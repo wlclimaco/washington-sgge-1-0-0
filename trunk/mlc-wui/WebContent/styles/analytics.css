@@ -1,0 +1,58 @@
+.dataTables_info,.dataTables_length {
+	display: inline;
+}
+
+#analytics-bar {
+	margin-top: 1em;
+}
+
+#analytics-table td, #analytics-table th{
+	text-align: right;
+}
+
+#analytics-table td:first-child, #analytics_group_name {
+	text-align: left !important;
+	font-weight: bold;
+}
+
+#analytics-table td.analytics-col-left, #analytics-table th.analytics-col-left{
+	text-align: left;
+}
+
+#analytics-table .selected-column-alt {
+	background: #D9EDD9;
+}
+
+#analytics-table .selected-column {
+	background: #E8F4E8;
+}
+
+.ui-autocomplete {
+	z-index: 100 !important;
+}
+
+#ui-datepicker-div {
+	z-index: 100 !important;
+}
+
+#analytics-filter-date input.error {
+	border: 2px solid #cc0000 !important;
+	margin-bottom: 0 !important;
+}
+
+#analytics-filter-date label.error {
+	float: none;
+	font-size: 77%;
+	color: #fff;
+	background: #c00;
+	margin: 0;
+}
+
+.ui-button-icon-only {
+    height: 2.2em !important;
+}
+
+.analytics-table-row {
+	text-align: left !important;
+	font-weight: bold;
+}

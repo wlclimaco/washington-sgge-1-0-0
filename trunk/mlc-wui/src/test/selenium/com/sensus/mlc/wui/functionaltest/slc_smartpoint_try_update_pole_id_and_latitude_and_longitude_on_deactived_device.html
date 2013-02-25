@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://slct1.davis.sensus.lab:8080/" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<!--Check Curent Page/...-->
+<tr>
+	<td>assertText</td>
+	<td>id=about-deivce</td>
+	<td>Light Details</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>click</td>
+	<td>id=menu-smartpoints</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Filter by deactived/...-->
+<tr>
+	<td>click</td>
+	<td>css=#STATUS div ul:eq(1) li:eq(2) input</td>
+	<td></td>
+</tr>
+<!--.../-->
+<!--Verify if the filter deactived return any record. If not filter by actives/...-->
+<tr>
+	<td>storeVisible</td>
+	<td>css=#blankslate.blankslate</td>
+	<td>deactived</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${deactived}</td>
+	<td>jumpDeactived</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#STATUS div ul:eq(1) li:eq(3) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#STATUS div ul:eq(1) li input</td>
+	<td></td>
+</tr>
+<!--.../-->
+<!--Verify if the filter actives return any record. If not stop test case/...-->
+<tr>
+	<td>assertNotVisible</td>
+	<td>css=#blankslate.blankslate</td>
+	<td></td>
+</tr>
+<!--.../-->
+<!--Take the first active light to turn to deactived/.../...-->
+<tr>
+	<td>storeText</td>
+	<td>css=#smartpoint-table tbody tr:eq(0) td:eq(1) a strong</td>
+	<td>poleId</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tbody tr:eq(0) td:eq(1) a</td>
+	<td></td>
+</tr>
+<!--Check Element/...-->
+<tr>
+	<td>waitForText</td>
+	<td>id=pole-id</td>
+	<td>${poleId}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=pole-id</td>
+	<td>${poleId}</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>storeElementPresent</td>
+	<td>css=#update-protect span.locked</td>
+	<td>isLocked</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${isLocked}</td>
+	<td>jumpLock</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=false</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>jumpLock</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;.fg-menu &gt; li:eq(1) &gt; a&quot;, &quot;div.positionHelper&quot;).click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=status-deative</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=status-deative</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=edit-light-status-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#action-dialog-panel div a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=light-status</td>
+	<td>deactivated</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=light-status</td>
+	<td>deactivated</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>jumpDeactived</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menu-smartpoints</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Filter by deactived/...-->
+<tr>
+	<td>click</td>
+	<td>css=#STATUS div ul:eq(1) li:eq(2) input</td>
+	<td></td>
+</tr>
+<!--.../-->
+<tr>
+	<td>storeText</td>
+	<td>css=#smartpoint-table tbody tr:eq(0) td:eq(1) a strong</td>
+	<td>poleId</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tbody tr:eq(0) td:eq(1) a</td>
+	<td></td>
+</tr>
+<!--Check Element/...-->
+<tr>
+	<td>waitForText</td>
+	<td>id=pole-id</td>
+	<td>${poleId}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=pole-id</td>
+	<td>${poleId}</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>id=edit-location</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=light-details-edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=pole-id-input</td>
+	<td>New ID</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=light-details-save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#action-dialog-panel div a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#request-complete a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#process-table tbody tr:eq(1) td a</td>
+	<td></td>
+</tr>
+<!--Check Message/...-->
+<tr>
+	<td>waitForText</td>
+	<td>css=li.lightDeactivated</td>
+	<td>1 Light is Deactivated Export as a .csv file</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=li.lightDeactivated</td>
+	<td>1 Light is Deactivated Export as a .csv file</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;a.ui-dialog-titlebar-close:eq(2)&quot;).click()</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
