@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="smartPointProcessorBCLTarget"
+		class="com.sensus.mlc.smartpoint.bcl.impl.SmartPointProcessorBCLImpl">
+		<property name="smartPointDAC" ref="smartPointDACMockTarget" />
+		<property name="processBCL" ref="processBCLMockTarget"/>
+		<property name="ecoModeBCL" ref="ecoModeBCLMockTarget"/>
+		<property name="incompleteData" ref="incompleteData" />
+		<property name="timeForReadLightStatus" value="60" /> <!-- in minutes -->
+		<property name="tagBCL" ref="tagBCLMockTarget" />
+		<property name="lcHelpGeoCoding" ref="lcHelpGeoCodingTarget" />
+		<property name="smartPointUpdaterBCL" ref="smartPointUpdaterBCLMockTarget" />
+	</bean>
+
+	<bean id="smartPointAccessorBCLTarget"
+		class="com.sensus.mlc.smartpoint.bcl.impl.SmartPointAccessorBCLImpl">
+		<property name="smartPointDAC" ref="smartPointDACMockTarget" />
+		<property name="processBCL" ref="processBCLMockTarget"/>
+		<property name="tagBCL" ref="tagBCLMockTarget" />
+		<property name="groupBCL" ref="groupBCLMockTarget" />
+		<property name="scheduleBCL" ref="scheduleBCLMockTarget" />
+	</bean>
+
+	<bean id="smartPointUpdaterBCLTarget"
+		class="com.sensus.mlc.smartpoint.bcl.impl.SmartPointUpdaterBCLImpl">
+		<property name="smartPointDAC" ref="smartPointDACMockTarget" />
+		<property name="processBCL" ref="processBCLMockTarget"/>
+		<property name="tempFilePath" value="${csv.temp.file.path}" />
+	</bean>
+
+	<bean id="lcHelpGeoCodingTarget" class="com.sensus.mlc.base.util.LCHelpGeoCoding">
+		<property name="reverseLookup" ref="reverseLookup" />
+		<property name="xpathExpressionBase" ref="xpathExpressionBase" />
+		<property name="xpathExpressionStatus" ref="xpathExpressionStatus" />
+		<property name="xpathExpressionState" ref="xpathExpressionState" />
+		<property name="xpathExpressionCounty" ref="xpathExpressionCounty" />
+		<property name="xpathExpressionCity" ref="xpathExpressionCity" />
+		<property name="xpathExpressionZip" ref="xpathExpressionZip" />
+		<property name="xpathExpressionRoute" ref="xpathExpressionStreet" />
+	</bean>
+
+	<bean id="reverseLookup" class="java.lang.String">
+		<constructor-arg>
+			<value>http://maps.googleapis.com/maps/api/geocode/xml?latlng=%s,%s&amp;sensor=false</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="xpathExpressionStatus" class="java.lang.String">
+		<constructor-arg>
+			<value>//GeocodeResponse/status/text()</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="xpathExpressionBase" class="java.lang.String">
+		<constructor-arg>
+			<value>//GeocodeResponse/result[type/text()='street_address']/address_component[type/text()=
+			</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="xpathExpressionState" class="java.lang.String">
+		<constructor-arg>
+			<value>'administrative_area_level_1']/long_name</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="xpathExpressionCounty" class="java.lang.String">
+		<constructor-arg>
+			<value>'administrative_area_level_2']/long_name</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="xpathExpressionCity" class="java.lang.String">
+		<constructor-arg>
+			<value>'locality']/long_name</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="xpathExpressionZip" class="java.lang.String">
+		<constructor-arg>
+			<value>'postal_code']/long_name</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="xpathExpressionStreet" class="java.lang.String">
+		<constructor-arg>
+			<value>'route']/long_name</value>
+		</constructor-arg>
+	</bean>
+
+</beans>

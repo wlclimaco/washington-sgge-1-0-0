@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Endereco">
+
+	<resultMap id="EmpresasResult" type="Empresa">
+		<result property="codemp" column="codemp" />
+		<result property="razemp" column="razemp" />
+		<result property="nomeemp" column="nomeemp" />
+		<result property="cnpjemp" column="cnpjemp" />
+		<result property="inscemp" column="inscemp" />
+		<result property="endemp" column="endemp" />
+		<result property="numemp" column="numemp" />
+		<result property="complemp" column="complemp" />
+		<result property="bairemp" column="bairemp" />
+		<result property="cepemp" column="cepemp" />
+		<result property="cidemp" column="cidemp" />
+		<result property="ufemp" column="ufemp" />
+		<result property="dddemp" column="dddemp" />
+		<result property="foneemp" column="foneemp" />
+		<result property="faxemp" column="faxemp" />
+		<result property="emailemp" column="emailemp" />
+		<result property="wwwemp" column="wwwemp" />
+		<result property="codeanemp" column="codeanemp" />
+		<result property="nomecontemp" column="nomecontemp" />
+		<result property="multialmoxemp" column="multialmoxemp" />
+		<result property="fotoemp" column="fotoemp" />
+		<result property="codmunic" column="codmunic" />
+		<result property="siglauf" column="siglauf" />
+		<result property="codpais" column="codpais" />
+		<result property="percissemp" column="percissemp" />
+		<result property="codpaisemp" column="codpaisemp" />
+		<result property="dtins" column="dtins" />
+		<result property="hins" column="hins" />
+		<result property="idusuins" column="idusuins" />
+		<result property="dtalt" column="dtalt" />
+		<result property="halt" column="halt" />
+		<result property="idusualt" column="idusualt" />
+		<result property="listFilial" column="idusualt" />
+		<collection property="listFilial" column="listFilial"
+			select="Filial.fetchAllFiliais" />
+	</resultMap>
+	
+	<sql id="allEmpresaColumms">
+		SELECT codemp, razemp, nomeemp, cnpjemp, inscemp, codend, codean, multialmoxemp, 
+       fotoemp, codmunic, percissemp, dtins, hins, dtalt, halt, idusuins
+	</sql>
+	
+	<!-- Fetch All Tags -->
+	<select id="fetchAllEmpresas" parameterType="Map" resultMap="EmpresasResult">
+		
+		SELECT codemp, razemp, nomeemp, cnpjemp, inscemp, codend, codean, multialmoxemp, 
+       fotoemp, codmunic, percissemp, dtins, hins, dtalt, halt, idusuins
+  FROM empresa;
+	   
+	</select>
+	
+</mapper>
+			
+			

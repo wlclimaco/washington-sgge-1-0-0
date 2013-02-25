@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="analyticsDACTarget" class="com.sensus.mlc.analytics.dac.mybatis.AnalyticsDACImpl">
+		<property name="sqlSessionFactory" ref="analytics-sqlSessionFactory" />
+	</bean>
+	
+	<!-- Setup for mybatis Database Layer ANALYTICS -->
+	<bean id="analytics-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation"
+			value="classpath:com/sensus/mlc/analytics/dac/mybatis/map/analytics-sql-map-config.xml" />
+		<property name="dataSource" ref="mlcDataSource" />
+	</bean>
+  
+</beans>

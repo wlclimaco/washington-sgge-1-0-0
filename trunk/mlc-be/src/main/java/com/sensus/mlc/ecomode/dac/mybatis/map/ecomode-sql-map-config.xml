@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	
+	<settings>
+		<setting name="lazyLoadingEnabled" value="false" />
+	</settings>
+	
+	<typeAliases>
+		
+		<!-- EcoMode mapping -->
+		<typeAlias alias="Light" 					type="com.sensus.mlc.smartpoint.model.Light"/>
+		<typeAlias alias="LightParameter"			type="com.sensus.mlc.smartpoint.model.LightParameter"/>
+		<typeAlias alias="EcoModeBaseline"			type="com.sensus.mlc.ecomode.model.EcoModeBaseline"/>
+		<typeAlias alias="LightConsumption"			type="com.sensus.mlc.ecomode.model.LightConsumption"/>
+		<typeAlias alias="InquiryEcoModeRequest" 	type="com.sensus.mlc.ecomode.model.request.InquiryEcoModeRequest"/>
+		
+	</typeAliases>
+	
+	<mappers>
+    	<mapper resource="com/sensus/mlc/ecomode/dac/mybatis/map/ecomode.xml"/>
+    </mappers>
+    
+</configuration>

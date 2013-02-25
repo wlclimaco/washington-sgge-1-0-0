@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+			
+	<bean id="tagBCLTarget" class="com.sensus.mlc.tag.bcl.impl.TagBCLImpl">
+		<property name="tagDAC" ref="tagDACMockTarget"/>
+		<property name="groupBCL" ref="groupBCLMockTarget"/>
+		<property name="smartPointAccessorBCL" ref="smartPointAccessorBCLMockTarget"/>
+		<property name="processBCL" ref="processBCLMockTarget"/>
+		<property name="lcHelp" ref="lcHelpTarget" />
+	</bean>
+</beans>

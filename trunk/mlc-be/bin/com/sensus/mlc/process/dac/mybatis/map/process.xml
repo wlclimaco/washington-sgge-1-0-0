@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Process">
+
+	<resultMap id="listProcesses" type="Process">
+		<result property="id" column="process_id" />
+		<result property="description" column="description" />
+		<result property="startTime" column="start_datetime" typeHandler="com.sensus.mlc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="endTime" column="end_datetime" typeHandler="com.sensus.mlc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="rniCorrelationId" column="rni_correlation_id" />
+		<result property="isSubmitted" column="is_submitted" />
+		<result property="isMonitoredInstance" column="is_monitored_instance" />
+		<result property="isProcessComplete" column="is_process_complete" />
+		<result property="estimatedSecondsToComplete" column="estimated_seconds_to_complete" />
+		<result property="createUser" column="create_user" />
+		<result property="createDate" column="create_date" typeHandler="com.sensus.mlc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="isParent" column="is_first_level" />
+		<collection property="processItems" column="process_id"
+			select="Process.fetchProcessResultByProcess" />
+		<collection property="lcAction" column="process_id"
+			select="Process.fetchLCActionById" />
+		<collection property="parentProcess" column="parent_process_id"
+			resultMap="Process.parentProcess" />
+		<collection property="tenant" column="tenant_id"
+			select="Process.fetchTenantById" />
+	</resultMap>
+
+	<resultMap id="parentProcess" type="Process">
+		<result property="id" column="parent_process_id" />
+	</resultMap>
+
+	<!-- fetchGroupById -->
+	<resultMap id="GroupResult" type="Group">
+		<result property="id" column="grouping_id" />
+		<result property="name" column="name" />
+		<result property="description" column="description" />
+		<result property="createDate" column="create_date" typeHandler="com.sensus.mlc.base.util.DateTimeZoneTypeHandler"/>
+	</resultMap>
+
+	<!-- fetchScheduleById -->
+	<resultMap id="ScheduleResult" type="Schedule">
+		<result property="id" column="schedule_id" />
+		<result property="name" column="name" />
+		<result property="description" column="description" />
+		<result property="createDate" column="create_date" typeHandler="com.sensus.mlc.base.util.DateTimeZoneTypeHandler"/>
+		<discriminator javaType="Integer" column="schedule_type">
+			<case value="1" resultMap="OffSetScheduleResult" />
+			<case value="2" resultMap="EventScheduleResult" />
+		</discriminator>
+	</resultMap>
+
+	<resultMap id="OffSetScheduleResult" type="OffSetSchedule"
+		extends="Process.ScheduleResult" />
+
+	<resultMap id="EventScheduleResult" type="EventSchedule"
+		extends="Process.ScheduleResult" />
+
+	<resultMap id="LCActionResult" type="LCAction">
+		<result property="actionTypeValue" column="lc_action_id" />
+		<result property="description" column="description" />
+		<collection property="actionParameters" column="process_id"
+			select="Process.fetchLCActionParametersByProcess" />
+	</resultMap>
+
+	<resultMap id="countMonitoredProcessResult" type="HashMap">
+		<result property="count_monitored" column="count_monitored" javaType="java.lang.Integer" />
+		<result property="count_processing" column="count_processing" javaType="java.lang.Integer"/>
+	</resultMap>
+
+	<!--fetchTenantByRniCode -->
+	<resultMap id="TenantResult" type="Tenant">
+		<result property="id" column="tenant_id" />
+		<result property="name" column="name" />
+		<result property="description" column="description" />
+		<result property="rniCode" column="rni_code" />
+		<result property="gatewayURL" column="gateway_rni_location" />
+		<result property="lightTimeZone" column="light_time_zone" />
+	</resultMap>
+
+	<!--fetchStatusMessage -->
+	<resultMap id="StatusMessageResult" type="StatusMessage">
+		<result property="id" jdbcType="INTEGER" column="status_message_id" />
+		<result property="date" jdbcType="TIMESTAMP" column="message_date" typeHandler="com.sensus.mlc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="lightStatusEnumValue" jdbcType="INTEGER"
+			column="status_id" />
+		<result property="statusMessageCategoryEnumValue" jdbcType="INTEGER"
+			column="message_type" />
+	</resultMap>
+
+	<!-- fetchLightById -->
+	<resultMap id="LightResult" type="Light">
+		<result property="id" column="light_id" />
+		<result property="smartPointId" column="smartpoint_id" />
+		<result property="rniId" column="rni_id" />
+		<result property="poleId" column="poleId" />
+		<result property="lightLocation.streetName" column="street_name" />
+		<result property="lightLocation.cityName" column="city_name" />
+		<result property="lightLocation.zipCode" column="zip_code" />
+		<collection property="currentStatusMessage" column="light_id"
+			select="Process.fetchLightStatusMessage" />
+	</resultMap>
+
+	<!-- fetchProcessResultByLRP -->
+	<resultMap id="ProcessItem" type="ProcessItem">
+		<result property="processItemStatusEnumValue" column="process_result" />
+		<result property="processStatusReasonEnumValue" column="failure_id" />
+		<collection property="light" column="smartpoint_id"
+			select="Process.fetchLightById" />
+	</resultMap>
+
+	<resultMap id="LCActionParameterResult" type="LCActionParameter">
+		<result property="propertyValue" column="property_id" />
+		<result property="actionValue" column="value" />
+	</resultMap>
+
+	<sql id="allCustomTenantColumns">
+		tenant_id, name, description, rni_code, gateway_rni_location, light_time_zone
+	</sql>
+
+	<sql id="allCustomTenantColumnsWithAlias">
+		t.tenant_id, t.name, t.description, t.rni_code, t.gateway_rni_location, t.light_time_zone
+	</sql>
+
+	<sql id="allCustomCountMonitoredProcessColumns">
+		count_monitored, count_processing
+	</sql>
+
+	<sql id="allCustomGroupColumns">
+		grouping_id, name, description, create_date
+		, modified_date, create_user, modify_user
+		, tenant_id, latitude, longitude
+	</sql>
+
+	<sql id="allCustomScheduleColumns">
+		schedule_id, name, description, create_date, schedule_type
+	</sql>
+
+	<sql id="allCustomProcessItemColumnsWithAlias">
+		s.smartpoint_id, s.process_result, s.failure_id
+	</sql>
+
+	<sql id="allCustomLCActionColumnsWithAlias">
+		p.lc_action_id, p.description, p.process_id
+	</sql>
+
+	<sql id="allCustomLightColumnsWithAlias">
+		l.light_id, l.smartpoint_id, sm.rni_id, l.pole_id, ll.street_name, ll.city_name, ll.zip_code
+	</sql>
+
+	<sql id="allCustomStatusMessageColumnsWithAlias">
+		s.status_message_id, s.message_date, s.status_id, s.message_type
+	</sql>
+
+	<sql id="allCustomLCActionParameterColumnsWithAlias">
+		pp.property_id, pp.value
+	</sql>
+
+	<sql id="allProcessesColumms">
+		process_id, description, lc_action_description,
+		start_datetime, end_datetime, rni_correlation_id,
+		is_submitted,
+		lc_action_id, tenant_id, parent_process_id,
+		is_monitored_instance,
+		estimated_seconds_to_complete, create_user,
+		create_date,
+		is_process_complete, is_first_level,smartpoint_count
+	</sql>
+
+	<sql id="allFethProcessesColummsWithAlias">
+		p.process_id, p.description, p.lc_action_description
+        ,p.start_datetime, p.end_datetime, p.rni_correlation_id
+        ,p.is_submitted, p.lc_action_id, p.tenant_id, p.parent_process_id
+        ,p.is_monitored_instance, p.estimated_seconds_to_complete
+        ,p.create_user, p.create_date, p.is_process_complete, p.is_first_level
+	</sql>
+
+		<sql id="allProcessesColummsWithAlias">
+		 vw.process_id, vw.description, vw.lc_action_description, vw.start_datetime
+		 , vw.end_datetime, vw.rni_correlation_id, vw.is_submitted, vw.lc_action_id
+		 , vw.tenant_id, vw.parent_process_id, vw.is_monitored_instance
+		 , vw.estimated_seconds_to_complete, vw.create_user, vw.create_date
+		 , vw.is_process_complete, vw.is_first_level
+	</sql>
+
+	<sql id="allProcessesColummsAvoidAmbiguos">
+		process.process_id, replace(replace(description,'[','"'),']','"') AS description
+		, lc_action_description
+		,start_datetime AS start_datetime
+		,end_datetime AS end_datetime
+		, rni_correlation_id
+		,is_submitted
+		,process.lc_action_id
+		,process.tenant_id
+		,parent_process_id
+		,is_monitored_instance
+		,estimated_seconds_to_complete
+		,process.create_user
+		,process.create_date AS create_date
+		, is_process_complete
+		,is_first_level
+	</sql>
+
+	<!-- Insert SmartpointProcess -->
+	<select id="insertSmartpointProcess" parameterType="Map" resultType="int">
+		SELECT ins_smartpoint_process (#{process_result}, #{smartpoint_id},#{process_id}, #{failure_id})
+	</select>
+
+	<!-- Insert Smartpoint Process Dynamic -->
+	<insert id="insertSmartpointProcessDynamic" parameterType="Map">
+
+	    INSERT INTO smartpoint_process
+	           (process_result
+	           ,smartpoint_id
+	           ,process_id
+	           ,failure_id)
+	    SELECT #{process_result}	AS process_result
+	           ,light.smartpoint_id AS smartpoint_id
+		   	   ,#{process_id}		AS process_id
+	           ,#{failure_id} 		AS failure_id
+	    <include refid="SmartPoint.fetchAllLightsConditions"/>
+	    <if test="processItemFailureList == null">
+	            GROUP BY light.smartpoint_id
+	    </if>
+	    <if test="processItemFailureList != null and !processItemFailureList.isEmpty()">
+	            AND light.light_id NOT IN
+	            <foreach item="item" index="index" collection="processItemFailureList"
+					    open="(" separator="," close=")">
+	    			#{item.light.smartPointId}
+	            </foreach>
+	            GROUP BY light.smartpoint_id
+	    	UNION ALL
+			<foreach item="item" index="index" collection="processItemFailureList"
+				separator=" UNION ALL ">
+			    (SELECT #{item.processItemStatusEnumValue}		AS process_result
+			           ,#{item.light.smartPointId}				AS smartpoint_id
+				   	   ,#{process_id}							AS process_id
+			           ,#{item.processStatusReasonEnumValue} 	AS failure_id)
+			</foreach>
+	    </if>
+	</insert>
+
+	<!-- Insert Process -->
+	<select id="insertProcess" parameterType="Map"
+		resultType="int">
+		SELECT ins_process (#{description},
+		                    #{lc_action_description},#{start_datetime,jdbcType=TIMESTAMP}::timestamp without time zone, #{end_datetime,	jdbcType=TIMESTAMP}::timestamp without time zone,
+		                    #{rni_correlation_id}, #{is_submitted}, #{lc_action_id}, #{tenant_id},
+	                      	#{parent_process_id}, #{is_monitored_instance},
+		                    #{estimated_seconds_to_complete}, #{create_user}, #{is_process_complete},
+		                    #{is_first_level})
+	</select>
+
+	<!-- Update Process -->
+	<select id="updateProcess" parameterType="Map">
+		SELECT upd_process
+		(#{end_datetime, jdbcType=TIMESTAMP}::timestamp without time zone,#{is_monitored_instance},#{is_process_complete},#{id},
+		#{is_submitted}, #{rni_correlation_id},#{description})
+	</select>
+
+	<!-- Update IsMonitoredProcess -->
+	<select id="updateIsMonitoredProcess" parameterType="Map">
+		SELECT upd_is_monitored_process (#{is_monitored_instance}, #{id})
+	</select>
+
+	<!-- Update SmartpointProcess -->
+	<select id="updateSmartpointProcess" parameterType="Map" resultType="int">
+		SELECT upd_smartpoint_process (#{process_id}, #{smartpoint_id}, #{process_result},#{failure_id})
+	</select>
+
+	<!-- Update Process is_first_level flag -->
+	<select id="updateProcessIsFirstLevel" parameterType="Map">
+		SELECT upd_process_is_first_level (#{process_id}, #{is_first_level})
+	</select>
+
+	<!-- Upsert ActionParameterProcess -->
+	<select id="upsertProcessProperty" parameterType="Map" resultType="int">
+		SELECT upsert_process_property (#{property_id}, #{process_id}, #{value})
+	</select>
+
+	<select id="fetchProcessById" resultMap="listProcesses">
+		SELECT
+			<include refid="allFethProcessesColummsWithAlias" />
+    	  FROM process p
+        WHERE p.process_id = #{value}
+	</select>
+
+	<select id="fetchProcessByLight" resultMap="listProcesses">
+		SELECT
+			<include refid="allFethProcessesColummsWithAlias" />
+    	  FROM   process p, light l, smartpoint_process sp
+        WHERE p.process_id = sp.process_id
+          AND sp.smartpoint_id = l.smartpoint_id
+          AND l.light_id =  #{value}
+
+	</select>
+
+	<select id="fetchProcessByRniId" resultMap="listProcesses">
+		SELECT
+			<include refid="allFethProcessesColummsWithAlias" />
+	      FROM process p
+        WHERE p.rni_correlation_id = #{value}
+
+	</select>
+
+	<select id="fetchProcessByFileName" resultMap="listProcesses">
+		SELECT
+		  <include refid="allFethProcessesColummsWithAlias" />
+          FROM process p
+              ,process_property  pp
+        WHERE pp.property_id = 53
+          AND pp.value = #{value}
+          AND pp.process_id = p.process_id
+	</select>
+
+	<select id="fetchMonitoredProcesses" parameterType="Map"
+		resultMap="listProcesses">
+		SELECT
+		<include refid="allProcessesColumms" />
+		FROM vw_process_smartpoint_count
+		WHERE (tenant_id = ${tenant_id}
+		  AND is_first_level = true
+		  AND is_monitored_instance = true
+		  AND create_user = (SELECT username FROM users WHERE user_id = ${user_id}))
+		ORDER BY
+
+		<if test="orderBy == null">
+			is_process_complete, start_datetime DESC
+		</if>
+		<if test="orderBy != null">
+			${orderBy}
+		</if>
+	</select>
+
+	<select id="fetchUnsubmittedProcesses" parameterType="Map"
+		resultMap="listProcesses">
+		SELECT
+		  <include refid="allProcessesColummsWithAlias" />
+    	  FROM  vw_process_smartpoint_count AS vw
+        WHERE vw.is_submitted = false;
+	</select>
+
+		<select id="fetchProcesses" parameterType="Map"
+			resultMap="listProcesses">
+			 SELECT <include refid="allProcessesColumms" />
+			 FROM(
+
+				SELECT
+				<include refid="allProcessesColumms" />
+
+				,
+				ROW_NUMBER() OVER(ORDER BY <if test=" orderBy != null "> date_trunc('day', start_datetime) DESC, ${orderBy}, start_datetime DESC</if>
+				                           <if test=" orderBy == null "> start_datetime DESC </if>) as RowNum
+				FROM
+				(SELECT
+				<include refid="allProcessesColummsAvoidAmbiguos" />
+				, (SELECT count(s.smartpoint_id) FROM smartpoint_process s WHERE s.process_id = process.process_id) as smartpoint_count
+				FROM
+				process
+
+				<if test="lightProperty != null">
+					INNER JOIN smartpoint_process ON
+					process.process_id =
+					smartpoint_process.process_id
+					INNER JOIN light l ON
+					smartpoint_process.smartpoint_id = l.smartpoint_id
+					INNER JOIN
+					light_property ON
+					l.light_id = light_property.light_id
+					INNER JOIN
+					property ON
+					light_property.property_id = property.property_id
+				</if>
+				<if test="rniId != null">
+					INNER JOIN smartpoint_process ON
+					process.process_id =
+					smartpoint_process.process_id
+					INNER JOIN smartpoint ON
+					smartpoint_process.smartpoint_id = smartpoint.smartpoint_id
+				</if>
+
+				where process.tenant_id = #{tenant_id} AND process.is_first_level = true
+
+				<if test="actionCategoryList != null">
+					AND process.lc_action_id in (${actionCategoryList})
+				</if>
+
+				<if test="startDate != null and endDate != null">
+					AND process.create_date BETWEEN #{startDate,
+					jdbcType=TIMESTAMP}::timestamp without time zone AND #{endDate,jdbcType=TIMESTAMP}::timestamp without time zone
+				</if>
+
+				<if test="eventId != null">
+					AND process.process_id = ${eventId}
+				</if>
+
+				<if test="lightProperty != null">
+					AND property.property_name = TRIM('${lightProperty}')
+				</if>
+
+				<if test="searchText != null">
+					AND light_property.property_value like '%${searchText}%'
+				</if>
+				<if test="userIds != null">
+					AND process.create_user IN ( SELECT username FROM users WHERE user_id IN (${userIds}) )
+				</if>
+
+				<if test="rniId != null">
+					AND cast(smartpoint.rni_id as text) like '%${rniId}%'
+				</if>
+				group by
+				process.process_id, description, lc_action_description,
+				start_datetime, end_datetime, rni_correlation_id,
+				is_submitted,
+				process.lc_action_id, process.tenant_id, parent_process_id,
+				is_monitored_instance, estimated_seconds_to_complete,
+				process.create_user,
+				process.create_date, is_process_complete,
+				is_first_level
+				) as PROCESSPAGE
+		 	) as tbl
+			<if test="pageSize > 0">
+				WHERE
+				RowNum BETWEEN #{startRow} + 1 AND (#{startRow} +
+				#{pageSize})
+			</if>
+		</select>
+
+	<select id="PaginationTotalRows" parameterType="Map"
+		resultType="int">
+		SELECT count(1)
+		FROM
+		(SELECT
+		<include refid="allProcessesColummsAvoidAmbiguos" />
+
+		FROM
+		process
+
+		<if test="actionCategoryList != null">
+			INNER JOIN action_category_lc_action ON
+			action_category_lc_action.lc_action_id = process.lc_action_id
+			INNER
+			JOIN action_category ON action_category_lc_action.action_category_id
+			= action_category.action_category_id
+		</if>
+
+		<if test="lightProperty != null">
+			INNER JOIN smartpoint_process ON
+			process.process_id =
+			smartpoint_process.process_id
+			INNER JOIN light l ON
+			smartpoint_process.smartpoint_id = l.smartpoint_id
+			INNER JOIN
+			light_property ON
+			l.light_id = light_property.light_id
+			INNER JOIN
+			property ON
+			light_property.property_id = property.property_id
+		</if>
+		<if test="rniId != null">
+			INNER JOIN smartpoint_process ON
+			process.process_id =
+			smartpoint_process.process_id
+			INNER JOIN smartpoint ON
+			smartpoint_process.smartpoint_id = smartpoint.smartpoint_id
+		</if>
+
+		WHERE process.tenant_id = #{tenant_id} AND process.is_first_level = true
+
+		<if test="actionCategoryList != null">
+			AND process.lc_action_id in (
+			${actionCategoryList})
+		</if>
+
+		<if test="startDate != null and endDate != null">
+			AND process.create_date BETWEEN #{startDate,
+			jdbcType=TIMESTAMP}::timestamp without time zone AND #{endDate,jdbcType=TIMESTAMP}::timestamp without time zone
+		</if>
+
+		<if test="eventId != null">
+			AND process.process_id = ${eventId}
+		</if>
+
+		<if test="lightProperty != null">
+			AND property.property_name = TRIM('${lightProperty}')
+		</if>
+
+		<if test="searchText != null">
+			AND light_property.property_value like '%${searchText}%'
+		</if>
+		<if test="userIds != null">
+			AND process.create_user IN ( SELECT username FROM users WHERE user_id IN (${userIds}) )
+		</if>
+
+		<if test="rniId != null">
+			AND cast(smartpoint.rni_id as text) like '%${rniId}%'
+		</if>
+		group by
+		process.process_id, description, lc_action_description,
+		start_datetime, end_datetime, rni_correlation_id,
+		is_submitted,
+		process.lc_action_id, process.tenant_id, parent_process_id,
+		is_monitored_instance, estimated_seconds_to_complete,
+		process.create_user,
+		process.create_date, is_process_complete,
+		is_first_level
+		) as PROCESSPAGE
+	</select>
+
+	<select id="fetchGroupById" resultMap="GroupResult">
+		SELECT
+			<include refid="allCustomGroupColumns"/>
+          FROM grouping
+        WHERE grouping_id = #{value}
+	</select>
+
+	<select id="fetchScheduleById" resultMap="ScheduleResult">
+	   SELECT s.schedule_id
+              ,(SELECT COUNT(1)
+                  FROM schedule_membership
+                WHERE schedule_membership.schedule_id = s.schedule_id) as smartpoint_count
+              ,s.name
+              ,s.description
+              ,s.create_date
+              ,s.schedule_type
+              ,s.sunrise_offset
+              ,s.sunset_offset
+              ,s.intensity
+         FROM schedule s
+       WHERE s.schedule_id = #{value}
+	</select>
+
+	<select id="fetchProcessResultByProcess" resultMap="ProcessItem">
+		SELECT
+		  <include refid="allCustomProcessItemColumnsWithAlias"/>
+   		  FROM smartpoint_process s
+   		WHERE s.process_id = #{value}
+	</select>
+
+	<select id="fetchLightById" resultMap="LightResult">
+		SELECT
+		  <include refid="allCustomLightColumnsWithAlias"/>
+		  FROM  light l
+          INNER JOIN smartpoint sm ON (l.smartpoint_id = sm.smartpoint_id)
+           LEFT JOIN light_location ll on (l.light_id = ll.light_id)
+        WHERE l.smartpoint_id = #{value}
+	</select>
+
+	<select id="fetchLightStatusMessage" resultMap="StatusMessageResult">
+		SELECT
+          <include refid="allCustomStatusMessageColumnsWithAlias"/>
+          FROM status_message s
+        WHERE s.light_id = #{light_id}
+        ORDER BY s.status_message_id DESC LIMIT 1
+	</select>
+
+	<select id="fetchLCActionById" resultMap="LCActionResult">
+	    SELECT
+          <include refid="allCustomLCActionColumnsWithAlias"/>
+          FROM process p
+        WHERE p.process_id = #{value}
+	</select>
+
+	<select id="fetchLCActionParametersByProcess" resultMap="LCActionParameterResult">
+		SELECT
+			<include refid="allCustomLCActionParameterColumnsWithAlias"/>
+          FROM process_property pp
+        WHERE pp.process_id = #{process_id}
+	</select>
+
+	<!--fetchTenantById -->
+	<select id="fetchTenantById" resultMap="TenantResult">
+		SELECT
+			<include refid="allCustomTenantColumnsWithAlias"/>
+	      FROM tenant t
+        WHERE t.tenant_id = #{value}
+	</select>
+
+	<select id="fetchTenantByRniCode" resultMap="TenantResult">
+		SELECT
+			<include refid="allCustomTenantColumnsWithAlias"/>
+          FROM tenant t
+        WHERE t.rni_code = #{value}
+	</select>
+
+	<select id="fetchAllTenant" resultMap="TenantResult">
+		SELECT
+			<include refid="allCustomTenantColumnsWithAlias"/>
+	      FROM tenant t
+        ORDER BY t.gateway_rni_location
+	</select>
+
+	<select id="fetchCountMonitoredProcesses" parameterType="Map"
+		resultMap="countMonitoredProcessResult">
+		SELECT (SELECT COUNT(1)
+          FROM process
+        WHERE tenant_id = #{tenant_id}
+          AND is_first_level = true
+          AND is_monitored_instance = true
+          AND create_user = #{user_id}) AS count_monitored
+        ,(SELECT COUNT(1)
+            FROM process
+          WHERE tenant_id = #{tenant_id}
+          AND is_first_level = true
+          AND is_monitored_instance = true
+          AND is_process_complete = false
+          AND create_user = #{user_id}) AS count_processing
+	</select>
+</mapper>

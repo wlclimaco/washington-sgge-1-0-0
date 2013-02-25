@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<settings>
+		<setting name="lazyLoadingEnabled" value="false" />
+	</settings>
+
+	<typeAliases>
+		<!-- Empresa mapping -->
+		<typeAlias alias="InquiryTelaRequest" 	type="com.sensus.mlc.dicionario.model.request.InquiryTelaRequest" />
+		<typeAlias alias="TelaRequest" 			type="com.sensus.mlc.dicionario.model.request.TelaRequest" />
+		<typeAlias alias="Tela" 						type="com.sensus.mlc.dicionario.model.Tela"/>
+		<typeAlias alias="Abas"  						type="com.sensus.mlc.dicionario.model.Abas"/>
+		<typeAlias alias="Validacoes"  					type="com.sensus.mlc.dicionario.model.Validacoes"/>
+		<typeAlias alias="Tipos"  						type="com.sensus.mlc.dicionario.model.Tipos"/>
+		<typeAlias alias="Atributos"  					type="com.sensus.mlc.dicionario.model.Atributos"/>
+		<typeAlias alias="Querys"  						type="com.sensus.mlc.dicionario.model.Querys"/>
+		<typeAlias alias="Tabelas"  					type="com.sensus.mlc.dicionario.model.Tabelas"/>
+		<typeAlias alias="Exports"  					type="com.sensus.mlc.dicionario.model.Exports"/>
+		<typeAlias alias="Imports"  					type="com.sensus.mlc.dicionario.model.Imports"/>
+
+
+
+
+	</typeAliases>
+
+	<mappers>
+    	<mapper resource="com/sensus/mlc/dicionario/dac/mybatis/map/Dicionario.xml"/>
+
+    </mappers>
+
+</configuration>
+

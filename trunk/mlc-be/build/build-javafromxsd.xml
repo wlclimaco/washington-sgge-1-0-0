@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<project name="Build Java Objects from XSD" default="buildJavaFromXsd">
+	<taskdef file="../../lib/build/sensus-pcm-antlib.xml" />
+	<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
+		<classpath>
+			<fileset dir="../../lib" includes="*.jar" />
+		</classpath>
+	</taskdef>
+
+	<!-- Properties that will most commonly be passed into the tasks -->
+	
+	<target name="buildJavaFromXsd">
+		<buildJavaFromXsd jarFileName="mlcserver-client.jar" packageName="com.sensus.mlc.mlcserver.type"
+		/>
+	</target>
+
+
+</project>

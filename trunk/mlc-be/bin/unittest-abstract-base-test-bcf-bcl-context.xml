@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- BCF Mocks -->
+	<bean id="analyticsBCFMockTarget" class="com.sensus.mlc.analytics.bcf.MockAnalyticsBCF"/>
+	<bean id="groupBCFMockTarget" class="com.sensus.mlc.group.bcf.MockGroupBCF"/>
+	<bean id="mlcServerBCFMockTarget" class="com.sensus.mlc.mlcserver.bcf.MockMlcServerBCF"/>
+	<bean id="processBCFMockTarget" class="com.sensus.mlc.process.bcf.MockProcessBCF"/>
+	<bean id="scheduleBCFMockTarget" class="com.sensus.mlc.schedule.bcf.MockScheduleBCF"/>
+	<bean id="settingsBCFMockTarget" class="com.sensus.mlc.settings.bcf.MockSettingsBCF"/>
+	<bean id="smartPointAccessorBCFMockTarget" class="com.sensus.mlc.smartpoint.bcf.MockSmartPointAccessorBCF"/>
+	<bean id="smartPointProcessorBCFMockTarget" class="com.sensus.mlc.smartpoint.bcf.MockSmartPointProcessorBCF"/>
+	<bean id="smartPointUpdaterBCFMockTarget" class="com.sensus.mlc.smartpoint.bcf.MockSmartPointUpdaterBCF"/>
+	<bean id="tagBCFMockTarget" class="com.sensus.mlc.tag.bcf.MockTagBCF"/>
+	<bean id="tenantBCFMockTarget" class="com.sensus.mlc.tenant.bcf.MockTenantBCF"/>
+	<bean id="userBCFMockTarget" class="com.sensus.mlc.user.bcf.MockUserBCF"/>
+	<bean id="ecoModeBCFMockTarget" class="com.sensus.mlc.ecomode.bcf.MockEcoModeBCF"/>
+
+	<!-- BCL Mocks -->
+	<bean id="analyticsBCLMockTarget" class="com.sensus.mlc.analytics.bcl.MockAnalyticsBCL" />
+	<bean id="groupBCLMockTarget" class="com.sensus.mlc.group.bcl.MockGroupBCL" />
+	<bean id="mlcServerBCLMockTarget" class="com.sensus.mlc.mlcserver.bcl.MockMlcServerBCL"/>
+	<bean id="processBCLMockTarget" class="com.sensus.mlc.process.bcl.MockProcessBCL"/>
+	<bean id="scheduleBCLMockTarget" class="com.sensus.mlc.schedule.bcl.MockScheduleBCL"/>
+	<bean id="settingsBCLMockTarget" class="com.sensus.mlc.settings.bcl.MockSettingsBCL"/>
+	<bean id="smartPointProcessorBCLMockTarget" class="com.sensus.mlc.smartpoint.bcl.MockSmartPointProcessorBCL" />
+	<bean id="smartPointUpdaterBCLMockTarget" class="com.sensus.mlc.smartpoint.bcl.MockSmartPointUpdaterBCL" />
+	<bean id="smartPointAccessorBCLMockTarget" class="com.sensus.mlc.smartpoint.bcl.MockSmartPointAccessorBCL" />
+	<bean id="tagBCLMockTarget" class="com.sensus.mlc.tag.bcl.MockTagBCL" />
+	<bean id="tenantBCLMockTarget" class="com.sensus.mlc.tenant.bcl.MockTenantBCL"/>
+	<bean id="userBCLMockTarget" class="com.sensus.mlc.user.bcl.MockUserBCL"/>
+	<bean id="ecoModeBCLMockTarget" class="com.sensus.mlc.ecomode.bcl.MockEcoModeBCL"/>
+
+	<!-- DAC Mocks -->
+	<bean id="analyticsDACMockTarget" class="com.sensus.mlc.analytics.dac.MockAnalyticsDAC" />
+	<bean id="groupDACMockTarget" class="com.sensus.mlc.group.dac.MockGroupDAC"/>
+	<bean id="processDACMockTarget" class="com.sensus.mlc.process.dac.MockProcessDAC" />
+	<bean id="scheduleDACMockTarget" class="com.sensus.mlc.schedule.dac.MockScheduleDAC" />
+	<bean id="settingsDACMockTarget" class="com.sensus.mlc.settings.dac.MockSettingsDAC" />
+	<bean id="smartPointDACMockTarget" class="com.sensus.mlc.smartpoint.dac.MockSmartPointDAC" />
+	<bean id="tagDACMockTarget" class="com.sensus.mlc.tag.dac.MockTagDAC" />
+	<bean id="tenantDACMockTarget" class="com.sensus.mlc.tenant.dac.MockTenantDAC" />
+	<bean id="userDACMockTarget" class="com.sensus.mlc.user.dac.MockUserDAC" />
+	<bean id="ecoModeDACMockTarget" class="com.sensus.mlc.ecomode.dac.MockEcoModeDAC" />
+
+	<!-- General Beans -->
+	<bean id="SensusAppContext" class="com.sensus.common.util.SensusAppContext"/>
+	<bean id="objectFactoryMlcServer" class="com.sensus.mlc.mlcserver.client.ObjectFactoryMock" />
+	<bean id="lcHelpTarget" class="com.sensus.mlc.base.util.LCHelp"/>
+
+	<bean id="lcValidationUtilTarget" class="com.sensus.mlc.base.util.LCValidationUtil"/>
+
+	<!-- Configure the Spring-WS client
+	 <bean id="marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller"
+		p:contextPath="com.sensus.mlc.mlcserver.type" />
+
+	 Configure Spring-WS client template
+	 p:defaultUri="http://localhost:9090/mlc-gateway-ws/mlc-gateway-ws"
+	<bean id="wsTemplate" class="org.springframework.ws.client.core.WebServiceTemplate"
+		p:defaultUri="http://localhost:8083/gateway-mlc/mlc-gateway-ws/"
+		p:marshaller-ref="marshaller" p:unmarshaller-ref="marshaller">
+	</bean>
+ -->
+	<bean id="mlcGatewayWSClient" class="com.sensus.mlc.mlcserver.client.MlcServerClientMock" lazy-init="false"/>
+
+	<bean id="incompleteData" class="java.lang.String">
+        <constructor-arg>
+        	<value>Incomplete Data</value>
+        </constructor-arg>
+    </bean>
+
+	<!-- This is the User and Pwd for LC System activities -->
+	<bean id="systemIdTarget" class="java.lang.String">
+		<constructor-arg>
+			<value>${system.user.name}</value>
+		</constructor-arg>
+	</bean>
+	<bean id="systemPwdTarget" class="java.lang.String">
+		<constructor-arg>
+			<value>${system.user.pwd}</value>
+		</constructor-arg>
+	</bean>
+</beans>

@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="EcoMode">
+
+    <resultMap id="listEcoModeResults" type="EcoModeBaseline">
+		<result property="replacedTypeValue" column="ecomode_replaced_type" />
+		<result property="replacedWattage" column="ecomode_replaced_wattage" />
+		<result property="calculateRetroactiveEcomode" column="calculate_retroactive_ecomode" />
+		<result property="light.id" column="light_id" />
+		<result property="light.rniId" column="rni_id" />
+		<result property="light.smartPointId" column="smartpoint_id" />
+		<result property="light.ecoMode" column="ecomode" />
+		<result property="light.poleId" column="pole_id" />
+		<result property="light.lightConfiguration.wattageRating" column="wattage_rating" />
+		<result property="light.lightLocation.latitude" column="latitude" />
+		<collection property="light.lastConsumption" column="light_id" select="fetchLastConsumption" />
+	</resultMap>
+
+    <resultMap id="listLightConsumptionsResults" type="LightConsumption">
+		<result property="day" column="consumption_day" typeHandler="com.sensus.mlc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="consumption" column="consumption" />
+		<result property="ecomodeBaseline" column="ecomode_baseline" />
+		<result property="ecoMode" column="consumption_ecomode" />
+		<result property="light.id" column="light_id" />
+		<result property="light.ecoMode" column="light_ecomode" />
+		<result property="light.ecoModeBaseline.replacedTypeValue" column="ecomode_replaced_type" />
+		<result property="light.ecoModeBaseline.replacedWattage" column="ecomode_replaced_wattage" />
+	</resultMap>
+
+	<resultMap id="listPropertyResults" type="LightParameter">
+		<result property="value" jdbcType="VARCHAR" column="property_value" />
+		<result property="propertyEnumValue" column="property_id" />
+	</resultMap>
+
+    <sql id="allFetchEcoModeByLightIdColumns">
+		l.light_id, l.calculate_retroactive_ecomode, smt.smartpoint_id, smt.rni_id, ecomode, ecomode_replaced_type, ecomode_replaced_wattage, l.pole_id, lc.wattage_rating, ll.latitude
+	</sql>
+
+    <sql id="allFetchLightConsumptionsByLightIdColumns">
+		l.light_id, l.ecomode AS light_ecomode, ldc.ecomode AS consumption_ecomode, l.ecomode_replaced_type, l.ecomode_replaced_wattage, ldc.consumption_day, ldc.consumption, ldc.ecomode_baseline
+	</sql>
+
+	<!-- Update Group -->
+	<select id="upsertEcomode" parameterType="InquiryEcoModeRequest" resultType="int">
+
+       SELECT upsert_ecomode FROM upsert_ecomode(#{tenant.id},
+       											 #{firstEcoModeBaseline.light.rniId},
+       											 #{firstEcoModeBaseline.light.lastConsumption.day},
+       											 #{firstEcoModeBaseline.calculateRetroactiveEcomode},
+       											 #{firstEcoModeBaseline.light.ecoMode},
+										         #{firstEcoModeBaseline.replacedTypeValue},
+										         #{firstEcoModeBaseline.replacedWattage},
+										         #{firstEcoModeBaseline.light.lastConsumption.ecomodeBaseline}
+						       					)
+
+    </select>
+
+	<!-- Update Light Consumptions -->
+	<select id="updateLightConsumptions" parameterType="InquiryEcoModeRequest" resultType="java.lang.Void">
+
+       <if test="lightConsumptions != null and !lightConsumptions.isEmpty()">
+
+			UPDATE light_daily_consumption AS ldc
+			   SET ecomode = CONSUMPTIONS.ecomode,
+			       ecomode_baseline = CONSUMPTIONS.ecomode_baseline
+			  FROM (
+
+				<foreach item="item" index="index" collection="lightConsumptions" separator=" UNION ALL ">
+			        (SELECT #{item.ecoMode}::double precision AS ecomode,
+			                #{item.ecomodeBaseline}::real AS ecomode_baseline,
+			                #{item.day}::date AS consumption_day)
+				</foreach>
+
+			       ) AS CONSUMPTIONS
+			  WHERE ldc.consumption_day = CONSUMPTIONS.consumption_day
+			    AND ldc.light_id = #{light.id};
+
+	    </if>
+
+    </select>
+
+    <!-- Update Calculation Retroactive Ecomode -->
+	<select id="updateCalculationRetroactiveEcomode" parameterType="InquiryEcoModeRequest" resultType="java.lang.Void">
+
+		SELECT upd_light_calculation_retroactive_ecomode(#{firstEcoModeBaseline.light.id}, #{firstEcoModeBaseline.calculateRetroactiveEcomode});
+
+    </select>
+
+    <insert id="insertLightConsumption" parameterType="LightConsumption">
+
+    	INSERT INTO light_daily_consumption(
+           			light_id, consumption_day, consumption)
+    		 VALUES (#{light.id}, #{day}, #{consumption});
+
+    </insert>
+
+    <select id="fetchEcoModeByPoleId" parameterType="InquiryEcoModeRequest" resultMap="listEcoModeResults">
+
+    	SELECT <include refid="allFetchEcoModeByLightIdColumns" />
+    	  FROM light l
+    	       JOIN light_configuration lc ON (l.light_id = lc.light_id)
+       		   JOIN light_location ll ON (l.light_id = ll.light_id)
+			   JOIN smartpoint smt ON (l.smartpoint_id = smt.smartpoint_id)
+    	  <if test="allowedGroupIdList != null and !allowedGroupIdList.isEmpty()">
+			   JOIN smartpoint_grouping smt_grp ON (smt.smartpoint_id = smt_grp.smartpoint_id)
+    	  </if>
+    	 WHERE l.tenant_id = #{tenant.id}
+    	   AND l.pole_id = #{firstEcoModeBaseline.light.poleId}
+    	   AND ll.latitude IS NOT NULL
+    	<if test="light != null">
+			AND l.light_id = #{light.id}
+		</if>
+    	<if test="allowedGroupIdList != null and !allowedGroupIdList.isEmpty()">
+			AND smt_grp.grouping_id IN
+			<foreach item="item" index="index" collection="allowedGroupIdList"
+				open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+    </select>
+
+    <select id="fetchLightConsumptionsToChart" parameterType="InquiryEcoModeRequest" resultMap="listLightConsumptionsResults">
+
+		SELECT cast(sum(COALESCE(consumption,0.00)) as real) AS consumption
+		       ,cast(sum(COALESCE(ecomode_baseline,0.00)) as real) AS ecomode_baseline
+		       ,consumption_day
+		       ,cast(avg(COALESCE(consumption_ecomode,0.00)) AS double precision) AS consumption_ecomode
+		       ,lgt.light_id
+		       ,lgt.ecomode AS light_ecomode
+		       ,lgt.ecomode_replaced_type
+		       ,lgt.ecomode_replaced_wattage
+		       ,lgt.calculate_retroactive_ecomode
+		FROM (SELECT light_id
+		             ,ecomode
+		             ,ecomode_replaced_type
+		             ,ecomode_replaced_wattage
+		             ,calculate_retroactive_ecomode
+		        FROM light l
+                     <if test="allowedGroupIdList != null and !allowedGroupIdList.isEmpty()">
+                         JOIN smartpoint_grouping smt_grp ON l.smartpoint_id = smt_grp.smartpoint_id
+		             </if>
+		       WHERE light_id = #{light.id}
+		             <if test="allowedGroupIdList != null and !allowedGroupIdList.isEmpty()">
+			              AND smt_grp.grouping_id IN
+						  <foreach item="item" index="index" collection="allowedGroupIdList"
+						      open="(" separator="," close=")">
+						      #{item}
+						  </foreach>
+			         </if>
+		      ) AS lgt,
+		      (SELECT ldc.consumption
+		              ,ldc.ecomode_baseline
+		              ,ldc.ecomode AS consumption_ecomode
+		              ,l.light_id
+		              ,CASE WHEN (#{endDate}::date - #{initialDate}::date) > 31
+		                         THEN date_trunc('month',ldc.consumption_day)
+		                         ELSE date_trunc('day',ldc.consumption_day)
+		                    END AS consumption_date
+		         FROM light l JOIN light_daily_consumption ldc ON l.light_id = ldc.light_id
+		              <if test="allowedGroupIdList != null and !allowedGroupIdList.isEmpty()">
+		                  JOIN smartpoint_grouping smt_grp ON l.smartpoint_id = smt_grp.smartpoint_id
+		              </if>
+		        WHERE ldc.light_id = #{light.id}
+		          AND ldc.consumption_day BETWEEN
+		                                    (SELECT CASE WHEN (#{endDate}::date - #{initialDate}::date) > 31
+				                                              THEN date_trunc('month',#{initialDate}::date)
+			                                                  ELSE date_trunc('day',#{initialDate}::date)
+			                                             END AS consumption_day)
+		                                    AND #{endDate}
+			      <if test="allowedGroupIdList != null and !allowedGroupIdList.isEmpty()">
+				      AND smt_grp.grouping_id IN
+				      <foreach item="item" index="index" collection="allowedGroupIdList"
+					       open="(" separator="," close=")">
+					       #{item}
+				      </foreach>
+				  </if>
+		       ) AS CONSUMPTION
+		       RIGHT JOIN
+		       (
+			      SELECT CASE
+			                 WHEN (#{endDate}::date - #{initialDate}::date) > 31
+				                  THEN generate_series(date_trunc('month',#{initialDate}::date), date_trunc('month',#{endDate}::date), interval '1 month')
+			                      ELSE generate_series(#{initialDate}::date, #{endDate}::date, interval '1 day')
+			                 END AS consumption_day
+		        ) AS RANGE_DATE ON CONSUMPTION.consumption_date = RANGE_DATE.consumption_day
+		GROUP BY consumption_day
+		         ,lgt.light_id
+		         ,lgt.ecomode
+		         ,lgt.ecomode_replaced_type
+		         ,lgt.ecomode_replaced_wattage
+		         ,lgt.calculate_retroactive_ecomode
+		ORDER BY consumption_day
+
+    </select>
+
+    <select id="fetchLightConsumptionsByLightId" parameterType="InquiryEcoModeRequest" resultMap="listLightConsumptionsResults">
+
+    	SELECT *
+	   	FROM (
+	    	SELECT LIGHT.light_id AS light_id
+	              ,LIGHT.ecomode AS light_ecomode
+	              ,LIGHT.ecomode_replaced_type
+			      ,LIGHT.ecomode_replaced_wattage
+			      ,<if test="initialDate != null and endDate != null">RANGE_DATE.</if>consumption_day
+			      ,consumption_ecomode
+			      ,consumption
+			      ,ecomode_baseline
+	               <if test="sortExpression == 'consumption_day DESC' or sortExpression == 'consumption_day' or sortExpression == 'consumption_day ASC'">
+	    		   		,ROW_NUMBER() OVER ( ORDER BY <if test="initialDate != null and endDate != null">RANGE_DATE.</if>${sortExpression} ) AS RowNum
+				   </if>
+	               <if test="sortExpression != 'consumption_day' and sortExpression != 'consumption_day ASC' and sortExpression != 'consumption_day DESC'">
+	    		   		,ROW_NUMBER() OVER ( ORDER BY ${sortExpression} ) AS RowNum
+				   </if>
+				   FROM (
+						SELECT <include refid="allFetchLightConsumptionsByLightIdColumns"/>
+						  FROM light_daily_consumption ldc
+						       JOIN light l ON ldc.light_id = l.light_id
+				    	  	<if test="allowedGroupIdList != null and !allowedGroupIdList.isEmpty()">
+							   JOIN smartpoint_grouping smt_grp ON l.smartpoint_id = smt_grp.smartpoint_id
+						    </if>
+						 WHERE ldc.light_id = #{light.id}
+						 <if test="initialDate != null and endDate != null">
+				    	   AND consumption_day BETWEEN #{initialDate} AND #{endDate}
+				    	 </if>
+				    	 <if test="allowedGroupIdList != null and !allowedGroupIdList.isEmpty()">
+						   AND smt_grp.grouping_id IN
+							<foreach item="item" index="index" collection="allowedGroupIdList"
+								open="(" separator="," close=")">
+								#{item}
+							</foreach>
+						 </if>
+			       ) AS CONSUMPTIONS
+				<if test="initialDate != null and endDate != null">
+	               RIGHT JOIN (
+	                     SELECT generate_series(#{initialDate}::date, #{endDate}::date, interval '1 day') AS consumption_day
+	                  ) AS RANGE_DATE ON CONSUMPTIONS.consumption_day = RANGE_DATE.consumption_day
+	            </if>
+	               ,light AS LIGHT
+
+	         WHERE LIGHT.light_id = #{light.id}
+
+		) CONSUMPTIONSPAGE
+
+		<if test="pageSize > 0">
+			WHERE RowNum BETWEEN #{startRow,jdbcType=INTEGER} + 1 AND (#{startRow,jdbcType=INTEGER} + #{pageSize,jdbcType=INTEGER})
+		</if>
+
+    </select>
+
+    <select id="fetchCountLightConsumptionsByLightId" parameterType="InquiryEcoModeRequest" resultType="int">
+    	<if test="initialDate != null and endDate != null">
+	   		SELECT #{endDate}::date - #{initialDate}::date
+		</if>
+    	<if test="initialDate == null and endDate == null">
+	   		SELECT COUNT(1)
+	   		  FROM light_daily_consumption
+	   		 WHERE light_id = #{light.id}
+		</if>
+    </select>
+
+    <select id="fetchAllLightsToCalculateEcoMode" parameterType="InquiryEcoModeRequest" resultMap="listEcoModeResults">
+
+		SELECT <include refid="allFetchEcoModeByLightIdColumns" />
+		       <include refid="fetchAllLightsConditions" />
+	  GROUP BY <include refid="allFetchEcoModeByLightIdColumns" />
+		OFFSET ( #{startPage} * #{pageSize} )
+		 LIMIT #{pageSize}
+
+	</select>
+
+    <select id="fetchCountAllLightsToCalculateEcoMode" parameterType="InquiryEcoModeRequest" resultType="int">
+
+		SELECT COUNT(DISTINCT(<include refid="allFetchEcoModeByLightIdColumns" />))
+		       <include refid="fetchAllLightsConditions" />
+
+	</select>
+
+	<sql id="fetchAllLightsConditions">
+
+	      FROM light l
+		       JOIN light_configuration lc ON (l.light_id = lc.light_id)
+       		   JOIN light_location ll ON (l.light_id = ll.light_id)
+		       JOIN smartpoint smt ON (l.smartpoint_id = smt.smartpoint_id)
+		  <if test="allowedGroupIdList != null and !allowedGroupIdList.isEmpty()">
+			   JOIN smartpoint_grouping smt_grp ON (smt.smartpoint_id = smt_grp.smartpoint_id)
+    	  </if>
+		 WHERE l.tenant_id = #{tenant.id}
+		   AND l.ecomode_replaced_wattage IS NOT NULL
+		   AND l.pole_id IS NOT NULL
+           AND ll.latitude IS NOT NULL
+         <if test="allowedGroupIdList != null and !allowedGroupIdList.isEmpty()">
+		   AND smt_grp.grouping_id IN
+		   	   <foreach item="item" index="index" collection="allowedGroupIdList"
+				        open="(" separator="," close=")">
+				    #{item}
+			   </foreach>
+		 </if>
+	</sql>
+
+	<select id="updateAnalyticsData" statementType="CALLABLE" resultType="java.lang.Void">
+		{ call calculate_analytics_ecomode() }
+	</select>
+
+    <select id="fetchLastConsumption" resultMap="listLightConsumptionsResults">
+
+		SELECT <include refid="allFetchLightConsumptionsByLightIdColumns" />
+    	  FROM light_daily_consumption ldc
+			   JOIN light l ON ldc.light_id = l.light_id
+    	 WHERE ldc.light_id = #{value}
+    	   AND ldc.consumption_day = (SELECT CURRENT_DATE - interval '1 day')
+
+	</select>
+</mapper>

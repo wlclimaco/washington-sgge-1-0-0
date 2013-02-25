@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="smartPointAccessorBCFTarget" class="com.sensus.mlc.smartpoint.bcf.impl.SmartPointAccessorBCFImpl">
+		<property name="smartPointAccessorBCL" ref="smartPointAccessorBCLMockTarget"/>
+		<property name="lightingControlRequestValidationController" ref="lightingControlRequestValidationController" />
+		<property name="lightingControlInquiryRequestValidationController" ref="lightingControlInquiryRequestValidationController" />
+		<property name="lightValidationController" ref="lightValidationController" />
+		<property name="propertiesValidationController" ref="propertiesValidationController" />
+		<property name="rangeDateValidationController" ref="rangeDateValidationController" />
+		<property name="customSearchValidationController" ref="customSearchValidationController" />
+		<property name="processValidationController" ref="processValidationController" />
+		<property name="csvFileValidationController" ref="csvFileValidationController" />
+	</bean>
+
+	<bean id="smartPointProcessorBCFTarget" class="com.sensus.mlc.smartpoint.bcf.impl.SmartPointProcessorBCFImpl">
+		<property name="smartPointProcessorBCL" ref="smartPointProcessorBCLMockTarget" />
+		<property name="lightValidationController" ref="lightValidationController" />
+		<property name="geoCodeValidationController" ref="geoCodeValidationController" />
+		<property name="lightingControlRequestValidationController" ref="lightingControlRequestValidationController" />
+		<property name="lightSelectionRequestValidationController" ref="lightSelectionRequestValidationController" />
+		<property name="propertiesValidationController" ref="propertiesValidationController" />
+		<property name="lightIntensityValidationController" ref="lightIntensityValidationController" />
+		<property name="lightListValidationController" ref="lightListValidationController" />
+		<property name="channelSetupAuditRequestValidationController" ref="channelSetupAuditRequestValidationController" />
+		<property name="alarmNotificationRequestValidationController" ref="alarmNotificationRequestValidationController" />
+		<property name="forcedLightStatusNotificationRequestValidationController" ref="forcedLightStatusNotificationRequestValidationController" />
+		<property name="lightStatusNotificationRequestValidationController" ref="lightStatusNotificationRequestValidationController" />
+	</bean>
+
+	<bean id="smartPointUpdaterBCFTarget" class="com.sensus.mlc.smartpoint.bcf.impl.SmartPointUpdaterBCFImpl">
+		<property name="smartPointUpdaterBCL" ref="smartPointUpdaterBCLMockTarget"/>
+		<property name="processBCF" ref="processBCFMockTarget" />
+		<property name="lightingControlRequestValidationController" ref="lightingControlRequestValidationController" />
+		<property name="lightValidationController" ref="lightValidationController" />
+		<property name="lightSelectionRequestValidationController" ref="lightSelectionRequestValidationController" />
+		<property name="customSearchValidationController" ref="customSearchValidationController" />
+		<property name="geoCodeValidationController" ref="geoCodeValidationController" />
+		<property name="columnFilterValidationController" ref="columnFilterValidationController" />
+	</bean>
+
+</beans>

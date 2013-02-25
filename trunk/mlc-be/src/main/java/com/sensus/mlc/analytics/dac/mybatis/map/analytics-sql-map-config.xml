@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="lazyLoadingEnabled" value="false" />
+	</settings>
+
+	<typeAliases>
+		<typeAlias alias="AnalyticsGroup" 				type="com.sensus.mlc.analytics.model.AnalyticsGroup" 				/>
+		<typeAlias alias="AnalyticsGroupAlarm" 			type="com.sensus.mlc.analytics.model.AnalyticsGroupAlarm" 			/>
+		<typeAlias alias="AnalyticsGroupWarning" 		type="com.sensus.mlc.analytics.model.AnalyticsGroupWarning" 		/>
+		<typeAlias alias="AnalyticsGroupTypeLight" 		type="com.sensus.mlc.analytics.model.AnalyticsGroupTypeLight" 		/>
+		<typeAlias alias="AnalyticsGroupCarbonCredits" 	type="com.sensus.mlc.analytics.model.AnalyticsGroupCarbonCredits" 	/>
+		<typeAlias alias="AnalyticsGroupEcoMode" 	    type="com.sensus.mlc.analytics.model.AnalyticsGroupEcoMode"    	    />
+		<typeAlias alias="LightParameter"				type="com.sensus.mlc.smartpoint.model.LightParameter" 				/>
+		<typeAlias alias="AnalyticsGroupColumns" 		type="com.sensus.mlc.analytics.model.AnalyticsGroupColumns" 		/>
+		<typeAlias alias="Light" 						type="com.sensus.mlc.smartpoint.model.Light" 						/>
+		<typeAlias alias="Tenant" 						type="com.sensus.mlc.tenant.model.Tenant" 							/>
+		<typeAlias alias="StatusMessage" 				type="com.sensus.mlc.smartpoint.model.StatusMessage" 				/>
+		<typeAlias alias="Tag"  						type="com.sensus.mlc.tag.model.Tag"									/>
+		<typeAlias alias="Parameter"					type="com.sensus.mlc.base.model.Parameter" 							/>
+		<typeAlias alias="AnalyticsRequest"				type="com.sensus.mlc.analytics.model.request.AnalyticsRequest" 		/>
+	</typeAliases>
+
+	<mappers>
+  		<mapper resource="com/sensus/mlc/analytics/dac/mybatis/map/analytics.xml"/>
+    </mappers>
+</configuration>

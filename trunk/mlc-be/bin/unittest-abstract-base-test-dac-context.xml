@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>messages/messages</value>
+			</list>
+		</property>
+	</bean>
+ 	
+ 	<bean id="smartPointDACTarget" class="com.sensus.mlc.smartpoint.dac.mybatis.SmartPointDACImpl "> 
+ 		<property name="sqlSessionFactory" ref="smartPoint-sqlSessionFactory"/> 
+ 	</bean>	 
+ 	
+	<!-- SqlMap setup for myBATIS Database Layer SMARTPOINT -->
+ 	<bean id="smartPoint-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> 
+     	<property name="configLocation" value="classpath:com/sensus/mlc/smartpoint/dac/mybatis/map/smartpoint-sql-map-config.xml" /> 
+     	<property name="dataSource" ref="mlcDataSource" />
+   	</bean> 
+
+
+	<bean id="settingsDACTarget" class="com.sensus.mlc.settings.dac.mybatis.SettingsDACImpl ">
+		<property name="sqlSessionFactory" ref="settings-sqlSessionFactory" />
+	</bean>
+
+	<!-- SqlMap setup for myBATIS Database Layer SETTINGS -->
+	<bean id="settings-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation"
+			value="classpath:com/sensus/mlc/settings/dac/mybatis/map/settings-sql-map-config.xml" />
+		<property name="dataSource" ref="mlcDataSource" />
+	</bean>
+
+	<bean id="groupDACTarget" class="com.sensus.mlc.group.dac.mybatis.GroupDACImpl">
+		<property name="sqlSessionFactory" ref="group-sqlSessionFactory" />
+	</bean>
+
+	<!-- SqlMap setup for myBATIS Database Layer GROUP -->
+	<bean id="group-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation"
+			value="classpath:com/sensus/mlc/group/dac/mybatis/map/group-sql-map-config.xml" />
+		<property name="dataSource" ref="mlcDataSource" />
+	</bean>
+
+	<bean id="tagDACTarget" class="com.sensus.mlc.tag.dac.mybatis.TagDACImpl ">
+		<property name="sqlSessionFactory" ref="tag-sqlSessionFactory" />
+	</bean>
+
+	<!-- SqlMap setup for myBATIS Database Layer TAG -->
+	<bean id="tag-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation"
+			value="classpath:com/sensus/mlc/tag/dac/mybatis/map/tag-sql-map-config.xml" />
+		<property name="dataSource" ref="mlcDataSource" />
+	</bean>
+
+	<bean id="scheduleDACTarget" class="com.sensus.mlc.schedule.dac.mybatis.ScheduleDACImpl ">
+		<property name="sqlSessionFactory" ref="schedule-sqlSessionFactory" />
+		<property name="smartpointDAC" ref="smartPointDACTarget" />
+	</bean>
+
+	<!-- SqlMap setup for myBATIS Database Layer SCHEDULE -->
+	<bean id="schedule-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation"
+			value="classpath:com/sensus/mlc/schedule/dac/mybatis/map/schedule-sql-map-config.xml" />
+		<property name="dataSource" ref="mlcDataSource" />
+	</bean>
+
+	<bean id="processDACTarget" class="com.sensus.mlc.process.dac.mybatis.ProcessDACImpl">
+		<property name="sqlSessionFactory" ref="process-sqlSessionFactory" />
+	</bean>
+	
+	<!-- SqlMap setup for myBATIS Database Layer PROCESS -->
+	<bean id="process-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation"	value="classpath:com/sensus/mlc/process/dac/mybatis/map/process-sql-map-config.xml" />
+		<property name="dataSource" ref="mlcDataSource" />
+	</bean>
+	
+	<bean id="userDACTarget" class="com.sensus.mlc.user.dac.mybatis.UserDACImpl">
+		<property name="sqlSessionFactory" ref="user-sqlSessionFactory" />
+	</bean>
+
+	<!-- SqlMap setup for myBATIS Database Layer USER -->
+  	<bean id="user-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    	<property name="configLocation" value="classpath:com/sensus/mlc/user/dac/mybatis/map/user-sql-map-config.xml" />
+    	<property name="dataSource" ref="mlcDataSource" />
+  	</bean>
+  	
+	<!-- SqlMap setup for myBATIS Database Layer ECOMODE -->
+	<bean id="ecomode-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation"
+			value="classpath:com/sensus/mlc/ecomode/dac/mybatis/map/ecomode-sql-map-config.xml" />
+		<property name="dataSource" ref="mlcDataSource" />
+	</bean>
+  		
+	<bean id="ecoModeDACTarget" class="com.sensus.mlc.ecomode.dac.mybatis.EcoModeDACImpl">
+		<property name="sqlSessionFactory" ref="ecomode-sqlSessionFactory" />
+	</bean>
+
+</beans>
