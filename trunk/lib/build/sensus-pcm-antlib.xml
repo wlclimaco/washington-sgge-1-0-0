@@ -1,0 +1,1206 @@
+<?xml version="1.0" ?>
+<antlib>
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
+		<classpath>
+			<pathelement location="../../cotslib/ant-contrib.jar"/>
+		</classpath>
+	</taskdef>
+
+	<!--
+		This builds a specific component JAR file, first compiling the source, optionally running unit tests, and then building the jar file. All results are placed into the
+		component-dir/dist folder. Optionally, the artifacts are also copied to the ComponentLib directory.
+	-->
+	<macrodef name="buildComponentJar">
+
+		<!-- ****** Attribute definitions ****** -->
+
+		<!-- ** Component Naming and Parameters ** -->
+		<!-- Business Area (required) -->
+		<attribute name="businessArea" />
+		<!-- Component Name -->
+		<attribute name="componentName" default="base" />
+		<!-- Prefix for jar file name -->
+		<attribute name="prefix" default="sensus" />
+		<!-- Version for jar file name -->
+		<attribute name="version" default="0" />
+		<!-- Suffix for Jar file name when only interfaces and models are built -->
+		<attribute name="clientSuffix" default="client" />
+		<!-- Base name for Jar file. Suffixes for different build content will be appended later. -->
+		<attribute name="jarFileBaseName" default="@{prefix}-@{businessArea}-@{componentName}" />
+		<!-- Version of the implemented specification (included in jar manifest) -->
+		<attribute name="specificationVersion" default="0" />
+
+		<!-- ** Business Area Directories ** -->
+		<!-- The main source folder -->
+		<attribute name="rootSrcDir" default="../src/main/java" />
+		<!-- The directory that will hold temporary build artifacts, i.e. class files -->
+		<attribute name="rootTmpDir" default="../tmp" />
+		<!-- The distribution directory inside the current project -->
+		<attribute name="rootDistDir" default="../dist" />
+		<!-- The main configuration directory for classpath resources -->
+		<attribute name="rootConfDir" default="../src/main/resources" />
+		<!-- The directory for non-classpath resources and production spring files -->
+		<attribute name="rootWebConfDir" default="../config" />
+		<!-- The unit test source folder -->
+		<attribute name="rootTestDir" default="../src/test/java" />
+		<!-- The classpath resources directory for unit tests -->
+		<attribute name="rootTestConfDir" default="../src/test/resources" />
+		<!-- The output directory for unit test reports -->
+		<attribute name="rootTestReportDir" default="../testreports" />
+
+		<!-- ** Business Component Directories ** -->
+		<!-- The directory structure (package structure) where the code for the current component is located -->
+		<attribute name="componentDir" default="com/sensus/@{businessArea}/@{componentName}" />
+		<!-- Distribution directory for current component -->
+		<attribute name="outputDir" default="@{rootDistDir}/@{componentName}" />
+		<!-- Build output directory for current component -->
+		<attribute name="binDir" default="@{rootTmpDir}/main/@{componentName}/bin" />
+		<!-- Unit test build output directory for current component -->
+		<attribute name="binTestDir" default="@{rootTmpDir}/test/@{componentName}/bin" />
+		<!-- Unit test report directory for current component -->
+		<attribute name="testReportDir" default="@{rootTestReportDir}/@{componentName}" />
+		<!-- Unit test config directory for current component -->
+		<attribute name="testConfDir" default="@{rootTestConfDir}" />
+		<!-- Configuration directory for current component -->
+		<attribute name="webConfDir" default="@{rootWebConfDir}" />
+
+		<!-- ** Shared Libraries ** -->
+		<!-- LIB, third party shared libraries -->
+		<attribute name="libDir" default="../../lib" />
+		<!-- COTSLib, requirements for compilation and unit tests that will be provided by app server when deployed -->
+		<attribute name="COTSLibDir" default="../../cotsib" />
+		<!-- ComponentLib, shared project artifacts -->
+		<attribute name="componentLibDir" default="../../componentlib" />
+
+
+		<!-- ** Build Settings ** -->
+		<!-- Which classes should be build; either "all" for all classes or "interfacesAndModels" for packaging only interfaces and model objects -->
+		<attribute name="buildContent" default="all" />
+		<!-- Whether to enable debug on javac. This also will include the source zfiles in the jar if true. -->
+		<attribute name="javacDebugEnabled" default="true" />
+		<!-- Whether to copy the build artifacts (jar file) to the ComponentLib	directory -->
+		<attribute name="copyToComponentLib" default="true" />
+		<!-- Whether to run JUnit tests. Note that only tests for the current component are executed.-->
+		<attribute name="runJUnitTests" default="true" />
+		<!-- Whether to fail the build on Junit test failures and errors  -->
+		<attribute name="failOnJUnitError" default="true" />
+
+
+		<!-- ****** Build Logic ****** -->
+
+		<sequential>
+			<echo message="Begin compilation for component[@{businessArea}-@{componentName}]" />
+
+			<!-- Create the componentLibDir to avoid errors when it doesn't exist -->
+			<mkdir dir="@{componentLibDir}" />
+
+			<echo message="COTSLibDir=@{COTSLibDir}" />
+
+			<!-- Create a path based on the shared libraries. -->
+			<path id="sensus.lib">
+				<fileset dir="@{libDir}">
+					<include name="*.jar" />
+				</fileset>
+				<fileset dir="@{componentLibDir}">
+					<include name="*.jar" />
+				</fileset>
+				<fileset dir="@{COTSLibDir}">
+					<include name="*.jar" />
+				</fileset>
+			</path>
+
+			<!-- Create output dir -->
+			<mkdir dir="@{binDir}" />
+
+			<!-- Determine the jar file name -->
+			<if>
+				<equals arg1="@{buildContent}" arg2="interfacesAndModels" />
+				<!-- Build Interfaces and Model Object (so UI doesn't have to wait until full backend implementation is updated to begin development) -->
+				<then>
+					<var name="jarFileName" value="@{jarFileBaseName}-@{clientSuffix}.jar" />
+				</then>
+				<!-- or build the complete backend -->
+				<else>
+					<var name="jarFileName" value="@{jarFileBaseName}.jar" />
+				</else>
+			</if>
+
+			<echo message="Jar File will be named [${jarFileName}]" />
+			<!-- Determine the classes to build -->
+			<if>
+				<equals arg1="@{buildContent}" arg2="interfacesAndModels" />
+				<!-- Build Interfaces and Model Object (so UI doesn't have to wait until full backend implementation is updated to begin development) -->
+				<then>
+					<var name="javacIncludePath" value="@{componentDir}/model/**,@{componentDir}/bcf/*,@{componentDir}/util/**" />
+				</then>
+				<!-- or build the complete backend -->
+				<else>
+					<var name="javacIncludePath" value="@{componentDir}/**" />
+				</else>
+			</if>
+			<!-- Build the project.  All source files are included. -->
+			<echo message="Run javac task" />
+			<javac srcDir="@{rootSrcDir}" destdir="@{binDir}" listfiles="true" verbose="true" classpathref="sensus.lib" debug="@{javacDebugEnabled}" debuglevel="lines,vars,source"  includeantruntime="false" includes="${javacIncludePath}">
+			</javac>
+
+			<if>
+				<equals arg1="@{runJUnitTests}" arg2="true" />
+				<then>
+					<!-- Build the JUnit Tests -->
+					<!-- Create compilation output dir -->
+					<mkdir dir="@{binTestDir}" />
+
+					<!-- This will compile the UnitTests -->
+					<echo message="Run javac task for unit tests" />
+					<javac srcDir="@{rootTestDir}" destdir="@{binTestDir}" listfiles="true" verbose="true" debug="@{javacDebugEnabled}" debuglevel="lines,vars,source" includes="${javacIncludePath}">
+						<classpath>
+							<pathelement location="@{binDir}" />
+							<path refId="sensus.lib" />
+						</classpath>
+					</javac>
+
+					<!-- Create test output dir -->
+					<mkdir dir="@{testReportDir}" />
+
+					<!-- Run the JUnit Tests -->
+					<junit printsummary="withOutAndErr" haltonfailure="@{failOnJUnitError}">
+						<classpath>
+							<!-- compiled sources -->
+							<pathelement location="@{binDir}" />
+							<!-- compiled JUnit tests -->
+							<pathelement location="@{binTestDir}" />
+							<!-- test resources-->
+							<pathelement location="@{testConfDir}" />
+							<!-- spring configurations are loaded via classpath in unit tests -->
+							<pathelement location="@{webConfDir}" />
+							<!-- main classpath resources -->
+							<pathelement location="@{rootConfDir}" />
+							<!-- ibatis configurations -->
+							<pathelement location="@{rootSrcDir}" />
+							<!-- main classpath -->
+							<path refId="sensus.lib" />
+						</classpath>
+
+						<batchtest fork="yes" todir="@{testReportDir}">
+							<formatter type="xml" />
+							<fileset dir="@{binTestDir}">
+								<include name="**/*Test.class" />
+							</fileset>
+						</batchtest>
+					</junit>
+				</then>
+			</if>
+
+			<if>
+				<equals arg1="@{buildContent}" arg2="interfacesAndModels" />
+				<!-- Either package interfaces and model objects only -->
+				<then>
+					<var name="jarIncludePath" value="com/sensus/@{businessArea}/@{componentName}/model/**,com/sensus/@{businessArea}/@{componentName}/bcf/*" />
+				</then>
+				<!-- Or package everything -->
+				<else>
+					<var name="jarIncludePath" value="com/sensus/@{businessArea}/@{componentName}/**" />
+				</else>
+			</if>
+
+			<!-- Determine which files to exclude (don't exclude source files if @{javaDebugEnabled} is true) -->
+			<if>
+				<equals arg1="@{javacDebugEnabled}" arg2="true" />
+				<then>
+					<var name="jarExcludePath" value="**/bin/** **/dist/** **/build/** **/config/**" />
+				</then>
+				<else>
+					<var name="jarExcludePath" value="**/*.java **/bin/** **/dist/** **/build/** **/config/**" />
+				</else>
+			</if>
+
+			<!-- Jar the output -->
+			<echo message="Jar Packaging into @{outputDir}/${jarFileName}" />
+			<jar destfile="@{outputDir}/${jarFileName}">
+				<fileset dir="@{binDir}" includes="**/com/**" />
+				<fileset dir="@{rootSrcDir}" includes="${jarIncludePath}" excludes="${jarExcludePath}" />
+				<manifest>
+					<!-- Who is building this jar? -->
+					<attribute name="Built-By" value="${user.name}" />
+					<!-- Information about the program itself -->
+					<attribute name="Extension-Name" value="@{prefix}-@{businessArea}-@{componentName}" />
+					<attribute name="Specification-Version" value="@{specificationVersion}" />
+					<attribute name="Specification-Vendor" value="QAT" />
+					<attribute name="Implementation-Version" value="@{version}" />
+					<attribute name="Implementation-Vendor" value="QAT" />
+				</manifest>
+
+			</jar>
+
+			<!-- If @{copyToComponentLib} is true, copy artifacts and config files to component lib -->
+			<echo message="copyToComponentLib=@{copyToComponentLib}" />
+			<if>
+				<equals arg1="@{copyToComponentLib}" arg2="true" />
+				<then>
+					<echo message="Copying artifacts to component lib dir" />
+					<copy todir="@{componentLibDir}" overwrite="true">
+						<fileset dir="@{outputDir}" includes="${jarFileName}" excludes="**/*.xsd"/>
+					</copy>
+				</then>
+			</if>
+
+			<echo message="Done with compilation for component[@{businessArea}-@{componentName}]" />
+		</sequential>
+	</macrodef>
+
+	<!--
+		This builds all of a business area components based on the delimited
+		list of component names passed in.
+	-->
+	<!--
+		The list of components can optionally include a version specifier with
+		the component name, separated by a dash
+	-->
+
+	<macrodef name="buildBAComponents">
+
+		<!-- ****** Attribute definitions ****** -->
+
+		<!-- ** Component Naming and Parameters ** -->
+		<!-- Business Area (required) -->
+		<attribute name="businessArea" />
+		<!-- List of components to build. -->
+		<attribute name="componentNameList" />
+		<!-- Delimiter for component list -->
+		<attribute name="listDelimiter" default="," />
+		<!-- Prefix for jar file name -->
+		<attribute name="prefix" default="sensus" />
+		<!-- Suffix for Jar file name when only interfaces and models are built -->
+		<attribute name="clientSuffix" default="client" />
+		<!-- Version of the implemented specification (included in jar manifest) -->
+		<attribute name="specificationVersion" default="0" />
+
+		<!-- ** Business Area Directories ** -->
+		<!-- The main source folder -->
+		<attribute name="rootSrcDir" default="../src/main/java" />
+		<!-- The directory that will hold temporary build artifacts, i.e. class files -->
+		<attribute name="rootTmpDir" default="../tmp" />
+		<!-- The distribution directory inside the current project -->
+		<attribute name="rootDistDir" default="../dist" />
+		<!-- The main configuration directory for classpath resources -->
+		<attribute name="rootConfDir" default="../src/main/resources" />
+		<!-- The directory for non-classpath resources and production spring files -->
+		<attribute name="rootWebConfDir" default="../config" />
+		<!-- The unit test source folder -->
+		<attribute name="rootTestDir" default="../src/test/java" />
+		<!-- The classpath resources directory for unit tests -->
+		<attribute name="rootTestConfDir" default="../src/test/resources" />
+		<!-- The output directory for unit test reports -->
+		<attribute name="rootTestReportDir" default="../testreports" />
+
+		<!-- ** Shared Libraries ** -->
+		<!-- LIB, third party shared libraries -->
+		<attribute name="libDir" default="../../lib" />
+		<!-- COTSLib, requirements for compilation and unit tests that will be provided by app server when deployed -->
+		<attribute name="COTSLibDir" default="../../cotslib" />
+		<!-- ComponentLib, shared project artifacts -->
+		<attribute name="componentLibDir" default="../../componentlib" />
+
+		<!-- Directories to be used as root by the build process for the individual jars -->
+		<!-- Distribution directory -->
+		<attribute name="outputDir" default="@{rootDistDir}" />
+		<!-- Compilation directory -->
+		<attribute name="binDir" default="@{rootTmpDir}" />
+		<!-- JUnit Test Report directory -->
+		<attribute name="testReportDir" default="@{rootTestReportDir}" />
+		<!-- Configuration directory for non-classpath resources and production spring config files -->
+		<attribute name="webConfDir" default="@{rootWebConfDir}" />
+		<!-- Configuration directory for classpath resources -->
+		<attribute name="confDir" default="@{rootConfDir}" />
+
+
+		<!-- ** Build Settings ** -->
+		<!-- Whether to clean all artifact folders before building -->
+		<attribute name="cleanOutputFolders" default="true" />
+		<!-- Which classes should be build; either "all" for all classes or "interfacesAndModels" for packaging only interfaces and model objects -->
+		<attribute name="buildContent" default="all" />
+		<!-- Whether to enable debug on javac. This also will include the source zfiles in the jar if true. -->
+		<attribute name="javacDebugEnabled" default="true" />
+		<!-- Whether to copy the build artifacts (jar file) to the ComponentLib	directory -->
+		<attribute name="copyToComponentLib" default="true" />
+		<!-- Whether to run JUnit tests. Note that only tests for the current component are executed.-->
+		<attribute name="runJUnitTests" default="true" />
+		<!-- Whether to fail the build on Junit test failures and errors  -->
+		<attribute name="failOnJUnitError" default="true" />
+
+		<sequential>
+			<!-- Clean the output and bin folders for whole backend by deleting and re-creating them. -->
+			<if>
+				<equals arg1="@{cleanOutputFolders}" arg2="true" />
+				<then>
+					<echo message="Clean the output folders" />
+					<delete dir="@{binDir}" />
+					<mkdir dir="@{binDir}" />
+					<delete dir="@{outputDir}" />
+					<mkdir dir="@{outputDir}" />
+					<delete dir="@{testReportDir}" />
+					<mkdir dir="@{testReportDir}" />
+				</then>
+			</if>
+
+			<!-- Build the individual components first. -->
+			<for list="@{componentNameList}" trim="true" param="componentListData" delimiter="@{listDelimiter}">
+				<sequential>
+					<propertyregex property="componentListNamePortion" input="@{componentListData}" regexp="([^ ]*)-([^ ]*)" select="\1" override="true" defaultValue="@{componentListData}"
+						casesensitive="false" />
+					<var name="componentName" value="${componentListNamePortion}" />
+
+					<echo>${line.separator}Component Name is [${componentName}]</echo>
+
+					<propertyregex property="componentListVersionPortion" input="@{componentListData}" regexp="([^ ]*)-([^ ]*)" select="\2" override="true" defaultValue="0"
+						casesensitive="false" />
+					<var name="version" value="${componentListVersionPortion}" />
+
+					<echo>${line.separator}Version is [${version}]</echo>
+					<echo>${line.separator}Doing component build for [${componentName}]</echo>
+
+					<var name="componentDir" value="com/sensus/@{businessArea}/${componentName}" />
+					<var name="jarFileDir" value="@{rootDistDir}/${componentName}" />
+					<var name="componentConfigLocation" value="@{rootTmpDir}/${componentDir}/config" />
+					<echo message="copyToComponentLib=@{copyToComponentLib}" />
+					<buildComponentJar businessArea="@{businessArea}" componentName="${componentName}" libDir="@{libDir}" buildContent="@{buildContent}" COTSLibDir="@{COTSLibDir}"
+						componentLibDir="@{componentLibDir}" prefix="@{prefix}" version="${version}" clientSuffix="client" outputDir="${jarFileDir}" javacDebugEnabled="@{javacDebugEnabled}"
+						copyToComponentLib="@{copyToComponentLib}" runJUnitTests="@{runJUnitTests}" failOnJUnitError="@{failOnJUnitError}" specificationVersion="@{specificationVersion}" />
+				</sequential>
+			</for>
+
+			<!-- remove bin dir -->
+			<delete dir="@{binDir}" />
+
+			<!-- If @{copyToComponentLib} is true, copy the configurations to ComponentLib (the individual jars are copied by the buildComponentJar task) -->
+			<if>
+				<equals arg1="@{copyToComponentLib}" arg2="true" />
+				<then>
+					<echo message="Copying configuration files to component lib dir" />
+					<delete dir="@{componentLibDir}/@{businessArea}" />
+					<mkdir dir="@{componentLibDir}/@{businessArea}" />
+					<echo message="webConfDir=@{webConfDir}" />
+					<copy todir="@{componentLibDir}/@{businessArea}" overwrite="true">
+						<fileset dir="@{webConfDir}">
+							<include name="*.*" />
+							<include name="**/*.*" />
+						</fileset>
+					</copy>
+					<copy todir="@{componentLibDir}/@{businessArea}/classes" overwrite="true">
+						<fileset dir="@{confDir}">
+							<include name="*.*" />
+							<include name="**/*.*" />
+							<exclude name="**/*.xsd"/>
+						</fileset>
+					</copy>
+					<copy todir="@{componentLibDir}/@{businessArea}" overwrite="true">
+						<fileset dir="@{confDir}">
+							<include name="**/*.xsd"/>
+						</fileset>
+					</copy>
+				</then>
+			</if>
+		</sequential>
+	</macrodef>
+
+
+	<!--
+		This will construct the user interface WAR file based on the list of comma separated component names passed in. The components are included from ComponentLib.
+	-->
+	<macrodef name="buildUIWar">
+		<!-- The business area to build for -->
+		<attribute name="businessArea" default="mlc" />
+		<!-- The component list to build -->
+		<attribute name="componentNameList" default="wui" />
+		<!--  The delimiter for th component list -->
+		<attribute name="listDelimiter" default="," />
+		<!-- Prefix for ui jar and war -->
+		<attribute name="prefix" default="sensus" />
+		<!-- Suffix for Backend Jar file name when only interfaces and models are built (should never be used for an MVC war build) -->
+		<attribute name="clientSuffix" default="client" />
+		<!-- The name of the war file. Note that it doesn't contain a version. -->
+		<attribute name="warFileName" default="@{businessArea}-wui.war" />
+
+		<!-- ** Logger configuration ** -->
+		<attribute name="logDir" />
+		<attribute name="logFile" />
+		<attribute name="logFileUser" />
+
+		<!-- ** Shared Libraries ** -->
+		<!-- LIB, third party shared libraries -->
+		<attribute name="libDir" default="../../lib" />
+		<!-- COTSLib, requirements for compilation and unit tests that will be provided by app server when deployed -->
+		<attribute name="COTSLibDir" default="../../cotslib" />
+		<!-- ComponentLib, shared project artifacts -->
+		<attribute name="componentLibDir" default="../../componentlib" />
+
+		<!-- ** War build Directories ** -->
+		<!-- The main source folder -->
+		<attribute name="rootSrcDir" default="../src/main/java" />
+		<!-- The directory that will hold temporary build artifacts, i.e. class files -->
+		<attribute name="rootTmpDir" default="../tmp" />
+		<!-- The distribution directory inside the current project -->
+		<attribute name="rootDistDir" default="../dist" />
+		<!-- The main configuration directory for classpath resources -->
+		<attribute name="rootConfDir" default="../src/main/resources" />
+		<!-- The unit test source folder -->
+		<attribute name="rootTestDir" default="../src/test/java" />
+		<!-- The classpath resources directory for unit tests -->
+		<attribute name="rootTestConfDir" default="../src/test/resources" />
+		<!-- The Test Mock web.xml file-->
+		<attribute name="mockWebXmlFile" default="../src/test/resources/web.xml" />
+		<!-- The output directory for unit test reports -->
+		<attribute name="rootTestReportDir" default="../testreports" />
+		<!-- The root directory for Web Content -->
+		<attribute name="rootWebContentDir" default="../WebContent" />
+		<!-- The directory for lib classpath configurations -->
+
+		<!-- ** Settings for the Web UI jar file ** -->		<!-- Include pattern for Lib jars -->
+		<attribute name="libIncludes" default="*.jar" />
+		<!-- Exclude pattern for Lib jars -->
+		<attribute name="libExcludes" default="junit*.jar,antlr*.jar,postgresql*.jar,spring-batch*.jar,org.springframework.test*.jar,jaxb-*.jar" />
+		<!-- Lib config dir -->
+		<attribute name="libConfigDir" default="@{libDir}/config/web" />
+		<!-- Lib classpath config subdir -->
+		<attribute name="libClasspathConfigDir" default="@{libConfigDir}/classes" />
+
+		<!--Google Maps Key -->
+		<attribute name="googleMapKey" default="" />
+		<!--Map Server URL -->
+		<attribute name="mapServerURL" default="" />
+
+		<!--Use Mock BCF Layers to test WUI without the real Back-end-->
+		<attribute name="buildUsingMocks" default="false" />
+
+		<!-- Whether to enable debug on javac. This also will include the source zfiles in the jar if true. -->
+		<attribute name="javacDebugEnabled" default="true" />
+		<!-- Whether to run JUnit tests. Note that only tests for the current component are executed.-->
+		<attribute name="runJUnitTests" default="true" />
+		<!-- Whether to fail the build on Junit test failures and errors  -->
+		<attribute name="failOnJUnitError" default="true" />
+
+
+		<sequential>
+			<!-- Clean the output folders -->
+			<echo message="Clean the output folders" />
+			<delete dir="@{rootDistDir}" />
+			<mkdir dir="@{rootDistDir}" />
+			<mkdir dir="@{rootTmpDir}" />
+			<!-- Build the Mock Objects components. -->
+			<if>
+				<equals arg1="@{buildUsingMocks}" arg2="true" />
+				<then>
+					<echo message="Build Mock Objects" />
+					<mkdir dir="@{rootTmpDir}/uimocks/bin" />
+					<!-- Build a path based on what is in the Shared Libary folders and other specified jars. -->
+					<path id="sensusbm.lib">
+						<fileset dir="@{libDir}">
+							<include name="*.jar" />
+						</fileset>
+						<fileset dir="@{COTSLibDir}">
+							<include name="*.jar" />
+						</fileset>
+						<fileset dir="@{componentLibDir}">
+							<include name="*.jar" />
+						</fileset>
+					</path>
+					<echo message="Build Mock Objects jar" />
+					<javac srcdir="@{rootTestDir}" destdir="@{rootTmpDir}/uimocks/bin" listfiles="true" verbose="true" classpathref="sensusbm.lib" debug="@{javacDebugEnabled}" debuglevel="lines,vars,source" includes="/com/sensus/mlc/wui/*/*/*MockImpl.java" />
+
+					<echo message="Create jar file" />
+					<jar destfile="@{componentLibDir}/uibemocks.jar">
+						<fileset dir="@{rootTmpDir}/uimocks/bin" includes="**/com/**" />
+						<manifest>
+							<!-- Who is building this jar? -->
+							<attribute name="Built-By" value="${user.name}" />
+							<!-- Information about the program itself -->
+							<attribute name="Specification-Version" value="${version}" />
+							<attribute name="Specification-Vendor" value="QAT" />
+							<attribute name="Implementation-Version" value="${version}" />
+							<attribute name="Implementation-Vendor" value="QAT" />
+						</manifest>
+					</jar>
+					<echo message="Copy Mock Objects Spring Context" />
+					<copy todir="@{componentLibDir}/@{businessArea}/conf" overwrite="true">
+						<fileset dir="@{rootTestConfDir}">
+							<include name="**/*.xml"/>
+						</fileset>
+					</copy>
+				</then>
+			</if>
+
+
+			<!-- Build the individual UI components. -->
+			<echo>Building UI component jars for [@{componentNameList}]...</echo>
+			<buildBAComponents businessArea="@{businessArea}" componentNameList="@{componentNameList}" listDelimiter="@{listDelimiter}" webConfDir="@{rootWebContentDir}/WEB-INF/conf"
+				copyToComponentLib="false" runJUnitTests="@{runJUnitTests}" failOnJUnitError="@{failOnJUnitError}" javacDebugEnabled="@{javacDebugEnabled}" />
+
+			<!-- Copy log4j.xml file -->
+			<copy file="@{libClasspathConfigDir}/log4j.xml.template" tofile="@{rootTmpDir}/log4j.xml">
+				<filterset>
+					<filter token="LOG_DIR" value="@{logDir}" />
+					<filter token="LOG_FILE" value="@{logFile}" />
+					<filter token="LOG_FILE_USER" value="@{logFileUser}" />
+				</filterset>
+			</copy>
+			<!-- Fix Build Number -->
+			<exec executable="svnversion" outputproperty="svn-version">
+				<arg line="${basedir}"/>
+			</exec>
+			<echo message="adding build version number" />
+
+			<replaceregexp file="@{rootConfDir}/ui-settings.properties"
+				match="mlc.build.version=.*$"
+				replace="mlc.build.version=${svn-version}" byline="true"/>
+
+			<replaceregexp file="@{rootWebContentDir}/version.jsp"
+				match="&lt;build&gt;.*&lt;/build&gt;"
+				replace="&lt;build&gt;${svn-version}&lt;/build&gt;" byline="true"/>
+
+			<!-- Add ComponentLib mlc/conf configurations (Spring configurations) -->
+			<if>
+				<equals arg1="@{buildUsingMocks}" arg2="true" />
+					<then>
+						<var name="confInclude" value="conf/sensus-mlc-wui-unittest-context-test.xml" />
+						<var name="webxmlPath" value="@{mockWebXmlFile}" />
+					</then>
+					<else>
+						<var name="confInclude" value="conf/*" />
+						<var name="webxmlPath" value="@{rootWebContentDir}/WEB-INF/web.xml" />
+					</else>
+			</if>
+			<echo>${webxmlPath}</echo>
+
+			<!-- TODO minimize and merge JavaScript and Css files -->
+
+			<!-- Create the war with the web content -->
+			<echo>Building war with static and config files [@{rootDistDir}/@{warFileName}]...</echo>
+			<war destfile="@{rootDistDir}/@{warFileName}" webxml="${webxmlPath}" basedir="@{rootWebContentDir}"
+				includes="**/*.jsp, **/*.js,**/*.css,**/sitemesh.xml,**/decorators.xml, **/web-context.xml, **/slc-mvc-config.xml, **/*.properties,**/*.html,**/*.png,**/*.gif,**/*.jpg">
+
+				<!-- Add log4j.xml file. -->
+				<classes dir="@{rootTmpDir}">
+						<include name="log4j.xml" />
+				</classes>
+
+				<!-- Add mlc-wui classpath resources. -->
+				<classes dir="@{rootConfDir}">
+					<include name="*" />
+					<include name="**/*" />
+					<exclude name="**/*.template" />
+					<exclude name="log4j.xml" />
+				</classes>
+
+				<!-- Add Lib jars -->
+				<lib dir="@{libDir}" excludes="@{libExcludes}">
+					<include name="@{libIncludes}" />
+				</lib>
+
+				<!-- Add Lib web/conf files (Spring configurations) -->
+				<webinf dir="@{libConfigDir}">
+					<include name="${confInclude}" />
+				</webinf>
+
+				<!-- Add Lib web/classes files (ehcache config and resources). -->
+				<classes dir="@{libClasspathConfigDir}">
+					<exclude name="log4j.*" />
+				</classes>
+
+				<!-- Add ComponentLib mlc/conf configurations (Spring configurations) -->
+				<webinf dir="@{componentLibDir}/@{businessArea}">
+						<include name="${confInclude}" />
+				</webinf>
+
+				<!-- Add ComponentLib mlc/classes configurations (Spring configurations) -->
+
+				<classes dir="@{componentLibDir}/@{businessArea}/classes">
+					<include name="*.*" />
+					<include name="**/*.*" />
+				</classes>
+
+				<!-- Add ComponentLib backend jars  (only build with full jars)-->
+				<lib dir="@{componentLibDir}">
+					<include name="@{prefix}-@{businessArea}-*.jar" />
+					<include name="uibemocks.jar" />
+					<exclude name="*-@{clientSuffix}.jar" />
+				</lib>
+
+				<!-- Add Spring MLC RNI Gateway XSD files. -->
+				<fileset dir="@{componentLibDir}/@{businessArea}/wsxsd/">
+					<include name="**/*.xsd"/>
+				</fileset>
+
+				<!-- Add ComponentLib gateway client jars  (only build with full jars)-->
+				<lib dir="@{componentLibDir}">
+					<include name="**/*.jar" />
+				</lib>
+			</war>
+
+			<!-- Create the war with the web content -->
+			<echo>Adding jars for components[@{componentNameList}] to war file [@{rootDistDir}/@{warFileName}]...</echo>
+			<for list="@{componentNameList}" trim="true" param="componentListData" delimiter="@{listDelimiter}">
+				<sequential>
+					<propertyregex property="componentListNamePortion" input="@{componentListData}" regexp="([^ ]*)-([^ ]*)" select="\1" override="true" defaultValue="@{componentListData}"
+						casesensitive="false" />
+					<var name="componentName" value="${componentListNamePortion}" />
+
+					<echo>${line.separator}Component Name is [${componentName}]</echo>
+
+					<propertyregex property="componentListVersionPortion" input="@{componentListData}" regexp="([^ ]*)-([^ ]*)" select="\2" override="true" defaultValue="0"
+						casesensitive="false" />
+					<var name="version" value="${componentListVersionPortion}" />
+
+					<echo>${line.separator}Version is [${version}]</echo>
+					<echo>${line.separator}Adding component [${componentName}] to war [@{rootDistDir}/@{warFileName}] </echo>
+
+					<war destfile="@{rootDistDir}/@{warFileName}" update="true">
+						<!-- Add UI Component Jar -->
+						<lib dir="@{rootDistDir}/${componentName}">
+							<include name="*.jar" />
+						</lib>
+					</war>
+				</sequential>
+			</for>
+			<echo>Cleaning up temp folder...</echo>
+			<delete dir="@{rootTmpDir}" />
+			<echo>Done building LC-UI war file.</echo>
+		</sequential>
+	</macrodef>
+
+
+	<!-- Build the War file for BE project to use for testing LC Back-end. -->
+	<macrodef name="buildBEWar">
+		<!-- The business area to build for -->
+		<attribute name="businessArea" default="mlc" />
+		<!-- The component list to build -->
+		<attribute name="componentNameList" default="be" />
+		<!--  The delimiter for th component list -->
+		<attribute name="listDelimiter" default="," />
+		<!-- Prefix for ui jar and war -->
+		<attribute name="prefix" default="sensus" />
+		<!-- The classpath resources directory for unit tests -->
+		<attribute name="rootTestConfDir" default="../src/test/resources" />
+		<!-- The name of the war file. Note that it doesn't contain a version. -->
+		<attribute name="warFileName" default="@{businessArea}-test-be.war" />
+
+		<!-- ** Logger configuration ** -->
+		<attribute name="logDir" />
+		<attribute name="logFile" />
+
+		<!-- ** Shared Libraries ** -->
+		<!-- LIB, third party shared libraries -->
+		<attribute name="libDir" default="../../lib" />
+		<!-- COTSLib, requirements for compilation and unit tests that will be provided by app server when deployed -->
+		<attribute name="COTSLibDir" default="../../cotslib" />
+		<!-- ComponentLib, shared project artifacts -->
+		<attribute name="componentLibDir" default="../../componentlib" />
+
+		<!-- ** War build Directories ** -->
+		<!-- The main source folder -->
+		<attribute name="rootSrcDir" default="../src/main/java" />
+		<!-- The directory that will hold temporary build artifacts, i.e. class files -->
+		<attribute name="rootTmpDir" default="../tmp" />
+		<!-- The distribution directory inside the current project -->
+		<attribute name="rootDistDir" default="../dist" />
+		<!-- The main configuration directory for classpath resources -->
+		<attribute name="rootConfDir" default="../src/main/resources" />
+		<!-- The directory for lib classpath configurations -->
+
+		<!-- ** Settings for the Web BE jar file ** -->		<!-- Include pattern for Lib jars -->
+		<attribute name="libIncludes" default="*.jar" />
+		<!-- Exclude pattern for Lib jars -->
+		<attribute name="libExcludes" default="junit*.jar,antlr*.jar,jtds*.jar,spring-batch*.jar,org.springframework.test*.jar,jaxb-*.jar" />
+		<!-- Lib config dir -->
+		<attribute name="libConfigDir" default="@{libDir}/config/web" />
+		<!-- Lib classpath config subdir -->
+		<attribute name="libClasspathConfigDir" default="@{libConfigDir}/classes" />
+
+		<!-- Whether to enable debug on javac. This also will include the source zfiles in the jar if true. -->
+		<attribute name="javacDebugEnabled" default="true" />
+
+		<sequential>
+			<!-- Clean the output folders -->
+			<echo message="Clean the output folders" />
+			<delete dir="@{rootDistDir}" />
+			<mkdir dir="@{rootDistDir}" />
+
+			<!-- Build the individual BE components. -->
+			<echo>Building BE component jars for [@{componentNameList}]...</echo>
+			<buildBAComponents businessArea="@{businessArea}" componentNameList="@{componentNameList}" listDelimiter="@{listDelimiter}"
+				copyToComponentLib="true" runJUnitTests="false" failOnJUnitError="false" javacDebugEnabled="@{javacDebugEnabled}" />
+
+			<!-- Copy log4j.xml file -->
+			<mkdir dir="@{rootTmpDir}" />
+			<copy file="@{libClasspathConfigDir}/log4j.xml.template" tofile="@{rootTmpDir}/log4j.xml">
+				<filterset>
+					<filter token="LOG_DIR" value="@{logDir}" />
+					<filter token="LOG_FILE" value="@{logFile}" />
+				</filterset>
+			</copy>
+
+			<!-- Create the war with the web content -->
+			<echo>Building war with static and config files [@{rootDistDir}/@{warFileName}]...</echo>
+			<war destfile="@{rootDistDir}/@{warFileName}" webxml="@{rootTestConfDir}/web.xml" update="true" duplicate="preserve">
+
+				<!-- Add log4j.xml file. -->
+				<classes dir="@{rootTmpDir}">
+					<include name="log4j.xml" />
+				</classes>
+
+				<!-- Add Spring MLC RNI Gateway XSD files. -->
+				<fileset dir="@{rootConfDir}/wsxsd/">
+					<include name="**/*.xsd"/>
+				</fileset>
+
+				<!-- Add classpath resources. -->
+				<classes dir="@{rootConfDir}">
+					<include name="*" />
+					<include name="**/*" />
+					<exclude name="log4j.xml" />
+					<exclude name="**/*.xsd" />
+				</classes>
+
+				<!-- Add Lib jars -->
+				<lib dir="@{libDir}" excludes="@{libExcludes}">
+					<include name="@{libIncludes}" />
+				</lib>
+
+				<!-- Add Lib web/conf files (Spring configurations) -->
+				<webinf dir="@{libConfigDir}">
+					<include name="conf/*" />
+				</webinf>
+
+				<!-- Add Lib web/classes files (ehcache config and resources). -->
+				<classes dir="@{libClasspathConfigDir}">
+					<exclude name="log4j.*" />
+				</classes>
+
+				<!-- Add ComponentLib mlc/conf configurations (Spring configurations) -->
+				<webinf dir="@{componentLibDir}/@{businessArea}">
+					<include name="conf/*" />
+				</webinf>
+
+				<!-- Add ComponentLib mlc/classes configurations (Spring configurations) -->
+				<classes dir="@{componentLibDir}/@{businessArea}/classes">
+					<include name="*.*" />
+					<include name="**/*.*" />
+				</classes>
+
+				<!-- Add ComponentLib backend jars  (only build with full jars)-->
+				<lib dir="@{componentLibDir}">
+					<include name="@{prefix}-@{businessArea}-*.jar" />
+					<exclude name="*-@{clientSuffix}.jar" />
+				</lib>
+
+				<!-- Add ComponentLib gateway client jars  (only build with full jars)-->
+				<lib dir="@{componentLibDir}">
+					<include name="sensus-mlcserver-client.jar" />
+				</lib>
+			</war>
+
+			<echo>Cleaning up temp folder...</echo>
+			<delete dir="@{rootTmpDir}" />
+			<echo>Done building LC-BE test war file.</echo>
+		</sequential>
+	</macrodef>
+
+	<!--
+		This builds JavaDoc for all business area components based on the
+		delimited list of component names passed in.
+	-->
+	<!--
+		The list of components can optionally include a version specifier with
+		the component name, separated by a dash
+	-->
+	<!--
+		The list delimiter can also be specified to assist with batch program
+		parameter passing
+	-->
+	<macrodef name="buildBAJavaDoc">
+
+
+		<!-- ****** Attribute definitions ****** -->
+
+		<!-- ** Component Naming and Parameters ** -->
+		<!-- Business Area (required) -->
+		<attribute name="businessArea" />
+		<!-- List of components to build. -->
+		<attribute name="componentNameList" />
+		<!-- Delimiter for component list -->
+		<attribute name="listDelimiter" default="," />
+		<!-- Prefix for jar file name -->
+		<attribute name="prefix" default="sensus" />
+
+		<!-- ** Business Area Directories ** -->
+		<!-- The main source folder -->
+		<attribute name="rootSrcDir" default="../src/main/java" />
+		<!-- The directory that will hold temporary build artifacts, i.e. class files -->
+		<attribute name="rootTmpDir" default="../tmp" />
+		<!-- The distribution directory inside the current project -->
+		<attribute name="rootDistDir" default="../dist" />
+
+
+		<!-- ** Shared Libraries ** -->
+		<!-- LIB, third party shared libraries -->
+		<attribute name="libDir" default="../../LIB" />
+		<!-- COTSLib, requirements for compilation and unit tests that will be provided by app server when deployed -->
+		<attribute name="COTSLibDir" default="../../COTSLib" />
+		<!-- ComponentLib, shared project artifacts -->
+		<attribute name="componentLibDir" default="../../ComponentLib" />
+
+
+		<sequential>
+			<!-- Run JavaDoc for each component. -->
+			<for list="@{componentNameList}" trim="true" param="componentListData" delimiter="@{listDelimiter}">
+				<sequential>
+					<propertyregex property="componentListNamePortion" input="@{componentListData}" regexp="([^ ]*)-([^ ]*)" select="\1" override="true" defaultValue="@{componentListData}"
+						casesensitive="false" />
+					<var name="componentName" value="${componentListNamePortion}" />
+					<echo>${line.separator}Component Name is [${componentName}]</echo>
+
+					<propertyregex property="componentListVersionPortion" input="@{componentListData}" regexp="([^ ]*)-([^ ]*)" select="\2" override="true" defaultValue="0"
+						casesensitive="false" />
+					<var name="version" value="" />
+					<echo>${line.separator}Version is [${version}]</echo>
+
+					<echo>${line.separator}Generating JavaDoc for [${componentName}]</echo>
+					<buildJavaDoc businessArea="@{businessArea}" componentName="${componentName}" libDir="@{libDir}" prefix="@{prefix}" rootSrcDir="@{rootSrcDir}" version="${version}"
+						distDir="@{rootDistDir}/${componentName}" COTSLibDir="@{COTSLibDir}" componentLibDir="@{componentLibDir}" />
+
+				</sequential>
+			</for>
+		</sequential>
+
+	</macrodef>
+
+	<!-- Build the java-doc for a component. -->
+	<macrodef name="buildJavaDoc">
+
+		<!-- ****** Attribute definitions ****** -->
+
+		<!-- ** Component Naming and Parameters ** -->
+		<!-- Business Area (required) -->
+		<attribute name="businessArea" />
+		<!-- Component Name -->
+		<attribute name="componentName" default="base" />
+		<!-- Prefix for jar file name -->
+		<attribute name="prefix" default="sensus" />
+		<!-- Version for jar file name -->
+		<attribute name="version" default="0" />
+
+
+		<!-- ** Business Area Directories ** -->
+		<!-- The main source folder -->
+		<attribute name="rootSrcDir" default="../src/main/java" />
+		<!-- The distribution directory inside the current project -->
+		<attribute name="rootDistDir" default="../dist" />
+
+		<!-- ** Business Component Directories ** -->
+		<!-- Distribution directory for current component -->
+		<attribute name="distDir" default="@{rootDistDir}/@{componentName}" />
+
+
+		<!-- ** Shared Libraries ** -->
+		<!-- LIB, third party shared libraries -->
+		<attribute name="libDir" default="../../LIB" />
+		<!-- COTSLib, requirements for compilation and unit tests that will be provided by app server when deployed -->
+		<attribute name="COTSLibDir" default="../../COTSLib" />
+		<!-- ComponentLib, shared project artifacts -->
+		<attribute name="componentLibDir" default="../../ComponentLib" />
+
+		<sequential>
+
+			<tstamp>
+				<format property="javaDocGenerateTimestamp" pattern="MM/dd/yyyy hh:mm aa" />
+				<format property="javaDocGenerateYear" pattern="yyyy" />
+			</tstamp>
+
+			<!-- Create the componentLibDir to avoid errors when it doesn't exist -->
+			<mkdir dir="@{componentLibDir}" />
+
+			<!-- Build a path based on what is in the shared lib folders. -->
+			<path id="sensus.lib">
+				<fileset dir="@{libDir}">
+					<include name="*.jar" />
+				</fileset>
+				<fileset dir="@{COTSLibDir}">
+					<include name="*.jar" />
+				</fileset>
+				<fileset dir="@{componentLibDir}">
+					<include name="*.jar" />
+				</fileset>
+			</path>
+
+			<delete dir="@{distDir}/javadoc" />
+
+			<javadoc packagenames="com.@{prefix}.@{businessArea}.@{componentName}.**" destdir="@{distDir}/javadoc" classpathref="sensus.lib" source="1.6"
+				Windowtitle="@{prefix}-@{businessarea}-@{componentName}-javadoc created ${javaDocGenerateTimestamp}">
+				<packageset dir="@{rootSrcDir}" defaultexcludes="yes">
+					<include name="com/@{prefix}/@{businessArea}/@{componentName}/**" />
+				</packageset>
+			</javadoc>
+
+			<zip destfile="@{distDir}/@{prefix}-@{businessarea}-@{componentName}-javadoc.zip" basedir="@{distDir}/javadoc" />
+
+			<echo message="Javadoc zip'd into @{distDir}/@{prefix}-@{businessarea}-@{componentName}-javadoc.zip" />
+			<delete dir="@{distDir}/javadoc" />
+
+		</sequential>
+	</macrodef>
+
+	<!--
+		buildJavaProject - Used to build a simple project and optionally jar
+		the results.
+	-->
+	<macrodef name="buildJavaProject">
+
+		<!-- The business area. Will be part of jar name unless otherwise specified by passing in jarFileName attribute. -->
+		<attribute name="businessArea" />
+		<!-- The component Name. Will be included in manifest. The packaged files will not be filtered by it. -->
+		<attribute name="componentName" default="base" />
+		<!-- The jar file prefix unless otherwise specified by passing in jarFileName attribute. -->
+		<attribute name="prefix" default="sensus" />
+		<!-- The jar file version unless otherwise specified by passing in jarFileName attribute. -->
+		<attribute name="version" default="" />
+		<!-- The local output directory. -->
+		<attribute name="outputDir" default="../dist" />
+		<!-- The source directory -->
+		<attribute name="srcDir" default="../src" />
+		<!-- Whether to package compiled code into a jar -->
+		<attribute name="packageJar" default="true" />
+		<!-- The directory to compile sources to -->
+		<attribute name="binDir" default="../bin" />
+		<!-- The Lib directory for shared third-party jars -->
+		<attribute name="libDir" default="../../../lib" />
+		<!-- The COTSLib directory for shared third-party jars needed only at compile time -->
+		<attribute name="COTSLibDir" default="../../../cotslib" />
+		<!-- The ComponentLib directory for shared project jars -->
+		<attribute name="componentLibDir" default="../../../componentlib" />
+		<!-- Other jars that need to be added to the build path -->
+		<attribute name="extJarFileListRefId" default="noFileList" />
+		<!-- The default naming pattern for the jar file -->
+		<attribute name="jarFileName" default="@{prefix}-@{businessarea}.jar" />
+		<!-- Whether to compile with debug option and to package sources in jar -->
+		<attribute name="javacDebugEnabled" default="true" />
+
+		<sequential>
+			<echo message="Begin compilation for @{businessarea} project" />
+
+			<filelist id="noFileList" dir="${libDir}" />
+
+			<!-- Create the componentLibDir to avoid errors when it doesn't exist -->
+			<mkdir dir="@{componentLibDir}" />
+
+			<!-- Build a path based on what is in the Shared Libary folders and other specified jars. -->
+			<path id="sensus.lib">
+				<fileset dir="@{libDir}">
+					<include name="*.jar" />
+				</fileset>
+				<fileset dir="@{COTSLibDir}">
+					<include name="*.jar" />
+				</fileset>
+				<fileset dir="@{componentLibDir}">
+					<include name="*.jar" />
+				</fileset>
+				<filelist refid="@{extJarFileListRefId}" />
+			</path>
+
+			<!--  Clean the output and bin folders by deleting and re-creating them. -->
+			<echo message="Clean the output folders" />
+			<delete dir="@{outputDir}" />
+			<mkdir dir="@{outputDir}" />
+			<delete dir="@{binDir}" />
+			<mkdir dir="@{binDir}" />
+
+			<!-- Build the project.  All source files are included. -->
+			<echo message="Run javac task" />
+			<javac srcdir="@{srcDir}" destdir="@{binDir}" listfiles="true" verbose="false" classpathref="sensus.lib" debug="@{javacDebugEnabled}" debuglevel="lines,vars,source" />
+
+			<!-- Determine which files to package (include sources for debug-enabled build) -->
+			<if>
+				<equals arg1="@{javacDebugEnabled}" arg2="true" />
+				<then>
+					<var name="jarExcludePath" value="**/bin/** **/dist/** **/build/** **/config/**" />
+				</then>
+				<else>
+					<var name="jarExcludePath" value="**/*.java **/bin/** **/dist/** **/build/** **/config/**" />
+				</else>
+			</if>
+
+			<!-- If @{packageJar} is true package the jar -->
+			<if>
+				<equals arg1="@{packageJar}" arg2="true" />
+				<then>
+					<echo message="Jar Packaging into @{outputDir}/@{jarFileName}" />
+					<jar destfile="@{outputDir}/@{jarFileName}">
+						<fileset dir="@{binDir}" includes="**/com/**" />
+						<fileset dir="@{srcDir}" excludes="${jarExcludePath}" />
+						<manifest>
+							<!-- Who is building this jar? -->
+							<attribute name="Built-By" value="${user.name}" />
+							<!-- Information about the program itself -->
+							<attribute name="Extension-Name" value="@{prefix}-@{businessArea}-@{componentName}" />
+							<attribute name="Specification-Version" value="${version}" />
+							<attribute name="Specification-Vendor" value="QAT" />
+							<attribute name="Implementation-Version" value="${version}" />
+							<attribute name="Implementation-Vendor" value="QAT" />
+						</manifest>
+					</jar>
+				</then>
+				<else>
+					<echo message="Jar Packaging turned off" />
+				</else>
+			</if>
+
+			<echo message="Done with compilation for @{businessarea} project" />
+
+		</sequential>
+	</macrodef>
+
+	<!-- Build the js-doc for a javascript folder. -->
+	<!-- Requires jsdoc-toolkit -->
+	<macrodef name="buildJsDoc">
+
+		<!-- ****** Attribute definitions ****** -->
+
+		<!-- The JavaScript source directory -->
+		<attribute name="jsSrcDir" default="../WebContent/scripts" />
+		<!-- The temp directory to use for generation of documentation -->
+		<attribute name="tmpDir" default="../tmp" />
+		<!-- The distribution directory where to store the resulting zip file -->
+		<attribute name="distDir" default="../dist" />
+		<!-- The zip file prefix (used in default zipFileName attribute) -->
+		<attribute name="prefix" default="sensus" />
+		<!-- The business area (used in default zipFileName attribute) -->
+		<attribute name="businessArea" default="mlc" />
+		<!-- The default name of the resulting zip file -->
+		<attribute name="zipFileName" default="@{prefix}-@{businessArea}-jsdoc.zip" />
+		<!-- The location of jsdoc-toolkit -->
+		<attribute name="jsDocHome" default="../../cotslib/jsdoc-toolkit" />
+		<!-- The jsDoc template to use (passed into jsdoc as command line argument) -->
+		<attribute name="jsDocTemplate" default="templates/jsdoc" />
+
+		<sequential>
+
+			<echo message="Starting jsdoc..." />
+
+			<!-- Clean up temp folders. Create dist dir just in case it doesn't exist yet... -->
+			<delete dir="@{tmpDir}" />
+			<mkdir dir="@{tmpDir}" />
+			<mkdir dir="@{distDir}" />
+
+			<!-- Generate jsDoc documentation -->
+			<java jar="@{jsDocHome}/jsrun.jar" fork="true" failonerror="true" maxmemory="128m" logError="true" dir=".">
+				<!-- run.js -->
+				<arg value="@{jsDocHome}/app/run.js" />
+				<!-- input dir -->
+				<arg value="@{jsSrcDir}" />
+				<!-- output dir -->
+				<arg value="-d=@{tmpDir}" />
+				<arg value="-t=@{jsDocHome}/@{jsDocTemplate}" />
+				<arg value="-r=8" />
+				<arg value="-a" />
+				<arg value="-v" />
+			</java>
+
+			<!-- Generate zip file from jsDoc files -->
+			<zip basedir="@{tmpDir}" destfile="@{distDir}/@{zipFileName}" />
+
+			<!-- Remove temp dir -->
+			<delete dir="@{tmpDir}" />
+		</sequential>
+	</macrodef>
+
+	<!--
+		buildJavaProject - Used to build a simple project and optionally jar
+		the results.
+	-->
+	<macrodef name="buildJavaFromXsd">
+		<!-- Package name-->
+		<attribute name="packageName" />
+		<!-- Jar file name-->
+		<attribute name="jarFileName" />
+		<!-- Prefix for jar -->
+		<attribute name="prefix" default="sensus" />
+		<!-- The jar file version unless otherwise specified by passing in jarFileName attribute. -->
+		<attribute name="version" default="" />
+		<!-- LIB, third party shared libraries -->
+		<attribute name="libDir" default="../../lib" />
+		<!-- COTSLib, requirements for compilation and unit tests that will be provided by app server when deployed -->
+		<attribute name="COTSLibDir" default="../../cotslib" />
+		<!-- ComponentLib, shared project artifacts -->
+		<attribute name="componentLibDir" default="../../componentlib" />
+
+		<!-- The main source folder -->
+		<attribute name="rootSrcDir" default="../src/main/java" />
+		<!-- The directory that will hold temporary build artifacts, i.e. class files -->
+		<attribute name="rootTmpDir" default="../tmp" />
+		<!-- The distribution directory inside the current project -->
+		<attribute name="rootDistDir" default="../dist" />
+		<!-- The main configuration directory for classpath resources -->
+		<attribute name="rootConfDir" default="../src/main/resources" />
+		<!-- Whether to compile with debug option and to package sources in jar -->
+		<attribute name="javacDebugEnabled" default="true" />
+
+		<sequential>
+			<echo message="Begin JavaFromXsd project" />
+			<delete dir="@{rootTmpDir}" />
+			<mkdir dir="@{rootTmpDir}/wsxsd/src" />
+			<mkdir dir="@{rootTmpDir}/wsxsd/bin" />
+			<echo message="Generating classes using xjc" />
+			<xjc destdir="@{rootTmpDir}/wsxsd/src" package="@{packageName}" >
+				<schema  dir="@{rootConfDir}/wsxsd/" includes="**/*.xsd"/>
+				<classpath>
+					<fileset dir="../../lib" includes="jaxb*.jar" />
+				</classpath>
+			</xjc>
+			<echo message="Compiling generated classes" />
+			<!-- Create a path based on the shared libraries. -->
+			<path id="sensus.lib">
+				<fileset dir="@{libDir}">
+					<include name="*.jar" />
+				</fileset>
+				<fileset dir="@{componentLibDir}">
+					<include name="*.jar" />
+				</fileset>
+				<fileset dir="@{COTSLibDir}">
+					<include name="*.jar" />
+				</fileset>
+			</path>
+			<echo message="Compiling Converters" />
+			<javac srcdir="@{rootSrcDir}" destdir="@{rootTmpDir}/wsxsd/bin" classpathref="sensus.lib"  verbose="false" listfiles="true"  includes="**/**Converter.java"  includeantruntime="false" />
+
+			<echo message="Compiling XSD classes" />
+			<javac srcdir="@{rootTmpDir}/wsxsd/src" destdir="@{rootTmpDir}/wsxsd/bin" listfiles="true" verbose="false" classpathref="sensus.lib" includeantruntime="false" debug="@{javacDebugEnabled}" debuglevel="lines,vars,source" />
+
+			<echo message="Create jar file" />
+			<jar destfile="@{componentLibDir}/@{prefix}-@{jarFileName}">
+				<fileset dir="@{rootTmpDir}/wsxsd/bin" includes="**/com/**" />
+				<manifest>
+					<!-- Who is building this jar? -->
+					<attribute name="Built-By" value="${user.name}" />
+					<!-- Information about the program itself -->
+					<attribute name="Specification-Version" value="${version}" />
+					<attribute name="Specification-Vendor" value="QAT" />
+					<attribute name="Implementation-Version" value="${version}" />
+					<attribute name="Implementation-Vendor" value="QAT" />
+				</manifest>
+			</jar>
+
+			<echo message="Clean-up!" />
+			<!-- Remove temp dir -->
+			<delete dir="@{rootTmpDir}" />
+		</sequential>
+	</macrodef>
+
+	<macrodef name="cleanComponentLib">
+		<!-- ComponentLib, shared project artifacts -->
+		<attribute name="componentLibDir" default="../../componentlib" />
+		<sequential>
+			<delete includeemptydirs="true">
+				<fileset dir="@{componentLibDir}" includes="**/*"/>
+			</delete>
+		</sequential>
+	</macrodef>
+
+</antlib>

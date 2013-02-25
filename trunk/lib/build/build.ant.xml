@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="Build Sensus-Commons">
+	<taskdef file="sensus-pcm-antlib.xml" />
+
+	<target name="build">
+		<buildJavaProject businessArea="commons"
+			COTSLibDir="../../COTSLib"
+			libDir="../../LIB" />
+		
+	</target>
+</project>
