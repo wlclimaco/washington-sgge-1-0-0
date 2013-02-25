@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://acme-app.davis.sensus.lab:8080/" />
+<title>try_filter_invalid_date</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">try_filter_invalid_date</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>id=menu-analytics</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=bar1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker1</td>
+	<td>01/11/2012</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker2</td>
+	<td>31/10/2012</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=submit-date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Date is invalid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=1w</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker1</td>
+	<td>11/11/2012</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker2</td>
+	<td>11/14/2025</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=submit-date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Date is invalid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=1w</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker2</td>
+	<td>11/13/2012</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=submit-date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:* This field is required.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker1</td>
+	<td>01/11/2012</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=bar2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker1</td>
+	<td>01/11/2012</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker2</td>
+	<td>31/10/2012</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=submit-date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Date is invalid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=1w</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker1</td>
+	<td>11/11/2012</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker2</td>
+	<td>11/14/2025</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=submit-date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Date is invalid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=1w</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker2</td>
+	<td>11/13/2012</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=submit-date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:* This field is required.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker1</td>
+	<td>01/11/2012</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=bar3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker1</td>
+	<td>01/11/2012</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker2</td>
+	<td>31/10/2012</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=submit-date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Date is invalid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=1w</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker1</td>
+	<td>11/11/2012</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker2</td>
+	<td>11/14/2025</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=submit-date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Date is invalid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=1w</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker2</td>
+	<td>11/13/2012</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=submit-date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:* This field is required.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker1</td>
+	<td>01/11/2012</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=bar4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker1</td>
+	<td>01/11/2012</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker2</td>
+	<td>31/10/2012</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=submit-date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Date is invalid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=1w</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker1</td>
+	<td>11/11/2012</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker2</td>
+	<td>11/14/2025</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=submit-date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Date is invalid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=1w</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker2</td>
+	<td>11/13/2012</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=submit-date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:* This field is required.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker1</td>
+	<td>01/11/2012</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=bar5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker1</td>
+	<td>01/11/2012</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker2</td>
+	<td>31/10/2012</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=submit-date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Date is invalid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=1w</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker1</td>
+	<td>11/11/2012</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker2</td>
+	<td>11/14/2025</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=submit-date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Date is invalid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=1d</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker2</td>
+	<td>11/13/2012</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=submit-date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:* This field is required.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker1</td>
+	<td>01/11/2012</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=bar6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker1</td>
+	<td>01/11/2012</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker2</td>
+	<td>31/10/2012</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=submit-date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Date is invalid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=1w</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker1</td>
+	<td>11/11/2012</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker2</td>
+	<td>11/14/2025</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=submit-date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Date is invalid</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=1w</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=datepicker2</td>
+	<td>11/13/2012</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=submit-date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:* This field is required.</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

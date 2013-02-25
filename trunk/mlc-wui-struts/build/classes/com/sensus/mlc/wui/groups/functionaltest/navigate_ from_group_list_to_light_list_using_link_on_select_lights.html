@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://mallet-app.davis.sensus.lab:8080/" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#messaging-main&quot;).remove()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.content-header h1</td>
+	<td>Groups</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Create Group</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=group-name</td>
+	<td>${group_name_7}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>group-create-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#messaging-main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=#messaging-main &gt; span</td>
+	<td>Group ${group_name_7} created successfully. Select the Lights you would like to add to this Group.</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#messaging-main &gt; span</td>
+	<td>Group ${group_name_7} created successfully. Select the Lights you would like to add to this Group.</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;.message &gt; a&quot;, &quot;div.messaging&quot;).click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Control Lights</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menu-groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Create Group</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

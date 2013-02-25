@@ -1,0 +1,67 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- Action for Search CRUD -->
+	<package name="mlc-search" extends="mlc-default" namespace="/search">
+
+		<!-- Render Search main page -->
+		<action name="ajax.list" class="savedSearchPageAction">
+			<param name="jsComponents">mlc-search</param>
+			<result name="success">/pages/search/saved.jsp</result>
+		</action>
+
+		<!-- Ajax callback for saved search -->
+		<action name="savedSearch" class="savedSearchAjaxAction" method="search">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+
+		<!-- JavaScript Settings -->
+		<action name="settings" class="searchSettingsAction" method="settings">
+			<param name="menuItem">search</param>
+			<result name="success" type="freemarker">/freemarker/search_settings.js</result>
+		</action>
+
+		<!-- removeSearch dialog page -->
+		<action name="include.deleteSearch" class="savedSearchPageAction">
+			<result name="success">/pages/search/search_delete_dialog.jsp</result>
+		</action>
+
+		<!-- Delete a search -->
+		<action name="deleteSearch" class="searchAjaxAction" method="deleteSearch">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+
+		<!-- Load Smartpoint tab -->
+		<action name="ajax.tabs.search.smartpoint.list"  class="smartpointPageAction">
+			<param name="jsComponents">mlc-smartpoint</param>
+			<result name="success">/pages/smartpoint/smartpoint_main.jsp</result>
+			<result name="input">/pages/smartpoint/smartpoint_main.jsp</result>
+		</action>
+
+		<action name="ajax.advanced" class="smartpointPageAction" method="getValidValues">
+			<param name="jsComponents">mlc-advanced</param>
+			<result name="success">/pages/search/advanced.jsp</result>
+		</action>
+		
+		<action name="include.saveSearch" class="smartpointPageAction">
+			<result name="success">/pages/smartpoint/smartpoint_save_search.jsp</result>
+		</action>
+		
+				
+		<!-- Insert Save Search -->
+		<action name="saveSearch" class="smartpointAjaxAction" method="saveSearch">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">smartpointResult</param>
+			</result>
+		</action>
+		
+	</package>
+</struts>	

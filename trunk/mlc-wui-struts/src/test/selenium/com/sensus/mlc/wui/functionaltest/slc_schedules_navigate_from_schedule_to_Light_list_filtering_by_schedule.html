@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://acme-app.davis.sensus.lab:8080/" />
+<title>slc_schedules_navigate_from_schedule_to_Light_list_filtering_by_schedule</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">slc_schedules_navigate_from_schedule_to_Light_list_filtering_by_schedule</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>link=Schedules</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Check Curent Page-->
+<tr>
+	<td>verifyText</td>
+	<td>css=div.content-header &gt; h1</td>
+	<td>Schedules</td>
+</tr>
+<!--Click on nº of Lights-->
+<tr>
+	<td>storeTableRow</td>
+	<td>${offsetScheduleName}/2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${row}) - 2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#schedule-table tbody tr:eq(${row}) a.afilter</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Check Page-->
+<tr>
+	<td>assertAttribute</td>
+	<td>id=menu-smartpoints@class</td>
+	<td>alist active</td>
+</tr>
+<!--Check Lights Filtered-->
+<tr>
+	<td>verifyCssCount</td>
+	<td>css=#smartpoint-table tbody td.checkbox</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menu-smartpoints</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

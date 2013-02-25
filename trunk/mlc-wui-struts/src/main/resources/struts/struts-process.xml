@@ -1,0 +1,189 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- Action for Group CRUD -->
+	<package name="mlc-process" extends="mlc-default" namespace="/process">
+		
+		<!-- Render Process main page -->
+		<action name="ajax.processPageAction" class="processPageAction">
+			<param name="jsComponents">mlc-process-history</param>
+			<result name="success">/pages/process/process_main.jsp</result>
+			<result name="input">/pages/process/process_main.jsp</result>
+		</action>
+		
+		<!-- Parameterized JavaScript settings -->
+		<action name="settings" class="processSettingAction" method="settings">
+			<param name="menuItem">process</param>
+			<result name="success" type="freemarker">/freemarker/process_settings.js
+			</result>
+		</action>
+				
+		<!-- Render main page -->
+		<action name="include.process.main" class="processPageAction">
+			<result name="success">/pages/process/system_messaging.jsp</result>
+		</action>
+		
+		<!-- Long Running Process Recent Request Dialog -->
+		<action name="include.process.recent.dialog" class="smartpointPageAction">
+			<result name="success">/pages/process/process_recent_dialog.jsp</result>
+		</action>
+		
+		<!-- Ajax callback for Long Running Process search -->
+		<action name="longRunningProcessSearch" class="processSearchAjaxAction" method="search">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">processSearchResult</param>
+			</result>
+		</action>
+		
+		<!-- Ajax callback for Process search -->
+		<action name="searchProcess" class="processSearchAjaxAction" method="searchProcess">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- Ajax callback for Process search -->
+		<action name="search" class="processSearchAjaxAction" method="search">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- Ajax callback for Process search By Id-->
+		<action name="getProcessById" class="processSearchAjaxAction" method="getProcessById">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- Long Running Process Remove -->
+		<action name="longRunningProcessRemove" class="processAjaxAction" method="removeLongRunningProcess">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+	
+		<!-- Ajax callback for Check Long Running Process -->
+		<action name="include.checkLongRunningProcess" class="processAjaxAction" method="checkLongRunningProcess">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- Ajax call for retry long Running Process  -->
+		<action name="retryUnreacheable" class="processAjaxAction" method="retryUnreachable">	
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- Ajax call for Remove All Selected Long Running Process  -->
+		<action name="longRunningProcessRemoveAll" class="processAjaxAction" method="removeAllSelected">	
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>	
+		
+		
+		<!-- Ajax call for Remove All Selected Long Running Process  -->
+		<action name="checkRni" class="processAjaxAction" method="checkRni">	
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>	
+		
+		<!-- Ajax call for Abort Process  -->
+		<action name="abortProcessUrl" class="processAjaxAction" method="abortProcessUrl">	
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>	
+		
+		<!-- Ajax call for Abort Process  -->
+		<action name="filterProcessDate" class="processSearchAjaxAction" method="searchProcess">	
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+		<!-- Ajax call for Delete File -->
+		<action name="deleteFile" class="processAjaxAction" method="deleteFile">	
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+		<!-- Ajax call for generateSummaryFileCSV -->
+		<action name="generateSummaryFileCSV" class="processAjaxAction" method="generateSummaryFileCSV">	
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>		
+		
+		<!-- Summary Dialog -->
+		<action name="include.summary" class="processSearchAjaxAction" method="summaryProcess">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- Ajax callback for analytics checkFileReady -->
+		<action name="callFileReady" class="processAjaxAction" method="callFileReady">
+			<result name="success" type="stream">
+			   <param name="contentType">text/csv</param>
+		       <param name="inputName">inputStream</param>
+		       <param name="contentDisposition">attachment; filename="${csvName}"</param>
+		       <param name="bufferSize">1024</param> 
+			</result>
+		</action>
+		
+		<!-- Ajax callback for download file -->
+		<action name="downloadCSVFile" class="processAjaxAction" method="downloadCSVFile">
+			<result name="success" type="stream">
+			   <param name="contentType">text/csv</param>
+		       <param name="inputName">inputStream</param>
+		       <param name="contentDisposition">attachment; filename="${csvName}"</param>
+		       <param name="bufferSize">1024</param> 
+			</result>
+		</action>
+		
+		<!-- Ajax callback for insert csv process -->		
+		<action name="updateMonitorProcess" class="processAjaxAction" method="updateMonitorProcess">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- Ajax callback for analytics generateFile -->
+		<action name="generateFile" class="processSearchAjaxAction" method="generateFileCSV">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- Ajax callback for lights generateFile -->
+		<action name="insertProcess" class="processSearchAjaxAction" method="insertProcess">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>		
+		
+	</package>
+</struts>

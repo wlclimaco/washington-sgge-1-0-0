@@ -1,0 +1,16 @@
+sensus.settings = $.extend({
+		searchUrl : '${base}/${searchUrl}',
+		groupUrl : '${base}/${groupUrl}',
+		maxExtent: '[${maxExtent1},${maxExtent2},${maxExtent3},${maxExtent4}]',
+		menuItem: '${menuItem}',
+		smartpointUrl : '${base}/${smartpointUrl}',
+		initiateDeleteGroupInclude: '${base}/${initiateDeleteGroupInclude}',
+		createGroupUrl: '${base}/${createGroupUrl}', 
+		updateGroupUrl: '${base}/${updateGroupUrl}',
+		initiateDeleteGroupUrl: '${base}/${initiateDeleteGroupUrl}',
+		deleteGroupUrl: '${base}/${deleteGroupUrl}',
+		searchUrlLRP : '${base}/${searchUrlLRP}',
+		deleteFile : '${base}/${deleteFile}',
+		saveProfileSettings: '${base}/${saveProfileSettings}',
+		generateSummaryFileCSV : '${base}/${generateSummaryFileCSV}',
+}, sensus.commons.lib.ajax.settings);

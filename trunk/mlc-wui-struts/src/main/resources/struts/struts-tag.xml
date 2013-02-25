@@ -1,0 +1,79 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- Action for Tag CRUD -->
+	<package name="mlc-tag" extends="mlc-default" namespace="/tag">
+
+		<!-- Delete Tag Dialog -->
+		<action name="include.deleteTagInclude" class="tagPageAction">
+			<result name="success">/pages/tag/tag_delete_dialog.jsp</result>
+		</action>
+		
+		<!-- Auto Existing Group Include Dialog -->
+		<action name="include.autoExistingGroup" class="tagPageAction">
+			<result name="success">/pages/tag/auto_existing_group.jsp</result>
+		</action>
+		
+		<!-- Auto Absent Group Include Dialog -->
+		<action name="include.autoNoGroup" class="tagPageAction">
+			<result name="success">/pages/tag/auto_no_group.jsp</result>
+		</action>
+		
+		<!-- Suspend Auto Group Include Dialog -->
+		<action name="include.suspendAutoGroup" class="tagPageAction">
+			<result name="success">/pages/tag/suspend_auto_group.jsp</result>
+		</action>
+		
+		<!-- Ajax callback for tag search -->
+		<action name="tagSearch" class="tagSearchAjaxAction" method="search">
+			<!-- <param name="requiresRole">Tower Configuration</param> -->
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="exludeNullProperties">true</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!--  Update Auto Group -->
+		<action name="updateAutoGroup" class="tagAjaxAction" method="updateAutoGroup">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- Check if already exists Group  -->
+		<action name="existGroupWithTagName" class="tagAjaxAction" method="existGroupWithTagName">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- Create a group with the tag name  -->
+		<action name="createGroup" class="tagAjaxAction" method="createGroup">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		
+		<!-- Delete a Tag  -->
+		<action name="deleteTagUrl" class="tagAjaxAction" method="deleteTag">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- Create a tag  -->
+		<action name="addTag" class="tagAjaxAction" method="addTag">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+	</package>
+</struts>	

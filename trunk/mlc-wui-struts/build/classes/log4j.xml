@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-4r [%t] %-5p %c %x - %m%n" />
+		</layout>
+	</appender>
+	<appender name="mlc-site-file" class="org.apache.log4j.FileAppender">
+		<param name="File" value="/opt/flexnet/log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-4r [%t] %-5p %c %x - %m%n" />
+		</layout>
+	</appender>
+	<logger name="com.opensymphony" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="console" />
+		<appender-ref ref="mlc-site-file" />
+	</logger>
+	<logger name="org.apache.commons" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="console" />
+		<appender-ref ref="mlc-site-file" />
+	</logger>
+	<logger name="freemarker.beans" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="console" />
+		<appender-ref ref="mlc-site-file" />
+	</logger>
+	<logger name="org.springframework.beans" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="console" />
+		<appender-ref ref="mlc-site-file" />
+	</logger>
+	<logger name="org.apache.struts2.dispatcher.ActionContextCleanUp"
+		additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="console" />
+		<appender-ref ref="mlc-site-file" />
+	</logger>
+	<logger name="httpclient.wire" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="console" />
+		<appender-ref ref="mlc-site-file" />
+	</logger>
+	<root>
+		<level value="DEBUG" />
+		<appender-ref ref="console" />
+		<appender-ref ref="mlc-site-file" />
+	</root>
+</log4j:configuration>

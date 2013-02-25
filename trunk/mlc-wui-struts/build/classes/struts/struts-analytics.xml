@@ -1,0 +1,104 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- Action for Analytics CRUD -->
+	<package name="mlc-analytics" extends="mlc-default" namespace="/analytics">
+		
+		<!-- Render Analytics page -->
+		<action name="ajax.list" class="analyticsPageAction">
+			<param name="jsComponents">mlc-analytics</param>
+			<result name="success">/pages/analytics/analytics_main.jsp</result>
+			<result name="input">/pages/analytics/analytics_main.jsp</result>
+		</action>
+		
+		<!-- Render Alarms page -->
+		<action name="include.alarms" class="analyticsPageAction">
+			<result name="success">/pages/analytics/analytics_alarm.jsp</result>
+			<result name="input">/pages/analytics/analytics_alarm.jsp</result>
+		</action>
+		
+		<!-- Render Warning page -->
+		<action name="include.warning" class="analyticsPageAction">
+			<result name="success">/pages/analytics/analytics_warning.jsp</result>
+			<result name="input">/pages/analytics/analytics_warning.jsp</result>
+		</action>
+		
+		<!-- Render Installed page -->
+		<action name="include.installed" class="analyticsPageAction">
+			<result name="success">/pages/analytics/analytics_installed.jsp</result>
+			<result name="input">/pages/analytics/analytics_installed.jsp</result>
+		</action>
+		
+		<!-- Render Consumption page -->
+		<action name="include.consumption" class="analyticsPageAction">
+			<result name="success">/pages/analytics/analytics_consumption.jsp</result>
+			<result name="input">/pages/analytics/analytics_consumption.jsp</result>
+		</action>
+		
+		<!-- Render Energy Savings page -->
+		<action name="include.energySaving" class="analyticsPageAction">
+			<result name="success">/pages/analytics/analytics_energy_savings.jsp</result>
+			<result name="input">/pages/analytics/analytics_energy_savings.jsp</result>
+		</action>
+		
+		<!-- Render Carbon Credits page -->
+		<action name="include.carbonCredits" class="analyticsPageAction">
+			<result name="success">/pages/analytics/analytics_carbon_credits.jsp</result>
+			<result name="input">/pages/analytics/analytics_carbon_credits.jsp</result>
+		</action>
+		
+		<!-- Render Cost Saving page -->
+		<action name="costSaving" class="analyticsPageAction">
+			<result name="success">/pages/analytics/analytics_cost_saving.jsp</result>
+			<result name="input">/pages/analytics/analytics_cost_saving.jsp</result>
+		</action>
+		
+		<!-- Parameterized JavaScript settings -->
+		<action name="settings" class="analyticsSettingsAction"
+			method="settings">
+			<param name="menuItem">analytics</param>
+			<result name="success" type="freemarker">/freemarker/analytics_settings.js
+			</result>
+		</action>
+		
+		<!-- Render main page -->
+		<action name="listSmartPoint" class="smartpointPageAction">
+			<param name="jsComponents">mlc-smartpoint</param>
+			<result name="success">/pages/smartpoint/smartpoint_main.jsp</result>
+			<result name="input">/pages/smartpoint/smartpoint_main.jsp</result>
+		</action>
+		
+		<!-- Ajax callback for analytics search -->
+		<action name="search" class="analyticsSearchAjaxAction" method="search">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- Ajax callback for analytics graphic search -->
+		<action name="searchGraphic" class="analyticsSearchAjaxAction" method="searchGraphic">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- Ajax callback for analytics generateFile -->
+		<action name="generateFile" class="analyticsSearchAjaxAction" method="generateFileCSV">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- Ajax callback for lights generateFile -->
+		<action name="insertProcess" class="analyticsSearchAjaxAction" method="insertProcess">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>		
+		
+	</package>
+</struts>		

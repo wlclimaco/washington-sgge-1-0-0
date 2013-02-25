@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://mallet-app.davis.sensus.lab:8080/" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#messaging-main&quot;).remove();</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#yui-main h1</td>
+	<td>Schedules</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Create Event Schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Create Event Schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForEditable</td>
+	<td>id=schedule-name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.formErrorContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>* This field is required.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>* Please select an option</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>* This field is required.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>* Expected Format hh:mm am|pm - * Expected valid hour: 01:00am|pm to 12:00am|pm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>* Please select 1 options</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=schedule-name</td>
+	<td>Event Schedule Test Maaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaax</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=radio11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=day1Mon</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=time1</td>
+	<td>00:00 AM</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.formErrorContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>* Maximum 100 characters allowed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>* Expected Format hh:mm am|pm - * Expected valid hour: 01:00am|pm to 12:00am|pm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=schedule-name</td>
+	<td>${UP_eventSchName}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=time1</td>
+	<td>7:00 AM</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=#messaging-main span.message</td>
+	<td>A Schedule with this name already exists.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main span.message</td>
+	<td>A Schedule with this name already exists.</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#actions &gt; span.message</td>
+	<td>0 of ${scheTotal} Schedules Selected</td>
+</tr>
+<tr>
+	<td>verifyTableRows</td>
+	<td>css=#schedule-table tbody</td>
+	<td>${scheTotal}</td>
+</tr>
+</tbody>
+
+</table>
+</body>
+</html>

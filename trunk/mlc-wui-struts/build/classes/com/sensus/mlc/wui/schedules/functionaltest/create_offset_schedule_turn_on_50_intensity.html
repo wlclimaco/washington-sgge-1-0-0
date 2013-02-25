@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://mallet-app.davis.sensus.lab:8080/" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#messaging-main&quot;).remove();</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#yui-main h1</td>
+	<td>Schedules</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Create Offset Schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Create Offset Schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=schedule-name</td>
+	<td>${offsetSchName}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=schedule-description</td>
+	<td>Description ${offsetSchName} - TURN ON 50% intensity</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=sunset-intensity</td>
+	<td>50%</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Schedule ${offsetSchName} created successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Schedule ${offsetSchName} created successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>${offsetSchName}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Description ${offsetSchName}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>${totalSch}</td>
+	<td>total</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(storedVars.total) + 1</td>
+	<td>total</td>
+</tr>
+<tr>
+	<td>verifyTableRows</td>
+	<td>css=#schedule-table tbody</td>
+	<td>${total}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#actions &gt; span</td>
+	<td>0 of ${total} Schedules Selected</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${total}</td>
+	<td>totalSch</td>
+</tr>
+</tbody></table>
+</body>
+</html>
