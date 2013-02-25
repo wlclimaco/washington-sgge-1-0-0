@@ -1,0 +1,865 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://www.sensus.com/gateway/mlc" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.sensus.com/gateway/mlc" targetNamespace="http://www.sensus.com/gateway/mlc">
+  <wsdl:types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:types="http://www.sensus.com/gateway/mlc/types" elementFormDefault="qualified" jaxb:version="2.0" targetNamespace="http://www.sensus.com/gateway/mlc" xmlns:tns="http://www.sensus.com/gateway/mlc">
+
+	<xs:import namespace="http://www.sensus.com/gateway/mlc/types" schemaLocation="../imported/xsd/mlcTypes.xsd"/>
+
+	<!-- ApplyScheduleRequest. Applies schedule info to one or more smartpoints -->
+	<xs:element name="InitiateApplyScheduleRequest">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayRequest">
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" minOccurs="1" name="scheduledSmartpoint" type="types:ScheduledSmartpoint"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="InitiateApplyScheduleResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayResponse">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="ApplyScheduleNotification">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayNotification">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="ApplyScheduleNotificationResult">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayNotificationResult">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<!--UpdateLightStatusRequest. Applies light status to one or more smartpoints-->
+	  <xs:element name="InitiateUpdateLightStatusRequest">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayRequest">
+					<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="unbounded" name="Smartpoint"
+							type="types:SmartpointStateLevel" />
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="InitiateUpdateLightStatusResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayResponse">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="UpdateLightStatusNotification">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayNotification">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="UpdateLightStatusNotificationResult">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayNotificationResult">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- ClearScheduleRequest. This message will clear schedule info from one 
+		or more smartpoints -->
+	<xs:element name="InitiateClearScheduleRequest">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayRequest">
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" minOccurs="1" name="Smartpoint" type="types:Smartpoint"/>
+						<xs:element maxOccurs="2" minOccurs="1" name="ScheduleType" type="types:ScheduleType"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="InitiateClearScheduleResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayResponse">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="ClearScheduleNotification">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayNotification">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="ClearScheduleNotificationResult">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayNotificationResult">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+
+	<!-- Set Light Level (currently only on/off supported) -->
+	<xs:element name="InitiateApplyLightLevelRequest">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayRequest">
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" minOccurs="1" name="DimmedSmartpoint" type="types:DimmedSmartpoint"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="InitiateApplyLightLevelResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayResponse">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="ApplyLightLevelNotification">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayNotification">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="ApplyLightLevelNotificationResult">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayNotificationResult">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- Set Dimming Level  -->
+	<xs:element name="InitiateApplyDimmingConfigurationRequest">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayRequest">
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" minOccurs="1" name="smartpoint" type="types:Smartpoint"/>
+						<xs:element maxOccurs="unbounded" minOccurs="1" name="dimmingConfiguration" type="types:LightDimmingConfiguration"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="InitiateApplyDimmingConfigurationResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayResponse">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="ApplyDimmingConfigurationNotification">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayNotification">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="ApplyDimmingConfigurationNotificationResult">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayNotificationResult">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	
+	<!-- Abort Transaction. Simplistic approach until more information is gathered -->
+	<xs:element name="AbortTransactionRequest">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayRequest"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="AbortTransactionResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayResponse"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- Ping URL -->
+	<xs:element name="PingURLRequest">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayRequest"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="PingURLResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayResponse"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- Supervisory status/alarm info and Get Light Details -->
+	<xs:element name="InitiateReadLightStatusRequest">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayRequest">
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" minOccurs="1" name="DataType" type="types:DataType"/>
+						<xs:element maxOccurs="unbounded" minOccurs="1" name="Smartpoint" type="types:Smartpoint"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="InitiateReadLightStatusResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayResponse">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="ReadLightStatusNotification">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayDataNotification">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="ReadLightStatusNotificationResult">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayNotificationResult">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+
+
+	<!-- Clear alarms and warnings -->
+	<xs:element name="InitiateClearAlarmsRequest">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayRequest">
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" minOccurs="1" name="Smartpoint" type="types:Smartpoint"/>
+						<xs:element maxOccurs="1" minOccurs="0" name="ClearAlarmsType" type="types:ClearAlarmsType"/>
+						<xs:element maxOccurs="unbounded" minOccurs="0" name="Alarms" type="types:AlarmWarningInfo"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="InitiateClearAlarmsResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayResponse">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="ClearAlarmsNotification">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayNotification">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="ClearAlarmsNotificationResult">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayNotificationResult">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+
+	<!-- Set Endpoint properties -->
+	<xs:element name="InitiateApplySmartpointPropertiesRequest">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayRequest">
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" minOccurs="1" name="Smartpoint" type="types:Smartpoint"/>
+						<xs:element maxOccurs="1" minOccurs="0" name="Latitude" type="types:Double"/>
+						<xs:element maxOccurs="1" minOccurs="0" name="Longitude" type="types:Double"/>
+						<xs:element maxOccurs="1" minOccurs="0" name="PoleId" type="xs:string"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="InitiateApplySmartpointPropertiesResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayResponse">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="ApplySmartpointPropertiesNotification">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayNotification">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="ApplySmartpointPropertiesNotificationResult">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayNotificationResult">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+
+	<!-- Request Endpoint Data -->
+	<xs:element name="InitiateReadSmartpointPropertiesRequest">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayRequest">
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" minOccurs="1" name="Smartpoint" type="types:Smartpoint"/>
+						<xs:element maxOccurs="unbounded" minOccurs="0" name="RequestType" type="types:RequestType"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="InitiateReadSmartpointPropertiesResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayResponse">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="ReadSmartpointPropertiesNotification">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayNotification">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="ReadSmartpointPropertiesNotificationResult">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewayNotificationResult">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+
+
+	<!-- *** Supervisory messages (Notifications that are sent without prior 
+		InitiateXXXX request and therefore have no transaction Id** -->
+
+	<!-- Status and Alarm Messages - AppCodes 11(0x0B)/90(0x5A); sent at configured 
+		transmit rate (which one is sent depends on whether alarm conditions are 
+		present or not) -->
+	<!-- Should we split them out for consistencies sake? -->
+	<xs:element name="LightStatusNotification">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewaySupervisoryNotification">
+					<xs:sequence>
+						<xs:element name="SmartpointDetail" type="types:AppCode90Info"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="LightStatusNotificationResult">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewaySupervisoryNotificationResult">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- Light Setup Message - AppCode 9 (0x09); sent bi-weekly -->
+	<xs:element name="LightSetupNotification">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewaySupervisoryNotification"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="LightSetupNotificationResult">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewaySupervisoryNotificationResult"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- Channel Setup Audit Message - AppCode 75 (0x4B) -->
+	<xs:element name="ChannelSetupAuditNotification">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewaySupervisoryNotification">
+					<xs:sequence>
+						<xs:element name="smartpointDetail" type="types:AppCode75Info"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="ChannelSetupAuditNotificationResult">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewaySupervisoryNotificationResult">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- Channel Setup Audit 2 Message - AppCode 85 (0x55) -->
+	<xs:element name="ChannelSetupAudit2Notification">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewaySupervisoryNotification">
+					<xs:sequence>
+						<xs:element name="smartpointDetail" type="types:AppCode85Info"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="ChannelSetupAudit2NotificationResult">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewaySupervisoryNotificationResult">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- Light Binding Message - AppCode 86 (0x56); sent bi-weekly -->
+	<xs:element name="LightBindingNotification">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewaySupervisoryNotification">
+					<xs:sequence>
+						<xs:element name="smartpointDetail" type="types:AppCode86Info"/>
+						<xs:element name="installationDetail" type="types:InstallationInfo"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="LightBindingNotificationResult">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewaySupervisoryNotificationResult">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- Alarm Warning Message - AppCode 11 (0x0B); sent when condition is triggered -->
+	<xs:element name="AlarmWarningNotification">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewaySupervisoryNotification">
+					<xs:sequence>
+						<xs:element name="smartpointDetail" type="types:AppCode11Info"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="AlarmWarningNotificationResult">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewaySupervisoryNotificationResult">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- Attribute Notification AppCode 94 (0x5E) -->
+	<!-- The request for attribute message notifications. -->
+	<xs:element name="AttributeNotification">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewaySupervisoryNotification">
+					<xs:sequence>
+						<xs:element name="smartpointDetail" type="types:AppCode94InfoIndividual"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="AttributeNotificationResult">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewaySupervisoryNotificationResult">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- CustomerSerialNumber Notification AppCode 71 (0x47) -->
+	<!-- The request for customer serial number message notifications. -->
+	<xs:element name="CustomerSerialNumberNotification">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewaySupervisoryNotification">
+					<xs:sequence>
+						<xs:element name="customerSerial" type="xs:string"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="CustomerSerialNumberNotificationResult">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="types:MlcGatewaySupervisoryNotificationResult">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="InitiateClearScheduleResponse">
+    <wsdl:part element="tns:InitiateClearScheduleResponse" name="InitiateClearScheduleResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InitiateApplyLightLevelRequest">
+    <wsdl:part element="tns:InitiateApplyLightLevelRequest" name="InitiateApplyLightLevelRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InitiateClearAlarmsResponse">
+    <wsdl:part element="tns:InitiateClearAlarmsResponse" name="InitiateClearAlarmsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InitiateApplyScheduleRequest">
+    <wsdl:part element="tns:InitiateApplyScheduleRequest" name="InitiateApplyScheduleRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="PingURLRequest">
+    <wsdl:part element="tns:PingURLRequest" name="PingURLRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InitiateApplyScheduleResponse">
+    <wsdl:part element="tns:InitiateApplyScheduleResponse" name="InitiateApplyScheduleResponse">
+    </wsdl:part>
+  </wsdl:message>
+  
+  <wsdl:message name="InitiateUpdateLightStatusRequest">
+    <wsdl:part element="tns:InitiateUpdateLightStatusRequest" name="InitiateUpdateLightStatusRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InitiateUpdateLightStatusResponse">
+    <wsdl:part element="tns:InitiateUpdateLightStatusResponse" name="InitiateUpdateLightStatusResponse"></wsdl:part>
+  </wsdl:message>
+  
+  <wsdl:message name="InitiateApplyDimmingConfigurationRequest">
+    <wsdl:part element="tns:InitiateApplyDimmingConfigurationRequest" name="InitiateApplyDimmingConfigurationRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InitiateReadLightStatusRequest">
+    <wsdl:part element="tns:InitiateReadLightStatusRequest" name="InitiateReadLightStatusRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InitiateClearAlarmsRequest">
+    <wsdl:part element="tns:InitiateClearAlarmsRequest" name="InitiateClearAlarmsRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AbortTransactionResponse">
+    <wsdl:part element="tns:AbortTransactionResponse" name="AbortTransactionResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InitiateReadSmartpointPropertiesRequest">
+    <wsdl:part element="tns:InitiateReadSmartpointPropertiesRequest" name="InitiateReadSmartpointPropertiesRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AbortTransactionRequest">
+    <wsdl:part element="tns:AbortTransactionRequest" name="AbortTransactionRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="PingURLResponse">
+    <wsdl:part element="tns:PingURLResponse" name="PingURLResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InitiateApplySmartpointPropertiesResponse">
+    <wsdl:part element="tns:InitiateApplySmartpointPropertiesResponse" name="InitiateApplySmartpointPropertiesResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InitiateClearScheduleRequest">
+    <wsdl:part element="tns:InitiateClearScheduleRequest" name="InitiateClearScheduleRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InitiateApplyDimmingConfigurationResponse">
+    <wsdl:part element="tns:InitiateApplyDimmingConfigurationResponse" name="InitiateApplyDimmingConfigurationResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InitiateApplyLightLevelResponse">
+    <wsdl:part element="tns:InitiateApplyLightLevelResponse" name="InitiateApplyLightLevelResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InitiateApplySmartpointPropertiesRequest">
+    <wsdl:part element="tns:InitiateApplySmartpointPropertiesRequest" name="InitiateApplySmartpointPropertiesRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InitiateReadLightStatusResponse">
+    <wsdl:part element="tns:InitiateReadLightStatusResponse" name="InitiateReadLightStatusResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InitiateReadSmartpointPropertiesResponse">
+    <wsdl:part element="tns:InitiateReadSmartpointPropertiesResponse" name="InitiateReadSmartpointPropertiesResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="MLCGateway">
+    <wsdl:operation name="InitiateClearSchedule">
+      <wsdl:input message="tns:InitiateClearScheduleRequest" name="InitiateClearScheduleRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:InitiateClearScheduleResponse" name="InitiateClearScheduleResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateApplySmartpointProperties">
+      <wsdl:input message="tns:InitiateApplySmartpointPropertiesRequest" name="InitiateApplySmartpointPropertiesRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:InitiateApplySmartpointPropertiesResponse" name="InitiateApplySmartpointPropertiesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateApplySchedule">
+      <wsdl:input message="tns:InitiateApplyScheduleRequest" name="InitiateApplyScheduleRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:InitiateApplyScheduleResponse" name="InitiateApplyScheduleResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AbortTransaction">
+      <wsdl:input message="tns:AbortTransactionRequest" name="AbortTransactionRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:AbortTransactionResponse" name="AbortTransactionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateApplyDimmingConfiguration">
+      <wsdl:input message="tns:InitiateApplyDimmingConfigurationRequest" name="InitiateApplyDimmingConfigurationRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:InitiateApplyDimmingConfigurationResponse" name="InitiateApplyDimmingConfigurationResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateReadSmartpointProperties">
+      <wsdl:input message="tns:InitiateReadSmartpointPropertiesRequest" name="InitiateReadSmartpointPropertiesRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:InitiateReadSmartpointPropertiesResponse" name="InitiateReadSmartpointPropertiesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+	
+	<wsdl:operation name="InitiateUpdateLightStatus">
+      <wsdl:input message="tns:InitiateUpdateLightStatusRequest" name="InitiateUpdateLightStatusRequest"></wsdl:input>
+      <wsdl:output message="tns:InitiateUpdateLightStatusResponse" name="InitiateUpdateLightStatusResponse"></wsdl:output>
+    </wsdl:operation>
+	
+    <wsdl:operation name="PingURL">
+      <wsdl:input message="tns:PingURLRequest" name="PingURLRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:PingURLResponse" name="PingURLResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateApplyLightLevel">
+      <wsdl:input message="tns:InitiateApplyLightLevelRequest" name="InitiateApplyLightLevelRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:InitiateApplyLightLevelResponse" name="InitiateApplyLightLevelResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateReadLightStatus">
+      <wsdl:input message="tns:InitiateReadLightStatusRequest" name="InitiateReadLightStatusRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:InitiateReadLightStatusResponse" name="InitiateReadLightStatusResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateClearAlarms">
+      <wsdl:input message="tns:InitiateClearAlarmsRequest" name="InitiateClearAlarmsRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:InitiateClearAlarmsResponse" name="InitiateClearAlarmsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MLCGatewaySoap11" type="tns:MLCGateway">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="InitiateClearSchedule">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="InitiateClearScheduleRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="InitiateClearScheduleResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateApplySmartpointProperties">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="InitiateApplySmartpointPropertiesRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="InitiateApplySmartpointPropertiesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateApplySchedule">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="InitiateApplyScheduleRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="InitiateApplyScheduleResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AbortTransaction">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="AbortTransactionRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="AbortTransactionResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+	
+	<wsdl:operation name="InitiateUpdateLightStatus">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="InitiateUpdateLightStatusRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="InitiateUpdateLightStatusResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+	
+    <wsdl:operation name="InitiateApplyDimmingConfiguration">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="InitiateApplyDimmingConfigurationRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="InitiateApplyDimmingConfigurationResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateReadSmartpointProperties">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="InitiateReadSmartpointPropertiesRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="InitiateReadSmartpointPropertiesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PingURL">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="PingURLRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="PingURLResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateApplyLightLevel">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="InitiateApplyLightLevelRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="InitiateApplyLightLevelResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateReadLightStatus">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="InitiateReadLightStatusRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="InitiateReadLightStatusResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateClearAlarms">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="InitiateClearAlarmsRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="InitiateClearAlarmsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MLCGatewayService">
+    <wsdl:port binding="tns:MLCGatewaySoap11" name="MLCGatewaySoap11">
+      <soap:address location="/mlc-gateway-ws/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

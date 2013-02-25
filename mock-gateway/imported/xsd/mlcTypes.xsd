@@ -1,0 +1,1192 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.0"
+	xmlns:tns="http://www.sensus.com/gateway/mlc/types" elementFormDefault="qualified"
+	targetNamespace="http://www.sensus.com/gateway/mlc/types">
+
+	<!-- *** Smartpoint Object *********************** -->
+	<xs:complexType name="Smartpoint">
+		<xs:sequence>
+			<xs:element name="customerID" type="xs:string" minOccurs="1"
+				maxOccurs="1" />
+			<xs:element name="rniId" type="tns:Integer" minOccurs="1"
+				maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- *** Dimmable Smartpoint Object *********************** -->
+	<xs:complexType name="DimmedSmartpoint">
+		<xs:complexContent>
+			<xs:extension base="tns:Smartpoint">
+				<xs:sequence>
+					<xs:element name="lightLevel" type="tns:LightLevel" />
+					<xs:element name="blinkLevel" type="tns:BlinkLevel" />
+					<xs:element name="overrideTime" type="tns:Integer" />
+					<xs:element name="overrideTerminationEvent" type="tns:Integer" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+		<!-- *** Event Programmable Smartpoint Object *********************** -->
+	<xs:complexType name="ScheduledSmartpoint">
+		<xs:complexContent>
+			<xs:extension base="tns:Smartpoint">
+				<xs:sequence>
+					<xs:element name="schedule" type="tns:Schedule" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- *** Schedule Object *********************** -->
+	<xs:complexType name="Schedule">
+		<xs:sequence>
+			<xs:element name="scheduleType" type="tns:ScheduleType" />
+			<xs:choice>
+				<xs:element name="offsetData" type="tns:ScheduleOffsetData" />
+				<xs:element name="eventData" type="tns:ScheduleEventData" />
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Parent for all requests. To simplify the object hierarchy, I'm including 
+		customerID here (required) as well as transactionId (not required if no async 
+		response is wanted; this also could be used as an indicator to discard the 
+		Acks???) -->
+	<xs:complexType name="MlcGatewayRequest">
+		<xs:sequence>
+			<xs:element name="customerID" type="xs:string" minOccurs="1"
+				maxOccurs="1" />
+			<xs:element name="transactionID" type="xs:string"
+				minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Parent for all synchronous responses -->
+	<xs:complexType name="MlcGatewayResponse">
+		<xs:sequence>
+			<xs:element name="customerID" type="xs:string" />
+			<xs:element name="transactionID" type="xs:string" />
+			<xs:element name="status" type="tns:Status" />
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="Message"
+				type="tns:MessageInfo" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Parent for all asynchronous responses aka "Notifications" -->
+	<xs:complexType name="MlcGatewayNotification">
+		<xs:complexContent>
+			<xs:extension base="tns:MlcGatewayResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" name="FailedSmartpoint"
+						type="tns:Smartpoint" />
+					<xs:element minOccurs="0" maxOccurs="unbounded" name="SuccededSmartpoint"
+						type="tns:Smartpoint" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- Parent for all asynchronous responses that return data -->
+	<xs:complexType name="MlcGatewayDataNotification">
+		<xs:complexContent>
+			<xs:extension base="tns:MlcGatewayResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" name="DataType"
+						type="tns:DataType" />
+					<xs:element minOccurs="0" maxOccurs="unbounded" name="LightDetail"
+						type="tns:LightDetail" />
+					<xs:element minOccurs="0" maxOccurs="unbounded" name="FailedSmartpoint"
+						type="tns:Smartpoint" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Parent for all responses to Notifications (MLC Response) -->
+	<xs:complexType name="MlcGatewayNotificationResult">
+		<xs:complexContent>
+			<xs:extension base="tns:MlcGatewayResponse" />
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- UNSOLICITED (SUPERVISORY) MESSAGES -->
+	<!-- Parent for all asynchronous responses aka "Notifications" that are 
+		unsolicited (Supervisory) -->
+	<xs:complexType name="MlcGatewaySupervisoryNotification">
+		<xs:complexContent>
+			<xs:extension base="tns:MlcGatewayResponse">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="smartpoint"
+						type="tns:Smartpoint" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- Parent for all responses to Notifications that are unsolicited (Supervisory) -->
+	<xs:complexType name="MlcGatewaySupervisoryNotificationResult">
+		<xs:complexContent>
+			<xs:extension base="tns:MlcGatewayResponse" />
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- END OF UNSOLICITED (SUPERVISORY) MESSAGES -->
+
+	<!-- Endpoint properties object -->
+	<xs:complexType name="EndpointProperties">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" name="Latitude"
+				type="tns:Double" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Longitude"
+				type="tns:Double" />
+			<xs:element minOccurs="0" maxOccurs="1" name="PoleId"
+				type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Rni Error Info -->
+	<xs:complexType name="MessageInfo">
+		<xs:sequence>
+			<!-- Severity -->
+			<xs:element name="messageLevel" type="tns:MessageLevel" />
+			<!-- Error Type -->
+			<xs:element name="messageType" type="tns:MessageType" />
+			<!-- description -->
+			<xs:element name="messageText" type="xs:string" />
+			<xs:element name="messageDomain" type="tns:MessageDomain" />
+			<xs:element name="customerId" type="xs:string" minOccurs="0" />
+			<!-- the group name or flexnet id if applicable (actor) -->
+			<xs:element name="objectId" type="xs:string" />
+			<xs:element name="messageTime" type="xs:dateTime" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="MessageLevel">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Error">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="ERROR" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Warning">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="WARNING" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Info">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="INFO" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="None">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="NONE" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="MessageType">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NO_ROUTE_TO_DEVICE">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="NO_ROUTE_TO_DEVICE" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DEVICE_RESPONSE_TIMEOUT">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="DEVICE_RESPONSE_TIMEOUT" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DEVICE_DOES_NOT_EXIST">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="DEVICE_DOES_NOT_EXIST" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DUPLICATE_DEVICE_EXCEPTION">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="DUPLICATE_DEVICE_EXCEPTION" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FAIL_TO_ACCESS_DATABASE">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="FAIL_TO_ACCESS_DATABASE" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DATA_VALIDATION_FAILURE">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="DATA_VALIDATION_FAILURE" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TRANSACTION_FAILURE">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="TRANSACTION_FAILURE" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DEVICE_NOT_ACTIVE">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="DEVICE_NOT_ACTIVE" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UNSUPPORTED_MESSAGE_TYPE">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="UNSUPPORTED_MESSAGE_TYPE" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UNSUPPORTED_DEVICE_TYPE">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="UNSUPPORTED_DEVICE_TYPE" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="INVALID_LIFECYCLE_STATE">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="INVALID_LIFECYCLE_STATE" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="INVALID_LOGICAL_STATE">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="INVALID_LOGICAL_STATE" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NO_DATA_FOUND">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="NO_DATA_FOUND" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TRANSACTION_NOT_FOUND">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="TRANSACTION_NOT_FOUND" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OTHER">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="OTHER" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="MessageDomain">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="DATABASE">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="DATABASE" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AUTHENTICATION">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="AUTHENTICATION" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VALIDATION">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="VALIDATION" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="COMMUNICATION">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="COMMUNICATION" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- Light Detail (status, alarms, ...) -->
+	<xs:complexType name="LightDetail">
+		<xs:complexContent>
+			<xs:extension base="tns:Smartpoint">
+				<xs:sequence>
+					<xs:element name="appCode11Data" type="tns:AppCode11Info" />
+					<xs:element name="appCode71Data" type="tns:AppCode71Info" />
+					<xs:element name="appCode75Data" type="tns:AppCode75Info" />
+					<xs:element name="appCode85Data" type="tns:AppCode85Info" />
+					<xs:element name="appCode90Data" type="tns:AppCode90Info" />
+					<xs:element name="appCode94Data" type="tns:AppCode94Info" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- Schedule -> Type = Offset -->
+	<xs:complexType name="ScheduleOffsetData">
+		<xs:sequence>
+			<xs:element name="sunriseOffset" type="tns:Integer" />
+			<xs:element name="sunsetOffset" type="tns:Integer" />
+			<xs:element name="lightLevel" type="tns:LightLevel" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Schedule -> Type = Event -->
+	<xs:complexType name="ScheduleEventData">
+		<xs:sequence>
+			<xs:element name="scheduleEvent" type="tns:ScheduleEvent"
+				minOccurs="1" maxOccurs="28" />
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<!-- Schedule Event. Represents a single event for a event-based schedule -->
+	<xs:complexType name="ScheduleEvent">
+		<xs:sequence>
+			<xs:element name="lightLevel" type="tns:LightLevel" />
+			<xs:element name="eventHour" type="tns:Integer" />
+			<xs:element name="eventMinute" type="tns:Integer" />
+			<xs:sequence minOccurs="1" maxOccurs="7">
+				<xs:element name="eventDayOfWeek" type="tns:DayOfWeek" />
+			</xs:sequence>
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- AppCode 11 (0x0B) NA2W Alarm -->
+	<xs:complexType name="AppCode11Info">
+		<xs:sequence>
+			<xs:element name="alarmWarningMessages" type="tns:AlarmWarningInfo"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="lightState" type="tns:LightState" />
+			<xs:element name="lightTopLevelState" type="tns:LightTopLevelState" />
+			<xs:element name="current" type="tns:Integer" />
+			<xs:element name="voltage" type="tns:Integer" />
+			<xs:element name="temperature" type="tns:Integer" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- AppCode 71 (0x47) Customer Serial Number -->
+	<xs:complexType name="AppCode71Info">
+		<xs:sequence>
+			<xs:element name="customerSerial" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- AppCode 75 (0x4B) NA2W Channel Setup Audit -->
+	<xs:complexType name="AppCode75Info">
+		<xs:sequence>
+			<xs:element name="lightTopLevelState" type="tns:LightTopLevelState" />
+			<xs:element name="protected" type="xs:boolean" />
+			<xs:element name="sunriseSunsetLightLevel" type="tns:LightLevel" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- AppCode 94 (0x5E) AttributeMessage - aggregated -->
+	<xs:complexType name="AppCode94Info">
+		<xs:sequence>
+			<xs:element name="ProductNumber" type="xs:string" />
+			<xs:element name="BulbSerial" type="xs:string" />
+			<xs:element name="BallastSerial" type="xs:string" />
+			<xs:element name="UpperCaseSerial" type="xs:string" />
+			<xs:element name="LowerCaseSerial" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- AppCode 94 (0x5E) AttributeMessage - aggregated -->
+	<xs:complexType name="AppCode94InfoIndividual">
+		<xs:sequence>
+			<xs:element name="attribute" type="xs:string" />
+			<xs:element name="attributeType" type="tns:AttributeType" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- AppCode 85 (0x55) NA2W Channel Setup Audit 2 -->
+	<xs:complexType name="AppCode85Info">
+		<xs:sequence>
+			<xs:element name="sunriseOffset" type="tns:Integer" />
+			<xs:element name="sunsetOffset" type="tns:Integer" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- AppCode 86 (0x56) NA2W Binding/Configuration -->
+	<xs:complexType name="AppCode86Info">
+		<xs:sequence>
+			<xs:element name="latitude" type="tns:Double" />
+			<xs:element name="longitude" type="tns:Double" />
+			<xs:element name="poleId" type="xs:string" />
+			<xs:element name="productVersionMinor" type="tns:Integer" />
+			<xs:element name="productVersionMajor" type="tns:Integer" />
+			<xs:element name="productVersionBeta" type="xs:boolean" />
+			<xs:element name="productVersionPatch" type="tns:Integer" />
+			<xs:element name="deviceVersionMinor" type="tns:Integer" />
+			<xs:element name="deviceVersionMajor" type="tns:Integer" />
+			<xs:element name="deviceVersionBeta" type="xs:boolean" />
+			<xs:element name="deviceVersionPatch" type="tns:Integer" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Installation Info -->
+	<xs:complexType name="InstallationInfo">
+		<xs:sequence>
+			<xs:element name="timezoneRegion" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- AppCode 90 (0x5A) NA2W Device Status -->
+	<xs:complexType name="AppCode90Info">
+		<xs:sequence>
+			<xs:element name="voltage" type="tns:Integer" />
+			<xs:element name="current" type="tns:Integer" />
+			<xs:element name="consumption" type="tns:Integer" />
+			<xs:element name="lightState" type="tns:LightState" />
+			<xs:element name="lightLevel" type="tns:LightLevel" />
+			<xs:element name="sunriseHour" type="tns:Integer" />
+			<xs:element name="sunriseMinute" type="tns:Integer" />
+			<xs:element name="sunsetHour" type="tns:Integer" />
+			<xs:element name="sunsetMinute" type="tns:Integer" />
+			<xs:element name="temperature" type="tns:Integer" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Alarm/Warning Info -->
+	<xs:complexType name="AlarmWarningInfo">
+		<xs:sequence>
+			<xs:element name="alarmWarningType" type="tns:AlarmWarningType" />
+			<xs:element name="alarmWarningSubType" type="tns:AlarmWarningSubType" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Light Setup Detail -->
+	<xs:complexType name="LightSetupDetail">
+		<xs:sequence>
+			<!-- no data at this point -->
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Light Status Enumeration for sync and async responses -->
+	<xs:simpleType name="LightState">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="OFF" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="ON" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="BLINK" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="3">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="MAINTENANCE" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="4">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="UNKNOWN" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- Top Level State. Present on AppCode11 (Alarm) -->
+	<xs:simpleType name="LightTopLevelState">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="IDLE" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="MAINTENANCE" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="ACTIVE" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="3">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="UNKNOWN" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- Alarm/Warning Enumeration for sync and async responses -->
+	<xs:simpleType name="AlarmWarningType">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="ALARM" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="WARNING" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- Alarm/Warning subtype Enumeration for sync and async responses -->
+	<xs:simpleType name="AlarmWarningSubType">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="LAMP_FAILURE" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="POWER_FAILURE" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="POWER_SURGE_DETECTED" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="3">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="BROWN_OUT_DETECTED" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="4">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="METROLOGY_ERROR" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="5">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="METROLOGY_COM_FAILURE" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="6">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="HIGH_CURRENT" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="7">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="LOW_CURRENT" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="8">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="REVERSE_ENERGY" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="9">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="METROLOGY_RESET" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="BOARD_FAILURE" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>	
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- Status Enumeration for sync and async responses -->
+	<xs:simpleType name="Status">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SUCCESS">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="SUCCESS" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FAIL">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="FAIL" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+<!-- Blink Level Enumeration for ApplyLightLevelRequest -->
+<xs:simpleType name="BlinkLevel">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="NONE" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="FAST" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="SLOW" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Light Level Enumeration for ApplyLightLevelRequest -->
+	<xs:simpleType name="LightLevel">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="LEVEL_0" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="LEVEL_1" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="LEVEL_2" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="3">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="LEVEL_3" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="4">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="LEVEL_4" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="5">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="LEVEL_5" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="6">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="LEVEL_6" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="7">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="LEVEL_7" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- Schedule types -->
+	<xs:simpleType name="ScheduleType">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="OFFSET" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="EVENT" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- Attribute Enumeration for sync and async responses -->
+	<xs:simpleType name="AttributeType">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="UPPER_CASE_SERIAL_NUMBER" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="LOWER_CASE_SERIAL_NUMBER" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="BALLAST_SERIAL_NUMBER" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="3">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="BULB_SERIAL_NUMBER" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="4">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="PRODUCT_MODEL_NUMBER" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+
+	<!-- Request Type Enumeration for sync and async responses -->
+	<xs:simpleType name="RequestType">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="UPPER_CASE_SERIAL_NUMBER" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="LOWER_CASE_SERIAL_NUMBER" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="BALLAST_SERIAL_NUMBER" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="3">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="BULB_SERIAL_NUMBER" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="4">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="PRODUCT_MODEL_NUMBER" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="5">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="BINDING_MESSAGE" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="6">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="SETUP_MESSAGE" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="7">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="ALARM" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="8">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="CHANNEL_SETUP" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="9">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="CHANNEL_SETUP_2" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="LIGHT_STATUS" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="11">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="PROGRAMMED_SCHEDULE" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="12">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="CUSTOMER_SERIAL_NUMBER" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- Data Type Enumeration for sync and async responses -->
+	<xs:simpleType name="DataType">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="STATUS">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="STATUS_DATA" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CONFIG">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="CONFIGURATION_DATA" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- ProtectedStatus types -->
+	<xs:simpleType name="ProtectedStatus">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="UNPROTECTED" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="PROTECTED" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- OverrideLockType types -->
+	<xs:simpleType name="ClearAlarmsType">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="USE_LIST">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="USE_LIST" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CLEAR_ALL">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="CLEAR_ALL" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- Days of the Week -->
+	<xs:simpleType name="DayOfWeek">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="SUNDAY" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="MONDAY" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="TUESDAY" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="3">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="WEDNESDAY" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="4">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="THURSDAY" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="5">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="FRIDAY" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="6">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="SATURDAY" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="Integer">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:javaType name="Integer"
+					parseMethod="com.sensus.gateway.converter.IntegerConverter.toInteger"
+					printMethod="com.sensus.gateway.converter.IntegerConverter.fromInteger" />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0" />
+			<xs:maxInclusive value="999999999" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="Double">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:javaType name="Double"
+					parseMethod="com.sensus.gateway.converter.DoubleConverter.toDouble"
+					printMethod="com.sensus.gateway.converter.DoubleConverter.fromDouble" />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:double">
+			<xs:minInclusive value="-324234.234" />
+			<xs:maxInclusive value="3249239847982.234" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- *** Light Level Configuration Object *********************** -->
+	<xs:complexType name="LightDimmingConfiguration">
+		<xs:sequence>
+			<xs:element name="hardwareSetting" type="tns:Integer" />
+			<xs:element name="currentScale" type="tns:Integer" />
+			<xs:element name="fullOnRequired" type="xs:boolean" />
+			<xs:element name="lightLevel" type="tns:LightLevel" />
+			<xs:element name="blinkSlotTime" type="tns:Integer" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- *** Smartpoint with top level state Object *********************** -->
+	<xs:complexType name="SmartpointStateLevel">
+		<xs:complexContent>
+			<xs:extension base="tns:Smartpoint">
+				<xs:sequence>
+					<xs:element name="lightTopLevelState" type="tns:LightTopLevelState" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+</xs:schema>
