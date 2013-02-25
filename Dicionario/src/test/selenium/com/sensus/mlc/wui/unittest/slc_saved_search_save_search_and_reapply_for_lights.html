@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://mallet-app.davis.sensus.lab:8080/" />
+<title>save_search_for_lights</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">save_search_for_lights</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>id=menu-smartpoints</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>id=menu-smartpoints@class</td>
+	<td>alist active</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='2']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//input[@value='2'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=lights-save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForEditable</td>
+	<td>id=saved-search-name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=saved-search-name</td>
+	<td>${searchName}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=saved-search-description</td>
+	<td>Test</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=save-search-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Saved Search ${searchName} created successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#messaging-main &gt; span</td>
+	<td>Saved Search ${searchName} created successfully.</td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=#actions span.message</td>
+	<td>varResult</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>${searchName}/1</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${row}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(storedVars['row']) - 2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#saved-table tbody tr:eq(${row}) td:eq(1) a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=#actions span.message</td>
+	<td>${varResult}</td>
+</tr>
+</tbody></table>
+</body>
+</html>
