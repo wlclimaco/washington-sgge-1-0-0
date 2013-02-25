@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<project name="Build MLC Backend Jar Files" default="buildAll">
+	<taskdef file="../../lib/build/sensus-pcm-antlib.xml" />
+
+	<property name="version" value="0" />
+	<property name="run.tests" value="false" />
+	<property name="copy.to.clib" value="true" />
+
+	<!-- Build complete backend -->
+	<target name="buildAll">
+		<echo message="Building Gateway Client Web Service ..." />
+		<ant antfile="build-javafromxsd.xml" target="buildJavaFromXsd" inheritAll="true" />
+		<buildBAComponents businessArea="mlc" componentNameList="endereco-${version},almoxarifado-${version},cliente-${version},empresa-${version},filial-${version},dicionario-${version},base-${version},security-${version},process-${version},smartpoint-${version},tag-${version},group-${version},schedule-${version},mlcserver-${version},settings-${version},analytics-${version},user-${version},tenant-${version},ecomode-${version},batch-${version}" buildContent="all" runJUnitTests="${run.tests}" copyToComponentLib="${copy.to.clib}" />
+	</target>
+
+	<!-- Build interfaces and models only -->
+	<target name="buildInterfacesAndModels">
+		<buildBAComponents businessArea="mlc" componentNameList="endereco-${version},almoxarifado-${version},cliente-${version},empresa-${version},filial-${version},dicionario-${version},base-${version},security-${version},process-${version},schedule-${version},smartpoint-${version},tag-${version},group-${version},mlcserver-${version},settings-${version},analytics-${version},user-${version},tenant-${version},ecomode-${version},batch-${version}" buildContent="interfacesAndModels" runJUnitTests="${run.tests}" copyToComponentLib="${copy.to.clib}" />
+	</target>
+
+	<target name="javaDoc">
+		<buildBAJavaDoc businessArea="mlc" componentNameList="endereco-${version},almoxarifado-${version},cliente-${version},empresa-${version},filial-${version},dicionario-${version},process-${version},security-${version},schedule-${version},smartpoint-${version},tag-${version},group-${version},settings-${version},analytics-${version},user-${version},tenant-${version},ecomode-${version},batch-${version}" />
+	</target>
+
+</project>

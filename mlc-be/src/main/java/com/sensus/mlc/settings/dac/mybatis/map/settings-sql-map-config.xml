@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<settings>
+		<setting name="lazyLoadingEnabled" value="false" />
+	</settings>
+	
+	<typeAliases>
+		<typeAlias alias="Setting" type="com.sensus.mlc.settings.model.Setting" />
+		<typeAlias alias="Tenant" type="com.sensus.mlc.tenant.model.Tenant" />
+		<typeAlias alias="Map" type="java.util.Map" />
+		<typeAlias alias="ColumnFilterRequest" type="com.sensus.mlc.smartpoint.model.request.ColumnFilterRequest" />
+	</typeAliases>
+ 	
+ 	<mappers>
+  		<mapper resource="com/sensus/mlc/settings/dac/mybatis/map/settings.xml"/>
+  	</mappers>
+  	 
+</configuration>

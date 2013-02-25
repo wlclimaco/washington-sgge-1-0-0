@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Tag">
+
+	<resultMap id="listAllTagResults" type="Tag" >
+		<result property="id" column="tag_id" />
+		<result property="name" column="name" />
+		<result property="autoGroup" column="auto_group" />
+		<result property="totalSmartpoints" column="smartpoint_count" />
+		<result property="date" column="create_date" typeHandler="com.sensus.mlc.base.util.DateTimeZoneTypeHandler"/>
+	</resultMap>
+	
+	<resultMap id="listTagResults" type="Tag" >
+		<result property="id" column="tag_id" />
+		<result property="name" column="name" />
+		<result property="autoGroup" column="auto_group" />
+		<collection property="lights" column="tag_id" select="Tag.fetchLightsByTagId" />
+	</resultMap>
+	
+	<resultMap id="listTagSimpleResults" type="Tag" >
+		<result property="id" column="tag_id" />
+		<result property="name" column="name" />
+		<result property="autoGroup" column="auto_group" />
+	</resultMap>
+
+	<resultMap id="LightsTag" type="Light" >
+		<result property="id" column="light_id" />
+		<result property="smartPointId" column="smartpoint_id" />
+		<result property="rniId" column="rni_id" />
+	</resultMap>
+
+	<parameterMap type="Tag" id="fetchByIdParam">
+		<parameter property="id" jdbcType="INTEGER" javaType="int" />
+	</parameterMap>
+	
+	<parameterMap type="Light" id="fetchTagByIdParameters">
+		<parameter property="id" jdbcType="INTEGER" javaType="int" />
+	</parameterMap>
+		
+	<resultMap id="lightsResults" type="Light">
+		<result property="id" column="light_id" />
+	</resultMap>
+	
+	<sql id="allTagColumms">
+		tag_id,name,auto_group,create_date,smartpoint_count
+	</sql>
+	
+	<sql id="allCustomListTagColumns">
+		tag_id, name, auto_group
+	</sql>
+		
+	<sql id="allCustomLightsTagColumns">
+		light_id, smartpoint_id
+	</sql>
+
+	<!-- Insert Tag -->
+	<select id="insertTag" parameterType="Map" resultType="int">
+		SELECT ins_tag (#{tagname,jdbcType=VARCHAR},
+						#{autogroup,jdbcType=BOOLEAN},
+						#{address_related,jdbcType=BOOLEAN},
+						#{tenantId,jdbcType=INTEGER},
+						#{createuser,jdbcType=VARCHAR})
+	</select>	
+	
+	<!-- Insert Smartpoint To Tag -->
+	<select id="insertSmartPointToTag" parameterType="Map">
+		INSERT INTO smartpoint_tag( create_user
+					    ,tag_id
+					    ,smartpoint_id)
+		    SELECT #{createuser} AS create_user
+		           ,t.tag_id
+		           ,l.smartpoint_id
+		      FROM light l, tag t
+		     WHERE smartpoint_id IN (SELECT light.smartpoint_id <include refid="SmartPoint.fetchAllLightsConditions"/>)
+			<if test="unselectionPaginationIds != nul">
+		       AND l.smartpoint_id NOT IN 
+					<foreach item="item" index="index" collection="unselectionPaginationIds"
+						open="(" separator="," close=")">
+						#{item}
+					</foreach>
+			 </if>
+		       AND tag_id IN 
+         	 <foreach item="item" index="index" collection="tagId"
+				open="(" separator="," close=")">
+				 #{item}
+			 </foreach>
+	</select>
+		
+	<!-- Update Auto Group Tag -->
+	<select id="updateAutoGroupTag"  parameterType="Tag">
+		SELECT upd_auto_group_tag (#{id,jdbcType=INTEGER},#{autoGroup,jdbcType=BOOLEAN})
+	</select>
+	
+	<!-- Delete Smartpoint From Tag -->
+	<delete id="deleteSmartPointFromTag"  parameterType="Map">
+		
+		DELETE 
+		  FROM smartpoint_tag
+         WHERE tag_id IN 
+         	<foreach item="item" index="index" collection="tagId"
+				open="(" separator="," close=")">
+				#{item}
+			</foreach>
+           AND smartpoint_id IN (SELECT light.smartpoint_id <include refid="SmartPoint.fetchAllLightsConditions"/>);
+		
+	</delete>
+	
+	<!-- Delete Tag -->
+	<select id="deleteTag" parameterType="Tag">
+		SELECT del_tag (#{id})
+	</select>	
+	
+	<!-- Fetch All Tags -->
+	<select id="fetchAllTags" parameterType="Map" resultMap="listAllTagResults">
+		
+		SELECT  <include refid="allTagColumms"/>
+		  FROM
+		   (  select ROW_NUMBER() OVER(ORDER BY ${orderBy}) as RowNum
+		             ,t.* 
+		        from (SELECT tg.tag_id   
+		                    ,tg.name 
+		                    ,tg.auto_group
+		                    ,tg.create_date
+		                    ,( SELECT COALESCE(COUNT(lt.light_id),0)                
+					             FROM smartpoint_tag AS stg, light AS lt, tag AS t
+					            WHERE stg.smartpoint_id = lt.smartpoint_id 
+					              AND stg.tag_id = t.tag_id
+					              AND t.tenant_id = #{tenantId,jdbcType=INTEGER}
+					              AND t.tag_id = COALESCE(tg.tag_id, t.tag_id)) 
+              				AS smartpoint_count
+		                FROM tag AS tg
+		               WHERE tg.tenant_id = #{tenantId,jdbcType=INTEGER}
+		                 AND tg.tag_id = COALESCE(#{tagId},tg.tag_id)
+		             ) t
+		   ) as TAGPAGE
+		   <if test="pageSize > 0" >
+				WHERE RowNum BETWEEN #{startRow} + 1 AND (#{startRow,jdbcType=INTEGER} + #{pageSize,jdbcType=INTEGER})
+				OFFSET (  #{startPage,jdbcType=INTEGER} * #{pageSize,jdbcType=INTEGER} )
+				LIMIT #{pageSize}
+		   </if>
+	   
+	</select>
+	
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+		          FROM tag 
+		         WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Tag By Name -->
+	<select id="fetchTagByName" parameterType="TagRequest"  resultMap="listTagResults" >
+	    SELECT  <include refid="allCustomListTagColumns"/>
+	      FROM tag
+	     WHERE name = #{tag.name,jdbcType=VARCHAR}
+	       AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	         
+	</select>
+
+	<!-- Fetch Tag By Id -->
+	<select id="fetchTagById" parameterType="Tag" resultMap="listTagResults" >
+		SELECT <include refid="allCustomListTagColumns"/>
+		  FROM tag
+		 WHERE tag_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Tag By Id -->
+	<select id="fetchTagNameById" parameterType="Tag" resultMap="listTagSimpleResults" >
+		SELECT <include refid="allCustomListTagColumns"/>
+		  FROM tag
+		 WHERE tag_id = #{id,jdbcType=INTEGER};
+	</select>
+	
+	<!-- Fetch Lights By Tag Id -->
+	<select id="fetchLightsByTagId" resultMap="LightsTag" >
+		SELECT smartpoint.rni_id,
+			   light.light_id,
+		       smartpoint_tag.smartpoint_id
+		  FROM smartpoint,smartpoint_tag, light
+		 WHERE smartpoint_tag.tag_id = #{value,jdbcType=INTEGER}
+		   AND light.smartpoint_id = smartpoint.smartpoint_id
+		   AND smartpoint_tag.smartpoint_id = light.smartpoint_id;
+	</select>
+	
+	<!-- Fetch Tags By Light Id -->
+	<select id="fetchTagsByLightId" parameterType="Map"  resultMap="listTagResults" >
+	   SELECT tag.tag_id AS tag_id, tag.name AS name, tag.auto_group AS auto_group
+         FROM tag, smartpoint_tag, light 
+	    WHERE light.light_id = #{lightid} 
+	      AND smartpoint_tag.tag_id = tag.tag_id 
+	      AND smartpoint_tag.smartpoint_id = light.smartpoint_id 
+	      AND light.tenant_id = #{tenantId,jdbcType=INTEGER} AND tag.tenant_id = #{tenantId,jdbcType=INTEGER};
+	</select>
+	
+	<!-- Fetch Tags By Smartpoint Id -->
+	<select id="fetchTagsBySmartPointId" parameterType="LightRequest"  resultMap="listTagResults" >
+	   SELECT tag.tag_id AS tag_id, tag.name AS name, tag.auto_group AS auto_group
+         FROM tag, smartpoint_tag, light 
+	    WHERE light.light_id = #{firstLight.id,jdbcType=INTEGER}
+	      AND smartpoint_tag.tag_id = tag.tag_id 
+	      AND smartpoint_tag.smartpoint_id = light.smartpoint_id 
+	      AND light.tenant_id = #{tenant.id,jdbcType=INTEGER} AND tag.tenant_id = #{tenant.id,jdbcType=INTEGER};
+	</select>
+	
+
+	<!-- Fetch Lights Belong -->
+	<select id="fetchLightsBelongGroup" parameterType="Map" resultMap="lightsResults">
+		
+		SELECT l.light_id
+		  FROM smartpoint_tag AS smt_tag JOIN light l ON smt_tag.smartpoint_id = l.smartpoint_id
+		 WHERE smt_tag.smartpoint_id IN (SELECT light.smartpoint_id <include refid="SmartPoint.fetchAllLightsConditions"/>)
+		   AND smt_tag.tag_id = #{tagId}
+	</select>
+	
+</mapper>

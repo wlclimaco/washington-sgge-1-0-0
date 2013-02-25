@@ -1,0 +1,3110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SmartPoint">
+
+	<parameterMap type="Int" id="fetchEventScheduleByIdParameters">
+		<parameter property="id" jdbcType="INTEGER" javaType="int" />
+	</parameterMap>
+
+	<parameterMap type="Int" id="fetchOffsetScheduleByIdParameters">
+		<parameter property="id" jdbcType="INTEGER" javaType="int" />
+	</parameterMap>
+
+	<parameterMap type="Light" id="fetchLightPropertiesParameters">
+		<parameter property="id" jdbcType="INTEGER" javaType="int" />
+	</parameterMap>
+
+	<resultMap id="PropertiesResultLight" type="LightParameter">
+		<result property="id" jdbcType="INTEGER" column="property_id" />
+		<result property="labelKey" jdbcType="VARCHAR" column="property_name" />
+		<result property="value" jdbcType="VARCHAR" column="property_value" />
+		<result property="dataTypeEnumValue" jdbcType="INTEGER" column="data_type" />
+		<result property="propertyClass" jdbcType="INTEGER" column="property_class" />
+		<result property="createUser" jdbcType="VARCHAR" column="create_user" />
+		<result property="modifyUser" jdbcType="VARCHAR" column="modify_user" />
+		<result property="createDate" jdbcType="TIMESTAMP" column="create_date" typeHandler="com.sensus.mlc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="modifyDate" jdbcType="TIMESTAMP" column="modified_date" typeHandler="com.sensus.mlc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="propertyEnumValue" column="property_id" />
+	</resultMap>
+
+	<resultMap id="LightResultInsert" type="Light">
+		<result property="id" column="light_id" />
+		<result property="smartPointId" column="smartpoint_id" />
+		<result property="poleId" column="pole_id" />
+		<result property="createDate" jdbcType="TIMESTAMP" column="create_date" typeHandler="com.sensus.mlc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="lightTypeEnumValue" column="light_type" />
+		<result property="lightLocation.cityName" column="city_name" />
+		<result property="lightConfiguration.housingColor" column="housing_color" />
+		<result property="lightConfiguration.bulbSerialNumber" column="bulb_serial_number" />
+		<result property="lightConfiguration.upperAssemblySerial" column="upper_assembly_serial_number" />
+		<result property="lightConfiguration.lowerAssemblySerial" column="lower_assembly_serial_number" />
+		<result property="lightConfiguration.lampTypeWattageDimmable" column="lamp_type_wattage_dimmable" />
+		<result property="lightLocation.latitude" column="latitude" />
+		<result property="lightLocation.longitude" column="longitude" />
+		<result property="lightConfiguration.firmwareVersion" column="firmware_version" />
+		<result property="lightConfiguration.dateAdded" column="date_added" />
+		<result property="lightConfiguration.modelNumber" column="model_number" />
+		<result property="lightConfiguration.colorTemperature" column="color_temperature" />
+		<result property="lightConfiguration.inputaWattageRange" column="input_voltage_range" />
+		<result property="lightConfiguration.wattageRating" column="wattage_rating" />
+		<result property="lightConfiguration.ballastSerialNumber" column="ballast_serial_number" />
+		<collection property="currentStatusMessage" column="light_id" select="SmartPoint.fetchLastLightStatusMessage" />
+	</resultMap>
+
+	<resultMap id="LightResultComplete" type="Light">
+		<result property="id" column="light_id" />
+		<result property="smartPointId" column="smartpoint_id" />
+		<result property="rniId" column="RNI_id" />
+		<result property="lightStateEnumValue" column="light_status" />
+		<result property="createDate" jdbcType="TIMESTAMP" column="create_date" typeHandler="com.sensus.mlc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="protect" column="protected" />
+		<result property="lightIntensityEnumValue" column="intensity" />
+		<result property="lightBlinkEnumValue" column="blink_level" />
+		<result property="ecoMode" column="ecomode" />
+		<result property="ecoModeBaseline.replacedTypeValue" column="ecomode_replaced_type" />
+		<result property="ecoModeBaseline.replacedWattage" column="ecomode_replaced_wattage" />
+		<result property="overrideEnumValue" column="override" />
+		<result property="overridePerDate" jdbcType="TIMESTAMP" column="override_per_date" typeHandler="com.sensus.mlc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="lightLocation.timeZone" column="timezone" />
+		<collection property="parameters" column="light_id"
+			select="SmartPoint.fetchLightProperties" />
+		<collection property="currentStatusMessage" column="light_id"
+			select="SmartPoint.fetchLastLightStatusMessage" />
+		<collection property="lastMessageReceived" column="light_id"
+			select="SmartPoint.fetchLastMessageRecieved" />
+		<collection property="offsetSchedule" column="offset_schedule_id"
+			select="SmartPoint.fetchOffsetScheduleById" />
+		<collection property="eventSchedule" column="event_schedule_id"
+			select="SmartPoint.fetchEventScheduleById" />
+		<collection property="lightIntensitylevels" column="light_id"
+			select="SmartPoint.fetchLightIntensityPercentageByLight" />
+		<collection property="currentAlarmWarningMessageList" column="light_id"
+			select="SmartPoint.fetchCurrentAlarmStatusMessagesByLight" />
+		<collection property="groups" column="smartpoint_id"
+			select="SmartPoint.fetchGroupsByLightId" />
+		<collection property="tags" column="smartpoint_id"
+			select="SmartPoint.fetchTagsByLightId" />
+	</resultMap>
+
+	<resultMap id="GroupResult" type="Group">
+		<result property="id" column="grouping_id" />
+		<result property="name" column="name" />
+	</resultMap>
+
+	<resultMap id="TagResult" type="Tag">
+		<result property="id" column="tag_id" />
+		<result property="name" column="name" />
+	</resultMap>
+
+	<resultMap id="LightResultApplySchedule" type="Light">
+		<result property="id" column="light_id" />
+		<result property="smartPointId" column="smartpoint_id" />
+		<result property="rniId" column="RNI_id" />
+		<result property="protect" column="protected" />
+		<result property="lightIntensityEnumValue" column="intensity" />
+		<result property="lightBlinkEnumValue" column="blink_level" />
+		<result property="overrideEnumValue" column="override" />
+		<result property="overridePerDate" jdbcType="TIMESTAMP" column="override_per_date" typeHandler="com.sensus.mlc.base.util.DateTimeZoneTypeHandler"/>
+		<collection property="currentStatusMessage" column="light_id"
+			select="SmartPoint.fetchLastLightStatusMessage" />
+	</resultMap>
+
+	<resultMap id="StatusMessageResult" type="StatusMessage">
+		<result property="id" jdbcType="INTEGER" column="status_message_id" />
+		<result property="date" jdbcType="TIMESTAMP" column="message_date" typeHandler="com.sensus.mlc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="lightStatusEnumValue" jdbcType="INTEGER" column="status_messages_status_id" />
+		<result property="statusMessageCategoryEnumValue" jdbcType="INTEGER" column="status_message_type" />
+		<collection property="statusExceptions" column="status_message_id" select="SmartPoint.fetchStatusException" />
+	</resultMap>
+
+	<resultMap id="listOffsetScheduleResult" type="OffsetSchedule">
+		<result property="id" column="schedule_id" />
+		<result property="name" column="name" />
+		<result property="description" column="description" />
+		<result property="sunriseOffsetMinutes" column="sunrise_offset"/>
+		<result property="sunsetOffsetMinutes" column="sunset_offset"/>
+	</resultMap>
+
+	<resultMap id="listEventScheduleResult" type="EventSchedule">
+		<result property="id" column="schedule_id" />
+		<result property="name" column="name" />
+		<result property="description" column="description" />
+	</resultMap>
+
+	<resultMap id="StatusExceptionResult" type="StatusException">
+		<result property="id" jdbcType="INTEGER" column="status_subtype_id" />
+		<result property="labelKey" jdbcType="VARCHAR" column="label_Key" />
+		<result property="statusExceptionTypeEnumValue" jdbcType="INTEGER" column="status_subtype_id" />
+	</resultMap>
+
+	<resultMap id="LightResult" type="Light">
+		<result property="id" column="light_id" />
+		<result property="smartPointId" column="smartpoint_id" />
+		<result property="rniId" column="RNI_id" />
+		<result property="protect" column="protected" />
+		<result property="lightIntensityEnumValue" column="intensity" />
+		<result property="lightBlinkEnumValue" column="blink_level" />
+		<result property="ecoMode" column="ecomode" />
+		<association property="currentStatusMessage" javaType="StatusMessage">
+				<result property="id" jdbcType="INTEGER" column="status_message_id" />
+				<result property="date" jdbcType="TIMESTAMP" column="message_date" typeHandler="com.sensus.mlc.base.util.DateTimeZoneTypeHandler"/>
+				<result property="lightStatusEnumValue" jdbcType="INTEGER" column="status_id" />
+				<result property="statusMessageCategoryEnumValue" jdbcType="INTEGER" column="message_type" />
+				<result property="overrideEnumValue" column="override" />
+				<association property="statusExceptions" javaType="StatusException">
+					<result property="id" jdbcType="INTEGER" column="status_subtype_id" />
+					<result property="labelKey" jdbcType="VARCHAR" column="label_Key" />
+					<result property="statusExceptionTypeEnumValue" jdbcType="INTEGER" column="status_subtype_id" />
+				</association>
+		</association>
+		<collection property="parameters" column="light_id"
+			select="SmartPoint.fetchLightPropertiesClass1AndDimmable" />
+	</resultMap>
+
+	<resultMap id="LightResultToMap" type="Light">
+		<result property="id" column="light_id" />
+		<result property="smartPointId" column="smartpoint_id" />
+		<result property="rniId" column="RNI_id" />
+		<result property="lightLocation.latitude" column="latitude" />
+		<result property="lightLocation.longitude" column="longitude" />
+		<collection property="currentStatusMessage" column="light_id"
+			select="SmartPoint.fetchLastLightStatusMessage" />
+	</resultMap>
+
+	<resultMap id="LightResultProcess" type="Light">
+		<result property="id" column="light_id" />
+		<result property="smartPointId" column="smartpoint_id" />
+		<result property="rniId" column="RNI_id" />
+		<result property="protect" column="protected" />
+		<collection property="parameters" column="light_id"
+			select="SmartPoint.fetchLightPropertiesClass1" />
+		<collection property="currentStatusMessage" column="light_id"
+			select="SmartPoint.fetchLastLightStatusMessage" />
+	</resultMap>
+
+	<resultMap id="PropertyValidValuesResult" type="PropertyValidValue">
+		<result property="id" jdbcType="INTEGER" column="property_valid_value_id" />
+		<result property="value" jdbcType="VARCHAR" column="valid_value" />
+		<result property="propertyEnumValue" jdbcType="INTEGER" column="property_id" />
+	</resultMap>
+
+	<resultMap id="LightIntensityPercentageResult" type="SensusPartNumberConfiguration">
+		<result property="intensityLevel" column="intensity_level" />
+		<result property="percentage" column="percentage" />
+	</resultMap>
+
+	<resultMap id="LightingConfigurationResult" type="SensusPartNumberConfiguration">
+		<result property="intensityLevel" column="intensity_level" />
+		<result property="hardwareSetting" column="hardware_setting" />
+		<result property="currentScale" column="current_scale" />
+		<result property="fullOnRequired" column="full_on_required" />
+		<result property="dimOnDelay" column="dim_on_delay" />
+	</resultMap>
+
+	<resultMap id="CustomSearchResult" type="CustomSearch">
+		<result property="id" column="custom_search_id" />
+		<result property="name" column="custom_search_name" />
+		<result property="description" column="custom_search_description" />
+		<result property="createDate" jdbcType="TIMESTAMP" column="create_date" typeHandler="com.sensus.mlc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="modifyDate" jdbcType="TIMESTAMP" column="modified_date" typeHandler="com.sensus.mlc.base.util.DateTimeZoneTypeHandler"/>
+		<collection property="searchParameters" column="custom_search_id"
+			select="SmartPoint.fetchCustomSearchParameters" />
+	</resultMap>
+
+	<resultMap id="SearchParameterResult" type="SearchParameter">
+		<result property="id" column="custom_search_id" />
+		<result property="value" column="custom_search_property_value" />
+		<result property="name" column="custom_search_property_name" />
+		<result property="labelKey" column="label_key" />
+		<result property="propertyEnumValue" column="property_id" />
+		<result property="createUser" jdbcType="VARCHAR" column="create_user" />
+		<result property="createDate" jdbcType="TIMESTAMP" column="create_date" typeHandler="com.sensus.mlc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="modifyUser" jdbcType="VARCHAR" column="modified_user" />
+		<result property="modifyDate" jdbcType="TIMESTAMP" column="modified_date" typeHandler="com.sensus.mlc.base.util.DateTimeZoneTypeHandler"/>
+	</resultMap>
+
+	<resultMap id="LightingHistoryResult" type="LightHistory">
+		<result property="createDate" column="create_date"  typeHandler="com.sensus.mlc.base.util.DateTimeZoneTypeHandler" />
+		<result property="name" column="name" />
+		<result property="description" column="description" />
+		<result property="createUser" column="create_user" />
+		<result property="processId" column="id" />
+		<result property="statusMessageId" column="status_message_id" />
+		<result property="statusComplete" column="status" />
+		<result property="smartpointCount" column="smartpoint_count" />
+	</resultMap>
+
+	<resultMap id="lightWithIDOnly" type="Light">
+		<result property="id" column="light_id" />
+	</resultMap>
+
+	<resultMap id="LightResultToCSV" type="java.util.HashMap">
+		<result property="rni_id" column="rni_id"  javaType="java.lang.String" />
+		<result property="light_id" column="light_id"  javaType="java.lang.String" />
+		<result property="lamp_type" column="light_type"  javaType="java.lang.String" />
+		<result property="protected" column="protected"  javaType="java.lang.String" />
+		<result property="lightState" column="light_state"  javaType="java.lang.String" />
+		<result property="status" column="light_status"  javaType="java.lang.String" />
+		<result property="city_name" column="city"  javaType="java.lang.String" />
+		<result property="address" column="address" javaType="java.lang.String" />
+		<result property="latitude" column="latitude" javaType="java.lang.String" />
+		<result property="longitude" column="longitude" javaType="java.lang.String" />
+		<result property="last_message_received" column="last_message_received" javaType="java.lang.String" />
+		<result property="light_status" column="light_status" javaType="java.lang.String" />
+		<result property="light_voltage" column="light_voltage" javaType="java.lang.String" />
+		<result property="light_voltage_monthly" column="light_voltage_monthly" javaType="java.lang.String" />
+		<result property="light_current" column="light_current" javaType="java.lang.String" />
+		<result property="light_current_monthly" column="light_current_monthly" javaType="java.lang.String" />
+		<result property="light_consumption" column="light_consumption" javaType="java.lang.String" />
+		<result property="light_consumption_monthly" column="light_consumption_monthly" javaType="java.lang.String" />
+		<result property="light_status" column="light_status" javaType="java.lang.String" />
+		<result property="alarm" column="alarm" javaType="java.lang.String" />
+		<result property="warnings" column="warnings" javaType="java.lang.String" />
+		<result property="sunset_time" column="sunset_time" javaType="java.lang.String" />
+		<result property="sunrise_time" column="sunrise_time" javaType="java.lang.String" />
+		<result property="offset_schedule" column="offset_schedule_time" javaType="java.lang.String" />
+		<result property="event_schedule" column="event_schedule_time" javaType="java.lang.String" />
+		<result property="schedule_offset" column="schedule_offset" javaType="java.lang.String" />
+		<result property="schedule_event" column="schedule_event" javaType="java.lang.String" />
+		<result property="pole_id" column="pole_id" javaType="java.lang.String" />
+		<result property="light_type_detail" column="light_type_detail" javaType="java.lang.String" />
+		<result property="input_voltage" column="input_voltage" javaType="java.lang.String" />
+		<result property="color_temperature" column="color_temperature" javaType="java.lang.String" />
+		<result property="housing_color" column="housing_color" javaType="java.lang.String" />
+		<result property="manufacturer" column="manufacturer" javaType="java.lang.String" />
+		<result property="model_number" column="model_number" javaType="java.lang.String" />
+		<result property="serial_number" column="serial_number" javaType="java.lang.String" />
+		<result property="bulb_serial_number" column="bulb_serial_number" javaType="java.lang.String" />
+		<result property="light_driver_number" column="light_driver_number" javaType="java.lang.String" />
+		<result property="lower_assembly_serial_number" column="lower_assembly" javaType="java.lang.String" />
+		<result property="upper_assembly_serial_number" column="upper_assembly" javaType="java.lang.String" />
+		<result property="date_added" column="date_added" javaType="java.lang.String" />
+		<result property="firmware_version" column="firmware_version" javaType="java.lang.String" />
+		<result property="input_voltage_range" column="input_voltage_range" javaType="java.lang.String" />
+	</resultMap>
+
+	<resultMap id="lightHistoryHeaderResult" type="HashMap">
+    	<result property="alarms" column="alarms" javaType="Integer"/>
+    	<result property="warnings" column="warnings" javaType="Integer"/>
+    	<result property="power_failure" column="power_failure" javaType="Integer"/>
+ 	</resultMap>
+
+	<resultMap id="CurrentAlarmWarningMessageResult" type="CurrentAlarmWarningMessage">
+		<result property="lightId" column="light_id" />
+		<result property="statusMessageId" column="status_message_id" />
+		<result property="statusMessageTypeValue" column="status_message_type" />
+		<result property="statusMessageValue" column="status_messages_status_id" />
+		<result property="statusMessageSubtypeValue" column="status_messages_status_subtype_id" />
+		<result property="messageDate" column="message_date" typeHandler="com.sensus.mlc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="tenantId" column="tenant_id" />
+	</resultMap>
+
+	<resultMap id="LightIdResult" type="Light">
+		<result property="id" column="light_id" />
+	</resultMap>
+
+	<sql id="light_idColumn">
+		light_id
+	</sql>
+
+	<sql id="allCurrenteAlarmWarningMessageColumns">
+			status_message_id
+			, message_date
+			, status_messages_status_id
+		    , status_message_type
+	</sql>
+
+	<sql id="allLigthingConfigurationsByPartNumberColumns">
+	     intensity_level, hardware_setting, current_scale
+		 , full_on_required, dim_on_delay
+	</sql>
+
+	<sql id="allLightStatusMessageColumns">
+	     status_message_id, message_date
+		 , status_id as status_messages_status_id, message_type
+	</sql>
+
+	<sql id="allPropertyValidValueColumns">
+		 pvv.property_valid_value_id, pvv.valid_value, pvv.property_id
+	</sql>
+
+	<sql id="allCurrentAlarmStatusMessageColumns">
+		light_id, status_message_id, status_message_type, status_messages_status_id, status_messages_status_subtype_id, message_date, tenant_id
+	</sql>
+
+	<select id="insertLight" parameterType="light" resultType="Integer">
+        INSERT INTO light
+	          	 (create_user
+	          	  ,light_status
+				  ,smartpoint_id
+				  ,tenant_id
+				  ,protected
+				  ,intensity
+				  ,blink_level
+				  ,override
+				  ,override_per_date
+				  ,override_create_date
+				  ,light_state
+				  ,pole_id
+				  ,ecomode
+				  ,light_type)
+    	VALUES
+	            (#{userContext.userId,jdbcType=VARCHAR,mode=IN}
+	             ,#{firstLight.currentLightStatusEnumValue,jdbcType=INTEGER,mode=IN}
+	             ,#{firstLight.smartPointId,jdbcType=INTEGER,mode=IN}
+	             ,#{tenant.id,jdbcType=INTEGER,mode=IN}
+	             ,#{firstLight.protect,jdbcType=BOOLEAN,mode=IN}
+	             ,#{firstLight.lightIntensityEnumValue,jdbcType=INTEGER,mode=IN}
+	             ,#{firstLight.lightBlinkEnumValue,jdbcType=INTEGER,mode=IN}
+	             ,#{firstLight.overrideEnumValue,jdbcType=INTEGER,mode=IN}
+	             ,#{firstLight.overridePerDate,jdbcType=TIMESTAMP,mode=IN}
+	             ,#{firstLight.overrideCreateDate,jdbcType=TIMESTAMP,mode=IN}
+	             ,#{firstLight.lightStateEnumValue,jdbcType=INTEGER,mode=IN}
+	             ,#{firstLight.poleId,jdbcType=VARCHAR,mode=IN}
+	             ,#{firstLight.ecoMode,jdbcType=DOUBLE,mode=IN}
+	             ,#{firstLight.lightTypeEnumValue,jdbcType=INTEGER,mode=IN})
+	     RETURNING light.light_id
+    </select >
+
+	<select id="insertLightConfiguration" parameterType="light" resultType="java.lang.Void">
+		    INSERT INTO light_configuration(
+	         		light_id
+					,housing
+					,housing_color
+					,dimmable
+					,lamp_type_wattage_dimmable
+					,wattage_rating
+					,input_voltage_range
+					,color_temperature
+					,manufacturer
+					,firmware_version
+					,model_number
+					,lower_assembly_serial_number
+					,upper_assembly_serial_number
+					,frequency
+		        	,date_added
+					,bulb_serial_number
+					,ballast_serial_number
+	         		,create_user)
+		 VALUES
+				(#{firstLight.id,jdbcType=INTEGER,mode=IN}
+				,#{firstLight.lightConfiguration.housing,jdbcType=VARCHAR,mode=IN}
+				,#{firstLight.lightConfiguration.housingColor,jdbcType=VARCHAR,mode=IN}
+				,#{firstLight.lightConfiguration.dimmable,jdbcType=BOOLEAN,mode=IN}
+				,#{firstLight.lightConfiguration.lampTypeWattageDimmable,jdbcType=VARCHAR,mode=IN}
+				,#{firstLight.lightConfiguration.wattageRating,jdbcType=VARCHAR,mode=IN}
+				,#{firstLight.lightConfiguration.inputaWattageRange,jdbcType=VARCHAR,mode=IN}
+				,#{firstLight.lightConfiguration.colorTemperature,jdbcType=VARCHAR,mode=IN}
+				,#{firstLight.lightConfiguration.manufacturer,jdbcType=VARCHAR,mode=IN}
+				,#{firstLight.lightConfiguration.firmwareVersion,jdbcType=VARCHAR,mode=IN}
+				,#{firstLight.lightConfiguration.modelNumber,jdbcType=VARCHAR,mode=IN}
+				,#{firstLight.lightConfiguration.lowerAssemblySerial,jdbcType=VARCHAR,mode=IN}
+				,#{firstLight.lightConfiguration.upperAssemblySerial,jdbcType=VARCHAR,mode=IN}
+				,#{firstLight.lightConfiguration.frequency,jdbcType=VARCHAR,mode=IN}
+				,#{firstLight.lightConfiguration.dateAdded,jdbcType=TIMESTAMP,mode=IN}
+				,#{firstLight.lightConfiguration.bulbSerialNumber,jdbcType=VARCHAR,mode=IN}
+				,#{firstLight.lightConfiguration.ballastSerialNumber,jdbcType=VARCHAR,mode=IN}
+				,#{userContext.userId,jdbcType=VARCHAR,mode=IN})
+    </select >
+
+	<select id="insertLightLocation" parameterType="light" resultType="java.lang.Void">
+		 INSERT INTO light_location(
+				light_id
+				,timezone
+                ,latitude
+                ,longitude
+                ,street_name
+                ,city_name
+                ,county_name
+                ,state_name
+                ,zip_code
+                ,create_user)
+	    VALUES
+		   	    (#{firstLight.id,jdbcType=INTEGER,mode=IN}
+		   	     ,#{firstLight.lightLocation.timeZone,jdbcType=VARCHAR,mode=IN}
+	             ,#{firstLight.lightLocation.latitude,jdbcType=DOUBLE,mode=IN}
+	             ,#{firstLight.lightLocation.longitude,jdbcType=DOUBLE,mode=IN}
+	             ,#{firstLight.lightLocation.streetName,jdbcType=VARCHAR,mode=IN}
+	             ,#{firstLight.lightLocation.cityName,jdbcType=VARCHAR,mode=IN}
+	             ,#{firstLight.lightLocation.countyName,jdbcType=VARCHAR,mode=IN}
+	             ,#{firstLight.lightLocation.stateName,jdbcType=VARCHAR,mode=IN}
+	             ,#{firstLight.lightLocation.zipCode,jdbcType=VARCHAR,mode=IN}
+	             ,#{userContext.userId,jdbcType=VARCHAR,mode=IN})
+    </select >
+
+	<select id="insertLightLastOperationalData" parameterType="light" resultType="java.lang.Void">
+		 INSERT INTO light_last_operational_data(
+					  light_id
+		              ,ac_voltage
+		              ,ac_voltage_min
+		              ,ac_voltage_min_date
+		              ,ac_voltage_max
+		              ,ac_voltage_max_date
+		              ,ac_current
+		              ,ac_current_min
+		              ,ac_current_min_date
+		              ,ac_current_max
+		              ,ac_current_max_date
+		              ,consumption
+		              ,consumption_min
+		              ,consumption_max
+		              ,create_user )
+		   VALUES
+		   	    (#{firstLight.id,jdbcType=INTEGER,mode=IN}
+		   	     ,#{firstLight.lightLastOperationalData.acVoltage,jdbcType=INTEGER,mode=IN}
+		            ,#{firstLight.lightLastOperationalData.acVoltageMin,jdbcType=INTEGER,mode=IN}
+		            ,#{firstLight.lightLastOperationalData.acVoltageMinDate,jdbcType=TIMESTAMP,mode=IN}
+		            ,#{firstLight.lightLastOperationalData.acVoltageMax,jdbcType=INTEGER,mode=IN}
+		            ,#{firstLight.lightLastOperationalData.acVoltageMaxDate,jdbcType=TIMESTAMP,mode=IN}
+		            ,#{firstLight.lightLastOperationalData.acCurrent,jdbcType=DOUBLE,mode=IN}
+		            ,#{firstLight.lightLastOperationalData.acCurrentMin,jdbcType=DOUBLE,mode=IN}
+		            ,#{firstLight.lightLastOperationalData.acCurrentMinDate,jdbcType=TIMESTAMP,mode=IN}
+		            ,#{firstLight.lightLastOperationalData.acCurrentMax,jdbcType=DOUBLE,mode=IN}
+		            ,#{firstLight.lightLastOperationalData.acCurrentMaxDate,jdbcType=TIMESTAMP,mode=IN}
+		            ,#{firstLight.lightLastOperationalData.consumption,jdbcType=DOUBLE,mode=IN}
+		            ,#{firstLight.lightLastOperationalData.consumptionMin,jdbcType=DOUBLE,mode=IN}
+		            ,#{firstLight.lightLastOperationalData.consumptionMax,jdbcType=DOUBLE,mode=IN}
+		            ,#{userContext.userId,jdbcType=VARCHAR,mode=IN})
+    </select >
+
+    <select id="insertLightSchedule" parameterType="light" resultType="java.lang.Void">
+		 INSERT INTO light_schedule(
+				light_id
+                ,sunrise_time
+                ,sunrise_offset
+                ,sunset_time
+                ,sunset_offset
+                ,create_user )
+	    VALUES
+		   	    (#{firstLight.id,jdbcType=INTEGER,mode=IN}
+		   	     ,#{firstLight.lightSchedule.sunriseTime,jdbcType=VARCHAR,mode=IN}
+	             ,#{firstLight.lightSchedule.sunriseOffset,jdbcType=INTEGER,mode=IN}
+	             ,#{firstLight.lightSchedule.sunsetTime,jdbcType=VARCHAR,mode=IN}
+	             ,#{firstLight.lightSchedule.sunsetOffset,jdbcType=INTEGER,mode=IN}
+	             ,#{userContext.userId,jdbcType=VARCHAR,mode=IN})
+    </select >
+
+    <select id="insertSmartPoint" parameterType="light" resultType="Integer" >
+    	 INSERT INTO smartpoint
+	           (rni_id
+	           ,smartpoint_type
+	           ,tenant_id
+	           ,create_user)
+   		 VALUES
+	           (#{firstLight.rniId,jdbcType=INTEGER,mode=IN}
+	           ,1 -- Light
+	           , #{tenant.id,jdbcType=INTEGER,mode=IN}
+	           ,#{userContext.userId,jdbcType=VARCHAR,mode=IN})
+    	 RETURNING smartpoint.smartpoint_id
+    </select>
+
+	<select id="insertOperationalData" parameterType="Map">
+		INSERT INTO operational_data_value
+           (status_message_id
+           ,operational_data_type_id
+           ,value
+           ,create_user
+           ,create_date)
+        VALUES
+           (#{status_message_id}
+            ,#{operational_data_type_id}
+            ,#{value}
+            ,#{create_user}
+            ,CURRENT_TIMESTAMP);
+	</select>
+
+	<select id="insertStatusMessage" parameterType="Map" resultType="int">
+		INSERT INTO status_message
+	           (message_date
+	           ,light_id
+	           ,status_id
+	           ,create_user
+	           ,tenant_id
+	           ,message_type
+	           ,simple_notification)
+        VALUES
+	           (#{message_date}
+	           ,#{light_id}
+	           ,#{status_id}
+	           ,#{create_user}
+	           ,#{tenant_id}
+	           ,#{message_type}
+	           ,#{simple_notification})
+	   RETURNING status_message_id
+
+	</select>
+
+	<select id="insertStatusMessageSubtype" parameterType="Map">
+		INSERT INTO status_message_status_subtype
+	           (status_message_id
+	           ,status_subtype_id
+	           ,create_user)
+       VALUES
+	           (#{status_message_id}
+	           ,#{status_subtype_id}
+	           ,#{create_user});
+	</select>
+
+	<select id="insertCustomSearchProperty" parameterType="Map" resultType="int">
+		INSERT INTO custom_search_property (custom_search_id
+                                           ,property_id
+                                           ,create_user
+                                           ,custom_search_property_value
+                                           ,operator_id)
+    								VALUES (#{custom_search_id,jdbcType=INTEGER}
+            							   ,#{property_id,jdbcType=INTEGER}
+            							   ,#{create_user,jdbcType=VARCHAR}
+            							   ,#{property_value,jdbcType=VARCHAR}
+            							   ,#{operator_id,jdbcType=INTEGER})
+        RETURNING custom_search_property_id
+	</select>
+
+	<select id="insertCustomSearch" parameterType="Map" resultType="int">
+		INSERT INTO custom_search (custom_search_name
+                                  ,custom_search_description
+                                  ,create_user
+                                  ,user_id
+                                  ,tenant_id)
+                           VALUES (#{custom_search_name,jdbcType=VARCHAR}
+                                  ,#{custom_search_description,jdbcType=VARCHAR}
+                                  ,#{create_user,jdbcType=VARCHAR}
+                                  ,#{user_id,jdbcType=INTEGER}
+                                  ,#{tenant_id,jdbcType=INTEGER})
+        RETURNING custom_search_id
+	</select>
+
+	<select id="insertCurrentAlarmStatusMessage" parameterType="CurrentAlarmWarningMessage" resultType="java.lang.Void">
+		INSERT INTO current_alarm_warning_message(
+					light_id
+					,status_message_id
+					,status_message_type
+					,status_messages_status_id
+					,status_messages_status_subtype_id
+					,message_date
+					,tenant_id
+			    ) VALUES (
+					#{lightId}
+					<if test="statusMessageId != null">
+						,#{statusMessageId}
+					</if>
+					<if test="statusMessageId == null">
+						,null
+					</if>
+					,#{statusMessageTypeValue}
+					,#{statusMessageValue}
+					,#{statusMessageSubtypeValue}
+					,#{messageDate}
+					,#{tenantId}
+			   );
+	</select>
+	<select id="updateLight" parameterType="Map">
+		  UPDATE light
+		    <trim prefix="SET" prefixOverrides=",">
+		        <if test="modifyUser != null">
+			        modify_user = #{modifyUser,jdbcType=VARCHAR,mode=IN}
+			    </if>
+			    <if test="currentLightStatusEnumValue != null">
+					,light_status = #{currentLightStatusEnumValue,jdbcType=INTEGER,mode=IN}
+				</if>
+				<if test="smartPointId != null">
+					,smartpoint_id = #{smartPointId,jdbcType=INTEGER,mode=IN}
+				</if>
+				<if test="protect != null">
+					,protected = #{protect,jdbcType=BOOLEAN,mode=IN}
+				</if>
+				<if test="lightIntensityEnumValue != null">
+					,intensity = #{lightIntensityEnumValue,jdbcType=INTEGER,mode=IN}
+				</if>
+				<if test="lightBlinkEnum != null">
+					,blink_level = #{lightBlinkEnumValue,jdbcType=INTEGER,mode=IN}
+				</if>
+				<if test="overrideEnumValue != null">
+					,override = #{overrideEnumValue,jdbcType=INTEGER,mode=IN}
+				</if>
+				<if test="overridePerDate != null">
+					,override_per_date = #{overridePerDate,jdbcType=TIMESTAMP,mode=IN}
+				</if>
+				<if test="overrideCreateDate != null">
+					,override_create_date = #{overrideCreateDate,jdbcType=TIMESTAMP,mode=IN}
+				</if>
+				<if test="lightStateEnumValue != null">
+					,light_state = #{lightStateEnumValue,jdbcType=INTEGER,mode=IN}
+				</if>
+				<if test="poleId != null">
+					,pole_id = #{poleId,jdbcType=VARCHAR,mode=IN}
+				</if>
+				<if test="ecoMode != null">
+					,ecomode = #{ecoMode,jdbcType=DOUBLE,mode=IN}
+				</if>
+				<if test="lightTypeEnumValue != null">
+					,light_type = #{lightTypeEnumValue,jdbcType=INTEGER,mode=IN}
+				</if>
+			</trim>
+		  WHERE light_id = #{id,jdbcType=INTEGER,mode=IN}
+
+	</select>
+
+	<select id="updateLightSchedule" parameterType="Map">
+		UPDATE light_schedule
+	      <trim prefix="SET" prefixOverrides=",">
+	          <if test="lightSchedule.sunriseTime != null">
+		      	sunrise_time = #{lightSchedule.sunriseTime,jdbcType=VARCHAR,mode=IN}
+		      </if>
+		      <if test="lightSchedule.sunriseOffset != null">
+				 ,sunrise_offset = #{lightSchedule.sunriseOffset,jdbcType=INTEGER,mode=IN}
+			  </if>
+			  <if test="lightSchedule.sunsetTime != null">
+				 ,sunset_time = #{lightSchedule.sunsetTime,jdbcType=VARCHAR,mode=IN}
+			  </if>
+			  <if test="lightSchedule.sunsetOffset != null">
+				 ,sunset_offset = #{lightSchedule.sunsetOffset,jdbcType=INTEGER,mode=IN}
+			  </if>
+			  <if test="modifyUser != null">
+			     ,modified_user = #{modifyUser,jdbcType=VARCHAR,mode=IN}
+			  </if>
+		  </trim>
+		WHERE light_id = #{id,jdbcType=INTEGER,mode=IN}
+	</select>
+
+	<select id="updateLightLastOperationData" parameterType="Map">
+		UPDATE light_last_operational_data
+		  <trim prefix="SET" prefixOverrides=",">
+			   <if test="lightLastOperationalData.acVoltage != null">
+			      ac_voltage = #{lightLastOperationalData.acVoltage,jdbcType=INTEGER,mode=IN}
+			   </if>
+			   <if test="lightLastOperationalData.acVoltageMin != null">
+				  ,ac_voltage_min = #{lightLastOperationalData.acVoltageMin,jdbcType=INTEGER,mode=IN}
+			   </if>
+			   <if test="lightLastOperationalData.acVoltageMinDate != null">
+				  ,ac_voltage_min_date = #{lightLastOperationalData.acVoltageMinDate,jdbcType=TIMESTAMP,mode=IN}
+			   </if>
+			   <if test="lightLastOperationalData.acVoltageMax != null">
+				  ,ac_voltage_max = #{lightLastOperationalData.acVoltageMax,jdbcType=INTEGER,mode=IN}
+			   </if>
+			   <if test="lightLastOperationalData.acVoltageMaxDate != null">
+				  ,ac_voltage_max_date = #{lightLastOperationalData.acVoltageMaxDate,jdbcType=TIMESTAMP,mode=IN}
+			   </if>
+			   <if test="lightLastOperationalData.acCurrent != null">
+				  ,ac_current = #{lightLastOperationalData.acCurrent,jdbcType=DOUBLE,mode=IN}
+			   </if>
+			   <if test="lightLastOperationalData.acCurrentMin != null">
+				  ,ac_current_min = #{lightLastOperationalData.acCurrentMin,jdbcType=DOUBLE,mode=IN}
+			   </if>
+			   <if test="lightLastOperationalData.acCurrentMinDate != null">
+				  ,ac_current_min_date = #{lightLastOperationalData.acCurrentMinDate,jdbcType=TIMESTAMP,mode=IN}
+			   </if>
+			   <if test="lightLastOperationalData.acCurrentMax != null">
+				  ,ac_current_max = #{lightLastOperationalData.acCurrentMax,jdbcType=DOUBLE,mode=IN}
+			   </if>
+			   <if test="lightLastOperationalData.acCurrentMaxDate != null">
+				  ,ac_current_max_date = #{lightLastOperationalData.acCurrentMaxDate,jdbcType=TIMESTAMP,mode=IN}
+			   </if>
+			   <if test="lightLastOperationalData.consumption != null">
+				  ,consumption = #{lightLastOperationalData.consumption,jdbcType=DOUBLE,mode=IN}
+			   </if>
+			   <if test="lightLastOperationalData.consumptionMin != null">
+				  ,consumption_min = #{lightLastOperationalData.consumptionMin,jdbcType=DOUBLE,mode=IN}
+			   </if>
+			   <if test="lightLastOperationalData.consumptionMax != null">
+				  ,consumption_max = #{lightLastOperationalData.consumptionMax,jdbcType=DOUBLE,mode=IN}
+	           </if>
+	           <if test="modifyUser != null">
+			      ,modified_user = #{modifyUser,jdbcType=VARCHAR,mode=IN}
+			   </if>
+		  </trim>
+		WHERE light_id = #{id,jdbcType=INTEGER,mode=IN}
+	</select>
+
+	<select id="updateLightLocation" parameterType="Map">
+		UPDATE light_location
+		 <trim prefix="SET" prefixOverrides=",">
+			   <if test="lightLocation.timeZone != null">
+			  	  timezone = #{lightLocation.timeZone,jdbcType=VARCHAR,mode=IN}
+			   </if>
+			   <if test="lightLocation.latitude != null">
+				  ,latitude = #{lightLocation.latitude,jdbcType=DOUBLE,mode=IN}
+			   </if>
+			   <if test="lightLocation.longitude != null">
+			      ,longitude = #{lightLocation.longitude,jdbcType=DOUBLE,mode=IN}
+			   </if>
+			   <if test="lightLocation.streetName != null">
+			      ,street_name = #{lightLocation.streetName,jdbcType=VARCHAR,mode=IN}
+			   </if>
+			   <if test="lightLocation.cityName != null">
+				  ,city_name = #{lightLocation.cityName,jdbcType=VARCHAR,mode=IN}
+			   </if>
+			   <if test="lightLocation.countyName != null">
+				  ,county_name = #{lightLocation.countyName,jdbcType=VARCHAR,mode=IN}
+			   </if>
+			   <if test="lightLocation.stateName != null">
+				  ,state_name = #{lightLocation.stateName,jdbcType=VARCHAR,mode=IN}
+			   </if>
+			   <if test="lightLocation.zipCode != null">
+				  ,zip_code = #{lightLocation.zipCode,jdbcType=VARCHAR,mode=IN}
+			   </if>
+			   <if test="modifyUser != null">
+			     ,modified_user = #{modifyUser,jdbcType=VARCHAR,mode=IN}
+			   </if>
+		  </trim>
+		WHERE light_id = #{id,jdbcType=INTEGER,mode=IN}
+	</select>
+
+	<select id="updateLightConfiguration" parameterType="Map">
+		UPDATE light_configuration
+		   <trim prefix="SET" prefixOverrides=",">
+		   		<if test="lightConfiguration.housing != null">
+		   			housing = #{lightConfiguration.housing,jdbcType=VARCHAR,mode=IN}
+		   		</if>
+			   	<if test="lightConfiguration.housingColor != null">
+				    ,housing_color = #{lightConfiguration.housingColor,jdbcType=VARCHAR,mode=IN}
+				</if>
+				<if test="lightConfiguration.dimmable != null">
+					,dimmable = #{lightConfiguration.dimmable,jdbcType=BOOLEAN,mode=IN}
+				</if>
+				<if test="lightConfiguration.lampTypeWattageDimmable != null">
+					,lamp_type_wattage_dimmable = #{lightConfiguration.lampTypeWattageDimmable,jdbcType=VARCHAR,mode=IN}
+				</if>
+				<if test="lightConfiguration.wattageRating != null">
+					,wattage_rating = #{lightConfiguration.wattageRating,jdbcType=VARCHAR,mode=IN}
+				</if>
+				<if test="lightConfiguration.inputaWattageRange != null">
+					,input_voltage_range = #{lightConfiguration.inputaWattageRange,jdbcType=VARCHAR,mode=IN}
+				</if>
+				<if test="lightConfiguration.colorTemperature != null">
+					,color_temperature = #{lightConfiguration.colorTemperature,jdbcType=VARCHAR,mode=IN}
+				</if>
+				<if test="lightConfiguration.manufacturer != null">
+					,manufacturer = #{lightConfiguration.manufacturer,jdbcType=VARCHAR,mode=IN}
+				</if>
+				<if test="lightConfiguration.firmwareVersion != null">
+					,firmware_version = #{lightConfiguration.firmwareVersion,jdbcType=VARCHAR,mode=IN}
+				</if>
+				<if test="lightConfiguration.modelNumber != null">
+					,model_number = #{lightConfiguration.modelNumber,jdbcType=VARCHAR,mode=IN}
+				</if>
+				<if test="lightConfiguration.lowerAssemblySerial != null">
+					,lower_assembly_serial_number = #{lightConfiguration.lowerAssemblySerial,jdbcType=VARCHAR,mode=IN}
+				</if>
+				<if test="lightConfiguration.upperAssemblySerial != null">
+					,upper_assembly_serial_number = #{lightConfiguration.upperAssemblySerial,jdbcType=VARCHAR,mode=IN}
+				</if>
+				<if test="lightConfiguration.frequency != null">
+					,frequency = #{lightConfiguration.frequency,jdbcType=VARCHAR,mode=IN}
+				</if>
+				<if test="lightConfiguration.dateAdded != null">
+					,date_added = #{lightConfiguration.dateAdded,jdbcType=TIMESTAMP,mode=IN}
+				</if>
+				<if test="lightConfiguration.bulbSerialNumber != null">
+					,bulb_serial_number = #{lightConfiguration.bulbSerialNumber,jdbcType=VARCHAR,mode=IN}
+				</if>
+				<if test="lightConfiguration.ballastSerialNumber != null">
+					,ballast_serial_number = #{lightConfiguration.ballastSerialNumber,jdbcType=VARCHAR,mode=IN}
+				</if>
+				<if test="modifyUser != null">
+			        ,modified_user = #{modifyUser,jdbcType=VARCHAR,mode=IN}
+			   </if>
+		   </trim>
+
+		WHERE light_id = #{id,jdbcType=INTEGER,mode=IN}
+	</select>
+
+	<select id="updateAnalyticsAlarmsWarnings" resultType="int" parameterType="Map">
+		SELECT upd_analytics_alarms_warnings(#{status_message_id},#{status_subtype_id},#{create_user},#{status_type},#{operator})
+	</select>
+
+	<select id="updateAnalyticsAlarmsWarningsByLight" resultType="int" parameterType="Map">
+		SELECT upd_analytics_alarms_warnings_by_light(#{tenant_id},#{light_id},#{status_subtype_id}, #{create_user},#{status_type},#{operator})
+	</select>
+
+	<select id="updateLightState" parameterType="Map">
+		  UPDATE light
+		     SET light_status = #{light_state}
+                 ,intensity = #{intensity}
+                 ,modify_user = #{modify_user}
+                 ,blink_level = coalesce(#{blink_level},blink_level)
+                 ,override = coalesce(#{override},override)
+                 ,override_per_date = coalesce(#{override_per_date},override_per_date)
+                 ,override_create_date = coalesce(#{override_create_date}, override_create_date)
+		 WHERE light_id = (SELECT light.light_id
+		                     FROM light
+							 INNER JOIN smartpoint ON (light.smartpoint_id = smartpoint.smartpoint_id)
+					       WHERE smartpoint.rni_id = #{rni_light_id});
+
+	</select>
+
+	<update id="updateLightProtected" parameterType="Map">
+		UPDATE light
+        SET protected = #{protected,jdbcType=BOOLEAN}
+            , modify_user = #{modify_user}
+        WHERE light_id IN (SELECT light.light_id <include refid="fetchAllLightsConditions"/>)
+	</update>
+
+	<select id="updateLightPropertiesForCommunicationFailure" parameterType="LightRequest" resultType="java.lang.Void">
+		UPDATE
+			light
+		SET
+			light_status = 2
+			,light_status_subtype = 8
+		WHERE light_id = #{firstLight.id}
+	</select>
+
+	<select id="deleteCustomSearch" parameterType="CustomSearch">
+		DELETE
+		  FROM custom_search cs
+    	 WHERE cs.custom_search_id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<select id="deleteLightFromAllTagScheduleGroup" parameterType="Map">
+	    DELETE FROM smartpoint_tag
+        WHERE smartpoint_id = (SELECT smartpoint_id FROM smartpoint WHERE rni_id = #{rni_light_id,jdbcType=INTEGER});
+
+    	DELETE FROM smartpoint_grouping
+    	WHERE smartpoint_id = (SELECT smartpoint_id FROM smartpoint WHERE rni_id = #{rni_light_id,jdbcType=INTEGER});
+
+	    DELETE FROM schedule_membership
+	    WHERE smartpoint_id = (SELECT smartpoint_id FROM smartpoint WHERE rni_id = #{rni_light_id,jdbcType=INTEGER});
+	</select>
+
+	<select id="deleteAddrTagsForLight" parameterType="int">
+		 DELETE
+		   FROM smartpoint_tag 	st
+		  WHERE st.smartpoint_id = (SELECT s.smartpoint_id
+									  FROM smartpoint s
+		                             WHERE s.rni_id = #{rni_light_id,jdbcType=INTEGER})
+		   AND tag_id IN (SELECT tag_id
+		                    FROM tag
+		                   WHERE address_related='Y');
+	</select>
+
+	<select id="deleteCurrentAlarmWarningMessagesByLightID" parameterType="int">
+		DELETE FROM current_alarm_warning_message WHERE light_id = #{value};
+	</select>
+
+	<update id="resetMinMax" parameterType="Map">
+		UPDATE light_last_operational_data
+		SET ac_current_min = (SELECT * FROM get_last_operational_data_value(light_id,2))
+    		,ac_current_max = (SELECT * FROM get_last_operational_data_value(light_id,2))
+		    ,modified_user = #{modify_user}
+		WHERE light_id IN (SELECT light.light_id <include refid="fetchAllLightsConditions"/>);
+
+		UPDATE light_last_operational_data
+		SET ac_voltage_min = (SELECT * FROM get_last_operational_data_value(light_id,3))
+    		,ac_voltage_max = (SELECT * FROM get_last_operational_data_value(light_id,3))
+		    ,modified_user = #{modify_user}
+		WHERE light_id IN (SELECT light.light_id <include refid="fetchAllLightsConditions"/>);
+	</update>
+
+	<select id="fetchCountStatusMessageSubtype" parameterType="Map" resultType="int">
+	  SELECT COUNT(1)
+		FROM status_message_status_subtype smss
+	  WHERE smss.status_message_id = #{status_message_id}
+	    AND smss.status_subtype_id = #{status_subtype_id}
+		AND smss.create_user = #{create_user}
+	</select>
+
+	<!-- fetchLightToInsert -->
+	<select id="fetchLightToInsert" parameterType="GuaranteeLightExistenceRequest" resultMap="LightResultInsert">
+		SELECT  l.light_id
+				,l.smartpoint_id
+				,l.pole_id
+				,l.create_date
+				,ll.city_name
+				,lc.housing_color
+				,lc.bulb_serial_number
+				,lc.upper_assembly_serial_number
+				,lc.lower_assembly_serial_number
+				,lc.lamp_type_wattage_dimmable
+				,lc.ballast_serial_number
+				,ll.latitude
+				,ll.longitude
+				,lc.firmware_version
+				,lc.date_added
+				,lc.model_number
+				,lc.color_temperature
+				,lc.input_voltage_range
+				,lc.wattage_rating
+				,l.light_type
+			   FROM light l
+			   LEFT JOIN light_location ll ON(ll.light_id = l.light_id)
+			   LEFT JOIN light_configuration lc ON(lc.light_id = l.light_id)
+			WHERE l.light_id = #{firstLight.id,jdbcType=INTEGER,mode=IN}
+			  AND l.smartpoint_id = #{firstLight.smartPointId,jdbcType=INTEGER,mode=IN}
+	</select>
+
+	<select id="fetchLigthingConfigurationsByPartNumber" parameterType="int" resultMap="LightingConfigurationResult">
+		SELECT
+		  <include refid="allLigthingConfigurationsByPartNumberColumns"/>
+		  FROM get_light_configuration_by_part_number (#{value,jdbcType=INTEGER})
+	</select>
+
+	<select id="fetchLightIntensityPercentageByLight" parameterType="int" resultMap="LightIntensityPercentageResult">
+		SELECT MIN(intensity_level) AS intensity_level, percentage FROM  get_light_intensity_percentage_by_light(#{value,jdbcType=INTEGER}) GROUP BY percentage ORDER BY intensity_level
+	</select>
+
+	<select id="checkIfLightInTenant" parameterType="Map" resultType="int">
+		SELECT CASE WHEN (SELECT COUNT(1)
+						    FROM tenant <if test="allowedGroupIdList != null">, grouping </if>
+						   WHERE rni_code = #{rni_tenant_code}
+
+							<if test="allowedGroupIdList != null">
+								AND tenant.tenant_id = grouping.tenant_id
+								AND grouping.grouping_id IN
+								<foreach item="item" index="index" collection="allowedGroupIdList"
+									open="(" separator="," close=")">
+									#{item}
+								</foreach>
+							</if>
+
+						  ) &lt;= 0 THEN -3
+			    	WHEN (SELECT COUNT(1)
+			    		    FROM smartpoint <if test="allowedGroupIdList != null">, smartpoint_grouping </if>
+			    		    WHERE rni_id = #{rni_light_id}
+
+							<if test="allowedGroupIdList != null">
+								AND smartpoint.smartpoint_id = smartpoint_grouping.smartpoint_id
+								AND smartpoint_grouping.grouping_id IN
+								<foreach item="item" index="index" collection="allowedGroupIdList"
+									open="(" separator="," close=")">
+									#{item}
+								</foreach>
+							</if>
+
+			    	) &lt;= 0 THEN -2
+			    	WHEN (SELECT COUNT(1)
+			    	 	 	FROM smartpoint <if test="allowedGroupIdList != null">, smartpoint_grouping </if>
+			    	 	   WHERE rni_id = #{rni_light_id}
+
+							<if test="allowedGroupIdList != null">
+								AND smartpoint.smartpoint_id = smartpoint_grouping.smartpoint_id
+								AND smartpoint_grouping.grouping_id IN
+								<foreach item="item" index="index" collection="allowedGroupIdList"
+									open="(" separator="," close=")">
+									#{item}
+								</foreach>
+							</if>
+
+			    	 	     AND tenant_id = (SELECT tenant_id
+			    	 	     					FROM tenant <if test="allowedGroupIdList != null">, grouping </if>
+			    	 	     				   WHERE rni_code = #{rni_tenant_code}
+
+												<if test="allowedGroupIdList != null">
+													AND tenant.tenant_id = grouping.tenant_id
+													AND grouping.grouping_id IN
+													<foreach item="item" index="index" collection="allowedGroupIdList"
+														open="(" separator="," close=")">
+														#{item}
+													</foreach>
+												</if>
+
+			    	 	     				  )
+				  	) &lt;= 0 THEN -1
+			    	ELSE 0
+				END;
+	</select>
+
+	<select id="fetchLightPropertiesClass1" resultMap="PropertiesResultLight">
+	    SELECT p1.property_id AS property_id
+	          ,p1.label_key AS label_key
+	          ,p2.property_value AS property_value
+	          ,p2.modify_user AS modify_user
+	          ,p2.modified_date AS modified_date
+	          ,p2.create_user AS create_user
+	          ,p2.create_date AS create_date
+	          ,p1.data_type AS data_type
+	          ,p1.property_name AS property_name
+	          ,p1.property_class AS property_class
+	     FROM property p1,
+	          light_property p2
+	    WHERE p1.property_class = 1
+	      AND p2.light_id = #{value}
+	      AND p1.property_id = p2.property_id
+	</select>
+
+	<select id="fetchLightPropertiesClass1AndDimmable" resultMap="PropertiesResultLight">
+	    SELECT p1.property_id AS property_id
+	          ,p1.label_key AS label_key
+	          ,p2.property_value AS property_value
+	          ,p2.modify_user AS modify_user
+	          ,p2.modified_date AS modified_date
+	          ,p2.create_user AS create_user
+	          ,p2.create_date AS create_date
+	          ,p1.data_type AS data_type
+	          ,p1.property_name AS property_name
+	          ,p1.property_class AS property_class
+	     FROM property p1,
+	          light_property p2
+	    WHERE (p1.property_class = 1 or p1.property_id = 55)
+	      AND p2.light_id = #{value}
+	      AND p1.property_id = p2.property_id
+	</select>
+
+	<select id="fetchLastLightStatusMessage" resultMap="StatusMessageResult">
+		 SELECT <include refid="allCurrenteAlarmWarningMessageColumns"/>
+		   FROM current_alarm_warning_message cm
+		  WHERE cm.light_id = #{light_id}
+		  ORDER BY cm.status_message_id DESC LIMIT 1
+	</select>
+
+	<select id="fetchLastMessageRecieved" resultMap="StatusMessageResult">
+	     SELECT s.status_message_id as status_message_id
+				,s.message_date as message_date
+           FROM status_message s
+          WHERE s.light_id = #{light_id}
+            AND (NOT EXISTS (SELECT 1 FROM status_message_status_subtype smss WHERE s.status_message_id = smss.status_message_id AND smss.status_subtype_id = 8 AND s.status_id = 2))
+       ORDER BY s.message_date DESC LIMIT 1
+	</select>
+
+	<select id="fetchLightStatusMessage" resultMap="StatusMessageResult" parameterType="Map">
+		 SELECT <include refid="allLightStatusMessageColumns"/>
+		   FROM status_message s
+				<if test="allowedGroupIdList != null">
+					, light l, smartpoint_grouping smt_grp
+				</if>
+		  WHERE s.light_id = #{light_id}
+
+			<if test="allowedGroupIdList != null">
+			 	AND s.light_id = l.light_id
+			 	AND l.smartpoint_id = smt_grp.smartpoint_id
+			 	AND smt_grp.grouping_id IN
+				<foreach item="item" index="index" collection="allowedGroupIdList"
+				  		open="(" separator="," close=")">
+				   #{item}
+				</foreach>
+			</if>
+
+		  ORDER BY s.status_message_id DESC LIMIT 1
+	</select>
+
+	<select id="fetchLightStatusMessageById" resultMap="StatusMessageResult" parameterType="Map">
+		 SELECT <include refid="allLightStatusMessageColumns"/>
+		   FROM status_message
+		  WHERE status_message_id = #{status_message_id}
+	</select>
+
+	<select id="fetchLightStatusMessageDetail" parameterType="int" resultMap="StatusMessageResult" >
+       SELECT sm.status_message_id,
+				  (SELECT	s.message_date
+		           FROM status_message s
+				  WHERE s.light_id = #{light_id,jdbcType=INTEGER,mode=IN}
+				   AND(NOT EXISTS(SELECT smss.status_message_id FROM status_message_status_subtype smss where s.status_message_id  = smss.status_message_id AND smss.status_subtype_id = 8 ) )
+				   ORDER BY s.status_message_id DESC LIMIT 1)
+             AS message_date
+			 ,sM.status_id
+	         ,sm.message_type
+	    FROM status_message sm
+	   WHERE sm.light_id = #{light_id,jdbcType=INTEGER,mode=IN}
+       ORDER BY sm.status_message_id DESC LIMIT 1 ;
+    </select >
+
+	<select id="fetchLightStatusMessageType" resultMap="StatusMessageResult">
+		SELECT <include refid="allLightStatusMessageColumns"/>
+		FROM  status_message s
+
+          <if test="allowedGroupIdList != null">
+          	, light l, smartpoint_grouping smt_grp
+          </if>
+
+		WHERE s.light_id = #{light_id}
+		  AND s.message_type = #{message_type_id}
+
+	  <if test="allowedGroupIdList != null">
+		  AND l.light_id = s.light_id
+		  AND l.smartpoint_id = smt_grp.smartpoint_id
+		  AND smt_grp.grouping_id IN
+		  <foreach  item="item" index="index" collection="allowedGroupIdList"
+			  		open="(" separator="," close=")">
+		 	  #{item}
+		  </foreach>
+	  </if>
+
+		ORDER BY s.message_date DESC LIMIT 1;
+	</select>
+
+	<select id="fetchLightLocationById" resultMap="LightIdResult"  parameterType="LightRequest">
+		SELECT light_id
+		  FROM light_location
+	    WHERE light_id = #{firstLight.id}
+	</select>
+
+	<select id="fetchLightLastOperationDataById" resultMap="LightIdResult"  parameterType="LightRequest">
+		SELECT light_id
+		  FROM light_last_operational_data
+		WHERE light_id = #{firstLight.id}
+	</select>
+
+	<select id="fetchLightScheduleById" resultMap="LightIdResult"  parameterType="LightRequest">
+		SELECT light_id
+		  FROM light_schedule
+	    WHERE light_id = #{firstLight.id}
+	</select>
+
+	<select id="fetchLightConfigurationById" resultMap="LightIdResult"  parameterType="LightRequest">
+		SELECT light_id
+		  FROM light_configuration
+		WHERE light_id = #{firstLight.id}
+	</select>
+
+ 	<select id="fetchLightById" resultMap="LightResultComplete"  parameterType="LightRequest">
+	    SELECT light.light_id AS light_id
+	           ,light.smartpoint_id AS smartpoint_id
+	           ,light.light_status AS light_status
+	           ,light.protected AS protected
+	           ,smartpoint.rni_id AS rni_id
+	           ,light.create_date AS create_date
+	           ,light.blink_level
+	           ,light.ecomode
+	           ,light.ecomode_replaced_type
+	           ,light.ecomode_replaced_wattage
+			   ,CASE WHEN light.override = 1
+					       AND ((light.override_create_date &lt; CAST(CAST(NOW() AS DATE)|| ' '|| (sch.sunrise_time::TIME + ((sch.sunrise_offset || 'minute')::interval)) AS TIMESTAMP)
+						     AND NOW() &gt; CAST(CAST(NOW() AS DATE)|| ' '|| (sch.sunrise_time::TIME + ((sch.sunrise_offset || 'minute')::interval)) AS TIMESTAMP))
+
+						    OR (light.override_create_date &lt; CAST(CAST(NOW() AS DATE)|| ' '|| (sch.sunset_time::TIME + ((sch.sunset_offset || 'minute')::interval)) AS TIMESTAMP)
+							AND NOW() &gt; CAST(CAST(NOW() AS DATE)|| ' '|| (sch.sunset_time::TIME + ((sch.sunset_offset || 'minute')::interval)) AS TIMESTAMP))
+						    OR (SELECT MIN(event_time) FROM schedule_event se
+								INNER JOIN schedule_membership sm on (sm.schedule_id = se.schedule_id)
+								WHERE sm.smartpoint_id = light.light_id)  BETWEEN light.override_create_date AND NOW()
+						   ) THEN 0
+					     WHEN light.override = 3 AND light.override_per_date &lt; NOW() THEN 0
+				    ELSE
+					     light.override
+			END AS override
+           ,light.override_per_date
+           ,(SELECT schedule_membership.schedule_id AS offset_schedule_id
+	         FROM schedule_membership, schedule
+	         WHERE schedule_membership.smartpoint_id = light.smartpoint_id
+	         AND schedule_membership.schedule_id = schedule.schedule_id
+	         AND  (schedule_type = 1 OR schedule_type = 3))
+              AS offset_schedule_id
+              ,(SELECT schedule_membership.schedule_id AS event_schedule_id
+	         FROM schedule_membership, schedule
+	         WHERE schedule_membership.smartpoint_id = light.smartpoint_id
+	         AND schedule_membership.schedule_id = schedule.schedule_id
+	         AND  (schedule_type = 2 OR schedule_type = 4)) AS
+              event_schedule_id
+              ,light.intensity AS intensity
+	    FROM   light
+	    INNER JOIN smartpoint ON (light.smartpoint_id = smartpoint.smartpoint_id)
+	    LEFT JOIN light_schedule sch on (light.light_id = sch.light_id)
+
+          <if test="allowedGroupIdList != null">
+          	INNER JOIN smartpoint_grouping smt_grp ON (smartpoint.smartpoint_id = smt_grp.smartpoint_id)
+          </if>
+
+	    WHERE  light.light_id = #{firstLight.id}
+	      AND  light.tenant_id = #{userContext.tenant.id}
+
+	  <if test="allowedGroupIdList != null">
+		  AND smt_grp.grouping_id IN
+		  <foreach  item="item" index="index" collection="allowedGroupIdList"
+			  		open="(" separator="," close=")">
+		 	  #{item}
+		  </foreach>
+	  </if>
+	</select>
+
+	<select id="fetchOffsetScheduleById" parameterMap="fetchOffsetScheduleByIdParameters" resultMap="listOffsetScheduleResult">
+		SELECT s.schedule_id
+		      ,(SELECT COUNT(1) FROM schedule_membership WHERE schedule_membership.schedule_id = s.schedule_id) AS smartpoint_count
+		      ,s.name
+		      ,s.description
+		      ,s.create_date
+		      ,s.schedule_type
+		      ,s.sunrise_offset
+		      ,s.sunset_offset
+		      ,s.intensity
+		 FROM schedule s
+		WHERE s.schedule_id = (?)
+	</select>
+
+	<select id="fetchEventScheduleById" parameterMap="fetchEventScheduleByIdParameters" resultMap="listEventScheduleResult">
+		SELECT s.schedule_id
+		      ,(SELECT COUNT(1) FROM schedule_membership WHERE schedule_membership.schedule_id = s.schedule_id) AS smartpoint_count
+		      ,s.name
+		      ,s.description
+		      ,s.create_date
+		      ,s.schedule_type
+		      ,s.sunrise_offset
+		      ,s.sunset_offset
+		      ,s.intensity
+		 FROM schedule s
+		WHERE s.schedule_id = (?)
+	</select>
+
+	<select id="fetchStatusException" resultMap="StatusExceptionResult">
+		SELECT  s1.status_subtype_id
+				,s1.label_key
+				,s1.status_id
+		  FROM  status_subtype s1
+			   ,status_message_status_subtype s2
+			   ,status_message s3
+		 WHERE  s3.status_message_id = #{value}
+           AND  s1.status_subtype_id = s2.status_subtype_id
+		   AND  s2.status_message_id = s3.status_message_id
+	</select>
+
+	<!-- fetchSmartpointIdByRniId -->
+	<select id="fetchSmartpointIdByRniId" resultType="int">
+		SELECT smartpoint_id FROM smartpoint WHERE rni_id = #{value}
+	</select>
+
+	<!-- fetchLightByRniId -->
+	<select id="fetchLightByRniId" resultMap="LightResultComplete" parameterType="LightRequest">
+		SELECT light.light_id AS light_id
+	           ,light.smartpoint_id AS smartpoint_id
+	           ,light.light_status AS light_status
+	           ,light.protected AS protected
+	           ,smartpoint.rni_id AS rni_id
+	           ,light.create_date AS create_date
+	           ,light.blink_level
+	           ,light.ecomode
+	           ,light.ecomode_replaced_type
+	           ,light.ecomode_replaced_wattage
+	           ,light.blink_level
+               ,CASE WHEN light.override = 1
+					       AND ((light.override_create_date &lt; CAST(CAST(NOW() AS DATE)|| ' '|| (sch.sunrise_time::TIME + ((sch.sunrise_offset || 'minute')::interval)) AS TIMESTAMP)
+						     AND NOW() &gt; CAST(CAST(NOW() AS DATE)|| ' '|| (sch.sunrise_time::TIME + ((sch.sunrise_offset || 'minute')::interval)) AS TIMESTAMP))
+
+						    OR (light.override_create_date &lt; CAST(CAST(NOW() AS DATE)|| ' '|| (sch.sunset_time::TIME + ((sch.sunset_offset || 'minute')::interval)) AS TIMESTAMP)
+							AND NOW() &gt; CAST(CAST(NOW() AS DATE)|| ' '|| (sch.sunset_time::TIME + ((sch.sunset_offset || 'minute')::interval)) AS TIMESTAMP))
+						    OR (SELECT MIN(event_time) FROM schedule_event se
+								INNER JOIN schedule_membership sm on (sm.schedule_id = se.schedule_id)
+								WHERE sm.smartpoint_id = light.light_id)  BETWEEN light.override_create_date AND NOW()
+						   ) THEN 0
+					     WHEN light.override = 3 AND light.override_per_date &lt; NOW() THEN 0
+				    ELSE
+					     light.override
+              END AS override
+             ,light.override_per_date
+             ,(SELECT schedule_membership.schedule_id AS offset_schedule_id
+	             FROM schedule_membership, schedule
+	           WHERE schedule_membership.smartpoint_id = light.smartpoint_id
+	             AND schedule_membership.schedule_id = schedule.schedule_id
+	             AND  (schedule_type = 1 OR schedule_type = 3)) AS offset_schedule_id
+             ,(SELECT schedule_membership.schedule_id AS event_schedule_id
+	             FROM schedule_membership, schedule
+	           WHERE schedule_membership.smartpoint_id = light.smartpoint_id
+	             AND schedule_membership.schedule_id = schedule.schedule_id
+	             AND  (schedule_type = 2 OR schedule_type = 4)) AS event_schedule_id
+             ,light.intensity AS intensity
+		 FROM light
+		 LEFT JOIN light_schedule sch ON (light.light_id = sch.light_id)
+		 INNER JOIN smartpoint ON (light.smartpoint_id = smartpoint.smartpoint_id)
+
+		  <if test="allowedGroupIdList != null">
+          	INNER JOIN smartpoint_grouping smt_grp ON smt_grp.smartpoint_id = smartpoint.smartpoint_id
+          </if>
+
+		 WHERE smartpoint.rni_id = #{firstLight.rniId}
+
+	  <if test="allowedGroupIdList != null">
+		  AND smt_grp.grouping_id IN
+		  <foreach  item="item" index="index" collection="allowedGroupIdList"
+			  		open="(" separator="," close=")">
+		 	  #{item}
+		  </foreach>
+	  </if>
+
+	</select>
+
+	<select id="fetchAllLightsByProcess" resultMap="LightResultProcess">
+		SELECT l.light_id as light_id
+		      ,s.smartpoint_id as smartpoint_id
+		      ,s.RNI_id as RNI_id
+		      ,l.protected as protected
+		 FROM light AS l
+		      ,smartpoint AS s
+		      ,smartpoint_process AS sp
+
+          <if test="allowedGroupIdList != null">
+          	  ,smartpoint_grouping smt_grp
+          </if>
+
+		WHERE sp.process_id    = #{process_id}
+		  AND s.tenant_id      = #{tenant_id}
+		  AND sp.smartpoint_id = s.smartpoint_id
+		  AND s.smartpoint_id  = l.smartpoint_id
+		  AND s.tenant_id      = l.tenant_id
+	  <if test="failure_id == null">
+		  AND sp.failure_id is null
+	  </if>
+	  <if test="failure_id == 0">
+		  AND sp.failure_id is not null
+	  </if>
+	  <if test="failure_id > 0">
+		  AND sp.failure_id = #{failure_id}
+	  </if>
+
+	  <if test="allowedGroupIdList != null">
+		  AND s.smartpoint_id = smt_grp.smartpoint_id
+		  AND smt_grp.grouping_id IN
+		  <foreach  item="item" index="index" collection="allowedGroupIdList"
+			  		open="(" separator="," close=")">
+		 	  #{item}
+		  </foreach>
+	  </if>
+	</select>
+
+	<!-- fetchLightPropertyByRniId -->
+	<select id="fetchLightPropertyByRniId" parameterType="Map" resultMap="PropertiesResultLight">
+		SELECT p1.property_id
+			  ,p1.label_key
+			  ,p2.property_value
+			  ,p2.modify_user
+			  ,p2.modified_date
+			  ,p2.create_user
+			  ,p2.create_date
+			  ,p1.data_type
+			  ,p1.property_name
+			  ,p1.property_class
+		 FROM  property p1,
+		       light_property p2
+
+		<if test="allowedGroupIdList != null">
+          	 ,light l, smartpoint_grouping smt_grp
+        </if>
+
+		 WHERE p1.property_id = p2.property_id
+		   AND p2.light_id = (SELECT light.light_id
+		                        FROM light INNER JOIN smartpoint
+						          ON light.smartpoint_id = smartpoint.smartpoint_id
+					           WHERE smartpoint.rni_id = #{rni_light_id})
+		   AND p1.property_id = #{property_id}
+
+	  <if test="allowedGroupIdList != null">
+		  AND l.light_id = p2.light_id
+		  AND l.smartpoint_id = smt_grp.smartpoint_id
+		  AND smt_grp.grouping_id IN
+		  <foreach  item="item" index="index" collection="allowedGroupIdList"
+			  		open="(" separator="," close=")">
+		 	  #{item}
+		  </foreach>
+	  </if>
+	</select>
+
+	<select id="fetchLightProperties" resultMap="PropertiesResultLight">
+		SELECT p1.property_id
+			  ,p1.label_key
+			  ,p2.property_value
+			  ,p2.modify_user
+			  ,p2.modified_date
+			  ,p2.create_user
+			  ,p2.create_date
+			  ,p1.data_type
+			  ,p1.property_name
+			  ,p1.property_class
+		 FROM  property p1,
+			   light_property p2
+		 WHERE p1.property_id = p2.property_id
+		   AND p2.light_id = #{id}
+	</select>
+
+	<select id="countCustomSearchByName" parameterType="Map" resultType="int">
+		SELECT COUNT(1)
+		  FROM custom_search cs
+			<if test="allowedGroupIdList != null">
+          	   INNER JOIN tenant t ON cs.tenant_id = t.tenant_id
+          	   INNER JOIN grouping grp ON t.tenant_id = grp.tenant_id
+           </if>
+		 WHERE UPPER(cs.custom_search_name) = UPPER(#{custom_search_name,jdbcType=VARCHAR})
+		   AND cs.user_id = #{user_id,jdbcType=INTEGER}
+		   AND cs.tenant_id = #{tenant_id,jdbcType=INTEGER}
+	 <if test="allowedGroupIdList != null">
+		   AND grp.grouping_id IN
+		   <foreach  item="item" index="index" collection="allowedGroupIdList"
+				  open="(" separator="," close=")">
+				#{item}
+		   </foreach>
+	 </if>
+
+	</select>
+
+	<select id="fetchCustomSearchParameters" resultMap="SearchParameterResult">
+		 SELECT csp.custom_search_id
+				,p.property_id
+				,p.property_name
+				,p.label_key
+				,csp.create_user
+				,csp.create_date
+				,csp.modified_user
+				,csp.modified_date
+				,csp.custom_search_property_value
+				,CASE csp.property_id WHEN 21 THEN g.name
+									  WHEN 42 THEN s.name
+									  WHEN 43 THEN s.name
+									  WHEN 25 THEN t.name
+									  WHEN 96 THEN ss.label_key
+									  WHEN 97 THEN ss.label_key
+									  END custom_search_property_name
+				,csp.operator_id
+		   FROM property p
+				,custom_search_property csp
+				LEFT OUTER JOIN grouping g ON g.grouping_id = CAST(csp.custom_search_property_value AS integer) AND csp.property_id = 21
+				LEFT OUTER JOIN schedule s ON s.schedule_id = CAST(csp.custom_search_property_value AS integer) AND (csp.property_id = 42 OR csp.property_id = 43)
+				LEFT OUTER JOIN tag t ON t.tag_id = CAST(csp.custom_search_property_value AS integer) AND csp.property_id = 25
+				LEFT OUTER JOIN property_valid_value pvv ON pvv.property_id = csp.property_id AND pvv.property_valid_value_id = CAST(csp.custom_search_property_value AS integer)
+				LEFT OUTER JOIN status_subtype ss ON ss.status_subtype_id = CAST(csp.custom_search_property_value AS integer) AND csp.property_id IN (96,97)
+		  WHERE csp.custom_search_id = #{value,jdbcType=INTEGER}
+			AND (csp.property_id = 21
+			OR csp.property_id = 25
+			OR csp.property_id = 42
+			OR csp.property_id = 43
+			OR csp.property_id = 96
+			OR csp.property_id = 97)
+			AND csp.property_id = p.property_id
+				UNION ALL
+			SELECT csp.custom_search_id
+					,p.property_id
+					,p.property_name
+					,p.label_key
+					,csp.create_user
+					,csp.create_date
+					,csp.modified_user
+					,csp.modified_date
+					,csp.custom_search_property_value
+					,csp.custom_search_property_value custom_search_property_name
+					,csp.operator_id
+								FROM property p
+										,custom_search_property csp
+								WHERE csp.custom_search_id = #{value,jdbcType=INTEGER}
+
+			AND csp.property_id != 21
+			AND csp.property_id != 25
+			AND csp.property_id != 42
+			AND csp.property_id != 43
+			AND csp.property_id != 96
+			AND csp.property_id != 97
+			AND csp.property_id = p.property_id
+	</select>
+
+	<select id="locationHasChanged" parameterType="Map" resultType="boolean">
+		SELECT COALESCE (
+		   ( SELECT( (ABS(#{lat,jdbcType=DOUBLE}
+		       -
+		       (SELECT loc.latitude
+		       FROM light_location loc
+			   INNER JOIN light l ON (loc.light_id = l.light_id)
+			   INNER JOIN smartpoint s ON (l.smartpoint_id = s.smartpoint_id)
+			   <if test="allowedGroupIdList != null">
+			       INNER JOIN smartpoint_grouping smt_grp ON (l.smartpoint_id = smt_grp.smartpoint_id)
+			   </if>
+		       WHERE s.rni_id = #{rni_light_id,jdbcType=INTEGER}
+			   <if test="allowedGroupIdList != null">
+			       AND smt_grp.grouping_id IN
+			       <foreach  item="item" index="index" collection="allowedGroupIdList"
+				   open="(" separator="," close=")">
+				   #{item}
+			       </foreach>
+			   </if>
+		       )
+		       ) > 0.000001 )
+		   AND
+		       (
+			   ABS(#{lng,jdbcType=DOUBLE}
+			   -
+			   (SELECT loc.longitude
+			   FROM light_location loc
+			       INNER JOIN light l ON (loc.light_id = l.light_id)
+			       INNER JOIN smartpoint s ON (l.smartpoint_id = s.smartpoint_id)
+			       <if test="allowedGroupIdList != null">
+				   INNER JOIN smartpoint_grouping smt_grp ON (l.smartpoint_id = smt_grp.smartpoint_id)
+			       </if>
+			   WHERE s.rni_id = #{rni_light_id,jdbcType=INTEGER}
+			       <if test="allowedGroupIdList != null">
+				   AND smt_grp.grouping_id IN
+				       <foreach  item="item" index="index" collection="allowedGroupIdList"
+				       open="(" separator="," close=")">
+				       #{item}
+				      </foreach>
+			       </if>
+			   )
+			   ) > 0.000001
+		       )
+		       )
+		   ),false)
+	</select>
+
+ 	<select id="fetchLightHistoryHeader" parameterType="Map" resultMap="lightHistoryHeaderResult">
+		SELECT  (SELECT COUNT(1)
+				   FROM status_message sm
+			          <if test="allowedGroupIdList != null">
+			          	INNER JOIN light l ON sm.light_id = l.light_id
+			          	INNER JOIN smartpoint_grouping smt_grp ON l.smartpoint_id = smt_grp.smartpoint_id
+			          </if>
+				  WHERE sm.light_id = #{firstLight.id}
+					AND sm.status_id = 1
+			    <if test="allowedGroupIdList != null">
+				    AND smt_grp.grouping_id IN
+				    <foreach  item="item" index="index" collection="allowedGroupIdList"
+					  		  open="(" separator="," close=")">
+				 	   #{item}
+				    </foreach>
+			    </if>
+					)
+				AS alarms
+			   ,(SELECT COUNT(1)
+			       FROM status_message sm
+			          <if test="allowedGroupIdList != null">
+			          	INNER JOIN light l ON sm.light_id = l.light_id
+			          	INNER JOIN smartpoint_grouping smt_grp ON l.smartpoint_id = smt_grp.smartpoint_id
+			          </if>
+				  WHERE sm.light_id = #{firstLight.id}
+					AND sm.status_id = 2
+			    <if test="allowedGroupIdList != null">
+				    AND smt_grp.grouping_id IN
+				    <foreach  item="item" index="index" collection="allowedGroupIdList"
+					  		  open="(" separator="," close=")">
+				 	   #{item}
+				    </foreach>
+			    </if>
+					)
+				AS warnings
+			   ,(SELECT COUNT(1)
+			       FROM status_message_status_subtype smss
+						,status_message sm
+			          <if test="allowedGroupIdList != null">
+			          	,light l, smartpoint_grouping smt_grp
+			          </if>
+				  WHERE sm.light_id = #{firstLight.id}
+					AND sm.status_id = 1
+					AND smss.status_message_id = sm.status_message_id
+					AND smss.status_subtype_id = 2
+					AND smss.status_message_id = sm.status_message_id
+			    <if test="allowedGroupIdList != null">
+				    AND sm.light_id = l.light_id
+				    AND l.smartpoint_id = smt_grp.smartpoint_id
+				    AND smt_grp.grouping_id IN
+				    <foreach  item="item" index="index" collection="allowedGroupIdList"
+					  		  open="(" separator="," close=")">
+				 	   #{item}
+				    </foreach>
+			    </if>
+					)
+				AS power_failure;
+ 	</select>
+
+	<select id="fetchAllLightsToApplySchedule" parameterType="ScheduleRequest" resultMap="LightResultApplySchedule" >
+		SELECT 	light.light_id,
+			light.smartpoint_id,
+			smartpoint.rni_id,
+			light.intensity,
+			light.protected,
+			light.blink_level,
+            CASE WHEN light.override = 1
+					       AND ((light.override_create_date &lt; CAST(CAST(NOW() AS DATE)|| ' '|| (sch.sunrise_time::TIME + ((sch.sunrise_offset || 'minute')::interval)) AS TIMESTAMP)
+						     AND NOW() &gt; CAST(CAST(NOW() AS DATE)|| ' '|| (sch.sunrise_time::TIME + ((sch.sunrise_offset || 'minute')::interval)) AS TIMESTAMP))
+
+						    OR (light.override_create_date &lt; CAST(CAST(NOW() AS DATE)|| ' '|| (sch.sunset_time::TIME + ((sch.sunset_offset || 'minute')::interval)) AS TIMESTAMP)
+							AND NOW() &gt; CAST(CAST(NOW() AS DATE)|| ' '|| (sch.sunset_time::TIME + ((sch.sunset_offset || 'minute')::interval)) AS TIMESTAMP))
+						    OR (SELECT MIN(event_time) FROM schedule_event se
+								INNER JOIN schedule_membership sm on (sm.schedule_id = se.schedule_id)
+								WHERE sm.smartpoint_id = light.light_id)  BETWEEN light.override_create_date AND NOW()
+						   ) THEN 0
+					     WHEN light.override = 3 AND light.override_per_date &lt; NOW() THEN 0
+				    ELSE
+					     light.override
+              END AS override,
+            light.override_per_date
+		FROM light
+		LEFT JOIN light_schedule sch ON (light.light_id = sch.light_id)
+		INNER JOIN smartpoint ON (light.smartpoint_id = smartpoint.smartpoint_id)
+		<if test="allowedGroupIdList != null">
+        	 INNER JOIN smartpoint_grouping smt_grp ON (smt_grp.smartpoint_id = smartpoint.smartpoint_id)
+        </if>
+    	WHERE
+		<if test="lightIdList != null ">
+			 light.light_id IN
+	    	<foreach item="item" index="index" collection="lightIdList"
+				open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+	 	<if test="allowedGroupIdList != null">
+			 AND smt_grp.grouping_id IN
+			 <foreach  item="item" index="index" collection="allowedGroupIdList"
+				  		open="(" separator="," close=")">
+				#{item}
+			 </foreach>
+	   </if>
+	</select>
+
+	<select id="countLights" parameterType="LightingControlRequest" resultType="int">
+		<if test="tenant.id != null ">
+			select COUNT(light_id)
+			  FROM light l
+			  <if test="allowedGroupIdList != null">
+	          	   INNER JOIN smartpoint_grouping smt_grp ON (l.smartpoint_id = smt_grp.smartpoint_id)
+	           </if>
+			 WHERE l.tenant_id = #{tenant.id}
+		   <if test="allowedGroupIdList != null">
+			   AND smt_grp.grouping_id IN
+			   <foreach  item="item" index="index" collection="allowedGroupIdList"
+				  		open="(" separator="," close=")">
+					#{item}
+			   </foreach>
+		   </if>
+		</if>
+	</select>
+
+	<select id="fetchAllLights" parameterType="Map" resultMap="LightResult">
+
+			SELECT *
+			FROM ( SELECT light.light_id       AS light_id
+			        ,smartpoint.smartpoint_id   AS smartpoint_id
+			        ,smartpoint.RNI_id          AS RNI_id
+			        ,smartpoint.smartpoint_type AS smartpoint_type
+			        ,light.light_status         AS light_status
+			        ,light.protected            AS protected
+			        ,light.ecomode              AS ecomode
+			        ,CASE WHEN light.override = 1
+								       AND ((light.override_create_date &lt; CAST(CAST(NOW() AS DATE)|| ' '|| (sch.sunrise_time::TIME + ((sch.sunrise_offset || 'minute')::interval)) AS TIMESTAMP)
+									     AND NOW() &gt; CAST(CAST(NOW() AS DATE)|| ' '|| (sch.sunrise_time::TIME + ((sch.sunrise_offset || 'minute')::interval)) AS TIMESTAMP))
+
+									    OR (light.override_create_date &lt; CAST(CAST(NOW() AS DATE)|| ' '|| (sch.sunset_time::TIME + ((sch.sunset_offset || 'minute')::interval)) AS TIMESTAMP)
+										AND NOW() &gt; CAST(CAST(NOW() AS DATE)|| ' '|| (sch.sunset_time::TIME + ((sch.sunset_offset || 'minute')::interval)) AS TIMESTAMP))
+									    OR (SELECT MIN(event_time) FROM schedule_event se
+											INNER JOIN schedule_membership sm on (sm.schedule_id = se.schedule_id)
+											WHERE sm.smartpoint_id = light.light_id)  BETWEEN light.override_create_date AND NOW()
+									   ) THEN 0
+								     WHEN light.override = 3 AND light.override_per_date &lt; NOW() THEN 0
+								ELSE
+								     light.override
+				     END                     AS override
+			        ,lsm.status_message_id  AS status_message_id
+			        ,lsm.message_date       AS message_date
+			        ,lsm.status_id          AS status_id
+			        ,lsm.message_type       AS message_type
+			        ,lssm.status_subtype_id AS status_subtype_id
+			        ,lssm.label_key         AS label_key
+			        ,ROW_NUMBER() OVER (ORDER BY
+
+					<if test=" propName != null ">
+					   <!-- This validation is necessary to do the ordenation by lamp type wattage-->
+						<if test="propName == 18">
+							 lpad(substring(cfg.lamp_type_wattage_dimmable from 1 for position('W' in cfg.lamp_type_wattage_dimmable ) - 1),3,'0') ||
+        					substring(cfg.lamp_type_wattage_dimmable from position('W' in cfg.lamp_type_wattage_dimmable )  for length(cfg.lamp_type_wattage_dimmable ))
+		          		</if>
+		          		<if test="propName != 18">
+							cfg.lamp_type_wattage_dimmable
+					   </if>
+					 </if>
+					 <if test="orderBy != 'SS.LABEL_KEY ASC' and orderBy != 'SS.LABEL_KEY' and orderBy != 'SS.LABEL_KEY DESC'">
+					 	${orderBy}
+					 </if>
+					 <if test="orderBy == 'SS.LABEL_KEY ASC' or orderBy == 'SS.LABEL_KEY'">
+						  CASE WHEN lsm.status_id = 0 THEN 2
+						   WHEN lsm.status_id = 1 THEN 0
+						   WHEN lsm.status_id = 2 THEN 1
+						   WHEN lsm.status_id = 3 THEN 4
+						   WHEN lsm.status_id = 4 THEN 3
+						   WHEN lsm.status_id = 5 THEN 5
+					      END DESC, lssm.label_key, message_date ASC
+					 </if>
+					  <if test="orderBy == 'SS.LABEL_KEY DESC'">
+					 	  CASE WHEN lsm.status_id = 0 THEN 2
+						   WHEN lsm.status_id = 1 THEN 0
+						   WHEN lsm.status_id = 2 THEN 1
+						   WHEN lsm.status_id = 3 THEN 4
+						   WHEN lsm.status_id = 4 THEN 3
+						   WHEN lsm.status_id = 5 THEN 5
+					      END ASC, lssm.label_key, message_date DESC
+					 </if>
+					 , smartpoint.rni_id) AS RowNum
+
+			<include refid="fetchAllLightsConditions"/>
+
+				GROUP BY light.light_id
+					,smartpoint.smartpoint_id
+					,smartpoint.RNI_id
+					,smartpoint.smartpoint_type
+					,light.light_status
+					,light.protected
+					,light.intensity
+					,light.ecomode
+					,light.override
+					,light.override_create_date
+					,light.override_per_date
+				<if test="propName != null ">
+					,lpname.property_value
+				</if>
+				    ,lsm.status_message_id
+                    ,lsm.message_date
+                    ,lsm.status_id
+                    ,lsm.message_type
+                    ,lssm.status_subtype_id
+	                ,lssm.label_key
+	                ,sch.sunrise_time
+					,sch.sunrise_offset
+					,sch.sunset_time
+					,sch.sunset_offset
+
+		) AS SMARTPOINTPAGE
+		<if test="pageSize > 0">
+			WHERE RowNum BETWEEN #{startRow,jdbcType=INTEGER} + 1 AND (#{startRow,jdbcType=INTEGER} + #{pageSize,jdbcType=INTEGER})
+		</if>
+
+	</select>
+
+	<select id="paginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(light_id)
+  		   FROM (
+			   SELECT light.light_id AS light_id
+				<include refid="fetchAllLightsConditions"/>
+				GROUP BY light.light_id
+				) AS SMARTPOINTPAGE
+	</select>
+
+	<select id="fetchGroupsByLightId" parameterType="int" resultMap="GroupResult">
+
+		SELECT grp.grouping_id, grp.name
+  		   FROM grouping grp JOIN smartpoint_grouping smt_grp ON grp.grouping_id = smt_grp.grouping_id
+  		  WHERE smt_grp.smartpoint_id = #{value}
+
+	</select>
+
+	<select id="fetchTagsByLightId" parameterType="int" resultMap="TagResult">
+
+		SELECT t.tag_id, name
+  		   FROM tag t JOIN smartpoint_tag smt_tag ON t.tag_id = smt_tag.tag_id
+  		  WHERE smt_tag.smartpoint_id = #{value}
+
+	</select>
+
+	<sql id="fetchAllLightsConditions">
+
+		FROM
+	        light
+		<if test="currentLightStatusPropertyId != null">
+		    LEFT JOIN status_subtype ss ON (light.light_status_subtype = ss.status_subtype_id)
+		</if>
+
+		INNER JOIN smartpoint ON smartpoint.smartpoint_id = light.smartpoint_id
+		LEFT JOIN status_message lsm ON lsm.status_message_id = (SELECT max(status_message_id)
+									   FROM status_message s
+									  WHERE s.light_id = light.light_id)
+		LEFT JOIN status_subtype lssm ON lssm.status_subtype_id = (SELECT s1.status_subtype_id
+									     FROM status_subtype s1
+										  INNER JOIN status_message_status_subtype s2 ON s1.status_subtype_id = s2.status_subtype_id
+										  INNER JOIN status_message s3 ON s2.status_message_id = s3.status_message_id
+									    WHERE s3.status_message_id = lsm.status_message_id
+									    GROUP BY s1.status_subtype_id LIMIT 1 )
+
+		<if test=" groupIds != null or allowedGroupIdList != null">
+		    INNER JOIN smartpoint_grouping ON smartpoint_grouping.smartpoint_id = light.smartpoint_id
+		    INNER JOIN grouping ON smartpoint_grouping.grouping_id = grouping.grouping_id
+		</if>
+
+		<if test=" tagIds != null ">
+		    INNER JOIN smartpoint_tag ON smartpoint_tag.smartpoint_id = light.smartpoint_id
+		    INNER JOIN tag ON smartpoint_tag.tag_id = tag.tag_id
+		</if>
+
+		<if test="scheduleIds != null">
+		    INNER JOIN schedule_membership ON light.smartpoint_id = schedule_membership.smartpoint_id
+		    INNER JOIN schedule ON schedule.schedule_id = schedule_membership.schedule_id
+		</if>
+
+		<if test="map_condition != null or streetName != null or cityName != null or zipCode != null">
+		    LEFT JOIN light_location loc ON (light.light_id = loc.light_id)
+		</if>
+
+	    LEFT JOIN light_configuration cfg ON (light.light_id = cfg.light_id)
+
+		LEFT JOIN light_schedule sch ON (light.light_id = sch.light_id)
+
+		LEFT JOIN light_last_operational_data opd ON (light.light_id = opd.light_id)
+
+		<where>
+
+		    <if test=" tenant_id != null">
+			    light.tenant_id = ${tenant_id}
+		    </if>
+
+		    <if test="unSelectedIds != null and !unSelectedIds.isEmpty()">
+				AND light.light_id NOT IN
+				<foreach item="item" index="index" collection="unSelectedIds"
+					 open="(" separator="," close=")">
+					 #{item}
+				</foreach>
+		    </if>
+
+		    <if test="selectedIds != null and !selectedIds.isEmpty()">
+				AND light.light_id IN
+				<foreach item="item" index="index" collection="selectedIds"
+				 	 open="(" separator="," close=")">
+					 #{item}
+				</foreach>
+		    </if>
+
+		    <if test="scheduleIds != null">
+				AND schedule.schedule_id IN
+				<foreach item="item" index="index" collection="scheduleIds"
+					 open="(" separator="," close=")">
+					 #{item}
+				</foreach>
+		    </if>
+
+		    <if test="statusList != null or override != null">
+				AND (
+				<if test="statusList != null">
+				    lsm.status_id IN
+				    <foreach item="item" index="index" collection="statusList"
+					     open="(" separator="," close=")">
+					     #{item}
+				    </foreach>
+				</if>
+
+				<if test="override != null">
+				    <if test="statusList != NULL">
+						OR
+				    </if>
+					CASE WHEN light.override = 1
+					     AND ((light.override_create_date &lt; CAST(CAST(NOW() AS DATE)|| ' '|| (sch.sunrise_time::TIME + ((sch.sunrise_offset || 'minute')::interval)) AS TIMESTAMP)
+					     AND NOW() &lt; CAST(CAST(NOW() AS DATE)|| ' '|| (sch.sunrise_time::TIME + ((sch.sunrise_offset || 'minute')::interval)) AS TIMESTAMP))
+					     OR (light.override_create_date &lt; CAST(CAST(NOW() AS DATE)|| ' '|| (sch.sunset_time::TIME + ((sch.sunset_offset || 'minute')::interval)) AS TIMESTAMP)
+					     AND NOW() &lt; CAST(CAST(NOW() AS DATE)|| ' '|| (sch.sunset_time::TIME + ((sch.sunset_offset || 'minute')::interval)) AS TIMESTAMP))
+					     OR (SELECT MIN(event_time)
+					           FROM schedule_event se
+							INNER JOIN schedule_membership sm on (sm.schedule_id = se.schedule_id)
+						  WHERE sm.smartpoint_id = light.light_id) BETWEEN light.override_create_date AND NOW()
+					        ) THEN 0
+					     WHEN light.override = 3
+					     AND light.override_per_date &lt; NOW() THEN 0
+					     ELSE
+						 light.override
+					     END &lt; 0
+				</if>
+			    )
+		    </if>
+
+		    <if test="groupIds != null">
+				AND grouping.grouping_id IN
+				<foreach item="item" index="index" collection="groupIds"
+					 open="(" separator="," close=")">
+					 #{item}
+				</foreach>
+		    </if>
+
+		    <if test="allowedGroupIdList != null">
+				AND grouping.grouping_id IN
+				<foreach item="item" index="index" collection="allowedGroupIdList"
+					 open="(" separator="," close=")">
+					 #{item}
+				</foreach>
+		    </if>
+
+		    <if test="tagIds != null">
+				AND tag.tag_id IN
+				<foreach item="item" index="index" collection="tagIds"
+				         open="(" separator="," close=")">
+					 #{item}
+				</foreach>
+		    </if>
+
+		    <if test=" protect != null">
+				AND protected IN ('${protect}')
+		    </if>
+
+		    <if test="rni_id != null">
+				AND cast(smartpoint.rni_id AS character varying) LIKE '%${rni_id}%'
+		    </if>
+
+	        <if test="poleId != null">
+				AND UPPER(light.pole_id) IN ('${poleId}')
+		    </if>
+
+		    <if test="streetName != null">
+				AND UPPER(loc.street_name) LIKE '%${streetName}%'
+		    </if>
+
+		    <if test="cityName != null">
+				AND UPPER(loc.city_name) LIKE '%${cityName}%'
+		    </if>
+
+		    <if test="zipCode != null">
+				AND loc.zip_code = '${zipCode}'
+		    </if>
+
+		    <if test="housing_color != null">
+				AND UPPER(cfg.housing_color) IN ('${housing_color}')
+		    </if>
+
+		    <if test="housing != null">
+				AND cfg.housing = '${housing}'
+		    </if>
+
+		    <if test="dimmable != null">
+				AND cfg.dimmable = '${dimmable}'
+		    </if>
+
+		    <if test="lampType != null">
+				AND light.light_type = '${lampType}'
+		    </if>
+
+		    <if test="wattage != null">
+				AND cfg.wattage_rating = '${wattage}'
+		    </if>
+
+		    <if test="status_subType != null">
+				AND light.light_status_subtype IN ('${status_subType}')
+		    </if>
+
+		    <if test="upper_assembly != null">
+				AND UPPER(cfg.upper_assembly_serial_number) LIKE '%${upper_assembly}%'
+		    </if>
+
+		    <if test="lower_assembly != null">
+				AND UPPER(cfg.lower_assembly_serial_number) LIKE '%${lower_assembly}%'
+		    </if>
+
+		    <if test="bulb_number != null">
+				AND UPPER(cfg.bulb_serial_number) LIKE '%${bulb_number}%'
+		    </if>
+
+		    <if test="light_driver_number != null">
+				AND UPPER(cfg.ballast_serial_number) LIKE '%${light_driver_number}%'
+		    </if>
+
+		    <!--message date -->
+		    <if test = "last_messages != null">
+				AND((NOT EXISTS (SELECT 1
+				                   FROM status_message s
+					  	  WHERE s.light_id = light.light_id
+						        AND (SELECT s.message_date AT TIME ZONE (SELECT usp.user_setting_property_value
+												   FROM user_settings_property usp, user_settings us
+												  WHERE property_id = 38
+													AND usp.user_settings_id = us.user_settings_id
+													AND user_id = '${user_id}' )
+							       FROM status_message s
+							      WHERE s.light_id = light.light_id
+							      ORDER BY s.status_message_id DESC LIMIT 1) >
+							    (SELECT current_timestamp AT TIME ZONE (SELECT usp.user_setting_property_value
+											 FROM user_settings_property usp, user_settings us
+											WHERE property_id = 38
+											      AND usp.user_settings_id = us.user_settings_id
+											      AND user_id = '${user_id}' ) ) - CAST('${last_messages}' AS interval) )))
+		    </if>
+
+		    <!--voltage_greater-->
+		    <if test = "voltage_greater != null">
+				AND opd.ac_voltage > ${voltage_greater}
+		    </if>
+
+		    <!--voltage_less-->
+		    <if test = "voltage_less != null">
+				AND ${voltage_less} > opd.ac_voltage
+		    </if>
+
+		    <!--current_greater -->
+		    <if test = "current_greater != null">
+				AND trunc(cast(cast(opd.ac_current AS real) / 1000 AS numeric),1) > ${current_greater}
+	    	</if>
+
+		    <!--current_less -->
+		    <if test = "current_less != null">
+				AND ${current_less} > trunc(cast(cast(opd.ac_current AS real) / 1000 AS numeric),1)
+		    </if>
+
+		    <!--consumption_greater -->
+		    <if test = "consumption_greater != null">
+				AND trunc(cast(cast(opd.consumption AS real) / 1000 AS numeric),1) >  ${consumption_greater}
+		    </if>
+
+		    <!--consumption_less -->
+		    <if test = "consumption_less != null">
+				AND  ${consumption_less} > trunc(cast(cast(opd.consumption AS real) / 1000 AS numeric),1)
+		    </if>
+
+		    <!--light type -->
+		    <if test = "light_type != null">
+				AND UPPER(cfg.lamp_type_wattage_dimmable) = '${light_type}'
+		    </if>
+
+		    <!--input_voltage -->
+		    <if test = "input_voltage != null">
+				AND UPPER(cfg.input_voltage_range) IN ('${input_voltage}')
+		    </if>
+
+		    <!-- color_temperature -->
+		    <if test = "color_temperature != null">
+				AND cfg.color_temperature IN ('${color_temperature}')
+		    </if>
+
+		    <!--sensus part number(MODEL NUMBER) -->
+		    <if test = "part_number != null">
+				AND cfg.model_number = '${part_number}'
+		    </if>
+
+		    <!--firmware version -->
+		    <if test = "firmware_version != null">
+				AND cfg.firmware_version = '${firmware_version}'
+		    </if>
+
+		    <!--date added after-->
+		    <if test = "date_added_after != null">
+				AND CAST(cfg.date_added AS DATE) >= CAST('${date_added_after}' AS DATE)
+		    </if>
+
+		    <!--date added before -->
+		    <if test = "date_added_before != null">
+				AND  CAST( '${date_added_before}' AS DATE) >= CAST(cfg.date_added AS DATE)
+		    </if>
+
+		    <!--ALL GROUP -->
+		    <if test = "all_groups != null">
+				AND (EXISTS(SELECT 1 FROM smartpoint_grouping WHERE smartpoint_id = light.smartpoint_id))
+		    </if>
+
+		    <!--ALL SCHEDULE OFFSET -->
+		    <if test = "all_offsets != null">
+				AND (EXISTS(SELECT 1 FROM schedule_membership sm, schedule s WHERE sm.schedule_id = s.schedule_id AND s.schedule_type = 1 AND sm.smartpoint_id = light.smartpoint_id))
+		    </if>
+
+		    <!--ALL SCHEDULE EVENT -->
+		    <if test = "all_events != null">
+				AND (EXISTS(SELECT 1 FROM schedule_membership sm, schedule s WHERE sm.schedule_id = s.schedule_id AND s.schedule_type = 2 AND sm.smartpoint_id = light.smartpoint_id))
+		    </if>
+
+		    <!-- ALL TAG  -->
+		    <if test = "all_tags != null">
+				AND (EXISTS((SELECT 1 FROM SMARTPOINT_TAG WHERE smartpoint_id = light.smartpoint_id)))
+		    </if>
+
+		    <!-- ALL ALARMS/WARNINGS -->
+		    <if test = "all_alarms_warnings != null">
+				AND (lssm.status_subtype_id IN ('${all_alarms_warnings}'))
+		    </if>
+
+		    <!-- ECOMODE -->
+		    <if test = "ecomode != null">
+				AND
+				<foreach item="item" index="index" collection="ecomode"
+					open="(" separator=" or " close=")">
+					<if test = "item.initialValue != 0 and item.endValue != 100">
+					    (light.ecomode &gt; ${item.initialValue} and light.ecomode &lt;= ${item.endValue})
+					</if>
+					<if test = "item.initialValue == 0">
+					    (light.ecomode &lt; ${item.endValue})
+					</if>
+					<if test = "item.endValue == 100">
+					    (light.ecomode &gt; ${item.initialValue})
+					</if>
+				</foreach>
+		    </if>
+
+		    <if test = "map_condition != null">
+				<if test="middle_lat_min == null">
+				    AND loc.latitude  BETWEEN #{bottom_left_lat} AND #{top_right_lat}
+				    AND loc.longitude BETWEEN #{bottom_left_lon} AND #{top_right_lon}
+				</if>
+
+				<if test="middle_lat_min != null">
+				    AND loc.latitude  BETWEEN #{middle_lat_min} AND #{middle_lat_max}
+				    AND loc.longitude BETWEEN #{middle_lon_min} AND #{middle_lon_max}
+				</if>
+		    </if>
+
+		</where>
+
+	</sql>
+
+	<select id="fetchPropertyValidValue" parameterType="PropertyValidValuesRequest" resultMap="PropertyValidValuesResult">
+		SELECT
+		  <include refid="allPropertyValidValueColumns"/>
+          FROM property_valid_value pvv
+		  <if test="allowedGroupIdList != null">
+          	   ,light_property lp, light l, smartpoint_grouping smt_grp
+           </if>
+         WHERE pvv.property_id IN
+         	<foreach item="item" index="index" collection="properties"
+				open="(" separator="," close=")">
+					#{item.value}
+			</foreach>
+		    <if test="allowedGroupIdList != null">
+			    AND pvv.property_id = lp.property_id
+			    AND lp.light_id = l.light_id
+			    AND l.smartpoint_id = smt_grp.smartpoint_id
+			    AND smt_grp.grouping_id IN
+			    <foreach  item="item" index="index" collection="allowedGroupIdList"
+				  		open="(" separator="," close=")">
+					#{item}
+			    </foreach>
+		    </if>
+         ORDER BY pvv.property_id, pvv.valid_value
+	</select>
+
+	<select id="fetchAllCustomSearch" parameterType="Map" resultMap="CustomSearchResult">
+		SELECT
+			custom_search_id
+			,custom_search_name
+			,custom_search_description
+			,create_date
+			,modified_date
+		 FROM
+		(
+			SELECT  cs.custom_search_id
+					,cs.custom_search_name
+					,cs.custom_search_description
+					,cs.create_date
+					,cs.modified_date
+				    ,ROW_NUMBER() OVER(ORDER BY ${orderBy}) AS RowNum
+			FROM custom_search cs
+			<if test="allowedGroupIdList != null">
+          	   INNER JOIN tenant t ON cs.tenant_id = t.tenant_id
+          	   INNER JOIN grouping grp ON t.tenant_id = grp.tenant_id
+           </if>
+			WHERE cs.user_id = '${user_id}'
+			  AND cs.tenant_id = ${tenant_id}
+		  <if test="allowedGroupIdList != null">
+		     AND grp.grouping_id IN
+		     <foreach  item="item" index="index" collection="allowedGroupIdList"
+				  open="(" separator="," close=")">
+				#{item}
+		     </foreach>
+		  </if>
+		) AS SEARCH_LIGHT_PAGE
+	<if test=" pageSize > 0">
+		WHERE RowNum BETWEEN #{startRow,jdbcType=INTEGER} + 1 AND (#{startRow,jdbcType=INTEGER} + #{pageSize,jdbcType=INTEGER})
+	</if>
+	</select>
+
+	<select id="paginationTotalRowsCustomSearch" parameterType="Map" resultType="int">
+		SELECT count(1)
+		  FROM (
+				SELECT custom_search_id
+				  FROM custom_search cs
+					<if test="allowedGroupIdList != null">
+		          	   INNER JOIN tenant t ON cs.tenant_id = t.tenant_id
+		          	   INNER JOIN grouping grp ON t.tenant_id = grp.tenant_id
+		           </if>
+				 WHERE cs.user_id = '${user_id}'
+				   AND cs.tenant_id =  ${tenant_id}
+			  <if test="allowedGroupIdList != null">
+			       AND grp.grouping_id IN
+			       <foreach  item="item" index="index" collection="allowedGroupIdList"
+							  open="(" separator="," close=")">
+					 	#{item}
+			       </foreach>
+			  </if>
+				)
+		AS CUSTOM_SEARCH_PAGE
+	</select>
+
+   <select id="fetchLightHistory" parameterType="Map" resultMap="LightingHistoryResult">
+        SELECT
+	           process_id AS id
+		       ,start_datetime AS create_date
+	           ,name AS name
+			   ,description AS description
+	           ,is_process_complete As status
+	           ,status_message_id
+	           ,create_user
+	           ,smartpoint_count
+           FROM (
+                  SELECT ROW_NUMBER()
+		              OVER(ORDER BY start_datetime::date DESC
+		              		<if test=" propName != null ">,${propName} </if>
+		              		<if test=" orderBy != null ">,${orderBy} </if>
+		     	      	   ) AS RowNum, lh.*
+                     FROM (
+						    SELECT NULL AS process_id
+						    	   , 0 AS smartpoint_count
+								   ,s.status_message_id AS status_message_id
+							       ,s.message_date AS start_datetime
+							       ,(CASE s.status_id WHEN 1 THEN 2
+									  WHEN 2 THEN 2
+									  WHEN 3 THEN 2
+										 END ) as lc_action_description
+									,(CASE s.status_id WHEN 1 THEN 'Alarm'
+									  WHEN 2 THEN 'Warning'
+									  WHEN 3 THEN 'Active'
+										 END ) as name
+							       ,(SELECT CASE  WHEN (s1.label_key) = 'sensus.mlc.status_subtype.lampfailure'  THEN 'Lamp Failure'
+												  WHEN (s1.label_key) = 'sensus.mlc.status_subtype.powerfailure' THEN 'Power Failure'
+												  WHEN (s1.label_key) = 'sensus.mlc.status_subtype.boardfailure'  THEN 'Board Failure'
+												  WHEN (s1.label_key) = 'sensus.mlc.status_subtype.metrologyerror'  THEN 'Metrology Error'
+												  WHEN (s1.label_key) = 'sensus.mlc.status_subtype.metrologycomfailure'  THEN 'Metrology Com Failure'
+												  WHEN (s1.label_key) = 'sensus.mlc.status_subtype.powersurgedetected' THEN 'Power Surge Detected'
+												  WHEN (s1.label_key) = 'sensus.mlc.status_subtype.brownoutdetected' THEN 'Brownout Detected'
+												  WHEN (s1.label_key) = 'sensus.mlc.status_subtype.communicationfail' THEN 'Communication Fail'
+												  WHEN (s1.label_key) = 'sensus.mlc.status_subtype.highcurrent' THEN 'High Current'
+												  WHEN (s1.label_key) = 'sensus.mlc.status_subtype.lowcurrent' THEN 'Low Current'
+												  WHEN (s1.label_key) = 'sensus.mlc.status_subtype.reverseenergy' THEN 'Reverse Energy'
+												  WHEN (s1.label_key) = 'sensus.mlc.status_subtype.metrologyreset' THEN 'Metrology Reset' ELSE '' END
+									   FROM status_subtype s1,
+											status_message s3
+								    WHERE s3.status_message_id = s.status_message_id
+									  AND s1.status_subtype_id = s2.status_subtype_id
+									  AND s2.status_message_id = s3.status_message_id) AS description
+								   ,true AS is_process_complete
+							       ,s.create_user
+							  FROM status_message s
+							  LEFT OUTER JOIN status_message_status_subtype s2 ON s2.status_message_id = s.status_message_id,
+							  light l
+					          <if test="allowedGroupIdList != null">
+					          	, smartpoint_grouping smt_grp
+					          </if>
+	                        WHERE s.light_id = l.smartpoint_id
+	            	          AND l.light_id = #{light_id,jdbcType=INTEGER}
+	                          AND (s.status_id = 1 OR s.status_id = 2 OR s.status_id = 3)
+
+							<if test="startDate != null and endDate != null">
+			   	              AND s.message_date BETWEEN #{startDate,jdbcType=TIMESTAMP}::timestamp without time zone AND #{endDate,jdbcType=TIMESTAMP}::timestamp without time zone
+			                </if>
+							<if test="allowedGroupIdList != null">
+							  AND l.smartpoint_id = smt_grp.smartpoint_id
+							  AND smt_grp.grouping_id IN
+							  <foreach  item="item" index="index" collection="allowedGroupIdList"
+								  		open="(" separator="," close=")">
+							 	  #{item}
+							  </foreach>
+						  	</if>
+                          UNION ALL
+        	              SELECT p.process_id AS process_id
+        	              		 , 1 AS smartpoint_count
+					   		     ,NULL AS status_message_id
+				       			 ,p.create_date AS start_datetime
+						         ,(SELECT CASE   WHEN upper(p.lc_action_description) LIKE upper('%Locked%') THEN 2
+							                     WHEN upper(p.lc_action_description) LIKE upper('%Group%') THEN 3
+							                     WHEN upper(p.lc_action_description) LIKE upper('%Turn%') THEN 1
+							                     WHEN upper(p.lc_action_description) LIKE upper('%Schedule%') THEN 5
+							                     WHEN upper(p.lc_action_description) LIKE upper('%Tag%') THEN 4
+							                     WHEN upper(p.lc_action_description) LIKE upper('%Update Light Status%') THEN 2
+							                     WHEN upper(p.lc_action_description) LIKE upper('%Reset%') THEN 2
+							                     WHEN upper(p.lc_action_description) LIKE upper('%Dim') THEN 1
+							                     WHEN upper(p.lc_action_description) LIKE upper('%Blink%') THEN 	1
+							                     WHEN upper(p.lc_action_description) LIKE upper('%Update Pole%') THEN 2
+							                     WHEN upper(p.lc_action_description) LIKE upper('%Configuration%') THEN 2
+							                     WHEN upper(p.lc_action_description) LIKE upper('%Clear Override%') THEN 2
+							                     WHEN upper(p.lc_action_description) LIKE upper('%Update Light%') THEN 2
+							                     WHEN upper(p.lc_action_description) LIKE upper('%Dimming%') THEN 2
+							                     WHEN upper(p.lc_action_description) LIKE upper('%Update lat%') THEN 2
+							                     WHEN upper(p.lc_action_description) LIKE upper('%Protected%') THEN 2
+							                     WHEN upper(p.lc_action_description) LIKE upper('%Clear%') THEN 2
+								          ELSE 0 END) as lc_action_description
+								  ,(SELECT CASE    WHEN upper(p.lc_action_description) LIKE upper('%Locked%') THEN 'Configuration'
+							                      WHEN upper(p.lc_action_description) LIKE upper('%Group%') THEN 'Group'
+							                      WHEN upper(p.lc_action_description) LIKE upper('%Turn On%') THEN 'Turn On'
+                     							  WHEN upper(p.lc_action_description) LIKE upper('%Turn Off%') THEN 'Turn Off'
+							                      WHEN upper(p.lc_action_description) LIKE upper('%Schedule%') THEN 'Schedule'
+							                      WHEN upper(p.lc_action_description) LIKE upper('%Tag%') THEN 'Tag'
+							                      WHEN upper(p.lc_action_description) LIKE upper('%Get Status%') THEN 'Light Status'
+							                      WHEN upper(p.lc_action_description) LIKE upper('%Reset%') THEN 'Configuration'
+							                      WHEN upper(p.lc_action_description) LIKE upper('%Blink%') THEN 'Blink'
+							                      WHEN upper(p.lc_action_description) LIKE upper('%Update Pole%') THEN 'Configuration'
+							                      WHEN upper(p.lc_action_description) LIKE upper('%Configuration%') THEN 'Configuration'
+							                      WHEN upper(p.lc_action_description) LIKE upper('%Clear Override%') THEN 'Clear Override'
+							                      WHEN upper(p.lc_action_description) LIKE upper('%Update Light%') THEN 'Update Light Status'
+							                      WHEN upper(p.lc_action_description) LIKE upper('%Dim') THEN 'Dim'
+							                      WHEN upper(p.lc_action_description) LIKE upper('%Dimming%') THEN 'Configuration'
+							                      WHEN upper(p.lc_action_description) LIKE upper('%Update lat%') THEN 'Configuration'
+							                      WHEN upper(p.lc_action_description) LIKE upper('%Protected%') THEN 'Configuration'
+							                      WHEN upper(p.lc_action_description) LIKE upper('%Clear%') THEN 'Clear Alerts' ELSE '' END) as name
+
+				                ,p.description
+						        ,p.is_process_complete AS is_process_complete
+				                ,p.create_user
+				           FROM process p
+				                ,smartpoint_process sp
+				                ,light l
+					          <if test="allowedGroupIdList != null">
+					           ,smartpoint_grouping smt_grp
+					          </if>
+                        WHERE sp.smartpoint_id = l.smartpoint_id
+                          AND l.light_id = #{light_id,jdbcType=INTEGER}
+                          AND sp.process_id  = p.process_id
+                          AND p.tenant_id = #{tenant_id,jdbcType=INTEGER}
+						 <if test="startDate != null and endDate != null">
+		   	              AND p.create_date BETWEEN #{startDate,jdbcType=TIMESTAMP}::timestamp without time zone AND #{endDate,jdbcType=TIMESTAMP}::timestamp without time zone
+		                 </if>
+		                 <if test="eventId != null">
+		   		          AND p.process_id = ${eventId}
+		   			     </if>
+						<if test="allowedGroupIdList != null">
+							  AND l.smartpoint_id = smt_grp.smartpoint_id
+							  AND smt_grp.grouping_id IN
+							  <foreach  item="item" index="index" collection="allowedGroupIdList"
+								  		open="(" separator="," close=")">
+							 	  #{item}
+							  </foreach>
+					  	</if>
+		   ) AS lh
+		  <where>
+			   <if test=" userIds != null">
+				  AND create_user IN (SELECT username FROM users WHERE user_id IN (${userIds}))
+			   </if>
+			    <if test="actionId != null">
+		         AND process_id = ${actionId}
+		        </if>
+			   <if test="searchText != null">
+			   	  AND upper(description) LIKE upper('%${searchText}%')
+			   </if>
+			   <if test=" ACTION_CATEGORY_LIST != null">
+			      AND lc_action_description IN
+					  <foreach item="item" index="index" collection="ACTION_CATEGORY_LIST"
+						  open="(" separator="," close=")">
+						  #{item}
+				      </foreach>
+			  </if>
+		 </where>
+        ) AS light_history
+     	<if test="pageSize > 0 ">
+			WHERE
+			RowNum BETWEEN #{startRow,jdbcType=INTEGER} + 1 AND (#{startRow,jdbcType=INTEGER} +	#{pageSize,jdbcType=INTEGER})
+		</if>
+	</select>
+
+	<select id="fetchLightHistoryPaginationTotalRows" parameterType="Map" resultType="int">
+
+		SELECT count(1)
+    	FROM (
+     				SELECT  lh.*
+                     FROM (
+						    SELECT NULL AS process_id
+								   ,s.status_message_id AS status_message_id
+							       ,s.message_date AS start_datetime
+							       ,(CASE s.status_id WHEN 1 THEN 8
+									  WHEN 2 THEN 9
+									  WHEN 3 THEN 10
+										 END ) as lc_action_description
+							       ,(SELECT CASE  WHEN (s1.label_key) = 'sensus.mlc.status_subtype.lampfailure'  THEN 'Lamp Failure'
+												  WHEN (s1.label_key) = 'sensus.mlc.status_subtype.powerfailure' THEN 'Power Failure'
+												  WHEN (s1.label_key) = 'sensus.mlc.status_subtype.boardfailure'  THEN 'Board Failure'
+												  WHEN (s1.label_key) = 'sensus.mlc.status_subtype.metrologyerror'  THEN 'Metrology Error'
+												  WHEN (s1.label_key) = 'sensus.mlc.status_subtype.metrologycomfailure'  THEN 'Metrology Com Failure'
+												  WHEN (s1.label_key) = 'sensus.mlc.status_subtype.powersurgedetected' THEN 'Power Surge Detected'
+												  WHEN (s1.label_key) = 'sensus.mlc.status_subtype.brownoutdetected' THEN 'Brownout Detected'
+												  WHEN (s1.label_key) = 'sensus.mlc.status_subtype.communicationfail' THEN 'Communication Fail'
+												  WHEN (s1.label_key) = 'sensus.mlc.status_subtype.highcurrent' THEN 'High Current'
+												  WHEN (s1.label_key) = 'sensus.mlc.status_subtype.lowcurrent' THEN 'Low Current'
+												  WHEN (s1.label_key) = 'sensus.mlc.status_subtype.reverseenergy' THEN 'Reverse Energy'
+												  WHEN (s1.label_key) = 'sensus.mlc.status_subtype.metrologyreset' THEN 'Metrology Reset' ELSE '' END
+									   FROM status_subtype s1,
+											status_message s3
+								    WHERE s3.status_message_id = s.status_message_id
+									  AND s1.status_subtype_id = s2.status_subtype_id
+									  AND s2.status_message_id = s3.status_message_id) AS description
+								   ,true AS is_process_complete
+							       ,s.create_user
+							  FROM status_message s
+							  LEFT OUTER JOIN status_message_status_subtype s2 ON s2.status_message_id = s.status_message_id,
+							  light l
+					          <if test="allowedGroupIdList != null">
+					          	, smartpoint_grouping smt_grp
+					          </if>
+	                        WHERE s.light_id = l.smartpoint_id
+	            	          AND l.light_id = #{light_id,jdbcType=INTEGER}
+	                          AND (s.status_id = 1 OR s.status_id = 2 OR s.status_id = 3)
+
+							<if test="startDate != null and endDate != null">
+			   	              AND s.message_date BETWEEN #{startDate,jdbcType=TIMESTAMP}::timestamp without time zone AND #{endDate,jdbcType=TIMESTAMP}::timestamp without time zone
+			                </if>
+							<if test="allowedGroupIdList != null">
+							  AND l.smartpoint_id = smt_grp.smartpoint_id
+							  AND smt_grp.grouping_id IN
+							  <foreach  item="item" index="index" collection="allowedGroupIdList"
+								  		open="(" separator="," close=")">
+							 	  #{item}
+							  </foreach>
+						  	</if>
+                          UNION ALL
+        	              SELECT p.process_id AS process_id
+					   		     ,NULL AS status_message_id
+				       			 ,p.create_date AS start_datetime
+					         ,(SELECT CASE    WHEN upper(p.lc_action_description) LIKE upper('%Clear%') THEN 1
+						                      WHEN upper(p.lc_action_description) LIKE upper('%Locked%') THEN 2
+						                      WHEN upper(p.lc_action_description) LIKE upper('%Group%') THEN 3
+						                      WHEN upper(p.lc_action_description) LIKE upper('%Turn%') THEN 4
+						                      WHEN upper(p.lc_action_description) LIKE upper('%Schedule%') THEN 5
+						                      WHEN upper(p.lc_action_description) LIKE upper('%Tag%') THEN 6
+						                      WHEN upper(p.lc_action_description) LIKE upper('%Get Status%') THEN 7
+						                      WHEN upper(p.lc_action_description) LIKE upper('%Reset%') THEN 2
+						                      WHEN upper(p.lc_action_description) LIKE upper('%Blink%') THEN 4
+						                      WHEN upper(p.lc_action_description) LIKE upper('%Update Pole%') THEN 2
+						                      WHEN upper(p.lc_action_description) LIKE upper('%Configuration%') THEN 2
+						                      WHEN upper(p.lc_action_description) LIKE upper('%Clear Override%') THEN 2
+						                      WHEN upper(p.lc_action_description) LIKE upper('%Update Light%') THEN 7
+						                      WHEN upper(p.lc_action_description) LIKE upper('%Dimming%') THEN 2
+						                      WHEN upper(p.lc_action_description) LIKE upper('%Update lat%') THEN 2
+						                      WHEN upper(p.lc_action_description) LIKE upper('%Protected%') THEN 2
+								  ELSE 0 END) as lc_action_description
+				                ,p.description
+						        ,p.is_process_complete AS is_process_complete
+				                ,p.create_user
+				           FROM process p
+				                ,smartpoint_process sp
+				                ,light l
+					          <if test="allowedGroupIdList != null">
+					           ,smartpoint_grouping smt_grp
+					          </if>
+                        WHERE sp.smartpoint_id = l.smartpoint_id
+                          AND l.light_id = #{light_id,jdbcType=INTEGER}
+                          AND sp.process_id  = p.process_id
+                          AND p.tenant_id = #{tenant_id,jdbcType=INTEGER}
+						 <if test="startDate != null and endDate != null">
+		   	              AND p.create_date BETWEEN #{startDate,jdbcType=TIMESTAMP}::timestamp without time zone AND #{endDate,jdbcType=TIMESTAMP}::timestamp without time zone
+		                 </if>
+		                 <if test="eventId != null">
+		   		          AND p.process_id = ${eventId}
+		   			     </if>
+		                 <if test="actionId != null">
+		                 AND p.process_id = ${actionId}
+		                 </if>
+						<if test="allowedGroupIdList != null">
+							  AND l.smartpoint_id = smt_grp.smartpoint_id
+							  AND smt_grp.grouping_id IN
+							  <foreach  item="item" index="index" collection="allowedGroupIdList"
+								  		open="(" separator="," close=")">
+							 	  #{item}
+							  </foreach>
+					  	</if>
+		   ) AS lh
+		    <where>
+			   <if test=" userIds != null">
+				  AND create_user IN (SELECT username FROM users WHERE user_id IN (${userIds}))
+			   </if>
+			    <if test="actionId != null">
+		         AND process_id = ${actionId}
+		        </if>
+			   <if test="searchText != null">
+			   	  AND upper(description) LIKE upper('%${searchText}%')
+			   </if>
+			   <if test=" ACTION_CATEGORY_LIST != null">
+			      AND lc_action_description IN
+					  <foreach item="item" index="index" collection="ACTION_CATEGORY_LIST"
+						  open="(" separator="," close=")">
+						  #{item}
+				      </foreach>
+			  </if>
+		 </where>
+		  ) AS light_history
+	</select>
+
+	<select id="fetchAllLightsToCSV" parameterType="Map" resultMap="LightResultToCSV">
+		SELECT *
+		  FROM (
+			  SELECT smartpoint.RNI_id AS RNI_id
+			        ,light.light_id
+			        ,light.ecomode AS ecomode
+			        ,light.pole_id
+			        ,cfg.lamp_type_wattage_dimmable AS light_type
+			        ,cfg.date_added
+			        ,loc.city_name
+			        ,cfg.input_voltage_range
+			        ,CAST(light.protected AS VARCHAR) AS protected
+			        /*address*/
+			        ,loc.street_name || ' ' || loc.county_name || ' ' || loc.city_name || ' ' || loc.state_name || ' ' || loc.zip_code as address
+			        ,loc.latitude
+			        ,loc.longitude
+			        /*light status*/
+			        ,(SELECT s.message_date AT TIME ZONE (SELECT usp.user_setting_property_value
+				 				        FROM user_settings_property usp, user_settings us
+								       WHERE property_id = 38
+									 AND usp.user_settings_id = us.user_settings_id
+									 AND user_id = ${user_id} )
+				    FROM status_message s
+				   WHERE s.light_id = light.light_id
+				   ORDER BY s.status_message_id DESC LIMIT 1) AS last_message_received
+			        ,CASE light.light_state
+			              WHEN 0 THEN 'OFF'
+				      WHEN 1 THEN 'ON'
+				      WHEN 2 THEN 'BLINK'
+				      WHEN 3 THEN 'MAINTENANCE'
+				      WHEN 4 THEN 'DEACTIVATED'
+				      WHEN 5 THEN 'UNKNOWN' ELSE '' END AS light_state
+				,TRUNC(CAST(COALESCE(op.ac_voltage,0) AS NUMERIC),2) AS light_voltage
+				,TRUNC(CAST (COALESCE((SELECT * FROM get_average_light_voltage(light.light_id, current_timestamp - CAST('1 month' AS interval), current_timestamp )), '0') AS NUMERIC),2) AS light_voltage_monthly
+				,TRUNC(CAST(COALESCE(op.ac_current / 1000,0) AS NUMERIC),1) AS light_current
+				,TRUNC(CAST (COALESCE((SELECT * FROM get_average_light_current(light.light_id,current_timestamp - CAST('1 month' AS interval),current_timestamp ) ) / 1000 ,'0')  AS NUMERIC),2) AS light_current_monthly
+				,TRUNC(CAST (COALESCE((SELECT * FROM get_average_light_consumption(light.light_id,current_timestamp,current_timestamp)) ,'0') AS NUMERIC),1) AS light_consumption
+				,TRUNC(CAST (COALESCE((SELECT * FROM get_average_light_consumption(light.light_id,current_timestamp,current_timestamp - CAST('1 month' AS interval))),'0') AS NUMERIC),1) AS light_consumption_monthly
+				/*alerts*/
+				,CASE light.light_status
+				      WHEN 0 THEN 'MAINTENANCE'
+				      WHEN 1 THEN 'ALARM'
+				      WHEN 2 THEN 'WARNING'
+				      WHEN 3 THEN 'ACTIVE'
+				      WHEN 4 THEN 'DEACTIVATED'
+				      WHEN 5 THEN 'UNKNOWN' ELSE '' END
+				AS light_status
+				,(SELECT CASE WHEN (s1.label_key) = 'sensus.mlc.status_subtype.lampfailure'  THEN 'Lamp Failure'
+					      WHEN (s1.label_key) = 'sensus.mlc.status_subtype.powerfailure' THEN 'Power Failure'
+					      WHEN (s1.label_key) = 'sensus.mlc.status_subtype.boardfailure'  THEN 'Board Failure'
+					      WHEN (s1.label_key) = 'sensus.mlc.status_subtype.metrologyerror'  THEN 'Metrology Error'
+					      WHEN (s1.label_key) = 'sensus.mlc.status_subtype.metrologycomfailure'  THEN 'Metrology Com Failure' ELSE '' END
+				    FROM status_subtype s1, status_message_status_subtype s2, status_message s3
+				   WHERE s3.status_message_id = (SELECT sm.status_message_id
+								   FROM status_message sm
+								  WHERE sm.light_id = light.light_id
+								  ORDER BY sm.message_date DESC LIMIT 1)
+				     AND s1.status_subtype_id = s2.status_subtype_id
+				     AND s2.status_message_id = s3.status_message_id
+				     AND s1.status_id = 1 LIMIT 1) AS alarm
+				,(SELECT CASE WHEN (s1.label_key) = 'sensus.mlc.status_subtype.powersurgedetected' THEN 'Power Surge Detected'
+					      WHEN (s1.label_key) = 'sensus.mlc.status_subtype.brownoutdetected' THEN 'Brownout Detected'
+					      WHEN (s1.label_key) = 'sensus.mlc.status_subtype.communicationfail' THEN 'Communication Fail'
+					      WHEN (s1.label_key) = 'sensus.mlc.status_subtype.highcurrent' THEN 'High Current'
+					      WHEN (s1.label_key) = 'sensus.mlc.status_subtype.lowcurrent' THEN 'Low Current'
+					      WHEN (s1.label_key) = 'sensus.mlc.status_subtype.reverseenergy' THEN 'Reverse Energy'
+					      WHEN (s1.label_key) = 'sensus.mlc.status_subtype.metrologyreset' THEN 'Metrology Reset' ELSE '' END
+				    FROM status_subtype s1, status_message_status_subtype s2, status_message s3
+				   WHERE s3.status_message_id = (SELECT sm.status_message_id
+								   FROM status_message sm
+								  WHERE sm.light_id = light.light_id
+								  ORDER BY sm.message_date DESC LIMIT 1)
+				     AND s1.status_subtype_id = s2.status_subtype_id
+				     AND s2.status_message_id = s3.status_message_id
+				     AND s1.status_id = 2 LIMIT 1) AS warnings
+				/*light schedule*/
+				,sch.sunset_time
+				,sch.sunrise_time
+				,sch.sunset_offset
+				,sch.sunrise_offset
+				,(SELECT s.name FROM schedule s, schedule_membership sm WHERE s.schedule_type = 1 AND s.schedule_id = sm.schedule_id AND sm.smartpoint_id = light.light_id) schedule_offset
+				,(SELECT s.name FROM schedule s, schedule_membership sm WHERE s.schedule_type = 2 AND s.schedule_id = sm.schedule_id AND sm.smartpoint_id = light.light_id) schedule_event
+				/*configuration*/
+				,cfg.wattage_rating ||' ' || (SELECT a.light_type_name FROM analytics_light_type a WHERE a.light_type_id = light.light_type) ||' ' || cfg.housing || ' ' || CASE cfg.dimmable WHEN TRUE THEN 'Dim' ELSE '' END AS light_type_detail
+				,cfg.input_voltage_range AS input_voltage
+				,cfg.color_temperature
+				,cfg.housing_color
+				,cfg.manufacturer
+				,cfg.model_number
+				,cfg.bulb_serial_number
+				,cfg.ballast_serial_number AS light_driver_number
+				,cfg.lower_assembly_serial_number AS lower_assembly
+				,cfg.upper_assembly_serial_number AS upper_assembly
+				,cfg.firmware_version
+				,ROW_NUMBER() OVER (ORDER BY ${orderBy},smartpoint.rni_id) AS RowNum
+			    FROM light
+			   INNER JOIN smartpoint ON (smartpoint.smartpoint_id = light.smartpoint_id)
+			    LEFT JOIN light_configuration cfg ON (light.light_id = cfg.light_id)
+			    LEFT JOIN light_location loc ON (light.light_id = loc.light_id)
+			    LEFT JOIN light_last_operational_data op ON (light.light_id = op.light_id)
+			    LEFT JOIN light_schedule sch ON (light.light_id = sch.light_id)
+			    LEFT JOIN status_subtype ss ON (light.light_status_subtype = ss.status_subtype_id)
+
+			<if test=" groupIds != null or allowedGroupIdList != null ">
+			    INNER JOIN smartpoint_grouping ON smartpoint_grouping.smartpoint_id =light.smartpoint_id
+			    INNER JOIN grouping ON smartpoint_grouping.grouping_id = grouping.grouping_id
+			</if>
+
+			<if test=" tagIds != null ">
+			    INNER JOIN smartpoint_tag ON smartpoint_tag.smartpoint_id = light.smartpoint_id
+			    INNER JOIN tag ON smartpoint_tag.tag_id = tag.tag_id
+			</if>
+
+			<if test="scheduleIds != null">
+			    INNER JOIN schedule_membership ON light.smartpoint_id = schedule_membership.smartpoint_id
+			    INNER JOIN schedule ON schedule.schedule_id = schedule_membership.schedule_id
+			</if>
+	<where>
+			<if test=" tenant_id != null">
+			    light.tenant_id = ${tenant_id}
+			</if>
+
+			<if test="unSelectedIds != null">
+			    AND smartpoint.smartpoint_id NOT IN
+			    <foreach item="item" index="index" collection="unSelectedIds"
+				open="(" separator="," close=")">
+				#{item}
+			    </foreach>
+			</if>
+
+			<if test="selectedIds != null">
+			    AND smartpoint.smartpoint_id IN
+			    <foreach item="item" index="index" collection="selectedIds"
+				open="(" separator="," close=")">
+				#{item}
+			    </foreach>
+			</if>
+
+			<if test="scheduleIds != null">
+			    AND schedule.schedule_id IN
+			    <foreach item="item" index="index" collection="scheduleIds"
+				open="(" separator="," close=")">
+				#{item}
+			    </foreach>
+			</if>
+
+			<if test="statusList != null or override != null">
+			    AND (
+			    <if test="statusList != null">
+				light.light_status IN
+				<foreach item="item" index="index" collection="statusList"
+				    open="(" separator="," close=")">
+				    #{item}
+				</foreach>
+			    </if>
+
+			    <if test="override != null">
+				<if test="statusList != NULL">
+				    OR
+				</if>
+				    CASE WHEN light.override = 1
+					 AND ((light.override_create_date &lt; CAST(CAST(NOW() AS DATE)|| ' '|| (sch.sunrise_time::TIME + ((sch.sunrise_offset || 'minute')::interval)) AS TIMESTAMP)
+					 AND NOW() &gt; CAST(CAST(NOW() AS DATE)|| ' '|| (sch.sunrise_time::TIME + ((sch.sunrise_offset || 'minute')::interval)) AS TIMESTAMP))
+					 OR (light.override_create_date &lt; CAST(CAST(NOW() AS DATE)|| ' '|| (sch.sunset_time::TIME + ((sch.sunset_offset || 'minute')::interval)) AS TIMESTAMP)
+					 AND NOW() &gt; CAST(CAST(NOW() AS DATE)|| ' '|| (sch.sunset_time::TIME + ((sch.sunset_offset || 'minute')::interval)) AS TIMESTAMP))
+					 OR (SELECT MIN(event_time)
+					       FROM schedule_event se
+					      INNER JOIN schedule_membership sm on (sm.schedule_id = se.schedule_id)
+					      WHERE sm.smartpoint_id = light.light_id)  BETWEEN light.override_create_date AND NOW()
+					     ) THEN 0
+					 WHEN light.override = 3 AND light.override_per_date &lt; NOW() THEN 0
+					 ELSE
+					      light.override
+					 END &gt; 0
+			    </if>
+				)
+			</if>
+
+			<if test="groupIds != null">
+				AND grouping.grouping_id IN
+				<foreach item="item" index="index" collection="groupIds"
+					open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+
+			<if test="allowedGroupIdList != null">
+				AND grouping.grouping_id IN
+				<foreach item="item" index="index" collection="allowedGroupIdList"
+					open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+
+			<if test="tagIds != null">
+				AND tag.tag_id IN
+				<foreach item="item" index="index" collection="tagIds" open="("
+					separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+
+			<if test=" protect != null">
+				AND light.protected IN('${protect}')
+			</if>
+
+			<if test="rni_id != null">
+				AND cast(smartpoint.rni_id AS character varying) LIKE '%${rni_id}%'
+			</if>
+
+			<if test="poleId != null">
+				AND light.pole_id LIKE '%${poleId}%'
+			</if>
+
+			<if test="streetName != null">
+				AND UPPER(loc.street_name) LIKE '%${streetName}%'
+			</if>
+
+			<if test="cityName != null">
+				AND UPPER(loc.city_name) LIKE '%${cityName}%''
+			</if>
+
+			<if test="zipCode != null">
+				AND loc.zip_code = '${zipCode}'
+			</if>
+
+			<if test="housing != null">
+				AND cfg.housing = '${housing}'
+			</if>
+
+			<if test="dimmable != null">
+				AND UPPER(cast(cfg.dimmable AS VARCHAR)) = '${dimmable}'
+			</if>
+
+			<if test="lampType != null">
+				AND light.light_type = '${lampType}'
+			</if>
+
+			<if test="wattage != null">
+				AND cfg.wattage_rating = '${wattage}'
+			</if>
+
+			<if test = "ecomodeInitialValue != null and ecomodeEndValue != null">
+				AND light.ecomode &gt; ${ecomodeInitialValue} AND light.ecomode &lt;= ${ecomodeEndValue}
+			</if>
+		</where>
+		) AS SMARTPOINTPAGE
+		<if test="pageSize > 0">
+			WHERE
+			RowNum BETWEEN #{startRow,jdbcType=INTEGER} + 1 AND (#{startRow,jdbcType=INTEGER} +	#{pageSize,jdbcType=INTEGER})
+		</if>
+	</select>
+
+	<select id="fetchLightsByTenant" parameterType="int" resultMap="lightWithIDOnly">
+		SELECT <include refid="light_idColumn" /> FROM light WHERE tenant_id = #{value}
+	</select>
+
+	<select id="fetchLastStatusMessageDateFromLight" parameterType="int" resultType="Date">
+		SELECT max(message_date) FROM status_message WHERE light_id = #{value}
+	</select>
+
+	<select id="fetchLastStatusSubtypeIDFromLight" parameterType="int" resultType="Integer">
+		SELECT
+			smss.status_subtype_id
+		FROM
+			status_message sm, status_message_status_subtype smss
+		WHERE
+			sm.status_message_id = smss.status_message_id AND
+			sm.light_id = #{value}
+		ORDER BY
+			sm.message_date DESC
+		LIMIT 1
+	</select>
+
+
+	<select id="insertColumnsToCustomSearch" parameterType="com.sensus.mlc.smartpoint.model.request.ColumnFilterRequest"
+		resultType="java.lang.Void" statementType="CALLABLE">
+
+		<foreach item="item" index="index" collection="listColumn" >
+			INSERT INTO custom_search_property (custom_search_id
+											   ,property_id
+											   ,create_date
+											   ,create_user
+											   ,custom_search_property_value
+											   ,display_order)
+									    VALUES (#{customSearchId,jdbcType=INTEGER,mode=IN}
+									           ,104
+									           ,CURRENT_TIMESTAMP
+									           ,#{userContext.userId,jdbcType=VARCHAR,mode=IN}
+									           ,#{item.columnEnum.value,jdbcType=VARCHAR,mode=IN}
+									           ,${index});
+		</foreach>
+	</select>
+
+	<select id="insertFilterToCustomSearch" parameterType="com.sensus.mlc.smartpoint.model.request.ColumnFilterRequest"
+		resultType="java.lang.Void" statementType="CALLABLE">
+
+		<foreach item="item" index="index" collection="filters">
+			INSERT INTO custom_search_property(custom_search_id
+											  ,property_id
+											  ,create_date
+											  ,create_user
+											  ,custom_search_property_value
+											  ,display_order)
+		         					   VALUES (#{customSearchId,jdbcType=INTEGER,mode=IN}
+		         					          ,105
+		         					          ,CURRENT_TIMESTAMP
+		         					          ,#{userContext.userId,jdbcType=VARCHAR,mode=IN}
+		         					          ,#{item.filterEnum,jdbcType=VARCHAR,mode=IN}
+		         					          ,${index});
+		</foreach>
+	</select>
+
+	<resultMap id="UsersColumnsFiltersResult" type="ColumnFilterResponse" >
+		<collection property="filters" column="settings_id"  select="fetchAllFilters" />
+		<collection property="listColumn" column="settings_id" select="fetchAllColumns" />
+	</resultMap>
+
+	<resultMap id="filtersResults" type="com.sensus.mlc.smartpoint.model.Filter" >
+		<result property="filterEnumValue" column="filter" />
+		<result property="displayOrder" column="display_order" />
+	</resultMap>
+
+	<select id="fetchAllFilters"  resultMap="filtersResults">
+		SELECT user_setting_property_value as filter,
+			   display_order
+		  FROM user_settings_property
+		 WHERE user_settings_id = #{value}
+		   AND property_id = 105
+	</select>
+
+ 	<resultMap type="Column" id="ColumnResults">
+ 		<result property="columnEnumValue" column="user_setting_property_value"></result>
+ 		<result property="displayOrder" column="display_order"></result>
+ 	</resultMap>
+
+	<select id="fetchAllColumns"  resultMap="ColumnResults">
+		SELECT user_setting_property_value,
+		       display_order
+		  FROM user_settings_property
+		 WHERE user_settings_id = #{value}
+		   AND property_id = 104
+	</select>
+
+	<select id="fetchAllColumnFilters" parameterType="ColumnFilterRequest" resultMap="UsersColumnsFiltersResult">
+		SELECT us.user_settings_id as settings_id
+		  FROM user_settings  us
+	 	 WHERE us.user_id =   #{userContext.id,jdbcType=INTEGER,mode=IN}
+		   AND us.tenant_id = #{tenant.id,jdbcType=INTEGER,mode=IN}
+	</select>
+
+	<select id="fetchCurrentAlarmStatusMessagesByLight" parameterType="int" resultMap="CurrentAlarmWarningMessageResult">
+		SELECT <include refid="allCurrentAlarmStatusMessageColumns" /> FROM current_alarm_warning_message WHERE light_id = #{value}
+	</select>
+
+	<resultMap id="fetchCurrentLightMessageByResult" type="Light">
+		<result property="id" column="light_id" />
+		<collection property="currentStatusMessage" select="fetchCurrentStatusMessageIdByLightId" column="light_id"/>
+	</resultMap>
+
+	<resultMap id="StatusExceptionCommunicationResult" type="StatusException">
+		<result property="statusExceptionTypeEnumValue" jdbcType="INTEGER" column="status_subtype_id" />
+	</resultMap>
+
+	<select id="fetchStatusExceptionsToCommunication" resultMap="StatusExceptionCommunicationResult" parameterType="int">
+		SELECT status_messages_status_subtype_id as status_subtype_id FROM current_alarm_warning_message where id = #{value}
+	</select>
+
+	<!-- fetchCurrentLightMessageByTenant -->
+	<select id="fetchCurrentLightMessageByTenant" parameterType="TenantRequest" resultMap="fetchCurrentLightMessageByResult">
+
+		SELECT DISTINCT(c.light_id) as light_id
+		  FROM current_alarm_warning_message c JOIN light l
+		       ON c.light_id = l.light_id
+		 WHERE (  EXTRACT(EPOCH FROM current_timestamp)
+				- EXTRACT(EPOCH FROM message_date)
+		       ) &gt; (3600 * #{tenant.minSmartpointCommTime})
+		   AND l.tenant_id = #{tenant.id}
+		   AND c.status_messages_status_id &lt;&gt; 4
+		<if test="communicationFailure == null or !communicationFailure">
+		   AND (c.status_messages_status_subtype_id &lt;&gt; 8
+		   		OR c.status_messages_status_subtype_id IS NULL
+		       )
+		</if>
+		<if test="communicationFailure != null and communicationFailure">
+		   AND c.status_messages_status_subtype_id = 8
+		</if>
+
+	</select>
+
+	<select id="fetchCurrentStatusMessageIdByLightId" parameterType="int" resultMap="StatusMessageResult" >
+       SELECT sm.status_message_id,
+              sm.message_date
+	    FROM status_message sm
+	   WHERE sm.light_id = #{light_id,jdbcType=INTEGER,mode=IN}
+       ORDER BY sm.status_message_id DESC LIMIT 1;
+    </select >
+
+	<select id="updateCommunicationFailMessage" parameterType="Light" resultType="string" statementType="CALLABLE">
+       { call upd_communication_fail_message_date(#{id,jdbcType=INTEGER,mode=IN}
+       ) }
+    </select >
+
+    <select id="fetchCountSmartpointsToMap" parameterType="Map" resultType="int">
+		SELECT COUNT(light.smartpoint_id)
+		       <include refid="fetchAllLightsConditions"/>
+	</select>
+
+	<resultMap type="GeocodeSmartpointInfo" id="GeocodeSmartpointResultToMap">
+		<result property="latitudeAvg" jdbcType="DOUBLE" column="latitudeavg" />
+		<result property="longitudeAvg" jdbcType="DOUBLE" column="longitudeavg" />
+		<result property="latitudeTrunc" jdbcType="DOUBLE" column="latitudetrunc" />
+		<result property="longitudeTrunc" jdbcType="DOUBLE" column="longitudetrunc" />
+		<result property="smartpointsTotalByLatLong" jdbcType="INTEGER" column="total" />
+		<result property="currentLightStatus" jdbcType="INTEGER" column="status" />
+		<collection property="lightIds" ofType="Integer" column="light_id" />
+	</resultMap>
+
+	<select id="fetchSmartpointsToMap" parameterType="Map" resultMap="GeocodeSmartpointResultToMap">
+		SELECT null as light_id,
+		       count(light_id) as total,
+		       CASE min(status_ranking)
+			    WHEN 100 THEN 1 /* alarm */
+			    WHEN 101 THEN 2 /* warning */
+			    WHEN 102 THEN 0 /* maintenance */
+			    WHEN 103 THEN 4 /* deactivated */
+			    WHEN 104 THEN 3 /* activated */
+			    ELSE 99 /* unknown */
+		       END as status,
+		       trunc(AVG(latitude),5)as latitudeavg,
+		       trunc(AVG(longitude),5) as longitudeavg,
+		       max(trunc(latitude,#{geoCodeTrunc})) as latitudetrunc,
+		       max(trunc(longitude,#{geoCodeTrunc})) as longitudetrunc
+		FROM (
+			SELECT light_id,
+			       CASE CAST(status AS NUMERIC)
+				    WHEN 1 THEN 100 /* alarm */
+				    WHEN 2 THEN 101 /* warning */
+				    WHEN 0 THEN 102 /* maintenance */
+				    WHEN 4 THEN 103 /* deactivated */
+				    WHEN 3 THEN 104 /* activated */
+				    ELSE 105 /* unknown */
+			       END as status_ranking,
+			       latitude,
+			       longitude
+			FROM (
+				SELECT l.light_id,
+				       l.light_status as status,
+				       CAST(ll.latitude as NUMERIC) as latitude,
+				       CAST(ll.longitude as NUMERIC) as longitude
+				  FROM light l
+				  JOIN light_location ll ON (l.light_id = ll.light_id)
+				 WHERE l.tenant_id = ${tenant_id}
+				   AND ll.latitude BETWEEN #{bottom_left_lat} AND #{top_right_lat}
+				   AND ll.longitude BETWEEN #{bottom_left_lon} AND #{top_right_lon}
+				   AND l.light_id IN (SELECT light.light_id <include refid="fetchAllLightsConditions"/>)
+			      ) VW
+			) VWF
+		 GROUP BY trunc(latitude,#{geoCodeTrunc}),
+			  trunc(longitude,#{geoCodeTrunc})
+		HAVING count(light_id) &gt; 5
+
+		UNION ALL
+
+		SELECT vw_light.light_id,
+		       vww.total,
+		       vww.status,
+		       vww.latitudeavg,
+		       vww.longitudeavg,
+		       vww.latitudetrunc,
+		       vww.longitudetrunc
+		  FROM (
+			SELECT null as light_id,
+			       count(light_id) as total,
+			       CASE min(status_ranking)
+				    WHEN 100 THEN 1 /* alarm */
+				    WHEN 101 THEN 2 /* warning */
+				    WHEN 102 THEN 0 /* maintenance */
+				    WHEN 103 THEN 4 /* deactivated */
+				    WHEN 104 THEN 3 /* activated */
+				    ELSE 99 /* unknown */
+			       END as status,
+			       trunc(AVG(latitude),5)as latitudeavg,
+			       trunc(AVG(longitude),5) as longitudeavg,
+			       max(trunc(latitude,#{geoCodeTrunc})) as latitudetrunc,
+			       max(trunc(longitude,#{geoCodeTrunc})) as longitudetrunc
+			FROM (
+				SELECT light_id,
+				       CASE CAST(status AS NUMERIC)
+					    WHEN 1 THEN 100 /* alarm */
+					    WHEN 2 THEN 101 /* warning */
+					    WHEN 0 THEN 102 /* maintenance */
+					    WHEN 4 THEN 103 /* deactivated */
+					    WHEN 3 THEN 104 /* activated */
+					    ELSE 105 /* unknown */
+				       END as status_ranking,
+				       latitude,
+				       longitude
+				FROM (
+					SELECT l.light_id,
+					       l.light_status as status,
+					       CAST(ll.latitude as NUMERIC) as latitude,
+					       CAST(ll.longitude as NUMERIC) as longitude
+					  FROM light l
+					  JOIN light_location ll ON (l.light_id = ll.light_id)
+					 WHERE l.tenant_id = ${tenant_id}
+					   AND ll.latitude BETWEEN #{bottom_left_lat} AND #{top_right_lat}
+					   AND ll.longitude BETWEEN #{bottom_left_lon} AND #{top_right_lon}
+					   AND l.light_id IN (SELECT light.light_id <include refid="fetchAllLightsConditions"/>)
+				      ) VW
+				) VWF
+			 GROUP BY trunc(latitude,#{geoCodeTrunc}),
+				  trunc(longitude,#{geoCodeTrunc})
+			HAVING count(light_id) &lt;= 5
+		     ) VWW
+		 JOIN (
+			SELECT trunc(CAST(ll.latitude as NUMERIC),#{geoCodeTrunc}) as latitudetrunc,
+			       trunc(CAST(ll.longitude as NUMERIC),#{geoCodeTrunc}) as longitudetrunc,
+			       l.light_id as light_id
+			  FROM light l
+			  JOIN light_location ll ON (l.light_id = ll.light_id)
+			 WHERE l.tenant_id = ${tenant_id}
+			   AND l.light_id IN (SELECT light.light_id <include refid="fetchAllLightsConditions"/>)
+ 			 GROUP BY latitudetrunc,
+			          longitudetrunc,
+			          l.light_id
+		      ) VW_LIGHT ON (VWW.latitudetrunc = VW_LIGHT.latitudetrunc AND VWW.longitudetrunc = VW_LIGHT.longitudetrunc)
+		 ORDER BY total DESC
+ 	</select>
+
+	<select id="fetchLimitedSmartpointsToMap" parameterType="Map" resultMap="LightResultToMap">
+
+		WITH latitude_asc AS (
+			SELECT light.light_id, lp_lat.property_value as latitude,lp_lon.property_value as longitude, lp_status.property_value
+			<include refid="fetchAllLightsConditions"/>
+		      ORDER BY latitude ASC LIMIT ${max_device_count}
+		      )
+
+			,latitude_desc AS (
+
+			SELECT light.light_id, lp_lat.property_value as latitude,lp_lon.property_value as longitude, lp_status.property_value
+			 <include refid="fetchAllLightsConditions"/>
+		      ORDER BY latitude DESC LIMIT ${max_device_count}
+				)
+
+			,longitude_asc AS (
+
+		    SELECT light.light_id, lp_lat.property_value as latitude,lp_lon.property_value as longitude, lp_status.property_value
+			  <include refid="fetchAllLightsConditions"/>
+		      ORDER BY longitude ASC LIMIT ${max_device_count}
+		    )
+      		,longitude_desc AS (
+
+	    	SELECT light.light_id, lp_lat.property_value as latitude,lp_lon.property_value as longitude, lp_status.property_value
+			  <include refid="fetchAllLightsConditions"/>
+		      ORDER BY longitude DESC LIMIT ${max_device_count}
+		      )
+
+			SELECT * FROM latitude_asc
+
+			UNION ALL
+
+			SELECT * FROM latitude_desc
+
+			UNION ALL
+
+			SELECT * FROM longitude_asc
+
+			UNION ALL
+
+			SELECT * FROM longitude_desc
+
+	</select>
+
+	<resultMap id="MiddleResult" type="com.sensus.mlc.smartpoint.model.SmartpointMiddleMap">
+		<result property="middleLatMin" column="middle_lat_min" />
+		<result property="middleLatMax" column="middle_lat_max" />
+		<result property="middleLonMin" column="middle_long_min" />
+		<result property="middleLonMax" column="middle_long_max" />
+	</resultMap>
+
+	<select id="fetchMiddleMap" parameterType="Map" resultMap="MiddleResult">
+			SELECT 	(SELECT MIN(cast(lp_lat.property_value as double precision))
+					 <include refid="fetchAllLightsConditions"/>
+			    	)AS middle_lat_min,
+
+					(SELECT MAX(cast(lp_lat.property_value as double precision))
+					 <include refid="fetchAllLightsConditions"/>
+			    	) as middle_lat_max,
+
+					(SELECT MIN(cast(lp_lon.property_value as double precision))
+					 <include refid="fetchAllLightsConditions"/>
+					) AS middle_long_min,
+
+					(SELECT MAX(cast(lp_lon.property_value as double precision))
+					 <include refid="fetchAllLightsConditions"/>
+			    	) AS middle_long_max
+
+	</select>
+
+	<select id="fetchMiddleSmartpointsToMap" parameterType="Map" resultMap="LightResultToMap">
+		SELECT light.light_id, lp_lat.property_value,lp_lon.property_value,lp_status.property_value
+				<include refid="fetchAllLightsConditions"/>
+				   LIMIT ${max_device_count}
+	</select>
+
+    <select id="updateCurrentStatusMessage" parameterType="Map" resultType="string" statementType="CALLABLE">
+      UPDATE light
+  		SET   current_status_message_id = #{current_status_message_id}
+ 	  WHERE light_id = #{light_id};
+    </select >
+
+    <select id="checkIfValidBinding" parameterType="LightRequest" resultType="Boolean">
+
+	    SELECT CASE WHEN(current_timestamp - create_date)::TIME > '01:00:00'::TIME THEN true ELSE false END as binding_exist
+	      FROM status_message
+		 WHERE light_id =  #{firstLight.id,jdbcType=INTEGER,mode=IN}
+		   AND message_type = 4
+		   AND tenant_id =  #{tenant.id,jdbcType=INTEGER,mode=IN}
+		   ORDER BY create_date DESC
+		   LIMIT 1
+
+    </select>
+
+</mapper>

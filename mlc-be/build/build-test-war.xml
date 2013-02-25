@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<project name="Build LC BE Jar and  War Files" default="buildBEWar">
+	<taskdef file="../../lib/build/sensus-pcm-antlib.xml" />
+
+	<!-- Properties that will most commonly be passed into the tasks -->
+	
+	<!-- The build version number; it is used in the jar name -->
+	<property name="version" value="1" />
+	<!-- The directory log4j should be configured to log to in the final war -->
+	<property name="log.dir" value="/opt/flexnet-slc/log" />
+	<!-- The file name log4j should be configured to log to in the final war -->
+	<property name="log.file" value="slc.log" />
+	<!-- Exclude pattern for Lib jars -->
+	<property name="libExcludes" value="junit*.jar,antlr*.jar,jtds*.jar,spring-batch*.jar,org.springframework.test*.jar,struts*.jar,sitemesh*.jar,freemarker*.jar" /> 
+	
+
+
+	<!-- Build Targets -->
+	
+	<!-- Build the BE test War ...it will build back-end jars -->
+	<target name="buildBEWar" description="Build the BE War for Test">
+		<buildBEWar componentNameList="base-${version},process-${version},mlcserver-${version},schedule-${version},smartpoint-${version},group-${version},tag-${version}" libExcludes="${libExcludes}" logDir="${log.dir}" logFile="${log.file}" />
+	</target>
+
+
+</project>

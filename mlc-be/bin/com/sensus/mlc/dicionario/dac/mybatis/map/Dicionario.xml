@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Dicionario">
+
+<resultMap id="ValidacaoResult" type="Validacoes">
+	<result property="codValid" column="codValid" />
+	<result property="descValid" column="descValid" />
+</resultMap>
+
+<resultMap id="AbasResult" type="Abas">
+	<result property="codAbas" column="codAbas" />
+	<result property="nmAbas" column="nmAbas" />
+	<result property="positionX" column="positionX" />
+	<result property="positionY" column="positionY" />
+	<collection property="codAtrib" column="codAtrib"
+		select="Dicionario.fetchAllAbasByAtributos"/>
+</resultMap>
+
+<resultMap id="AtributosResult" type="Atributos">
+	<result property="codAtrib" column="codAtrib" />
+	<result property="nmAtrib" column="nmAtrib" />
+	<result property="posicaoX" column="posicaoX" />
+	<result property="posicaoY" column="posicaoY" />
+	<result property="tamanho" column="tamanho" />
+	<result property="label" column="label" />
+	<result property="requerido" column="requerido" />
+	<result property="busca" column="busca" />
+	<result property="help" column="help" />
+	<result property="mascara" column="mascara" />
+	<result property="codTelaBusca" column="codTelaBusca" />
+	<collection property="cdValidacao" column="cdValidacao"
+		select="Dicionario.fetchAllAtributosByValidacao" />
+	<collection property="codTipo" column="codTipo"
+		select="Dicionario.fetchAllAtributosByTipo" />
+</resultMap>
+
+<resultMap id="ExportResult" type="Exports">
+	<result property="CodExp" column="codExp" />
+	<result property="Posicao" column="posicao" />
+	<result property="DsExport" column="dsExport" />
+	<collection property="CodAtrib" column="CodAtrib"
+		select="Dicionario.fetchAllAbasByAtributos" />
+	<collection property="CodQuery" column="CodQuery"
+		select="Dicionario.fetchAllExportByQuerys" />
+</resultMap>
+
+<resultMap id="ImportResult" type="Imports">
+	<result property="CodImp" column="codImp" />
+	<result property="Posicao" column="posicao" />
+	<result property="DsExport" column="dsExport" />
+	<collection property="CodAtrib" column="CodAtrib"
+		select="Dicionario.fetchAllAbasByAtributos" />
+	<collection property="CodQuery" column="CodQuery"
+		select="Dicionario.fetchAllExportByQuerys" />
+</resultMap>
+
+<resultMap id="QuerysResult" type="Querys">
+	<result property="CodQuery" column="codQuery" />
+	<result property="DsQuery" column="dsQuery" />
+	<result property="Query" column="query" />
+	<result property="TipoQuery" column="tipoQuery" />
+</resultMap>
+
+<resultMap id="TabelasResult" type="Tabelas">
+	<result property="CodTab" column="codTab" />
+	<result property="PrimaryKey" column="primaryKey" />
+	<result property="Forenkey" column="forenkey" />
+	<result property="CodTabs" column="codTabs" />
+	<result property="Descricao" column="descricao" />
+	<collection property="CodAtrib" column="CodAtrib"
+		select="Dicionario.fetchAllAbasByAtributos" />
+</resultMap>
+
+
+<resultMap id="TelaResult" type="Tela">
+	<result property="codTela" column="codTela" />
+	<result property="nmTela" column="nmTela" />
+	<result property="horizontal" column="horizontal" />
+	<result property="vertical" column="vertical" />
+	<collection property="codAbas" column="codAbas"
+		select="Dicionario.fetchAllTelaByAbas" />
+</resultMap>
+
+<resultMap id="TipoResult" type="Tipos">
+	<result property="codTipo" column="codTipo" />
+	<result property="tipo" column="tipo" />
+</resultMap>
+
+	<select id="fetchTelaById"  parameterType="Map" resultMap="TelaResult">
+		SELECT * FROM DIC008
+	</select>
+
+	<select id="fetchAllTelaByAbas" parameterType="Map"   resultMap="AbasResult">
+
+		select e.*
+			from DIC008 f
+				inner join DIC009 e on
+					(f.codAbas = e.codAbas and f.codTela = #{codTela} )
+
+	</select>
+
+	<select id="fetchAllAbasByAtributos" parameterType="Map"  resultMap="AtributosResult">
+
+		select a.* from DIC008 t
+			left join DIC009 b on(t.codabas = b.codabas )
+			left join DIC005 a on(b.codAtrib = a.codAtrib)
+		where t.codTela = #{codTela}
+
+	</select>
+
+
+	<select id="fetchAllAtributosByValidacao" parameterType="Map"  resultMap="ValidacaoResult">
+
+		select a.* from DIC005 t
+			left join DIC003 b on(t.codValid = b.codValid )
+		where t.codAtrib = #{codAtrib}
+
+	</select>
+
+	<select id="fetchAllAtributosByTipo" parameterType="Map"  resultMap="TipoResult">
+
+		select a.* from DIC005 t
+			left join DIC006 b on(t.codTipo = b.codTipo )
+		where t.codAtrib = #{codAtrib}
+
+	</select>
+
+</mapper>
+

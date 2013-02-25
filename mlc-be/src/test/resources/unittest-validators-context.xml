@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- General validators -->
+	<bean id="LightingControlRequestValidator" class="com.sensus.mlc.base.validation.LightingControlRequestValidator" />
+	<bean id="lightingControlRequestValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="LightingControlRequestValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="LightListValidator" class="com.sensus.mlc.smartpoint.validation.LightListValidator" />
+	<bean id="lightListValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="LightListValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="MapDataValidator" class="com.sensus.mlc.base.validation.MapDataValidator" />
+	<bean id="mapDataValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="MapDataValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="LightingControlInquiryRequestValidator" class="com.sensus.mlc.base.validation.LightingControlInquiryRequestValidator">
+		<property name="pageSizeList" value= "${system.settings.pageSizeList}" />
+	</bean>
+	<bean id="lightingControlInquiryRequestValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="LightingControlInquiryRequestValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="LightSelectionRequestValidator" class="com.sensus.mlc.base.validation.LightSelectionRequestValidator" />
+	<bean id="lightSelectionRequestValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="LightSelectionRequestValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="RangeDateValidator" class="com.sensus.mlc.base.validation.RangeDateValidator" />
+	<bean id="rangeDateValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="RangeDateValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="PropertiesValidator" class="com.sensus.mlc.smartpoint.validation.PropertiesValidator" />
+	<bean id="propertiesValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="PropertiesValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="CustomSearchValidator" class="com.sensus.mlc.smartpoint.validation.CustomSearchValidator" >
+		<property name="smartPointAccessorBCL" ref="smartPointAccessorBCLMockTarget" />
+	</bean>
+
+	<bean id="customSearchValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="CustomSearchValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="GeoCodeValidator" class="com.sensus.mlc.base.validation.GeoCodeValidator" />
+	<bean id="geoCodeValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="GeoCodeValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- Validators by area -->
+	<bean id="LightValidator" class="com.sensus.mlc.smartpoint.validation.LightValidator" />
+	<bean id="lightValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="LightValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="AnalyticsTypeValidator" class="com.sensus.mlc.analytics.validation.AnalyticsTypeValidator" />
+	<bean id="analyticsTypeValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="AnalyticsTypeValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- Group Validators -->
+	<bean id="GroupValidator" class="com.sensus.mlc.group.validation.GroupValidator" />
+	<bean id="groupValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="GroupValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="GroupRequestValidator" class="com.sensus.mlc.group.validation.GroupRequestValidator" />
+	<bean id="groupRequestValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="GroupRequestValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="GroupListValidator" class="com.sensus.mlc.group.validation.GroupListValidator" />
+	<bean id="groupListValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="GroupListValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="ScheduleValidator" class="com.sensus.mlc.schedule.validation.ScheduleValidator">
+		<property name="scheduleBCL" ref="scheduleBCLMockTarget" />
+	</bean>
+	<bean id="scheduleValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="LightingControlRequestValidator" />
+				<ref bean="LightingControlInquiryRequestValidator" />
+				<ref bean="ScheduleValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="ProcessValidator" class="com.sensus.mlc.process.validation.ProcessValidator" />
+	<bean id="processValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="ProcessValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="ColumnFilterValidator" class="com.sensus.mlc.base.validation.ColumnFilterValidator" />
+		<bean id="columnFilterValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="ColumnFilterValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="LightStatusNotificationRequestValidator" class="com.sensus.mlc.smartpoint.validation.LightStatusNotificationRequestValidator"/>
+	<bean id="lightStatusNotificationRequestValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="LightStatusNotificationRequestValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="ChannelSetupAuditRequestValidator" class="com.sensus.mlc.smartpoint.validation.ChannelSetupAuditRequestValidator" />
+	<bean id="channelSetupAuditRequestValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="ChannelSetupAuditRequestValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="AlarmNotificationRequestValidator" class="com.sensus.mlc.smartpoint.validation.AlarmNotificationRequestValidator" />
+	<bean id="alarmNotificationRequestValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="AlarmNotificationRequestValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="ForcedLightStatusNotificationRequestValidator" class="com.sensus.mlc.smartpoint.validation.ForcedLightStatusNotificationRequestValidator" />
+	<bean id="forcedLightStatusNotificationRequestValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="ForcedLightStatusNotificationRequestValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="LightIntensityValidator" class="com.sensus.mlc.smartpoint.validation.LightIntensityValidator" />
+	<bean id="lightIntensityValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="LightIntensityValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="MlcGatewaySupervisoryNotificationValidator" class="com.sensus.mlc.mlcserver.validation.MlcGatewaySupervisoryNotificationValidator" />
+	<bean id="mlcGatewaySupervisoryNotificationValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="MlcGatewaySupervisoryNotificationValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="MlcServerValidator" class="com.sensus.mlc.mlcserver.validation.MlcServerValidator" />
+	<bean id="mlcServerValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="MlcServerValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="TenantLightAssociationValidator" class="com.sensus.mlc.base.validation.TenantLightAssociationValidator">
+		<property name="smartPointAccessorBCL" ref="smartPointAccessorBCLMockTarget" />
+	</bean>
+	<bean id="tenantLightAssociationValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="TenantLightAssociationValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="MlcServerSmartpointListValidator" class="com.sensus.mlc.mlcserver.validation.MlcServerSmartpointListValidator" >
+		<property name="smartPointAccessorBCL" ref="smartPointAccessorBCLMockTarget" />
+	</bean>
+	<bean id="mlcServerSmartpointListValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="MlcServerSmartpointListValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="SettingListValidator" class="com.sensus.mlc.settings.validation.SettingListValidator" />
+	<bean id="settingListValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="SettingListValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="UserValidator" class="com.sensus.mlc.user.validation.UserValidator" />
+	<bean id="userValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="UserValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="UserRequestValidator" class="com.sensus.mlc.user.validation.UserRequestValidator" />
+	<bean id="userRequestValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="UserRequestValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="TagRequestValidator" class="com.sensus.mlc.tag.validation.TagRequestValidator" />
+	<bean id="tagRequestValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="TagRequestValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="TagValidator" class="com.sensus.mlc.tag.validation.TagValidator" />
+	<bean id="tagValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="TagValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="TagListValidator" class="com.sensus.mlc.tag.validation.TagListValidator" />
+	<bean id="tagListValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="TagListValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="EcoModeBaselineValidator" class="com.sensus.mlc.ecomode.validation.EcoModeBaselineValidator" />
+	<bean id="ecoModeBaselineValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="EcoModeBaselineValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="CsvFileValidator" class="com.sensus.mlc.base.validation.CsvFileValidator" />
+	<bean id="csvFileValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="CsvFileValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="TenantRequestValidator" class="com.sensus.mlc.tenant.validation.TenantRequestValidator" />
+	<bean id="tenantRequestValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="TenantRequestValidator" />
+			</list>
+		</property>
+	</bean>
+
+</beans>
