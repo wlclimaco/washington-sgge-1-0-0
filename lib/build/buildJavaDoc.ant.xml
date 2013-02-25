@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<project name="Build QAT Framework JavaDoc" default="build" >
+	<taskdef file="../../Lib/qat-pcm-antlib.xml" />
+
+	<!-- This is the real target -->
+	<target name="build">
+		<buildJavaDoc businessArea="framework" 
+			COTSLibDir="../../COTSLib"
+			rootSrcDir="../src"
+			libDir="../../Lib"/>
+	</target>
+
+</project>

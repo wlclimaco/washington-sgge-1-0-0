@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+	<!--
+  - Application context definition for QAT Backends.
+  -->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+	<!-- ========================= GENERAL DEFINITIONS ========================= -->
+
+	<!-- Configurer that replaces ${...} placeholders with values from properties files -->
+	<!--
+		(in this case, mail and JDBC related properties) <bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> <property name="locations"> <list>
+		<value>WEB-INF/mail.properties</value> <value>WEB-INF/jdbc.properties</value> </list> </property> </bean>
+	-->
+
+	<!-- =================== Spring Custom Property Editors===================== -->
+
+	<!-- This one is for Java.util.Date properties where the input format must be mm/dd/yyyy -->
+	<bean id="customEditorConfigurer" class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+		<property name="customEditors">
+			<map>
+				<entry key="java.util.Date">
+					<bean class="org.springframework.beans.propertyeditors.CustomDateEditor">
+						<constructor-arg index="0">
+							<bean class="java.text.SimpleDateFormat">
+								<constructor-arg>
+									<value>MM/dd/yyyy</value>
+								</constructor-arg>
+							</bean>
+						</constructor-arg>
+						<constructor-arg index="1">
+							<value>true</value>
+						</constructor-arg>
+					</bean>
+				</entry>
+
+			</map>
+		</property>
+	</bean>
+
+	<!-- ========================= QAT FRAMEWORK DEFINITIONS ======================== -->
+	<bean id="SensusAppContext" class="com.sensus.common.util.SensusAppContext"></bean>
+	<bean id="sensus-debug-loggingInterceptor" class="com.sensus.common.aop.SensusDebugLoggingAOP"></bean>
+
+	<!--
+		- Build in timing profiler must have log4j in TRACE for this class. <bean id="timingLogger"
+		class="org.springframework.aop.interceptor.PerformanceMonitorInterceptor"/>
+	-->
+
+
+	<!-- ========================= ASPECT CONFIGURATIONS ======================== -->
+
+	<!--
+		- Transaction advice gets applied through the AOP configuration below.
+		-->
+	<aop:config>
+		<!--  pointcut matches execution of service with expression -->
+		<!--  we have defined the pointcut expression to make the entire bas layer transactional -->
+		<aop:pointcut id="sensus-bclOperations" expression="execution(* com.sensus.*.*.bcl.*.*(..))" />
+		<!--  when match occurs, the advice defined by ‘txadvice’ will run -->
+		<aop:advisor advice-ref="sensus-txAdvice" pointcut-ref="sensus-bclOperations" />
+	</aop:config>
+
+	<!--
+		Transaction advice definition, based on method name patterns. Defaults to PROPAGATION_REQUIRED for all methods whose
+		name starts with "*", and to PROPAGATION_REQUIRED with read-only hint for all whose name starts with "fetch*".
+	-->
+	<tx:advice id="sensus-txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<!-- all methods starting with 'fetch' are read-only -->
+			<tx:method name="fetch*" propagation="SUPPORTS" read-only="true" />
+			<!-- other methods use the default transaction settings  -->
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<!--  we have defined the pointcut expression to make the entry points for the batch layer NOT transactional -->
+		<aop:pointcut id="sensus-batchOperations" expression="execution(* com.sensus.*.batch.*.*(..))" />
+		<!--  when match occurs, the advice defined by ‘txadvice’ will run -->
+		<aop:advisor advice-ref="sensus-batch-txAdvice" pointcut-ref="sensus-batchOperations" />
+	</aop:config>
+
+	<!--
+		Transaction advice definition, based on method name patterns. Defaults to PROPAGATION_REQUIRED for all methods whose
+		name starts with "*", and to PROPAGATION_REQUIRED with read-only hint for all whose name starts with "batch*".
+	-->
+	<tx:advice id="sensus-batch-txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<!-- all methods starting with 'fetch' are read-only -->
+			<tx:method name="batch*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="fetch*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="get*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="set*" propagation="SUPPORTS" read-only="true" />
+			<!-- other methods use the default transaction settings  -->
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!--
+		Used for built-in timing interceptor <bean
+		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator"> <property name="beanNames"> <list>
+		<value>solutionBAC</value> </list> </property> <property name="interceptorNames"> <list> <value>timingLogger</value>
+		</list> </property> </bean>
+	-->
+
+	<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames">
+			<list>
+				<value>*DAC*</value>
+				<value>*BCL*</value>
+				<value>*BCF*</value>
+			</list>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>sensus-debug-loggingInterceptor</value>
+			</list>
+		</property>
+	</bean>
+
+</beans>
