@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://mallet-app.davis.sensus.lab:8080/" />
+<title>update_offset_schedule_turn_on_50_to_100_intensity</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">update_offset_schedule_turn_on_50_to_100_intensity</td></tr>
+</thead><tbody>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#messaging-main&quot;).remove();</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#yui-main h1</td>
+	<td>Schedules</td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>${offsetSchName}/2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(storedVars['row']) - 2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#schedule-table tbody tr:eq(${row}) td:eq(2) a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Edit Offset Schedule &quot;${offsetSchName}&quot; </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Edit Offset Schedule &quot;${offsetSchName}&quot; </td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=schedule-description</td>
+	<td>Description ${offsetSchName} - TURN ON 100% intensity</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=sunset-intensity</td>
+	<td>100%</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Schedule ${offsetSchName} updated successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTableRows</td>
+	<td>css=#schedule-table tbody</td>
+	<td>${totalSch}</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

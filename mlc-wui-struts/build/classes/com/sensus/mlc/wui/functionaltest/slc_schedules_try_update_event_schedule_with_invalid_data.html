@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://mallet-app.davis.sensus.lab:8080/" />
+<title>try_update_event_schedule_with_invalid_data</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">try_update_event_schedule_with_invalid_data</td></tr>
+</thead><tbody>
+<tr>
+	<td>store</td>
+	<td>${eventSchName}004</td>
+	<td>schName</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#messaging-main&quot;).remove();</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#yui-main h1</td>
+	<td>Schedules</td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>${schName}/2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${row}) - 2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#schedule-table tbody tr:eq(${row}) td:eq(2) a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Edit Event Schedule &quot;${schName}&quot; </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Edit Event Schedule &quot;${schName}&quot; </td>
+	<td></td>
+</tr>
+<!--Empty name, max of event information, event not defined-->
+<tr>
+	<td>waitForVisible</td>
+	<td>id=time3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForEditable</td>
+	<td>id=schedule-name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=schedule-name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=event-add-link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=event4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>id=event-add-link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.formErrorContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>* This field is required.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>* Please select an option</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>* This field is required.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>* Expected Format hh:mm am|pm - * Expected valid hour: 01:00am|pm to 12:00am|pm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>* Please select 1 options</td>
+	<td></td>
+</tr>
+<!--Schedule Name/Description max length and invalid when information-->
+<tr>
+	<td>click</td>
+	<td>css=#event4 &gt; h3.remove</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>id=event4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=schedule-name</td>
+	<td>Event Schedule Test Maaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaax</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=schedule-description</td>
+	<td>Event Schedule Test Descriptioooooooon Maaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaax</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=radio11</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=day1Mon</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=time1</td>
+	<td>00:00 AM</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.formErrorContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>* Maximum 100 characters allowed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>* Maximum 150 characters allowed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>* Please select 1 options</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>* Expected Format hh:mm am|pm - * Expected valid hour: 01:00am|pm to 12:00am|pm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>id=event-add-link</td>
+	<td></td>
+</tr>
+<!--Unique name-->
+<tr>
+	<td>click</td>
+	<td>id=day1Mon</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=schedule-name</td>
+	<td>${eventSchName}001</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=schedule-description</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=time1</td>
+	<td>7:00 AM</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=#messaging-main span.message</td>
+	<td>A Schedule with this name already exists.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main span.message</td>
+	<td>A Schedule with this name already exists.</td>
+</tr>
+<!--No when information-->
+<tr>
+	<td>click</td>
+	<td>css=#event3 &gt; h3.remove</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>id=event3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>time2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.formErrorContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>* This field is required.</td>
+	<td></td>
+</tr>
+<!--Invalid when information-->
+<tr>
+	<td>type</td>
+	<td>time2</td>
+	<td>a</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.formErrorContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>* Expected Format hh:mm am|pm - * Expected valid hour: 01:00am|pm to 12:00am|pm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#event2 &gt; h3.remove</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>id=event2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotAttribute</td>
+	<td>css=#event1 &gt; h3@class</td>
+	<td>remove</td>
+</tr>
+<!--Cancel Button-->
+<tr>
+	<td>click</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Check Navigation-->
+<tr>
+	<td>verifyText</td>
+	<td>css=#yui-main h1</td>
+	<td>Schedules</td>
+</tr>
+<!--Check Element count/summariz-->
+<tr>
+	<td>verifyText</td>
+	<td>css=#actions &gt; span</td>
+	<td>0 of ${totalSch} Schedules Selected</td>
+</tr>
+<tr>
+	<td>verifyTableRows</td>
+	<td>css=#schedule-table tbody</td>
+	<td>${totalSch}</td>
+</tr>
+<!--Check Element in Grid-->
+<tr>
+	<td>verifyTable</td>
+	<td>css=#schedule-table tbody.${row}.2</td>
+	<td>${schName}</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#schedule-table tbody.${row}.3</td>
+	<td>Description ${schName} - Multiple events</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#schedule-table tbody.${row}.4</td>
+	<td>Event</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#schedule-table tbody.${row}.7</td>
+	<td>${currentDate}</td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="mlc-user" extends="mlc-default" namespace="/user">
+		<!-- Render main page -->
+		<action name="ajax.list" class="userPageAction">
+			<param name="jsComponents">mlc-user</param>
+			<result name="success">/pages/user/user_main.jsp</result>
+		</action>
+		
+		<!-- JavaScript Settings -->
+		<action name="settings" class="userSettingsAction" method="settings">
+			<param name="menuItem">users</param>
+			<result name="success" type="freemarker">/freemarker/user_settings.js
+			</result>
+		</action>
+		
+		<!-- Ajax callback for user search -->
+		<action name="search" class="userSearchAjaxAction" method="search">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- Render main page -->
+		<action name="ajax.createUserPage" class="userPageAction">
+			<param name="jsComponents">mlc-create-user</param>
+			<result name="success">/pages/user/user_create.jsp</result>
+		</action>
+		
+		<action name="include.userDeleteDialog" class="userPageAction">
+			<param name="jsComponents">mlc-user</param>
+			<result name="success">/pages/user/user_delete_dialog.jsp</result>
+		</action>
+		
+		<!-- Render main page -->
+		<action name="ajax.updateUserPage" class="userCreatePageAction" method="fillUpdateUser">
+			<param name="jsComponents">mlc-create-user</param>
+			<result name="success">/pages/user/user_create.jsp</result>
+			<param name="root">response</param>
+		</action>
+		
+		<action name="fillUserPage" class="userAjaxAction" method="fillUserPage">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="exludeNullProperties">true</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<action name="fetchLightsByGroup" class="userAjaxAction" method="fetchLightsByGroupList">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<action name="fillUserContext" class="userAjaxAction" method="fillUserContext">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">fillUserContext</param>
+			</result>
+		</action>
+		
+		<action name="ajax.fetchLightByUserToMap" class="userAjaxAction" method="fetchLightByUserToMap">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+
+		<action name="ajax.countLightsbyGroup" class="userAjaxAction" method="countLightsbyGroup">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+
+
+		<!-- Delete Users -->
+		<action name="deleteUser" class="userAjaxAction" method="deleteUser">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- Create User -->
+		<action name="createUser" class="userAjaxAction" method="createUser">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+
+		<!-- Create User -->
+		<action name="updateUser" class="userAjaxAction" method="updateUser">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+
+
+	</package>
+	
+</struts>

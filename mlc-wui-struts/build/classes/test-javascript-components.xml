@@ -1,0 +1,33 @@
+<components>
+	<component id="base">
+		<files>
+			<settings absolute="false">settings</settings>
+			<stylesheet absolute="true">stylesheet_absolute</stylesheet>
+			<stylesheet absolute="false">stylesheet_relative</stylesheet>
+			<script absolute="true">script_absolute</script>
+			<script absolute="false">script_relative</script>
+		</files>
+	</component>
+	<component id="dependency1">
+		<requires>
+			<component>base</component>
+		</requires>
+		<files>
+			<settings absolute="false">settings2</settings>
+			<stylesheet absolute="true">stylesheet_absolute2</stylesheet>
+			<stylesheet absolute="false">stylesheet_relative2</stylesheet>
+			<script absolute="true">script_absolute2</script>
+			<script absolute="false">script_relative2</script>
+		</files>
+	</component>
+	<component id="dependency2">
+		<requires>
+			<component>dependency1</component>
+		</requires>
+	</component>
+	<component id="independent">
+		<files>
+			<settings absolute="false">settings3</settings>
+		</files>
+	</component>
+</components>

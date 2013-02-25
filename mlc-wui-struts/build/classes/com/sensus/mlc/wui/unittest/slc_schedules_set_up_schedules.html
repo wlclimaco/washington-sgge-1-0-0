@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://mallet-app.davis.sensus.lab:8080/" />
+<title>set_up_schedules</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">set_up_schedules</td></tr>
+</thead><tbody>
+<tr>
+	<td>storeGlobal</td>
+	<td>15</td>
+	<td>schePerPage</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>Test Offset Schedule S 001</td>
+	<td>offsetSchName</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${offsetSchName} Updated</td>
+	<td>UP_offsetSchName</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>Test Event Schedule S 001</td>
+	<td>eventSchName</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${eventSchName} Updated</td>
+	<td>UP_eventSchName</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Schedules</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeTableRows</td>
+	<td>css=#schedule-table tbody</td>
+	<td>rowsTotal</td>
+</tr>
+<tr>
+	<td>storeVisible</td>
+	<td>css=#schedule-table</td>
+	<td>isTableVisible</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${isTableVisible}</td>
+	<td>jump</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>0</td>
+	<td>rowsTotal</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>jump</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${rowsTotal}</td>
+	<td>scheTotal</td>
+</tr>
+</tbody></table>
+</body>
+</html>

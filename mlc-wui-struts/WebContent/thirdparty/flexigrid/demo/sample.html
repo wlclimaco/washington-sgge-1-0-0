@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Flexigrid</title>
+<link rel="stylesheet" type="text/css" href="../css/flexigrid.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
+<script type="text/javascript" src="../js/flexigrid.js"></script>
+</head>
+<body>
+<p>This is a sample implementation attached to a form, to add additional parameters.</p>
+
+<table id="flex1" style="display:none"></table>
+<script type="text/javascript">
+
+
+$(document).ready(function(){
+var rows = new Array();
+for (x=0;x<= 100;x++){
+rows.push({cell: [x,"Washington","Climaco",15,"Maria conceição",10, 38082243,10] });
+}
+<!-- rows.push({cell: [3,"ashington","Climaco",15,"Maria conceição",10, 38082243,10] }); -->
+<!-- rows.push({cell: [2,"oashington","Climaco",15,"Maria conceição",10, 38082243,10] }); -->
+
+var data = {
+        total: 100,    
+        page:5,
+        rows: rows
+}
+var searchitems=[];
+
+var colModel = [{ display: 'id', name : 'id', width : 150, sortable : true, align: 'center'},
+         { display: 'Name', name : 'name', width : 150, sortable : true, align: 'left'},
+         { display: 'Sobrenome', name : 'Sobrenome', width : 150, sortable : true, align: 'left'},
+         { display: 'idade', name : 'idade', width : 150, sortable : true, align: 'left'},
+         { display: 'rua', name : 'rua', width : 150, sortable : true, align: 'left'},
+         { display: 'numero', name : 'numero', width : 150, sortable : true, align: 'left'},
+         { display: 'cep', name : 'cep', width : 150, sortable : true, align: 'left'}];
+colModel.push({display: 'teste', name : 'teste', width : 150, sortable : true, align: 'center'})		
+console.log(colModel) ;
+console.log("=============================================================================")
+for(i = 0;i< colModel.length;i++){
+	searchitems.push({display: colModel[i].display, name : colModel[i].name});
+}
+console.log(searchitems) ;
+$('table').flexigrid({
+     colModel : colModel,
+
+        dataType: 'json',
+		//url:data,
+		addData :data,
+		searchitems : searchitems,		
+		sortname: "Name",
+		sortorder: "asc",
+		usepager: true,
+		title: 'Countries',
+		useRp: true,
+		rp: 15,
+		showTableToggleBtn: false,
+		width: 700,
+		height: 200
+        });
+    
+
+$('table').flexAddData(data);//.flexReload();
+});
+</script>
+</body>
+</html>

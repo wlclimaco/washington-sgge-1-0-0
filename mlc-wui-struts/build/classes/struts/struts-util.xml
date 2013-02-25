@@ -1,0 +1,70 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<!-- Action for Analytics CRUD -->
+	<package name="mlc-util" extends="mlc-default" namespace="/util">
+
+		<!-- Fill Filter -->
+		<action name="include.fillFilter" class="fillFilterAction" method="fillFilter">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">filterResult</param>
+			</result>
+		</action>
+
+		<action name="ajax.fetchCustomize" class="fillFilterAction" method="fillFilter">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">filterResult</param>
+			</result>
+		</action>
+		
+		<!-- Customize -->
+        <action name="fetchCustomize" class="customizeAjaxAction" method="fetchCustomize">  
+            <result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result> 
+        </action>
+
+		 <!-- Session Create Customize -->
+        <action name="createSessionCustomize" class="customizeAjaxAction" method="createSessionCustomize">  
+            <result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result> 
+        </action>
+
+		<!-- Session Recover Customize -->
+        <action name="recoverSessionCustomize" class="customizeAjaxAction" method="recoverSessionCustomize">  
+            <result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">columnFilterRequest</param>
+			</result> 
+        </action>
+        
+        <!-- Control Light -->
+		<action name="include.controlLight" class="smartpointPageAction">
+			<result name="success">/commons/pages/smartpoint_control_lights.jsp</result>
+		</action>
+				
+		<!-- Switch On/Off Individual Lights -->
+		<action name="ajax.controlLights" class="controlLightAjaxAction" method="controlLights">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- Session Remove Customize -->
+        <action name="removeSessionCustomize" class="customizeAjaxAction" method="removeSessionCustomize">  
+            <result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result> 
+        </action>
+		
+	</package>
+</struts>
+		

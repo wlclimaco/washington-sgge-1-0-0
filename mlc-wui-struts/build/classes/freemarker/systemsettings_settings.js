@@ -1,0 +1,42 @@
+sensus.settings = $.extend({
+	menuItem: '${menuItem}',
+	//TAG
+	tagPageAction : '${base}/${tagPageAction}',
+	searchTagUrl : '${base}/${searchTagUrl}',
+	deleteTagInclude: '${base}/${deleteTagInclude}',
+	deleteTagUrl: '${base}/${deleteTagUrl}',
+	autoExistingGroupInclude: '${base}/${autoExistingGroupInclude}',
+	autoNoGroupInclude: '${base}/${autoNoGroupInclude}',
+	suspendAutoGroupInclude: '${base}/${suspendAutoGroupInclude}',
+	updateAutoGroup : '${base}/${updateAutoGroup}',
+	existGroupWithTagName : '${base}/${existGroupWithTagName}',
+	createGroup :'${base}/${createGroup}',
+	addTag : '${base}/${addTag}',
+	smartpointUrl : '${base}/${smartpointUrl}',
+	//Process
+	searchUrlLRP : '${base}/${searchUrlLRP}',
+	longRunningProcessDialog: '${base}/${longRunningProcessDialog}',
+	longRunningProcessDialogRemove: '${base}/${longRunningProcessDialogRemove}',
+	longRunningProcessDialogAbort: '${base}/${longRunningProcessDialogAbort}',
+	longRunningProcessRemove: '${base}/${longRunningProcessRemove}',
+	longRunningProcessAbort: '${base}/${longRunningProcessAbort}',
+	longRunningProcessRecent: '${base}/${longRunningProcessRecent}',
+	longRunningProcessRemoveAll: '${base}/${longRunningProcessRemoveAll}',
+	retryUnreachable : '${base}/${longRunningProcessRetryUnreachable}',
+	checkLongRunningProcess: '${base}/${checkLongRunningProcess}',
+	checkRni: '${base}/${checkRni}',
+	deleteFile : '${base}/${deleteFile}',
+	saveProfileSettings: '${base}/${saveProfileSettings}',
+	generateSummaryFileCSV : '${base}/${generateSummaryFileCSV}',
+		
+	//Profile
+	saveProfileSettings: '${base}/${saveProfileSettings}',
+	profilePageAction: '${base}/${profilePageAction}',
+	unitkWh: '${unitkWh}',
+	unitMWh: '${unitMWh}',
+	unitGWh: '${unitGWh}',
+	unitTWh: '${unitTWh}',
+	unitPWh: '${unitPWh}',
+	convertUnit: '${userLocaleSettings.convertUnit}',
+	
+}, sensus.commons.lib.ajax.settings);

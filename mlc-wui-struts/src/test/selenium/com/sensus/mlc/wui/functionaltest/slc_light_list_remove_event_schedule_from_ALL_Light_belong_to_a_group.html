@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://slct1.davis.sensus.lab:8080/slc/login.jsp" />
+<title>slc_light_list_remove_event_schedule_from_ALL_Light_belong_to_a_group</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">slc_light_list_remove_event_schedule_from_ALL_Light_belong_to_a_group</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>link=Lights</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#STATUS .ui-listcombobox input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=smartpoint-table</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#GROUPS div ul:eq(1) li:contains('00 Test Group 000') input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=lights-select-all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//a[contains(text(),'Remove Event Schedule')])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=remove-from-schedule-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=.descriptive-button-row </td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.descriptive-button-row span.ui-button-text</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=.message</td>
+	<td>We have received your request. View 'Recent Requests' or 'Event History' for event confirmation.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.message</td>
+	<td>We have received your request. View 'Recent Requests' or 'Event History' for event confirmation.</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

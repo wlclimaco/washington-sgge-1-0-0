@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://acme-app.davis.sensus.lab:8080/" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>id=menu-smartpoints</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Check Curent Page/...-->
+<tr>
+	<td>assertAttribute</td>
+	<td>id=menu-smartpoints@class</td>
+	<td>alist active</td>
+</tr>
+<!--.../-->
+<!--Filter by active/...-->
+<tr>
+	<td>click</td>
+	<td>css=#STATUS div ul:eq(1) li:eq(0) input</td>
+	<td></td>
+</tr>
+<!--.../-->
+<tr>
+	<td>storeText</td>
+	<td>css=#smartpoint-table tbody tr:eq(0) td:eq(1) a strong</td>
+	<td>poleId</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tbody tr:eq(0) td:eq(1) a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeElementPresent</td>
+	<td>css=#update-protect span.locked</td>
+	<td>isLocked</td>
+</tr>
+<!--If unlock, lock/...-->
+<tr>
+	<td>gotoIf</td>
+	<td>${isLocked}</td>
+	<td>jumpLock</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=true</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>jumpLock</td>
+	<td></td>
+</tr>
+<!--.../-->
+<tr>
+	<td>click</td>
+	<td>id=false</td>
+	<td></td>
+</tr>
+<!--Check Message/...-->
+<tr>
+	<td>waitForText</td>
+	<td>id=light-text</td>
+	<td>Unlocked</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=light-text</td>
+	<td>Unlocked</td>
+</tr>
+<!--.../-->
+</tbody></table>
+</body>
+</html>

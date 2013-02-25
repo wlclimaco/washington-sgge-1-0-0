@@ -1,0 +1,65 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- Action for Group CRUD -->
+	<package name="mlc-dicionario" extends="mlc-default" namespace="/dicionario">
+		
+		<action name="settings" class="dicionarioSettingsAction"
+			method="settings">
+			<param name="menuItem">dicionario</param>
+			<result name="success" type="freemarker">/freemarker/dicionario_settings.js
+			</result>
+		</action>
+		
+		<!-- Render main page -->
+		<action name="ajax.list" class="dicionarioPageAction">
+			<param name="jsComponents">mlc-dicionario</param>
+			<result name="success">/pages/dicionario/dicionario_main.jsp</result>
+			<result name="input">/pages/dicionario/dicionario_main.jsp</result>
+		</action>
+		
+				<!-- Render main page -->
+		<action name="ajax.list.table" class="dicionarioPageAction">
+			<param name="jsComponents">mlc-dicionarioTable</param>
+			<result name="success">/pages/table/dicionarioTable_main.jsp</result>
+			<result name="input">/pages/table/dicionarioTable_main.jsp</result>
+		</action>
+		
+				<!-- Ajax callback for smartpoint search -->
+		<action name="search" class="dicionarioSearchAjaxAction" method="search">
+			<!-- <param name="requiresRole">Tower Configuration</param> -->
+			<result name="success" type="json">
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<action name="fetchTelaById" class="dicionarioAjaxAction" method="fetchTelaById">
+			<!-- <param name="requiresRole">Tower Configuration</param> -->
+			<result name="success" type="json">
+				<param name="root">response</param>
+			</result>
+		</action>
+						<!-- Ajax callback for smartpoint search -->
+		<action name="search" class="empresaSearchAjaxAction" method="fetchAllEmpresa">
+			<!-- <param name="requiresRole">Tower Configuration</param> -->
+			<result name="success" type="json">
+				<param name="root">response</param>
+			</result>
+		</action>
+		<action name="insertEmpresa" class="empresaAjaxAction" method="insertEmpresa">
+				<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="exludeNullProperties">true</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		<action name="insertFilial" class="filialAjaxAction" method="insertFilial">
+				<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="exludeNullProperties">true</param>
+				<param name="root">response</param>
+			</result>
+		</action>				
+	</package>
+</struts>
+		

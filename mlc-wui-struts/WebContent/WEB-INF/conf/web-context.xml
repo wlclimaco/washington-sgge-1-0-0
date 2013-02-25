@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+   
+	
+	<!-- START Application Startup and Configuration -->
+
+	<!-- Load application settings into singleton Properties object -->
+	<util:properties id="settings" location="classpath:ui-settings.properties" />
+
+	<!-- Load and parse JavaScript Configuration -->
+	<bean id="jsComponentMap" class="com.sensus.mlc.wui.base.util.JsComponentLoader" factory-method="loadComponents">
+		<constructor-arg value="javascript-components.xml" />
+	</bean>
+
+
+
+	<!-- Explicitly configure Log4j -->
+	<bean id="log4jInitialization"
+		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetClass" value="org.springframework.util.Log4jConfigurer" />
+		<property name="targetMethod" value="initLogging" />
+		<property name="arguments">
+			<list>
+				<value>classpath:log4j.xml</value>
+			</list>
+		</property>
+	</bean>
+	<!-- END Application Startup and Configuration -->
+
+	<!-- START Parent Bean Definitions -->
+	<!-- Parent Beans -->
+	<bean id="baseAction" abstract="true"
+		class="com.sensus.mlc.wui.base.action.ActionBase">
+		<property name="settings" ref="settings" />
+	</bean>
+	<bean id="layoutAction" abstract="true"
+		class="com.sensus.mlc.wui.base.action.LayoutBase" parent="baseAction">
+		<property name="jsComponentMap" ref="jsComponentMap" />
+	</bean>
+	<!-- END Parent Bean Definitions -->
+	
+	<!--  START MLC Actions -->
+	<!--  The action to render SmartPoint-related pages -->
+	<bean id="mlcPageAction"
+		class="com.sensus.mlc.wui.base.action.MlcPageAction"
+		scope="prototype" parent="layoutAction">
+		<property name="settingsBCF" ref="settingsBCF" />
+		<property name="userBCF" ref="userBCF" />
+	</bean>
+	
+	 <!-- Settings Action for SmartPoint Page -->
+	 <bean id="slcSettingsAction"
+	  class="com.sensus.mlc.wui.base.action.SlcSettingsAction"
+	  scope="prototype" parent="baseAction">  	
+	 </bean>
+
+ 	<bean id="fillFilterAction"
+	 class="com.sensus.mlc.wui.base.util.FillFilterAction"
+	 scope="prototype" parent="baseAction">
+	 <property name="groupBCF" ref="groupBCF" />
+	 <property name="tagBCF" ref="tagBCF" />
+	 <property name="scheduleBCF" ref="scheduleBCF" />
+	 <property name="smartPointAccessorBCF" ref="smartPointAccessorBCF" />
+	 <property name="settingsBCF" ref="settingsBCF" />
+	 <property name="userBCF" ref="userBCF" />
+ </bean>
+
+	<bean id="controlLightAjaxAction"
+		 class="com.sensus.mlc.wui.base.util.ControlLightsAjaxAction"
+		 scope="prototype" parent="baseAction">
+		 <property name="smartPointProcessorBCF" ref="smartPointProcessorBCF" />
+	</bean>
+
+	<!--  START SmartPoint Actions -->
+	<!--  The action to render SmartPoint-related pages -->
+	<bean id="smartpointPageAction"
+		class="com.sensus.mlc.wui.smartpoint.action.SmartpointPageAction"
+		scope="prototype" parent="layoutAction">
+		<property name="scheduleBCF" ref="scheduleBCF" />
+		<property name="groupBCF" ref="groupBCF" />
+		<property name="tagBCF" ref="tagBCF" />
+	</bean>
+	
+	<!-- Settings Action for SmartPointDetail Page  -->	
+	<bean id="smartpointDetailPageAction" 
+		  class="com.sensus.mlc.wui.smartpoint.action.SmartpointDetailPageAction" 
+		  scope="prototype" parent="layoutAction">
+		<property name="smartPointAccessorBCF" ref="smartPointAccessorBCF" />
+		<property name="groupBCF" ref="groupBCF" />
+		<property name="scheduleBCF" ref="scheduleBCF" />
+		<property name="tagBCF" ref="tagBCF" />
+		<property name="processBCF" ref="processBCF" />
+		<property name="settingsBCF" ref="settingsBCF" />
+		<property name="lcHelp" ref="lcHelpTarget" />
+	</bean>
+	
+	<bean id="smartpointDetailAjaxAction" 
+		  class="com.sensus.mlc.wui.smartpoint.action.SmartpointDetailAjaxAction" 
+		  scope="prototype" parent="baseAction">
+		<property name="smartPointAccessorBCF" ref="smartPointAccessorBCF" />
+		<property name="smartPointProcessorBCF" ref="smartPointProcessorBCF" />
+		<property name="smartPointUpdaterBCF" ref="smartPointUpdaterBCF" />
+		<property name="scheduleBCF" ref="scheduleBCF" />
+		<property name="tagBCF" ref="tagBCF" />
+		<property name="ecoModeBCF" ref="ecoModeBCF" />
+		<property name="processBCF" ref="processBCF" />
+	</bean>	
+	
+	<bean id="smartpointHistorySearchAjaxAction" 
+		  class="com.sensus.mlc.wui.smartpoint.action.SmartpointHistorySearchAjaxAction" 
+		  scope="prototype" parent="baseAction">
+		<property name="smartPointAccessorBCF" ref="smartPointAccessorBCF" />
+	</bean>
+
+	<!-- The action handling the SmartPoint search -->
+	<bean id="smartpointSearchAjaxAction"
+		class="com.sensus.mlc.wui.smartpoint.action.SmartpointSearchAjaxAction"
+		scope="prototype" parent="baseAction">
+		<property name="smartPointAccessorBCF" ref="smartPointAccessorBCF" />
+		<property name="smartPointUpdaterBCF" ref="smartPointUpdaterBCF" />
+	</bean>
+	
+	<bean id="customizeAjaxAction"
+		 class="com.sensus.mlc.wui.base.util.CustomizeAjaxAction"
+		 scope="prototype" parent="baseAction">
+		 <property name="smartPointAccessorBCF" ref="smartPointAccessorBCF" />
+	 </bean>
+
+	<!-- Settings Action for SmartPoint Page -->
+	<bean id="smartpointSettingsAction"
+		class="com.sensus.mlc.wui.smartpoint.action.SmartpointSettingsAction"
+		scope="prototype" parent="baseAction" />
+
+	<!-- Other Ajax Callbacks related to SmartPoints -->
+	<bean id="smartpointAjaxAction"
+		class="com.sensus.mlc.wui.smartpoint.action.SmartpointAjaxAction"
+		scope="prototype" parent="baseAction">
+		<property name="smartPointAccessorBCF" ref="smartPointAccessorBCF" />
+		<property name="smartPointUpdaterBCF" ref="smartPointUpdaterBCF" />
+		<property name="smartPointProcessorBCF" ref="smartPointProcessorBCF" />
+		<property name="settingsBCF" ref="settingsBCF" />
+		<property name="tagBCF" ref="tagBCF" />
+	</bean>
+	<!--  END SmartPoint Actions -->
+
+	<!--  START Group Processing -->
+	<!-- Action rendering the Group Page -->
+	<bean id="groupPageAction" class="com.sensus.mlc.wui.group.action.GroupPageAction"
+		scope="prototype" parent="layoutAction" />
+	
+	<!-- Action rendering the Group Create Page -->
+	<bean id="groupCreatePageAction" class="com.sensus.mlc.wui.group.action.GroupCreatePageAction"
+		scope="prototype" parent="layoutAction" >
+		<property name="groupBCF" ref="groupBCF" />
+	</bean>
+	
+	<!-- Settings Actions for the Group Page -->
+	<bean id="groupSettingsAction" class="com.sensus.mlc.wui.group.action.GroupSettingsAction"
+		parent="baseAction" />
+
+	<!-- Action for the Group Search -->
+	<bean id="groupSearchAjaxAction" class="com.sensus.mlc.wui.group.action.GroupSearchAjaxAction"
+		scope="prototype" parent="baseAction">
+		<property name="groupBCF" ref="groupBCF" />
+	</bean>
+
+	<!-- Action supporting other group-releated Ajax Callbacks -->
+	<bean id="groupAjaxAction" class="com.sensus.mlc.wui.group.action.GroupAjaxAction"
+		scope="prototype" parent="baseAction">
+		<property name="groupBCF" ref="groupBCF" />
+	</bean>
+	<!--  END Group Actions -->
+	
+	<!-- Action rendering the User Page -->
+	<bean id="userPageAction" class="com.sensus.mlc.wui.user.action.UserPageAction"
+		scope="prototype" parent="layoutAction">
+		<property name="userBCF" ref="userBCF" />
+		<property name="groupBCF" ref="groupBCF" />
+	</bean>
+	
+	<!-- Action rendering the Edit User Page -->
+	<bean id="userCreatePageAction" class="com.sensus.mlc.wui.user.action.UserPageAction"
+		scope="prototype" parent="layoutAction">
+		<property name="userBCF" ref="userBCF" />
+		<property name="groupBCF" ref="groupBCF" />
+	</bean>
+		
+	<!-- Action for the User Search -->
+	<bean id="userSearchAjaxAction" class="com.sensus.mlc.wui.user.action.UserSearchAjaxAction"
+		scope="prototype" parent="baseAction">
+		<property name="userBCF" ref="userBCF" />
+	</bean>
+	
+	<!-- Settings Actions for the Group Page -->
+	<bean id="userSettingsAction" class="com.sensus.mlc.wui.user.action.UserSettingsAction"
+		parent="baseAction" />
+	
+	<!-- Actions User page -->
+	<bean id="userAjaxAction" class="com.sensus.mlc.wui.user.action.UserAjaxAction"
+		scope="prototype" parent="baseAction">
+		<property name="userBCF" ref="userBCF" />
+		<property name="groupBCF" ref="groupBCF" />
+	</bean>
+	
+	<!--  END User Actions -->	
+	
+	<!-- START Schedule Actions -->
+	<!-- Action supporting the Schedule Page -->
+	<bean id="schedulePageAction" class="com.sensus.mlc.wui.schedule.action.SchedulePageAction"
+		scope="prototype" parent="layoutAction" />
+
+	<!-- Action supporting schedule-related Ajax Callbacks -->
+	<bean id="scheduleAjaxAction" class="com.sensus.mlc.wui.schedule.action.ScheduleAjaxAction"
+		scope="prototype" parent="baseAction">
+		<property name="scheduleBCF" ref="scheduleBCF" />
+	</bean>
+
+	<!-- Actions loading schedule settings -->
+	<bean id="scheduleSettingsAction"
+		class="com.sensus.mlc.wui.schedule.action.ScheduleSettingsAction"
+		scope="prototype" parent="baseAction" />
+
+	<!-- Action for searching schedules -->
+	<bean id="scheduleSearchAjaxAction"
+		class="com.sensus.mlc.wui.schedule.action.ScheduleSearchAjaxAction"
+		scope="prototype" parent="baseAction">
+		<property name="scheduleBCF" ref="scheduleBCF" />
+	</bean>
+
+	<!--  Action rendering the Create Schedule page -->
+	<bean id="createSchedulePageAction"
+		class="com.sensus.mlc.wui.schedule.action.CreateSchedulePageAction"
+		scope="prototype" parent="layoutAction">
+		<property name="scheduleBCF" ref="scheduleBCF" />
+	</bean>	
+
+	<!-- Ajax callbacks for creating schedules -->
+	<bean id="createScheduleAjaxAction"
+		class="com.sensus.mlc.wui.schedule.action.CreateScheduleAjaxAction"
+		scope="prototype" parent="baseAction">
+		<property name="scheduleBCF" ref="scheduleBCF" />
+	</bean>
+	<!-- END Schedule Actions -->
+	
+	<!-- Ajax action for table Process -->
+	 <bean id="processPageAction"
+		class="com.sensus.mlc.wui.process.action.ProcessPageAction"
+		scope="prototype" parent="layoutAction">
+		<property name="userBCF" ref="userBCF" />
+	</bean>
+	
+	<!-- Process Settings Action for System Settings Page -->
+	<bean id="processSettingAction"
+		class="com.sensus.mlc.wui.process.action.ProcessSettingAction"
+		scope="prototype" parent="baseAction" />
+		
+	
+	
+	<bean id="processSearchAjaxAction"
+		class="com.sensus.mlc.wui.process.action.ProcessSearchAjaxAction"
+		scope="prototype" parent="baseAction">
+		<property name="processBCF" ref="processBCF" />
+	</bean>
+	
+	<bean id="processAjaxAction"
+		class="com.sensus.mlc.wui.process.action.ProcessAjaxAction"
+		scope="prototype" parent="baseAction">
+		<property name="processBCF" ref="processBCF" />
+	</bean> 
+	
+	<!-- Action for DashBoardPageAction -->
+	<bean id="dashBoardPageAction"
+		class="com.sensus.mlc.wui.dashboard.action.DashBoardPageAction"
+		scope="prototype" parent="layoutAction">
+	</bean>
+	
+	<!-- Action for DashBoardPageAction -->
+	<bean id="dashboardSearchAjaxAction"
+		class="com.sensus.mlc.wui.dashboard.action.DashboardSearchAjaxAction"
+		scope="prototype" parent="baseAction">
+		<property name="analyticsBCF" ref="analyticsBCF" />
+	 </bean>
+		
+	<!-- Settings Action for DashBoard Page -->
+	<bean id="dashboardSettingsAction"
+		class="com.sensus.mlc.wui.dashboard.action.DashboardSettingAction"
+		scope="prototype" parent="baseAction" />	
+	
+	<!-- Action for search Analytics  -->	
+	<bean id="analyticsSearchAjaxAction"
+		class="com.sensus.mlc.wui.analytics.action.AnalyticsSearchAjaxAction"
+		scope="prototype" parent="baseAction">
+		<property name="analyticsBCF" ref="analyticsBCF" />
+	</bean>
+		
+	<!-- Action for AnalyticsPageAction -->
+	<bean id="analyticsPageAction"
+		class="com.sensus.mlc.wui.analytics.action.AnalyticsPageAction"
+		scope="prototype" parent="layoutAction" >
+		<property name="analyticsBCF" ref="analyticsBCF" />
+	</bean>
+		
+	<!-- Settings Action for Analytics Page -->
+	<bean id="analyticsSettingsAction"
+		class="com.sensus.mlc.wui.analytics.action.AnalyticsSettingAction"
+		scope="prototype" parent="baseAction" />	
+		
+		
+	<!-- Action for System Settings Page Action -->
+	<bean id="systemSettingsPageAction"
+		class="com.sensus.mlc.wui.systemsettings.action.SystemSettingsPageAction"
+		scope="prototype" parent="layoutAction">
+			<property name="settingsBCF" ref="settingsBCF" />
+			<property name="lcHelp" ref="lcHelpTarget" />
+	</bean>	
+	
+	<!-- Action for System Settings Ajax Action -->
+	<bean id="systemSettingsAjaxAction"
+		class="com.sensus.mlc.wui.systemsettings.action.SystemSettingsAjaxAction"
+		scope="prototype" parent="baseAction">
+			<property name="settingsBCF" ref="settingsBCF" />
+	</bean>
+		
+	<!-- Settings Action for System Settings Page -->
+	<bean id="systemSettingsAction"
+		class="com.sensus.mlc.wui.systemsettings.action.SystemSettingAction"
+		scope="prototype" parent="baseAction" />
+		
+	<!-- Action for Tag Page Action -->
+	<bean id="tagPageAction"
+		class="com.sensus.mlc.wui.systemsettings.tags.action.TagPageAction"
+		scope="prototype" parent="layoutAction">
+		<property name="tagBCF" ref="tagBCF" />
+	</bean>		
+	
+	<!-- Action for Tag Search Ajax Page Action -->
+	<bean id="tagSearchAjaxAction"
+		class="com.sensus.mlc.wui.systemsettings.tags.action.TagSearchAjaxAction"
+		scope="prototype" parent="baseAction">
+		<property name="tagBCF" ref="tagBCF" />
+	</bean>	  
+						  
+	<!-- Action for Tag Ajax Page Action -->
+	<bean id="tagAjaxAction"
+		class="com.sensus.mlc.wui.systemsettings.tags.action.TagAjaxAction"
+		scope="prototype" parent="baseAction">
+		<property name="tagBCF" ref="tagBCF" />
+		<property name="groupBCF" ref="groupBCF" />
+	</bean>	 
+	
+	<!-- Action for Profile Page Action  -->	
+	<bean id="profilePageAction"
+		class="com.sensus.mlc.wui.profile.action.ProfilePageAction"
+		scope="prototype" parent="layoutAction">
+		<property name="lcHelp" ref="lcHelpTarget" />
+	</bean>
+	
+	<!-- Settings Action for Profile Page -->
+	<bean id="profileSettingsAction"
+		class="com.sensus.mlc.wui.profile.action.ProfileSettingAction"
+		scope="prototype" parent="baseAction" />
+		
+	<!-- Action for Saved Search Page Action -->
+	<bean id="savedSearchPageAction"
+		class="com.sensus.mlc.wui.search.action.SavedSearchPageAction"
+		scope="prototype" parent="layoutAction" />
+		
+	<!-- Action for Saved Search Ajax Page Action -->
+	<bean id="savedSearchAjaxAction"
+		class="com.sensus.mlc.wui.search.action.SavedSearchAjaxAction"
+		scope="prototype" parent="baseAction">
+		<property name="smartPointAccessorBCF" ref="smartPointAccessorBCF" />
+	</bean>	  
+	
+	<!-- Actions loading search settings -->
+	<bean id="searchSettingsAction"
+		class="com.sensus.mlc.wui.search.action.SearchSettingsAction"
+		scope="prototype" parent="baseAction" />
+		
+	<!-- Action supporting other search-releated Ajax Callbacks -->
+	<bean id="searchAjaxAction" class="com.sensus.mlc.wui.search.action.SearchAjaxAction"
+		scope="prototype" parent="baseAction">
+		<property name="smartPointUpdaterBCF" ref="smartPointUpdaterBCF" />
+	</bean>
+		
+	<!-- Settings Ajax Action for Profile Page -->
+	<bean id="profileAjaxAction"
+		class="com.sensus.mlc.wui.profile.action.ProfileAjaxAction"
+		scope="prototype" parent="baseAction">
+		<property name="settingsBCF" ref="settingsBCF" />
+	</bean>
+		
+	<!-- Action for Eco Mode Page Action -->
+	<bean id="ecoModePageAction"
+		class="com.sensus.mlc.wui.systemsettings.ecomode.action.EcoModePageAction"
+		scope="prototype" parent="layoutAction">
+	</bean>
+	
+	<!-- Action for Eco Mode Ajax Action -->
+	<bean id="ecoModeAjaxAction"
+		class="com.sensus.mlc.wui.systemsettings.ecomode.action.EcoModeAjaxAction"
+		scope="prototype" parent="baseAction">
+		<property name="ecoModeBCF" ref="ecoModeBCF" />
+	</bean> 
+	
+
+
+	<bean id="dicionarioAjaxAction" class="com.sensus.mlc.wui.dicionario.action.DicionarioAjaxAction"
+		scope="prototype" parent="baseAction">
+		<property name="dicionarioBCF" ref="dicionarioBCF" />
+	</bean>
+	
+	<bean id="dicionarioPageAction"
+		class="com.sensus.mlc.wui.dicionario.action.DicionarioPageAction"
+		scope="prototype" parent="layoutAction">
+	</bean>
+	
+	<bean id="dicionarioSearchAjaxAction"
+		class="com.sensus.mlc.wui.dicionario.action.DicionarioSearchAjaxAction"
+		scope="prototype" parent="baseAction">
+		<property name="dicionarioBCF" ref="dicionarioBCF" />
+	</bean>	
+	
+	<bean id="dicionarioSettingsAction"
+		class="com.sensus.mlc.wui.dicionario.action.DicionarioSettingsAction"
+		scope="prototype" parent="baseAction">
+	</bean>
+	<bean id="empresaAjaxAction" class="com.sensus.mlc.wui.empresa.action.EmpresaAjaxAction"
+		scope="prototype" parent="baseAction">
+		<property name="empresaBCF" ref="empresaBCF" />
+	</bean>
+	
+	<bean id="empresaPageAction"
+		class="com.sensus.mlc.wui.empresa.action.EmpresaPageAction"
+		scope="prototype" parent="layoutAction">
+	</bean>
+	
+	<bean id="empresaSearchAjaxAction"
+		class="com.sensus.mlc.wui.empresa.action.EmpresaSearchAjaxAction"
+		scope="prototype" parent="baseAction">
+		<property name="empresaBCF" ref="empresaBCF" />
+	</bean>	
+	
+	<bean id="empresaSettingsAction"
+		class="com.sensus.mlc.wui.empresa.action.EmpresaSettingsAction"
+		scope="prototype" parent="baseAction" >
+	</bean>
+			
+	<bean id="filialAjaxAction" class="com.sensus.mlc.wui.filial.action.FilialAjaxAction"
+		scope="prototype" parent="baseAction">
+		<property name="filialBCF" ref="filialBCF" />
+	</bean>
+	
+	<bean id="filialPageAction"
+		class="com.sensus.mlc.wui.filial.action.FilialPageAction"
+		scope="prototype" parent="layoutAction">
+	</bean>
+	
+	<bean id="filialSearchAjaxAction"
+		class="com.sensus.mlc.wui.filial.action.FilialSearchAjaxAction"
+		scope="prototype" parent="baseAction">
+		<property name="filialBCF" ref="filialBCF" />
+	</bean>	
+	
+	<bean id="filialSettingsAction"
+		class="com.sensus.mlc.wui.filial.action.FilialSettingsAction"
+		scope="prototype" parent="baseAction">
+	</bean>	
+	</beans>	
+
+

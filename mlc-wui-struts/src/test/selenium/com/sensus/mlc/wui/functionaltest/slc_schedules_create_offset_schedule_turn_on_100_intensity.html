@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://mallet-app.davis.sensus.lab:8080/" />
+<title>create_offset_schedule_turn_on_100_intensity</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">create_offset_schedule_turn_on_100_intensity</td></tr>
+</thead><tbody>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#messaging-main&quot;).remove();</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#yui-main h1</td>
+	<td>Schedules</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Create Offset Schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Create Offset Schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=schedule-name</td>
+	<td>${offsetSchName}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=schedule-description</td>
+	<td>Description ${offsetSchName} - TURN ON 100% intensity</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Check Message-->
+<tr>
+	<td>waitForText</td>
+	<td>css=#messaging-main span.message</td>
+	<td>Schedule ${offsetSchName} created successfully. Select the Lights you would like to add to this Schedule.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main span.message</td>
+	<td>Schedule ${offsetSchName} created successfully. Select the Lights you would like to add to this Schedule.</td>
+</tr>
+<!--Check Element in Grid-->
+<tr>
+	<td>storeTableRow</td>
+	<td>${offsetSchName}/2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${row}) - 2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#schedule-table tbody.${row}.2</td>
+	<td>${offsetSchName}</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#schedule-table tbody.${row}.3</td>
+	<td>Description ${offsetSchName} - TURN ON 100% intensity</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#schedule-table tbody.${row}.4</td>
+	<td>Offset</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#schedule-table tbody.${row}.7</td>
+	<td>${currentDate}</td>
+</tr>
+<!--Check Element count/summariz-->
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${totalSch}) + 1</td>
+	<td>total</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${total}</td>
+	<td>totalSch</td>
+</tr>
+<tr>
+	<td>verifyTableRows</td>
+	<td>css=#schedule-table tbody</td>
+	<td>${total}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#actions &gt; span</td>
+	<td>0 of ${total} Schedules Selected</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

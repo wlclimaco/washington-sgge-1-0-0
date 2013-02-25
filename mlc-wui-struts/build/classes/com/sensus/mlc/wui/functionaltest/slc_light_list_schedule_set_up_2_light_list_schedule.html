@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://acme-app.davis.sensus.lab:8080/" />
+<title>set_up_2_light_list_schedule</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">set_up_2_light_list_schedule</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>id=menu-schedules</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Check Curent Page/...-->
+<tr>
+	<td>waitForText</td>
+	<td>css=div.content-header &gt; h1</td>
+	<td>Schedules</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.content-header &gt; h1</td>
+	<td>Schedules</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>click</td>
+	<td>css=#actions a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=schedule-name</td>
+	<td>${offsetScheduleName}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=schedule-description</td>
+	<td>${offsetScheduleName}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=span.message</td>
+	<td></td>
+</tr>
+<!--Check Message/...-->
+<tr>
+	<td>waitForText</td>
+	<td>css=span.message</td>
+	<td>Schedule ${offsetScheduleName} created successfully. Select the Lights you would like to add to this Schedule.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.message</td>
+	<td>Schedule ${offsetScheduleName} created successfully. Select the Lights you would like to add to this Schedule.</td>
+</tr>
+<!--.../-->
+<!--Check Curent Page/...-->
+<tr>
+	<td>waitForText</td>
+	<td>css=div.content-header &gt; h1</td>
+	<td>Schedules</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.content-header &gt; h1</td>
+	<td>Schedules</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>click</td>
+	<td>css=#actions a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=schedule-name</td>
+	<td>${offsetScheduleName}2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=schedule-description</td>
+	<td>${offsetScheduleName}2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=span.message</td>
+	<td></td>
+</tr>
+<!--Check Message/...-->
+<tr>
+	<td>waitForText</td>
+	<td>css=span.message</td>
+	<td>Schedule ${offsetScheduleName}2 created successfully. Select the Lights you would like to add to this Schedule.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.message</td>
+	<td>Schedule ${offsetScheduleName}2 created successfully. Select the Lights you would like to add to this Schedule.</td>
+</tr>
+<!--.../-->
+<!--Check Curent Page/...-->
+<tr>
+	<td>waitForText</td>
+	<td>css=div.content-header &gt; h1</td>
+	<td>Schedules</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.content-header &gt; h1</td>
+	<td>Schedules</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>click</td>
+	<td>css=#actions a:eq(1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=schedule-name</td>
+	<td>${eventScheduleName}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=schedule-description</td>
+	<td>${eventScheduleName}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#radio_light1 div label:eq(3) span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=time1</td>
+	<td>7:30 PM</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#event-repeat1 label:eq(3) span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=span.message</td>
+	<td></td>
+</tr>
+<!--Check Message/...-->
+<tr>
+	<td>waitForText</td>
+	<td>css=span.message</td>
+	<td>Schedule ${eventScheduleName} created successfully. Select the Lights you would like to add to this Schedule.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.message</td>
+	<td>Schedule ${eventScheduleName} created successfully. Select the Lights you would like to add to this Schedule.</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>storeGlobal</td>
+	<td>css=#schedule-table tbody tr:contains('${scheduleName}') td:eq(5) a</td>
+	<td>lights</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menu-smartpoints</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

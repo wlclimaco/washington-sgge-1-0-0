@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<decorators defaultdir="/">
+    <!-- Any urls that are excluded will never be decorated by Sitemesh -->
+    <excludes>
+        <pattern>/nodecorate/*</pattern>
+        <pattern>/styles/*</pattern>
+        <pattern>/scripts/*</pattern>
+        <pattern>/images/*</pattern>
+        <pattern>/dojo/*</pattern>
+        <pattern>/struts/*</pattern>
+        <pattern>*.html</pattern>
+        <pattern>*/*.html</pattern>
+        <pattern>*/settings*</pattern>
+        <pattern>/login.*</pattern>
+        <pattern>*/include.*</pattern>
+        <pattern>/thirdparty/pages/*</pattern>
+        <pattern>/commons/pages/summary.jsp</pattern>
+        <pattern>/timeout.*</pattern>
+    </excludes>
+
+    <decorator name="main" page="/pages/decorator_mlcmain.jsp">
+        <pattern>/*</pattern>
+    </decorator>
+	
+	<decorator name="components" page="/decorators/decorator_mlc_components.jsp">
+        <pattern>*/ajax.*</pattern>
+    </decorator>
+</decorators>

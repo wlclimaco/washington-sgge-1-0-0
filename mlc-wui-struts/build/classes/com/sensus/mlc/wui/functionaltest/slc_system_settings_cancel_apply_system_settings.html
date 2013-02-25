@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://acme-app.davis.sensus.lab:8080/" />
+<title>cancel_apply_system_settings</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">cancel_apply_system_settings</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>id=systemsettings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Check Curent Page-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.content-header &gt; h1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.content-header &gt; h1</td>
+	<td>System Settings</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>Alaska</td>
+	<td>timeZone</td>
+</tr>
+<tr>
+	<td>storeSelectedLabel</td>
+	<td>id=timezone</td>
+	<td>cTimeZone</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>dd/mm/yyyy</td>
+	<td>dateFormat</td>
+</tr>
+<tr>
+	<td>storeSelectedLabel</td>
+	<td>id=dateformat</td>
+	<td>cDateFormat</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>100</td>
+	<td>pageSize</td>
+</tr>
+<tr>
+	<td>storeSelectedLabel</td>
+	<td>id=pagesize</td>
+	<td>cPageSize</td>
+</tr>
+<!--Time Zone-->
+<tr>
+	<td>select</td>
+	<td>id=timezone</td>
+	<td>${timeZone}</td>
+</tr>
+<!--Date Format-->
+<tr>
+	<td>select</td>
+	<td>id=dateformat</td>
+	<td>${dateFormat}</td>
+</tr>
+<!--Results Per Page-->
+<tr>
+	<td>select</td>
+	<td>id=pagesize</td>
+	<td>${pageSize}</td>
+</tr>
+<!--Cancel-->
+<tr>
+	<td>click</td>
+	<td>id=cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Check Cancel Action-->
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=timezone</td>
+	<td>${cTimeZone}</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=dateformat</td>
+	<td>${cDateFormat}</td>
+</tr>
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>id=pagesize</td>
+	<td>${cPageSize}</td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="mlc-group" extends="mlc-default" namespace="/group">
+		<!-- Render main page -->
+		<action name="ajax.list" class="groupPageAction">
+			<param name="jsComponents">mlc-group</param>
+			<result name="success">/pages/group/group_main.jsp</result>
+		</action>
+		<!-- Ajax callback for group search -->
+		<action name="search" class="groupSearchAjaxAction" method="search">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="noCache">true</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		<!-- Add smartpoints to a group -->
+		<action name="addSmartPoints" class="groupAjaxAction" method="addSmartpoints">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		<!-- Remove smartpoints from a group -->
+		<action name="removeSmartPoints" class="groupAjaxAction" method="removeSmartpoints">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		<!-- JavaScript Settings -->
+		<action name="settings" class="groupSettingsAction" method="settings">
+			<param name="menuItem">groups</param>
+			<result name="success" type="freemarker">/freemarker/group_settings.js
+			</result>
+		</action>
+		<!-- Long Running Process Dialog -->
+		<action name="include.longRunningProcessDialog" class="smartpointPageAction">
+			<result name="success">/pages/smartpoint/smartpoint_process_dialog.jsp</result>
+		</action>
+		<!-- removeGroup dialog page -->
+		<action name="include.initiateDeleteGroup" class="groupPageAction">
+			<result name="success">/pages/group/group_delete_dialog.jsp</result>
+		</action>
+		<!-- Initiate Delete a group -->
+		<action name="initiateDeleteGroup" class="groupAjaxAction" method="initiateDeleteGroup">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">result</param>
+			</result>
+		</action>
+		<!-- Delete a group -->
+		<action name="deleteGroup" class="groupAjaxAction" method="deleteGroup">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- createGroup a group page -->
+		<action name="ajax.createGroupPage" class="groupCreatePageAction" method="createGroupPage">
+			<param name="jsComponents">mlc-group-create</param>
+			<result name="success">/pages/group/group_create.jsp</result>
+		</action>
+		<!-- insertGroup a group page -->
+		<action name="insertGroup" class="groupCreatePageAction" method="insertGroup">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		<!-- updateGroup a group page -->
+		<action name="updateGroup" class="groupCreatePageAction" method="updateGroup">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		<!-- Ajax call for Remove All Selected Long Running Process  -->
+		<action name="longRunningProcessRemoveAll" class="longRunningProcessPageAction" method="removeAllSelected">	
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">longRunningProcessSearchResult</param>
+			</result>
+		</action>	
+		<!-- Action for GROUP - Group Page Fetch -->
+		<action name="ajax.fetchLightByGroupToMap" class="groupAjaxAction" method="fetchLightByGroupToMap">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+	</package>
+</struts>

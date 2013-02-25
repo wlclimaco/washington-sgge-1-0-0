@@ -1,0 +1,526 @@
+<components>
+	<component id="mlc-base">
+		<files>
+			<settings absolute="false">/scripts/util/namespace_init.js</settings>
+		</files>
+	</component>
+	
+	<component id="slc-commons">
+		<files>
+			<script absolute="false">/commons/widget-ui/widget_ajax_validator.js</script>
+			<script absolute="false">/commons/widget-ui/widget_filter.js</script>
+			<script absolute="false">/commons/widget-ui/widget_date_format.js</script>
+		</files>
+	</component>
+	
+	<component id="mlc-main">
+		<requires>
+			<component>jquery-checkbox</component>
+			<component>jquery-combobox</component>
+			<component>open-layers</component>
+			<component>jquery-datatable</component>
+			<component>slc-commons</component>
+			<component>mlc-util-base</component>
+			<component>mlc-util-widget</component>
+			<component>mlc-decorator</component>
+			<component>mlc-pages-main</component>
+			<component>mlc-process</component>
+			<component>mlc-slickGrid</component>
+			<component>mlc-flexigrid</component>
+		</requires>
+		<files>	
+			<settings absolute="false">/settings.action</settings>		
+			<stylesheet absolute="false">/styles/base.css</stylesheet>
+			<stylesheet absolute="false">/thirdparty/jquery/ui/ui.slider.extras.css</stylesheet>
+			<stylesheet absolute="false">/styles/chosen.css</stylesheet>
+			<stylesheet absolute="false">/styles/calendrical.css</stylesheet>
+			<stylesheet absolute="false">/thirdparty/jquery/ui/jquery.validate.password.css</stylesheet>			
+			<script absolute="false">/commons/lib/ajax_load.js</script>
+			<script absolute="false">/thirdparty/jquery/jquery.ez-pinned-footer.min.js</script>
+			<script absolute="false">/thirdparty/jquery/jquery.sparkline.min.js</script>
+			<script absolute="false">/thirdparty/jquery/selectToUISlider.jQuery.min.js</script>
+			<script absolute="false">/thirdparty/jquery/custom/jquery.truncatable.custom.js</script>
+			<script absolute="false">/thirdparty/jquery/custom/chosen.jquery.custom.js</script>
+			<script absolute="false">/scripts/pages/mlc_main.js</script>
+			<script absolute="false">/scripts/pages/mlc_actions.js</script>
+			<script absolute="false">/scripts/pages/mlc_init.js</script>
+			<script absolute="false">/thirdparty/jquery/custom/jquery.validate.custom.js</script>
+			<script absolute="false">/thirdparty/jquery/jquery.validate.password.js</script>
+			<script absolute="false">/thirdparty/jquery/custom/jquery.calendrical.js</script>
+			<script absolute="false">/thirdparty/jquery/highcharts.js</script>
+			<script absolute="false">/thirdparty/jquery/jquery.cookie.js</script>		
+			<script absolute="false">/scripts/util/ajax_action.js</script>
+			<script absolute="false">/scripts/config/mlc_config.js</script>
+			<script absolute="false">/thirdparty/jquery/jquery.json-2.3.min.js</script>			
+			<script absolute="false">/thirdparty/jquery/jquery.idletimer.min.js</script>
+			<script absolute="false">/thirdparty/jquery/jquery.idletimeout.min.js</script>
+			<script absolute="false">/commons/widget-ui/widget_summary.js</script>
+			<script absolute="false">/commons/widget-ui/widget_customize.js</script>
+			<script absolute="false">/commons/widget-ui/widget_module_controller.js</script>
+			<script absolute="false">/commons/widget-ui/widget_number_format.js</script>
+			<script absolute="false">/commons/widget-ui/widget_light_control.js</script>
+			<script absolute="false">/scripts/util/request_model.js</script>
+			<script absolute="false">/scripts/util/exportcsv.js</script>			
+			
+		</files>
+	</component>
+	
+	<component id="mlc-pages-main">
+		<files>
+			<script absolute="false">/scripts/pages/long_running_process_main.js</script>		
+			<script absolute="false">/scripts/pages/system_settings_main.js</script>
+			<script absolute="false">/scripts/pages/saved_main.js</script>
+		</files>
+	</component>
+
+	<component id="jquery-base">
+		<requires>
+			<component>mlc-base</component>
+			<component>yahoo-layout</component>
+		</requires>
+		<files>
+			<stylesheet absolute="false">/thirdparty/jquery/ui/jquery.menu.css</stylesheet>
+			<stylesheet absolute="false">/thirdparty/jquery/ui/jquery-ui-1.8.12.custom.css</stylesheet>
+			<script absolute="false">/thirdparty/jquery/jquery-1.7.2.min.js</script>	
+			<script absolute="false">/thirdparty/jquery/jquery.ui.core.min.js</script>
+			<script absolute="false">/thirdparty/jquery/jquery.ui.widget.min.js</script>
+			<script absolute="false">/thirdparty/jquery/jquery.ui.dialog.min.js</script>
+			<script absolute="false">/thirdparty/jquery/jquery.ui.position.min.js</script>
+			<script absolute="false">/thirdparty/jquery/jquery.ui.progressbar.min.js</script>
+			<script absolute="false">/thirdparty/jquery/jquery.ui.tabs.min.js</script>
+			<script absolute="false">/scripts/util/block_ui_init.js</script>	
+			<stylesheet absolute="false">/styles/validationEngine.jquery.css</stylesheet>
+			<script absolute="false">/thirdparty/jquery/jquery-ui-1.8.20.custom.min.js</script>
+			<script absolute="false">/thirdparty/jquery/custom/jquery.i18n.properties-min.custom.js</script>
+			<script absolute="false">/thirdparty/jquery/jquery.address-1.4.min.js</script>
+			<script absolute="false">/thirdparty/jquery/custom/jquery.menu.custom.js</script>
+			<script absolute="false">/thirdparty/jquery/custom/globalize.js</script>
+			<script absolute="false">/scripts/util/locale.js</script>
+		    <script absolute="false">/thirdparty/jquery/jquery.validationEngine.min.js</script>
+			<script absolute="false">/thirdparty/jquery/jquery.validationEngine-functions.js</script>			   			
+		</files>
+	</component>
+		
+	<component id="yahoo-layout">
+		<files>
+			<stylesheet absolute="false">/styles/reset-fonts-grids.css
+			</stylesheet>
+		</files>
+	</component>
+	
+	<component id="jquery-datatable">
+		<requires>
+			<component absolute="false">jquery-base</component>
+		</requires>
+		<files>
+			<stylesheet absolute="false">/thirdparty/jquery/styles/jquery.dataTables.custom.css</stylesheet>
+			<script absolute="false">/thirdparty/jquery/jquery.dataTables.min.js</script>
+			<script absolute="false">/thirdparty/jquery/jquery.datatable.fnStartingRedraw.js</script>
+			<script absolute="false">/thirdparty/jquery/custom/jquery.dataTables.custom.js</script>
+			<script absolute="false">/thirdparty/jquery/custom/jquery.number_format.1.0.custom.js</script>
+		</files>
+	</component>
+	<component id="jquery-combobox">
+		<requires>
+			<component>jquery-base</component>
+		</requires>
+		<files>
+			<script absolute="false">/thirdparty/jquery/custom/jquery.combobox.js</script>
+			<script absolute="false">/thirdparty/jquery/custom/jquery.combofilter.js</script>
+			<script absolute="false">/scripts/util/combobox.js</script>
+		</files>
+	</component>
+	<component id="jquery-checkbox">
+		<requires>
+			<component>jquery-base</component>
+		</requires>
+		<files>
+			<script absolute="false">/thirdparty/jquery/custom/jquery.checkbox.js</script>
+			<script absolute="false">/scripts/util/checkbox.js</script>
+		</files>
+	</component>
+	<component id="open-layers">
+		<files>
+			<script absolute="false">/thirdparty/openlayers/OpenLayers.js</script>
+		</files>
+	</component>
+	<component id="mlc-process">
+		<files>
+			<stylesheet absolute="false">/styles/jquery-bubble-popup-v3.css</stylesheet>
+			<script absolute="false">/thirdparty/jquery/jquery-bubble-popup-v3.min.js</script>
+			<script absolute="false">/scripts/pages/long_running_process_init.js</script>
+			<script absolute="false">/scripts/pages/long_running_process_actions.js</script>
+		</files>
+	</component>
+	
+	<component id="mlc-util-base">
+		<requires>
+			<component>jquery-base</component>
+		</requires>
+		<files>
+			<script absolute="false">/scripts/util/string.js</script>
+			<script absolute="false">/scripts/util/page.js</script>
+			<script absolute="false">/scripts/util/pages.js</script>
+			<script absolute="false">/scripts/util/global_table.js</script>
+			<script absolute="false">/scripts/util/session.js</script>
+			<script absolute="false">/scripts/util/process_util.js</script>
+			<script absolute="false">/scripts/util/date_filter.js</script>
+		</files>
+	</component>
+	<component id="mlc-util-widget">
+		<files>
+			<script absolute="false">/scripts/util/mapopen.js</script>
+			<script absolute="false">/scripts/util/actiondialog.js</script>
+		</files>
+	</component>
+	
+	<component id="mlc-slickGrid">
+		<files>
+			<stylesheet absolute="false">/thirdparty/SlickGrid/slick.grid.css</stylesheet>
+			<stylesheet absolute="false">/thirdparty/SlickGrid//controls/slick.pager.css</stylesheet>
+			<stylesheet absolute="false">/thirdparty/SlickGrid/css/smoothness/jquery-ui-1.8.16.custom.css</stylesheet>
+			<stylesheet absolute="false">/thirdparty/SlickGrid/plugins/slick.headermenu.css</stylesheet>
+			<stylesheet absolute="false">/thirdparty/SlickGrid/examples/examples.css</stylesheet>
+			<stylesheet absolute="false">/thirdparty/SlickGrid/controls/slick.columnpicker.css</stylesheet>	
+			<script absolute="false">/thirdparty/SlickGrid/lib/firebugx.js</script>
+			<script absolute="false">/thirdparty/SlickGrid/lib/jquery-ui-1.8.16.custom.min.js</script>
+			<script absolute="false">/thirdparty/SlickGrid/lib/jquery.event.drag-2.0.min.js</script>
+			<script absolute="false">/thirdparty/SlickGrid/slick.core.js</script>
+			<script absolute="false">/thirdparty/SlickGrid/slick.formatters.js</script>
+			<script absolute="false">/thirdparty/SlickGrid/slick.editors.js</script>
+			<script absolute="false">/thirdparty/SlickGrid/plugins/slick.rowselectionmodel.js</script>
+			<script absolute="false">/thirdparty/SlickGrid/slick.grid.js</script>
+			<script absolute="false">/thirdparty/SlickGrid/slick.dataview.js</script>
+			<script absolute="false">/thirdparty/SlickGrid/controls/slick.pager.js</script>
+			<script absolute="false">/thirdparty/SlickGrid/controls/slick.columnpicker.js</script>
+			<script absolute="false">/thirdparty/SlickGrid/plugins/slick.checkboxselectcolumn.js</script>
+			<script absolute="false">/thirdparty/SlickGrid/plugins/slick.cellrangedecorator.js</script>
+			<script absolute="false">/thirdparty/SlickGrid/plugins/slick.cellrangeselector.js</script>
+			<script absolute="false">/thirdparty/SlickGrid/plugins/slick.cellselectionmodel.js</script>
+			<script absolute="false">/thirdparty/SlickGrid/plugins/slick.autotooltips.js</script>
+			<script absolute="false">/thirdparty/SlickGrid/plugins/slick.cellcopymanager.js</script>
+			<script absolute="true">http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js</script>
+			<script absolute="false">/thirdparty/SlickGrid/examples/slick.compositeeditor.js</script>
+		</files>
+	</component>
+	
+	<component id="mlc-flexigrid">
+		<files>
+			<stylesheet absolute="false">/thirdparty/flexigrid/css/flexigrid.css</stylesheet>			
+			<script absolute="false">/thirdparty/flexigrid/js/flexigrid.js</script>
+		</files>
+	</component>
+	
+	
+	<component id="mlc-decorator">
+		<requires>
+			<component>jquery-base</component>
+			<component>mlc-base</component>
+			
+		</requires>
+		<files>
+			<script absolute="false">/scripts/pages/decorator_mlcmain.js</script>
+		</files>
+	</component>
+	<!-- The scripts imported by the smartpoint page -->
+	<component id="mlc-smartpoint">
+		<requires>
+			<component></component>
+		</requires>
+		<files>
+			<settings absolute="false">/smartpoint/settings.action</settings>
+			<stylesheet absolute="false">/styles/group.css</stylesheet>
+			<stylesheet absolute="false">/styles/smartpoint.css</stylesheet>
+			<script sec="true">/scripts/pages/smartpoint_main.js.jsp</script>
+			<script sec="true">/scripts/pages/smartpoint_actions.js.jsp</script>
+			<script sec="true">/scripts/pages/smartpoint_init.js.jsp</script>
+		</files>
+	</component>
+
+	<!-- The scripts imported by the smartpointDetail page  -->
+	<component id="mlc-smartpoint-detail-header">
+		<requires>
+		</requires>
+		<files>
+			<settings absolute="false">/smartpoint/settings.action</settings>
+			<stylesheet absolute="false">/styles/smartpoint_detail.css</stylesheet>
+			<script sec="true">/scripts/pages/smartpoint_main.js.jsp</script>
+			<script sec="true">/scripts/pages/smartpoint_detail_main.js.jsp</script>
+			<script sec="true">/scripts/pages/smartpoint_detail_actions.js.jsp</script>
+			<script absolute="false">/scripts/pages/smartpoint_detail_header_init.js</script>
+		</files>
+	</component>
+	
+	<!-- The scripts imported by the smartpointDetail page  -->
+	<component id="mlc-smartpoint-detail">
+		<requires>
+		</requires>
+		<files>
+			<settings absolute="false">/smartpoint/settings.action</settings>
+			<script sec="true">/scripts/pages/smartpoint_main.js.jsp</script>
+			<script absolute="false">/commons/scripts/util/modules_controller_main.js</script>
+			<script absolute="false">/commons/scripts/util/modules_light_actions.js</script>
+			<script sec="true">/scripts/pages/smartpoint_detail_init.js.jsp</script>
+		</files>
+	</component>
+	
+	<!-- The scripts imported by the smartpointDetail page  -->
+	<component id="mlc-smartpoint-detail-about">
+		<requires>
+		</requires>
+		<files>
+			<settings absolute="false">/smartpoint/settings.action</settings>
+			<script sec="true">/scripts/pages/smartpoint_detail_about_main.js.jsp</script>
+			<script sec="true">/scripts/pages/smartpoint_detail_actions.js.jsp</script>
+			<script sec="true">/scripts/pages/smartpoint_detail_about_init.js.jsp</script>
+		</files>
+	</component>
+
+	<component id="mlc-smartpoint-detail-history">
+		<requires>
+		</requires>
+		<files>
+			<settings absolute="false">/smartpoint/settings.action</settings>
+			<script sec="true">/scripts/pages/smartpoint_detail_history_main.js.jsp</script>
+			<script sec="true">/scripts/pages/smartpoint_detail_actions.js.jsp</script>
+			<script sec="true">/scripts/pages/smartpoint_detail_history_init.js.jsp</script>
+		</files>
+	</component>
+	
+	<component id="mlc-smartpoint-detail-eco-mode">
+		<requires>
+		</requires>
+		<files>
+			<settings absolute="false">/smartpoint/settings.action</settings>
+			<script sec="true">/scripts/pages/smartpoint_detail_eco_mode_main.js.jsp</script>
+			<script sec="true">/scripts/pages/smartpoint_detail_actions.js.jsp</script>
+			<script sec="true">/scripts/pages/smartpoint_detail_eco_mode_init.js.jsp</script>
+		</files>
+	</component>
+
+	<!-- The scripts imported by the group page -->
+	<component id="mlc-group">
+		<requires>
+			
+		</requires>
+		<files>
+			<settings absolute="false">/group/settings.action</settings>
+			<stylesheet absolute="false">/thirdparty/jquery/ui/ui.slider.extras.css</stylesheet>
+			<stylesheet absolute="false">/styles/group.css</stylesheet>
+			<script sec="true">/scripts/pages/group_init.js.jsp</script>
+		</files>
+	</component>
+	
+	<!-- The scripts imported by the group create page  -->
+	<component id="mlc-group-create">
+		<requires>
+			
+		</requires>
+		<files>
+			<settings absolute="false">/group/settings.action</settings>
+			<stylesheet absolute="false">/styles/group.css</stylesheet>
+			<stylesheet absolute="false">/styles/group_create.css</stylesheet>
+			<script absolute="false">/scripts/pages/group_create_main.js</script>
+			<script absolute="false">/scripts/pages/group_create_init.js</script>
+		</files>
+	</component>
+	
+	<!-- The scripts imported by the user page -->
+	<component id="mlc-user">
+		<requires>
+			
+		</requires>
+		<files>
+			<settings absolute="false">/user/settings.action</settings>
+			<stylesheet absolute="false">/styles/user.css</stylesheet>
+			<script sec="true">/scripts/pages/user_main.js.jsp</script>
+			<script sec="true">/scripts/pages/user_init.js.jsp</script>
+			<script sec="true">/scripts/pages/user_actions.js.jsp</script>
+		</files>
+	</component>
+	
+	<!-- The scripts imported by the create user page -->
+	<component id="mlc-create-user">
+		<requires>
+			
+		</requires>
+		<files>
+			<settings absolute="false">/user/settings.action</settings>
+			<stylesheet absolute="false">/styles/user.css</stylesheet>
+			<script sec="true">/scripts/pages/user_main.js.jsp</script>	
+			<script sec="true">/scripts/pages/create_user_main.js.jsp</script>	
+			<script sec="true">/scripts/pages/create_user_actions.js.jsp</script>
+			<script sec="true">/scripts/pages/create_user_init.js.jsp</script>
+		</files>
+	</component>
+	
+	<!-- The scripts imported by the schedule main page -->
+	<component id="mlc-schedule">
+		<requires>
+		</requires>
+		<files>
+			<settings absolute="false">/schedule/settings.action</settings>
+			<stylesheet absolute="false">/styles/schedule.css</stylesheet>
+			<script sec="true">/scripts/pages/schedule_init.js.jsp</script>
+		</files>
+	</component>
+
+	<!-- The scripts imported by the create offset schedule min page -->
+	<component id="mlc-schedule-offset-create">
+		<requires>
+		</requires>
+		<files>
+			<settings absolute="false">/schedule/settings.action</settings>
+			<stylesheet absolute="false">/styles/schedule_create.css</stylesheet>
+			<script absolute="false">/scripts/pages/schedule_create_offset_main.js</script>	
+			<script absolute="false">/scripts/pages/schedule_create_offset_init.js</script>
+		</files>
+	</component>
+	
+	<!-- The scripts imported by the create schedule min page -->
+	<component id="mlc-schedule-event-create">
+		<requires>
+		</requires>
+		<files>
+			<settings absolute="false">/schedule/settings.action</settings>
+			<stylesheet absolute="false">/styles/schedule_create.css</stylesheet>
+			<script absolute="false">/scripts/pages/schedule_create_event_main.js</script>	
+			<script absolute="false">/scripts/pages/schedule_create_event_init.js</script>
+		</files>
+	</component>
+	
+	
+	<!-- The scripts imported by the DashBoard page -->
+	<component id="mlc-dashboard">
+		<requires>
+		</requires>
+		<files>
+			<settings absolute="false">/dashboard/settings.action</settings>
+			<stylesheet absolute="false">/styles/dashboard.css</stylesheet>
+			<script sec="true">/scripts/pages/dashboard_main.js.jsp</script>
+			<script sec="true">/scripts/pages/dashboard_init.js.jsp</script>
+		</files>
+	</component>
+	
+	<!-- The scripts imported by the Analytics page -->
+	<component id="mlc-analytics">
+		<requires>
+		
+		</requires>
+		<files>
+			<settings absolute="false">/analytics/settings.action</settings>
+			<stylesheet absolute="false">/styles/analytics.css</stylesheet>
+			<script absolute="false">/scripts/pages/analytics_main.js</script>
+			<script absolute="false">/scripts/pages/analytics_init.js</script>
+			
+		</files>
+	</component>
+	
+	<!-- The scripts imported by the System Settings page -->
+	<component id="mlc-systemsettings">
+		<requires>
+		</requires>
+		<files>
+			<settings absolute="false">/systemsettings/settings.action</settings>
+			<stylesheet absolute="false">/styles/system_settings.css</stylesheet>
+			<script absolute="false">/scripts/pages/system_settings_init.js</script>
+		</files>
+	</component>
+
+	<!-- The scripts imported by the System Settings page -->
+	<component id="mlc-systemsettings-profile">
+		<files>
+			<script absolute="false">/scripts/pages/profile_init.js</script>
+		</files>
+	</component>
+
+
+	<!-- The scripts imported by the System Settings page -->
+	<component id="mlc-systemsettings-tag">
+		<files>
+			<script sec="true">/scripts/pages/tag_actions.js.jsp</script>
+			<script sec="true">/scripts/pages/tag_main.js.jsp</script>
+			<script sec="true">/scripts/pages/tag_init.js.jsp</script>
+		</files>
+	</component>
+	
+	<!-- The scripts imported by the System Settings page -->
+	<component id="mlc-systemsettings-ecomode">
+		<files>
+			<script sec="true">/scripts/pages/ecomode_main.js.jsp</script>
+			<script sec="true">/scripts/pages/ecomode_actions.js.jsp</script>
+			<script sec="true">/scripts/pages/ecomode_init.js.jsp</script>
+		</files>
+	</component>
+
+	<!-- The scripts imported by the Process page -->
+	<component id="mlc-process-history">
+		<requires>
+		</requires>
+		<files>
+			<settings absolute="false">/process/settings.action</settings>
+			<stylesheet absolute="false">/styles/process.css</stylesheet>
+			<script sec="true">/scripts/pages/process_init.js.jsp</script>
+		</files>
+	</component>
+
+	<!-- The scripts imported by the Profile page -->
+	<component id="mlc-profile">
+		<requires>
+		</requires>
+		<files>
+			<settings absolute="false">/profile/settings.action</settings>
+			<script absolute="false">/scripts/pages/profile_init.js</script>
+		</files>
+	</component>
+	
+	<component id="mlc-search">
+		<requires>
+			
+		</requires>
+		<files>
+			<settings absolute="false">/search/settings.action</settings>
+			<stylesheet absolute="false">/styles/search.css</stylesheet>
+			<script absolute="false">/scripts/pages/saved_init.js</script>
+			<script absolute="false">/scripts/pages/saved_actions.js</script>
+		</files>
+	</component>
+	
+	<component id="mlc-advanced">
+		<requires>
+		</requires>
+		<files>
+			<settings absolute="false">/search/settings.action</settings>
+			<stylesheet absolute="false">/styles/search.css</stylesheet>
+			<script sec="true">/scripts/pages/smartpoint_main.js.jsp</script>
+			<script sec="true">/scripts/pages/smartpoint_actions.js.jsp</script>
+			<script absolute="false">/scripts/pages/advanced_main.js</script>
+			<script absolute="false">/scripts/pages/advanced_init.js</script>
+		</files>
+	</component>
+	
+		<component id="mlc-dicionario">
+		<requires>
+			<component></component>
+		</requires>
+		<files>
+			<settings absolute="false">/dicionario/settings.action</settings>
+			<stylesheet absolute="false">/styles/group.css</stylesheet>
+			<stylesheet absolute="false">/styles/smartpoint.css</stylesheet>
+			<script sec="true">/scripts/pages/dicionario_main.js.jsp</script>
+			<script sec="true">/scripts/pages/dicionario_init.js.jsp</script>
+		</files>
+	</component>
+	
+			<component id="mlc-dicionarioTable">
+		<requires>
+			<component></component>
+		</requires>
+		<files>
+
+			<script sec="true">/scripts/pages/dicionarioTable_main.js.jsp</script>
+			<script sec="true">/scripts/pages/dicionarioTable_init.js.jsp</script>
+		</files>
+	</component>
+	
+</components>

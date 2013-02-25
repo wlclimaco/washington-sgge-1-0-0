@@ -1,0 +1,1 @@
+java -jar selenium-server-standalone-2.25.0.jar -multiwindow -userExtensions user-extensions-rc.js -htmlSuite "*iexplore" "http://mallet-app.davis.sensus.lab:8080/slc/" "%1\functionaltest\%2.html" "%1\functionaltest\results_%2.html"

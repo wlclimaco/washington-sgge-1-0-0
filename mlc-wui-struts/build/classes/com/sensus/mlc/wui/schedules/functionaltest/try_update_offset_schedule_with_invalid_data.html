@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://mallet-app.davis.sensus.lab:8080/" />
+<title>Try create new Offset Schedule with Invalid data</title>
+</head>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script>
+var fields = [
+	{locator:"id=schedule-name", value:"", errorMsg:"* This field is required."}, 
+	{locator:"id=schedule-name", value:storedVars['name'] + "Maaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaax", errorMsg:"* Maximum 100 characters allowed"}, 
+];
+</script>
+
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Try create new Offset Schedule with Invalid data</td></tr>
+</thead><tbody>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#messaging-main&quot;).remove();</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#yui-main h1</td>
+	<td>Schedules</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#schedule-table &gt; tbody &gt; tr:eq(0) &gt; td &gt; a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.content-header &gt; h1</td>
+	<td>Edit Offset Schedule &quot;${offsetSchName}&quot;</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.content-header &gt; h1</td>
+	<td>Edit Offset Schedule &quot;${offsetSchName}&quot;</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=offsetSunsetTime</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>* This field is required.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>* This field is required.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=offsetSunsetTime</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please enter time in 5 minute increments.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please enter time in 5 minute increments.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=offsetSunsetTime</td>
+	<td>A</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please enter time in 5 minute increments.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please enter time in 5 minute increments.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=offsetSunsetTime</td>
+	<td>700</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>* Maximum value is 635</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>* Maximum value is 635</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=offsetSunsetTime</td>
+	<td>-5</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>* Invalid number, use increments of 5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>* Invalid number, use increments of 5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=offsetSunsetTime</td>
+	<td>-5</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>* Minimum value is 0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>* Minimum value is 0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=offsetSunriseTime</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>* This field is required.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>* This field is required.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=offsetSunriseTime</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please enter time in 5 minute increments.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please enter time in 5 minute increments.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=offsetSunriseTime</td>
+	<td>A</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please enter time in 5 minute increments.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please enter time in 5 minute increments.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=offsetSunriseTime</td>
+	<td>700</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>* Maximum value is 635</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>* Maximum value is 635</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=offsetSunriseTime</td>
+	<td>-5</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>* Invalid number, use increments of 5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>* Invalid number, use increments of 5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=offsetSunriseTime</td>
+	<td>-5</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>* Minimum value is 0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>* Minimum value is 0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTableRows</td>
+	<td>css=#schedule-table tbody</td>
+	<td>${totalSch}</td>
+</tr>
+</tbody>
+</body>
+</table>
+</html>
