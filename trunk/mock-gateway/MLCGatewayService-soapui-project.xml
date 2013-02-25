@@ -1,0 +1,2479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project name="RNI-To-LC" soapui-version="4.5.1" abortOnError="false" runType="SEQUENTIAL" resourceRoot="" activeEnvironment="Default" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="mlcSoap11" type="wsdl" bindingName="{http://www.sensus.com/gateway/mlc}mlcSoap11" soapVersion="1_1" anonymous="optional" definition="C:/QATEclipseWorkSpace/mock-gateway/xsd/mlc-gateway-ws.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/C:/QATEclipseWorkSpace/mock-gateway/xsd/mlc-gateway-ws.wsdl"><con:part><con:url>file:/C:/QATEclipseWorkSpace/mock-gateway/xsd/mlc-gateway-ws.wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://www.sensus.com/gateway/mlc" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://www.sensus.com/gateway/mlc" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.sensus.com/gateway/mlc">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" jaxb:version="2.0" targetNamespace="http://www.sensus.com/gateway/mlc" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:types="http://www.sensus.com/gateway/mlc/types">
+      <xs:import namespace="http://www.sensus.com/gateway/mlc/types" schemaLocation="../imported/xsd/mlcTypes.xsd"/>
+      <!--ApplyScheduleRequest. Applies schedule info to one or more smartpoints-->
+      <xs:element name="InitiateApplyScheduleRequest">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayRequest">
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="1" name="Smartpoint" type="types:Smartpoint"/>
+                <xs:element maxOccurs="1" minOccurs="1" name="Schedule" type="types:Schedule"/>
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="InitiateApplyScheduleResponse">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayResponse"></xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ApplyScheduleNotification">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayNotification"></xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ApplyScheduleNotificationResult">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayNotificationResult"></xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <!--ClearScheduleRequest. This message will clear schedule info from one 
+		or more smartpoints-->
+      <xs:element name="InitiateClearScheduleRequest">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayRequest">
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="1" name="Smartpoint" type="types:Smartpoint"/>
+                <xs:element maxOccurs="2" minOccurs="1" name="ScheduleType" type="types:ScheduleType"/>
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="InitiateClearScheduleResponse">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayResponse"></xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ClearScheduleNotification">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayNotification"></xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ClearScheduleNotificationResult">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayNotificationResult"></xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <!--Set Light Level (currently only on/off supported)-->
+      <xs:element name="InitiateApplyLightLevelRequest">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayRequest">
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="1" name="Smartpoint" type="types:Smartpoint"/>
+                <xs:element maxOccurs="1" minOccurs="1" name="lightLevel" type="types:LightLevel"/>
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="InitiateApplyLightLevelResponse">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayResponse"></xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ApplyLightLevelNotification">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayNotification"></xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ApplyLightLevelNotificationResult">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayNotificationResult"></xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <!--Abort Transaction. Simplistic approach until more information is gathered-->
+      <xs:element name="AbortTransactionRequest">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayRequest"/>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AbortTransactionResponse">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayResponse"/>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <!--Ping URL-->
+      <xs:element name="PingURLRequest">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayRequest"/>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="PingURLResponse">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayResponse"/>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <!--Supervisory status/alarm info and Get Light Details-->
+      <xs:element name="InitiateReadLightStatusRequest">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayRequest">
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="1" name="DataType" type="types:DataType"/>
+                <xs:element maxOccurs="unbounded" minOccurs="1" name="Smartpoint" type="types:Smartpoint"/>
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="InitiateReadLightStatusResponse">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayResponse"></xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ReadLightStatusNotification">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayDataNotification"></xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ReadLightStatusNotificationResult">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayNotificationResult"></xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <!--Clear alarms and warnings-->
+      <xs:element name="InitiateClearAlarmsRequest">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayRequest">
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="1" name="Smartpoint" type="types:Smartpoint"/>
+                <xs:element maxOccurs="1" minOccurs="0" name="ClearAlarmsType" type="types:ClearAlarmsType"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="Alarms" type="types:AlarmWarningInfo"/>
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="InitiateClearAlarmsResponse">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayResponse"></xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ClearAlarmsNotification">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayNotification"></xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ClearAlarmsNotificationResult">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayNotificationResult"></xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <!--Set Endpoint properties-->
+      <xs:element name="InitiateApplySmartpointPropertiesRequest">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayRequest">
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="1" name="Smartpoint" type="types:Smartpoint"/>
+                <xs:element maxOccurs="1" minOccurs="0" name="Latitude" type="types:Double"/>
+                <xs:element maxOccurs="1" minOccurs="0" name="Longitude" type="types:Double"/>
+                <xs:element maxOccurs="1" minOccurs="0" name="PoleId" type="xs:string"/>
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="InitiateApplySmartpointPropertiesResponse">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayResponse"></xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ApplySmartpointPropertiesNotification">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayNotification"></xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ApplySmartpointPropertiesNotificationResult">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayNotificationResult"></xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <!--Request Endpoint Data-->
+      <xs:element name="InitiateReadSmartpointPropertiesRequest">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayRequest">
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="1" name="Smartpoint" type="types:Smartpoint"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="RequestType" type="types:RequestType"/>
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="InitiateReadSmartpointPropertiesResponse">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayResponse"></xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ReadSmartpointPropertiesNotification">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayNotification"></xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ReadSmartpointPropertiesNotificationResult">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewayNotificationResult"></xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <!--*** Supervisory messages (Notifications that are sent without prior 
+		InitiateXXXX request and therefore have no transaction Id**-->
+      <!--Status and Alarm Messages - AppCodes 11(0x0B)/90(0x5A); sent at configured 
+		transmit rate (which one is sent depends on whether alarm conditions are 
+		present or not)-->
+      <!--Should we split them out for consistencies sake?-->
+      <xs:element name="LightStatusNotification">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewaySupervisoryNotification">
+              <xs:sequence>
+                <xs:element name="SmartpointDetail" type="types:AppCode90Info"/>
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="LightStatusNotificationResult">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewaySupervisoryNotificationResult"></xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <!--Light Setup Message - AppCode 9 (0x09); sent bi-weekly-->
+      <xs:element name="LightSetupNotification">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewaySupervisoryNotification"/>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="LightSetupNotificationResult">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewaySupervisoryNotificationResult"/>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <!--Channel Setup Audit Message - AppCode 75 (0x4B)-->
+      <xs:element name="ChannelSetupAuditNotification">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewaySupervisoryNotification">
+              <xs:sequence>
+                <xs:element name="smartpointDetail" type="types:AppCode75Info"/>
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ChannelSetupAuditNotificationResult">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewaySupervisoryNotificationResult"></xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <!--Channel Setup Audit 2 Message - AppCode 85 (0x55)-->
+      <xs:element name="ChannelSetupAudit2Notification">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewaySupervisoryNotification">
+              <xs:sequence>
+                <xs:element name="smartpointDetail" type="types:AppCode85Info"/>
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ChannelSetupAudit2NotificationResult">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewaySupervisoryNotificationResult"></xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <!--Light Binding Message - AppCode 86 (0x56); sent bi-weekly-->
+      <xs:element name="LightBindingNotification">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewaySupervisoryNotification">
+              <xs:sequence>
+                <xs:element name="smartpointDetail" type="types:AppCode86Info"/>
+                <xs:element name="installationDetail" type="types:InstallationInfo"/>
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="LightBindingNotificationResult">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewaySupervisoryNotificationResult"></xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <!--Alarm Warning Message - AppCode 11 (0x0B); sent when condition is triggered-->
+      <xs:element name="AlarmWarningNotification">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewaySupervisoryNotification">
+              <xs:sequence>
+                <xs:element name="smartpointDetail" type="types:AppCode11Info"/>
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AlarmWarningNotificationResult">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewaySupervisoryNotificationResult"></xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <!--Attribute Notification AppCode 94 (0x5E)-->
+      <!--The request for attribute message notifications.-->
+      <xs:element name="AttributeNotification">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewaySupervisoryNotification">
+              <xs:sequence>
+                <xs:element name="smartpointDetail" type="types:AppCode94InfoIndividual"/>
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AttributeNotificationResult">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewaySupervisoryNotificationResult"></xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <!--CustomerSerialNumber Notification AppCode 71 (0x47)-->
+      <!--The request for customer serial number message notifications.-->
+      <xs:element name="CustomerSerialNumberNotification">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewaySupervisoryNotification">
+              <xs:sequence>
+                <xs:element name="customerSerial" type="xs:string"/>
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CustomerSerialNumberNotificationResult">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="types:MlcGatewaySupervisoryNotificationResult"></xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="ClearAlarmsNotification">
+    <wsdl:part element="tns:ClearAlarmsNotification" name="ClearAlarmsNotification"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AlarmWarningNotification">
+    <wsdl:part element="tns:AlarmWarningNotification" name="AlarmWarningNotification"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ChannelSetupAuditNotificationResult">
+    <wsdl:part element="tns:ChannelSetupAuditNotificationResult" name="ChannelSetupAuditNotificationResult"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="LightBindingNotification">
+    <wsdl:part element="tns:LightBindingNotification" name="LightBindingNotification"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AlarmWarningNotificationResult">
+    <wsdl:part element="tns:AlarmWarningNotificationResult" name="AlarmWarningNotificationResult"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AttributeNotification">
+    <wsdl:part element="tns:AttributeNotification" name="AttributeNotification"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ReadLightStatusNotification">
+    <wsdl:part element="tns:ReadLightStatusNotification" name="ReadLightStatusNotification"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ChannelSetupAudit2Notification">
+    <wsdl:part element="tns:ChannelSetupAudit2Notification" name="ChannelSetupAudit2Notification"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ClearScheduleNotificationResult">
+    <wsdl:part element="tns:ClearScheduleNotificationResult" name="ClearScheduleNotificationResult"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ChannelSetupAuditNotification">
+    <wsdl:part element="tns:ChannelSetupAuditNotification" name="ChannelSetupAuditNotification"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AttributeNotificationResult">
+    <wsdl:part element="tns:AttributeNotificationResult" name="AttributeNotificationResult"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="LightBindingNotificationResult">
+    <wsdl:part element="tns:LightBindingNotificationResult" name="LightBindingNotificationResult"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ChannelSetupAudit2NotificationResult">
+    <wsdl:part element="tns:ChannelSetupAudit2NotificationResult" name="ChannelSetupAudit2NotificationResult"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ReadSmartpointPropertiesNotification">
+    <wsdl:part element="tns:ReadSmartpointPropertiesNotification" name="ReadSmartpointPropertiesNotification"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ClearScheduleNotification">
+    <wsdl:part element="tns:ClearScheduleNotification" name="ClearScheduleNotification"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ReadLightStatusNotificationResult">
+    <wsdl:part element="tns:ReadLightStatusNotificationResult" name="ReadLightStatusNotificationResult"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CustomerSerialNumberNotification">
+    <wsdl:part element="tns:CustomerSerialNumberNotification" name="CustomerSerialNumberNotification"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="LightSetupNotificationResult">
+    <wsdl:part element="tns:LightSetupNotificationResult" name="LightSetupNotificationResult"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ApplyLightLevelNotification">
+    <wsdl:part element="tns:ApplyLightLevelNotification" name="ApplyLightLevelNotification"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ApplyLightLevelNotificationResult">
+    <wsdl:part element="tns:ApplyLightLevelNotificationResult" name="ApplyLightLevelNotificationResult"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CustomerSerialNumberNotificationResult">
+    <wsdl:part element="tns:CustomerSerialNumberNotificationResult" name="CustomerSerialNumberNotificationResult"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ClearAlarmsNotificationResult">
+    <wsdl:part element="tns:ClearAlarmsNotificationResult" name="ClearAlarmsNotificationResult"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ApplyScheduleNotification">
+    <wsdl:part element="tns:ApplyScheduleNotification" name="ApplyScheduleNotification"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="LightStatusNotificationResult">
+    <wsdl:part element="tns:LightStatusNotificationResult" name="LightStatusNotificationResult"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="LightStatusNotification">
+    <wsdl:part element="tns:LightStatusNotification" name="LightStatusNotification"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ApplySmartpointPropertiesNotificationResult">
+    <wsdl:part element="tns:ApplySmartpointPropertiesNotificationResult" name="ApplySmartpointPropertiesNotificationResult"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ApplyScheduleNotificationResult">
+    <wsdl:part element="tns:ApplyScheduleNotificationResult" name="ApplyScheduleNotificationResult"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ApplySmartpointPropertiesNotification">
+    <wsdl:part element="tns:ApplySmartpointPropertiesNotification" name="ApplySmartpointPropertiesNotification"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="LightSetupNotification">
+    <wsdl:part element="tns:LightSetupNotification" name="LightSetupNotification"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ReadSmartpointPropertiesNotificationResult">
+    <wsdl:part element="tns:ReadSmartpointPropertiesNotificationResult" name="ReadSmartpointPropertiesNotificationResult"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="mlc">
+    <wsdl:operation name="ClearAlarms">
+      <wsdl:input message="tns:ClearAlarmsNotification" name="ClearAlarmsNotification"></wsdl:input>
+      <wsdl:output message="tns:ClearAlarmsNotificationResult" name="ClearAlarmsNotificationResult"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AlarmWarning">
+      <wsdl:input message="tns:AlarmWarningNotification" name="AlarmWarningNotification"></wsdl:input>
+      <wsdl:output message="tns:AlarmWarningNotificationResult" name="AlarmWarningNotificationResult"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChannelSetupAudit">
+      <wsdl:input message="tns:ChannelSetupAuditNotification" name="ChannelSetupAuditNotification"></wsdl:input>
+      <wsdl:output message="tns:ChannelSetupAuditNotificationResult" name="ChannelSetupAuditNotificationResult"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LightBinding">
+      <wsdl:input message="tns:LightBindingNotification" name="LightBindingNotification"></wsdl:input>
+      <wsdl:output message="tns:LightBindingNotificationResult" name="LightBindingNotificationResult"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Attribute">
+      <wsdl:input message="tns:AttributeNotification" name="AttributeNotification"></wsdl:input>
+      <wsdl:output message="tns:AttributeNotificationResult" name="AttributeNotificationResult"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadLightStatus">
+      <wsdl:input message="tns:ReadLightStatusNotification" name="ReadLightStatusNotification"></wsdl:input>
+      <wsdl:output message="tns:ReadLightStatusNotificationResult" name="ReadLightStatusNotificationResult"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChannelSetupAudit2">
+      <wsdl:input message="tns:ChannelSetupAudit2Notification" name="ChannelSetupAudit2Notification"></wsdl:input>
+      <wsdl:output message="tns:ChannelSetupAudit2NotificationResult" name="ChannelSetupAudit2NotificationResult"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ClearSchedule">
+      <wsdl:input message="tns:ClearScheduleNotification" name="ClearScheduleNotification"></wsdl:input>
+      <wsdl:output message="tns:ClearScheduleNotificationResult" name="ClearScheduleNotificationResult"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadSmartpointProperties">
+      <wsdl:input message="tns:ReadSmartpointPropertiesNotification" name="ReadSmartpointPropertiesNotification"></wsdl:input>
+      <wsdl:output message="tns:ReadSmartpointPropertiesNotificationResult" name="ReadSmartpointPropertiesNotificationResult"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CustomerSerialNumber">
+      <wsdl:input message="tns:CustomerSerialNumberNotification" name="CustomerSerialNumberNotification"></wsdl:input>
+      <wsdl:output message="tns:CustomerSerialNumberNotificationResult" name="CustomerSerialNumberNotificationResult"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LightSetup">
+      <wsdl:input message="tns:LightSetupNotification" name="LightSetupNotification"></wsdl:input>
+      <wsdl:output message="tns:LightSetupNotificationResult" name="LightSetupNotificationResult"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ApplyLightLevel">
+      <wsdl:input message="tns:ApplyLightLevelNotification" name="ApplyLightLevelNotification"></wsdl:input>
+      <wsdl:output message="tns:ApplyLightLevelNotificationResult" name="ApplyLightLevelNotificationResult"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ApplySchedule">
+      <wsdl:input message="tns:ApplyScheduleNotification" name="ApplyScheduleNotification"></wsdl:input>
+      <wsdl:output message="tns:ApplyScheduleNotificationResult" name="ApplyScheduleNotificationResult"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LightStatus">
+      <wsdl:input message="tns:LightStatusNotification" name="LightStatusNotification"></wsdl:input>
+      <wsdl:output message="tns:LightStatusNotificationResult" name="LightStatusNotificationResult"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ApplySmartpointProperties">
+      <wsdl:input message="tns:ApplySmartpointPropertiesNotification" name="ApplySmartpointPropertiesNotification"></wsdl:input>
+      <wsdl:output message="tns:ApplySmartpointPropertiesNotificationResult" name="ApplySmartpointPropertiesNotificationResult"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="mlcSoap11" type="tns:mlc">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="ClearAlarms">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="ClearAlarmsNotification">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ClearAlarmsNotificationResult">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AlarmWarning">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="AlarmWarningNotification">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="AlarmWarningNotificationResult">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChannelSetupAudit">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="ChannelSetupAuditNotification">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ChannelSetupAuditNotificationResult">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LightBinding">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="LightBindingNotification">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="LightBindingNotificationResult">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Attribute">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="AttributeNotification">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="AttributeNotificationResult">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadLightStatus">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="ReadLightStatusNotification">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ReadLightStatusNotificationResult">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChannelSetupAudit2">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="ChannelSetupAudit2Notification">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ChannelSetupAudit2NotificationResult">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ClearSchedule">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="ClearScheduleNotification">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ClearScheduleNotificationResult">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadSmartpointProperties">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="ReadSmartpointPropertiesNotification">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ReadSmartpointPropertiesNotificationResult">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CustomerSerialNumber">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="CustomerSerialNumberNotification">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="CustomerSerialNumberNotificationResult">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LightSetup">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="LightSetupNotification">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="LightSetupNotificationResult">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ApplyLightLevel">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="ApplyLightLevelNotification">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ApplyLightLevelNotificationResult">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ApplySchedule">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="ApplyScheduleNotification">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ApplyScheduleNotificationResult">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LightStatus">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="LightStatusNotification">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="LightStatusNotificationResult">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ApplySmartpointProperties">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="ApplySmartpointPropertiesNotification">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ApplySmartpointPropertiesNotificationResult">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="mlcService">
+    <wsdl:port binding="tns:mlcSoap11" name="mlcSoap11">
+      <soap:address location="/MLCGatewayService/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>file:\C:\QATEclipseWorkSpace\mock-gateway\imported\xsd\mlcTypes.xsd</con:url><con:content><![CDATA[<xs:schema jaxb:version="2.0" elementFormDefault="qualified" targetNamespace="http://www.sensus.com/gateway/mlc/types" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:tns="http://www.sensus.com/gateway/mlc/types">
+  <!--*** Smartpoint Object ***********************-->
+  <xs:complexType name="Smartpoint">
+    <xs:sequence>
+      <xs:element name="customerID" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="rniId" type="tns:Integer" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!--*** Schedule Object ***********************-->
+  <xs:complexType name="Schedule">
+    <xs:sequence>
+      <xs:element name="scheduleType" type="tns:ScheduleType"/>
+      <xs:choice>
+        <xs:element name="offsetData" type="tns:ScheduleOffsetData"/>
+        <xs:element name="eventData" type="tns:ScheduleEventData"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <!--Parent for all requests. To simplify the object hierarchy, I'm including 
+		customerID here (required) as well as transactionId (not required if no async 
+		response is wanted; this also could be used as an indicator to discard the 
+		Acks???)-->
+  <xs:complexType name="MlcGatewayRequest">
+    <xs:sequence>
+      <xs:element name="customerID" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="transactionID" type="xs:string" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!--Parent for all synchronous responses-->
+  <xs:complexType name="MlcGatewayResponse">
+    <xs:sequence>
+      <xs:element name="customerID" type="xs:string"/>
+      <xs:element name="transactionID" type="xs:string"/>
+      <xs:element name="status" type="tns:Status"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Message" type="tns:MessageInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!--Parent for all asynchronous responses aka "Notifications"-->
+  <xs:complexType name="MlcGatewayNotification">
+    <xs:complexContent>
+      <xs:extension base="tns:MlcGatewayResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="FailedSmartpoint" type="tns:Smartpoint"/>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="SuccededSmartpoint" type="tns:Smartpoint"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!--Parent for all asynchronous responses that return data-->
+  <xs:complexType name="MlcGatewayDataNotification">
+    <xs:complexContent>
+      <xs:extension base="tns:MlcGatewayResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="DataType" type="tns:DataType"/>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="LightDetail" type="tns:LightDetail"/>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="FailedSmartpoint" type="tns:Smartpoint"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!--Parent for all responses to Notifications (MLC Response)-->
+  <xs:complexType name="MlcGatewayNotificationResult">
+    <xs:complexContent>
+      <xs:extension base="tns:MlcGatewayResponse"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <!--UNSOLICITED (SUPERVISORY) MESSAGES-->
+  <!--Parent for all asynchronous responses aka "Notifications" that are 
+		unsolicited (Supervisory)-->
+  <xs:complexType name="MlcGatewaySupervisoryNotification">
+    <xs:complexContent>
+      <xs:extension base="tns:MlcGatewayResponse">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="smartpoint" type="tns:Smartpoint"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!--Parent for all responses to Notifications that are unsolicited (Supervisory)-->
+  <xs:complexType name="MlcGatewaySupervisoryNotificationResult">
+    <xs:complexContent>
+      <xs:extension base="tns:MlcGatewayResponse"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <!--END OF UNSOLICITED (SUPERVISORY) MESSAGES-->
+  <!--Endpoint properties object-->
+  <xs:complexType name="EndpointProperties">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Latitude" type="tns:Double"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="Longitude" type="tns:Double"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="PoleId" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!--Rni Error Info-->
+  <xs:complexType name="MessageInfo">
+    <xs:sequence>
+      <!--Severity-->
+      <xs:element name="messageLevel" type="tns:MessageLevel"/>
+      <!--Error Type-->
+      <xs:element name="messageType" type="tns:MessageType"/>
+      <!--description-->
+      <xs:element name="messageText" type="xs:string"/>
+      <xs:element name="messageDomain" type="tns:MessageDomain"/>
+      <xs:element name="customerId" type="xs:string" minOccurs="0"/>
+      <!--the group name or flexnet id if applicable (actor)-->
+      <xs:element name="objectId" type="xs:string" minOccurs="0"/>
+      <xs:element name="messageTime" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="MessageLevel">
+    <xs:annotation>
+      <xs:appinfo>
+        <jaxb:typesafeEnumClass/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Error">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="ERROR"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Warning">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="WARNING"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Info">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="INFO"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="None">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="NONE"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="MessageType">
+    <xs:annotation>
+      <xs:appinfo>
+        <jaxb:typesafeEnumClass/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NO_ROUTE_TO_DEVICE">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="NO_ROUTE_TO_DEVICE"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DEVICE_RESPONSE_TIMEOUT">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="DEVICE_RESPONSE_TIMEOUT"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DEVICE_DOES_NOT_EXIST">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="DEVICE_DOES_NOT_EXIST"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DUPLICATE_DEVICE_EXCEPTION">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="DUPLICATE_DEVICE_EXCEPTION"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FAIL_TO_ACCESS_DATABASE">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="FAIL_TO_ACCESS_DATABASE"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DATA_VALIDATION_FAILURE">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="DATA_VALIDATION_FAILURE"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TRANSACTION_FAILURE">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="TRANSACTION_FAILURE"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DEVICE_NOT_ACTIVE">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="DEVICE_NOT_ACTIVE"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="UNSUPPORTED_MESSAGE_TYPE">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="UNSUPPORTED_MESSAGE_TYPE"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="UNSUPPORTED_DEVICE_TYPE">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="UNSUPPORTED_DEVICE_TYPE"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="INVALID_LIFECYCLE_STATE">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="INVALID_LIFECYCLE_STATE"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="INVALID_LOGICAL_STATE">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="INVALID_LOGICAL_STATE"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NO_DATA_FOUND">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="NO_DATA_FOUND"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TRANSACTION_NOT_FOUND">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="TRANSACTION_NOT_FOUND"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="OTHER">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="OTHER"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="MessageDomain">
+    <xs:annotation>
+      <xs:appinfo>
+        <jaxb:typesafeEnumClass/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DATABASE">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="DATABASE"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AUTHENTICATION">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="AUTHENTICATION"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="VALIDATION">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="VALIDATION"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="COMMUNICATION">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="COMMUNICATION"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <!--Light Detail (status, alarms, ...)-->
+  <xs:complexType name="LightDetail">
+    <xs:complexContent>
+      <xs:extension base="tns:Smartpoint">
+        <xs:sequence>
+          <xs:element name="appCode11Data" type="tns:AppCode11Info"/>
+          <xs:element name="appCode71Data" type="tns:AppCode71Info"/>
+          <xs:element name="appCode75Data" type="tns:AppCode75Info"/>
+          <xs:element name="appCode85Data" type="tns:AppCode85Info"/>
+          <xs:element name="appCode90Data" type="tns:AppCode90Info"/>
+          <xs:element name="appCode94Data" type="tns:AppCode94Info"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!--Schedule -> Type = Offset-->
+  <xs:complexType name="ScheduleOffsetData">
+    <xs:sequence>
+      <xs:element name="sunriseOffset" type="tns:Integer"/>
+      <xs:element name="sunsetOffset" type="tns:Integer"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!--Schedule -> Type = Event-->
+  <xs:complexType name="ScheduleEventData">
+    <xs:sequence>
+      <xs:element name="scheduleEvent" type="tns:ScheduleEvent" minOccurs="1" maxOccurs="28"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!--Schedule Event. Represents a single event for a event-based schedule-->
+  <xs:complexType name="ScheduleEvent">
+    <xs:sequence>
+      <xs:element name="lightLevel" type="tns:LightLevel"/>
+      <xs:element name="eventHour" type="tns:Integer"/>
+      <xs:element name="eventMinute" type="tns:Integer"/>
+      <xs:sequence minOccurs="1" maxOccurs="7">
+        <xs:element name="eventDayOfWeek" type="tns:DayOfWeek"/>
+      </xs:sequence>
+    </xs:sequence>
+  </xs:complexType>
+  <!--AppCode 11 (0x0B) NA2W Alarm-->
+  <xs:complexType name="AppCode11Info">
+    <xs:sequence>
+      <xs:element name="alarmWarningMessages" type="tns:AlarmWarningInfo" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="lightState" type="tns:LightState"/>
+      <xs:element name="lightTopLevelState" type="tns:LightTopLevelState"/>
+      <xs:element name="current" type="tns:Integer"/>
+      <xs:element name="voltage" type="tns:Integer"/>
+      <xs:element name="temperature" type="tns:Integer"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!--AppCode 71 (0x47) Customer Serial Number-->
+  <xs:complexType name="AppCode71Info">
+    <xs:sequence>
+      <xs:element name="customerSerial" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!--AppCode 75 (0x4B) NA2W Channel Setup Audit-->
+  <xs:complexType name="AppCode75Info">
+    <xs:sequence>
+      <xs:element name="lightTopLevelState" type="tns:LightTopLevelState"/>
+      <xs:element name="protected" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!--AppCode 94 (0x5E) AttributeMessage - aggregated-->
+  <xs:complexType name="AppCode94Info">
+    <xs:sequence>
+      <xs:element name="ProductNumber" type="xs:string"/>
+      <xs:element name="BulbSerial" type="xs:string"/>
+      <xs:element name="BallastSerial" type="xs:string"/>
+      <xs:element name="UpperCaseSerial" type="xs:string"/>
+      <xs:element name="LowerCaseSerial" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!--AppCode 94 (0x5E) AttributeMessage - aggregated-->
+  <xs:complexType name="AppCode94InfoIndividual">
+    <xs:sequence>
+      <xs:element name="attribute" type="xs:string"/>
+      <xs:element name="attributeType" type="tns:AttributeType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!--AppCode 85 (0x55) NA2W Channel Setup Audit 2-->
+  <xs:complexType name="AppCode85Info">
+    <xs:sequence>
+      <xs:element name="sunriseOffset" type="tns:Integer"/>
+      <xs:element name="sunsetOffset" type="tns:Integer"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!--AppCode 86 (0x56) NA2W Binding/Configuration-->
+  <xs:complexType name="AppCode86Info">
+    <xs:sequence>
+      <xs:element name="latitude" type="tns:Double"/>
+      <xs:element name="longitude" type="tns:Double"/>
+      <xs:element name="poleId" type="xs:string"/>
+      <xs:element name="productVersionMinor" type="tns:Integer"/>
+      <xs:element name="productVersionMajor" type="tns:Integer"/>
+      <xs:element name="productVersionBeta" type="xs:boolean"/>
+      <xs:element name="productVersionPatch" type="tns:Integer"/>
+      <xs:element name="deviceVersionMinor" type="tns:Integer"/>
+      <xs:element name="deviceVersionMajor" type="tns:Integer"/>
+      <xs:element name="deviceVersionBeta" type="xs:boolean"/>
+      <xs:element name="deviceVersionPatch" type="tns:Integer"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!--Installation Info-->
+  <xs:complexType name="InstallationInfo">
+    <xs:sequence>
+      <xs:element name="timezoneRegion" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!--AppCode 90 (0x5A) NA2W Device Status-->
+  <xs:complexType name="AppCode90Info">
+    <xs:sequence>
+      <xs:element name="voltage" type="tns:Integer"/>
+      <xs:element name="current" type="tns:Integer"/>
+      <xs:element name="consumption" type="tns:Integer"/>
+      <xs:element name="lightState" type="tns:LightState"/>
+      <xs:element name="lightLevel" type="tns:LightLevel"/>
+      <xs:element name="sunriseHour" type="tns:Integer"/>
+      <xs:element name="sunriseMinute" type="tns:Integer"/>
+      <xs:element name="sunsetHour" type="tns:Integer"/>
+      <xs:element name="sunsetMinute" type="tns:Integer"/>
+      <xs:element name="temperature" type="tns:Integer"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!--Alarm/Warning Info-->
+  <xs:complexType name="AlarmWarningInfo">
+    <xs:sequence>
+      <xs:element name="alarmWarningType" type="tns:AlarmWarningType"/>
+      <xs:element name="alarmWarningSubType" type="tns:AlarmWarningSubType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!--Light Setup Detail-->
+  <xs:complexType name="LightSetupDetail">
+    <xs:sequence>
+      <!--no data at this point-->
+    </xs:sequence>
+  </xs:complexType>
+  <!--Light Status Enumeration for sync and async responses-->
+  <xs:simpleType name="LightState">
+    <xs:annotation>
+      <xs:appinfo>
+        <jaxb:typesafeEnumClass/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="0">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="OFF"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="1">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="ON"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="2">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="BLINK"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="3">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="MAINTENANCE"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="4">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="UNKNOWN"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <!--Top Level State. Present on AppCode11 (Alarm)-->
+  <xs:simpleType name="LightTopLevelState">
+    <xs:annotation>
+      <xs:appinfo>
+        <jaxb:typesafeEnumClass/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="0">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="IDLE"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="1">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="MAINTENANCE"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="2">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="ACTIVE"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="3">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="UNKNOWN"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <!--Alarm/Warning Enumeration for sync and async responses-->
+  <xs:simpleType name="AlarmWarningType">
+    <xs:annotation>
+      <xs:appinfo>
+        <jaxb:typesafeEnumClass/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="0">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="ALARM"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="1">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="WARNING"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <!--Alarm/Warning subtype Enumeration for sync and async responses-->
+  <xs:simpleType name="AlarmWarningSubType">
+    <xs:annotation>
+      <xs:appinfo>
+        <jaxb:typesafeEnumClass/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="0">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="LAMP_FAILURE"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="1">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="POWER_FAILURE"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="2">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="POWER_SURGE_DETECTED"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="3">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="BROWN_OUT_DETECTED"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <!--Status Enumeration for sync and async responses-->
+  <xs:simpleType name="Status">
+    <xs:annotation>
+      <xs:appinfo>
+        <jaxb:typesafeEnumClass/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SUCCESS">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="SUCCESS"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FAIL">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="FAIL"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <!--Light Level Enumeration for ApplyLightLevelRequest-->
+  <xs:simpleType name="LightLevel">
+    <xs:annotation>
+      <xs:appinfo>
+        <jaxb:typesafeEnumClass/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="0">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="LEVEL_0"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="1">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="LEVEL_1"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="2">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="LEVEL_2"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="3">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="LEVEL_3"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="4">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="LEVEL_4"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="5">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="LEVEL_5"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="6">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="LEVEL_6"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="7">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="LEVEL_7"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <!--Schedule types-->
+  <xs:simpleType name="ScheduleType">
+    <xs:annotation>
+      <xs:appinfo>
+        <jaxb:typesafeEnumClass/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="0">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="OFFSET"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="1">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="EVENT"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <!--Attribute Enumeration for sync and async responses-->
+  <xs:simpleType name="AttributeType">
+    <xs:annotation>
+      <xs:appinfo>
+        <jaxb:typesafeEnumClass/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="0">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="UPPER_CASE_SERIAL_NUMBER"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="1">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="LOWER_CASE_SERIAL_NUMBER"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="2">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="BALLAST_SERIAL_NUMBER"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="3">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="BULB_SERIAL_NUMBER"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="4">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="PRODUCT_MODEL_NUMBER"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <!--Request Type Enumeration for sync and async responses-->
+  <xs:simpleType name="RequestType">
+    <xs:annotation>
+      <xs:appinfo>
+        <jaxb:typesafeEnumClass/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="0">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="UPPER_CASE_SERIAL_NUMBER"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="1">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="LOWER_CASE_SERIAL_NUMBER"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="2">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="BALLAST_SERIAL_NUMBER"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="3">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="BULB_SERIAL_NUMBER"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="4">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="PRODUCT_MODEL_NUMBER"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="5">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="BINDING_MESSAGE"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="6">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="SETUP_MESSAGE"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="7">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="ALARM"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="8">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="CHANNEL_SETUP"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="9">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="CHANNEL_SETUP_2"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="10">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="LIGHT_STATUS"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="11">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="PROGRAMMED_SCHEDULE"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="12">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="CUSTOMER_SERIAL_NUMBER"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <!--Data Type Enumeration for sync and async responses-->
+  <xs:simpleType name="DataType">
+    <xs:annotation>
+      <xs:appinfo>
+        <jaxb:typesafeEnumClass/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="STATUS">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="STATUS_DATA"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CONFIG">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="CONFIGURATION_DATA"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <!--ProtectedStatus types-->
+  <xs:simpleType name="ProtectedStatus">
+    <xs:annotation>
+      <xs:appinfo>
+        <jaxb:typesafeEnumClass/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="0">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="UNPROTECTED"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="1">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="PROTECTED"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <!--OverrideLockType types-->
+  <xs:simpleType name="ClearAlarmsType">
+    <xs:annotation>
+      <xs:appinfo>
+        <jaxb:typesafeEnumClass/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="USE_LIST">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="USE_LIST"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CLEAR_ALL">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="CLEAR_ALL"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <!--Days of the Week-->
+  <xs:simpleType name="DayOfWeek">
+    <xs:annotation>
+      <xs:appinfo>
+        <jaxb:typesafeEnumClass/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="0">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="SUNDAY"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="1">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="MONDAY"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="2">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="TUESDAY"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="3">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="WEDNESDAY"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="4">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="THURSDAY"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="5">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="FRIDAY"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="6">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="SATURDAY"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Integer">
+    <xs:annotation>
+      <xs:appinfo>
+        <jaxb:javaType name="Integer" parseMethod="com.sensus.gateway.converter.IntegerConverter.toInteger" printMethod="com.sensus.gateway.converter.IntegerConverter.fromInteger"/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:restriction base="xs:integer">
+      <xs:minInclusive value="0"/>
+      <xs:maxInclusive value="999999999"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Double">
+    <xs:annotation>
+      <xs:appinfo>
+        <jaxb:javaType name="Double" parseMethod="com.sensus.gateway.converter.DoubleConverter.toDouble" printMethod="com.sensus.gateway.converter.DoubleConverter.fromDouble"/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:restriction base="xs:double">
+      <xs:minInclusive value="-324234.234"/>
+      <xs:maxInclusive value="3249239847982.234"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/slc/MLCGatewayService/</con:endpoint><con:endpoint>/MLCGatewayService/</con:endpoint><con:endpoint>http://localhost:8080/mlc-test-be/MLCGatewayService/</con:endpoint><con:endpoint>http://localhost:9090/slc/MLCGatewayService/</con:endpoint><con:endpoint>http://mallet-app.davis.sensus.lab:8080/slc/MLCGatewayService/</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="ChannelSetupAudit" bindingOperationName="ChannelSetupAudit" type="Request-Response" outputName="ChannelSetupAuditNotificationResult" inputName="ChannelSetupAuditNotification" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="GoodAddSmpToGrp"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/mlc-test-be/MLCGatewayService/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mlc="http://www.sensus.com/gateway/mlc" xmlns:typ="http://www.sensus.com/gateway/mlc/types" xmlns:ser="http://server.ws.gateway.mlc.sensus.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mlc:ChannelSetupAuditNotification>
+         <typ:customerID>?</typ:customerID>
+         <typ:transactionID>?</typ:transactionID>
+         <typ:status>?</typ:status>
+         <typ:smartpoint>
+            <typ:customerID>?</typ:customerID>
+            <typ:rniId>?</typ:rniId>
+         </typ:smartpoint>
+         <mlc:smartpointDetail>
+            <typ:customerId>?</typ:customerId>
+            <typ:municipalityId>?</typ:municipalityId>
+            <typ:protected>?</typ:protected>
+         </mlc:smartpointDetail>
+      </mlc:ChannelSetupAuditNotification>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://server.ws.gateway.mlc.sensus.com/IMlcGatewayWSServer/addSmartpointsToGroup"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="AlarmWarning" bindingOperationName="AlarmWarning" type="Request-Response" outputName="AlarmWarningNotificationResult" inputName="AlarmWarningNotification" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/slc/MLCGatewayService/</con:endpoint><con:request><![CDATA[<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+   <SOAP-ENV:Header>
+      <wsse:Security SOAP-ENV:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+         <wsse:UsernameToken wsu:Id="UsernameToken-2">
+            <wsse:Username>not_user</wsse:Username>
+            <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">not_user</wsse:Password>
+            <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">WrhNNQ8ahDj+Wfiyu3X6GA==</wsse:Nonce>
+            <wsu:Created>2012-07-09T15:24:24.019Z</wsu:Created>
+         </wsse:UsernameToken>
+      </wsse:Security>
+   </SOAP-ENV:Header>
+   <SOAP-ENV:Body>
+      <ns3:AlarmWarningNotification xmlns:ns2="http://www.sensus.com/gateway/mlc/types" xmlns:ns3="http://www.sensus.com/gateway/mlc">
+         <ns2:customerID>ACME</ns2:customerID>
+         <ns2:smartpoint>
+            <ns2:customerID>ACME</ns2:customerID>
+            <ns2:rniId>1000</ns2:rniId>
+         </ns2:smartpoint>
+         <ns3:smartpointDetail>
+            <ns2:alarmWarningMessages>
+               <ns2:alarmWarningType>0</ns2:alarmWarningType>
+               <ns2:alarmWarningSubType>1</ns2:alarmWarningSubType>
+            </ns2:alarmWarningMessages>           
+            <ns2:lightState>0</ns2:lightState>
+            <ns2:lightTopLevelState>2</ns2:lightTopLevelState>
+            <ns2:current>0</ns2:current>
+            <ns2:voltage>0</ns2:voltage>
+            <ns2:temperature>23</ns2:temperature>
+         </ns3:smartpointDetail>
+      </ns3:AlarmWarningNotification>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>]]></con:request><con:credentials><con:username>rod</con:username><con:password>koala</con:password><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.sensus.com/gateway/mlc/mlc/AlarmWarningNotification"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/slc/MLCGatewayService/</con:endpoint><con:request><![CDATA[<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+   <SOAP-ENV:Header>
+      <wsse:Security SOAP-ENV:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+         <wsse:UsernameToken wsu:Id="UsernameToken-2">
+            <wsse:Username>not_user</wsse:Username>
+            <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">not_user</wsse:Password>
+            <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">WrhNNQ8ahDj+Wfiyu3X6GA==</wsse:Nonce>
+            <wsu:Created>2012-07-09T15:24:24.019Z</wsu:Created>
+         </wsse:UsernameToken>
+      </wsse:Security>
+   </SOAP-ENV:Header>
+   <SOAP-ENV:Body>
+      <ns3:AlarmWarningNotification xmlns:ns2="http://www.sensus.com/gateway/mlc/types" xmlns:ns3="http://www.sensus.com/gateway/mlc">
+         <ns2:customerID>ACME</ns2:customerID>
+         <ns2:smartpoint>
+            <ns2:customerID>ACME</ns2:customerID>
+            <ns2:rniId>68</ns2:rniId>
+         </ns2:smartpoint>
+         <ns3:smartpointDetail>
+       	<ns2:alarmWarningMessages>
+            <ns2:alarmWarningType>1</ns2:alarmWarningType>
+            <ns2:alarmWarningSubType>2</ns2:alarmWarningSubType>
+          </ns2:alarmWarningMessages> 
+        
+            <ns2:lightState>0</ns2:lightState>
+            <ns2:lightTopLevelState>2</ns2:lightTopLevelState>
+            <ns2:current>0</ns2:current>
+            <ns2:voltage>0</ns2:voltage>
+            <ns2:temperature>23</ns2:temperature>
+         </ns3:smartpointDetail>
+      </ns3:AlarmWarningNotification>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>]]></con:request><con:credentials><con:username>rod</con:username><con:password>koala</con:password><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.sensus.com/gateway/mlc/mlc/AlarmWarningNotification"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="ApplyLightLevel" bindingOperationName="ApplyLightLevel" type="Request-Response" outputName="ApplyLightLevelNotificationResult" inputName="ApplyLightLevelNotification" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="GoodGetLightStatus"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/slc/MLCGatewayService/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mlc="http://www.sensus.com/gateway/mlc" xmlns:typ="http://www.sensus.com/gateway/mlc/types" xmlns:ser="http://server.ws.gateway.mlc.sensus.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mlc:ApplyLightLevelNotification>
+         <typ:customerID>?</typ:customerID>
+         <typ:transactionID>?</typ:transactionID>
+         <typ:status>?</typ:status>
+      </mlc:ApplyLightLevelNotification>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://server.ws.gateway.mlc.sensus.com/IMlcGatewayWSServer/getLightStatus"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/slc/MLCGatewayService/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:mlc="http://www.sensus.com/gateway/mlc" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://www.sensus.com/gateway/mlc/types">
+   <soapenv:Header>
+      <wsse:Security soapenv:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+         <wsse:UsernameToken wsu:Id="UsernameToken-2" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+            <wsse:Username>not_user</wsse:Username>
+            <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">not_user</wsse:Password>
+            <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">9Ef8lzwW+ohvdsa5M7ekyg==</wsse:Nonce>
+            <wsu:Created>2011-06-29T12:51:16.692Z</wsu:Created>
+         </wsse:UsernameToken>
+      </wsse:Security>
+   </soapenv:Header>
+   <soapenv:Body>
+     <mlc:ApplyLightLevelNotification>
+         <typ:customerID>ACME</typ:customerID>
+         <typ:transactionID>3d9e8202-2999-4ab9-a0a7-fcda7cce5689</typ:transactionID>
+         <typ:status>?</typ:status>
+         <!--Zero or more repetitions:-->
+         <typ:SuccededSmartpoint>
+            <typ:customerID>ACME</typ:customerID>
+            <typ:rniId>20</typ:rniId>
+            <ns2:lightState>1</ns2:lightState>
+		  <ns2:lightLevel>6</ns2:lightLevel>
+         </typ:SuccededSmartpoint>
+     </mlc:ApplyLightLevelNotification>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>rod</con:username><con:password>koala</con:password><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.sensus.com/gateway/mlc/mlc/ApplyLightLevelNotification"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 3"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/slc/MLCGatewayService/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mlc="http://www.sensus.com/gateway/mlc" xmlns:typ="http://www.sensus.com/gateway/mlc/types">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mlc:ApplyLightLevelNotification>
+         <typ:customerID>?</typ:customerID>
+         <typ:transactionID>?</typ:transactionID>
+         <typ:status>?</typ:status>
+         <!--Zero or more repetitions:-->
+         <typ:Message>
+            <typ:messageLevel>?</typ:messageLevel>
+            <typ:messageType>?</typ:messageType>
+            <typ:messageText>?</typ:messageText>
+            <typ:messageDomain>?</typ:messageDomain>
+            <!--Optional:-->
+            <typ:customerId>?</typ:customerId>
+            <!--Optional:-->
+            <typ:objectId>?</typ:objectId>
+            <typ:messageTime>?</typ:messageTime>
+         </typ:Message>
+         <!--Zero or more repetitions:-->
+         <typ:FailedSmartpoint>
+            <typ:customerID>?</typ:customerID>
+            <typ:rniId>?</typ:rniId>
+         </typ:FailedSmartpoint>
+         <!--Zero or more repetitions:-->
+         <typ:SuccededSmartpoint>
+            <typ:customerID>?</typ:customerID>
+            <typ:rniId>?</typ:rniId>
+         </typ:SuccededSmartpoint>
+      </mlc:ApplyLightLevelNotification>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.sensus.com/gateway/mlc/mlc/ApplyLightLevelNotification"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="LightBinding" bindingOperationName="LightBinding" type="Request-Response" outputName="LightBindingNotificationResult" inputName="LightBindingNotification" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="RealRequest"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/slc/MLCGatewayService/</con:endpoint><con:request><![CDATA[[7/11/2012 3:32:51 PM] _QAT_Jean Dannemann Carone: <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+   <SOAP-ENV:Header>
+      <wsse:Security SOAP-ENV:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+         <wsse:UsernameToken wsu:Id="UsernameToken-8">
+            <wsse:Username>not_user</wsse:Username>
+            <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">not_user</wsse:Password>
+            <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">LgjCuZhcIra5sYGdG4xhog==</wsse:Nonce>
+            <wsu:Created>2012-07-07T12:57:45.380Z</wsu:Created>
+         </wsse:UsernameToken>
+      </wsse:Security>
+   </SOAP-ENV:Header>
+   <SOAP-ENV:Body>
+      <ns3:LightBindingNotification xmlns:ns2="http://www.sensus.com/gateway/mlc/types" xmlns:ns3="http://www.sensus.com/gateway/mlc">
+         <ns2:customerID>ACME</ns2:customerID>
+         <ns2:smartpoint>
+            <ns2:customerID>ACME</ns2:customerID>
+            <ns2:rniId>52010038</ns2:rniId>
+         </ns2:smartpoint>
+         <ns3:smartpointDetail>
+            <ns2:latitude>35.86669921875</ns2:latitude>
+            <ns2:longitude>-78.86150360107422</ns2:longitude>
+            <ns2:poleId>1_4442</ns2:poleId>
+            <ns2:productVersionMinor>8</ns2:productVersionMinor>
+            <ns2:productVersionMajor>0</ns2:productVersionMajor>
+            <ns2:productVersionBeta>true</ns2:productVersionBeta>
+            <ns2:productVersionPatch>4</ns2:productVersionPatch>
+            <ns2:deviceVersionMinor>8</ns2:deviceVersionMinor>
+            <ns2:deviceVersionMajor>0</ns2:deviceVersionMajor>
+            <ns2:deviceVersionBeta>true</ns2:deviceVersionBeta>
+            <ns2:deviceVersionPatch>4</ns2:deviceVersionPatch>
+         </ns3:smartpointDetail>
+         <ns3:installationDetail>
+            <ns2:timezoneRegion>America/Chicago</ns2:timezoneRegion>
+         </ns3:installationDetail>
+      </ns3:LightBindingNotification>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>]]></con:request><con:credentials><con:username>qat1</con:username><con:password>qar1</con:password><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.sensus.com/gateway/mlc/mlc/LightBindingNotification"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://mallet-app.davis.sensus.lab:8080/slc/MLCGatewayService/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:mlc="http://www.sensus.com/gateway/mlc" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://www.sensus.com/gateway/mlc/types">
+   <soapenv:Header>
+      <wsse:Security soapenv:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+         <wsse:UsernameToken wsu:Id="UsernameToken-1" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+            <wsse:Username>not_user</wsse:Username>
+            <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">not_user</wsse:Password>
+            <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">53fU9rFZzRBcnPr7AB+H7w==</wsse:Nonce>
+            <wsu:Created>2011-11-14T15:23:10.305Z</wsu:Created>
+         </wsse:UsernameToken>
+      </wsse:Security>
+   </soapenv:Header>
+   <soapenv:Body>
+      <mlc:LightBindingNotification>
+         <typ:customerID>PECO</typ:customerID>
+         <typ:transactionID>123</typ:transactionID>
+         <typ:status>SUCCESS</typ:status>
+         <typ:smartpoint>
+            <typ:customerID>PECO</typ:customerID>
+            <typ:rniId>52000188</typ:rniId>
+         </typ:smartpoint>
+         <mlc:smartpointDetail>
+            <typ:latitude>45.5184</typ:latitude>
+            <typ:longitude>-122.6792</typ:longitude>
+            <typ:poleId>2_2</typ:poleId>
+            <typ:productVersionMinor>11</typ:productVersionMinor>
+            <typ:productVersionMajor>12</typ:productVersionMajor>
+            <typ:productVersionBeta>13</typ:productVersionBeta>
+            <typ:productVersionPatch>14</typ:productVersionPatch>
+            <typ:deviceVersionMinor>2</typ:deviceVersionMinor>
+            <typ:deviceVersionMajor>3</typ:deviceVersionMajor>
+            <typ:deviceVersionBeta>4</typ:deviceVersionBeta>
+            <typ:deviceVersionPatch>5</typ:deviceVersionPatch>
+         </mlc:smartpointDetail>
+         <mlc:installationDetail>
+            <typ:timezoneRegion>America/New_York</typ:timezoneRegion>
+         </mlc:installationDetail>
+      </mlc:LightBindingNotification>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>qat1</con:username><con:password>qat1</con:password></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.sensus.com/gateway/mlc/mlc/LightBindingNotification"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 3"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/slc/MLCGatewayService/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:mlc="http://www.sensus.com/gateway/mlc" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://www.sensus.com/gateway/mlc/types">
+   <soapenv:Header>
+      <wsse:Security soapenv:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+         <wsse:UsernameToken wsu:Id="UsernameToken-1" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+            <wsse:Username>not_user</wsse:Username>
+            <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">not_user</wsse:Password>
+            <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">53fU9rFZzRBcnPr7AB+H7w==</wsse:Nonce>
+            <wsu:Created>2011-11-14T15:23:10.305Z</wsu:Created>
+         </wsse:UsernameToken>
+      </wsse:Security>
+   </soapenv:Header>
+   <soapenv:Body>
+      <mlc:LightBindingNotification>
+         <typ:customerID>PECO</typ:customerID>
+         <typ:transactionID>TX1</typ:transactionID>
+         <typ:status>SUCCESS</typ:status>
+         <typ:smartpoint>
+            <typ:customerID>ACME</typ:customerID>
+            <typ:rniId>2005</typ:rniId>
+         </typ:smartpoint>
+         <mlc:smartpointDetail>
+            <typ:latitude>35.8675</typ:latitude>
+            <typ:longitude>-78.8621</typ:longitude>
+            <typ:poleId>pole 1</typ:poleId>
+            <typ:productVersionMinor>11</typ:productVersionMinor>
+            <typ:productVersionMajor>12</typ:productVersionMajor>
+            <typ:productVersionBeta>13</typ:productVersionBeta>
+            <typ:productVersionPatch>14</typ:productVersionPatch>
+            <typ:deviceVersionMinor>2</typ:deviceVersionMinor>
+            <typ:deviceVersionMajor>3</typ:deviceVersionMajor>
+            <typ:deviceVersionBeta>4</typ:deviceVersionBeta>
+            <typ:deviceVersionPatch>5</typ:deviceVersionPatch>
+         </mlc:smartpointDetail>
+         <mlc:installationDetail>
+            <typ:timezoneRegion>America/New_York</typ:timezoneRegion>
+         </mlc:installationDetail>
+      </mlc:LightBindingNotification>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.sensus.com/gateway/mlc/mlc/LightBindingNotification"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="LightSetup" bindingOperationName="LightSetup" type="Request-Response" outputName="LightSetupNotificationResult" inputName="LightSetupNotification" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 3"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/slc/MLCGatewayService/</con:endpoint><con:request><![CDATA[<LightSetupNotificationRequest xmlns="http://www.sensus.com/api/mlc/message/messages">
+   <Header>
+      <wsse:Security soapenv:mustUnderstand="1" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+         <wsse:UsernameToken wsu:Id="UsernameToken-1" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+            <wsse:Username>ACME</wsse:Username>
+            <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">acme</wsse:Password>
+            <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">hC6RsYlmHhzmC8LRyIzEaQ==</wsse:Nonce>
+            <wsu:Created>2011-06-21T17:02:11.033Z</wsu:Created>
+         </wsse:UsernameToken>
+      </wsse:Security>
+   </Header>
+   <customerId>ACME</customerId>
+   <smartpointId>52000206</smartpointId>
+</LightSetupNotificationRequest>]]></con:request><con:credentials><con:username>ACME</con:username><con:password>acme</con:password></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.sensus.com/gateway/mlc/mlc/LightSetupNotification"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/slc/MLCGatewayService/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:mlc="http://www.sensus.com/gateway/mlc" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://www.sensus.com/gateway/mlc/types">
+   <soapenv:Header>
+      <wsse:Security soapenv:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+         <wsse:UsernameToken wsu:Id="UsernameToken-2" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+            <wsse:Username>ACME</wsse:Username>
+            <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">acme</wsse:Password>
+            <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">RikCnrWxlFnyG6Bv83byhg==</wsse:Nonce>
+            <wsu:Created>2011-06-21T17:09:07.848Z</wsu:Created>
+         </wsse:UsernameToken>
+      </wsse:Security>
+   </soapenv:Header>
+   <soapenv:Body>
+      <mlc:LightSetupNotification>
+         <typ:customerID>ACME</typ:customerID>
+         <typ:smartpoint>
+            <typ:customerID>ACME</typ:customerID>
+            <typ:rniId>52000206</typ:rniId>
+         </typ:smartpoint>
+      </mlc:LightSetupNotification>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>ACME</con:username><con:password>acme</con:password></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.sensus.com/gateway/mlc/mlc/LightSetupNotification"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="LightStatus" bindingOperationName="LightStatus" type="Request-Response" outputName="LightStatusNotificationResult" inputName="LightStatusNotification" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="GoodStatus"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/slc/MLCGatewayService/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:mlc="http://www.sensus.com/gateway/mlc" xmlns:ser="http://server.ws.gateway.mlc.sensus.com/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://www.sensus.com/gateway/mlc/types">
+   <soapenv:Header>
+      <wsse:Security soapenv:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+         <wsse:UsernameToken wsu:Id="UsernameToken-2" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+            <wsse:Username>not_user</wsse:Username>
+            <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">not_user</wsse:Password>
+            <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">Pv/znPMvlQa2FEoLhSXpww==</wsse:Nonce>
+            <wsu:Created>2011-11-14T17:47:41.833Z</wsu:Created>
+         </wsse:UsernameToken>
+      </wsse:Security>
+   </soapenv:Header>
+   <soapenv:Body>
+      <mlc:LightStatusNotification>
+         <typ:customerID>ACME</typ:customerID>
+         <typ:smartpoint>
+            <typ:customerID>ACME</typ:customerID>
+            <typ:rniId>1001</typ:rniId>
+         </typ:smartpoint>
+         <mlc:SmartpointDetail>
+            <typ:lightState>0</typ:lightState>
+            <typ:lightIntensity>0</typ:lightIntensity>
+            <typ:sunriseHour>7</typ:sunriseHour>
+            <typ:sunriseMinute>10</typ:sunriseMinute>
+            <typ:sunsetHour>18</typ:sunsetHour>
+            <typ:sunsetMinute>38</typ:sunsetMinute>
+            <typ:voltage>124</typ:voltage>
+            <typ:current>20</typ:current>
+            <typ:consumption>15</typ:consumption>
+            <typ:temperature>31</typ:temperature>
+         </mlc:SmartpointDetail>
+      </mlc:LightStatusNotification>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>qat1</con:username><con:password>qat1</con:password><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://server.ws.gateway.mlc.sensus.com/IMlcGatewayWSServer/lightStatusNotification"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/slc/MLCGatewayService/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:mlc="http://www.sensus.com/gateway/mlc" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://www.sensus.com/gateway/mlc/types">
+   <soapenv:Header>
+      <wsse:Security soapenv:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+         <wsse:UsernameToken wsu:Id="UsernameToken-2" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+            <wsse:Username>not_user</wsse:Username>
+            <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">not_user</wsse:Password>
+            <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">OispXe+t6vJJzlmTUFegbw==</wsse:Nonce>
+            <wsu:Created>2011-11-15T17:41:00.962Z</wsu:Created>
+         </wsse:UsernameToken>
+      </wsse:Security>
+   </soapenv:Header>
+   <soapenv:Body>
+      <mlc:LightStatusNotification>
+         <typ:customerID>ACME</typ:customerID>
+         <typ:smartpoint>
+            <typ:customerID>ACME</typ:customerID>
+            <typ:rniId>20</typ:rniId>
+         </typ:smartpoint>
+         <mlc:SmartpointDetail>
+            <typ:voltage>124</typ:voltage>
+            <typ:current>20</typ:current>
+            <typ:consumption>15</typ:consumption>
+            <typ:lightState>0</typ:lightState>
+            <typ:lightLevel>0</typ:lightLevel>
+            <typ:sunriseHour>8</typ:sunriseHour>
+            <typ:sunriseMinute>20</typ:sunriseMinute>
+            <typ:sunsetHour>10</typ:sunsetHour>
+            <typ:sunsetMinute>45</typ:sunsetMinute>
+            <typ:temperature>33</typ:temperature>
+         </mlc:SmartpointDetail>
+      </mlc:LightStatusNotification>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>qat1</con:username><con:password>qat1</con:password><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.sensus.com/gateway/mlc/mlc/LightStatusNotification"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="ClearSchedule" bindingOperationName="ClearSchedule" type="Request-Response" outputName="ClearScheduleNotificationResult" inputName="ClearScheduleNotification" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="GoodDelSmpFromGrp"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/slc/MLCGatewayService/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:mlc="http://www.sensus.com/gateway/mlc" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://www.sensus.com/gateway/mlc/types">
+   <soapenv:Header>
+      <wsse:Security soapenv:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+         <wsse:UsernameToken wsu:Id="UsernameToken-2" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+            <wsse:Username>not_user</wsse:Username>
+            <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">not_user</wsse:Password>
+            <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">9Ef8lzwW+ohvdsa5M7ekyg==</wsse:Nonce>
+            <wsu:Created>2011-06-29T12:51:16.692Z</wsu:Created>
+         </wsse:UsernameToken>
+      </wsse:Security>
+   </soapenv:Header>
+   <soapenv:Body>
+      <mlc:ClearScheduleNotification>
+         <typ:customerID>ACME</typ:customerID>
+         <typ:transactionID>2650b63a-ac2b-4814-88b7-fc878103042a</typ:transactionID>
+         <typ:status>SUCCESS</typ:status>
+          <typ:SuccededSmartpoint>
+            <typ:customerID>ACME</typ:customerID>
+            <typ:rniId>13</typ:rniId>
+         </typ:SuccededSmartpoint>
+      </mlc:ClearScheduleNotification>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>rod</con:username><con:password>koala</con:password><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://server.ws.gateway.mlc.sensus.com/IMlcGatewayWSServer/removeSmartpointsFromGroup"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/slc/MLCGatewayService/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mlc="http://www.sensus.com/gateway/mlc" xmlns:typ="http://www.sensus.com/gateway/mlc/types">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mlc:ClearScheduleNotification>
+         <typ:customerID>?</typ:customerID>
+         <typ:transactionID>?</typ:transactionID>
+         <typ:status>?</typ:status>
+        
+         <typ:SuccededSmartpoint>
+            <typ:customerID>?</typ:customerID>
+            <typ:rniId>?</typ:rniId>
+         </typ:SuccededSmartpoint>
+      </mlc:ClearScheduleNotification>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.sensus.com/gateway/mlc/mlc/ClearScheduleNotification"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="ClearAlarms" bindingOperationName="ClearAlarms" type="Request-Response" outputName="ClearAlarmsNotificationResult" inputName="ClearAlarmsNotification" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/slc/MLCGatewayService/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:mlc="http://www.sensus.com/gateway/mlc" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://www.sensus.com/gateway/mlc/types">
+   <soapenv:Header>
+      <wsse:Security soapenv:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+         <wsse:UsernameToken wsu:Id="UsernameToken-1">
+            <wsse:Username>not_user</wsse:Username>
+            <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">not_user</wsse:Password>
+            <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">EIgmvWYKYelOswyWff13xg==</wsse:Nonce>
+            <wsu:Created>2012-07-19T15:13:10.072Z</wsu:Created>
+         </wsse:UsernameToken>
+      </wsse:Security>
+   </soapenv:Header>
+   <soapenv:Body>
+      <mlc:ClearAlarmsNotification>
+         <typ:customerID>PECO</typ:customerID>
+         <typ:transactionID>5da2b49c-3a79-49bb-8f0e-8ed44e8a27aa</typ:transactionID>
+         <typ:status>0</typ:status>
+         <typ:SuccededSmartpoint>
+            <typ:customerID>PECO</typ:customerID>
+            <typ:rniId>52000184</typ:rniId>
+         </typ:SuccededSmartpoint>
+      </mlc:ClearAlarmsNotification>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>not_user</con:username><con:password>not_user</con:password></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.sensus.com/gateway/mlc/mlc/ClearAlarmsNotification"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/slc/MLCGatewayService/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:mlc="http://www.sensus.com/gateway/mlc" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://www.sensus.com/gateway/mlc/types">
+   <soapenv:Header>
+      <wsse:Security soapenv:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+         <wsse:UsernameToken wsu:Id="UsernameToken-1">
+            <wsse:Username>rod</wsse:Username>
+            <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">koala</wsse:Password>
+            <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">soGFmoeqT70fBpi8vhokTw==</wsse:Nonce>
+            <wsu:Created>2012-07-16T20:18:59.108Z</wsu:Created>
+         </wsse:UsernameToken>
+      </wsse:Security>
+   </soapenv:Header>
+   <soapenv:Body>
+      <mlc:ClearAlarmsNotification>
+         <typ:customerID>PECO</typ:customerID>
+         <typ:transactionID>5a41e2f8-a9ea-4bc2-81f0-58280e797fc6</typ:transactionID>
+         <typ:status>?</typ:status>
+         <!--Zero or more repetitions:-->
+         <!--Zero or more repetitions:-->
+         <typ:SuccededSmartpoint>
+            <typ:customerID>PECO</typ:customerID>
+            <typ:rniId>52000184</typ:rniId>
+         </typ:SuccededSmartpoint>
+      </mlc:ClearAlarmsNotification>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.sensus.com/gateway/mlc/mlc/ClearAlarmsNotification"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="ReadLightStatus" bindingOperationName="ReadLightStatus" type="Request-Response" outputName="ReadLightStatusNotificationResult" inputName="ReadLightStatusNotification" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://mallet-app.davis.sensus.lab:8080/slc/MLCGatewayService/</con:endpoint><con:request><![CDATA[<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Header>
+      <wsse:Security soapenv:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+         <wsse:UsernameToken wsu:Id="UsernameToken-2" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+            <wsse:Username>qat1</wsse:Username>
+            <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">qat1</wsse:Password>
+            <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">M0eHx2EOxBNzQV0rmOUofQ==</wsse:Nonce>
+            <wsu:Created>2011-05-22T21:28:43.684Z</wsu:Created>
+         </wsse:UsernameToken>
+      </wsse:Security>
+   </soapenv:Header>
+	<SOAP-ENV:Body>
+		<mlc:ReadLightStatusNotification>
+			<typ:customerID>PECO</typ:customerID>
+			<typ:transactionID>3877fb22-733c-4359-b3e9-d856e13b9a4d</typ:transactionID>
+			<typ:status>SUCCESS</typ:status>
+			<typ:DataType>STATUS</typ:DataType>
+                        <typ:DataType>CONFIG</typ:DataType>
+			<typ:LightDetail>
+				<typ:customerID>PECO</typ:customerID>
+				<typ:rniId>52010205</typ:rniId>
+				<typ:appCode11Data>
+					<typ:alarmWarningMessages>
+						<typ:alarmWarningType>0</typ:alarmWarningType>
+						<typ:alarmWarningSubType>0</typ:alarmWarningSubType>
+					</typ:alarmWarningMessages>
+					<typ:lightState>0</typ:lightState>
+					<typ:lightTopLevelState>2</typ:lightTopLevelState>
+					<typ:current>20</typ:current>
+					<typ:voltage>124</typ:voltage>
+					<typ:temperature>33</typ:temperature>
+				</typ:appCode11Data>
+				<typ:appCode90Data>
+					<typ:voltage>124</typ:voltage>
+					<typ:current>20</typ:current>
+					<typ:consumption>10</typ:consumption>
+					<typ:lightState>0</typ:lightState>
+					<typ:lightLevel>0</typ:lightLevel>
+					<typ:sunriseHour>8</typ:sunriseHour>
+					<typ:sunriseMinute>36</typ:sunriseMinute>
+					<typ:sunsetHour>21</typ:sunsetHour>
+					<typ:sunsetMinute>35</typ:sunsetMinute>
+					<typ:temperature>33</typ:temperature>
+				</typ:appCode90Data>
+			</typ:LightDetail>
+		</mlc:ReadLightStatusNotification>
+	</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+]]]></con:request><con:credentials><con:username/><con:password/><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.sensus.com/gateway/mlc/mlc/ReadLightStatusNotification"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://mallet-app.davis.sensus.lab:8080/slc/MLCGatewayService/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:mlc="http://www.sensus.com/gateway/mlc" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://www.sensus.com/gateway/mlc/types">
+   <soapenv:Header>
+      <wsse:Security soapenv:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+         <wsse:UsernameToken wsu:Id="UsernameToken-2" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+            <wsse:Username>qat1</wsse:Username>
+            <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">qat1</wsse:Password>
+            <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">M0eHx2EOxBNzQV0rmOUofQ==</wsse:Nonce>
+            <wsu:Created>2011-05-22T21:28:43.684Z</wsu:Created>
+         </wsse:UsernameToken>
+      </wsse:Security>
+   </soapenv:Header>
+   <soapenv:Body>
+      <mlc:ReadLightStatusNotification>
+         <typ:customerID>PECO</typ:customerID>
+         <typ:transactionID>3877fb22-733c-4359-b3e9-d856e13b9a4d</typ:transactionID>
+         <typ:status>SUCCESS</typ:status>
+         <typ:DataType>STATUS</typ:DataType>
+         <typ:DataType>CONFIG</typ:DataType>
+         <!--Zero or more repetitions:-->
+         <typ:LightDetail>
+            <typ:customerID>PECO</typ:customerID>
+            <typ:rniId>52010205</typ:rniId>
+            <typ:appCode11Data>
+               <typ:lightState>0</typ:lightState>
+               <typ:lightTopLevelState>2</typ:lightTopLevelState>
+               <typ:current>20</typ:current>
+               <typ:voltage>124</typ:voltage>
+               <typ:temperature>33</typ:temperature>
+            </typ:appCode11Data>
+            <typ:appCode90Data>
+               <typ:voltage>124</typ:voltage>
+               <typ:current>20</typ:current>
+               <typ:consumption>10</typ:consumption>
+               <typ:lightState>0</typ:lightState>
+               <typ:lightLevel>0</typ:lightLevel>
+               <typ:sunriseHour>8</typ:sunriseHour>
+               <typ:sunriseMinute>36</typ:sunriseMinute>
+               <typ:sunsetHour>21</typ:sunsetHour>
+               <typ:sunsetMinute>35</typ:sunsetMinute>
+               <typ:temperature>33</typ:temperature>
+            </typ:appCode90Data>
+            <typ:appCode94Data>
+               <typ:ProductNumber>539449037C2310</typ:ProductNumber>
+               <typ:BulbSerial>BulbSerial</typ:BulbSerial>
+               <typ:BallastSerial>BallastSerial</typ:BallastSerial>
+               <typ:UpperCaseSerial>UpperSerial</typ:UpperCaseSerial>
+               <typ:LowerCaseSerial>LowerSerial</typ:LowerCaseSerial>
+            </typ:appCode94Data>
+         </typ:LightDetail>
+      </mlc:ReadLightStatusNotification>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>rod</con:username><con:password>koala</con:password></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.sensus.com/gateway/mlc/mlc/ReadLightStatusNotification"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 3"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/slc/MLCGatewayService/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:mlc="http://www.sensus.com/gateway/mlc" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://www.sensus.com/gateway/mlc/types">
+   <soapenv:Header>
+      <wsse:Security soapenv:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+         <wsse:UsernameToken wsu:Id="UsernameToken-1" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+            <wsse:Username>not_user</wsse:Username>
+            <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">not_user</wsse:Password>
+            <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">eYUrmHrdSxPplIQ9v6ZOuQ==</wsse:Nonce>
+            <wsu:Created>2011-11-15T11:29:42.386Z</wsu:Created>
+         </wsse:UsernameToken>
+      </wsse:Security>
+   </soapenv:Header>
+   <soapenv:Body>
+      <mlc:ReadLightStatusNotification>
+         <typ:customerID>ACME</typ:customerID>
+         <typ:transactionID>0dd21e33-645c-4b91-8832-5c5d5a7daa40</typ:transactionID>
+         <typ:status>SUCCESS</typ:status>
+         <typ:DataType>STATUS</typ:DataType>
+         <typ:DataType>CONFIG</typ:DataType>
+         <typ:LightDetail>
+            <typ:customerID>ACME</typ:customerID>
+            <typ:rniId>20</typ:rniId>
+            <typ:appCode11Data>
+               <typ:lightState>0</typ:lightState>
+               <typ:lightTopLevelState>2</typ:lightTopLevelState>
+               <typ:current>20</typ:current>
+               <typ:voltage>220</typ:voltage>
+               <typ:temperature>33</typ:temperature>
+            </typ:appCode11Data>
+            <typ:appCode85Data>
+               <typ:sunriseOffset>5</typ:sunriseOffset>
+               <typ:sunsetOffset>5</typ:sunsetOffset>
+            </typ:appCode85Data>
+            <typ:appCode71Data>
+               <typ:customerSerial>CustSerial</typ:customerSerial>
+            </typ:appCode71Data>
+            <typ:appCode90Data>
+               <typ:voltage>124</typ:voltage>
+               <typ:current>20</typ:current>
+               <typ:consumption>0</typ:consumption>
+               <typ:lightState>0</typ:lightState>
+               <typ:lightLevel>0</typ:lightLevel>
+               <typ:sunriseHour>8</typ:sunriseHour>
+               <typ:sunriseMinute>05</typ:sunriseMinute>
+               <typ:sunsetHour>17</typ:sunsetHour>
+               <typ:sunsetMinute>30</typ:sunsetMinute>
+               <typ:temperature>33</typ:temperature>
+            </typ:appCode90Data>
+            <typ:appCode94Data>
+               <typ:ProductNumber>539439137714140</typ:ProductNumber>
+               <typ:BulbSerial>BulbSerial</typ:BulbSerial>
+               <typ:BallastSerial>BallastSerial</typ:BallastSerial>
+               <typ:UpperCaseSerial>UpperSerial</typ:UpperCaseSerial>
+               <typ:LowerCaseSerial>LowerSerial</typ:LowerCaseSerial>
+            </typ:appCode94Data>
+         </typ:LightDetail>
+      </mlc:ReadLightStatusNotification>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>qat1</con:username><con:password>qar1</con:password><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.sensus.com/gateway/mlc/mlc/ReadLightStatusNotification"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="ApplySchedule" bindingOperationName="ApplySchedule" type="Request-Response" outputName="ApplyScheduleNotificationResult" inputName="ApplyScheduleNotification" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/slc/MLCGatewayService/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:mlc="http://www.sensus.com/gateway/mlc" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://www.sensus.com/gateway/mlc/types">
+   <soapenv:Header>
+      <wsse:Security soapenv:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+         <wsse:UsernameToken wsu:Id="UsernameToken-2" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+            <wsse:Username>not_user</wsse:Username>
+            <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">not_user</wsse:Password>
+            <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">9Ef8lzwW+ohvdsa5M7ekyg==</wsse:Nonce>
+            <wsu:Created>2011-06-29T12:51:16.692Z</wsu:Created>
+         </wsse:UsernameToken>
+      </wsse:Security>
+   </soapenv:Header>
+   <soapenv:Body>
+      <mlc:ApplyScheduleNotification>
+         <typ:customerID>ACME</typ:customerID>
+         <typ:transactionID>72d41516-b462-4c51-a938-13d11402c8b5</typ:transactionID>
+         <typ:status>SUCCESS</typ:status>
+         <typ:SuccededSmartpoint>
+            <typ:customerID>ACME</typ:customerID>
+            <typ:rniId>105</typ:rniId>
+         </typ:SuccededSmartpoint>
+      </mlc:ApplyScheduleNotification>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>rod</con:username><con:password>koala</con:password><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.sensus.com/gateway/mlc/mlc/ApplyScheduleNotification"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="ChannelSetupAudit2" bindingOperationName="ChannelSetupAudit2" type="Request-Response" outputName="ChannelSetupAudit2NotificationResult" inputName="ChannelSetupAudit2Notification" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/slc/MLCGatewayService/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mlc="http://www.sensus.com/gateway/mlc" xmlns:typ="http://www.sensus.com/gateway/mlc/types">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mlc:ChannelSetupAudit2Notification>
+         <typ:customerID>?</typ:customerID>
+         <typ:transactionID>?</typ:transactionID>
+         <typ:status>?</typ:status>
+         <typ:smartpoint>
+            <typ:customerID>?</typ:customerID>
+            <typ:rniId>?</typ:rniId>
+         </typ:smartpoint>
+         <mlc:smartpointDetail>
+            <typ:sunriseOffset>?</typ:sunriseOffset>
+            <typ:sunsetOffset>?</typ:sunsetOffset>
+         </mlc:smartpointDetail>
+      </mlc:ChannelSetupAudit2Notification>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.sensus.com/gateway/mlc/mlc/ChannelSetupAudit2Notification"/></con:call></con:operation><con:operation isOneWay="false" action="" name="Attribute" bindingOperationName="Attribute" type="Request-Response" outputName="AttributeNotificationResult" inputName="AttributeNotification" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/slc/MLCGatewayService/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mlc="http://www.sensus.com/gateway/mlc" xmlns:typ="http://www.sensus.com/gateway/mlc/types">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mlc:AttributeNotification>
+         <typ:customerID>?</typ:customerID>
+         <typ:transactionID>?</typ:transactionID>
+         <typ:status>?</typ:status>
+         <!--Zero or more repetitions:-->
+         <typ:Message>
+            <typ:messageLevel>?</typ:messageLevel>
+            <typ:messageType>?</typ:messageType>
+            <typ:messageText>?</typ:messageText>
+            <typ:messageDomain>?</typ:messageDomain>
+            <!--Optional:-->
+            <typ:customerId>?</typ:customerId>
+            <!--Optional:-->
+            <typ:objectId>?</typ:objectId>
+            <typ:messageTime>?</typ:messageTime>
+         </typ:Message>
+         <typ:smartpoint>
+            <typ:customerID>?</typ:customerID>
+            <typ:rniId>?</typ:rniId>
+         </typ:smartpoint>
+         <mlc:attribute>?</mlc:attribute>
+         <mlc:attributeType>?</mlc:attributeType>
+      </mlc:AttributeNotification>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.sensus.com/gateway/mlc/mlc/AttributeNotification"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="ReadSmartpointProperties" bindingOperationName="ReadSmartpointProperties" type="Request-Response" outputName="ReadSmartpointPropertiesNotificationResult" inputName="ReadSmartpointPropertiesNotification" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/slc/MLCGatewayService/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:mlc="http://www.sensus.com/gateway/mlc" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://www.sensus.com/gateway/mlc/types">
+   <soapenv:Header>
+      <wsse:Security soapenv:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+         <wsse:UsernameToken wsu:Id="UsernameToken-3">
+            <wsse:Username>rod</wsse:Username>
+            <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">koala</wsse:Password>
+            <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">5s+yy/DYoDxC2B7xH1DKrw==</wsse:Nonce>
+            <wsu:Created>2012-07-18T20:13:22.660Z</wsu:Created>
+         </wsse:UsernameToken>
+      </wsse:Security>
+   </soapenv:Header>
+   <soapenv:Body>
+      <mlc:ReadSmartpointPropertiesNotification>
+         <typ:customerID>PECO</typ:customerID>
+         <typ:transactionID>b1788d95-fb52-4300-a453-87ca13c7eb3e</typ:transactionID>
+         <typ:status>0</typ:status>
+         <!--Zero or more repetitions:-->
+         <typ:Message>
+            <typ:messageLevel>?</typ:messageLevel>
+            <typ:messageType>?</typ:messageType>
+            <typ:messageText>?</typ:messageText>
+            <typ:messageDomain>?</typ:messageDomain>
+            <!--Optional:-->
+            <typ:customerId>?</typ:customerId>
+            <!--Optional:-->
+            <typ:objectId>?</typ:objectId>
+            <typ:messageTime>?</typ:messageTime>
+         </typ:Message>
+         <!--Zero or more repetitions:-->
+         <typ:FailedSmartpoint>
+            <typ:customerID>?</typ:customerID>
+            <typ:rniId>?</typ:rniId>
+         </typ:FailedSmartpoint>
+         <!--Zero or more repetitions:-->
+         <typ:SuccededSmartpoint>
+            <typ:customerID>PECO</typ:customerID>
+            <typ:rniId>20</typ:rniId>
+         </typ:SuccededSmartpoint>
+      </mlc:ReadSmartpointPropertiesNotification>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>rod</con:username><con:password>koala</con:password></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.sensus.com/gateway/mlc/mlc/ReadSmartpointPropertiesNotification"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="ApplySmartpointProperties" bindingOperationName="ApplySmartpointProperties" type="Request-Response" outputName="ApplySmartpointPropertiesNotificationResult" inputName="ApplySmartpointPropertiesNotification" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/slc/MLCGatewayService/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mlc="http://www.sensus.com/gateway/mlc" xmlns:typ="http://www.sensus.com/gateway/mlc/types">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mlc:ApplySmartpointPropertiesNotification>
+         <typ:customerID>?</typ:customerID>
+         <typ:transactionID>?</typ:transactionID>
+         <typ:status>?</typ:status>
+         <!--Zero or more repetitions:-->
+         <typ:Message>
+            <typ:messageLevel>?</typ:messageLevel>
+            <typ:messageType>?</typ:messageType>
+            <typ:messageText>?</typ:messageText>
+            <typ:messageDomain>?</typ:messageDomain>
+            <!--Optional:-->
+            <typ:customerId>?</typ:customerId>
+            <!--Optional:-->
+            <typ:objectId>?</typ:objectId>
+            <typ:messageTime>?</typ:messageTime>
+         </typ:Message>
+         <!--Zero or more repetitions:-->
+         <typ:FailedSmartpoint>
+            <typ:customerID>?</typ:customerID>
+            <typ:rniId>?</typ:rniId>
+         </typ:FailedSmartpoint>
+         <!--Zero or more repetitions:-->
+         <typ:SuccededSmartpoint>
+            <typ:customerID>?</typ:customerID>
+            <typ:rniId>?</typ:rniId>
+         </typ:SuccededSmartpoint>
+      </mlc:ApplySmartpointPropertiesNotification>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.sensus.com/gateway/mlc/mlc/ApplySmartpointPropertiesNotification"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="CustomerSerialNumber" bindingOperationName="CustomerSerialNumber" type="Request-Response" outputName="CustomerSerialNumberNotificationResult" inputName="CustomerSerialNumberNotification" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/slc/MLCGatewayService/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mlc="http://www.sensus.com/gateway/mlc" xmlns:typ="http://www.sensus.com/gateway/mlc/types">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mlc:CustomerSerialNumberNotification>
+         <typ:customerID>?</typ:customerID>
+         <typ:transactionID>?</typ:transactionID>
+         <typ:status>?</typ:status>
+         <!--Zero or more repetitions:-->
+         <typ:Message>
+            <typ:messageLevel>?</typ:messageLevel>
+            <typ:messageType>?</typ:messageType>
+            <typ:messageText>?</typ:messageText>
+            <typ:messageDomain>?</typ:messageDomain>
+            <!--Optional:-->
+            <typ:customerId>?</typ:customerId>
+            <!--Optional:-->
+            <typ:objectId>?</typ:objectId>
+            <typ:messageTime>?</typ:messageTime>
+         </typ:Message>
+         <typ:smartpoint>
+            <typ:customerID>?</typ:customerID>
+            <typ:rniId>?</typ:rniId>
+         </typ:smartpoint>
+         <mlc:customerSerial>?</mlc:customerSerial>
+      </mlc:CustomerSerialNumberNotification>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.sensus.com/gateway/mlc/mlc/CustomerSerialNumberNotification"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer><con:outgoing><con:name>DefaultOut</con:name><con:entry type="Username" username="ACME" password="acme"><con:configuration><addCreated>false</addCreated><addNonce>false</addNonce><passwordType>PasswordText</passwordType></con:configuration></con:entry></con:outgoing></con:wssContainer><con:sensitiveInformation/></con:soapui-project>
