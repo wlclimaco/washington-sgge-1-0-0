@@ -1,0 +1,62 @@
+<?xml version="1.0" ?>
+<project name="Build Dicionario UI Jar and  War Files" default="buildAllISO">
+	<taskdef file="../../lib/build/sensus-pcm-antlib.xml" />
+
+	<!-- Properties that will most commonly be passed into the tasks -->
+
+	<!-- The build version number; it is used in the jar name for the UI -->
+	<property name="version" value="1" />
+	<!-- Whether to run unit tests -->
+	<property name="run.tests" value="false" />
+	<!-- The directory log4j should be configured to log to in the final war -->
+	<property name="log.dir" value="/opt/flexnet-Dicionario/logs" />
+	<!-- The file name log4j should be configured to log to in the final war -->
+	<property name="log.file" value="Dicionario.log" />
+	<!-- The file name log4j should be configured to log to in the final war for users actions-->
+	<property name="log.user.file" value="Dicionario_user.log" />
+
+	<!--Use Mock BCF Layers to test WUI without the real Back-end-->
+	<property name="buildUsingMocks" value="false" />
+
+	<!-- Build Targets -->
+
+	<!-- Build the UI War using existing backend libraries of specified version from ComponentLib -->
+	<target name="buildUIWar" description="Build the UI War using existing backend libraries from ComponentLib">
+		<echo message="Building Dicionario UI War..." />
+		<buildUIWar componentNameList="wui-${version}" logDir="${log.dir}" logFileUser="${log.user.file}" logFile="${log.file}" buildUsingMocks="${buildUsingMocks}" googleMapKey="${googleMapKey}" mapServerURL="${mapServerURL}" runJUnitTests="${run.tests}"/>
+	</target>
+
+	<!-- Build the Backend first, distribute to ComponentLib, and the build the UI War from the new backend jars -->
+	<!-- This task requires the backend project to be checked out -->
+	<target name="buildAll" description="Build the Backend first, distribute to ComponentLib, and the build the UI War from the new backend jars">
+		<echo message="Cleaning ComponentLib ..." />
+		<cleanComponentLib />
+		<echo message="Building Dicionario Backend Jars and copying to ComponentLib ..." />
+		<ant antfile="../../mlc-be/build/build-jars.xml" target="buildAll" inheritAll="true" dir="../../mlc-be/build" />
+		<echo message="Building Dicionario UI War..." />
+		<buildUIWar componentNameList="wui-${version}" logDir="${log.dir}" logFileUser="${log.user.file}" logFile="${log.file}"  runJUnitTests="${run.tests}" />
+	</target>
+
+	<!-- This task requires the backend project to be checked out -->
+	<target name="buildAllISO" description="Build the Backend first, distribute to ComponentLib, and the build the UI War from the new backend jars">
+		<echo message="Cleaning ComponentLib ..." />
+		<cleanComponentLib />
+		<echo message="Building Dicionario Backend Jars and copying to ComponentLib ..." />
+		<ant antfile="../../mlc-be/build/build-jars.xml" target="buildAll" inheritAll="true" dir="../../mlc-be/build" />
+		<echo message="Building Dicionario UI War..." />
+		<buildUIWar componentNameList="wui-${version}" warFileName="Dicionario.war" logDir="${log.dir}" logFileUser="${log.user.file}" logFile="${log.file}"  runJUnitTests="${run.tests}" />
+	</target>
+
+	<!-- Generate JavaDoc for the UI code -->
+	<!-- Output will be copied to project's dist folder -->
+	<target name="javaDoc" description="Generate JavaDoc for the UI code">
+		<buildBAJavaDoc businessArea="Dicionario" componentNameList="wui-${version}" />
+	</target>
+
+	<!-- Generate jsDoc for the UI code -->
+	<!-- Output will be copied to project's dist folder -->
+	<target name="jsDoc" description="Generate jsDoc for the UI code">
+		<buildJsDoc businessArea="Dicionario" />
+	</target>
+
+</project>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:p="http://www.springframework.org/schema/p"
+		xmlns:mvc="http://www.springframework.org/schema/mvc"
+		xmlns:security="http://www.springframework.org/schema/security"
+
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context
+	   		http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/mvc
+			http://www.springframework.org/schema/mvc/spring-mvc.xsd
+			http://www.springframework.org/schem...-beans-2.5.xsd
+		  	http://www.springframework.org/schema/security
+   			http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+
+	<bean id="SensusAppContext" class="com.sensus.common.util.SensusAppContext"/>
+	<bean id="analyticsBCFTarget" class="com.sensus.mlc.wui.analytics.unittest.AnalyticsBCFMockImpl" />
+	<bean id="groupBCFTarget" class="com.sensus.mlc.wui.groups.unittest.GroupBCFMockImpl" />
+	<bean id="userBCFTarget" class="com.sensus.mlc.wui.user.unittest.UserBCFMockImpl" />
+	<bean id="scheduleBCFTarget" class="com.sensus.mlc.wui.schedule.unittest.ScheduleBCFMockImpl" />
+	<bean id="settingsBCFTarget" class="com.sensus.mlc.wui.settings.unittest.SettingsBCFMockImpl" />
+	<bean id="tagBCFTarget" class="com.sensus.mlc.wui.tags.unittest.TagBCFMockImpl" />
+
+
+	<bean id="processBCFTarget" class="com.sensus.mlc.wui.process.unittest.ProcessBCFMockImpl" />
+	<bean id="ecoModeBCFTarget" class="com.sensus.mlc.wui.ecomode.unittest.EcoModeBCFMockImpl" />
+
+
+	<bean id="analyticsAPIController" class="com.sensus.mlc.wui.analytics.AnalyticsAPIController">
+		<property name="analyticsBCF" ref="analyticsBCFTarget" />
+	</bean>
+
+	<bean id="groupAPIController" class="com.sensus.mlc.wui.groups.GroupAPIController">
+		<property name="groupBCF" ref="groupBCFTarget" />
+	</bean>
+
+	<bean id="userAPIController" class="com.sensus.mlc.wui.user.UserAPIController">
+		<property name="userBCF" ref="userBCFTarget" />
+	</bean>
+
+	<bean id="scheduleAPIController" class="com.sensus.mlc.wui.schedule.ScheduleAPIController">
+		<property name="scheduleBCF" ref="scheduleBCFTarget" />
+	</bean>
+
+	<bean id="tagAPIController" class="com.sensus.mlc.wui.tags.TagAPIController">
+		<property name="tagBCF" ref="tagBCFTarget" />
+		<property name="groupBCF" ref="groupBCFTarget" />
+	</bean>
+
+	<bean id="processAPIController" class="com.sensus.mlc.wui.process.ProcessAPIController">
+		<property name="processBCF" ref="processBCFTarget" />
+		<property name="analyticsBCF" ref="analyticsBCFTarget" />
+		<property name="ecoModeBCF" ref="ecoModeBCFTarget" />
+	</bean>
+
+
+	<bean id="systemSettingsAPIController" class="com.sensus.mlc.wui.settings.SystemSettingsAPIController">
+		<property name="settingsBCF" ref="settingsBCFTarget" />
+	</bean>
+
+	<!-- Activates various annotations to be detected in bean classes -->
+	<context:annotation-config />
+
+	<!-- Scans the classpath for annotated components that will be auto-registered as Spring beans.
+	 For example @Controller and @Service. Make sure to set the correct base-package -->
+	<context:component-scan  base-package="com.sensus.mlc.wui.*.unittest"/>
+
+
+
+	<!-- Configures the annotation-driven Spring MVC Controller programming model. -->
+	<mvc:annotation-driven />
+
+	<!-- Internationalization -->
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="en" />
+	</bean>
+
+	<bean id="localeChangeInterceptor"
+		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+		<property name="paramName" value="language" />
+	</bean>
+
+	<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping" >
+		<property name="interceptors">
+		   <list>
+			<ref bean="localeChangeInterceptor" />
+		   </list>
+		</property>
+	</bean>
+
+	<!-- Register the welcome.properties -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename">
+			<value>locale\messages</value>
+		</property>
+	</bean>
+
+
+	<!--  Maps directly to JSP pages-->
+	<mvc:view-controller path="/login" view-name="../login"/>
+	<mvc:view-controller path="/" view-name="redirect:/login"/>
+
+	<mvc:view-controller path="/api/dashboard" view-name="/dashboard"/>
+
+	<!--  Static Content to bypass dispatcher -->
+	<mvc:resources mapping="/images/**" location="/images/"/>
+	<mvc:resources mapping="/scripts/**" location="/scripts/"/>
+	<mvc:resources mapping="/styles/**" location="/styles/"/>
+	<mvc:resources mapping="/thirdparty/**" location="/thirdparty/"/>
+
+
+    <!-- Resolves view names to protected .jsp resources within the /WEB-INF directory -->
+    <bean id="viewResolver"
+    	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+</beans>
+
