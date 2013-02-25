@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://acme-app.davis.sensus.lab:8080/" />
+<title>try_turn_off_without_select_any_light</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">try_turn_off_without_select_any_light</td></tr>
+</thead><tbody>
+<!--Check page-->
+<tr>
+	<td>assertAttribute</td>
+	<td>id=menu-smartpoints@class</td>
+	<td>alist active</td>
+</tr>
+<!--Assert records-->
+<tr>
+	<td>assertNotVisible</td>
+	<td>css=#blankslate</td>
+	<td></td>
+</tr>
+<!--Select None-->
+<tr>
+	<td>click</td>
+	<td>id=lights-select-none</td>
+	<td></td>
+</tr>
+<!--Contro Lights Button-->
+<tr>
+	<td>click</td>
+	<td>id=lights-on-off</td>
+	<td></td>
+</tr>
+<!--Verify validation-->
+<tr>
+	<td>verifyAttribute</td>
+	<td>css=#actions span.message@class</td>
+	<td>message rounded ui-state-error</td>
+</tr>
+<!--* Cancel submit turn off-->
+<!--Select Lights-->
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table .checkbox:eq(1) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table .checkbox:eq(2) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table .checkbox:eq(3) input</td>
+	<td></td>
+</tr>
+<!--Contro Lights Button-->
+<tr>
+	<td>click</td>
+	<td>id=lights-on-off</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=override-date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=turn-on-cancel</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

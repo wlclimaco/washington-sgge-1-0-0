@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://mallet-app.davis.sensus.lab:8080/" />
+<title>navigate_tag_page</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">navigate_tag_page</td></tr>
+</thead><tbody>
+<!--Check Curent Page/...-->
+<tr>
+	<td>assertText</td>
+	<td>css=#tag-main &gt; fieldset &gt; legend</td>
+	<td>Tags</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>verifyTable</td>
+	<td>id=tag-table.0.1</td>
+	<td>Tag</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>id=tag-table.0.2</td>
+	<td>Add Light to Group</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>id=tag-table.0.3</td>
+	<td>Lights</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>id=tag-table.0.4</td>
+	<td>Date Added</td>
+</tr>
+</tbody></table>
+</body>
+</html>

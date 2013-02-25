@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://slct1.davis.sensus.lab:8080/" />
+<title>slc_device_detail_turn_one_smartpoint_from_listen_to_protected_from_light_list</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">slc_device_detail_turn_one_smartpoint_from_listen_to_protected_from_light_list</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>id=menu-smartpoints</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Check Curent Page/...-->
+<tr>
+	<td>assertAttribute</td>
+	<td>id=menu-smartpoints@class</td>
+	<td>alist active</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>storeElementPresent</td>
+	<td>css=#smartpoint-table tbody tr td:eq(7) span.locked</td>
+	<td>isLocked</td>
+</tr>
+<!--If lock, unlock/.../...-->
+<tr>
+	<td>gotoIf</td>
+	<td>!${isLocked}</td>
+	<td>jumpLock</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tbody tr:eq(0) td:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;.fg-menu-container &gt; ul:eq(1) &gt; li:eq(1) ul li:eq(3) ul li:eq(1) a&quot;, &quot;div.positionHelper&quot;).click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Check Message/...-->
+<tr>
+	<td>waitForText</td>
+	<td>css=span.message</td>
+	<td>You successfully unlocked 1 Lights. Locked Lights will not respond to commands from the system.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.message</td>
+	<td>You successfully unlocked 1 Lights. Locked Lights will not respond to commands from the system.</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>label</td>
+	<td>jumpLock</td>
+	<td></td>
+</tr>
+<!--.../-->
+<tr>
+	<td>storeElementPresent</td>
+	<td>css=#smartpoint-table tbody tr:eq(1) td:eq(7) span.locked</td>
+	<td>isLocked</td>
+</tr>
+<!--If lock, unlock/.../...-->
+<tr>
+	<td>gotoIf</td>
+	<td>!${isLocked}</td>
+	<td>jumpLock2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tbody tr:eq(1) td:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;.fg-menu-container &gt; ul:eq(1) &gt; li:eq(1) ul li:eq(3) ul li:eq(1) a&quot;, &quot;div.positionHelper&quot;).click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Check Message/...-->
+<tr>
+	<td>waitForText</td>
+	<td>css=span.message</td>
+	<td>You successfully unlocked 1 Lights. Locked Lights will not respond to commands from the system.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.message</td>
+	<td>You successfully unlocked 1 Lights. Locked Lights will not respond to commands from the system.</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>label</td>
+	<td>jumpLock2</td>
+	<td></td>
+</tr>
+<!--.../-->
+<tr>
+	<td>storeElementPresent</td>
+	<td>css=#smartpoint-table tbody tr td:eq(7) span.locked</td>
+	<td>isLocked</td>
+</tr>
+<!--If lock, unlock/.../...-->
+<tr>
+	<td>gotoIf</td>
+	<td>!${isLocked}</td>
+	<td>jumpLock3</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tbody tr:eq(2) td:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;.fg-menu-container &gt; ul:eq(1) &gt; li:eq(1) ul li:eq(3) ul li:eq(1) a&quot;, &quot;div.positionHelper&quot;).click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Check Message/...-->
+<tr>
+	<td>waitForText</td>
+	<td>css=span.message</td>
+	<td>You successfully unlocked 1 Lights. Locked Lights will not respond to commands from the system.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.message</td>
+	<td>You successfully unlocked 1 Lights. Locked Lights will not respond to commands from the system.</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>label</td>
+	<td>jumpLock3</td>
+	<td></td>
+</tr>
+<!--.../-->
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tbody tr:eq(0) td:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tbody tr:eq(1) td:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tbody tr:eq(2) td:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;.fg-menu-container &gt; ul:eq(1) &gt; li:eq(1) ul li:eq(3) ul li:eq(0) a&quot;, &quot;div.positionHelper&quot;).click()</td>
+	<td></td>
+</tr>
+<!--Check Element/...-->
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#smartpoint-table tbody tr td:eq(7) span.locked</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#smartpoint-table tbody tr:eq(1) td:eq(7) span.locked</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#smartpoint-table tbody tr:eq(2) td:eq(7) span.locked</td>
+	<td></td>
+</tr>
+<!--.../-->
+</tbody></table>
+</body>
+</html>

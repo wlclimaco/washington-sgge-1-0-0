@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://mallet-app.davis.sensus.lab:8080/" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>id=user-name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Check Curent Page-->
+<tr>
+	<td>assertText</td>
+	<td>css=div.content-header &gt; h1</td>
+	<td>Your Profile</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=dateformat</td>
+	<td>label=dd/mm/yyyy</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#user-profile-save &gt; span.ui-button-text</td>
+	<td></td>
+</tr>
+<!--Check Message-->
+<tr>
+	<td>waitForText</td>
+	<td>css=#messaging-main &gt; span</td>
+	<td>Settings updated successfully.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main &gt; span</td>
+	<td>Settings updated successfully.</td>
+</tr>
+<!--Check Action-->
+<tr>
+	<td>click</td>
+	<td>id=menu-dashboard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>id=menu-dashboard@class</td>
+	<td>alist active</td>
+</tr>
+<tr>
+	<td>getSysDate</td>
+	<td>sysDate</td>
+	<td>dd/mm/yyyy</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.stamp &gt; em</td>
+	<td>glob:Last Refresh: ${sysDate}*</td>
+</tr>
+<!--Revert Changes-->
+<tr>
+	<td>click</td>
+	<td>id=user-name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Check Curent Page-->
+<tr>
+	<td>assertText</td>
+	<td>css=div.content-header &gt; h1</td>
+	<td>Your Profile</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=dateformat</td>
+	<td>label=mm/dd/yyyy</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#user-profile-save &gt; span.ui-button-text</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

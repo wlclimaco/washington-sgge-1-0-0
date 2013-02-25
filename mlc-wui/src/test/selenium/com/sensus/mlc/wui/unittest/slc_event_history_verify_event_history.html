@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://mallet-app.davis.sensus.lab:8080/" />
+<title>verify_event_history</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">verify_event_history</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>link=Event History</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#process-main div.content-header h1</td>
+	<td>Event History</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#USERS ul.ui-listcombobox input[value=&quot;${userId}&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>${action}/1</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(storedVars['row']) - 2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${row}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#event-history-table tbody tr:eq(${row}) td:eq(3) .launch</td>
+	<td>${qtdlights}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#event-history-table tbody tr:eq(${row}) td:eq(5)</td>
+	<td>${description}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#event-history-table tbody tr:eq(${row}) td:eq(8)</td>
+	<td>${status}</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${checkSummary}</td>
+	<td>jumpSummary</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#event-history-table tbody tr:eq(${row}) td:eq(13) a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=action-dialog</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=count-success</td>
+	<td>${countsuccess}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=percent-success</td>
+	<td>${percentsuccess}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=count-failure</td>
+	<td>${countfailure}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=percent-failure</td>
+	<td>${percentfailure}</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#action-dialog&quot;).dialog(&quot;close&quot;);</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>jumpSummary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#event-history-table tbody tr:eq(${row}) td:eq(3) a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
