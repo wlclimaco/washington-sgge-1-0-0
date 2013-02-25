@@ -1,0 +1,99 @@
+#!/bin/bash
+#
+# flexnet-slc
+#
+# chkconfig: - 80 20
+#
+### BEGIN INIT INFO
+# Provides: flexnet-slc
+# Required-Start: $network $syslog
+# Required-Stop: $network $syslog
+# Default-Start:
+# Default-Stop:
+# Description: flexnet-slc
+# Short-Description: start and stop flexnet slc
+### END INIT INFO
+
+function setulimit()
+{
+	minlimit=$1
+	currentlimit=`ulimit -n`
+	if [ "$currentlimit" -lt "$minlimit" ] ; then
+		ulimit -n $minlimit
+	fi
+}
+
+function getPid() {
+  FILTER="^tomslc.*/usr/bin/java.*/opt/flexnet-slc"
+  if ps -Af | grep $FILTER &> /dev/null ; then 
+    SLC_PID=`ps -Af | grep $FILTER | awk '{print $2}'`
+  else
+    unset SLC_PID
+  fi
+}
+
+# Always check if we're running
+getPid
+
+function start() {
+  if [[ -z $SLC_PID ]] ; then  
+    CATALINA_HOME=/opt/flexnet-slc
+    # TTP 16164 - set the ulimit before starting the process
+    setulimit 4096
+    # TTP 11794 - switched to su instead of sudo
+    su - tomslc -c "/opt/flexnet-slc/bin/catalina.sh start" 
+  else
+    echo "flexnet-slc appears to be running(pid=$SLC_PID).  Please stop it first."
+    exit 1
+  fi
+  sleep 1
+  getPid
+  if [[ -n $SLC_PID ]] ; then
+    echo "flexnet-slc started(pid=$SLC_PID)."
+  fi
+}
+
+function stop() {
+  CATALINA_HOME=/opt/flexnet-slc
+  /opt/flexnet-slc/bin/catalina.sh stop
+  sleep 2
+  getPid
+  if [[ -n $SLC_PID ]] ; then  
+    echo "flexnet-slc is still running(pid=$SLC_PID).  Attempting brute-force kill..."
+    kill -9 $SLC_PID
+    sleep 2
+    getPid 
+    if [[ -n $SLC_PID ]] ; then
+      echo "Unable to stop flexnet-slc."
+      exit 1
+    fi
+  fi
+  echo "flexnet-slc successfully stopped."
+}
+
+# See how we were called.
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart)
+        stop
+        sleep 2    
+        start
+        ;;
+    status)
+        if [[ -n $SLC_PID ]] ; then
+          echo "flexnet-slc is running(pid=$SLC_PID)."
+        else
+          echo "flexnet-slc is stopped."
+        fi
+        ;;
+    *)
+        echo "Usage: $TOMCAT_PROG {start|stop|restart|status}"
+        exit 1
+esac
+
+

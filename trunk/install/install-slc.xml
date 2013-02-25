@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+
+<project name="install-tomcat" basedir="." default="install-all">
+   
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+        <classpath>
+            <pathelement location="./ant/lib/ant-contrib.jar"/>
+        </classpath>
+    </taskdef>
+    
+    <property name="tomcat-dir" value="/opt/flexnet-slc"/>
+    <property name="tomcat7-slc-service.filename"  value="/etc/init.d/flexnet-slc"/>
+    <property name="slc.properties.filename"  value="sensus-lc.properties"/>
+    <available property="tomcat.dir.exists"  file="${tomcat-dir}" />
+    <property name="tomcat.dir2.exists"  value="true" />
+
+    <target name="install-tomcat" if="${tomcat.dir2.exists}">
+        <echo message="Installing Tomcat 7" />
+        <untar src="${basedir}/tomcat-7.0.28.tar.gz" compression="gzip" dest="/opt/flexnet-slc"/>
+        <echo message="Fixing Tomcat 7 directory permissions" />
+        <chmod dir="${tomcat-dir}" perm="ugo+rx" includes="**/*.sh" />
+        <chmod dir="${tomcat-dir}/logs" perm="777" />
+        <chmod dir="${tomcat-dir}/webapps" perm="777" />
+        <chmod dir="${tomcat-dir}/temp" perm="777" />
+        <chmod dir="${tomcat-dir}/work" perm="777" />
+        <chmod dir="${tomcat-dir}/csvtemp" perm="777" />
+        <copy  file="${basedir}/flexnet-slc" todir="/etc/init.d" overwrite="true"/>
+        <echo message="Installing flexnet-slc service" />
+        <chmod file="${tomcat7-slc-service.filename}"  perm="ugo+rx" />
+        <exec executable="/sbin/chkconfig" dir="/etc/init.d">
+            <arg line="--levels 35 flexnet-slc on" />
+        </exec>
+    </target>
+
+    <target name="start-tomcat">
+        <echo message="Starting Tomcat 7" />
+        <exec executable="${tomcat7-slc-service.filename}"> <arg line="start" /> </exec> 
+    </target>
+
+    <target name="stop-tomcat" if="tomcat.dir.exists">
+        <echo message="Waiting..." />
+        <waitfor maxwait="30" maxwaitunit="second">
+            <available file="${slc.properties.filename}"/>
+        </waitfor>
+        <echo message="Stopping Tomcat" />
+        <exec executable="${tomcat7-slc-service.filename}"> <arg line="stop" /> </exec> 
+        <echo message="Cleanup old tomcat 7" />
+        <delete dir="${tomcat-dir}" verbose="true"/>
+		<if>
+			<available file="${tomcat-dir}" type="dir" />
+			<then>
+				<echo message="Tomcat 7 Removal unsuccessful!" />
+				<property name="tomcat.dir2.exists" value="false"/>
+			</then>
+		<else>
+			<echo message="Tomcat 7 Removal successful!" />
+			<property name="tomcat.dir2.exists" value="true"/>			
+		</else>
+		</if>
+    </target>
+
+    <target name="copy-war" if="${tomcat.dir2.exists}">
+        <echo message="Installing slc.war file" />
+        <copy file="slc.war" todir="${tomcat-dir}/webapps" />
+		<echo message="Altering context.xml userid and password" />
+		<replace file="${tomcat-dir}/conf/context.xml" token="username=&quot;qat&quot;" value="username=&quot;${user_id}&quot;"/>
+		<replace file="${tomcat-dir}/conf/context.xml" token="password=&quot;qat&quot;" value="password=&quot;${user_pass}&quot;"/>
+    </target>
+
+    <target name="install-all" depends="stop-tomcat, install-tomcat, copy-war, start-tomcat" />
+
+</project>
+
