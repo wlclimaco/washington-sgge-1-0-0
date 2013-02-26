@@ -9,6 +9,1051 @@
 -- +---------------------------------------------------------
 -- | CREATE
 -- +---------------------------------------------------------
+drop table S001;
+
+drop table S002;
+
+drop table S003;
+
+drop table S004;
+
+drop table S004A1;
+
+drop table S005;
+
+drop table S006;
+
+drop table S007;
+
+drop table S008;
+
+drop table S009;
+
+drop table S010;
+
+drop table S011;
+
+drop table S012;
+
+drop table S013;
+
+drop table S014;
+
+drop table S015;
+
+drop table S016;
+
+drop table S017;
+
+drop table S018;
+
+drop table S019;
+
+drop table S021;
+
+drop table S022;
+
+drop table S023;
+
+drop table S024;
+
+drop table S025;
+
+drop table S026;
+
+drop table S027;
+
+drop table S028;
+
+drop table S029;
+
+drop table S030;
+
+drop table S031;
+
+drop table S032;
+
+drop table S033;
+
+drop table S034;
+
+drop table S035;
+
+drop table S036;
+
+drop table S037;
+
+drop table S038;
+
+drop table S039;
+
+drop table S040;
+
+drop table S041;
+
+drop table S042;
+
+drop table S043;
+
+drop table S044;
+
+drop table S045;
+
+drop table S046;
+
+drop table S047;
+
+drop table S048;
+
+drop table S049;
+
+/*==============================================================*/
+/* User: DBO                                                    */
+/*==============================================================*/
+create user DBO;
+
+/*==============================================================*/
+/* Table: S001                                                  */
+/*==============================================================*/
+
+
+create table S001 (
+   CDUSUARI             serial               not null,
+   DSLOGIN              character varying(20)          null,
+   CDSENHA              INTEGER                 null,
+   NMCOMUSU             character varying(30)          null,
+   constraint PK_S001 primary key (CDUSUARI)
+);
+
+/*==============================================================*/
+/* Table: S002                                                  */
+/*==============================================================*/
+create table S002 (
+   CDGRUPO              serial               not null,
+   DSGRUPO              character varying(60)          null,
+   SNADMINI             character varying(1)           null,
+   constraint PK_S002 primary key (CDGRUPO)
+);
+
+/*==============================================================*/
+/* Table: S003                                                  */
+/*==============================================================*/
+create table S003 (
+   CDUSUARI             INTEGER                 not null,
+   CDGRUPO              INTEGER                 not null,
+   constraint PK_S003 primary key (CDUSUARI, CDGRUPO)
+);
+
+/*==============================================================*/
+/* Table: S004                                                  */
+/*==============================================================*/
+create table S004 (
+   CDEMPRES             INTEGER                 not null,
+   CDGRUEMP             INTEGER                 null,
+   DSEMPRES             character varying(20)          null,
+   RSEMPRES             character varying(40)          null,
+   IEEMPRES             character varying(15)          null,
+   CJEMPRES             character varying(14)          null,
+   constraint PK_S004 primary key (CDEMPRES)
+);
+
+/*==============================================================*/
+/* Table: S004A1                                                */
+/*==============================================================*/
+create table S004A1 (
+   CDEMPRES             INTEGER                 not null,
+   constraint PK_S004A1 primary key (CDEMPRES)
+);
+
+/*==============================================================*/
+/* Table: S005                                                  */
+/*==============================================================*/
+create table S005 (
+   CDEMPRES             INTEGER                 not null,
+   CDUSUARI             INTEGER                 not null,
+   SNEMPINI             character varying(1)           null,
+   constraint PK_S005 primary key (CDEMPRES, CDUSUARI)
+);
+
+/*==============================================================*/
+/* Table: S006                                                  */
+/*==============================================================*/
+create table S006 (
+   TPFORMUL             character varying(3)           not null,
+   NRSEQFOR             serial                 not null,
+   DSFORMUL             character varying(200)         null,
+   constraint PK_S006 primary key (TPFORMUL, NRSEQFOR)
+);
+
+/*==============================================================*/
+/* Table: S007                                                  */
+/*==============================================================*/
+create table S007 (
+   NRQUERY              serial                 not null,
+   NMQUERY              character varying(15)          null,
+   TXSQL                character varying(1000)                null,
+   DSQUERY              character varying(60)          null,
+   constraint PK_S007 primary key (NRQUERY)
+);
+
+/*==============================================================*/
+/* Table: S008                                                  */
+/*==============================================================*/
+create table S008 (
+   CDTABELA             serial          not null,
+   NMTABELA             character varying(15)          not null,
+   DSTABELA             character varying(30)          null,
+   constraint PK_S008 primary key (NMTABELA)
+);
+
+/*==============================================================*/
+/* Table: S009                                                  */
+/*==============================================================*/
+create table S009 (
+   CDTABELA             integer          not null,
+   CDATRIBU             serial          not null,
+   NMATRIBU             character varying(8)           not null,
+   DSATRIBU             character varying(30)          null,
+   TPATRIBU             character varying(1)           null,
+   TPMASCAR             character varying(1)           null,
+   DSMASCAR             character varying(30)          null,
+   DSHELP               character varying(255)                 null,
+   DSHINT               character varying(40)          null,
+   VRATUAL              INTEGER                 null,
+   VRINTERV             INTEGER                 null,
+   TMATRIBU             INTEGER                 null,
+   constraint PK_S009 primary key (NMTABELA, NMATRIBU)
+);
+
+/*==============================================================*/
+/* Table: S010                                                  */
+/*==============================================================*/
+create table S010 (
+   NMTABELA             character varying(15)          not null,
+   VRDOMINI             character varying(20)          not null,
+   NMATRIBU             character varying(8)           not null,
+   DSDOMINI             character varying(40)          null,
+   constraint PK_S010 primary key (NMTABELA, VRDOMINI, NMATRIBU)
+);
+
+/*==============================================================*/
+/* Table: S011                                                  */
+/*==============================================================*/
+create table S011 (
+   NMTABELA             character varying(15)          not null,
+   NMATRIBU             character varying(8)           not null,
+   NRSEQKEY             INTEGER                 not null,
+   constraint PK_S011 primary key (NMTABELA, NMATRIBU)
+);
+
+/*==============================================================*/
+/* Table: S012                                                  */
+/*==============================================================*/
+create table S012 (
+   NMCHAEST             character varying(30)          not null,
+   NMTABELA             character varying(15)          not null,
+   NMTABEST             character varying(15)          null,
+   TPCHAEST             character varying(1)           null,
+   constraint PK_S012 primary key (NMCHAEST)
+);
+
+/*==============================================================*/
+/* Table: S013                                                  */
+/*==============================================================*/
+create table S013 (
+   NMCHAEST             character varying(30)          not null,
+   NMTABELA             character varying(15)          not null,
+   NMATRIBU             character varying(8)           not null,
+   NRSEQKEY             INTEGER                 null,
+   constraint PK_S013 primary key (NMCHAEST, NMTABELA, NMATRIBU)
+);
+
+/*==============================================================*/
+/* Table: S014                                                  */
+/*==============================================================*/
+create table S014 (
+   NRFORDIN             INTEGER                 not null,
+   NMTABELA             character varying(15)          not null,
+   SNDELETE             character varying(1)           null,
+   SNINCLUI             character varying(1)           null,
+   DSHELP               character varying(255)                 null,
+   DSFORDIN             character varying(30)          null,
+   constraint PK_S014 primary key (NRFORDIN)
+);
+
+/*==============================================================*/
+/* Table: S015                                                  */
+/*==============================================================*/
+create table S015 (
+   NRFORDIN             INTEGER                 not null,
+   NRCOMPON             INTEGER                 not null,
+   NRQUECON             INTEGER                 null,
+   NMTABELA             character varying(15)          null,
+   NMATRIBU             character varying(8)           null,
+   NMCHACON             character varying(30)          null,
+   DSCAPTIO             character varying(30)          null,
+   DSCAPGRI             character varying(30)          null,
+   NRTABORD             INTEGER                 null,
+   NRTABGRI             INTEGER                 null,
+   SNENABLE             character varying(1)           null,
+   SNVISIBLE            character varying(1)           null,
+   TPCOMPON             character varying(1)           null,
+   VRHEIGHT             INTEGER                 null,
+   VRLEFT               INTEGER                 null,
+   VRTOP                INTEGER                 null,
+   VRWIDTH              INTEGER                 null,
+   TPDEFAUL             character varying(5)           null,
+   VRDEFAUL             character varying(30)          null,
+   NRCOMPAI             INTEGER                 null,
+   SNNULO               character varying(1)           null,
+   SNAUTINC             character varying(1)           null,
+   SNANCDIR             character varying(1)           null,
+   SNANCESQ             character varying(1)           null,
+   SNANCACI             character varying(1)           null,
+   SNANCBAI             character varying(1)           null,
+   constraint PK_S015 primary key (NRFORDIN, NRCOMPON)
+);
+
+/*==============================================================*/
+/* Table: S016                                                  */
+/*==============================================================*/
+create table S016 (
+   NRQUECON             INTEGER                 not null,
+   NMTABCON             character varying(15)          null,
+   NMATRORD             character varying(8)           null,
+   NMATRPES             character varying(8)           null,
+   DSCONSUL             character varying(60)          null,
+   TXSQLCON             character varying(255)                 null,
+   constraint PK_S016 primary key (NRQUECON)
+);
+
+/*==============================================================*/
+/* Table: S017                                                  */
+/*==============================================================*/
+create table S017 (
+   NRFORDIN             INTEGER                 not null,
+   NMTABELA             character varying(15)          not null,
+   NMATRIBU             character varying(8)           not null,
+   NRORDEM              INTEGER                 null,
+   constraint PK_S017 primary key (NRFORDIN, NMTABELA, NMATRIBU)
+);
+
+/*==============================================================*/
+/* Table: S018                                                  */
+/*==============================================================*/
+create table S018 (
+   NMINDICE             character varying(15)          not null,
+   NMTABELA             character varying(15)          null,
+   SNUNICO              character varying(1)           null,
+   constraint PK_S018 primary key (NMINDICE)
+);
+
+/*==============================================================*/
+/* Table: S019                                                  */
+/*==============================================================*/
+create table S019 (
+   NMINDICE             character varying(15)          not null,
+   NMTABELA             character varying(15)          not null,
+   NMATRIBU             character varying(8)           not null,
+   NRSEQIND             INTEGER                 null,
+   constraint PK_S019 primary key (NMINDICE, NMTABELA, NMATRIBU)
+);
+
+/*==============================================================*/
+/* Table: S021                                                  */
+/*==============================================================*/
+create table S021 (
+   NMPROCED             character varying(30)          not null,
+   TXPROCED             character varying(255)                 null,
+   constraint PK_S021 primary key (NMPROCED)
+);
+
+/*==============================================================*/
+/* Table: S022                                                  */
+/*==============================================================*/
+create table S022 (
+   CDUSUARI             INTEGER                 not null,
+   NRSQLUSR             INTEGER                 not null,
+   DSSQLUSR             character varying(30)          null,
+   TXSQLUSR             INTEGER                 null,
+   constraint PK_S022 primary key (CDUSUARI, NRSQLUSR)
+);
+
+/*==============================================================*/
+/* Table: S023                                                  */
+/*==============================================================*/
+create table S023 (
+   CDUSUARI             INTEGER                 not null,
+   NMTABELA             character varying(15)          not null,
+   DSLAYREL             character varying(30)          not null,
+   TPFOLREL             character varying(1)           null,
+   DSTITREL             character varying(50)          null,
+   TPIMPRES             character varying(1)           null,
+   constraint PK_S023 primary key (CDUSUARI, NMTABELA, DSLAYREL)
+);
+
+/*==============================================================*/
+/* Table: S024                                                  */
+/*==============================================================*/
+create table S024 (
+   CDUSUARI             INTEGER                 not null,
+   NMTABELA             character varying(15)          not null,
+   DSLAYREL             character varying(30)          not null,
+   NRORDEM              INTEGER                 not null,
+   NMATRIBU             character varying(8)           null,
+   SNCOLSEL             character varying(1)           null,
+   constraint PK_S024 primary key (CDUSUARI, NMTABELA, DSLAYREL, NRORDEM)
+);
+
+/*==============================================================*/
+/* Table: S025                                                  */
+/*==============================================================*/
+create table S025 (
+   NMEXCESS             character varying(30)          not null,
+   TXEXCESS             character varying(90)          null,
+   constraint PK_S025 primary key (NMEXCESS)
+);
+
+/*==============================================================*/
+/* Table: S026                                                  */
+/*==============================================================*/
+create table S026 (
+   NRFORDIN             INTEGER                 not null,
+   NRCOMPON             INTEGER                 not null,
+   NRORDCON             INTEGER                 not null,
+   NMTABELA             character varying(15)          null,
+   NMATRIBU             character varying(8)           null,
+   DSSEPANT             character varying(3)           null,
+   constraint PK_S026 primary key (NRFORDIN, NRCOMPON, NRORDCON)
+);
+
+/*==============================================================*/
+/* Table: S027                                                  */
+/*==============================================================*/
+create table S027 (
+   NRQUECON             INTEGER                 not null,
+   CDUSUARI             INTEGER                 not null,
+   NMTABORD             character varying(15)          null,
+   NMATRORD             character varying(8)           null,
+   NMTABPES             character varying(15)          null,
+   NMATRPES             character varying(8)           null,
+   NMTABPE2             character varying(15)          null,
+   NMATRPE2             character varying(8)           null,
+   DSLOCAL2             character varying(30)          null,
+   TPMAIMIN             character varying(1)           null,
+   TPWHERE              INTEGER                 null,
+   constraint PK_S027 primary key (NRQUECON, CDUSUARI)
+);
+
+/*==============================================================*/
+/* Table: S028                                                  */
+/*==============================================================*/
+create table S028 (
+   NRQUECON             INTEGER                 not null,
+   CDUSUARI             INTEGER                 not null,
+   NRORDATR             INTEGER                 not null,
+   NMTABELA             character varying(15)          null,
+   NMATRIBU             character varying(8)           null,
+   VRLARCOM             INTEGER                 null,
+   constraint PK_S028 primary key (NRQUECON, CDUSUARI, NRORDATR)
+);
+
+/*==============================================================*/
+/* Table: S029                                                  */
+/*==============================================================*/
+create table S029 (
+   NRQUECON             INTEGER                 not null,
+   DTEXECUT             DATE                 not null,
+   NMFORMUL             character varying(30)          null,
+   constraint PK_S029 primary key (NRQUECON, DTEXECUT)
+);
+
+/*==============================================================*/
+/* Table: S030                                                  */
+/*==============================================================*/
+create table S030 (
+   NRSEQUEN             INTEGER                 not null,
+   CDUSUARI             INTEGER                 null,
+   TPFORMUL             character varying(3)           null,
+   NRSEQFOR             INTEGER                 null,
+   NRFORDIN             INTEGER                 null,
+   constraint PK_S030 primary key (NRSEQUEN)
+);
+
+/*==============================================================*/
+/* Table: S031                                                  */
+/*==============================================================*/
+create table S031 (
+   NRFORDIN             INTEGER                 null,
+   NRSUBFOR             INTEGER                 null
+);
+
+/*==============================================================*/
+/* Table: S032                                                  */
+/*==============================================================*/
+create table S032 (
+   NRQUERY              INTEGER                 not null,
+   DTEXECUT             DATE                 not null,
+   NMFORMUL             character varying(30)          null,
+   constraint PK_S032 primary key (NRQUERY, DTEXECUT)
+);
+
+/*==============================================================*/
+/* Table: S033                                                  */
+/*==============================================================*/
+create table S033 (
+   NRMENU               INTEGER                 not null,
+   NRMENPAI             INTEGER                 null,
+   NRFORDIN             INTEGER                 null,
+   TPFORMUL             character varying(3)           null,
+   NRSEQFOR             INTEGER                 null,
+   DSMENU               character varying(90)          null,
+   TPMENU               character varying(1)           null,
+   NRNIVEL              INTEGER                 null,
+   NRORDEM              INTEGER                 null,
+   constraint PK_S033 primary key (NRMENU)
+);
+
+/*==============================================================*/
+/* Table: S034                                                  */
+/*==============================================================*/
+create table S034 (
+   NRMENU               INTEGER                 not null,
+   CDGRUPO              INTEGER                 not null,
+   constraint PK_S034 primary key (NRMENU, CDGRUPO)
+);
+
+/*==============================================================*/
+/* Table: S035                                                  */
+/*==============================================================*/
+create table S035 (
+   NRMENU               INTEGER                 not null,
+   CDGRUPO              INTEGER                 not null,
+   CDUSUARI             INTEGER                 not null,
+   constraint PK_S035 primary key (NRMENU, CDGRUPO, CDUSUARI)
+);
+
+/*==============================================================*/
+/* Table: S036                                                  */
+/*==============================================================*/
+create table S036 (
+   CDGRUEMP             INTEGER                 not null,
+   DSGRUEMP             character varying(60)          null,
+   VRMAXCAR             NUMERIC(15,2)        null,
+   constraint PK_S036 primary key (CDGRUEMP)
+);
+
+/*==============================================================*/
+/* Table: S037                                                  */
+/*==============================================================*/
+create table S037 (
+   NMTABELA             character varying(15)          not null,
+   NMATRIBU             character varying(8)           not null,
+   CDGRUPO              INTEGER                 not null,
+   TPPERMIS             character varying(1)           null,
+   constraint PK_S037 primary key (NMTABELA, NMATRIBU, CDGRUPO)
+);
+
+/*==============================================================*/
+/* Table: S038                                                  */
+/*==============================================================*/
+create table S038 (
+   NMTABELA             character varying(15)          not null,
+   NMATRIBU             character varying(8)           not null,
+   CDGRUPO              INTEGER                 not null,
+   CDUSUARI             INTEGER                 not null,
+   TPPERMIS             character varying(1)           not null,
+   constraint PK_S038 primary key (NMTABELA, NMATRIBU, CDGRUPO, CDUSUARI)
+);
+
+/*==============================================================*/
+/* Table: S039                                                  */
+/*==============================================================*/
+create table S039 (
+   NMTABELA             character varying(15)          null,
+   NMATRIBU             character varying(8)           null,
+   CDUSUARI             INTEGER                 null,
+   DTALTERA             DATE                 null,
+   VRCHAVE              character varying(99)          null,
+   TPOPERAC             INTEGER                 null,
+   VRATUAL              character varying(255)                 null,
+   NMFORMUL             character varying(30)          null,
+   TXSQL                character varying(255)                 null
+);
+
+/*==============================================================*/
+/* Table: S040                                                  */
+/*==============================================================*/
+create table S040 (
+   NMVIEW               character varying(30)          not null,
+   TXVIEW               character varying(255)                 null,
+   constraint PK_S040 primary key (NMVIEW)
+);
+
+/*==============================================================*/
+/* Table: S041                                                  */
+/*==============================================================*/
+create table S041 (
+   NRPARAME             INTEGER                 not null,
+   DSPARAME             character varying(100)         null,
+   VRPARAME             character varying(80)          null,
+   constraint PK_S041 primary key (NRPARAME)
+);
+
+/*==============================================================*/
+/* Table: S042                                                  */
+/*==============================================================*/
+create table S042 (
+   NRPARAME             INTEGER                 not null,
+   CDEMPRES             INTEGER                 not null,
+   VRPARAME             character varying(80)          null,
+   constraint PK_S042 primary key (NRPARAME, CDEMPRES)
+);
+
+/*==============================================================*/
+/* Table: S043                                                  */
+/*==============================================================*/
+create table S043 (
+   NRSEQLOG             INTEGER                 not null,
+   QTIMGLOG             INTEGER                 null,
+   constraint PK_S043 primary key (NRSEQLOG)
+);
+
+/*==============================================================*/
+/* Table: S044                                                  */
+/*==============================================================*/
+create table S044 (
+   CDUSUARI             INTEGER                 not null,
+   NRSEQTEL             INTEGER                 not null,
+   TPFORMUL             character varying(3)           null,
+   NRSEQFOR             INTEGER                 null,
+   NRFORDIN             INTEGER                 null,
+   constraint PK_S044 primary key (CDUSUARI, NRSEQTEL)
+);
+
+/*==============================================================*/
+/* Table: S045                                                  */
+/*==============================================================*/
+create table S045 (
+   NRFORDIN             INTEGER                 not null,
+   NRCOMPON             INTEGER                 not null,
+   NRSEQUEN             INTEGER                 not null,
+   NMTABORI             character varying(15)          null,
+   NMATRORI             character varying(8)           null,
+   NMTABDES             character varying(15)          null,
+   NMATRDES             character varying(8)           null,
+   constraint PK_S045 primary key (NRFORDIN, NRCOMPON, NRSEQUEN)
+);
+
+/*==============================================================*/
+/* Table: S046                                                  */
+/*==============================================================*/
+create table S046 (
+   CDTAREFA             INTEGER                 not null,
+   DSTAREFA             character varying(40)          null,
+   SNATIVA              character varying(1)           null,
+   QTINTERV             INTEGER                 null,
+   constraint PK_S046 primary key (CDTAREFA)
+);
+
+/*==============================================================*/
+/* Table: S047                                                  */
+/*==============================================================*/
+create table S047 (
+   CDVALIDA             INTEGER                 not null,
+   DSVALIDA             character varying(30)          null,
+   TPVALIDA             character varying(1)           null,
+   DSEXPRES             character varying(200)         null,
+   DSMENSAG             character varying(255)                 null,
+   constraint PK_S047 primary key (CDVALIDA)
+);
+
+/*==============================================================*/
+/* Table: S048                                                  */
+/*==============================================================*/
+create table S048 (
+   NMTABELA             character varying(15)          not null,
+   NMATRIBU             character varying(8)           not null,
+   CDVALIDA             INTEGER                 not null,
+   NRORDEM              INTEGER                 null,
+   constraint PK_S048 primary key (NMTABELA, NMATRIBU, CDVALIDA)
+);
+
+/*==============================================================*/
+/* Table: S049                                                  */
+/*==============================================================*/
+create table S049 (
+   NRALTERA             INTEGER                 not null,
+   TPFORMUL             character varying(3)           null,
+   NRSEQFOR             INTEGER                 null,
+   NRFORDIN             INTEGER                 null,
+   CDUSUARI             INTEGER                 null,
+   DSRESUMO             character varying(40)          null,
+   TXALTERA             character varying(255)                 null,
+   NRATESAB             INTEGER                 null,
+   DTALTERA             DATE                 null,
+   constraint PK_S049 primary key (NRALTERA)
+);
+
+alter table S003
+   add constraint FK_S003_REFERENCE_S001 foreign key (CDUSUARI)
+      references S001 (CDUSUARI)
+      on delete restrict on update restrict;
+
+alter table S003
+   add constraint FK_S003_REFERENCE_S002 foreign key (CDGRUPO)
+      references S002 (CDGRUPO)
+      on delete restrict on update restrict;
+
+alter table S004
+   add constraint FK_S004_REFERENCE_S036 foreign key (CDGRUEMP)
+      references S036 (CDGRUEMP)
+      on delete restrict on update restrict;
+
+alter table S005
+   add constraint FK_S005_REFERENCE_S004 foreign key (CDEMPRES)
+      references S004 (CDEMPRES)
+      on delete restrict on update restrict;
+
+alter table S005
+   add constraint FK_S005_REFERENCE_S001 foreign key (CDUSUARI)
+      references S001 (CDUSUARI)
+      on delete restrict on update restrict;
+
+alter table S009
+   add constraint FK_S009_REFERENCE_S008 foreign key (NMTABELA)
+      references S008 (NMTABELA)
+      on delete restrict on update restrict;
+
+alter table S010
+   add constraint FK_S010_REFERENCE_S009 foreign key (NMTABELA, NMATRIBU)
+      references S009 (NMTABELA, NMATRIBU)
+      on delete restrict on update restrict;
+
+alter table S011
+   add constraint FK_S011_REFERENCE_S009 foreign key (NMTABELA, NMATRIBU)
+      references S009 (NMTABELA, NMATRIBU)
+      on delete restrict on update restrict;
+
+alter table S012
+   add constraint FK_S012_REFERENCE_S008 foreign key (NMTABELA)
+      references S008 (NMTABELA)
+      on delete restrict on update restrict;
+
+alter table S012
+   add constraint FK_S012_REFERENCE_S008 foreign key (NMTABEST)
+      references S008 (NMTABELA)
+      on delete restrict on update restrict;
+
+alter table S013
+   add constraint FK_S013_REFERENCE_S012 foreign key (NMCHAEST)
+      references S012 (NMCHAEST)
+      on delete restrict on update restrict;
+
+alter table S013
+   add constraint FK_S013_REFERENCE_S009 foreign key (NMTABELA, NMATRIBU)
+      references S009 (NMTABELA, NMATRIBU)
+      on delete restrict on update restrict;
+
+alter table S014
+   add constraint FK_S014_REFERENCE_S008 foreign key (NMTABELA)
+      references S008 (NMTABELA)
+      on delete restrict on update restrict;
+
+alter table S015
+   add constraint FK_S015_REFERENCE_S014 foreign key (NRFORDIN)
+      references S014 (NRFORDIN)
+      on delete restrict on update restrict;
+
+alter table S015
+   add constraint FK_S015_REFERENCE_S016 foreign key (NRQUECON)
+      references S016 (NRQUECON)
+      on delete restrict on update restrict;
+
+alter table S015
+   add constraint FK_S015_REFERENCE_S009 foreign key (NMTABELA, NMATRIBU)
+      references S009 (NMTABELA, NMATRIBU)
+      on delete restrict on update restrict;
+
+alter table S015
+   add constraint FK_S015_REFERENCE_S012 foreign key (NMCHACON)
+      references S012 (NMCHAEST)
+      on delete restrict on update restrict;
+
+alter table S016
+   add constraint FK_S016_REFERENCE_S008 foreign key (NMTABCON)
+      references S008 (NMTABELA)
+      on delete restrict on update restrict;
+
+alter table S016
+   add constraint FK_S016_REFERENCE_S009 foreign key (NMTABCON, NMATRORD)
+      references S009 (NMTABELA, NMATRIBU)
+      on delete restrict on update restrict;
+
+alter table S016
+   add constraint FK_S016_REFERENCE_S009 foreign key (NMTABCON, NMATRPES)
+      references S009 (NMTABELA, NMATRIBU)
+      on delete restrict on update restrict;
+
+alter table S017
+   add constraint FK_S017_REFERENCE_S014 foreign key (NRFORDIN)
+      references S014 (NRFORDIN)
+      on delete restrict on update restrict;
+
+alter table S017
+   add constraint FK_S017_REFERENCE_S009 foreign key (NMTABELA, NMATRIBU)
+      references S009 (NMTABELA, NMATRIBU)
+      on delete restrict on update restrict;
+
+alter table S018
+   add constraint FK_S018_REFERENCE_S008 foreign key (NMTABELA)
+      references S008 (NMTABELA)
+      on delete restrict on update restrict;
+
+alter table S019
+   add constraint FK_S019_REFERENCE_S018 foreign key (NMINDICE)
+      references S018 (NMINDICE)
+      on delete restrict on update restrict;
+
+alter table S019
+   add constraint FK_S019_REFERENCE_S009 foreign key (NMTABELA, NMATRIBU)
+      references S009 (NMTABELA, NMATRIBU)
+      on delete restrict on update restrict;
+
+alter table S022
+   add constraint FK_S022_REFERENCE_S001 foreign key (CDUSUARI)
+      references S001 (CDUSUARI)
+      on delete restrict on update restrict;
+
+alter table S023
+   add constraint FK_S023_REFERENCE_S001 foreign key (CDUSUARI)
+      references S001 (CDUSUARI)
+      on delete restrict on update restrict;
+
+alter table S023
+   add constraint FK_S023_REFERENCE_S008 foreign key (NMTABELA)
+      references S008 (NMTABELA)
+      on delete restrict on update restrict;
+
+alter table S024
+   add constraint FK_S024_REFERENCE_S023 foreign key (CDUSUARI, NMTABELA, DSLAYREL)
+      references S023 (CDUSUARI, NMTABELA, DSLAYREL)
+      on delete restrict on update restrict;
+
+alter table S024
+   add constraint FK_S024_REFERENCE_S009 foreign key (NMTABELA, NMATRIBU)
+      references S009 (NMTABELA, NMATRIBU)
+      on delete restrict on update restrict;
+
+alter table S026
+   add constraint FK_S026_REFERENCE_S015 foreign key (NRFORDIN, NRCOMPON)
+      references S015 (NRFORDIN, NRCOMPON)
+      on delete restrict on update restrict;
+
+alter table S026
+   add constraint FK_S026_REFERENCE_S009 foreign key (NMTABELA, NMATRIBU)
+      references S009 (NMTABELA, NMATRIBU)
+      on delete restrict on update restrict;
+
+alter table S027
+   add constraint FK_S027_REFERENCE_S016 foreign key (NRQUECON)
+      references S016 (NRQUECON)
+      on delete restrict on update restrict;
+
+alter table S027
+   add constraint FK_S027_REFERENCE_S001 foreign key (CDUSUARI)
+      references S001 (CDUSUARI)
+      on delete restrict on update restrict;
+
+alter table S027
+   add constraint FK_S027_REFERENCE_S009 foreign key (NMTABORD, NMATRORD)
+      references S009 (NMTABELA, NMATRIBU)
+      on delete restrict on update restrict;
+
+alter table S027
+   add constraint FK_S027_REFERENCE_S009 foreign key (NMTABPES, NMATRPES)
+      references S009 (NMTABELA, NMATRIBU)
+      on delete restrict on update restrict;
+
+alter table S027
+   add constraint FK_S027_REFERENCE_S009 foreign key (NMTABPE2, NMATRPE2)
+      references S009 (NMTABELA, NMATRIBU)
+      on delete restrict on update restrict;
+
+alter table S028
+   add constraint FK_S028_REFERENCE_S027 foreign key (NRQUECON, CDUSUARI)
+      references S027 (NRQUECON, CDUSUARI)
+      on delete restrict on update restrict;
+
+alter table S028
+   add constraint FK_S028_REFERENCE_S009 foreign key (NMTABELA, NMATRIBU)
+      references S009 (NMTABELA, NMATRIBU)
+      on delete restrict on update restrict;
+
+alter table S029
+   add constraint FK_S029_REFERENCE_S016 foreign key (NRQUECON)
+      references S016 (NRQUECON)
+      on delete restrict on update restrict;
+
+alter table S030
+   add constraint FK_S030_REFERENCE_S001 foreign key (CDUSUARI)
+      references S001 (CDUSUARI)
+      on delete restrict on update restrict;
+
+alter table S030
+   add constraint FK_S030_REFERENCE_S006 foreign key (TPFORMUL, NRSEQFOR)
+      references S006 (TPFORMUL, NRSEQFOR)
+      on delete restrict on update restrict;
+
+alter table S030
+   add constraint FK_S030_REFERENCE_S014 foreign key (NRFORDIN)
+      references S014 (NRFORDIN)
+      on delete restrict on update restrict;
+
+alter table S031
+   add constraint FK_S031_REFERENCE_S014 foreign key (NRFORDIN)
+      references S014 (NRFORDIN)
+      on delete restrict on update restrict;
+
+alter table S031
+   add constraint FK_S031_REFERENCE_S014 foreign key (NRSUBFOR)
+      references S014 (NRFORDIN)
+      on delete restrict on update restrict;
+
+alter table S032
+   add constraint FK_S032_REFERENCE_S007 foreign key (NRQUERY)
+      references S007 (NRQUERY)
+      on delete restrict on update restrict;
+
+alter table S033
+   add constraint FK_S033_REFERENCE_S033 foreign key (NRMENPAI)
+      references S033 (NRMENU)
+      on delete restrict on update restrict;
+
+alter table S033
+   add constraint FK_S033_REFERENCE_S014 foreign key (NRFORDIN)
+      references S014 (NRFORDIN)
+      on delete restrict on update restrict;
+
+alter table S033
+   add constraint FK_S033_REFERENCE_S006 foreign key (TPFORMUL, NRSEQFOR)
+      references S006 (TPFORMUL, NRSEQFOR)
+      on delete restrict on update restrict;
+
+alter table S034
+   add constraint FK_S034_REFERENCE_S033 foreign key (NRMENU)
+      references S033 (NRMENU)
+      on delete restrict on update restrict;
+
+alter table S034
+   add constraint FK_S034_REFERENCE_S002 foreign key (CDGRUPO)
+      references S002 (CDGRUPO)
+      on delete restrict on update restrict;
+
+alter table S035
+   add constraint FK_S035_REFERENCE_S034 foreign key (NRMENU, CDGRUPO)
+      references S034 (NRMENU, CDGRUPO)
+      on delete restrict on update restrict;
+
+alter table S035
+   add constraint FK_S035_REFERENCE_S003 foreign key (CDUSUARI, CDGRUPO)
+      references S003 (CDUSUARI, CDGRUPO)
+      on delete restrict on update restrict;
+
+alter table S037
+   add constraint FK_S037_REFERENCE_S009 foreign key (NMTABELA, NMATRIBU)
+      references S009 (NMTABELA, NMATRIBU)
+      on delete restrict on update restrict;
+
+alter table S037
+   add constraint FK_S037_REFERENCE_S002 foreign key (CDGRUPO)
+      references S002 (CDGRUPO)
+      on delete restrict on update restrict;
+
+alter table S038
+   add constraint FK_S038_REFERENCE_S009 foreign key (NMTABELA, NMATRIBU)
+      references S009 (NMTABELA, NMATRIBU)
+      on delete restrict on update restrict;
+
+alter table S038
+   add constraint FK_S038_REFERENCE_S003 foreign key (CDUSUARI, CDGRUPO)
+      references S003 (CDUSUARI, CDGRUPO)
+      on delete restrict on update restrict;
+
+alter table S039
+   add constraint FK_S039_REFERENCE_S009 foreign key (NMTABELA, NMATRIBU)
+      references S009 (NMTABELA, NMATRIBU)
+      on delete restrict on update restrict;
+
+alter table S039
+   add constraint FK_S039_REFERENCE_S001 foreign key (CDUSUARI)
+      references S001 (CDUSUARI)
+      on delete restrict on update restrict;
+
+alter table S042
+   add constraint FK_S042_REFERENCE_S041 foreign key (NRPARAME)
+      references S041 (NRPARAME)
+      on delete restrict on update restrict;
+
+alter table S042
+   add constraint FK_S042_REFERENCE_S004 foreign key (CDEMPRES)
+      references S004 (CDEMPRES)
+      on delete restrict on update restrict;
+
+alter table S044
+   add constraint FK_S044_REFERENCE_S001 foreign key (CDUSUARI)
+      references S001 (CDUSUARI)
+      on delete restrict on update restrict;
+
+alter table S044
+   add constraint FK_S044_REFERENCE_S006 foreign key (TPFORMUL, NRSEQFOR)
+      references S006 (TPFORMUL, NRSEQFOR)
+      on delete restrict on update restrict;
+
+alter table S044
+   add constraint FK_S044_REFERENCE_S014 foreign key (NRFORDIN)
+      references S014 (NRFORDIN)
+      on delete restrict on update restrict;
+
+alter table S045
+   add constraint FK_S045_REFERENCE_S015 foreign key (NRFORDIN, NRCOMPON)
+      references S015 (NRFORDIN, NRCOMPON)
+      on delete restrict on update restrict;
+
+alter table S045
+   add constraint FK_S045_REFERENCE_S009 foreign key (NMTABORI, NMATRORI)
+      references S009 (NMTABELA, NMATRIBU)
+      on delete restrict on update restrict;
+
+alter table S045
+   add constraint FK_S045_REFERENCE_S009 foreign key (NMTABDES, NMATRDES)
+      references S009 (NMTABELA, NMATRIBU)
+      on delete restrict on update restrict;
+
+alter table S048
+   add constraint FK_S048_REFERENCE_S009 foreign key (NMTABELA, NMATRIBU)
+      references S009 (NMTABELA, NMATRIBU)
+      on delete restrict on update restrict;
+
+alter table S048
+   add constraint FK_S048_REFERENCE_S047 foreign key (CDVALIDA)
+      references S047 (CDVALIDA)
+      on delete restrict on update restrict;
+
+alter table S049
+   add constraint FK_S049_REFERENCE_S006 foreign key (TPFORMUL, NRSEQFOR)
+      references S006 (TPFORMUL, NRSEQFOR)
+      on delete restrict on update restrict;
+
+alter table S049
+   add constraint FK_S049_REFERENCE_S014 foreign key (NRFORDIN)
+      references S014 (NRFORDIN)
+      on delete restrict on update restrict;
+
+
+
+
+---------------------------------------------------------------------------------------
 CREATE TABLE day_of_week
 (
   day_of_week_id integer NOT NULL,
