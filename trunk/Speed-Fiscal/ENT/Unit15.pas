@@ -1,0 +1,249 @@
+unit Unit15;
+
+
+
+ interface
+
+type
+ TClientes = Class
+
+    private
+    FNUMERO,FCDCLIENTE : Integer;
+    FSITUACAO,FSTATUS,FCEP,FNome,FCGC,FINCR,FEND,FBAIRRO,FMUNICIPIO,FUF,FTELEFONE,FFAX,FCEL,FEMAIL,FSITE,FOBS :String;
+    FDTCADASTRO:TDateTime;
+    protected
+      function  GetCDCLIENTE    : Integer;
+      function  GetCEP    : String;
+      function  GetSITUACAO : string;
+      function  GetSTATUS : string;
+      function  GetRAZAO : string;
+      function  GetCGC : string;
+      function  GetINCR : string;
+      function  GetEND : string;
+      function  GetNumero : INTEGER;
+      function  GetBAIRRO : string;
+      function  GetMUNICIPIO : string;
+      function  GetUF : string;
+      function  GetTELEFONE : string;
+      function  GetFax :String;
+      function  GetCEL :String;
+      function  GetEMAIL :String;
+      function  GetSITE :String;
+      function  GetDTCADASTRO :TDateTime;
+      function  GetOBS :String;
+
+
+
+      procedure  SetCDCLIENTE       (Value : Integer);
+      procedure  SetCEP             (Value : string);
+      procedure  SetSITUACAO        (Value : string);
+      procedure  SetSTATUS          (Value : string);
+      procedure  SetRAZAO           (Value : string);
+      procedure  SetCGC             (Value : string);
+      procedure  SetINCR            (Value : string);
+      procedure  SetEND             (Value : string);
+      procedure  SetNUMERO          (Value : Integer);
+      procedure  SetBAIRRO          (Value : string);
+      procedure  SetMUNICIPIO       (Value : string);
+      procedure  SetUF              (Value : string);
+      procedure  SetTELEFONE        (Value : string);
+      procedure  SetCEL             (Value : string);
+      procedure  SetFax             (Value : string);
+      procedure  SetEMAIL           (Value : string);
+      procedure  SetSITE            (Value : string);
+      procedure  SetDTCADASTRO      (Value : TDateTime);
+      procedure  SetOBS             (Value : string);
+
+    public
+      property  CDCLIENTE      : Integer read GetCDCLIENTE           write SetCDCLIENTE;
+      property  CEP               : String read GetCEP               write SetCEP ;
+      property  SITUACAO          : string read GetSITUACAO          write SetSITUACAO;
+      property  STATUS            : string read GetSTATUS            write SetSTATUS;
+      property  RAZAO             : string read GetRAZAO             write SetRAZAO;
+      property  CGC               : string read GetCGC               write SetCGC;
+      property  INCR              : string read GetINCR              write SetINCR;
+      property  ENDe              : string read GetEND               write SetEND;
+      property  NUMERO         : Integer   read GetNUMERO            write SetNUMERO;
+      property  BAIRRO            : string read GetBAIRRO            write SetBAIRRO;
+      property  MUNICIPIO         : string read GetMUNICIPIO         write SetMUNICIPIO;
+      property  UF                : string read GetUF                write SetUF;
+      property  TELEFONE          : string read GetTELEFONE          write SetTELEFONE;
+      property  CEL               : string read GetCEL               write SetCEL;
+      property  Fax               : string read GetFax               write SetFax;
+      property  EMAIL             : string read GetEMAIL             write SetEMAIL;
+      property  SITE              : string read GetSITE              write SetSITE;
+      property  DTCADASTRO        : TdateTime read GetDTCADASTRO        write SetDTCADASTRO;
+      property  OBS               : string read GetOBS               write SetOBS;
+//      function GravarFornecedores():String;
+  End;
+implementation
+
+uses SysUtils,DB, IBCustomDataSet, IBQuery;
+
+var
+   IBQuery1: TIBQuery;
+
+function    TClientes.GetCDCLIENTE    : Integer;
+Begin
+      Result := Self.FCDCLIENTE;
+End;
+function    TClientes.GetCEP   : String;
+Begin
+      Result := Self.FCEP;
+End;
+function    TClientes.GetSITUACAO    : string;
+Begin
+  Result := Self.FSITUACAO;
+End;
+function    TClientes.GetSTATUS    : string;
+Begin
+  Result := Self.FSTATUS;
+End;
+function    TClientes.GetRAZAO    : string;
+Begin
+  Result := Self.FNome;
+End;
+function    TClientes.GetCGC    : string;
+Begin
+  Result := Self.FCGC;
+End;
+function    TClientes.GetINCR    : string;
+Begin
+  Result := Self.FINCR;
+End;
+function    TClientes.GetEND   :string;
+Begin
+  Result := Self.FEND;
+End;
+function    TClientes.GetNUMERO   :Integer;
+Begin
+  Result := Self.FNUMERO;
+End;
+
+function    TClientes.GetBAIRRO    : string;
+Begin
+  Result := Self.FBAIRRO;
+End;
+function    TClientes.GetMUNICIPIO    : string;
+Begin
+  Result := Self.FMUNICIPIO;
+End;
+function    TClientes.GetUF    : string;
+Begin
+  Result := Self.FUF;
+End;
+function    TClientes.GetTELEFONE    : string;
+Begin
+  Result := Self.FTELEFONE;
+End;
+function    TClientes.GetFAX    : string;
+Begin
+  Result := Self.FFAX;
+End;
+function    TClientes.GetCEL    : string;
+Begin
+  Result := Self.FCEL;
+End;
+function    TClientes.GetEMAIL   : String;
+Begin
+  Result := Self.FEMAIL;
+End;
+
+function    TClientes.GetSITE   : String;
+Begin
+  Result := Self.FSITE;
+End;
+function    TClientes.GetOBS   : String;
+Begin
+  Result := Self.FOBS;
+End;
+function    TClientes.GetDTCADAStro   : Tdatetime;
+Begin
+  Result := Self.FDTCADAStro;
+End;
+
+
+
+
+procedure   TClientes.SetCDCLIENTE    (Value : Integer);
+Begin
+  Self.FCDCLIENTE := Value;
+End;
+procedure   TClientes.SetCEP    (Value : String);
+Begin
+  Self.FCEP := Value;
+End;
+procedure   TClientes.SetSITUACAO    (Value : string);
+Begin
+  Self.FSITUACAO := Value;
+End;
+procedure   TClientes.SetSTATUS   (Value : string);
+Begin
+  Self.FSTATUS := Value;
+End;
+procedure   TClientes.SetRAZAO    (Value : string);
+Begin
+  Self.FNome := Value;
+End;
+procedure   TClientes.SetCGC   (Value : String);
+Begin
+  Self.FCGC := Value;
+End;
+procedure   TClientes.SetINCR    (Value : String);
+Begin
+  Self.FINCR := Value;
+End;
+procedure   TClientes.SetEND    (Value : String);
+Begin
+  Self.FEND := Value;
+End;
+procedure   TClientes.SetNUMERO    (Value : Integer);
+Begin
+  Self.FNUMERO := Value;
+End;
+procedure   TClientes.SetBAIRRO    (Value : String);
+Begin
+  Self.FBAIRRO := Value;
+End;
+procedure   TClientes.SetMUNICIPIO    (Value : String);
+Begin
+  Self.FMUNICIPIO := Value;
+End;
+procedure   TClientes.SetUF   (Value : String);
+Begin
+  Self.FUF := Value;
+End;
+procedure   TClientes.SetTELEFONE    (Value : String);
+Begin
+ // if (value <>StrToFloat('')) then
+    Self.FTELEFONE := Value;
+  //else
+  //  Self.FICMS := 0;
+End;
+procedure   TClientes.SetFAX   (Value : String);
+Begin
+  Self.FFAX := Value;
+End;
+procedure   TClientes.SetCEL    (Value : String);
+Begin
+  Self.FCEL := Value;
+End;
+procedure   TClientes.SetEMAIL    (Value : String);
+Begin
+  Self.FEMAIL := Value;
+End;
+procedure   TClientes.SetSITE    (Value : String);
+Begin
+  Self.FSITE := Value;
+End;
+procedure   TClientes.SetDTCADASTRO    (Value : TdateTime);
+Begin
+  Self.FDTCADASTRO := Value;
+End;
+procedure   TClientes.SetObs    (Value : String);
+Begin
+  Self.FObs := Value;
+End;
+
+end.
+ 
