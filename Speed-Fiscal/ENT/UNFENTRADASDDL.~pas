@@ -1,0 +1,384 @@
+unit UNFENTRADASDDL;
+
+interface
+
+type
+ TNFENTRADAS = Class
+    private
+    FDCNUMERO,FCDPEDIDO,FCODPRO,FNOPARCELA,FFORNECEDOR,FNATUREZA : Integer;
+    FDCSERIE,FDCORDEM,FDCTIPO,FSTATUS,FCFOP,FSTATUST,FTPSITUACAOT :String;
+    FVLNOTA,FICMS,FFRETE,FIPI,FST,FVLTITULO,FQUANTIDADE,FAQUIS,FVLVENDA,FPOR,FICMSI,FIPII,FSTI,FVLUNITARIO:Double;
+    FDTEMISSAO,FDTENTRADA,FDTVENCIMENTO:TDateTime;
+    protected
+      function  GetDCNUMERO    : Integer;
+      function  GetCDPEDIDO    : Integer;
+      function  GetNOPARCELA   : Integer;
+      function  GetQUANTIDADE  : Double;
+      function  GetFORNECEDOR  : Integer;
+      function  GetNATUREZA    : Integer;
+      function  GetCODPRO      : Integer;
+      function  GetDCSERIE     : string;
+      function  GetDCORDEM     : string;
+      function  GetDCTIPO      : string;
+      function  GetSTATUS      : string;
+      function  GetCFOP        : string;
+      function  GetSTATUST     : string;
+      function  GetTPSITUACAOT : string;
+      function  GetVLUNITARIO      : DOUBLE;
+      function  GetVLNOTA      : DOUBLE;
+      function  GetICMS        : DOUBLE;
+      function  GetIPI         : DOUBLE;
+      function  GetST          : DOUBLE;
+      function  GetICMSI        : DOUBLE;
+      function  GetIPII         : DOUBLE;
+      function  GetSTI          : DOUBLE;
+      function  GetFRETE       : DOUBLE;
+      function  GetVLTITULO    : DOUBLE;
+      function  GetAQUIS       : DOUBLE;
+      function  GetVLVENDA     : DOUBLE;
+      function  GetPOR         : DOUBLE;
+      function  GetICMS_BC         : DOUBLE;
+      function  GetI         : DOUBLE;
+      function  GetPOR         : DOUBLE;
+      function  GetDTEMISSAO :TDATETIME;
+      function  GetDTENTRADA :TDATETIME;
+      function  GetDTVENCIMENTO :TDATETIME;
+
+      Procedure  SetDCNUMERO    (Value : Integer);
+      Procedure  SetCDPEDIDO    (Value : Integer);
+      Procedure  SetNOPARCELA   (Value : Integer);
+      Procedure  SetQUANTIDADE  (Value : Double);
+      Procedure  SetFORNECEDOR  (Value : Integer);
+      Procedure  SetNATUREZA    (Value : Integer);
+      Procedure  SetCODPRO      (Value : Integer);
+      Procedure  SETSTATUST     (Value : string);
+      Procedure  SETTPSITUACAOT (Value : string);
+      Procedure  SetDCSERIE     (Value : string);
+      Procedure  SetDCORDEM     (Value : string);
+      Procedure  SetDCTIPO      (Value : string);
+      Procedure  SetSTATUS      (Value : string);
+      Procedure  SetCFOP        (Value : string);
+      Procedure  SetVLNOTA (Value : DOUBLE);
+      Procedure  SetVLUNITARIO (Value : DOUBLE);
+      Procedure  SetICMS (Value : double);
+      Procedure  SetIPI (Value : DOUBLE);
+      Procedure  SetST(Value : Double);
+      Procedure  SetICMSI (Value : double);
+      Procedure  SetIPII (Value : DOUBLE);
+      Procedure  SetSTI(Value : Double);
+      Procedure  SetFRETE (Value : DOUBLE);
+      Procedure  SetVLTITULO (Value : DOUBLE);
+      Procedure  SetAQUIS (Value : DOUBLE);
+      Procedure  SetVLVENDA (Value : DOUBLE);
+      Procedure  SetPOR (Value : DOUBLE);
+      Procedure  SetDTEMISSAO (Value : TDateTime);
+      Procedure  SetDTENTRADA (Value : TDateTime);
+      Procedure  SetDTVENCIMENTO (Value : TDateTime);
+
+    public
+      property  DCNUMERO      : Integer read GetDCNUMERO     write SetDCNUMERO;
+      property  CDPEDIDO      : Integer read GetCDPEDIDO     write SetCDPEDIDO;
+      property  CODPRO        : Integer read GetCODPRO       write SetCODPRO;
+      property  NOPARCELA     : Integer read GetNOPARCELA    write SetNOPARCELA;
+      property  QUANTIDADE    : Double read GetQUANTIDADE   write SetQUANTIDADE;
+      property  FORNECEDOR    : Integer read GetFORNECEDOR   write SetFORNECEDOR;
+      property  NATUREZA      : Integer read GetNATUREZA     write SetNATUREZA;
+      property  DCSERIE       : string  read GetDCSERIE      write SetDCSERIE;
+      property  DCORDEM       : string  read GetDCORDEM      write SetDCORDEM;
+      property  STATUST       : string  read GetSTATUST      write SetSTATUST;
+      property  TPSITUACAOT   : string  read GetTPSITUACAOT  write SetTPSITUACAOT;
+      property  DCTIPO        : string  read GetDCTIPO       write SetDCTIPO;
+      property  STATUS        : string  read GetSTATUS       write SetSTATUS;
+      property  CFOP          : String  read GetCFOP         write SetCFOP;
+      property  VLUNITARIO    : DOUBLE read GetVLUNITARIO    write SetVLUNITARIO;
+      property  VLNOTA        : DOUBLE read GetVLNOTA        write SetVLNOTA;
+      property  ICMS          : DOUBLE read GetICMS          write SetICMS;
+      property  IPI           : DOUBLE read GetIPI           write SetIPI;
+      property  ST            : DOUBLE read GetST            write SetST;
+      property  ICMSI         : DOUBLE read GetICMSI          write SetICMSI;
+      property  IPII          : DOUBLE read GetIPII           write SetIPII;
+      property  STI           : DOUBLE read GetSTI            write SetSTI;
+      property  FRETE         : DOUBLE read GetFRETE         write SetFRETE;
+      property  VLTITULO      : DOUBLE read GetVLTITULO     write SetVLTITULO;
+      property  AQUIS         : DOUBLE read GetAQUIS         write SetAQUIS;
+      property  VLVENDA       : DOUBLE read GetVLVENDA       write SetVLVENDA;
+      property  POR           : DOUBLE read GetPOR           write SetPOR;
+      property  DTENTRADA     : TDatetime read GetDTENTRADA       write SetDTENTRADA ;
+      property  DTEMISSAO     : TDatetime read GetDTEMISSAO       write SetDTEMISSAO ;
+      property  DTVENCIMENTO  : TDatetime read GetDTVENCIMENTO    write SetDTVENCIMENTO ;
+
+  End;
+implementation
+
+uses SysUtils;
+
+function    TNFENTRADAS.GetDCNUMERO    : Integer;
+Begin
+      Result := Self.FDCNUMERO;
+End;
+function    TNFENTRADAS.GetCDPEDIDO   : Integer;
+Begin
+      Result := Self.FCDPEDIDO;
+End;
+function    TNFENTRADAS.GetCODPRO    : Integer;
+Begin
+      Result := Self.FCODPRO;
+End;
+function    TNFENTRADAS.GetNOPARCELA   : Integer;
+Begin
+      Result := Self.FNOPARCELA;
+End;
+function    TNFENTRADAS.GetQUANTIDADE    : Double;
+Begin
+      Result := Self.FQUANTIDADE;
+End;
+function    TNFENTRADAS.GetFORNECEDOR   : Integer;
+Begin
+      Result := Self.FFORNECEDOR;
+End;
+function    TNFENTRADAS.GetNATUREZA    : Integer;
+Begin
+      Result := Self.FNATUREZA ;
+End;
+ {   FDCSERIE,FDCORDEM,FDCTIPO,FSTATUS,FCFOP :String;
+    FVLNOTA,FICMS,FFRETE,FIPI,FST,FVLTITULO,FAQUIS,FVLVENDA,FPOR:Double;
+    FDTEMISSAO,FDTENTRADA:TDateTime; }
+function    TNFENTRADAS.GetDCSERIE    : string;
+Begin
+  Result := Self.FDCSERIE;
+End;
+function    TNFENTRADAS.GetSTATUST   : string;
+Begin
+  Result := Self.FSTATUST;
+End;
+function    TNFENTRADAS.GetTPSITUACAOT   : string;
+Begin
+  Result := Self.FTPSITUACAOT;
+End;
+function    TNFENTRADAS.GetDCORDEM    : string;
+Begin
+  Result := Self.FDCORDEM;
+End;
+function    TNFENTRADAS.GetDCTIPO    : string;
+Begin
+  Result := Self.FDCTIPO;
+End;
+function    TNFENTRADAS.GetSTATUS    : string;
+Begin
+  Result := Self.FSTATUS;
+End;
+function   TNFENTRADAS.GetCFOP    : string;
+Begin
+  Result := Self.FCFOP;
+End;
+//FVLNOTA,FICMS,FFRETE,FIPI,FST,FVLTITULO,FAQUIS,FVLVENDA,FPOR:Double;
+function    TNFENTRADAS.GetVLNOTA    : DOUBLE;
+Begin
+  Result := Self.FVLNOTA;
+End;
+function    TNFENTRADAS.GetVLUNITARIO    : DOUBLE;
+Begin
+  Result := Self.FVLUNITARIO ;
+End;
+function    TNFENTRADAS.GetICMS    : DOUBLE;
+Begin
+  Result := Self.FICMS;
+End;
+function    TNFENTRADAS.GetIPI    : DOUBLE;
+Begin
+  Result := Self.FIPI;
+End;
+function    TNFENTRADAS.GetST    : DOUBLE;
+Begin
+  Result := Self.FST;
+End;
+
+function    TNFENTRADAS.GetICMSI    : DOUBLE;
+Begin
+  Result := Self.FICMSI;
+End;
+function    TNFENTRADAS.GetIPII    : DOUBLE;
+Begin
+  Result := Self.FIPII;
+End;
+function    TNFENTRADAS.GetSTI    : DOUBLE;
+Begin
+  Result := Self.FSTI;
+End;
+
+function    TNFENTRADAS.GetFRETE    : DOUBLE;
+Begin
+  Result := Self.FFRETE;
+End;
+function    TNFENTRADAS.GetVLTITULO   : DOUBLE;
+Begin
+  Result := Self.FVLTITULO;
+End;
+function    TNFENTRADAS.GetAQUIS    : DOUBLE;
+Begin
+  Result := Self.FAQUIS;
+End;
+function    TNFENTRADAS.GetVLVENDA    : DOUBLE;
+Begin
+  Result := Self.FVLVENDA;
+End;
+function    TNFENTRADAS.GetPOR   : DOUBLE;
+Begin
+  Result := Self.FPOR;
+End;
+
+
+function    TNFENTRADAS.GetDTEMISSAO    : TDateTime;
+Begin
+  Result := Self.FDTEMISSAO;
+
+End;
+function    TNFENTRADAS.GetDTENTRADA    : TDateTime;
+Begin
+  Result := Self.FDTENTRADA;
+End;
+function    TNFENTRADAS.GetDTVENCIMENTO   : TDateTime;
+Begin
+  Result := Self.FDTVENCIMENTO;
+End;
+procedure    TNFENTRADAS.setdcnumero    (Value : Integer);
+Begin
+      Self.FDCNUMERO := Value;
+End;
+
+
+
+
+
+
+procedure    TNFENTRADAS.setCDPEDIDO  (Value : Integer);
+Begin
+      Self.FCDPEDIDO := Value;
+End;
+
+procedure    TNFENTRADAS.setNOPARCELA   (Value : Integer);
+Begin
+      Self.FNOPARCELA := Value;
+End;
+procedure    TNFENTRADAS.setQUANTIDADE    (Value : Double);
+Begin
+      Self.FQUANTIDADE := Value;
+End;
+procedure    TNFENTRADAS.setFORNECEDOR   (Value : Integer);
+Begin
+      Self.FFORNECEDOR := Value;
+End;
+procedure    TNFENTRADAS.setNATUREZA    (Value : Integer);
+Begin
+      Self.FNATUREZA := Value;
+End;
+procedure   TNFENTRADAS.SetCODPRO    (Value : Integer);
+Begin
+      Self.FCODPRO := Value;
+End;
+
+procedure    TNFENTRADAS.setDCSERIE    (Value : string);
+Begin
+      Self.FDCSERIE := Value;
+End;
+
+procedure    TNFENTRADAS.SETSTATUST (Value : string);
+Begin
+      Self.FSTATUST := Value;
+End;
+
+procedure    TNFENTRADAS.SETTPSITUACAOT (Value : string);
+Begin
+      Self.FTPSITUACAOT := Value;
+End;
+
+procedure    TNFENTRADAS.setDCORDEM    (Value : string);
+Begin
+      Self.FDCORDEM := Value;
+End;
+procedure    TNFENTRADAS.setDCTIPO    (Value : string);
+Begin
+      Self.FDCTIPO := Value;
+End;
+procedure    TNFENTRADAS.setSTATUS   (Value : string);
+Begin
+      Self.FSTATUS := Value;
+End;
+procedure    TNFENTRADAS.setCFOP    (Value : string);
+Begin
+      Self.FCFOP := Value;
+End;
+//FVLNOTA,FICMS,FFRETE,FIPI,FST,FVLTITULO,FAQUIS,FVLVENDA,FPOR:Double;
+
+procedure    TNFENTRADAS.SetVLUNITARIO (Value : Double);
+Begin
+      Self.FVLUNITARIO:= Value;
+End;
+procedure    TNFENTRADAS.setVLNOTA    (Value : Double);
+Begin
+      Self.FVLNOTA := Value;
+End;
+procedure    TNFENTRADAS.setICMS   (Value : Double);
+Begin
+      Self.FICMS := Value;
+End;
+
+procedure    TNFENTRADAS.setIPI    (Value : Double);
+Begin
+      Self.FIPI := Value;
+End;
+procedure    TNFENTRADAS.setST    (Value : Double);
+Begin
+      Self.FST := Value;
+End;
+
+procedure    TNFENTRADAS.setICMSI   (Value : Double);
+Begin
+      Self.FICMSI := Value;
+End;
+
+procedure    TNFENTRADAS.setIPII    (Value : Double);
+Begin
+      Self.FIPII := Value;
+End;
+procedure    TNFENTRADAS.setSTI    (Value : Double);
+Begin
+      Self.FSTI := Value;
+End;
+
+procedure   TNFENTRADAS.setFRETE    (Value : Double);
+Begin
+      Self.FFRETE := Value;
+End;
+procedure    TNFENTRADAS.setVLTITULO   (Value : Double);
+Begin
+      Self.FVLTITULO := Value;
+End;
+procedure    TNFENTRADAS.setAQUIS    (Value : Double);
+Begin
+      Self.FAQUIS := Value;
+End;
+procedure    TNFENTRADAS.setVLVENDA    (Value : Double);
+Begin
+      Self.FVLVENDA := Value;
+End;
+procedure    TNFENTRADAS.setPOR       (Value : Double);
+Begin
+      Self.FPOR := Value;
+End;
+
+procedure    TNFENTRADAS.setDTEMISSAO    (Value : TdateTime);
+Begin
+      Self.FDTEMISSAO := Value;
+End;
+procedure    TNFENTRADAS.setDTENTRADA    (Value : TdateTime);
+Begin
+      Self.FDTENTRADA := Value;
+End;
+procedure    TNFENTRADAS.setDTVENCIMENTO   (Value : TdateTime);
+Begin
+      Self.FDTVENCIMENTO:= Value;
+End;
+
+end.
+ 

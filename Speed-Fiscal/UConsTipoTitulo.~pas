@@ -1,0 +1,28 @@
+unit UConsTipoTitulo;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, IBCustomDataSet, IBQuery, Grids, DBGrids, ExtCtrls;
+
+type
+  TForm3 = class(TForm)
+    Panel1: TPanel;
+    dbgrid1: TDBGrid;
+    IBQuery1: TIBQuery;
+    DataSource1: TDataSource;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form3: TForm3;
+
+implementation
+
+{$R *.dfm}
+
+end.
