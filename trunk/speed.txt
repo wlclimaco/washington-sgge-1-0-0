@@ -1,0 +1,379 @@
+*/  //**********************************01
+/*ABERTURA DO ARQUIVO DIGITAL E IDENTIFICAÇÃO DA ENTIDADE (Empresa)
+CREATE TABLE EMPRESA ( 
+	NOME       VARCHAR(120)  NOT NULL,  */(Nome empresarial da entidade.)
+	CNPJ       VARCHAR(13)   NOT NULL,  */(Número de inscrição da entidade no CNPJ.)
+	CPF        VARCHAR(11)   NOT NULL,  */(Número de inscrição da entidade no CPF.) 
+	UF         VARCHAR(2)    NOT NULL,  */(Sigla da unidade da federação da entidade.)
+	IE         VARCHAR(9)    NOT NULL,  */(Inscrição Estadual da entidade.)
+	COD_MUN    VARCHAR(2)    NOT NULL,  */(Código do município do domicílio fiscal da entidade, conforme a tabela IBGE)
+	IM         VARCHAR(12)   NOT NULL,  */(Inscrição Municipal da entidade) 
+	SUFRAMA    VARCHAR(12)   NOT NULL,  */(Inscrição da entidade na SUFRAMA)
+	IND_PERFIL VARCHAR(1)    NOT NULL,  */(Perfil de apresentação do arquivo fiscal;A – Perfil A;B – Perfil B.;C – Perfil C.)
+	IND_ATIV   VARCHAR(1)    NOT NULL,  */(Indicador de tipo de atividade:0 – Industrial ou equiparado a industrial;1 – Outros.)
+	FANTASIA   VARCHAR(150)  NOT NULL,  */(Nome de fantasia associado ao nome empresarial.)
+	CEP        VARCHAR(8)    NOT NULL,  */(Código de Endereçamento Postal)
+	END        VARCHAR(120)  NOT NULL,  */(Logradouro e endereço do imóvel) 
+	NUM        INTEGER,      NOT  NULL, */(Número do imóvel.)
+	COMPL      VARCHAR(120)  NOT NULL,  */(Dados complementares do endereço)
+	BAIRRO     VARCHAR(50)   NOT NULL,  */(Bairro em que o imóvel está situado)
+	FONE       VARCHAR(50)   NOT NULL,  */(Número do telefone (DDD+FONE).)
+	FAX        VARCHAR(50)   NOT NULL,  */(Número do fax.)
+	EMAIL      VARCHAR(50)   NOT NULL   */(Endereço do correio eletrônico.)
+
+);
+/***********************************02
+/*DADOS DO CONTABILISTA (CONTADOR)
+CREATE TABLE contador ( 
+	NOME    VARCHAR(120), */  (Nome do contabilista.)
+	CPF     VARCHAR(11),  */  (Número de inscrição do contabilista no CPF.)
+	CRC     VARCHAR(15),  */  (Número de inscrição do contabilista no Conselho Regional de Contabilidade)
+	CNPJ    VARCHAR(14),  */  (Número de inscrição do escritório de contabilidade no CNPJ, se houver.)
+	CEP     VARCHAR(8),   */  (Código de Endereçamento Postal)
+	END     VARCHAR(120), */  (Logradouro e endereço do imóvel)
+	NUM     INTEGER,      */  (Número do imóvel.)
+	COMPL   VARCHAR(120), */  (Dados complementares do endereço)
+	BAIRRO  VARCHAR(050), */  (Bairro em que o imóvel está situado.)
+	FONE    VARCHAR(012), */  (Número do telefone (DDD+FONE).)
+	FAX     VARCHAR(012), */  (Número do fax.)
+	EMAIL   VARCHAR(120), */  (Endereço do correio eletrônico)
+	COD_MUN VARCHAR(010)  */  (Código do município, conforme tabela IBGE)
+);
+
+/***********************************03
+/*TABELA DE CADASTRO DO PARTICIPANTE (CLIENTE)
+CREATE TABLE contador ( 
+	COD_PART  INTEGER,       */  (Código de identificação do participante no arquivo.)
+	NOME      VARCHAR(120),  */  (Nome pessoal ou empresarial do participante)
+	COD_PAIS  INTEGER,       */  (Código do país do participante, conforme a tabela indicada no item 3.2.1)
+	CNPJ      VARCHAR(120),  */  (CNPJ do participante.)
+	CPF       VARCHAR(120),  */  (CPF do participante)
+	IE        VARCHAR(120),  */   (Inscrição Estadual do participante.)
+	COD_MUN   INTEGER,       */  (Código do município, conforme a tabela IBGE)
+	SUFRAMA   VARCHAR(120),  */  (Número de inscrição do participante na SUFRAMA)
+	END       VARCHAR(120),  */  (Logradouro e endereço do imóvel)
+	NUM       INTEGER,       */  (Número do imóvel)
+	COMPL     VARCHAR(120),  */  (Dados complementares do endereço)
+	BAIRRO    VARCHAR(120)   */  (Bairro em que o imóvel está situado)
+);
+/*************************************04
+/* IDENTIFICAÇÃO DAS UNIDADES DE MEDIDA (UNIMED)
+CREATE TABLE unimed ( 
+	UNID   INTEGER,       /*(Código da unidade de medida)
+	DESCR  VARCHAR(120)   /*(Descrição da unidade de medida)
+
+);
+/**************************************05
+/*	TABELA DE IDENTIFICAÇÃO DO ITEM (PRODUTO E SERVIÇOS)
+CREATE TABLE PROD_SERV ( 
+	COD_ITEM     INTEGER,       */ (Código do item)
+	DESCR_ITEM   VARCHAR(120),  */ (Descrição do item)  
+	COD_BARRA    VARCHAR(120),  */ (Representação alfanumérico do código de barra do produto, se houver)
+	COD_ANT_ITEM VARCHAR(120),  */ (Código anterior do item com relação à última informação apresentada.)
+	UNID_INV     VARCHAR(120),  */ (Unidade de medida utilizada na quantificação de estoques.)
+	TIPO_ITEM    VARCHAR(120),  */ (Tipo do item – Atividades Industriais, Comerciais e Serviços:){00 – Mercadoria para Revenda01 – Matéria-Prima;02 – Embalagem;03 – Produto em Processo;04 – Produto Acabado;05 – Subproduto;06 – Produto Intermediário;07 – Material de Uso e Consumo;08 – Ativo Imobilizado;09 – Serviços;10 – Outros insumos;99 – Outras}
+	COD_NCM      VARCHAR(120),  */ INTEGER,       */(Código da Nomenclatura Comum do Mercosul)
+	EX_IPI       VARCHAR(120),  */ (Código EX, conforme a TIPI)
+	COD_GEN      VARCHAR(120),  */ (Código do gênero do item, conforme a Tabela 4.2.1)
+	COD_LST      VARCHAR(120),  */ (Código do serviço conforme lista do Anexo I da Lei Complementar Federal nº 116/03.)
+	ALIQ_ICMS    VARCHAR(120),  */ (Alíquota de ICMS aplicável ao item nas operações internas)
+	MVA          INTEGER        */ ()
+);
+/**************************************06
+/*CADASTRO DE BENS (PATRIMONIO)
+CREATE TABLE PATRIMONIO ( 
+	COD_IND_BEM INTEGER,        */(Código individualizado do bem ou componente adotado no controle patrimonial do estabelecimento informante)
+	IDENT_MERC  INTEGER         */(Identificação do tipo de mercadoria: 1 = bem;2 = componente.)
+	DESCR_ITEM  VARCHAR(120),   */(Descrição do bem ou componente (modelo, marca e outras características necessárias a sua individualização))
+	COD_PRNC    INTEGER         */(Código de cadastro do bem principal nos casos em que o bem ou componente ( campo 02) esteja vinculado a um bem principal.)
+	COD_CTA     INTEGER         */(Código da conta analítica de contabilização do bem ou componente (campo 06 do Registro 0500))
+	NR_PARC     INTEGER         */(Número total de parcelas a serem apropriadas, segundo a legislação de cada unidade federada)
+	COD_CCUS    INTEGER         */(Código do centro de custo onde o bem está sendo ou será utilizado (campo 03 do Registro 0600))
+	FUNC        VARCHAR(120),   */(Descrição sucinta da função do bem na atividade do estabelecimento)
+	VIDA_UTIL   VARCHAR(120)    */(Vida útil estimada do bem, em número de meses)
+);
+
+/**************************************08
+/*TABELA DE NATUREZA DA OPERAÇÃO/PRESTAÇÃO
+CREATE TABLE NATUREZA ( 
+	COD_NAT   INTEGER,     /* (Código da natureza da operação/prestação)
+	DESCR_NAT VARCHAR(120) /* (Descrição da natureza da operação/prestação)
+);
+
+
+/**************************************09
+/*   PLANO DE CONTAS CONTÁBEIS
+CREATE TABLE CONTA ( 
+DT_ALT      TIMESTAMP,  /* (Data da inclusão/alteração)
+COD_ NAT_CC INTEGER,    /* (Código da natureza da conta/grupo de contas){01 - Contas de ativo;02 - Contas de passivo;03 - Patrimônio líquido;04 - Contas de resultado;05 - Contas de compensação;09 - Outras.}
+IND_CTA     INTEGER,    /* (Indicador do tipo de conta: S - Sintética (grupo de contas);A - Analítica (conta).)
+NÍVEL       INTEGER,    /* (Nível da conta analítica/grupo de contas)
+COD_CTA     INTEGER,    /* (Código da conta analítica/grupo de contas)
+NOME_CTA    VARCHAR(10) /* (Nome da conta analítica/grupo de contas)
+);
+
+
+/**************************************10
+/*CENTRO DE CUSTOS
+CREATE TABLE CCUSTO( 
+DT_ALT    TIMESTAMP,   /* (Data da inclusão/alteração)
+COD_CCUS  INTEGER,     /* (Código do centro de custos.)
+CCUS      VARCHAR(100) /* (Nome do centro de custos)
+); 
+
+
+/**************************************11
+/*NOTA FISCAL
+CREATE TABLE NFFISCAL( 
+	IND_OPER      INTEGER,           /*  (Indicador do tipo de operação:0- Entrada;1- Saída)
+	IND_EMIT      INTEGER,           /*  (Indicador do emitente do documento fiscal:0- Emissão própria;1- Terceiros)
+	COD_PART      VARCHAR(100)       /*  (Código do participante (campo 02 do Registro 0150):- do adquirente, no caso das saídas;- do fornecedor no caso de entradas)
+	COD_MOD       INTEGER,           /*  (Código do modelo do documento fiscal,conforme a Tabela 4.1.1 )
+	COD_SIT       VARCHAR(100)       /*  (Código do modelo do documento fiscal,conforme a Tabela 4.1.1)
+	SER           VARCHAR(100)       /*  (Série do documento fiscal)
+	SUB           VARCHAR(100)       /*  (Subsérie do documento fiscal)
+	COD_CONS      VARCHAR(100)       /*  (- Código de classe de consumo de energia elétrica ou gás:){01 - Comercial02 - Consumo Próprio03 - Iluminação Pública04 - Industrial05 - Poder Público06 - Residencial07 - Rural08 -Serviço Público.- Código de classe de consumo de FornecimentoD´água – Tabela 4.4.2.}
+	NUM_DOC       INTEGER,           /*  (Número do documento fiscal)
+	DT_DOC        TIMESTAMP,         /*  (Data da emissão do documento fiscal)
+	DT_E_S        TIMESTAMP,         /*  (Data da entrada ou da saída)
+	VL_DOC        DOUBLE PRECISION,  /*    (Valor total do documento fiscal)
+	VL_DESC       DOUBLE PRECISION,  /*    (Valor total do desconto)
+	VL_FORN       DOUBLE PRECISION,  /*    (Valor total fornecido/consumido)
+	VL_SERV_NT    DOUBLE PRECISION,  /*    (Valor total dos serviços não-tributados pelo ICMS)
+	VL_TERC       DOUBLE PRECISION,  /*     (Valor total cobrado em nome de terceiros)
+	VL_DA         DOUBLE PRECISION,  /*    (Valor total de despesas acessórias indicadas no documento fiscal)
+	VL_BC_ICMS    DOUBLE PRECISION,  /*    (Valor acumulado da base de cálculo do ICMS)
+	VL_ICMS       DOUBLE PRECISION,  /*    (Valor acumulado do ICMS)
+	VL_BC_ICMS_ST DOUBLE PRECISION,  /*    (Valor acumulado da base de cálculo do ICMS substituição tributária)
+	VL_ICMS_ST    DOUBLE PRECISION,  /*   (Valor acumulado do ICMS retido por substituição tributária)
+	COD_INF       DOUBLE PRECISION,  /*   (Código da informação complementar do documento fiscal (campo 02 do Registro 0450))
+	VL_PIS        DOUBLE PRECISION,  /*   (Valor do PIS)
+	VL_COFINS     DOUBLE PRECISION,  /*   (Valor da COFINS)
+	TP_LIGACAO    DOUBLE PRECISION,  /*   (Código de tipo de Ligação 1 - Monofásico 2 - Bifásico 3 - Trifásico)
+	COD_GRUPO_TENSAO VARCHAR(100),   /*   (Código de grupo de tensão: 01 - A1 - Alta Tensão (230kV ou mais) 02 - A2 - Alta Tensão (88 a 138kV))
+        CHV_CTE          VARCHAR(100),   /*   (Chave do Conhecimento de Transporte Eletrônico)
+        TP_CT-e          VARCHAR(100),   /*   (Tipo de Conhecimento de Transporte Eletrônico conforme definido no Manual de Integração do CT-e)
+        CHV_CTE_REF      VARCHAR(100),   /*  (Chave do CT-e de referência cujos valores foram complementados (opção “1” do campo anterior) ou cujo débito foi anulado(opção “2” do campo anterior).)
+        IND_FRT          VARCHAR(100)    /*  (Indicador do tipo do frete:){0- Por conta de terceiros;1- Por conta do emitente;2- Por conta do destinatário;9- Sem cobrança de frete.}
+        VL_SERV       DOUBLE PRECISION   /*   (Valor total da prestação de serviço)
+);
+
+/*****************************************************************12
+/*NoTA FISCAL ITEM
+CREATE TABLE NFFISCALITENS(  
+    NUM_ITEM        INTEGER,            /*  (Número sequencial do item no documento fiscal)
+    COD_ITEM	    INTEGER,            /*(Código do item (campo 02 do Registro 0200))
+    DESCR_COMPL     VARCHAR(12),        /*(Descrição complementar do item como adotado no documento fiscal)
+    QTD             DOUBLE PRECISION,   /*(Quantidade do item)
+    UNID            INTEGER,            /*(Unidade do item (Campo 02 do registro 0190))
+    VL_ITEM         DOUBLE PRECISION,   /*(Valor total do item (mercadorias ou serviços))
+    VL_DESC         DOUBLE PRECISION,   /*(Valor do desconto comercial)
+    IND_MOV         INTEGER,            /*(Movimentação física do ITEM/PRODUTO:) {0. SIM; 1. NÃO}
+    CST_ICMS        DOUBLE PRECISION,   /*(Código da Situação Tributária referente ao ICMS, conforme a Tabela indicada no item 4.3.1)
+    CFOP            VARCHAR(12)         /*(Código Fiscal de Operação e Prestação)
+    COD_NAT         VARCHAR(12)         /*(Código da natureza da operação (campo 02 do Registro 0400))
+    VL_BC_ICMS      DOUBLE PRECISION,   /*(Valor da base de cálculo do ICMS)
+    ALIQ_ICMS       DOUBLE PRECISION,   /*(Alíquota do ICMS)
+    VL_ICMS         DOUBLE PRECISION,   /*(Valor do ICMS creditado/debitado)
+    VL_BC_ICMS_ST   DOUBLE PRECISION,   /*(Valor da base de cálculo referente à substituição tributária)
+    ALIQ_ST         DOUBLE PRECISION,   /*(Alíquota do ICMS da substituição tributária na unidade da federação de destino)
+    VL_ICMS_ST      DOUBLE PRECISION,   /*(Valor do ICMS referente à substituição tributária)
+    IND_APUR        DOUBLE PRECISION,   /*(Indicador de período de apuração do IPI:){0 - Mensal;1 - Decendial}
+    CST_IPI         DOUBLE PRECISION,   /*(Código da Situação Tributária referente ao IPI,conforme a Tabela indicada no item 4.3.2.)
+    COD_ENQ         DOUBLE PRECISION,   /*(Código de enquadramento legal do IPI, conforme tabela indicada no item 4.5.3.)
+    VL_BC_IPI       DOUBLE PRECISION,   /* (Valor da base de cálculo do IPI)
+    ALIQ_IPI        DOUBLE PRECISION,   /*(Alíquota do IPI)
+    VL_IPI          DOUBLE PRECISION,   /*(Valor do IPI creditado/debitado)
+    CST_PIS         DOUBLE PRECISION,   /*(Código da Situação Tributária referente ao PIS.)
+    VL_BC_PIS       DOUBLE PRECISION,   /*(Valor da base de cálculo do PIS)
+    ALIQ_PIS        DOUBLE PRECISION,   /*(Alíquota do PIS (em percentual))
+    QUANT_BC_PIS    DOUBLE PRECISION,   /*(Quantidade – Base de cálculo PIS)
+    ALIQ_PIS        DOUBLE PRECISION,   /* (Alíquota do PIS (em reais))
+    VL_PIS          DOUBLE PRECISION,   /*(Valor do PIS)
+    CST_COFINS      DOUBLE PRECISION,   /*(Código da Situação Tributária referente ao COFINS.)
+    VL_BC_COFINS    DOUBLE PRECISION,   /*(Valor da base de cálculo da COFINS)
+    ALIQ_COFINS     DOUBLE PRECISION,   /*(Alíquota do COFINS (em percentual))
+    QUANT_BC_COFINS DOUBLE PRECISION,   /*(Quantidade – Base de cálculo COFINS)
+    ALIQ_COFINS     DOUBLE PRECISION,   /*(Alíquota da COFINS (em reais))
+    VL_COFINS       DOUBLE PRECISION,   /*(Valor da COFINS)
+    COD_CTA         INTEGER             /*(Código da conta analítica contábil debitada/creditada)
+);
+	
+/**************************************************************13
+/*Transportador (COLETA E/OU ENTREGA)
+CREATE TABLE cOLETA_ENTREGA(
+   IND_CARGA    INTEGER, {0 – Rodoviário;1 – Ferroviário;2 – Rodo-Ferroviário;3 – Aquaviário;4 – Dutoviário;5 – Aéreo;9 – Outros.  }
+   CNPJ_COL     VARCHAR(12),
+   IE_COL       VARCHAR(12),
+   CPF_COL      VARCHAR(12),
+   COD_MUN_COL  VARCHAR(12),
+   CNPJ_ENTG    VARCHAR(12),
+   IE_ENTG      VARCHAR(12),
+   CPF_ENTG     VARCHAR(12),
+   COD_MUN_ENTG VARCHAR(12)
+);
+/**********************14
+/* CARGA TRANSPORTADA
+CREATE TABLE CARGA_TRANSPORTADA(
+	DESPACHO     INTEGER,    /* (Identificação do número do despacho)
+	CNPJ_CPF_REM VARCHAR(12),/*(CNPJ ou CPF do remetente das mercadorias que constam na nota fiscal.)
+	IE_REM       VARCHAR(12),/*(Inscrição Estadual do remetente das mercadorias que constam na nota fiscal)
+	COD_MUN_ORI  INTEGER,    /*(Código do Município de origem, conforme tabela IBGE(Preencher com 9999999, se Exterior))
+	CNPJ_CPF_DESTVARCHAR(12),/*(CNPJ ou CPF do destinatário das mercadorias que constam na nota fiscal.)
+	IE_DEST      VARCHAR(12),/*(Inscrição Estadual do destinatário das mercadorias que constam na nota fiscal.)
+	COD_MUN_DEST INTEGER     /*(Código do Município de destino, conforme tabela IBGE(Preencher com 9999999, se Exterior))
+);
+
+/***********************************************************15
+/*Transporte de volumes ( VOLUMES TRANSPORTADOS )
+CREATE TABLE VOLUMES_TRANSPORTADOS(
+    COD_PART INTEGER,    /*(Código do participante (campo 02 do Registro 0150): - transportador, se houver)
+    VEIC_ID  VARCHAR(12),/*(Placa de identificação do veículo automotor)
+    QTD_VOL  VARCHAR(12),/*(Quantidade de volumes transportados)
+    PESO_BRT VARCHAR(12),/*(Peso bruto dos volumes transportados (em Kg))
+    PESO_LIQ VARCHAR(12),/*(Peso líquido dos volumes transportados (em Kg))
+    UF_ID    VARCHAR(12) /*(Sigla da UF da placa do veículo)
+);
+/************************************16
+/*Importação (OPERAÇÕES DE IMPORTAÇÃO)
+CREATE TABLE OPERACAO_IMPORTACAO(
+   COD_DOC_IMP INTEGER,          /*  ( 0 – Declaração de Importação;1 – Declaração Simplificada de Importação.)
+   NUM_DOC_IMP INTEGER,          /* ( Número do documento de Importação. )
+   PIS_IMP     DOUBLE PRECISION, /*( Valor pago de PIS na importação )
+   COFINS_IMP  DOUBLE PRECISION, /*( Valor pago de COFINS na importação )
+   NUM_ACDRAW  INTEGER           /*( Número do Ato Concessório do regime Drawback )
+);
+
+/****************************************17
+/*CONHECIMENTO RODOVIÁRIO DE CARGAS AVULSO
+CREATE TABLE CARGAS_AVULSO(
+	COD_PART_CONSG INTEGER,         /*(Código do participante (campo 02 do Registro 0150):- consignatário, se houver)
+	COD_PART_RED   INTEGER,         /*(Código do participante (campo 02 do Registro 0150):- redespachado, se houver)
+	IND_FRT_RED    INTEGER,         /*(Indicador do tipo do frete da operação de redespacho: 0 – Sem redespacho;1 - Por conta do emitente;2 - Por conta do destinatário;9 – Outros.)
+	COD_MUN_ORIG   INTEGER,         /*(Código do município de origem do serviço, conforme a tabela IBGE(Preencher com 9999999,se Exterior))
+	COD_MUN_DEST   INTEGER,         /*(Código do município de destino, conforme a tabela IBGE(Preencher com 9999999, se Exterior))
+	VEIC_ID        VARCHAR(12)      /*(Placa de identificação do veículo)
+	VL_LIQ_FRT     DOUBLE PRECISION,/*(Valor líquido do frete)
+	VL_SEC_CAT     DOUBLE PRECISION,/*(Soma de valores de Sec/Cat (serviços de coleta/custo adicional de transporte))
+	VL_DESP        DOUBLE PRECISION,/*(Soma de valores de despacho)
+	VL_PEDG        DOUBLE PRECISION,/*(Soma dos valores de pedágio)
+	VL_OUT         DOUBLE PRECISION,/*(Outros valores)
+	VL_FRT         DOUBLE PRECISION,/*(Valor total do frete)
+	UF_ID          VARCHAR(12)      /*(Sigla da UF da placa do veículo)
+);
+/***********************************18
+/*CONHECIMENTO AQUAVIÁRIO DE CARGAS
+CREATE TABLE AQUAVIARIO_CARGAS(
+	COD_PART_CONSG   INTEGER,         /*    (Código do participante (campo 02 do Registro 0150): - consignatário, se houver)
+	COD_MUN_ORIG     INTEGER,         /*    (Código do município de origem do serviço, conforme a tabela IBGE(Preencher com 9999999, se Exterior))
+	COD_MUN_DEST     INTEGER,         /*    (Código do município de destino, conforme a tabela IBGE(Preencher com 9999999, se Exterior)) 
+	IND_VEIC         INTEGER,         /*    (Indicador do tipo do veículo transportador: 0- Embarcação;1- Empurrador/rebocador)
+	VEIC_ID          VARCHAR(12),     /*    (Identificação da embarcação (IRIM ou Registro CPP))
+	IND_NAV          INTEGER,         /*    (Indicador do tipo da navegação:0- Interior;1- Cabotagem)
+	VIAGEM           INTEGER,         /*    (Número da viagem) 
+	VL_FRT_LIQ       DOUBLE PRECISION,/*    (Valor líquido do frete)
+	VL_DESP_PORT     DOUBLE PRECISION,/*    (Valor das despesas portuárias)
+	VL_DESP_CAR_DESC DOUBLE PRECISION,/*    (Valor das despesas com carga e descarga)
+	VL_OUT           DOUBLE PRECISION,/*    (Outros valores)
+	VL_FRT_BRT       DOUBLE PRECISION,/*    (Valor bruto do frete)
+	VL_FRT_MM        DOUBLE PRECISION /*    (Valor adicional do frete para renovação da Marinha Mercante)
+);
+/**************************************************19
+/*COMPLEMENTO DO CONHECIMENTO AÉREO
+CREATE TABLE CONHECIMENTO_AEREO(
+	COD_MUN_ORIG INTEGER,          /* (Código do município de origem do serviço,conforme a tabela IBGE(Preencher com 9999999, se Exterior))
+	COD_MUN_DEST INTEGER,          /* (Código do município de destino, conforme a tabela IBGE(Preencher com 9999999, se Exterior))
+	VEIC_ID      VARCHAR(12),      /* (Identificação da aeronave (DAC))
+	VIAGEM       VARCHAR(12),      /* (Número do vôo.)
+	IND_TFA      INTEGER,          /* (Indicador do tipo de tarifa aplicada:0- Exp.;1- Enc.;2- C.I.;9- Outra)
+	VL_PESO_TX   DOUBLE PRECISION, /* (Peso taxado)
+	VL_TX_TERR   DOUBLE PRECISION, /* (Valor da taxa terrestre)
+	VL_TX_RED    DOUBLE PRECISION, /* (Valor da taxa de redespacho)
+	VL_OUT       DOUBLE PRECISION, /* (Outros valores)
+	VL_TX_ADV    DOUBLE PRECISION  /* (Valor da taxa "ad valorem")
+
+);
+/*****************************************20
+/*Prestação se serviço ( ISSQN, IRRF E PREVIDÊNCIA SOCIAL )
+CREATE TABLE PREVIDENCIA_SOCIAL(
+    VL_SERV_NT   DOUBLE PRECISION, /* ( Valor dos serviços sob não-incidência ou nãotributados pelo ICMS )
+    VL_BC_ISSQN  DOUBLE PRECISION, /* ( Valor da base de cálculo do ISSQN )
+    VL_ISSQN     DOUBLE PRECISION, /* ( Valor do ISSQN )
+    VL_BC_IRRF   DOUBLE PRECISION, /* ( Valor da base de cálculo do Imposto de Renda Retido na Fonte )
+    VL_ IRRF     DOUBLE PRECISION, /* ( Valor do Imposto de Renda - Retido na Fonte )
+    VL_BC_PREV   DOUBLE PRECISION, /* ( Valor da base de cálculo de retenção da Previdência Social )
+    VL_ PREV     DOUBLE PRECISION  /* ( Valor destacado para retenção da Previdência Social )
+);
+/***********************************************21
+/*TiTulos (FATURA)
+CREATE TABLE FATURA(
+   IND_EMIT  INTEGER,            /* ( Indicador do emitente do título: 0- Emissão própria; 1- Terceiros )
+   IND_TIT   INTEGER,            /* ( Indicador do tipo de título de crédito:00- Duplicata;01- Cheque;02- Promissória;03- Recibo;99- Outros (descrever) )
+   DESC_TIT  VARCHAR(12),        /* ( Descrição complementar do título de crédito )
+   NUM_TIT   INTEGER,            /* ( Número ou código identificador do título de crédito )
+   QTD_PARC  INTEGER,            /* ( Quantidade de parcelas a receber/pagar )
+   VL_TIT    DOUBLE PRECISION    /* ( Valor total dos títulos de créditos )
+);
+/******************************************************22
+/*TiTulosItens (FATURA Itens)
+CREATE TABLE FATURAITENS(
+   NUM_PARC  INTEGER,           /*  ( Número da parcela a receber/pagar )
+   DT_VCTO   TIMESTAMP,         /*  ( Data de vencimento da parcela )
+   VL_PARC   DOUBLE PRECISION  /*  (Valor da parcela a receber/pagar)
+);
+/********************************************************23
+/*Patrimonio (OPERAÇÕES COM VEÍCULOS NOVOS)
+CREATE TABLE VEÍCULOS_NOVOS(
+   IND_VEIC_OPER   INTEGER,(Indicador do tipo de operação com veículo:) {0- Venda para concessionária;1- Faturamento direto;2- Venda direta;3- Venda da concessionária;9- Outros}
+   CNPJ            VARCHAR(12), /*  ( CNPJ da Concessionária )
+   UF              VARCHAR(12), /*  ( Sigla da unidade da federação da Concessionária ) 
+   CHASSI_VEIC     VARCHAR(12)  /*  ( Chassi do veículo )
+);
+/***********************************24
+/*ECF ( EQUIPAMENTO ECF (CÓDIGO 02 e 2D). )
+CREATE TABLE ECF(
+	COD_MOD  INTEGER,     /* ( Código do modelo do documento fiscal,conforme a Tabela 4.1.1 )
+	ECF_MOD  VARCHAR(12), /* ( Modelo do equipamento )
+	ECF_FAB  VARCHAR(12), /* ( Número de série de fabricação do ECF )
+	ECF_CX   VARCHAR(12)  /* ( Número do caixa atribuído ao ECF )
+);
+/****************************************25
+/*REDUÇÃO Z ()
+CREATE TABLE REDUCAO_Z(
+	DT_DOC       TIMESTAMP,       /* (Data do movimento a que se refere a Redução Z)
+	CRO          INTEGER,         /* (Posição do Contador de Reinício de Operação)
+	CRZ          INTEGER,         /* (Posição do Contador de Redução Z)
+	NUM_COO_FIN  INTEGER,         /* (Número do Contador de Ordem de Operação do último documento emitido no dia. (Número do COO na Redução Z))
+	GT_FIN       INTEGER,         /* (Valor do Grande Total final)
+	VL_BRT       DOUBLE PRECISION /* (Valor da venda bruta)
+);
+/*********************************************26
+/*DOCUMENTO FISCAL EMITIDO POR ECF
+CREATE TABLE CUPOM(
+	COD_MOD   INTEGER,           /* ( Código do modelo do documento fiscal,conforme a Tabela 4.1.1 )
+	COD_SIT   INTEGER,           /* ( Código da situação do documento fiscal,conforme a Tabela 4.1.2 )
+	NUM_DOC   INTEGER,           /* ( Número do documento fiscal (COO) )
+	DT_DOC    TIMESTAMP,         /* ( Data da emissão do documento fiscal )
+	VL_DOC    DOUBLE PRECISION   /* ( Valor total do documento fiscal )
+	VL_PIS    DOUBLE PRECISION   /* ( Valor do PIS )
+	VL_COFINS DOUBLE PRECISION   /* ( Valor da COFINS )
+	CPF_CNPJ  VARCHAR(12),       /* ( CPF ou CNPJ do adquirente )
+	NOM_ADQ   VARCHAR(12)        /* ( Nome do adquirente )
+);
+/************************************************27
+/*ITENS DO DOCUMENTO FISCAL EMITIDO POR ECF
+CREATE TABLE CUPOMITEM(
+	COD_ITEM  INTEGER,            /* (Código do item (campo 02 do Registro 0200))
+	QTD       DOUBLE PRECISION,   /* (Quantidade do item)
+	QTD_CANC  DOUBLE PRECISION,   /* (Quantidade cancelada, no caso de cancelamento parcial de item)
+	UNID      INTEGER,            /* (Unidade do item (Campo 02 do registro 0190))
+	VL_ITEM   DOUBLE PRECISION,   /* (Valor total do item)
+	CST_ICMS  DOUBLE PRECISION,   /* (Código da Situação Tributária, conforme a Tabela indicada no item 4.3.1.)
+	CFOP      VARCHAR(12),        /* (Código Fiscal de Operação e Prestação)
+	ALIQ_ICMS DOUBLE PRECISION,   /* (Alíquota do ICMS – Carga tributária efetiva em percentual)
+	VL_PIS    DOUBLE PRECISION,   /* (Valor do PIS)
+	VL_COFINS DOUBLE PRECISION,   /* (Valor da COFINS)
+);
+//*****************************************************28
+
+

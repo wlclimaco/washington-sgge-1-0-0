@@ -1,0 +1,275 @@
+unit UDLLCCORRENTE;
+
+
+
+ interface
+
+type
+ TCONTACORRENTE = Class
+
+    private
+    FSQNOSSONUMERO,FNOBANCO,FNOCONTA,FNOCOMPENSACAO,FCDEMPRESA,FCDFILIAL,FCDCONTACORRENTE,FNOTRADUTOR, FSQREMESSA,FNOCONVENIO,FCDHISTORICO,FCDHISTCTB,FCDTITULARNOMINAL:Integer;
+    FCDAGENCIA,FNMBANCO,FNMAGENCIA,FDSGRUPO,FDSINSTRUCAO1,FDSINSTRUCAO2,FSNMOVBANCUNICO,FSTATUS,FSNNOSSONUMAUTO,FCARTEIRA :String;
+    FSQCHEQUES,FPCJUROMES ,FVLSALDO :Double ;
+    FDTSALDO :TdateTime;
+    protected
+
+{
+    NOBANCO,NOCONTA,NOCOMPENSACAO,CDEMPRESA,CDFILIAL,CDCONTACORRENTE,NOTRADUTOR,SNNOSSONUMAUTO, SQREMESSA,NOCONVENIO,CDHISTORICO,CDHISTCTB,CDTITULARNOMINAL:Integer;
+    CDAGENCIA,NMBANCO,NMAGENCIA,DSGRUPO,DSINSTRUCAO1,DSINSTRUCAO2,SNMOVBANCUNICO,STATUS :String;
+    SQNOSSONUMERO ,SQCHEQUES,PCJUROMES ,VLSALDO :Double ;
+    DTSALDO :TdateTime;
+
+}
+
+      function  GetNOBANCO           : Integer;
+      function  GetCDAGENCIA         : String;
+      function  GetNOCONTA           : Integer;
+      function  GetNMBANCO           : string;
+      function  GetNMAGENCIA         : string;
+      function  GetNOCOMPENSACAO     : iNTEGER;
+      function  GetDTSALDO           : tDATEtIME;
+      function  GetDSGRUPO           : string;
+      function  GetCDEMPRESA         : Integer;
+      function  GetCDFILIAL          : Integer;
+      function  GetCDCONTACORRENTE   : Integer;
+      function  GetNOTRADUTOR        : Integer;
+      function  GetSQNOSSONUMERO     : Integer;
+      function  GetSNNOSSONUMAUTO    : string;
+      function  GetSQCHEQUES         : double;
+      function  GetSQREMESSA         : string;
+      function  GetNOCONVENIO        : string;
+      function  GetVLSALDO           : Double;
+      function  GetCDHISTORICO       : string;
+      function  GetCARTEIRA          : String;
+      function  GetSTATUS            : String;
+
+
+      procedure  SetNOBANCO           (Value : Integer);
+      procedure  SetCDAGENCIA         (Value : string);
+      procedure  SetNOCONTA           (Value : Integer);
+      procedure  SetNMBANCO           (Value : string);
+      procedure  SetNMAGENCIA         (Value : string);
+      procedure  SetNOCOMPENSACAO     (Value : Integer);
+      procedure  SetDTSALDO           (Value : TDateTime);
+      procedure  SetDSGRUPO           (Value : string);
+      procedure  SetCDEMPRESA         (Value : Integer);
+      procedure  SetCDFILIAL          (Value : Integer);
+      procedure  SetCDCONTACORRENTE   (Value : Integer);
+      procedure  SetNOTRADUTOR        (Value : Integer);
+      procedure  SetSQNOSSONUMERO     (Value : Integer);
+      procedure  SetSNNOSSONUMAUTO    (Value : string);
+      procedure  SetSQCHEQUES         (Value : double);
+      procedure  SetSQREMESSA         (Value : string);
+      procedure  SetNOCONVENIO        (Value : string);
+      procedure  SetVLSALDO           (Value : double);
+      procedure  SetCDHISTORICO       (Value : string);
+      procedure  SetCARTEIRA          (Value : string);
+      procedure  SetSTATUS            (Value : string);
+      public
+      property  NOBANCO           : Integer   read GetNOBANCO     write SetNOBANCO;
+      property  CDAGENCIA         : String    read GetCDAGENCIA     write SetCDAGENCIA;
+      property  NOCONTA           : Integer   read GetNOCONTA     write SetNOCONTA;
+      property  NMBANCO           : string    read GetNMBANCO     write SetNMBANCO;
+      property  NMAGENCIA         : string    read GetNMAGENCIA     write SetNMAGENCIA;
+      property  NOCOMPENSACAO     : Integer    read GetNOCOMPENSACAO     write SetNOCOMPENSACAO;
+      property  DTSALDO           : TdateTime read GetDTSALDO     write SetDTSALDO;
+      property  DSGRUPO           : string    read GetDSGRUPO     write SetDSGRUPO;
+      property  CDEMPRESA         : Integer   read GetCDEMPRESA      write SetCDEMPRESA ;
+      property  CDFILIAL          : Integer   read GetCDFILIAL     write SetCDFILIAL;
+      property  CDCONTACORRENTE   : Integer   read GetCDCONTACORRENTE     write SetCDCONTACORRENTE;
+      property  NOTRADUTOR        : integer    read GetNOTRADUTOR     write SetNOTRADUTOR;
+      property  SQNOSSONUMERO     : string    read GetSQNOSSONUMERO     write SetSQNOSSONUMERO;
+      property  SNNOSSONUMAUTO    : String    read GetSNNOSSONUMAUTO     write SetSNNOSSONUMAUTO;
+      property  SQCHEQUES         : double    read GetSQCHEQUES     write SetSQCHEQUES;
+      property  SQREMESSA         : string    read GetSQREMESSA     write SetSQREMESSA;
+      property  NOCONVENIO        : string    read GetNOCONVENIO     write SetNOCONVENIO;
+      property  VLSALDO           : double    read GetVLSALDO      write SetVLSALDO ;
+      property  CDHISTORICO       : string    read GetCDHISTORICO     write SetCDHISTORICO;
+      property  CARTEIRA          : String    read GetCARTEIRA    write SetCARTEIRA;
+      property  STATUS            : String    read GetSTATUS     write SetSTATUS;
+
+
+  End;
+implementation
+
+uses SysUtils,DB, IBCustomDataSet, IBQuery;
+
+
+      function  TCONTACORRENTE.GetNOBANCO           : Integer;
+      Begin
+      Result := Self.FNOBANCO;
+      End;
+      function  TCONTACORRENTE.GetCDAGENCIA         : String;
+      Begin
+      Result := Self.FCDAGENCIA;
+      End;
+      function  TCONTACORRENTE.GetNOCONTA           : Integer;
+      Begin
+      Result := Self.FNOCONTA;
+      End;
+      function  TCONTACORRENTE.GetNMBANCO           : string;
+      Begin
+      Result := Self.FNMBANCO;
+      End;
+      function  TCONTACORRENTE.GetNMAGENCIA         : string;
+      Begin
+      Result := Self.FNMAGENCIA;
+      End;
+      function  TCONTACORRENTE.GetNOCOMPENSACAO     : iNTEGER;
+      Begin
+      Result := Self.FNOCOMPENSACAO;
+      End;
+      function  TCONTACORRENTE.GetDTSALDO           : tDATEtIME;
+      Begin
+      Result := Self.FDTSALDO;
+      End;
+      function  TCONTACORRENTE.GetDSGRUPO           : string;
+      Begin
+      Result := Self.FDSGRUPO;
+      End;
+      function  TCONTACORRENTE.GetCDEMPRESA         : Integer;
+      Begin
+      Result := Self.FCDEMPRESA;
+      End;
+      function  TCONTACORRENTE.GetCDFILIAL          : Integer;
+      Begin
+      Result := Self.FCDFILIAL;
+      End;
+      function  TCONTACORRENTE.GetCDCONTACORRENTE   : Integer;
+      Begin
+      Result := Self.FCDCONTACORRENTE;
+      End;
+      function  TCONTACORRENTE.GetNOTRADUTOR        : iNTEGER;
+      Begin
+      Result := Self.FNOTRADUTOR;
+      End;
+      function  TCONTACORRENTE.GetSQNOSSONUMERO     : Integer;
+      Begin
+      Result := Self.FSQNOSSONUMERO;
+      End;
+      function  TCONTACORRENTE.GetSNNOSSONUMAUTO    : String;
+      Begin
+      Result := Self.FSNNOSSONUMAUTO;
+      End;
+      function  TCONTACORRENTE.GetSQCHEQUES         : double;
+      Begin
+      Result := Self.FSQCHEQUES;
+      End;
+      function  TCONTACORRENTE.GetSQREMESSA         : string;
+      Begin
+      Result := Self.FSQREMESSA;
+      End;
+      function  TCONTACORRENTE.GetNOCONVENIO        : string;
+      Begin
+      Result := Self.FNOCONVENIO;
+      End;
+      function  TCONTACORRENTE.GetVLSALDO           : Double;
+      Begin
+      Result := Self.FVLSALDO;
+      End;
+      function  TCONTACORRENTE.GetCDHISTORICO       : string;
+      Begin
+      Result := Self.FCDHISTORICO;
+      End;
+      function  TCONTACORRENTE.GetCARTEIRA          : String;
+      Begin
+      Result := Self.FCARTEIRA;
+      End;
+      function  TCONTACORRENTE.GetSTATUS            : String;
+      Begin
+      Result := Self.FSTATUS;
+      End;
+
+
+
+      procedure  TCONTACORRENTE.SetNOBANCO           (Value : Integer);
+      Begin
+        Self.FNOBANCO := Value;
+      End;
+      procedure  TCONTACORRENTE.SetCDAGENCIA         (Value : string);
+      Begin
+        Self.FCDAGENCIA := Value;
+      End;
+      procedure  TCONTACORRENTE.SetNOCONTA           (Value : Integer);
+      Begin
+        Self.FNOCONTA := Value;
+      End;
+      procedure  TCONTACORRENTE.SetNMBANCO           (Value : string);
+      Begin
+        Self.FNMBANCO := Value;
+      End;
+      procedure  TCONTACORRENTE.SetNMAGENCIA         (Value : string);
+      Begin
+        Self.FNMAGENCIA := Value;
+      End;
+      procedure  TCONTACORRENTE.SetNOCOMPENSACAO     (Value : Integer);
+      Begin
+        Self.FNOCOMPENSACAO := Value;
+      End;
+      procedure  TCONTACORRENTE.SetDTSALDO           (Value : TDateTime);
+      Begin
+        Self.FDTSALDO := Value;
+      End;
+      procedure  TCONTACORRENTE.SetDSGRUPO           (Value : string);
+      Begin
+        Self.FDSGRUPO := Value;
+      End;
+      procedure  TCONTACORRENTE.SetCDEMPRESA         (Value : Integer);
+      Begin
+        Self.FCDEMPRESA := Value;
+      End;
+      procedure  TCONTACORRENTE.SetCDFILIAL          (Value : Integer);
+      Begin
+        Self.FCDFILIAL := Value;
+      End;
+      procedure  TCONTACORRENTE.SetCDCONTACORRENTE   (Value : Integer);
+      Begin
+        Self.FCDCONTACORRENTE := Value;
+      End;
+      procedure  TCONTACORRENTE.SetNOTRADUTOR        (Value : string);
+      Begin
+        Self.FNOTRADUTOR := Value;
+      End;
+      procedure  TCONTACORRENTE.SetSQNOSSONUMERO     (Value : Integer);
+      Begin
+        Self.FSQNOSSONUMERO := Value;
+      End;
+      procedure  TCONTACORRENTE.SetSNNOSSONUMAUTO    (Value : Integer);
+      Begin
+        Self.FSNNOSSONUMAUTO  := Value;
+      End;
+      procedure  TCONTACORRENTE.SetSQCHEQUES         (Value : double);
+      Begin
+        Self.FSQCHEQUES := Value;
+      End;
+      procedure  TCONTACORRENTE.SetSQREMESSA         (Value : string);
+      Begin
+        Self.FSQREMESSA := Value;
+      End;
+      procedure  TCONTACORRENTE.SetNOCONVENIO        (Value : string);
+      Begin
+        Self.FNOCONVENIO := Value;
+      End;
+      procedure  TCONTACORRENTE.SetVLSALDO           (Value : double);
+      Begin
+        Self.FVLSALDO := Value;
+      End;
+      procedure  TCONTACORRENTE.SetCDHISTORICO       (Value : string);
+      Begin
+        Self.FCDHISTORICO := Value;
+      End;
+      procedure  TCONTACORRENTE.SetCARTEIRA          (Value : string);
+      Begin
+        Self.FCARTEIRA := Value;
+      End;
+      procedure  TCONTACORRENTE.SetSTATUS            (Value : string);
+      Begin
+        Self.FSTATUS := Value;
+      End;
+
+end.
+{
+
+
+}

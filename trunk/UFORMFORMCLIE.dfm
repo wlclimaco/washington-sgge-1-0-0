@@ -1,0 +1,679 @@
+inherited Form3: TForm3
+  Left = 71
+  Top = 147
+  Width = 986
+  Height = 659
+  Caption = '........CADASTRO FORNECEDOR/CLIENTE............'
+  OldCreateOrder = True
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Width = 978
+    inherited ActResultEdit1: TActResultEdit
+      Left = 208
+      EditLabel.Width = 125
+      EditLabel.Caption = 'FORNECEDOR/CLIENTE'
+    end
+  end
+  inherited Panel2: TPanel
+    Left = 834
+    Height = 568
+    inherited DBNavigator1: TDBNavigator
+      Hints.Strings = ()
+    end
+  end
+  inherited ScrollBox1: TScrollBox
+    Width = 834
+    Height = 568
+    VertScrollBar.Position = 3
+    object GroupBox1: TGroupBox
+      Left = 16
+      Top = 77
+      Width = 785
+      Height = 41
+      TabOrder = 0
+      object TXTRAZAO: TActEdit
+        Left = 104
+        Top = 9
+        Width = 281
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 78
+        EditLabel.Height = 13
+        EditLabel.Caption = 'RAZ'#195'O SOCIAL'
+        TabOrder = 0
+      end
+      object TXTFANTASIA: TActEdit
+        Left = 456
+        Top = 9
+        Width = 321
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 52
+        EditLabel.Height = 13
+        EditLabel.Caption = 'FANTASIA'
+        TabOrder = 1
+      end
+    end
+    object GroupBox2: TGroupBox
+      Left = 16
+      Top = 125
+      Width = 297
+      Height = 348
+      Caption = 'TIPO FORNECEDOR/CLIENTE'
+      TabOrder = 1
+      object Label1: TLabel
+        Left = 160
+        Top = 272
+        Width = 25
+        Height = 13
+        Caption = 'DIAS'
+        Visible = False
+      end
+      object CBFORNECEDOR: TCheckBox
+        Left = 32
+        Top = 24
+        Width = 97
+        Height = 17
+        Caption = 'FORNECEDOR'
+        TabOrder = 0
+      end
+      object CDbLIENTE: TCheckBox
+        Left = 32
+        Top = 56
+        Width = 97
+        Height = 17
+        Caption = 'CLIENTE'
+        TabOrder = 1
+      end
+      object CBFISICA: TCheckBox
+        Left = 32
+        Top = 88
+        Width = 97
+        Height = 17
+        Caption = 'FISICA'
+        TabOrder = 2
+      end
+      object CBJURIDICA: TCheckBox
+        Left = 32
+        Top = 120
+        Width = 97
+        Height = 17
+        Caption = 'JURIDICA'
+        TabOrder = 3
+      end
+      object CBOUTRA: TCheckBox
+        Left = 32
+        Top = 152
+        Width = 97
+        Height = 17
+        Caption = 'OUTRAS'
+        TabOrder = 4
+      end
+      object TXTCNPJ: TActMaskEdit
+        Left = 96
+        Top = 176
+        Width = 185
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 52
+        EditLabel.Height = 13
+        EditLabel.Caption = 'CPF/CNPJ'
+        TabOrder = 5
+      end
+      object CBAGROPtRANS: TCheckBox
+        Left = 32
+        Top = 208
+        Width = 97
+        Height = 17
+        Caption = 'AGROP/TRANSP'
+        TabOrder = 6
+      end
+      object ActButton1: TActButton
+        Left = 152
+        Top = 312
+        Width = 137
+        Height = 25
+        Caption = 'REGIME TRIBUTARIO'
+        TabOrder = 7
+        ResourceID = 0
+      end
+      object CDREPRESENTANTE: TCheckBox
+        Left = 32
+        Top = 232
+        Width = 129
+        Height = 17
+        Caption = 'REPRESENTANTE'
+        TabOrder = 8
+        OnClick = CDREPRESENTANTEClick
+      end
+      object TXTINERVALO: TActEdit
+        Left = 104
+        Top = 265
+        Width = 49
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 61
+        EditLabel.Height = 13
+        EditLabel.Caption = 'INTERVALO'
+        TabOrder = 9
+        Visible = False
+      end
+    end
+    object GroupBox3: TGroupBox
+      Left = 328
+      Top = 125
+      Width = 473
+      Height = 292
+      Caption = 'DADOS CONTABEIS'
+      TabOrder = 2
+      object TXTBANCO: TActEdit
+        Left = 152
+        Top = 17
+        Width = 233
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 37
+        EditLabel.Height = 13
+        EditLabel.Caption = 'BANCO'
+        TabOrder = 0
+      end
+      object TXTCONTA: TActEdit
+        Left = 152
+        Top = 43
+        Width = 233
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 37
+        EditLabel.Height = 13
+        EditLabel.Caption = 'CONTA'
+        TabOrder = 1
+      end
+      object CheckBox7: TCheckBox
+        Left = 24
+        Top = 112
+        Width = 193
+        Height = 17
+        Caption = 'CONTA IMP NO REG ENTRADA'
+        TabOrder = 3
+      end
+      object CheckBox8: TCheckBox
+        Left = 224
+        Top = 112
+        Width = 193
+        Height = 17
+        Caption = 'CONTA IMP NO REG SAIDA'
+        TabOrder = 4
+      end
+      object TXTIE: TActMaskEdit
+        Left = 152
+        Top = 136
+        Width = 185
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 118
+        EditLabel.Height = 13
+        EditLabel.Caption = 'INSCRI'#199#195'O ESTADUAL'
+        TabOrder = 5
+      end
+      object TXTUF: TActEdit
+        Left = 152
+        Top = 169
+        Width = 33
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 14
+        EditLabel.Height = 13
+        EditLabel.Caption = 'UF'
+        TabOrder = 6
+      end
+      object TXTCOD_PAIS: TActEdit
+        Left = 344
+        Top = 201
+        Width = 41
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 50
+        EditLabel.Height = 13
+        EditLabel.Caption = 'COD PAIS'
+        TabOrder = 7
+      end
+      object TXTSERIE: TActEdit
+        Left = 152
+        Top = 201
+        Width = 41
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 49
+        EditLabel.Height = 13
+        EditLabel.Caption = 'SERIE NF'
+        TabOrder = 8
+      end
+      object TXTMODELONF: TActEdit
+        Left = 344
+        Top = 233
+        Width = 41
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 63
+        EditLabel.Height = 13
+        EditLabel.Caption = 'MODELO NF'
+        TabOrder = 9
+      end
+      object TXTCODIGOMUNICIPAL: TActEdit
+        Left = 152
+        Top = 233
+        Width = 89
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 101
+        EditLabel.Height = 13
+        EditLabel.Caption = 'CODIGO MUNICIPIO'
+        TabOrder = 10
+      end
+      object TXTAGENCIA: TActEdit
+        Left = 152
+        Top = 73
+        Width = 233
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 47
+        EditLabel.Height = 13
+        EditLabel.Caption = 'AGENCIA'
+        TabOrder = 2
+      end
+    end
+    object GroupBox4: TGroupBox
+      Left = 328
+      Top = 421
+      Width = 473
+      Height = 41
+      Caption = 'RETEN'#199#195'O ESTABELECIMENTO RESPONSAVEL'
+      TabOrder = 3
+      object TXTTIPO: TActEdit
+        Left = 88
+        Top = 16
+        Width = 33
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 25
+        EditLabel.Height = 13
+        EditLabel.Caption = 'TIPO'
+        TabOrder = 0
+      end
+    end
+    object GroupBox5: TGroupBox
+      Left = 16
+      Top = 501
+      Width = 785
+      Height = 214
+      TabOrder = 4
+      object TXTIM: TActMaskEdit
+        Left = 144
+        Top = 20
+        Width = 185
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 119
+        EditLabel.Height = 13
+        EditLabel.Caption = 'INSTRI'#199#195'O MUNICIPAL'
+        TabOrder = 0
+      end
+      object TXTSUFRAMA: TActMaskEdit
+        Left = 568
+        Top = 20
+        Width = 185
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 52
+        EditLabel.Height = 13
+        EditLabel.Caption = 'SUFRAMA'
+        TabOrder = 1
+      end
+      object TXTTIPOLOGRADOURO: TActEdit
+        Left = 144
+        Top = 49
+        Width = 105
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 105
+        EditLabel.Height = 13
+        EditLabel.Caption = 'TIPO LOGRADOURO'
+        TabOrder = 2
+      end
+      object TXTLOGRADOURO: TActMaskEdit
+        Left = 360
+        Top = 49
+        Width = 265
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 77
+        EditLabel.Height = 13
+        EditLabel.Caption = 'LOGRADOURO'
+        TabOrder = 3
+      end
+      object TXTBAIRRO: TActEdit
+        Left = 144
+        Top = 81
+        Width = 217
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 41
+        EditLabel.Height = 13
+        EditLabel.Caption = 'BAIRRO'
+        TabOrder = 4
+      end
+      object TXTCEP: TActMaskEdit
+        Left = 568
+        Top = 82
+        Width = 185
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 21
+        EditLabel.Height = 13
+        EditLabel.Caption = 'CEP'
+        TabOrder = 6
+      end
+      object TXTTELEFONE: TActMaskEdit
+        Left = 144
+        Top = 106
+        Width = 137
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 56
+        EditLabel.Height = 13
+        EditLabel.Caption = 'TELEFONE'
+        TabOrder = 7
+      end
+      object TXTCONTATO: TActEdit
+        Left = 352
+        Top = 105
+        Width = 169
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 52
+        EditLabel.Height = 13
+        EditLabel.Caption = 'CONTATO'
+        TabOrder = 8
+      end
+      object TXTTELCONTATO: TActMaskEdit
+        Left = 616
+        Top = 106
+        Width = 137
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 75
+        EditLabel.Height = 13
+        EditLabel.Caption = 'TEL CONTATO'
+        TabOrder = 9
+      end
+      object TXTEMAIL: TActEdit
+        Left = 144
+        Top = 137
+        Width = 273
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 32
+        EditLabel.Height = 13
+        EditLabel.Caption = 'EMAIL'
+        TabOrder = 10
+      end
+      object TXTEMAILNFe: TActEdit
+        Left = 496
+        Top = 137
+        Width = 257
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 55
+        EditLabel.Height = 13
+        EditLabel.Caption = 'EMAIL NFe'
+        TabOrder = 11
+      end
+      object TXTALVARA: TActMaskEdit
+        Left = 144
+        Top = 164
+        Width = 185
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 57
+        EditLabel.Height = 13
+        EditLabel.Caption = 'N'#186' ALVAR'#193
+        TabOrder = 12
+      end
+      object txtnum: TActMaskEdit
+        Left = 680
+        Top = 49
+        Width = 73
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 12
+        EditLabel.Height = 13
+        EditLabel.Caption = 'N'#186
+        TabOrder = 13
+      end
+      object TXTFAX: TActMaskEdit
+        Left = 400
+        Top = 82
+        Width = 129
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 20
+        EditLabel.Height = 13
+        EditLabel.Caption = 'FAX'
+        TabOrder = 5
+      end
+      object TXTSITE: TActEdit
+        Left = 144
+        Top = 188
+        Width = 609
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 24
+        EditLabel.Height = 13
+        EditLabel.Caption = 'SITE'
+        TabOrder = 14
+      end
+    end
+    object GroupBox6: TGroupBox
+      Left = 16
+      Top = 5
+      Width = 787
+      Height = 65
+      TabOrder = 5
+      object TXTEMPRESA: TActResultEdit
+        Left = 144
+        Top = 10
+        Width = 81
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 52
+        EditLabel.Height = 13
+        EditLabel.Caption = 'EMPRESA'
+        TabOrder = 0
+        Value = 0
+        Glyph.Data = {
+          9A020000424D9A0200000000000036000000280000000C000000110000000100
+          1800000000006402000000000000000000000000000000000000FFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000
+          000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000
+          00000000FFFFFF000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00
+          0000000000FFFFFFFFFFFFFFFFFF000000000000FFFFFFFFFFFFFFFFFFFFFFFF
+          000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000000000FFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000000000000000FFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000000000FFFFFF00
+          0000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000000000FFFFFF
+          FFFFFFFFFFFF000000000000FFFFFFFFFFFFFFFFFFFFFFFF000000000000FFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFF000000000000FFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+        NumGlyphs = 1
+      end
+      object TXTFILIAL: TActResultEdit
+        Left = 144
+        Top = 34
+        Width = 81
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 31
+        EditLabel.Height = 13
+        EditLabel.Caption = 'FILIAL'
+        TabOrder = 1
+        Value = 0
+        Glyph.Data = {
+          9A020000424D9A0200000000000036000000280000000C000000110000000100
+          1800000000006402000000000000000000000000000000000000FFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000
+          000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000
+          00000000FFFFFF000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00
+          0000000000FFFFFFFFFFFFFFFFFF000000000000FFFFFFFFFFFFFFFFFFFFFFFF
+          000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000000000FFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000000000000000FFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000000000FFFFFF00
+          0000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000000000FFFFFF
+          FFFFFFFFFFFF000000000000FFFFFFFFFFFFFFFFFFFFFFFF000000000000FFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFF000000000000FFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+        NumGlyphs = 1
+      end
+    end
+    object GroupBox7: TGroupBox
+      Left = 16
+      Top = 717
+      Width = 785
+      Height = 41
+      Caption = 'REPRESENTANTE'
+      TabOrder = 6
+      object TXTCODREPR: TActResultEdit
+        Left = 184
+        Top = 16
+        Width = 209
+        Height = 21
+        Alignment = taLeftJustify
+        ColorOnFocus = 16311512
+        ColorOnNotFocus = clWindow
+        EditLabel.Width = 140
+        EditLabel.Height = 13
+        EditLabel.Caption = 'C'#211'DIGO REPRESENTANTE'
+        TabOrder = 0
+        Value = 0
+        Glyph.Data = {
+          9A020000424D9A0200000000000036000000280000000C000000110000000100
+          1800000000006402000000000000000000000000000000000000FFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000
+          000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000
+          00000000FFFFFF000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00
+          0000000000FFFFFFFFFFFFFFFFFF000000000000FFFFFFFFFFFFFFFFFFFFFFFF
+          000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000000000FFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000000000000000FFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000000000FFFFFF00
+          0000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000000000FFFFFF
+          FFFFFFFFFFFF000000000000FFFFFFFFFFFFFFFFFFFFFFFF000000000000FFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFF000000000000FFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+        NumGlyphs = 1
+      end
+    end
+  end
+  object IBQuery1: TIBQuery
+    Database = DataModule1.DBPrincipal
+    Transaction = DataModule1.IBTransaction1
+    BufferChunks = 1000
+    CachedUpdates = False
+    Left = 650
+    Top = 21
+  end
+  object IBQuery2: TIBQuery
+    Database = DataModule1.DBPrincipal
+    Transaction = DataModule1.IBTransaction1
+    BufferChunks = 1000
+    CachedUpdates = False
+    Left = 555
+    Top = 26
+  end
+end

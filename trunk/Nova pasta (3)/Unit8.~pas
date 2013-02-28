@@ -1,0 +1,42 @@
+unit Unit8;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, IBCustomDataSet, IBUpdateSQL, IBQuery, StdCtrls, Buttons,
+  U_DBBButton, Grids, DBGrids, ExtCtrls, ActCustomEdit, ActMask,
+  ActDateEdit;
+
+type
+  TForm8 = class(TForm)
+    Panel1: TPanel;
+    TXTDATA: TActDateEdit;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    DBGrid1: TDBGrid;
+    DBButton1: TDBButton;
+    DBButton2: TDBButton;
+    DBButton3: TDBButton;
+    DBButton4: TDBButton;
+    DBButton5: TDBButton;
+    IBQuery1: TIBQuery;
+    IBUpdateSQL1: TIBUpdateSQL;
+    DataSource1: TDataSource;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form8: TForm8;
+
+implementation
+
+uses Unit1;
+
+{$R *.dfm}
+
+end.
