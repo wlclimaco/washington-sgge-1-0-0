@@ -1,0 +1,37 @@
+unit UConsIndForne;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, IBCustomDataSet, IBQuery, Grids, DBGrids, ExtCtrls;
+
+type
+  TForm17 = class(TForm)
+    Panel1: TPanel;
+    DBGRID1: TDBGrid;
+    IBQuery1: TIBQuery;
+    DataSource1: TDataSource;
+    procedure DBGRID1DblClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form17: TForm17;
+
+implementation
+
+uses Unit10;
+
+{$R *.dfm}
+
+procedure TForm17.DBGRID1DblClick(Sender: TObject);
+begin
+Form10.TXTIND_FORN.Text :=  IntToStr(dbGrid1.Fields[0].AsInteger);
+Form17.Close();
+end;
+
+end.

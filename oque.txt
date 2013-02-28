@@ -1,0 +1,15 @@
+-->  Fornecedor/cliente/representante/vendedoras 
+-->  conta corrente
+-->  produtos {inserir (marca derivaçao)}
+-->  natureza
+-->  cfop
+-->  pedido/aprovação
+-->  nota entrada
+-->  titulos pagar /baixa     {fazer movimentação conta corrente }
+-->  titulos receber /baixa   {fazer movimentação conta corrente }
+-->  Lança caixa              {fazer movimentação conta corrente }
+-->  Lança vendas vendedoras
+-->  Importa Sintegra
+-->  Lançar saida sem nota
+-->  gerar sintegra
+-->  gerar etiquetas

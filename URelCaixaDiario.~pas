@@ -1,0 +1,44 @@
+unit URelCaixaDiario;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Buttons, DB, IBCustomDataSet, IBQuery, StdCtrls, Mask, ExtCtrls;
+
+type
+  TRelMovDiario = class(TForm)
+    Panel1: TPanel;
+    MaskEdit1: TMaskEdit;
+    MaskEdit2: TMaskEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    IBQuery1: TIBQuery;
+    SpeedButton1: TSpeedButton;
+    DataSource1: TDataSource;
+    procedure SpeedButton1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  RelMovDiario: TRelMovDiario;
+
+implementation
+
+uses URelCaixaDiario1;
+
+{$R *.dfm}
+
+procedure TRelMovDiario.SpeedButton1Click(Sender: TObject);
+begin
+IBQuery1.Active := false;
+IBQuery1.ParamByName('DTINICIAL').AsDate := StrToDate(MaskEdit1.Text);
+IBQuery1.ParamByName('DTFINAL').AsDate :=   StrToDate(MaskEdit2.Text);
+IBQuery1.Active := true;
+form3.RLReport1.Preview();
+end;
+
+end.

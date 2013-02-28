@@ -1,0 +1,704 @@
+unit Unit100;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ActNumberEdit, ActResultEdit, ActCurrencyEdit, StdCtrls,
+  ExtCtrls, ActCustomEdit, ActMask, ActDateEdit, Grids, DBGrids, Buttons,
+  DB, IBCustomDataSet, IBQuery, IBDatabase, IBUpdateSQL, XPInformationPanel,
+  DBCtrls, ActButton, ActLabel, CellEditors, Menus;
+
+type
+  TFrmCadMovD = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    SpeedButton3: TSpeedButton;
+    SpeedButton4: TSpeedButton;
+    ScrollBox1: TScrollBox;
+    TXTDINHEIRO: TActCurrencyEdit;
+    TXTPROMISSORIA: TActResultEdit;
+    TXTCREDITO: TActCurrencyEdit;
+    TXTTOTAL: TActCurrencyEdit;
+    IBQuery1: TIBQuery;
+    DataSource1: TDataSource;
+    QryMovDia: TIBQuery;
+    IBUpdateSQL1: TIBUpdateSQL;
+    QryTiTUlos: TIBQuery;
+    IBUpdateSQL2: TIBUpdateSQL;
+    TXTEMPRESA: TActResultEdit;
+    TXTFILIAL: TActResultEdit;
+    ActResultEdit1: TActResultEdit;
+    SpeedButton2: TSpeedButton;
+    IBQuery2: TIBQuery;
+    IBQuery3: TIBQuery;
+    IBQuery4: TIBQuery;
+    IBQuery5: TIBQuery;
+    QryTiTUlosDCNUMERO: TIntegerField;
+    QryTiTUlosDCSERIE: TIBStringField;
+    QryTiTUlosDCORDEM: TIBStringField;
+    QryTiTUlosDCTIPO: TIBStringField;
+    QryTiTUlosPARCELA: TFloatField;
+    QryTiTUlosDTVENCIMENTO: TDateField;
+    QryTiTUlosDTLANCAMENTO: TDateField;
+    QryTiTUlosSTATUS: TIBStringField;
+    QryTiTUlosTPSITUACAO: TIBStringField;
+    QryTiTUlosVLPARCELA: TFloatField;
+    QryTiTUlosFORNECEDOR: TFloatField;
+    QryTiTUlosOBS: TIBStringField;
+    QryTiTUlosDATAPAGAMENTO: TDateField;
+    QryTiTUlosTIPO_TITULO: TIntegerField;
+    QryTiTUlosCOD_EMPRESA: TIntegerField;
+    QryTiTUlosCOD_FILIAL: TIntegerField;
+    QryTiTUlosCOD_CONTA: TIntegerField;
+    QryTiTUlosCOD_TITULO: TIntegerField;
+    QryTiTUlosVALORPAGO: TFloatField;
+    QryTiTUlosOPER_TITULO: TIBStringField;
+    QryTiTUlosID_MOV_DIARIO: TIntegerField;
+    QryTiTUlosNOCHEQUE: TIBStringField;
+    QryTiTUlosDESCONTO: TFloatField;
+    QryTiTUlosJUROS: TFloatField;
+    QryTiTUlosDATA_APROV_PAG: TDateTimeField;
+    QryTiTUlosRESP_APROV_PAG: TIntegerField;
+    QryTiTUlosDATA_PAG: TDateTimeField;
+    QryTiTUlosRESP_PAG: TIntegerField;
+    QryTiTUlosOPCAO: TIntegerField;
+    IBQuery3DCNUMERO: TIntegerField;
+    IBQuery3DCSERIE: TIBStringField;
+    IBQuery3DCORDEM: TIBStringField;
+    IBQuery3DCTIPO: TIBStringField;
+    IBQuery3PARCELA: TFloatField;
+    IBQuery3DTVENCIMENTO: TDateField;
+    IBQuery3DTLANCAMENTO: TDateField;
+    IBQuery3STATUS: TIBStringField;
+    IBQuery3TPSITUACAO: TIBStringField;
+    IBQuery3VLPARCELA: TFloatField;
+    IBQuery3FORNECEDOR: TFloatField;
+    IBQuery3OBS: TIBStringField;
+    IBQuery3DATAPAGAMENTO: TDateField;
+    IBQuery3TIPO_TITULO: TIntegerField;
+    IBQuery3COD_EMPRESA: TIntegerField;
+    IBQuery3COD_FILIAL: TIntegerField;
+    IBQuery3COD_CONTA: TIntegerField;
+    IBQuery3COD_TITULO: TIntegerField;
+    IBQuery3VALORPAGO: TFloatField;
+    IBQuery3OPER_TITULO: TIBStringField;
+    IBQuery3ID_MOV_DIARIO: TIntegerField;
+    IBQuery3NOCHEQUE: TIBStringField;
+    IBQuery3DESCONTO: TFloatField;
+    IBQuery3JUROS: TFloatField;
+    IBQuery3DATA_APROV_PAG: TDateTimeField;
+    IBQuery3RESP_APROV_PAG: TIntegerField;
+    IBQuery3DATA_PAG: TDateTimeField;
+    IBQuery3RESP_PAG: TIntegerField;
+    IBQuery3OPCAO: TIntegerField;
+    IBQuery4DCNUMERO: TIntegerField;
+    IBQuery4DCSERIE: TIBStringField;
+    IBQuery4DCORDEM: TIBStringField;
+    IBQuery4DCTIPO: TIBStringField;
+    IBQuery4PARCELA: TFloatField;
+    IBQuery4DTVENCIMENTO: TDateField;
+    IBQuery4DTLANCAMENTO: TDateField;
+    IBQuery4STATUS: TIBStringField;
+    IBQuery4TPSITUACAO: TIBStringField;
+    IBQuery4VLPARCELA: TFloatField;
+    IBQuery4FORNECEDOR: TFloatField;
+    IBQuery4OBS: TIBStringField;
+    IBQuery4DATAPAGAMENTO: TDateField;
+    IBQuery4TIPO_TITULO: TIntegerField;
+    IBQuery4COD_EMPRESA: TIntegerField;
+    IBQuery4COD_FILIAL: TIntegerField;
+    IBQuery4COD_CONTA: TIntegerField;
+    IBQuery4COD_TITULO: TIntegerField;
+    IBQuery4VALORPAGO: TFloatField;
+    IBQuery4OPER_TITULO: TIBStringField;
+    IBQuery4ID_MOV_DIARIO: TIntegerField;
+    IBQuery4NOCHEQUE: TIBStringField;
+    IBQuery4DESCONTO: TFloatField;
+    IBQuery4JUROS: TFloatField;
+    IBQuery4DATA_APROV_PAG: TDateTimeField;
+    IBQuery4RESP_APROV_PAG: TIntegerField;
+    IBQuery4DATA_PAG: TDateTimeField;
+    IBQuery4RESP_PAG: TIntegerField;
+    IBQuery4OPCAO: TIntegerField;
+    IBQuery5DCNUMERO: TIntegerField;
+    IBQuery5DCSERIE: TIBStringField;
+    IBQuery5DCORDEM: TIBStringField;
+    IBQuery5DCTIPO: TIBStringField;
+    IBQuery5PARCELA: TFloatField;
+    IBQuery5DTVENCIMENTO: TDateField;
+    IBQuery5DTLANCAMENTO: TDateField;
+    IBQuery5STATUS: TIBStringField;
+    IBQuery5TPSITUACAO: TIBStringField;
+    IBQuery5VLPARCELA: TFloatField;
+    IBQuery5FORNECEDOR: TFloatField;
+    IBQuery5OBS: TIBStringField;
+    IBQuery5DATAPAGAMENTO: TDateField;
+    IBQuery5TIPO_TITULO: TIntegerField;
+    IBQuery5COD_EMPRESA: TIntegerField;
+    IBQuery5COD_FILIAL: TIntegerField;
+    IBQuery5COD_CONTA: TIntegerField;
+    IBQuery5COD_TITULO: TIntegerField;
+    IBQuery5VALORPAGO: TFloatField;
+    IBQuery5OPER_TITULO: TIBStringField;
+    IBQuery5ID_MOV_DIARIO: TIntegerField;
+    IBQuery5NOCHEQUE: TIBStringField;
+    IBQuery5DESCONTO: TFloatField;
+    IBQuery5JUROS: TFloatField;
+    IBQuery5DATA_APROV_PAG: TDateTimeField;
+    IBQuery5RESP_APROV_PAG: TIntegerField;
+    IBQuery5DATA_PAG: TDateTimeField;
+    IBQuery5RESP_PAG: TIntegerField;
+    IBQuery5OPCAO: TIntegerField;
+    txtcheque: TActCurrencyEdit;
+    IBQuery6: TIBQuery;
+    IBQuery7: TIBQuery;
+    IBQuery8: TIBQuery;
+    txtdata: TDatePickerEditor;
+    Label1: TLabel;
+    GroupBox1: TGroupBox;
+    DBGrid1: TDBGrid;
+    ActCurrencyEdit1: TActCurrencyEdit;
+    ActLabel1: TActLabel;
+    ActButton1: TActButton;
+    IBQuery9: TIBQuery;
+    DataSource2: TDataSource;
+    DBComboBox1: TDBComboBox;
+    ScrollBox2: TScrollBox;
+    Label2: TLabel;
+    ActCurrencyEdit2: TActCurrencyEdit;
+    ActCurrencyEdit3: TActCurrencyEdit;
+    ActCurrencyEdit4: TActCurrencyEdit;
+    ActResultEdit3: TActResultEdit;
+    ActResultEdit4: TActResultEdit;
+    ActCurrencyEdit5: TActCurrencyEdit;
+    DatePickerEditor1: TDatePickerEditor;
+    GroupBox2: TGroupBox;
+    ActLabel2: TActLabel;
+    DBGrid2: TDBGrid;
+    VrVendedoras: TActCurrencyEdit;
+    ActButton2: TActButton;
+    DataSource3: TDataSource;
+    IBQuery10: TIBQuery;
+    IBQuery11: TIBQuery;
+    DBLookupComboBox1: TDBLookupComboBox;
+    ActCurrencyEdit6: TActCurrencyEdit;
+    PopupMenu1: TPopupMenu;
+    Excluir1: TMenuItem;
+    IBQuery12: TIBQuery;
+    procedure TXTDATAExit(Sender: TObject);
+    procedure TXTCHEQUEButtonClick(Sender: TObject);
+    procedure TXTPROMISSORIAButtonClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure TXTCHEQUEExit(Sender: TObject);
+    procedure TXTPROMISSORIAExit(Sender: TObject);
+    procedure TXTCREDITOExit(Sender: TObject);
+    procedure SpeedButton4Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure SpeedButton7Click(Sender: TObject);
+    procedure SpeedButton8Click(Sender: TObject);
+    procedure SpeedButton5Click(Sender: TObject);
+    procedure SpeedButton6Click(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure ActResultEdit1ButtonClick(Sender: TObject);
+    procedure ActResultEdit1Exit(Sender: TObject);
+    procedure DatePickerEditor1Exit(Sender: TObject);
+    procedure ActButton2Click(Sender: TObject);
+    procedure ActCurrencyEdit2Exit(Sender: TObject);
+    procedure ActCurrencyEdit5Exit(Sender: TObject);
+    procedure ActCurrencyEdit6Exit(Sender: TObject);
+    procedure Excluir1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    function  ajustaVirgula(const frase : String): String;
+    function GravarALMENTOConta(CONST VALOR :DOUBLE;CONTA :INTEGER ):Boolean;
+    FUNCTION POPULATXT():BOOLEAN;
+//    FUNCTION POPULABANCO():BOOLEAN;
+    FUNCTION SELECTINICIAL():BOOLEAN;
+    function Primeiro():Boolean;
+    function Proximo():Boolean;
+    function Anterior():Boolean;
+    function Ultimo():Boolean;
+  end;
+
+var
+  FrmCadMovD: TFrmCadMovD;
+  SOMA : double;
+
+implementation
+
+uses  Unit400  , Unit500, Unit600, Unit700, Unit800, UFrmEmpresa, UMenu,
+  UFormCadCCorrente, Unit8, Unit1, UBuscarMovDia;
+
+{$R *.dfm}
+
+function TFrmCadMovD.Primeiro():Boolean;
+    begin
+      QryMovDia.First;
+    end;
+    function TFrmCadMovD.Proximo():Boolean;
+    begin
+       QryMovDia.Next;
+    end;
+    function TFrmCadMovD.Anterior():Boolean;
+    begin
+       QryMovDia.Prior;
+    end;
+    function TFrmCadMovD.Ultimo():Boolean;
+    begin
+       QryMovDia.Last;
+    end;
+
+
+FUNCTION TFrmCadMovD.SELECTINICIAL():BOOLEAN;
+BEGIN
+QryMovDia.SQL.Clear;
+QryMovDia.Active := fALSE;
+QryMovDia.SQL.Add('SELECT *FROM movimentodiario where status = ''A'' ORDER BY DATAmovimento');
+QryMovDia.Active := TRUE;
+end;
+
+FUNCTION TFrmCadMovD.POPULATXT():BOOLEAN;
+BEGIN
+ActResultEdit1.Text :=  IntToStr(QryMovDia.FieldByName('ID').AsInteger) ;
+TXTEMPRESA.Text :=      IntToStr(QryMovDia.FieldByName('COD_EMPRESA').AsInteger) ;
+TXTFILIAL.Text  :=      IntToStr(QryMovDia.FieldByName('COD_FILIAL').AsInteger);
+DatePickerEditor1.text    :=      DateToStr(QryMovDia.FieldByName('DATAMOVIMENTO').AsDateTime );
+TXTTOTAL.Text   :=      FloatToStr(QryMovDia.FieldByName('TOTAL').AsFloat);
+TXTDINHEIRO.Text:=      FloatToStr(QryMovDia.FieldByName('DINHEIRO').AsFloat);
+TXTCHEQUE.Text  :=      FloatToStr(QryMovDia.FieldByName('CHEQUE').AsFloat) ;
+TXTCREDITO.Text :=      FloatToStr(QryMovDia.FieldByName('CARTAO_CREDITO').AsFloat);
+TXTPROMISSORIA.Text  :=      FloatToStr(QryMovDia.FieldByName('PROMISSORIA').AsFloat);
+
+end;
+
+ function TFrmCadMovD.GravarALMENTOConta(CONST VALOR :DOUBLE;CONTA :INTEGER ):Boolean;
+ begin
+   FrmCadTitulos.QryContaCorrente.Active := False;
+   FrmCadTitulos.QryContaCorrente.SQL.Clear;
+   FrmCadTitulos.QryContaCorrente.SQL.Add('update contacorrente set vlsaldo = vlsaldo +'+FloatToStr(VALOR)+' where cdcontacorrente = '+IntToStr(CONTA)+'' );
+   FrmCadTitulos.QryContaCorrente.ExecSQL;
+   FrmCadTitulos.QryContaCorrente.Transaction.Commit;
+ end;
+function  TFrmCadMovD.ajustaVirgula(const frase : String): String;
+  var x: integer;
+     teste : string;
+
+        const
+   cP='.';
+   cVa='';
+   cVi=',';
+
+   begin
+   result:=Frase;
+   result:=StringReplace(StringReplace(result,cP,cVa,[rfReplaceAll]),
+   cVi,cP,[rfReplaceAll]);
+    {x:= 0;
+    teste := '';
+    teste := frase;
+    while (x < 10  )do
+    begin
+      if(teste[x] = ',') then
+        teste[x] := '.';
+        x := x + 1;
+    end;
+    Result := teste; }
+
+  end;
+
+procedure TFrmCadMovD.TXTDATAExit(Sender: TObject);
+begin
+ IBQuery1.Active := False;
+ IBQuery1.SQL.Clear;
+ IBQuery1.SQL.Add('Select *from movimentodiario where datamovimento = '''+DateToStr(DatePickerEditor1.Date)+'''');
+ IBQuery1.Active := true;
+ {Form2.IBQuery1.Active := False;
+ Form2.IBQuery1.SQL.Clear;
+ Form2.IBQuery1.SQL.Add('select *from cheques where dtmovimento = '''+TXTDATA.Text+'''');
+ Form2.IBQuery1.Active := True; }
+end;
+
+procedure TFrmCadMovD.TXTCHEQUEButtonClick(Sender: TObject);
+begin
+FrmCadTitulos.Show;
+end;
+
+procedure TFrmCadMovD.TXTPROMISSORIAButtonClick(Sender: TObject);
+begin
+FrmCadTitulos.Show;
+end;
+
+procedure TFrmCadMovD.Button1Click(Sender: TObject);
+begin
+FrmBaixaTitulo.Show;
+end;
+
+procedure TFrmCadMovD.SpeedButton3Click(Sender: TObject);
+begin
+QryMovDia.SQL.Clear;
+QryMovDia.SQL.Add('insert into MOVIMENTODIARIO ');
+QryMovDia.SQL.Add('  (COD_EMPRESA,COD_FILIAL, ID, DATAMOVIMENTO, TOTAL, DINHEIRO, CHEQUE, CARTAO_CREDITO, CARTAO_DEBITO, ');
+QryMovDia.SQL.Add('   PROMISSORIA,status)');
+QryMovDia.SQL.Add('values ');
+QryMovDia.SQL.Add('  (:COD_EMPRESA,:COD_FILIAL,:ID, :DATAMOVIMENTO, :TOTAL, :DINHEIRO, :CHEQUE, :CARTAO_CREDITO, :CARTAO_DEBITO, ');
+QryMovDia.SQL.Add('   :PROMISSORIA,:status )');
+QryMovDia.ParamByName('ID').AsInteger            :=  1;
+QryMovDia.ParamByName('COD_EMPRESA').AsInteger   :=  1;
+QryMovDia.ParamByName('COD_FILIAL').AsInteger     :=  1;
+QryMovDia.ParamByName('DATAMOVIMENTO').AsDate    :=  DatePickerEditor1.Date;
+QryMovDia.ParamByName('TOTAL').AsFloat           :=  StrTofloat(ActCurrencyEdit4.Text);
+if((ActCurrencyEdit2.Text = '')or(ActCurrencyEdit2.Text = ' '))then
+     QryMovDia.ParamByName('DINHEIRO').AsFloat        :=  0
+else
+    QryMovDia.ParamByName('DINHEIRO').AsFloat        :=  StrToFloat(ActCurrencyEdit2.Text);
+if((ActCurrencyEdit5.Text = '')or(ActCurrencyEdit5.Text = ' '))then
+     QryMovDia.ParamByName('cheque').AsFloat        :=  0
+else
+QryMovDia.ParamByName('CHEQUE').AsFloat          :=  StrToFloat(ActCurrencyEdit5.Text);
+if((ActCurrencyEdit3.Text = '')or(ActCurrencyEdit3.Text = ' '))then
+     QryMovDia.ParamByName('CARTAO_CREDITO').AsFloat        :=  0
+else
+QryMovDia.ParamByName('CARTAO_CREDITO').AsFloat  :=  StrToFloat(ActCurrencyEdit3.Text);
+
+QryMovDia.ParamByName('CARTAO_DEBITO').AsFloat        :=  0  ;
+
+if((ActCurrencyEdit6.Text = '')or(ActCurrencyEdit6.Text = ' '))then
+     QryMovDia.ParamByName('PROMISSORIA').AsFloat        :=  0
+else
+QryMovDia.ParamByName('PROMISSORIA').AsFloat     :=  StrToFloat(ActCurrencyEdit6.Text);
+
+QryMovDia.ParamByName('status').AsString           :=  'A';
+
+ TRY
+  QryMovDia.ExecSQL;
+  QryMovDia.Transaction.Commit;
+
+
+  {if (StrToFloat(TXTDINHEIRO.Text) > 0 )THEN
+    BEGIN
+      QryTiTUlos.SQL.Clear;
+      QryTiTUlos.SQL.Add('  insert into titulospagar2 ');
+      QryTiTUlos.SQL.Add('    (PARCELA, DTVENCIMENTO, DTLANCAMENTO, ');
+      QryTiTUlos.SQL.Add('     STATUS, TPSITUACAO, VLPARCELA,TIPO_TITULO, ');
+      QryTiTUlos.SQL.Add('     COD_EMPRESA, COD_FILIAL,COD_TITULO,COD_CONTA,OPER_TITULO,FORNECEDOR,ID_MOV_DIARIO) ');
+      QryTiTUlos.SQL.Add('  values ');
+      QryTiTUlos.SQL.Add('    (:PARCELA, :DTVENCIMENTO, :DTLANCAMENTO, ');
+      QryTiTUlos.SQL.Add('     :STATUS, :TPSITUACAO, :VLPARCELA, ');
+      QryTiTUlos.SQL.Add('     :TIPO_TITULO, :COD_EMPRESA, :COD_FILIAL, :COD_TITULO,:COD_CONTA,:OPER_TITULO,:FORNECEDOR,:ID_MOV_DIARIO) ');                                             //  FormatDateTime('DD/MM/YYYY',)
+      QryTiTUlos.ParamByName('PARCELA').AsInteger := 1 ;
+      QryTiTUlos.ParamByName('DTVENCIMENTO').AsDate  :=  StrToDate(FormatDateTime('DD/MM/YYYY',StrToDate(TXTDATA.Text)));
+      QryTiTUlos.ParamByName('DTLANCAMENTO').AsDate :=   StrToDate(FormatDateTime('DD/MM/YYYY',StrToDate(TXTDATA.Text)));
+      QryTiTUlos.ParamByName('STATUS').AsString := 'B';
+      QryTiTUlos.ParamByName('TPSITUACAO').AsString := 'F';
+      QryTiTUlos.ParamByName('VLPARCELA').AsFloat := StrToFloat(TXTDINHEIRO.Text);
+      QryTiTUlos.ParamByName('TIPO_TITULO').AsInteger := 4 ;
+      QryTiTUlos.ParamByName('COD_FILIAL').AsInteger := StrToInt(TXTFILIAL.Text);
+      QryTiTUlos.ParamByName('COD_EMPRESA').AsInteger := StrToInt(TXTEMPRESA.Text);
+      QryTiTUlos.ParamByName('COD_TITULO').AsInteger := 1;
+      QryTiTUlos.ParamByName('COD_CONTA').AsInteger := StrToInt(txtcontadin.Text);
+      QryTiTUlos.ParamByName('OPER_TITULO').AsString := 'R';
+      QryTiTUlos.ParamByName('FORNECEDOR').AsInteger := 102;
+      QryTiTUlos.ParamByName('ID_MOV_DIARIO').AsInteger :=  StrToINT(ActResultEdit1.Text);
+      QryTiTUlos.ExecSQL;
+      QryTiTUlos.Transaction.Commit;
+    // GravarALMENTOConta(StrToFloat(DA TXTDINHEIRO.Text),StrToInt(txtcontadin.Text));
+
+    end;
+
+
+
+    if (StrToFloat(TXTDEBITO.Text) > 0 )THEN
+      BEGIN
+        IBQuery3.SQL.Clear;
+        IBQuery3.SQL.Add('  insert into titulospagar2 ');
+        IBQuery3.SQL.Add('    (PARCELA, DTVENCIMENTO, DTLANCAMENTO, ');
+        IBQuery3.SQL.Add('     STATUS, TPSITUACAO, VLPARCELA,TIPO_TITULO, ');
+        IBQuery3.SQL.Add('     COD_EMPRESA, COD_FILIAL,COD_TITULO,COD_CONTA,OPER_TITULO,FORNECEDOR,ID_MOV_DIARIO) ');
+        IBQuery3.SQL.Add('  values ');
+        IBQuery3.SQL.Add('    (:PARCELA, :DTVENCIMENTO, :DTLANCAMENTO, ');
+        IBQuery3.SQL.Add('     :STATUS, :TPSITUACAO, :VLPARCELA, ');
+        IBQuery3.SQL.Add('     :TIPO_TITULO, :COD_EMPRESA, :COD_FILIAL, :COD_TITULO,:COD_CONTA,:OPER_TITULO,:FORNECEDOR,:ID_MOV_DIARIO) ');
+        IBQuery3.ParamByName('PARCELA').AsInteger := 1 ;
+        IBQuery3.ParamByName('DTVENCIMENTO').AsDate  := StrToDate(FormatDateTime('DD/MM/YYYY',StrToDate(TXTDATA.Text)));
+        IBQuery3.ParamByName('DTLANCAMENTO').AsDate :=  StrToDate(FormatDateTime('DD/MM/YYYY',StrToDate(TXTDATA.Text)));
+        IBQuery3.ParamByName('STATUS').AsString := 'B';
+        IBQuery3.ParamByName('TPSITUACAO').AsString := 'F';
+        IBQuery3.ParamByName('VLPARCELA').AsFloat := StrToFloat(TXTDEBITO.Text);
+        IBQuery3.ParamByName('TIPO_TITULO').AsInteger := 5 ;
+        IBQuery3.ParamByName('COD_FILIAL').AsInteger := StrToInt(TXTFILIAL.Text);
+        IBQuery3.ParamByName('COD_EMPRESA').AsInteger := StrToInt(TXTEMPRESA.Text);
+        IBQuery3.ParamByName('COD_TITULO').AsInteger := 1;
+        IBQuery3.ParamByName('COD_CONTA').AsInteger := StrToInt(txtcontacre.Text);
+        IBQuery3.ParamByName('OPER_TITULO').AsString := 'R';
+        IBQuery3.ParamByName('FORNECEDOR').AsInteger := 102;
+        IBQuery3.ParamByName('ID_MOV_DIARIO').AsInteger:=  StrToINT(ActResultEdit1.Text);
+        IBQuery3.ExecSQL;
+        IBQuery3.Transaction.Commit;
+       //   GravarALMENTOConta(StrToFloat(TXTDEBITO.Text),StrToInt(txtcontadeb.Text));
+
+      end;
+      if (StrToFloat(TXTCREDITO.Text) > 0 )THEN
+        BEGIN
+          IBQuery4.SQL.Clear;
+          IBQuery4.SQL.Add('  insert into titulospagar2 ');
+          IBQuery4.SQL.Add('    (PARCELA, DTVENCIMENTO, DTLANCAMENTO, ');
+          IBQuery4.SQL.Add('     STATUS, TPSITUACAO, VLPARCELA,TIPO_TITULO, ');
+          IBQuery4.SQL.Add('     COD_EMPRESA, COD_FILIAL,COD_TITULO,COD_CONTA,OPER_TITULO,FORNECEDOR,ID_MOV_DIARIO) ');
+          IBQuery4.SQL.Add('  values ');
+          IBQuery4.SQL.Add('    (:PARCELA, :DTVENCIMENTO, :DTLANCAMENTO, ');
+          IBQuery4.SQL.Add('     :STATUS, :TPSITUACAO, :VLPARCELA, ');
+          IBQuery4.SQL.Add('     :TIPO_TITULO, :COD_EMPRESA, :COD_FILIAL, :COD_TITULO,:COD_CONTA,:OPER_TITULO,:FORNECEDOR,:ID_MOV_DIARIO) ');
+          IBQuery4.ParamByName('PARCELA').AsInteger := 1 ;
+          IBQuery4.ParamByName('DTVENCIMENTO').AsDate  := StrToDate(FormatDateTime('DD/MM/YYYY',StrToDate(txtdtprovpag.Text)));
+          IBQuery4.ParamByName('DTLANCAMENTO').AsDate :=  StrToDate(FormatDateTime('DD/MM/YYYY',StrToDate(TXTDATA.Text)));
+          IBQuery4.ParamByName('STATUS').AsString := 'A';
+          IBQuery4.ParamByName('TPSITUACAO').AsString := 'F';
+          IBQuery4.ParamByName('VLPARCELA').AsFloat := StrToFloat(TXTCREDITO.Text);
+          IBQuery4.ParamByName('TIPO_TITULO').AsInteger := 6 ;
+          IBQuery4.ParamByName('COD_FILIAL').AsInteger := StrToInt(TXTFILIAL.Text);
+          IBQuery4.ParamByName('COD_EMPRESA').AsInteger := StrToInt(TXTEMPRESA.Text);
+          IBQuery4.ParamByName('COD_TITULO').AsInteger := 1;
+          IBQuery4.ParamByName('COD_CONTA').AsInteger := StrToInt(txtcontadeb.Text);
+          IBQuery4.ParamByName('OPER_TITULO').AsString := 'R';
+          IBQuery4.ParamByName('FORNECEDOR').AsInteger := 102;
+          IBQuery4.ParamByName('ID_MOV_DIARIO').AsInteger:=  StrToINT(ActResultEdit1.Text);
+          IBQuery4.ExecSQL;
+          IBQuery4.Transaction.Commit;
+
+        end;     }
+   showmessage('MOVIMENTO GRAVADO COM SUCESSO');
+Except
+  QryMovDia.Transaction.Rollback;
+  QryTiTUlos.Transaction.Rollback;
+  IBQuery3.Transaction.Rollback;
+  IBQuery4.Transaction.Rollback;
+  showmessage('ERRO NA GRAVAÇÃO DO MOVIMENTO');
+end;
+    SELECTINICIAL();
+    POPULATXT();
+
+ ActCurrencyEdit4.Text := '';
+ soma := 0 ;
+END;
+
+procedure TFrmCadMovD.TXTCHEQUEExit(Sender: TObject);
+begin
+SOMA := SOMA + StrToFloat(TXTCHEQUE.Text) ;
+TXTTOTAL.Text := FloatToStr(SOMA);
+end;
+
+procedure TFrmCadMovD.TXTPROMISSORIAExit(Sender: TObject);
+begin
+SOMA := SOMA + StrToFloat(TXTPROMISSORIA.Text) ;
+TXTTOTAL.Text := FloatToStr(SOMA);
+end;
+
+procedure TFrmCadMovD.TXTCREDITOExit(Sender: TObject);
+begin
+try
+  soma := soma + StrToCurr(ActCurrencyEdit3.text);
+  ActCurrencyEdit4.Text := CurrToStr(soma);
+Except
+end;
+end;
+
+procedure TFrmCadMovD.SpeedButton4Click(Sender: TObject);
+begin
+if MessageDlg('DESEJA REALMENTE EXCLUIR TITULO ', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+    begin
+    IBQuery8.Active := False;
+    IBQuery8.ParamByName('id').AsInteger := StrToInt(ActResultEdit1.text);
+    IBQuery8.ExecSQL;
+
+
+    end;
+    SELECTINICIAL();
+    POPULATXT();
+end;
+
+procedure TFrmCadMovD.SpeedButton2Click(Sender: TObject);
+var max :Integer;
+begin
+IBQuery2.Active := false;
+IBQuery2.SQL.Text := 'select max(id)+ 1  from movimentodiario';
+IBQuery2.Active := true;
+max := IBQuery2.fieldbyname('F_1').AsInteger;
+ActResultEdit1.Text := IntToStr(max);
+ActResultEdit1.Enabled := true ;
+TXTEMPRESA.Enabled := true ;
+TXTFILIAL.Enabled := true ;
+TXTDATA.Enabled := true ;
+TXTTOTAL.Enabled := true ;
+TXTDINHEIRO.Enabled := true ;
+TXTCHEQUE.Enabled := true ;
+TXTCREDITO.Enabled := true ;
+TXTPROMISSORIA.Enabled := true ;
+
+
+
+TXTEMPRESA.Text := '' ;
+TXTFILIAL.Text := '' ;
+TXTDATA.Text := '' ;
+TXTTOTAL.Text := '' ;
+TXTDINHEIRO.Text := '' ;
+TXTCHEQUE.Text := '0' ;
+TXTCREDITO.Text := '' ;
+TXTPROMISSORIA.Text := '0' ;
+
+ ActCurrencyEdit4.Text := '';
+ soma := 0 ;
+
+end;
+
+procedure TFrmCadMovD.SpeedButton7Click(Sender: TObject);
+begin
+Primeiro;
+POPULATXT;
+end;
+
+procedure TFrmCadMovD.SpeedButton8Click(Sender: TObject);
+begin
+ultimo;
+POPULATXT;
+end;
+
+procedure TFrmCadMovD.SpeedButton5Click(Sender: TObject);
+begin
+proximo;
+POPULATXT;
+end;
+
+procedure TFrmCadMovD.SpeedButton6Click(Sender: TObject);
+begin
+anterior;
+POPULATXT;
+end;
+
+procedure TFrmCadMovD.FormActivate(Sender: TObject);
+begin
+//SELECTINICIAL();
+//POPULATXT();
+{
+ActResultEdit1.Enabled := False ;
+TXTEMPRESA.Enabled := False ;
+TXTFILIAL.Enabled := False ;
+TXTDATA.Enabled := False ;
+TXTTOTAL.Enabled := False ;
+TXTDINHEIRO.Enabled := False ;
+TXTCHEQUE.Enabled := False ;
+TXTCREDITO.Enabled := False ;
+TXTDEBITO.Enabled := False ;
+TXTPROMISSORIA.Enabled := False ;   }
+
+
+end;
+
+procedure TFrmCadMovD.Button2Click(Sender: TObject);
+begin
+FrmAprovPag.Show;
+end;
+
+procedure TFrmCadMovD.Button3Click(Sender: TObject);
+begin
+FrmCadTitPa.Show;
+end;
+
+procedure TFrmCadMovD.Button4Click(Sender: TObject);
+begin
+frmlancVendasVend.Show;
+end;
+
+procedure TFrmCadMovD.ActResultEdit1ButtonClick(Sender: TObject);
+begin
+BusMovDiario.Show;
+end;
+
+procedure TFrmCadMovD.ActResultEdit1Exit(Sender: TObject);
+var cont : integer;
+begin
+
+IBQuery6.Active := False;
+IBQuery6.ParamByName('id').AsInteger := StrToInt(ActResultEdit1.text);
+IBQuery6.Active := True;
+cont := IBQuery6.FieldByName('total').AsInteger;
+    if(cont > 0) then
+    begin
+      IBQuery7.Active := False;
+      IBQuery7.ParamByName('id').AsInteger := StrToInt(ActResultEdit1.text);
+      IBQuery7.Active := True;
+      TXTEMPRESA.Text :=      IntToStr(IBQuery7.FieldByName('COD_EMPRESA').AsInteger) ;
+      TXTFILIAL.Text  :=      IntToStr(IBQuery7.FieldByName('COD_FILIAL').AsInteger);
+      DatePickerEditor1.Text    :=      DateToStr(IBQuery7.FieldByName('DATAMOVIMENTO').AsDateTime );
+      TXTTOTAL.Text   :=      FloatToStr(IBQuery7.FieldByName('TOTAL').AsFloat);
+      TXTDINHEIRO.Text:=      FloatToStr(IBQuery7.FieldByName('DINHEIRO').AsFloat);
+      TXTCHEQUE.Text  :=      FloatToStr(IBQuery7.FieldByName('CHEQUE').AsFloat) ;
+      TXTCREDITO.Text :=      FloatToStr(IBQuery7.FieldByName('CARTAO_CREDITO').AsFloat);
+      TXTPROMISSORIA.Text  := FloatToStr(IBQuery7.FieldByName('PROMISSORIA').AsFloat);
+    end;
+end;
+
+procedure TFrmCadMovD.DatePickerEditor1Exit(Sender: TObject);
+begin
+IBQuery10.Active := False;
+IBQuery10.ParamByName('data').AsDate := DatePickerEditor1.Date  ;
+IBQuery10.Active := True;
+IBQuery9.Active := True;
+end;
+
+procedure TFrmCadMovD.ActButton2Click(Sender: TObject);
+begin
+//CODVEND,:DATA,:VALORVENDA
+IBQuery11.ParamByName('CODVEND').AsInteger := DBLookupComboBox1.KeyValue;
+IBQuery11.ParamByName('DATA').Asdate       := DatePickerEditor1.Date;
+IBQuery11.ParamByName('VALORVENDA').AsFloat:= StrToFloat(VrVendedoras.Text);
+IBQuery11.ExecSQL;
+IBQuery11.Transaction.Commit;
+IBQuery9.Active := True;
+end;
+
+procedure TFrmCadMovD.ActCurrencyEdit2Exit(Sender: TObject);
+begin
+try
+  soma := soma + StrToCurr(ActCurrencyEdit2.text);
+  ActCurrencyEdit4.Text := CurrToStr(soma);
+Except
+end;
+end;
+
+procedure TFrmCadMovD.ActCurrencyEdit5Exit(Sender: TObject);
+begin
+try
+  soma := soma + StrToCurr(ActCurrencyEdit5.text);
+  ActCurrencyEdit4.Text := CurrToStr(soma);
+Except
+end;
+end;
+
+procedure TFrmCadMovD.ActCurrencyEdit6Exit(Sender: TObject);
+begin
+try
+  soma := soma + StrToCurr(ActCurrencyEdit6.text);
+  ActCurrencyEdit4.Text := CurrToStr(soma);
+Except
+end;
+end;
+
+procedure TFrmCadMovD.Excluir1Click(Sender: TObject);
+begin
+if MessageDlg('DESEJA REALMENTE EXCLUIR VENDA ', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+    begin
+    IBQuery12.Active := False;
+    IBQuery12.ParamByName('id').AsInteger := dbGrid2.Fields[2].AsInteger;
+    IBQuery12.ExecSQL;
+    IBQuery10.Active := false;
+    IBQuery10.Active := true;
+
+    end;
+end;
+
+end.
