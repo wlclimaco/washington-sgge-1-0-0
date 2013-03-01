@@ -1,0 +1,310 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{9A961904-38AE-4CDD-9993-F96F29361048}</ProjectGuid>
+			<MainSource>ERP001.dpr</MainSource>
+			<Base>True</Base>
+			<Config Condition="'$(Config)'==''">Debug</Config>
+			<Platform>Win32</Platform>
+			<AppType>Application</AppType>
+			<FrameworkType>VCL</FrameworkType>
+			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_UsePackage>vcl;rtl;vclx;indy;inet;xmlrtl;vclie;inetdbbde;inetdbxpress;dbrtl;dsnap;dsnapcon;vcldb;soaprtl;VclSmp;dbexpress;dbxcds;inetdb;bdertl;vcldbx;webdsnap;websnap;adortl;ibxpress;teeui;teedb;tee;dss;visualclx;visualdbclx;vclactnband;vclshlctrls;IntrawebDB_50_70;Intraweb_50_70;Rave50CLX;Rave50VCL;dclOfficeXP;RxCtl7;RxBDE7;RxDB7;qrpt;RLibWinD7vcl</DCC_UsePackage>
+			<DCC_SymbolReferenceInfo>1</DCC_SymbolReferenceInfo>
+			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;$(DCC_UnitAlias)</DCC_UnitAlias>
+			<DCC_ImageBase>00400000</DCC_ImageBase>
+			<DCC_E>false</DCC_E>
+			<DCC_N>true</DCC_N>
+			<DCC_S>false</DCC_S>
+			<DCC_F>false</DCC_F>
+			<DCC_K>false</DCC_K>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+			<DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_DebugInformation>false</DCC_DebugInformation>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+			<DCC_Optimize>false</DCC_Optimize>
+			<DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+		</PropertyGroup>
+		<ItemGroup>
+			<DelphiCompile Include="ERP001.dpr">
+				<MainSource>MainSource</MainSource>
+			</DelphiCompile>
+			<DCCReference Include="UFormModelo.pas">
+				<Form>Form1</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmEmpresa.pas">
+				<Form>Form2</Form>
+			</DCCReference>
+			<DCCReference Include="UMenu.pas">
+				<Form>Form4</Form>
+			</DCCReference>
+			<DCCReference Include="UFormCadProServ.pas">
+				<Form>FRMCADPROD</Form>
+			</DCCReference>
+			<DCCReference Include="ENT\Unit7.pas"/>
+			<DCCReference Include="ENT\Unit16.pas"/>
+			<DCCReference Include="ENT\Unit2.pas">
+				<Form>ModeloForm</Form>
+			</DCCReference>
+			<DCCReference Include="ENT\ufrmStatus.pas">
+				<Form>frmStatus</Form>
+			</DCCReference>
+			<DCCReference Include="ENT\UNFENTRADASDDL.pas"/>
+			<DCCReference Include="ENT\UBDLFornecedores.pas"/>
+			<DCCReference Include="ENT\Unit82.pas">
+				<Form>Form82</Form>
+			</DCCReference>
+			<DCCReference Include="ENT\unit8.pas">
+				<Form>Form7</Form>
+			</DCCReference>
+			<DCCReference Include="ENT\Unit4.pas">
+				<Form>ModeloForm4</Form>
+			</DCCReference>
+			<DCCReference Include="ENT\Unit5.pas"/>
+			<DCCReference Include="ENT\Unit10.pas">
+				<Form>Form10</Form>
+			</DCCReference>
+			<DCCReference Include="UFormCadCCorrente.pas">
+				<Form>Form6</Form>
+			</DCCReference>
+			<DCCReference Include="UProd_Serv.pas"/>
+			<DCCReference Include="UConsUniMed.pas">
+				<Form>Form9</Form>
+			</DCCReference>
+			<DCCReference Include="UConsEmpr.pas">
+				<Form>Form11</Form>
+			</DCCReference>
+			<DCCReference Include="UConsFilial.pas">
+				<Form>Form12</Form>
+			</DCCReference>
+			<DCCReference Include="UConstipoItem.pas">
+				<Form>Form13</Form>
+			</DCCReference>
+			<DCCReference Include="UConsTipoProd.pas">
+				<Form>Form14</Form>
+			</DCCReference>
+			<DCCReference Include="UConsProd.pas">
+				<Form>Form15</Form>
+			</DCCReference>
+			<DCCReference Include="UDLLNFFISCAL.pas"/>
+			<DCCReference Include="UDLLNFFISCALItens.pas"/>
+			<DCCReference Include="UTitulosPagar.pas"/>
+			<DCCReference Include="UDLLCCORRENTE.pas"/>
+			<DCCReference Include="Unit1.pas">
+				<Form>DataModule1</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="UConsRamoAtiv.pas">
+				<Form>FRMCONSRAMO</Form>
+			</DCCReference>
+			<DCCReference Include="UConsIndForne.pas">
+				<Form>Form17</Form>
+			</DCCReference>
+			<DCCReference Include="UConsCep.pas">
+				<Form>FRMCONSCEP</Form>
+			</DCCReference>
+			<DCCReference Include="UconsMarca.pas">
+				<Form>FConsMarca</Form>
+			</DCCReference>
+			<DCCReference Include="UConsGrupo.pas">
+				<Form>FrmConsGrupo</Form>
+			</DCCReference>
+			<DCCReference Include="UConsSub_Grupo.pas">
+				<Form>FrmConsSub_Grupo</Form>
+			</DCCReference>
+			<DCCReference Include="Nova pasta (3)\Unit800.pas">
+				<Form>frmlancVendasVend</Form>
+			</DCCReference>
+			<DCCReference Include="Nova pasta (3)\Unit100.pas">
+				<Form>FrmCadMovD</Form>
+			</DCCReference>
+			<DCCReference Include="Nova pasta (3)\Unit400.pas">
+				<Form>FrmBaixaTitulo</Form>
+			</DCCReference>
+			<DCCReference Include="Nova pasta (3)\Unit500.pas">
+				<Form>FrmCadTitulos</Form>
+			</DCCReference>
+			<DCCReference Include="Nova pasta (3)\Unit600.pas">
+				<Form>FrmAprovPag</Form>
+			</DCCReference>
+			<DCCReference Include="Nova pasta (3)\Unit700.pas">
+				<Form>FrmCadTitPa</Form>
+			</DCCReference>
+			<DCCReference Include="UAltPrec.pas">
+				<Form>FrmAltPreco</Form>
+			</DCCReference>
+			<DCCReference Include="Unit315.pas">
+				<Form>FrmConsNfe</Form>
+			</DCCReference>
+			<DCCReference Include="Unit115.pas">
+				<Form>FrmTitulosP</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmConsRep.pas">
+				<Form>FrmConsRep</Form>
+			</DCCReference>
+			<DCCReference Include="teste2.0\Unit216.pas">
+				<Form>ConsEntradas</Form>
+			</DCCReference>
+			<DCCReference Include="teste2.0\Unit108.pas">
+				<Form>Form108</Form>
+			</DCCReference>
+			<DCCReference Include="teste2.0\Unit110.pas">
+				<Form>Form110</Form>
+			</DCCReference>
+			<DCCReference Include="teste2.0\Unit109.pas">
+				<Form>Form109</Form>
+			</DCCReference>
+			<DCCReference Include="teste2.0\Unit99.pas">
+				<Form>Form99</Form>
+			</DCCReference>
+			<DCCReference Include="teste2.0\Unit98.pas">
+				<Form>Form98</Form>
+			</DCCReference>
+			<DCCReference Include="teste2.0\Unit103.pas">
+				<Form>Form103</Form>
+			</DCCReference>
+			<DCCReference Include="teste2.0\Unit74.pas">
+				<Form>Form74</Form>
+			</DCCReference>
+			<DCCReference Include="teste2.0\Unit73.pas">
+				<Form>Form73</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmCentroCusto.pas">
+				<Form>FrmCentroCusto</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmCadCONTC.pas">
+				<Form>FrmCadCONTC</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmCadContador.pas">
+				<Form>FrmCadContador</Form>
+			</DCCReference>
+			<DCCReference Include="Umod.pas">
+				<Form>Frmmod</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmCadGrupo.pas">
+				<Form>FrmCadGrupo</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmRateio.pas">
+				<Form>FrmRateio</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmCadSubGrupo.pas">
+				<Form>FrmCadSubGrupo</Form>
+			</DCCReference>
+			<DCCReference Include="UConsTransacao.pas">
+				<Form>ConsTransacao</Form>
+			</DCCReference>
+			<DCCReference Include="UConsForn.pas">
+				<Form>ConsForn</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmCadTipoT.pas">
+				<Form>FrmCadTipoT</Form>
+			</DCCReference>
+			<DCCReference Include="UConsTipoTitulo.pas">
+				<Form>ConsTipoTitulo</Form>
+			</DCCReference>
+			<DCCReference Include="UCadVendDiario.pas">
+				<Form>CadVendDiario</Form>
+			</DCCReference>
+			<DCCReference Include="teste2.0\Unit83.pas">
+				<Form>Form83</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmMarca.pas">
+				<Form>FrmMarca</Form>
+			</DCCReference>
+			<DCCReference Include="URelCriticaSintegra.pas">
+				<Form>RelCriticaSintegra</Form>
+			</DCCReference>
+			<DCCReference Include="URelCaixaDiario1.pas">
+				<Form>RelCaxDIa</Form>
+			</DCCReference>
+			<DCCReference Include="URelCaixaDiario.pas">
+				<Form>RelMovDiario</Form>
+			</DCCReference>
+			<DCCReference Include="UBuscarMovDia.pas">
+				<Form>BusMovDiario</Form>
+			</DCCReference>
+			<DCCReference Include="URelVendDiaria.pas">
+				<Form>RelVendDia</Form>
+			</DCCReference>
+			<DCCReference Include="URelApuracao.pas">
+				<Form>RelApuSaidas</Form>
+			</DCCReference>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')" Project="$(BDS)\Bin\CodeGear.Delphi.Targets"/>
+		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\8.0\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\8.0\UserTools.proj"/>
+		<ProjectExtensions>
+			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
+			<Borland.ProjectType>VCLApplication</Borland.ProjectType>
+			<BorlandProject>
+				<Delphi.Personality>
+					<Source>
+						<Source Name="MainSource">ERP001.dpr</Source>
+					</Source>
+					<Language>
+						<Language Name="RootDir">C:\Speed-Fiscal\</Language>
+					</Language>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">False</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
+						<VersionInfo Name="MajorVer">1</VersionInfo>
+						<VersionInfo Name="MinorVer">0</VersionInfo>
+						<VersionInfo Name="Release">0</VersionInfo>
+						<VersionInfo Name="Build">0</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="Locale">1046</VersionInfo>
+						<VersionInfo Name="CodePage">1252</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName"/>
+						<VersionInfoKeys Name="FileDescription"/>
+						<VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName"/>
+						<VersionInfoKeys Name="LegalCopyright"/>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename"/>
+						<VersionInfoKeys Name="ProductName"/>
+						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments"/>
+					</VersionInfoKeys>
+				</Delphi.Personality>
+				<Platforms>
+					<Platform value="Win32">True</Platform>
+				</Platforms>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+	</Project>

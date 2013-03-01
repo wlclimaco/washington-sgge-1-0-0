@@ -1,0 +1,99 @@
+package ActiveTools;
+
+{$R *.res}
+{$R 'ActLabel.dcr'}
+{$R 'ActEdit.dcr'}
+{$R 'ActMemo.dcr'}
+{$R 'ActButton.dcr'}
+{$R 'ActCheckBox.dcr'}
+{$R 'ActRadioButton.dcr'}
+{$R 'ActComboBox.dcr'}
+{$R 'ActMaskEdit.dcr'}
+{$R 'ActNumberEdit.dcr'}
+{$R 'ActCurrencyEdit.dcr'}
+{$R 'ActTimeEdit.dcr'}
+{$R 'ActDateEdit.dcr'}
+{$R 'ActCheckValidate.dcr'}
+{$R 'ActException.dcr'}
+{$R 'ActLanguage.dcr'}
+{$R 'ActResultEdit.dcr'}
+{$R 'ActKeyResult.dcr'}
+{$R 'ActDBKey.dcr'}
+{$R 'ActSQL.dcr'}
+{$R 'ActTabVisible.dcr'}
+{$R 'ActCtrlSize.dcr'}
+{$R 'ActSpinNumber.dcr'}
+{$R 'XPInformationPanel.dcr'}
+{$R 'ActHintBalloon.dcr'}
+{$R 'ActButtonEdit.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'Active Tools'}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  vcl,
+  dbrtl,
+  vcldb,
+  dsnap,
+  VclSmp,
+  vclx,
+  designide,
+  vclactnband;
+
+contains
+  ActLabel in 'ActLabel.pas',
+  ActEdit in 'ActEdit.pas',
+  ActMemo in 'ActMemo.pas',
+  ActButton in 'ActButton.pas',
+  ActCustomEdit in 'ActCustomEdit.pas',
+  ActCheckBox in 'ActCheckBox.pas',
+  ActRadioButton in 'ActRadioButton.pas',
+  ActComboBox in 'ActComboBox.pas',
+  ActMask in 'ActMask.pas',
+  ActMaskEdit in 'ActMaskEdit.pas',
+  ActNumberEdit in 'ActNumberEdit.pas',
+  ActCurrencyEdit in 'ActCurrencyEdit.pas',
+  ActTimeEdit in 'ActTimeEdit.pas',
+  ActDateEdit in 'ActDateEdit.pas' {FrmDateEdit},
+  ActCheckValidate in 'ActCheckValidate.pas',
+  ActException in 'ActException.pas',
+  ActLanguage in 'ActLanguage.pas',
+  ActButtonEdit in 'ActButtonEdit.pas',
+  ActKeyResult in 'ActKeyResult.pas',
+  ActDBKey in 'ActDBKey.pas',
+  ActSQL in 'ActSQL.pas',
+  ActTabVisible in 'ActTabVisible.pas',
+  ActCtrlSize in 'ActCtrlSize.pas',
+  ActDBGrid in 'ActDBGrid.pas',
+  XPProgressBar in 'XPProgressBar.pas',
+  ActPanel in 'ActPanel.pas',
+  ActSpin in 'ActSpin.pas',
+  ActSpinNumber in 'ActSpinNumber.pas',
+  XPInformationPanel in 'XPInformationPanel.pas',
+  ActHintBalloon in 'ActHintBalloon.pas',
+  ActResultEdit in 'ActResultEdit.pas',
+  ActOptical in 'ActOptical.pas',
+  ActStopWatch in 'ActStopWatch.pas';
+
+end.
