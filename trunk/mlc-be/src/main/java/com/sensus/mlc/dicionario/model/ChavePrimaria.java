@@ -1,5 +1,7 @@
 package com.sensus.mlc.dicionario.model;
 
+import java.util.List;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class ChavePrimaria.
@@ -13,7 +15,7 @@ public class ChavePrimaria {
 	Tabela cdTab;
 
 	/** The cd atrib. */
-	Atributos cdAtrib;
+	List<Atributos> cdAtrib;
 
 	/** The nr seg key. */
 	Integer nrSegKey;
@@ -54,12 +56,14 @@ public class ChavePrimaria {
 		this.cdTab = cdTab;
 	}
 
+
+
 	/**
 	 * Gets the cd atrib.
 	 *
 	 * @return the cd atrib
 	 */
-	public Atributos getCdAtrib() {
+	public List<Atributos> getCdAtrib() {
 		return cdAtrib;
 	}
 
@@ -68,7 +72,7 @@ public class ChavePrimaria {
 	 *
 	 * @param cdAtrib the new cd atrib
 	 */
-	public void setCdAtrib(Atributos cdAtrib) {
+	public void setCdAtrib(List<Atributos> cdAtrib) {
 		this.cdAtrib = cdAtrib;
 	}
 

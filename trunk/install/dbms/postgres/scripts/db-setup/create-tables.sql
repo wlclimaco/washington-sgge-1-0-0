@@ -203,7 +203,7 @@ create table S008 (
    CDTABELA             serial          not null,
    NMTABELA             character varying(15)          not null,
    DSTABELA             character varying(30)          null,
-   constraint PK_S008 primary key (NMTABELA)
+   constraint PK_S008 primary key (CDTABELA)
 );
 
 /*==============================================================*/

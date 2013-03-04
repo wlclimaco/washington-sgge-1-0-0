@@ -32,7 +32,8 @@ public class Atributos {
 	  /** The label. */
   	public String label;
 
-  	public Integer codTelaBusca;
+  	/** The cod tela busca. */
+	  public Integer codTelaBusca;
 
 	  /** The requerido. */
   	public Boolean requerido;
@@ -46,10 +47,23 @@ public class Atributos {
 	  /** The mascara. */
   	public String mascara;
 
+  	/** The dominios. */
+	  public List<Dominios> dominios;
+
+	/**
+	 * Gets the cod tela busca.
+	 *
+	 * @return the cod tela busca
+	 */
 	public Integer getCodTelaBusca() {
 		return codTelaBusca;
 	}
 
+	/**
+	 * Sets the cod tela busca.
+	 *
+	 * @param codTelaBusca the new cod tela busca
+	 */
 	public void setCodTelaBusca(Integer codTelaBusca) {
 		this.codTelaBusca = codTelaBusca;
 	}
@@ -270,6 +284,24 @@ public class Atributos {
 		this.mascara = mascara;
 	}
 
+	/**
+	 * Gets the dominios.
+	 *
+	 * @return the dominios
+	 */
+	public List<Dominios> getDominios() {
+		return dominios;
+	}
+
+	/**
+	 * Sets the dominios.
+	 *
+	 * @param dominios the new dominios
+	 */
+	public void setDominios(List<Dominios> dominios) {
+		this.dominios = dominios;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -278,16 +310,24 @@ public class Atributos {
 		return "Atributos [codatrib=" + codatrib + ", nmatrib=" + nmatrib
 				+ ", cdvalidacao=" + cdvalidacao + ", codtipo=" + codtipo
 				+ ", posicaox=" + posicaox + ", posicaoy=" + posicaoy
-				+ ", tamanho=" + tamanho + ", label=" + label + ", requerido="
-				+ requerido + ", busca=" + busca + ", help=" + help
-				+ ", getCodatrib()=" + getCodatrib() + ", getNmatrib()="
-				+ getNmatrib() + ", getCdvalidacao()=" + getCdvalidacao()
-				+ ", getCodtipo()=" + getCodtipo() + ", getPosicaox()="
-				+ getPosicaox() + ", getPosicaoy()=" + getPosicaoy()
-				+ ", getTamanho()=" + getTamanho() + ", getLabel()="
-				+ getLabel() + ", getRequerido()=" + getRequerido()
-				+ ", getBusca()=" + getBusca() + ", getHelp()=" + getHelp()
-				+ ", getMascara()=" + getMascara() + "]";
+				+ ", tamanho=" + tamanho + ", label=" + label
+				+ ", codTelaBusca=" + codTelaBusca + ", requerido=" + requerido
+				+ ", busca=" + busca + ", help=" + help + ", mascara="
+				+ mascara + ", dominios=" + dominios + ", getCodTelaBusca()="
+				+ getCodTelaBusca() + ", getCodatrib()=" + getCodatrib()
+				+ ", getNmatrib()=" + getNmatrib() + ", getCdvalidacao()="
+				+ getCdvalidacao() + ", getCodtipo()=" + getCodtipo()
+				+ ", getPosicaox()=" + getPosicaox() + ", getPosicaoy()="
+				+ getPosicaoy() + ", getTamanho()=" + getTamanho()
+				+ ", getLabel()=" + getLabel() + ", getRequerido()="
+				+ getRequerido() + ", getBusca()=" + getBusca()
+				+ ", getHelp()=" + getHelp() + ", getMascara()=" + getMascara()
+				+ ", getDominios()=" + getDominios() + "]";
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+
 
 }

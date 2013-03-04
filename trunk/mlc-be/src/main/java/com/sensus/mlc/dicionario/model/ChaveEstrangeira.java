@@ -1,5 +1,7 @@
 package com.sensus.mlc.dicionario.model;
 
+import java.util.List;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class ChaveEstrangeira.
@@ -14,6 +16,9 @@ public class ChaveEstrangeira {
 
 	/** The tp cha est. */
 	String  tpChaEst;
+
+	/** The atributos. */
+	List<Atributos> atributos;
 
 	/**
 	 * Gets the cd cha est.
@@ -69,15 +74,37 @@ public class ChaveEstrangeira {
 		this.tpChaEst = tpChaEst;
 	}
 
+	/**
+	 * Gets the atributos.
+	 *
+	 * @return the atributos
+	 */
+	public List<Atributos> getAtributos() {
+		return atributos;
+	}
+
+	/**
+	 * Sets the atributos.
+	 *
+	 * @param atributos the new atributos
+	 */
+	public void setAtributos(List<Atributos> atributos) {
+		this.atributos = atributos;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		return "ChaveEstrangeira [cdChaEst=" + cdChaEst + ", cdTab=" + cdTab
-				+ ", tpChaEst=" + tpChaEst + ", getCdChaEst()=" + getCdChaEst()
-				+ ", getCdTab()=" + getCdTab() + ", getTpChaEst()="
-				+ getTpChaEst() + "]";
+				+ ", tpChaEst=" + tpChaEst + ", atributos=" + atributos
+				+ ", getCdChaEst()=" + getCdChaEst() + ", getCdTab()="
+				+ getCdTab() + ", getTpChaEst()=" + getTpChaEst()
+				+ ", getAtributos()=" + getAtributos() + "]";
 	}
+
+
+
 
 }
