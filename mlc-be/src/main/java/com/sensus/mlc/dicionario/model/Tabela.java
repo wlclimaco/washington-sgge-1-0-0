@@ -1,5 +1,7 @@
 package com.sensus.mlc.dicionario.model;
 
+import java.util.List;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class Tabela.
@@ -14,6 +16,27 @@ public class Tabela {
 
 	/** The Ds tab. */
 	String  DsTab;
+
+	/** The atributos. */
+	List<Atributos> atributos;
+
+	/**
+	 * Gets the atributos.
+	 *
+	 * @return the atributos
+	 */
+	public List<Atributos> getAtributos() {
+		return atributos;
+	}
+
+	/**
+	 * Sets the atributos.
+	 *
+	 * @param atributos the new atributos
+	 */
+	public void setAtributos(List<Atributos> atributos) {
+		this.atributos = atributos;
+	}
 
 	/**
 	 * Gets the cod tab.
@@ -75,7 +98,13 @@ public class Tabela {
 	@Override
 	public String toString() {
 		return "Tabela [codTab=" + codTab + ", nomeTab=" + nomeTab + ", DsTab="
-				+ DsTab + ", getCodTab()=" + getCodTab() + ", getNomeTab()="
-				+ getNomeTab() + ", getDsTab()=" + getDsTab() + "]";
+				+ DsTab + ", atributos=" + atributos + ", getAtributos()="
+				+ getAtributos() + ", getCodTab()=" + getCodTab()
+				+ ", getNomeTab()=" + getNomeTab() + ", getDsTab()="
+				+ getDsTab() + "]";
 	}
+
+
+
+
 }
