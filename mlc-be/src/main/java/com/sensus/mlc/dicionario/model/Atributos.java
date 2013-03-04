@@ -15,10 +15,7 @@ public class Atributos {
   	public String nmatrib;
 
 	  /** The cdvalidacao. */
-  	public List<Validacoes> cdvalidacao;
-
-	  /** The codtipo. */
-  	public Tipos codtipo;
+  	public List<Validacao> cdvalidacao;
 
 	  /** The posicaox. */
   	public Double posicaox;
@@ -33,7 +30,7 @@ public class Atributos {
   	public String label;
 
   	/** The cod tela busca. */
-	  public Integer codTelaBusca;
+	  public Tabela codTelaBusca;
 
 	  /** The requerido. */
   	public Boolean requerido;
@@ -50,23 +47,7 @@ public class Atributos {
   	/** The dominios. */
 	  public List<Dominios> dominios;
 
-	/**
-	 * Gets the cod tela busca.
-	 *
-	 * @return the cod tela busca
-	 */
-	public Integer getCodTelaBusca() {
-		return codTelaBusca;
-	}
 
-	/**
-	 * Sets the cod tela busca.
-	 *
-	 * @param codTelaBusca the new cod tela busca
-	 */
-	public void setCodTelaBusca(Integer codTelaBusca) {
-		this.codTelaBusca = codTelaBusca;
-	}
 
 	/**
 	 * Gets the codatrib.
@@ -102,42 +83,6 @@ public class Atributos {
 	 */
 	public void setNmatrib(String nmatrib) {
 		this.nmatrib = nmatrib;
-	}
-
-	/**
-	 * Gets the cdvalidacao.
-	 *
-	 * @return the cdvalidacao
-	 */
-	public List<Validacoes> getCdvalidacao() {
-		return cdvalidacao;
-	}
-
-	/**
-	 * Sets the cdvalidacao.
-	 *
-	 * @param cdvalidacao the new cdvalidacao
-	 */
-	public void setCdvalidacao(List<Validacoes> cdvalidacao) {
-		this.cdvalidacao = cdvalidacao;
-	}
-
-	/**
-	 * Gets the codtipo.
-	 *
-	 * @return the codtipo
-	 */
-	public Tipos getCodtipo() {
-		return codtipo;
-	}
-
-	/**
-	 * Sets the codtipo.
-	 *
-	 * @param codtipo the new codtipo
-	 */
-	public void setCodtipo(Tipos codtipo) {
-		this.codtipo = codtipo;
 	}
 
 	/**
@@ -302,32 +247,65 @@ public class Atributos {
 		this.dominios = dominios;
 	}
 
+	/**
+	 * Gets the cdvalidacao.
+	 *
+	 * @return the cdvalidacao
+	 */
+	public List<Validacao> getCdvalidacao() {
+		return cdvalidacao;
+	}
+
+	/**
+	 * Sets the cdvalidacao.
+	 *
+	 * @param cdvalidacao the new cdvalidacao
+	 */
+	public void setCdvalidacao(List<Validacao> cdvalidacao) {
+		this.cdvalidacao = cdvalidacao;
+	}
+
+	/**
+	 * Gets the cod tela busca.
+	 *
+	 * @return the cod tela busca
+	 */
+	public Tabela getCodTelaBusca() {
+		return codTelaBusca;
+	}
+
+	/**
+	 * Sets the cod tela busca.
+	 *
+	 * @param codTelaBusca the new cod tela busca
+	 */
+	public void setCodTelaBusca(Tabela codTelaBusca) {
+		this.codTelaBusca = codTelaBusca;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		return "Atributos [codatrib=" + codatrib + ", nmatrib=" + nmatrib
-				+ ", cdvalidacao=" + cdvalidacao + ", codtipo=" + codtipo
-				+ ", posicaox=" + posicaox + ", posicaoy=" + posicaoy
-				+ ", tamanho=" + tamanho + ", label=" + label
-				+ ", codTelaBusca=" + codTelaBusca + ", requerido=" + requerido
-				+ ", busca=" + busca + ", help=" + help + ", mascara="
-				+ mascara + ", dominios=" + dominios + ", getCodTelaBusca()="
-				+ getCodTelaBusca() + ", getCodatrib()=" + getCodatrib()
-				+ ", getNmatrib()=" + getNmatrib() + ", getCdvalidacao()="
-				+ getCdvalidacao() + ", getCodtipo()=" + getCodtipo()
-				+ ", getPosicaox()=" + getPosicaox() + ", getPosicaoy()="
-				+ getPosicaoy() + ", getTamanho()=" + getTamanho()
-				+ ", getLabel()=" + getLabel() + ", getRequerido()="
-				+ getRequerido() + ", getBusca()=" + getBusca()
-				+ ", getHelp()=" + getHelp() + ", getMascara()=" + getMascara()
-				+ ", getDominios()=" + getDominios() + "]";
+				+ ", cdvalidacao=" + cdvalidacao + ", posicaox=" + posicaox
+				+ ", posicaoy=" + posicaoy + ", tamanho=" + tamanho
+				+ ", label=" + label + ", codTelaBusca=" + codTelaBusca
+				+ ", requerido=" + requerido + ", busca=" + busca + ", help="
+				+ help + ", mascara=" + mascara + ", dominios=" + dominios
+				+ ", getCodatrib()=" + getCodatrib() + ", getNmatrib()="
+				+ getNmatrib() + ", getPosicaox()=" + getPosicaox()
+				+ ", getPosicaoy()=" + getPosicaoy() + ", getTamanho()="
+				+ getTamanho() + ", getLabel()=" + getLabel()
+				+ ", getRequerido()=" + getRequerido() + ", getBusca()="
+				+ getBusca() + ", getHelp()=" + getHelp() + ", getMascara()="
+				+ getMascara() + ", getDominios()=" + getDominios()
+				+ ", getCdvalidacao()=" + getCdvalidacao()
+				+ ", getCodTelaBusca()=" + getCodTelaBusca() + "]";
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+
 
 
 }
