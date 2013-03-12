@@ -1,0 +1,166 @@
+/*Sets the scroll bar for the comboxe's*/
+
+.ui-menu {
+	height:175px;
+	width: 142px;
+	overflow-y:scroll;
+}
+
+.dataTables_info,.dataTables_length {
+	display: inline;
+}
+
+a.button .ui-button-text {
+	color: #333333;
+    font-size: 100%;
+    padding: 0.15em 0.5em;
+    line-height: 1;
+}
+
+.first_row .yui-u {
+	float: left !important;
+}
+
+#combo-tag .button_filter .ui-button-icon-primary {
+	margin-left: -11px;
+}
+
+#tag-main fieldset .desc {
+	margin-top: -0.7em;
+}
+
+#process-page .filter-vert ul li label.error {
+	display: inline;
+	 color: #FFFFFF !important;
+	 font-size: 77% !important;
+}
+
+#history-filter-box .filter-vert ul li {
+    margin: 0.25em 0;
+}
+
+#history-filter-box fieldset ul li select {
+    padding: 0px;
+    width: 100px;
+}
+
+textarea.error {
+	display: block !important;
+	 color: #222222 !important;
+	 font-size: 1em !important;
+	 border: 2px solid #CC0000 !important
+}
+
+#light-type-watt {
+	width: 5em;	
+}
+
+/* Configuration Page Styles */
+
+.tag-container {
+    color: #666666;
+    float: left;
+    font-size: 85%;
+    overflow: hidden;
+    width: 75%;
+}
+
+.tag-container .count a, .tag-container .read_only .count {
+    color: #666666;
+    padding-left: 1.5em;
+    text-decoration: none;
+}
+
+.tag-container li {
+    background: none repeat scroll 0 0 #F0F0F0;
+    border: 1px solid #CCCCCC;
+    border-radius: 0.4em 0.4em 0.4em 0.4em;
+    display: inline;
+    float: left;
+    margin: 0.25em;
+    padding: 0.5em 0.5em 0.25em;
+	list-style: none outside none;
+}
+
+.tag-container .count {
+    background: none repeat scroll 0 0 #CCCCCC;
+    border-radius: 0.4em 0.4em 0.4em 0.4em;
+    color: #666666;
+    margin-left: 0.5em;
+    padding: 0.1em 0.25em 0.2em !important;
+}
+
+#listDefinitionType .tag-container .read_only .title {
+    padding: 0.2em 0.75em 0.3em;
+}
+
+.tag-container .title {
+    margin-left: 0.5em;
+	background: url(''); 
+}
+
+#tag-table {
+	margin-top: -1.2em !important
+}
+
+table.list td {
+    color: #333333;
+    line-height: 1.05;
+    text-align: left;
+}
+
+a.button .ui-button-text {
+    color: #333333 !important;
+    padding: 0.25em 0.75em;
+}
+
+fieldset ul li input  {
+    padding: 0.2em;
+    width: 14.5em !important;
+}
+
+#create-conservation-button .ui-button-text {
+    color: #333333;
+    font-size: 100%;
+    line-height: 1.5;
+    padding: 0.15em 0.5em;
+}
+
+#create-conservation-button .ui-dialog .ui-dialog-buttonpane button, .tools .ui-button {
+    float: left;
+    padding: 0.1em 0 0.8em;
+}
+
+#conservationCreateButton {
+	*border: none !important;
+}
+
+#cost-savings {
+	width: 5em !important;
+}
+
+#conservation-table td a.launch, #conservation-table a.launch:visited, #conservation-table a.lunch:hover {
+    background: none;
+    padding-left: 0px;
+}
+
+#search-submit-container #search-submit {
+	padding-bottom: 0.2em !important;
+    padding-top: 0.2em !important;
+}
+
+/* =validation */
+select.error {
+	*filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=-2, OffY=-2,color=#cc0000) progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2,color=#cc0000);
+	border: 2px solid #cc0000 !important;
+	margin-bottom: 0 !important;
+}
+
+.table_footer .numbers {
+    text-align: right;
+    width: 48% !important;
+}
+
+.tag-add-error {
+	vertical-align: text-top;
+}

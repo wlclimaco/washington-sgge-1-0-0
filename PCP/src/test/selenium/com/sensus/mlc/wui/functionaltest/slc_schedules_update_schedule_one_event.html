@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://mallet-app.davis.sensus.lab:8080/" />
+<title>updated_schedule_one_event</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">updated_schedule_one_event</td></tr>
+</thead><tbody>
+<tr>
+	<td>store</td>
+	<td>${eventSchName}001</td>
+	<td>schName</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#messaging-main &gt; span&quot;).text(&quot;&quot;);</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#yui-main h1</td>
+	<td>Schedules</td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>${schName}/2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${row}) - 2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#schedule-table tbody tr:eq(${row}) td:eq(2) a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Edit Event Schedule &quot;${schName}&quot; </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Edit Event Schedule &quot;${schName}&quot; </td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=time1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForEditable</td>
+	<td>id=schedule-name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=day1Fri</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=radio41</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=time1</td>
+	<td>6:00 PM</td>
+</tr>
+<tr>
+	<td>storeValue</td>
+	<td>id=schedule-description</td>
+	<td>desc</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=schedule-description</td>
+	<td>${desc} - Updated</td>
+</tr>
+<tr>
+	<td>storeValue</td>
+	<td>id=schedule-description</td>
+	<td>desc</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Check Message-->
+<tr>
+	<td>waitForText</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td>Schedule ${schName} updated successfully. Select the Lights you would like to add to this Schedule.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td>Schedule ${schName} updated successfully. Select the Lights you would like to add to this Schedule.</td>
+</tr>
+<!--Check Element in Grid-->
+<tr>
+	<td>verifyTable</td>
+	<td>css=#schedule-table tbody.${row}.2</td>
+	<td>${schName}</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#schedule-table tbody.${row}.3</td>
+	<td>${desc}</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#schedule-table tbody.${row}.4</td>
+	<td>Event</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#schedule-table tbody.${row}.7</td>
+	<td>${currentDate}</td>
+</tr>
+<!--Check Element count/summariz-->
+<tr>
+	<td>verifyTableRows</td>
+	<td>css=#schedule-table tbody</td>
+	<td>${totalSch}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#actions &gt; span</td>
+	<td>0 of ${totalSch} Schedules Selected</td>
+</tr>
+</tbody></table>
+</body>
+</html>
