@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://mallet-app.davis.sensus.lab:8080/" />
+<title>try_remove_light_from_group_light_does_not_belong</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">try_remove_light_from_group_light_does_not_belong</td></tr>
+</thead><tbody>
+<!--Store Global History Vars-->
+<tr>
+	<td>storeGlobal</td>
+	<td>Delete Light from Group</td>
+	<td>action</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>false</td>
+	<td>checkSummary</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>3</td>
+	<td>qtdLightsSelected</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>0</td>
+	<td>totalLight</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>Remove ${totalLight} Lights from Group ${groupGeneratorName} 6</td>
+	<td>description</td>
+</tr>
+<!--Check Page-->
+<tr>
+	<td>assertAttribute</td>
+	<td>id=menu-smartpoints@class</td>
+	<td>alist active</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>id=select-page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.positionHelper ul.fg-menu &gt; li &gt; ul &gt; li &gt; a[title='Remove from Group']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=group-add-select_input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=action-dialog-panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>id=group-add-select_input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=group-add-select_input</td>
+	<td>${groupGeneratorName} 6</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=remove-from-group-submit</td>
+	<td></td>
+</tr>
+<!--Check Message-->
+<tr>
+	<td>waitForText</td>
+	<td>css=#messaging-main .message</td>
+	<td>Lights have been successfully removed from Group “${groupGeneratorName} 6“.${qtdLightsSelected} Light(s) not in Group.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main .message</td>
+	<td>Lights have been successfully removed from Group “${groupGeneratorName} 6“.${qtdLightsSelected} Light(s) not in Group.</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
