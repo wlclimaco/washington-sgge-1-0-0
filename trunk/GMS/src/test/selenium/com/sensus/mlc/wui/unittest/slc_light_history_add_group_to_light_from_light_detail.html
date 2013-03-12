@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://mallet-app.davis.sensus.lab:8080/" />
+<title>add_group_to_light_from_light_detail</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">add_group_to_light_from_light_detail</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>link=Lights</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tbody tr:eq(0) td:eq(1) a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeTextGlobal</td>
+	<td>id=pole-id</td>
+	<td>poleID</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>Remove Pole ID${poleID} from ${groupName} Group</td>
+	<td>descriptionRemove</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>Add Pole ID${poleID} to Group ${groupName}</td>
+	<td>descriptionAdd</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add-to-group-link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=group-add-select_input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=group-add-select_input</td>
+	<td>${nameGroup}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=submit-groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#table-group tbody tr:last td:eq(0)</td>
+	<td>${nameGroup}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#table-group tbody tr:last td:eq(1) a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

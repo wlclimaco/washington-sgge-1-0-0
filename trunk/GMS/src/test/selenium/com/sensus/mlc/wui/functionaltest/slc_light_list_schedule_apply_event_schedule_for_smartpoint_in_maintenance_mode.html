@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://acme-app.davis.sensus.lab:8080/" />
+<title>apply_offset_schedule_for_a_single_smartpoint</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">apply_offset_schedule_for_a_single_smartpoint</td></tr>
+</thead><tbody>
+<!--Check Curent Page/...-->
+<tr>
+	<td>assertAttribute</td>
+	<td>id=menu-smartpoints@class</td>
+	<td>alist active</td>
+</tr>
+<!--.../-->
+<!--Filter by maintenance/...-->
+<tr>
+	<td>click</td>
+	<td>css=#STATUS div ul:eq(1) li:eq(3) input</td>
+	<td></td>
+</tr>
+<!--.../-->
+<!--Verify if the filter maintenance return any record. If not filter by actives/...-->
+<tr>
+	<td>storeElementPresent</td>
+	<td>css=#blankslate.blankslate</td>
+	<td>maintenance</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${maintenance}</td>
+	<td>jumpMaintenance</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#STATUS div ul:eq(1) li:eq(3) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#STATUS div ul:eq(1) li input</td>
+	<td></td>
+</tr>
+<!--.../-->
+<!--Verify if the filter actives return any record. If not stop test case/...-->
+<tr>
+	<td>assertNotVisible</td>
+	<td>css=#blankslate.blankslate</td>
+	<td></td>
+</tr>
+<!--.../-->
+<!--Take the first active light to turn to maintenance/.../...-->
+<tr>
+	<td>storeText</td>
+	<td>css=#smartpoint-table tbody tr:eq(0) td:eq(1) a strong</td>
+	<td>poleId</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tbody tr:eq(0) td:eq(1) a</td>
+	<td></td>
+</tr>
+<!--Check Element/...-->
+<tr>
+	<td>waitForText</td>
+	<td>id=pole-id</td>
+	<td>${poleId}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=pole-id</td>
+	<td>${poleId}</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>storeElementPresent</td>
+	<td>css=#update-protect span.locked</td>
+	<td>isLocked</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${isLocked}</td>
+	<td>jumpLock</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=false</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>jumpLock</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;.fg-menu &gt; li:eq(1) &gt; a&quot;, &quot;div.positionHelper&quot;).click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=status-maintain</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=status-maintain</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=edit-light-status-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=light-status</td>
+	<td>maintenance</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=light-status</td>
+	<td>maintenance</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>jumpMaintenance</td>
+	<td></td>
+</tr>
+<!--Return to Light List../-->
+<tr>
+	<td>click</td>
+	<td>id=menu-smartpoints</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--.../-->
+<!--Filter by maintenance/...-->
+<tr>
+	<td>click</td>
+	<td>css=#STATUS div ul:eq(1) li:eq(3) input</td>
+	<td></td>
+</tr>
+<!--.../-->
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tbody tr:eq(0) td:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;ul.fg-menu &gt; li:eq(3) &gt; ul &gt; li:eq(0) &gt; a[title='Apply Event Schedule']&quot;, &quot;div.positionHelper:visible&quot;).click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=add-schedule-select_input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=add-schedule-select_input</td>
+	<td>${eventScheduleName}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=apply-smartpoint-to-schedule-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>4000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;div.descriptive-button-row &gt; a:eq(0)&quot;).click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>css=#request-processing a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#request-complete a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#process-table tbody tr:eq(1) td a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#process-table tbody tr:eq(1) td a</td>
+	<td></td>
+</tr>
+<!--Check Message/...-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=li.lightMaintenance</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=li.lightMaintenance</td>
+	<td></td>
+</tr>
+<!--.../-->
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;a.ui-dialog-titlebar-close:eq(3)&quot;).click()</td>
+	<td></td>
+</tr>
+<!--Filter by maintenance/...-->
+<tr>
+	<td>click</td>
+	<td>css=#STATUS div ul:eq(1) li:eq(3) input</td>
+	<td></td>
+</tr>
+<!--.../-->
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tbody tr:eq(0) td:eq(1) a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;ul.fg-menu &gt; li:eq(1) &gt; a[title='Edit Light Status']&quot;, &quot;div.positionHelper:visible&quot;).click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=status-ative</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=status-ative</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=edit-light-status-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>2000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;div.descriptive-button-row &gt; a:eq(0)&quot;).click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=light-status</td>
+	<td>active</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=light-status</td>
+	<td>active</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menu-smartpoints</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

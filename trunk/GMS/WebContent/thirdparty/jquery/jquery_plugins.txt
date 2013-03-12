@@ -1,0 +1,4 @@
+jquery.i18n.properties.min.js
+- http://codingwithcoffee.com/?p=272
+- reads internationalized messages off Java-style properties file
+
