@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://Dicionariot1.davis.sensus.lab:8080/" />
+<title>try_update_pole_id_to_blank</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">try_update_pole_id_to_blank</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>id=menu-smartpoints</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Check Curent Page/...-->
+<tr>
+	<td>assertAttribute</td>
+	<td>id=menu-smartpoints@class</td>
+	<td>alist active</td>
+</tr>
+<!--.../-->
+<!--Filter by active/...-->
+<tr>
+	<td>click</td>
+	<td>css=#ALARM_TYPE div ul:eq(1) li:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#ALARM_TYPE div ul:eq(1) li:eq(1) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#ALARM_TYPE div ul:eq(1) li:eq(2) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#ALARM_TYPE div ul:eq(1) li:eq(3) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#ALARM_TYPE div ul:eq(1) li:eq(4) input</td>
+	<td></td>
+</tr>
+<!--.../-->
+<tr>
+	<td>storeText</td>
+	<td>css=#smartpoint-table tbody tr:eq(0) td:eq(1) a strong</td>
+	<td>poleId</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tbody tr:eq(0) td:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;ul.fg-menu &gt; li &gt; ul &gt; li &gt; a[title='Clear Alerts']&quot;, &quot;div.positionHelper:visible&quot;).click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#action-dialog-panel div a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#request-complete a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#process-table tbody tr:eq(1) td a</td>
+	<td></td>
+</tr>
+<!--Check Message/...-->
+<tr>
+	<td>waitForText</td>
+	<td>css=li.success</td>
+	<td>1 (100%) Sucedido Exportar(.csv)</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=li.success</td>
+	<td>1 (100%) Sucedido Exportar(.csv)</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;a.ui-dialog-titlebar-close:eq(3)&quot;).click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
