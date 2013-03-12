@@ -16,7 +16,7 @@
 	<property name="log.user.file" value="Dicionario_user.log" />
 
 	<!--Use Mock BCF Layers to test WUI without the real Back-end-->
-	<property name="buildUsingMocks" value="false" />
+	<property name="buildUsingMocks" value="true" />
 
 	<!-- Build Targets -->
 
