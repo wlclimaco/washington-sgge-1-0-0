@@ -1,0 +1,7 @@
+.dataTables_info,.dataTables_length {
+	display: inline;
+}
+
+#event-history-table {
+	margin-top: -2em;
+}
