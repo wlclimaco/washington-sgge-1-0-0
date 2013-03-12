@@ -1,0 +1,49 @@
+@charset "utf-8";
+
+/* CSS Document */
+#seach_form_container {
+	
+}
+
+/* table filters */
+.filters ul li a.active {
+	padding: .9em 1em .6em 2.5em;
+}
+
+/* search form */
+#seach_form_container input#search_text {
+	width: 11.5em;
+}
+
+#seach_form_container input#search_submit {
+	padding: 0;
+}
+
+#seach_form_container {
+	padding: 1.4em 1em;
+}
+
+/* index */
+ul#dashboard-links {
+	padding: 2em 1em 8em
+}
+
+/* tabs */
+ul.tabs {
+	margin-bottom: -1em;
+}
+
+/* tools */
+.filter-vert .ui-autocomplete-input {
+	width: 70% !important;
+	margin: 0;
+    padding: 0.25em 0 0.25em 0.45em !important;
+}
+
+.ui-button-icon-only {
+	height: 1.8em;
+}
+
+#sensus-menu ul.first-of-type {
+	margin-top: 1em;
+}

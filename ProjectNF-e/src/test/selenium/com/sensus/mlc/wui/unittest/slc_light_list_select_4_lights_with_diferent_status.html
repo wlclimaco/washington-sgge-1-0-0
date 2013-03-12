@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://mallet-app.davis.sensus.lab:8080/" />
+<title>select_4_lights_with_diferent_status</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">select_4_lights_with_diferent_status</td></tr>
+</thead><tbody>
+<tr>
+	<td>assertAttribute</td>
+	<td>id=menu-smartpoints@class</td>
+	<td>alist active</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>0</td>
+	<td>cont</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>0</td>
+	<td>lights</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>storedVars['lights'] = new Array();</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>Communication Fail/${column}</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${row} == 0</td>
+	<td>jump1</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>storedVars['row'] - 1</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeTable</td>
+	<td>smartpoint-table.${row}.2</td>
+	<td>flexNetId</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>storedVars['lights'].push(storedVars['flexNetId'])</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tr:eq(${row}) td:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>jump1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>CHECKED ${flexNetId}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>Deactivated/${column}</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${row} == 0</td>
+	<td>jump2</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>storedVars['row'] - 1</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeTable</td>
+	<td>smartpoint-table.${row}.2</td>
+	<td>flexNetId</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>storedVars['lights'].push(storedVars['flexNetId'])</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tr:eq(${row}) td:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>CHECKED ${flexNetId}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>jump2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>Active/${column}</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${row} == 0</td>
+	<td>jump3</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>storedVars['row'] - 1</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeTable</td>
+	<td>smartpoint-table.${row}.2</td>
+	<td>flexNetId</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>storedVars['lights'].push(storedVars['flexNetId'])</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tr:eq(${row}) td:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>CHECKED ${flexNetId}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>jump3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>Maintenance/${column}</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${row} == 0</td>
+	<td>jump4</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>storedVars['row'] - 1</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeTable</td>
+	<td>smartpoint-table.${row}.2</td>
+	<td>flexNetId</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>storedVars['lights'].push(storedVars['flexNetId'])</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tr:eq(${row}) td:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>CHECKED ${flexNetId}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>jump4</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
