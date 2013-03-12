@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://Dicionariot1.davis.sensus.lab:8080/" />
+<title>try_update_invalid_latitude_and_nvalid_longitude</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">try_update_invalid_latitude_and_nvalid_longitude</td></tr>
+</thead><tbody>
+<!--Check Curent Page/...-->
+<tr>
+	<td>assertText</td>
+	<td>id=about-deivce</td>
+	<td>Light Details</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>storeText</td>
+	<td>id=location-latitude</td>
+	<td>lat</td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>id=location-longitude</td>
+	<td>long</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=edit-location</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=latitude</td>
+	<td>91</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=submit-edit</td>
+	<td></td>
+</tr>
+<!--Check Message/...-->
+<tr>
+	<td>waitForText</td>
+	<td>css=div.formErrorContent</td>
+	<td>exact:* Maximum value is 90</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.formErrorContent</td>
+	<td>exact:* Maximum value is 90</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>type</td>
+	<td>id=latitude</td>
+	<td>80</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=longitude</td>
+	<td>181</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=submit-edit</td>
+	<td></td>
+</tr>
+<!--Check Message/...-->
+<tr>
+	<td>waitForText</td>
+	<td>css=div.formErrorContent</td>
+	<td>exact:* Maximum value is 180</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.formErrorContent</td>
+	<td>exact:* Maximum value is 180</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>click</td>
+	<td>id=cancel-edit</td>
+	<td></td>
+</tr>
+<!--Check Element/...-->
+<tr>
+	<td>verifyText</td>
+	<td>id=location-latitude</td>
+	<td>${lat}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=location-longitude</td>
+	<td>${long}</td>
+</tr>
+<!--.../-->
+</tbody></table>
+</body>
+</html>

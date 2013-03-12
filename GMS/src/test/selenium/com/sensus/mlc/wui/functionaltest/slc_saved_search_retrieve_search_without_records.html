@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://acme-app.davis.sensus.lab:8080/" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<!--Check Curent Page/...-->
+<tr>
+	<td>assertAttribute</td>
+	<td>id=menu-smartpoints@class</td>
+	<td>alist active</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>type</td>
+	<td>id=search-text</td>
+	<td>${idFake}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=search-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=h5</td>
+	<td>Your request returned 0 results</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=h5</td>
+	<td>Your request returned 0 results</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=span.save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=saved-search-name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=saved-search-name</td>
+	<td>${idFake}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.ui-dialog button:eq(0)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Check Message/...-->
+<tr>
+	<td>waitForText</td>
+	<td>css=span.message &gt; strong</td>
+	<td>${idFake}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.message &gt; strong</td>
+	<td>${idFake}</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>click</td>
+	<td>id=saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Check element in grid/...-->
+<tr>
+	<td>verifyTextPresent</td>
+	<td>${idFake}</td>
+	<td></td>
+</tr>
+<!--.../-->
+<!--Check Element count/summariz-->
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${totalGrp}) + 1</td>
+	<td>total</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${total}</td>
+	<td>totalGrp</td>
+</tr>
+<tr>
+	<td>verifyCssCount</td>
+	<td>css=#saved-table tbody tr</td>
+	<td>${totalGrp}</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>click</td>
+	<td>id=menu-smartpoints</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Check Curent Page/...-->
+<tr>
+	<td>assertAttribute</td>
+	<td>id=menu-smartpoints@class</td>
+	<td>alist active</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>click</td>
+	<td>id=saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Check Message/...-->
+<tr>
+	<td>waitForText</td>
+	<td>css=div.content-header &gt; h1</td>
+	<td>Saved Searches</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.content-header &gt; h1</td>
+	<td>Saved Searches</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#saved-table tbody tr:contains('${idFake}') td:eq(1) strong a&quot;).click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=h5</td>
+	<td>Your request returned 0 results</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=h5</td>
+	<td>Your request returned 0 results</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menu-smartpoints</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Check Curent Page/...-->
+<tr>
+	<td>assertAttribute</td>
+	<td>id=menu-smartpoints@class</td>
+	<td>alist active</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>click</td>
+	<td>id=saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Check Message/...-->
+<tr>
+	<td>waitForText</td>
+	<td>css=div.content-header &gt; h1</td>
+	<td>Saved Searches</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.content-header &gt; h1</td>
+	<td>Saved Searches</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#saved-table tbody tr:contains('${idFake}') td:eq(7) a&quot;).click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.ui-dialog-buttonpane button:eq(0)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Check Element count/summariz-->
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${totalGrp}) - 1</td>
+	<td>total</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${total}</td>
+	<td>totalGrp</td>
+</tr>
+<tr>
+	<td>verifyCssCount</td>
+	<td>css=#saved-table tbody tr</td>
+	<td>${totalGrp}</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>click</td>
+	<td>id=menu-smartpoints</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://acme-app.davis.sensus.lab:8080/" />
+<title>apply_offset_schedule_for_a_single_smartpoint</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">apply_offset_schedule_for_a_single_smartpoint</td></tr>
+</thead><tbody>
+<!--Check Curent Page/...-->
+<tr>
+	<td>assertAttribute</td>
+	<td>id=menu-smartpoints@class</td>
+	<td>alist active</td>
+</tr>
+<!--.../-->
+<!--Filter by active/...-->
+<tr>
+	<td>click</td>
+	<td>css=#STATUS div ul:eq(1) li:eq(0) input</td>
+	<td></td>
+</tr>
+<!--.../-->
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tbody tr:eq(0) td:eq(1) a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=about-deivce</td>
+	<td>Light Details</td>
+</tr>
+<tr>
+	<td>storeElementPresent</td>
+	<td>css=#sunrise-sunset-offset a.remove-offset-schedule</td>
+	<td>isRemove</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${isRemove}</td>
+	<td></td>
+</tr>
+<!--If unlock, lock/...-->
+<tr>
+	<td>gotoIf</td>
+	<td>!${isRemove}</td>
+	<td>jumpRemove</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#sunrise-sunset-offset a.remove-offset-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>2000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;div.descriptive-button-row &gt; a:eq(0)&quot;).click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>jumpRemove</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#sunrise-sunset-offset a.apply-offset-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=offset-schedule-add-select_input</td>
+	<td>${offsetScheduleName}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=apply-offset-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>4000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;div.descriptive-button-row &gt; a:eq(0)&quot;).click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>100000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Check Message/...-->
+<tr>
+	<td>waitForText</td>
+	<td>id=smartpointdetail-update</td>
+	<td>${offsetScheduleName}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=smartpointdetail-update</td>
+	<td>${offsetScheduleName}</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>click</td>
+	<td>id=menu-smartpoints</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

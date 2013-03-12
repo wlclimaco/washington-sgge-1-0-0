@@ -1,0 +1,28 @@
+.dataTables_processing {
+	height: 0px;
+}
+
+#schedule_map_container {
+	height: 100%;
+}
+
+.yui-u.add-action.first {
+	text-align: left;
+}
+
+.filters ul li a.export,a.export {
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+
+.button {
+	margin: 0 2px !important;
+}
+
+#search-form-container #search-submit-container {
+	margin-left: 0.6em !important
+}
+
+#schedule-list #actions .ui-state-error {
+	margin-top: 0 !important;
+}
