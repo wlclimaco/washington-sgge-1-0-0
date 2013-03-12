@@ -12,9 +12,13 @@ import com.sensus.mlc.base.util.LCHelp;
 import com.sensus.mlc.dicionario.bcf.IDicionarioBCF;
 import com.sensus.mlc.dicionario.bcl.IDicionarioBCL;
 import com.sensus.mlc.dicionario.model.Tela;
+import com.sensus.mlc.dicionario.model.request.InquiryTabelaRequest;
 import com.sensus.mlc.dicionario.model.request.InquiryTelaRequest;
+import com.sensus.mlc.dicionario.model.request.TabelaRequest;
 import com.sensus.mlc.dicionario.model.request.TelaRequest;
+import com.sensus.mlc.dicionario.model.response.InquiryTabelaResponse;
 import com.sensus.mlc.dicionario.model.response.InquiryTelaResponse;
+import com.sensus.mlc.dicionario.model.response.TabelaResponse;
 import com.sensus.mlc.dicionario.model.response.TelaResponse;
 import com.sensus.mlc.tag.bcf.impl.TagBCFImpl;
 
@@ -163,6 +167,109 @@ public class DicionarioBCFImpl implements IDicionarioBCF
 	public void setDicionarioBCL(IDicionarioBCL telaBCL)
 	{
 		this.telaBCL = telaBCL;
+	}
+
+	@Override
+	public TelaResponse insertDominio(TelaRequest dicionarioRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TelaResponse insertValidacao(TelaRequest dicionarioRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TelaResponse insertAtributo(TelaRequest dicionarioRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TelaResponse insertTabela(TelaRequest dicionarioRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TelaResponse insertQuery(TelaRequest dicionarioRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TelaResponse updateDominio(TelaRequest dicionarioRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TelaResponse updateValidacao(TelaRequest dicionarioRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TelaResponse updateAtributo(TelaRequest dicionarioRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TelaResponse updateTabela(TelaRequest dicionarioRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TelaResponse updateQuery(TelaRequest dicionarioRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TelaResponse deleteDominio(TelaRequest dicionarioRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TelaResponse deleteValidacao(TelaRequest dicionarioRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TelaResponse deleteAtributo(TelaRequest dicionarioRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TelaResponse deleteTabela(TelaRequest dicionarioRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TelaResponse deleteQuery(TelaRequest dicionarioRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TabelaResponse fetchTabelaById(TabelaRequest tabelaRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InquiryTabelaResponse fetchAllTabelas(
+			InquiryTabelaRequest inquiryTabelaRequest) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
