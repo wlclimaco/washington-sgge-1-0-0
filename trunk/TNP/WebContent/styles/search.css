@@ -1,0 +1,252 @@
+/*  ****************************** 
+	=table 
+	****************************** */
+
+table.list td {	
+	padding:.5em 1em;
+	text-align:left;
+	line-height:1.1;
+	vertical-align:top;
+	border-bottom:1px solid #fff;
+	color:#333333;
+	border-right:1px solid #f7f7f7;
+}
+
+
+table.list th a{
+	text-decoration:none;
+	color:#333333;
+	display:block;
+	padding-right:2em;
+}
+
+.advanced_search_container.highlight {
+	margin-top: -0.5em;
+}
+
+.yui-main {
+	margin-top: 0.5em;
+}
+
+#saved-table_wrapper {
+	margin-top: -0.5em;
+}
+
+/* =table_footer */
+
+.table_footer {
+		background:#f0f0f0;
+		border-top:1px solid #fff;
+		margin:0;
+		padding:.5em .8em;
+		font-size:85%;
+		color:#333333;
+		overflow:hidden;
+}
+
+
+.table_footer .numbers, table tfoot .numbers {
+	text-align:right;
+}
+
+
+.paginate_active {
+	background: none repeat scroll 0 0 #DBEEDA;
+	color: #333333;
+}
+
+.paging ul {
+}
+
+.paging ul li {
+	display:inline;
+}
+
+.paging ul li a {
+	display:block;
+	float:left;
+	text-decoration:none;
+	color:#000;
+	padding:.1em .2em;
+}
+
+.paging ol li a {
+	border:1px solid #ccc; 
+	padding:.25em .5em .4em;
+	margin:0 .2em;
+	font-size:93%;
+}
+
+.paging ol li a:hover {
+	border:1px solid #999999; 
+	background:#dedede;
+}
+
+.paging ol li.gap a {
+	border:none;
+}
+
+.paging ol li.active a {
+	background:#DBEEDA;
+	color:#333;
+}
+
+.paging ul .ui-button-text-only .ui-button-text {
+	padding:0 0.5em;
+}
+
+.stamp {
+	color:#333333;
+	text-align:center;
+	font-size:77%;
+	padding:.75em 0;
+}
+
+
+#listDefinitionType .tag-container .read_only .title {
+	padding:0.3em 0.75em;
+	font-size: 85%;
+	height /*\**/: 14px;
+}
+
+.dataTables_info, .dataTables_length {
+    display: inline;
+}
+
+
+/* Tags */
+
+li {
+    list-style: none outside none;
+}
+
+#listTable .tag-container {
+	margin:1em 0;
+	width:100%;
+}
+
+.tag-container li {
+    display: inline;
+    float: left;
+    margin-right: 0.35em;
+}
+
+.point-detail-container .tag-container li, #listTable .tag-container li {
+	padding-bottom:.35em;
+}
+
+.tag-container .tag-removed .count {
+	background:#900;
+	color:#fff;
+}
+
+.tag-container .tag-removed .count a {
+	color:#fff;
+}
+
+.tag-container .tag-removed .title {
+	background:#c00;
+	color:#fff;
+	padding:.3em;
+}
+
+.tag_column {
+	min-width:13em;
+}
+
+.tag-container .count {
+    background: url("../images/bg-tag-count.png") no-repeat scroll 0 0 transparent;
+    float: left;
+    padding: 0.3em 0.75em 0.3em 0;
+}
+
+.tag-container .count a, .tag-container .read_only .count {
+    color: #666666;
+    padding-left: 1.5em;
+    text-decoration: none;
+}
+
+.tag-container .read_only .title {
+    padding: 0.3em 0.75em;
+}
+
+.tag-container .title {
+    background: url("../images/bg-tag-title.gif") no-repeat scroll right center transparent;
+    float: left;
+}
+
+.tag-container {
+    color: #666666;
+    float: left;
+    font-size: 85%;
+    overflow: hidden;
+    width: 75%;
+}
+
+* =active filetes */
+
+.filter-container li {
+	display:inline; 
+	float:left;
+	margin-right:.5em;
+}
+
+.filter-container .type-status a {
+	float:left;
+	color:#fff;
+	text-decoration:none;
+	padding:.25em .75em .25em 1.75em;
+	background: url(../images/sensus-sprite.png) no-repeat -1px -696px;	
+}
+
+.filter-container .type-status a:hover, .filter-container .filter-removed .type-status a  {
+	background: url(../images/icn-cross-circle.png) no-repeat 1px 1px
+}
+
+.filter-container .bad-tag {
+	float:left;
+	margin:.25em .5em;
+	text-transform:uppercase;
+	font-size:77%;
+	padding:0;
+	letter-spacing:-.035em;
+	background:#CC0000 !important;
+	color:#fff;
+	
+	/* CSS 3 */
+	-webkit-border-radius: .4em;
+    -moz-border-radius: .4em;
+    -khtml-border-radius: .4em;
+    border-radius: .4em;
+	
+	/* css3	*/
+	text-shadow: 1px 1px 1px #666;		
+}
+
+.filter-container .type-status {
+    color: #666666;
+    float: left;
+    font-size: 93%;
+    margin: 0.35em 0 0;
+}
+
+table#saved-table .filter-container li  span.title {
+    clear: both;
+    background: none repeat scroll 0 0 #CCCCCC;
+    border-radius: 0.4em 0.4em 0.4em 0.4em;
+    color: #FFFFFF;
+    float: left;
+    font-size: 77%;
+    letter-spacing: -0.035em;
+    margin: 0.25em 0.5em;
+    padding: 0.25em 0.5em;
+    text-shadow: 1px 1px 1px #666666;
+    text-transform: uppercase;
+}
+
+table#saved-table #filter-active, 
+table#saved-table#tag-bad-tag {
+	display: block !important;
+    float: none !important;
+    margin-right: 0.5em;
+}
