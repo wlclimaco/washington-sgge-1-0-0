@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://mallet-app.davis.sensus.lab:8080/" />
+<title>Select (Check) Lights From FlexNext ID</title>
+</head>
+<body>
+<!-- 
+parameters
+lights: string de flex net id; ex:151,121,120
+-->
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Select (Check) Lights From FlexNext ID</td></tr>
+</thead><tbody>
+<tr>
+	<td>echo</td>
+	<td>${lights}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>id=menu-smartpoints@class</td>
+	<td>alist active</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>0</td>
+	<td>cont</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>storedVars['flexNetID'] = storedVars['lights'].split('|')</td>
+	<td>flexNetID</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>storedVars['flexNetID'].length</td>
+	<td>length</td>
+</tr>
+<tr>
+	<td>while</td>
+	<td>${cont} &lt; ${length}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>storedVars['flexNetID'][new Number(storedVars['cont'])]</td>
+	<td>id</td>
+</tr>
+<tr>
+	<td>storeTextPresent</td>
+	<td>${id}</td>
+	<td>exist</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${exist}</td>
+	<td>jump1</td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>${id}/2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(storedVars['row']) - 2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tbody tr:eq(${row}) td:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>jump1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(storedVars['cont']) + 1</td>
+	<td>cont</td>
+</tr>
+<tr>
+	<td>endWhile</td>
+	<td></td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

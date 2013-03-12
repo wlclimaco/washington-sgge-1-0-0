@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:p="http://www.springframework.org/schema/p"
+		xmlns:mvc="http://www.springframework.org/schema/mvc"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context
+	   		http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/mvc
+			http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- Scans the classpath for annotated components that will be auto-registered as Spring beans.
+	 For example @Controller and @Service. Make sure to set the correct base-package -->
+
+<!--  ############################################################
+      Activates various annotations to be detected in bean classes
+      ############################################################ -->
+	<context:annotation-config />
+
+	<context:component-scan  base-package="com.sensus.mlc.wui">
+		<context:include-filter type="aspectj" expression="com.sensus.mlc.wui.*.*" />
+	</context:component-scan>
+
+
+<!--  #########################################################################
+      Configures the annotation-driven Spring MVC Controller programming model.
+      #########################################################################  -->
+	<mvc:annotation-driven ></mvc:annotation-driven>
+
+
+<!--  ####################
+      Internationalization
+      ####################  -->
+	<bean id="messageSource"
+	    class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+	    <property name="basename" value="classpath:locale/messages" />
+	    <property name="defaultEncoding" value="UTF-8"/>
+	</bean>
+
+	<bean id="localeChangeInterceptor"
+	    class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+	    <property name="paramName" value="lang" />
+	</bean>
+
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="en" />
+	</bean>
+
+	<bean id="handlerMapping"
+	    class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+	    <property name="interceptors">
+	        <ref bean="localeChangeInterceptor" />
+	    </property>
+	</bean>
+
+<!--  ##########################
+      Maps directly to JSP pages
+      ##########################  -->
+
+<!--  MAIN  -->
+	<mvc:view-controller path="/login" view-name="../login"/>
+	<mvc:view-controller path="/" view-name="redirect:/login"/>
+	<mvc:view-controller path="/main" view-name="/main"/>
+
+<!--  Analytics  -->
+	<mvc:view-controller path="/analytics/" view-name="/analytics/analytics_main"/>
+<!--  Dashboard  -->
+	<mvc:view-controller path="/dashboard" view-name="/dashboard/dashboard_main"/>
+<!--  Group  -->
+	<mvc:view-controller path="/group" view-name="/group/group_main"/>
+	<mvc:view-controller path="/group/insert" view-name="/group/group_create"/>
+	<mvc:view-controller path="/group/update" view-name="/group/group_create"/>
+	<mvc:view-controller path="/groupcreate" view-name="/group/group_create"/>
+
+<!--  Light  -->
+	<mvc:view-controller path="/light" view-name="/light/light_main"/>
+<!--  Light  Detail -->
+	<mvc:view-controller path="/lightDetail" view-name="/light/light_detail_main"/>
+	<mvc:view-controller path="/lightDetail/openlightdetailComponent" view-name="../commons/pages/controller/modules_controller_main"/>
+	<mvc:view-controller path="/lightDetail/about" view-name="../commons/pages/controller/module_about_this_light"/>
+	<mvc:view-controller path="/lightDetail/ecoMode" view-name="/light/light_detail_eco_mode"/>
+	<mvc:view-controller path="/lightDetail/history" view-name="/light/light_detail_history"/>
+<!--  Process  -->
+	<mvc:view-controller path="/process" view-name="/process/process_main"/>
+	<mvc:view-controller path="/process/includeProcessRecentDialog" view-name="/process/process_recent_dialog"/>
+<!--  Profile  -->
+	<mvc:view-controller path="/profile" view-name="/profile/profile_main"/>
+<!--  Schedule  -->
+	<mvc:view-controller path="/schedule" view-name="/schedule/schedule_main"/>
+	<mvc:view-controller path="/schedule/scheduleCreateEventInclude" view-name="/schedule/schedule_create_event_include"/>
+	<mvc:view-controller path="/schedule/insertOffset" view-name="/schedule/schedule_create_offset"/>
+	<mvc:view-controller path="/schedule/insertEvent" view-name="/schedule/schedule_create_event"/>
+	<mvc:view-controller path="/schedule/deleteScheduleInclude" view-name="/schedule/schedule_delete_dialog"/>
+<!--  Saved Search  -->
+	<mvc:view-controller path="/search" view-name="/search/search_main"/>
+<!--  System Settings  -->
+	<mvc:view-controller path="/settings/" view-name="/systemsettings/systemsettings_main"/>
+	<mvc:view-controller path="/settingsEcomode" view-name="/systemsettings/eco_mode_main"/>
+	<mvc:view-controller path="/settingsImportEcoMode" view-name="/systemsettings/eco_mode_format_dialog"/>
+		<mvc:view-controller path="/generalsettings" view-name="/systemsettings/general_settings"/>
+<!--  Tag  -->
+	<mvc:view-controller path="/tag" view-name="/tag/tag_main"/>
+<!--  User  -->
+	<mvc:view-controller path="/user" view-name="/user/user_main"/>
+	<mvc:view-controller path="/user/update" view-name="/user/user_create"/>
+	<mvc:view-controller path="/user/userDeleteInclude" view-name="/user/user_delete_dialog"/>
+<!--  Actions  -->
+	<mvc:view-controller path="/light/applyEventSchedule" view-name="/light/light_apply_event_schedule"/>
+	<mvc:view-controller path="/light/applyOffsetSchedule" view-name="/light/light_apply_offset_schedule"/>
+	<mvc:view-controller path="/light/removeEventSchedule" view-name="/light/light_remove_event_schedule"/>
+	<mvc:view-controller path="/tag/includeAutoNoGroupDialog" view-name="/tag/auto_no_group"/>
+	<mvc:view-controller path="/tag/includeAutoExistingGroupDialog" view-name="/tag/auto_existing_group"/>
+	<mvc:view-controller path="/light/monitorDialog" view-name="/light/light_process_dialog"/>
+
+<!--  Utils  -->
+	<mvc:view-controller path="/util/summary" view-name="../commons/pages/summary"/>
+	<mvc:view-controller path="/pageSize" view-name="../commons/pages/page_size_include"/>
+
+<!--  ###################################
+      Static Content to bypass dispatcher
+      ###################################  -->
+	<mvc:resources mapping="/images/**" location="/images/"/>
+	<mvc:resources mapping="/scripts/**" location="/scripts/"/>
+	<mvc:resources mapping="/commons/**" location="/commons/"/>
+	<mvc:resources mapping="/styles/**" location="/styles/"/>
+	<mvc:resources mapping="/thirdparty/**" location="/thirdparty/"/>
+
+
+<!--  #############################################################################
+      Resolves view names to protected .jsp resources within the /WEB-INF directory
+      #############################################################################  -->
+    <bean id="viewResolver"
+    	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+</beans>

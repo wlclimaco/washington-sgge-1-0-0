@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://acme-app.davis.sensus.lab:8080" />
+<title>add_several_light_to_group</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">add_several_light_to_group</td></tr>
+</thead><tbody>
+<!--Store Global History Vars-->
+<tr>
+	<td>storeGlobal</td>
+	<td>3</td>
+	<td>qtdLightsSelected</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>2</td>
+	<td>totalLight</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>100</td>
+	<td>percentSuccess</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>0</td>
+	<td>percentFailure</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>Add ${qtdLightsSelected} Lights to Group ${groupName} - &quot;1&quot; Light(s) already belongs to Group ${groupName}.</td>
+	<td>description</td>
+</tr>
+<!--Check page-->
+<tr>
+	<td>click</td>
+	<td>link=Lights</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>id=menu-smartpoints@class</td>
+	<td>alist active</td>
+</tr>
+<!--Assert records-->
+<tr>
+	<td>assertNotVisible</td>
+	<td>css=#blankslate</td>
+	<td></td>
+</tr>
+<!--Filter by Active and Warning Status-->
+<tr>
+	<td>click</td>
+	<td>css=#STATUS ul.ui-listcombobox li[title='Active'] input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#STATUS ul.ui-listcombobox li[title='Warning'] input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Select Lights-->
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table .checkbox:eq(1) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table .checkbox:eq(2) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table .checkbox:eq(3) input</td>
+	<td></td>
+</tr>
+<!--Add Group Action-->
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.positionHelper ul.fg-menu &gt; li &gt; ul &gt; li &gt; a[title='Add to Group']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=group-add-select_input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=action-dialog-panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>id=group-add-select_input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=group-add-select_input</td>
+	<td>${groupName}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add-to-group-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Check Message-->
+<tr>
+	<td>waitForText</td>
+	<td>css=#messaging-main .message</td>
+	<td>Lights have been successfully added to Group “${groupName}“.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main .message</td>
+	<td>Lights have been successfully added to Group “${groupName}“.</td>
+</tr>
+</tbody></table>
+</body>
+</html>
