@@ -5,7 +5,7 @@ import com.sensus.mlc.ecomode.bcf.IEcoModeBCF;
 import com.sensus.mlc.ecomode.model.request.InquiryEcoModeRequest;
 import com.sensus.mlc.ecomode.model.response.InquiryEcoModeResponse;
 import com.sensus.mlc.process.model.response.ProcessResponse;
-import com.sensus.mlc.wui.base.unittest.util.BaseMockImpl;
+import com.sensus.mlc.wui.util.BaseMockImpl;
 
 /**
  * The Class AnalyticsBCFMockImpl.

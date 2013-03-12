@@ -11,7 +11,7 @@ import com.sensus.mlc.user.model.request.InquiryUserRequest;
 import com.sensus.mlc.user.model.request.UserRequest;
 import com.sensus.mlc.user.model.response.InquiryUserResponse;
 import com.sensus.mlc.user.model.response.UserResponse;
-import com.sensus.mlc.wui.base.unittest.util.BaseMockImpl;
+import com.sensus.mlc.wui.util.BaseMockImpl;
 import com.sensus.mlc.wui.util.ModeEnum;
 
 public class UserBCFMockImpl extends BaseMockImpl implements IUserBCF
@@ -81,7 +81,7 @@ public class UserBCFMockImpl extends BaseMockImpl implements IUserBCF
 			}
 		}
 
-		return (UserResponse)testOtherDefaultModes(response);
+		return (UserResponse)(response);
 
 	}
 
@@ -108,7 +108,7 @@ public class UserBCFMockImpl extends BaseMockImpl implements IUserBCF
 			}
 		}
 
-		return (UserResponse)testOtherDefaultModes(response);
+		return (UserResponse)(response);
 	}
 
 	@Override
@@ -123,7 +123,7 @@ public class UserBCFMockImpl extends BaseMockImpl implements IUserBCF
 			return response;
 		}
 
-		return (InquiryUserResponse)testOtherDefaultModes(response);
+		return (InquiryUserResponse)(response);
 
 	}
 
@@ -146,7 +146,7 @@ public class UserBCFMockImpl extends BaseMockImpl implements IUserBCF
 
 		}
 
-		return (UserResponse)testOtherDefaultModes(response);
+		return (UserResponse) (response);
 	}
 
 	@Override
@@ -161,6 +161,6 @@ public class UserBCFMockImpl extends BaseMockImpl implements IUserBCF
 
 		}
 
-		return (UserResponse)testOtherDefaultModes(response);
+		return (UserResponse)(response);
 	}
 }
