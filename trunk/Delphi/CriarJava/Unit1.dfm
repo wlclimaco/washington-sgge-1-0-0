@@ -3,7 +3,7 @@ object Form1: TForm1
   Top = 0
   Caption = 'Form1'
   ClientHeight = 502
-  ClientWidth = 647
+  ClientWidth = 837
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,15 +17,16 @@ object Form1: TForm1
   object Panel1: TPanel
     Left = 0
     Top = 469
-    Width = 647
+    Width = 837
     Height = 33
     Align = alBottom
     TabOrder = 0
+    ExplicitWidth = 647
     DesignSize = (
-      647
+      837
       33)
     object BtnPesquisa: TBrvBitBtn
-      Left = 527
+      Left = 717
       Top = 6
       Width = 113
       Height = 25
@@ -124,28 +125,30 @@ object Form1: TForm1
       TabOrder = 0
       OnClick = BtnPesquisaClick
       BrTipoBotao = BtnConvSQL
+      ExplicitLeft = 527
     end
   end
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 647
+    Width = 837
     Height = 41
     Align = alTop
     TabOrder = 1
+    ExplicitWidth = 647
   end
   object PgcFundo: TPageControl
     Left = 0
     Top = 41
-    Width = 647
+    Width = 837
     Height = 428
-    ActivePage = TbsFiltro
+    ActivePage = TabSheet15
     Align = alClient
     TabOrder = 2
+    ExplicitWidth = 647
     object TbsFiltro: TTabSheet
       Caption = 'Geral'
-      ExplicitLeft = 1
-      ExplicitTop = 22
+      ExplicitWidth = 639
       object SpeedButton1: TSpeedButton
         Left = 583
         Top = 6
@@ -196,7 +199,7 @@ object Form1: TForm1
         Left = 467
         Top = 35
         Width = 169
-        Height = 335
+        Height = 354
         Caption = 'Classes BE'
         TabOrder = 1
         object CheckBox1: TCheckBox
@@ -323,8 +326,8 @@ object Form1: TForm1
       object GroupBox2: TGroupBox
         Left = 16
         Top = 62
-        Width = 417
-        Height = 198
+        Width = 316
+        Height = 190
         Caption = 'Metados'
         TabOrder = 3
         object CheckBox13: TCheckBox
@@ -336,17 +339,18 @@ object Form1: TForm1
           TabOrder = 0
         end
         object Memo2: TMemo
-          Left = 119
+          Left = 91
           Top = 15
-          Width = 296
-          Height = 181
+          Width = 223
+          Height = 173
           Align = alRight
           TabOrder = 1
+          ExplicitHeight = 112
         end
         object CheckBox14: TCheckBox
           Left = 16
           Top = 39
-          Width = 97
+          Width = 69
           Height = 17
           Caption = 'Update'
           TabOrder = 2
@@ -354,7 +358,7 @@ object Form1: TForm1
         object CheckBox15: TCheckBox
           Left = 16
           Top = 62
-          Width = 97
+          Width = 69
           Height = 17
           Caption = 'FetchById'
           TabOrder = 3
@@ -362,7 +366,7 @@ object Form1: TForm1
         object CheckBox16: TCheckBox
           Left = 16
           Top = 85
-          Width = 97
+          Width = 69
           Height = 17
           Caption = 'FetchAll'
           TabOrder = 4
@@ -370,23 +374,23 @@ object Form1: TForm1
         object CheckBox17: TCheckBox
           Left = 16
           Top = 108
-          Width = 97
+          Width = 69
           Height = 17
           Caption = 'Delete'
           TabOrder = 5
         end
       end
       object GroupBox3: TGroupBox
-        Left = 16
-        Top = 266
-        Width = 161
-        Height = 131
+        Left = 338
+        Top = 62
+        Width = 123
+        Height = 327
         Caption = 'Classes FE'
         TabOrder = 4
         object CheckBox12: TCheckBox
           Left = 16
           Top = 14
-          Width = 129
+          Width = 105
           Height = 17
           Caption = 'ClasseApiControl'
           TabOrder = 0
@@ -394,7 +398,7 @@ object Form1: TForm1
         object CheckBox20: TCheckBox
           Left = 16
           Top = 30
-          Width = 129
+          Width = 97
           Height = 17
           Caption = 'ClasseTest'
           TabOrder = 1
@@ -402,294 +406,482 @@ object Form1: TForm1
         object CheckBox21: TCheckBox
           Left = 16
           Top = 45
-          Width = 129
+          Width = 97
           Height = 17
           Caption = 'ClasseMock'
           TabOrder = 2
         end
-        object CheckBox22: TCheckBox
-          Left = 16
-          Top = 61
-          Width = 129
-          Height = 17
-          Caption = 'HTML'
-          TabOrder = 3
-        end
         object CheckBox23: TCheckBox
           Left = 16
-          Top = 77
-          Width = 129
+          Top = 62
+          Width = 97
           Height = 17
           Caption = 'ClasseInit.js'
-          TabOrder = 4
+          TabOrder = 3
         end
         object CheckBox24: TCheckBox
           Left = 16
-          Top = 93
-          Width = 129
+          Top = 80
+          Width = 97
           Height = 17
           Caption = 'ClasseMain.js'
+          TabOrder = 4
+        end
+        object CheckBox54: TCheckBox
+          Left = 16
+          Top = 96
+          Width = 97
+          Height = 17
+          Caption = 'HTML'
           TabOrder = 5
+        end
+        object CheckBox22: TCheckBox
+          Left = 16
+          Top = 114
+          Width = 97
+          Height = 17
+          Caption = 'HTML Create'
+          TabOrder = 6
         end
       end
       object GroupBox4: TGroupBox
-        Left = 192
-        Top = 266
-        Width = 185
+        Left = 151
+        Top = 258
+        Width = 178
         Height = 131
         Caption = 'Configura'#231#227'o'
         TabOrder = 5
-        object CheckBox25: TCheckBox
+        object CheckBox28: TCheckBox
           Left = 16
           Top = 14
           Width = 129
           Height = 17
-          Caption = 'Gerar Insert Table'
+          Caption = 'Gerar Procedure Insert'
           TabOrder = 0
         end
-        object CheckBox26: TCheckBox
+        object CheckBox29: TCheckBox
           Left = 16
-          Top = 30
-          Width = 129
+          Top = 37
+          Width = 145
           Height = 17
-          Caption = 'Gerar Insert Atributos'
+          Caption = 'Gerar Procedure Update'
           TabOrder = 1
         end
-        object CheckBox28: TCheckBox
+        object CheckBox30: TCheckBox
           Left = 16
-          Top = 46
-          Width = 129
+          Top = 60
+          Width = 145
           Height = 17
-          Caption = 'Gerar Procedure'
+          Caption = 'Gerar Procedure Delete'
           TabOrder = 2
+        end
+        object CheckBox31: TCheckBox
+          Left = 16
+          Top = 88
+          Width = 145
+          Height = 17
+          Caption = 'Gerar Procedure Select'
+          TabOrder = 3
+        end
+        object CheckBox32: TCheckBox
+          Left = 16
+          Top = 111
+          Width = 145
+          Height = 17
+          Caption = 'Gerar Procedure Select Id'
+          TabOrder = 4
+        end
+      end
+      object GroupBox6: TGroupBox
+        Left = 642
+        Top = 223
+        Width = 169
+        Height = 166
+        Caption = 'Classes BE Test'
+        TabOrder = 6
+        object CheckBox40: TCheckBox
+          Left = 24
+          Top = 24
+          Width = 97
+          Height = 17
+          Caption = 'ClasseBCFTest'
+          TabOrder = 0
+        end
+        object CheckBox41: TCheckBox
+          Left = 24
+          Top = 47
+          Width = 97
+          Height = 17
+          Caption = 'ClasseBCFIMock'
+          TabOrder = 1
+        end
+        object CheckBox42: TCheckBox
+          Left = 24
+          Top = 70
+          Width = 97
+          Height = 17
+          Caption = 'ClasseBCLTest'
+          TabOrder = 2
+        end
+        object CheckBox43: TCheckBox
+          Left = 24
+          Top = 93
+          Width = 97
+          Height = 17
+          Caption = 'ClasseBCLIMock'
+          TabOrder = 3
+        end
+        object CheckBox44: TCheckBox
+          Left = 24
+          Top = 116
+          Width = 97
+          Height = 17
+          Caption = 'ClasseDACTest'
+          TabOrder = 4
+        end
+        object CheckBox45: TCheckBox
+          Left = 24
+          Top = 139
+          Width = 97
+          Height = 17
+          Caption = 'ClasseDACMock'
+          TabOrder = 5
+        end
+      end
+      object GroupBox7: TGroupBox
+        Left = 642
+        Top = 37
+        Width = 169
+        Height = 180
+        Caption = 'Configura'#231#227'o BE'
+        TabOrder = 7
+        object CheckBox46: TCheckBox
+          Left = 16
+          Top = 21
+          Width = 105
+          Height = 17
+          Caption = 'bcf-application'
+          TabOrder = 0
+        end
+        object CheckBox47: TCheckBox
+          Left = 16
+          Top = 55
+          Width = 97
+          Height = 17
+          Caption = 'bcl-application'
+          TabOrder = 1
+        end
+        object CheckBox48: TCheckBox
+          Left = 16
+          Top = 101
+          Width = 97
+          Height = 17
+          Caption = 'data-access'
+          TabOrder = 2
+        end
+        object CheckBox49: TCheckBox
+          Left = 16
+          Top = 149
+          Width = 97
+          Height = 17
+          Caption = 'validators'
+          TabOrder = 3
+        end
+      end
+      object GroupBox8: TGroupBox
+        Left = 16
+        Top = 260
+        Width = 129
+        Height = 129
+        Caption = 'GerarScript'
+        TabOrder = 8
+        object CheckBox50: TCheckBox
+          Left = 16
+          Top = 14
+          Width = 105
+          Height = 17
+          Caption = 'Insert'
+          TabOrder = 0
+        end
+        object CheckBox51: TCheckBox
+          Left = 16
+          Top = 37
+          Width = 97
+          Height = 17
+          Caption = 'Tabela'
+          TabOrder = 1
+        end
+        object CheckBox52: TCheckBox
+          Left = 16
+          Top = 70
+          Width = 97
+          Height = 17
+          Caption = 'Atributos'
+          TabOrder = 2
+        end
+        object CheckBox53: TCheckBox
+          Left = 16
+          Top = 93
+          Width = 97
+          Height = 17
+          Caption = 'validators'
+          TabOrder = 3
         end
       end
     end
     object TbsConsulta: TTabSheet
       Caption = 'Arquivo'
       ImageIndex = 1
+      ExplicitWidth = 639
       object Memo1: TMemo
         Left = 0
         Top = 0
-        Width = 639
+        Width = 829
         Height = 400
         Align = alClient
         Lines.Strings = (
           '')
+        ScrollBars = ssVertical
         TabOrder = 0
       end
     end
     object TabSheet1: TTabSheet
       Caption = 'Modelo'
       ImageIndex = 2
+      ExplicitWidth = 639
       object Memo3: TMemo
         Left = 0
         Top = 0
-        Width = 639
+        Width = 829
         Height = 400
         Align = alClient
         Lines.Strings = (
           'Memo1')
+        ScrollBars = ssVertical
         TabOrder = 0
       end
     end
     object TabSheet2: TTabSheet
       Caption = 'InqueryResponse'
       ImageIndex = 3
+      ExplicitWidth = 639
       object Memo4: TMemo
         Left = 0
         Top = 0
-        Width = 639
+        Width = 829
         Height = 400
         Align = alClient
         Lines.Strings = (
           'Memo1')
+        ScrollBars = ssVertical
         TabOrder = 0
       end
     end
     object TabSheet3: TTabSheet
       Caption = 'TabSheet3'
       ImageIndex = 4
+      ExplicitWidth = 639
       object Memo5: TMemo
         Left = 0
         Top = 0
-        Width = 639
+        Width = 829
         Height = 400
         Align = alClient
         Lines.Strings = (
           'Memo1')
+        ScrollBars = ssVertical
         TabOrder = 0
       end
     end
     object TabSheet4: TTabSheet
       Caption = 'TabSheet4'
       ImageIndex = 5
+      ExplicitWidth = 639
       object Memo6: TMemo
         Left = 0
         Top = 0
-        Width = 639
+        Width = 829
         Height = 400
         Align = alClient
         Lines.Strings = (
           'Memo1')
+        ScrollBars = ssVertical
         TabOrder = 0
       end
     end
     object TabSheet5: TTabSheet
       Caption = 'TabSheet5'
       ImageIndex = 6
+      ExplicitWidth = 639
       object Memo7: TMemo
         Left = 0
         Top = 0
-        Width = 639
+        Width = 829
         Height = 400
         Align = alClient
         Lines.Strings = (
           'Memo1')
+        ScrollBars = ssVertical
         TabOrder = 0
       end
     end
     object TabSheet6: TTabSheet
       Caption = 'TabSheet6'
       ImageIndex = 7
+      ExplicitWidth = 639
       object Memo8: TMemo
         Left = 0
         Top = 0
-        Width = 639
+        Width = 829
         Height = 400
         Align = alClient
         Lines.Strings = (
           'Memo1')
+        ScrollBars = ssVertical
         TabOrder = 0
       end
     end
     object TabSheet7: TTabSheet
       Caption = 'TabSheet7'
       ImageIndex = 8
+      ExplicitWidth = 639
       object Memo9: TMemo
         Left = 0
         Top = 0
-        Width = 639
+        Width = 829
         Height = 400
         Align = alClient
         Lines.Strings = (
           'Memo1')
+        ScrollBars = ssVertical
         TabOrder = 0
-        ExplicitTop = 4
       end
     end
     object TabSheet8: TTabSheet
       Caption = 'TabSheet8'
       ImageIndex = 9
+      ExplicitWidth = 639
       object Memo10: TMemo
         Left = 0
         Top = 0
-        Width = 639
+        Width = 829
         Height = 400
         Align = alClient
         Lines.Strings = (
           'Memo1')
+        ScrollBars = ssVertical
         TabOrder = 0
       end
     end
     object TabSheet9: TTabSheet
       Caption = 'TabSheet9'
       ImageIndex = 10
+      ExplicitWidth = 639
       object Memo11: TMemo
         Left = 0
         Top = 0
-        Width = 639
+        Width = 829
         Height = 400
         Align = alClient
         Lines.Strings = (
           'Memo1')
+        ScrollBars = ssVertical
         TabOrder = 0
-        ExplicitTop = -2
       end
     end
     object TabSheet10: TTabSheet
       Caption = 'TabSheet10'
       ImageIndex = 11
-      ExplicitLeft = 1
-      ExplicitTop = 28
+      ExplicitWidth = 639
       object Memo12: TMemo
         Left = 0
         Top = 0
-        Width = 639
+        Width = 829
         Height = 400
         Align = alClient
         Lines.Strings = (
           'Memo1')
+        ScrollBars = ssVertical
         TabOrder = 0
       end
     end
     object TabSheet11: TTabSheet
       Caption = 'TabSheet11'
       ImageIndex = 12
+      ExplicitWidth = 639
       object Memo13: TMemo
         Left = 0
         Top = 0
-        Width = 639
+        Width = 829
         Height = 400
         Align = alClient
         Lines.Strings = (
           'Memo1')
+        ScrollBars = ssVertical
         TabOrder = 0
       end
     end
     object TabSheet12: TTabSheet
       Caption = 'TabSheet12'
       ImageIndex = 13
+      ExplicitWidth = 639
       object Memo14: TMemo
         Left = 0
         Top = 0
-        Width = 639
+        Width = 829
         Height = 400
         Align = alClient
         Lines.Strings = (
           'Memo1')
+        ScrollBars = ssVertical
         TabOrder = 0
       end
     end
     object TabSheet13: TTabSheet
       Caption = 'TabSheet13'
       ImageIndex = 14
+      ExplicitWidth = 639
       object Memo15: TMemo
         Left = 0
         Top = 0
-        Width = 639
+        Width = 829
         Height = 400
         Align = alClient
         Lines.Strings = (
           'Memo1')
+        ScrollBars = ssVertical
         TabOrder = 0
       end
     end
     object TabSheet14: TTabSheet
       Caption = 'TabSheet14'
       ImageIndex = 15
+      ExplicitWidth = 639
       object Memo16: TMemo
         Left = 0
         Top = 0
-        Width = 639
+        Width = 829
         Height = 400
         Align = alClient
         Lines.Strings = (
           'Memo1')
+        ScrollBars = ssVertical
         TabOrder = 0
       end
     end
     object TabSheet15: TTabSheet
       Caption = 'TabSheet15'
       ImageIndex = 16
+      ExplicitWidth = 639
       object Memo17: TMemo
         Left = 0
         Top = 0
-        Width = 639
+        Width = 829
         Height = 400
         Align = alClient
         Lines.Strings = (
           'Memo1')
+        ScrollBars = ssVertical
         TabOrder = 0
       end
     end
@@ -698,7 +890,7 @@ object Form1: TForm1
     FavoriteLinks = <>
     FileTypes = <>
     Options = []
-    Left = 560
-    Top = 120
+    Left = 640
+    Top = 8
   end
 end
