@@ -70,14 +70,30 @@ type
     GroupBox4: TGroupBox;
     CheckBox25: TCheckBox;
     CheckBox26: TCheckBox;
+    CheckBox27: TCheckBox;
+    TabSheet10: TTabSheet;
+    TabSheet11: TTabSheet;
+    TabSheet12: TTabSheet;
+    TabSheet13: TTabSheet;
+    TabSheet14: TTabSheet;
+    Memo12: TMemo;
+    Memo13: TMemo;
+    Memo14: TMemo;
+    Memo15: TMemo;
+    Memo16: TMemo;
+    TabSheet15: TTabSheet;
+    Memo17: TMemo;
+    CheckBox28: TCheckBox;
     procedure SpeedButton1Click(Sender: TObject);
     procedure BtnPesquisaClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
     procedure gerarModelo(Txt:String);
     function escreverCode(Txt:String):String;
     function verificadorCode(Txt:String):String;
+    function escreverCodeXML(Txt:String;Op:Integer):String;
     function criarCodeInquiryResponse(Txt:String):String;
     function criarCodeInquiryRequest(Txt:String):String;
     function criarCodeResponse(Txt:String):String;
@@ -94,6 +110,12 @@ type
     function criarCodeClasseXML(Txt:String):String;
     function criarCodeClasseSqlMapConfigXml(Txt:String):String;
     function criarCodeClasseAPIControler(Txt:String):String;
+    function criarCodeClasseHTML(Txt:String):String;
+    function criarCodeClasseMainJS(Txt:String):String;
+    function criarCodeClasseInitJS(Txt:String):String;
+    function criarGerarProcedureInsert(Txt:String):String;
+    function criarGerarProcedureUpdate(Txt:String):String;
+    function verificadorCodeAppBanco(Txt:String):String;
   end;
 
 var
@@ -104,10 +126,103 @@ var
 implementation
 
 {$R *.dfm}
+
+function TForm1.criarGerarProcedureInsert(Txt:String):String;
+begin
+      AssignFile(F,'c:\Ins'+PrimeiraMaiscula(Edit1.Text)+'.sql');
+      Rewrite(F); //abre o arquivo para escrita
+      Writeln(F,'CREATE OR REPLACE FUNCTION ins_'+(Edit1.Text)+'(p_name character varying, p_autogroup boolean, p_address_related boolean,  p_tenant_id integer, p_create_user character varying)');
+      Writeln(F,'RETURNS integer AS');
+      Writeln(F,'$$');
+      Writeln(F,'DECLARE');
+      Writeln(F,'		id int;');
+      Writeln(F,'BEGIN');
+      Writeln(F,'	INSERT INTO tag');
+      Writeln(F,'		   (name');
+      Writeln(F,'		   ,auto_group');
+      Writeln(F,'		   ,address_related');
+      Writeln(F,'		   ,tenant_id');
+      Writeln(F,'		   ,create_user)');
+      Writeln(F,'	VALUES');
+      Writeln(F,'		   (p_name');
+      Writeln(F,'		   ,p_autogroup');
+      Writeln(F,'		   ,p_address_related');
+      Writeln(F,'		   ,(SELECT tenant_id from tenant where tenant.tenant_id = p_tenant_id)');
+      Writeln(F,'		   ,p_create_user) RETURNING tag_id INTO id;');
+      Writeln(F,'');
+      Writeln(F,'	 RETURN id; ');
+      Writeln(F,'END');
+      Writeln(F,'$$');
+      Writeln(F,'LANGUAGE ''plpgsql'';');
+      Writeln(F,'');
+      Closefile(F);
+
+end;
+function TForm1.criarGerarProcedureUpdate(Txt:String):String;
+var linha:String;
+begin
+      AssignFile(F,'c:\Upd'+PrimeiraMaiscula(Edit1.Text)+'.sql');
+      Rewrite(F);
+      Writeln(F,'CREATE OR REPLACE FUNCTION upd_'+Edit1.Text+'(');
+      AssignFile(arq, BrvEdit1.Text);
+      Reset(arq);   // [ 3 ] Abre o arquivo texto para leitura
+      {$I+}
+      while (not eof(arq)) do
+      begin
+           readln(arq, linha); // [ 6 ] Lê uma linha do arquivo
+           Writeln(F,escreverCodeXML(linha,3));
+      end;
+
+      CloseFile(arq); // [ 8 ] Fecha o arquivo texto aberto
+      Writeln(F,')');
+      Writeln(F,'RETURNS void AS');
+      Writeln(F,'$$');
+      Writeln(F,'BEGIN');
+      Writeln(F,'	UPDATE '+Edit1.Text+' ');
+      Writeln(F,'	   SET ');
+      AssignFile(arq, BrvEdit1.Text);
+
+      Reset(arq);   // [ 3 ] Abre o arquivo texto para leitura
+      {$I+}
+      while (not eof(arq)) do
+      begin
+           readln(arq, linha); // [ 6 ] Lê uma linha do arquivo
+           Writeln(F,escreverCodeXML(linha,4));
+      end;
+
+      CloseFile(arq); // [ 8 ] Fecha o arquivo texto aberto
+
+      Writeln(F,'	 WHERE SubstituirID = p_SubstituirID;');
+      Writeln(F,'END');
+      Writeln(F,'$$');
+      Writeln(F,'  LANGUAGE plpgsql;');
+      Closefile(F);
+end;
+function TForm1.criarCodeClasseHTML(Txt:String):String;
+begin
+       AssignFile(F,'c:\I'+PrimeiraMaiscula(Edit1.Text)+'DAC.java');
+       Rewrite(F); //abre o arquivo para escrita
+       Closefile(F);
+end;
+function TForm1.criarCodeClasseMainJS(Txt:String):String;
+begin
+       AssignFile(F,'c:\I'+PrimeiraMaiscula(Edit1.Text)+'DAC.java');
+       Rewrite(F); //abre o arquivo para escrita
+       Closefile(F);
+end;
+function TForm1.criarCodeClasseInitJS(Txt:String):String;
+begin
+       AssignFile(F,'c:\I'+PrimeiraMaiscula(Edit1.Text)+'DAC.java');
+        Rewrite(F); //abre o arquivo para escrita
+       Closefile(F);
+end;
+
+
 function TForm1.criarCodeClasseAPIControler(Txt:String):String;
 begin
-      AssignFile(F,'c:\I'+PrimeiraMaiscula(Edit1.Text)+'DAC.java');
-      Writeln(F,'package com.sensus.mlc.wui.almoxarifado;');
+      AssignFile(F,'c:\'+PrimeiraMaiscula(Edit1.Text)+'APIControler.java');
+      Rewrite(F); //abre o arquivo para escrita
+      Writeln(F,'package com.sensus.mlc.wui.'+Edit1.Text+';');
       Writeln(F,'import javax.servlet.http.HttpServletRequest;');
       Writeln(F,'');
       Writeln(F,'import org.slf4j.Logger;');
@@ -120,11 +235,11 @@ begin
       Writeln(F,'');
       Writeln(F,'import com.sensus.common.model.response.Response;');
       Writeln(F,'import com.sensus.common.util.SensusInterfaceUtil;');
-      Writeln(F,'import com.sensus.mlc.almoxarifado.bcf.IAlmoxarifadoBCF;');
-      Writeln(F,'import com.sensus.mlc.almoxarifado.model.request.AlmoxarifadoRequest;');
-      Writeln(F,'import com.sensus.mlc.almoxarifado.model.request.InquiryAlmoxarifadoRequest;');
-      Writeln(F,'import com.sensus.mlc.almoxarifado.model.response.AlmoxarifadoResponse;');
-      Writeln(F,'import com.sensus.mlc.almoxarifado.model.response.InquiryAlmoxarifadoResponse;');
+      Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.bcf.I'+PrimeiraMaiscula(Edit1.Text)+'BCF;');
+      Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.model.request.'+PrimeiraMaiscula(Edit1.Text)+'Request;');
+      Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.model.request.Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request;');
+      Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.model.response.'+PrimeiraMaiscula(Edit1.Text)+'Response;');
+      Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.model.response.Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Response;');
       Writeln(F,'import com.sensus.mlc.wui.BaseController;');
       Writeln(F,'import com.sensus.mlc.wui.light.LightAPIController;');
       Writeln(F,'');
@@ -133,8 +248,8 @@ begin
       Writeln(F,'* ');
       Writeln(F,'*/ ');
       Writeln(F,'@Controller');
-      Writeln(F,'@RequestMapping("/api/almoxarifado") ');
-      Writeln(F,'public class AlmoxarifadoAPIController extends BaseController  ');
+      Writeln(F,'@RequestMapping("/api/'+Edit1.Text+'") ');
+      Writeln(F,'public class '+PrimeiraMaiscula(Edit1.Text)+'APIController extends BaseController  ');
       Writeln(F,'{ ');
       Writeln(F,'');
       Writeln(F,'/* ');
@@ -155,22 +270,22 @@ begin
       Writeln(F,'private static final String MAP_UPDATE = "/update";');
       Writeln(F,'');
       Writeln(F,'');
-      Writeln(F,'private IAlmoxarifadoBCF almoxarifadoBCF;');
+      Writeln(F,'private I'+PrimeiraMaiscula(Edit1.Text)+'BCF '+Edit1.Text+'BCF;');
       Writeln(F,'');
       Writeln(F,'/** The Constant LOG. */');
       Writeln(F,'private static final Logger LOG = LoggerFactory.getLogger(LightAPIController.class);');
       Writeln(F,'');
       Writeln(F,'/** The Constant CONTROLLER_EXCEPTION_MSG. */  ');
-      Writeln(F,'public static final String CONTROLLER_EXCEPTION_MSG = "TagAPIController";');
+      Writeln(F,'public static final String CONTROLLER_EXCEPTION_MSG = "'+PrimeiraMaiscula(Edit1.Text)+'APIController";');
       Writeln(F,'');
       Writeln(F,'');
       Writeln(F,'');
-      Writeln(F,'public IAlmoxarifadoBCF getAlmoxarifadoBCF() { ');
-      Writeln(F,'return almoxarifadoBCF;');
+      Writeln(F,'public I'+PrimeiraMaiscula(Edit1.Text)+'BCF get'+PrimeiraMaiscula(Edit1.Text)+'BCF() { ');
+      Writeln(F,'return '+Edit1.Text+'BCF;');
       Writeln(F,'}  ');
       Writeln(F,'');
-      Writeln(F,'public void setAlmoxarifadoBCF(IAlmoxarifadoBCF almoxarifadoBCF) {  ');
-      Writeln(F,'this.almoxarifadoBCF = almoxarifadoBCF;');
+      Writeln(F,'public void set'+PrimeiraMaiscula(Edit1.Text)+'BCF(I'+PrimeiraMaiscula(Edit1.Text)+'BCF '+Edit1.Text+'BCF) {  ');
+      Writeln(F,'this.'+Edit1.Text+'BCF = '+Edit1.Text+'BCF;');
       Writeln(F,'}');
       Writeln(F,'');
       Writeln(F,'');
@@ -180,15 +295,15 @@ begin
       Writeln(F,'');
       Writeln(F,'@RequestMapping(value = MAP_INSERT, method = RequestMethod.POST) ');
       Writeln(F,'@ResponseBody   ');
-      Writeln(F,'public Response insert(@RequestBody AlmoxarifadoRequest almoxarifadoRequest, HttpServletRequest request) ');
+      Writeln(F,'public Response insert(@RequestBody '+PrimeiraMaiscula(Edit1.Text)+'Request '+Edit1.Text+'Request, HttpServletRequest request) ');
       Writeln(F,'{ ');
       Writeln(F,'');
-      Writeln(F,'AlmoxarifadoResponse response = new AlmoxarifadoResponse();');
+      Writeln(F,''+PrimeiraMaiscula(Edit1.Text)+'Response response = new '+PrimeiraMaiscula(Edit1.Text)+'Response();');
       Writeln(F,'try  ');
       Writeln(F,'{ ');
-      Writeln(F,'setUserContext(almoxarifadoRequest, request);');
+      Writeln(F,'setUserContext('+Edit1.Text+'Request, request);');
       Writeln(F,'');
-      Writeln(F,'response = getAlmoxarifadoBCF().insertAlmoxarifado(almoxarifadoRequest);');
+      Writeln(F,'response = get'+PrimeiraMaiscula(Edit1.Text)+'BCF().insert'+PrimeiraMaiscula(Edit1.Text)+'('+Edit1.Text+'Request);');
       Writeln(F,'');
       Writeln(F,'}  ');
       Writeln(F,'catch (Exception e)');
@@ -203,23 +318,23 @@ begin
       Writeln(F,'');
       Writeln(F,'');
       Writeln(F,'/**  ');
-      Writeln(F,'* Update filial.  ');
+      Writeln(F,'* Update '+Edit1.Text+'.  ');
       Writeln(F,'*    ');
-      Writeln(F,'* @param filialRequest the filial request  ');
-      Writeln(F,'* @return the filial response  ');
+      Writeln(F,'* @param '+Edit1.Text+'Request the '+Edit1.Text+' request  ');
+      Writeln(F,'* @return the '+Edit1.Text+' response  ');
       Writeln(F,'*/  ');
       Writeln(F,'');
       Writeln(F,'@RequestMapping(value = MAP_UPDATE, method = RequestMethod.POST)  ');
       Writeln(F,'@ResponseBody  ');
-      Writeln(F,'public Response updateAlmoxarifado(@RequestBody AlmoxarifadoRequest almoxarifadoRequest, HttpServletRequest request) ');
+      Writeln(F,'public Response update'+PrimeiraMaiscula(Edit1.Text)+'(@RequestBody '+PrimeiraMaiscula(Edit1.Text)+'Request '+Edit1.Text+'Request, HttpServletRequest request) ');
       Writeln(F,'{ ');
       Writeln(F,'');
-      Writeln(F,'AlmoxarifadoResponse response = new AlmoxarifadoResponse();');
+      Writeln(F,''+PrimeiraMaiscula(Edit1.Text)+'Response response = new '+PrimeiraMaiscula(Edit1.Text)+'Response();');
       Writeln(F,'try  ');
       Writeln(F,'{ ');
-      Writeln(F,'setUserContext(almoxarifadoRequest, request);');
+      Writeln(F,'setUserContext('+Edit1.Text+'Request, request);');
       Writeln(F,'');
-      Writeln(F,'response = getAlmoxarifadoBCF().updateAlmoxarifado(almoxarifadoRequest);');
+      Writeln(F,'response = get'+PrimeiraMaiscula(Edit1.Text)+'BCF().update'+PrimeiraMaiscula(Edit1.Text)+'('+Edit1.Text+'Request);');
       Writeln(F,'');
       Writeln(F,'} ');
       Writeln(F,'catch (Exception e) ');
@@ -241,15 +356,15 @@ begin
       Writeln(F,'');
       Writeln(F,'@RequestMapping(value = MAP_DELETE, method = RequestMethod.POST)  ');
       Writeln(F,'@ResponseBody  ');
-      Writeln(F,'public Response deleteAlmoxarifado(@RequestBody AlmoxarifadoRequest almoxarifadoRequest, HttpServletRequest request) ');
+      Writeln(F,'public Response delete'+PrimeiraMaiscula(Edit1.Text)+'(@RequestBody '+PrimeiraMaiscula(Edit1.Text)+'Request '+Edit1.Text+'Request, HttpServletRequest request) ');
       Writeln(F,'{  ');
       Writeln(F,'');
-      Writeln(F,'AlmoxarifadoResponse response = new AlmoxarifadoResponse();');
+      Writeln(F,''+PrimeiraMaiscula(Edit1.Text)+'Response response = new '+PrimeiraMaiscula(Edit1.Text)+'Response();');
       Writeln(F,'try ');
       Writeln(F,'{ ');
-      Writeln(F,'setUserContext(almoxarifadoRequest, request);');
+      Writeln(F,'setUserContext('+Edit1.Text+'Request, request);');
       Writeln(F,'');
-      Writeln(F,'response = getAlmoxarifadoBCF().deleteAlmoxarifado(almoxarifadoRequest);');
+      Writeln(F,'response = get'+PrimeiraMaiscula(Edit1.Text)+'BCF().delete'+PrimeiraMaiscula(Edit1.Text)+'('+Edit1.Text+'Request);');
       Writeln(F,'');
       Writeln(F,'} ');
       Writeln(F,'catch (Exception e) ');
@@ -270,15 +385,15 @@ begin
       Writeln(F,'');
       Writeln(F,'@RequestMapping(value = MAP_FETCHALL, method = RequestMethod.POST) ');
       Writeln(F,'@ResponseBody ');
-      Writeln(F,'public Response fetch(@RequestBody InquiryAlmoxarifadoRequest inquiryAlmoxarifadoRequest, HttpServletRequest request) ');
+      Writeln(F,'public Response fetch(@RequestBody Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request, HttpServletRequest request) ');
       Writeln(F,'{  ');
       Writeln(F,'');
-      Writeln(F,'InquiryAlmoxarifadoResponse response = new InquiryAlmoxarifadoResponse();');
+      Writeln(F,'Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Response response = new Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Response();');
       Writeln(F,'try');
       Writeln(F,'{ ');
-      Writeln(F,'setUserContext(inquiryAlmoxarifadoRequest, request);');
+      Writeln(F,'setUserContext(inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request, request);');
       Writeln(F,'');
-      Writeln(F,'response = getAlmoxarifadoBCF().fetchAllAlmoxarifado(inquiryAlmoxarifadoRequest);');
+      Writeln(F,'response = get'+PrimeiraMaiscula(Edit1.Text)+'BCF().fetchAll'+PrimeiraMaiscula(Edit1.Text)+'(inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request);');
       Writeln(F,'');
       Writeln(F,'}');
       Writeln(F,'catch (Exception e) ');
@@ -299,15 +414,15 @@ begin
       Writeln(F,'');
       Writeln(F,'@RequestMapping(value = MAP_FETCH, method = RequestMethod.POST) ');
       Writeln(F,'@ResponseBody ');
-      Writeln(F,'public Response fetch(@RequestBody AlmoxarifadoRequest almoxarifadoRequest, HttpServletRequest request)   ');
+      Writeln(F,'public Response fetch(@RequestBody '+PrimeiraMaiscula(Edit1.Text)+'Request '+Edit1.Text+'Request, HttpServletRequest request)   ');
       Writeln(F,'{ ');
       Writeln(F,'');
-      Writeln(F,'AlmoxarifadoResponse response = new AlmoxarifadoResponse();');
+      Writeln(F,''+PrimeiraMaiscula(Edit1.Text)+'Response response = new '+PrimeiraMaiscula(Edit1.Text)+'Response();');
       Writeln(F,'try   ');
       Writeln(F,'{  ');
-      Writeln(F,'setUserContext(almoxarifadoRequest, request);');
+      Writeln(F,'setUserContext('+Edit1.Text+'Request, request);');
       Writeln(F,'');
-      Writeln(F,'response = getAlmoxarifadoBCF().fetchAlmoxarifadoById(almoxarifadoRequest);');
+      Writeln(F,'response = get'+PrimeiraMaiscula(Edit1.Text)+'BCF().fetch'+PrimeiraMaiscula(Edit1.Text)+'ById('+Edit1.Text+'Request);');
       Writeln(F,'');
       Writeln(F,'} ');
       Writeln(F,'catch (Exception e)');
@@ -328,6 +443,7 @@ end;
 function TForm1.criarCodeClasseSqlMapConfigXml(Txt:String):String;
 begin
       AssignFile(F,'c:\I'+PrimeiraMaiscula(Edit1.Text)+'DAC.java');
+      Rewrite(F); //abre o arquivo para escrita
       Writeln(F,'<?xml version="1.0" encoding="UTF-8"?>');
       Writeln(F,'<!DOCTYPE configuration');
       Writeln(F,'PUBLIC "-//mybatis.org//DTD Config 3.0//EN"');
@@ -340,20 +456,20 @@ begin
       Writeln(F,'</settings>');
 
       Writeln(F,'<typeAliases>');
-      Writeln(F,'<!-- Empresa mapping -->');
-      Writeln(F,'<typeAlias alias="InquiryEmpresaRequest" 	type="com.sensus.mlc.empresa.model.request.InquiryEmpresaRequest" />');
-      Writeln(F,'<typeAlias alias="EmpresaRequest" 			type="com.sensus.mlc.empresa.model.request.EmpresaRequest" />');
+      Writeln(F,'<!-- '+PrimeiraMaiscula(Edit1.Text)+' mapping -->');
+      Writeln(F,'<typeAlias alias="Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request" 	type="com.sensus.mlc.'+Edit1.Text+'.model.request.Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request" />');
+      Writeln(F,'<typeAlias alias="'+PrimeiraMaiscula(Edit1.Text)+'Request" 			type="com.sensus.mlc.'+Edit1.Text+'.model.request.'+PrimeiraMaiscula(Edit1.Text)+'Request" />');
       Writeln(F,'<typeAlias alias="FilialRequest" 		type="com.sensus.mlc.filial.model.request.FilialRequest" />');
       Writeln(F,'<typeAlias alias="EnderecoRequest" 		type="com.sensus.mlc.endereco.model.request.EnderecoRequest" />');
 
-      Writeln(F,'<!-- Empresa and Smartpoint joint mapping -->');
-      Writeln(F,'<typeAlias alias="Empresa"  Writeln(F,''type="com.sensus.mlc.empresa.model.Empresa"/>');
+      Writeln(F,'<!-- '+PrimeiraMaiscula(Edit1.Text)+' and Smartpoint joint mapping -->');
+      Writeln(F,'<typeAlias alias="'+PrimeiraMaiscula(Edit1.Text)+'"  Writeln(F,''type="com.sensus.mlc.'+Edit1.Text+'.model.'+PrimeiraMaiscula(Edit1.Text)+'"/>');
       Writeln(F,'<typeAlias alias="Filial" Writeln(F,''    type="com.sensus.mlc.filial.model.Filial"/>');
       Writeln(F,'<typeAlias alias="Endereco" Writeln(F,''type="com.sensus.mlc.endereco.model.Endereco"/>');
 
       Writeln(F,'<!-- Smartpoint mapping -->');
       Writeln(F,'<typeAlias alias="Group" Writeln(F,''		  type="com.sensus.mlc.group.model.Group" />');
-      Writeln(F,'<typeAlias alias="Tag" Writeln(F,''	      type="com.sensus.mlc.tag.model.Tag" />');
+      Writeln(F,'<typeAlias alias="'+Edit1.Text+'" Writeln(F,''	      type="com.sensus.mlc.tag.model.'+Edit1.Text+'" />');
       Writeln(F,'<typeAlias alias="StatusMessage" Writeln(F,''  type="com.sensus.mlc.smartpoint.model.StatusMessage" />');
       Writeln(F,'<typeAlias alias="LightParameter" Writeln(F,''  type="com.sensus.mlc.smartpoint.model.LightParameter" />');
       Writeln(F,'<typeAlias alias="PropertyValidValue" 			  type="com.sensus.mlc.smartpoint.model.PropertyValidValue" />');
@@ -382,7 +498,7 @@ begin
       Writeln(F,'</typeAliases>');
 
       Writeln(F,'<mappers>');
-      Writeln(F,'<mapper resource="com/sensus/mlc/empresa/dac/mybatis/map/Empresa.xml"/>');
+      Writeln(F,'<mapper resource="com/sensus/mlc/'+Edit1.Text+'/dac/mybatis/map/'+PrimeiraMaiscula(Edit1.Text)+'.xml"/>');
       Writeln(F,'<mapper resource="com/sensus/mlc/filial/dac/mybatis/map/Filial.xml" />');
       Writeln(F,'<mapper resource="com/sensus/mlc/endereco/dac/mybatis/map/Endereco.xml" />');
       Writeln(F,'</mappers>');
@@ -393,169 +509,65 @@ begin
       Closefile(F);
 end;
 function TForm1.criarCodeClasseXML(Txt:String):String;
+var linha: string;
 begin
       AssignFile(F,'c:\I'+PrimeiraMaiscula(Edit1.Text)+'DAC.java');
+      Rewrite(F); //abre o arquivo para escrita
       Writeln(F,'<?xml version="1.0" encoding="UTF-8"?>');
       Writeln(F,'<!DOCTYPE mapper ');
       Writeln(F,'PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" ');
       Writeln(F,'"http://mybatis.org/dtd/mybatis-3-mapper.dtd">');
 
-      Writeln(F,'<mapper namespace="Empresa">');
+      Writeln(F,'<mapper namespace="'+PrimeiraMaiscula(Edit1.Text)+'">');
 
-      Writeln(F,'<resultMap id="EmpresasResult" type="Empresa">');
-      Writeln(F,'<result property="codemp" column="codemp" />');
-      Writeln(F,'<result property="razemp" column="razemp" />');
-      Writeln(F,'<result property="nomeemp" column="nomeemp" />');
-      Writeln(F,'<result property="cnpjemp" column="cnpjemp" />');
-      Writeln(F,'<result property="inscemp" column="inscemp" />');
-      Writeln(F,'<result property="endemp" column="endemp" />');
-      Writeln(F,'<result property="numemp" column="numemp" />');
-      Writeln(F,'<result property="complemp" column="complemp" />');
-      Writeln(F,'<result property="bairemp" column="bairemp" />');
-      Writeln(F,'<result property="cepemp" column="cepemp" />');
-      Writeln(F,'<result property="cidemp" column="cidemp" />');
-      Writeln(F,'<result property="ufemp" column="ufemp" />');
-      Writeln(F,'<result property="dddemp" column="dddemp" />');
-      Writeln(F,'<result property="foneemp" column="foneemp" />');
-      Writeln(F,'<result property="faxemp" column="faxemp" />');
-      Writeln(F,'<result property="emailemp" column="emailemp" />');
-      Writeln(F,'<result property="wwwemp" column="wwwemp" />');
-      Writeln(F,'<result property="codeanemp" column="codeanemp" />');
-      Writeln(F,'<result property="nomecontemp" column="nomecontemp" />');
-      Writeln(F,'<result property="multialmoxemp" column="multialmoxemp" />');
-      Writeln(F,'<result property="fotoemp" column="fotoemp" />');
-      Writeln(F,'<result property="codmunic" column="codmunic" />');
-      Writeln(F,'<result property="siglauf" column="siglauf" />');
-      Writeln(F,'<result property="codpais" column="codpais" />');
-      Writeln(F,'<result property="percissemp" column="percissemp" />');
-      Writeln(F,'<result property="codpaisemp" column="codpaisemp" />');
-      Writeln(F,'<result property="dtins" column="dtins" />');
-      Writeln(F,'<result property="hins" column="hins" />');
-      Writeln(F,'<result property="idusuins" column="idusuins" />');
-      Writeln(F,'<result property="dtalt" column="dtalt" />');
-      Writeln(F,'<result property="halt" column="halt" />');
-      Writeln(F,'<result property="idusualt" column="idusualt" />');
-      Writeln(F,'<collection property="listFilial" column="codemp" ');
-      Writeln(F,'select="Empresa.fetchAllFiliaisById" />');
-      Writeln(F,'<collection property="codend" column="codend" ');
-      Writeln(F,'select="Empresa.fetchAllEnderecoByEmpresa" />');
+      Writeln(F,'<resultMap id="'+PrimeiraMaiscula(Edit1.Text)+'sResult" type="'+PrimeiraMaiscula(Edit1.Text)+'">');
+      AssignFile(arq, BrvEdit1.Text);
+      Reset(arq);   // [ 3 ] Abre o arquivo texto para leitura
+      {$I+}
+      while (not eof(arq)) do
+      begin
+           readln(arq, linha); // [ 6 ] Lê uma linha do arquivo
+           Writeln(F,escreverCodeXML(linha,1));
+      end;
+
+      CloseFile(arq); // [ 8 ] Fecha o arquivo texto aberto
+
       Writeln(F,'</resultMap>');
 
-      Writeln(F,'<resultMap id="FilialResult" type="Filial">');
-      Writeln(F,'<result property="codemp" column="codemp" />');
-      Writeln(F,'<result property="codfilial" column="codfilial" />');
-      Writeln(F,'<result property="razfilial" column="razfilial" />');
-      Writeln(F,'<result property="nomefilial" column="nomefilial" />');
-      Writeln(F,'<result property="mzfilial" column="mzfilial" />');
-      Writeln(F,'<result property="cnpjfilial" column="cnpjfilial" />');
-      Writeln(F,'<result property="inscfilial" column="inscfilial" />');
-      Writeln(F,'<result property="coddistfilial" column="coddistfilial" />');
-      Writeln(F,'<result property="percpisfilial" column="percpisfilial" />');
-      Writeln(F,'<result property="perccofinsfilial" column="perccofinsfilial" />');
-      Writeln(F,'<result property="percirfilial" column="percirfilial" />');
-      Writeln(F,'<result property="perccsocialfilial" column="perccsocialfilial" />');
-      Writeln(F,'<result property="simplesfilial" column="simplesfilial" />');
-      Writeln(F,'<result property="percsimplesfilial" column="percsimplesfilial" />');
-      Writeln(F,'<result property="codmunic" column="codmunic" />');
-      Writeln(F,'<result property="siglauf" column="siglauf" />');
-      Writeln(F,'<result property="codpais" column="codpais" />');
-      Writeln(F,'<result property="codempuc" column="codempuc" />');
-      Writeln(F,'<result property="codfilialuc" column="codfilialuc" />');
-      Writeln(F,'<result property="codunifcod" column="codunifcod" />');
-      Writeln(F,'<result property="inscmunfilial" column="inscmunfilial" />');
-      Writeln(F,'<result property="cnaefilial" column="cnaefilial" />');
-      Writeln(F,'<result property="percissfilial" column="percissfilial" />');
-      Writeln(F,'<result property="contribipifilial" column="contribipifilial" />');
-      Writeln(F,'<result property="timbrefilial" column="timbrefilial" />');
-      Writeln(F,'<result property="perfilfilial" column="perfilfilial" />');
-      Writeln(F,'<result property="indativfilial" column="indativfilial" />');
-      Writeln(F,'<result property="dtins" column="dtins" />');
-      Writeln(F,'<result property="hins" column="hins" />');
-      Writeln(F,'<result property="idusuins" column="idusuins" />');
-      Writeln(F,'<result property="dtalt" column="dtalt" />');
-      Writeln(F,'<result property="halt" column="halt" />');
-      Writeln(F,'<result property="idusualt" column="idusualt" />');
-      Writeln(F,'<result property="codempco" column="codempco" />');
-      Writeln(F,'<result property="codfilialco" column="codfilialco" />');
-      Writeln(F,'<result property="codfor" column="codfor" />');
-      Writeln(F,'<result property="suframa" column="suframa" />');
-      Writeln(F,'<result property="sedeMatriz" column="sedeMatriz" />');
-      Writeln(F,'<collection property="codend" column="codend" ');
-      Writeln(F,'select="Empresa.fetchAllEnderecoByFilial" />');
-      Writeln(F,'</resultMap>');
+      Writeln(F,'<sql id="all'+PrimeiraMaiscula(Edit1.Text)+'Columms">');
+      AssignFile(arq, BrvEdit1.Text);
+      Write(F,'SELECT ');
+      Reset(arq);   // [ 3 ] Abre o arquivo texto para leitura
+      {$I+}
+      while (not eof(arq)) do
+      begin
+           readln(arq, linha); // [ 6 ] Lê uma linha do arquivo
+           Write(F,escreverCodeXML(linha,2)+',');
+      end;
 
-      Writeln(F,'<resultMap id="EnderecoResult" type="Endereco">');
-      Writeln(F,'<result property="codend" column="codend" />');
-      Writeln(F,'<result property="endereco" column="ende" />');
-      Writeln(F,'<result property="numero" column="num" />');
-      Writeln(F,'<result property="complemento" column="compl" />');
-      Writeln(F,'<result property="bairro" column="bair" />');
-      Writeln(F,'<result property="cep" column="cep" />');
-      Writeln(F,'<result property="cidade" column="cid" />');
-      Writeln(F,'<result property="uf" column="uf" />');
-      Writeln(F,'<result property="ddd" column="ddd" />');
-      Writeln(F,'<result property="fone1" column="fone" />');
-      Writeln(F,'<result property="fone2" column="fone" />');
-      Writeln(F,'<result property="email" column="email" />');
-      Writeln(F,'<result property="site" column="www" />');
-      Writeln(F,'<result property="cel1" column="fone" />');
-      Writeln(F,'<result property="cel2" column="fone" />');
-      Writeln(F,'<result property="codpais" column="codpais" />');
-      Writeln(F,'<result property="codmunic" column="codmunic" />');
-      Writeln(F,'<!--  	<result property="siglauf" column="siglauf" />');
-      Writeln(F,'<result property="dtins" column="dtins" />');
-      Writeln(F,'<result property="hins" column="hins" />');
-      Writeln(F,'<result property="idusuins" column="idusuins" />');
-      Writeln(F,'<result property="dtalt" column="dtalt" />');
-      Writeln(F,'<result property="halt" column="halt" />');
-      Writeln(F,'<result property="idusualt" column="idusualt" />');
-      Writeln(F,'</resultMap>');
-
-      Writeln(F,'<sql id="allEmpresaColumms">');
-      Writeln(F,'SELECT codemp, razemp, nomeemp, cnpjemp, inscemp, codend, codean, multialmoxemp,');
-      Writeln(F,'fotoemp, codmunic, percissemp, dtins, hins, dtalt, halt, idusuins ');
+      CloseFile(arq); // [ 8 ] Fecha o arquivo texto aberto
       Writeln(F,'</sql>');
 
-      Writeln(F,'<!-- Fetch All Tags -->');
-      Writeln(F,'<select id="fetchAllEmpresas" parameterType="Map" resultMap="EmpresasResult">');
+      Writeln(F,'<!-- Fetch All '+Edit1.Text+'s -->');
+      Writeln(F,'<select id="fetchAll'+PrimeiraMaiscula(Edit1.Text)+'s" parameterType="Map" resultMap="'+PrimeiraMaiscula(Edit1.Text)+'sResult">');
 
-      Writeln(F,'SELECT codemp, razemp, nomeemp, cnpjemp, inscemp, codend, codean, multialmoxemp, ');
-      Writeln(F,'fotoemp, codmunic, percissemp, dtins, hins, dtalt, halt, idusuins   ');
-      Writeln(F,'FROM empresa;   ');
-
-      Writeln(F,'</select>');
-
-      Writeln(F,'<select id="fetchAllFiliaisById"  parameterType="Map" resultMap="FilialResult">');
-
-      Writeln(F,'select f.* ');
-      Writeln(F,'from filial f ,empresa e   ');
-      Writeln(F,'where   ');
-      Writeln(F,'f.codemp = e.codemp and  ');
-      Writeln(F,'f.codemp = #{codemp}  ');
+      Writeln(F,'SELECT  <include refid="all'+PrimeiraMaiscula(Edit1.Text)+'Columms"/>');
+      Writeln(F,'FROM '+Edit1.Text+';   ');
 
       Writeln(F,'</select>');
 
-      Writeln(F,'<select id="fetchAllEnderecoByFilial"  resultMap="EnderecoResult">');
+      Writeln(F,'<select id="fetchAll'+PrimeiraMaiscula(Edit1.Text)+'ById"  parameterType="Map" resultMap="'+PrimeiraMaiscula(Edit1.Text)+'Result">');
 
-      Writeln(F,'select e.*  ');
-      Writeln(F,'from filial f  ');
-      Writeln(F,'inner join endereco e on   ');
-      Writeln(F,'(f.codend = e.codend and f.codfilial = #{codfilial} ) ');
-
-      Writeln(F,'</select>');
-
-      Writeln(F,'<select id="fetchAllEnderecoByEmpresa"  resultMap="EnderecoResult">');
-
-      Writeln(F,'select n.*');
-      Writeln(F,'from empresa e  ');
-      Writeln(F,'left join endereco n on  ');
-      Writeln(F,'(e.codend = n.codend and e.codemp = #{codemp})  ');
+      Writeln(F,'   select <include refid="all'+PrimeiraMaiscula(Edit1.Text)+'Columms"/>');
+      Writeln(F,'   from '+Edit1.Text+' e   ');
+      Writeln(F,'   where   ');
+      Writeln(F,'   e.codemp = #{codemp}  ');
 
       Writeln(F,'</select>');
 
-      Writeln(F,'<!-- Insert Empresa -->');
-      Writeln(F,'<select id="insertEmpresa" parameterType="Empresa" resultType="int">');
-      Writeln(F,'SELECT ins_empresa (   ');
+      Writeln(F,'<!-- Insert '+PrimeiraMaiscula(Edit1.Text)+' -->');
+      Writeln(F,'<select id="insert'+PrimeiraMaiscula(Edit1.Text)+'" parameterType="'+PrimeiraMaiscula(Edit1.Text)+'" resultType="int">');
+      Writeln(F,'SELECT ins_'+Edit1.Text+' (   ');
       Writeln(F,'#{emdemp,jdbcType=VARCHAR}, ');
       Writeln(F,'#{numemp,jdbcType=INTEGER}, ');
       Writeln(F,'#{complemp,jdbcType=VARCHAR},  ');
@@ -583,7 +595,7 @@ begin
       Writeln(F,'#{percissemp,jdbcType=DOUBLE})     ');
       Writeln(F,'</select>');
 
-      Writeln(F,'<select id="insertEndereco" parameterType="Empresa" resultType="int">');
+      Writeln(F,'<select id="insertEndereco" parameterType="'+PrimeiraMaiscula(Edit1.Text)+'" resultType="int">');
       Writeln(F,'SELECT ins_endereco( ');
       Writeln(F,'#{emdemp,jdbcType=VARCHAR}, ');
       Writeln(F,'#{numemp,jdbcType=INTEGER},  ');
@@ -608,7 +620,8 @@ end;
 function TForm1.criarCodeIClasseDACImpl(Txt:String):String;
 begin
       AssignFile(F,'c:\I'+PrimeiraMaiscula(Edit1.Text)+'DAC.java');
-      Writeln(F,'package com.sensus.mlc.empresa.dac.mybatis;');
+      Rewrite(F); //abre o arquivo para escrita
+      Writeln(F,'package com.sensus.mlc.'+Edit1.Text+'.dac.mybatis;');
       Writeln(F,'');
       Writeln(F,'');
       Writeln(F,'');
@@ -630,11 +643,11 @@ begin
       Writeln(F,'import com.sensus.common.model.response.InternalResponse;');
       Writeln(F,'import com.sensus.common.model.response.InternalResultsResponse;');
       Writeln(F,'import com.sensus.common.validation.ValidationUtil;');
-      Writeln(F,'import com.sensus.mlc.empresa.dac.IEmpresaDAC;');
-      Writeln(F,'import com.sensus.mlc.empresa.model.Empresa;');
-      Writeln(F,'import com.sensus.mlc.empresa.model.request.EmpresaRequest;');
-      Writeln(F,'import com.sensus.mlc.empresa.model.request.InquiryEmpresaRequest;');
-      Writeln(F,'import com.sensus.mlc.empresa.model.response.EmpresaResponse;');
+      Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.dac.I'+PrimeiraMaiscula(Edit1.Text)+'DAC;');
+      Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.model.'+PrimeiraMaiscula(Edit1.Text)+';');
+      Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.model.request.'+PrimeiraMaiscula(Edit1.Text)+'Request;');
+      Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.model.request.Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request;');
+      Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.model.response.'+PrimeiraMaiscula(Edit1.Text)+'Response;');
       Writeln(F,'');
       Writeln(F,'/**');
       Writeln(F,'* The Class ActionDACImpl.');
@@ -642,7 +655,7 @@ begin
       Writeln(F,'* @author - QAT Brazil.');
       Writeln(F,'*');
       Writeln(F,'*/');
-      Writeln(F,'public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC');
+      Writeln(F,'public class '+PrimeiraMaiscula(Edit1.Text)+'DACImpl extends SqlSessionDaoSupport implements I'+PrimeiraMaiscula(Edit1.Text)+'DAC');
       Writeln(F,'{');
       Writeln(F,'');
       Writeln(F,'/** The Constant PARAMSIZE7. */');
@@ -650,10 +663,10 @@ begin
       Writeln(F,'/** The Constant PARAMSIZE1. */');
       Writeln(F,'');
       Writeln(F,'/** The Constant TAG_NAMESPACE. */');
-      Writeln(F,'private static final String EMPRESA_NAMESPACE = "Empresa.";');
+      Writeln(F,'private static final String EMPRESA_NAMESPACE = "'+PrimeiraMaiscula(Edit1.Text)+'.";');
       Writeln(F,'');
       Writeln(F,'/** The Constant FETCH_ALL_TAGS. */');
-      Writeln(F,'private static final String FETCH_ALL_EMPRESAS = EMPRESA_NAMESPACE + "fetchAllEmpresas";');
+      Writeln(F,'private static final String FETCH_ALL_EMPRESAS = EMPRESA_NAMESPACE + "fetchAll'+PrimeiraMaiscula(Edit1.Text)+'s";');
       Writeln(F,'');
       Writeln(F,'private static final Integer PARAMSIZE1 = 1;');
       Writeln(F,'');
@@ -759,10 +772,10 @@ begin
       Writeln(F,'private static final String UNSELECTION_PAGINATION_IDS = "unselectionPaginationIds";');
       Writeln(F,'');
       Writeln(F,'/** The Constant INSERT_SMART_POINT_TO_TAG. */');
-      Writeln(F,'private static final String INSERT_SMART_POINT_TO_TAG = EMPRESA_NAMESPACE + "insertSmartPointToTag";');
+      Writeln(F,'private static final String INSERT_SMART_POINT_TO_TAG = EMPRESA_NAMESPACE + "insertSmartPointTo'+Edit1.Text+'";');
       Writeln(F,'');
       Writeln(F,'/** The Constant INSERT_TAG. */');
-      Writeln(F,'private static final String INSERT_EMPRESA = EMPRESA_NAMESPACE + "insertEmpresa";');
+      Writeln(F,'private static final String INSERT_EMPRESA = EMPRESA_NAMESPACE + "insert'+PrimeiraMaiscula(Edit1.Text)+'";');
       Writeln(F,'');
       Writeln(F,'');
       Writeln(F,'/** The Constant SENSUS_EPM_ACTIONVALIDATOR_ACTION_IS_SCHEDULED. */');
@@ -778,7 +791,7 @@ begin
       Writeln(F,'* @param actionList the action list');
       Writeln(F,'* @return the string[][]');
       Writeln(F,'*/');
-      Writeln(F,'private String[][] preapreDataToWriteFile(List<Empresa> actionList)');
+      Writeln(F,'private String[][] preapreDataToWriteFile(List<'+PrimeiraMaiscula(Edit1.Text)+'> actionList)');
       Writeln(F,'{');
       Writeln(F,'String[][] excelData = new String[actionList.size() + 1][TOTAL_COLUMN];');
       Writeln(F,'');
@@ -791,28 +804,28 @@ begin
       Writeln(F,'');
       Writeln(F,'for (int i = 1; i <= actionList.size(); i++)');
       Writeln(F,'{ ');
-      Writeln(F,'Empresa empresa = actionList.get(i - 1);');
+      Writeln(F,''+PrimeiraMaiscula(Edit1.Text)+' '+Edit1.Text+' = actionList.get(i - 1);');
       Writeln(F,'');
-      Writeln(F,'excelData[i][COLUMN_0] = empresa.getCodemp().toString();');
+      Writeln(F,'excelData[i][COLUMN_0] = '+Edit1.Text+'.getCodemp().toString();');
       Writeln(F,'');
       Writeln(F,'excelData[i][COLUMN_1] = null;');
-      Writeln(F,'if (!ValidationUtil.isNull(empresa.getNomeemp()))');
+      Writeln(F,'if (!ValidationUtil.isNull('+Edit1.Text+'.getNomeemp()))');
       Writeln(F,'{');
-      Writeln(F,'excelData[i][COLUMN_1] = empresa.getRazemp();');
+      Writeln(F,'excelData[i][COLUMN_1] = '+Edit1.Text+'.getRazemp();');
       Writeln(F,'}');
       Writeln(F,'');
-      Writeln(F,'excelData[i][COLUMN_2] = empresa.getCnpjemp();');
+      Writeln(F,'excelData[i][COLUMN_2] = '+Edit1.Text+'.getCnpjemp();');
       Writeln(F,'');
       Writeln(F,'excelData[i][COLUMN_3] = null;');
-      Writeln(F,'if (!ValidationUtil.isNull(empresa.getInscemp()))');
+      Writeln(F,'if (!ValidationUtil.isNull('+Edit1.Text+'.getInscemp()))');
       Writeln(F,'{');
-      Writeln(F,'excelData[i][COLUMN_3] = empresa.getInscemp();');
+      Writeln(F,'excelData[i][COLUMN_3] = '+Edit1.Text+'.getInscemp();');
       Writeln(F,'}');
       Writeln(F,'');
       Writeln(F,'excelData[i][COLUMN_4] = null;');
-      Writeln(F,'if (!ValidationUtil.isNull(empresa.getCodmunic()))');
+      Writeln(F,'if (!ValidationUtil.isNull('+Edit1.Text+'.getCodmunic()))');
       Writeln(F,'{');
-      Writeln(F,'excelData[i][COLUMN_4] = empresa.getWwwemp();');
+      Writeln(F,'excelData[i][COLUMN_4] = '+Edit1.Text+'.getWwwemp();');
       Writeln(F,'}');
       Writeln(F,'}');
       Writeln(F,'');
@@ -820,45 +833,45 @@ begin
       Writeln(F,'}');
       Writeln(F,'');
       Writeln(F,'@Override');
-      Writeln(F,'public InternalResultsResponse<Empresa> insertEmpresa(EmpresaRequest empresaRequest)');
+      Writeln(F,'public InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'> insert'+PrimeiraMaiscula(Edit1.Text)+'('+PrimeiraMaiscula(Edit1.Text)+'Request '+Edit1.Text+'Request)');
       Writeln(F,'{');
       Writeln(F,'');
       Writeln(F,'// Define user from context.');
-      Writeln(F,'empresaRequest.getEmpresa().setCreateUser(empresaRequest.getUserContext().getUserId());');
+      Writeln(F,''+Edit1.Text+'Request.get'+PrimeiraMaiscula(Edit1.Text)+'().setCreateUser('+Edit1.Text+'Request.getUserContext().getUserId());');
       Writeln(F,'');
       Writeln(F,'paramMap.put(UNSELECTION_PAGINATION_IDS, null);');
       Writeln(F,'');
-      Writeln(F,'if (!ValidationUtil.isNullOrEmpty(empresaRequest.getUnselectionPaginationIds()))');
+      Writeln(F,'if (!ValidationUtil.isNullOrEmpty('+Edit1.Text+'Request.getUnselectionPaginationIds()))');
       Writeln(F,'{');
-      Writeln(F,'paramMap.put(UNSELECTION_PAGINATION_IDS, empresaRequest.getUnselectionPaginationIds());');
+      Writeln(F,'paramMap.put(UNSELECTION_PAGINATION_IDS, '+Edit1.Text+'Request.getUnselectionPaginationIds());');
       Writeln(F,'}');
-      Writeln(F,'empresa.setCodemp((Integer)doQueryForObject(getSqlSession(), "insertEndereco", empresaRequest.getEmpresa()));');
+      Writeln(F,''+Edit1.Text+'.setCodemp((Integer)doQueryForObject(getSqlSession(), "insertEndereco", '+Edit1.Text+'Request.get'+PrimeiraMaiscula(Edit1.Text)+'()));');
       Writeln(F,'');
-      Writeln(F,'InternalResultsResponse<Empresa> response = new InternalResultsResponse<Empresa>();');
-      Writeln(F,'response.addResult(empresa);');
+      Writeln(F,'InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'> response = new InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'>();');
+      Writeln(F,'response.addResult('+Edit1.Text+');');
       Writeln(F,'return response;');
       Writeln(F,'}');
       Writeln(F,'');
       Writeln(F,'@SuppressWarnings("unchecked")');
       Writeln(F,'@Override');
-      Writeln(F,'public InternalResultsResponse<Empresa> fetchAllEmpresa(InquiryEmpresaRequest inquiryempresaRequest)');
+      Writeln(F,'public InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'> fetchAll'+PrimeiraMaiscula(Edit1.Text)+'(Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request inquiry'+Edit1.Text+'Request)');
       Writeln(F,'{');
-      Writeln(F,'InternalResultsResponse<Empresa> response = new InternalResultsResponse<Empresa>();');
+      Writeln(F,'InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'> response = new InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'>();');
       Writeln(F,'HashMap<String, Object> paramMap = new HashMap<String, Object>(PARAMSIZE6);');
-      Writeln(F,'paramMap.put(TENANT_ID, inquiryempresaRequest.getTenant().getId());');
-      Writeln(F,'paramMap.put(PAGE_SIZE, inquiryempresaRequest.getPageSize());');
-      Writeln(F,'paramMap.put(START_ROW, inquiryempresaRequest.getStartRow());');
-      Writeln(F,'paramMap.put(START_PAGE, inquiryempresaRequest.getStartPage());');
-      Writeln(F,'paramMap.put(ORDERBY, TagOrderByEnum.NAME_COLUMN.getValue());');
+      Writeln(F,'paramMap.put(TENANT_ID, inquiry'+Edit1.Text+'Request.getTenant().getId());');
+      Writeln(F,'paramMap.put(PAGE_SIZE, inquiry'+Edit1.Text+'Request.getPageSize());');
+      Writeln(F,'paramMap.put(START_ROW, inquiry'+Edit1.Text+'Request.getStartRow());');
+      Writeln(F,'paramMap.put(START_PAGE, inquiry'+Edit1.Text+'Request.getStartPage());');
+      Writeln(F,'paramMap.put(ORDERBY, '+Edit1.Text+'OrderByEnum.NAME_COLUMN.getValue());');
       Writeln(F,'');
-      Writeln(F,'if (!ValidationUtil.isNullOrEmpty(inquiryempresaRequest.getSortExpressions()))');
+      Writeln(F,'if (!ValidationUtil.isNullOrEmpty(inquiry'+Edit1.Text+'Request.getSortExpressions()))');
       Writeln(F,'{');
-      Writeln(F,'paramMap.put(ORDERBY, inquiryempresaRequest.getSortExpressions().get(0));');
+      Writeln(F,'paramMap.put(ORDERBY, inquiry'+Edit1.Text+'Request.getSortExpressions().get(0));');
       Writeln(F,'}');
       Writeln(F,'');
-      Writeln(F,'if (!ValidationUtil.isNull(inquiryempresaRequest.getEmpresas()))');
+      Writeln(F,'if (!ValidationUtil.isNull(inquiry'+Edit1.Text+'Request.get'+PrimeiraMaiscula(Edit1.Text)+'s()))');
       Writeln(F,'{');
-      Writeln(F,'paramMap.put(EMPRESA_ID, inquiryempresaRequest.getEmpresas().get(0).getCodemp());');
+      Writeln(F,'paramMap.put(EMPRESA_ID, inquiry'+Edit1.Text+'Request.get'+PrimeiraMaiscula(Edit1.Text)+'s().get(0).getCodemp());');
       Writeln(F,'}');
       Writeln(F,'');
       Writeln(F,'doQueryForList(getSqlSession(), FETCH_ALL_EMPRESAS, paramMap, response);');
@@ -871,24 +884,24 @@ begin
       Writeln(F,'}');
       Writeln(F,'');
       Writeln(F,'@Override');
-      Writeln(F,'public InternalResultsResponse<Empresa> fetchEmpresaById(EmpresaRequest empresaRequest)');
+      Writeln(F,'public InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'> fetch'+PrimeiraMaiscula(Edit1.Text)+'ById('+PrimeiraMaiscula(Edit1.Text)+'Request '+Edit1.Text+'Request)');
       Writeln(F,'{');
-      Writeln(F,'InternalResultsResponse<Empresa> response = new InternalResultsResponse<Empresa>();');
+      Writeln(F,'InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'> response = new InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'>();');
       Writeln(F,'');
       Writeln(F,'response.getResultsList().addAll(');
-      Writeln(F,'getSqlSession().selectList("EmpresaMap.fetchEmpresaById", empresaRequest.getEmpresa()));');
+      Writeln(F,'getSqlSession().selectList("'+PrimeiraMaiscula(Edit1.Text)+'Map.fetch'+PrimeiraMaiscula(Edit1.Text)+'ById", '+Edit1.Text+'Request.get'+PrimeiraMaiscula(Edit1.Text)+'()));');
       Writeln(F,'');
       Writeln(F,'return response;');
       Writeln(F,'}');
       Writeln(F,'');
       Writeln(F,'@Override');
-      Writeln(F,'public InternalResponse generateFileCSV(InquiryEmpresaRequest inquiryEmpresaRequest)');
+      Writeln(F,'public InternalResponse generateFileCSV(Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request)');
       Writeln(F,'{');
       Writeln(F,'InternalResponse response = new InternalResponse();');
       Writeln(F,'');
-      Writeln(F,'preapreDataToWriteFile(inquiryEmpresaRequest.getEmpresas());');
+      Writeln(F,'preapreDataToWriteFile(inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request.get'+PrimeiraMaiscula(Edit1.Text)+'s());');
       Writeln(F,'');
-      Writeln(F,'if (GenerateFileCSV.generateCSVFile(inquiryEmpresaRequest.getFileName(), excelData))');
+      Writeln(F,'if (GenerateFileCSV.generateCSVFile(inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request.getFileName(), excelData))');
       Writeln(F,'{');
       Writeln(F,'response.setStatus(Status.OperationSuccess);');
       Writeln(F,'}');
@@ -901,28 +914,28 @@ begin
       Writeln(F,'}');
       Writeln(F,'');
       Writeln(F,'@Override');
-      Writeln(F,'public EmpresaResponse fetchAllEmpresaTypes(Request request)');
+      Writeln(F,'public '+PrimeiraMaiscula(Edit1.Text)+'Response fetchAll'+PrimeiraMaiscula(Edit1.Text)+'Types(Request request)');
       Writeln(F,'{');
       Writeln(F,'// TODO Auto-generated method stub');
       Writeln(F,'return null;');
       Writeln(F,'}');
       Writeln(F,'');
       Writeln(F,'@Override');
-      Writeln(F,'public EmpresaResponse fetchAllEmpresaFilial(Request request)');
+      Writeln(F,'public '+PrimeiraMaiscula(Edit1.Text)+'Response fetchAll'+PrimeiraMaiscula(Edit1.Text)+'Filial(Request request)');
       Writeln(F,'{');
       Writeln(F,'// TODO Auto-generated method stub');
       Writeln(F,'return null;');
       Writeln(F,'}');
       Writeln(F,'');
       Writeln(F,'@Override');
-      Writeln(F,'public InternalResultsResponse<Empresa> updateEmpresa(');
-      Writeln(F,'EmpresaRequest empresaRequest) {');
+      Writeln(F,'public InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'> update'+PrimeiraMaiscula(Edit1.Text)+'(');
+      Writeln(F,''+PrimeiraMaiscula(Edit1.Text)+'Request '+Edit1.Text+'Request) {');
       Writeln(F,'// TODO Auto-generated method stub');
       Writeln(F,'return null;');
       Writeln(F,'}');
       Writeln(F,'');
       Writeln(F,'@Override');
-      Writeln(F,'public InternalResponse deleteEmpresa(EmpresaRequest empresaRequest) {');
+      Writeln(F,'public InternalResponse delete'+PrimeiraMaiscula(Edit1.Text)+'('+PrimeiraMaiscula(Edit1.Text)+'Request '+Edit1.Text+'Request) {');
       Writeln(F,'// TODO Auto-generated method stub');
       Writeln(F,'return null;');
       Writeln(F,'}');
@@ -935,16 +948,17 @@ end;
  function TForm1.criarCodeIClasseDAC(Txt:String):String;
  begin
         AssignFile(F,'c:\I'+PrimeiraMaiscula(Edit1.Text)+'DAC.java');
-        Writeln(F,'package com.sensus.mlc.empresa.dac');
+        Rewrite(F); //abre o arquivo para escrita
+        Writeln(F,'package com.sensus.mlc.'+Edit1.Text+'.dac');
         Writeln(F,'');
         Writeln(F,'');
         Writeln(F,'import com.sensus.common.model.request.Request');
         Writeln(F,'import com.sensus.common.model.response.InternalResponse');
         Writeln(F,'import com.sensus.common.model.response.InternalResultsResponse');
-        Writeln(F,'import com.sensus.mlc.empresa.model.Empresa');
-        Writeln(F,'import com.sensus.mlc.empresa.model.request.EmpresaRequest');
-        Writeln(F,'import com.sensus.mlc.empresa.model.request.InquiryEmpresaRequest');
-        Writeln(F,'import com.sensus.mlc.empresa.model.response.EmpresaResponse');
+        Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.model.'+PrimeiraMaiscula(Edit1.Text)+'');
+        Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.model.request.'+PrimeiraMaiscula(Edit1.Text)+'Request');
+        Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.model.request.Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request');
+        Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.model.response.'+PrimeiraMaiscula(Edit1.Text)+'Response');
         Writeln(F,'');
         Writeln(F,'/**');
         Writeln(F,'* The Interface IActionDAC.');
@@ -952,66 +966,66 @@ end;
         Writeln(F,'* @author - QAT Brazil.');
         Writeln(F,'*');
         Writeln(F,'*/');
-        Writeln(F,'public interface IEmpresaDAC');
+        Writeln(F,'public interface I'+PrimeiraMaiscula(Edit1.Text)+'DAC');
         Writeln(F,'{');
         Writeln(F,'');
         Writeln(F,'/**');
-        Writeln(F,'* Update empresa.');
+        Writeln(F,'* Update '+Edit1.Text+'.');
         Writeln(F,'*');
-        Writeln(F,'* @param empresaRequest the empresa request');
-        Writeln(F,'* @return the empresa response');
+        Writeln(F,'* @param '+Edit1.Text+'Request the '+Edit1.Text+' request');
+        Writeln(F,'* @return the '+Edit1.Text+' response');
         Writeln(F,'*/');
-        Writeln(F,'public InternalResultsResponse<Empresa> updateEmpresa(EmpresaRequest empresaRequest)');
+        Writeln(F,'public InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'> update'+PrimeiraMaiscula(Edit1.Text)+'('+PrimeiraMaiscula(Edit1.Text)+'Request '+Edit1.Text+'Request)');
         Writeln(F,'');
         Writeln(F,'/**');
-        Writeln(F,'* Delete empresa.');
+        Writeln(F,'* Delete '+Edit1.Text+'.');
         Writeln(F,'*');
-        Writeln(F,'* @param empresaRequest the empresa request');
-        Writeln(F,'* @return the empresa response');
+        Writeln(F,'* @param '+Edit1.Text+'Request the '+Edit1.Text+' request');
+        Writeln(F,'* @return the '+Edit1.Text+' response');
         Writeln(F,'*/');
-        Writeln(F,'public InternalResponse deleteEmpresa(EmpresaRequest empresaRequest)');
+        Writeln(F,'public InternalResponse delete'+PrimeiraMaiscula(Edit1.Text)+'('+PrimeiraMaiscula(Edit1.Text)+'Request '+Edit1.Text+'Request)');
         Writeln(F,'');
         Writeln(F,'/**');
-        Writeln(F,'* Fetch all empresa.');
+        Writeln(F,'* Fetch all '+Edit1.Text+'.');
         Writeln(F,'*');
-        Writeln(F,'* @param inquiryempresaRequest the inquiryempresa request');
-        Writeln(F,'* @return the inquiry empresa response');
+        Writeln(F,'* @param inquiry'+Edit1.Text+'Request the inquiry'+Edit1.Text+' request');
+        Writeln(F,'* @return the inquiry '+Edit1.Text+' response');
         Writeln(F,'*/');
-        Writeln(F,'public InternalResultsResponse<Empresa> fetchAllEmpresa(InquiryEmpresaRequest inquiryempresaRequest)');
+        Writeln(F,'public InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'> fetchAll'+PrimeiraMaiscula(Edit1.Text)+'(Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request inquiry'+Edit1.Text+'Request)');
         Writeln(F,'');
         Writeln(F,'/**');
-        Writeln(F,'* Fetch empresa by id.');
+        Writeln(F,'* Fetch '+Edit1.Text+' by id.');
         Writeln(F,'*');
-        Writeln(F,'* @param inquiryempresaRequest the inquiryempresa request');
+        Writeln(F,'* @param inquiry'+Edit1.Text+'Request the inquiry'+Edit1.Text+' request');
         Writeln(F,'* @return the internal results response');
         Writeln(F,'*/');
-        Writeln(F,'public InternalResultsResponse<Empresa> fetchEmpresaById(EmpresaRequest empresaRequest)');
+        Writeln(F,'public InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'> fetch'+PrimeiraMaiscula(Edit1.Text)+'ById('+PrimeiraMaiscula(Edit1.Text)+'Request '+Edit1.Text+'Request)');
         Writeln(F,'');
         Writeln(F,'/**');
         Writeln(F,'* Generate file csv.');
         Writeln(F,'*');
-        Writeln(F,'* @param inquiryEmpresaRequest the inquiry empresa request');
-        Writeln(F,'* @return the inquiry empresa response');
+        Writeln(F,'* @param inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request the inquiry '+Edit1.Text+' request');
+        Writeln(F,'* @return the inquiry '+Edit1.Text+' response');
         Writeln(F,'*/');
-        Writeln(F,'public InternalResponse generateFileCSV(InquiryEmpresaRequest inquiryEmpresaRequest)');
+        Writeln(F,'public InternalResponse generateFileCSV(Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request)');
         Writeln(F,'');
         Writeln(F,'/**');
-        Writeln(F,'* Fetch all empresa types.');
+        Writeln(F,'* Fetch all '+Edit1.Text+' types.');
         Writeln(F,'*');
         Writeln(F,'* @param request the request');
-        Writeln(F,'* @return the empresa response');
+        Writeln(F,'* @return the '+Edit1.Text+' response');
         Writeln(F,'*/');
-        Writeln(F,'public EmpresaResponse fetchAllEmpresaTypes(Request request)');
+        Writeln(F,'public '+PrimeiraMaiscula(Edit1.Text)+'Response fetchAll'+PrimeiraMaiscula(Edit1.Text)+'Types(Request request)');
         Writeln(F,'');
         Writeln(F,'/**');
-        Writeln(F,'* Fetch all empresa filial.');
+        Writeln(F,'* Fetch all '+Edit1.Text+' filial.');
         Writeln(F,'*');
         Writeln(F,'* @param request the request');
-        Writeln(F,'* @return the empresa response');
+        Writeln(F,'* @return the '+Edit1.Text+' response');
         Writeln(F,'*/');
-        Writeln(F,'public EmpresaResponse fetchAllEmpresaFilial(Request request)');
+        Writeln(F,'public '+PrimeiraMaiscula(Edit1.Text)+'Response fetchAll'+PrimeiraMaiscula(Edit1.Text)+'Filial(Request request)');
         Writeln(F,'');
-        Writeln(F,'public InternalResultsResponse<Empresa> insertEmpresa(EmpresaRequest empresaRequest)');
+        Writeln(F,'public InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'> insert'+PrimeiraMaiscula(Edit1.Text)+'('+PrimeiraMaiscula(Edit1.Text)+'Request '+Edit1.Text+'Request)');
         Writeln(F,'}');
         Writeln(F,'');
         Writeln(F,'');
@@ -1021,7 +1035,8 @@ end;
 function TForm1.criarCodeIClasseBCLImpl(Txt:String):String;
 begin
       AssignFile(F,'c:\'+PrimeiraMaiscula(Edit1.Text)+'BCLImpl.java');
-      Writeln(F,'package com.sensus.mlc.empresa.bcl.impl; ');
+      Rewrite(F); //abre o arquivo para escrita
+      Writeln(F,'package com.sensus.mlc.'+Edit1.Text+'.bcl.impl; ');
       Writeln(F,' ');
       Writeln(F,'import static com.sensus.mlc.base.util.LCHelp.createProcessItemWithFailure; ');
       Writeln(F,'import static com.sensus.mlc.base.util.LCHelp.createProcessRequest; ');
@@ -1038,11 +1053,11 @@ begin
       Writeln(F,'import com.sensus.common.validation.ValidationUtil; ');
       Writeln(F,'import com.sensus.mlc.base.util.LCDateUtil;   ');
       Writeln(F,'import com.sensus.mlc.base.util.LCHelp;        ');
-      Writeln(F,'import com.sensus.mlc.empresa.bcl.IEmpresaBCL; ');
-      Writeln(F,'import com.sensus.mlc.empresa.dac.IEmpresaDAC;  ');
-      Writeln(F,'import com.sensus.mlc.empresa.model.Empresa;    ');
-      Writeln(F,'import com.sensus.mlc.empresa.model.request.EmpresaRequest; ');
-      Writeln(F,'import com.sensus.mlc.empresa.model.request.InquiryEmpresaRequest;  ');
+      Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.bcl.I'+PrimeiraMaiscula(Edit1.Text)+'BCL; ');
+      Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.dac.I'+PrimeiraMaiscula(Edit1.Text)+'DAC;  ');
+      Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.model.'+PrimeiraMaiscula(Edit1.Text)+';    ');
+      Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.model.request.'+PrimeiraMaiscula(Edit1.Text)+'Request; ');
+      Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.model.request.Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request;  ');
       Writeln(F,'import com.sensus.mlc.process.bcl.IProcessBCL;    ');
       Writeln(F,'import com.sensus.mlc.process.model.LCAction;  ');
       Writeln(F,'import com.sensus.mlc.process.model.LCActionParameter;  ');
@@ -1061,8 +1076,8 @@ begin
       Writeln(F,' * ');
       Writeln(F,' * @author QAT. ');
       Writeln(F,' */');
-      Writeln(F,'public class EmpresaBCLImpl implements IEmpresaBCL ');
-      Writeln(F,'package com.sensus.mlc.empresa.bcl.impl');
+      Writeln(F,'public class '+PrimeiraMaiscula(Edit1.Text)+'BCLImpl implements I'+PrimeiraMaiscula(Edit1.Text)+'BCL ');
+      Writeln(F,'package com.sensus.mlc.'+Edit1.Text+'.bcl.impl');
       Writeln(F,' ');
       Writeln(F,'import static com.sensus.mlc.base.util.LCHelp.createProcessItemWithFailure');
       Writeln(F,'import static com.sensus.mlc.base.util.LCHelp.createProcessRequest');
@@ -1079,11 +1094,11 @@ begin
       Writeln(F,'import com.sensus.common.validation.ValidationUtil');
       Writeln(F,'import com.sensus.mlc.base.util.LCDateUtil');
       Writeln(F,'import com.sensus.mlc.base.util.LCHelp');
-      Writeln(F,'import com.sensus.mlc.empresa.bcl.IEmpresaBCL');
-      Writeln(F,'import com.sensus.mlc.empresa.dac.IEmpresaDAC');
-      Writeln(F,'import com.sensus.mlc.empresa.model.Empresa');
-      Writeln(F,'import com.sensus.mlc.empresa.model.request.EmpresaRequest');
-      Writeln(F,'import com.sensus.mlc.empresa.model.request.InquiryEmpresaRequest');
+      Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.bcl.I'+PrimeiraMaiscula(Edit1.Text)+'BCL');
+      Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.dac.I'+PrimeiraMaiscula(Edit1.Text)+'DAC');
+      Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.model.'+PrimeiraMaiscula(Edit1.Text)+'');
+      Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.model.request.'+PrimeiraMaiscula(Edit1.Text)+'Request');
+      Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.model.request.Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request');
       Writeln(F,'import com.sensus.mlc.process.bcl.IProcessBCL');
       Writeln(F,'import com.sensus.mlc.process.model.LCAction');
       Writeln(F,'import com.sensus.mlc.process.model.LCActionParameter');
@@ -1102,14 +1117,14 @@ begin
       Writeln(F,'*');
       Writeln(F,'* @author QAT. ');
       Writeln(F,'*/');
-      Writeln(F,'public class EmpresaBCLImpl implements IEmpresaBCL ');
+      Writeln(F,'public class '+PrimeiraMaiscula(Edit1.Text)+'BCLImpl implements I'+PrimeiraMaiscula(Edit1.Text)+'BCL ');
       Writeln(F,'{ ');
       Writeln(F,' ');
       Writeln(F,'/** The LOG. */  ');
-      Writeln(F,'private static transient Log LOG = LogFactory.getLog(EmpresaBCLImpl.class)');
+      Writeln(F,'private static transient Log LOG = LogFactory.getLog('+PrimeiraMaiscula(Edit1.Text)+'BCLImpl.class)');
       Writeln(F,' ');
-      Writeln(F,'/** The empresa dac. */ ');
-      Writeln(F,'private IEmpresaDAC empresaDAC // injected by Spring through setter ');
+      Writeln(F,'/** The '+Edit1.Text+' dac. */ ');
+      Writeln(F,'private I'+PrimeiraMaiscula(Edit1.Text)+'DAC '+Edit1.Text+'DAC // injected by Spring through setter ');
       Writeln(F,' ');
       Writeln(F,'/** The Constant PROCESS_BCL_BEAN. */ ');
       Writeln(F,'private static final String PROCESS_BCL_BEAN = "processBCLTarget"');
@@ -1166,21 +1181,21 @@ begin
       Writeln(F,'} ');
       Writeln(F,' ');
       Writeln(F,'@Override ');
-      Writeln(F,'public InternalResultsResponse<Empresa> insertEmpresa(EmpresaRequest empresaRequest)  ');
+      Writeln(F,'public InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'> insert'+PrimeiraMaiscula(Edit1.Text)+'('+PrimeiraMaiscula(Edit1.Text)+'Request '+Edit1.Text+'Request)  ');
       Writeln(F,'{  ');
-      Writeln(F,'InternalResultsResponse<Empresa> response = getEmpresaDAC().insertEmpresa(empresaRequest)');
+      Writeln(F,'InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'> response = get'+PrimeiraMaiscula(Edit1.Text)+'DAC().insert'+PrimeiraMaiscula(Edit1.Text)+'('+Edit1.Text+'Request)');
       Writeln(F,' ');
       Writeln(F,'if (!response.isInError())  ');
       Writeln(F,'{    ');
-      Writeln(F,'Empresa empresa = response.getFirstResult()');
-      Writeln(F,'empresaRequest.setEmpresa(empresa)');
+      Writeln(F,''+PrimeiraMaiscula(Edit1.Text)+' '+Edit1.Text+' = response.getFirstResult()');
+      Writeln(F,''+Edit1.Text+'Request.set'+PrimeiraMaiscula(Edit1.Text)+'('+Edit1.Text+')');
       Writeln(F,' ');
-      Writeln(F,'SearchParameter empresaParameter =  ');
-      Writeln(F,'new SearchParameter(PropertyEnum.EMPRESA_ID, String.valueOf(empresa.getCodemp()))');
-      Writeln(F,'empresaRequest.getSearchLight().addSearchParameter(empresaParameter)');
+      Writeln(F,'SearchParameter '+Edit1.Text+'Parameter =  ');
+      Writeln(F,'new SearchParameter(PropertyEnum.EMPRESA_ID, String.valueOf('+Edit1.Text+'.getCodemp()))');
+      Writeln(F,''+Edit1.Text+'Request.getSearchLight().addSearchParameter('+Edit1.Text+'Parameter)');
       Writeln(F,'InternalResultsResponse<Process> processResponse =   ');
-      Writeln(F,'insertProcess(empresaRequest, LCActionTypeEnum.INSERT_EMPRESA, null)');
-      Writeln(F,'empresaRequest.getSearchLight().getSearchParameters().remove(empresaParameter)');
+      Writeln(F,'insertProcess('+Edit1.Text+'Request, LCActionTypeEnum.INSERT_EMPRESA, null)');
+      Writeln(F,''+Edit1.Text+'Request.getSearchLight().getSearchParameters().remove('+Edit1.Text+'Parameter)');
       Writeln(F,' ');
       Writeln(F,'response.setStatus(processResponse.getStatus())');
       Writeln(F,'response.addMessages(processResponse.getMessageInfoList())');
@@ -1190,11 +1205,11 @@ begin
       Writeln(F,'}  ');
       Writeln(F,' ');
       Writeln(F,'@Override ');
-      Writeln(F,'public InternalResultsResponse<Empresa> updateEmpresa(EmpresaRequest empresaRequest)');
+      Writeln(F,'public InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'> update'+PrimeiraMaiscula(Edit1.Text)+'('+PrimeiraMaiscula(Edit1.Text)+'Request '+Edit1.Text+'Request)');
       Writeln(F,'{ ');
       Writeln(F,'InternalResponse groupResponse = new InternalResponse()');
       Writeln(F,' ');
-      Writeln(F,'InternalResultsResponse<Empresa> internalResultsResponse = getEmpresaDAC().updateEmpresa(empresaRequest)');
+      Writeln(F,'InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'> internalResultsResponse = get'+PrimeiraMaiscula(Edit1.Text)+'DAC().update'+PrimeiraMaiscula(Edit1.Text)+'('+Edit1.Text+'Request)');
       Writeln(F,' ');
       Writeln(F,'if (!ValidationUtil.isNull(groupResponse))  ');
       Writeln(F,'{  ');
@@ -1205,11 +1220,11 @@ begin
       Writeln(F,'} ');
       Writeln(F,' ');
       Writeln(F,'@Override  ');
-      Writeln(F,'public InternalResponse deleteEmpresa(EmpresaRequest empresaRequest)  ');
+      Writeln(F,'public InternalResponse delete'+PrimeiraMaiscula(Edit1.Text)+'('+PrimeiraMaiscula(Edit1.Text)+'Request '+Edit1.Text+'Request)  ');
       Writeln(F,'{ ');
       Writeln(F,' ');
-      Writeln(F,'InternalResultsResponse<Empresa> tagResponse =  ');
-      Writeln(F,'(InternalResultsResponse<Empresa>)getEmpresaDAC().deleteEmpresa(empresaRequest)');
+      Writeln(F,'InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'> tagResponse =  ');
+      Writeln(F,'(InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'>)get'+PrimeiraMaiscula(Edit1.Text)+'DAC().delete'+PrimeiraMaiscula(Edit1.Text)+'('+Edit1.Text+'Request)');
       Writeln(F,'InternalResponse response = new InternalResponse()');
       Writeln(F,' ');
       Writeln(F,'if (tagResponse.isInError())  ');
@@ -1217,23 +1232,23 @@ begin
       Writeln(F,'return response');
       Writeln(F,'}  ');
       Writeln(F,' ');
-      Writeln(F,'response = getEmpresaDAC().deleteEmpresa(empresaRequest)');
+      Writeln(F,'response = get'+PrimeiraMaiscula(Edit1.Text)+'DAC().delete'+PrimeiraMaiscula(Edit1.Text)+'('+Edit1.Text+'Request)');
       Writeln(F,' ');
       Writeln(F,'if (tagResponse.isInError()) ');
       Writeln(F,'{      ');
       Writeln(F,'return response');
       Writeln(F,'}   ');
       Writeln(F,' ');
-      Writeln(F,'Empresa empresa = tagResponse.getFirstResult()');
-      Writeln(F,'empresaRequest.setEmpresa(empresa)');
+      Writeln(F,''+PrimeiraMaiscula(Edit1.Text)+' '+Edit1.Text+' = tagResponse.getFirstResult()');
+      Writeln(F,''+Edit1.Text+'Request.set'+PrimeiraMaiscula(Edit1.Text)+'('+Edit1.Text+')');
       Writeln(F,' ');
       Writeln(F,'SearchParameter tagParameter =  ');
-      Writeln(F,'new SearchParameter(PropertyEnum.EMPRESA_ID, String.valueOf(empresa.getCodemp()))');
-      Writeln(F,'empresaRequest.getSearchLight().addSearchParameter(tagParameter)');
+      Writeln(F,'new SearchParameter(PropertyEnum.EMPRESA_ID, String.valueOf('+Edit1.Text+'.getCodemp()))');
+      Writeln(F,''+Edit1.Text+'Request.getSearchLight().addSearchParameter(tagParameter)');
       Writeln(F,' ');
       Writeln(F,'InternalResultsResponse<Process> processResponse = ');
-      Writeln(F,'insertProcess(empresaRequest, LCActionTypeEnum.DELETE_TAG, null)');
-      Writeln(F,'empresaRequest.getSearchLight().getSearchParameters().remove(tagParameter)');
+      Writeln(F,'insertProcess('+Edit1.Text+'Request, LCActionTypeEnum.DELETE_TAG, null)');
+      Writeln(F,''+Edit1.Text+'Request.getSearchLight().getSearchParameters().remove(tagParameter)');
       Writeln(F,' ');
       Writeln(F,'if (processResponse.isInError())  ');
       Writeln(F,'{       ');
@@ -1245,39 +1260,39 @@ begin
       Writeln(F,'} ');
       Writeln(F,' ');
       Writeln(F,'@Override ');
-      Writeln(F,'public InternalResultsResponse<Empresa> fetchAllEmpresa(InquiryEmpresaRequest inquiryempresaRequest) ');
+      Writeln(F,'public InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'> fetchAll'+PrimeiraMaiscula(Edit1.Text)+'(Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request inquiry'+Edit1.Text+'Request) ');
       Writeln(F,'{   ');
-      Writeln(F,'return getEmpresaDAC().fetchAllEmpresa(inquiryempresaRequest)');
+      Writeln(F,'return get'+PrimeiraMaiscula(Edit1.Text)+'DAC().fetchAll'+PrimeiraMaiscula(Edit1.Text)+'(inquiry'+Edit1.Text+'Request)');
       Writeln(F,'}  ');
       Writeln(F,' ');
       Writeln(F,'@Override  ');
-      Writeln(F,'public InternalResultsResponse<Empresa> fetchEmpresaById(EmpresaRequest empresaRequest) ');
+      Writeln(F,'public InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'> fetch'+PrimeiraMaiscula(Edit1.Text)+'ById('+PrimeiraMaiscula(Edit1.Text)+'Request '+Edit1.Text+'Request) ');
       Writeln(F,'{   ');
-      Writeln(F,'return getEmpresaDAC().fetchEmpresaById(empresaRequest)');
+      Writeln(F,'return get'+PrimeiraMaiscula(Edit1.Text)+'DAC().fetch'+PrimeiraMaiscula(Edit1.Text)+'ById('+Edit1.Text+'Request)');
       Writeln(F,'} ');
       Writeln(F,' ');
-      Writeln(F,'public IEmpresaDAC getEmpresaDAC() ');
+      Writeln(F,'public I'+PrimeiraMaiscula(Edit1.Text)+'DAC get'+PrimeiraMaiscula(Edit1.Text)+'DAC() ');
       Writeln(F,'{');
-      Writeln(F,'return empresaDAC');
+      Writeln(F,'return '+Edit1.Text+'DAC');
       Writeln(F,'} ');
       Writeln(F,' ');
-      Writeln(F,'public void setEmpresaDAC(IEmpresaDAC empresaDAC) ');
+      Writeln(F,'public void set'+PrimeiraMaiscula(Edit1.Text)+'DAC(I'+PrimeiraMaiscula(Edit1.Text)+'DAC '+Edit1.Text+'DAC) ');
       Writeln(F,'{ ');
-      Writeln(F,'this.empresaDAC = empresaDAC');
+      Writeln(F,'this.'+Edit1.Text+'DAC = '+Edit1.Text+'DAC');
       Writeln(F,'}  ');
       Writeln(F,' ');
       Writeln(F,'@Override  ');
-      Writeln(F,'public InternalResultsResponse<Empresa> fetchAllEmpresaTypes(InquiryEmpresaRequest inquiryempresaRequest)  ');
+      Writeln(F,'public InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'> fetchAll'+PrimeiraMaiscula(Edit1.Text)+'Types(Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request inquiry'+Edit1.Text+'Request)  ');
       Writeln(F,'{ ');
       Writeln(F,'// TODO Auto-generated method stub  ');
       Writeln(F,'return null');
       Writeln(F,'}         ');
       Writeln(F,' ');
-      Writeln(F,'private InternalResultsResponse<Process> insertProcess(EmpresaRequest empresaRequest,  ');
+      Writeln(F,'private InternalResultsResponse<Process> insertProcess('+PrimeiraMaiscula(Edit1.Text)+'Request '+Edit1.Text+'Request,  ');
       Writeln(F,'LCActionTypeEnum lcActionType, ');
       Writeln(F,'String processDescription)   ');
       Writeln(F,'{ ');
-      Writeln(F,'return insertProcess(empresaRequest, lcActionType, processDescription, null)');
+      Writeln(F,'return insertProcess('+Edit1.Text+'Request, lcActionType, processDescription, null)');
       Writeln(F,'} ');
       Writeln(F,' ');
       Writeln(F,'/**   ');
@@ -1288,14 +1303,14 @@ begin
       Writeln(F,'* @param processDescription the process description   ');
       Writeln(F,'* @return the internal results response  ');
       Writeln(F,'*/         ');
-      Writeln(F,'private InternalResultsResponse<Process> insertProcess(EmpresaRequest tagRequest, LCActionTypeEnum lcActionType,  ');
+      Writeln(F,'private InternalResultsResponse<Process> insertProcess('+PrimeiraMaiscula(Edit1.Text)+'Request tagRequest, LCActionTypeEnum lcActionType,  ');
       Writeln(F,'String processDescription, List<Light> deactivatedLights) ');
       Writeln(F,'{');
-      Writeln(F,'Empresa empresa = tagRequest.getEmpresa()');
+      Writeln(F,''+PrimeiraMaiscula(Edit1.Text)+' '+Edit1.Text+' = tagRequest.get'+PrimeiraMaiscula(Edit1.Text)+'()');
       Writeln(F,' ');
       Writeln(F,'List<LCActionParameter> actionParameters = new ArrayList<LCActionParameter>()');
-      Writeln(F,'actionParameters.add(new LCActionParameter(PropertyEnum.TAG_ID, String.valueOf(empresa.getCodemp())))');
-      Writeln(F,'actionParameters.add(new LCActionParameter(PropertyEnum.TAG_NAME, empresa.getCnpjemp()))');
+      Writeln(F,'actionParameters.add(new LCActionParameter(PropertyEnum.TAG_ID, String.valueOf('+Edit1.Text+'.getCodemp())))');
+      Writeln(F,'actionParameters.add(new LCActionParameter(PropertyEnum.TAG_NAME, '+Edit1.Text+'.getCnpjemp()))');
       Writeln(F,' ');
       Writeln(F,'LCAction action = new LCAction(lcActionType)');
       Writeln(F,'action.setActionParameters(actionParameters)');
@@ -1303,7 +1318,7 @@ begin
       Writeln(F,'Process process = LCHelp.generateProcess(false, action, 0)');
       Writeln(F,'process.setIsProcessComplete(true)');
       Writeln(F,'process.setIsSubmitted(true)');
-      Writeln(F,'process.setDescription("insert Empresa")');
+      Writeln(F,'process.setDescription("insert '+PrimeiraMaiscula(Edit1.Text)+'")');
       Writeln(F,'process.setRniCorrelationId("")');
       Writeln(F,' ');
       Writeln(F,' ');
@@ -1325,7 +1340,7 @@ begin
       Writeln(F,'} ');
       Writeln(F,' ');
       Writeln(F,'@Override  ');
-      Writeln(F,'public InternalResultsResponse<Empresa> fetchAllEmpresaFilial(EmpresaRequest empresaRequest) ');
+      Writeln(F,'public InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'> fetchAll'+PrimeiraMaiscula(Edit1.Text)+'Filial('+PrimeiraMaiscula(Edit1.Text)+'Request '+Edit1.Text+'Request) ');
       Writeln(F,'{  ');
       Writeln(F,'// TODO Auto-generated method stub  ');
       Writeln(F,'return null');
@@ -1339,14 +1354,15 @@ end;
 function TForm1.criarCodeIClasseBCL(Txt:String):String;
 begin
       AssignFile(F,'c:\'+PrimeiraMaiscula(Edit1.Text)+'BCL.java');
-      Writeln(F,'package com.sensus.mlc.empresa.bcl;');
+      Rewrite(F); //abre o arquivo para escrita
+      Writeln(F,'package com.sensus.mlc.'+Edit1.Text+'.bcl;');
       Writeln(F,'');
       Writeln(F,'');
       Writeln(F,'import com.sensus.common.model.response.InternalResponse; ');
       Writeln(F,'import com.sensus.common.model.response.InternalResultsResponse;');
-      Writeln(F,'import com.sensus.mlc.empresa.model.Empresa; ');
-      Writeln(F,'import com.sensus.mlc.empresa.model.request.EmpresaRequest; ');
-      Writeln(F,'import com.sensus.mlc.empresa.model.request.InquiryEmpresaRequest; ');
+      Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.model.'+PrimeiraMaiscula(Edit1.Text)+'; ');
+      Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.model.request.'+PrimeiraMaiscula(Edit1.Text)+'Request; ');
+      Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.model.request.Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request; ');
       Writeln(F,' ');
       Writeln(F,'// TODO: Auto-generated Javadoc ');
       Writeln(F,'/**');
@@ -1355,64 +1371,64 @@ begin
       Writeln(F,' * @author - QAT Brazil. ');
       Writeln(F,' * ');
       Writeln(F,' */ ');
-      Writeln(F,'public interface IEmpresaBCL ');
+      Writeln(F,'public interface I'+PrimeiraMaiscula(Edit1.Text)+'BCL ');
       Writeln(F,'{   ');
       Writeln(F,'    ');
       Writeln(F,'	/**  ');
-      Writeln(F,'	 * Insert empresa. ');
+      Writeln(F,'	 * Insert '+Edit1.Text+'. ');
       Writeln(F,'	 * ');
-      Writeln(F,'	 * @param empresaRequest the empresa request  ');
-      Writeln(F,'	 * @return the empresa response  ');
+      Writeln(F,'	 * @param '+Edit1.Text+'Request the '+Edit1.Text+' request  ');
+      Writeln(F,'	 * @return the '+Edit1.Text+' response  ');
       Writeln(F,'	 */ ');
-      Writeln(F,'	public InternalResultsResponse<Empresa> insertEmpresa(EmpresaRequest empresaRequest);');
+      Writeln(F,'	public InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'> insert'+PrimeiraMaiscula(Edit1.Text)+'('+PrimeiraMaiscula(Edit1.Text)+'Request '+Edit1.Text+'Request);');
       Writeln(F,'  ');
       Writeln(F,'	/** ');
-      Writeln(F,'	 * Update empresa. ');
+      Writeln(F,'	 * Update '+Edit1.Text+'. ');
       Writeln(F,'	 *  ');
-      Writeln(F,'	 * @param empresaRequest the empresa request ');
-      Writeln(F,'	 * @return the empresa response ');
+      Writeln(F,'	 * @param '+Edit1.Text+'Request the '+Edit1.Text+' request ');
+      Writeln(F,'	 * @return the '+Edit1.Text+' response ');
       Writeln(F,'	 */  ');
-      Writeln(F,'	public InternalResultsResponse<Empresa> updateEmpresa(EmpresaRequest empresaRequest); ');
+      Writeln(F,'	public InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'> update'+PrimeiraMaiscula(Edit1.Text)+'('+PrimeiraMaiscula(Edit1.Text)+'Request '+Edit1.Text+'Request); ');
       Writeln(F,'   ');
       Writeln(F,'	/** ');
-      Writeln(F,'	 * Delete empresa. ');
+      Writeln(F,'	 * Delete '+Edit1.Text+'. ');
       Writeln(F,'	 *   ');
-      Writeln(F,'	 * @param empresaRequest the empresa request ');
-      Writeln(F,'	 * @return the empresa response  ');
+      Writeln(F,'	 * @param '+Edit1.Text+'Request the '+Edit1.Text+' request ');
+      Writeln(F,'	 * @return the '+Edit1.Text+' response  ');
       Writeln(F,'	 */ ');
-      Writeln(F,'	public InternalResponse deleteEmpresa(EmpresaRequest empresaRequest); ');
+      Writeln(F,'	public InternalResponse delete'+PrimeiraMaiscula(Edit1.Text)+'('+PrimeiraMaiscula(Edit1.Text)+'Request '+Edit1.Text+'Request); ');
       Writeln(F,'  ');
       Writeln(F,'	/** ');
-      Writeln(F,'	 * Fetch all empresa.');
+      Writeln(F,'	 * Fetch all '+Edit1.Text+'.');
       Writeln(F,'	 *   ');
-      Writeln(F,'	 * @param inquiryempresaRequest the inquiryempresa request ');
-      Writeln(F,'	 * @return the inquiry empresa response ');
+      Writeln(F,'	 * @param inquiry'+Edit1.Text+'Request the inquiry'+Edit1.Text+' request ');
+      Writeln(F,'	 * @return the inquiry '+Edit1.Text+' response ');
       Writeln(F,'	 */  ');
-      Writeln(F,'	public InternalResultsResponse<Empresa> fetchAllEmpresa(InquiryEmpresaRequest inquiryempresaRequest);');
+      Writeln(F,'	public InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'> fetchAll'+PrimeiraMaiscula(Edit1.Text)+'(Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request inquiry'+Edit1.Text+'Request);');
       Writeln(F,'  ');
       Writeln(F,'	/** ');
-      Writeln(F,'	 * Fetch empresa by id. ');
+      Writeln(F,'	 * Fetch '+Edit1.Text+' by id. ');
       Writeln(F,'	 * ');
-      Writeln(F,'	 * @param inquiryempresaRequest the inquiryempresa request');
+      Writeln(F,'	 * @param inquiry'+Edit1.Text+'Request the inquiry'+Edit1.Text+' request');
       Writeln(F,'	 * @return the internal results response   ');
       Writeln(F,'	 */ ');
-      Writeln(F,'	public InternalResultsResponse<Empresa> fetchEmpresaById(EmpresaRequest empresaRequest); ');
+      Writeln(F,'	public InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'> fetch'+PrimeiraMaiscula(Edit1.Text)+'ById('+PrimeiraMaiscula(Edit1.Text)+'Request '+Edit1.Text+'Request); ');
       Writeln(F,' ');
       Writeln(F,'	/** ');
-      Writeln(F,'	 * Fetch all empresa types. ');
+      Writeln(F,'	 * Fetch all '+Edit1.Text+' types. ');
       Writeln(F,'	 * ');
       Writeln(F,'	 * @param request the request ');
-      Writeln(F,'	 * @return the empresa response ');
+      Writeln(F,'	 * @return the '+Edit1.Text+' response ');
       Writeln(F,'	 */ ');
-      Writeln(F,'	public InternalResultsResponse<Empresa> fetchAllEmpresaTypes(InquiryEmpresaRequest inquiryempresaRequest);  ');
+      Writeln(F,'	public InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'> fetchAll'+PrimeiraMaiscula(Edit1.Text)+'Types(Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request inquiry'+Edit1.Text+'Request);  ');
       Writeln(F,'  ');
       Writeln(F,'	/** ');
-      Writeln(F,'	 * Fetch all empresa filial. ');
+      Writeln(F,'	 * Fetch all '+Edit1.Text+' filial. ');
       Writeln(F,'	 *  ');
       Writeln(F,'	 * @param request the request ');
-      Writeln(F,'	 * @return the empresa response ');
+      Writeln(F,'	 * @return the '+Edit1.Text+' response ');
       Writeln(F,'	 */ ');
-      Writeln(F,'	public InternalResultsResponse<Empresa> fetchAllEmpresaFilial(EmpresaRequest empresaRequest);');
+      Writeln(F,'	public InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'> fetchAll'+PrimeiraMaiscula(Edit1.Text)+'Filial('+PrimeiraMaiscula(Edit1.Text)+'Request '+Edit1.Text+'Request);');
       Writeln(F,' ');
       Writeln(F,'} ');
       Closefile(F);
@@ -1420,6 +1436,7 @@ end;
 function TForm1.criarCodeClasseBCFImpl(Txt:String):String;
 begin
       AssignFile(F,'c:\I'+PrimeiraMaiscula(Edit1.Text)+'BCF.java');
+      Rewrite(F); //abre o arquivo para escrita
       Writeln(F,'');
       Writeln(F,'package com.sensus.mlc.'+Edit1.Text+'.bcf.impl;');
       Writeln(F,'');
@@ -1432,17 +1449,17 @@ begin
       Writeln(F,'import com.sensus.common.util.SensusInterfaceUtil;');
       Writeln(F,'import com.sensus.mlc.base.model.MLCPersistanceActionEnum;');
       Writeln(F,'import com.sensus.mlc.base.util.LCHelp;');
-      Writeln(F,'import com.sensus.mlc.empresa.bcf.IEmpresaBCF;');
-      Writeln(F,'import com.sensus.mlc.empresa.bcl.IEmpresaBCL;');
-      Writeln(F,'import com.sensus.mlc.empresa.model.Empresa;');
-      Writeln(F,'import com.sensus.mlc.empresa.model.request.EmpresaRequest;');
-      Writeln(F,'import com.sensus.mlc.empresa.model.request.InquiryEmpresaRequest;');
-      Writeln(F,'import com.sensus.mlc.empresa.model.response.EmpresaResponse;');
-      Writeln(F,'import com.sensus.mlc.empresa.model.response.InquiryEmpresaResponse;');
+      Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.bcf.I'+PrimeiraMaiscula(Edit1.Text)+'BCF;');
+      Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.bcl.I'+PrimeiraMaiscula(Edit1.Text)+'BCL;');
+      Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.model.'+PrimeiraMaiscula(Edit1.Text)+';');
+      Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.model.request.'+PrimeiraMaiscula(Edit1.Text)+'Request;');
+      Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.model.request.Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request;');
+      Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.model.response.'+PrimeiraMaiscula(Edit1.Text)+'Response;');
+      Writeln(F,'import com.sensus.mlc.'+Edit1.Text+'.model.response.Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Response;');
       Writeln(F,'import com.sensus.mlc.process.model.response.ProcessResponse;');
-      Writeln(F,'import com.sensus.mlc.tag.bcf.impl.TagBCFImpl;');
+      Writeln(F,'import com.sensus.mlc.tag.bcf.impl.'+Edit1.Text+'BCFImpl;');
       Writeln(F,'');
-      Writeln(F,'public class EmpresaBCFImpl implements IEmpresaBCF');
+      Writeln(F,'public class '+PrimeiraMaiscula(Edit1.Text)+'BCFImpl implements I'+PrimeiraMaiscula(Edit1.Text)+'BCF');
       Writeln(F,'{');
       Writeln(F,'');
       Writeln(F,'	/** The Constant NAME_LENGTH. */');
@@ -1459,22 +1476,22 @@ begin
       Writeln(F,'	private static final String DEFAULT_EMPRESA_BCL_EXCEPTION_MSG = "sensus.mlc.groupbclimpl.defaultexception";');
       Writeln(F,' ');
       Writeln(F,'	/** The Constant LOG. */');
-      Writeln(F,'	private static final Logger LOG = LoggerFactory.getLogger(TagBCFImpl.class); ');
+      Writeln(F,'	private static final Logger LOG = LoggerFactory.getLogger('+Edit1.Text+'BCFImpl.class); ');
       Writeln(F,' ');
-      Writeln(F,'	private IEmpresaBCL empresaBCL; // injected by Spring through setter');
+      Writeln(F,'	private I'+PrimeiraMaiscula(Edit1.Text)+'BCL '+Edit1.Text+'BCL; // injected by Spring through setter');
       Writeln(F,' ');
       Writeln(F,'	@Override ');
-      Writeln(F,'	public EmpresaResponse insertEmpresa(EmpresaRequest empresaRequest)');
+      Writeln(F,'	public '+PrimeiraMaiscula(Edit1.Text)+'Response insert'+PrimeiraMaiscula(Edit1.Text)+'('+PrimeiraMaiscula(Edit1.Text)+'Request '+Edit1.Text+'Request)');
       Writeln(F,'	{');
-      Writeln(F,'		EmpresaResponse response = new EmpresaResponse();');
+      Writeln(F,'		'+PrimeiraMaiscula(Edit1.Text)+'Response response = new '+PrimeiraMaiscula(Edit1.Text)+'Response();');
       Writeln(F,' ');
       Writeln(F,'		try ');
       Writeln(F,'		{ ');
       Writeln(F,'     ');
-      Writeln(F,'			if (LCHelp.checkValidation(response, empresaRequest, new Object[] {MLCPersistanceActionEnum.INSERT}))');
+      Writeln(F,'			if (LCHelp.checkValidation(response, '+Edit1.Text+'Request, new Object[] {MLCPersistanceActionEnum.INSERT}))');
       Writeln(F,'			{');
-      Writeln(F,'				InternalResultsResponse<Empresa> internalResponse = getEmpresaBCL().insertEmpresa(empresaRequest); ');
-      Writeln(F,'				response.setEmpresa(internalResponse.getResultsList()); ');
+      Writeln(F,'				InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'> internalResponse = get'+PrimeiraMaiscula(Edit1.Text)+'BCL().insert'+PrimeiraMaiscula(Edit1.Text)+'('+Edit1.Text+'Request); ');
+      Writeln(F,'				response.set'+PrimeiraMaiscula(Edit1.Text)+'(internalResponse.getResultsList()); ');
       Writeln(F,'				LCHelp.treatReturnFromBCL(response, internalResponse, DEFAULT_EMPRESA_BCF_EXCEPTION_MSG); ');
       Writeln(F,'			}');
       Writeln(F,'		} ');
@@ -1487,15 +1504,15 @@ begin
       Writeln(F,'	}');
       Writeln(F,'');
       Writeln(F,'	@Override');
-      Writeln(F,'	public EmpresaResponse updateEmpresa(EmpresaRequest empresaRequest)');
+      Writeln(F,'	public '+PrimeiraMaiscula(Edit1.Text)+'Response update'+PrimeiraMaiscula(Edit1.Text)+'('+PrimeiraMaiscula(Edit1.Text)+'Request '+Edit1.Text+'Request)');
       Writeln(F,'	{');
-      Writeln(F,'		EmpresaResponse response = new EmpresaResponse();');
+      Writeln(F,'		'+PrimeiraMaiscula(Edit1.Text)+'Response response = new '+PrimeiraMaiscula(Edit1.Text)+'Response();');
       Writeln(F,'		try ');
       Writeln(F,'		{ ');
-      Writeln(F,'			if (LCHelp.checkValidation(response, empresaRequest, MLCPersistanceActionEnum.UPDATE)) ');
+      Writeln(F,'			if (LCHelp.checkValidation(response, '+Edit1.Text+'Request, MLCPersistanceActionEnum.UPDATE)) ');
       Writeln(F,'			{  ');
-      Writeln(F,'				InternalResultsResponse<Empresa> internalResponse = getEmpresaBCL().updateEmpresa(empresaRequest);');
-      Writeln(F,'				response.setEmpresa(internalResponse.getResultsList());');
+      Writeln(F,'				InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'> internalResponse = get'+PrimeiraMaiscula(Edit1.Text)+'BCL().update'+PrimeiraMaiscula(Edit1.Text)+'('+Edit1.Text+'Request);');
+      Writeln(F,'				response.set'+PrimeiraMaiscula(Edit1.Text)+'(internalResponse.getResultsList());');
       Writeln(F,'				LCHelp.treatReturnFromBCL(response, internalResponse, DEFAULT_EMPRESA_BCL_EXCEPTION_MSG);');
       Writeln(F,'			}');
       Writeln(F,'		} ');
@@ -1507,14 +1524,14 @@ begin
       Writeln(F,'	} ');
       Writeln(F,'   ');
       Writeln(F,'	@Override  ');
-      Writeln(F,'	public EmpresaResponse deleteEmpresa(EmpresaRequest empresaRequest) ');
+      Writeln(F,'	public '+PrimeiraMaiscula(Edit1.Text)+'Response delete'+PrimeiraMaiscula(Edit1.Text)+'('+PrimeiraMaiscula(Edit1.Text)+'Request '+Edit1.Text+'Request) ');
       Writeln(F,'	{  ');
-      Writeln(F,'		EmpresaResponse response = new EmpresaResponse();');
+      Writeln(F,'		'+PrimeiraMaiscula(Edit1.Text)+'Response response = new '+PrimeiraMaiscula(Edit1.Text)+'Response();');
       Writeln(F,'		try  ');
       Writeln(F,'		{  ');
-      Writeln(F,'			if (LCHelp.checkValidation(response, empresaRequest, MLCPersistanceActionEnum.DELETE)) ');
+      Writeln(F,'			if (LCHelp.checkValidation(response, '+Edit1.Text+'Request, MLCPersistanceActionEnum.DELETE)) ');
       Writeln(F,'			{  ');
-      Writeln(F,'				InternalResponse internalResponse = getEmpresaBCL().deleteEmpresa(empresaRequest); ');
+      Writeln(F,'				InternalResponse internalResponse = get'+PrimeiraMaiscula(Edit1.Text)+'BCL().delete'+PrimeiraMaiscula(Edit1.Text)+'('+Edit1.Text+'Request); ');
       Writeln(F,'				LCHelp.treatReturnFromBCL(response, internalResponse, DEFAULT_EMPRESA_BCF_EXCEPTION_MSG); ');
       Writeln(F,'			}  ');
       Writeln(F,'		}  ');
@@ -1526,15 +1543,15 @@ begin
       Writeln(F,'	} ');
       Writeln(F,'  ');
       Writeln(F,'	@Override ');
-      Writeln(F,'	public InquiryEmpresaResponse fetchAllEmpresa(InquiryEmpresaRequest inquiryempresaRequest) ');
+      Writeln(F,'	public Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Response fetchAll'+PrimeiraMaiscula(Edit1.Text)+'(Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request inquiry'+Edit1.Text+'Request) ');
       Writeln(F,'	{ ');
-      Writeln(F,'		InquiryEmpresaResponse response = new InquiryEmpresaResponse(); ');
+      Writeln(F,'		Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Response response = new Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Response(); ');
       Writeln(F,'		try ');
       Writeln(F,'		{ ');
       Writeln(F,'    ');
-      Writeln(F,'				InternalResultsResponse<Empresa> internalResponse =  ');
-      Writeln(F,'						getEmpresaBCL().fetchAllEmpresa(inquiryempresaRequest); ');
-      Writeln(F,'				response.setEmpresa(internalResponse.getResultsList());');
+      Writeln(F,'				InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'> internalResponse =  ');
+      Writeln(F,'						get'+PrimeiraMaiscula(Edit1.Text)+'BCL().fetchAll'+PrimeiraMaiscula(Edit1.Text)+'(inquiry'+Edit1.Text+'Request); ');
+      Writeln(F,'				response.set'+PrimeiraMaiscula(Edit1.Text)+'(internalResponse.getResultsList());');
       Writeln(F,'				response.setResultsSetInfo(internalResponse.getResultsSetInfo());');
       Writeln(F,'				LCHelp.treatReturnFromBCL(response, internalResponse, DEFAULT_EMPRESA_BCF_EXCEPTION_MSG); ');
       Writeln(F,'   ');
@@ -1547,15 +1564,15 @@ begin
       Writeln(F,'	} ');
       Writeln(F,'   ');
       Writeln(F,'	@Override  ');
-      Writeln(F,'	public EmpresaResponse fetchEmpresaById(EmpresaRequest empresaRequest) ');
+      Writeln(F,'	public '+PrimeiraMaiscula(Edit1.Text)+'Response fetch'+PrimeiraMaiscula(Edit1.Text)+'ById('+PrimeiraMaiscula(Edit1.Text)+'Request '+Edit1.Text+'Request) ');
       Writeln(F,'	{ ');
-      Writeln(F,'		EmpresaResponse response = new EmpresaResponse(); ');
+      Writeln(F,'		'+PrimeiraMaiscula(Edit1.Text)+'Response response = new '+PrimeiraMaiscula(Edit1.Text)+'Response(); ');
       Writeln(F,'		try ');
       Writeln(F,'		{  ');
-      Writeln(F,'			if (LCHelp.checkValidation(response, empresaRequest, MLCPersistanceActionEnum.FETCH_BY_ID)) ');
+      Writeln(F,'			if (LCHelp.checkValidation(response, '+Edit1.Text+'Request, MLCPersistanceActionEnum.FETCH_BY_ID)) ');
       Writeln(F,'			{ ');
-      Writeln(F,'				InternalResultsResponse<Empresa> internalResponse = getEmpresaBCL().fetchEmpresaById(empresaRequest); ');
-      Writeln(F,'				response.setEmpresa(internalResponse.getResultsList());');
+      Writeln(F,'				InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'> internalResponse = get'+PrimeiraMaiscula(Edit1.Text)+'BCL().fetch'+PrimeiraMaiscula(Edit1.Text)+'ById('+Edit1.Text+'Request); ');
+      Writeln(F,'				response.set'+PrimeiraMaiscula(Edit1.Text)+'(internalResponse.getResultsList());');
       Writeln(F,'				LCHelp.treatReturnFromBCL(response, internalResponse, DEFAULT_EMPRESA_BCF_EXCEPTION_MSG); ');
       Writeln(F,'			} ');
       Writeln(F,'		}  ');
@@ -1567,15 +1584,15 @@ begin
       Writeln(F,'	}');
       Writeln(F,'  ');
       Writeln(F,'	@Override ');
-      Writeln(F,'	public EmpresaResponse fetchAllEmpresaFilial(EmpresaRequest empresaRequest) { ');
-      Writeln(F,'		EmpresaResponse response = new EmpresaResponse(); ');
+      Writeln(F,'	public '+PrimeiraMaiscula(Edit1.Text)+'Response fetchAll'+PrimeiraMaiscula(Edit1.Text)+'Filial('+PrimeiraMaiscula(Edit1.Text)+'Request '+Edit1.Text+'Request) { ');
+      Writeln(F,'		'+PrimeiraMaiscula(Edit1.Text)+'Response response = new '+PrimeiraMaiscula(Edit1.Text)+'Response(); ');
       Writeln(F,'		try ');
       Writeln(F,'		{    ');
-      Writeln(F,'			if (LCHelp.checkValidation(response, inquiryEmpresaRequest, MLCPersistanceActionEnum.FETCH)) ');
+      Writeln(F,'			if (LCHelp.checkValidation(response, inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request, MLCPersistanceActionEnum.FETCH)) ');
       Writeln(F,'			{ ');
-      Writeln(F,'				InternalResultsResponse<Empresa> internalResponse =  ');
-      Writeln(F,'						getEmpresaBCL().fetchAllEmpresaFilial(empresaRequest);  ');
-      Writeln(F,'				response.setEmpresa(internalResponse.getResultsList());   ');
+      Writeln(F,'				InternalResultsResponse<'+PrimeiraMaiscula(Edit1.Text)+'> internalResponse =  ');
+      Writeln(F,'						get'+PrimeiraMaiscula(Edit1.Text)+'BCL().fetchAll'+PrimeiraMaiscula(Edit1.Text)+'Filial('+Edit1.Text+'Request);  ');
+      Writeln(F,'				response.set'+PrimeiraMaiscula(Edit1.Text)+'(internalResponse.getResultsList());   ');
       Writeln(F,'				LCHelp.treatReturnFromBCL(response, internalResponse, DEFAULT_EMPRESA_BCF_EXCEPTION_MSG); ');
       Writeln(F,'			}  ');
       Writeln(F,'		} ');
@@ -1587,14 +1604,14 @@ begin
       Writeln(F,'	} ');
       Writeln(F,'   ');
       Writeln(F,'   ');
-      Writeln(F,'	public IEmpresaBCL getEmpresaBCL() ');
+      Writeln(F,'	public I'+PrimeiraMaiscula(Edit1.Text)+'BCL get'+PrimeiraMaiscula(Edit1.Text)+'BCL() ');
       Writeln(F,'	{       ');
-      Writeln(F,'		return empresaBCL; ');
+      Writeln(F,'		return '+Edit1.Text+'BCL; ');
       Writeln(F,'	}  ');
       Writeln(F,'    ');
-      Writeln(F,'	public void setEmpresaBCL(IEmpresaBCL empresaBCL) ');
+      Writeln(F,'	public void set'+PrimeiraMaiscula(Edit1.Text)+'BCL(I'+PrimeiraMaiscula(Edit1.Text)+'BCL '+Edit1.Text+'BCL) ');
       Writeln(F,'	{ ');
-      Writeln(F,'		this.empresaBCL = empresaBCL; ');
+      Writeln(F,'		this.'+Edit1.Text+'BCL = '+Edit1.Text+'BCL; ');
       Writeln(F,'	} ');
       Writeln(F,'}  ');
       Closefile(F);
@@ -1603,6 +1620,7 @@ end;
 function TForm1.criarCodeIClasseBCF(Txt:String):String;
 begin
       AssignFile(F,'c:\I'+PrimeiraMaiscula(Edit1.Text)+'BCF.java');
+      Rewrite(F); //abre o arquivo para escrita
       Writeln(F,'package com.sensus.mlc.'+Edit1.Text+'.bcf;');
       Writeln(F,'');
       Writeln(F,'import com.sensus.common.model.request.Request;');
@@ -1679,7 +1697,7 @@ begin
        Writeln(F,'    ');
        Writeln(F,'    private Integer parentRetry;');
        Writeln(F,'    ');
-       Writeln(F,'    private List<'+PrimeiraMaiscula(Edit1.Text)+'> '+Edit1.Text+';');
+       Writeln(F,'    private List<'+PrimeiraMaiscula(Edit1.Text)+'> '+LowerCase(Edit1.Text)+'s ;');
        Writeln(F,'}');
        Closefile(F);
 end;
@@ -1698,7 +1716,7 @@ begin
        Writeln(F,'    ');
        Writeln(F,'    private Integer parentRetry;');
        Writeln(F,'    ');
-       Writeln(F,'    private '+PrimeiraMaiscula(Edit1.Text)+'  '+Edit1.Text+';');
+       Writeln(F,'    private '+PrimeiraMaiscula(Edit1.Text)+'  '+LowerCase(Edit1.Text)+';');
        Writeln(F,'}');
        Closefile(F);
 end;
@@ -1706,7 +1724,7 @@ end;
 Function TForm1.MostrarMemo(Memo: TMemo) : String;
  var   linha: string;
 begin
-      CloseFile(F);
+      Memo.Lines.Clear;
       Reset(F);   // [ 3 ] Abre o arquivo texto para leitura
       {$I+}         // ativa a diretiva de Input
 
@@ -1750,7 +1768,7 @@ begin
        Writeln(F,'    ');
        Writeln(F,'    Integer processId;');
        Writeln(F,'    ');
-       Writeln(F,'    private List<'+PrimeiraMaiscula(Edit1.Text)+'> '+Edit1.Text+';');
+       Writeln(F,'    private List<'+PrimeiraMaiscula(Edit1.Text)+'> '+LowerCase(Edit1.Text)+';');
        Writeln(F,'}');
        Closefile(F);
 end;
@@ -1767,7 +1785,7 @@ begin
        Writeln(F,'');
        Writeln(F,'public class Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Response extends InquiryResponse');
        Writeln(F,'');
-       Writeln(F,'    private List<'+PrimeiraMaiscula(Edit1.Text)+'> '+Edit1.Text+';');
+       Writeln(F,'    private List<'+PrimeiraMaiscula(Edit1.Text)+'> '+lowerCase(Edit1.Text)+' ;');
        Writeln(F,'');
        Writeln(F,'');
 	     Writeln(F,'    public List<'+PrimeiraMaiscula(Edit1.Text)+'> get'+PrimeiraMaiscula(Edit1.Text)+'() {');
@@ -1783,7 +1801,7 @@ begin
        Writeln(F,'');
        Writeln(F,'    public String toString() {');
 //       Writeln(F,'                                                                                                                                                       ');
-       Writeln(F,'    return "InquiryTelaResponse ['+Edit1.Text+'=" + '+Edit1.Text);
+       Writeln(F,'    return "Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Response ['+Edit1.Text+'=" + '+Edit1.Text);
        Writeln(F,'      + ", get'+PrimeiraMaiscula(Edit1.Text)+'()=" + get'+PrimeiraMaiscula(Edit1.Text)+'()');
        Writeln(F,'    + "]";');
        Writeln(F,'');
@@ -1791,6 +1809,41 @@ begin
        Writeln(F,'}');
        Closefile(F);
 end;
+
+function TForm1.verificadorCodeAppBanco(Txt:String):String;
+begin
+      if Pos(UpperCase('Char'),UpperCase(Txt)) <> 0  then
+      begin
+          result := ' character varying'
+      end
+      else if Pos(UpperCase('INTEGER'),UpperCase(Txt)) <> 0  then
+      begin
+          result := 'integer'
+      end
+      else if Pos(UpperCase('SMALLINT'),UpperCase(Txt)) <> 0  then
+      begin
+            result := ' character varying'
+      end
+      else if Pos(UpperCase('NUMERIC'),UpperCase(Txt)) <> 0  then
+      begin
+            result := 'double'
+      end
+      else if Pos(UpperCase('TIME'),UpperCase(Txt)) <> 0  then
+      begin
+            result := 'timestamp with time zone'
+      end
+      else if Pos(UpperCase('Date'),UpperCase(Txt)) <> 0  then
+      begin
+            result := 'timestamp with time zone'
+      end
+      else
+      begin
+           result := Txt
+      end
+
+end;
+
+
 
 function TForm1.verificadorCode(Txt:String):String;
 begin
@@ -1850,26 +1903,81 @@ Begin
     Explode := ListaAuxUTILS.Text;
 end;
 
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+      TabSheet1.TabVisible := false;
+      TabSheet2.TabVisible := false;
+      TabSheet3.TabVisible := false;
+      TabSheet4.TabVisible := false;
+      TabSheet5.TabVisible := false;
+      TabSheet6.TabVisible := false;
+      TabSheet7.TabVisible := false;
+      TabSheet8.TabVisible := false;
+      TabSheet9.TabVisible := false;
+      TabSheet10.TabVisible := false;
+      TabSheet11.TabVisible := false;
+      TabSheet12.TabVisible := false;
+      TabSheet13.TabVisible := false;
+      TabSheet14.TabVisible := false;
+      TabSheet15.TabVisible := false;
+      TbsConsulta.TabVisible := false;
+end;
+
+function TForm1.escreverCodeXML(Txt:String;Op:Integer):String;
+var
+  strLinha: String;
+  Parte : TStringList;
+  begin
+        strLinha := 'ab|c|d e|f';
+
+        Parte := TStringList.Create;
+        try
+        Parte.Clear;
+        ExtractStrings([' '],[], PChar(Txt), Parte);
+        if('CREATE' <> Parte[0])  then
+        begin
+              if Op = 1 then
+              begin
+                    result := '<result property="'+LowerCase(Parte[0])+'" column="'+LowerCase(Parte[0])+'" />';
+              end;
+              if Op = 2 then
+              begin
+                    result := ''+LowerCase(Parte[0]);
+              end;
+              if Op = 3 then
+              begin
+                    result := 'p_'+LowerCase(Parte[0])+ ' '+verificadorCodeAppBanco(Parte[1])+' ';
+              end;
+              if Op = 4 then
+              begin
+                    result := LowerCase(Parte[0])+ ' =  COALESCE(p_'+LowerCase(Parte[0])+ ','+LowerCase(Parte[0])+')';
+              end;
+        end;
+  finally
+    Parte.Free;
+  end;
+end;
+
 function TForm1.escreverCode(Txt:String):String;
 var
   strLinha: String;
   Parte : TStringList;
-begin
-  strLinha := 'ab|c|d e|f';
+    begin
+          strLinha := 'ab|c|d e|f';
 
-  Parte := TStringList.Create;
-  try
-  Parte.Clear;
-  ExtractStrings([' '],[], PChar(Txt), Parte);
-  if('CREATE' <> Parte[0])  then
-  result := verificadorCode(Parte[1])+' '+ Parte[0] +';';
-  finally
-    Parte.Free;
-  end; end;
+          Parte := TStringList.Create;
+          try
+          Parte.Clear;
+          ExtractStrings([' '],[], PChar(Txt), Parte);
+          if('CREATE' <> Parte[0])  then
+          result := verificadorCode(Parte[1])+' '+ LowerCase(Parte[0]) +';';
+    finally
+      Parte.Free;
+    end;
+end;
 procedure TForm1.gerarModelo(Txt:String);
 var linha: string;
 BEGIN
-     Closefile(F);
      AssignFile(F,'c:\'+Edit1.Text+'.java');
      Rewrite(F); //abre o arquivo para escrita
      Writeln(F,'public class '+Txt+' extends SensusModel'); //escreve no arquivo e desce uma linha
@@ -1881,7 +1989,7 @@ BEGIN
      while (not eof(arq)) do
      begin
            readln(arq, linha); // [ 6 ] Lê uma linha do arquivo
-           Writeln(F,'    '+escreverCode(linha));
+           Writeln(F,'    private '+escreverCode(linha));
       end;
 
       CloseFile(arq); // [ 8 ] Fecha o arquivo texto aberto
@@ -1897,42 +2005,107 @@ begin
      if CheckBox1.Checked = true then
      begin
            criarCodeIClasseBCF(Edit1.Text);
-           MostrarMemo(Memo8);
+           MostrarMemo(Memo3);
+           TabSheet1.TabVisible := true;
+           TabSheet1.Caption := 'IClasseBCF';
      end;
      if CheckBox2.Checked = true then
      begin
            criarCodeClasseBCFImpl(Edit1.Text);
-           MostrarMemo(Memo8);
+           MostrarMemo(Memo4);
+           TabSheet2.TabVisible := true;
+           TabSheet2.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'BCFImpl';
      end;
      if CheckBox3.Checked = true then
      begin
            criarCodeIClasseBCL(Edit1.Text);
+           MostrarMemo(Memo5);
+           TabSheet3.TabVisible := true;
+           TabSheet3.Caption := 'I'+PrimeiraMaiscula(Edit1.Text)+'BCL';
+     end;
+     if CheckBox4.Checked = true then
+     begin
+           criarCodeIClasseBCLImpl(Edit1.Text);
+           MostrarMemo(Memo6);
+           TabSheet4.TabVisible := true;
+           TabSheet4.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'BCLImpl';
+     end;
+     if CheckBox5.Checked = true then
+     begin
+           criarCodeIClasseBCL(Edit1.Text);
+           MostrarMemo(Memo7);
+           TabSheet5.TabVisible := true;
+           TabSheet5.Caption := 'I'+PrimeiraMaiscula(Edit1.Text)+'BCL';
+     end;
+     if CheckBox6.Checked = true then
+     begin
+           criarCodeIClasseDAC(Edit1.Text);
            MostrarMemo(Memo8);
+           TabSheet6.TabVisible := true;
+           TabSheet6.Caption := 'I'+PrimeiraMaiscula(Edit1.Text)+'DAC';
+     end;
+     if CheckBox7.Checked = true then
+     begin
+           criarCodeIClasseDACImpl(Edit1.Text);
+           MostrarMemo(Memo9);
+           TabSheet7.TabVisible := true;
+           TabSheet7.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'DACImpl';
+     end;
+     if CheckBox8.Checked = true then
+     begin
+           criarCodeClasseXML(Edit1.Text);
+           MostrarMemo(Memo10);
+           TabSheet8.TabVisible := true;
+           TabSheet8.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'.XML';
+     end;
+     if CheckBox27.Checked = true then
+     begin
+           criarCodeClasseSqlMapConfigXml(Edit1.Text);
+           MostrarMemo(Memo11);
+           TabSheet9.TabVisible := true;
+           TabSheet9.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'.Sql.Map.Config.Xml';
      end;
      if CheckBox9.Checked = true then
      begin
            gerarModelo(Edit1.Text);
-           MostrarMemo(Memo3);
+           MostrarMemo(Memo12);
+           TabSheet10.TabVisible := true;
+           TabSheet10.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'Modelo';
      end;
      if CheckBox10.Checked = true then
      begin
            criarCodeRequest(Edit1.Text);
-           MostrarMemo(Memo6);
+           MostrarMemo(Memo13);
+           TabSheet11.TabVisible := true;
+           TabSheet11.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'Request';
      end;
      if CheckBox11.Checked = true then
      begin
            criarCodeResponse(Edit1.Text);
-           MostrarMemo(Memo7);
+           MostrarMemo(Memo14);
+           TabSheet12.TabVisible := true;
+           TabSheet12.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'Response';
      end;
      if CheckBox18.Checked = true then
      begin
            criarCodeInquiryResponse(Edit1.Text);
-           MostrarMemo(Memo4);
+           MostrarMemo(Memo15);
+           TabSheet13.TabVisible := true;
+           TabSheet13.Caption := 'Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Response';
      end;
      if CheckBox19.Checked = true then
      begin
            criarCodeInquiryRequest(Edit1.Text);
-           MostrarMemo(Memo5);
+           MostrarMemo(Memo16);
+           TabSheet14.TabVisible := true;
+           TabSheet14.Caption := 'Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request';
+     end;
+     if CheckBox11.Checked = true then
+     begin
+           criarCodeClasseAPIControler(Edit1.Text);
+           MostrarMemo(Memo17);
+           TabSheet15.TabVisible := true;
+           TabSheet15.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
      end;
 end;
 
@@ -1958,5 +2131,6 @@ begin
 
          CloseFile(arq); // [ 8 ] Fecha o arquivo texto aberto
        end;
+   TbsConsulta.TabVisible := true;
 end;
 end.

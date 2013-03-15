@@ -11,6 +11,7 @@ object Form1: TForm1
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -20,7 +21,6 @@ object Form1: TForm1
     Height = 33
     Align = alBottom
     TabOrder = 0
-    ExplicitTop = 442
     DesignSize = (
       647
       33)
@@ -139,13 +139,13 @@ object Form1: TForm1
     Top = 41
     Width = 647
     Height = 428
-    ActivePage = TabSheet9
+    ActivePage = TbsFiltro
     Align = alClient
     TabOrder = 2
-    ExplicitHeight = 401
     object TbsFiltro: TTabSheet
       Caption = 'Geral'
-      ExplicitHeight = 373
+      ExplicitLeft = 1
+      ExplicitTop = 22
       object SpeedButton1: TSpeedButton
         Left = 583
         Top = 6
@@ -265,7 +265,7 @@ object Form1: TForm1
         end
         object CheckBox9: TCheckBox
           Left = 24
-          Top = 208
+          Top = 225
           Width = 97
           Height = 17
           Caption = 'Modelo'
@@ -273,7 +273,7 @@ object Form1: TForm1
         end
         object CheckBox10: TCheckBox
           Left = 24
-          Top = 231
+          Top = 245
           Width = 97
           Height = 17
           Caption = 'Request'
@@ -281,7 +281,7 @@ object Form1: TForm1
         end
         object CheckBox11: TCheckBox
           Left = 24
-          Top = 254
+          Top = 268
           Width = 97
           Height = 17
           Caption = 'Response'
@@ -289,7 +289,7 @@ object Form1: TForm1
         end
         object CheckBox18: TCheckBox
           Left = 24
-          Top = 277
+          Top = 291
           Width = 113
           Height = 17
           Caption = 'InqueryResponse'
@@ -297,11 +297,19 @@ object Form1: TForm1
         end
         object CheckBox19: TCheckBox
           Left = 24
-          Top = 295
+          Top = 314
           Width = 97
           Height = 18
           Caption = 'InqueryRequest'
           TabOrder = 12
+        end
+        object CheckBox27: TCheckBox
+          Left = 24
+          Top = 205
+          Width = 97
+          Height = 17
+          Caption = 'ClasseMAP.xml'
+          TabOrder = 13
         end
       end
       object Edit1: TEdit
@@ -334,7 +342,6 @@ object Form1: TForm1
           Height = 181
           Align = alRight
           TabOrder = 1
-          ExplicitHeight = 162
         end
         object CheckBox14: TCheckBox
           Left = 16
@@ -448,12 +455,19 @@ object Form1: TForm1
           Caption = 'Gerar Insert Atributos'
           TabOrder = 1
         end
+        object CheckBox28: TCheckBox
+          Left = 16
+          Top = 46
+          Width = 129
+          Height = 17
+          Caption = 'Gerar Procedure'
+          TabOrder = 2
+        end
       end
     end
     object TbsConsulta: TTabSheet
       Caption = 'Arquivo'
       ImageIndex = 1
-      ExplicitHeight = 373
       object Memo1: TMemo
         Left = 0
         Top = 0
@@ -461,15 +475,13 @@ object Form1: TForm1
         Height = 400
         Align = alClient
         Lines.Strings = (
-          'Memo1')
+          '')
         TabOrder = 0
-        ExplicitHeight = 373
       end
     end
     object TabSheet1: TTabSheet
       Caption = 'Modelo'
       ImageIndex = 2
-      ExplicitHeight = 373
       object Memo3: TMemo
         Left = 0
         Top = 0
@@ -479,13 +491,11 @@ object Form1: TForm1
         Lines.Strings = (
           'Memo1')
         TabOrder = 0
-        ExplicitHeight = 373
       end
     end
     object TabSheet2: TTabSheet
       Caption = 'InqueryResponse'
       ImageIndex = 3
-      ExplicitHeight = 373
       object Memo4: TMemo
         Left = 0
         Top = 0
@@ -495,13 +505,11 @@ object Form1: TForm1
         Lines.Strings = (
           'Memo1')
         TabOrder = 0
-        ExplicitHeight = 373
       end
     end
     object TabSheet3: TTabSheet
       Caption = 'TabSheet3'
       ImageIndex = 4
-      ExplicitHeight = 373
       object Memo5: TMemo
         Left = 0
         Top = 0
@@ -511,13 +519,11 @@ object Form1: TForm1
         Lines.Strings = (
           'Memo1')
         TabOrder = 0
-        ExplicitHeight = 373
       end
     end
     object TabSheet4: TTabSheet
       Caption = 'TabSheet4'
       ImageIndex = 5
-      ExplicitHeight = 373
       object Memo6: TMemo
         Left = 0
         Top = 0
@@ -527,13 +533,11 @@ object Form1: TForm1
         Lines.Strings = (
           'Memo1')
         TabOrder = 0
-        ExplicitHeight = 373
       end
     end
     object TabSheet5: TTabSheet
       Caption = 'TabSheet5'
       ImageIndex = 6
-      ExplicitHeight = 373
       object Memo7: TMemo
         Left = 0
         Top = 0
@@ -543,13 +547,11 @@ object Form1: TForm1
         Lines.Strings = (
           'Memo1')
         TabOrder = 0
-        ExplicitHeight = 373
       end
     end
     object TabSheet6: TTabSheet
       Caption = 'TabSheet6'
       ImageIndex = 7
-      ExplicitHeight = 373
       object Memo8: TMemo
         Left = 0
         Top = 0
@@ -559,15 +561,11 @@ object Form1: TForm1
         Lines.Strings = (
           'Memo1')
         TabOrder = 0
-        ExplicitHeight = 373
       end
     end
     object TabSheet7: TTabSheet
       Caption = 'TabSheet7'
       ImageIndex = 8
-      ExplicitLeft = 8
-      ExplicitTop = 22
-      ExplicitHeight = 373
       object Memo9: TMemo
         Left = 0
         Top = 0
@@ -577,13 +575,12 @@ object Form1: TForm1
         Lines.Strings = (
           'Memo1')
         TabOrder = 0
-        ExplicitHeight = 373
+        ExplicitTop = 4
       end
     end
     object TabSheet8: TTabSheet
       Caption = 'TabSheet8'
       ImageIndex = 9
-      ExplicitHeight = 373
       object Memo10: TMemo
         Left = 0
         Top = 0
@@ -593,13 +590,11 @@ object Form1: TForm1
         Lines.Strings = (
           'Memo1')
         TabOrder = 0
-        ExplicitHeight = 373
       end
     end
     object TabSheet9: TTabSheet
       Caption = 'TabSheet9'
       ImageIndex = 10
-      ExplicitHeight = 373
       object Memo11: TMemo
         Left = 0
         Top = 0
@@ -609,7 +604,93 @@ object Form1: TForm1
         Lines.Strings = (
           'Memo1')
         TabOrder = 0
-        ExplicitHeight = 373
+        ExplicitTop = -2
+      end
+    end
+    object TabSheet10: TTabSheet
+      Caption = 'TabSheet10'
+      ImageIndex = 11
+      ExplicitLeft = 1
+      ExplicitTop = 28
+      object Memo12: TMemo
+        Left = 0
+        Top = 0
+        Width = 639
+        Height = 400
+        Align = alClient
+        Lines.Strings = (
+          'Memo1')
+        TabOrder = 0
+      end
+    end
+    object TabSheet11: TTabSheet
+      Caption = 'TabSheet11'
+      ImageIndex = 12
+      object Memo13: TMemo
+        Left = 0
+        Top = 0
+        Width = 639
+        Height = 400
+        Align = alClient
+        Lines.Strings = (
+          'Memo1')
+        TabOrder = 0
+      end
+    end
+    object TabSheet12: TTabSheet
+      Caption = 'TabSheet12'
+      ImageIndex = 13
+      object Memo14: TMemo
+        Left = 0
+        Top = 0
+        Width = 639
+        Height = 400
+        Align = alClient
+        Lines.Strings = (
+          'Memo1')
+        TabOrder = 0
+      end
+    end
+    object TabSheet13: TTabSheet
+      Caption = 'TabSheet13'
+      ImageIndex = 14
+      object Memo15: TMemo
+        Left = 0
+        Top = 0
+        Width = 639
+        Height = 400
+        Align = alClient
+        Lines.Strings = (
+          'Memo1')
+        TabOrder = 0
+      end
+    end
+    object TabSheet14: TTabSheet
+      Caption = 'TabSheet14'
+      ImageIndex = 15
+      object Memo16: TMemo
+        Left = 0
+        Top = 0
+        Width = 639
+        Height = 400
+        Align = alClient
+        Lines.Strings = (
+          'Memo1')
+        TabOrder = 0
+      end
+    end
+    object TabSheet15: TTabSheet
+      Caption = 'TabSheet15'
+      ImageIndex = 16
+      object Memo17: TMemo
+        Left = 0
+        Top = 0
+        Width = 639
+        Height = 400
+        Align = alClient
+        Lines.Strings = (
+          'Memo1')
+        TabOrder = 0
       end
     end
   end
@@ -617,6 +698,7 @@ object Form1: TForm1
     FavoriteLinks = <>
     FileTypes = <>
     Options = []
-    Left = 496
+    Left = 560
+    Top = 120
   end
 end
