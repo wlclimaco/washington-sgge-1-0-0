@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, BrvCustomEdit, BrvEdit, ComCtrls, ExtCtrls, Buttons, BrvBitBtn;
+  Dialogs, StdCtrls,IniFiles, BrvCustomEdit, BrvEdit, ComCtrls, ExtCtrls, Buttons, BrvBitBtn, BrvSpeedButton;
 
 type
   TForm1 = class(TForm)
@@ -104,6 +104,67 @@ type
     CheckBox53: TCheckBox;
     CheckBox54: TCheckBox;
     CheckBox22: TCheckBox;
+    TabSheet16: TTabSheet;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    Panel5: TPanel;
+    Panel6: TPanel;
+    Panel7: TPanel;
+    BrvEdit2: TBrvEdit;
+    BrvEdit3: TBrvEdit;
+    BrvEdit4: TBrvEdit;
+    BrvEdit5: TBrvEdit;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    BrvEdit6: TBrvEdit;
+    Label12: TLabel;
+    BrvEdit7: TBrvEdit;
+    Label13: TLabel;
+    BrvEdit8: TBrvEdit;
+    Label14: TLabel;
+    BrvEdit9: TBrvEdit;
+    Label15: TLabel;
+    BrvEdit10: TBrvEdit;
+    Label16: TLabel;
+    BrvEdit11: TBrvEdit;
+    BrvEdit12: TBrvEdit;
+    Label17: TLabel;
+    Label18: TLabel;
+    BrvEdit13: TBrvEdit;
+    BrvEdit14: TBrvEdit;
+    Label19: TLabel;
+    Label20: TLabel;
+    BrvEdit15: TBrvEdit;
+    BrvEdit16: TBrvEdit;
+    FileOpenDialog2: TFileOpenDialog;
+    BrvEdit17: TBrvEdit;
+    Label22: TLabel;
+    BrvEdit18: TBrvEdit;
+    Label23: TLabel;
+    Label24: TLabel;
+    BrvEdit19: TBrvEdit;
+    Label25: TLabel;
+    BrvEdit20: TBrvEdit;
+    Label26: TLabel;
+    BrvEdit21: TBrvEdit;
+    Label27: TLabel;
+    BrvEdit22: TBrvEdit;
+    Label28: TLabel;
+    BrvEdit23: TBrvEdit;
+    BtnFecEmp: TBrvSpeedButton;
+    BtnSalvar: TBrvSpeedButton;
+    SbtAjuda: TBrvSpeedButton;
+    BrvSpeedButton1: TBrvSpeedButton;
+    Label29: TLabel;
+    TabSheet17: TTabSheet;
+    GroupBox5: TGroupBox;
     procedure SpeedButton1Click(Sender: TObject);
     procedure BtnPesquisaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -136,6 +197,8 @@ type
     function criarGerarProcedureInsert(Txt:String):String;
     function criarGerarProcedureUpdate(Txt:String):String;
     function verificadorCodeAppBanco(Txt:String):String;
+    procedure GravarConfiguracao;
+    procedure LerConfiguracao;
   end;
 
 var
@@ -147,6 +210,87 @@ implementation
 
 {$R *.dfm}
 
+procedure TForm1.LerConfiguracao;
+Var IniFile  : String ;
+    Ini     : TIniFile ;
+    Ok : Boolean;
+
+begin
+  IniFile := ChangeFileExt( Application.ExeName, '.ini') ;
+
+  Ini := TIniFile.Create( IniFile );
+  try
+
+      BrvEdit2.Text   := Ini.ReadString( 'BE','bcf Aplicattion'  ,'') ;
+      BrvEdit3.Text   := Ini.ReadString( 'BE','bcl Aplicattion'  ,'') ;
+      BrvEdit4.Text   := Ini.ReadString( 'BE','data aplication'  ,'') ;
+      BrvEdit5.Text   := Ini.ReadString( 'BE','validation'  ,'') ;
+
+      BrvEdit10.Text   := Ini.ReadString( 'Banco de dados','procedure'  ,'') ;
+      BrvEdit11.Text   := Ini.ReadString( 'Banco de dados','insert'  ,'') ;
+      BrvEdit12.Text   := Ini.ReadString( 'Banco de dados','table'  ,'') ;
+      BrvEdit13.Text   := Ini.ReadString( 'Banco de dados','function'  ,'') ;
+
+      BrvEdit14.Text   := Ini.ReadString( 'FE','context'  ,'') ;
+      BrvEdit15.Text   := Ini.ReadString( 'FE','InternacionalizaçãoI'  ,'') ;
+      BrvEdit16.Text   := Ini.ReadString( 'FE','InternacionalizaçãoII'  ,'') ;
+      BrvEdit17.Text   := Ini.ReadString( 'FE','InternacionalizaçãoIII'  ,'') ;
+      BrvEdit18.Text   := Ini.ReadString( 'FE','UniTest'  ,'') ;
+      BrvEdit19.Text   := Ini.ReadString( 'FE','test'  ,'') ;
+
+      BrvEdit20.Text   := Ini.ReadString( 'web','Host'  ,'') ;
+      BrvEdit21.Text   := Ini.ReadString( 'web','Porta'  ,'') ;
+
+      BrvEdit22.Text   := Ini.ReadString( 'Emitente','CNPJ'  ,'') ;
+      BrvEdit23.Text   := Ini.ReadString( 'Emitente','IE'  ,'') ;
+
+
+  finally
+     Ini.Free ;
+  end;
+
+end;
+
+procedure TForm1.GravarConfiguracao;
+Var IniFile : String ;
+    Ini     : TIniFile ;
+    StreamMemo : TMemoryStream;
+begin
+  IniFile := ChangeFileExt( Application.ExeName, '.ini') ;
+
+  Ini := TIniFile.Create( IniFile );
+  try
+      Ini.WriteString( 'BE','bcf Aplicattion',BrvEdit2.Text) ;
+      Ini.WriteString( 'BE','bcl Aplicattion',BrvEdit3.Text) ;
+      Ini.WriteString( 'BE','data aplication',BrvEdit4.Text) ;
+      Ini.WriteString( 'BE','validation'     ,BrvEdit5.Text) ;
+
+
+      Ini.WriteString( 'Banco de dados','procedure',BrvEdit10.Text) ;
+      Ini.WriteString( 'Banco de dados','insert'   ,BrvEdit11.Text) ;
+      Ini.WriteString( 'Banco de dados','table'    ,BrvEdit12.Text) ;
+      Ini.WriteString( 'Banco de dados','function' ,BrvEdit13.Text) ;
+
+
+      Ini.WriteString( 'FE','context'                ,BrvEdit14.Text) ;
+      Ini.WriteString( 'FE','InternacionalizaçãoI'   ,BrvEdit15.Text) ;
+      Ini.WriteString( 'FE','InternacionalizaçãoII'  ,BrvEdit16.Text) ;
+      Ini.WriteString( 'FE','InternacionalizaçãoIII' ,BrvEdit17.Text) ;
+      Ini.WriteString( 'FE','UniTest'                ,BrvEdit18.Text) ;
+      Ini.WriteString( 'FE','test'                   ,BrvEdit19.Text) ;
+
+      Ini.WriteString( 'web','Host'   ,BrvEdit20.Text) ;
+      Ini.WriteString( 'web','Porta'  ,BrvEdit21.Text) ;
+
+
+      Ini.WriteString( 'Emitente','CNPJ'       ,BrvEdit21.Text);
+      Ini.WriteString( 'Emitente','IE'        ,BrvEdit22.Text);
+
+      StreamMemo.Free;
+  finally
+     Ini.Free ;
+  end;
+end;
 function TForm1.criarGerarProcedureInsert(Txt:String):String;
 begin
       AssignFile(F,'c:\Ins'+PrimeiraMaiscula(Edit1.Text)+'.sql');
@@ -1941,6 +2085,7 @@ begin
       TabSheet14.TabVisible := false;
       TabSheet15.TabVisible := false;
       TbsConsulta.TabVisible := false;
+      LerConfiguracao;
 end;
 
 function TForm1.escreverCodeXML(Txt:String;Op:Integer):String;
@@ -2022,6 +2167,7 @@ END;
 
 procedure TForm1.BtnPesquisaClick(Sender: TObject);
 begin
+     GravarConfiguracao;
      if CheckBox1.Checked = true then
      begin
            criarCodeIClasseBCF(Edit1.Text);
@@ -2132,6 +2278,8 @@ end;
 procedure TForm1.SpeedButton1Click(Sender: TObject);
 var   arq: TextFile; { declarando a variável "arq" do tipo arquivo texto }
     linha: string;
+     b:tcheckbox;
+     x,y:Integer;
 begin
   Memo1.Clear;
 
@@ -2139,13 +2287,30 @@ begin
 
   Reset(arq);   // [ 3 ] Abre o arquivo texto para leitura
   {$I+}         // ativa a diretiva de Input
-
+  x := 10;
+  y := 15;
   if (IOResult <> 0) // verifica o resultado da operação de abertura
      then Memo1.Lines.Add('Erro na abertura do arquivo !!!')
   else begin
          while (not eof(arq)) do
          begin
-           readln(arq, linha); // [ 6 ] Lê uma linha do arquivo
+                readln(arq, linha); // [ 6 ] Lê uma linha do arquivo
+                b:=Tcheckbox.create(self);
+                b.visible:=false;
+                b.parent:=GroupBox5;
+                b.left:=x;
+                b.top:=y;
+                b.Width := 190;
+                b.name:= escreverCodeXML(linha,2);
+                b.Caption:= escreverCodeXML(linha,3);
+                b.visible:=true;
+                y := y + 20;
+                if y > 420 then
+                begin
+                    x:= x + 200;
+                    y := 15;
+                end;
+
            Memo1.Lines.Add(linha);
          end;
 
