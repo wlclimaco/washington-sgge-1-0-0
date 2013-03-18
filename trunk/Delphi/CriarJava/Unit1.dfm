@@ -73,7 +73,6 @@ object Form1: TForm1
     Height = 33
     Align = alBottom
     TabOrder = 0
-    ExplicitWidth = 837
     DesignSize = (
       949
       33)
@@ -177,7 +176,6 @@ object Form1: TForm1
       TabOrder = 0
       OnClick = BtnPesquisaClick
       BrTipoBotao = BtnConvSQL
-      ExplicitLeft = 717
     end
   end
   object Panel2: TPanel
@@ -187,7 +185,6 @@ object Form1: TForm1
     Height = 41
     Align = alTop
     TabOrder = 1
-    ExplicitWidth = 837
     DesignSize = (
       949
       41)
@@ -563,19 +560,12 @@ object Form1: TForm1
     Top = 41
     Width = 949
     Height = 428
-    ActivePage = TabSheet11
+    ActivePage = TabSheet18
     Align = alClient
     MultiLine = True
     TabOrder = 2
     object TbsFiltro: TTabSheet
       Caption = 'Geral'
-      object SpeedButton1: TSpeedButton
-        Left = 583
-        Top = 6
-        Width = 23
-        Height = 22
-        OnClick = SpeedButton1Click
-      end
       object Label1: TLabel
         Left = 56
         Top = 13
@@ -602,18 +592,53 @@ object Form1: TForm1
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object BrvEdit1: TBrvEdit
-        Left = 128
-        Top = 8
-        Width = 449
-        Height = 21
-        TabOrder = 0
-        Text = 'BrvEdit1'
-        BrVisibleButton = True
-        BrFunctionButton = VeArquivo
-        BrAlignment = taLeftJustify
-        BrvQueryCode = 0
-        BrRecordar = False
+      object SpeedButton2: TSpeedButton
+        Left = 535
+        Top = 7
+        Width = 23
+        Height = 22
+        Glyph.Data = {
+          E6040000424DE604000000000000360000002800000014000000140000000100
+          180000000000B0040000C40E0000C40E00000000000000000000008080008080
+          0080800080800080800080800080800080800080800080800080800080800080
+          8000808000808000808000808000808000808000808000808000808000808000
+          8080008080008080008080008080008080008080008080008080008080008080
+          0080800080800080800080800080800080800080800080800080800080800080
+          8000808000808000808000808000808000808000808000808000808000808000
+          8080008080008080008080008080008080008080008080008080008080008080
+          0080800080800080800080800080800080800080800080800080800080800080
+          8000808000808000808000808000808000000000000000000000000000000000
+          0000000000000000000000000000000000008080008080008080008080008080
+          008080008080008080008080000000000000007F7F007F7F007F7F007F7F007F
+          7F007F7F007F7F007F7F007F7F00000000808000808000808000808000808000
+          808000808000808000000000FFFF000000007F7F007F7F007F7F007F7F007F7F
+          007F7F007F7F007F7F007F7F0000000080800080800080800080800080800080
+          80008080000000FFFFFF00FFFF000000007F7F007F7F007F7F007F7F007F7F00
+          7F7F007F7F007F7F007F7F000000008080008080008080008080008080008080
+          00000000FFFFFFFFFF00FFFF000000007F7F007F7F007F7F007F7F007F7F007F
+          7F007F7F007F7F007F7F000000008080008080008080008080008080000000FF
+          FFFF00FFFFFFFFFF00FFFF000000000000000000000000000000000000000000
+          00000000000000000000000000808000808000808000808000000000FFFFFFFF
+          FF00FFFFFFFFFF00FFFFFFFFFF00FFFFFFFFFF00FFFF00000000808000808000
+          8080008080008080008080008080008080008080000000FFFFFF00FFFFFFFFFF
+          00FFFFFFFFFF00FFFFFFFFFF00FFFFFFFFFF0000000080800080800080800080
+          8000808000808000808000808000808000000000FFFFFFFFFF00FFFF00000000
+          0000000000000000000000000000000000008080008080008080008080008080
+          0080800080800080800080800080800000000000000000000080800080800080
+          8000808000808000808000808000808000000000000000000000808000808000
+          8080008080008080008080008080008080008080008080008080008080008080
+          0080800080800080800080800080800000000000000080800080800080800080
+          8000808000808000808000808000808000808000808000808000808000000000
+          8080008080008080000000008080000000008080008080008080008080008080
+          0080800080800080800080800080800080800080800080800080800000000000
+          0000000000808000808000808000808000808000808000808000808000808000
+          8080008080008080008080008080008080008080008080008080008080008080
+          0080800080800080800080800080800080800080800080800080800080800080
+          8000808000808000808000808000808000808000808000808000808000808000
+          8080008080008080008080008080008080008080008080008080008080008080
+          0080800080800080800080800080800080800080800080800080800080800080
+          80008080008080008080}
+        OnClick = SpeedButton1Click
       end
       object GroupBox1: TGroupBox
         Left = 467
@@ -621,7 +646,7 @@ object Form1: TForm1
         Width = 169
         Height = 354
         Caption = 'Classes BE'
-        TabOrder = 1
+        TabOrder = 0
         object CheckBox1: TCheckBox
           Left = 24
           Top = 24
@@ -740,7 +765,7 @@ object Form1: TForm1
         Top = 35
         Width = 321
         Height = 21
-        TabOrder = 2
+        TabOrder = 1
         Text = 'Edit1'
       end
       object GroupBox2: TGroupBox
@@ -749,7 +774,7 @@ object Form1: TForm1
         Width = 316
         Height = 190
         Caption = 'Metados'
-        TabOrder = 3
+        TabOrder = 2
         object CheckBox13: TCheckBox
           Left = 16
           Top = 16
@@ -805,7 +830,7 @@ object Form1: TForm1
         Width = 123
         Height = 327
         Caption = 'Classes FE'
-        TabOrder = 4
+        TabOrder = 3
         object CheckBox12: TCheckBox
           Left = 16
           Top = 14
@@ -869,7 +894,7 @@ object Form1: TForm1
         Width = 178
         Height = 131
         Caption = 'Configura'#231#227'o'
-        TabOrder = 5
+        TabOrder = 4
         object CheckBox28: TCheckBox
           Left = 16
           Top = 14
@@ -917,7 +942,7 @@ object Form1: TForm1
         Width = 169
         Height = 166
         Caption = 'Classes BE Test'
-        TabOrder = 6
+        TabOrder = 5
         object CheckBox40: TCheckBox
           Left = 24
           Top = 24
@@ -973,7 +998,7 @@ object Form1: TForm1
         Width = 169
         Height = 180
         Caption = 'Configura'#231#227'o BE'
-        TabOrder = 7
+        TabOrder = 6
         object CheckBox46: TCheckBox
           Left = 16
           Top = 21
@@ -1013,7 +1038,7 @@ object Form1: TForm1
         Width = 129
         Height = 129
         Caption = 'GerarScript'
-        TabOrder = 8
+        TabOrder = 7
         object CheckBox50: TCheckBox
           Left = 16
           Top = 14
@@ -1046,6 +1071,13 @@ object Form1: TForm1
           Caption = 'validators'
           TabOrder = 3
         end
+      end
+      object EdtDsArquiv: TEdit
+        Left = 128
+        Top = 8
+        Width = 401
+        Height = 21
+        TabOrder = 8
       end
     end
     object TbsConsulta: TTabSheet
@@ -1915,8 +1947,31 @@ object Form1: TForm1
         Align = alClient
         Caption = 'GroupBox5'
         TabOrder = 0
-        ExplicitLeft = -56
-        ExplicitTop = -3
+      end
+    end
+    object TabSheet18: TTabSheet
+      Caption = 'TabSheet18'
+      ImageIndex = 19
+      object BrvDbGrid1: TBrvDbGrid
+        Left = 0
+        Top = 0
+        Width = 941
+        Height = 382
+        BrShowMemo = True
+        BrReadOnlyStyle = [fsItalic]
+        BrReadOnlyColor = clMaroon
+        Align = alClient
+        DataSource = DataSource1
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
+        BrDrawColumn.Strings = (
+          'N'#227'o remova essas duas linhas de formata'#231#227'o:'
+          'CampoTabela;Operador;ValorComparativo;Cor;')
+        BrGradeZebrada = True
       end
     end
   end
@@ -1933,5 +1988,21 @@ object Form1: TForm1
     Options = []
     Left = 408
     Top = 8
+  end
+  object DataSource1: TDataSource
+    DataSet = ClientDataSet1
+    Left = 560
+  end
+  object DlgArquiv: TOpenDialog
+    Filter = 'Text File|*.txt|DAT|*.dat|All Files|*.*'
+    FilterIndex = 3
+    Left = 543
+    Top = 3
+  end
+  object ClientDataSet1: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 640
+    Top = 65528
   end
 end

@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls,IniFiles, BrvCustomEdit, BrvEdit, ComCtrls, ExtCtrls, Buttons, BrvBitBtn, BrvSpeedButton;
+  Dialogs, StdCtrls,IniFiles, BrvCustomEdit, BrvEdit, ComCtrls, ExtCtrls, Buttons, BrvBitBtn, BrvSpeedButton,
+  DB, DBClient, BrvClientDataSet, Grids, BrvDbGrids, BrvDbGrid;
 
 type
   TForm1 = class(TForm)
@@ -14,14 +15,12 @@ type
     TbsFiltro: TTabSheet;
     TbsConsulta: TTabSheet;
     FileOpenDialog1: TFileOpenDialog;
-    BrvEdit1: TBrvEdit;
     GroupBox1: TGroupBox;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
     TabSheet3: TTabSheet;
     TabSheet4: TTabSheet;
     TabSheet5: TTabSheet;
-    SpeedButton1: TSpeedButton;
     Memo1: TMemo;
     CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
@@ -165,6 +164,13 @@ type
     Label29: TLabel;
     TabSheet17: TTabSheet;
     GroupBox5: TGroupBox;
+    TabSheet18: TTabSheet;
+    BrvDbGrid1: TBrvDbGrid;
+    DataSource1: TDataSource;
+    EdtDsArquiv: TEdit;
+    SpeedButton2: TSpeedButton;
+    DlgArquiv: TOpenDialog;
+    ClientDataSet1: TClientDataSet;
     procedure SpeedButton1Click(Sender: TObject);
     procedure BtnPesquisaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -207,6 +213,8 @@ var
   F:TextFile;
 
 implementation
+
+uses BrvFuncoesXE;
 
 {$R *.dfm}
 
@@ -328,7 +336,7 @@ begin
       AssignFile(F,'c:\Upd'+PrimeiraMaiscula(Edit1.Text)+'.sql');
       Rewrite(F);
       Writeln(F,'CREATE OR REPLACE FUNCTION upd_'+Edit1.Text+'(');
-      AssignFile(arq, BrvEdit1.Text);
+      AssignFile(arq, EdtDsArquiv.text);
       Reset(arq);   // [ 3 ] Abre o arquivo texto para leitura
       {$I+}
       while (not eof(arq)) do
@@ -344,7 +352,7 @@ begin
       Writeln(F,'BEGIN');
       Writeln(F,'	UPDATE '+Edit1.Text+' ');
       Writeln(F,'	   SET ');
-      AssignFile(arq, BrvEdit1.Text);
+      AssignFile(arq, EdtDsArquiv.text);
 
       Reset(arq);   // [ 3 ] Abre o arquivo texto para leitura
       {$I+}
@@ -685,7 +693,7 @@ begin
       Writeln(F,'<mapper namespace="'+PrimeiraMaiscula(Edit1.Text)+'">');
 
       Writeln(F,'<resultMap id="'+PrimeiraMaiscula(Edit1.Text)+'sResult" type="'+PrimeiraMaiscula(Edit1.Text)+'">');
-      AssignFile(arq, BrvEdit1.Text);
+      AssignFile(arq, EdtDsArquiv.text);
       Reset(arq);   // [ 3 ] Abre o arquivo texto para leitura
       {$I+}
       while (not eof(arq)) do
@@ -699,7 +707,7 @@ begin
       Writeln(F,'</resultMap>');
 
       Writeln(F,'<sql id="all'+PrimeiraMaiscula(Edit1.Text)+'Columms">');
-      AssignFile(arq, BrvEdit1.Text);
+      AssignFile(arq, EdtDsArquiv.text);
       Write(F,'SELECT ');
       Reset(arq);   // [ 3 ] Abre o arquivo texto para leitura
       {$I+}
@@ -2147,7 +2155,7 @@ BEGIN
      Rewrite(F); //abre o arquivo para escrita
      Writeln(F,'public class '+Txt+' extends SensusModel'); //escreve no arquivo e desce uma linha
      Writeln(F,'{');
-     AssignFile(arq, BrvEdit1.Text);
+     AssignFile(arq, EdtDsArquiv.text);
 
      Reset(arq);   // [ 3 ] Abre o arquivo texto para leitura
      {$I+}
@@ -2280,42 +2288,56 @@ var   arq: TextFile; { declarando a variável "arq" do tipo arquivo texto }
     linha: string;
      b:tcheckbox;
      x,y:Integer;
+     lDsLista  : TStrings;
 begin
-  Memo1.Clear;
 
-  AssignFile(arq, BrvEdit1.Text);
+      Memo1.Clear;
+      try
+          lDsLista  := TStringList.Create;
+      if DlgArquiv.Execute then
+      begin
+            AssignFile(arq, EdtDsArquiv.text);
 
-  Reset(arq);   // [ 3 ] Abre o arquivo texto para leitura
-  {$I+}         // ativa a diretiva de Input
-  x := 10;
-  y := 15;
-  if (IOResult <> 0) // verifica o resultado da operação de abertura
-     then Memo1.Lines.Add('Erro na abertura do arquivo !!!')
-  else begin
-         while (not eof(arq)) do
-         begin
-                readln(arq, linha); // [ 6 ] Lê uma linha do arquivo
-                b:=Tcheckbox.create(self);
-                b.visible:=false;
-                b.parent:=GroupBox5;
-                b.left:=x;
-                b.top:=y;
-                b.Width := 190;
-                b.name:= escreverCodeXML(linha,2);
-                b.Caption:= escreverCodeXML(linha,3);
-                b.visible:=true;
-                y := y + 20;
-                if y > 420 then
-                begin
-                    x:= x + 200;
-                    y := 15;
-                end;
+            Reset(arq);   // [ 3 ] Abre o arquivo texto para leitura
+            {$I+}         // ativa a diretiva de Input
+            x := 10;
+            y := 15;
+            if (IOResult <> 0) // verifica o resultado da operação de abertura
+               then Memo1.Lines.Add('Erro na abertura do arquivo !!!')
+            else begin
+                   lDsLista.LoadFromFile(DlgArquiv.FileName);
+                   Reset(arq);
+                          {$I+}
+                          lDsLista.Insert(0,'NrCodigo NrRua NrPredio NrNivel DsBloco');
+                          BrvFuncoesXE.StrToClientDataSet(lDsLista.Text,ClientDataSet1);
+                   while (not eof(arq)) do
+                   begin
+                          readln(arq, linha); // [ 6 ] Lê uma linha do arquivo
+                          b:=Tcheckbox.create(self);
+                          b.visible:=false;
+                          b.parent:=GroupBox5;
+                          b.left:=x;
+                          b.top:=y;
+                          b.Width := 190;
+                          b.name:= escreverCodeXML(linha,2);
+                          b.Caption:= escreverCodeXML(linha,3);
+                          b.visible:=true;
+                          y := y + 20;
+                          if y > 420 then
+                          begin
+                              x:= x + 200;
+                              y := 15;
+                          end;
 
-           Memo1.Lines.Add(linha);
-         end;
+                     Memo1.Lines.Add(linha);
+                   end;
 
-         CloseFile(arq); // [ 8 ] Fecha o arquivo texto aberto
-       end;
-   TbsConsulta.TabVisible := true;
+                   CloseFile(arq); // [ 8 ] Fecha o arquivo texto aberto
+                 end;
+             TbsConsulta.TabVisible := true;
+          end;
+      finally
+              FreeAndNil(lDsLista);
+      end;
 end;
 end.
