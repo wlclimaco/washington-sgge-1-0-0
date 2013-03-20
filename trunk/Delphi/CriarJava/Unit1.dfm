@@ -566,6 +566,8 @@ object Form1: TForm1
     TabOrder = 2
     object TbsFiltro: TTabSheet
       Caption = 'Geral'
+      ExplicitTop = 42
+      ExplicitHeight = 382
       object Label1: TLabel
         Left = 56
         Top = 13
@@ -887,6 +889,14 @@ object Form1: TForm1
           Caption = 'HTML Create'
           TabOrder = 6
         end
+        object CheckBox25: TCheckBox
+          Left = 16
+          Top = 131
+          Width = 97
+          Height = 17
+          Caption = 'Sellenium'
+          TabOrder = 7
+        end
       end
       object GroupBox4: TGroupBox
         Left = 151
@@ -1057,7 +1067,7 @@ object Form1: TForm1
         end
         object CheckBox52: TCheckBox
           Left = 16
-          Top = 70
+          Top = 60
           Width = 97
           Height = 17
           Caption = 'Atributos'
@@ -1065,7 +1075,7 @@ object Form1: TForm1
         end
         object CheckBox53: TCheckBox
           Left = 16
-          Top = 93
+          Top = 83
           Width = 97
           Height = 17
           Caption = 'validators'
@@ -1083,321 +1093,315 @@ object Form1: TForm1
     object TbsConsulta: TTabSheet
       Caption = 'Arquivo'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitTop = 42
+      ExplicitHeight = 382
       object Memo1: TMemo
         Left = 0
         Top = 0
         Width = 941
-        Height = 382
+        Height = 364
         Align = alClient
         Lines.Strings = (
           '')
         ScrollBars = ssVertical
         TabOrder = 0
+        ExplicitHeight = 382
       end
     end
     object TabSheet1: TTabSheet
       Caption = 'Modelo'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitTop = 42
+      ExplicitHeight = 382
       object Memo3: TMemo
         Left = 0
         Top = 0
         Width = 941
-        Height = 382
+        Height = 364
         Align = alClient
         Lines.Strings = (
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
+        ExplicitHeight = 382
       end
     end
     object TabSheet2: TTabSheet
       Caption = 'InqueryResponse'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitTop = 42
+      ExplicitHeight = 382
       object Memo4: TMemo
         Left = 0
         Top = 0
         Width = 941
-        Height = 382
+        Height = 364
         Align = alClient
         Lines.Strings = (
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
+        ExplicitHeight = 382
       end
     end
     object TabSheet3: TTabSheet
       Caption = 'TabSheet3'
       ImageIndex = 4
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitTop = 42
+      ExplicitHeight = 382
       object Memo5: TMemo
         Left = 0
         Top = 0
         Width = 941
-        Height = 382
+        Height = 364
         Align = alClient
         Lines.Strings = (
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
+        ExplicitHeight = 382
       end
     end
     object TabSheet4: TTabSheet
       Caption = 'TabSheet4'
       ImageIndex = 5
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitTop = 42
+      ExplicitHeight = 382
       object Memo6: TMemo
         Left = 0
         Top = 0
         Width = 941
-        Height = 382
+        Height = 364
         Align = alClient
         Lines.Strings = (
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
+        ExplicitHeight = 382
       end
     end
     object TabSheet5: TTabSheet
       Caption = 'TabSheet5'
       ImageIndex = 6
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitTop = 42
+      ExplicitHeight = 382
       object Memo7: TMemo
         Left = 0
         Top = 0
         Width = 941
-        Height = 382
+        Height = 364
         Align = alClient
         Lines.Strings = (
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
+        ExplicitHeight = 382
+      end
+      object Memo35: TMemo
+        Left = 0
+        Top = 0
+        Width = 941
+        Height = 364
+        Align = alClient
+        Lines.Strings = (
+          'Memo1')
+        ScrollBars = ssVertical
+        TabOrder = 1
       end
     end
     object TabSheet6: TTabSheet
       Caption = 'TabSheet6'
       ImageIndex = 7
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitTop = 42
+      ExplicitHeight = 382
       object Memo8: TMemo
         Left = 0
         Top = 0
         Width = 941
-        Height = 382
+        Height = 364
         Align = alClient
         Lines.Strings = (
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
+        ExplicitHeight = 382
       end
     end
     object TabSheet7: TTabSheet
       Caption = 'TabSheet7'
       ImageIndex = 8
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitTop = 42
+      ExplicitHeight = 382
       object Memo9: TMemo
         Left = 0
         Top = 0
         Width = 941
-        Height = 382
+        Height = 364
         Align = alClient
         Lines.Strings = (
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
+        ExplicitHeight = 382
       end
     end
     object TabSheet8: TTabSheet
       Caption = 'TabSheet8'
       ImageIndex = 9
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitTop = 42
+      ExplicitHeight = 382
       object Memo10: TMemo
         Left = 0
         Top = 0
         Width = 941
-        Height = 382
+        Height = 364
         Align = alClient
         Lines.Strings = (
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
+        ExplicitHeight = 382
       end
     end
     object TabSheet9: TTabSheet
       Caption = 'TabSheet9'
       ImageIndex = 10
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitTop = 42
+      ExplicitHeight = 382
       object Memo11: TMemo
         Left = 0
         Top = 0
         Width = 941
-        Height = 382
+        Height = 364
         Align = alClient
         Lines.Strings = (
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
+        ExplicitHeight = 382
       end
     end
     object TabSheet10: TTabSheet
       Caption = 'TabSheet10'
       ImageIndex = 11
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitTop = 42
+      ExplicitHeight = 382
       object Memo12: TMemo
         Left = 0
         Top = 0
         Width = 941
-        Height = 382
+        Height = 364
         Align = alClient
         Lines.Strings = (
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
+        ExplicitHeight = 382
       end
     end
     object TabSheet11: TTabSheet
       Caption = 'TabSheet11'
       ImageIndex = 12
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitTop = 42
+      ExplicitHeight = 382
       object Memo13: TMemo
         Left = 0
         Top = 0
         Width = 941
-        Height = 382
+        Height = 364
         Align = alClient
         Lines.Strings = (
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
+        ExplicitHeight = 382
       end
     end
     object TabSheet12: TTabSheet
       Caption = 'TabSheet12'
       ImageIndex = 13
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitTop = 42
+      ExplicitHeight = 382
       object Memo14: TMemo
         Left = 0
         Top = 0
         Width = 941
-        Height = 382
+        Height = 364
         Align = alClient
         Lines.Strings = (
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
+        ExplicitHeight = 382
       end
     end
     object TabSheet13: TTabSheet
       Caption = 'TabSheet13'
       ImageIndex = 14
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitTop = 42
+      ExplicitHeight = 382
       object Memo15: TMemo
         Left = 0
         Top = 0
         Width = 941
-        Height = 382
+        Height = 364
         Align = alClient
         Lines.Strings = (
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
+        ExplicitHeight = 382
       end
     end
     object TabSheet14: TTabSheet
       Caption = 'TabSheet14'
       ImageIndex = 15
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitTop = 42
+      ExplicitHeight = 382
       object Memo16: TMemo
         Left = 0
         Top = 0
         Width = 941
-        Height = 382
+        Height = 364
         Align = alClient
         Lines.Strings = (
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
+        ExplicitHeight = 382
       end
     end
     object TabSheet15: TTabSheet
       Caption = 'TabSheet15'
       ImageIndex = 16
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitTop = 42
+      ExplicitHeight = 382
       object Memo17: TMemo
         Left = 0
         Top = 0
         Width = 941
-        Height = 382
+        Height = 364
         Align = alClient
         Lines.Strings = (
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
+        ExplicitHeight = 382
       end
     end
     object TabSheet16: TTabSheet
       Caption = 'TabSheet16'
       ImageIndex = 17
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitTop = 42
+      ExplicitHeight = 382
       object Panel3: TPanel
         Left = 0
-        Top = 326
+        Top = 308
         Width = 941
         Height = 56
         Align = alBottom
         TabOrder = 0
+        ExplicitTop = 326
         object Label27: TLabel
           Left = 8
           Top = 24
@@ -1453,11 +1457,12 @@ object Form1: TForm1
       end
       object Panel4: TPanel
         Left = 0
-        Top = 278
+        Top = 260
         Width = 941
         Height = 48
         Align = alBottom
         TabOrder = 1
+        ExplicitTop = 278
         object Label25: TLabel
           Left = 8
           Top = 26
@@ -1513,11 +1518,12 @@ object Form1: TForm1
       end
       object Panel5: TPanel
         Left = 0
-        Top = 190
+        Top = 172
         Width = 941
         Height = 88
         Align = alBottom
         TabOrder = 2
+        ExplicitTop = 190
         object Label19: TLabel
           Left = 8
           Top = 11
@@ -1677,11 +1683,12 @@ object Form1: TForm1
       end
       object Panel6: TPanel
         Left = 0
-        Top = 125
+        Top = 107
         Width = 941
         Height = 65
         Align = alBottom
         TabOrder = 3
+        ExplicitTop = 125
         object Label15: TLabel
           Left = 8
           Top = 11
@@ -1789,11 +1796,12 @@ object Form1: TForm1
       end
       object Panel7: TPanel
         Left = 0
-        Top = -12
+        Top = -30
         Width = 941
         Height = 137
         Align = alBottom
         TabOrder = 4
+        ExplicitTop = -12
         object Label3: TLabel
           Left = 14
           Top = 21
@@ -2007,32 +2015,31 @@ object Form1: TForm1
     object TabSheet17: TTabSheet
       Caption = 'TabSheet17'
       ImageIndex = 18
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
-      object GroupBox5: TGroupBox
+      ExplicitTop = 42
+      ExplicitHeight = 382
+      object Memo18: TMemo
         Left = 0
         Top = 0
         Width = 941
-        Height = 382
+        Height = 364
         Align = alClient
-        Caption = 'GroupBox5'
+        Lines.Strings = (
+          'Memo1')
+        ScrollBars = ssVertical
         TabOrder = 0
+        ExplicitHeight = 382
       end
     end
     object TabSheet18: TTabSheet
       Caption = 'TabSheet18'
       ImageIndex = 19
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitTop = 42
+      ExplicitHeight = 382
       object BrvDbGrid1: TBrvDbGrid
         Left = 0
         Top = 0
         Width = 941
-        Height = 382
+        Height = 364
         BrShowMemo = True
         BrReadOnlyStyle = [fsItalic]
         BrReadOnlyColor = clMaroon
@@ -2085,14 +2092,350 @@ object Form1: TForm1
           end
           item
             Expanded = False
-            FieldName = 'aa'
+            FieldName = 'ab'
             Width = 137
             Visible = True
             BrConsulta = 0
             BrPermissao = []
             BrValueHalfChecked = False
             BrSaveOnClick = False
+          end
+          item
+            Expanded = False
+            FieldName = 'ac'
+            Visible = True
+            BrConsulta = 0
+            BrPermissao = []
+            BrValueHalfChecked = False
+            BrSaveOnClick = False
+          end
+          item
+            Expanded = False
+            FieldName = 'aa'
+            Visible = True
+            BrConsulta = 0
+            BrPermissao = []
+            BrValueHalfChecked = False
+            BrSaveOnClick = False
           end>
+      end
+    end
+    object TabSheet19: TTabSheet
+      Caption = 'TabSheet19'
+      ImageIndex = 20
+      ExplicitTop = 42
+      ExplicitHeight = 382
+      object Memo19: TMemo
+        Left = 0
+        Top = 0
+        Width = 941
+        Height = 364
+        Align = alClient
+        Lines.Strings = (
+          'Memo1')
+        ScrollBars = ssVertical
+        TabOrder = 0
+        ExplicitHeight = 382
+      end
+    end
+    object TabSheet20: TTabSheet
+      Caption = 'TabSheet20'
+      ImageIndex = 21
+      ExplicitTop = 42
+      ExplicitHeight = 382
+      object Memo20: TMemo
+        Left = 0
+        Top = 0
+        Width = 941
+        Height = 364
+        Align = alClient
+        Lines.Strings = (
+          'Memo1')
+        ScrollBars = ssVertical
+        TabOrder = 0
+        ExplicitHeight = 382
+      end
+    end
+    object TabSheet21: TTabSheet
+      Caption = 'TabSheet21'
+      ImageIndex = 22
+      ExplicitTop = 42
+      ExplicitHeight = 382
+      object Memo21: TMemo
+        Left = 0
+        Top = 0
+        Width = 941
+        Height = 364
+        Align = alClient
+        Lines.Strings = (
+          'Memo1')
+        ScrollBars = ssVertical
+        TabOrder = 0
+        ExplicitHeight = 382
+      end
+    end
+    object TabSheet22: TTabSheet
+      Caption = 'TabSheet22'
+      ImageIndex = 23
+      ExplicitTop = 42
+      ExplicitHeight = 382
+      object Memo22: TMemo
+        Left = 0
+        Top = 0
+        Width = 941
+        Height = 364
+        Align = alClient
+        Lines.Strings = (
+          'Memo1')
+        ScrollBars = ssVertical
+        TabOrder = 0
+        ExplicitHeight = 382
+      end
+    end
+    object TabSheet23: TTabSheet
+      Caption = 'TabSheet23'
+      ImageIndex = 24
+      ExplicitLeft = 8
+      ExplicitTop = 58
+      object Memo23: TMemo
+        Left = 0
+        Top = 0
+        Width = 941
+        Height = 364
+        Align = alClient
+        Lines.Strings = (
+          'Memo1')
+        ScrollBars = ssVertical
+        TabOrder = 0
+        ExplicitHeight = 382
+      end
+    end
+    object TabSheet24: TTabSheet
+      Caption = 'TabSheet24'
+      ImageIndex = 25
+      ExplicitTop = 42
+      ExplicitHeight = 382
+      object Memo24: TMemo
+        Left = 0
+        Top = 0
+        Width = 941
+        Height = 364
+        Align = alClient
+        Lines.Strings = (
+          'Memo1')
+        ScrollBars = ssVertical
+        TabOrder = 0
+        ExplicitHeight = 382
+      end
+    end
+    object TabSheet25: TTabSheet
+      Caption = 'TabSheet25'
+      ImageIndex = 26
+      ExplicitTop = 42
+      ExplicitHeight = 382
+      object Memo25: TMemo
+        Left = 0
+        Top = 0
+        Width = 941
+        Height = 364
+        Align = alClient
+        Lines.Strings = (
+          'Memo1')
+        ScrollBars = ssVertical
+        TabOrder = 0
+        ExplicitHeight = 382
+      end
+    end
+    object TabSheet26: TTabSheet
+      Caption = 'TabSheet26'
+      ImageIndex = 27
+      object Memo26: TMemo
+        Left = 0
+        Top = 0
+        Width = 941
+        Height = 364
+        Align = alClient
+        Lines.Strings = (
+          'Memo1')
+        ScrollBars = ssVertical
+        TabOrder = 0
+        ExplicitHeight = 382
+      end
+    end
+    object TabSheet27: TTabSheet
+      Caption = 'TabSheet27'
+      ImageIndex = 28
+      object Memo27: TMemo
+        Left = 0
+        Top = 0
+        Width = 941
+        Height = 364
+        Align = alClient
+        Lines.Strings = (
+          'Memo1')
+        ScrollBars = ssVertical
+        TabOrder = 0
+        ExplicitHeight = 382
+      end
+    end
+    object TabSheet28: TTabSheet
+      Caption = 'TabSheet28'
+      ImageIndex = 29
+      object Memo28: TMemo
+        Left = 0
+        Top = 0
+        Width = 941
+        Height = 364
+        Align = alClient
+        Lines.Strings = (
+          'Memo1')
+        ScrollBars = ssVertical
+        TabOrder = 0
+        ExplicitHeight = 382
+      end
+    end
+    object TabSheet29: TTabSheet
+      Caption = 'TabSheet29'
+      ImageIndex = 30
+      object Memo29: TMemo
+        Left = 0
+        Top = 0
+        Width = 941
+        Height = 364
+        Align = alClient
+        Lines.Strings = (
+          'Memo1')
+        ScrollBars = ssVertical
+        TabOrder = 0
+        ExplicitHeight = 382
+      end
+    end
+    object TabSheet30: TTabSheet
+      Caption = 'TabSheet30'
+      ImageIndex = 31
+      object Memo30: TMemo
+        Left = 0
+        Top = 0
+        Width = 941
+        Height = 364
+        Align = alClient
+        Lines.Strings = (
+          'Memo1')
+        ScrollBars = ssVertical
+        TabOrder = 0
+        ExplicitHeight = 382
+      end
+    end
+    object TabSheet31: TTabSheet
+      Caption = 'TabSheet31'
+      ImageIndex = 32
+      object Memo31: TMemo
+        Left = 0
+        Top = 0
+        Width = 941
+        Height = 364
+        Align = alClient
+        Lines.Strings = (
+          'Memo1')
+        ScrollBars = ssVertical
+        TabOrder = 0
+        ExplicitHeight = 382
+      end
+    end
+    object TabSheet32: TTabSheet
+      Caption = 'TabSheet32'
+      ImageIndex = 33
+      object Memo32: TMemo
+        Left = 0
+        Top = 0
+        Width = 941
+        Height = 364
+        Align = alClient
+        Lines.Strings = (
+          'Memo1')
+        ScrollBars = ssVertical
+        TabOrder = 0
+        ExplicitHeight = 382
+      end
+    end
+    object TabSheet33: TTabSheet
+      Caption = 'TabSheet33'
+      ImageIndex = 34
+      object Memo33: TMemo
+        Left = 0
+        Top = 0
+        Width = 941
+        Height = 364
+        Align = alClient
+        Lines.Strings = (
+          'Memo1')
+        ScrollBars = ssVertical
+        TabOrder = 0
+        ExplicitHeight = 382
+      end
+    end
+    object TabSheet34: TTabSheet
+      Caption = 'TabSheet34'
+      ImageIndex = 35
+      object Memo34: TMemo
+        Left = 0
+        Top = 0
+        Width = 941
+        Height = 364
+        Align = alClient
+        Lines.Strings = (
+          'Memo1')
+        ScrollBars = ssVertical
+        TabOrder = 0
+        ExplicitHeight = 382
+      end
+    end
+    object TabSheet35: TTabSheet
+      Caption = 'TabSheet35'
+      ImageIndex = 36
+      object Memo38: TMemo
+        Left = 0
+        Top = 0
+        Width = 941
+        Height = 364
+        Align = alClient
+        Lines.Strings = (
+          'Memo1')
+        ScrollBars = ssVertical
+        TabOrder = 0
+        ExplicitHeight = 382
+      end
+    end
+    object TabSheet36: TTabSheet
+      Caption = 'TabSheet36'
+      ImageIndex = 37
+      object Memo36: TMemo
+        Left = 0
+        Top = 0
+        Width = 941
+        Height = 364
+        Align = alClient
+        Lines.Strings = (
+          'Memo1')
+        ScrollBars = ssVertical
+        TabOrder = 0
+        ExplicitHeight = 382
+      end
+    end
+    object TabSheet37: TTabSheet
+      Caption = 'TabSheet37'
+      ImageIndex = 38
+      object Memo37: TMemo
+        Left = 0
+        Top = 0
+        Width = 941
+        Height = 364
+        Align = alClient
+        Lines.Strings = (
+          'Memo1')
+        ScrollBars = ssVertical
+        TabOrder = 0
+        ExplicitHeight = 382
       end
     end
   end

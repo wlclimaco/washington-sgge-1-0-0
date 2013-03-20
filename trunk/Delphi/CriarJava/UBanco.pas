@@ -1,84 +1,121 @@
 unit UBanco;
 
+
+
 interface
-function criarGerarProcedureInsert(Txt:String):String;
-function criarGerarProcedureUpdate(Txt:String):String;
+
+uses  SysUtils,DBClient, DB,StdCtrls;
+
+function criarGerarProcedureInsert(Txt:String;CcDataset:TClientDataSet;memo1 :TMemo):TMemo;
+function criarGerarProcedureUpdate(Txt:String;CcDataset:TClientDataSet;memo1 :TMemo):TMemo;
+function criarGerarProcedureDelete(Txt:String;CcDataset:TClientDataSet;memo1 :TMemo):TMemo;
+function criarGerarProcedureSelect(Txt:String;CcDataset:TClientDataSet;memo1 :TMemo):TMemo;
+function criarGerarProcedureSelectById(Txt:String;CcDataset:TClientDataSet;memo1 :TMemo):TMemo;
+function GerarScriptBDInsert(Txt:String;CcDataset:TClientDataSet;memo1 :TMemo):TMemo;
+function GerarScriptBDTable(Txt:String;CcDataset:TClientDataSet;memo1 :TMemo):TMemo;
+function GerarScriptBDAtributos(Txt:String;CcDataset:TClientDataSet;memo1 :TMemo):TMemo;
+function GerarScriptBDValidators(Txt:String;CcDataset:TClientDataSet;memo1 :TMemo):TMemo;
 implementation
 
 uses BrvFuncoesXE;
 
-function TForm1.criarGerarProcedureInsert(Txt:String):String;
-var F:TextFile;
+function criarGerarProcedureInsert(Txt:String;CcDataset:TClientDataSet;memo1 :TMemo):TMemo;
 begin
-      AssignFile(F,'c:\Ins'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'.sql');
-      Rewrite(F); //abre o arquivo para escrita
-      Writeln(F,'CREATE OR REPLACE FUNCTION ins_'+(Txt)+'(p_name character varying, p_autogroup boolean, p_address_related boolean,  p_tenant_id integer, p_create_user character varying)');
-      Writeln(F,'RETURNS integer AS');
-      Writeln(F,'$$');
-      Writeln(F,'DECLARE');
-      Writeln(F,'		id int;');
-      Writeln(F,'BEGIN');
-      Writeln(F,'	INSERT INTO tag');
-      Writeln(F,'		   (name');
-      Writeln(F,'		   ,auto_group');
-      Writeln(F,'		   ,address_related');
-      Writeln(F,'		   ,tenant_id');
-      Writeln(F,'		   ,create_user)');
-      Writeln(F,'	VALUES');
-      Writeln(F,'		   (p_name');
-      Writeln(F,'		   ,p_autogroup');
-      Writeln(F,'		   ,p_address_related');
-      Writeln(F,'		   ,(SELECT tenant_id from tenant where tenant.tenant_id = p_tenant_id)');
-      Writeln(F,'		   ,p_create_user) RETURNING tag_id INTO id;');
-      Writeln(F,'');
-      Writeln(F,'	 RETURN id; ');
-      Writeln(F,'END');
-      Writeln(F,'$$');
-      Writeln(F,'LANGUAGE ''plpgsql'';');
-      Writeln(F,'');
-      Closefile(F);
+      memo1.Lines.Clear;
+      memo1.Lines.Add('CREATE OR REPLACE FUNCTION ins_'+(Txt)+'(p_name character varying, p_autogroup boolean, p_address_related boolean,  p_tenant_id integer, p_create_user character varying)');
+      memo1.Lines.Add('RETURNS integer AS');
+      memo1.Lines.Add('$$');
+      memo1.Lines.Add('DECLARE');
+      memo1.Lines.Add('		id int;');
+      memo1.Lines.Add('BEGIN');
+      memo1.Lines.Add('	INSERT INTO tag');
+      memo1.Lines.Add('		   (name');
+      memo1.Lines.Add('		   ,auto_group');
+      memo1.Lines.Add('		   ,address_related');
+      memo1.Lines.Add('		   ,tenant_id');
+      memo1.Lines.Add('		   ,create_user)');
+      memo1.Lines.Add('	VALUES');
+      memo1.Lines.Add('		   (p_name');
+      memo1.Lines.Add('		   ,p_autogroup');
+      memo1.Lines.Add('		   ,p_address_related');
+      memo1.Lines.Add('		   ,(SELECT tenant_id from tenant where tenant.tenant_id = p_tenant_id)');
+      memo1.Lines.Add('		   ,p_create_user) RETURNING tag_id INTO id;');
+      memo1.Lines.Add('');
+      memo1.Lines.Add('	 RETURN id; ');
+      memo1.Lines.Add('END');
+      memo1.Lines.Add('$$');
+      memo1.Lines.Add('LANGUAGE ''plpgsql'';');
+      memo1.Lines.Add('');
+      Result := memo1;
 
 end;
-function TForm1.criarGerarProcedureUpdate(Txt:String):String;
-var linha:String;
-    F:TextFile;
+function criarGerarProcedureUpdate(Txt:String;CcDataset:TClientDataSet;memo1 :Tmemo):Tmemo;
 begin
-      AssignFile(F,'c:\Upd'+PrimeiraMaiscula(Txt)+'.sql');
-      Rewrite(F);
-      Writeln(F,'CREATE OR REPLACE FUNCTION upd_'+Txt+'(');
-      AssignFile(arq, EdtDsArquiv.text);
-      Reset(arq);   // [ 3 ] Abre o arquivo texto para leitura
-      {$I+}
-      while (not eof(arq)) do
+      memo1.Lines.Clear;
+      memo1.Lines.Add('CREATE OR REPLACE FUNCTION upd_'+Txt+'(');
+      CcDataset.First;
+      while not CcDataset.Eof do
       begin
-           readln(arq, linha); // [ 6 ] Lê uma linha do arquivo
-           Writeln(F,escreverCodeXML(linha,3));
+            if CcDataset.FieldByName('S/N').AsString = 'S'  then
+                  memo1.Lines.Add('p_'+LowerCase(CcDataset.FieldByName('Nome').AsString)+ ' '+verificadorCodeAppBanco(CcDataset.FieldByName('Tipo').AsString)+' ');
+           CcDataset.Next;
       end;
+      memo1.Lines.Add(')');
+      memo1.Lines.Add('RETURNS void AS');
+      memo1.Lines.Add('$$');
+      memo1.Lines.Add('BEGIN');
+      memo1.Lines.Add('	UPDATE '+Txt+' ');
+      memo1.Lines.Add('	   SET ');
 
-      CloseFile(arq); // [ 8 ] Fecha o arquivo texto aberto
-      Writeln(F,')');
-      Writeln(F,'RETURNS void AS');
-      Writeln(F,'$$');
-      Writeln(F,'BEGIN');
-      Writeln(F,'	UPDATE '+Txt+' ');
-      Writeln(F,'	   SET ');
-      AssignFile(arq, EdtDsArquiv.text);
-
-      Reset(arq);   // [ 3 ] Abre o arquivo texto para leitura
-      {$I+}
-      while (not eof(arq)) do
+      CcDataset.First;
+      while not CcDataset.Eof do
       begin
-           readln(arq, linha); // [ 6 ] Lê uma linha do arquivo
-           Writeln(F,escreverCodeXML(linha,4));
+            if CcDataset.FieldByName('S/N').AsString = 'S'  then
+                  memo1.Lines.Add(LowerCase(CcDataset.FieldByName('Nome').AsString)+ ' =  COALESCE(p_'+LowerCase(CcDataset.FieldByName('Nome').AsString)+ ','+LowerCase(CcDataset.FieldByName('Nome').AsString)+'),');
+           CcDataset.Next;
       end;
+      memo1.Lines.Add('	 WHERE SubstituirID = p_SubstituirID;');
+      memo1.Lines.Add('END');
+      memo1.Lines.Add('$$');
+      memo1.Lines.Add('  LANGUAGE plpgsql;');
+      Result := memo1;
 
-      CloseFile(arq); // [ 8 ] Fecha o arquivo texto aberto
+end;
 
-      Writeln(F,'	 WHERE SubstituirID = p_SubstituirID;');
-      Writeln(F,'END');
-      Writeln(F,'$$');
-      Writeln(F,'  LANGUAGE plpgsql;');
-      Closefile(F);
+function criarGerarProcedureDelete(Txt:String;CcDataset:TClientDataSet;memo1 :Tmemo):Tmemo;
+begin
+      memo1.Lines.Clear;
+      memo1.Lines.Add('	 criarGerarProcedureDelete');
+end;
+function criarGerarProcedureSelect(Txt:String;CcDataset:TClientDataSet;memo1 :Tmemo):Tmemo;
+begin
+      memo1.Lines.Clear;
+      memo1.Lines.Add('	 criarGerarProcedureSelect');
+end;
+function criarGerarProcedureSelectById(Txt:String;CcDataset:TClientDataSet;memo1 :Tmemo):Tmemo;
+begin
+      memo1.Lines.Clear;
+      memo1.Lines.Add('	 criarGerarProcedureSelectById');
+end;
+function GerarScriptBDInsert(Txt:String;CcDataset:TClientDataSet;memo1 :Tmemo):Tmemo;
+begin
+      memo1.Lines.Clear;
+      memo1.Lines.Add('	 GerarScriptBDInsert');
+end;
+function GerarScriptBDTable(Txt:String;CcDataset:TClientDataSet;memo1 :Tmemo):Tmemo;
+begin
+      memo1.Lines.Clear;
+      memo1.Lines.Add('	 GerarScriptBDTable');
+end;
+function GerarScriptBDAtributos(Txt:String;CcDataset:TClientDataSet;memo1 :Tmemo):Tmemo;
+begin
+      memo1.Lines.Clear;
+      memo1.Lines.Add('	 GerarScriptBDAtributos');
+end;
+function GerarScriptBDValidators(Txt:String;CcDataset:TClientDataSet;memo1 :Tmemo):Tmemo;
+begin
+      memo1.Lines.Clear;
+      memo1.Lines.Add('	 GerarScriptBDValidators');
 end;
 
 end.
