@@ -62,6 +62,29 @@ begin
       Memo.Text :=  Texto;
 end;
 
+function alterarCodigo(Txt:String;Tipo:String;Op:Integer):String;
+var
+  strLinha: String;
+  Parte : TStringList;
+  begin
+        if Op = 1 then
+        begin
+              result := '<result property="'+LowerCase(Txt)+'" column="'+LowerCase(Txt)+'" />';
+        end;
+        if Op = 2 then
+        begin
+              result := ''+LowerCase(Txt);
+        end;
+        if Op = 3 then
+        begin
+              result := 'p_'+Txt+ ' '+verificadorCodeAppBanco(Tipo)+' ';
+        end;
+        if Op = 4 then
+        begin
+              result := LowerCase(Txt)+ ' =  COALESCE(p_'+LowerCase(Txt)+ ','+LowerCase(Txt)+')';
+        end;
+end;
+
 
 
 function escreverCodeXML(Txt:String;Op:Integer):String;
@@ -185,14 +208,12 @@ begin
             CcDataTmp.Append;
             while ((dstxtpro <> '')) do
             begin
-                  //showmessage(trim(StringReplace(copy(dstxtpro, 1,Pos(' ', dstxtpro)-1), '.', ' ', [rfReplaceAll])));
                   if trim(StringReplace(copy(dstxtpro, 1,Pos(' ', dstxtpro)-1), '.', ' ', [rfReplaceAll])) <> '' then
                   begin
-                  CcDataTmp.Fields[nridxcmp].AsString := StringReplace(copy(dstxtpro, 1,Pos(' ', dstxtpro)-1), '.', ' ', [rfReplaceAll]);
-                  Inc(nridxcmp);
+                        CcDataTmp.Fields[nridxcmp].AsString := StringReplace(copy(dstxtpro, 1,Pos(' ', dstxtpro)-1), '.', ' ', [rfReplaceAll]);
+                        Inc(nridxcmp);
                   end;
                   dstxtpro := copy(dstxtpro, Pos(' ', dstxtpro)+1, Length(dstxtpro));
-
             end;
             CcDataTmp.Post;
       end;
