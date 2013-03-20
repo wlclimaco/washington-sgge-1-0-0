@@ -560,7 +560,7 @@ object Form1: TForm1
     Top = 41
     Width = 949
     Height = 428
-    ActivePage = TabSheet18
+    ActivePage = TbsFiltro
     Align = alClient
     MultiLine = True
     TabOrder = 2
@@ -1083,6 +1083,10 @@ object Form1: TForm1
     object TbsConsulta: TTabSheet
       Caption = 'Arquivo'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo1: TMemo
         Left = 0
         Top = 0
@@ -1098,6 +1102,10 @@ object Form1: TForm1
     object TabSheet1: TTabSheet
       Caption = 'Modelo'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo3: TMemo
         Left = 0
         Top = 0
@@ -1113,6 +1121,10 @@ object Form1: TForm1
     object TabSheet2: TTabSheet
       Caption = 'InqueryResponse'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo4: TMemo
         Left = 0
         Top = 0
@@ -1128,6 +1140,10 @@ object Form1: TForm1
     object TabSheet3: TTabSheet
       Caption = 'TabSheet3'
       ImageIndex = 4
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo5: TMemo
         Left = 0
         Top = 0
@@ -1143,6 +1159,10 @@ object Form1: TForm1
     object TabSheet4: TTabSheet
       Caption = 'TabSheet4'
       ImageIndex = 5
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo6: TMemo
         Left = 0
         Top = 0
@@ -1158,6 +1178,10 @@ object Form1: TForm1
     object TabSheet5: TTabSheet
       Caption = 'TabSheet5'
       ImageIndex = 6
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo7: TMemo
         Left = 0
         Top = 0
@@ -1173,6 +1197,10 @@ object Form1: TForm1
     object TabSheet6: TTabSheet
       Caption = 'TabSheet6'
       ImageIndex = 7
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo8: TMemo
         Left = 0
         Top = 0
@@ -1188,6 +1216,10 @@ object Form1: TForm1
     object TabSheet7: TTabSheet
       Caption = 'TabSheet7'
       ImageIndex = 8
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo9: TMemo
         Left = 0
         Top = 0
@@ -1203,6 +1235,10 @@ object Form1: TForm1
     object TabSheet8: TTabSheet
       Caption = 'TabSheet8'
       ImageIndex = 9
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo10: TMemo
         Left = 0
         Top = 0
@@ -1218,6 +1254,10 @@ object Form1: TForm1
     object TabSheet9: TTabSheet
       Caption = 'TabSheet9'
       ImageIndex = 10
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo11: TMemo
         Left = 0
         Top = 0
@@ -1233,6 +1273,10 @@ object Form1: TForm1
     object TabSheet10: TTabSheet
       Caption = 'TabSheet10'
       ImageIndex = 11
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo12: TMemo
         Left = 0
         Top = 0
@@ -1248,6 +1292,10 @@ object Form1: TForm1
     object TabSheet11: TTabSheet
       Caption = 'TabSheet11'
       ImageIndex = 12
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo13: TMemo
         Left = 0
         Top = 0
@@ -1263,6 +1311,10 @@ object Form1: TForm1
     object TabSheet12: TTabSheet
       Caption = 'TabSheet12'
       ImageIndex = 13
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo14: TMemo
         Left = 0
         Top = 0
@@ -1278,6 +1330,10 @@ object Form1: TForm1
     object TabSheet13: TTabSheet
       Caption = 'TabSheet13'
       ImageIndex = 14
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo15: TMemo
         Left = 0
         Top = 0
@@ -1293,6 +1349,10 @@ object Form1: TForm1
     object TabSheet14: TTabSheet
       Caption = 'TabSheet14'
       ImageIndex = 15
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo16: TMemo
         Left = 0
         Top = 0
@@ -1308,6 +1368,10 @@ object Form1: TForm1
     object TabSheet15: TTabSheet
       Caption = 'TabSheet15'
       ImageIndex = 16
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo17: TMemo
         Left = 0
         Top = 0
@@ -1323,6 +1387,10 @@ object Form1: TForm1
     object TabSheet16: TTabSheet
       Caption = 'TabSheet16'
       ImageIndex = 17
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Panel3: TPanel
         Left = 0
         Top = 326
@@ -1939,6 +2007,10 @@ object Form1: TForm1
     object TabSheet17: TTabSheet
       Caption = 'TabSheet17'
       ImageIndex = 18
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object GroupBox5: TGroupBox
         Left = 0
         Top = 0
@@ -1952,6 +2024,10 @@ object Form1: TForm1
     object TabSheet18: TTabSheet
       Caption = 'TabSheet18'
       ImageIndex = 19
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object BrvDbGrid1: TBrvDbGrid
         Left = 0
         Top = 0
@@ -1962,6 +2038,7 @@ object Form1: TForm1
         BrReadOnlyColor = clMaroon
         Align = alClient
         DataSource = DataSource1
+        PopupMenu = PopF013
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -1972,6 +2049,50 @@ object Form1: TForm1
           'N'#227'o remova essas duas linhas de formata'#231#227'o:'
           'CampoTabela;Operador;ValorComparativo;Cor;')
         BrGradeZebrada = True
+        Columns = <
+          item
+            ButtonStyle = cbsNone
+            Expanded = False
+            FieldName = 'S/N'
+            Width = 82
+            Visible = True
+            BrConsulta = 0
+            BrPermissao = []
+            BrValueChecked = 'S'
+            BrValueUnchecked = 'N'
+            BrValueHalfChecked = False
+            BrSaveOnClick = False
+          end
+          item
+            Expanded = False
+            FieldName = 'Nome'
+            Width = 173
+            Visible = True
+            BrConsulta = 0
+            BrPermissao = []
+            BrValueHalfChecked = False
+            BrSaveOnClick = False
+          end
+          item
+            Expanded = False
+            FieldName = 'Tipo'
+            Width = 173
+            Visible = True
+            BrConsulta = 0
+            BrPermissao = []
+            BrValueHalfChecked = False
+            BrSaveOnClick = False
+          end
+          item
+            Expanded = False
+            FieldName = 'aa'
+            Width = 137
+            Visible = True
+            BrConsulta = 0
+            BrPermissao = []
+            BrValueHalfChecked = False
+            BrSaveOnClick = False
+          end>
       end
     end
   end
@@ -2004,5 +2125,17 @@ object Form1: TForm1
     Params = <>
     Left = 640
     Top = 65528
+  end
+  object PopF013: TPopupMenu
+    Left = 112
+    Top = 176
+    object odos1: TMenuItem
+      Caption = 'Todos'
+      OnClick = odos1Click
+    end
+    object Nenhum1: TMenuItem
+      Caption = 'Nenhum'
+      OnClick = Nenhum1Click
+    end
   end
 end
