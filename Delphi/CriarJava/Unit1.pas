@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls,IniFiles, BrvCustomEdit, BrvEdit, ComCtrls, ExtCtrls, Buttons, BrvBitBtn, BrvSpeedButton,
-  DB, DBClient, BrvClientDataSet, Grids, BrvDbGrids, BrvDbGrid, Menus;
+  DB, DBClient, BrvClientDataSet, Grids, BrvDbGrids, BrvDbGrid, Menus, BrvComboBox, BrvEditNum,
+  BrvListParam, ImgList, BrvString;
 
 type
   TForm1 = class(TForm)
@@ -214,11 +215,39 @@ type
     Memo36: TMemo;
     Memo37: TMemo;
     Memo38: TMemo;
+    QpAtrDis: TBrvClientDataSet;
+    BrvString: TBrvString;
+    QpObjDin: TBrvClientDataSet;
+    PopPagCtr: TPopupMenu;
+    AdicionarPgina1: TMenuItem;
+    PopupMenu1: TPopupMenu;
+    CdsOrdIni: TBrvClientDataSet;
+    BrvString2: TBrvString;
+    BrvString3: TBrvString;
+    PopCfgFrm: TPopupMenu;
+    Ajuda1: TMenuItem;
+    Apontamento1: TMenuItem;
+    ParmetrosdeContabilizao1: TMenuItem;
+    ImlPopFrm: TImageList;
+    LspS049: TBrvListParam;
+    TabSheet38: TTabSheet;
+    TabSheet39: TTabSheet;
+    TabSheet40: TTabSheet;
+    TabSheet41: TTabSheet;
+    TabSheet42: TTabSheet;
+    Memo39: TMemo;
+    Memo40: TMemo;
+    Memo41: TMemo;
+    Memo42: TMemo;
+    Memo43: TMemo;
+    Edit2: TEdit;
+    Label21: TLabel;
     procedure SpeedButton1Click(Sender: TObject);
     procedure BtnPesquisaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure odos1Click(Sender: TObject);
     procedure Nenhum1Click(Sender: TObject);
+    procedure SbtAjudaClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -234,7 +263,7 @@ var
 
 implementation
 
-uses BrvFuncoesXE,UBanco,UFEpas,UConf,UBE;
+uses BrvFuncoesXE,UBanco,UFEpas,UConf,UBE, Unit2;
 
 {$R *.dfm}
 
@@ -416,6 +445,11 @@ begin
       TabSheet35.TabVisible := false;
       TabSheet36.TabVisible := false;
       TabSheet37.TabVisible := false;
+      TabSheet38.TabVisible := false;
+      TabSheet39.TabVisible := false;
+      TabSheet40.TabVisible := false;
+      TabSheet41.TabVisible := false;
+      TabSheet42.TabVisible := false;
       TbsConsulta.TabVisible := false;
       LerConfiguracao;
 end;
@@ -615,6 +649,47 @@ begin
            TabSheet34.TabVisible := true;
            TabSheet34.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
      end;
+      if CheckBox40.Checked = true then
+     begin
+           Memo35 := criarCodeClasseSelenium(Edit1.Text,ClientDataSet1,Memo35);
+           TabSheet35.TabVisible := true;
+           TabSheet35.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
+     end;
+      if CheckBox41.Checked = true then
+     begin
+           Memo36 := criarCodeClasseSelenium(Edit1.Text,ClientDataSet1,Memo36);
+           TabSheet36.TabVisible := true;
+           TabSheet36.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
+     end;
+      if CheckBox42.Checked = true then
+     begin
+           Memo37 := criarCodeClasseSelenium(Edit1.Text,ClientDataSet1,Memo37);
+           TabSheet37.TabVisible := true;
+           TabSheet37.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
+     end;
+      if CheckBox43.Checked = true then
+     begin
+           Memo38 := criarCodeClasseSelenium(Edit1.Text,ClientDataSet1,Memo38);
+           TabSheet38.TabVisible := true;
+           TabSheet38.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
+     end;
+      if CheckBox44.Checked = true then
+     begin
+           Memo39 := criarCodeClasseSelenium(Edit1.Text,ClientDataSet1,Memo39);
+           TabSheet39.TabVisible := true;
+           TabSheet39.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
+     end;
+      if CheckBox45.Checked = true then
+     begin
+           Memo40 := criarCodeClasseSelenium(Edit1.Text,ClientDataSet1,Memo40);
+           TabSheet40.TabVisible := true;
+           TabSheet40.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
+     end;
+end;
+
+procedure TForm1.SbtAjudaClick(Sender: TObject);
+begin
+      Form2.ShowModal;
 end;
 
 procedure TForm1.SpeedButton1Click(Sender: TObject);
