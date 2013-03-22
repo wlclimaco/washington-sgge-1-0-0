@@ -122,14 +122,6 @@ type
     Label8: TLabel;
     Label9: TLabel;
     Label10: TLabel;
-    Label11: TLabel;
-    BrvEdit6: TBrvEdit;
-    Label12: TLabel;
-    BrvEdit7: TBrvEdit;
-    Label13: TLabel;
-    BrvEdit8: TBrvEdit;
-    Label14: TLabel;
-    BrvEdit9: TBrvEdit;
     Label15: TLabel;
     BrvEdit10: TBrvEdit;
     Label16: TLabel;
@@ -242,16 +234,28 @@ type
     Memo43: TMemo;
     Edit2: TEdit;
     Label21: TLabel;
+    BrvBitBtn1: TBrvBitBtn;
+    BrvEdit1: TBrvEdit;
+    Label30: TLabel;
+    Edit3: TEdit;
+    Edit4: TEdit;
+    Edit5: TEdit;
+    Edit6: TEdit;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
     procedure SpeedButton1Click(Sender: TObject);
     procedure BtnPesquisaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure odos1Click(Sender: TObject);
     procedure Nenhum1Click(Sender: TObject);
     procedure SbtAjudaClick(Sender: TObject);
+    procedure BrvBitBtn1Click(Sender: TObject);
   private
     { Private declarations }
   public
-    Function Explode(Texto, Separador : String) : String;
+    Function GerarArquivo(Nome,Diretorio,extensao : String;Memo:TMemo;linha:Integer) : String;
     procedure GravarConfiguracao;
     procedure LerConfiguracao;
   end;
@@ -259,7 +263,6 @@ type
 var
   Form1: TForm1;
   arq: TextFile;
-  F:TextFile;
 
 implementation
 
@@ -301,6 +304,13 @@ begin
       BrvEdit22.Text   := Ini.ReadString( 'Emitente','CNPJ'  ,'') ;
       BrvEdit23.Text   := Ini.ReadString( 'Emitente','IE'  ,'') ;
 
+      Edit2.Text      := Ini.ReadString( 'ConfInicial','QNTREG'  ,'') ;
+      BrvEdit1.Text   := Ini.ReadString( 'ConfInicial','DIREC'  ,'') ;
+      Edit3.Text      := Ini.ReadString( 'BE','LinhaBCF','') ;
+      Edit4.Text      := Ini.ReadString( 'BE','LinhaBCL','') ;
+      Edit5.Text      := Ini.ReadString( 'BE','LinhaDATA','') ;
+      Edit6.Text      := Ini.ReadString( 'BE','LinhaValidation','') ;
+
 
   finally
      Ini.Free ;
@@ -321,6 +331,10 @@ begin
       Ini.WriteString( 'BE','bcl Aplicattion',BrvEdit3.Text) ;
       Ini.WriteString( 'BE','data aplication',BrvEdit4.Text) ;
       Ini.WriteString( 'BE','validation'     ,BrvEdit5.Text) ;
+      Ini.WriteString( 'BE','LinhaBCF',Edit3.Text) ;
+      Ini.WriteString( 'BE','LinhaBCL',Edit4.Text) ;
+      Ini.WriteString( 'BE','LinhaDATA',Edit5.Text) ;
+      Ini.WriteString( 'BE','LinhaValidation',Edit6.Text) ;
 
 
       Ini.WriteString( 'Banco de dados','procedure',BrvEdit10.Text) ;
@@ -342,6 +356,9 @@ begin
 
       Ini.WriteString( 'Emitente','CNPJ'       ,BrvEdit21.Text);
       Ini.WriteString( 'Emitente','IE'        ,BrvEdit22.Text);
+
+      Ini.WriteString( 'ConfInicial','QNTREG'      ,Edit2.Text);
+      Ini.WriteString( 'ConfInicial','DIREC'        ,BrvEdit1.Text);
 
       StreamMemo.Free;
   finally
@@ -376,34 +393,51 @@ begin
       ClientDataSet1.First;
 end;
 
-Function TForm1.Explode(Texto, Separador : String) : String;
+Function TForm1.GerarArquivo(Nome,Diretorio,extensao : String;Memo:TMemo;linha:Integer) : String;
 var
     strItem       : String;
     ListaAuxUTILS : TStrings;
     NumCaracteres,
     TamanhoSeparador,
     I : Integer;
+    F:TextFile;
+    lDsLista   : TStrings;
 Begin
-    ListaAuxUTILS    := TStringList.Create;
-    strItem          := '';
-    NumCaracteres    := Length(Texto);
-    TamanhoSeparador := Length(Separador);
-    I                := 1;
-    While I <= NumCaracteres Do
-      Begin
-        If (Copy(Texto,I,TamanhoSeparador) = Separador) or (I = NumCaracteres) Then
-          Begin
-            if (I = NumCaracteres) then strItem := strItem + Texto[I];
-            ListaAuxUTILS.Add(trim(strItem));
-            strItem := '';
-            I := I + (TamanhoSeparador-1);
-          end
-        Else
-            strItem := strItem + Texto[I];
-
-        I := I + 1;
-      End;
-    Explode := ListaAuxUTILS.Text;
+      if linha = 0 then
+      begin
+            i := 0;
+            AssignFile(F,Diretorio+''+Nome+''+extensao);
+            Rewrite(f); //abre o arquivo para escrita
+            {$I+}
+            while Memo.Lines.Count <> i do
+            begin
+                  Writeln(F,Memo.Lines[i]);
+                  inc(i);
+            end;
+            Closefile(F);
+      end else
+      begin
+            try
+                lDsLista  := TStringList.Create;
+                AssignFile(f, Diretorio);
+                lDsLista.LoadFromFile(Diretorio);
+                Reset(f);
+                i := 0 ;
+                linha := linha + 1;
+                while Memo.Lines.Count > i do
+                begin
+                      lDsLista.Insert(linha,Memo.Lines[i]);
+                      inc(i);
+                end;
+            //    AssignFile(F,Diretorio);
+                Rewrite(F); //abre o arquivo para escrita
+                {$I+}
+                Writeln(F,lDsLista.Text);
+                 Closefile(F);
+            finally
+                FreeAndNil(lDsLista);
+            end;
+      end;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -423,7 +457,7 @@ begin
       TabSheet13.TabVisible := false;
       TabSheet14.TabVisible := false;
       TabSheet15.TabVisible := false;
-      TabSheet16.TabVisible := false;
+      TabSheet16.TabVisible := true;
       TabSheet17.TabVisible := false;
       TabSheet18.TabVisible := false;
       TabSheet19.TabVisible := false;
@@ -454,6 +488,196 @@ begin
       LerConfiguracao;
 end;
 
+
+procedure TForm1.BrvBitBtn1Click(Sender: TObject);
+begin
+     if CheckBox1.Checked = true then
+     begin
+           GerarArquivo('I'+PrimeiraMaiscula(Edit1.Text)+'BCF',BrvEdit1.Text,'.java',Memo3,0);
+     end;
+     if CheckBox2.Checked = true then
+     begin
+           GerarArquivo(''+PrimeiraMaiscula(Edit1.Text)+'BCFImpl',BrvEdit1.Text,'.java',Memo4,0);
+     end;
+     if CheckBox3.Checked = true then
+     begin
+           GerarArquivo('I'+PrimeiraMaiscula(Edit1.Text)+'BCL',BrvEdit1.Text,'.java',Memo5,0);
+     end;
+     if CheckBox4.Checked = true then
+     begin
+           GerarArquivo(''+PrimeiraMaiscula(Edit1.Text)+'BCLImpl',BrvEdit1.Text,'.java',Memo6,0);
+     end;
+     if CheckBox5.Checked = true then
+     begin
+           GerarArquivo('I'+PrimeiraMaiscula(Edit1.Text)+'BCL',BrvEdit1.Text,'.java',Memo7,0);
+     end;
+     if CheckBox6.Checked = true then
+     begin
+           GerarArquivo('I'+PrimeiraMaiscula(Edit1.Text)+'DAC',BrvEdit1.Text,'.java',Memo8,0);
+     end;
+     if CheckBox7.Checked = true then
+     begin
+           GerarArquivo(''+PrimeiraMaiscula(Edit1.Text)+'DACImpl',BrvEdit1.Text,'.java',Memo9,0);
+     end;
+     if CheckBox8.Checked = true then
+     begin
+           GerarArquivo(''+PrimeiraMaiscula(Edit1.Text)+'',BrvEdit1.Text,'.XML',Memo10,0);
+     end;
+     if CheckBox27.Checked = true then
+     begin
+           GerarArquivo(''+PrimeiraMaiscula(Edit1.Text)+'-sql-map-config',BrvEdit1.Text,'.xml',Memo11,0);
+     end;
+     if CheckBox9.Checked = true then
+     begin
+           GerarArquivo(PrimeiraMaiscula(Edit1.Text),BrvEdit1.Text,'.java',Memo12,0);
+     end;
+     if CheckBox10.Checked = true then
+     begin
+           GerarArquivo(PrimeiraMaiscula(Edit1.Text)+'Request',BrvEdit1.Text,'.java',Memo13,0);
+     end;
+     if CheckBox11.Checked = true then
+     begin
+           GerarArquivo(PrimeiraMaiscula(Edit1.Text)+'Response',BrvEdit1.Text,'.java',Memo14,0);
+     end;
+     if CheckBox18.Checked = true then
+     begin
+           GerarArquivo('Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Response',BrvEdit1.Text,'.java',Memo15,0);
+     end;
+     if CheckBox19.Checked = true then
+     begin
+           GerarArquivo('Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request',BrvEdit1.Text,'.java',Memo16,0);
+     end;
+     if CheckBox11.Checked = true then
+     begin
+           GerarArquivo(''+PrimeiraMaiscula(Edit1.Text)+'APIControler',BrvEdit1.Text,'.java',Memo17,0);
+     end;
+     if CheckBox28.Checked = true then
+     begin
+           GerarArquivo('',BrvEdit2.Text,'',Memo19,StrToInt(Edit3.Text));
+     end;
+     if CheckBox29.Checked = true then
+     begin
+           GerarArquivo('',BrvEdit3.Text,'',Memo20,StrToInt(Edit4.Text));
+     end;
+     if CheckBox30.Checked = true then
+     begin
+           GerarArquivo('',BrvEdit4.Text,'',Memo21,StrToInt(Edit5.Text));
+     end;
+     if CheckBox31.Checked = true then
+     begin
+           Memo22 := criarGerarProcedureSelect(Edit1.Text,ClientDataSet1,Memo22);
+           TabSheet22.TabVisible := true;
+           TabSheet22.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
+     end;
+     if CheckBox32.Checked = true then
+     begin
+           Memo23 := criarGerarProcedureSelectById(Edit1.Text,ClientDataSet1,Memo23);
+           TabSheet23.TabVisible := true;
+           TabSheet23.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
+     end;
+     if CheckBox50.Checked = true then
+     begin
+           Memo24 := GerarScriptBDInsert(Edit1.Text,ClientDataSet1,Memo24);
+           TabSheet24.TabVisible := true;
+           TabSheet24.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
+     end;
+     if CheckBox51.Checked = true then
+     begin
+           Memo25 := GerarScriptBDTable(Edit1.Text,ClientDataSet1,Memo25);
+           TabSheet25.TabVisible := true;
+           TabSheet25.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
+     end;
+     if CheckBox52.Checked = true then
+     begin
+           Memo26 := GerarScriptBDAtributos(Edit1.Text,ClientDataSet1,Memo26);
+           TabSheet26.TabVisible := true;
+           TabSheet26.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
+     end;
+     if CheckBox53.Checked = true then
+     begin
+           Memo27 := GerarScriptBDValidators(Edit1.Text,ClientDataSet1,Memo27);
+           TabSheet27.TabVisible := true;
+           TabSheet27.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
+     end;
+     if CheckBox20.Checked = true then
+     begin
+           Memo28 := criarCodeClasseTest(Edit1.Text,ClientDataSet1,Memo28);
+           TabSheet28.TabVisible := true;
+           TabSheet28.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
+     end;
+     if CheckBox21.Checked = true then
+     begin
+           Memo29 := criarCodeClasseTestMock(Edit1.Text,ClientDataSet1,Memo29);
+           TabSheet29.TabVisible := true;
+           TabSheet29.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
+     end;
+     if CheckBox23.Checked = true then
+     begin
+           Memo30 := criarCodeClasseInitJS(Edit1.Text,ClientDataSet1,Memo30);
+           TabSheet30.TabVisible := true;
+           TabSheet30.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
+     end;
+     if CheckBox24.Checked = true then
+     begin
+           Memo31 := criarCodeClasseMainJS(Edit1.Text,ClientDataSet1,Memo31);
+           TabSheet31.TabVisible := true;
+           TabSheet31.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
+     end;
+     if CheckBox54.Checked = true then
+     begin
+           Memo32 := criarCodeClasseHTML(Edit1.Text,ClientDataSet1,Memo32);
+           TabSheet32.TabVisible := true;
+           TabSheet32.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
+     end;
+     if CheckBox22.Checked = true then
+     begin
+           Memo33 := criarCodeClasseHTMLCreate(Edit1.Text,ClientDataSet1,Memo33);
+           TabSheet33.TabVisible := true;
+           TabSheet33.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
+     end;
+     if CheckBox25.Checked = true then
+     begin
+           Memo34 := criarCodeClasseSelenium(Edit1.Text,ClientDataSet1,Memo34);
+           TabSheet34.TabVisible := true;
+           TabSheet34.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
+     end;
+      if CheckBox40.Checked = true then
+     begin
+           Memo35 := criarCodeClasseSelenium(Edit1.Text,ClientDataSet1,Memo35);
+           TabSheet35.TabVisible := true;
+           TabSheet35.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
+     end;
+      if CheckBox41.Checked = true then
+     begin
+           Memo36 := criarCodeClasseSelenium(Edit1.Text,ClientDataSet1,Memo36);
+           TabSheet36.TabVisible := true;
+           TabSheet36.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
+     end;
+      if CheckBox42.Checked = true then
+     begin
+           Memo37 := criarCodeClasseSelenium(Edit1.Text,ClientDataSet1,Memo37);
+           TabSheet37.TabVisible := true;
+           TabSheet37.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
+     end;
+      if CheckBox43.Checked = true then
+     begin
+           Memo38 := criarCodeClasseSelenium(Edit1.Text,ClientDataSet1,Memo38);
+           TabSheet38.TabVisible := true;
+           TabSheet38.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
+     end;
+      if CheckBox44.Checked = true then
+     begin
+           Memo39 := criarCodeClasseSelenium(Edit1.Text,ClientDataSet1,Memo39);
+           TabSheet39.TabVisible := true;
+           TabSheet39.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
+     end;
+      if CheckBox45.Checked = true then
+     begin
+           Memo40 := criarCodeClasseSelenium(Edit1.Text,ClientDataSet1,Memo40);
+           TabSheet40.TabVisible := true;
+           TabSheet40.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
+     end;
+end;
 
 procedure TForm1.BtnPesquisaClick(Sender: TObject);
 begin

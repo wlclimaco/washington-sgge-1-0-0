@@ -73,7 +73,6 @@ object Form1: TForm1
     Height = 33
     Align = alBottom
     TabOrder = 0
-    ExplicitTop = 593
     DesignSize = (
       949
       33)
@@ -176,6 +175,107 @@ object Form1: TForm1
       ShowHint = True
       TabOrder = 0
       OnClick = BtnPesquisaClick
+      BrTipoBotao = BtnConvSQL
+    end
+    object BrvBitBtn1: TBrvBitBtn
+      Left = 710
+      Top = 6
+      Width = 113
+      Height = 25
+      Hint = 'Localizar'
+      Anchors = [akTop, akRight]
+      Caption = '&Gerar'
+      DoubleBuffered = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      Glyph.Data = {
+        96090000424D9609000000000000360000002800000028000000140000000100
+        1800000000006009000000000000000000000000000000000000008080FFC093
+        DFB18BE0B28BE0B28BE0B28BE0B28BE0B28CE3B68EBA8672B085840080800080
+        80008080008080008080008080008080008080008080008080D1C4C4C2C1C1C1
+        C1C1C1C1C1C1C1C1C1C1C1C1C1C1C1C5C6C08E86AD8D86008080008080008080
+        008080008080008080008080008080008080008080FFD6B3FF0000FF0000FF00
+        00FFFFFFFF0000FFFFFFFBFFFFB3857CFCC178AC877B00808000808000808000
+        8080008080008080008080008080008080E6D5D5808080808080808080FFFFFF
+        808080FFFFFFFEFCFDC08D85C4C3C3A6918B0080800080800080800080800080
+        80008080008080008080008080FFCEACFF0000FFFFFFFF0000FFFFFFFF0000FF
+        FFFFF8F8F6B2847BFCC371F9A852A88772008080008080008080008080008080
+        008080008080008080E2D2D2808080FFFFFF808080FFFFFF808080FFFFFFF8F7
+        F8C08C83BCC8CAC8B5B29D857E00808000808000808000808000808000808000
+        8080008080FFCAA9FF0000FFFFFFFF0000FF0000FF0000FFFAF9FDFAF5B1806F
+        BD8464C4875CD385670080800080800080800080800080800080800080800080
+        80E0D1D1808080FFFFFF808080808080808080FFF8F9F7FAF5BA877EB7918BBB
+        8F88D2897F008080008080008080008080008080008080008080008080FCC4A3
+        FDFCFFFFFFFFFFFFFFFFF7F8FFF9FCFFFEFFFFFFFDFEF6F8E6DFE4C6CBD1BF99
+        92008080008080008080008080008080008080008080008080E0D1D1FFFBFBFF
+        FFFFFFFFFFFFF6F6FFFAFAFFFDFDFFFEFDFFF5F5ECDEDDCCC9C9C99D98008080
+        008080008080008080008080008080008080008080FAC2A2FF0000FF0000FF00
+        00FF0000FF0000E4AB7CDBAA80DDAC82E0AE84E3B186E5B58CF5B98FFFBD90CD
+        7E6F9E8685008080008080008080008080E0D1D1808080808080808080808080
+        808080B3B4B4BBBBBBBBBDBDBDBFBFC0C1C1C2C6C6D2CACAD9CECFDA877C9B8D
+        87008080008080008080008080EEB59FFF0000FEEBDAFCD6ABFDD8ACFF0000F8
+        DBC3FFFFFFFFFFFF000080000080000080000080000080B37E64FAB97A8D847E
+        008080008080008080DED2D0808080F4EDE8DAD8D6DAD8D8808080DEDADAFFFF
+        FFFFFFFF808080808080808080808080808080B6867FCBBDBC898D8800808000
+        8080008080E5AC9EFF0000FF0000FF0000FF0000F1D7C4F1D1B8FEFFFFFFFFFF
+        000080FFFFFFFFFFFDFFFFFF000080B27D65FDC26CF8A3548F84790080800080
+        80DEBAB7808080808080808080808080DED9D9D7D3D3FFFEFEFFFFFF808080FF
+        FFFFFFFDFDFFFFFF808080B6847DBDCACCCCAAA689857F008080008080DEA69E
+        FBF8F2FAE8D6FCDBB0FEDAB1F6CBA0ECCDB9FDFEFFFFFFFF0000800000800000
+        80000080000080A66B57C08665C5875AD6846D008080008080DEA49DFDF8F9E6
+        E5E2D9D8D8DCDADACECECED6D1D1FFFDFDFFFFFF808080808080808080808080
+        808080AF756CB8948EBB8C85D88B81008080008080D8A191FF0000FF0000FF00
+        00FF0000FF0000E8C8B3FDFEFFFFFFFFFFFFFFFFF7F8FFF8F9FFF8FBFFFAF3F6
+        EAECDFD6D8C0C2C6C89184008080008080DEA6A0808080808080808080808080
+        808080D5D1D1FFFDFDFFFFFFFFFFFFFFF6F6FFF8F8FFF8F9FFFAFAF9EBEBE3D6
+        D6C3C2C3D09992008080008080D89D8CF6EEE8FDEAD5F8DBB7F9DDB8FF0000E7
+        C7B3FEFFFFFFF4F3000080000080000080000080000080F8EEE1FBF2E9F5F0E7
+        C5948B008080008080E0A79EF2F3E9EEEAE7D4D5D5D2D4D4808080D6D2D2FFFF
+        FFFEF6F4808080808080808080808080808080ECEEE6EFF1E9ECF0ECC2938D00
+        8080008080D49B8DF8F0EAF4E6D7FAD9BAFDDCB8FF0000DDBDAFFEFFFFFDE4CF
+        000080FCD7AB000080000080FFD8A9FCD4A9F6E5D3F9F4E8CC998E0080800080
+        80DAA39AF5F5ECE0E0DEDCD9DBDEDCD9808080D1D2CFFFFDFBF2E9E2808080D9
+        D7D7808080808080DBD8D9D0D1D2E1DFDEF8F5EDCD9A91008080008080CA958C
+        F9F0E3F1EBDFECE7DDEEEBDCDECABAD5B5AAFEFBF9F7F3EA0000800000800000
+        80F5E9DE000080F5E4D4F7EADCF9EEE0C88F86008080008080C5958EEEEDEAF1
+        EAE4F1E8E3F3EBDFDED0C7D0BEBDFFF7F8F3EEEB808080808080808080F3E9E9
+        808080E4DFDFF3EAEAEEEBE9C7968F008080008080CE998DFFFBE8FEF6E3FDF1
+        DFFFF6E3E7CEC0CFB1A9FEFAF5F7E4CDFEDAADFDD8B0FDD9AFFDD9AEFDD9AEFE
+        D9AFF7E2CDF9EDE1C4887D008080008080C39690ECF0F2F8F3F1F6F2EFF8F6F4
+        E1CDC8D0AFAAFFFBFBDEDEDCD9D8D8DAD9D9DAD9D9DAD9D9DAD9D9DBD9DAE1DE
+        DFE7E7E8C1938D008080008080CC7B71C1847AC08379C08379C0837AB97E71D1
+        B5A7FFFBF3F7F0DE000080000080000080000080000080EEE6D3F2E7D6FAECDB
+        C58A7F008080008080CB7B71BF837BC0837BBF837BBF837BBB8078D5B8B5FFFB
+        FCEFE7E7808080808080808080808080808080EEE6DCF0E7E1E7E6E8C4968F00
+        8080008080008080008080008080008080008080008080E0AFA1F6EFE9FFE7D0
+        000080F8DBB7000080F8DBB7F8DCB7F9DBB9F4E0C9F6EEDDB67A770080800080
+        80008080008080008080008080008080008080E6BAB0F1F2E8EEE7E7808080D2
+        D3D3808080D2D3D3D3D4D4D2D3D4DCDBD8EBEAE4AD7577008080008080008080
+        008080008080008080008080008080DDAEA2F8F0EAF3E2D10000800000800000
+        80000080000080FBD7B5F2E1C8F6EEDDB77B7700808000808000808000808000
+        8080008080008080008080E2B7AEF4F4EBDCDBDB808080808080808080808080
+        808080D4D5D5DEDCD9EBEAE5AF78790080800080800080800080800080800080
+        80008080008080D6ABA0F9F0E4EEE8DCECE8DDEDE8D9EDE6D7EDE3D4EDDED0ED
+        DDCFEDE0D1F6EEDCB77B77008080008080008080008080008080008080008080
+        008080CFAAA4EFEDE9F1E8E3F1E8E2F1E8DDEAE3DBE2DED9D5D5D4D2D3D4DCDB
+        D8EBEAE4AF7879008080008080008080008080008080008080008080008080DA
+        B0A3FFFCEAFDF3E0FDF2DFFDF2E0FDF0DEFDEEDDFDEFDDFDEFDDFDF3DFFFFCE5
+        B97E7A008080008080008080008080008080008080008080008080CBABA7F1F1
+        F3F7F2F0F6F2EFF7F2F0F2EFEFEDEBEDEFEDEEEFEDEEF2EFEFF0F4F3B07B7C00
+        8080008080008080008080008080008080008080008080B47D74AA837AAA8179
+        AA8179AA8179AA8179AA8279AA8279AA8279AA8279AD867CA2605E0080800080
+        80008080008080008080008080008080008080B37D74A9827AA9817AA9817AA9
+        817AAA827AAA827AAA827AAA827AAA827AAB857DA1605E008080}
+      NumGlyphs = 2
+      ParentDoubleBuffered = False
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+      OnClick = BrvBitBtn1Click
       BrTipoBotao = BtnConvSQL
     end
   end
@@ -566,10 +666,8 @@ object Form1: TForm1
     Align = alClient
     MultiLine = True
     TabOrder = 2
-    ExplicitHeight = 552
     object TbsFiltro: TTabSheet
       Caption = 'Geral'
-      ExplicitHeight = 470
       object Label1: TLabel
         Left = 56
         Top = 13
@@ -1110,7 +1208,6 @@ object Form1: TForm1
     object TabSheet1: TTabSheet
       Caption = 'Modelo'
       ImageIndex = 2
-      ExplicitHeight = 470
       object Memo3: TMemo
         Left = 0
         Top = 0
@@ -1121,13 +1218,11 @@ object Form1: TForm1
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
-        ExplicitHeight = 470
       end
     end
     object TabSheet2: TTabSheet
       Caption = 'InqueryResponse'
       ImageIndex = 3
-      ExplicitHeight = 470
       object Memo4: TMemo
         Left = 0
         Top = 0
@@ -1138,13 +1233,11 @@ object Form1: TForm1
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
-        ExplicitHeight = 470
       end
     end
     object TabSheet3: TTabSheet
       Caption = 'TabSheet3'
       ImageIndex = 4
-      ExplicitHeight = 470
       object Memo5: TMemo
         Left = 0
         Top = 0
@@ -1155,13 +1248,11 @@ object Form1: TForm1
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
-        ExplicitHeight = 470
       end
     end
     object TabSheet4: TTabSheet
       Caption = 'TabSheet4'
       ImageIndex = 5
-      ExplicitHeight = 470
       object Memo6: TMemo
         Left = 0
         Top = 0
@@ -1172,13 +1263,11 @@ object Form1: TForm1
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
-        ExplicitHeight = 470
       end
     end
     object TabSheet5: TTabSheet
       Caption = 'TabSheet5'
       ImageIndex = 6
-      ExplicitHeight = 470
       object Memo7: TMemo
         Left = 0
         Top = 0
@@ -1189,7 +1278,6 @@ object Form1: TForm1
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
-        ExplicitHeight = 470
       end
       object Memo35: TMemo
         Left = 0
@@ -1201,13 +1289,11 @@ object Form1: TForm1
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 1
-        ExplicitHeight = 470
       end
     end
     object TabSheet6: TTabSheet
       Caption = 'TabSheet6'
       ImageIndex = 7
-      ExplicitHeight = 470
       object Memo8: TMemo
         Left = 0
         Top = 0
@@ -1218,13 +1304,11 @@ object Form1: TForm1
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
-        ExplicitHeight = 470
       end
     end
     object TabSheet7: TTabSheet
       Caption = 'TabSheet7'
       ImageIndex = 8
-      ExplicitHeight = 470
       object Memo9: TMemo
         Left = 0
         Top = 0
@@ -1235,13 +1319,11 @@ object Form1: TForm1
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
-        ExplicitHeight = 470
       end
     end
     object TabSheet8: TTabSheet
       Caption = 'TabSheet8'
       ImageIndex = 9
-      ExplicitHeight = 470
       object Memo10: TMemo
         Left = 0
         Top = 0
@@ -1252,13 +1334,11 @@ object Form1: TForm1
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
-        ExplicitHeight = 470
       end
     end
     object TabSheet9: TTabSheet
       Caption = 'TabSheet9'
       ImageIndex = 10
-      ExplicitHeight = 470
       object Memo11: TMemo
         Left = 0
         Top = 0
@@ -1269,13 +1349,11 @@ object Form1: TForm1
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
-        ExplicitHeight = 470
       end
     end
     object TabSheet10: TTabSheet
       Caption = 'TabSheet10'
       ImageIndex = 11
-      ExplicitHeight = 470
       object Memo12: TMemo
         Left = 0
         Top = 0
@@ -1286,13 +1364,11 @@ object Form1: TForm1
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
-        ExplicitHeight = 470
       end
     end
     object TabSheet11: TTabSheet
       Caption = 'TabSheet11'
       ImageIndex = 12
-      ExplicitHeight = 470
       object Memo13: TMemo
         Left = 0
         Top = 0
@@ -1303,13 +1379,11 @@ object Form1: TForm1
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
-        ExplicitHeight = 470
       end
     end
     object TabSheet12: TTabSheet
       Caption = 'TabSheet12'
       ImageIndex = 13
-      ExplicitHeight = 470
       object Memo14: TMemo
         Left = 0
         Top = 0
@@ -1320,13 +1394,11 @@ object Form1: TForm1
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
-        ExplicitHeight = 470
       end
     end
     object TabSheet13: TTabSheet
       Caption = 'TabSheet13'
       ImageIndex = 14
-      ExplicitHeight = 470
       object Memo15: TMemo
         Left = 0
         Top = 0
@@ -1337,13 +1409,11 @@ object Form1: TForm1
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
-        ExplicitHeight = 470
       end
     end
     object TabSheet14: TTabSheet
       Caption = 'TabSheet14'
       ImageIndex = 15
-      ExplicitHeight = 470
       object Memo16: TMemo
         Left = 0
         Top = 0
@@ -1354,13 +1424,11 @@ object Form1: TForm1
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
-        ExplicitHeight = 470
       end
     end
     object TabSheet15: TTabSheet
       Caption = 'TabSheet15'
       ImageIndex = 16
-      ExplicitHeight = 470
       object Memo17: TMemo
         Left = 0
         Top = 0
@@ -1371,13 +1439,11 @@ object Form1: TForm1
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
-        ExplicitHeight = 470
       end
     end
     object TabSheet16: TTabSheet
       Caption = 'TabSheet16'
       ImageIndex = 17
-      ExplicitHeight = 470
       object Panel3: TPanel
         Left = 0
         Top = 353
@@ -1385,10 +1451,9 @@ object Form1: TForm1
         Height = 56
         Align = alBottom
         TabOrder = 0
-        ExplicitTop = 414
         object Label27: TLabel
           Left = 8
-          Top = 24
+          Top = 6
           Width = 66
           Height = 16
           Caption = 'Validators'
@@ -1400,8 +1465,8 @@ object Form1: TForm1
           ParentFont = False
         end
         object Label28: TLabel
-          Left = 360
-          Top = 24
+          Left = 9
+          Top = 28
           Width = 66
           Height = 16
           Caption = 'Validators'
@@ -1412,9 +1477,22 @@ object Form1: TForm1
           Font.Style = [fsBold]
           ParentFont = False
         end
+        object Label30: TLabel
+          Left = 442
+          Top = 11
+          Width = 162
+          Height = 16
+          Caption = 'Diretorio Salvar arquivos'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
         object BrvEdit22: TBrvEdit
           Left = 128
-          Top = 19
+          Top = 6
           Width = 209
           Height = 21
           TabOrder = 0
@@ -1426,11 +1504,24 @@ object Form1: TForm1
           BrRecordar = False
         end
         object BrvEdit23: TBrvEdit
-          Left = 480
-          Top = 19
+          Left = 128
+          Top = 33
           Width = 209
           Height = 21
           TabOrder = 1
+          Text = 'BrvEdit1'
+          BrVisibleButton = True
+          BrFunctionButton = VeArquivo
+          BrAlignment = taLeftJustify
+          BrvQueryCode = 0
+          BrRecordar = False
+        end
+        object BrvEdit1: TBrvEdit
+          Left = 610
+          Top = 6
+          Width = 247
+          Height = 21
+          TabOrder = 2
           Text = 'BrvEdit1'
           BrVisibleButton = True
           BrFunctionButton = VeArquivo
@@ -1446,7 +1537,6 @@ object Form1: TForm1
         Height = 48
         Align = alBottom
         TabOrder = 1
-        ExplicitTop = 366
         object Label25: TLabel
           Left = 8
           Top = 26
@@ -1507,7 +1597,6 @@ object Form1: TForm1
         Height = 88
         Align = alBottom
         TabOrder = 2
-        ExplicitTop = 278
         object Label19: TLabel
           Left = 8
           Top = 11
@@ -1672,7 +1761,6 @@ object Form1: TForm1
         Height = 65
         Align = alBottom
         TabOrder = 3
-        ExplicitTop = 213
         object Label15: TLabel
           Left = 8
           Top = 11
@@ -1806,7 +1894,6 @@ object Form1: TForm1
         Height = 137
         Align = alBottom
         TabOrder = 4
-        ExplicitTop = 76
         object Label3: TLabel
           Left = 14
           Top = 21
@@ -1860,11 +1947,11 @@ object Form1: TForm1
           ParentFont = False
         end
         object Label11: TLabel
-          Left = 422
+          Left = 392
           Top = 21
-          Width = 96
+          Width = 34
           Height = 16
-          Caption = 'bcf-application'
+          Caption = 'Linha'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
@@ -1873,11 +1960,11 @@ object Form1: TForm1
           ParentFont = False
         end
         object Label12: TLabel
-          Left = 424
+          Left = 392
           Top = 48
-          Width = 94
+          Width = 34
           Height = 16
-          Caption = 'bcl-application'
+          Caption = 'Linha'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
@@ -1886,11 +1973,11 @@ object Form1: TForm1
           ParentFont = False
         end
         object Label13: TLabel
-          Left = 424
+          Left = 392
           Top = 75
-          Width = 74
+          Width = 34
           Height = 16
-          Caption = 'Data Acess'
+          Caption = 'Linha'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
@@ -1899,11 +1986,11 @@ object Form1: TForm1
           ParentFont = False
         end
         object Label14: TLabel
-          Left = 424
+          Left = 392
           Top = 102
-          Width = 66
+          Width = 34
           Height = 16
-          Caption = 'Validators'
+          Caption = 'Linha'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
@@ -1963,57 +2050,37 @@ object Form1: TForm1
           BrvQueryCode = 0
           BrRecordar = False
         end
-        object BrvEdit6: TBrvEdit
-          Left = 544
+        object Edit3: TEdit
+          Left = 442
           Top = 16
-          Width = 209
+          Width = 121
           Height = 21
           TabOrder = 4
-          Text = 'BrvEdit1'
-          BrVisibleButton = True
-          BrFunctionButton = VeArquivo
-          BrAlignment = taLeftJustify
-          BrvQueryCode = 0
-          BrRecordar = False
+          Text = 'Edit3'
         end
-        object BrvEdit7: TBrvEdit
-          Left = 544
+        object Edit4: TEdit
+          Left = 442
           Top = 43
-          Width = 209
+          Width = 121
           Height = 21
           TabOrder = 5
-          Text = 'BrvEdit1'
-          BrVisibleButton = True
-          BrFunctionButton = VeArquivo
-          BrAlignment = taLeftJustify
-          BrvQueryCode = 0
-          BrRecordar = False
+          Text = 'Edit3'
         end
-        object BrvEdit8: TBrvEdit
-          Left = 544
+        object Edit5: TEdit
+          Left = 442
           Top = 70
-          Width = 209
+          Width = 121
           Height = 21
           TabOrder = 6
-          Text = 'BrvEdit1'
-          BrVisibleButton = True
-          BrFunctionButton = VeArquivo
-          BrAlignment = taLeftJustify
-          BrvQueryCode = 0
-          BrRecordar = False
+          Text = 'Edit3'
         end
-        object BrvEdit9: TBrvEdit
-          Left = 544
+        object Edit6: TEdit
+          Left = 442
           Top = 97
-          Width = 209
+          Width = 121
           Height = 21
           TabOrder = 7
-          Text = 'BrvEdit1'
-          BrVisibleButton = True
-          BrFunctionButton = VeArquivo
-          BrAlignment = taLeftJustify
-          BrvQueryCode = 0
-          BrRecordar = False
+          Text = 'Edit3'
         end
       end
     end
@@ -2468,7 +2535,6 @@ object Form1: TForm1
     object TabSheet42: TTabSheet
       Caption = 'TabSheet42'
       ImageIndex = 43
-      ExplicitHeight = 470
       object Memo43: TMemo
         Left = 0
         Top = 0
@@ -2479,7 +2545,6 @@ object Form1: TForm1
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
-        ExplicitHeight = 470
       end
     end
   end
