@@ -66,6 +66,19 @@ object Form1: TForm1
     Font.Style = [fsBold]
     ParentFont = False
   end
+  object Label31: TLabel
+    Left = 480
+    Top = 159
+    Width = 80
+    Height = 16
+    Caption = 'Nome Classe'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
   object Panel1: TPanel
     Left = 0
     Top = 532
@@ -668,6 +681,8 @@ object Form1: TForm1
     TabOrder = 2
     object TbsFiltro: TTabSheet
       Caption = 'Geral'
+      ExplicitLeft = 1
+      ExplicitTop = 82
       object Label1: TLabel
         Left = 56
         Top = 13
@@ -742,11 +757,37 @@ object Form1: TForm1
           80008080008080008080}
         OnClick = SpeedButton1Click
       end
+      object Label32: TLabel
+        Left = 594
+        Top = 13
+        Width = 81
+        Height = 16
+        Caption = 'Nome Tabela'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label33: TLabel
+        Left = 456
+        Top = 40
+        Width = 109
+        Height = 16
+        Caption = 'Descri'#231#227'o Tabela'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
       object GroupBox1: TGroupBox
         Left = 467
-        Top = 35
+        Top = 62
         Width = 169
-        Height = 354
+        Height = 344
         Caption = 'Classes BE'
         TabOrder = 0
         object CheckBox1: TCheckBox
@@ -930,7 +971,7 @@ object Form1: TForm1
         Left = 338
         Top = 62
         Width = 123
-        Height = 327
+        Height = 344
         Caption = 'Classes FE'
         TabOrder = 3
         object CheckBox12: TCheckBox
@@ -997,12 +1038,20 @@ object Form1: TForm1
           Caption = 'Sellenium'
           TabOrder = 7
         end
+        object CheckBox26: TCheckBox
+          Left = 16
+          Top = 149
+          Width = 97
+          Height = 17
+          Caption = 'Sellenium'
+          TabOrder = 8
+        end
       end
       object GroupBox4: TGroupBox
         Left = 151
         Top = 258
         Width = 178
-        Height = 131
+        Height = 148
         Caption = 'Configura'#231#227'o'
         TabOrder = 4
         object CheckBox28: TCheckBox
@@ -1041,7 +1090,7 @@ object Form1: TForm1
           Left = 16
           Top = 111
           Width = 145
-          Height = 17
+          Height = 18
           Caption = 'Gerar Procedure Select Id'
           TabOrder = 4
         end
@@ -1049,8 +1098,8 @@ object Form1: TForm1
       object GroupBox6: TGroupBox
         Left = 642
         Top = 223
-        Width = 169
-        Height = 166
+        Width = 143
+        Height = 183
         Caption = 'Classes BE Test'
         TabOrder = 5
         object CheckBox40: TCheckBox
@@ -1103,9 +1152,9 @@ object Form1: TForm1
         end
       end
       object GroupBox7: TGroupBox
-        Left = 642
-        Top = 37
-        Width = 169
+        Left = 791
+        Top = 226
+        Width = 127
         Height = 180
         Caption = 'Configura'#231#227'o BE'
         TabOrder = 6
@@ -1146,7 +1195,7 @@ object Form1: TForm1
         Left = 16
         Top = 260
         Width = 129
-        Height = 129
+        Height = 146
         Caption = 'GerarScript'
         TabOrder = 7
         object CheckBox50: TCheckBox
@@ -1188,6 +1237,22 @@ object Form1: TForm1
         Width = 401
         Height = 21
         TabOrder = 8
+      end
+      object Edit7: TEdit
+        Left = 688
+        Top = 8
+        Width = 231
+        Height = 21
+        TabOrder = 9
+        Text = 'Edit1'
+      end
+      object Edit8: TEdit
+        Left = 571
+        Top = 35
+        Width = 348
+        Height = 21
+        TabOrder = 10
+        Text = 'Edit1'
       end
     end
     object TbsConsulta: TTabSheet
@@ -1788,7 +1853,7 @@ object Form1: TForm1
           ParentFont = False
         end
         object Label17: TLabel
-          Left = 360
+          Left = 400
           Top = 11
           Width = 34
           Height = 16
@@ -1801,7 +1866,7 @@ object Form1: TForm1
           ParentFont = False
         end
         object Label18: TLabel
-          Left = 360
+          Left = 400
           Top = 33
           Width = 54
           Height = 16
@@ -1814,8 +1879,8 @@ object Form1: TForm1
           ParentFont = False
         end
         object Label21: TLabel
-          Left = 701
-          Top = 11
+          Left = 804
+          Top = 6
           Width = 118
           Height = 16
           Caption = 'Quantidade Insert'
@@ -1879,11 +1944,43 @@ object Form1: TForm1
           BrRecordar = False
         end
         object Edit2: TEdit
-          Left = 825
-          Top = 6
+          Left = 804
+          Top = 28
           Width = 73
           Height = 21
           TabOrder = 4
+          Text = 'Edit2'
+        end
+        object Edit9: TEdit
+          Left = 343
+          Top = 6
+          Width = 45
+          Height = 21
+          TabOrder = 5
+          Text = 'Edit2'
+        end
+        object Edit10: TEdit
+          Left = 343
+          Top = 33
+          Width = 45
+          Height = 21
+          TabOrder = 6
+          Text = 'Edit2'
+        end
+        object Edit11: TEdit
+          Left = 695
+          Top = 6
+          Width = 45
+          Height = 21
+          TabOrder = 7
+          Text = 'Edit2'
+        end
+        object Edit12: TEdit
+          Left = 695
+          Top = 33
+          Width = 45
+          Height = 21
+          TabOrder = 8
           Text = 'Edit2'
         end
       end
@@ -2150,7 +2247,7 @@ object Form1: TForm1
           item
             Expanded = False
             FieldName = 'Tipo'
-            Width = 173
+            Width = 200
             Visible = True
             BrConsulta = 0
             BrPermissao = []
@@ -2159,8 +2256,8 @@ object Form1: TForm1
           end
           item
             Expanded = False
-            FieldName = 'ab'
-            Width = 137
+            FieldName = 'Tamanho'
+            Width = 163
             Visible = True
             BrConsulta = 0
             BrPermissao = []
@@ -2169,19 +2266,30 @@ object Form1: TForm1
           end
           item
             Expanded = False
-            FieldName = 'ac'
+            FieldName = 'Chave'
+            PickList.Strings = (
+              'PK'
+              'FK')
+            Width = 72
             Visible = True
             BrConsulta = 0
+            BrPickValue.Strings = (
+              'PK'
+              'FK')
             BrPermissao = []
             BrValueHalfChecked = False
             BrSaveOnClick = False
           end
           item
+            ButtonStyle = cbsNone
             Expanded = False
-            FieldName = 'aa'
+            FieldName = 'Obrigatorio'
+            Width = 150
             Visible = True
             BrConsulta = 0
             BrPermissao = []
+            BrValueChecked = 'S'
+            BrValueUnchecked = 'N'
             BrValueHalfChecked = False
             BrSaveOnClick = False
           end>

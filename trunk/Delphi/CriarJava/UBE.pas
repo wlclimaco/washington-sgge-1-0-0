@@ -139,51 +139,24 @@ begin
       memo1.Lines.Add('<!-- Insert '+BrvFuncoesXE.PrimeiraMaiscula(Txt)+' -->');
       memo1.Lines.Add('<select id="insert'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'" parameterType="'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'" resultType="int">');
       memo1.Lines.Add('SELECT ins_'+Txt+' (   ');
-      memo1.Lines.Add('#{emdemp,jdbcType=VARCHAR}, ');
-      memo1.Lines.Add('#{numemp,jdbcType=INTEGER}, ');
-      memo1.Lines.Add('#{complemp,jdbcType=VARCHAR},  ');
-      memo1.Lines.Add('#{bairemp,jdbcType=VARCHAR},  ');
-      memo1.Lines.Add('#{cepemp,jdbcType=VARCHAR},  ');
-      memo1.Lines.Add('#{cidemp,jdbcType=VARCHAR},  ');
-      memo1.Lines.Add('#{ufemp,jdbcType=VARCHAR},   ');
-      memo1.Lines.Add('#{dddemp,jdbcType=VARCHAR},  ');
-      memo1.Lines.Add('#{foneemp,jdbcType=VARCHAR}, ');
-      memo1.Lines.Add('#{faxemp,jdbcType=VARCHAR},   ');
-      memo1.Lines.Add('#{emailemp,jdbcType=VARCHAR},  ');
-      memo1.Lines.Add('#{wwwemp,jdbcType=VARCHAR},    ');
-      memo1.Lines.Add('#{nomecontemp,jdbcType=VARCHAR}, ');
-      memo1.Lines.Add('#{siglauf,jdbcType=VARCHAR},     ');
-      memo1.Lines.Add('#{codmunic,jdbcType=VARCHAR},   ');
-      memo1.Lines.Add('#{codpais,jdbcType=VARCHAR},    ');
-      memo1.Lines.Add('#{razemp,jdbcType=VARCHAR},     ');
-      memo1.Lines.Add('#{nomeemp,jdbcType=VARCHAR},    ');
-      memo1.Lines.Add('#{cnpjemp,jdbcType=VARCHAR},     ');
-      memo1.Lines.Add('#{inscemp,jdbcType=VARCHAR},      ');
-      memo1.Lines.Add('#{codeanemp,jdbcType=VARCHAR},    ');
-      memo1.Lines.Add('#{multialmoxemp,jdbcType=VARCHAR}, ');
-      memo1.Lines.Add('#{fotoemp,jdbcType=VARCHAR},      ');
-      memo1.Lines.Add('#{codmunic,jdbcType=VARCHAR},      ');
-      memo1.Lines.Add('#{percissemp,jdbcType=DOUBLE})     ');
+      CcDataset.First;
+      while CcDataset.Eof do
+      begin
+            if CcDataset.FieldByName('S/N').AsString = 'true'  then
+                memo1.Lines.Add('#{'+LowerCase(CcDataset.FieldByName('Nome').AsString)+',jdbcType='+verificadorCodeBanco(LowerCase(CcDataset.FieldByName('Tipo').AsString))+'},');
+           CcDataset.Next;
+      end;
       memo1.Lines.Add('</select>');
-
-      memo1.Lines.Add('<select id="insertEndereco" parameterType="'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'" resultType="int">');
-      memo1.Lines.Add('SELECT ins_endereco( ');
-      memo1.Lines.Add('#{emdemp,jdbcType=VARCHAR}, ');
-      memo1.Lines.Add('#{numemp,jdbcType=INTEGER},  ');
-      memo1.Lines.Add('#{complemp,jdbcType=VARCHAR},  ');
-      memo1.Lines.Add('#{bairemp,jdbcType=VARCHAR}, ');
-      memo1.Lines.Add('#{cepemp,jdbcType=VARCHAR},  ');
-      memo1.Lines.Add('#{cidemp,jdbcType=VARCHAR}, ');
-      memo1.Lines.Add('#{ufemp,jdbcType=VARCHAR}, ');
-      memo1.Lines.Add('#{dddemp,jdbcType=VARCHAR},  ');
-      memo1.Lines.Add('#{foneemp,jdbcType=VARCHAR},  ');
-      memo1.Lines.Add('#{faxemp,jdbcType=VARCHAR},   ');
-      memo1.Lines.Add('#{emailemp,jdbcType=VARCHAR},  ');
-      memo1.Lines.Add('#{wwwemp,jdbcType=VARCHAR},     ');
-      memo1.Lines.Add('#{nomecontemp,jdbcType=VARCHAR}, ');
-      memo1.Lines.Add('#{siglauf,jdbcType=VARCHAR},  ');
-      memo1.Lines.Add('#{codmunic,jdbcType=VARCHAR}, ');
-      memo1.Lines.Add('#{codpais,jdbcType=VARCHAR})  ');
+      memo1.Lines.Add('<!-- Update '+BrvFuncoesXE.PrimeiraMaiscula(Txt)+' -->');
+      memo1.Lines.Add('<select id="update'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'" parameterType="'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'" resultType="int">');
+      memo1.Lines.Add('SELECT upd_'+Txt+' (   ');
+      CcDataset.First;
+      while CcDataset.Eof do
+      begin
+            if CcDataset.FieldByName('S/N').AsString = 'true'  then
+                memo1.Lines.Add('#{'+LowerCase(CcDataset.FieldByName('Nome').AsString)+',jdbcType='+verificadorCodeBanco(LowerCase(CcDataset.FieldByName('Tipo').AsString))+'},');
+           CcDataset.Next;
+      end;
       memo1.Lines.Add('</select>');
       memo1.Lines.Add('</mapper>');
       Result := memo1;
@@ -682,7 +655,7 @@ begin
       memo1.Lines.Add('/**');
       memo1.Lines.Add('* Action BCL implementation class. ');
       memo1.Lines.Add('*');
-      memo1.Lines.Add('* @author QAT. ');
+      memo1.Lines.Add('* @author Washington ');
       memo1.Lines.Add('*/');
       memo1.Lines.Add('public class '+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'BCLImpl implements I'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'BCL ');
       memo1.Lines.Add('{ ');
