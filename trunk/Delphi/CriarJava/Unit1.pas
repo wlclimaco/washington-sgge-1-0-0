@@ -255,6 +255,8 @@ type
     Edit10: TEdit;
     Edit11: TEdit;
     Edit12: TEdit;
+    GroupBox5: TGroupBox;
+    ComboBox1: TComboBox;
     procedure SpeedButton1Click(Sender: TObject);
     procedure BtnPesquisaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -602,7 +604,7 @@ begin
      end;
      if CheckBox51.Checked = true then
      begin
-           Memo25 := GerarScriptBDTable(Edit1.Text,ClientDataSet1,Memo25);
+           Memo25 := GerarScriptBDTable(Edit1.Text,ClientDataSet1,Memo25,ComboBox1.Text);
            TabSheet25.TabVisible := true;
            TabSheet25.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
      end;
@@ -834,7 +836,7 @@ begin
      end;
      if CheckBox51.Checked = true then
      begin
-           Memo25 := GerarScriptBDTable(Edit1.Text,ClientDataSet1,Memo25);
+           Memo25 := GerarScriptBDTable(Edit1.Text,ClientDataSet1,Memo25,ComboBox1.Text);
            TabSheet25.TabVisible := true;
            TabSheet25.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
      end;

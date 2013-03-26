@@ -111,9 +111,9 @@ begin
 
       memo1.Lines.Add('SELECT ');
       CcDataset.First;
-      while CcDataset.Eof do
+      while not CcDataset.Eof do
       begin
-            if CcDataset.FieldByName('S/N').AsString = 'true'  then
+            if CcDataset.FieldByName('S/N').AsString = 'S'  then
                   memo1.Lines.Add(''+CcDataset.FieldByName('Nome').AsString+',');
            CcDataset.Next;
       end;
@@ -140,9 +140,9 @@ begin
       memo1.Lines.Add('<select id="insert'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'" parameterType="'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'" resultType="int">');
       memo1.Lines.Add('SELECT ins_'+Txt+' (   ');
       CcDataset.First;
-      while CcDataset.Eof do
+      while not CcDataset.Eof do
       begin
-            if CcDataset.FieldByName('S/N').AsString = 'true'  then
+            if CcDataset.FieldByName('S/N').AsString = 'S'  then
                 memo1.Lines.Add('#{'+LowerCase(CcDataset.FieldByName('Nome').AsString)+',jdbcType='+verificadorCodeBanco(LowerCase(CcDataset.FieldByName('Tipo').AsString))+'},');
            CcDataset.Next;
       end;
@@ -151,9 +151,9 @@ begin
       memo1.Lines.Add('<select id="update'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'" parameterType="'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'" resultType="int">');
       memo1.Lines.Add('SELECT upd_'+Txt+' (   ');
       CcDataset.First;
-      while CcDataset.Eof do
+      while not CcDataset.Eof do
       begin
-            if CcDataset.FieldByName('S/N').AsString = 'true'  then
+            if CcDataset.FieldByName('S/N').AsString = 'S'  then
                 memo1.Lines.Add('#{'+LowerCase(CcDataset.FieldByName('Nome').AsString)+',jdbcType='+verificadorCodeBanco(LowerCase(CcDataset.FieldByName('Tipo').AsString))+'},');
            CcDataset.Next;
       end;
