@@ -245,6 +245,16 @@ type
     Label12: TLabel;
     Label13: TLabel;
     Label14: TLabel;
+    Label31: TLabel;
+    Edit7: TEdit;
+    Label32: TLabel;
+    Edit8: TEdit;
+    Label33: TLabel;
+    CheckBox26: TCheckBox;
+    Edit9: TEdit;
+    Edit10: TEdit;
+    Edit11: TEdit;
+    Edit12: TEdit;
     procedure SpeedButton1Click(Sender: TObject);
     procedure BtnPesquisaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -290,6 +300,11 @@ begin
       BrvEdit11.Text   := Ini.ReadString( 'Banco de dados','insert'  ,'') ;
       BrvEdit12.Text   := Ini.ReadString( 'Banco de dados','table'  ,'') ;
       BrvEdit13.Text   := Ini.ReadString( 'Banco de dados','function'  ,'') ;
+
+      Edit9.Text    := Ini.ReadString( 'Banco de dados linha','Lprocedure'  ,'') ;
+      Edit10.Text   := Ini.ReadString( 'Banco de dados linha','Linsert'  ,'') ;
+      Edit11.Text   := Ini.ReadString( 'Banco de dados linha','Ltable'  ,'') ;
+      Edit12.Text   := Ini.ReadString( 'Banco de dados linha','Lfunction'  ,'') ;
 
       BrvEdit14.Text   := Ini.ReadString( 'FE','context'  ,'') ;
       BrvEdit15.Text   := Ini.ReadString( 'FE','InternacionalizaçãoI'  ,'') ;
@@ -341,6 +356,10 @@ begin
       Ini.WriteString( 'Banco de dados','insert'   ,BrvEdit11.Text) ;
       Ini.WriteString( 'Banco de dados','table'    ,BrvEdit12.Text) ;
       Ini.WriteString( 'Banco de dados','function' ,BrvEdit13.Text) ;
+      Ini.WriteString( 'Banco de dados linha','Lprocedure'  ,Edit9.Text) ;
+      Ini.WriteString( 'Banco de dados linha','Linsert'     ,Edit10.Text) ;
+      Ini.WriteString( 'Banco de dados linha','Ltable'      ,Edit11.Text) ;
+      Ini.WriteString( 'Banco de dados linha','Lfunction'   ,Edit12.Text) ;
 
 
       Ini.WriteString( 'FE','context'                ,BrvEdit14.Text) ;
@@ -577,9 +596,9 @@ begin
      end;
      if CheckBox50.Checked = true then
      begin
-           Memo24 := GerarScriptBDInsert(Edit1.Text,ClientDataSet1,Memo24);
+           Memo24 := GerarScriptBDInsert(Edit1.Text,ClientDataSet1,Memo24,StrToInt(Edit2.Text),StrToInt(Edit9.Text));
            TabSheet24.TabVisible := true;
-           TabSheet24.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
+           TabSheet24.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'INSERT';
      end;
      if CheckBox51.Checked = true then
      begin
@@ -809,7 +828,7 @@ begin
      end;
      if CheckBox50.Checked = true then
      begin
-           Memo24 := GerarScriptBDInsert(Edit1.Text,ClientDataSet1,Memo24);
+           Memo24 := GerarScriptBDInsert(Edit1.Text,ClientDataSet1,Memo24,StrToInt(Edit2.Text),StrToInt(Edit9.Text));
            TabSheet24.TabVisible := true;
            TabSheet24.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
      end;
@@ -934,7 +953,7 @@ begin
                then Memo1.Lines.Add('Erro na abertura do arquivo !!!')
             else begin
                    lDsLista.LoadFromFile(DlgArquiv.FileName);
-                   lDsLista.Insert(0,'S/N Nome Tipo ab ac aa bb cc dd ee');
+                   lDsLista.Insert(0,'S/N Nome Tipo Tamanho Chave Obrigatorio bb cc dd ee');
                    BrvFuncoesXE.StrToClientDataSet(lDsLista.Text,ClientDataSet1);
                  end;
              TbsConsulta.TabVisible := true;

@@ -13,9 +13,40 @@ uses
   Function PrimeiraMaiscula(Texto: String) : String;
   Function MostrarMemo(Memo: TMemo;Texto:String) : String;
   function verificadorCodeAppBanco(Txt:String):String;
+  function verificadorCodeBanco(Txt:String):String;
 
 implementation
-
+function verificadorCodeBanco(Txt:String):String;
+begin
+      if Pos(UpperCase('Char'),UpperCase(Txt)) <> 0  then
+      begin
+          result := 'VARCHAR';
+      end
+      else if Pos(UpperCase('INTEGER'),UpperCase(Txt)) <> 0  then
+      begin
+          result := 'INTEGER'
+      end
+      else if Pos(UpperCase('SMALLINT'),UpperCase(Txt)) <> 0  then
+      begin
+            result := 'VARCHAR'
+      end
+      else if Pos(UpperCase('NUMERIC'),UpperCase(Txt)) <> 0  then
+      begin
+            result := 'DOUBLE'
+      end
+      else if Pos(UpperCase('TIME'),UpperCase(Txt)) <> 0  then
+      begin
+            result := 'DATE'
+      end
+      else if Pos(UpperCase('Date'),UpperCase(Txt)) <> 0  then
+      begin
+            result := 'DATE'
+      end
+      else
+      begin
+           result := Txt
+      end
+end;
 function verificadorCodeAppBanco(Txt:String):String;
 begin
       if Pos(UpperCase('Char'),UpperCase(Txt)) <> 0  then
