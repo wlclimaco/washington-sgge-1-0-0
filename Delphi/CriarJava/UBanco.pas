@@ -12,13 +12,25 @@ function criarGerarProcedureDelete(Txt:String;CcDataset:TClientDataSet;memo1 :TM
 function criarGerarProcedureSelect(Txt:String;CcDataset:TClientDataSet;memo1 :TMemo):TMemo;
 function criarGerarProcedureSelectById(Txt:String;CcDataset:TClientDataSet;memo1 :TMemo):TMemo;
 function GerarScriptBDInsert(Txt:String;CcDataset:TClientDataSet;memo1 :Tmemo;qntReq:Integer;LinhaInsert:Integer):Tmemo;
-function GerarScriptBDTable(Txt:String;CcDataset:TClientDataSet;memo1 :TMemo):TMemo;
+function GerarScriptBDTable(Txt:String;CcDataset:TClientDataSet;memo1 :Tmemo;banco:String):Tmemo;
 function GerarScriptBDAtributos(Txt:String;CcDataset:TClientDataSet;memo1 :TMemo):TMemo;
 function GerarScriptBDValidators(Txt:String;CcDataset:TClientDataSet;memo1 :TMemo):TMemo;
 function GerarScriptCabecalho(CcDataset:TClientDataSet):AnsiString;
+function GerarScriptBDTradutorBanco(Txt:String;Banco:String):String;
 implementation
 
 uses BrvFuncoesXE;
+
+function GerarScriptBDTradutorBanco(Txt:String;Banco:String):String;
+begin
+      if LowerCase(Banco) = 'postgres' then // postgres
+      begin
+             if Pos(UpperCase('Char'),UpperCase(Txt)) <> 0  then
+                result := 'character varying'
+             else if True then
+                result := Txt;
+      end;
+end;
 
 function GerarScriptCabecalho(CcDataset:TClientDataSet):AnsiString;
 var return:AnsiString;
@@ -158,10 +170,48 @@ begin
       end;
       memo1.Lines.Add(Value);
 end;
-function GerarScriptBDTable(Txt:String;CcDataset:TClientDataSet;memo1 :Tmemo):Tmemo;
+function GerarScriptBDTable(Txt:String;CcDataset:TClientDataSet;memo1 :Tmemo;banco:String):Tmemo;
 begin
       memo1.Lines.Clear;
-      memo1.Lines.Add('	 GerarScriptBDTable');
+
+
+      memo1.Lines.Add('create table '+Txt+' (');
+      CcDataset.First;
+      while not CcDataset.Eof do
+      begin
+            if CcDataset.FieldByName('S/N').AsString = 'S'  then
+            begin
+                  if (LowerCase(CcDataset.FieldByName('Tipo').AsString) = 'integer')or(LowerCase(CcDataset.FieldByName('Tipo').AsString) = 'serial')or(LowerCase(CcDataset.FieldByName('Tipo').AsString) = 'double') then
+                  begin
+                        if CcDataset.FieldByName('Obrigatorio').AsString = 'S' then
+                           memo1.Lines.Add('     '+CcDataset.FieldByName('Nome').AsString+'     '+GerarScriptBDTradutorBanco(CcDataset.FieldByName('Tipo').AsString,banco)+'  NOT NULL ,')
+                        else
+                           memo1.Lines.Add('     '+CcDataset.FieldByName('Nome').AsString+'     '+GerarScriptBDTradutorBanco(CcDataset.FieldByName('Tipo').AsString,banco)+'  NULL ,');
+
+                  end;
+                   if (LowerCase(CcDataset.FieldByName('Tipo').AsString) = 'char') or(LowerCase(CcDataset.FieldByName('Tipo').AsString) = 'varchar') or (UpperCase(CcDataset.FieldByName('Tipo').AsString) = 'SMALLINT') then
+                   begin
+                         if CcDataset.FieldByName('Obrigatorio').AsString = 'S' then
+                            memo1.Lines.Add('     '+CcDataset.FieldByName('Nome').AsString+'     '+GerarScriptBDTradutorBanco(CcDataset.FieldByName('Tipo').AsString,banco)+'('+CcDataset.FieldByName('tamanho').AsString+')   NOT NULL   ,')
+                         else
+                            memo1.Lines.Add('     '+CcDataset.FieldByName('Nome').AsString+'     '+GerarScriptBDTradutorBanco(CcDataset.FieldByName('Tipo').AsString,banco)+'('+CcDataset.FieldByName('tamanho').AsString+')   NULL   ,')
+
+                   end;
+            end;
+            CcDataset.Next;
+      end;
+      memo1.Lines.Add(')');
+      CcDataset.First;
+      while not CcDataset.Eof do
+      begin
+            if LowerCase(CcDataset.FieldByName('Chave').AsString) = 'pk' then
+            begin
+                  memo1.Lines.Add('constraint PK_'+Txt+' primary key ('+CcDataset.FieldByName('Nome').AsString+') ' );
+            end;
+            CcDataset.Next;
+      end;
+
+
 end;
 function GerarScriptBDAtributos(Txt:String;CcDataset:TClientDataSet;memo1 :Tmemo):Tmemo;
 begin

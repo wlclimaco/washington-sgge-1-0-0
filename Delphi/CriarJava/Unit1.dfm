@@ -675,14 +675,12 @@ object Form1: TForm1
     Top = 41
     Width = 949
     Height = 491
-    ActivePage = TabSheet16
+    ActivePage = TbsFiltro
     Align = alClient
     MultiLine = True
     TabOrder = 2
     object TbsFiltro: TTabSheet
       Caption = 'Geral'
-      ExplicitLeft = 1
-      ExplicitTop = 82
       object Label1: TLabel
         Left = 56
         Top = 13
@@ -1253,6 +1251,28 @@ object Form1: TForm1
         Height = 21
         TabOrder = 10
         Text = 'Edit1'
+      end
+      object GroupBox5: TGroupBox
+        Left = 642
+        Top = 62
+        Width = 276
+        Height = 155
+        Caption = 'Banco'
+        TabOrder = 11
+        object ComboBox1: TComboBox
+          Left = 16
+          Top = 40
+          Width = 249
+          Height = 21
+          ItemIndex = 0
+          TabOrder = 0
+          Text = 'Postgres'
+          Items.Strings = (
+            'Postgres'
+            'Oracle'
+            'FireBird'
+            'MySql')
+        end
       end
     end
     object TbsConsulta: TTabSheet
