@@ -257,6 +257,7 @@ type
     Edit12: TEdit;
     GroupBox5: TGroupBox;
     ComboBox1: TComboBox;
+    BrvString1: TBrvString;
     procedure SpeedButton1Click(Sender: TObject);
     procedure BtnPesquisaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -604,13 +605,13 @@ begin
      end;
      if CheckBox51.Checked = true then
      begin
-           Memo25 := GerarScriptBDTable(Edit1.Text,ClientDataSet1,Memo25,ComboBox1.Text);
+           Memo25 := GerarScriptBDTable(Edit7.Text,Edit8.Text,ClientDataSet1,Memo25,ComboBox1.Text);
            TabSheet25.TabVisible := true;
            TabSheet25.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
      end;
      if CheckBox52.Checked = true then
      begin
-           Memo26 := GerarScriptBDAtributos(Edit1.Text,ClientDataSet1,Memo26);
+           Memo26 := GerarScriptBDAtributos(Edit7.Text,Edit8.Text,ClientDataSet1,Memo26);
            TabSheet26.TabVisible := true;
            TabSheet26.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
      end;
@@ -836,13 +837,13 @@ begin
      end;
      if CheckBox51.Checked = true then
      begin
-           Memo25 := GerarScriptBDTable(Edit1.Text,ClientDataSet1,Memo25,ComboBox1.Text);
+           Memo25 := GerarScriptBDTable(Edit7.Text,Edit8.Text,ClientDataSet1,Memo25,ComboBox1.Text);
            TabSheet25.TabVisible := true;
            TabSheet25.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
      end;
      if CheckBox52.Checked = true then
      begin
-           Memo26 := GerarScriptBDAtributos(Edit1.Text,ClientDataSet1,Memo26);
+           Memo26 := GerarScriptBDAtributos(Edit7.Text,Edit8.Text,ClientDataSet1,Memo26);
            TabSheet26.TabVisible := true;
            TabSheet26.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
      end;
@@ -955,7 +956,7 @@ begin
                then Memo1.Lines.Add('Erro na abertura do arquivo !!!')
             else begin
                    lDsLista.LoadFromFile(DlgArquiv.FileName);
-                   lDsLista.Insert(0,'S/N Nome Tipo Tamanho Chave Obrigatorio bb cc dd ee');
+                   lDsLista.Insert(0,'S/N Nome Tipo Tamanho Chave Obrigatorio Dominio Mascara NomeFK Help Apelido');
                    BrvFuncoesXE.StrToClientDataSet(lDsLista.Text,ClientDataSet1);
                  end;
              TbsConsulta.TabVisible := true;

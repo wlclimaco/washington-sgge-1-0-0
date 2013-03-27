@@ -4,7 +4,7 @@ unit UBanco;
 
 interface
 
-uses  SysUtils,DBClient, DB,StdCtrls;
+uses  SysUtils,DBClient, DB,StdCtrls,BrvString;
 
 function criarGerarProcedureInsert(Txt:String;CcDataset:TClientDataSet;memo1 :TMemo):TMemo;
 function criarGerarProcedureUpdate(Txt:String;CcDataset:TClientDataSet;memo1 :TMemo):TMemo;
@@ -12,14 +12,16 @@ function criarGerarProcedureDelete(Txt:String;CcDataset:TClientDataSet;memo1 :TM
 function criarGerarProcedureSelect(Txt:String;CcDataset:TClientDataSet;memo1 :TMemo):TMemo;
 function criarGerarProcedureSelectById(Txt:String;CcDataset:TClientDataSet;memo1 :TMemo):TMemo;
 function GerarScriptBDInsert(Txt:String;CcDataset:TClientDataSet;memo1 :Tmemo;qntReq:Integer;LinhaInsert:Integer):Tmemo;
-function GerarScriptBDTable(Txt:String;CcDataset:TClientDataSet;memo1 :Tmemo;banco:String):Tmemo;
-function GerarScriptBDAtributos(Txt:String;CcDataset:TClientDataSet;memo1 :TMemo):TMemo;
+function GerarScriptBDTable(Txt:String;DsTab:String;CcDataset:TClientDataSet;memo1 :Tmemo;banco:String):Tmemo;
+function GerarScriptBDAtributos(Txt:String;dSTABE:String;CcDataset:TClientDataSet;memo1 :Tmemo):TMemo;
 function GerarScriptBDValidators(Txt:String;CcDataset:TClientDataSet;memo1 :TMemo):TMemo;
 function GerarScriptCabecalho(CcDataset:TClientDataSet):AnsiString;
 function GerarScriptBDTradutorBanco(Txt:String;Banco:String):String;
 implementation
 
+
 uses BrvFuncoesXE;
+var BrvString: TBrvString;
 
 function GerarScriptBDTradutorBanco(Txt:String;Banco:String):String;
 begin
@@ -170,11 +172,9 @@ begin
       end;
       memo1.Lines.Add(Value);
 end;
-function GerarScriptBDTable(Txt:String;CcDataset:TClientDataSet;memo1 :Tmemo;banco:String):Tmemo;
+function GerarScriptBDTable(Txt:String;DsTab:String;CcDataset:TClientDataSet;memo1 :Tmemo;banco:String):Tmemo;
 begin
       memo1.Lines.Clear;
-
-
       memo1.Lines.Add('create table '+Txt+' (');
       CcDataset.First;
       while not CcDataset.Eof do
@@ -210,13 +210,47 @@ begin
             end;
             CcDataset.Next;
       end;
-
+          memo1.Lines.Add('COMMENT ON TABLE '+Txt+' '''+DsTab+'''');
 
 end;
-function GerarScriptBDAtributos(Txt:String;CcDataset:TClientDataSet;memo1 :Tmemo):Tmemo;
+function GerarScriptBDAtributos(Txt:String;dSTABE:String;CcDataset:TClientDataSet;memo1 :Tmemo):Tmemo;
+var Input : String;
 begin
       memo1.Lines.Clear;
-      memo1.Lines.Add('	 GerarScriptBDAtributos');
+      memo1.Lines.Add('INSERT INTO S008 (NMTABELA,DSTABELA)VALUES('''+Txt+''','''+dSTABE+''')');
+      memo1.Lines.Add('INSERT INTO S009 (nmtabela,nmatribu,dsatribu,tpatribu,tpmascar,Dsmascar,dshelp,tmatribu');
+      memo1.Lines.Add(')value ');
+      CcDataset.First;
+      while not CcDataset.Eof do
+      begin
+            if CcDataset.FieldByName('S/N').AsString = 'S'  then
+            begin
+                  memo1.Lines.Add('  '''+Txt+''','''+CcDataset.FieldByName('Nome').AsString+''','''+CcDataset.FieldByName('Apelido').AsString+''','''+CcDataset.FieldByName('Tipo').AsString+''','' '' ,'''+CcDataset.FieldByName('Mascara').AsString+''','''+CcDataset.FieldByName('Help').AsString+''','''+CcDataset.FieldByName('Tamanho').AsString+''',');
+            end;
+            CcDataset.Next;
+      end;
+      memo1.Lines.Add(';');
+      CcDataset.First;
+      while not CcDataset.Eof do
+      begin
+            if CcDataset.FieldByName('S/N').AsString = 'S'  then
+            begin
+                  if not(CcDataset.FieldByName('Dominio').AsString <> '') then
+                  begin
+                        memo1.Lines.Add('INSERT INTO S010 (NMTABELA,NMATRIBU,DSDOMINI,VRDOMINI)VALUES('+Txt+','+CcDataset.FieldByName('NOME').AsString+','+CcDataset.FieldByName('Dominio').AsString+','+CcDataset.FieldByName('Dominio').AsString+');');
+                  end;
+                   if LowerCase(CcDataset.FieldByName('Chave').AsString) <> 'pk' then
+                  begin
+                        memo1.Lines.Add('INSERT INTO S011 (NMTABELA,NMATRIBU)VALUES('+Txt+','+CcDataset.FieldByName('NOME').AsString+');');
+                  end;
+                   if LowerCase(CcDataset.FieldByName('Chave').AsString) <> 'fk' then
+                  begin
+                        memo1.Lines.Add('INSERT INTO S012 (NMCHAEST,NMTABELA,NMTABEST,TPCHAEST)VALUES(FK_'+Txt+'_'+CcDataset.FieldByName('NomeFK').AsString+','+Txt+','+CcDataset.FieldByName('NomeFK').AsString+',''C'');');
+                  end;
+            end;
+            CcDataset.Next;
+      end;
+
 end;
 function GerarScriptBDValidators(Txt:String;CcDataset:TClientDataSet;memo1 :Tmemo):Tmemo;
 begin

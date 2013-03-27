@@ -675,7 +675,7 @@ object Form1: TForm1
     Top = 41
     Width = 949
     Height = 491
-    ActivePage = TbsFiltro
+    ActivePage = TabSheet18
     Align = alClient
     MultiLine = True
     TabOrder = 2
@@ -2267,7 +2267,7 @@ object Form1: TForm1
           item
             Expanded = False
             FieldName = 'Tipo'
-            Width = 200
+            Width = 107
             Visible = True
             BrConsulta = 0
             BrPermissao = []
@@ -2277,7 +2277,7 @@ object Form1: TForm1
           item
             Expanded = False
             FieldName = 'Tamanho'
-            Width = 163
+            Width = 50
             Visible = True
             BrConsulta = 0
             BrPermissao = []
@@ -2290,7 +2290,7 @@ object Form1: TForm1
             PickList.Strings = (
               'PK'
               'FK')
-            Width = 72
+            Width = 40
             Visible = True
             BrConsulta = 0
             BrPickValue.Strings = (
@@ -2304,12 +2304,60 @@ object Form1: TForm1
             ButtonStyle = cbsNone
             Expanded = False
             FieldName = 'Obrigatorio'
-            Width = 150
+            Width = 63
             Visible = True
             BrConsulta = 0
             BrPermissao = []
             BrValueChecked = 'S'
             BrValueUnchecked = 'N'
+            BrValueHalfChecked = False
+            BrSaveOnClick = False
+          end
+          item
+            Expanded = False
+            FieldName = 'Apelido'
+            Visible = True
+            BrConsulta = 0
+            BrPermissao = []
+            BrValueHalfChecked = False
+            BrSaveOnClick = False
+          end
+          item
+            Expanded = False
+            FieldName = 'Dominio'
+            Width = 97
+            Visible = True
+            BrConsulta = 0
+            BrPermissao = []
+            BrValueHalfChecked = False
+            BrSaveOnClick = False
+          end
+          item
+            Expanded = False
+            FieldName = 'Mascara'
+            Visible = True
+            BrConsulta = 0
+            BrPermissao = []
+            BrValueHalfChecked = False
+            BrSaveOnClick = False
+          end
+          item
+            Expanded = False
+            FieldName = 'NomeFK'
+            Width = 87
+            Visible = True
+            BrConsulta = 0
+            BrPermissao = []
+            BrValueHalfChecked = False
+            BrSaveOnClick = False
+          end
+          item
+            Expanded = False
+            FieldName = 'Help'
+            Width = 144
+            Visible = True
+            BrConsulta = 0
+            BrPermissao = []
             BrValueHalfChecked = False
             BrSaveOnClick = False
           end>
@@ -3009,5 +3057,9 @@ object Form1: TForm1
   object LspS049: TBrvListParam
     Left = 8
     Top = 136
+  end
+  object BrvString1: TBrvString
+    Left = 808
+    Top = 8
   end
 end
