@@ -675,7 +675,7 @@ object Form1: TForm1
     Top = 41
     Width = 949
     Height = 491
-    ActivePage = TabSheet18
+    ActivePage = TbsFiltro
     Align = alClient
     MultiLine = True
     TabOrder = 2
