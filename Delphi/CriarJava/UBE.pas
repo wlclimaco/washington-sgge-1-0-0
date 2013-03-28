@@ -1311,7 +1311,7 @@ function gerarModelo(Txt:String;CcDataset:TClientDataSet;memo1 :Tmemo):Tmemo;
 BEGIN
      try
          memo1.Lines.Clear;
-         memo1.Lines.Add('public class '+Txt+' extends SensusModel'); //escreve no arquivo e desce uma linha
+         memo1.Lines.Add('public class '+BrvFuncoesXE.PrimeiraMaiscula(Txt)+' extends SensusModel'); //escreve no arquivo e desce uma linha
          memo1.Lines.Add('{');
          CcDataset.First;
          while not CcDataset.Eof do
