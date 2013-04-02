@@ -98,6 +98,10 @@
 		<property name="lightingControlInquiryRequestValidationController" ref="lightingControlInquiryRequestValidationController" />
 		<property name="lightSelectionRequestValidationController" 	ref="lightSelectionRequestValidationController"/>
 	</bean>
+	
+	
+	
+	
 
 	<bean id="processBCF" class="com.sensus.mlc.process.bcf.impl.ProcessBCFImpl">
 		<property name="processBCL" ref="processBCLTarget" />

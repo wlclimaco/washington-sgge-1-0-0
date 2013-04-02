@@ -91,6 +91,21 @@
 		<property name="systemId" ref="systemIdTarget" />
 	</bean>
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<bean id="smartPointProcessorBCLTarget" class="com.sensus.mlc.smartpoint.bcl.impl.SmartPointProcessorBCLImpl">
 		<property name="smartPointDAC" ref="smartPointDACTarget" />
 		<property name="processBCL" ref="processBCLTarget"/>
