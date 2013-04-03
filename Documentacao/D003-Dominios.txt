@@ -1,0 +1,4 @@
+nmtabela VARCHAR2 15 NOTNULL
+nmatribu VARCHAR2 8 NOTNULL
+dsdomini VARCHAR2 60
+vrdomini VARCHAR2 20   

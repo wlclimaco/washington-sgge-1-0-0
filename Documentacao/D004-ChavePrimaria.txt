@@ -1,0 +1,3 @@
+nmtabela VARCHAR2 15 NOTNULL
+nmatribu VARCHAR2 8 NOTNULL
+nrseqkey INTEGER

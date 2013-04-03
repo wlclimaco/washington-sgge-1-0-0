@@ -1,0 +1,2 @@
+nmtabela VARCHAR2 15 NOTNULL
+dstabela VARCHAR2 30 
