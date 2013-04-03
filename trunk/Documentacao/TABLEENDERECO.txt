@@ -1,23 +1,23 @@
-    CodEnd             INTEGER,
-	ENDERECO           CHAR(50),
-    NUMERO             INTEGER,
-    COMPLEMENTO        CHAR(20),
-    BAIRRO             CHAR(30),
-    CEP                CHAR(8),
-    CIDADE             CHAR(30),
-    UF                 CHAR(2),
-    DDD                CHAR(4),
-    FONE1              CHAR(12),
-	FONE2              CHAR(12),
-    FAX                CHAR(8),
-    EMAIL              CHAR(50),
-    WWW                CHAR(50),
-    CODDIST            INTEGER,
-	CODMUNIC           CHAR(7),
-    SIGLAUF            CHAR(2),
-    CODPAIS            SMALLINT,
-    CODEMPUC           INTEGER,
-    CODFILIALUC        SMALLINT,
-    CODUNIFCOD         INTEGER,
-    INSCMUN            CHAR(15),      
-	LISTINSALT         List<ALTERINSE>,
+    CodEnd             INTEGER
+	ENDERECO           CHAR 50
+    NUMERO             INTEGER
+    COMPLEMENTO        CHAR 20
+    BAIRRO             CHAR 30
+    CEP                CHAR 8
+    CIDADE             CHAR 30
+    UF                 CHAR 2
+    DDD                CHAR 4
+    FONE1              CHAR 12
+	FONE2              CHAR 12
+    FAX                CHAR 8
+    EMAIL              CHAR 50
+    WWW                CHAR 50
+    CODDIST            INTEGER
+	CODMUNIC           CHAR 7
+    SIGLAUF            CHAR 2
+    CODPAIS            Pais
+    CODEMPUC           INTEGER
+    CODFILIALUC        Integer
+    CODUNIFCOD         INTEGER
+    INSCMUN            CHAR 15      
+	LISTINSALT         List<Alterinse>

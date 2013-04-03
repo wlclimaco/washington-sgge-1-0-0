@@ -1,0 +1,9 @@
+cdtabela Integer NOTNULL      
+nmtabela VARCHAR2 15 NOTNULL
+nmatribu VARCHAR2 8  NOTNULL
+dsatribu VARCHAR2 30
+tpatribu VARCHAR2 1
+dsmascar VARCHAR2 30
+dshelp   VARCHAR2 255
+tmatribu Integer 
+nrseqatr Integer 
