@@ -1,0 +1,100 @@
+Memo1
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Edit1">
+<resultMap id="Edit1sResult" type="Edit1">
+</resultMap>
+<sql id="allEdit1Columms">
+SELECT 
+CodEnd,
+	ENDERECO,
+NUMERO,
+COMPLEMENTO,
+BAIRRO,
+CEP,
+CIDADE,
+UF,
+DDD,
+FONE1,
+	FONE2,
+FAX,
+EMAIL,
+WWW,
+CODDIST,
+	CODMUNIC,
+SIGLAUF,
+CODPAIS,
+CODEMPUC,
+CODFILIALUC,
+CODUNIFCOD,
+INSCMUN,
+LISTINSALT,
+</sql>
+<!-- Fetch All Edit1s -->
+<select id="fetchAllEdit1s" parameterType="Map" resultMap="Edit1sResult">
+SELECT  <include refid="allEdit1Columms"/>
+FROM Edit1;   
+</select>
+<select id="fetchAllEdit1ById"  parameterType="Map" resultMap="Edit1Result">
+   select <include refid="allEdit1Columms"/>
+   from Edit1 e   
+   where   
+   e.codemp = #{codemp}  
+</select>
+<!-- Insert Edit1 -->
+<select id="insertEdit1" parameterType="Edit1" resultType="int">
+SELECT ins_Edit1 (   
+#{codend,jdbcType=INTEGER},
+#{	endereco,jdbcType=VARCHAR},
+#{numero,jdbcType=INTEGER},
+#{complemento,jdbcType=VARCHAR},
+#{bairro,jdbcType=VARCHAR},
+#{cep,jdbcType=VARCHAR},
+#{cidade,jdbcType=VARCHAR},
+#{uf,jdbcType=VARCHAR},
+#{ddd,jdbcType=VARCHAR},
+#{fone1,jdbcType=VARCHAR},
+#{	fone2,jdbcType=VARCHAR},
+#{fax,jdbcType=VARCHAR},
+#{email,jdbcType=VARCHAR},
+#{www,jdbcType=VARCHAR},
+#{coddist,jdbcType=INTEGER},
+#{	codmunic,jdbcType=VARCHAR},
+#{siglauf,jdbcType=VARCHAR},
+#{codpais,jdbcType=pais},
+#{codempuc,jdbcType=INTEGER},
+#{codfilialuc,jdbcType=INTEGER},
+#{codunifcod,jdbcType=INTEGER},
+#{inscmun,jdbcType=VARCHAR},
+#{listinsalt,jdbcType=list<alterinse>},
+</select>
+<!-- Update Edit1 -->
+<select id="updateEdit1" parameterType="Edit1" resultType="int">
+SELECT upd_Edit1 (   
+#{codend,jdbcType=INTEGER},
+#{	endereco,jdbcType=VARCHAR},
+#{numero,jdbcType=INTEGER},
+#{complemento,jdbcType=VARCHAR},
+#{bairro,jdbcType=VARCHAR},
+#{cep,jdbcType=VARCHAR},
+#{cidade,jdbcType=VARCHAR},
+#{uf,jdbcType=VARCHAR},
+#{ddd,jdbcType=VARCHAR},
+#{fone1,jdbcType=VARCHAR},
+#{	fone2,jdbcType=VARCHAR},
+#{fax,jdbcType=VARCHAR},
+#{email,jdbcType=VARCHAR},
+#{www,jdbcType=VARCHAR},
+#{coddist,jdbcType=INTEGER},
+#{	codmunic,jdbcType=VARCHAR},
+#{siglauf,jdbcType=VARCHAR},
+#{codpais,jdbcType=pais},
+#{codempuc,jdbcType=INTEGER},
+#{codfilialuc,jdbcType=INTEGER},
+#{codunifcod,jdbcType=INTEGER},
+#{inscmun,jdbcType=VARCHAR},
+#{listinsalt,jdbcType=list<alterinse>},
+</select>
+</mapper>
