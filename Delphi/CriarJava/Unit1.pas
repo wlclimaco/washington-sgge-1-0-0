@@ -258,6 +258,14 @@ type
     GroupBox5: TGroupBox;
     ComboBox1: TComboBox;
     BrvString1: TBrvString;
+    TabSheet43: TTabSheet;
+    TabSheet44: TTabSheet;
+    TabSheet45: TTabSheet;
+    TabSheet46: TTabSheet;
+    Memo44: TMemo;
+    Memo45: TMemo;
+    Memo46: TMemo;
+    Memo47: TMemo;
     procedure SpeedButton1Click(Sender: TObject);
     procedure BtnPesquisaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -455,7 +463,7 @@ Begin
                 Rewrite(F); //abre o arquivo para escrita
                 {$I+}
                 Writeln(F,lDsLista.Text);
-                 Closefile(F);
+                Closefile(F);
             finally
                 FreeAndNil(lDsLista);
             end;
@@ -506,6 +514,10 @@ begin
       TabSheet40.TabVisible := false;
       TabSheet41.TabVisible := false;
       TabSheet42.TabVisible := false;
+      TabSheet43.TabVisible := false;
+      TabSheet44.TabVisible := false;
+      TabSheet45.TabVisible := false;
+      TabSheet46.TabVisible := false;
       TbsConsulta.TabVisible := false;
       LerConfiguracao;
 end;
@@ -545,10 +557,6 @@ begin
      begin
            GerarArquivo(''+PrimeiraMaiscula(Edit1.Text)+'',BrvEdit1.Text,'.XML',Memo10,0);
      end;
-     if CheckBox27.Checked = true then
-     begin
-           GerarArquivo(''+PrimeiraMaiscula(Edit1.Text)+'-sql-map-config',BrvEdit1.Text,'.xml',Memo11,0);
-     end;
      if CheckBox9.Checked = true then
      begin
            GerarArquivo(PrimeiraMaiscula(Edit1.Text),BrvEdit1.Text,'.java',Memo12,0);
@@ -561,6 +569,11 @@ begin
      begin
            GerarArquivo(PrimeiraMaiscula(Edit1.Text)+'Response',BrvEdit1.Text,'.java',Memo14,0);
      end;
+     if CheckBox27.Checked = true then
+     begin
+           GerarArquivo(''+PrimeiraMaiscula(Edit1.Text)+'-sql-map-config',BrvEdit1.Text,'.xml',Memo11,0);
+     end;
+
      if CheckBox18.Checked = true then
      begin
            GerarArquivo('Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Response',BrvEdit1.Text,'.java',Memo15,0);
@@ -569,21 +582,54 @@ begin
      begin
            GerarArquivo('Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request',BrvEdit1.Text,'.java',Memo16,0);
      end;
-     if CheckBox11.Checked = true then
-     begin
-           GerarArquivo(''+PrimeiraMaiscula(Edit1.Text)+'APIControler',BrvEdit1.Text,'.java',Memo17,0);
-     end;
+
      if CheckBox28.Checked = true then
      begin
-           GerarArquivo('',BrvEdit2.Text,'',Memo19,StrToInt(Edit3.Text));
+           IncluirNoArq(Memo19,StrToInt(Edit9.Text),BrvEdit10.Text);
      end;
      if CheckBox29.Checked = true then
      begin
-           GerarArquivo('',BrvEdit3.Text,'',Memo20,StrToInt(Edit4.Text));
+           IncluirNoArq(Memo20,StrToInt(Edit9.Text),BrvEdit10.Text);
      end;
      if CheckBox30.Checked = true then
      begin
-           GerarArquivo('',BrvEdit4.Text,'',Memo21,StrToInt(Edit5.Text));
+           IncluirNoArq(Memo21,StrToInt(Edit9.Text),BrvEdit10.Text);
+     end;
+     if CheckBox31.Checked = true then
+     begin
+           IncluirNoArq(Memo22,StrToInt(Edit9.Text),BrvEdit10.Text);
+     end;
+     if CheckBox32.Checked = true then
+     begin
+           IncluirNoArq(Memo23,StrToInt(Edit9.Text),BrvEdit10.Text);
+     end;
+     if CheckBox46.Checked = true then
+     begin
+           IncluirNoArq(Memo42,StrToInt(Edit3.Text),BrvEdit2.Text);
+     end;
+     if CheckBox47.Checked = true then
+     begin
+           IncluirNoArq(Memo43,StrToInt(Edit4.Text),BrvEdit3.Text);
+     end;
+     if CheckBox48.Checked = true then
+     begin
+           IncluirNoArq(Memo44,StrToInt(Edit5.Text),BrvEdit4.Text);
+     end;
+     if CheckBox49.Checked = true then
+     begin
+           IncluirNoArq(Memo45,StrToInt(Edit6.Text),BrvEdit5.Text);
+     end;
+     if CheckBox50.Checked = true then
+     begin
+           IncluirNoArq(Memo24,StrToInt(Edit10.Text),BrvEdit11.Text);
+     end;
+     if CheckBox51.Checked = true then
+     begin
+           IncluirNoArq(Memo25,StrToInt(Edit11.Text),BrvEdit12.Text);
+     end;
+     if CheckBox52.Checked = true then
+     begin
+           IncluirNoArq(Memo26,StrToInt(Edit10.Text),BrvEdit11.Text);
      end;
      if CheckBox31.Checked = true then
      begin
@@ -597,24 +643,8 @@ begin
            TabSheet23.TabVisible := true;
            TabSheet23.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
      end;
-     if CheckBox50.Checked = true then
-     begin
-           Memo24 := GerarScriptBDInsert(Edit1.Text,ClientDataSet1,Memo24,StrToInt(Edit2.Text),StrToInt(Edit9.Text));
-           TabSheet24.TabVisible := true;
-           TabSheet24.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'INSERT';
-     end;
-     if CheckBox51.Checked = true then
-     begin
-           Memo25 := GerarScriptBDTable(Edit7.Text,Edit8.Text,ClientDataSet1,Memo25,ComboBox1.Text);
-           TabSheet25.TabVisible := true;
-           TabSheet25.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
-     end;
-     if CheckBox52.Checked = true then
-     begin
-           Memo26 := GerarScriptBDAtributos(Edit7.Text,Edit8.Text,ClientDataSet1,Memo26);
-           TabSheet26.TabVisible := true;
-           TabSheet26.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
-     end;
+
+
      if CheckBox53.Checked = true then
      begin
            Memo27 := GerarScriptBDValidators(Edit1.Text,ClientDataSet1,Memo27);
@@ -706,7 +736,6 @@ begin
      GravarConfiguracao;
      if CheckBox1.Checked = true then
      begin
-
            Memo3 :=  UBE.criarCodeIClasseBCF(Edit1.Text,ClientDataSet1,Memo3);
            TabSheet1.TabVisible := true;
            TabSheet1.Caption := 'IClasseBCF';
@@ -755,12 +784,6 @@ begin
            TabSheet8.TabVisible := true;
            TabSheet8.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'.XML';
      end;
-     if CheckBox27.Checked = true then
-     begin
-           Memo11 := criarCodeClasseSqlMapConfigXml(Edit1.Text,Memo11);
-           TabSheet9.TabVisible := true;
-           TabSheet9.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'.Sql.Map.Config.Xml';
-     end;
      if CheckBox9.Checked = true then
      begin
            Memo12 := gerarModelo(Edit1.Text,ClientDataSet1,Memo12);
@@ -780,6 +803,20 @@ begin
            TabSheet12.TabVisible := true;
            TabSheet12.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'Response';
      end;
+     if CheckBox12.Checked = true then
+     begin
+
+           Memo14 := criarCodeClasseAPIControler(Edit1.Text,ClientDataSet1,Memo14);
+           TabSheet12.TabVisible := true;
+           TabSheet12.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIController';
+     end;
+     if CheckBox27.Checked = true then
+     begin
+           Memo11 := criarCodeClasseSqlMapConfigXml(Edit1.Text,Memo11);
+           TabSheet9.TabVisible := true;
+           TabSheet9.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'.Sql.Map.Config.Xml';
+     end;
+
      if CheckBox18.Checked = true then
      begin
 
@@ -793,75 +830,70 @@ begin
            TabSheet14.TabVisible := true;
            TabSheet14.Caption := 'Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request';
      end;
-     if CheckBox11.Checked = true then
-     begin
-           Memo17 := criarCodeClasseAPIControler(Edit1.Text,ClientDataSet1,Memo17);
-           TabSheet15.TabVisible := true;
-           TabSheet15.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
-     end;
+
      if CheckBox28.Checked = true then
      begin
-           Memo19 := criarGerarProcedureInsert(Edit1.Text,ClientDataSet1,Memo19);
+           criarGerarProcedureInsert(Edit1.Text,ClientDataSet1,Memo19);
            TabSheet19.TabVisible := true;
            TabSheet19.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
      end;
      if CheckBox29.Checked = true then
      begin
-           Memo20 := criarGerarProcedureUpdate(Edit1.Text,ClientDataSet1,Memo20);
+           criarGerarProcedureUpdate(Edit1.Text,ClientDataSet1,Memo20);
            TabSheet20.TabVisible := true;
            TabSheet20.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
      end;
      if CheckBox30.Checked = true then
      begin
-           Memo21 := criarGerarProcedureDelete(Edit1.Text,ClientDataSet1,Memo21);
+           criarGerarProcedureDelete(Edit1.Text,ClientDataSet1,Memo21);
            TabSheet21.TabVisible := true;
            TabSheet21.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
      end;
      if CheckBox31.Checked = true then
      begin
-           Memo22 := criarGerarProcedureSelect(Edit1.Text,ClientDataSet1,Memo22);
+           criarGerarProcedureSelect(Edit1.Text,ClientDataSet1,Memo22);
            TabSheet22.TabVisible := true;
            TabSheet22.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
      end;
      if CheckBox32.Checked = true then
      begin
-           Memo23 := criarGerarProcedureSelectById(Edit1.Text,ClientDataSet1,Memo23);
+           criarGerarProcedureSelectById(Edit1.Text,ClientDataSet1,Memo23);
            TabSheet23.TabVisible := true;
            TabSheet23.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
      end;
      if CheckBox50.Checked = true then
      begin
-           Memo24 := GerarScriptBDInsert(Edit1.Text,ClientDataSet1,Memo24,StrToInt(Edit2.Text),StrToInt(Edit9.Text));
+           GerarScriptBDInsert(Edit1.Text,ClientDataSet1,Memo24,StrToInt(Edit2.Text),StrToInt(Edit9.Text));
            TabSheet24.TabVisible := true;
-           TabSheet24.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
+           TabSheet24.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'INSERT';
      end;
      if CheckBox51.Checked = true then
      begin
-           Memo25 := GerarScriptBDTable(Edit7.Text,Edit8.Text,ClientDataSet1,Memo25,ComboBox1.Text);
+           GerarScriptBDTable(Edit7.Text,Edit8.Text,ClientDataSet1,Memo25,ComboBox1.Text);
            TabSheet25.TabVisible := true;
-           TabSheet25.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
+           TabSheet25.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'Gerar Tabela - '+ComboBox1.Text;
      end;
      if CheckBox52.Checked = true then
      begin
-           Memo26 := GerarScriptBDAtributos(Edit7.Text,Edit8.Text,ClientDataSet1,Memo26);
+           GerarScriptBDAtributos(Edit7.Text,Edit8.Text,ClientDataSet1,Memo26);
            TabSheet26.TabVisible := true;
-           TabSheet26.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
+           TabSheet26.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'Script Atributos';
      end;
      if CheckBox53.Checked = true then
      begin
-           Memo27 := GerarScriptBDValidators(Edit1.Text,ClientDataSet1,Memo27);
+           GerarScriptBDValidators(Edit1.Text,ClientDataSet1,Memo27);
            TabSheet27.TabVisible := true;
            TabSheet27.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
      end;
      if CheckBox20.Checked = true then
      begin
-           Memo28 := criarCodeClasseTest(Edit1.Text,ClientDataSet1,Memo28);
+           criarCodeClasseTest(Edit1.Text,ClientDataSet1,Memo28);
            TabSheet28.TabVisible := true;
            TabSheet28.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
      end;
      if CheckBox21.Checked = true then
      begin
-           Memo29 := criarCodeClasseTestMock(Edit1.Text,ClientDataSet1,Memo29);
+           criarCodeClasseTestMock(Edit1.Text,ClientDataSet1,Memo29);
            TabSheet29.TabVisible := true;
            TabSheet29.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
      end;
@@ -925,11 +957,35 @@ begin
            TabSheet39.TabVisible := true;
            TabSheet39.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
      end;
-      if CheckBox45.Checked = true then
+     if CheckBox45.Checked = true then
      begin
-           Memo40 := criarCodeClasseSelenium(Edit1.Text,ClientDataSet1,Memo40);
+           Memo41 := criarCodeClasseSelenium(Edit1.Text,ClientDataSet1,Memo41);
            TabSheet40.TabVisible := true;
            TabSheet40.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'APIControler';
+     end;
+     if CheckBox46.Checked = true then
+     begin
+           criarBcfApplication(Edit1.Text,ClientDataSet1,Memo42);
+           TabSheet41.TabVisible := true;
+           TabSheet41.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'-BcfApplication';
+     end;
+     if CheckBox47.Checked = true then
+     begin
+           criarBclApplication(Edit1.Text,ClientDataSet1,Memo43);
+           TabSheet42.TabVisible := true;
+           TabSheet42.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'-BclApplication';
+     end;
+     if CheckBox48.Checked = true then
+     begin
+           criarDataAcessApplication(Edit1.Text,ClientDataSet1,Memo44);
+           TabSheet43.TabVisible := true;
+           TabSheet43.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'-DataAcessApplication';
+     end;
+     if CheckBox49.Checked = true then
+     begin
+           criarValidationApplication(Edit1.Text,ClientDataSet1,Memo45);
+           TabSheet44.TabVisible := true;
+           TabSheet44.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'-ValidationApplication';
      end;
 end;
 
