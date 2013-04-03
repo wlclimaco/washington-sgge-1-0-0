@@ -7,6 +7,10 @@
 -- -------------------  --------------------- -------------------------
 --
 ------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
 CREATE OR REPLACE FUNCTION add_smartpoint_to_group(p_rni_id integer, p_grouping_id integer, p_create_user character varying)
   RETURNS integer AS
 $$
