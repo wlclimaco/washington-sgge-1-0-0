@@ -7,6 +7,7 @@ uses
 
   procedure StrToClientDataSet(pDsLista: String; CcDataTmp: TClientDataSet);
   procedure TocarSpacoPosVirgula(pDsLista: String);
+  function IncluirNoArq(Texto:TMemo;Linha:Integer;Arquivo:String):Boolean;
   function escreverCode(Txt:String):String;
   function verificadorCode(Txt:String):String;
   function escreverCodeXML(Txt:String;Op:Integer):String;
@@ -16,6 +17,29 @@ uses
   function verificadorCodeBanco(Txt:String):String;
 
 implementation
+
+function IncluirNoArq(Texto:TMemo;Linha:Integer;Arquivo:String):Boolean;
+var arq        : TextFile;
+    count      : Integer;
+    lDsLista   : TStrings;
+begin
+    try
+        lDsLista  := TStringList.Create;
+        AssignFile(arq, Arquivo);
+        lDsLista.LoadFromFile(Arquivo);
+        Reset(arq);
+        count := 0 ;
+        linha := linha + 1;
+        lDsLista.Insert(linha,Texto.Lines.Text);
+        Rewrite(arq); //abre o arquivo para escrita
+        {$I+}
+        Writeln(arq,lDsLista.Text);
+        Closefile(arq);
+    finally
+        FreeAndNil(lDsLista);
+    end;
+end;
+
 function verificadorCodeBanco(Txt:String):String;
 begin
       if Pos(UpperCase('Char'),UpperCase(Txt)) <> 0  then

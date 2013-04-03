@@ -22,7 +22,7 @@ begin
 		 memo1.Lines.Add('      <property name="'+Txt+'ListValidationController" ref="'+Txt+'ListValidationController" />  ');
 	   memo1.Lines.Add('  </bean>');
      memo1.Lines.Add('');
-     memo1.Lines.Add('<!-- ---------------------------------------------------------------------------------------------------------------------');
+     memo1.Lines.Add('<!-- --------------------------------------------------------------------------------------------------------------------- -->');
 end;
 function criarBclApplication(Txt:String;CcDataset:TClientDataSet;memo1 :TMemo):TMemo;
 begin
@@ -33,7 +33,7 @@ begin
 		 memo1.Lines.Add('     <property name="'+Txt+'DAC" ref="'+Txt+'DACTarget" />');
 	   memo1.Lines.Add('  </bean>');
      memo1.Lines.Add('');
-     memo1.Lines.Add('<!-- ---------------------------------------------------------------------------------------------------------------------');
+     memo1.Lines.Add('<!-- --------------------------------------------------------------------------------------------------------------------- -->');
 end;
 function criarDataAcessApplication(Txt:String;CcDataset:TClientDataSet;memo1 :TMemo):TMemo;
 begin
@@ -51,7 +51,7 @@ begin
      memo1.Lines.Add('    <property name="sqlSessionFactory" ref="'+Txt+'-sqlSessionFactory" />');
      memo1.Lines.Add('</bean>');
      memo1.Lines.Add('');
-     memo1.Lines.Add('<!-- ---------------------------------------------------------------------------------------------------------------------');
+     memo1.Lines.Add('<!-- --------------------------------------------------------------------------------------------------------------------- -->');
 
 end;
 function criarValidationApplication(Txt:String;CcDataset:TClientDataSet;memo1 :TMemo):TMemo;
@@ -67,6 +67,14 @@ begin
       memo1.Lines.Add('		</list>    ');
       memo1.Lines.Add('	</property>  ');
       memo1.Lines.Add('</bean>    ');
-      memo1.Lines.Add('<!-- ---------------------------------------------------------------------------------------------------------------------');
+      memo1.Lines.Add('<bean id="'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'ListValidator" class="com.sensus.mlc.'+Txt+'.validation.'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'ListValidator" />');
+	    memo1.Lines.Add('<bean id="'+Txt+'ListValidationController" class="com.sensus.common.validation.ValidationController">');
+		  memo1.Lines.Add('   <property name="validators">');
+			memo1.Lines.Add('       <list>');
+			memo1.Lines.Add('	            <ref bean="'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'ListValidator" /> ');
+			memo1.Lines.Add('       </list> ');
+		  memo1.Lines.Add('   </property>  ');
+	    memo1.Lines.Add('</bean> ');
+      memo1.Lines.Add('<!-- --------------------------------------------------------------------------------------------------------------------- -->');
 end;
 end.

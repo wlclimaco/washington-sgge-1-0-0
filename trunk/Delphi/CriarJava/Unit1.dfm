@@ -675,7 +675,7 @@ object Form1: TForm1
     Top = 41
     Width = 949
     Height = 491
-    ActivePage = TbsFiltro
+    ActivePage = TabSheet18
     Align = alClient
     MultiLine = True
     TabOrder = 2
@@ -2706,12 +2706,73 @@ object Form1: TForm1
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
+        ExplicitTop = -2
       end
     end
     object TabSheet42: TTabSheet
       Caption = 'TabSheet42'
       ImageIndex = 43
       object Memo43: TMemo
+        Left = 0
+        Top = 0
+        Width = 941
+        Height = 409
+        Align = alClient
+        Lines.Strings = (
+          'Memo1')
+        ScrollBars = ssVertical
+        TabOrder = 0
+      end
+    end
+    object TabSheet43: TTabSheet
+      Caption = 'TabSheet43'
+      ImageIndex = 44
+      object Memo44: TMemo
+        Left = 0
+        Top = 0
+        Width = 941
+        Height = 409
+        Align = alClient
+        Lines.Strings = (
+          'Memo1')
+        ScrollBars = ssVertical
+        TabOrder = 0
+      end
+    end
+    object TabSheet44: TTabSheet
+      Caption = 'TabSheet44'
+      ImageIndex = 45
+      object Memo45: TMemo
+        Left = 0
+        Top = 0
+        Width = 941
+        Height = 409
+        Align = alClient
+        Lines.Strings = (
+          'Memo1')
+        ScrollBars = ssVertical
+        TabOrder = 0
+      end
+    end
+    object TabSheet45: TTabSheet
+      Caption = 'TabSheet45'
+      ImageIndex = 46
+      object Memo46: TMemo
+        Left = 0
+        Top = 0
+        Width = 941
+        Height = 409
+        Align = alClient
+        Lines.Strings = (
+          'Memo1')
+        ScrollBars = ssVertical
+        TabOrder = 0
+      end
+    end
+    object TabSheet46: TTabSheet
+      Caption = 'TabSheet46'
+      ImageIndex = 47
+      object Memo47: TMemo
         Left = 0
         Top = 0
         Width = 941
@@ -2776,8 +2837,8 @@ object Form1: TForm1
     Left = 238
   end
   object BrvString: TBrvString
-    Left = 16
-    Top = 64
+    Left = 256
+    Top = 176
   end
   object QpObjDin: TBrvClientDataSet
     Aggregates = <>
@@ -2811,17 +2872,17 @@ object Form1: TForm1
     Left = 126
   end
   object BrvString2: TBrvString
-    Left = 16
-    Top = 112
+    Left = 248
+    Top = 304
   end
   object BrvString3: TBrvString
-    Left = 16
-    Top = 160
+    Left = 176
+    Top = 304
   end
   object PopCfgFrm: TPopupMenu
     Images = ImlPopFrm
-    Left = 8
-    Top = 72
+    Left = 184
+    Top = 232
     object Ajuda1: TMenuItem
       Caption = 'Ajuda'
       ImageIndex = 0
@@ -2838,8 +2899,8 @@ object Form1: TForm1
   object ImlPopFrm: TImageList
     Height = 20
     Width = 20
-    Left = 8
-    Top = 104
+    Left = 192
+    Top = 176
     Bitmap = {
       494C010103000500040014001400FFFFFFFFFF00FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000500000001400000001002000000000000019
@@ -3055,8 +3116,8 @@ object Form1: TForm1
       FFE000F000000000FC07FFFFFFE001F000000000FFFFFFFFFFFFFFF000000000}
   end
   object LspS049: TBrvListParam
-    Left = 8
-    Top = 136
+    Left = 248
+    Top = 232
   end
   object BrvString1: TBrvString
     Left = 808
