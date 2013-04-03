@@ -45,6 +45,11 @@ DELETE FROM analytics_group WHERE tenant_id IS NOT NULL;
 DELETE FROM sensus_part_number_configuration;
 DELETE FROM sensus_part_number;
 
+
+
+
+
+
 INSERT INTO tenant
            (name
            ,description
