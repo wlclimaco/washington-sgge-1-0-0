@@ -7,9 +7,9 @@ import com.sensus.mlc.user.model.Alterinse;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class Dominios.
+ * The Class Chaveprimaria.
  */
-public class Dominios extends SensusModel
+public class Chaveprimaria extends SensusModel
 {
 
     /** The nmtabela. */
@@ -18,14 +18,30 @@ public class Dominios extends SensusModel
     /** The nmatribu. */
     private Atributos nmatribu;
 
-    /** The dsdomini. */
-    private String dsdomini;
+    /** The nrseqkey. */
+    private Integer nrseqkey;
 
-    /** The vrdomini. */
-    private String vrdomini;
+    /** The listinsalt. */
+    private List<Alterinse> listinsalt;
 
-	/** The listinsalt. */
-	private List<Alterinse> listinsalt;
+
+
+	/**
+	 * Instantiates a new chaveprimaria.
+	 *
+	 * @param nmtabela the nmtabela
+	 * @param nmatribu the nmatribu
+	 * @param nrseqkey the nrseqkey
+	 * @param listinsalt the listinsalt
+	 */
+	public Chaveprimaria(Tabela nmtabela, Atributos nmatribu, Integer nrseqkey,
+			List<Alterinse> listinsalt) {
+		super();
+		this.nmtabela = nmtabela;
+		this.nmatribu = nmatribu;
+		this.nrseqkey = nrseqkey;
+		this.listinsalt = listinsalt;
+	}
 
 	/**
 	 * Gets the nmtabela.
@@ -64,39 +80,21 @@ public class Dominios extends SensusModel
 	}
 
 	/**
-	 * Gets the dsdomini.
+	 * Gets the nrseqkey.
 	 *
-	 * @return the dsdomini
+	 * @return the nrseqkey
 	 */
-	public String getDsdomini() {
-		return dsdomini;
+	public Integer getNrseqkey() {
+		return nrseqkey;
 	}
 
 	/**
-	 * Sets the dsdomini.
+	 * Sets the nrseqkey.
 	 *
-	 * @param dsdomini the new dsdomini
+	 * @param nrseqkey the new nrseqkey
 	 */
-	public void setDsdomini(String dsdomini) {
-		this.dsdomini = dsdomini;
-	}
-
-	/**
-	 * Gets the vrdomini.
-	 *
-	 * @return the vrdomini
-	 */
-	public String getVrdomini() {
-		return vrdomini;
-	}
-
-	/**
-	 * Sets the vrdomini.
-	 *
-	 * @param vrdomini the new vrdomini
-	 */
-	public void setVrdomini(String vrdomini) {
-		this.vrdomini = vrdomini;
+	public void setNrseqkey(Integer nrseqkey) {
+		this.nrseqkey = nrseqkey;
 	}
 
 	/**
@@ -122,14 +120,12 @@ public class Dominios extends SensusModel
 	 */
 	@Override
 	public String toString() {
-		return "Dominios [nmtabela=" + nmtabela + ", nmatribu=" + nmatribu
-				+ ", dsdomini=" + dsdomini + ", vrdomini=" + vrdomini
-				+ ", listinsalt=" + listinsalt + ", getNmtabela()="
-				+ getNmtabela() + ", getNmatribu()=" + getNmatribu()
-				+ ", getDsdomini()=" + getDsdomini() + ", getVrdomini()="
-				+ getVrdomini() + ", getListinsalt()=" + getListinsalt() + "]";
+		return "Chaveprimaria [nmtabela=" + nmtabela + ", nmatribu=" + nmatribu
+				+ ", nrseqkey=" + nrseqkey + ", listinsalt=" + listinsalt
+				+ ", getNmtabela()=" + getNmtabela() + ", getNmatribu()="
+				+ getNmatribu() + ", getNrseqkey()=" + getNrseqkey()
+				+ ", getListinsalt()=" + getListinsalt() + "]";
 	}
-
 
 
 }

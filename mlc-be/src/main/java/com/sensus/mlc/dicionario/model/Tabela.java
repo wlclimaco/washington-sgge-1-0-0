@@ -2,109 +2,101 @@ package com.sensus.mlc.dicionario.model;
 
 import java.util.List;
 
+import com.sensus.common.model.SensusModel;
+import com.sensus.mlc.user.model.Alterinse;
+
 // TODO: Auto-generated Javadoc
 /**
- * The Class Tabela.
+ * The Class Tabelad001.
  */
-public class Tabela {
+public class Tabela extends SensusModel
+{
 
-	/** The cod tab. */
-	Integer codTab;
+    /** The nmtabela. */
+    private String nmtabela;
 
-	/** The nome tab. */
-	String  nomeTab;
+    /** The dstabela. */
+    private String dstabela;
 
-	/** The Ds tab. */
-	String  DsTab;
+    /** The listinsalt. */
+    private List<Alterinse> listinsalt;
 
-	/** The atributos. */
-	List<Atributos> atributos;
+
 
 	/**
-	 * Gets the atributos.
+	 * Instantiates a new tabelad001.
 	 *
-	 * @return the atributos
+	 * @param nmtabela the nmtabela
+	 * @param dstabela the dstabela
 	 */
-	public List<Atributos> getAtributos() {
-		return atributos;
+	public Tabela(String nmtabela, String dstabela) {
+		super();
+		this.nmtabela = nmtabela;
+		this.dstabela = dstabela;
 	}
 
 	/**
-	 * Sets the atributos.
+	 * Gets the nmtabela.
 	 *
-	 * @param atributos the new atributos
+	 * @return the nmtabela
 	 */
-	public void setAtributos(List<Atributos> atributos) {
-		this.atributos = atributos;
+	public String getNmtabela() {
+		return nmtabela;
 	}
 
 	/**
-	 * Gets the cod tab.
+	 * Sets the nmtabela.
 	 *
-	 * @return the cod tab
+	 * @param nmtabela the new nmtabela
 	 */
-	public Integer getCodTab() {
-		return codTab;
+	public void setNmtabela(String nmtabela) {
+		this.nmtabela = nmtabela;
 	}
 
 	/**
-	 * Sets the cod tab.
+	 * Gets the dstabela.
 	 *
-	 * @param codTab the new cod tab
+	 * @return the dstabela
 	 */
-	public void setCodTab(Integer codTab) {
-		this.codTab = codTab;
+	public String getDstabela() {
+		return dstabela;
 	}
 
 	/**
-	 * Gets the nome tab.
+	 * Sets the dstabela.
 	 *
-	 * @return the nome tab
+	 * @param dstabela the new dstabela
 	 */
-	public String getNomeTab() {
-		return nomeTab;
+	public void setDstabela(String dstabela) {
+		this.dstabela = dstabela;
 	}
 
 	/**
-	 * Sets the nome tab.
+	 * Gets the listinsalt.
 	 *
-	 * @param nomeTab the new nome tab
+	 * @return the listinsalt
 	 */
-	public void setNomeTab(String nomeTab) {
-		this.nomeTab = nomeTab;
+	public List<ALTERINSE> getListinsalt() {
+		return listinsalt;
 	}
 
 	/**
-	 * Gets the ds tab.
+	 * Sets the listinsalt.
 	 *
-	 * @return the ds tab
+	 * @param listinsalt the new listinsalt
 	 */
-	public String getDsTab() {
-		return DsTab;
-	}
-
-	/**
-	 * Sets the ds tab.
-	 *
-	 * @param dsTab the new ds tab
-	 */
-	public void setDsTab(String dsTab) {
-		DsTab = dsTab;
+	public void setListinsalt(List<ALTERINSE> listinsalt) {
+		this.listinsalt = listinsalt;
 	}
 
 	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	 * @see com.sensus.common.model.SensusModel#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Tabela [codTab=" + codTab + ", nomeTab=" + nomeTab + ", DsTab="
-				+ DsTab + ", atributos=" + atributos + ", getAtributos()="
-				+ getAtributos() + ", getCodTab()=" + getCodTab()
-				+ ", getNomeTab()=" + getNomeTab() + ", getDsTab()="
-				+ getDsTab() + "]";
+		return "Tabelad001 [nmtabela=" + nmtabela + ", dstabela=" + dstabela
+				+ ", getNmtabela()=" + getNmtabela() + ", getDstabela()="
+				+ getDstabela() + "]";
 	}
-
-
-
 
 }
