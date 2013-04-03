@@ -2,310 +2,268 @@ package com.sensus.mlc.dicionario.model;
 
 import java.util.List;
 
+import com.sensus.common.model.SensusModel;
+import com.sensus.mlc.user.model.Alterinse;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class Atributos.
  */
-public class Atributos {
+public class Atributos extends SensusModel
+{
 
-	  /** The codatrib. */
-  	public Integer codatrib;
+    /** The nmtabela. */
+    private Tabela nmtabela;
 
-	  /** The nmatrib. */
-  	public String nmatrib;
+    /** The nmatribu. */
+    private String nmatribu;
 
-	  /** The cdvalidacao. */
-  	public List<Validacao> cdvalidacao;
+    /** The dsatribu. */
+    private String dsatribu;
 
-	  /** The posicaox. */
-  	public Double posicaox;
+    /** The tpatribu. */
+    private String tpatribu;
 
-	  /** The posicaoy. */
-  	public Double posicaoy;
+    /** The dsmascar. */
+    private String dsmascar;
 
-	  /** The tamanho. */
-  	public Integer tamanho;
+    /** The dshelp. */
+    private String dshelp;
 
-	  /** The label. */
-  	public String label;
+    /** The tmatribu. */
+    private Integer tmatribu;
 
-  	/** The cod tela busca. */
-	  public Tabela codTelaBusca;
+    /** The nrseqatr. */
+    private Integer nrseqatr;
 
-	  /** The requerido. */
-  	public Boolean requerido;
-
-	  /** The busca. */
-  	public Boolean busca;
-
-	  /** The help. */
-  	public String help;
-
-	  /** The mascara. */
-  	public String mascara;
-
-  	/** The dominios. */
-	  public List<Dominios> dominios;
+    /** The listinsalt. */
+    private List<Alterinse> listinsalt;
 
 
 
 	/**
-	 * Gets the codatrib.
+	 * Instantiates a new atributos.
 	 *
-	 * @return the codatrib
+	 * @param nmtabela the nmtabela
+	 * @param nmatribu the nmatribu
+	 * @param dsatribu the dsatribu
+	 * @param tpatribu the tpatribu
+	 * @param dsmascar the dsmascar
+	 * @param dshelp the dshelp
+	 * @param tmatribu the tmatribu
+	 * @param nrseqatr the nrseqatr
+	 * @param listinsalt the listinsalt
 	 */
-	public Integer getCodatrib() {
-		return codatrib;
+	public Atributos(Tabela nmtabela, String nmatribu, String dsatribu,
+			String tpatribu, String dsmascar, String dshelp, Integer tmatribu,
+			Integer nrseqatr, List<Alterinse> listinsalt) {
+		super();
+		this.nmtabela = nmtabela;
+		this.nmatribu = nmatribu;
+		this.dsatribu = dsatribu;
+		this.tpatribu = tpatribu;
+		this.dsmascar = dsmascar;
+		this.dshelp = dshelp;
+		this.tmatribu = tmatribu;
+		this.nrseqatr = nrseqatr;
+		this.listinsalt = listinsalt;
 	}
 
 	/**
-	 * Sets the codatrib.
+	 * Instantiates a new atributos.
 	 *
-	 * @param codatrib the new codatrib
+	 * @param nmtabela the nmtabela
+	 * @param nmatribu the nmatribu
+	 * @param listinsalt the listinsalt
 	 */
-	public void setCodatrib(Integer codatrib) {
-		this.codatrib = codatrib;
+	public Atributos(Tabela nmtabela, String nmatribu,
+			List<Alterinse> listinsalt) {
+		super();
+		this.nmtabela = nmtabela;
+		this.nmatribu = nmatribu;
+		this.listinsalt = listinsalt;
 	}
 
 	/**
-	 * Gets the nmatrib.
+	 * Gets the nmtabela.
 	 *
-	 * @return the nmatrib
+	 * @return the nmtabela
 	 */
-	public String getNmatrib() {
-		return nmatrib;
+	public Tabela getNmtabela() {
+		return nmtabela;
 	}
 
 	/**
-	 * Sets the nmatrib.
+	 * Sets the nmtabela.
 	 *
-	 * @param nmatrib the new nmatrib
+	 * @param nmtabela the new nmtabela
 	 */
-	public void setNmatrib(String nmatrib) {
-		this.nmatrib = nmatrib;
+	public void setNmtabela(Tabela nmtabela) {
+		this.nmtabela = nmtabela;
 	}
 
 	/**
-	 * Gets the posicaox.
+	 * Gets the nmatribu.
 	 *
-	 * @return the posicaox
+	 * @return the nmatribu
 	 */
-	public Double getPosicaox() {
-		return posicaox;
+	public String getNmatribu() {
+		return nmatribu;
 	}
 
 	/**
-	 * Sets the posicaox.
+	 * Sets the nmatribu.
 	 *
-	 * @param posicaox the new posicaox
+	 * @param nmatribu the new nmatribu
 	 */
-	public void setPosicaox(Double posicaox) {
-		this.posicaox = posicaox;
+	public void setNmatribu(String nmatribu) {
+		this.nmatribu = nmatribu;
 	}
 
 	/**
-	 * Gets the posicaoy.
+	 * Gets the dsatribu.
 	 *
-	 * @return the posicaoy
+	 * @return the dsatribu
 	 */
-	public Double getPosicaoy() {
-		return posicaoy;
+	public String getDsatribu() {
+		return dsatribu;
 	}
 
 	/**
-	 * Sets the posicaoy.
+	 * Sets the dsatribu.
 	 *
-	 * @param posicaoy the new posicaoy
+	 * @param dsatribu the new dsatribu
 	 */
-	public void setPosicaoy(Double posicaoy) {
-		this.posicaoy = posicaoy;
+	public void setDsatribu(String dsatribu) {
+		this.dsatribu = dsatribu;
 	}
 
 	/**
-	 * Gets the tamanho.
+	 * Gets the tpatribu.
 	 *
-	 * @return the tamanho
+	 * @return the tpatribu
 	 */
-	public Integer getTamanho() {
-		return tamanho;
+	public String getTpatribu() {
+		return tpatribu;
 	}
 
 	/**
-	 * Sets the tamanho.
+	 * Sets the tpatribu.
 	 *
-	 * @param tamanho the new tamanho
+	 * @param tpatribu the new tpatribu
 	 */
-	public void setTamanho(Integer tamanho) {
-		this.tamanho = tamanho;
+	public void setTpatribu(String tpatribu) {
+		this.tpatribu = tpatribu;
 	}
 
 	/**
-	 * Gets the label.
+	 * Gets the dsmascar.
 	 *
-	 * @return the label
+	 * @return the dsmascar
 	 */
-	public String getLabel() {
-		return label;
+	public String getDsmascar() {
+		return dsmascar;
 	}
 
 	/**
-	 * Sets the label.
+	 * Sets the dsmascar.
 	 *
-	 * @param label the new label
+	 * @param dsmascar the new dsmascar
 	 */
-	public void setLabel(String label) {
-		this.label = label;
+	public void setDsmascar(String dsmascar) {
+		this.dsmascar = dsmascar;
 	}
 
 	/**
-	 * Gets the requerido.
+	 * Gets the dshelp.
 	 *
-	 * @return the requerido
+	 * @return the dshelp
 	 */
-	public Boolean getRequerido() {
-		return requerido;
+	public String getDshelp() {
+		return dshelp;
 	}
 
 	/**
-	 * Sets the requerido.
+	 * Sets the dshelp.
 	 *
-	 * @param requerido the new requerido
+	 * @param dshelp the new dshelp
 	 */
-	public void setRequerido(Boolean requerido) {
-		this.requerido = requerido;
+	public void setDshelp(String dshelp) {
+		this.dshelp = dshelp;
 	}
 
 	/**
-	 * Gets the busca.
+	 * Gets the tmatribu.
 	 *
-	 * @return the busca
+	 * @return the tmatribu
 	 */
-	public Boolean getBusca() {
-		return busca;
+	public Integer getTmatribu() {
+		return tmatribu;
 	}
 
 	/**
-	 * Sets the busca.
+	 * Sets the tmatribu.
 	 *
-	 * @param busca the new busca
+	 * @param tmatribu the new tmatribu
 	 */
-	public void setBusca(Boolean busca) {
-		this.busca = busca;
+	public void setTmatribu(Integer tmatribu) {
+		this.tmatribu = tmatribu;
 	}
 
 	/**
-	 * Gets the help.
+	 * Gets the nrseqatr.
 	 *
-	 * @return the help
+	 * @return the nrseqatr
 	 */
-	public String getHelp() {
-		return help;
+	public Integer getNrseqatr() {
+		return nrseqatr;
 	}
 
 	/**
-	 * Sets the help.
+	 * Sets the nrseqatr.
 	 *
-	 * @param help the new help
+	 * @param nrseqatr the new nrseqatr
 	 */
-	public void setHelp(String help) {
-		this.help = help;
+	public void setNrseqatr(Integer nrseqatr) {
+		this.nrseqatr = nrseqatr;
 	}
 
 	/**
-	 * Gets the mascara.
+	 * Gets the listinsalt.
 	 *
-	 * @return the mascara
+	 * @return the listinsalt
 	 */
-	public String getMascara() {
-		return mascara;
+	public List<Alterinse> getListinsalt() {
+		return listinsalt;
 	}
 
 	/**
-	 * Sets the mascara.
+	 * Sets the listinsalt.
 	 *
-	 * @param mascara the new mascara
+	 * @param listinsalt the new listinsalt
 	 */
-	public void setMascara(String mascara) {
-		this.mascara = mascara;
-	}
-
-	/**
-	 * Gets the dominios.
-	 *
-	 * @return the dominios
-	 */
-	public List<Dominios> getDominios() {
-		return dominios;
-	}
-
-	/**
-	 * Sets the dominios.
-	 *
-	 * @param dominios the new dominios
-	 */
-	public void setDominios(List<Dominios> dominios) {
-		this.dominios = dominios;
-	}
-
-	/**
-	 * Gets the cdvalidacao.
-	 *
-	 * @return the cdvalidacao
-	 */
-	public List<Validacao> getCdvalidacao() {
-		return cdvalidacao;
-	}
-
-	/**
-	 * Sets the cdvalidacao.
-	 *
-	 * @param cdvalidacao the new cdvalidacao
-	 */
-	public void setCdvalidacao(List<Validacao> cdvalidacao) {
-		this.cdvalidacao = cdvalidacao;
-	}
-
-	/**
-	 * Gets the cod tela busca.
-	 *
-	 * @return the cod tela busca
-	 */
-	public Tabela getCodTelaBusca() {
-		return codTelaBusca;
-	}
-
-	/**
-	 * Sets the cod tela busca.
-	 *
-	 * @param codTelaBusca the new cod tela busca
-	 */
-	public void setCodTelaBusca(Tabela codTelaBusca) {
-		this.codTelaBusca = codTelaBusca;
+	public void setListinsalt(List<Alterinse> listinsalt) {
+		this.listinsalt = listinsalt;
 	}
 
 	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	 * @see com.sensus.common.model.SensusModel#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Atributos [codatrib=" + codatrib + ", nmatrib=" + nmatrib
-				+ ", cdvalidacao=" + cdvalidacao + ", posicaox=" + posicaox
-				+ ", posicaoy=" + posicaoy + ", tamanho=" + tamanho
-				+ ", label=" + label + ", codTelaBusca=" + codTelaBusca
-				+ ", requerido=" + requerido + ", busca=" + busca + ", help="
-				+ help + ", mascara=" + mascara + ", dominios=" + dominios
-				+ ", getCodatrib()=" + getCodatrib() + ", getNmatrib()="
-				+ getNmatrib() + ", getPosicaox()=" + getPosicaox()
-				+ ", getPosicaoy()=" + getPosicaoy() + ", getTamanho()="
-				+ getTamanho() + ", getLabel()=" + getLabel()
-				+ ", getRequerido()=" + getRequerido() + ", getBusca()="
-				+ getBusca() + ", getHelp()=" + getHelp() + ", getMascara()="
-				+ getMascara() + ", getDominios()=" + getDominios()
-				+ ", getCdvalidacao()=" + getCdvalidacao()
-				+ ", getCodTelaBusca()=" + getCodTelaBusca() + "]";
+		return "Atributos [nmtabela=" + nmtabela + ", nmatribu=" + nmatribu
+				+ ", dsatribu=" + dsatribu + ", tpatribu=" + tpatribu
+				+ ", dsmascar=" + dsmascar + ", dshelp=" + dshelp
+				+ ", tmatribu=" + tmatribu + ", nrseqatr=" + nrseqatr
+				+ ", listinsalt=" + listinsalt + ", getNmtabela()="
+				+ getNmtabela() + ", getNmatribu()=" + getNmatribu()
+				+ ", getDsatribu()=" + getDsatribu() + ", getTpatribu()="
+				+ getTpatribu() + ", getDsmascar()=" + getDsmascar()
+				+ ", getDshelp()=" + getDshelp() + ", getTmatribu()="
+				+ getTmatribu() + ", getNrseqatr()=" + getNrseqatr()
+				+ ", getListinsalt()=" + getListinsalt() + "]";
 	}
 
 
-
-
 }
+
