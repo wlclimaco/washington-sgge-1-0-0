@@ -1,0 +1,417 @@
+Memo1
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<settings>
+<setting name="lazyLoadingEnabled" value="false" />
+</settings>
+<typeAliases>
+<!-- Cnae mapping -->
+<typeAlias alias="InquiryCnaeRequest" 	type="com.sensus.mlc.CNAE.model.request.InquiryCnaeRequest" />
+<typeAlias alias="CnaeRequest" 			type="com.sensus.mlc.CNAE.model.request.CnaeRequest" />
+<typeAlias alias="FilialRequest" 		type="com.sensus.mlc.filial.model.request.FilialRequest" />
+<typeAlias alias="EnderecoRequest" 		type="com.sensus.mlc.endereco.model.request.EnderecoRequest" />
+<!-- Cnae and Smartpoint joint mapping -->
+<typeAlias alias="Cnae"  memo1.Lines.Add('type="com.sensus.mlc.CNAE.model.Cnae"/>
+<typeAlias alias="Filial" memo1.Lines.Add('    type="com.sensus.mlc.filial.model.Filial"/>
+<typeAlias alias="Endereco" memo1.Lines.Add('type="com.sensus.mlc.endereco.model.Endereco"/>
+<!-- Smartpoint mapping -->
+<typeAlias alias="Group" memo1.Lines.Add('		  type="com.sensus.mlc.group.model.Group" />
+<typeAlias alias="CNAE" memo1.Lines.Add('	      type="com.sensus.mlc.tag.model.CNAE" />
+<typeAlias alias="StatusMessage" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.StatusMessage" />
+<typeAlias alias="LightParameter" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.LightParameter" />
+<typeAlias alias="PropertyValidValue" 			  type="com.sensus.mlc.smartpoint.model.PropertyValidValue" />
+<typeAlias alias="StatusException" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.StatusException" />
+<typeAlias alias="LightRequest" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.request.LightRequest" />
+<typeAlias alias="EventSchedule" memo1.Lines.Add('  type="com.sensus.mlc.schedule.model.EventSchedule" />
+<typeAlias alias="OffsetSchedule" memo1.Lines.Add('  type="com.sensus.mlc.schedule.model.OffsetSchedule" />
+<typeAlias alias="CustomSearch" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.CustomSearch" />
+<typeAlias alias="SearchParameter" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.SearchParameter" />
+<typeAlias alias="TimeZoneInfo" memo1.Lines.Add('  type="com.sensus.mlc.base.model.TimeZoneInfo" />
+<typeAlias alias="SensusPartNumberConfiguration"  type="com.sensus.mlc.smartpoint.model.SensusPartNumberConfiguration" />
+<typeAlias alias="LightHistory" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.LightHistory" />
+<typeAlias alias="Schedule" memo1.Lines.Add('	  type="com.sensus.mlc.schedule.model.Schedule" />
+<typeAlias alias="Column" memo1.Lines.Add('		  type="com.sensus.mlc.smartpoint.model.Column" />
+<typeAlias alias="GuaranteeLightExistenceRequest" type="com.sensus.mlc.smartpoint.model.request.GuaranteeLightExistenceRequest" />
+<typeAlias alias="CurrentAlarmWarningMessage" 	  type="com.sensus.mlc.smartpoint.model.CurrentAlarmWarningMessage" />
+<typeAlias alias="CustomSearchRequest" 			  type="com.sensus.mlc.smartpoint.model.request.CustomSearchRequest" />
+<typeAlias alias="TenantRequest" memo1.Lines.Add('  type="com.sensus.mlc.tenant.model.request.TenantRequest" />
+<typeAlias alias="LightStatusRequest" 			  type="com.sensus.mlc.smartpoint.model.request.LightStatusRequest" />
+<typeAlias alias="LightingControlRequest" 		  type="com.sensus.mlc.base.model.request.LightingControlRequest" />
+<typeAlias alias="ScheduleRequest" memo1.Lines.Add('  type="com.sensus.mlc.schedule.model.request.ScheduleRequest" />
+<typeAlias alias="PropertyValidValuesRequest" 	  type="com.sensus.mlc.smartpoint.model.request.PropertyValidValuesRequest" />
+<typeAlias alias="ColumnFilterRequest" 			  type="com.sensus.mlc.smartpoint.model.request.ColumnFilterRequest" />
+<typeAlias alias="ColumnFilterResponse" 		  type="com.sensus.mlc.smartpoint.model.response.ColumnFilterResponse" />
+</typeAliases>
+<mappers>
+<mapper resource="com/sensus/mlc/CNAE/dac/mybatis/map/Cnae.xml"/>
+<mapper resource="com/sensus/mlc/filial/dac/mybatis/map/Filial.xml" />
+<mapper resource="com/sensus/mlc/endereco/dac/mybatis/map/Endereco.xml" />
+</mappers>
+</configuration>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<settings>
+<setting name="lazyLoadingEnabled" value="false" />
+</settings>
+<typeAliases>
+<!-- Bairro mapping -->
+<typeAlias alias="InquiryBairroRequest" 	type="com.sensus.mlc.bairro.model.request.InquiryBairroRequest" />
+<typeAlias alias="BairroRequest" 			type="com.sensus.mlc.bairro.model.request.BairroRequest" />
+<typeAlias alias="FilialRequest" 		type="com.sensus.mlc.filial.model.request.FilialRequest" />
+<typeAlias alias="EnderecoRequest" 		type="com.sensus.mlc.endereco.model.request.EnderecoRequest" />
+<!-- Bairro and Smartpoint joint mapping -->
+<typeAlias alias="Bairro"  memo1.Lines.Add('type="com.sensus.mlc.bairro.model.Bairro"/>
+<typeAlias alias="Filial" memo1.Lines.Add('    type="com.sensus.mlc.filial.model.Filial"/>
+<typeAlias alias="Endereco" memo1.Lines.Add('type="com.sensus.mlc.endereco.model.Endereco"/>
+<!-- Smartpoint mapping -->
+<typeAlias alias="Group" memo1.Lines.Add('		  type="com.sensus.mlc.group.model.Group" />
+<typeAlias alias="bairro" memo1.Lines.Add('	      type="com.sensus.mlc.tag.model.bairro" />
+<typeAlias alias="StatusMessage" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.StatusMessage" />
+<typeAlias alias="LightParameter" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.LightParameter" />
+<typeAlias alias="PropertyValidValue" 			  type="com.sensus.mlc.smartpoint.model.PropertyValidValue" />
+<typeAlias alias="StatusException" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.StatusException" />
+<typeAlias alias="LightRequest" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.request.LightRequest" />
+<typeAlias alias="EventSchedule" memo1.Lines.Add('  type="com.sensus.mlc.schedule.model.EventSchedule" />
+<typeAlias alias="OffsetSchedule" memo1.Lines.Add('  type="com.sensus.mlc.schedule.model.OffsetSchedule" />
+<typeAlias alias="CustomSearch" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.CustomSearch" />
+<typeAlias alias="SearchParameter" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.SearchParameter" />
+<typeAlias alias="TimeZoneInfo" memo1.Lines.Add('  type="com.sensus.mlc.base.model.TimeZoneInfo" />
+<typeAlias alias="SensusPartNumberConfiguration"  type="com.sensus.mlc.smartpoint.model.SensusPartNumberConfiguration" />
+<typeAlias alias="LightHistory" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.LightHistory" />
+<typeAlias alias="Schedule" memo1.Lines.Add('	  type="com.sensus.mlc.schedule.model.Schedule" />
+<typeAlias alias="Column" memo1.Lines.Add('		  type="com.sensus.mlc.smartpoint.model.Column" />
+<typeAlias alias="GuaranteeLightExistenceRequest" type="com.sensus.mlc.smartpoint.model.request.GuaranteeLightExistenceRequest" />
+<typeAlias alias="CurrentAlarmWarningMessage" 	  type="com.sensus.mlc.smartpoint.model.CurrentAlarmWarningMessage" />
+<typeAlias alias="CustomSearchRequest" 			  type="com.sensus.mlc.smartpoint.model.request.CustomSearchRequest" />
+<typeAlias alias="TenantRequest" memo1.Lines.Add('  type="com.sensus.mlc.tenant.model.request.TenantRequest" />
+<typeAlias alias="LightStatusRequest" 			  type="com.sensus.mlc.smartpoint.model.request.LightStatusRequest" />
+<typeAlias alias="LightingControlRequest" 		  type="com.sensus.mlc.base.model.request.LightingControlRequest" />
+<typeAlias alias="ScheduleRequest" memo1.Lines.Add('  type="com.sensus.mlc.schedule.model.request.ScheduleRequest" />
+<typeAlias alias="PropertyValidValuesRequest" 	  type="com.sensus.mlc.smartpoint.model.request.PropertyValidValuesRequest" />
+<typeAlias alias="ColumnFilterRequest" 			  type="com.sensus.mlc.smartpoint.model.request.ColumnFilterRequest" />
+<typeAlias alias="ColumnFilterResponse" 		  type="com.sensus.mlc.smartpoint.model.response.ColumnFilterResponse" />
+</typeAliases>
+<mappers>
+<mapper resource="com/sensus/mlc/bairro/dac/mybatis/map/Bairro.xml"/>
+<mapper resource="com/sensus/mlc/filial/dac/mybatis/map/Filial.xml" />
+<mapper resource="com/sensus/mlc/endereco/dac/mybatis/map/Endereco.xml" />
+</mappers>
+</configuration>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<settings>
+<setting name="lazyLoadingEnabled" value="false" />
+</settings>
+<typeAliases>
+<!-- Municipio mapping -->
+<typeAlias alias="InquiryMunicipioRequest" 	type="com.sensus.mlc.MUNICIPIO.model.request.InquiryMunicipioRequest" />
+<typeAlias alias="MunicipioRequest" 			type="com.sensus.mlc.MUNICIPIO.model.request.MunicipioRequest" />
+<typeAlias alias="FilialRequest" 		type="com.sensus.mlc.filial.model.request.FilialRequest" />
+<typeAlias alias="EnderecoRequest" 		type="com.sensus.mlc.endereco.model.request.EnderecoRequest" />
+<!-- Municipio and Smartpoint joint mapping -->
+<typeAlias alias="Municipio"  memo1.Lines.Add('type="com.sensus.mlc.MUNICIPIO.model.Municipio"/>
+<typeAlias alias="Filial" memo1.Lines.Add('    type="com.sensus.mlc.filial.model.Filial"/>
+<typeAlias alias="Endereco" memo1.Lines.Add('type="com.sensus.mlc.endereco.model.Endereco"/>
+<!-- Smartpoint mapping -->
+<typeAlias alias="Group" memo1.Lines.Add('		  type="com.sensus.mlc.group.model.Group" />
+<typeAlias alias="MUNICIPIO" memo1.Lines.Add('	      type="com.sensus.mlc.tag.model.MUNICIPIO" />
+<typeAlias alias="StatusMessage" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.StatusMessage" />
+<typeAlias alias="LightParameter" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.LightParameter" />
+<typeAlias alias="PropertyValidValue" 			  type="com.sensus.mlc.smartpoint.model.PropertyValidValue" />
+<typeAlias alias="StatusException" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.StatusException" />
+<typeAlias alias="LightRequest" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.request.LightRequest" />
+<typeAlias alias="EventSchedule" memo1.Lines.Add('  type="com.sensus.mlc.schedule.model.EventSchedule" />
+<typeAlias alias="OffsetSchedule" memo1.Lines.Add('  type="com.sensus.mlc.schedule.model.OffsetSchedule" />
+<typeAlias alias="CustomSearch" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.CustomSearch" />
+<typeAlias alias="SearchParameter" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.SearchParameter" />
+<typeAlias alias="TimeZoneInfo" memo1.Lines.Add('  type="com.sensus.mlc.base.model.TimeZoneInfo" />
+<typeAlias alias="SensusPartNumberConfiguration"  type="com.sensus.mlc.smartpoint.model.SensusPartNumberConfiguration" />
+<typeAlias alias="LightHistory" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.LightHistory" />
+<typeAlias alias="Schedule" memo1.Lines.Add('	  type="com.sensus.mlc.schedule.model.Schedule" />
+<typeAlias alias="Column" memo1.Lines.Add('		  type="com.sensus.mlc.smartpoint.model.Column" />
+<typeAlias alias="GuaranteeLightExistenceRequest" type="com.sensus.mlc.smartpoint.model.request.GuaranteeLightExistenceRequest" />
+<typeAlias alias="CurrentAlarmWarningMessage" 	  type="com.sensus.mlc.smartpoint.model.CurrentAlarmWarningMessage" />
+<typeAlias alias="CustomSearchRequest" 			  type="com.sensus.mlc.smartpoint.model.request.CustomSearchRequest" />
+<typeAlias alias="TenantRequest" memo1.Lines.Add('  type="com.sensus.mlc.tenant.model.request.TenantRequest" />
+<typeAlias alias="LightStatusRequest" 			  type="com.sensus.mlc.smartpoint.model.request.LightStatusRequest" />
+<typeAlias alias="LightingControlRequest" 		  type="com.sensus.mlc.base.model.request.LightingControlRequest" />
+<typeAlias alias="ScheduleRequest" memo1.Lines.Add('  type="com.sensus.mlc.schedule.model.request.ScheduleRequest" />
+<typeAlias alias="PropertyValidValuesRequest" 	  type="com.sensus.mlc.smartpoint.model.request.PropertyValidValuesRequest" />
+<typeAlias alias="ColumnFilterRequest" 			  type="com.sensus.mlc.smartpoint.model.request.ColumnFilterRequest" />
+<typeAlias alias="ColumnFilterResponse" 		  type="com.sensus.mlc.smartpoint.model.response.ColumnFilterResponse" />
+</typeAliases>
+<mappers>
+<mapper resource="com/sensus/mlc/MUNICIPIO/dac/mybatis/map/Municipio.xml"/>
+<mapper resource="com/sensus/mlc/filial/dac/mybatis/map/Filial.xml" />
+<mapper resource="com/sensus/mlc/endereco/dac/mybatis/map/Endereco.xml" />
+</mappers>
+</configuration>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<settings>
+<setting name="lazyLoadingEnabled" value="false" />
+</settings>
+<typeAliases>
+<!-- Municipio mapping -->
+<typeAlias alias="InquiryMunicipioRequest" 	type="com.sensus.mlc.MUNICIPIO.model.request.InquiryMunicipioRequest" />
+<typeAlias alias="MunicipioRequest" 			type="com.sensus.mlc.MUNICIPIO.model.request.MunicipioRequest" />
+<typeAlias alias="FilialRequest" 		type="com.sensus.mlc.filial.model.request.FilialRequest" />
+<typeAlias alias="EnderecoRequest" 		type="com.sensus.mlc.endereco.model.request.EnderecoRequest" />
+<!-- Municipio and Smartpoint joint mapping -->
+<typeAlias alias="Municipio"  memo1.Lines.Add('type="com.sensus.mlc.MUNICIPIO.model.Municipio"/>
+<typeAlias alias="Filial" memo1.Lines.Add('    type="com.sensus.mlc.filial.model.Filial"/>
+<typeAlias alias="Endereco" memo1.Lines.Add('type="com.sensus.mlc.endereco.model.Endereco"/>
+<!-- Smartpoint mapping -->
+<typeAlias alias="Group" memo1.Lines.Add('		  type="com.sensus.mlc.group.model.Group" />
+<typeAlias alias="MUNICIPIO" memo1.Lines.Add('	      type="com.sensus.mlc.tag.model.MUNICIPIO" />
+<typeAlias alias="StatusMessage" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.StatusMessage" />
+<typeAlias alias="LightParameter" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.LightParameter" />
+<typeAlias alias="PropertyValidValue" 			  type="com.sensus.mlc.smartpoint.model.PropertyValidValue" />
+<typeAlias alias="StatusException" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.StatusException" />
+<typeAlias alias="LightRequest" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.request.LightRequest" />
+<typeAlias alias="EventSchedule" memo1.Lines.Add('  type="com.sensus.mlc.schedule.model.EventSchedule" />
+<typeAlias alias="OffsetSchedule" memo1.Lines.Add('  type="com.sensus.mlc.schedule.model.OffsetSchedule" />
+<typeAlias alias="CustomSearch" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.CustomSearch" />
+<typeAlias alias="SearchParameter" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.SearchParameter" />
+<typeAlias alias="TimeZoneInfo" memo1.Lines.Add('  type="com.sensus.mlc.base.model.TimeZoneInfo" />
+<typeAlias alias="SensusPartNumberConfiguration"  type="com.sensus.mlc.smartpoint.model.SensusPartNumberConfiguration" />
+<typeAlias alias="LightHistory" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.LightHistory" />
+<typeAlias alias="Schedule" memo1.Lines.Add('	  type="com.sensus.mlc.schedule.model.Schedule" />
+<typeAlias alias="Column" memo1.Lines.Add('		  type="com.sensus.mlc.smartpoint.model.Column" />
+<typeAlias alias="GuaranteeLightExistenceRequest" type="com.sensus.mlc.smartpoint.model.request.GuaranteeLightExistenceRequest" />
+<typeAlias alias="CurrentAlarmWarningMessage" 	  type="com.sensus.mlc.smartpoint.model.CurrentAlarmWarningMessage" />
+<typeAlias alias="CustomSearchRequest" 			  type="com.sensus.mlc.smartpoint.model.request.CustomSearchRequest" />
+<typeAlias alias="TenantRequest" memo1.Lines.Add('  type="com.sensus.mlc.tenant.model.request.TenantRequest" />
+<typeAlias alias="LightStatusRequest" 			  type="com.sensus.mlc.smartpoint.model.request.LightStatusRequest" />
+<typeAlias alias="LightingControlRequest" 		  type="com.sensus.mlc.base.model.request.LightingControlRequest" />
+<typeAlias alias="ScheduleRequest" memo1.Lines.Add('  type="com.sensus.mlc.schedule.model.request.ScheduleRequest" />
+<typeAlias alias="PropertyValidValuesRequest" 	  type="com.sensus.mlc.smartpoint.model.request.PropertyValidValuesRequest" />
+<typeAlias alias="ColumnFilterRequest" 			  type="com.sensus.mlc.smartpoint.model.request.ColumnFilterRequest" />
+<typeAlias alias="ColumnFilterResponse" 		  type="com.sensus.mlc.smartpoint.model.response.ColumnFilterResponse" />
+</typeAliases>
+<mappers>
+<mapper resource="com/sensus/mlc/MUNICIPIO/dac/mybatis/map/Municipio.xml"/>
+<mapper resource="com/sensus/mlc/filial/dac/mybatis/map/Filial.xml" />
+<mapper resource="com/sensus/mlc/endereco/dac/mybatis/map/Endereco.xml" />
+</mappers>
+</configuration>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<settings>
+<setting name="lazyLoadingEnabled" value="false" />
+</settings>
+<typeAliases>
+<!-- Uf mapping -->
+<typeAlias alias="InquiryUfRequest" 	type="com.sensus.mlc.UF.model.request.InquiryUfRequest" />
+<typeAlias alias="UfRequest" 			type="com.sensus.mlc.UF.model.request.UfRequest" />
+<typeAlias alias="FilialRequest" 		type="com.sensus.mlc.filial.model.request.FilialRequest" />
+<typeAlias alias="EnderecoRequest" 		type="com.sensus.mlc.endereco.model.request.EnderecoRequest" />
+<!-- Uf and Smartpoint joint mapping -->
+<typeAlias alias="Uf"  memo1.Lines.Add('type="com.sensus.mlc.UF.model.Uf"/>
+<typeAlias alias="Filial" memo1.Lines.Add('    type="com.sensus.mlc.filial.model.Filial"/>
+<typeAlias alias="Endereco" memo1.Lines.Add('type="com.sensus.mlc.endereco.model.Endereco"/>
+<!-- Smartpoint mapping -->
+<typeAlias alias="Group" memo1.Lines.Add('		  type="com.sensus.mlc.group.model.Group" />
+<typeAlias alias="UF" memo1.Lines.Add('	      type="com.sensus.mlc.tag.model.UF" />
+<typeAlias alias="StatusMessage" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.StatusMessage" />
+<typeAlias alias="LightParameter" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.LightParameter" />
+<typeAlias alias="PropertyValidValue" 			  type="com.sensus.mlc.smartpoint.model.PropertyValidValue" />
+<typeAlias alias="StatusException" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.StatusException" />
+<typeAlias alias="LightRequest" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.request.LightRequest" />
+<typeAlias alias="EventSchedule" memo1.Lines.Add('  type="com.sensus.mlc.schedule.model.EventSchedule" />
+<typeAlias alias="OffsetSchedule" memo1.Lines.Add('  type="com.sensus.mlc.schedule.model.OffsetSchedule" />
+<typeAlias alias="CustomSearch" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.CustomSearch" />
+<typeAlias alias="SearchParameter" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.SearchParameter" />
+<typeAlias alias="TimeZoneInfo" memo1.Lines.Add('  type="com.sensus.mlc.base.model.TimeZoneInfo" />
+<typeAlias alias="SensusPartNumberConfiguration"  type="com.sensus.mlc.smartpoint.model.SensusPartNumberConfiguration" />
+<typeAlias alias="LightHistory" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.LightHistory" />
+<typeAlias alias="Schedule" memo1.Lines.Add('	  type="com.sensus.mlc.schedule.model.Schedule" />
+<typeAlias alias="Column" memo1.Lines.Add('		  type="com.sensus.mlc.smartpoint.model.Column" />
+<typeAlias alias="GuaranteeLightExistenceRequest" type="com.sensus.mlc.smartpoint.model.request.GuaranteeLightExistenceRequest" />
+<typeAlias alias="CurrentAlarmWarningMessage" 	  type="com.sensus.mlc.smartpoint.model.CurrentAlarmWarningMessage" />
+<typeAlias alias="CustomSearchRequest" 			  type="com.sensus.mlc.smartpoint.model.request.CustomSearchRequest" />
+<typeAlias alias="TenantRequest" memo1.Lines.Add('  type="com.sensus.mlc.tenant.model.request.TenantRequest" />
+<typeAlias alias="LightStatusRequest" 			  type="com.sensus.mlc.smartpoint.model.request.LightStatusRequest" />
+<typeAlias alias="LightingControlRequest" 		  type="com.sensus.mlc.base.model.request.LightingControlRequest" />
+<typeAlias alias="ScheduleRequest" memo1.Lines.Add('  type="com.sensus.mlc.schedule.model.request.ScheduleRequest" />
+<typeAlias alias="PropertyValidValuesRequest" 	  type="com.sensus.mlc.smartpoint.model.request.PropertyValidValuesRequest" />
+<typeAlias alias="ColumnFilterRequest" 			  type="com.sensus.mlc.smartpoint.model.request.ColumnFilterRequest" />
+<typeAlias alias="ColumnFilterResponse" 		  type="com.sensus.mlc.smartpoint.model.response.ColumnFilterResponse" />
+</typeAliases>
+<mappers>
+<mapper resource="com/sensus/mlc/UF/dac/mybatis/map/Uf.xml"/>
+<mapper resource="com/sensus/mlc/filial/dac/mybatis/map/Filial.xml" />
+<mapper resource="com/sensus/mlc/endereco/dac/mybatis/map/Endereco.xml" />
+</mappers>
+</configuration>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<settings>
+<setting name="lazyLoadingEnabled" value="false" />
+</settings>
+<typeAliases>
+<!-- Cnae mapping -->
+<typeAlias alias="InquiryCnaeRequest" 	type="com.sensus.mlc.CNAE.model.request.InquiryCnaeRequest" />
+<typeAlias alias="CnaeRequest" 			type="com.sensus.mlc.CNAE.model.request.CnaeRequest" />
+<typeAlias alias="FilialRequest" 		type="com.sensus.mlc.filial.model.request.FilialRequest" />
+<typeAlias alias="EnderecoRequest" 		type="com.sensus.mlc.endereco.model.request.EnderecoRequest" />
+<!-- Cnae and Smartpoint joint mapping -->
+<typeAlias alias="Cnae"  memo1.Lines.Add('type="com.sensus.mlc.CNAE.model.Cnae"/>
+<typeAlias alias="Filial" memo1.Lines.Add('    type="com.sensus.mlc.filial.model.Filial"/>
+<typeAlias alias="Endereco" memo1.Lines.Add('type="com.sensus.mlc.endereco.model.Endereco"/>
+<!-- Smartpoint mapping -->
+<typeAlias alias="Group" memo1.Lines.Add('		  type="com.sensus.mlc.group.model.Group" />
+<typeAlias alias="CNAE" memo1.Lines.Add('	      type="com.sensus.mlc.tag.model.CNAE" />
+<typeAlias alias="StatusMessage" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.StatusMessage" />
+<typeAlias alias="LightParameter" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.LightParameter" />
+<typeAlias alias="PropertyValidValue" 			  type="com.sensus.mlc.smartpoint.model.PropertyValidValue" />
+<typeAlias alias="StatusException" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.StatusException" />
+<typeAlias alias="LightRequest" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.request.LightRequest" />
+<typeAlias alias="EventSchedule" memo1.Lines.Add('  type="com.sensus.mlc.schedule.model.EventSchedule" />
+<typeAlias alias="OffsetSchedule" memo1.Lines.Add('  type="com.sensus.mlc.schedule.model.OffsetSchedule" />
+<typeAlias alias="CustomSearch" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.CustomSearch" />
+<typeAlias alias="SearchParameter" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.SearchParameter" />
+<typeAlias alias="TimeZoneInfo" memo1.Lines.Add('  type="com.sensus.mlc.base.model.TimeZoneInfo" />
+<typeAlias alias="SensusPartNumberConfiguration"  type="com.sensus.mlc.smartpoint.model.SensusPartNumberConfiguration" />
+<typeAlias alias="LightHistory" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.LightHistory" />
+<typeAlias alias="Schedule" memo1.Lines.Add('	  type="com.sensus.mlc.schedule.model.Schedule" />
+<typeAlias alias="Column" memo1.Lines.Add('		  type="com.sensus.mlc.smartpoint.model.Column" />
+<typeAlias alias="GuaranteeLightExistenceRequest" type="com.sensus.mlc.smartpoint.model.request.GuaranteeLightExistenceRequest" />
+<typeAlias alias="CurrentAlarmWarningMessage" 	  type="com.sensus.mlc.smartpoint.model.CurrentAlarmWarningMessage" />
+<typeAlias alias="CustomSearchRequest" 			  type="com.sensus.mlc.smartpoint.model.request.CustomSearchRequest" />
+<typeAlias alias="TenantRequest" memo1.Lines.Add('  type="com.sensus.mlc.tenant.model.request.TenantRequest" />
+<typeAlias alias="LightStatusRequest" 			  type="com.sensus.mlc.smartpoint.model.request.LightStatusRequest" />
+<typeAlias alias="LightingControlRequest" 		  type="com.sensus.mlc.base.model.request.LightingControlRequest" />
+<typeAlias alias="ScheduleRequest" memo1.Lines.Add('  type="com.sensus.mlc.schedule.model.request.ScheduleRequest" />
+<typeAlias alias="PropertyValidValuesRequest" 	  type="com.sensus.mlc.smartpoint.model.request.PropertyValidValuesRequest" />
+<typeAlias alias="ColumnFilterRequest" 			  type="com.sensus.mlc.smartpoint.model.request.ColumnFilterRequest" />
+<typeAlias alias="ColumnFilterResponse" 		  type="com.sensus.mlc.smartpoint.model.response.ColumnFilterResponse" />
+</typeAliases>
+<mappers>
+<mapper resource="com/sensus/mlc/CNAE/dac/mybatis/map/Cnae.xml"/>
+<mapper resource="com/sensus/mlc/filial/dac/mybatis/map/Filial.xml" />
+<mapper resource="com/sensus/mlc/endereco/dac/mybatis/map/Endereco.xml" />
+</mappers>
+</configuration>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<settings>
+<setting name="lazyLoadingEnabled" value="false" />
+</settings>
+<typeAliases>
+<!-- Bairro mapping -->
+<typeAlias alias="InquiryBairroRequest" 	type="com.sensus.mlc.BAIRRO.model.request.InquiryBairroRequest" />
+<typeAlias alias="BairroRequest" 			type="com.sensus.mlc.BAIRRO.model.request.BairroRequest" />
+<typeAlias alias="FilialRequest" 		type="com.sensus.mlc.filial.model.request.FilialRequest" />
+<typeAlias alias="EnderecoRequest" 		type="com.sensus.mlc.endereco.model.request.EnderecoRequest" />
+<!-- Bairro and Smartpoint joint mapping -->
+<typeAlias alias="Bairro"  memo1.Lines.Add('type="com.sensus.mlc.BAIRRO.model.Bairro"/>
+<typeAlias alias="Filial" memo1.Lines.Add('    type="com.sensus.mlc.filial.model.Filial"/>
+<typeAlias alias="Endereco" memo1.Lines.Add('type="com.sensus.mlc.endereco.model.Endereco"/>
+<!-- Smartpoint mapping -->
+<typeAlias alias="Group" memo1.Lines.Add('		  type="com.sensus.mlc.group.model.Group" />
+<typeAlias alias="BAIRRO" memo1.Lines.Add('	      type="com.sensus.mlc.tag.model.BAIRRO" />
+<typeAlias alias="StatusMessage" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.StatusMessage" />
+<typeAlias alias="LightParameter" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.LightParameter" />
+<typeAlias alias="PropertyValidValue" 			  type="com.sensus.mlc.smartpoint.model.PropertyValidValue" />
+<typeAlias alias="StatusException" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.StatusException" />
+<typeAlias alias="LightRequest" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.request.LightRequest" />
+<typeAlias alias="EventSchedule" memo1.Lines.Add('  type="com.sensus.mlc.schedule.model.EventSchedule" />
+<typeAlias alias="OffsetSchedule" memo1.Lines.Add('  type="com.sensus.mlc.schedule.model.OffsetSchedule" />
+<typeAlias alias="CustomSearch" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.CustomSearch" />
+<typeAlias alias="SearchParameter" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.SearchParameter" />
+<typeAlias alias="TimeZoneInfo" memo1.Lines.Add('  type="com.sensus.mlc.base.model.TimeZoneInfo" />
+<typeAlias alias="SensusPartNumberConfiguration"  type="com.sensus.mlc.smartpoint.model.SensusPartNumberConfiguration" />
+<typeAlias alias="LightHistory" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.LightHistory" />
+<typeAlias alias="Schedule" memo1.Lines.Add('	  type="com.sensus.mlc.schedule.model.Schedule" />
+<typeAlias alias="Column" memo1.Lines.Add('		  type="com.sensus.mlc.smartpoint.model.Column" />
+<typeAlias alias="GuaranteeLightExistenceRequest" type="com.sensus.mlc.smartpoint.model.request.GuaranteeLightExistenceRequest" />
+<typeAlias alias="CurrentAlarmWarningMessage" 	  type="com.sensus.mlc.smartpoint.model.CurrentAlarmWarningMessage" />
+<typeAlias alias="CustomSearchRequest" 			  type="com.sensus.mlc.smartpoint.model.request.CustomSearchRequest" />
+<typeAlias alias="TenantRequest" memo1.Lines.Add('  type="com.sensus.mlc.tenant.model.request.TenantRequest" />
+<typeAlias alias="LightStatusRequest" 			  type="com.sensus.mlc.smartpoint.model.request.LightStatusRequest" />
+<typeAlias alias="LightingControlRequest" 		  type="com.sensus.mlc.base.model.request.LightingControlRequest" />
+<typeAlias alias="ScheduleRequest" memo1.Lines.Add('  type="com.sensus.mlc.schedule.model.request.ScheduleRequest" />
+<typeAlias alias="PropertyValidValuesRequest" 	  type="com.sensus.mlc.smartpoint.model.request.PropertyValidValuesRequest" />
+<typeAlias alias="ColumnFilterRequest" 			  type="com.sensus.mlc.smartpoint.model.request.ColumnFilterRequest" />
+<typeAlias alias="ColumnFilterResponse" 		  type="com.sensus.mlc.smartpoint.model.response.ColumnFilterResponse" />
+</typeAliases>
+<mappers>
+<mapper resource="com/sensus/mlc/BAIRRO/dac/mybatis/map/Bairro.xml"/>
+<mapper resource="com/sensus/mlc/filial/dac/mybatis/map/Filial.xml" />
+<mapper resource="com/sensus/mlc/endereco/dac/mybatis/map/Endereco.xml" />
+</mappers>
+</configuration>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<settings>
+<setting name="lazyLoadingEnabled" value="false" />
+</settings>
+<typeAliases>
+<!-- Municipio mapping -->
+<typeAlias alias="InquiryMunicipioRequest" 	type="com.sensus.mlc.MUNICIPIO.model.request.InquiryMunicipioRequest" />
+<typeAlias alias="MunicipioRequest" 			type="com.sensus.mlc.MUNICIPIO.model.request.MunicipioRequest" />
+<typeAlias alias="FilialRequest" 		type="com.sensus.mlc.filial.model.request.FilialRequest" />
+<typeAlias alias="EnderecoRequest" 		type="com.sensus.mlc.endereco.model.request.EnderecoRequest" />
+<!-- Municipio and Smartpoint joint mapping -->
+<typeAlias alias="Municipio"  memo1.Lines.Add('type="com.sensus.mlc.MUNICIPIO.model.Municipio"/>
+<typeAlias alias="Filial" memo1.Lines.Add('    type="com.sensus.mlc.filial.model.Filial"/>
+<typeAlias alias="Endereco" memo1.Lines.Add('type="com.sensus.mlc.endereco.model.Endereco"/>
+<!-- Smartpoint mapping -->
+<typeAlias alias="Group" memo1.Lines.Add('		  type="com.sensus.mlc.group.model.Group" />
+<typeAlias alias="MUNICIPIO" memo1.Lines.Add('	      type="com.sensus.mlc.tag.model.MUNICIPIO" />
+<typeAlias alias="StatusMessage" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.StatusMessage" />
+<typeAlias alias="LightParameter" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.LightParameter" />
+<typeAlias alias="PropertyValidValue" 			  type="com.sensus.mlc.smartpoint.model.PropertyValidValue" />
+<typeAlias alias="StatusException" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.StatusException" />
+<typeAlias alias="LightRequest" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.request.LightRequest" />
+<typeAlias alias="EventSchedule" memo1.Lines.Add('  type="com.sensus.mlc.schedule.model.EventSchedule" />
+<typeAlias alias="OffsetSchedule" memo1.Lines.Add('  type="com.sensus.mlc.schedule.model.OffsetSchedule" />
+<typeAlias alias="CustomSearch" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.CustomSearch" />
+<typeAlias alias="SearchParameter" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.SearchParameter" />
+<typeAlias alias="TimeZoneInfo" memo1.Lines.Add('  type="com.sensus.mlc.base.model.TimeZoneInfo" />
+<typeAlias alias="SensusPartNumberConfiguration"  type="com.sensus.mlc.smartpoint.model.SensusPartNumberConfiguration" />
+<typeAlias alias="LightHistory" memo1.Lines.Add('  type="com.sensus.mlc.smartpoint.model.LightHistory" />
+<typeAlias alias="Schedule" memo1.Lines.Add('	  type="com.sensus.mlc.schedule.model.Schedule" />
+<typeAlias alias="Column" memo1.Lines.Add('		  type="com.sensus.mlc.smartpoint.model.Column" />
+<typeAlias alias="GuaranteeLightExistenceRequest" type="com.sensus.mlc.smartpoint.model.request.GuaranteeLightExistenceRequest" />
+<typeAlias alias="CurrentAlarmWarningMessage" 	  type="com.sensus.mlc.smartpoint.model.CurrentAlarmWarningMessage" />
+<typeAlias alias="CustomSearchRequest" 			  type="com.sensus.mlc.smartpoint.model.request.CustomSearchRequest" />
+<typeAlias alias="TenantRequest" memo1.Lines.Add('  type="com.sensus.mlc.tenant.model.request.TenantRequest" />
+<typeAlias alias="LightStatusRequest" 			  type="com.sensus.mlc.smartpoint.model.request.LightStatusRequest" />
+<typeAlias alias="LightingControlRequest" 		  type="com.sensus.mlc.base.model.request.LightingControlRequest" />
+<typeAlias alias="ScheduleRequest" memo1.Lines.Add('  type="com.sensus.mlc.schedule.model.request.ScheduleRequest" />
+<typeAlias alias="PropertyValidValuesRequest" 	  type="com.sensus.mlc.smartpoint.model.request.PropertyValidValuesRequest" />
+<typeAlias alias="ColumnFilterRequest" 			  type="com.sensus.mlc.smartpoint.model.request.ColumnFilterRequest" />
+<typeAlias alias="ColumnFilterResponse" 		  type="com.sensus.mlc.smartpoint.model.response.ColumnFilterResponse" />
+</typeAliases>
+<mappers>
+<mapper resource="com/sensus/mlc/MUNICIPIO/dac/mybatis/map/Municipio.xml"/>
+<mapper resource="com/sensus/mlc/filial/dac/mybatis/map/Filial.xml" />
+<mapper resource="com/sensus/mlc/endereco/dac/mybatis/map/Endereco.xml" />
+</mappers>
+</configuration>
