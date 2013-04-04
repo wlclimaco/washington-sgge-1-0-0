@@ -1,5 +1,4 @@
-Memo1
-package com.sensus.mlc.CNAE.bcf;
+package com.sensus.mlc.Gestao.bcf;
 
 import com.sensus.common.model.request.Request;
 import com.sensus.mlc.CNAE.model.request.CnaeRequest;
@@ -9,22 +8,22 @@ import com.sensus.mlc.CNAE.model.response.InquiryCnaeResponse;
 import com.sensus.mlc.process.model.response.ProcessResponse;
 
 
-/** 
+/**
  * The Interface ICnaeBCF.
  *
  * @author Washington.Costa
  */
-public interface ICnaeBCF 
+public interface ICnaeBCF
 {
 
-	/** 
+	/**
 	 * Insert CNAE.
 	 *
 	 * @param CNAERequest the CNAE request
-	 * @return the CNAE response 
+	 * @return the CNAE response
 	 */
 	public CnaeResponse insertCnae(CnaeRequest CNAERequest);
-  
+
 	/**
 	 * Update CNAE.
 	 *
@@ -32,32 +31,32 @@ public interface ICnaeBCF
 	 * @return the CNAE response
 	 */
 	public CnaeResponse updateCnae(CnaeRequest CNAERequest);
-  
-	/**  
-	 * Delete CNAE.  
-	 *     
-	 * @param CNAERequest the CNAE request 
+
+	/**
+	 * Delete CNAE.
+	 *
+	 * @param CNAERequest the CNAE request
 	 * @return the CNAE response
 	 */
-	public CnaeResponse deleteCnae(CnaeRequest CNAERequest); 
-   
-	/**  
-	 * Fetch all CNAE. 
-	 *  
-	 * @param inquiryCnaeRequest the inquiryCnae request   
-	 * @return the inquiry CNAE response 
-	 */ 
-	public InquiryCnaeResponse fetchAllCnae(InquiryCnaeRequest inquiryCnaeRequest); 
-   
-	/** 
-	 * Fetch CNAE by id. 
-	 *   
-	 * @param CnaeRequest the CNAE request 
-	 * @return the CNAE response  
-	 */ 
-	public CnaeResponse fetchCnaeById(CnaeRequest CNAERequest); 
- 
-} 
+	public CnaeResponse deleteCnae(CnaeRequest CNAERequest);
+
+	/**
+	 * Fetch all CNAE.
+	 *
+	 * @param inquiryCnaeRequest the inquiryCnae request
+	 * @return the inquiry CNAE response
+	 */
+	public InquiryCnaeResponse fetchAllCnae(InquiryCnaeRequest inquiryCnaeRequest);
+
+	/**
+	 * Fetch CNAE by id.
+	 *
+	 * @param CnaeRequest the CNAE request
+	 * @return the CNAE response
+	 */
+	public CnaeResponse fetchCnaeById(CnaeRequest CNAERequest);
+
+}
 package com.sensus.mlc.bairro.bcf;
 
 import com.sensus.common.model.request.Request;
@@ -68,22 +67,22 @@ import com.sensus.mlc.bairro.model.response.InquiryBairroResponse;
 import com.sensus.mlc.process.model.response.ProcessResponse;
 
 
-/** 
+/**
  * The Interface IBairroBCF.
  *
  * @author Washington.Costa
  */
-public interface IBairroBCF 
+public interface IBairroBCF
 {
 
-	/** 
+	/**
 	 * Insert bairro.
 	 *
 	 * @param bairroRequest the bairro request
-	 * @return the bairro response 
+	 * @return the bairro response
 	 */
 	public BairroResponse insertBairro(BairroRequest bairroRequest);
-  
+
 	/**
 	 * Update bairro.
 	 *
@@ -91,32 +90,32 @@ public interface IBairroBCF
 	 * @return the bairro response
 	 */
 	public BairroResponse updateBairro(BairroRequest bairroRequest);
-  
-	/**  
-	 * Delete bairro.  
-	 *     
-	 * @param bairroRequest the bairro request 
+
+	/**
+	 * Delete bairro.
+	 *
+	 * @param bairroRequest the bairro request
 	 * @return the bairro response
 	 */
-	public BairroResponse deleteBairro(BairroRequest bairroRequest); 
-   
-	/**  
-	 * Fetch all bairro. 
-	 *  
-	 * @param inquiryBairroRequest the inquiryBairro request   
-	 * @return the inquiry bairro response 
-	 */ 
-	public InquiryBairroResponse fetchAllBairro(InquiryBairroRequest inquiryBairroRequest); 
-   
-	/** 
-	 * Fetch bairro by id. 
-	 *   
-	 * @param BairroRequest the bairro request 
-	 * @return the bairro response  
-	 */ 
-	public BairroResponse fetchBairroById(BairroRequest bairroRequest); 
- 
-} 
+	public BairroResponse deleteBairro(BairroRequest bairroRequest);
+
+	/**
+	 * Fetch all bairro.
+	 *
+	 * @param inquiryBairroRequest the inquiryBairro request
+	 * @return the inquiry bairro response
+	 */
+	public InquiryBairroResponse fetchAllBairro(InquiryBairroRequest inquiryBairroRequest);
+
+	/**
+	 * Fetch bairro by id.
+	 *
+	 * @param BairroRequest the bairro request
+	 * @return the bairro response
+	 */
+	public BairroResponse fetchBairroById(BairroRequest bairroRequest);
+
+}
 package com.sensus.mlc.MUNICIPIO.bcf;
 
 import com.sensus.common.model.request.Request;
@@ -127,22 +126,22 @@ import com.sensus.mlc.MUNICIPIO.model.response.InquiryMunicipioResponse;
 import com.sensus.mlc.process.model.response.ProcessResponse;
 
 
-/** 
+/**
  * The Interface IMunicipioBCF.
  *
  * @author Washington.Costa
  */
-public interface IMunicipioBCF 
+public interface IMunicipioBCF
 {
 
-	/** 
+	/**
 	 * Insert MUNICIPIO.
 	 *
 	 * @param MUNICIPIORequest the MUNICIPIO request
-	 * @return the MUNICIPIO response 
+	 * @return the MUNICIPIO response
 	 */
 	public MunicipioResponse insertMunicipio(MunicipioRequest MUNICIPIORequest);
-  
+
 	/**
 	 * Update MUNICIPIO.
 	 *
@@ -150,32 +149,32 @@ public interface IMunicipioBCF
 	 * @return the MUNICIPIO response
 	 */
 	public MunicipioResponse updateMunicipio(MunicipioRequest MUNICIPIORequest);
-  
-	/**  
-	 * Delete MUNICIPIO.  
-	 *     
-	 * @param MUNICIPIORequest the MUNICIPIO request 
+
+	/**
+	 * Delete MUNICIPIO.
+	 *
+	 * @param MUNICIPIORequest the MUNICIPIO request
 	 * @return the MUNICIPIO response
 	 */
-	public MunicipioResponse deleteMunicipio(MunicipioRequest MUNICIPIORequest); 
-   
-	/**  
-	 * Fetch all MUNICIPIO. 
-	 *  
-	 * @param inquiryMunicipioRequest the inquiryMunicipio request   
-	 * @return the inquiry MUNICIPIO response 
-	 */ 
-	public InquiryMunicipioResponse fetchAllMunicipio(InquiryMunicipioRequest inquiryMunicipioRequest); 
-   
-	/** 
-	 * Fetch MUNICIPIO by id. 
-	 *   
-	 * @param MunicipioRequest the MUNICIPIO request 
-	 * @return the MUNICIPIO response  
-	 */ 
-	public MunicipioResponse fetchMunicipioById(MunicipioRequest MUNICIPIORequest); 
- 
-} 
+	public MunicipioResponse deleteMunicipio(MunicipioRequest MUNICIPIORequest);
+
+	/**
+	 * Fetch all MUNICIPIO.
+	 *
+	 * @param inquiryMunicipioRequest the inquiryMunicipio request
+	 * @return the inquiry MUNICIPIO response
+	 */
+	public InquiryMunicipioResponse fetchAllMunicipio(InquiryMunicipioRequest inquiryMunicipioRequest);
+
+	/**
+	 * Fetch MUNICIPIO by id.
+	 *
+	 * @param MunicipioRequest the MUNICIPIO request
+	 * @return the MUNICIPIO response
+	 */
+	public MunicipioResponse fetchMunicipioById(MunicipioRequest MUNICIPIORequest);
+
+}
 package com.sensus.mlc.MUNICIPIO.bcf;
 
 import com.sensus.common.model.request.Request;
@@ -186,22 +185,22 @@ import com.sensus.mlc.MUNICIPIO.model.response.InquiryMunicipioResponse;
 import com.sensus.mlc.process.model.response.ProcessResponse;
 
 
-/** 
+/**
  * The Interface IMunicipioBCF.
  *
  * @author Washington.Costa
  */
-public interface IMunicipioBCF 
+public interface IMunicipioBCF
 {
 
-	/** 
+	/**
 	 * Insert MUNICIPIO.
 	 *
 	 * @param MUNICIPIORequest the MUNICIPIO request
-	 * @return the MUNICIPIO response 
+	 * @return the MUNICIPIO response
 	 */
 	public MunicipioResponse insertMunicipio(MunicipioRequest MUNICIPIORequest);
-  
+
 	/**
 	 * Update MUNICIPIO.
 	 *
@@ -209,32 +208,32 @@ public interface IMunicipioBCF
 	 * @return the MUNICIPIO response
 	 */
 	public MunicipioResponse updateMunicipio(MunicipioRequest MUNICIPIORequest);
-  
-	/**  
-	 * Delete MUNICIPIO.  
-	 *     
-	 * @param MUNICIPIORequest the MUNICIPIO request 
+
+	/**
+	 * Delete MUNICIPIO.
+	 *
+	 * @param MUNICIPIORequest the MUNICIPIO request
 	 * @return the MUNICIPIO response
 	 */
-	public MunicipioResponse deleteMunicipio(MunicipioRequest MUNICIPIORequest); 
-   
-	/**  
-	 * Fetch all MUNICIPIO. 
-	 *  
-	 * @param inquiryMunicipioRequest the inquiryMunicipio request   
-	 * @return the inquiry MUNICIPIO response 
-	 */ 
-	public InquiryMunicipioResponse fetchAllMunicipio(InquiryMunicipioRequest inquiryMunicipioRequest); 
-   
-	/** 
-	 * Fetch MUNICIPIO by id. 
-	 *   
-	 * @param MunicipioRequest the MUNICIPIO request 
-	 * @return the MUNICIPIO response  
-	 */ 
-	public MunicipioResponse fetchMunicipioById(MunicipioRequest MUNICIPIORequest); 
- 
-} 
+	public MunicipioResponse deleteMunicipio(MunicipioRequest MUNICIPIORequest);
+
+	/**
+	 * Fetch all MUNICIPIO.
+	 *
+	 * @param inquiryMunicipioRequest the inquiryMunicipio request
+	 * @return the inquiry MUNICIPIO response
+	 */
+	public InquiryMunicipioResponse fetchAllMunicipio(InquiryMunicipioRequest inquiryMunicipioRequest);
+
+	/**
+	 * Fetch MUNICIPIO by id.
+	 *
+	 * @param MunicipioRequest the MUNICIPIO request
+	 * @return the MUNICIPIO response
+	 */
+	public MunicipioResponse fetchMunicipioById(MunicipioRequest MUNICIPIORequest);
+
+}
 package com.sensus.mlc.UF.bcf;
 
 import com.sensus.common.model.request.Request;
@@ -245,22 +244,22 @@ import com.sensus.mlc.UF.model.response.InquiryUfResponse;
 import com.sensus.mlc.process.model.response.ProcessResponse;
 
 
-/** 
+/**
  * The Interface IUfBCF.
  *
  * @author Washington.Costa
  */
-public interface IUfBCF 
+public interface IUfBCF
 {
 
-	/** 
+	/**
 	 * Insert UF.
 	 *
 	 * @param UFRequest the UF request
-	 * @return the UF response 
+	 * @return the UF response
 	 */
 	public UfResponse insertUf(UfRequest UFRequest);
-  
+
 	/**
 	 * Update UF.
 	 *
@@ -268,32 +267,32 @@ public interface IUfBCF
 	 * @return the UF response
 	 */
 	public UfResponse updateUf(UfRequest UFRequest);
-  
-	/**  
-	 * Delete UF.  
-	 *     
-	 * @param UFRequest the UF request 
+
+	/**
+	 * Delete UF.
+	 *
+	 * @param UFRequest the UF request
 	 * @return the UF response
 	 */
-	public UfResponse deleteUf(UfRequest UFRequest); 
-   
-	/**  
-	 * Fetch all UF. 
-	 *  
-	 * @param inquiryUfRequest the inquiryUf request   
-	 * @return the inquiry UF response 
-	 */ 
-	public InquiryUfResponse fetchAllUf(InquiryUfRequest inquiryUfRequest); 
-   
-	/** 
-	 * Fetch UF by id. 
-	 *   
-	 * @param UfRequest the UF request 
-	 * @return the UF response  
-	 */ 
-	public UfResponse fetchUfById(UfRequest UFRequest); 
- 
-} 
+	public UfResponse deleteUf(UfRequest UFRequest);
+
+	/**
+	 * Fetch all UF.
+	 *
+	 * @param inquiryUfRequest the inquiryUf request
+	 * @return the inquiry UF response
+	 */
+	public InquiryUfResponse fetchAllUf(InquiryUfRequest inquiryUfRequest);
+
+	/**
+	 * Fetch UF by id.
+	 *
+	 * @param UfRequest the UF request
+	 * @return the UF response
+	 */
+	public UfResponse fetchUfById(UfRequest UFRequest);
+
+}
 package com.sensus.mlc.CNAE.bcf;
 
 import com.sensus.common.model.request.Request;
@@ -304,22 +303,22 @@ import com.sensus.mlc.CNAE.model.response.InquiryCnaeResponse;
 import com.sensus.mlc.process.model.response.ProcessResponse;
 
 
-/** 
+/**
  * The Interface ICnaeBCF.
  *
  * @author Washington.Costa
  */
-public interface ICnaeBCF 
+public interface ICnaeBCF
 {
 
-	/** 
+	/**
 	 * Insert CNAE.
 	 *
 	 * @param CNAERequest the CNAE request
-	 * @return the CNAE response 
+	 * @return the CNAE response
 	 */
 	public CnaeResponse insertCnae(CnaeRequest CNAERequest);
-  
+
 	/**
 	 * Update CNAE.
 	 *
@@ -327,32 +326,32 @@ public interface ICnaeBCF
 	 * @return the CNAE response
 	 */
 	public CnaeResponse updateCnae(CnaeRequest CNAERequest);
-  
-	/**  
-	 * Delete CNAE.  
-	 *     
-	 * @param CNAERequest the CNAE request 
+
+	/**
+	 * Delete CNAE.
+	 *
+	 * @param CNAERequest the CNAE request
 	 * @return the CNAE response
 	 */
-	public CnaeResponse deleteCnae(CnaeRequest CNAERequest); 
-   
-	/**  
-	 * Fetch all CNAE. 
-	 *  
-	 * @param inquiryCnaeRequest the inquiryCnae request   
-	 * @return the inquiry CNAE response 
-	 */ 
-	public InquiryCnaeResponse fetchAllCnae(InquiryCnaeRequest inquiryCnaeRequest); 
-   
-	/** 
-	 * Fetch CNAE by id. 
-	 *   
-	 * @param CnaeRequest the CNAE request 
-	 * @return the CNAE response  
-	 */ 
-	public CnaeResponse fetchCnaeById(CnaeRequest CNAERequest); 
- 
-} 
+	public CnaeResponse deleteCnae(CnaeRequest CNAERequest);
+
+	/**
+	 * Fetch all CNAE.
+	 *
+	 * @param inquiryCnaeRequest the inquiryCnae request
+	 * @return the inquiry CNAE response
+	 */
+	public InquiryCnaeResponse fetchAllCnae(InquiryCnaeRequest inquiryCnaeRequest);
+
+	/**
+	 * Fetch CNAE by id.
+	 *
+	 * @param CnaeRequest the CNAE request
+	 * @return the CNAE response
+	 */
+	public CnaeResponse fetchCnaeById(CnaeRequest CNAERequest);
+
+}
 package com.sensus.mlc.BAIRRO.bcf;
 
 import com.sensus.common.model.request.Request;
@@ -363,22 +362,22 @@ import com.sensus.mlc.BAIRRO.model.response.InquiryBairroResponse;
 import com.sensus.mlc.process.model.response.ProcessResponse;
 
 
-/** 
+/**
  * The Interface IBairroBCF.
  *
  * @author Washington.Costa
  */
-public interface IBairroBCF 
+public interface IBairroBCF
 {
 
-	/** 
+	/**
 	 * Insert BAIRRO.
 	 *
 	 * @param BAIRRORequest the BAIRRO request
-	 * @return the BAIRRO response 
+	 * @return the BAIRRO response
 	 */
 	public BairroResponse insertBairro(BairroRequest BAIRRORequest);
-  
+
 	/**
 	 * Update BAIRRO.
 	 *
@@ -386,29 +385,29 @@ public interface IBairroBCF
 	 * @return the BAIRRO response
 	 */
 	public BairroResponse updateBairro(BairroRequest BAIRRORequest);
-  
-	/**  
-	 * Delete BAIRRO.  
-	 *     
-	 * @param BAIRRORequest the BAIRRO request 
+
+	/**
+	 * Delete BAIRRO.
+	 *
+	 * @param BAIRRORequest the BAIRRO request
 	 * @return the BAIRRO response
 	 */
-	public BairroResponse deleteBairro(BairroRequest BAIRRORequest); 
-   
-	/**  
-	 * Fetch all BAIRRO. 
-	 *  
-	 * @param inquiryBairroRequest the inquiryBairro request   
-	 * @return the inquiry BAIRRO response 
-	 */ 
-	public InquiryBairroResponse fetchAllBairro(InquiryBairroRequest inquiryBairroRequest); 
-   
-	/** 
-	 * Fetch BAIRRO by id. 
-	 *   
-	 * @param BairroRequest the BAIRRO request 
-	 * @return the BAIRRO response  
-	 */ 
-	public BairroResponse fetchBairroById(BairroRequest BAIRRORequest); 
- 
-} 
+	public BairroResponse deleteBairro(BairroRequest BAIRRORequest);
+
+	/**
+	 * Fetch all BAIRRO.
+	 *
+	 * @param inquiryBairroRequest the inquiryBairro request
+	 * @return the inquiry BAIRRO response
+	 */
+	public InquiryBairroResponse fetchAllBairro(InquiryBairroRequest inquiryBairroRequest);
+
+	/**
+	 * Fetch BAIRRO by id.
+	 *
+	 * @param BairroRequest the BAIRRO request
+	 * @return the BAIRRO response
+	 */
+	public BairroResponse fetchBairroById(BairroRequest BAIRRORequest);
+
+}

@@ -1,6 +1,5 @@
 public class Filial extends SensusModel
 {
-    private  ;
     private Empresa, codemp;
     private Integer codfilial;
     private String razfilial;
