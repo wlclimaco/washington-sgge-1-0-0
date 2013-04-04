@@ -1,4 +1,4 @@
-public class Edit1 extends SensusModel
+public class Endereco extends SensusModel
 {
     private Integer codend;
     private String 	endereco;

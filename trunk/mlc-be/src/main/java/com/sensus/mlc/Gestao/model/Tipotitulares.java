@@ -1,6 +1,5 @@
 public class Tipotitulares extends SensusModel
 {
-    private  ;
     private Integer codemp;
     private Integer codfilial;
     private Integer codtipocli;
