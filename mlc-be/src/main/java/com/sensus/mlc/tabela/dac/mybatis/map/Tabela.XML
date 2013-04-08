@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Tabela">
+<resultMap id="TabelasResult" type="Tabela">
+		<result property="nmtabela" column="nmtabela" />
+		<result property="dstabela" column="dstabela" />
+</resultMap>
+<sql id="allTabelaColumms">
+	SELECT
+		nmtabela,
+		dstabela
+</sql>
+<!-- Fetch All Tabelas -->
+<select id="fetchAllTabelas" parameterType="Map" resultMap="TabelasResult">
+SELECT  <include refid="allTabelaColumms"/>
+FROM Tabela;
+</select>
+<select id="fetchAllTabelaById"  parameterType="Map" resultMap="TabelaResult">
+   select <include refid="allTabelaColumms"/>
+   from Tabela e
+   where
+   e.nmtabela = #{nmtabela}
+</select>
+<!-- Insert Tabela -->
+<select id="insertTabela" parameterType="Tabela" resultType="int">
+SELECT ins_Tabela (
+#{nmtabela,jdbcType=VARCHAR},
+#{dstabela,jdbcType=VARCHAR},
+</select>
+<!-- Update Tabela -->
+<select id="updateTabela" parameterType="Tabela" resultType="int">
+SELECT upd_Tabela (
+#{nmtabela,jdbcType=VARCHAR},
+#{dstabela,jdbcType=VARCHAR},
+</select>
+</mapper>

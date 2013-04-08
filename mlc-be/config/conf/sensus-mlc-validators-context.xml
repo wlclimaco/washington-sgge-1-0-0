@@ -102,6 +102,86 @@
 
 	
 	
+<!-- ------------------Criado via Sistema Dominios------------------------------------------------------------------------------------------------- -->
+<!-- Dominios Validators -->
+<bean id="DominiosValidator" class="com.sensus.mlc.dominios.validation.DominiosValidator" />
+<bean id="dominiosValidationController" class="com.sensus.common.validation.ValidationController">
+	<property name="validators"> 
+		<list>  
+			<ref bean="DominiosValidator" />   
+		</list>    
+	</property>  
+</bean>    
+<bean id="DominiosListValidator" class="com.sensus.mlc.dominios.validation.DominiosListValidator" />
+<bean id="dominiosListValidationController" class="com.sensus.common.validation.ValidationController">
+   <property name="validators">
+       <list>
+	            <ref bean="DominiosListValidator" /> 
+       </list> 
+   </property>  
+</bean> 
+<!-- --------------------------------------------------------------------------------------------------------------------- -->
+
+<!-- ------------------Criado via Sistema Dominios------------------------------------------------------------------------------------------------- -->
+<!-- Dominios Validators -->
+<bean id="DominiosValidator" class="com.sensus.mlc.dominios.validation.DominiosValidator" />
+<bean id="dominiosValidationController" class="com.sensus.common.validation.ValidationController">
+	<property name="validators"> 
+		<list>  
+			<ref bean="DominiosValidator" />   
+		</list>    
+	</property>  
+</bean>    
+<bean id="DominiosListValidator" class="com.sensus.mlc.dominios.validation.DominiosListValidator" />
+<bean id="dominiosListValidationController" class="com.sensus.common.validation.ValidationController">
+   <property name="validators">
+       <list>
+	            <ref bean="DominiosListValidator" /> 
+       </list> 
+   </property>  
+</bean> 
+<!-- --------------------------------------------------------------------------------------------------------------------- -->
+
+<!-- ------------------Criado via Sistema Atributos------------------------------------------------------------------------------------------------- -->
+<!-- Atributos Validators -->
+<bean id="AtributosValidator" class="com.sensus.mlc.atributos.validation.AtributosValidator" />
+<bean id="atributosValidationController" class="com.sensus.common.validation.ValidationController">
+	<property name="validators"> 
+		<list>  
+			<ref bean="AtributosValidator" />   
+		</list>    
+	</property>  
+</bean>    
+<bean id="AtributosListValidator" class="com.sensus.mlc.atributos.validation.AtributosListValidator" />
+<bean id="atributosListValidationController" class="com.sensus.common.validation.ValidationController">
+   <property name="validators">
+       <list>
+	            <ref bean="AtributosListValidator" /> 
+       </list> 
+   </property>  
+</bean> 
+<!-- --------------------------------------------------------------------------------------------------------------------- -->
+
+<!-- ------------------Criado via Sistema Tabela------------------------------------------------------------------------------------------------- -->
+<!-- Tabela Validators -->
+<bean id="TabelaValidator" class="com.sensus.mlc.Tabela.validation.TabelaValidator" />
+<bean id="TabelaValidationController" class="com.sensus.common.validation.ValidationController">
+	<property name="validators"> 
+		<list>  
+			<ref bean="TabelaValidator" />   
+		</list>    
+	</property>  
+</bean>    
+<bean id="TabelaListValidator" class="com.sensus.mlc.Tabela.validation.TabelaListValidator" />
+<bean id="TabelaListValidationController" class="com.sensus.common.validation.ValidationController">
+   <property name="validators">
+       <list>
+	            <ref bean="TabelaListValidator" /> 
+       </list> 
+   </property>  
+</bean> 
+<!-- --------------------------------------------------------------------------------------------------------------------- -->
+
 	
 	
 	<bean id="GroupRequestValidator" class="com.sensus.mlc.group.validation.GroupRequestValidator" />
@@ -335,3 +415,7 @@
 		</property>
 	</bean>
 </beans>
+
+
+
+
