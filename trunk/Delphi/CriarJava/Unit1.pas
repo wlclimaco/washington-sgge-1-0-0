@@ -268,6 +268,9 @@ type
     Memo47: TMemo;
     Edit13: TEdit;
     Label34: TLabel;
+    PopupMenu2: TPopupMenu;
+    odos2: TMenuItem;
+    Nenhum2: TMenuItem;
     procedure SpeedButton1Click(Sender: TObject);
     procedure BtnPesquisaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -275,6 +278,8 @@ type
     procedure Nenhum1Click(Sender: TObject);
     procedure SbtAjudaClick(Sender: TObject);
     procedure BrvBitBtn1Click(Sender: TObject);
+    procedure odos2Click(Sender: TObject);
+    procedure Nenhum2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -412,6 +417,24 @@ begin
           ClientDataSet1.First;
 end;
 
+procedure TForm1.Nenhum2Click(Sender: TObject);
+begin
+      CheckBox1.Checked := false;
+      CheckBox2.Checked := false;
+      CheckBox3.Checked := false;
+      CheckBox4.Checked := false;
+      CheckBox5.Checked := false;
+      CheckBox6.Checked := false;
+      CheckBox7.Checked := false;
+      CheckBox8.Checked := false;
+      CheckBox9.Checked := false;
+      CheckBox10.Checked := false;
+      CheckBox11.Checked := false;
+      CheckBox18.Checked := false;
+      CheckBox19.Checked := false;
+      CheckBox27.Checked := false;
+end;
+
 procedure TForm1.odos1Click(Sender: TObject);
 begin
       ClientDataSet1.First;
@@ -423,6 +446,24 @@ begin
             ClientDataSet1.Next;
       end;
       ClientDataSet1.First;
+end;
+
+procedure TForm1.odos2Click(Sender: TObject);
+begin
+      CheckBox1.Checked := true;
+      CheckBox2.Checked := true;
+      CheckBox3.Checked := true;
+      CheckBox4.Checked := true;
+      CheckBox5.Checked := true;
+      CheckBox6.Checked := true;
+      CheckBox7.Checked := true;
+      CheckBox8.Checked := true;
+      CheckBox9.Checked := true;
+      CheckBox10.Checked := true;
+      CheckBox11.Checked := true;
+      CheckBox18.Checked := true;
+      CheckBox19.Checked := true;
+      CheckBox27.Checked := true;
 end;
 
 Function TForm1.GerarArquivo(Nome,Diretorio,extensao : String;Memo:TMemo;linha:Integer) : String;
@@ -529,60 +570,60 @@ procedure TForm1.BrvBitBtn1Click(Sender: TObject);
 begin
      if CheckBox1.Checked = true then
      begin
-           GerarArquivo('I'+PrimeiraMaiscula(Edit1.Text)+'BCF',BrvEdit1.Text,'.java',Memo3,0);
+           GerarArquivo('I'+PrimeiraMaiscula(Edit1.Text)+'BCF',BrvEdit1.Text+'BCF\','.java',Memo3,0);
      end;
      if CheckBox2.Checked = true then
      begin
-           GerarArquivo(''+PrimeiraMaiscula(Edit1.Text)+'BCFImpl',BrvEdit1.Text,'.java',Memo4,0);
+           GerarArquivo(''+PrimeiraMaiscula(Edit1.Text)+'BCFImpl',BrvEdit1.Text+'BCF\BCFImpl\','.java',Memo4,0);
      end;
      if CheckBox3.Checked = true then
      begin
-           GerarArquivo('I'+PrimeiraMaiscula(Edit1.Text)+'BCL',BrvEdit1.Text,'.java',Memo5,0);
+           GerarArquivo('I'+PrimeiraMaiscula(Edit1.Text)+'BCL',BrvEdit1.Text+'BCL\','.java',Memo5,0);
      end;
      if CheckBox4.Checked = true then
      begin
-           GerarArquivo(''+PrimeiraMaiscula(Edit1.Text)+'BCLImpl',BrvEdit1.Text,'.java',Memo6,0);
+           GerarArquivo(''+PrimeiraMaiscula(Edit1.Text)+'BCLImpl',BrvEdit1.Text+'BCL\BCLImpl\','.java',Memo6,0);
      end;
      if CheckBox5.Checked = true then
      begin
-           GerarArquivo('I'+PrimeiraMaiscula(Edit1.Text)+'BCL',BrvEdit1.Text,'.java',Memo7,0);
+           GerarArquivo('I'+PrimeiraMaiscula(Edit1.Text)+'BCL',BrvEdit1.Text+'BCL\','.java',Memo7,0);
      end;
      if CheckBox6.Checked = true then
      begin
-           GerarArquivo('I'+PrimeiraMaiscula(Edit1.Text)+'DAC',BrvEdit1.Text,'.java',Memo8,0);
+           GerarArquivo('I'+PrimeiraMaiscula(Edit1.Text)+'DAC',BrvEdit1.Text+'DAC\','.java',Memo8,0);
      end;
      if CheckBox7.Checked = true then
      begin
-           GerarArquivo(''+PrimeiraMaiscula(Edit1.Text)+'DACImpl',BrvEdit1.Text,'.java',Memo9,0);
+           GerarArquivo(''+PrimeiraMaiscula(Edit1.Text)+'DACImpl',BrvEdit1.Text+'DAC\mybatis\','.java',Memo9,0);
      end;
      if CheckBox8.Checked = true then
      begin
-           GerarArquivo(''+PrimeiraMaiscula(Edit1.Text)+'',BrvEdit1.Text,'.XML',Memo10,0);
+           GerarArquivo(''+PrimeiraMaiscula(Edit1.Text)+'',BrvEdit1.Text+'DAC\mybatis\map','.XML',Memo10,0);
      end;
      if CheckBox9.Checked = true then
      begin
-           GerarArquivo(PrimeiraMaiscula(Edit1.Text),BrvEdit1.Text,'.java',Memo12,0);
+           GerarArquivo(PrimeiraMaiscula(Edit1.Text),BrvEdit1.Text+'model\','.java',Memo12,0);
      end;
      if CheckBox10.Checked = true then
      begin
-           GerarArquivo(PrimeiraMaiscula(Edit1.Text)+'Request',BrvEdit1.Text,'.java',Memo13,0);
+           GerarArquivo(PrimeiraMaiscula(Edit1.Text)+'Request',BrvEdit1.Text+'model\request','.java',Memo13,0);
      end;
      if CheckBox11.Checked = true then
      begin
-           GerarArquivo(PrimeiraMaiscula(Edit1.Text)+'Response',BrvEdit1.Text,'.java',Memo14,0);
+           GerarArquivo(PrimeiraMaiscula(Edit1.Text)+'Response',BrvEdit1.Text+'model\response','.java',Memo14,0);
      end;
      if CheckBox27.Checked = true then
      begin
-           GerarArquivo(''+PrimeiraMaiscula(Edit1.Text)+'-sql-map-config',BrvEdit1.Text,'.xml',Memo11,0);
+           GerarArquivo(''+PrimeiraMaiscula(Edit1.Text)+'-sql-map-config',BrvEdit1.Text+'DAC\mybatis\map\','.xml',Memo11,0);
      end;
 
      if CheckBox18.Checked = true then
      begin
-           GerarArquivo('Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Response',BrvEdit1.Text,'.java',Memo15,0);
+           GerarArquivo('Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Response',BrvEdit1.Text+'model\response','.java',Memo15,0);
      end;
      if CheckBox19.Checked = true then
      begin
-           GerarArquivo('Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request',BrvEdit1.Text,'.java',Memo16,0);
+           GerarArquivo('Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request',BrvEdit1.Text+'model\request','.java',Memo16,0);
      end;
 
      if CheckBox28.Checked = true then
@@ -738,70 +779,70 @@ begin
      GravarConfiguracao;
      if CheckBox1.Checked = true then
      begin
-           Memo3 :=  UBE.criarCodeIClasseBCF(Edit1.Text,ClientDataSet1,Memo3);
+           Memo3 :=  UBE.criarCodeIClasseBCF(Edit1.Text,Edit13.Text,ClientDataSet1,Memo3);
            TabSheet1.TabVisible := true;
            TabSheet1.Caption := 'IClasseBCF';
      end;
      if CheckBox2.Checked = true then
      begin
-           Memo4 := criarCodeClasseBCFImpl(Edit1.Text,ClientDataSet1,Memo4);
+           Memo4 := criarCodeClasseBCFImpl(Edit1.Text,Edit13.Text,ClientDataSet1,Memo4);
            TabSheet2.TabVisible := true;
            TabSheet2.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'BCFImpl';
      end;
      if CheckBox3.Checked = true then
      begin
-           Memo5:=criarCodeIClasseBCL(Edit1.Text,ClientDataSet1,Memo5);
+           Memo5:=criarCodeIClasseBCL(Edit1.Text,Edit13.Text,ClientDataSet1,Memo5);
            TabSheet3.TabVisible := true;
            TabSheet3.Caption := 'I'+PrimeiraMaiscula(Edit1.Text)+'BCL';
      end;
      if CheckBox4.Checked = true then
      begin
-           Memo6 := criarCodeIClasseBCLImpl(Edit1.Text,ClientDataSet1,Memo6);
+           Memo6 := criarCodeIClasseBCLImpl(Edit1.Text,Edit13.Text,ClientDataSet1,Memo6);
            TabSheet4.TabVisible := true;
            TabSheet4.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'BCLImpl';
      end;
      if CheckBox5.Checked = true then
      begin
 
-           Memo7:=criarCodeIClasseBCL(Edit1.Text,ClientDataSet1,Memo7);
+           Memo7:=criarCodeIClasseBCL(Edit1.Text,Edit13.Text,ClientDataSet1,Memo7);
            TabSheet5.TabVisible := true;
            TabSheet5.Caption := 'I'+PrimeiraMaiscula(Edit1.Text)+'BCL';
      end;
      if CheckBox6.Checked = true then
      begin
 
-           Memo8:=criarCodeIClasseDAC(Edit1.Text,ClientDataSet1,Memo8);
+           Memo8:=criarCodeIClasseDAC(Edit1.Text,Edit13.Text,ClientDataSet1,Memo8);
            TabSheet6.TabVisible := true;
            TabSheet6.Caption := 'I'+PrimeiraMaiscula(Edit1.Text)+'DAC';
      end;
      if CheckBox7.Checked = true then
      begin
-           Memo9 := criarCodeIClasseDAC(Edit1.Text,ClientDataSet1,Memo9);
+           Memo9 := criarCodeIClasseDACImpl(Edit1.Text,Edit13.Text,ClientDataSet1,Memo9);
            TabSheet7.TabVisible := true;
            TabSheet7.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'DACImpl';
      end;
      if CheckBox8.Checked = true then
      begin
-           Memo10 := criarCodeClasseXML(Edit1.Text,ClientDataSet1,Memo10);
+           Memo10 := criarCodeClasseXML(Edit1.Text,Edit13.Text,ClientDataSet1,Memo10);
            TabSheet8.TabVisible := true;
            TabSheet8.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'.XML';
      end;
      if CheckBox9.Checked = true then
      begin
-           Memo12 := gerarModelo(Edit1.Text,ClientDataSet1,Memo12);
+           Memo12 := gerarModelo(Edit1.Text,Edit13.Text,ClientDataSet1,Memo12);
            TabSheet10.TabVisible := true;
            TabSheet10.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'Modelo';
      end;
      if CheckBox10.Checked = true then
      begin
-           Memo13:=criarCodeRequest(Edit1.Text,ClientDataSet1,Memo13);
+           Memo13:=criarCodeRequest(Edit1.Text,Edit13.Text,ClientDataSet1,Memo13);
            TabSheet11.TabVisible := true;
            TabSheet11.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'Request';
      end;
      if CheckBox11.Checked = true then
      begin
 
-           Memo14 := criarCodeResponse(Edit1.Text,ClientDataSet1,Memo14);
+           Memo14 := criarCodeResponse(Edit1.Text,Edit13.Text,ClientDataSet1,Memo14);
            TabSheet12.TabVisible := true;
            TabSheet12.Caption := ''+PrimeiraMaiscula(Edit1.Text)+'Response';
      end;
@@ -822,13 +863,13 @@ begin
      if CheckBox18.Checked = true then
      begin
 
-           Memo15 := criarCodeInquiryResponse(Edit1.Text,ClientDataSet1,Memo15);
+           Memo15 := criarCodeInquiryResponse(Edit1.Text,Edit13.Text,ClientDataSet1,Memo15);
            TabSheet13.TabVisible := true;
            TabSheet13.Caption := 'Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Response';
      end;
      if CheckBox19.Checked = true then
      begin
-           Memo16 := criarCodeInquiryRequest(Edit1.Text,ClientDataSet1,Memo16);
+           Memo16 := criarCodeInquiryRequest(Edit1.Text,Edit13.Text,ClientDataSet1,Memo16);
            TabSheet14.TabVisible := true;
            TabSheet14.Caption := 'Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request';
      end;
