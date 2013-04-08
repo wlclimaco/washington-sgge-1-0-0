@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<settings>
+		<setting name="lazyLoadingEnabled" value="false" />
+	</settings>
+
+	<typeAliases>
+		<!-- Tag mapping -->
+		<typeAlias alias="InquiryTagRequest" 	type="com.sensus.mlc.tag.model.request.InquiryTagRequest" />
+		<typeAlias alias="TagRequest" 			type="com.sensus.mlc.tag.model.request.TagRequest" />
+		<typeAlias alias="LightRequest" 		type="com.sensus.mlc.smartpoint.model.request.LightRequest" />
+
+		<!-- Tag and Smartpoint joint mapping -->
+		<typeAlias alias="Tag"  				type="com.sensus.mlc.tag.model.Tag"/>
+		<typeAlias alias="Light" 				type="com.sensus.mlc.smartpoint.model.Light"/>
+		<typeAlias alias="GeocodeSmartpointInfo" 		  type="com.sensus.mlc.smartpoint.model.GeocodeSmartpointInfo" />
+
+		<!-- Smartpoint mapping -->
+		<typeAlias alias="Group" 						  type="com.sensus.mlc.group.model.Group" />
+		<typeAlias alias="StatusMessage" 				  type="com.sensus.mlc.smartpoint.model.StatusMessage" />
+		<typeAlias alias="LightParameter" 				  type="com.sensus.mlc.smartpoint.model.LightParameter" />
+		<typeAlias alias="PropertyValidValue" 			  type="com.sensus.mlc.smartpoint.model.PropertyValidValue" />
+		<typeAlias alias="StatusException" 				  type="com.sensus.mlc.smartpoint.model.StatusException" />
+		<typeAlias alias="LightRequest" 				  type="com.sensus.mlc.smartpoint.model.request.LightRequest" />
+		<typeAlias alias="EventSchedule" 				  type="com.sensus.mlc.schedule.model.EventSchedule" />
+		<typeAlias alias="OffsetSchedule" 				  type="com.sensus.mlc.schedule.model.OffsetSchedule" />
+		<typeAlias alias="CustomSearch" 				  type="com.sensus.mlc.smartpoint.model.CustomSearch" />
+		<typeAlias alias="SearchParameter" 				  type="com.sensus.mlc.smartpoint.model.SearchParameter" />
+		<typeAlias alias="TimeZoneInfo" 				  type="com.sensus.mlc.base.model.TimeZoneInfo" />
+		<typeAlias alias="SensusPartNumberConfiguration"  type="com.sensus.mlc.smartpoint.model.SensusPartNumberConfiguration" />
+		<typeAlias alias="LightHistory" 				  type="com.sensus.mlc.smartpoint.model.LightHistory" />
+		<typeAlias alias="Schedule" 					  type="com.sensus.mlc.schedule.model.Schedule" />
+		<typeAlias alias="Column" 						  type="com.sensus.mlc.smartpoint.model.Column" />
+		<typeAlias alias="GuaranteeLightExistenceRequest" type="com.sensus.mlc.smartpoint.model.request.GuaranteeLightExistenceRequest" />
+		<typeAlias alias="CurrentAlarmWarningMessage" 	  type="com.sensus.mlc.smartpoint.model.CurrentAlarmWarningMessage" />
+		<typeAlias alias="CustomSearchRequest" 			  type="com.sensus.mlc.smartpoint.model.request.CustomSearchRequest" />
+		<typeAlias alias="TenantRequest" 				  type="com.sensus.mlc.tenant.model.request.TenantRequest" />
+		<typeAlias alias="LightStatusRequest" 			  type="com.sensus.mlc.smartpoint.model.request.LightStatusRequest" />
+		<typeAlias alias="LightingControlRequest" 		  type="com.sensus.mlc.base.model.request.LightingControlRequest" />
+		<typeAlias alias="ScheduleRequest" 				  type="com.sensus.mlc.schedule.model.request.ScheduleRequest" />
+		<typeAlias alias="PropertyValidValuesRequest" 	  type="com.sensus.mlc.smartpoint.model.request.PropertyValidValuesRequest" />
+		<typeAlias alias="ColumnFilterRequest" 			  type="com.sensus.mlc.smartpoint.model.request.ColumnFilterRequest" />
+		<typeAlias alias="ColumnFilterResponse" 		  type="com.sensus.mlc.smartpoint.model.response.ColumnFilterResponse" />
+
+	</typeAliases>
+
+	<mappers>
+    	<mapper resource="com/sensus/mlc/tag/dac/mybatis/map/tag.xml"/>
+    	<mapper resource="com/sensus/mlc/smartpoint/dac/mybatis/map/smartpoint.xml" />
+    </mappers>
+
+</configuration>
+

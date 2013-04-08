@@ -1,0 +1,271 @@
+Memo1
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<settings>
+<setting name="lazyLoadingEnabled" value="false" />
+</settings>
+<typeAliases>
+<!-- Empresa mapping -->
+<typeAlias alias="InquiryEmpresaRequest" 	type="com.sensus.mlc.empresa.model.request.InquiryEmpresaRequest" />
+<typeAlias alias="EmpresaRequest" 			type="com.sensus.mlc.empresa.model.request.EmpresaRequest" />
+<typeAlias alias="FilialRequest" 		type="com.sensus.mlc.filial.model.request.FilialRequest" />
+<typeAlias alias="EnderecoRequest" 		type="com.sensus.mlc.endereco.model.request.EnderecoRequest" />
+<!-- Empresa and Smartpoint joint mapping -->
+<typeAlias alias="Empresa"  memo1.Lines.Add('type="com.sensus.mlc.empresa.model.Empresa"/>
+<typeAlias alias="Filial" memo1.Lines.Add('    type="com.sensus.mlc.filial.model.Filial"/>
+<typeAlias alias="Endereco" memo1.Lines.Add('type="com.sensus.mlc.endereco.model.Endereco"/>
+<!-- Smartpoint mapping -->
+<typeAlias alias="Group" memo1.Lines.Add('		  type="com.sensus.mlc.group.model.Group" />
+<typeAlias alias="empresa" memo1.Lines.Add('	      type="com.sensus.mlc.empresa.model.Empresa" />
+</typeAliases>
+<mappers>
+<mapper resource="com/sensus/mlc/empresa/dac/mybatis/map/Empresa.xml"/>
+<mapper resource="com/sensus/mlc/endereco/dac/mybatis/map/Endereco.xml" />
+</mappers>
+</configuration>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<settings>
+<setting name="lazyLoadingEnabled" value="false" />
+</settings>
+<typeAliases>
+<!-- Filial mapping -->
+<typeAlias alias="InquiryFilialRequest" 	type="com.sensus.mlc.filial.model.request.InquiryFilialRequest" />
+<typeAlias alias="FilialRequest" 			type="com.sensus.mlc.filial.model.request.FilialRequest" />
+<typeAlias alias="FilialRequest" 		type="com.sensus.mlc.filial.model.request.FilialRequest" />
+<typeAlias alias="EnderecoRequest" 		type="com.sensus.mlc.endereco.model.request.EnderecoRequest" />
+<!-- Filial and Smartpoint joint mapping -->
+<typeAlias alias="Filial"  memo1.Lines.Add('type="com.sensus.mlc.filial.model.Filial"/>
+<typeAlias alias="Filial" memo1.Lines.Add('    type="com.sensus.mlc.filial.model.Filial"/>
+<typeAlias alias="Endereco" memo1.Lines.Add('type="com.sensus.mlc.endereco.model.Endereco"/>
+<!-- Smartpoint mapping -->
+<typeAlias alias="Group" memo1.Lines.Add('		  type="com.sensus.mlc.group.model.Group" />
+<typeAlias alias="filial" memo1.Lines.Add('	      type="com.sensus.mlc.filial.model.Filial" />
+</typeAliases>
+<mappers>
+<mapper resource="com/sensus/mlc/filial/dac/mybatis/map/Filial.xml"/>
+<mapper resource="com/sensus/mlc/endereco/dac/mybatis/map/Endereco.xml" />
+</mappers>
+</configuration>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<settings>
+<setting name="lazyLoadingEnabled" value="false" />
+</settings>
+<typeAliases>
+<!-- Endereco mapping -->
+<typeAlias alias="InquiryEnderecoRequest" 	type="com.sensus.mlc.endereco.model.request.InquiryEnderecoRequest" />
+<typeAlias alias="EnderecoRequest" 			type="com.sensus.mlc.endereco.model.request.EnderecoRequest" />
+<typeAlias alias="FilialRequest" 		type="com.sensus.mlc.filial.model.request.FilialRequest" />
+<typeAlias alias="EnderecoRequest" 		type="com.sensus.mlc.endereco.model.request.EnderecoRequest" />
+<!-- Endereco and Smartpoint joint mapping -->
+<typeAlias alias="Endereco"  memo1.Lines.Add('type="com.sensus.mlc.endereco.model.Endereco"/>
+<typeAlias alias="Filial" memo1.Lines.Add('    type="com.sensus.mlc.filial.model.Filial"/>
+<typeAlias alias="Endereco" memo1.Lines.Add('type="com.sensus.mlc.endereco.model.Endereco"/>
+<!-- Smartpoint mapping -->
+<typeAlias alias="Group" memo1.Lines.Add('		  type="com.sensus.mlc.group.model.Group" />
+<typeAlias alias="endereco" memo1.Lines.Add('	      type="com.sensus.mlc.endereco.model.Endereco" />
+</typeAliases>
+<mappers>
+<mapper resource="com/sensus/mlc/endereco/dac/mybatis/map/Endereco.xml"/>
+<mapper resource="com/sensus/mlc/endereco/dac/mybatis/map/Endereco.xml" />
+</mappers>
+</configuration>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<settings>
+<setting name="lazyLoadingEnabled" value="false" />
+</settings>
+<typeAliases>
+<!-- Cnae mapping -->
+<typeAlias alias="InquiryCnaeRequest" 	type="com.sensus.mlc.cnae.model.request.InquiryCnaeRequest" />
+<typeAlias alias="CnaeRequest" 			type="com.sensus.mlc.cnae.model.request.CnaeRequest" />
+<typeAlias alias="FilialRequest" 		type="com.sensus.mlc.filial.model.request.FilialRequest" />
+<typeAlias alias="EnderecoRequest" 		type="com.sensus.mlc.endereco.model.request.EnderecoRequest" />
+<!-- Cnae and Smartpoint joint mapping -->
+<typeAlias alias="Cnae"  memo1.Lines.Add('type="com.sensus.mlc.cnae.model.Cnae"/>
+<typeAlias alias="Filial" memo1.Lines.Add('    type="com.sensus.mlc.filial.model.Filial"/>
+<typeAlias alias="Endereco" memo1.Lines.Add('type="com.sensus.mlc.endereco.model.Endereco"/>
+<!-- Smartpoint mapping -->
+<typeAlias alias="Group" memo1.Lines.Add('		  type="com.sensus.mlc.group.model.Group" />
+<typeAlias alias="cnae" memo1.Lines.Add('	      type="com.sensus.mlc.cnae.model.Cnae" />
+</typeAliases>
+<mappers>
+<mapper resource="com/sensus/mlc/cnae/dac/mybatis/map/Cnae.xml"/>
+<mapper resource="com/sensus/mlc/endereco/dac/mybatis/map/Endereco.xml" />
+</mappers>
+</configuration>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<settings>
+<setting name="lazyLoadingEnabled" value="false" />
+</settings>
+<typeAliases>
+<!-- Bairro mapping -->
+<typeAlias alias="InquiryBairroRequest" 	type="com.sensus.mlc.bairro.model.request.InquiryBairroRequest" />
+<typeAlias alias="BairroRequest" 			type="com.sensus.mlc.bairro.model.request.BairroRequest" />
+<typeAlias alias="FilialRequest" 		type="com.sensus.mlc.filial.model.request.FilialRequest" />
+<typeAlias alias="EnderecoRequest" 		type="com.sensus.mlc.endereco.model.request.EnderecoRequest" />
+<!-- Bairro and Smartpoint joint mapping -->
+<typeAlias alias="Bairro"  memo1.Lines.Add('type="com.sensus.mlc.bairro.model.Bairro"/>
+<typeAlias alias="Filial" memo1.Lines.Add('    type="com.sensus.mlc.filial.model.Filial"/>
+<typeAlias alias="Endereco" memo1.Lines.Add('type="com.sensus.mlc.endereco.model.Endereco"/>
+<!-- Smartpoint mapping -->
+<typeAlias alias="Group" memo1.Lines.Add('		  type="com.sensus.mlc.group.model.Group" />
+<typeAlias alias="bairro" memo1.Lines.Add('	      type="com.sensus.mlc.bairro.model.Bairro" />
+</typeAliases>
+<mappers>
+<mapper resource="com/sensus/mlc/bairro/dac/mybatis/map/Bairro.xml"/>
+<mapper resource="com/sensus/mlc/endereco/dac/mybatis/map/Endereco.xml" />
+</mappers>
+</configuration>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<settings>
+<setting name="lazyLoadingEnabled" value="false" />
+</settings>
+<typeAliases>
+<!-- Municipio mapping -->
+<typeAlias alias="InquiryMunicipioRequest" 	type="com.sensus.mlc.municipio.model.request.InquiryMunicipioRequest" />
+<typeAlias alias="MunicipioRequest" 			type="com.sensus.mlc.municipio.model.request.MunicipioRequest" />
+<typeAlias alias="FilialRequest" 		type="com.sensus.mlc.filial.model.request.FilialRequest" />
+<typeAlias alias="EnderecoRequest" 		type="com.sensus.mlc.endereco.model.request.EnderecoRequest" />
+<!-- Municipio and Smartpoint joint mapping -->
+<typeAlias alias="Municipio"  memo1.Lines.Add('type="com.sensus.mlc.municipio.model.Municipio"/>
+<typeAlias alias="Filial" memo1.Lines.Add('    type="com.sensus.mlc.filial.model.Filial"/>
+<typeAlias alias="Endereco" memo1.Lines.Add('type="com.sensus.mlc.endereco.model.Endereco"/>
+<!-- Smartpoint mapping -->
+<typeAlias alias="Group" memo1.Lines.Add('		  type="com.sensus.mlc.group.model.Group" />
+<typeAlias alias="municipio" memo1.Lines.Add('	      type="com.sensus.mlc.municipio.model.Municipio" />
+</typeAliases>
+<mappers>
+<mapper resource="com/sensus/mlc/municipio/dac/mybatis/map/Municipio.xml"/>
+<mapper resource="com/sensus/mlc/endereco/dac/mybatis/map/Endereco.xml" />
+</mappers>
+</configuration>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<settings>
+<setting name="lazyLoadingEnabled" value="false" />
+</settings>
+<typeAliases>
+<!-- Municipio mapping -->
+<typeAlias alias="InquiryMunicipioRequest" 	type="com.sensus.mlc.municipio.model.request.InquiryMunicipioRequest" />
+<typeAlias alias="MunicipioRequest" 			type="com.sensus.mlc.municipio.model.request.MunicipioRequest" />
+<typeAlias alias="FilialRequest" 		type="com.sensus.mlc.filial.model.request.FilialRequest" />
+<typeAlias alias="EnderecoRequest" 		type="com.sensus.mlc.endereco.model.request.EnderecoRequest" />
+<!-- Municipio and Smartpoint joint mapping -->
+<typeAlias alias="Municipio"  memo1.Lines.Add('type="com.sensus.mlc.municipio.model.Municipio"/>
+<typeAlias alias="Filial" memo1.Lines.Add('    type="com.sensus.mlc.filial.model.Filial"/>
+<typeAlias alias="Endereco" memo1.Lines.Add('type="com.sensus.mlc.endereco.model.Endereco"/>
+<!-- Smartpoint mapping -->
+<typeAlias alias="Group" memo1.Lines.Add('		  type="com.sensus.mlc.group.model.Group" />
+<typeAlias alias="municipio" memo1.Lines.Add('	      type="com.sensus.mlc.municipio.model.Municipio" />
+</typeAliases>
+<mappers>
+<mapper resource="com/sensus/mlc/municipio/dac/mybatis/map/Municipio.xml"/>
+<mapper resource="com/sensus/mlc/endereco/dac/mybatis/map/Endereco.xml" />
+</mappers>
+</configuration>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<settings>
+<setting name="lazyLoadingEnabled" value="false" />
+</settings>
+<typeAliases>
+<!-- Uf mapping -->
+<typeAlias alias="InquiryUfRequest" 	type="com.sensus.mlc.uf.model.request.InquiryUfRequest" />
+<typeAlias alias="UfRequest" 			type="com.sensus.mlc.uf.model.request.UfRequest" />
+<typeAlias alias="FilialRequest" 		type="com.sensus.mlc.filial.model.request.FilialRequest" />
+<typeAlias alias="EnderecoRequest" 		type="com.sensus.mlc.endereco.model.request.EnderecoRequest" />
+<!-- Uf and Smartpoint joint mapping -->
+<typeAlias alias="Uf"  memo1.Lines.Add('type="com.sensus.mlc.uf.model.Uf"/>
+<typeAlias alias="Filial" memo1.Lines.Add('    type="com.sensus.mlc.filial.model.Filial"/>
+<typeAlias alias="Endereco" memo1.Lines.Add('type="com.sensus.mlc.endereco.model.Endereco"/>
+<!-- Smartpoint mapping -->
+<typeAlias alias="Group" memo1.Lines.Add('		  type="com.sensus.mlc.group.model.Group" />
+<typeAlias alias="uf" memo1.Lines.Add('	      type="com.sensus.mlc.uf.model.Uf" />
+</typeAliases>
+<mappers>
+<mapper resource="com/sensus/mlc/uf/dac/mybatis/map/Uf.xml"/>
+<mapper resource="com/sensus/mlc/endereco/dac/mybatis/map/Endereco.xml" />
+</mappers>
+</configuration>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<settings>
+<setting name="lazyLoadingEnabled" value="false" />
+</settings>
+<typeAliases>
+<!-- Pais mapping -->
+<typeAlias alias="InquiryPaisRequest" 	type="com.sensus.mlc.pais.model.request.InquiryPaisRequest" />
+<typeAlias alias="PaisRequest" 			type="com.sensus.mlc.pais.model.request.PaisRequest" />
+<typeAlias alias="FilialRequest" 		type="com.sensus.mlc.filial.model.request.FilialRequest" />
+<typeAlias alias="EnderecoRequest" 		type="com.sensus.mlc.endereco.model.request.EnderecoRequest" />
+<!-- Pais and Smartpoint joint mapping -->
+<typeAlias alias="Pais"  memo1.Lines.Add('type="com.sensus.mlc.pais.model.Pais"/>
+<typeAlias alias="Filial" memo1.Lines.Add('    type="com.sensus.mlc.filial.model.Filial"/>
+<typeAlias alias="Endereco" memo1.Lines.Add('type="com.sensus.mlc.endereco.model.Endereco"/>
+<!-- Smartpoint mapping -->
+<typeAlias alias="Group" memo1.Lines.Add('		  type="com.sensus.mlc.group.model.Group" />
+<typeAlias alias="pais" memo1.Lines.Add('	      type="com.sensus.mlc.pais.model.Pais" />
+</typeAliases>
+<mappers>
+<mapper resource="com/sensus/mlc/pais/dac/mybatis/map/Pais.xml"/>
+<mapper resource="com/sensus/mlc/endereco/dac/mybatis/map/Endereco.xml" />
+</mappers>
+</configuration>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<settings>
+<setting name="lazyLoadingEnabled" value="false" />
+</settings>
+<typeAliases>
+<!-- Eventos mapping -->
+<typeAlias alias="InquiryEventosRequest" 	type="com.sensus.mlc.eventos.model.request.InquiryEventosRequest" />
+<typeAlias alias="EventosRequest" 			type="com.sensus.mlc.eventos.model.request.EventosRequest" />
+<typeAlias alias="FilialRequest" 		type="com.sensus.mlc.filial.model.request.FilialRequest" />
+<typeAlias alias="EnderecoRequest" 		type="com.sensus.mlc.endereco.model.request.EnderecoRequest" />
+<!-- Eventos and Smartpoint joint mapping -->
+<typeAlias alias="Eventos"  memo1.Lines.Add('type="com.sensus.mlc.eventos.model.Eventos"/>
+<typeAlias alias="Filial" memo1.Lines.Add('    type="com.sensus.mlc.filial.model.Filial"/>
+<typeAlias alias="Endereco" memo1.Lines.Add('type="com.sensus.mlc.endereco.model.Endereco"/>
+<!-- Smartpoint mapping -->
+<typeAlias alias="Group" memo1.Lines.Add('		  type="com.sensus.mlc.group.model.Group" />
+<typeAlias alias="eventos" memo1.Lines.Add('	      type="com.sensus.mlc.eventos.model.Eventos" />
+</typeAliases>
+<mappers>
+<mapper resource="com/sensus/mlc/eventos/dac/mybatis/map/Eventos.xml"/>
+<mapper resource="com/sensus/mlc/endereco/dac/mybatis/map/Endereco.xml" />
+</mappers>
+</configuration>
