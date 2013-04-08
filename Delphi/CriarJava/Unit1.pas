@@ -266,6 +266,8 @@ type
     Memo45: TMemo;
     Memo46: TMemo;
     Memo47: TMemo;
+    Edit13: TEdit;
+    Label34: TLabel;
     procedure SpeedButton1Click(Sender: TObject);
     procedure BtnPesquisaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);

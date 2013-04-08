@@ -42,7 +42,7 @@ begin
       memo1.Lines.Add('import com.sensus.mlc.wui.light.LightAPIController;');
       memo1.Lines.Add('');
       memo1.Lines.Add('/** ');
-      memo1.Lines.Add('* @author QATEmployee ');
+      memo1.Lines.Add('* @author Washington ');
       memo1.Lines.Add('* ');
       memo1.Lines.Add('*/ ');
       memo1.Lines.Add('@Controller');
