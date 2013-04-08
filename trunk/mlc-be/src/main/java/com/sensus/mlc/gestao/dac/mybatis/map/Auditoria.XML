@@ -1,0 +1,55 @@
+Memo1
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Auditoria">
+<resultMap id="AuditoriasResult" type="Auditoria">
+</resultMap>
+<sql id="allAuditoriaColumms">
+   SELECT 
+     CODALTINS,
+     TIPO,
+     DTINS,
+     HINS,
+     IDUSUINS,
+     DTALT,
+     HALT,
+     IDUSUALT,
+   </sql>
+<!-- Fetch All auditorias -->
+<select id="fetchAllAuditorias" parameterType="Map" resultMap="AuditoriasResult">
+   SELECT  <include refid="allAuditoriaColumms"/>
+       FROM auditoria;   
+   </select>
+<select id="fetchAllAuditoriaById"  parameterType="Map" resultMap="AuditoriaResult">
+   select <include refid="allAuditoriaColumms"/>
+       from auditoria e   
+       where   
+       e.codemp = #{codemp}  
+   </select>
+<!-- Insert Auditoria -->
+ <select id="insertAuditoria" parameterType="Auditoria" resultType="int">
+     SELECT ins_auditoria (   
+     #{codaltins,jdbcType=INTEGER},
+     #{tipo,jdbcType=VARCHAR},
+     #{dtins,jdbcType=DATE},
+     #{hins,jdbcType=DATE},
+     #{idusuins,jdbcType=VARCHAR},
+     #{dtalt,jdbcType=DATE},
+     #{halt,jdbcType=DATE},
+     #{idusualt,jdbcType=VARCHAR},
+ </select>
+<!-- Update Auditoria -->
+ <select id="updateAuditoria" parameterType="Auditoria" resultType="int">
+     SELECT upd_auditoria (   
+     #{codaltins,jdbcType=INTEGER},
+     #{tipo,jdbcType=VARCHAR},
+     #{dtins,jdbcType=DATE},
+     #{hins,jdbcType=DATE},
+     #{idusuins,jdbcType=VARCHAR},
+     #{dtalt,jdbcType=DATE},
+     #{halt,jdbcType=DATE},
+     #{idusualt,jdbcType=VARCHAR},
+ </select>
+</mapper>

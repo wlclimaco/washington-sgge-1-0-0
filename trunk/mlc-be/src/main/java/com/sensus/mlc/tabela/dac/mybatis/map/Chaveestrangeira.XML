@@ -1,0 +1,43 @@
+Memo1
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Chaveestrangeira">
+<resultMap id="ChaveestrangeirasResult" type="Chaveestrangeira">
+</resultMap>
+<sql id="allChaveestrangeiraColumms">
+   SELECT 
+     nmchaest,
+     nmtabela,
+     nmtabest,
+     tpchaest,
+   </sql>
+<!-- Fetch All chaveestrangeiras -->
+<select id="fetchAllChaveestrangeiras" parameterType="Map" resultMap="ChaveestrangeirasResult">
+   SELECT  <include refid="allChaveestrangeiraColumms"/>
+       FROM chaveestrangeira;   
+   </select>
+<select id="fetchAllChaveestrangeiraById"  parameterType="Map" resultMap="ChaveestrangeiraResult">
+   select <include refid="allChaveestrangeiraColumms"/>
+       from chaveestrangeira e   
+       where   
+       e.codemp = #{codemp}  
+   </select>
+<!-- Insert Chaveestrangeira -->
+ <select id="insertChaveestrangeira" parameterType="Chaveestrangeira" resultType="int">
+     SELECT ins_chaveestrangeira (   
+     #{nmchaest,jdbcType=VARCHAR},
+     #{nmtabela,jdbcType=VARCHAR},
+     #{nmtabest,jdbcType=VARCHAR},
+     #{tpchaest,jdbcType=VARCHAR},
+ </select>
+<!-- Update Chaveestrangeira -->
+ <select id="updateChaveestrangeira" parameterType="Chaveestrangeira" resultType="int">
+     SELECT upd_chaveestrangeira (   
+     #{nmchaest,jdbcType=VARCHAR},
+     #{nmtabela,jdbcType=VARCHAR},
+     #{nmtabest,jdbcType=VARCHAR},
+     #{tpchaest,jdbcType=VARCHAR},
+ </select>
+</mapper>
