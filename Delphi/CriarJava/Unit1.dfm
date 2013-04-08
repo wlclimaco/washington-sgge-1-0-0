@@ -771,7 +771,7 @@ object Form1: TForm1
       object Label33: TLabel
         Left = 568
         Top = 37
-        Width = 113
+        Width = 109
         Height = 16
         Caption = 'Descri'#231#227'o Tabela'
         Font.Charset = DEFAULT_CHARSET
@@ -800,6 +800,7 @@ object Form1: TForm1
         Width = 169
         Height = 344
         Caption = 'Classes BE'
+        PopupMenu = PopupMenu2
         TabOrder = 0
         object CheckBox1: TCheckBox
           Left = 24
@@ -1299,6 +1300,10 @@ object Form1: TForm1
     object TbsConsulta: TTabSheet
       Caption = 'Arquivo'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo1: TMemo
         Left = 0
         Top = 0
@@ -1314,6 +1319,10 @@ object Form1: TForm1
     object TabSheet1: TTabSheet
       Caption = 'Modelo'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo3: TMemo
         Left = 0
         Top = 0
@@ -1329,6 +1338,10 @@ object Form1: TForm1
     object TabSheet2: TTabSheet
       Caption = 'InqueryResponse'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo4: TMemo
         Left = 0
         Top = 0
@@ -1344,6 +1357,10 @@ object Form1: TForm1
     object TabSheet3: TTabSheet
       Caption = 'TabSheet3'
       ImageIndex = 4
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo5: TMemo
         Left = 0
         Top = 0
@@ -1359,6 +1376,10 @@ object Form1: TForm1
     object TabSheet4: TTabSheet
       Caption = 'TabSheet4'
       ImageIndex = 5
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo6: TMemo
         Left = 0
         Top = 0
@@ -1374,6 +1395,10 @@ object Form1: TForm1
     object TabSheet5: TTabSheet
       Caption = 'TabSheet5'
       ImageIndex = 6
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo7: TMemo
         Left = 0
         Top = 0
@@ -1400,6 +1425,10 @@ object Form1: TForm1
     object TabSheet6: TTabSheet
       Caption = 'TabSheet6'
       ImageIndex = 7
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo8: TMemo
         Left = 0
         Top = 0
@@ -1415,6 +1444,10 @@ object Form1: TForm1
     object TabSheet7: TTabSheet
       Caption = 'TabSheet7'
       ImageIndex = 8
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo9: TMemo
         Left = 0
         Top = 0
@@ -1430,6 +1463,10 @@ object Form1: TForm1
     object TabSheet8: TTabSheet
       Caption = 'TabSheet8'
       ImageIndex = 9
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo10: TMemo
         Left = 0
         Top = 0
@@ -1445,6 +1482,10 @@ object Form1: TForm1
     object TabSheet9: TTabSheet
       Caption = 'TabSheet9'
       ImageIndex = 10
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo11: TMemo
         Left = 0
         Top = 0
@@ -1460,6 +1501,10 @@ object Form1: TForm1
     object TabSheet10: TTabSheet
       Caption = 'TabSheet10'
       ImageIndex = 11
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo12: TMemo
         Left = 0
         Top = 0
@@ -1475,6 +1520,10 @@ object Form1: TForm1
     object TabSheet11: TTabSheet
       Caption = 'TabSheet11'
       ImageIndex = 12
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo13: TMemo
         Left = 0
         Top = 0
@@ -1490,6 +1539,10 @@ object Form1: TForm1
     object TabSheet12: TTabSheet
       Caption = 'TabSheet12'
       ImageIndex = 13
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo14: TMemo
         Left = 0
         Top = 0
@@ -1505,6 +1558,10 @@ object Form1: TForm1
     object TabSheet13: TTabSheet
       Caption = 'TabSheet13'
       ImageIndex = 14
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo15: TMemo
         Left = 0
         Top = 0
@@ -1520,6 +1577,10 @@ object Form1: TForm1
     object TabSheet14: TTabSheet
       Caption = 'TabSheet14'
       ImageIndex = 15
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo16: TMemo
         Left = 0
         Top = 0
@@ -1535,6 +1596,10 @@ object Form1: TForm1
     object TabSheet15: TTabSheet
       Caption = 'TabSheet15'
       ImageIndex = 16
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo17: TMemo
         Left = 0
         Top = 0
@@ -1550,6 +1615,10 @@ object Form1: TForm1
     object TabSheet16: TTabSheet
       Caption = 'TabSheet16'
       ImageIndex = 17
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Panel3: TPanel
         Left = 0
         Top = 353
@@ -2225,6 +2294,10 @@ object Form1: TForm1
     object TabSheet17: TTabSheet
       Caption = 'TabSheet17'
       ImageIndex = 18
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo18: TMemo
         Left = 0
         Top = 0
@@ -2240,6 +2313,10 @@ object Form1: TForm1
     object TabSheet18: TTabSheet
       Caption = 'TabSheet18'
       ImageIndex = 19
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object BrvDbGrid1: TBrvDbGrid
         Left = 0
         Top = 0
@@ -2387,6 +2464,10 @@ object Form1: TForm1
     object TabSheet19: TTabSheet
       Caption = 'TabSheet19'
       ImageIndex = 20
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo19: TMemo
         Left = 0
         Top = 0
@@ -2402,6 +2483,10 @@ object Form1: TForm1
     object TabSheet20: TTabSheet
       Caption = 'TabSheet20'
       ImageIndex = 21
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo20: TMemo
         Left = 0
         Top = 0
@@ -2417,6 +2502,10 @@ object Form1: TForm1
     object TabSheet21: TTabSheet
       Caption = 'TabSheet21'
       ImageIndex = 22
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo21: TMemo
         Left = 0
         Top = 0
@@ -2432,6 +2521,10 @@ object Form1: TForm1
     object TabSheet22: TTabSheet
       Caption = 'TabSheet22'
       ImageIndex = 23
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo22: TMemo
         Left = 0
         Top = 0
@@ -2447,6 +2540,10 @@ object Form1: TForm1
     object TabSheet23: TTabSheet
       Caption = 'TabSheet23'
       ImageIndex = 24
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo23: TMemo
         Left = 0
         Top = 0
@@ -2462,6 +2559,10 @@ object Form1: TForm1
     object TabSheet24: TTabSheet
       Caption = 'TabSheet24'
       ImageIndex = 25
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo24: TMemo
         Left = 0
         Top = 0
@@ -2477,6 +2578,10 @@ object Form1: TForm1
     object TabSheet25: TTabSheet
       Caption = 'TabSheet25'
       ImageIndex = 26
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo25: TMemo
         Left = 0
         Top = 0
@@ -2492,6 +2597,10 @@ object Form1: TForm1
     object TabSheet26: TTabSheet
       Caption = 'TabSheet26'
       ImageIndex = 27
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo26: TMemo
         Left = 0
         Top = 0
@@ -2507,6 +2616,10 @@ object Form1: TForm1
     object TabSheet27: TTabSheet
       Caption = 'TabSheet27'
       ImageIndex = 28
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo27: TMemo
         Left = 0
         Top = 0
@@ -2522,6 +2635,10 @@ object Form1: TForm1
     object TabSheet28: TTabSheet
       Caption = 'TabSheet28'
       ImageIndex = 29
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo28: TMemo
         Left = 0
         Top = 0
@@ -2537,6 +2654,10 @@ object Form1: TForm1
     object TabSheet29: TTabSheet
       Caption = 'TabSheet29'
       ImageIndex = 30
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo29: TMemo
         Left = 0
         Top = 0
@@ -2552,6 +2673,10 @@ object Form1: TForm1
     object TabSheet30: TTabSheet
       Caption = 'TabSheet30'
       ImageIndex = 31
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo30: TMemo
         Left = 0
         Top = 0
@@ -2567,6 +2692,10 @@ object Form1: TForm1
     object TabSheet31: TTabSheet
       Caption = 'TabSheet31'
       ImageIndex = 32
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo31: TMemo
         Left = 0
         Top = 0
@@ -2582,6 +2711,10 @@ object Form1: TForm1
     object TabSheet32: TTabSheet
       Caption = 'TabSheet32'
       ImageIndex = 33
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo32: TMemo
         Left = 0
         Top = 0
@@ -2597,6 +2730,10 @@ object Form1: TForm1
     object TabSheet33: TTabSheet
       Caption = 'TabSheet33'
       ImageIndex = 34
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo33: TMemo
         Left = 0
         Top = 0
@@ -2612,6 +2749,10 @@ object Form1: TForm1
     object TabSheet34: TTabSheet
       Caption = 'TabSheet34'
       ImageIndex = 35
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo34: TMemo
         Left = 0
         Top = 0
@@ -2627,6 +2768,10 @@ object Form1: TForm1
     object TabSheet35: TTabSheet
       Caption = 'TabSheet35'
       ImageIndex = 36
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo38: TMemo
         Left = 0
         Top = 0
@@ -2642,6 +2787,10 @@ object Form1: TForm1
     object TabSheet36: TTabSheet
       Caption = 'TabSheet36'
       ImageIndex = 37
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo36: TMemo
         Left = 0
         Top = 0
@@ -2657,6 +2806,10 @@ object Form1: TForm1
     object TabSheet37: TTabSheet
       Caption = 'TabSheet37'
       ImageIndex = 38
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo37: TMemo
         Left = 0
         Top = 0
@@ -2672,6 +2825,10 @@ object Form1: TForm1
     object TabSheet38: TTabSheet
       Caption = 'TabSheet38'
       ImageIndex = 39
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo39: TMemo
         Left = 0
         Top = 0
@@ -2687,6 +2844,10 @@ object Form1: TForm1
     object TabSheet39: TTabSheet
       Caption = 'TabSheet39'
       ImageIndex = 40
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo40: TMemo
         Left = 0
         Top = 0
@@ -2702,6 +2863,10 @@ object Form1: TForm1
     object TabSheet40: TTabSheet
       Caption = 'TabSheet40'
       ImageIndex = 41
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo41: TMemo
         Left = 0
         Top = 0
@@ -2717,6 +2882,10 @@ object Form1: TForm1
     object TabSheet41: TTabSheet
       Caption = 'TabSheet41'
       ImageIndex = 42
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo42: TMemo
         Left = 0
         Top = 0
@@ -2732,6 +2901,10 @@ object Form1: TForm1
     object TabSheet42: TTabSheet
       Caption = 'TabSheet42'
       ImageIndex = 43
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo43: TMemo
         Left = 0
         Top = 0
@@ -2747,6 +2920,10 @@ object Form1: TForm1
     object TabSheet43: TTabSheet
       Caption = 'TabSheet43'
       ImageIndex = 44
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo44: TMemo
         Left = 0
         Top = 0
@@ -2762,6 +2939,10 @@ object Form1: TForm1
     object TabSheet44: TTabSheet
       Caption = 'TabSheet44'
       ImageIndex = 45
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo45: TMemo
         Left = 0
         Top = 0
@@ -2777,6 +2958,10 @@ object Form1: TForm1
     object TabSheet45: TTabSheet
       Caption = 'TabSheet45'
       ImageIndex = 46
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo46: TMemo
         Left = 0
         Top = 0
@@ -2792,6 +2977,10 @@ object Form1: TForm1
     object TabSheet46: TTabSheet
       Caption = 'TabSheet46'
       ImageIndex = 47
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo47: TMemo
         Left = 0
         Top = 0
@@ -3142,5 +3331,17 @@ object Form1: TForm1
   object BrvString1: TBrvString
     Left = 808
     Top = 8
+  end
+  object PopupMenu2: TPopupMenu
+    Left = 608
+    Top = 200
+    object odos2: TMenuItem
+      Caption = 'Todos'
+      OnClick = odos2Click
+    end
+    object Nenhum2: TMenuItem
+      Caption = 'Nenhum'
+      OnClick = Nenhum2Click
+    end
   end
 end
