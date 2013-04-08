@@ -103,6 +103,50 @@
 	
 	
 
+<!-- ------------------Criado via Sistema Dominios------------------------------------------------------------------------------------------------- -->
+	<bean id="dominiosBCF" class="com.sensus.mlc.dominios.bcf.impl.DominiosBCFImpl">
+      <property name="dominiosBCL" ref="dominiosBCLTarget" />
+      <property name="dominiosValidationController" ref="dominiosValidationController" />
+      <property name="dominiosRequestValidationController" ref="dominiosRequestValidationController" />
+      <property name="dominiosListValidationController" ref="dominiosListValidationController" />  
+  </bean>
+
+<!-- --------------------------------------------------------------------------------------------------------------------- -->
+
+
+<!-- ------------------Criado via Sistema Dominios------------------------------------------------------------------------------------------------- -->
+	<bean id="dominiosBCF" class="com.sensus.mlc.dominios.bcf.impl.DominiosBCFImpl">
+      <property name="dominiosBCL" ref="dominiosBCLTarget" />
+      <property name="dominiosValidationController" ref="dominiosValidationController" />
+      <property name="dominiosRequestValidationController" ref="dominiosRequestValidationController" />
+      <property name="dominiosListValidationController" ref="dominiosListValidationController" />  
+  </bean>
+
+<!-- --------------------------------------------------------------------------------------------------------------------- -->
+
+
+<!-- ------------------Criado via Sistema Atributos------------------------------------------------------------------------------------------------- -->
+	<bean id="atributosBCF" class="com.sensus.mlc.atributos.bcf.impl.AtributosBCFImpl">
+      <property name="atributosBCL" ref="atributosBCLTarget" />
+      <property name="atributosValidationController" ref="atributosValidationController" />
+      <property name="atributosRequestValidationController" ref="atributosRequestValidationController" />
+      <property name="atributosListValidationController" ref="atributosListValidationController" />  
+  </bean>
+
+<!-- --------------------------------------------------------------------------------------------------------------------- -->
+
+
+<!-- ------------------Criado via Sistema Tabela------------------------------------------------------------------------------------------------- -->
+	<bean id="TabelaBCF" class="com.sensus.mlc.Tabela.bcf.impl.TabelaBCFImpl">
+      <property name="TabelaBCL" ref="TabelaBCLTarget" />
+      <property name="TabelaValidationController" ref="TabelaValidationController" />
+      <property name="TabelaRequestValidationController" ref="TabelaRequestValidationController" />
+      <property name="TabelaListValidationController" ref="TabelaListValidationController" />  
+  </bean>
+
+<!-- --------------------------------------------------------------------------------------------------------------------- -->
+
+
 	<bean id="processBCF" class="com.sensus.mlc.process.bcf.impl.ProcessBCFImpl">
 		<property name="processBCL" ref="processBCLTarget" />
 		<property name="processValidationController" ref="processValidationController"/>
@@ -150,3 +194,7 @@
 	</bean>
 
 </beans>
+
+
+
+

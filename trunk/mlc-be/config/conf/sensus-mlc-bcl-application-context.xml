@@ -102,6 +102,38 @@
 	
 	
 	
+
+<!-- ------------------Criado via Sistema Dominios------------------------------------------------------------------------------------------------- -->
+<bean id="dominiosBCLTarget" class="com.sensus.mlc.dominios.bcl.impl.DominiosBCLImpl">
+     <property name="dominiosDAC" ref="dominiosDACTarget" />
+  </bean>
+
+<!-- --------------------------------------------------------------------------------------------------------------------- -->
+
+
+<!-- ------------------Criado via Sistema Dominios------------------------------------------------------------------------------------------------- -->
+<bean id="dominiosBCLTarget" class="com.sensus.mlc.dominios.bcl.impl.DominiosBCLImpl">
+     <property name="dominiosDAC" ref="dominiosDACTarget" />
+  </bean>
+
+<!-- --------------------------------------------------------------------------------------------------------------------- -->
+
+
+<!-- ------------------Criado via Sistema Atributos------------------------------------------------------------------------------------------------- -->
+<bean id="atributosBCLTarget" class="com.sensus.mlc.atributos.bcl.impl.AtributosBCLImpl">
+     <property name="atributosDAC" ref="atributosDACTarget" />
+  </bean>
+
+<!-- --------------------------------------------------------------------------------------------------------------------- -->
+
+
+<!-- ------------------Criado via Sistema Tabela------------------------------------------------------------------------------------------------- -->
+<bean id="TabelaBCLTarget" class="com.sensus.mlc.Tabela.bcl.impl.TabelaBCLImpl">
+     <property name="TabelaDAC" ref="TabelaDACTarget" />
+  </bean>
+
+<!-- --------------------------------------------------------------------------------------------------------------------- -->
+
 	
 	
 	
@@ -757,3 +789,7 @@
 
 
 </beans>
+
+
+
+
