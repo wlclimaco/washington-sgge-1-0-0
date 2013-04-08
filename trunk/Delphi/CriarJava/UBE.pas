@@ -50,37 +50,12 @@ begin
 
       memo1.Lines.Add('<!-- Smartpoint mapping -->');
       memo1.Lines.Add('<typeAlias alias="Group" memo1.Lines.Add(''		  type="com.sensus.mlc.group.model.Group" />');
-      memo1.Lines.Add('<typeAlias alias="'+Txt+'" memo1.Lines.Add(''	      type="com.sensus.mlc.tag.model.'+Txt+'" />');
-      memo1.Lines.Add('<typeAlias alias="StatusMessage" memo1.Lines.Add(''  type="com.sensus.mlc.smartpoint.model.StatusMessage" />');
-      memo1.Lines.Add('<typeAlias alias="LightParameter" memo1.Lines.Add(''  type="com.sensus.mlc.smartpoint.model.LightParameter" />');
-      memo1.Lines.Add('<typeAlias alias="PropertyValidValue" 			  type="com.sensus.mlc.smartpoint.model.PropertyValidValue" />');
-      memo1.Lines.Add('<typeAlias alias="StatusException" memo1.Lines.Add(''  type="com.sensus.mlc.smartpoint.model.StatusException" />');
-      memo1.Lines.Add('<typeAlias alias="LightRequest" memo1.Lines.Add(''  type="com.sensus.mlc.smartpoint.model.request.LightRequest" />');
-      memo1.Lines.Add('<typeAlias alias="EventSchedule" memo1.Lines.Add(''  type="com.sensus.mlc.schedule.model.EventSchedule" />');
-      memo1.Lines.Add('<typeAlias alias="OffsetSchedule" memo1.Lines.Add(''  type="com.sensus.mlc.schedule.model.OffsetSchedule" />');
-      memo1.Lines.Add('<typeAlias alias="CustomSearch" memo1.Lines.Add(''  type="com.sensus.mlc.smartpoint.model.CustomSearch" />');
-      memo1.Lines.Add('<typeAlias alias="SearchParameter" memo1.Lines.Add(''  type="com.sensus.mlc.smartpoint.model.SearchParameter" />');
-      memo1.Lines.Add('<typeAlias alias="TimeZoneInfo" memo1.Lines.Add(''  type="com.sensus.mlc.base.model.TimeZoneInfo" />');
-      memo1.Lines.Add('<typeAlias alias="SensusPartNumberConfiguration"  type="com.sensus.mlc.smartpoint.model.SensusPartNumberConfiguration" />');
-      memo1.Lines.Add('<typeAlias alias="LightHistory" memo1.Lines.Add(''  type="com.sensus.mlc.smartpoint.model.LightHistory" />');
-      memo1.Lines.Add('<typeAlias alias="Schedule" memo1.Lines.Add(''	  type="com.sensus.mlc.schedule.model.Schedule" />');
-      memo1.Lines.Add('<typeAlias alias="Column" memo1.Lines.Add(''		  type="com.sensus.mlc.smartpoint.model.Column" />');
-      memo1.Lines.Add('<typeAlias alias="GuaranteeLightExistenceRequest" type="com.sensus.mlc.smartpoint.model.request.GuaranteeLightExistenceRequest" />');
-      memo1.Lines.Add('<typeAlias alias="CurrentAlarmWarningMessage" 	  type="com.sensus.mlc.smartpoint.model.CurrentAlarmWarningMessage" />');
-      memo1.Lines.Add('<typeAlias alias="CustomSearchRequest" 			  type="com.sensus.mlc.smartpoint.model.request.CustomSearchRequest" />');
-      memo1.Lines.Add('<typeAlias alias="TenantRequest" memo1.Lines.Add(''  type="com.sensus.mlc.tenant.model.request.TenantRequest" />');
-      memo1.Lines.Add('<typeAlias alias="LightStatusRequest" 			  type="com.sensus.mlc.smartpoint.model.request.LightStatusRequest" />');
-      memo1.Lines.Add('<typeAlias alias="LightingControlRequest" 		  type="com.sensus.mlc.base.model.request.LightingControlRequest" />');
-      memo1.Lines.Add('<typeAlias alias="ScheduleRequest" memo1.Lines.Add(''  type="com.sensus.mlc.schedule.model.request.ScheduleRequest" />');
-      memo1.Lines.Add('<typeAlias alias="PropertyValidValuesRequest" 	  type="com.sensus.mlc.smartpoint.model.request.PropertyValidValuesRequest" />');
-      memo1.Lines.Add('<typeAlias alias="ColumnFilterRequest" 			  type="com.sensus.mlc.smartpoint.model.request.ColumnFilterRequest" />');
-      memo1.Lines.Add('<typeAlias alias="ColumnFilterResponse" 		  type="com.sensus.mlc.smartpoint.model.response.ColumnFilterResponse" />');
+      memo1.Lines.Add('<typeAlias alias="'+Txt+'" memo1.Lines.Add(''	      type="com.sensus.mlc.'+LowerCase(Txt)+'.model.'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'" />');
 
       memo1.Lines.Add('</typeAliases>');
 
       memo1.Lines.Add('<mappers>');
       memo1.Lines.Add('<mapper resource="com/sensus/mlc/'+Txt+'/dac/mybatis/map/'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'.xml"/>');
-      memo1.Lines.Add('<mapper resource="com/sensus/mlc/filial/dac/mybatis/map/Filial.xml" />');
       memo1.Lines.Add('<mapper resource="com/sensus/mlc/endereco/dac/mybatis/map/Endereco.xml" />');
       memo1.Lines.Add('</mappers>');
 
@@ -100,7 +75,7 @@ begin
       CcDataset.First;
       while CcDataset.Eof do
       begin
-            if CcDataset.FieldByName('S/N').AsString = 'true'  then
+            if CcDataset.FieldByName('S/N').AsString = 'S'  then
                   memo1.Lines.Add('<result property="'+LowerCase(CcDataset.FieldByName('Nome').AsString)+'" column="'+LowerCase(CcDataset.FieldByName('Nome').AsString)+'" />');
            CcDataset.Next;
       end;
@@ -109,55 +84,55 @@ begin
 
       memo1.Lines.Add('<sql id="all'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'Columms">');
 
-      memo1.Lines.Add('SELECT ');
+      memo1.Lines.Add('   SELECT ');
       CcDataset.First;
       while not CcDataset.Eof do
       begin
             if CcDataset.FieldByName('S/N').AsString = 'S'  then
-                  memo1.Lines.Add(''+CcDataset.FieldByName('Nome').AsString+',');
+                  memo1.Lines.Add('     '+CcDataset.FieldByName('Nome').AsString+',');
            CcDataset.Next;
       end;
-      memo1.Lines.Add('</sql>');
+      memo1.Lines.Add('   </sql>');
 
       memo1.Lines.Add('<!-- Fetch All '+Txt+'s -->');
       memo1.Lines.Add('<select id="fetchAll'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'s" parameterType="Map" resultMap="'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'sResult">');
 
-      memo1.Lines.Add('SELECT  <include refid="all'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'Columms"/>');
-      memo1.Lines.Add('FROM '+Txt+';   ');
+      memo1.Lines.Add('   SELECT  <include refid="all'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'Columms"/>');
+      memo1.Lines.Add('       FROM '+Txt+';   ');
 
-      memo1.Lines.Add('</select>');
+      memo1.Lines.Add('   </select>');
 
       memo1.Lines.Add('<select id="fetchAll'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'ById"  parameterType="Map" resultMap="'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'Result">');
 
       memo1.Lines.Add('   select <include refid="all'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'Columms"/>');
-      memo1.Lines.Add('   from '+Txt+' e   ');
-      memo1.Lines.Add('   where   ');
-      memo1.Lines.Add('   e.codemp = #{codemp}  ');
+      memo1.Lines.Add('       from '+Txt+' e   ');
+      memo1.Lines.Add('       where   ');
+      memo1.Lines.Add('       e.codemp = #{codemp}  ');
 
-      memo1.Lines.Add('</select>');
+      memo1.Lines.Add('   </select>');
 
       memo1.Lines.Add('<!-- Insert '+BrvFuncoesXE.PrimeiraMaiscula(Txt)+' -->');
-      memo1.Lines.Add('<select id="insert'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'" parameterType="'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'" resultType="int">');
-      memo1.Lines.Add('SELECT ins_'+Txt+' (   ');
+      memo1.Lines.Add(' <select id="insert'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'" parameterType="'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'" resultType="int">');
+      memo1.Lines.Add('     SELECT ins_'+Txt+' (   ');
       CcDataset.First;
       while not CcDataset.Eof do
       begin
             if CcDataset.FieldByName('S/N').AsString = 'S'  then
-                memo1.Lines.Add('#{'+LowerCase(CcDataset.FieldByName('Nome').AsString)+',jdbcType='+verificadorCodeBanco(LowerCase(CcDataset.FieldByName('Tipo').AsString))+'},');
+                memo1.Lines.Add('     #{'+LowerCase(CcDataset.FieldByName('Nome').AsString)+',jdbcType='+verificadorCodeBanco(LowerCase(CcDataset.FieldByName('Tipo').AsString))+'},');
            CcDataset.Next;
       end;
-      memo1.Lines.Add('</select>');
+      memo1.Lines.Add(' </select>');
       memo1.Lines.Add('<!-- Update '+BrvFuncoesXE.PrimeiraMaiscula(Txt)+' -->');
-      memo1.Lines.Add('<select id="update'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'" parameterType="'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'" resultType="int">');
-      memo1.Lines.Add('SELECT upd_'+Txt+' (   ');
+      memo1.Lines.Add(' <select id="update'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'" parameterType="'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'" resultType="int">');
+      memo1.Lines.Add('     SELECT upd_'+Txt+' (   ');
       CcDataset.First;
       while not CcDataset.Eof do
       begin
             if CcDataset.FieldByName('S/N').AsString = 'S'  then
-                memo1.Lines.Add('#{'+LowerCase(CcDataset.FieldByName('Nome').AsString)+',jdbcType='+verificadorCodeBanco(LowerCase(CcDataset.FieldByName('Tipo').AsString))+'},');
+                memo1.Lines.Add('     #{'+LowerCase(CcDataset.FieldByName('Nome').AsString)+',jdbcType='+verificadorCodeBanco(LowerCase(CcDataset.FieldByName('Tipo').AsString))+'},');
            CcDataset.Next;
       end;
-      memo1.Lines.Add('</select>');
+      memo1.Lines.Add(' </select>');
       memo1.Lines.Add('</mapper>');
       Result := memo1;
 end;
@@ -194,7 +169,7 @@ begin
       memo1.Lines.Add('/**');
       memo1.Lines.Add('* The Class ActionDACImpl.');
       memo1.Lines.Add('*');
-      memo1.Lines.Add('* @author - QAT Brazil.');
+      memo1.Lines.Add('* @author - Washington.');
       memo1.Lines.Add('*');
       memo1.Lines.Add('*/');
       memo1.Lines.Add('public class '+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'DACImpl extends SqlSessionDaoSupport implements I'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'DAC');
@@ -416,7 +391,7 @@ begin
       memo1.Lines.Add('paramMap.put(EMPRESA_ID, inquiry'+Txt+'Request.get'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'s().get(0).getCodemp());');
       memo1.Lines.Add('}');
       memo1.Lines.Add('');
-      memo1.Lines.Add('doQueryForList(getSqlSession(), FETCH_ALL_EMPRESAS, paramMap, response);');
+      memo1.Lines.Add('doQueryForList(getSqlSession(), FETCH_ALL_'+UpperCase(Txt)+', paramMap, response);');
       memo1.Lines.Add('');
       memo1.Lines.Add('Integer totalRows = (Integer)doQueryForObject(getSqlSession(),');
       memo1.Lines.Add('PAGINATION_TOTAL_ROWS, paramMap);');
@@ -504,10 +479,10 @@ end;
         memo1.Lines.Add('/**');
         memo1.Lines.Add('* The Interface IActionDAC.');
         memo1.Lines.Add('*');
-        memo1.Lines.Add('* @author - QAT Brazil.');
+        memo1.Lines.Add('* @author - Washington');
         memo1.Lines.Add('*');
         memo1.Lines.Add('*/');
-        memo1.Lines.Add('public interface I'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'DAC;');
+        memo1.Lines.Add('public interface I'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'DAC');
         memo1.Lines.Add('{');
         memo1.Lines.Add('');
         memo1.Lines.Add('/**');
@@ -1198,7 +1173,7 @@ begin
       memo1.Lines.Add('/**');
       memo1.Lines.Add(' * The Interface IActionBCL.');
       memo1.Lines.Add(' * ');
-      memo1.Lines.Add(' * @author - QAT Brazil. ');
+      memo1.Lines.Add(' * @author - Washington ');
       memo1.Lines.Add(' * ');
       memo1.Lines.Add(' */ ');
       memo1.Lines.Add('public interface I'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'BCL ');
@@ -1609,6 +1584,7 @@ function gerarModelo(Txt:String;CcDataset:TClientDataSet;memo1 :Tmemo):Tmemo;
 BEGIN
      try
          memo1.Lines.Clear;
+         memo1.Lines.Add('package com.sensus.mlc.'+lowerCase(Txt)+'.model');
          memo1.Lines.Add('public class '+BrvFuncoesXE.PrimeiraMaiscula(Txt)+' extends SensusModel'); //escreve no arquivo e desce uma linha
          memo1.Lines.Add('{');
          CcDataset.First;

@@ -675,7 +675,7 @@ object Form1: TForm1
     Top = 41
     Width = 949
     Height = 491
-    ActivePage = TabSheet18
+    ActivePage = TbsFiltro
     Align = alClient
     MultiLine = True
     TabOrder = 2
@@ -769,11 +769,24 @@ object Form1: TForm1
         ParentFont = False
       end
       object Label33: TLabel
-        Left = 456
-        Top = 40
-        Width = 109
+        Left = 568
+        Top = 37
+        Width = 113
         Height = 16
         Caption = 'Descri'#231#227'o Tabela'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label34: TLabel
+        Left = 312
+        Top = 40
+        Width = 45
+        Height = 16
+        Caption = 'Pacote'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -904,7 +917,7 @@ object Form1: TForm1
       object Edit1: TEdit
         Left = 128
         Top = 35
-        Width = 321
+        Width = 178
         Height = 21
         TabOrder = 1
         Text = 'Edit1'
@@ -1245,9 +1258,9 @@ object Form1: TForm1
         Text = 'Edit1'
       end
       object Edit8: TEdit
-        Left = 571
+        Left = 688
         Top = 35
-        Width = 348
+        Width = 231
         Height = 21
         TabOrder = 10
         Text = 'Edit1'
@@ -1273,6 +1286,14 @@ object Form1: TForm1
             'FireBird'
             'MySql')
         end
+      end
+      object Edit13: TEdit
+        Left = 363
+        Top = 35
+        Width = 199
+        Height = 21
+        TabOrder = 12
+        Text = 'Edit1'
       end
     end
     object TbsConsulta: TTabSheet
@@ -2706,7 +2727,6 @@ object Form1: TForm1
           'Memo1')
         ScrollBars = ssVertical
         TabOrder = 0
-        ExplicitTop = -2
       end
     end
     object TabSheet42: TTabSheet
