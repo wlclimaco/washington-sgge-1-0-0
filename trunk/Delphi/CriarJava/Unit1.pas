@@ -271,6 +271,21 @@ type
     PopupMenu2: TPopupMenu;
     odos2: TMenuItem;
     Nenhum2: TMenuItem;
+    PopupMenu3: TPopupMenu;
+    MenuItem1: TMenuItem;
+    MenuItem2: TMenuItem;
+    PopupMenu4: TPopupMenu;
+    MenuItem3: TMenuItem;
+    MenuItem4: TMenuItem;
+    PopupMenu5: TPopupMenu;
+    MenuItem5: TMenuItem;
+    MenuItem6: TMenuItem;
+    PopupMenu6: TPopupMenu;
+    MenuItem7: TMenuItem;
+    MenuItem8: TMenuItem;
+    PopupMenu7: TPopupMenu;
+    MenuItem9: TMenuItem;
+    MenuItem10: TMenuItem;
     procedure SpeedButton1Click(Sender: TObject);
     procedure BtnPesquisaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -280,6 +295,8 @@ type
     procedure BrvBitBtn1Click(Sender: TObject);
     procedure odos2Click(Sender: TObject);
     procedure Nenhum2Click(Sender: TObject);
+    procedure MenuItem1Click(Sender: TObject);
+    procedure MenuItem2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -349,6 +366,32 @@ begin
      Ini.Free ;
   end;
 
+end;
+
+procedure TForm1.MenuItem1Click(Sender: TObject);
+begin
+      CheckBox12.Checked := true;
+      CheckBox20.Checked := true;
+      CheckBox21.Checked := true;
+      CheckBox23.Checked := true;
+      CheckBox24.Checked := true;
+      CheckBox54.Checked := true;
+      CheckBox22.Checked := true;
+      CheckBox25.Checked := true;
+      CheckBox26.Checked := true;
+end;
+
+procedure TForm1.MenuItem2Click(Sender: TObject);
+begin
+      CheckBox12.Checked := false;
+      CheckBox20.Checked := false;
+      CheckBox21.Checked := false;
+      CheckBox23.Checked := false;
+      CheckBox24.Checked := false;
+      CheckBox54.Checked := false;
+      CheckBox22.Checked := false;
+      CheckBox25.Checked := false;
+      CheckBox26.Checked := false;
 end;
 
 procedure TForm1.GravarConfiguracao;
@@ -606,11 +649,11 @@ begin
      end;
      if CheckBox10.Checked = true then
      begin
-           GerarArquivo(PrimeiraMaiscula(Edit1.Text)+'Request',BrvEdit1.Text+'model\request','.java',Memo13,0);
+           GerarArquivo(PrimeiraMaiscula(Edit1.Text)+'Request',BrvEdit1.Text+'model\request\','.java',Memo13,0);
      end;
      if CheckBox11.Checked = true then
      begin
-           GerarArquivo(PrimeiraMaiscula(Edit1.Text)+'Response',BrvEdit1.Text+'model\response','.java',Memo14,0);
+           GerarArquivo(PrimeiraMaiscula(Edit1.Text)+'Response',BrvEdit1.Text+'model\response\','.java',Memo14,0);
      end;
      if CheckBox27.Checked = true then
      begin
@@ -619,11 +662,11 @@ begin
 
      if CheckBox18.Checked = true then
      begin
-           GerarArquivo('Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Response',BrvEdit1.Text+'model\response','.java',Memo15,0);
+           GerarArquivo('Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Response',BrvEdit1.Text+'model\response\','.java',Memo15,0);
      end;
      if CheckBox19.Checked = true then
      begin
-           GerarArquivo('Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request',BrvEdit1.Text+'model\request','.java',Memo16,0);
+           GerarArquivo('Inquiry'+PrimeiraMaiscula(Edit1.Text)+'Request',BrvEdit1.Text+'model\request\','.java',Memo16,0);
      end;
 
      if CheckBox28.Checked = true then
