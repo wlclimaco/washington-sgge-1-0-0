@@ -286,6 +286,7 @@ type
     PopupMenu7: TPopupMenu;
     MenuItem9: TMenuItem;
     MenuItem10: TMenuItem;
+    CheckBox33: TCheckBox;
     procedure SpeedButton1Click(Sender: TObject);
     procedure BtnPesquisaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -378,6 +379,7 @@ begin
       CheckBox54.Checked := true;
       CheckBox22.Checked := true;
       CheckBox25.Checked := true;
+      CheckBox33.Checked := true;
       CheckBox26.Checked := true;
 end;
 
@@ -392,6 +394,7 @@ begin
       CheckBox22.Checked := false;
       CheckBox25.Checked := false;
       CheckBox26.Checked := false;
+      CheckBox33.Checked := false;
 end;
 
 procedure TForm1.GravarConfiguracao;

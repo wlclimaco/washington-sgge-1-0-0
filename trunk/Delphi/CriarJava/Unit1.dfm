@@ -1055,9 +1055,18 @@ object Form1: TForm1
           Top = 149
           Width = 97
           Height = 17
-          Caption = 'Sellenium'
+          Caption = 'Request'
           PopupMenu = PopupMenu3
           TabOrder = 8
+        end
+        object CheckBox33: TCheckBox
+          Left = 16
+          Top = 168
+          Width = 97
+          Height = 17
+          Caption = 'Response'
+          PopupMenu = PopupMenu3
+          TabOrder = 9
         end
       end
       object GroupBox4: TGroupBox
