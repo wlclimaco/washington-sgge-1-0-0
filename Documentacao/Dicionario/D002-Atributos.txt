@@ -7,3 +7,4 @@ dsmascar VARCHAR2 30
 dshelp   VARCHAR2 255
 tmatribu Integer 
 nrseqatr Integer 
+auditorias List<Auditoria> 
