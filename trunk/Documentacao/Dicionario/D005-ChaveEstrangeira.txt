@@ -2,3 +2,4 @@ nmchaest VARCHAR2 30 NOTNULL,
 nmtabela VARCHAR2 15
 nmtabest VARCHAR2 15
 tpchaest VARCHAR2 2
+auditorias List<Auditoria> 
