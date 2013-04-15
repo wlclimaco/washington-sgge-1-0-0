@@ -1,6 +1,6 @@
 package com.sensus.mlc.gestao.model.request;
 import com.sensus.mlc.base.model.request.LightSelectionRequest;
-import com.sensus.mlc.empresa.model.Empresa;
+import com.sensus.mlc.gestao.model.Empresa;
 
 
 public class EmpresaRequest extends LightSelectionRequest

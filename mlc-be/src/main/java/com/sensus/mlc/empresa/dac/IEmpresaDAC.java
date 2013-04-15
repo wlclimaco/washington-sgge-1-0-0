@@ -4,10 +4,10 @@ package com.sensus.mlc.empresa.dac;
 import com.sensus.common.model.request.Request;
 import com.sensus.common.model.response.InternalResponse;
 import com.sensus.common.model.response.InternalResultsResponse;
-import com.sensus.mlc.empresa.model.Empresa;
-import com.sensus.mlc.empresa.model.request.EmpresaRequest;
-import com.sensus.mlc.empresa.model.request.InquiryEmpresaRequest;
-import com.sensus.mlc.empresa.model.response.EmpresaResponse;
+import com.sensus.mlc.gestao.model.Empresa;
+import com.sensus.mlc.gestao.model.request.EmpresaRequest;
+import com.sensus.mlc.gestao.model.request.InquiryEmpresaRequest;
+import com.sensus.mlc.gestao.model.response.EmpresaResponse;
 
 /**
  * The Interface IActionDAC.

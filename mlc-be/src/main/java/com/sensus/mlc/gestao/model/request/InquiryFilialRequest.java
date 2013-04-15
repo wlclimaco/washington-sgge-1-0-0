@@ -1,8 +1,9 @@
 package com.sensus.mlc.gestao.model.request;
 import java.util.List;
+
 import com.sensus.mlc.base.model.BaseSearch;
 import com.sensus.mlc.base.model.request.InquiryPaginationRequest;
-import com.sensus.mlc.filial.model.Filial;
+import com.sensus.mlc.gestao.model.Filial;
 
 
 public class InquiryFilialRequest extends InquiryPaginationRequest

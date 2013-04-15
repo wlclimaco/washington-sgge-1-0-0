@@ -3,9 +3,9 @@ package com.sensus.mlc.gestao.bcl;
 
 import com.sensus.common.model.response.InternalResponse;
 import com.sensus.common.model.response.InternalResultsResponse;
-import com.sensus.mlc.empresa.model.Empresa;
-import com.sensus.mlc.empresa.model.request.EmpresaRequest;
-import com.sensus.mlc.empresa.model.request.InquiryEmpresaRequest;
+import com.sensus.mlc.gestao.model.Empresa;
+import com.sensus.mlc.gestao.model.request.EmpresaRequest;
+import com.sensus.mlc.gestao.model.request.InquiryEmpresaRequest;
 
 // TODO: Auto-generated Javadoc
 /**

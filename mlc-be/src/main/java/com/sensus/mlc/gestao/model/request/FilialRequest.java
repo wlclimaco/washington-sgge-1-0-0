@@ -1,6 +1,6 @@
 package com.sensus.mlc.gestao.model.request;
 import com.sensus.mlc.base.model.request.LightSelectionRequest;
-import com.sensus.mlc.filial.model.Filial;
+import com.sensus.mlc.gestao.model.Filial;
 
 
 public class FilialRequest extends LightSelectionRequest

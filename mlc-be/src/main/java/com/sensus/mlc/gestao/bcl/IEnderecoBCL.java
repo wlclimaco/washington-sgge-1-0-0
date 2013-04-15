@@ -3,9 +3,9 @@ package com.sensus.mlc.gestao.bcl;
 
 import com.sensus.common.model.response.InternalResponse;
 import com.sensus.common.model.response.InternalResultsResponse;
-import com.sensus.mlc.endereco.model.Endereco;
-import com.sensus.mlc.endereco.model.request.EnderecoRequest;
-import com.sensus.mlc.endereco.model.request.InquiryEnderecoRequest;
+import com.sensus.mlc.gestao.model.Endereco;
+import com.sensus.mlc.gestao.model.request.EnderecoRequest;
+import com.sensus.mlc.gestao.model.request.InquiryEnderecoRequest;
 
 // TODO: Auto-generated Javadoc
 /**

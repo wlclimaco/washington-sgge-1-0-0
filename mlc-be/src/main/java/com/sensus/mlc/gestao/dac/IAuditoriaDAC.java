@@ -24,7 +24,7 @@ public interface IAuditoriaDAC
 * @param auditoriaRequest the auditoria request
 * @return the auditoria response
 */
-public InternalResultsResponse<Auditoria> updateAuditoria(AuditoriaRequest auditoriaRequest);
+public InternalResponse updateAuditoria(AuditoriaRequest auditoriaRequest);
 
 /**
 * Delete auditoria.

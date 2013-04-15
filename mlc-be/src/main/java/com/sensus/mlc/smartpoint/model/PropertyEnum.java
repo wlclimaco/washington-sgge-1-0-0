@@ -352,7 +352,28 @@ public enum PropertyEnum implements IIntegerEnum
 	/** The polygon dialog. */
 	SHOW_DIALOG_POLYGON(115),
 
-	EMPRESA_ID(116);
+	EMPRESA_ID(116),
+
+	AUDITORIA_ID(117),
+
+	BAIRRO_ID(118),
+
+	CLASSCLIENTE_ID(119),
+
+	CNAE_ID(120),
+
+	EMBALAGEM_ID(121),
+
+	ENDERECO_ID(122),
+
+	EVENTO_ID(123),
+	FILIAL_ID(124),
+	MUNICIPIO_ID(125),
+	PAIS_ID(126),
+	TIPCLIENTE_ID(127),
+	TITULARE_ID(128),
+	UNIMED_ID(129),
+	UF_ID(129);
 
 	/** The property Id. */
 	private Integer propertyId;

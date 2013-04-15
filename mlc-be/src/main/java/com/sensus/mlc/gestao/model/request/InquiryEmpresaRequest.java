@@ -3,7 +3,7 @@ import java.util.List;
 
 import com.sensus.mlc.base.model.BaseSearch;
 import com.sensus.mlc.base.model.request.InquiryPaginationRequest;
-import com.sensus.mlc.empresa.model.Empresa;
+import com.sensus.mlc.gestao.model.Empresa;
 
 
 public class InquiryEmpresaRequest extends InquiryPaginationRequest

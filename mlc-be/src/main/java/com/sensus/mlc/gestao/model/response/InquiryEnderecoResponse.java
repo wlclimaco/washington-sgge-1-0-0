@@ -1,6 +1,8 @@
-package com.sensus.mlc.endereco.model.response;
+package com.sensus.mlc.gestao.model.response;
 import java.util.List;
-import com.sensus.common.model.response.InquiryResponse
+
+import com.sensus.common.model.response.InquiryResponse;
+import com.sensus.mlc.endereco.model.Endereco;
 
 
 public class InquiryEnderecoResponse extends InquiryResponse

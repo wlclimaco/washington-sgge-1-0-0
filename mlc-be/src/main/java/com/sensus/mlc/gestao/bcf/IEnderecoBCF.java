@@ -1,9 +1,11 @@
 package com.sensus.mlc.gestao.bcf;
 
-import com.sensus.mlc.endereco.model.request.EnderecoRequest;
-import com.sensus.mlc.endereco.model.request.InquiryEnderecoRequest;
-import com.sensus.mlc.endereco.model.response.EnderecoResponse;
-import com.sensus.mlc.endereco.model.response.InquiryEnderecoResponse;
+import com.sensus.mlc.gestao.model.request.EnderecoRequest;
+import com.sensus.mlc.gestao.model.request.InquiryEnderecoRequest;
+import com.sensus.mlc.gestao.model.response.EnderecoResponse;
+import com.sensus.mlc.gestao.model.response.InquiryEnderecoResponse;
+
+
 
 
 /**
