@@ -1,9 +1,9 @@
 package com.sensus.mlc.gestao.bcf;
 
-import com.sensus.mlc.empresa.model.request.EmpresaRequest;
-import com.sensus.mlc.empresa.model.request.InquiryEmpresaRequest;
-import com.sensus.mlc.empresa.model.response.EmpresaResponse;
-import com.sensus.mlc.empresa.model.response.InquiryEmpresaResponse;
+import com.sensus.mlc.gestao.model.request.EmpresaRequest;
+import com.sensus.mlc.gestao.model.request.InquiryEmpresaRequest;
+import com.sensus.mlc.gestao.model.response.EmpresaResponse;
+import com.sensus.mlc.gestao.model.response.InquiryEmpresaResponse;
 
 
 /**

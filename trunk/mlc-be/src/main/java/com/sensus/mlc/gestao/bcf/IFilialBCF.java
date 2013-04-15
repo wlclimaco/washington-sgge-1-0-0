@@ -1,9 +1,9 @@
 package com.sensus.mlc.gestao.bcf;
 
-import com.sensus.mlc.filial.model.request.FilialRequest;
-import com.sensus.mlc.filial.model.request.InquiryFilialRequest;
-import com.sensus.mlc.filial.model.response.FilialResponse;
-import com.sensus.mlc.filial.model.response.InquiryFilialResponse;
+import com.sensus.mlc.gestao.model.request.FilialRequest;
+import com.sensus.mlc.gestao.model.request.InquiryFilialRequest;
+import com.sensus.mlc.gestao.model.response.FilialResponse;
+import com.sensus.mlc.gestao.model.response.InquiryFilialResponse;
 
 
 /**

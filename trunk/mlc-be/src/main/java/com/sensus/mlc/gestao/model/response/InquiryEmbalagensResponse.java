@@ -1,6 +1,8 @@
-package com.sensus.mlc.embalagens.model.response;
+package com.sensus.mlc.gestao.model.response;
 import java.util.List;
-import com.sensus.common.model.response.InquiryResponse
+
+import com.sensus.common.model.response.InquiryResponse;
+import com.sensus.mlc.gestao.model.Embalagens;
 
 
 public class InquiryEmbalagensResponse extends InquiryResponse

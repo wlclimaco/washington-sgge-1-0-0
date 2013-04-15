@@ -1,6 +1,6 @@
 package com.sensus.mlc.gestao.model.request;
 import com.sensus.mlc.base.model.request.LightSelectionRequest;
-import com.sensus.mlc.endereco.model.Endereco;
+import com.sensus.mlc.gestao.model.Endereco;
 
 
 public class EnderecoRequest extends LightSelectionRequest

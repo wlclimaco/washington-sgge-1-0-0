@@ -3,9 +3,9 @@ package com.sensus.mlc.gestao.bcl;
 
 import com.sensus.common.model.response.InternalResponse;
 import com.sensus.common.model.response.InternalResultsResponse;
-import com.sensus.mlc.filial.model.Filial;
-import com.sensus.mlc.filial.model.request.FilialRequest;
-import com.sensus.mlc.filial.model.request.InquiryFilialRequest;
+import com.sensus.mlc.gestao.model.Filial;
+import com.sensus.mlc.gestao.model.request.FilialRequest;
+import com.sensus.mlc.gestao.model.request.InquiryFilialRequest;
 
 // TODO: Auto-generated Javadoc
 /**

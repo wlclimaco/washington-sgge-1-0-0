@@ -1,6 +1,8 @@
-package com.sensus.mlc.titulares.model.response;
+package com.sensus.mlc.gestao.model.response;
 import java.util.List;
-import com.sensus.common.model.response.InquiryResponse
+
+import com.sensus.common.model.response.InquiryResponse;
+import com.sensus.mlc.gestao.model.Titulares;
 
 
 public class InquiryTitularesResponse extends InquiryResponse
