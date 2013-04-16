@@ -1,0 +1,6 @@
+cdempres NUMBER 10,0
+dsmodenf VARCHAR 3
+nrconta NUMBER 10,0
+nrnota NUMBER 10,0
+nrserinf VARCHAR 6
+nrnotcon NUMBER 10,0 NOT NULL)

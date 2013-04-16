@@ -1,0 +1,12 @@
+cdempres  NUMBER 10,0
+cdforpag  NUMBER 10,0
+cdtitula  NUMBER 10,0
+cdusuari  NUMBER 10,0
+dtemidoc  DATE
+dtproces  DATE
+nmarqedi  VARCHAR 30
+nrconta   NUMBER 10,0 NOTNULL PK
+nrdocto   NUMBER 10,0
+nrprefat  NUMBER 10,0
+tpconta   VARCHAR 1
+vrorigem  NUMBER 15,2

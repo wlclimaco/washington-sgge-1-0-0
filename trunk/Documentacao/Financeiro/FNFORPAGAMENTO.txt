@@ -1,0 +1,9 @@
+cdforpag NUMBER 10 NOTNULL PK
+dsforpag VARCHAR2 30
+dsabrpag VARCHAR2 2
+tpforpag VARCHAR2 1
+tpopecon VARCHAR2 1
+snimpnot VARCHAR2 1
+dhensaf  DATE
+snensaf  VARCHAR2 1
+snvercre VARCHAR2 1
