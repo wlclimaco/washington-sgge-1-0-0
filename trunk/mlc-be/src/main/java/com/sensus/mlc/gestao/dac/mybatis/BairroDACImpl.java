@@ -34,9 +34,6 @@ public class BairroDACImpl extends SqlSessionDaoSupport implements IBairroDAC
 	/** The Constant BAIRRO_NAMESPACE. */
 	private static final String BAIRRO_NAMESPACE = "Bairro.";
 
-	/** The Constant FETCH_BAIRRO_BY_ID. */
-	private static final String FETCH_BAIRRO_BY_ID = BAIRRO_NAMESPACE + "fetchBairroById";
-
 	/** The Constant PAGINATION_TOTAL_ROWS. */
 	private static final String PAGINATION_TOTAL_ROWS = BAIRRO_NAMESPACE + "PaginationTotalRows";
 
@@ -109,6 +106,10 @@ public class BairroDACImpl extends SqlSessionDaoSupport implements IBairroDAC
 	/** The Constant PARAMSIZE5. */
 	private static final Integer PARAMSIZE6 = 5;
 
+	private static final String UPDATE_BAIRRO = null;
+
+	private static final String SENSUS_MLC_BAIRROVALIDATOR_BAIRRO_ALREADY_EXISTS = null;
+
 	/*
 	 * (non-Javadoc)
 	 * @see com.sensus.mlc.bairro.dao.IBairroDAO#fetchAllBairros(com.sensus.mlc.bairro.model.request.InquiryBairroRequest)
@@ -145,18 +146,6 @@ public class BairroDACImpl extends SqlSessionDaoSupport implements IBairroDAC
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.sensus.mlc.bairro.dao.IBairroDAO#fetchBairroById(com.sensus.mlc.bairro.model.Bairro
-	 */
-	@Override
-	public InternalResultsResponse<Bairro> fetchBairroById(BairroRequest bairroRequest)
-	{
-		InternalResultsResponse<Bairro> response = new InternalResultsResponse<Bairro>();
-		doQueryForList(getSqlSession(), FETCH_BAIRRO_BY_ID, bairroRequest, response);
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
 	 * @see com.sensus.mlc.bairro.dao.IBairroDAO#insertBairro(com.sensus.mlc.bairro.model.request.BairroRequest)
 	 */
 	@Override
@@ -166,8 +155,8 @@ public class BairroDACImpl extends SqlSessionDaoSupport implements IBairroDAC
 
 		Bairro bairro = bairroRequest.getBairro();
 
-		bairro.setCodEmp((Integer)doQueryForObject(getSqlSession(), INSERT_BAIRRO, bairroRequest));
-        bairro.setListinsalt((List<Auditoria>)doQueryForObject(getSqlSession(), INSERT_EMPRESA, bairroRequest));
+		bairro.setCodbairro((Integer)doQueryForObject(getSqlSession(), INSERT_BAIRRO, bairroRequest));
+        bairro.setListinsalt((List<Auditoria>)doQueryForObject(getSqlSession(), INSERT_BAIRRO, bairroRequest));
 		InternalResultsResponse<Bairro> response = new InternalResultsResponse<Bairro>();
 		response.addResult(bairro);
 		return response;
@@ -192,18 +181,6 @@ public class BairroDACImpl extends SqlSessionDaoSupport implements IBairroDAC
 	 */
 	@Override
 	public InternalResultsResponse<Bairro> fetchBairroById(BairroRequest bairroRequest)
-	{
-		InternalResultsResponse<Bairro> response = new InternalResultsResponse<Bairro>();
-		doQueryForList(getSqlSession(), FETCH_BAIRRO_BY_ID, bairroRequest.getBairro(), response);
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.sensus.mlc.bairro.dac.IBairroDAC#fetchBairroNameById(com.sensus.mlc.bairro.model.request.BairroRequest)
-	 */
-	@Override
-	public InternalResultsResponse<Bairro> fetchBairroNameById(BairroRequest bairroRequest)
 	{
 		InternalResultsResponse<Bairro> response = new InternalResultsResponse<Bairro>();
 		doQueryForList(getSqlSession(), FETCH_BAIRRO_NAME_BY_ID, bairroRequest.getBairro(), response);

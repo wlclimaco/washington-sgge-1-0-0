@@ -1,8 +1,9 @@
 package com.sensus.mlc.gestao.model.request;
 import java.util.List;
+
 import com.sensus.mlc.base.model.BaseSearch;
 import com.sensus.mlc.base.model.request.InquiryPaginationRequest;
-import com.sensus.mlc.endereco.model.Endereco;
+import com.sensus.mlc.gestao.model.Endereco;
 
 
 public class InquiryEnderecoRequest extends InquiryPaginationRequest
