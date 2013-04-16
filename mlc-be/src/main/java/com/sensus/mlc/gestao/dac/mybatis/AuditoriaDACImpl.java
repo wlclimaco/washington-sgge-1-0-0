@@ -4,10 +4,10 @@ package com.sensus.mlc.auditoria.dac;
 import com.sensus.common.model.request.Request;
 import com.sensus.common.model.response.InternalResponse;
 import com.sensus.common.model.response.InternalResultsResponse;
-import com.sensus.mlc.auditoria.model.Auditoria
-import com.sensus.mlc.auditoria.model.request.AuditoriaRequest;
-import com.sensus.mlc.auditoria.model.request.InquiryAuditoriaRequest;
-import com.sensus.mlc.auditoria.model.response.AuditoriaResponse;
+import com.sensus.mlc.gestao.model.Auditoria;
+import com.sensus.mlc.gestao.model.request.AuditoriaRequest;
+import com.sensus.mlc.gestao.model.request.InquiryAuditoriaRequest;
+import com.sensus.mlc.gestao.model.response.AuditoriaResponse;
 
 /**
 * The Interface IActionDAC.

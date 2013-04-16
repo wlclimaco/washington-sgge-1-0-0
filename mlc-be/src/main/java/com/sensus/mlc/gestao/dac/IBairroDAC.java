@@ -24,7 +24,7 @@ public interface IBairroDAC
 * @param bairroRequest the bairro request
 * @return the bairro response
 */
-public InternalResultsResponse<Bairro> updateBairro(BairroRequest bairroRequest);
+public InternalResponse updateBairro(BairroRequest bairroRequest);
 
 /**
 * Delete bairro.

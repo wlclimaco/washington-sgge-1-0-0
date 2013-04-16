@@ -12,6 +12,7 @@ import org.springframework.dao.DuplicateKeyException;
 
 import com.sensus.common.model.Message.MessageLevel;
 import com.sensus.common.model.Message.MessageSeverity;
+import com.sensus.common.model.request.Request;
 import com.sensus.common.model.response.InternalResponse;
 import com.sensus.common.model.response.InternalResponse.Status;
 import com.sensus.common.model.response.InternalResultsResponse;
@@ -21,6 +22,7 @@ import com.sensus.mlc.gestao.model.Auditoria;
 import com.sensus.mlc.gestao.model.Empresa;
 import com.sensus.mlc.gestao.model.request.EmpresaRequest;
 import com.sensus.mlc.gestao.model.request.InquiryEmpresaRequest;
+import com.sensus.mlc.gestao.model.response.EmpresaResponse;
 import com.sensus.mlc.tag.model.TagOrderByEnum;
 
 /**
@@ -110,6 +112,10 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 	/** The Constant PARAMSIZE5. */
 	private static final Integer PARAMSIZE6 = 5;
 
+	private static final String UPDATE_EMPRESA = null;
+
+	private static final String SENSUS_MLC_EMPRESAVALIDATOR_EMPRESA_ALREADY_EXISTS = null;
+
 	/*
 	 * (non-Javadoc)
 	 * @see com.sensus.mlc.empresa.dao.IEmpresaDAO#fetchAllEmpresas(com.sensus.mlc.empresa.model.request.InquiryEmpresaRequest)
@@ -144,17 +150,6 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		return response;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.sensus.mlc.empresa.dao.IEmpresaDAO#fetchEmpresaByName(com.sensus.mlc.empresa.model.Empresa
-	 */
-	@Override
-	public InternalResultsResponse<Empresa> fetchEmpresaById(EmpresaRequest empresaRequest)
-	{
-		InternalResultsResponse<Empresa> response = new InternalResultsResponse<Empresa>();
-		doQueryForList(getSqlSession(), FETCH_EMPRESA_BY_NAME, empresaRequest, response);
-		return response;
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -168,8 +163,8 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		Empresa empresa = empresaRequest.getEmpresa();
 
 
-		empresa.setId((Integer)doQueryForObject(getSqlSession(), INSERT_EMPRESA, empresaRequest));
-		empresa.setListinsalt((List<Auditoria>)doQueryForObject(getSqlSession(), INSERT_EMPRESA, empresaRequest))
+		empresa.setCodemp((Integer)doQueryForObject(getSqlSession(), INSERT_EMPRESA, empresaRequest));
+		empresa.setListinsalt((List<Auditoria>)doQueryForObject(getSqlSession(), INSERT_EMPRESA, empresaRequest));
 		InternalResultsResponse<Empresa> response = new InternalResultsResponse<Empresa>();
 		response.addResult(empresa);
 		return response;
@@ -202,24 +197,12 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.sensus.mlc.empresa.dac.IEmpresaDAC#fetchEmpresaNameById(com.sensus.mlc.empresa.model.request.EmpresaRequest)
-	 */
-	@Override
-	public InternalResultsResponse<Empresa> fetchEmpresaNameById(EmpresaRequest empresaRequest)
-	{
-		InternalResultsResponse<Empresa> response = new InternalResultsResponse<Empresa>();
-		doQueryForList(getSqlSession(), FETCH_EMPRESA_NAME_BY_ID, empresaRequest.getEmpresa(), response);
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
 	 * @see com.sensus.mlc.empresa.dac.IEmpresaDAC#updateEmpresa(com.sensus.mlc.empresa.model.request.EmpresaRequest)
 	 */
 	@Override
-	public InternalResponse updateEmpresa(EmpresaRequest empresaRequest)
+	public InternalResultsResponse<Empresa> updateEmpresa(EmpresaRequest empresaRequest)
 	{
-		InternalResponse response = new InternalResponse();
+		InternalResultsResponse<Empresa> response = new InternalResultsResponse<Empresa>();
 		try
 		{
 			doQueryForObject(getSqlSession(), UPDATE_EMPRESA, empresaRequest);
@@ -231,6 +214,25 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		}
 
 		return response;
+	}
+
+	@Override
+	public InternalResponse generateFileCSV(
+			InquiryEmpresaRequest inquiryEmpresaRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public EmpresaResponse fetchAllEmpresaTypes(Request request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public EmpresaResponse fetchAllEmpresaFilial(Request request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

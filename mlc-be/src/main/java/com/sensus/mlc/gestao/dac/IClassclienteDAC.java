@@ -24,7 +24,7 @@ public interface IClassclienteDAC
 * @param classclienteRequest the classcliente request
 * @return the classcliente response
 */
-public InternalResultsResponse<Classcliente> updateClasscliente(ClassclienteRequest classclienteRequest);
+public InternalResponse updateClasscliente(ClassclienteRequest classclienteRequest);
 
 /**
 * Delete classcliente.

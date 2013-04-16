@@ -11,7 +11,7 @@ public class Bairro extends SensusModel
 {
 
     /** The codbairro. */
-    private Bairro codbairro;
+    private Integer codbairro;
 
     /** The codmunic. */
     private Municipio codmunic;
@@ -39,7 +39,7 @@ public class Bairro extends SensusModel
 	 *
 	 * @return the codbairro
 	 */
-	public Bairro getCodbairro() {
+	public Integer getCodbairro() {
 		return codbairro;
 	}
 
@@ -48,7 +48,7 @@ public class Bairro extends SensusModel
 	 *
 	 * @param codbairro the new codbairro
 	 */
-	public void setCodbairro(Bairro codbairro) {
+	public void setCodbairro(Integer codbairro) {
 		this.codbairro = codbairro;
 	}
 
