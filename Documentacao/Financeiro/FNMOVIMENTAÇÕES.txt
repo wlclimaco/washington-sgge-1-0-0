@@ -1,0 +1,9 @@
+cdhistor NUMBER 10,0
+cdusuari NUMBER 10,0
+dtmovto DATE
+dtvendoc DATE
+nrconta NUMBER 10,0 NOTNULL PK,
+nrordem NUMBER 10,0 NOTNULL PK,
+nrseqcon NUMBER 10,0 NOTNULL PK,
+tppagto VARCHAR2 1
+vrdocto NUMBER 15,2
