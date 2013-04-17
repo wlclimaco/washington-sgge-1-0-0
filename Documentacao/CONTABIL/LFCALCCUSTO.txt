@@ -1,0 +1,22 @@
+CREATE TABLE LFCALCCUSTO (
+    CODEMP     INTEGER NOT NULL,
+    CODFILIAL  SMALLINT NOT NULL,
+    CODCALC    INTEGER NOT NULL,
+    DESCCALC   VARCHAR(60) NOT NULL,
+    DTINS      DATE DEFAULT 'now' NOT NULL,
+    HINS       TIME DEFAULT 'now' NOT NULL,
+    IDUSUINS   VARCHAR(128) DEFAULT USER NOT NULL,
+    DTALT      DATE DEFAULT 'now',
+    HALT       TIME DEFAULT 'now',
+    IDUSUALT   VARCHAR(128) DEFAULT USER
+);
+
+
+
+
+/******************************************************************************/
+/****                             Primary Keys                             ****/
+/******************************************************************************/
+
+ALTER TABLE LFCALCCUSTO ADD CONSTRAINT LFCALCCUSTOPK PRIMARY KEY (CODCALC, CODFILIAL, CODEMP);
+

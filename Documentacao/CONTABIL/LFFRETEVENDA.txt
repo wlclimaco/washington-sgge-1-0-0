@@ -1,0 +1,31 @@
+CREATE TABLE LFFRETEVENDA (
+    CODEMP     INTEGER NOT NULL,
+    CODFILIAL  SMALLINT NOT NULL,
+    CODFRETE   INTEGER NOT NULL,
+    CODVENDA   INTEGER NOT NULL,
+    TIPOVENDA  CHAR(1) NOT NULL,
+    DTINS      DATE DEFAULT 'now' NOT NULL,
+    HINS       TIME DEFAULT 'now' NOT NULL,
+    IDUSUINS   CHAR(8) DEFAULT USER NOT NULL,
+    DTALT      DATE DEFAULT 'now',
+    HALT       TIME DEFAULT 'now',
+    IDUSUALT   CHAR(8) DEFAULT USER
+);
+
+
+
+
+/******************************************************************************/
+/****                             Primary Keys                             ****/
+/******************************************************************************/
+
+ALTER TABLE LFFRETEVENDA ADD CONSTRAINT LFFRETEVDPK PRIMARY KEY (CODFRETE, CODVENDA, TIPOVENDA, CODFILIAL, CODEMP);
+
+
+/******************************************************************************/
+/****                             Foreign Keys                             ****/
+/******************************************************************************/
+
+ALTER TABLE LFFRETEVENDA ADD CONSTRAINT LFFRETEFKLFFRETE FOREIGN KEY (CODFRETE, CODFILIAL, CODEMP) REFERENCES LFFRETE (CODFRETE, CODFILIAL, CODEMP);
+ALTER TABLE LFFRETEVENDA ADD CONSTRAINT VDFRETEVEFKVDVENDA FOREIGN KEY (CODVENDA, TIPOVENDA, CODFILIAL, CODEMP) REFERENCES VDVENDA (CODVENDA, TIPOVENDA, CODFILIAL, CODEMP);
+

@@ -1,0 +1,46 @@
+CREATE TABLE LFTIPOFISCCLI (
+    CODEMP         INTEGER NOT NULL,
+    CODFILIAL      INTEGER NOT NULL,
+    CODFISCCLI     INTEGER NOT NULL,
+    DESCFISCCLI    CHAR(40) NOT NULL,
+    CALCCOFINSTF   CHAR(1) DEFAULT 'N' NOT NULL,
+    CALCCSOCIALTF  CHAR(1) DEFAULT 'N' NOT NULL,
+    CALCICMSTF     CHAR(1) DEFAULT 'N' NOT NULL,
+    CALCIPITF      CHAR(1) DEFAULT 'N' NOT NULL,
+    CALCIRTF       CHAR(1) DEFAULT 'N' NOT NULL,
+    CALCISSTF      CHAR(1) DEFAULT 'N' NOT NULL,
+    CALCPISTF      CHAR(1) DEFAULT 'N' NOT NULL,
+    IMPCOFINSTF    CHAR(1) DEFAULT 'N' NOT NULL,
+    IMPCSOCIALTF   CHAR(1) DEFAULT 'N' NOT NULL,
+    IMPICMSTF      CHAR(1) DEFAULT 'N' NOT NULL,
+    IMPISSTF       CHAR(1) DEFAULT 'N' NOT NULL,
+    IMPIPITF       CHAR(1) DEFAULT  'N' NOT NULL,
+    IMPIRTF        CHAR(1) DEFAULT 'N' NOT NULL,
+    IMPPISTF       CHAR(1) DEFAULT 'N' NOT NULL,
+    CODEMPOC       INTEGER,
+    CODFILIALOC    SMALLINT,
+    CODTIPOMOVOC   INTEGER,
+    DTINS          DATE DEFAULT 'now' NOT NULL,
+    HINS           TIME DEFAULT 'now' NOT NULL,
+    IDUSUINS       CHAR(8) DEFAULT USER NOT NULL,
+    DTALT          DATE DEFAULT 'now',
+    HALT           TIME DEFAULT 'now',
+    IDUSUALT       CHAR(8) DEFAULT USER
+);
+
+
+
+
+/******************************************************************************/
+/****                             Primary Keys                             ****/
+/******************************************************************************/
+
+ALTER TABLE LFTIPOFISCCLI ADD CONSTRAINT LFTIPOFISCCLIPK PRIMARY KEY (CODFISCCLI, CODFILIAL, CODEMP);
+
+
+/******************************************************************************/
+/****                             Foreign Keys                             ****/
+/******************************************************************************/
+
+ALTER TABLE LFTIPOFISCCLI ADD CONSTRAINT LFTIPOFISCCLIFKEQTIPOMOV FOREIGN KEY (CODTIPOMOVOC, CODFILIALOC, CODEMPOC) REFERENCES EQTIPOMOV (CODTIPOMOV, CODFILIAL, CODEMP);
+

@@ -1,0 +1,27 @@
+CREATE TABLE LFNBM (
+    CODNBM    VARCHAR(12) NOT NULL,
+    DESCNBM   VARCHAR(60) NOT NULL,
+    DTINS     DATE default 'now' NOT NULL,
+    HINS      TIME default 'now' NOT NULL,
+    IDUSUINS  CHAR(8) default user NOT NULL,
+    DTALT     DATE default 'now' NOT NULL,
+    HALT      TIME default 'now' NOT NULL,
+    IDUSUALT  CHAR(8) default user NOT NULL
+);
+
+
+
+
+/******************************************************************************/
+/****                             Primary Keys                             ****/
+/******************************************************************************/
+
+ALTER TABLE LFNBM ADD CONSTRAINT LFNBMPK PRIMARY KEY (CODNBM);
+
+
+/******************************************************************************/
+/****                               Indices                                ****/
+/******************************************************************************/
+
+CREATE INDEX LFNBMIDX001 ON LFNBM (DESCNBM);
+

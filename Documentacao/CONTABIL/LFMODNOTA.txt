@@ -1,0 +1,30 @@
+CREATE TABLE LFMODNOTA (
+    CODEMP       INTEGER NOT NULL,
+    CODFILIAL    SMALLINT NOT NULL,
+    CODMODNOTA   INTEGER NOT NULL,
+    DESCMODNOTA  CHAR(30) NOT NULL,
+    TIPOMODNOTA  CHAR(1) DEFAULT 'N' NOT NULL,
+    DTINS        DATE DEFAULT 'now' NOT NULL,
+    HINS         TIME DEFAULT 'now' NOT NULL,
+    IDUSUINS     CHAR(8) DEFAULT USER NOT NULL,
+    DTALT        DATE DEFAULT 'now',
+    HALT         TIME DEFAULT 'now',
+    IDUSUALT     CHAR(8) DEFAULT USER
+);
+
+
+
+
+/******************************************************************************/
+/****                             Primary Keys                             ****/
+/******************************************************************************/
+
+ALTER TABLE LFMODNOTA ADD CONSTRAINT LFMODNOTAPK PRIMARY KEY (CODMODNOTA, CODFILIAL, CODEMP);
+
+
+/******************************************************************************/
+/****                             Foreign Keys                             ****/
+/******************************************************************************/
+
+ALTER TABLE LFMODNOTA ADD CONSTRAINT LFMODNOTAFKSGFILIA FOREIGN KEY (CODFILIAL, CODEMP) REFERENCES SGFILIAL (CODFILIAL, CODEMP);
+
