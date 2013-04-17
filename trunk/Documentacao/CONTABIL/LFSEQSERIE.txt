@@ -1,0 +1,26 @@
+CREATE TABLE LFSEQSERIE (
+    CODEMP       INTEGER NOT NULL,
+    CODFILIAL    SMALLINT NOT NULL,
+    SERIE        CHAR(4) NOT NULL,
+    CODEMPSS     INTEGER NOT NULL,
+    CODFILIALSS  SMALLINT NOT NULL,
+    SEQSERIE     SMALLINT NOT NULL,
+    DOCSERIE     INTEGER DEFAULT 0 NOT NULL,
+    ATIVSERIE    CHAR(1) DEFAULT 'S' NOT NULL,
+    DTINS        DATE DEFAULT 'now' NOT NULL,
+    HINS         TIME DEFAULT 'now' NOT NULL,
+    IDUSUINS     VARCHAR(128) DEFAULT USER NOT NULL,
+    DTALT        DATE DEFAULT 'now' NOT NULL,
+    HALT         TIME DEFAULT 'now' NOT NULL,
+    IDUSUALT     VARCHAR(128) DEFAULT USER NOT NULL
+);
+
+
+
+
+/******************************************************************************/
+/****                             Primary Keys                             ****/
+/******************************************************************************/
+
+ALTER TABLE LFSEQSERIE ADD CONSTRAINT LFSEQSERIEPK PRIMARY KEY (SERIE, CODFILIAL, CODEMP, SEQSERIE, CODFILIALSS, CODEMPSS);
+

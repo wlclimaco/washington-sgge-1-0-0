@@ -1,0 +1,25 @@
+CREATE TABLE LFTABICMS (
+    CODEMP       INTEGER NOT NULL,
+    CODFILIAL    INTEGER NOT NULL,
+    UFTI         CHAR(2) NOT NULL,
+    ALIQTI       NUMERIC(9,2) NOT NULL,
+    ALIQINTRATI  SMALLINT,
+    DTINS        DATE DEFAULT 'now' NOT NULL,
+    HINS         TIME DEFAULT 'now' NOT NULL,
+    IDUSUINS     CHAR(8) DEFAULT USER NOT NULL,
+    DTALT        DATE DEFAULT 'now',
+    HALT         TIME DEFAULT 'now',
+    IDUSUALT     CHAR(8) DEFAULT USER
+);
+
+
+
+
+/******************************************************************************/
+/****                             Primary Keys                             ****/
+/******************************************************************************/
+
+ALTER TABLE LFTABICMS ADD CONSTRAINT LFTABICMSPK PRIMARY KEY (UFTI, CODFILIAL, CODEMP);
+
+
+/******************

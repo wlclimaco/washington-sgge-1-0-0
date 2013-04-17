@@ -1,0 +1,56 @@
+CREATE TABLE LFCLFISCAL (
+    CODEMP         INTEGER NOT NULL,
+    CODFILIAL      SMALLINT NOT NULL,
+    CODFISC        CHAR(13) NOT NULL,
+    DESCFISC       CHAR(50) NOT NULL,
+    TIPOFISC       CHAR(2),
+    TPREDICMSFISC  CHAR(1) DEFAULT 'B',
+    ALIQFISC       NUMERIC(6,2),
+    ALIQLFISC      NUMERIC(6,2),
+    REDFISC        NUMERIC(6,2),
+    ALIQIPIFISC    NUMERIC(6,2),
+    CODEMPRA       INTEGER NOT NULL,
+    CODFILIALRA    SMALLINT NOT NULL,
+    CODREGRA       CHAR(4) NOT NULL,
+    ORIGFISC       CHAR(1),
+    CODEMPTT       INTEGER,
+    CODFILIALTT    SMALLINT,
+    CODTRATTRIB    CHAR(2),
+    CODEMPME       INTEGER,
+    CODFILIALME    SMALLINT,
+    CODMENS        INTEGER,
+    SITPISFISC     CHAR(1) DEFAULT 'T',
+    SITCOFINSFISC  CHAR(1) DEFAULT 'T',
+    TIPOST         CHAR(2) DEFAULT 'SI',
+    MARGEMVLAGR    NUMERICDN /* NUMERICDN = NUMERIC(15,5) */,
+    CODNCM         VARCHAR(10),
+    CODNBM         VARCHAR(12),
+    EXTIPI         CHAR(2),
+    CODSERV        CHAR(5),
+    DTINS          DATE DEFAULT 'now' NOT NULL,
+    HINS           TIME DEFAULT 'now' NOT NULL,
+    IDUSUINS       CHAR(8) DEFAULT USER NOT NULL,
+    DTALT          DATE DEFAULT 'now',
+    HALT           TIME DEFAULT 'now',
+    IDUSUALT       CHAR(8) DEFAULT USER
+);
+
+
+
+
+/******************************************************************************/
+/****                             Primary Keys                             ****/
+/******************************************************************************/
+
+ALTER TABLE LFCLFISCAL ADD CONSTRAINT LFCLFISCALPK PRIMARY KEY (CODFISC, CODFILIAL, CODEMP);
+
+
+/******************************************************************************/
+/****                             Foreign Keys                             ****/
+/******************************************************************************/
+
+ALTER TABLE LFCLFISCAL ADD CONSTRAINT LFCLFISCALFKLFNCM FOREIGN KEY (CODNCM, CODNBM) REFERENCES LFNCMNBM (CODNCM, CODNBM);
+ALTER TABLE LFCLFISCAL ADD CONSTRAINT LFCLFISCALFKLFREGR FOREIGN KEY (CODREGRA, CODFILIALRA, CODEMPRA) REFERENCES LFREGRAFISCAL (CODREGRA, CODFILIAL, CODEMP);
+ALTER TABLE LFCLFISCAL ADD CONSTRAINT LFCLFISCALFKLFSERVICO FOREIGN KEY (CODSERV) REFERENCES LFSERVICO (CODSERV);
+ALTER TABLE LFCLFISCAL ADD CONSTRAINT LFCLFISCALFKSGFILI FOREIGN KEY (CODFILIAL, CODEMP) REFERENCES SGFILIAL (CODFILIAL, CODEMP);
+

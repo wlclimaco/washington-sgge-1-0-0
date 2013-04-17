@@ -1,0 +1,30 @@
+CREATE TABLE LFNCM (
+    CODNCM      VARCHAR(10) NOT NULL,
+    DESCNCM     VARCHAR(60) NOT NULL,
+    ALIQNCM     VARCHAR(6),
+    TEXTONCM    VARCHAR(2000),
+    EXCECAONCM  VARCHAR(1000),
+    DTINS       DATE default 'now' NOT NULL,
+    HINS        TIME default 'now' NOT NULL,
+    IDUSUINS    CHAR(8) default user NOT NULL,
+    DTALT       DATE default 'now' NOT NULL,
+    HALT        TIME default 'now' NOT NULL,
+    IDUSUALT    CHAR(8) default user NOT NULL
+);
+
+
+
+
+/******************************************************************************/
+/****                             Primary Keys                             ****/
+/******************************************************************************/
+
+ALTER TABLE LFNCM ADD CONSTRAINT LFNCMPK PRIMARY KEY (CODNCM);
+
+
+/******************************************************************************/
+/****                               Indices                                ****/
+/******************************************************************************/
+
+CREATE INDEX LFNCMIDX001 ON LFNCM (DESCNCM);
+

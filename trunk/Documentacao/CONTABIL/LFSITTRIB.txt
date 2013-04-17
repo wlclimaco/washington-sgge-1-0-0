@@ -1,0 +1,30 @@
+CREATE TABLE LFSITTRIB (
+    CODEMP       INTEGER NOT NULL,
+    CODFILIAL    SMALLINT NOT NULL,
+    CODSITTRIB   CHAR(2) NOT NULL,
+    IMPSITTRIB   CHAR(2) NOT NULL,
+    DESCSITTRIB  VARCHAR(200) NOT NULL,
+    DTINS        DATE DEFAULT 'now' NOT NULL,
+    HINS         TIME DEFAULT 'now' NOT NULL,
+    IDUSUINS     CHAR(8) DEFAULT USER NOT NULL,
+    DTALT        DATE DEFAULT 'now',
+    HALT         TIME DEFAULT 'now',
+    IDUSUALT     CHAR(8) DEFAULT USER
+);
+
+
+
+
+/******************************************************************************/
+/****                             Primary Keys                             ****/
+/******************************************************************************/
+
+ALTER TABLE LFSITTRIB ADD CONSTRAINT LFSITTRIBPK PRIMARY KEY (CODSITTRIB, IMPSITTRIB, CODFILIAL, CODEMP);
+
+
+/******************************************************************************/
+/****                             Foreign Keys                             ****/
+/******************************************************************************/
+
+ALTER TABLE LFSITTRIB ADD CONSTRAINT LFSITTRIBFKSGFILI FOREIGN KEY (CODFILIAL, CODEMP) REFERENCES SGFILIAL (CODFILIAL, CODEMP);
+

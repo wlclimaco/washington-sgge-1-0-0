@@ -1,0 +1,29 @@
+CREATE TABLE LFREGRAFISCAL (
+    CODEMP     INTEGER NOT NULL,
+    CODFILIAL  SMALLINT NOT NULL,
+    CODREGRA   CHAR(4) NOT NULL,
+    DESCREGRA  CHAR(50),
+    DTINS      DATE DEFAULT 'now' NOT NULL,
+    HINS       TIME DEFAULT 'now' NOT NULL,
+    IDUSUINS   CHAR(8) DEFAULT USER NOT NULL,
+    DTALT      DATE DEFAULT 'now',
+    HALT       TIME DEFAULT 'now',
+    IDUSUALT   CHAR(8) DEFAULT USER
+);
+
+
+
+
+/******************************************************************************/
+/****                             Primary Keys                             ****/
+/******************************************************************************/
+
+ALTER TABLE LFREGRAFISCAL ADD CONSTRAINT LFREGRAFISCALPK PRIMARY KEY (CODREGRA, CODFILIAL, CODEMP);
+
+
+/******************************************************************************/
+/****                             Foreign Keys                             ****/
+/******************************************************************************/
+
+ALTER TABLE LFREGRAFISCAL ADD CONSTRAINT LFREGRAFISCALFKSGF FOREIGN KEY (CODFILIAL, CODEMP) REFERENCES SGFILIAL (CODFILIAL, CODEMP);
+
