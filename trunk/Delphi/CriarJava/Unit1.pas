@@ -644,7 +644,7 @@ begin
      end;
      if CheckBox8.Checked = true then
      begin
-           GerarArquivo(''+PrimeiraMaiscula(Edit1.Text)+'',BrvEdit1.Text+'DAC\mybatis\map','.XML',Memo10,0);
+           GerarArquivo(''+PrimeiraMaiscula(Edit1.Text)+'',BrvEdit1.Text+'DAC\mybatis\map\','.xml',Memo10,0);
      end;
      if CheckBox9.Checked = true then
      begin
