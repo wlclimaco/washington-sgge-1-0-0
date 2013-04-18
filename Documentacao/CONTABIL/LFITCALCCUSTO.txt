@@ -1,31 +1,7 @@
-CREATE TABLE LFITCALCCUSTO (
-    CODEMP        INTEGER NOT NULL,
-    CODFILIAL     SMALLINT NOT NULL,
-    CODCALC       INTEGER NOT NULL,
-    SEQITCALC     SMALLINT NOT NULL,
-    SIGLACALC     VARCHAR(10) NOT NULL,
-    OPERACAOCALC  VARCHAR(1) NOT NULL,
-    DTINS         DATE DEFAULT 'now' NOT NULL,
-    HINS          TIME DEFAULT 'now' NOT NULL,
-    IDUSUINS      VARCHAR(128) DEFAULT USER NOT NULL,
-    DTALT         DATE DEFAULT 'now',
-    HALT          TIME DEFAULT 'now',
-    IDUSUALT      VARCHAR(128) DEFAULT USER
-);
-
-
-
-
-/******************************************************************************/
-/****                             Primary Keys                             ****/
-/******************************************************************************/
-
-ALTER TABLE LFITCALCCUSTO ADD CONSTRAINT LFITCALCCUSTOPK PRIMARY KEY (CODCALC, SEQITCALC, CODFILIAL, CODEMP);
-
-
-/******************************************************************************/
-/****                             Foreign Keys                             ****/
-/******************************************************************************/
-
-ALTER TABLE LFITCALCCUSTO ADD CONSTRAINT LFITCALCCFKLFCALCC FOREIGN KEY (CODCALC, CODFILIAL, CODEMP) REFERENCES LFCALCCUSTO (CODCALC, CODFILIAL, CODEMP);
-
+CODEMP        INTEGER 0 PK S
+CODFILIAL     INTEGER 0 PK S
+CODCALC       INTEGER 0 PK S
+SEQITCALC     INTEGER 0 PK S
+SIGLACALC     VARCHAR 10 ' S
+OPERACAOCALC  VARCHAR 1  ' S
+LISTINSALT List<Alterinse>

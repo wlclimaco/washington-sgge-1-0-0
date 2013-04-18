@@ -1,29 +1,5 @@
-CREATE TABLE LFCSOSN (
-    CODEMP     INTEGER NOT NULL,
-    CODFILIAL  SMALLINT NOT NULL,
-    CSOSN      CHAR(4) NOT NULL,
-    DESCCSOSN  VARCHAR(1000) NOT NULL,
-    DTINS      DATE DEFAULT 'now' NOT NULL,
-    HINS       TIME DEFAULT 'now' NOT NULL,
-    IDUSUINS   CHAR(8) DEFAULT USER NOT NULL,
-    DTALT      DATE DEFAULT 'now',
-    HALT       TIME DEFAULT 'now',
-    IDUSUALT   CHAR(8) DEFAULT USER
-);
-
-
-
-
-/******************************************************************************/
-/****                             Primary Keys                             ****/
-/******************************************************************************/
-
-ALTER TABLE LFCSOSN ADD CONSTRAINT LFCSOSNPK PRIMARY KEY (CSOSN, CODFILIAL, CODEMP);
-
-
-/******************************************************************************/
-/****                             Foreign Keys                             ****/
-/******************************************************************************/
-
-ALTER TABLE LFCSOSN ADD CONSTRAINT LFCSOSNFKSGFILI FOREIGN KEY (CODFILIAL, CODEMP) REFERENCES SGFILIAL (CODFILIAL, CODEMP);
-
+CODEMP         INTEGER 0 PK S
+CODFILIAL      INTEGER 0 PK S
+CSOSN      VARCHAR 4 PK S
+DESCCSOSN  VARCHAR(1000) ' S
+LISTINSALT List<Alterinse>
