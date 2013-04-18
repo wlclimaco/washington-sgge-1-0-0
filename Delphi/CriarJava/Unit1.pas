@@ -1101,6 +1101,8 @@ begin
                then Memo1.Lines.Add('Erro na abertura do arquivo !!!')
             else begin
                    lDsLista.LoadFromFile(DlgArquiv.FileName);
+                   EdtDsArquiv.Text := DlgArquiv.FileName ;
+                   Edit1.text := LowerCase(DlgArquiv.FileName);
                    lDsLista.Insert(0,'S/N Nome Tipo Tamanho Chave Obrigatorio Dominio Mascara NomeFK Help Apelido');
                    BrvFuncoesXE.StrToClientDataSet(lDsLista.Text,ClientDataSet1);
                  end;
