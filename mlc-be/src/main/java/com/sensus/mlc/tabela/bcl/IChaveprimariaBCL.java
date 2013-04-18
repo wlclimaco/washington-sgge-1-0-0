@@ -1,4 +1,4 @@
-package com.sensus.mlc.chaveprimaria.bcl;
+package com.sensus.mlc.tabela.bcl;
 
 
 import com.sensus.common.model.response.InternalResponse; 

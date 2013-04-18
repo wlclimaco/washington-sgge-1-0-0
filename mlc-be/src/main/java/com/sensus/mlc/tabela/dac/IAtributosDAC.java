@@ -1,4 +1,4 @@
-package com.sensus.mlc.tabela.dac
+package com.sensus.mlc.tabela.dac;
 
 
 import com.sensus.common.model.request.Request;
@@ -12,7 +12,7 @@ import com.sensus.mlc.tabela.model.response.AtributosResponse;
 /**
 * The Interface IActionDAC.
 *
-* @author - QAT Brazil.
+* @author - Washington
 *
 */
 public interface IAtributosDAC

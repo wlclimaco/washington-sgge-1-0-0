@@ -1,36 +1,61 @@
 package com.sensus.mlc.tabela.model.request;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.sensus.common.model.UserContext;
 import com.sensus.mlc.base.model.request.LightSelectionRequest;
 import com.sensus.mlc.tabela.model.Dominios;
+import com.sensus.mlc.tenant.model.Tenant;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class DominiosRequest.
+ * The Class InquiryDominiosRequest.
+ *
+ * @author - Washington
  */
 public class DominiosRequest extends LightSelectionRequest
 {
 
-    /** The parent retry. */
-    private Integer parentRetry;
+	/** The dominios. */
+	private Dominios atributo;
 
-    /** The dominios. */
-    private Dominios  dominios;
+	/** The dominios. */
+	private List<Dominios> dominios = new ArrayList<Dominios>();
 
 	/**
-	 * Gets the parent retry.
-	 *
-	 * @return the parent retry
+	 * Instantiates a new dominios request.
 	 */
-	public Integer getParentRetry() {
-		return parentRetry;
+	public DominiosRequest()
+	{
 	}
 
 	/**
-	 * Sets the parent retry.
+	 * Instantiates a new dominios request.
 	 *
-	 * @param parentRetry the new parent retry
+	 * @param userContext the user context
 	 */
-	public void setParentRetry(Integer parentRetry) {
-		this.parentRetry = parentRetry;
+	public DominiosRequest(UserContext userContext)
+	{
+		super(userContext);
+	}
+
+	/**
+	 * Gets the atributo.
+	 *
+	 * @return the atributo
+	 */
+	public Dominios getAtributo() {
+		return atributo;
+	}
+
+	/**
+	 * Sets the atributo.
+	 *
+	 * @param atributo the new atributo
+	 */
+	public void setAtributo(Dominios atributo) {
+		this.atributo = atributo;
 	}
 
 	/**
@@ -38,7 +63,7 @@ public class DominiosRequest extends LightSelectionRequest
 	 *
 	 * @return the dominios
 	 */
-	public Dominios getDominios() {
+	public List<Dominios> getDominios() {
 		return dominios;
 	}
 
@@ -47,18 +72,44 @@ public class DominiosRequest extends LightSelectionRequest
 	 *
 	 * @param dominios the new dominios
 	 */
-	public void setDominios(Dominios dominios) {
+	public void setDominios(List<Dominios> dominios) {
 		this.dominios = dominios;
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * Instantiates a new dominios request.
+	 *
+	 * @param userContext the user context
+	 * @param tenant the tenant
+	 */
+	public DominiosRequest(UserContext userContext, Tenant tenant)
+	{
+		super(userContext, tenant);
+	}
+
+
+	/**
+	 * Adds the to dominios.
+	 *
+	 * @param dominiosValue the dominios value
+	 */
+	public void addToDominios(Dominios dominiosValue)
+	{
+		getDominios().add(dominiosValue);
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @see com.sensus.mlc.base.model.request.LightSelectionRequest#toString()
 	 */
 	@Override
-	public String toString() {
-		return "DominiosRequest [parentRetry=" + parentRetry + ", dominios="
-				+ dominios + ", getParentRetry()=" + getParentRetry()
-				+ ", getDominios()=" + getDominios() + "]";
+	public String toString()
+	{
+		return "DominiosRequest [getDominios()=" + getDominios() + "getDominios() = " + getDominios()
+				+ ", getIsMonitored()=" + isMonitored() + ", getSearchLight()="
+				+ getSearchLight() + ", getPaginationAllSelected()=" + getPaginationAllSelected()
+				+ ", getSelectionPaginationIds()=" + getSelectionPaginationIds() + ", getTenant()=" + getTenant()
+				+ ", getUserContext()=" + getUserContext() + "]";
 	}
-
 }
+

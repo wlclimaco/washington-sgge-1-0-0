@@ -1,6 +1,8 @@
-package com.sensus.mlc.chaveestrangeira.model.response;
+package com.sensus.mlc.tabela.model.response;
 import java.util.List;
-import com.sensus.common.model.response.InquiryResponse
+
+import com.sensus.common.model.response.InquiryResponse;
+import com.sensus.mlc.tabela.model.Chaveestrangeira;
 
 
 public class InquiryChaveestrangeiraResponse extends InquiryResponse

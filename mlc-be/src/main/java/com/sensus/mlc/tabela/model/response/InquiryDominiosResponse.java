@@ -25,7 +25,6 @@ public class InquiryDominiosResponse extends InquiryResponse
     return "InquiryDominiosResponse [dominios=" + dominios
       + ", getDominios()=" + getDominios()
     + "]";
-
     }
 
 }

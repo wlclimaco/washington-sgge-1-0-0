@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Chaveprimaria">
+
+	<resultMap id="listAllChaveprimariaResults" type="Chaveprimaria" >
+		<result property="nmtabela" column="nmtabela" />
+		<result property="nmatribu" column="nmatribu" />
+		<result property="nrseqkey" column="nrseqkey" />
+		<result property="auditorias" column="auditorias" />
+	</resultMap>
+
+
+	<sql id="allChaveprimariaColumms">
+     	nmtabela,
+     	nmatribu,
+     	nrseqkey,
+     	auditorias,
+	</sql>
+	
+
+	<!-- Insert Chaveprimaria -->
+	<select id="insertChaveprimaria" parameterType="Map" resultType="int">
+		SELECT ins_chaveprimaria (
+		#{nmtabela,jdbcType=VARCHAR},
+		#{nmatribu,jdbcType=VARCHAR},
+		#{nrseqkey,jdbcType=INTEGER},
+		#{auditorias,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Chaveprimaria -->
+	<select id="updateChaveprimaria" parameterType="Map" resultType="int">
+		SELECT upd_chaveprimaria (
+		#{nmtabela,jdbcType=VARCHAR},
+		#{nmatribu,jdbcType=VARCHAR},
+		#{nrseqkey,jdbcType=INTEGER},
+		#{auditorias,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Chaveprimaria -->
+	<select id="deleteChaveprimaria" parameterType="Chaveprimaria">
+		SELECT del_chaveprimaria (#{id})
+	</select>
+	
+	<!-- Fetch All Chaveprimarias -->
+	<select id="fetchAllChaveprimarias" parameterType="Map" resultMap="listAllChaveprimariaResults">
+	
+		SELECT  <include refid="allChaveprimariaColumms"/>
+		  FROM chaveprimaria
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM chaveprimaria 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Chaveprimaria By type -->
+	<select id="fetchChaveprimariaByType" parameterType="ChaveprimariaRequest"  resultMap="listAllChaveprimariaResults" >
+		SELECT  <include refid="allCustomListChaveprimariaColumns"/>
+		  FROM chaveprimaria
+		 WHERE name = #{chaveprimaria.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Chaveprimaria By Id -->
+	<select id="fetchChaveprimariaById" parameterType="Chaveprimaria" resultMap="listAllChaveprimariaResults" >
+		SELECT <include refid="allCustomListChaveprimariaColumns"/>
+		  FROM chaveprimaria
+		 WHERE chaveprimaria_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Chaveprimaria By Id -->
+	<select id="fetchChaveprimariaNameById" parameterType="Chaveprimaria" resultMap="listAllChaveprimariaResults" >
+		SELECT <include refid="allCustomListChaveprimariaColumns"/>
+		  FROM chaveprimaria
+		 WHERE chaveprimaria_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

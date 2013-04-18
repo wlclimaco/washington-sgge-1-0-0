@@ -223,7 +223,7 @@ public class ChaveprimariaBCLImpl implements IChaveprimariaBCL
 	@Override 
 	public InternalResultsResponse<Chaveprimaria> updateChaveprimaria(ChaveprimariaRequest chaveprimariaRequest)
 	{ 
-		InternalResultsResponse<Empresa> response = getChaveprimariaDAC().updateChaveprimaria(chaveprimariaRequest);
+		InternalResultsResponse<Chaveprimaria> response = getChaveprimariaDAC().updateChaveprimaria(chaveprimariaRequest);
 
 		if (!response.isInError()) 
 		{ 
@@ -271,9 +271,9 @@ public class ChaveprimariaBCLImpl implements IChaveprimariaBCL
 		Chaveprimaria chaveprimaria = chaveprimariaRequest.getChaveprimaria();
 
 		List<LCActionParameter> actionParameters = new ArrayList<LCActionParameter>();
-		actionParameters.add(new LCActionParameter(PropertyEnum.EMPRESA_ID, String.valueOf(empresa.getCodemp())));
-   actionParameters.add(new LCActionParameter(PropertyEnum.EMPRESA_ID, empresa.getCodemp().toString()));
-   InquiryLightRequest lightRequest = createInquiryLightRequest(empresaRequest);
+		actionParameters.add(new LCActionParameter(PropertyEnum.EMPRESA_ID, String.valueOf(chaveprimaria.getCodemp())));
+   actionParameters.add(new LCActionParameter(PropertyEnum.EMPRESA_ID, chaveprimaria.getCodemp().toString()));
+   InquiryLightRequest lightRequest = createInquiryLightRequest(chaveprimariaRequest);
    Integer lightAmount = 1;
 
 		LCAction action = new LCAction(lcActionType);

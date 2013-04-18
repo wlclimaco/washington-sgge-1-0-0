@@ -1,11 +1,17 @@
 package com.sensus.mlc.tabela.bcf.impl;
 
 import static com.sensus.common.util.SensusInterfaceUtil.handleOperationStatusAndMessages;
+import static com.sensus.mlc.base.model.MLCPersistanceActionEnum.ADD_SMP_TO_CHAVEESTRANGEIRA;
 import static com.sensus.mlc.base.model.MLCPersistanceActionEnum.DELETE;
+import static com.sensus.mlc.base.model.MLCPersistanceActionEnum.DEL_SMP_FROM_CHAVEESTRANGEIRA;
+import static com.sensus.mlc.base.model.MLCPersistanceActionEnum.FETCH_BY_LIGHT;
 import static com.sensus.mlc.base.model.MLCPersistanceActionEnum.FETCH_BY_NAME;
+import static com.sensus.mlc.base.model.MLCPersistanceActionEnum.FETCH_BY_SMARTPOINT;
 import static com.sensus.mlc.base.model.MLCPersistanceActionEnum.INSERT;
 import static com.sensus.mlc.base.model.MLCPersistanceActionEnum.UPDATE;
 import static com.sensus.mlc.base.model.MLCPersistanceActionEnum.getSlcActionName;
+import static com.sensus.mlc.base.model.ObjectToBeValidatedKeyEnum.LIGHT_LIST;
+import static com.sensus.mlc.base.model.ObjectToBeValidatedKeyEnum.CHAVEESTRANGEIRA_LIST;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,13 +24,13 @@ import com.sensus.common.validation.ValidationController;
 import com.sensus.mlc.base.bcf.impl.AbstractBaseBCF;
 import com.sensus.mlc.smartpoint.model.Light;
 import com.sensus.mlc.smartpoint.model.request.LightRequest;
-import com.sensus.mlc.tabela.bcf.IChaveestrangeiraBCF;
-import com.sensus.mlc.tabela.bcl.IChaveestrangeiraBCL;
-import com.sensus.mlc.tabela.model.Chaveestrangeira;
-import com.sensus.mlc.tabela.model.request.ChaveestrangeiraRequest;
-import com.sensus.mlc.tabela.model.request.InquiryChaveestrangeiraRequest;
-import com.sensus.mlc.tabela.model.response.ChaveestrangeiraResponse;
-import com.sensus.mlc.tabela.model.response.InquiryChaveestrangeiraResponse;
+import com.sensus.mlc.chaveestrangeira.bcf.IChaveestrangeiraBCF;
+import com.sensus.mlc.chaveestrangeira.bcl.IChaveestrangeiraBCL;
+import com.sensus.mlc.chaveestrangeira.model.Chaveestrangeira;
+import com.sensus.mlc.chaveestrangeira.model.request.InquiryChaveestrangeiraRequest;
+import com.sensus.mlc.chaveestrangeira.model.request.ChaveestrangeiraRequest;
+import com.sensus.mlc.chaveestrangeira.model.response.InquiryChaveestrangeiraResponse;
+import com.sensus.mlc.chaveestrangeira.model.response.ChaveestrangeiraResponse;
 
 /** 
  * The Class ChaveestrangeiraBCFImpl.

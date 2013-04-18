@@ -43,9 +43,6 @@ public class AtributosDACImpl extends SqlSessionDaoSupport implements IAtributos
 	/** The Constant DELETE_SMART_POINT_FROM_ATRIBUTOS. */ 
 	private static final String DELETE_SMART_POINT_FROM_ATRIBUTOS = ATRIBUTOS_NAMESPACE + "deleteSmartPointFromAtributos";
 
-	/** The Constant FETCH_ATRIBUTOS_BY_ID. */ 
-	private static final String FETCH_ATRIBUTOS_BY_ID = ATRIBUTOS_NAMESPACE + "fetchAtributosById";
-
 	/** The Constant FETCH_ATRIBUTOS_NAME_BY_ID. */ 
 	private static final String FETCH_ATRIBUTOS_NAME_BY_ID = ATRIBUTOS_NAMESPACE + "fetchAtributosNameById";
 
@@ -64,6 +61,10 @@ public class AtributosDACImpl extends SqlSessionDaoSupport implements IAtributos
 	/** The Constant INSERT_ATRIBUTOS. */ 
 	private static final String INSERT_ATRIBUTOS = ATRIBUTOS_NAMESPACE + "insertAtributos";
 
+private static final String INSERT_AUDITORIA = Auditoria.insertAuditoria;
+private static final String UPDATE_ATRIBUTOS = ATRIBUTOS_NAMESPACE + "updateAtributos";
+private static final String SENSUS_MLC_ATRIBUTOS_VALIDATOR_ATRIBUTOS_ALREADY_EXISTS = error.update.atributos;
+ 
 	/** The Constant INSERT_SMART_POINT_TO_ATRIBUTOS. */ 
 	private static final String INSERT_SMART_POINT_TO_ATRIBUTOS = ATRIBUTOS_NAMESPACE + "insertSmartPointToAtributos";
 
@@ -132,9 +133,9 @@ public class AtributosDACImpl extends SqlSessionDaoSupport implements IAtributos
 			paramMap.put(ORDERBY, inquiryAtributosRequest.getSortExpressions().get(0));
 		}
 
-		if (!ValidationUtil.isNull(inquiryAtributosRequest.getAtributoss()))
+		if (!ValidationUtil.isNull(inquiryAtributosRequest.getAtributos()))
 		{
-			paramMap.put(ATRIBUTOS_ID, inquiryAtributosRequest.getAtributoss().get(0).getCodemp());
+			paramMap.put(ATRIBUTOS_ID, inquiryAtributosRequest.getAtributos().get(0).getCodemp());
 		}
 
 		doQueryForList(getSqlSession(), FETCH_ALL_ATRIBUTOSS, paramMap, response);
@@ -143,18 +144,6 @@ public class AtributosDACImpl extends SqlSessionDaoSupport implements IAtributos
 				PAGINATION_TOTAL_ROWS, paramMap);
 
 		response.getResultsSetInfo().setTotalRowsAvailable(totalRows);
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc) 
-	 * @see com.sensus.mlc.atributos.dao.IAtributosDAO#fetchAtributosById(com.sensus.mlc.atributos.model.Atributos
-	 */ 
-	@Override
-	public InternalResultsResponse<Atributos> fetchAtributosByName(AtributosRequest atributosRequest)
-	{ 
-		InternalResultsResponse<Atributos> response = new InternalResultsResponse<Atributos>();
-		doQueryForList(getSqlSession(), FETCH_ATRIBUTOS_BY_ID, atributosRequest, response);
 		return response;
 	}
 
@@ -170,7 +159,7 @@ public class AtributosDACImpl extends SqlSessionDaoSupport implements IAtributos
 		Atributos atributos = atributosRequest.getAtributos();
 
 		atributos.setCodEmp((Integer)doQueryForObject(getSqlSession(), INSERT_ATRIBUTOS, atributosRequest));
-   atributos.setListinsalt((List<Auditoria>)doQueryForObject(getSqlSession(), INSERT_EMPRESA, atributosRequest));
+   atributos.setListinsalt((List<Auditoria>)doQueryForObject(getSqlSession(), INSERT_AUDITORIA, atributosRequest));
 		InternalResultsResponse<Atributos> response = new InternalResultsResponse<Atributos>();
 		response.addResult(atributos);
 		return response;
@@ -185,50 +174,29 @@ public class AtributosDACImpl extends SqlSessionDaoSupport implements IAtributos
 	{
 		InternalResponse response = new InternalResponse();
 		doRemove(getSqlSession(), DELETE_ATRIBUTOS, atributosRequest.getAtributos(), response);
+   atributos.setListinsalt((List<Auditoria>)doQueryForObject(getSqlSession(), INSERT_AUDITORIA , atributosRequest));
 		return response;
 	}
 
 
-	/* 
-	 * (non-Javadoc)
-	 * @see com.sensus.mlc.atributos.dao.IAtributosDAO#fetchAtributosById(com.sensus.mlc.atributos.model.request.AtributosRequest)
-	 */ 
-	@Override 
-	public InternalResultsResponse<Atributos> fetchAtributosById(AtributosRequest atributosRequest) 
-	{
-		InternalResultsResponse<Atributos> response = new InternalResultsResponse<Atributos>();
-		doQueryForList(getSqlSession(), FETCH_ATRIBUTOS_BY_ID, atributosRequest.getAtributos(), response);
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc) 
-	 * @see com.sensus.mlc.atributos.dac.IAtributosDAC#fetchAtributosNameById(com.sensus.mlc.atributos.model.request.AtributosRequest)
-	 */ 
-	@Override 
-	public InternalResultsResponse<Atributos> fetchAtributosNameById(AtributosRequest atributosRequest)
-	{
-		InternalResultsResponse<Atributos> response = new InternalResultsResponse<Atributos>();
-		doQueryForList(getSqlSession(), FETCH_ATRIBUTOS_NAME_BY_ID, atributosRequest.getAtributos(), response);
-		return response;
-	}
  
 	/* 
 	 * (non-Javadoc)
 	 * @see com.sensus.mlc.atributos.dac.IAtributosDAC#updateAtributos(com.sensus.mlc.atributos.model.request.AtributosRequest)
 	 */ 
 	@Override 
-	public InternalResponse updateAtributos(AtributosRequest atributosRequest)
+	public InternalResultsResponse<Atributos> updateAtributos(AtributosRequest atributosRequest)
 	{
-		InternalResponse response = new InternalResponse();
+		InternalResultsResponse<Atributos> response = new InternalResultsResponse<Atributos>();
 		try 
 		{ 
 			doQueryForObject(getSqlSession(), UPDATE_ATRIBUTOS, atributosRequest);
+   atributos.setListinsalt((List<Auditoria>)doQueryForObject(getSqlSession(), INSERT_AUDITORIA, atributosRequest));
 		}
 		catch (DuplicateKeyException ex) 
 		{
 			response.setStatus(Status.ExceptionError);
-			response.addMessage(SENSUS_MLC_ATRIBUTOSVALIDATOR_ATRIBUTOS_ALREADY_EXISTS, MessageSeverity.Info, MessageLevel.None);
+			response.addMessage(SENSUS_MLC_ATRIBUTOS_VALIDATOR_ATRIBUTOS_ALREADY_EXISTS, MessageSeverity.Info, MessageLevel.None);
 		}
 
 		return response;

@@ -12,69 +12,69 @@ import com.sensus.mlc.tabela.model.response.TabelaResponse;
 /**
 * The Interface IActionDAC.
 *
-* @author - Washington.
+* @author - Washington
 *
 */
 public interface ITabelaDAC
 {
 
 /**
-* Update Tabela.
+* Update tabela.
 *
-* @param TabelaRequest the Tabela request
-* @return the Tabela response
+* @param tabelaRequest the tabela request
+* @return the tabela response
 */
-public InternalResultsResponse<Tabela> updateTabela(TabelaRequest TabelaRequest);
+public InternalResultsResponse<Tabela> updateTabela(TabelaRequest tabelaRequest);
 
 /**
-* Delete Tabela.
+* Delete tabela.
 *
-* @param TabelaRequest the Tabela request
-* @return the Tabela response
+* @param tabelaRequest the tabela request
+* @return the tabela response
 */
-public InternalResponse deleteTabela(TabelaRequest TabelaRequest);
+public InternalResponse deleteTabela(TabelaRequest tabelaRequest);
 
 /**
-* Fetch all Tabela.
+* Fetch all tabela.
 *
-* @param inquiryTabelaRequest the inquiryTabela request
-* @return the inquiry Tabela response
+* @param inquirytabelaRequest the inquirytabela request
+* @return the inquiry tabela response
 */
-public InternalResultsResponse<Tabela> fetchAllTabela(InquiryTabelaRequest inquiryTabelaRequest);
+public InternalResultsResponse<Tabela> fetchAllTabela(InquiryTabelaRequest inquirytabelaRequest);
 
 /**
-* Fetch Tabela by id.
+* Fetch tabela by id.
 *
-* @param inquiryTabelaRequest the inquiryTabela request
+* @param inquirytabelaRequest the inquirytabela request
 * @return the internal results response
 */
-public InternalResultsResponse<Tabela> fetchTabelaById(TabelaRequest TabelaRequest);
+public InternalResultsResponse<Tabela> fetchTabelaById(TabelaRequest tabelaRequest);
 
 /**
 * Generate file csv.
 *
-* @param inquiryTabelaRequest the inquiry Tabela request
-* @return the inquiry Tabela response
+* @param inquiryTabelaRequest the inquiry tabela request
+* @return the inquiry tabela response
 */
 public InternalResponse generateFileCSV(InquiryTabelaRequest inquiryTabelaRequest);
 
 /**
-* Fetch all Tabela types.
+* Fetch all tabela types.
 *
 * @param request the request
-* @return the Tabela response
+* @return the tabela response
 */
 public TabelaResponse fetchAllTabelaTypes(Request request);
 
 /**
-* Fetch all Tabela filial.
+* Fetch all tabela filial.
 *
 * @param request the request
-* @return the Tabela response
+* @return the tabela response
 */
 public TabelaResponse fetchAllTabelaFilial(Request request);
 
-public InternalResultsResponse<Tabela> insertTabela(TabelaRequest TabelaRequest);
+public InternalResultsResponse<Tabela> insertTabela(TabelaRequest tabelaRequest);
 }
 
 

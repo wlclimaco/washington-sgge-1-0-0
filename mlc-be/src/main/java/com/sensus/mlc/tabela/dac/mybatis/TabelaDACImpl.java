@@ -43,9 +43,6 @@ public class TabelaDACImpl extends SqlSessionDaoSupport implements ITabelaDAC
 	/** The Constant DELETE_SMART_POINT_FROM_TABELA. */ 
 	private static final String DELETE_SMART_POINT_FROM_TABELA = TABELA_NAMESPACE + "deleteSmartPointFromTabela";
 
-	/** The Constant FETCH_TABELA_BY_ID. */ 
-	private static final String FETCH_TABELA_BY_ID = TABELA_NAMESPACE + "fetchTabelaById";
-
 	/** The Constant FETCH_TABELA_NAME_BY_ID. */ 
 	private static final String FETCH_TABELA_NAME_BY_ID = TABELA_NAMESPACE + "fetchTabelaNameById";
 
@@ -64,6 +61,10 @@ public class TabelaDACImpl extends SqlSessionDaoSupport implements ITabelaDAC
 	/** The Constant INSERT_TABELA. */ 
 	private static final String INSERT_TABELA = TABELA_NAMESPACE + "insertTabela";
 
+private static final String INSERT_AUDITORIA = Auditoria.insertAuditoria;
+private static final String UPDATE_TABELA = TABELA_NAMESPACE + "updateTabela";
+private static final String SENSUS_MLC_TABELA_VALIDATOR_TABELA_ALREADY_EXISTS = error.update.tabela;
+ 
 	/** The Constant INSERT_SMART_POINT_TO_TABELA. */ 
 	private static final String INSERT_SMART_POINT_TO_TABELA = TABELA_NAMESPACE + "insertSmartPointToTabela";
 
@@ -132,9 +133,9 @@ public class TabelaDACImpl extends SqlSessionDaoSupport implements ITabelaDAC
 			paramMap.put(ORDERBY, inquiryTabelaRequest.getSortExpressions().get(0));
 		}
 
-		if (!ValidationUtil.isNull(inquiryTabelaRequest.getTabelas()))
+		if (!ValidationUtil.isNull(inquiryTabelaRequest.getTabela()))
 		{
-			paramMap.put(TABELA_ID, inquiryTabelaRequest.getTabelas().get(0).getCodemp());
+			paramMap.put(TABELA_ID, inquiryTabelaRequest.getTabela().get(0).getCodemp());
 		}
 
 		doQueryForList(getSqlSession(), FETCH_ALL_TABELAS, paramMap, response);
@@ -143,18 +144,6 @@ public class TabelaDACImpl extends SqlSessionDaoSupport implements ITabelaDAC
 				PAGINATION_TOTAL_ROWS, paramMap);
 
 		response.getResultsSetInfo().setTotalRowsAvailable(totalRows);
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc) 
-	 * @see com.sensus.mlc.tabela.dao.ITabelaDAO#fetchTabelaById(com.sensus.mlc.tabela.model.Tabela
-	 */ 
-	@Override
-	public InternalResultsResponse<Tabela> fetchTabelaByName(TabelaRequest tabelaRequest)
-	{ 
-		InternalResultsResponse<Tabela> response = new InternalResultsResponse<Tabela>();
-		doQueryForList(getSqlSession(), FETCH_TABELA_BY_ID, tabelaRequest, response);
 		return response;
 	}
 
@@ -170,7 +159,7 @@ public class TabelaDACImpl extends SqlSessionDaoSupport implements ITabelaDAC
 		Tabela tabela = tabelaRequest.getTabela();
 
 		tabela.setCodEmp((Integer)doQueryForObject(getSqlSession(), INSERT_TABELA, tabelaRequest));
-   tabela.setListinsalt((List<Auditoria>)doQueryForObject(getSqlSession(), INSERT_EMPRESA, tabelaRequest));
+   tabela.setListinsalt((List<Auditoria>)doQueryForObject(getSqlSession(), INSERT_AUDITORIA, tabelaRequest));
 		InternalResultsResponse<Tabela> response = new InternalResultsResponse<Tabela>();
 		response.addResult(tabela);
 		return response;
@@ -185,50 +174,29 @@ public class TabelaDACImpl extends SqlSessionDaoSupport implements ITabelaDAC
 	{
 		InternalResponse response = new InternalResponse();
 		doRemove(getSqlSession(), DELETE_TABELA, tabelaRequest.getTabela(), response);
+   tabela.setListinsalt((List<Auditoria>)doQueryForObject(getSqlSession(), INSERT_AUDITORIA , tabelaRequest));
 		return response;
 	}
 
 
-	/* 
-	 * (non-Javadoc)
-	 * @see com.sensus.mlc.tabela.dao.ITabelaDAO#fetchTabelaById(com.sensus.mlc.tabela.model.request.TabelaRequest)
-	 */ 
-	@Override 
-	public InternalResultsResponse<Tabela> fetchTabelaById(TabelaRequest tabelaRequest) 
-	{
-		InternalResultsResponse<Tabela> response = new InternalResultsResponse<Tabela>();
-		doQueryForList(getSqlSession(), FETCH_TABELA_BY_ID, tabelaRequest.getTabela(), response);
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc) 
-	 * @see com.sensus.mlc.tabela.dac.ITabelaDAC#fetchTabelaNameById(com.sensus.mlc.tabela.model.request.TabelaRequest)
-	 */ 
-	@Override 
-	public InternalResultsResponse<Tabela> fetchTabelaNameById(TabelaRequest tabelaRequest)
-	{
-		InternalResultsResponse<Tabela> response = new InternalResultsResponse<Tabela>();
-		doQueryForList(getSqlSession(), FETCH_TABELA_NAME_BY_ID, tabelaRequest.getTabela(), response);
-		return response;
-	}
  
 	/* 
 	 * (non-Javadoc)
 	 * @see com.sensus.mlc.tabela.dac.ITabelaDAC#updateTabela(com.sensus.mlc.tabela.model.request.TabelaRequest)
 	 */ 
 	@Override 
-	public InternalResponse updateTabela(TabelaRequest tabelaRequest)
+	public InternalResultsResponse<Tabela> updateTabela(TabelaRequest tabelaRequest)
 	{
-		InternalResponse response = new InternalResponse();
+		InternalResultsResponse<Tabela> response = new InternalResultsResponse<Tabela>();
 		try 
 		{ 
 			doQueryForObject(getSqlSession(), UPDATE_TABELA, tabelaRequest);
+   tabela.setListinsalt((List<Auditoria>)doQueryForObject(getSqlSession(), INSERT_AUDITORIA, tabelaRequest));
 		}
 		catch (DuplicateKeyException ex) 
 		{
 			response.setStatus(Status.ExceptionError);
-			response.addMessage(SENSUS_MLC_TABELAVALIDATOR_TABELA_ALREADY_EXISTS, MessageSeverity.Info, MessageLevel.None);
+			response.addMessage(SENSUS_MLC_TABELA_VALIDATOR_TABELA_ALREADY_EXISTS, MessageSeverity.Info, MessageLevel.None);
 		}
 
 		return response;

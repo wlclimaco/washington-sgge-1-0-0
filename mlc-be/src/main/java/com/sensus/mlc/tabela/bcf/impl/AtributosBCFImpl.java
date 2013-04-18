@@ -26,9 +26,6 @@ import com.sensus.mlc.tabela.model.request.InquiryAtributosRequest;
 import com.sensus.mlc.tabela.model.response.AtributosResponse;
 import com.sensus.mlc.tabela.model.response.InquiryAtributosResponse;
 
-
-
-
 /**
  * The Class AtributosBCFImpl.
  *
@@ -46,7 +43,7 @@ public class AtributosBCFImpl extends AbstractBaseBCF implements IAtributosBCF
 	private static final String INQUIRY_ATRIBUTOS_REQUEST_NAME = InquiryAtributosRequest.class.getSimpleName();
 
 	/** The Constant ATRIBUTOS_REQUEST_NAME. */
-	private static final String ATRIBUTOS_REQUEST_NAME = AtributosRequest.class.getSimpleName() class.getSimpleName();
+	private static final String ATRIBUTOS_REQUEST_NAME = AtributosRequest.class.getSimpleName();
 
 	/** The Constant ATRIBUTOS_NAME. */
 	private static final String ATRIBUTOS_NAME = Atributos.class.getSimpleName();
@@ -245,7 +242,7 @@ public class AtributosBCFImpl extends AbstractBaseBCF implements IAtributosBCF
 			if (getLightingControlRequestValidationController().validate(context)
 					&& getAtributosValidationController().validate(context))
 			{
-				internalResponse = getAtributosBCL().fetchAtributosByName(atributosRequest);
+				internalResponse = getAtributosBCL().fetchAtributosById(atributosRequest);
 				response.setAtributos(internalResponse.getResultsList());
 			}
 

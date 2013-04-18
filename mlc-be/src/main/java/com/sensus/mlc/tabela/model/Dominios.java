@@ -1,23 +1,16 @@
+package com.sensus.mlc.tabela.model;
+
+import java.util.List;
+
 import com.sensus.common.model.SensusModel;
+import com.sensus.mlc.gestao.model.Auditoria;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class Dominios.
- */
-public class Dominios extends SensusModel
-{
-
-    /** The nmtabela. */
-    private String nmtabela;
-
-    /** The nmatribu. */
-    private String nmatribu;
-
-    /** The dsdomini. */
-    private String dsdomini;
-
-    /** The vrdomini. */
-    private String vrdomini;
+public class Dominios extends SensusModel {
+	private String nmtabela;
+	private String nmatribu;
+	private String dsdomini;
+	private String vrdomini;
+	private List<Auditoria> auditorias;
 
 	/**
 	 * Gets the nmtabela.
@@ -25,13 +18,14 @@ public class Dominios extends SensusModel
 	 * @return the nmtabela
 	 */
 	public String getNmtabela() {
-		return nmtabela;
+		return this.nmtabela;
 	}
 
 	/**
 	 * Sets the nmtabela.
 	 *
-	 * @param nmtabela the new nmtabela
+	 * @param nmtabela
+	 *            the new nmtabela
 	 */
 	public void setNmtabela(String nmtabela) {
 		this.nmtabela = nmtabela;
@@ -43,13 +37,14 @@ public class Dominios extends SensusModel
 	 * @return the nmatribu
 	 */
 	public String getNmatribu() {
-		return nmatribu;
+		return this.nmatribu;
 	}
 
 	/**
 	 * Sets the nmatribu.
 	 *
-	 * @param nmatribu the new nmatribu
+	 * @param nmatribu
+	 *            the new nmatribu
 	 */
 	public void setNmatribu(String nmatribu) {
 		this.nmatribu = nmatribu;
@@ -61,13 +56,14 @@ public class Dominios extends SensusModel
 	 * @return the dsdomini
 	 */
 	public String getDsdomini() {
-		return dsdomini;
+		return this.dsdomini;
 	}
 
 	/**
 	 * Sets the dsdomini.
 	 *
-	 * @param dsdomini the new dsdomini
+	 * @param dsdomini
+	 *            the new dsdomini
 	 */
 	public void setDsdomini(String dsdomini) {
 		this.dsdomini = dsdomini;
@@ -79,42 +75,48 @@ public class Dominios extends SensusModel
 	 * @return the vrdomini
 	 */
 	public String getVrdomini() {
-		return vrdomini;
+		return this.vrdomini;
 	}
 
 	/**
 	 * Sets the vrdomini.
 	 *
-	 * @param vrdomini the new vrdomini
+	 * @param vrdomini
+	 *            the new vrdomini
 	 */
 	public void setVrdomini(String vrdomini) {
 		this.vrdomini = vrdomini;
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * Gets the auditorias.
+	 *
+	 * @return the auditorias
+	 */
+	public List<Auditoria> getAuditorias() {
+		return this.auditorias;
+	}
+
+	/**
+	 * Sets the auditorias.
+	 *
+	 * @param auditorias
+	 *            the new auditorias
+	 */
+	public void setAuditorias(List<Auditoria> auditorias) {
+		this.auditorias = auditorias;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see com.sensus.common.model.SensusModel#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Dominios [nmtabela=" + nmtabela + ", nmatribu=" + nmatribu
-				+ ", dsdomini=" + dsdomini + ", vrdomini=" + vrdomini + "]";
+		return "Dominios[ getNmtabela()=" + getNmtabela() + ", getNmatribu()="
+				+ getNmatribu() + ", getDsdomini()=" + getDsdomini()
+				+ ", getVrdomini()=" + getVrdomini() + ", getAuditorias()="
+				+ getAuditorias() + "]";
 	}
-
-	/**
-	 * Instantiates a new dominios.
-	 *
-	 * @param nmtabela the nmtabela
-	 * @param nmatribu the nmatribu
-	 * @param dsdomini the dsdomini
-	 * @param vrdomini the vrdomini
-	 */
-	public Dominios(String nmtabela, String nmatribu, String dsdomini,
-			String vrdomini) {
-		super();
-		this.nmtabela = nmtabela;
-		this.nmatribu = nmatribu;
-		this.dsdomini = dsdomini;
-		this.vrdomini = vrdomini;
-	}
-
 }
