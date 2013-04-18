@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Tipcliente">
+
+	<resultMap id="listAllTipclienteResults" type="Tipcliente" >
+		<result property="codemp" column="codemp" />
+		<result property="codfilial" column="codfilial" />
+		<result property="codtipocli" column="codtipocli" />
+		<result property="desctipocli" column="desctipocli" />
+		<result property="cheqtipocli" column="cheqtipocli" />
+		<result property="fistipocli" column="fistipocli" />
+		<result property="jurtipocli" column="jurtipocli" />
+		<result property="filtipocli" column="filtipocli" />
+		<result property="loctrabtipocli" column="loctrabtipocli" />
+		<result property="refcomltipocli" column="refcomltipocli" />
+		<result property="banctipocli" column="banctipocli" />
+		<result property="refpestipocli" column="refpestipocli" />
+		<result property="conjtipocli" column="conjtipocli" />
+		<result property="veictipocli" column="veictipocli" />
+		<result property="imovtipocli" column="imovtipocli" />
+		<result property="terratipocli" column="terratipocli" />
+		<result property="pesautcptipocli" column="pesautcptipocli" />
+		<result property="avaltipocli" column="avaltipocli" />
+		<result property="sociotipocli" column="sociotipocli" />
+		<result property="prodruraltipocli" column="prodruraltipocli" />
+		<result property="web" column="web" />
+		<result property="siglatipocli" column="siglatipocli" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allTipclienteColumms">
+     	codemp,
+     	codfilial,
+     	codtipocli,
+     	desctipocli,
+     	cheqtipocli,
+     	fistipocli,
+     	jurtipocli,
+     	filtipocli,
+     	loctrabtipocli,
+     	refcomltipocli,
+     	banctipocli,
+     	refpestipocli,
+     	conjtipocli,
+     	veictipocli,
+     	imovtipocli,
+     	terratipocli,
+     	pesautcptipocli,
+     	avaltipocli,
+     	sociotipocli,
+     	prodruraltipocli,
+     	web,
+     	siglatipocli,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Tipcliente -->
+	<select id="insertTipcliente" parameterType="Map" resultType="int">
+		SELECT ins_tipcliente (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codtipocli,jdbcType=INTEGER},
+		#{desctipocli,jdbcType=VARCHAR},
+		#{cheqtipocli,jdbcType=VARCHAR},
+		#{fistipocli,jdbcType=VARCHAR},
+		#{jurtipocli,jdbcType=VARCHAR},
+		#{filtipocli,jdbcType=VARCHAR},
+		#{loctrabtipocli,jdbcType=VARCHAR},
+		#{refcomltipocli,jdbcType=VARCHAR},
+		#{banctipocli,jdbcType=VARCHAR},
+		#{refpestipocli,jdbcType=VARCHAR},
+		#{conjtipocli,jdbcType=VARCHAR},
+		#{veictipocli,jdbcType=VARCHAR},
+		#{imovtipocli,jdbcType=VARCHAR},
+		#{terratipocli,jdbcType=VARCHAR},
+		#{pesautcptipocli,jdbcType=VARCHAR},
+		#{avaltipocli,jdbcType=VARCHAR},
+		#{sociotipocli,jdbcType=VARCHAR},
+		#{prodruraltipocli,jdbcType=VARCHAR},
+		#{web,jdbcType=VARCHAR},
+		#{siglatipocli,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Tipcliente -->
+	<select id="updateTipcliente" parameterType="Map" resultType="int">
+		SELECT upd_tipcliente (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codtipocli,jdbcType=INTEGER},
+		#{desctipocli,jdbcType=VARCHAR},
+		#{cheqtipocli,jdbcType=VARCHAR},
+		#{fistipocli,jdbcType=VARCHAR},
+		#{jurtipocli,jdbcType=VARCHAR},
+		#{filtipocli,jdbcType=VARCHAR},
+		#{loctrabtipocli,jdbcType=VARCHAR},
+		#{refcomltipocli,jdbcType=VARCHAR},
+		#{banctipocli,jdbcType=VARCHAR},
+		#{refpestipocli,jdbcType=VARCHAR},
+		#{conjtipocli,jdbcType=VARCHAR},
+		#{veictipocli,jdbcType=VARCHAR},
+		#{imovtipocli,jdbcType=VARCHAR},
+		#{terratipocli,jdbcType=VARCHAR},
+		#{pesautcptipocli,jdbcType=VARCHAR},
+		#{avaltipocli,jdbcType=VARCHAR},
+		#{sociotipocli,jdbcType=VARCHAR},
+		#{prodruraltipocli,jdbcType=VARCHAR},
+		#{web,jdbcType=VARCHAR},
+		#{siglatipocli,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Tipcliente -->
+	<select id="deleteTipcliente" parameterType="Tipcliente">
+		SELECT del_tipcliente (#{id})
+	</select>
+	
+	<!-- Fetch All Tipclientes -->
+	<select id="fetchAllTipclientes" parameterType="Map" resultMap="listAllTipclienteResults">
+	
+		SELECT  <include refid="allTipclienteColumms"/>
+		  FROM tipcliente
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM tipcliente 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Tipcliente By type -->
+	<select id="fetchTipclienteByType" parameterType="TipclienteRequest"  resultMap="listAllTipclienteResults" >
+		SELECT  <include refid="allCustomListTipclienteColumns"/>
+		  FROM tipcliente
+		 WHERE name = #{tipcliente.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Tipcliente By Id -->
+	<select id="fetchTipclienteById" parameterType="Tipcliente" resultMap="listAllTipclienteResults" >
+		SELECT <include refid="allCustomListTipclienteColumns"/>
+		  FROM tipcliente
+		 WHERE tipcliente_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Tipcliente By Id -->
+	<select id="fetchTipclienteNameById" parameterType="Tipcliente" resultMap="listAllTipclienteResults" >
+		SELECT <include refid="allCustomListTipclienteColumns"/>
+		  FROM tipcliente
+		 WHERE tipcliente_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

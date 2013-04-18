@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Unimed">
+
+	<resultMap id="listAllUnimedResults" type="Unimed" >
+		<result property="cdunidad" column="cdunidad" />
+		<result property="dsunidad" column="dsunidad" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allUnimedColumms">
+     	cdunidad,
+     	dsunidad,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Unimed -->
+	<select id="insertUnimed" parameterType="Map" resultType="int">
+		SELECT ins_unimed (
+		#{cdunidad,jdbcType=INTEGER},
+		#{dsunidad,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Unimed -->
+	<select id="updateUnimed" parameterType="Map" resultType="int">
+		SELECT upd_unimed (
+		#{cdunidad,jdbcType=INTEGER},
+		#{dsunidad,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Unimed -->
+	<select id="deleteUnimed" parameterType="Unimed">
+		SELECT del_unimed (#{id})
+	</select>
+	
+	<!-- Fetch All Unimeds -->
+	<select id="fetchAllUnimeds" parameterType="Map" resultMap="listAllUnimedResults">
+	
+		SELECT  <include refid="allUnimedColumms"/>
+		  FROM unimed
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM unimed 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Unimed By type -->
+	<select id="fetchUnimedByType" parameterType="UnimedRequest"  resultMap="listAllUnimedResults" >
+		SELECT  <include refid="allCustomListUnimedColumns"/>
+		  FROM unimed
+		 WHERE name = #{unimed.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Unimed By Id -->
+	<select id="fetchUnimedById" parameterType="Unimed" resultMap="listAllUnimedResults" >
+		SELECT <include refid="allCustomListUnimedColumns"/>
+		  FROM unimed
+		 WHERE unimed_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Unimed By Id -->
+	<select id="fetchUnimedNameById" parameterType="Unimed" resultMap="listAllUnimedResults" >
+		SELECT <include refid="allCustomListUnimedColumns"/>
+		  FROM unimed
+		 WHERE unimed_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

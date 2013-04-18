@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Classcliente">
+
+	<resultMap id="listAllClassclienteResults" type="Classcliente" >
+		<result property="codemp" column="codemp" />
+		<result property="codfilial" column="codfilial" />
+		<result property="codclascli" column="codclascli" />
+		<result property="descclascli" column="descclascli" />
+		<result property="siglaclascli" column="siglaclascli" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allClassclienteColumms">
+     	codemp,
+     	codfilial,
+     	codclascli,
+     	descclascli,
+     	siglaclascli,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Classcliente -->
+	<select id="insertClasscliente" parameterType="Map" resultType="int">
+		SELECT ins_classcliente (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codclascli,jdbcType=INTEGER},
+		#{descclascli,jdbcType=VARCHAR},
+		#{siglaclascli,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Classcliente -->
+	<select id="updateClasscliente" parameterType="Map" resultType="int">
+		SELECT upd_classcliente (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codclascli,jdbcType=INTEGER},
+		#{descclascli,jdbcType=VARCHAR},
+		#{siglaclascli,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Classcliente -->
+	<select id="deleteClasscliente" parameterType="Classcliente">
+		SELECT del_classcliente (#{id})
+	</select>
+	
+	<!-- Fetch All Classclientes -->
+	<select id="fetchAllClassclientes" parameterType="Map" resultMap="listAllClassclienteResults">
+	
+		SELECT  <include refid="allClassclienteColumms"/>
+		  FROM classcliente
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM classcliente 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Classcliente By type -->
+	<select id="fetchClassclienteByType" parameterType="ClassclienteRequest"  resultMap="listAllClassclienteResults" >
+		SELECT  <include refid="allCustomListClassclienteColumns"/>
+		  FROM classcliente
+		 WHERE name = #{classcliente.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Classcliente By Id -->
+	<select id="fetchClassclienteById" parameterType="Classcliente" resultMap="listAllClassclienteResults" >
+		SELECT <include refid="allCustomListClassclienteColumns"/>
+		  FROM classcliente
+		 WHERE classcliente_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Classcliente By Id -->
+	<select id="fetchClassclienteNameById" parameterType="Classcliente" resultMap="listAllClassclienteResults" >
+		SELECT <include refid="allCustomListClassclienteColumns"/>
+		  FROM classcliente
+		 WHERE classcliente_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+
