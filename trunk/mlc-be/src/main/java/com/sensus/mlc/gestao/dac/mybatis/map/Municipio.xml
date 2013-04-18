@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Municipio">
+
+	<resultMap id="listAllMunicipioResults" type="Municipio" >
+		<result property="	codmunic" column="	codmunic" />
+		<result property="siglauf" column="siglauf" />
+		<result property="codpais" column="codpais" />
+		<result property="nomemunic" column="nomemunic" />
+		<result property="dddmunic" column="dddmunic" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allMunicipioColumms">
+     		codmunic,
+     	siglauf,
+     	codpais,
+     	nomemunic,
+     	dddmunic,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Municipio -->
+	<select id="insertMunicipio" parameterType="Map" resultType="int">
+		SELECT ins_municipio (
+		#{	codmunic,jdbcType=VARCHAR},
+		#{siglauf,jdbcType=VARCHAR},
+		#{codpais,jdbcType=PAIS},
+		#{nomemunic,jdbcType=VARCHAR},
+		#{dddmunic,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Municipio -->
+	<select id="updateMunicipio" parameterType="Map" resultType="int">
+		SELECT upd_municipio (
+		#{	codmunic,jdbcType=VARCHAR},
+		#{siglauf,jdbcType=VARCHAR},
+		#{codpais,jdbcType=PAIS},
+		#{nomemunic,jdbcType=VARCHAR},
+		#{dddmunic,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Municipio -->
+	<select id="deleteMunicipio" parameterType="Municipio">
+		SELECT del_municipio (#{id})
+	</select>
+	
+	<!-- Fetch All Municipios -->
+	<select id="fetchAllMunicipios" parameterType="Map" resultMap="listAllMunicipioResults">
+	
+		SELECT  <include refid="allMunicipioColumms"/>
+		  FROM municipio
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM municipio 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Municipio By type -->
+	<select id="fetchMunicipioByType" parameterType="MunicipioRequest"  resultMap="listAllMunicipioResults" >
+		SELECT  <include refid="allCustomListMunicipioColumns"/>
+		  FROM municipio
+		 WHERE name = #{municipio.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Municipio By Id -->
+	<select id="fetchMunicipioById" parameterType="Municipio" resultMap="listAllMunicipioResults" >
+		SELECT <include refid="allCustomListMunicipioColumns"/>
+		  FROM municipio
+		 WHERE municipio_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Municipio By Id -->
+	<select id="fetchMunicipioNameById" parameterType="Municipio" resultMap="listAllMunicipioResults" >
+		SELECT <include refid="allCustomListMunicipioColumns"/>
+		  FROM municipio
+		 WHERE municipio_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

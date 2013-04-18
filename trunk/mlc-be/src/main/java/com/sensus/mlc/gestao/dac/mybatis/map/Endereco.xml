@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Endereco">
+
+	<resultMap id="listAllEnderecoResults" type="Endereco" >
+		<result property="codend" column="codend" />
+		<result property="	endereco" column="	endereco" />
+		<result property="numero" column="numero" />
+		<result property="complemento" column="complemento" />
+		<result property="bairro" column="bairro" />
+		<result property="cep" column="cep" />
+		<result property="cidade" column="cidade" />
+		<result property="uf" column="uf" />
+		<result property="ddd" column="ddd" />
+		<result property="fone1" column="fone1" />
+		<result property="	fone2" column="	fone2" />
+		<result property="fax" column="fax" />
+		<result property="email" column="email" />
+		<result property="www" column="www" />
+		<result property="coddist" column="coddist" />
+		<result property="	codmunic" column="	codmunic" />
+		<result property="siglauf" column="siglauf" />
+		<result property="codpais" column="codpais" />
+		<result property="codempuc" column="codempuc" />
+		<result property="codfilialuc" column="codfilialuc" />
+		<result property="codunifcod" column="codunifcod" />
+		<result property="inscmun" column="inscmun" />
+		<result property="	listinsalt" column="	listinsalt" />
+	</resultMap>
+
+
+	<sql id="allEnderecoColumms">
+     	codend,
+     		endereco,
+     	numero,
+     	complemento,
+     	bairro,
+     	cep,
+     	cidade,
+     	uf,
+     	ddd,
+     	fone1,
+     		fone2,
+     	fax,
+     	email,
+     	www,
+     	coddist,
+     		codmunic,
+     	siglauf,
+     	codpais,
+     	codempuc,
+     	codfilialuc,
+     	codunifcod,
+     	inscmun,
+     		listinsalt,
+	</sql>
+	
+
+	<!-- Insert Endereco -->
+	<select id="insertEndereco" parameterType="Map" resultType="int">
+		SELECT ins_endereco (
+		#{codend,jdbcType=INTEGER},
+		#{	endereco,jdbcType=VARCHAR},
+		#{numero,jdbcType=INTEGER},
+		#{complemento,jdbcType=VARCHAR},
+		#{bairro,jdbcType=VARCHAR},
+		#{cep,jdbcType=VARCHAR},
+		#{cidade,jdbcType=VARCHAR},
+		#{uf,jdbcType=VARCHAR},
+		#{ddd,jdbcType=VARCHAR},
+		#{fone1,jdbcType=VARCHAR},
+		#{	fone2,jdbcType=VARCHAR},
+		#{fax,jdbcType=VARCHAR},
+		#{email,jdbcType=VARCHAR},
+		#{www,jdbcType=VARCHAR},
+		#{coddist,jdbcType=INTEGER},
+		#{	codmunic,jdbcType=VARCHAR},
+		#{siglauf,jdbcType=VARCHAR},
+		#{codpais,jdbcType=PAIS},
+		#{codempuc,jdbcType=INTEGER},
+		#{codfilialuc,jdbcType=INTEGER},
+		#{codunifcod,jdbcType=INTEGER},
+		#{inscmun,jdbcType=VARCHAR},
+		#{	listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Endereco -->
+	<select id="updateEndereco" parameterType="Map" resultType="int">
+		SELECT upd_endereco (
+		#{codend,jdbcType=INTEGER},
+		#{	endereco,jdbcType=VARCHAR},
+		#{numero,jdbcType=INTEGER},
+		#{complemento,jdbcType=VARCHAR},
+		#{bairro,jdbcType=VARCHAR},
+		#{cep,jdbcType=VARCHAR},
+		#{cidade,jdbcType=VARCHAR},
+		#{uf,jdbcType=VARCHAR},
+		#{ddd,jdbcType=VARCHAR},
+		#{fone1,jdbcType=VARCHAR},
+		#{	fone2,jdbcType=VARCHAR},
+		#{fax,jdbcType=VARCHAR},
+		#{email,jdbcType=VARCHAR},
+		#{www,jdbcType=VARCHAR},
+		#{coddist,jdbcType=INTEGER},
+		#{	codmunic,jdbcType=VARCHAR},
+		#{siglauf,jdbcType=VARCHAR},
+		#{codpais,jdbcType=PAIS},
+		#{codempuc,jdbcType=INTEGER},
+		#{codfilialuc,jdbcType=INTEGER},
+		#{codunifcod,jdbcType=INTEGER},
+		#{inscmun,jdbcType=VARCHAR},
+		#{	listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Endereco -->
+	<select id="deleteEndereco" parameterType="Endereco">
+		SELECT del_endereco (#{id})
+	</select>
+	
+	<!-- Fetch All Enderecos -->
+	<select id="fetchAllEnderecos" parameterType="Map" resultMap="listAllEnderecoResults">
+	
+		SELECT  <include refid="allEnderecoColumms"/>
+		  FROM endereco
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM endereco 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Endereco By type -->
+	<select id="fetchEnderecoByType" parameterType="EnderecoRequest"  resultMap="listAllEnderecoResults" >
+		SELECT  <include refid="allCustomListEnderecoColumns"/>
+		  FROM endereco
+		 WHERE name = #{endereco.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Endereco By Id -->
+	<select id="fetchEnderecoById" parameterType="Endereco" resultMap="listAllEnderecoResults" >
+		SELECT <include refid="allCustomListEnderecoColumns"/>
+		  FROM endereco
+		 WHERE endereco_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Endereco By Id -->
+	<select id="fetchEnderecoNameById" parameterType="Endereco" resultMap="listAllEnderecoResults" >
+		SELECT <include refid="allCustomListEnderecoColumns"/>
+		  FROM endereco
+		 WHERE endereco_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

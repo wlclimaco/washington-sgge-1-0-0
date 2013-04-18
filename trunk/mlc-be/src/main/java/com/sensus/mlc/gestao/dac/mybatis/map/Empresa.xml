@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Empresa">
+
+	<resultMap id="listAllEmpresaResults" type="Empresa" >
+		<result property="codemp" column="codemp" />
+		<result property="razemp" column="razemp" />
+		<result property="nomeemp" column="nomeemp" />
+		<result property="cnpjemp" column="cnpjemp" />
+		<result property="inscemp" column="inscemp" />
+		<result property="multialmoxemp" column="multialmoxemp" />
+		<result property="fotoemp" column="fotoemp" />
+		<result property="percissemp" column="percissemp" />
+		<result property="codend" column="codend" />
+		<result property="nrcertif" column="nrcertif" />
+		<result property="nrsencer" column="nrsencer" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allEmpresaColumms">
+     	codemp,
+     	razemp,
+     	nomeemp,
+     	cnpjemp,
+     	inscemp,
+     	multialmoxemp,
+     	fotoemp,
+     	percissemp,
+     	codend,
+     	nrcertif,
+     	nrsencer,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Empresa -->
+	<select id="insertEmpresa" parameterType="Map" resultType="int">
+		SELECT ins_empresa (
+		#{codemp,jdbcType=INTEGER},
+		#{razemp,jdbcType=VARCHAR},
+		#{nomeemp,jdbcType=VARCHAR},
+		#{cnpjemp,jdbcType=VARCHAR},
+		#{inscemp,jdbcType=VARCHAR},
+		#{multialmoxemp,jdbcType=VARCHAR},
+		#{fotoemp,jdbcType=BLOB},
+		#{percissemp,jdbcType=DOUBLE},
+		#{codend,jdbcType=ENDERECO},
+		#{nrcertif,jdbcType=VARCHAR},
+		#{nrsencer,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Empresa -->
+	<select id="updateEmpresa" parameterType="Map" resultType="int">
+		SELECT upd_empresa (
+		#{codemp,jdbcType=INTEGER},
+		#{razemp,jdbcType=VARCHAR},
+		#{nomeemp,jdbcType=VARCHAR},
+		#{cnpjemp,jdbcType=VARCHAR},
+		#{inscemp,jdbcType=VARCHAR},
+		#{multialmoxemp,jdbcType=VARCHAR},
+		#{fotoemp,jdbcType=BLOB},
+		#{percissemp,jdbcType=DOUBLE},
+		#{codend,jdbcType=ENDERECO},
+		#{nrcertif,jdbcType=VARCHAR},
+		#{nrsencer,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Empresa -->
+	<select id="deleteEmpresa" parameterType="Empresa">
+		SELECT del_empresa (#{id})
+	</select>
+	
+	<!-- Fetch All Empresas -->
+	<select id="fetchAllEmpresas" parameterType="Map" resultMap="listAllEmpresaResults">
+	
+		SELECT  <include refid="allEmpresaColumms"/>
+		  FROM empresa
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM empresa 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Empresa By type -->
+	<select id="fetchEmpresaByType" parameterType="EmpresaRequest"  resultMap="listAllEmpresaResults" >
+		SELECT  <include refid="allCustomListEmpresaColumns"/>
+		  FROM empresa
+		 WHERE name = #{empresa.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Empresa By Id -->
+	<select id="fetchEmpresaById" parameterType="Empresa" resultMap="listAllEmpresaResults" >
+		SELECT <include refid="allCustomListEmpresaColumns"/>
+		  FROM empresa
+		 WHERE empresa_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Empresa By Id -->
+	<select id="fetchEmpresaNameById" parameterType="Empresa" resultMap="listAllEmpresaResults" >
+		SELECT <include refid="allCustomListEmpresaColumns"/>
+		  FROM empresa
+		 WHERE empresa_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

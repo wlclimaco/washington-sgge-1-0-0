@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Uf">
+
+	<resultMap id="listAllUfResults" type="Uf" >
+		<result property="siglauf" column="siglauf" />
+		<result property="codpais" column="codpais" />
+		<result property="nomeuf" column="nomeuf" />
+		<result property="nomecurto" column="nomecurto" />
+		<result property="coduf" column="coduf" />
+		<result property="regiaouf" column="regiaouf" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allUfColumms">
+     	siglauf,
+     	codpais,
+     	nomeuf,
+     	nomecurto,
+     	coduf,
+     	regiaouf,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Uf -->
+	<select id="insertUf" parameterType="Map" resultType="int">
+		SELECT ins_uf (
+		#{siglauf,jdbcType=VARCHAR},
+		#{codpais,jdbcType=PAIS},
+		#{nomeuf,jdbcType=VARCHAR},
+		#{nomecurto,jdbcType=VARCHAR},
+		#{coduf,jdbcType=INTEGER},
+		#{regiaouf,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Uf -->
+	<select id="updateUf" parameterType="Map" resultType="int">
+		SELECT upd_uf (
+		#{siglauf,jdbcType=VARCHAR},
+		#{codpais,jdbcType=PAIS},
+		#{nomeuf,jdbcType=VARCHAR},
+		#{nomecurto,jdbcType=VARCHAR},
+		#{coduf,jdbcType=INTEGER},
+		#{regiaouf,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Uf -->
+	<select id="deleteUf" parameterType="Uf">
+		SELECT del_uf (#{id})
+	</select>
+	
+	<!-- Fetch All Ufs -->
+	<select id="fetchAllUfs" parameterType="Map" resultMap="listAllUfResults">
+	
+		SELECT  <include refid="allUfColumms"/>
+		  FROM uf
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM uf 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Uf By type -->
+	<select id="fetchUfByType" parameterType="UfRequest"  resultMap="listAllUfResults" >
+		SELECT  <include refid="allCustomListUfColumns"/>
+		  FROM uf
+		 WHERE name = #{uf.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Uf By Id -->
+	<select id="fetchUfById" parameterType="Uf" resultMap="listAllUfResults" >
+		SELECT <include refid="allCustomListUfColumns"/>
+		  FROM uf
+		 WHERE uf_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Uf By Id -->
+	<select id="fetchUfNameById" parameterType="Uf" resultMap="listAllUfResults" >
+		SELECT <include refid="allCustomListUfColumns"/>
+		  FROM uf
+		 WHERE uf_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

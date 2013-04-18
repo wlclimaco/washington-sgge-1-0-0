@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Pais">
+
+	<resultMap id="listAllPaisResults" type="Pais" >
+		<result property="codpais" column="codpais" />
+		<result property="nomepais" column="nomepais" />
+		<result property="sigla3cpais" column="sigla3cpais" />
+		<result property="ddipais" column="ddipais" />
+		<result property="sigla2cpais" column="sigla2cpais" />
+		<result property="codbacenpais" column="codbacenpais" />
+		<result property="codeanpais" column="codeanpais" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allPaisColumms">
+     	codpais,
+     	nomepais,
+     	sigla3cpais,
+     	ddipais,
+     	sigla2cpais,
+     	codbacenpais,
+     	codeanpais,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Pais -->
+	<select id="insertPais" parameterType="Map" resultType="int">
+		SELECT ins_pais (
+		#{codpais,jdbcType=INTEGER},
+		#{nomepais,jdbcType=VARCHAR},
+		#{sigla3cpais,jdbcType=VARCHAR},
+		#{ddipais,jdbcType=INTEGER},
+		#{sigla2cpais,jdbcType=VARCHAR},
+		#{codbacenpais,jdbcType=INTEGER},
+		#{codeanpais,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Pais -->
+	<select id="updatePais" parameterType="Map" resultType="int">
+		SELECT upd_pais (
+		#{codpais,jdbcType=INTEGER},
+		#{nomepais,jdbcType=VARCHAR},
+		#{sigla3cpais,jdbcType=VARCHAR},
+		#{ddipais,jdbcType=INTEGER},
+		#{sigla2cpais,jdbcType=VARCHAR},
+		#{codbacenpais,jdbcType=INTEGER},
+		#{codeanpais,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Pais -->
+	<select id="deletePais" parameterType="Pais">
+		SELECT del_pais (#{id})
+	</select>
+	
+	<!-- Fetch All Paiss -->
+	<select id="fetchAllPaiss" parameterType="Map" resultMap="listAllPaisResults">
+	
+		SELECT  <include refid="allPaisColumms"/>
+		  FROM pais
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM pais 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Pais By type -->
+	<select id="fetchPaisByType" parameterType="PaisRequest"  resultMap="listAllPaisResults" >
+		SELECT  <include refid="allCustomListPaisColumns"/>
+		  FROM pais
+		 WHERE name = #{pais.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Pais By Id -->
+	<select id="fetchPaisById" parameterType="Pais" resultMap="listAllPaisResults" >
+		SELECT <include refid="allCustomListPaisColumns"/>
+		  FROM pais
+		 WHERE pais_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Pais By Id -->
+	<select id="fetchPaisNameById" parameterType="Pais" resultMap="listAllPaisResults" >
+		SELECT <include refid="allCustomListPaisColumns"/>
+		  FROM pais
+		 WHERE pais_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Eventos">
+
+	<resultMap id="listAllEventosResults" type="Eventos" >
+		<result property="cdevento" column="cdevento" />
+		<result property="dsevento" column="dsevento" />
+		<result property="dtinieve" column="dtinieve" />
+		<result property="dtfimeve" column="dtfimeve" />
+		<result property="nrdiaven" column="nrdiaven" />
+		<result property="cdforpag" column="cdforpag" />
+		<result property="nrdiafin" column="nrdiafin" />
+		<result property="stcomeve" column="stcomeve" />
+		<result property="stevento" column="stevento" />
+		<result property="stbaiest" column="stbaiest" />
+		<result property="stgermap" column="stgermap" />
+		<result property="dsseneve" column="dsseneve" />
+		<result property="tpoperac" column="tpoperac" />
+		<result property="tppreco" column="tppreco" />
+		<result property="sntribut" column="sntribut" />
+		<result property="pcfineve" column="pcfineve" />
+		<result property="qtclicla" column="qtclicla" />
+		<result property="qtprocla" column="qtprocla" />
+		<result property="qtrepcla" column="qtrepcla" />
+		<result property="qtgercla" column="qtgercla" />
+		<result property="qtsupcla" column="qtsupcla" />
+		<result property="qtcidcla" column="qtcidcla" />
+		<result property="stgerdup" column="stgerdup" />
+		<result property="nrconeve" column="nrconeve" />
+		<result property="qtparcel" column="qtparcel" />
+		<result property="qtdiapar" column="qtdiapar" />
+		<result property="dtdiafat" column="dtdiafat" />
+		<result property="dtdiaven" column="dtdiaven" />
+		<result property="dtpripar" column="dtpripar" />
+		<result property="snpriacu" column="snpriacu" />
+		<result property="dsobserv" column="dsobserv" />
+		<result property="pcmindes" column="pcmindes" />
+		<result property="pcmaxdes" column="pcmaxdes" />
+		<result property="pcmaxacr" column="pcmaxacr" />
+		<result property="snrelven" column="snrelven" />
+		<result property="snpalm" column="snpalm" />
+		<result property="dhensaf" column="dhensaf" />
+		<result property="snensaf" column="snensaf" />
+		<result property="dspagpal" column="dspagpal" />
+		<result property="cdclafis" column="cdclafis" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allEventosColumms">
+     	cdevento,
+     	dsevento,
+     	dtinieve,
+     	dtfimeve,
+     	nrdiaven,
+     	cdforpag,
+     	nrdiafin,
+     	stcomeve,
+     	stevento,
+     	stbaiest,
+     	stgermap,
+     	dsseneve,
+     	tpoperac,
+     	tppreco,
+     	sntribut,
+     	pcfineve,
+     	qtclicla,
+     	qtprocla,
+     	qtrepcla,
+     	qtgercla,
+     	qtsupcla,
+     	qtcidcla,
+     	stgerdup,
+     	nrconeve,
+     	qtparcel,
+     	qtdiapar,
+     	dtdiafat,
+     	dtdiaven,
+     	dtpripar,
+     	snpriacu,
+     	dsobserv,
+     	pcmindes,
+     	pcmaxdes,
+     	pcmaxacr,
+     	snrelven,
+     	snpalm,
+     	dhensaf,
+     	snensaf,
+     	dspagpal,
+     	cdclafis,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Eventos -->
+	<select id="insertEventos" parameterType="Map" resultType="int">
+		SELECT ins_eventos (
+		#{cdevento,jdbcType=NUMBER},
+		#{dsevento,jdbcType=VARCHAR},
+		#{dtinieve,jdbcType=DATE},
+		#{dtfimeve,jdbcType=DATE},
+		#{nrdiaven,jdbcType=NUMBER},
+		#{cdforpag,jdbcType=NUMBER},
+		#{nrdiafin,jdbcType=NUMBER},
+		#{stcomeve,jdbcType=VARCHAR},
+		#{stevento,jdbcType=VARCHAR},
+		#{stbaiest,jdbcType=VARCHAR},
+		#{stgermap,jdbcType=VARCHAR},
+		#{dsseneve,jdbcType=VARCHAR},
+		#{tpoperac,jdbcType=VARCHAR},
+		#{tppreco,jdbcType=VARCHAR},
+		#{sntribut,jdbcType=VARCHAR},
+		#{pcfineve,jdbcType=NUMBER},
+		#{qtclicla,jdbcType=NUMBER},
+		#{qtprocla,jdbcType=NUMBER},
+		#{qtrepcla,jdbcType=NUMBER},
+		#{qtgercla,jdbcType=NUMBER},
+		#{qtsupcla,jdbcType=NUMBER},
+		#{qtcidcla,jdbcType=NUMBER},
+		#{stgerdup,jdbcType=VARCHAR},
+		#{nrconeve,jdbcType=NUMBER},
+		#{qtparcel,jdbcType=NUMBER},
+		#{qtdiapar,jdbcType=NUMBER},
+		#{dtdiafat,jdbcType=NUMBER},
+		#{dtdiaven,jdbcType=NUMBER},
+		#{dtpripar,jdbcType=NUMBER},
+		#{snpriacu,jdbcType=VARCHAR},
+		#{dsobserv,jdbcType=CLOB,},
+		#{pcmindes,jdbcType=NUMBER},
+		#{pcmaxdes,jdbcType=NUMBER},
+		#{pcmaxacr,jdbcType=NUMBER},
+		#{snrelven,jdbcType=VARCHAR},
+		#{snpalm,jdbcType=VARCHAR},
+		#{dhensaf,jdbcType=DATE},
+		#{snensaf,jdbcType=VARCHAR},
+		#{dspagpal,jdbcType=VARCHAR},
+		#{cdclafis,jdbcType=CLASSIFICACAO},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Eventos -->
+	<select id="updateEventos" parameterType="Map" resultType="int">
+		SELECT upd_eventos (
+		#{cdevento,jdbcType=NUMBER},
+		#{dsevento,jdbcType=VARCHAR},
+		#{dtinieve,jdbcType=DATE},
+		#{dtfimeve,jdbcType=DATE},
+		#{nrdiaven,jdbcType=NUMBER},
+		#{cdforpag,jdbcType=NUMBER},
+		#{nrdiafin,jdbcType=NUMBER},
+		#{stcomeve,jdbcType=VARCHAR},
+		#{stevento,jdbcType=VARCHAR},
+		#{stbaiest,jdbcType=VARCHAR},
+		#{stgermap,jdbcType=VARCHAR},
+		#{dsseneve,jdbcType=VARCHAR},
+		#{tpoperac,jdbcType=VARCHAR},
+		#{tppreco,jdbcType=VARCHAR},
+		#{sntribut,jdbcType=VARCHAR},
+		#{pcfineve,jdbcType=NUMBER},
+		#{qtclicla,jdbcType=NUMBER},
+		#{qtprocla,jdbcType=NUMBER},
+		#{qtrepcla,jdbcType=NUMBER},
+		#{qtgercla,jdbcType=NUMBER},
+		#{qtsupcla,jdbcType=NUMBER},
+		#{qtcidcla,jdbcType=NUMBER},
+		#{stgerdup,jdbcType=VARCHAR},
+		#{nrconeve,jdbcType=NUMBER},
+		#{qtparcel,jdbcType=NUMBER},
+		#{qtdiapar,jdbcType=NUMBER},
+		#{dtdiafat,jdbcType=NUMBER},
+		#{dtdiaven,jdbcType=NUMBER},
+		#{dtpripar,jdbcType=NUMBER},
+		#{snpriacu,jdbcType=VARCHAR},
+		#{dsobserv,jdbcType=CLOB,},
+		#{pcmindes,jdbcType=NUMBER},
+		#{pcmaxdes,jdbcType=NUMBER},
+		#{pcmaxacr,jdbcType=NUMBER},
+		#{snrelven,jdbcType=VARCHAR},
+		#{snpalm,jdbcType=VARCHAR},
+		#{dhensaf,jdbcType=DATE},
+		#{snensaf,jdbcType=VARCHAR},
+		#{dspagpal,jdbcType=VARCHAR},
+		#{cdclafis,jdbcType=CLASSIFICACAO},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Eventos -->
+	<select id="deleteEventos" parameterType="Eventos">
+		SELECT del_eventos (#{id})
+	</select>
+	
+	<!-- Fetch All Eventoss -->
+	<select id="fetchAllEventoss" parameterType="Map" resultMap="listAllEventosResults">
+	
+		SELECT  <include refid="allEventosColumms"/>
+		  FROM eventos
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM eventos 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Eventos By type -->
+	<select id="fetchEventosByType" parameterType="EventosRequest"  resultMap="listAllEventosResults" >
+		SELECT  <include refid="allCustomListEventosColumns"/>
+		  FROM eventos
+		 WHERE name = #{eventos.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Eventos By Id -->
+	<select id="fetchEventosById" parameterType="Eventos" resultMap="listAllEventosResults" >
+		SELECT <include refid="allCustomListEventosColumns"/>
+		  FROM eventos
+		 WHERE eventos_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Eventos By Id -->
+	<select id="fetchEventosNameById" parameterType="Eventos" resultMap="listAllEventosResults" >
+		SELECT <include refid="allCustomListEventosColumns"/>
+		  FROM eventos
+		 WHERE eventos_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

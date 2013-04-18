@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Filial">
+
+	<resultMap id="listAllFilialResults" type="Filial" >
+		<result property="codemp" column="codemp" />
+		<result property="codfilial" column="codfilial" />
+		<result property="razfilial" column="razfilial" />
+		<result property="nomefilial" column="nomefilial" />
+		<result property="mzfilial" column="mzfilial" />
+		<result property="cnpjfilial" column="cnpjfilial" />
+		<result property="inscfilial" column="inscfilial" />
+		<result property="percpisfilial" column="percpisfilial" />
+		<result property="perccofinsfilial" column="perccofinsfilial" />
+		<result property="percirfilial" column="percirfilial" />
+		<result property="perccsocialfilial" column="perccsocialfilial" />
+		<result property="simplesfilial" column="simplesfilial" />
+		<result property="percsimplesfilial" column="percsimplesfilial" />
+		<result property="cnaefilial" column="cnaefilial" />
+		<result property="percissfilial" column="percissfilial" />
+		<result property="contribipifilial" column="contribipifilial" />
+		<result property="timbrefilial" column="timbrefilial" />
+		<result property="perfilfilial" column="perfilfilial" />
+		<result property="indativfilial" column="indativfilial" />
+		<result property="indnatpjfilial" column="indnatpjfilial" />
+		<result property="codempco" column="codempco" />
+		<result property="codfilialco" column="codfilialco" />
+		<result property="codfor" column="codfor" />
+		<result property="suframa" column="suframa" />
+		<result property="codinctrib" column="codinctrib" />
+		<result property="indaprocred" column="indaprocred" />
+		<result property="codtipocont" column="codtipocont" />
+		<result property="indregcum" column="indregcum" />
+		<result property="unidfranqueada" column="unidfranqueada" />
+		<result property="marcafranqueadora" column="marcafranqueadora" />
+		<result property="wwwfranqueadora" column="wwwfranqueadora" />
+		<result property="codend" column="codend" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allFilialColumms">
+     	codemp,
+     	codfilial,
+     	razfilial,
+     	nomefilial,
+     	mzfilial,
+     	cnpjfilial,
+     	inscfilial,
+     	percpisfilial,
+     	perccofinsfilial,
+     	percirfilial,
+     	perccsocialfilial,
+     	simplesfilial,
+     	percsimplesfilial,
+     	cnaefilial,
+     	percissfilial,
+     	contribipifilial,
+     	timbrefilial,
+     	perfilfilial,
+     	indativfilial,
+     	indnatpjfilial,
+     	codempco,
+     	codfilialco,
+     	codfor,
+     	suframa,
+     	codinctrib,
+     	indaprocred,
+     	codtipocont,
+     	indregcum,
+     	unidfranqueada,
+     	marcafranqueadora,
+     	wwwfranqueadora,
+     	codend,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Filial -->
+	<select id="insertFilial" parameterType="Map" resultType="int">
+		SELECT ins_filial (
+		#{codemp,jdbcType=EMPRESA,},
+		#{codfilial,jdbcType=INTEGER},
+		#{razfilial,jdbcType=VARCHAR},
+		#{nomefilial,jdbcType=VARCHAR},
+		#{mzfilial,jdbcType=VARCHAR},
+		#{cnpjfilial,jdbcType=VARCHAR},
+		#{inscfilial,jdbcType=VARCHAR},
+		#{percpisfilial,jdbcType=DOUBLE},
+		#{perccofinsfilial,jdbcType=DOUBLE},
+		#{percirfilial,jdbcType=DOUBLE},
+		#{perccsocialfilial,jdbcType=DOUBLE},
+		#{simplesfilial,jdbcType=VARCHAR},
+		#{percsimplesfilial,jdbcType=DOUBLE},
+		#{cnaefilial,jdbcType=VARCHAR},
+		#{percissfilial,jdbcType=DOUBLE},
+		#{contribipifilial,jdbcType=VARCHAR},
+		#{timbrefilial,jdbcType=BLOB},
+		#{perfilfilial,jdbcType=VARCHAR},
+		#{indativfilial,jdbcType=VARCHAR},
+		#{indnatpjfilial,jdbcType=VARCHAR},
+		#{codempco,jdbcType=INTEGER},
+		#{codfilialco,jdbcType=INTEGER},
+		#{codfor,jdbcType=INTEGER},
+		#{suframa,jdbcType=VARCHAR},
+		#{codinctrib,jdbcType=VARCHAR},
+		#{indaprocred,jdbcType=VARCHAR},
+		#{codtipocont,jdbcType=VARCHAR},
+		#{indregcum,jdbcType=VARCHAR},
+		#{unidfranqueada,jdbcType=VARCHAR},
+		#{marcafranqueadora,jdbcType=VARCHAR},
+		#{wwwfranqueadora,jdbcType=VARCHAR},
+		#{codend,jdbcType=INTEGER},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Filial -->
+	<select id="updateFilial" parameterType="Map" resultType="int">
+		SELECT upd_filial (
+		#{codemp,jdbcType=EMPRESA,},
+		#{codfilial,jdbcType=INTEGER},
+		#{razfilial,jdbcType=VARCHAR},
+		#{nomefilial,jdbcType=VARCHAR},
+		#{mzfilial,jdbcType=VARCHAR},
+		#{cnpjfilial,jdbcType=VARCHAR},
+		#{inscfilial,jdbcType=VARCHAR},
+		#{percpisfilial,jdbcType=DOUBLE},
+		#{perccofinsfilial,jdbcType=DOUBLE},
+		#{percirfilial,jdbcType=DOUBLE},
+		#{perccsocialfilial,jdbcType=DOUBLE},
+		#{simplesfilial,jdbcType=VARCHAR},
+		#{percsimplesfilial,jdbcType=DOUBLE},
+		#{cnaefilial,jdbcType=VARCHAR},
+		#{percissfilial,jdbcType=DOUBLE},
+		#{contribipifilial,jdbcType=VARCHAR},
+		#{timbrefilial,jdbcType=BLOB},
+		#{perfilfilial,jdbcType=VARCHAR},
+		#{indativfilial,jdbcType=VARCHAR},
+		#{indnatpjfilial,jdbcType=VARCHAR},
+		#{codempco,jdbcType=INTEGER},
+		#{codfilialco,jdbcType=INTEGER},
+		#{codfor,jdbcType=INTEGER},
+		#{suframa,jdbcType=VARCHAR},
+		#{codinctrib,jdbcType=VARCHAR},
+		#{indaprocred,jdbcType=VARCHAR},
+		#{codtipocont,jdbcType=VARCHAR},
+		#{indregcum,jdbcType=VARCHAR},
+		#{unidfranqueada,jdbcType=VARCHAR},
+		#{marcafranqueadora,jdbcType=VARCHAR},
+		#{wwwfranqueadora,jdbcType=VARCHAR},
+		#{codend,jdbcType=INTEGER},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Filial -->
+	<select id="deleteFilial" parameterType="Filial">
+		SELECT del_filial (#{id})
+	</select>
+	
+	<!-- Fetch All Filials -->
+	<select id="fetchAllFilials" parameterType="Map" resultMap="listAllFilialResults">
+	
+		SELECT  <include refid="allFilialColumms"/>
+		  FROM filial
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM filial 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Filial By type -->
+	<select id="fetchFilialByType" parameterType="FilialRequest"  resultMap="listAllFilialResults" >
+		SELECT  <include refid="allCustomListFilialColumns"/>
+		  FROM filial
+		 WHERE name = #{filial.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Filial By Id -->
+	<select id="fetchFilialById" parameterType="Filial" resultMap="listAllFilialResults" >
+		SELECT <include refid="allCustomListFilialColumns"/>
+		  FROM filial
+		 WHERE filial_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Filial By Id -->
+	<select id="fetchFilialNameById" parameterType="Filial" resultMap="listAllFilialResults" >
+		SELECT <include refid="allCustomListFilialColumns"/>
+		  FROM filial
+		 WHERE filial_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

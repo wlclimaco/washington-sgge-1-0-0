@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "Bairro">
+
+	<resultMap id="listAllBairroResults" type="Bairro" >
+		<result property="codbairro" column="codbairro" />
+		<result property="codmunic" column="codmunic" />
+		<result property="siglauf" column="siglauf" />
+		<result property="codpais" column="codpais" />
+		<result property="nomebairro" column="nomebairro" />
+		<result property="vlrfrete" column="vlrfrete" />
+		<result property="qtdfrete" column="qtdfrete" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allBairroColumms">
+     	codbairro,
+     	codmunic,
+     	siglauf,
+     	codpais,
+     	nomebairro,
+     	vlrfrete,
+     	qtdfrete,
+     	listinsalt,
+	</sql>
+
+
+	<!-- Insert Bairro -->
+	<select id="insertBairro" parameterType="Map" resultType="int">
+		SELECT ins_bairro (
+		#{codbairro,jdbcType=BAIRRO},
+		#{codmunic,jdbcType=MUNICIPIO},
+		#{siglauf,jdbcType=VARCHAR},
+		#{codpais,jdbcType=PAIS},
+		#{nomebairro,jdbcType=VARCHAR},
+		#{vlrfrete,jdbcType=FLOAT},
+		#{qtdfrete,jdbcType=FLOAT},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Bairro -->
+	<select id="updateBairro" parameterType="Map" resultType="int">
+		SELECT upd_bairro (
+		#{codbairro,jdbcType=BAIRRO},
+		#{codmunic,jdbcType=MUNICIPIO},
+		#{siglauf,jdbcType=VARCHAR},
+		#{codpais,jdbcType=PAIS},
+		#{nomebairro,jdbcType=VARCHAR},
+		#{vlrfrete,jdbcType=FLOAT},
+		#{qtdfrete,jdbcType=FLOAT},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Bairro -->
+	<select id="deleteBairro" parameterType="Bairro">
+		SELECT del_bairro (#{id})
+	</select>
+
+	<!-- Fetch All Bairros -->
+	<select id="fetchAllBairros" parameterType="Map" resultMap="listAllBairroResults">
+
+		SELECT  <include refid="allBairroColumms"/>
+		  FROM bairro
+
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1)
+		  FROM (SELECT tenant_id
+				  FROM bairro
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>
+
+	<!-- Fetch Bairro By type -->
+	<select id="fetchBairroByType" parameterType="BairroRequest"  resultMap="listAllBairroResults" >
+		SELECT  <include refid="allCustomListBairroColumns"/>
+		  FROM bairro
+		 WHERE name = #{bairro.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+
+	</select>
+
+	<!-- Fetch Bairro By Id -->
+	<select id="fetchBairroById" parameterType="Bairro" resultMap="listAllBairroResults" >
+		SELECT <include refid="allCustomListBairroColumns"/>
+		  FROM bairro
+		 WHERE bairro_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Bairro By Id -->
+	<select id="fetchBairroNameById" parameterType="Bairro" resultMap="listAllBairroResults" >
+		SELECT <include refid="allCustomListBairroColumns"/>
+		  FROM bairro
+		 WHERE bairro_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

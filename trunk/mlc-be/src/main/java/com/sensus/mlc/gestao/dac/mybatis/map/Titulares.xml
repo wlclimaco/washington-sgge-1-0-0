@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Titulares">
+
+	<resultMap id="listAllTitularesResults" type="Titulares" >
+		<result property="codemp" column="codemp" />
+		<result property="codfilial" column="codfilial" />
+		<result property="codtitular" column="codtitular" />
+		<result property="raztitular" column="raztitular" />
+		<result property="nometitular" column="nometitular" />
+		<result property="codempcc" column="codempcc" />
+		<result property="codfilialcc" column="codfilialcc" />
+		<result property="codclastitular" column="codclastitular" />
+		<result property="codempvd" column="codempvd" />
+		<result property="codfilialvd" column="codfilialvd" />
+		<result property="codvend" column="codvend" />
+		<result property="codemptc" column="codemptc" />
+		<result property="codfilialtc" column="codfilialtc" />
+		<result property="codtipocob" column="codtipocob" />
+		<result property="codemppg" column="codemppg" />
+		<result property="codfilialpg" column="codfilialpg" />
+		<result property="codplanopag" column="codplanopag" />
+		<result property="codemptn" column="codemptn" />
+		<result property="codfilialtn" column="codfilialtn" />
+		<result property="codtran" column="codtran" />
+		<result property="codempbo" column="codempbo" />
+		<result property="codfilialbo" column="codfilialbo" />
+		<result property="codbanco" column="codbanco" />
+		<result property="codempsr" column="codempsr" />
+		<result property="codfilialsr" column="codfilialsr" />
+		<result property="codsetor" column="codsetor" />
+		<result property="codempti" column="codempti" />
+		<result property="codfilialti" column="codfilialti" />
+		<result property="codtipotitular" column="codtipotitular" />
+		<result property="codtpcred" column="codtpcred" />
+		<result property="codfilialtr" column="codfilialtr" />
+		<result property="codemptr" column="codemptr" />
+		<result property="codfisctitular" column="codfisctitular" />
+		<result property="codempfc" column="codempfc" />
+		<result property="codfilialfc" column="codfilialfc" />
+		<result property="codempec" column="codempec" />
+		<result property="codfilialec" column="codfilialec" />
+		<result property="codtbec" column="codtbec" />
+		<result property="codittbec" column="codittbec" />
+		<result property="codemphp" column="codemphp" />
+		<result property="codfilialhp" column="codfilialhp" />
+		<result property="codhist" column="codhist" />
+		<result property="codempcb" column="codempcb" />
+		<result property="codfilialcb" column="codfilialcb" />
+		<result property="codcartcob" column="codcartcob" />
+		<result property="datatitular" column="datatitular" />
+		<result property="pessoatitular" column="pessoatitular" />
+		<result property="ativotitular" column="ativotitular" />
+		<result property="cnpjtitular" column="cnpjtitular" />
+		<result property="insctitular" column="insctitular" />
+		<result property="cpftitular" column="cpftitular" />
+		<result property="rgtitular" column="rgtitular" />
+		<result property="ssptitular" column="ssptitular" />
+		<result property="endtitular" column="endtitular" />
+		<result property="numtitular" column="numtitular" />
+		<result property="compltitular" column="compltitular" />
+		<result property="edificiotitular" column="edificiotitular" />
+		<result property="bairtitular" column="bairtitular" />
+		<result property="cidtitular" column="cidtitular" />
+		<result property="uftitular" column="uftitular" />
+		<result property="ceptitular" column="ceptitular" />
+		<result property="dddtitular" column="dddtitular" />
+		<result property="fonetitular" column="fonetitular" />
+		<result property="ramaltitular" column="ramaltitular" />
+		<result property="dddfaxtitular" column="dddfaxtitular" />
+		<result property="faxtitular" column="faxtitular" />
+		<result property="emailtitular" column="emailtitular" />
+		<result property="emailcob" column="emailcob" />
+		<result property="emailent" column="emailent" />
+		<result property="emailnfetitular" column="emailnfetitular" />
+		<result property="conttitular" column="conttitular" />
+		<result property="endcob" column="endcob" />
+		<result property="endent" column="endent" />
+		<result property="obstitular" column="obstitular" />
+		<result property="agenciatitular" column="agenciatitular" />
+		<result property="ncontabcotitular" column="ncontabcotitular" />
+		<result property="codemppq" column="codemppq" />
+		<result property="codfilialpq" column="codfilialpq" />
+		<result property="codpesq" column="codpesq" />
+		<result property="incratitular" column="incratitular" />
+		<result property="dtinitr" column="dtinitr" />
+		<result property="dtvenctotr" column="dtvenctotr" />
+		<result property="nirftitular" column="nirftitular" />
+		<result property="simplestitular" column="simplestitular" />
+		<result property="dddceltitular" column="dddceltitular" />
+		<result property="celtitular" column="celtitular" />
+		<result property="nattitular" column="nattitular" />
+		<result property="ufnattitular" column="ufnattitular" />
+		<result property="temporestitular" column="temporestitular" />
+		<result property="apelidotitular" column="apelidotitular" />
+		<result property="sitetitular" column="sitetitular" />
+		<result property="codcontdeb" column="codcontdeb" />
+		<result property="codcontcred" column="codcontcred" />
+		<result property="codtitularcontab" column="codtitularcontab" />
+		<result property="fototitular" column="fototitular" />
+		<result property="imgasstitular" column="imgasstitular" />
+		<result property="codmunic" column="codmunic" />
+		<result property="siglauf" column="siglauf" />
+		<result property="codpais" column="codpais" />
+		<result property="codmunicent" column="codmunicent" />
+		<result property="siglaufent" column="siglaufent" />
+		<result property="codpaisent" column="codpaisent" />
+		<result property="codmuniccob" column="codmuniccob" />
+		<result property="siglaufcob" column="siglaufcob" />
+		<result property="codpaiscob" column="codpaiscob" />
+		<result property="codempuc" column="codempuc" />
+		<result property="codfilialuc" column="codfilialuc" />
+		<result property="codunifcod" column="codunifcod" />
+		<result property="suframatitular" column="suframatitular" />
+		<result property="prodruraltitular" column="prodruraltitular" />
+		<result property="ctotitular" column="ctotitular" />
+		<result property="codcnae" column="codcnae" />
+		<result property="inscmuntitular" column="inscmuntitular" />
+		<result property="percdesctitular" column="percdesctitular" />
+		<result property="conttitularcob" column="conttitularcob" />
+		<result property="conttitularent" column="conttitularent" />
+		<result property="descipi" column="descipi" />
+		<result property="identtitularbco" column="identtitularbco" />
+		<result property="dtnasctitular" column="dtnasctitular" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allTitularesColumms">
+     	codemp,
+     	codfilial,
+     	codtitular,
+     	raztitular,
+     	nometitular,
+     	codempcc,
+     	codfilialcc,
+     	codclastitular,
+     	codempvd,
+     	codfilialvd,
+     	codvend,
+     	codemptc,
+     	codfilialtc,
+     	codtipocob,
+     	codemppg,
+     	codfilialpg,
+     	codplanopag,
+     	codemptn,
+     	codfilialtn,
+     	codtran,
+     	codempbo,
+     	codfilialbo,
+     	codbanco,
+     	codempsr,
+     	codfilialsr,
+     	codsetor,
+     	codempti,
+     	codfilialti,
+     	codtipotitular,
+     	codtpcred,
+     	codfilialtr,
+     	codemptr,
+     	codfisctitular,
+     	codempfc,
+     	codfilialfc,
+     	codempec,
+     	codfilialec,
+     	codtbec,
+     	codittbec,
+     	codemphp,
+     	codfilialhp,
+     	codhist,
+     	codempcb,
+     	codfilialcb,
+     	codcartcob,
+     	datatitular,
+     	pessoatitular,
+     	ativotitular,
+     	cnpjtitular,
+     	insctitular,
+     	cpftitular,
+     	rgtitular,
+     	ssptitular,
+     	endtitular,
+     	numtitular,
+     	compltitular,
+     	edificiotitular,
+     	bairtitular,
+     	cidtitular,
+     	uftitular,
+     	ceptitular,
+     	dddtitular,
+     	fonetitular,
+     	ramaltitular,
+     	dddfaxtitular,
+     	faxtitular,
+     	emailtitular,
+     	emailcob,
+     	emailent,
+     	emailnfetitular,
+     	conttitular,
+     	endcob,
+     	endent,
+     	obstitular,
+     	agenciatitular,
+     	ncontabcotitular,
+     	codemppq,
+     	codfilialpq,
+     	codpesq,
+     	incratitular,
+     	dtinitr,
+     	dtvenctotr,
+     	nirftitular,
+     	simplestitular,
+     	dddceltitular,
+     	celtitular,
+     	nattitular,
+     	ufnattitular,
+     	temporestitular,
+     	apelidotitular,
+     	sitetitular,
+     	codcontdeb,
+     	codcontcred,
+     	codtitularcontab,
+     	fototitular,
+     	imgasstitular,
+     	codmunic,
+     	siglauf,
+     	codpais,
+     	codmunicent,
+     	siglaufent,
+     	codpaisent,
+     	codmuniccob,
+     	siglaufcob,
+     	codpaiscob,
+     	codempuc,
+     	codfilialuc,
+     	codunifcod,
+     	suframatitular,
+     	prodruraltitular,
+     	ctotitular,
+     	codcnae,
+     	inscmuntitular,
+     	percdesctitular,
+     	conttitularcob,
+     	conttitularent,
+     	descipi,
+     	identtitularbco,
+     	dtnasctitular,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Titulares -->
+	<select id="insertTitulares" parameterType="Map" resultType="int">
+		SELECT ins_titulares (
+		#{codemp,jdbcType=EMPRESA},
+		#{codfilial,jdbcType=FILIAL},
+		#{codtitular,jdbcType=INTEGER},
+		#{raztitular,jdbcType=VARCHAR},
+		#{nometitular,jdbcType=VARCHAR},
+		#{codempcc,jdbcType=INTEGER},
+		#{codfilialcc,jdbcType=INTEGER},
+		#{codclastitular,jdbcType=INTEGER},
+		#{codempvd,jdbcType=INTEGER},
+		#{codfilialvd,jdbcType=INTEGER},
+		#{codvend,jdbcType=INTEGER},
+		#{codemptc,jdbcType=INTEGER},
+		#{codfilialtc,jdbcType=INTEGER},
+		#{codtipocob,jdbcType=INTEGER},
+		#{codemppg,jdbcType=INTEGER},
+		#{codfilialpg,jdbcType=INTEGER},
+		#{codplanopag,jdbcType=INTEGER},
+		#{codemptn,jdbcType=INTEGER},
+		#{codfilialtn,jdbcType=INTEGER},
+		#{codtran,jdbcType=INTEGER},
+		#{codempbo,jdbcType=INTEGER},
+		#{codfilialbo,jdbcType=INTEGER},
+		#{codbanco,jdbcType=VARCHAR},
+		#{codempsr,jdbcType=INTEGER},
+		#{codfilialsr,jdbcType=INTEGER},
+		#{codsetor,jdbcType=INTEGER},
+		#{codempti,jdbcType=INTEGER},
+		#{codfilialti,jdbcType=INTEGER},
+		#{codtipotitular,jdbcType=INTEGER},
+		#{codtpcred,jdbcType=INTEGER},
+		#{codfilialtr,jdbcType=INTEGER},
+		#{codemptr,jdbcType=INTEGER},
+		#{codfisctitular,jdbcType=INTEGER},
+		#{codempfc,jdbcType=INTEGER},
+		#{codfilialfc,jdbcType=INTEGER},
+		#{codempec,jdbcType=INTEGER},
+		#{codfilialec,jdbcType=INTEGER},
+		#{codtbec,jdbcType=INTEGER},
+		#{codittbec,jdbcType=INTEGER},
+		#{codemphp,jdbcType=INTEGER},
+		#{codfilialhp,jdbcType=INTEGER},
+		#{codhist,jdbcType=INTEGER},
+		#{codempcb,jdbcType=INTEGER},
+		#{codfilialcb,jdbcType=INTEGER},
+		#{codcartcob,jdbcType=VARCHAR},
+		#{datatitular,jdbcType=DATE},
+		#{pessoatitular,jdbcType=VARCHAR},
+		#{ativotitular,jdbcType=VARCHAR},
+		#{cnpjtitular,jdbcType=VARCHAR},
+		#{insctitular,jdbcType=VARCHAR},
+		#{cpftitular,jdbcType=VARCHAR},
+		#{rgtitular,jdbcType=VARCHAR},
+		#{ssptitular,jdbcType=VARCHAR},
+		#{endtitular,jdbcType=VARCHAR},
+		#{numtitular,jdbcType=INTEGER},
+		#{compltitular,jdbcType=VARCHAR},
+		#{edificiotitular,jdbcType=VARCHAR},
+		#{bairtitular,jdbcType=VARCHAR},
+		#{cidtitular,jdbcType=VARCHAR},
+		#{uftitular,jdbcType=VARCHAR},
+		#{ceptitular,jdbcType=VARCHAR},
+		#{dddtitular,jdbcType=VARCHAR},
+		#{fonetitular,jdbcType=VARCHAR},
+		#{ramaltitular,jdbcType=VARCHAR},
+		#{dddfaxtitular,jdbcType=VARCHAR},
+		#{faxtitular,jdbcType=VARCHAR},
+		#{emailtitular,jdbcType=VARCHAR},
+		#{emailcob,jdbcType=VARCHAR},
+		#{emailent,jdbcType=VARCHAR},
+		#{emailnfetitular,jdbcType=VARCHAR},
+		#{conttitular,jdbcType=VARCHAR},
+		#{endcob,jdbcType=ENDERECO},
+		#{endent,jdbcType=ENDERECO},
+		#{obstitular,jdbcType=VARCHAR},
+		#{agenciatitular,jdbcType=VARCHAR},
+		#{ncontabcotitular,jdbcType=VARCHAR},
+		#{codemppq,jdbcType=INTEGER},
+		#{codfilialpq,jdbcType=INTEGER},
+		#{codpesq,jdbcType=INTEGER},
+		#{incratitular,jdbcType=VARCHAR},
+		#{dtinitr,jdbcType=DATE},
+		#{dtvenctotr,jdbcType=DATE},
+		#{nirftitular,jdbcType=VARCHAR},
+		#{simplestitular,jdbcType=VARCHAR},
+		#{dddceltitular,jdbcType=VARCHAR},
+		#{celtitular,jdbcType=VARCHAR},
+		#{nattitular,jdbcType=VARCHAR},
+		#{ufnattitular,jdbcType=VARCHAR},
+		#{temporestitular,jdbcType=VARCHAR},
+		#{apelidotitular,jdbcType=VARCHAR},
+		#{sitetitular,jdbcType=VARCHAR},
+		#{codcontdeb,jdbcType=VARCHAR},
+		#{codcontcred,jdbcType=VARCHAR},
+		#{codtitularcontab,jdbcType=VARCHAR},
+		#{fototitular,jdbcType=BLOB},
+		#{imgasstitular,jdbcType=BLOB},
+		#{codmunic,jdbcType=VARCHAR},
+		#{siglauf,jdbcType=VARCHAR},
+		#{codpais,jdbcType=INTEGER},
+		#{codmunicent,jdbcType=VARCHAR},
+		#{siglaufent,jdbcType=VARCHAR},
+		#{codpaisent,jdbcType=INTEGER},
+		#{codmuniccob,jdbcType=VARCHAR},
+		#{siglaufcob,jdbcType=VARCHAR},
+		#{codpaiscob,jdbcType=INTEGER},
+		#{codempuc,jdbcType=INTEGER},
+		#{codfilialuc,jdbcType=INTEGER},
+		#{codunifcod,jdbcType=INTEGER},
+		#{suframatitular,jdbcType=VARCHAR},
+		#{prodruraltitular,jdbcType=VARCHAR},
+		#{ctotitular,jdbcType=VARCHAR},
+		#{codcnae,jdbcType=VARCHAR},
+		#{inscmuntitular,jdbcType=VARCHAR},
+		#{percdesctitular,jdbcType=DOUBLE},
+		#{conttitularcob,jdbcType=VARCHAR},
+		#{conttitularent,jdbcType=VARCHAR},
+		#{descipi,jdbcType=VARCHAR},
+		#{identtitularbco,jdbcType=VARCHAR},
+		#{dtnasctitular,jdbcType=DATE},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Titulares -->
+	<select id="updateTitulares" parameterType="Map" resultType="int">
+		SELECT upd_titulares (
+		#{codemp,jdbcType=EMPRESA},
+		#{codfilial,jdbcType=FILIAL},
+		#{codtitular,jdbcType=INTEGER},
+		#{raztitular,jdbcType=VARCHAR},
+		#{nometitular,jdbcType=VARCHAR},
+		#{codempcc,jdbcType=INTEGER},
+		#{codfilialcc,jdbcType=INTEGER},
+		#{codclastitular,jdbcType=INTEGER},
+		#{codempvd,jdbcType=INTEGER},
+		#{codfilialvd,jdbcType=INTEGER},
+		#{codvend,jdbcType=INTEGER},
+		#{codemptc,jdbcType=INTEGER},
+		#{codfilialtc,jdbcType=INTEGER},
+		#{codtipocob,jdbcType=INTEGER},
+		#{codemppg,jdbcType=INTEGER},
+		#{codfilialpg,jdbcType=INTEGER},
+		#{codplanopag,jdbcType=INTEGER},
+		#{codemptn,jdbcType=INTEGER},
+		#{codfilialtn,jdbcType=INTEGER},
+		#{codtran,jdbcType=INTEGER},
+		#{codempbo,jdbcType=INTEGER},
+		#{codfilialbo,jdbcType=INTEGER},
+		#{codbanco,jdbcType=VARCHAR},
+		#{codempsr,jdbcType=INTEGER},
+		#{codfilialsr,jdbcType=INTEGER},
+		#{codsetor,jdbcType=INTEGER},
+		#{codempti,jdbcType=INTEGER},
+		#{codfilialti,jdbcType=INTEGER},
+		#{codtipotitular,jdbcType=INTEGER},
+		#{codtpcred,jdbcType=INTEGER},
+		#{codfilialtr,jdbcType=INTEGER},
+		#{codemptr,jdbcType=INTEGER},
+		#{codfisctitular,jdbcType=INTEGER},
+		#{codempfc,jdbcType=INTEGER},
+		#{codfilialfc,jdbcType=INTEGER},
+		#{codempec,jdbcType=INTEGER},
+		#{codfilialec,jdbcType=INTEGER},
+		#{codtbec,jdbcType=INTEGER},
+		#{codittbec,jdbcType=INTEGER},
+		#{codemphp,jdbcType=INTEGER},
+		#{codfilialhp,jdbcType=INTEGER},
+		#{codhist,jdbcType=INTEGER},
+		#{codempcb,jdbcType=INTEGER},
+		#{codfilialcb,jdbcType=INTEGER},
+		#{codcartcob,jdbcType=VARCHAR},
+		#{datatitular,jdbcType=DATE},
+		#{pessoatitular,jdbcType=VARCHAR},
+		#{ativotitular,jdbcType=VARCHAR},
+		#{cnpjtitular,jdbcType=VARCHAR},
+		#{insctitular,jdbcType=VARCHAR},
+		#{cpftitular,jdbcType=VARCHAR},
+		#{rgtitular,jdbcType=VARCHAR},
+		#{ssptitular,jdbcType=VARCHAR},
+		#{endtitular,jdbcType=VARCHAR},
+		#{numtitular,jdbcType=INTEGER},
+		#{compltitular,jdbcType=VARCHAR},
+		#{edificiotitular,jdbcType=VARCHAR},
+		#{bairtitular,jdbcType=VARCHAR},
+		#{cidtitular,jdbcType=VARCHAR},
+		#{uftitular,jdbcType=VARCHAR},
+		#{ceptitular,jdbcType=VARCHAR},
+		#{dddtitular,jdbcType=VARCHAR},
+		#{fonetitular,jdbcType=VARCHAR},
+		#{ramaltitular,jdbcType=VARCHAR},
+		#{dddfaxtitular,jdbcType=VARCHAR},
+		#{faxtitular,jdbcType=VARCHAR},
+		#{emailtitular,jdbcType=VARCHAR},
+		#{emailcob,jdbcType=VARCHAR},
+		#{emailent,jdbcType=VARCHAR},
+		#{emailnfetitular,jdbcType=VARCHAR},
+		#{conttitular,jdbcType=VARCHAR},
+		#{endcob,jdbcType=ENDERECO},
+		#{endent,jdbcType=ENDERECO},
+		#{obstitular,jdbcType=VARCHAR},
+		#{agenciatitular,jdbcType=VARCHAR},
+		#{ncontabcotitular,jdbcType=VARCHAR},
+		#{codemppq,jdbcType=INTEGER},
+		#{codfilialpq,jdbcType=INTEGER},
+		#{codpesq,jdbcType=INTEGER},
+		#{incratitular,jdbcType=VARCHAR},
+		#{dtinitr,jdbcType=DATE},
+		#{dtvenctotr,jdbcType=DATE},
+		#{nirftitular,jdbcType=VARCHAR},
+		#{simplestitular,jdbcType=VARCHAR},
+		#{dddceltitular,jdbcType=VARCHAR},
+		#{celtitular,jdbcType=VARCHAR},
+		#{nattitular,jdbcType=VARCHAR},
+		#{ufnattitular,jdbcType=VARCHAR},
+		#{temporestitular,jdbcType=VARCHAR},
+		#{apelidotitular,jdbcType=VARCHAR},
+		#{sitetitular,jdbcType=VARCHAR},
+		#{codcontdeb,jdbcType=VARCHAR},
+		#{codcontcred,jdbcType=VARCHAR},
+		#{codtitularcontab,jdbcType=VARCHAR},
+		#{fototitular,jdbcType=BLOB},
+		#{imgasstitular,jdbcType=BLOB},
+		#{codmunic,jdbcType=VARCHAR},
+		#{siglauf,jdbcType=VARCHAR},
+		#{codpais,jdbcType=INTEGER},
+		#{codmunicent,jdbcType=VARCHAR},
+		#{siglaufent,jdbcType=VARCHAR},
+		#{codpaisent,jdbcType=INTEGER},
+		#{codmuniccob,jdbcType=VARCHAR},
+		#{siglaufcob,jdbcType=VARCHAR},
+		#{codpaiscob,jdbcType=INTEGER},
+		#{codempuc,jdbcType=INTEGER},
+		#{codfilialuc,jdbcType=INTEGER},
+		#{codunifcod,jdbcType=INTEGER},
+		#{suframatitular,jdbcType=VARCHAR},
+		#{prodruraltitular,jdbcType=VARCHAR},
+		#{ctotitular,jdbcType=VARCHAR},
+		#{codcnae,jdbcType=VARCHAR},
+		#{inscmuntitular,jdbcType=VARCHAR},
+		#{percdesctitular,jdbcType=DOUBLE},
+		#{conttitularcob,jdbcType=VARCHAR},
+		#{conttitularent,jdbcType=VARCHAR},
+		#{descipi,jdbcType=VARCHAR},
+		#{identtitularbco,jdbcType=VARCHAR},
+		#{dtnasctitular,jdbcType=DATE},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Titulares -->
+	<select id="deleteTitulares" parameterType="Titulares">
+		SELECT del_titulares (#{id})
+	</select>
+	
+	<!-- Fetch All Titularess -->
+	<select id="fetchAllTitularess" parameterType="Map" resultMap="listAllTitularesResults">
+	
+		SELECT  <include refid="allTitularesColumms"/>
+		  FROM titulares
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM titulares 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Titulares By type -->
+	<select id="fetchTitularesByType" parameterType="TitularesRequest"  resultMap="listAllTitularesResults" >
+		SELECT  <include refid="allCustomListTitularesColumns"/>
+		  FROM titulares
+		 WHERE name = #{titulares.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Titulares By Id -->
+	<select id="fetchTitularesById" parameterType="Titulares" resultMap="listAllTitularesResults" >
+		SELECT <include refid="allCustomListTitularesColumns"/>
+		  FROM titulares
+		 WHERE titulares_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Titulares By Id -->
+	<select id="fetchTitularesNameById" parameterType="Titulares" resultMap="listAllTitularesResults" >
+		SELECT <include refid="allCustomListTitularesColumns"/>
+		  FROM titulares
+		 WHERE titulares_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

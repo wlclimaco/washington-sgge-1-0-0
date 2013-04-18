@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Embalagens">
+
+	<resultMap id="listAllEmbalagensResults" type="Embalagens" >
+		<result property="cdembala" column="cdembala" />
+		<result property="cdprodut" column="cdprodut" />
+		<result property="cdunidad" column="cdunidad" />
+		<result property="dsembala" column="dsembala" />
+		<result property="qtembala" column="qtembala" />
+		<result property="tpembala" column="tpembala" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allEmbalagensColumms">
+     	cdembala,
+     	cdprodut,
+     	cdunidad,
+     	dsembala,
+     	qtembala,
+     	tpembala,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Embalagens -->
+	<select id="insertEmbalagens" parameterType="Map" resultType="int">
+		SELECT ins_embalagens (
+		#{cdembala,jdbcType=INTEGER},
+		#{cdprodut,jdbcType=INTEGER},
+		#{cdunidad,jdbcType=UNIMED},
+		#{dsembala,jdbcType=VARCHAR},
+		#{qtembala,jdbcType=INTEGER},
+		#{tpembala,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Embalagens -->
+	<select id="updateEmbalagens" parameterType="Map" resultType="int">
+		SELECT upd_embalagens (
+		#{cdembala,jdbcType=INTEGER},
+		#{cdprodut,jdbcType=INTEGER},
+		#{cdunidad,jdbcType=UNIMED},
+		#{dsembala,jdbcType=VARCHAR},
+		#{qtembala,jdbcType=INTEGER},
+		#{tpembala,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Embalagens -->
+	<select id="deleteEmbalagens" parameterType="Embalagens">
+		SELECT del_embalagens (#{id})
+	</select>
+	
+	<!-- Fetch All Embalagenss -->
+	<select id="fetchAllEmbalagenss" parameterType="Map" resultMap="listAllEmbalagensResults">
+	
+		SELECT  <include refid="allEmbalagensColumms"/>
+		  FROM embalagens
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM embalagens 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Embalagens By type -->
+	<select id="fetchEmbalagensByType" parameterType="EmbalagensRequest"  resultMap="listAllEmbalagensResults" >
+		SELECT  <include refid="allCustomListEmbalagensColumns"/>
+		  FROM embalagens
+		 WHERE name = #{embalagens.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Embalagens By Id -->
+	<select id="fetchEmbalagensById" parameterType="Embalagens" resultMap="listAllEmbalagensResults" >
+		SELECT <include refid="allCustomListEmbalagensColumns"/>
+		  FROM embalagens
+		 WHERE embalagens_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Embalagens By Id -->
+	<select id="fetchEmbalagensNameById" parameterType="Embalagens" resultMap="listAllEmbalagensResults" >
+		SELECT <include refid="allCustomListEmbalagensColumns"/>
+		  FROM embalagens
+		 WHERE embalagens_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

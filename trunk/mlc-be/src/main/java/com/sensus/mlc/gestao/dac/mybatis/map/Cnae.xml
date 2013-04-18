@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Cnae">
+
+	<resultMap id="listAllCnaeResults" type="Cnae" >
+		<result property="codcnae" column="codcnae" />
+		<result property="desccnae" column="desccnae" />
+		<result property="seccnae" column="seccnae" />
+		<result property="divcnae" column="divcnae" />
+		<result property="grupcnae" column="grupcnae" />
+		<result property="dtrevcnae" column="dtrevcnae" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allCnaeColumms">
+     	codcnae,
+     	desccnae,
+     	seccnae,
+     	divcnae,
+     	grupcnae,
+     	dtrevcnae,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Cnae -->
+	<select id="insertCnae" parameterType="Map" resultType="int">
+		SELECT ins_cnae (
+		#{codcnae,jdbcType=VARCHAR},
+		#{desccnae,jdbcType=VARCHAR},
+		#{seccnae,jdbcType=VARCHAR},
+		#{divcnae,jdbcType=VARCHAR},
+		#{grupcnae,jdbcType=VARCHAR},
+		#{dtrevcnae,jdbcType=DATE},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Cnae -->
+	<select id="updateCnae" parameterType="Map" resultType="int">
+		SELECT upd_cnae (
+		#{codcnae,jdbcType=VARCHAR},
+		#{desccnae,jdbcType=VARCHAR},
+		#{seccnae,jdbcType=VARCHAR},
+		#{divcnae,jdbcType=VARCHAR},
+		#{grupcnae,jdbcType=VARCHAR},
+		#{dtrevcnae,jdbcType=DATE},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Cnae -->
+	<select id="deleteCnae" parameterType="Cnae">
+		SELECT del_cnae (#{id})
+	</select>
+	
+	<!-- Fetch All Cnaes -->
+	<select id="fetchAllCnaes" parameterType="Map" resultMap="listAllCnaeResults">
+	
+		SELECT  <include refid="allCnaeColumms"/>
+		  FROM cnae
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM cnae 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Cnae By type -->
+	<select id="fetchCnaeByType" parameterType="CnaeRequest"  resultMap="listAllCnaeResults" >
+		SELECT  <include refid="allCustomListCnaeColumns"/>
+		  FROM cnae
+		 WHERE name = #{cnae.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Cnae By Id -->
+	<select id="fetchCnaeById" parameterType="Cnae" resultMap="listAllCnaeResults" >
+		SELECT <include refid="allCustomListCnaeColumns"/>
+		  FROM cnae
+		 WHERE cnae_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Cnae By Id -->
+	<select id="fetchCnaeNameById" parameterType="Cnae" resultMap="listAllCnaeResults" >
+		SELECT <include refid="allCustomListCnaeColumns"/>
+		  FROM cnae
+		 WHERE cnae_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+
