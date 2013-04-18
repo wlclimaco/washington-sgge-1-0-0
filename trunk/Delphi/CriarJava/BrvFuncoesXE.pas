@@ -42,7 +42,11 @@ end;
 
 function verificadorCodeBanco(Txt:String):String;
 begin
-      if Pos(UpperCase('Char'),UpperCase(Txt)) <> 0  then
+      if Pos(UpperCase('list'),UpperCase(Txt)) <> 0  then
+      begin
+          result := 'INTEGER';
+      end
+      else if Pos(UpperCase('Char'),UpperCase(Txt)) <> 0  then
       begin
           result := 'VARCHAR';
       end

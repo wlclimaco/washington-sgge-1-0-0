@@ -106,7 +106,7 @@ begin
       while not CcDataset.Eof do
       begin
                   if CcDataset.FieldByName('S/N').AsString = 'S'  then
-      memo1.Lines.Add('		#{'+LowerCase(CcDataset.FieldByName('Nome').AsString)+',jdbcType='+UPPERCase(CcDataset.FieldByName('TIPO').AsString)+'},');
+      memo1.Lines.Add('		#{'+LowerCase(CcDataset.FieldByName('Nome').AsString)+',jdbcType='+UPPERCase(verificadorCodeBanco(CcDataset.FieldByName('TIPO').AsString))+'},');
       CcDataset.Next;
       end;
       memo1.Lines.Add(')');
@@ -119,7 +119,7 @@ begin
       while not CcDataset.Eof do
       begin
                   if CcDataset.FieldByName('S/N').AsString = 'S'  then
-      memo1.Lines.Add('		#{'+LowerCase(CcDataset.FieldByName('Nome').AsString)+',jdbcType='+UPPERCase(CcDataset.FieldByName('TIPO').AsString)+'},');
+      memo1.Lines.Add('		#{'+LowerCase(CcDataset.FieldByName('Nome').AsString)+',jdbcType='+UPPERCase(verificadorCodeBanco(CcDataset.FieldByName('TIPO').AsString))+'},');
       CcDataset.Next;
       end;
       memo1.Lines.Add(')');
@@ -1311,22 +1311,20 @@ begin
       memo1.Lines.Add('');
       memo1.Lines.Add('import com.sensus.common.model.UserContext;');
       memo1.Lines.Add('import com.sensus.mlc.base.model.request.LightSelectionRequest;');
-      memo1.Lines.Add('import com.sensus.mlc.'+LowerCase(Txt)+'.model.'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+';');
+      memo1.Lines.Add('import com.sensus.mlc.tabela.model.'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+';');
       memo1.Lines.Add('import com.sensus.mlc.tenant.model.Tenant;');
       memo1.Lines.Add('');
+      memo1.Lines.Add('// TODO: Auto-generated Javadoc');
       memo1.Lines.Add('/**');
       memo1.Lines.Add(' * The Class Inquiry'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'Request.');
-      memo1.Lines.Add(' * ');
+      memo1.Lines.Add(' *');
       memo1.Lines.Add(' * @author - Washington');
       memo1.Lines.Add(' */');
       memo1.Lines.Add('public class '+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'Request extends LightSelectionRequest');
       memo1.Lines.Add('{');
       memo1.Lines.Add('');
       memo1.Lines.Add('	/** The '+LowerCase(Txt)+'. */');
-      memo1.Lines.Add('	private '+BrvFuncoesXE.PrimeiraMaiscula(Txt)+' '+LowerCase(Txt)+';');
-      memo1.Lines.Add('');
-      memo1.Lines.Add('	/** The include smart points to group. */');
-      memo1.Lines.Add('	private Boolean includeSmartPointsToGroup;');
+      memo1.Lines.Add('	private '+BrvFuncoesXE.PrimeiraMaiscula(Txt)+' atributo;');
       memo1.Lines.Add('');
       memo1.Lines.Add('	/** The '+LowerCase(Txt)+'. */');
       memo1.Lines.Add('	private List<'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'> '+LowerCase(Txt)+' = new ArrayList<'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'>();');
@@ -1340,7 +1338,7 @@ begin
       memo1.Lines.Add('');
       memo1.Lines.Add('	/**');
       memo1.Lines.Add('	 * Instantiates a new '+LowerCase(Txt)+' request.');
-      memo1.Lines.Add('	 * ');
+      memo1.Lines.Add('	 *');
       memo1.Lines.Add('	 * @param userContext the user context');
       memo1.Lines.Add('	 */');
       memo1.Lines.Add('	public '+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'Request(UserContext userContext)');
@@ -1349,80 +1347,57 @@ begin
       memo1.Lines.Add('	}');
       memo1.Lines.Add('');
       memo1.Lines.Add('	/**');
+      memo1.Lines.Add('	 * Gets the atributo.');
+      memo1.Lines.Add('	 *');
+      memo1.Lines.Add('	 * @return the atributo');
+      memo1.Lines.Add('	 */');
+      memo1.Lines.Add('	public '+BrvFuncoesXE.PrimeiraMaiscula(Txt)+' getAtributo() {');
+      memo1.Lines.Add('		return atributo;');
+      memo1.Lines.Add('	}');
+      memo1.Lines.Add('');
+      memo1.Lines.Add('	/**');
+      memo1.Lines.Add('	 * Sets the atributo.');
+      memo1.Lines.Add('	 *');
+      memo1.Lines.Add('	 * @param atributo the new atributo');
+      memo1.Lines.Add('	 */');
+      memo1.Lines.Add('	public void setAtributo('+BrvFuncoesXE.PrimeiraMaiscula(Txt)+' atributo) {');
+      memo1.Lines.Add('		this.atributo = atributo;');
+      memo1.Lines.Add('	}');
+      memo1.Lines.Add('');
+      memo1.Lines.Add('	/**');
+      memo1.Lines.Add('	 * Gets the '+LowerCase(Txt)+'.');
+      memo1.Lines.Add('	 *');
+      memo1.Lines.Add('	 * @return the '+LowerCase(Txt)+'');
+      memo1.Lines.Add('	 */');
+      memo1.Lines.Add('	public List<'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'> get'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'() {');
+      memo1.Lines.Add('		return '+LowerCase(Txt)+';');
+      memo1.Lines.Add('	}');
+      memo1.Lines.Add('');
+      memo1.Lines.Add('	/**');
+      memo1.Lines.Add('	 * Sets the '+LowerCase(Txt)+'.');
+      memo1.Lines.Add('	 *');
+      memo1.Lines.Add('	 * @param '+LowerCase(Txt)+' the new '+LowerCase(Txt)+'');
+      memo1.Lines.Add('	 */');
+      memo1.Lines.Add('	public void set'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'(List<'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'> '+LowerCase(Txt)+') {');
+      memo1.Lines.Add('		this.'+LowerCase(Txt)+' = '+LowerCase(Txt)+';');
+      memo1.Lines.Add('	}');
+      memo1.Lines.Add('');
+      memo1.Lines.Add('	/**');
       memo1.Lines.Add('	 * Instantiates a new '+LowerCase(Txt)+' request.');
-      memo1.Lines.Add('	 * ');
+      memo1.Lines.Add('	 *');
       memo1.Lines.Add('	 * @param userContext the user context');
       memo1.Lines.Add('	 * @param tenant the tenant');
-      memo1.Lines.Add('	 */ ');
+      memo1.Lines.Add('	 */');
       memo1.Lines.Add('	public '+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'Request(UserContext userContext, Tenant tenant)');
       memo1.Lines.Add('	{');
       memo1.Lines.Add('		super(userContext, tenant);');
       memo1.Lines.Add('	}');
       memo1.Lines.Add('');
-      memo1.Lines.Add('	/**');
-      memo1.Lines.Add('	 * Sets the '+LowerCase(Txt)+'.');
-      memo1.Lines.Add('	 * ');
-      memo1.Lines.Add('	 * @param '+LowerCase(Txt)+' the new '+LowerCase(Txt)+'');
-      memo1.Lines.Add('	 */');
-      memo1.Lines.Add('	public void set'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'('+BrvFuncoesXE.PrimeiraMaiscula(Txt)+' '+LowerCase(Txt)+')');
-      memo1.Lines.Add('	{');
-      memo1.Lines.Add('		this.'+LowerCase(Txt)+' = '+LowerCase(Txt)+';');
-      memo1.Lines.Add('	}');
-      memo1.Lines.Add('');
-      memo1.Lines.Add('	/**');
-      memo1.Lines.Add('	 * Gets the '+LowerCase(Txt)+'.');
-      memo1.Lines.Add('	 * ');
-      memo1.Lines.Add('	 * @return the '+LowerCase(Txt)+'');
-      memo1.Lines.Add('	 */');
-      memo1.Lines.Add('	public '+BrvFuncoesXE.PrimeiraMaiscula(Txt)+' get'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'()');
-      memo1.Lines.Add('	{');
-      memo1.Lines.Add('		return '+LowerCase(Txt)+';');
-      memo1.Lines.Add('	}');
-      memo1.Lines.Add('');
-      memo1.Lines.Add('	/**');
-      memo1.Lines.Add('	 * Gets the include smart points to group.');
-      memo1.Lines.Add('	 * ');
-      memo1.Lines.Add('	 * @return the include smart points to group');
-      memo1.Lines.Add('	 */');
-      memo1.Lines.Add('	public Boolean getIncludeSmartPointsToGroup()');
-      memo1.Lines.Add('	{');
-      memo1.Lines.Add('		return includeSmartPointsToGroup;');
-      memo1.Lines.Add('	}');
-      memo1.Lines.Add('');
-      memo1.Lines.Add('	/**');
-      memo1.Lines.Add('	 * Sets the include smart points to group.');
-      memo1.Lines.Add('	 * ');
-      memo1.Lines.Add('	 * @param includeSmartPointsToGroup the new include smart points to group');
-      memo1.Lines.Add('	 */');
-      memo1.Lines.Add('	public void setIncludeSmartPointsToGroup(Boolean includeSmartPointsToGroup)');
-      memo1.Lines.Add('	{');
-      memo1.Lines.Add('		this.includeSmartPointsToGroup = includeSmartPointsToGroup;');
-      memo1.Lines.Add('	}');
-      memo1.Lines.Add('');
-      memo1.Lines.Add('	/**');
-      memo1.Lines.Add('	 * Gets the '+LowerCase(Txt)+'.');
-      memo1.Lines.Add('	 * ');
-      memo1.Lines.Add('	 * @return the '+LowerCase(Txt)+'');
-      memo1.Lines.Add('	 */');
-      memo1.Lines.Add('	public List<'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'> get'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'()');
-      memo1.Lines.Add('	{');
-      memo1.Lines.Add('		return '+LowerCase(Txt)+';');
-      memo1.Lines.Add('	}');
-      memo1.Lines.Add('');
-      memo1.Lines.Add('	/**');
-      memo1.Lines.Add('	 * Sets the '+LowerCase(Txt)+'.');
-      memo1.Lines.Add('	 * ');
-      memo1.Lines.Add('	 * @param '+LowerCase(Txt)+' the new '+LowerCase(Txt)+'');
-      memo1.Lines.Add('	 */');
-      memo1.Lines.Add('	public void set'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'(List<'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'> '+LowerCase(Txt)+')');
-      memo1.Lines.Add('	{');
-      memo1.Lines.Add('		this.'+LowerCase(Txt)+' = '+LowerCase(Txt)+';');
-      memo1.Lines.Add('	}');
       memo1.Lines.Add('');
       memo1.Lines.Add('	/**');
       memo1.Lines.Add('	 * Adds the to '+LowerCase(Txt)+'.');
-      memo1.Lines.Add('	 * ');
-      memo1.Lines.Add('	 * @param '+LowerCase(Txt)+' the '+LowerCase(Txt)+'');
+      memo1.Lines.Add('	 *');
+      memo1.Lines.Add('	 * @param '+LowerCase(Txt)+'Value the '+LowerCase(Txt)+' value');
       memo1.Lines.Add('	 */');
       memo1.Lines.Add('	public void addTo'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'('+BrvFuncoesXE.PrimeiraMaiscula(Txt)+' '+LowerCase(Txt)+'Value)');
       memo1.Lines.Add('	{');
@@ -1436,8 +1411,8 @@ begin
       memo1.Lines.Add('	@Override');
       memo1.Lines.Add('	public String toString()');
       memo1.Lines.Add('	{');
-      memo1.Lines.Add('		return "'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'Request [get'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'()=" + get'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'() + ", getIncludeSmartPointsToGroup()=" + "get'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'() = " + get'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'()');
-      memo1.Lines.Add('				+ getIncludeSmartPointsToGroup() + ", getIsMonitored()=" + isMonitored() + ", getSearchLight()="');
+      memo1.Lines.Add('		return "'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'Request [get'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'()=" + get'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'() + "get'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'() = " + get'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'()');
+      memo1.Lines.Add('				+ ", getIsMonitored()=" + isMonitored() + ", getSearchLight()="');
       memo1.Lines.Add('				+ getSearchLight() + ", getPaginationAllSelected()=" + getPaginationAllSelected()');
       memo1.Lines.Add('				+ ", getSelectionPaginationIds()=" + getSelectionPaginationIds() + ", getTenant()=" + getTenant()');
       memo1.Lines.Add('				+ ", getUserContext()=" + getUserContext() + "]";');
@@ -1620,7 +1595,8 @@ tostring : string;
 BEGIN
      try
          memo1.Lines.Clear;
-         memo1.Lines.Add('package com.sensus.mlc.'+LowerCase(pacote)+'.model');
+         memo1.Lines.Add('package com.sensus.mlc.'+LowerCase(pacote)+'.model;');
+         memo1.Lines.Add('import java.util.List;');
          memo1.Lines.Add('public class '+BrvFuncoesXE.PrimeiraMaiscula(Txt)+' extends SensusModel'); //escreve no arquivo e desce uma linha
          memo1.Lines.Add('{');
          CcDataset.First;
@@ -1635,13 +1611,12 @@ BEGIN
          begin
                if CcDataset.FieldByName('S/N').AsString = 'S'  then
                begin
-                      memo1.Lines.Add('    private '+verificadorCode(CcDataset.FieldByName('Tipo').AsString)+' '+ LowerCase(CcDataset.FieldByName('Nome').AsString) +';');
                       memo1.Lines.Add('    /** ');
                       memo1.Lines.Add('    * Gets the '+ LowerCase(CcDataset.FieldByName('Nome').AsString) +'.');
                       memo1.Lines.Add('    * ');
                       memo1.Lines.Add('    * @return the '+ LowerCase(CcDataset.FieldByName('Nome').AsString) +' ');
                       memo1.Lines.Add('    */');
-                      memo1.Lines.Add('    	public '+verificadorCode(CcDataset.FieldByName('Tipo').AsString)+' get'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'() ');
+                      memo1.Lines.Add('    	public '+verificadorCode(CcDataset.FieldByName('Tipo').AsString)+' get'+BrvFuncoesXE.PrimeiraMaiscula(CcDataset.FieldByName('Nome').AsString)+'() ');
                       memo1.Lines.Add('    { ');
                       memo1.Lines.Add('    	return this.'+ LowerCase(CcDataset.FieldByName('Nome').AsString) +'; ');
                       memo1.Lines.Add('    } ');
@@ -1651,7 +1626,7 @@ BEGIN
                       memo1.Lines.Add('     *');
                       memo1.Lines.Add('     * @param '+ LowerCase(CcDataset.FieldByName('Nome').AsString) +' the new '+ LowerCase(CcDataset.FieldByName('Nome').AsString) +' ');
                       memo1.Lines.Add('     */');
-                      memo1.Lines.Add('    public void set'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'('+verificadorCode(CcDataset.FieldByName('Tipo').AsString)+' '+ LowerCase(CcDataset.FieldByName('Nome').AsString) +')');
+                      memo1.Lines.Add('    public void set'+BrvFuncoesXE.PrimeiraMaiscula(CcDataset.FieldByName('Nome').AsString)+'('+verificadorCode(CcDataset.FieldByName('Tipo').AsString)+' '+ LowerCase(CcDataset.FieldByName('Nome').AsString) +')');
                       memo1.Lines.Add('    {');
                       memo1.Lines.Add('    	this.'+ LowerCase(CcDataset.FieldByName('Nome').AsString) +' = '+ LowerCase(CcDataset.FieldByName('Nome').AsString) +'; ');
                       memo1.Lines.Add('    }  ');
@@ -1667,14 +1642,14 @@ BEGIN
           memo1.Lines.Add('@Override ');
           memo1.Lines.Add('public String toString()  ');
           memo1.Lines.Add('{');
-          memo1.Lines.Add('return "'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'[');
+          tostring := 'return "'+BrvFuncoesXE.PrimeiraMaiscula(Txt)+'[';
           CcDataset.First;
           while not CcDataset.Eof do
           begin
                 if CcDataset.FieldByName('S/N').AsString = 'S'  then
                 begin
                       if controte = 0 then
-                          tostring := tostring + '" get'+BrvFuncoesXE.PrimeiraMaiscula(LowerCase(CcDataset.FieldByName('Nome').AsString))+'()=" + get'+BrvFuncoesXE.PrimeiraMaiscula(LowerCase(CcDataset.FieldByName('Nome').AsString))+'()'
+                          tostring := tostring + ' get'+BrvFuncoesXE.PrimeiraMaiscula(LowerCase(CcDataset.FieldByName('Nome').AsString))+'()=" + get'+BrvFuncoesXE.PrimeiraMaiscula(LowerCase(CcDataset.FieldByName('Nome').AsString))+'()'
                       else
                           tostring := tostring + '+ ", get'+BrvFuncoesXE.PrimeiraMaiscula(LowerCase(CcDataset.FieldByName('Nome').AsString))+'()=" + get'+BrvFuncoesXE.PrimeiraMaiscula(LowerCase(CcDataset.FieldByName('Nome').AsString))+'()';
                 controte := controte + 1;
