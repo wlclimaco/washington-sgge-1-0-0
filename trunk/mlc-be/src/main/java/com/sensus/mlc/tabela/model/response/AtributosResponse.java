@@ -1,66 +1,52 @@
 package com.sensus.mlc.tabela.model.response;
 
+import java.util.ArrayList;
 import java.util.List;
-import com.sensus.common.model.request.Request;
-import com.sensus.mlc.tabela.model.Tabela;
 
-// TODO: Auto-generated Javadoc
+import com.sensus.common.model.response.Response;
+import com.sensus.mlc.tabela.model.Atributos;
+
 /**
- * The Class TabelaResponse.
+ * The Class AtributosResponse.
+ *
+ * @author - Washington
  */
-public class AtributosResponse extends Request {
+public class AtributosResponse extends Response
+{
 
-	/** The parent retry. */
-	private Integer parentRetry;
-
-	/** The tabelas. */
-	private List<Tabela> tabelas;
+	/** The atributos. */
+	private List<Atributos> atributos = new ArrayList<Atributos>();
 
 	/**
-	 * Gets the parent retry.
-	 *
-	 * @return the parent retry
+	 * Sets the atributoss.
+	 * 
+	 * @param atributosList the new atributos
 	 */
-	public Integer getParentRetry() {
-		return parentRetry;
+	public void setAtributoss(List<Atributos> atributosList)
+	{
+		this.atributos = atributosList;
 	}
 
 	/**
-	 * Sets the parent retry.
-	 *
-	 * @param parentRetry the new parent retry
+	 * Gets the atributos.
+	 * 
+	 * @return the atributos
 	 */
-	public void setParentRetry(Integer parentRetry) {
-		this.parentRetry = parentRetry;
+	public List<Atributos> getAtributos()
+	{
+		return this.atributos;
 	}
 
-	/**
-	 * Gets the tabelas.
-	 *
-	 * @return the tabelas
-	 */
-	public List<Tabela> getTabelas() {
-		return tabelas;
-	}
-
-	/**
-	 * Sets the tabelas.
-	 *
-	 * @param tabelas the new tabelas
-	 */
-	public void setTabelas(List<Tabela> tabelas) {
-		this.tabelas = tabelas;
-	}
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
-	public String toString() {
-		return "AtributosResponse [parentRetry=" + parentRetry + ", tabelas="
-				+ tabelas + ", getParentRetry()=" + getParentRetry()
-				+ ", getTabelas()=" + getTabelas() + "]";
+	public String toString()
+	{
+		return "AtributosResponse [getAtributos()=" + this.getAtributos() + ", getMessageIterator()=" + this.getMessageIterator()
+				+ ", getMessageList()=" + this.getMessageList() + ", getMessageInfoList()=" + this.getMessageInfoList()
+				+ ", isOperationSuccess()=" + this.isOperationSuccess() + "]";
 	}
-
-
 }
+

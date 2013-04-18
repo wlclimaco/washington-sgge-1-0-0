@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Dominios">
+
+	<resultMap id="listAllDominiosResults" type="Dominios" >
+		<result property="" column="" />
+		<result property="nmtabela" column="nmtabela" />
+		<result property="nmatribu" column="nmatribu" />
+		<result property="dsdomini" column="dsdomini" />
+		<result property="vrdomini" column="vrdomini" />
+	</resultMap>
+
+
+	<sql id="allDominiosColumms">
+     	,
+     	nmtabela,
+     	nmatribu,
+     	dsdomini,
+     	vrdomini,
+	</sql>
+	
+
+	<!-- Insert Dominios -->
+	<select id="insertDominios" parameterType="Map" resultType="int">
+		SELECT ins_dominios (
+		#{,jdbcType=},
+		#{nmtabela,jdbcType=VARCHAR},
+		#{nmatribu,jdbcType=VARCHAR},
+		#{dsdomini,jdbcType=VARCHAR},
+		#{vrdomini,jdbcType=VARCHAR},
+)
+	</select>
+
+	<!-- Update Dominios -->
+	<select id="updateDominios" parameterType="Map" resultType="int">
+		SELECT upd_dominios (
+		#{,jdbcType=},
+		#{nmtabela,jdbcType=VARCHAR},
+		#{nmatribu,jdbcType=VARCHAR},
+		#{dsdomini,jdbcType=VARCHAR},
+		#{vrdomini,jdbcType=VARCHAR},
+)
+	</select>
+
+	<!-- Delete Dominios -->
+	<select id="deleteDominios" parameterType="Dominios">
+		SELECT del_dominios (#{id})
+	</select>
+	
+	<!-- Fetch All Dominioss -->
+	<select id="fetchAllDominioss" parameterType="Map" resultMap="listAllDominiosResults">
+	
+		SELECT  <include refid="allDominiosColumms"/>
+		  FROM dominios
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM dominios 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Dominios By type -->
+	<select id="fetchDominiosByType" parameterType="DominiosRequest"  resultMap="listAllDominiosResults" >
+		SELECT  <include refid="allCustomListDominiosColumns"/>
+		  FROM dominios
+		 WHERE name = #{dominios.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Dominios By Id -->
+	<select id="fetchDominiosById" parameterType="Dominios" resultMap="listAllDominiosResults" >
+		SELECT <include refid="allCustomListDominiosColumns"/>
+		  FROM dominios
+		 WHERE dominios_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Dominios By Id -->
+	<select id="fetchDominiosNameById" parameterType="Dominios" resultMap="listAllDominiosResults" >
+		SELECT <include refid="allCustomListDominiosColumns"/>
+		  FROM dominios
+		 WHERE dominios_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

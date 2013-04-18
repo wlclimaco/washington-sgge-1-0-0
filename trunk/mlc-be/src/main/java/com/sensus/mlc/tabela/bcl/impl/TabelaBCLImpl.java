@@ -223,7 +223,7 @@ public class TabelaBCLImpl implements ITabelaBCL
 	@Override 
 	public InternalResultsResponse<Tabela> updateTabela(TabelaRequest tabelaRequest)
 	{ 
-		InternalResultsResponse<Empresa> response = getTabelaDAC().updateTabela(tabelaRequest);
+		InternalResultsResponse<Tabela> response = getTabelaDAC().updateTabela(tabelaRequest);
 
 		if (!response.isInError()) 
 		{ 
@@ -271,9 +271,9 @@ public class TabelaBCLImpl implements ITabelaBCL
 		Tabela tabela = tabelaRequest.getTabela();
 
 		List<LCActionParameter> actionParameters = new ArrayList<LCActionParameter>();
-		actionParameters.add(new LCActionParameter(PropertyEnum.EMPRESA_ID, String.valueOf(empresa.getCodemp())));
-   actionParameters.add(new LCActionParameter(PropertyEnum.EMPRESA_ID, empresa.getCodemp().toString()));
-   InquiryLightRequest lightRequest = createInquiryLightRequest(empresaRequest);
+		actionParameters.add(new LCActionParameter(PropertyEnum.EMPRESA_ID, String.valueOf(tabela.getCodemp())));
+   actionParameters.add(new LCActionParameter(PropertyEnum.EMPRESA_ID, tabela.getCodemp().toString()));
+   InquiryLightRequest lightRequest = createInquiryLightRequest(tabelaRequest);
    Integer lightAmount = 1;
 
 		LCAction action = new LCAction(lcActionType);

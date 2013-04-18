@@ -1,13 +1,13 @@
-package com.sensus.mlc.chaveestrangeira.dac;
+package com.sensus.mlc.tabela.dac;
 
 
 import com.sensus.common.model.request.Request;
 import com.sensus.common.model.response.InternalResponse;
 import com.sensus.common.model.response.InternalResultsResponse;
-import com.sensus.mlc.chaveestrangeira.model.Chaveestrangeira
-import com.sensus.mlc.chaveestrangeira.model.request.ChaveestrangeiraRequest;
-import com.sensus.mlc.chaveestrangeira.model.request.InquiryChaveestrangeiraRequest;
-import com.sensus.mlc.chaveestrangeira.model.response.ChaveestrangeiraResponse;
+import com.sensus.mlc.tabela.model.Chaveestrangeira;
+import com.sensus.mlc.tabela.model.request.ChaveestrangeiraRequest;
+import com.sensus.mlc.tabela.model.request.InquiryChaveestrangeiraRequest;
+import com.sensus.mlc.tabela.model.response.ChaveestrangeiraResponse;
 
 /**
 * The Interface IActionDAC.
@@ -15,7 +15,7 @@ import com.sensus.mlc.chaveestrangeira.model.response.ChaveestrangeiraResponse;
 * @author - Washington
 *
 */
-public interface IChaveestrangeiraDAC;
+public interface IChaveestrangeiraDAC
 {
 
 /**

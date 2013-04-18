@@ -1,74 +1,45 @@
 package com.sensus.mlc.tabela.model.request;
-import java.util.List;
 
-import com.sensus.mlc.base.model.BaseSearch;
+import com.sensus.common.model.UserContext;
 import com.sensus.mlc.base.model.request.InquiryPaginationRequest;
 import com.sensus.mlc.tabela.model.Atributos;
 
-
-// TODO: Auto-generated Javadoc
 /**
  * The Class InquiryAtributosRequest.
+ *
+ * @author - Washinton
  */
 public class InquiryAtributosRequest extends InquiryPaginationRequest
 {
 
-    /** The base search. */
-    private BaseSearch baseSearch;
-
-    /** The file name. */
-    private String fileName;
-
-    /** The process id. */
-    Integer processId;
-
-    /** The atributos. */
-    private List<Atributos> atributos;
+	/** The atributos. */
+	private Atributos atributos;
 
 	/**
-	 * Gets the base search.
-	 *
-	 * @return the base search
+	 * Instantiates a new inquiry atributos request.
 	 */
-	public BaseSearch getBaseSearch() {
-		return baseSearch;
+	public InquiryAtributosRequest()
+	{
 	}
 
 	/**
-	 * Sets the base search.
+	 * Instantiates a new inquiry atributos request.
 	 *
-	 * @param baseSearch the new base search
+	 * @param userContext the user context
 	 */
-	public void setBaseSearch(BaseSearch baseSearch) {
-		this.baseSearch = baseSearch;
+	public InquiryAtributosRequest(UserContext userContext)
+	{
+		super(userContext);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.sensus.mlc.base.model.request.InquiryPaginationRequest#getFileName()
+	/**
+	 * Sets the atributos.
+	 *
+	 * @param atributosObject the new atributos
 	 */
-	public String getFileName() {
-		return fileName;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.sensus.mlc.base.model.request.InquiryPaginationRequest#setFileName(java.lang.String)
-	 */
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.sensus.mlc.base.model.request.InquiryPaginationRequest#getProcessId()
-	 */
-	public Integer getProcessId() {
-		return processId;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.sensus.mlc.base.model.request.InquiryPaginationRequest#setProcessId(java.lang.Integer)
-	 */
-	public void setProcessId(Integer processId) {
-		this.processId = processId;
+	public void setAtributos(Atributos atributosObject)
+	{
+		atributos = atributosObject;
 	}
 
 	/**
@@ -76,31 +47,23 @@ public class InquiryAtributosRequest extends InquiryPaginationRequest
 	 *
 	 * @return the atributos
 	 */
-	public List<Atributos> getAtributos() {
+	public Atributos getAtributos()
+	{
 		return atributos;
 	}
 
-	/**
-	 * Sets the atributos.
-	 *
-	 * @param atributos the new atributos
-	 */
-	public void setAtributos(List<Atributos> atributos) {
-		this.atributos = atributos;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.sensus.mlc.base.model.request.InquiryPaginationRequest#toString()
+	/*
+	 * (non-Javadoc)
+	 * @see com.sensus.mlc.base.model.request.LightingControlInquiryRequest#toString()
 	 */
 	@Override
-	public String toString() {
-		return "InquiryAtributosRequest [baseSearch=" + baseSearch
-				+ ", fileName=" + fileName + ", processId=" + processId
-				+ ", atributos=" + atributos + ", getBaseSearch()="
-				+ getBaseSearch() + ", getFileName()=" + getFileName()
-				+ ", getProcessId()=" + getProcessId() + ", getAtributos()="
-				+ getAtributos() + "]";
+	public String toString()
+	{
+		return "InquiryAtributosRequest [getAtributos()=" + getAtributos() + ", getStartRow()=" + getStartRow() + ", getEndRow()="
+				+ getEndRow() + ", getPageSize()=" + getPageSize() + ", getStartPage()=" + getStartPage()
+				+ ", getSortExpressions()=" + getSortExpressions() + ", getSortExpression()=" + getSortExpression()
+				+ ", isPreQueryCount()=" + isPreQueryCount() + ", getMaxPreQueryCount()=" + getMaxPreQueryCount()
+				+ ", getTenant()=" + getTenant() + ", getUserContext()=" + getUserContext() + "]";
 	}
-
-
 }
+

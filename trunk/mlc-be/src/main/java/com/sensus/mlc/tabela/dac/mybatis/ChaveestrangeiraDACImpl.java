@@ -43,9 +43,6 @@ public class ChaveestrangeiraDACImpl extends SqlSessionDaoSupport implements ICh
 	/** The Constant DELETE_SMART_POINT_FROM_CHAVEESTRANGEIRA. */ 
 	private static final String DELETE_SMART_POINT_FROM_CHAVEESTRANGEIRA = CHAVEESTRANGEIRA_NAMESPACE + "deleteSmartPointFromChaveestrangeira";
 
-	/** The Constant FETCH_CHAVEESTRANGEIRA_BY_ID. */ 
-	private static final String FETCH_CHAVEESTRANGEIRA_BY_ID = CHAVEESTRANGEIRA_NAMESPACE + "fetchChaveestrangeiraById";
-
 	/** The Constant FETCH_CHAVEESTRANGEIRA_NAME_BY_ID. */ 
 	private static final String FETCH_CHAVEESTRANGEIRA_NAME_BY_ID = CHAVEESTRANGEIRA_NAMESPACE + "fetchChaveestrangeiraNameById";
 
@@ -64,6 +61,10 @@ public class ChaveestrangeiraDACImpl extends SqlSessionDaoSupport implements ICh
 	/** The Constant INSERT_CHAVEESTRANGEIRA. */ 
 	private static final String INSERT_CHAVEESTRANGEIRA = CHAVEESTRANGEIRA_NAMESPACE + "insertChaveestrangeira";
 
+private static final String INSERT_AUDITORIA = Auditoria.insertAuditoria;
+private static final String UPDATE_CHAVEESTRANGEIRA = CHAVEESTRANGEIRA_NAMESPACE + "updateChaveestrangeira";
+private static final String SENSUS_MLC_CHAVEESTRANGEIRA_VALIDATOR_CHAVEESTRANGEIRA_ALREADY_EXISTS = error.update.chaveestrangeira;
+ 
 	/** The Constant INSERT_SMART_POINT_TO_CHAVEESTRANGEIRA. */ 
 	private static final String INSERT_SMART_POINT_TO_CHAVEESTRANGEIRA = CHAVEESTRANGEIRA_NAMESPACE + "insertSmartPointToChaveestrangeira";
 
@@ -133,9 +134,9 @@ com.sensus.mlc.chaveestrangeira.dao.IChaveestrangeiraDAO#fetchAllChaveestrangeir
 			paramMap.put(ORDERBY, inquiryChaveestrangeiraRequest.getSortExpressions().get(0));
 		}
 
-		if (!ValidationUtil.isNull(inquiryChaveestrangeiraRequest.getChaveestrangeiras()))
+		if (!ValidationUtil.isNull(inquiryChaveestrangeiraRequest.getChaveestrangeira()))
 		{
-			paramMap.put(CHAVEESTRANGEIRA_ID, inquiryChaveestrangeiraRequest.getChaveestrangeiras().get(0).getCodemp());
+			paramMap.put(CHAVEESTRANGEIRA_ID, inquiryChaveestrangeiraRequest.getChaveestrangeira().get(0).getCodemp());
 		}
 
 		doQueryForList(getSqlSession(), FETCH_ALL_CHAVEESTRANGEIRAS, paramMap, response);
@@ -144,18 +145,6 @@ com.sensus.mlc.chaveestrangeira.dao.IChaveestrangeiraDAO#fetchAllChaveestrangeir
 				PAGINATION_TOTAL_ROWS, paramMap);
 
 		response.getResultsSetInfo().setTotalRowsAvailable(totalRows);
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc) 
-	 * @see com.sensus.mlc.chaveestrangeira.dao.IChaveestrangeiraDAO#fetchChaveestrangeiraById(com.sensus.mlc.chaveestrangeira.model.Chaveestrangeira
-	 */ 
-	@Override
-	public InternalResultsResponse<Chaveestrangeira> fetchChaveestrangeiraByName(ChaveestrangeiraRequest chaveestrangeiraRequest)
-	{ 
-		InternalResultsResponse<Chaveestrangeira> response = new InternalResultsResponse<Chaveestrangeira>();
-		doQueryForList(getSqlSession(), FETCH_CHAVEESTRANGEIRA_BY_ID, chaveestrangeiraRequest, response);
 		return response;
 	}
 
@@ -171,7 +160,7 @@ com.sensus.mlc.chaveestrangeira.dao.IChaveestrangeiraDAO#fetchAllChaveestrangeir
 		Chaveestrangeira chaveestrangeira = chaveestrangeiraRequest.getChaveestrangeira();
 
 		chaveestrangeira.setCodEmp((Integer)doQueryForObject(getSqlSession(), INSERT_CHAVEESTRANGEIRA, chaveestrangeiraRequest));
-   chaveestrangeira.setListinsalt((List<Auditoria>)doQueryForObject(getSqlSession(), INSERT_EMPRESA, chaveestrangeiraRequest));
+   chaveestrangeira.setListinsalt((List<Auditoria>)doQueryForObject(getSqlSession(), INSERT_AUDITORIA, chaveestrangeiraRequest));
 		InternalResultsResponse<Chaveestrangeira> response = new InternalResultsResponse<Chaveestrangeira>();
 		response.addResult(chaveestrangeira);
 		return response;
@@ -186,51 +175,30 @@ com.sensus.mlc.chaveestrangeira.dao.IChaveestrangeiraDAO#fetchAllChaveestrangeir
 	{
 		InternalResponse response = new InternalResponse();
 		doRemove(getSqlSession(), DELETE_CHAVEESTRANGEIRA, chaveestrangeiraRequest.getChaveestrangeira(), response);
+   chaveestrangeira.setListinsalt((List<Auditoria>)doQueryForObject(getSqlSession(), INSERT_AUDITORIA , chaveestrangeiraRequest));
 		return response;
 	}
 
 
-	/* 
-	 * (non-Javadoc)
-	 * @see com.sensus.mlc.chaveestrangeira.dao.IChaveestrangeiraDAO#fetchChaveestrangeiraById(com.sensus.mlc.chaveestrangeira.model.request.ChaveestrangeiraRequest)
-	 */ 
-	@Override 
-	public InternalResultsResponse<Chaveestrangeira> fetchChaveestrangeiraById(ChaveestrangeiraRequest chaveestrangeiraRequest) 
-	{
-		InternalResultsResponse<Chaveestrangeira> response = new InternalResultsResponse<Chaveestrangeira>();
-		doQueryForList(getSqlSession(), FETCH_CHAVEESTRANGEIRA_BY_ID, chaveestrangeiraRequest.getChaveestrangeira(), response);
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc) 
-	 * @see 
-com.sensus.mlc.chaveestrangeira.dac.IChaveestrangeiraDAC#fetchChaveestrangeiraNameById(com.sensus.mlc.chaveestrangeira.model.request.ChaveestrangeiraRequest)
-	 */ 
-	@Override 
-	public InternalResultsResponse<Chaveestrangeira> fetchChaveestrangeiraNameById(ChaveestrangeiraRequest chaveestrangeiraRequest)
-	{
-		InternalResultsResponse<Chaveestrangeira> response = new InternalResultsResponse<Chaveestrangeira>();
-		doQueryForList(getSqlSession(), FETCH_CHAVEESTRANGEIRA_NAME_BY_ID, chaveestrangeiraRequest.getChaveestrangeira(), response);
-		return response;
-	}
  
 	/* 
 	 * (non-Javadoc)
 	 * @see com.sensus.mlc.chaveestrangeira.dac.IChaveestrangeiraDAC#updateChaveestrangeira(com.sensus.mlc.chaveestrangeira.model.request.ChaveestrangeiraRequest)
 	 */ 
 	@Override 
-	public InternalResponse updateChaveestrangeira(ChaveestrangeiraRequest chaveestrangeiraRequest)
+	public InternalResultsResponse<Chaveestrangeira> updateChaveestrangeira(ChaveestrangeiraRequest chaveestrangeiraRequest)
 	{
-		InternalResponse response = new InternalResponse();
+		InternalResultsResponse<Chaveestrangeira> response = new InternalResultsResponse<Chaveestrangeira>();
 		try 
 		{ 
 			doQueryForObject(getSqlSession(), UPDATE_CHAVEESTRANGEIRA, chaveestrangeiraRequest);
+   chaveestrangeira.setListinsalt((List<Auditoria>)doQueryForObject(getSqlSession(), INSERT_AUDITORIA, chaveestrangeiraRequest));
 		}
 		catch (DuplicateKeyException ex) 
 		{
 			response.setStatus(Status.ExceptionError);
-			response.addMessage(SENSUS_MLC_CHAVEESTRANGEIRAVALIDATOR_CHAVEESTRANGEIRA_ALREADY_EXISTS, MessageSeverity.Info, MessageLevel.None);
+			response.addMessage(SENSUS_MLC_CHAVEESTRANGEIRA_VALIDATOR_CHAVEESTRANGEIRA_ALREADY_EXISTS, MessageSeverity.Info, 
+MessageLevel.None);
 		}
 
 		return response;

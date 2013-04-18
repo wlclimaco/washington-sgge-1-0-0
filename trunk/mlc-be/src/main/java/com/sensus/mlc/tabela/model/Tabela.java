@@ -1,81 +1,80 @@
 package com.sensus.mlc.tabela.model;
 
+import java.util.List;
+
 import com.sensus.common.model.SensusModel;
+import com.sensus.mlc.gestao.model.Auditoria;
 
-
-// TODO: Auto-generated Javadoc
-/**
- * * The Model Object Tag.
- *
- * @author - Washington
- */
-@SuppressWarnings("serial")
 public class Tabela extends SensusModel
 {
-
-    /** The nmtabela. */
     private String nmtabela;
-
-    /** The dstabela. */
     private String dstabela;
+    private List<Auditoria> auditorias;
+    /**
+    * Gets the nmtabela.
+    *
+    * @return the nmtabela
+    */
+    	public String getNmtabela()
+    {
+    	return this.nmtabela;
+    }
 
+    /**
+     * Sets the nmtabela.
+     *
+     * @param nmtabela the new nmtabela
+     */
+    public void setNmtabela(String nmtabela)
+    {
+    	this.nmtabela = nmtabela;
+    }
+    /**
+    * Gets the dstabela.
+    *
+    * @return the dstabela
+    */
+    	public String getDstabela()
+    {
+    	return this.dstabela;
+    }
 
-	/**
-	 * Instantiates a new tabela.
-	 *
-	 * @param nmtabela the nmtabela
-	 * @param dstabela the dstabela
-	 */
-	public Tabela(String nmtabela, String dstabela) {
-		super();
-		this.nmtabela = nmtabela;
-		this.dstabela = dstabela;
-	}
+    /**
+     * Sets the dstabela.
+     *
+     * @param dstabela the new dstabela
+     */
+    public void setDstabela(String dstabela)
+    {
+    	this.dstabela = dstabela;
+    }
+    /**
+    * Gets the auditorias.
+    *
+    * @return the auditorias
+    */
+    	public List<Auditoria> getAuditorias()
+    {
+    	return this.auditorias;
+    }
 
-	/**
-	 * Gets the nmtabela.
-	 *
-	 * @return the nmtabela
-	 */
-	public String getNmtabela() {
-		return nmtabela;
-	}
-
-	/**
-	 * Sets the nmtabela.
-	 *
-	 * @param nmtabela the new nmtabela
-	 */
-	public void setNmtabela(String nmtabela) {
-		this.nmtabela = nmtabela;
-	}
-
-	/**
-	 * Gets the dstabela.
-	 *
-	 * @return the dstabela
-	 */
-	public String getDstabela() {
-		return dstabela;
-	}
-
-	/**
-	 * Sets the dstabela.
-	 *
-	 * @param dstabela the new dstabela
-	 */
-	public void setDstabela(String dstabela) {
-		this.dstabela = dstabela;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.sensus.common.model.SensusModel#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Tabela [nmtabela=" + nmtabela + ", dstabela=" + dstabela
-				+ ", getNmtabela()=" + getNmtabela() + ", getDstabela()="
-				+ getDstabela() + "]";
-	}
-
+    /**
+     * Sets the auditorias.
+     *
+     * @param auditorias the new auditorias
+     */
+    public void setAuditorias(List<Auditoria> auditorias)
+    {
+    	this.auditorias = auditorias;
+    }
+/*
+* (non-Javadoc)
+* @see com.sensus.common.model.SensusModel#toString()
+*/
+@Override
+public String toString()
+{
+return "Tabela[ getNmtabela()=" + getNmtabela()+ ", getDstabela()=" + getDstabela()+ ", getAuditorias()=" + getAuditorias()
++"]";
+}
 }

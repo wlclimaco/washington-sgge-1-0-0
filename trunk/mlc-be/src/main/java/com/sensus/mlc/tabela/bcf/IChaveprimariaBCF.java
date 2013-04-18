@@ -1,4 +1,4 @@
-package com.sensus.mlc.chaveprimaria.bcf;
+package com.sensus.mlc.tabela.bcf;
 
 import com.sensus.common.model.request.Request;
 import com.sensus.mlc.chaveprimaria.model.request.ChaveprimariaRequest;

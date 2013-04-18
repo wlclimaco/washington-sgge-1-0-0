@@ -12,7 +12,7 @@ import com.sensus.mlc.tabela.model.response.DominiosResponse;
 /**
 * The Interface IActionDAC.
 *
-* @author - QAT Brazil.
+* @author - Washington
 *
 */
 public interface IDominiosDAC

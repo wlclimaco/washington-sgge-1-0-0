@@ -223,7 +223,7 @@ public class DominiosBCLImpl implements IDominiosBCL
 	@Override 
 	public InternalResultsResponse<Dominios> updateDominios(DominiosRequest dominiosRequest)
 	{ 
-		InternalResultsResponse<Empresa> response = getDominiosDAC().updateDominios(dominiosRequest);
+		InternalResultsResponse<Dominios> response = getDominiosDAC().updateDominios(dominiosRequest);
 
 		if (!response.isInError()) 
 		{ 
@@ -271,9 +271,9 @@ public class DominiosBCLImpl implements IDominiosBCL
 		Dominios dominios = dominiosRequest.getDominios();
 
 		List<LCActionParameter> actionParameters = new ArrayList<LCActionParameter>();
-		actionParameters.add(new LCActionParameter(PropertyEnum.EMPRESA_ID, String.valueOf(empresa.getCodemp())));
-   actionParameters.add(new LCActionParameter(PropertyEnum.EMPRESA_ID, empresa.getCodemp().toString()));
-   InquiryLightRequest lightRequest = createInquiryLightRequest(empresaRequest);
+		actionParameters.add(new LCActionParameter(PropertyEnum.EMPRESA_ID, String.valueOf(dominios.getCodemp())));
+   actionParameters.add(new LCActionParameter(PropertyEnum.EMPRESA_ID, dominios.getCodemp().toString()));
+   InquiryLightRequest lightRequest = createInquiryLightRequest(dominiosRequest);
    Integer lightAmount = 1;
 
 		LCAction action = new LCAction(lcActionType);

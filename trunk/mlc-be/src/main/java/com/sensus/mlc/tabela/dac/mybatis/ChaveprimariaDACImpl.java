@@ -43,9 +43,6 @@ public class ChaveprimariaDACImpl extends SqlSessionDaoSupport implements IChave
 	/** The Constant DELETE_SMART_POINT_FROM_CHAVEPRIMARIA. */ 
 	private static final String DELETE_SMART_POINT_FROM_CHAVEPRIMARIA = CHAVEPRIMARIA_NAMESPACE + "deleteSmartPointFromChaveprimaria";
 
-	/** The Constant FETCH_CHAVEPRIMARIA_BY_ID. */ 
-	private static final String FETCH_CHAVEPRIMARIA_BY_ID = CHAVEPRIMARIA_NAMESPACE + "fetchChaveprimariaById";
-
 	/** The Constant FETCH_CHAVEPRIMARIA_NAME_BY_ID. */ 
 	private static final String FETCH_CHAVEPRIMARIA_NAME_BY_ID = CHAVEPRIMARIA_NAMESPACE + "fetchChaveprimariaNameById";
 
@@ -64,6 +61,10 @@ public class ChaveprimariaDACImpl extends SqlSessionDaoSupport implements IChave
 	/** The Constant INSERT_CHAVEPRIMARIA. */ 
 	private static final String INSERT_CHAVEPRIMARIA = CHAVEPRIMARIA_NAMESPACE + "insertChaveprimaria";
 
+private static final String INSERT_AUDITORIA = Auditoria.insertAuditoria;
+private static final String UPDATE_CHAVEPRIMARIA = CHAVEPRIMARIA_NAMESPACE + "updateChaveprimaria";
+private static final String SENSUS_MLC_CHAVEPRIMARIA_VALIDATOR_CHAVEPRIMARIA_ALREADY_EXISTS = error.update.chaveprimaria;
+ 
 	/** The Constant INSERT_SMART_POINT_TO_CHAVEPRIMARIA. */ 
 	private static final String INSERT_SMART_POINT_TO_CHAVEPRIMARIA = CHAVEPRIMARIA_NAMESPACE + "insertSmartPointToChaveprimaria";
 
@@ -132,9 +133,9 @@ public class ChaveprimariaDACImpl extends SqlSessionDaoSupport implements IChave
 			paramMap.put(ORDERBY, inquiryChaveprimariaRequest.getSortExpressions().get(0));
 		}
 
-		if (!ValidationUtil.isNull(inquiryChaveprimariaRequest.getChaveprimarias()))
+		if (!ValidationUtil.isNull(inquiryChaveprimariaRequest.getChaveprimaria()))
 		{
-			paramMap.put(CHAVEPRIMARIA_ID, inquiryChaveprimariaRequest.getChaveprimarias().get(0).getCodemp());
+			paramMap.put(CHAVEPRIMARIA_ID, inquiryChaveprimariaRequest.getChaveprimaria().get(0).getCodemp());
 		}
 
 		doQueryForList(getSqlSession(), FETCH_ALL_CHAVEPRIMARIAS, paramMap, response);
@@ -143,18 +144,6 @@ public class ChaveprimariaDACImpl extends SqlSessionDaoSupport implements IChave
 				PAGINATION_TOTAL_ROWS, paramMap);
 
 		response.getResultsSetInfo().setTotalRowsAvailable(totalRows);
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc) 
-	 * @see com.sensus.mlc.chaveprimaria.dao.IChaveprimariaDAO#fetchChaveprimariaById(com.sensus.mlc.chaveprimaria.model.Chaveprimaria
-	 */ 
-	@Override
-	public InternalResultsResponse<Chaveprimaria> fetchChaveprimariaByName(ChaveprimariaRequest chaveprimariaRequest)
-	{ 
-		InternalResultsResponse<Chaveprimaria> response = new InternalResultsResponse<Chaveprimaria>();
-		doQueryForList(getSqlSession(), FETCH_CHAVEPRIMARIA_BY_ID, chaveprimariaRequest, response);
 		return response;
 	}
 
@@ -170,7 +159,7 @@ public class ChaveprimariaDACImpl extends SqlSessionDaoSupport implements IChave
 		Chaveprimaria chaveprimaria = chaveprimariaRequest.getChaveprimaria();
 
 		chaveprimaria.setCodEmp((Integer)doQueryForObject(getSqlSession(), INSERT_CHAVEPRIMARIA, chaveprimariaRequest));
-   chaveprimaria.setListinsalt((List<Auditoria>)doQueryForObject(getSqlSession(), INSERT_EMPRESA, chaveprimariaRequest));
+   chaveprimaria.setListinsalt((List<Auditoria>)doQueryForObject(getSqlSession(), INSERT_AUDITORIA, chaveprimariaRequest));
 		InternalResultsResponse<Chaveprimaria> response = new InternalResultsResponse<Chaveprimaria>();
 		response.addResult(chaveprimaria);
 		return response;
@@ -185,50 +174,29 @@ public class ChaveprimariaDACImpl extends SqlSessionDaoSupport implements IChave
 	{
 		InternalResponse response = new InternalResponse();
 		doRemove(getSqlSession(), DELETE_CHAVEPRIMARIA, chaveprimariaRequest.getChaveprimaria(), response);
+   chaveprimaria.setListinsalt((List<Auditoria>)doQueryForObject(getSqlSession(), INSERT_AUDITORIA , chaveprimariaRequest));
 		return response;
 	}
 
 
-	/* 
-	 * (non-Javadoc)
-	 * @see com.sensus.mlc.chaveprimaria.dao.IChaveprimariaDAO#fetchChaveprimariaById(com.sensus.mlc.chaveprimaria.model.request.ChaveprimariaRequest)
-	 */ 
-	@Override 
-	public InternalResultsResponse<Chaveprimaria> fetchChaveprimariaById(ChaveprimariaRequest chaveprimariaRequest) 
-	{
-		InternalResultsResponse<Chaveprimaria> response = new InternalResultsResponse<Chaveprimaria>();
-		doQueryForList(getSqlSession(), FETCH_CHAVEPRIMARIA_BY_ID, chaveprimariaRequest.getChaveprimaria(), response);
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc) 
-	 * @see com.sensus.mlc.chaveprimaria.dac.IChaveprimariaDAC#fetchChaveprimariaNameById(com.sensus.mlc.chaveprimaria.model.request.ChaveprimariaRequest)
-	 */ 
-	@Override 
-	public InternalResultsResponse<Chaveprimaria> fetchChaveprimariaNameById(ChaveprimariaRequest chaveprimariaRequest)
-	{
-		InternalResultsResponse<Chaveprimaria> response = new InternalResultsResponse<Chaveprimaria>();
-		doQueryForList(getSqlSession(), FETCH_CHAVEPRIMARIA_NAME_BY_ID, chaveprimariaRequest.getChaveprimaria(), response);
-		return response;
-	}
  
 	/* 
 	 * (non-Javadoc)
 	 * @see com.sensus.mlc.chaveprimaria.dac.IChaveprimariaDAC#updateChaveprimaria(com.sensus.mlc.chaveprimaria.model.request.ChaveprimariaRequest)
 	 */ 
 	@Override 
-	public InternalResponse updateChaveprimaria(ChaveprimariaRequest chaveprimariaRequest)
+	public InternalResultsResponse<Chaveprimaria> updateChaveprimaria(ChaveprimariaRequest chaveprimariaRequest)
 	{
-		InternalResponse response = new InternalResponse();
+		InternalResultsResponse<Chaveprimaria> response = new InternalResultsResponse<Chaveprimaria>();
 		try 
 		{ 
 			doQueryForObject(getSqlSession(), UPDATE_CHAVEPRIMARIA, chaveprimariaRequest);
+   chaveprimaria.setListinsalt((List<Auditoria>)doQueryForObject(getSqlSession(), INSERT_AUDITORIA, chaveprimariaRequest));
 		}
 		catch (DuplicateKeyException ex) 
 		{
 			response.setStatus(Status.ExceptionError);
-			response.addMessage(SENSUS_MLC_CHAVEPRIMARIAVALIDATOR_CHAVEPRIMARIA_ALREADY_EXISTS, MessageSeverity.Info, MessageLevel.None);
+			response.addMessage(SENSUS_MLC_CHAVEPRIMARIA_VALIDATOR_CHAVEPRIMARIA_ALREADY_EXISTS, MessageSeverity.Info, MessageLevel.None);
 		}
 
 		return response;

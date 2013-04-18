@@ -43,9 +43,6 @@ public class DominiosDACImpl extends SqlSessionDaoSupport implements IDominiosDA
 	/** The Constant DELETE_SMART_POINT_FROM_DOMINIOS. */ 
 	private static final String DELETE_SMART_POINT_FROM_DOMINIOS = DOMINIOS_NAMESPACE + "deleteSmartPointFromDominios";
 
-	/** The Constant FETCH_DOMINIOS_BY_ID. */ 
-	private static final String FETCH_DOMINIOS_BY_ID = DOMINIOS_NAMESPACE + "fetchDominiosById";
-
 	/** The Constant FETCH_DOMINIOS_NAME_BY_ID. */ 
 	private static final String FETCH_DOMINIOS_NAME_BY_ID = DOMINIOS_NAMESPACE + "fetchDominiosNameById";
 
@@ -64,6 +61,10 @@ public class DominiosDACImpl extends SqlSessionDaoSupport implements IDominiosDA
 	/** The Constant INSERT_DOMINIOS. */ 
 	private static final String INSERT_DOMINIOS = DOMINIOS_NAMESPACE + "insertDominios";
 
+private static final String INSERT_AUDITORIA = Auditoria.insertAuditoria;
+private static final String UPDATE_DOMINIOS = DOMINIOS_NAMESPACE + "updateDominios";
+private static final String SENSUS_MLC_DOMINIOS_VALIDATOR_DOMINIOS_ALREADY_EXISTS = error.update.dominios;
+ 
 	/** The Constant INSERT_SMART_POINT_TO_DOMINIOS. */ 
 	private static final String INSERT_SMART_POINT_TO_DOMINIOS = DOMINIOS_NAMESPACE + "insertSmartPointToDominios";
 
@@ -132,9 +133,9 @@ public class DominiosDACImpl extends SqlSessionDaoSupport implements IDominiosDA
 			paramMap.put(ORDERBY, inquiryDominiosRequest.getSortExpressions().get(0));
 		}
 
-		if (!ValidationUtil.isNull(inquiryDominiosRequest.getDominioss()))
+		if (!ValidationUtil.isNull(inquiryDominiosRequest.getDominios()))
 		{
-			paramMap.put(DOMINIOS_ID, inquiryDominiosRequest.getDominioss().get(0).getCodemp());
+			paramMap.put(DOMINIOS_ID, inquiryDominiosRequest.getDominios().get(0).getCodemp());
 		}
 
 		doQueryForList(getSqlSession(), FETCH_ALL_DOMINIOSS, paramMap, response);
@@ -143,18 +144,6 @@ public class DominiosDACImpl extends SqlSessionDaoSupport implements IDominiosDA
 				PAGINATION_TOTAL_ROWS, paramMap);
 
 		response.getResultsSetInfo().setTotalRowsAvailable(totalRows);
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc) 
-	 * @see com.sensus.mlc.dominios.dao.IDominiosDAO#fetchDominiosById(com.sensus.mlc.dominios.model.Dominios
-	 */ 
-	@Override
-	public InternalResultsResponse<Dominios> fetchDominiosByName(DominiosRequest dominiosRequest)
-	{ 
-		InternalResultsResponse<Dominios> response = new InternalResultsResponse<Dominios>();
-		doQueryForList(getSqlSession(), FETCH_DOMINIOS_BY_ID, dominiosRequest, response);
 		return response;
 	}
 
@@ -170,7 +159,7 @@ public class DominiosDACImpl extends SqlSessionDaoSupport implements IDominiosDA
 		Dominios dominios = dominiosRequest.getDominios();
 
 		dominios.setCodEmp((Integer)doQueryForObject(getSqlSession(), INSERT_DOMINIOS, dominiosRequest));
-   dominios.setListinsalt((List<Auditoria>)doQueryForObject(getSqlSession(), INSERT_EMPRESA, dominiosRequest));
+   dominios.setListinsalt((List<Auditoria>)doQueryForObject(getSqlSession(), INSERT_AUDITORIA, dominiosRequest));
 		InternalResultsResponse<Dominios> response = new InternalResultsResponse<Dominios>();
 		response.addResult(dominios);
 		return response;
@@ -185,50 +174,29 @@ public class DominiosDACImpl extends SqlSessionDaoSupport implements IDominiosDA
 	{
 		InternalResponse response = new InternalResponse();
 		doRemove(getSqlSession(), DELETE_DOMINIOS, dominiosRequest.getDominios(), response);
+   dominios.setListinsalt((List<Auditoria>)doQueryForObject(getSqlSession(), INSERT_AUDITORIA , dominiosRequest));
 		return response;
 	}
 
 
-	/* 
-	 * (non-Javadoc)
-	 * @see com.sensus.mlc.dominios.dao.IDominiosDAO#fetchDominiosById(com.sensus.mlc.dominios.model.request.DominiosRequest)
-	 */ 
-	@Override 
-	public InternalResultsResponse<Dominios> fetchDominiosById(DominiosRequest dominiosRequest) 
-	{
-		InternalResultsResponse<Dominios> response = new InternalResultsResponse<Dominios>();
-		doQueryForList(getSqlSession(), FETCH_DOMINIOS_BY_ID, dominiosRequest.getDominios(), response);
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc) 
-	 * @see com.sensus.mlc.dominios.dac.IDominiosDAC#fetchDominiosNameById(com.sensus.mlc.dominios.model.request.DominiosRequest)
-	 */ 
-	@Override 
-	public InternalResultsResponse<Dominios> fetchDominiosNameById(DominiosRequest dominiosRequest)
-	{
-		InternalResultsResponse<Dominios> response = new InternalResultsResponse<Dominios>();
-		doQueryForList(getSqlSession(), FETCH_DOMINIOS_NAME_BY_ID, dominiosRequest.getDominios(), response);
-		return response;
-	}
  
 	/* 
 	 * (non-Javadoc)
 	 * @see com.sensus.mlc.dominios.dac.IDominiosDAC#updateDominios(com.sensus.mlc.dominios.model.request.DominiosRequest)
 	 */ 
 	@Override 
-	public InternalResponse updateDominios(DominiosRequest dominiosRequest)
+	public InternalResultsResponse<Dominios> updateDominios(DominiosRequest dominiosRequest)
 	{
-		InternalResponse response = new InternalResponse();
+		InternalResultsResponse<Dominios> response = new InternalResultsResponse<Dominios>();
 		try 
 		{ 
 			doQueryForObject(getSqlSession(), UPDATE_DOMINIOS, dominiosRequest);
+   dominios.setListinsalt((List<Auditoria>)doQueryForObject(getSqlSession(), INSERT_AUDITORIA, dominiosRequest));
 		}
 		catch (DuplicateKeyException ex) 
 		{
 			response.setStatus(Status.ExceptionError);
-			response.addMessage(SENSUS_MLC_DOMINIOSVALIDATOR_DOMINIOS_ALREADY_EXISTS, MessageSeverity.Info, MessageLevel.None);
+			response.addMessage(SENSUS_MLC_DOMINIOS_VALIDATOR_DOMINIOS_ALREADY_EXISTS, MessageSeverity.Info, MessageLevel.None);
 		}
 
 		return response;

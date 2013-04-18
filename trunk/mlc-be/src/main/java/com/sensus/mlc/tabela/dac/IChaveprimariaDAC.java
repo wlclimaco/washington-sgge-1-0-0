@@ -1,13 +1,13 @@
-package com.sensus.mlc.chaveprimaria.dac;
+package com.sensus.mlc.tabela.dac;
 
 
 import com.sensus.common.model.request.Request;
 import com.sensus.common.model.response.InternalResponse;
 import com.sensus.common.model.response.InternalResultsResponse;
-import com.sensus.mlc.chaveprimaria.model.Chaveprimaria
-import com.sensus.mlc.chaveprimaria.model.request.ChaveprimariaRequest;
-import com.sensus.mlc.chaveprimaria.model.request.InquiryChaveprimariaRequest;
-import com.sensus.mlc.chaveprimaria.model.response.ChaveprimariaResponse;
+import com.sensus.mlc.tabela.model.Chaveprimaria;
+import com.sensus.mlc.tabela.model.request.ChaveprimariaRequest;
+import com.sensus.mlc.tabela.model.request.InquiryChaveprimariaRequest;
+import com.sensus.mlc.tabela.model.response.ChaveprimariaResponse;
 
 /**
 * The Interface IActionDAC.
@@ -15,7 +15,7 @@ import com.sensus.mlc.chaveprimaria.model.response.ChaveprimariaResponse;
 * @author - Washington
 *
 */
-public interface IChaveprimariaDAC;
+public interface IChaveprimariaDAC
 {
 
 /**

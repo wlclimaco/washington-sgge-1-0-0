@@ -1,36 +1,50 @@
 package com.sensus.mlc.tabela.bcl.impl;
 
+import static com.sensus.mlc.base.util.LCActionUtil.createMessageInfoNone;
+import static com.sensus.mlc.base.util.LCActionUtil.createMessageWarningOther;
 import static com.sensus.mlc.base.util.LCHelp.createInquiryLightRequest;
 import static com.sensus.mlc.base.util.LCHelp.createProcessItemWithFailure;
 import static com.sensus.mlc.base.util.LCHelp.createProcessRequest;
+import static com.sensus.mlc.base.util.LCPropertiesExtractorUtil.extractLightId;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import com.sensus.common.model.Message;
+import com.sensus.common.model.Message.MessageLevel;
+import com.sensus.common.model.Message.MessageSeverity;
+import com.sensus.common.model.MessageInfo;
 import com.sensus.common.model.response.InternalResponse;
 import com.sensus.common.model.response.InternalResponse.Status;
 import com.sensus.common.model.response.InternalResultsResponse;
+import com.sensus.common.util.SensusAppContext;
 import com.sensus.common.validation.ValidationUtil;
+import com.sensus.mlc.base.model.MLCSortExpression;
 import com.sensus.mlc.base.util.LCDateUtil;
 import com.sensus.mlc.base.util.LCHelp;
-import com.sensus.mlc.gestao.model.Empresa;
 import com.sensus.mlc.process.bcl.IProcessBCL;
 import com.sensus.mlc.process.model.LCAction;
 import com.sensus.mlc.process.model.LCActionParameter;
 import com.sensus.mlc.process.model.LCActionTypeEnum;
+import com.sensus.mlc.process.model.Process;
 import com.sensus.mlc.process.model.ProcessItemStatusEnum;
 import com.sensus.mlc.process.model.ProcessStatusReasonEnum;
 import com.sensus.mlc.process.model.request.ProcessRequest;
+import com.sensus.mlc.smartpoint.bcl.ISmartPointAccessorBCL;
 import com.sensus.mlc.smartpoint.model.Light;
+import com.sensus.mlc.smartpoint.model.LightOrderByEnum;
+import com.sensus.mlc.smartpoint.model.LightStatusEnum;
 import com.sensus.mlc.smartpoint.model.PropertyEnum;
+import com.sensus.mlc.smartpoint.model.SearchLight;
 import com.sensus.mlc.smartpoint.model.SearchParameter;
 import com.sensus.mlc.smartpoint.model.request.InquiryLightRequest;
-import com.sensus.mlc.tabela.bcl.IAtributosBCL;
-import com.sensus.mlc.tabela.dac.IAtributosDAC;
-import com.sensus.mlc.tabela.model.Atributos;
-import com.sensus.mlc.tabela.model.request.AtributosRequest;
-import com.sensus.mlc.tabela.model.request.InquiryAtributosRequest;
-
+import com.sensus.mlc.smartpoint.model.request.LightRequest;
+import com.sensus.mlc.atributos.bcl.IAtributosBCL;
+import com.sensus.mlc.atributos.dac.IAtributosDAC;
+import com.sensus.mlc.atributos.model.Atributos;
+import com.sensus.mlc.atributos.model.request.InquiryAtributosRequest;
+import com.sensus.mlc.atributos.model.request.AtributosRequest;
 
 /** 
  * The Class AtributosBCLImpl. 
@@ -209,7 +223,7 @@ public class AtributosBCLImpl implements IAtributosBCL
 	@Override 
 	public InternalResultsResponse<Atributos> updateAtributos(AtributosRequest atributosRequest)
 	{ 
-		InternalResultsResponse<Empresa> response = getAtributosDAC().updateAtributos(atributosRequest);
+		InternalResultsResponse<Atributos> response = getAtributosDAC().updateAtributos(atributosRequest);
 
 		if (!response.isInError()) 
 		{ 
@@ -257,9 +271,9 @@ public class AtributosBCLImpl implements IAtributosBCL
 		Atributos atributos = atributosRequest.getAtributos();
 
 		List<LCActionParameter> actionParameters = new ArrayList<LCActionParameter>();
-		actionParameters.add(new LCActionParameter(PropertyEnum.EMPRESA_ID, String.valueOf(empresa.getCodemp())));
-   actionParameters.add(new LCActionParameter(PropertyEnum.EMPRESA_ID, empresa.getCodemp().toString()));
-   InquiryLightRequest lightRequest = createInquiryLightRequest(empresaRequest);
+		actionParameters.add(new LCActionParameter(PropertyEnum.EMPRESA_ID, String.valueOf(atributos.getCodemp())));
+   actionParameters.add(new LCActionParameter(PropertyEnum.EMPRESA_ID, atributos.getCodemp().toString()));
+   InquiryLightRequest lightRequest = createInquiryLightRequest(atributosRequest);
    Integer lightAmount = 1;
 
 		LCAction action = new LCAction(lcActionType);

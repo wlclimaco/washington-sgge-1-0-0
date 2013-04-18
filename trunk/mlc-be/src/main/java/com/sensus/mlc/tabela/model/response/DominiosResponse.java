@@ -1,68 +1,52 @@
 package com.sensus.mlc.tabela.model.response;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import com.sensus.common.model.response.Response;
 import com.sensus.mlc.tabela.model.Dominios;
 
-
-// TODO: Auto-generated Javadoc
 /**
  * The Class DominiosResponse.
+ *
+ * @author - Washington
  */
 public class DominiosResponse extends Response
 {
 
-    /** The parent retry. */
-    private Integer parentRetry;
-
-    /** The dominioss. */
-    private List<Dominios> dominioss ;
-
-	/**
-	 * Gets the parent retry.
-	 *
-	 * @return the parent retry
-	 */
-	public Integer getParentRetry() {
-		return parentRetry;
-	}
-
-	/**
-	 * Sets the parent retry.
-	 *
-	 * @param parentRetry the new parent retry
-	 */
-	public void setParentRetry(Integer parentRetry) {
-		this.parentRetry = parentRetry;
-	}
-
-	/**
-	 * Gets the dominioss.
-	 *
-	 * @return the dominioss
-	 */
-	public List<Dominios> getDominioss() {
-		return dominioss;
-	}
+	/** The dominios. */
+	private List<Dominios> dominios = new ArrayList<Dominios>();
 
 	/**
 	 * Sets the dominioss.
-	 *
-	 * @param dominioss the new dominioss
+	 * 
+	 * @param dominiosList the new dominios
 	 */
-	public void setDominioss(List<Dominios> dominioss) {
-		this.dominioss = dominioss;
+	public void setDominioss(List<Dominios> dominiosList)
+	{
+		this.dominios = dominiosList;
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * Gets the dominios.
+	 * 
+	 * @return the dominios
+	 */
+	public List<Dominios> getDominios()
+	{
+		return this.dominios;
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
-	public String toString() {
-		return "DominiosResponse [parentRetry=" + parentRetry + ", dominioss="
-				+ dominioss + ", getParentRetry()=" + getParentRetry()
-				+ ", getDominioss()=" + getDominioss() + "]";
+	public String toString()
+	{
+		return "DominiosResponse [getDominios()=" + this.getDominios() + ", getMessageIterator()=" + this.getMessageIterator()
+				+ ", getMessageList()=" + this.getMessageList() + ", getMessageInfoList()=" + this.getMessageInfoList()
+				+ ", isOperationSuccess()=" + this.isOperationSuccess() + "]";
 	}
-
-
 }
+
