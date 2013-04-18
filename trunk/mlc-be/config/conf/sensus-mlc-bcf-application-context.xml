@@ -98,241 +98,195 @@
 		<property name="lightingControlInquiryRequestValidationController" ref="lightingControlInquiryRequestValidationController" />
 		<property name="lightSelectionRequestValidationController" 	ref="lightSelectionRequestValidationController"/>
 	</bean>
-	
-	
-	
-	
 
-<!-- ------------------Criado via Sistema Tipcliente------------------------------------------------------------------------------------------------- -->
-	<bean id="tipclienteBCF" class="com.sensus.mlc.tipcliente.bcf.impl.TipclienteBCFImpl">
-      <property name="tipclienteBCL" ref="tipclienteBCLTarget" />
-      <property name="tipclienteValidationController" ref="tipclienteValidationController" />
-      <property name="tipclienteRequestValidationController" ref="tipclienteRequestValidationController" />
-      <property name="tipclienteListValidationController" ref="tipclienteListValidationController" />  
-  </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Classcliente------------------------------------------------------------------------------------------------- -->
-	<bean id="classclienteBCF" class="com.sensus.mlc.classcliente.bcf.impl.ClassclienteBCFImpl">
-      <property name="classclienteBCL" ref="classclienteBCLTarget" />
-      <property name="classclienteValidationController" ref="classclienteValidationController" />
-      <property name="classclienteRequestValidationController" ref="classclienteRequestValidationController" />
-      <property name="classclienteListValidationController" ref="classclienteListValidationController" />  
-  </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Unimed------------------------------------------------------------------------------------------------- -->
-	<bean id="unimedBCF" class="com.sensus.mlc.unimed.bcf.impl.UnimedBCFImpl">
-      <property name="unimedBCL" ref="unimedBCLTarget" />
-      <property name="unimedValidationController" ref="unimedValidationController" />
-      <property name="unimedRequestValidationController" ref="unimedRequestValidationController" />
-      <property name="unimedListValidationController" ref="unimedListValidationController" />  
-  </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Embalagens------------------------------------------------------------------------------------------------- -->
-	<bean id="embalagensBCF" class="com.sensus.mlc.embalagens.bcf.impl.EmbalagensBCFImpl">
-      <property name="embalagensBCL" ref="embalagensBCLTarget" />
-      <property name="embalagensValidationController" ref="embalagensValidationController" />
-      <property name="embalagensRequestValidationController" ref="embalagensRequestValidationController" />
-      <property name="embalagensListValidationController" ref="embalagensListValidationController" />  
-  </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Embalagens------------------------------------------------------------------------------------------------- -->
-	<bean id="embalagensBCF" class="com.sensus.mlc.embalagens.bcf.impl.EmbalagensBCFImpl">
-      <property name="embalagensBCL" ref="embalagensBCLTarget" />
-      <property name="embalagensValidationController" ref="embalagensValidationController" />
-      <property name="embalagensRequestValidationController" ref="embalagensRequestValidationController" />
-      <property name="embalagensListValidationController" ref="embalagensListValidationController" />  
-  </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Titulares------------------------------------------------------------------------------------------------- -->
-	<bean id="titularesBCF" class="com.sensus.mlc.titulares.bcf.impl.TitularesBCFImpl">
-      <property name="titularesBCL" ref="titularesBCLTarget" />
-      <property name="titularesValidationController" ref="titularesValidationController" />
-      <property name="titularesRequestValidationController" ref="titularesRequestValidationController" />
-      <property name="titularesListValidationController" ref="titularesListValidationController" />  
-  </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Eventos------------------------------------------------------------------------------------------------- -->
-	<bean id="eventosBCF" class="com.sensus.mlc.eventos.bcf.impl.EventosBCFImpl">
-      <property name="eventosBCL" ref="eventosBCLTarget" />
-      <property name="eventosValidationController" ref="eventosValidationController" />
-      <property name="eventosRequestValidationController" ref="eventosRequestValidationController" />
-      <property name="eventosListValidationController" ref="eventosListValidationController" />  
-  </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Pais------------------------------------------------------------------------------------------------- -->
-	<bean id="paisBCF" class="com.sensus.mlc.pais.bcf.impl.PaisBCFImpl">
-      <property name="paisBCL" ref="paisBCLTarget" />
-      <property name="paisValidationController" ref="paisValidationController" />
-      <property name="paisRequestValidationController" ref="paisRequestValidationController" />
-      <property name="paisListValidationController" ref="paisListValidationController" />  
-  </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Uf------------------------------------------------------------------------------------------------- -->
-	<bean id="ufBCF" class="com.sensus.mlc.uf.bcf.impl.UfBCFImpl">
-      <property name="ufBCL" ref="ufBCLTarget" />
-      <property name="ufValidationController" ref="ufValidationController" />
-      <property name="ufRequestValidationController" ref="ufRequestValidationController" />
-      <property name="ufListValidationController" ref="ufListValidationController" />  
-  </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Municipio------------------------------------------------------------------------------------------------- -->
-	<bean id="municipioBCF" class="com.sensus.mlc.municipio.bcf.impl.MunicipioBCFImpl">
-      <property name="municipioBCL" ref="municipioBCLTarget" />
-      <property name="municipioValidationController" ref="municipioValidationController" />
-      <property name="municipioRequestValidationController" ref="municipioRequestValidationController" />
-      <property name="municipioListValidationController" ref="municipioListValidationController" />  
-  </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Municipio------------------------------------------------------------------------------------------------- -->
-	<bean id="municipioBCF" class="com.sensus.mlc.municipio.bcf.impl.MunicipioBCFImpl">
-      <property name="municipioBCL" ref="municipioBCLTarget" />
-      <property name="municipioValidationController" ref="municipioValidationController" />
-      <property name="municipioRequestValidationController" ref="municipioRequestValidationController" />
-      <property name="municipioListValidationController" ref="municipioListValidationController" />  
-  </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Bairro------------------------------------------------------------------------------------------------- -->
-	<bean id="bairroBCF" class="com.sensus.mlc.bairro.bcf.impl.BairroBCFImpl">
-      <property name="bairroBCL" ref="bairroBCLTarget" />
-      <property name="bairroValidationController" ref="bairroValidationController" />
-      <property name="bairroRequestValidationController" ref="bairroRequestValidationController" />
-      <property name="bairroListValidationController" ref="bairroListValidationController" />  
-  </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Cnae------------------------------------------------------------------------------------------------- -->
-	<bean id="cnaeBCF" class="com.sensus.mlc.cnae.bcf.impl.CnaeBCFImpl">
-      <property name="cnaeBCL" ref="cnaeBCLTarget" />
-      <property name="cnaeValidationController" ref="cnaeValidationController" />
-      <property name="cnaeRequestValidationController" ref="cnaeRequestValidationController" />
-      <property name="cnaeListValidationController" ref="cnaeListValidationController" />  
-  </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Endereco------------------------------------------------------------------------------------------------- -->
-	<bean id="enderecoBCF" class="com.sensus.mlc.endereco.bcf.impl.EnderecoBCFImpl">
-      <property name="enderecoBCL" ref="enderecoBCLTarget" />
-      <property name="enderecoValidationController" ref="enderecoValidationController" />
-      <property name="enderecoRequestValidationController" ref="enderecoRequestValidationController" />
-      <property name="enderecoListValidationController" ref="enderecoListValidationController" />  
-  </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Filial------------------------------------------------------------------------------------------------- -->
-	<bean id="filialBCF" class="com.sensus.mlc.filial.bcf.impl.FilialBCFImpl">
-      <property name="filialBCL" ref="filialBCLTarget" />
-      <property name="filialValidationController" ref="filialValidationController" />
-      <property name="filialRequestValidationController" ref="filialRequestValidationController" />
-      <property name="filialListValidationController" ref="filialListValidationController" />  
-  </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Empresa------------------------------------------------------------------------------------------------- -->
-	<bean id="empresaBCF" class="com.sensus.mlc.empresa.bcf.impl.EmpresaBCFImpl">
-      <property name="empresaBCL" ref="empresaBCLTarget" />
-      <property name="empresaValidationController" ref="empresaValidationController" />
-      <property name="empresaRequestValidationController" ref="empresaRequestValidationController" />
-      <property name="empresaListValidationController" ref="empresaListValidationController" />  
-  </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Chaveestrangeira------------------------------------------------------------------------------------------------- -->
-	<bean id="chaveestrangeiraBCF" class="com.sensus.mlc.chaveestrangeira.bcf.impl.ChaveestrangeiraBCFImpl">
+<bean id="chaveestrangeiraBCF" class="com.sensus.mlc.chaveestrangeira.bcf.impl.ChaveestrangeiraBCFImpl">
       <property name="chaveestrangeiraBCL" ref="chaveestrangeiraBCLTarget" />
       <property name="chaveestrangeiraValidationController" ref="chaveestrangeiraValidationController" />
       <property name="chaveestrangeiraRequestValidationController" ref="chaveestrangeiraRequestValidationController" />
-      <property name="chaveestrangeiraListValidationController" ref="chaveestrangeiraListValidationController" />  
+      <property name="chaveestrangeiraListValidationController" ref="chaveestrangeiraListValidationController" />
   </bean>
 
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
+	<bean id="chaveprimariaBCF" class="com.sensus.mlc.chaveprimaria.bcf.impl.ChaveprimariaBCFImpl">
+      <property name="chaveprimariaBCL" ref="chaveprimariaBCLTarget" />
+      <property name="chaveprimariaValidationController" ref="chaveprimariaValidationController" />
+      <property name="chaveprimariaRequestValidationController" ref="chaveprimariaRequestValidationController" />
+      <property name="chaveprimariaListValidationController" ref="chaveprimariaListValidationController" />
+  </bean>
 
-
-<!-- ------------------Criado via Sistema Dominios------------------------------------------------------------------------------------------------- -->
 	<bean id="dominiosBCF" class="com.sensus.mlc.dominios.bcf.impl.DominiosBCFImpl">
       <property name="dominiosBCL" ref="dominiosBCLTarget" />
       <property name="dominiosValidationController" ref="dominiosValidationController" />
       <property name="dominiosRequestValidationController" ref="dominiosRequestValidationController" />
-      <property name="dominiosListValidationController" ref="dominiosListValidationController" />  
+      <property name="dominiosListValidationController" ref="dominiosListValidationController" />
   </bean>
 
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Dominios------------------------------------------------------------------------------------------------- -->
-	<bean id="dominiosBCF" class="com.sensus.mlc.dominios.bcf.impl.DominiosBCFImpl">
-      <property name="dominiosBCL" ref="dominiosBCLTarget" />
-      <property name="dominiosValidationController" ref="dominiosValidationController" />
-      <property name="dominiosRequestValidationController" ref="dominiosRequestValidationController" />
-      <property name="dominiosListValidationController" ref="dominiosListValidationController" />  
+	<bean id="tabelaBCF" class="com.sensus.mlc.tabela.bcf.impl.TabelaBCFImpl">
+      <property name="tabelaBCL" ref="tabelaBCLTarget" />
+      <property name="tabelaValidationController" ref="tabelaValidationController" />
+      <property name="tabelaRequestValidationController" ref="tabelaRequestValidationController" />
+      <property name="tabelaListValidationController" ref="tabelaListValidationController" />
   </bean>
 
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Atributos------------------------------------------------------------------------------------------------- -->
 	<bean id="atributosBCF" class="com.sensus.mlc.atributos.bcf.impl.AtributosBCFImpl">
       <property name="atributosBCL" ref="atributosBCLTarget" />
       <property name="atributosValidationController" ref="atributosValidationController" />
       <property name="atributosRequestValidationController" ref="atributosRequestValidationController" />
-      <property name="atributosListValidationController" ref="atributosListValidationController" />  
+      <property name="atributosListValidationController" ref="atributosListValidationController" />
   </bean>
 
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
+	<bean id="tabelaBCF" class="com.sensus.mlc.tabela.bcf.impl.TabelaBCFImpl">
+      <property name="tabelaBCL" ref="tabelaBCLTarget" />
+      <property name="tabelaValidationController" ref="tabelaValidationController" />
+      <property name="tabelaRequestValidationController" ref="tabelaRequestValidationController" />
+      <property name="tabelaListValidationController" ref="tabelaListValidationController" />
+  </bean>
 
+	<bean id="tipclienteBCF" class="com.sensus.mlc.tipcliente.bcf.impl.TipclienteBCFImpl">
+      <property name="tipclienteBCL" ref="tipclienteBCLTarget" />
+      <property name="tipclienteValidationController" ref="tipclienteValidationController" />
+      <property name="tipclienteRequestValidationController" ref="tipclienteRequestValidationController" />
+      <property name="tipclienteListValidationController" ref="tipclienteListValidationController" />
+  </bean>
 
-<!-- ------------------Criado via Sistema Tabela------------------------------------------------------------------------------------------------- -->
+	<bean id="classclienteBCF" class="com.sensus.mlc.classcliente.bcf.impl.ClassclienteBCFImpl">
+      <property name="classclienteBCL" ref="classclienteBCLTarget" />
+      <property name="classclienteValidationController" ref="classclienteValidationController" />
+      <property name="classclienteRequestValidationController" ref="classclienteRequestValidationController" />
+      <property name="classclienteListValidationController" ref="classclienteListValidationController" />
+  </bean>
+
+	<bean id="unimedBCF" class="com.sensus.mlc.unimed.bcf.impl.UnimedBCFImpl">
+      <property name="unimedBCL" ref="unimedBCLTarget" />
+      <property name="unimedValidationController" ref="unimedValidationController" />
+      <property name="unimedRequestValidationController" ref="unimedRequestValidationController" />
+      <property name="unimedListValidationController" ref="unimedListValidationController" />
+  </bean>
+
+	<bean id="embalagensBCF" class="com.sensus.mlc.embalagens.bcf.impl.EmbalagensBCFImpl">
+      <property name="embalagensBCL" ref="embalagensBCLTarget" />
+      <property name="embalagensValidationController" ref="embalagensValidationController" />
+      <property name="embalagensRequestValidationController" ref="embalagensRequestValidationController" />
+      <property name="embalagensListValidationController" ref="embalagensListValidationController" />
+  </bean>
+
+	<bean id="embalagensBCF" class="com.sensus.mlc.embalagens.bcf.impl.EmbalagensBCFImpl">
+      <property name="embalagensBCL" ref="embalagensBCLTarget" />
+      <property name="embalagensValidationController" ref="embalagensValidationController" />
+      <property name="embalagensRequestValidationController" ref="embalagensRequestValidationController" />
+      <property name="embalagensListValidationController" ref="embalagensListValidationController" />
+  </bean>
+
+	<bean id="titularesBCF" class="com.sensus.mlc.titulares.bcf.impl.TitularesBCFImpl">
+      <property name="titularesBCL" ref="titularesBCLTarget" />
+      <property name="titularesValidationController" ref="titularesValidationController" />
+      <property name="titularesRequestValidationController" ref="titularesRequestValidationController" />
+      <property name="titularesListValidationController" ref="titularesListValidationController" />
+  </bean>
+
+	<bean id="eventosBCF" class="com.sensus.mlc.eventos.bcf.impl.EventosBCFImpl">
+      <property name="eventosBCL" ref="eventosBCLTarget" />
+      <property name="eventosValidationController" ref="eventosValidationController" />
+      <property name="eventosRequestValidationController" ref="eventosRequestValidationController" />
+      <property name="eventosListValidationController" ref="eventosListValidationController" />
+  </bean>
+
+	<bean id="paisBCF" class="com.sensus.mlc.pais.bcf.impl.PaisBCFImpl">
+      <property name="paisBCL" ref="paisBCLTarget" />
+      <property name="paisValidationController" ref="paisValidationController" />
+      <property name="paisRequestValidationController" ref="paisRequestValidationController" />
+      <property name="paisListValidationController" ref="paisListValidationController" />
+  </bean>
+
+<bean id="ufBCF" class="com.sensus.mlc.uf.bcf.impl.UfBCFImpl">
+      <property name="ufBCL" ref="ufBCLTarget" />
+      <property name="ufValidationController" ref="ufValidationController" />
+      <property name="ufRequestValidationController" ref="ufRequestValidationController" />
+      <property name="ufListValidationController" ref="ufListValidationController" />
+  </bean>
+
+	<bean id="municipioBCF" class="com.sensus.mlc.municipio.bcf.impl.MunicipioBCFImpl">
+      <property name="municipioBCL" ref="municipioBCLTarget" />
+      <property name="municipioValidationController" ref="municipioValidationController" />
+      <property name="municipioRequestValidationController" ref="municipioRequestValidationController" />
+      <property name="municipioListValidationController" ref="municipioListValidationController" />
+  </bean>
+
+	<bean id="municipioBCF" class="com.sensus.mlc.municipio.bcf.impl.MunicipioBCFImpl">
+      <property name="municipioBCL" ref="municipioBCLTarget" />
+      <property name="municipioValidationController" ref="municipioValidationController" />
+      <property name="municipioRequestValidationController" ref="municipioRequestValidationController" />
+      <property name="municipioListValidationController" ref="municipioListValidationController" />
+  </bean>
+
+	<bean id="bairroBCF" class="com.sensus.mlc.bairro.bcf.impl.BairroBCFImpl">
+      <property name="bairroBCL" ref="bairroBCLTarget" />
+      <property name="bairroValidationController" ref="bairroValidationController" />
+      <property name="bairroRequestValidationController" ref="bairroRequestValidationController" />
+      <property name="bairroListValidationController" ref="bairroListValidationController" />
+  </bean>
+
+	<bean id="cnaeBCF" class="com.sensus.mlc.cnae.bcf.impl.CnaeBCFImpl">
+      <property name="cnaeBCL" ref="cnaeBCLTarget" />
+      <property name="cnaeValidationController" ref="cnaeValidationController" />
+      <property name="cnaeRequestValidationController" ref="cnaeRequestValidationController" />
+      <property name="cnaeListValidationController" ref="cnaeListValidationController" />
+  </bean>
+
+	<bean id="enderecoBCF" class="com.sensus.mlc.endereco.bcf.impl.EnderecoBCFImpl">
+      <property name="enderecoBCL" ref="enderecoBCLTarget" />
+      <property name="enderecoValidationController" ref="enderecoValidationController" />
+      <property name="enderecoRequestValidationController" ref="enderecoRequestValidationController" />
+      <property name="enderecoListValidationController" ref="enderecoListValidationController" />
+  </bean>
+
+	<bean id="filialBCF" class="com.sensus.mlc.filial.bcf.impl.FilialBCFImpl">
+      <property name="filialBCL" ref="filialBCLTarget" />
+      <property name="filialValidationController" ref="filialValidationController" />
+      <property name="filialRequestValidationController" ref="filialRequestValidationController" />
+      <property name="filialListValidationController" ref="filialListValidationController" />
+  </bean>
+
+	<bean id="empresaBCF" class="com.sensus.mlc.empresa.bcf.impl.EmpresaBCFImpl">
+      <property name="empresaBCL" ref="empresaBCLTarget" />
+      <property name="empresaValidationController" ref="empresaValidationController" />
+      <property name="empresaRequestValidationController" ref="empresaRequestValidationController" />
+      <property name="empresaListValidationController" ref="empresaListValidationController" />
+  </bean>
+
+	<bean id="chaveestrangeiraBCF" class="com.sensus.mlc.chaveestrangeira.bcf.impl.ChaveestrangeiraBCFImpl">
+      <property name="chaveestrangeiraBCL" ref="chaveestrangeiraBCLTarget" />
+      <property name="chaveestrangeiraValidationController" ref="chaveestrangeiraValidationController" />
+      <property name="chaveestrangeiraRequestValidationController" ref="chaveestrangeiraRequestValidationController" />
+      <property name="chaveestrangeiraListValidationController" ref="chaveestrangeiraListValidationController" />
+  </bean>
+
+	<bean id="dominiosBCF" class="com.sensus.mlc.dominios.bcf.impl.DominiosBCFImpl">
+      <property name="dominiosBCL" ref="dominiosBCLTarget" />
+      <property name="dominiosValidationController" ref="dominiosValidationController" />
+      <property name="dominiosRequestValidationController" ref="dominiosRequestValidationController" />
+      <property name="dominiosListValidationController" ref="dominiosListValidationController" />
+  </bean>
+
+	<bean id="dominiosBCF" class="com.sensus.mlc.dominios.bcf.impl.DominiosBCFImpl">
+      <property name="dominiosBCL" ref="dominiosBCLTarget" />
+      <property name="dominiosValidationController" ref="dominiosValidationController" />
+      <property name="dominiosRequestValidationController" ref="dominiosRequestValidationController" />
+      <property name="dominiosListValidationController" ref="dominiosListValidationController" />
+  </bean>
+
+	<bean id="atributosBCF" class="com.sensus.mlc.atributos.bcf.impl.AtributosBCFImpl">
+      <property name="atributosBCL" ref="atributosBCLTarget" />
+      <property name="atributosValidationController" ref="atributosValidationController" />
+      <property name="atributosRequestValidationController" ref="atributosRequestValidationController" />
+      <property name="atributosListValidationController" ref="atributosListValidationController" />
+  </bean>
+
 	<bean id="TabelaBCF" class="com.sensus.mlc.Tabela.bcf.impl.TabelaBCFImpl">
       <property name="TabelaBCL" ref="TabelaBCLTarget" />
       <property name="TabelaValidationController" ref="TabelaValidationController" />
       <property name="TabelaRequestValidationController" ref="TabelaRequestValidationController" />
-      <property name="TabelaListValidationController" ref="TabelaListValidationController" />  
+      <property name="TabelaListValidationController" ref="TabelaListValidationController" />
   </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
 
 	<bean id="processBCF" class="com.sensus.mlc.process.bcf.impl.ProcessBCFImpl">
 		<property name="processBCL" ref="processBCLTarget" />
@@ -381,6 +335,12 @@
 	</bean>
 
 </beans>
+
+
+
+
+
+
 
 
 

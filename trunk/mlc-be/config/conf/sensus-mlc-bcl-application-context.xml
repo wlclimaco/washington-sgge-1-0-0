@@ -91,189 +91,127 @@
 		<property name="systemId" ref="systemIdTarget" />
 	</bean>
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-<!-- ------------------Criado via Sistema Tipcliente------------------------------------------------------------------------------------------------- -->
-<bean id="tipclienteBCLTarget" class="com.sensus.mlc.tipcliente.bcl.impl.TipclienteBCLImpl">
-     <property name="tipclienteDAC" ref="tipclienteDACTarget" />
-  </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
 
 
-<!-- ------------------Criado via Sistema Classcliente------------------------------------------------------------------------------------------------- -->
-<bean id="classclienteBCLTarget" class="com.sensus.mlc.classcliente.bcl.impl.ClassclienteBCLImpl">
-     <property name="classclienteDAC" ref="classclienteDACTarget" />
-  </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
 
 
-<!-- ------------------Criado via Sistema Unimed------------------------------------------------------------------------------------------------- -->
-<bean id="unimedBCLTarget" class="com.sensus.mlc.unimed.bcl.impl.UnimedBCLImpl">
-     <property name="unimedDAC" ref="unimedDACTarget" />
-  </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
 
 
-<!-- ------------------Criado via Sistema Embalagens------------------------------------------------------------------------------------------------- -->
-<bean id="embalagensBCLTarget" class="com.sensus.mlc.embalagens.bcl.impl.EmbalagensBCLImpl">
-     <property name="embalagensDAC" ref="embalagensDACTarget" />
-  </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
 
 
-<!-- ------------------Criado via Sistema Embalagens------------------------------------------------------------------------------------------------- -->
-<bean id="embalagensBCLTarget" class="com.sensus.mlc.embalagens.bcl.impl.EmbalagensBCLImpl">
-     <property name="embalagensDAC" ref="embalagensDACTarget" />
-  </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
 
 
-<!-- ------------------Criado via Sistema Titulares------------------------------------------------------------------------------------------------- -->
-<bean id="titularesBCLTarget" class="com.sensus.mlc.titulares.bcl.impl.TitularesBCLImpl">
-     <property name="titularesDAC" ref="titularesDACTarget" />
-  </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
 
 
-<!-- ------------------Criado via Sistema Eventos------------------------------------------------------------------------------------------------- -->
-<bean id="eventosBCLTarget" class="com.sensus.mlc.eventos.bcl.impl.EventosBCLImpl">
-     <property name="eventosDAC" ref="eventosDACTarget" />
-  </bean>
 
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Pais------------------------------------------------------------------------------------------------- -->
-<bean id="paisBCLTarget" class="com.sensus.mlc.pais.bcl.impl.PaisBCLImpl">
-     <property name="paisDAC" ref="paisDACTarget" />
-  </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Uf------------------------------------------------------------------------------------------------- -->
-<bean id="ufBCLTarget" class="com.sensus.mlc.uf.bcl.impl.UfBCLImpl">
-     <property name="ufDAC" ref="ufDACTarget" />
-  </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Municipio------------------------------------------------------------------------------------------------- -->
-<bean id="municipioBCLTarget" class="com.sensus.mlc.municipio.bcl.impl.MunicipioBCLImpl">
-     <property name="municipioDAC" ref="municipioDACTarget" />
-  </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Municipio------------------------------------------------------------------------------------------------- -->
-<bean id="municipioBCLTarget" class="com.sensus.mlc.municipio.bcl.impl.MunicipioBCLImpl">
-     <property name="municipioDAC" ref="municipioDACTarget" />
-  </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Bairro------------------------------------------------------------------------------------------------- -->
-<bean id="bairroBCLTarget" class="com.sensus.mlc.bairro.bcl.impl.BairroBCLImpl">
-     <property name="bairroDAC" ref="bairroDACTarget" />
-  </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Cnae------------------------------------------------------------------------------------------------- -->
-<bean id="cnaeBCLTarget" class="com.sensus.mlc.cnae.bcl.impl.CnaeBCLImpl">
-     <property name="cnaeDAC" ref="cnaeDACTarget" />
-  </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Endereco------------------------------------------------------------------------------------------------- -->
-<bean id="enderecoBCLTarget" class="com.sensus.mlc.endereco.bcl.impl.EnderecoBCLImpl">
-     <property name="enderecoDAC" ref="enderecoDACTarget" />
-  </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Filial------------------------------------------------------------------------------------------------- -->
-<bean id="filialBCLTarget" class="com.sensus.mlc.filial.bcl.impl.FilialBCLImpl">
-     <property name="filialDAC" ref="filialDACTarget" />
-  </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Empresa------------------------------------------------------------------------------------------------- -->
-<bean id="empresaBCLTarget" class="com.sensus.mlc.empresa.bcl.impl.EmpresaBCLImpl">
-     <property name="empresaDAC" ref="empresaDACTarget" />
-  </bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Chaveestrangeira------------------------------------------------------------------------------------------------- -->
 <bean id="chaveestrangeiraBCLTarget" class="com.sensus.mlc.chaveestrangeira.bcl.impl.ChaveestrangeiraBCLImpl">
      <property name="chaveestrangeiraDAC" ref="chaveestrangeiraDACTarget" />
+</bean>
+
+<bean id="chaveprimariaBCLTarget" class="com.sensus.mlc.chaveprimaria.bcl.impl.ChaveprimariaBCLImpl">
+     <property name="chaveprimariaDAC" ref="chaveprimariaDACTarget" />
   </bean>
 
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Dominios------------------------------------------------------------------------------------------------- -->
 <bean id="dominiosBCLTarget" class="com.sensus.mlc.dominios.bcl.impl.DominiosBCLImpl">
      <property name="dominiosDAC" ref="dominiosDACTarget" />
   </bean>
 
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Dominios------------------------------------------------------------------------------------------------- -->
-<bean id="dominiosBCLTarget" class="com.sensus.mlc.dominios.bcl.impl.DominiosBCLImpl">
-     <property name="dominiosDAC" ref="dominiosDACTarget" />
+<bean id="tabelaBCLTarget" class="com.sensus.mlc.tabela.bcl.impl.TabelaBCLImpl">
+     <property name="tabelaDAC" ref="tabelaDACTarget" />
   </bean>
 
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Atributos------------------------------------------------------------------------------------------------- -->
 <bean id="atributosBCLTarget" class="com.sensus.mlc.atributos.bcl.impl.AtributosBCLImpl">
      <property name="atributosDAC" ref="atributosDACTarget" />
   </bean>
 
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
+<bean id="tabelaBCLTarget" class="com.sensus.mlc.tabela.bcl.impl.TabelaBCLImpl">
+     <property name="tabelaDAC" ref="tabelaDACTarget" />
+  </bean>
 
+<bean id="tipclienteBCLTarget" class="com.sensus.mlc.tipcliente.bcl.impl.TipclienteBCLImpl">
+     <property name="tipclienteDAC" ref="tipclienteDACTarget" />
+  </bean>
 
-<!-- ------------------Criado via Sistema Tabela------------------------------------------------------------------------------------------------- -->
+<bean id="classclienteBCLTarget" class="com.sensus.mlc.classcliente.bcl.impl.ClassclienteBCLImpl">
+     <property name="classclienteDAC" ref="classclienteDACTarget" />
+  </bean>
+
+<bean id="unimedBCLTarget" class="com.sensus.mlc.unimed.bcl.impl.UnimedBCLImpl">
+     <property name="unimedDAC" ref="unimedDACTarget" />
+  </bean>
+
+<bean id="embalagensBCLTarget" class="com.sensus.mlc.embalagens.bcl.impl.EmbalagensBCLImpl">
+     <property name="embalagensDAC" ref="embalagensDACTarget" />
+  </bean>
+
+<bean id="embalagensBCLTarget" class="com.sensus.mlc.embalagens.bcl.impl.EmbalagensBCLImpl">
+     <property name="embalagensDAC" ref="embalagensDACTarget" />
+  </bean>
+
+<bean id="titularesBCLTarget" class="com.sensus.mlc.titulares.bcl.impl.TitularesBCLImpl">
+     <property name="titularesDAC" ref="titularesDACTarget" />
+  </bean>
+
+<bean id="eventosBCLTarget" class="com.sensus.mlc.eventos.bcl.impl.EventosBCLImpl">
+     <property name="eventosDAC" ref="eventosDACTarget" />
+  </bean>
+
+<bean id="paisBCLTarget" class="com.sensus.mlc.pais.bcl.impl.PaisBCLImpl">
+     <property name="paisDAC" ref="paisDACTarget" />
+  </bean>
+
+<bean id="ufBCLTarget" class="com.sensus.mlc.uf.bcl.impl.UfBCLImpl">
+     <property name="ufDAC" ref="ufDACTarget" />
+  </bean>
+
+<bean id="municipioBCLTarget" class="com.sensus.mlc.municipio.bcl.impl.MunicipioBCLImpl">
+     <property name="municipioDAC" ref="municipioDACTarget" />
+  </bean>
+
+<bean id="municipioBCLTarget" class="com.sensus.mlc.municipio.bcl.impl.MunicipioBCLImpl">
+     <property name="municipioDAC" ref="municipioDACTarget" />
+  </bean>
+
+<bean id="bairroBCLTarget" class="com.sensus.mlc.bairro.bcl.impl.BairroBCLImpl">
+     <property name="bairroDAC" ref="bairroDACTarget" />
+  </bean>
+
+<bean id="cnaeBCLTarget" class="com.sensus.mlc.cnae.bcl.impl.CnaeBCLImpl">
+     <property name="cnaeDAC" ref="cnaeDACTarget" />
+  </bean>
+
+<bean id="enderecoBCLTarget" class="com.sensus.mlc.endereco.bcl.impl.EnderecoBCLImpl">
+     <property name="enderecoDAC" ref="enderecoDACTarget" />
+  </bean>
+
+<bean id="filialBCLTarget" class="com.sensus.mlc.filial.bcl.impl.FilialBCLImpl">
+     <property name="filialDAC" ref="filialDACTarget" />
+  </bean>
+
+<bean id="empresaBCLTarget" class="com.sensus.mlc.empresa.bcl.impl.EmpresaBCLImpl">
+     <property name="empresaDAC" ref="empresaDACTarget" />
+  </bean>
+
+<bean id="chaveestrangeiraBCLTarget" class="com.sensus.mlc.chaveestrangeira.bcl.impl.ChaveestrangeiraBCLImpl">
+     <property name="chaveestrangeiraDAC" ref="chaveestrangeiraDACTarget" />
+  </bean>
+
+<bean id="dominiosBCLTarget" class="com.sensus.mlc.dominios.bcl.impl.DominiosBCLImpl">
+     <property name="dominiosDAC" ref="dominiosDACTarget" />
+  </bean>
+
+<bean id="dominiosBCLTarget" class="com.sensus.mlc.dominios.bcl.impl.DominiosBCLImpl">
+     <property name="dominiosDAC" ref="dominiosDACTarget" />
+  </bean>
+
+<bean id="atributosBCLTarget" class="com.sensus.mlc.atributos.bcl.impl.AtributosBCLImpl">
+     <property name="atributosDAC" ref="atributosDACTarget" />
+  </bean>
+
 <bean id="TabelaBCLTarget" class="com.sensus.mlc.Tabela.bcl.impl.TabelaBCLImpl">
      <property name="TabelaDAC" ref="TabelaDACTarget" />
   </bean>
 
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-	
-	
-	
-	
 	<bean id="smartPointProcessorBCLTarget" class="com.sensus.mlc.smartpoint.bcl.impl.SmartPointProcessorBCLImpl">
 		<property name="smartPointDAC" ref="smartPointDACTarget" />
 		<property name="processBCL" ref="processBCLTarget"/>
@@ -925,6 +863,12 @@
 
 
 </beans>
+
+
+
+
+
+
 
 
 
