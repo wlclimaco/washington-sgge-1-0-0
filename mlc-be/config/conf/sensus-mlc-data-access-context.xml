@@ -100,250 +100,10 @@
 
 	<!-- ========================= DAC DEFINITIONS: MYBATIS IMPLEMENTATIONS ========================= -->
 
-	
-	
 
-<!-- ------------------Criado via Sistema Tipcliente------------------------------------------------------------------------------------------------- -->
-<bean id="tipcliente-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-    <property name="configLocation"
-      value="classpath:com/sensus/mlc/tipcliente/dac/mybatis/map/tipcliente-sql-map-config.xml" />
-    <property name="dataSource" ref="mlcDataSource" />
-</bean>
 
 
-<bean id="tipclienteDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.TipclienteDACImpl">
-    <property name="sqlSessionFactory" ref="tipcliente-sqlSessionFactory" />
-</bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Classcliente------------------------------------------------------------------------------------------------- -->
-<bean id="classcliente-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-    <property name="configLocation"
-      value="classpath:com/sensus/mlc/classcliente/dac/mybatis/map/classcliente-sql-map-config.xml" />
-    <property name="dataSource" ref="mlcDataSource" />
-</bean>
-
-
-<bean id="classclienteDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.ClassclienteDACImpl">
-    <property name="sqlSessionFactory" ref="classcliente-sqlSessionFactory" />
-</bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Unimed------------------------------------------------------------------------------------------------- -->
-<bean id="unimed-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-    <property name="configLocation"
-      value="classpath:com/sensus/mlc/unimed/dac/mybatis/map/unimed-sql-map-config.xml" />
-    <property name="dataSource" ref="mlcDataSource" />
-</bean>
-
-
-<bean id="unimedDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.UnimedDACImpl">
-    <property name="sqlSessionFactory" ref="unimed-sqlSessionFactory" />
-</bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Embalagens------------------------------------------------------------------------------------------------- -->
-<bean id="embalagens-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-    <property name="configLocation"
-      value="classpath:com/sensus/mlc/embalagens/dac/mybatis/map/embalagens-sql-map-config.xml" />
-    <property name="dataSource" ref="mlcDataSource" />
-</bean>
-
-
-<bean id="embalagensDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.EmbalagensDACImpl">
-    <property name="sqlSessionFactory" ref="embalagens-sqlSessionFactory" />
-</bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Embalagens------------------------------------------------------------------------------------------------- -->
-<bean id="embalagens-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-    <property name="configLocation"
-      value="classpath:com/sensus/mlc/embalagens/dac/mybatis/map/embalagens-sql-map-config.xml" />
-    <property name="dataSource" ref="mlcDataSource" />
-</bean>
-
-
-<bean id="embalagensDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.EmbalagensDACImpl">
-    <property name="sqlSessionFactory" ref="embalagens-sqlSessionFactory" />
-</bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Titulares------------------------------------------------------------------------------------------------- -->
-<bean id="titulares-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-    <property name="configLocation"
-      value="classpath:com/sensus/mlc/titulares/dac/mybatis/map/titulares-sql-map-config.xml" />
-    <property name="dataSource" ref="mlcDataSource" />
-</bean>
-
-
-<bean id="titularesDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.TitularesDACImpl">
-    <property name="sqlSessionFactory" ref="titulares-sqlSessionFactory" />
-</bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Eventos------------------------------------------------------------------------------------------------- -->
-<bean id="eventos-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-    <property name="configLocation"
-      value="classpath:com/sensus/mlc/eventos/dac/mybatis/map/eventos-sql-map-config.xml" />
-    <property name="dataSource" ref="mlcDataSource" />
-</bean>
-
-
-<bean id="eventosDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.EventosDACImpl">
-    <property name="sqlSessionFactory" ref="eventos-sqlSessionFactory" />
-</bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Pais------------------------------------------------------------------------------------------------- -->
-<bean id="pais-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-    <property name="configLocation"
-      value="classpath:com/sensus/mlc/pais/dac/mybatis/map/pais-sql-map-config.xml" />
-    <property name="dataSource" ref="mlcDataSource" />
-</bean>
-
-
-<bean id="paisDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.PaisDACImpl">
-    <property name="sqlSessionFactory" ref="pais-sqlSessionFactory" />
-</bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Uf------------------------------------------------------------------------------------------------- -->
-<bean id="uf-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-    <property name="configLocation"
-      value="classpath:com/sensus/mlc/uf/dac/mybatis/map/uf-sql-map-config.xml" />
-    <property name="dataSource" ref="mlcDataSource" />
-</bean>
-
-
-<bean id="ufDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.UfDACImpl">
-    <property name="sqlSessionFactory" ref="uf-sqlSessionFactory" />
-</bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Municipio------------------------------------------------------------------------------------------------- -->
-<bean id="municipio-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-    <property name="configLocation"
-      value="classpath:com/sensus/mlc/municipio/dac/mybatis/map/municipio-sql-map-config.xml" />
-    <property name="dataSource" ref="mlcDataSource" />
-</bean>
-
-
-<bean id="municipioDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.MunicipioDACImpl">
-    <property name="sqlSessionFactory" ref="municipio-sqlSessionFactory" />
-</bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Municipio------------------------------------------------------------------------------------------------- -->
-<bean id="municipio-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-    <property name="configLocation"
-      value="classpath:com/sensus/mlc/municipio/dac/mybatis/map/municipio-sql-map-config.xml" />
-    <property name="dataSource" ref="mlcDataSource" />
-</bean>
-
-
-<bean id="municipioDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.MunicipioDACImpl">
-    <property name="sqlSessionFactory" ref="municipio-sqlSessionFactory" />
-</bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Bairro------------------------------------------------------------------------------------------------- -->
-<bean id="bairro-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-    <property name="configLocation"
-      value="classpath:com/sensus/mlc/bairro/dac/mybatis/map/bairro-sql-map-config.xml" />
-    <property name="dataSource" ref="mlcDataSource" />
-</bean>
-
-
-<bean id="bairroDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.BairroDACImpl">
-    <property name="sqlSessionFactory" ref="bairro-sqlSessionFactory" />
-</bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Cnae------------------------------------------------------------------------------------------------- -->
-<bean id="cnae-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-    <property name="configLocation"
-      value="classpath:com/sensus/mlc/cnae/dac/mybatis/map/cnae-sql-map-config.xml" />
-    <property name="dataSource" ref="mlcDataSource" />
-</bean>
-
-
-<bean id="cnaeDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.CnaeDACImpl">
-    <property name="sqlSessionFactory" ref="cnae-sqlSessionFactory" />
-</bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Endereco------------------------------------------------------------------------------------------------- -->
-<bean id="endereco-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-    <property name="configLocation"
-      value="classpath:com/sensus/mlc/endereco/dac/mybatis/map/endereco-sql-map-config.xml" />
-    <property name="dataSource" ref="mlcDataSource" />
-</bean>
-
-
-<bean id="enderecoDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.EnderecoDACImpl">
-    <property name="sqlSessionFactory" ref="endereco-sqlSessionFactory" />
-</bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Filial------------------------------------------------------------------------------------------------- -->
-<bean id="filial-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-    <property name="configLocation"
-      value="classpath:com/sensus/mlc/filial/dac/mybatis/map/filial-sql-map-config.xml" />
-    <property name="dataSource" ref="mlcDataSource" />
-</bean>
-
-
-<bean id="filialDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.FilialDACImpl">
-    <property name="sqlSessionFactory" ref="filial-sqlSessionFactory" />
-</bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Empresa------------------------------------------------------------------------------------------------- -->
-<bean id="empresa-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-    <property name="configLocation"
-      value="classpath:com/sensus/mlc/empresa/dac/mybatis/map/empresa-sql-map-config.xml" />
-    <property name="dataSource" ref="mlcDataSource" />
-</bean>
-
-
-<bean id="empresaDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.EmpresaDACImpl">
-    <property name="sqlSessionFactory" ref="empresa-sqlSessionFactory" />
-</bean>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- ------------------Criado via Sistema Chaveestrangeira------------------------------------------------------------------------------------------------- -->
+<!-- ============Criado via Sistema Chaveestrangeira========================================================================- -->
 <bean id="chaveestrangeira-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
     <property name="configLocation"
       value="classpath:com/sensus/mlc/chaveestrangeira/dac/mybatis/map/chaveestrangeira-sql-map-config.xml" />
@@ -355,10 +115,25 @@
     <property name="sqlSessionFactory" ref="chaveestrangeira-sqlSessionFactory" />
 </bean>
 
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
+<!-- =======================================================================================- -->
 
 
-<!-- ------------------Criado via Sistema Dominios------------------------------------------------------------------------------------------------- -->
+<!-- ==============Criado via Sistema Chaveprimaria========================================================================- -->
+<bean id="chaveprimaria-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="configLocation"
+      value="classpath:com/sensus/mlc/chaveprimaria/dac/mybatis/map/chaveprimaria-sql-map-config.xml" />
+    <property name="dataSource" ref="mlcDataSource" />
+</bean>
+
+
+<bean id="chaveprimariaDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.ChaveprimariaDACImpl">
+    <property name="sqlSessionFactory" ref="chaveprimaria-sqlSessionFactory" />
+</bean>
+
+<!-- =======================================================================================- -->
+
+
+<!-- ==============Criado via Sistema Dominios========================================================================- -->
 <bean id="dominios-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
     <property name="configLocation"
       value="classpath:com/sensus/mlc/dominios/dac/mybatis/map/dominios-sql-map-config.xml" />
@@ -370,25 +145,25 @@
     <property name="sqlSessionFactory" ref="dominios-sqlSessionFactory" />
 </bean>
 
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
+<!-- =======================================================================================- -->
 
 
-<!-- ------------------Criado via Sistema Dominios------------------------------------------------------------------------------------------------- -->
-<bean id="dominios-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+<!-- ==============Criado via Sistema Tabela========================================================================- -->
+<bean id="tabela-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
     <property name="configLocation"
-      value="classpath:com/sensus/mlc/dominios/dac/mybatis/map/dominios-sql-map-config.xml" />
+      value="classpath:com/sensus/mlc/tabela/dac/mybatis/map/tabela-sql-map-config.xml" />
     <property name="dataSource" ref="mlcDataSource" />
 </bean>
 
 
-<bean id="dominiosDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.DominiosDACImpl">
-    <property name="sqlSessionFactory" ref="dominios-sqlSessionFactory" />
+<bean id="tabelaDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.TabelaDACImpl">
+    <property name="sqlSessionFactory" ref="tabela-sqlSessionFactory" />
 </bean>
 
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
+<!-- =======================================================================================- -->
 
 
-<!-- ------------------Criado via Sistema Atributos------------------------------------------------------------------------------------------------- -->
+<!-- ==============Criado via Sistema Atributos========================================================================- -->
 <bean id="atributos-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
     <property name="configLocation"
       value="classpath:com/sensus/mlc/atributos/dac/mybatis/map/atributos-sql-map-config.xml" />
@@ -400,10 +175,325 @@
     <property name="sqlSessionFactory" ref="atributos-sqlSessionFactory" />
 </bean>
 
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
+<!-- =======================================================================================- -->
 
 
-<!-- ------------------Criado via Sistema Tabela------------------------------------------------------------------------------------------------- -->
+<!-- ==============Criado via Sistema Tabela========================================================================- -->
+<bean id="tabela-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="configLocation"
+      value="classpath:com/sensus/mlc/tabela/dac/mybatis/map/tabela-sql-map-config.xml" />
+    <property name="dataSource" ref="mlcDataSource" />
+</bean>
+
+
+<bean id="tabelaDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.TabelaDACImpl">
+    <property name="sqlSessionFactory" ref="tabela-sqlSessionFactory" />
+</bean>
+
+<!-- =======================================================================================- -->
+
+
+<!-- ==============Criado via Sistema Tipcliente========================================================================- -->
+<bean id="tipcliente-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="configLocation"
+      value="classpath:com/sensus/mlc/tipcliente/dac/mybatis/map/tipcliente-sql-map-config.xml" />
+    <property name="dataSource" ref="mlcDataSource" />
+</bean>
+
+
+<bean id="tipclienteDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.TipclienteDACImpl">
+    <property name="sqlSessionFactory" ref="tipcliente-sqlSessionFactory" />
+</bean>
+
+<!-- =======================================================================================- -->
+
+
+<!-- ==============Criado via Sistema Classcliente========================================================================- -->
+<bean id="classcliente-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="configLocation"
+      value="classpath:com/sensus/mlc/classcliente/dac/mybatis/map/classcliente-sql-map-config.xml" />
+    <property name="dataSource" ref="mlcDataSource" />
+</bean>
+
+
+<bean id="classclienteDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.ClassclienteDACImpl">
+    <property name="sqlSessionFactory" ref="classcliente-sqlSessionFactory" />
+</bean>
+
+<!-- =======================================================================================- -->
+
+
+<!-- ==============Criado via Sistema Unimed========================================================================- -->
+<bean id="unimed-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="configLocation"
+      value="classpath:com/sensus/mlc/unimed/dac/mybatis/map/unimed-sql-map-config.xml" />
+    <property name="dataSource" ref="mlcDataSource" />
+</bean>
+
+
+<bean id="unimedDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.UnimedDACImpl">
+    <property name="sqlSessionFactory" ref="unimed-sqlSessionFactory" />
+</bean>
+
+<!-- =======================================================================================- -->
+
+
+<!-- ==============Criado via Sistema Embalagens========================================================================- -->
+<bean id="embalagens-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="configLocation"
+      value="classpath:com/sensus/mlc/embalagens/dac/mybatis/map/embalagens-sql-map-config.xml" />
+    <property name="dataSource" ref="mlcDataSource" />
+</bean>
+
+
+<bean id="embalagensDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.EmbalagensDACImpl">
+    <property name="sqlSessionFactory" ref="embalagens-sqlSessionFactory" />
+</bean>
+
+<!-- =======================================================================================- -->
+
+
+<!-- ==============Criado via Sistema Embalagens========================================================================- -->
+<bean id="embalagens-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="configLocation"
+      value="classpath:com/sensus/mlc/embalagens/dac/mybatis/map/embalagens-sql-map-config.xml" />
+    <property name="dataSource" ref="mlcDataSource" />
+</bean>
+
+
+<bean id="embalagensDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.EmbalagensDACImpl">
+    <property name="sqlSessionFactory" ref="embalagens-sqlSessionFactory" />
+</bean>
+
+<!-- =======================================================================================- -->
+
+
+<!-- ==============Criado via Sistema Titulares========================================================================- -->
+<bean id="titulares-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="configLocation"
+      value="classpath:com/sensus/mlc/titulares/dac/mybatis/map/titulares-sql-map-config.xml" />
+    <property name="dataSource" ref="mlcDataSource" />
+</bean>
+
+
+<bean id="titularesDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.TitularesDACImpl">
+    <property name="sqlSessionFactory" ref="titulares-sqlSessionFactory" />
+</bean>
+
+<!-- =======================================================================================- -->
+
+
+<!-- ==============Criado via Sistema Eventos========================================================================- -->
+<bean id="eventos-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="configLocation"
+      value="classpath:com/sensus/mlc/eventos/dac/mybatis/map/eventos-sql-map-config.xml" />
+    <property name="dataSource" ref="mlcDataSource" />
+</bean>
+
+
+<bean id="eventosDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.EventosDACImpl">
+    <property name="sqlSessionFactory" ref="eventos-sqlSessionFactory" />
+</bean>
+
+<!-- =======================================================================================- -->
+
+
+<!-- ==============Criado via Sistema Pais========================================================================- -->
+<bean id="pais-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="configLocation"
+      value="classpath:com/sensus/mlc/pais/dac/mybatis/map/pais-sql-map-config.xml" />
+    <property name="dataSource" ref="mlcDataSource" />
+</bean>
+
+
+<bean id="paisDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.PaisDACImpl">
+    <property name="sqlSessionFactory" ref="pais-sqlSessionFactory" />
+</bean>
+
+<!-- =======================================================================================- -->
+
+
+<!-- ==============Criado via Sistema Uf========================================================================- -->
+<bean id="uf-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="configLocation"
+      value="classpath:com/sensus/mlc/uf/dac/mybatis/map/uf-sql-map-config.xml" />
+    <property name="dataSource" ref="mlcDataSource" />
+</bean>
+
+
+<bean id="ufDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.UfDACImpl">
+    <property name="sqlSessionFactory" ref="uf-sqlSessionFactory" />
+</bean>
+
+<!-- =======================================================================================- -->
+
+
+<!-- ==============Criado via Sistema Municipio========================================================================- -->
+<bean id="municipio-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="configLocation"
+      value="classpath:com/sensus/mlc/municipio/dac/mybatis/map/municipio-sql-map-config.xml" />
+    <property name="dataSource" ref="mlcDataSource" />
+</bean>
+
+
+<bean id="municipioDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.MunicipioDACImpl">
+    <property name="sqlSessionFactory" ref="municipio-sqlSessionFactory" />
+</bean>
+
+<!-- =======================================================================================- -->
+
+
+<!-- ==============Criado via Sistema Municipio========================================================================- -->
+<bean id="municipio-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="configLocation"
+      value="classpath:com/sensus/mlc/municipio/dac/mybatis/map/municipio-sql-map-config.xml" />
+    <property name="dataSource" ref="mlcDataSource" />
+</bean>
+
+
+<bean id="municipioDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.MunicipioDACImpl">
+    <property name="sqlSessionFactory" ref="municipio-sqlSessionFactory" />
+</bean>
+
+<!-- =======================================================================================- -->
+
+
+<!-- ==============Criado via Sistema Bairro========================================================================- -->
+<bean id="bairro-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="configLocation"
+      value="classpath:com/sensus/mlc/bairro/dac/mybatis/map/bairro-sql-map-config.xml" />
+    <property name="dataSource" ref="mlcDataSource" />
+</bean>
+
+
+<bean id="bairroDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.BairroDACImpl">
+    <property name="sqlSessionFactory" ref="bairro-sqlSessionFactory" />
+</bean>
+
+<!-- =======================================================================================- -->
+
+
+<!-- ==============Criado via Sistema Cnae========================================================================- -->
+<bean id="cnae-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="configLocation"
+      value="classpath:com/sensus/mlc/cnae/dac/mybatis/map/cnae-sql-map-config.xml" />
+    <property name="dataSource" ref="mlcDataSource" />
+</bean>
+
+
+<bean id="cnaeDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.CnaeDACImpl">
+    <property name="sqlSessionFactory" ref="cnae-sqlSessionFactory" />
+</bean>
+
+<!-- =======================================================================================- -->
+
+
+<!-- ==============Criado via Sistema Endereco========================================================================- -->
+<bean id="endereco-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="configLocation"
+      value="classpath:com/sensus/mlc/endereco/dac/mybatis/map/endereco-sql-map-config.xml" />
+    <property name="dataSource" ref="mlcDataSource" />
+</bean>
+
+
+<bean id="enderecoDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.EnderecoDACImpl">
+    <property name="sqlSessionFactory" ref="endereco-sqlSessionFactory" />
+</bean>
+
+<!-- =======================================================================================- -->
+
+
+<!-- ==============Criado via Sistema Filial========================================================================- -->
+<bean id="filial-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="configLocation"
+      value="classpath:com/sensus/mlc/filial/dac/mybatis/map/filial-sql-map-config.xml" />
+    <property name="dataSource" ref="mlcDataSource" />
+</bean>
+
+
+<bean id="filialDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.FilialDACImpl">
+    <property name="sqlSessionFactory" ref="filial-sqlSessionFactory" />
+</bean>
+
+<!-- =======================================================================================- -->
+
+
+<!-- ==============Criado via Sistema Empresa========================================================================- -->
+<bean id="empresa-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="configLocation"
+      value="classpath:com/sensus/mlc/empresa/dac/mybatis/map/empresa-sql-map-config.xml" />
+    <property name="dataSource" ref="mlcDataSource" />
+</bean>
+
+
+<bean id="empresaDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.EmpresaDACImpl">
+    <property name="sqlSessionFactory" ref="empresa-sqlSessionFactory" />
+</bean>
+
+<!-- =======================================================================================- -->
+
+
+<!-- ==============Criado via Sistema Chaveestrangeira========================================================================- -->
+<bean id="chaveestrangeira-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="configLocation"
+      value="classpath:com/sensus/mlc/chaveestrangeira/dac/mybatis/map/chaveestrangeira-sql-map-config.xml" />
+    <property name="dataSource" ref="mlcDataSource" />
+</bean>
+
+
+<bean id="chaveestrangeiraDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.ChaveestrangeiraDACImpl">
+    <property name="sqlSessionFactory" ref="chaveestrangeira-sqlSessionFactory" />
+</bean>
+
+<!-- =======================================================================================- -->
+
+
+<!-- ==============Criado via Sistema Dominios========================================================================- -->
+<bean id="dominios-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="configLocation"
+      value="classpath:com/sensus/mlc/dominios/dac/mybatis/map/dominios-sql-map-config.xml" />
+    <property name="dataSource" ref="mlcDataSource" />
+</bean>
+
+
+<bean id="dominiosDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.DominiosDACImpl">
+    <property name="sqlSessionFactory" ref="dominios-sqlSessionFactory" />
+</bean>
+
+<!-- =======================================================================================- -->
+
+
+<!-- ==============Criado via Sistema Dominios========================================================================- -->
+<bean id="dominios-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="configLocation"
+      value="classpath:com/sensus/mlc/dominios/dac/mybatis/map/dominios-sql-map-config.xml" />
+    <property name="dataSource" ref="mlcDataSource" />
+</bean>
+
+
+<bean id="dominiosDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.DominiosDACImpl">
+    <property name="sqlSessionFactory" ref="dominios-sqlSessionFactory" />
+</bean>
+
+<!-- =======================================================================================- -->
+
+
+<!-- ==============Criado via Sistema Atributos========================================================================- -->
+<bean id="atributos-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="configLocation"
+      value="classpath:com/sensus/mlc/atributos/dac/mybatis/map/atributos-sql-map-config.xml" />
+    <property name="dataSource" ref="mlcDataSource" />
+</bean>
+
+
+<bean id="atributosDACTarget" class="com.sensus.mlc.dicionario.dac.mybatis.AtributosDACImpl">
+    <property name="sqlSessionFactory" ref="atributos-sqlSessionFactory" />
+</bean>
+
+<!-- =======================================================================================- -->
+
+
+<!-- ==============Criado via Sistema Tabela========================================================================- -->
 <bean id="Tabela-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
     <property name="configLocation"
       value="classpath:com/sensus/mlc/Tabela/dac/mybatis/map/Tabela-sql-map-config.xml" />
@@ -415,10 +505,10 @@
     <property name="sqlSessionFactory" ref="Tabela-sqlSessionFactory" />
 </bean>
 
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
+<!-- =======================================================================================- -->
 
-	
-	
+
+
 	<bean id="groupDACTarget" class="com.sensus.mlc.group.dac.mybatis.GroupDACImpl">
 		<property name="sqlSessionFactory" ref="group-sqlSessionFactory" />
 	</bean>
@@ -472,6 +562,12 @@
 	</bean>
 
 </beans>
+
+
+
+
+
+
 
 
 
