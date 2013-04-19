@@ -1,20 +1,3 @@
-CREATE TABLE LFSERVICO (
-    CODSERV   CHAR(5) NOT NULL,
-    DESCSERV  VARCHAR(500),
-    DTINS     DATE DEFAULT 'today' NOT NULL,
-    HINS      TIME DEFAULT 'now' NOT NULL,
-    IDUSUINS  CHAR(8) DEFAULT USER NOT NULL,
-    DTALT     DATE DEFAULT 'today',
-    HALT      TIME DEFAULT 'now',
-    IDUSUALT  CHAR(8) DEFAULT USER
-);
-
-
-
-
-/******************************************************************************/
-/****                             Primary Keys                             ****/
-/******************************************************************************/
-
-ALTER TABLE LFSERVICO ADD CONSTRAINT LFSERVICOSPK PRIMARY KEY (CODSERV);
-
+CODSERV   VARCHAR 5 PK S
+DESCSERV  VARCHAR 500
+LISTINSALT List<Alterinse>

@@ -1,33 +1,10 @@
-CREATE TABLE LFNATOPER (
-    CODEMP         INTEGER NOT NULL,
-    CODFILIAL      SMALLINT NOT NULL,
-    CODNAT         CHAR(4) NOT NULL,
-    DESCNAT        CHAR(60) NOT NULL,
-    IMPDTSAIDANAT  CHAR(1) DEFAULT 'S' NOT NULL,
-    ALIQENAT       NUMERIC(6,2) DEFAULT 0 NOT NULL,
-    ALIQFNAT       NUMERIC(6,2) DEFAULT 0 NOT NULL,
-    TXTNAT         VARCHAR(500),
-    DTINS          DATE DEFAULT 'now' NOT NULL,
-    HINS           TIME DEFAULT 'now' NOT NULL,
-    IDUSUINS       CHAR(8) DEFAULT USER NOT NULL,
-    DTALT          DATE DEFAULT 'now',
-    HALT           TIME DEFAULT 'now',
-    IDUSUALT       CHAR(8) DEFAULT USER
-);
-
-
-
-
-/******************************************************************************/
-/****                             Primary Keys                             ****/
-/******************************************************************************/
-
-ALTER TABLE LFNATOPER ADD CONSTRAINT LFNATOPERPK PRIMARY KEY (CODNAT, CODFILIAL, CODEMP);
-
-
-/******************************************************************************/
-/****                             Foreign Keys                             ****/
-/******************************************************************************/
-
-ALTER TABLE LFNATOPER ADD CONSTRAINT LFNATOPERFKSGFILIA FOREIGN KEY (CODFILIAL, CODEMP) REFERENCES SGFILIAL (CODFILIAL, CODEMP);
+CODEMP         INTEGER 0 PK S
+CODFILIAL      INTEGER 0 PK S
+CODNAT         VARCHAR 4 PK S
+DESCNAT        VARCHAR 60 ' S
+IMPDTSAIDANAT  VARCHAR 1 ' S
+ALIQENAT       NUMERIC 6,2 ' S
+ALIQFNAT       NUMERIC 6,2 ' S 
+TXTNAT         VARCHAR 500
+LISTINSALT List<Alterinse>
 
