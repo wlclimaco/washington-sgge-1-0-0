@@ -1,28 +1,3 @@
-CREATE TABLE LFNCMNBM (
-    CODNCM    VARCHAR(10) NOT NULL,
-    CODNBM    VARCHAR(12) NOT NULL,
-    DTINS     DATE default 'now' NOT NULL,
-    HINS      TIME default 'now' NOT NULL,
-    IDUSUINS  CHAR(8) default user NOT NULL,
-    DTALT     DATE default 'now' NOT NULL,
-    HALT      TIME default 'now' NOT NULL,
-    IDUSUALT  CHAR(8) default user NOT NULL
-);
-
-
-
-
-/******************************************************************************/
-/****                             Primary Keys                             ****/
-/******************************************************************************/
-
-ALTER TABLE LFNCMNBM ADD CONSTRAINT LFNCMNBMPK PRIMARY KEY (CODNCM, CODNBM);
-
-
-/******************************************************************************/
-/****                             Foreign Keys                             ****/
-/******************************************************************************/
-
-ALTER TABLE LFNCMNBM ADD CONSTRAINT LFNCMNBMFKLFNBM FOREIGN KEY (CODNBM) REFERENCES LFNBM (CODNBM);
-ALTER TABLE LFNCMNBM ADD CONSTRAINT LFNCMNBMFKLFNCM FOREIGN KEY (CODNCM) REFERENCES LFNCM (CODNCM);
-
+CODNCM    VARCHAR 10 PK S
+CODNBM    VARCHAR 12 PK S
+LISTINSALT List<Alterinse>

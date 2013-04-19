@@ -1,75 +1,51 @@
-CREATE TABLE LFITCOMPRA (
-    CODEMP                    INTEGER NOT NULL,
-    CODFILIAL                 SMALLINT NOT NULL,
-    CODCOMPRA                 INTEGER NOT NULL,
-    CODITCOMPRA               INTEGER NOT NULL,
-    ALIQCOFINS                NUMERICDN /* NUMERICDN = NUMERIC(15,5) */,
-    CODEMPSP                  INTEGER,
-    CODFILIALSP               SMALLINT,
-    CODSITTRIBPIS             CHAR(2),
-    IMPSITTRIBPIS             CHAR(2),
-    CODEMPSC                  INTEGER,
-    CODFILIALSC               SMALLINT,
-    CODSITTRIBCOF             CHAR(2),
-    IMPSITTRIBCOF             CHAR(2),
-    CODEMPSI                  INTEGER,
-    CODFILIALSI               SMALLINT,
-    CODSITTRIBIPI             CHAR(2),
-    IMPSITTRIBIPI             CHAR(2),
-    VLRIPIUNIDTRIB            NUMERICDN /* NUMERICDN = NUMERIC(15,5) */,
-    MODBCICMS                 SMALLINT DEFAULT 3,
-    MODBCICMSST               SMALLINT DEFAULT 4,
-    ALIQREDBCICMS             NUMERICDN /* NUMERICDN = NUMERIC(15,5) */,
-    ALIQREDBCICMSST           NUMERICDN /* NUMERICDN = NUMERIC(15,5) */,
-    ALIQICMSST                NUMERICDN /* NUMERICDN = NUMERIC(15,5) */,
-    ALIQPIS                   NUMERICDN /* NUMERICDN = NUMERIC(15,5) */,
-    VLRPISUNIDTRIB            NUMERICDN /* NUMERICDN = NUMERIC(15,5) */,
-    VLRBASEPIS                NUMERICDN /* NUMERICDN = NUMERIC(15,5) */,
-    VLRBASECOFINS             NUMERICDN /* NUMERICDN = NUMERIC(15,5) */,
-    VLRCOFUNIDTRIB            NUMERICDN /* NUMERICDN = NUMERIC(15,5) */,
-    VLRIR                     NUMERICDN /* NUMERICDN = NUMERIC(15,5) */,
-    VLRPIS                    NUMERICDN /* NUMERICDN = NUMERIC(15,5) */,
-    VLRCOFINS                 NUMERICDN /* NUMERICDN = NUMERIC(15,5) */,
-    VLRCSOCIAL                NUMERICDN /* NUMERICDN = NUMERIC(15,5) */,
-    ORIGFISC                  CHAR(1),
-    CODTRATTRIB               CHAR(2),
-    MARGEMVLAGRITCOMPRA       NUMERICDN /* NUMERICDN = NUMERIC(15,5) */,
-    VLRBASEICMSSTITCOMPRA     NUMERICDN /* NUMERICDN = NUMERIC(15,5) */,
-    VLRICMSSTITCOMPRA         NUMERICDN /* NUMERICDN = NUMERIC(15,5) */,
-    PERCISSITCOMPRA           NUMERICDN /* NUMERICDN = NUMERIC(15,5) */,
-    VLRBASEISSITCOMPRA        NUMERICDN /* NUMERICDN = NUMERIC(15,5) */,
-    VLRISSITCOMPRA            NUMERICDN /* NUMERICDN = NUMERIC(15,5) */,
-    PERCICMSSIMPLES           NUMERICDN /* NUMERICDN = NUMERIC(15,5) */,
-    EMMANUT                   CHAR(1) DEFAULT 'N' NOT NULL,
-    VLRBASEICMSSTITRETCOMPRA  NUMERICDN /* NUMERICDN = NUMERIC(15,5) */,
-    VLRICMSSTRETITCOMPRA      NUMERICDN /* NUMERICDN = NUMERIC(15,5) */,
-    ALIQII                    NUMERICDN /* NUMERICDN = NUMERIC(15,5) */,
-    VLRBASEII                 NUMERICDN /* NUMERICDN = NUMERIC(15,5) */,
-    VLRII                     NUMERICDN /* NUMERICDN = NUMERIC(15,5) */,
-    VLRICMSDIFERIDO           NUMERICDN /* NUMERICDN = NUMERIC(15,5) */,
-    VLRICMSDEVIDO             NUMERICDN /* NUMERICDN = NUMERIC(15,5) */,
-    VLRICMSCREDPRESUM         NUMERICDN /* NUMERICDN = NUMERIC(15,5) */,
-    DTINS                     DATE DEFAULT 'today' NOT NULL,
-    HINS                      TIME DEFAULT 'now' NOT NULL,
-    IDUSUINS                  CHAR(8) DEFAULT USER NOT NULL,
-    DTALT                     DATE DEFAULT 'today',
-    HALT                      TIME DEFAULT 'now',
-    IDUSUALT                  CHAR(8) DEFAULT USER
-);
-
-
-
-
-/******************************************************************************/
-/****                             Primary Keys                             ****/
-/******************************************************************************/
-
-ALTER TABLE LFITCOMPRA ADD CONSTRAINT LFITCOMPRA PRIMARY KEY (CODCOMPRA, CODITCOMPRA, CODFILIAL, CODEMP);
-
-
-/******************************************************************************/
-/****                             Foreign Keys                             ****/
-/******************************************************************************/
-
-ALTER TABLE LFITCOMPRA ADD CONSTRAINT LFITCOMPRAFKCPITCOMPRA FOREIGN KEY (CODCOMPRA, CODITCOMPRA, CODFILIAL, CODEMP) REFERENCES CPITCOMPRA (CODCOMPRA, CODITCOMPRA, CODFILIAL, CODEMP) ON DELETE CASCADE ON UPDATE CASCADE;
-
+    CODEMP                    INTEGER 0 PK S
+    CODFILIAL                 INTEGER 0 PK S
+    CODCOMPRA                 INTEGER 0 PK S
+    CODITCOMPRA               INTEGER 0 PK S
+    ALIQCOFINS                NUMERIC 15,5
+    CODEMPSP                  INTEGER
+    CODFILIALSP               INTEGER
+    CODSITTRIBPIS             VARCHAR 2
+    IMPSITTRIBPIS             VARCHAR 2
+    CODEMPSC                  INTEGER
+    CODFILIALSC               INTEGER
+    CODSITTRIBCOF             VARCHAR 2
+    IMPSITTRIBCOF             VARCHAR 2
+    CODEMPSI                  INTEGER
+    CODFILIALSI               INTEGER
+    CODSITTRIBIPI             VARCHAR 2
+    IMPSITTRIBIPI             VARCHAR 2
+    VLRIPIUNIDTRIB            NUMERIC 15,5
+    MODBCICMS                 INTEGER
+    MODBCICMSST               INTEGER
+    ALIQREDBCICMS             NUMERIC 15,5
+    ALIQREDBCICMSST           NUMERIC 15,5
+    ALIQICMSST                NUMERIC 15,5
+    ALIQPIS                   NUMERIC 15,5
+    VLRPISUNIDTRIB            NUMERIC 15,5
+    VLRBASEPIS                NUMERIC 15,5
+    VLRBASECOFINS             NUMERIC 15,5
+    VLRCOFUNIDTRIB            NUMERIC 15,5
+    VLRIR                     NUMERIC 15,5
+    VLRPIS                    NUMERIC 15,5
+    VLRCOFINS                 NUMERIC 15,5
+    VLRCSOCIAL                NUMERIC 15,5
+    ORIGFISC                  VARCHAR 1
+    CODTRATTRIB               VARCHAR 2
+    MARGEMVLAGRITCOMPRA       NUMERIC 15,5
+    VLRBASEICMSSTITCOMPRA     NUMERIC 15,5
+    VLRICMSSTITCOMPRA         NUMERIC 15,5
+    PERCISSITCOMPRA           NUMERIC 15,5
+    VLRBASEISSITCOMPRA        NUMERIC 15,5
+    VLRISSITCOMPRA            NUMERIC 15,5
+    PERCICMSSIMPLES           NUMERIC 15,5
+    EMMANUT                   VARCHAR 1
+    VLRBASEICMSSTITRETCOMPRA  NUMERIC 15,5
+    VLRICMSSTRETITCOMPRA      NUMERIC 15,5
+    ALIQII                    NUMERIC 15,5
+    VLRBASEII                 NUMERIC 15,5
+    VLRII                     NUMERIC 15,5
+    VLRICMSDIFERIDO           NUMERIC 15,5
+    VLRICMSDEVIDO             NUMERIC 15,5
+    VLRICMSCREDPRESUM         NUMERIC 15,5
+	LISTINSALT List<Alterinse>

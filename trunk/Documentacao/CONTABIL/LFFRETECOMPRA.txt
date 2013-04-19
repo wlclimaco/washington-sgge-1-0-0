@@ -1,32 +1,10 @@
-
-
-CREATE TABLE LFFRETECOMPRA (
-    CODEMP     INTEGER NOT NULL,
-    CODFILIAL  SMALLINT NOT NULL,
-    CODFRETE   INTEGER NOT NULL,
-    CODCOMPRA  INTEGER NOT NULL,
-    DTINS      DATE DEFAULT 'now' NOT NULL,
-    HINS       TIME DEFAULT 'now' NOT NULL,
-    IDUSUINS   CHAR(8) DEFAULT USER NOT NULL,
-    DTALT      DATE DEFAULT 'now',
-    HALT       TIME DEFAULT 'now',
-    IDUSUALT   CHAR(8) DEFAULT USER
-);
-
-
-
-
-/******************************************************************************/
-/****                             Primary Keys                             ****/
-/******************************************************************************/
-
-ALTER TABLE LFFRETECOMPRA ADD CONSTRAINT LFFRETECPPK PRIMARY KEY (CODFRETE, CODCOMPRA, CODFILIAL, CODEMP);
-
-
-/******************************************************************************/
-/****                             Foreign Keys                             ****/
-/******************************************************************************/
-
-ALTER TABLE LFFRETECOMPRA ADD CONSTRAINT CPFRETEFKCPCOMPRA FOREIGN KEY (CODCOMPRA, CODFILIAL, CODEMP) REFERENCES CPCOMPRA (CODCOMPRA, CODFILIAL, CODEMP);
-ALTER TABLE LFFRETECOMPRA ADD CONSTRAINT CPFRETEFKLFFRETE FOREIGN KEY (CODFRETE, CODFILIAL, CODEMP) REFERENCES LFFRETE (CODFRETE, CODFILIAL, CODEMP);
-
+    CODEMP     INTEGER 0 PK S
+    CODFILIAL  INTEGER 0 PK S
+    CODFRETE   INTEGER 0 PK S
+    CODCOMPRA  INTEGER 0 PK S
+    DTINS      DATE
+    HINS       TIME
+    IDUSUINS   VARCHAR 8
+    DTALT      DATE
+    HALT       TIME
+    IDUSUALT   VARCHAR 8

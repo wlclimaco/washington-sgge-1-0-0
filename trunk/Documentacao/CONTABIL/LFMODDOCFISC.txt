@@ -1,29 +1,5 @@
-CREATE TABLE LFMODDOCFISC (
-    CODEMP          INTEGER NOT NULL,
-    CODFILIAL       SMALLINT NOT NULL,
-    CODMODDOCFISC   CHAR(2) NOT NULL,
-    DESCMODDOCFISC  CHAR(60) NOT NULL,
-    DTINS           DATE DEFAULT 'now' NOT NULL,
-    HINS            TIME DEFAULT 'now' NOT NULL,
-    IDUSUINS        CHAR(8) DEFAULT USER NOT NULL,
-    DTALT           DATE DEFAULT 'now',
-    HALT            TIME DEFAULT 'now',
-    IDUSUALT        CHAR(8) DEFAULT USER
-);
-
-
-
-
-/******************************************************************************/
-/****                             Primary Keys                             ****/
-/******************************************************************************/
-
-ALTER TABLE LFMODDOCFISC ADD CONSTRAINT LFMODDOCFISCPK PRIMARY KEY (CODMODDOCFISC, CODFILIAL, CODEMP);
-
-
-/******************************************************************************/
-/****                             Foreign Keys                             ****/
-/******************************************************************************/
-
-ALTER TABLE LFMODDOCFISC ADD CONSTRAINT LFMODDOCFISCFKSGFILIA FOREIGN KEY (CODFILIAL, CODEMP) REFERENCES SGFILIAL (CODFILIAL, CODEMP);
-
+CODEMP          INTEGER 0 PK S
+CODFILIAL       INTEGER 0 PK S
+CODMODDOCFISC   VARCHAR 2 PK S
+DESCMODDOCFISC  VARCHAR 60 ' S
+LISTINSALT List<Alterinse>
