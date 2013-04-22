@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Lffrete">
+
+	<resultMap id="listAllLffreteResults" type="Lffrete" >
+		<result property="codemp" column="codemp" />
+		<result property="codfilial" column="codfilial" />
+		<result property="codfrete" column="codfrete" />
+		<result property="docfrete" column="docfrete" />
+		<result property="codemptn" column="codemptn" />
+		<result property="codfilialtn" column="codfilialtn" />
+		<result property="codtran" column="codtran" />
+		<result property="codemptm" column="codemptm" />
+		<result property="codfilialtm" column="codfilialtm" />
+		<result property="codtipomov" column="codtipomov" />
+		<result property="codempnt" column="codempnt" />
+		<result property="codfilialnt" column="codfilialnt" />
+		<result property="codnat" column="codnat" />
+		<result property="tipofrete" column="tipofrete" />
+		<result property="tipopgto" column="tipopgto" />
+		<result property="codempre" column="codempre" />
+		<result property="codfilialre" column="codfilialre" />
+		<result property="codremet" column="codremet" />
+		<result property="codempde" column="codempde" />
+		<result property="codfilialde" column="codfilialde" />
+		<result property="coddestinat" column="coddestinat" />
+		<result property="dtemitfrete" column="dtemitfrete" />
+		<result property="dtpagfrete" column="dtpagfrete" />
+		<result property="qtdfrete" column="qtdfrete" />
+		<result property="vlrmercadoria" column="vlrmercadoria" />
+		<result property="vlrfrete" column="vlrfrete" />
+		<result property="vlrfretenota" column="vlrfretenota" />
+		<result property="pesobruto" column="pesobruto" />
+		<result property="pesoliquido" column="pesoliquido" />
+		<result property="aliqicmsfrete" column="aliqicmsfrete" />
+		<result property="vlricmsfrete" column="vlricmsfrete" />
+		<result property="vlrbaseicmsfrete" column="vlrbaseicmsfrete" />
+		<result property="codemppa" column="codemppa" />
+		<result property="codfilialpa" column="codfilialpa" />
+		<result property="codpag" column="codpag" />
+		<result property="serie" column="serie" />
+		<result property="codemprm" column="codemprm" />
+		<result property="codfilialrm" column="codfilialrm" />
+		<result property="ticket" column="ticket" />
+		<result property="chavecte" column="chavecte" />
+		<result property="codemptt" column="codemptt" />
+		<result property="codfilialtt" column="codfilialtt" />
+		<result property="codtrattrib" column="codtrattrib" />
+		<result property="codempex" column="codempex" />
+		<result property="codfilialex" column="codfilialex" />
+		<result property="ticketex" column="ticketex" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allLffreteColumms">
+     	codemp,
+     	codfilial,
+     	codfrete,
+     	docfrete,
+     	codemptn,
+     	codfilialtn,
+     	codtran,
+     	codemptm,
+     	codfilialtm,
+     	codtipomov,
+     	codempnt,
+     	codfilialnt,
+     	codnat,
+     	tipofrete,
+     	tipopgto,
+     	codempre,
+     	codfilialre,
+     	codremet,
+     	codempde,
+     	codfilialde,
+     	coddestinat,
+     	dtemitfrete,
+     	dtpagfrete,
+     	qtdfrete,
+     	vlrmercadoria,
+     	vlrfrete,
+     	vlrfretenota,
+     	pesobruto,
+     	pesoliquido,
+     	aliqicmsfrete,
+     	vlricmsfrete,
+     	vlrbaseicmsfrete,
+     	codemppa,
+     	codfilialpa,
+     	codpag,
+     	serie,
+     	codemprm,
+     	codfilialrm,
+     	ticket,
+     	chavecte,
+     	codemptt,
+     	codfilialtt,
+     	codtrattrib,
+     	codempex,
+     	codfilialex,
+     	ticketex,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Lffrete -->
+	<select id="insertLffrete" parameterType="Map" resultType="int">
+		SELECT ins_lffrete (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codfrete,jdbcType=INTEGER},
+		#{docfrete,jdbcType=VARCHAR},
+		#{codemptn,jdbcType=INTEGER},
+		#{codfilialtn,jdbcType=INTEGER},
+		#{codtran,jdbcType=INTEGER},
+		#{codemptm,jdbcType=INTEGER},
+		#{codfilialtm,jdbcType=INTEGER},
+		#{codtipomov,jdbcType=INTEGER},
+		#{codempnt,jdbcType=INTEGER},
+		#{codfilialnt,jdbcType=INTEGER},
+		#{codnat,jdbcType=VARCHAR},
+		#{tipofrete,jdbcType=VARCHAR},
+		#{tipopgto,jdbcType=VARCHAR},
+		#{codempre,jdbcType=INTEGER},
+		#{codfilialre,jdbcType=INTEGER},
+		#{codremet,jdbcType=INTEGER},
+		#{codempde,jdbcType=INTEGER},
+		#{codfilialde,jdbcType=INTEGER},
+		#{coddestinat,jdbcType=INTEGER},
+		#{dtemitfrete,jdbcType=DATE},
+		#{dtpagfrete,jdbcType=DATE},
+		#{qtdfrete,jdbcType=DOUBLE},
+		#{vlrmercadoria,jdbcType=DOUBLE},
+		#{vlrfrete,jdbcType=DOUBLE},
+		#{vlrfretenota,jdbcType=DOUBLE},
+		#{pesobruto,jdbcType=DOUBLE},
+		#{pesoliquido,jdbcType=DOUBLE},
+		#{aliqicmsfrete,jdbcType=DOUBLE},
+		#{vlricmsfrete,jdbcType=15,5},
+		#{vlrbaseicmsfrete,jdbcType=15,5},
+		#{codemppa,jdbcType=INTEGER},
+		#{codfilialpa,jdbcType=INTEGER},
+		#{codpag,jdbcType=INTEGER},
+		#{serie,jdbcType=VARCHAR},
+		#{codemprm,jdbcType=INTEGER},
+		#{codfilialrm,jdbcType=INTEGER},
+		#{ticket,jdbcType=INTEGER},
+		#{chavecte,jdbcType=VARCHAR},
+		#{codemptt,jdbcType=INTEGER},
+		#{codfilialtt,jdbcType=INTEGER},
+		#{codtrattrib,jdbcType=VARCHAR},
+		#{codempex,jdbcType=INTEGER},
+		#{codfilialex,jdbcType=INTEGER},
+		#{ticketex,jdbcType=INTEGER},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Lffrete -->
+	<select id="updateLffrete" parameterType="Map" resultType="int">
+		SELECT upd_lffrete (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codfrete,jdbcType=INTEGER},
+		#{docfrete,jdbcType=VARCHAR},
+		#{codemptn,jdbcType=INTEGER},
+		#{codfilialtn,jdbcType=INTEGER},
+		#{codtran,jdbcType=INTEGER},
+		#{codemptm,jdbcType=INTEGER},
+		#{codfilialtm,jdbcType=INTEGER},
+		#{codtipomov,jdbcType=INTEGER},
+		#{codempnt,jdbcType=INTEGER},
+		#{codfilialnt,jdbcType=INTEGER},
+		#{codnat,jdbcType=VARCHAR},
+		#{tipofrete,jdbcType=VARCHAR},
+		#{tipopgto,jdbcType=VARCHAR},
+		#{codempre,jdbcType=INTEGER},
+		#{codfilialre,jdbcType=INTEGER},
+		#{codremet,jdbcType=INTEGER},
+		#{codempde,jdbcType=INTEGER},
+		#{codfilialde,jdbcType=INTEGER},
+		#{coddestinat,jdbcType=INTEGER},
+		#{dtemitfrete,jdbcType=DATE},
+		#{dtpagfrete,jdbcType=DATE},
+		#{qtdfrete,jdbcType=DOUBLE},
+		#{vlrmercadoria,jdbcType=DOUBLE},
+		#{vlrfrete,jdbcType=DOUBLE},
+		#{vlrfretenota,jdbcType=DOUBLE},
+		#{pesobruto,jdbcType=DOUBLE},
+		#{pesoliquido,jdbcType=DOUBLE},
+		#{aliqicmsfrete,jdbcType=DOUBLE},
+		#{vlricmsfrete,jdbcType=15,5},
+		#{vlrbaseicmsfrete,jdbcType=15,5},
+		#{codemppa,jdbcType=INTEGER},
+		#{codfilialpa,jdbcType=INTEGER},
+		#{codpag,jdbcType=INTEGER},
+		#{serie,jdbcType=VARCHAR},
+		#{codemprm,jdbcType=INTEGER},
+		#{codfilialrm,jdbcType=INTEGER},
+		#{ticket,jdbcType=INTEGER},
+		#{chavecte,jdbcType=VARCHAR},
+		#{codemptt,jdbcType=INTEGER},
+		#{codfilialtt,jdbcType=INTEGER},
+		#{codtrattrib,jdbcType=VARCHAR},
+		#{codempex,jdbcType=INTEGER},
+		#{codfilialex,jdbcType=INTEGER},
+		#{ticketex,jdbcType=INTEGER},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Lffrete -->
+	<select id="deleteLffrete" parameterType="Lffrete">
+		SELECT del_lffrete (#{id})
+	</select>
+	
+	<!-- Fetch All Lffretes -->
+	<select id="fetchAllLffretes" parameterType="Map" resultMap="listAllLffreteResults">
+	
+		SELECT  <include refid="allLffreteColumms"/>
+		  FROM lffrete
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM lffrete 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Lffrete By type -->
+	<select id="fetchLffreteByType" parameterType="LffreteRequest"  resultMap="listAllLffreteResults" >
+		SELECT  <include refid="allCustomListLffreteColumns"/>
+		  FROM lffrete
+		 WHERE name = #{lffrete.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Lffrete By Id -->
+	<select id="fetchLffreteById" parameterType="Lffrete" resultMap="listAllLffreteResults" >
+		SELECT <include refid="allCustomListLffreteColumns"/>
+		  FROM lffrete
+		 WHERE lffrete_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Lffrete By Id -->
+	<select id="fetchLffreteNameById" parameterType="Lffrete" resultMap="listAllLffreteResults" >
+		SELECT <include refid="allCustomListLffreteColumns"/>
+		  FROM lffrete
+		 WHERE lffrete_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

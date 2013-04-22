@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Lftrattrib">
+
+	<resultMap id="listAllLftrattribResults" type="Lftrattrib" >
+		<result property="codemp" column="codemp" />
+		<result property="codfilial" column="codfilial" />
+		<result property="codtrattrib" column="codtrattrib" />
+		<result property="desctrattrib" column="desctrattrib" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allLftrattribColumms">
+     	codemp,
+     	codfilial,
+     	codtrattrib,
+     	desctrattrib,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Lftrattrib -->
+	<select id="insertLftrattrib" parameterType="Map" resultType="int">
+		SELECT ins_lftrattrib (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codtrattrib,jdbcType=VARCHAR},
+		#{desctrattrib,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Lftrattrib -->
+	<select id="updateLftrattrib" parameterType="Map" resultType="int">
+		SELECT upd_lftrattrib (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codtrattrib,jdbcType=VARCHAR},
+		#{desctrattrib,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Lftrattrib -->
+	<select id="deleteLftrattrib" parameterType="Lftrattrib">
+		SELECT del_lftrattrib (#{id})
+	</select>
+	
+	<!-- Fetch All Lftrattribs -->
+	<select id="fetchAllLftrattribs" parameterType="Map" resultMap="listAllLftrattribResults">
+	
+		SELECT  <include refid="allLftrattribColumms"/>
+		  FROM lftrattrib
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM lftrattrib 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Lftrattrib By type -->
+	<select id="fetchLftrattribByType" parameterType="LftrattribRequest"  resultMap="listAllLftrattribResults" >
+		SELECT  <include refid="allCustomListLftrattribColumns"/>
+		  FROM lftrattrib
+		 WHERE name = #{lftrattrib.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Lftrattrib By Id -->
+	<select id="fetchLftrattribById" parameterType="Lftrattrib" resultMap="listAllLftrattribResults" >
+		SELECT <include refid="allCustomListLftrattribColumns"/>
+		  FROM lftrattrib
+		 WHERE lftrattrib_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Lftrattrib By Id -->
+	<select id="fetchLftrattribNameById" parameterType="Lftrattrib" resultMap="listAllLftrattribResults" >
+		SELECT <include refid="allCustomListLftrattribColumns"/>
+		  FROM lftrattrib
+		 WHERE lftrattrib_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<settings>
+<setting name="lazyLoadingEnabled" value="false" />
+</settings>
+<typeAliases>
+<!-- Tabela mapping -->
+<typeAlias alias="InquiryTabelaRequest" 	type="com.sensus.mlc.tabela.model.request.InquiryTabelaRequest" />
+<typeAlias alias="TabelaRequest" 			type="com.sensus.mlc.tabela.model.request.TabelaRequest" />
+<typeAlias alias="FilialRequest" 		type="com.sensus.mlc.filial.model.request.FilialRequest" />
+<typeAlias alias="EnderecoRequest" 		type="com.sensus.mlc.endereco.model.request.EnderecoRequest" />
+<!-- Tabela and Smartpoint joint mapping -->
+<typeAlias alias="Tabela"  type="com.sensus.mlc.tabela.model.Tabela"/>
+<typeAlias alias="Filial"     type="com.sensus.mlc.filial.model.Filial"/>
+<typeAlias alias="Endereco"   type="com.sensus.mlc.endereco.model.Endereco"/>
+<!-- Smartpoint mapping -->
+<typeAlias alias="Group"        type="com.sensus.mlc.group.model.Group" />
+<typeAlias alias="tabela"      type="com.sensus.mlc.tabela.model.Tabela" />
+</typeAliases>
+<mappers>
+<mapper resource="com/sensus/mlc/tabela/dac/mybatis/map/Tabela.xml"/>
+<mapper resource="com/sensus/mlc/filial/dac/mybatis/map/Filial.xml" />
+<mapper resource="com/sensus/mlc/endereco/dac/mybatis/map/Endereco.xml" />
+<mapper resource="com/sensus/mlc/auditoria/dac/mybatis/map/Auditoria.xml" />
+</mappers>
+</configuration>

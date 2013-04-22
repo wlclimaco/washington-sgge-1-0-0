@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Tabela">
+
+	<resultMap id="listAllTabelaResults" type="Tabela" >
+		<result property="nmtabela" column="nmtabela" />
+		<result property="dstabela" column="dstabela" />
+		<result property="auditorias" column="auditorias" />
+	</resultMap>
+
+
+	<sql id="allTabelaColumms">
+     	nmtabela,
+     	dstabela,
+     	auditorias,
+	</sql>
+	
+
+	<!-- Insert Tabela -->
+	<select id="insertTabela" parameterType="Map" resultType="int">
+		SELECT ins_tabela (
+		#{nmtabela,jdbcType=VARCHAR},
+		#{dstabela,jdbcType=VARCHAR},
+		#{auditorias,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Tabela -->
+	<select id="updateTabela" parameterType="Map" resultType="int">
+		SELECT upd_tabela (
+		#{nmtabela,jdbcType=VARCHAR},
+		#{dstabela,jdbcType=VARCHAR},
+		#{auditorias,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Tabela -->
+	<select id="deleteTabela" parameterType="Tabela">
+		SELECT del_tabela (#{id})
+	</select>
+	
+	<!-- Fetch All Tabelas -->
+	<select id="fetchAllTabelas" parameterType="Map" resultMap="listAllTabelaResults">
+	
+		SELECT  <include refid="allTabelaColumms"/>
+		  FROM tabela
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM tabela 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Tabela By type -->
+	<select id="fetchTabelaByType" parameterType="TabelaRequest"  resultMap="listAllTabelaResults" >
+		SELECT  <include refid="allCustomListTabelaColumns"/>
+		  FROM tabela
+		 WHERE name = #{tabela.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Tabela By Id -->
+	<select id="fetchTabelaById" parameterType="Tabela" resultMap="listAllTabelaResults" >
+		SELECT <include refid="allCustomListTabelaColumns"/>
+		  FROM tabela
+		 WHERE tabela_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Tabela By Id -->
+	<select id="fetchTabelaNameById" parameterType="Tabela" resultMap="listAllTabelaResults" >
+		SELECT <include refid="allCustomListTabelaColumns"/>
+		  FROM tabela
+		 WHERE tabela_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Lfserie">
+
+	<resultMap id="listAllLfserieResults" type="Lfserie" >
+		<result property="codemp" column="codemp" />
+		<result property="codfilial" column="codfilial" />
+		<result property="serie" column="serie" />
+		<result property="docserie" column="docserie" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allLfserieColumms">
+     	codemp,
+     	codfilial,
+     	serie,
+     	docserie,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Lfserie -->
+	<select id="insertLfserie" parameterType="Map" resultType="int">
+		SELECT ins_lfserie (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{serie,jdbcType=VARCHAR},
+		#{docserie,jdbcType=INTEGER},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Lfserie -->
+	<select id="updateLfserie" parameterType="Map" resultType="int">
+		SELECT upd_lfserie (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{serie,jdbcType=VARCHAR},
+		#{docserie,jdbcType=INTEGER},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Lfserie -->
+	<select id="deleteLfserie" parameterType="Lfserie">
+		SELECT del_lfserie (#{id})
+	</select>
+	
+	<!-- Fetch All Lfseries -->
+	<select id="fetchAllLfseries" parameterType="Map" resultMap="listAllLfserieResults">
+	
+		SELECT  <include refid="allLfserieColumms"/>
+		  FROM lfserie
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM lfserie 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Lfserie By type -->
+	<select id="fetchLfserieByType" parameterType="LfserieRequest"  resultMap="listAllLfserieResults" >
+		SELECT  <include refid="allCustomListLfserieColumns"/>
+		  FROM lfserie
+		 WHERE name = #{lfserie.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Lfserie By Id -->
+	<select id="fetchLfserieById" parameterType="Lfserie" resultMap="listAllLfserieResults" >
+		SELECT <include refid="allCustomListLfserieColumns"/>
+		  FROM lfserie
+		 WHERE lfserie_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Lfserie By Id -->
+	<select id="fetchLfserieNameById" parameterType="Lfserie" resultMap="listAllLfserieResults" >
+		SELECT <include refid="allCustomListLfserieColumns"/>
+		  FROM lfserie
+		 WHERE lfserie_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Lfmensagem">
+
+	<resultMap id="listAllLfmensagemResults" type="Lfmensagem" >
+		<result property="codemp" column="codemp" />
+		<result property="codfilial" column="codfilial" />
+		<result property="codmens" column="codmens" />
+		<result property="mens" column="mens" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allLfmensagemColumms">
+     	codemp,
+     	codfilial,
+     	codmens,
+     	mens,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Lfmensagem -->
+	<select id="insertLfmensagem" parameterType="Map" resultType="int">
+		SELECT ins_lfmensagem (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codmens,jdbcType=INTEGER},
+		#{mens,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Lfmensagem -->
+	<select id="updateLfmensagem" parameterType="Map" resultType="int">
+		SELECT upd_lfmensagem (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codmens,jdbcType=INTEGER},
+		#{mens,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Lfmensagem -->
+	<select id="deleteLfmensagem" parameterType="Lfmensagem">
+		SELECT del_lfmensagem (#{id})
+	</select>
+	
+	<!-- Fetch All Lfmensagems -->
+	<select id="fetchAllLfmensagems" parameterType="Map" resultMap="listAllLfmensagemResults">
+	
+		SELECT  <include refid="allLfmensagemColumms"/>
+		  FROM lfmensagem
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM lfmensagem 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Lfmensagem By type -->
+	<select id="fetchLfmensagemByType" parameterType="LfmensagemRequest"  resultMap="listAllLfmensagemResults" >
+		SELECT  <include refid="allCustomListLfmensagemColumns"/>
+		  FROM lfmensagem
+		 WHERE name = #{lfmensagem.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Lfmensagem By Id -->
+	<select id="fetchLfmensagemById" parameterType="Lfmensagem" resultMap="listAllLfmensagemResults" >
+		SELECT <include refid="allCustomListLfmensagemColumns"/>
+		  FROM lfmensagem
+		 WHERE lfmensagem_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Lfmensagem By Id -->
+	<select id="fetchLfmensagemNameById" parameterType="Lfmensagem" resultMap="listAllLfmensagemResults" >
+		SELECT <include refid="allCustomListLfmensagemColumns"/>
+		  FROM lfmensagem
+		 WHERE lfmensagem_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

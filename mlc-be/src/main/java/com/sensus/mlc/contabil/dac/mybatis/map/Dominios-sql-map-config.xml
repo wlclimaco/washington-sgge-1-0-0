@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<settings>
+<setting name="lazyLoadingEnabled" value="false" />
+</settings>
+<typeAliases>
+<!-- Dominios mapping -->
+<typeAlias alias="InquiryDominiosRequest" 	type="com.sensus.mlc.dominios.model.request.InquiryDominiosRequest" />
+<typeAlias alias="DominiosRequest" 			type="com.sensus.mlc.dominios.model.request.DominiosRequest" />
+<typeAlias alias="FilialRequest" 		type="com.sensus.mlc.filial.model.request.FilialRequest" />
+<typeAlias alias="EnderecoRequest" 		type="com.sensus.mlc.endereco.model.request.EnderecoRequest" />
+<!-- Dominios and Smartpoint joint mapping -->
+<typeAlias alias="Dominios"  type="com.sensus.mlc.dominios.model.Dominios"/>
+<typeAlias alias="Filial"     type="com.sensus.mlc.filial.model.Filial"/>
+<typeAlias alias="Endereco"   type="com.sensus.mlc.endereco.model.Endereco"/>
+<!-- Smartpoint mapping -->
+<typeAlias alias="Group"        type="com.sensus.mlc.group.model.Group" />
+<typeAlias alias="dominios"      type="com.sensus.mlc.dominios.model.Dominios" />
+</typeAliases>
+<mappers>
+<mapper resource="com/sensus/mlc/dominios/dac/mybatis/map/Dominios.xml"/>
+<mapper resource="com/sensus/mlc/filial/dac/mybatis/map/Filial.xml" />
+<mapper resource="com/sensus/mlc/endereco/dac/mybatis/map/Endereco.xml" />
+<mapper resource="com/sensus/mlc/auditoria/dac/mybatis/map/Auditoria.xml" />
+</mappers>
+</configuration>

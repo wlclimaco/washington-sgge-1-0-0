@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Lfitclfiscal">
+
+	<resultMap id="listAllLfitclfiscalResults" type="Lfitclfiscal" >
+		<result property="codemp" column="codemp" />
+		<result property="codfilial" column="codfilial" />
+		<result property="codfisc" column="codfisc" />
+		<result property="coditfisc" column="coditfisc" />
+		<result property="origfisc" column="origfisc" />
+		<result property="codemptt" column="codemptt" />
+		<result property="codfilialtt" column="codfilialtt" />
+		<result property="tipofisc" column="tipofisc" />
+		<result property="tpredicmsfisc" column="tpredicmsfisc" />
+		<result property="redfisc" column="redfisc" />
+		<result property="codtrattrib" column="codtrattrib" />
+		<result property="noufitfisc" column="noufitfisc" />
+		<result property="codempfc" column="codempfc" />
+		<result property="codfilialfc" column="codfilialfc" />
+		<result property="codfisccli" column="codfisccli" />
+		<result property="aliqfisc" column="aliqfisc" />
+		<result property="aliqfiscintra" column="aliqfiscintra" />
+		<result property="aliqlfisc" column="aliqlfisc" />
+		<result property="aliqipifisc" column="aliqipifisc" />
+		<result property="aliqpisfisc" column="aliqpisfisc" />
+		<result property="aliqcofinsfisc" column="aliqcofinsfisc" />
+		<result property="aliqcsocialfisc" column="aliqcsocialfisc" />
+		<result property="aliqirfisc" column="aliqirfisc" />
+		<result property="aliqfunruralfisc" column="aliqfunruralfisc" />
+		<result property="aliqiifisc" column="aliqiifisc" />
+		<result property="codempme" column="codempme" />
+		<result property="codfilialme" column="codfilialme" />
+		<result property="codmens" column="codmens" />
+		<result property="codemptm" column="codemptm" />
+		<result property="codfilialtm" column="codfilialtm" />
+		<result property="codtipomov" column="codtipomov" />
+		<result property="tipost" column="tipost" />
+		<result property="margemvlagr" column="margemvlagr" />
+		<result property="geralfisc" column="geralfisc" />
+		<result property="codempsp" column="codempsp" />
+		<result property="codfilialsp" column="codfilialsp" />
+		<result property="codsittribpis" column="codsittribpis" />
+		<result property="impsittribpis" column="impsittribpis" />
+		<result property="codempsc" column="codempsc" />
+		<result property="codfilialsc" column="codfilialsc" />
+		<result property="codsittribcof" column="codsittribcof" />
+		<result property="impsittribcof" column="impsittribcof" />
+		<result property="codempsi" column="codempsi" />
+		<result property="codfilialsi" column="codfilialsi" />
+		<result property="codsittribipi" column="codsittribipi" />
+		<result property="impsittribipi" column="impsittribipi" />
+		<result property="tpcalcipi" column="tpcalcipi" />
+		<result property="vlripiunidtrib" column="vlripiunidtrib" />
+		<result property="modbcicms" column="modbcicms" />
+		<result property="modbcicmsst" column="modbcicmsst" />
+		<result property="codpais" column="codpais" />
+		<result property="siglauf" column="siglauf" />
+		<result property="vlrpisunidtrib" column="vlrpisunidtrib" />
+		<result property="vlrcofunidtrib" column="vlrcofunidtrib" />
+		<result property="tipousoitfisc" column="tipousoitfisc" />
+		<result property="redbasest" column="redbasest" />
+		<result property="redbasefrete" column="redbasefrete" />
+		<result property="codempra" column="codempra" />
+		<result property="codfilialra" column="codfilialra" />
+		<result property="codregra" column="codregra" />
+		<result property="codempis" column="codempis" />
+		<result property="codfilialis" column="codfilialis" />
+		<result property="codsittribiss" column="codsittribiss" />
+		<result property="impsittribiss" column="impsittribiss" />
+		<result property="aliqissfisc" column="aliqissfisc" />
+		<result property="retensaoiss" column="retensaoiss" />
+		<result property="indapuripi" column="indapuripi" />
+		<result property="codempcn" column="codempcn" />
+		<result property="codfilialcn" column="codfilialcn" />
+		<result property="csosn" column="csosn" />
+		<result property="aliqicmsimp" column="aliqicmsimp" />
+		<result property="perccredpresimp" column="perccredpresimp" />
+		<result property="adicipibaseicms" column="adicipibaseicms" />
+		<result property="adicicmstotnota" column="adicicmstotnota" />
+		<result property="codempcc" column="codempcc" />
+		<result property="codfilialcc" column="codfilialcc" />
+		<result property="codcalc" column="codcalc" />
+		<result property="aliqicmsstcm" column="aliqicmsstcm" />
+		<result property="calcstcm" column="calcstcm" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allLfitclfiscalColumms">
+     	codemp,
+     	codfilial,
+     	codfisc,
+     	coditfisc,
+     	origfisc,
+     	codemptt,
+     	codfilialtt,
+     	tipofisc,
+     	tpredicmsfisc,
+     	redfisc,
+     	codtrattrib,
+     	noufitfisc,
+     	codempfc,
+     	codfilialfc,
+     	codfisccli,
+     	aliqfisc,
+     	aliqfiscintra,
+     	aliqlfisc,
+     	aliqipifisc,
+     	aliqpisfisc,
+     	aliqcofinsfisc,
+     	aliqcsocialfisc,
+     	aliqirfisc,
+     	aliqfunruralfisc,
+     	aliqiifisc,
+     	codempme,
+     	codfilialme,
+     	codmens,
+     	codemptm,
+     	codfilialtm,
+     	codtipomov,
+     	tipost,
+     	margemvlagr,
+     	geralfisc,
+     	codempsp,
+     	codfilialsp,
+     	codsittribpis,
+     	impsittribpis,
+     	codempsc,
+     	codfilialsc,
+     	codsittribcof,
+     	impsittribcof,
+     	codempsi,
+     	codfilialsi,
+     	codsittribipi,
+     	impsittribipi,
+     	tpcalcipi,
+     	vlripiunidtrib,
+     	modbcicms,
+     	modbcicmsst,
+     	codpais,
+     	siglauf,
+     	vlrpisunidtrib,
+     	vlrcofunidtrib,
+     	tipousoitfisc,
+     	redbasest,
+     	redbasefrete,
+     	codempra,
+     	codfilialra,
+     	codregra,
+     	codempis,
+     	codfilialis,
+     	codsittribiss,
+     	impsittribiss,
+     	aliqissfisc,
+     	retensaoiss,
+     	indapuripi,
+     	codempcn,
+     	codfilialcn,
+     	csosn,
+     	aliqicmsimp,
+     	perccredpresimp,
+     	adicipibaseicms,
+     	adicicmstotnota,
+     	codempcc,
+     	codfilialcc,
+     	codcalc,
+     	aliqicmsstcm,
+     	calcstcm,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Lfitclfiscal -->
+	<select id="insertLfitclfiscal" parameterType="Map" resultType="int">
+		SELECT ins_lfitclfiscal (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codfisc,jdbcType=INTEGER},
+		#{coditfisc,jdbcType=INTEGER},
+		#{origfisc,jdbcType=VARCHAR},
+		#{codemptt,jdbcType=INTEGER},
+		#{codfilialtt,jdbcType=INTEGER},
+		#{tipofisc,jdbcType=VARCHAR},
+		#{tpredicmsfisc,jdbcType=VARCHAR},
+		#{redfisc,jdbcType=DOUBLE},
+		#{codtrattrib,jdbcType=VARCHAR},
+		#{noufitfisc,jdbcType=VARCHAR},
+		#{codempfc,jdbcType=INTEGER},
+		#{codfilialfc,jdbcType=INTEGER},
+		#{codfisccli,jdbcType=INTEGER},
+		#{aliqfisc,jdbcType=DOUBLE},
+		#{aliqfiscintra,jdbcType=DOUBLE},
+		#{aliqlfisc,jdbcType=DOUBLE},
+		#{aliqipifisc,jdbcType=DOUBLE},
+		#{aliqpisfisc,jdbcType=DOUBLE},
+		#{aliqcofinsfisc,jdbcType=DOUBLE},
+		#{aliqcsocialfisc,jdbcType=DOUBLE},
+		#{aliqirfisc,jdbcType=DOUBLE},
+		#{aliqfunruralfisc,jdbcType=DOUBLE},
+		#{aliqiifisc,jdbcType=DOUBLE},
+		#{codempme,jdbcType=INTEGER},
+		#{codfilialme,jdbcType=INTEGER},
+		#{codmens,jdbcType=INTEGER},
+		#{codemptm,jdbcType=INTEGER},
+		#{codfilialtm,jdbcType=INTEGER},
+		#{codtipomov,jdbcType=INTEGER},
+		#{tipost,jdbcType=VARCHAR},
+		#{margemvlagr,jdbcType=DOUBLE},
+		#{geralfisc,jdbcType=VARCHAR},
+		#{codempsp,jdbcType=INTEGER},
+		#{codfilialsp,jdbcType=INTEGER},
+		#{codsittribpis,jdbcType=VARCHAR},
+		#{impsittribpis,jdbcType=VARCHAR},
+		#{codempsc,jdbcType=INTEGER},
+		#{codfilialsc,jdbcType=INTEGER},
+		#{codsittribcof,jdbcType=VARCHAR},
+		#{impsittribcof,jdbcType=VARCHAR},
+		#{codempsi,jdbcType=INTEGER},
+		#{codfilialsi,jdbcType=INTEGER},
+		#{codsittribipi,jdbcType=VARCHAR},
+		#{impsittribipi,jdbcType=VARCHAR},
+		#{tpcalcipi,jdbcType=VARCHAR},
+		#{vlripiunidtrib,jdbcType=DOUBLE},
+		#{modbcicms,jdbcType=INTEGER},
+		#{modbcicmsst,jdbcType=INTEGER},
+		#{codpais,jdbcType=INTEGER},
+		#{siglauf,jdbcType=VARCHAR},
+		#{vlrpisunidtrib,jdbcType=DOUBLE},
+		#{vlrcofunidtrib,jdbcType=DOUBLE},
+		#{tipousoitfisc,jdbcType=VARCHAR},
+		#{redbasest,jdbcType=VARCHAR},
+		#{redbasefrete,jdbcType=VARCHAR},
+		#{codempra,jdbcType=INTEGER},
+		#{codfilialra,jdbcType=INTEGER},
+		#{codregra,jdbcType=VARCHAR},
+		#{codempis,jdbcType=INTEGER},
+		#{codfilialis,jdbcType=INTEGER},
+		#{codsittribiss,jdbcType=VARCHAR},
+		#{impsittribiss,jdbcType=VARCHAR},
+		#{aliqissfisc,jdbcType=DOUBLE},
+		#{retensaoiss,jdbcType=VARCHAR},
+		#{indapuripi,jdbcType=VARCHAR},
+		#{codempcn,jdbcType=INTEGER},
+		#{codfilialcn,jdbcType=INTEGER},
+		#{csosn,jdbcType=VARCHAR},
+		#{aliqicmsimp,jdbcType=DOUBLE},
+		#{perccredpresimp,jdbcType=DOUBLE},
+		#{adicipibaseicms,jdbcType=VARCHAR},
+		#{adicicmstotnota,jdbcType=VARCHAR},
+		#{codempcc,jdbcType=INTEGER},
+		#{codfilialcc,jdbcType=INTEGER},
+		#{codcalc,jdbcType=INTEGER},
+		#{aliqicmsstcm,jdbcType=DOUBLE},
+		#{calcstcm,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Lfitclfiscal -->
+	<select id="updateLfitclfiscal" parameterType="Map" resultType="int">
+		SELECT upd_lfitclfiscal (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codfisc,jdbcType=INTEGER},
+		#{coditfisc,jdbcType=INTEGER},
+		#{origfisc,jdbcType=VARCHAR},
+		#{codemptt,jdbcType=INTEGER},
+		#{codfilialtt,jdbcType=INTEGER},
+		#{tipofisc,jdbcType=VARCHAR},
+		#{tpredicmsfisc,jdbcType=VARCHAR},
+		#{redfisc,jdbcType=DOUBLE},
+		#{codtrattrib,jdbcType=VARCHAR},
+		#{noufitfisc,jdbcType=VARCHAR},
+		#{codempfc,jdbcType=INTEGER},
+		#{codfilialfc,jdbcType=INTEGER},
+		#{codfisccli,jdbcType=INTEGER},
+		#{aliqfisc,jdbcType=DOUBLE},
+		#{aliqfiscintra,jdbcType=DOUBLE},
+		#{aliqlfisc,jdbcType=DOUBLE},
+		#{aliqipifisc,jdbcType=DOUBLE},
+		#{aliqpisfisc,jdbcType=DOUBLE},
+		#{aliqcofinsfisc,jdbcType=DOUBLE},
+		#{aliqcsocialfisc,jdbcType=DOUBLE},
+		#{aliqirfisc,jdbcType=DOUBLE},
+		#{aliqfunruralfisc,jdbcType=DOUBLE},
+		#{aliqiifisc,jdbcType=DOUBLE},
+		#{codempme,jdbcType=INTEGER},
+		#{codfilialme,jdbcType=INTEGER},
+		#{codmens,jdbcType=INTEGER},
+		#{codemptm,jdbcType=INTEGER},
+		#{codfilialtm,jdbcType=INTEGER},
+		#{codtipomov,jdbcType=INTEGER},
+		#{tipost,jdbcType=VARCHAR},
+		#{margemvlagr,jdbcType=DOUBLE},
+		#{geralfisc,jdbcType=VARCHAR},
+		#{codempsp,jdbcType=INTEGER},
+		#{codfilialsp,jdbcType=INTEGER},
+		#{codsittribpis,jdbcType=VARCHAR},
+		#{impsittribpis,jdbcType=VARCHAR},
+		#{codempsc,jdbcType=INTEGER},
+		#{codfilialsc,jdbcType=INTEGER},
+		#{codsittribcof,jdbcType=VARCHAR},
+		#{impsittribcof,jdbcType=VARCHAR},
+		#{codempsi,jdbcType=INTEGER},
+		#{codfilialsi,jdbcType=INTEGER},
+		#{codsittribipi,jdbcType=VARCHAR},
+		#{impsittribipi,jdbcType=VARCHAR},
+		#{tpcalcipi,jdbcType=VARCHAR},
+		#{vlripiunidtrib,jdbcType=DOUBLE},
+		#{modbcicms,jdbcType=INTEGER},
+		#{modbcicmsst,jdbcType=INTEGER},
+		#{codpais,jdbcType=INTEGER},
+		#{siglauf,jdbcType=VARCHAR},
+		#{vlrpisunidtrib,jdbcType=DOUBLE},
+		#{vlrcofunidtrib,jdbcType=DOUBLE},
+		#{tipousoitfisc,jdbcType=VARCHAR},
+		#{redbasest,jdbcType=VARCHAR},
+		#{redbasefrete,jdbcType=VARCHAR},
+		#{codempra,jdbcType=INTEGER},
+		#{codfilialra,jdbcType=INTEGER},
+		#{codregra,jdbcType=VARCHAR},
+		#{codempis,jdbcType=INTEGER},
+		#{codfilialis,jdbcType=INTEGER},
+		#{codsittribiss,jdbcType=VARCHAR},
+		#{impsittribiss,jdbcType=VARCHAR},
+		#{aliqissfisc,jdbcType=DOUBLE},
+		#{retensaoiss,jdbcType=VARCHAR},
+		#{indapuripi,jdbcType=VARCHAR},
+		#{codempcn,jdbcType=INTEGER},
+		#{codfilialcn,jdbcType=INTEGER},
+		#{csosn,jdbcType=VARCHAR},
+		#{aliqicmsimp,jdbcType=DOUBLE},
+		#{perccredpresimp,jdbcType=DOUBLE},
+		#{adicipibaseicms,jdbcType=VARCHAR},
+		#{adicicmstotnota,jdbcType=VARCHAR},
+		#{codempcc,jdbcType=INTEGER},
+		#{codfilialcc,jdbcType=INTEGER},
+		#{codcalc,jdbcType=INTEGER},
+		#{aliqicmsstcm,jdbcType=DOUBLE},
+		#{calcstcm,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Lfitclfiscal -->
+	<select id="deleteLfitclfiscal" parameterType="Lfitclfiscal">
+		SELECT del_lfitclfiscal (#{id})
+	</select>
+	
+	<!-- Fetch All Lfitclfiscals -->
+	<select id="fetchAllLfitclfiscals" parameterType="Map" resultMap="listAllLfitclfiscalResults">
+	
+		SELECT  <include refid="allLfitclfiscalColumms"/>
+		  FROM lfitclfiscal
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM lfitclfiscal 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Lfitclfiscal By type -->
+	<select id="fetchLfitclfiscalByType" parameterType="LfitclfiscalRequest"  resultMap="listAllLfitclfiscalResults" >
+		SELECT  <include refid="allCustomListLfitclfiscalColumns"/>
+		  FROM lfitclfiscal
+		 WHERE name = #{lfitclfiscal.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Lfitclfiscal By Id -->
+	<select id="fetchLfitclfiscalById" parameterType="Lfitclfiscal" resultMap="listAllLfitclfiscalResults" >
+		SELECT <include refid="allCustomListLfitclfiscalColumns"/>
+		  FROM lfitclfiscal
+		 WHERE lfitclfiscal_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Lfitclfiscal By Id -->
+	<select id="fetchLfitclfiscalNameById" parameterType="Lfitclfiscal" resultMap="listAllLfitclfiscalResults" >
+		SELECT <include refid="allCustomListLfitclfiscalColumns"/>
+		  FROM lfitclfiscal
+		 WHERE lfitclfiscal_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

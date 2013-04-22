@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<settings>
+<setting name="lazyLoadingEnabled" value="false" />
+</settings>
+<typeAliases>
+<!-- Lfregrafiscal mapping -->
+<typeAlias alias="InquiryLfregrafiscalRequest" 	type="com.sensus.mlc.lfregrafiscal.model.request.InquiryLfregrafiscalRequest" />
+<typeAlias alias="LfregrafiscalRequest" 			type="com.sensus.mlc.lfregrafiscal.model.request.LfregrafiscalRequest" />
+<typeAlias alias="FilialRequest" 		type="com.sensus.mlc.filial.model.request.FilialRequest" />
+<typeAlias alias="EnderecoRequest" 		type="com.sensus.mlc.endereco.model.request.EnderecoRequest" />
+<!-- Lfregrafiscal and Smartpoint joint mapping -->
+<typeAlias alias="Lfregrafiscal"  type="com.sensus.mlc.lfregrafiscal.model.Lfregrafiscal"/>
+<typeAlias alias="Filial"     type="com.sensus.mlc.filial.model.Filial"/>
+<typeAlias alias="Endereco"   type="com.sensus.mlc.endereco.model.Endereco"/>
+<!-- Smartpoint mapping -->
+<typeAlias alias="Group"        type="com.sensus.mlc.group.model.Group" />
+<typeAlias alias="lfregrafiscal"      type="com.sensus.mlc.lfregrafiscal.model.Lfregrafiscal" />
+</typeAliases>
+<mappers>
+<mapper resource="com/sensus/mlc/lfregrafiscal/dac/mybatis/map/Lfregrafiscal.xml"/>
+<mapper resource="com/sensus/mlc/filial/dac/mybatis/map/Filial.xml" />
+<mapper resource="com/sensus/mlc/endereco/dac/mybatis/map/Endereco.xml" />
+<mapper resource="com/sensus/mlc/auditoria/dac/mybatis/map/Auditoria.xml" />
+</mappers>
+</configuration>

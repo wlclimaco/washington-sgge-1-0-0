@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Lfitcalccusto">
+
+	<resultMap id="listAllLfitcalccustoResults" type="Lfitcalccusto" >
+		<result property="codemp" column="codemp" />
+		<result property="codfilial" column="codfilial" />
+		<result property="codcalc" column="codcalc" />
+		<result property="seqitcalc" column="seqitcalc" />
+		<result property="siglacalc" column="siglacalc" />
+		<result property="operacaocalc" column="operacaocalc" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allLfitcalccustoColumms">
+     	codemp,
+     	codfilial,
+     	codcalc,
+     	seqitcalc,
+     	siglacalc,
+     	operacaocalc,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Lfitcalccusto -->
+	<select id="insertLfitcalccusto" parameterType="Map" resultType="int">
+		SELECT ins_lfitcalccusto (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codcalc,jdbcType=INTEGER},
+		#{seqitcalc,jdbcType=INTEGER},
+		#{siglacalc,jdbcType=VARCHAR},
+		#{operacaocalc,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Lfitcalccusto -->
+	<select id="updateLfitcalccusto" parameterType="Map" resultType="int">
+		SELECT upd_lfitcalccusto (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codcalc,jdbcType=INTEGER},
+		#{seqitcalc,jdbcType=INTEGER},
+		#{siglacalc,jdbcType=VARCHAR},
+		#{operacaocalc,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Lfitcalccusto -->
+	<select id="deleteLfitcalccusto" parameterType="Lfitcalccusto">
+		SELECT del_lfitcalccusto (#{id})
+	</select>
+	
+	<!-- Fetch All Lfitcalccustos -->
+	<select id="fetchAllLfitcalccustos" parameterType="Map" resultMap="listAllLfitcalccustoResults">
+	
+		SELECT  <include refid="allLfitcalccustoColumms"/>
+		  FROM lfitcalccusto
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM lfitcalccusto 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Lfitcalccusto By type -->
+	<select id="fetchLfitcalccustoByType" parameterType="LfitcalccustoRequest"  resultMap="listAllLfitcalccustoResults" >
+		SELECT  <include refid="allCustomListLfitcalccustoColumns"/>
+		  FROM lfitcalccusto
+		 WHERE name = #{lfitcalccusto.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Lfitcalccusto By Id -->
+	<select id="fetchLfitcalccustoById" parameterType="Lfitcalccusto" resultMap="listAllLfitcalccustoResults" >
+		SELECT <include refid="allCustomListLfitcalccustoColumns"/>
+		  FROM lfitcalccusto
+		 WHERE lfitcalccusto_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Lfitcalccusto By Id -->
+	<select id="fetchLfitcalccustoNameById" parameterType="Lfitcalccusto" resultMap="listAllLfitcalccustoResults" >
+		SELECT <include refid="allCustomListLfitcalccustoColumns"/>
+		  FROM lfitcalccusto
+		 WHERE lfitcalccusto_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

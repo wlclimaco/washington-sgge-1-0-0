@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Lftabicms.txt">
+
+	<resultMap id="listAllLftabicms.txtResults" type="Lftabicms.txt" >
+		<result property="codemp" column="codemp" />
+		<result property="codfilial" column="codfilial" />
+		<result property="ufti" column="ufti" />
+		<result property="aliqti" column="aliqti" />
+		<result property="aliqintrati" column="aliqintrati" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allLftabicms.txtColumms">
+     	codemp,
+     	codfilial,
+     	ufti,
+     	aliqti,
+     	aliqintrati,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Lftabicms.txt -->
+	<select id="insertLftabicms.txt" parameterType="Map" resultType="int">
+		SELECT ins_lftabicms.txt (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{ufti,jdbcType=VARCHAR},
+		#{aliqti,jdbcType=DOUBLE},
+		#{aliqintrati,jdbcType=INTEGER},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Lftabicms.txt -->
+	<select id="updateLftabicms.txt" parameterType="Map" resultType="int">
+		SELECT upd_lftabicms.txt (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{ufti,jdbcType=VARCHAR},
+		#{aliqti,jdbcType=DOUBLE},
+		#{aliqintrati,jdbcType=INTEGER},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Lftabicms.txt -->
+	<select id="deleteLftabicms.txt" parameterType="Lftabicms.txt">
+		SELECT del_lftabicms.txt (#{id})
+	</select>
+	
+	<!-- Fetch All Lftabicms.txts -->
+	<select id="fetchAllLftabicms.txts" parameterType="Map" resultMap="listAllLftabicms.txtResults">
+	
+		SELECT  <include refid="allLftabicms.txtColumms"/>
+		  FROM lftabicms.txt
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM lftabicms.txt 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Lftabicms.txt By type -->
+	<select id="fetchLftabicms.txtByType" parameterType="Lftabicms.txtRequest"  resultMap="listAllLftabicms.txtResults" >
+		SELECT  <include refid="allCustomListLftabicms.txtColumns"/>
+		  FROM lftabicms.txt
+		 WHERE name = #{lftabicms.txt.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Lftabicms.txt By Id -->
+	<select id="fetchLftabicms.txtById" parameterType="Lftabicms.txt" resultMap="listAllLftabicms.txtResults" >
+		SELECT <include refid="allCustomListLftabicms.txtColumns"/>
+		  FROM lftabicms.txt
+		 WHERE lftabicms.txt_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Lftabicms.txt By Id -->
+	<select id="fetchLftabicms.txtNameById" parameterType="Lftabicms.txt" resultMap="listAllLftabicms.txtResults" >
+		SELECT <include refid="allCustomListLftabicms.txtColumns"/>
+		  FROM lftabicms.txt
+		 WHERE lftabicms.txt_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

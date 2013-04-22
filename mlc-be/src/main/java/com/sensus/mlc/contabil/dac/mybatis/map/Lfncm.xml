@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Lfncm">
+
+	<resultMap id="listAllLfncmResults" type="Lfncm" >
+		<result property="codncm" column="codncm" />
+		<result property="descncm" column="descncm" />
+		<result property="aliqncm" column="aliqncm" />
+		<result property="textoncm" column="textoncm" />
+		<result property="excecaoncm" column="excecaoncm" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allLfncmColumms">
+     	codncm,
+     	descncm,
+     	aliqncm,
+     	textoncm,
+     	excecaoncm,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Lfncm -->
+	<select id="insertLfncm" parameterType="Map" resultType="int">
+		SELECT ins_lfncm (
+		#{codncm,jdbcType=VARCHAR},
+		#{descncm,jdbcType=VARCHAR},
+		#{aliqncm,jdbcType=VARCHAR},
+		#{textoncm,jdbcType=VARCHAR},
+		#{excecaoncm,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Lfncm -->
+	<select id="updateLfncm" parameterType="Map" resultType="int">
+		SELECT upd_lfncm (
+		#{codncm,jdbcType=VARCHAR},
+		#{descncm,jdbcType=VARCHAR},
+		#{aliqncm,jdbcType=VARCHAR},
+		#{textoncm,jdbcType=VARCHAR},
+		#{excecaoncm,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Lfncm -->
+	<select id="deleteLfncm" parameterType="Lfncm">
+		SELECT del_lfncm (#{id})
+	</select>
+	
+	<!-- Fetch All Lfncms -->
+	<select id="fetchAllLfncms" parameterType="Map" resultMap="listAllLfncmResults">
+	
+		SELECT  <include refid="allLfncmColumms"/>
+		  FROM lfncm
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM lfncm 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Lfncm By type -->
+	<select id="fetchLfncmByType" parameterType="LfncmRequest"  resultMap="listAllLfncmResults" >
+		SELECT  <include refid="allCustomListLfncmColumns"/>
+		  FROM lfncm
+		 WHERE name = #{lfncm.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Lfncm By Id -->
+	<select id="fetchLfncmById" parameterType="Lfncm" resultMap="listAllLfncmResults" >
+		SELECT <include refid="allCustomListLfncmColumns"/>
+		  FROM lfncm
+		 WHERE lfncm_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Lfncm By Id -->
+	<select id="fetchLfncmNameById" parameterType="Lfncm" resultMap="listAllLfncmResults" >
+		SELECT <include refid="allCustomListLfncmColumns"/>
+		  FROM lfncm
+		 WHERE lfncm_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

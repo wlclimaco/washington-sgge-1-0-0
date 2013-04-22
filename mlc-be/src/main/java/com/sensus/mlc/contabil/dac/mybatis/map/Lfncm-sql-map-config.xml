@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<settings>
+<setting name="lazyLoadingEnabled" value="false" />
+</settings>
+<typeAliases>
+<!-- Lfncm mapping -->
+<typeAlias alias="InquiryLfncmRequest" 	type="com.sensus.mlc.lfncm.model.request.InquiryLfncmRequest" />
+<typeAlias alias="LfncmRequest" 			type="com.sensus.mlc.lfncm.model.request.LfncmRequest" />
+<typeAlias alias="FilialRequest" 		type="com.sensus.mlc.filial.model.request.FilialRequest" />
+<typeAlias alias="EnderecoRequest" 		type="com.sensus.mlc.endereco.model.request.EnderecoRequest" />
+<!-- Lfncm and Smartpoint joint mapping -->
+<typeAlias alias="Lfncm"  type="com.sensus.mlc.lfncm.model.Lfncm"/>
+<typeAlias alias="Filial"     type="com.sensus.mlc.filial.model.Filial"/>
+<typeAlias alias="Endereco"   type="com.sensus.mlc.endereco.model.Endereco"/>
+<!-- Smartpoint mapping -->
+<typeAlias alias="Group"        type="com.sensus.mlc.group.model.Group" />
+<typeAlias alias="lfncm"      type="com.sensus.mlc.lfncm.model.Lfncm" />
+</typeAliases>
+<mappers>
+<mapper resource="com/sensus/mlc/lfncm/dac/mybatis/map/Lfncm.xml"/>
+<mapper resource="com/sensus/mlc/filial/dac/mybatis/map/Filial.xml" />
+<mapper resource="com/sensus/mlc/endereco/dac/mybatis/map/Endereco.xml" />
+<mapper resource="com/sensus/mlc/auditoria/dac/mybatis/map/Auditoria.xml" />
+</mappers>
+</configuration>
