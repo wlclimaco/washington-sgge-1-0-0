@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Lfcsosn">
+
+	<resultMap id="listAllLfcsosnResults" type="Lfcsosn" >
+		<result property="codemp" column="codemp" />
+		<result property="codfilial" column="codfilial" />
+		<result property="csosn" column="csosn" />
+		<result property="desccsosn" column="desccsosn" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allLfcsosnColumms">
+     	codemp,
+     	codfilial,
+     	csosn,
+     	desccsosn,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Lfcsosn -->
+	<select id="insertLfcsosn" parameterType="Map" resultType="int">
+		SELECT ins_lfcsosn (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{csosn,jdbcType=VARCHAR},
+		#{desccsosn,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Lfcsosn -->
+	<select id="updateLfcsosn" parameterType="Map" resultType="int">
+		SELECT upd_lfcsosn (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{csosn,jdbcType=VARCHAR},
+		#{desccsosn,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Lfcsosn -->
+	<select id="deleteLfcsosn" parameterType="Lfcsosn">
+		SELECT del_lfcsosn (#{id})
+	</select>
+	
+	<!-- Fetch All Lfcsosns -->
+	<select id="fetchAllLfcsosns" parameterType="Map" resultMap="listAllLfcsosnResults">
+	
+		SELECT  <include refid="allLfcsosnColumms"/>
+		  FROM lfcsosn
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM lfcsosn 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Lfcsosn By type -->
+	<select id="fetchLfcsosnByType" parameterType="LfcsosnRequest"  resultMap="listAllLfcsosnResults" >
+		SELECT  <include refid="allCustomListLfcsosnColumns"/>
+		  FROM lfcsosn
+		 WHERE name = #{lfcsosn.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Lfcsosn By Id -->
+	<select id="fetchLfcsosnById" parameterType="Lfcsosn" resultMap="listAllLfcsosnResults" >
+		SELECT <include refid="allCustomListLfcsosnColumns"/>
+		  FROM lfcsosn
+		 WHERE lfcsosn_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Lfcsosn By Id -->
+	<select id="fetchLfcsosnNameById" parameterType="Lfcsosn" resultMap="listAllLfcsosnResults" >
+		SELECT <include refid="allCustomListLfcsosnColumns"/>
+		  FROM lfcsosn
+		 WHERE lfcsosn_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

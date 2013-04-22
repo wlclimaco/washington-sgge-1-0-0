@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Lflivrofiscal">
+
+	<resultMap id="listAllLflivrofiscalResults" type="Lflivrofiscal" >
+		<result property="codemp" column="codemp" />
+		<result property="codfilial" column="codfilial" />
+		<result property="tipolf" column="tipolf" />
+		<result property="anomeslf" column="anomeslf" />
+		<result property="codlf" column="codlf" />
+		<result property="codempet" column="codempet" />
+		<result property="codfilialet" column="codfilialet" />
+		<result property="codemitlf" column="codemitlf" />
+		<result property="serielf" column="serielf" />
+		<result property="docinilf" column="docinilf" />
+		<result property="dtemitlf" column="dtemitlf" />
+		<result property="dteslf" column="dteslf" />
+		<result property="codempnt" column="codempnt" />
+		<result property="codfilialnt" column="codfilialnt" />
+		<result property="codnat" column="codnat" />
+		<result property="docfimlf" column="docfimlf" />
+		<result property="especielf" column="especielf" />
+		<result property="uflf" column="uflf" />
+		<result property="vlrcontabillf" column="vlrcontabillf" />
+		<result property="vlrbaseicmslf" column="vlrbaseicmslf" />
+		<result property="aliqicmslf" column="aliqicmslf" />
+		<result property="vlricmslf" column="vlricmslf" />
+		<result property="vlrisentasicmslf" column="vlrisentasicmslf" />
+		<result property="vlroutrasicmslf" column="vlroutrasicmslf" />
+		<result property="vlrbaseipilf" column="vlrbaseipilf" />
+		<result property="aliqipilf" column="aliqipilf" />
+		<result property="vlripilf" column="vlripilf" />
+		<result property="vlrisentasipilf" column="vlrisentasipilf" />
+		<result property="vlroutrasipilf" column="vlroutrasipilf" />
+		<result property="obslf" column="obslf" />
+		<result property="codempmn" column="codempmn" />
+		<result property="codfilialmn" column="codfilialmn" />
+		<result property="codmodnota" column="codmodnota" />
+		<result property="situacaolf" column="situacaolf" />
+		<result property="vlrbaseicmsstlf" column="vlrbaseicmsstlf" />
+		<result property="vlricmsstlf" column="vlricmsstlf" />
+		<result property="vlracessoriaslf" column="vlracessoriaslf" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allLflivrofiscalColumms">
+     	codemp,
+     	codfilial,
+     	tipolf,
+     	anomeslf,
+     	codlf,
+     	codempet,
+     	codfilialet,
+     	codemitlf,
+     	serielf,
+     	docinilf,
+     	dtemitlf,
+     	dteslf,
+     	codempnt,
+     	codfilialnt,
+     	codnat,
+     	docfimlf,
+     	especielf,
+     	uflf,
+     	vlrcontabillf,
+     	vlrbaseicmslf,
+     	aliqicmslf,
+     	vlricmslf,
+     	vlrisentasicmslf,
+     	vlroutrasicmslf,
+     	vlrbaseipilf,
+     	aliqipilf,
+     	vlripilf,
+     	vlrisentasipilf,
+     	vlroutrasipilf,
+     	obslf,
+     	codempmn,
+     	codfilialmn,
+     	codmodnota,
+     	situacaolf,
+     	vlrbaseicmsstlf,
+     	vlricmsstlf,
+     	vlracessoriaslf,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Lflivrofiscal -->
+	<select id="insertLflivrofiscal" parameterType="Map" resultType="int">
+		SELECT ins_lflivrofiscal (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{tipolf,jdbcType=VARCHAR},
+		#{anomeslf,jdbcType=VARCHAR},
+		#{codlf,jdbcType=INTEGER},
+		#{codempet,jdbcType=INTEGER},
+		#{codfilialet,jdbcType=INTEGER},
+		#{codemitlf,jdbcType=INTEGER},
+		#{serielf,jdbcType=VARCHAR},
+		#{docinilf,jdbcType=INTEGER},
+		#{dtemitlf,jdbcType=DATE},
+		#{dteslf,jdbcType=DATE},
+		#{codempnt,jdbcType=INTEGER},
+		#{codfilialnt,jdbcType=INTEGER},
+		#{codnat,jdbcType=VARCHAR},
+		#{docfimlf,jdbcType=INTEGER},
+		#{especielf,jdbcType=VARCHAR},
+		#{uflf,jdbcType=VARCHAR},
+		#{vlrcontabillf,jdbcType=DOUBLE},
+		#{vlrbaseicmslf,jdbcType=DOUBLE},
+		#{aliqicmslf,jdbcType=DOUBLE},
+		#{vlricmslf,jdbcType=DOUBLE},
+		#{vlrisentasicmslf,jdbcType=DOUBLE},
+		#{vlroutrasicmslf,jdbcType=DOUBLE},
+		#{vlrbaseipilf,jdbcType=DOUBLE},
+		#{aliqipilf,jdbcType=DOUBLE},
+		#{vlripilf,jdbcType=DOUBLE},
+		#{vlrisentasipilf,jdbcType=DOUBLE},
+		#{vlroutrasipilf,jdbcType=DOUBLE},
+		#{obslf,jdbcType=VARCHAR},
+		#{codempmn,jdbcType=INTEGER},
+		#{codfilialmn,jdbcType=INTEGER},
+		#{codmodnota,jdbcType=INTEGER},
+		#{situacaolf,jdbcType=VARCHAR},
+		#{vlrbaseicmsstlf,jdbcType=DOUBLE},
+		#{vlricmsstlf,jdbcType=DOUBLE},
+		#{vlracessoriaslf,jdbcType=DOUBLE},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Lflivrofiscal -->
+	<select id="updateLflivrofiscal" parameterType="Map" resultType="int">
+		SELECT upd_lflivrofiscal (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{tipolf,jdbcType=VARCHAR},
+		#{anomeslf,jdbcType=VARCHAR},
+		#{codlf,jdbcType=INTEGER},
+		#{codempet,jdbcType=INTEGER},
+		#{codfilialet,jdbcType=INTEGER},
+		#{codemitlf,jdbcType=INTEGER},
+		#{serielf,jdbcType=VARCHAR},
+		#{docinilf,jdbcType=INTEGER},
+		#{dtemitlf,jdbcType=DATE},
+		#{dteslf,jdbcType=DATE},
+		#{codempnt,jdbcType=INTEGER},
+		#{codfilialnt,jdbcType=INTEGER},
+		#{codnat,jdbcType=VARCHAR},
+		#{docfimlf,jdbcType=INTEGER},
+		#{especielf,jdbcType=VARCHAR},
+		#{uflf,jdbcType=VARCHAR},
+		#{vlrcontabillf,jdbcType=DOUBLE},
+		#{vlrbaseicmslf,jdbcType=DOUBLE},
+		#{aliqicmslf,jdbcType=DOUBLE},
+		#{vlricmslf,jdbcType=DOUBLE},
+		#{vlrisentasicmslf,jdbcType=DOUBLE},
+		#{vlroutrasicmslf,jdbcType=DOUBLE},
+		#{vlrbaseipilf,jdbcType=DOUBLE},
+		#{aliqipilf,jdbcType=DOUBLE},
+		#{vlripilf,jdbcType=DOUBLE},
+		#{vlrisentasipilf,jdbcType=DOUBLE},
+		#{vlroutrasipilf,jdbcType=DOUBLE},
+		#{obslf,jdbcType=VARCHAR},
+		#{codempmn,jdbcType=INTEGER},
+		#{codfilialmn,jdbcType=INTEGER},
+		#{codmodnota,jdbcType=INTEGER},
+		#{situacaolf,jdbcType=VARCHAR},
+		#{vlrbaseicmsstlf,jdbcType=DOUBLE},
+		#{vlricmsstlf,jdbcType=DOUBLE},
+		#{vlracessoriaslf,jdbcType=DOUBLE},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Lflivrofiscal -->
+	<select id="deleteLflivrofiscal" parameterType="Lflivrofiscal">
+		SELECT del_lflivrofiscal (#{id})
+	</select>
+	
+	<!-- Fetch All Lflivrofiscals -->
+	<select id="fetchAllLflivrofiscals" parameterType="Map" resultMap="listAllLflivrofiscalResults">
+	
+		SELECT  <include refid="allLflivrofiscalColumms"/>
+		  FROM lflivrofiscal
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM lflivrofiscal 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Lflivrofiscal By type -->
+	<select id="fetchLflivrofiscalByType" parameterType="LflivrofiscalRequest"  resultMap="listAllLflivrofiscalResults" >
+		SELECT  <include refid="allCustomListLflivrofiscalColumns"/>
+		  FROM lflivrofiscal
+		 WHERE name = #{lflivrofiscal.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Lflivrofiscal By Id -->
+	<select id="fetchLflivrofiscalById" parameterType="Lflivrofiscal" resultMap="listAllLflivrofiscalResults" >
+		SELECT <include refid="allCustomListLflivrofiscalColumns"/>
+		  FROM lflivrofiscal
+		 WHERE lflivrofiscal_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Lflivrofiscal By Id -->
+	<select id="fetchLflivrofiscalNameById" parameterType="Lflivrofiscal" resultMap="listAllLflivrofiscalResults" >
+		SELECT <include refid="allCustomListLflivrofiscalColumns"/>
+		  FROM lflivrofiscal
+		 WHERE lflivrofiscal_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

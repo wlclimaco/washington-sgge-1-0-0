@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Atributos">
+
+	<resultMap id="listAllAtributosResults" type="Atributos" >
+		<result property="cdtabela" column="cdtabela" />
+		<result property="nmtabela" column="nmtabela" />
+		<result property="nmatribu" column="nmatribu" />
+		<result property="dsatribu" column="dsatribu" />
+		<result property="tpatribu" column="tpatribu" />
+		<result property="dsmascar" column="dsmascar" />
+		<result property="dshelp" column="dshelp" />
+		<result property="tmatribu" column="tmatribu" />
+		<result property="nrseqatr" column="nrseqatr" />
+		<result property="auditorias" column="auditorias" />
+	</resultMap>
+
+
+	<sql id="allAtributosColumms">
+     	cdtabela,
+     	nmtabela,
+     	nmatribu,
+     	dsatribu,
+     	tpatribu,
+     	dsmascar,
+     	dshelp,
+     	tmatribu,
+     	nrseqatr,
+     	auditorias,
+	</sql>
+	
+
+	<!-- Insert Atributos -->
+	<select id="insertAtributos" parameterType="Map" resultType="int">
+		SELECT ins_atributos (
+		#{cdtabela,jdbcType=INTEGER},
+		#{nmtabela,jdbcType=VARCHAR},
+		#{nmatribu,jdbcType=VARCHAR},
+		#{dsatribu,jdbcType=VARCHAR},
+		#{tpatribu,jdbcType=VARCHAR},
+		#{dsmascar,jdbcType=VARCHAR},
+		#{dshelp,jdbcType=VARCHAR},
+		#{tmatribu,jdbcType=INTEGER},
+		#{nrseqatr,jdbcType=INTEGER},
+		#{auditorias,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Atributos -->
+	<select id="updateAtributos" parameterType="Map" resultType="int">
+		SELECT upd_atributos (
+		#{cdtabela,jdbcType=INTEGER},
+		#{nmtabela,jdbcType=VARCHAR},
+		#{nmatribu,jdbcType=VARCHAR},
+		#{dsatribu,jdbcType=VARCHAR},
+		#{tpatribu,jdbcType=VARCHAR},
+		#{dsmascar,jdbcType=VARCHAR},
+		#{dshelp,jdbcType=VARCHAR},
+		#{tmatribu,jdbcType=INTEGER},
+		#{nrseqatr,jdbcType=INTEGER},
+		#{auditorias,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Atributos -->
+	<select id="deleteAtributos" parameterType="Atributos">
+		SELECT del_atributos (#{id})
+	</select>
+	
+	<!-- Fetch All Atributoss -->
+	<select id="fetchAllAtributoss" parameterType="Map" resultMap="listAllAtributosResults">
+	
+		SELECT  <include refid="allAtributosColumms"/>
+		  FROM atributos
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM atributos 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Atributos By type -->
+	<select id="fetchAtributosByType" parameterType="AtributosRequest"  resultMap="listAllAtributosResults" >
+		SELECT  <include refid="allCustomListAtributosColumns"/>
+		  FROM atributos
+		 WHERE name = #{atributos.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Atributos By Id -->
+	<select id="fetchAtributosById" parameterType="Atributos" resultMap="listAllAtributosResults" >
+		SELECT <include refid="allCustomListAtributosColumns"/>
+		  FROM atributos
+		 WHERE atributos_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Atributos By Id -->
+	<select id="fetchAtributosNameById" parameterType="Atributos" resultMap="listAllAtributosResults" >
+		SELECT <include refid="allCustomListAtributosColumns"/>
+		  FROM atributos
+		 WHERE atributos_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

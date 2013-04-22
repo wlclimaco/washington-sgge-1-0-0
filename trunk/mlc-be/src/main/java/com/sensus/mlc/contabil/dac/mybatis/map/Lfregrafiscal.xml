@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Lfregrafiscal">
+
+	<resultMap id="listAllLfregrafiscalResults" type="Lfregrafiscal" >
+		<result property="codemp" column="codemp" />
+		<result property="codfilial" column="codfilial" />
+		<result property="codregra" column="codregra" />
+		<result property="descregra" column="descregra" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allLfregrafiscalColumms">
+     	codemp,
+     	codfilial,
+     	codregra,
+     	descregra,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Lfregrafiscal -->
+	<select id="insertLfregrafiscal" parameterType="Map" resultType="int">
+		SELECT ins_lfregrafiscal (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codregra,jdbcType=VARCHAR},
+		#{descregra,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Lfregrafiscal -->
+	<select id="updateLfregrafiscal" parameterType="Map" resultType="int">
+		SELECT upd_lfregrafiscal (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codregra,jdbcType=VARCHAR},
+		#{descregra,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Lfregrafiscal -->
+	<select id="deleteLfregrafiscal" parameterType="Lfregrafiscal">
+		SELECT del_lfregrafiscal (#{id})
+	</select>
+	
+	<!-- Fetch All Lfregrafiscals -->
+	<select id="fetchAllLfregrafiscals" parameterType="Map" resultMap="listAllLfregrafiscalResults">
+	
+		SELECT  <include refid="allLfregrafiscalColumms"/>
+		  FROM lfregrafiscal
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM lfregrafiscal 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Lfregrafiscal By type -->
+	<select id="fetchLfregrafiscalByType" parameterType="LfregrafiscalRequest"  resultMap="listAllLfregrafiscalResults" >
+		SELECT  <include refid="allCustomListLfregrafiscalColumns"/>
+		  FROM lfregrafiscal
+		 WHERE name = #{lfregrafiscal.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Lfregrafiscal By Id -->
+	<select id="fetchLfregrafiscalById" parameterType="Lfregrafiscal" resultMap="listAllLfregrafiscalResults" >
+		SELECT <include refid="allCustomListLfregrafiscalColumns"/>
+		  FROM lfregrafiscal
+		 WHERE lfregrafiscal_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Lfregrafiscal By Id -->
+	<select id="fetchLfregrafiscalNameById" parameterType="Lfregrafiscal" resultMap="listAllLfregrafiscalResults" >
+		SELECT <include refid="allCustomListLfregrafiscalColumns"/>
+		  FROM lfregrafiscal
+		 WHERE lfregrafiscal_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

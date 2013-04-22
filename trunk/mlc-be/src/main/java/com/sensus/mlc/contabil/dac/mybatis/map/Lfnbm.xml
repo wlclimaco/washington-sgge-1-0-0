@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Lfnbm">
+
+	<resultMap id="listAllLfnbmResults" type="Lfnbm" >
+		<result property="codnbm" column="codnbm" />
+		<result property="descnbm" column="descnbm" />
+		<result property="dtins" column="dtins" />
+		<result property="hins" column="hins" />
+		<result property="idusuins" column="idusuins" />
+		<result property="dtalt" column="dtalt" />
+		<result property="halt" column="halt" />
+		<result property="idusualt" column="idusualt" />
+	</resultMap>
+
+
+	<sql id="allLfnbmColumms">
+     	codnbm,
+     	descnbm,
+     	dtins,
+     	hins,
+     	idusuins,
+     	dtalt,
+     	halt,
+     	idusualt,
+	</sql>
+	
+
+	<!-- Insert Lfnbm -->
+	<select id="insertLfnbm" parameterType="Map" resultType="int">
+		SELECT ins_lfnbm (
+		#{codnbm,jdbcType=VARCHAR},
+		#{descnbm,jdbcType=VARCHAR},
+		#{dtins,jdbcType=DATE},
+		#{hins,jdbcType=DATE},
+		#{idusuins,jdbcType=VARCHAR},
+		#{dtalt,jdbcType=DATE},
+		#{halt,jdbcType=DATE},
+		#{idusualt,jdbcType=VARCHAR},
+)
+	</select>
+
+	<!-- Update Lfnbm -->
+	<select id="updateLfnbm" parameterType="Map" resultType="int">
+		SELECT upd_lfnbm (
+		#{codnbm,jdbcType=VARCHAR},
+		#{descnbm,jdbcType=VARCHAR},
+		#{dtins,jdbcType=DATE},
+		#{hins,jdbcType=DATE},
+		#{idusuins,jdbcType=VARCHAR},
+		#{dtalt,jdbcType=DATE},
+		#{halt,jdbcType=DATE},
+		#{idusualt,jdbcType=VARCHAR},
+)
+	</select>
+
+	<!-- Delete Lfnbm -->
+	<select id="deleteLfnbm" parameterType="Lfnbm">
+		SELECT del_lfnbm (#{id})
+	</select>
+	
+	<!-- Fetch All Lfnbms -->
+	<select id="fetchAllLfnbms" parameterType="Map" resultMap="listAllLfnbmResults">
+	
+		SELECT  <include refid="allLfnbmColumms"/>
+		  FROM lfnbm
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM lfnbm 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Lfnbm By type -->
+	<select id="fetchLfnbmByType" parameterType="LfnbmRequest"  resultMap="listAllLfnbmResults" >
+		SELECT  <include refid="allCustomListLfnbmColumns"/>
+		  FROM lfnbm
+		 WHERE name = #{lfnbm.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Lfnbm By Id -->
+	<select id="fetchLfnbmById" parameterType="Lfnbm" resultMap="listAllLfnbmResults" >
+		SELECT <include refid="allCustomListLfnbmColumns"/>
+		  FROM lfnbm
+		 WHERE lfnbm_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Lfnbm By Id -->
+	<select id="fetchLfnbmNameById" parameterType="Lfnbm" resultMap="listAllLfnbmResults" >
+		SELECT <include refid="allCustomListLfnbmColumns"/>
+		  FROM lfnbm
+		 WHERE lfnbm_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

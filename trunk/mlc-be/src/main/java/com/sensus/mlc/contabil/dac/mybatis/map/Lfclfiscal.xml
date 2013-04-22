@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Lfclfiscal">
+
+	<resultMap id="listAllLfclfiscalResults" type="Lfclfiscal" >
+		<result property="codemp" column="codemp" />
+		<result property="codfilial" column="codfilial" />
+		<result property="codfisc" column="codfisc" />
+		<result property="descfisc" column="descfisc" />
+		<result property="tipofisc" column="tipofisc" />
+		<result property="tpredicmsfisc" column="tpredicmsfisc" />
+		<result property="aliqfisc" column="aliqfisc" />
+		<result property="aliqlfisc" column="aliqlfisc" />
+		<result property="redfisc" column="redfisc" />
+		<result property="aliqipifisc" column="aliqipifisc" />
+		<result property="codempra" column="codempra" />
+		<result property="codfilialra" column="codfilialra" />
+		<result property="codregra" column="codregra" />
+		<result property="origfisc" column="origfisc" />
+		<result property="codemptt" column="codemptt" />
+		<result property="codfilialtt" column="codfilialtt" />
+		<result property="codtrattrib" column="codtrattrib" />
+		<result property="codempme" column="codempme" />
+		<result property="codfilialme" column="codfilialme" />
+		<result property="codmens" column="codmens" />
+		<result property="sitpisfisc" column="sitpisfisc" />
+		<result property="sitcofinsfisc" column="sitcofinsfisc" />
+		<result property="tipost" column="tipost" />
+		<result property="margemvlagr" column="margemvlagr" />
+		<result property="codncm" column="codncm" />
+		<result property="codnbm" column="codnbm" />
+		<result property="extipi" column="extipi" />
+		<result property="codserv" column="codserv" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allLfclfiscalColumms">
+     	codemp,
+     	codfilial,
+     	codfisc,
+     	descfisc,
+     	tipofisc,
+     	tpredicmsfisc,
+     	aliqfisc,
+     	aliqlfisc,
+     	redfisc,
+     	aliqipifisc,
+     	codempra,
+     	codfilialra,
+     	codregra,
+     	origfisc,
+     	codemptt,
+     	codfilialtt,
+     	codtrattrib,
+     	codempme,
+     	codfilialme,
+     	codmens,
+     	sitpisfisc,
+     	sitcofinsfisc,
+     	tipost,
+     	margemvlagr,
+     	codncm,
+     	codnbm,
+     	extipi,
+     	codserv,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Lfclfiscal -->
+	<select id="insertLfclfiscal" parameterType="Map" resultType="int">
+		SELECT ins_lfclfiscal (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codfisc,jdbcType=INTEGER},
+		#{descfisc,jdbcType=VARCHAR},
+		#{tipofisc,jdbcType=VARCHAR},
+		#{tpredicmsfisc,jdbcType=VARCHAR},
+		#{aliqfisc,jdbcType=DOUBLE},
+		#{aliqlfisc,jdbcType=DOUBLE},
+		#{redfisc,jdbcType=DOUBLE},
+		#{aliqipifisc,jdbcType=DOUBLE},
+		#{codempra,jdbcType=INTEGER},
+		#{codfilialra,jdbcType=INTEGER},
+		#{codregra,jdbcType=VARCHAR},
+		#{origfisc,jdbcType=VARCHAR},
+		#{codemptt,jdbcType=INTEGER},
+		#{codfilialtt,jdbcType=INTEGER},
+		#{codtrattrib,jdbcType=VARCHAR},
+		#{codempme,jdbcType=INTEGER},
+		#{codfilialme,jdbcType=INTEGER},
+		#{codmens,jdbcType=INTEGER},
+		#{sitpisfisc,jdbcType=VARCHAR},
+		#{sitcofinsfisc,jdbcType=VARCHAR},
+		#{tipost,jdbcType=VARCHAR},
+		#{margemvlagr,jdbcType=DOUBLE},
+		#{codncm,jdbcType=VARCHAR},
+		#{codnbm,jdbcType=VARCHAR},
+		#{extipi,jdbcType=VARCHAR},
+		#{codserv,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Lfclfiscal -->
+	<select id="updateLfclfiscal" parameterType="Map" resultType="int">
+		SELECT upd_lfclfiscal (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codfisc,jdbcType=INTEGER},
+		#{descfisc,jdbcType=VARCHAR},
+		#{tipofisc,jdbcType=VARCHAR},
+		#{tpredicmsfisc,jdbcType=VARCHAR},
+		#{aliqfisc,jdbcType=DOUBLE},
+		#{aliqlfisc,jdbcType=DOUBLE},
+		#{redfisc,jdbcType=DOUBLE},
+		#{aliqipifisc,jdbcType=DOUBLE},
+		#{codempra,jdbcType=INTEGER},
+		#{codfilialra,jdbcType=INTEGER},
+		#{codregra,jdbcType=VARCHAR},
+		#{origfisc,jdbcType=VARCHAR},
+		#{codemptt,jdbcType=INTEGER},
+		#{codfilialtt,jdbcType=INTEGER},
+		#{codtrattrib,jdbcType=VARCHAR},
+		#{codempme,jdbcType=INTEGER},
+		#{codfilialme,jdbcType=INTEGER},
+		#{codmens,jdbcType=INTEGER},
+		#{sitpisfisc,jdbcType=VARCHAR},
+		#{sitcofinsfisc,jdbcType=VARCHAR},
+		#{tipost,jdbcType=VARCHAR},
+		#{margemvlagr,jdbcType=DOUBLE},
+		#{codncm,jdbcType=VARCHAR},
+		#{codnbm,jdbcType=VARCHAR},
+		#{extipi,jdbcType=VARCHAR},
+		#{codserv,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Lfclfiscal -->
+	<select id="deleteLfclfiscal" parameterType="Lfclfiscal">
+		SELECT del_lfclfiscal (#{id})
+	</select>
+	
+	<!-- Fetch All Lfclfiscals -->
+	<select id="fetchAllLfclfiscals" parameterType="Map" resultMap="listAllLfclfiscalResults">
+	
+		SELECT  <include refid="allLfclfiscalColumms"/>
+		  FROM lfclfiscal
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM lfclfiscal 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Lfclfiscal By type -->
+	<select id="fetchLfclfiscalByType" parameterType="LfclfiscalRequest"  resultMap="listAllLfclfiscalResults" >
+		SELECT  <include refid="allCustomListLfclfiscalColumns"/>
+		  FROM lfclfiscal
+		 WHERE name = #{lfclfiscal.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Lfclfiscal By Id -->
+	<select id="fetchLfclfiscalById" parameterType="Lfclfiscal" resultMap="listAllLfclfiscalResults" >
+		SELECT <include refid="allCustomListLfclfiscalColumns"/>
+		  FROM lfclfiscal
+		 WHERE lfclfiscal_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Lfclfiscal By Id -->
+	<select id="fetchLfclfiscalNameById" parameterType="Lfclfiscal" resultMap="listAllLfclfiscalResults" >
+		SELECT <include refid="allCustomListLfclfiscalColumns"/>
+		  FROM lfclfiscal
+		 WHERE lfclfiscal_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

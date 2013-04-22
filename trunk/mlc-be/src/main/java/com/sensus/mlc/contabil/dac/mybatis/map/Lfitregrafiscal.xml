@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Lfitregrafiscal">
+
+	<resultMap id="listAllLfitregrafiscalResults" type="Lfitregrafiscal" >
+		<result property="codemp" column="codemp" />
+		<result property="codfilial" column="codfilial" />
+		<result property="codregra" column="codregra" />
+		<result property="codnat" column="codnat" />
+		<result property="noufitrf" column="noufitrf" />
+		<result property="cvitrf" column="cvitrf" />
+		<result property="codemptm" column="codemptm" />
+		<result property="codfilialtm" column="codfilialtm" />
+		<result property="codtipomov" column="codtipomov" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allLfitregrafiscalColumms">
+     	codemp,
+     	codfilial,
+     	codregra,
+     	codnat,
+     	noufitrf,
+     	cvitrf,
+     	codemptm,
+     	codfilialtm,
+     	codtipomov,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Lfitregrafiscal -->
+	<select id="insertLfitregrafiscal" parameterType="Map" resultType="int">
+		SELECT ins_lfitregrafiscal (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codregra,jdbcType=INTEGER},
+		#{codnat,jdbcType=VARCHAR},
+		#{noufitrf,jdbcType=VARCHAR},
+		#{cvitrf,jdbcType=VARCHAR},
+		#{codemptm,jdbcType=INTEGER},
+		#{codfilialtm,jdbcType=INTEGER},
+		#{codtipomov,jdbcType=INTEGER},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Lfitregrafiscal -->
+	<select id="updateLfitregrafiscal" parameterType="Map" resultType="int">
+		SELECT upd_lfitregrafiscal (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codregra,jdbcType=INTEGER},
+		#{codnat,jdbcType=VARCHAR},
+		#{noufitrf,jdbcType=VARCHAR},
+		#{cvitrf,jdbcType=VARCHAR},
+		#{codemptm,jdbcType=INTEGER},
+		#{codfilialtm,jdbcType=INTEGER},
+		#{codtipomov,jdbcType=INTEGER},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Lfitregrafiscal -->
+	<select id="deleteLfitregrafiscal" parameterType="Lfitregrafiscal">
+		SELECT del_lfitregrafiscal (#{id})
+	</select>
+	
+	<!-- Fetch All Lfitregrafiscals -->
+	<select id="fetchAllLfitregrafiscals" parameterType="Map" resultMap="listAllLfitregrafiscalResults">
+	
+		SELECT  <include refid="allLfitregrafiscalColumms"/>
+		  FROM lfitregrafiscal
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM lfitregrafiscal 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Lfitregrafiscal By type -->
+	<select id="fetchLfitregrafiscalByType" parameterType="LfitregrafiscalRequest"  resultMap="listAllLfitregrafiscalResults" >
+		SELECT  <include refid="allCustomListLfitregrafiscalColumns"/>
+		  FROM lfitregrafiscal
+		 WHERE name = #{lfitregrafiscal.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Lfitregrafiscal By Id -->
+	<select id="fetchLfitregrafiscalById" parameterType="Lfitregrafiscal" resultMap="listAllLfitregrafiscalResults" >
+		SELECT <include refid="allCustomListLfitregrafiscalColumns"/>
+		  FROM lfitregrafiscal
+		 WHERE lfitregrafiscal_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Lfitregrafiscal By Id -->
+	<select id="fetchLfitregrafiscalNameById" parameterType="Lfitregrafiscal" resultMap="listAllLfitregrafiscalResults" >
+		SELECT <include refid="allCustomListLfitregrafiscalColumns"/>
+		  FROM lfitregrafiscal
+		 WHERE lfitregrafiscal_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

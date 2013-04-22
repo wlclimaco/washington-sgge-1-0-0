@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Lfsittrib">
+
+	<resultMap id="listAllLfsittribResults" type="Lfsittrib" >
+		<result property="codemp" column="codemp" />
+		<result property="codfilial" column="codfilial" />
+		<result property="codsittrib" column="codsittrib" />
+		<result property="impsittrib" column="impsittrib" />
+		<result property="descsittrib" column="descsittrib" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allLfsittribColumms">
+     	codemp,
+     	codfilial,
+     	codsittrib,
+     	impsittrib,
+     	descsittrib,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Lfsittrib -->
+	<select id="insertLfsittrib" parameterType="Map" resultType="int">
+		SELECT ins_lfsittrib (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codsittrib,jdbcType=VARCHAR},
+		#{impsittrib,jdbcType=VARCHAR},
+		#{descsittrib,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Lfsittrib -->
+	<select id="updateLfsittrib" parameterType="Map" resultType="int">
+		SELECT upd_lfsittrib (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codsittrib,jdbcType=VARCHAR},
+		#{impsittrib,jdbcType=VARCHAR},
+		#{descsittrib,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Lfsittrib -->
+	<select id="deleteLfsittrib" parameterType="Lfsittrib">
+		SELECT del_lfsittrib (#{id})
+	</select>
+	
+	<!-- Fetch All Lfsittribs -->
+	<select id="fetchAllLfsittribs" parameterType="Map" resultMap="listAllLfsittribResults">
+	
+		SELECT  <include refid="allLfsittribColumms"/>
+		  FROM lfsittrib
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM lfsittrib 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Lfsittrib By type -->
+	<select id="fetchLfsittribByType" parameterType="LfsittribRequest"  resultMap="listAllLfsittribResults" >
+		SELECT  <include refid="allCustomListLfsittribColumns"/>
+		  FROM lfsittrib
+		 WHERE name = #{lfsittrib.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Lfsittrib By Id -->
+	<select id="fetchLfsittribById" parameterType="Lfsittrib" resultMap="listAllLfsittribResults" >
+		SELECT <include refid="allCustomListLfsittribColumns"/>
+		  FROM lfsittrib
+		 WHERE lfsittrib_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Lfsittrib By Id -->
+	<select id="fetchLfsittribNameById" parameterType="Lfsittrib" resultMap="listAllLfsittribResults" >
+		SELECT <include refid="allCustomListLfsittribColumns"/>
+		  FROM lfsittrib
+		 WHERE lfsittrib_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

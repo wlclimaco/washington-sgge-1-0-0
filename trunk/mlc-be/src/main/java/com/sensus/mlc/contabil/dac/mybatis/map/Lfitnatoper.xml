@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Lfitnatoper">
+
+	<resultMap id="listAllLfitnatoperResults" type="Lfitnatoper" >
+		<result property="codemp" column="codemp" />
+		<result property="codfilial" column="codfilial" />
+		<result property="codnat" column="codnat" />
+		<result property="coditnatoper" column="coditnatoper" />
+		<result property="codempti" column="codempti" />
+		<result property="codfilialti" column="codfilialti" />
+		<result property="ufti" column="ufti" />
+		<result property="	listinsalt" column="	listinsalt" />
+	</resultMap>
+
+
+	<sql id="allLfitnatoperColumms">
+     	codemp,
+     	codfilial,
+     	codnat,
+     	coditnatoper,
+     	codempti,
+     	codfilialti,
+     	ufti,
+     		listinsalt,
+	</sql>
+	
+
+	<!-- Insert Lfitnatoper -->
+	<select id="insertLfitnatoper" parameterType="Map" resultType="int">
+		SELECT ins_lfitnatoper (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codnat,jdbcType=VARCHAR},
+		#{coditnatoper,jdbcType=INTEGER},
+		#{codempti,jdbcType=INTEGER},
+		#{codfilialti,jdbcType=INTEGER},
+		#{ufti,jdbcType=VARCHAR},
+		#{	listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Lfitnatoper -->
+	<select id="updateLfitnatoper" parameterType="Map" resultType="int">
+		SELECT upd_lfitnatoper (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codnat,jdbcType=VARCHAR},
+		#{coditnatoper,jdbcType=INTEGER},
+		#{codempti,jdbcType=INTEGER},
+		#{codfilialti,jdbcType=INTEGER},
+		#{ufti,jdbcType=VARCHAR},
+		#{	listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Lfitnatoper -->
+	<select id="deleteLfitnatoper" parameterType="Lfitnatoper">
+		SELECT del_lfitnatoper (#{id})
+	</select>
+	
+	<!-- Fetch All Lfitnatopers -->
+	<select id="fetchAllLfitnatopers" parameterType="Map" resultMap="listAllLfitnatoperResults">
+	
+		SELECT  <include refid="allLfitnatoperColumms"/>
+		  FROM lfitnatoper
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM lfitnatoper 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Lfitnatoper By type -->
+	<select id="fetchLfitnatoperByType" parameterType="LfitnatoperRequest"  resultMap="listAllLfitnatoperResults" >
+		SELECT  <include refid="allCustomListLfitnatoperColumns"/>
+		  FROM lfitnatoper
+		 WHERE name = #{lfitnatoper.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Lfitnatoper By Id -->
+	<select id="fetchLfitnatoperById" parameterType="Lfitnatoper" resultMap="listAllLfitnatoperResults" >
+		SELECT <include refid="allCustomListLfitnatoperColumns"/>
+		  FROM lfitnatoper
+		 WHERE lfitnatoper_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Lfitnatoper By Id -->
+	<select id="fetchLfitnatoperNameById" parameterType="Lfitnatoper" resultMap="listAllLfitnatoperResults" >
+		SELECT <include refid="allCustomListLfitnatoperColumns"/>
+		  FROM lfitnatoper
+		 WHERE lfitnatoper_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

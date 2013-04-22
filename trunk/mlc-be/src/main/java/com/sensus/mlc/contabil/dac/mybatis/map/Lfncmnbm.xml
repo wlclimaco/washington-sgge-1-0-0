@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Lfncmnbm">
+
+	<resultMap id="listAllLfncmnbmResults" type="Lfncmnbm" >
+		<result property="codncm" column="codncm" />
+		<result property="codnbm" column="codnbm" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allLfncmnbmColumms">
+     	codncm,
+     	codnbm,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Lfncmnbm -->
+	<select id="insertLfncmnbm" parameterType="Map" resultType="int">
+		SELECT ins_lfncmnbm (
+		#{codncm,jdbcType=VARCHAR},
+		#{codnbm,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Lfncmnbm -->
+	<select id="updateLfncmnbm" parameterType="Map" resultType="int">
+		SELECT upd_lfncmnbm (
+		#{codncm,jdbcType=VARCHAR},
+		#{codnbm,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Lfncmnbm -->
+	<select id="deleteLfncmnbm" parameterType="Lfncmnbm">
+		SELECT del_lfncmnbm (#{id})
+	</select>
+	
+	<!-- Fetch All Lfncmnbms -->
+	<select id="fetchAllLfncmnbms" parameterType="Map" resultMap="listAllLfncmnbmResults">
+	
+		SELECT  <include refid="allLfncmnbmColumms"/>
+		  FROM lfncmnbm
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM lfncmnbm 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Lfncmnbm By type -->
+	<select id="fetchLfncmnbmByType" parameterType="LfncmnbmRequest"  resultMap="listAllLfncmnbmResults" >
+		SELECT  <include refid="allCustomListLfncmnbmColumns"/>
+		  FROM lfncmnbm
+		 WHERE name = #{lfncmnbm.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Lfncmnbm By Id -->
+	<select id="fetchLfncmnbmById" parameterType="Lfncmnbm" resultMap="listAllLfncmnbmResults" >
+		SELECT <include refid="allCustomListLfncmnbmColumns"/>
+		  FROM lfncmnbm
+		 WHERE lfncmnbm_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Lfncmnbm By Id -->
+	<select id="fetchLfncmnbmNameById" parameterType="Lfncmnbm" resultMap="listAllLfncmnbmResults" >
+		SELECT <include refid="allCustomListLfncmnbmColumns"/>
+		  FROM lfncmnbm
+		 WHERE lfncmnbm_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Lfmoddocfisc">
+
+	<resultMap id="listAllLfmoddocfiscResults" type="Lfmoddocfisc" >
+		<result property="codemp" column="codemp" />
+		<result property="codfilial" column="codfilial" />
+		<result property="codmoddocfisc" column="codmoddocfisc" />
+		<result property="descmoddocfisc" column="descmoddocfisc" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allLfmoddocfiscColumms">
+     	codemp,
+     	codfilial,
+     	codmoddocfisc,
+     	descmoddocfisc,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Lfmoddocfisc -->
+	<select id="insertLfmoddocfisc" parameterType="Map" resultType="int">
+		SELECT ins_lfmoddocfisc (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codmoddocfisc,jdbcType=VARCHAR},
+		#{descmoddocfisc,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Lfmoddocfisc -->
+	<select id="updateLfmoddocfisc" parameterType="Map" resultType="int">
+		SELECT upd_lfmoddocfisc (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codmoddocfisc,jdbcType=VARCHAR},
+		#{descmoddocfisc,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Lfmoddocfisc -->
+	<select id="deleteLfmoddocfisc" parameterType="Lfmoddocfisc">
+		SELECT del_lfmoddocfisc (#{id})
+	</select>
+	
+	<!-- Fetch All Lfmoddocfiscs -->
+	<select id="fetchAllLfmoddocfiscs" parameterType="Map" resultMap="listAllLfmoddocfiscResults">
+	
+		SELECT  <include refid="allLfmoddocfiscColumms"/>
+		  FROM lfmoddocfisc
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM lfmoddocfisc 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Lfmoddocfisc By type -->
+	<select id="fetchLfmoddocfiscByType" parameterType="LfmoddocfiscRequest"  resultMap="listAllLfmoddocfiscResults" >
+		SELECT  <include refid="allCustomListLfmoddocfiscColumns"/>
+		  FROM lfmoddocfisc
+		 WHERE name = #{lfmoddocfisc.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Lfmoddocfisc By Id -->
+	<select id="fetchLfmoddocfiscById" parameterType="Lfmoddocfisc" resultMap="listAllLfmoddocfiscResults" >
+		SELECT <include refid="allCustomListLfmoddocfiscColumns"/>
+		  FROM lfmoddocfisc
+		 WHERE lfmoddocfisc_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Lfmoddocfisc By Id -->
+	<select id="fetchLfmoddocfiscNameById" parameterType="Lfmoddocfisc" resultMap="listAllLfmoddocfiscResults" >
+		SELECT <include refid="allCustomListLfmoddocfiscColumns"/>
+		  FROM lfmoddocfisc
+		 WHERE lfmoddocfisc_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

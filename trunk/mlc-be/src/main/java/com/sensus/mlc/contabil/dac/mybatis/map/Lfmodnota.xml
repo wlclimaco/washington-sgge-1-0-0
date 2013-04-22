@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Lfmodnota">
+
+	<resultMap id="listAllLfmodnotaResults" type="Lfmodnota" >
+		<result property="codemp" column="codemp" />
+		<result property="codfilial" column="codfilial" />
+		<result property="codmodnota" column="codmodnota" />
+		<result property="descmodnota" column="descmodnota" />
+		<result property="tipomodnota" column="tipomodnota" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allLfmodnotaColumms">
+     	codemp,
+     	codfilial,
+     	codmodnota,
+     	descmodnota,
+     	tipomodnota,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Lfmodnota -->
+	<select id="insertLfmodnota" parameterType="Map" resultType="int">
+		SELECT ins_lfmodnota (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codmodnota,jdbcType=INTEGER},
+		#{descmodnota,jdbcType=VARCHAR},
+		#{tipomodnota,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Lfmodnota -->
+	<select id="updateLfmodnota" parameterType="Map" resultType="int">
+		SELECT upd_lfmodnota (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codmodnota,jdbcType=INTEGER},
+		#{descmodnota,jdbcType=VARCHAR},
+		#{tipomodnota,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Lfmodnota -->
+	<select id="deleteLfmodnota" parameterType="Lfmodnota">
+		SELECT del_lfmodnota (#{id})
+	</select>
+	
+	<!-- Fetch All Lfmodnotas -->
+	<select id="fetchAllLfmodnotas" parameterType="Map" resultMap="listAllLfmodnotaResults">
+	
+		SELECT  <include refid="allLfmodnotaColumms"/>
+		  FROM lfmodnota
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM lfmodnota 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Lfmodnota By type -->
+	<select id="fetchLfmodnotaByType" parameterType="LfmodnotaRequest"  resultMap="listAllLfmodnotaResults" >
+		SELECT  <include refid="allCustomListLfmodnotaColumns"/>
+		  FROM lfmodnota
+		 WHERE name = #{lfmodnota.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Lfmodnota By Id -->
+	<select id="fetchLfmodnotaById" parameterType="Lfmodnota" resultMap="listAllLfmodnotaResults" >
+		SELECT <include refid="allCustomListLfmodnotaColumns"/>
+		  FROM lfmodnota
+		 WHERE lfmodnota_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Lfmodnota By Id -->
+	<select id="fetchLfmodnotaNameById" parameterType="Lfmodnota" resultMap="listAllLfmodnotaResults" >
+		SELECT <include refid="allCustomListLfmodnotaColumns"/>
+		  FROM lfmodnota
+		 WHERE lfmodnota_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

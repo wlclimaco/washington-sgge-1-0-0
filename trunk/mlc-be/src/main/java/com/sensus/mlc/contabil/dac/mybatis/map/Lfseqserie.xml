@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Lfseqserie">
+
+	<resultMap id="listAllLfseqserieResults" type="Lfseqserie" >
+		<result property="codemp" column="codemp" />
+		<result property="codfilial" column="codfilial" />
+		<result property="serie" column="serie" />
+		<result property="codempss" column="codempss" />
+		<result property="codfilialss" column="codfilialss" />
+		<result property="seqserie" column="seqserie" />
+		<result property="docserie" column="docserie" />
+		<result property="ativserie" column="ativserie" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allLfseqserieColumms">
+     	codemp,
+     	codfilial,
+     	serie,
+     	codempss,
+     	codfilialss,
+     	seqserie,
+     	docserie,
+     	ativserie,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Lfseqserie -->
+	<select id="insertLfseqserie" parameterType="Map" resultType="int">
+		SELECT ins_lfseqserie (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{serie,jdbcType=VARCHAR},
+		#{codempss,jdbcType=INTEGER},
+		#{codfilialss,jdbcType=INTEGER},
+		#{seqserie,jdbcType=INTEGER},
+		#{docserie,jdbcType=INTEGER},
+		#{ativserie,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Lfseqserie -->
+	<select id="updateLfseqserie" parameterType="Map" resultType="int">
+		SELECT upd_lfseqserie (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{serie,jdbcType=VARCHAR},
+		#{codempss,jdbcType=INTEGER},
+		#{codfilialss,jdbcType=INTEGER},
+		#{seqserie,jdbcType=INTEGER},
+		#{docserie,jdbcType=INTEGER},
+		#{ativserie,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Lfseqserie -->
+	<select id="deleteLfseqserie" parameterType="Lfseqserie">
+		SELECT del_lfseqserie (#{id})
+	</select>
+	
+	<!-- Fetch All Lfseqseries -->
+	<select id="fetchAllLfseqseries" parameterType="Map" resultMap="listAllLfseqserieResults">
+	
+		SELECT  <include refid="allLfseqserieColumms"/>
+		  FROM lfseqserie
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM lfseqserie 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Lfseqserie By type -->
+	<select id="fetchLfseqserieByType" parameterType="LfseqserieRequest"  resultMap="listAllLfseqserieResults" >
+		SELECT  <include refid="allCustomListLfseqserieColumns"/>
+		  FROM lfseqserie
+		 WHERE name = #{lfseqserie.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Lfseqserie By Id -->
+	<select id="fetchLfseqserieById" parameterType="Lfseqserie" resultMap="listAllLfseqserieResults" >
+		SELECT <include refid="allCustomListLfseqserieColumns"/>
+		  FROM lfseqserie
+		 WHERE lfseqserie_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Lfseqserie By Id -->
+	<select id="fetchLfseqserieNameById" parameterType="Lfseqserie" resultMap="listAllLfseqserieResults" >
+		SELECT <include refid="allCustomListLfseqserieColumns"/>
+		  FROM lfseqserie
+		 WHERE lfseqserie_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

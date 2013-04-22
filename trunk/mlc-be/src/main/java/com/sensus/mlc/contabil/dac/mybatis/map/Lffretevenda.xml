@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Lffretevenda">
+
+	<resultMap id="listAllLffretevendaResults" type="Lffretevenda" >
+		<result property="codemp" column="codemp" />
+		<result property="codfilial" column="codfilial" />
+		<result property="codfrete" column="codfrete" />
+		<result property="codvenda" column="codvenda" />
+		<result property="tipovenda" column="tipovenda" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allLffretevendaColumms">
+     	codemp,
+     	codfilial,
+     	codfrete,
+     	codvenda,
+     	tipovenda,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Lffretevenda -->
+	<select id="insertLffretevenda" parameterType="Map" resultType="int">
+		SELECT ins_lffretevenda (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codfrete,jdbcType=INTEGER},
+		#{codvenda,jdbcType=INTEGER},
+		#{tipovenda,jdbcType=INTEGER},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Lffretevenda -->
+	<select id="updateLffretevenda" parameterType="Map" resultType="int">
+		SELECT upd_lffretevenda (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codfrete,jdbcType=INTEGER},
+		#{codvenda,jdbcType=INTEGER},
+		#{tipovenda,jdbcType=INTEGER},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Lffretevenda -->
+	<select id="deleteLffretevenda" parameterType="Lffretevenda">
+		SELECT del_lffretevenda (#{id})
+	</select>
+	
+	<!-- Fetch All Lffretevendas -->
+	<select id="fetchAllLffretevendas" parameterType="Map" resultMap="listAllLffretevendaResults">
+	
+		SELECT  <include refid="allLffretevendaColumms"/>
+		  FROM lffretevenda
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM lffretevenda 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Lffretevenda By type -->
+	<select id="fetchLffretevendaByType" parameterType="LffretevendaRequest"  resultMap="listAllLffretevendaResults" >
+		SELECT  <include refid="allCustomListLffretevendaColumns"/>
+		  FROM lffretevenda
+		 WHERE name = #{lffretevenda.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Lffretevenda By Id -->
+	<select id="fetchLffretevendaById" parameterType="Lffretevenda" resultMap="listAllLffretevendaResults" >
+		SELECT <include refid="allCustomListLffretevendaColumns"/>
+		  FROM lffretevenda
+		 WHERE lffretevenda_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Lffretevenda By Id -->
+	<select id="fetchLffretevendaNameById" parameterType="Lffretevenda" resultMap="listAllLffretevendaResults" >
+		SELECT <include refid="allCustomListLffretevendaColumns"/>
+		  FROM lffretevenda
+		 WHERE lffretevenda_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

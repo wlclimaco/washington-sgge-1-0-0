@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Lftipofisccli">
+
+	<resultMap id="listAllLftipofisccliResults" type="Lftipofisccli" >
+		<result property="codemp" column="codemp" />
+		<result property="codfilial" column="codfilial" />
+		<result property="codfisccli" column="codfisccli" />
+		<result property="descfisccli" column="descfisccli" />
+		<result property="calccofinstf" column="calccofinstf" />
+		<result property="calccsocialtf" column="calccsocialtf" />
+		<result property="calcicmstf" column="calcicmstf" />
+		<result property="calcipitf" column="calcipitf" />
+		<result property="calcirtf" column="calcirtf" />
+		<result property="calcisstf" column="calcisstf" />
+		<result property="calcpistf" column="calcpistf" />
+		<result property="impcofinstf" column="impcofinstf" />
+		<result property="impcsocialtf" column="impcsocialtf" />
+		<result property="impicmstf" column="impicmstf" />
+		<result property="impisstf" column="impisstf" />
+		<result property="impipitf" column="impipitf" />
+		<result property="impirtf" column="impirtf" />
+		<result property="imppistf" column="imppistf" />
+		<result property="codempoc" column="codempoc" />
+		<result property="codfilialoc" column="codfilialoc" />
+		<result property="codtipomovoc" column="codtipomovoc" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allLftipofisccliColumms">
+     	codemp,
+     	codfilial,
+     	codfisccli,
+     	descfisccli,
+     	calccofinstf,
+     	calccsocialtf,
+     	calcicmstf,
+     	calcipitf,
+     	calcirtf,
+     	calcisstf,
+     	calcpistf,
+     	impcofinstf,
+     	impcsocialtf,
+     	impicmstf,
+     	impisstf,
+     	impipitf,
+     	impirtf,
+     	imppistf,
+     	codempoc,
+     	codfilialoc,
+     	codtipomovoc,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Lftipofisccli -->
+	<select id="insertLftipofisccli" parameterType="Map" resultType="int">
+		SELECT ins_lftipofisccli (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codfisccli,jdbcType=INTEGER},
+		#{descfisccli,jdbcType=VARCHAR},
+		#{calccofinstf,jdbcType=VARCHAR},
+		#{calccsocialtf,jdbcType=VARCHAR},
+		#{calcicmstf,jdbcType=VARCHAR},
+		#{calcipitf,jdbcType=VARCHAR},
+		#{calcirtf,jdbcType=VARCHAR},
+		#{calcisstf,jdbcType=VARCHAR},
+		#{calcpistf,jdbcType=VARCHAR},
+		#{impcofinstf,jdbcType=VARCHAR},
+		#{impcsocialtf,jdbcType=VARCHAR},
+		#{impicmstf,jdbcType=VARCHAR},
+		#{impisstf,jdbcType=VARCHAR},
+		#{impipitf,jdbcType=VARCHAR},
+		#{impirtf,jdbcType=VARCHAR},
+		#{imppistf,jdbcType=VARCHAR},
+		#{codempoc,jdbcType=INTEGER},
+		#{codfilialoc,jdbcType=INTEGER},
+		#{codtipomovoc,jdbcType=INTEGER},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Lftipofisccli -->
+	<select id="updateLftipofisccli" parameterType="Map" resultType="int">
+		SELECT upd_lftipofisccli (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codfisccli,jdbcType=INTEGER},
+		#{descfisccli,jdbcType=VARCHAR},
+		#{calccofinstf,jdbcType=VARCHAR},
+		#{calccsocialtf,jdbcType=VARCHAR},
+		#{calcicmstf,jdbcType=VARCHAR},
+		#{calcipitf,jdbcType=VARCHAR},
+		#{calcirtf,jdbcType=VARCHAR},
+		#{calcisstf,jdbcType=VARCHAR},
+		#{calcpistf,jdbcType=VARCHAR},
+		#{impcofinstf,jdbcType=VARCHAR},
+		#{impcsocialtf,jdbcType=VARCHAR},
+		#{impicmstf,jdbcType=VARCHAR},
+		#{impisstf,jdbcType=VARCHAR},
+		#{impipitf,jdbcType=VARCHAR},
+		#{impirtf,jdbcType=VARCHAR},
+		#{imppistf,jdbcType=VARCHAR},
+		#{codempoc,jdbcType=INTEGER},
+		#{codfilialoc,jdbcType=INTEGER},
+		#{codtipomovoc,jdbcType=INTEGER},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Lftipofisccli -->
+	<select id="deleteLftipofisccli" parameterType="Lftipofisccli">
+		SELECT del_lftipofisccli (#{id})
+	</select>
+	
+	<!-- Fetch All Lftipofiscclis -->
+	<select id="fetchAllLftipofiscclis" parameterType="Map" resultMap="listAllLftipofisccliResults">
+	
+		SELECT  <include refid="allLftipofisccliColumms"/>
+		  FROM lftipofisccli
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM lftipofisccli 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Lftipofisccli By type -->
+	<select id="fetchLftipofisccliByType" parameterType="LftipofisccliRequest"  resultMap="listAllLftipofisccliResults" >
+		SELECT  <include refid="allCustomListLftipofisccliColumns"/>
+		  FROM lftipofisccli
+		 WHERE name = #{lftipofisccli.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Lftipofisccli By Id -->
+	<select id="fetchLftipofisccliById" parameterType="Lftipofisccli" resultMap="listAllLftipofisccliResults" >
+		SELECT <include refid="allCustomListLftipofisccliColumns"/>
+		  FROM lftipofisccli
+		 WHERE lftipofisccli_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Lftipofisccli By Id -->
+	<select id="fetchLftipofisccliNameById" parameterType="Lftipofisccli" resultMap="listAllLftipofisccliResults" >
+		SELECT <include refid="allCustomListLftipofisccliColumns"/>
+		  FROM lftipofisccli
+		 WHERE lftipofisccli_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

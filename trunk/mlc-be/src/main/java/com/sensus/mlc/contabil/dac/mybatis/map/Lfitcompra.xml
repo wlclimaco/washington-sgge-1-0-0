@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Lfitcompra">
+
+	<resultMap id="listAllLfitcompraResults" type="Lfitcompra" >
+		<result property="codemp" column="codemp" />
+		<result property="codfilial" column="codfilial" />
+		<result property="codcompra" column="codcompra" />
+		<result property="coditcompra" column="coditcompra" />
+		<result property="aliqcofins" column="aliqcofins" />
+		<result property="codempsp" column="codempsp" />
+		<result property="codfilialsp" column="codfilialsp" />
+		<result property="codsittribpis" column="codsittribpis" />
+		<result property="impsittribpis" column="impsittribpis" />
+		<result property="codempsc" column="codempsc" />
+		<result property="codfilialsc" column="codfilialsc" />
+		<result property="codsittribcof" column="codsittribcof" />
+		<result property="impsittribcof" column="impsittribcof" />
+		<result property="codempsi" column="codempsi" />
+		<result property="codfilialsi" column="codfilialsi" />
+		<result property="codsittribipi" column="codsittribipi" />
+		<result property="impsittribipi" column="impsittribipi" />
+		<result property="vlripiunidtrib" column="vlripiunidtrib" />
+		<result property="modbcicms" column="modbcicms" />
+		<result property="modbcicmsst" column="modbcicmsst" />
+		<result property="aliqredbcicms" column="aliqredbcicms" />
+		<result property="aliqredbcicmsst" column="aliqredbcicmsst" />
+		<result property="aliqicmsst" column="aliqicmsst" />
+		<result property="aliqpis" column="aliqpis" />
+		<result property="vlrpisunidtrib" column="vlrpisunidtrib" />
+		<result property="vlrbasepis" column="vlrbasepis" />
+		<result property="vlrbasecofins" column="vlrbasecofins" />
+		<result property="vlrcofunidtrib" column="vlrcofunidtrib" />
+		<result property="vlrir" column="vlrir" />
+		<result property="vlrpis" column="vlrpis" />
+		<result property="vlrcofins" column="vlrcofins" />
+		<result property="vlrcsocial" column="vlrcsocial" />
+		<result property="origfisc" column="origfisc" />
+		<result property="codtrattrib" column="codtrattrib" />
+		<result property="margemvlagritcompra" column="margemvlagritcompra" />
+		<result property="vlrbaseicmsstitcompra" column="vlrbaseicmsstitcompra" />
+		<result property="vlricmsstitcompra" column="vlricmsstitcompra" />
+		<result property="percissitcompra" column="percissitcompra" />
+		<result property="vlrbaseissitcompra" column="vlrbaseissitcompra" />
+		<result property="vlrissitcompra" column="vlrissitcompra" />
+		<result property="percicmssimples" column="percicmssimples" />
+		<result property="emmanut" column="emmanut" />
+		<result property="vlrbaseicmsstitretcompra" column="vlrbaseicmsstitretcompra" />
+		<result property="vlricmsstretitcompra" column="vlricmsstretitcompra" />
+		<result property="aliqii" column="aliqii" />
+		<result property="vlrbaseii" column="vlrbaseii" />
+		<result property="vlrii" column="vlrii" />
+		<result property="vlricmsdiferido" column="vlricmsdiferido" />
+		<result property="vlricmsdevido" column="vlricmsdevido" />
+		<result property="vlricmscredpresum" column="vlricmscredpresum" />
+		<result property="	listinsalt" column="	listinsalt" />
+	</resultMap>
+
+
+	<sql id="allLfitcompraColumms">
+     	codemp,
+     	codfilial,
+     	codcompra,
+     	coditcompra,
+     	aliqcofins,
+     	codempsp,
+     	codfilialsp,
+     	codsittribpis,
+     	impsittribpis,
+     	codempsc,
+     	codfilialsc,
+     	codsittribcof,
+     	impsittribcof,
+     	codempsi,
+     	codfilialsi,
+     	codsittribipi,
+     	impsittribipi,
+     	vlripiunidtrib,
+     	modbcicms,
+     	modbcicmsst,
+     	aliqredbcicms,
+     	aliqredbcicmsst,
+     	aliqicmsst,
+     	aliqpis,
+     	vlrpisunidtrib,
+     	vlrbasepis,
+     	vlrbasecofins,
+     	vlrcofunidtrib,
+     	vlrir,
+     	vlrpis,
+     	vlrcofins,
+     	vlrcsocial,
+     	origfisc,
+     	codtrattrib,
+     	margemvlagritcompra,
+     	vlrbaseicmsstitcompra,
+     	vlricmsstitcompra,
+     	percissitcompra,
+     	vlrbaseissitcompra,
+     	vlrissitcompra,
+     	percicmssimples,
+     	emmanut,
+     	vlrbaseicmsstitretcompra,
+     	vlricmsstretitcompra,
+     	aliqii,
+     	vlrbaseii,
+     	vlrii,
+     	vlricmsdiferido,
+     	vlricmsdevido,
+     	vlricmscredpresum,
+     		listinsalt,
+	</sql>
+	
+
+	<!-- Insert Lfitcompra -->
+	<select id="insertLfitcompra" parameterType="Map" resultType="int">
+		SELECT ins_lfitcompra (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codcompra,jdbcType=INTEGER},
+		#{coditcompra,jdbcType=INTEGER},
+		#{aliqcofins,jdbcType=DOUBLE},
+		#{codempsp,jdbcType=INTEGER},
+		#{codfilialsp,jdbcType=INTEGER},
+		#{codsittribpis,jdbcType=VARCHAR},
+		#{impsittribpis,jdbcType=VARCHAR},
+		#{codempsc,jdbcType=INTEGER},
+		#{codfilialsc,jdbcType=INTEGER},
+		#{codsittribcof,jdbcType=VARCHAR},
+		#{impsittribcof,jdbcType=VARCHAR},
+		#{codempsi,jdbcType=INTEGER},
+		#{codfilialsi,jdbcType=INTEGER},
+		#{codsittribipi,jdbcType=VARCHAR},
+		#{impsittribipi,jdbcType=VARCHAR},
+		#{vlripiunidtrib,jdbcType=DOUBLE},
+		#{modbcicms,jdbcType=INTEGER},
+		#{modbcicmsst,jdbcType=INTEGER},
+		#{aliqredbcicms,jdbcType=DOUBLE},
+		#{aliqredbcicmsst,jdbcType=DOUBLE},
+		#{aliqicmsst,jdbcType=DOUBLE},
+		#{aliqpis,jdbcType=DOUBLE},
+		#{vlrpisunidtrib,jdbcType=DOUBLE},
+		#{vlrbasepis,jdbcType=DOUBLE},
+		#{vlrbasecofins,jdbcType=DOUBLE},
+		#{vlrcofunidtrib,jdbcType=DOUBLE},
+		#{vlrir,jdbcType=DOUBLE},
+		#{vlrpis,jdbcType=DOUBLE},
+		#{vlrcofins,jdbcType=DOUBLE},
+		#{vlrcsocial,jdbcType=DOUBLE},
+		#{origfisc,jdbcType=VARCHAR},
+		#{codtrattrib,jdbcType=VARCHAR},
+		#{margemvlagritcompra,jdbcType=DOUBLE},
+		#{vlrbaseicmsstitcompra,jdbcType=DOUBLE},
+		#{vlricmsstitcompra,jdbcType=DOUBLE},
+		#{percissitcompra,jdbcType=DOUBLE},
+		#{vlrbaseissitcompra,jdbcType=DOUBLE},
+		#{vlrissitcompra,jdbcType=DOUBLE},
+		#{percicmssimples,jdbcType=DOUBLE},
+		#{emmanut,jdbcType=VARCHAR},
+		#{vlrbaseicmsstitretcompra,jdbcType=DOUBLE},
+		#{vlricmsstretitcompra,jdbcType=DOUBLE},
+		#{aliqii,jdbcType=DOUBLE},
+		#{vlrbaseii,jdbcType=DOUBLE},
+		#{vlrii,jdbcType=DOUBLE},
+		#{vlricmsdiferido,jdbcType=DOUBLE},
+		#{vlricmsdevido,jdbcType=DOUBLE},
+		#{vlricmscredpresum,jdbcType=DOUBLE},
+		#{	listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Lfitcompra -->
+	<select id="updateLfitcompra" parameterType="Map" resultType="int">
+		SELECT upd_lfitcompra (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codcompra,jdbcType=INTEGER},
+		#{coditcompra,jdbcType=INTEGER},
+		#{aliqcofins,jdbcType=DOUBLE},
+		#{codempsp,jdbcType=INTEGER},
+		#{codfilialsp,jdbcType=INTEGER},
+		#{codsittribpis,jdbcType=VARCHAR},
+		#{impsittribpis,jdbcType=VARCHAR},
+		#{codempsc,jdbcType=INTEGER},
+		#{codfilialsc,jdbcType=INTEGER},
+		#{codsittribcof,jdbcType=VARCHAR},
+		#{impsittribcof,jdbcType=VARCHAR},
+		#{codempsi,jdbcType=INTEGER},
+		#{codfilialsi,jdbcType=INTEGER},
+		#{codsittribipi,jdbcType=VARCHAR},
+		#{impsittribipi,jdbcType=VARCHAR},
+		#{vlripiunidtrib,jdbcType=DOUBLE},
+		#{modbcicms,jdbcType=INTEGER},
+		#{modbcicmsst,jdbcType=INTEGER},
+		#{aliqredbcicms,jdbcType=DOUBLE},
+		#{aliqredbcicmsst,jdbcType=DOUBLE},
+		#{aliqicmsst,jdbcType=DOUBLE},
+		#{aliqpis,jdbcType=DOUBLE},
+		#{vlrpisunidtrib,jdbcType=DOUBLE},
+		#{vlrbasepis,jdbcType=DOUBLE},
+		#{vlrbasecofins,jdbcType=DOUBLE},
+		#{vlrcofunidtrib,jdbcType=DOUBLE},
+		#{vlrir,jdbcType=DOUBLE},
+		#{vlrpis,jdbcType=DOUBLE},
+		#{vlrcofins,jdbcType=DOUBLE},
+		#{vlrcsocial,jdbcType=DOUBLE},
+		#{origfisc,jdbcType=VARCHAR},
+		#{codtrattrib,jdbcType=VARCHAR},
+		#{margemvlagritcompra,jdbcType=DOUBLE},
+		#{vlrbaseicmsstitcompra,jdbcType=DOUBLE},
+		#{vlricmsstitcompra,jdbcType=DOUBLE},
+		#{percissitcompra,jdbcType=DOUBLE},
+		#{vlrbaseissitcompra,jdbcType=DOUBLE},
+		#{vlrissitcompra,jdbcType=DOUBLE},
+		#{percicmssimples,jdbcType=DOUBLE},
+		#{emmanut,jdbcType=VARCHAR},
+		#{vlrbaseicmsstitretcompra,jdbcType=DOUBLE},
+		#{vlricmsstretitcompra,jdbcType=DOUBLE},
+		#{aliqii,jdbcType=DOUBLE},
+		#{vlrbaseii,jdbcType=DOUBLE},
+		#{vlrii,jdbcType=DOUBLE},
+		#{vlricmsdiferido,jdbcType=DOUBLE},
+		#{vlricmsdevido,jdbcType=DOUBLE},
+		#{vlricmscredpresum,jdbcType=DOUBLE},
+		#{	listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Lfitcompra -->
+	<select id="deleteLfitcompra" parameterType="Lfitcompra">
+		SELECT del_lfitcompra (#{id})
+	</select>
+	
+	<!-- Fetch All Lfitcompras -->
+	<select id="fetchAllLfitcompras" parameterType="Map" resultMap="listAllLfitcompraResults">
+	
+		SELECT  <include refid="allLfitcompraColumms"/>
+		  FROM lfitcompra
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM lfitcompra 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Lfitcompra By type -->
+	<select id="fetchLfitcompraByType" parameterType="LfitcompraRequest"  resultMap="listAllLfitcompraResults" >
+		SELECT  <include refid="allCustomListLfitcompraColumns"/>
+		  FROM lfitcompra
+		 WHERE name = #{lfitcompra.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Lfitcompra By Id -->
+	<select id="fetchLfitcompraById" parameterType="Lfitcompra" resultMap="listAllLfitcompraResults" >
+		SELECT <include refid="allCustomListLfitcompraColumns"/>
+		  FROM lfitcompra
+		 WHERE lfitcompra_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Lfitcompra By Id -->
+	<select id="fetchLfitcompraNameById" parameterType="Lfitcompra" resultMap="listAllLfitcompraResults" >
+		SELECT <include refid="allCustomListLfitcompraColumns"/>
+		  FROM lfitcompra
+		 WHERE lfitcompra_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

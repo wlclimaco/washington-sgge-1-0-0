@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<settings>
+<setting name="lazyLoadingEnabled" value="false" />
+</settings>
+<typeAliases>
+<!-- Lfmodnota mapping -->
+<typeAlias alias="InquiryLfmodnotaRequest" 	type="com.sensus.mlc.lfmodnota.model.request.InquiryLfmodnotaRequest" />
+<typeAlias alias="LfmodnotaRequest" 			type="com.sensus.mlc.lfmodnota.model.request.LfmodnotaRequest" />
+<typeAlias alias="FilialRequest" 		type="com.sensus.mlc.filial.model.request.FilialRequest" />
+<typeAlias alias="EnderecoRequest" 		type="com.sensus.mlc.endereco.model.request.EnderecoRequest" />
+<!-- Lfmodnota and Smartpoint joint mapping -->
+<typeAlias alias="Lfmodnota"  type="com.sensus.mlc.lfmodnota.model.Lfmodnota"/>
+<typeAlias alias="Filial"     type="com.sensus.mlc.filial.model.Filial"/>
+<typeAlias alias="Endereco"   type="com.sensus.mlc.endereco.model.Endereco"/>
+<!-- Smartpoint mapping -->
+<typeAlias alias="Group"        type="com.sensus.mlc.group.model.Group" />
+<typeAlias alias="lfmodnota"      type="com.sensus.mlc.lfmodnota.model.Lfmodnota" />
+</typeAliases>
+<mappers>
+<mapper resource="com/sensus/mlc/lfmodnota/dac/mybatis/map/Lfmodnota.xml"/>
+<mapper resource="com/sensus/mlc/filial/dac/mybatis/map/Filial.xml" />
+<mapper resource="com/sensus/mlc/endereco/dac/mybatis/map/Endereco.xml" />
+<mapper resource="com/sensus/mlc/auditoria/dac/mybatis/map/Auditoria.xml" />
+</mappers>
+</configuration>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Chaveestrangeira">
+
+	<resultMap id="listAllChaveestrangeiraResults" type="Chaveestrangeira" >
+		<result property="nmchaest" column="nmchaest" />
+		<result property="nmtabela" column="nmtabela" />
+		<result property="nmtabest" column="nmtabest" />
+		<result property="tpchaest" column="tpchaest" />
+		<result property="auditorias" column="auditorias" />
+	</resultMap>
+
+
+	<sql id="allChaveestrangeiraColumms">
+     	nmchaest,
+     	nmtabela,
+     	nmtabest,
+     	tpchaest,
+     	auditorias,
+	</sql>
+	
+
+	<!-- Insert Chaveestrangeira -->
+	<select id="insertChaveestrangeira" parameterType="Map" resultType="int">
+		SELECT ins_chaveestrangeira (
+		#{nmchaest,jdbcType=VARCHAR},
+		#{nmtabela,jdbcType=VARCHAR},
+		#{nmtabest,jdbcType=VARCHAR},
+		#{tpchaest,jdbcType=VARCHAR},
+		#{auditorias,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Chaveestrangeira -->
+	<select id="updateChaveestrangeira" parameterType="Map" resultType="int">
+		SELECT upd_chaveestrangeira (
+		#{nmchaest,jdbcType=VARCHAR},
+		#{nmtabela,jdbcType=VARCHAR},
+		#{nmtabest,jdbcType=VARCHAR},
+		#{tpchaest,jdbcType=VARCHAR},
+		#{auditorias,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Chaveestrangeira -->
+	<select id="deleteChaveestrangeira" parameterType="Chaveestrangeira">
+		SELECT del_chaveestrangeira (#{id})
+	</select>
+	
+	<!-- Fetch All Chaveestrangeiras -->
+	<select id="fetchAllChaveestrangeiras" parameterType="Map" resultMap="listAllChaveestrangeiraResults">
+	
+		SELECT  <include refid="allChaveestrangeiraColumms"/>
+		  FROM chaveestrangeira
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM chaveestrangeira 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Chaveestrangeira By type -->
+	<select id="fetchChaveestrangeiraByType" parameterType="ChaveestrangeiraRequest"  resultMap="listAllChaveestrangeiraResults" >
+		SELECT  <include refid="allCustomListChaveestrangeiraColumns"/>
+		  FROM chaveestrangeira
+		 WHERE name = #{chaveestrangeira.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Chaveestrangeira By Id -->
+	<select id="fetchChaveestrangeiraById" parameterType="Chaveestrangeira" resultMap="listAllChaveestrangeiraResults" >
+		SELECT <include refid="allCustomListChaveestrangeiraColumns"/>
+		  FROM chaveestrangeira
+		 WHERE chaveestrangeira_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Chaveestrangeira By Id -->
+	<select id="fetchChaveestrangeiraNameById" parameterType="Chaveestrangeira" resultMap="listAllChaveestrangeiraResults" >
+		SELECT <include refid="allCustomListChaveestrangeiraColumns"/>
+		  FROM chaveestrangeira
+		 WHERE chaveestrangeira_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

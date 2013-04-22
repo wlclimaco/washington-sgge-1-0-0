@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Lffretecompra">
+
+	<resultMap id="listAllLffretecompraResults" type="Lffretecompra" >
+		<result property="codemp" column="codemp" />
+		<result property="codfilial" column="codfilial" />
+		<result property="codfrete" column="codfrete" />
+		<result property="codcompra" column="codcompra" />
+		<result property="dtins" column="dtins" />
+		<result property="hins" column="hins" />
+		<result property="idusuins" column="idusuins" />
+		<result property="dtalt" column="dtalt" />
+		<result property="halt" column="halt" />
+		<result property="idusualt" column="idusualt" />
+	</resultMap>
+
+
+	<sql id="allLffretecompraColumms">
+     	codemp,
+     	codfilial,
+     	codfrete,
+     	codcompra,
+     	dtins,
+     	hins,
+     	idusuins,
+     	dtalt,
+     	halt,
+     	idusualt,
+	</sql>
+	
+
+	<!-- Insert Lffretecompra -->
+	<select id="insertLffretecompra" parameterType="Map" resultType="int">
+		SELECT ins_lffretecompra (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codfrete,jdbcType=INTEGER},
+		#{codcompra,jdbcType=INTEGER},
+		#{dtins,jdbcType=DATE},
+		#{hins,jdbcType=DATE},
+		#{idusuins,jdbcType=VARCHAR},
+		#{dtalt,jdbcType=DATE},
+		#{halt,jdbcType=DATE},
+		#{idusualt,jdbcType=VARCHAR},
+)
+	</select>
+
+	<!-- Update Lffretecompra -->
+	<select id="updateLffretecompra" parameterType="Map" resultType="int">
+		SELECT upd_lffretecompra (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codfrete,jdbcType=INTEGER},
+		#{codcompra,jdbcType=INTEGER},
+		#{dtins,jdbcType=DATE},
+		#{hins,jdbcType=DATE},
+		#{idusuins,jdbcType=VARCHAR},
+		#{dtalt,jdbcType=DATE},
+		#{halt,jdbcType=DATE},
+		#{idusualt,jdbcType=VARCHAR},
+)
+	</select>
+
+	<!-- Delete Lffretecompra -->
+	<select id="deleteLffretecompra" parameterType="Lffretecompra">
+		SELECT del_lffretecompra (#{id})
+	</select>
+	
+	<!-- Fetch All Lffretecompras -->
+	<select id="fetchAllLffretecompras" parameterType="Map" resultMap="listAllLffretecompraResults">
+	
+		SELECT  <include refid="allLffretecompraColumms"/>
+		  FROM lffretecompra
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM lffretecompra 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Lffretecompra By type -->
+	<select id="fetchLffretecompraByType" parameterType="LffretecompraRequest"  resultMap="listAllLffretecompraResults" >
+		SELECT  <include refid="allCustomListLffretecompraColumns"/>
+		  FROM lffretecompra
+		 WHERE name = #{lffretecompra.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Lffretecompra By Id -->
+	<select id="fetchLffretecompraById" parameterType="Lffretecompra" resultMap="listAllLffretecompraResults" >
+		SELECT <include refid="allCustomListLffretecompraColumns"/>
+		  FROM lffretecompra
+		 WHERE lffretecompra_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Lffretecompra By Id -->
+	<select id="fetchLffretecompraNameById" parameterType="Lffretecompra" resultMap="listAllLffretecompraResults" >
+		SELECT <include refid="allCustomListLffretecompraColumns"/>
+		  FROM lffretecompra
+		 WHERE lffretecompra_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

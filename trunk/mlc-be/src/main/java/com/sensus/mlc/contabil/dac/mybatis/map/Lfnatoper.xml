@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Lfnatoper">
+
+	<resultMap id="listAllLfnatoperResults" type="Lfnatoper" >
+		<result property="codemp" column="codemp" />
+		<result property="codfilial" column="codfilial" />
+		<result property="codnat" column="codnat" />
+		<result property="descnat" column="descnat" />
+		<result property="impdtsaidanat" column="impdtsaidanat" />
+		<result property="aliqenat" column="aliqenat" />
+		<result property="aliqfnat" column="aliqfnat" />
+		<result property="txtnat" column="txtnat" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allLfnatoperColumms">
+     	codemp,
+     	codfilial,
+     	codnat,
+     	descnat,
+     	impdtsaidanat,
+     	aliqenat,
+     	aliqfnat,
+     	txtnat,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Lfnatoper -->
+	<select id="insertLfnatoper" parameterType="Map" resultType="int">
+		SELECT ins_lfnatoper (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codnat,jdbcType=VARCHAR},
+		#{descnat,jdbcType=VARCHAR},
+		#{impdtsaidanat,jdbcType=VARCHAR},
+		#{aliqenat,jdbcType=DOUBLE},
+		#{aliqfnat,jdbcType=DOUBLE},
+		#{txtnat,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Lfnatoper -->
+	<select id="updateLfnatoper" parameterType="Map" resultType="int">
+		SELECT upd_lfnatoper (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codnat,jdbcType=VARCHAR},
+		#{descnat,jdbcType=VARCHAR},
+		#{impdtsaidanat,jdbcType=VARCHAR},
+		#{aliqenat,jdbcType=DOUBLE},
+		#{aliqfnat,jdbcType=DOUBLE},
+		#{txtnat,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Lfnatoper -->
+	<select id="deleteLfnatoper" parameterType="Lfnatoper">
+		SELECT del_lfnatoper (#{id})
+	</select>
+	
+	<!-- Fetch All Lfnatopers -->
+	<select id="fetchAllLfnatopers" parameterType="Map" resultMap="listAllLfnatoperResults">
+	
+		SELECT  <include refid="allLfnatoperColumms"/>
+		  FROM lfnatoper
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM lfnatoper 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Lfnatoper By type -->
+	<select id="fetchLfnatoperByType" parameterType="LfnatoperRequest"  resultMap="listAllLfnatoperResults" >
+		SELECT  <include refid="allCustomListLfnatoperColumns"/>
+		  FROM lfnatoper
+		 WHERE name = #{lfnatoper.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Lfnatoper By Id -->
+	<select id="fetchLfnatoperById" parameterType="Lfnatoper" resultMap="listAllLfnatoperResults" >
+		SELECT <include refid="allCustomListLfnatoperColumns"/>
+		  FROM lfnatoper
+		 WHERE lfnatoper_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Lfnatoper By Id -->
+	<select id="fetchLfnatoperNameById" parameterType="Lfnatoper" resultMap="listAllLfnatoperResults" >
+		SELECT <include refid="allCustomListLfnatoperColumns"/>
+		  FROM lfnatoper
+		 WHERE lfnatoper_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

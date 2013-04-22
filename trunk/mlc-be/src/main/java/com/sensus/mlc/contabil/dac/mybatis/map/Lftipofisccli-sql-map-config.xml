@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<settings>
+<setting name="lazyLoadingEnabled" value="false" />
+</settings>
+<typeAliases>
+<!-- Lftipofisccli mapping -->
+<typeAlias alias="InquiryLftipofisccliRequest" 	type="com.sensus.mlc.lftipofisccli.model.request.InquiryLftipofisccliRequest" />
+<typeAlias alias="LftipofisccliRequest" 			type="com.sensus.mlc.lftipofisccli.model.request.LftipofisccliRequest" />
+<typeAlias alias="FilialRequest" 		type="com.sensus.mlc.filial.model.request.FilialRequest" />
+<typeAlias alias="EnderecoRequest" 		type="com.sensus.mlc.endereco.model.request.EnderecoRequest" />
+<!-- Lftipofisccli and Smartpoint joint mapping -->
+<typeAlias alias="Lftipofisccli"  type="com.sensus.mlc.lftipofisccli.model.Lftipofisccli"/>
+<typeAlias alias="Filial"     type="com.sensus.mlc.filial.model.Filial"/>
+<typeAlias alias="Endereco"   type="com.sensus.mlc.endereco.model.Endereco"/>
+<!-- Smartpoint mapping -->
+<typeAlias alias="Group"        type="com.sensus.mlc.group.model.Group" />
+<typeAlias alias="lftipofisccli"      type="com.sensus.mlc.lftipofisccli.model.Lftipofisccli" />
+</typeAliases>
+<mappers>
+<mapper resource="com/sensus/mlc/lftipofisccli/dac/mybatis/map/Lftipofisccli.xml"/>
+<mapper resource="com/sensus/mlc/filial/dac/mybatis/map/Filial.xml" />
+<mapper resource="com/sensus/mlc/endereco/dac/mybatis/map/Endereco.xml" />
+<mapper resource="com/sensus/mlc/auditoria/dac/mybatis/map/Auditoria.xml" />
+</mappers>
+</configuration>

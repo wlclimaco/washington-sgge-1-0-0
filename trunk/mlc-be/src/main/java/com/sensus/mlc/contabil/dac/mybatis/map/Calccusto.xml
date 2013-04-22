@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Calccusto">
+
+	<resultMap id="listAllCalccustoResults" type="Calccusto" >
+		<result property="codemp" column="codemp" />
+		<result property="codfilial" column="codfilial" />
+		<result property="codcalc" column="codcalc" />
+		<result property="desccalc" column="desccalc" />
+		<result property="listinsalt" column="listinsalt" />
+	</resultMap>
+
+
+	<sql id="allCalccustoColumms">
+     	codemp,
+     	codfilial,
+     	codcalc,
+     	desccalc,
+     	listinsalt,
+	</sql>
+	
+
+	<!-- Insert Calccusto -->
+	<select id="insertCalccusto" parameterType="Map" resultType="int">
+		SELECT ins_calccusto (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codcalc,jdbcType=INTEGER},
+		#{desccalc,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Calccusto -->
+	<select id="updateCalccusto" parameterType="Map" resultType="int">
+		SELECT upd_calccusto (
+		#{codemp,jdbcType=INTEGER},
+		#{codfilial,jdbcType=INTEGER},
+		#{codcalc,jdbcType=INTEGER},
+		#{desccalc,jdbcType=VARCHAR},
+		#{listinsalt,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Calccusto -->
+	<select id="deleteCalccusto" parameterType="Calccusto">
+		SELECT del_calccusto (#{id})
+	</select>
+	
+	<!-- Fetch All Calccustos -->
+	<select id="fetchAllCalccustos" parameterType="Map" resultMap="listAllCalccustoResults">
+	
+		SELECT  <include refid="allCalccustoColumms"/>
+		  FROM calccusto
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM calccusto 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Calccusto By type -->
+	<select id="fetchCalccustoByType" parameterType="CalccustoRequest"  resultMap="listAllCalccustoResults" >
+		SELECT  <include refid="allCustomListCalccustoColumns"/>
+		  FROM calccusto
+		 WHERE name = #{calccusto.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Calccusto By Id -->
+	<select id="fetchCalccustoById" parameterType="Calccusto" resultMap="listAllCalccustoResults" >
+		SELECT <include refid="allCustomListCalccustoColumns"/>
+		  FROM calccusto
+		 WHERE calccusto_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Calccusto By Id -->
+	<select id="fetchCalccustoNameById" parameterType="Calccusto" resultMap="listAllCalccustoResults" >
+		SELECT <include refid="allCustomListCalccustoColumns"/>
+		  FROM calccusto
+		 WHERE calccusto_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+
