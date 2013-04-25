@@ -76,7 +76,7 @@ begin
           ACBrNFe.Configuracoes.Certificados.NumeroSerie   := NrCertificado;
           ACBrNFe.Configuracoes.Certificados.Senha         := NrSenha;
           ACBrNFe.Configuracoes.WebServices.Visualizar     := BoVisualizar;
-          ACBrNFe.Configuracoes.WebServices.Ambiente       := TpAmbiente;
+        //  ACBrNFe.Configuracoes.WebServices.Ambiente       := TpAmbiente;
 end;
 function NfeDestinadas(NrSenha,NrCertificado,uf,CNPJ, IndNFe, IndEmi, ultNSU:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean): OleVariant;
 var
@@ -381,6 +381,7 @@ begin
           CcxmlSet.FieldDefs.Add('enderDest_UF',       ftString,   05 );
           CcxmlSet.FieldDefs.Add('Xml',                ftString, 1000 );
           CcxmlSet.CreateDataSet;
+          inicializetion(NrSenha,NrCertificado,uf,TpAmbiente,BoVisualizar);
           if pCpXML.RecordCount > 0 then
           begin
                 while not pCpXML.Eof do
@@ -388,10 +389,6 @@ begin
                       ACBrNFe.DownloadNFe.Download.Chaves.Clear;
                       ACBrNFe.DownloadNFe.Download.Chaves.Add.chNFe := pCpXML.FieldByName('NrChaDoc').AsString;
                       ACBrNFe.DownloadNFe.Download.CNPJ             := pCpXML.FieldByName('CjEmpres').AsString;
-                      ACBrNFe.Configuracoes.WebServices.ProxyHost := '192.10.10.1';
-                      ACBrNFe.Configuracoes.WebServices.ProxyPort := '80';
-                      ACBrNFe.Configuracoes.WebServices.ProxyUser := 'administrador';
-                      ACBrNFe.Configuracoes.WebServices.ProxyPass := 'brvu3025';
                       ACBrNFe.Download;
                       XML.BrXMLOriginal.Text := ACBrNFe.WebServices.DownloadNFe.retDownloadNFe.XML;
                       XML.ProcessarXml;
