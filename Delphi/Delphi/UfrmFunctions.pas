@@ -7,33 +7,33 @@ uses  SysUtils, Forms, Classes, Dialogs, Windows, ComCtrls, DBClient, DB,
       XMLIntf, XMLDoc, ACBrNFeDANFERaveCB,BrvXml;
 
 
-function ListarNotasManifesto(NrSenha,NrCertificado,uf:String;XmlRetorno: AnsiString;CjEmpres:String;Operacao:Integer): OleVariant;
+function ListarNotasManifesto(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;XmlRetorno: AnsiString;CjEmpres:String;Operacao:Integer): OleVariant;
 
-procedure BuscarNFePelaChave(NrSenha,NrCertificado,uf:String;pCpXML:TClientDataSet);
+procedure BuscarNFePelaChave(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;pCpXML:TClientDataSet);
 
 procedure IniciarVariaveisGlobal();
 
-function gravarNFe(NrSenha,NrCertificado:String;CcXml:TClientDataSet):Boolean;
+function gravarNFe(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;CcXml:TClientDataSet):Boolean;
 
-function Mudar_e_GravarStatusManifesto(NrSenha,NrCertificado:String;Chave,CjEmpres:String;CdEventOp:Integer):Boolean;
+function Mudar_e_GravarStatusManifesto(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;Chave,CjEmpres:String;CdEventOp:Integer):Boolean;
 
-function DownloadNFe(NrSenha,NrCertificado,Chave,CjEmpres:String;CdEventOp :Integer):Boolean;
+function DownloadNFe(NrSenha,NrCertificado,Chave,CjEmpres:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;CdEventOp :Integer):Boolean;
 
-function StatusServico(NrSenha,NrCertificado:String):AnsiString;
+function StatusServico(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
 
-function ConsultaNFeChave(NrSenha,NrCertificado,Chave:String):AnsiString;
+function ConsultaNFeChave(NrSenha,NrCertificado,uf,Chave:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
 
-function CancelarNFePelaChave(NrSenha,NrCertificado,Chave,idLote,CNPJ,Protocolo,Justificativa:String):AnsiString;
+function CancelarNFePelaChave(NrSenha,NrCertificado,uf,Chave,idLote,CNPJ,Protocolo,Justificativa:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
 
-function ConsultarReciboLoteNFe(NrSenha,NrCertificado:String;NrLote :Integer):AnsiString;
+function ConsultarReciboLoteNFe(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;NrLote :Integer):AnsiString;
 
 function ConsCadDestinatario(NrSenha,NrCertificado,CdUF,CjEmpres:String):AnsiString;
 
-function GerarPDFNFe(NrSenha,NrCertificado,Diretorio:String):AnsiString;
+function GerarPDFNFe(NrSenha,NrCertificado,CdUF,TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;Diretorio:String):AnsiString;
 
-function ImprimirDanfe(NrSenha,NrCertificado,Diretorio:String):AnsiString;
+function ImprimirDanfe(NrSenha,NrCertificado,CdUF,Diretorio:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
 
-function EnviarEmail(const NrSenha,NrCertificado:String;sSmtpHost,
+function EnviarEmail(const NrSenha,NrCertificado,CdUF:String;sSmtpHost,
                                       sSmtpPort,
                                       sSmtpUser,
                                       sSmtpPasswd,
@@ -51,12 +51,13 @@ function EnviarEmail(const NrSenha,NrCertificado:String;sSmtpHost,
                                       TLS : Boolean = True;
                                       UsarThread: Boolean = True):AnsiString;
 
-function CartaDeCorrecao(NrSenha,NrCertificado,Chave, idLote, CNPJ, nSeqEvento, Correcao:String):AnsiString;
+function CartaDeCorrecao(NrSenha,NrCertificado,CdUF,Chave, idLote, CNPJ, nSeqEvento, Correcao:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
 
 procedure Func_CDS_Duplica(Cds: TClientDataSet;CamposExcecoes:String = '');
 
-function NfeDestinadas(NrSenha,NrCertificado,uf,CNPJ, IndNFe, IndEmi, ultNSU:String): OleVariant;
+function NfeDestinadas(NrSenha,NrCertificado,uf,CNPJ, IndNFe, IndEmi, ultNSU:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean): OleVariant;
 
+procedure inicializetion(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean);
 
 implementation
 
@@ -69,17 +70,21 @@ var CcxmlSet  :TClientDataSet;
     XML       : TBrvXML;
     ACBrNFe   : TACBrNFe;
 
-function NfeDestinadas(NrSenha,NrCertificado,uf,CNPJ, IndNFe, IndEmi, ultNSU:String): OleVariant;
+procedure inicializetion(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean);
+begin
+          ACBrNFe.Configuracoes.WebServices.UF             := uf;
+          ACBrNFe.Configuracoes.Certificados.NumeroSerie   := NrCertificado;
+          ACBrNFe.Configuracoes.Certificados.Senha         := NrSenha;
+          ACBrNFe.Configuracoes.WebServices.Visualizar     := BoVisualizar;
+          ACBrNFe.Configuracoes.WebServices.Ambiente       := TpAmbiente;
+end;
+function NfeDestinadas(NrSenha,NrCertificado,uf,CNPJ, IndNFe, IndEmi, ultNSU:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean): OleVariant;
 var
     ok: boolean;
     lStlAnexo :AnsiString;
 begin
       IniciarVariaveisGlobal;
-      ACBrNFe.Configuracoes.WebServices.UF             := uf;
-      ACBrNFe.Configuracoes.Certificados.NumeroSerie   := NrCertificado;
-      ACBrNFe.Configuracoes.Certificados.Senha         := NrSenha;
-      ACBrNFe.Configuracoes.WebServices.Visualizar     := true;
-      ACBrNFe.Configuracoes.WebServices.Ambiente       := taProducao;
+      inicializetion(NrSenha,NrCertificado,uf,TpAmbiente,BoVisualizar);
 
       ACBrNFe.ConsultaNFeDest(CNPJ,
                                StrToIndicadorNFe(ok,indNFe),
@@ -87,7 +92,7 @@ begin
                                UltNSu);
       lStlAnexo := AcbrNFe.WebServices.ConsNFeDest.retConsNFeDest.XML;
 
-      ListarNotasManifesto(NrSenha,NrCertificado,uf,AcbrNFe.WebServices.ConsNFeDest.retConsNFeDest.XML,CNPJ,1);
+      ListarNotasManifesto(NrSenha,NrCertificado,uf,TpAmbiente,BoVisualizar,AcbrNFe.WebServices.ConsNFeDest.retConsNFeDest.XML,CNPJ,1);
 
 end;
 
@@ -131,14 +136,13 @@ begin
 
 end ;
 
-function StatusServico(NrSenha,NrCertificado:String):AnsiString;
+function StatusServico(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
 var
     ACBrNFe   : TACBrNFe;
 begin
       try
           ACBrNFe   := TACBrNFe.Create(nil);
-          ACBrNFe.Configuracoes.Certificados.NumeroSerie := NrCertificado;
-          ACBrNFe.Configuracoes.Certificados.Senha       := NrSenha;
+          inicializetion(NrSenha,NrCertificado,uf,TpAmbiente,BoVisualizar);
 
           ACBrNFe.WebServices.StatusServico.Executar;
           Result := UTF8Encode(ACBrNFe.WebServices.StatusServico.RetWS);
@@ -147,14 +151,13 @@ begin
       end;
 end;
 
-function ConsultaNFeChave(NrSenha,NrCertificado,Chave:String):AnsiString;
+function ConsultaNFeChave(NrSenha,NrCertificado,uf,Chave:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
 var
     ACBrNFe   : TACBrNFe;
 begin
       try
           ACBrNFe   := TACBrNFe.Create(nil);
-          ACBrNFe.Configuracoes.Certificados.NumeroSerie := NrCertificado;
-          ACBrNFe.Configuracoes.Certificados.Senha       := NrSenha;
+          inicializetion(NrSenha,NrCertificado,uf,TpAmbiente,BoVisualizar);
           ACBrNFe.WebServices.Consulta.NFeChave := Chave;
           ACBrNFe.WebServices.Consulta.Executar;
           Result := UTF8Encode(ACBrNFe.WebServices.StatusServico.RetWS);
@@ -164,7 +167,8 @@ begin
 
 end;
 
-function CancelarNFePelaChave(NrSenha,NrCertificado,Chave,idLote,CNPJ,Protocolo,Justificativa:String):AnsiString;
+function CancelarNFePelaChave(NrSenha,NrCertificado,uf,Chave,idLote,CNPJ,Protocolo,Justificativa:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
+
 var
     ACBrNFe   : TACBrNFe;
 begin
@@ -187,7 +191,7 @@ begin
 
 end;
 
-function ConsultarReciboLoteNFe(NrSenha,NrCertificado:String;NrLote :Integer):AnsiString;
+function ConsultarReciboLoteNFe(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;NrLote :Integer):AnsiString;
 var
     ACBrNFe   : TACBrNFe;
 begin
@@ -213,7 +217,8 @@ begin
 
 end;
 
-function GerarPDFNFe(NrSenha,NrCertificado,Diretorio:String):AnsiString;
+function GerarPDFNFe(NrSenha,NrCertificado,CdUF,TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;Diretorio:String):AnsiString;
+
 var
     ACBrNFe   : TACBrNFe;
 begin
@@ -226,7 +231,7 @@ begin
 
 end;
 
-function ImprimirDanfe(NrSenha,NrCertificado,Diretorio:String):AnsiString;
+function ImprimirDanfe(NrSenha,NrCertificado,CdUF,Diretorio:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
 var
     ACBrNFe   : TACBrNFe;
 begin
@@ -239,7 +244,7 @@ begin
 
 end;
 
-function EnviarEmail(const NrSenha,NrCertificado:String;sSmtpHost,
+function EnviarEmail(const NrSenha,NrCertificado,CdUF:String;sSmtpHost,
                                       sSmtpPort,
                                       sSmtpUser,
                                       sSmtpPasswd,
@@ -267,7 +272,7 @@ begin
       end;
 
 end;
-function CartaDeCorrecao(NrSenha,NrCertificado,Chave, idLote, CNPJ, nSeqEvento, Correcao:String):AnsiString;
+function CartaDeCorrecao(NrSenha,NrCertificado,CdUF,Chave, idLote, CNPJ, nSeqEvento, Correcao:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
 var
     ACBrNFe   : TACBrNFe;
 begin
@@ -280,9 +285,7 @@ begin
 
 end;
 
-
-
-function ListarNotasManifesto(NrSenha,NrCertificado,uf:String;XmlRetorno: AnsiString;CjEmpres:String;Operacao:Integer): OleVariant;
+function ListarNotasManifesto(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;XmlRetorno: AnsiString;CjEmpres:String;Operacao:Integer): OleVariant;
 var lStlAnexo : AnsiString;
     lDsChaDoc : AnsiString;
     pCpXML    : TClientDataSet;
@@ -316,7 +319,7 @@ begin
                 pCpXML.FieldByName('CjEmpres').AsString := CjEmpres;
                 pCpXML.Post;
           end;
-          BuscarNFePelaChave(NrSenha,NrCertificado,uf,pCpXML);
+          BuscarNFePelaChave(NrSenha,NrCertificado,uf,TpAmbiente,BoVisualizar,pCpXML);
           Result := CpNfeDet.Data;
       finally
          FreeAndNil(pCpXML);
@@ -324,7 +327,7 @@ begin
 
 end;
 
-procedure BuscarNFePelaChave(NrSenha,NrCertificado,uf:String;pCpXML:TClientDataSet);
+procedure BuscarNFePelaChave(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;pCpXML:TClientDataSet);
 var
     lCpXML    : TClientDataSet;
     lNrIndice,i : Integer;
@@ -378,11 +381,6 @@ begin
           CcxmlSet.FieldDefs.Add('enderDest_UF',       ftString,   05 );
           CcxmlSet.FieldDefs.Add('Xml',                ftString, 1000 );
           CcxmlSet.CreateDataSet;
-          ACBrNFe.Configuracoes.WebServices.UF := uf;
-          ACBrNFe.Configuracoes.Certificados.NumeroSerie   :=  NrCertificado;
-          ACBrNFe.Configuracoes.Certificados.Senha         :=  NrSenha;
-          ACBrNFe.Configuracoes.WebServices.Visualizar := true;
-          ACBrNFe.Configuracoes.WebServices.Ambiente := taProducao;
           if pCpXML.RecordCount > 0 then
           begin
                 while not pCpXML.Eof do
@@ -412,14 +410,12 @@ begin
       end;
 end;
 
-function gravarNFe(NrSenha,NrCertificado:String;CcXml:TClientDataSet):Boolean;
-begin
+function gravarNFe(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;CcXml:TClientDataSet):Boolean;begin
       CcXml.Post;
       CcXml.ApplyUpdates(1);
 end;
 
-function Mudar_e_GravarStatusManifesto(NrSenha,NrCertificado:String;Chave,CjEmpres:String;CdEventOp:Integer):Boolean;
-var
+function Mudar_e_GravarStatusManifesto(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;Chave,CjEmpres:String;CdEventOp:Integer):Boolean;var
     ACBrNFe     : TACBrNFe;
     DescEventOp : TpcnTpEvento ;
 begin
@@ -464,7 +460,7 @@ begin
       end;
 end;
 
-function DownloadNFe(NrSenha,NrCertificado,Chave,CjEmpres:String;CdEventOp :Integer):Boolean;
+function DownloadNFe(NrSenha,NrCertificado,Chave,CjEmpres:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;CdEventOp :Integer):Boolean;
 begin
 //var
 //    ACBrNFe     : TACBrNFe;
