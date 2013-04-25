@@ -11,7 +11,7 @@ uses IniFiles, ShellAPI, pcnRetConsReciNFe,
   pcnNFeW, pcnNFeRTXT, pcnAuxiliar, ACBrDFeUtil,
   XMLIntf, XMLDoc, ACBrNFeDANFERaveCB, BrvXml, Grids, BrvDbGrids, BrvDbGrid, BrvBitBtn, DBXFirebird,
   FMTBcd, DB, SqlExpr, DBClient, Menus, XDBGrids, mxExport, BrvRetCon, BrvCustomEdit, BrvEditNum,
-  Mask, BrvCustomMaskEdit, BrvEditDate;
+  Mask, BrvCustomMaskEdit, BrvEditDate, IBCustomDataSet, IBTable, IBDatabase, Provider;
 
 type
   TForm1 = class(TForm)
@@ -189,6 +189,51 @@ type
     Deletar1: TMenuItem;
     Label36: TLabel;
     Edit2: TEdit;
+    DataSource2: TDataSource;
+    SQLConnection1: TSQLConnection;
+    DataSetProvider1: TDataSetProvider;
+    SQLDataSet1: TSQLDataSet;
+    SQLTable1: TSQLTable;
+    SQLTable1XMOTIVO: TStringField;
+    SQLTable1CHNFE: TStringField;
+    SQLTable1DHRECBTO: TStringField;
+    SQLTable1NPROT: TStringField;
+    SQLTable1IDE_MOD: TStringField;
+    SQLTable1IDE_NATOP: TStringField;
+    SQLTable1IDE_NNF: TStringField;
+    SQLTable1IDE_SERIE: TStringField;
+    SQLTable1IDE_TPIMP: TStringField;
+    SQLTable1IDE_TPEMIS: TStringField;
+    SQLTable1IDE_CDV: TStringField;
+    SQLTable1IDE_TPAMB: TStringField;
+    SQLTable1IDE_DEMI: TStringField;
+    SQLTable1IDE_DSAIENT: TStringField;
+    SQLTable1IDE_HSAIENT: TStringField;
+    SQLTable1EMIT_XNOME: TStringField;
+    SQLTable1EMIT_CNPJ: TStringField;
+    SQLTable1EMIT_IE: TStringField;
+    SQLTable1EMIT_CRT: TStringField;
+    SQLTable1ENDEREMIT_XLGR: TStringField;
+    SQLTable1ENDEREMIT_NRO: TStringField;
+    SQLTable1ENDEREMIT_XBAIRRO: TStringField;
+    SQLTable1ENDEREMIT_XMUN: TStringField;
+    SQLTable1ENDEREMIT_CEP: TStringField;
+    SQLTable1ENDEREMIT_FONE: TStringField;
+    SQLTable1ENDEREMIT_UF: TStringField;
+    SQLTable1DEST_XNOME: TStringField;
+    SQLTable1DEST_CNPJ: TStringField;
+    SQLTable1DEST_CPF: TStringField;
+    SQLTable1DEST_IE: TStringField;
+    SQLTable1DEST_EMAIL: TStringField;
+    SQLTable1ENDERDEST_XLGR: TStringField;
+    SQLTable1ENDERDEST_NRO: TStringField;
+    SQLTable1ENDERDEST_XBAIRRO: TStringField;
+    SQLTable1ENDERDEST_XMUN: TStringField;
+    SQLTable1ENDERDEST_CEP: TStringField;
+    SQLTable1ENDERDEST_FONE: TStringField;
+    SQLTable1ENDERDEST_UF: TStringField;
+    SQLTable1XML: TStringField;
+    SQLTable1STMANIFESTO: TIntegerField;
     procedure sbtnCaminhoCertClick(Sender: TObject);
     procedure sbtnLogoMarcaClick(Sender: TObject);
     procedure sbtnPathSalvarClick(Sender: TObject);
@@ -545,6 +590,7 @@ begin
       TabSheet16.TabVisible     := false;
       TabSheet17.TabVisible     := false;
       TabSheet18.TabVisible     := false;
+      SQLConnection1.Connected := true;
 end;
 
 procedure TForm1.btnSalvarConfigClick(Sender: TObject);
@@ -644,6 +690,7 @@ begin
       NrChaDoc := Edit2.Text;
       xml.data := ListarNotasManifesto(NrSenha,NrCertif,CdEstado,TpAmbiente,BoVisualizar,NrChaDoc,CjEmpres,2);
       xml.Open;
+
       DataSource1.DataSet := xml;
       MemoResp.Lines.Text :=  UTF8Encode(xml.FieldByName('xml').AsString);
       memoRespWS.Lines.Text :=  UTF8Encode(xml.FieldByName('xml').AsString);
@@ -1092,14 +1139,23 @@ procedure TForm1.btnConsultarReciboClick(Sender: TObject);
 var
   aux : String;
 begin
-  if not(InputQuery('Consultar Recibo Lote', 'Número do Recibo', aux)) then
-    exit;
-  ACBrNFe1.WebServices.Recibo.Recibo := aux;;
-  ACBrNFe1.WebServices.Recibo.Executar;
+    SQLTable1.Open;
+    SQLTable1.Insert;
+    SQLTable1.FieldByName('SnMarcad').AsString := 'S';
+    SQLTable1.FieldByName('xMotivo').AsString := '1111111111111111';
+    SQLTable1.FieldByName('chNFe').AsString := '1111111111111111';
+    SQLTable1.FieldByName('dhRecbto').AsString := '1111111111111111';
+    SQLTable1.FieldByName('nProt').AsString := '1111111111111111';
+    SQLTable1.Post;
 
-  MemoResp.Lines.Text :=  UTF8Encode(ACBrNFe1.WebServices.Recibo.RetWS);
-  memoRespWS.Lines.Text :=  UTF8Encode(ACBrNFe1.WebServices.Recibo.RetornoWS);
-  LoadXML(MemoResp, WBResposta);
+//  if not(InputQuery('Consultar Recibo Lote', 'Número do Recibo', aux)) then
+//    exit;
+//  ACBrNFe1.WebServices.Recibo.Recibo := aux;;
+//  ACBrNFe1.WebServices.Recibo.Executar;
+//
+//  MemoResp.Lines.Text :=  UTF8Encode(ACBrNFe1.WebServices.Recibo.RetWS);
+//  memoRespWS.Lines.Text :=  UTF8Encode(ACBrNFe1.WebServices.Recibo.RetornoWS);
+//  LoadXML(MemoResp, WBResposta);
 end;
 
 procedure TForm1.btnEnvDPECClick(Sender: TObject);

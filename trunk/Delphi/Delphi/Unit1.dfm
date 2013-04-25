@@ -487,7 +487,7 @@ object Form1: TForm1
           BrReadOnlyStyle = [fsItalic]
           BrReadOnlyColor = clMaroon
           Align = alClient
-          DataSource = DataSource1
+          DataSource = DataSource2
           PopupMenu = PopupMenu2
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
@@ -499,127 +499,6 @@ object Form1: TForm1
             'N'#227'o remova essas duas linhas de formata'#231#227'o:'
             'CampoTabela;Operador;ValorComparativo;Cor;')
           BrGradeZebrada = True
-          Columns = <
-            item
-              ButtonStyle = cbsNone
-              Expanded = False
-              FieldName = 'S/N'
-              Width = 82
-              Visible = True
-              BrConsulta = 0
-              BrPermissao = []
-              BrValueChecked = 'S'
-              BrValueUnchecked = 'N'
-              BrValueHalfChecked = False
-              BrSaveOnClick = False
-            end
-            item
-              Expanded = False
-              FieldName = 'Nome'
-              Width = 173
-              Visible = True
-              BrConsulta = 0
-              BrPermissao = []
-              BrValueHalfChecked = False
-              BrSaveOnClick = False
-            end
-            item
-              Expanded = False
-              FieldName = 'Tipo'
-              Width = 107
-              Visible = True
-              BrConsulta = 0
-              BrPermissao = []
-              BrValueHalfChecked = False
-              BrSaveOnClick = False
-            end
-            item
-              Expanded = False
-              FieldName = 'Tamanho'
-              Width = 50
-              Visible = True
-              BrConsulta = 0
-              BrPermissao = []
-              BrValueHalfChecked = False
-              BrSaveOnClick = False
-            end
-            item
-              Expanded = False
-              FieldName = 'Chave'
-              PickList.Strings = (
-                'PK'
-                'FK')
-              Width = 40
-              Visible = True
-              BrConsulta = 0
-              BrPickValue.Strings = (
-                'PK'
-                'FK')
-              BrPermissao = []
-              BrValueHalfChecked = False
-              BrSaveOnClick = False
-            end
-            item
-              ButtonStyle = cbsNone
-              Expanded = False
-              FieldName = 'Obrigatorio'
-              Width = 63
-              Visible = True
-              BrConsulta = 0
-              BrPermissao = []
-              BrValueChecked = 'S'
-              BrValueUnchecked = 'N'
-              BrValueHalfChecked = False
-              BrSaveOnClick = False
-            end
-            item
-              Expanded = False
-              FieldName = 'Apelido'
-              Visible = True
-              BrConsulta = 0
-              BrPermissao = []
-              BrValueHalfChecked = False
-              BrSaveOnClick = False
-            end
-            item
-              Expanded = False
-              FieldName = 'Dominio'
-              Width = 97
-              Visible = True
-              BrConsulta = 0
-              BrPermissao = []
-              BrValueHalfChecked = False
-              BrSaveOnClick = False
-            end
-            item
-              Expanded = False
-              FieldName = 'Mascara'
-              Visible = True
-              BrConsulta = 0
-              BrPermissao = []
-              BrValueHalfChecked = False
-              BrSaveOnClick = False
-            end
-            item
-              Expanded = False
-              FieldName = 'NomeFK'
-              Width = 87
-              Visible = True
-              BrConsulta = 0
-              BrPermissao = []
-              BrValueHalfChecked = False
-              BrSaveOnClick = False
-            end
-            item
-              Expanded = False
-              FieldName = 'Help'
-              Width = 144
-              Visible = True
-              BrConsulta = 0
-              BrPermissao = []
-              BrValueHalfChecked = False
-              BrSaveOnClick = False
-            end>
         end
       end
     end
@@ -778,7 +657,7 @@ object Form1: TForm1
             Top = 1
             Width = 701
             Height = 430
-            ActivePage = TabSheet13
+            ActivePage = TabSheet12
             Align = alClient
             TabOrder = 0
             object tsNFe: TTabSheet
@@ -1541,7 +1420,7 @@ object Form1: TForm1
                   end
                   item
                     Expanded = False
-                    FieldName = 'chNFe'
+                    FieldName = 'CHNFE'
                     Visible = True
                     BrConsulta = 0
                     BrPermissao = []
@@ -1550,7 +1429,7 @@ object Form1: TForm1
                   end
                   item
                     Expanded = False
-                    FieldName = 'ide_nNF'
+                    FieldName = 'IDE_NNF'
                     Visible = True
                     BrConsulta = 0
                     BrPermissao = []
@@ -1559,7 +1438,7 @@ object Form1: TForm1
                   end
                   item
                     Expanded = False
-                    FieldName = 'ide_serie'
+                    FieldName = 'IDE_SERIE'
                     Visible = True
                     BrConsulta = 0
                     BrPermissao = []
@@ -1568,7 +1447,7 @@ object Form1: TForm1
                   end
                   item
                     Expanded = False
-                    FieldName = 'ide_dEmi'
+                    FieldName = 'IDE_DEMI'
                     Visible = True
                     BrConsulta = 0
                     BrPermissao = []
@@ -1577,7 +1456,7 @@ object Form1: TForm1
                   end
                   item
                     Expanded = False
-                    FieldName = 'ide_dSaiEnt'
+                    FieldName = 'IDE_DSAIENT'
                     Visible = True
                     BrConsulta = 0
                     BrPermissao = []
@@ -1586,7 +1465,7 @@ object Form1: TForm1
                   end
                   item
                     Expanded = False
-                    FieldName = 'emit_CNPJ'
+                    FieldName = 'EMIT_CNPJ'
                     Visible = True
                     BrConsulta = 0
                     BrPermissao = []
@@ -1595,7 +1474,7 @@ object Form1: TForm1
                   end
                   item
                     Expanded = False
-                    FieldName = 'emit_xNome'
+                    FieldName = 'EMIT_XNOME'
                     Visible = True
                     BrConsulta = 0
                     BrPermissao = []
@@ -1604,7 +1483,7 @@ object Form1: TForm1
                   end
                   item
                     Expanded = False
-                    FieldName = 'nProt'
+                    FieldName = 'NPROT'
                     Visible = True
                     BrConsulta = 0
                     BrPermissao = []
@@ -1613,7 +1492,7 @@ object Form1: TForm1
                   end
                   item
                     Expanded = False
-                    FieldName = 'xMotivo'
+                    FieldName = 'XMOTIVO'
                     Visible = True
                     BrConsulta = 0
                     BrPermissao = []
@@ -1622,7 +1501,7 @@ object Form1: TForm1
                   end
                   item
                     Expanded = False
-                    FieldName = 'Xml'
+                    FieldName = 'XML'
                     Visible = True
                     BrConsulta = 0
                     BrPermissao = []
@@ -1905,12 +1784,13 @@ object Form1: TForm1
     Top = 32
   end
   object DataSource1: TDataSource
-    Left = 360
-    Top = 152
+    Left = 384
+    Top = 216
   end
   object xml: TClientDataSet
     Aggregates = <>
     Params = <>
+    ProviderName = 'DataSetProvider1'
     Left = 360
     Top = 16
   end
@@ -2084,6 +1964,215 @@ object Form1: TForm1
     end
     object Deletar1: TMenuItem
       Caption = 'Deletar'
+    end
+  end
+  object DataSource2: TDataSource
+    DataSet = SQLTable1
+    Left = 320
+    Top = 288
+  end
+  object SQLConnection1: TSQLConnection
+    ConnectionName = 'FBCONNECTION'
+    DriverName = 'Firebird'
+    GetDriverFunc = 'getSQLDriverINTERBASE'
+    LibraryName = 'dbxfb.dll'
+    LoadParamsOnConnect = True
+    LoginPrompt = False
+    Params.Strings = (
+      'drivername=Firebird'
+      
+        'Database=C:\Documents and Settings\Administrador\Desktop\Delphi\' +
+        'MANIFESTO.fdb'
+      'rolename=RoleName'
+      'user_name=sysdba'
+      'Password=masterkey'
+      'sqldialect=3'
+      'localecode=0000'
+      'blobsize=-1'
+      'commitretain=False'
+      'waitonlocks=True'
+      'isolationlevel=ReadCommitted'
+      'trim char=False'
+      
+        'ConnectionString=drivername=Firebird,Database=C:\Documents and S' +
+        'ettings\Administrador\Desktop\Delphi\MANIFESTO.fdb,rolename=Role' +
+        'Name,user_name=sysdba,Password=masterkey,sqldialect=3,localecode' +
+        '=0000,blobsize=-1,commitretain=False,waitonlocks=True,isolationl' +
+        'evel=ReadCommitted,trim char=False')
+    VendorLib = 'fbclient.DLL'
+    Connected = True
+    Left = 568
+    Top = 200
+  end
+  object DataSetProvider1: TDataSetProvider
+    DataSet = SQLDataSet1
+    Options = [poFetchBlobsOnDemand, poAllowCommandText, poUseQuoteChar]
+    Left = 576
+    Top = 312
+  end
+  object SQLDataSet1: TSQLDataSet
+    SchemaName = 'sysdba'
+    CommandText = 'select *  from NOTAS'
+    DbxCommandType = 'Dbx.SQL'
+    DataSource = DataSource2
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = SQLConnection1
+    Left = 568
+    Top = 256
+  end
+  object SQLTable1: TSQLTable
+    Active = True
+    MaxBlobSize = -1
+    SQLConnection = SQLConnection1
+    TableName = 'NOTAS'
+    Left = 440
+    Top = 304
+    object SQLTable1XMOTIVO: TStringField
+      FieldName = 'XMOTIVO'
+      Size = 99
+    end
+    object SQLTable1CHNFE: TStringField
+      FieldName = 'CHNFE'
+      Required = True
+      Size = 50
+    end
+    object SQLTable1DHRECBTO: TStringField
+      FieldName = 'DHRECBTO'
+      Size = 50
+    end
+    object SQLTable1NPROT: TStringField
+      FieldName = 'NPROT'
+      Size = 50
+    end
+    object SQLTable1IDE_MOD: TStringField
+      FieldName = 'IDE_MOD'
+      Size = 5
+    end
+    object SQLTable1IDE_NATOP: TStringField
+      FieldName = 'IDE_NATOP'
+      Size = 99
+    end
+    object SQLTable1IDE_NNF: TStringField
+      FieldName = 'IDE_NNF'
+    end
+    object SQLTable1IDE_SERIE: TStringField
+      FieldName = 'IDE_SERIE'
+    end
+    object SQLTable1IDE_TPIMP: TStringField
+      FieldName = 'IDE_TPIMP'
+    end
+    object SQLTable1IDE_TPEMIS: TStringField
+      FieldName = 'IDE_TPEMIS'
+    end
+    object SQLTable1IDE_CDV: TStringField
+      FieldName = 'IDE_CDV'
+    end
+    object SQLTable1IDE_TPAMB: TStringField
+      FieldName = 'IDE_TPAMB'
+    end
+    object SQLTable1IDE_DEMI: TStringField
+      FieldName = 'IDE_DEMI'
+    end
+    object SQLTable1IDE_DSAIENT: TStringField
+      FieldName = 'IDE_DSAIENT'
+    end
+    object SQLTable1IDE_HSAIENT: TStringField
+      FieldName = 'IDE_HSAIENT'
+    end
+    object SQLTable1EMIT_XNOME: TStringField
+      FieldName = 'EMIT_XNOME'
+      Size = 99
+    end
+    object SQLTable1EMIT_CNPJ: TStringField
+      FieldName = 'EMIT_CNPJ'
+      Size = 30
+    end
+    object SQLTable1EMIT_IE: TStringField
+      FieldName = 'EMIT_IE'
+      Size = 30
+    end
+    object SQLTable1EMIT_CRT: TStringField
+      FieldName = 'EMIT_CRT'
+      Size = 5
+    end
+    object SQLTable1ENDEREMIT_XLGR: TStringField
+      FieldName = 'ENDEREMIT_XLGR'
+      Size = 99
+    end
+    object SQLTable1ENDEREMIT_NRO: TStringField
+      FieldName = 'ENDEREMIT_NRO'
+    end
+    object SQLTable1ENDEREMIT_XBAIRRO: TStringField
+      FieldName = 'ENDEREMIT_XBAIRRO'
+      Size = 99
+    end
+    object SQLTable1ENDEREMIT_XMUN: TStringField
+      FieldName = 'ENDEREMIT_XMUN'
+      Size = 99
+    end
+    object SQLTable1ENDEREMIT_CEP: TStringField
+      FieldName = 'ENDEREMIT_CEP'
+    end
+    object SQLTable1ENDEREMIT_FONE: TStringField
+      FieldName = 'ENDEREMIT_FONE'
+    end
+    object SQLTable1ENDEREMIT_UF: TStringField
+      FieldName = 'ENDEREMIT_UF'
+      Size = 5
+    end
+    object SQLTable1DEST_XNOME: TStringField
+      FieldName = 'DEST_XNOME'
+      Size = 99
+    end
+    object SQLTable1DEST_CNPJ: TStringField
+      FieldName = 'DEST_CNPJ'
+      Size = 30
+    end
+    object SQLTable1DEST_CPF: TStringField
+      FieldName = 'DEST_CPF'
+      Size = 30
+    end
+    object SQLTable1DEST_IE: TStringField
+      FieldName = 'DEST_IE'
+      Size = 30
+    end
+    object SQLTable1DEST_EMAIL: TStringField
+      FieldName = 'DEST_EMAIL'
+      Size = 99
+    end
+    object SQLTable1ENDERDEST_XLGR: TStringField
+      FieldName = 'ENDERDEST_XLGR'
+      Size = 99
+    end
+    object SQLTable1ENDERDEST_NRO: TStringField
+      FieldName = 'ENDERDEST_NRO'
+    end
+    object SQLTable1ENDERDEST_XBAIRRO: TStringField
+      FieldName = 'ENDERDEST_XBAIRRO'
+      Size = 99
+    end
+    object SQLTable1ENDERDEST_XMUN: TStringField
+      FieldName = 'ENDERDEST_XMUN'
+      Size = 99
+    end
+    object SQLTable1ENDERDEST_CEP: TStringField
+      FieldName = 'ENDERDEST_CEP'
+    end
+    object SQLTable1ENDERDEST_FONE: TStringField
+      FieldName = 'ENDERDEST_FONE'
+      Size = 30
+    end
+    object SQLTable1ENDERDEST_UF: TStringField
+      FieldName = 'ENDERDEST_UF'
+      Size = 5
+    end
+    object SQLTable1XML: TStringField
+      FieldName = 'XML'
+      Size = 10000
+    end
+    object SQLTable1STMANIFESTO: TIntegerField
+      FieldName = 'STMANIFESTO'
     end
   end
 end
