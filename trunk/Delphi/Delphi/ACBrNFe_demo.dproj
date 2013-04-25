@@ -57,7 +57,6 @@
 			<DCCReference Include="ufrmStatus.pas">
 				<Form>frmStatus</Form>
 			</DCCReference>
-			<DCCReference Include="..\..\..\Fontes\ACBrNFe2\ACBrDANFeEventoRaveRetrato.pas"/>
 			<DCCReference Include="UfrmFunctions.pas"/>
 			<DCCReference Include="Unit2.pas">
 				<Form>DmNfe</Form>

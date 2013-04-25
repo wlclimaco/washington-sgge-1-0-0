@@ -8,8 +8,140 @@
   resources were bound to the produced executable.
 */
 
+#define mxExport_rsFilterText 64384
+#define mxExport_rsFilterComma 64385
+#define mxExport_rsFilterTab 64386
+#define mxExport_rsFilterRTF 64387
+#define mxExport_rsFilterDIF 64388
+#define mxExport_rsFilterSYLK 64389
+#define mxExport_rsOlive_TABLE_ODD_BGCOLOR 64400
+#define mxExport_rsOlive_TABLE_FONT_COLOR 64401
+#define mxExport_rsDark_BGCOLOR 64402
+#define mxExport_rsDark_TEXT 64403
+#define mxExport_rsDark_LINK 64404
+#define mxExport_rsDark_ALINK 64405
+#define mxExport_rsDark_VLINK 64406
+#define mxExport_rsDark_HEAD_BGCOLOR 64407
+#define mxExport_rsDark_HEAD_FONT_COLOR 64408
+#define mxExport_rsDark_TABLE_BGCOLOR 64409
+#define mxExport_rsDark_TABLE_ODD_BGCOLOR 64410
+#define mxExport_rsDark_TABLE_FONT_COLOR 64411
+#define mxExport_rsSaveTitle 64412
+#define mxExport_rsFilterHTML 64413
+#define mxExport_rsFilterExcel 64414
+#define mxExport_rsFilterWord 64415
+#define mxExport_rsMsMoney_LINK 64416
+#define mxExport_rsMsMoney_ALINK 64417
+#define mxExport_rsMsMoney_VLINK 64418
+#define mxExport_rsMsMoney_HEAD_BGCOLOR 64419
+#define mxExport_rsMsMoney_HEAD_FONT_COLOR 64420
+#define mxExport_rsMsMoney_TABLE_BGCOLOR 64421
+#define mxExport_rsMsMoney_TABLE_ODD_BGCOLOR 64422
+#define mxExport_rsMsMoney_TABLE_FONT_COLOR 64423
+#define mxExport_rsOlive_BGCOLOR 64424
+#define mxExport_rsOlive_TEXT 64425
+#define mxExport_rsOlive_LINK 64426
+#define mxExport_rsOlive_ALINK 64427
+#define mxExport_rsOlive_VLINK 64428
+#define mxExport_rsOlive_HEAD_BGCOLOR 64429
+#define mxExport_rsOlive_HEAD_FONT_COLOR 64430
+#define mxExport_rsOlive_TABLE_BGCOLOR 64431
+#define mxExport_rsColorful_RTF_TABLE_ODD_BGCOLOR 64432
+#define mxExport_rsGray_BGCOLOR 64433
+#define mxExport_rsGray_TEXT 64434
+#define mxExport_rsGray_LINK 64435
+#define mxExport_rsGray_ALINK 64436
+#define mxExport_rsGray_VLINK 64437
+#define mxExport_rsGray_HEAD_BGCOLOR 64438
+#define mxExport_rsGray_HEAD_FONT_COLOR 64439
+#define mxExport_rsGray_TABLE_BGCOLOR 64440
+#define mxExport_rsGray_TABLE_ODD_BGCOLOR 64441
+#define mxExport_rsGray_TABLE_FONT_COLOR 64442
+#define mxExport_rsGray_RTF_HEAD_BGCOLOR 64443
+#define mxExport_rsGray_RTF_TABLE_BGCOLOR 64444
+#define mxExport_rsGray_RTF_TABLE_ODD_BGCOLOR 64445
+#define mxExport_rsMsMoney_BGCOLOR 64446
+#define mxExport_rsMsMoney_TEXT 64447
+#define mxExport_rsClassic_RTF_HEAD_BGCOLOR 64448
+#define mxExport_rsClassic_RTF_TABLE_BGCOLOR 64449
+#define mxExport_rsClassic_RTF_TABLE_ODD_BGCOLOR 64450
+#define mxExport_rsColorful_BGCOLOR 64451
+#define mxExport_rsColorful_TEXT 64452
+#define mxExport_rsColorful_LINK 64453
+#define mxExport_rsColorful_ALINK 64454
+#define mxExport_rsColorful_VLINK 64455
+#define mxExport_rsColorful_HEAD_BGCOLOR 64456
+#define mxExport_rsColorful_HEAD_FONT_COLOR 64457
+#define mxExport_rsColorful_TABLE_BGCOLOR 64458
+#define mxExport_rsColorful_TABLE_ODD_BGCOLOR 64459
+#define mxExport_rsColorful_TABLE_FONT_COLOR 64460
+#define mxExport_rsColorful_RTF_TABLE_FONT_COLOR 64461
+#define mxExport_rsColorful_RTF_HEAD_BGCOLOR 64462
+#define mxExport_rsColorful_RTF_TABLE_BGCOLOR 64463
+#define mxExport_rsBW_HEAD_FONT_COLOR 64464
+#define mxExport_rsBW_TABLE_BGCOLOR 64465
+#define mxExport_rsBW_TABLE_ODD_BGCOLOR 64466
+#define mxExport_rsBW_TABLE_FONT_COLOR 64467
+#define mxExport_rsClassic_BGCOLOR 64468
+#define mxExport_rsClassic_TEXT 64469
+#define mxExport_rsClassic_LINK 64470
+#define mxExport_rsClassic_ALINK 64471
+#define mxExport_rsClassic_VLINK 64472
+#define mxExport_rsClassic_HEAD_BGCOLOR 64473
+#define mxExport_rsClassic_HEAD_FONT_COLOR 64474
+#define mxExport_rsClassic_TABLE_BGCOLOR 64475
+#define mxExport_rsClassic_TABLE_ODD_BGCOLOR 64476
+#define mxExport_rsClassic_TABLE_FONT_COLOR 64477
+#define mxExport_rsClassic_RTF_TABLE_FONT_COLOR 64478
+#define mxExport_rsClassic_RTF_HEAD_FONT_COLOR 64479
+#define mxExport_rsStandard_ALINK 64480
+#define mxExport_rsStandard_VLINK 64481
+#define mxExport_rsStandard_HEAD_BGCOLOR 64482
+#define mxExport_rsStandard_HEAD_FONT_COLOR 64483
+#define mxExport_rsStandard_TABLE_BGCOLOR 64484
+#define mxExport_rsStandard_TABLE_ODD_BGCOLOR 64485
+#define mxExport_rsStandard_TABLE_FONT_COLOR 64486
+#define mxExport_rsStandard_RTF_HEAD_BGCOLOR 64487
+#define mxExport_rsStandard_RTF_TABLE_BGCOLOR 64488
+#define mxExport_rsStandard_RTF_TABLE_ODD_BGCOLOR 64489
+#define mxExport_rsBW_BGCOLOR 64490
+#define mxExport_rsBW_TEXT 64491
+#define mxExport_rsBW_LINK 64492
+#define mxExport_rsBW_ALINK 64493
+#define mxExport_rsBW_VLINK 64494
+#define mxExport_rsBW_HEAD_BGCOLOR 64495
+#define mxExport_rsViewOnly 64496
+#define mxExport_rsTempPrefix 64497
+#define mxExport_rsSelectHTML 64498
+#define mxExport_rsSelectWord 64499
+#define mxExport_rsSelectExcel 64500
+#define mxExport_rsSelectText 64501
+#define mxExport_rsSelectRTF 64502
+#define mxExport_rsSelectComma 64503
+#define mxExport_rsSelectTab 64504
+#define mxExport_rsSelectDIF 64505
+#define mxExport_rsSelectSYLK 64506
+#define mxExport_rsSelectClipboard 64507
+#define mxExport_rsDefaultFontFace 64508
+#define mxExport_rsStandard_BGCOLOR 64509
+#define mxExport_rsStandard_TEXT 64510
+#define mxExport_rsStandard_LINK 64511
 #define DBXOpenSSLRes_SOpenSSLNotLoaded 64512
 #define DBXOpenSSLRes_SKeyCannotBeGenerated 64513
+#define mxExport_rsExportingDataSet 64514
+#define mxExport_rsFieldIsUnknown 64515
+#define mxExport_rsFieldIsBinary 64516
+#define mxExport_rsNullValue 64517
+#define mxExport_rsTrue 64518
+#define mxExport_rsFalse 64519
+#define mxExport_rsExportCaption 64520
+#define mxExport_rsExport 64521
+#define mxExport_rsCancel 64522
+#define mxExport_rsCreated 64523
+#define mxExport_rsProcessing 64524
+#define mxExport_rsSelectFormat 64525
+#define mxExport_rsCopiedToClipboard 64526
+#define mxExport_rsExportToFile 64527
 #define IdResourceStringsCore_RSReadLnMaxLineLengthExceeded 64528
 #define IdResourceStringsCore_RSRequiresLargeStream 64529
 #define IdResourceStringsCore_RSDataTooLarge 64530
@@ -1020,8 +1152,140 @@
 #define SysConst_SInvalidOp 65535
 STRINGTABLE
 BEGIN
+	mxExport_rsFilterText,	"Text Files"
+	mxExport_rsFilterComma,	"CSV (Comma delimited)"
+	mxExport_rsFilterTab,	"Text (Tab delimited)"
+	mxExport_rsFilterRTF,	"Rich Text Format"
+	mxExport_rsFilterDIF,	"Data Interchange Format"
+	mxExport_rsFilterSYLK,	"SYLK Files"
+	mxExport_rsOlive_TABLE_ODD_BGCOLOR,	"$00FFFFCF"
+	mxExport_rsOlive_TABLE_FONT_COLOR,	"$00000000"
+	mxExport_rsDark_BGCOLOR,	"$00317676"
+	mxExport_rsDark_TEXT,	"$00FFE760"
+	mxExport_rsDark_LINK,	"$00DDE760"
+	mxExport_rsDark_ALINK,	"$00FFFF00"
+	mxExport_rsDark_VLINK,	"$00CCCC39"
+	mxExport_rsDark_HEAD_BGCOLOR,	"$003A9393"
+	mxExport_rsDark_HEAD_FONT_COLOR,	"$00FFFFFF"
+	mxExport_rsDark_TABLE_BGCOLOR,	"$00004040"
+	mxExport_rsDark_TABLE_ODD_BGCOLOR,	"$00000000"
+	mxExport_rsDark_TABLE_FONT_COLOR,	"$00FFFFFF"
+	mxExport_rsSaveTitle,	"Save document"
+	mxExport_rsFilterHTML,	"HTML Documents"
+	mxExport_rsFilterExcel,	"Excel Files"
+	mxExport_rsFilterWord,	"Word Documents"
+	mxExport_rsMsMoney_LINK,	"$000000FF"
+	mxExport_rsMsMoney_ALINK,	"$00FF0000"
+	mxExport_rsMsMoney_VLINK,	"$00AABBAA"
+	mxExport_rsMsMoney_HEAD_BGCOLOR,	"$00CEC6B5"
+	mxExport_rsMsMoney_HEAD_FONT_COLOR,	"$00000000"
+	mxExport_rsMsMoney_TABLE_BGCOLOR,	"$00DEE7DE"
+	mxExport_rsMsMoney_TABLE_ODD_BGCOLOR,	"$00FFFBF0"
+	mxExport_rsMsMoney_TABLE_FONT_COLOR,	"$00000080"
+	mxExport_rsOlive_BGCOLOR,	"$00FFFFFF"
+	mxExport_rsOlive_TEXT,	"$005F605F"
+	mxExport_rsOlive_LINK,	"$000000FF"
+	mxExport_rsOlive_ALINK,	"$00FF0000"
+	mxExport_rsOlive_VLINK,	"$00FFFF00"
+	mxExport_rsOlive_HEAD_BGCOLOR,	"$00CFC890"
+	mxExport_rsOlive_HEAD_FONT_COLOR,	"$00000000"
+	mxExport_rsOlive_TABLE_BGCOLOR,	"$00FFFFFF"
+	mxExport_rsColorful_RTF_TABLE_ODD_BGCOLOR,	"$0000FF80"
+	mxExport_rsGray_BGCOLOR,	"$00FFFFFF"
+	mxExport_rsGray_TEXT,	"$00000000"
+	mxExport_rsGray_LINK,	"$000000FF"
+	mxExport_rsGray_ALINK,	"$00FF0000"
+	mxExport_rsGray_VLINK,	"$00FFFF00"
+	mxExport_rsGray_HEAD_BGCOLOR,	"$00808080"
+	mxExport_rsGray_HEAD_FONT_COLOR,	"$00FFFFFF"
+	mxExport_rsGray_TABLE_BGCOLOR,	"$00FFFFFF"
+	mxExport_rsGray_TABLE_ODD_BGCOLOR,	"$00EEEEEE"
+	mxExport_rsGray_TABLE_FONT_COLOR,	"$00000000"
+	mxExport_rsGray_RTF_HEAD_BGCOLOR,	"$00808080"
+	mxExport_rsGray_RTF_TABLE_BGCOLOR,	"$00FFFFFF"
+	mxExport_rsGray_RTF_TABLE_ODD_BGCOLOR,	"$0080FF80"
+	mxExport_rsMsMoney_BGCOLOR,	"$00FFFFFF"
+	mxExport_rsMsMoney_TEXT,	"$00000000"
+	mxExport_rsClassic_RTF_HEAD_BGCOLOR,	"$00000000"
+	mxExport_rsClassic_RTF_TABLE_BGCOLOR,	"$00FF0000"
+	mxExport_rsClassic_RTF_TABLE_ODD_BGCOLOR,	"$00FF8080"
+	mxExport_rsColorful_BGCOLOR,	"$00339966"
+	mxExport_rsColorful_TEXT,	"$00000000"
+	mxExport_rsColorful_LINK,	"$000066CC"
+	mxExport_rsColorful_ALINK,	"$00FF0000"
+	mxExport_rsColorful_VLINK,	"$00923FC1"
+	mxExport_rsColorful_HEAD_BGCOLOR,	"$00CC0033"
+	mxExport_rsColorful_HEAD_FONT_COLOR,	"$00FFFFFF"
+	mxExport_rsColorful_TABLE_BGCOLOR,	"$00FFFFFF"
+	mxExport_rsColorful_TABLE_ODD_BGCOLOR,	"$00FAF100"
+	mxExport_rsColorful_TABLE_FONT_COLOR,	"$00FFFFFF"
+	mxExport_rsColorful_RTF_TABLE_FONT_COLOR,	"$00000000"
+	mxExport_rsColorful_RTF_HEAD_BGCOLOR,	"$000000FF"
+	mxExport_rsColorful_RTF_TABLE_BGCOLOR,	"$00FFFFFF"
+	mxExport_rsBW_HEAD_FONT_COLOR,	"$00FFFFFF"
+	mxExport_rsBW_TABLE_BGCOLOR,	"$00FFFFFF"
+	mxExport_rsBW_TABLE_ODD_BGCOLOR,	"$00F3F3F3"
+	mxExport_rsBW_TABLE_FONT_COLOR,	"$00000000"
+	mxExport_rsClassic_BGCOLOR,	"$00339966"
+	mxExport_rsClassic_TEXT,	"$00000000"
+	mxExport_rsClassic_LINK,	"$000066CC"
+	mxExport_rsClassic_ALINK,	"$00FF0000"
+	mxExport_rsClassic_VLINK,	"$00923FC1"
+	mxExport_rsClassic_HEAD_BGCOLOR,	"$00000000"
+	mxExport_rsClassic_HEAD_FONT_COLOR,	"$00FF0000"
+	mxExport_rsClassic_TABLE_BGCOLOR,	"$00006BCE"
+	mxExport_rsClassic_TABLE_ODD_BGCOLOR,	"$00007AEC"
+	mxExport_rsClassic_TABLE_FONT_COLOR,	"$00FFFFFF"
+	mxExport_rsClassic_RTF_TABLE_FONT_COLOR,	"$00000000"
+	mxExport_rsClassic_RTF_HEAD_FONT_COLOR,	"$000000FF"
+	mxExport_rsStandard_ALINK,	"$00FF0000"
+	mxExport_rsStandard_VLINK,	"$00FFFF00"
+	mxExport_rsStandard_HEAD_BGCOLOR,	"$00336699"
+	mxExport_rsStandard_HEAD_FONT_COLOR,	"$00FFFFFF"
+	mxExport_rsStandard_TABLE_BGCOLOR,	"$00FFFFCF"
+	mxExport_rsStandard_TABLE_ODD_BGCOLOR,	"$00FFFFFF"
+	mxExport_rsStandard_TABLE_FONT_COLOR,	"$00000000"
+	mxExport_rsStandard_RTF_HEAD_BGCOLOR,	"$00800000"
+	mxExport_rsStandard_RTF_TABLE_BGCOLOR,	"$00FFFFFF"
+	mxExport_rsStandard_RTF_TABLE_ODD_BGCOLOR,	"$0000FF80"
+	mxExport_rsBW_BGCOLOR,	"$00FFFFFF"
+	mxExport_rsBW_TEXT,	"$00000000"
+	mxExport_rsBW_LINK,	"$00AAAAAA"
+	mxExport_rsBW_ALINK,	"$00BBBBBB"
+	mxExport_rsBW_VLINK,	"$00DDDDDD"
+	mxExport_rsBW_HEAD_BGCOLOR,	"$00000000"
+	mxExport_rsViewOnly,	"&Ver apenas"
+	mxExport_rsTempPrefix,	"MX"
+	mxExport_rsSelectHTML,	"HTML"
+	mxExport_rsSelectWord,	"Microsoft Word"
+	mxExport_rsSelectExcel,	"Microsoft Excel"
+	mxExport_rsSelectText,	"Text"
+	mxExport_rsSelectRTF,	"Rich Text"
+	mxExport_rsSelectComma,	"Comma-Separated Text"
+	mxExport_rsSelectTab,	"Tab-Separated Text"
+	mxExport_rsSelectDIF,	"Data Interchange Format"
+	mxExport_rsSelectSYLK,	"SYLK Format"
+	mxExport_rsSelectClipboard,	"Clipboard"
+	mxExport_rsDefaultFontFace,	"Arial,Helvetica"
+	mxExport_rsStandard_BGCOLOR,	"$00FFFFFF"
+	mxExport_rsStandard_TEXT,	"$00000000"
+	mxExport_rsStandard_LINK,	"$000000FF"
 	DBXOpenSSLRes_SOpenSSLNotLoaded,	"SSL module was not loaded or it was not loaded successful. Use LoadSSL method to load the module"
 	DBXOpenSSLRes_SKeyCannotBeGenerated,	"RSA key generation failed"
+	mxExport_rsExportingDataSet,	"Exportação de dados definido"
+	mxExport_rsFieldIsUnknown,	"** UNKNOWN **"
+	mxExport_rsFieldIsBinary,	"** BINARY **"
+	mxExport_rsNullValue,	"** NULL **"
+	mxExport_rsTrue,	"True"
+	mxExport_rsFalse,	"False"
+	mxExport_rsExportCaption,	"Exportar"
+	mxExport_rsExport,	"&Export"
+	mxExport_rsCancel,	"&Cancelar"
+	mxExport_rsCreated,	"Created:"
+	mxExport_rsProcessing,	"Processing..."
+	mxExport_rsSelectFormat,	"Formatos de e&xportação:"
+	mxExport_rsCopiedToClipboard,	"Data was copied to clipboard!"
+	mxExport_rsExportToFile,	"Expor&tar para arquivo"
 	IdResourceStringsCore_RSReadLnMaxLineLengthExceeded,	"Max line length exceeded."
 	IdResourceStringsCore_RSRequiresLargeStream,	"Set LargeStream to True to send streams greater than 2GB"
 	IdResourceStringsCore_RSDataTooLarge,	"Data is too large for stream"
@@ -2049,6 +2313,8 @@ END
 /* C:\BRAVO\fontes\Componentes\BrvCalculadoraForm.DFM */
 /* C:\BRAVO\fontes\Componentes\BRVDBGRIDS.RES */
 /* c:\arquivos de programas\embarcadero\rad studio\8.0\XDBGrid\XDBGrids.res */
+/* C:\BRAVO\fontes\ComponentesTerceiros\MaxComponents\mxExports\mxExportSelect.DFM */
+/* C:\BRAVO\fontes\ComponentesTerceiros\MaxComponents\mxExports\mxExportProgress.DFM */
 /* c:\arquivos de programas\embarcadero\rad studio\8.0\lib\Win32\release\FileCtrl.res */
 /* C:\Documents and Settings\Administrador\Desktop\Delphi\ufrmStatus.dfm */
 /* C:\BRAVO\fontes\Componentes\BrvAlertProgress.res */

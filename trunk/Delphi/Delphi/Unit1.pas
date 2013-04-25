@@ -10,21 +10,27 @@ uses IniFiles, ShellAPI, pcnRetConsReciNFe,
   ACBrNFe, pcnConversao, ACBrNFeDANFEClass, ACBrNFeDANFERave, ACBrUtil,
   pcnNFeW, pcnNFeRTXT, pcnAuxiliar, ACBrDFeUtil,
   XMLIntf, XMLDoc, ACBrNFeDANFERaveCB, BrvXml, Grids, BrvDbGrids, BrvDbGrid, BrvBitBtn, DBXFirebird,
-  FMTBcd, DB, SqlExpr, DBClient, Menus, XDBGrids;
+  FMTBcd, DB, SqlExpr, DBClient, Menus, XDBGrids, mxExport, BrvRetCon, BrvCustomEdit, BrvEditNum,
+  Mask, BrvCustomMaskEdit, BrvEditDate;
 
 type
   TForm1 = class(TForm)
-    Panel1: TPanel;
     OpenDialog1: TOpenDialog;
+    ACBrNFe1: TACBrNFe;
+    ACBrNFeDANFERave1: TACBrNFeDANFERave;
+    BrvXMLNFE: TBrvXML;
+    Label29: TLabel;
+    DataSource1: TDataSource;
+    xml: TClientDataSet;
+    PageControl1: TPageControl;
+    TabSheet14: TTabSheet;
+    TabSheet15: TTabSheet;
     Panel2: TPanel;
-    Panel3: TPanel;
     PageControl2: TPageControl;
     TabSheet5: TTabSheet;
     MemoResp: TMemo;
     TabSheet6: TTabSheet;
     WBResposta: TWebBrowser;
-    ACBrNFe1: TACBrNFe;
-    ACBrNFeDANFERave1: TACBrNFeDANFERave;
     TabSheet8: TTabSheet;
     memoLog: TMemo;
     TabSheet9: TTabSheet;
@@ -35,17 +41,9 @@ type
     MemoDados: TMemo;
     TabSheet11: TTabSheet;
     TreeViewRetornoConsulta: TTreeView;
+    Panel3: TPanel;
     PageControl3: TPageControl;
     tsNFe: TTabSheet;
-    BrvXMLNFE: TBrvXML;
-    SQLConnection1: TSQLConnection;
-    TabSheet12: TTabSheet;
-    TabSheet13: TTabSheet;
-    Panel5: TPanel;
-    BrvBitBtn5: TBrvBitBtn;
-    BrvBitBtn6: TBrvBitBtn;
-    BrvBitBtn7: TBrvBitBtn;
-    BrvBitBtn8: TBrvBitBtn;
     GroupBox2: TGroupBox;
     Label1: TLabel;
     Label2: TLabel;
@@ -64,6 +62,7 @@ type
     ckSalvar: TCheckBox;
     rgTipoDanfe: TRadioGroup;
     rgFormaEmissao: TRadioGroup;
+    btnSalvarConfig: TBitBtn;
     GroupBox4: TGroupBox;
     Label6: TLabel;
     ckVisualizar: TCheckBox;
@@ -78,35 +77,32 @@ type
     edtProxyPorta: TEdit;
     edtProxyUser: TEdit;
     edtProxySenha: TEdit;
-    btnStatusServ: TButton;
-    btnConsultarChave: TButton;
-    btnCancelarChave: TButton;
     GroupBox6: TGroupBox;
     Label12: TLabel;
-    edtEmitCNPJ: TEdit;
     Label13: TLabel;
-    edtEmitIE: TEdit;
-    edtEmitRazao: TEdit;
     Label14: TLabel;
     Label15: TLabel;
-    edtEmitFantasia: TEdit;
     Label24: TLabel;
     Label23: TLabel;
-    edtEmitFone: TEdit;
-    edtEmitCEP: TEdit;
     Label16: TLabel;
-    edtEmitLogradouro: TEdit;
-    edtEmitNumero: TEdit;
     Label17: TLabel;
-    edtEmitComp: TEdit;
     Label18: TLabel;
     Label19: TLabel;
-    edtEmitBairro: TEdit;
     Label20: TLabel;
-    edtEmitCodCidade: TEdit;
     Label21: TLabel;
-    edtEmitCidade: TEdit;
     Label22: TLabel;
+    edtEmitCNPJ: TEdit;
+    edtEmitIE: TEdit;
+    edtEmitRazao: TEdit;
+    edtEmitFantasia: TEdit;
+    edtEmitFone: TEdit;
+    edtEmitCEP: TEdit;
+    edtEmitLogradouro: TEdit;
+    edtEmitNumero: TEdit;
+    edtEmitComp: TEdit;
+    edtEmitBairro: TEdit;
+    edtEmitCodCidade: TEdit;
+    edtEmitCidade: TEdit;
     edtEmitUF: TEdit;
     GroupBox5: TGroupBox;
     Label3: TLabel;
@@ -122,6 +118,26 @@ type
     edtEmailAssunto: TEdit;
     cbEmailSSL: TCheckBox;
     mmEmailMsg: TMemo;
+    TabSheet12: TTabSheet;
+    Panel4: TPanel;
+    BrvDbGrid1: TBrvDbGrid;
+    TabSheet13: TTabSheet;
+    Panel6: TPanel;
+    Label30: TLabel;
+    Edit1: TEdit;
+    BrvBitBtn1: TBrvBitBtn;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    TabSheet3: TTabSheet;
+    TabSheet4: TTabSheet;
+    TabSheet7: TTabSheet;
+    TabSheet16: TTabSheet;
+    TabSheet17: TTabSheet;
+    TabSheet18: TTabSheet;
+    Panel1: TPanel;
+    btnStatusServ: TButton;
+    btnConsultarChave: TButton;
+    btnCancelarChave: TButton;
     btnConsultarRecibo: TButton;
     btnConsCad: TButton;
     btnGerarPDF: TButton;
@@ -131,28 +147,48 @@ type
     btnCartadeCorrecao: TButton;
     btnNfeDestinadas: TButton;
     Button1: TButton;
-    btnSalvarConfig: TBitBtn;
     Button2: TButton;
-    TabSheet1: TTabSheet;
-    TabSheet2: TTabSheet;
-    TabSheet3: TTabSheet;
-    TabSheet4: TTabSheet;
-    TabSheet7: TTabSheet;
-    TabSheet16: TTabSheet;
-    TabSheet17: TTabSheet;
-    TabSheet18: TTabSheet;
-    Panel4: TPanel;
-    BrvDbGrid1: TBrvDbGrid;
-    Panel6: TPanel;
-    Edit1: TEdit;
-    BrvBitBtn1: TBrvBitBtn;
-    Label29: TLabel;
-    Label30: TLabel;
-    DataSource1: TDataSource;
-    xml: TClientDataSet;
+    Panel7: TPanel;
+    Panel8: TPanel;
+    Panel9: TPanel;
+    Panel10: TPanel;
+    BrvDbGrid2: TBrvDbGrid;
+    GroupBox1: TGroupBox;
+    GroupBox7: TGroupBox;
+    GroupBox8: TGroupBox;
+    GroupBox9: TGroupBox;
+    CheckBox1: TCheckBox;
+    CheckBox2: TCheckBox;
+    CheckBox3: TCheckBox;
+    CheckBox4: TCheckBox;
+    BrvEditDate1: TBrvEditDate;
+    BrvEditDate2: TBrvEditDate;
+    Label31: TLabel;
+    Label32: TLabel;
+    BrvEditNum1: TBrvEditNum;
     PopupMenu1: TPopupMenu;
     Detalhar1: TMenuItem;
     Imprimir1: TMenuItem;
+    BrvEditNum2: TBrvEditNum;
+    BrvEditNum3: TBrvEditNum;
+    Label33: TLabel;
+    Label34: TLabel;
+    Label35: TLabel;
+    EdtQtdeReg: TBrvRetCon;
+    BtnExcel: TBrvBitBtn;
+    mxExcel: TmxDataSetExport;
+    PopupMenu2: TPopupMenu;
+    MenuItem1: TMenuItem;
+    MenuItem2: TMenuItem;
+    GerarPDF1: TMenuItem;
+    Cancelar1: TMenuItem;
+    BrvBitBtn2: TBrvBitBtn;
+    BrvBitBtn3: TBrvBitBtn;
+    BrvBitBtn4: TBrvBitBtn;
+    BrvBitBtn9: TBrvBitBtn;
+    Deletar1: TMenuItem;
+    Label36: TLabel;
+    Edit2: TEdit;
     procedure sbtnCaminhoCertClick(Sender: TObject);
     procedure sbtnLogoMarcaClick(Sender: TObject);
     procedure sbtnPathSalvarClick(Sender: TObject);
@@ -210,10 +246,18 @@ type
     procedure LoadConsulta201(XML: string);
   public
     { Public declarations }
+   procedure gerarDadosInicial();
   end;
 
 var
-  Form1: TForm1;
+  Form1    : TForm1;
+  NrSenha  : String;
+  NrCertif : String;
+  CdEstado : String;
+  NrChaDoc : String;
+  CjEmpres : String;
+  TpAmbiente : TpcnTipoEmissao;
+  BoVisualizar : boolean;
 
 implementation
 
@@ -223,6 +267,20 @@ const
   SELDIRHELP = 1000;
 
 {$R *.dfm}
+
+procedure TForm1.gerarDadosInicial();
+var
+   OK : boolean;
+begin
+      NrSenha  := edtSenha.Text;
+      NrCertif := edtNumSerie.Text;
+      CdEstado := cbUF.Text;
+      NrChaDoc := Edit2.Text;
+      CjEmpres := edtEmitCNPJ.Text;
+      TpAmbiente  := StrToTpEmis(OK,IntToStr(rgFormaEmissao.ItemIndex+1));
+      BoVisualizar := ckSalvar.Checked;
+end;
+
 
 procedure TForm1.GravarConfiguracao;
 Var IniFile : String ;
@@ -298,22 +356,22 @@ begin
          edtSenha.Text    := Ini.ReadString( 'Certificado','Senha'   ,'') ;
          ACBrNFe1.Configuracoes.Certificados.Certificado  := edtCaminho.Text;
          ACBrNFe1.Configuracoes.Certificados.Senha        := edtSenha.Text;
-         edtNumSerie.Visible := False;
-         Label25.Visible := False;
-         sbtnGetCert.Visible := False;
+ //        edtNumSerie.Visible := False;
+ //        Label25.Visible := False;
+//         sbtnGetCert.Visible := False;
       {$ELSE}
          edtNumSerie.Text := Ini.ReadString( 'Certificado','NumSerie','') ;
          ACBrNFe1.Configuracoes.Certificados.NumeroSerie := edtNumSerie.Text;
          edtNumSerie.Text := ACBrNFe1.Configuracoes.Certificados.NumeroSerie;
-         Label1.Caption := 'Informe o número de série do certificado'#13+
-                           'Disponível no Internet Explorer no menu'#13+
-                           'Ferramentas - Opções da Internet - Conteúdo '#13+
-                           'Certificados - Exibir - Detalhes - '#13+
-                           'Número do certificado';
-         Label2.Visible := False;
-         edtCaminho.Visible := False;
-         edtSenha.Visible   := False;
-         sbtnCaminhoCert.Visible := False;
+//         Label1.Caption := 'Informe o número de série do certificado'#13+
+//                           'Disponível no Internet Explorer no menu'#13+
+//                           'Ferramentas - Opções da Internet - Conteúdo '#13+
+//                           'Certificados - Exibir - Detalhes - '#13+
+//                           'Número do certificado';
+//         Label2.Visible := False;
+//         edtCaminho.Visible := False;
+//         edtSenha.Visible   := False;
+//         sbtnCaminhoCert.Visible := False;
       {$ENDIF}
 
       rgFormaEmissao.ItemIndex := Ini.ReadInteger( 'Geral','FormaEmissao',0) ;
@@ -499,7 +557,8 @@ procedure TForm1.btnStatusServClick(Sender: TObject);
  var
     RetWS : AnsiString;
 begin
-      RetWS := StatusServico('1234','5428A4C49E860605E7F8CD271415D9AD');
+      gerarDadosInicial;
+      RetWS := StatusServico(NrSenha,NrCertif,CdEstado,TpAmbiente,BoVisualizar);
       MemoResp.Lines.Text :=  RetWS;
       memoRespWS.Lines.Text :=  UTF8Encode(RetWS);
       LoadXML(MemoResp, WBResposta);
@@ -580,9 +639,15 @@ end;
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
-     xml.data := ListarNotasManifesto('1234','5428A4C49E860605E7F8CD271415D9AD','MG','31130417045964000159550010000009111330603904','01759112000193',2);
-     xml.Open;
-     DataSource1.DataSet := xml;
+
+      gerarDadosInicial;
+      NrChaDoc := Edit2.Text;
+      xml.data := ListarNotasManifesto(NrSenha,NrCertif,CdEstado,TpAmbiente,BoVisualizar,NrChaDoc,CjEmpres,2);
+      xml.Open;
+      DataSource1.DataSet := xml;
+      MemoResp.Lines.Text :=  UTF8Encode(xml.FieldByName('xml').AsString);
+      memoRespWS.Lines.Text :=  UTF8Encode(xml.FieldByName('xml').AsString);
+      LoadXML(MemoResp, WBResposta);
 end;
 
 procedure TForm1.Button2Click(Sender: TObject);
@@ -593,6 +658,8 @@ begin
       PageControl2.Align := alClient;
 
 end;
+
+
 
 procedure TForm1.btnManifDestConfirmacaoClick(Sender: TObject);
 var
@@ -648,7 +715,8 @@ end;
 
 procedure TForm1.btnNfeDestinadasClick(Sender: TObject);
 begin        // NfeDestinadas(NrSenha,NrCertificado,uf,CNPJ, IndNFe, IndEmi, ultNSU:String): OleVariant;
-  xml.data := NfeDestinadas('1234','1A834F6D9090F03701881A2E05D0FC72','MG','00950001000105','2','0',' ');
+  gerarDadosInicial;
+  xml.data := NfeDestinadas(NrSenha,NrCertif,CdEstado,CjEmpres,'2','0','0',TpAmbiente,BoVisualizar);
   xml.Open;
   DataSource1.DataSet := xml;
 end;
@@ -883,7 +951,7 @@ procedure TForm1.BrvBitBtn1Click(Sender: TObject);
 var
     RetWS : AnsiString;
 begin
-      RetWS := ConsultaNFeChave('1234','5428A4C49E860605E7F8CD271415D9AD',Edit1.Text);
+      RetWS := ConsultaNFeChave(NrSenha,NrCertif,CdEstado,Edit1.Text,TpAmbiente,BoVisualizar);
       MemoResp.Lines.Text :=  UTF8Encode(RetWS);
       memoRespWS.Lines.Text :=  UTF8Encode(RetWS);
       LoadXML(MemoResp, WBResposta);
