@@ -62,7 +62,6 @@ type
     ckSalvar: TCheckBox;
     rgTipoDanfe: TRadioGroup;
     rgFormaEmissao: TRadioGroup;
-    btnSalvarConfig: TBitBtn;
     GroupBox4: TGroupBox;
     Label6: TLabel;
     ckVisualizar: TCheckBox;
@@ -234,6 +233,15 @@ type
     SQLTable1ENDERDEST_UF: TStringField;
     SQLTable1XML: TStringField;
     SQLTable1STMANIFESTO: TIntegerField;
+    RadioGroup2: TRadioGroup;
+    SpeedButton2: TSpeedButton;
+    EdtDsArquiv: TEdit;
+    SpeedButton3: TSpeedButton;
+    Edit3: TEdit;
+    SpeedButton1: TSpeedButton;
+    Label37: TLabel;
+    Label38: TLabel;
+    btnSalvarConfig: TBitBtn;
     procedure sbtnCaminhoCertClick(Sender: TObject);
     procedure sbtnLogoMarcaClick(Sender: TObject);
     procedure sbtnPathSalvarClick(Sender: TObject);

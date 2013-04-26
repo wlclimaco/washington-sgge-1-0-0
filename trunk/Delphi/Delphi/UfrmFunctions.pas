@@ -4,8 +4,9 @@ interface
 uses  SysUtils, Forms, Classes, Dialogs, Windows, ComCtrls, DBClient, DB,
       Variants, BrvExcel, BrvClientDataSet, Graphics, CheckLst,ACBrNFe, pcnConversao,
       ACBrNFeDANFEClass, ACBrNFeDANFERave, ACBrUtil,pcnNFeW, pcnNFeRTXT, pcnAuxiliar, ACBrDFeUtil,
-      XMLIntf, XMLDoc, ACBrNFeDANFERaveCB,BrvXml;
+      XMLIntf, XMLDoc, BrvXml;
 
+procedure ListarXmlDiretorio(NrSenha,NrCertificado,uf,xml:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean);
 
 function ListarNotasManifesto(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;XmlRetorno: AnsiString;CjEmpres:String;Operacao:Integer): OleVariant;
 
@@ -59,6 +60,8 @@ function NfeDestinadas(NrSenha,NrCertificado,uf,CNPJ, IndNFe, IndEmi, ultNSU:Str
 
 procedure inicializetion(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean);
 
+procedure CreateTableInfoNFe();
+
 implementation
 
 uses pcnNFe, ACBrNFeNotasFiscais, DateUtils, ACBrNFeUtil;
@@ -69,32 +72,6 @@ var CcxmlSet  :TClientDataSet;
     CpNFePro  : TClientDataSet;
     XML       : TBrvXML;
     ACBrNFe   : TACBrNFe;
-
-procedure inicializetion(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean);
-begin
-          ACBrNFe.Configuracoes.WebServices.UF             := uf;
-          ACBrNFe.Configuracoes.Certificados.NumeroSerie   := NrCertificado;
-          ACBrNFe.Configuracoes.Certificados.Senha         := NrSenha;
-          ACBrNFe.Configuracoes.WebServices.Visualizar     := BoVisualizar;
-        //  ACBrNFe.Configuracoes.WebServices.Ambiente       := TpAmbiente;
-end;
-function NfeDestinadas(NrSenha,NrCertificado,uf,CNPJ, IndNFe, IndEmi, ultNSU:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean): OleVariant;
-var
-    ok: boolean;
-    lStlAnexo :AnsiString;
-begin
-      IniciarVariaveisGlobal;
-      inicializetion(NrSenha,NrCertificado,uf,TpAmbiente,BoVisualizar);
-
-      ACBrNFe.ConsultaNFeDest(CNPJ,
-                               StrToIndicadorNFe(ok,indNFe),
-                               StrToIndicadorEmissor(ok,IndEmi),
-                               UltNSu);
-      lStlAnexo := AcbrNFe.WebServices.ConsNFeDest.retConsNFeDest.XML;
-
-      ListarNotasManifesto(NrSenha,NrCertificado,uf,TpAmbiente,BoVisualizar,AcbrNFe.WebServices.ConsNFeDest.retConsNFeDest.XML,CNPJ,1);
-
-end;
 
 procedure IniciarVariaveisGlobal();
 begin
@@ -111,6 +88,83 @@ begin
       finally
 
       end;
+end;
+
+procedure CreateTableInfoNFe();
+begin
+      CcxmlSet.Close;
+      CcxmlSet.FieldDefs.Clear;
+      CcxmlSet.FieldDefs.Add('SnMarcad',           ftString,   10 );
+      CcxmlSet.FieldDefs.Add('xMotivo',            ftString,   99 );
+      CcxmlSet.FieldDefs.Add('chNFe',              ftString,   50 );
+      CcxmlSet.FieldDefs.Add('dhRecbto',           ftString,   50 );
+      CcxmlSet.FieldDefs.Add('nProt',              ftString,   50 );
+      CcxmlSet.FieldDefs.Add('ide_mod',            ftString,   05 );
+      CcxmlSet.FieldDefs.Add('ide_natOp',          ftString,   99 );
+      CcxmlSet.FieldDefs.Add('ide_nNF',            ftString,   20 );
+      CcxmlSet.FieldDefs.Add('ide_serie',          ftString,   20 );
+      CcxmlSet.FieldDefs.Add('ide_tpImp',          ftString,   20 );
+      CcxmlSet.FieldDefs.Add('ide_tpEmis',         ftString,   20 );
+      CcxmlSet.FieldDefs.Add('ide_cDV',            ftString,   20 );
+      CcxmlSet.FieldDefs.Add('ide_tpAmb',          ftString,   20 );
+      CcxmlSet.FieldDefs.Add('ide_dEmi',           ftString,   20 );
+      CcxmlSet.FieldDefs.Add('ide_dSaiEnt',        ftString,   20 );
+      CcxmlSet.FieldDefs.Add('ide_hSaiEnt',        ftString,   20 );
+      CcxmlSet.FieldDefs.Add('emit_xNome',         ftString,   99 );
+      CcxmlSet.FieldDefs.Add('emit_CNPJ',          ftString,   30 );
+      CcxmlSet.FieldDefs.Add('emit_IE',            ftString,   30 );
+      CcxmlSet.FieldDefs.Add('emit_CRT',           ftString,   05 );
+
+      CcxmlSet.FieldDefs.Add('enderEmit_xLgr',     ftString,   99 );
+      CcxmlSet.FieldDefs.Add('enderEmit_nro',      ftString,   20 );
+      CcxmlSet.FieldDefs.Add('enderEmit_xBairro',  ftString,   99 );
+      CcxmlSet.FieldDefs.Add('enderEmit_xMun',     ftString,   99 );
+      CcxmlSet.FieldDefs.Add('enderEmit_CEP',      ftString,   20 );
+      CcxmlSet.FieldDefs.Add('enderEmit_fone',     ftString,   20 );
+      CcxmlSet.FieldDefs.Add('enderEmit_UF',       ftString,   05 );
+
+      CcxmlSet.FieldDefs.Add('dest_xNome',         ftString,   99 );
+      CcxmlSet.FieldDefs.Add('dest_CNPJ',          ftString,   30 );
+      CcxmlSet.FieldDefs.Add('dest_CPF',           ftString,   30 );
+      CcxmlSet.FieldDefs.Add('dest_IE',            ftString,   30 );
+      CcxmlSet.FieldDefs.Add('dest_email',         ftString,   99 );
+
+      CcxmlSet.FieldDefs.Add('enderDest_xLgr',     ftString,   99 );
+      CcxmlSet.FieldDefs.Add('enderDest_nro',      ftString,   20 );
+      CcxmlSet.FieldDefs.Add('enderDest_xBairro',  ftString,   99 );
+      CcxmlSet.FieldDefs.Add('enderDest_xMun',     ftString,   99 );
+      CcxmlSet.FieldDefs.Add('enderDest_CEP',      ftString,   20 );
+      CcxmlSet.FieldDefs.Add('enderDest_fone',     ftString,   30 );
+      CcxmlSet.FieldDefs.Add('enderDest_UF',       ftString,   05 );
+      CcxmlSet.FieldDefs.Add('Xml',                ftString, 1000 );
+      CcxmlSet.CreateDataSet;
+end;
+procedure inicializetion(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean);
+begin
+          ACBrNFe.Configuracoes.WebServices.UF             := uf;
+          ACBrNFe.Configuracoes.Certificados.NumeroSerie   := NrCertificado;
+          ACBrNFe.Configuracoes.Certificados.Senha         := NrSenha;
+          ACBrNFe.Configuracoes.WebServices.Visualizar     := BoVisualizar;
+        //  ACBrNFe.Configuracoes.WebServices.Ambiente       := TpAmbiente;
+end;
+
+
+function NfeDestinadas(NrSenha,NrCertificado,uf,CNPJ, IndNFe, IndEmi, ultNSU:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean): OleVariant;
+var
+    ok: boolean;
+    lStlAnexo :AnsiString;
+begin
+      IniciarVariaveisGlobal;
+      inicializetion(NrSenha,NrCertificado,uf,TpAmbiente,BoVisualizar);
+
+      ACBrNFe.ConsultaNFeDest(CNPJ,
+                               StrToIndicadorNFe(ok,indNFe),
+                               StrToIndicadorEmissor(ok,IndEmi),
+                               UltNSu);
+      lStlAnexo := AcbrNFe.WebServices.ConsNFeDest.retConsNFeDest.XML;
+
+      ListarNotasManifesto(NrSenha,NrCertificado,uf,TpAmbiente,BoVisualizar,AcbrNFe.WebServices.ConsNFeDest.retConsNFeDest.XML,CNPJ,1);
+
 end;
 
 procedure Func_CDS_Duplica(Cds: TClientDataSet;CamposExcecoes:String = '');
@@ -334,53 +388,7 @@ var
 begin
       try
           lCpXML    := TClientDataSet.Create(nil);
-          CcxmlSet.Close;
-          CcxmlSet.FieldDefs.Clear;
-          CcxmlSet.FieldDefs.Add('SnMarcad',           ftString,   10 );
-          CcxmlSet.FieldDefs.Add('xMotivo',            ftString,   99 );
-          CcxmlSet.FieldDefs.Add('chNFe',              ftString,   50 );
-          CcxmlSet.FieldDefs.Add('dhRecbto',           ftString,   50 );
-          CcxmlSet.FieldDefs.Add('nProt',              ftString,   50 );
-          CcxmlSet.FieldDefs.Add('ide_mod',            ftString,   05 );
-          CcxmlSet.FieldDefs.Add('ide_natOp',          ftString,   99 );
-          CcxmlSet.FieldDefs.Add('ide_nNF',            ftString,   20 );
-          CcxmlSet.FieldDefs.Add('ide_serie',          ftString,   20 );
-          CcxmlSet.FieldDefs.Add('ide_tpImp',          ftString,   20 );
-          CcxmlSet.FieldDefs.Add('ide_tpEmis',         ftString,   20 );
-          CcxmlSet.FieldDefs.Add('ide_cDV',            ftString,   20 );
-          CcxmlSet.FieldDefs.Add('ide_tpAmb',          ftString,   20 );
-          CcxmlSet.FieldDefs.Add('ide_dEmi',           ftString,   20 );
-          CcxmlSet.FieldDefs.Add('ide_dSaiEnt',        ftString,   20 );
-          CcxmlSet.FieldDefs.Add('ide_hSaiEnt',        ftString,   20 );
-          CcxmlSet.FieldDefs.Add('emit_xNome',         ftString,   99 );
-          CcxmlSet.FieldDefs.Add('emit_CNPJ',          ftString,   30 );
-          CcxmlSet.FieldDefs.Add('emit_IE',            ftString,   30 );
-          CcxmlSet.FieldDefs.Add('emit_CRT',           ftString,   05 );
-
-
-          CcxmlSet.FieldDefs.Add('enderEmit_xLgr',     ftString,   99 );
-          CcxmlSet.FieldDefs.Add('enderEmit_nro',      ftString,   20 );
-          CcxmlSet.FieldDefs.Add('enderEmit_xBairro',  ftString,   99 );
-          CcxmlSet.FieldDefs.Add('enderEmit_xMun',     ftString,   99 );
-          CcxmlSet.FieldDefs.Add('enderEmit_CEP',      ftString,   20 );
-          CcxmlSet.FieldDefs.Add('enderEmit_fone',     ftString,   20 );
-          CcxmlSet.FieldDefs.Add('enderEmit_UF',       ftString,   05 );
-
-          CcxmlSet.FieldDefs.Add('dest_xNome',         ftString,   99 );
-          CcxmlSet.FieldDefs.Add('dest_CNPJ',          ftString,   30 );
-          CcxmlSet.FieldDefs.Add('dest_CPF',           ftString,   30 );
-          CcxmlSet.FieldDefs.Add('dest_IE',            ftString,   30 );
-          CcxmlSet.FieldDefs.Add('dest_email',         ftString,   99 );
-
-          CcxmlSet.FieldDefs.Add('enderDest_xLgr',     ftString,   99 );
-          CcxmlSet.FieldDefs.Add('enderDest_nro',      ftString,   20 );
-          CcxmlSet.FieldDefs.Add('enderDest_xBairro',  ftString,   99 );
-          CcxmlSet.FieldDefs.Add('enderDest_xMun',     ftString,   99 );
-          CcxmlSet.FieldDefs.Add('enderDest_CEP',      ftString,   20 );
-          CcxmlSet.FieldDefs.Add('enderDest_fone',     ftString,   30 );
-          CcxmlSet.FieldDefs.Add('enderDest_UF',       ftString,   05 );
-          CcxmlSet.FieldDefs.Add('Xml',                ftString, 1000 );
-          CcxmlSet.CreateDataSet;
+          CreateTableInfoNFe;
           inicializetion(NrSenha,NrCertificado,uf,TpAmbiente,BoVisualizar);
           if pCpXML.RecordCount > 0 then
           begin
@@ -417,6 +425,7 @@ function Mudar_e_GravarStatusManifesto(NrSenha,NrCertificado,uf:String;TpAmbient
     DescEventOp : TpcnTpEvento ;
 begin
       try
+          XML.BrXMLOriginal.Text := '';
           ACBrNFe := TACBrNFe.Create(nil);
           case CdEventOp of
             210200 : DescEventOp := teManifDestConfirmacao;
@@ -538,6 +547,40 @@ begin
 //
 //      end;
 
+end;
+
+procedure ListarXmlDiretorio(NrSenha,NrCertificado,uf,xml:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean);
+begin
+      IniciarVariaveisGlobal;
+      inicializetion(NrSenha,NrCertificado,uf,TpAmbiente,BoVisualizar);
+      if xml <> '' then
+      begin
+            ACBrNFe.NotasFiscais.Clear;
+            ACBrNFe.NotasFiscais.LoadFromFile(xml);
+            ACBrNFe.NotasFiscais.GerarNFe;
+            ACBrNFe.Enviar(1,True);
+      end;
+      if Pos('REJEICAO', UpperCase(ACBrNFe.WebServices.Retorno.RetWS)) > 0 then
+      begin
+      end else
+      begin
+            try
+
+              XML.BrXMLOriginal.Text := ACBrNFe.WebServices.Retorno.RetWS;
+//            XML.ProcessarXml;
+//            CcxmlSet.Append;
+//            CcxmlSet.FieldByName('SnMarcad').Value := 'N';
+//            for i := 1 to CcxmlSet.FieldCount-1 do
+//            begin
+//                  CcxmlSet.FieldByName(CcxmlSet.Fields[i].FieldName).Value := CpNfeDet.FieldByName(CcxmlSet.Fields[i].FieldName).Value;
+//            end;
+//            CcxmlSet.Post;
+         //   result := ACBrNFe.WebServices.Retorno;
+
+            finally
+
+            end;
+      end;
 end;
 
 end.

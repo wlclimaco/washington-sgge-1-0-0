@@ -3,7 +3,7 @@ object Form1: TForm1
   Top = 149
   Caption = 'ACBrNFe - Demonstra'#231#227'o'
   ClientHeight = 604
-  ClientWidth = 874
+  ClientWidth = 879
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -25,21 +25,15 @@ object Form1: TForm1
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 874
+    Width = 879
     Height = 604
     ActivePage = TabSheet15
     Align = alClient
     TabOrder = 0
-    ExplicitLeft = 8
-    ExplicitTop = 45
-    ExplicitWidth = 849
-    ExplicitHeight = 366
+    ExplicitWidth = 874
     object TabSheet14: TTabSheet
       Caption = 'TabSheet14'
-      ExplicitLeft = -100
-      ExplicitTop = 80
-      ExplicitWidth = 513
-      ExplicitHeight = 338
+      ExplicitWidth = 866
       object Panel7: TPanel
         Left = 0
         Top = 41
@@ -47,9 +41,6 @@ object Form1: TForm1
         Height = 494
         Align = alLeft
         TabOrder = 0
-        ExplicitLeft = 576
-        ExplicitTop = 248
-        ExplicitHeight = 41
         object GroupBox1: TGroupBox
           Left = 8
           Top = 6
@@ -234,15 +225,13 @@ object Form1: TForm1
       object Panel8: TPanel
         Left = 0
         Top = 535
-        Width = 866
+        Width = 871
         Height = 41
         Align = alBottom
         TabOrder = 1
-        ExplicitLeft = 560
-        ExplicitTop = 328
-        ExplicitWidth = 185
+        ExplicitWidth = 866
         DesignSize = (
-          866
+          871
           41)
         object Label35: TLabel
           Left = 11
@@ -280,7 +269,7 @@ object Form1: TForm1
           Text = '0'
         end
         object BtnExcel: TBrvBitBtn
-          Left = 760
+          Left = 765
           Top = 7
           Width = 100
           Height = 25
@@ -378,6 +367,7 @@ object Form1: TForm1
           ShowHint = True
           TabOrder = 1
           BrTipoBotao = BrBtnExcel
+          ExplicitLeft = 760
         end
         object BrvBitBtn2: TBrvBitBtn
           Left = 182
@@ -459,29 +449,24 @@ object Form1: TForm1
       object Panel9: TPanel
         Left = 0
         Top = 0
-        Width = 866
+        Width = 871
         Height = 41
         Align = alTop
         TabOrder = 2
-        ExplicitLeft = 472
-        ExplicitTop = 360
-        ExplicitWidth = 185
+        ExplicitWidth = 866
       end
       object Panel10: TPanel
         Left = 185
         Top = 41
-        Width = 681
+        Width = 686
         Height = 494
         Align = alClient
         TabOrder = 3
-        ExplicitLeft = 472
-        ExplicitTop = 232
-        ExplicitWidth = 185
-        ExplicitHeight = 41
+        ExplicitWidth = 681
         object BrvDbGrid2: TBrvDbGrid
           Left = 1
           Top = 1
-          Width = 679
+          Width = 684
           Height = 492
           BrShowMemo = True
           BrReadOnlyStyle = [fsItalic]
@@ -505,58 +490,53 @@ object Form1: TForm1
     object TabSheet15: TTabSheet
       Caption = 'TabSheet15'
       ImageIndex = 1
-      ExplicitWidth = 281
-      ExplicitHeight = 165
+      ExplicitWidth = 866
       object Panel2: TPanel
         Left = 169
         Top = 0
-        Width = 697
+        Width = 702
         Height = 576
         Align = alClient
         TabOrder = 0
-        ExplicitLeft = 136
-        ExplicitTop = -266
-        ExplicitWidth = 705
-        ExplicitHeight = 604
+        ExplicitWidth = 697
         object PageControl2: TPageControl
           Left = 1
           Top = 411
-          Width = 695
+          Width = 700
           Height = 164
           ActivePage = TabSheet10
           Align = alBottom
           TabOrder = 0
-          ExplicitTop = 439
-          ExplicitWidth = 703
+          ExplicitWidth = 695
           object TabSheet5: TTabSheet
             Caption = 'Respostas'
-            ExplicitWidth = 695
+            ExplicitWidth = 687
             object MemoResp: TMemo
               Left = 0
               Top = 0
-              Width = 687
+              Width = 692
               Height = 136
               Align = alClient
               ScrollBars = ssVertical
               TabOrder = 0
-              ExplicitWidth = 695
+              ExplicitWidth = 687
             end
           end
           object TabSheet6: TTabSheet
             Caption = 'XML Resposta'
             ImageIndex = 1
-            ExplicitWidth = 695
+            ExplicitWidth = 687
             object WBResposta: TWebBrowser
               Left = 0
               Top = 0
-              Width = 687
+              Width = 692
               Height = 136
               Align = alClient
               TabOrder = 0
               ExplicitWidth = 571
               ExplicitHeight = 263
               ControlData = {
-                4C000000014700000E0E00000000000000000000000000000000000000000000
+                4C000000854700000E0E00000000000000000000000000000000000000000000
                 000000004C000000000000000000000001000000E0D057007335CF11AE690800
                 2B2E126208000000000000004C0000000114020000000000C000000000000046
                 8000000000000000000000000000000000000000000000000000000000000000
@@ -566,82 +546,77 @@ object Form1: TForm1
           object TabSheet8: TTabSheet
             Caption = 'Log'
             ImageIndex = 2
-            ExplicitWidth = 695
+            ExplicitWidth = 687
             object memoLog: TMemo
               Left = 0
               Top = 0
-              Width = 687
+              Width = 692
               Height = 136
               Align = alClient
               ScrollBars = ssVertical
               TabOrder = 0
-              ExplicitWidth = 695
+              ExplicitWidth = 687
             end
           end
           object TabSheet9: TTabSheet
             Caption = 'NFe'
             ImageIndex = 3
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
+            ExplicitWidth = 687
             object trvwNFe: TTreeView
               Left = 0
               Top = 0
-              Width = 687
+              Width = 692
               Height = 136
               Align = alClient
               Indent = 19
               TabOrder = 0
-              ExplicitWidth = 695
+              ExplicitWidth = 687
             end
           end
           object TabSheet10: TTabSheet
             Caption = 'Retorno Completo WS'
             ImageIndex = 4
-            ExplicitWidth = 695
+            ExplicitWidth = 687
             object memoRespWS: TMemo
               Left = 0
               Top = 0
-              Width = 687
+              Width = 692
               Height = 136
-              Align = alClient
+              Align = alBottom
               ScrollBars = ssVertical
               TabOrder = 0
-              ExplicitWidth = 695
+              ExplicitTop = -1
+              ExplicitHeight = 137
             end
           end
           object Dados: TTabSheet
             Caption = 'Dados'
             ImageIndex = 5
-            ExplicitWidth = 695
+            ExplicitWidth = 687
             object MemoDados: TMemo
               Left = 0
               Top = 0
-              Width = 687
+              Width = 692
               Height = 136
               Align = alClient
               ScrollBars = ssVertical
               TabOrder = 0
-              ExplicitWidth = 695
+              ExplicitWidth = 687
             end
           end
           object TabSheet11: TTabSheet
             Caption = 'RetornoConsulta NFe 2.01'
             ImageIndex = 6
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
+            ExplicitWidth = 687
             object TreeViewRetornoConsulta: TTreeView
               Left = 0
               Top = 0
-              Width = 687
+              Width = 692
               Height = 136
               Align = alClient
               Indent = 19
               TabOrder = 0
-              ExplicitWidth = 695
+              ExplicitWidth = 687
             end
           end
         end
@@ -649,24 +624,151 @@ object Form1: TForm1
           Left = 1
           Top = 1
           Width = 703
-          Height = 432
+          Height = 512
           Align = alCustom
           TabOrder = 1
           object PageControl3: TPageControl
             Left = 1
             Top = 1
             Width = 701
-            Height = 430
-            ActivePage = TabSheet12
+            Height = 510
+            ActivePage = tsNFe
             Align = alClient
             TabOrder = 0
+            ExplicitHeight = 478
             object tsNFe: TTabSheet
               Caption = 'NF-e'
               OnEnter = tsNFeEnter
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
+              ExplicitHeight = 417
+              object SpeedButton2: TSpeedButton
+                Left = 230
+                Top = 53
+                Width = 23
+                Height = 24
+                Glyph.Data = {
+                  76010000424D7601000000000000760000002800000020000000100000000100
+                  04000000000000010000130B0000130B00001000000000000000000000000000
+                  800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+                  FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF0033333333B333
+                  333B33FF33337F3333F73BB3777BB7777BB3377FFFF77FFFF77333B000000000
+                  0B3333777777777777333330FFFFFFFF07333337F33333337F333330FFFFFFFF
+                  07333337F3FF3FFF7F333330F00F000F07333337F77377737F333330FFFFFFFF
+                  07333FF7F3FFFF3F7FFFBBB0F0000F0F0BB37777F7777373777F3BB0FFFFFFFF
+                  0BBB3777F3FF3FFF77773330F00F000003333337F773777773333330FFFF0FF0
+                  33333337F3FF7F37F3333330F08F0F0B33333337F7737F77FF333330FFFF003B
+                  B3333337FFFF77377FF333B000000333BB33337777777F3377FF3BB3333BB333
+                  3BB33773333773333773B333333B3333333B7333333733333337}
+                NumGlyphs = 2
+                OnClick = sbtnPathSalvarClick
+              end
+              object SpeedButton3: TSpeedButton
+                Left = 445
+                Top = 415
+                Width = 23
+                Height = 22
+                Glyph.Data = {
+                  E6040000424DE604000000000000360000002800000014000000140000000100
+                  180000000000B0040000C40E0000C40E00000000000000000000008080008080
+                  0080800080800080800080800080800080800080800080800080800080800080
+                  8000808000808000808000808000808000808000808000808000808000808000
+                  8080008080008080008080008080008080008080008080008080008080008080
+                  0080800080800080800080800080800080800080800080800080800080800080
+                  8000808000808000808000808000808000808000808000808000808000808000
+                  8080008080008080008080008080008080008080008080008080008080008080
+                  0080800080800080800080800080800080800080800080800080800080800080
+                  8000808000808000808000808000808000000000000000000000000000000000
+                  0000000000000000000000000000000000008080008080008080008080008080
+                  008080008080008080008080000000000000007F7F007F7F007F7F007F7F007F
+                  7F007F7F007F7F007F7F007F7F00000000808000808000808000808000808000
+                  808000808000808000000000FFFF000000007F7F007F7F007F7F007F7F007F7F
+                  007F7F007F7F007F7F007F7F0000000080800080800080800080800080800080
+                  80008080000000FFFFFF00FFFF000000007F7F007F7F007F7F007F7F007F7F00
+                  7F7F007F7F007F7F007F7F000000008080008080008080008080008080008080
+                  00000000FFFFFFFFFF00FFFF000000007F7F007F7F007F7F007F7F007F7F007F
+                  7F007F7F007F7F007F7F000000008080008080008080008080008080000000FF
+                  FFFF00FFFFFFFFFF00FFFF000000000000000000000000000000000000000000
+                  00000000000000000000000000808000808000808000808000000000FFFFFFFF
+                  FF00FFFFFFFFFF00FFFFFFFFFF00FFFFFFFFFF00FFFF00000000808000808000
+                  8080008080008080008080008080008080008080000000FFFFFF00FFFFFFFFFF
+                  00FFFFFFFFFF00FFFFFFFFFF00FFFFFFFFFF0000000080800080800080800080
+                  8000808000808000808000808000808000000000FFFFFFFFFF00FFFF00000000
+                  0000000000000000000000000000000000008080008080008080008080008080
+                  0080800080800080800080800080800000000000000000000080800080800080
+                  8000808000808000808000808000808000000000000000000000808000808000
+                  8080008080008080008080008080008080008080008080008080008080008080
+                  0080800080800080800080800080800000000000000080800080800080800080
+                  8000808000808000808000808000808000808000808000808000808000000000
+                  8080008080008080000000008080000000008080008080008080008080008080
+                  0080800080800080800080800080800080800080800080800080800000000000
+                  0000000000808000808000808000808000808000808000808000808000808000
+                  8080008080008080008080008080008080008080008080008080008080008080
+                  0080800080800080800080800080800080800080800080800080800080800080
+                  8000808000808000808000808000808000808000808000808000808000808000
+                  8080008080008080008080008080008080008080008080008080008080008080
+                  0080800080800080800080800080800080800080800080800080800080800080
+                  80008080008080008080}
+              end
+              object SpeedButton1: TSpeedButton
+                Left = 445
+                Top = 457
+                Width = 23
+                Height = 22
+                Glyph.Data = {
+                  E6040000424DE604000000000000360000002800000014000000140000000100
+                  180000000000B0040000C40E0000C40E00000000000000000000008080008080
+                  0080800080800080800080800080800080800080800080800080800080800080
+                  8000808000808000808000808000808000808000808000808000808000808000
+                  8080008080008080008080008080008080008080008080008080008080008080
+                  0080800080800080800080800080800080800080800080800080800080800080
+                  8000808000808000808000808000808000808000808000808000808000808000
+                  8080008080008080008080008080008080008080008080008080008080008080
+                  0080800080800080800080800080800080800080800080800080800080800080
+                  8000808000808000808000808000808000000000000000000000000000000000
+                  0000000000000000000000000000000000008080008080008080008080008080
+                  008080008080008080008080000000000000007F7F007F7F007F7F007F7F007F
+                  7F007F7F007F7F007F7F007F7F00000000808000808000808000808000808000
+                  808000808000808000000000FFFF000000007F7F007F7F007F7F007F7F007F7F
+                  007F7F007F7F007F7F007F7F0000000080800080800080800080800080800080
+                  80008080000000FFFFFF00FFFF000000007F7F007F7F007F7F007F7F007F7F00
+                  7F7F007F7F007F7F007F7F000000008080008080008080008080008080008080
+                  00000000FFFFFFFFFF00FFFF000000007F7F007F7F007F7F007F7F007F7F007F
+                  7F007F7F007F7F007F7F000000008080008080008080008080008080000000FF
+                  FFFF00FFFFFFFFFF00FFFF000000000000000000000000000000000000000000
+                  00000000000000000000000000808000808000808000808000000000FFFFFFFF
+                  FF00FFFFFFFFFF00FFFFFFFFFF00FFFFFFFFFF00FFFF00000000808000808000
+                  8080008080008080008080008080008080008080000000FFFFFF00FFFFFFFFFF
+                  00FFFFFFFFFF00FFFFFFFFFF00FFFFFFFFFF0000000080800080800080800080
+                  8000808000808000808000808000808000000000FFFFFFFFFF00FFFF00000000
+                  0000000000000000000000000000000000008080008080008080008080008080
+                  0080800080800080800080800080800000000000000000000080800080800080
+                  8000808000808000808000808000808000000000000000000000808000808000
+                  8080008080008080008080008080008080008080008080008080008080008080
+                  0080800080800080800080800080800000000000000080800080800080800080
+                  8000808000808000808000808000808000808000808000808000808000000000
+                  8080008080008080000000008080000000008080008080008080008080008080
+                  0080800080800080800080800080800080800080800080800080800000000000
+                  0000000000808000808000808000808000808000808000808000808000808000
+                  8080008080008080008080008080008080008080008080008080008080008080
+                  0080800080800080800080800080800080800080800080800080800080800080
+                  8000808000808000808000808000808000808000808000808000808000808000
+                  8080008080008080008080008080008080008080008080008080008080008080
+                  0080800080800080800080800080800080800080800080800080800080800080
+                  80008080008080008080}
+              end
+              object Label37: TLabel
+                Left = 3
+                Top = 441
+                Width = 120
+                Height = 13
+                Caption = 'Diretorio para Exporta'#231#227'o'
+              end
+              object Label38: TLabel
+                Left = 3
+                Top = 400
+                Width = 119
+                Height = 13
+                Caption = 'Diretorio para Importa'#231#227'o'
+              end
               object GroupBox2: TGroupBox
                 Left = 3
                 Top = 3
@@ -718,7 +820,7 @@ object Form1: TForm1
                 end
                 object sbtnGetCert: TSpeedButton
                   Left = 175
-                  Top = 117
+                  Top = 67
                   Width = 23
                   Height = 24
                   Glyph.Data = {
@@ -764,9 +866,9 @@ object Form1: TForm1
                 end
               end
               object GroupBox3: TGroupBox
-                Left = 220
+                Left = 215
                 Top = 272
-                Width = 466
+                Width = 471
                 Height = 127
                 Caption = 'Geral'
                 TabOrder = 1
@@ -875,31 +977,6 @@ object Form1: TForm1
                     'DPEC'
                     'FSDA')
                   TabOrder = 4
-                end
-                object btnSalvarConfig: TBitBtn
-                  Left = 322
-                  Top = 99
-                  Width = 132
-                  Height = 24
-                  Caption = 'Salvar Configura'#231#245'es'
-                  DoubleBuffered = True
-                  Glyph.Data = {
-                    76010000424D7601000000000000760000002800000020000000100000000100
-                    04000000000000010000130B0000130B00001000000000000000000000000000
-                    800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
-                    FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333330070
-                    7700333333337777777733333333008088003333333377F73377333333330088
-                    88003333333377FFFF7733333333000000003FFFFFFF77777777000000000000
-                    000077777777777777770FFFFFFF0FFFFFF07F3333337F3333370FFFFFFF0FFF
-                    FFF07F3FF3FF7FFFFFF70F00F0080CCC9CC07F773773777777770FFFFFFFF039
-                    99337F3FFFF3F7F777F30F0000F0F09999937F7777373777777F0FFFFFFFF999
-                    99997F3FF3FFF77777770F00F000003999337F773777773777F30FFFF0FF0339
-                    99337F3FF7F3733777F30F08F0F0337999337F7737F73F7777330FFFF0039999
-                    93337FFFF7737777733300000033333333337777773333333333}
-                  NumGlyphs = 2
-                  ParentDoubleBuffered = False
-                  TabOrder = 5
-                  OnClick = btnSalvarConfigClick
                 end
               end
               object GroupBox4: TGroupBox
@@ -1352,10 +1429,62 @@ object Form1: TForm1
                   TabOrder = 6
                 end
               end
+              object RadioGroup2: TRadioGroup
+                Left = 479
+                Top = 399
+                Width = 207
+                Height = 50
+                Caption = 'Importa'#231#227'o'
+                ItemIndex = 0
+                Items.Strings = (
+                  'Importar e trasmitir'
+                  'So importar')
+                TabOrder = 6
+              end
+              object EdtDsArquiv: TEdit
+                Left = 3
+                Top = 416
+                Width = 436
+                Height = 21
+                TabOrder = 7
+              end
+              object Edit3: TEdit
+                Left = 3
+                Top = 456
+                Width = 436
+                Height = 21
+                TabOrder = 8
+              end
+              object btnSalvarConfig: TBitBtn
+                Left = 479
+                Top = 455
+                Width = 207
+                Height = 24
+                Caption = 'Salvar Configura'#231#245'es'
+                DoubleBuffered = True
+                Glyph.Data = {
+                  76010000424D7601000000000000760000002800000020000000100000000100
+                  04000000000000010000130B0000130B00001000000000000000000000000000
+                  800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+                  FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333330070
+                  7700333333337777777733333333008088003333333377F73377333333330088
+                  88003333333377FFFF7733333333000000003FFFFFFF77777777000000000000
+                  000077777777777777770FFFFFFF0FFFFFF07F3333337F3333370FFFFFFF0FFF
+                  FFF07F3FF3FF7FFFFFF70F00F0080CCC9CC07F773773777777770FFFFFFFF039
+                  99337F3FFFF3F7F777F30F0000F0F09999937F7777373777777F0FFFFFFFF999
+                  99997F3FF3FFF77777770F00F000003999337F773777773777F30FFFF0FF0339
+                  99337F3FF7F3733777F30F08F0F0337999337F7737F73F7777330FFFF0039999
+                  93337FFFF7737777733300000033333333337777773333333333}
+                NumGlyphs = 2
+                ParentDoubleBuffered = False
+                TabOrder = 9
+                OnClick = btnSalvarConfigClick
+              end
             end
             object TabSheet12: TTabSheet
               Caption = 'TabSheet12'
               ImageIndex = 1
+              ExplicitHeight = 402
               object Panel4: TPanel
                 Left = 0
                 Top = 0
@@ -1388,7 +1517,7 @@ object Form1: TForm1
                 Left = 0
                 Top = 49
                 Width = 693
-                Height = 353
+                Height = 433
                 BrShowMemo = True
                 BrReadOnlyStyle = [fsItalic]
                 BrReadOnlyColor = clMaroon
@@ -1513,6 +1642,7 @@ object Form1: TForm1
             object TabSheet13: TTabSheet
               Caption = 'TabSheet13'
               ImageIndex = 2
+              ExplicitHeight = 402
               object Panel6: TPanel
                 Left = 0
                 Top = 0
@@ -1565,34 +1695,42 @@ object Form1: TForm1
             object TabSheet1: TTabSheet
               Caption = 'TabSheet1'
               ImageIndex = 5
+              ExplicitHeight = 402
             end
             object TabSheet2: TTabSheet
               Caption = 'TabSheet2'
               ImageIndex = 6
+              ExplicitHeight = 402
             end
             object TabSheet3: TTabSheet
               Caption = 'TabSheet3'
               ImageIndex = 7
+              ExplicitHeight = 402
             end
             object TabSheet4: TTabSheet
               Caption = 'TabSheet4'
               ImageIndex = 8
+              ExplicitHeight = 402
             end
             object TabSheet7: TTabSheet
               Caption = 'TabSheet7'
               ImageIndex = 9
+              ExplicitHeight = 402
             end
             object TabSheet16: TTabSheet
               Caption = 'TabSheet16'
               ImageIndex = 10
+              ExplicitHeight = 402
             end
             object TabSheet17: TTabSheet
               Caption = 'TabSheet17'
               ImageIndex = 11
+              ExplicitHeight = 402
             end
             object TabSheet18: TTabSheet
               Caption = 'TabSheet18'
               ImageIndex = 12
+              ExplicitHeight = 402
             end
           end
         end
@@ -1604,8 +1742,6 @@ object Form1: TForm1
         Height = 576
         Align = alLeft
         TabOrder = 1
-        ExplicitTop = 407
-        ExplicitHeight = 866
         object btnStatusServ: TButton
           Left = 9
           Top = 50
@@ -1780,8 +1916,8 @@ object Form1: TForm1
   object BrvXMLNFE: TBrvXML
     BrGerarBanco = True
     BrQtdePagDanfe = 0
-    Left = 424
-    Top = 32
+    Left = 528
+    Top = 64
   end
   object DataSource1: TDataSource
     Left = 384
@@ -1795,8 +1931,8 @@ object Form1: TForm1
     Top = 16
   end
   object PopupMenu1: TPopupMenu
-    Left = 416
-    Top = 56
+    Left = 560
+    Top = 48
     object Detalhar1: TMenuItem
       Caption = 'Detalhar'
     end
