@@ -6,7 +6,7 @@ uses  SysUtils, Forms, Classes, Dialogs, Windows, ComCtrls, DBClient, DB,
       ACBrNFeDANFEClass, ACBrNFeDANFERave, ACBrUtil,pcnNFeW, pcnNFeRTXT, pcnAuxiliar, ACBrDFeUtil,
       XMLIntf, XMLDoc, BrvXml;
 
-procedure ListarXmlDiretorio(NrSenha,NrCertificado,uf,xml:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean);
+function ListarXmlDiretorio(NrSenha,NrCertificado,uf,diretorioOrigem,DiretorioMove:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):TClientDataSet;
 
 function ListarNotasManifesto(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;XmlRetorno: AnsiString;CjEmpres:String;Operacao:Integer): OleVariant;
 
@@ -549,38 +549,73 @@ begin
 
 end;
 
-procedure ListarXmlDiretorio(NrSenha,NrCertificado,uf,xml:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean);
+function ListarXmlDiretorio(NrSenha,NrCertificado,uf,diretorioOrigem,DiretorioMove:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):TClientDataSet;
+var i : Integer;
+    ArquivoXML: TStringList;
+    SR: TSearchRec;
+    destino,origem:String;
 begin
       IniciarVariaveisGlobal;
-      inicializetion(NrSenha,NrCertificado,uf,TpAmbiente,BoVisualizar);
-      if xml <> '' then
+     // inicializetion(NrSenha,NrCertificado,uf,TpAmbiente,BoVisualizar);
+
+      if diretorioOrigem = '' then
       begin
             ACBrNFe.NotasFiscais.Clear;
-            ACBrNFe.NotasFiscais.LoadFromFile(xml);
+            ACBrNFe.NotasFiscais.LoadFromFile(diretorioOrigem);
             ACBrNFe.NotasFiscais.GerarNFe;
             ACBrNFe.Enviar(1,True);
-      end;
-      if Pos('REJEICAO', UpperCase(ACBrNFe.WebServices.Retorno.RetWS)) > 0 then
-      begin
-      end else
-      begin
-            try
+            if Pos('REJEICAO', UpperCase(ACBrNFe.WebServices.Retorno.RetWS)) > 0 then
+            begin
+            end else
+            begin
+                  try
 
-              XML.BrXMLOriginal.Text := ACBrNFe.WebServices.Retorno.RetWS;
-//            XML.ProcessarXml;
-//            CcxmlSet.Append;
-//            CcxmlSet.FieldByName('SnMarcad').Value := 'N';
-//            for i := 1 to CcxmlSet.FieldCount-1 do
-//            begin
-//                  CcxmlSet.FieldByName(CcxmlSet.Fields[i].FieldName).Value := CpNfeDet.FieldByName(CcxmlSet.Fields[i].FieldName).Value;
-//            end;
-//            CcxmlSet.Post;
-         //   result := ACBrNFe.WebServices.Retorno;
+                    XML.BrXMLOriginal.Text := ACBrNFe.WebServices.Retorno.RetWS;
+                    XML.ProcessarXml;
+                    CcxmlSet.Append;
+                    CcxmlSet.FieldByName('SnMarcad').Value := 'N';
+                    for i := 1 to CcxmlSet.FieldCount-1 do
+                    begin
+                         CcxmlSet.FieldByName(CcxmlSet.Fields[i].FieldName).Value := CpNfeDet.FieldByName(CcxmlSet.Fields[i].FieldName).Value;
+                    end;
+                    CcxmlSet.Post;
+                    finally
 
-            finally
-
+                    end;
             end;
-      end;
+        end else
+        begin
+              try
+
+              i := FindFirst(diretorioOrigem+'\*.xml', faAnyFile, SR);
+              if i = 0 then
+              begin
+                CreateTableInfoNFe;
+              while I = 0 do
+              begin
+                  ArquivoXML := TStringList.Create;
+                  ArquivoXML.LoadFromFile(diretorioOrigem+'\'+SR.Name);
+                  XML.BrXMLOriginal.Text := ArquivoXML.Text;
+                  XML.ProcessarXml;
+
+                  CcxmlSet.insert;
+                  CcxmlSet.FieldByName('SnMarcad').Value := 'N';
+                  for i := 1 to CcxmlSet.FieldCount-1 do
+                  begin
+                       CcxmlSet.FieldByName(CcxmlSet.Fields[i].FieldName).Value := CpNfeDet.FieldByName(CcxmlSet.Fields[i].FieldName).Value;
+                  end;
+                  CcxmlSet.Post;
+                  Windows.MoveFile(PChar(diretorioOrigem+'\'+SR.Name),PChar(DiretorioMove+'\'+SR.Name));
+                  Windows.DeleteFile(PChar(diretorioOrigem+'\'+SR.Name));
+                  i := FindNext(SR);
+              end;
+                  result :=  CcxmlSet;
+              end;
+
+              finally
+
+              end;
+        end;
 end;
 
 end.
