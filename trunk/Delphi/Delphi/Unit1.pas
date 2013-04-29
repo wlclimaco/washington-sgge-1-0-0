@@ -242,6 +242,10 @@ type
     Label37: TLabel;
     Label38: TLabel;
     btnSalvarConfig: TBitBtn;
+    RadioGroup1: TRadioGroup;
+    Edit4: TEdit;
+    Label39: TLabel;
+    Timer1: TTimer;
     procedure sbtnCaminhoCertClick(Sender: TObject);
     procedure sbtnLogoMarcaClick(Sender: TObject);
     procedure sbtnPathSalvarClick(Sender: TObject);
@@ -287,6 +291,7 @@ type
     procedure Button2Click(Sender: TObject);
     procedure BrvBitBtn1Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
 
   private
     { Private declarations }
@@ -383,6 +388,12 @@ begin
       Ini.WriteString( 'Email','Pass'    ,edtSmtpPass.Text) ;
       Ini.WriteString( 'Email','Assunto' ,edtEmailAssunto.Text) ;
       Ini.WriteBool(   'Email','SSL'     ,cbEmailSSL.Checked ) ;
+
+      Ini.WriteString( 'Import','DiretorioImportacao' ,EdtDsArquiv.Text) ;
+      Ini.WriteString( 'Import','DiretorioExportacao' ,Edit3.Text) ;
+      Ini.WriteString( 'Import','TempoImpotacao'      ,Edit4.Text) ;
+      Ini.WriteString( 'Import','Importacao'          ,IntToStr(RadioGroup2.ItemIndex)) ;
+
       StreamMemo := TMemoryStream.Create;
       mmEmailMsg.Lines.SaveToStream(StreamMemo);
       StreamMemo.Seek(0,soFromBeginning);
@@ -478,6 +489,13 @@ begin
       edtSmtpPass.Text      := Ini.ReadString( 'Email','Pass'   ,'') ;
       edtEmailAssunto.Text  := Ini.ReadString( 'Email','Assunto','') ;
       cbEmailSSL.Checked    := Ini.ReadBool(   'Email','SSL'    ,False) ;
+
+      EdtDsArquiv.Text      := Ini.ReadString( 'Import','DiretorioImportacao'   ,'') ;
+      Edit3.Text            := Ini.ReadString( 'Import','DiretorioExportacao'   ,'') ;
+      Edit4.Text            := Ini.ReadString( 'Import','TempoImpotacao'   ,'') ;
+      RadioGroup2.ItemIndex := StrToInt(Ini.ReadString( 'Import','Importacao'   ,'')) ;
+
+
       StreamMemo := TMemoryStream.Create;
       Ini.ReadBinaryStream( 'Email','Mensagem',StreamMemo) ;
       mmEmailMsg.Lines.LoadFromStream(StreamMemo);
@@ -584,6 +602,24 @@ begin
     edtPathLogs.Text := Dir;
 end;
 
+procedure TForm1.Timer1Timer(Sender: TObject);
+var
+SR: TSearchRec;
+i: integer;
+destino,origem:String;
+begin
+      xml := ListarXmlDiretorio(NrSenha,NrCertif,CdEstado,EdtDsArquiv.Text,EdtDsArquiv.Text+'\teste',TpAmbiente,BoVisualizar);
+      if xml <> nil then
+      begin
+            xml.Open;
+            DataSource1.DataSet   := xml;
+            MemoResp.Lines.Text   :=  UTF8Encode(xml.FieldByName('xml').AsString);
+            memoRespWS.Lines.Text :=  UTF8Encode(xml.FieldByName('xml').AsString);
+            LoadXML(MemoResp, WBResposta);
+      end;
+
+end;
+
 procedure TForm1.FormCreate(Sender: TObject);
 begin
       LerConfiguracao;
@@ -593,12 +629,16 @@ begin
       TabSheet3.TabVisible      := false;
       TabSheet4.TabVisible      := false;
       TabSheet7.TabVisible      := false;
- //     TabSheet12.TabVisible     := false;
-  //    TabSheet13.TabVisible     := false;
       TabSheet16.TabVisible     := false;
       TabSheet17.TabVisible     := false;
       TabSheet18.TabVisible     := false;
       SQLConnection1.Connected := true;
+      if Edit4.Text <> '' then
+      begin
+            Timer1.Interval := StrToInt(Edit4.Text);
+      end else
+           Timer1.Enabled := false;
+
 end;
 
 procedure TForm1.btnSalvarConfigClick(Sender: TObject);
@@ -671,6 +711,7 @@ begin
     LoadXML(MemoResp, WBResposta);
     ShowMessage(IntToStr(ACBrNFe1.WebServices.EnvEvento.cStat));
     ShowMessage(ACBrNFe1.WebServices.EnvEvento.EventoRetorno.retEvento.Items[0].RetInfEvento.nProt);
+
   end;
 end;
 

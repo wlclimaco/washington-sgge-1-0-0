@@ -30,10 +30,12 @@ object Form1: TForm1
     ActivePage = TabSheet15
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 874
     object TabSheet14: TTabSheet
       Caption = 'TabSheet14'
-      ExplicitWidth = 866
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Panel7: TPanel
         Left = 0
         Top = 41
@@ -229,7 +231,6 @@ object Form1: TForm1
         Height = 41
         Align = alBottom
         TabOrder = 1
-        ExplicitWidth = 866
         DesignSize = (
           871
           41)
@@ -367,7 +368,6 @@ object Form1: TForm1
           ShowHint = True
           TabOrder = 1
           BrTipoBotao = BrBtnExcel
-          ExplicitLeft = 760
         end
         object BrvBitBtn2: TBrvBitBtn
           Left = 182
@@ -453,7 +453,6 @@ object Form1: TForm1
         Height = 41
         Align = alTop
         TabOrder = 2
-        ExplicitWidth = 866
       end
       object Panel10: TPanel
         Left = 185
@@ -462,7 +461,6 @@ object Form1: TForm1
         Height = 494
         Align = alClient
         TabOrder = 3
-        ExplicitWidth = 681
         object BrvDbGrid2: TBrvDbGrid
           Left = 1
           Top = 1
@@ -490,7 +488,6 @@ object Form1: TForm1
     object TabSheet15: TTabSheet
       Caption = 'TabSheet15'
       ImageIndex = 1
-      ExplicitWidth = 866
       object Panel2: TPanel
         Left = 169
         Top = 0
@@ -498,7 +495,6 @@ object Form1: TForm1
         Height = 576
         Align = alClient
         TabOrder = 0
-        ExplicitWidth = 697
         object PageControl2: TPageControl
           Left = 1
           Top = 411
@@ -507,10 +503,12 @@ object Form1: TForm1
           ActivePage = TabSheet10
           Align = alBottom
           TabOrder = 0
-          ExplicitWidth = 695
           object TabSheet5: TTabSheet
             Caption = 'Respostas'
-            ExplicitWidth = 687
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object MemoResp: TMemo
               Left = 0
               Top = 0
@@ -519,13 +517,15 @@ object Form1: TForm1
               Align = alClient
               ScrollBars = ssVertical
               TabOrder = 0
-              ExplicitWidth = 687
             end
           end
           object TabSheet6: TTabSheet
             Caption = 'XML Resposta'
             ImageIndex = 1
-            ExplicitWidth = 687
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object WBResposta: TWebBrowser
               Left = 0
               Top = 0
@@ -546,7 +546,10 @@ object Form1: TForm1
           object TabSheet8: TTabSheet
             Caption = 'Log'
             ImageIndex = 2
-            ExplicitWidth = 687
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object memoLog: TMemo
               Left = 0
               Top = 0
@@ -555,13 +558,15 @@ object Form1: TForm1
               Align = alClient
               ScrollBars = ssVertical
               TabOrder = 0
-              ExplicitWidth = 687
             end
           end
           object TabSheet9: TTabSheet
             Caption = 'NFe'
             ImageIndex = 3
-            ExplicitWidth = 687
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object trvwNFe: TTreeView
               Left = 0
               Top = 0
@@ -570,13 +575,11 @@ object Form1: TForm1
               Align = alClient
               Indent = 19
               TabOrder = 0
-              ExplicitWidth = 687
             end
           end
           object TabSheet10: TTabSheet
             Caption = 'Retorno Completo WS'
             ImageIndex = 4
-            ExplicitWidth = 687
             object memoRespWS: TMemo
               Left = 0
               Top = 0
@@ -585,14 +588,15 @@ object Form1: TForm1
               Align = alBottom
               ScrollBars = ssVertical
               TabOrder = 0
-              ExplicitTop = -1
-              ExplicitHeight = 137
             end
           end
           object Dados: TTabSheet
             Caption = 'Dados'
             ImageIndex = 5
-            ExplicitWidth = 687
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object MemoDados: TMemo
               Left = 0
               Top = 0
@@ -601,13 +605,15 @@ object Form1: TForm1
               Align = alClient
               ScrollBars = ssVertical
               TabOrder = 0
-              ExplicitWidth = 687
             end
           end
           object TabSheet11: TTabSheet
             Caption = 'RetornoConsulta NFe 2.01'
             ImageIndex = 6
-            ExplicitWidth = 687
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object TreeViewRetornoConsulta: TTreeView
               Left = 0
               Top = 0
@@ -616,7 +622,6 @@ object Form1: TForm1
               Align = alClient
               Indent = 19
               TabOrder = 0
-              ExplicitWidth = 687
             end
           end
         end
@@ -635,11 +640,9 @@ object Form1: TForm1
             ActivePage = tsNFe
             Align = alClient
             TabOrder = 0
-            ExplicitHeight = 478
             object tsNFe: TTabSheet
               Caption = 'NF-e'
               OnEnter = tsNFeEnter
-              ExplicitHeight = 417
               object SpeedButton2: TSpeedButton
                 Left = 230
                 Top = 53
@@ -662,8 +665,8 @@ object Form1: TForm1
                 OnClick = sbtnPathSalvarClick
               end
               object SpeedButton3: TSpeedButton
-                Left = 445
-                Top = 415
+                Left = 324
+                Top = 416
                 Width = 23
                 Height = 22
                 Glyph.Data = {
@@ -709,7 +712,7 @@ object Form1: TForm1
                   80008080008080008080}
               end
               object SpeedButton1: TSpeedButton
-                Left = 445
+                Left = 324
                 Top = 457
                 Width = 23
                 Height = 22
@@ -768,6 +771,13 @@ object Form1: TForm1
                 Width = 119
                 Height = 13
                 Caption = 'Diretorio para Importa'#231#227'o'
+              end
+              object Label39: TLabel
+                Left = 390
+                Top = 442
+                Width = 57
+                Height = 13
+                Caption = 'Logo Marca'
               end
               object GroupBox2: TGroupBox
                 Left = 3
@@ -1444,14 +1454,14 @@ object Form1: TForm1
               object EdtDsArquiv: TEdit
                 Left = 3
                 Top = 416
-                Width = 436
+                Width = 315
                 Height = 21
                 TabOrder = 7
               end
               object Edit3: TEdit
                 Left = 3
                 Top = 456
-                Width = 436
+                Width = 315
                 Height = 21
                 TabOrder = 8
               end
@@ -1480,11 +1490,32 @@ object Form1: TForm1
                 TabOrder = 9
                 OnClick = btnSalvarConfigClick
               end
+              object RadioGroup1: TRadioGroup
+                Left = 353
+                Top = 405
+                Width = 120
+                Height = 74
+                Caption = 'Intervalo Importa'#231#227'o'
+                ParentShowHint = False
+                ShowHint = False
+                TabOrder = 11
+                WordWrap = True
+              end
+              object Edit4: TEdit
+                Left = 364
+                Top = 424
+                Width = 96
+                Height = 21
+                TabOrder = 10
+              end
             end
             object TabSheet12: TTabSheet
               Caption = 'TabSheet12'
               ImageIndex = 1
-              ExplicitHeight = 402
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Panel4: TPanel
                 Left = 0
                 Top = 0
@@ -1642,7 +1673,10 @@ object Form1: TForm1
             object TabSheet13: TTabSheet
               Caption = 'TabSheet13'
               ImageIndex = 2
-              ExplicitHeight = 402
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Panel6: TPanel
                 Left = 0
                 Top = 0
@@ -1695,42 +1729,66 @@ object Form1: TForm1
             object TabSheet1: TTabSheet
               Caption = 'TabSheet1'
               ImageIndex = 5
-              ExplicitHeight = 402
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
             end
             object TabSheet2: TTabSheet
               Caption = 'TabSheet2'
               ImageIndex = 6
-              ExplicitHeight = 402
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
             end
             object TabSheet3: TTabSheet
               Caption = 'TabSheet3'
               ImageIndex = 7
-              ExplicitHeight = 402
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
             end
             object TabSheet4: TTabSheet
               Caption = 'TabSheet4'
               ImageIndex = 8
-              ExplicitHeight = 402
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
             end
             object TabSheet7: TTabSheet
               Caption = 'TabSheet7'
               ImageIndex = 9
-              ExplicitHeight = 402
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
             end
             object TabSheet16: TTabSheet
               Caption = 'TabSheet16'
               ImageIndex = 10
-              ExplicitHeight = 402
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
             end
             object TabSheet17: TTabSheet
               Caption = 'TabSheet17'
               ImageIndex = 11
-              ExplicitHeight = 402
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
             end
             object TabSheet18: TTabSheet
               Caption = 'TabSheet18'
               ImageIndex = 12
-              ExplicitHeight = 402
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
             end
           end
         end
@@ -2310,5 +2368,10 @@ object Form1: TForm1
     object SQLTable1STMANIFESTO: TIntegerField
       FieldName = 'STMANIFESTO'
     end
+  end
+  object Timer1: TTimer
+    OnTimer = Timer1Timer
+    Left = 600
+    Top = 8
   end
 end

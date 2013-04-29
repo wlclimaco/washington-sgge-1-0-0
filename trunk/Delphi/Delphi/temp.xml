@@ -1,1 +1,31 @@
-<retConsStatServ versao="2.00" xmlns="http://www.portalfiscal.inf.br/nfe"><tpAmb>2</tpAmb><verAplic>SP_NFE_PL_006q</verAplic><cStat>107</cStat><xMotivo>Servico em Operacao</xMotivo><cUF>35</cUF><dhRecbto>2013-04-23T16:47:25</dhRecbto><tMed>1</tMed></retConsStatServ>
+
+         <nfeProc xmlns="http://www.portalfiscal.inf.br/nfe" versao="2.00">
+  <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+    <infNFe versao="2.00" Id="NFe31130300776574001470550010006268121454903700">
+      <ide>
+        <cUF>31</cUF>
+        <cNF>45490370</cNF>
+        <natOp>Venda de mercadoria adquir. de terceiros</natOp>
+        <indPag>0</indPag>
+        <mod>55</mod>
+        <serie>1</serie>
+        <nNF>626812</nNF>
+        <dEmi>2013-03-23</dEmi>
+        <dSaiEnt>2013-03-23</dSaiEnt>
+        <hSaiEnt>07:12:22</hSaiEnt>
+        <tpNF>1</tpNF>
+        <cMunFG>3170206</cMunFG>
+        <tpImp>1</tpImp>
+        <tpEmis>1</tpEmis>
+        <cDV>0</cDV>
+        <tpAmb>1</tpAmb>
+        <finNFe>1</finNFe>
+        <procEmi>0</procEmi>
+        <verProc>ELDOC</verProc>
+      </ide>
+      <emit>
+        <CNPJ>00776574001470</CNPJ>
+        <xNome>B2W - Companhia Global do Varejo</xNome>
+        <enderEmit>
+          <xLgr>Rod BR-497</xLgr>
+          <nro>
