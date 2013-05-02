@@ -53,7 +53,7 @@ object Form1: TForm1
     Top = 0
     Width = 899
     Height = 680
-    ActivePage = TabSheet2
+    ActivePage = TabSheet15
     Align = alClient
     TabOrder = 0
     object TabSheet14: TTabSheet
@@ -953,7 +953,6 @@ object Form1: TForm1
             object TabSheet12: TTabSheet
               Caption = 'Busca Manifesto'
               ImageIndex = 1
-              ExplicitHeight = 620
               object Panel4: TPanel
                 Left = 0
                 Top = 0
@@ -986,7 +985,7 @@ object Form1: TForm1
                 Left = 0
                 Top = 49
                 Width = 710
-                Height = 531
+                Height = 571
                 BrShowMemo = True
                 BrReadOnlyStyle = [fsItalic]
                 BrReadOnlyColor = clMaroon
@@ -1111,7 +1110,6 @@ object Form1: TForm1
             object TabSheet13: TTabSheet
               Caption = 'Busca Chave'
               ImageIndex = 2
-              ExplicitHeight = 620
               object Panel6: TPanel
                 Left = 0
                 Top = 0
@@ -1164,45 +1162,39 @@ object Form1: TForm1
             object TabSheet1: TTabSheet
               Caption = 'Retorno'
               ImageIndex = 5
-              ExplicitHeight = 620
               object PageControl2: TPageControl
                 Left = 0
                 Top = 0
                 Width = 710
-                Height = 580
+                Height = 620
                 ActivePage = TabSheet11
                 Align = alClient
                 TabOrder = 0
-                ExplicitHeight = 620
                 object TabSheet5: TTabSheet
                   Caption = 'Respostas'
-                  ExplicitHeight = 592
                   object MemoResp: TMemo
                     Left = 0
                     Top = 0
                     Width = 702
-                    Height = 552
+                    Height = 592
                     Align = alClient
                     ScrollBars = ssVertical
                     TabOrder = 0
-                    ExplicitHeight = 592
                   end
                 end
                 object TabSheet6: TTabSheet
                   Caption = 'XML Resposta'
                   ImageIndex = 1
-                  ExplicitHeight = 592
                   object WBResposta: TWebBrowser
                     Left = 0
                     Top = 0
                     Width = 702
-                    Height = 552
+                    Height = 592
                     Align = alClient
                     TabOrder = 0
-                    ExplicitWidth = 692
-                    ExplicitHeight = 136
+                    ExplicitHeight = 552
                     ControlData = {
-                      4C0000008E4800000D3900000000000000000000000000000000000000000000
+                      4C0000008E4800002F3D00000000000000000000000000000000000000000000
                       000000004C000000000000000000000001000000E0D057007335CF11AE690800
                       2B2E126208000000000000004C0000000114020000000000C000000000000046
                       8000000000000000000000000000000000000000000000000000000000000000
@@ -1212,76 +1204,66 @@ object Form1: TForm1
                 object TabSheet8: TTabSheet
                   Caption = 'Log'
                   ImageIndex = 2
-                  ExplicitHeight = 592
                   object memoLog: TMemo
                     Left = 0
                     Top = 0
                     Width = 702
-                    Height = 552
+                    Height = 592
                     Align = alClient
                     ScrollBars = ssVertical
                     TabOrder = 0
-                    ExplicitHeight = 592
                   end
                 end
                 object TabSheet9: TTabSheet
                   Caption = 'NFe'
                   ImageIndex = 3
-                  ExplicitHeight = 592
                   object trvwNFe: TTreeView
                     Left = 0
                     Top = 0
                     Width = 702
-                    Height = 552
+                    Height = 592
                     Align = alClient
                     Indent = 19
                     TabOrder = 0
-                    ExplicitHeight = 592
                   end
                 end
                 object TabSheet10: TTabSheet
                   Caption = 'Retorno Completo WS'
                   ImageIndex = 4
-                  ExplicitHeight = 592
                   object memoRespWS: TMemo
                     Left = 0
-                    Top = 416
+                    Top = 456
                     Width = 702
                     Height = 136
                     Align = alBottom
                     ScrollBars = ssVertical
                     TabOrder = 0
-                    ExplicitTop = 456
                   end
                 end
                 object Dados: TTabSheet
                   Caption = 'Dados'
                   ImageIndex = 5
-                  ExplicitHeight = 592
                   object MemoDados: TMemo
                     Left = 0
                     Top = 0
                     Width = 702
-                    Height = 552
+                    Height = 592
                     Align = alClient
                     ScrollBars = ssVertical
                     TabOrder = 0
-                    ExplicitHeight = 592
                   end
                 end
                 object TabSheet11: TTabSheet
                   Caption = 'RetornoConsulta NFe 2.01'
                   ImageIndex = 6
-                  ExplicitHeight = 592
                   object TreeViewRetornoConsulta: TTreeView
                     Left = 0
                     Top = 0
                     Width = 702
-                    Height = 552
+                    Height = 592
                     Align = alClient
                     Indent = 19
                     TabOrder = 0
-                    ExplicitHeight = 592
                   end
                 end
               end
@@ -2055,15 +2037,15 @@ object Form1: TForm1
               NumGlyphs = 2
               OnClick = sbtnGetCertClick
             end
-            object Edit37: TEdit
+            object edtCaminho: TEdit
               Left = 8
-              Top = 29
+              Top = 30
               Width = 161
               Height = 21
               TabOrder = 0
               Text = '1A834F6D9090F03701881A2E05D0FC72'
             end
-            object Edit38: TEdit
+            object edtSenha: TEdit
               Left = 8
               Top = 112
               Width = 161
@@ -2072,7 +2054,7 @@ object Form1: TForm1
               TabOrder = 1
               Text = '1234'
             end
-            object Edit39: TEdit
+            object edtNumSerie: TEdit
               Left = 8
               Top = 69
               Width = 161
@@ -2137,21 +2119,21 @@ object Form1: TForm1
               NumGlyphs = 2
               OnClick = sbtnPathSalvarClick
             end
-            object Edit40: TEdit
+            object edtLogoMarca: TEdit
               Left = 3
               Top = 92
               Width = 221
               Height = 21
               TabOrder = 0
             end
-            object Edit41: TEdit
+            object edtPathLogs: TEdit
               Left = 3
               Top = 59
               Width = 221
               Height = 21
               TabOrder = 1
             end
-            object CheckBox12: TCheckBox
+            object ckSalvar: TCheckBox
               Left = 259
               Top = 83
               Width = 201
@@ -2165,7 +2147,7 @@ object Form1: TForm1
               ParentFont = False
               TabOrder = 2
             end
-            object RadioGroup8: TRadioGroup
+            object rgTipoDanfe: TRadioGroup
               Left = 4
               Top = 11
               Width = 249
@@ -2178,7 +2160,7 @@ object Form1: TForm1
                 'Paisagem')
               TabOrder = 3
             end
-            object RadioGroup9: TRadioGroup
+            object rgFormaEmissao: TRadioGroup
               Left = 259
               Top = 11
               Width = 195
@@ -2215,7 +2197,7 @@ object Form1: TForm1
               Font.Style = []
               ParentFont = False
             end
-            object CheckBox13: TCheckBox
+            object ckVisualizar: TCheckBox
               Left = 5
               Top = 118
               Width = 153
@@ -2229,7 +2211,7 @@ object Form1: TForm1
               ParentFont = False
               TabOrder = 0
             end
-            object ComboBox2: TComboBox
+            object cbUF: TComboBox
               Left = 2
               Top = 32
               Width = 198
@@ -2273,7 +2255,7 @@ object Form1: TForm1
                 'SE'
                 'TO')
             end
-            object RadioGroup10: TRadioGroup
+            object rgTipoAmb: TRadioGroup
               Left = 5
               Top = 61
               Width = 195
@@ -2322,28 +2304,28 @@ object Form1: TForm1
               Height = 13
               Caption = 'Senha'
             end
-            object Edit42: TEdit
+            object edtProxyHost: TEdit
               Left = 8
               Top = 32
               Width = 124
               Height = 21
               TabOrder = 0
             end
-            object Edit43: TEdit
+            object edtProxyPorta: TEdit
               Left = 138
               Top = 32
               Width = 44
               Height = 21
               TabOrder = 1
             end
-            object Edit44: TEdit
+            object edtProxyUser: TEdit
               Left = 8
               Top = 72
               Width = 97
               Height = 21
               TabOrder = 2
             end
-            object Edit45: TEdit
+            object edtProxySenha: TEdit
               Left = 111
               Top = 72
               Width = 71
@@ -2453,91 +2435,91 @@ object Form1: TForm1
               Height = 13
               Caption = 'UF'
             end
-            object Edit46: TEdit
+            object edtEmitCNPJ: TEdit
               Left = 7
               Top = 30
               Width = 123
               Height = 21
               TabOrder = 0
             end
-            object Edit47: TEdit
+            object edtEmitIE: TEdit
               Left = 136
               Top = 30
               Width = 123
               Height = 21
               TabOrder = 1
             end
-            object Edit48: TEdit
+            object edtEmitRazao: TEdit
               Left = 7
               Top = 63
               Width = 252
               Height = 21
               TabOrder = 2
             end
-            object Edit49: TEdit
+            object edtEmitFantasia: TEdit
               Left = 7
               Top = 97
               Width = 252
               Height = 21
               TabOrder = 3
             end
-            object Edit50: TEdit
+            object edtEmitFone: TEdit
               Left = 7
               Top = 131
               Width = 125
               Height = 21
               TabOrder = 4
             end
-            object Edit51: TEdit
+            object edtEmitCEP: TEdit
               Left = 136
               Top = 131
               Width = 123
               Height = 21
               TabOrder = 5
             end
-            object Edit52: TEdit
+            object edtEmitLogradouro: TEdit
               Left = 7
               Top = 165
               Width = 196
               Height = 21
               TabOrder = 6
             end
-            object Edit53: TEdit
+            object edtEmitNumero: TEdit
               Left = 209
               Top = 165
               Width = 50
               Height = 21
               TabOrder = 7
             end
-            object Edit54: TEdit
+            object edtEmitComp: TEdit
               Left = 7
               Top = 203
               Width = 123
               Height = 21
               TabOrder = 8
             end
-            object Edit55: TEdit
+            object edtEmitBairro: TEdit
               Left = 133
               Top = 203
               Width = 126
               Height = 21
               TabOrder = 9
             end
-            object Edit56: TEdit
+            object edtEmitCodCidade: TEdit
               Left = 9
               Top = 241
               Width = 61
               Height = 21
               TabOrder = 10
             end
-            object Edit57: TEdit
+            object edtEmitCidade: TEdit
               Left = 75
               Top = 241
               Width = 142
               Height = 21
               TabOrder = 11
             end
-            object Edit58: TEdit
+            object edtEmitUF: TEdit
               Left = 223
               Top = 240
               Width = 36
@@ -2594,42 +2576,42 @@ object Form1: TForm1
               Height = 13
               Caption = 'Mensagem do Email'
             end
-            object Edit59: TEdit
+            object edtSmtpHost: TEdit
               Left = 5
               Top = 32
               Width = 123
               Height = 21
               TabOrder = 0
             end
-            object Edit60: TEdit
+            object edtSmtpPort: TEdit
               Left = 134
               Top = 32
               Width = 51
               Height = 21
               TabOrder = 1
             end
-            object Edit61: TEdit
+            object edtSmtpUser: TEdit
               Left = 8
               Top = 72
               Width = 81
               Height = 21
               TabOrder = 2
             end
-            object Edit62: TEdit
+            object edtSmtpPass: TEdit
               Left = 95
               Top = 73
               Width = 90
               Height = 21
               TabOrder = 3
             end
-            object Edit63: TEdit
+            object edtEmailAssunto: TEdit
               Left = 8
               Top = 112
               Width = 177
               Height = 21
               TabOrder = 4
             end
-            object CheckBox14: TCheckBox
+            object cbEmailSSL: TCheckBox
               Left = 10
               Top = 144
               Width = 167
@@ -2645,7 +2627,7 @@ object Form1: TForm1
               TabOrder = 6
             end
           end
-          object RadioGroup11: TRadioGroup
+          object RadioGroup2: TRadioGroup
             Left = 479
             Top = 399
             Width = 207
@@ -2657,14 +2639,14 @@ object Form1: TForm1
               'So importar')
             TabOrder = 6
           end
-          object Edit64: TEdit
+          object EdtDsArquiv: TEdit
             Left = 3
             Top = 416
             Width = 315
             Height = 21
             TabOrder = 7
           end
-          object Edit65: TEdit
+          object Edit3: TEdit
             Left = 3
             Top = 456
             Width = 315
@@ -2707,7 +2689,7 @@ object Form1: TForm1
             TabOrder = 11
             WordWrap = True
           end
-          object Edit66: TEdit
+          object Edit4: TEdit
             Left = 364
             Top = 424
             Width = 96
@@ -3085,7 +3067,7 @@ object Form1: TForm1
             BrSaveOnClick = False
           end>
       end
-      object MemTxMsgEma: TMemo
+      object mmEmailMsg: TMemo
         Left = 0
         Top = 544
         Width = 891
@@ -3118,7 +3100,7 @@ object Form1: TForm1
           Caption = 'LblQtReg'
         end
         object BtnEnviar: TBrvBitBtn
-          Left = 769
+          Left = 761
           Top = 4
           Width = 100
           Height = 25
@@ -3251,7 +3233,7 @@ object Form1: TForm1
           ParentFont = False
         end
         object BrvBitBtn7: TBrvBitBtn
-          Left = 524
+          Left = 516
           Top = 4
           Width = 100
           Height = 25
@@ -3353,7 +3335,7 @@ object Form1: TForm1
         object BrvEdit1: TBrvEdit
           Left = 276
           Top = 6
-          Width = 242
+          Width = 234
           Height = 21
           Anchors = [akLeft, akTop, akRight]
           TabOrder = 1
@@ -3365,7 +3347,7 @@ object Form1: TForm1
           BrRecordar = False
         end
         object BrvBitBtn8: TBrvBitBtn
-          Left = 628
+          Left = 620
           Top = 4
           Width = 100
           Height = 25
@@ -4248,6 +4230,22 @@ object Form1: TForm1
         end
       end
     end
+    object TabSheet18: TTabSheet
+      Caption = 'Gerar NFe'
+      ImageIndex = 7
+    end
+    object TabSheet25: TTabSheet
+      Caption = 'Gerar NFSe'
+      ImageIndex = 8
+    end
+    object TabSheet28: TTabSheet
+      Caption = 'Gerar Conhecimento'
+      ImageIndex = 9
+    end
+    object TabSheet30: TTabSheet
+      Caption = 'Configura'#231#227'o Boletos'
+      ImageIndex = 10
+    end
   end
   object OpenDialog1: TOpenDialog
     DefaultExt = '*-nfe.XML'
@@ -4267,8 +4265,8 @@ object Form1: TForm1
     Configuracoes.WebServices.AjustaAguardaConsultaRet = True
     OnStatusChange = ACBrNFe1StatusChange
     OnGerarLog = ACBrNFe1GerarLog
-    Left = 551
-    Top = 368
+    Left = 607
+    Top = 400
   end
   object ACBrNFeDANFERave1: TACBrNFeDANFERave
     PathPDF = 'C:\Program Files\Borland\Delphi7\Bin\'
@@ -4471,8 +4469,8 @@ object Form1: TForm1
     Top = 368
   end
   object PopupMenu2: TPopupMenu
-    Left = 488
-    Top = 376
+    Left = 584
+    Top = 352
     object MenuItem1: TMenuItem
       Caption = 'Detalhar'
     end

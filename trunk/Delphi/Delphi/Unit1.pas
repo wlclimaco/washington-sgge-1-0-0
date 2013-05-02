@@ -242,32 +242,32 @@ type
     SpeedButton14: TSpeedButton;
     Label83: TLabel;
     SpeedButton15: TSpeedButton;
-    Edit37: TEdit;
-    Edit38: TEdit;
-    Edit39: TEdit;
+    edtCaminho: TEdit;
+    edtSenha: TEdit;
+    edtNumSerie: TEdit;
     GroupBox19: TGroupBox;
     Label84: TLabel;
     SpeedButton16: TSpeedButton;
     SpeedButton17: TSpeedButton;
-    Edit40: TEdit;
-    Edit41: TEdit;
-    CheckBox12: TCheckBox;
-    RadioGroup8: TRadioGroup;
-    RadioGroup9: TRadioGroup;
+    edtLogoMarca: TEdit;
+    edtPathLogs: TEdit;
+    ckSalvar: TCheckBox;
+    rgTipoDanfe: TRadioGroup;
+    rgFormaEmissao: TRadioGroup;
     GroupBox20: TGroupBox;
     Label85: TLabel;
-    CheckBox13: TCheckBox;
-    ComboBox2: TComboBox;
-    RadioGroup10: TRadioGroup;
+    ckVisualizar: TCheckBox;
+    cbUF: TComboBox;
+    rgTipoAmb: TRadioGroup;
     GroupBox21: TGroupBox;
     Label86: TLabel;
     Label87: TLabel;
     Label88: TLabel;
     Label89: TLabel;
-    Edit42: TEdit;
-    Edit43: TEdit;
-    Edit44: TEdit;
-    Edit45: TEdit;
+    edtProxyHost: TEdit;
+    edtProxyPorta: TEdit;
+    edtProxyUser: TEdit;
+    edtProxySenha: TEdit;
     GroupBox22: TGroupBox;
     Label90: TLabel;
     Label91: TLabel;
@@ -282,19 +282,19 @@ type
     Label100: TLabel;
     Label101: TLabel;
     Label102: TLabel;
-    Edit46: TEdit;
-    Edit47: TEdit;
-    Edit48: TEdit;
-    Edit49: TEdit;
-    Edit50: TEdit;
-    Edit51: TEdit;
-    Edit52: TEdit;
-    Edit53: TEdit;
-    Edit54: TEdit;
-    Edit55: TEdit;
-    Edit56: TEdit;
-    Edit57: TEdit;
-    Edit58: TEdit;
+    edtEmitCNPJ: TEdit;
+    edtEmitIE: TEdit;
+    edtEmitRazao: TEdit;
+    edtEmitFantasia: TEdit;
+    edtEmitFone: TEdit;
+    edtEmitCEP: TEdit;
+    edtEmitLogradouro: TEdit;
+    edtEmitNumero: TEdit;
+    edtEmitComp: TEdit;
+    edtEmitBairro: TEdit;
+    edtEmitCodCidade: TEdit;
+    edtEmitCidade: TEdit;
+    edtEmitUF: TEdit;
     GroupBox23: TGroupBox;
     Label103: TLabel;
     Label104: TLabel;
@@ -302,19 +302,19 @@ type
     Label106: TLabel;
     Label107: TLabel;
     Label108: TLabel;
-    Edit59: TEdit;
-    Edit60: TEdit;
-    Edit61: TEdit;
-    Edit62: TEdit;
-    Edit63: TEdit;
-    CheckBox14: TCheckBox;
+    edtSmtpHost: TEdit;
+    edtSmtpPort: TEdit;
+    edtSmtpUser: TEdit;
+    edtSmtpPass: TEdit;
+    edtEmailAssunto: TEdit;
+    cbEmailSSL: TCheckBox;
     Memo6: TMemo;
-    RadioGroup11: TRadioGroup;
-    Edit64: TEdit;
-    Edit65: TEdit;
+    RadioGroup2: TRadioGroup;
+    EdtDsArquiv: TEdit;
+    Edit3: TEdit;
     BitBtn2: TBitBtn;
     RadioGroup12: TRadioGroup;
-    Edit66: TEdit;
+    Edit4: TEdit;
     Button2: TButton;
     btnConsultar: TButton;
     Button3: TButton;
@@ -337,7 +337,7 @@ type
     Panel16: TPanel;
     DbgNotas: TBrvDbGrid;
     DbgEmails: TBrvDbGrid;
-    MemTxMsgEma: TMemo;
+    mmEmailMsg: TMemo;
     Panel18: TPanel;
     LblQtReg: TLabel;
     BtnEnviar: TBrvBitBtn;
@@ -457,15 +457,16 @@ type
     CheckBox35: TCheckBox;
     ExportarTXT1: TMenuItem;
     BrvBitBtn11: TBrvBitBtn;
+    TabSheet18: TTabSheet;
+    TabSheet25: TTabSheet;
+    TabSheet28: TTabSheet;
+    TabSheet30: TTabSheet;
     procedure sbtnCaminhoCertClick(Sender: TObject);
     procedure sbtnLogoMarcaClick(Sender: TObject);
     procedure sbtnPathSalvarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnSalvarConfigClick(Sender: TObject);
     procedure btnStatusServClick(Sender: TObject);
-    procedure btnConsultarClick(Sender: TObject);
-    procedure btnCancNFClick(Sender: TObject);
-    procedure btnValidarXMLClick(Sender: TObject);
     procedure btnCriarEnviarClick(Sender: TObject);
     procedure btnInutilizarClick(Sender: TObject);
     procedure ACBrNFe1StatusChange(Sender: TObject);
@@ -498,7 +499,6 @@ type
   private
     { Private declarations }
     procedure GravarConfiguracao ;
-    procedure LerConfiguracao ;
  //   procedure GerarNFCe(NumNFe : String);
     procedure LoadXML(MyMemo: TMemo; MyWebBrowser: TWebBrowser);
 
@@ -607,94 +607,94 @@ begin
 
 end;
 
-procedure TForm1.LerConfiguracao;
-Var IniFile  : String ;
-    Ini     : TIniFile ;
-    Ok : Boolean;
-    StreamMemo : TMemoryStream;
-begin
-  IniFile := ChangeFileExt( Application.ExeName, '.ini') ;
-
-  Ini := TIniFile.Create( IniFile );
-  try
-      {$IFDEF ACBrNFeOpenSSL}
-         edtCaminho.Text  := Ini.ReadString( 'Certificado','Caminho' ,'') ;
-         edtSenha.Text    := Ini.ReadString( 'Certificado','Senha'   ,'') ;
-         ACBrNFe1.Configuracoes.Certificados.Certificado  := edtCaminho.Text;
-         ACBrNFe1.Configuracoes.Certificados.Senha        := edtSenha.Text;
-      {$ELSE}
-         edtNumSerie.Text := Ini.ReadString( 'Certificado','NumSerie','') ;
-         ACBrNFe1.Configuracoes.Certificados.NumeroSerie := edtNumSerie.Text;
-         edtNumSerie.Text := ACBrNFe1.Configuracoes.Certificados.NumeroSerie;
-      {$ENDIF}
-
-      rgFormaEmissao.ItemIndex := Ini.ReadInteger( 'Geral','FormaEmissao',0) ;
-      ckSalvar.Checked    := Ini.ReadBool(   'Geral','Salvar'      ,True) ;
-      edtPathLogs.Text    := Ini.ReadString( 'Geral','PathSalvar'  ,'') ;
-      ACBrNFe1.Configuracoes.Geral.FormaEmissao := StrToTpEmis(OK,IntToStr(rgFormaEmissao.ItemIndex+1));
-      ACBrNFe1.Configuracoes.Geral.Salvar       := ckSalvar.Checked;
-      ACBrNFe1.Configuracoes.Geral.PathSalvar   := edtPathLogs.Text;
-
-      cbUF.ItemIndex       := cbUF.Items.IndexOf(Ini.ReadString( 'WebService','UF','SP')) ;
-      rgTipoAmb.ItemIndex  := Ini.ReadInteger( 'WebService','Ambiente'  ,0) ;
-      ckVisualizar.Checked :=Ini.ReadBool(    'WebService','Visualizar',False) ;
-      ACBrNFe1.Configuracoes.WebServices.UF         := cbUF.Text;
-      ACBrNFe1.Configuracoes.WebServices.Ambiente   := StrToTpAmb(Ok,IntToStr(rgTipoAmb.ItemIndex+1));
-      ACBrNFe1.Configuracoes.WebServices.Visualizar := ckVisualizar.Checked;
-
-      edtProxyHost.Text  := Ini.ReadString( 'Proxy','Host'   ,'') ;
-      edtProxyPorta.Text := Ini.ReadString( 'Proxy','Porta'  ,'') ;
-      edtProxyUser.Text  := Ini.ReadString( 'Proxy','User'   ,'') ;
-      edtProxySenha.Text := Ini.ReadString( 'Proxy','Pass'   ,'') ;
-      ACBrNFe1.Configuracoes.WebServices.ProxyHost := edtProxyHost.Text;
-      ACBrNFe1.Configuracoes.WebServices.ProxyPort := edtProxyPorta.Text;
-      ACBrNFe1.Configuracoes.WebServices.ProxyUser := edtProxyUser.Text;
-      ACBrNFe1.Configuracoes.WebServices.ProxyPass := edtProxySenha.Text;
-
-      rgTipoDanfe.ItemIndex     := Ini.ReadInteger( 'Geral','DANFE'       ,0) ;
-      edtLogoMarca.Text         := Ini.ReadString( 'Geral','LogoMarca'   ,'') ;
-      if ACBrNFe1.DANFE <> nil then
-       begin
-         ACBrNFe1.DANFE.TipoDANFE  := StrToTpImp(OK,IntToStr(rgTipoDanfe.ItemIndex+1));
-         ACBrNFe1.DANFE.Logo       := edtLogoMarca.Text;
-       end;  
-
-      edtEmitCNPJ.Text       := Ini.ReadString( 'Emitente','CNPJ'       ,'') ;
-      edtEmitIE.Text         := Ini.ReadString( 'Emitente','IE'         ,'') ;
-      edtEmitRazao.Text      := Ini.ReadString( 'Emitente','RazaoSocial','') ;
-      edtEmitFantasia.Text   := Ini.ReadString( 'Emitente','Fantasia'   ,'') ;
-      edtEmitFone.Text       := Ini.ReadString( 'Emitente','Fone'       ,'') ;
-      edtEmitCEP.Text        := Ini.ReadString( 'Emitente','CEP'        ,'') ;
-      edtEmitLogradouro.Text := Ini.ReadString( 'Emitente','Logradouro' ,'') ;
-      edtEmitNumero.Text     := Ini.ReadString( 'Emitente','Numero'     ,'') ;
-      edtEmitComp.Text       := Ini.ReadString( 'Emitente','Complemento','') ;
-      edtEmitBairro.Text     := Ini.ReadString( 'Emitente','Bairro'     ,'') ;
-      edtEmitCodCidade.Text  := Ini.ReadString( 'Emitente','CodCidade'  ,'') ;
-      edtEmitCidade.Text     :=Ini.ReadString( 'Emitente','Cidade'     ,'') ;
-      edtEmitUF.Text         := Ini.ReadString( 'Emitente','UF'         ,'') ;
-
-      edtSmtpHost.Text      := Ini.ReadString( 'Email','Host'   ,'') ;
-      edtSmtpPort.Text      := Ini.ReadString( 'Email','Port'   ,'') ;
-      edtSmtpUser.Text      := Ini.ReadString( 'Email','User'   ,'') ;
-      edtSmtpPass.Text      := Ini.ReadString( 'Email','Pass'   ,'') ;
-      edtEmailAssunto.Text  := Ini.ReadString( 'Email','Assunto','') ;
-      cbEmailSSL.Checked    := Ini.ReadBool(   'Email','SSL'    ,False) ;
-
-      EdtDsArquiv.Text      := Ini.ReadString( 'Import','DiretorioImportacao'   ,'') ;
-      Edit3.Text            := Ini.ReadString( 'Import','DiretorioExportacao'   ,'') ;
-      Edit4.Text            := Ini.ReadString( 'Import','TempoImpotacao'   ,'') ;
-      RadioGroup2.ItemIndex := StrToInt(Ini.ReadString( 'Import','Importacao'   ,'')) ;
-
-
-      StreamMemo := TMemoryStream.Create;
-      Ini.ReadBinaryStream( 'Email','Mensagem',StreamMemo) ;
-      mmEmailMsg.Lines.LoadFromStream(StreamMemo);
-      StreamMemo.Free;
-  finally
-     Ini.Free ;
-  end;
-
-end;
+//procedure TForm1.LerConfiguracao;
+//Var IniFile  : String ;
+//    Ini     : TIniFile ;
+//    Ok : Boolean;
+//    StreamMemo : TMemoryStream;
+//begin
+//  IniFile := ChangeFileExt( Application.ExeName, '.ini') ;
+//
+//  Ini := TIniFile.Create( IniFile );
+//  try
+//      {$IFDEF ACBrNFeOpenSSL}
+//         edtCaminho.Text  := Ini.ReadString( 'Certificado','Caminho' ,'') ;
+//         edtSenha.Text    := Ini.ReadString( 'Certificado','Senha'   ,'') ;
+//         ACBrNFe1.Configuracoes.Certificados.Certificado  := edtCaminho.Text;
+//         ACBrNFe1.Configuracoes.Certificados.Senha        := edtSenha.Text;
+//      {$ELSE}
+//         edtNumSerie.Text := Ini.ReadString( 'Certificado','NumSerie','') ;
+//         ACBrNFe1.Configuracoes.Certificados.NumeroSerie := edtNumSerie.Text;
+//         edtNumSerie.Text := ACBrNFe1.Configuracoes.Certificados.NumeroSerie;
+//      {$ENDIF}
+//
+//      rgFormaEmissao.ItemIndex := Ini.ReadInteger( 'Geral','FormaEmissao',0) ;
+//      ckSalvar.Checked    := Ini.ReadBool(   'Geral','Salvar'      ,True) ;
+//      edtPathLogs.Text    := Ini.ReadString( 'Geral','PathSalvar'  ,'') ;
+//      ACBrNFe1.Configuracoes.Geral.FormaEmissao := StrToTpEmis(OK,IntToStr(rgFormaEmissao.ItemIndex+1));
+//      ACBrNFe1.Configuracoes.Geral.Salvar       := ckSalvar.Checked;
+//      ACBrNFe1.Configuracoes.Geral.PathSalvar   := edtPathLogs.Text;
+//
+//      cbUF.ItemIndex       := cbUF.Items.IndexOf(Ini.ReadString( 'WebService','UF','SP')) ;
+//      rgTipoAmb.ItemIndex  := Ini.ReadInteger( 'WebService','Ambiente'  ,0) ;
+//      ckVisualizar.Checked :=Ini.ReadBool(    'WebService','Visualizar',False) ;
+//      ACBrNFe1.Configuracoes.WebServices.UF         := cbUF.Text;
+//      ACBrNFe1.Configuracoes.WebServices.Ambiente   := StrToTpAmb(Ok,IntToStr(rgTipoAmb.ItemIndex+1));
+//      ACBrNFe1.Configuracoes.WebServices.Visualizar := ckVisualizar.Checked;
+//
+//      edtProxyHost.Text  := Ini.ReadString( 'Proxy','Host'   ,'') ;
+//      edtProxyPorta.Text := Ini.ReadString( 'Proxy','Porta'  ,'') ;
+//      edtProxyUser.Text  := Ini.ReadString( 'Proxy','User'   ,'') ;
+//      edtProxySenha.Text := Ini.ReadString( 'Proxy','Pass'   ,'') ;
+//      ACBrNFe1.Configuracoes.WebServices.ProxyHost := edtProxyHost.Text;
+//      ACBrNFe1.Configuracoes.WebServices.ProxyPort := edtProxyPorta.Text;
+//      ACBrNFe1.Configuracoes.WebServices.ProxyUser := edtProxyUser.Text;
+//      ACBrNFe1.Configuracoes.WebServices.ProxyPass := edtProxySenha.Text;
+//
+//      rgTipoDanfe.ItemIndex     := Ini.ReadInteger( 'Geral','DANFE'       ,0) ;
+//      edtLogoMarca.Text         := Ini.ReadString( 'Geral','LogoMarca'   ,'') ;
+//      if ACBrNFe1.DANFE <> nil then
+//       begin
+//         ACBrNFe1.DANFE.TipoDANFE  := StrToTpImp(OK,IntToStr(rgTipoDanfe.ItemIndex+1));
+//         ACBrNFe1.DANFE.Logo       := edtLogoMarca.Text;
+//       end;
+//
+//      edtEmitCNPJ.Text       := Ini.ReadString( 'Emitente','CNPJ'       ,'') ;
+//      edtEmitIE.Text         := Ini.ReadString( 'Emitente','IE'         ,'') ;
+//      edtEmitRazao.Text      := Ini.ReadString( 'Emitente','RazaoSocial','') ;
+//      edtEmitFantasia.Text   := Ini.ReadString( 'Emitente','Fantasia'   ,'') ;
+//      edtEmitFone.Text       := Ini.ReadString( 'Emitente','Fone'       ,'') ;
+//      edtEmitCEP.Text        := Ini.ReadString( 'Emitente','CEP'        ,'') ;
+//      edtEmitLogradouro.Text := Ini.ReadString( 'Emitente','Logradouro' ,'') ;
+//      edtEmitNumero.Text     := Ini.ReadString( 'Emitente','Numero'     ,'') ;
+//      edtEmitComp.Text       := Ini.ReadString( 'Emitente','Complemento','') ;
+//      edtEmitBairro.Text     := Ini.ReadString( 'Emitente','Bairro'     ,'') ;
+//      edtEmitCodCidade.Text  := Ini.ReadString( 'Emitente','CodCidade'  ,'') ;
+//      edtEmitCidade.Text     :=Ini.ReadString( 'Emitente','Cidade'     ,'') ;
+//      edtEmitUF.Text         := Ini.ReadString( 'Emitente','UF'         ,'') ;
+//
+//      edtSmtpHost.Text      := Ini.ReadString( 'Email','Host'   ,'') ;
+//      edtSmtpPort.Text      := Ini.ReadString( 'Email','Port'   ,'') ;
+//      edtSmtpUser.Text      := Ini.ReadString( 'Email','User'   ,'') ;
+//      edtSmtpPass.Text      := Ini.ReadString( 'Email','Pass'   ,'') ;
+//      edtEmailAssunto.Text  := Ini.ReadString( 'Email','Assunto','') ;
+//      cbEmailSSL.Checked    := Ini.ReadBool(   'Email','SSL'    ,False) ;
+//
+//      EdtDsArquiv.Text      := Ini.ReadString( 'Import','DiretorioImportacao'   ,'') ;
+//      Edit3.Text            := Ini.ReadString( 'Import','DiretorioExportacao'   ,'') ;
+//      Edit4.Text            := Ini.ReadString( 'Import','TempoImpotacao'   ,'') ;
+//      RadioGroup2.ItemIndex := StrToInt(Ini.ReadString( 'Import','Importacao'   ,'')) ;
+//
+//
+//      StreamMemo := TMemoryStream.Create;
+//      Ini.ReadBinaryStream( 'Email','Mensagem',StreamMemo) ;
+//      mmEmailMsg.Lines.LoadFromStream(StreamMemo);
+//      StreamMemo.Free;
+//  finally
+//     Ini.Free ;
+//  end;
+//
+//end;
 
 procedure TForm1.LoadConsulta201(XML: String);
 var
@@ -816,7 +816,7 @@ end;
 procedure TForm1.FormCreate(Sender: TObject);
 begin
       LerConfiguracao;
-      tsNFe.PageControl.Visible := true;
+//      tsNFe.PageControl.Visible := true;
       TabSheet1.TabVisible      := false;
       SQLConnection1.Connected := true;
       if Edit4.Text <> '' then
@@ -838,92 +838,18 @@ procedure TForm1.btnStatusServClick(Sender: TObject);
     RetWS : AnsiString;
 begin
       gerarDadosInicial;
-      RetWS := StatusServico(NrSenha,NrCertif,CdEstado,TpAmbiente,BoVisualizar);
+      RetWS := ACBrNFe_StatusServico(NrSenha,NrCertif,CdEstado,TpAmbiente,BoVisualizar);
       MemoResp.Lines.Text :=  RetWS;
       memoRespWS.Lines.Text :=  UTF8Encode(RetWS);
       LoadXML(MemoResp, WBResposta);
       LoadConsulta201(RetWS);
 end;
-
-procedure TForm1.btnConsultarClick(Sender: TObject);
-begin
-  OpenDialog1.Title := 'Selecione a NFE';
-  OpenDialog1.DefaultExt := '*-nfe.XML';
-  OpenDialog1.Filter := 'Arquivos NFE (*-nfe.XML)|*-nfe.XML|Arquivos XML (*.XML)|*.XML|Todos os Arquivos (*.*)|*.*';
-  OpenDialog1.InitialDir := ACBrNFe1.Configuracoes.Geral.PathSalvar;
-  if OpenDialog1.Execute then
-  begin
-    ACBrNFe1.NotasFiscais.Clear;
-    ACBrNFe1.NotasFiscais.LoadFromFile(OpenDialog1.FileName);
-    ACBrNFe1.Consultar;
-    ShowMessage(ACBrNFe1.WebServices.Consulta.Protocolo);
-    MemoResp.Lines.Text := UTF8Encode(ACBrNFe1.WebServices.Consulta.RetWS);
-    memoRespWS.Lines.Text := UTF8Encode(ACBrNFe1.WebServices.Consulta.RetornoWS);
-    LoadXML(MemoResp, WBResposta);
-    LoadConsulta201(ACBrNFe1.WebServices.Consulta.RetWS);
-  end;
-end;
-
-procedure TForm1.btnCancNFClick(Sender: TObject);
-var
-  idLote,vAux : String;
-begin
-  OpenDialog1.Title := 'Selecione a NFE';
-  OpenDialog1.DefaultExt := '*-nfe.XML';
-  OpenDialog1.Filter := 'Arquivos NFE (*-nfe.XML)|*-nfe.XML|Arquivos XML (*.XML)|*.XML|Todos os Arquivos (*.*)|*.*';
-  OpenDialog1.InitialDir := ACBrNFe1.Configuracoes.Geral.PathSalvar;
-  if OpenDialog1.Execute then
-  begin
-    ACBrNFe1.NotasFiscais.Clear;
-    ACBrNFe1.NotasFiscais.LoadFromFile(OpenDialog1.FileName);
-
-    idLote := '1';
-    if not(InputQuery('WebServices Eventos: Cancelamento', 'Identificador de controle do Lote de envio do Evento', idLote)) then
-       exit;
-    if not(InputQuery('WebServices Eventos: Cancelamento', 'Justificativa', vAux)) then
-       exit;
-    ACBrNFe1.EventoNFe.Evento.Clear;
-    ACBrNFe1.EventoNFe.idLote := StrToInt(idLote) ;
-    with ACBrNFe1.EventoNFe.Evento.Add do
-    begin
-     infEvento.dhEvento := now;
-     infEvento.tpEvento := teCancelamento;
-     infEvento.detEvento.xJust := vAux;
-    end;
-    ACBrNFe1.EnviarEventoNFe(StrToInt(idLote));
-
-    MemoResp.Lines.Text :=  UTF8Encode(ACBrNFe1.WebServices.EnvEvento.RetWS);
-    memoRespWS.Lines.Text :=  UTF8Encode(ACBrNFe1.WebServices.EnvEvento.RetornoWS);
-    LoadXML(MemoResp, WBResposta);
-    ShowMessage(IntToStr(ACBrNFe1.WebServices.EnvEvento.cStat));
-    ShowMessage(ACBrNFe1.WebServices.EnvEvento.EventoRetorno.retEvento.Items[0].RetInfEvento.nProt);
-
-  end;
-end;
-
-procedure TForm1.btnValidarXMLClick(Sender: TObject);
-begin
-  OpenDialog1.Title := 'Selecione a NFE';
-  OpenDialog1.DefaultExt := '*-nfe.XML';
-  OpenDialog1.Filter := 'Arquivos NFE (*-nfe.XML)|*-nfe.XML|Arquivos XML (*.XML)|*.XML|Todos os Arquivos (*.*)|*.*';
-  OpenDialog1.InitialDir := ACBrNFe1.Configuracoes.Geral.PathSalvar;
-  if OpenDialog1.Execute then
-  begin
-    ACBrNFe1.NotasFiscais.Clear;
-    ACBrNFe1.NotasFiscais.LoadFromFile(OpenDialog1.FileName);
-    ACBrNFe1.NotasFiscais.Valida;
-    if ACBrNFe1.NotasFiscais.Items[0].Alertas <> '' then
-      MemoDados.Lines.Add('Alertas: '+ACBrNFe1.NotasFiscais.Items[0].Alertas);
-    showmessage('Nota Fiscal Eletrônica Valida');
-  end;
-end;
-
 procedure TForm1.Button1Click(Sender: TObject);
 begin
 
       gerarDadosInicial;
       NrChaDoc := Edit2.Text;
-      xml.data := ListarNotasManifesto(NrSenha,NrCertif,CdEstado,TpAmbiente,BoVisualizar,NrChaDoc,CjEmpres,2);
+      xml := ACBrNFe_ListarNotasManifesto(NrSenha,NrCertif,CdEstado,TpAmbiente,BoVisualizar,NrChaDoc,CjEmpres,2);
       xml.Open;
 
       DataSource1.DataSet := xml;
@@ -934,8 +860,8 @@ end;
 
 procedure TForm1.Button2Click(Sender: TObject);
 begin
-      tsNFe.PageControl.Visible := true;
-      PageControl3.ActivePage := tsNFe;
+      TabSheet15.PageControl.Visible := true;
+      PageControl3.ActivePage := TabSheet15;
       Panel3.Height := 432;
       PageControl2.Align := alClient;
 
@@ -998,7 +924,7 @@ end;
 procedure TForm1.btnNfeDestinadasClick(Sender: TObject);
 begin        // NfeDestinadas(NrSenha,NrCertificado,uf,CNPJ, IndNFe, IndEmi, ultNSU:String): OleVariant;
   gerarDadosInicial;
-  xml.data := NfeDestinadas(NrSenha,NrCertif,CdEstado,CjEmpres,'2','0','0',TpAmbiente,BoVisualizar);
+  xml.data := ACBrNFe_NfeDestinadas(NrSenha,NrCertif,CdEstado,CjEmpres,'2','0','0',TpAmbiente,BoVisualizar);
   xml.Open;
   DataSource1.DataSet := xml;
 end;
@@ -1214,7 +1140,7 @@ var
     Chave, idLote, CNPJ, Protocolo, Justificativa : string;
 begin
       if gTipe = 1 then
-          RetWS := ConsultaNFeChave(NrSenha,NrCertif,CdEstado,Edit1.Text,TpAmbiente,BoVisualizar)
+          RetWS := ACBrNFe_ConsultaNFeChave(NrSenha,NrCertif,CdEstado,Edit1.Text,TpAmbiente,BoVisualizar)
       else if gTipe = 2 then
       begin
           Protocolo:='';
@@ -1223,7 +1149,7 @@ begin
           Justificativa := 'Justificativa do Cancelamento';
           if not(InputQuery('WebServices Eventos: Cancelamento', 'Justificativa do Cancelamento', Justificativa)) then
          exit;
-          CancelarNFePelaChave(NrSenha,NrCertif,CdEstado,Edit1.Text,'0',edtEmitCNPJ.Text,Protocolo,Justificativa,TpAmbiente,BoVisualizar);
+          ACBrNFe_CancelarNFePelaChave(NrSenha,NrCertif,CdEstado,Edit1.Text,'0',edtEmitCNPJ.Text,Protocolo,Justificativa,TpAmbiente,BoVisualizar);
       end;
       PageControl3.ActivePage := TabSheet1;
 end;
@@ -1247,7 +1173,7 @@ begin
         exit;
 
       Documento :=  Trim(DFeUtil.LimpaNumero(Documento));
-      Return := ConsCadDestinatario(NrSenha,NrCertif,UF,Trim(DFeUtil.LimpaNumero(Documento)),TpAmbiente,BoVisualizar);
+      Return := ACBrNFe_ConsCadDestinatario(NrSenha,NrCertif,UF,Trim(DFeUtil.LimpaNumero(Documento)),TpAmbiente,BoVisualizar);
 
       MemoResp.Lines.Text :=  UTF8Encode(Return);
       memoRespWS.Lines.Text :=  UTF8Encode(Return);
@@ -1325,7 +1251,7 @@ var
 begin
       if not(InputQuery('Consultar Recibo Lote', 'Número do Recibo', aux)) then
       exit;
-      MemoResp.Lines.Text :=  UTF8Encode(ConsultarReciboLoteNFe(NrSenha,NrCertif,CdEstado,TpAmbiente,BoVisualizar,StrToInt(aux)));
+      MemoResp.Lines.Text :=  UTF8Encode(ACBrNFe_ConsultarReciboLoteNFe(NrSenha,NrCertif,CdEstado,TpAmbiente,BoVisualizar,StrToInt(aux)));
       memoRespWS.Lines.Text :=  UTF8Encode(ACBrNFe1.WebServices.Recibo.RetornoWS);
       LoadXML(MemoResp, WBResposta);
 end;
@@ -1983,7 +1909,7 @@ end;
 
 procedure TForm1.btnConsultarChaveClick(Sender: TObject);
 begin
-      tsNFe.PageControl.Visible := true;
+      TabSheet15.PageControl.Visible := true;
       PageControl3.ActivePage := TabSheet13;
       Panel3.Height := 100;
       PageControl2.Align := alClient;
@@ -1992,7 +1918,7 @@ end;
 
 procedure TForm1.btnCancelarChaveClick(Sender: TObject);
 begin
-      tsNFe.PageControl.Visible := true;
+      TabSheet15.PageControl.Visible := true;
       PageControl3.ActivePage := TabSheet13;
       Panel3.Height := 100;
       PageControl2.Align := alClient;

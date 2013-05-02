@@ -4,35 +4,36 @@ interface
 uses  SysUtils, Forms, Classes, Dialogs, Windows, ComCtrls, DBClient, DB,
       Variants, BrvExcel, BrvClientDataSet, Graphics, CheckLst,ACBrNFe, pcnConversao,
       ACBrNFeDANFEClass, ACBrNFeDANFERave, ACBrUtil,pcnNFeW, pcnNFeRTXT, pcnAuxiliar, ACBrDFeUtil,
-      XMLIntf, XMLDoc, BrvXml;
+      XMLIntf, XMLDoc, BrvXml, pnfsConversao,ACBrNFSe, ACBrNFSeDANFSeClass, ACBrNFSeDANFSeQRClass, pnfsNFSe,
+      ACBrCTeDACTEClass,ACBrCTe,Controls,SHDocVw,IniFiles, ShellAPI;
 
 function ListarXmlDiretorio(NrSenha,NrCertificado,uf,diretorioOrigem,DiretorioMove:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):TClientDataSet;
 
-function ListarNotasManifesto(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;XmlRetorno: AnsiString;CjEmpres:String;Operacao:Integer): OleVariant;
+function ACBrNFe_ListarNotasManifesto(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;XmlRetorno: AnsiString;CjEmpres:String;Operacao:Integer): TClientDataSet;
 
-procedure BuscarNFePelaChave(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;pCpXML:TClientDataSet);
+procedure ACBrNFe_BuscarNFePelaChave(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;pCpXML:TClientDataSet);
 
 procedure IniciarVariaveisGlobal();
 
-function gravarNFe(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;CcXml:TClientDataSet):Boolean;
+function ACBrNFe_gravarNFe(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;CcXml:TClientDataSet):Boolean;
 
-function Mudar_e_GravarStatusManifesto(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;Chave,CjEmpres:String;CdEventOp:Integer):Boolean;
+function ACBrNFe_Mudar_e_GravarStatusManifesto(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;Chave,CjEmpres:String;CdEventOp:Integer):Boolean;
 
-function DownloadNFe(NrSenha,NrCertificado,Chave,CjEmpres:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;CdEventOp :Integer):Boolean;
+function ACBrNFe_DownloadNFe(NrSenha,NrCertificado,Chave,CjEmpres:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;CdEventOp :Integer):Boolean;
 
-function StatusServico(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
+function ACBrNFe_StatusServico(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
 
-function ConsultaNFeChave(NrSenha,NrCertificado,uf,Chave:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
+function ACBrNFe_ConsultaNFeChave(NrSenha,NrCertificado,uf,Chave:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
 
-function CancelarNFePelaChave(NrSenha,NrCertificado,uf,Chave,idLote,CNPJ,Protocolo,Justificativa:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
+function ACBrNFe_CancelarNFePelaChave(NrSenha,NrCertificado,uf,Chave,idLote,CNPJ,Protocolo,Justificativa:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
 
-function ConsultarReciboLoteNFe(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;NrLote :Integer):AnsiString;
+function ACBrNFe_ConsultarReciboLoteNFe(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;NrLote :Integer):AnsiString;
 
-function ConsCadDestinatario(NrSenha,NrCertificado,CdUF,CjEmpres:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
+function ACBrNFe_ConsCadDestinatario(NrSenha,NrCertificado,CdUF,CjEmpres:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
 
-function GerarPDFNFe(NrSenha,NrCertificado,CdUF:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;XMLNFE:String):AnsiString;
+function ACBrNFe_GerarPDFNFe(NrSenha,NrCertificado,CdUF:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;XMLNFE:String):AnsiString;
 
-function ImprimirDanfe(NrSenha,NrCertificado,CdUF,XMLNFE:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
+function ACBrNFe_ImprimirDanfe(NrSenha,NrCertificado,CdUF,XMLNFE:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
 
 function EnviarEmail(const NrSenha,NrCertificado,CdUF:String;sSmtpHost,
                                       sSmtpPort,
@@ -52,26 +53,306 @@ function EnviarEmail(const NrSenha,NrCertificado,CdUF:String;sSmtpHost,
                                       TLS : Boolean = True;
                                       UsarThread: Boolean = True):AnsiString;
 
-function CartaDeCorrecao(NrSenha,NrCertificado,CdUF,Chave, idLote, CNPJ, nSeqEvento, Correcao:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
+function ACBrNFe_CartaDeCorrecao(NrSenha,NrCertificado,CdUF,Chave, idLote, CNPJ, nSeqEvento, Correcao:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
 
 procedure Func_CDS_Duplica(Cds: TClientDataSet;CamposExcecoes:String = '');
 
-function NfeDestinadas(NrSenha,NrCertificado,uf,CNPJ, IndNFe, IndEmi, ultNSU:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean): OleVariant;
+function ACBrNFe_NfeDestinadas(NrSenha,NrCertificado,uf,CNPJ, IndNFe, IndEmi, ultNSU:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean): OleVariant;
 
 procedure inicializetion(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean);
 
 procedure CreateTableInfoNFe();
 
+procedure LerConfiguracao();
+
+//======================== NFSe=====================================================================
+
+procedure ACBrNFSe_ConfiguraComponente(edtCaminho,edtSenha,edtNumSerie,edtPathLogs,edtSchemas,edtLogoMarca,edtPrestLogo,edtPrefeitura,
+            edtCodCidade,edtSenhaWeb,edtUserWeb,edtProxyHost,edtProxyPorta,edtProxyUser,edtProxySenha
+            :String;ckSalvar,ckVisualizar:Boolean;rgTipoAmb:Integer);
+
+ function ACBrNFSe_GerarRPS():AnsiString;
+
+ function ACBrNFSe_ImprimirNFSe(Xml : AnsiString):AnsiString;
+
+ function ACBrNFSe_ConsultarSitLote(Protocolo,EmitCNPJ,EmitIM : String):AnsiString;
+
+ function ACBrNFSe_ConsultarNFSePeriodo(DataInicial,DataFinal,EmitCNPJ,EmitIM:String):AnsiString;
+
+ function ACBrNFSe_CancNFSe(XML,Codigo:AnsiString):AnsiString;
+
+ function ACBrNFSe_ConsultarNFSeRPS(XML:AnsiString):AnsiString;
+
+ //======================================CTe========================================================
+
+ function ACBrCTe_ValidarXML(FileName:String):Boolean;
+
+ function ACBrCTe_ImportarXML(FileName:String):AnsiString;
+
+ function ACBrCTe_Imprimir(Xmls:AnsiString):AnsiString;
+
+ function ACBrCTe_GerarPDF(Xmls:AnsiString):AnsiString;
+
+ function ACBrCTe_ConsultarRecibo(NrLote:String):AnsiString;
+
+ function ACBrCTe_CancCTeXml(XmlS,Justificativa:AnsiString):AnsiString;
+
+ function ACBrCTe_ConsultarChave(vChave : String):AnsiString;
+
+ function ACBrCTe_Consultar(XMLS:AnsiString):AnsiString;
+
+ function ACBrCTe_Status(Sender: TObject):AnsiString;
+
+
 implementation
 
-uses pcnNFe, ACBrNFeNotasFiscais, DateUtils, ACBrNFeUtil;
+uses pcnNFe, ACBrNFeNotasFiscais, DateUtils, ACBrNFeUtil, FileCtrl,ACBrCTeConhecimentos,ACBrCTeUtil;
 
-var CcxmlSet  :TClientDataSet;
-    CpNfeDet  : TClientDataSet;
-    CpNFeFat  : TClientDataSet;
-    CpNFePro  : TClientDataSet;
-    XML       : TBrvXML;
-    ACBrNFe   : TACBrNFe;
+var CcxmlSet    :TClientDataSet;
+    CpNfeDet    : TClientDataSet;
+    CpNFeFat    : TClientDataSet;
+    CpNFePro    : TClientDataSet;
+    XML         : TBrvXML;
+    ACBrNFe     : TACBrNFe;
+    ACBrNFSe    : TACBrNFSe;
+    ACBrCTe     : TACBrCTe;
+    edtEmitCNPJ : String;
+    edtEmitIE   : String;
+    edtEmitCEP  : String;
+    edtEmitUF   : String;
+
+
+procedure LerConfiguracao;
+var
+ IniFile    : String;
+ Ini        : TIniFile;
+ Ok         : Boolean;
+ StreamMemo : TMemoryStream;
+begin
+      IniFile := ChangeFileExt( Application.ExeName, '.ini');
+      IniciarVariaveisGlobal;
+      Ini := TIniFile.Create( IniFile );
+      try
+          IniciarVariaveisGlobal;
+          ACBrCTe.Configuracoes.Certificados.NumeroSerie  := Ini.ReadString( 'Certificado','NumeroSerie' ,'');
+          ACBrCTe.Configuracoes.Certificados.Senha        := Ini.ReadString( 'Certificado','Senha'   ,'');
+          ACBrCTe.Configuracoes.Geral.FormaEmissao := StrToTpEmis(OK,IntToStr(Ini.ReadInteger('Geral','FormaEmissao',0)+1));
+          ACBrCTe.Configuracoes.Geral.Salvar       := Ini.ReadBool(   'Geral','Salvar'      ,True);
+          ACBrCTe.Configuracoes.Geral.PathSalvar   := Ini.ReadString( 'Geral','PathSalvar'  ,'');
+          ACBrCTe.Configuracoes.WebServices.UF         := Ini.ReadString('WebService','UF','SP');
+          ACBrCTe.Configuracoes.WebServices.Ambiente   := StrToTpAmb(Ok,IntToStr(Ini.ReadInteger('WebService','Ambiente'  ,0)+1));
+          ACBrCTe.Configuracoes.WebServices.Visualizar := Ini.ReadBool(    'WebService','Visualizar',False);
+          ACBrCTe.Configuracoes.WebServices.ProxyHost := Ini.ReadString( 'Proxy','Host'   ,'');
+          ACBrCTe.Configuracoes.WebServices.ProxyPort := Ini.ReadString( 'Proxy','Porta'  ,'');
+          ACBrCTe.Configuracoes.WebServices.ProxyUser := Ini.ReadString( 'Proxy','User'   ,'');
+          ACBrCTe.Configuracoes.WebServices.ProxyPass := Ini.ReadString( 'Proxy','Pass'   ,'');
+          if ACBrCTe.DACTe <> nil then
+          begin
+                ACBrCTe.DACTe.TipoDACTe := StrToTpImp(OK,IntToStr(Ini.ReadInteger( 'Geral','DACTE'       ,0)+1));
+                ACBrCTe.DACTe.Logo      := Ini.ReadString( 'Geral','LogoMarca'   ,'');
+                ACBrCTe.DACTe.PathPDF   := Ini.ReadString( 'Geral','PathSalvar'  ,'');
+          end;
+
+          edtEmitCNPJ       := Ini.ReadString( 'Emitente','CNPJ'       ,'');
+          edtEmitIE         := Ini.ReadString( 'Emitente','IE'         ,'');
+          edtEmitUF         := Ini.ReadString( 'Emitente','UF'         ,'');
+          StreamMemo.Free;
+ finally
+  Ini.Free;
+ end;
+end;
+
+function ACBrCTe_ValidarXML(FileName:String):Boolean;
+begin
+      ACBrCTe.Conhecimentos.Clear;
+      ACBrCTe.Conhecimentos.LoadFromFile(FileName);
+      ACBrCTe.Conhecimentos.Valida;
+      result :=  true;
+end;
+
+function ACBrCTe_ImportarXML(FileName:String):AnsiString;
+
+begin
+
+   ACBrCTe.Conhecimentos.Clear;
+   ACBrCTe.Conhecimentos.LoadFromFile(FileName);
+
+   result := ACBrCTe.Conhecimentos.Items[0].XML;
+end;
+
+function ACBrCTe_Imprimir(Xmls:AnsiString):AnsiString;
+begin
+   ACBrCTe.Conhecimentos.Clear;
+   ACBrCTe.Conhecimentos.LoadFromFile(Xmls);
+//   if ACBrCTe.Conhecimentos.Items[0].CTe.Ide.tpEmis = teDPEC then
+//    begin
+//     ACBrCTe.WebServices.ConsultaDPEC.CTeChave := ACBrCTe.Conhecimentos.Items[0].CTe.infCTe.ID;
+//     ACBrCTe.WebServices.ConsultaDPEC.Executar;
+//     ACBrCTe.DACTe.ProtocoloCTe := ACBrCTe.WebServices.ConsultaDPEC.nRegDPEC +
+//       ' '+ DateTimeToStr(ACBrCTe1.WebServices.ConsultaDPEC.retDPEC.dhRegDPEC);
+//    end;
+   ACBrCTe.Conhecimentos.Imprimir;
+end;
+
+function ACBrCTe_GerarPDF(Xmls:AnsiString):AnsiString;
+begin
+      ACBrCTe.Conhecimentos.Clear;
+      ACBrCTe.Conhecimentos.LoadFromFile(Xmls);
+      ACBrCTe.Conhecimentos.ImprimirPDF;
+end;
+
+function ACBrCTe_ConsultarRecibo(NrLote:String):AnsiString;
+begin
+      ACBrCTe.WebServices.Recibo.Recibo := NrLote;
+      ACBrCTe.WebServices.Recibo.Executar;
+      Result := UTF8Encode(ACBrCTe.WebServices.Recibo.RetWS);
+end;
+
+function ACBrCTe_CancCTeXml(XmlS,Justificativa:AnsiString):AnsiString;
+begin
+      ACBrCTe.Conhecimentos.Clear;
+      ACBrCTe.Conhecimentos.LoadFromFile(XmlS);
+      ACBrCTe.Cancelamento(Justificativa);
+      Result := UTF8Encode(ACBrCTe.WebServices.Cancelamento.RetWS);
+end;
+
+function ACBrCTe_ConsultarChave(vChave : String):AnsiString;
+begin
+      ACBrCTe.WebServices.Consulta.CTeChave := vChave;
+      ACBrCTe.WebServices.Consulta.Executar;
+      Result := ACBrCTe.WebServices.Consulta.RetWS;
+end;
+
+function ACBrCTe_Consultar(XMLS:AnsiString):AnsiString;
+begin
+     ACBrCTe.Conhecimentos.Clear;
+     ACBrCTe.Conhecimentos.LoadFromFile(XMLS);
+     ACBrCTe.Consultar;
+     Result := ACBrCTe.WebServices.Consulta.RetWS;
+end;
+
+function ACBrCTe_Status(Sender: TObject):AnsiString;
+begin
+      ACBrCTe.WebServices.StatusServico.Executar;
+      Result := UTF8Encode(ACBrCTe.WebServices.StatusServico.RetWS);
+end;
+
+function ACBrNFSe_ConsultarNFSeRPS(XML:AnsiString):AnsiString;
+begin
+       ACBrNFSe.NotasFiscais.Clear;
+       ACBrNFSe.NotasFiscais.LoadFromFile(XML);
+
+       ACBrNFSe.ConsultarNFSeporRps(ACBrNFSe.NotasFiscais.Items[0].NFSe.IdentificacaoRps.Numero,
+                                    ACBrNFSe.NotasFiscais.Items[0].NFSe.IdentificacaoRps.Serie,
+                                    TipoRPSToStr(ACBrNFSe.NotasFiscais.Items[0].NFSe.IdentificacaoRps.Tipo),
+                                    ACBrNFSe.NotasFiscais.Items[0].NFSe.Prestador.Cnpj,
+                                    ACBrNFSe.NotasFiscais.Items[0].NFSe.Prestador.InscricaoMunicipal);
+       Result := ACBrNFSe.WebServices.ConsNfseRps.RetWS
+end;
+
+function ACBrNFSe_CancNFSe(XML,Codigo:AnsiString):AnsiString;
+begin
+      ACBrNFSe.NotasFiscais.Clear;
+      ACBrNFSe.NotasFiscais.LoadFromFile(XML);
+
+   // Codigo de Cancelamento
+   // 1 - Erro de emissão
+   // 2 - Serviço não concluido
+   // 3 - RPS Cancelado na Emissão
+//   ACBrNFSe1.WebServices.CancelaNFSe(Codigo, '1', '03310700000170', '0306223', '0');
+     ACBrNFSe.CancelarNFSe(Codigo);
+     Result := ACBrNFSe.WebServices.CancNfse.CodigoCancelamento;
+end;
+
+function ACBrNFSe_ConsultarLote(Lote,Protocolo:String):AnsiString;
+begin
+      ACBrNFSe.ConsultarLoteRps(Lote, Protocolo);
+      Result := UTF8Encode(ACBrNFSe.WebServices.ConsLote.RetWS);
+end;
+
+function ACBrNFSe_ConsultarNFSePeriodo(DataInicial,DataFinal,EmitCNPJ,EmitIM:String):AnsiString;
+begin
+      ACBrNFSe.ConsultarNFSe(EmitCNPJ, EmitIM, StrToDate(DataInicial), StrToDate(DataFinal));
+      Result :=  UTF8Encode(ACBrNFSe.WebServices.ConsNfse.RetWS);
+
+end;
+
+function ACBrNFSe_ConsultarSitLote(Protocolo,EmitCNPJ,EmitIM : String):AnsiString;
+begin
+      ACBrNFSe.ConsultarSituacao(EmitCNPJ,EmitIM, Protocolo);
+      Result := UTF8Encode(ACBrNFSe.WebServices.ConsSitLote.RetWS);
+end;
+
+function ACBrNFSe_GerarRPS():AnsiString;
+var
+ vAux : String;
+begin
+      if not(InputQuery('Gerar RPS', 'Numero do RPS', vAux))
+      then exit;
+      ACBrNFSe.NotasFiscais.Clear;
+      //GerarNFSe(vAux);
+      ACBrNFSe.NotasFiscais.Items[0].SaveToFile;
+      Result := ACBrNFSe.NotasFiscais.Items[0].NomeArq;
+end;
+
+function ACBrNFSe_ImprimirNFSe(Xml : AnsiString):AnsiString;
+begin
+      ACBrNFSe.NotasFiscais.Clear;
+      ACBrNFSe.NotasFiscais.LoadFromFile(Xml);
+      ACBrNFSe.NotasFiscais.Imprimir;
+      Result := ACBrNFSe.NotasFiscais.Items[0].NFSe.CodigoVerificacao
+end;
+
+procedure ACBrNFSe_ConfiguraComponente(edtCaminho,edtSenha,edtNumSerie,edtPathLogs,edtSchemas,edtLogoMarca,edtPrestLogo,edtPrefeitura,
+            edtCodCidade,edtSenhaWeb,edtUserWeb,edtProxyHost,edtProxyPorta,edtProxyUser,edtProxySenha
+            :String;ckSalvar,ckVisualizar:Boolean;rgTipoAmb:Integer);
+var
+ PathMensal: String;
+ Ok : Boolean;
+begin
+     {$IFDEF ACBrNFSeOpenSSL}
+       ACBrNFSe.Configuracoes.Certificados.Certificado := edtCaminho;
+       ACBrNFSe.Configuracoes.Certificados.Senha       := edtSenha;
+     {$ELSE}
+       ACBrNFSe.Configuracoes.Certificados.NumeroSerie := edtNumSerie;
+     {$ENDIF}
+
+     ACBrNFSe.Configuracoes.Arquivos.AdicionarLiteral:=True;
+     ACBrNFSe.Configuracoes.Arquivos.EmissaoPathNFSe:=True;
+     ACBrNFSe.Configuracoes.Arquivos.PastaMensal:=True;
+     ACBrNFSe.Configuracoes.Arquivos.PathCan:=edtPathLogs;
+     ACBrNFSe.Configuracoes.Arquivos.PathNFSe:=edtPathLogs;
+     ACBrNFSe.Configuracoes.Arquivos.Salvar:=True;
+
+     PathMensal:=ACBrNFSe.Configuracoes.Arquivos.GetPathNFSe(0);
+
+     ACBrNFSe.Configuracoes.Geral.PathSchemas := edtSchemas;
+     ACBrNFSe.Configuracoes.Geral.Salvar      := ckSalvar;
+     ACBrNFSe.Configuracoes.Geral.PathSalvar  := edtPathLogs;
+
+     ACBrNFSe.Configuracoes.WebServices.CodigoMunicipio := StrToIntDef(edtCodCidade, 0);
+     ACBrNFSe.Configuracoes.WebServices.Ambiente        := StrToTpAmb(Ok, IntToStr(rgTipoAmb+1));
+     ACBrNFSe.Configuracoes.WebServices.Visualizar      := ckVisualizar;
+     ACBrNFSe.Configuracoes.WebServices.SenhaWeb        := edtSenhaWeb;
+     ACBrNFSe.Configuracoes.WebServices.UserWeb         := edtUserWeb;
+
+     ACBrNFSe.Configuracoes.WebServices.ProxyHost := edtProxyHost;
+     ACBrNFSe.Configuracoes.WebServices.ProxyPort := edtProxyPorta;
+     ACBrNFSe.Configuracoes.WebServices.ProxyUser := edtProxyUser;
+     ACBrNFSe.Configuracoes.WebServices.ProxyPass := edtProxySenha;
+
+     ACBrNFSe.Configuracoes.WebServices.SetConfigMunicipio(ACBrNFSe.Configuracoes.Geral.PathSchemas);
+
+     if ACBrNFSe.DANFSe <> nil then
+      begin
+       ACBrNFSe.DANFSe.Logo       := edtLogoMarca;
+       ACBrNFSe.DANFSe.PrestLogo  := edtPrestLogo;
+       ACBrNFSe.DANFSe.Prefeitura := edtPrefeitura;
+      end;
+
+ //lblSchemas.Caption := ACBrNFSe.Configuracoes.WebServices.xProvedor;
+end;
+
 
 procedure IniciarVariaveisGlobal();
 begin
@@ -82,6 +363,8 @@ begin
           CpNFeFat  := TClientDataSet.Create(nil);
           CpNFePro  := TClientDataSet.Create(nil);
           ACBrNFe   := TACBrNFe.Create(nil);
+          ACBrNFSe  := TACBrNFSe.Create(nil);
+          ACBrCTe   := TACBrCTe.Create(nil);
           XML.BrCdsNfeDet := CpNfeDet;
           XML.BrCdsNfeFat := CpNFeFat;
           XML.BrCdsNfePro := CpNFePro;
@@ -149,7 +432,7 @@ begin
 end;
 
 
-function NfeDestinadas(NrSenha,NrCertificado,uf,CNPJ, IndNFe, IndEmi, ultNSU:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean): OleVariant;
+function ACBrNFe_NfeDestinadas(NrSenha,NrCertificado,uf,CNPJ, IndNFe, IndEmi, ultNSU:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean): OleVariant;
 var
     ok: boolean;
     lStlAnexo :AnsiString;
@@ -162,7 +445,7 @@ begin
                                UltNSu);
       lStlAnexo := AcbrNFe.WebServices.ConsNFeDest.retConsNFeDest.XML;
 
-      ListarNotasManifesto(NrSenha,NrCertificado,uf,TpAmbiente,BoVisualizar,AcbrNFe.WebServices.ConsNFeDest.retConsNFeDest.XML,CNPJ,1);
+      ACBrNFe_ListarNotasManifesto(NrSenha,NrCertificado,uf,TpAmbiente,BoVisualizar,AcbrNFe.WebServices.ConsNFeDest.retConsNFeDest.XML,CNPJ,1);
 
 end;
 
@@ -189,7 +472,7 @@ begin
 
 end ;
 
-function StatusServico(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
+function ACBrNFe_StatusServico(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
 begin
       try
           inicializetion(NrSenha,NrCertificado,uf,TpAmbiente,BoVisualizar);
@@ -200,7 +483,7 @@ begin
       end;
 end;
 
-function ConsultaNFeChave(NrSenha,NrCertificado,uf,Chave:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
+function ACBrNFe_ConsultaNFeChave(NrSenha,NrCertificado,uf,Chave:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
 begin
       try
           inicializetion(NrSenha,NrCertificado,uf,TpAmbiente,BoVisualizar);
@@ -212,10 +495,7 @@ begin
 
 end;
 
-function CancelarNFePelaChave(NrSenha,NrCertificado,uf,Chave,idLote,CNPJ,Protocolo,Justificativa:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
-
-var
-    ACBrNFe   : TACBrNFe;
+function ACBrNFe_CancelarNFePelaChave(NrSenha,NrCertificado,uf,Chave,idLote,CNPJ,Protocolo,Justificativa:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
 begin
       try
           IniciarVariaveisGlobal;
@@ -238,7 +518,7 @@ begin
 
 end;
 
-function ConsultarReciboLoteNFe(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;NrLote :Integer):AnsiString;
+function ACBrNFe_ConsultarReciboLoteNFe(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;NrLote :Integer):AnsiString;
 begin
       try
           IniciarVariaveisGlobal;
@@ -252,9 +532,7 @@ begin
 
 end;
 
-function ConsCadDestinatario(NrSenha,NrCertificado,CdUF,CjEmpres:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
-var
-    ACBrNFe   : TACBrNFe;
+function ACBrNFe_ConsCadDestinatario(NrSenha,NrCertificado,CdUF,CjEmpres:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
 begin
       try
           IniciarVariaveisGlobal;
@@ -272,7 +550,7 @@ begin
 
 end;
 
-function GerarPDFNFe(NrSenha,NrCertificado,CdUF:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;XMLNFE:String):AnsiString;
+function ACBrNFe_GerarPDFNFe(NrSenha,NrCertificado,CdUF:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;XMLNFE:String):AnsiString;
 begin
       try
            IniciarVariaveisGlobal;
@@ -284,7 +562,7 @@ begin
 
 end;
 
-function ImprimirDanfe(NrSenha,NrCertificado,CdUF,XMLNFE:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
+function ACBrNFe_ImprimirDanfe(NrSenha,NrCertificado,CdUF,XMLNFE:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
 begin
       try
           IniciarVariaveisGlobal;
@@ -322,6 +600,16 @@ function EnviarEmail(const NrSenha,NrCertificado,CdUF:String;sSmtpHost,
                                       NomeRemetente: String = '';
                                       TLS : Boolean = True;
                                       UsarThread: Boolean = True):AnsiString;
+begin
+      try
+          ACBrNFe.WebServices.StatusServico.Executar;
+          Result := UTF8Encode(ACBrNFe.WebServices.StatusServico.RetWS);
+      finally
+          FreeAndNil(ACBrNFe);
+      end;
+
+end;
+function ACBrNFe_CartaDeCorrecao(NrSenha,NrCertificado,CdUF,Chave, idLote, CNPJ, nSeqEvento, Correcao:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
 var
     ACBrNFe   : TACBrNFe;
 begin
@@ -333,20 +621,8 @@ begin
       end;
 
 end;
-function CartaDeCorrecao(NrSenha,NrCertificado,CdUF,Chave, idLote, CNPJ, nSeqEvento, Correcao:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
-var
-    ACBrNFe   : TACBrNFe;
-begin
-      try
-          ACBrNFe.WebServices.StatusServico.Executar;
-          Result := UTF8Encode(ACBrNFe.WebServices.StatusServico.RetWS);
-      finally
-          FreeAndNil(ACBrNFe);
-      end;
 
-end;
-
-function ListarNotasManifesto(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;XmlRetorno: AnsiString;CjEmpres:String;Operacao:Integer): OleVariant;
+function ACBrNFe_ListarNotasManifesto(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;XmlRetorno: AnsiString;CjEmpres:String;Operacao:Integer): TClientDataSet;
 var lStlAnexo : AnsiString;
     lDsChaDoc : AnsiString;
     pCpXML    : TClientDataSet;
@@ -380,15 +656,15 @@ begin
                 pCpXML.FieldByName('CjEmpres').AsString := CjEmpres;
                 pCpXML.Post;
           end;
-          BuscarNFePelaChave(NrSenha,NrCertificado,uf,TpAmbiente,BoVisualizar,pCpXML);
-          Result := CpNfeDet.Data;
+          ACBrNFe_BuscarNFePelaChave(NrSenha,NrCertificado,uf,TpAmbiente,BoVisualizar,pCpXML);
+          Result := CpNfeDet;
       finally
          FreeAndNil(pCpXML);
       end;
 
 end;
 
-procedure BuscarNFePelaChave(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;pCpXML:TClientDataSet);
+procedure ACBrNFe_BuscarNFePelaChave(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;pCpXML:TClientDataSet);
 var
     lCpXML    : TClientDataSet;
     lNrIndice,i : Integer;
@@ -422,12 +698,12 @@ begin
       end;
 end;
 
-function gravarNFe(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;CcXml:TClientDataSet):Boolean;begin
+function ACBrNFe_gravarNFe(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;CcXml:TClientDataSet):Boolean;begin
       CcXml.Post;
       CcXml.ApplyUpdates(1);
 end;
 
-function Mudar_e_GravarStatusManifesto(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;Chave,CjEmpres:String;CdEventOp:Integer):Boolean;var
+function ACBrNFe_Mudar_e_GravarStatusManifesto(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;Chave,CjEmpres:String;CdEventOp:Integer):Boolean;var
     ACBrNFe     : TACBrNFe;
     DescEventOp : TpcnTpEvento ;
 begin
@@ -473,7 +749,7 @@ begin
       end;
 end;
 
-function DownloadNFe(NrSenha,NrCertificado,Chave,CjEmpres:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;CdEventOp :Integer):Boolean;
+function ACBrNFe_DownloadNFe(NrSenha,NrCertificado,Chave,CjEmpres:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;CdEventOp :Integer):Boolean;
 begin
 
 
