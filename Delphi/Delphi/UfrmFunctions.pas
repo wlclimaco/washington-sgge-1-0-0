@@ -7,13 +7,40 @@ uses  SysUtils, Forms, Classes, Dialogs, Windows, ComCtrls, DBClient, DB,
       XMLIntf, XMLDoc, BrvXml, pnfsConversao,ACBrNFSe, ACBrNFSeDANFSeClass, ACBrNFSeDANFSeQRClass, pnfsNFSe,
       ACBrCTeDACTEClass,ACBrCTe,Controls,SHDocVw,IniFiles, ShellAPI;
 
-function ListarXmlDiretorio(NrSenha,NrCertificado,uf,diretorioOrigem,DiretorioMove:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):TClientDataSet;
+//================================= Util======================================================
+
+procedure IniciarVariaveisGlobal();
+
+function EnviarEmail(const NrSenha,NrCertificado,CdUF:String;sSmtpHost,
+                                      sSmtpPort,
+                                      sSmtpUser,
+                                      sSmtpPasswd,
+                                      sFrom,
+                                      sTo,
+                                      sAssunto: String;
+                                      sMensagem : TStrings;
+                                      SSL : Boolean;
+                                      EnviaPDF: Boolean = true;
+                                      sCC: TStrings=nil;
+                                      Anexos:TStrings=nil;
+                                      PedeConfirma: Boolean = False;
+                                      AguardarEnvio: Boolean = False;
+                                      NomeRemetente: String = '';
+                                      TLS : Boolean = True;
+                                      UsarThread: Boolean = True):AnsiString;
+
+procedure Func_CDS_Duplica(Cds: TClientDataSet;CamposExcecoes:String = '');
+
+
+procedure inicializetion(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean);
+
+
+//================================= NFe=======================================================
+function ListarXmlDiretorio(diretorioOrigem,DiretorioMove:String):TClientDataSet;
 
 function ACBrNFe_ListarNotasManifesto(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;XmlRetorno: AnsiString;CjEmpres:String;Operacao:Integer): TClientDataSet;
 
 procedure ACBrNFe_BuscarNFePelaChave(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;pCpXML:TClientDataSet);
-
-procedure IniciarVariaveisGlobal();
 
 function ACBrNFe_gravarNFe(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;CcXml:TClientDataSet):Boolean;
 
@@ -35,35 +62,13 @@ function ACBrNFe_GerarPDFNFe(NrSenha,NrCertificado,CdUF:String;TpAmbiente:TpcnTi
 
 function ACBrNFe_ImprimirDanfe(NrSenha,NrCertificado,CdUF,XMLNFE:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
 
-function EnviarEmail(const NrSenha,NrCertificado,CdUF:String;sSmtpHost,
-                                      sSmtpPort,
-                                      sSmtpUser,
-                                      sSmtpPasswd,
-                                      sFrom,
-                                      sTo,
-                                      sAssunto: String;
-                                      sMensagem : TStrings;
-                                      SSL : Boolean;
-                                      EnviaPDF: Boolean = true;
-                                      sCC: TStrings=nil;
-                                      Anexos:TStrings=nil;
-                                      PedeConfirma: Boolean = False;
-                                      AguardarEnvio: Boolean = False;
-                                      NomeRemetente: String = '';
-                                      TLS : Boolean = True;
-                                      UsarThread: Boolean = True):AnsiString;
-
 function ACBrNFe_CartaDeCorrecao(NrSenha,NrCertificado,CdUF,Chave, idLote, CNPJ, nSeqEvento, Correcao:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
-
-procedure Func_CDS_Duplica(Cds: TClientDataSet;CamposExcecoes:String = '');
 
 function ACBrNFe_NfeDestinadas(NrSenha,NrCertificado,uf,CNPJ, IndNFe, IndEmi, ultNSU:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean): OleVariant;
 
-procedure inicializetion(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean);
-
 procedure CreateTableInfoNFe();
 
-procedure LerConfiguracao();
+procedure ACBrNFe_LerConfiguracao();
 
 //======================== NFSe=====================================================================
 
@@ -103,6 +108,8 @@ procedure ACBrNFSe_ConfiguraComponente(edtCaminho,edtSenha,edtNumSerie,edtPathLo
 
  function ACBrCTe_Status(Sender: TObject):AnsiString;
 
+ //====================================== Boleto ===================================================
+
 
 implementation
 
@@ -118,11 +125,110 @@ var CcxmlSet    :TClientDataSet;
     ACBrCTe     : TACBrCTe;
     edtEmitCNPJ : String;
     edtEmitIE   : String;
+    edtEmitIM   : String;
     edtEmitCEP  : String;
     edtEmitUF   : String;
 
 
-procedure LerConfiguracao;
+procedure ACBrNFSe_LerConfiguracao;
+var
+ IniFile    : String;
+ Ini        : TIniFile;
+ StreamMemo : TMemoryStream;
+ PathMensal : String;
+ Ok         : Boolean;
+begin
+     IniFile := ChangeFileExt( Application.ExeName, '.ini');
+
+     Ini := TIniFile.Create( IniFile );
+     try
+       ACBrNFSe.Configuracoes.Certificados.NumeroSerie  := Ini.ReadString( 'Certificado','NumSerie' ,'');
+       ACBrNFSe.Configuracoes.Certificados.Senha        := Ini.ReadString( 'Certificado','Senha'   ,'');
+       edtEmitCNPJ                                      := Ini.ReadString( 'Emitente', 'CNPJ'       , '');
+       edtEmitIM                                        := Ini.ReadString( 'Emitente', 'IM'         , '');
+       edtEmitUF                                        := Ini.ReadString( 'Emitente', 'UF'         , '');
+       ACBrNFSe.Configuracoes.Arquivos.AdicionarLiteral :=True;
+       ACBrNFSe.Configuracoes.Arquivos.EmissaoPathNFSe  :=True;
+       ACBrNFSe.Configuracoes.Arquivos.PastaMensal      :=True;
+       ACBrNFSe.Configuracoes.Arquivos.PathCan:=Ini.ReadString( 'Geral','PathSalvar'  ,'');
+       ACBrNFSe.Configuracoes.Arquivos.PathNFSe:=Ini.ReadString( 'Geral','PathSalvar'  ,'');
+       ACBrNFSe.Configuracoes.Arquivos.Salvar:=True;
+
+       PathMensal:=ACBrNFSe.Configuracoes.Arquivos.GetPathNFSe(0);
+
+       ACBrNFSe.Configuracoes.Geral.PathSchemas := Ini.ReadString( 'Proxy','Host'   ,'');
+       ACBrNFSe.Configuracoes.Geral.Salvar      := Ini.ReadBool(   'Geral','Salvar'      ,True);
+       ACBrNFSe.Configuracoes.Geral.PathSalvar  := Ini.ReadString( 'Geral','PathSalvar'  ,'');
+
+       ACBrNFSe.Configuracoes.WebServices.CodigoMunicipio := StrToIntDef(Ini.ReadString( 'Geral','PathSalvar'  ,''), 0);
+       ACBrNFSe.Configuracoes.WebServices.Ambiente        := StrToTpAmb(Ok,IntToStr(Ini.ReadInteger('WebService','Ambiente'  ,0)+1));
+       ACBrNFSe.Configuracoes.WebServices.Visualizar      := Ini.ReadBool(    'WebService','Visualizar',False);
+       ACBrNFSe.Configuracoes.WebServices.SenhaWeb        := Ini.ReadString( 'Proxy','SenhaWeb'   ,'');
+       ACBrNFSe.Configuracoes.WebServices.UserWeb         := Ini.ReadString( 'Proxy','UserWeb'   ,'');
+       ACBrNFSe.Configuracoes.WebServices.Ambiente   := StrToTpAmb(Ok,IntToStr(Ini.ReadInteger('WebService','Ambiente'  ,0)+1));
+       ACBrNFSe.Configuracoes.WebServices.Visualizar := Ini.ReadBool(  'WebService','Visualizar',False);
+       ACBrNFSe.Configuracoes.WebServices.ProxyHost := Ini.ReadString( 'Proxy','Host'   ,'');
+       ACBrNFSe.Configuracoes.WebServices.ProxyPort := Ini.ReadString( 'Proxy','Porta'  ,'');
+       ACBrNFSe.Configuracoes.WebServices.ProxyUser := Ini.ReadString( 'Proxy','User'   ,'');
+       ACBrNFSe.Configuracoes.WebServices.ProxyPass := Ini.ReadString( 'Proxy','Pass'   ,'');
+
+       ACBrNFSe.Configuracoes.WebServices.SetConfigMunicipio(ACBrNFSe.Configuracoes.Geral.PathSchemas);
+
+       if ACBrNFSe.DANFSe <> nil then
+        begin
+         ACBrNFSe.DANFSe.Logo       := Ini.ReadString( 'Geral','LogoMarcaNFSe'   ,'');
+         ACBrNFSe.DANFSe.PrestLogo  := Ini.ReadString( 'Geral','PrestLogo'   ,'');
+         ACBrNFSe.DANFSe.Prefeitura := Ini.ReadString( 'Geral','Prefeitura'   ,'');
+        end;
+
+
+      StreamMemo := TMemoryStream.Create;
+      StreamMemo.Free;
+     finally
+      Ini.Free;
+     end;
+end;
+
+procedure ACBrNFe_LerConfiguracao;
+Var IniFile  : String ;
+    Ini     : TIniFile ;
+    Ok : Boolean;
+begin
+  IniFile := ChangeFileExt( Application.ExeName, '.ini') ;
+
+  Ini := TIniFile.Create( IniFile );
+  try
+        ACBrNFe.Configuracoes.Certificados.NumeroSerie := Ini.ReadString( 'Certificado','NumSerie' ,'');
+        ACBrNFe.Configuracoes.Certificados.Senha        := Ini.ReadString( 'Certificado','Senha'   ,'') ;
+        ACBrNFe.Configuracoes.Geral.FormaEmissao        := StrToTpEmis(OK,IntToStr(Ini.ReadInteger('Geral','FormaEmissao',0)+1));
+        ACBrNFe.Configuracoes.Geral.Salvar              := Ini.ReadBool(   'Geral','Salvar'      ,True);
+        ACBrNFe.Configuracoes.Geral.PathSalvar          := Ini.ReadString( 'Geral','PathSalvar'  ,'');
+        ACBrNFe.Configuracoes.WebServices.UF            := Ini.ReadString( 'WebService','UF','SP');
+        ACBrNFe.Configuracoes.WebServices.Ambiente      := StrToTpAmb(Ok,IntToStr(Ini.ReadInteger('WebService','Ambiente'  ,0)+1));
+        ACBrNFe.Configuracoes.WebServices.Visualizar    := Ini.ReadBool(    'WebService','Visualizar',False) ;
+
+        ACBrNFe.Configuracoes.WebServices.ProxyHost := Ini.ReadString( 'Proxy','Host'   ,'') ;
+        ACBrNFe.Configuracoes.WebServices.ProxyPort := Ini.ReadString( 'Proxy','Porta'  ,'') ;
+        ACBrNFe.Configuracoes.WebServices.ProxyUser := Ini.ReadString( 'Proxy','User'   ,'') ;
+        ACBrNFe.Configuracoes.WebServices.ProxyPass := Ini.ReadString( 'Proxy','Pass'   ,'') ;
+
+        if ACBrNFe.DANFE <> nil then
+         begin
+           ACBrNFe.DANFE.TipoDANFE  := StrToTpImp(OK,IntToStr(Ini.ReadInteger( 'Geral','DANFE'       ,0)+1));
+           ACBrNFe.DANFE.Logo       := Ini.ReadString( 'Geral','LogoMarca'   ,'') ;
+         end;
+
+        edtEmitCNPJ      := Ini.ReadString( 'Emitente','CNPJ'       ,'') ;
+        edtEmitIE        := Ini.ReadString( 'Emitente','IE'         ,'') ;
+        edtEmitCEP       := Ini.ReadString( 'Emitente','CEP'        ,'') ;
+        edtEmitUF        := Ini.ReadString( 'Emitente','UF'         ,'') ;
+  finally
+     Ini.Free ;
+  end;
+
+end;
+
+procedure ACBrCTe_LerConfiguracao;
 var
  IniFile    : String;
  Ini        : TIniFile;
@@ -134,7 +240,7 @@ begin
       Ini := TIniFile.Create( IniFile );
       try
           IniciarVariaveisGlobal;
-          ACBrCTe.Configuracoes.Certificados.NumeroSerie  := Ini.ReadString( 'Certificado','NumeroSerie' ,'');
+          ACBrCTe.Configuracoes.Certificados.NumeroSerie  := Ini.ReadString( 'Certificado','NumSerie' ,'');
           ACBrCTe.Configuracoes.Certificados.Senha        := Ini.ReadString( 'Certificado','Senha'   ,'');
           ACBrCTe.Configuracoes.Geral.FormaEmissao := StrToTpEmis(OK,IntToStr(Ini.ReadInteger('Geral','FormaEmissao',0)+1));
           ACBrCTe.Configuracoes.Geral.Salvar       := Ini.ReadBool(   'Geral','Salvar'      ,True);
@@ -438,7 +544,7 @@ var
     lStlAnexo :AnsiString;
 begin
       IniciarVariaveisGlobal;
-      inicializetion(NrSenha,NrCertificado,uf,TpAmbiente,BoVisualizar);
+      ACBrNFe_LerConfiguracao();
       ACBrNFe.ConsultaNFeDest(CNPJ,
                                StrToIndicadorNFe(ok,indNFe),
                                StrToIndicadorEmissor(ok,IndEmi),
@@ -755,7 +861,7 @@ begin
 
 end;
 
-function ListarXmlDiretorio(NrSenha,NrCertificado,uf,diretorioOrigem,DiretorioMove:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):TClientDataSet;
+function ListarXmlDiretorio(diretorioOrigem,DiretorioMove:String):TClientDataSet;
 var i : Integer;
     ArquivoXML: TStringList;
     SR: TSearchRec;

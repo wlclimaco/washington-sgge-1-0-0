@@ -11,12 +11,12 @@ uses IniFiles, ShellAPI, pcnRetConsReciNFe,
   pcnNFeW, pcnNFeRTXT, pcnAuxiliar, ACBrDFeUtil,
   XMLIntf, XMLDoc, ACBrNFeDANFERaveCB, BrvXml, Grids, BrvDbGrids, BrvDbGrid, BrvBitBtn, DBXFirebird,
   FMTBcd, DB, SqlExpr, DBClient, Menus, XDBGrids, mxExport, BrvRetCon, BrvCustomEdit, BrvEditNum,
-  Mask, BrvCustomMaskEdit, BrvEditDate, IBCustomDataSet, IBTable, IBDatabase, Provider, BrvEdit;
+  Mask, BrvCustomMaskEdit, BrvEditDate, IBCustomDataSet, IBTable, IBDatabase, Provider, BrvEdit,
+  DBCtrls, BrvDBComboListBox, BrvComboBox, BrvDbEdit, BrvLabel;
 
 type
   TForm1 = class(TForm)
     OpenDialog1: TOpenDialog;
-    ACBrNFe1: TACBrNFe;
     ACBrNFeDANFERave1: TACBrNFeDANFERave;
     BrvXMLNFE: TBrvXML;
     Label29: TLabel;
@@ -293,7 +293,6 @@ type
     edtEmitComp: TEdit;
     edtEmitBairro: TEdit;
     edtEmitCodCidade: TEdit;
-    edtEmitCidade: TEdit;
     edtEmitUF: TEdit;
     GroupBox23: TGroupBox;
     Label103: TLabel;
@@ -461,36 +460,265 @@ type
     TabSheet25: TTabSheet;
     TabSheet28: TTabSheet;
     TabSheet30: TTabSheet;
+    Panel21: TPanel;
+    BrvLabel1: TBrvLabel;
+    BrvLabel3: TBrvLabel;
+    BrvLabel4: TBrvLabel;
+    BrvLabel5: TBrvLabel;
+    BrvLabel6: TBrvLabel;
+    BrvLabel7: TBrvLabel;
+    BrvLabel8: TBrvLabel;
+    BrvLabel10: TBrvLabel;
+    BrvLabel11: TBrvLabel;
+    BrvLabel29: TBrvLabel;
+    BrvLabel50: TBrvLabel;
+    BrvLabel24: TBrvLabel;
+    BrvDbEdit1: TBrvDbEdit;
+    EdtDsEmpres: TBrvRetCon;
+    BrvDbEdit2: TBrvDbEdit;
+    BrvDbEdit3: TBrvDbEdit;
+    EdtRsTitula: TBrvRetCon;
+    BrvDbEdit4: TBrvDbEdit;
+    BrvDbEdit5: TBrvDbEdit;
+    BrvDbEdit7: TBrvDbEdit;
+    EdtDsEvento: TBrvRetCon;
+    BrvDbEdit8: TBrvDbEdit;
+    BrvDbEdit10: TBrvDbEdit;
+    BrvDbEdit41: TBrvDbEdit;
+    BrvDbEdit43: TBrvDbEdit;
+    GroupBox2: TGroupBox;
+    CbxSnItens: TCheckBox;
+    CbxSnConhec: TCheckBox;
+    CbxSnCreImp: TCheckBox;
+    EdtStGerDup: TBrvRetCon;
+    EdtCdForPag: TBrvRetCon;
+    EdtNrChave: TBrvEdit;
+    BrvDbEdit42: TBrvDbEdit;
+    EdtCdEstEmp: TBrvRetCon;
+    CbxFinali: TBrvComboBox;
+    EdtCdEstEmi: TBrvRetCon;
+    EdtCdEmpEst: TBrvRetCon;
+    EdtDsFiscal: TBrvRetCon;
+    EdtCdFiscal: TBrvRetCon;
+    EdtCdGruEmp: TBrvRetCon;
+    PgcDadosNF: TPageControl;
+    TbsItens: TTabSheet;
+    DbgF002: TBrvDbGrid;
+    TbsImpostos: TTabSheet;
+    GroupBox3: TGroupBox;
+    BrvLabel12: TBrvLabel;
+    BrvLabel13: TBrvLabel;
+    BrvLabel14: TBrvLabel;
+    BrvDbEdit11: TBrvDbEdit;
+    BrvDbEdit12: TBrvDbEdit;
+    BrvDbEdit13: TBrvDbEdit;
+    GroupBox4: TGroupBox;
+    BrvLabel15: TBrvLabel;
+    BrvLabel16: TBrvLabel;
+    BrvDbEdit14: TBrvDbEdit;
+    BrvDbEdit15: TBrvDbEdit;
+    GroupBox5: TGroupBox;
+    BrvLabel18: TBrvLabel;
+    BrvDbEdit17: TBrvDbEdit;
+    GroupBox6: TGroupBox;
+    BrvLabel17: TBrvLabel;
+    BrvLabel20: TBrvLabel;
+    BrvLabel21: TBrvLabel;
+    BrvLabel19: TBrvLabel;
+    BrvDbEdit16: TBrvDbEdit;
+    BrvDbEdit19: TBrvDbEdit;
+    BrvDbEdit20: TBrvDbEdit;
+    DBCheckBox1: TDBCheckBox;
+    BrvDbEdit18: TBrvDbEdit;
+    GrbTransp: TGroupBox;
+    BrvLabel22: TBrvLabel;
+    BrvLabel9: TBrvLabel;
+    BrvLabel23: TBrvLabel;
+    BrvDBComboListBox1: TBrvDBComboListBox;
+    DBCheckBox2: TDBCheckBox;
+    DBCheckBox3: TDBCheckBox;
+    BrvDbEdit9: TBrvDbEdit;
+    EdtRsTransp: TBrvRetCon;
+    BrvDbEdit21: TBrvDbEdit;
+    TbsRetencao: TTabSheet;
+    GroupBox32: TGroupBox;
+    BrvLabel30: TBrvLabel;
+    BrvLabel32: TBrvLabel;
+    BrvLabel35: TBrvLabel;
+    BrvDbEdit28: TBrvDbEdit;
+    BrvDbEdit27: TBrvDbEdit;
+    BrvDbEdit26: TBrvDbEdit;
+    GroupBox33: TGroupBox;
+    BrvLabel33: TBrvLabel;
+    BrvLabel36: TBrvLabel;
+    BrvLabel37: TBrvLabel;
+    BrvDbEdit29: TBrvDbEdit;
+    BrvDbEdit30: TBrvDbEdit;
+    BrvDbEdit31: TBrvDbEdit;
+    GroupBox34: TGroupBox;
+    BrvLabel31: TBrvLabel;
+    BrvLabel34: TBrvLabel;
+    BrvLabel38: TBrvLabel;
+    BrvDbEdit32: TBrvDbEdit;
+    BrvDbEdit33: TBrvDbEdit;
+    BrvDbEdit34: TBrvDbEdit;
+    GroupBox35: TGroupBox;
+    BrvLabel39: TBrvLabel;
+    BrvLabel40: TBrvLabel;
+    BrvLabel41: TBrvLabel;
+    BrvDbEdit35: TBrvDbEdit;
+    BrvDbEdit37: TBrvDbEdit;
+    BrvDbEdit36: TBrvDbEdit;
+    GroupBox36: TGroupBox;
+    BrvLabel42: TBrvLabel;
+    BrvLabel43: TBrvLabel;
+    BrvLabel44: TBrvLabel;
+    BrvDbEdit38: TBrvDbEdit;
+    BrvDbEdit39: TBrvDbEdit;
+    BrvDbEdit40: TBrvDbEdit;
+    GroupBox37: TGroupBox;
+    BrvLabel45: TBrvLabel;
+    BrvLabel46: TBrvLabel;
+    BrvLabel47: TBrvLabel;
+    BrvDbEdit22: TBrvDbEdit;
+    BrvDbEdit23: TBrvDbEdit;
+    BrvDbEdit24: TBrvDbEdit;
+    GroupBox38: TGroupBox;
+    CbxPIS: TCheckBox;
+    CbxCOFINS: TCheckBox;
+    CbxCSLL: TCheckBox;
+    CbxIRRF: TCheckBox;
+    CbxISSQN: TCheckBox;
+    CbxINSS: TCheckBox;
+    TbsParcela: TTabSheet;
+    DbgN003: TBrvDbGrid;
+    Panel22: TPanel;
+    BtnGerParcel: TBrvBitBtn;
+    BtnCancelParcel: TBrvBitBtn;
+    TbsDadAdi: TTabSheet;
+    DBMemo1: TDBMemo;
+    Panel23: TPanel;
+    Bevel2: TBevel;
+    GroupBox39: TGroupBox;
+    BrvLabel27: TBrvLabel;
+    BrvLabel2: TBrvLabel;
+    BrvLabel28: TBrvLabel;
+    BrvDbEdit6: TBrvDbEdit;
+    BrvDbEdit25: TBrvDbEdit;
+    EdtTtProdut: TBrvEditNum;
+    BtnSalvar: TBrvBitBtn;
+    BtnCancelar: TBrvBitBtn;
+    GroupBox40: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    edtLocalPag: TEdit;
+    edtEspecieDoc: TEdit;
+    edtEspecieMod: TEdit;
+    cbxAceite: TComboBox;
+    edtCarteira: TEdit;
+    edtNossoNro: TEdit;
+    GroupBox41: TGroupBox;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
+    edtMoraJuros: TEdit;
+    edtValorDesconto: TEdit;
+    edtValorAbatimento: TEdit;
+    edtMulta: TEdit;
+    edtDataMora: TMaskEdit;
+    edtDataDesconto: TMaskEdit;
+    edtDataAbatimento: TMaskEdit;
+    edtDataProtesto: TMaskEdit;
+    GroupBox42: TGroupBox;
+    Label17: TLabel;
+    Label18: TLabel;
+    Label19: TLabel;
+    Label20: TLabel;
+    edtNumeroDoc: TEdit;
+    edtValorDoc: TEdit;
+    edtDataDoc: TMaskEdit;
+    edtVencimento: TMaskEdit;
+    GroupBox43: TGroupBox;
+    Label15: TLabel;
+    Label16: TLabel;
+    memMensagem: TMemo;
+    edtInstrucoes1: TEdit;
+    edtInstrucoes2: TEdit;
+    Panel24: TPanel;
+    GroupBox44: TGroupBox;
+    Label21: TLabel;
+    Label22: TLabel;
+    Label23: TLabel;
+    Label24: TLabel;
+    Label25: TLabel;
+    Label26: TLabel;
+    Label27: TLabel;
+    Label28: TLabel;
+    Label37: TLabel;
+    Label38: TLabel;
+    Label39: TLabel;
+    edtNome: TEdit;
+    edtCPFCNPJ: TEdit;
+    edtEmail: TEdit;
+    edtEndereco: TEdit;
+    edtNumero: TEdit;
+    edtComplemento: TEdit;
+    edtBairro: TEdit;
+    edtCidade: TEdit;
+    edtCEP: TEdit;
+    edtUF: TEdit;
+    cbxLayOut: TComboBox;
+    Panel25: TPanel;
+    Button8: TButton;
+    Button9: TButton;
+    Button10: TButton;
+    Button11: TButton;
+    Button12: TButton;
+    Button13: TButton;
+    Button14: TButton;
+    gbGeral: TGroupBox;
+    Label59: TLabel;
+    sbtnLogoMarca: TSpeedButton;
+    sbtnPathSalvar: TSpeedButton;
+    lblSchemas: TLabel;
+    sbtSchemas: TSpeedButton;
+    Label60: TLabel;
+    sbtnPrestLogo: TSpeedButton;
+    Label61: TLabel;
+    Label62: TLabel;
+    Edit5: TEdit;
+    Edit7: TEdit;
+    CheckBox12: TCheckBox;
+    edtSchemas: TEdit;
+    edtPrestLogo: TEdit;
+    edtPrefeitura: TEdit;
+    edtEmitCidade: TComboBox;
+    Label63: TLabel;
+    edtSenhaWeb: TEdit;
+    Label64: TLabel;
+    edtUserWeb: TEdit;
     procedure sbtnCaminhoCertClick(Sender: TObject);
     procedure sbtnLogoMarcaClick(Sender: TObject);
     procedure sbtnPathSalvarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnSalvarConfigClick(Sender: TObject);
     procedure btnStatusServClick(Sender: TObject);
-    procedure btnCriarEnviarClick(Sender: TObject);
-    procedure btnInutilizarClick(Sender: TObject);
-    procedure ACBrNFe1StatusChange(Sender: TObject);
-    procedure sbtnGetCertClick(Sender: TObject);
     procedure btnConsCadClick(Sender: TObject);
-    procedure btnEnviarEmailClick(Sender: TObject);
-    procedure btnConsultarReciboClick(Sender: TObject);
     procedure ACBrNFe1GerarLog(const Mensagem: String);
-    procedure btnImportarXMLClick(Sender: TObject);
     procedure lblMouseEnter(Sender: TObject);
     procedure lblMouseLeave(Sender: TObject);
     procedure btnConsultarChaveClick(Sender: TObject);
     procedure btnCancelarChaveClick(Sender: TObject);
-    procedure btnGerarTXTClick(Sender: TObject);
-    procedure btnCarregarXMLEnviarClick(Sender: TObject);
-    procedure btnCartadeCorrecaoClick(Sender: TObject);
-    procedure btnValidarAssinaturaClick(Sender: TObject);
-    procedure btnManifDestConfirmacaoClick(Sender: TObject);
     procedure btnNfeDestinadasClick(Sender: TObject);
-    procedure btnImprimirCCeClick(Sender: TObject);
-    procedure btnEnviarEventoClick(Sender: TObject);
-    procedure btnCriarEnviarNFCeClick(Sender: TObject);
-    procedure tsNFeEnter(Sender: TObject);
-    procedure tsNFCeEnter(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure BrvBitBtn1Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
@@ -506,6 +734,7 @@ type
   public
     { Public declarations }
    procedure gerarDadosInicial();
+   procedure LerConfiguracaoAqui();
   end;
 
 var
@@ -528,6 +757,66 @@ const
 
 {$R *.dfm}
 
+procedure TForm1.LerConfiguracaoAqui();
+Var IniFile  : String ;
+    Ini     : TIniFile ;
+    Ok : Boolean;
+    StreamMemo : TMemoryStream;
+begin
+  IniFile := ChangeFileExt( Application.ExeName, '.ini') ;
+
+  Ini := TIniFile.Create( IniFile );
+  try
+      edtCaminho.Text  := Ini.ReadString( 'Certificado','Caminho' ,'') ;
+      edtSenha.Text    := Ini.ReadString( 'Certificado','Senha'   ,'') ;
+
+      rgFormaEmissao.ItemIndex := Ini.ReadInteger( 'Geral','FormaEmissao',0) ;
+      ckSalvar.Checked    := Ini.ReadBool(   'Geral','Salvar'      ,True) ;
+      edtPathLogs.Text    := Ini.ReadString( 'Geral','PathSalvar'  ,'') ;
+
+      cbUF.ItemIndex       := cbUF.Items.IndexOf(Ini.ReadString( 'WebService','UF','SP')) ;
+      rgTipoAmb.ItemIndex  := Ini.ReadInteger( 'WebService','Ambiente'  ,0) ;
+      ckVisualizar.Checked :=Ini.ReadBool(    'WebService','Visualizar',False) ;
+
+      edtProxyHost.Text  := Ini.ReadString( 'Proxy','Host'   ,'') ;
+      edtProxyPorta.Text := Ini.ReadString( 'Proxy','Porta'  ,'') ;
+      edtProxyUser.Text  := Ini.ReadString( 'Proxy','User'   ,'') ;
+      edtProxySenha.Text := Ini.ReadString( 'Proxy','Pass'   ,'') ;
+
+
+      rgTipoDanfe.ItemIndex     := Ini.ReadInteger( 'Geral','DANFE'       ,0) ;
+      edtLogoMarca.Text         := Ini.ReadString( 'Geral','LogoMarca'   ,'') ;
+
+
+      edtEmitCNPJ.Text       := Ini.ReadString( 'Emitente','CNPJ'       ,'') ;
+      edtEmitIE.Text         := Ini.ReadString( 'Emitente','IE'         ,'') ;
+      edtEmitRazao.Text      := Ini.ReadString( 'Emitente','RazaoSocial','') ;
+      edtEmitFantasia.Text   := Ini.ReadString( 'Emitente','Fantasia'   ,'') ;
+      edtEmitFone.Text       := Ini.ReadString( 'Emitente','Fone'       ,'') ;
+      edtEmitCEP.Text        := Ini.ReadString( 'Emitente','CEP'        ,'') ;
+      edtEmitLogradouro.Text := Ini.ReadString( 'Emitente','Logradouro' ,'') ;
+      edtEmitNumero.Text     := Ini.ReadString( 'Emitente','Numero'     ,'') ;
+      edtEmitComp.Text       := Ini.ReadString( 'Emitente','Complemento','') ;
+      edtEmitBairro.Text     := Ini.ReadString( 'Emitente','Bairro'     ,'') ;
+      edtEmitCodCidade.Text  := Ini.ReadString( 'Emitente','CodCidade'  ,'') ;
+      edtEmitCidade.Text     :=Ini.ReadString( 'Emitente','Cidade'     ,'') ;
+      edtEmitUF.Text         := Ini.ReadString( 'Emitente','UF'         ,'') ;
+
+      edtSmtpHost.Text      := Ini.ReadString( 'Email','Host'   ,'') ;
+      edtSmtpPort.Text      := Ini.ReadString( 'Email','Port'   ,'') ;
+      edtSmtpUser.Text      := Ini.ReadString( 'Email','User'   ,'') ;
+      edtSmtpPass.Text      := Ini.ReadString( 'Email','Pass'   ,'') ;
+      edtEmailAssunto.Text  := Ini.ReadString( 'Email','Assunto','') ;
+      cbEmailSSL.Checked    := Ini.ReadBool(   'Email','SSL'    ,False) ;
+      StreamMemo := TMemoryStream.Create;
+      Ini.ReadBinaryStream( 'Email','Mensagem',StreamMemo) ;
+      mmEmailMsg.Lines.LoadFromStream(StreamMemo);
+      StreamMemo.Free;
+  finally
+     Ini.Free ;
+  end;
+
+end;
 procedure TForm1.gerarDadosInicial();
 var
    OK : boolean;
@@ -555,15 +844,23 @@ begin
       Ini.WriteString( 'Certificado','Senha'   ,edtSenha.Text) ;
       Ini.WriteString( 'Certificado','NumSerie',edtNumSerie.Text) ;
 
-      Ini.WriteInteger( 'Geral','DANFE'       ,rgTipoDanfe.ItemIndex) ;
-      Ini.WriteInteger( 'Geral','FormaEmissao',rgFormaEmissao.ItemIndex) ;
+      Ini.WriteInteger('Geral','DANFE'       ,rgTipoDanfe.ItemIndex) ;
+      Ini.WriteInteger('Geral','FormaEmissao',rgFormaEmissao.ItemIndex) ;
       Ini.WriteString( 'Geral','LogoMarca'   ,edtLogoMarca.Text) ;
       Ini.WriteBool(   'Geral','Salvar'      ,ckSalvar.Checked) ;
       Ini.WriteString( 'Geral','PathSalvar'  ,edtPathLogs.Text) ;
+      Ini.WriteString( 'Geral','Schemas'   , edtSchemas.Text);
+      Ini.WriteString( 'Geral','LogoMarcaNFSe' , edtLogoMarca.Text);
+      Ini.WriteString( 'Geral','PrestLogo' , edtPrestLogo.Text);
+      Ini.WriteString( 'Geral','Prefeitura', edtPrefeitura.Text);
 
-      Ini.WriteString( 'WebService','UF'        ,cbUF.Text) ;
+
+      Ini.WriteString('WebService', 'SenhaWeb'  , edtSenhaWeb.Text);
+      Ini.WriteString('WebService', 'UserWeb'   , edtUserWeb.Text);
+      Ini.WriteString('WebService','UF'        ,cbUF.Text) ;
       Ini.WriteInteger( 'WebService','Ambiente'  ,rgTipoAmb.ItemIndex) ;
       Ini.WriteBool(   'WebService','Visualizar',ckVisualizar.Checked) ;
+
 
       Ini.WriteString( 'Proxy','Host'   ,edtProxyHost.Text) ;
       Ini.WriteString( 'Proxy','Porta'  ,edtProxyPorta.Text) ;
@@ -606,95 +903,6 @@ begin
   end;
 
 end;
-
-//procedure TForm1.LerConfiguracao;
-//Var IniFile  : String ;
-//    Ini     : TIniFile ;
-//    Ok : Boolean;
-//    StreamMemo : TMemoryStream;
-//begin
-//  IniFile := ChangeFileExt( Application.ExeName, '.ini') ;
-//
-//  Ini := TIniFile.Create( IniFile );
-//  try
-//      {$IFDEF ACBrNFeOpenSSL}
-//         edtCaminho.Text  := Ini.ReadString( 'Certificado','Caminho' ,'') ;
-//         edtSenha.Text    := Ini.ReadString( 'Certificado','Senha'   ,'') ;
-//         ACBrNFe1.Configuracoes.Certificados.Certificado  := edtCaminho.Text;
-//         ACBrNFe1.Configuracoes.Certificados.Senha        := edtSenha.Text;
-//      {$ELSE}
-//         edtNumSerie.Text := Ini.ReadString( 'Certificado','NumSerie','') ;
-//         ACBrNFe1.Configuracoes.Certificados.NumeroSerie := edtNumSerie.Text;
-//         edtNumSerie.Text := ACBrNFe1.Configuracoes.Certificados.NumeroSerie;
-//      {$ENDIF}
-//
-//      rgFormaEmissao.ItemIndex := Ini.ReadInteger( 'Geral','FormaEmissao',0) ;
-//      ckSalvar.Checked    := Ini.ReadBool(   'Geral','Salvar'      ,True) ;
-//      edtPathLogs.Text    := Ini.ReadString( 'Geral','PathSalvar'  ,'') ;
-//      ACBrNFe1.Configuracoes.Geral.FormaEmissao := StrToTpEmis(OK,IntToStr(rgFormaEmissao.ItemIndex+1));
-//      ACBrNFe1.Configuracoes.Geral.Salvar       := ckSalvar.Checked;
-//      ACBrNFe1.Configuracoes.Geral.PathSalvar   := edtPathLogs.Text;
-//
-//      cbUF.ItemIndex       := cbUF.Items.IndexOf(Ini.ReadString( 'WebService','UF','SP')) ;
-//      rgTipoAmb.ItemIndex  := Ini.ReadInteger( 'WebService','Ambiente'  ,0) ;
-//      ckVisualizar.Checked :=Ini.ReadBool(    'WebService','Visualizar',False) ;
-//      ACBrNFe1.Configuracoes.WebServices.UF         := cbUF.Text;
-//      ACBrNFe1.Configuracoes.WebServices.Ambiente   := StrToTpAmb(Ok,IntToStr(rgTipoAmb.ItemIndex+1));
-//      ACBrNFe1.Configuracoes.WebServices.Visualizar := ckVisualizar.Checked;
-//
-//      edtProxyHost.Text  := Ini.ReadString( 'Proxy','Host'   ,'') ;
-//      edtProxyPorta.Text := Ini.ReadString( 'Proxy','Porta'  ,'') ;
-//      edtProxyUser.Text  := Ini.ReadString( 'Proxy','User'   ,'') ;
-//      edtProxySenha.Text := Ini.ReadString( 'Proxy','Pass'   ,'') ;
-//      ACBrNFe1.Configuracoes.WebServices.ProxyHost := edtProxyHost.Text;
-//      ACBrNFe1.Configuracoes.WebServices.ProxyPort := edtProxyPorta.Text;
-//      ACBrNFe1.Configuracoes.WebServices.ProxyUser := edtProxyUser.Text;
-//      ACBrNFe1.Configuracoes.WebServices.ProxyPass := edtProxySenha.Text;
-//
-//      rgTipoDanfe.ItemIndex     := Ini.ReadInteger( 'Geral','DANFE'       ,0) ;
-//      edtLogoMarca.Text         := Ini.ReadString( 'Geral','LogoMarca'   ,'') ;
-//      if ACBrNFe1.DANFE <> nil then
-//       begin
-//         ACBrNFe1.DANFE.TipoDANFE  := StrToTpImp(OK,IntToStr(rgTipoDanfe.ItemIndex+1));
-//         ACBrNFe1.DANFE.Logo       := edtLogoMarca.Text;
-//       end;
-//
-//      edtEmitCNPJ.Text       := Ini.ReadString( 'Emitente','CNPJ'       ,'') ;
-//      edtEmitIE.Text         := Ini.ReadString( 'Emitente','IE'         ,'') ;
-//      edtEmitRazao.Text      := Ini.ReadString( 'Emitente','RazaoSocial','') ;
-//      edtEmitFantasia.Text   := Ini.ReadString( 'Emitente','Fantasia'   ,'') ;
-//      edtEmitFone.Text       := Ini.ReadString( 'Emitente','Fone'       ,'') ;
-//      edtEmitCEP.Text        := Ini.ReadString( 'Emitente','CEP'        ,'') ;
-//      edtEmitLogradouro.Text := Ini.ReadString( 'Emitente','Logradouro' ,'') ;
-//      edtEmitNumero.Text     := Ini.ReadString( 'Emitente','Numero'     ,'') ;
-//      edtEmitComp.Text       := Ini.ReadString( 'Emitente','Complemento','') ;
-//      edtEmitBairro.Text     := Ini.ReadString( 'Emitente','Bairro'     ,'') ;
-//      edtEmitCodCidade.Text  := Ini.ReadString( 'Emitente','CodCidade'  ,'') ;
-//      edtEmitCidade.Text     :=Ini.ReadString( 'Emitente','Cidade'     ,'') ;
-//      edtEmitUF.Text         := Ini.ReadString( 'Emitente','UF'         ,'') ;
-//
-//      edtSmtpHost.Text      := Ini.ReadString( 'Email','Host'   ,'') ;
-//      edtSmtpPort.Text      := Ini.ReadString( 'Email','Port'   ,'') ;
-//      edtSmtpUser.Text      := Ini.ReadString( 'Email','User'   ,'') ;
-//      edtSmtpPass.Text      := Ini.ReadString( 'Email','Pass'   ,'') ;
-//      edtEmailAssunto.Text  := Ini.ReadString( 'Email','Assunto','') ;
-//      cbEmailSSL.Checked    := Ini.ReadBool(   'Email','SSL'    ,False) ;
-//
-//      EdtDsArquiv.Text      := Ini.ReadString( 'Import','DiretorioImportacao'   ,'') ;
-//      Edit3.Text            := Ini.ReadString( 'Import','DiretorioExportacao'   ,'') ;
-//      Edit4.Text            := Ini.ReadString( 'Import','TempoImpotacao'   ,'') ;
-//      RadioGroup2.ItemIndex := StrToInt(Ini.ReadString( 'Import','Importacao'   ,'')) ;
-//
-//
-//      StreamMemo := TMemoryStream.Create;
-//      Ini.ReadBinaryStream( 'Email','Mensagem',StreamMemo) ;
-//      mmEmailMsg.Lines.LoadFromStream(StreamMemo);
-//      StreamMemo.Free;
-//  finally
-//     Ini.Free ;
-//  end;
-//
-//end;
 
 procedure TForm1.LoadConsulta201(XML: String);
 var
@@ -799,7 +1007,7 @@ i: integer;
 destino,origem:String;
 begin
 
-      xml := ListarXmlDiretorio(NrSenha,NrCertif,CdEstado,EdtDsArquiv.Text,EdtDsArquiv.Text+'\teste',TpAmbiente,BoVisualizar);
+      xml := ListarXmlDiretorio(EdtDsArquiv.Text,EdtDsArquiv.Text+'\teste');
       if xml <> nil then
       begin
             xml.Insert;
@@ -815,7 +1023,7 @@ end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
-      LerConfiguracao;
+       LerConfiguracaoAqui;
 //      tsNFe.PageControl.Visible := true;
       TabSheet1.TabVisible      := false;
       SQLConnection1.Connected := true;
@@ -830,7 +1038,7 @@ end;
 procedure TForm1.btnSalvarConfigClick(Sender: TObject);
 begin
  GravarConfiguracao;
- LerConfiguracao;
+ LerConfiguracaoAqui;
 end;
 
 procedure TForm1.btnStatusServClick(Sender: TObject);
@@ -867,60 +1075,6 @@ begin
 
 end;
 
-
-
-procedure TForm1.btnManifDestConfirmacaoClick(Sender: TObject);
-var
- Chave, idLote, CNPJ: string;
- lMsg: string;
-begin
-  Chave:='';
-  if not(InputQuery('WebServices Eventos: Manif. Destinatario - Conf. Operacao', 'Chave da NF-e', Chave)) then
-     exit;
-  Chave := Trim(OnlyNumber(Chave));
-  idLote := '1';
-  if not(InputQuery('WebServices Eventos: Manif. Destinatario - Conf. Operacao', 'Identificador de controle do Lote de envio do Evento', idLote)) then
-     exit;
-  CNPJ := '';
-  if not(InputQuery('WebServices Eventos: Manif. Destinatario - Conf. Operacao', 'CNPJ ou o CPF do autor do Evento', CNPJ)) then
-     exit;
-
-  ACBrNFe1.EventoNFe.Evento.Clear;
-  with ACBrNFe1.EventoNFe.Evento.Add do
-   begin
-     infEvento.chNFe := Chave;
-     infEvento.CNPJ   := CNPJ;
-     infEvento.dhEvento := now;
-     infEvento.tpEvento := teManifDestConfirmacao;
-   end;
-  ACBrNFe1.EnviarEventoNFe(StrToInt(IDLote));
-
-  with AcbrNFe1.WebServices.EnvEvento.EventoRetorno.retEvento.Items[0].RetInfEvento do
-  begin
-    lMsg:=
-    'Id: '+Id+#13+
-    'tpAmb: '+TpAmbToStr(tpAmb)+#13+
-    'verAplic: '+verAplic+#13+
-    'cOrgao: '+IntToStr(cOrgao)+#13+
-    'cStat: '+IntToStr(cStat)+#13+
-    'xMotivo: '+xMotivo+#13+
-    'chNFe: '+chNFe+#13+
-    'tpEvento: '+TpEventoToStr(tpEvento)+#13+
-    'xEvento: '+xEvento+#13+
-    'nSeqEvento: '+IntToStr(nSeqEvento)+#13+
-    'CNPJDest: '+CNPJDest+#13+
-    'emailDest: '+emailDest+#13+
-    'dhRegEvento: '+DateTimeToStr(dhRegEvento)+#13+
-    'nProt: '+nProt;
-  end;
-  ShowMessage(lMsg);
-
-  MemoResp.Lines.Text := UTF8Encode(ACBrNFe1.WebServices.EnvEvento.RetWS);
-  memoRespWS.Lines.Text := UTF8Encode(ACBrNFe1.WebServices.EnvEvento.RetornoWS);
-//  ACBrNFe1.WebServices.EnvEvento.EventoRetorno.retEvento.Items[0].XXXX
-  LoadXML(MemoResp, WBResposta);
-end;
-
 procedure TForm1.btnNfeDestinadasClick(Sender: TObject);
 begin        // NfeDestinadas(NrSenha,NrCertificado,uf,CNPJ, IndNFe, IndEmi, ultNSU:String): OleVariant;
   gerarDadosInicial;
@@ -929,210 +1083,122 @@ begin        // NfeDestinadas(NrSenha,NrCertificado,uf,CNPJ, IndNFe, IndEmi, ult
   DataSource1.DataSet := xml;
 end;
 
-procedure TForm1.btnCriarEnviarClick(Sender: TObject);
-var
- vAux, vNumLote : String;
-begin
-  if not(InputQuery('WebServices Enviar', 'Numero da Nota', vAux)) then
-    exit;
 
-  if not(InputQuery('WebServices Enviar', 'Numero do Lote', vNumLote)) then
-    exit;
-
-  vNumLote := OnlyNumber(vNumLote);
-
-  if Trim(vNumLote) = '' then
-   begin
-     MessageDlg('Número do Lote inválido.',mtError,[mbok],0);
-     exit;
-   end;
-
-  ACBrNFe1.NotasFiscais.Clear;
-
-  ACBrNFe1.Configuracoes.Geral.ModeloDF := moNFe;
-
-  ACBrNFe1.Enviar(vNumLote,True);
-
-  MemoResp.Lines.Text := UTF8Encode(ACBrNFe1.WebServices.Retorno.RetWS);
-  memoRespWS.Lines.Text := UTF8Encode(ACBrNFe1.WebServices.Retorno.RetornoWS);
-  LoadXML(MemoResp, WBResposta);
-
- MemoDados.Lines.Add('');
- MemoDados.Lines.Add('Envio NFe');
- MemoDados.Lines.Add('tpAmb: '+ TpAmbToStr(ACBrNFe1.WebServices.Retorno.TpAmb));
- MemoDados.Lines.Add('verAplic: '+ ACBrNFe1.WebServices.Retorno.verAplic);
- MemoDados.Lines.Add('cStat: '+ IntToStr(ACBrNFe1.WebServices.Retorno.cStat));
- MemoDados.Lines.Add('cUF: '+ IntToStr(ACBrNFe1.WebServices.Retorno.cUF));
- MemoDados.Lines.Add('xMotivo: '+ ACBrNFe1.WebServices.Retorno.xMotivo);
- MemoDados.Lines.Add('cMsg: '+ IntToStr(ACBrNFe1.WebServices.Retorno.cMsg));
- MemoDados.Lines.Add('xMsg: '+ ACBrNFe1.WebServices.Retorno.xMsg);
- MemoDados.Lines.Add('Recibo: '+ ACBrNFe1.WebServices.Retorno.Recibo);
- MemoDados.Lines.Add('Protocolo: '+ ACBrNFe1.WebServices.Retorno.Protocolo);
-// MemoDados.Lines.Add('cStat: '+ ACBrNFe1.WebServices.Retorno.NFeRetorno;
-
-{ ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].tpAmb
- ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].verAplic
- ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].chNFe
- ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].dhRecbto
- ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].nProt
- ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].digVal
- ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].cStat
- ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].xMotivo }
-
-  ACBrNFe1.NotasFiscais.Clear;
-end;
-
-procedure TForm1.btnInutilizarClick(Sender: TObject);
-var
- Modelo, Serie, Ano, NumeroInicial, NumeroFinal, Justificativa : String;
-begin
- if not(InputQuery('WebServices Inutilização ', 'Ano',    Ano)) then
-    exit;
- if not(InputQuery('WebServices Inutilização ', 'Modelo', Modelo)) then
-    exit;
- if not(InputQuery('WebServices Inutilização ', 'Serie',  Serie)) then
-    exit;
- if not(InputQuery('WebServices Inutilização ', 'Número Inicial', NumeroInicial)) then
-    exit;
- if not(InputQuery('WebServices Inutilização ', 'Número Inicial', NumeroFinal)) then
-    exit;
- if not(InputQuery('WebServices Inutilização ', 'Justificativa', Justificativa)) then
-    exit;
-  ACBrNFe1.WebServices.Inutiliza(edtEmitCNPJ.Text, Justificativa, StrToInt(Ano), StrToInt(Modelo), StrToInt(Serie), StrToInt(NumeroInicial), StrToInt(NumeroFinal));
-  MemoResp.Lines.Text :=  UTF8Encode(ACBrNFe1.WebServices.Inutilizacao.RetWS);
-  memoRespWS.Lines.Text :=  UTF8Encode(ACBrNFe1.WebServices.Inutilizacao.RetornoWS);  
-  LoadXML(MemoResp, WBResposta);
-
-{  ACBrNFe1.WebServices.Inutilizacao.TpAmb
-  ACBrNFe1.WebServices.Inutilizacao.verAplic
-  ACBrNFe1.WebServices.Inutilizacao.cStat
-  ACBrNFe1.WebServices.Inutilizacao.xMotivo
-  ACBrNFe1.WebServices.Inutilizacao.cUF
-  ACBrNFe1.WebServices.Inutilizacao.Ano
-  ACBrNFe1.WebServices.Inutilizacao.CNPJ
-  ACBrNFe1.WebServices.Inutilizacao.Modelo
-  ACBrNFe1.WebServices.Inutilizacao.Serie
-  ACBrNFe1.WebServices.Inutilizacao.NumeroInicial
-  ACBrNFe1.WebServices.Inutilizacao.NumeroFinal
-  ACBrNFe1.WebServices.Inutilizacao.dhRecbto
-  ACBrNFe1.WebServices.Inutilizacao.Protocolo    }
-end;
-
-procedure TForm1.ACBrNFe1StatusChange(Sender: TObject);
-begin
-  case ACBrNFe1.Status of
-    stIdle :
-    begin
-      if ( frmStatus <> nil ) then
-        frmStatus.Hide;
-    end;
-    stNFeStatusServico :
-    begin
-      if ( frmStatus = nil ) then
-        frmStatus := TfrmStatus.Create(Application);
-      frmStatus.lblStatus.Caption := 'Verificando Status do servico...';
-      frmStatus.Show;
-      frmStatus.BringToFront;
-    end;
-    stNFeRecepcao :
-    begin
-      if ( frmStatus = nil ) then
-        frmStatus := TfrmStatus.Create(Application);
-      frmStatus.lblStatus.Caption := 'Enviando dados da NFe...';
-      frmStatus.Show;
-      frmStatus.BringToFront;
-    end;
-    stNfeRetRecepcao :
-    begin
-      if ( frmStatus = nil ) then
-        frmStatus := TfrmStatus.Create(Application);
-      frmStatus.lblStatus.Caption := 'Recebendo dados da NFe...';
-      frmStatus.Show;
-      frmStatus.BringToFront;
-    end;
-    stNfeConsulta :
-    begin
-      if ( frmStatus = nil ) then
-        frmStatus := TfrmStatus.Create(Application);
-      frmStatus.lblStatus.Caption := 'Consultando NFe...';
-      frmStatus.Show;
-      frmStatus.BringToFront;
-    end;
-    stNfeCancelamento :
-    begin
-      if ( frmStatus = nil ) then
-        frmStatus := TfrmStatus.Create(Application);
-      frmStatus.lblStatus.Caption := 'Enviando cancelamento de NFe...';
-      frmStatus.Show;
-      frmStatus.BringToFront;
-    end;
-    stNfeInutilizacao :
-    begin
-      if ( frmStatus = nil ) then
-        frmStatus := TfrmStatus.Create(Application);
-      frmStatus.lblStatus.Caption := 'Enviando pedido de Inutilização...';
-      frmStatus.Show;
-      frmStatus.BringToFront;
-    end;
-    stNFeRecibo :
-    begin
-      if ( frmStatus = nil ) then
-        frmStatus := TfrmStatus.Create(Application);
-      frmStatus.lblStatus.Caption := 'Consultando Recibo de Lote...';
-      frmStatus.Show;
-      frmStatus.BringToFront;
-    end;
-    stNFeCadastro :
-    begin
-      if ( frmStatus = nil ) then
-        frmStatus := TfrmStatus.Create(Application);
-      frmStatus.lblStatus.Caption := 'Consultando Cadastro...';
-      frmStatus.Show;
-      frmStatus.BringToFront;
-    end;
-    stNFeEnvDPEC :
-    begin
-      if ( frmStatus = nil ) then
-        frmStatus := TfrmStatus.Create(Application);
-      frmStatus.lblStatus.Caption := 'Enviando DPEC...';
-      frmStatus.Show;
-      frmStatus.BringToFront;
-    end;
-    stNFeConsultaDPEC :
-    begin
-      if ( frmStatus = nil ) then
-        frmStatus := TfrmStatus.Create(Application);
-      frmStatus.lblStatus.Caption := 'Consultando DPEC...';
-      frmStatus.Show;
-      frmStatus.BringToFront;
-    end;
-    stNFeEmail :
-    begin
-      if ( frmStatus = nil ) then
-        frmStatus := TfrmStatus.Create(Application);
-      frmStatus.lblStatus.Caption := 'Enviando Email...';
-      frmStatus.Show;
-      frmStatus.BringToFront;
-    end;
-    stNFeCCe :
-    begin
-      if ( frmStatus = nil ) then
-        frmStatus := TfrmStatus.Create(Application);
-      frmStatus.lblStatus.Caption := 'Enviando Carta de Correção...';
-      frmStatus.Show;
-      frmStatus.BringToFront;
-    end;
-    stNFeEvento :
-    begin
-      if ( frmStatus = nil ) then
-        frmStatus := TfrmStatus.Create(Application);
-      frmStatus.lblStatus.Caption := 'Enviando Evento...';
-      frmStatus.Show;
-      frmStatus.BringToFront;
-    end;
-  end;
-  Application.ProcessMessages;
-end;
+//procedure TForm1.ACBrNFe1StatusChange(Sender: TObject);
+//begin
+//  case ACBrNFe1.Status of
+//    stIdle :
+//    begin
+//      if ( frmStatus <> nil ) then
+//        frmStatus.Hide;
+//    end;
+//    stNFeStatusServico :
+//    begin
+//      if ( frmStatus = nil ) then
+//        frmStatus := TfrmStatus.Create(Application);
+//      frmStatus.lblStatus.Caption := 'Verificando Status do servico...';
+//      frmStatus.Show;
+//      frmStatus.BringToFront;
+//    end;
+//    stNFeRecepcao :
+//    begin
+//      if ( frmStatus = nil ) then
+//        frmStatus := TfrmStatus.Create(Application);
+//      frmStatus.lblStatus.Caption := 'Enviando dados da NFe...';
+//      frmStatus.Show;
+//      frmStatus.BringToFront;
+//    end;
+//    stNfeRetRecepcao :
+//    begin
+//      if ( frmStatus = nil ) then
+//        frmStatus := TfrmStatus.Create(Application);
+//      frmStatus.lblStatus.Caption := 'Recebendo dados da NFe...';
+//      frmStatus.Show;
+//      frmStatus.BringToFront;
+//    end;
+//    stNfeConsulta :
+//    begin
+//      if ( frmStatus = nil ) then
+//        frmStatus := TfrmStatus.Create(Application);
+//      frmStatus.lblStatus.Caption := 'Consultando NFe...';
+//      frmStatus.Show;
+//      frmStatus.BringToFront;
+//    end;
+//    stNfeCancelamento :
+//    begin
+//      if ( frmStatus = nil ) then
+//        frmStatus := TfrmStatus.Create(Application);
+//      frmStatus.lblStatus.Caption := 'Enviando cancelamento de NFe...';
+//      frmStatus.Show;
+//      frmStatus.BringToFront;
+//    end;
+//    stNfeInutilizacao :
+//    begin
+//      if ( frmStatus = nil ) then
+//        frmStatus := TfrmStatus.Create(Application);
+//      frmStatus.lblStatus.Caption := 'Enviando pedido de Inutilização...';
+//      frmStatus.Show;
+//      frmStatus.BringToFront;
+//    end;
+//    stNFeRecibo :
+//    begin
+//      if ( frmStatus = nil ) then
+//        frmStatus := TfrmStatus.Create(Application);
+//      frmStatus.lblStatus.Caption := 'Consultando Recibo de Lote...';
+//      frmStatus.Show;
+//      frmStatus.BringToFront;
+//    end;
+//    stNFeCadastro :
+//    begin
+//      if ( frmStatus = nil ) then
+//        frmStatus := TfrmStatus.Create(Application);
+//      frmStatus.lblStatus.Caption := 'Consultando Cadastro...';
+//      frmStatus.Show;
+//      frmStatus.BringToFront;
+//    end;
+//    stNFeEnvDPEC :
+//    begin
+//      if ( frmStatus = nil ) then
+//        frmStatus := TfrmStatus.Create(Application);
+//      frmStatus.lblStatus.Caption := 'Enviando DPEC...';
+//      frmStatus.Show;
+//      frmStatus.BringToFront;
+//    end;
+//    stNFeConsultaDPEC :
+//    begin
+//      if ( frmStatus = nil ) then
+//        frmStatus := TfrmStatus.Create(Application);
+//      frmStatus.lblStatus.Caption := 'Consultando DPEC...';
+//      frmStatus.Show;
+//      frmStatus.BringToFront;
+//    end;
+//    stNFeEmail :
+//    begin
+//      if ( frmStatus = nil ) then
+//        frmStatus := TfrmStatus.Create(Application);
+//      frmStatus.lblStatus.Caption := 'Enviando Email...';
+//      frmStatus.Show;
+//      frmStatus.BringToFront;
+//    end;
+//    stNFeCCe :
+//    begin
+//      if ( frmStatus = nil ) then
+//        frmStatus := TfrmStatus.Create(Application);
+//      frmStatus.lblStatus.Caption := 'Enviando Carta de Correção...';
+//      frmStatus.Show;
+//      frmStatus.BringToFront;
+//    end;
+//    stNFeEvento :
+//    begin
+//      if ( frmStatus = nil ) then
+//        frmStatus := TfrmStatus.Create(Application);
+//      frmStatus.lblStatus.Caption := 'Enviando Evento...';
+//      frmStatus.Show;
+//      frmStatus.BringToFront;
+//    end;
+//  end;
+//  Application.ProcessMessages;
+//end;
 
 procedure TForm1.BrvBitBtn1Click(Sender: TObject);
 var
@@ -1152,13 +1218,6 @@ begin
           ACBrNFe_CancelarNFePelaChave(NrSenha,NrCertif,CdEstado,Edit1.Text,'0',edtEmitCNPJ.Text,Protocolo,Justificativa,TpAmbiente,BoVisualizar);
       end;
       PageControl3.ActivePage := TabSheet1;
-end;
-
-procedure TForm1.sbtnGetCertClick(Sender: TObject);
-begin
-   {$IFNDEF ACBrNFeOpenSSL}
-   edtNumSerie.Text := ACBrNFe1.Configuracoes.Certificados.SelecionarCertificado;
-   {$ENDIF}
 end;
 
 
@@ -1181,719 +1240,9 @@ begin
 
 end;
 
-procedure TForm1.btnGerarTXTClick(Sender: TObject);
-var
-   vAux, vNumLote : String;
-begin
-  if not(InputQuery('WebServices Enviar', 'Numero da Nota', vAux)) then
-    exit;
-
-  if not(InputQuery('WebServices Enviar', 'Numero do Lote', vNumLote)) then
-    exit;
-
-  vNumLote := OnlyNumber(vNumLote);
-
-  if Trim(vNumLote) = '' then
-   begin
-     MessageDlg('Número do Lote inválido.',mtError,[mbok],0);
-     exit;
-   end;
-
-  ACBrNFe1.NotasFiscais.Clear;
-
-  //GerarNFe(vAux);
-
-  ACBrNFe1.NotasFiscais.SaveToTXT({caminho e nome do arquivo TXT});
-end;
-
-procedure TForm1.btnEnviarEmailClick(Sender: TObject);
-var
- Para : String;
- CC: Tstrings;
-begin
-  if not(InputQuery('Enviar Email', 'Email de destino', Para)) then
-    exit;
-
-  OpenDialog1.Title := 'Selecione a NFE';
-  OpenDialog1.DefaultExt := '*-nfe.XML';
-  OpenDialog1.Filter := 'Arquivos NFE (*-nfe.XML)|*-nfe.XML|Arquivos XML (*.XML)|*.XML|Todos os Arquivos (*.*)|*.*';
-  OpenDialog1.InitialDir := ACBrNFe1.Configuracoes.Geral.PathSalvar;
-  if OpenDialog1.Execute then
-  begin
-    ACBrNFe1.NotasFiscais.Clear;
-    ACBrNFe1.NotasFiscais.LoadFromFile(OpenDialog1.FileName);
-    CC:=TstringList.Create;
-    CC.Add('andrefmoraes@gmail.com'); //especifique um email válido
-    CC.Add('anfm@zipmail.com.br');    //especifique um email válido
-    ACBrNFe1.NotasFiscais.Items[0].EnviarEmail(edtSmtpHost.Text
-                                             , edtSmtpPort.Text
-                                             , edtSmtpUser.Text
-                                             , edtSmtpPass.Text
-                                             , edtSmtpUser.Text
-                                             , Para
-                                             , edtEmailAssunto.Text
-                                             , mmEmailMsg.Lines
-                                             , cbEmailSSL.Checked // SSL - Conexão Segura
-                                             , True //Enviar PDF junto
-                                             , CC //Lista com emails que serão enviado cópias - TStrings
-                                             , nil // Lista de anexos - TStrings
-                                             , False  //Pede confirmação de leitura do email
-                                             , False  //Aguarda Envio do Email(não usa thread)
-                                             , 'ACBrNFe2' // Nome do Rementente
-                                             , cbEmailSSL.Checked ); // Auto TLS
-    CC.Free;
-  end;
-end;
-
-procedure TForm1.btnConsultarReciboClick(Sender: TObject);
-var
-  aux : String;
-begin
-      if not(InputQuery('Consultar Recibo Lote', 'Número do Recibo', aux)) then
-      exit;
-      MemoResp.Lines.Text :=  UTF8Encode(ACBrNFe_ConsultarReciboLoteNFe(NrSenha,NrCertif,CdEstado,TpAmbiente,BoVisualizar,StrToInt(aux)));
-      memoRespWS.Lines.Text :=  UTF8Encode(ACBrNFe1.WebServices.Recibo.RetornoWS);
-      LoadXML(MemoResp, WBResposta);
-end;
-
 procedure TForm1.ACBrNFe1GerarLog(const Mensagem: String);
 begin
  memoLog.Lines.Add(Mensagem);
-end;
-
-procedure TForm1.btnImportarXMLClick(Sender: TObject);
-var
-  i, j, k, n  : integer;
-  Nota, Node, NodePai, NodeItem: TTreeNode;
-  NFeRTXT: TNFeRTXT;
-begin
-  OpenDialog1.FileName  :=  '';
-  OpenDialog1.Title := 'Selecione a NFE';
-  OpenDialog1.DefaultExt := '*-nfe.XML';
-  OpenDialog1.Filter := 'Arquivos NFE (*-nfe.XML)|*-nfe.XML|Arquivos XML (*.XML)|*.XML|Arquivos TXT (*.TXT)|*.TXT|Todos os Arquivos (*.*)|*.*';
-  OpenDialog1.InitialDir := ACBrNFe1.Configuracoes.Geral.PathSalvar;
-  if OpenDialog1.Execute then
-  begin
-    ACBrNFe1.NotasFiscais.Clear;
-    //tenta TXT
-    ACBrNFe1.NotasFiscais.Add;
-    NFeRTXT := TNFeRTXT.Create(ACBrNFe1.NotasFiscais.Items[0].NFe);
-    NFeRTXT.CarregarArquivo(OpenDialog1.FileName);
-    if NFeRTXT.LerTxt then
-       NFeRTXT.Free
-    else
-    begin
-       NFeRTXT.Free;
-       //tenta XML
-       ACBrNFe1.NotasFiscais.Clear;
-       try
-          ACBrNFe1.NotasFiscais.LoadFromFile(OpenDialog1.FileName);
-       except
-          ShowMessage('Arquivo NFe Inválido');
-          exit;
-       end;
-    end;
-
-    trvwNFe.Items.Clear;
-
-    for n:=0 to ACBrNFe1.NotasFiscais.Count-1 do
-    begin
-    with ACBrNFe1.NotasFiscais.Items[n].NFe do
-     begin
-
-       Nota := trvwNFe.Items.Add(nil,infNFe.ID);
-       trvwNFe.Items.AddChild(Nota,'ID= ' +infNFe.ID);
-       Node := trvwNFe.Items.AddChild(Nota,'procNFe');
-       trvwNFe.Items.AddChild(Node,'tpAmb= '     +TpAmbToStr(procNFe.tpAmb));
-       trvwNFe.Items.AddChild(Node,'verAplic= '  +procNFe.verAplic);
-       trvwNFe.Items.AddChild(Node,'chNFe= '     +procNFe.chNFe);
-       trvwNFe.Items.AddChild(Node,'dhRecbto= '  +DateTimeToStr(procNFe.dhRecbto));
-       trvwNFe.Items.AddChild(Node,'nProt= '     +procNFe.nProt);
-       trvwNFe.Items.AddChild(Node,'digVal= '    +procNFe.digVal);
-       trvwNFe.Items.AddChild(Node,'cStat= '     +IntToStr(procNFe.cStat));
-       trvwNFe.Items.AddChild(Node,'xMotivo= '   +procNFe.xMotivo);
-
-       Node := trvwNFe.Items.AddChild(Nota,'Ide');
-       trvwNFe.Items.AddChild(Node,'cNF= '     +IntToStr(Ide.cNF));
-       trvwNFe.Items.AddChild(Node,'natOp= '   +Ide.natOp );
-       trvwNFe.Items.AddChild(Node,'indPag= '  +IndpagToStr(Ide.indPag));
-       trvwNFe.Items.AddChild(Node,'modelo= '  +IntToStr(Ide.modelo));
-       trvwNFe.Items.AddChild(Node,'serie= '   +IntToStr(Ide.serie));
-       trvwNFe.Items.AddChild(Node,'nNF= '     +IntToStr(Ide.nNF));
-       trvwNFe.Items.AddChild(Node,'dEmi= '    +DateToStr(Ide.dEmi));
-       trvwNFe.Items.AddChild(Node,'dSaiEnt= ' +DateToStr(Ide.dSaiEnt));
-       trvwNFe.Items.AddChild(Node,'hSaiEnt= ' +DateToStr(Ide.hSaiEnt));
-       trvwNFe.Items.AddChild(Node,'tpNF= '    +tpNFToStr(Ide.tpNF));
-       trvwNFe.Items.AddChild(Node,'finNFe= '  +FinNFeToStr(Ide.finNFe));
-       trvwNFe.Items.AddChild(Node,'verProc= ' +Ide.verProc);
-       trvwNFe.Items.AddChild(Node,'cUF= '     +IntToStr(Ide.cUF));
-       trvwNFe.Items.AddChild(Node,'cMunFG= '  +IntToStr(Ide.cMunFG));
-       trvwNFe.Items.AddChild(Node,'tpImp= '   +TpImpToStr(Ide.tpImp));
-       trvwNFe.Items.AddChild(Node,'tpEmis= '  +TpEmisToStr(Ide.tpEmis));
-       trvwNFe.Items.AddChild(Node,'cDV= '     +IntToStr(Ide.cDV));
-       trvwNFe.Items.AddChild(Node,'tpAmb= '   +TpAmbToStr(Ide.tpAmb));
-       trvwNFe.Items.AddChild(Node,'finNFe= '  +FinNFeToStr(Ide.finNFe));
-       trvwNFe.Items.AddChild(Node,'procEmi= ' +procEmiToStr(Ide.procEmi));
-       trvwNFe.Items.AddChild(Node,'verProc= ' +Ide.verProc);
-       trvwNFe.Items.AddChild(Node,'dhCont= '  +DateTimeToStr(Ide.dhCont));
-       trvwNFe.Items.AddChild(Node,'xJust= '   +Ide.xJust);
-
-       for i:=0 to Ide.NFref.Count-1 do
-        begin
-          if Ide.NFref.Items[i].refNFe <> '' then
-          begin
-            Node := trvwNFe.Items.AddChild(Node,'NFRef'+IntToStrZero(i+1,3));
-            trvwNFe.Items.AddChild(Node,'refNFe= ' +Ide.NFref.Items[i].refNFe);
-            trvwNFe.Items.AddChild(Node,'cUF= '    +IntToStr(Ide.NFref.Items[i].RefNF.cUF));
-            trvwNFe.Items.AddChild(Node,'AAMM= '   +Ide.NFref.Items[i].RefNF.AAMM);
-            trvwNFe.Items.AddChild(Node,'CNPJ= '   +Ide.NFref.Items[i].RefNF.CNPJ);
-            trvwNFe.Items.AddChild(Node,'modelo= ' +IntToStr(Ide.NFref.Items[i].RefNF.modelo));
-            trvwNFe.Items.AddChild(Node,'serie= '  +IntToStr(Ide.NFref.Items[i].RefNF.serie));
-            trvwNFe.Items.AddChild(Node,'nNF= '    +IntToStr(Ide.NFref.Items[i].RefNF.nNF));
-          end;
-
-          if Ide.NFref.Items[i].RefECF.nCOO <> '' then
-          begin
-            Node := trvwNFe.Items.AddChild(Node,'refECF'+IntToStrZero(i+1,3));
-            trvwNFe.Items.AddChild(Node,'mod= '  +ECFModRefToStr(Ide.NFref.Items[i].RefECF.modelo));
-            trvwNFe.Items.AddChild(Node,'nECF= ' +Ide.NFref.Items[i].RefECF.nECF);
-            trvwNFe.Items.AddChild(Node,'nCOO= ' +Ide.NFref.Items[i].RefECF.nCOO);
-          end;
-        end;
-
-       Node := trvwNFe.Items.AddChild(Nota,'Emit');
-       trvwNFe.Items.AddChild(Node,'CNPJCPF= ' +Emit.CNPJCPF);
-       trvwNFe.Items.AddChild(Node,'IE='       +Emit.IE);
-       trvwNFe.Items.AddChild(Node,'xNome='    +Emit.xNome);
-       trvwNFe.Items.AddChild(Node,'xFant='    +Emit.xFant );
-       trvwNFe.Items.AddChild(Node,'IEST='     +Emit.IEST);
-       trvwNFe.Items.AddChild(Node,'IM='       +Emit.IM);
-       trvwNFe.Items.AddChild(Node,'CNAE='     +Emit.CNAE);
-       trvwNFe.Items.AddChild(Node,'CRT='      +CRTToStr(Emit.CRT));
-
-       Node := trvwNFe.Items.AddChild(Node,'EnderEmit');
-       trvwNFe.Items.AddChild(Node,'Fone='    +Emit.EnderEmit.fone);
-       trvwNFe.Items.AddChild(Node,'CEP='     +IntToStr(Emit.EnderEmit.CEP));
-       trvwNFe.Items.AddChild(Node,'xLgr='    +Emit.EnderEmit.xLgr);
-       trvwNFe.Items.AddChild(Node,'nro='     +Emit.EnderEmit.nro);
-       trvwNFe.Items.AddChild(Node,'xCpl='    +Emit.EnderEmit.xCpl);
-       trvwNFe.Items.AddChild(Node,'xBairro=' +Emit.EnderEmit.xBairro);
-       trvwNFe.Items.AddChild(Node,'cMun='    +IntToStr(Emit.EnderEmit.cMun));
-       trvwNFe.Items.AddChild(Node,'xMun='    +Emit.EnderEmit.xMun);
-       trvwNFe.Items.AddChild(Node,'UF'       +Emit.EnderEmit.UF);
-       trvwNFe.Items.AddChild(Node,'cPais='   +IntToStr(Emit.EnderEmit.cPais));
-       trvwNFe.Items.AddChild(Node,'xPais='   +Emit.EnderEmit.xPais);
-
-       if Avulsa.CNPJ  <> '' then
-        begin
-          Node := trvwNFe.Items.AddChild(Nota,'Avulsa');
-          trvwNFe.Items.AddChild(Node,'CNPJ='    +Avulsa.CNPJ);
-          trvwNFe.Items.AddChild(Node,'xOrgao='  +Avulsa.xOrgao);
-          trvwNFe.Items.AddChild(Node,'matr='    +Avulsa.matr );
-          trvwNFe.Items.AddChild(Node,'xAgente=' +Avulsa.xAgente);
-          trvwNFe.Items.AddChild(Node,'fone='    +Avulsa.fone);
-          trvwNFe.Items.AddChild(Node,'UF='      +Avulsa.UF);
-          trvwNFe.Items.AddChild(Node,'nDAR='    +Avulsa.nDAR);
-          trvwNFe.Items.AddChild(Node,'dEmi='    +DateToStr(Avulsa.dEmi));
-          trvwNFe.Items.AddChild(Node,'vDAR='    +FloatToStr(Avulsa.vDAR));
-          trvwNFe.Items.AddChild(Node,'repEmi='  +Avulsa.repEmi);
-          trvwNFe.Items.AddChild(Node,'dPag='    +DateToStr(Avulsa.dPag));
-        end;
-       Node := trvwNFe.Items.AddChild(Nota,'Dest');
-       trvwNFe.Items.AddChild(Node,'CNPJCPF= ' +Dest.CNPJCPF);
-       trvwNFe.Items.AddChild(Node,'IE='       +Dest.IE);
-       trvwNFe.Items.AddChild(Node,'ISUF='     +Dest.ISUF);
-       trvwNFe.Items.AddChild(Node,'xNome='    +Dest.xNome);
-       trvwNFe.Items.AddChild(Node,'email='    +Dest.Email);
-
-       Node := trvwNFe.Items.AddChild(Node,'EnderDest');
-       trvwNFe.Items.AddChild(Node,'Fone='    +Dest.EnderDest.Fone);
-       trvwNFe.Items.AddChild(Node,'CEP='     +IntToStr(Dest.EnderDest.CEP));
-       trvwNFe.Items.AddChild(Node,'xLgr='    +Dest.EnderDest.xLgr);
-       trvwNFe.Items.AddChild(Node,'nro='     +Dest.EnderDest.nro);
-       trvwNFe.Items.AddChild(Node,'xCpl='    +Dest.EnderDest.xCpl);
-       trvwNFe.Items.AddChild(Node,'xBairro=' +Dest.EnderDest.xBairro);
-       trvwNFe.Items.AddChild(Node,'cMun='    +IntToStr(Dest.EnderDest.cMun));
-       trvwNFe.Items.AddChild(Node,'xMun='    +Dest.EnderDest.xMun);
-       trvwNFe.Items.AddChild(Node,'UF='      +Dest.EnderDest.UF );
-       trvwNFe.Items.AddChild(Node,'cPais='   +IntToStr(Dest.EnderDest.cPais));
-       trvwNFe.Items.AddChild(Node,'xPais='   +Dest.EnderDest.xPais);
-
-       for I := 0 to Det.Count-1 do
-        begin
-          with Det.Items[I] do
-           begin
-               NodeItem := trvwNFe.Items.AddChild(Nota,'Produto'+IntToStrZero(I+1,3));
-               trvwNFe.Items.AddChild(NodeItem,'nItem='  +IntToStr(Prod.nItem) );
-               trvwNFe.Items.AddChild(NodeItem,'cProd='  +Prod.cProd );
-               trvwNFe.Items.AddChild(NodeItem,'cEAN='   +Prod.cEAN);
-               trvwNFe.Items.AddChild(NodeItem,'xProd='  +Prod.xProd);
-               trvwNFe.Items.AddChild(NodeItem,'NCM='    +Prod.NCM);
-               trvwNFe.Items.AddChild(NodeItem,'EXTIPI=' +Prod.EXTIPI);
-               //trvwNFe.Items.AddChild(NodeItem,'genero=' +IntToStr(Prod.genero));
-               trvwNFe.Items.AddChild(NodeItem,'CFOP='   +Prod.CFOP);
-               trvwNFe.Items.AddChild(NodeItem,'uCom='   +Prod.uCom);
-               trvwNFe.Items.AddChild(NodeItem,'qCom='   +FloatToStr(Prod.qCom)) ;
-               trvwNFe.Items.AddChild(NodeItem,'vUnCom=' +FloatToStr(Prod.vUnCom)) ;
-               trvwNFe.Items.AddChild(NodeItem,'vProd='  +FloatToStr(Prod.vProd)) ;
-
-               trvwNFe.Items.AddChild(NodeItem,'cEANTrib=' +Prod.cEANTrib);
-               trvwNFe.Items.AddChild(NodeItem,'uTrib='    +Prod.uTrib);
-               trvwNFe.Items.AddChild(NodeItem,'qTrib='    +FloatToStr(Prod.qTrib));
-               trvwNFe.Items.AddChild(NodeItem,'vUnTrib='  +FloatToStr(Prod.vUnTrib)) ;
-
-               trvwNFe.Items.AddChild(NodeItem,'vFrete='      +FloatToStr(Prod.vFrete)) ;
-               trvwNFe.Items.AddChild(NodeItem,'vSeg='        +FloatToStr(Prod.vSeg)) ;
-               trvwNFe.Items.AddChild(NodeItem,'vDesc='       +FloatToStr(Prod.vDesc)) ;
-               trvwNFe.Items.AddChild(NodeItem,'vOutro='      +FloatToStr(Prod.vOutro)) ;
-               trvwNFe.Items.AddChild(NodeItem,'indTot='      +indTotToStr(Prod.IndTot)) ;
-               trvwNFe.Items.AddChild(NodeItem,'xPed='        +Prod.xPed) ;
-               trvwNFe.Items.AddChild(NodeItem,'nItemPedido=' +IntToStr(Prod.nItemPed)) ;
-
-               trvwNFe.Items.AddChild(NodeItem,'infAdProd=' +infAdProd);
-
-               for J:=0 to Prod.DI.Count-1 do
-                begin
-                  if Prod.DI.Items[j].nDi <> '' then
-                   begin
-                     with Prod.DI.Items[j] do
-                      begin
-                        NodePai := trvwNFe.Items.AddChild(NodeItem,'DI'+IntToStrZero(J+1,3));
-                        trvwNFe.Items.AddChild(NodePai,'nDi='         +nDi);
-                        trvwNFe.Items.AddChild(NodePai,'dDi='         +DateToStr(dDi));
-                        trvwNFe.Items.AddChild(NodePai,'xLocDesemb='  +xLocDesemb);
-                        trvwNFe.Items.AddChild(NodePai,'UFDesemb='    +UFDesemb);
-                        trvwNFe.Items.AddChild(NodePai,'dDesemb='     +DateToStr(dDesemb));
-                        trvwNFe.Items.AddChild(NodePai,'cExportador=' +cExportador);;
-
-                        for K:=0 to adi.Count-1 do
-                         begin
-                           with adi.Items[K] do
-                            begin
-                              Node := trvwNFe.Items.AddChild(NodePai,'LADI'+IntToStrZero(K+1,3));
-                              trvwNFe.Items.AddChild(Node,'nAdicao='     +IntToStr(nAdicao)) ;
-                              trvwNFe.Items.AddChild(Node,'nSeqAdi='     +IntToStr(nSeqAdi)) ;
-                              trvwNFe.Items.AddChild(Node,'cFabricante=' +cFabricante);
-                              trvwNFe.Items.AddChild(Node,'vDescDI='     +FloatToStr(vDescDI));
-                            end;
-                         end;
-                      end;
-                   end
-                  else
-                    Break;
-                end;
-
-              if Prod.veicProd.chassi <> '' then
-               begin
-                 Node := trvwNFe.Items.AddChild(NodeItem,'Veiculo');
-                 with Prod.veicProd do
-                  begin
-                    trvwNFe.Items.AddChild(Node,'tpOP='     +tpOPToStr(tpOP));
-                    trvwNFe.Items.AddChild(Node,'chassi='   +chassi) ;
-                    trvwNFe.Items.AddChild(Node,'cCor='     +cCor);
-                    trvwNFe.Items.AddChild(Node,'xCor='     +xCor);
-                    trvwNFe.Items.AddChild(Node,'pot='      +pot);
-                    trvwNFe.Items.AddChild(Node,'Cilin='      +Cilin);
-                    trvwNFe.Items.AddChild(Node,'pesoL='    +pesoL);
-                    trvwNFe.Items.AddChild(Node,'pesoB='    +pesoB);
-                    trvwNFe.Items.AddChild(Node,'nSerie='   +nSerie);
-                    trvwNFe.Items.AddChild(Node,'tpComb='   +tpComb);
-                    trvwNFe.Items.AddChild(Node,'nMotor='   +nMotor);
-                    trvwNFe.Items.AddChild(Node,'CMT='     +CMT);
-                    trvwNFe.Items.AddChild(Node,'dist='     +dist);
-                    //trvwNFe.Items.AddChild(Node,'RENAVAM='  +RENAVAM);
-                    trvwNFe.Items.AddChild(Node,'anoMod='   +IntToStr(anoMod));
-                    trvwNFe.Items.AddChild(Node,'anoFab='   +IntToStr(anoFab));
-                    trvwNFe.Items.AddChild(Node,'tpPint='   +tpPint);
-                    trvwNFe.Items.AddChild(Node,'tpVeic='   +IntToStr(tpVeic));
-                    trvwNFe.Items.AddChild(Node,'espVeic='  +IntToStr(espVeic));
-                    trvwNFe.Items.AddChild(Node,'VIN='      +VIN);
-                    trvwNFe.Items.AddChild(Node,'condVeic=' +condVeicToStr(condVeic));
-                    trvwNFe.Items.AddChild(Node,'cMod='     +cMod);
-                  end;
-               end;
-
-               for J:=0 to Prod.med.Count-1 do
-                begin
-                  Node := trvwNFe.Items.AddChild(NodeItem,'Medicamento'+IntToStrZero(J+1,3) );
-                  with Prod.med.Items[J] do
-                   begin
-                     trvwNFe.Items.AddChild(Node,'nLote=' +nLote) ;
-                     trvwNFe.Items.AddChild(Node,'qLote=' +FloatToStr(qLote)) ;
-                     trvwNFe.Items.AddChild(Node,'dFab='  +DateToStr(dFab)) ;
-                     trvwNFe.Items.AddChild(Node,'dVal='  +DateToStr(dVal)) ;
-                     trvwNFe.Items.AddChild(Node,'vPMC='  +FloatToStr(vPMC)) ;
-                    end;
-                end;
-
-               for J:=0 to Prod.arma.Count-1 do
-                begin
-                  Node := trvwNFe.Items.AddChild(NodeItem,'Arma'+IntToStrZero(J+1,3));
-                  with Prod.arma.Items[J] do
-                   begin
-                     trvwNFe.Items.AddChild(Node,'nSerie=' +nSerie) ;
-                     trvwNFe.Items.AddChild(Node,'tpArma=' +tpArmaToStr(tpArma)) ;
-                     trvwNFe.Items.AddChild(Node,'nCano='  +nCano) ;
-                     trvwNFe.Items.AddChild(Node,'descr='  +descr) ;
-                    end;
-                end;
-
-               if (Prod.comb.cProdANP > 0) then
-                begin
-                 NodePai := trvwNFe.Items.AddChild(NodeItem,'Combustivel');
-                 with Prod.comb do
-                  begin
-                    trvwNFe.Items.AddChild(NodePai,'cProdANP=' +IntToStr(cProdANP)) ;
-                    trvwNFe.Items.AddChild(NodePai,'CODIF='    +CODIF) ;
-                    trvwNFe.Items.AddChild(NodePai,'qTemp='    +FloatToStr(qTemp)) ;
-                    trvwNFe.Items.AddChild(NodePai,'UFcons='    +UFcons) ;                    
-
-                    Node := trvwNFe.Items.AddChild(NodePai,'CIDE'+IntToStrZero(I+1,3));
-                    trvwNFe.Items.AddChild(Node,'qBCprod='   +FloatToStr(CIDE.qBCprod)) ;
-                    trvwNFe.Items.AddChild(Node,'vAliqProd=' +FloatToStr(CIDE.vAliqProd)) ;
-                    trvwNFe.Items.AddChild(Node,'vCIDE='     +FloatToStr(CIDE.vCIDE)) ;
-
-                    Node := trvwNFe.Items.AddChild(NodePai,'ICMSComb'+IntToStrZero(I+1,3));
-                    trvwNFe.Items.AddChild(Node,'vBCICMS='   +FloatToStr(ICMS.vBCICMS)) ;
-                    trvwNFe.Items.AddChild(Node,'vICMS='     +FloatToStr(ICMS.vICMS)) ;
-                    trvwNFe.Items.AddChild(Node,'vBCICMSST=' +FloatToStr(ICMS.vBCICMSST)) ;
-                    trvwNFe.Items.AddChild(Node,'vICMSST='   +FloatToStr(ICMS.vICMSST)) ;
-
-                    if (ICMSInter.vBCICMSSTDest>0) then
-                     begin
-                       Node := trvwNFe.Items.AddChild(NodePai,'ICMSInter'+IntToStrZero(I+1,3));
-                       trvwNFe.Items.AddChild(Node,'vBCICMSSTDest=' +FloatToStr(ICMSInter.vBCICMSSTDest)) ;
-                       trvwNFe.Items.AddChild(Node,'vICMSSTDest='   +FloatToStr(ICMSInter.vICMSSTDest)) ;
-                     end;
-
-                    if (ICMSCons.vBCICMSSTCons>0) then
-                     begin
-                       Node := trvwNFe.Items.AddChild(NodePai,'ICMSCons'+IntToStrZero(I+1,3));
-                       trvwNFe.Items.AddChild(Node,'vBCICMSSTCons=' +FloatToStr(ICMSCons.vBCICMSSTCons)) ;
-                       trvwNFe.Items.AddChild(Node,'vICMSSTCons='   +FloatToStr(ICMSCons.vICMSSTCons)) ;
-                       trvwNFe.Items.AddChild(Node,'UFCons='        +ICMSCons.UFcons) ;
-                     end;
-                  end;
-               end;
-
-               with Imposto do
-                begin
-                   NodePai := trvwNFe.Items.AddChild(NodeItem,'Imposto');
-
-                   if ISSQN.cSitTrib = ISSQNcSitTribVazio then
-                   begin
-                     Node := trvwNFe.Items.AddChild(NodePai,'ICMS');
-                     with ICMS do
-                      begin
-                        trvwNFe.Items.AddChild(Node,'CST=' +CSTICMSToStr(CST));
-                        trvwNFe.Items.AddChild(Node,'CSOSN=' +CSOSNIcmsToStr(CSOSN));
-                        trvwNFe.Items.AddChild(Node,'orig='  +OrigToStr(ICMS.orig));
-                        trvwNFe.Items.AddChild(Node,'modBC=' +modBCToStr(ICMS.modBC));
-                        trvwNFe.Items.AddChild(Node,'pRedBC=' +FloatToStr(ICMS.pRedBC));
-                        trvwNFe.Items.AddChild(Node,'vBC='   +FloatToStr(ICMS.vBC));
-                        trvwNFe.Items.AddChild(Node,'pICMS=' +FloatToStr(ICMS.pICMS));
-                        trvwNFe.Items.AddChild(Node,'vICMS=' +FloatToStr(ICMS.vICMS));
-                        trvwNFe.Items.AddChild(Node,'modBCST='  +modBCSTToStr(ICMS.modBCST));
-                        trvwNFe.Items.AddChild(Node,'pMVAST='   +FloatToStr(ICMS.pMVAST));
-                        trvwNFe.Items.AddChild(Node,'pRedBCST=' +FloatToStr(ICMS.pRedBCST));
-                        trvwNFe.Items.AddChild(Node,'vBCST='    +FloatToStr(ICMS.vBCST));
-                        trvwNFe.Items.AddChild(Node,'pICMSST='  +FloatToStr(ICMS.pICMSST));
-                        trvwNFe.Items.AddChild(Node,'vICMSST='  +FloatToStr(ICMS.vICMSST));
-                        trvwNFe.Items.AddChild(Node,'vBCSTRet='   +FloatToStr(ICMS.vBCSTRet));
-                        trvwNFe.Items.AddChild(Node,'vICMSSTRet=' +FloatToStr(ICMS.vICMSSTRet));
-                        trvwNFe.Items.AddChild(Node,'pCredSN='   +FloatToStr(ICMS.pCredSN));
-                        trvwNFe.Items.AddChild(Node,'vCredICMSSN='   +FloatToStr(ICMS.vCredICMSSN));
-                      end;
-                   end
-                   else
-                   begin
-                     Node := trvwNFe.Items.AddChild(NodePai,'ISSQN');
-                     with ISSQN do
-                      begin
-                        trvwNFe.Items.AddChild(Node,'vBC='       +FloatToStr(vBC));
-                        trvwNFe.Items.AddChild(Node,'vAliq='     +FloatToStr(vAliq));
-                        trvwNFe.Items.AddChild(Node,'vISSQN='    +FloatToStr(vISSQN));
-                        trvwNFe.Items.AddChild(Node,'cMunFG='    +IntToStr(cMunFG));
-                        trvwNFe.Items.AddChild(Node,'cListServ=' +IntToStr(cListServ));
-                      end;
-                   end;
-
-                   if (IPI.vBC > 0) then
-                    begin
-                      Node := trvwNFe.Items.AddChild(NodePai,'IPI');
-                      with IPI do
-                       begin
-                         trvwNFe.Items.AddChild(Node,'CST='       +CSTIPIToStr(CST)) ;
-                         trvwNFe.Items.AddChild(Node,'clEnq='    +clEnq);
-                         trvwNFe.Items.AddChild(Node,'CNPJProd=' +CNPJProd);
-                         trvwNFe.Items.AddChild(Node,'cSelo='    +cSelo);
-                         trvwNFe.Items.AddChild(Node,'qSelo='    +IntToStr(qSelo));
-                         trvwNFe.Items.AddChild(Node,'cEnq='     +cEnq);
-
-                         trvwNFe.Items.AddChild(Node,'vBC='    +FloatToStr(vBC));
-                         trvwNFe.Items.AddChild(Node,'qUnid='  +FloatToStr(qUnid));
-                         trvwNFe.Items.AddChild(Node,'vUnid='  +FloatToStr(vUnid));
-                         trvwNFe.Items.AddChild(Node,'pIPI='   +FloatToStr(pIPI));
-                         trvwNFe.Items.AddChild(Node,'vIPI='   +FloatToStr(vIPI));
-                       end;
-                    end;
-
-                   if (II.vBc > 0) then
-                    begin
-                      Node := trvwNFe.Items.AddChild(NodePai,'II');
-                      with II do
-                       begin
-                         trvwNFe.Items.AddChild(Node,'vBc='      +FloatToStr(vBc));
-                         trvwNFe.Items.AddChild(Node,'vDespAdu=' +FloatToStr(vDespAdu));
-                         trvwNFe.Items.AddChild(Node,'vII='      +FloatToStr(vII));
-                         trvwNFe.Items.AddChild(Node,'vIOF='     +FloatToStr(vIOF));
-                       end;
-                    end;
-
-                   Node := trvwNFe.Items.AddChild(NodePai,'PIS');
-                   with PIS do
-                    begin
-                      trvwNFe.Items.AddChild(Node,'CST=' +CSTPISToStr(CST));
-
-                      if (CST = pis01) or (CST = pis02) then
-                       begin
-                         trvwNFe.Items.AddChild(Node,'vBC='  +FloatToStr(PIS.vBC));
-                         trvwNFe.Items.AddChild(Node,'pPIS=' +FloatToStr(PIS.pPIS));
-                         trvwNFe.Items.AddChild(Node,'vPIS=' +FloatToStr(PIS.vPIS));
-                       end
-                      else if CST = pis03 then
-                       begin
-                         trvwNFe.Items.AddChild(Node,'qBCProd='   +FloatToStr(PIS.qBCProd));
-                         trvwNFe.Items.AddChild(Node,'vAliqProd=' +FloatToStr(PIS.vAliqProd));
-                         trvwNFe.Items.AddChild(Node,'vPIS='      +FloatToStr(PIS.vPIS));
-                       end
-                      else if CST = pis99 then
-                       begin
-                         trvwNFe.Items.AddChild(Node,'vBC='       +FloatToStr(PIS.vBC));
-                         trvwNFe.Items.AddChild(Node,'pPIS='      +FloatToStr(PIS.pPIS));
-                         trvwNFe.Items.AddChild(Node,'qBCProd='   +FloatToStr(PIS.qBCProd));
-                         trvwNFe.Items.AddChild(Node,'vAliqProd=' +FloatToStr(PIS.vAliqProd));
-                         trvwNFe.Items.AddChild(Node,'vPIS='      +FloatToStr(PIS.vPIS));
-                       end;
-                    end;
-
-                   if (PISST.vBc>0) then
-                    begin
-                      Node := trvwNFe.Items.AddChild(NodePai,'PISST');
-                      with PISST do
-                       begin
-                         trvwNFe.Items.AddChild(Node,'vBc='       +FloatToStr(vBc));
-                         trvwNFe.Items.AddChild(Node,'pPis='      +FloatToStr(pPis));
-                         trvwNFe.Items.AddChild(Node,'qBCProd='   +FloatToStr(qBCProd));
-                         trvwNFe.Items.AddChild(Node,'vAliqProd=' +FloatToStr(vAliqProd));
-                         trvwNFe.Items.AddChild(Node,'vPIS='      +FloatToStr(vPIS));
-                       end;
-                      end;
-
-                   Node := trvwNFe.Items.AddChild(NodePai,'COFINS');
-                   with COFINS do
-                    begin
-                      trvwNFe.Items.AddChild(Node,'CST=' +CSTCOFINSToStr(CST));
-
-                      if (CST = cof01) or (CST = cof02)   then
-                       begin
-                         trvwNFe.Items.AddChild(Node,'vBC='     +FloatToStr(COFINS.vBC));
-                         trvwNFe.Items.AddChild(Node,'pCOFINS=' +FloatToStr(COFINS.pCOFINS));
-                         trvwNFe.Items.AddChild(Node,'vCOFINS=' +FloatToStr(COFINS.vCOFINS));
-                       end
-                      else if CST = cof03 then
-                       begin
-                         trvwNFe.Items.AddChild(Node,'qBCProd='   +FloatToStr(COFINS.qBCProd));
-                         trvwNFe.Items.AddChild(Node,'vAliqProd=' +FloatToStr(COFINS.vAliqProd));
-                         trvwNFe.Items.AddChild(Node,'vCOFINS='   +FloatToStr(COFINS.vCOFINS));
-                       end
-                      else if CST = cof99 then
-                       begin
-                         trvwNFe.Items.AddChild(Node,'vBC='       +FloatToStr(COFINS.vBC));
-                         trvwNFe.Items.AddChild(Node,'pCOFINS='   +FloatToStr(COFINS.pCOFINS));
-                         trvwNFe.Items.AddChild(Node,'qBCProd='   +FloatToStr(COFINS.qBCProd));
-                         trvwNFe.Items.AddChild(Node,'vAliqProd=' +FloatToStr(COFINS.vAliqProd));
-                         trvwNFe.Items.AddChild(Node,'vCOFINS='   +FloatToStr(COFINS.vCOFINS));
-                       end;
-                    end;
-
-                   if (COFINSST.vBC > 0) then
-                    begin
-                      Node := trvwNFe.Items.AddChild(NodePai,'COFINSST');
-                      with COFINSST do
-                       begin
-                         trvwNFe.Items.AddChild(Node,'vBC='       +FloatToStr(vBC));
-                         trvwNFe.Items.AddChild(Node,'pCOFINS='   +FloatToStr(pCOFINS));
-                         trvwNFe.Items.AddChild(Node,'qBCProd='   +FloatToStr(qBCProd));
-                         trvwNFe.Items.AddChild(Node,'vAliqProd=' +FloatToStr(vAliqProd));
-                         trvwNFe.Items.AddChild(Node,'vCOFINS='   +FloatToStr(vCOFINS));
-                       end;
-                    end;
-                end;
-             end;
-          end ;
-
-       NodePai := trvwNFe.Items.AddChild(Nota,'Total');
-       Node := trvwNFe.Items.AddChild(NodePai,'ICMSTot');
-       trvwNFe.Items.AddChild(Node,'vBC='     +FloatToStr(Total.ICMSTot.vBC));
-       trvwNFe.Items.AddChild(Node,'vICMS='   +FloatToStr(Total.ICMSTot.vICMS)) ;
-       trvwNFe.Items.AddChild(Node,'vBCST='   +FloatToStr(Total.ICMSTot.vBCST)) ;
-       trvwNFe.Items.AddChild(Node,'vST='     +FloatToStr(Total.ICMSTot.vST)) ;
-       trvwNFe.Items.AddChild(Node,'vProd='   +FloatToStr(Total.ICMSTot.vProd)) ;
-       trvwNFe.Items.AddChild(Node,'vFrete='  +FloatToStr(Total.ICMSTot.vFrete)) ;
-       trvwNFe.Items.AddChild(Node,'vSeg='    +FloatToStr(Total.ICMSTot.vSeg)) ;
-       trvwNFe.Items.AddChild(Node,'vDesc='   +FloatToStr(Total.ICMSTot.vDesc)) ;
-       trvwNFe.Items.AddChild(Node,'vII='     +FloatToStr(Total.ICMSTot.vII)) ;
-       trvwNFe.Items.AddChild(Node,'vIPI='    +FloatToStr(Total.ICMSTot.vIPI)) ;
-       trvwNFe.Items.AddChild(Node,'vPIS='    +FloatToStr(Total.ICMSTot.vPIS)) ;
-       trvwNFe.Items.AddChild(Node,'vCOFINS=' +FloatToStr(Total.ICMSTot.vCOFINS)) ;
-       trvwNFe.Items.AddChild(Node,'vOutro='  +FloatToStr(Total.ICMSTot.vOutro)) ;
-       trvwNFe.Items.AddChild(Node,'vNF='     +FloatToStr(Total.ICMSTot.vNF)) ;
-
-       if Total.ISSQNtot.vServ > 0 then
-        begin
-          Node := trvwNFe.Items.AddChild(NodePai,'ISSQNtot');
-          trvwNFe.Items.AddChild(Node,'vServ='   +FloatToStr(Total.ISSQNtot.vServ)) ;
-          trvwNFe.Items.AddChild(Node,'vBC='     +FloatToStr(Total.ISSQNTot.vBC)) ;
-          trvwNFe.Items.AddChild(Node,'vISS='    +FloatToStr(Total.ISSQNTot.vISS)) ;
-          trvwNFe.Items.AddChild(Node,'vPIS='    +FloatToStr(Total.ISSQNTot.vPIS)) ;
-          trvwNFe.Items.AddChild(Node,'vCOFINS=' +FloatToStr(Total.ISSQNTot.vCOFINS)) ;
-        end;
-
-       Node := trvwNFe.Items.AddChild(NodePai,'retTrib');
-       trvwNFe.Items.AddChild(Node,'vRetPIS='   +FloatToStr(Total.retTrib.vRetPIS)) ;
-       trvwNFe.Items.AddChild(Node,'vRetCOFINS='+FloatToStr(Total.retTrib.vRetCOFINS)) ;
-       trvwNFe.Items.AddChild(Node,'vRetCSLL='  +FloatToStr(Total.retTrib.vRetCSLL)) ;
-       trvwNFe.Items.AddChild(Node,'vBCIRRF='   +FloatToStr(Total.retTrib.vBCIRRF)) ;
-       trvwNFe.Items.AddChild(Node,'vIRRF='     +FloatToStr(Total.retTrib.vIRRF)) ;
-       trvwNFe.Items.AddChild(Node,'vBCRetPrev='+FloatToStr(Total.retTrib.vBCRetPrev)) ;
-       trvwNFe.Items.AddChild(Node,'vRetPrev='  +FloatToStr(Total.retTrib.vRetPrev)) ;
-
-       NodePai := trvwNFe.Items.AddChild(Nota,'Transp');
-       Node := trvwNFe.Items.AddChild(NodePai,'Transporta');
-       trvwNFe.Items.AddChild(Node,'modFrete=' +modFreteToStr(Transp.modFrete));
-       trvwNFe.Items.AddChild(Node,'CNPJCPF='  +Transp.Transporta.CNPJCPF);
-       trvwNFe.Items.AddChild(Node,'xNome='    +Transp.Transporta.xNome);
-       trvwNFe.Items.AddChild(Node,'IE='       +Transp.Transporta.IE);
-       trvwNFe.Items.AddChild(Node,'xEnder='   +Transp.Transporta.xEnder);
-       trvwNFe.Items.AddChild(Node,'xMun='     +Transp.Transporta.xMun);
-       trvwNFe.Items.AddChild(Node,'UF='       +Transp.Transporta.UF);
-
-       Node := trvwNFe.Items.AddChild(NodePai,'retTransp');
-       trvwNFe.Items.AddChild(Node,'vServ='    +FloatToStr(Transp.retTransp.vServ)) ;
-       trvwNFe.Items.AddChild(Node,'vBCRet='   +FloatToStr(Transp.retTransp.vBCRet)) ;
-       trvwNFe.Items.AddChild(Node,'pICMSRet=' +FloatToStr(Transp.retTransp.pICMSRet)) ;
-       trvwNFe.Items.AddChild(Node,'vICMSRet=' +FloatToStr(Transp.retTransp.vICMSRet)) ;
-       trvwNFe.Items.AddChild(Node,'CFOP='     +Transp.retTransp.CFOP);
-       trvwNFe.Items.AddChild(Node,'cMunFG='   +FloatToStr(Transp.retTransp.cMunFG));
-
-       Node := trvwNFe.Items.AddChild(NodePai,'veicTransp');
-       trvwNFe.Items.AddChild(Node,'placa='  +Transp.veicTransp.placa);
-       trvwNFe.Items.AddChild(Node,'UF='     +Transp.veicTransp.UF);
-       trvwNFe.Items.AddChild(Node,'RNTC='   +Transp.veicTransp.RNTC);
-
-       for I:=0 to Transp.Reboque.Count-1 do
-        begin
-          Node := trvwNFe.Items.AddChild(NodePai,'Reboque'+IntToStrZero(I+1,3));
-          with Transp.Reboque.Items[I] do
-           begin
-             trvwNFe.Items.AddChild(Node,'placa=' +placa) ;
-             trvwNFe.Items.AddChild(Node,'UF='    +UF) ;
-             trvwNFe.Items.AddChild(Node,'RNTC='  +RNTC) ;
-           end;
-        end;
-
-       for I:=0 to Transp.Vol.Count-1 do
-        begin
-          Node := trvwNFe.Items.AddChild(NodePai,'Volume'+IntToStrZero(I+1,3));
-          with Transp.Vol.Items[I] do
-           begin
-             trvwNFe.Items.AddChild(Node,'qVol='  +IntToStr(qVol)) ;
-             trvwNFe.Items.AddChild(Node,'esp='   +esp);
-             trvwNFe.Items.AddChild(Node,'marca=' +marca);
-             trvwNFe.Items.AddChild(Node,'nVol='  +nVol);
-             trvwNFe.Items.AddChild(Node,'pesoL=' +FloatToStr(pesoL)) ;
-             trvwNFe.Items.AddChild(Node,'pesoB'  +FloatToStr(pesoB)) ;
-
-             for J:=0 to Lacres.Count-1 do
-              begin
-                Node := trvwNFe.Items.AddChild(Node,'Lacre'+IntToStrZero(I+1,3)+IntToStrZero(J+1,3) );
-                trvwNFe.Items.AddChild(Node,'nLacre='+Lacres.Items[J].nLacre) ;
-              end;
-           end;
-        end;
-
-       NodePai := trvwNFe.Items.AddChild(Nota,'Cobr');
-       Node    := trvwNFe.Items.AddChild(NodePai,'Fat');
-       trvwNFe.Items.AddChild(Node,'nFat='  +Cobr.Fat.nFat);
-       trvwNFe.Items.AddChild(Node,'vOrig=' +FloatToStr(Cobr.Fat.vOrig)) ;
-       trvwNFe.Items.AddChild(Node,'vDesc=' +FloatToStr(Cobr.Fat.vDesc)) ;
-       trvwNFe.Items.AddChild(Node,'vLiq='  +FloatToStr(Cobr.Fat.vLiq)) ;
-
-       for I:=0 to Cobr.Dup.Count-1 do
-        begin
-          Node    := trvwNFe.Items.AddChild(NodePai,'Duplicata'+IntToStrZero(I+1,3));
-          with Cobr.Dup.Items[I] do
-           begin
-             trvwNFe.Items.AddChild(Node,'nDup='  +nDup) ;
-             trvwNFe.Items.AddChild(Node,'dVenc=' +DateToStr(dVenc));
-             trvwNFe.Items.AddChild(Node,'vDup='  +FloatToStr(vDup)) ;
-           end;
-        end;
-
-       NodePai := trvwNFe.Items.AddChild(Nota,'InfAdic');
-       trvwNFe.Items.AddChild(NodePai,'infCpl='     +InfAdic.infCpl);
-       trvwNFe.Items.AddChild(NodePai,'infAdFisco=' +InfAdic.infAdFisco);
-
-       for I:=0 to InfAdic.obsCont.Count-1 do
-        begin
-          Node := trvwNFe.Items.AddChild(NodePai,'obsCont'+IntToStrZero(I+1,3));
-          with InfAdic.obsCont.Items[I] do
-           begin
-             trvwNFe.Items.AddChild(Node,'xCampo=' +xCampo) ;
-             trvwNFe.Items.AddChild(Node,'xTexto=' +xTexto);
-           end;
-        end;
-
-         for I:=0 to InfAdic.obsFisco.Count-1 do
-          begin
-            Node := trvwNFe.Items.AddChild(NodePai,'obsFisco'+IntToStrZero(I+1,3));
-            with InfAdic.obsFisco.Items[I] do
-             begin
-                trvwNFe.Items.AddChild(Node,'xCampo=' +xCampo) ;
-                trvwNFe.Items.AddChild(Node,'xTexto=' +xTexto);
-             end;
-          end;
-
-         for I:=0 to InfAdic.procRef.Count-1 do
-          begin
-            Node := trvwNFe.Items.AddChild(NodePai,'procRef'+IntToStrZero(I+1,3));
-            with InfAdic.procRef.Items[I] do
-             begin
-               trvwNFe.Items.AddChild(Node,'nProc='   +nProc) ;
-               trvwNFe.Items.AddChild(Node,'indProc=' +indProcToStr(indProc));
-             end;
-          end;
-
-         if (exporta.UFembarq <> '') then
-          begin
-            Node := trvwNFe.Items.AddChild(Nota,'exporta');
-            trvwNFe.Items.AddChild(Node,'UFembarq='   +exporta.UFembarq) ;
-            trvwNFe.Items.AddChild(Node,'xLocEmbarq=' +exporta.xLocEmbarq);
-          end;
-
-         if (compra.xNEmp <> '') then
-          begin
-            Node := trvwNFe.Items.AddChild(Nota,'compra');
-            trvwNFe.Items.AddChild(Node,'xNEmp=' +compra.xNEmp) ;
-            trvwNFe.Items.AddChild(Node,'xPed='  +compra.xPed);
-            trvwNFe.Items.AddChild(Node,'xCont=' +compra.xCont);
-          end;
-     end;
-       PageControl2.ActivePageIndex := 3;
-     end;
-
-  end;
 end;
 
 procedure TForm1.lblMouseEnter(Sender: TObject);
@@ -1923,244 +1272,6 @@ begin
       Panel3.Height := 100;
       PageControl2.Align := alClient;
       gTipe := 2;
-end;
-
-procedure TForm1.btnCarregarXMLEnviarClick(Sender: TObject);
-begin
-  OpenDialog1.Title := 'Selecione a NFE';
-  OpenDialog1.DefaultExt := '*-nfe.XML';
-  OpenDialog1.Filter := 'Arquivos NFE (*-nfe.XML)|*-nfe.XML|Arquivos XML (*.XML)|*.XML|Todos os Arquivos (*.*)|*.*';
-  OpenDialog1.InitialDir := ACBrNFe1.Configuracoes.Geral.PathSalvar;
-  if OpenDialog1.Execute then
-  begin
-    ACBrNFe1.NotasFiscais.Clear;
-    ACBrNFe1.NotasFiscais.LoadFromFile(OpenDialog1.FileName);
-
-    ACBrNFe1.NotasFiscais.GerarNFe;
-    ACBrNFe1.Enviar(1,True);
-
-    MemoResp.Lines.Text := UTF8Encode(ACBrNFe1.WebServices.Retorno.RetWS);
-    memoRespWS.Lines.Text := UTF8Encode(ACBrNFe1.WebServices.Retorno.RetornoWS);
-    LoadXML(MemoResp, WBResposta);
-
-   MemoDados.Lines.Add('');
-   MemoDados.Lines.Add('Envio NFe');
-   MemoDados.Lines.Add('tpAmb: '+ TpAmbToStr(ACBrNFe1.WebServices.Retorno.TpAmb));
-   MemoDados.Lines.Add('verAplic: '+ ACBrNFe1.WebServices.Retorno.verAplic);
-   MemoDados.Lines.Add('cStat: '+ IntToStr(ACBrNFe1.WebServices.Retorno.cStat));
-   MemoDados.Lines.Add('cUF: '+ IntToStr(ACBrNFe1.WebServices.Retorno.cUF));
-   MemoDados.Lines.Add('xMotivo: '+ ACBrNFe1.WebServices.Retorno.xMotivo);
-   MemoDados.Lines.Add('cMsg: '+ IntToStr(ACBrNFe1.WebServices.Retorno.cMsg));
-   MemoDados.Lines.Add('xMsg: '+ ACBrNFe1.WebServices.Retorno.xMsg);
-   MemoDados.Lines.Add('Recibo: '+ ACBrNFe1.WebServices.Retorno.Recibo);
-   MemoDados.Lines.Add('Protocolo: '+ ACBrNFe1.WebServices.Retorno.Protocolo);
-  end;
-end;
-
-procedure TForm1.btnCartadeCorrecaoClick(Sender: TObject);
-var
- Chave, idLote, CNPJ, nSeqEvento, Correcao : string;
-begin
-  if not(InputQuery('WebServices Eventos: Carta de Correção', 'Chave da NF-e', Chave)) then
-     exit;
-  Chave := Trim(OnlyNumber(Chave));
-  idLote := '1';
-  if not(InputQuery('WebServices Eventos: Carta de Correção', 'Identificador de controle do Lote de envio do Evento', idLote)) then
-     exit;
-  CNPJ := copy(Chave,7,14);
-  if not(InputQuery('WebServices Eventos: Carta de Correção', 'CNPJ ou o CPF do autor do Evento', CNPJ)) then
-     exit;
-  nSeqEvento := '1';
-  if not(InputQuery('WebServices Eventos: Carta de Correção', 'Sequencial do evento para o mesmo tipo de evento', nSeqEvento)) then
-     exit;
-  Correcao := 'Correção a ser considerada, texto livre. A correção mais recente substitui as anteriores.';
-  if not(InputQuery('WebServices Eventos: Carta de Correção', 'Correção a ser considerada', Correcao)) then
-     exit;
-  ACBrNFe1.EventoNFe.Evento.Clear;
-
-  with ACBrNFe1.EventoNFe.Evento.Add do
-   begin
-     infEvento.chNFe := Chave;
-     infEvento.CNPJ   := CNPJ;
-     infEvento.dhEvento := now;
-     infEvento.tpEvento := teCCe;
-     infEvento.nSeqEvento := StrToInt(nSeqEvento);
-     infEvento.detEvento.xCorrecao := Correcao;
-   end;
-  ACBrNFe1.EnviarEventoNFe(StrToInt(idLote));
-
-  MemoResp.Lines.Text := UTF8Encode(ACBrNFe1.WebServices.EnvEvento.RetWS);
-  LoadXML(MemoResp, WBResposta);
-end;
-
-procedure TForm1.btnValidarAssinaturaClick(Sender: TObject);
-var
-  Msg : String;
-begin
-  OpenDialog1.Title := 'Selecione a NFE';
-  OpenDialog1.DefaultExt := '*-nfe.XML';
-  OpenDialog1.Filter := 'Arquivos NFE (*-nfe.XML)|*-nfe.XML|Arquivos XML (*.XML)|*.XML|Todos os Arquivos (*.*)|*.*';
-  OpenDialog1.InitialDir := ACBrNFe1.Configuracoes.Geral.PathSalvar;
-  if OpenDialog1.Execute then
-  begin
-    ACBrNFe1.NotasFiscais.Clear;
-    ACBrNFe1.NotasFiscais.LoadFromFile(OpenDialog1.FileName);
-    if not ACBrNFe1.NotasFiscais.ValidaAssinatura(Msg) then
-      MemoDados.Lines.Add('Erro: '+Msg)
-    else
-      ShowMessage('Assinatura Válida');  
-  end;
-end;
-
-procedure TForm1.btnImprimirCCeClick(Sender: TObject);
-begin
-  OpenDialog1.Title := 'Selecione a NFE';
-  OpenDialog1.DefaultExt := '*.XML';
-  OpenDialog1.Filter := 'Arquivos XML (*.XML)|*.XML|Todos os Arquivos (*.*)|*.*';
-  OpenDialog1.InitialDir := ACBrNFe1.Configuracoes.Geral.PathSalvar;
-  if OpenDialog1.Execute then
-  begin
-    ACBrNFe1.NotasFiscais.Clear;
-    ACBrNFe1.NotasFiscais.LoadFromFile(OpenDialog1.FileName);
-  end;
-    
-  OpenDialog1.Title := 'Selecione o Evento';
-  OpenDialog1.DefaultExt := '*.XML';
-  OpenDialog1.Filter := 'Arquivos XML (*.XML)|*.XML|Todos os Arquivos (*.*)|*.*';
-  OpenDialog1.InitialDir := ACBrNFe1.Configuracoes.Geral.PathSalvar;
-  if OpenDialog1.Execute then
-  begin
-    ACBrNFe1.EventoNFe.Evento.Clear;
-    ACBrNFe1.EventoNFe.LerXML(OpenDialog1.FileName) ;
-    ACBrNFe1.ImprimirEvento;
-  end;
-//  LoadXML(MemoResp, WBResposta);
-end;
-
-procedure TForm1.btnEnviarEventoClick(Sender: TObject);
-var
- Para : String;
- CC, Evento: Tstrings;
-begin
-  if not(InputQuery('Enviar Email', 'Email de destino', Para)) then
-    exit;
-    
-  OpenDialog1.Title := 'Selecione a NFE';
-  OpenDialog1.DefaultExt := '*.XML';
-  OpenDialog1.Filter := 'Arquivos XML (*.XML)|*.XML|Todos os Arquivos (*.*)|*.*';
-  OpenDialog1.InitialDir := ACBrNFe1.Configuracoes.Geral.PathSalvar;
-  if OpenDialog1.Execute then
-  begin
-    ACBrNFe1.NotasFiscais.Clear;
-    ACBrNFe1.NotasFiscais.LoadFromFile(OpenDialog1.FileName);
-  end;
-
-  OpenDialog1.Title := 'Selecione ao Evento';
-  OpenDialog1.DefaultExt := '*.XML';
-  OpenDialog1.Filter := 'Arquivos XML (*.XML)|*.XML|Todos os Arquivos (*.*)|*.*';
-  OpenDialog1.InitialDir := ACBrNFe1.Configuracoes.Geral.PathSalvar;
-  if OpenDialog1.Execute then
-  begin
-    Evento := TStringList.Create;
-    Evento.Clear;
-    Evento.Add(OpenDialog1.FileName);
-    ACBrNFe1.EventoNFe.Evento.Clear;
-    ACBrNFe1.EventoNFe.LerXML(OpenDialog1.FileName) ;
-    CC:=TstringList.Create;
-    CC.Add('andrefmoraes@gmail.com'); //especifique um email válido
-    CC.Add('anfm@zipmail.com.br');    //especifique um email válido
-    ACBrNFe1.EnviarEmailEvento(edtSmtpHost.Text
-                             , edtSmtpPort.Text
-                             , edtSmtpUser.Text
-                             , edtSmtpPass.Text
-                             , edtSmtpUser.Text
-                             , Para
-                             , edtEmailAssunto.Text
-                             , mmEmailMsg.Lines
-                             , cbEmailSSL.Checked // SSL - Conexão Segura
-                             , True //Enviar PDF junto
-                             , CC //Lista com emails que serão enviado cópias - TStrings
-                             , Evento // Lista de anexos - TStrings
-                             , False  //Pede confirmação de leitura do email
-                             , False  //Aguarda Envio do Email(não usa thread)
-                             , 'ACBrNFe2' // Nome do Rementente
-                             , cbEmailSSL.Checked ); // Auto TLS
-    CC.Free;
-    Evento.Free;
-  end;
-end;
-
-procedure TForm1.btnCriarEnviarNFCeClick(Sender: TObject);
-var
- vAux, vNumLote, vSincrono : String;
- Sincrono : boolean;
-begin
-  if not(InputQuery('WebServices Enviar', 'Numero da Nota', vAux)) then
-    exit;
-
-  if not(InputQuery('WebServices Enviar', 'Numero do Lote', vNumLote)) then
-    exit;
-
-  vSincrono := '1';
-  if not(InputQuery('WebServices Enviar', 'Envio Síncrono(1=Sim, 0=Não)', vSincrono)) then
-    exit;
-
-  vNumLote := OnlyNumber(vNumLote);
-
-  if Trim(vNumLote) = '' then
-   begin
-     MessageDlg('Número do Lote inválido.',mtError,[mbok],0);
-     exit;
-   end;
-
-  if (Trim(vSincrono) <> '1') and
-     (Trim(vSincrono) <> '0') then
-   begin
-     MessageDlg('Valor Inválido.',mtError,[mbok],0);
-     exit;
-   end;
-
-  if (Trim(vSincrono) = '1') then
-    Sincrono := True
-  else
-    Sincrono := False;  
-
-  ACBrNFe1.NotasFiscais.Clear;
-
-  ACBrNFe1.Configuracoes.Geral.ModeloDF := moNFCe;  
-  //GerarNFCe(vAux);
-
-  ACBrNFe1.Enviar(vNumLote,True,Sincrono);
-
-  MemoResp.Lines.Text := UTF8Encode(ACBrNFe1.WebServices.Retorno.RetWS);
-  memoRespWS.Lines.Text := UTF8Encode(ACBrNFe1.WebServices.Retorno.RetornoWS);
-  LoadXML(MemoResp, WBResposta);
-
-  MemoDados.Lines.Add('');
-  MemoDados.Lines.Add('Envio NFe');
-  MemoDados.Lines.Add('tpAmb: '+ TpAmbToStr(ACBrNFe1.WebServices.Retorno.TpAmb));
-  MemoDados.Lines.Add('verAplic: '+ ACBrNFe1.WebServices.Retorno.verAplic);
-  MemoDados.Lines.Add('cStat: '+ IntToStr(ACBrNFe1.WebServices.Retorno.cStat));
-  MemoDados.Lines.Add('cUF: '+ IntToStr(ACBrNFe1.WebServices.Retorno.cUF));
-  MemoDados.Lines.Add('xMotivo: '+ ACBrNFe1.WebServices.Retorno.xMotivo);
-  MemoDados.Lines.Add('cMsg: '+ IntToStr(ACBrNFe1.WebServices.Retorno.cMsg));
-  MemoDados.Lines.Add('xMsg: '+ ACBrNFe1.WebServices.Retorno.xMsg);
-  MemoDados.Lines.Add('Recibo: '+ ACBrNFe1.WebServices.Retorno.Recibo);
-  MemoDados.Lines.Add('Protocolo: '+ ACBrNFe1.WebServices.Retorno.Protocolo);
-
-  ACBrNFe1.NotasFiscais.Clear;
-end;
-
-
-
-procedure TForm1.tsNFeEnter(Sender: TObject);
-begin
-  ACBrNFe1.Configuracoes.Geral.ModeloDF := moNFe;
-end;
-
-procedure TForm1.tsNFCeEnter(Sender: TObject);
-begin
-  ACBrNFe1.Configuracoes.Geral.ModeloDF := moNFe;
 end;
 
 end.
