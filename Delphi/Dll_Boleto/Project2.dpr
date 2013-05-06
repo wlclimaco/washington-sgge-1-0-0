@@ -1,0 +1,254 @@
+library Project2;
+
+{ Important note about DLL memory management: ShareMem must be the
+  first unit in your library's USES clause AND your project's (select
+  Project-View Source) USES clause if your DLL exports any procedures or
+  functions that pass strings as parameters or function results. This
+  applies to all strings passed to and from your DLL--even those that
+  are nested in records and classes. ShareMem is the interface unit to
+  the BORLNDMM.DLL shared memory manager, which must be deployed along
+  with your DLL. To avoid using BORLNDMM.DLL, pass string information
+  using PChar or ShortString parameters. }
+
+uses
+  SysUtils,
+  Windows,
+  Messages,
+  Variants,
+  Classes,
+  Graphics,
+  Controls,
+  Forms,
+  Dialogs,
+  StdCtrls,
+  Mask,
+  RLBoleto,
+  ExtCtrls,
+  ComCtrls,
+  RLSaveDialog,
+  RLFilters,
+  RLPDFFilter,
+  DateUtils,
+  Math;
+
+{$R *.res}
+
+function GeraBoleto(
+    System_nQtdeBoletos,
+    System_blPadrao:Integer;
+    Cedente_DataProcessamento:TDate;
+    Cedente_Banco_Codigo,
+    Cedente_CodigoAgencia,
+    Cedente_DigitoAgencia,
+    Cedente_NumeroConta,
+    Cedente_DigitoConta,
+    Cedente_CodigoCedente,
+    Cedente_DigitoCodigoCedente,
+    Cedente_Carteira,
+    Cedente_Convenio,
+    Cedente_NomeCliente:String;
+    Cedente_TipoInscricao:Integer;
+    Cedente_NumeroCPFCGC,
+    Cedente_Nome:String;
+    //dados Sacado
+    Sacado_Nome:String;
+    Sacado_TipoInscricao:Integer;
+    Sacado_NumeroCPFCGC,
+    Sacado_Rua,
+    Sacado_CEP,
+    Sacado_Cidade,
+    Sacado_Estado,
+    //dados da cobranca
+    Cobranca_NossoNumero:String;
+    Cobranca_ValorDocumento:Currency;
+    Cobranca_DataDocumento:TDate;
+    Cobranca_DataVencimento:TDate;
+    Cobranca_NumeroDocumento,
+    Cobranca_InstrucoesText:String):String;stdcall;
+
+var
+    nI: Integer;
+    RLBTitulo1  : TRLBTitulo;
+    RLPDFFilter1: TRLPDFFilter;
+    RLBRemessa1 : TRLBRemessa;
+begin
+      try
+      RLBTitulo1    := TRLBTitulo.Create(nil);
+      RLPDFFilter1  := TRLPDFFilter.Create(nil);
+      RLBRemessa1   := TRLBRemessa.Create(nil);
+
+  case System_blPadrao of
+    0: RLBTitulo1.BoletoLayout := blPadrao;
+    1: RLBTitulo1.BoletoLayout := blCarne;
+  end;
+  for nI := 1 to System_nQtdeBoletos do
+  begin
+    //Dados do Cedente
+    RLBTitulo1.DataProcessamento := Cedente_DataProcessamento;
+    RLBTitulo1.Cedente.ContaBancaria.Banco.Codigo := Trim(Copy(Cedente_Banco_Codigo,1,3));
+    RLBTitulo1.Cedente.ContaBancaria.CodigoAgencia := Trim(Cedente_CodigoAgencia);
+    RLBTitulo1.Cedente.ContaBancaria.DigitoAgencia := Trim(Cedente_DigitoAgencia);
+    RLBTitulo1.Cedente.ContaBancaria.NumeroConta := Trim(Cedente_NumeroConta);
+    RLBTitulo1.Cedente.ContaBancaria.DigitoConta := Trim(Cedente_DigitoConta);
+    RLBTitulo1.Cedente.CodigoCedente := Trim(Cedente_CodigoCedente);
+    RLBTitulo1.Cedente.DigitoCodigoCedente := Trim(Cedente_DigitoCodigoCedente);
+    RLBTitulo1.Carteira := Trim(Cedente_Carteira);
+    RLBTitulo1.Cedente.ContaBancaria.Convenio := Trim(Cedente_Convenio);
+    RLBTitulo1.Cedente.ContaBancaria.NomeCliente := Trim(Cedente_NomeCliente);
+    case Cedente_TipoInscricao of
+      0: RLBTitulo1.Cedente.TipoInscricao := tiPessoaFisica;
+      1: RLBTitulo1.Cedente.TipoInscricao := tiPessoaJuridica;
+    end;
+    RLBTitulo1.Cedente.NumeroCPFCGC := Cedente_NumeroCPFCGC;
+    RLBTitulo1.Cedente.Nome := Trim(Cedente_Nome);
+    //dados do sacado
+    RLBTitulo1.Sacado.Nome := Trim(Sacado_Nome);
+    case Sacado_TipoInscricao of
+      0: RLBTitulo1.Sacado.TipoInscricao := tiPessoaFisica;
+      1: RLBTitulo1.Sacado.TipoInscricao := tiPessoaJuridica;
+    end;
+    RLBTitulo1.Sacado.NumeroCPFCGC := Trim(Sacado_NumeroCPFCGC);
+    RLBTitulo1.Sacado.Endereco.Rua := Trim(Sacado_Rua);
+    RLBTitulo1.Sacado.Endereco.CEP := Trim(Sacado_CEP);
+    RLBTitulo1.Sacado.Endereco.Cidade := Trim(Sacado_Cidade);
+    RLBTitulo1.Sacado.Endereco.Estado := Trim(Sacado_Estado);
+    //dados da cobranca
+    RLBTitulo1.NossoNumero := Trim(Cobranca_NossoNumero);
+    RLBTitulo1.ValorDocumento := Cobranca_ValorDocumento;
+    RLBTitulo1.DataDocumento := Cobranca_DataDocumento;
+    RLBTitulo1.DataVencimento := Cobranca_DataVencimento;
+    RLBTitulo1.NumeroDocumento := Trim(Cobranca_NumeroDocumento);
+    RLBTitulo1.Instrucoes.Text := Cobranca_InstrucoesText;
+    RLBTitulo1.InsertRecord;
+  end;
+    RLBTitulo1.PreviewModal;
+  finally
+      RLBTitulo1.Free;
+      RLPDFFilter1.Free;
+      RLBRemessa1.Free;
+  end;
+
+end;
+
+function Remessa(
+    System_nQtdeBoletos,
+    System_blPadrao:Integer;
+    System_diretorio:String;
+    Cedente_DataProcessamento:TDate;
+    Cedente_Banco_Codigo,
+    Cedente_CodigoAgencia,
+    Cedente_DigitoAgencia,
+    Cedente_NumeroConta,
+    Cedente_DigitoConta,
+    Cedente_CodigoCedente,
+    Cedente_DigitoCodigoCedente,
+    Cedente_Carteira,
+    Cedente_Convenio,
+    Cedente_NomeCliente:String;
+    Cedente_TipoInscricao:Integer;
+    Cedente_NumeroCPFCGC,
+    Cedente_Nome:String;
+    //dados Sacado
+    Sacado_Nome:String;
+    Sacado_TipoInscricao:Integer;
+    Sacado_NumeroCPFCGC,
+    Sacado_Rua,
+    Sacado_CEP,
+    Sacado_Cidade,
+    Sacado_Estado,
+    //dados da cobranca
+    Cobranca_NossoNumero:String;
+    Cobranca_ValorDocumento:Currency;
+    Cobranca_DataDocumento:TDate;
+    Cobranca_DataVencimento:TDate;
+    Cobranca_NumeroDocumento,
+    Cobranca_InstrucoesText:String):String;stdcall;
+var
+    nI: Integer;
+    RLBTitulo1  : TRLBTitulo;
+    RLPDFFilter1: TRLPDFFilter;
+    RLBRemessa1 : TRLBRemessa;
+begin
+      try
+      RLBTitulo1    := TRLBTitulo.Create(nil);
+      RLPDFFilter1  := TRLPDFFilter.Create(nil);
+      RLBRemessa1   := TRLBRemessa.Create(nil);
+      //Para gerar a remessa temos que passar todos os boletos para o componente RLBRemessa1
+      //Vamos colocar tudo em um for para facilitar
+
+
+      for nI := 1 to System_nQtdeBoletos do
+      begin
+            //Dados do Cedente
+            RLBTitulo1.Cedente.ContaBancaria.Banco.Codigo := Trim(Copy(Cedente_Banco_Codigo,1,3));
+            RLBTitulo1.Cedente.ContaBancaria.CodigoAgencia := Trim(Cedente_CodigoAgencia);
+            RLBTitulo1.Cedente.ContaBancaria.DigitoAgencia := Trim(Cedente_DigitoAgencia);
+            RLBTitulo1.Cedente.ContaBancaria.NumeroConta := Trim(Cedente_NumeroConta);
+            RLBTitulo1.Cedente.ContaBancaria.DigitoConta := Trim(Cedente_DigitoConta);
+            RLBTitulo1.Cedente.CodigoCedente := Trim(Cedente_CodigoCedente);
+            RLBTitulo1.Cedente.DigitoCodigoCedente := Trim(Cedente_DigitoCodigoCedente);   // Os dados do cedente foram repetidos com os dados da conta, mas em alguns bancos eles são diferentes, CUIDADO
+            RLBTitulo1.Carteira := Trim(Cedente_Carteira);
+            RLBTitulo1.Cedente.ContaBancaria.Convenio := Trim(Cedente_Convenio);
+            RLBTitulo1.Cedente.ContaBancaria.NomeCliente := Trim(Cedente_NomeCliente);
+            case Cedente_TipoInscricao of
+              0: RLBTitulo1.Cedente.TipoInscricao := tiPessoaFisica;
+              1: RLBTitulo1.Cedente.TipoInscricao := tiPessoaJuridica;
+            end;
+            RLBTitulo1.Cedente.NumeroCPFCGC := Cedente_NumeroCPFCGC;
+            RLBTitulo1.Cedente.Nome := Trim(Cedente_Nome);
+            //dados do sacado
+            RLBTitulo1.Sacado.Nome := Trim(Sacado_Nome);
+            case Sacado_TipoInscricao of
+              0: RLBTitulo1.Sacado.TipoInscricao := tiPessoaFisica;
+              1: RLBTitulo1.Sacado.TipoInscricao := tiPessoaJuridica;
+            end;
+            RLBTitulo1.Sacado.NumeroCPFCGC := Trim(Sacado_NumeroCPFCGC);
+            RLBTitulo1.Sacado.Endereco.Rua := Trim(Sacado_Rua);
+            RLBTitulo1.Sacado.Endereco.CEP := Trim(Sacado_CEP);
+            RLBTitulo1.Sacado.Endereco.Cidade := Trim(Sacado_Cidade);
+            RLBTitulo1.Sacado.Endereco.Estado := Trim(Sacado_Estado);
+
+            //dados da cobranca
+            RLBTitulo1.NossoNumero := Trim(Cobranca_NossoNumero);
+            RLBTitulo1.ValorDocumento := Cobranca_ValorDocumento;
+            RLBTitulo1.DataDocumento := Cobranca_DataDocumento;
+            RLBTitulo1.DataVencimento := Cobranca_DataVencimento;
+            RLBTitulo1.NumeroDocumento := Trim(Cobranca_NumeroDocumento);
+            RLBTitulo1.Instrucoes.Text := Cobranca_InstrucoesText;
+
+            //dados da cobranca
+            RLBTitulo1.TipoOcorrencia := toRemessaRegistrar;
+            RLBTitulo1.EspecieDocumento := edDuplicataMercantil;
+            Cobranca_NossoNumero := IntToStr(StrToIntDef(Trim(Cobranca_NossoNumero),0)+1); //Simulando o nosso numero
+            RLBTitulo1.NossoNumero := Trim(Cobranca_NossoNumero);
+            RLBTitulo1.ValorDocumento := Cobranca_ValorDocumento;
+            RLBTitulo1.DataDocumento := Cobranca_DataDocumento;
+            RLBTitulo1.DataVencimento := Cobranca_DataVencimento;
+            RLBTitulo1.NumeroDocumento := Trim(Cobranca_NumeroDocumento);
+            RLBTitulo1.Instrucoes.Text := Cobranca_InstrucoesText;
+            //Inserindo o boleto na remessa
+            RLBRemessa1.Titulos.Add(RLBTitulo1);
+      end;
+
+      RLBRemessa1.DataArquivo := Date; //É a data que o arquivo está sendo gerado
+      RLBRemessa1.LayoutArquivo := laCNAB400; { Layout do arquivo, é necessário ver com o banco qual é o indicado.CNAB400 é o mais comum. }
+      RLBRemessa1.NomeArquivo := FormatDateTime('yymmdd',Date)+'.REM'; { Apenas o nome do arquivo, alguns bancos estipulam regras e outros não }
+      RLBRemessa1.NumeroArquivo := 1; { Sequencia númerica de quandos arquivos já foram gerados para este banco }
+      RLBRemessa1.TipoMovimento := tmRemessa;
+      RLBRemessa1.NomeArquivo := ExtractFileDir(Application.ExeName)+'\'+RLBRemessa1.NomeArquivo; // Apenas colocando um caminho para o arquivo
+
+      if RLBRemessa1.GerarRemessa then
+          MessageDlg('O arquivo foi gerado com sucesso.'#13+RLBRemessa1.NomeArquivo,mtInformation,[mbOK],0);
+     finally
+          RLBTitulo1.Free;
+          RLPDFFilter1.Free;
+          RLBRemessa1.Free;
+  end;
+end;
+
+exports
+GeraBoleto,
+Remessa;
+
+Begin
+end.
