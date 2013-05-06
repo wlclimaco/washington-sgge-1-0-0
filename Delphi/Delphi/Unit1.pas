@@ -22,9 +22,6 @@ type
     Label29: TLabel;
     DataSource1: TDataSource;
     xml: TClientDataSet;
-    PopupMenu1: TPopupMenu;
-    Detalhar1: TMenuItem;
-    Imprimir1: TMenuItem;
     mxExcel: TmxDataSetExport;
     PopupMenu2: TPopupMenu;
     MenuItem1: TMenuItem;
@@ -466,22 +463,15 @@ type
     BrvLabel4: TBrvLabel;
     BrvLabel5: TBrvLabel;
     BrvLabel6: TBrvLabel;
-    BrvLabel7: TBrvLabel;
     BrvLabel8: TBrvLabel;
     BrvLabel10: TBrvLabel;
     BrvLabel11: TBrvLabel;
-    BrvLabel29: TBrvLabel;
     BrvLabel50: TBrvLabel;
-    BrvLabel24: TBrvLabel;
     BrvDbEdit1: TBrvDbEdit;
-    EdtDsEmpres: TBrvRetCon;
     BrvDbEdit2: TBrvDbEdit;
     BrvDbEdit3: TBrvDbEdit;
     EdtRsTitula: TBrvRetCon;
     BrvDbEdit4: TBrvDbEdit;
-    BrvDbEdit5: TBrvDbEdit;
-    BrvDbEdit7: TBrvDbEdit;
-    EdtDsEvento: TBrvRetCon;
     BrvDbEdit8: TBrvDbEdit;
     BrvDbEdit10: TBrvDbEdit;
     BrvDbEdit41: TBrvDbEdit;
@@ -490,17 +480,10 @@ type
     CbxSnItens: TCheckBox;
     CbxSnConhec: TCheckBox;
     CbxSnCreImp: TCheckBox;
-    EdtStGerDup: TBrvRetCon;
-    EdtCdForPag: TBrvRetCon;
-    EdtNrChave: TBrvEdit;
     BrvDbEdit42: TBrvDbEdit;
-    EdtCdEstEmp: TBrvRetCon;
-    CbxFinali: TBrvComboBox;
     EdtCdEstEmi: TBrvRetCon;
-    EdtCdEmpEst: TBrvRetCon;
     EdtDsFiscal: TBrvRetCon;
     EdtCdFiscal: TBrvRetCon;
-    EdtCdGruEmp: TBrvRetCon;
     PgcDadosNF: TPageControl;
     TbsItens: TTabSheet;
     DbgF002: TBrvDbGrid;
@@ -706,6 +689,35 @@ type
     edtSenhaWeb: TEdit;
     Label64: TLabel;
     edtUserWeb: TEdit;
+    CheckBox13: TCheckBox;
+    ComboBox1: TComboBox;
+    GroupBox45: TGroupBox;
+    ComboBox2: TComboBox;
+    PopupMenu1: TPopupMenu;
+    Detalhar1: TMenuItem;
+    Imprimir1: TMenuItem;
+    CheckBox14: TCheckBox;
+    Label65: TLabel;
+    MaskEdit2: TMaskEdit;
+    Label66: TLabel;
+    ComboBox3: TComboBox;
+    Edit8: TEdit;
+    Edit9: TEdit;
+    Label67: TLabel;
+    Edit10: TEdit;
+    Edit11: TEdit;
+    Label68: TLabel;
+    Label69: TLabel;
+    Edit12: TEdit;
+    Label71: TLabel;
+    Edit14: TEdit;
+    Edit15: TEdit;
+    Label72: TLabel;
+    Label73: TLabel;
+    Edit16: TEdit;
+    Label75: TLabel;
+    Memo10: TMemo;
+    CheckBox36: TCheckBox;
     procedure sbtnCaminhoCertClick(Sender: TObject);
     procedure sbtnLogoMarcaClick(Sender: TObject);
     procedure sbtnPathSalvarClick(Sender: TObject);
@@ -893,10 +905,108 @@ begin
       Ini.WriteString( 'Import','TempoImpotacao'      ,Edit4.Text) ;
       Ini.WriteString( 'Import','Importacao'          ,IntToStr(RadioGroup2.ItemIndex)) ;
 
+      Ini.WriteBool( 'Boleto','tela' ,CheckBox14.Checked) ;
+      Ini.WriteBool( 'Boleto','remessa' ,CheckBox36.Checked) ;
+      Ini.WriteString( 'Boleto','banco' ,Trim(Copy(ComboBox2.Text,1,3))) ;
+      Ini.WriteString( 'Boleto','NrBoletos' ,MaskEdit2.Text) ;
+      Ini.WriteInteger( 'Boleto','Layout' ,ComboBox2.ItemIndex) ;
+      Ini.WriteString( 'Boleto','CodAgencia' ,Edit8.Text) ;
+      Ini.WriteString( 'Boleto','DigAgencia' ,Edit9.Text) ;
+      Ini.WriteString( 'Boleto','CodCedente' ,Edit10.Text) ;
+      Ini.WriteString( 'Boleto','DigCedente' ,Edit11.Text) ;
+      Ini.WriteString( 'Boleto','NossoNumero' ,Edit12.Text) ;
+      Ini.WriteString( 'Boleto','NrDoc' ,Edit14.Text) ;
+      Ini.WriteString( 'Boleto','Carteira' ,Edit15.Text) ;
+      Ini.WriteString( 'Boleto','Convenio' ,Edit16.Text) ;
+      Ini.WriteString( 'Boleto','Intrucoes' ,Memo10.Lines.Text) ;
+
       StreamMemo := TMemoryStream.Create;
       mmEmailMsg.Lines.SaveToStream(StreamMemo);
       StreamMemo.Seek(0,soFromBeginning);
       Ini.WriteBinaryStream( 'Email','Mensagem',StreamMemo) ;
+      StreamMemo.Free;
+  finally
+     Ini.Free ;
+  end;
+
+end;
+
+procedure TForm1.LerConfiguracao;
+Var IniFile  : String ;
+    Ini     : TIniFile ;
+    Ok : Boolean;
+    StreamMemo : TMemoryStream;
+begin
+  IniFile := ChangeFileExt( Application.ExeName, '.ini') ;
+
+  Ini := TIniFile.Create( IniFile );
+  try
+
+         edtCaminho.Text  := Ini.ReadString( 'Certificado','Caminho' ,'') ;
+         edtSenha.Text    := Ini.ReadString( 'Certificado','Senha'   ,'') ;
+
+
+      rgFormaEmissao.ItemIndex := Ini.ReadInteger( 'Geral','FormaEmissao',0) ;
+      ckSalvar.Checked    := Ini.ReadBool(   'Geral','Salvar'      ,True) ;
+      edtPathLogs.Text    := Ini.ReadString( 'Geral','PathSalvar'  ,'') ;
+
+      cbUF.ItemIndex       := cbUF.Items.IndexOf(Ini.ReadString( 'WebService','UF','SP')) ;
+      rgTipoAmb.ItemIndex  := Ini.ReadInteger( 'WebService','Ambiente'  ,0) ;
+      ckVisualizar.Checked :=Ini.ReadBool(    'WebService','Visualizar',False) ;
+
+      edtProxyHost.Text  := Ini.ReadString( 'Proxy','Host'   ,'') ;
+      edtProxyPorta.Text := Ini.ReadString( 'Proxy','Porta'  ,'') ;
+      edtProxyUser.Text  := Ini.ReadString( 'Proxy','User'   ,'') ;
+      edtProxySenha.Text := Ini.ReadString( 'Proxy','Pass'   ,'') ;
+
+
+      rgTipoDanfe.ItemIndex     := Ini.ReadInteger( 'Geral','DANFE'       ,0) ;
+      edtLogoMarca.Text         := Ini.ReadString( 'Geral','LogoMarca'   ,'') ;
+
+      edtEmitCNPJ.Text       := Ini.ReadString( 'Emitente','CNPJ'       ,'') ;
+      edtEmitIE.Text         := Ini.ReadString( 'Emitente','IE'         ,'') ;
+      edtEmitRazao.Text      := Ini.ReadString( 'Emitente','RazaoSocial','') ;
+      edtEmitFantasia.Text   := Ini.ReadString( 'Emitente','Fantasia'   ,'') ;
+      edtEmitFone.Text       := Ini.ReadString( 'Emitente','Fone'       ,'') ;
+      edtEmitCEP.Text        := Ini.ReadString( 'Emitente','CEP'        ,'') ;
+      edtEmitLogradouro.Text := Ini.ReadString( 'Emitente','Logradouro' ,'') ;
+      edtEmitNumero.Text     := Ini.ReadString( 'Emitente','Numero'     ,'') ;
+      edtEmitComp.Text       := Ini.ReadString( 'Emitente','Complemento','') ;
+      edtEmitBairro.Text     := Ini.ReadString( 'Emitente','Bairro'     ,'') ;
+      edtEmitCodCidade.Text  := Ini.ReadString( 'Emitente','CodCidade'  ,'') ;
+      edtEmitCidade.Text     :=Ini.ReadString( 'Emitente','Cidade'     ,'') ;
+      edtEmitUF.Text         := Ini.ReadString( 'Emitente','UF'         ,'') ;
+
+      edtSmtpHost.Text      := Ini.ReadString( 'Email','Host'   ,'') ;
+      edtSmtpPort.Text      := Ini.ReadString( 'Email','Port'   ,'') ;
+      edtSmtpUser.Text      := Ini.ReadString( 'Email','User'   ,'') ;
+      edtSmtpPass.Text      := Ini.ReadString( 'Email','Pass'   ,'') ;
+      edtEmailAssunto.Text  := Ini.ReadString( 'Email','Assunto','') ;
+      cbEmailSSL.Checked    := Ini.ReadBool(   'Email','SSL'    ,False) ;
+
+      EdtDsArquiv.Text := Ini.ReadString( 'Import','DiretorioImportacao' ,'') ;
+      Edit3.Text       := Ini.ReadString( 'Import','DiretorioExportacao' ,'') ;
+      Edit4.Text       := Ini.ReadString( 'Import','TempoImpotacao'      ,'') ;
+      RadioGroup2.ItemIndex := StrToInt(Ini.ReadInteger( 'Import','Importacao',''));
+
+      CheckBox14.Checked := Ini.ReadBool( 'Boleto','tela' ,CheckBox14.Checked) ;
+      CheckBox36.Checked := Ini.ReadBool( 'Boleto','remessa' ,'') ;
+      ComboBox2.Text     := Ini.ReadString( 'Boleto','banco' ,'') ;
+      MaskEdit2.Text := Ini.ReadString( 'Boleto','NrBoletos' ,'') ;
+      ComboBox2.ItemIndex := Ini.ReadInteger( 'Boleto','Layout' ,'') ;
+      Edit8.Text  :=  Ini.ReadString( 'Boleto','CodAgencia' ,'') ;
+      Edit9.Text  :=  Ini.ReadString( 'Boleto','DigAgencia' ,'') ;
+      Edit10.Text := Ini.ReadString( 'Boleto','CodCedente' ,'') ;
+      Edit11.Text := Ini.ReadString( 'Boleto','DigCedente' ,'') ;
+      Edit12.Text := Ini.ReadString( 'Boleto','NossoNumero' ,'') ;
+      Edit14.Text := Ini.ReadString( 'Boleto','NrDoc' ,'') ;
+      Edit15.Text  :=  Ini.ReadString( 'Boleto','Carteira' ,'') ;
+      Edit16.Text  := Ini.ReadString( 'Boleto','Convenio' ,'') ;
+      Memo10.Lines.Text := Ini.ReadString( 'Boleto','Intrucoes' ,'') ;
+
+      StreamMemo := TMemoryStream.Create;
+      Ini.ReadBinaryStream( 'Email','Mensagem',StreamMemo) ;
+      mmEmailMsg.Lines.LoadFromStream(StreamMemo);
       StreamMemo.Free;
   finally
      Ini.Free ;
