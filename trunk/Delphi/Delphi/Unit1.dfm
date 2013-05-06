@@ -56,10 +56,12 @@ object Form1: TForm1
     ActivePage = TabSheet26
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 899
     object TabSheet14: TTabSheet
       Caption = 'Pagina Inicial'
-      ExplicitWidth = 891
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Panel7: TPanel
         Left = 0
         Top = 41
@@ -359,7 +361,6 @@ object Form1: TForm1
         Height = 36
         Align = alBottom
         TabOrder = 1
-        ExplicitWidth = 891
         DesignSize = (
           972
           36)
@@ -462,7 +463,6 @@ object Form1: TForm1
           ShowHint = True
           TabOrder = 0
           BrTipoBotao = BrBtnExcel
-          ExplicitLeft = 755
         end
       end
       object Panel9: TPanel
@@ -472,7 +472,6 @@ object Form1: TForm1
         Height = 41
         Align = alTop
         TabOrder = 2
-        ExplicitWidth = 891
       end
       object Panel10: TPanel
         Left = 185
@@ -481,7 +480,6 @@ object Form1: TForm1
         Height = 575
         Align = alClient
         TabOrder = 3
-        ExplicitWidth = 706
         object BrvDbGrid2: TBrvDbGrid
           Left = 1
           Top = 1
@@ -934,7 +932,10 @@ object Form1: TForm1
     object TabSheet15: TTabSheet
       Caption = 'NFe'
       ImageIndex = 1
-      ExplicitWidth = 891
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Panel2: TPanel
         Left = 169
         Top = 0
@@ -942,7 +943,6 @@ object Form1: TForm1
         Height = 652
         Align = alClient
         TabOrder = 0
-        ExplicitWidth = 722
         object Panel3: TPanel
           Left = 1
           Top = 1
@@ -950,7 +950,6 @@ object Form1: TForm1
           Height = 650
           Align = alClient
           TabOrder = 0
-          ExplicitWidth = 720
           object PageControl3: TPageControl
             Left = 1
             Top = 1
@@ -959,11 +958,13 @@ object Form1: TForm1
             ActivePage = TabSheet12
             Align = alClient
             TabOrder = 0
-            ExplicitWidth = 718
             object TabSheet12: TTabSheet
               Caption = 'Busca Manifesto'
               ImageIndex = 1
-              ExplicitWidth = 710
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Panel4: TPanel
                 Left = 0
                 Top = 0
@@ -971,7 +972,6 @@ object Form1: TForm1
                 Height = 49
                 Align = alTop
                 TabOrder = 0
-                ExplicitWidth = 710
                 object Label36: TLabel
                   Left = 13
                   Top = 18
@@ -1122,7 +1122,10 @@ object Form1: TForm1
             object TabSheet13: TTabSheet
               Caption = 'Busca Chave'
               ImageIndex = 2
-              ExplicitWidth = 710
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Panel6: TPanel
                 Left = 0
                 Top = 0
@@ -1130,7 +1133,6 @@ object Form1: TForm1
                 Height = 65
                 Align = alTop
                 TabOrder = 0
-                ExplicitWidth = 710
                 object Label30: TLabel
                   Left = 13
                   Top = 26
@@ -1176,7 +1178,10 @@ object Form1: TForm1
             object TabSheet1: TTabSheet
               Caption = 'Retorno'
               ImageIndex = 5
-              ExplicitWidth = 710
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object PageControl2: TPageControl
                 Left = 0
                 Top = 0
@@ -1185,10 +1190,12 @@ object Form1: TForm1
                 ActivePage = TabSheet11
                 Align = alClient
                 TabOrder = 0
-                ExplicitWidth = 710
                 object TabSheet5: TTabSheet
                   Caption = 'Respostas'
-                  ExplicitWidth = 702
+                  ExplicitLeft = 0
+                  ExplicitTop = 0
+                  ExplicitWidth = 0
+                  ExplicitHeight = 0
                   object MemoResp: TMemo
                     Left = 0
                     Top = 0
@@ -1197,13 +1204,15 @@ object Form1: TForm1
                     Align = alClient
                     ScrollBars = ssVertical
                     TabOrder = 0
-                    ExplicitWidth = 702
                   end
                 end
                 object TabSheet6: TTabSheet
                   Caption = 'XML Resposta'
                   ImageIndex = 1
-                  ExplicitWidth = 702
+                  ExplicitLeft = 0
+                  ExplicitTop = 0
+                  ExplicitWidth = 0
+                  ExplicitHeight = 0
                   object WBResposta: TWebBrowser
                     Left = 0
                     Top = 0
@@ -1224,7 +1233,10 @@ object Form1: TForm1
                 object TabSheet8: TTabSheet
                   Caption = 'Log'
                   ImageIndex = 2
-                  ExplicitWidth = 702
+                  ExplicitLeft = 0
+                  ExplicitTop = 0
+                  ExplicitWidth = 0
+                  ExplicitHeight = 0
                   object memoLog: TMemo
                     Left = 0
                     Top = 0
@@ -1233,13 +1245,15 @@ object Form1: TForm1
                     Align = alClient
                     ScrollBars = ssVertical
                     TabOrder = 0
-                    ExplicitWidth = 702
                   end
                 end
                 object TabSheet9: TTabSheet
                   Caption = 'NFe'
                   ImageIndex = 3
-                  ExplicitWidth = 702
+                  ExplicitLeft = 0
+                  ExplicitTop = 0
+                  ExplicitWidth = 0
+                  ExplicitHeight = 0
                   object trvwNFe: TTreeView
                     Left = 0
                     Top = 0
@@ -1248,13 +1262,15 @@ object Form1: TForm1
                     Align = alClient
                     Indent = 19
                     TabOrder = 0
-                    ExplicitWidth = 702
                   end
                 end
                 object TabSheet10: TTabSheet
                   Caption = 'Retorno Completo WS'
                   ImageIndex = 4
-                  ExplicitWidth = 702
+                  ExplicitLeft = 0
+                  ExplicitTop = 0
+                  ExplicitWidth = 0
+                  ExplicitHeight = 0
                   object memoRespWS: TMemo
                     Left = 0
                     Top = 456
@@ -1263,13 +1279,15 @@ object Form1: TForm1
                     Align = alBottom
                     ScrollBars = ssVertical
                     TabOrder = 0
-                    ExplicitWidth = 702
                   end
                 end
                 object Dados: TTabSheet
                   Caption = 'Dados'
                   ImageIndex = 5
-                  ExplicitWidth = 702
+                  ExplicitLeft = 0
+                  ExplicitTop = 0
+                  ExplicitWidth = 0
+                  ExplicitHeight = 0
                   object MemoDados: TMemo
                     Left = 0
                     Top = 0
@@ -1278,13 +1296,15 @@ object Form1: TForm1
                     Align = alClient
                     ScrollBars = ssVertical
                     TabOrder = 0
-                    ExplicitWidth = 702
                   end
                 end
                 object TabSheet11: TTabSheet
                   Caption = 'RetornoConsulta NFe 2.01'
                   ImageIndex = 6
-                  ExplicitWidth = 702
+                  ExplicitLeft = 0
+                  ExplicitTop = 0
+                  ExplicitWidth = 0
+                  ExplicitHeight = 0
                   object TreeViewRetornoConsulta: TTreeView
                     Left = 0
                     Top = 0
@@ -1293,7 +1313,6 @@ object Form1: TForm1
                     Align = alClient
                     Indent = 19
                     TabOrder = 0
-                    ExplicitWidth = 702
                   end
                 end
               end
@@ -1415,7 +1434,10 @@ object Form1: TForm1
     object TabSheet2: TTabSheet
       Caption = 'CTe'
       ImageIndex = 2
-      ExplicitWidth = 891
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Panel5: TPanel
         Left = 0
         Top = 0
@@ -1523,11 +1545,13 @@ object Form1: TForm1
         ActivePage = TabSheet4
         Align = alClient
         TabOrder = 1
-        ExplicitWidth = 722
         object TabSheet4: TTabSheet
           Caption = 'Busca Manifesto'
           ImageIndex = 1
-          ExplicitWidth = 714
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Panel11: TPanel
             Left = 0
             Top = 0
@@ -1535,7 +1559,6 @@ object Form1: TForm1
             Height = 49
             Align = alTop
             TabOrder = 0
-            ExplicitWidth = 714
             object Label76: TLabel
               Left = 13
               Top = 18
@@ -1686,7 +1709,10 @@ object Form1: TForm1
         object TabSheet7: TTabSheet
           Caption = 'Busca Chave'
           ImageIndex = 2
-          ExplicitWidth = 714
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Panel12: TPanel
             Left = 0
             Top = 0
@@ -1694,7 +1720,6 @@ object Form1: TForm1
             Height = 65
             Align = alTop
             TabOrder = 0
-            ExplicitWidth = 714
             object Label77: TLabel
               Left = 13
               Top = 26
@@ -1740,7 +1765,10 @@ object Form1: TForm1
         object TabSheet16: TTabSheet
           Caption = 'Retorno'
           ImageIndex = 5
-          ExplicitWidth = 714
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object PageControl5: TPageControl
             Left = 0
             Top = 0
@@ -1749,10 +1777,12 @@ object Form1: TForm1
             ActivePage = TabSheet24
             Align = alClient
             TabOrder = 0
-            ExplicitWidth = 714
             object TabSheet17: TTabSheet
               Caption = 'Respostas'
-              ExplicitWidth = 706
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Memo2: TMemo
                 Left = 0
                 Top = 0
@@ -1761,13 +1791,15 @@ object Form1: TForm1
                 Align = alClient
                 ScrollBars = ssVertical
                 TabOrder = 0
-                ExplicitWidth = 706
               end
             end
             object TabSheet19: TTabSheet
               Caption = 'XML Resposta'
               ImageIndex = 1
-              ExplicitWidth = 706
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object WebBrowser1: TWebBrowser
                 Left = 0
                 Top = 0
@@ -1788,7 +1820,10 @@ object Form1: TForm1
             object TabSheet20: TTabSheet
               Caption = 'Log'
               ImageIndex = 2
-              ExplicitWidth = 706
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Memo3: TMemo
                 Left = 0
                 Top = 0
@@ -1797,13 +1832,15 @@ object Form1: TForm1
                 Align = alClient
                 ScrollBars = ssVertical
                 TabOrder = 0
-                ExplicitWidth = 706
               end
             end
             object TabSheet21: TTabSheet
               Caption = 'NFe'
               ImageIndex = 3
-              ExplicitWidth = 706
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object TreeView1: TTreeView
                 Left = 0
                 Top = 0
@@ -1812,13 +1849,15 @@ object Form1: TForm1
                 Align = alClient
                 Indent = 19
                 TabOrder = 0
-                ExplicitWidth = 706
               end
             end
             object TabSheet22: TTabSheet
               Caption = 'Retorno Completo WS'
               ImageIndex = 4
-              ExplicitWidth = 706
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Memo4: TMemo
                 Left = 0
                 Top = 460
@@ -1827,13 +1866,15 @@ object Form1: TForm1
                 Align = alBottom
                 ScrollBars = ssVertical
                 TabOrder = 0
-                ExplicitWidth = 706
               end
             end
             object TabSheet23: TTabSheet
               Caption = 'Dados'
               ImageIndex = 5
-              ExplicitWidth = 706
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Memo5: TMemo
                 Left = 0
                 Top = 0
@@ -1842,13 +1883,15 @@ object Form1: TForm1
                 Align = alClient
                 ScrollBars = ssVertical
                 TabOrder = 0
-                ExplicitWidth = 706
               end
             end
             object TabSheet24: TTabSheet
               Caption = 'RetornoConsulta NFe 2.01'
               ImageIndex = 6
-              ExplicitWidth = 706
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object TreeView2: TTreeView
                 Left = 0
                 Top = 0
@@ -1857,7 +1900,6 @@ object Form1: TForm1
                 Align = alClient
                 Indent = 19
                 TabOrder = 0
-                ExplicitWidth = 706
               end
             end
           end
@@ -1867,7 +1909,6 @@ object Form1: TForm1
     object TabSheet26: TTabSheet
       Caption = 'Configura'#231#245'es'
       ImageIndex = 3
-      ExplicitWidth = 891
       object PageControl6: TPageControl
         Left = 0
         Top = 0
@@ -1876,10 +1917,8 @@ object Form1: TForm1
         ActivePage = TabSheet27
         Align = alClient
         TabOrder = 0
-        ExplicitWidth = 891
         object TabSheet27: TTabSheet
           Caption = 'Configura'#231#245'es'
-          ExplicitWidth = 883
           object SpeedButton11: TSpeedButton
             Left = 230
             Top = 53
@@ -3094,13 +3133,228 @@ object Form1: TForm1
               TabOrder = 7
             end
           end
+          object GroupBox45: TGroupBox
+            Left = 692
+            Top = 323
+            Width = 269
+            Height = 286
+            Caption = 'Dados Boleto'
+            Color = clBtnFace
+            ParentBackground = False
+            ParentColor = False
+            TabOrder = 13
+            object Label65: TLabel
+              Left = 8
+              Top = 60
+              Width = 77
+              Height = 13
+              Caption = 'N'#176' de Registros:'
+            end
+            object Label66: TLabel
+              Left = 127
+              Top = 60
+              Width = 35
+              Height = 13
+              Caption = 'Layout:'
+            end
+            object Label67: TLabel
+              Left = 8
+              Top = 79
+              Width = 42
+              Height = 13
+              Caption = 'Ag'#234'ncia:'
+            end
+            object Label68: TLabel
+              Left = 182
+              Top = 78
+              Width = 79
+              Height = 13
+              Caption = 'C'#243'digo Cedente:'
+            end
+            object Label69: TLabel
+              Left = 8
+              Top = 120
+              Width = 70
+              Height = 13
+              Caption = 'Nosso N'#250'mero'
+            end
+            object Label71: TLabel
+              Left = 194
+              Top = 120
+              Width = 46
+              Height = 13
+              Caption = 'Nr. Docto'
+            end
+            object Label72: TLabel
+              Left = 91
+              Top = 79
+              Width = 36
+              Height = 13
+              Caption = 'Carteira'
+            end
+            object Label73: TLabel
+              Left = 102
+              Top = 120
+              Width = 45
+              Height = 13
+              Caption = 'Conv'#234'nio'
+            end
+            object Label75: TLabel
+              Left = 7
+              Top = 159
+              Width = 49
+              Height = 13
+              Caption = 'Instru'#231#245'es'
+            end
+            object ComboBox2: TComboBox
+              Left = 7
+              Top = 30
+              Width = 255
+              Height = 21
+              Style = csDropDownList
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = [fsBold]
+              ItemIndex = 5
+              ParentFont = False
+              TabOrder = 0
+              Text = '341 - Banco Itau'
+              Items.Strings = (
+                '001 - Banco do Brasil'
+                '033 - Santander Banespa'
+                '104 - Caixa Economica'
+                '237 - Banco Bradesco'
+                '275 - Banco Real'
+                '341 - Banco Itau'
+                '399 - Banco HSBC'
+                '409 - Banco Unicanco'
+                '748 - Sicred'
+                '756 - Bancoob')
+            end
+            object CheckBox14: TCheckBox
+              Left = 36
+              Top = 11
+              Width = 45
+              Height = 17
+              Alignment = taLeftJustify
+              Caption = 'Tela:'
+              Checked = True
+              State = cbChecked
+              TabOrder = 1
+            end
+            object MaskEdit2: TMaskEdit
+              Left = 86
+              Top = 57
+              Width = 32
+              Height = 21
+              EditMask = '9999'
+              MaxLength = 4
+              TabOrder = 2
+              Text = '1   '
+            end
+            object ComboBox3: TComboBox
+              Left = 169
+              Top = 57
+              Width = 93
+              Height = 21
+              Style = csDropDownList
+              ItemIndex = 0
+              TabOrder = 3
+              Text = 'Boleto Padr'#227'o'
+              Items.Strings = (
+                'Boleto Padr'#227'o'
+                'Carn'#234)
+            end
+            object Edit8: TEdit
+              Left = 8
+              Top = 93
+              Width = 72
+              Height = 21
+              TabOrder = 4
+            end
+            object Edit9: TEdit
+              Left = 58
+              Top = 93
+              Width = 27
+              Height = 21
+              TabOrder = 5
+            end
+            object Edit10: TEdit
+              Left = 189
+              Top = 93
+              Width = 72
+              Height = 21
+              TabOrder = 6
+            end
+            object Edit11: TEdit
+              Left = 235
+              Top = 93
+              Width = 26
+              Height = 21
+              TabOrder = 7
+            end
+            object Edit12: TEdit
+              Left = 8
+              Top = 135
+              Width = 88
+              Height = 21
+              TabOrder = 8
+              Text = '522'
+            end
+            object Edit14: TEdit
+              Left = 194
+              Top = 135
+              Width = 67
+              Height = 21
+              TabOrder = 9
+            end
+            object Edit15: TEdit
+              Left = 91
+              Top = 94
+              Width = 85
+              Height = 21
+              TabOrder = 10
+            end
+            object Edit16: TEdit
+              Left = 102
+              Top = 135
+              Width = 72
+              Height = 21
+              TabOrder = 11
+            end
+            object Memo10: TMemo
+              Left = 8
+              Top = 176
+              Width = 254
+              Height = 97
+              Lines.Strings = (
+                'N'#227'o receber ap'#243's vencimento')
+              TabOrder = 12
+            end
+            object CheckBox36: TCheckBox
+              Left = 117
+              Top = 11
+              Width = 132
+              Height = 17
+              Alignment = taLeftJustify
+              Caption = 'Gerar Arquivo Remessa:'
+              Checked = True
+              State = cbChecked
+              TabOrder = 13
+            end
+          end
         end
       end
     end
     object TabSheet39: TTabSheet
       Caption = 'Enviar Email'
       ImageIndex = 5
-      ExplicitWidth = 891
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Panel16: TPanel
         Left = 0
         Top = 0
@@ -3108,7 +3362,6 @@ object Form1: TForm1
         Height = 105
         Align = alTop
         TabOrder = 0
-        ExplicitWidth = 891
         object GroupBox13: TGroupBox
           Left = 10
           Top = 0
@@ -3297,7 +3550,7 @@ object Form1: TForm1
         Left = 0
         Top = 105
         Width = 972
-        Height = 303
+        Height = 268
         Margins.Left = 0
         Margins.Top = 0
         Margins.Right = 0
@@ -3474,7 +3727,6 @@ object Form1: TForm1
         Height = 67
         Align = alBottom
         TabOrder = 2
-        ExplicitWidth = 891
       end
       object Panel18: TPanel
         Left = 0
@@ -3490,7 +3742,6 @@ object Form1: TForm1
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 3
-        ExplicitWidth = 891
         DesignSize = (
           968
           37)
@@ -3502,7 +3753,7 @@ object Form1: TForm1
           Caption = 'LblQtReg'
         end
         object BtnEnviar: TBrvBitBtn
-          Left = 830
+          Left = 822
           Top = 4
           Width = 100
           Height = 25
@@ -3600,14 +3851,14 @@ object Form1: TForm1
           ShowHint = True
           TabOrder = 0
           BrTipoBotao = BrBtnOk
-          ExplicitLeft = 749
+          ExplicitLeft = 826
         end
       end
       object Panel19: TPanel
         Left = 0
-        Top = 408
+        Top = 373
         Width = 972
-        Height = 46
+        Height = 81
         Align = alBottom
         BorderStyle = bsSingle
         Font.Charset = DEFAULT_CHARSET
@@ -3617,10 +3868,10 @@ object Form1: TForm1
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 4
-        ExplicitWidth = 891
+        ExplicitTop = 408
         DesignSize = (
           968
-          42)
+          77)
         object Label48: TLabel
           Left = 145
           Top = 10
@@ -3637,7 +3888,7 @@ object Form1: TForm1
           ParentFont = False
         end
         object BrvBitBtn7: TBrvBitBtn
-          Left = 585
+          Left = 581
           Top = 4
           Width = 100
           Height = 25
@@ -3735,12 +3986,11 @@ object Form1: TForm1
           ShowHint = True
           TabOrder = 2
           BrTipoBotao = BrBtnSetaAbaixo
-          ExplicitLeft = 504
         end
         object BrvEdit1: TBrvEdit
           Left = 276
           Top = 6
-          Width = 303
+          Width = 299
           Height = 21
           Anchors = [akLeft, akTop, akRight]
           TabOrder = 1
@@ -3750,10 +4000,9 @@ object Form1: TForm1
           BrAlignment = taLeftJustify
           BrvQueryCode = 0
           BrRecordar = False
-          ExplicitWidth = 222
         end
         object BrvBitBtn8: TBrvBitBtn
-          Left = 689
+          Left = 685
           Top = 4
           Width = 100
           Height = 25
@@ -3851,7 +4100,6 @@ object Form1: TForm1
           ShowHint = True
           TabOrder = 3
           BrTipoBotao = BrBtnExcluir
-          ExplicitLeft = 608
         end
         object BrvBitBtn10: TBrvBitBtn
           Left = 8
@@ -3953,10 +4201,10 @@ object Form1: TForm1
           BrTipoBotao = BrBtnSetaAbaixo
         end
         object GroupBox31: TGroupBox
-          Left = 752
-          Top = -2
-          Width = 121
-          Height = 34
+          Left = 789
+          Top = -1
+          Width = 172
+          Height = 74
           Caption = 'Anexo'
           TabOrder = 4
           object CheckBox34: TCheckBox
@@ -3979,13 +4227,53 @@ object Form1: TForm1
             State = cbChecked
             TabOrder = 1
           end
+          object CheckBox13: TCheckBox
+            Left = 6
+            Top = 32
+            Width = 46
+            Height = 17
+            Caption = 'Gerar Boleto'
+            Checked = True
+            State = cbChecked
+            TabOrder = 2
+          end
+          object ComboBox1: TComboBox
+            Left = 6
+            Top = 48
+            Width = 163
+            Height = 21
+            Style = csDropDownList
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            ItemIndex = 5
+            ParentFont = False
+            TabOrder = 3
+            Text = '341 - Banco Itau'
+            Items.Strings = (
+              '001 - Banco do Brasil'
+              '033 - Santander Banespa'
+              '104 - Caixa Economica'
+              '237 - Banco Bradesco'
+              '275 - Banco Real'
+              '341 - Banco Itau'
+              '399 - Banco HSBC'
+              '409 - Banco Unicanco'
+              '748 - Sicred'
+              '756 - Bancoob')
+          end
         end
       end
     end
     object TabSheet40: TTabSheet
       Caption = 'Movimenta'#231#245'es'
       ImageIndex = 6
-      ExplicitWidth = 891
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Panel17: TPanel
         Left = 0
         Top = 0
@@ -4407,7 +4695,10 @@ object Form1: TForm1
     object TabSheet3: TTabSheet
       Caption = 'NFSe'
       ImageIndex = 4
-      ExplicitWidth = 891
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Panel13: TPanel
         Left = 0
         Top = 0
@@ -4480,11 +4771,13 @@ object Form1: TForm1
         ActivePage = TabSheet29
         Align = alClient
         TabOrder = 1
-        ExplicitWidth = 722
         object TabSheet29: TTabSheet
           Caption = 'Busca Chave'
           ImageIndex = 2
-          ExplicitWidth = 714
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Panel15: TPanel
             Left = 0
             Top = 0
@@ -4492,7 +4785,6 @@ object Form1: TForm1
             Height = 65
             Align = alTop
             TabOrder = 0
-            ExplicitWidth = 714
             object Label46: TLabel
               Left = 13
               Top = 26
@@ -4542,10 +4834,12 @@ object Form1: TForm1
             ActivePage = TabSheet37
             Align = alClient
             TabOrder = 1
-            ExplicitWidth = 714
             object TabSheet31: TTabSheet
               Caption = 'Respostas'
-              ExplicitWidth = 706
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Memo1: TMemo
                 Left = 0
                 Top = 0
@@ -4554,13 +4848,15 @@ object Form1: TForm1
                 Align = alClient
                 ScrollBars = ssVertical
                 TabOrder = 0
-                ExplicitWidth = 706
               end
             end
             object TabSheet32: TTabSheet
               Caption = 'XML Resposta'
               ImageIndex = 1
-              ExplicitWidth = 706
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object WebBrowser2: TWebBrowser
                 Left = 0
                 Top = 0
@@ -4581,7 +4877,10 @@ object Form1: TForm1
             object TabSheet33: TTabSheet
               Caption = 'Log'
               ImageIndex = 2
-              ExplicitWidth = 706
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Memo7: TMemo
                 Left = 0
                 Top = 0
@@ -4590,13 +4889,15 @@ object Form1: TForm1
                 Align = alClient
                 ScrollBars = ssVertical
                 TabOrder = 0
-                ExplicitWidth = 706
               end
             end
             object TabSheet34: TTabSheet
               Caption = 'NFe'
               ImageIndex = 3
-              ExplicitWidth = 706
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object TreeView3: TTreeView
                 Left = 0
                 Top = 0
@@ -4605,13 +4906,15 @@ object Form1: TForm1
                 Align = alClient
                 Indent = 19
                 TabOrder = 0
-                ExplicitWidth = 706
               end
             end
             object TabSheet35: TTabSheet
               Caption = 'Retorno Completo WS'
               ImageIndex = 4
-              ExplicitWidth = 706
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Memo8: TMemo
                 Left = 0
                 Top = 395
@@ -4620,13 +4923,15 @@ object Form1: TForm1
                 Align = alBottom
                 ScrollBars = ssVertical
                 TabOrder = 0
-                ExplicitWidth = 706
               end
             end
             object TabSheet36: TTabSheet
               Caption = 'Dados'
               ImageIndex = 5
-              ExplicitWidth = 706
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Memo9: TMemo
                 Left = 0
                 Top = 0
@@ -4635,13 +4940,15 @@ object Form1: TForm1
                 Align = alClient
                 ScrollBars = ssVertical
                 TabOrder = 0
-                ExplicitWidth = 706
               end
             end
             object TabSheet37: TTabSheet
               Caption = 'RetornoConsulta NFe 2.01'
               ImageIndex = 6
-              ExplicitWidth = 706
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object TreeView4: TTreeView
                 Left = 0
                 Top = 0
@@ -4650,7 +4957,6 @@ object Form1: TForm1
                 Align = alClient
                 Indent = 19
                 TabOrder = 0
-                ExplicitWidth = 706
               end
             end
           end
@@ -4660,7 +4966,10 @@ object Form1: TForm1
     object TabSheet18: TTabSheet
       Caption = 'Gerar NFe'
       ImageIndex = 7
-      ExplicitWidth = 891
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Panel21: TPanel
         Left = 0
         Top = 0
@@ -4670,7 +4979,6 @@ object Form1: TForm1
         BevelKind = bkSoft
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 891
         object BrvLabel1: TBrvLabel
           Left = 8
           Top = 35
@@ -4736,19 +5044,6 @@ object Form1: TForm1
           Font.Style = [fsBold]
           ParentFont = False
         end
-        object BrvLabel7: TBrvLabel
-          Left = 8
-          Top = 90
-          Width = 39
-          Height = 13
-          Caption = 'Evento'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlue
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
         object BrvLabel8: TBrvLabel
           Left = 541
           Top = 144
@@ -4782,13 +5077,6 @@ object Form1: TForm1
           Font.Style = [fsBold]
           ParentFont = False
         end
-        object BrvLabel29: TBrvLabel
-          Left = 252
-          Top = 9
-          Width = 57
-          Height = 13
-          Caption = 'Chave NF-e'
-        end
         object BrvLabel50: TBrvLabel
           Left = 8
           Top = 117
@@ -4796,26 +5084,13 @@ object Form1: TForm1
           Height = 13
           Caption = 'Opera'#231#227'o'
         end
-        object BrvLabel24: TBrvLabel
-          Left = 8
-          Top = 9
-          Width = 57
-          Height = 13
-          Caption = 'Finalidade'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlue
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
         object BrvDbEdit1: TBrvDbEdit
           Left = 77
           Top = 32
-          Width = 87
+          Width = 238
           Height = 21
           DataField = 'CDEMPRES'
-          TabOrder = 2
+          TabOrder = 0
           BrAlignment = taRightJustify
           BrVisibleButton = True
           BrFunctionButton = TpDbConsulta
@@ -4828,27 +5103,13 @@ object Form1: TForm1
           BrQueryConsulta = 12
           BrvReadOnlyColor = 14541539
         end
-        object EdtDsEmpres: TBrvRetCon
-          Left = 170
-          Top = 32
-          Width = 489
-          Height = 19
-          TabStop = False
-          BevelInner = bvLowered
-          BevelKind = bkFlat
-          BevelWidth = 2
-          BorderStyle = bsNone
-          ParentColor = True
-          ReadOnly = True
-          TabOrder = 3
-        end
         object BrvDbEdit2: TBrvDbEdit
           Left = 77
           Top = 140
           Width = 87
           Height = 21
           DataField = 'NRNOTA'
-          TabOrder = 15
+          TabOrder = 6
           BrAlignment = taRightJustify
           BrVisibleButton = False
           BrFunctionButton = TpDbConsulta
@@ -4861,7 +5122,7 @@ object Form1: TForm1
           Width = 60
           Height = 21
           DataField = 'NRSERINF'
-          TabOrder = 16
+          TabOrder = 7
           BrAlignment = taRightJustify
           BrVisibleButton = False
           BrFunctionButton = TpDbConsulta
@@ -4869,9 +5130,9 @@ object Form1: TForm1
           BrvReadOnlyColor = 14541539
         end
         object EdtRsTitula: TBrvRetCon
-          Left = 321
+          Left = 228
           Top = 59
-          Width = 338
+          Width = 431
           Height = 19
           TabStop = False
           BevelInner = bvLowered
@@ -4880,7 +5141,7 @@ object Form1: TForm1
           BorderStyle = bsNone
           ParentColor = True
           ReadOnly = True
-          TabOrder = 7
+          TabOrder = 2
         end
         object BrvDbEdit4: TBrvDbEdit
           Left = 357
@@ -4888,63 +5149,12 @@ object Form1: TForm1
           Width = 60
           Height = 21
           DataField = 'NRSUSENF'
-          TabOrder = 17
+          TabOrder = 8
           BrAlignment = taRightJustify
           BrVisibleButton = False
           BrFunctionButton = TpDbConsulta
           BrQueryConsulta = 0
           BrvReadOnlyColor = 14541539
-        end
-        object BrvDbEdit5: TBrvDbEdit
-          Left = 228
-          Top = 59
-          Width = 87
-          Height = 21
-          DataField = 'CDTITULA'
-          TabOrder = 6
-          BrAlignment = taRightJustify
-          BrVisibleButton = True
-          BrFunctionButton = TpDbConsulta
-          BrConfigurar.Strings = (
-            'CdTitula;CdTitula;S;S;'
-            'CjTitula;CjTitula;S;N;'
-            'EdtRsTitula;RsTitula;S;N;'
-            'CdEstEmi;CdEstado;S;N;'
-            'EdtCdEstEmi;CdEstado;S;N;')
-          BrQueryConsulta = 19
-          BrvReadOnlyColor = 14541539
-        end
-        object BrvDbEdit7: TBrvDbEdit
-          Left = 77
-          Top = 86
-          Width = 87
-          Height = 21
-          DataField = 'CDEVENTO'
-          TabOrder = 9
-          BrAlignment = taRightJustify
-          BrVisibleButton = True
-          BrFunctionButton = TpDbConsulta
-          BrConfigurar.Strings = (
-            'CDEVENTO;CDEVENTO;S;S;'
-            'EdtDsEvento;DSEVENTO;S;N;'
-            'EdtStGerDup;STGERDUP;S;N;'
-            'EdtCdForPag;CdForPag;S;N;')
-          BrQueryConsulta = 56
-          BrvReadOnlyColor = 14541539
-        end
-        object EdtDsEvento: TBrvRetCon
-          Left = 170
-          Top = 86
-          Width = 528
-          Height = 19
-          TabStop = False
-          BevelInner = bvLowered
-          BevelKind = bkFlat
-          BevelWidth = 2
-          BorderStyle = bsNone
-          ParentColor = True
-          ReadOnly = True
-          TabOrder = 10
         end
         object BrvDbEdit8: TBrvDbEdit
           Left = 593
@@ -4952,7 +5162,7 @@ object Form1: TForm1
           Width = 107
           Height = 21
           DataField = 'DTEMINOT'
-          TabOrder = 19
+          TabOrder = 10
           BrAlignment = taRightJustify
           BrVisibleButton = True
           BrFunctionButton = TpDbData
@@ -4965,7 +5175,7 @@ object Form1: TForm1
           Width = 107
           Height = 21
           DataField = 'DTENTRAD'
-          TabOrder = 20
+          TabOrder = 11
           BrAlignment = taRightJustify
           BrVisibleButton = True
           BrFunctionButton = TpDbData
@@ -4977,7 +5187,7 @@ object Form1: TForm1
           Top = 140
           Width = 60
           Height = 21
-          TabOrder = 18
+          TabOrder = 9
           BrAlignment = taRightJustify
           BrVisibleButton = False
           BrFunctionButton = TpDbConsulta
@@ -4990,7 +5200,7 @@ object Form1: TForm1
           Width = 87
           Height = 21
           DataField = 'NRSEQFIS'
-          TabOrder = 13
+          TabOrder = 4
           BrAlignment = taRightJustify
           BrVisibleButton = True
           BrFunctionButton = TpDbConsulta
@@ -5010,7 +5220,7 @@ object Form1: TForm1
           Caption = 'Op'#231#245'es'
           Ctl3D = False
           ParentCtl3D = False
-          TabOrder = 21
+          TabOrder = 12
           object CbxSnItens: TCheckBox
             Left = 8
             Top = 18
@@ -5038,56 +5248,13 @@ object Form1: TForm1
             TabOrder = 2
           end
         end
-        object EdtStGerDup: TBrvRetCon
-          Left = 678
-          Top = 86
-          Width = 20
-          Height = 19
-          TabStop = False
-          BevelInner = bvLowered
-          BevelKind = bkFlat
-          BevelWidth = 2
-          BorderStyle = bsNone
-          ParentColor = True
-          ReadOnly = True
-          TabOrder = 12
-          Visible = False
-        end
-        object EdtCdForPag: TBrvRetCon
-          Left = 659
-          Top = 86
-          Width = 20
-          Height = 19
-          TabStop = False
-          BevelInner = bvLowered
-          BevelKind = bkFlat
-          BevelWidth = 2
-          BorderStyle = bsNone
-          ParentColor = True
-          ReadOnly = True
-          TabOrder = 11
-          Visible = False
-        end
-        object EdtNrChave: TBrvEdit
-          Left = 321
-          Top = 5
-          Width = 377
-          Height = 21
-          TabOrder = 1
-          BrvReadOnlyColor = 14541539
-          BrVisibleButton = False
-          BrFunctionButton = VeConsulta
-          BrAlignment = taLeftJustify
-          BrvQueryCode = 0
-          BrRecordar = False
-        end
         object BrvDbEdit42: TBrvDbEdit
           Left = 77
           Top = 59
           Width = 145
           Height = 21
           DataField = 'CJTITULA'
-          TabOrder = 5
+          TabOrder = 1
           BrAlignment = taRightJustify
           BrVisibleButton = True
           BrFunctionButton = TpDbConsulta
@@ -5099,39 +5266,6 @@ object Form1: TForm1
             'EdtCdEstEmi;CdEstado;S;N;')
           BrQueryConsulta = 19
           BrvReadOnlyColor = 14541539
-        end
-        object EdtCdEstEmp: TBrvRetCon
-          Left = 658
-          Top = 32
-          Width = 40
-          Height = 19
-          TabStop = False
-          BevelInner = bvLowered
-          BevelKind = bkFlat
-          BevelWidth = 2
-          BorderStyle = bsNone
-          ParentColor = True
-          ReadOnly = True
-          TabOrder = 4
-        end
-        object CbxFinali: TBrvComboBox
-          Left = 77
-          Top = 5
-          Width = 145
-          Height = 21
-          ItemIndex = 0
-          TabOrder = 0
-          Text = 'Consumo'
-          Items.Strings = (
-            'Consumo'
-            'Insumo'
-            'Ativo'
-            'Outros')
-          Values.Strings = (
-            'C'
-            'I'
-            'A'
-            'O')
         end
         object EdtCdEstEmi: TBrvRetCon
           Left = 658
@@ -5145,22 +5279,7 @@ object Form1: TForm1
           BorderStyle = bsNone
           ParentColor = True
           ReadOnly = True
-          TabOrder = 8
-        end
-        object EdtCdEmpEst: TBrvRetCon
-          Left = 678
-          Top = 32
-          Width = 20
-          Height = 19
-          TabStop = False
-          BevelInner = bvLowered
-          BevelKind = bkFlat
-          BevelWidth = 2
-          BorderStyle = bsNone
-          ParentColor = True
-          ReadOnly = True
-          TabOrder = 22
-          Visible = False
+          TabOrder = 3
         end
         object EdtDsFiscal: TBrvRetCon
           Left = 252
@@ -5174,7 +5293,7 @@ object Form1: TForm1
           BorderStyle = bsNone
           ParentColor = True
           ReadOnly = True
-          TabOrder = 14
+          TabOrder = 5
         end
         object EdtCdFiscal: TBrvRetCon
           Left = 170
@@ -5188,22 +5307,7 @@ object Form1: TForm1
           BorderStyle = bsNone
           ParentColor = True
           ReadOnly = True
-          TabOrder = 23
-        end
-        object EdtCdGruEmp: TBrvRetCon
-          Left = 634
-          Top = 32
-          Width = 25
-          Height = 19
-          TabStop = False
-          BevelInner = bvLowered
-          BevelKind = bkFlat
-          BevelWidth = 2
-          BorderStyle = bsNone
-          ParentColor = True
-          ReadOnly = True
-          TabOrder = 24
-          Visible = False
+          TabOrder = 13
         end
       end
       object PgcDadosNF: TPageControl
@@ -5214,11 +5318,13 @@ object Form1: TForm1
         ActivePage = TbsItens
         Align = alClient
         TabOrder = 1
-        ExplicitWidth = 891
         object TbsItens: TTabSheet
           Caption = 'Itens da Nota'
           ImageIndex = 10
-          ExplicitWidth = 883
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object DbgF002: TBrvDbGrid
             Left = 0
             Top = 0
@@ -5547,7 +5653,10 @@ object Form1: TForm1
         object TbsImpostos: TTabSheet
           Caption = 'Impostos\Outros'
           ImageIndex = 2
-          ExplicitWidth = 883
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object GroupBox3: TGroupBox
             Left = 3
             Top = 0
@@ -5930,7 +6039,10 @@ object Form1: TForm1
         object TbsRetencao: TTabSheet
           Caption = 'Reten'#231#227'o'
           ImageIndex = 6
-          ExplicitWidth = 883
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object GroupBox32: TGroupBox
             Left = 207
             Top = 0
@@ -6413,7 +6525,10 @@ object Form1: TForm1
         object TbsParcela: TTabSheet
           Caption = 'Parcelas'
           ImageIndex = 9
-          ExplicitWidth = 883
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object DbgN003: TBrvDbGrid
             Left = 0
             Top = 0
@@ -6487,7 +6602,6 @@ object Form1: TForm1
             Align = alBottom
             BevelOuter = bvNone
             TabOrder = 1
-            ExplicitWidth = 883
             object BtnGerParcel: TBrvBitBtn
               Left = 5
               Top = 5
@@ -6652,7 +6766,10 @@ object Form1: TForm1
         object TbsDadAdi: TTabSheet
           Caption = 'Dados Adicionais'
           ImageIndex = 1
-          ExplicitWidth = 883
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object DBMemo1: TDBMemo
             Left = 0
             Top = 0
@@ -6661,7 +6778,6 @@ object Form1: TForm1
             Align = alClient
             DataField = 'TXDADADI'
             TabOrder = 0
-            ExplicitWidth = 883
           end
         end
       end
@@ -6673,7 +6789,6 @@ object Form1: TForm1
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 2
-        ExplicitWidth = 891
         DesignSize = (
           972
           34)
@@ -6862,7 +6977,6 @@ object Form1: TForm1
           ShowHint = True
           TabOrder = 1
           BrTipoBotao = BrBtnSalvar
-          ExplicitLeft = 629
         end
         object BtnCancelar: TBrvBitBtn
           Left = 865
@@ -6963,24 +7077,32 @@ object Form1: TForm1
           ShowHint = True
           TabOrder = 2
           BrTipoBotao = BrBtnCancel
-          ExplicitLeft = 784
         end
       end
     end
     object TabSheet25: TTabSheet
       Caption = 'Gerar NFSe'
       ImageIndex = 8
-      ExplicitWidth = 891
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
     end
     object TabSheet28: TTabSheet
       Caption = 'Gerar Conhecimento'
       ImageIndex = 9
-      ExplicitWidth = 891
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
     end
     object TabSheet30: TTabSheet
       Caption = 'Configura'#231#227'o Boletos'
       ImageIndex = 10
-      ExplicitWidth = 891
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object GroupBox40: TGroupBox
         Left = 8
         Top = 8
@@ -7530,7 +7652,6 @@ object Form1: TForm1
         Height = 50
         Align = alBottom
         TabOrder = 5
-        ExplicitWidth = 891
         object Button8: TButton
           Left = 8
           Top = 16
@@ -7627,8 +7748,8 @@ object Form1: TForm1
     EspessuraBorda = 1
     TamanhoFonte_RazaoSocial = 12
     TamanhoFonte_ANTT = 10
-    Left = 846
-    Top = 440
+    Left = 478
+    Top = 576
   end
   object BrvXMLNFE: TBrvXML
     BrGerarBanco = True
@@ -7644,18 +7765,8 @@ object Form1: TForm1
     Aggregates = <>
     Params = <>
     ProviderName = 'DataSetProvider1'
-    Left = 848
-    Top = 392
-  end
-  object PopupMenu1: TPopupMenu
-    Left = 848
-    Top = 528
-    object Detalhar1: TMenuItem
-      Caption = 'Detalhar'
-    end
-    object Imprimir1: TMenuItem
-      Caption = 'Imprimir'
-    end
+    Left = 368
+    Top = 584
   end
   object mxExcel: TmxDataSetExport
     Captions.Strings = (
@@ -8200,11 +8311,21 @@ object Form1: TForm1
   end
   object Timer1: TTimer
     OnTimer = Timer1Timer
-    Left = 848
-    Top = 488
+    Left = 592
+    Top = 576
   end
   object DataSetProvider2: TDataSetProvider
     Left = 840
     Top = 72
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 552
+    Top = 584
+    object Detalhar1: TMenuItem
+      Caption = 'Detalhar'
+    end
+    object Imprimir1: TMenuItem
+      Caption = 'Imprimir'
+    end
   end
 end
