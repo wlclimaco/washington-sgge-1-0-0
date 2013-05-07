@@ -53,15 +53,11 @@ object Form1: TForm1
     Top = 0
     Width = 980
     Height = 680
-    ActivePage = TabSheet26
+    ActivePage = TabSheet14
     Align = alClient
     TabOrder = 0
     object TabSheet14: TTabSheet
       Caption = 'Pagina Inicial'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Panel7: TPanel
         Left = 0
         Top = 41
@@ -932,10 +928,6 @@ object Form1: TForm1
     object TabSheet15: TTabSheet
       Caption = 'NFe'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Panel2: TPanel
         Left = 169
         Top = 0
@@ -961,10 +953,6 @@ object Form1: TForm1
             object TabSheet12: TTabSheet
               Caption = 'Busca Manifesto'
               ImageIndex = 1
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object Panel4: TPanel
                 Left = 0
                 Top = 0
@@ -1122,10 +1110,6 @@ object Form1: TForm1
             object TabSheet13: TTabSheet
               Caption = 'Busca Chave'
               ImageIndex = 2
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object Panel6: TPanel
                 Left = 0
                 Top = 0
@@ -1178,10 +1162,6 @@ object Form1: TForm1
             object TabSheet1: TTabSheet
               Caption = 'Retorno'
               ImageIndex = 5
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object PageControl2: TPageControl
                 Left = 0
                 Top = 0
@@ -1192,10 +1172,6 @@ object Form1: TForm1
                 TabOrder = 0
                 object TabSheet5: TTabSheet
                   Caption = 'Respostas'
-                  ExplicitLeft = 0
-                  ExplicitTop = 0
-                  ExplicitWidth = 0
-                  ExplicitHeight = 0
                   object MemoResp: TMemo
                     Left = 0
                     Top = 0
@@ -1209,10 +1185,6 @@ object Form1: TForm1
                 object TabSheet6: TTabSheet
                   Caption = 'XML Resposta'
                   ImageIndex = 1
-                  ExplicitLeft = 0
-                  ExplicitTop = 0
-                  ExplicitWidth = 0
-                  ExplicitHeight = 0
                   object WBResposta: TWebBrowser
                     Left = 0
                     Top = 0
@@ -1233,10 +1205,6 @@ object Form1: TForm1
                 object TabSheet8: TTabSheet
                   Caption = 'Log'
                   ImageIndex = 2
-                  ExplicitLeft = 0
-                  ExplicitTop = 0
-                  ExplicitWidth = 0
-                  ExplicitHeight = 0
                   object memoLog: TMemo
                     Left = 0
                     Top = 0
@@ -1250,10 +1218,6 @@ object Form1: TForm1
                 object TabSheet9: TTabSheet
                   Caption = 'NFe'
                   ImageIndex = 3
-                  ExplicitLeft = 0
-                  ExplicitTop = 0
-                  ExplicitWidth = 0
-                  ExplicitHeight = 0
                   object trvwNFe: TTreeView
                     Left = 0
                     Top = 0
@@ -1267,10 +1231,6 @@ object Form1: TForm1
                 object TabSheet10: TTabSheet
                   Caption = 'Retorno Completo WS'
                   ImageIndex = 4
-                  ExplicitLeft = 0
-                  ExplicitTop = 0
-                  ExplicitWidth = 0
-                  ExplicitHeight = 0
                   object memoRespWS: TMemo
                     Left = 0
                     Top = 456
@@ -1284,10 +1244,6 @@ object Form1: TForm1
                 object Dados: TTabSheet
                   Caption = 'Dados'
                   ImageIndex = 5
-                  ExplicitLeft = 0
-                  ExplicitTop = 0
-                  ExplicitWidth = 0
-                  ExplicitHeight = 0
                   object MemoDados: TMemo
                     Left = 0
                     Top = 0
@@ -1301,10 +1257,6 @@ object Form1: TForm1
                 object TabSheet11: TTabSheet
                   Caption = 'RetornoConsulta NFe 2.01'
                   ImageIndex = 6
-                  ExplicitLeft = 0
-                  ExplicitTop = 0
-                  ExplicitWidth = 0
-                  ExplicitHeight = 0
                   object TreeViewRetornoConsulta: TTreeView
                     Left = 0
                     Top = 0
@@ -1434,10 +1386,6 @@ object Form1: TForm1
     object TabSheet2: TTabSheet
       Caption = 'CTe'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Panel5: TPanel
         Left = 0
         Top = 0
@@ -1548,10 +1496,6 @@ object Form1: TForm1
         object TabSheet4: TTabSheet
           Caption = 'Busca Manifesto'
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Panel11: TPanel
             Left = 0
             Top = 0
@@ -1709,10 +1653,6 @@ object Form1: TForm1
         object TabSheet7: TTabSheet
           Caption = 'Busca Chave'
           ImageIndex = 2
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Panel12: TPanel
             Left = 0
             Top = 0
@@ -1765,10 +1705,6 @@ object Form1: TForm1
         object TabSheet16: TTabSheet
           Caption = 'Retorno'
           ImageIndex = 5
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object PageControl5: TPageControl
             Left = 0
             Top = 0
@@ -1779,10 +1715,6 @@ object Form1: TForm1
             TabOrder = 0
             object TabSheet17: TTabSheet
               Caption = 'Respostas'
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object Memo2: TMemo
                 Left = 0
                 Top = 0
@@ -1796,10 +1728,6 @@ object Form1: TForm1
             object TabSheet19: TTabSheet
               Caption = 'XML Resposta'
               ImageIndex = 1
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object WebBrowser1: TWebBrowser
                 Left = 0
                 Top = 0
@@ -1820,10 +1748,6 @@ object Form1: TForm1
             object TabSheet20: TTabSheet
               Caption = 'Log'
               ImageIndex = 2
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object Memo3: TMemo
                 Left = 0
                 Top = 0
@@ -1837,10 +1761,6 @@ object Form1: TForm1
             object TabSheet21: TTabSheet
               Caption = 'NFe'
               ImageIndex = 3
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object TreeView1: TTreeView
                 Left = 0
                 Top = 0
@@ -1854,10 +1774,6 @@ object Form1: TForm1
             object TabSheet22: TTabSheet
               Caption = 'Retorno Completo WS'
               ImageIndex = 4
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object Memo4: TMemo
                 Left = 0
                 Top = 460
@@ -1871,10 +1787,6 @@ object Form1: TForm1
             object TabSheet23: TTabSheet
               Caption = 'Dados'
               ImageIndex = 5
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object Memo5: TMemo
                 Left = 0
                 Top = 0
@@ -1888,10 +1800,6 @@ object Form1: TForm1
             object TabSheet24: TTabSheet
               Caption = 'RetornoConsulta NFe 2.01'
               ImageIndex = 6
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object TreeView2: TTreeView
                 Left = 0
                 Top = 0
@@ -3351,10 +3259,6 @@ object Form1: TForm1
     object TabSheet39: TTabSheet
       Caption = 'Enviar Email'
       ImageIndex = 5
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Panel16: TPanel
         Left = 0
         Top = 0
@@ -3753,7 +3657,7 @@ object Form1: TForm1
           Caption = 'LblQtReg'
         end
         object BtnEnviar: TBrvBitBtn
-          Left = 822
+          Left = 814
           Top = 4
           Width = 100
           Height = 25
@@ -3851,7 +3755,6 @@ object Form1: TForm1
           ShowHint = True
           TabOrder = 0
           BrTipoBotao = BrBtnOk
-          ExplicitLeft = 826
         end
       end
       object Panel19: TPanel
@@ -3868,7 +3771,6 @@ object Form1: TForm1
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 4
-        ExplicitTop = 408
         DesignSize = (
           968
           77)
@@ -4270,10 +4172,6 @@ object Form1: TForm1
     object TabSheet40: TTabSheet
       Caption = 'Movimenta'#231#245'es'
       ImageIndex = 6
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Panel17: TPanel
         Left = 0
         Top = 0
@@ -4695,10 +4593,6 @@ object Form1: TForm1
     object TabSheet3: TTabSheet
       Caption = 'NFSe'
       ImageIndex = 4
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Panel13: TPanel
         Left = 0
         Top = 0
@@ -4774,10 +4668,6 @@ object Form1: TForm1
         object TabSheet29: TTabSheet
           Caption = 'Busca Chave'
           ImageIndex = 2
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Panel15: TPanel
             Left = 0
             Top = 0
@@ -4836,10 +4726,6 @@ object Form1: TForm1
             TabOrder = 1
             object TabSheet31: TTabSheet
               Caption = 'Respostas'
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object Memo1: TMemo
                 Left = 0
                 Top = 0
@@ -4853,10 +4739,6 @@ object Form1: TForm1
             object TabSheet32: TTabSheet
               Caption = 'XML Resposta'
               ImageIndex = 1
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object WebBrowser2: TWebBrowser
                 Left = 0
                 Top = 0
@@ -4877,10 +4759,6 @@ object Form1: TForm1
             object TabSheet33: TTabSheet
               Caption = 'Log'
               ImageIndex = 2
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object Memo7: TMemo
                 Left = 0
                 Top = 0
@@ -4894,10 +4772,6 @@ object Form1: TForm1
             object TabSheet34: TTabSheet
               Caption = 'NFe'
               ImageIndex = 3
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object TreeView3: TTreeView
                 Left = 0
                 Top = 0
@@ -4911,10 +4785,6 @@ object Form1: TForm1
             object TabSheet35: TTabSheet
               Caption = 'Retorno Completo WS'
               ImageIndex = 4
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object Memo8: TMemo
                 Left = 0
                 Top = 395
@@ -4928,10 +4798,6 @@ object Form1: TForm1
             object TabSheet36: TTabSheet
               Caption = 'Dados'
               ImageIndex = 5
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object Memo9: TMemo
                 Left = 0
                 Top = 0
@@ -4945,10 +4811,6 @@ object Form1: TForm1
             object TabSheet37: TTabSheet
               Caption = 'RetornoConsulta NFe 2.01'
               ImageIndex = 6
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object TreeView4: TTreeView
                 Left = 0
                 Top = 0
@@ -4966,10 +4828,6 @@ object Form1: TForm1
     object TabSheet18: TTabSheet
       Caption = 'Gerar NFe'
       ImageIndex = 7
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Panel21: TPanel
         Left = 0
         Top = 0
@@ -5321,10 +5179,6 @@ object Form1: TForm1
         object TbsItens: TTabSheet
           Caption = 'Itens da Nota'
           ImageIndex = 10
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object DbgF002: TBrvDbGrid
             Left = 0
             Top = 0
@@ -5653,10 +5507,6 @@ object Form1: TForm1
         object TbsImpostos: TTabSheet
           Caption = 'Impostos\Outros'
           ImageIndex = 2
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object GroupBox3: TGroupBox
             Left = 3
             Top = 0
@@ -6039,10 +5889,6 @@ object Form1: TForm1
         object TbsRetencao: TTabSheet
           Caption = 'Reten'#231#227'o'
           ImageIndex = 6
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object GroupBox32: TGroupBox
             Left = 207
             Top = 0
@@ -6525,10 +6371,6 @@ object Form1: TForm1
         object TbsParcela: TTabSheet
           Caption = 'Parcelas'
           ImageIndex = 9
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object DbgN003: TBrvDbGrid
             Left = 0
             Top = 0
@@ -6766,10 +6608,6 @@ object Form1: TForm1
         object TbsDadAdi: TTabSheet
           Caption = 'Dados Adicionais'
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object DBMemo1: TDBMemo
             Left = 0
             Top = 0
@@ -7083,631 +6921,1741 @@ object Form1: TForm1
     object TabSheet25: TTabSheet
       Caption = 'Gerar NFSe'
       ImageIndex = 8
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
     end
     object TabSheet28: TTabSheet
       Caption = 'Gerar Conhecimento'
       ImageIndex = 9
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
     end
-    object TabSheet30: TTabSheet
-      Caption = 'Configura'#231#227'o Boletos'
-      ImageIndex = 10
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
-      object GroupBox40: TGroupBox
-        Left = 8
-        Top = 8
-        Width = 785
-        Height = 63
-        Caption = 'Informa'#231#245'es Sobre a Cobran'#231'a'
-        TabOrder = 0
-        object Label1: TLabel
-          Left = 8
-          Top = 16
-          Width = 177
-          Height = 13
-          Caption = 'Mensagem para Local de Pagamento'
-        end
-        object Label2: TLabel
-          Left = 383
-          Top = 16
-          Width = 70
-          Height = 13
-          Caption = 'Esp'#233'cie Docto'
-        end
-        object Label3: TLabel
-          Left = 463
-          Top = 16
-          Width = 74
-          Height = 13
-          Caption = 'Esp'#233'cie Moeda'
-        end
-        object Label4: TLabel
-          Left = 544
-          Top = 16
-          Width = 30
-          Height = 13
-          Caption = 'Aceite'
-        end
-        object Label5: TLabel
-          Left = 624
-          Top = 16
-          Width = 36
-          Height = 13
-          Caption = 'Carteira'
-        end
-        object Label6: TLabel
-          Left = 672
-          Top = 16
-          Width = 70
-          Height = 13
-          Caption = 'Nosso N'#250'mero'
-        end
-        object edtLocalPag: TEdit
-          Left = 8
-          Top = 32
-          Width = 369
-          Height = 21
-          TabOrder = 0
-          Text = 'Pagar prefer'#234'ncialmente nas ag'#234'ncias do Bradesco'
-        end
-        object edtEspecieDoc: TEdit
-          Left = 383
-          Top = 32
-          Width = 73
-          Height = 21
-          TabOrder = 1
-          Text = 'DM'
-        end
-        object edtEspecieMod: TEdit
-          Left = 463
-          Top = 32
-          Width = 76
-          Height = 21
-          TabOrder = 2
-          Text = '$'
-        end
-        object cbxAceite: TComboBox
-          Left = 544
-          Top = 32
-          Width = 73
-          Height = 21
-          TabOrder = 3
-          Text = 'Sim'
-          Items.Strings = (
-            'Sim'
-            'N'#227'o')
-        end
-        object edtCarteira: TEdit
-          Left = 624
-          Top = 32
-          Width = 41
-          Height = 21
-          TabOrder = 4
-          Text = '09'
-        end
-        object edtNossoNro: TEdit
-          Left = 672
-          Top = 32
-          Width = 103
-          Height = 21
-          TabOrder = 5
-          Text = '00000000000'
-        end
-      end
-      object GroupBox41: TGroupBox
-        Left = 8
-        Top = 88
-        Width = 609
-        Height = 105
-        Caption = 'Acr'#233'scimos\Descontos'
-        TabOrder = 1
-        object Label7: TLabel
-          Left = 8
-          Top = 16
-          Width = 78
-          Height = 13
-          Caption = 'ValorMora\Juros'
-        end
-        object Label8: TLabel
-          Left = 162
-          Top = 16
-          Width = 73
-          Height = 13
-          Caption = 'Valor Desconto'
-        end
-        object Label9: TLabel
-          Left = 316
-          Top = 16
-          Width = 80
-          Height = 13
-          Caption = 'Valor Abatimento'
-        end
-        object Label10: TLabel
-          Left = 466
-          Top = 16
-          Width = 37
-          Height = 13
-          Caption = '% Multa'
-        end
-        object Label11: TLabel
-          Left = 8
-          Top = 56
-          Width = 83
-          Height = 13
-          Caption = 'Data Multa_Juros'
-        end
-        object Label12: TLabel
-          Left = 162
-          Top = 56
-          Width = 72
-          Height = 13
-          Caption = 'Data Desconto'
-        end
-        object Label13: TLabel
-          Left = 316
-          Top = 56
-          Width = 79
-          Height = 13
-          Caption = 'Data Abatimento'
-        end
-        object Label14: TLabel
-          Left = 466
-          Top = 56
-          Width = 65
-          Height = 13
-          Caption = 'Data Protesto'
-        end
-        object edtMoraJuros: TEdit
-          Left = 8
-          Top = 32
-          Width = 135
-          Height = 21
-          TabOrder = 0
-          Text = '5'
-        end
-        object edtValorDesconto: TEdit
-          Left = 162
-          Top = 32
-          Width = 135
-          Height = 21
-          TabOrder = 1
-          Text = '0'
-        end
-        object edtValorAbatimento: TEdit
-          Left = 316
-          Top = 32
-          Width = 135
-          Height = 21
-          TabOrder = 2
-          Text = '0'
-        end
-        object edtMulta: TEdit
-          Left = 466
-          Top = 32
-          Width = 135
-          Height = 21
-          TabOrder = 3
-          Text = '5'
-        end
-        object edtDataMora: TMaskEdit
-          Left = 8
-          Top = 72
-          Width = 135
-          Height = 21
-          EditMask = '!99/99/00;1;_'
-          MaxLength = 8
-          TabOrder = 4
-          Text = '  /  /  '
-        end
-        object edtDataDesconto: TMaskEdit
-          Left = 162
-          Top = 72
-          Width = 135
-          Height = 21
-          EditMask = '!99/99/00;1;_'
-          MaxLength = 8
-          TabOrder = 5
-          Text = '  /  /  '
-        end
-        object edtDataAbatimento: TMaskEdit
-          Left = 316
-          Top = 72
-          Width = 135
-          Height = 21
-          EditMask = '!99/99/00;1;_'
-          MaxLength = 8
-          TabOrder = 6
-          Text = '  /  /  '
-        end
-        object edtDataProtesto: TMaskEdit
-          Left = 466
-          Top = 72
-          Width = 135
-          Height = 21
-          EditMask = '!99/99/00;1;_'
-          MaxLength = 8
-          TabOrder = 7
-          Text = '  /  /  '
-        end
-      end
-      object GroupBox42: TGroupBox
-        Left = 624
-        Top = 88
-        Width = 169
-        Height = 225
-        Caption = 'Informa'#231#245'es Sobre a Duplicata '
-        TabOrder = 2
-        object Label17: TLabel
-          Left = 8
-          Top = 16
-          Width = 40
-          Height = 13
-          Caption = 'N'#250'mero '
-        end
-        object Label18: TLabel
-          Left = 8
-          Top = 64
-          Width = 24
-          Height = 13
-          Caption = 'Valor'
-        end
-        object Label19: TLabel
-          Left = 8
-          Top = 120
-          Width = 65
-          Height = 13
-          Caption = 'Data Emiss'#227'o'
-        end
-        object Label20: TLabel
-          Left = 8
-          Top = 176
-          Width = 56
-          Height = 13
-          Caption = 'Vencimento'
-        end
-        object edtNumeroDoc: TEdit
-          Left = 8
-          Top = 32
-          Width = 153
-          Height = 21
-          TabOrder = 0
-          Text = '0000000001'
-        end
-        object edtValorDoc: TEdit
-          Left = 8
-          Top = 80
-          Width = 153
-          Height = 21
-          TabOrder = 1
-          Text = '100'
-        end
-        object edtDataDoc: TMaskEdit
-          Left = 8
-          Top = 136
-          Width = 153
-          Height = 21
-          EditMask = '!99/99/00;1;_'
-          MaxLength = 8
-          TabOrder = 2
-          Text = '  /  /  '
-        end
-        object edtVencimento: TMaskEdit
-          Left = 8
-          Top = 192
-          Width = 153
-          Height = 21
-          EditMask = '!99/99/00;1;_'
-          MaxLength = 8
-          TabOrder = 3
-          Text = '  /  /  '
-        end
-      end
-      object GroupBox43: TGroupBox
-        Left = 8
-        Top = 199
-        Width = 609
-        Height = 114
-        Caption = 'Mensagens \ Instru'#231#245'es'
-        TabOrder = 3
-        object Label15: TLabel
-          Left = 320
-          Top = 16
-          Width = 53
-          Height = 13
-          Caption = 'Instru'#231#227'o 1'
-        end
-        object Label16: TLabel
-          Left = 464
-          Top = 16
-          Width = 53
-          Height = 13
-          Caption = 'Instru'#231#227'o 2'
-        end
-        object memMensagem: TMemo
-          Left = 9
-          Top = 11
-          Width = 305
-          Height = 89
-          Lines.Strings = (
-            '')
-          TabOrder = 0
-        end
-        object edtInstrucoes1: TEdit
-          Left = 320
-          Top = 32
-          Width = 137
-          Height = 21
-          TabOrder = 1
-        end
-        object edtInstrucoes2: TEdit
-          Left = 464
-          Top = 32
-          Width = 137
-          Height = 21
-          TabOrder = 2
-        end
-        object Panel24: TPanel
-          Left = 320
-          Top = 64
-          Width = 281
-          Height = 41
-          Caption = '* Informar o C'#243'digo do Instru'#231#227'o'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlue
-          Font.Height = -11
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 3
-        end
-      end
-      object GroupBox44: TGroupBox
-        Left = 8
-        Top = 320
-        Width = 786
-        Height = 143
-        Caption = 'Informa'#231#245'es do Sacado'
-        TabOrder = 4
-        object Label21: TLabel
-          Left = 8
-          Top = 16
-          Width = 28
-          Height = 13
-          Caption = 'Nome'
-        end
-        object Label22: TLabel
-          Left = 352
-          Top = 16
-          Width = 58
-          Height = 13
-          Caption = 'CPF / CNPJ'
-        end
-        object Label23: TLabel
-          Left = 512
-          Top = 16
-          Width = 29
-          Height = 13
-          Caption = 'E-Mail'
-        end
-        object Label24: TLabel
-          Left = 8
-          Top = 56
-          Width = 46
-          Height = 13
-          Caption = 'Endere'#231'o'
-        end
-        object Label25: TLabel
-          Left = 328
-          Top = 56
-          Width = 37
-          Height = 13
-          Caption = 'N'#250'mero'
-        end
-        object Label26: TLabel
-          Left = 400
-          Top = 56
-          Width = 64
-          Height = 13
-          Caption = 'Complemento'
-        end
-        object Label27: TLabel
-          Left = 592
-          Top = 56
-          Width = 27
-          Height = 13
-          Caption = 'Bairro'
-        end
-        object Label28: TLabel
-          Left = 8
-          Top = 96
-          Width = 33
-          Height = 13
-          Caption = 'Cidade'
-        end
-        object Label37: TLabel
-          Left = 304
-          Top = 96
-          Width = 21
-          Height = 13
-          Caption = 'CEP'
-        end
-        object Label38: TLabel
-          Left = 384
-          Top = 96
-          Width = 14
-          Height = 13
-          Caption = 'UF'
-        end
-        object Label39: TLabel
-          Left = 424
-          Top = 98
-          Width = 34
-          Height = 13
-          Caption = 'LayOut'
-          Color = clBtnFace
-          ParentColor = False
-        end
-        object edtNome: TEdit
-          Left = 8
-          Top = 32
-          Width = 337
-          Height = 21
-          TabOrder = 0
-          Text = 'Joao Roberto Pirea'
-        end
-        object edtCPFCNPJ: TEdit
-          Left = 352
-          Top = 32
-          Width = 153
-          Height = 21
-          TabOrder = 1
-          Text = '87.854.233-78'
-        end
-        object edtEmail: TEdit
-          Left = 512
-          Top = 32
-          Width = 265
-          Height = 21
-          TabOrder = 2
-          Text = 'joao@gmail.com'
-        end
-        object edtEndereco: TEdit
-          Left = 8
-          Top = 72
-          Width = 313
-          Height = 21
-          TabOrder = 3
-          Text = 'Rua XI de Agosto'
-        end
-        object edtNumero: TEdit
-          Left = 328
-          Top = 72
-          Width = 65
-          Height = 21
-          TabOrder = 4
-          Text = '1000'
-        end
-        object edtComplemento: TEdit
-          Left = 400
-          Top = 72
-          Width = 185
-          Height = 21
-          TabOrder = 5
-        end
-        object edtBairro: TEdit
-          Left = 592
-          Top = 72
-          Width = 185
-          Height = 21
-          TabOrder = 6
-          Text = 'Centro'
-        end
-        object edtCidade: TEdit
-          Left = 8
-          Top = 112
-          Width = 289
-          Height = 21
-          TabOrder = 7
-          Text = 'Tatui'
-        end
-        object edtCEP: TEdit
-          Left = 304
-          Top = 112
-          Width = 73
-          Height = 21
-          TabOrder = 8
-          Text = '18270-000'
-        end
-        object edtUF: TEdit
-          Left = 384
-          Top = 112
-          Width = 33
-          Height = 21
-          TabOrder = 9
-          Text = 'SP'
-        end
-        object cbxLayOut: TComboBox
-          Left = 424
-          Top = 114
-          Width = 138
-          Height = 21
-          Style = csDropDownList
-          TabOrder = 10
-        end
-      end
-      object Panel25: TPanel
+    object TabSheet38: TTabSheet
+      Caption = 'Titulares'
+      ImageIndex = 11
+      object PageControl10: TPageControl
         Left = 0
-        Top = 602
+        Top = 0
         Width = 972
-        Height = 50
-        Align = alBottom
-        TabOrder = 5
-        object Button8: TButton
-          Left = 8
-          Top = 16
-          Width = 75
-          Height = 25
-          Caption = 'Gerar HTML'
+        Height = 652
+        ActivePage = TabSheet43
+        Align = alClient
+        TabOrder = 0
+        object TabSheet43: TTabSheet
+          Caption = 'Titulares'
+          object Panel41: TPanel
+            Left = 0
+            Top = 0
+            Width = 964
+            Height = 41
+            Align = alTop
+            TabOrder = 0
+          end
+          object Panel42: TPanel
+            Left = 0
+            Top = 41
+            Width = 177
+            Height = 583
+            Align = alLeft
+            TabOrder = 1
+            object GroupBox46: TGroupBox
+              Left = 3
+              Top = 6
+              Width = 171
+              Height = 107
+              Caption = 'Tipo Cliente'
+              TabOrder = 0
+              object CheckBox37: TCheckBox
+                Left = 7
+                Top = 16
+                Width = 146
+                Height = 17
+                Caption = 'Fornecedor'
+                Checked = True
+                State = cbChecked
+                TabOrder = 0
+              end
+              object CheckBox38: TCheckBox
+                Left = 7
+                Top = 39
+                Width = 146
+                Height = 17
+                Caption = 'Cliente'
+                Checked = True
+                State = cbChecked
+                TabOrder = 1
+              end
+              object CheckBox39: TCheckBox
+                Left = 7
+                Top = 62
+                Width = 97
+                Height = 17
+                Caption = 'Transportador'
+                Checked = True
+                State = cbChecked
+                TabOrder = 2
+              end
+              object CheckBox40: TCheckBox
+                Left = 7
+                Top = 85
+                Width = 97
+                Height = 17
+                Caption = 'Contador'
+                Checked = True
+                State = cbChecked
+                TabOrder = 3
+              end
+            end
+            object GroupBox47: TGroupBox
+              Left = 2
+              Top = 114
+              Width = 171
+              Height = 66
+              Caption = 'Status Cliente'
+              TabOrder = 1
+              object CheckBox41: TCheckBox
+                Left = 7
+                Top = 16
+                Width = 146
+                Height = 17
+                Caption = 'Ativo'
+                Checked = True
+                State = cbChecked
+                TabOrder = 0
+              end
+              object CheckBox42: TCheckBox
+                Left = 7
+                Top = 39
+                Width = 146
+                Height = 17
+                Caption = 'Inativo'
+                Checked = True
+                State = cbChecked
+                TabOrder = 1
+              end
+            end
+            object GroupBox48: TGroupBox
+              Left = 2
+              Top = 253
+              Width = 171
+              Height = 129
+              Caption = 'Dados'
+              TabOrder = 2
+              object Label70: TLabel
+                Left = 3
+                Top = 12
+                Width = 65
+                Height = 13
+                Caption = 'Codigo Titular'
+              end
+              object Label74: TLabel
+                Left = 3
+                Top = 50
+                Width = 42
+                Height = 13
+                Caption = 'Cnpj/Cpf'
+              end
+              object Label111: TLabel
+                Left = 3
+                Top = 86
+                Width = 96
+                Height = 13
+                Caption = 'Raz'#227'o Social/Nome'
+              end
+              object BrvEditNum9: TBrvEditNum
+                Left = 3
+                Top = 29
+                Width = 158
+                Height = 21
+                TabOrder = 0
+                Text = '0'
+                BrvReadOnlyColor = 14541539
+                BrAlignment = taRightJustify
+                BrCasasDecimais = 0
+                BrSepararMilhar = False
+                BrAsInteger = 0
+                BrAsFloatSQL = '0'
+                BrVisibleButton = False
+                BrFunctionButton = TpConsulta
+                BrQueryCode = 0
+                BrRecordar = False
+              end
+              object BrvEditNum10: TBrvEditNum
+                Left = 3
+                Top = 64
+                Width = 158
+                Height = 21
+                TabOrder = 1
+                Text = '0'
+                BrvReadOnlyColor = 14541539
+                BrAlignment = taRightJustify
+                BrCasasDecimais = 0
+                BrSepararMilhar = False
+                BrAsInteger = 0
+                BrAsFloatSQL = '0'
+                BrVisibleButton = False
+                BrFunctionButton = TpConsulta
+                BrQueryCode = 0
+                BrRecordar = False
+              end
+              object BrvEditNum13: TBrvEditNum
+                Left = 3
+                Top = 100
+                Width = 158
+                Height = 21
+                TabOrder = 2
+                Text = '0'
+                BrvReadOnlyColor = 14541539
+                BrAlignment = taRightJustify
+                BrCasasDecimais = 0
+                BrSepararMilhar = False
+                BrAsInteger = 0
+                BrAsFloatSQL = '0'
+                BrVisibleButton = False
+                BrFunctionButton = TpConsulta
+                BrQueryCode = 0
+                BrRecordar = False
+              end
+            end
+            object GroupBox49: TGroupBox
+              Left = 2
+              Top = 181
+              Width = 171
+              Height = 66
+              Caption = 'Pessoa'
+              TabOrder = 3
+              object CheckBox43: TCheckBox
+                Left = 7
+                Top = 16
+                Width = 146
+                Height = 17
+                Caption = 'Fisica'
+                Checked = True
+                State = cbChecked
+                TabOrder = 0
+              end
+              object CheckBox44: TCheckBox
+                Left = 7
+                Top = 38
+                Width = 146
+                Height = 17
+                Caption = 'Juridica'
+                Checked = True
+                State = cbChecked
+                TabOrder = 1
+              end
+            end
+          end
+          object Panel43: TPanel
+            Left = 177
+            Top = 41
+            Width = 787
+            Height = 583
+            Align = alClient
+            TabOrder = 2
+            object Label1: TLabel
+              Left = 40
+              Top = 224
+              Width = 53
+              Height = 13
+              Caption = 'CDTITULA'
+              FocusControl = DBEdit1
+            end
+            object Label2: TLabel
+              Left = 40
+              Top = 264
+              Width = 52
+              Height = 13
+              Caption = 'TPTITULA'
+              FocusControl = DBEdit2
+            end
+            object Label3: TLabel
+              Left = 40
+              Top = 304
+              Width = 75
+              Height = 13
+              Caption = 'RAZAOSOCIAL'
+              FocusControl = DBEdit3
+            end
+            object Label4: TLabel
+              Left = 40
+              Top = 344
+              Width = 27
+              Height = 13
+              Caption = 'CNPJ'
+              FocusControl = DBEdit4
+            end
+            object Label5: TLabel
+              Left = 40
+              Top = 384
+              Width = 63
+              Height = 13
+              Caption = 'CODCIDADE'
+              FocusControl = DBEdit5
+            end
+            object Label6: TLabel
+              Left = 40
+              Top = 424
+              Width = 12
+              Height = 13
+              Caption = 'IM'
+              FocusControl = DBEdit6
+            end
+            object Label7: TLabel
+              Left = 40
+              Top = 464
+              Width = 10
+              Height = 13
+              Caption = 'IE'
+              FocusControl = DBEdit7
+            end
+            object Label8: TLabel
+              Left = 40
+              Top = 504
+              Width = 84
+              Height = 13
+              Caption = 'NOMEFANTASIA'
+              FocusControl = DBEdit8
+            end
+            object Label9: TLabel
+              Left = 40
+              Top = 544
+              Width = 43
+              Height = 13
+              Caption = 'STATUS'
+              FocusControl = DBEdit9
+            end
+            object Label10: TLabel
+              Left = 40
+              Top = 584
+              Width = 45
+              Height = 13
+              Caption = 'CLIENTE'
+              FocusControl = DBEdit10
+            end
+            object Label11: TLabel
+              Left = 40
+              Top = 624
+              Width = 75
+              Height = 13
+              Caption = 'FORNECEDOR'
+              FocusControl = DBEdit11
+            end
+            object Label12: TLabel
+              Left = 40
+              Top = 664
+              Width = 61
+              Height = 13
+              Caption = 'CONTADOR'
+              FocusControl = DBEdit12
+            end
+            object Label13: TLabel
+              Left = 40
+              Top = 704
+              Width = 98
+              Height = 13
+              Caption = 'TRANSPORTADOR'
+              FocusControl = DBEdit13
+            end
+            object Panel44: TPanel
+              Left = 1
+              Top = 1
+              Width = 785
+              Height = 184
+              Align = alTop
+              TabOrder = 0
+              object BrvDbGrid7: TBrvDbGrid
+                Left = 1
+                Top = 1
+                Width = 783
+                Height = 182
+                BrShowMemo = True
+                BrReadOnlyStyle = [fsItalic]
+                BrReadOnlyColor = clMaroon
+                Align = alClient
+                DataSource = DSTitula
+                Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs]
+                TabOrder = 0
+                TitleFont.Charset = DEFAULT_CHARSET
+                TitleFont.Color = clWindowText
+                TitleFont.Height = -11
+                TitleFont.Name = 'MS Sans Serif'
+                TitleFont.Style = []
+                BrDrawColumn.Strings = (
+                  'N'#227'o remova essas duas linhas de formata'#231#227'o:'
+                  'CampoTabela;Operador;ValorComparativo;Cor;')
+                BrGradeZebrada = True
+              end
+            end
+            object Panel45: TPanel
+              Left = 1
+              Top = 185
+              Width = 785
+              Height = 24
+              Align = alTop
+              TabOrder = 1
+              object XDBNavigator4: TXDBNavigator
+                Left = 1
+                Top = 1
+                Width = 783
+                Height = 22
+                DataSource = DSTitula
+                Align = alClient
+                TabOrder = 0
+              end
+            end
+            object DBEdit1: TDBEdit
+              Left = 40
+              Top = 240
+              Width = 134
+              Height = 21
+              DataField = 'CDTITULA'
+              DataSource = DSTitula
+              TabOrder = 2
+            end
+            object DBEdit2: TDBEdit
+              Left = 40
+              Top = 280
+              Width = 17
+              Height = 21
+              DataField = 'TPTITULA'
+              DataSource = DSTitula
+              TabOrder = 3
+            end
+            object DBEdit3: TDBEdit
+              Left = 40
+              Top = 320
+              Width = 2604
+              Height = 21
+              DataField = 'RAZAOSOCIAL'
+              DataSource = DSTitula
+              TabOrder = 4
+            end
+            object DBEdit4: TDBEdit
+              Left = 40
+              Top = 360
+              Width = 212
+              Height = 21
+              DataField = 'CNPJ'
+              DataSource = DSTitula
+              TabOrder = 5
+            end
+            object DBEdit5: TDBEdit
+              Left = 40
+              Top = 400
+              Width = 134
+              Height = 21
+              DataField = 'CODCIDADE'
+              DataSource = DSTitula
+              TabOrder = 6
+            end
+            object DBEdit6: TDBEdit
+              Left = 40
+              Top = 440
+              Width = 264
+              Height = 21
+              DataField = 'IM'
+              DataSource = DSTitula
+              TabOrder = 7
+            end
+            object DBEdit7: TDBEdit
+              Left = 40
+              Top = 480
+              Width = 264
+              Height = 21
+              DataField = 'IE'
+              DataSource = DSTitula
+              TabOrder = 8
+            end
+            object DBEdit8: TDBEdit
+              Left = 40
+              Top = 520
+              Width = 17
+              Height = 21
+              DataField = 'NOMEFANTASIA'
+              DataSource = DSTitula
+              TabOrder = 9
+            end
+            object DBEdit9: TDBEdit
+              Left = 40
+              Top = 560
+              Width = 17
+              Height = 21
+              DataField = 'STATUS'
+              DataSource = DSTitula
+              TabOrder = 10
+            end
+            object DBEdit10: TDBEdit
+              Left = 40
+              Top = 600
+              Width = 17
+              Height = 21
+              DataField = 'CLIENTE'
+              DataSource = DSTitula
+              TabOrder = 11
+            end
+            object DBEdit11: TDBEdit
+              Left = 40
+              Top = 640
+              Width = 17
+              Height = 21
+              DataField = 'FORNECEDOR'
+              DataSource = DSTitula
+              TabOrder = 12
+            end
+            object DBEdit12: TDBEdit
+              Left = 40
+              Top = 680
+              Width = 17
+              Height = 21
+              DataField = 'CONTADOR'
+              DataSource = DSTitula
+              TabOrder = 13
+            end
+            object DBEdit13: TDBEdit
+              Left = 40
+              Top = 720
+              Width = 17
+              Height = 21
+              DataField = 'TRANSPORTADOR'
+              DataSource = DSTitula
+              TabOrder = 14
+            end
+          end
+        end
+        object TabSheet46: TTabSheet
+          Caption = 'TabSheet46'
+          ImageIndex = 1
+          object Panel46: TPanel
+            Left = 0
+            Top = 0
+            Width = 964
+            Height = 41
+            Align = alTop
+            TabOrder = 0
+          end
+          object Panel47: TPanel
+            Left = 0
+            Top = 41
+            Width = 169
+            Height = 583
+            Align = alLeft
+            TabOrder = 1
+          end
+          object Panel48: TPanel
+            Left = 169
+            Top = 41
+            Width = 795
+            Height = 583
+            Align = alClient
+            TabOrder = 2
+            object Panel49: TPanel
+              Left = 1
+              Top = 1
+              Width = 793
+              Height = 184
+              Align = alTop
+              TabOrder = 0
+              object BrvDbGrid9: TBrvDbGrid
+                Left = 1
+                Top = 1
+                Width = 791
+                Height = 182
+                BrShowMemo = True
+                BrReadOnlyStyle = [fsItalic]
+                BrReadOnlyColor = clMaroon
+                Align = alClient
+                DataSource = DataSource1
+                Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs]
+                TabOrder = 0
+                TitleFont.Charset = DEFAULT_CHARSET
+                TitleFont.Color = clWindowText
+                TitleFont.Height = -11
+                TitleFont.Name = 'MS Sans Serif'
+                TitleFont.Style = []
+                BrDrawColumn.Strings = (
+                  'N'#227'o remova essas duas linhas de formata'#231#227'o:'
+                  'CampoTabela;Operador;ValorComparativo;Cor;')
+                BrGradeZebrada = True
+                Columns = <
+                  item
+                    ButtonStyle = cbsNone
+                    Expanded = False
+                    FieldName = 'SnMarcad'
+                    Visible = True
+                    BrConsulta = 0
+                    BrPermissao = []
+                    BrValueChecked = 'S'
+                    BrValueUnchecked = 'N'
+                    BrValueHalfChecked = False
+                    BrSaveOnClick = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'CHNFE'
+                    Visible = True
+                    BrConsulta = 0
+                    BrPermissao = []
+                    BrValueHalfChecked = False
+                    BrSaveOnClick = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'IDE_NNF'
+                    Visible = True
+                    BrConsulta = 0
+                    BrPermissao = []
+                    BrValueHalfChecked = False
+                    BrSaveOnClick = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'IDE_SERIE'
+                    Visible = True
+                    BrConsulta = 0
+                    BrPermissao = []
+                    BrValueHalfChecked = False
+                    BrSaveOnClick = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'IDE_DEMI'
+                    Visible = True
+                    BrConsulta = 0
+                    BrPermissao = []
+                    BrValueHalfChecked = False
+                    BrSaveOnClick = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'IDE_DSAIENT'
+                    Visible = True
+                    BrConsulta = 0
+                    BrPermissao = []
+                    BrValueHalfChecked = False
+                    BrSaveOnClick = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'EMIT_CNPJ'
+                    Visible = True
+                    BrConsulta = 0
+                    BrPermissao = []
+                    BrValueHalfChecked = False
+                    BrSaveOnClick = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'EMIT_XNOME'
+                    Visible = True
+                    BrConsulta = 0
+                    BrPermissao = []
+                    BrValueHalfChecked = False
+                    BrSaveOnClick = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'NPROT'
+                    Visible = True
+                    BrConsulta = 0
+                    BrPermissao = []
+                    BrValueHalfChecked = False
+                    BrSaveOnClick = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'XMOTIVO'
+                    Visible = True
+                    BrConsulta = 0
+                    BrPermissao = []
+                    BrValueHalfChecked = False
+                    BrSaveOnClick = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'XML'
+                    Visible = True
+                    BrConsulta = 0
+                    BrPermissao = []
+                    BrValueHalfChecked = False
+                    BrSaveOnClick = False
+                  end>
+              end
+            end
+            object Panel50: TPanel
+              Left = 1
+              Top = 185
+              Width = 793
+              Height = 24
+              Align = alTop
+              TabOrder = 1
+              object XDBNavigator5: TXDBNavigator
+                Left = 1
+                Top = 1
+                Width = 791
+                Height = 22
+                Align = alClient
+                TabOrder = 0
+              end
+            end
+          end
+        end
+      end
+    end
+    object TabSheet41: TTabSheet
+      Caption = 'Produtos'
+      ImageIndex = 12
+      object PageControl9: TPageControl
+        Left = 0
+        Top = 0
+        Width = 972
+        Height = 652
+        ActivePage = TabSheet42
+        Align = alClient
+        TabOrder = 0
+        object TabSheet42: TTabSheet
+          Caption = 'Cadastro Produto'
+          object Panel26: TPanel
+            Left = 0
+            Top = 41
+            Width = 177
+            Height = 583
+            Align = alLeft
+            TabOrder = 0
+            object GroupBox50: TGroupBox
+              Left = 3
+              Top = 6
+              Width = 171
+              Height = 107
+              Caption = 'Tipo Cliente'
+              TabOrder = 0
+              object CheckBox45: TCheckBox
+                Left = 7
+                Top = 16
+                Width = 146
+                Height = 17
+                Caption = 'Fornecedor'
+                Checked = True
+                State = cbChecked
+                TabOrder = 0
+              end
+              object CheckBox46: TCheckBox
+                Left = 7
+                Top = 39
+                Width = 146
+                Height = 17
+                Caption = 'Cliente'
+                Checked = True
+                State = cbChecked
+                TabOrder = 1
+              end
+              object CheckBox47: TCheckBox
+                Left = 7
+                Top = 62
+                Width = 97
+                Height = 17
+                Caption = 'Transportador'
+                Checked = True
+                State = cbChecked
+                TabOrder = 2
+              end
+              object CheckBox48: TCheckBox
+                Left = 7
+                Top = 85
+                Width = 97
+                Height = 17
+                Caption = 'Contador'
+                Checked = True
+                State = cbChecked
+                TabOrder = 3
+              end
+            end
+            object GroupBox51: TGroupBox
+              Left = 3
+              Top = 114
+              Width = 171
+              Height = 66
+              Caption = 'Status Cliente'
+              TabOrder = 1
+              object CheckBox49: TCheckBox
+                Left = 7
+                Top = 16
+                Width = 146
+                Height = 17
+                Caption = 'Ativo'
+                Checked = True
+                State = cbChecked
+                TabOrder = 0
+              end
+              object CheckBox50: TCheckBox
+                Left = 7
+                Top = 39
+                Width = 146
+                Height = 17
+                Caption = 'Inativo'
+                Checked = True
+                State = cbChecked
+                TabOrder = 1
+              end
+            end
+            object GroupBox52: TGroupBox
+              Left = 3
+              Top = 181
+              Width = 171
+              Height = 66
+              Caption = 'Pessoa'
+              TabOrder = 2
+              object CheckBox51: TCheckBox
+                Left = 7
+                Top = 16
+                Width = 146
+                Height = 17
+                Caption = 'Fisica'
+                Checked = True
+                State = cbChecked
+                TabOrder = 0
+              end
+              object CheckBox52: TCheckBox
+                Left = 7
+                Top = 38
+                Width = 146
+                Height = 17
+                Caption = 'Juridica'
+                Checked = True
+                State = cbChecked
+                TabOrder = 1
+              end
+            end
+            object GroupBox53: TGroupBox
+              Left = 3
+              Top = 253
+              Width = 171
+              Height = 129
+              Caption = 'Dados'
+              TabOrder = 3
+              object Label109: TLabel
+                Left = 3
+                Top = 12
+                Width = 65
+                Height = 13
+                Caption = 'Codigo Titular'
+              end
+              object Label110: TLabel
+                Left = 3
+                Top = 50
+                Width = 42
+                Height = 13
+                Caption = 'Cnpj/Cpf'
+              end
+              object Label112: TLabel
+                Left = 3
+                Top = 86
+                Width = 96
+                Height = 13
+                Caption = 'Raz'#227'o Social/Nome'
+              end
+              object BrvEditNum11: TBrvEditNum
+                Left = 3
+                Top = 29
+                Width = 158
+                Height = 21
+                TabOrder = 0
+                Text = '0'
+                BrvReadOnlyColor = 14541539
+                BrAlignment = taRightJustify
+                BrCasasDecimais = 0
+                BrSepararMilhar = False
+                BrAsInteger = 0
+                BrAsFloatSQL = '0'
+                BrVisibleButton = False
+                BrFunctionButton = TpConsulta
+                BrQueryCode = 0
+                BrRecordar = False
+              end
+              object BrvEditNum12: TBrvEditNum
+                Left = 3
+                Top = 64
+                Width = 158
+                Height = 21
+                TabOrder = 1
+                Text = '0'
+                BrvReadOnlyColor = 14541539
+                BrAlignment = taRightJustify
+                BrCasasDecimais = 0
+                BrSepararMilhar = False
+                BrAsInteger = 0
+                BrAsFloatSQL = '0'
+                BrVisibleButton = False
+                BrFunctionButton = TpConsulta
+                BrQueryCode = 0
+                BrRecordar = False
+              end
+              object BrvEditNum14: TBrvEditNum
+                Left = 3
+                Top = 100
+                Width = 158
+                Height = 21
+                TabOrder = 2
+                Text = '0'
+                BrvReadOnlyColor = 14541539
+                BrAlignment = taRightJustify
+                BrCasasDecimais = 0
+                BrSepararMilhar = False
+                BrAsInteger = 0
+                BrAsFloatSQL = '0'
+                BrVisibleButton = False
+                BrFunctionButton = TpConsulta
+                BrQueryCode = 0
+                BrRecordar = False
+              end
+            end
+          end
+          object Panel27: TPanel
+            Left = 177
+            Top = 41
+            Width = 787
+            Height = 583
+            Align = alClient
+            TabOrder = 1
+            object Panel29: TPanel
+              Left = 1
+              Top = 1
+              Width = 785
+              Height = 184
+              Align = alTop
+              TabOrder = 0
+              object BrvDbGrid3: TBrvDbGrid
+                Left = 1
+                Top = 1
+                Width = 783
+                Height = 182
+                BrShowMemo = True
+                BrReadOnlyStyle = [fsItalic]
+                BrReadOnlyColor = clMaroon
+                Align = alClient
+                DataSource = DSProduto
+                Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs]
+                TabOrder = 0
+                TitleFont.Charset = DEFAULT_CHARSET
+                TitleFont.Color = clWindowText
+                TitleFont.Height = -11
+                TitleFont.Name = 'MS Sans Serif'
+                TitleFont.Style = []
+                BrDrawColumn.Strings = (
+                  'N'#227'o remova essas duas linhas de formata'#231#227'o:'
+                  'CampoTabela;Operador;ValorComparativo;Cor;')
+                BrGradeZebrada = True
+              end
+            end
+            object Panel30: TPanel
+              Left = 1
+              Top = 185
+              Width = 785
+              Height = 24
+              Align = alTop
+              TabOrder = 1
+              object XDBNavigator1: TXDBNavigator
+                Left = 1
+                Top = 1
+                Width = 783
+                Height = 22
+                DataSource = DSProduto
+                Align = alClient
+                TabOrder = 0
+              end
+            end
+          end
+          object Panel28: TPanel
+            Left = 0
+            Top = 0
+            Width = 964
+            Height = 41
+            Align = alTop
+            TabOrder = 2
+          end
+        end
+        object TabSheet44: TTabSheet
+          Caption = 'Cadastro Tributa'#231#227'o'
+          ImageIndex = 1
+          object Panel31: TPanel
+            Left = 0
+            Top = 0
+            Width = 964
+            Height = 41
+            Align = alTop
+            TabOrder = 0
+          end
+          object Panel32: TPanel
+            Left = 0
+            Top = 41
+            Width = 177
+            Height = 583
+            Align = alLeft
+            TabOrder = 1
+            object GroupBox54: TGroupBox
+              Left = 3
+              Top = 6
+              Width = 171
+              Height = 107
+              Caption = 'Tipo Cliente'
+              TabOrder = 0
+              object CheckBox53: TCheckBox
+                Left = 7
+                Top = 16
+                Width = 146
+                Height = 17
+                Caption = 'Fornecedor'
+                Checked = True
+                State = cbChecked
+                TabOrder = 0
+              end
+              object CheckBox54: TCheckBox
+                Left = 7
+                Top = 39
+                Width = 146
+                Height = 17
+                Caption = 'Cliente'
+                Checked = True
+                State = cbChecked
+                TabOrder = 1
+              end
+              object CheckBox55: TCheckBox
+                Left = 7
+                Top = 62
+                Width = 97
+                Height = 17
+                Caption = 'Transportador'
+                Checked = True
+                State = cbChecked
+                TabOrder = 2
+              end
+              object CheckBox56: TCheckBox
+                Left = 7
+                Top = 85
+                Width = 97
+                Height = 17
+                Caption = 'Contador'
+                Checked = True
+                State = cbChecked
+                TabOrder = 3
+              end
+            end
+            object GroupBox55: TGroupBox
+              Left = 3
+              Top = 114
+              Width = 171
+              Height = 66
+              Caption = 'Status Cliente'
+              TabOrder = 1
+              object CheckBox57: TCheckBox
+                Left = 7
+                Top = 16
+                Width = 146
+                Height = 17
+                Caption = 'Ativo'
+                Checked = True
+                State = cbChecked
+                TabOrder = 0
+              end
+              object CheckBox58: TCheckBox
+                Left = 7
+                Top = 39
+                Width = 146
+                Height = 17
+                Caption = 'Inativo'
+                Checked = True
+                State = cbChecked
+                TabOrder = 1
+              end
+            end
+            object GroupBox56: TGroupBox
+              Left = 3
+              Top = 181
+              Width = 171
+              Height = 66
+              Caption = 'Pessoa'
+              TabOrder = 2
+              object CheckBox59: TCheckBox
+                Left = 7
+                Top = 16
+                Width = 146
+                Height = 17
+                Caption = 'Fisica'
+                Checked = True
+                State = cbChecked
+                TabOrder = 0
+              end
+              object CheckBox60: TCheckBox
+                Left = 7
+                Top = 38
+                Width = 146
+                Height = 17
+                Caption = 'Juridica'
+                Checked = True
+                State = cbChecked
+                TabOrder = 1
+              end
+            end
+            object GroupBox57: TGroupBox
+              Left = 3
+              Top = 253
+              Width = 171
+              Height = 129
+              Caption = 'Dados'
+              TabOrder = 3
+              object Label113: TLabel
+                Left = 3
+                Top = 12
+                Width = 65
+                Height = 13
+                Caption = 'Codigo Titular'
+              end
+              object Label114: TLabel
+                Left = 3
+                Top = 50
+                Width = 42
+                Height = 13
+                Caption = 'Cnpj/Cpf'
+              end
+              object Label115: TLabel
+                Left = 3
+                Top = 86
+                Width = 96
+                Height = 13
+                Caption = 'Raz'#227'o Social/Nome'
+              end
+              object BrvEditNum15: TBrvEditNum
+                Left = 3
+                Top = 29
+                Width = 158
+                Height = 21
+                TabOrder = 0
+                Text = '0'
+                BrvReadOnlyColor = 14541539
+                BrAlignment = taRightJustify
+                BrCasasDecimais = 0
+                BrSepararMilhar = False
+                BrAsInteger = 0
+                BrAsFloatSQL = '0'
+                BrVisibleButton = False
+                BrFunctionButton = TpConsulta
+                BrQueryCode = 0
+                BrRecordar = False
+              end
+              object BrvEditNum16: TBrvEditNum
+                Left = 3
+                Top = 64
+                Width = 158
+                Height = 21
+                TabOrder = 1
+                Text = '0'
+                BrvReadOnlyColor = 14541539
+                BrAlignment = taRightJustify
+                BrCasasDecimais = 0
+                BrSepararMilhar = False
+                BrAsInteger = 0
+                BrAsFloatSQL = '0'
+                BrVisibleButton = False
+                BrFunctionButton = TpConsulta
+                BrQueryCode = 0
+                BrRecordar = False
+              end
+              object BrvEditNum17: TBrvEditNum
+                Left = 3
+                Top = 100
+                Width = 158
+                Height = 21
+                TabOrder = 2
+                Text = '0'
+                BrvReadOnlyColor = 14541539
+                BrAlignment = taRightJustify
+                BrCasasDecimais = 0
+                BrSepararMilhar = False
+                BrAsInteger = 0
+                BrAsFloatSQL = '0'
+                BrVisibleButton = False
+                BrFunctionButton = TpConsulta
+                BrQueryCode = 0
+                BrRecordar = False
+              end
+            end
+          end
+          object Panel33: TPanel
+            Left = 177
+            Top = 41
+            Width = 787
+            Height = 583
+            Align = alClient
+            TabOrder = 2
+            object Panel34: TPanel
+              Left = 1
+              Top = 1
+              Width = 785
+              Height = 184
+              Align = alTop
+              TabOrder = 0
+              object BrvDbGrid5: TBrvDbGrid
+                Left = 1
+                Top = 1
+                Width = 783
+                Height = 182
+                BrShowMemo = True
+                BrReadOnlyStyle = [fsItalic]
+                BrReadOnlyColor = clMaroon
+                Align = alClient
+                DataSource = DataSource1
+                Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs]
+                TabOrder = 0
+                TitleFont.Charset = DEFAULT_CHARSET
+                TitleFont.Color = clWindowText
+                TitleFont.Height = -11
+                TitleFont.Name = 'MS Sans Serif'
+                TitleFont.Style = []
+                BrDrawColumn.Strings = (
+                  'N'#227'o remova essas duas linhas de formata'#231#227'o:'
+                  'CampoTabela;Operador;ValorComparativo;Cor;')
+                BrGradeZebrada = True
+                Columns = <
+                  item
+                    ButtonStyle = cbsNone
+                    Expanded = False
+                    FieldName = 'SnMarcad'
+                    Visible = True
+                    BrConsulta = 0
+                    BrPermissao = []
+                    BrValueChecked = 'S'
+                    BrValueUnchecked = 'N'
+                    BrValueHalfChecked = False
+                    BrSaveOnClick = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'CHNFE'
+                    Visible = True
+                    BrConsulta = 0
+                    BrPermissao = []
+                    BrValueHalfChecked = False
+                    BrSaveOnClick = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'IDE_NNF'
+                    Visible = True
+                    BrConsulta = 0
+                    BrPermissao = []
+                    BrValueHalfChecked = False
+                    BrSaveOnClick = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'IDE_SERIE'
+                    Visible = True
+                    BrConsulta = 0
+                    BrPermissao = []
+                    BrValueHalfChecked = False
+                    BrSaveOnClick = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'IDE_DEMI'
+                    Visible = True
+                    BrConsulta = 0
+                    BrPermissao = []
+                    BrValueHalfChecked = False
+                    BrSaveOnClick = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'IDE_DSAIENT'
+                    Visible = True
+                    BrConsulta = 0
+                    BrPermissao = []
+                    BrValueHalfChecked = False
+                    BrSaveOnClick = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'EMIT_CNPJ'
+                    Visible = True
+                    BrConsulta = 0
+                    BrPermissao = []
+                    BrValueHalfChecked = False
+                    BrSaveOnClick = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'EMIT_XNOME'
+                    Visible = True
+                    BrConsulta = 0
+                    BrPermissao = []
+                    BrValueHalfChecked = False
+                    BrSaveOnClick = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'NPROT'
+                    Visible = True
+                    BrConsulta = 0
+                    BrPermissao = []
+                    BrValueHalfChecked = False
+                    BrSaveOnClick = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'XMOTIVO'
+                    Visible = True
+                    BrConsulta = 0
+                    BrPermissao = []
+                    BrValueHalfChecked = False
+                    BrSaveOnClick = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'XML'
+                    Visible = True
+                    BrConsulta = 0
+                    BrPermissao = []
+                    BrValueHalfChecked = False
+                    BrSaveOnClick = False
+                  end>
+              end
+            end
+            object Panel35: TPanel
+              Left = 1
+              Top = 185
+              Width = 785
+              Height = 24
+              Align = alTop
+              TabOrder = 1
+              object XDBNavigator2: TXDBNavigator
+                Left = 1
+                Top = 1
+                Width = 783
+                Height = 22
+                Align = alClient
+                TabOrder = 0
+              end
+            end
+          end
+        end
+        object TabSheet45: TTabSheet
+          Caption = 'Cadastro Unidade de Medida'
+          ImageIndex = 2
+          object Panel36: TPanel
+            Left = 0
+            Top = 0
+            Width = 964
+            Height = 41
+            Align = alTop
+            TabOrder = 0
+          end
+          object Panel37: TPanel
+            Left = 0
+            Top = 41
+            Width = 177
+            Height = 583
+            Align = alLeft
+            TabOrder = 1
+            object GroupBox58: TGroupBox
+              Left = 3
+              Top = 6
+              Width = 171
+              Height = 107
+              Caption = 'Tipo Cliente'
+              TabOrder = 0
+              object CheckBox61: TCheckBox
+                Left = 7
+                Top = 16
+                Width = 146
+                Height = 17
+                Caption = 'Fornecedor'
+                Checked = True
+                State = cbChecked
+                TabOrder = 0
+              end
+              object CheckBox62: TCheckBox
+                Left = 7
+                Top = 39
+                Width = 146
+                Height = 17
+                Caption = 'Cliente'
+                Checked = True
+                State = cbChecked
+                TabOrder = 1
+              end
+              object CheckBox63: TCheckBox
+                Left = 7
+                Top = 62
+                Width = 97
+                Height = 17
+                Caption = 'Transportador'
+                Checked = True
+                State = cbChecked
+                TabOrder = 2
+              end
+              object CheckBox64: TCheckBox
+                Left = 7
+                Top = 85
+                Width = 97
+                Height = 17
+                Caption = 'Contador'
+                Checked = True
+                State = cbChecked
+                TabOrder = 3
+              end
+            end
+            object GroupBox59: TGroupBox
+              Left = 3
+              Top = 114
+              Width = 171
+              Height = 66
+              Caption = 'Status Cliente'
+              TabOrder = 1
+              object CheckBox65: TCheckBox
+                Left = 7
+                Top = 16
+                Width = 146
+                Height = 17
+                Caption = 'Ativo'
+                Checked = True
+                State = cbChecked
+                TabOrder = 0
+              end
+              object CheckBox66: TCheckBox
+                Left = 7
+                Top = 39
+                Width = 146
+                Height = 17
+                Caption = 'Inativo'
+                Checked = True
+                State = cbChecked
+                TabOrder = 1
+              end
+            end
+            object GroupBox60: TGroupBox
+              Left = 3
+              Top = 181
+              Width = 171
+              Height = 66
+              Caption = 'Pessoa'
+              TabOrder = 2
+              object CheckBox67: TCheckBox
+                Left = 7
+                Top = 16
+                Width = 146
+                Height = 17
+                Caption = 'Fisica'
+                Checked = True
+                State = cbChecked
+                TabOrder = 0
+              end
+              object CheckBox68: TCheckBox
+                Left = 7
+                Top = 38
+                Width = 146
+                Height = 17
+                Caption = 'Juridica'
+                Checked = True
+                State = cbChecked
+                TabOrder = 1
+              end
+            end
+            object GroupBox61: TGroupBox
+              Left = 3
+              Top = 253
+              Width = 171
+              Height = 129
+              Caption = 'Dados'
+              TabOrder = 3
+              object Label116: TLabel
+                Left = 3
+                Top = 12
+                Width = 65
+                Height = 13
+                Caption = 'Codigo Titular'
+              end
+              object Label117: TLabel
+                Left = 3
+                Top = 50
+                Width = 42
+                Height = 13
+                Caption = 'Cnpj/Cpf'
+              end
+              object Label118: TLabel
+                Left = 3
+                Top = 86
+                Width = 96
+                Height = 13
+                Caption = 'Raz'#227'o Social/Nome'
+              end
+              object BrvEditNum18: TBrvEditNum
+                Left = 3
+                Top = 29
+                Width = 158
+                Height = 21
+                TabOrder = 0
+                Text = '0'
+                BrvReadOnlyColor = 14541539
+                BrAlignment = taRightJustify
+                BrCasasDecimais = 0
+                BrSepararMilhar = False
+                BrAsInteger = 0
+                BrAsFloatSQL = '0'
+                BrVisibleButton = False
+                BrFunctionButton = TpConsulta
+                BrQueryCode = 0
+                BrRecordar = False
+              end
+              object BrvEditNum19: TBrvEditNum
+                Left = 3
+                Top = 64
+                Width = 158
+                Height = 21
+                TabOrder = 1
+                Text = '0'
+                BrvReadOnlyColor = 14541539
+                BrAlignment = taRightJustify
+                BrCasasDecimais = 0
+                BrSepararMilhar = False
+                BrAsInteger = 0
+                BrAsFloatSQL = '0'
+                BrVisibleButton = False
+                BrFunctionButton = TpConsulta
+                BrQueryCode = 0
+                BrRecordar = False
+              end
+              object BrvEditNum20: TBrvEditNum
+                Left = 3
+                Top = 100
+                Width = 158
+                Height = 21
+                TabOrder = 2
+                Text = '0'
+                BrvReadOnlyColor = 14541539
+                BrAlignment = taRightJustify
+                BrCasasDecimais = 0
+                BrSepararMilhar = False
+                BrAsInteger = 0
+                BrAsFloatSQL = '0'
+                BrVisibleButton = False
+                BrFunctionButton = TpConsulta
+                BrQueryCode = 0
+                BrRecordar = False
+              end
+            end
+          end
+          object Panel38: TPanel
+            Left = 177
+            Top = 41
+            Width = 787
+            Height = 583
+            Align = alClient
+            TabOrder = 2
+            object Panel39: TPanel
+              Left = 1
+              Top = 1
+              Width = 785
+              Height = 184
+              Align = alTop
+              TabOrder = 0
+              object BrvDbGrid6: TBrvDbGrid
+                Left = 1
+                Top = 1
+                Width = 783
+                Height = 182
+                BrShowMemo = True
+                BrReadOnlyStyle = [fsItalic]
+                BrReadOnlyColor = clMaroon
+                Align = alClient
+                DataSource = DSUniMed
+                Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs]
+                TabOrder = 0
+                TitleFont.Charset = DEFAULT_CHARSET
+                TitleFont.Color = clWindowText
+                TitleFont.Height = -11
+                TitleFont.Name = 'MS Sans Serif'
+                TitleFont.Style = []
+                BrDrawColumn.Strings = (
+                  'N'#227'o remova essas duas linhas de formata'#231#227'o:'
+                  'CampoTabela;Operador;ValorComparativo;Cor;')
+                BrGradeZebrada = True
+              end
+            end
+            object Panel40: TPanel
+              Left = 1
+              Top = 185
+              Width = 785
+              Height = 24
+              Align = alTop
+              TabOrder = 1
+              object XDBNavigator3: TXDBNavigator
+                Left = 1
+                Top = 1
+                Width = 783
+                Height = 22
+                DataSource = DSUniMed
+                Align = alClient
+                TabOrder = 0
+              end
+            end
+          end
+        end
+      end
+    end
+    object TabSheet47: TTabSheet
+      Caption = 'Estoque'
+      ImageIndex = 13
+      object Panel51: TPanel
+        Left = 0
+        Top = 0
+        Width = 169
+        Height = 652
+        Align = alLeft
+        TabOrder = 0
+      end
+      object Panel52: TPanel
+        Left = 169
+        Top = 0
+        Width = 803
+        Height = 652
+        Align = alClient
+        TabOrder = 1
+        object Panel53: TPanel
+          Left = 1
+          Top = 1
+          Width = 801
+          Height = 615
+          Align = alClient
           TabOrder = 0
-          OnClick = Button1Click
+          object BrvDbGrid10: TBrvDbGrid
+            Left = 1
+            Top = 1
+            Width = 799
+            Height = 613
+            BrShowMemo = True
+            BrReadOnlyStyle = [fsItalic]
+            BrReadOnlyColor = clMaroon
+            Align = alClient
+            DataSource = DataSource1
+            Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs]
+            TabOrder = 0
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'MS Sans Serif'
+            TitleFont.Style = []
+            BrDrawColumn.Strings = (
+              'N'#227'o remova essas duas linhas de formata'#231#227'o:'
+              'CampoTabela;Operador;ValorComparativo;Cor;')
+            BrGradeZebrada = True
+            Columns = <
+              item
+                ButtonStyle = cbsNone
+                Expanded = False
+                FieldName = 'SnMarcad'
+                Visible = True
+                BrConsulta = 0
+                BrPermissao = []
+                BrValueChecked = 'S'
+                BrValueUnchecked = 'N'
+                BrValueHalfChecked = False
+                BrSaveOnClick = False
+              end
+              item
+                Expanded = False
+                FieldName = 'CHNFE'
+                Visible = True
+                BrConsulta = 0
+                BrPermissao = []
+                BrValueHalfChecked = False
+                BrSaveOnClick = False
+              end
+              item
+                Expanded = False
+                FieldName = 'IDE_NNF'
+                Visible = True
+                BrConsulta = 0
+                BrPermissao = []
+                BrValueHalfChecked = False
+                BrSaveOnClick = False
+              end
+              item
+                Expanded = False
+                FieldName = 'IDE_SERIE'
+                Visible = True
+                BrConsulta = 0
+                BrPermissao = []
+                BrValueHalfChecked = False
+                BrSaveOnClick = False
+              end
+              item
+                Expanded = False
+                FieldName = 'IDE_DEMI'
+                Visible = True
+                BrConsulta = 0
+                BrPermissao = []
+                BrValueHalfChecked = False
+                BrSaveOnClick = False
+              end
+              item
+                Expanded = False
+                FieldName = 'IDE_DSAIENT'
+                Visible = True
+                BrConsulta = 0
+                BrPermissao = []
+                BrValueHalfChecked = False
+                BrSaveOnClick = False
+              end
+              item
+                Expanded = False
+                FieldName = 'EMIT_CNPJ'
+                Visible = True
+                BrConsulta = 0
+                BrPermissao = []
+                BrValueHalfChecked = False
+                BrSaveOnClick = False
+              end
+              item
+                Expanded = False
+                FieldName = 'EMIT_XNOME'
+                Visible = True
+                BrConsulta = 0
+                BrPermissao = []
+                BrValueHalfChecked = False
+                BrSaveOnClick = False
+              end
+              item
+                Expanded = False
+                FieldName = 'NPROT'
+                Visible = True
+                BrConsulta = 0
+                BrPermissao = []
+                BrValueHalfChecked = False
+                BrSaveOnClick = False
+              end
+              item
+                Expanded = False
+                FieldName = 'XMOTIVO'
+                Visible = True
+                BrConsulta = 0
+                BrPermissao = []
+                BrValueHalfChecked = False
+                BrSaveOnClick = False
+              end
+              item
+                Expanded = False
+                FieldName = 'XML'
+                Visible = True
+                BrConsulta = 0
+                BrPermissao = []
+                BrValueHalfChecked = False
+                BrSaveOnClick = False
+              end>
+          end
         end
-        object Button9: TButton
-          Left = 104
-          Top = 16
-          Width = 75
-          Height = 25
-          Caption = 'Gerar PDF'
+        object Panel55: TPanel
+          Left = 1
+          Top = 616
+          Width = 801
+          Height = 35
+          Align = alBottom
           TabOrder = 1
-        end
-        object Button10: TButton
-          Left = 192
-          Top = 16
-          Width = 131
-          Height = 25
-          Caption = 'Zerar Lista de Boletos'
-          TabOrder = 2
-        end
-        object Button11: TButton
-          Left = 336
-          Top = 16
-          Width = 97
-          Height = 25
-          Caption = 'Incluir Boleto'
-          TabOrder = 3
-        end
-        object Button12: TButton
-          Left = 448
-          Top = 16
-          Width = 129
-          Height = 25
-          Caption = 'Incluir V'#225'rios Boletos'
-          TabOrder = 4
-        end
-        object Button13: TButton
-          Left = 592
-          Top = 16
-          Width = 97
-          Height = 25
-          Caption = 'Gerar Remessa'
-          TabOrder = 5
-        end
-        object Button14: TButton
-          Left = 704
-          Top = 16
-          Width = 89
-          Height = 25
-          Caption = 'Imprimir'
-          TabOrder = 6
         end
       end
     end
@@ -7758,8 +8706,8 @@ object Form1: TForm1
     Top = 32
   end
   object DataSource1: TDataSource
-    Left = 840
-    Top = 288
+    Left = 432
+    Top = 344
   end
   object xml: TClientDataSet
     Aggregates = <>
@@ -7956,8 +8904,8 @@ object Form1: TForm1
   end
   object DataSource2: TDataSource
     DataSet = SQLTable1
-    Left = 848
-    Top = 336
+    Left = 496
+    Top = 344
   end
   object SQLConnection1: TSQLConnection
     ConnectionName = 'FBCONNECTION'
@@ -7992,22 +8940,23 @@ object Form1: TForm1
     Left = 840
     Top = 232
   end
-  object DataSetProvider1: TDataSetProvider
-    DataSet = SQLDataSet1
+  object DtTitular: TDataSetProvider
+    DataSet = SqlDSTitula
     Options = [poFetchBlobsOnDemand, poAllowCommandText, poUseQuoteChar]
-    Left = 840
-    Top = 184
+    Left = 296
+    Top = 400
   end
   object SQLDataSet1: TSQLDataSet
     SchemaName = 'sysdba'
+    Active = True
     CommandText = 'select *  from NOTAS'
     DbxCommandType = 'Dbx.SQL'
     DataSource = DataSource2
     MaxBlobSize = -1
     Params = <>
     SQLConnection = SQLConnection1
-    Left = 832
-    Top = 24
+    Left = 376
+    Top = 344
     object SQLDataSet1XMOTIVO: TStringField
       FieldName = 'XMOTIVO'
       Size = 99
@@ -8160,8 +9109,8 @@ object Form1: TForm1
     MaxBlobSize = -1
     SQLConnection = SQLConnection1
     TableName = 'NOTAS'
-    Left = 840
-    Top = 128
+    Left = 568
+    Top = 344
     object SQLTable1XMOTIVO: TStringField
       FieldName = 'XMOTIVO'
       Size = 99
@@ -8315,8 +9264,8 @@ object Form1: TForm1
     Top = 576
   end
   object DataSetProvider2: TDataSetProvider
-    Left = 840
-    Top = 72
+    Left = 320
+    Top = 344
   end
   object PopupMenu1: TPopupMenu
     Left = 552
@@ -8326,6 +9275,172 @@ object Form1: TForm1
     end
     object Imprimir1: TMenuItem
       Caption = 'Imprimir'
+    end
+  end
+  object SqlDSTitula: TSQLDataSet
+    SchemaName = 'sysdba'
+    Active = True
+    CommandText = 'select  *  from titulares'
+    DbxCommandType = 'Dbx.SQL'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = SQLConnection1
+    Left = 368
+    Top = 400
+    object SqlDSTitulaCDTITULA: TIntegerField
+      FieldName = 'CDTITULA'
+      Required = True
+    end
+    object SqlDSTitulaTPTITULA: TStringField
+      FieldName = 'TPTITULA'
+      Size = 1
+    end
+    object SqlDSTitulaRAZAOSOCIAL: TStringField
+      FieldName = 'RAZAOSOCIAL'
+      Size = 200
+    end
+    object SqlDSTitulaCNPJ: TStringField
+      FieldName = 'CNPJ'
+      Size = 16
+    end
+    object SqlDSTitulaCODCIDADE: TIntegerField
+      FieldName = 'CODCIDADE'
+    end
+    object SqlDSTitulaIM: TStringField
+      FieldName = 'IM'
+    end
+    object SqlDSTitulaIE: TStringField
+      FieldName = 'IE'
+    end
+    object SqlDSTitulaNOMEFANTASIA: TStringField
+      FieldName = 'NOMEFANTASIA'
+      Size = 1
+    end
+    object SqlDSTitulaSTATUS: TStringField
+      FieldName = 'STATUS'
+      Size = 1
+    end
+    object SqlDSTitulaCLIENTE: TStringField
+      FieldName = 'CLIENTE'
+      Size = 1
+    end
+    object SqlDSTitulaFORNECEDOR: TStringField
+      FieldName = 'FORNECEDOR'
+      Size = 1
+    end
+    object SqlDSTitulaCONTADOR: TStringField
+      FieldName = 'CONTADOR'
+      Size = 1
+    end
+    object SqlDSTitulaTRANSPORTADOR: TStringField
+      FieldName = 'TRANSPORTADOR'
+      Size = 1
+    end
+  end
+  object DSTitula: TDataSource
+    DataSet = SQLTable2
+    Left = 448
+    Top = 400
+  end
+  object DtProduto: TDataSetProvider
+    DataSet = SqlDSProduto
+    Options = [poFetchBlobsOnDemand, poAllowCommandText, poUseQuoteChar]
+    Left = 288
+    Top = 456
+  end
+  object SqlDSProduto: TSQLDataSet
+    SchemaName = 'sysdba'
+    Active = True
+    CommandText = 'select *  from Produtos'
+    DbxCommandType = 'Dbx.SQL'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = SQLConnection1
+    Left = 360
+    Top = 456
+  end
+  object DSProduto: TDataSource
+    DataSet = SqlDSProduto
+    Left = 432
+    Top = 456
+  end
+  object DSUniMed: TDataSource
+    DataSet = SqlDSUniMed
+    Left = 432
+    Top = 512
+  end
+  object SqlDSUniMed: TSQLDataSet
+    SchemaName = 'sysdba'
+    Active = True
+    CommandText = 'select *  from UNIDADEMEDIDA'
+    DbxCommandType = 'Dbx.SQL'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = SQLConnection1
+    Left = 360
+    Top = 512
+  end
+  object DTUniMed: TDataSetProvider
+    DataSet = SqlDSUniMed
+    Options = [poFetchBlobsOnDemand, poAllowCommandText, poUseQuoteChar]
+    Left = 280
+    Top = 512
+  end
+  object SQLTable2: TSQLTable
+    Active = True
+    MaxBlobSize = -1
+    SQLConnection = SQLConnection1
+    TableName = 'TITULARES'
+    Left = 512
+    Top = 440
+    object SQLTable2CDTITULA: TIntegerField
+      FieldName = 'CDTITULA'
+      Required = True
+    end
+    object SQLTable2TPTITULA: TStringField
+      FieldName = 'TPTITULA'
+      Size = 1
+    end
+    object SQLTable2RAZAOSOCIAL: TStringField
+      FieldName = 'RAZAOSOCIAL'
+      Size = 200
+    end
+    object SQLTable2CNPJ: TStringField
+      FieldName = 'CNPJ'
+      Size = 16
+    end
+    object SQLTable2CODCIDADE: TIntegerField
+      FieldName = 'CODCIDADE'
+    end
+    object SQLTable2IM: TStringField
+      FieldName = 'IM'
+    end
+    object SQLTable2IE: TStringField
+      FieldName = 'IE'
+    end
+    object SQLTable2NOMEFANTASIA: TStringField
+      FieldName = 'NOMEFANTASIA'
+      Size = 1
+    end
+    object SQLTable2STATUS: TStringField
+      FieldName = 'STATUS'
+      Size = 1
+    end
+    object SQLTable2CLIENTE: TStringField
+      FieldName = 'CLIENTE'
+      Size = 1
+    end
+    object SQLTable2FORNECEDOR: TStringField
+      FieldName = 'FORNECEDOR'
+      Size = 1
+    end
+    object SQLTable2CONTADOR: TStringField
+      FieldName = 'CONTADOR'
+      Size = 1
+    end
+    object SQLTable2TRANSPORTADOR: TStringField
+      FieldName = 'TRANSPORTADOR'
+      Size = 1
     end
   end
 end
