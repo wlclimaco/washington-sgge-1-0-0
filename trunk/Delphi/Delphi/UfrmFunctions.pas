@@ -525,7 +525,7 @@ begin
       CcxmlSet.FieldDefs.Add('enderDest_CEP',      ftString,   20 );
       CcxmlSet.FieldDefs.Add('enderDest_fone',     ftString,   30 );
       CcxmlSet.FieldDefs.Add('enderDest_UF',       ftString,   05 );
-      CcxmlSet.FieldDefs.Add('Xml',                ftString, 1000 );
+      CcxmlSet.FieldDefs.Add('Xml',                ftString, 4000 );
       CcxmlSet.CreateDataSet;
 end;
 procedure inicializetion(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean);

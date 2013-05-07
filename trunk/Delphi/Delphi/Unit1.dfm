@@ -468,6 +468,15 @@ object Form1: TForm1
         Height = 41
         Align = alTop
         TabOrder = 2
+        object Memo11: TMemo
+          Left = 319
+          Top = 2
+          Width = 108
+          Height = 33
+          Lines.Strings = (
+            'Memo11')
+          TabOrder = 0
+        end
       end
       object Panel10: TPanel
         Left = 185
@@ -477,9 +486,10 @@ object Form1: TForm1
         Align = alClient
         TabOrder = 3
         object BrvDbGrid2: TBrvDbGrid
-          Left = 1
-          Top = 1
-          Width = 785
+          AlignWithMargins = True
+          Left = 4
+          Top = 4
+          Width = 779
           Height = 411
           BrShowMemo = True
           BrReadOnlyStyle = [fsItalic]
@@ -947,7 +957,7 @@ object Form1: TForm1
             Top = 1
             Width = 799
             Height = 648
-            ActivePage = TabSheet12
+            ActivePage = TabSheet1
             Align = alClient
             TabOrder = 0
             object TabSheet12: TTabSheet
@@ -3657,7 +3667,7 @@ object Form1: TForm1
           Caption = 'LblQtReg'
         end
         object BtnEnviar: TBrvBitBtn
-          Left = 814
+          Left = 802
           Top = 4
           Width = 100
           Height = 25
@@ -4721,7 +4731,7 @@ object Form1: TForm1
             Top = 65
             Width = 795
             Height = 559
-            ActivePage = TabSheet37
+            ActivePage = TabSheet31
             Align = alClient
             TabOrder = 1
             object TabSheet31: TTabSheet
@@ -5173,7 +5183,7 @@ object Form1: TForm1
         Top = 169
         Width = 972
         Height = 449
-        ActivePage = TbsItens
+        ActivePage = TbsImpostos
         Align = alClient
         TabOrder = 1
         object TbsItens: TTabSheet
@@ -8702,7 +8712,7 @@ object Form1: TForm1
   object BrvXMLNFE: TBrvXML
     BrGerarBanco = True
     BrQtdePagDanfe = 0
-    Left = 776
+    Left = 704
     Top = 32
   end
   object DataSource1: TDataSource
@@ -8713,8 +8723,157 @@ object Form1: TForm1
     Aggregates = <>
     Params = <>
     ProviderName = 'DataSetProvider1'
-    Left = 368
-    Top = 584
+    Left = 304
+    Top = 600
+    object xmlXMOTIVO: TStringField
+      FieldName = 'XMOTIVO'
+      Size = 99
+    end
+    object xmlCHNFE: TStringField
+      FieldName = 'CHNFE'
+      Required = True
+      Size = 50
+    end
+    object xmlDHRECBTO: TStringField
+      FieldName = 'DHRECBTO'
+      Size = 50
+    end
+    object xmlNPROT: TStringField
+      FieldName = 'NPROT'
+      Size = 50
+    end
+    object xmlIDE_MOD: TStringField
+      FieldName = 'IDE_MOD'
+      Size = 5
+    end
+    object xmlIDE_NATOP: TStringField
+      FieldName = 'IDE_NATOP'
+      Size = 99
+    end
+    object xmlIDE_NNF: TStringField
+      FieldName = 'IDE_NNF'
+    end
+    object xmlIDE_SERIE: TStringField
+      FieldName = 'IDE_SERIE'
+    end
+    object xmlIDE_TPIMP: TStringField
+      FieldName = 'IDE_TPIMP'
+    end
+    object xmlIDE_TPEMIS: TStringField
+      FieldName = 'IDE_TPEMIS'
+    end
+    object xmlIDE_CDV: TStringField
+      FieldName = 'IDE_CDV'
+    end
+    object xmlIDE_TPAMB: TStringField
+      FieldName = 'IDE_TPAMB'
+    end
+    object xmlIDE_DEMI: TStringField
+      FieldName = 'IDE_DEMI'
+    end
+    object xmlIDE_DSAIENT: TStringField
+      FieldName = 'IDE_DSAIENT'
+    end
+    object xmlIDE_HSAIENT: TStringField
+      FieldName = 'IDE_HSAIENT'
+    end
+    object xmlEMIT_XNOME: TStringField
+      FieldName = 'EMIT_XNOME'
+      Size = 99
+    end
+    object xmlEMIT_CNPJ: TStringField
+      FieldName = 'EMIT_CNPJ'
+      Size = 30
+    end
+    object xmlEMIT_IE: TStringField
+      FieldName = 'EMIT_IE'
+      Size = 30
+    end
+    object xmlEMIT_CRT: TStringField
+      FieldName = 'EMIT_CRT'
+      Size = 5
+    end
+    object xmlENDEREMIT_XLGR: TStringField
+      FieldName = 'ENDEREMIT_XLGR'
+      Size = 99
+    end
+    object xmlENDEREMIT_NRO: TStringField
+      FieldName = 'ENDEREMIT_NRO'
+    end
+    object xmlENDEREMIT_XBAIRRO: TStringField
+      FieldName = 'ENDEREMIT_XBAIRRO'
+      Size = 99
+    end
+    object xmlENDEREMIT_XMUN: TStringField
+      FieldName = 'ENDEREMIT_XMUN'
+      Size = 99
+    end
+    object xmlENDEREMIT_CEP: TStringField
+      FieldName = 'ENDEREMIT_CEP'
+    end
+    object xmlENDEREMIT_FONE: TStringField
+      FieldName = 'ENDEREMIT_FONE'
+    end
+    object xmlENDEREMIT_UF: TStringField
+      FieldName = 'ENDEREMIT_UF'
+      Size = 5
+    end
+    object xmlDEST_XNOME: TStringField
+      FieldName = 'DEST_XNOME'
+      Size = 99
+    end
+    object xmlDEST_CNPJ: TStringField
+      FieldName = 'DEST_CNPJ'
+      Size = 30
+    end
+    object xmlDEST_CPF: TStringField
+      FieldName = 'DEST_CPF'
+      Size = 30
+    end
+    object xmlDEST_IE: TStringField
+      FieldName = 'DEST_IE'
+      Size = 30
+    end
+    object xmlDEST_EMAIL: TStringField
+      FieldName = 'DEST_EMAIL'
+      Size = 99
+    end
+    object xmlENDERDEST_XLGR: TStringField
+      FieldName = 'ENDERDEST_XLGR'
+      Size = 99
+    end
+    object xmlENDERDEST_NRO: TStringField
+      FieldName = 'ENDERDEST_NRO'
+    end
+    object xmlENDERDEST_XBAIRRO: TStringField
+      FieldName = 'ENDERDEST_XBAIRRO'
+      Size = 99
+    end
+    object xmlENDERDEST_XMUN: TStringField
+      FieldName = 'ENDERDEST_XMUN'
+      Size = 99
+    end
+    object xmlENDERDEST_CEP: TStringField
+      FieldName = 'ENDERDEST_CEP'
+    end
+    object xmlENDERDEST_FONE: TStringField
+      FieldName = 'ENDERDEST_FONE'
+      Size = 30
+    end
+    object xmlENDERDEST_UF: TStringField
+      FieldName = 'ENDERDEST_UF'
+      Size = 5
+    end
+    object xmlXML: TStringField
+      FieldName = 'XML'
+      Size = 10000
+    end
+    object xmlSTMANIFESTO: TIntegerField
+      FieldName = 'STMANIFESTO'
+    end
+    object xmlSQLDataSet1: TDataSetField
+      FieldName = 'SQLDataSet1'
+    end
   end
   object mxExcel: TmxDataSetExport
     Captions.Strings = (
@@ -8860,8 +9019,8 @@ object Form1: TForm1
     Top = 128
   end
   object PopupMenu2: TPopupMenu
-    Left = 776
-    Top = 80
+    Left = 768
+    Top = 24
     object MenuItem1: TMenuItem
       Caption = 'Detalhar'
     end
@@ -8903,7 +9062,7 @@ object Form1: TForm1
     end
   end
   object DataSource2: TDataSource
-    DataSet = SQLTable1
+    DataSet = SQLTable3
     Left = 496
     Top = 344
   end
@@ -8941,176 +9100,86 @@ object Form1: TForm1
     Top = 232
   end
   object DtTitular: TDataSetProvider
-    DataSet = SqlDSTitula
-    Options = [poFetchBlobsOnDemand, poAllowCommandText, poUseQuoteChar]
+    DataSet = SQLTable2
+    Options = []
     Left = 296
     Top = 400
   end
   object SQLDataSet1: TSQLDataSet
     SchemaName = 'sysdba'
-    Active = True
-    CommandText = 'select *  from NOTAS'
+    CommandText = 
+      'insert into detalhes (CNPJ_CPF, DATAEMISSAO, NRCHADOC, RAZAO, ST' +
+      'ATUS, TIPO, XML,xMOTIVO,PROTOCOLO,DATAENVIO,NRNOTA)values (:CNPJ' +
+      '_CPF, :DATAEMISSAO,:NRCHADOC,:RAZAO, :STATUS, :TIPO, :XML,:xMOTI' +
+      'VO,:PROTOCOLO,:DATAENVIO,:NRNOTA)'
     DbxCommandType = 'Dbx.SQL'
-    DataSource = DataSource2
     MaxBlobSize = -1
-    Params = <>
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'CNPJ_CPF'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'DATAEMISSAO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'NRCHADOC'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'RAZAO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'STATUS'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'TIPO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'XML'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'xMOTIVO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'PROTOCOLO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'DATAENVIO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'NRNOTA'
+        ParamType = ptInput
+      end>
     SQLConnection = SQLConnection1
-    Left = 376
-    Top = 344
-    object SQLDataSet1XMOTIVO: TStringField
-      FieldName = 'XMOTIVO'
-      Size = 99
-    end
-    object SQLDataSet1CHNFE: TStringField
-      FieldName = 'CHNFE'
-      Required = True
-      Size = 50
-    end
-    object SQLDataSet1DHRECBTO: TStringField
-      FieldName = 'DHRECBTO'
-      Size = 50
-    end
-    object SQLDataSet1NPROT: TStringField
-      FieldName = 'NPROT'
-      Size = 50
-    end
-    object SQLDataSet1IDE_MOD: TStringField
-      FieldName = 'IDE_MOD'
-      Size = 5
-    end
-    object SQLDataSet1IDE_NATOP: TStringField
-      FieldName = 'IDE_NATOP'
-      Size = 99
-    end
-    object SQLDataSet1IDE_NNF: TStringField
-      FieldName = 'IDE_NNF'
-    end
-    object SQLDataSet1IDE_SERIE: TStringField
-      FieldName = 'IDE_SERIE'
-    end
-    object SQLDataSet1IDE_TPIMP: TStringField
-      FieldName = 'IDE_TPIMP'
-    end
-    object SQLDataSet1IDE_TPEMIS: TStringField
-      FieldName = 'IDE_TPEMIS'
-    end
-    object SQLDataSet1IDE_CDV: TStringField
-      FieldName = 'IDE_CDV'
-    end
-    object SQLDataSet1IDE_TPAMB: TStringField
-      FieldName = 'IDE_TPAMB'
-    end
-    object SQLDataSet1IDE_DEMI: TStringField
-      FieldName = 'IDE_DEMI'
-    end
-    object SQLDataSet1IDE_DSAIENT: TStringField
-      FieldName = 'IDE_DSAIENT'
-    end
-    object SQLDataSet1IDE_HSAIENT: TStringField
-      FieldName = 'IDE_HSAIENT'
-    end
-    object SQLDataSet1EMIT_XNOME: TStringField
-      FieldName = 'EMIT_XNOME'
-      Size = 99
-    end
-    object SQLDataSet1EMIT_CNPJ: TStringField
-      FieldName = 'EMIT_CNPJ'
-      Size = 30
-    end
-    object SQLDataSet1EMIT_IE: TStringField
-      FieldName = 'EMIT_IE'
-      Size = 30
-    end
-    object SQLDataSet1EMIT_CRT: TStringField
-      FieldName = 'EMIT_CRT'
-      Size = 5
-    end
-    object SQLDataSet1ENDEREMIT_XLGR: TStringField
-      FieldName = 'ENDEREMIT_XLGR'
-      Size = 99
-    end
-    object SQLDataSet1ENDEREMIT_NRO: TStringField
-      FieldName = 'ENDEREMIT_NRO'
-    end
-    object SQLDataSet1ENDEREMIT_XBAIRRO: TStringField
-      FieldName = 'ENDEREMIT_XBAIRRO'
-      Size = 99
-    end
-    object SQLDataSet1ENDEREMIT_XMUN: TStringField
-      FieldName = 'ENDEREMIT_XMUN'
-      Size = 99
-    end
-    object SQLDataSet1ENDEREMIT_CEP: TStringField
-      FieldName = 'ENDEREMIT_CEP'
-    end
-    object SQLDataSet1ENDEREMIT_FONE: TStringField
-      FieldName = 'ENDEREMIT_FONE'
-    end
-    object SQLDataSet1ENDEREMIT_UF: TStringField
-      FieldName = 'ENDEREMIT_UF'
-      Size = 5
-    end
-    object SQLDataSet1DEST_XNOME: TStringField
-      FieldName = 'DEST_XNOME'
-      Size = 99
-    end
-    object SQLDataSet1DEST_CNPJ: TStringField
-      FieldName = 'DEST_CNPJ'
-      Size = 30
-    end
-    object SQLDataSet1DEST_CPF: TStringField
-      FieldName = 'DEST_CPF'
-      Size = 30
-    end
-    object SQLDataSet1DEST_IE: TStringField
-      FieldName = 'DEST_IE'
-      Size = 30
-    end
-    object SQLDataSet1DEST_EMAIL: TStringField
-      FieldName = 'DEST_EMAIL'
-      Size = 99
-    end
-    object SQLDataSet1ENDERDEST_XLGR: TStringField
-      FieldName = 'ENDERDEST_XLGR'
-      Size = 99
-    end
-    object SQLDataSet1ENDERDEST_NRO: TStringField
-      FieldName = 'ENDERDEST_NRO'
-    end
-    object SQLDataSet1ENDERDEST_XBAIRRO: TStringField
-      FieldName = 'ENDERDEST_XBAIRRO'
-      Size = 99
-    end
-    object SQLDataSet1ENDERDEST_XMUN: TStringField
-      FieldName = 'ENDERDEST_XMUN'
-      Size = 99
-    end
-    object SQLDataSet1ENDERDEST_CEP: TStringField
-      FieldName = 'ENDERDEST_CEP'
-    end
-    object SQLDataSet1ENDERDEST_FONE: TStringField
-      FieldName = 'ENDERDEST_FONE'
-      Size = 30
-    end
-    object SQLDataSet1ENDERDEST_UF: TStringField
-      FieldName = 'ENDERDEST_UF'
-      Size = 5
-    end
-    object SQLDataSet1XML: TStringField
-      FieldName = 'XML'
-      Size = 10000
-    end
-    object SQLDataSet1STMANIFESTO: TIntegerField
-      FieldName = 'STMANIFESTO'
-    end
+    Left = 304
+    Top = 176
   end
   object SQLTable1: TSQLTable
-    Active = True
     MaxBlobSize = -1
     SQLConnection = SQLConnection1
     TableName = 'NOTAS'
-    Left = 568
-    Top = 344
+    Left = 584
+    Top = 280
     object SQLTable1XMOTIVO: TStringField
       FieldName = 'XMOTIVO'
       Size = 99
@@ -9279,7 +9348,6 @@ object Form1: TForm1
   end
   object SqlDSTitula: TSQLDataSet
     SchemaName = 'sysdba'
-    Active = True
     CommandText = 'select  *  from titulares'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
@@ -9338,7 +9406,7 @@ object Form1: TForm1
     end
   end
   object DSTitula: TDataSource
-    DataSet = SQLTable2
+    DataSet = ClientDataSet1
     Left = 448
     Top = 400
   end
@@ -9350,7 +9418,6 @@ object Form1: TForm1
   end
   object SqlDSProduto: TSQLDataSet
     SchemaName = 'sysdba'
-    Active = True
     CommandText = 'select *  from Produtos'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
@@ -9371,7 +9438,6 @@ object Form1: TForm1
   end
   object SqlDSUniMed: TSQLDataSet
     SchemaName = 'sysdba'
-    Active = True
     CommandText = 'select *  from UNIDADEMEDIDA'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
@@ -9387,7 +9453,6 @@ object Form1: TForm1
     Top = 512
   end
   object SQLTable2: TSQLTable
-    Active = True
     MaxBlobSize = -1
     SQLConnection = SQLConnection1
     TableName = 'TITULARES'
@@ -9442,5 +9507,285 @@ object Form1: TForm1
       FieldName = 'TRANSPORTADOR'
       Size = 1
     end
+  end
+  object FBCONNECTION: TSQLConnection
+    ConnectionName = 'FBCONNECTION'
+    DriverName = 'Firebird'
+    GetDriverFunc = 'getSQLDriverINTERBASE'
+    LibraryName = 'dbxfb.dll'
+    LoginPrompt = False
+    Params.Strings = (
+      'drivername=Firebird'
+      
+        'Database=C:\Documents and Settings\Administrador\Desktop\Delphi\' +
+        'MANIFESTO.fdb'
+      'rolename=RoleName'
+      'user_name=sysdba'
+      'Password=masterkey'
+      'sqldialect=3'
+      'localecode=0000'
+      'blobsize=-1'
+      'commitretain=False'
+      'waitonlocks=True'
+      'isolationlevel=ReadCommitted'
+      'trim char=False'
+      
+        'ConnectionString=drivername=Firebird,Database=C:\Documents and S' +
+        'ettings\Administrador\Desktop\Delphi\MANIFESTO.fdb,rolename=Role' +
+        'Name,user_name=sysdba,Password=masterkey,sqldialect=3,localecode' +
+        '=0000,blobsize=-1,commitretain=False,waitonlocks=True,isolationl' +
+        'evel=ReadCommitted,trim char=False')
+    VendorLib = 'fbclient.DLL'
+    Left = 1605
+    Top = 1605
+  end
+  object PRODUTOS: TSQLDataSet
+    CommandText = 'PRODUTOS'
+    CommandType = ctTable
+    DbxCommandType = 'Dbx.Table'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = FBCONNECTION
+    Left = 1616
+    Top = 1616
+  end
+  object ClientDataSet1: TClientDataSet
+    Active = True
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'DtTitular'
+    Left = 584
+    Top = 32
+  end
+  object ClientDataSet2: TClientDataSet
+    Active = True
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'DtTitular'
+    Left = 456
+    Top = 32
+  end
+  object DataSetProvider1: TDataSetProvider
+    DataSet = SQLTable1
+    Left = 224
+    Top = 600
+  end
+  object ClientDataSet3: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'DataSetProvider1'
+    Left = 416
+    Top = 200
+    object StringField1: TStringField
+      FieldName = 'XMOTIVO'
+      Size = 99
+    end
+    object StringField2: TStringField
+      FieldName = 'CHNFE'
+      Required = True
+      Size = 50
+    end
+    object StringField3: TStringField
+      FieldName = 'DHRECBTO'
+      Size = 50
+    end
+    object StringField4: TStringField
+      FieldName = 'NPROT'
+      Size = 50
+    end
+    object StringField5: TStringField
+      FieldName = 'IDE_MOD'
+      Size = 5
+    end
+    object StringField6: TStringField
+      FieldName = 'IDE_NATOP'
+      Size = 99
+    end
+    object StringField7: TStringField
+      FieldName = 'IDE_NNF'
+    end
+    object StringField8: TStringField
+      FieldName = 'IDE_SERIE'
+    end
+    object StringField9: TStringField
+      FieldName = 'IDE_TPIMP'
+    end
+    object StringField10: TStringField
+      FieldName = 'IDE_TPEMIS'
+    end
+    object StringField11: TStringField
+      FieldName = 'IDE_CDV'
+    end
+    object StringField12: TStringField
+      FieldName = 'IDE_TPAMB'
+    end
+    object StringField13: TStringField
+      FieldName = 'IDE_DEMI'
+    end
+    object StringField14: TStringField
+      FieldName = 'IDE_DSAIENT'
+    end
+    object StringField15: TStringField
+      FieldName = 'IDE_HSAIENT'
+    end
+    object StringField16: TStringField
+      FieldName = 'EMIT_XNOME'
+      Size = 99
+    end
+    object StringField17: TStringField
+      FieldName = 'EMIT_CNPJ'
+      Size = 30
+    end
+    object StringField18: TStringField
+      FieldName = 'EMIT_IE'
+      Size = 30
+    end
+    object StringField19: TStringField
+      FieldName = 'EMIT_CRT'
+      Size = 5
+    end
+    object StringField20: TStringField
+      FieldName = 'ENDEREMIT_XLGR'
+      Size = 99
+    end
+    object StringField21: TStringField
+      FieldName = 'ENDEREMIT_NRO'
+    end
+    object StringField22: TStringField
+      FieldName = 'ENDEREMIT_XBAIRRO'
+      Size = 99
+    end
+    object StringField23: TStringField
+      FieldName = 'ENDEREMIT_XMUN'
+      Size = 99
+    end
+    object StringField24: TStringField
+      FieldName = 'ENDEREMIT_CEP'
+    end
+    object StringField25: TStringField
+      FieldName = 'ENDEREMIT_FONE'
+    end
+    object StringField26: TStringField
+      FieldName = 'ENDEREMIT_UF'
+      Size = 5
+    end
+    object StringField27: TStringField
+      FieldName = 'DEST_XNOME'
+      Size = 99
+    end
+    object StringField28: TStringField
+      FieldName = 'DEST_CNPJ'
+      Size = 30
+    end
+    object StringField29: TStringField
+      FieldName = 'DEST_CPF'
+      Size = 30
+    end
+    object StringField30: TStringField
+      FieldName = 'DEST_IE'
+      Size = 30
+    end
+    object StringField31: TStringField
+      FieldName = 'DEST_EMAIL'
+      Size = 99
+    end
+    object StringField32: TStringField
+      FieldName = 'ENDERDEST_XLGR'
+      Size = 99
+    end
+    object StringField33: TStringField
+      FieldName = 'ENDERDEST_NRO'
+    end
+    object StringField34: TStringField
+      FieldName = 'ENDERDEST_XBAIRRO'
+      Size = 99
+    end
+    object StringField35: TStringField
+      FieldName = 'ENDERDEST_XMUN'
+      Size = 99
+    end
+    object StringField36: TStringField
+      FieldName = 'ENDERDEST_CEP'
+    end
+    object StringField37: TStringField
+      FieldName = 'ENDERDEST_FONE'
+      Size = 30
+    end
+    object StringField38: TStringField
+      FieldName = 'ENDERDEST_UF'
+      Size = 5
+    end
+    object StringField39: TStringField
+      FieldName = 'XML'
+      Size = 10000
+    end
+    object IntegerField1: TIntegerField
+      FieldName = 'STMANIFESTO'
+    end
+    object DataSetField1: TDataSetField
+      FieldName = 'SQLDataSet1'
+    end
+  end
+  object SQLTable3: TSQLTable
+    Active = True
+    MaxBlobSize = 1
+    SQLConnection = SQLConnection1
+    TableName = 'DETALHES'
+    Left = 640
+    Top = 360
+    object SQLTable3NRCHADOC: TStringField
+      FieldName = 'NRCHADOC'
+      Required = True
+      Size = 50
+    end
+    object SQLTable3RAZAO: TStringField
+      FieldName = 'RAZAO'
+      Size = 200
+    end
+    object SQLTable3CNPJ_CPF: TStringField
+      FieldName = 'CNPJ_CPF'
+    end
+    object SQLTable3DATAEMISSAO: TDateField
+      FieldName = 'DATAEMISSAO'
+    end
+    object SQLTable3STATUS: TStringField
+      FieldName = 'STATUS'
+      Size = 1
+    end
+    object SQLTable3TIPO: TStringField
+      FieldName = 'TIPO'
+      Size = 1
+    end
+    object SQLTable3XMOTIVO: TStringField
+      FieldName = 'XMOTIVO'
+      Size = 255
+    end
+    object SQLTable3PROTOCOLO: TStringField
+      FieldName = 'PROTOCOLO'
+      Size = 255
+    end
+    object SQLTable3DATAENVIO: TDateField
+      FieldName = 'DATAENVIO'
+    end
+    object SQLTable3NRNOTA: TStringField
+      FieldName = 'NRNOTA'
+      Size = 10
+    end
+    object SQLTable3XML: TStringField
+      FieldName = 'XML'
+      Size = 12000
+    end
+  end
+  object SQLDataSet2: TSQLDataSet
+    SchemaName = 'sysdba'
+    CommandText = 
+      'select CNPJ_CPF, DATAEMISSAO, DATAENVIO, NRCHADOC, NRNOTA, PROTO' +
+      'COLO, RAZAO, STATUS, TIPO, XMOTIVO  from DETALHES'
+    DbxCommandType = 'Dbx.SQL'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = SQLConnection1
+    Left = 240
+    Top = 272
   end
 end
