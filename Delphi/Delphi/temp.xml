@@ -28,4 +28,108 @@
         <xNome>B2W - Companhia Global do Varejo</xNome>
         <enderEmit>
           <xLgr>Rod BR-497</xLgr>
-          <nro>
+          <nro>KM 1+480 A; GALPAO: 01; ARMZ: 11,12,13 e 14;</nro>
+          <xBairro>Jardim Europa</xBairro>
+          <cMun>3170206</cMun>
+          <xMun>UBERLANDIA</xMun>
+          <UF>MG</UF>
+          <CEP>38414583</CEP>
+        </enderEmit>
+        <IE>0019918010010</IE>
+        <CRT>3</CRT>
+      </emit>
+      <dest>
+        <CPF>05790167659</CPF>
+        <xNome>WASHINGTON LUIS CLIMACO</xNome>
+        <enderDest>
+          <xLgr>RUA MARIA CONCEICAO SILVA</xLgr>
+          <nro>686</nro>
+          <xBairro>MANGUEIRAS</xBairro>
+          <cMun>3170107</cMun>
+          <xMun>UBERABA</xMun>
+          <UF>MG</UF>
+          <CEP>38082243</CEP>
+          <fone>3433158065</fone>
+        </enderDest>
+        <IE/>
+      </dest>
+      <det nItem="1">
+        <prod>
+          <cProd>111520877</cProd>
+          <cEAN>0083717202523</cEAN>
+          <xProd>Game ProEvolution Soccer 2013 - PS3</xProd>
+          <NCM>85234990</NCM>
+          <CFOP>5102</CFOP>
+          <uCom>PC</uCom>
+          <qCom>1</qCom>
+          <vUnCom>99.90</vUnCom>
+          <vProd>99.90</vProd>
+          <cEANTrib>0083717202523</cEANTrib>
+          <uTrib>PC</uTrib>
+          <qTrib>1</qTrib>
+          <vUnTrib>99.90</vUnTrib>
+          <indTot>1</indTot>
+        </prod>
+        <imposto>
+          <ICMS>
+            <ICMS00>
+              <orig>0</orig>
+              <CST>00</CST>
+              <modBC>2</modBC>
+              <vBC>99.90</vBC>
+              <pICMS>18.00</pICMS>
+              <vICMS>17.98</vICMS>
+            </ICMS00>
+          </ICMS>
+          <PIS>
+            <PISAliq>
+              <CST>01</CST>
+              <vBC>99.90</vBC>
+              <pPIS>1.65</pPIS>
+              <vPIS>1.65</vPIS>
+            </PISAliq>
+          </PIS>
+          <COFINS>
+            <COFINSAliq>
+              <CST>01</CST>
+              <vBC>99.90</vBC>
+              <pCOFINS>7.60</pCOFINS>
+              <vCOFINS>7.59</vCOFINS>
+            </COFINSAliq>
+          </COFINS>
+        </imposto>
+      </det>
+      <total>
+        <ICMSTot>
+          <vBC>99.90</vBC>
+          <vICMS>17.98</vICMS>
+          <vBCST>0.00</vBCST>
+          <vST>0.00</vST>
+          <vProd>99.90</vProd>
+          <vFrete>0.00</vFrete>
+          <vSeg>0.00</vSeg>
+          <vDesc>0.00</vDesc>
+          <vII>0.00</vII>
+          <vIPI>0.00</vIPI>
+          <vPIS>1.65</vPIS>
+          <vCOFINS>7.59</vCOFINS>
+          <vOutro>0.00</vOutro>
+          <vNF>99.90</vNF>
+        </ICMSTot>
+      </total>
+      <transp>
+        <modFrete>1</modFrete>
+        <vol>
+          <qVol>1</qVol>
+          <pesoL>0.070</pesoL>
+          <pesoB>0.070</pesoB>
+        </vol>
+      </transp>
+      <infAdic>
+        <infCpl>- N. Pedido: 02-537909408 N. Entrega: 314869127. -</infCpl>
+        <obsCont xCampo="SiglaERP">
+          <xTexto>ORACLE</xTexto>
+        </obsCont>
+        <obsCont xCampo="Logo">
+          <xTexto>ACOM</xTexto>
+        </o

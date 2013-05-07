@@ -82,46 +82,6 @@ type
     OperaoNoRealizada1: TMenuItem;
     EnviarEmail1: TMenuItem;
     CartadeCorreo1: TMenuItem;
-    SQLDataSet1XMOTIVO: TStringField;
-    SQLDataSet1CHNFE: TStringField;
-    SQLDataSet1DHRECBTO: TStringField;
-    SQLDataSet1NPROT: TStringField;
-    SQLDataSet1IDE_MOD: TStringField;
-    SQLDataSet1IDE_NATOP: TStringField;
-    SQLDataSet1IDE_NNF: TStringField;
-    SQLDataSet1IDE_SERIE: TStringField;
-    SQLDataSet1IDE_TPIMP: TStringField;
-    SQLDataSet1IDE_TPEMIS: TStringField;
-    SQLDataSet1IDE_CDV: TStringField;
-    SQLDataSet1IDE_TPAMB: TStringField;
-    SQLDataSet1IDE_DEMI: TStringField;
-    SQLDataSet1IDE_DSAIENT: TStringField;
-    SQLDataSet1IDE_HSAIENT: TStringField;
-    SQLDataSet1EMIT_XNOME: TStringField;
-    SQLDataSet1EMIT_CNPJ: TStringField;
-    SQLDataSet1EMIT_IE: TStringField;
-    SQLDataSet1EMIT_CRT: TStringField;
-    SQLDataSet1ENDEREMIT_XLGR: TStringField;
-    SQLDataSet1ENDEREMIT_NRO: TStringField;
-    SQLDataSet1ENDEREMIT_XBAIRRO: TStringField;
-    SQLDataSet1ENDEREMIT_XMUN: TStringField;
-    SQLDataSet1ENDEREMIT_CEP: TStringField;
-    SQLDataSet1ENDEREMIT_FONE: TStringField;
-    SQLDataSet1ENDEREMIT_UF: TStringField;
-    SQLDataSet1DEST_XNOME: TStringField;
-    SQLDataSet1DEST_CNPJ: TStringField;
-    SQLDataSet1DEST_CPF: TStringField;
-    SQLDataSet1DEST_IE: TStringField;
-    SQLDataSet1DEST_EMAIL: TStringField;
-    SQLDataSet1ENDERDEST_XLGR: TStringField;
-    SQLDataSet1ENDERDEST_NRO: TStringField;
-    SQLDataSet1ENDERDEST_XBAIRRO: TStringField;
-    SQLDataSet1ENDERDEST_XMUN: TStringField;
-    SQLDataSet1ENDERDEST_CEP: TStringField;
-    SQLDataSet1ENDERDEST_FONE: TStringField;
-    SQLDataSet1ENDERDEST_UF: TStringField;
-    SQLDataSet1XML: TStringField;
-    SQLDataSet1STMANIFESTO: TIntegerField;
     DataSetProvider2: TDataSetProvider;
     PageControl1: TPageControl;
     TabSheet14: TTabSheet;
@@ -823,6 +783,108 @@ type
     SQLTable2FORNECEDOR: TStringField;
     SQLTable2CONTADOR: TStringField;
     SQLTable2TRANSPORTADOR: TStringField;
+    FBCONNECTION: TSQLConnection;
+    PRODUTOS: TSQLDataSet;
+    ClientDataSet1: TClientDataSet;
+    ClientDataSet2: TClientDataSet;
+    DataSetProvider1: TDataSetProvider;
+    xmlXMOTIVO: TStringField;
+    xmlCHNFE: TStringField;
+    xmlDHRECBTO: TStringField;
+    xmlNPROT: TStringField;
+    xmlIDE_MOD: TStringField;
+    xmlIDE_NATOP: TStringField;
+    xmlIDE_NNF: TStringField;
+    xmlIDE_SERIE: TStringField;
+    xmlIDE_TPIMP: TStringField;
+    xmlIDE_TPEMIS: TStringField;
+    xmlIDE_CDV: TStringField;
+    xmlIDE_TPAMB: TStringField;
+    xmlIDE_DEMI: TStringField;
+    xmlIDE_DSAIENT: TStringField;
+    xmlIDE_HSAIENT: TStringField;
+    xmlEMIT_XNOME: TStringField;
+    xmlEMIT_CNPJ: TStringField;
+    xmlEMIT_IE: TStringField;
+    xmlEMIT_CRT: TStringField;
+    xmlENDEREMIT_XLGR: TStringField;
+    xmlENDEREMIT_NRO: TStringField;
+    xmlENDEREMIT_XBAIRRO: TStringField;
+    xmlENDEREMIT_XMUN: TStringField;
+    xmlENDEREMIT_CEP: TStringField;
+    xmlENDEREMIT_FONE: TStringField;
+    xmlENDEREMIT_UF: TStringField;
+    xmlDEST_XNOME: TStringField;
+    xmlDEST_CNPJ: TStringField;
+    xmlDEST_CPF: TStringField;
+    xmlDEST_IE: TStringField;
+    xmlDEST_EMAIL: TStringField;
+    xmlENDERDEST_XLGR: TStringField;
+    xmlENDERDEST_NRO: TStringField;
+    xmlENDERDEST_XBAIRRO: TStringField;
+    xmlENDERDEST_XMUN: TStringField;
+    xmlENDERDEST_CEP: TStringField;
+    xmlENDERDEST_FONE: TStringField;
+    xmlENDERDEST_UF: TStringField;
+    xmlXML: TStringField;
+    xmlSTMANIFESTO: TIntegerField;
+    xmlSQLDataSet1: TDataSetField;
+    ClientDataSet3: TClientDataSet;
+    StringField1: TStringField;
+    StringField2: TStringField;
+    StringField3: TStringField;
+    StringField4: TStringField;
+    StringField5: TStringField;
+    StringField6: TStringField;
+    StringField7: TStringField;
+    StringField8: TStringField;
+    StringField9: TStringField;
+    StringField10: TStringField;
+    StringField11: TStringField;
+    StringField12: TStringField;
+    StringField13: TStringField;
+    StringField14: TStringField;
+    StringField15: TStringField;
+    StringField16: TStringField;
+    StringField17: TStringField;
+    StringField18: TStringField;
+    StringField19: TStringField;
+    StringField20: TStringField;
+    StringField21: TStringField;
+    StringField22: TStringField;
+    StringField23: TStringField;
+    StringField24: TStringField;
+    StringField25: TStringField;
+    StringField26: TStringField;
+    StringField27: TStringField;
+    StringField28: TStringField;
+    StringField29: TStringField;
+    StringField30: TStringField;
+    StringField31: TStringField;
+    StringField32: TStringField;
+    StringField33: TStringField;
+    StringField34: TStringField;
+    StringField35: TStringField;
+    StringField36: TStringField;
+    StringField37: TStringField;
+    StringField38: TStringField;
+    StringField39: TStringField;
+    IntegerField1: TIntegerField;
+    DataSetField1: TDataSetField;
+    SQLTable3: TSQLTable;
+    SQLTable3NRCHADOC: TStringField;
+    SQLDataSet2: TSQLDataSet;
+    SQLTable3RAZAO: TStringField;
+    SQLTable3CNPJ_CPF: TStringField;
+    SQLTable3DATAEMISSAO: TDateField;
+    SQLTable3STATUS: TStringField;
+    SQLTable3TIPO: TStringField;
+    SQLTable3XMOTIVO: TStringField;
+    SQLTable3PROTOCOLO: TStringField;
+    SQLTable3DATAENVIO: TDateField;
+    SQLTable3NRNOTA: TStringField;
+    Memo11: TMemo;
+    SQLTable3XML: TStringField;
     procedure sbtnCaminhoCertClick(Sender: TObject);
     procedure sbtnLogoMarcaClick(Sender: TObject);
     procedure sbtnPathSalvarClick(Sender: TObject);
@@ -852,6 +914,7 @@ type
     { Public declarations }
    procedure gerarDadosInicial();
    procedure LerConfiguracaoAqui();
+   procedure ApplyUpdateDs(var DataSetA: TClientDataSet; TypeOp: Byte);
 
   end;
 
@@ -1221,15 +1284,55 @@ var
 SR: TSearchRec;
 i: integer;
 destino,origem:String;
+   BlobStream : TStream;
 begin
 
       xml := ListarXmlDiretorio(EdtDsArquiv.Text,EdtDsArquiv.Text+'\teste');
       if xml <> nil then
       begin
-            xml.Insert;
-    //        xml.Open;
+//            xml.Open;
+//            xml.Insert;
+//            xml.post;
+
+            //xml.ApplyUpdates(1);
+ //           SQLConnection1.Commit();
             DataSource1.DataSet   := xml;
-            xml.ApplyUpdates(1);
+            xml.First;
+            while not xml.eof do
+            begin
+                  SQLDataSet1.ParamByName('CNPJ_CPF').AsString := xml.FieldByName('emit_CNPJ').AsString;
+                  SQLDataSet1.ParamByName('DATAEMISSAO').AsDate := xml.FieldByName('ide_dSaiEnt').AsDateTime;
+                  SQLDataSet1.ParamByName('NRCHADOC').AsString :=  xml.FieldByName('chNFe').AsString;
+                  SQLDataSet1.ParamByName('RAZAO').AsString :=    xml.FieldByName('emit_xNome').AsString;
+                  SQLDataSet1.ParamByName('STATUS').AsString :=  '1' ;
+                  SQLDataSet1.ParamByName('TIPO').AsString :=   '1';
+                  SQLDataSet1.ParamByName('XML').AsString :=   xml.FieldByName('xml').AsString;
+                  SQLDataSet1.ParamByName('xMOTIVO').AsString :=  xml.FieldByName('xMotivo').AsString;
+                  SQLDataSet1.ParamByName('PROTOCOLO').AsString :=   xml.FieldByName('nProt').AsString;
+                  SQLDataSet1.ParamByName('DATAENVIO').AsDate :=   xml.FieldByName('dhRecbto').AsDateTime;
+                  SQLDataSet1.ParamByName('NRNOTA').AsString :=   xml.FieldByName('ide_nNF').AsString;
+                  SQLDataSet1.ExecSQL();
+                 xml.next;
+            end;
+
+//
+//            SQLDataSet1.ParamByName('CNPJ_CPF').AsString := 'dd';
+//            SQLDataSet1.ParamByName('DATAEMISSAO').AsDate := now;
+//            SQLDataSet1.ParamByName('NRCHADOC').AsString :=  'dd' ;
+//            SQLDataSet1.ParamByName('RAZAO').AsString :=    'dd';
+//            SQLDataSet1.ParamByName('STATUS').AsString :=  '1' ;
+//            SQLDataSet1.ParamByName('TIPO').AsString :=   '1';
+//            SQLDataSet1.ParamByName('XML').AsString :=   'dd';
+//            SQLDataSet1.ExecSQL();
+//
+//            ClientDataSet3 := xml;
+//            ClientDataSet3.insert;
+//            for i := 1 to ClientDataSet3.FieldCount-1 do
+//            begin
+//                 ClientDataSet3.FieldByName(ClientDataSet3.Fields[i].FieldName).Value := xml.FieldByName(ClientDataSet3.Fields[i].FieldName).Value;
+//            end;
+//            ClientDataSet3.Post;
+//            ApplyUpdateDs(ClientDataSet3,1);
             MemoResp.Lines.Text   :=  UTF8Encode(xml.FieldByName('xml').AsString);
             memoRespWS.Lines.Text :=  UTF8Encode(xml.FieldByName('xml').AsString);
             LoadXML(MemoResp, WBResposta);
@@ -1242,7 +1345,8 @@ begin
        LerConfiguracaoAqui;
 //      tsNFe.PageControl.Visible := true;
       TabSheet1.TabVisible      := false;
-      SQLConnection1.Connected := true;
+ //     SQLConnection1.Connected := true;
+      SQLTable3.Active := true;
       if Edit4.Text <> '' then
       begin
             Timer1.Interval := StrToInt(Edit4.Text);
@@ -1488,6 +1592,41 @@ begin
       Panel3.Height := 100;
       PageControl2.Align := alClient;
       gTipe := 2;
+end;
+
+//Rotina que aplica o cache no BD
+//Padrão para todos os ClientDataSets
+//TypeOp = 1 Inclusão/Alteração
+//TypeOp = 2 Delete
+procedure TForm1.ApplyUpdateDs(var DataSetA: TClientDataSet; TypeOp: Byte);
+var
+TransDesc : TTransactionDesc;
+begin
+//ID único para cada transaction
+TransDesc.TransactionID := DataSetA.Tag;
+//Nível de isolamento
+//xilREADCOMMITTED
+//xilDIRTYREAD
+//xilREPEATABLEREAD
+//xilCUSTOM
+TransDesc.IsolationLevel := xilREADCOMMITTED;
+//Inicia a transação
+SQLConnection1.StartTransaction(TransDesc);
+try
+//Applica o Cache do ClientDataSet
+DataSetA.ApplyUpdates(0);
+//Conclui a transação
+SQLConnection1.Commit(TransDesc);
+except
+//se ocorreram erros desfaz as alterações
+SQLConnection1.Rollback(TransDesc);
+//e mostra uma msg ao usuário
+if TypeOp = 1 then
+ShowMessage('Problemas na gravação dos dados!')
+else
+if TypeOp = 2 then
+ShowMessage('Problemas ao apagar o Registro!');
+end;
 end;
 
 end.
