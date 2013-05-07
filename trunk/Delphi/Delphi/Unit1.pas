@@ -12,7 +12,7 @@ uses IniFiles, ShellAPI, pcnRetConsReciNFe,
   XMLIntf, XMLDoc, ACBrNFeDANFERaveCB, BrvXml, Grids, BrvDbGrids, BrvDbGrid, BrvBitBtn, DBXFirebird,
   FMTBcd, DB, SqlExpr, DBClient, Menus, XDBGrids, mxExport, BrvRetCon, BrvCustomEdit, BrvEditNum,
   Mask, BrvCustomMaskEdit, BrvEditDate, IBCustomDataSet, IBTable, IBDatabase, Provider, BrvEdit,
-  DBCtrls, BrvDBComboListBox, BrvComboBox, BrvDbEdit, BrvLabel;
+  DBCtrls, BrvDBComboListBox, BrvComboBox, BrvDbEdit, BrvLabel, XDBCtrls;
 
 type
   TForm1 = class(TForm)
@@ -31,7 +31,7 @@ type
     Deletar1: TMenuItem;
     DataSource2: TDataSource;
     SQLConnection1: TSQLConnection;
-    DataSetProvider1: TDataSetProvider;
+    DtTitular: TDataSetProvider;
     SQLDataSet1: TSQLDataSet;
     SQLTable1: TSQLTable;
     SQLTable1XMOTIVO: TStringField;
@@ -456,7 +456,6 @@ type
     TabSheet18: TTabSheet;
     TabSheet25: TTabSheet;
     TabSheet28: TTabSheet;
-    TabSheet30: TTabSheet;
     Panel21: TPanel;
     BrvLabel1: TBrvLabel;
     BrvLabel3: TBrvLabel;
@@ -591,83 +590,6 @@ type
     EdtTtProdut: TBrvEditNum;
     BtnSalvar: TBrvBitBtn;
     BtnCancelar: TBrvBitBtn;
-    GroupBox40: TGroupBox;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
-    Label4: TLabel;
-    Label5: TLabel;
-    Label6: TLabel;
-    edtLocalPag: TEdit;
-    edtEspecieDoc: TEdit;
-    edtEspecieMod: TEdit;
-    cbxAceite: TComboBox;
-    edtCarteira: TEdit;
-    edtNossoNro: TEdit;
-    GroupBox41: TGroupBox;
-    Label7: TLabel;
-    Label8: TLabel;
-    Label9: TLabel;
-    Label10: TLabel;
-    Label11: TLabel;
-    Label12: TLabel;
-    Label13: TLabel;
-    Label14: TLabel;
-    edtMoraJuros: TEdit;
-    edtValorDesconto: TEdit;
-    edtValorAbatimento: TEdit;
-    edtMulta: TEdit;
-    edtDataMora: TMaskEdit;
-    edtDataDesconto: TMaskEdit;
-    edtDataAbatimento: TMaskEdit;
-    edtDataProtesto: TMaskEdit;
-    GroupBox42: TGroupBox;
-    Label17: TLabel;
-    Label18: TLabel;
-    Label19: TLabel;
-    Label20: TLabel;
-    edtNumeroDoc: TEdit;
-    edtValorDoc: TEdit;
-    edtDataDoc: TMaskEdit;
-    edtVencimento: TMaskEdit;
-    GroupBox43: TGroupBox;
-    Label15: TLabel;
-    Label16: TLabel;
-    memMensagem: TMemo;
-    edtInstrucoes1: TEdit;
-    edtInstrucoes2: TEdit;
-    Panel24: TPanel;
-    GroupBox44: TGroupBox;
-    Label21: TLabel;
-    Label22: TLabel;
-    Label23: TLabel;
-    Label24: TLabel;
-    Label25: TLabel;
-    Label26: TLabel;
-    Label27: TLabel;
-    Label28: TLabel;
-    Label37: TLabel;
-    Label38: TLabel;
-    Label39: TLabel;
-    edtNome: TEdit;
-    edtCPFCNPJ: TEdit;
-    edtEmail: TEdit;
-    edtEndereco: TEdit;
-    edtNumero: TEdit;
-    edtComplemento: TEdit;
-    edtBairro: TEdit;
-    edtCidade: TEdit;
-    edtCEP: TEdit;
-    edtUF: TEdit;
-    cbxLayOut: TComboBox;
-    Panel25: TPanel;
-    Button8: TButton;
-    Button9: TButton;
-    Button10: TButton;
-    Button11: TButton;
-    Button12: TButton;
-    Button13: TButton;
-    Button14: TButton;
     gbGeral: TGroupBox;
     Label59: TLabel;
     sbtnLogoMarca: TSpeedButton;
@@ -718,6 +640,189 @@ type
     Label75: TLabel;
     Memo10: TMemo;
     CheckBox36: TCheckBox;
+    TabSheet38: TTabSheet;
+    TabSheet41: TTabSheet;
+    PageControl9: TPageControl;
+    TabSheet42: TTabSheet;
+    PageControl10: TPageControl;
+    TabSheet43: TTabSheet;
+    TabSheet44: TTabSheet;
+    Panel26: TPanel;
+    Panel27: TPanel;
+    Panel28: TPanel;
+    Panel29: TPanel;
+    BrvDbGrid3: TBrvDbGrid;
+    Panel30: TPanel;
+    XDBNavigator1: TXDBNavigator;
+    Panel31: TPanel;
+    Panel32: TPanel;
+    Panel33: TPanel;
+    Panel34: TPanel;
+    BrvDbGrid5: TBrvDbGrid;
+    Panel35: TPanel;
+    XDBNavigator2: TXDBNavigator;
+    TabSheet45: TTabSheet;
+    Panel36: TPanel;
+    Panel37: TPanel;
+    Panel38: TPanel;
+    Panel39: TPanel;
+    BrvDbGrid6: TBrvDbGrid;
+    Panel40: TPanel;
+    XDBNavigator3: TXDBNavigator;
+    TabSheet46: TTabSheet;
+    Panel41: TPanel;
+    Panel42: TPanel;
+    Panel43: TPanel;
+    Panel44: TPanel;
+    BrvDbGrid7: TBrvDbGrid;
+    Panel45: TPanel;
+    XDBNavigator4: TXDBNavigator;
+    Panel46: TPanel;
+    Panel47: TPanel;
+    Panel48: TPanel;
+    Panel49: TPanel;
+    BrvDbGrid9: TBrvDbGrid;
+    Panel50: TPanel;
+    XDBNavigator5: TXDBNavigator;
+    TabSheet47: TTabSheet;
+    Panel51: TPanel;
+    Panel52: TPanel;
+    Panel53: TPanel;
+    BrvDbGrid10: TBrvDbGrid;
+    Panel55: TPanel;
+    GroupBox46: TGroupBox;
+    CheckBox37: TCheckBox;
+    CheckBox38: TCheckBox;
+    CheckBox39: TCheckBox;
+    CheckBox40: TCheckBox;
+    GroupBox47: TGroupBox;
+    CheckBox41: TCheckBox;
+    CheckBox42: TCheckBox;
+    GroupBox48: TGroupBox;
+    Label70: TLabel;
+    Label74: TLabel;
+    BrvEditNum9: TBrvEditNum;
+    BrvEditNum10: TBrvEditNum;
+    BrvEditNum13: TBrvEditNum;
+    Label111: TLabel;
+    GroupBox49: TGroupBox;
+    CheckBox43: TCheckBox;
+    CheckBox44: TCheckBox;
+    GroupBox50: TGroupBox;
+    CheckBox45: TCheckBox;
+    CheckBox46: TCheckBox;
+    CheckBox47: TCheckBox;
+    CheckBox48: TCheckBox;
+    GroupBox51: TGroupBox;
+    CheckBox49: TCheckBox;
+    CheckBox50: TCheckBox;
+    GroupBox52: TGroupBox;
+    CheckBox51: TCheckBox;
+    CheckBox52: TCheckBox;
+    GroupBox53: TGroupBox;
+    Label109: TLabel;
+    Label110: TLabel;
+    Label112: TLabel;
+    BrvEditNum11: TBrvEditNum;
+    BrvEditNum12: TBrvEditNum;
+    BrvEditNum14: TBrvEditNum;
+    GroupBox54: TGroupBox;
+    CheckBox53: TCheckBox;
+    CheckBox54: TCheckBox;
+    CheckBox55: TCheckBox;
+    CheckBox56: TCheckBox;
+    GroupBox55: TGroupBox;
+    CheckBox57: TCheckBox;
+    CheckBox58: TCheckBox;
+    GroupBox56: TGroupBox;
+    CheckBox59: TCheckBox;
+    CheckBox60: TCheckBox;
+    GroupBox57: TGroupBox;
+    Label113: TLabel;
+    Label114: TLabel;
+    Label115: TLabel;
+    BrvEditNum15: TBrvEditNum;
+    BrvEditNum16: TBrvEditNum;
+    BrvEditNum17: TBrvEditNum;
+    GroupBox58: TGroupBox;
+    CheckBox61: TCheckBox;
+    CheckBox62: TCheckBox;
+    CheckBox63: TCheckBox;
+    CheckBox64: TCheckBox;
+    GroupBox59: TGroupBox;
+    CheckBox65: TCheckBox;
+    CheckBox66: TCheckBox;
+    GroupBox60: TGroupBox;
+    CheckBox67: TCheckBox;
+    CheckBox68: TCheckBox;
+    GroupBox61: TGroupBox;
+    Label116: TLabel;
+    Label117: TLabel;
+    Label118: TLabel;
+    BrvEditNum18: TBrvEditNum;
+    BrvEditNum19: TBrvEditNum;
+    BrvEditNum20: TBrvEditNum;
+    SqlDSTitula: TSQLDataSet;
+    DSTitula: TDataSource;
+    DtProduto: TDataSetProvider;
+    SqlDSProduto: TSQLDataSet;
+    DSProduto: TDataSource;
+    SqlDSTitulaCDTITULA: TIntegerField;
+    SqlDSTitulaTPTITULA: TStringField;
+    SqlDSTitulaRAZAOSOCIAL: TStringField;
+    SqlDSTitulaCNPJ: TStringField;
+    SqlDSTitulaCODCIDADE: TIntegerField;
+    SqlDSTitulaIM: TStringField;
+    SqlDSTitulaIE: TStringField;
+    SqlDSTitulaNOMEFANTASIA: TStringField;
+    SqlDSTitulaSTATUS: TStringField;
+    SqlDSTitulaCLIENTE: TStringField;
+    SqlDSTitulaFORNECEDOR: TStringField;
+    SqlDSTitulaCONTADOR: TStringField;
+    SqlDSTitulaTRANSPORTADOR: TStringField;
+    Label1: TLabel;
+    DBEdit1: TDBEdit;
+    Label2: TLabel;
+    DBEdit2: TDBEdit;
+    Label3: TLabel;
+    DBEdit3: TDBEdit;
+    Label4: TLabel;
+    DBEdit4: TDBEdit;
+    Label5: TLabel;
+    DBEdit5: TDBEdit;
+    Label6: TLabel;
+    DBEdit6: TDBEdit;
+    Label7: TLabel;
+    DBEdit7: TDBEdit;
+    Label8: TLabel;
+    DBEdit8: TDBEdit;
+    Label9: TLabel;
+    DBEdit9: TDBEdit;
+    Label10: TLabel;
+    DBEdit10: TDBEdit;
+    Label11: TLabel;
+    DBEdit11: TDBEdit;
+    Label12: TLabel;
+    DBEdit12: TDBEdit;
+    Label13: TLabel;
+    DBEdit13: TDBEdit;
+    DSUniMed: TDataSource;
+    SqlDSUniMed: TSQLDataSet;
+    DTUniMed: TDataSetProvider;
+    SQLTable2: TSQLTable;
+    SQLTable2CDTITULA: TIntegerField;
+    SQLTable2TPTITULA: TStringField;
+    SQLTable2RAZAOSOCIAL: TStringField;
+    SQLTable2CNPJ: TStringField;
+    SQLTable2CODCIDADE: TIntegerField;
+    SQLTable2IM: TStringField;
+    SQLTable2IE: TStringField;
+    SQLTable2NOMEFANTASIA: TStringField;
+    SQLTable2STATUS: TStringField;
+    SQLTable2CLIENTE: TStringField;
+    SQLTable2FORNECEDOR: TStringField;
+    SQLTable2CONTADOR: TStringField;
+    SQLTable2TRANSPORTADOR: TStringField;
     procedure sbtnCaminhoCertClick(Sender: TObject);
     procedure sbtnLogoMarcaClick(Sender: TObject);
     procedure sbtnPathSalvarClick(Sender: TObject);
@@ -747,6 +852,7 @@ type
     { Public declarations }
    procedure gerarDadosInicial();
    procedure LerConfiguracaoAqui();
+
   end;
 
 var
@@ -769,66 +875,66 @@ const
 
 {$R *.dfm}
 
-procedure TForm1.LerConfiguracaoAqui();
-Var IniFile  : String ;
-    Ini     : TIniFile ;
-    Ok : Boolean;
-    StreamMemo : TMemoryStream;
-begin
-  IniFile := ChangeFileExt( Application.ExeName, '.ini') ;
-
-  Ini := TIniFile.Create( IniFile );
-  try
-      edtCaminho.Text  := Ini.ReadString( 'Certificado','Caminho' ,'') ;
-      edtSenha.Text    := Ini.ReadString( 'Certificado','Senha'   ,'') ;
-
-      rgFormaEmissao.ItemIndex := Ini.ReadInteger( 'Geral','FormaEmissao',0) ;
-      ckSalvar.Checked    := Ini.ReadBool(   'Geral','Salvar'      ,True) ;
-      edtPathLogs.Text    := Ini.ReadString( 'Geral','PathSalvar'  ,'') ;
-
-      cbUF.ItemIndex       := cbUF.Items.IndexOf(Ini.ReadString( 'WebService','UF','SP')) ;
-      rgTipoAmb.ItemIndex  := Ini.ReadInteger( 'WebService','Ambiente'  ,0) ;
-      ckVisualizar.Checked :=Ini.ReadBool(    'WebService','Visualizar',False) ;
-
-      edtProxyHost.Text  := Ini.ReadString( 'Proxy','Host'   ,'') ;
-      edtProxyPorta.Text := Ini.ReadString( 'Proxy','Porta'  ,'') ;
-      edtProxyUser.Text  := Ini.ReadString( 'Proxy','User'   ,'') ;
-      edtProxySenha.Text := Ini.ReadString( 'Proxy','Pass'   ,'') ;
-
-
-      rgTipoDanfe.ItemIndex     := Ini.ReadInteger( 'Geral','DANFE'       ,0) ;
-      edtLogoMarca.Text         := Ini.ReadString( 'Geral','LogoMarca'   ,'') ;
-
-
-      edtEmitCNPJ.Text       := Ini.ReadString( 'Emitente','CNPJ'       ,'') ;
-      edtEmitIE.Text         := Ini.ReadString( 'Emitente','IE'         ,'') ;
-      edtEmitRazao.Text      := Ini.ReadString( 'Emitente','RazaoSocial','') ;
-      edtEmitFantasia.Text   := Ini.ReadString( 'Emitente','Fantasia'   ,'') ;
-      edtEmitFone.Text       := Ini.ReadString( 'Emitente','Fone'       ,'') ;
-      edtEmitCEP.Text        := Ini.ReadString( 'Emitente','CEP'        ,'') ;
-      edtEmitLogradouro.Text := Ini.ReadString( 'Emitente','Logradouro' ,'') ;
-      edtEmitNumero.Text     := Ini.ReadString( 'Emitente','Numero'     ,'') ;
-      edtEmitComp.Text       := Ini.ReadString( 'Emitente','Complemento','') ;
-      edtEmitBairro.Text     := Ini.ReadString( 'Emitente','Bairro'     ,'') ;
-      edtEmitCodCidade.Text  := Ini.ReadString( 'Emitente','CodCidade'  ,'') ;
-      edtEmitCidade.Text     :=Ini.ReadString( 'Emitente','Cidade'     ,'') ;
-      edtEmitUF.Text         := Ini.ReadString( 'Emitente','UF'         ,'') ;
-
-      edtSmtpHost.Text      := Ini.ReadString( 'Email','Host'   ,'') ;
-      edtSmtpPort.Text      := Ini.ReadString( 'Email','Port'   ,'') ;
-      edtSmtpUser.Text      := Ini.ReadString( 'Email','User'   ,'') ;
-      edtSmtpPass.Text      := Ini.ReadString( 'Email','Pass'   ,'') ;
-      edtEmailAssunto.Text  := Ini.ReadString( 'Email','Assunto','') ;
-      cbEmailSSL.Checked    := Ini.ReadBool(   'Email','SSL'    ,False) ;
-      StreamMemo := TMemoryStream.Create;
-      Ini.ReadBinaryStream( 'Email','Mensagem',StreamMemo) ;
-      mmEmailMsg.Lines.LoadFromStream(StreamMemo);
-      StreamMemo.Free;
-  finally
-     Ini.Free ;
-  end;
-
-end;
+//procedure TForm1.LerConfiguracaoAqui();
+//Var IniFile  : String ;
+//    Ini     : TIniFile ;
+//    Ok : Boolean;
+//    StreamMemo : TMemoryStream;
+//begin
+//  IniFile := ChangeFileExt( Application.ExeName, '.ini') ;
+//
+//  Ini := TIniFile.Create( IniFile );
+//  try
+//      edtCaminho.Text  := Ini.ReadString( 'Certificado','Caminho' ,'') ;
+//      edtSenha.Text    := Ini.ReadString( 'Certificado','Senha'   ,'') ;
+//
+//      rgFormaEmissao.ItemIndex := Ini.ReadInteger( 'Geral','FormaEmissao',0) ;
+//      ckSalvar.Checked    := Ini.ReadBool(   'Geral','Salvar'      ,True) ;
+//      edtPathLogs.Text    := Ini.ReadString( 'Geral','PathSalvar'  ,'') ;
+//
+//      cbUF.ItemIndex       := cbUF.Items.IndexOf(Ini.ReadString( 'WebService','UF','SP')) ;
+//      rgTipoAmb.ItemIndex  := Ini.ReadInteger( 'WebService','Ambiente'  ,0) ;
+//      ckVisualizar.Checked :=Ini.ReadBool(    'WebService','Visualizar',False) ;
+//
+//      edtProxyHost.Text  := Ini.ReadString( 'Proxy','Host'   ,'') ;
+//      edtProxyPorta.Text := Ini.ReadString( 'Proxy','Porta'  ,'') ;
+//      edtProxyUser.Text  := Ini.ReadString( 'Proxy','User'   ,'') ;
+//      edtProxySenha.Text := Ini.ReadString( 'Proxy','Pass'   ,'') ;
+//
+//
+//      rgTipoDanfe.ItemIndex     := Ini.ReadInteger( 'Geral','DANFE'       ,0) ;
+//      edtLogoMarca.Text         := Ini.ReadString( 'Geral','LogoMarca'   ,'') ;
+//
+//
+//      edtEmitCNPJ.Text       := Ini.ReadString( 'Emitente','CNPJ'       ,'') ;
+//      edtEmitIE.Text         := Ini.ReadString( 'Emitente','IE'         ,'') ;
+//      edtEmitRazao.Text      := Ini.ReadString( 'Emitente','RazaoSocial','') ;
+//      edtEmitFantasia.Text   := Ini.ReadString( 'Emitente','Fantasia'   ,'') ;
+//      edtEmitFone.Text       := Ini.ReadString( 'Emitente','Fone'       ,'') ;
+//      edtEmitCEP.Text        := Ini.ReadString( 'Emitente','CEP'        ,'') ;
+//      edtEmitLogradouro.Text := Ini.ReadString( 'Emitente','Logradouro' ,'') ;
+//      edtEmitNumero.Text     := Ini.ReadString( 'Emitente','Numero'     ,'') ;
+//      edtEmitComp.Text       := Ini.ReadString( 'Emitente','Complemento','') ;
+//      edtEmitBairro.Text     := Ini.ReadString( 'Emitente','Bairro'     ,'') ;
+//      edtEmitCodCidade.Text  := Ini.ReadString( 'Emitente','CodCidade'  ,'') ;
+//      edtEmitCidade.Text     :=Ini.ReadString( 'Emitente','Cidade'     ,'') ;
+//      edtEmitUF.Text         := Ini.ReadString( 'Emitente','UF'         ,'') ;
+//
+//      edtSmtpHost.Text      := Ini.ReadString( 'Email','Host'   ,'') ;
+//      edtSmtpPort.Text      := Ini.ReadString( 'Email','Port'   ,'') ;
+//      edtSmtpUser.Text      := Ini.ReadString( 'Email','User'   ,'') ;
+//      edtSmtpPass.Text      := Ini.ReadString( 'Email','Pass'   ,'') ;
+//      edtEmailAssunto.Text  := Ini.ReadString( 'Email','Assunto','') ;
+//      cbEmailSSL.Checked    := Ini.ReadBool(   'Email','SSL'    ,False) ;
+//      StreamMemo := TMemoryStream.Create;
+//      Ini.ReadBinaryStream( 'Email','Mensagem',StreamMemo) ;
+//      mmEmailMsg.Lines.LoadFromStream(StreamMemo);
+//      StreamMemo.Free;
+//  finally
+//     Ini.Free ;
+//  end;
+//
+//end;
 procedure TForm1.gerarDadosInicial();
 var
    OK : boolean;
@@ -931,7 +1037,7 @@ begin
 
 end;
 
-procedure TForm1.LerConfiguracao;
+procedure TForm1.LerConfiguracaoAqui();
 Var IniFile  : String ;
     Ini     : TIniFile ;
     Ok : Boolean;
@@ -987,13 +1093,13 @@ begin
       EdtDsArquiv.Text := Ini.ReadString( 'Import','DiretorioImportacao' ,'') ;
       Edit3.Text       := Ini.ReadString( 'Import','DiretorioExportacao' ,'') ;
       Edit4.Text       := Ini.ReadString( 'Import','TempoImpotacao'      ,'') ;
-      RadioGroup2.ItemIndex := StrToInt(Ini.ReadInteger( 'Import','Importacao',''));
+      RadioGroup2.ItemIndex := StrToInt(Ini.ReadString( 'Import','Importacao',''));
 
-      CheckBox14.Checked := Ini.ReadBool( 'Boleto','tela' ,CheckBox14.Checked) ;
-      CheckBox36.Checked := Ini.ReadBool( 'Boleto','remessa' ,'') ;
+      CheckBox14.Checked := Ini.ReadBool( 'Boleto','tela' ,false) ;
+      CheckBox36.Checked := Ini.ReadBool( 'Boleto','remessa' ,false) ;
       ComboBox2.Text     := Ini.ReadString( 'Boleto','banco' ,'') ;
       MaskEdit2.Text := Ini.ReadString( 'Boleto','NrBoletos' ,'') ;
-      ComboBox2.ItemIndex := Ini.ReadInteger( 'Boleto','Layout' ,'') ;
+      ComboBox2.ItemIndex := Ini.ReadInteger( 'Boleto','Layout' ,0) ;
       Edit8.Text  :=  Ini.ReadString( 'Boleto','CodAgencia' ,'') ;
       Edit9.Text  :=  Ini.ReadString( 'Boleto','DigAgencia' ,'') ;
       Edit10.Text := Ini.ReadString( 'Boleto','CodCedente' ,'') ;
