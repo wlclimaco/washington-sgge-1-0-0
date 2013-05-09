@@ -5,7 +5,7 @@ uses  SysUtils, Forms, Classes, Dialogs, Windows, ComCtrls, DBClient, DB,
       Variants, BrvExcel, BrvClientDataSet, Graphics, CheckLst,ACBrNFe, pcnConversao,
       ACBrNFeDANFEClass, ACBrNFeDANFERave, ACBrUtil,pcnNFeW, pcnNFeRTXT, pcnAuxiliar, ACBrDFeUtil,
       XMLIntf, XMLDoc, BrvXml, pnfsConversao,ACBrNFSe, ACBrNFSeDANFSeClass, ACBrNFSeDANFSeQRClass, pnfsNFSe,
-      ACBrCTeDACTEClass,ACBrCTe,Controls,SHDocVw,IniFiles, ShellAPI;
+      ACBrCTeDACTEClass,ACBrCTe,Controls,SHDocVw,IniFiles, ShellAPI,ACBrNFeDANFERaveCB;
 
 //================================= Util======================================================
 
@@ -42,9 +42,9 @@ function ACBrNFe_ListarNotasManifesto(NrSenha,NrCertificado,uf:String;TpAmbiente
 
 procedure ACBrNFe_BuscarNFePelaChave(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;pCpXML:TClientDataSet);
 
-function ACBrNFe_gravarNFe(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;CcXml:TClientDataSet):Boolean;
+//function ACBrNFe_gravarNFe(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;CcXml:TClientDataSet):Boolean;
 
-function ACBrNFe_Mudar_e_GravarStatusManifesto(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;Chave,CjEmpres:String;CdEventOp:Integer):Boolean;
+function ACBrNFe_Mudar_e_GravarStatusManifesto(Chave,CjEmpres:String;CdEventOp:Integer):Boolean;
 
 function ACBrNFe_DownloadNFe(NrSenha,NrCertificado,Chave,CjEmpres:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;CdEventOp :Integer):Boolean;
 
@@ -58,9 +58,9 @@ function ACBrNFe_ConsultarReciboLoteNFe(NrSenha,NrCertificado,uf:String;TpAmbien
 
 function ACBrNFe_ConsCadDestinatario(NrSenha,NrCertificado,CdUF,CjEmpres:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
 
-function ACBrNFe_GerarPDFNFe(NrSenha,NrCertificado,CdUF:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;XMLNFE:String):AnsiString;
+function ACBrNFe_GerarPDFNFe(XMLNFE:String):AnsiString;
 
-function ACBrNFe_ImprimirDanfe(NrSenha,NrCertificado,CdUF,XMLNFE:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
+function ACBrNFe_ImprimirDanfe(XMLNFE:String):AnsiString;
 
 function ACBrNFe_CartaDeCorrecao(NrSenha,NrCertificado,CdUF,Chave, idLote, CNPJ, nSeqEvento, Correcao:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
 
@@ -123,6 +123,7 @@ var CcxmlSet    :TClientDataSet;
     ACBrNFe     : TACBrNFe;
     ACBrNFSe    : TACBrNFSe;
     ACBrCTe     : TACBrCTe;
+    ACBrNFeDANFERaveCB: TACBrNFeDANFERaveCB;
     edtEmitCNPJ : String;
     edtEmitIE   : String;
     edtEmitIM   : String;
@@ -468,9 +469,16 @@ begin
           CpNfeDet  := TClientDataSet.Create(nil);
           CpNFeFat  := TClientDataSet.Create(nil);
           CpNFePro  := TClientDataSet.Create(nil);
+          ACBrNFeDANFERaveCB := TACBrNFeDANFERaveCB.Create(nil);
           ACBrNFe   := TACBrNFe.Create(nil);
           ACBrNFSe  := TACBrNFSe.Create(nil);
           ACBrCTe   := TACBrCTe.Create(nil);
+          ACBrNFe.DANFE := ACBrNFeDANFERaveCB;
+          ACBrNFeDANFERaveCB.PathPDF := 'C:\Program Files\Borland\Delphi7\Bin';
+          ACBrNFeDANFERaveCB.NFeCancelada := false;
+          ACBrNFeDANFERaveCB.ACBrNFe := ACBrNFe;
+          ACBrNFeDANFERaveCB.Sistema:= 'DJSYSTEM';
+          ACBrNFeDANFERaveCB.Usuario := 'Washington';
           XML.BrCdsNfeDet := CpNfeDet;
           XML.BrCdsNfeFat := CpNFeFat;
           XML.BrCdsNfePro := CpNFePro;
@@ -656,25 +664,28 @@ begin
 
 end;
 
-function ACBrNFe_GerarPDFNFe(NrSenha,NrCertificado,CdUF:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;XMLNFE:String):AnsiString;
+function ACBrNFe_GerarPDFNFe(XMLNFE:String):AnsiString;
 begin
       try
            IniciarVariaveisGlobal;
-           inicializetion(NrSenha,NrCertificado,CdUF,TpAmbiente,BoVisualizar);
-           ACBrNFe.NotasFiscais.Items[0].XML := XMLNFE;
+           ACBrNFe_LerConfiguracao;
+     //      ACBrNFe.NotasFiscais.LoadFromFile(XMLNFE);
+           ACBrNFe.NotasFiscais.LoadFromString(XMLNFE);
+ // ACBrNFe1.NotasFiscais.ImprimirPDF;
+
+        //   ACBrNFe.NotasFiscais.Items[0].XML := XMLNFE;
            ACBrNFe.NotasFiscais.ImprimirPDF;
       finally
       end;
 
 end;
-
-function ACBrNFe_ImprimirDanfe(NrSenha,NrCertificado,CdUF,XMLNFE:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean):AnsiString;
+function ACBrNFe_ImprimirDanfe(XMLNFE:String):AnsiString;
 begin
       try
           IniciarVariaveisGlobal;
-          inicializetion(NrSenha,NrCertificado,CdUF,TpAmbiente,BoVisualizar);
+          ACBrNFe_LerConfiguracao;
           ACBrNFe.NotasFiscais.Clear;
-          ACBrNFe.NotasFiscais.Items[0].XML := XMLNFE ;
+          ACBrNFe.NotasFiscais.LoadFromString(XMLNFE);
           if ACBrNFe.NotasFiscais.Items[0].NFe.Ide.tpEmis = teDPEC then
            begin
              ACBrNFe.WebServices.ConsultaDPEC.NFeChave := ACBrNFe.NotasFiscais.Items[0].NFe.infNFe.ID;
@@ -804,18 +815,14 @@ begin
       end;
 end;
 
-function ACBrNFe_gravarNFe(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;CcXml:TClientDataSet):Boolean;begin
-      CcXml.Post;
-      CcXml.ApplyUpdates(1);
-end;
 
-function ACBrNFe_Mudar_e_GravarStatusManifesto(NrSenha,NrCertificado,uf:String;TpAmbiente:TpcnTipoEmissao;BoVisualizar:boolean;Chave,CjEmpres:String;CdEventOp:Integer):Boolean;var
-    ACBrNFe     : TACBrNFe;
+function ACBrNFe_Mudar_e_GravarStatusManifesto(Chave,CjEmpres:String;CdEventOp:Integer):Boolean;
+var
     DescEventOp : TpcnTpEvento ;
 begin
       try
-          XML.BrXMLOriginal.Text := '';
-          ACBrNFe := TACBrNFe.Create(nil);
+          IniciarVariaveisGlobal;
+          ACBrNFe_LerConfiguracao;
           case CdEventOp of
             210200 : DescEventOp := teManifDestConfirmacao;
             210210 : DescEventOp := teManifDestCiencia;
@@ -829,6 +836,7 @@ begin
                 infEvento.CNPJ     := CjEmpres;
                 infEvento.dhEvento := now;
                 infEvento.tpEvento := DescEventOp;
+                infEvento.cOrgao   := 91;
           end;
           ACBrNFe.EnviarEventoNFe(StrToInt('1'));
           if Pos('REJEICAO: CODIGO DO ORGAO DIVERGE DO ORGAO AUTORIZADOR', UpperCase(
@@ -842,7 +850,7 @@ begin
                       infEvento.CNPJ     := CjEmpres;
                       infEvento.dhEvento := now;
                       infEvento.tpEvento := DescEventOp;
-                      infEvento.cOrgao   := 91;
+
                 end;
                 ACBrNFe.EnviarEventoNFe(StrToInt('1'));
                 if Pos('REJEICAO', UpperCase(AcbrNFe.WebServices.EnvEvento.EventoRetorno.retEvento.Items[0].RetInfEvento.xMotivo)) > 0 then
@@ -851,7 +859,6 @@ begin
                 end;
           end;
       finally
-         FreeAndNil(ACBrNFe);
       end;
 end;
 
