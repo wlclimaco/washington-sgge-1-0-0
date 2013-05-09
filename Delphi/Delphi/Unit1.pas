@@ -885,6 +885,8 @@ type
     SQLTable3NRNOTA: TStringField;
     Memo11: TMemo;
     SQLTable3XML: TStringField;
+    ClientDataSet4: TClientDataSet;
+    ImprimirBoleto1: TMenuItem;
     procedure sbtnCaminhoCertClick(Sender: TObject);
     procedure sbtnLogoMarcaClick(Sender: TObject);
     procedure sbtnPathSalvarClick(Sender: TObject);
@@ -902,6 +904,12 @@ type
     procedure BrvBitBtn1Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
+    procedure GerarPDF1Click(Sender: TObject);
+    procedure MenuItem2Click(Sender: TObject);
+    procedure ConfirmarOperao1Click(Sender: TObject);
+    procedure CidenciadaOperao1Click(Sender: TObject);
+    procedure DesconhecimentoOperao1Click(Sender: TObject);
+    procedure OperaoNoRealizada1Click(Sender: TObject);
 
   private
     { Private declarations }
@@ -1011,6 +1019,11 @@ begin
       BoVisualizar := ckSalvar.Checked;
 end;
 
+
+procedure TForm1.GerarPDF1Click(Sender: TObject);
+begin
+       ACBrNFe_GerarPDFNFe(ClientDataSet4.FieldByName('XML').AsString);
+end;
 
 procedure TForm1.GravarConfiguracao;
 Var IniFile : String ;
@@ -1242,6 +1255,17 @@ begin
   MyWebBrowser.Navigate(PathWithDelim(ExtractFileDir(application.ExeName))+'temp.xml');
 end;
 
+procedure TForm1.MenuItem2Click(Sender: TObject);
+begin
+      ACBrNFe_ImprimirDanfe(ClientDataSet4.FieldByName('XML').AsString);
+end;
+
+procedure TForm1.OperaoNoRealizada1Click(Sender: TObject);
+begin
+      ACBrNFe_Mudar_e_GravarStatusManifesto(ClientDataSet4.FieldByName('Cnpj').AsString,
+                                               ClientDataSet4.FieldByName('CHNFE').AsString,210240);
+end;
+
 procedure TForm1.sbtnCaminhoCertClick(Sender: TObject);
 begin
   OpenDialog1.Title := 'Selecione o Certificado';
@@ -1395,8 +1419,26 @@ begin
 
 end;
 
+procedure TForm1.CidenciadaOperao1Click(Sender: TObject);
+begin
+      ACBrNFe_Mudar_e_GravarStatusManifesto(ClientDataSet4.FieldByName('Cnpj').AsString,
+                                      ClientDataSet4.FieldByName('CHNFE').AsString,210210);
+end;
+
+procedure TForm1.ConfirmarOperao1Click(Sender: TObject);
+begin
+      ACBrNFe_Mudar_e_GravarStatusManifesto(ClientDataSet4.FieldByName('Cnpj').AsString,
+                                            ClientDataSet4.FieldByName('CHNFE').AsString,210200);
+end;
+
+procedure TForm1.DesconhecimentoOperao1Click(Sender: TObject);
+begin
+      ACBrNFe_Mudar_e_GravarStatusManifesto(ClientDataSet4.FieldByName('Cnpj').AsString,
+                                            ClientDataSet4.FieldByName('CHNFE').AsString,210220);
+end;
+
 procedure TForm1.btnNfeDestinadasClick(Sender: TObject);
-begin        // NfeDestinadas(NrSenha,NrCertificado,uf,CNPJ, IndNFe, IndEmi, ultNSU:String): OleVariant;
+begin
   gerarDadosInicial;
   xml.data := ACBrNFe_NfeDestinadas(NrSenha,NrCertif,CdEstado,CjEmpres,'2','0','0',TpAmbiente,BoVisualizar);
   xml.Open;

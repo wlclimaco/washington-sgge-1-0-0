@@ -3667,7 +3667,7 @@ object Form1: TForm1
           Caption = 'LblQtReg'
         end
         object BtnEnviar: TBrvBitBtn
-          Left = 802
+          Left = 794
           Top = 4
           Width = 100
           Height = 25
@@ -9015,8 +9015,8 @@ object Form1: TForm1
     EXCEL.RightMargin = 0.300000000000000000
     Options = [xoClipboardMessage, xoExportInvisibles, xoFooterLine, xoHeaderLine, xoShowExportDate, xoShowHeader, xoShowProgress, xoUseAlignments]
     Version = '2.38'
-    Left = 776
-    Top = 128
+    Left = 704
+    Top = 184
   end
   object PopupMenu2: TPopupMenu
     Left = 768
@@ -9026,21 +9026,27 @@ object Form1: TForm1
     end
     object ConfirmarOperao1: TMenuItem
       Caption = 'Confirmar Opera'#231#227'o'
+      OnClick = ConfirmarOperao1Click
     end
     object CidenciadaOperao1: TMenuItem
       Caption = 'Ciencia da Opera'#231#227'o'
+      OnClick = CidenciadaOperao1Click
     end
     object DesconhecimentoOperao1: TMenuItem
       Caption = 'Desconhecimento Opera'#231#227'o'
+      OnClick = DesconhecimentoOperao1Click
     end
     object OperaoNoRealizada1: TMenuItem
       Caption = 'Opera'#231#227'o N'#227'o Realizada'
+      OnClick = OperaoNoRealizada1Click
     end
     object MenuItem2: TMenuItem
       Caption = 'Imprimir'
+      OnClick = MenuItem2Click
     end
     object GerarPDF1: TMenuItem
       Caption = 'Gerar PDF'
+      OnClick = GerarPDF1Click
     end
     object Deletar1: TMenuItem
       Caption = 'Deletar'
@@ -9060,9 +9066,12 @@ object Form1: TForm1
     object ExportarTXT1: TMenuItem
       Caption = 'Exportar TXT'
     end
+    object ImprimirBoleto1: TMenuItem
+      Caption = 'Imprimir Boleto'
+    end
   end
   object DataSource2: TDataSource
-    DataSet = SQLTable3
+    DataSet = ClientDataSet4
     Left = 496
     Top = 344
   end
@@ -9093,7 +9102,12 @@ object Form1: TForm1
         'ettings\Administrador\Desktop\Delphi\MANIFESTO.fdb,rolename=Role' +
         'Name,user_name=sysdba,Password=masterkey,sqldialect=3,localecode' +
         '=0000,blobsize=-1,commitretain=False,waitonlocks=True,isolationl' +
-        'evel=ReadCommitted,trim char=False')
+        'evel=ReadCommitted,trim char=False,ConnectionString=drivername=F' +
+        'irebird,Database=C:\Documents and Settings\Administrador\Desktop' +
+        '\Delphi\MANIFESTO.fdb,rolename=RoleName,user_name=sysdba,Passwor' +
+        'd=masterkey,sqldialect=3,localecode=0000,blobsize=-1,commitretai' +
+        'n=False,waitonlocks=True,isolationlevel=ReadCommitted,trim char=' +
+        'False')
     VendorLib = 'fbclient.DLL'
     Connected = True
     Left = 840
@@ -9171,10 +9185,11 @@ object Form1: TForm1
         ParamType = ptInput
       end>
     SQLConnection = SQLConnection1
-    Left = 304
-    Top = 176
+    Left = 384
+    Top = 184
   end
   object SQLTable1: TSQLTable
+    Active = True
     MaxBlobSize = -1
     SQLConnection = SQLConnection1
     TableName = 'NOTAS'
@@ -9333,6 +9348,7 @@ object Form1: TForm1
     Top = 576
   end
   object DataSetProvider2: TDataSetProvider
+    DataSet = SQLTable3
     Left = 320
     Top = 344
   end
@@ -9453,6 +9469,7 @@ object Form1: TForm1
     Top = 512
   end
   object SQLTable2: TSQLTable
+    Active = True
     MaxBlobSize = -1
     SQLConnection = SQLConnection1
     TableName = 'TITULARES'
@@ -9574,8 +9591,8 @@ object Form1: TForm1
     Aggregates = <>
     Params = <>
     ProviderName = 'DataSetProvider1'
-    Left = 416
-    Top = 200
+    Left = 464
+    Top = 184
     object StringField1: TStringField
       FieldName = 'XMOTIVO'
       Size = 99
@@ -9727,7 +9744,6 @@ object Form1: TForm1
     end
   end
   object SQLTable3: TSQLTable
-    Active = True
     MaxBlobSize = 1
     SQLConnection = SQLConnection1
     TableName = 'DETALHES'
@@ -9773,11 +9789,12 @@ object Form1: TForm1
     end
     object SQLTable3XML: TStringField
       FieldName = 'XML'
-      Size = 12000
+      Size = 4000
     end
   end
   object SQLDataSet2: TSQLDataSet
     SchemaName = 'sysdba'
+    Active = True
     CommandText = 
       'select CNPJ_CPF, DATAEMISSAO, DATAENVIO, NRCHADOC, NRNOTA, PROTO' +
       'COLO, RAZAO, STATUS, TIPO, XMOTIVO  from DETALHES'
@@ -9787,5 +9804,13 @@ object Form1: TForm1
     SQLConnection = SQLConnection1
     Left = 240
     Top = 272
+  end
+  object ClientDataSet4: TClientDataSet
+    Active = True
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'DataSetProvider2'
+    Left = 544
+    Top = 184
   end
 end
