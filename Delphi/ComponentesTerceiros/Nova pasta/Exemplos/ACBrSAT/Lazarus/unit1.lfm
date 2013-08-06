@@ -1,0 +1,591 @@
+object Form1: TForm1
+  Left = 447
+  Height = 413
+  Top = 157
+  Width = 675
+  Caption = 'SAT Teste - Projeto ACBr'
+  ClientHeight = 393
+  ClientWidth = 675
+  Menu = MainMenu1
+  OnCreate = FormCreate
+  LCLVersion = '1.1'
+  object Splitter1: TSplitter
+    Cursor = crVSplit
+    Left = 0
+    Height = 5
+    Top = 184
+    Width = 675
+    Align = alTop
+    ResizeAnchor = akTop
+  end
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 204
+    Top = 189
+    Width = 648
+    ActivePage = tsRecebido
+    TabIndex = 2
+    TabOrder = 1
+    object tsLog: TTabSheet
+      Caption = 'Log de Comandos'
+      ClientHeight = 176
+      ClientWidth = 640
+      object mResposta: TMemo
+        Left = 0
+        Height = 176
+        Top = 0
+        Width = 640
+        Align = alBottom
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        ScrollBars = ssAutoBoth
+        TabOrder = 0
+      end
+    end
+    object tsGerado: TTabSheet
+      Caption = 'XML Gerado'
+      ClientHeight = 192
+      ClientWidth = 563
+      object mVenda: TMemo
+        Left = 0
+        Height = 192
+        Top = 0
+        Width = 563
+        Align = alBottom
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        ScrollBars = ssAutoBoth
+        TabOrder = 0
+      end
+    end
+    object tsRecebido: TTabSheet
+      Caption = 'XML Recebido'
+      ClientHeight = 176
+      ClientWidth = 640
+      object mCupom: TMemo
+        Left = 0
+        Height = 176
+        Top = 0
+        Width = 640
+        Align = alBottom
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        ScrollBars = ssAutoBoth
+        TabOrder = 0
+      end
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 184
+    Top = 0
+    Width = 675
+    Align = alTop
+    ClientHeight = 184
+    ClientWidth = 675
+    TabOrder = 2
+    object gpOperacao: TGroupBox
+      Left = 1
+      Height = 182
+      Top = 1
+      Width = 145
+      Align = alLeft
+      Caption = 'Inicialização'
+      ClientHeight = 164
+      ClientWidth = 141
+      TabOrder = 0
+      object bInicializar: TButton
+        Left = 16
+        Height = 33
+        Top = 40
+        Width = 105
+        Caption = 'Inicializar'
+        OnClick = bInicializarClick
+        TabOrder = 0
+      end
+      object cbxModelo: TComboBox
+        Left = 16
+        Height = 23
+        Top = 8
+        Width = 105
+        ItemHeight = 15
+        Items.Strings = (
+          'Procurar'
+          'ecfNaoFiscal'
+          'ecfBematech'
+          'ecfSweda'
+          'ecfDaruma'
+          'ecfSchalter'
+          'ecfMecaf'
+          'ecfYanco'
+          'ecfDataRegis'
+          'ecfUrano'
+          'ecfICash'
+          'ecfQuattro'
+        )
+        OnChange = cbxModeloChange
+        Style = csDropDownList
+        TabOrder = 1
+      end
+      object btSalvarParams: TButton
+        Left = 16
+        Height = 25
+        Top = 127
+        Width = 105
+        Caption = 'Salvar Params'
+        OnClick = btSalvarParamsClick
+        TabOrder = 2
+      end
+      object btLerParams: TButton
+        Left = 16
+        Height = 25
+        Top = 95
+        Width = 105
+        Caption = 'Ler Params'
+        OnClick = btLerParamsClick
+        TabOrder = 3
+      end
+    end
+    object GroupBox1: TGroupBox
+      Left = 146
+      Height = 182
+      Top = 1
+      Width = 528
+      Align = alClient
+      Caption = 'Configuração'
+      ClientHeight = 164
+      ClientWidth = 524
+      TabOrder = 1
+      object PageControl2: TPageControl
+        Left = 0
+        Height = 164
+        Top = 0
+        Width = 524
+        ActivePage = tsDadosEmit
+        Align = alClient
+        TabIndex = 1
+        TabOrder = 0
+        object tsDadosSAT: TTabSheet
+          Caption = 'Dados do SAT CFe'
+          ClientHeight = 136
+          ClientWidth = 516
+          object Label9: TLabel
+            Left = 23
+            Height = 15
+            Top = 15
+            Width = 45
+            Alignment = taRightJustify
+            Caption = 'Arq.Log:'
+            ParentColor = False
+          end
+          object edLog: TEdit
+            Cursor = crIBeam
+            Left = 24
+            Height = 23
+            Top = 32
+            Width = 163
+            TabOrder = 0
+          end
+          object SbArqLog: TSpeedButton
+            Left = 192
+            Height = 22
+            Top = 32
+            Width = 24
+            Caption = '...'
+            OnClick = SbArqLogClick
+          end
+          object Label10: TLabel
+            Left = 224
+            Height = 15
+            Top = 15
+            Width = 50
+            Alignment = taRightJustify
+            Caption = 'Path DLL:'
+            ParentColor = False
+          end
+          object edPathDLL: TEdit
+            Cursor = crIBeam
+            Left = 224
+            Height = 23
+            Top = 32
+            Width = 131
+            Anchors = [akTop, akLeft, akRight]
+            TabOrder = 1
+          end
+          object edtCodigoAtivacao: TEdit
+            Left = 23
+            Height = 23
+            Top = 80
+            Width = 164
+            TabOrder = 2
+          end
+          object Label1: TLabel
+            Left = 23
+            Height = 15
+            Top = 64
+            Width = 104
+            Caption = 'Código de Ativação'
+            ParentColor = False
+          end
+          object Label4: TLabel
+            Left = 200
+            Height = 15
+            Top = 64
+            Width = 39
+            Caption = 'Cód.UF'
+            ParentColor = False
+          end
+          object edtCodUF: TEdit
+            Left = 200
+            Height = 23
+            Top = 80
+            Width = 49
+            TabOrder = 3
+          end
+          object Label3: TLabel
+            Left = 262
+            Height = 15
+            Top = 64
+            Width = 58
+            Caption = 'Num.Caixa'
+            ParentColor = False
+          end
+          object seNumeroCaixa: TSpinEdit
+            Left = 262
+            Height = 23
+            Top = 80
+            Width = 58
+            MaxValue = 999
+            MinValue = 1
+            TabOrder = 4
+            Value = 1
+          end
+          object cbxAmbiente: TComboBox
+            Left = 368
+            Height = 23
+            Top = 80
+            Width = 132
+            ItemHeight = 15
+            Style = csDropDownList
+            TabOrder = 5
+          end
+          object Label6: TLabel
+            Left = 368
+            Height = 15
+            Top = 64
+            Width = 52
+            Caption = 'Ambiente'
+            ParentColor = False
+          end
+          object Label7: TLabel
+            Left = 368
+            Height = 15
+            Top = 16
+            Width = 28
+            Caption = 'Porta'
+            ParentColor = False
+          end
+          object edtPorta: TEdit
+            Left = 368
+            Height = 23
+            Top = 32
+            Width = 132
+            TabOrder = 6
+            Text = 'COM7'
+          end
+        end
+        object tsDadosEmit: TTabSheet
+          Caption = 'Dados Emitente'
+          ClientHeight = 136
+          ClientWidth = 516
+          object Label11: TLabel
+            Left = 12
+            Height = 15
+            Top = 23
+            Width = 28
+            Caption = 'CNPJ'
+            ParentColor = False
+          end
+          object Label12: TLabel
+            Left = 192
+            Height = 15
+            Top = 23
+            Width = 68
+            Caption = 'Insc.Estadual'
+            ParentColor = False
+          end
+          object Label14: TLabel
+            Left = 336
+            Height = 15
+            Top = 23
+            Width = 77
+            Caption = 'Insc.Municipal'
+            ParentColor = False
+          end
+          object edtEmitCNPJ: TEdit
+            Cursor = crIBeam
+            Left = 12
+            Height = 23
+            Top = 38
+            Width = 166
+            TabOrder = 0
+          end
+          object edtEmitIE: TEdit
+            Cursor = crIBeam
+            Left = 192
+            Height = 23
+            Top = 38
+            Width = 134
+            TabOrder = 1
+          end
+          object edtEmitIM: TEdit
+            Cursor = crIBeam
+            Left = 336
+            Height = 23
+            Top = 38
+            Width = 134
+            TabOrder = 2
+          end
+          object cbxRegTribISSQN: TComboBox
+            Left = 192
+            Height = 23
+            Top = 87
+            Width = 130
+            ItemHeight = 15
+            Style = csDropDownList
+            TabOrder = 4
+          end
+          object Label15: TLabel
+            Left = 192
+            Height = 15
+            Top = 71
+            Width = 103
+            Caption = 'Regime Trib. ISSQN'
+            ParentColor = False
+          end
+          object cbxIndRatISSQN: TComboBox
+            Left = 336
+            Height = 23
+            Top = 87
+            Width = 134
+            ItemHeight = 15
+            Style = csDropDownList
+            TabOrder = 5
+          end
+          object Label16: TLabel
+            Left = 336
+            Height = 15
+            Top = 71
+            Width = 73
+            Caption = 'Ind.Rat.ISSQN'
+            ParentColor = False
+          end
+          object Label17: TLabel
+            Left = 12
+            Height = 15
+            Top = 73
+            Width = 95
+            Caption = 'Regime Tributario'
+            ParentColor = False
+          end
+          object cbxRegTributario: TComboBox
+            Left = 12
+            Height = 23
+            Top = 87
+            Width = 166
+            ItemHeight = 15
+            Style = csDropDownList
+            TabOrder = 3
+          end
+        end
+        object tsDadosSwHouse: TTabSheet
+          Caption = 'Dados Sw.House'
+          ClientHeight = 136
+          ClientWidth = 489
+          object Label2: TLabel
+            Left = 10
+            Height = 15
+            Top = 15
+            Width = 28
+            Caption = 'CNPJ'
+            ParentColor = False
+          end
+          object edtSwHCNPJ: TEdit
+            Left = 10
+            Height = 23
+            Top = 31
+            Width = 191
+            Anchors = [akTop, akLeft, akRight]
+            TabOrder = 0
+          end
+          object Label5: TLabel
+            Left = 10
+            Height = 15
+            Top = 71
+            Width = 195
+            Caption = 'Assinatura Sw.House (344 caracteres)'
+            ParentColor = False
+          end
+          object edtSwHAssinatura: TEdit
+            Left = 10
+            Height = 23
+            Top = 89
+            Width = 456
+            Anchors = [akTop, akLeft, akRight]
+            TabOrder = 1
+          end
+        end
+      end
+    end
+  end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Height = 23
+    Top = 370
+    Width = 675
+    Panels = <    
+      item
+        Width = 200
+      end    
+      item
+        Width = 50
+      end>
+    SimplePanel = False
+  end
+  object MainMenu1: TMainMenu
+    left = 61
+    top = 328
+    object MenuItem1: TMenuItem
+      Caption = 'Ativação'
+      object mAtivarSAT: TMenuItem
+        Caption = 'Ativar SAT'
+        OnClick = mAtivarSATClick
+      end
+      object mComunicarCertificado: TMenuItem
+        Caption = 'Comunicar Certificado'
+        OnClick = mComunicarCertificadoClick
+      end
+      object mAssociarAssinatura: TMenuItem
+        Caption = 'Associar Assinatura'
+        OnClick = mAssociarAssinaturaClick
+      end
+      object MenuItem3: TMenuItem
+        Caption = '-'
+      end
+      object mBloquearSAT: TMenuItem
+        Caption = 'Bloquear SAT'
+        OnClick = mBloquearSATClick
+      end
+      object mDesbloquearSAT: TMenuItem
+        Caption = 'Desbloquear SAT'
+        OnClick = mDesbloquearSATClick
+      end
+      object MenuItem4: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem5: TMenuItem
+        Caption = 'Trocar  Código de Ativação'
+        OnClick = MenuItem5Click
+      end
+    end
+    object MenuItem2: TMenuItem
+      Caption = 'Venda'
+      object mGerarVenda: TMenuItem
+        Caption = 'Gerar Venda'
+        OnClick = mGerarVendaClick
+      end
+      object mEnviarVenda: TMenuItem
+        Caption = 'Enviar Venda'
+        OnClick = mEnviarVendaClick
+      end
+      object mImprimirExtratoVenda: TMenuItem
+        Caption = 'Imprimir Extrato Venda'
+        OnClick = mImprimirExtratoVendaClick
+      end
+      object mImprimirExtratoVendaResumido: TMenuItem
+        Caption = 'Imprimir Extrato Venda Resumido'
+        OnClick = mImprimirExtratoVendaResumidoClick
+      end
+      object MenuItem10: TMenuItem
+        Caption = '-'
+      end
+      object mCancelarUltimaVenda: TMenuItem
+        Caption = 'Cancelar Última Venda'
+        OnClick = mCancelarUltimaVendaClick
+      end
+      object mImprimirExtratoCancelamento: TMenuItem
+        Caption = 'Imprimir Extrato Cancelamento'
+        OnClick = mImprimirExtratoCancelamentoClick
+      end
+    end
+    object MenuItem6: TMenuItem
+      Caption = 'Consultas'
+      object mConsultarStatusOperacional: TMenuItem
+        Caption = 'Consultar Status Operacional'
+        OnClick = mConsultarStatusOperacionalClick
+      end
+      object mConsultarSAT: TMenuItem
+        Caption = 'Consultar SAT'
+        OnClick = mConsultarSATClick
+      end
+      object mConsultarNumeroSessao: TMenuItem
+        Caption = 'Consultar Numero Sessão'
+        OnClick = mConsultarNumeroSessaoClick
+      end
+    end
+    object MenuItem7: TMenuItem
+      Caption = 'Configuração'
+      object mAtaulizarSoftwareSAT: TMenuItem
+        Caption = 'Ataulizar Software SAT'
+        OnClick = mAtaulizarSoftwareSATClick
+      end
+      object mConfigurarInterfaceRede: TMenuItem
+        Caption = 'Configurar Interface Rede'
+        OnClick = mConfigurarInterfaceRedeClick
+      end
+    end
+    object MenuItem8: TMenuItem
+      Caption = 'Diversos'
+      object mTesteFimAFim: TMenuItem
+        Caption = 'Teste Fim a Fim'
+      end
+      object mExtrairLogs: TMenuItem
+        Caption = 'Extrair Logs'
+        OnClick = mExtrairLogsClick
+      end
+      object MenuItem9: TMenuItem
+        Caption = '-'
+      end
+      object mDesligarSAT: TMenuItem
+        Caption = 'Desligar SAT'
+        OnClick = mDesligarSATClick
+      end
+    end
+    object mLimpar: TMenuItem
+      Caption = 'Limpar'
+      OnClick = mLimparClick
+    end
+  end
+  object OpenDialog1: TOpenDialog
+    left = 97
+    top = 328
+  end
+  object ACBrSAT1: TACBrSAT
+    Modelo = satEmuladorSP
+    Extrato = ACBrSATExtratoESCPOS1
+    OnLog = ACBrSAT1Log
+    Config.infCFe_versaoDadosEnt = 0.03
+    Config.ide_numeroCaixa = 0
+    Config.ide_tpAmb = taHomologacao
+    Config.emit_cRegTrib = RTSimplesNacional
+    Config.emit_cRegTribISSQN = RTISSMicroempresaMunicipal
+    Config.emit_indRatISSQN = irSim
+    OnGetcodigoDeAtivacao = ACBrSAT1GetcodigoDeAtivacao
+    OnGetsignAC = ACBrSAT1GetsignAC
+    left = 24
+    top = 330
+  end
+  object ACBrSATExtratoESCPOS1: TACBrSATExtratoESCPOS
+    ACBrSAT = ACBrSAT1
+    ImprimeQRCode = False
+    left = 24
+    top = 293
+  end
+end

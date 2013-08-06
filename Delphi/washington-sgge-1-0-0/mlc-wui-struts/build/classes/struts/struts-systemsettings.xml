@@ -1,0 +1,74 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" 
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- Action for System Settings CRUD -->
+	<package name="mlc-systemsettings" extends="mlc-default" namespace="/systemsettings">
+
+		<!-- Parameterized JavaScript settings -->
+		<action name="settings" class="systemSettingsAction" method="settings">
+			<param name="menuItem">systemsettings</param>
+			<result name="success" type="freemarker">/freemarker/systemsettings_settings.js</result>
+		</action>
+
+		<!-- Render main page -->
+		<action name="ajax.list" class="systemSettingsPageAction">
+			<param name="jsComponents">mlc-systemsettings</param>
+			<result name="success">/pages/systemsettings/system_settings.jsp</result>
+			<result name="input">/pages/systemsettings/system_settings.jsp</result>
+		</action>
+
+		<!-- Render Profile main page -->
+		<action name="ajax.profilePageAction" class="systemSettingsPageAction">
+			<param name="jsComponents">mlc-systemsettings-profile</param>
+			<result name="success">/pages/profile/profile_settings.jsp</result>
+		</action>
+
+		<!-- Render Tag main page -->
+		<action name="ajax.tagPageAction" class="tagPageAction">
+			<param name="jsComponents">mlc-systemsettings-tag</param>
+			<result name="success">/pages/tag/tag_main.jsp</result>
+		</action>
+
+		<!-- Render Conservation main page -->
+		<action name="ajax.ecoModePageAction" class="ecoModePageAction">
+			<param name="jsComponents">mlc-systemsettings-ecomode</param>
+			<result name="success">/pages/systemsettings/eco_mode_main.jsp</result>
+		</action>
+		
+		<!-- Render Conservation main page-->
+		<action name="ajax.importEcoMode" class="ecoModeAjaxAction" method="importEcoMode">
+			<result name="success" type="dispatcher">/pages/systemsettings/eco_mode_redirect.jsp?messageSuccess=${messageSuccess}</result>
+			<result name="error"  type="dispatcher">/pages/systemsettings/eco_mode_redirect.jsp?messageError=${messageError}</result>
+		</action>
+		
+		<!-- Render Eco Mode Dialog -->
+		<action name="include.ecomodedialog" class="ecoModePageAction">
+			<param name="jsComponents">mlc-systemsettings-ecomode</param>
+			<result name="success">/pages/systemsettings/eco_mode_format_dialog.jsp</result>
+		</action>
+		
+		<!-- Render Profile main page -->
+		<action name="ajax.fillProfilePageAction" class="systemSettingsAjaxAction" method="openProfile">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+
+		<!-- Save Profile Settings -->
+		<action name="saveProfileSettings" class="systemSettingsAjaxAction" method="saveSystemSettings">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+
+		<action name="fillEnuns" class="systemSettingsAjaxAction" method="fillEnuns">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">enumResponse</param>
+			</result>
+		</action>
+
+	</package>
+</struts>	

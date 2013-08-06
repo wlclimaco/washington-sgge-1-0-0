@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2012/03/07 11:17:54.000.765,=C:\Documents and Settings\wilson.filho\Meus documentos\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2012/03/07 16:26:46.000.765,=C:\Documents and Settings\wilson.filho\Meus documentos\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2012/03/08 08:38:33.578.pas,C:\BRAVO\fontes\Server\WebService\LogosWSIntf.pas=C:\Documents and Settings\wilson.filho\Meus documentos\RAD Studio\Projects\LogosWSIntf.pas</Transaction>
+    <Transaction>2012/03/08 08:38:35.437.pas,C:\BRAVO\fontes\Server\WebService\LogosWSImpl.pas=C:\Documents and Settings\wilson.filho\Meus documentos\RAD Studio\Projects\LogosWSImpl.pas</Transaction>
+    <Transaction>2012/03/08 08:38:40.250.pas,C:\BRAVO\fontes\Server\WebService\ULogosWS.pas=C:\Documents and Settings\wilson.filho\Meus documentos\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2012/03/08 08:38:40.250.dfm,C:\BRAVO\fontes\Server\WebService\ULogosWS.dfm=C:\Documents and Settings\wilson.filho\Meus documentos\RAD Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2012/03/08 08:38:44.281.dproj,C:\BRAVO\fontes\Server\WebService\LogosWS.dproj=C:\Documents and Settings\wilson.filho\Meus documentos\RAD Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2012/04/04 17:35:15.000.937,=C:\BRAVO\fontes\Client\Logos\UClaImp.pas</Transaction>
+    <Transaction>2012/04/12 14:49:39.000.734,=C:\BRAVO\fontes\Client\Logos\UClaSrv.pas</Transaction>
+  </Transactions>
+</BorlandProject>

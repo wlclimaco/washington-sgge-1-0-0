@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2011/01/28 08:54:21.000.325,=C:\Documents and Settings\Administrador\Meus documentos\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2011/01/28 09:50:47.000.450,=C:\Documents and Settings\Administrador\Meus documentos\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2011/02/01 11:18:52.000.902,=C:\Documents and Settings\Administrador\Meus documentos\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2011/02/03 08:54:47.000.750,=C:\Documents and Settings\Administrador\Meus documentos\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2011/02/03 08:56:44.000.015,=C:\Documents and Settings\Administrador\Meus documentos\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2011/02/04 10:49:54.000.978,=C:\Documents and Settings\Administrador\Meus documentos\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2011/02/04 10:50:34.000.197,C:\Documents and Settings\Administrador\Meus documentos\RAD Studio\Projects\Unit1.pas=C:\Bravo\fontes\Server\Conexao\UFrmSerCon.pas</Transaction>
+    <Transaction>2011/02/04 10:50:34.000.197,C:\Documents and Settings\Administrador\Meus documentos\RAD Studio\Projects\Unit1.dfm=C:\Bravo\fontes\Server\Conexao\UFrmSerCon.dfm</Transaction>
+    <Transaction>2011/02/04 10:50:45.000.619,C:\Documents and Settings\Administrador\Meus documentos\RAD Studio\Projects\Project1.dproj=C:\Bravo\fontes\Server\Conexao\SrvConexa.dproj</Transaction>
+    <Transaction>2011/02/04 10:57:31.000.275,=C:\Bravo\fontes\Server\Conexao\Unit2.pas</Transaction>
+    <Transaction>2011/02/04 10:58:05.000.088,C:\Bravo\fontes\Server\Conexao\Unit2.dfm=C:\Bravo\fontes\Server\Conexao\UFrmAtuEnd.dfm</Transaction>
+    <Transaction>2011/02/04 10:58:05.000.088,C:\Bravo\fontes\Server\Conexao\Unit2.pas=C:\Bravo\fontes\Server\Conexao\UFrmAtuEnd.pas</Transaction>
+    <Transaction>2011/02/25 07:53:25.000.734,C:\Bravo\fontes\Server\Conexao\LogosCnx.dproj=C:\Bravo\fontes\Server\Conexao\SrvConexa.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

@@ -1,0 +1,145 @@
+*******************************************************
+
+ TmxExports for Delphi 5,6,7,2005,2006,2007,2009
+ Copyright (c) 2001-2008 Bitvadász Kft.
+
+*******************************************************
+
+ [*] : Bug
+ [+] : New
+ [-] : Removed
+ [!] : Modified
+
+HISTORY:
+--------
+
+2.38:
+
+ [+] : Delphi 2009 support added
+
+2.37b:
+
+ [+] : Delphi 2007 support added
+
+2.37a :
+
+ [+] : Delphi 2006 support added
+
+2.37 :
+
+ [+] : Delphi 2005 support added
+
+2.36 :
+
+ [+] : Delphi 7 compatible release
+ [+] : Export type selection combo bug fixed
+       Peter Gore: Thanks for your bug report
+ [*] : Float number export to Excel bug fixed
+ [!] : AnyExport demo application modified
+
+2.35 : 
+
+ [*] : Component Access Violation bug during Destroy fixed.
+
+2.34 : 
+
+ [*] : mxExport.res removed from the project.
+       Sometimes it changed the project's icon to the
+       Excel symbol. I hope it now really fixed.
+
+2.33 : 
+
+ [*] : TmxCellFormat cannot be assigned to TmxFormat.
+       Sergio Sette: Thanks for this bug report.
+
+2.32 : 
+
+ [+] : TmxNativeExcel incompatibility bug fixed.
+       Now it really can installed under Delphi 6.
+
+2.31 : First blank line has been removed from Excel export.
+       Tom Deprez: Thanks for this bug report.
+
+2.30 : 
+
+ [+] : New component TmxAnyExport added. Now you can export
+       anything what you want.
+
+2.20 : Internal release
+
+2.10 : 
+
+ [+] : Most of TmxNativeExcel Professional properties can 
+       be accessed in TmxExcelOptions.
+ [*] : Excel Page Setup bug has been fixed
+ [+] : New property editors added for Fonts
+
+
+2.00 : 
+
+ [+] : This version supports TmxNativeExcel Standard and
+       Professional Editions.
+
+1.47 :
+
+ [*] : One more integer conversion bug fixed in exports.
+
+1.46 :
+
+ [*] : This release does not change the application's icon.
+ [*] : Sometimes unnecessary QuotationMarks were added
+       to the exported fields.
+ [*] : Integer conversion bug fixed in exports
+       Kiril Antonov: Thanks for your support. 
+ [+] : All component can export in design-time.
+       Two new menu items have been added to component's
+       popup menu. Idea came from Kiril Antonov. Thank you.
+
+1.45 :
+
+ [*] : Component does not store the developer's computer
+       temp folder path. It set this property at program
+       start, but if you set a different folder of course
+       it will be stored.
+
+1.44 :
+
+ [+] : Delphi 6 compatible version.
+       prog-fr: Thanks for your help.
+
+1.43 :
+
+ [*] : IsValidToExport bug fixed.
+
+1.42 : 
+
+ [+] : Now It restores the cursor's original position
+       in database after export.
+ [*] : It uses Fields.DisplayLabel to generate 
+       captions instead of FieldName.
+ [*] : When a field had NULL value the HTML export 
+       crashed.
+
+1.41 : 
+
+ [+] : The linked controls are disabled during export.
+ [+] : New virtual procedures in TmxCustomExport
+          * BeforeExecute
+          * AfterExecute
+
+1.4 : 
+
+ [+] : Excel support added
+ [*] : Minor bug fixes
+
+1.3 :
+
+ [+] : CSV, SLK support added
+
+1.21:
+
+ [*] : Minor bug fixes
+
+1.20:
+
+ [+] : First Public Release

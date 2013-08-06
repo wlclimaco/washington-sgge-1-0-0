@@ -1,0 +1,438 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <ProjectOptions>
+    <Version Value="9"/>
+    <PathDelim Value="\"/>
+    <General>
+      <MainUnit Value="0"/>
+      <Title Value="EADTeste"/>
+      <ResourceType Value="res"/>
+      <UseXPManifest Value="True"/>
+      <XPManifest>
+        <DpiAware Value="True"/>
+      </XPManifest>
+      <ActiveWindowIndexAtStart Value="0"/>
+    </General>
+    <i18n>
+      <EnableI18N LFM="False"/>
+    </i18n>
+    <VersionInfo>
+      <StringTable ProductVersion=""/>
+    </VersionInfo>
+    <BuildModes Count="1" Active="Default">
+      <Item1 Name="Default" Default="True"/>
+    </BuildModes>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
+      <ExcludeFileFilter Value="*.(bak|ppu|o|so);*~;backup"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <FormatVersion Value="1"/>
+      </local>
+    </RunParams>
+    <RequiredPackages Count="3">
+      <Item1>
+        <PackageName Value="LCLBase"/>
+        <MinVersion Major="1" Release="1" Valid="True"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="ACBrComum"/>
+        <MinVersion Minor="9" Valid="True"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="LCL"/>
+      </Item3>
+    </RequiredPackages>
+    <Units Count="22">
+      <Unit0>
+        <Filename Value="EADTeste.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="EADTeste"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="50" Y="8"/>
+        <UsageCount Value="230"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="EADTeste1.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form1"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="EADTeste1"/>
+        <EditorIndex Value="0"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="216"/>
+        <CursorPos X="1" Y="226"/>
+        <UsageCount Value="230"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <UnitName Value="ACBrEAD"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="40"/>
+        <CursorPos X="1" Y="49"/>
+        <UsageCount Value="42"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="..\..\Fontes\ACBrDiversos\ACBrValidador.pas"/>
+        <UnitName Value="ACBrValidador"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="234"/>
+        <CursorPos X="3" Y="236"/>
+        <UsageCount Value="8"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="..\..\..\..\..\Lazarus\TESTE\libeay32\unit1.pas"/>
+        <ComponentName Value="Form1"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="Unit1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="159"/>
+        <CursorPos X="15" Y="177"/>
+        <UsageCount Value="42"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="C:\lazarus\fpc\2.5.1\source\packages\openssl\src\openssl.pas"/>
+        <UnitName Value="OpenSSL"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="521"/>
+        <CursorPos X="37" Y="534"/>
+        <UsageCount Value="18"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="..\..\Fontes\ACBrComum\libeay32.pas"/>
+        <UnitName Value="libeay32"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="792"/>
+        <CursorPos X="10" Y="804"/>
+        <UsageCount Value="40"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="..\..\Fontes\ACBrComum\ACBrUtil.pas"/>
+        <UnitName Value="ACBrUtil"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1601"/>
+        <CursorPos X="3" Y="1607"/>
+        <UsageCount Value="9"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="..\..\Fontes\ACBrComum\ACBr.inc"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="333"/>
+        <CursorPos X="16" Y="347"/>
+        <UsageCount Value="7"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="..\..\Fontes\ACBrComum\OpenSSLUtils.pas"/>
+        <UnitName Value="OpenSSLUtils"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="690"/>
+        <CursorPos X="22" Y="673"/>
+        <UsageCount Value="16"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="..\..\Fontes\synalist\ssl_openssl.pas"/>
+        <UnitName Value="ssl_openssl"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="79"/>
+        <CursorPos X="15" Y="98"/>
+        <UsageCount Value="11"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="..\..\Fontes\synalist\ssl_openssl_lib.pas"/>
+        <UnitName Value="ssl_openssl_lib"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="136"/>
+        <CursorPos X="1" Y="1"/>
+        <UsageCount Value="11"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <UnitName Value="ACBrEAD"/>
+        <EditorIndex Value="1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="860"/>
+        <CursorPos X="1" Y="889"/>
+        <UsageCount Value="105"/>
+        <Bookmarks Count="7">
+          <Item0 X="42" Y="1007" ID="3"/>
+          <Item1 X="1" Y="326" ID="5"/>
+          <Item2 X="1" Y="822" ID="4"/>
+          <Item3 X="35" Y="886" ID="6"/>
+          <Item4 X="29" Y="783" ID="1"/>
+          <Item5 X="1" Y="460" ID="2"/>
+          <Item6 X="1" Y="776" ID="7"/>
+        </Bookmarks>
+        <Loaded Value="True"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="..\..\..\Fontes\ACBrComum\libeay32.pas"/>
+        <UnitName Value="libeay32"/>
+        <EditorIndex Value="4"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1769"/>
+        <CursorPos X="27" Y="1787"/>
+        <UsageCount Value="105"/>
+        <Loaded Value="True"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="..\..\..\Fontes\ACBrComum\OpenSSL.pas"/>
+        <UnitName Value="OpenSSL"/>
+        <EditorIndex Value="3"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="2175"/>
+        <CursorPos X="1" Y="2186"/>
+        <UsageCount Value="105"/>
+        <Loaded Value="True"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrUtil.pas"/>
+        <UnitName Value="ACBrUtil"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1933"/>
+        <CursorPos X="1" Y="1950"/>
+        <UsageCount Value="10"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="..\..\..\Projetos\ACBrMonitor\Lazarus\ACBrMonitor1.pas"/>
+        <UnitName Value="ACBrMonitor1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="2430"/>
+        <CursorPos X="20" Y="2451"/>
+        <UsageCount Value="1"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="C:\lazarus\fpc\2.6.0\source\rtl\inc\ctypes.pp"/>
+        <UnitName Value="ctypes"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="43"/>
+        <CursorPos X="35" Y="54"/>
+        <UsageCount Value="10"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="C:\lazarus\fpc\2.6.0\source\rtl\objpas\classes\classesh.inc"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="771"/>
+        <CursorPos X="3" Y="771"/>
+        <UsageCount Value="10"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="C:\lazarus\fpc\2.6.0\source\rtl\objpas\classes\streams.inc"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="223"/>
+        <CursorPos X="7" Y="244"/>
+        <UsageCount Value="10"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="C:\lazarus\fpc\2.6.0\source\rtl\inc\wstringh.inc"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="13"/>
+        <CursorPos X="10" Y="24"/>
+        <UsageCount Value="1"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrComum-change-log.txt"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="34"/>
+        <CursorPos X="49" Y="44"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="None"/>
+      </Unit21>
+    </Units>
+    <JumpHistory Count="30" HistoryIndex="29">
+      <Position1>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Caret Line="869" Column="1" TopLine="859"/>
+      </Position1>
+      <Position2>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Caret Line="870" Column="1" TopLine="859"/>
+      </Position2>
+      <Position3>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Caret Line="871" Column="1" TopLine="859"/>
+      </Position3>
+      <Position4>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Caret Line="870" Column="38" TopLine="859"/>
+      </Position4>
+      <Position5>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Caret Line="868" Column="1" TopLine="859"/>
+      </Position5>
+      <Position6>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Caret Line="870" Column="1" TopLine="859"/>
+      </Position6>
+      <Position7>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Caret Line="871" Column="1" TopLine="859"/>
+      </Position7>
+      <Position8>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Caret Line="872" Column="1" TopLine="859"/>
+      </Position8>
+      <Position9>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Caret Line="873" Column="1" TopLine="859"/>
+      </Position9>
+      <Position10>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Caret Line="870" Column="1" TopLine="859"/>
+      </Position10>
+      <Position11>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Caret Line="871" Column="1" TopLine="859"/>
+      </Position11>
+      <Position12>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Caret Line="872" Column="1" TopLine="859"/>
+      </Position12>
+      <Position13>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Caret Line="879" Column="1" TopLine="861"/>
+      </Position13>
+      <Position14>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Caret Line="876" Column="8" TopLine="866"/>
+      </Position14>
+      <Position15>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Caret Line="868" Column="1" TopLine="864"/>
+      </Position15>
+      <Position16>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Caret Line="869" Column="1" TopLine="864"/>
+      </Position16>
+      <Position17>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Caret Line="870" Column="1" TopLine="864"/>
+      </Position17>
+      <Position18>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Caret Line="871" Column="1" TopLine="864"/>
+      </Position18>
+      <Position19>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Caret Line="873" Column="1" TopLine="864"/>
+      </Position19>
+      <Position20>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Caret Line="874" Column="1" TopLine="864"/>
+      </Position20>
+      <Position21>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Caret Line="875" Column="1" TopLine="864"/>
+      </Position21>
+      <Position22>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Caret Line="873" Column="1" TopLine="864"/>
+      </Position22>
+      <Position23>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Caret Line="874" Column="1" TopLine="864"/>
+      </Position23>
+      <Position24>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Caret Line="875" Column="1" TopLine="864"/>
+      </Position24>
+      <Position25>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Caret Line="879" Column="1" TopLine="864"/>
+      </Position25>
+      <Position26>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Caret Line="880" Column="1" TopLine="864"/>
+      </Position26>
+      <Position27>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Caret Line="881" Column="17" TopLine="865"/>
+      </Position27>
+      <Position28>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Caret Line="885" Column="1" TopLine="868"/>
+      </Position28>
+      <Position29>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Caret Line="886" Column="1" TopLine="869"/>
+      </Position29>
+      <Position30>
+        <Filename Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Caret Line="887" Column="1" TopLine="870"/>
+      </Position30>
+    </JumpHistory>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="11"/>
+    <PathDelim Value="\"/>
+    <Target>
+      <Filename Value="EADTeste"/>
+    </Target>
+    <SearchPaths>
+      <IncludeFiles Value="$(ProjOutDir)"/>
+      <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+    </SearchPaths>
+    <Linking>
+      <Options>
+        <Win32>
+          <GraphicApplication Value="True"/>
+        </Win32>
+      </Options>
+    </Linking>
+    <Other>
+      <CompilerMessages>
+        <UseMsgFile Value="True"/>
+      </CompilerMessages>
+      <CompilerPath Value="$(CompPath)"/>
+    </Other>
+  </CompilerOptions>
+  <Debugging>
+    <BreakPoints Count="3">
+      <Item1>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Line Value="594"/>
+      </Item1>
+      <Item2>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Line Value="993"/>
+      </Item2>
+      <Item3>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="..\..\..\Fontes\ACBrComum\ACBrEAD.pas"/>
+        <Line Value="868"/>
+      </Item3>
+    </BreakPoints>
+    <Exceptions Count="4">
+      <Item1>
+        <Name Value="EAbort"/>
+      </Item1>
+      <Item2>
+        <Name Value="ECodetoolError"/>
+      </Item2>
+      <Item3>
+        <Name Value="EFOpenError"/>
+      </Item3>
+      <Item4>
+        <Name Value="Exception"/>
+      </Item4>
+    </Exceptions>
+  </Debugging>
+  <EditorMacros Count="0"/>
+</CONFIG>

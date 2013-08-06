@@ -1,0 +1,15 @@
+C:\BRAVO\fontes\Mobile\BrMobile\BrMobile\obj\Debug\ResolveAssemblyReference.cache
+C:\BRAVO\fontes\Mobile\BrMobile\BrMobile\obj\Debug\BrMobile.SIS001.resources
+C:\BRAVO\fontes\Mobile\BrMobile\BrMobile\obj\Debug\BrMobile.Properties.Resources.resources
+C:\BRAVO\fontes\Mobile\BrMobile\BrMobile\obj\Debug\BrMobile.csproj.GenerateResource.Cache
+C:\BRAVO\fontes\Mobile\BrMobile\BrMobile\bin\Debug\BrMobile.exe
+C:\BRAVO\fontes\Mobile\BrMobile\BrMobile\bin\Debug\BrMobile.pdb
+C:\BRAVO\fontes\Mobile\BrMobile\BrMobile\obj\Debug\BrMobile.exe
+C:\BRAVO\fontes\Mobile\BrMobile\BrMobile\obj\Debug\BrMobile.pdb
+C:\BRAVO\fontes\Mobile\BrMobile\BrMobile\bin\Debug\System.Data.SQLite.dll
+C:\BRAVO\fontes\Mobile\BrMobile\BrMobile\bin\Debug\System.Data.OracleClient.dll
+C:\BRAVO\fontes\Mobile\BrMobile\BrMobile\bin\Debug\System.Web.dll
+C:\BRAVO\fontes\Mobile\BrMobile\BrMobile\bin\Debug\System.EnterpriseServices.dll
+C:\BRAVO\fontes\Mobile\BrMobile\BrMobile\bin\Debug\System.Transactions.dll
+C:\BRAVO\fontes\Mobile\BrMobile\BrMobile\bin\Debug\System.Data.SQLite.pdb
+C:\BRAVO\fontes\Mobile\BrMobile\BrMobile\bin\Debug\System.EnterpriseServices.Wrapper.dll

@@ -1,0 +1,470 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{F43F64A4-5A9E-42B3-B54A-87B6476ABE64}</ProjectGuid>
+			<ProjectVersion>12.3</ProjectVersion>
+			<MainSource>Logos.dpr</MainSource>
+			<Base>True</Base>
+			<Config Condition="'$(Config)'==''">Debug</Config>
+			<Platform>Win32</Platform>
+			<AppType>Application</AppType>
+			<FrameworkType>VCL</FrameworkType>
+			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_UsePackage>vclimg;vcl;vclx;dbrtl;Rave90VCL;bdertl;VclSmp;rtl;svnui;svn;TeeUI;TeeDB;Tee;vclactnband;vcldb;vcltouch;xmlrtl;dsnap;IndyCore;IndySystem;IndyProtocols;inet;intrawebdb_110_150;Intraweb_110_150;vclie;webdsnap;inetdbbde;inetdbxpress;soaprtl;vclribbon;dbexpress;DbxCommonDriver;DataSnapIndy10ServerTransport;DataSnapProviderClient;DbxClientDriver;dbxcds;inetdb;DataSnapServer;AzureCloud;DBXInterBaseDriver;DBXMySQLDriver;DBXFirebirdDriver;DBXSybaseASEDriver;DBXSybaseASADriver;DBXOracleDriver;DBXMSSQLDriver;DBXInformixDriver;DBXDb2Driver;CodeSiteExpressVcl;QR5RunDXE;Bravo;dclOffice2k;DataSnapClient;dsnapcon</DCC_UsePackage>
+			<DCC_ImageBase>00400000</DCC_ImageBase>
+			<DCC_DcuOutput>.\$(Config)\$(Platform)</DCC_DcuOutput>
+			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;$(DCC_UnitAlias)</DCC_UnitAlias>
+			<DCC_ExeOutput>.\$(Config)\$(Platform)</DCC_ExeOutput>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<DCC_ExeOutput>C:\Bravo\exe\</DCC_ExeOutput>
+			<DCC_UnitSearchPath>C:\Bravo\fontes\Componentes;C:\Bravo\fontes\ComponentesTerceiros\MaxComponents\mxExports;C:\Bravo\fontes\ComponentesTerceiros\MaxComponents\mxNativeExcel;C:\Bravo\dcu;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+			<DCC_DcuOutput>C:\Bravo\dcu\</DCC_DcuOutput>
+			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+			<DCC_Optimize>false</DCC_Optimize>
+			<DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<DCC_ExeOutput>C:\Bravo\exe\</DCC_ExeOutput>
+			<DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+			<DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_DebugInformation>false</DCC_DebugInformation>
+		</PropertyGroup>
+		<ItemGroup>
+			<DelphiCompile Include="Logos.dpr">
+				<MainSource>MainSource</MainSource>
+			</DelphiCompile>
+			<DCCReference Include="ULogos.pas">
+				<Form>FrmLogos</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmConCli.pas">
+				<Form>FrmConCli</Form>
+			</DCCReference>
+			<DCCReference Include="UDmSrvApl.pas">
+				<Form>DmSrvApl</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="UClaSrv.pas"/>
+			<DCCReference Include="UFrmErrCon.pas">
+				<Form>FrmErrCon</Form>
+			</DCCReference>
+			<DCCReference Include="..\..\padrao\UCai0000.pas">
+				<Form>Cai0000</Form>
+			</DCCReference>
+			<DCCReference Include="UCai0001.pas">
+				<Form>Cai0001</Form>
+			</DCCReference>
+			<DCCReference Include="UCai0002.pas">
+				<Form>Cai0002</Form>
+			</DCCReference>
+			<DCCReference Include="UCad0001.pas">
+				<Form>Cad0001</Form>
+			</DCCReference>
+			<DCCReference Include="UDmSis.pas">
+				<Form>DmSis</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="..\..\padrao\UCad0000.pas">
+				<Form>Cad0000</Form>
+			</DCCReference>
+			<DCCReference Include="UCad0002.pas">
+				<Form>Cad0002</Form>
+			</DCCReference>
+			<DCCReference Include="UCai0003.pas">
+				<Form>Cai0003</Form>
+			</DCCReference>
+			<DCCReference Include="UCad0003.pas">
+				<Form>Cad0003</Form>
+			</DCCReference>
+			<DCCReference Include="..\..\Componentes\BrvDb.pas"/>
+			<DCCReference Include="UCai0004.pas">
+				<Form>Cai0004</Form>
+			</DCCReference>
+			<DCCReference Include="UCai0005.pas">
+				<Form>Cai0005</Form>
+			</DCCReference>
+			<DCCReference Include="UCai0006.pas">
+				<Form>Cai0006</Form>
+			</DCCReference>
+			<DCCReference Include="UCai0007.pas">
+				<Form>Cai0007</Form>
+			</DCCReference>
+			<DCCReference Include="UCad0004.pas">
+				<Form>Cad0004</Form>
+			</DCCReference>
+			<DCCReference Include="UCai0008.pas">
+				<Form>Cai0008</Form>
+			</DCCReference>
+			<DCCReference Include="UCai0009.pas">
+				<Form>Cai0009</Form>
+			</DCCReference>
+			<DCCReference Include="UCai0010.pas">
+				<Form>Cai0010</Form>
+			</DCCReference>
+			<DCCReference Include="..\..\padrao\UMov0000.pas">
+				<Form>Mov0000</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0001.pas">
+				<Form>Mov0001</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0002.pas">
+				<Form>Mov0002</Form>
+			</DCCReference>
+			<DCCReference Include="UCon0001.pas">
+				<Form>Con0001</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0003.pas">
+				<Form>Mov0003</Form>
+			</DCCReference>
+			<DCCReference Include="UClaImp.pas"/>
+			<DCCReference Include="..\..\padrao\URel0000.pas">
+				<Form>REL0000</Form>
+			</DCCReference>
+			<DCCReference Include="URel0001.pas">
+				<Form>REL0001</Form>
+			</DCCReference>
+			<DCCReference Include="UCon0002.pas">
+				<Form>Con0002</Form>
+			</DCCReference>
+			<DCCReference Include="UCon0003.pas">
+				<Form>Con0003</Form>
+			</DCCReference>
+			<DCCReference Include="UCai0011.pas">
+				<Form>Cai0011</Form>
+			</DCCReference>
+			<DCCReference Include="UCai0012.pas">
+				<Form>Cai0012</Form>
+			</DCCReference>
+			<DCCReference Include="UCon0005.pas">
+				<Form>Con0005</Form>
+			</DCCReference>
+			<DCCReference Include="UCon0004.pas">
+				<Form>Con0004</Form>
+			</DCCReference>
+			<DCCReference Include="UCon0006.pas">
+				<Form>Con0006</Form>
+			</DCCReference>
+			<DCCReference Include="BrvDominiosXE.pas"/>
+			<DCCReference Include="BrvFuncoesXE.pas"/>
+			<DCCReference Include="UCon0007.pas">
+				<Form>Con0007</Form>
+			</DCCReference>
+			<DCCReference Include="UCai0013.pas">
+				<Form>Cai0013</Form>
+			</DCCReference>
+			<DCCReference Include="UCon0008.pas">
+				<Form>Con0008</Form>
+			</DCCReference>
+			<DCCReference Include="uCon0009.pas">
+				<Form>Con0009</Form>
+			</DCCReference>
+			<DCCReference Include="UCad0007.pas">
+				<Form>Cad0007</Form>
+			</DCCReference>
+			<DCCReference Include="UCad0008.pas">
+				<Form>Cad0008</Form>
+			</DCCReference>
+			<DCCReference Include="UDmCtb.pas">
+				<Form>DmCtb</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="UMov0004.pas">
+				<Form>Mov0004</Form>
+			</DCCReference>
+			<DCCReference Include="UCon0010.pas">
+				<Form>Con0010</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0005.pas">
+				<Form>Mov0005</Form>
+			</DCCReference>
+			<DCCReference Include="URel0002.pas">
+				<Form>Rel0002</Form>
+			</DCCReference>
+			<DCCReference Include="URel0004.pas">
+				<Form>Rel0004</Form>
+			</DCCReference>
+			<DCCReference Include="URel0005.pas">
+				<Form>Rel0005</Form>
+			</DCCReference>
+			<DCCReference Include="UCon0011.pas">
+				<Form>Con0011</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0006.pas">
+				<Form>Mov0006</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0007.pas">
+				<Form>Mov0007</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0008.pas">
+				<Form>Mov0008</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0009.pas">
+				<Form>Mov0009</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0011.pas">
+				<Form>Mov0011</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0010.pas">
+				<Form>Mov0010</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0012.pas">
+				<Form>Mov0012</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0013.pas">
+				<Form>Mov0013</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0014.pas">
+				<Form>Mov0014</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0015.pas">
+				<Form>Mov0015</Form>
+			</DCCReference>
+			<DCCReference Include="URel0003.pas">
+				<Form>Rel0003</Form>
+			</DCCReference>
+			<DCCReference Include="URel0006.pas">
+				<Form>Rel0006</Form>
+			</DCCReference>
+			<DCCReference Include="..\..\padrao\UQrl0000.pas">
+				<Form>Qrl0000</Form>
+				<DesignClass>TQuickRep</DesignClass>
+			</DCCReference>
+			<DCCReference Include="..\..\Server\Impressao\UQrl0005.pas">
+				<Form>Qrl0005</Form>
+				<DesignClass>TQuickRep</DesignClass>
+			</DCCReference>
+			<DCCReference Include="UCon0012.pas">
+				<Form>Con0012</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0016.pas">
+				<Form>Mov0016</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0017.pas">
+				<Form>Mov0017</Form>
+			</DCCReference>
+			<DCCReference Include="WSStatusPedidos.pas"/>
+			<DCCReference Include="UCon0013.pas">
+				<Form>Con0013</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0018.pas">
+				<Form>Mov0018</Form>
+			</DCCReference>
+			<DCCReference Include="UCon0014.pas">
+				<Form>Con0014</Form>
+			</DCCReference>
+			<DCCReference Include="UCon0015.pas">
+				<Form>Con0015</Form>
+			</DCCReference>
+			<DCCReference Include="URel0007.pas">
+				<Form>Rel0007</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0019.pas">
+				<Form>Mov0019</Form>
+			</DCCReference>
+			<DCCReference Include="UGravaLogScreen.pas"/>
+			<DCCReference Include="UCad0010.pas">
+				<Form>Cad0010</Form>
+			</DCCReference>
+			<DCCReference Include="UCad0009.pas">
+				<Form>Cad0009</Form>
+			</DCCReference>
+			<DCCReference Include="UCad0011.pas">
+				<Form>Cad0011</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0020.pas">
+				<Form>Mov0020</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0021.pas">
+				<Form>MOV0021</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0022.pas">
+				<Form>MOV0022</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0023.pas">
+				<Form>MOV0023</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0024.pas">
+				<Form>MOV0024</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0025.pas">
+				<Form>MOV0025</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0026.pas">
+				<Form>Mov0026</Form>
+			</DCCReference>
+			<DCCReference Include="UDmTra.pas">
+				<Form>DmTra</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="UMov0027.pas">
+				<Form>Mov0027</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0028.pas">
+				<Form>Mov0028</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0029.pas">
+				<Form>Mov0029</Form>
+			</DCCReference>
+			<DCCReference Include="UCon0016.pas">
+				<Form>CON0016</Form>
+			</DCCReference>
+			<DCCReference Include="UCon0017.pas">
+				<Form>Con0017</Form>
+			</DCCReference>
+			<DCCReference Include="UCon0018.pas">
+				<Form>CON0018</Form>
+			</DCCReference>
+			<DCCReference Include="UCad0012.pas">
+				<Form>Cad0012</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0033.pas">
+				<Form>Mov0033</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0030.pas">
+				<Form>Mov0030</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0031.pas">
+				<Form>Mov0031</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0032.pas">
+				<Form>Mov0032</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0034.pas">
+				<Form>Mov0034</Form>
+			</DCCReference>
+			<DCCReference Include="URel0008.pas">
+				<Form>Rel0008</Form>
+			</DCCReference>
+			<DCCReference Include="UCon0020.pas">
+				<Form>Con0020</Form>
+			</DCCReference>
+			<DCCReference Include="UCon0021.pas">
+				<Form>CON0021</Form>
+			</DCCReference>
+			<DCCReference Include="UCon0019.pas">
+				<Form>Con0019</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0035.pas">
+				<Form>MOV0035</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0036.pas">
+				<Form>Mov0036</Form>
+			</DCCReference>
+			<DCCReference Include="UCai0014.pas">
+				<Form>Cai0014</Form>
+			</DCCReference>
+			<DCCReference Include="UCon0022.pas">
+				<Form>Con0022</Form>
+			</DCCReference>
+			<DCCReference Include="UCon0023.pas">
+				<Form>Con0023</Form>
+			</DCCReference>
+			<DCCReference Include="UCon0024.pas">
+				<Form>Con0024</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0037.pas">
+				<Form>Mov0037</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0038.pas">
+				<Form>Mov0038</Form>
+			</DCCReference>
+			<DCCReference Include="UMov0039.pas">
+				<Form>Mov0039</Form>
+			</DCCReference>
+			<DCCReference Include="UDmFis.pas">
+				<Form>DmFis</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="UCad0006.pas">
+				<Form>Cad0006</Form>
+			</DCCReference>
+			<DCCReference Include="UBrvISO.pas"/>
+			<DCCReference Include="UCon0025.pas">
+				<Form>Con0025</Form>
+			</DCCReference>
+			<None Include="ModelSupport_Logos\default.txaPackage"/>
+			<None Include="ModelSupport_Logos\default.txvpck"/>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')" Project="$(BDS)\Bin\CodeGear.Delphi.Targets"/>
+		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\8.0\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\8.0\UserTools.proj"/>
+		<ProjectExtensions>
+			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Delphi.Personality>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">False</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
+						<VersionInfo Name="MajorVer">1</VersionInfo>
+						<VersionInfo Name="MinorVer">0</VersionInfo>
+						<VersionInfo Name="Release">0</VersionInfo>
+						<VersionInfo Name="Build">0</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="Locale">1046</VersionInfo>
+						<VersionInfo Name="CodePage">1252</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName"/>
+						<VersionInfoKeys Name="FileDescription"/>
+						<VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName"/>
+						<VersionInfoKeys Name="LegalCopyright"/>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename"/>
+						<VersionInfoKeys Name="ProductName"/>
+						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments"/>
+					</VersionInfoKeys>
+					<Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dclbde150.bpl">Embarcadero BDE DB Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dclmcn150.bpl">Embarcadero DataSnap Connection Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dclib150.bpl">Embarcadero InterBase Express Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dclado150.bpl">Embarcadero ADO DB Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dclwebsnap150.bpl">Embarcadero WebSnap Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dclDataSnapClient150.bpl">Embarcadero DBExpress DataSnap Client Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dcldbxcds150.bpl">Embarcadero SimpleDataset Component (DBX)</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dcloffice2k150.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dclofficexp150.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+					</Excluded_Packages>
+					<Source>
+						<Source Name="MainSource">Logos.dpr</Source>
+					</Source>
+				</Delphi.Personality>
+				<Platforms>
+					<Platform value="Win32">True</Platform>
+				</Platforms>
+				<ModelSupport>True</ModelSupport>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+	</Project>

@@ -1,0 +1,75 @@
+object dm: Tdm
+  OnCreate = DataModuleCreate
+  OnDestroy = DataModuleDestroy
+  OldCreateOrder = False
+  left = 239
+  top = 180
+  Height = 143
+  HorizontalOffset = 495
+  VerticalOffset = 323
+  Width = 406
+  object TcpServer: TACBrTCPServer
+    IP = '0.0.0.0'
+    Port = '0'
+    TimeOut = 10000
+    Terminador = '#13,#10,#46,#13,#10'
+    OnConecta = TcpServerConecta
+    OnDesConecta = TcpServerDesConecta
+    OnRecebeDados = TcpServerRecebeDados
+    left = 36
+    top = 12
+  end
+  object ACBrCHQ1: TACBrCHQ
+    Porta = 'COM1'
+    left = 36
+    top = 72
+  end
+  object ACBrGAV1: TACBrGAV
+    Porta = 'COM1'
+    AberturaAntecipada = aaException
+    left = 111
+    top = 72
+  end
+  object ACBrDIS1: TACBrDIS
+    Porta = 'COM1'
+    IntervaloEnvioBytes = 3
+    left = 186
+    top = 72
+  end
+  object ACBrLCB1: TACBrLCB
+    Porta = 'Sem Leitor'
+    Sufixo = '#13'
+    ExcluirSufixo = False
+    Intervalo = 100
+    OnLeCodigo = ACBrLCB1LeCodigo
+    left = 261
+    top = 72
+  end
+  object ACBrRFD1: TACBrRFD
+    OnGetKeyRSA = ACBrRFD1GetKeyRSA
+    left = 337
+    top = 72
+  end
+  object ACBrBAL1: TACBrBAL
+    Porta = 'COM1'
+    MonitorarBalanca = True
+    left = 337
+    top = 12
+  end
+  object ACBrETQ1: TACBrETQ
+    Porta = 'LPT1'
+    left = 261
+    top = 12
+  end
+  object ACBrCEP1: TACBrCEP
+    ProxyPort = '8080'
+    OnAntesAbrirHTTP = ACBrCEP1AntesAbrirHTTP
+    left = 111
+    top = 12
+  end
+  object ACBrIBGE1: TACBrIBGE
+    ProxyPort = '8080'
+    left = 186
+    top = 12
+  end
+end

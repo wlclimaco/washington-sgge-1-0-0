@@ -1,0 +1,460 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- Action for Group CRUD -->
+	<package name="mlc-smartpoint" extends="mlc-default" namespace="/smartpoint">
+		<!-- Render main page -->
+		<action name="ajax.list" class="smartpointPageAction">
+			<param name="jsComponents">mlc-smartpoint</param>
+			<result name="success">/pages/smartpoint/smartpoint_main.jsp</result>
+			<result name="input">/pages/smartpoint/smartpoint_main.jsp</result>
+		</action>
+		
+		<!-- Ajax callback for smartpoint search -->
+		<action name="search" class="smartpointSearchAjaxAction" method="search">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- Parameterized JavaScript settings -->
+		<action name="settings" class="smartpointSettingsAction"
+			method="settings">
+			<param name="menuItem">smartpoints</param>
+			<result name="success" type="freemarker">/freemarker/smartpoint_settings.js
+			</result>
+		</action>
+		
+		<!-- Filter Tag Container -->
+		<action name="include.filterTagContainer" class="smartpointPageAction">
+			<result name="success">/pages/smartpoint/smartpoint_tag_filter.jsp</result>
+		</action>
+		
+		<!-- addToGroup dialog page -->
+		<action name="include.addToGroup" class="smartpointPageAction">
+			<result name="success">/pages/smartpoint/smartpoint_add_to_group.jsp</result>
+		</action>
+		
+		<!-- removeFromGroup dialog page -->
+		<action name="include.removeFromGroup" class="smartpointPageAction">
+			<result name="success">/pages/smartpoint/smartpoint_remove_from_group.jsp</result>
+		</action>
+				
+		<!-- Apply schedule dialog page -->
+		<action name="include.applyEventSchedule" class="smartpointPageAction">
+			<result name="success">/pages/smartpoint/smartpoint_apply_event_schedule.jsp</result>
+		</action>
+		
+		<!-- Apply Offset schedule dialog page -->
+		<action name="include.applyOffsetSchedule" class="smartpointPageAction">
+			<result name="success">/pages/smartpoint/smartpoint_apply_offset_schedule.jsp</result>
+		</action>
+		
+		<!-- Reset schedule dialog page -->
+		<action name="include.resetEventSchedule" class="smartpointPageAction">
+			<result name="success">/pages/smartpoint/smartpoint_remove_event_schedule.jsp</result>
+		</action>
+		
+		<!-- Edit Light Status dialog page -->
+		<action name="editLightStatus" class="smartpointPageAction">
+			<result name="success">/pages/smartpoint/smartpoint_edit_dialog.jsp</result>
+		</action>
+
+
+		<!-- Edit Light Status dialog page -->
+		<action name="include.editLightStatusInclude" class="smartpointPageAction">
+			<result name="success">/pages/smartpoint/smartpoint_edit_dialog.jsp</result>
+		</action>
+		
+		<!-- Page Size dialog page -->
+		<action name="include.pageSizeInclude" class="smartpointPageAction">
+			<result name="success">/pages/smartpoint/smartpoint_page_size_include.jsp</result>
+		</action>
+			
+		<!-- Long Running Process Dialog -->
+		<action name="include.longRunningProcessDialog" class="smartpointPageAction">
+			<result name="success">/pages/smartpoint/smartpoint_process_dialog.jsp</result>
+		</action>
+		
+		<!-- Long Running Process Recent Request Dialog -->
+		<action name="include.longRunningProcessRecent" class="smartpointPageAction">
+			<result name="success">/pages/process/long_running_process_recent_request.jsp</result>
+		</action>
+		
+		<action name="ajax.openSmartPointDetailComponent" class="smartpointDetailPageAction">
+			<result name="success">/commons/pages/controller/modules_controller_main.jsp</result>
+			<result name="input">/commons/pages/controller/modules_controller_main.jsp</result>
+		</action>		
+		
+		<!-- Render SmartPointDetails  -->
+		<action name="ajax.openSmartPointDetailHeader" class="smartpointDetailPageAction" method="openSmartPointDetail">
+			<param name="jsComponents">mlc-smartpoint-detail-header</param>
+			<result name="success">/commons/pages/controller/modules_controller_main.jsp</result>
+			<result name="input">/commons/pages/controller/modules_controller_main.jsp</result>
+		</action>
+		
+		<!-- Render SmartPointDetails  -->
+		<action name="ajax.smartpoint.detail.main" class="smartpointDetailPageAction">
+			<param name="jsComponents">mlc-smartpoint-detail</param>
+			<result name="success">/pages/smartpoint/smartpoint_detail_main.jsp</result>
+		</action>
+
+		<!-- Render SmartPointDetails  -->
+		<action name="ajax.fetchLightById" class="smartpointDetailPageAction" method="fetchLightById">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- Get Status Message  -->
+		<action name="ajax.fetchStatusMessage" class="smartpointDetailAjaxAction" method="fetchStatusMessage">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+
+		<!-- Render SmartPointDetails  -->
+		<action name="ajax.tabs.smartpoint.detail.about" class="smartpointDetailPageAction">
+			<result name="success">/commons/pages/controller/module_about_this_light.jsp</result>
+		</action>		
+		
+		<!-- Render SmartPointDetails  -->
+		<action name="ajax.tabs.smartpoint.detail.history" class="smartpointDetailPageAction">
+			<param name="jsComponents">mlc-smartpoint-detail-history</param>
+			<result name="success">/pages/smartpoint/smartpoint_detail_history.jsp</result>
+		</action>
+		
+		<!-- Render SmartPointDetails  -->
+		<action name="ajax.tabs.smartpoint.detail.ecoMode" class="smartpointDetailPageAction">
+			<param name="jsComponents">mlc-smartpoint-detail-eco-mode</param>
+			<result name="success">/pages/smartpoint/smartpoint_detail_eco_mode.jsp</result>
+		</action>
+		
+		<!-- Render SmartPointDetails  -->
+		<action name="ajax.loadSmartPointDetailHistory" class="smartpointHistorySearchAjaxAction" method="search">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- createGroup a group page -->
+		<action name="createGroupPage" class="groupCreatePageAction" method="createGroupPage">
+			<param name="jsComponents">mlc-group-create</param>
+			<result name="success">/pages/group/group_create.jsp</result>
+		</action>
+		
+		<!-- Render Create Schedule Page -->
+		<action name="createOffsetSchedule" class="createSchedulePageAction">
+			<param name="jsComponents">mlc-schedulecreate</param>
+			<result name="success">/pages/schedule/schedule_create.jsp</result>
+		</action>
+		<!-- Render Create Event Schedule Page -->
+		<action name="createEventSchedule" class="createSchedulePageAction">
+			<param name="jsComponents">mlc-schedulecreate</param>
+			<result name="success">/pages/schedule/schedule_create_event.jsp</result>
+		</action>
+		
+		<action name="include.event" class="createSchedulePageAction">
+			<result name="success">/pages/schedule/schedule_create_event_include.jsp</result>
+		</action>
+		
+		<!-- insertGroup a group page -->
+		<action name="insertGroup" class="groupCreatePageAction" method="insertGroup">
+			<result name="success" type="redirectAction">../group/list.action</result>
+			<param name="jsComponents">mlc-group-create</param>
+			<result name="error">/pages/group/group_create.jsp</result>
+		</action>
+		
+		<!-- Apply Protected/Listen  -->
+		<action name="updateListLightProtected" class="smartpointAjaxAction" method="updateListLightProtected">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>	
+		
+		<!-- Reset Values  -->
+		<action name="ajax.resetValues" class="smartpointDetailAjaxAction" method="resetValues">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- Get Status Message  -->
+		<action name="ajax.fetchStatusMessage" class="smartpointDetailAjaxAction" method="fetchStatusMessage">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+				
+		<!-- Update Light Status  -->
+		<action name="ajax.updateLightStatus" class="smartpointAjaxAction" method="updateLightStatus">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>	
+			
+		<!-- Messages Status Alarms Warnings  -->
+		<action name="ajax.currentAlarmStatus" class="smartpointDetailAjaxAction" method="currentAlarmStatus">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- Clear Status  -->
+		<action name="clearStatus" class="smartpointDetailAjaxAction" method="clearStatus">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+				
+		<!-- Force Light Status  -->
+		<action name="forceLightStatus" class="smartpointDetailAjaxAction" method="forceLightStatus">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+			
+		<!-- Check Update Light Status -->
+		<action name="checkUpdatedLight" class="smartpointDetailAjaxAction" method="checkUpdatedLightStatus">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+
+		<!-- Remove Schedule -->
+		<action name="removeSchedule" class="smartpointDetailAjaxAction" method="removeSchedule">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- Apply Schedule -->
+		<action name="applySchedule" class="smartpointDetailAjaxAction" method="applySchedule">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+
+		<!-- Lock Light -->
+		<action name="updateLightProtected" class="smartpointDetailAjaxAction" method="updateLightProtected">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+						
+		<!-- Render Update Offset Schedule Page -->
+		<action name="updateOffset" class="createSchedulePageAction" method="openUpdateOffSetSchedule">
+			<param name="jsComponents">mlc-schedulecreate</param>
+			<result name="success">/pages/schedule/schedule_create.jsp</result>
+		</action>
+		
+		<!-- Render Update Event Schedule Page -->
+		<action name="updateEvent" class="createSchedulePageAction" method="openUpdateEventSchedule">
+			<param name="jsComponents">mlc-schedulecreate</param>
+			<result name="success">/pages/schedule/schedule_create_event.jsp</result>
+		</action>
+		
+		<action name="include.event" class="createSchedulePageAction">
+			<result name="success">/pages/schedule/schedule_create_event_include.jsp</result>
+		</action>
+		
+		<action name="include.saveSearch" class="smartpointPageAction">
+			<result name="success">/pages/smartpoint/smartpoint_save_search.jsp</result>
+		</action>
+		
+				
+		<!-- Insert Save Search -->
+		<action name="saveSearch" class="smartpointAjaxAction" method="saveSearch">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- Dialog Box with process summary -->
+		<action name="include.processingSummary" class="smartpointDetailPageAction" method="fetchProcessById">
+			<result name="success">/pages/process/processing_summary_include.jsp</result>
+		</action>
+		
+		<!-- Insert Smartpoint to tag -->
+		<action name="insertSmartpointToTag" class="smartpointDetailAjaxAction" method="insertSmartpointToTag">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">smartpointDetailResult</param>
+			</result>
+		</action>
+		
+		<!-- Remove Smartpoint to tag -->
+		<action name="removeSmartpointToTag" class="smartpointDetailAjaxAction" method="removeSmartpointToTag">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">smartpointDetailResult</param>
+			</result>
+		</action>
+		
+		<!-- add tag dialog page -->
+		<action name="include.addTag" class="smartpointPageAction">
+			<result name="success">/pages/smartpoint/smartpoint_add_tag.jsp</result>
+		</action>
+
+		<!-- Get Light Info by Id -->
+		<action name="getSmartpointInfo" class="smartpointAjaxAction" method="getLightInfo">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- Insert List Smartpoints to tag -->
+		<action name="insertListSmartpointToTag" class="smartpointAjaxAction" method="insertListSmartpointToTag">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- remove tag dialog page -->
+		<action name="include.removeTag" class="smartpointPageAction">
+			<result name="success">/pages/smartpoint/smartpoint_remove_tag.jsp</result>
+		</action>
+
+		<!-- Remove List Smartpoints to tag -->
+		<action name="removeListSmartpointToTag" class="smartpointAjaxAction" method="removeListSmartpointToTag">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- Clear Smartpoints Alerts-->
+		<action name="clearSmartPointsAlerts" class="smartpointAjaxAction" method="clearSmartPointsAlerts">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- Dialog Box with alert summary -->
+		<action name="include.alertDetails" class="smartpointDetailPageAction">
+			<result name="success">/pages/smartpoint/smartpoint_alert_detail.jsp</result>
+		</action>
+		
+		<!-- Dialog Box with Eco-Mode Baseline Detail -->
+		<action name="include.baselineEcoMode" class="smartpointDetailPageAction">
+			<result name="success">/pages/smartpoint/smartpoint_baseline_eco_mode.jsp</result>
+		</action>
+		
+		<!-- Update Smart Points Status-->
+		<action name="updateSmartPointsStatus" class="smartpointAjaxAction" method="updateSmartPointsStatus">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- Update Smart Points Status-->
+		<action name="updateLightProperty" class="smartpointDetailAjaxAction" method="updateLightProperty">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- Ajax callback for lights generateFile -->
+		<action name="generateFile" class="smartpointSearchAjaxAction" method="generateFileCSV">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+
+		<!-- Ajax callback for lights generateFile -->
+		<action name="generateFileHistory" class="smartpointSearchAjaxAction" method="generateFileCSVHistory">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+
+		<!-- Ajax callback for lights generateFile -->
+		<action name="insertProcess" class="smartpointSearchAjaxAction" method="insertProcess">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+				
+		<!-- Insert Filters and Columns of the SmartPoints -->
+		<action name="ajax.insertColumnFilter" class="smartpointAjaxAction" method="insertColumnFilter">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- Action for GROUP - Group Page Fetch -->
+		<action name="ajax.fetchLightsToMap" class="smartpointAjaxAction" method="fetchLightsToMap">
+			<result name="success" type="json">
+				<param name="excludeNullProperties">true</param>
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<!-- Update BaseLine EcoMode  -->
+		<action name="ajax.updateEcoModeBaseLine" class="smartpointDetailAjaxAction" method="updateBaseLine">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+
+		<!-- Fill EcoMode Table  -->
+		<action name="ajax.fetchEcoMode" class="smartpointDetailAjaxAction" method="fetchEcoMode">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+
+		<!-- Fill EcoMode Chart  -->
+		<action name="ajax.fetchEcoModeChart" class="smartpointDetailAjaxAction" method="fetchEcoModeChart">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>				
+		
+		<!-- Insert Process for export csv eco mode  -->
+		<action name="ajax.insertProcessEcoMode" class="smartpointDetailAjaxAction" method="insertProcessEcoMode">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>	
+		
+		<!-- Insert Process for export csv eco mode  -->
+		<action name="generateFileEcoMode" class="smartpointDetailAjaxAction" method="generateFileCSVEcoMode">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>						
+	</package>
+</struts>
+		

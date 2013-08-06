@@ -1,0 +1,95 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+
+namespace LogosMobile
+{
+    public partial class SIS007 : Form
+    {        
+        private string NrMapa;
+        private bool snfinaliza = false;
+
+        public bool Snfinaliza
+        {
+            get { return snfinaliza; }
+            set { snfinaliza = value; }
+        }
+
+        public string Etiqueta()
+        {
+            return edtCodigo.Text.PadLeft(18, '0') + "          " + "      " + "      " + 
+                   edtSSCC.Text.PadLeft(20,'0');
+        }        
+
+        public SIS007(string nrmapa)
+        {
+            InitializeComponent();
+            NrMapa = nrmapa;            
+
+            edtCodigo.Focus();
+        }
+
+        private void SIS007_KeyDown(object sender, KeyEventArgs e)
+        {            
+            if ((e.KeyCode == System.Windows.Forms.Keys.Enter))
+            {
+                if (edtCodigo.Focused)
+                {
+                    edtSSCC.Focus();
+                }
+                else
+                {
+                    if (edtSSCC.Focused)
+                    {
+                        DialogResult = DialogResult.OK;
+                    }
+                }
+            }
+
+        }
+
+        private void btnSair_Click(object sender, EventArgs e)
+        {
+            if (Controller.MessageDlg("Deseja realmente cancelar esta saída?"))
+            {
+                this.Refresh();                
+                pnlAguarde.Visible = true;
+                pnlAguarde.Refresh();
+
+                if (Controller.WsLogos.Ping())
+                {
+                    if (Controller.WsLogos.SaidaFinalizar(NrMapa, string.Empty, "", "S"))
+                    {
+                        this.DialogResult = DialogResult.Cancel;
+                    }
+                    else
+                    {
+                        Controller.ShowMessage("Falha durante procedimento!");
+                        lblStatus.Text = "Tente novamente...";
+                        pnlAguarde.Refresh();
+                    }
+                }
+            }
+        }
+
+        private void BtnFinalizar_Click(object sender, EventArgs e)
+        {
+            edtCodigo.Text = string.Empty;
+            edtSSCC.Text = string.Empty;
+
+            if (Controller.MessageDlg("Deseja realmente finalizar esta operação?"))
+            {
+                Snfinaliza = true;
+                this.DialogResult = DialogResult.OK;
+            }
+            else
+            {
+                edtCodigo.Focus();
+            }
+        }        
+    }
+}

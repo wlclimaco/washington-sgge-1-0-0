@@ -1,0 +1,236 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7BDEB3AE-1A9F-4F18-8236-37C5E2AAD209}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LogosMobile</RootNamespace>
+    <AssemblyName>LogosMobile</AssemblyName>
+    <ProjectTypeGuids>{4D628B5B-2FBC-4AA6-8C16-197242AEB884};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <PlatformFamilyName>PocketPC</PlatformFamilyName>
+    <PlatformID>3C41C503-53EF-4c2a-8DD4-A8217CAD115E</PlatformID>
+    <OSVersion>4.20</OSVersion>
+    <DeployDirSuffix>BrMobile</DeployDirSuffix>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FormFactorID>
+    </FormFactorID>
+    <ApplicationIcon>Bravo2.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;$(PlatformFamilyName)</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <FileAlignment>512</FileAlignment>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;$(PlatformFamilyName)</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <FileAlignment>512</FileAlignment>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.WindowsCE.Forms" />
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SqlServerCe, Version=3.0.3600.0, Culture=neutral, PublicKeyToken=3be235df1c8d2ad3, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AcessoBD.cs" />
+    <Compile Include="BayerEntrada.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BayerSaida.cs" />
+    <Compile Include="Controller.cs" />
+    <Compile Include="LogosWS.cs" />
+    <Compile Include="SIS002.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SIS002.Designer.cs">
+      <DependentUpon>SIS002.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SIS001.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SIS001.Designer.cs">
+      <DependentUpon>SIS001.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SIS000.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SIS000.Designer.cs">
+      <DependentUpon>SIS000.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="SIS002.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SIS002.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SIS001.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SIS001.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SIS000.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SIS000.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SIS003.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SIS003.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SIS004.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SIS004.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SIS005.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SIS005.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SIS006.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SIS006.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SIS007.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SIS007.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SIS008.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SIS008.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SIS009.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SIS009.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="SIS003.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SIS003.Designer.cs">
+      <DependentUpon>SIS003.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SIS004.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SIS004.Designer.cs">
+      <DependentUpon>SIS004.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SIS005.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SIS005.Designer.cs">
+      <DependentUpon>SIS005.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SIS006.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SIS006.Designer.cs">
+      <DependentUpon>SIS006.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SIS007.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SIS007.Designer.cs">
+      <DependentUpon>SIS007.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SIS008.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SIS008.Designer.cs">
+      <DependentUpon>SIS008.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SIS009.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SIS009.Designer.cs">
+      <DependentUpon>SIS009.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\LogosWebService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AcessoBD.cd" />
+    <None Include="Resources\Background.jpg" />
+    <None Include="Web References\LogosWebService\ILogosWSservice.wsdl" />
+    <None Include="Web References\LogosWebService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://192.10.10.67:8080/logos/logosws.exe/wsdl/ILogosWS">
+      <UrlBehavior>Static</UrlBehavior>
+      <RelPath>Web References\LogosWebService\</RelPath>
+      <UpdateFromURL>http://192.10.10.67:8080/logos/logosws.exe/wsdl/ILogosWS</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>
+      </CachedAppSettingsObjectName>
+      <CachedSettingsPropName>
+      </CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bravo2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
+  </ItemGroup>
+  <Import Condition="'$(TargetFrameworkVersion)' == 'v1.0'" Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.v1.targets" />
+  <Import Condition="'$(TargetFrameworkVersion)' == 'v2.0'" Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}">
+        <HostingProcess disable="1" />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

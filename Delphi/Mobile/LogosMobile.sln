@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogosMobile", "BrMobile\LogosMobile.csproj", "{7BDEB3AE-1A9F-4F18-8236-37C5E2AAD209}"
+EndProject
+Project("{B900F1C2-3D47-4FEC-85B3-04AAF18C3634}") = "LogosInstall", "BrCab\LogosInstall\LogosInstall\LogosInstall.vddproj", "{8B539E93-FA97-40D4-9062-4E66E3326998}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7BDEB3AE-1A9F-4F18-8236-37C5E2AAD209}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BDEB3AE-1A9F-4F18-8236-37C5E2AAD209}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BDEB3AE-1A9F-4F18-8236-37C5E2AAD209}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{7BDEB3AE-1A9F-4F18-8236-37C5E2AAD209}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BDEB3AE-1A9F-4F18-8236-37C5E2AAD209}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BDEB3AE-1A9F-4F18-8236-37C5E2AAD209}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{8B539E93-FA97-40D4-9062-4E66E3326998}.Debug|Any CPU.ActiveCfg = Debug
+		{8B539E93-FA97-40D4-9062-4E66E3326998}.Debug|Any CPU.Build.0 = Debug
+		{8B539E93-FA97-40D4-9062-4E66E3326998}.Release|Any CPU.ActiveCfg = Release
+		{8B539E93-FA97-40D4-9062-4E66E3326998}.Release|Any CPU.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

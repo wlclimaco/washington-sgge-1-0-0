@@ -1,0 +1,292 @@
+namespace LogosMobile
+{
+    partial class SIS005
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SIS005));
+            this.lblAviso = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnBip1 = new System.Windows.Forms.Button();
+            this.BtnFinalizar = new System.Windows.Forms.Button();
+            this.lblNrNota = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.ImgTeclado = new System.Windows.Forms.PictureBox();
+            this.btnSair = new System.Windows.Forms.Button();
+            this.lblEtiqueta = new System.Windows.Forms.Label();
+            this.edtCodigo = new System.Windows.Forms.TextBox();
+            this.lblNrMapa = new System.Windows.Forms.Label();
+            this.lblMapa = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.edtQtde = new System.Windows.Forms.TextBox();
+            this.IptPnlSenha = new Microsoft.WindowsCE.Forms.InputPanel();
+            this.pnlStatus = new System.Windows.Forms.Panel();
+            this.lblStatus = new System.Windows.Forms.Label();
+            this.panel2.SuspendLayout();
+            this.pnlStatus.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // lblAviso
+            // 
+            this.lblAviso.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.lblAviso.Location = new System.Drawing.Point(3, 236);
+            this.lblAviso.Name = "lblAviso";
+            this.lblAviso.Size = new System.Drawing.Size(209, 44);
+            this.lblAviso.Text = "Favor, localizar sinal de rede e repetir operação.";
+            this.lblAviso.Visible = false;
+            // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.Color.White;
+            this.button3.Location = new System.Drawing.Point(112, 3);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(35, 20);
+            this.button3.TabIndex = 43;
+            this.button3.Text = "Bip4";
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.White;
+            this.button2.Location = new System.Drawing.Point(77, 3);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(35, 20);
+            this.button2.TabIndex = 42;
+            this.button2.Text = "Bip3";
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(42, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(35, 20);
+            this.button1.TabIndex = 41;
+            this.button1.Text = "Bip2";
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // btnBip1
+            // 
+            this.btnBip1.BackColor = System.Drawing.Color.White;
+            this.btnBip1.Location = new System.Drawing.Point(7, 3);
+            this.btnBip1.Name = "btnBip1";
+            this.btnBip1.Size = new System.Drawing.Size(35, 20);
+            this.btnBip1.TabIndex = 40;
+            this.btnBip1.Text = "Bip1";
+            this.btnBip1.Click += new System.EventHandler(this.btnBip1_Click);
+            // 
+            // BtnFinalizar
+            // 
+            this.BtnFinalizar.BackColor = System.Drawing.Color.White;
+            this.BtnFinalizar.Location = new System.Drawing.Point(3, 213);
+            this.BtnFinalizar.Name = "BtnFinalizar";
+            this.BtnFinalizar.Size = new System.Drawing.Size(97, 20);
+            this.BtnFinalizar.TabIndex = 39;
+            this.BtnFinalizar.Text = "Finalizar";
+            this.BtnFinalizar.Visible = false;
+            this.BtnFinalizar.Click += new System.EventHandler(this.Finalizar_Click);
+            // 
+            // lblNrNota
+            // 
+            this.lblNrNota.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.lblNrNota.Location = new System.Drawing.Point(67, 87);
+            this.lblNrNota.Name = "lblNrNota";
+            this.lblNrNota.Size = new System.Drawing.Size(61, 20);
+            this.lblNrNota.Text = "00000";
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.label2.Location = new System.Drawing.Point(0, 87);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(61, 20);
+            this.label2.Text = "Nota:";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.ImgTeclado);
+            this.panel2.Controls.Add(this.btnSair);
+            this.panel2.Controls.Add(this.button2);
+            this.panel2.Controls.Add(this.button3);
+            this.panel2.Controls.Add(this.btnBip1);
+            this.panel2.Controls.Add(this.button1);
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(240, 27);
+            // 
+            // ImgTeclado
+            // 
+            this.ImgTeclado.Image = ((System.Drawing.Image)(resources.GetObject("ImgTeclado.Image")));
+            this.ImgTeclado.Location = new System.Drawing.Point(160, 4);
+            this.ImgTeclado.Name = "ImgTeclado";
+            this.ImgTeclado.Size = new System.Drawing.Size(41, 20);
+            this.ImgTeclado.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ImgTeclado.Click += new System.EventHandler(this.ImgTeclado_Click);
+            // 
+            // btnSair
+            // 
+            this.btnSair.BackColor = System.Drawing.Color.White;
+            this.btnSair.Location = new System.Drawing.Point(205, 4);
+            this.btnSair.Name = "btnSair";
+            this.btnSair.Size = new System.Drawing.Size(32, 20);
+            this.btnSair.TabIndex = 11;
+            this.btnSair.Text = "Sair";
+            this.btnSair.Click += new System.EventHandler(this.btnSair_Click);
+            // 
+            // lblEtiqueta
+            // 
+            this.lblEtiqueta.Location = new System.Drawing.Point(3, 113);
+            this.lblEtiqueta.Name = "lblEtiqueta";
+            this.lblEtiqueta.Size = new System.Drawing.Size(61, 20);
+            this.lblEtiqueta.Text = "Código";
+            // 
+            // edtCodigo
+            // 
+            this.edtCodigo.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular);
+            this.edtCodigo.Location = new System.Drawing.Point(3, 136);
+            this.edtCodigo.Name = "edtCodigo";
+            this.edtCodigo.Size = new System.Drawing.Size(237, 26);
+            this.edtCodigo.TabIndex = 38;
+            // 
+            // lblNrMapa
+            // 
+            this.lblNrMapa.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.lblNrMapa.Location = new System.Drawing.Point(67, 58);
+            this.lblNrMapa.Name = "lblNrMapa";
+            this.lblNrMapa.Size = new System.Drawing.Size(61, 20);
+            this.lblNrMapa.Text = "00000";
+            // 
+            // lblMapa
+            // 
+            this.lblMapa.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.lblMapa.Location = new System.Drawing.Point(0, 58);
+            this.lblMapa.Name = "lblMapa";
+            this.lblMapa.Size = new System.Drawing.Size(61, 20);
+            this.lblMapa.Text = "Mapa:";
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.label1.Location = new System.Drawing.Point(25, 30);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(187, 18);
+            this.label1.Text = "Conferencia de Saída";
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(64, 182);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(70, 16);
+            this.label3.Text = "Quantidade";
+            // 
+            // edtQtde
+            // 
+            this.edtQtde.Enabled = false;
+            this.edtQtde.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular);
+            this.edtQtde.Location = new System.Drawing.Point(135, 178);
+            this.edtQtde.Name = "edtQtde";
+            this.edtQtde.Size = new System.Drawing.Size(105, 26);
+            this.edtQtde.TabIndex = 51;
+            // 
+            // pnlStatus
+            // 
+            this.pnlStatus.Controls.Add(this.lblStatus);
+            this.pnlStatus.Location = new System.Drawing.Point(0, 113);
+            this.pnlStatus.Name = "pnlStatus";
+            this.pnlStatus.Size = new System.Drawing.Size(240, 167);
+            this.pnlStatus.Visible = false;
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold);
+            this.lblStatus.Location = new System.Drawing.Point(50, 85);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(145, 38);
+            this.lblStatus.Text = "Aguarde...";
+            // 
+            // SIS005
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(240, 320);
+            this.Controls.Add(this.pnlStatus);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.edtQtde);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblAviso);
+            this.Controls.Add(this.BtnFinalizar);
+            this.Controls.Add(this.lblNrNota);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.lblEtiqueta);
+            this.Controls.Add(this.edtCodigo);
+            this.Controls.Add(this.lblNrMapa);
+            this.Controls.Add(this.lblMapa);
+            this.KeyPreview = true;
+            this.Location = new System.Drawing.Point(0, 0);
+            this.Name = "SIS005";
+            this.Text = "SIS005";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Closed += new System.EventHandler(this.SIS005_Closed);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SIS005_KeyDown);
+            this.panel2.ResumeLayout(false);
+            this.pnlStatus.ResumeLayout(false);
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Label lblAviso;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnBip1;
+        private System.Windows.Forms.Button BtnFinalizar;
+        private System.Windows.Forms.Label lblNrNota;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button btnSair;
+        private System.Windows.Forms.Label lblEtiqueta;
+        private System.Windows.Forms.TextBox edtCodigo;
+        private System.Windows.Forms.Label lblNrMapa;
+        private System.Windows.Forms.Label lblMapa;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox edtQtde;
+        private Microsoft.WindowsCE.Forms.InputPanel IptPnlSenha;
+        private System.Windows.Forms.PictureBox ImgTeclado;
+        private System.Windows.Forms.Panel pnlStatus;
+        private System.Windows.Forms.Label lblStatus;
+    }
+}

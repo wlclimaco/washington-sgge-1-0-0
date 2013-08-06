@@ -1,0 +1,94 @@
+namespace LogosMobile
+{
+    partial class SIS007
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.lblEtiqueta = new System.Windows.Forms.Label();
+            this.edtCodigo = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.SuspendLayout();
+            // 
+            // lblEtiqueta
+            // 
+            this.lblEtiqueta.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.lblEtiqueta.Location = new System.Drawing.Point(3, 91);
+            this.lblEtiqueta.Name = "lblEtiqueta";
+            this.lblEtiqueta.Size = new System.Drawing.Size(83, 20);
+            this.lblEtiqueta.Text = "Produto";
+            // 
+            // edtCodigo
+            // 
+            this.edtCodigo.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular);
+            this.edtCodigo.Location = new System.Drawing.Point(3, 114);
+            this.edtCodigo.Name = "edtCodigo";
+            this.edtCodigo.Size = new System.Drawing.Size(237, 26);
+            this.edtCodigo.TabIndex = 40;
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.label1.Location = new System.Drawing.Point(0, 155);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(61, 20);
+            this.label1.Text = "SSCC";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular);
+            this.textBox1.Location = new System.Drawing.Point(0, 178);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(237, 26);
+            this.textBox1.TabIndex = 42;
+            // 
+            // SIS007
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(240, 320);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.lblEtiqueta);
+            this.Controls.Add(this.edtCodigo);
+            this.Location = new System.Drawing.Point(0, 0);
+            this.Name = "SIS007";
+            this.Text = "SIS007";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Label lblEtiqueta;
+        private System.Windows.Forms.TextBox edtCodigo;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBox1;
+    }
+}

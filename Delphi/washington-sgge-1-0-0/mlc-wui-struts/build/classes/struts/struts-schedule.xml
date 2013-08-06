@@ -1,0 +1,174 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="mlc-schedule" extends="mlc-default" namespace="/schedule">
+		<!-- Render Main Schedule Page -->
+		<action name="ajax.list" class="schedulePageAction">
+			<!-- <param name="requiresRole">Tower Configuration</param> -->
+			<param name="jsComponents">mlc-schedule</param>
+			<result name="success">/pages/schedule/schedule_main.jsp</result>
+		</action>
+		
+		<!-- Render Create Schedule Page -->
+		<action name="ajax.createOffsetSchedule" class="createSchedulePageAction">
+			<param name="jsComponents">mlc-schedule-offset-create</param>
+			<result name="success">/pages/schedule/schedule_create_offset.jsp</result>
+		</action>
+
+		<!-- Fill Update Offset Schedule Page -->
+		<action name="ajax.fillOffsetSchedule" class="createSchedulePageAction" method="fillOffsetSchedule">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+
+		<!-- Render Create Event Schedule Page -->
+		<action name="ajax.createEventSchedule" class="createSchedulePageAction">
+			<param name="jsComponents">mlc-schedule-event-create</param>
+			<result name="success">/pages/schedule/schedule_create_event.jsp
+			</result>
+		</action>
+
+		<!-- Fill Update Event Schedule Page -->
+		<action name="ajax.fillEventSchedule" class="createSchedulePageAction" method="fillEventSchedule">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+
+		<!-- Render Update Offset Schedule Page -->
+		<action name="ajax.updateOffsetSchedule" class="createSchedulePageAction"
+			method="openUpdateOffSetSchedule">
+			<param name="jsComponents">mlc-schedulecreate</param>
+			<result name="success">/pages/schedule/schedule_create.jsp</result>
+		</action>
+		<!-- Render Update Event Schedule Page -->
+		<action name="ajax.updateEventSchedule" class="createSchedulePageAction"
+			method="openUpdateEventSchedule">
+			<param name="jsComponents">mlc-schedulecreate</param>
+			<result name="success">/pages/schedule/schedule_create_event.jsp
+			</result>
+		</action>
+
+		<!-- Ajax callback for schedule search -->
+		<action name="search" class="scheduleSearchAjaxAction" method="search">
+			<!-- <param name="requiresRole">Tower Configuration</param> -->
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		<!-- Add smartpoints to a schedule -->
+		<action name="applyEventSchedule" class="scheduleAjaxAction"
+			method="applySchedule">
+			<!-- <param name="requiresRole">Tower Configuration</param> -->
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+
+		<!-- Add smartpoints to a schedule -->
+		<action name="applyOffsetSchedule" class="scheduleAjaxAction"
+			method="applySchedule">
+			<!-- <param name="requiresRole">Tower Configuration</param> -->
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		<!-- Remove smartpoints from a Event schedule -->
+		<action name="clearEventSchedule" class="scheduleAjaxAction"
+			method="clearSchedule">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+
+		<!-- Remove smartpoints from a Offset schedule -->
+		<action name="clearOffsetSchedule" class="scheduleAjaxAction"
+			method="clearSchedule">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		<!-- JavaScript Settings -->
+		<action name="settings" class="scheduleSettingsAction" method="settings">
+			<!-- <param name="requiresRole">Tower Configuration</param> -->
+			<param name="menuItem">schedules</param>
+			<result name="success" type="freemarker">/freemarker/schedule_settings.js
+			</result>
+		</action>
+		<!-- Create a schedule -->
+		<action name="createSchedule" class="createScheduleAjaxAction" method="createSchedule">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+
+		<!-- Update a schedule -->
+		<action name="updateSchedule" class="createScheduleAjaxAction"	method="updateSchedule">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+
+		<action name="include.event" class="createSchedulePageAction">
+			<result name="success">/pages/schedule/schedule_create_event_include.jsp
+			</result>
+		</action>
+
+		<action name="insertSchedule" class="createSchedulePageAction"
+			method="createSchedulePage">
+			<result name="success" type="chain">list</result>
+			<param name="jsComponents">mlc-schedulecreate</param>
+			<result name="error">/pages/schedule/schedule_create.jsp</result>
+		</action>
+
+		<!-- removeSchedule dialog page -->
+		<action name="include.deleteSchedule" class="schedulePageAction">
+			<result name="success">/pages/schedule/schedule_delete_dialog.jsp
+			</result>
+		</action>
+
+		<!-- Delete a schedule -->
+		<action name="deleteSchedule" class="scheduleAjaxAction" method="deleteSchedule">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+
+		<!-- Initiate Delete a schedule -->
+		<action name="initiateDeleteSchedule" class="scheduleAjaxAction" method="initiateDeleteSchedule">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		<!-- Action for GROUP - Group Page Fetch -->
+		<action name="ajax.fetchLightByScheduleToMap" class="scheduleAjaxAction" method="fetchLightByScheduleToMap">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,62 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- Action for DashBoard CRUD -->
+	<package name="mlc-dashboard" extends="mlc-default" namespace="/dashboard">
+
+		<!-- Render main page -->
+		<action name="ajax.list" class="dashBoardPageAction" method="loadPageData">
+			<param name="jsComponents">mlc-dashboard</param>
+			<result name="success">/pages/dashboard/dashboard_main.jsp</result>
+			<result name="input">/pages/dashboard_main.jsp</result>
+		</action>
+
+		<!-- Parameterized JavaScript settings -->
+		<action name="settings" class="dashboardSettingsAction"
+			method="settings">
+			<param name="menuItem">dashboard</param>
+			<result name="success" type="freemarker">/freemarker/dashboard_settings.js</result>
+		</action>
+
+		<!-- Render table light failure -->
+		<action name="search" class="dashboardSearchAjaxAction" method="search">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+
+		<!-- JSON Header -->
+		<action name="ajax.loadHeaderData" class="dashboardSearchAjaxAction" method="loadHeaderData">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+
+		<!-- JSON Light Control Table -->
+		<action name="ajax.loadLightControlTable" class="dashboardSearchAjaxAction" method="loadLightControlTable">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+
+		<!-- JSON to HighChart -->
+		<action name="ajax.loadHighchartsData" class="dashboardSearchAjaxAction" method="loadHighchartsData">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+	</package>
+</struts>		

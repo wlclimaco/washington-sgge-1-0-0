@@ -1,0 +1,276 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{41E77E5E-3300-41E8-9B18-4927A072FAB0}</ProjectGuid>
+			<MainSource>Bravo.dpk</MainSource>
+			<Base>True</Base>
+			<Config Condition="'$(Config)'==''">Debug</Config>
+			<Platform>Win32</Platform>
+			<AppType>Package</AppType>
+			<FrameworkType>VCL</FrameworkType>
+			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+			<ProjectVersion>12.3</ProjectVersion>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+			<DCC_Optimize>false</DCC_Optimize>
+			<DCC_DcuOutput>C:\Bravo\dcu\</DCC_DcuOutput>
+			<GenPackage>true</GenPackage>
+			<DCC_E>false</DCC_E>
+			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;WinTypes=Windows;WinProcs=Windows;$(DCC_UnitAlias)</DCC_UnitAlias>
+			<DCC_ImageBase>00400000</DCC_ImageBase>
+			<DCC_F>false</DCC_F>
+			<DCC_S>false</DCC_S>
+			<GenDll>true</GenDll>
+			<DCC_K>false</DCC_K>
+			<DCC_N>false</DCC_N>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+			<DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_DebugInformation>false</DCC_DebugInformation>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<DCC_MapFile>3</DCC_MapFile>
+			<DCC_UnitSearchPath>C:\Bravo\fontes\ComponentesTerceiros\MaxComponents\mxExports;C:\Bravo\fontes\ComponentesTerceiros\MaxComponents\mxNativeExcel;C:\Arquivos de programas\Embarcadero\RAD Studio\8.0\source\db;C:\Arquivos de programas\Embarcadero\RAD Studio\8.0\bin;C:\Bravo\fontes\Client\Logos;C:\Bravo\dcu;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+			<DCC_Optimize>false</DCC_Optimize>
+			<DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+		</PropertyGroup>
+		<ItemGroup>
+			<DelphiCompile Include="Bravo.dpk">
+				<MainSource>MainSource</MainSource>
+			</DelphiCompile>
+			<DCCReference Include="BrvString.dcr"/>
+			<DCCReference Include="BrvDbGrid.dcr"/>
+			<DCCReference Include="..\ComponentesTerceiros\SevenZip\SevenZipVcl.dcr"/>
+			<DCCReference Include="rtl.dcp"/>
+			<DCCReference Include="VclSmp.dcp"/>
+			<DCCReference Include="dbrtl.dcp"/>
+			<DCCReference Include="bdertl.dcp"/>
+			<DCCReference Include="vcldb.dcp"/>
+			<DCCReference Include="vclimg.dcp"/>
+			<DCCReference Include="dsnap.dcp"/>
+			<DCCReference Include="dbexpress.dcp"/>
+			<DCCReference Include="DbxCommonDriver.dcp"/>
+			<DCCReference Include="dsnapcon.dcp"/>
+			<DCCReference Include="QR5RunDXE.dcp"/>
+			<DCCReference Include="IndyCore.dcp"/>
+			<DCCReference Include="IndySystem.dcp"/>
+			<DCCReference Include="IndyProtocols.dcp"/>
+			<DCCReference Include="DbxClientDriver.dcp"/>
+			<DCCReference Include="DataSnapClient.dcp"/>
+			<DCCReference Include="vcl.dcp"/>
+			<DCCReference Include="xmlrtl.dcp"/>
+			<DCCReference Include="soaprtl.dcp"/>
+			<DCCReference Include="ACBr_CTe.dcp"/>
+			<DCCReference Include="ACBrCapicom.dcp"/>
+			<DCCReference Include="synapse.dcp"/>
+			<DCCReference Include="PCN2.dcp"/>
+			<DCCReference Include="ACBr_NFe2.dcp"/>
+			<DCCReference Include="ACBrComum.dcp"/>
+			<DCCReference Include="BrvDbNavCop.pas"/>
+			<DCCReference Include="BrvDialogoImpressaoForm.pas">
+				<Form>FrmDlgImpres</Form>
+			</DCCReference>
+			<DCCReference Include="BrvBitBtn.pas"/>
+			<DCCReference Include="BrvGauge.pas"/>
+			<DCCReference Include="BrvProgress.pas">
+				<Form>FrmProgress</Form>
+			</DCCReference>
+			<DCCReference Include="BrvSpeedButton.pas"/>
+			<DCCReference Include="BrvImgBot.pas"/>
+			<DCCReference Include="BrvDialogoImpressao.pas"/>
+			<DCCReference Include="BrvRelAscII.pas">
+				<Form>FrmRelAscII</Form>
+			</DCCReference>
+			<DCCReference Include="URELTR0001.pas"/>
+			<DCCReference Include="BrvRelAsc.pas"/>
+			<DCCReference Include="BrvDBComboListBox.pas"/>
+			<DCCReference Include="BrvExtenso.pas"/>
+			<DCCReference Include="BrvAtualizarLabel.pas"/>
+			<DCCReference Include="BrvIP.pas"/>
+			<DCCReference Include="BrvImage.pas"/>
+			<DCCReference Include="BrvDigito.pas"/>
+			<DCCReference Include="BrvCripto.pas"/>
+			<DCCReference Include="BrvSenha.pas"/>
+			<DCCReference Include="BrvSerial.pas"/>
+			<DCCReference Include="BrvLabel.pas"/>
+			<DCCReference Include="BrvInterbase.pas"/>
+			<DCCReference Include="BrvInformix.pas"/>
+			<DCCReference Include="BrvOracle.pas"/>
+			<DCCReference Include="BrvLocalizarForm.pas">
+				<Form>FrmLocalizar</Form>
+			</DCCReference>
+			<DCCReference Include="BrvConColForm.pas">
+				<Form>FrmConCol</Form>
+			</DCCReference>
+			<DCCReference Include="BrvConfConsulta.pas"/>
+			<DCCReference Include="BrvFiltrarForm.pas">
+				<Form>FrmFiltrar</Form>
+			</DCCReference>
+			<DCCReference Include="BrvOrdenarForm.pas">
+				<Form>FrmOrdenar</Form>
+			</DCCReference>
+			<DCCReference Include="BrvConnection.pas"/>
+			<DCCReference Include="BrvCheckListBox.pas"/>
+			<DCCReference Include="BrvComboBox.pas"/>
+			<DCCReference Include="BrvDataBase.pas"/>
+			<DCCReference Include="BrvMesAno.pas"/>
+			<DCCReference Include="BrvProvider.pas"/>
+			<DCCReference Include="BrvRegEdit.pas"/>
+			<DCCReference Include="BrvBarCode.pas"/>
+			<DCCReference Include="BrvDicionario.pas"/>
+			<DCCReference Include="BrvQuery.pas"/>
+			<DCCReference Include="BrvProgressBar.pas"/>
+			<DCCReference Include="BrvEditNum.pas"/>
+			<DCCReference Include="BrvEditDate.pas"/>
+			<DCCReference Include="BrvConsultaForm.pas">
+				<Form>FrmConsulta</Form>
+			</DCCReference>
+			<DCCReference Include="BrvConsulta.pas"/>
+			<DCCReference Include="BrvEdit.pas"/>
+			<DCCReference Include="BrvImportForm.pas">
+				<Form>FrmImport</Form>
+			</DCCReference>
+			<DCCReference Include="BrvImport.pas"/>
+			<DCCReference Include="BrvProcesso.pas"/>
+			<DCCReference Include="BrvDadosTabela.pas"/>
+			<DCCReference Include="BrvString.pas"/>
+			<DCCReference Include="BrvExport.pas"/>
+			<DCCReference Include="BrvCalendarioForm.pas">
+				<Form>FrmCalendar</Form>
+			</DCCReference>
+			<DCCReference Include="BrvCalendario.pas"/>
+			<DCCReference Include="BrvCalculadora.pas"/>
+			<DCCReference Include="BrvCalculadoraForm.pas">
+				<Form>FrmCalculadora</Form>
+			</DCCReference>
+			<DCCReference Include="BrvDbEdit.pas"/>
+			<DCCReference Include="BrvCalculaDiasForm.pas">
+				<Form>FrmCalDias</Form>
+			</DCCReference>
+			<DCCReference Include="BrvQrBarCode.pas"/>
+			<DCCReference Include="BrvRelQuickForm.pas">
+				<Form>RelQuick</Form>
+			</DCCReference>
+			<DCCReference Include="URELTR0010.pas"/>
+			<DCCReference Include="BrvRelAscIII.pas">
+				<Form>RelAscIII</Form>
+				<DesignClass>TQuickRep</DesignClass>
+			</DCCReference>
+			<DCCReference Include="BrvRelatorioForm.pas">
+				<Form>FrmRelatorio</Form>
+			</DCCReference>
+			<DCCReference Include="BrvRelatorio.pas"/>
+			<DCCReference Include="BrvRelatorioParamForm.pas">
+				<Form>RelParame</Form>
+			</DCCReference>
+			<DCCReference Include="BrvDbGrid.pas"/>
+			<DCCReference Include="BrvEnviaEmail.pas">
+				<Form>FrmMail</Form>
+			</DCCReference>
+			<DCCReference Include="BrvSrvConexao.pas"/>
+			<DCCReference Include="BrvTCPClient.pas"/>
+			<DCCReference Include="BrvClientDataSet.pas"/>
+			<DCCReference Include="BrvDataSet.pas"/>
+			<DCCReference Include="BrvRadioGroup.pas"/>
+			<DCCReference Include="BrvOrdenar.pas"/>
+			<DCCReference Include="BrvDbGrids.pas"/>
+			<DCCReference Include="BrvLocalizar.pas"/>
+			<DCCReference Include="BrvFiltrar.pas"/>
+			<DCCReference Include="BrvExcel.pas"/>
+			<DCCReference Include="BrvWord.pas"/>
+			<DCCReference Include="BrvHtml.pas"/>
+			<DCCReference Include="BrvRetCon.pas"/>
+			<DCCReference Include="BrvDbRetCon.pas"/>
+			<DCCReference Include="..\ComponentesTerceiros\SevenZip\SevenZipVCL.pas"/>
+			<DCCReference Include="BrvGeraRelatorio.pas"/>
+			<DCCReference Include="BrvXml.pas"/>
+			<DCCReference Include="BrvGestao.pas"/>
+			<DCCReference Include="BrvContabil.pas"/>
+			<DCCReference Include="BrvContas.pas"/>
+			<DCCReference Include="BrvListParam.pas"/>
+			<DCCReference Include="BrvAlertProgress.pas"/>
+			<DCCReference Include="BrvServerProgress.pas"/>
+			<DCCReference Include="BrvLogScreen.pas"/>
+			<DCCReference Include="BrvCustomEdit.pas"/>
+			<DCCReference Include="BrvCustomMaskEdit.pas"/>
+			<DCCReference Include="..\Client\cliente\UClaSrv.pas"/>
+			<DCCReference Include="BrvParamExe.pas"/>
+			<DCCReference Include="BrvQRImage.pas"/>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')" Project="$(BDS)\Bin\CodeGear.Delphi.Targets"/>
+		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\8.0\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\8.0\UserTools.proj"/>
+		<ProjectExtensions>
+			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
+			<Borland.ProjectType>Package</Borland.ProjectType>
+			<BorlandProject>
+				<Delphi.Personality>
+					<Source>
+						<Source Name="MainSource">Bravo.dpk</Source>
+					</Source>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
+						<VersionInfo Name="MajorVer">1</VersionInfo>
+						<VersionInfo Name="MinorVer">0</VersionInfo>
+						<VersionInfo Name="Release">0</VersionInfo>
+						<VersionInfo Name="Build">0</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="Locale">1046</VersionInfo>
+						<VersionInfo Name="CodePage">1252</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName"/>
+						<VersionInfoKeys Name="FileDescription"/>
+						<VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName"/>
+						<VersionInfoKeys Name="LegalCopyright"/>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename"/>
+						<VersionInfoKeys Name="ProductName"/>
+						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments"/>
+					</VersionInfoKeys>
+					<Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dcloffice2k150.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dclofficexp150.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+					</Excluded_Packages>
+					<Parameters/>
+				</Delphi.Personality>
+				<Platforms>
+					<Platform value="Win32">True</Platform>
+				</Platforms>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+	</Project>

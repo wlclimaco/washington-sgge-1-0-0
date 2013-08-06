@@ -1,0 +1,51 @@
+unit BrvRetCon;
+
+interface
+
+uses
+  SysUtils, Classes, Controls, StdCtrls, Forms;
+
+type
+  TBrvRetCon = class(TEdit)
+  private
+    { Private declarations }
+  protected
+    { Protected declarations }
+  public
+    { Public declarations }
+    constructor Create(AOwner: TComponent); override;
+    destructor  Destroy;                    override;
+  published
+    { Published declarations }
+  end;
+
+procedure Register;
+
+implementation
+
+procedure Register;
+begin
+  RegisterComponents('Bravo Consulta', [TBrvRetCon]);
+end;
+
+{ TBrvRetCon }
+
+constructor TBrvRetCon.Create(AOwner: TComponent);
+begin
+      inherited;
+      TabStop     := False;
+      ReadOnly    := True;
+      ParentColor := True;
+      BevelInner  := bvLowered;
+      BevelKind   := bkFlat;
+      BevelOuter  := bvLowered;
+      BorderStyle := bsNone;
+      BevelWidth  := 2;
+end;
+
+destructor TBrvRetCon.Destroy;
+begin
+      inherited;
+end;
+
+end.

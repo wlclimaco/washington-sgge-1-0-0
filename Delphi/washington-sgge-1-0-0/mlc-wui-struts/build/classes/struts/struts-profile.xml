@@ -1,0 +1,36 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- Action for Process CRUD -->
+	<package name="mlc-profile" extends="mlc-default" namespace="/profile">
+	
+		<!-- Render main page -->
+		<action name="ajax.list" class="profilePageAction" method="openProfile">
+			<param name="jsComponents">mlc-profile</param>
+			<result name="success">/pages/profile/profile_main.jsp</result>
+			<result name="input">/pages/profile/profile_main.jsp</result>
+		</action>
+		
+		<!-- Parameterized JavaScript settings -->
+		<action name="settings" class="profileSettingsAction"
+			method="settings">
+			<param name="menuItem">profile</param>
+			<result name="success" type="freemarker">/freemarker/profile_settings.js
+			</result>
+		</action>
+		
+		<action name="locale" class="com.mkyong.common.action.LocaleAction">
+			<result name="SUCCESS">systemsettings/list.action</result>
+	   	</action>
+	   	
+	   	<!-- Save Profile Settings  -->
+		<action name="saveProfileSettings" class="profileAjaxAction" method="saveProfileSettings">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+	</package>
+	
+</struts>	
