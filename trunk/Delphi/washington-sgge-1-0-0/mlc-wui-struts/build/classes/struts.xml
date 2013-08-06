@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC 
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!-- Import the mlc-default stack -->
+	<include file="struts/struts-mlc.xml" />
+	<include file="struts/struts-smartpoint.xml" />
+	<include file="struts/struts-group.xml" />
+	<include file="struts/struts-schedule.xml" />
+	<include file="struts/struts-process.xml" />
+	<include file="struts/struts-dashboard.xml" />
+	<include file="struts/struts-analytics.xml" />
+	<include file="struts/struts-systemsettings.xml" />
+	<include file="struts/struts-tag.xml" />
+	<include file="struts/struts-search.xml" />
+	<include file="struts/struts-profile.xml" />
+	<include file="struts/struts-user.xml" />
+	<include file="struts/struts-util.xml" />
+	<include file="struts/struts-dicionario.xml" />
+	<package name="root" namespace="/" extends="struts-default">
+		<!-- Render main page -->
+		<action name="checkLogin" class="mlcPageAction" method="createUserProfile">
+			<result name="success" type="redirect">/list.action</result>
+			<result name="notenant" type="redirect">/login.jsp?notenant</result>
+			<result name="input">/pages/mlc_main.jsp</result>
+		</action>		
+		
+		<action name="list" class="mlcPageAction">
+			<param name="jsComponents">mlc-main</param>
+			<result name="success">/pages/mlc_main.jsp</result>
+			<result name="input">/pages/mlc_main.jsp</result>
+		</action>
+		
+		<action name="ajax.messagesFile" class="mlcPageAction">
+		   <param name="menuItem">slc</param>
+		   <result name="success" type="freemarker">/locale/messages_${localeLanguage}.properties</result>
+		</action>		
+		
+		<!-- Parameterized JavaScript settings -->
+		<action name="settings" class="slcSettingsAction"
+			method="settings">
+			<param name="menuItem">slc</param>
+			<result name="success" type="freemarker">/freemarker/slc_settings.js</result>
+		</action>
+		
+		<!-- session expired dialog page -->
+		<action name="include.sessionExpired" class="smartpointPageAction">
+			<result name="success">timeout.jsp</result>
+		</action>
+	</package>
+	<constant name="struts.custom.i18n.resources" value="global" />
+ 	<constant name="struts.devMode" value="true" />
+</struts>

@@ -1,0 +1,63 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="mlc-default" extends="struts-default">
+		<result-types>
+			<result-type name="json" class="org.apache.struts2.json.JSONResult" default="false" />
+		</result-types>
+		
+		<interceptors>
+			<interceptor name="json" class="org.apache.struts2.json.JSONInterceptor" />
+			<interceptor name="cookie" class="org.apache.struts2.interceptor.CookieInterceptor" />
+			<interceptor name="cacheHeaders" class="com.sensus.mlc.wui.base.interceptor.CacheHeaderInterceptor" />
+			<interceptor name="i18nCustom" class="com.sensus.mlc.wui.base.interceptor.I18nCustomInterceptor" />
+			<interceptor-stack name="mlcStack">
+				<interceptor-ref name="json" />
+				<interceptor-ref name="cookie">
+					<param name="cookiesName">*</param>
+					<param name="cookiesValue">*</param>
+				</interceptor-ref>
+				<interceptor-ref name="tokenSession">
+					<param name="excludeMethods">*</param>
+				</interceptor-ref>
+				<interceptor-ref name="exception" />
+				<interceptor-ref name="alias" />
+				<interceptor-ref name="servletConfig" />
+				<interceptor-ref name="prepare" />
+				<interceptor-ref name="i18nCustom" />
+				<interceptor-ref name="chain" />
+				<interceptor-ref name="debugging" />
+				<interceptor-ref name="profiling" />
+				<interceptor-ref name="scopedModelDriven" />
+				<interceptor-ref name="modelDriven" />
+				<interceptor-ref name="fileUpload" />
+				<interceptor-ref name="checkbox" />
+				<interceptor-ref name="staticParams" />
+				<interceptor-ref name="params">
+					<param name="excludeParams">dojo\..*</param>
+				</interceptor-ref>
+				<interceptor-ref name="conversionError" />
+				<interceptor-ref name="validation">
+					<param name="excludeMethods">input,back,cancel,browse</param>
+				</interceptor-ref>
+				<interceptor-ref name="workflow">
+					<param name="excludeMethods">input,back,cancel,browse</param>
+				</interceptor-ref>				
+				<interceptor-ref name="cacheHeaders" />
+			</interceptor-stack>
+
+		</interceptors>
+
+		<default-interceptor-ref name="mlcStack" />
+
+		<global-results>
+			<result name="EXCEPTION">/pages/exception.jsp</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception" result="EXCEPTION" />
+		</global-exception-mappings>
+	</package>
+
+</struts>

@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://mallet-app.davis.sensus.lab:8080/" />
+<title>create_new_user</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">create_new_user</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>link=Create User</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.content-header h1</td>
+	<td>Create User</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user-first-create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user-last-create</td>
+	<td>${userName}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user-user</td>
+	<td>${userName}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user-email-create</td>
+	<td>${userName}@${userName}.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user-password-create</td>
+	<td>Sensus123$</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>xpath=(//input[@id='user-password-create'])[2]</td>
+	<td>Sensus123$</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=user-create-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user-create-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:* This field is required.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user-first-create</td>
+	<td>${userName}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user-last-create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user-create-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:* This field is required.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user-last-create</td>
+	<td>${userName}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user-user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user-create-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:* This field is required.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user-user</td>
+	<td>${userName}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user-email-create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user-create-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:* This field is required.<br />* Invalid email address</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user-email-create</td>
+	<td>${userName}@${userName}.com</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=role-operator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=include-some-lights</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user-create-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:* This field is required.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=include-all-lights</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user-password-create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>xpath=(//input[@id='user-password-create'])[2]</td>
+	<td>Sensus123$</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user-create-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:* Fields do not match</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user-password-create</td>
+	<td>Sensus123$</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>xpath=(//input[@id='user-password-create'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user-create-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user-create-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:* This field is required.<br />* Minimum 8 characters allowed<br />* Fields do not match<br />* The password must contain 1 Upper Case - 1 Lower Case - 1 Alpha - 1 Numeric - 1 Special Character</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user-password-create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>xpath=(//input[@id='user-password-create'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user-create-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:* This field is required.<br />* Minimum 8 characters allowed<br />* The password must contain 1 Upper Case - 1 Lower Case - 1 Alpha - 1 Numeric - 1 Special Character</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=users</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

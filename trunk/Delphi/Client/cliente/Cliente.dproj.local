@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2011/01/10 14:01:12.000.941,=C:\Users\Jefferson\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2011/01/10 14:01:18.000.745,=C:\Users\Jefferson\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2011/01/10 14:45:54.000.957,=C:\Users\Jefferson\Documents\RAD Studio\Projects\ServerMethodsUnit1.pas</Transaction>
+    <Transaction>2011/01/10 14:45:56.000.707,=C:\Users\Jefferson\Documents\RAD Studio\Projects\ServerContainerUnit1.pas</Transaction>
+    <Transaction>2011/01/10 14:46:30.000.220,=C:\Users\Jefferson\Documents\RAD Studio\Projects\ServerContainerUnit1.pas</Transaction>
+    <Transaction>2011/01/10 14:46:30.000.211,=C:\Users\Jefferson\Documents\RAD Studio\Projects\ServerMethodsUnit1.pas</Transaction>
+    <Transaction>2011/01/10 14:47:17.000.534,=C:\Users\Jefferson\Documents\RAD Studio\Projects\ServerMethodsUnit1.pas</Transaction>
+    <Transaction>2011/01/10 14:47:18.000.201,=C:\Users\Jefferson\Documents\RAD Studio\Projects\ServerContainerUnit1.pas</Transaction>
+    <Transaction>2011/01/10 14:47:41.000.080,=C:\Users\Jefferson\Documents\RAD Studio\Projects\ServerMethodsUnit1.pas</Transaction>
+    <Transaction>2011/01/10 14:47:41.000.157,=C:\Users\Jefferson\Documents\RAD Studio\Projects\ServerContainerUnit1.pas</Transaction>
+    <Transaction>2011/01/10 15:28:42.000.193,=C:\Users\Jefferson\Documents\RAD Studio\Projects\ServerContainerUnit2.pas</Transaction>
+    <Transaction>2011/01/10 15:28:42.000.147,=C:\Users\Jefferson\Documents\RAD Studio\Projects\ServerMethodsUnit2.pas</Transaction>
+    <Transaction>2011/01/10 16:22:18.000.473,=C:\Users\Jefferson\Documents\RAD Studio\Projects\ServerMethodsUnit1.pas</Transaction>
+    <Transaction>2011/01/10 16:22:18.000.530,=C:\Users\Jefferson\Documents\RAD Studio\Projects\ServerContainerUnit1.pas</Transaction>
+    <Transaction>2011/01/10 16:23:02.000.335,=C:\Users\Jefferson\Documents\RAD Studio\Projects\ServerMethodsUnit1.pas</Transaction>
+    <Transaction>2011/01/10 16:23:02.000.399,=C:\Users\Jefferson\Documents\RAD Studio\Projects\ServerContainerUnit1.pas</Transaction>
+    <Transaction>2011/01/10 16:23:02.000.256,=C:\Users\Jefferson\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2011/01/11 07:30:50.000.209,=C:\Users\Jefferson\Documents\RAD Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2011/01/11 07:31:37.000.956,D:\Empresas\Bravo\Jefferson\cliente\uFrmClient.pas=C:\Users\Jefferson\Documents\RAD Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2011/01/11 07:31:37.000.956,D:\Empresas\Bravo\Jefferson\cliente\uFrmClient.dfm=C:\Users\Jefferson\Documents\RAD Studio\Projects\Unit2.dfm</Transaction>
+    <Transaction>2011/01/11 07:31:43.000.702,D:\Empresas\Bravo\Jefferson\cliente\Cliente.dproj=C:\Users\Jefferson\Documents\RAD Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2011/01/11 07:54:32.000.068,=D:\Empresas\Bravo\Jefferson\cliente\Unit1.pas</Transaction>
+    <Transaction>2011/01/11 08:04:36.000.901,=D:\Empresas\Bravo\Jefferson\cliente\Unit1.pas</Transaction>
+    <Transaction>2011/01/11 08:04:57.000.780,=D:\Empresas\Bravo\Jefferson\cliente\Unit1.pas</Transaction>
+    <Transaction>2011/01/11 08:05:19.000.300,=D:\Empresas\Bravo\Jefferson\cliente\Unit1.pas</Transaction>
+    <Transaction>2011/01/11 08:05:35.000.021,=D:\Empresas\Bravo\Jefferson\cliente\Unit1.pas</Transaction>
+    <Transaction>2011/01/11 08:05:56.000.627,D:\Empresas\Bravo\Jefferson\cliente\UServerClasses.pas=D:\Empresas\Bravo\Jefferson\cliente\Unit1.pas</Transaction>
+    <Transaction>2012/04/27 14:25:03.000.265,C:\BRAVO\fontes\Client\Logos\UClaSrv.pas=C:\cliente\UServerClasses.pas</Transaction>
+  </Transactions>
+</BorlandProject>

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2012/08/13 11:50:15.000.182,=C:\Sistema\Avulsos\BrvBarCode\Unit2.pas</Transaction>
+    <Transaction>2012/08/13 17:05:02.000.887,C:\Sistema\Avulsos\BrvBarCode\UQrBarC.pas=C:\Sistema\Avulsos\BrvBarCode\Unit2.pas</Transaction>
+    <Transaction>2012/08/13 17:05:02.000.887,C:\Sistema\Avulsos\BrvBarCode\UQrBarC.dfm=C:\Sistema\Avulsos\BrvBarCode\Unit2.dfm</Transaction>
+    <Transaction>2012/08/13 17:38:49.000.201,=C:\Sistema\Avulsos\BrvBarCode\QuricolCode.pas</Transaction>
+    <Transaction>2012/08/14 10:08:54.000.396,C:\Sistema\Avulsos\BrvBarCode\UQrBarC.pas=</Transaction>
+  </Transactions>
+</BorlandProject>

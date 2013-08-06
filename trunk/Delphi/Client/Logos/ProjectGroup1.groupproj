@@ -1,0 +1,48 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{00792482-FE5C-4E33-A1CF-ED8EF422BA1A}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="Logos.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="..\..\Componentes\Bravo.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="Logos">
+			<MSBuild Projects="Logos.dproj"/>
+		</Target>
+		<Target Name="Logos:Clean">
+			<MSBuild Projects="Logos.dproj" Targets="Clean"/>
+		</Target>
+		<Target Name="Logos:Make">
+			<MSBuild Projects="Logos.dproj" Targets="Make"/>
+		</Target>
+		<Target Name="Bravo">
+			<MSBuild Projects="..\..\Componentes\Bravo.dproj"/>
+		</Target>
+		<Target Name="Bravo:Clean">
+			<MSBuild Projects="..\..\Componentes\Bravo.dproj" Targets="Clean"/>
+		</Target>
+		<Target Name="Bravo:Make">
+			<MSBuild Projects="..\..\Componentes\Bravo.dproj" Targets="Make"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="Logos;Bravo"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="Logos:Clean;Bravo:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="Logos:Make;Bravo:Make"/>
+		</Target>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')" Project="$(BDS)\Bin\CodeGear.Group.Targets"/>
+	</Project>

@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" name="ILogosWSservice" targetNamespace="http://tempuri.org/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types />
+  <message name="AutenticaUsuario0Request">
+    <part name="pDsLogin" type="xs:string" />
+    <part name="pDsSenha" type="xs:string" />
+    <part name="pCdUsuari" type="xs:int" />
+  </message>
+  <message name="AutenticaUsuario0Response">
+    <part name="pCdUsuari" type="xs:int" />
+    <part name="return" type="xs:string" />
+  </message>
+  <message name="ProximaAtividade1Request">
+    <part name="pCdUsuari" type="xs:int" />
+    <part name="pNrMapa" type="xs:string" />
+    <part name="pDsAtivid" type="xs:string" />
+  </message>
+  <message name="ProximaAtividade1Response">
+    <part name="pNrMapa" type="xs:string" />
+    <part name="pDsAtivid" type="xs:string" />
+    <part name="return" type="xs:string" />
+  </message>
+  <message name="ConsultaAtividade2Request">
+    <part name="pNrFornec" type="xs:string" />
+    <part name="pSgTipAti" type="xs:string" />
+    <part name="pNrOpeLog" type="xs:string" />
+  </message>
+  <message name="ConsultaAtividade2Response">
+    <part name="pNrOpeLog" type="xs:string" />
+    <part name="return" type="xs:string" />
+  </message>
+  <message name="AtividadeNaoConvocada3Request">
+    <part name="pCdUsuari" type="xs:int" />
+    <part name="pDsLista" type="xs:string" />
+  </message>
+  <message name="AtividadeNaoConvocada3Response">
+    <part name="pDsLista" type="xs:string" />
+    <part name="return" type="xs:string" />
+  </message>
+  <message name="ConferenciaEntradaIniciar4Request">
+    <part name="pCdUsuari" type="xs:int" />
+    <part name="pNrMapa" type="xs:string" />
+    <part name="pNrNota" type="xs:string" />
+    <part name="pNrFornec" type="xs:string" />
+    <part name="pDsLista" type="xs:string" />
+  </message>
+  <message name="ConferenciaEntradaIniciar4Response">
+    <part name="pNrNota" type="xs:string" />
+    <part name="pNrFornec" type="xs:string" />
+    <part name="pDsLista" type="xs:string" />
+    <part name="return" type="xs:string" />
+  </message>
+  <message name="ConferenciaEntradaFinalizar5Request">
+    <part name="pCdUsuari" type="xs:int" />
+    <part name="pNrMapa" type="xs:string" />
+    <part name="pdslista" type="xs:string" />
+    <part name="pSnCancel" type="xs:string" />
+    <part name="pQtProSid" type="xs:int" />
+  </message>
+  <message name="ConferenciaEntradaFinalizar5Response">
+    <part name="return" type="xs:string" />
+  </message>
+  <message name="ConferenciaSaidaIniciar6Request">
+    <part name="pCdUsuari" type="xs:int" />
+    <part name="pNrMapa" type="xs:string" />
+    <part name="pNrNota" type="xs:string" />
+    <part name="pNrFornec" type="xs:string" />
+    <part name="pDsLista" type="xs:string" />
+  </message>
+  <message name="ConferenciaSaidaIniciar6Response">
+    <part name="pNrNota" type="xs:string" />
+    <part name="pNrFornec" type="xs:string" />
+    <part name="pDsLista" type="xs:string" />
+    <part name="return" type="xs:string" />
+  </message>
+  <message name="ConferenciaSaidaFinalizar7Request">
+    <part name="pCdUsuari" type="xs:int" />
+    <part name="pNrMapa" type="xs:string" />
+    <part name="pdslista" type="xs:string" />
+    <part name="pCdClient" type="xs:string" />
+    <part name="pSnCancel" type="xs:string" />
+    <part name="pQtProSid" type="xs:int" />
+  </message>
+  <message name="ConferenciaSaidaFinalizar7Response">
+    <part name="return" type="xs:string" />
+  </message>
+  <message name="Ping8Request" />
+  <message name="Ping8Response">
+    <part name="return" type="xs:string" />
+  </message>
+  <message name="TestaConexao9Request">
+    <part name="pIDTest" type="xs:string" />
+    <part name="pMsnTest" type="xs:string" />
+  </message>
+  <message name="TestaConexao9Response">
+    <part name="return" type="xs:string" />
+  </message>
+  <portType name="ILogosWS">
+    <operation name="AutenticaUsuario">
+      <input message="tns:AutenticaUsuario0Request" />
+      <output message="tns:AutenticaUsuario0Response" />
+    </operation>
+    <operation name="ProximaAtividade">
+      <input message="tns:ProximaAtividade1Request" />
+      <output message="tns:ProximaAtividade1Response" />
+    </operation>
+    <operation name="ConsultaAtividade">
+      <input message="tns:ConsultaAtividade2Request" />
+      <output message="tns:ConsultaAtividade2Response" />
+    </operation>
+    <operation name="AtividadeNaoConvocada">
+      <input message="tns:AtividadeNaoConvocada3Request" />
+      <output message="tns:AtividadeNaoConvocada3Response" />
+    </operation>
+    <operation name="ConferenciaEntradaIniciar">
+      <input message="tns:ConferenciaEntradaIniciar4Request" />
+      <output message="tns:ConferenciaEntradaIniciar4Response" />
+    </operation>
+    <operation name="ConferenciaEntradaFinalizar">
+      <input message="tns:ConferenciaEntradaFinalizar5Request" />
+      <output message="tns:ConferenciaEntradaFinalizar5Response" />
+    </operation>
+    <operation name="ConferenciaSaidaIniciar">
+      <input message="tns:ConferenciaSaidaIniciar6Request" />
+      <output message="tns:ConferenciaSaidaIniciar6Response" />
+    </operation>
+    <operation name="ConferenciaSaidaFinalizar">
+      <input message="tns:ConferenciaSaidaFinalizar7Request" />
+      <output message="tns:ConferenciaSaidaFinalizar7Response" />
+    </operation>
+    <operation name="Ping">
+      <input message="tns:Ping8Request" />
+      <output message="tns:Ping8Response" />
+    </operation>
+    <operation name="TestaConexao">
+      <input message="tns:TestaConexao9Request" />
+      <output message="tns:TestaConexao9Response" />
+    </operation>
+  </portType>
+  <binding name="ILogosWSbinding" type="tns:ILogosWS">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <operation name="AutenticaUsuario">
+      <soap:operation soapAction="urn:LogosWSIntf-ILogosWS#AutenticaUsuario" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="urn:LogosWSIntf-ILogosWS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:LogosWSIntf-ILogosWS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="ProximaAtividade">
+      <soap:operation soapAction="urn:LogosWSIntf-ILogosWS#ProximaAtividade" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="urn:LogosWSIntf-ILogosWS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:LogosWSIntf-ILogosWS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="ConsultaAtividade">
+      <soap:operation soapAction="urn:LogosWSIntf-ILogosWS#ConsultaAtividade" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="urn:LogosWSIntf-ILogosWS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:LogosWSIntf-ILogosWS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="AtividadeNaoConvocada">
+      <soap:operation soapAction="urn:LogosWSIntf-ILogosWS#AtividadeNaoConvocada" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="urn:LogosWSIntf-ILogosWS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:LogosWSIntf-ILogosWS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="ConferenciaEntradaIniciar">
+      <soap:operation soapAction="urn:LogosWSIntf-ILogosWS#ConferenciaEntradaIniciar" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="urn:LogosWSIntf-ILogosWS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:LogosWSIntf-ILogosWS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="ConferenciaEntradaFinalizar">
+      <soap:operation soapAction="urn:LogosWSIntf-ILogosWS#ConferenciaEntradaFinalizar" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="urn:LogosWSIntf-ILogosWS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:LogosWSIntf-ILogosWS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="ConferenciaSaidaIniciar">
+      <soap:operation soapAction="urn:LogosWSIntf-ILogosWS#ConferenciaSaidaIniciar" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="urn:LogosWSIntf-ILogosWS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:LogosWSIntf-ILogosWS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="ConferenciaSaidaFinalizar">
+      <soap:operation soapAction="urn:LogosWSIntf-ILogosWS#ConferenciaSaidaFinalizar" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="urn:LogosWSIntf-ILogosWS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:LogosWSIntf-ILogosWS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="Ping">
+      <soap:operation soapAction="urn:LogosWSIntf-ILogosWS#Ping" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="urn:LogosWSIntf-ILogosWS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:LogosWSIntf-ILogosWS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="TestaConexao">
+      <soap:operation soapAction="urn:LogosWSIntf-ILogosWS#TestaConexao" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="urn:LogosWSIntf-ILogosWS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:LogosWSIntf-ILogosWS" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="ILogosWSservice">
+    <port name="ILogosWSPort" binding="tns:ILogosWSbinding">
+      <soap:address location="http://192.10.10.67:8080/logos/logosws.exe/soap/ILogosWS" />
+    </port>
+  </service>
+</definitions>

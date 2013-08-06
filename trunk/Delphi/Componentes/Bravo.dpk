@@ -1,0 +1,156 @@
+package Bravo;
+
+{$R *.res}
+{$R 'BrvString.dcr'}
+{$R 'BrvDbGrid.dcr'}
+{$R '..\ComponentesTerceiros\SevenZip\SevenZipVcl.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$IMPLICITBUILD ON}
+{$DEFINE DEBUG}
+
+requires
+  rtl,
+  VclSmp,
+  dbrtl,
+  bdertl,
+  vcldb,
+  vclimg,
+  dsnap,
+  dbexpress,
+  DbxCommonDriver,
+  dsnapcon,
+  QR5RunDXE,
+  IndyCore,
+  IndySystem,
+  IndyProtocols,
+  DbxClientDriver,
+  DataSnapClient,
+  vcl,
+  xmlrtl,
+  soaprtl,
+  ACBr_CTe,
+  ACBrCapicom,
+  synapse,
+  PCN2,
+  ACBr_NFe2,
+  ACBrComum;
+
+contains
+  BrvDbNavCop in 'BrvDbNavCop.pas',
+  BrvDialogoImpressaoForm in 'BrvDialogoImpressaoForm.pas' {FrmDlgImpres},
+  BrvBitBtn in 'BrvBitBtn.pas',
+  BrvGauge in 'BrvGauge.pas',
+  BrvProgress in 'BrvProgress.pas' {FrmProgress},
+  BrvSpeedButton in 'BrvSpeedButton.pas',
+  BrvImgBot in 'BrvImgBot.pas',
+  BrvDialogoImpressao in 'BrvDialogoImpressao.pas',
+  BrvRelAscII in 'BrvRelAscII.pas' {FrmRelAscII},
+  URELTR0001 in 'URELTR0001.pas',
+  BrvRelAsc in 'BrvRelAsc.pas',
+  BrvDBComboListBox in 'BrvDBComboListBox.pas',
+  BrvExtenso in 'BrvExtenso.pas',
+  BrvAtualizarLabel in 'BrvAtualizarLabel.pas',
+  BrvIP in 'BrvIP.pas',
+  BrvImage in 'BrvImage.pas',
+  BrvDigito in 'BrvDigito.pas',
+  BrvCripto in 'BrvCripto.pas',
+  BrvSenha in 'BrvSenha.pas',
+  BrvSerial in 'BrvSerial.pas',
+  BrvLabel in 'BrvLabel.pas',
+  BrvInterbase in 'BrvInterbase.pas',
+  BrvInformix in 'BrvInformix.pas',
+  BrvOracle in 'BrvOracle.pas',
+  BrvLocalizarForm in 'BrvLocalizarForm.pas' {FrmLocalizar},
+  BrvConColForm in 'BrvConColForm.pas' {FrmConCol},
+  BrvConfConsulta in 'BrvConfConsulta.pas',
+  BrvFiltrarForm in 'BrvFiltrarForm.pas' {FrmFiltrar},
+  BrvOrdenarForm in 'BrvOrdenarForm.pas' {FrmOrdenar},
+  BrvConnection in 'BrvConnection.pas',
+  BrvCheckListBox in 'BrvCheckListBox.pas',
+  BrvComboBox in 'BrvComboBox.pas',
+  BrvDataBase in 'BrvDataBase.pas',
+  BrvMesAno in 'BrvMesAno.pas',
+  BrvProvider in 'BrvProvider.pas',
+  BrvRegEdit in 'BrvRegEdit.pas',
+  BrvBarCode in 'BrvBarCode.pas',
+  BrvDicionario in 'BrvDicionario.pas',
+  BrvQuery in 'BrvQuery.pas',
+  BrvProgressBar in 'BrvProgressBar.pas',
+  BrvEditNum in 'BrvEditNum.pas',
+  BrvEditDate in 'BrvEditDate.pas',
+  BrvConsultaForm in 'BrvConsultaForm.pas' {FrmConsulta},
+  BrvConsulta in 'BrvConsulta.pas',
+  BrvEdit in 'BrvEdit.pas',
+  BrvImportForm in 'BrvImportForm.pas' {FrmImport},
+  BrvImport in 'BrvImport.pas',
+  BrvProcesso in 'BrvProcesso.pas',
+  BrvDadosTabela in 'BrvDadosTabela.pas',
+  BrvString in 'BrvString.pas',
+  BrvExport in 'BrvExport.pas',
+  BrvCalendarioForm in 'BrvCalendarioForm.pas' {FrmCalendar},
+  BrvCalendario in 'BrvCalendario.pas',
+  BrvCalculadora in 'BrvCalculadora.pas',
+  BrvCalculadoraForm in 'BrvCalculadoraForm.pas' {FrmCalculadora},
+  BrvDbEdit in 'BrvDbEdit.pas',
+  BrvCalculaDiasForm in 'BrvCalculaDiasForm.pas' {FrmCalDias},
+  BrvQrBarCode in 'BrvQrBarCode.pas',
+  BrvRelQuickForm in 'BrvRelQuickForm.pas' {RelQuick},
+  URELTR0010 in 'URELTR0010.pas',
+  BrvRelAscIII in 'BrvRelAscIII.pas' {RelAscIII: TQuickRep},
+  BrvRelatorioForm in 'BrvRelatorioForm.pas' {FrmRelatorio},
+  BrvRelatorio in 'BrvRelatorio.pas',
+  BrvRelatorioParamForm in 'BrvRelatorioParamForm.pas' {RelParame},
+  BrvDbGrid in 'BrvDbGrid.pas',
+  BrvEnviaEmail in 'BrvEnviaEmail.pas' {FrmMail},
+  BrvSrvConexao in 'BrvSrvConexao.pas',
+  BrvTCPClient in 'BrvTCPClient.pas',
+  BrvClientDataSet in 'BrvClientDataSet.pas',
+  BrvDataSet in 'BrvDataSet.pas',
+  BrvRadioGroup in 'BrvRadioGroup.pas',
+  BrvOrdenar in 'BrvOrdenar.pas',
+  BrvDbGrids in 'BrvDbGrids.pas',
+  BrvLocalizar in 'BrvLocalizar.pas',
+  BrvFiltrar in 'BrvFiltrar.pas',
+  BrvExcel in 'BrvExcel.pas',
+  BrvWord in 'BrvWord.pas',
+  BrvHtml in 'BrvHtml.pas',
+  BrvRetCon in 'BrvRetCon.pas',
+  BrvDbRetCon in 'BrvDbRetCon.pas',
+  SevenZipVCL in '..\ComponentesTerceiros\SevenZip\SevenZipVCL.pas',
+  BrvGeraRelatorio in 'BrvGeraRelatorio.pas',
+  BrvXml in 'BrvXml.pas',
+  BrvGestao in 'BrvGestao.pas',
+  BrvContabil in 'BrvContabil.pas',
+  BrvContas in 'BrvContas.pas',
+  BrvListParam in 'BrvListParam.pas',
+  BrvAlertProgress in 'BrvAlertProgress.pas',
+  BrvServerProgress in 'BrvServerProgress.pas',
+  BrvLogScreen in 'BrvLogScreen.pas',
+  BrvCustomEdit in 'BrvCustomEdit.pas',
+  BrvCustomMaskEdit in 'BrvCustomMaskEdit.pas',
+  UClaSrv in '..\Client\cliente\UClaSrv.pas',
+  BrvParamExe in 'BrvParamExe.pas',
+  BrvQRImage in 'BrvQRImage.pas';
+
+end.
+

@@ -1,0 +1,85 @@
+*** Muitos problemas no uso do emulador e da DLL
+    - Emulador para de responder ocasionalmente
+	- Emulador Não retem as informações de Ativação
+	- DLL sem descrição da assinatura dos métodos
+	- DLL não funciona corretamente (AV) quando carregada de forma dinâmica
+	
+*** Campos que devem ter na configuração
+
+infCFe
+  versaoDadosEnt
+ide
+  CNPJ
+  signAC
+  numeroCaixa
+emit
+  CNPJ
+  IE
+  IM
+  cRegTribISSQN
+  indRatISSQN
+  
+  
+*** Campos do CFe que não precisam ser informados, pois o SAT que irá calcula-los ou preenche-los
+
+det
+  prod
+    vProd
+	vItem
+	vRatDesc
+	vRatAcr
+	imposto
+	  ICMS
+	    ICMS00
+		  vICMS
+		ICMSSN900
+		  vICMS
+	  PIS
+	    PISAliq
+		  vPIS
+		PISQts
+		  vPIS
+		PISOutr
+		  vPIS
+		PISST
+		  vPIS
+	  COFINS
+	    COFINSAliq
+		  vCOFINS
+	    COFINSQtde
+		  vCOFINS
+	    COFINSOutr
+		  vCOFINS
+	    COFINSST
+		  vCOFINS
+	  ISSQN
+	    vBC
+		vISSQN
+  total
+    ICMSTot
+	  vICMS
+	  vProd
+	  vDesc
+	  vPIS
+	  vCOFINS
+	  vPISST
+	  vCOFINSST
+	  vOutro
+	  vCFe
+	ISSQNTot
+	  vBC
+	  vISS
+	  vPIS
+	  vCOFINS
+	  vPISST
+	  vCOFINSST
+  pagto
+    MP
+      vTROCO
+  infAdic
+    obsFisco
+	  xCampo
+	  xTexto
+Signature
+		  
+	

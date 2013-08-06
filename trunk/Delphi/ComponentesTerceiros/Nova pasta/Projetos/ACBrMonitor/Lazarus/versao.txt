@@ -1,0 +1,3 @@
+Versao = '0.9.22.2' ;
+UrlDownloadWindows = 'http://downloads.sourceforge.net/acbr/ACBrMonitor-0.9.22.2-Windows-Instalador.exe?use_mirror=' ;
+UrlDownloadLinux   = 'http://downloads.sourceforge.net/acbr/ACBrMonitor-0.9.22.2-linux-installer.tar.gz?use_mirror=' ;

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://mallet-app.davis.sensus.lab:8080/" />
+<title>verify_event_history</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">verify_event_history</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>id=eventhistory</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#EVENT_TYPE ul.ui-listcombobox li[title='${eventType}'] input</td>
+	<td></td>
+</tr>
+<!--Filter Actions-->
+<!--Action Type - Defined by set up-->
+<tr>
+	<td>click</td>
+	<td>css=#EVENT_TYPE ul.ui-listcombobox li[title='${eventType}'] input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Filter Date  - Today-->
+<tr>
+	<td>type</td>
+	<td>id=total_days</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#dateFilter button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Users - Definaed by set up-->
+<tr>
+	<td>storeElementPresent</td>
+	<td>css=#USERS ul.ui-listcombobox li[title='${userName}']</td>
+	<td>isUserPresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${isUserPresent}</td>
+	<td>jumpUserLI</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#USERS ul.ui-listcombobox li[title='${userName}'] input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>jumpUserLI</td>
+	<td></td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${isUserPresent}</td>
+	<td>jumpUserSelect</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=combobox_input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=combobox_input</td>
+	<td>${userName}</td>
+</tr>
+<tr>
+	<td>storeSelectedValue</td>
+	<td>id=combobox_input</td>
+	<td>userID</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>var userName = &quot; ${userName}&quot;; var userID = ${userID};&nbsp;&nbsp;var $liUser = $(&quot;&lt;li/&gt;&quot;, {&quot;title&quot;: userName, &quot;class&quot;:&quot;checkbox&quot;})&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append($(&quot;&lt;input/&gt;&quot;, {&quot;value&quot;:userID, &quot;type&quot;:&quot;checkbox&quot;}))&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append(userName);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(&quot;#USERS ul.ui-listcombobox&quot;).append($liUser);</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#USERS ul.ui-listcombobox li:last input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>jumpUserSelect</td>
+	<td></td>
+</tr>
+<!--Verify Actions-->
+<tr>
+	<td>storeTableRow</td>
+	<td>${action}/1</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${row}) - 2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#event-history-table tbody.${row}.3</td>
+	<td>${totalLight}</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#event-history-table tbody.${row}.5</td>
+	<td>${description}</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${checkSummary}</td>
+	<td>jumSummary</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#event-history-table tbody tr:eq(${row}) a.button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#action-dialog &gt; ul</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=percent-success</td>
+	<td>${percentSuccess}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=percent-failure</td>
+	<td>${percentFailure}</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#action-dialog&quot;).dialog(&quot;close&quot;)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#event-history-table tbody tr:eq(${row}) a.afilter</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>jumSummary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

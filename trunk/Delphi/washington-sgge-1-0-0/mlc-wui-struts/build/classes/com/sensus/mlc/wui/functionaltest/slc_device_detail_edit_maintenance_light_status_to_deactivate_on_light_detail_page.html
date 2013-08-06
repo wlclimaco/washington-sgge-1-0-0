@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://acme-app.davis.sensus.lab:8080/" />
+<title>slc_device_detail_edit_maintenance_light_status_to_deactivate_on_light_detail_page</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">slc_device_detail_edit_maintenance_light_status_to_deactivate_on_light_detail_page</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>id=menu-smartpoints</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=smartpoint-table</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>id=menu-smartpoints@class</td>
+	<td>alist active</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tag-clear a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#STATUS div ul:eq(1) li input:eq(3)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#smartpoint-table tbody tr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=#smartpoint-table tbody tr:eq(0) td:eq(1) a strong</td>
+	<td>poleId</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tbody tr:eq(0) td:eq(1) a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=pole-id</td>
+	<td>${poleId}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//a[contains(text(),'Edit Light Status')])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=action-dialog</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=status-deative</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=status-deative</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=edit-light-status-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=monitor-dialog</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#monitor-dialog .dismiss</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=pole-id</td>
+	<td>${poleId}</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Light History</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=light-history-table</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#ACTION_TYPE div ul:eq(1) li input:eq(1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>Update Light Status/1</td>
+	<td>groupRow</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${groupRow}</td>
+	<td>groupRow</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${groupRow}) - 3</td>
+	<td>groupRow</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#light-history-table tbody tr:eq(${groupRow}) td:eq(2)</td>
+	<td>Update Light Status for Deactivated</td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://mallet-app.davis.sensus.lab:8080/" />
+<title>try_update_with_empty_field_then_cancel</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">try_update_with_empty_field_then_cancel</td></tr>
+</thead><tbody>
+<!--Check Curent Page/...-->
+<tr>
+	<td>assertText</td>
+	<td>css=div.content-header &gt; h1</td>
+	<td>Users</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#user-table tbody tr td:nth-child(3):contains('${userName}5')&quot;).parent().find(&quot;a.alist&quot;).click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user-first-create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user-last-create</td>
+	<td>${userName}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user-user</td>
+	<td>${userName}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user-email-create</td>
+	<td>${userName}@${userName}.com</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user-create-button</td>
+	<td></td>
+</tr>
+<!--Check Message/...-->
+<tr>
+	<td>waitForText</td>
+	<td>css=div.formErrorContent</td>
+	<td>* This field is required.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.formErrorContent</td>
+	<td>* This field is required.</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>type</td>
+	<td>id=user-first-create</td>
+	<td>${userName}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user-last-create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user-create-button</td>
+	<td></td>
+</tr>
+<!--Check Message/...-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=user-create-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user-create-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.formErrorContent</td>
+	<td>* This field is required.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.formErrorContent</td>
+	<td>* This field is required.</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>type</td>
+	<td>id=user-user</td>
+	<td>${userName}11</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user-last-create</td>
+	<td>Test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user-email-create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user-create-button</td>
+	<td></td>
+</tr>
+<!--Check Message/...-->
+<tr>
+	<td>pause</td>
+	<td>2000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.formErrorContent</td>
+	<td>* This field is required.<br />* Invalid email address</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.formErrorContent</td>
+	<td>* This field is required.* Invalid email address</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>type</td>
+	<td>id=user-email-create</td>
+	<td>${userName}@${userName}.com</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=role-operator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=include-some-lights</td>
+	<td></td>
+</tr>
+<!--Check Message/...-->
+<tr>
+	<td>label</td>
+	<td>removeGroup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=ul[class=&quot;chzn-choices&quot;] &gt; li &gt; a[class=&quot;search-choice-close&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeElementPresent</td>
+	<td>css=ul[class=&quot;chzn-choices&quot;] &gt; li &gt; a[class=&quot;search-choice-close&quot;]</td>
+	<td>haveGroup</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${haveGroup}</td>
+	<td>removeGroup</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user-create-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.formErrorContent</td>
+	<td>* This field is required.</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>* This field is required.</td>
+	<td>* This field is required.</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>click</td>
+	<td>id=include-all-lights</td>
+	<td></td>
+</tr>
+<!--.../-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=users-list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=users-list</td>
+	<td></td>
+</tr>
+<!--Check Element count/summariz-->
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${totalUsers}) </td>
+	<td>total</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${total}</td>
+	<td>totalUsers</td>
+</tr>
+<tr>
+	<td>verifyCssCount</td>
+	<td>css=#user-table tbody .checkbox</td>
+	<td>${totalUsers}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#actions &gt; span</td>
+	<td>0 of ${totalUsers} Users Selected</td>
+</tr>
+<!--.../-->
+</tbody></table>
+</body>
+</html>

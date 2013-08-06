@@ -1,0 +1,41 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- Action for Group CRUD -->
+	<package name="mlc-empresa" extends="mlc-default" namespace="/empresa">
+		
+		<action name="settings" class="empresaSettingsAction"
+			method="settings">
+			<param name="menuItem">empresa</param>
+			<result name="success" type="freemarker">/freemarker/empresa_settings.js
+			</result>
+		</action>
+		
+		<!-- Render main page -->
+		<action name="ajax.list" class="empresaPageAction">
+			<param name="jsComponents">mlc-empresa</param>
+			<result name="success">/pages/empresa/empresa_main.jsp</result>
+			<result name="input">/pages/empresa/empresa_main.jsp</result>
+		</action>
+		
+				<!-- Ajax callback for smartpoint search -->
+		<action name="search" class="empresaSearchAjaxAction" method="fetchAllEmpresa">
+				<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="exludeNullProperties">true</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+		
+		<action name="insertEmpresa" class="empresaAjaxAction" method="insertEmpresa">
+				<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="exludeNullProperties">true</param>
+				<param name="root">response</param>
+			</result>
+		</action>
+
+					
+	</package>
+</struts>
+		

@@ -1,0 +1,14 @@
+FTP
+=-=-=
+Host: www.bravolog.com.br
+Login: bravol 
+Senha: tebhg+pb
+
+Painel de controle
+=-=-=-=-=-=-=-=-=-=
+www.bravolog.com.br/stats
+Login: bravol
+Senha: tebhg+Br
+
+Banco de Dados MySql: bravol
+ 

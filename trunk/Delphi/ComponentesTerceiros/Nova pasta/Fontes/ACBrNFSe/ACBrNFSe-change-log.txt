@@ -1,0 +1,106 @@
+{******************************************************************************}
+{ Projeto: Componentes ACBr                                                    }
+{ Biblioteca multi plataforma de componentes Delphi para interação com equipa- }
+{ mentos de Automação Comercial utilizados no Brasil                           }
+{                                                                              }
+{  Você pode obter a última versão desse arquivo na página do Projeto ACBr     }
+{ Componentes localizado em      http://www.sourceforge.net/projects/acbr      }
+{                                                                              }
+{  Esta biblioteca é software livre; você pode redistribuí-la e/ou modificá-la }
+{ sob os termos da Licença Pública Geral Menor do GNU conforme publicada pela  }
+{ Free Software Foundation; tanto a versão 2.1 da Licença, ou (a seu critério) }
+{ qualquer versão posterior.                                                   }
+{                                                                              }
+{  Esta biblioteca é distribuída na expectativa de que seja útil, porém, SEM   }
+{ NENHUMA GARANTIA; nem mesmo a garantia implícita de COMERCIABILIDADE OU      }
+{ ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA. Consulte a Licença Pública Geral Menor}
+{ do GNU para mais detalhes. (Arquivo LICENÇA.TXT ou LICENSE.TXT)              }
+{                                                                              }
+{  Você deve ter recebido uma cópia da Licença Pública Geral Menor do GNU junto}
+{ com esta biblioteca; se não, escreva para a Free Software Foundation, Inc.,  }
+{ no endereço 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.          }
+{ Você também pode obter uma copia da licença em:                              }
+{ http://www.opensource.org/licenses/lgpl-license.php                          }
+{                                                                              }
+{ Daniel Simões de Almeida  -  daniel@djsystem.com.br  -  www.djsystem.com.br  }
+{              Praça Anita Costa, 34 - Tatuí - SP - 18270-410                  }
+{                                                                              }
+{******************************************************************************}
+Agradecimentos:
+
+* Administradores:
+- Daniel Simões de Almeida
+- André Ferreira de Moraes
+
+* Desenvolvedores:
+- Juaumkiko - Doação do componente ao projeto ACBr
+
+{******************************************************************************
+|* ACBrNFSe
+|*
+|* PROPÓSITO: Registro de Alterações
+******************************************************************************}
+
+Símbolo : Significado
+
+[+]     : Novo recurso
+[*]     : Recurso modificado/melhorado
+[-]     : Correção de Bug (assim esperamos)
+
+04/04/2013
+-- ACBrNFSeReg --
+[*] Alterado para por a imagem no componente para Lazarus
+-- ACBrNFSeWebServices --
+[*] Alterado para compatibilizar ao Lazarus
+   (Juliomar Marchetti)
+
+25/02/2012
+-- ACBrNFSe --
+[-] Comentei as chamadas referentes ao Provedor de Natal porque estavam 
+    causando erros de compilação por falta do arquivo.
+    A pessoa responsável por adicionar o provedor de Natal por favor adicione 
+    o arquivo e descomente.    (por Regys Silveira)
+
+22/11/2012
+-- ACBrDFeUtil
+[+] Unificação de funções de mesma funcionalidade das units:
+    ACBrNFeUtil, ACBrNFEsUtil, ACBrCTeUtil
+    (por Isaque Pinheiro)
+
+Alterações   08/11/2012 (João Henrique)
+---------------
+[+] Incluido propriedade Webservices->ConsultarLoteAposEnvio (valor padrão TRUE).
+    Alguns servidores não processam o lote logo após o envio, e o componente fica
+    tentando obter o processamento em vão. Com essa propriedade é possível controlar
+    essas situações.
+
+Alterações   20/07/2012 (Italo Jurisato Junior)
+---------------
+[+] Diponibilizado o pacote de instalação do DANFSE em Fortes Report, 
+    Fontes do componente escrito por Danilo D.C.F. o pacote de instalação escrito
+    por Rafael Muler.
+
+Alterações   03/04/2012 (Italo Jurisato Junior)
+---------------
+[*] Incluido dentro da função CancelaNFSe a chamada para a função ConsutaNFSeporRps
+    desta forma o XML da NFSe cancelada será atualizado com as tags referente ao
+    cancelamento.
+
+Alterações   12/09/2011 (Italo Jurisato Junior)
+---------------
+[+] Implementado a função de Cancelamento de NFSe no padrão Ginfes e Abrasf.
+
+Alterações   09/09/2011 (Italo Jurisato Junior)
+---------------
+[+] Implementado as funções de Envio e consulta ao WebServices no padrão Ginfes e
+    Abrasf.
+[+] Criado o componente ACBrNFSeDANFSeQR, usado para imprimir o DANFSe.
+
+Versão 0.01a   
+---------------
+[+] Início do Projeto
+[+] Primeira Versao lançada baseado no componente fornecido por juaumkiko.
+
+
+
+

@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{B900F1C2-3D47-4FEC-85B3-04AAF18C3634}") = "LogosInstall", "LogosInstall\LogosInstall.vddproj", "{2EF1F061-369C-447A-A3EA-F39A81428D7B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2EF1F061-369C-447A-A3EA-F39A81428D7B}.Debug|Default.ActiveCfg = Debug
+		{2EF1F061-369C-447A-A3EA-F39A81428D7B}.Debug|Default.Build.0 = Debug
+		{2EF1F061-369C-447A-A3EA-F39A81428D7B}.Release|Default.ActiveCfg = Release
+		{2EF1F061-369C-447A-A3EA-F39A81428D7B}.Release|Default.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

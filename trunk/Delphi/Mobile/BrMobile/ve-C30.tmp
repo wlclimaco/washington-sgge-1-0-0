@@ -1,0 +1,397 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using System.Data.SqlServerCe;
+using LogosMobileSaidaBayer;
+
+namespace LogosMobile
+{
+    public partial class SIS005 : Form
+    {
+        private SqlCeConnection conexao = new SqlCeConnection();
+        private LogosMobile.AcessoBD Acesso;
+        private BayerSaida Saida;
+
+        public string NrMapa;
+        public string DsList;
+        public bool   snfecha;
+
+        private int QtProSid = 0;
+        
+        string nrgtin   = string.Empty;
+        string nrlote   = string.Empty;
+        string dtproduc = string.Empty;
+        string dtvalid  = string.Empty;
+        string nrsscc   = string.Empty;
+        float  qtprodut = 0;
+        string NrClient = string.Empty;
+        string NrFornec = string.Empty;
+        bool   SnTransf = false;
+        
+        public SIS005(string nrmapa, string nrnota, string dslist, string nrclient, string nrfornec, bool sntransf, string nmusuario, string dstitoper)
+        {
+            InitializeComponent();
+            LblTitulo.Text  = dstitoper;
+            lblUsuario.Text = nmusuario;
+
+            NrFornec = nrfornec;
+            SnTransf = sntransf;
+
+            NrClient = nrclient;
+            snfecha = false;
+            Acesso = new LogosMobile.AcessoBD();
+            Acesso.CriaBD(ref conexao, "LogosMobileBD");
+            Acesso.AbreConexao(ref conexao, "LogosMobileBD");
+
+            Saida = new BayerSaida();
+
+            NrMapa = nrmapa;
+            Saida.AlimentaSaida(ref conexao, dslist, nrmapa);
+
+            lblNrMapa.Text = nrmapa;
+            lblNrNota.Text = nrnota;
+
+            LePreEtiqueta(BtnFinalizar.Visible);
+        }
+
+        private void ProcessaSaida()
+        {
+            if (Controller.MessageDlg("Deseja realmente cancelar esta saída?"))
+            {
+                this.Refresh();
+                pnlAguarde.Visible = true;
+                pnlAguarde.Refresh();
+
+                if (Controller.WsLogos.Ping())
+                {
+                    if (Controller.WsLogos.SaidaFinalizar(NrMapa, string.Empty, NrClient, "S", 0))
+                    {
+                        this.Close();
+                    }
+                    else
+                    {
+                        Controller.ShowMessage("Tente novamente...");
+                        lblAviso.Visible = true;
+                        pnlAguarde.Visible = false;
+                        this.Refresh();
+                    }
+                }
+                else
+                {
+                    Controller.ShowMessage("Tente novamente...");
+                    lblAviso.Visible = true;
+                    pnlAguarde.Visible = false;
+                    this.Refresh();
+                }
+            }        
+        }
+
+        private void btnSair_Click(object sender, EventArgs e)
+        {
+            ProcessaSaida();
+        }        
+
+        private void Finalizar()
+        {
+            if (!snfecha)
+            {
+                if (Saida.FinalizarContagem(ref conexao))
+                {
+                    this.Refresh();
+                    pnlAguarde.Visible = true;
+                    pnlAguarde.Refresh();
+
+                    edtCodigo.Enabled = false;
+                    snfecha = true;
+
+                    if (Controller.WsLogos.Ping())
+                    {
+                        if (Controller.WsLogos.SaidaFinalizar(NrMapa, Saida.GeraListagem(ref conexao, NrMapa), NrClient, "N", QtProSid))
+                        {
+                            this.Close();
+                        }
+                        else
+                        {
+                            Controller.ShowMessage("Tente novamente...");
+                            lblAviso.Visible = true;
+                            pnlAguarde.Visible = false;
+                            this.Refresh();
+                        }
+                    }
+                    else
+                    {
+                        Controller.ShowMessage("Sem acesso a rede!!! Tente novamente...");
+                        lblAviso.Visible = true;
+                        pnlAguarde.Visible = false;
+                        this.Refresh();
+                    }
+                }
+                else
+                {
+                    PreparaEntradaNovoItem();                    
+                    BtnFinalizar.Visible = true;
+                    VerificaEtiquetaCliente();                    
+                }
+            }
+            else
+            {
+                edtCodigo.Enabled = false;
+
+                if (Controller.WsLogos.Ping())
+                {
+                    if (Controller.WsLogos.SaidaFinalizar(NrMapa, Saida.GeraListagem(ref conexao, NrMapa), NrClient, "N", QtProSid))
+                    {
+                        this.Close();
+                    }
+                    else
+                    {
+                        Controller.ShowMessage("Tente novamente...");
+                        lblAviso.Visible = true;
+                        pnlAguarde.Visible = false;
+                        this.Refresh();
+                    }
+                }
+                else
+                {
+                    Controller.ShowMessage("Sem acesso a rede!!! Tente novamente...");
+                    lblAviso.Visible = true;
+                    pnlAguarde.Visible = false;
+                    this.Refresh();
+                }
+            }   
+        }         
+
+        private void Finalizar_Click(object sender, EventArgs e)
+        {
+            Finalizar();
+        }
+
+        private void VerificaEtiquetaCliente()
+        {
+            if (SnTransf == false)
+            {
+                SIS006 FrmValidaEtiqueta = new SIS006(NrMapa, NrFornec, true, lblUsuario.Text);
+                FrmValidaEtiqueta.ShowDialog();
+
+                if (FrmValidaEtiqueta.DialogResult == DialogResult.OK)
+                {
+                    FrmValidaEtiqueta.Dispose();
+                    if (FrmValidaEtiqueta.SnFinaliza)
+                    {
+                        Finalizar();
+                    }
+                    else
+                    {
+                        LePreEtiqueta(BtnFinalizar.Visible);
+                    }
+                }
+                else
+                {
+                    ProcessaSaida();
+                }
+            }
+            else
+            {
+                LePreEtiqueta(BtnFinalizar.Visible);
+            }
+        }
+
+
+        private void LePreEtiqueta(bool snfinaliza)
+        {
+            SIS007 FrmPreEtiqueta = new SIS007(NrMapa, snfinaliza, LblTitulo.Text, "S", lblNrNota.Text, lblUsuario.Text);
+            FrmPreEtiqueta.ShowDialog();
+
+            if (FrmPreEtiqueta.DialogResult == DialogResult.Cancel)
+            {
+                pnlAguarde.Visible = true;
+                pnlAguarde.Refresh();
+                timerFecha.Enabled = true;
+            }
+            else
+            {
+                if (FrmPreEtiqueta.Snfinaliza)
+                {
+                    Finalizar();
+                }
+                else
+                {
+                    if (FrmPreEtiqueta.SnSemId)
+                    {
+                        btnSemID.Visible = false;
+                        LblSemId.Visible = true;
+                        edtTTSemID.Visible = true;
+                        edtTTSemID.Text = QtProSid.ToString();
+                        
+                        edtCodigo.Text = "Sem Identificação";
+                        edtCodigo.Enabled = false;
+                        edtQtde.Enabled = true;
+                        edtQtde.Text = string.Empty;
+                        edtQtde.SelectAll();
+                        edtQtde.Focus();                    
+                    }
+                    else
+                    {
+                        edtCodigo.Enabled = true;
+                        edtCodigo.Text = FrmPreEtiqueta.Etiqueta();
+                        edtCodigo.Focus();
+                        ProcessarEntrada();                    
+                    }                    
+                }
+            }
+        }
+
+        private void PreparaEntradaNovoItem()
+        {
+            btnSemID.Visible = true;
+            LblSemId.Visible = false;
+            edtTTSemID.Visible = false;
+            edtTTSemID.Text = string.Empty;
+
+            edtQtde.Text = string.Empty;
+            edtQtde.Enabled = false;
+            edtCodigo.Text = string.Empty;
+            edtCodigo.Focus();                    
+        }
+
+        private void ProcessarEntrada()
+        {
+            if (edtCodigo.Focused)
+            {
+                if (edtCodigo.Text.Length == 60)
+                { 
+                    nrgtin   = edtCodigo.Text.Substring( 1, 17).TrimStart('0');
+                    nrlote   = edtCodigo.Text.Substring(18, 10).Trim();
+                    dtproduc = edtCodigo.Text.Substring(28,  6).Trim();
+                    dtvalid  = edtCodigo.Text.Substring(34,  6).Trim();
+                    nrsscc   = edtCodigo.Text.Substring(40, 20).Trim();
+
+                    edtQtde.Enabled = true;
+                    edtQtde.Text = string.Empty;
+                    edtQtde.Focus();
+                }
+                else
+                {
+                    Controller.ShowMessage("Etiqueta inválida!");
+                    edtCodigo.SelectAll();
+                    edtCodigo.Focus();
+                }
+            }
+            else
+            {
+                if (edtQtde.Focused)
+                {
+                    if (edtQtde.Text.Trim() != string.Empty)
+                    {
+                        if (edtCodigo.Text == "Sem Identificação")
+                        {
+                            QtProSid += int.Parse(edtQtde.Text);
+
+                            if (QtProSid > 0)
+                            {
+                                BtnFinalizar.Visible = true;
+                            }
+
+                            PreparaEntradaNovoItem();                            
+                            VerificaEtiquetaCliente();
+                        }
+                        else
+                        {
+                            qtprodut = float.Parse(edtQtde.Text);
+
+                            if (Saida.FindItem(ref conexao, nrgtin, nrlote, dtvalid, " and STITEM <> 'X' ")) //Verifica se produto é válido na lista
+                            {
+                                if (Saida.FindItemExt(ref conexao, nrgtin, nrlote, dtproduc, dtvalid, nrsscc)) //Verifica se produto já foi registrado na lista
+                                {
+                                    Controller.ShowMessage("Item já conferido! Verifique...");
+                                    PreparaEntradaNovoItem();
+                                    VerificaEtiquetaCliente();
+                                }
+                                else
+                                {
+                                    //Insere contagem
+                                    Saida.InsertContagem(ref conexao, nrgtin, nrlote, dtproduc, dtvalid, nrsscc, false, qtprodut);
+                                    PreparaEntradaNovoItem();
+                                    BtnFinalizar.Visible = true;
+                                    VerificaEtiquetaCliente();
+                                }
+                            }
+                            else
+                            {
+                                if (Controller.MessageDlg("Produto não encontrado! Deseja incluir?"))
+                                {
+                                    Saida.InsertContagem(ref conexao, nrgtin, nrlote, dtproduc, dtvalid, nrsscc, true, qtprodut);
+                                    PreparaEntradaNovoItem();                                    
+                                    BtnFinalizar.Visible = true;
+                                    VerificaEtiquetaCliente();
+                                }
+                                else
+                                {
+                                    PreparaEntradaNovoItem();
+                                    BtnFinalizar.Visible = true;
+                                    VerificaEtiquetaCliente();
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Controller.ShowMessage("Quantidade Invalida!");
+                    }
+                }
+            }
+        }
+
+        private void SIS005_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ((e.KeyCode == System.Windows.Forms.Keys.Enter))
+            {
+                ProcessarEntrada();    
+            }
+        }
+
+        private void SIS005_Closed(object sender, EventArgs e)
+        {
+            Acesso.FechaConexao(ref conexao);
+        }
+
+        private void ImgTeclado_Click(object sender, EventArgs e)
+        {
+            IptPnlSenha.Enabled = !IptPnlSenha.Enabled;
+        }
+
+        private void timerFecha_Tick(object sender, EventArgs e)
+        {
+            timerFecha.Enabled = false;
+            this.Close();
+        }
+
+        private void btnQtSemID_Click(object sender, EventArgs e)
+        {
+            btnSemID.Visible = false;
+            LblSemId.Visible = true;
+            edtTTSemID.Visible = true;
+            edtTTSemID.Text = QtProSid.ToString();
+
+            edtCodigo.Text = "Sem Identificação";
+            edtCodigo.Enabled = false;
+            edtQtde.Enabled = true;
+            edtQtde.Text = string.Empty;
+            edtQtde.Focus();
+        }
+
+        private void BtnCancelIte_Click(object sender, EventArgs e)
+        {
+            if (Controller.MessageDlg("Cancelar contagem deste item?"))            
+            {
+                PreparaEntradaNovoItem();
+                VerificaEtiquetaCliente();
+            }
+        }
+        
+    }
+}

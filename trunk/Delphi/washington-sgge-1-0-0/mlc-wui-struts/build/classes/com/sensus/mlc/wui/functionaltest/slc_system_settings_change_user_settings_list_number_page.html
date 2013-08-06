@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://mallet-app.davis.sensus.lab:8080/" />
+<title>change_user_settings_list_number_page</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">change_user_settings_list_number_page</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>id=user-name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Check Curent Page-->
+<tr>
+	<td>assertText</td>
+	<td>css=div.content-header &gt; h1</td>
+	<td>Your Profile</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=pagesize</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=timezone</td>
+	<td>${timeZone}</td>
+</tr>
+<!--Check Message-->
+<tr>
+	<td>waitForText</td>
+	<td>css=#messaging-main &gt; span</td>
+	<td>Settings updated successfully.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main &gt; span</td>
+	<td>Settings updated successfully.</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Lights</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>id=total-records</td>
+	<td>qtyLights</td>
+</tr>
+<!--Check Page-->
+<tr>
+	<td>assertAttribute</td>
+	<td>id=menu-smartpoints@class</td>
+	<td>alist active</td>
+</tr>
+<!--Check Page Size-->
+<tr>
+	<td>verifySelectedLabel</td>
+	<td>name=smartpoint-table_length</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>Math.ceil(new Number(${qtyLights}) / 15)</td>
+	<td>qtyPages</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${qtyPages}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyCssCount</td>
+	<td>css=#smartpoint-table_paginate &gt; span &gt; span</td>
+	<td>${qtyPages}</td>
+</tr>
+</tbody></table>
+</body>
+</html>

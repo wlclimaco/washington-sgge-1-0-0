@@ -1,0 +1,1 @@
+C:\BRAVO\fontes\Componentes\BrvImgBot\brcc32.exe C:\BRAVO\fontes\Componentes\BrvImgBot\BrvImgBot.txt
