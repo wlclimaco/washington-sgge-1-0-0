@@ -675,7 +675,7 @@ object Form1: TForm1
     Top = 41
     Width = 949
     Height = 491
-    ActivePage = TbsFiltro
+    ActivePage = TabSheet16
     Align = alClient
     MultiLine = True
     TabOrder = 2
@@ -1645,7 +1645,7 @@ object Form1: TForm1
           Width = 247
           Height = 21
           TabOrder = 2
-          Text = 'BrvEdit1'
+          Text = 'BrvEdit1C:\Documents and Settings\Administrador\Desktop\g'
           BrvReadOnlyColor = 14541539
           BrVisibleButton = True
           BrFunctionButton = VeArquivo

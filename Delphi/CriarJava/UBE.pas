@@ -1595,10 +1595,13 @@ tostring : string;
 BEGIN
      try
          memo1.Lines.Clear;
-         memo1.Lines.Add('package com.sensus.mlc.'+LowerCase(pacote)+'.model;');
+         memo1.Lines.Add('package com.sensus.dm.common.'+LowerCase(pacote)+'.model;');
          memo1.Lines.Add('import java.util.List;');
+         memo1.Lines.Add('@SuppressWarnings("serial")');
          memo1.Lines.Add('public class '+BrvFuncoesXE.PrimeiraMaiscula(Txt)+' extends SensusModel'); //escreve no arquivo e desce uma linha
          memo1.Lines.Add('{');
+         memo1.Lines.Add('/** The Constant FIRST. */');
+	       memo1.Lines.Add('private static final Integer FIRST = 0; ');
          CcDataset.First;
          while not CcDataset.Eof do
          begin
@@ -1635,6 +1638,49 @@ BEGIN
          end;
           controte := 0;
           tostring := '';
+           CcDataset.First;
+         while not CcDataset.Eof do
+         begin
+               if CcDataset.FieldByName('S/N').AsString = 'S'  then
+                begin
+                  if Pos('List', CcDataset.FieldByName('Tipo').AsString) <> 0 then
+                  begin
+                  memo1.Lines.Add('          	/**    ');
+                  memo1.Lines.Add('	 * Adds the '+BrvFuncoesXE.PrimeiraMaiscula(BrvFuncoesXE.retornatipoArray(LowerCase(CcDataset.FieldByName('tipo').AsString))));
+                  memo1.Lines.Add('	 *   ');
+                  memo1.Lines.Add('	 * @param '+BrvFuncoesXE.retornatipoArray(LowerCase(CcDataset.FieldByName('tipo').AsString))+' the '+BrvFuncoesXE.PrimeiraMaiscula(BrvFuncoesXE.retornatipoArray(LowerCase(CcDataset.FieldByName('tipo').AsString))));
+                  memo1.Lines.Add('	 */ ');
+                  memo1.Lines.Add('	public void add'+BrvFuncoesXE.PrimeiraMaiscula(BrvFuncoesXE.retornatipoArray(LowerCase(CcDataset.FieldByName('tipo').AsString)))+'('+BrvFuncoesXE.PrimeiraMaiscula(BrvFuncoesXE.retornatipoArray(LowerCase(CcDataset.FieldByName('tipo').AsString)))+' '+BrvFuncoesXE.retornatipoArray(LowerCase(CcDataset.FieldByName('tipo').AsString))+') ');
+                  memo1.Lines.Add('	{ ');
+                  memo1.Lines.Add('		if (get'+BrvFuncoesXE.PrimeiraMaiscula(BrvFuncoesXE.retornatipoArray(LowerCase(CcDataset.FieldByName('tipo').AsString)))+'s() == null) ');
+                  memo1.Lines.Add('		{');
+                  memo1.Lines.Add('			set'+BrvFuncoesXE.PrimeiraMaiscula(BrvFuncoesXE.retornatipoArray(LowerCase(CcDataset.FieldByName('tipo').AsString)))+'s(new ArrayList<'+BrvFuncoesXE.PrimeiraMaiscula(BrvFuncoesXE.retornatipoArray(LowerCase(CcDataset.FieldByName('tipo').AsString)))+'>()); ');
+                  memo1.Lines.Add('		}  ');
+                  memo1.Lines.Add('      ');
+                  memo1.Lines.Add('		get'+BrvFuncoesXE.PrimeiraMaiscula(BrvFuncoesXE.retornatipoArray(LowerCase(CcDataset.FieldByName('tipo').AsString)))+'s().add('+BrvFuncoesXE.retornatipoArray(LowerCase(CcDataset.FieldByName('tipo').AsString))+'); ');
+                  memo1.Lines.Add('	} ');
+                  memo1.Lines.Add('   ');
+                  memo1.Lines.Add('	/**');
+                  memo1.Lines.Add('	 * Gets the first '+BrvFuncoesXE.retornatipoArray(LowerCase(CcDataset.FieldByName('tipo').AsString))+'.');
+                  memo1.Lines.Add('	 *');
+                  memo1.Lines.Add('	 * @return the first '+BrvFuncoesXE.retornatipoArray(LowerCase(CcDataset.FieldByName('tipo').AsString))+'');
+                  memo1.Lines.Add('	 */');
+                  memo1.Lines.Add('	public '+BrvFuncoesXE.PrimeiraMaiscula(BrvFuncoesXE.retornatipoArray(LowerCase(CcDataset.FieldByName('tipo').AsString)))+' getFirst'+BrvFuncoesXE.PrimeiraMaiscula(BrvFuncoesXE.retornatipoArray(LowerCase(CcDataset.FieldByName('tipo').AsString)))+'()');
+                  memo1.Lines.Add('	{    ');
+                  memo1.Lines.Add('		if ((get'+BrvFuncoesXE.PrimeiraMaiscula(BrvFuncoesXE.retornatipoArray(LowerCase(CcDataset.FieldByName('tipo').AsString)))+'s() != null) && !get'+BrvFuncoesXE.PrimeiraMaiscula(BrvFuncoesXE.retornatipoArray(LowerCase(CcDataset.FieldByName('tipo').AsString)))+'s().isEmpty())   ');
+                  memo1.Lines.Add('		{    ');
+                  memo1.Lines.Add('			return get'+BrvFuncoesXE.PrimeiraMaiscula(BrvFuncoesXE.retornatipoArray(LowerCase(CcDataset.FieldByName('tipo').AsString)))+'s().get(FIRST); ');
+                  memo1.Lines.Add('		}     ');
+                  memo1.Lines.Add('       ');
+                  memo1.Lines.Add('		return null; ');
+                  memo1.Lines.Add('	}  ');
+                end;
+              end;
+              CcDataset.Next;
+         end;
+          controte := 0;
+          tostring := '';
+          CcDataset.First;
           memo1.Lines.Add('/* ');
           memo1.Lines.Add('* (non-Javadoc) ');
           memo1.Lines.Add('* @see com.sensus.common.model.SensusModel#toString() ');

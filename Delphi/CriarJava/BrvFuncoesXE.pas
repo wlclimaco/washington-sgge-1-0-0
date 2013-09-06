@@ -15,8 +15,23 @@ uses
   Function MostrarMemo(Memo: TMemo;Texto:String) : String;
   function verificadorCodeAppBanco(Txt:String):String;
   function verificadorCodeBanco(Txt:String):String;
+  function retornatipoArray(Txt:String):String;
 
 implementation
+
+function retornatipoArray(Txt:String):String;
+var   linha: string;
+  sPos: Integer;
+  sPos2: Integer;
+begin
+  sPos  :=  Pos('<', Txt);
+  sPos2 :=  Pos('>', Txt);
+  linha :=  copy(Txt, sPos+1, (sPos2 - 1) - sPos );
+
+
+
+result := linha;
+end;
 
 function IncluirNoArq(Texto:TMemo;Linha:Integer;Arquivo:String):Boolean;
 var arq        : TextFile;
