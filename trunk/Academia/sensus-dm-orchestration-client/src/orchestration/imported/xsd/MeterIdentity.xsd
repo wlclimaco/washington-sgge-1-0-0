@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.sensus.com/common/messagetypes/meter" 
+			xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified"
+            xmlns:tns="http://www.sensus.com/common/messagetypes/meter"
+            xmlns:error="http://www.sensus.com/common/messagetypes/error"
+            xmlns:service="http://www.sensus.com/common/messagetypes/service"
+            xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+	   		xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+            jaxb:version="2.0"
+            jaxb:extensionBindingPrefixes="xjc">
+	
+	<xs:import schemaLocation="ServiceType.xsd"
+		namespace="http://www.sensus.com/common/messagetypes/service" />
+		
+	<xs:import schemaLocation="ErrorDetail.xsd"
+		namespace="http://www.sensus.com/common/messagetypes/error" />
+		
+	<xs:annotation>
+		<xs:documentation>
+			Meter Identity definition
+			Copyright 2010 Sensus
+			All Rights Reserved
+		</xs:documentation>
+	</xs:annotation>	
+
+	<xs:complexType name="MeterError">
+		<xs:sequence>
+		    <xs:choice>		       
+		    	<xs:element name="meterIdentity" type="tns:MeterIdentity" />
+		    	<xs:element  name="flexnetId" type="xs:int" />
+		    </xs:choice>			
+			<xs:element ref="error:errorDetail" />
+		</xs:sequence>
+	</xs:complexType>
+	
+
+	<xs:complexType name="MeterIdentity">
+		<xs:sequence>
+			<xs:element minOccurs="1" name="meterNo" type="xs:string" />
+			<xs:element minOccurs="1" name="customerId" type="xs:string" />
+			<xs:element minOccurs="0" name="serviceType" type="service:ServiceType" />
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="serviceTypeRanking" type="service:ServiceType">
+			<xs:annotation>
+				<xs:documentation>
+					An ordered ranking of service types.  In cases where a meterNo is
+					associated with more than one service type and the serviceType element
+					is not specified in the MeterIdentity, this ranking can be used 
+					select which of the meters are of primary interest.  The first service type
+					is most preferred.  The last service type is least preferred.
+				</xs:documentation>
+			</xs:annotation>			
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+    <xs:complexType name="MeterIdentityList">
+        <xs:sequence>
+            <xs:element name="meterIdentity" minOccurs="0" maxOccurs="unbounded" type="tns:MeterIdentity" />
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

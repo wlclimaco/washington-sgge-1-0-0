@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+	jaxb:version="2.0"
+	jaxb:extensionBindingPrefixes="xjc">
+
+	<xs:simpleType name="QuantityType">
+ 		<xs:annotation>
+       		<xs:appinfo>
+           		<jaxb:typesafeEnumClass />
+        	</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:enumeration value="0">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="VALUE"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+			<xs:enumeration value="1">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="SUMMATION"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+			<xs:enumeration value="2">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="PEAK_DEMAND"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+			<xs:enumeration value="3">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="INTERVAL"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+			<xs:enumeration value="4">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="SNAPSHOT"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="5">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="INSTANTANEOUS"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="6">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="INDICATING"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="7">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="EVENT"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>	  	   		
+	   		<xs:enumeration value="8">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="CUMULATIVE"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>	          	
+	   		</xs:enumeration>	  
+	   		<xs:enumeration value="9">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="CONTINUOUS_CUMULATIVE"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration> 		 		
+	   		<xs:enumeration value="-1">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="NA"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	
+</xs:schema>

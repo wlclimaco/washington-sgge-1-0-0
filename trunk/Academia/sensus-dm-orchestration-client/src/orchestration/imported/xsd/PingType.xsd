@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified"
+            xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+	   		xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+            jaxb:version="2.0"
+            jaxb:extensionBindingPrefixes="xjc">
+
+   		<xs:simpleType name="PingType">
+   			<xs:annotation>
+          		<xs:appinfo>
+              		<jaxb:typesafeEnumClass />
+          		</xs:appinfo>
+	    	</xs:annotation>
+	      	<xs:restriction base="xs:int">
+	     		<xs:enumeration value="0">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="NORMAL_PING"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="1">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CONFIGURATION_PING"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="2">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="DEMAND_READ_PING"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="3">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="HANDHELD_MPASS_BINDING_PING_BUDDY"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="4">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="HANDHELD_MPASS_BINDING_PING_NO_BUDDY"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="5">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="ALARM_PING"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="6">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="HANDHELD_MPASS_ALARM_PING_NO_BUDDY"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="7">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="HANDHELD_MPASS_DEMAND_READ_NO_BUDDY"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="8">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="METER_READING"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="9">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="TIER_DATA"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="10">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="DEMAND_READ_PING_ONLY"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="11">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="SINGLE_TIER"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="12">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="WATER_INTERVAL_DATA_METER_INTERFACE"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="13">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="WATER_INTERVAL_DATA"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="14">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="EXTENDED_SETUP"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="15">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="STATIC_SETUP"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="16">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="BINDING"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="17">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="ELECTRIC_INTERVAL_DATA"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="18">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="ELECTRIC_INTERVAL_DATA_FROM_ADDRESS"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="19">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="ELECTRIC_INTERVAL_DATA_CLEAR"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="20">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="SINGLE_TIER_MESSAGE_WITH_READ"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="21">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="DEMAND_HISTORY"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="22">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="HHD_INSTALLATION_INFORMATION"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="23">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="LOAD_PROFILE_META_DATA"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="24">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="LOAD_PROFILE_DATA"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="25">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="LOAD_PROFILE_DATA_SINGLE"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="26">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="HOME_LAN_PING"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="27">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="ICONA_ENHANCED_ALARM"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="28">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="SECONDARY_GROUP_ADDR_VECTOR"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="29">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="ICON_SERIAL_NUMBER"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="30">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="ICON_STYLE_NUMBER"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="31">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="ICON_METER_FORM_AND_VOLTAGE"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="32">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="ICON_CT_PT_MULTIPLIERS"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="33">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="ICON_REVERSE_POWER_ERROR_RESET_SETTINGS"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="34">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="ICON_LCD_FORMAT_CURRENT_DISPLAY_LIST"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="35">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="DEMAND_ENABLE_STATUS_INTERVAL_CONFIG"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="36">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="TOU_ENABLE_STATUS_TIER_AND_SEASON_CONFIG"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="37">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="TOU_EVEN_YEAR_HOLIDAYS"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="38">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="TOU_ODD_YEAR_HOLIDAYS"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="39">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CLICK_HISTORY"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="40">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="LOAD_LIMIT_STATUS_THRESHOLD"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="41">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="ADVANCED_VOLTAGE_QUALITY_SETTINGS"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="42">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="TOU_AUTO_PUSH_OPTIONS"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="43">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="ICONA_CURRENT_TOU_TIER_DATA"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="44">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="ICONA_FORCE_READ_DUAL_TOU_RATE_PING"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="45">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="ICONA_NON_READ_DUAL_TOU_RATE_PING"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="46">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="ICONA_PREVIOUS_TOU_TIER_DATA"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="47">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="ICONA_PREVIOUS_TOU_DUAL_TIER_PING"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="48">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="ICONA_PREVIOUS_TOU_DUAL_TIER_PING_WITH_READ"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="49">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="ICONA_LOAD_PROFILE_DATA"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="50">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="FLEXNET_ADVANCED_SETUP"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="51">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="C_AND_I_HIGH_RES_READ_WITH_PULSE_DATA"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="52">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="READ_TIME_ADJUSTMENT_LOG"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="53">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="WHOS_YOUR_BUDDY"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="54">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="ICONA_DAILY_READ"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="55">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="TOU_DAY_TYPE"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="56">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="ICONA_FACTORY_CONFIGURATION"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="57">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="ICONA_SEND_TOU_RATE_AND_CURRENT_TIME"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="58">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="COMBINED_EXTENDED_SETUP_AND_BIND"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="59">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="SEND_AES_KEY_HASH"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="60">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="LOAD_PROFILE_MULTI_BLOCK"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="61">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="LOAD_PROFILE_SINGLE_BLOCK_SEGMENT"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="62">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="MAXIMUM_PACKET_LENGTH"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="63">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="REQUEST_ALL_FLEXNET_IDS"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="64">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="REQUEST_BOTH_SERIAL_NUMBERS"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="65">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="NA2W_CONFIGURATION_PING"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="66">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="ICONA_SERVICE_QUALITY"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="67">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="BUDDY_THROTTLE_CONFIGURATION"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="68">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="ICONA_WEEKLY_ALARM"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="69">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="REQUEST_NA2W_SD_DB_INTERVAL_DATA"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="70">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="NA2W_EP_SETUP_AUDIT"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="71">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="NA2W_INSTALL_AUDIT"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="72">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="NA2W_CHANNEL_SETUP_AUDIT"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="81">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="ICONAS_EXTENDED_QUERIES"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+			</xs:restriction>
+		</xs:simpleType>
+</xs:schema>

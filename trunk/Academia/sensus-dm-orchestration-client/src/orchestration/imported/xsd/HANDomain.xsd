@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="http://www.sensus.com/common/messagetypes/han" 
+	xmlns:han="http://www.sensus.com/common/messagetypes/han" 
+	xmlns:error="http://www.sensus.com/common/messagetypes/error"
+	xmlns:tns="http://www.sensus.com/common/messagetypes/han" 
+	elementFormDefault="qualified">
+	
+    <import schemaLocation="ErrorDetail.xsd" namespace="http://www.sensus.com/common/messagetypes/error" />
+     
+    <!-- To be used for HAN API for sending back error --> 
+    <element name="HanError">
+        <complexType>
+            <sequence>
+                <element name="endpointId" type="string"></element>
+                <element name="customerId" type="string"></element>          
+                <element name="hanDevice" type="han:HanDevice" minOccurs="1" maxOccurs="1" />
+                <element name="hanInterface" type="han:HanInterface" minOccurs="0" maxOccurs="1" />
+                <element ref="error:errorDetail" minOccurs="1" maxOccurs="1" />
+            </sequence>
+        </complexType>
+    </element> 	
+   	
+	<complexType name="HanDevice" >
+    		<sequence>
+   				<element name="endpointId" type="string"></element>
+   				<element name="customerId" type="string"></element>
+    		</sequence>
+    	</complexType>
+
+  <!--
+	<element name="HanDevice">
+    	<complexType>
+    		<sequence>
+   				<element name="endpointId" type="string"></element>
+   				<element name="customerId" type="string"></element>
+    		</sequence>
+    	</complexType>
+    </element>
+
+     -->   
+     
+	<element name="HanSecurityToken">
+    	<complexType>
+    		<sequence>
+	   			<element name="tokenType" type="string"></element>
+   				<element name="installCode" type="base64Binary"></element>
+   				<element name="preConfigLinkKey" type="base64Binary"></element>
+   				<element name="encoding" type="string"></element>
+    		</sequence>
+    	</complexType>
+    </element>
+    
+
+   	<complexType name="HanInterface">
+    		<sequence>
+   			<element name="meterId" type="string"></element>
+   			<element name="customerId" type="string"></element>
+    		</sequence>
+   	</complexType>
+    
+ <!--    
+	<element name="HanInterface">
+    	<complexType>
+    		<sequence>
+   			<element name="meterId" type="string"></element>
+   			<element name="customerId" type="string"></element>
+    		</sequence>
+    	</complexType>
+    </element>
+ -->   
+ 
+<!--     <complexType name="HanGroup">
+    		<sequence>
+   			<element name="groupId" type="string"></element>
+   			<element name="customerId" type="string"></element>
+    		</sequence>
+    </complexType> -->
+ 
+	<element name="HanPriceFormat">
+    	<complexType>
+    		<sequence>
+ 				<element name="providerId" type="int"></element>
+				<element name="unitofMeasure" type="int"></element>
+				<element name="currency" type="int"></element>
+				<element name="trailingDigit" type="int"></element>
+				<element name="numberOfTiers" type="int"></element>
+    		</sequence>
+    	</complexType>
+    </element>
+    
+	<element name="HanPriceTier">
+    	<complexType>
+    		<sequence>
+				<element name="priceTier" type="int"></element>
+				<element name="price" type="int"></element>
+				<element name="registerTier" type="int"></element>
+				<element name="rateLabel" type="string"></element>
+    		</sequence>
+    	</complexType>
+    </element>   
+    
+	<element name="HanDeviceDetail">
+    	<complexType>
+    		<sequence>
+				<element name="macAddress" type="integer"></element>
+				<element name="protocol" type="string"></element>
+				<element name="model" type="string"></element>
+				<element name="manufacturer" type="string"></element>
+				<element name="firmwareVersion" type="string"></element>
+    		</sequence>
+    	</complexType>
+    </element>
+    
+	<element name="HanIHDMessage">
+    	<complexType>
+    		<sequence>
+				<element name="messageID" type="int"></element>
+				<element name="messageText" type="string"></element>
+				<element name="isComfirmationRequired" type="boolean"></element>
+				<element name="messageControlTransmissionMode" type="string"></element>
+				<element name="messageControlPriority" type="string"></element>				
+				<element name="startTime" type="int"></element>
+				<element name="duration" type="int"></element>				
+    		</sequence>
+    	</complexType>
+    </element>
+    
+    <element name="HanIHDBillingConsumption">
+       <complexType>
+          <sequence>
+             <element name="usageToDate" type="int"></element>
+             <element name="projectedUsage" type="int"></element>
+             <element name="billToDate" type="int"></element>
+             <element name="projectedBill" type="int"></element>
+             <element name="daysOfService" type="int"></element>
+          </sequence>
+       </complexType>
+    </element>
+    
+</schema>

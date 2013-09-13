@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	targetNamespace="http://www.sensus.com/common/messagetypes" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified"
+	xmlns:mt="http://www.sensus.com/common/messagetypes"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+	jaxb:version="2.0"
+	jaxb:extensionBindingPrefixes="xjc">
+
+	<xs:include schemaLocation="Status.xsd" />
+	<xs:include schemaLocation="TransactionType.xsd" />	
+	<xs:include schemaLocation="ResponseModeOverride.xsd" />
+	<xs:include schemaLocation="PingType.xsd" />
+
+</xs:schema>

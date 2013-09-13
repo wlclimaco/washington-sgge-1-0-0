@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.sensus.com/common/messagetypes/read/missing"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+	xmlns:tns="http://www.sensus.com/common/messagetypes/read/missing" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" jaxb:version="2.0"
+	jaxb:extensionBindingPrefixes="xjc">
+
+	<xs:simpleType name="MissingReadStatus">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass />
+			</xs:appinfo>
+			<xs:documentation>
+				Missing Read Status to represent and mark backfill candidates
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:enumeration value="-3">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="READ_QUARANTINED" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="-2">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="READ_UNAVAILABLE_NO_FILL" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="-1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="READ_UNAVAILABLE_FUTURE_FILL" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="READ_AVAILABLE" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="PREV_MISSING_NOW_AVAILABLE" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="MASTER_SAMPLE_POINT_CHANGE" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="3">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="PREV_QUARANTINED_NOW_AVAILABLE" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+</xs:schema>

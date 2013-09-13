@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.sensus.com/common/messagetypes/smartpointRequest"  
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" jaxb:version="2.0"
+	xmlns:smartptRequest="http://www.sensus.com/common/messagetypes/smartpointRequest" 
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	jaxb:extensionBindingPrefixes="xjc">
+	
+		<xs:complexType name="SmartPoint">
+		<xs:sequence>
+			<xs:element name="smartPointId" type="xs:int" minOccurs="1"
+				maxOccurs="1" />
+			<xs:element name="stopTime" type="xs:long" minOccurs="0"
+				maxOccurs="1" />
+			<xs:element name="lockOutPeriod" type="xs:long" minOccurs="0"
+				maxOccurs="1" />
+			<xs:element name="futureDRTime" type="xs:long" minOccurs="0"
+				maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

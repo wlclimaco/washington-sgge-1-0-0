@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.sensus.com/common/messagetypes" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified"
+            xmlns:mt="http://www.sensus.com/common/messagetypes"
+            xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+	   		xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+            jaxb:version="2.0"
+            jaxb:extensionBindingPrefixes="xjc">
+	
+	<xs:element name="Route">
+	   	<xs:complexType>
+	   		<xs:sequence>
+				<xs:element name="repId" type="xs:int"/>
+				<xs:element name="tgbId" type="xs:int"/>
+				<xs:element name="buddyId" type="xs:int"/>
+				<xs:element name="SNR" type="xs:float"/>
+				<xs:element name="weight" type="xs:int" default="100"/>
+				<xs:element name="success" type="xs:int" default="100"/>
+	 			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

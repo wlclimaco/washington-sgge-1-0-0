@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.sensus.com/common/messagetypes/connectionstatetype" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified"
+            xmlns:mt="http://www.sensus.com/common/messagetypes/connectionstatetype"
+            xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+	   		xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+            jaxb:version="2.0"
+            jaxb:extensionBindingPrefixes="xjc">
+
+	<xs:complexType name="ConnectionStateType">
+		<xs:sequence>
+			<xs:element ref="mt:ConnectionState"/>
+		</xs:sequence>
+	</xs:complexType>            
+            
+	<xs:element name="ConnectionState" type="mt:AbstractStateType"/>
+	<xs:element name="Connected" type="mt:ConnectedStateType" substitutionGroup="mt:ConnectionState"/>
+	<xs:element name="Disconnected" type="mt:DisconnectedStateType" substitutionGroup="mt:ConnectionState"/>
+	<xs:element name="Armed" type="mt:ArmedStateType" substitutionGroup="mt:ConnectionState"/>
+	<xs:element name="Unknown" type="mt:UnknownStateType" substitutionGroup="mt:ConnectionState"/>
+
+
+	<xs:complexType name="AbstractStateType" abstract="true">
+		<xs:sequence>
+			<xs:element name="effectiveTime" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>
+					 This time is indicates the the state change time in DB and is derived from "time of intercept"
+					 of the load-shed message that changes the state in DB.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+		
+	<xs:complexType name="DisconnectedStateType">
+		<xs:complexContent>
+			<xs:extension base="mt:AbstractStateType">
+				<xs:sequence>
+					<xs:element name="subState" type="mt:DisconnectedStateEnum"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>		
+	</xs:complexType>
+	
+	<xs:complexType name="ArmedStateType">
+		<xs:complexContent>
+			<xs:extension base="mt:AbstractStateType">
+				<xs:sequence>
+					<xs:element name="subState" type="mt:ArmedStateEnum"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>		
+	</xs:complexType>
+	
+	<xs:complexType name="ConnectedStateType">
+		<xs:complexContent>
+			<xs:extension base="mt:AbstractStateType">
+				<xs:sequence>
+					<xs:element name="subState" type="mt:ConnectedStateEnum"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>		
+	</xs:complexType>
+
+	<xs:complexType name="UnknownStateType">
+		<xs:complexContent>
+			<xs:extension base="mt:AbstractStateType">
+				<xs:sequence>
+					<xs:element name="subState" type="mt:UnknownStateEnum"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>		
+	</xs:complexType>
+	    	
+    <xs:simpleType name="DisconnectedStateEnum">
+    	<xs:annotation>
+          <xs:appinfo>
+              <jaxb:typesafeEnumClass />
+          </xs:appinfo>
+	    </xs:annotation>
+	    <xs:restriction base="xs:string">
+	          <xs:enumeration value="LOADSHED">
+	              <xs:annotation>
+	                   <xs:appinfo>
+	                        <jaxb:typesafeEnumMember name="LOADSHED"/>
+	                   </xs:appinfo>
+	              </xs:annotation>
+	          </xs:enumeration>	         
+	          <xs:enumeration value="LSVS">
+	              <xs:annotation>
+	                   <xs:appinfo>
+	                        <jaxb:typesafeEnumMember name="LSVS"/>
+	                   </xs:appinfo>
+	              </xs:annotation>
+	          </xs:enumeration>
+	          <xs:enumeration value="MDM">
+	              <xs:annotation>
+	                   <xs:appinfo>
+	                        <jaxb:typesafeEnumMember name="MDM"/>
+	                   </xs:appinfo>
+	              </xs:annotation>
+	          </xs:enumeration>
+	    </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="ArmedStateEnum">
+    	<xs:annotation>
+          <xs:appinfo>
+              <jaxb:typesafeEnumClass />
+          </xs:appinfo>
+	    </xs:annotation>
+	     <xs:restriction base="xs:string">
+	    	 <xs:enumeration value="DEFAULT">
+	              <xs:annotation>
+	                   <xs:appinfo>
+	                        <jaxb:typesafeEnumMember name="DEFAULT"/>
+	                   </xs:appinfo>
+	              </xs:annotation>
+	          </xs:enumeration>	          
+	          <xs:enumeration value="MDM">
+	              <xs:annotation>
+	                   <xs:appinfo>
+	                        <jaxb:typesafeEnumMember name="MDM"/>
+	                   </xs:appinfo>
+	              </xs:annotation>
+	          </xs:enumeration>
+	    </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="ConnectedStateEnum">
+    	<xs:annotation>
+          <xs:appinfo>
+              <jaxb:typesafeEnumClass />
+          </xs:appinfo>
+	    </xs:annotation>
+	    <xs:restriction base="xs:string">
+	          <xs:enumeration value="LOADRESTORE">
+	              <xs:annotation>
+	                   <xs:appinfo>
+	                        <jaxb:typesafeEnumMember name="LOADRESTORE"/>
+	                   </xs:appinfo>
+	              </xs:annotation>
+	          </xs:enumeration>
+	          <xs:enumeration value="MDM">
+	              <xs:annotation>
+	                   <xs:appinfo>
+	                        <jaxb:typesafeEnumMember name="MDM"/>
+	                   </xs:appinfo>
+	              </xs:annotation>
+	          </xs:enumeration>
+	    </xs:restriction>
+    </xs:simpleType>    
+    
+    <xs:simpleType name="UnknownStateEnum">
+    	<xs:annotation>
+          <xs:appinfo>
+              <jaxb:typesafeEnumClass />
+          </xs:appinfo>
+	    </xs:annotation>
+	    <xs:restriction base="xs:string">
+	          <xs:enumeration value="DEFAULT">
+	              <xs:annotation>
+	                   <xs:appinfo>
+	                        <jaxb:typesafeEnumMember name="DEFAULT"/>
+	                   </xs:appinfo>
+	              </xs:annotation>
+	          </xs:enumeration>
+	          <xs:enumeration value="ADMINISTRATIVE">
+	              <xs:annotation>
+	                   <xs:appinfo>
+	                        <jaxb:typesafeEnumMember name="ADMINISTRATIVE"/>
+	                   </xs:appinfo>
+	              </xs:annotation>
+	          </xs:enumeration>
+	    </xs:restriction>
+    </xs:simpleType>
+
+	<xs:simpleType name="LoadshedRequestType">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ARM">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="ARM" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CONNECT">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="CONNECT" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DICONNECT">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="DICONNECT" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CURRENT_STATE">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="CURRENT_STATE" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+
+		</xs:restriction>
+	</xs:simpleType>    	
+</xs:schema>

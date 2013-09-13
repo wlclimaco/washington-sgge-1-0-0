@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.sensus.com/common/messagetypes/smartpoint"  
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" jaxb:version="2.0"
+	xmlns:smartpt="http://www.sensus.com/common/messagetypes/smartpoint" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	jaxb:extensionBindingPrefixes="xjc">	
+	
+	<xs:complexType name="SmartPoint">
+		<xs:sequence>
+			<xs:element name="smartPointId" type="xs:int" />
+			<xs:element name="status" type="xs:string" />
+			<xs:element name="dayToBackfill" type="xs:int" />
+			<xs:element name="demandResetBackfill" type="xs:long" />
+			<xs:element name="lastContractRead" type="xs:long" />
+			<xs:element name="lastDemandReset" type="xs:long" />
+			<xs:element name="controlParams" type="smartpt:ControlParams" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ControlParams">
+		<xs:sequence>
+			<xs:element name="responseHour" type="xs:int" />
+			<xs:element name="epmCallbackLoc" type="xs:string"  minOccurs="0" maxOccurs="1" />
+			<xs:element name="correlationId" type="xs:string"  minOccurs="0" maxOccurs="1" />
+			<xs:element name="tierMap" type="xs:int" minOccurs="0" />
+			<xs:element name="record" type="xs:int" minOccurs="0" />
+			<xs:element name="transactionId" type="xs:string" minOccurs="0" />
+			<xs:element name="demandResetRetryCounter" type="xs:int"  minOccurs="0" />
+			<xs:element name="routerSendTimeOut" type="xs:int" minOccurs="0" />
+			<xs:element name="demandResetTransactionId" type="xs:string" minOccurs="0" />
+			<xs:element name="demandResetProcessTimeout" type="xs:int" minOccurs="0" />
+			<xs:element name="demandResetEpochTime" type="xs:long" minOccurs="0" />
+			<xs:element name="demandResetSentOutTime" type="xs:long" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

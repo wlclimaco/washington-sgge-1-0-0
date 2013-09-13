@@ -1,0 +1,235 @@
+<xs:schema targetNamespace="http://www.sensus.com/common/messagetypes" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified"
+            xmlns:mt="http://www.sensus.com/common/messagetypes"
+            xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+	   		xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+            jaxb:version="2.0"
+            jaxb:extensionBindingPrefixes="xjc">
+
+   		<xs:simpleType name="UserCommandType">
+   			<xs:annotation>
+          		<xs:appinfo>
+              		<jaxb:typesafeEnumClass />
+          		</xs:appinfo>
+	    	</xs:annotation>
+	      	<xs:restriction base="xs:int">
+	     		<xs:enumeration value="0">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_NONE_SET"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="1">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_PING"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>		   		
+		   		<xs:enumeration value="2">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_DEMAND_RESET"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>		   		
+		   		<xs:enumeration value="3">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_CTIER_READ"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>		   		
+		   		<xs:enumeration value="4">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_CTIER_WRITE"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>		   		
+		   		<xs:enumeration value="5">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_LOAD_PROFILE"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>		   		
+		   		<xs:enumeration value="6">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_SET_METER_ID"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="7">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_REPROGRAM"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="8">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_DISPLAY"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="9">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_SET_TIME"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="10">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_LOAD_SHED"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="11">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_CONFIG"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="12">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_TIERSET_READ"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="13">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_ICONA_CLEAR_WARNINGS"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="14">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_DELAY_SUPERVISORY_TX"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="15">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_DEMAND_ENABLE"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="16">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_FW_LOAD_BLOCK"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	  
+		   		<xs:enumeration value="17">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_FW_LOAD_FLASH"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="18">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_FW_LOAD_CHECK"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="19">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_FW_LOAD_START"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>			   				   		
+		   		<xs:enumeration value="20">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_ICON_METER_RESET"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="21">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_RESET_FLEXNET_MODULE"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="22">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_SET_VOLTAGE_QUALITY"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="23">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_TGB_STATUS_REQUEST"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="24">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_TOU_CRIT_PEAK_OVERRIDE"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="25">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_TOU_ENABLE"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="26">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_SET_ENCRYPTION_KEY"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="27">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_INTERNAL_MSG"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="28">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_NA2W"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="29">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_NA2W_MLC"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="30">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_FW_LOAD_CHECK_AND_FLASH"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	 		
+			</xs:restriction>
+		</xs:simpleType>
+</xs:schema>
