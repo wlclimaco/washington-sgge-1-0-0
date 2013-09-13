@@ -1,11 +1,11 @@
-package com.sensus.dm.commons.exercicio.model.response;
+package com.sensus.dm.common.exercicio.model.response;
 
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 
 import com.sensus.common.model.response.Response;
-import com.sensus.dm.commons.exercicio.model.Exercicio;
+import com.sensus.dm.common.exercicio.model.Exercicio;
 
 /**
  * The Class ExercicioResponse.

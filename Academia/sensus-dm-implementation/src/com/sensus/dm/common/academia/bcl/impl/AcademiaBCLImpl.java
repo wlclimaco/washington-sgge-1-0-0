@@ -16,9 +16,6 @@ import com.sensus.dm.common.academia.dac.IAcademiaDAC;
 import com.sensus.dm.common.academia.model.Academia;
 import com.sensus.dm.common.academia.model.request.AcademiaRequest;
 import com.sensus.dm.common.academia.model.request.InquiryAcademiaRequest;
-import com.sensus.dm.common.action.model.CreateAcademiaAction;
-import com.sensus.dm.common.action.model.EditAcademiaAction;
-import com.sensus.dm.common.action.model.RemoveAcademiaAction;
 import com.sensus.dm.common.base.util.DMUtil;
 import com.sensus.dm.common.device.bcl.IDeviceBCL;
 import com.sensus.dm.common.process.bcl.IProcessBCL;
@@ -343,7 +340,7 @@ public class AcademiaBCLImpl implements IAcademiaBCL
 			// insert process for del academia
 			InternalResultsResponse<DMProcess> processResponse =
 					insertAcademiaProcess(academiaResponse.getFirstResult(), academiaRequest.getIsMonitored(),
-							RemoveAcademiaAction.ACTION, ProcessStatusEnum.COMPLETED,
+							"RemoveAcademiaAction.ACTION", ProcessStatusEnum.COMPLETED,
 							null, academiaRequest);
 
 			if (processResponse.isInError())
@@ -387,7 +384,7 @@ public class AcademiaBCLImpl implements IAcademiaBCL
 
 		InternalResultsResponse<DMProcess> processResponse =
 				insertAcademiaProcess(academiaRequest.getFirstAcademia(), false,
-						CreateAcademiaAction.ACTION, ProcessStatusEnum.COMPLETED,
+						"CreateAcademiaAction.ACTION", ProcessStatusEnum.COMPLETED,
 						null, academiaRequest);
 
 		if (processResponse.isInError())
@@ -422,7 +419,7 @@ public class AcademiaBCLImpl implements IAcademiaBCL
 		// insert process for edit academia
 		InternalResultsResponse<DMProcess> processResponse =
 				insertAcademiaProcess(academiaRequest.getFirstAcademia(), false,
-						EditAcademiaAction.ACTION, ProcessStatusEnum.COMPLETED, null, academiaRequest);
+						"EditAcademiaAction.ACTION", ProcessStatusEnum.COMPLETED, null, academiaRequest);
 
 		if (processResponse.isInError())
 		{
@@ -475,7 +472,7 @@ public class AcademiaBCLImpl implements IAcademiaBCL
 	private InternalResponse fetchMessageProcessing(Academia academia)
 	{
 		List<Property> properties = new ArrayList<Property>();
-		properties.add(new Property(PropertyEnum.ACADEMIA_ID.getValue(), academia.getCdacad().toString()));
+		properties.add(new Property(PropertyEnum.GROUP_ID.getValue(), academia.getCdacad().toString()));
 
 		InternalResponse response = getProcessBCL().fetchCheckProcessing(
 				new ProcessRequest(new DMProcess(ProcessStatusEnum.IN_PROCESS, properties)));
@@ -510,7 +507,7 @@ public class AcademiaBCLImpl implements IAcademiaBCL
 	{
 
 		List<Property> properties = new ArrayList<Property>();
-		properties.add(new Property(PropertyEnum.ACADEMIA_ID.getValue(), academia.getCdacad()
+		properties.add(new Property(PropertyEnum.GROUP_ID.getValue(), academia.getCdacad()
 				.toString()));
 		properties.add(new Property(PropertyEnum.GROUP_NAME.getValue(), academia.getAcadem()));
 

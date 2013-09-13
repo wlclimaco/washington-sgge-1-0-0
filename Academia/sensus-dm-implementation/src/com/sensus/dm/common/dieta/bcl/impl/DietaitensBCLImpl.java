@@ -10,9 +10,6 @@ import com.sensus.common.csv.CSVColumn;
 import com.sensus.common.model.Message;
 import com.sensus.common.model.response.InternalResponse;
 import com.sensus.common.model.response.InternalResultsResponse;
-import com.sensus.dm.common.action.model.CreateDietaitensAction;
-import com.sensus.dm.common.action.model.EditDietaitensAction;
-import com.sensus.dm.common.action.model.RemoveDietaitensAction;
 import com.sensus.dm.common.base.util.DMUtil;
 import com.sensus.dm.common.device.bcl.IDeviceBCL;
 import com.sensus.dm.common.dieta.bcl.IDietaitensBCL;
@@ -333,7 +330,7 @@ public class DietaitensBCLImpl implements IDietaitensBCL
 			// insert process for del dietaitens
 			InternalResultsResponse<DMProcess> processResponse =
 					insertDietaitensProcess(dietaitensResponse.getFirstResult(), dietaitensRequest.getIsMonitored(),
-							RemoveDietaitensAction.ACTION, ProcessStatusEnum.COMPLETED,
+							"RemoveDietaitensAction.ACTION", ProcessStatusEnum.COMPLETED,
 							null, dietaitensRequest);
 
 			if (processResponse.isInError())
@@ -371,7 +368,7 @@ public class DietaitensBCLImpl implements IDietaitensBCL
 
 		InternalResultsResponse<DMProcess> processResponse =
 				insertDietaitensProcess(dietaitensRequest.getFirstDietaitens(), false,
-						CreateDietaitensAction.ACTION, ProcessStatusEnum.COMPLETED,
+						"CreateDietaitensAction.ACTION", ProcessStatusEnum.COMPLETED,
 						null, dietaitensRequest);
 
 		if (processResponse.isInError())
@@ -407,7 +404,7 @@ public class DietaitensBCLImpl implements IDietaitensBCL
 		// insert process for edit dietaitens
 		InternalResultsResponse<DMProcess> processResponse =
 				insertDietaitensProcess(dietaitensRequest.getFirstDietaitens(), false,
-						EditDietaitensAction.ACTION, ProcessStatusEnum.COMPLETED, null, dietaitensRequest);
+						"EditDietaitensAction.ACTION", ProcessStatusEnum.COMPLETED, null, dietaitensRequest);
 
 		if (processResponse.isInError())
 		{

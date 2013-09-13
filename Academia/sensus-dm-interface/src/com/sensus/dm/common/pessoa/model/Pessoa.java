@@ -9,8 +9,8 @@ import com.sensus.dm.common.academia.model.Academia;
 import com.sensus.dm.common.dieta.model.Dieta;
 import com.sensus.dm.common.foto.model.Foto;
 import com.sensus.dm.common.medida.model.Medida;
+import com.sensus.dm.common.serie.model.Serie;
 import com.sensus.dm.common.suplemento.model.Suplemento;
-import com.sensus.dm.commons.serie.model.Serie;
 
 @SuppressWarnings("serial")
 public class Pessoa extends SensusModel

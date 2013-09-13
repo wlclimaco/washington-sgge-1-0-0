@@ -1,4 +1,4 @@
-package com.sensus.dm.commons.serie.model.response;
+package com.sensus.dm.common.serie.model.response;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -7,7 +7,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 
 import com.sensus.common.model.response.InquiryResponse;
-import com.sensus.dm.commons.serie.model.Serie;
+import com.sensus.dm.common.serie.model.Serie;
 
 /**
  * The Class InquirySerieResponse.

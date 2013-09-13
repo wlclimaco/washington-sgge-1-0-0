@@ -1,10 +1,10 @@
-package com.sensus.dm.commons.exercicio.model;
+package com.sensus.dm.common.exercicio.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.sensus.common.model.SensusModel;
-import com.sensus.dm.commons.grupomuscular.model.Grupomuscular;
+import com.sensus.dm.common.grupomuscular.model.Grupomuscular;
 
 @SuppressWarnings("serial")
 public class Exercicio extends SensusModel

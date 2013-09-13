@@ -1,11 +1,11 @@
-package com.sensus.dm.commons.serie.model;
+package com.sensus.dm.common.serie.model;
 
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.sensus.common.model.SensusModel;
-import com.sensus.dm.commons.exercicio.model.Exercicio;
+import com.sensus.dm.common.exercicio.model.Exercicio;
 
 @SuppressWarnings("serial")
 public class Serieitens extends SensusModel

@@ -178,7 +178,7 @@ public class SuplementoBCFImpl implements ISuplementoBCF
 
 			ValidationContext context = new ValidationContext();
 			context.getValidationArguments().put(DMPersistanceActionEnum.getDefaultName(),
-					DMPersistanceActionEnum.FETCH_ALL_SUPLEMENTOS);
+					DMPersistanceActionEnum.FETCH_ALL);
 			context.putObjectToBeValidated(TenantRequest.class.getSimpleName(),
 					inquirySuplementoRequest);
 			context.putObjectToBeValidated(SortExpression.class.getSimpleName(),
