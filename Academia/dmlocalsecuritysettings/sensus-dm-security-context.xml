@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/security
+          	http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<!-- ########## HTTP requests security. ########## -->
+
+	<security:global-method-security pre-post-annotations="enabled" />
+
+	<security:http pattern="/login-redirect.jsp" security="none" />
+	<security:http pattern="/logout-redirect.jsp" security="none"/>
+	<security:http pattern="/access-denied.jsp" security="none"/>
+	<security:http pattern="/version.jsp" security="none" />
+	<security:http pattern="/images/**" security="none" />
+
+	<security:http auto-config="true" use-expressions="true">
+
+		<security:intercept-url pattern="/**/**"
+			access="hasAnyRole('ROLE_EPM_ADMIN', 'ROLE_EPM_SYSTEM_OPERATOR', 'ROLE_EPM_CUSTOMER_SUPPORT', 'ROLE_EPM_BILLING_MANAGER') and hasAnyRole('ROLE_EPM_SERVICE_ELECTRIC', 'ROLE_EPM_SERVICE_GAS', 'ROLE_EPM_SERVICE_WATER')" />
+		<security:form-login
+			login-page="/login-redirect.jsp?Please Login."
+			authentication-failure-url="/login-redirect.jsp?Login failed!"
+			always-use-default-target="true"
+			default-target-url="/service" />
+		<security:access-denied-handler error-page="/access-denied.jsp" />	
+		<security:logout
+			invalidate-session="true"
+			logout-success-url="/login-redirect.jsp?Successful Logout." />
+		<security:session-management invalid-session-url="/logout-redirect.jsp">
+			<security:concurrency-control max-sessions="5" error-if-maximum-exceeded="true" />
+		</security:session-management>
+	</security:http>
+	
+	<!-- ########## Authentication manager. ########## -->
+	 <security:authentication-manager alias="authenticationManager"	  erase-credentials="false">
+		<security:authentication-provider>
+		   <security:user-service>
+				<security:user name="rod" password="koala"
+				 authorities="ROLE_CUSTOMER_ACME, ROLE_EPM_ADMIN, ROLE_EPM_SERVICE_ELECTRIC, ROLE_EPM_SERVICE_WATER, ROLE_EPM_SERVICE_GAS" />
+				<security:user name="peco1" password="koala"
+				 authorities="ROLE_CUSTOMER_PECO, ROLE_EPM_ADMIN, ROLE_EPM_SERVICE_ELECTRIC, ROLE_EPM_SERVICE_WATER, ROLE_EPM_SERVICE_GAS" />
+				<security:user name="soco1" password="koala"
+				 authorities="ROLE_CUSTOMER_SOCO, ROLE_EPM_ADMIN, ROLE_EPM_SERVICE_ELECTRIC, ROLE_EPM_SERVICE_WATER, ROLE_EPM_SERVICE_GAS" />
+				<security:user name="rod-elec" password="koala"
+				 authorities="ROLE_CUSTOMER_ACME, ROLE_EPM_ADMIN, ROLE_EPM_SERVICE_ELECTRIC" />
+				<security:user name="rod-water" password="koala"
+				 authorities="ROLE_CUSTOMER_ACME, ROLE_EPM_ADMIN, ROLE_EPM_SERVICE_WATER" />
+				<security:user name="rod-gas" password="koala"
+				 authorities="ROLE_CUSTOMER_ACME, ROLE_EPM_ADMIN, ROLE_EPM_SERVICE_GAS" />
+				<security:user name="rod-arq" password="koala"
+				 authorities="ROLE_CUSTOMER_ACME, ROLE_EPM_ADMIN" />
+		   </security:user-service>
+		</security:authentication-provider>
+	 </security:authentication-manager>
+
+</beans>
