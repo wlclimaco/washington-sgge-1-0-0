@@ -10,9 +10,6 @@ import com.sensus.common.csv.CSVColumn;
 import com.sensus.common.model.Message;
 import com.sensus.common.model.response.InternalResponse;
 import com.sensus.common.model.response.InternalResultsResponse;
-import com.sensus.dm.common.action.model.CreateFotoAction;
-import com.sensus.dm.common.action.model.EditFotoAction;
-import com.sensus.dm.common.action.model.RemoveFotoAction;
 import com.sensus.dm.common.base.util.DMUtil;
 import com.sensus.dm.common.device.bcl.IDeviceBCL;
 import com.sensus.dm.common.foto.bcl.IFotoBCL;
@@ -330,7 +327,7 @@ public class FotoBCLImpl implements IFotoBCL
 			// insert process for del foto
 			InternalResultsResponse<DMProcess> processResponse =
 					insertFotoProcess(fotoResponse.getFirstResult(), fotoRequest.getIsMonitored(),
-							RemoveFotoAction.ACTION, ProcessStatusEnum.COMPLETED,
+							"RemoveFotoAction.ACTION", ProcessStatusEnum.COMPLETED,
 							null, fotoRequest);
 
 			if (processResponse.isInError())
@@ -366,7 +363,7 @@ public class FotoBCLImpl implements IFotoBCL
 
 		InternalResultsResponse<DMProcess> processResponse =
 				insertFotoProcess(fotoRequest.getFirstFoto(), false,
-						CreateFotoAction.ACTION, ProcessStatusEnum.COMPLETED,
+						"CreateFotoAction.ACTION", ProcessStatusEnum.COMPLETED,
 						null, fotoRequest);
 
 		if (processResponse.isInError())
@@ -400,7 +397,7 @@ public class FotoBCLImpl implements IFotoBCL
 		// insert process for edit foto
 		InternalResultsResponse<DMProcess> processResponse =
 				insertFotoProcess(fotoRequest.getFirstFoto(), false,
-						EditFotoAction.ACTION, ProcessStatusEnum.COMPLETED, null, fotoRequest);
+						"EditFotoAction.ACTION", ProcessStatusEnum.COMPLETED, null, fotoRequest);
 
 		if (processResponse.isInError())
 		{

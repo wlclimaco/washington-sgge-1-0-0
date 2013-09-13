@@ -1,4 +1,4 @@
-package com.sensus.dm.commons.grupomuscular.model;
+package com.sensus.dm.common.grupomuscular.model;
 
 import com.sensus.common.model.SensusModel;
 

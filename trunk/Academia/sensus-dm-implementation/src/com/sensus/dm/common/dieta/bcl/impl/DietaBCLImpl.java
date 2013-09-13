@@ -10,9 +10,6 @@ import com.sensus.common.csv.CSVColumn;
 import com.sensus.common.model.Message;
 import com.sensus.common.model.response.InternalResponse;
 import com.sensus.common.model.response.InternalResultsResponse;
-import com.sensus.dm.common.action.model.CreateDietaAction;
-import com.sensus.dm.common.action.model.EditDietaAction;
-import com.sensus.dm.common.action.model.RemoveDietaAction;
 import com.sensus.dm.common.base.util.DMUtil;
 import com.sensus.dm.common.device.bcl.IDeviceBCL;
 import com.sensus.dm.common.dieta.bcl.IDietaBCL;
@@ -330,7 +327,7 @@ public class DietaBCLImpl implements IDietaBCL
 			// insert process for del dieta
 			InternalResultsResponse<DMProcess> processResponse =
 					insertDietaProcess(dietaResponse.getFirstResult(), dietaRequest.getIsMonitored(),
-							RemoveDietaAction.ACTION, ProcessStatusEnum.COMPLETED,
+							"RemoveDietaAction.ACTION", ProcessStatusEnum.COMPLETED,
 							null, dietaRequest);
 
 			if (processResponse.isInError())
@@ -366,7 +363,7 @@ public class DietaBCLImpl implements IDietaBCL
 
 		InternalResultsResponse<DMProcess> processResponse =
 				insertDietaProcess(dietaRequest.getFirstDieta(), false,
-						CreateDietaAction.ACTION, ProcessStatusEnum.COMPLETED,
+						"CreateDietaAction.ACTION", ProcessStatusEnum.COMPLETED,
 						null, dietaRequest);
 
 		if (processResponse.isInError())
@@ -400,7 +397,7 @@ public class DietaBCLImpl implements IDietaBCL
 		// insert process for edit dieta
 		InternalResultsResponse<DMProcess> processResponse =
 				insertDietaProcess(dietaRequest.getFirstDieta(), false,
-						EditDietaAction.ACTION, ProcessStatusEnum.COMPLETED, null, dietaRequest);
+						"EditDietaAction.ACTION", ProcessStatusEnum.COMPLETED, null, dietaRequest);
 
 		if (processResponse.isInError())
 		{

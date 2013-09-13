@@ -1,10 +1,10 @@
-package com.sensus.dm.commons.grupomuscular.bcf;
+package com.sensus.dm.common.grupomuscular.bcf;
 
 import com.sensus.dm.common.device.model.response.DeviceResponse;
-import com.sensus.dm.commons.grupomuscular.model.request.GrupomuscularRequest;
-import com.sensus.dm.commons.grupomuscular.model.request.InquiryGrupomuscularRequest;
-import com.sensus.dm.commons.grupomuscular.model.response.GrupomuscularResponse;
-import com.sensus.dm.commons.grupomuscular.model.response.InquiryGrupomuscularResponse;
+import com.sensus.dm.common.grupomuscular.model.request.GrupomuscularRequest;
+import com.sensus.dm.common.grupomuscular.model.request.InquiryGrupomuscularRequest;
+import com.sensus.dm.common.grupomuscular.model.response.GrupomuscularResponse;
+import com.sensus.dm.common.grupomuscular.model.response.InquiryGrupomuscularResponse;
 
 /**
  * The Interface IGrupomuscularBCF.

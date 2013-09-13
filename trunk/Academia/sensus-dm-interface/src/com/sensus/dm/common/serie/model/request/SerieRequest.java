@@ -1,11 +1,11 @@
-package com.sensus.dm.commons.serie.model.request;
+package com.sensus.dm.common.serie.model.request;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.sensus.common.model.UserContext;
+import com.sensus.dm.common.serie.model.Serie;
 import com.sensus.dm.common.tenant.model.request.TenantRequest;
-import com.sensus.dm.commons.serie.model.Serie;
 
 /**
  * The Class SerieRequest.

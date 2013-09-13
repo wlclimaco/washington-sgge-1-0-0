@@ -1,11 +1,11 @@
-package com.sensus.dm.commons.grupomuscular.model.response;
+package com.sensus.dm.common.grupomuscular.model.response;
 
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 
 import com.sensus.common.model.response.Response;
-import com.sensus.dm.commons.grupomuscular.model.Grupomuscular;
+import com.sensus.dm.common.grupomuscular.model.Grupomuscular;
 
 /**
  * The Class GrupomuscularResponse.

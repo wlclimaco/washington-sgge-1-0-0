@@ -1,11 +1,11 @@
-package com.sensus.dm.commons.grupomuscular.model.request;
+package com.sensus.dm.common.grupomuscular.model.request;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.sensus.common.model.UserContext;
+import com.sensus.dm.common.grupomuscular.model.Grupomuscular;
 import com.sensus.dm.common.tenant.model.request.TenantRequest;
-import com.sensus.dm.commons.grupomuscular.model.Grupomuscular;
 
 /**
  * The Class GrupomuscularRequest.

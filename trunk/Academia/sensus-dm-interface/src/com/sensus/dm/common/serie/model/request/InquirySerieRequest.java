@@ -1,4 +1,4 @@
-package com.sensus.dm.commons.serie.model.request;
+package com.sensus.dm.common.serie.model.request;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,8 +6,8 @@ import java.util.List;
 import com.sensus.dm.common.base.model.request.InquiryPaginationRequest;
 import com.sensus.dm.common.device.model.DeviceSearch;
 import com.sensus.dm.common.device.model.ServiceTypeEnum;
+import com.sensus.dm.common.serie.model.Serie;
 import com.sensus.dm.common.tenant.model.DMTenant;
-import com.sensus.dm.commons.serie.model.Serie;
 
 /**
  * The Class InquirySerieRequest.

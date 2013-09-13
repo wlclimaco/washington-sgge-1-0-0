@@ -1,10 +1,10 @@
-package com.sensus.dm.commons.exercicio.bcf;
+package com.sensus.dm.common.exercicio.bcf;
 
 import com.sensus.dm.common.device.model.response.DeviceResponse;
-import com.sensus.dm.commons.exercicio.model.request.ExercicioRequest;
-import com.sensus.dm.commons.exercicio.model.request.InquiryExercicioRequest;
-import com.sensus.dm.commons.exercicio.model.response.ExercicioResponse;
-import com.sensus.dm.commons.exercicio.model.response.InquiryExercicioResponse;
+import com.sensus.dm.common.exercicio.model.request.ExercicioRequest;
+import com.sensus.dm.common.exercicio.model.request.InquiryExercicioRequest;
+import com.sensus.dm.common.exercicio.model.response.ExercicioResponse;
+import com.sensus.dm.common.exercicio.model.response.InquiryExercicioResponse;
 
 /**
  * The Interface IExercicioBCF.

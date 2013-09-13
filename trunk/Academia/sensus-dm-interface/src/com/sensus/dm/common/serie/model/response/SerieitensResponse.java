@@ -1,11 +1,11 @@
-package com.sensus.dm.commons.serie.model.response;
+package com.sensus.dm.common.serie.model.response;
 
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 
 import com.sensus.common.model.response.Response;
-import com.sensus.dm.commons.serie.model.Serieitens;
+import com.sensus.dm.common.serie.model.Serieitens;
 
 /**
  * The Class SerieitensResponse.

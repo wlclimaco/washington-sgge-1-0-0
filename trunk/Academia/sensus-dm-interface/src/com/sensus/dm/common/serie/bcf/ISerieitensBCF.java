@@ -1,10 +1,10 @@
-package com.sensus.dm.commons.serie.bcf;
+package com.sensus.dm.common.serie.bcf;
 
 import com.sensus.dm.common.device.model.response.DeviceResponse;
-import com.sensus.dm.commons.serie.model.request.InquirySerieitensRequest;
-import com.sensus.dm.commons.serie.model.request.SerieitensRequest;
-import com.sensus.dm.commons.serie.model.response.InquirySerieitensResponse;
-import com.sensus.dm.commons.serie.model.response.SerieitensResponse;
+import com.sensus.dm.common.serie.model.request.InquirySerieitensRequest;
+import com.sensus.dm.common.serie.model.request.SerieitensRequest;
+import com.sensus.dm.common.serie.model.response.InquirySerieitensResponse;
+import com.sensus.dm.common.serie.model.response.SerieitensResponse;
 
 /**
  * The Interface ISerieitensBCF.
