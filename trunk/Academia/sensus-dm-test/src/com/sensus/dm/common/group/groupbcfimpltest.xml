@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<import resource="classpath*:conf/sensus-dm-validators-context.xml" />
+
+	<bean id="SensusAppContext" class="com.sensus.common.util.SensusAppContext"/>
+
+	<bean id="groupBCF" class="com.sensus.dm.common.group.bcf.impl.GroupBCFImpl">
+		<property name="groupBCL" ref="groupBCLMockTarget"/>
+		<property name="tenantRequestValidationController" ref="tenantRequestValidationController" />
+		<property name="orderByValidationController" ref="orderByValidationController" />
+		<property name="pageSizeValidationController" ref="pageSizeValidationController" />
+		<property name="baseSearchValidationController" ref="baseSearchValidationController" />
+		<property name="groupValidationController" ref="groupValidationController" />
+		<property name="deviceValidationController" ref="deviceValidationController" />
+		<property name="radioValidationController" ref="radioValidationController" />
+		<property name="deviceSearchValidationController" ref="deviceSearchValidationController" />
+		<property name="inquiryDeviceRequestValidationController" ref="inquiryDeviceRequestValidationController" />
+	</bean>
+</beans>

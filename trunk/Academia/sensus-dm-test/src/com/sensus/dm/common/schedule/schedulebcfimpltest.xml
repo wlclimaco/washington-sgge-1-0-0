@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<import resource="classpath*:conf/sensus-dm-validators-context.xml" />
+
+	<bean id="SensusAppContext" class="com.sensus.common.util.SensusAppContext"/>
+
+	<bean id="scheduleBCF" class="com.sensus.dm.common.schedule.bcf.impl.ScheduleBCFImpl">
+		<property name="scheduleBCL" ref="scheduleBCLMockTarget" />
+
+		<property name="scheduleValidationController" ref="scheduleValidationController" />
+		<property name="frequencyValidationController" ref="frequencyValidationController" />
+		<property name="actionValidationController" ref="actionValidationController" />
+ 		<property name="groupValidationController" ref="groupValidationController" />
+		<property name="deviceValidationController" ref="deviceValidationController" />
+		<property name="inquiryRequestValidationController" ref="inquiryRequestValidationController" />
+		<property name="tenantRequestValidationController" ref="tenantRequestValidationController" />
+		<property name="rangeDateValidationController" ref="rangeDateValidationController" />
+		<property name="radioValidationController" ref="radioValidationController" />
+	</bean>
+
+</beans>

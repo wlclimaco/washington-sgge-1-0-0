@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<bean id="SensusAppContext" class="com.sensus.common.util.SensusAppContext"></bean>
+
+ 	 <bean id="epmDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="net.sourceforge.jtds.jdbc.Driver" />
+		<property name="url" value="jdbc:jtds:sqlserver://localhost:1433/FlexNetDb;user=sa;password=qatqat95" />
+	</bean>
+
+ <!-- <bean id="epmDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    <property name="driverClassName" value="net.sourceforge.jtds.jdbc.Driver" />
+    <property name="url" value="jdbc:jtds:sqlserver://10.22.2.94:1433/FlexNetDb;user=epm_flexnetdb;password=Sensus1!" />
+  </bean>-->
+
+<!--<bean id="epmDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="net.sourceforge.jtds.jdbc.Driver" />
+		<property name="url" value="jdbc:jtds:sqlserver://10.22.50.51:1433/FlexNetDb;user=epm_flexnetdb;password=Sensus1!" />
+	</bean>-->
+
+<!-- 	<bean id="epmDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+	    <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+	    <property name="url" value="jdbc:oracle:thin:@//10.22.49.43:1521/fndb.db" />
+	    <property name="username" value="epm_flexnetdb" />
+	    <property name="password" value="Sensus1!" />
+	 </bean> -->
+
+<!-- 	 <bean id="epmDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> -->
+<!-- 	    <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" /> -->
+<!-- 	    <property name="url" value="jdbc:oracle:thin:@//10.22.0.195:1521/fndb.db" /> -->
+<!-- 	    <property name="username" value="flexnetdb" /> -->
+<!-- 	    <property name="password" value="Sensus1!!" /> -->
+<!-- 	 </bean> -->
+
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="epmDataSource" />
+	</bean>
+</beans>

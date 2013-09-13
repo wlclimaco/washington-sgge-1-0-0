@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="SensusAppContext" class="com.sensus.common.util.SensusAppContext"/>
+
+	<!-- Setup for mybatis Database Layer SETTINGS -->
+	<bean id="property-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation"
+			value="classpath:com/sensus/dm/common/property/dac/mybatis/map/dm-common-property-mybatis-config.xml" />
+    <property name="dataSource" ref="epmDataSource" />
+  </bean>
+
+	<bean id="propertyDACTarget" class="com.sensus.dm.common.property.dac.mybatis.PropertyDACImpl">
+		<property name="sqlSessionFactory" ref="property-sqlSessionFactory" />
+	</bean>
+
+	<bean id="propertyDACImplTarget" class="com.sensus.dm.common.property.dac.PropertyDACImplTest" />
+
+</beans>

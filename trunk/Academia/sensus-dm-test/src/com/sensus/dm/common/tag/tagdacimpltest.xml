@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- ########## MyBatis session factory definitions: ########## -->
+
+	<bean id="process-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:com/sensus/dm/common/process/dac/mybatis/map/dm-common-process-mybatis-config.xml" />
+		<property name="dataSource" ref="epmDataSource" />
+	</bean>
+
+	<bean id="tag-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:com/sensus/dm/common/tag/dac/mybatis/map/dm-common-tag-mybatis-config.xml" />
+		<property name="dataSource" ref="epmDataSource" />
+	</bean>
+
+	<!-- ########## DAC implementations: ########## -->
+
+	<bean id="processDACTarget" class="com.sensus.dm.common.process.dac.mybatis.ProcessDACImpl">
+		<property name="sqlSessionFactory" ref="process-sqlSessionFactory" />
+	</bean>
+
+	<bean id="tagDACImplTarget" class="com.sensus.dm.elec.device.dac.TagDACImplTest"/>
+
+	<bean id="tagDACTarget" class="com.sensus.dm.common.tag.dac.mybatis.TagDACImpl">
+		<property name="sqlSessionFactory" ref="tag-sqlSessionFactory" />
+	</bean>
+
+
+</beans>
