@@ -1,0 +1,46 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- Parent POM from Sensus which enables us to publish etc. -->
+	<parent>
+		<artifactId>template-root</artifactId>
+		<groupId>flexnet</groupId>
+		<version>0.0.0-SNAPSHOT</version>
+		<relativePath>../../../projects/template/root/pom.xml</relativePath>
+		<!-- <relativePath>../.repository/flexnet/template-root/3.1.65-SNAPSHOT/template-root-3.1.65-20130302.215820-1.pom</relativePath> -->
+	</parent>
+
+	<groupId>com.sensus.dm</groupId>
+	<artifactId>sensus-qat-cbof-model</artifactId>
+	<version>1.6</version>
+	<packaging>jar</packaging>
+
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>src</directory>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.sensus.dm</groupId>
+			<artifactId>sensus-qat-framework-core</artifactId>
+			<version>1.6</version>
+		</dependency>
+
+	</dependencies>
+
+</project>
