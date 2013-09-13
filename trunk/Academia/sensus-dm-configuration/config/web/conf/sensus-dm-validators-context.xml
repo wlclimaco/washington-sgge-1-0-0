@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Validators -->
+
+	<bean id="actionRequestValidator" class="com.sensus.dm.elec.action.validation.ActionRequestValidator" />
+
+	<bean id="actionValidator" class="com.sensus.dm.elec.action.validation.ActionValidator">
+		<property name="enrollmentCodeLength" value="255" />
+		<property name="descriptionLength" value="127" />
+		<property name="durationHanTextMessageMax" value="1440" />
+		<property name="durationHanTextMessageMin" value="0" />
+		<property name="loadAdjustmentMax" value="100" />
+		<property name="loadAdjustmentMin" value="-100" />
+		<property name="criticalityLevelMax" value="15" />
+		<property name="criticalityLevelMin" value="1" />
+	</bean>
+
+	<bean id="alarmValidator" class="com.sensus.dm.common.device.validation.AlarmValidator"/>
+
+	<bean id="baseSearchValidator" class="com.sensus.dm.common.base.validation.BaseSearchValidator">
+		<property name="nameLength" value="100" />
+	</bean>
+
+	<bean id="columnFilterRequestValidator"
+		class="com.sensus.dm.common.device.validation.ColumnFilterRequestValidator" />
+
+	<bean id="customSearchValidator" class="com.sensus.dm.common.device.validation.CustomSearchValidator">
+		<property name="nameLength" value="100" />
+		<property name="descriptionLength" value="150" />
+	</bean>
+
+	<bean id="deviceSearchValidator" class="com.sensus.dm.common.device.validation.DeviceSearchValidator" />
+
+	<bean id="deviceValidator" class="com.sensus.dm.common.device.validation.DeviceValidator">
+		<property name="deviceIdLength" value="25" />
+	</bean>
+
+	<bean id="deviceRequestValidator" class="com.sensus.dm.common.device.validation.DeviceRequestValidator"/>
+
+	<bean id="inquiryDeviceRequestValidator" class="com.sensus.dm.common.device.validation.InquiryDeviceRequestValidator"/>
+
+	<bean id="deviceModelValidator" class="com.sensus.dm.common.device.validation.DeviceModelValidator" />
+
+	<bean id="electricMeterValidator" class="com.sensus.dm.elec.device.validation.ElectricMeterValidator" >
+		<property name="deviceIdLength" value="25" />
+	</bean>
+
+	<bean id="frequencyValidator" class="com.sensus.dm.common.schedule.validation.FrequencyValidator" />
+
+	<bean id="groupValidator" class="com.sensus.dm.common.group.validation.GroupValidator">
+		<property name="nameLength" value="100" />
+		<property name="descriptionLength" value="200" />
+	</bean>
+
+	<bean id="hanDeviceValidator" class="com.sensus.dm.elec.device.validation.HanDeviceValidator" />
+
+	<bean id="lcmValidator" class="com.sensus.dm.elec.device.validation.LCMValidator" />
+
+	<bean id="electricMeterConfigurationValidator" class="com.sensus.dm.elec.device.validation.ElectricMeterConfigurationValidator" />
+
+	<bean id="lCMConfigurationValidator" class="com.sensus.dm.elec.device.validation.LCMConfigurationValidator" />
+
+	<bean id="inquiryActionRequestValidator"
+		class="com.sensus.dm.elec.action.validation.InquiryActionRequestValidator" />
+
+	<bean id="inquiryProcessRequestValidator"
+		class="com.sensus.dm.common.process.validation.InquiryProcessRequestValidator" />
+
+	<bean id="locationValidator" class="com.sensus.dm.common.device.validation.LocationValidator">
+		<property name="addressLength" value="50" />
+		<property name="cityLength" value="25" />
+		<property name="zipLength" value="10" />
+	</bean>
+
+	<bean id="noteValidator" class="com.sensus.dm.common.device.validation.NoteValidator">
+		<property name="textLength" value="1000" />
+	</bean>
+
+	<bean id="orderByValidator" class="com.sensus.dm.common.base.validation.OrderByValidator" />
+
+	<bean id="processValidator" class="com.sensus.dm.common.process.validation.ProcessValidator" />
+
+	<bean id="processItemValidator" class="com.sensus.dm.common.process.validation.ProcessItemValidator" />
+
+	<bean id="pageSizeValidator" class="com.sensus.dm.common.base.validation.PageSizeValidator">
+		<property name="allowedPageSize" value="5,10,15,25,50,100" />
+	</bean>
+
+	<bean id="propertyValidator" class="com.sensus.dm.common.property.validation.PropertyValidator">
+		<property name="nameLength" value="100" />
+		<property name="providerLength" value="100" />
+		<property name="valueLength" value="200" />
+	</bean>
+
+	<bean id="radioValidator" class="com.sensus.dm.common.device.validation.RadioValidator" />
+
+	<bean id="rangeDateValidator" class="com.sensus.dm.common.base.validation.RangeDateValidator" />
+
+	<bean id="scheduleValidator" class="com.sensus.dm.common.schedule.validation.ScheduleValidator">
+		<property name="nameLength" value="200" />
+	</bean>
+
+	<bean id="tagValidator" class="com.sensus.dm.common.tag.validation.TagValidator">
+		<property name="nameLength" value="100" />
+	</bean>
+
+	<bean id="tenantRequestValidator" class="com.sensus.dm.common.base.validation.TenantRequestValidator">
+		<property name="fileNameLength" value="255" />
+	</bean>
+
+	<!-- Controllers -->
+
+	<bean id="actionValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators" ref="actionValidator" />
+	</bean>
+
+	<bean id="alarmValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="alarmValidator" />
+				<ref bean="radioValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="electricMeterConfigurationValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators" ref="electricMeterConfigurationValidator" />
+	</bean>
+
+	<bean id="lCMConfigurationValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators" ref="lCMConfigurationValidator" />
+	</bean>
+
+	<bean id="actionRequestValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="actionRequestValidator" />
+				<ref bean="tenantRequestValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="baseSearchValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators" ref="baseSearchValidator" />
+	</bean>
+
+	<bean id="columnFilterRequestValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators" ref="columnFilterRequestValidator" />
+	</bean>
+
+	<bean id="customSearchValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators" ref="customSearchValidator" />
+	</bean>
+
+	<bean id="deviceSearchValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators" ref="deviceSearchValidator" />
+	</bean>
+
+	<bean id="deviceValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators" ref="deviceValidator" />
+	</bean>
+
+	<bean id="deviceRequestValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators" ref="deviceRequestValidator" />
+	</bean>
+
+	<bean id="inquiryDeviceRequestValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators" ref="inquiryDeviceRequestValidator" />
+	</bean>
+
+	<bean id="deviceModelValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators" ref="deviceModelValidator" />
+	</bean>
+
+	<bean id="electricMeterValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators" ref="electricMeterValidator" />
+	</bean>
+
+	<bean id="frequencyValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators" ref="frequencyValidator" />
+	</bean>
+
+	<bean id="groupValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators" ref="groupValidator" />
+	</bean>
+
+	<bean id="hanDeviceValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators" ref="hanDeviceValidator" />
+	</bean>
+
+	<bean id="lcmValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators" ref="lcmValidator" />
+	</bean>
+
+	<bean id="inquiryActionRequestValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="inquiryActionRequestValidator" />
+				<ref bean="actionValidator" />
+				<ref bean="tenantRequestValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inquiryProcessRequestValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="inquiryProcessRequestValidator" />
+				<ref bean="tenantRequestValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inquiryRequestValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="pageSizeValidator" />
+				<ref bean="orderByValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="locationValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators" ref="locationValidator" />
+	</bean>
+
+	<bean id="noteValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators" ref="noteValidator" />
+	</bean>
+
+	<bean id="orderByValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators" ref="orderByValidator" />
+	</bean>
+
+	<bean id="pageSizeValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators" ref="pageSizeValidator" />
+	</bean>
+
+	<bean id="processValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="tenantRequestValidator" />
+				<ref bean="processValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="processItemValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators" ref="processItemValidator" />
+	</bean>
+
+	<bean id="propertyValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators" ref="propertyValidator" />
+	</bean>
+
+	<bean id="radioValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators" ref="radioValidator" />
+	</bean>
+
+	<bean id="rangeDateValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators" ref="rangeDateValidator" />
+	</bean>
+
+	<bean id="scheduleValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators" ref="scheduleValidator" />
+	</bean>
+
+	<bean id="tagValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators" ref="tagValidator" />
+	</bean>
+
+	<bean id="tenantRequestValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators" ref="tenantRequestValidator" />
+	</bean>
+
+	<!-- WaterMeter -->
+
+	<bean id="waterMeterValidator" class="com.sensus.dm.water.device.validation.WaterMeterValidator" />
+
+	<bean id="gasMeterValidator" class="com.sensus.dm.gas.device.validation.GasMeterValidator" />
+
+	<bean id="waterGasMeterConfigurationValidator" class="com.sensus.dm.water.device.validation.WaterGasMeterConfigurationValidator" />
+
+	<bean id="waterMeterValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators" ref="waterMeterValidator" />
+	</bean>
+
+	<bean id="gasMeterValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators" ref="gasMeterValidator" />
+	</bean>
+
+	<bean id="waterGasMeterConfigurationValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators" ref="waterGasMeterConfigurationValidator" />
+	</bean>
+
+</beans>

@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:oxm="http://www.springframework.org/schema/oxm"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+	 	http://www.springframework.org/schema/oxm
+		http://www.springframework.org/schema/oxm/spring-oxm.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <import resource="classpath*:spring/spring-apibinding-jms.xml" />
+    <import resource="classpath*:spring/spring-bcf-cim-mapping.xml" />
+    <import resource="classpath*:spring/spring-bcf-mrsvc-lifecycle-camel.xml" />
+    <import resource="classpath*:spring/spring-bcf-mrsvc.xml" />
+    <import resource="classpath*:spring/spring-bcf-mrsvc-camel.xml" />
+    <import resource="classpath*:spring/spring-bcf-hansvc.xml"/>
+    <import resource="classpath*:spring/spring-bcf-drsvc.xml" />
+    <import resource="classpath*:spring/spring-bcf-cd-notif.xml"/>
+    <import resource="classpath*:spring/spring-connectdisconnect-context.xml" />
+    <import resource="classpath*:spring/spring-bcf-mrnotif-camel.xml" />
+
+	<!-- ******************** -->
+	<!-- *** DEMAND RESET *** -->
+	<!-- ******************** -->
+
+	<!-- This sets up the scaffolding to receive API notifications through
+		 JMS, for a message-driven bean.
+		 The demandReset.notif.messageReceiver should be defined by the
+		 web service that uses this BCF module.
+	-->
+
+
+	<util:constant id="demandReset.notif.jms.output"
+		static-field="${bcf.mr.demandreset.publish:com.sensus.api.applicationeventnotification.EndpointRegistry.DEVICEMANAGER_DESTINATION_QUEUE}"/>
+
+	<!-- Message Driven POJO (MDP) for Demand Reset -->
+	<bean id="demandReset.notif.messageReceiver" class="com.sensus.dm.elec.action.listener.DemandResetListener"
+	  init-method="startListener">
+	  	<property name="processBCL" ref="processBCLTarget" />
+	</bean>
+
+
+	<!-- *********** Publisher for demand reset ***********
+		 This sets up the scaffolding to receive API notifications through
+		 JMS, for a message-driven bean.
+		 The demandReset.notif.messageReceiver should be defined by the
+		 web service that uses this BCF module.
+	-->
+	<bean id="demandReset.notif.jmsContainer"
+	    class="com.sensus.api.JmsListenerContainerManager"
+	    lazy-init="true"
+	    p:sessionAcknowledgeMode="2"
+	    p:connectionFactory-ref="mr.jmsNotificationConnectionFactory"
+	    p:messageListener-ref="demandReset.notif.jmsAdapter"
+	    p:autoStartup="false"
+	    p:destinationName-ref="demandReset.notif.jms.output"
+	    p:createDefaultListener="true"
+	   	p:concurrentConsumers="1"
+		p:maxConcurrentConsumers="5"
+		p:selectorProperty="customer"
+		p:threadNamePrefix="DemandResetConsumer"
+		destroy-method="stopListeners"/>
+
+	<bean id="demandReset.notif.jmsAdapter" class="com.sensus.api.JmsAdapter"
+		lazy-init="true"
+   		p:marshaller-ref="demandReset.notif.marshaller"
+    	p:messageReceiver-ref="demandReset.notif.messageReceiver"/>
+
+   	 <bean id="demandReset.notif.marshaller" class="com.sensus.api.DataMarshaller">
+           <property name="dataMarshaller">
+               <oxm:jaxb2-marshaller contextPath="com.sensus.api.demandresetinitiation.messages"/>
+           </property>
+	</bean>
+
+
+	<!-- ****************************** -->
+	<!-- *** JOIN HAN (CONNECT HAN) *** -->
+	<!-- ****************************** -->
+	<!-- it is TOPIC,  once the property p:pubSubDomain="true" exists inside jmsContainer bean -->
+
+	<util:constant id="joinHan.notif.jms.input"
+	static-field="com.sensus.api.joinhan.ZigbeeJoinHanRegistry.JMS_NOTIFY_QUEUE"/>
+
+	<bean id="joinHan.notif.jmsContainer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer"
+		lazy-init="true"
+	    p:connectionFactory-ref="api.binding.jmsNotificationConnectionFactory"
+	    p:messageListener-ref="joinHan.notif.jmsAdapter"
+	    p:autoStartup="false"
+	    p:pubSubDomain="true"
+	    p:destinationName-ref="joinHan.notif.jms.input"/>
+
+	<bean id="joinHan.notif.jmsAdapter"
+		class="com.sensus.api.JmsAdapter"
+		lazy-init="true"
+   		p:marshaller-ref="joinHan.notif.marshaller"
+    	p:messageReceiver-ref="joinHan.notif.messageReceiver"/>
+
+	<bean id="joinHan.notif.marshaller" class="com.sensus.api.DataMarshaller">
+    	<property name="dataMarshaller">
+     		<oxm:jaxb2-marshaller>
+    			<oxm:class-to-be-bound name="com.sensus.api.zigbeesimplemessage.messages.JoinHanResponse"/>
+			</oxm:jaxb2-marshaller>
+     	</property>
+	</bean>
+
+	<!-- The interface defined by han.joinHanSink is to be implemented by the client importing this xml -->
+	<bean id="joinHan.notif.messageReceiver"
+		class="com.sensus.dm.elec.action.listener.ConnectHanDeviceListener"
+		init-method="startListener">
+		<property name="processBCL" ref="processBCLTarget" />
+		<property name="electricMeterBCL" ref="electricMeterBCLTarget" />
+	</bean>
+
+	<!-- ********************************** -->
+	<!-- *** LEAVE HAN (DISCONNECT HAN) *** -->
+	<!-- ********************************** -->
+	<!-- it is TOPIC,  once the property p:pubSubDomain="true" exists inside jmsContainer bean -->
+
+	<util:constant id="leaveHan.notif.jms.input"
+		static-field="com.sensus.api.leavehan.ZigbeeLeaveHanRegistry.JMS_NOTIFY_QUEUE"/>
+
+	<bean id="leaveHan.notif.jmsContainer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer"
+		lazy-init="true"
+	    p:connectionFactory-ref="api.binding.jmsNotificationConnectionFactory"
+	    p:messageListener-ref="leaveHan.notif.jmsAdapter"
+	    p:autoStartup="false"
+	    p:pubSubDomain="true"
+	    p:destinationName-ref="leaveHan.notif.jms.input"/>
+
+	<bean id="leaveHan.notif.jmsAdapter"
+		class="com.sensus.api.JmsAdapter"
+		lazy-init="true"
+   		p:marshaller-ref="leaveHan.notif.marshaller"
+    	p:messageReceiver-ref="leaveHan.notif.messageReceiver"/>
+
+	<bean id="leaveHan.notif.marshaller" class="com.sensus.api.DataMarshaller">
+    	<property name="dataMarshaller">
+     		<oxm:jaxb2-marshaller>
+    			<oxm:class-to-be-bound name="com.sensus.api.zigbeesimplemessage.leavehan.messages.LeaveHanResponse"/>
+			</oxm:jaxb2-marshaller>
+     	</property>
+	</bean>
+
+	<bean id="leaveHan.notif.messageReceiver"
+		class="com.sensus.dm.elec.action.listener.DisconnectHanDeviceListener"
+		init-method="startListener">
+		<property name="processBCL" ref="processBCLTarget" />
+		<property name="electricMeterBCL" ref="electricMeterBCLTarget" />
+	</bean>
+
+	<!-- ***************************** -->
+	<!-- *** SEND HAN TEXT MESSAGE *** -->
+	<!-- ***************************** -->
+	<!-- it is TOPIC,  once the property p:pubSubDomain="true" exists inside jmsContainer bean -->
+
+	<util:constant id="sendText.notif.jms.input"
+		static-field="com.sensus.api.sendtext.ZigbeeSendTextRegistry.JMS_NOTIFY_QUEUE"/>
+
+	<bean id="sendText.notif.jmsContainer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer"
+		lazy-init="true"
+	    p:connectionFactory-ref="api.binding.jmsNotificationConnectionFactory"
+	    p:messageListener-ref="sendText.notif.jmsAdapter"
+	    p:autoStartup="false"
+	    p:pubSubDomain="true"
+	    p:destinationName-ref="sendText.notif.jms.input"/>
+
+	<bean id="sendText.notif.jmsAdapter"
+		class="com.sensus.api.JmsAdapter"
+		lazy-init="true"
+   		p:marshaller-ref="sendText.notif.marshaller"
+    	p:messageReceiver-ref="sendText.notif.messageReceiver"/>
+
+	<bean id="sendText.notif.marshaller" class="com.sensus.api.DataMarshaller">
+    	<property name="dataMarshaller">
+     		<oxm:jaxb2-marshaller>
+    			<oxm:class-to-be-bound name="com.sensus.api.zigbeesimplemessage.sendtext.messages.SendTextResponse"/>
+			</oxm:jaxb2-marshaller>
+     	</property>
+	</bean>
+
+	<bean id="sendText.notif.messageReceiver"
+		class="com.sensus.dm.elec.action.listener.SendHanTextMessageListener"
+		init-method="startListener">
+		<property name="processBCL" ref="processBCLTarget" />
+	</bean>
+
+	<!-- ************************************ -->
+	<!-- *** CANCEL SEND HAN TEXT MESSAGE *** -->
+	<!-- ************************************ -->
+	<!-- it is TOPIC,  once the property p:pubSubDomain="true" exists inside jmsContainer bean -->
+
+	<util:constant id="cancelText.notif.jms.input"
+		static-field="com.sensus.api.canceltext.ZigbeeCancelTextRegistry.JMS_NOTIFY_QUEUE"/>
+
+	<bean id="cancelText.notif.jmsContainer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer"
+		lazy-init="true"
+	    p:connectionFactory-ref="api.binding.jmsNotificationConnectionFactory"
+	    p:messageListener-ref="cancelText.notif.jmsAdapter"
+	    p:autoStartup="false"
+	    p:pubSubDomain="true"
+	    p:destinationName-ref="cancelText.notif.jms.input"/>
+
+	<bean id="cancelText.notif.jmsAdapter"
+		class="com.sensus.api.JmsAdapter"
+		lazy-init="true"
+   		p:marshaller-ref="cancelText.notif.marshaller"
+    	p:messageReceiver-ref="cancelText.notif.messageReceiver"/>
+
+	<bean id="cancelText.notif.marshaller" class="com.sensus.api.DataMarshaller">
+    	<property name="dataMarshaller">
+     		<oxm:jaxb2-marshaller>
+    			<oxm:class-to-be-bound name="com.sensus.api.zigbeesimplemessage.canceltext.messages.CancelTextResponse"/>
+			</oxm:jaxb2-marshaller>
+     	</property>
+	</bean>
+
+	<bean id="cancelText.notif.messageReceiver"
+		class="com.sensus.dm.elec.action.listener.CancelTextMessageListener"
+		init-method="startListener">
+		<property name="processBCL" ref="processBCLTarget" />
+	</bean>
+
+	<!-- ****************************** -->
+	<!-- *** GET HAN CONNECT STATUS *** -->
+	<!-- ****************************** -->
+	<!-- Listener when receiving METER status  -->
+	<!-- it is TOPIC,  once the property p:pubSubDomain="true" exists inside jmsContainer bean -->
+
+	<util:constant id="getHanStatus.notif.jms.input"
+		static-field="com.sensus.api.gethannetworkstatus.ZigbeeGetHanNetworkStatusRegistry.JMS_NOTIFY_QUEUE"/>
+
+	<bean id="getHanStatus.notif.jmsContainer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer"
+		lazy-init="true"
+	    p:connectionFactory-ref="api.binding.jmsNotificationConnectionFactory"
+	    p:messageListener-ref="getHanStatus.notif.jmsAdapter"
+	    p:autoStartup="false"
+	    p:pubSubDomain="true"
+	    p:destinationName-ref="getHanStatus.notif.jms.input"/>
+
+	<bean id="getHanStatus.notif.jmsAdapter"
+		class="com.sensus.api.JmsAdapter"
+		lazy-init="true"
+   		p:marshaller-ref="getHanStatus.notif.marshaller"
+    	p:messageReceiver-ref="getHanStatus.notif.messageReceiver"/>
+
+	<bean id="getHanStatus.notif.marshaller" class="com.sensus.api.DataMarshaller">
+    	<property name="dataMarshaller">
+     		<oxm:jaxb2-marshaller>
+    			<oxm:class-to-be-bound name="com.sensus.api.zigbeesimplemessage.messages.GetHanNetworkStatusResponse"/>
+			</oxm:jaxb2-marshaller>
+     	</property>
+	</bean>
+
+	<!-- The interface defined by han.getHanStatusSink is to be implemented by the client importing this xml -->
+	<bean id="getHanStatus.notif.messageReceiver"
+		class="com.sensus.dm.elec.action.listener.GetHanConnectionStatusListener"
+		init-method="startListener">
+		<property name="processBCL" ref="processBCLTarget" />
+		<property name="electricMeterBCL" ref="electricMeterBCLTarget" />
+	</bean>
+
+	<!-- ********************************** -->
+	<!-- *** GET LOAD CONTROL PARAMETER *** -->
+	<!-- *** GET HAN DEVICE STATUS      *** -->
+	<!-- ********************************** -->
+	<!-- Listener when receiving HAN DEVICE status  -->
+	<!-- it is TOPIC,  once the property p:pubSubDomain="true" exists inside jmsContainer bean -->
+
+	<util:constant id="getLoadControlParameter.notif.jms.input"
+		static-field="com.sensus.api.zigbee.getloadcontrolparameter.ZigbeeGetLoadControlParameteRegistry.JMS_NOTIFY_QUEUE"/>
+
+	<bean id="getLoadControlParameter.notif.jmsContainer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer"
+		lazy-init="true"
+	    p:connectionFactory-ref="api.binding.jmsNotificationConnectionFactory"
+	    p:messageListener-ref="getLoadControlParameter.notif.jmsAdapter"
+	    p:autoStartup="false"
+	    p:pubSubDomain="true"
+	    p:destinationName-ref="getLoadControlParameter.notif.jms.input"/>
+
+	<bean id="getLoadControlParameter.notif.jmsAdapter"
+		class="com.sensus.api.JmsAdapter"
+		lazy-init="true"
+   		p:marshaller-ref="getLoadControlParameter.notif.marshaller"
+    	p:messageReceiver-ref="getLoadControlParameter.notif.messageReceiver"/>
+
+	<bean id="getLoadControlParameter.notif.marshaller" class="com.sensus.api.DataMarshaller">
+    	<property name="dataMarshaller">
+     		<oxm:jaxb2-marshaller>
+    			<oxm:class-to-be-bound name="com.sensus.api.zigbee.getloadcontrolparameter.messages.GetLoadControlParameterResponse"/>
+			</oxm:jaxb2-marshaller>
+     	</property>
+	</bean>
+
+	<!-- The interface defined by han.getHanDeviceIdSink is to be implemented by the client importing this xml -->
+	<bean id="getLoadControlParameter.notif.messageReceiver"
+		class="com.sensus.dm.elec.action.listener.GetLoadControlParameterListener"
+		init-method="startListener">
+		<property name="processBCL" ref="processBCLTarget" />
+		<property name="electricMeterBCL" ref="electricMeterBCLTarget" />
+	</bean>
+
+	<!-- **************************** -->
+	<!-- *** initLoadControlEvent *** -->
+	<!-- *** DEMAND RESPONSE      *** -->
+	<!-- **************************** -->
+	<!-- it is TOPIC,  once the property p:pubSubDomain="true" exists inside jmsContainer bean -->
+
+	<util:constant id="initLoadControlEvent.notif.jms.input"
+	static-field="com.sensus.api.initloadcontrolevent.ZigbeeInitLoadControlEventRegistry.JMS_NOTIFY_QUEUE"/>
+
+	<bean id="initLoadControlEvent.notif.jmsContainer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer"
+		lazy-init="true"
+	    p:connectionFactory-ref="api.binding.jmsNotificationConnectionFactory"
+	    p:messageListener-ref="initLoadControlEvent.notif.jmsAdapter"
+	    p:autoStartup="false"
+	    p:pubSubDomain="true"
+	    p:destinationName-ref="initLoadControlEvent.notif.jms.input"/>
+
+	<bean id="initLoadControlEvent.notif.jmsAdapter"
+		class="com.sensus.api.JmsAdapter"
+		lazy-init="true"
+   		p:marshaller-ref="initLoadControlEvent.notif.marshaller"
+    	p:messageReceiver-ref="initLoadControlEvent.notif.messageReceiver"/>
+
+	<bean id="initLoadControlEvent.notif.marshaller" class="com.sensus.api.DataMarshaller">
+    	<property name="dataMarshaller">
+     		<oxm:jaxb2-marshaller>
+    			<oxm:class-to-be-bound name="com.sensus.api.zigbeesimplemessage.initloadcontrol.messages.InitLoadControlEventRequest"/>
+    			<oxm:class-to-be-bound name="com.sensus.api.zigbeesimplemessage.initloadcontrol.messages.InitLoadControlEventtResponse"/>
+			</oxm:jaxb2-marshaller>
+     	</property>
+	</bean>
+
+	<bean id="initLoadControlEvent.notif.messageReceiver"
+		class="com.sensus.dm.elec.action.listener.DemandReponseListener"
+		init-method="startListener">
+		<property name="processBCL" ref="processBCLTarget" />
+	</bean>
+
+	<!-- ********************************** -->
+	<!-- *** GetLoadControlEventReport  *** -->
+	<!-- *** GET DEMAND RESPONSE STATUS *** -->
+	<!-- ********************************** -->
+	<!-- it is TOPIC,  once the property p:pubSubDomain="true" exists inside jmsContainer bean -->
+
+	<util:constant id="getLoadControlEventReport.notif.jms.input"
+		static-field="com.sensus.api.getloadcontroleventreport.ZigbeeGetLoadControlEventReportRegistry.JMS_NOTIFY_QUEUE"/>
+
+	<bean id="getLoadControlEventReport.notif.jmsContainer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer"
+		lazy-init="true"
+	    p:connectionFactory-ref="api.binding.jmsNotificationConnectionFactory"
+	    p:messageListener-ref="getLoadControlEventReport.notif.jmsAdapter"
+	    p:autoStartup="false"
+	    p:pubSubDomain="true"
+	    p:destinationName-ref="getLoadControlEventReport.notif.jms.input"/>
+
+	<bean id="getLoadControlEventReport.notif.jmsAdapter"
+		class="com.sensus.api.JmsAdapter"
+		lazy-init="true"
+   		p:marshaller-ref="getLoadControlEventReport.notif.marshaller"
+    	p:messageReceiver-ref="getLoadControlEventReport.notif.messageReceiver"/>
+
+	<bean id="getLoadControlEventReport.notif.marshaller" class="com.sensus.api.DataMarshaller">
+    	<property name="dataMarshaller">
+     		<oxm:jaxb2-marshaller>
+    			<oxm:class-to-be-bound name="com.sensus.api.getloadcontroleventreport.messages.GetLoadControlEventReportRequest"/>
+    			<oxm:class-to-be-bound name="com.sensus.api.getloadcontroleventreport.messages.GetLoadControlEventReportResponse"/>
+			</oxm:jaxb2-marshaller>
+     	</property>
+	</bean>
+
+	<bean id="getLoadControlEventReport.notif.messageReceiver"
+		class="com.sensus.dm.elec.action.listener.GetDemandResponseStatusListener"
+		init-method="startListener">
+		<property name="processBCL" ref="processBCLTarget" />
+		<property name="processSummaryBCL" ref="processSummaryBCLTarget" />
+	</bean>
+
+	<!-- ******************************* -->
+	<!-- *** SetLoadControlParameter *** -->
+	<!-- ******************************* -->
+	<!-- it is TOPIC,  once the property p:pubSubDomain="true" exists inside jmsContainer bean -->
+
+	<util:constant id="setLoadControlParameter.notif.jms.input"
+		static-field="com.sensus.api.setloadcontrolparamete.ZigbeeSetLoadControlParameteRegistry.JMS_NOTIFY_QUEUE"/>
+
+	<bean id="setLoadControlParameter.notif.jmsContainer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer"
+		lazy-init="true"
+	    p:connectionFactory-ref="api.binding.jmsNotificationConnectionFactory"
+	    p:messageListener-ref="setLoadControlParameter.notif.jmsAdapter"
+	    p:autoStartup="false"
+	    p:pubSubDomain="true"
+	    p:destinationName-ref="setLoadControlParameter.notif.jms.input"/>
+
+	<bean id="setLoadControlParameter.notif.jmsAdapter"
+		class="com.sensus.api.JmsAdapter"
+		lazy-init="true"
+   		p:marshaller-ref="setLoadControlParameter.notif.marshaller"
+    	p:messageReceiver-ref="setLoadControlParameter.notif.messageReceiver"/>
+
+	<bean id="setLoadControlParameter.notif.marshaller" class="com.sensus.api.DataMarshaller">
+    	<property name="dataMarshaller">
+     		<oxm:jaxb2-marshaller>
+    			<oxm:class-to-be-bound name="com.sensus.api.zigbeesetloadcontrolparameter.messages.SetLoadControlParameterRequest"/>
+    			<oxm:class-to-be-bound name="com.sensus.api.zigbeesetloadcontrolparameter.messages.SetLoadControlParameterResponse"/>
+			</oxm:jaxb2-marshaller>
+     	</property>
+	</bean>
+
+	<bean id="setLoadControlParameter.notif.messageReceiver"
+		class="com.sensus.dm.elec.action.listener.SetupDemandResponseListener"
+		init-method="startListener">
+		<property name="processBCL" ref="processBCLTarget" />
+	</bean>
+
+	<!-- ********************************* -->
+	<!-- *** CANCEL LOAD CONTROL EVENT *** -->
+	<!-- ********************************* -->
+	<!-- it is TOPIC,  it once the property p:pubSubDomain="true" exists inside jmsContainer bean -->
+
+	<util:constant id="cancelLoadControlEvent.notif.jms.input"
+		static-field="com.sensus.api.cancelloadcontrolevent.ZigbeeCancelLoadControlEventRegistry.JMS_NOTIFY_QUEUE"/>
+
+	<bean id="cancelLoadControlEvent.notif.jmsContainer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer"
+		lazy-init="true"
+	    p:connectionFactory-ref="api.binding.jmsNotificationConnectionFactory"
+	    p:messageListener-ref="cancelLoadControlEvent.notif.jmsAdapter"
+	    p:autoStartup="false"
+		p:pubSubDomain="true"
+	    p:destinationName-ref="cancelLoadControlEvent.notif.jms.input"/>
+
+	<bean id="cancelLoadControlEvent.notif.jmsAdapter"
+		class="com.sensus.api.JmsAdapter"
+		lazy-init="true"
+   		p:marshaller-ref="cancelLoadControlEvent.notif.marshaller"
+    	p:messageReceiver-ref="cancelLoadControlEvent.notif.messageReceiver"/>
+
+	<bean id="cancelLoadControlEvent.notif.marshaller" class="com.sensus.api.DataMarshaller">
+    	<property name="dataMarshaller">
+     		<oxm:jaxb2-marshaller>
+    			<oxm:class-to-be-bound name="com.sensus.api.zigbeesimplemessage.cancelloadcontrol.messages.CancelLoadControlEventRequest"/>
+    			<oxm:class-to-be-bound name="com.sensus.api.zigbeesimplemessage.cancelloadcontrol.messages.CancelLoadControlEventtResponse"/>
+			</oxm:jaxb2-marshaller>
+     	</property>
+	</bean>
+
+	<bean id="cancelLoadControlEvent.notif.messageReceiver"
+		class="com.sensus.dm.elec.action.listener.CancelDemandResponseListener"
+		init-method="startListener">
+		<property name="processBCL" ref="processBCLTarget" />
+	</bean>
+
+	<!-- ********************************* -->
+	<!-- *** Remote Connect/Disconnect *** -->
+	<!-- ********************************* -->
+	<!-- This is sensus controlled (their BCF layer), DM just declare the receiver part -->
+	<!-- The CdStateChangeNotificationRequest receiver required by spring-bcf-cd-notif.xml -->
+    <!-- The name is a bit of misnomer as all kind of cd messages are received by it. -->
+
+	<bean id="cd.statechangenotif.messageReceiver"
+    	class="com.sensus.dm.elec.action.listener.RemoteConnectDisconnectListener"
+    	init-method="startListener">
+    	<property name="processSummaryBCL" ref="processSummaryBCLTarget" />
+    	<property name="processBCL" ref="processBCLTarget" />
+	</bean>
+
+	<bean id="clientContextMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+		<property name="contextPath" value = "com.sensus.gateway.cd.clientcontext"/>
+		<property name="marshallerProperties">
+			<map>
+				<entry>
+					<key>
+						<util:constant static-field="javax.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT" />
+					</key>
+    				<value type="java.lang.Boolean">true</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<!-- ********************************* -->
+	<!-- **** WATER Demand Read Ping ***** -->
+	<!-- ********************************* -->
+	<!-- it is not TOPIC,  it is queue, once the property p:pubSubDomain="true" does not exists inside jmsContainer bean -->
+
+    <util:constant id="demandReadPing.notif.jms.input" static-field="${bcf.mr.demand.read.ping}"/>
+
+	<bean id="demandReadPing.notif.jmsContainer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer"
+		lazy-init="true"
+	    p:connectionFactory-ref="api.binding.jmsNotificationConnectionFactory"
+	    p:messageListener-ref="demandReadPing.notif.jmsAdapter"
+	    p:autoStartup="false"
+	    p:destinationName-ref="demandReadPing.notif.jms.input"/>
+
+	<bean id="demandReadPing.notif.jmsAdapter"
+		class="com.sensus.api.JmsAdapter"
+		lazy-init="true"
+   		p:marshaller-ref="demandReadPing.notif.marshaller"
+    	p:messageReceiver-ref="demandReadPing.notif.messageReceiver"/>
+
+	<bean id="demandReadPing.notif.marshaller" class="com.sensus.api.DataMarshaller">
+    	<property name="dataMarshaller">
+     		<oxm:jaxb2-marshaller>
+    			<oxm:class-to-be-bound name="com.sensus.api.ontheglassreadping.messages.OnTheGlassReadPingResponse"/>
+			</oxm:jaxb2-marshaller>
+     	</property>
+	</bean>
+
+	<bean id="demandReadPing.notif.messageReceiver"
+		class="com.sensus.dm.elec.action.listener.DemandReadPingListener" init-method="startListener">
+		<property name="processBCL" ref="processBCLTarget" />
+	</bean>
+
+
+</beans>
