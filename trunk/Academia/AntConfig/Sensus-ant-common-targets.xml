@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project name="Sensus" xmlns:artifact="antlib:org.apache.maven.artifact.ant" xmlns:rsel="antlib:org.apache.tools.ant.types.resources.selectors">
+
+	<!-- Typically this file is included as follows -->
+	<!-- <include file="${antConfigPath}\..\Sensus-ant-common-targets.xml" optional="false" " /> -->
+	<!-- Note the all of these targets must be prefixed with Sensus. -->
+	<!-- Don't change the project name of this ANY file. -->
+
+	<!-- Must be overriden by calling target. -->
+	<property name="moduleName" value="Must be overriden" />
+
+	<!-- Setup default property values. -->
+
+	<property name="confidentialPrefix" value="Sensus Confidential" />
+
+	<property name="projectBaseDir" value="${basedir}\.." />
+
+	<property name="mavenAntTasksJar" value="maven-ant-tasks-2.1.3.jar" />
+
+	<path id="maven-ant-tasks.classpath" path="${antConfigPath}/${mavenAntTasksJar}" />
+
+	<!-- <path id="maven-ant-tasks.classpath"> -->
+	<!-- <pathelement location="${antConfigDir}\maven-ant-tasks-2.1.3.jar"/> -->
+	<!-- </path> -->
+
+	<typedef resource="org/apache/maven/artifact/ant/antlib.xml" uri="antlib:org.apache.maven.artifact.ant"
+		classpathref="maven-ant-tasks.classpath" />
+		
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
+        <classpath>
+            <pathelement location="${antConfigPath}/ant-contrib.jar"/>
+        </classpath>
+    </taskdef>	
+
+	<target name="mainBuildComponent">
+
+		<property name="binDir" value="${projectBaseDir}\bin" />
+		<property name="srcDir" value="${projectBaseDir}\src" />
+		<property name="destDir" value="${projectBaseDir}\dist" />
+
+		<antcall target="Sensus.buildProject" />
+		<antcall target="Sensus.buildJavadoc" />
+	</target>
+	<target name="mainBuildUIWar">
+
+		<antcall target="Sensus.cleanUIWarPre" />
+
+		<!-- Build the prerequisite projects first. -->
+		<!-- This target resides back in the calling ant file. -->
+		<antcall target="buildUIWarPrerequisites" />
+
+		<property name="binDir" value="${projectBaseDir}\bin" />
+		<property name="srcDir" value="${projectBaseDir}\src" />
+		<property name="destDir" value="${projectBaseDir}\dist" />
+
+		<property name="buildWorkArea" value="${destDir}\buildWorkArea" />
+		<property name="warLibDir" value="${buildWorkArea}\warLib" />
+		<property name="warWebInfDir" value="${buildWorkArea}\WEB-INF" />
+		<property name="webContentDir" value="${buildWorkArea}\WebContent" />
+
+
+		<antcall target="Sensus.buildUIWar" />
+		<antcall target="Sensus.cleanUIWarPost" />
+	</target>
+
+	<target name="cleanUIWarPre">
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset dir="${buildWorkArea}" includes="**/*" />
+		</delete>
+
+		<delete failonerror="false">
+			<fileset dir="${destDir}" />
+		</delete>
+	</target>
+
+	<target name="cleanUIWarPost" unless="noCleanUIWarPost">
+		<delete dir="${buildWorkArea}" includeemptydirs="true" failonerror="false" />
+	</target>
+
+	<target name="fixWebXml" unless="noCopyOverWebXml">
+		<copy file="${warWebInfDir}/web.xml.template" tofile='${warWebInfDir}/web.xml' filtering='true' overwrite='true'>
+		</copy>
+		<delete file="${warWebInfDir}/web.xml.template" />
+	</target>
+
+	<target name="fixLog4J">
+		<copy file="${warWebInfDir}/classes/log4j.xml.template" tofile='${warWebInfDir}/classes/log4j.xml' filtering='true'
+			overwrite='true'>
+			<filterset>
+				<filter token="LOG_DIR" value="${logDir}" />
+				<filter token="LOG_FILE" value="${logFile}" />
+				<filter token="LOG_FILE_USER" value="${logFileUser}" />
+			</filterset>
+		</copy>
+		<delete file="${warWebInfDir}/classes/log4j.xml.template" />
+	</target>
+
+	<target name="copyOverConfigConfWeb">
+		<copy todir='${warWebInfDir}'>
+			<fileset dir="${configurationProjectDir}/config/web" />
+		</copy>
+	</target>
+
+	<target name="copyOverLocalWebContent">
+		<copy todir='${webContentDir}'>
+			<fileset dir="${projectBaseDir}/WebContent">
+				<exclude name="**/WEB-INF/**" />
+			</fileset>
+		</copy>
+
+		<copy todir='${warWebInfDir}'>
+			<fileset dir="${projectBaseDir}/WebContent/WEB-INF">
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="copyOverDevBuildOnlyWebContent">
+		<if>
+			<available file="${devSecurityFileDirectory}" type="dir" />
+			<then>
+				<echo message="Dev Security File Directory exists ${devSecurityFileDirectory} performing local security build" />
+				<echo message="Copying dev security login-redirect.jsp file" />
+				<copy file="${devSecurityFileDirectory}/login-redirect.jsp" tofile='${webContentDir}/login-redirect.jsp' overwrite='true'></copy>	
+				<echo message="Copying dev security logout-redirect.jsp file" />
+				<copy file="${devSecurityFileDirectory}/logout-redirect.jsp" tofile='${webContentDir}/logout-redirect.jsp' overwrite='true'></copy>	
+				<echo message="Copying dev security context file ${devSecurityContextFileName} " />	
+				<copy file="${devSecurityFileDirectory}/${devSecurityContextFileName}" tofile='${warWebInfDir}/conf/${devSecurityContextFileName}' overwrite='true'></copy>			
+			</then>
+			<else>
+				<echo message="Dev Security File Directory does not exists doing nothing" />
+			</else>
+		</if>
+	</target>	
+	
+	<target name="commentOutListeners">
+		<if>
+			<equals arg1="${startDMJMSListeners}" arg2="false" />
+			<then>
+				<echo message="Commenting out the start of the DM Listeners in the sensus-dm-action-listeners-context.xml file" />
+				<replace file="${warWebInfDir}/conf/sensus-dm-action-listeners-context.xml" token="init-method=&quot;startListener&quot;&gt;" value="&gt;&lt;!--*&quot;init-method=&quot;startListener&quot;&gt;*--&gt;"/>
+			</then>
+			<else>
+				<echo message="Not doing anything to the sensus-dm-action-listeners-context.xml file" />
+			</else>
+		</if>
+	</target>	
+
+	<target name="copyOverXSDFiles" unless="noCopyOverXSDFiles">
+		<copy todir='${webContentDir}/xsd' flatten="true">
+			<fileset dir="${xsdRootSourceDir}">
+				<include name="**/*.xsd" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="updateWithSVNVersion">
+
+		<!-- Fix Build Number -->
+		<exec executable="svnversion" outputproperty="version">
+			<arg line="${basedir}" />
+		</exec>
+
+		<condition property="invalidSVN">
+			<length string="${version}" when="gt" length="10" />
+		</condition>
+
+		<antcall target="Sensus.applyVersion">
+			<param name="version" value="${version}" />
+		</antcall>
+		<antcall target="Sensus.applyDefaultVersion" />
+
+	</target>
+
+	<target name="applyDefaultVersion" if="invalidSVN">
+		<echo message="Setting default SVN version number since we are working under a un-versioned directory:${basedir}" />
+		<antcall target="Sensus.applySvnVersion">
+			<param name="version" value="6.6.6" />
+		</antcall>
+	</target>
+
+	<target name="applyVersion" unless="invalidSVN">
+		<antcall target="Sensus.applySvnVersion">
+			<param name="version" value="${version}" />
+		</antcall>
+	</target>
+
+	<target name="applySvnVersion">
+
+		<echo message="Updating files with Product Release and Build Numbers. ${dmRelease} ${version}" />
+
+		<replaceregexp file="${warWebInfDir}/classes/sensus-dm.properties" match="dm.release=.*$"
+			replace="dm.release=${dmRelease}" byline="true" />
+
+		<replaceregexp file="${warWebInfDir}/classes/sensus-dm.properties" match="dm.build.number=.*$"
+			replace="dm.build.number=${version}" byline="true" />
+			
+		<propertyregex property="major" input="${dmRelease}"
+              regexp="([^\.]*)\.([^\.]*)\.([^\.]*)" select="\1"
+              casesensitive="false" />
+        <echo message="major number -  ${major} "/>
+		
+		<propertyregex property="minor" input="${dmRelease}"
+              regexp="([^\.]*)\.([^\.]*)\.([^\.]*)" select="\2"
+              casesensitive="false" />
+        <echo message="minor number -  ${minor} "/>	
+		
+		<propertyregex property="patch" input="${dmRelease}"
+              regexp="([^\.]*)\.([^\.]*)\.([^\.]*)" select="\3"
+              casesensitive="false" />
+        <echo message="patch number -  ${patch} "/>	
+		
+		<echo message="Updating version.jsp - ${major} ${minor} ${patch} ${version}" />	
+
+		<replaceregexp file="${webContentDir}/version.jsp" match="&lt;major&gt;.*&lt;/major&gt;" replace="&lt;major&gt;${major}&lt;/major&gt;"
+			byline="true" />	
+			
+		<replaceregexp file="${webContentDir}/version.jsp" match="&lt;minor&gt;.*&lt;/minor&gt;" replace="&lt;minor&gt;${minor}&lt;/minor&gt;"
+			byline="true" />	
+
+		<replaceregexp file="${webContentDir}/version.jsp" match="&lt;patch&gt;.*&lt;/patch&gt;" replace="&lt;patch&gt;${patch}&lt;/patch&gt;"
+			byline="true" />	
+			
+		<replaceregexp file="${webContentDir}/version.jsp" match="&lt;build&gt;.*&lt;/build&gt;" replace="&lt;build&gt;${version}&lt;/build&gt;"
+			byline="true" />
+	</target>
+
+	<target name="copyOverFilesForWar">
+		<!-- Do not change order -->
+		<antcall target="Sensus.copyOverConfigConfWeb" />
+		<antcall target="Sensus.fixWebXml" />
+		<antcall target="Sensus.fixLog4J" />
+		<antcall target="Sensus.copyOverLocalWebContent" />
+		<antcall target="Sensus.copyOverXSDFiles" />
+		<antcall target="Sensus.copyOverDevBuildOnlyWebContent" />	
+		<antcall target="Sensus.commentOutListeners" />			
+	</target>
+
+	<target name="buildUIWar">
+
+		<!-- Resolve the dependencies -->
+		<artifact:pom id="mypom" file="${pomFile}" />
+		<artifact:dependencies pomRefId="mypom" filesetId="maven.dependency.fileset" />
+
+		<pathconvert property="path" refid="maven.dependency.fileset" />
+		<antcall target="Sensus.echoPath">
+			<param name="header" value="Maven resolved dependencies for ${ant.project.name} project:" />
+			<param name="path" value="${path}" />
+		</antcall>
+
+		<!-- Copy over dependencies to build work area, the war lib folder. -->
+		<copy todir="${warLibDir}">
+			<restrict>
+				<fileset refid="maven.dependency.fileset" />
+				<rsel:name name="*.jar" />
+			</restrict>
+			<mapper type="flatten" />
+		</copy>
+
+		<!--  Remove a few unwanted jar files from the war lib. -->
+		<antcall target="Sensus.trimWarLibDir">
+		</antcall>
+
+		<!-- Copy over the web jar itself since it's not in the pom.xml file. -->
+		<copy todir="${warLibDir}">
+			<fileset dir="${destDir}">
+				<include name="*.jar" />
+			</fileset>
+		</copy>
+
+		<!-- copy over from "additional-lib" folders. -->
+		<copy todir="${warLibDir}" failonerror="false">
+			<fileset dir="${additionalLibDir}">
+				<include name="*.jar" />
+			</fileset>
+			<fileset dir="${additionalLibDir2}">
+				<include name="*.jar" />
+			</fileset>
+			<fileset dir="${additionalLibDir3}">
+				<include name="*.jar" />
+			</fileset>
+		</copy>
+
+		<property name="configurationProjectDir" value="${projectBaseDir}\..\${configurationProjectName}" />
+		<property name="configurationProjectSubDir" value="web" />
+
+		<!-- Copy the various content folders etc into the war work area. -->
+		<antcall target="Sensus.copyOverFilesForWar" />
+
+		<antcall target="Sensus.updateWithSVNVersion" />
+
+		<property name="warFileName" value="${destDir}/${moduleName}-${mypom.version}.war" />
+
+		<war destfile="${warFileName}">
+
+			<webinf dir="${warWebInfDir}" />
+
+			<lib dir="${warLibDir}">
+				<exclude name="**/*javadoc*" />
+			</lib>
+
+			<fileset dir="${buildWorkArea}/WebContent" />
+
+			<!-- <classes dir="${warWebInfDir}/classes" /> -->
+
+		</war>
+
+		<antcall target="Sensus.createGenericWar">
+			<param name="warFileName" value="${warFileName}" />
+		</antcall>
+
+	</target>
+
+	<target name="trimWarLibDir" if="deleteFromWarLibList">
+		<delete verbose="true">
+			<fileset dir="${warLibDir}" includes="${deleteFromWarLibList}" />
+		</delete>
+	</target>
+
+	<target name="createGenericWar" if="genericWarFileName">
+		<copy file="${warFileName}" tofile="${destDir}/${genericWarFileName}" />
+	</target>
+
+	<target name="buildProject">
+
+		<property name="localRepositoryPath" value="${user.home}/.m2/repository" />
+		<property name="mavenSettingsFile" value="${user.home}/.m2/settings.xml" />
+
+		<echo message="localRepositoryPath=${localRepositoryPath}" />
+
+		<!-- Do some clean up. -->
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset dir="${destDir}" includes="**/*" />
+		</delete>
+		<mkdir dir="${destDir}" />
+
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset dir="${binDir}" includes="**/*" />
+		</delete>
+		<mkdir dir="${binDir}" />
+
+		<artifact:localRepository id="localrepo" path="${localRepositoryPath}" />
+
+		<!-- Resolve the dependencies -->
+		<artifact:pom id="mypom" file="${pomFile}" />
+		<artifact:dependencies pomRefId="mypom" pathId="maven.dependency.fileset" settingsFile="${mavenSettingsFile}">
+			<localRepository refid="localrepo" />
+		</artifact:dependencies>
+
+		<pathconvert property="path" refid="maven.dependency.fileset" />
+		<antcall target="Sensus.echoPath">
+			<param name="header" value="Maven resolved dependencies for ${ant.project.name} project:" />
+			<param name="path" value="${path}" />
+		</antcall>
+
+		<!-- Compile the source. -->
+		<echo message="Compiling the source" />
+		<javac srcdir="${srcDir}" debug="true" destdir="${binDir}" includeantruntime="false">
+			<classpath>
+				<path refid="maven.dependency.fileset" />
+				<fileset dir="${additionalLibDir}" erroronmissingdir="false">
+					<include name="*.jar" />
+				</fileset>
+				<fileset dir="${additionalLibDir2}" erroronmissingdir="false">
+					<include name="*.jar" />
+				</fileset>
+				<fileset dir="${additionalLibDir3}" erroronmissingdir="false">
+					<include name="*.jar" />
+				</fileset>
+			</classpath>
+		</javac>
+
+		<property name="jarFileName" value="${destDir}/${moduleName}-${mypom.version}.jar" />
+
+		<!-- Jar the class and source files. -->
+		<echo message="Jar Packaging into ${jarFileName}" />
+		<jar destfile="${jarFileName}">
+			<fileset dir="${binDir}" includes="**/com/**" />
+			<fileset dir="${srcDir}" excludes="**/bin/** **/dist/** **/build/** " />
+			<!-- <fileset dir="${srcDir}" excludes="**/bin/** **/dist/** **/build/** **/config/**" /> -->
+			<manifest>
+				<attribute name="Built-By" value="${user.name}" />
+				<attribute name="Specification-Version" value="${mypom.version}" />
+				<attribute name="Specification-Vendor" value="Sensus" />
+				<attribute name="Implementation-Version" value="${mypom.version}" />
+				<attribute name="Implementation-Vendor" value="Sensus" />
+			</manifest>
+		</jar>
+
+		<antcall target="Sensus.installLocal" />
+
+	</target>
+
+	<target name="echoPath">
+		<script language="javascript">
+			<![CDATA[
+			var before = project.getProperty("path");
+			project.setProperty("afterPath",
+			before.replaceAll(";", "\n"));
+		]]>
+		</script>
+		<echo>${header}</echo>
+		<echo>${afterPath}</echo>
+	</target>
+
+	<target name="installLocal" if="installLocal">
+		<artifact:pom id="mypom" file="${pomFile}" />
+		<artifact:install file="${jarFileName}">
+			<pom refid="mypom" />
+		</artifact:install>
+	</target>
+
+	<target name="buildJavaFromXsd">
+
+		<property name="binDir" value="${projectBaseDir}\bin" />
+		<property name="srcDir" value="${projectBaseDir}\src" />
+		<property name="destDir" value="${projectBaseDir}\dist" />
+		<property name="generatedSrcDir" value="${destDir}\generatedSrc" />
+
+		<!-- Resolve the dependencies -->
+		<artifact:pom id="mypom" file="${pomFile}" />
+		<artifact:dependencies pomRefId="mypom" pathId="maven.dependency.fileset" />
+
+		<!-- Define the ant task for xjc based on the depedencies we just resolved. -->
+		<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
+			<classpath>
+				<path refid="maven.dependency.fileset" />
+			</classpath>
+		</taskdef>
+
+		<!-- Clean up before we generate. -->
+		<delete dir="${generatedSrcDir}" failonerror="false" />
+		<mkdir dir="${generatedSrcDir}" />
+
+		<!-- Generate source. -->
+		<xjc destdir="${generatedSrcDir}" package="${generatedPackageName}">
+			<schema dir="${schemaSrcDir}" includes="**/*.xsd" />
+			<classpath>
+				<path refid="maven.dependency.fileset" />
+			</classpath>
+		</xjc>
+
+		<!-- Clean up before we build. -->
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset dir="${binDir}" includes="**/*" />
+		</delete>
+		<mkdir dir="${binDir}" />
+
+		<!-- Compile the generated source and any project source files. -->
+		<javac debug="true" destdir="${binDir}" includeantruntime="false">
+			<src path="${generatedSrcDir}" />
+			<src path="${srcDir}" />
+			<classpath>
+				<path refid="maven.dependency.fileset" />
+			</classpath>
+		</javac>
+
+		<!-- Jar the results. -->
+		<property name="jarFileName" value="${destDir}/${moduleName}-${mypom.version}.jar" />
+		<jar destfile="${jarFileName}">
+			<fileset dir="${binDir}" />
+			<manifest>
+				<attribute name="Built-By" value="${user.name}" />
+				<attribute name="Specification-Version" value="${mypom.version}" />
+				<attribute name="Specification-Vendor" value="Sensus" />
+				<attribute name="Implementation-Version" value="${mypom.version}" />
+				<attribute name="Implementation-Vendor" value="Sensus" />
+			</manifest>
+		</jar>
+
+		<antcall target="Sensus.deleteGeneratedSrcFolder" />
+
+		<!-- Publish to local repository. -->
+		<artifact:install file="${jarFileName}">
+			<pom refid="mypom" />
+		</artifact:install>
+
+	</target>
+
+	<target name="buildDMOrchestrationClientFromXsd">
+
+		<property name="projectBaseDir" value="${basedir}\.." />
+		<property name="binDir" value="${projectBaseDir}\bin" />
+		<property name="srcDir" value="${projectBaseDir}\src" />
+		<property name="destDir" value="${projectBaseDir}\dist" />
+		<property name="generatedSrcDir" value="${destDir}\generatedSrc" />
+
+		<!-- Resolve the dependencies -->
+		<artifact:pom id="mypom" file="${pomFile}" />
+		<artifact:dependencies pomRefId="mypom" pathId="maven.dependency.fileset" />
+
+		<!-- Define the ant task for xjc based on the depedencies we just resolved. -->
+		<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
+			<classpath>
+				<path refid="maven.dependency.fileset" />
+			</classpath>
+		</taskdef>
+
+		<!-- Clean up before we generate. -->
+		<delete dir="${generatedSrcDir}" failonerror="false" />
+		<mkdir dir="${generatedSrcDir}" />
+
+		<!-- Generate first source. -->
+		<xjc destdir="${generatedSrcDir}" extension="true" removeOldOutput="no">
+			<!-- <schema dir="${schemaSrcDir1}" includes="**/${firstXsdToGenFrom}" /> -->
+			<schema dir="${schemaSrcDir1}" includes="**/*.xsd" />
+			<classpath>
+				<path refid="maven.dependency.fileset" />
+			</classpath>
+		</xjc>
+
+		<!-- Generate second source. -->
+		<!-- <xjc destdir="${generatedSrcDir}" extension="true" removeOldOutput="yes"> <schema dir="${schemaSrcDir2}" includes="${secondXsdToGenFrom}"
+			/> <classpath> <path refid="maven.dependency.fileset" /> </classpath> </xjc> -->
+
+		<!-- Clean up before we build. -->
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset dir="${binDir}" includes="**/*" />
+		</delete>
+		<mkdir dir="${binDir}" />
+
+		<!-- Compile the generated source and any project source files. -->
+		<javac debug="true" destdir="${binDir}" includeantruntime="false">
+			<src path="${generatedSrcDir}" />
+			<src path="${srcDir}" />
+			<classpath>
+				<path refid="maven.dependency.fileset" />
+			</classpath>
+		</javac>
+
+		<!-- Jar the results. -->
+		<property name="jarFileName" value="${destDir}/${moduleName}-${mypom.version}.jar" />
+		<jar destfile="${jarFileName}">
+			<fileset dir="${binDir}" />
+			<manifest>
+				<attribute name="Built-By" value="${user.name}" />
+				<attribute name="Specification-Version" value="${mypom.version}" />
+				<attribute name="Specification-Vendor" value="Sensus" />
+				<attribute name="Implementation-Version" value="${mypom.version}" />
+				<attribute name="Implementation-Vendor" value="Sensus" />
+			</manifest>
+		</jar>
+
+		<antcall target="Sensus.deleteGeneratedSrcFolder" />
+
+
+		<!-- Publish to local repository. -->
+		<artifact:install file="${jarFileName}">
+			<pom refid="mypom" />
+		</artifact:install>
+
+	</target>
+
+	<target name="deleteGeneratedSrcFolder" unless="doNotDeleteGeneratedSrcFolder">
+		<delete dir="${generatedSrcDir}" failonerror="false" />
+	</target>
+
+	<target name="buildJavadoc" if="createJavadoc">
+
+		<property name="javadocWorkingDir" value="${projectBaseDir}/javadoc" />
+
+		<!-- Get timestamp for javadoc. -->
+		<tstamp>
+			<format property="javaDocGenerateTimestamp" pattern="MM/dd/yyyy hh:mm aa" />
+			<format property="javaDocGenerateYear" pattern="yyyy" />
+		</tstamp>
+
+		<!-- Create the javadoc. -->
+		<javadoc sourcepath="${srcDir}" destdir="${javadocWorkingDir}" classpathref="ivy.path" source="1.6"
+			Windowtitle="${moduleName}-javadoc created ${javaDocGenerateTimestamp}">
+
+			<bottom>
+				<![CDATA[<i>${confidentialPrefix} &#169; Copyright ${javaDocGenerateYear} QA Technologies, Inc. All Rights Reserved.</i>]]></bottom>
+		</javadoc>
+
+		<property name="javadocFileName" value="${destDir}/${moduleName}-javadoc-${ivy.revision}.zip" />
+		<!-- Zip the javadoc. -->
+		<zip destfile="${javadocFileName}" basedir="${javadocWorkingDir}" />
+		<echo message="Javadoc zip'd into ${javadocFileName}" />
+
+		<!-- Final clean up of javadoc. -->
+		<delete dir="${javadocWorkingDir}" />
+
+	</target>
+
+</project>
