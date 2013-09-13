@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ElectricResultMap">
+
+	<!--###################-->
+	<!--####  RESULTS  ####-->
+	<!--###################-->
+
+	<resultMap id="ElectricMeterConfigurationResult" type="ElectricMeterConfiguration">
+
+		<result property="firmwareFlexnet" 	 				 jdbcType="VARCHAR"		column="firmware_flexnet" />
+		<result property="firmwareMeter" 		 			 jdbcType="VARCHAR"		column="firmware_meter" />
+		<result property="firmwareBootflasher" 				 jdbcType="VARCHAR"		column="firmware_bootloader" />
+		<result property="firmwareZigbee" 	 				 jdbcType="VARCHAR"		column="firmware_zigbee" />
+		<result property="premiseId" 			 			 jdbcType="INTEGER"		column="premise_id" />
+		<result property="premiseIdDeviceCount"	 			 jdbcType="INTEGER"		column="premise_id_device_count" />
+		<result property="installDate" 		 				 jdbcType="TIMESTAMP"	column="install_date" />
+		<result property="encryptionSupported" 				 jdbcType="BOOLEAN"	    column="encrypted" />
+		<result property="encrypted" 		     			 jdbcType="VARCHAR"	    column="encrypted_status" />
+		<result property="remoteConnectAvailableEnumValue" 	 jdbcType="INTEGER"		column="remote_connect_available" />
+
+	</resultMap>
+
+	<resultMap id="HanDeviceConfigurationResult" type="HanDeviceConfiguration">
+
+		<result property="lastDateStatus" 	 				 jdbcType="TIMESTAMP" 	column="networkLastDateStatus" />
+		<result property="installDate"	 	 				 jdbcType="TIMESTAMP" 	column="install_date" />
+
+	</resultMap>
+
+	<resultMap id="LCMConfigurationResult" type="LCMConfiguration">
+
+		<result property="firmwareFlexnet" 	 				 jdbcType="VARCHAR"		column="firmware_flexnet" />
+		<result property="firmwareMeter" 		 			 jdbcType="VARCHAR"		column="firmware_meter" />
+		<result property="firmwareBootflasher" 				 jdbcType="VARCHAR"		column="firmware_bootloader" />
+		<result property="firmwareZigbee" 	 				 jdbcType="VARCHAR"		column="firmware_zigbee" />
+		<result property="lastDateStatus" 	 				 jdbcType="TIMESTAMP" 	column="networkLastDateStatus" />
+		<result property="encrypted" 		     			 jdbcType="VARCHAR"	    column="encrypted_status" />
+		<result property="installDate"	 	 				 jdbcType="TIMESTAMP" 	column="install_date" />
+
+	</resultMap>
+
+	<resultMap id="ElectricMeterResult" type="ElectricMeter" extends="DeviceResultMap.DeviceResult">
+
+		<result property="remoteConnectStatusEnumValue" 	 jdbcType="INTEGER"		column="remote_disconnect" />
+		<result property="lifecycleStateEnumValue"     		 jdbcType="VARCHAR"		column="lifecycle_state" />
+		<result property="electricMeterTypeEnumValue"  		 jdbcType="INTEGER"		column="meter_type_enum" />
+		<result property="lastHeard"						 jdbcType="VARCHAR"		column="lastHeard" />
+		<result property="quarantine"  		 				 jdbcType="BOOLEAN"		column="quarantine" />
+
+		<association property="configuration" 				 javaType="ElectricMeterConfiguration"  resultMap="ElectricMeterConfigurationResult" />
+		<association property="deviceModel" 				 javaType="DeviceModel"     			resultMap="DeviceResultMap.DeviceModelResult" />
+
+	</resultMap>
+
+	<resultMap id="HanDeviceResult" type="HanDevice" extends="DeviceResultMap.DeviceResult">
+
+		<result property="hanDeviceId" 						 jdbcType="VARCHAR"		column="han_device_id" />
+		<result property="hanDeviceTypeEnumValue" 			 jdbcType="INTEGER"		column="meter_type_enum" />
+		<result property="lifecycleStateEnumValue"     		 jdbcType="INTEGER"		column="netWorkStatus" />
+		<result property="electricMeterFlexNetId" 	   		 jdbcType="BIGINT"		column="base_rep_id" />				<!-- parent meter id -->
+
+		<association property="configuration" 				 javaType="HanDeviceConfiguration"  	resultMap="HanDeviceConfigurationResult" />
+		<association property="deviceModel" 				 javaType="DeviceModel" 				resultMap="DeviceResultMap.DeviceModelResult" />
+
+	</resultMap>
+
+	<resultMap id="LcmResult" type="LCM" extends="DeviceResultMap.DeviceResult">
+
+		<result property="lifecycleStateEnumValue"     		 jdbcType="INTEGER"		column="netWorkStatus" />
+		<result property="electricMeterFlexNetId" 	   		 jdbcType="BIGINT"		column="base_rep_id" />				<!-- parent meter id -->
+		<result property="lcmTypeEnumValue" 				 jdbcType="INTEGER"		column="meter_type_enum" />
+
+		<association property="configuration" 				 javaType="LCMConfiguration"  			resultMap="LCMConfigurationResult" />
+		<association property="deviceModel" 				 javaType="DeviceModel"     			resultMap="DeviceResultMap.DeviceModelResult" />
+
+		<collection property="alarms" column="alarm"         javaType="ArrayList"   				resultMap="DeviceResultMap.AlarmResult" />
+
+	</resultMap>
+
+	<!-- With Discriminator -->
+
+
+	<resultMap id="LocationResult" type="Device">
+
+		<result property="radio.location.address" 			 		jdbcType="VARCHAR" 	column="address" />
+		<result property="radio.location.city" 						jdbcType="VARCHAR"	column="city" />
+		<result property="radio.location.state" 					jdbcType="VARCHAR"	column="address_state" />
+		<result property="radio.location.country" 					jdbcType="VARCHAR"	column="country" />
+		<result property="radio.location.zip" 						jdbcType="VARCHAR"	column="zip" />
+		<result property="radio.location.latitude" 					jdbcType="DOUBLE"	column="latitude" />
+		<result property="radio.location.longitude" 				jdbcType="DOUBLE"	column="longitude" />
+		<result property="radio.location.timeZoneInfo.displayName" 	jdbcType="VARCHAR"	column="time_zone" />
+
+	</resultMap>
+
+	<resultMap id="RadioResult" type="Device" extends="LocationResult">
+
+		<result property="radio.flexNetId" 			jdbcType="INTEGER"		column="flexnet_id" />
+		<result property="radio.customerId" 		jdbcType="VARCHAR"		column="customer_id" />
+
+	</resultMap>
+
+	<resultMap id="DeviceResult" type="Device" extends="RadioResult">
+
+		<result property="deviceId" 				jdbcType="VARCHAR" 		column="device_id" />
+		<result property="deviceTypeValue" 		jdbcType="INTEGER"		column="device_type" />
+
+	</resultMap>
+
+	<resultMap id="HanDeviceDiscriminatorResult" type="HanDevice" extends="DeviceResult">
+
+		<result property="hanDeviceId" 						 jdbcType="VARCHAR"		column="han_device_id" />
+		<result property="hanDeviceTypeEnumValue" 			 jdbcType="INTEGER"		column="meter_type_enum" />
+		<result property="lifecycleStateEnumValue"     		 jdbcType="INTEGER"		column="netWorkStatus" />
+		<result property="electricMeterFlexNetId" 	   		 jdbcType="BIGINT"		column="base_rep_id" />				<!-- parent meter id -->
+
+		<result property="configuration.lastDateStatus" 	 jdbcType="TIMESTAMP" 	column="networkLastDateStatus" />
+		<result property="configuration.installDate"	 	 jdbcType="TIMESTAMP" 	column="install_date" />
+
+		<result property="deviceModel.description" 	   		 jdbcType="VARCHAR"		column="model" />
+		<result property="deviceModel.id" 			   		 jdbcType="INTEGER"		column="device_type_id" />
+		<result property="deviceModel.manufacture" 			 jdbcType="VARCHAR"		column="manufacture" />
+
+	</resultMap>
+
+	<resultMap id="ElectricMeterDiscriminatorResult" type="ElectricMeter" extends="DeviceResult">
+
+		<result property="remoteConnectStatusEnumValue" 	 	jdbcType="INTEGER"		column="remote_disconnect" />
+		<result property="lifecycleStateEnumValue"     		 	jdbcType="VARCHAR"		column="lifecycle_state" />
+		<result property="electricMeterTypeEnumValue"  		 	jdbcType="INTEGER"		column="meter_type_enum" />
+		<result property="lastHeard"						 	jdbcType="VARCHAR"		column="lastHeard" />
+		<result property="quarantine"  		 				 	jdbcType="BOOLEAN"		column="quarantine" />
+
+		<result property="configuration.firmwareFlexnet" 	 	jdbcType="VARCHAR"		column="firmware_flexnet" />
+		<result property="configuration.firmwareMeter" 		 	jdbcType="VARCHAR"		column="firmware_meter" />
+		<result property="configuration.firmwareBootflasher" 	jdbcType="VARCHAR"		column="firmware_bootloader" />
+		<result property="configuration.firmwareZigbee" 	 	jdbcType="VARCHAR"		column="firmware_zigbee" />
+		<result property="configuration.premiseId" 			 	jdbcType="INTEGER"		column="premise_id" />
+		<result property="configuration.premiseIdDeviceCount"	jdbcType="INTEGER"		column="premise_id_device_count" />
+		<result property="configuration.installDate" 		 	jdbcType="TIMESTAMP"	column="install_date" />
+		<result property="configuration.encryptionSupported" 	jdbcType="BOOLEAN"	    column="encrypted" />
+		<result property="configuration.encrypted" 		     	jdbcType="VARCHAR"	    column="encrypted_status" />
+		<result property="configuration.remoteConnectAvailableEnumValue" 	 jdbcType="INTEGER"		column="remote_connect_available" />
+
+		<result property="deviceModel.description" 	   		 	jdbcType="VARCHAR"		column="model" />
+		<result property="deviceModel.id" 			   		 	jdbcType="INTEGER"		column="device_type_id" />
+
+	</resultMap>
+
+
+	<resultMap id="LcmDiscriminatorResult" type="LCM" extends="DeviceResult">
+
+		<result property="lifecycleStateEnumValue"     		 jdbcType="INTEGER"		column="netWorkStatus" />
+		<result property="electricMeterFlexNetId" 	   		 jdbcType="BIGINT"		column="base_rep_id" />				<!-- parent meter id -->
+		<result property="lcmTypeEnumValue" 				 jdbcType="INTEGER"		column="meter_type_enum" />
+
+		<result property="configuration.firmwareFlexnet" 	 jdbcType="VARCHAR"		column="firmware_flexnet" />
+		<result property="configuration.firmwareMeter" 		 jdbcType="VARCHAR"		column="firmware_meter" />
+		<result property="configuration.firmwareBootflasher" jdbcType="VARCHAR"		column="firmware_bootloader" />
+		<result property="configuration.firmwareZigbee" 	 jdbcType="VARCHAR"		column="firmware_zigbee" />
+		<result property="configuration.lastDateStatus" 	 jdbcType="TIMESTAMP" 	column="networkLastDateStatus" />
+		<result property="configuration.installDate"	 	 jdbcType="TIMESTAMP" 	column="install_date" />
+		<result property="configuration.encrypted" 		     jdbcType="VARCHAR"	    column="encrypted_status" />
+
+		<result property="deviceModel.description" 	   		 jdbcType="VARCHAR"		column="model" />
+		<result property="deviceModel.manufacture" 			 jdbcType="VARCHAR"		column="manufacture" />
+		<result property="deviceModel.id" 			    	 jdbcType="INTEGER"		column="device_type_id" />
+
+	</resultMap>
+
+</mapper>

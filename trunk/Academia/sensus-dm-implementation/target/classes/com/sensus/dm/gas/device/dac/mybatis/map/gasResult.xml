@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GasResultMap">
+
+	<!--###################-->
+	<!--####  RESULTS  ####-->
+	<!--###################-->
+
+	<resultMap id="GasMeterResult" type="GasMeter" extends="DeviceResultMap.DeviceResult">
+
+		<result property="gasMeterTypeEnumValue" jdbcType="INTEGER" column="meter_type_enum" />
+
+		<result property="statusValue" 			    		 jdbcType="INTEGER" column="topLevelState" />
+		<result property="supervisoryTransmitRate"  		 jdbcType="INTEGER" column="supervisoryTransmitRate" />
+		<result property="transmitMode" 					 jdbcType="VARCHAR" column="transMode" />
+		<result property="transmitRate" 		    		 jdbcType="VARCHAR" column="transRate" />
+		<result property="lastHeard" 		        		 jdbcType="VARCHAR" column="last_heard" />
+		<result property="quarantine"  		 				 jdbcType="BOOLEAN"	column="quarantine" />
+
+		<association property="configuration" 				 javaType="WaterGasMeterConfiguration"  	resultMap="WaterResultMap.WaterGasMeterConfigurationResult" />
+		<association property="deviceModel" 				 javaType="DeviceModel" 					resultMap="DeviceResultMap.DeviceModelResult" />
+
+		<collection property="alarms" column="alarm"         javaType="ArrayList"   					resultMap="DeviceResultMap.AlarmResult" />
+
+	</resultMap>
+
+	<!-- With Discriminator -->
+
+	<resultMap id="LocationResult" type="Device">
+
+		<result property="radio.location.address" 					jdbcType="VARCHAR" 	column="address" />
+		<result property="radio.location.city" 						jdbcType="VARCHAR"	column="city" />
+		<result property="radio.location.state" 					jdbcType="VARCHAR"	column="address_state" />
+		<result property="radio.location.country" 					jdbcType="VARCHAR"	column="country" />
+		<result property="radio.location.zip" 						jdbcType="VARCHAR"	column="zip" />
+		<result property="radio.location.latitude" 					jdbcType="DOUBLE"	column="latitude" />
+		<result property="radio.location.longitude" 				jdbcType="DOUBLE"	column="longitude" />
+		<result property="radio.location.timeZoneInfo.displayName" 	jdbcType="VARCHAR"	column="time_zone" />
+
+	</resultMap>
+
+	<resultMap id="RadioResult" type="Device" extends="GasResultMap.LocationResult">
+
+		<result property="radio.flexNetId" 			jdbcType="INTEGER"		column="flexnet_id" />
+		<result property="radio.customerId" 		jdbcType="VARCHAR"		column="customer_id" />
+
+	</resultMap>
+
+	<resultMap id="DeviceResult" type="Device" extends="GasResultMap.RadioResult">
+
+		<result property="deviceId" 				jdbcType="VARCHAR" 		column="device_id" />
+		<result property="deviceTypeValue" 		jdbcType="INTEGER"		column="device_type" />
+
+	</resultMap>
+
+	<resultMap id="GasMeterDiscriminatorResult" type="GasMeter" extends="GasResultMap.DeviceResult">
+		<result property="gasMeterTypeEnumValue" jdbcType="INTEGER" column="meter_type_enum" />
+
+		<result property="statusValue" 			    			jdbcType="INTEGER" 		column="topLevelState" />
+		<result property="supervisoryTransmitRate"  			jdbcType="INTEGER" 		column="supervisoryTransmitRate" />
+		<result property="transmitMode" 						jdbcType="VARCHAR" 		column="transMode" />
+		<result property="transmitRate" 		    			jdbcType="VARCHAR" 		column="transRate" />
+		<result property="lastHeard" 		        			jdbcType="VARCHAR" 		column="last_heard" />
+		<result property="quarantine"  		 				 	jdbcType="BOOLEAN"		column="quarantine" />
+
+		<result property="deviceModel.id" 			    	 	jdbcType="INTEGER"		column="device_type_id" />
+		<result property="deviceModel.manufacture" 			 	jdbcType="VARCHAR"		column="manufacture" />
+		<result property="deviceModel.description" 			 	jdbcType="VARCHAR"		column="model" />
+
+		<result property="configuration.firmwareFlexnet" 	 	jdbcType="VARCHAR"		column="firmware_flexnet" />
+		<result property="configuration.firmwareMeter" 		 	jdbcType="VARCHAR"		column="firmware_meter" />
+		<result property="configuration.firmwareBootflasher" 	jdbcType="VARCHAR"		column="firmware_bootloader" />
+		<result property="configuration.firmwareZigbee" 	 	jdbcType="VARCHAR"		column="firmware_zigbee" />
+		<result property="configuration.premiseId" 			 	jdbcType="INTEGER"		column="premise_id" />
+		<result property="configuration.premiseIdDeviceCount"	jdbcType="INTEGER"		column="premise_id_device_count" />
+		<result property="configuration.installDate" 		 	jdbcType="TIMESTAMP"	column="install_date" />
+		<result property="configuration.encrypted" 		     	jdbcType="VARCHAR"	    column="encrypted_status" />
+		<result property="configuration.encryptionSupported"    jdbcType="BOOLEAN"	    column="encrypted" />
+		<result property="configuration.meterSerialNumber" 		jdbcType="VARCHAR"	    column="meterSerialNumber" />
+		<result property="configuration.brokenPipe" 		    jdbcType="INTEGER"	    column="brokenPipe" />
+		<result property="configuration.historyScale" 		    jdbcType="INTEGER"	    column="historyScale" />
+		<result property="configuration.leakConsecutiveReads" 	jdbcType="INTEGER"	    column="leakConsecutiveReads" />
+		<result property="configuration.leakDetectionThreshold"	jdbcType="INTEGER"	    column="leakDetectionThreshold" />
+		<result property="configuration.meterUnits" 		    jdbcType="INTEGER"	    column="meterUnits" />
+		<result property="configuration.readingResolution" 		jdbcType="DOUBLE"	    column="readingResolution" />
+		<result property="configuration.reverseFlowThreshold" 	jdbcType="INTEGER"	    column="reverseFlowThreshold" />
+
+		<result property="configuration.sampleRate"             jdbcType="INTEGER"      column="sample_rate" />
+		<result property="configuration.billingCycle"			jdbcType="VARCHAR"		column="billing_cycle" />
+		<result property="configuration.receiverChannel"		jdbcType="DOUBLE"		column="receiver_channel" />
+		<result property="configuration.transmitChannelMask"	jdbcType="INTEGER"		column="transmit_channel_mask" />
+
+		<result property="configuration.transmitterOperationalModeEnumValue"	jdbcType="INTEGER"	column="transmitter_operational_mode" />
+		<result property="configuration.receiverOperationalModeEnumValue"		jdbcType="INTEGER"	column="receiver_operational_mode" />
+
+		<collection property="alarms" column="alarm"         javaType="ArrayList"   resultMap="DeviceResultMap.AlarmResult" />
+	</resultMap>
+
+</mapper>

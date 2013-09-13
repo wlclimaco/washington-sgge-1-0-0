@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TagMap">
+
+ 	<parameterMap id="deviceParam" type="map" >
+        <parameter property="tagId" jdbcType="INTEGER" javaType="java.lang.Integer" mode="IN"/>
+        <parameter property="flexNetId" jdbcType="INTEGER" mode="IN"/>
+        <parameter property="meterid" jdbcType="INTEGER" mode="IN"/>
+      	<parameter property="create_user" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN"/>
+    </parameterMap>
+
+	<resultMap id="TagResult" type="Tag" >
+		<result property="id" column="groupset_id" />
+		<result property="name" column="name" />
+		<result property="devicesCount" column="endpoint_count" />
+	</resultMap>
+
+	<resultMap id="DeviceResult" type="Device">
+		<result property="radio.flexNetId" column="fldRepId" />
+		<result property="deviceTypeValue" column="fldDeviceType" />
+		<result property="radio.location.latitude" column="fldLat" />
+		<result property="radio.location.longitude" column="fldLong" />
+	</resultMap>
+
+	<sql id="WithNoLock">
+		<if test="_databaseId == 'Microsoft SQL Server'">
+			WITH (NOLOCK)
+		</if>
+	</sql>
+
+	<sql id="fetchAllTagsWhereClause">
+
+		<where>
+
+			gt.groupset_type_id = 2
+			 AND g.customer_id = #{tenant.key}
+			 AND EXISTS ( SELECT 1
+	                           FROM groupset_groupset_type ggt1 <include refid="WithNoLock"/>
+	                          WHERE ggt1.groupset_id = g.groupset_id
+	                            <!-- Service Type -->
+	                            AND ggt1.groupset_type_id = #{serviceTypeEnum.serviceGroupType})
+			<if test="tag != null">
+				<if test="tag.id != null">
+					AND g.groupset_id = #{tag.id}
+				</if>
+				<if test="tag.name != null and tag.id == null">
+					<if test="_databaseId == 'Oracle'">
+			        	AND UPPER(g.name) LIKE UPPER('%' || #{tag.name} || '%')
+					</if>
+					<if test="_databaseId == 'Microsoft SQL Server'">
+						AND UPPER(g.name) LIKE UPPER('%' + #{tag.name} + '%')
+					</if>
+			    </if>
+			    <if test="tag.firstDevice != null and tag.firstDevice.radio != null and tag.firstDevice.radio.flexNetId != null">
+			    	AND epg.endpoint_id = #{tag.firstDevice.radio.flexNetId}
+			    </if>
+			</if>
+
+			<if test="paginationAllSelected != null">
+                 <if test="paginationAllSelected == true">
+                 	AND g.groupset_id NOT IN
+					<foreach item="item" index="index" collection="selectionPaginationIds"
+						open="(" separator="," close=")">
+						#{item}
+					</foreach>
+                 </if>
+                 <if test="paginationAllSelected == false">
+                 	AND g.groupset_id IN
+					<foreach item="item" index="index" collection="selectionPaginationIds"
+						open="(" separator="," close=")">
+						#{item}
+					</foreach>
+                 </if>
+             </if>
+
+             <if test="baseSearch != null">
+
+				<if test="baseSearch.containDevices != null and baseSearch.containDevices == true">
+	                	AND EXISTS ( SELECT 1
+			                           FROM endpoint_groupset eg_devices <include refid="WithNoLock"/>
+			                           WHERE eg_devices.groupset_id = g.groupset_id)
+
+		        </if>
+
+		     </if>
+        </where>
+	</sql>
+
+	<!-- PaginationTotalRows -->
+	<select id="paginationTotalRows" parameterType="InquiryTagRequest" resultType="int">
+
+			SELECT COUNT(1)
+		      FROM (
+
+					SELECT g.groupset_id AS groupset_id
+		                    ,g.name AS name
+		                    ,( SELECT COUNT(1)
+		                         FROM endpoint_groupset epg <include refid="WithNoLock"/>
+		                        WHERE epg.groupset_id = g.groupset_id
+		                     ) AS endpoint_count
+		                   ,g.description
+		                   <if test="_databaseId == 'Oracle'">
+							 ,fn_date(fn_dt(g.modified_date)) AS modified_date
+						  </if>
+						  <if test="_databaseId == 'Microsoft SQL Server'">
+							,dbo.fn_dt(g.modified_date) AS modified_date
+						  </if>
+		              FROM groupset g <include refid="WithNoLock"/>
+		              INNER JOIN groupset_groupset_type ggt <include refid="WithNoLock"/>
+		                      ON (ggt.groupset_id = g.groupset_id)
+		              INNER JOIN groupset_type gt <include refid="WithNoLock"/>
+		                      ON (gt.groupset_type_id = ggt.groupset_type_id)
+
+					<include refid="fetchAllTagsWhereClause"/>
+
+			     ) list_endpoint
+
+	</select>
+
+	<select id="fetchAllTags" parameterType="InquiryTagRequest"  resultMap="TagResult">
+
+			SELECT groupset_id
+		           ,name
+		           ,endpoint_count
+		           ,description
+		           ,modified_date
+		           ,RowNumber
+			  FROM (
+			  		SELECT groupset_id
+				           ,name
+				           ,endpoint_count
+				           ,description
+				           ,modified_date
+				           ,ROW_NUMBER() OVER (ORDER BY <if test=" sortExpression != null and !sortExpression.isEmpty()">${sortExpression},</if>groupset_id) AS RowNumber
+				      FROM (
+								SELECT g.groupset_id AS groupset_id
+					                    ,g.name AS name
+					                    ,g.description
+					                    <if test="_databaseId == 'Oracle'">
+											,fn_date(fn_dt(g.modified_date)) AS modified_date
+										</if>
+					                    <if test="_databaseId == 'Microsoft SQL Server'">
+										    ,dbo.fn_dt(g.modified_date) AS modified_date
+										</if>
+					                    ,( SELECT COUNT(1)
+					                         FROM endpoint_groupset epg <include refid="WithNoLock"/>
+					                        WHERE epg.groupset_id = g.groupset_id
+					                     ) AS endpoint_count
+					              FROM groupset g <include refid="WithNoLock"/>
+					              INNER JOIN groupset_groupset_type ggt <include refid="WithNoLock"/>
+					                      ON (ggt.groupset_id = g.groupset_id)
+					              INNER JOIN groupset_type gt <include refid="WithNoLock"/>
+					                      ON (gt.groupset_type_id = ggt.groupset_type_id)
+								<if test="tag != null and tag.firstDevice != null and tag.firstDevice.radio != null and tag.firstDevice.radio.flexNetId != null">
+									INNER JOIN endpoint_groupset epg <include refid="WithNoLock"/>
+		                			   ON (epg.groupset_id = g.groupset_id)
+								</if>
+
+								<include refid="fetchAllTagsWhereClause"/>
+
+						 ) list_endpoint
+			     ) list
+
+		    <choose>
+				<when test="pageSize != null and pageSize > 0">
+					WHERE RowNumber BETWEEN #{startRow} + 1 AND (#{startRow} + #{pageSize})
+				</when>
+				<otherwise>
+					WHERE RowNumber BETWEEN 1 AND RowNumber
+				</otherwise>
+			</choose>
+	</select>
+</mapper>

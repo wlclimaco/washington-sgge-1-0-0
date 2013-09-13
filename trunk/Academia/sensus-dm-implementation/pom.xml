@@ -1,0 +1,43 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- Note the use of a parent POM. The parent POM must be installed/published first in order for this to work. -->
+	<parent>
+		<groupId>com.sensus.dm</groupId>
+		<artifactId>sensus-dm-maven</artifactId>
+		<version>0.0.0002-SNAPSHOT</version>  
+		<relativePath>../sensus-dm-maven/pom.xml</relativePath>
+	</parent>
+
+	<!-- We do'm no not define the group since that is defined in the parent POM along with the version property. -->
+	<artifactId>sensus-dm-implementation</artifactId>
+	<packaging>jar</packaging>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.sensus.dm</groupId>
+			<artifactId>sensus-dm-interface</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sensus.dm</groupId>
+			<artifactId>sensus-dm-orchestration-client</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.7</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	</dependencies>
+
+</project>

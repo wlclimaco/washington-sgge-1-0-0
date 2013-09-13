@@ -1,0 +1,864 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DeviceMap">
+
+	<!--###################-->
+	<!--####  RESULTS  ####-->
+	<!--###################-->
+
+	<resultMap id="DeviceTypeResult"             type="DeviceTypeCount" >
+		<result property="id" 		             jdbcType="INTEGER" 	     column="id" />
+		<result property="deviceCount" 		     jdbcType="INTEGER" 	     column="device_count" />
+		<association property="device" 			 resultMap="DeviceDiscriminatorResult" />
+	</resultMap>
+
+	<resultMap id="DeviceDiscriminatorResult" type="Device">
+
+		<discriminator javaType="java.lang.Integer" jdbcType="INTEGER" column="device_type">
+			<case value="1" resultMap="ElectricResultMap.ElectricMeterDiscriminatorResult"/>
+			<case value="2" resultMap="ElectricResultMap.HanDeviceDiscriminatorResult"/>
+			<case value="4" resultMap="ElectricResultMap.LcmDiscriminatorResult"/>
+			<case value="5" resultMap="WaterResultMap.WaterMeterDiscriminatorResult"/>
+			<case value="6" resultMap="GasResultMap.GasMeterDiscriminatorResult"/>
+		</discriminator>
+
+	</resultMap>
+
+	<resultMap id="GeocodeDeviceResultToMap" type="GeocodeDeviceInfo">
+		<result property="latitudeAvg" 			 jdbcType="DOUBLE" 	column="latitudeavg" />
+		<result property="longitudeAvg" 		 jdbcType="DOUBLE" 	column="longitudeavg" />
+		<result property="latitudeTrunc" 		 jdbcType="DOUBLE" 	column="latitudetrunc" />
+		<result property="longitudeTrunc" 		 jdbcType="DOUBLE" 	column="longitudetrunc" />
+		<result property="topRightLat" 			 jdbcType="DOUBLE" 	column="topRightLat" />
+		<result property="topRightLon" 			 jdbcType="DOUBLE" 	column="topRightLon" />
+		<result property="bottomLeftLat" 		 jdbcType="DOUBLE" 	column="bottomLeftLat" />
+		<result property="bottomLeftLon" 		 jdbcType="DOUBLE" 	column="bottomLeftLon" />
+		<result property="devicesTotalByLatLong" jdbcType="INTEGER" column="devicesTotal" />
+		<result property="alertEnumValue" 		 jdbcType="INTEGER" column="alert" />
+	</resultMap>
+
+	<resultMap id="AlarmsTypesCountResult"	type="AlarmsTypesCount" >
+		<result property="alarmValue"			jdbcType="VARCHAR" 	     column="alarm" />
+		<result property="amount"				jdbcType="INTEGER" 	     column="amount" />
+	</resultMap>
+
+	<!--##########################-->
+	<!--####  SQL TO INCLUDE  ####-->
+	<!--##########################-->
+
+
+	<sql id="hanDeviceConnectionStatusSelectClause">
+
+		,(SELECT
+			<if test="_databaseId == 'Oracle'">
+				fn_date(fn_dt(hds.device_status_time))
+			</if>
+			<if test="_databaseId == 'Microsoft SQL Server'">
+				dbo.fn_dt(hds.device_status_time)
+			</if>
+		    FROM han_device_status hds <include refid="WithNoLock"/>
+		   WHERE hds.mac_address = hd.fldRepId) networkLastDateStatus
+
+		,COALESCE((SELECT CAST(hds.device_status AS INTEGER)
+		    FROM han_device_status hds <include refid="WithNoLock"/>
+		   WHERE hds.mac_address = hd.fldRepId),0) networkStatus
+
+	</sql>
+
+	<sql id="deviceTypeTblMeterSelectClause">
+		CASE WHEN ml.fldMeterType IN ('E','A') THEN 1 /* ELECTRIC */
+		     WHEN ml.fldMeterType = 'W' THEN 5 /* WATER */
+		     WHEN ml.fldMeterType = 'G' THEN 6 /* GAS */
+		     ELSE 3 /* Light */
+		END AS device_type
+		,ml.fldDeviceType AS meter_type_enum
+	</sql>
+
+	<sql id="deviceTypeTblHanDeviceSelectClause">
+		CASE WHEN hdt.fldDeviceClassId IN (0,2) THEN 2 /* HAN DEVICE */
+			 WHEN hdt.fldDeviceClassId = 1 THEN 4 /* LCM */
+			 ELSE 3 /* LIGHT */
+		END AS device_type
+		, CASE WHEN hdt.fldDeviceClassId IN (0,2) OR hd.fldHanDeviceTypeId != 26 THEN hdt.fldDeviceClassId
+			   WHEN hd.fldHanDeviceTypeId = 26 THEN 2
+		  END AS meter_type_enum
+	</sql>
+
+	<sql id="meterFromClause">
+		FROM tblMeterList ml <include refid="WithNoLock"/>
+	   INNER JOIN tblValidDeviceTypes vdt <include refid="WithNoLock"/> ON (vdt.fldDeviceType = ml.fldDeviceType)
+	</sql>
+
+	<sql id="hanDeviceFromClause">
+		FROM tblHanDevice hd <include refid="WithNoLock"/>
+			INNER JOIN tblHanDeviceType hdt <include refid="WithNoLock"/> ON (hdt.fldHanDeviceTypeId = hd.fldHanDeviceTypeId)
+	</sql>
+
+
+	<sql id="meterDeviceWhereClause">
+
+		<if test="deviceSearch != null">
+
+			<if test="deviceSearch.electricMeterSearch != null and deviceSearch.electricMeterSearch.electricMeter != null ">
+
+				<if test="deviceSearch.electricMeterSearch.electricMeter.radio != null ">
+
+					<if test="deviceSearch.electricMeterSearch.electricMeter.radio.flexNetId != null">
+						AND ml.fldRepId = #{deviceSearch.electricMeterSearch.electricMeter.radio.flexNetId}
+					</if>
+					<if test="deviceSearch.electricMeterSearch.electricMeter.radio.location != null">
+
+						<if test="deviceSearch.electricMeterSearch.electricMeter.radio.location.address != null">
+							AND UPPER(ml.fldAddress) <include refid="LikeBeginning"/> UPPER(#{deviceSearch.electricMeterSearch.electricMeter.radio.location.address}) <include refid="LikeEnding"/>
+						</if>
+						<if test="deviceSearch.electricMeterSearch.electricMeter.radio.location.city != null">
+							AND UPPER(ml.fldCity) <include refid="LikeBeginning"/> UPPER(#{deviceSearch.electricMeterSearch.electricMeter.radio.location.city}) <include refid="LikeEnding"/>
+						</if>
+						<if test="deviceSearch.electricMeterSearch.electricMeter.radio.location.zip != null">
+							AND UPPER(ml.fldZip) = UPPER(#{deviceSearch.electricMeterSearch.electricMeter.radio.location.zip})
+						</if>
+
+					</if>
+				</if>
+				<if test="deviceSearch.electricMeterSearch.electricMeter.deviceId != null">
+					AND ml.fldMeterId <include refid="LikeBeginning"/> #{deviceSearch.electricMeterSearch.electricMeter.deviceId} <include refid="LikeEnding"/>
+				</if>
+
+				<if test="deviceSearch.electricMeterSearch.electricMeter.configuration != null">
+
+					<if test="deviceSearch.electricMeterSearch.electricMeter.configuration.premiseId != null">
+						AND ml.fldPOD <include refid="LikeBeginning"/> #{deviceSearch.electricMeterSearch.electricMeter.configuration.premiseId} <include refid="LikeEnding"/>
+					</if>
+					<if test="deviceSearch.electricMeterSearch.electricMeter.configuration.firmwareMeter != null">
+						AND ml.fldfirmwareflexnet <include refid="LikeBeginning"/> #{deviceSearch.electricMeterSearch.electricMeter.configuration.firmwareMeter} <include refid="LikeEnding"/>
+					</if>
+
+				</if>
+			</if>
+		</if>
+
+	</sql>
+
+	<sql id="waterMeterDeviceWhereClause">
+
+		<if test="deviceSearch != null">
+
+			<if test="deviceSearch.waterMeterSearch != null and deviceSearch.waterMeterSearch.waterMeter != null ">
+
+				<if test="deviceSearch.waterMeterSearch.waterMeter.radio != null ">
+
+					<if test="deviceSearch.waterMeterSearch.waterMeter.radio.flexNetId != null">
+						AND ml.fldRepId = #{deviceSearch.waterMeterSearch.waterMeter.radio.flexNetId}
+					</if>
+					<if test="deviceSearch.waterMeterSearch.waterMeter.radio.location != null">
+
+						<if test="deviceSearch.waterMeterSearch.waterMeter.radio.location.address != null">
+							AND UPPER(ml.fldAddress) <include refid="LikeBeginning"/> UPPER(#{deviceSearch.waterMeterSearch.waterMeter.radio.location.address}) <include refid="LikeEnding"/>
+						</if>
+						<if test="deviceSearch.waterMeterSearch.waterMeter.radio.location.city != null">
+							AND UPPER(ml.fldCity) <include refid="LikeBeginning"/> UPPER(#{deviceSearch.waterMeterSearch.waterMeter.radio.location.city}) <include refid="LikeEnding"/>
+						</if>
+						<if test="deviceSearch.waterMeterSearch.waterMeter.radio.location.zip != null">
+							AND UPPER(ml.fldZip) = UPPER(#{deviceSearch.waterMeterSearch.waterMeter.radio.location.zip})
+						</if>
+
+					</if>
+				</if>
+				<if test="deviceSearch.waterMeterSearch.waterMeter.deviceId != null">
+					AND ml.fldMeterId <include refid="LikeBeginning"/> #{deviceSearch.waterMeterSearch.waterMeter.deviceId} <include refid="LikeEnding"/>
+				</if>
+
+				<if test="deviceSearch.waterMeterSearch.waterMeter.configuration != null">
+
+					<if test="deviceSearch.waterMeterSearch.waterMeter.configuration.premiseId != null">
+						AND ml.fldPOD <include refid="LikeBeginning"/> #{deviceSearch.waterMeterSearch.waterMeter.configuration.premiseId} <include refid="LikeEnding"/>
+					</if>
+					<if test="deviceSearch.waterMeterSearch.waterMeter.configuration.firmwareMeter != null">
+						AND ml.fldfirmwareflexnet <include refid="LikeBeginning"/> #{deviceSearch.waterMeter.waterMeterSearch.waterMeter.firmwareMeter} <include refid="LikeEnding"/>
+					</if>
+
+				</if>
+			</if>
+		</if>
+
+	</sql>
+
+	<sql id="WithNoLock">
+
+		<if test="_databaseId == 'Microsoft SQL Server'">
+
+			WITH (NOLOCK)
+
+		</if>
+
+	</sql>
+
+	<sql id="LikeBeginning">
+
+		<if test="_databaseId == 'Microsoft SQL Server'">
+			like '%' +
+		</if>
+
+		<if test="_databaseId == 'Oracle'">
+			like '%' ||
+		</if>
+
+	</sql>
+
+	<sql id="LikeEnding">
+
+		<if test="_databaseId == 'Microsoft SQL Server'">
+			+ '%'
+		</if>
+
+		<if test="_databaseId == 'Oracle'">
+			|| '%'
+		</if>
+
+	</sql>
+
+	<sql id="fetchQuarantine">
+
+		<include refid="quarantineQuery"/> AS quarantine
+
+	</sql>
+
+	<sql id="quarantineQuery">
+
+		COALESCE((SELECT CASE read_detail_type_id WHEN - 3 THEN 1 ELSE 0 END
+					    			 FROM read_detail rd
+						   			WHERE rd.endpoint_id = ml.fldRepId
+							 		  AND rd.sample_point =
+											(SELECT MAX(rds.sample_point)
+							   		   		   FROM read_detail rds
+							  		  		  WHERE rds.endpoint_id = rd.endpoint_id)), 0)
+
+	</sql>
+
+
+	<!--########################-->
+	<!--####  SQL COMMANDS  ####-->
+	<!--########################-->
+
+
+	<select id="fetchAllDevicesTypeCount" parameterType="DeviceRequest" resultMap="DeviceTypeResult">
+		SELECT
+		      ROW_NUMBER() OVER (order by device_count DESC, device_type ASC ) AS ID
+		      ,device_count
+		      ,device_type
+		      ,meter_type_enum
+		      ,flexnet_id
+		FROM (
+				SELECT COUNT(1) AS device_count
+					   ,device_type
+					   ,meter_type_enum
+					   ,MIN(flexnet_id) AS flexnet_id
+				FROM (
+					<!--####  ELECTRIC METER / WATER METER / GAS METER  ####-->
+					SELECT CASE
+				               WHEN ml.fldMeterType IN ('E','A') THEN 1 /* ELECTRIC */
+				               WHEN ml.fldMeterType = 'W' THEN 5 /* WATER */
+				               WHEN ml.fldMeterType = 'G' THEN 6 /* GAS */
+				               ELSE 3 /* Light */
+				           END AS device_type
+				           ,null AS meter_type_enum
+				           ,ml.fldRepId AS flexnet_id
+						FROM tblMeterList ml <include refid="WithNoLock"/>
+							 <if test="serviceTypeEnumValue == 2 or serviceTypeEnumValue == 3">
+							 	INNER JOIN tblUniversalSetup us <include refid="WithNoLock"/> ON (us.fldRepid = ml.fldrepid)
+							 </if>
+						WHERE ml.fldCustomerId = #{tenant.key}
+						  AND CASE
+				                  WHEN ml.fldMeterType IN ('E','A') THEN 1 /* ELECTRIC */
+				                  WHEN ml.fldMeterType = 'W' THEN 2 /* WATER */
+				                  WHEN ml.fldMeterType = 'G' THEN 3 /* GAS */
+				                  ELSE 5 /* Light */
+				              END = #{serviceTypeEnum.value}
+					      AND ml.fldDeviceType != 81
+
+						    <if test="deviceSearch != null and deviceSearch.electricMeterSearch != null and deviceSearch.electricMeterSearch.electricMeterLifecycleStateEnumList">
+								   AND ml.fldMeterLifecycleStateCode IN
+								<foreach item="ls" index="index" collection="deviceSearch.electricMeterSearch.electricMeterLifecycleStateEnumList"
+									open="(" separator="," close=")">
+									#{ls.electricMeterlifecycle}
+								</foreach>
+							</if>
+
+				         	<include refid="meterDeviceWhereClause" />
+				         	<include refid="waterMeterDeviceWhereClause" />
+
+					<if test="serviceTypeEnumValue == 1">
+
+						<!--####  IHD / THERMOSTAT / LCM  ####-->
+						UNION ALL
+						SELECT
+								<include refid="deviceTypeTblHanDeviceSelectClause"/>
+			                    ,hd.fldRepId AS flexnet_id
+			               FROM tblHanDevice hd <include refid="WithNoLock"/>
+						  INNER JOIN tblHanDeviceType hdt <include refid="WithNoLock"/>  ON (hdt.fldHanDeviceTypeId = hd.fldHanDeviceTypeId)
+							<if test="deviceSearch != null and deviceSearch.hanDeviceSearch != null and deviceSearch.hanDeviceSearch.hanLifecycleStateEnumList != null">
+								INNER JOIN han_device_status hds ON (hds.mac_address = hd.fldRepId
+								                                 AND CAST(hds.device_status AS INTEGER) IN
+								                                 <foreach item="ls" index="index" collection="deviceSearch.hanDeviceSearch.hanLifecycleStateEnumList"
+																		  open="(" separator="," close=")">
+																			#{ls.value}
+																</foreach>)
+							</if>
+
+						WHERE hd.fldcustomerid = #{tenant.key}
+	                      AND hdt.fldDeviceClassId IN (0,1,2)
+	                      AND hdt.fldHanDeviceTypeId != 26
+
+						<if test="deviceSearch != null">
+
+							<if test="deviceSearch.electricMeterSearch != null and deviceSearch.electricMeterSearch.electricMeter != null ">
+
+								<if test="deviceSearch.electricMeterSearch.electricMeter.radio != null
+										  and deviceSearch.electricMeterSearch.electricMeter.radio.flexNetId != null ">
+									AND hd.fldRepId = #{deviceSearch.electricMeterSearch.electricMeter.radio.flexNetId}
+								</if>
+
+								<if test="deviceSearch.electricMeterSearch.electricMeter.deviceId != null">
+									AND hd.fldClientEndPointId <include refid="LikeBeginning"/> #{deviceSearch.electricMeterSearch.electricMeter.deviceId} <include refid="LikeEnding"/>
+								</if>
+
+								<if test="deviceSearch.electricMeterSearch.electricMeter.configuration != null
+										  and deviceSearch.electricMeterSearch.electricMeter.configuration.premiseId != null">
+									AND EXISTS ( SELECT 1 FROM tblMeterList ml <include refid="WithNoLock"/> WHERE ml.fldRepId = hd.fldBaseRepId AND ml.fldPOD <include refid="LikeBeginning"/> #{deviceSearch.electricMeterSearch.electricMeter.configuration.premiseId} <include refid="LikeEnding"/>)
+								</if>
+							</if>
+
+						</if>
+
+						<!--####  FLEXNET LCM  ####-->
+						UNION ALL
+						SELECT
+								<include refid="deviceTypeTblHanDeviceSelectClause"/>
+			                    ,hd.fldRepId AS flexnet_id
+			              FROM tblHanDevice hd <include refid="WithNoLock"/>
+						 INNER JOIN tblHanDeviceType hdt <include refid="WithNoLock"/>  ON (hdt.fldHanDeviceTypeId = hd.fldHanDeviceTypeId)
+						 INNER JOIN tblMeterList ml <include refid="WithNoLock"/> ON (ml.fldRepId = hd.fldBaseRepId)
+						 WHERE hd.fldcustomerid = #{tenant.key}
+						   AND hdt.fldDeviceClassId = 1
+						   AND hdt.fldHanDeviceTypeId = 26
+						   AND ml.fldMeterLifecycleStateCode = 'Install'
+
+							<if test="deviceSearch != null">
+
+								<if test="deviceSearch.electricMeterSearch != null and deviceSearch.electricMeterSearch.electricMeter != null ">
+
+									<if test="deviceSearch.electricMeterSearch.electricMeter.radio != null
+											  and deviceSearch.electricMeterSearch.electricMeter.radio.flexNetId != null ">
+										AND hd.fldRepId = #{deviceSearch.electricMeterSearch.electricMeter.radio.flexNetId}
+									</if>
+
+									<if test="deviceSearch.electricMeterSearch.electricMeter.deviceId != null">
+										AND hd.fldClientEndPointId <include refid="LikeBeginning"/> #{deviceSearch.electricMeterSearch.electricMeter.deviceId} <include refid="LikeEnding"/>
+									</if>
+
+									<if test="deviceSearch.electricMeterSearch.electricMeter.configuration != null
+											  and deviceSearch.electricMeterSearch.electricMeter.configuration.premiseId != null">
+										AND ml.fldPOD <include refid="LikeBeginning"/> #{deviceSearch.electricMeterSearch.electricMeter.configuration.premiseId} <include refid="LikeEnding"/>
+									</if>
+								</if>
+
+							</if>
+
+						</if>
+
+				) LST
+				GROUP BY device_type, meter_type_enum
+			) L
+
+	</select>
+
+	<select id="fetchAllByPremiseId" parameterType="DeviceRequest" resultMap="DeviceDiscriminatorResult">
+
+		SELECT   flexnet_id
+				,device_id
+				,device_type
+				,meter_type_enum
+				,base_rep_id
+				,device_type_id
+				,model
+				,install_date
+				,premise_id
+				,meter_type_id
+				,lifecycle_state
+				,han_device_id
+				,networkStatus
+				,topLevelState
+
+		FROM (
+
+			  SELECT ml.fldRepId AS flexnet_id
+			  		,null AS base_rep_id
+					,ml.fldMeterId AS device_id
+					,'' AS han_device_id
+					<if test="_databaseId == 'Oracle'">
+						,fn_date(fn_dt(ml.fldInstallDate)) AS install_date
+					</if>
+
+					<if test="_databaseId == 'Microsoft SQL Server'">
+						,dbo.fn_dt(ml.fldInstallDate) AS install_date
+					</if>
+					,<include refid="deviceTypeTblMeterSelectClause"/>
+					,ml.fldDeviceType AS device_type_id
+					,vdt.fldDescription AS model
+
+					,ml.fldPOD AS premise_id
+					,ml.fldMeterType AS meter_type_id
+					,ml.fldMeterLifeCycleStateCode AS lifecycle_state
+					,null networkLastDateStatus
+					,null networkStatus
+					,(SELECT CASE
+								WHEN us.fldTopLevelState IN (0,1,2,3) THEN us.fldTopLevelState
+								ELSE -1
+					 		 END
+			           FROM tblUniversalSetup us <include refid="WithNoLock"/>
+			           WHERE us.fldRepid = ml.fldrepid) AS topLevelState
+					,ml.fldRepId order_col
+
+			  <include refid="meterFromClause"/>
+
+			   WHERE ml.fldDeviceType != 81
+			   		 AND ml.fldPOD = #{firstDevice.configuration.premiseId, jdbcType=VARCHAR}
+					 AND CASE
+						      WHEN vdt.fldMeterType IN ('E','A') THEN 1 /* ELECTRIC */
+						      WHEN vdt.fldMeterType = 'W' THEN 2 /* WATER */
+						      WHEN vdt.fldMeterType = 'G' THEN 3 /* GAS */
+						      ELSE 4 /* Light */
+						 END = #{serviceTypeEnumValue, jdbcType=INTEGER}
+
+			  UNION ALL
+
+			  SELECT hd.fldRepId AS flexnet_id
+			  		,hd.fldBaseRepId AS base_rep_id
+			        ,hd.fldClientEndPointId AS device_id
+
+			  		<if test="_databaseId == 'Oracle'">
+						,TO_CHAR(hd.fldHanDeviceId) AS han_device_id
+						,fn_date(fn_dt(ml.fldInstallDate)) AS install_date
+					</if>
+					<if test="_databaseId == 'Microsoft SQL Server'">
+						,CAST(hd.fldHanDeviceId AS VARCHAR) AS han_device_id
+						,dbo.fn_dt(ml.fldInstallDate) AS install_date
+					</if>
+
+					,<include refid="deviceTypeTblHanDeviceSelectClause"/>
+					,hd.fldHanDeviceTypeId AS device_type_id
+					,hdt.fldDeviceModel AS model
+
+					,ml.fldPOD AS premise_id
+					,ml.fldMeterType AS meter_type_id
+					,ml.fldMeterLifeCycleStateCode AS lifecycle_state
+
+					<include refid="hanDeviceConnectionStatusSelectClause" />
+
+					,null AS topLevelState
+					,ml.fldRepId+1 order_col
+
+			  <include refid="hanDeviceFromClause"/>
+			  INNER JOIN tblMeterList ml <include refid="WithNoLock"/> ON (ml.fldRepId = hd.fldBaseRepId)
+
+			  WHERE hdt.fldDeviceClassId IN (0, 1, 2, 3)
+			    AND ml.fldPOD = #{firstDevice.configuration.premiseId, jdbcType=VARCHAR}
+				AND CASE
+                        WHEN hdt.fldDeviceClassId IN (0,1,2) THEN 1 /* ELECTRIC */
+                        ELSE 4 /* LIGHT */
+                    END = #{serviceTypeEnum.value}
+
+			) LIST_EVENTS
+
+		ORDER BY order_col, flexnet_id
+
+	</select>
+
+	<select id="fetchDeviceByIdImport" parameterType="DeviceRequest" resultMap="DeviceDiscriminatorResult">
+
+		SELECT hd.fldRepId                AS flexnet_id
+		       ,hd.fldClientEndPointId    AS device_id
+			   ,hd.fldHanDeviceId		  AS han_device_id
+			   ,hd.fldcustomerid 		  AS customer_id
+			   ,hdt.fldDeviceMake 		  AS manufacture
+			   ,hdt.fldDeviceModel 	  AS model
+               ,<include refid="deviceTypeTblHanDeviceSelectClause"/>
+		FROM tblHanDevice hd <include refid="WithNoLock"/>
+		 INNER JOIN tblHanDeviceType  hdt <include refid="WithNoLock"/>  ON (hdt.fldHanDeviceTypeId = hd.fldHanDeviceTypeId)
+		WHERE CASE
+					WHEN hdt.fldDeviceClassId IN (0,1,2) THEN 1 /* ELECTRIC */
+					ELSE 4 /* LIGHT */
+			   END = #{serviceTypeEnum.value}
+		   AND hd.fldcustomerid = #{tenant.key}
+
+		<choose>
+			<when test="firstDevice.radio != null and firstDevice.radio.flexNetId != null">
+			AND hd.fldRepId in
+				<foreach item="device" index="index" collection="devices"
+					open="(" separator="," close=")">
+					#{device.radio.flexNetId,jdbcType=INTEGER}
+				</foreach>
+			</when>
+			<otherwise>
+			AND hd.fldClientEndPointId in
+				<foreach item="device" index="index" collection="devices"
+					open="(" separator="," close=")">
+					#{device.deviceId,jdbcType=VARCHAR}
+				</foreach>
+			</otherwise>
+		</choose>
+
+		<if test="deviceSearch != null and deviceSearch.firstDeviceType != null">
+			AND CASE WHEN hdt.fldDeviceClassId IN (0,2) THEN 2 /* HAN DEVICE */
+					 WHEN hdt.fldDeviceClassId = 1 THEN 4 /* LCM */
+					 ELSE 3 /* LIGHT */
+				END = #{deviceSearch.firstDeviceType.value}
+		</if>
+
+		<if test="deviceSearch != null and deviceSearch.hanDeviceSearch != null and deviceSearch.hanDeviceSearch.firstDeviceType != null">
+			AND hdt.fldDeviceClassId =  #{deviceSearch.hanDeviceSearch.firstDeviceType.value}
+		</if>
+
+		UNION
+
+		SELECT  ml.fldRepId         AS flexnet_id
+				,ml.fldMeterId      AS device_id
+				,null               AS han_device_id
+				,ml.fldCustomerId 	AS customer_id
+				,null 				AS manufacture
+				,vdt.fldDescription AS model
+		        ,<include refid="deviceTypeTblMeterSelectClause"/>
+		FROM tblMeterList ml <include refid="WithNoLock"/>
+		INNER JOIN tblValidDeviceTypes  vdt <include refid="WithNoLock"/> ON (vdt.fldDeviceType = ml.fldDeviceType)
+		 WHERE
+			CASE
+			      WHEN vdt.fldMeterType IN ('E','A') THEN 1 /* ELECTRIC */
+			      WHEN vdt.fldMeterType = 'W' THEN 2 /* WATER */
+			      WHEN vdt.fldMeterType = 'G' THEN 3 /* GAS */
+			      ELSE 4 /* Light */
+			END = #{serviceTypeEnumValue, jdbcType=INTEGER}
+
+			<choose>
+				<when test="firstDevice.radio != null and firstDevice.radio.flexNetId != null">
+					AND ml.fldRepId in
+					<foreach item="device" index="index" collection="devices"
+						open="(" separator="," close=")">
+						#{device.radio.flexNetId,jdbcType=INTEGER}
+					</foreach>
+				</when>
+				<otherwise>
+					AND ml.fldMeterId in
+					<foreach item="device" index="index" collection="devices"
+						open="(" separator="," close=")">
+						#{device.deviceId,jdbcType=VARCHAR}
+					</foreach>
+				</otherwise>
+			</choose>
+
+			<if test="deviceSearch != null and deviceSearch.firstDeviceType != null">
+				AND CASE WHEN vdt.fldMeterType IN ('E','A') THEN 1 /* ELECTRIC */
+					 	 WHEN vdt.fldMeterType = 'W' THEN 5 /* WATER */
+					 	 WHEN vdt.fldMeterType = 'G' THEN 6 /* GAS */
+					 	 ELSE 3 /* Light */
+					END = #{deviceSearch.firstDeviceType.value}
+			</if>
+
+			AND ml.fldCustomerId = #{tenant.key}
+			AND ml.fldDeviceType != 81
+
+	</select>
+
+	<select id="fetchAlarmHistory" parameterType="DeviceRequest" resultMap="DeviceResultMap.AlarmResult">
+		SELECT UPPER(ah.alarm) AS alarm
+			   <if test="_databaseId == 'Oracle'">
+			   		,fn_date(fn_dt(ah.toi)) AS alarm_time
+			   </if>
+			   <if test="_databaseId == 'Microsoft SQL Server'">
+					,dbo.fn_dt(ah.toi) AS alarm_time
+			   </if>
+		  FROM alarms_history ah <include refid="WithNoLock"/>
+		 WHERE ah.endpoint_id = #{firstDevice.radio.flexNetId, jdbcType=INTEGER}
+		   AND UPPER(ah.alarm) = #{firstDevice.firstAlarm.alarmEnum.value, jdbcType=VARCHAR}
+		   <if test="_databaseId == 'Oracle'">
+				AND fn_date(fn_dt(ah.toi)) >= #{firstDevice.firstAlarm.alarmTime, jdbcType=TIMESTAMP}
+			</if>
+
+			<if test="_databaseId == 'Microsoft SQL Server'">
+				AND CAST(dbo.fn_dt(ah.toi) AS DATETIME)  >= #{firstDevice.firstAlarm.alarmTime, jdbcType=TIMESTAMP}
+			</if>
+		 ORDER BY ah.alarm, ah.toi DESC
+	</select>
+
+	<select id="fetchDevicesBoundsToMap" parameterType="InquiryDeviceRequest" resultMap="GeocodeDeviceResultToMap">
+
+		<choose>
+			<when test="deviceTypeValue == 1">
+				<include refid="ElectricMap.fetchElectricMetersBoundsToMap"/>
+			</when>
+			<when test="deviceTypeValue == 2">
+				<include refid="ElectricMap.fetchHanDevicesBoundsToMap"/>
+			</when>
+			<when test="deviceTypeValue == 4">
+				<include refid="ElectricMap.fetchLCMBoundsToMap"/>
+			</when>
+			<when test="deviceTypeValue == 5">
+				<include refid="WaterMeterMap.fetchWaterMetersBoundsToMap"/>
+			</when>
+			<when test="deviceTypeValue == 6">
+				<include refid="GasMeterMap.fetchGasMetersBoundsToMap"/>
+			</when>
+		</choose>
+
+	</select>
+
+	<select id="fetchCountDevices" parameterType="InquiryDeviceRequest" resultType="int">
+
+		<choose>
+			<when test="deviceTypeValue == 1">
+				<include refid="ElectricMap.fetchCountElectricMeters"/>
+			</when>
+			<when test="deviceTypeValue == 2">
+				<include refid="ElectricMap.fetchCountHanDevices"/>
+			</when>
+			<when test="deviceTypeValue == 4">
+				<include refid="ElectricMap.fetchCountLCM"/>
+			</when>
+			<when test="deviceTypeValue == 5">
+				<include refid="WaterMeterMap.fetchCountWaterMeters"/>
+			</when>
+			<when test="deviceTypeValue == 6">
+				<include refid="GasMeterMap.fetchCountGasMeters"/>
+			</when>
+		</choose>
+
+	</select>
+
+	<select id="fetchDevicesToMap" parameterType="InquiryDeviceRequest" resultMap="GeocodeDeviceResultToMap">
+
+		SELECT COUNT(vw.flexnet_id) AS devicesTotal,
+		       CASE WHEN MAX(vw.alarm) = '' THEN NULL ELSE 0 END AS alert,
+			   MAX(vw.latitude) AS topRightLat,
+		       MAX(vw.longitude) AS topRightLon,
+		       MIN(vw.latitude) AS bottomLeftLat,
+		       MIN(vw.longitude) AS bottomLeftLon,
+			   (MAX(vw.latitude) + MIN(vw.latitude)) / 2 AS latitudeavg,
+			   (MAX(vw.longitude) + MIN(vw.longitude)) / 2 AS longitudeavg,
+
+		   		<if test="_databaseId == 'Oracle'">
+					MAX(TRUNC(vw.latitude,#{geoCodeTrunc, jdbcType=INTEGER})) AS latitudetrunc,
+					MAX(TRUNC(vw.longitude,#{geoCodeTrunc, jdbcType=INTEGER})) AS longitudetrunc
+		   		</if>
+				<if test="_databaseId == 'Microsoft SQL Server'">
+					MAX(ROUND(vw.latitude,#{geoCodeTrunc, jdbcType=INTEGER},1)) AS latitudetrunc,
+					MAX(ROUND(vw.longitude,#{geoCodeTrunc, jdbcType=INTEGER},1)) AS longitudetrunc
+				</if>
+
+		 FROM (
+				<choose>
+					<when test="deviceTypeValue == 1">
+						SELECT ml.fldRepID AS flexnet_id,
+						       ml.fldMeterId AS device_id,
+						       '' AS alarm,
+						       ml.fldLat AS latitude,
+						       ml.fldLong AS longitude
+						<include refid="ElectricMap.fetchAllElectricMetersConditions"/>
+					</when>
+					<when test="deviceTypeValue == 2">
+						SELECT hd.fldRepId AS flexnet_id,
+						       hd.fldClientEndPointId AS device_id,
+						       '' AS alarm,
+						       ml.fldLat AS latitude,
+						       ml.fldLong AS longitude
+						<include refid="ElectricMap.fetchAllHanDevicesConditions"/>
+					</when>
+					<when test="deviceTypeValue == 4">
+						SELECT hd.fldRepId AS flexnet_id,
+						       hd.fldClientEndPointId AS device_id,
+						       COALESCE(a.alarm,'') AS alarm,
+						       ml.fldLat AS latitude,
+						       ml.fldLong AS longitude
+						<include refid="ElectricMap.fetchAllLCMConditions"/>
+					</when>
+					<when test="deviceTypeValue == 5">
+						SELECT ml.fldRepID AS flexnet_id,
+						       ml.fldMeterId AS device_id,
+						       COALESCE(a.alarm,'') AS alarm,
+						       ml.fldLat AS latitude,
+						       ml.fldLong AS longitude
+						<include refid="WaterMeterMap.fetchAllWaterMetersConditions"/>
+					</when>
+					<when test="deviceTypeValue == 6">
+						SELECT ml.fldRepID AS flexnet_id,
+						       ml.fldMeterId AS device_id,
+						       COALESCE(a.alarm,'') AS alarm,
+						       ml.fldLat AS latitude,
+						       ml.fldLong AS longitude
+						<include refid="GasMeterMap.fetchAllGasMetersConditions"/>
+					</when>
+				</choose>
+		 	  ) vw
+		 GROUP BY
+				<if test="_databaseId == 'Oracle'">
+					TRUNC(vw.latitude,#{geoCodeTrunc, jdbcType=INTEGER}),
+					TRUNC(vw.longitude,#{geoCodeTrunc, jdbcType=INTEGER})
+				</if>
+				<if test="_databaseId == 'Microsoft SQL Server'">
+					ROUND(vw.latitude,#{geoCodeTrunc, jdbcType=INTEGER},1),
+					ROUND(vw.longitude,#{geoCodeTrunc, jdbcType=INTEGER},1)
+				</if>
+
+	</select>
+
+	<select id="fetchAllDeviceTypesDescription" parameterType="DeviceRequest" resultMap="DeviceResultMap.DeviceModelResult">
+
+		SELECT fldDescription AS description
+			   ,id
+		FROM (
+			  SELECT vdt.fldDescription
+			  		 ,vdt.fldDeviceType AS id
+			  FROM tblValidDeviceTypes vdt <include refid="WithNoLock"/>
+			  WHERE (CASE WHEN vdt.fldMeterType IN ('E','A') THEN 1 /* ELECTRIC */
+					  	  WHEN vdt.fldMeterType = 'W' THEN 5 /* WATER */
+						  WHEN vdt.fldMeterType = 'G' THEN 6 /* GAS */
+					 ELSE 3 /* Light */
+					 END = #{deviceSearch.firstDeviceType.value, jdbcType=INTEGER})
+
+					<choose>
+						<when test="deviceSearch != null and deviceSearch.deviceModels != null">
+							AND vdt.fldDeviceType IN
+							<foreach item="deviceModel" index="index" collection="deviceSearch.deviceModels"
+								open="(" separator="," close=")">
+								#{deviceModel.id}
+							</foreach>
+						</when>
+						<otherwise>
+							AND EXISTS(SELECT 1 FROM tblMeterList ml <include refid="WithNoLock"/>
+									   WHERE ml.fldDeviceType = vdt.fldDeviceType
+				    						<if test="deviceSearch.firstDeviceType.value == 1">
+				    							AND ml.fldMeterLifeCycleStateCode = 'Install'
+				    							AND ml.fldDeviceType != 81
+				    						</if>
+				    				  )
+						</otherwise>
+					</choose>
+
+			  UNION ALL
+			  SELECT hdt.fldDeviceModel AS fldDescription
+			  		 ,hdt.fldHanDeviceTypeId AS id
+			  FROM tblHanDeviceType hdt <include refid="WithNoLock"/>
+			  WHERE (CASE WHEN hdt.fldDeviceClassId IN (0,2) THEN 2 /* HAN DEVICE */
+						 WHEN hdt.fldDeviceClassId = 1 THEN 4 /* LCM */
+						 ELSE 3 /* LIGHT */
+					END = #{deviceSearch.firstDeviceType.value, jdbcType=INTEGER})
+					<if test="deviceSearch.hanDeviceSearch != null and deviceSearch.hanDeviceSearch.hanDeviceTypeEnumList != null">
+						AND hdt.fldDeviceClassId = #{deviceSearch.hanDeviceSearch.firstDeviceType.value}
+					</if>
+
+					<choose>
+						<when test="deviceSearch != null and deviceSearch.deviceModels != null">
+							AND hdt.fldHanDeviceTypeId IN
+							<foreach item="deviceModel" index="index" collection="deviceSearch.deviceModels"
+								open="(" separator="," close=")">
+								#{deviceModel.id}
+							</foreach>
+						</when>
+						<otherwise>
+							AND EXISTS(SELECT 1 FROM tblHanDevice hd <include refid="WithNoLock"/>
+									   WHERE hdt.fldHanDeviceTypeId = hd.fldHanDeviceTypeId)
+						</otherwise>
+					</choose>
+
+			) LIST
+		GROUP BY fldDescription, id
+		ORDER BY fldDescription ASC
+
+	</select>
+
+	<select id="fetchQuarantineCount"  parameterType="DeviceRequest" resultType="int">
+
+		SELECT COUNT(ml.fldRepId) AS amount
+		  FROM tblMeterList ml <include refid="WithNoLock"/>
+		 WHERE
+		 	CASE
+			      WHEN ml.fldMeterType IN ('E','A') THEN 1 /* ELECTRIC */
+			      WHEN ml.fldMeterType = 'W' THEN 2 /* WATER */
+			      WHEN ml.fldMeterType = 'G' THEN 3 /* GAS */
+			      ELSE 4 /* Light */
+			END = #{serviceTypeEnumValue, jdbcType=INTEGER}
+		   AND ml.fldCustomerId = #{tenant.key}
+		   AND ml.fldDeviceType IS NOT NULL
+		   AND (<include refid="quarantineQuery"/>) = 1
+
+	</select>
+
+	<select id="fetchAlarmsTypesCount" parameterType="DeviceRequest" resultMap="AlarmsTypesCountResult">
+
+		<choose>
+			<when test="serviceTypeEnumValue == 1">
+
+				SELECT UPPER(a.alarm) AS alarm, COUNT(1) AS amount
+				  FROM tblHanDevice hd <include refid="WithNoLock"/>
+				 INNER JOIN tblHanDeviceType hdt <include refid="WithNoLock"/>  ON (hdt.fldHanDeviceTypeId = hd.fldHanDeviceTypeId)
+				 INNER JOIN alarms a <include refid="WithNoLock"/> ON (a.fldRepId = hd.fldRepId)
+				 WHERE hd.fldcustomerid = #{tenant.key}
+				   AND UPPER(a.alarm) IN
+						<foreach item="item" index="index" collection="deviceSearch.lcmSearch.alarmEnumList"
+							open="(" separator="," close=")">
+							#{item.alarm}
+						</foreach>
+				   AND hdt.fldDeviceClassId = 1
+				   AND hdt.fldHanDeviceTypeId != 26
+				 GROUP BY a.alarm
+
+			</when>
+			<otherwise>
+
+			  SELECT UPPER(a.alarm) AS alarm, COUNT(1) AS amount
+				FROM tblMeterList ml <include refid="WithNoLock"/>
+			   INNER JOIN tblUniversalSetup us <include refid="WithNoLock"/> ON (us.fldRepid = ml.fldrepid)
+	    	   INNER JOIN (SELECT a.fldRepId,
+						          CASE WHEN COUNT(a.fldRepId) > 1 THEN 'FLDMULTIPLE' ELSE max(a.alarm) END AS alarm
+						     FROM alarms a <include refid="WithNoLock"/>
+							<choose>
+								<when test="serviceTypeEnumValue == 2">
+						     		WHERE a.alarm IN <include refid="WaterMeterMap.alarmsWater"/>
+								</when>
+								<when test="serviceTypeEnumValue == 3">
+						     		WHERE a.alarm IN <include refid="GasMeterMap.alarmsGas"/>
+								</when>
+							</choose>
+						    GROUP BY a.fldRepId) a ON (a.fldRepId = ml.fldRepId)
+			   WHERE ml.fldCustomerId = #{tenant.key}
+				<choose>
+					<when test="serviceTypeEnumValue == 2">
+						AND ml.fldMeterType = 'W'
+						AND UPPER(a.alarm) IN
+							<foreach item="item" index="index" collection="deviceSearch.waterMeterSearch.alarmEnumList"
+								open="(" separator="," close=")">
+								#{item.alarm}
+							</foreach>
+					</when>
+					<when test="serviceTypeEnumValue == 3">
+						AND ml.fldMeterType = 'G'
+						AND UPPER(a.alarm) IN
+							<foreach item="item" index="index" collection="deviceSearch.gasMeterSearch.alarmEnumList"
+								open="(" separator="," close=")">
+								#{item.alarm}
+							</foreach>
+					</when>
+					<otherwise>
+						AND ml.fldMeterType IN ('E','A')
+					</otherwise>
+				</choose>
+			   GROUP BY a.alarm
+
+			</otherwise>
+
+		</choose>
+
+	</select>
+
+</mapper>

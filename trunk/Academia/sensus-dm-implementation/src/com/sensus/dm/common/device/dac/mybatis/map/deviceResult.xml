@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DeviceResultMap">
+
+	<!--###################-->
+	<!--####  RESULTS  ####-->
+	<!--###################-->
+
+	<resultMap id="TimeZoneInfoResult" type="TimeZoneInfo">
+
+		<result property="displayName" 		 jdbcType="VARCHAR"		column="time_zone" />
+
+	</resultMap>
+
+	<resultMap id="LocationResult" type="location">
+
+		<result property="address" 							 jdbcType="VARCHAR" 	column="address" />
+		<result property="city" 							 jdbcType="VARCHAR"		column="city" />
+		<result property="state" 							 jdbcType="VARCHAR"		column="address_state" />
+		<result property="country" 							 jdbcType="VARCHAR"		column="country" />
+		<result property="zip" 								 jdbcType="VARCHAR"		column="zip" />
+		<result property="latitude" 						 jdbcType="DOUBLE"		column="latitude" />
+		<result property="longitude" 						 jdbcType="DOUBLE"		column="longitude" />
+		<association property="timeZoneInfo" 				 javaType="TimeZoneInfo"    resultMap="TimeZoneInfoResult" />
+
+	</resultMap>
+
+	<resultMap id="RadioResult" type="Radio">
+
+		<result property="flexNetId" 						 jdbcType="INTEGER"		column="flexnet_id" />
+		<result property="customerId" 						 jdbcType="VARCHAR"		column="customer_id" />
+		<association property="location" 					 javaType="Location"    resultMap="LocationResult" />
+
+	</resultMap>
+
+	<resultMap id="DeviceResult" type="Device">
+
+		<result property="deviceId" 						 jdbcType="VARCHAR" 	column="device_id" />
+		<result property="deviceTypeValue" 				 	 jdbcType="INTEGER"		column="device_type" />
+		<association property="radio" 						 javaType="Radio"     	resultMap="RadioResult" />
+
+	</resultMap>
+
+	<resultMap id="DeviceModelResult" type="DeviceModel">
+
+		<result property="description" 	   		 			 jdbcType="VARCHAR"		column="model" />
+		<result property="id" 			   		 			 jdbcType="INTEGER"		column="device_type_id" />
+		<result property="manufacture" 			 			 jdbcType="VARCHAR"		column="manufacture" />
+
+	</resultMap>
+
+	<resultMap id="AlarmResult" type="Alarm">
+
+		<result property="alarmEnumValue" 			 		 jdbcType="VARCHAR"		column="alarm" />
+		<result property="alarmTime" 			     		 jdbcType="TIMESTAMP"	column="alarm_time" />
+
+	</resultMap>
+
+</mapper>

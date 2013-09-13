@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ActionMap">
+
+	<resultMap type="INTEGER" id="Count"/>
+
+	<resultMap type="java.lang.Integer" id="ActionTypeID"/>
+
+	<resultMap id="ActionResult" type="DMAction">
+	  <result property="name" column="action_name" />
+	  <result property="id" column="action_instance_id" />
+	  <result property="actionType.actionTypeEnumValue" column="action_type_id"/>
+	  <result property="totalDevices" column="total_devices" />
+	  <collection property="devices" column="action_instance_id" select="fetchAllDeviceFromAction"/>
+	  <collection property="groups" column="action_instance_id" select="fetchAllGroupFromAction"/>
+	  <collection property="tags" column="action_instance_id" select="fetchAllTagsFromAction"/>
+	 </resultMap>
+
+	<resultMap type="Group" id="GroupResult">
+		<result property="id" column="group_id" />
+		<result property="name" column="name" />
+		<result property="description" column="description" />
+		<result property="devicesCount" column="total_smartpoint" />
+		<collection property="devices" column="group_id" select="GroupMap.fetchDevicesByGroup"/>
+	</resultMap>
+
+	<resultMap type="Tag" id="TagResult">
+		<result property="id" column="group_id" />
+		<result property="name" column="name" />
+		<result property="description" column="description" />
+		<result property="devicesCount" column="total_smartpoint" />
+		<collection property="devices" column="group_id" select="GroupMap.fetchDevicesByGroup"/>
+	</resultMap>
+
+	<resultMap id="DeviceDiscriminatorResult" type="Device">
+		<discriminator javaType="java.lang.Integer" jdbcType="INTEGER" column="device_type_enum">
+			<case value="1" resultMap="ElectricMeterResult"/>
+			<case value="2" resultMap="HanDeviceResult"/>
+			<case value="4" resultMap="LcmResult"/>
+			<case value="5" resultMap="WaterMeterResult"/>
+			<case value="6" resultMap="GasMeterResult"/>
+		</discriminator>
+
+	</resultMap>
+
+	<resultMap id="DeviceResult" type="Device">
+		<!-- Device -->
+		<result property="deviceTypeValue" column="device_type_enum" />
+		<result property="deviceId" column="client_endpoint_id" />
+		<!-- Radio -->
+		<result property="radio.flexNetId" column="fldRepId" />
+		<result property="radio.customerId" column="customerId" />
+		<result property="radio.location.latitude" column="fldLat" />
+		<result property="radio.location.longitude" column="fldLong" />
+		<result property="radio.location.address"  	column="address" jdbcType="VARCHAR" />
+
+	</resultMap>
+
+	<resultMap id="ElectricMeterResult" type="ElectricMeter" extends="DeviceResult">
+		<result property="electricMeterTypeEnumValue"  		 jdbcType="INTEGER"		column="meter_type_enum" />
+		<result property="lifecycleStateEnumValue"     		 jdbcType="VARCHAR"		column="lifecycle_state" />
+	</resultMap>
+
+	<resultMap id="WaterMeterResult" type="WaterMeter" extends="DeviceResult">
+		<result property="waterMeterTypeEnumValue" jdbcType="INTEGER" column="meter_type_enum" />
+	</resultMap>
+
+	<resultMap id="GasMeterResult" type="GasMeter" extends="DeviceResult">
+		<result property="gasMeterTypeEnumValue" jdbcType="INTEGER" column="meter_type_enum" />
+	</resultMap>
+
+
+	<resultMap id="LcmResult" type="LCM" extends="DeviceResult">
+
+		<result property="electricMeterFlexNetId" 	   		 jdbcType="BIGINT"		column="baseFlexNetId" />				<!-- parent meter id -->
+		<result property="lcmTypeEnumValue" 				 jdbcType="INTEGER"		column="meter_type_enum" />
+
+	</resultMap>
+
+	<resultMap id="HanDeviceResult" type="HanDevice" extends="DeviceResult">
+
+		<result property="hanDeviceTypeEnumValue" 			 jdbcType="INTEGER"		column="meter_type_enum" />
+		<result property="electricMeterFlexNetId" 	   		 jdbcType="BIGINT"		column="baseFlexNetId" />				<!-- parent meter id -->
+
+	</resultMap>
+
+	<sql id="deviceTypeTblMeterSelectClause">
+
+		CASE WHEN ml.fldMeterType IN ('E','A') THEN 1 /* ELECTRIC */
+		     WHEN ml.fldMeterType = 'W' THEN 5 /* WATER */
+		     WHEN ml.fldMeterType = 'G' THEN 6 /* GAS */
+		     ELSE 3 /* Light */
+		END AS device_type_enum
+		,ml.fldDeviceType AS meter_type_enum
+
+	</sql>
+
+
+	<sql id="deviceTypeTblHanDeviceSelectClause">
+
+		CASE WHEN hdt.fldDeviceClassId IN (0,2) THEN 2 /* HAN DEVICE */
+			 WHEN hdt.fldDeviceClassId = 1 THEN 4 /* LCM */
+			 ELSE 3 /* LIGHT */
+		END AS device_type_enum
+		, CASE WHEN hdt.fldDeviceClassId IN (0,2) OR hd.fldHanDeviceTypeId != 26 THEN hdt.fldDeviceClassId
+			   WHEN hd.fldHanDeviceTypeId = 26 THEN 2
+		  END AS meter_type_enum
+
+	</sql>
+
+	<sql id="WithNoLock">
+
+		<if test="_databaseId == 'Microsoft SQL Server'">
+			WITH (NOLOCK)
+		</if>
+
+	</sql>
+
+	<sql id="addressSelect">
+
+		(SELECT ml.fldAddress FROM tblMeterList ml <include refid="WithNoLock"/> WHERE ml.fldRepId = hd.fldRepId) AS address
+
+	</sql>
+
+	<select id="deleteGroupFromAction" statementType="CALLABLE" parameterType="map" resultType="integer">
+
+ 		{call del_action_instance_groupset (#{action_instance_id, jdbcType=INTEGER}
+ 					              		   ,#{group_id, jdbcType=INTEGER}
+ 					              		   ,#{p_error_message, mode=OUT, jdbcType=VARCHAR}
+					    				   ,#{p_result, mode=OUT, jdbcType=INTEGER}
+ 					              		   )}
+
+	</select>
+
+
+	<select id="deleteDeviceFromAction" statementType="CALLABLE" parameterType="map" resultType="integer">
+
+ 		{call del_action_instance_endpoint (#{action_instance_id, jdbcType=INTEGER}
+ 					            		   ,#{device_id, jdbcType=INTEGER}
+ 					            		   ,#{p_error_message, mode=OUT, jdbcType=VARCHAR}
+					    				   ,#{p_result, mode=OUT, jdbcType=INTEGER}
+ 					            		   )}
+
+	</select>
+
+
+	<select id="insertAction" statementType="CALLABLE" parameterType="map" resultType="int">
+
+ 		{call ins_action_instance (#{action_type_id,jdbcType=INTEGER}
+								  ,#{create_user,jdbcType=VARCHAR}
+								  ,#{p_action_instance_id, mode=OUT,jdbcType=INTEGER}
+					   			  ,#{p_error_message, mode=OUT,jdbcType=VARCHAR}
+					   			  ,#{p_result, mode=OUT,jdbcType=INTEGER}
+					   			  )}
+
+	</select>
+
+
+	<select id="insertGroupToAction" statementType="CALLABLE" parameterType="map" resultType="int">
+
+		{call ins_action_instance_groupset (#{action_instance_id, jdbcType=INTEGER}
+			    						   ,#{group_id, jdbcType=INTEGER}
+		  								   ,#{create_user, jdbcType=VARCHAR}
+		  								   ,#{p_error_message, mode=OUT, jdbcType=VARCHAR}
+		   							       ,#{p_result, mode=OUT, jdbcType=INTEGER}
+		   							       )}
+
+	</select>
+
+
+
+	<select id="insertDeviceToAction" statementType="CALLABLE" parameterType="map" resultType="int">
+
+ 		{call ins_action_instance_endpoint (#{action_instance_id, jdbcType=INTEGER}
+ 					     				   ,#{device_id, jdbcType=INTEGER}
+	  		  				 			   ,#{create_user, jdbcType=VARCHAR}
+										   ,#{p_error_message, mode=OUT, jdbcType=VARCHAR}
+					   					   ,#{p_result, mode=OUT, jdbcType=INTEGER}
+					   					   )}
+
+	</select>
+
+	<select id="insertDeviceOptOutList" statementType="CALLABLE" parameterType="map" resultType="int">
+
+		 {call ins_action_inst_cancel_endpt (#{action_instance_id, jdbcType=INTEGER}
+											,#{device_id, jdbcType=INTEGER}
+											,#{create_user, jdbcType=VARCHAR}
+											,#{p_error_message, mode=OUT, jdbcType=VARCHAR}
+											,#{p_result, mode=OUT, jdbcType=INTEGER}
+											)}
+
+	</select>
+
+	<select id="deleteDeviceOptOutList" statementType="CALLABLE" parameterType="map" resultType="int">
+
+ 		 {call del_action_inst_cancel_endpt (#{action_instance_id, jdbcType=INTEGER}
+											,#{device_id,jdbcType=INTEGER}
+ 					            		   	,#{p_error_message, mode=OUT, jdbcType=VARCHAR}
+					    				   	,#{p_result, mode=OUT, jdbcType=INTEGER}
+											)}
+
+	</select>
+
+	<select id="fetchActionById" parameterType="DMAction" resultMap="ActionResult">
+
+		 SELECT ai.action_instance_id AS action_instance_id
+			    ,ai.action_type_id AS action_type_id
+			    ,ai.modified_user
+			    <if test="_databaseId == 'Oracle'">
+			    	,fn_date(fn_dt(ai.modified_date)) AS modified_date
+			    </if>
+			    <if test="_databaseId == 'Microsoft SQL Server'">
+			    	,dbo.fn_dt(ai.modified_date) AS modified_date
+			    </if>
+		   FROM action_instance ai <include refid="WithNoLock"/>
+		  WHERE ai.action_instance_id = #{id}
+
+	</select>
+
+ 	<select id="fetchAllDeviceFromAction" parameterType="int" resultMap="DeviceResult">
+
+		SELECT ad.endpoint_id AS fldRepId
+		  	   ,hd.fldBaseRepId AS baseFlexNetId
+		  	   ,hd.fldcustomerid AS customerId
+			   ,hd.fldClientEndPointId AS client_endpoint_id
+			   ,<include refid="deviceTypeTblHanDeviceSelectClause"/>
+			   ,<include refid="addressSelect"/>
+		FROM action_instance_endpoint ad <include refid="WithNoLock"/>
+			INNER JOIN tblHanDevice hd <include refid="WithNoLock"/> ON (hd.fldRepId = ad.endpoint_id)
+		 	INNER JOIN tblHanDeviceType hdt <include refid="WithNoLock"/> ON (hdt.fldHanDeviceTypeId = hd.fldHanDeviceTypeId)
+		WHERE ad.action_instance_id = #{action_instance_id}
+
+		UNION ALL
+
+		SELECT ad.endpoint_id AS fldRepId
+		       ,null AS baseFlexNetId
+		       ,ml.fldCustomerId AS customerId
+			   ,ml.fldMeterId AS client_endpoint_id
+			   ,<include refid="deviceTypeTblMeterSelectClause"/>
+			   ,ml.fldAddress as address
+		FROM action_instance_endpoint ad <include refid="WithNoLock"/>
+			INNER JOIN tblMeterList ml <include refid="WithNoLock"/> ON (ml.fldRepId = ad.endpoint_id)
+		WHERE ad.action_instance_id = #{action_instance_id}
+			AND ml.fldDeviceType != 81
+
+	</select>
+
+	<select id="fetchAllGroupFromAction" parameterType="int" resultMap="GroupResult">
+
+		SELECT ag.groupset_id AS group_id
+		      ,g.name
+		      ,g.description
+		      ,(SELECT COUNT(eg.endpoint_id)
+				  FROM endpoint_groupset eg <include refid="WithNoLock"/>
+				 WHERE eg.groupset_id = g.groupset_id) AS total_smartpoint
+		   FROM action_instance_groupset ag <include refid="WithNoLock"/>
+		       INNER JOIN groupset g <include refid="WithNoLock"/> ON (g.groupset_id = ag.groupset_id)
+			   INNER JOIN groupset_groupset_type ggt <include refid="WithNoLock"/> ON (ggt.groupset_id = ag.groupset_id)
+		 WHERE ag.action_instance_id = #{action_instance_id, jdbcType=INTEGER}
+		   AND ggt.groupset_type_id = 1
+
+	</select>
+
+	<select id="fetchAllTagsFromAction" parameterType="int" resultMap="TagResult">
+
+		SELECT ag.groupset_id AS group_id
+		      ,g.name
+		      ,g.description
+		      ,(SELECT COUNT(eg.endpoint_id)
+				  FROM endpoint_groupset eg <include refid="WithNoLock"/>
+				 WHERE eg.groupset_id = g.groupset_id) AS total_smartpoint
+		   FROM action_instance_groupset ag <include refid="WithNoLock"/>
+		       INNER JOIN groupset g <include refid="WithNoLock"/> ON (g.groupset_id = ag.groupset_id)
+			   INNER JOIN groupset_groupset_type ggt <include refid="WithNoLock"/> ON (ggt.groupset_id = g.groupset_id)
+		 WHERE ag.action_instance_id = #{action_instance_id, jdbcType=INTEGER}
+		   AND ggt.groupset_type_id = 2
+
+	</select>
+
+	<sql id="fetchTotalDevicesByAction">
+
+		( SELECT COUNT(ad.endpoint_id) AS total
+		  FROM action_instance_endpoint ad <include refid="WithNoLock"/>
+		  WHERE ad.action_instance_id = ai.action_instance_id)
+		 +
+		( SELECT COUNT(DISTINCT eg.endpoint_id)
+		  FROM action_instance_groupset aig <include refid="WithNoLock"/>
+		  	INNER JOIN endpoint_groupset eg <include refid="WithNoLock"/> ON (eg.groupset_id = aig.groupset_id)
+		  WHERE aig.action_instance_id = ai.action_instance_id)
+
+	</sql>
+
+	<select id="fetchDevicesByAction" parameterType="int" resultMap="DeviceDiscriminatorResult">
+
+		SELECT fldRepId
+		      ,baseFlexNetId
+		      ,customerId
+		      ,client_endpoint_id
+			  ,device_type_enum
+		      ,meter_type_enum
+		      ,address
+		      ,lifecycle_state
+		 FROM(
+			  SELECT ad.endpoint_id AS fldRepId
+			  		,hd.fldBaseRepId AS baseFlexNetId
+			  		,hd.fldcustomerid AS customerId
+					,hd.fldClientEndPointId AS client_endpoint_id
+				    ,<include refid="deviceTypeTblHanDeviceSelectClause"/>
+				    ,<include refid="addressSelect"/>
+				    ,null AS lifecycle_state
+			    FROM action_instance_endpoint ad <include refid="WithNoLock"/>
+				     INNER JOIN tblHanDevice hd <include refid="WithNoLock"/> ON (hd.fldRepId = ad.endpoint_id)
+			 	     INNER JOIN tblHanDeviceType hdt <include refid="WithNoLock"/> ON (hdt.fldHanDeviceTypeId = hd.fldHanDeviceTypeId)
+			   WHERE ad.action_instance_id = #{id}
+				 AND NOT EXISTS
+					(
+					 SELECT endpoint_id
+					 FROM action_inst_cancel_endpoint aie <include refid="WithNoLock"/>
+					 WHERE aie.action_instance_id = ad.action_instance_id
+					 	   AND aie.endpoint_id = ad.endpoint_id
+					)
+
+			 UNION ALL
+
+			 SELECT ad.endpoint_id AS fldRepId
+			       ,null AS baseFlexNetId
+			       ,ml.fldCustomerId AS customerId
+				   ,ml.fldMeterId AS client_endpoint_id
+				   ,<include refid="deviceTypeTblMeterSelectClause"/>
+				   ,ml.fldAddress as address
+				   ,ml.fldMeterLifecycleStateCode		AS lifecycle_state
+			   FROM action_instance_endpoint ad <include refid="WithNoLock"/>
+				    INNER JOIN tblMeterList ml <include refid="WithNoLock"/> ON (ml.fldRepId = ad.endpoint_id)
+			  WHERE ad.action_instance_id = #{id}
+				AND ml.fldDeviceType != 81
+				AND NOT EXISTS
+					(
+					 SELECT endpoint_id
+					 FROM action_inst_cancel_endpoint aie <include refid="WithNoLock"/>
+					 WHERE aie.action_instance_id = ad.action_instance_id
+					 	   AND aie.endpoint_id = ad.endpoint_id
+					)
+
+			  UNION ALL
+
+			 SELECT endpoint_id AS fldRepId
+			       ,hd.fldBaseRepId AS baseFlexNetId
+			       ,hd.fldcustomerid AS customerId
+				   ,hd.fldClientEndPointId AS client_endpoint_id
+			       ,<include refid="deviceTypeTblHanDeviceSelectClause"/>
+			       ,<include refid="addressSelect"/>
+			       ,null AS lifecycle_state
+			   FROM endpoint_groupset eg <include refid="WithNoLock"/>
+				  	INNER JOIN tblHanDevice hd <include refid="WithNoLock"/> ON (hd.fldRepId = eg.endpoint_id)
+		   		    INNER JOIN tblHanDeviceType hdt <include refid="WithNoLock"/> ON (hdt.fldHanDeviceTypeId = hd.fldHanDeviceTypeId)
+			  WHERE groupset_id in (SELECT groupset_id FROM action_instance_groupset <include refid="WithNoLock"/> WHERE action_instance_id = #{id} )
+			  	AND NOT EXISTS
+					(
+					 SELECT endpoint_id
+					 FROM action_inst_cancel_endpoint aie <include refid="WithNoLock"/>
+					 WHERE aie.action_instance_id = #{id}
+					 	   AND aie.endpoint_id = hd.fldRepId
+					)
+
+			  UNION ALL
+
+			 SELECT endpoint_id AS fldRepId
+			       ,null AS baseFlexNetId
+			       ,ml.fldCustomerId AS customerId
+				   ,ml.fldMeterId AS client_endpoint_id
+			       ,<include refid="deviceTypeTblMeterSelectClause"/>
+			       ,ml.fldAddress as address
+			       ,ml.fldMeterLifecycleStateCode		AS lifecycle_state
+			   FROM endpoint_groupset eg <include refid="WithNoLock"/>
+			  		INNER JOIN tblMeterList ml <include refid="WithNoLock"/> ON (ml.fldRepId = eg.endpoint_id)
+			  WHERE groupset_id in (SELECT groupset_id FROM action_instance_groupset <include refid="WithNoLock"/> WHERE action_instance_id = #{id} )
+				AND ml.fldDeviceType != 81
+				AND NOT EXISTS
+					(
+					 SELECT endpoint_id
+					 FROM action_inst_cancel_endpoint aie <include refid="WithNoLock"/>
+					 WHERE aie.action_instance_id = #{id}
+					 	   AND aie.endpoint_id = ml.fldRepId
+					)
+			 ) tb
+			GROUP BY fldRepId, baseFlexNetId, customerId, client_endpoint_id, device_type_enum, meter_type_enum, address, lifecycle_state
+
+	</select>
+
+	<select id="fetchDevicesExcludedByAction" parameterType="int" resultMap="DeviceDiscriminatorResult">
+
+		 SELECT ad.endpoint_id AS fldRepId
+		  		,hd.fldBaseRepId AS baseFlexNetId
+		  		,hd.fldcustomerid AS customerId
+				,hd.fldClientEndPointId AS client_endpoint_id
+			    ,<include refid="deviceTypeTblHanDeviceSelectClause"/>
+			    ,<include refid="addressSelect"/>
+			    ,null AS lifecycle_state
+		 FROM action_inst_cancel_endpoint ad <include refid="WithNoLock"/>
+		 	INNER JOIN tblHanDevice hd <include refid="WithNoLock"/> ON (hd.fldRepId = ad.endpoint_id)
+		 	INNER JOIN tblHanDeviceType hdt <include refid="WithNoLock"/> ON (hdt.fldHanDeviceTypeId = hd.fldHanDeviceTypeId)
+		 WHERE ad.action_instance_id = #{id}
+
+		 UNION ALL
+
+		 SELECT ad.endpoint_id AS fldRepId
+		       ,null AS baseFlexNetId
+		       ,ml.fldCustomerId AS customerId
+			   ,ml.fldMeterId AS client_endpoint_id
+			   ,<include refid="deviceTypeTblMeterSelectClause"/>
+			   ,ml.fldAddress as address
+			   ,ml.fldMeterLifecycleStateCode		AS lifecycle_state
+		 FROM action_inst_cancel_endpoint ad <include refid="WithNoLock"/>
+			INNER JOIN tblMeterList ml <include refid="WithNoLock"/> ON (ml.fldRepId = ad.endpoint_id)
+		 WHERE ad.action_instance_id = #{id}
+				AND ml.fldDeviceType != 81
+
+	</select>
+
+</mapper>
+

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Academia">
+
+	<resultMap id="listAllAcademiaResults" type="Academia" >
+		<result property="cdacad" column="cdacad" />
+		<result property="academ" column="academ" />
+		<result property="lograd" column="lograd" />
+		<result property="numen" column="numen" />
+		<result property="bairr" column="bairr" />
+		<result property="cidade" column="cidade" />
+		<result property="cep" column="cep" />
+		<result property="telef" column="telef" />
+		<result property="latlog" column="latlog" />
+	</resultMap>
+
+
+	<sql id="allAcademiaColumms">
+     	cdacad,
+     	academ,
+     	lograd,
+     	numen,
+     	bairr,
+     	cidade,
+     	cep,
+     	telef,
+     	latlog,
+	</sql>
+	
+
+	<!-- Insert Academia -->
+	<select id="insertAcademia" parameterType="Map" resultType="int">
+		SELECT ins_academia (
+		#{cdacad,jdbcType=INTEGER},
+		#{academ,jdbcType=VARCHAR},
+		#{lograd,jdbcType=VARCHAR},
+		#{numen,jdbcType=VARCHAR},
+		#{bairr,jdbcType=VARCHAR},
+		#{cidade,jdbcType=VARCHAR},
+		#{cep,jdbcType=VARCHAR},
+		#{telef,jdbcType=VARCHAR},
+		#{latlog,jdbcType=VARCHAR},
+)
+	</select>
+
+	<!-- Update Academia -->
+	<select id="updateAcademia" parameterType="Map" resultType="int">
+		SELECT upd_academia (
+		#{cdacad,jdbcType=INTEGER},
+		#{academ,jdbcType=VARCHAR},
+		#{lograd,jdbcType=VARCHAR},
+		#{numen,jdbcType=VARCHAR},
+		#{bairr,jdbcType=VARCHAR},
+		#{cidade,jdbcType=VARCHAR},
+		#{cep,jdbcType=VARCHAR},
+		#{telef,jdbcType=VARCHAR},
+		#{latlog,jdbcType=VARCHAR},
+)
+	</select>
+
+	<!-- Delete Academia -->
+	<select id="deleteAcademia" parameterType="Academia">
+		SELECT del_academia (#{id})
+	</select>
+	
+	<!-- Fetch All Academias -->
+	<select id="fetchAllAcademias" parameterType="Map" resultMap="listAllAcademiaResults">
+	
+		SELECT  <include refid="allAcademiaColumms"/>
+		  FROM academia
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM academia 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Academia By type -->
+	<select id="fetchAcademiaByType" parameterType="AcademiaRequest"  resultMap="listAllAcademiaResults" >
+		SELECT  <include refid="allCustomListAcademiaColumns"/>
+		  FROM academia
+		 WHERE name = #{academia.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Academia By Id -->
+	<select id="fetchAcademiaById" parameterType="Academia" resultMap="listAllAcademiaResults" >
+		SELECT <include refid="allCustomListAcademiaColumns"/>
+		  FROM academia
+		 WHERE academia_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Academia By Id -->
+	<select id="fetchAcademiaNameById" parameterType="Academia" resultMap="listAllAcademiaResults" >
+		SELECT <include refid="allCustomListAcademiaColumns"/>
+		  FROM academia
+		 WHERE academia_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

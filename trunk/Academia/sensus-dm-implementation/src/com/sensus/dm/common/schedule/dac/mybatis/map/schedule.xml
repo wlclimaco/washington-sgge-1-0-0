@@ -1,0 +1,626 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ScheduleMap">
+
+	<!--###################-->
+	<!--####  RESULTS  ####-->
+	<!--###################-->
+
+	<resultMap id="DMScheduleResultDefault" type="DMSchedule" >
+		<result property="id" column="schedule_id" />
+		<result property="name" column="schedule_name" />
+		<result property="description" column="schedule_description" />
+		<result property="createDate" column="create_date" />
+		<result property="startTime" column="start_time" />
+		<result property="modifyUser" column="modified_user" />
+		<result property="frequency.nextExecution" column="next_execution" />
+		<result property="frequency.frequencyEnumValue" column="frequency" />
+		<result property="dmAction.processId" column="process_id" />
+		<result property="dmAction.id" column="action_instance_id" />
+		<result property="dmAction.actionType.actionTypeEnumValue" column="action_type_id"/>
+		<result property="dmAction.createUser" column="action_modified_user" />
+		<result property="dmAction.totalDevices" column="total_smartpoint" />
+		<result property="statusEnumValue" column="status" />
+		<result property="serviceTypeEnumDescription" column="service_type" />
+		<result property="customerId" column="customer_id" />
+		<collection property="dmAction.devicesExcluded" resultMap="DeviceResult" />
+	</resultMap>
+
+	<resultMap id="DMSchedulePropertyResult" type="DMSchedule" extends="DMScheduleResultDefault">
+		<collection property="properties" column="schedule_id" select="fetchSchedulesProperty"/>
+	</resultMap>
+
+	<resultMap id="DMScheduleResult" type="DMSchedule" extends="DMSchedulePropertyResult">
+		<collection property="dmAction.devices" column="action_instance_id" select="ActionMap.fetchAllDeviceFromAction"/>
+		<collection property="dmAction.groups" column="action_instance_id" select="ActionMap.fetchAllGroupFromAction"/>
+		<collection property="dmAction.tags" column="action_instance_id" select="ActionMap.fetchAllTagsFromAction"/>
+	</resultMap>
+
+	<resultMap id="DMScheduleToExecuteResult" type="DMSchedule" extends="DMSchedulePropertyResult">
+		<collection property="dmAction.devices" column="action_instance_id" select="ActionMap.fetchDevicesByAction"/>
+		<collection property="dmAction.devicesExcluded" column="action_instance_id" select="ActionMap.fetchDevicesExcludedByAction"/>
+	</resultMap>
+
+	<resultMap id="DMScheduleGroupResult" type="DMSchedule" extends="DMScheduleResultDefault">
+		<collection property="dmAction.groups" column="action_instance_id" select="ActionMap.fetchAllGroupFromAction"/>
+	</resultMap>
+
+	<resultMap id="SchedulePropertyResult" type="Property">
+		<result property="propertyName" column="name" />
+		<result property="propertyValue" column="value" />
+	</resultMap>
+
+	<resultMap id="RadioResult" type="Radio">
+		<result property="flexNetId" 						 jdbcType="INTEGER"		column="flexnet_id_excluded" />
+	</resultMap>
+
+	<resultMap id="DeviceResult" type="Device">
+		<association property="radio" 						 javaType="Radio"     	resultMap="RadioResult" />
+	</resultMap>
+
+	<!--##########################-->
+	<!--####  SQL TO INCLUDE  ####-->
+	<!--##########################-->
+
+	<sql id="WithNoLock">
+		<if test="_databaseId == 'Microsoft SQL Server'">
+			WITH (NOLOCK)
+		</if>
+	</sql>
+
+	<sql id="statusSelectClause">
+
+		<if test="_databaseId == 'Microsoft SQL Server'">
+		   ,CASE WHEN schedule.status = 1 AND schedule.next_execution &lt; dbo.fn_ut(DATEADD(HOUR,-1,GETUTCDATE())) THEN
+			  3
+			ELSE
+			  schedule.status
+			END AS status
+		</if>
+
+		<if test="_databaseId == 'Oracle'">
+		   ,CASE WHEN schedule.status = 1 AND schedule.next_execution &lt; (select fn_ut(SYS_EXTRACT_UTC(SYSTIMESTAMP) - (1/24)) from dual) THEN
+			  3
+			ELSE
+			  schedule.status
+			END AS status
+		</if>
+
+	</sql>
+
+	<sql id="toExecuteSelectClause">
+
+			SELECT schedule_id
+			      ,name as schedule_name
+			      ,schedule_description
+			      ,status
+			      ,action_instance_id
+			      ,start_time
+			      ,next_execution
+			      ,modified_user
+			      ,action_type_id
+			      ,action_modified_user
+			      ,service_type
+			      ,customer_id
+
+			 FROM (
+			 		SELECT s.schedule_id
+						   ,s.name
+						   ,s.description AS schedule_description
+						   ,s.status
+						   ,s.action_instance_id
+						   <if test="_databaseId == 'Microsoft SQL Server'">
+						   		,dbo.fn_dt(s.start_date) AS start_time
+								,dbo.fn_dt(s.next_execution) AS next_execution
+						   </if>
+						   <if test="_databaseId == 'Oracle'">
+								,fn_dt(s.start_date) AS start_time
+								,fn_dt(s.next_execution) AS next_execution
+						   </if>
+						   ,s.modified_user
+						   ,ai.action_type_id
+						   ,ai.modified_user AS action_modified_user
+						   ,s.service_type
+						   ,s.customer_id
+
+	</sql>
+
+	<sql id="toExecuteFromClause">
+		FROM schedule s <include refid="WithNoLock"/>
+			INNER JOIN action_instance ai <include refid="WithNoLock"/> ON (ai.action_instance_id = s.action_instance_id)
+	</sql>
+
+	<sql id="toExecuteWhereClause">
+
+		<where>
+
+		    s.status = 1
+
+			AND s.next_execution BETWEEN #{startDateInt, jdbcType=INTEGER} AND #{endDateInt, jdbcType=INTEGER}
+
+			AND NOT EXISTS
+			(
+				SELECT 1
+				  FROM process p <include refid="WithNoLock"/>
+				 WHERE p.action_instance_id = ai.action_instance_id
+				 	AND p.start_date BETWEEN #{startDateInt, jdbcType=INTEGER} AND #{endDateInt, jdbcType=INTEGER}
+			)
+
+		</where>
+
+		) tb
+
+
+	</sql>
+
+	<sql id="fetchSchedulesWhereClause">
+		<where>
+	       	<if test="schedule.id != null">
+	       		schedule.schedule_id = COALESCE(#{schedule.id, jdbcType=INTEGER},0)
+	       	</if>
+
+	       	<if test="schedule.name != null">
+	       		AND LOWER(schedule.name) = LOWER(#{schedule.name, jdbcType=VARCHAR})
+	       	</if>
+
+	       	<if test="schedule.dmAction != null and schedule.dmAction.id != null">
+	       		AND ai.action_instance_id = #{schedule.dmAction.id}
+	       	</if>
+
+	       	<if test="serviceTypeEnum.serviceTypeDescription != null">
+	       		AND schedule.service_type = #{serviceTypeEnum.serviceTypeDescription}
+	       	</if>
+
+	       	<if test="tenant != null and tenant.key != null">
+	       		AND schedule.customer_id = #{tenant.key}
+	       	</if>
+
+	    </where>
+	</sql>
+
+	<sql id="fetchAllSchedulesWhereClause">
+
+		<where>
+
+			schedule.status != 0 <!-- Remove schedules disabled - There is no filter in the schedule list -->
+			AND schedule.service_type = #{serviceTypeEnum.serviceTypeDescription}
+			AND schedule.customer_id = #{tenant.key}
+
+			<if test="scheduleStatusEnums != null">
+
+				AND
+				CASE WHEN schedule.status = 1 AND schedule.next_execution &lt;
+					<if test="_databaseId == 'Microsoft SQL Server'"> dbo.fn_ut(DATEADD(HOUR,-1,GETUTCDATE()))</if>
+				   	<if test="_databaseId == 'Oracle'"> (select fn_ut(SYS_EXTRACT_UTC(SYSTIMESTAMP) - (1/24)) from dual) </if>
+				   	THEN 3
+				ELSE
+					schedule.status
+				END IN
+				<foreach item="item" index="index" collection="scheduleStatusEnums"
+					open="(" separator="," close=")">
+					#{item.value}
+				</foreach>
+			</if>
+			<if test="baseSearch != null">
+					<if test="baseSearch.searchText != null">
+						<if test="_databaseId == 'Microsoft SQL Server'">
+							AND LOWER(schedule.name) LIKE '%'+LOWER(#{baseSearch.searchText, jdbcType=VARCHAR})+'%'
+						</if>
+						<if test="_databaseId == 'Oracle'">
+							AND LOWER(schedule.name) LIKE '%'||LOWER(#{baseSearch.searchText, jdbcType=VARCHAR})||'%'
+						</if>
+					</if>
+					<if test="baseSearch.actionTypeEnums != null">
+						AND ai.action_type_id IN
+						<foreach item="item" index="index" collection="baseSearch.actionTypeEnums"
+							open="(" separator="," close=")">
+							#{item.value}
+						</foreach>
+					</if>
+					<if test="baseSearch.users != null">
+						AND LOWER(schedule.modified_user) IN
+						<foreach item="item" index="index" collection="baseSearch.users" open="("
+							separator="," close=")">
+							#{item.userId}
+						</foreach>
+					</if>
+			</if>
+			<if test="frequencies != null">
+				AND (UPPER(sp_freq.property_name) = 'FREQUENCY_TYPE' AND UPPER(sp_freq.value) IN
+				<foreach item="freq_type" index="index" collection="frequencies"
+					open="(" separator="," close=")">
+					#{freq_type.value}
+				</foreach>)
+			</if>
+			AND NOT EXISTS (SELECT 1
+							  FROM schedule_property sp <include refid="WithNoLock"/>
+							 WHERE sp.schedule_id = schedule.schedule_id AND sp.property_name = 'ON_DEMAND')
+
+	   </where>
+	</sql>
+
+	<!--########################-->
+	<!--####  SQL COMMANDS  ####-->
+	<!--########################-->
+
+	<select id="fetchScheduleByGroup" parameterType="DMAction" resultMap="DMScheduleGroupResult">
+
+		SELECT schedule.schedule_id
+              ,schedule.name as schedule_name
+              ,schedule.description AS schedule_description
+              ,schedule.action_instance_id
+			  ,schedule.modified_user
+			  ,ai.action_type_id
+			  ,schedule.service_type
+			  ,schedule.customer_id
+          FROM schedule schedule <include refid="WithNoLock"/>
+	     INNER JOIN action_instance ai <include refid="WithNoLock"/> ON (ai.action_instance_id = schedule.action_instance_id)
+		 <where>
+				EXISTS(SELECT *
+						 FROM action_instance_groupset ag
+						WHERE ag.action_instance_id = ai.action_instance_id
+						  AND ag.groupset_id IN
+								<foreach item="item" index="index" collection="groups" open="(" separator="," close=")">
+								 	#{item.id}
+							 	</foreach>
+				       )
+			 AND schedule.status > 0
+		 </where>
+
+	</select>
+
+	<select id="fetchScheduleByDevice" parameterType="DMAction" resultMap="DMScheduleResultDefault">
+
+
+		SELECT schedule_id
+			   ,name as schedule_name
+			   ,description AS schedule_description
+			   ,status
+			   <if test="_databaseId == 'Oracle'">
+				   ,fn_dt(start_date) AS start_time
+	               ,fn_dt(end_date) AS end_date
+	               ,fn_dt(next_execution) AS next_execution
+			   </if>
+			   <if test="_databaseId == 'Microsoft SQL Server'">
+				   ,dbo.fn_dt(start_date) AS start_time
+				   ,dbo.fn_dt(end_date) AS end_date
+				   ,dbo.fn_dt(next_execution) AS next_execution
+			   </if>
+			   ,modified_user
+			   ,action_instance_id
+			   ,action_type_id
+			   ,frequency
+			   ,flexnet_id_excluded
+          FROM (
+				  SELECT schedule.schedule_id
+				         ,schedule.name
+				         ,schedule.description
+				         ,schedule.status
+				         ,schedule.start_date
+				         ,schedule.end_date
+				         ,schedule.next_execution
+				         ,schedule.modified_user
+				         ,schedule.action_instance_id
+						 ,ai.action_type_id
+				         ,(select value from schedule_property sp <include refid="WithNoLock"/> where sp.schedule_id = schedule.schedule_id and  property_name = 'FREQUENCY_TYPE') AS frequency
+				         ,(SELECT endpoint_id FROM action_inst_cancel_endpoint aie <include refid="WithNoLock"/>
+				           WHERE aie.action_instance_id = ai.action_instance_id
+				           	  AND aie.endpoint_id = ad.endpoint_id) AS flexnet_id_excluded
+				    FROM schedule schedule <include refid="WithNoLock"/>
+						 INNER JOIN action_instance ai <include refid="WithNoLock"/> ON (ai.action_instance_id = schedule.action_instance_id)
+						 INNER JOIN action_instance_endpoint ad <include refid="WithNoLock"/> ON (ad.action_instance_id = ai.action_instance_id)
+				 <where>
+				 	 schedule.status > 0
+				 	 AND ad.endpoint_id = #{firstDevice.radio.flexNetId, jdbcType=INTEGER}
+				 	 AND NOT EXISTS (SELECT 1
+							  FROM schedule_property sp <include refid="WithNoLock"/>
+							 WHERE sp.schedule_id = schedule.schedule_id AND sp.property_name = 'ON_DEMAND')
+				 </where>
+
+				 UNION ALL
+
+				 SELECT schedule.schedule_id
+				         ,schedule.name
+				         ,schedule.description
+				         ,schedule.status
+				         ,schedule.start_date
+				         ,schedule.end_date
+				         ,schedule.next_execution
+				         ,schedule.modified_user
+				         ,schedule.action_instance_id
+				         ,ai.action_type_id
+					     ,(select value from schedule_property sp <include refid="WithNoLock"/> where sp.schedule_id = schedule.schedule_id and  property_name = 'FREQUENCY_TYPE') AS frequency
+					     ,(SELECT endpoint_id FROM action_inst_cancel_endpoint aie <include refid="WithNoLock"/>
+				            WHERE aie.action_instance_id = ai.action_instance_id
+				           	  AND aie.endpoint_id = #{firstDevice.radio.flexNetId, jdbcType=INTEGER}) AS flexnet_id_excluded
+						FROM schedule schedule <include refid="WithNoLock"/>
+					   	INNER JOIN action_instance ai <include refid="WithNoLock"/> ON (ai.action_instance_id = schedule.action_instance_id)
+			 		<where>
+			 			schedule.status > 0
+			 			AND EXISTS(SELECT ag.action_instance_id
+								   FROM action_instance_groupset ag <include refid="WithNoLock"/>
+								   	INNER JOIN groupset_groupset_type ggt <include refid="WithNoLock"/> ON (ggt.groupset_id = ag.groupset_id)
+								   	INNER JOIN endpoint_groupset epg <include refid="WithNoLock"/> ON (epg.groupset_id = ggt.groupset_id)
+								   WHERE ag.action_instance_id = ai.action_instance_id
+								  	AND epg.endpoint_id = #{firstDevice.radio.flexNetId, jdbcType=INTEGER}
+								    AND ggt.groupset_type_id in(1,2))
+
+						AND NOT EXISTS (SELECT 1
+							  FROM schedule_property sp <include refid="WithNoLock"/>
+							 WHERE sp.schedule_id = schedule.schedule_id AND sp.property_name = 'ON_DEMAND')
+			 		</where>
+			 		) tb
+	</select>
+
+	<select id="fetchSchedule" parameterType="ScheduleRequest" resultMap="DMScheduleResult">
+
+          SELECT schedule.schedule_id
+                ,schedule.name as schedule_name
+                ,schedule.description AS schedule_description
+                ,schedule.status
+                <if test="_databaseId == 'Oracle'">
+	                ,fn_dt(schedule.create_date) AS create_date
+	                ,fn_dt(schedule.start_date) AS start_time
+	                ,fn_dt(schedule.end_date) AS end_date
+	                ,fn_dt(schedule.next_execution) AS next_execution
+                </if>
+                <if test="_databaseId == 'Microsoft SQL Server'">
+                	,dbo.fn_dt(schedule.create_date) AS create_date
+	                ,dbo.fn_dt(schedule.start_date) AS start_time
+	                ,dbo.fn_dt(schedule.end_date) AS end_date
+	                ,dbo.fn_dt(schedule.next_execution) AS next_execution
+                </if>
+                ,schedule.modified_user
+                ,schedule.action_instance_id
+                ,ai.modified_user AS action_modified_user
+                ,ai.action_type_id AS action_type_id
+                ,(<include refid="ActionMap.fetchTotalDevicesByAction" />) AS total_smartpoint
+           FROM schedule schedule <include refid="WithNoLock"/>
+                INNER JOIN action_instance ai <include refid="WithNoLock"/> ON (ai.action_instance_id = schedule.action_instance_id)
+
+		  <include refid="fetchSchedulesWhereClause" />
+
+	</select>
+
+
+	<select id="fetchAllSchedules" parameterType="InquiryScheduleRequest" resultMap="DMSchedulePropertyResult">
+
+		SELECT schedule_id
+		      ,schedule_name
+		      ,schedule_description
+			  ,status
+		      <if test="_databaseId == 'Microsoft SQL Server'">
+			      ,dbo.fn_dt(start_time) AS start_time
+			      ,dbo.fn_dt(end_date) AS end_date
+			      ,dbo.fn_dt(next_execution) AS next_execution
+			      ,dbo.fn_dt(action_date) AS action_date
+		      </if>
+		      <if test="_databaseId == 'Oracle'">
+		      	  ,fn_dt(start_time) AS start_time
+			      ,fn_dt(end_date) AS end_date
+			      ,fn_dt(next_execution) AS next_execution
+			      ,fn_dt(action_date) AS action_date
+		      </if>
+		      ,modified_user
+		      ,process_id
+		      ,action_instance_id
+			  ,action_type_id
+			  ,action_modified_user
+			  ,total_smartpoint
+		  FROM (
+				SELECT schedule_id
+					  ,name AS schedule_name
+					  ,schedule_description
+					  ,status
+					  ,start_time
+					  ,end_date
+					  ,next_execution
+					  ,action_date
+					  ,modified_user
+					  ,process_id
+					  ,action_instance_id
+			  		  ,action_type_id
+					  ,action_modified_user
+					  ,total_smartpoint
+ 					  ,ROW_NUMBER() OVER( ORDER BY ${sortExpression} ) AS RowNumber
+				 FROM (
+				 		SELECT schedule.schedule_id
+							  ,schedule.name
+							  ,schedule.description AS schedule_description
+
+							  <include refid="statusSelectClause"/>
+
+							  ,CASE WHEN schedule.status = 0 THEN 'Inactive'
+							        WHEN schedule.status = 1 THEN 'Active'
+							        WHEN schedule.status = 2 THEN 'Paused'
+							        WHEN schedule.status = 3 THEN 'Failed'
+								END AS status_desc
+
+							  ,schedule.start_date AS start_time
+							  ,schedule.end_date
+							  ,schedule.next_execution
+							  ,CAST((SELECT sp_freq_type.value
+			                         	FROM schedule_property sp_freq_type <include refid="WithNoLock"/>
+			                         WHERE sp_freq_type.schedule_id = schedule.schedule_id
+			                              AND sp_freq_type.property_name = 'ACTION_DATE') AS INTEGER) AS action_date
+							  ,schedule.modified_user
+							  <choose>
+							      <when test="baseSearch != null">
+							  	  	   <if test="baseSearch.startDate != null and baseSearch.endDate != null">
+									       ,(SELECT MAX(process_id)
+									           FROM process p1 <include refid="WithNoLock"/>
+									          WHERE schedule.action_instance_id = p1.action_instance_id
+									                AND p1.start_date BETWEEN #{baseSearch.startDateInt} and #{baseSearch.endDateInt}
+									        ) AS process_id
+									   </if>
+								  </when>
+								  <otherwise>
+								      ,NULL AS process_id
+								  </otherwise>
+							  </choose>
+							  ,(SELECT sp_freq_type.value
+			                      FROM schedule_property sp_freq_type <include refid="WithNoLock"/>
+			                     WHERE sp_freq_type.schedule_id = schedule.schedule_id
+							     AND sp_freq_type.property_name = 'FREQUENCY_TYPE') AS frequency_name
+							  ,schedule.action_instance_id
+							  ,ai.action_type_id
+							  ,ai.modified_user AS action_modified_user
+							  ,(<include refid="ActionMap.fetchTotalDevicesByAction" />) AS total_smartpoint
+						  FROM schedule schedule <include refid="WithNoLock"/>
+							   INNER JOIN action_instance ai <include refid="WithNoLock"/>  ON (ai.action_instance_id = schedule.action_instance_id)
+							   <if test="frequencies != null">
+						       		INNER JOIN schedule_property sp_freq <include refid="WithNoLock"/> ON (sp_freq.schedule_id = schedule.schedule_id)
+						       </if>
+
+					   <include refid="fetchAllSchedulesWhereClause"/>
+
+				      ) LIST_SCHEDULE
+
+		        ) LIST
+
+		<choose>
+			<when test="pageSize != null and pageSize > 0">
+				WHERE RowNumber BETWEEN #{startRow} + 1 AND (#{startRow} + #{pageSize})
+			</when>
+			<otherwise>
+				WHERE RowNumber BETWEEN 1 AND RowNumber
+			</otherwise>
+		</choose>
+
+	</select>
+
+	<select id="PaginationTotalRows" parameterType="InquiryScheduleRequest" resultType="int">
+
+		SELECT COUNT(1)
+        FROM ( SELECT schedule.schedule_id
+			  FROM schedule schedule <include refid="WithNoLock"/>
+			       INNER JOIN action_instance ai <include refid="WithNoLock"/> ON (ai.action_instance_id = schedule.action_instance_id)
+					   <if test="frequencies != null">
+				       		INNER JOIN schedule_property sp_freq <include refid="WithNoLock"/> ON (sp_freq.schedule_id = schedule.schedule_id)
+				       </if>
+
+		               <include refid="fetchAllSchedulesWhereClause"/>
+
+		     ) COUNT
+
+	</select>
+
+	<select id="fetchSchedulesProperty" parameterType="int" resultMap="SchedulePropertyResult">
+
+		SELECT sp.property_name AS name
+		      ,sp.value AS value
+		  FROM schedule_property sp <include refid="WithNoLock"/>
+		 WHERE sp.schedule_id = #{id, jdbcType=INTEGER}
+
+	</select>
+
+	<select id="countScheduleByName" parameterType="ScheduleRequest" resultType="int">
+
+		SELECT COUNT(1)
+		  FROM schedule s <include refid="WithNoLock"/>
+		WHERE s.schedule_id != COALESCE(#{schedule.id, jdbcType=INTEGER},0)
+		   AND LOWER(s.name) = LOWER(#{schedule.name, jdbcType=VARCHAR})
+		   AND s.service_type = #{serviceTypeEnum.serviceTypeDescription}
+		   AND s.customer_id =  #{tenant.key}
+
+	</select>
+
+
+	<select id="countProcessBySchedule" parameterType="DMSchedule" resultType="int">
+
+		SELECT COUNT(1)
+		  FROM schedule s <include refid="WithNoLock"/>
+		INNER JOIN process p <include refid="WithNoLock"/>
+		       ON (s.action_instance_id = p.action_instance_id)
+		WHERE s.schedule_id = #{id, jdbcType=INTEGER}
+		  AND p.status = 1
+
+	</select>
+
+	<select id="fetchSchedulesToExecute" parameterType="ScheduleRequest" resultMap="DMScheduleToExecuteResult">
+
+		<include refid="toExecuteSelectClause" />
+
+		<include refid="toExecuteFromClause" />
+
+		<include refid="toExecuteWhereClause" />
+
+	</select>
+
+	<!--############################-->
+	<!--####  STORED PROCEDURES ####-->
+	<!--############################-->
+
+	<select id="insertSchedule" statementType="CALLABLE" parameterType="map" resultType="int">
+
+		{call ins_schedule (#{name, jdbcType=VARCHAR}
+				           ,#{description, jdbcType=VARCHAR}
+				           ,#{action_instance_id, jdbcType=INTEGER}
+				           ,#{status, jdbcType=INTEGER}
+				           ,#{start_date, jdbcType=TIMESTAMP}
+				           ,#{create_date, jdbcType=TIMESTAMP}
+				           ,#{next_excution, jdbcType=TIMESTAMP}
+				           ,#{end_date, jdbcType=TIMESTAMP}
+				           ,#{user_id, jdbcType=VARCHAR}
+				           ,#{service_type, jdbcType=VARCHAR}
+				           ,#{customer_id, jdbcType=VARCHAR}
+				           ,#{p_schedule_id, mode=OUT, jdbcType=INTEGER}
+						   ,#{p_error_message, mode=OUT, jdbcType=VARCHAR}
+						   ,#{p_result, mode=OUT, jdbcType=INTEGER}
+				           )}
+
+	</select>
+
+	<select id="updateSchedule" statementType="CALLABLE" parameterType="map" resultType="int">
+
+		{call upd_schedule (  #{schedule_id, jdbcType=INTEGER}
+							 ,#{name, jdbcType=VARCHAR}
+				             ,#{description, jdbcType=VARCHAR}
+				             ,#{action_instance_id, jdbcType=INTEGER}
+				             ,#{status, jdbcType=INTEGER}
+				             ,#{start_date, jdbcType=TIMESTAMP}
+				             ,#{next_excution, jdbcType=TIMESTAMP}
+				             ,#{end_date, jdbcType=TIMESTAMP}
+				             ,#{user_id, jdbcType=VARCHAR}
+				             ,#{p_error_message, mode=OUT, jdbcType=VARCHAR}
+						     ,#{p_result, mode=OUT, jdbcType=INTEGER}
+				             )}
+
+	</select>
+
+	<select id="deleteSchedule" statementType="CALLABLE" parameterType="map">
+
+		{call del_schedule_by_id (#{schedule_id, jdbcType=INTEGER}
+								 ,#{p_error_message, mode=OUT, jdbcType=VARCHAR}
+						     	 ,#{p_result, mode=OUT, jdbcType=INTEGER}
+				             	 )}
+
+	</select>
+
+	<select id="insertScheduleProperty" statementType="CALLABLE" parameterType="map" resultType="int">
+
+		{call ins_schedule_property (#{schedule_id, jdbcType=INTEGER}
+								    ,#{property_name, jdbcType=VARCHAR}
+									,#{property_value, jdbcType=VARCHAR}
+									,#{user_id, jdbcType=VARCHAR}
+				             		,#{p_schedule_property_id, mode=OUT, jdbcType=INTEGER}
+							   		,#{p_error_message, mode=OUT, jdbcType=VARCHAR}
+							   		,#{p_result, mode=OUT, jdbcType=INTEGER}
+					           		)}
+
+	</select>
+
+	<select id="deleteScheduleProperty" statementType="CALLABLE" parameterType="map" resultType="int">
+
+		{call del_schedule_property (#{schedule_id, jdbcType=INTEGER}
+									,#{property_name, jdbcType=VARCHAR}
+									,#{p_error_message, mode=OUT, jdbcType=VARCHAR}
+							   		,#{p_result, mode=OUT, jdbcType=INTEGER}
+					           		)}
+
+	</select>
+
+</mapper>

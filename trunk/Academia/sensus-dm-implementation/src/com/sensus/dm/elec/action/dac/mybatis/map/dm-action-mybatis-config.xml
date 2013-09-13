@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="lazyLoadingEnabled" value="false" />
+	</settings>
+
+	<typeAliases>
+		<typeAlias alias="ActionRequest" type="com.sensus.dm.elec.action.model.request.ActionRequest" />
+		<typeAlias alias="ActionType" type="com.sensus.dm.common.action.model.ActionType" />
+		<typeAlias alias="ActionTypeID" type="java.lang.Integer" />
+		<typeAlias alias="Device" type="com.sensus.cbof.model.Device" />
+		<typeAlias alias="WaterMeter" type="com.sensus.dm.water.device.model.WaterMeter"/>
+		<typeAlias alias="GasMeter" type="com.sensus.dm.gas.device.model.GasMeter"/>
+		<typeAlias alias="DMAction" type="com.sensus.dm.common.action.model.DMAction" />
+		<typeAlias alias="Group" type="com.sensus.dm.common.group.model.Group" />
+		<typeAlias alias="GroupRequest" type="com.sensus.dm.common.group.model.request.GroupRequest" />
+		<typeAlias alias="InquiryScheduleRequest" type="com.sensus.dm.common.schedule.model.request.InquiryScheduleRequest" />
+		<typeAlias alias="InquiryTagRequest" type="com.sensus.dm.common.tag.model.request.InquiryTagRequest" />
+		<typeAlias alias="InquiryGroupRequest" type="com.sensus.dm.common.group.model.request.InquiryGroupRequest" />
+		<typeAlias alias="Property" type="com.sensus.dm.common.property.model.Property" />
+		<typeAlias alias="ScheduleRequest" type="com.sensus.dm.common.schedule.model.request.ScheduleRequest" />
+		<typeAlias alias="DMSchedule" type="com.sensus.dm.common.schedule.model.DMSchedule" />
+		<typeAlias alias="Tag" type="com.sensus.dm.common.tag.model.Tag" />
+		<typeAlias alias="TagRequest" type="com.sensus.dm.common.tag.model.request.TagRequest" />
+		<typeAlias alias="ElectricMeter" type="com.sensus.dm.elec.device.model.ElectricMeter" />
+		<typeAlias alias="HanDevice" type="com.sensus.dm.elec.device.model.HanDevice"/>
+		<typeAlias alias="LCM" type="com.sensus.dm.elec.device.model.LCM"/>
+		<typeAlias alias="Radio" type="com.sensus.cbof.model.Radio"/>
+	</typeAliases>
+
+	<mappers>
+		<mapper resource="com/sensus/dm/elec/action/dac/mybatis/map/action.xml" />
+		<mapper resource="com/sensus/dm/common/group/dac/mybatis/map/group.xml" />
+		<mapper resource="com/sensus/dm/common/schedule/dac/mybatis/map/schedule.xml" />
+		<mapper resource="com/sensus/dm/common/tag/dac/mybatis/map/tag.xml" />
+	</mappers>
+</configuration>
