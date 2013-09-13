@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="Sensus war" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<include file="..\..\AntConfig\Sensus-ant-common-targets.xml" optional="false" />
+
+	<property name="antConfigDir" value="..\..\AntConfig" />
+
+	<!-- *************************************************************************************** -->
+	<!-- This is the main build target. Make sure this target gets invoked and only this target. -->
+	<!-- *************************************************************************************** -->
+	<target name="build">
+		<antcall target="Sensus.mainBuildUIWar">
+			<param name="moduleName" value="sensus-dm-web" />
+			<param name="pomFile" value="../pom.xml" />
+			<param name="noCleanUIWarPost" value="true" />
+			<!-- The directory for local dev security if it is set it will use Dev Security,
+			otherwise leave blank or comment out. This is set for when you want to deploy and test locally.
+			Never check in devSecurityFileDirectory directory or files into sensus svn
+			Fill in devSecurityContextFileName otherwise it will not work. Look in your devSecurityFileDirectory for name if you
+			do not know it-->
+			<param name="devSecurityFileDirectory" value="../../dmlocalsecuritysettings" />
+			<param name="devSecurityContextFileName" value="sensus-dm-security-context.xml" />
+			<!-- start RNI BCF Listeners when going to elara or qa this will always be true if local and you dont want OTA set to false-->
+			<param name="startDMJMSListeners" value="false" />
+			<param name="configurationProjectName" value="sensus-dm-configuration" />
+			<param name="installLocal" value="true" />
+			<param name="noCopyOverXSDFiles" value="true" />
+			<param name="genericWarFileName" value="dm.war" />
+			<param name="dmRelease" value="3.1.65" />
+
+			<!-- The directory log4j should be configured to log to in the final war -->
+			<param name="logDir" value="/opt/flexnet-dm/logs" />
+			<!-- The file name log4j should be configured to log to in the final war -->
+			<param name="logFile" value="dm.log" />
+			<!-- The file name log4j should be configured to log to in the final war for users actions -->
+			<param name="logFileUser" value="dm_user.log" />
+
+			<param name="deleteFromWarLibList" value="activation*.jar,guice*.jar,guava*.jar,hibernate*.jar,javax.servlet*.jar,servlet*.jar,jms*.jar,velocity*.jar" />
+		</antcall>
+	</target>
+
+
+	<!-- Invoked from within the Sensus-ant-common-targets ant file. -->
+	<target name="buildUIWarPrerequisites">
+
+		<antcall target="Sensus.mainBuildComponent">
+			<param name="moduleName" value="sensus-dm-interface" />
+			<param name="projectBaseDir" value="..\..\sensus-dm-interface" />
+			<param name="pomFile" value="..\..\sensus-dm-interface\pom.xml" />
+		</antcall>
+
+		<antcall target="Sensus.mainBuildComponent">
+			<param name="moduleName" value="sensus-dm-implementation" />
+			<param name="projectBaseDir" value="..\..\sensus-dm-implementation" />
+			<param name="pomFile" value="..\..\sensus-dm-implementation\pom.xml" />
+			<param name="additionalLibDir" value="..\..\sensus-dm-interface\dist" />
+			<param name="additionalLibDir2" value="../../sensus-dm-orchestration-client/build/sensus-dependency-lib" />
+		</antcall>
+
+		<antcall target="Sensus.mainBuildComponent">
+			<param name="moduleName" value="sensus-dm-web" />
+			<param name="projectBaseDir" value="..\..\sensus-dm-web" />
+			<param name="pomFile" value="..\..\sensus-dm-web\pom.xml" />
+			<param name="additionalLibDir" value="../../sensus-dm-orchestration-client/build/sensus-dependency-lib" />
+		</antcall>
+
+	</target>
+
+</project>

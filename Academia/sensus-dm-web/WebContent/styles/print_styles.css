@@ -1,0 +1,118 @@
+@charset "utf-8";
+
+/* CSS Document */
+/* SECTION 1: Set default width, margin, float, and
+   background. This prevents elements from extending 
+   beyond the edge of the printed page, and prevents
+   unnecessary background images from printing */
+body,#content,#container,.yui-b {
+	background: #fff url(none);
+	float: none;
+	margin: 0 !important;
+	width: 100%;	
+}
+
+/* SECTION 2: Remove any elements not needed in print. 
+   This would include navigation, ads, sidebars, etc. */
+#topnav,#navbar,#nav,#sidebar,#hd,#ft,.tools,.noprint,.filter-vert,.save,.result-count,.user-settings,table .checkbox,.map-col,.point-type-navigation,.lighting-controls,.button,#hdUser,.delete
+	{
+	display: none;
+}
+
+/* SECTION 3: Set body font face, size, and color.
+   Consider using a serif font for readability. */
+body {
+	color: #000 !important;
+}
+
+/* SECTION 4: Set heading font face, sizes, and color.
+   Diffrentiate your headings from your body text.
+   Perhaps use a large sans-serif for distinction. */
+h1,h2,h3,h4,h5,h6 {
+	color: #000;
+	font-family: Helvetica, Arial, sans-serif;	
+}
+
+h1 {
+	font-size: 250%;
+}
+
+h2 {
+	font-size: 175%;
+}
+
+h3 {
+	font-size: 135%;
+}
+
+h4 {
+	font-size: 100%;
+	font-variant: small-caps;
+}
+
+h5 {
+	font-size: 100%;
+}
+
+h6 {
+	font-size: 90%;
+	font-style: italic;
+}
+
+/* SECTION 5: Make hyperlinks more usable.
+   Ensure links are underlined, and consider appending
+   the URL to the end of the link for usability. */
+a:link,a:visited {
+	color: #00c;
+	font-weight: normal;
+	text-decoration: underline;
+}
+
+#content a:link:after,#content a:visited:after {
+	content: " (" attr(href) ") ";
+}
+
+.page-break {
+	display: block;
+	page-break-before: always;
+}
+
+/* table */
+td,th {
+	border: 1px solid #ccc !important;
+}
+
+th {
+	font-weight: bold;
+}
+
+th a:link {
+	color: #000;
+	font-weight: bold;
+}
+
+/* YUI Resets */
+.yui-gc div.first,.yui-gd .yui-u {
+	width: auto;
+}
+
+.yui-g div.first,.yui-gb div.first,.yui-gc div.first,.yui-gd div.first,.yui-ge div.first,.yui-gf div.first,.yui-g .yui-gc div.first,.yui-g .yui-ge div.first,.yui-gc div.first div.first
+	{
+	float: none;
+}
+
+.yui-gb .yui-u,.yui-g .yui-gb .yui-u,.yui-gb .yui-g,.yui-gb .yui-gb,.yui-gb .yui-gc,.yui-gb .yui-gd,.yui-gb .yui-ge,.yui-gb .yui-gf,.yui-gc .yui-u,.yui-gc .yui-g,.yui-gd .yui-u
+	{
+	margin-left: auto;
+	width: auto;
+}
+
+.yui-g .yui-u,.yui-g .yui-g,.yui-g .yui-gb,.yui-g .yui-gc,.yui-g .yui-gd,.yui-g .yui-ge,.yui-g .yui-gf,.yui-gc .yui-u,.yui-gd .yui-g,.yui-g .yui-gc .yui-u,.yui-ge .yui-u,.yui-ge .yui-g,.yui-gf .yui-g,.yui-gf .yui-u
+	{
+	float: none;
+}
+
+.yui-gb .yui-u,.yui-g .yui-gb .yui-u,.yui-gb .yui-g,.yui-gb .yui-gb,.yui-gb .yui-gc,.yui-gb .yui-gd,.yui-gb .yui-ge,.yui-gb .yui-gf,.yui-gc .yui-u,.yui-gc .yui-g,.yui-gd .yui-u
+	{
+	float: none;
+}

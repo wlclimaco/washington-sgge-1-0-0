@@ -1,0 +1,97 @@
+/* =header */
+.water .application {
+	background-image: url(../images/water/bg-body.gif);
+}
+.water #search-form-container {
+	background: #014950;
+}
+
+.water ul.link-list li {
+    background-image: url(../images/water/bg-sep-text-list.gif);
+}
+
+.water ul.link-list li.last {
+    background: none repeat scroll 0 0 transparent;
+}
+
+ /* =tabs */
+.water #sensus-menu ul.first-of-type li a.active {
+	background:#014950;
+}
+
+.water #sensus-menu ul.first-of-type li a:hover {
+	background:#00929f;
+}
+
+ /* =table */
+.water #kpi-container .header .today {
+	color:#000000;
+	border-bottom:1px solid #999999;
+	border-right:2px solid #999999;
+	border-top:3px solid #666666;
+	/* css3	*/
+	background:-moz-linear-gradient(top, #f0f0f0, #dcdbdb);
+   	background:linear-gradient(top, #f0f0f0, #dcdbdb);
+   	background-image: linear-gradient(to bottom, #f0f0f0 0%, #dcdbdb 100%);
+   	filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#f0f0f0', EndColorStr='#dcdbdb');
+	text-shadow: 1px 1px 1px #cccccc;
+	font-size: 125%;
+}
+.water #kpi-container .header .week,
+.water #dashboard-visualization-container h3 {
+	color:#000000;
+	border-bottom:1px solid #999999;
+	/* css3	*/
+	background:-moz-linear-gradient(top, #dbdbdb, #c8c8c8);
+   	background:linear-gradient(top, #dbdbdb, #c8c8c8);
+   	background-image: linear-gradient(to bottom, #dbdbdb 0%, #c8c8c8 100%);
+   	filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#dbdbdb', EndColorStr='#c8c8c8');
+	text-shadow: 1px 1px 1px #f0f0f0;
+}
+
+.water #kpi-container .header .month {
+	color:#000000;
+	border-bottom:1px solid #999999;
+	/* css3	*/
+	background:-moz-linear-gradient(top, #cccccc, #bab7b7);
+   	background:linear-gradient(top, #cccccc, #bab7b7);
+   	background-image: linear-gradient(to bottom, #cccccc 0%, #bab7b7 100%);
+   	filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#cccccc', EndColorStr='#bab7b7');
+	text-shadow: 1px 1px 1px #f0f0f0;
+}
+.water #kpi-container .subheader .today {background:#f0f0f0;border-right:2px solid #bbbbbb;}
+.water #kpi-container .subheader .week {background:#f0f0f0;}
+.water #kpi-container .subheader .month {background:#8db4dc;}
+.water #kpi-container .today{border-left:1px solid #cccccc;}
+.water #kpi-container tbody .today{border-right:2px solid #cccccc;border-left:1px solid #cccccc;}
+.water #kpi-container tbody .bottom .today {border-bottom:2px solid #bbbbbb;}
+#kpi-container tbody .bottom .today {border-bottom:2px solid #bbbbbb;}
+.water #kpi-container .alt td {background:#f7f6f6;}
+.water #kpi-container .alt td.week {background:#f0f0f0;}
+.water #kpi-container .alt td.v-alt {background:#f7f6f6;}
+.water #kpi-container table .row-title-sub	{
+		background:#f0f0f0;
+		border-bottom:1px solid #cccccc;
+		text-align:left;
+}
+.water #kpi-container table .alt .row-title-sub {background:#dfdede;}
+
+.water .ss-widget-summary-kpi{width:100%;height:50px;padding:0 .5em;}
+.water ul.summary-kpi {display:inline;}
+.water ul.summary-kpi li {display:inline;float:left;padding:0 2em;text-align:center;border-right:1px solid #ccc;}
+.water ul.summary-kpi li.last {border-right:0;}
+.water ul.summary-kpi li span {display:block;font-size:167%;color:#000}
+.water ul.summary-kpi li small {display:block;line-height:.8;color:#666}
+.water ul.summary-kpi li sup {font-size:45%;}
+
+.water .ss-widget-table-summary-kpi {padding:0 .5em;margin-bottom:.25em;}
+.water table.summary-kpi {width:100%;}
+.water table.summary-kpi td {padding:.5em .75em;text-align:left;border-right:1px solid #e4e4e4;color:#666;}
+.water table.summary-kpi td.last {border-right:0;}
+/*.water table.summary-kpi td span {display:block;font-size:146.5%;color:#000}*/
+.water .summary-kpi span a {
+    color: #000000;
+    text-decoration: none;
+}
+.water table.summary-kpi td small {display:block;line-height:.8;color:#666}
+.water table.summary-kpi td sup {font-size:50%;}
