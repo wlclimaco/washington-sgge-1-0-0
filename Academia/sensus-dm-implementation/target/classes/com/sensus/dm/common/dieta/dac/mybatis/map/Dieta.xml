@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Dieta">
+
+	<resultMap id="listAllDietaResults" type="Dieta" >
+		<result property="cddiet" column="cddiet" />
+		<result property="dtinic" column="dtinic" />
+		<result property="dtfina" column="dtfina" />
+		<result property="dsobj" column="dsobj" />
+		<result property="dieta" column="dieta" />
+	</resultMap>
+
+
+	<sql id="allDietaColumms">
+     	cddiet,
+     	dtinic,
+     	dtfina,
+     	dsobj,
+     	dieta,
+	</sql>
+	
+
+	<!-- Insert Dieta -->
+	<select id="insertDieta" parameterType="Map" resultType="int">
+		SELECT ins_dieta (
+		#{cddiet,jdbcType=INTEGER},
+		#{dtinic,jdbcType=DATE},
+		#{dtfina,jdbcType=DATE},
+		#{dsobj,jdbcType=VARCHAR},
+		#{dieta,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Update Dieta -->
+	<select id="updateDieta" parameterType="Map" resultType="int">
+		SELECT upd_dieta (
+		#{cddiet,jdbcType=INTEGER},
+		#{dtinic,jdbcType=DATE},
+		#{dtfina,jdbcType=DATE},
+		#{dsobj,jdbcType=VARCHAR},
+		#{dieta,jdbcType=INTEGER},
+)
+	</select>
+
+	<!-- Delete Dieta -->
+	<select id="deleteDieta" parameterType="Dieta">
+		SELECT del_dieta (#{id})
+	</select>
+	
+	<!-- Fetch All Dietas -->
+	<select id="fetchAllDietas" parameterType="Map" resultMap="listAllDietaResults">
+	
+		SELECT  <include refid="allDietaColumms"/>
+		  FROM dieta
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM dieta 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Dieta By type -->
+	<select id="fetchDietaByType" parameterType="DietaRequest"  resultMap="listAllDietaResults" >
+		SELECT  <include refid="allCustomListDietaColumns"/>
+		  FROM dieta
+		 WHERE name = #{dieta.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Dieta By Id -->
+	<select id="fetchDietaById" parameterType="Dieta" resultMap="listAllDietaResults" >
+		SELECT <include refid="allCustomListDietaColumns"/>
+		  FROM dieta
+		 WHERE dieta_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Dieta By Id -->
+	<select id="fetchDietaNameById" parameterType="Dieta" resultMap="listAllDietaResults" >
+		SELECT <include refid="allCustomListDietaColumns"/>
+		  FROM dieta
+		 WHERE dieta_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

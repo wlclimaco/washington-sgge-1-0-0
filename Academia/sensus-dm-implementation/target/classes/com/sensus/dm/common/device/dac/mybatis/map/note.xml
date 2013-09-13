@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NoteMap">
+
+	<!--###############################-->
+	<!--########### RESULTS ###########-->
+	<!--###############################-->
+	<resultMap id="NoteResult" type="Note">
+		<result property="id" column="meter_note_id" />
+		<result property="text" column="note_text" />
+		<result property="createUser" column="modified_user" />
+		<result property="createDate" column="modified_date" />
+	</resultMap>
+
+	<!--###############################-->
+	<!--########## INCLUDES ###########-->
+	<!--###############################-->
+	<sql id="WithNoLock">
+		<if test="_databaseId == 'Microsoft SQL Server'">
+			WITH (NOLOCK)
+		</if>
+	</sql>
+
+	<!--###############################-->
+	<!--########### FETCHS ############-->
+	<!--###############################-->
+	<select id="fetchDeviceNotes" parameterType="map" resultMap="NoteResult">
+
+		SELECT meter_note_id
+			  ,note_text
+			  ,endpoint_id
+			  ,modified_user
+			  <if test="_databaseId == 'Oracle'">
+			  	,fn_date(fn_dt(modified_date)) AS modified_date
+			  </if>
+			  <if test="_databaseId == 'Microsoft SQL Server'">
+			  	,dbo.fn_dt(modified_date) AS modified_date
+			  </if>
+		FROM meter_note <include refid="WithNoLock"/>
+		WHERE endpoint_id = #{flexNetId, jdbcType=INTEGER}
+		ORDER BY modified_date DESC
+
+	</select>
+
+  	<!--###############################-->
+	<!--########## PROCEDURE ##########-->
+	<!--###############################-->
+	<select id="insertMeterNotes" statementType="CALLABLE" parameterType="map" resultType="integer">
+
+		{call ins_meter_notes (  #{flexnet_id, jdbcType=INTEGER}
+								,#{note, jdbcType=VARCHAR}
+								,#{create_user, jdbcType=VARCHAR}
+								,#{meter_note_id, mode=OUT, jdbcType=INTEGER}
+								,#{p_error_message, mode=OUT, jdbcType=VARCHAR}
+								,#{p_result, mode=OUT, jdbcType=INTEGER})}
+
+	</select>
+
+	<select id="deleteMeterNotes" statementType="CALLABLE" parameterType="map" resultType="integer">
+
+		{call del_meter_notes (#{note_id, jdbcType=INTEGER}
+								<if test="_databaseId == 'Oracle'">
+									,#{p_return,mode=OUT,jdbcType=INTEGER}
+								</if>
+								)}
+
+	</select>
+
+</mapper>

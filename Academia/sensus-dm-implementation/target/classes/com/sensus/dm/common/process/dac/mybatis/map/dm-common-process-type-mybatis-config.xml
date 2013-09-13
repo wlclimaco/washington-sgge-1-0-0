@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<settings>
+		<setting name="lazyLoadingEnabled" value="false" />
+	</settings>
+
+	<typeAliases>
+		<typeAlias alias="ProcessType"  type="com.sensus.dm.common.process.model.ProcessType"/>
+		<typeAlias alias="ProcessCategory" type="com.sensus.dm.common.process.model.ProcessCategory"/>
+		<typeAlias alias="ProcessRequest"  type="com.sensus.dm.common.process.model.request.ProcessRequest"/>
+	</typeAliases>
+
+	<mappers>
+    	<mapper resource="com/sensus/dm/common/process/dac/mybatis/map/processtype.xml"/>
+    </mappers>
+
+</configuration>

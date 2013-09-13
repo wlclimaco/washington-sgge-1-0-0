@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Suplemento">
+
+	<resultMap id="listAllSuplementoResults" type="Suplemento" >
+		<result property="cdsuple" column="cdsuple" />
+		<result property="supleme" column="supleme" />
+		<result property="marca" column="marca" />
+		<result property="qntdia" column="qntdia" />
+		<result property="dtinic" column="dtinic" />
+		<result property="dtfina" column="dtfina" />
+		<result property="obssup" column="obssup" />
+		<result property="coment" column="coment" />
+	</resultMap>
+
+
+	<sql id="allSuplementoColumms">
+     	cdsuple,
+     	supleme,
+     	marca,
+     	qntdia,
+     	dtinic,
+     	dtfina,
+     	obssup,
+     	coment,
+	</sql>
+	
+
+	<!-- Insert Suplemento -->
+	<select id="insertSuplemento" parameterType="Map" resultType="int">
+		SELECT ins_suplemento (
+		#{cdsuple,jdbcType=INTEGER},
+		#{supleme,jdbcType=VARCHAR},
+		#{marca,jdbcType=VARCHAR},
+		#{qntdia,jdbcType=FLOAT},
+		#{dtinic,jdbcType=DATE},
+		#{dtfina,jdbcType=DATE},
+		#{obssup,jdbcType=VARCHAR},
+		#{coment,jdbcType=VARCHAR},
+)
+	</select>
+
+	<!-- Update Suplemento -->
+	<select id="updateSuplemento" parameterType="Map" resultType="int">
+		SELECT upd_suplemento (
+		#{cdsuple,jdbcType=INTEGER},
+		#{supleme,jdbcType=VARCHAR},
+		#{marca,jdbcType=VARCHAR},
+		#{qntdia,jdbcType=FLOAT},
+		#{dtinic,jdbcType=DATE},
+		#{dtfina,jdbcType=DATE},
+		#{obssup,jdbcType=VARCHAR},
+		#{coment,jdbcType=VARCHAR},
+)
+	</select>
+
+	<!-- Delete Suplemento -->
+	<select id="deleteSuplemento" parameterType="Suplemento">
+		SELECT del_suplemento (#{id})
+	</select>
+	
+	<!-- Fetch All Suplementos -->
+	<select id="fetchAllSuplementos" parameterType="Map" resultMap="listAllSuplementoResults">
+	
+		SELECT  <include refid="allSuplementoColumms"/>
+		  FROM suplemento
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM suplemento 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Suplemento By type -->
+	<select id="fetchSuplementoByType" parameterType="SuplementoRequest"  resultMap="listAllSuplementoResults" >
+		SELECT  <include refid="allCustomListSuplementoColumns"/>
+		  FROM suplemento
+		 WHERE name = #{suplemento.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Suplemento By Id -->
+	<select id="fetchSuplementoById" parameterType="Suplemento" resultMap="listAllSuplementoResults" >
+		SELECT <include refid="allCustomListSuplementoColumns"/>
+		  FROM suplemento
+		 WHERE suplemento_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Suplemento By Id -->
+	<select id="fetchSuplementoNameById" parameterType="Suplemento" resultMap="listAllSuplementoResults" >
+		SELECT <include refid="allCustomListSuplementoColumns"/>
+		  FROM suplemento
+		 WHERE suplemento_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<settings>
+		<setting name="lazyLoadingEnabled" value="true" />
+	</settings>
+
+	<typeAliases>
+		<typeAlias alias="ActionType" type="com.sensus.dm.common.action.model.ActionType" />
+		<typeAlias alias="ActionRequest"  type="com.sensus.dm.elec.action.model.request.ActionRequest"/>
+		<typeAlias alias="Device" type="com.sensus.cbof.model.Device" />
+		<typeAlias alias="DMAction" type="com.sensus.dm.common.action.model.DMAction" />
+		<typeAlias alias="Group" type="com.sensus.dm.common.group.model.Group" />
+		<typeAlias alias="HanDevice"  type="com.sensus.dm.elec.device.model.HanDevice"/>
+		<typeAlias alias="InquiryProcessRequest"  type="com.sensus.dm.common.process.model.request.InquiryProcessRequest"/>
+		<typeAlias alias="DMProcess"  type="com.sensus.dm.common.process.model.DMProcess"/>
+		<typeAlias alias="ProcessItem"  type="com.sensus.dm.common.process.model.ProcessItem"/>
+		<typeAlias alias="ProcessItemHistory"  type="com.sensus.dm.common.process.model.ProcessItemHistory"/>
+		<typeAlias alias="ProcessStatusEnum"  type="com.sensus.dm.common.process.model.ProcessStatusEnum"/>
+		<typeAlias alias="ProcessType"  type="com.sensus.dm.common.process.model.ProcessType"/>
+		<typeAlias alias="Property"  type="com.sensus.dm.common.property.model.Property"/>
+		<typeAlias alias="ProcessRequest"  type="com.sensus.dm.common.process.model.request.ProcessRequest"/>
+		<typeAlias alias="Tag" type="com.sensus.dm.common.tag.model.Tag" />
+		<typeAlias alias="ElectricMeter" type="com.sensus.dm.elec.device.model.ElectricMeter" />
+		<typeAlias alias="LCM" type="com.sensus.dm.elec.device.model.LCM"/>
+		<typeAlias alias="WaterMeter" type="com.sensus.dm.water.device.model.WaterMeter"/>
+		<typeAlias alias="GasMeter" type="com.sensus.dm.gas.device.model.GasMeter"/>
+		<typeAlias alias="ProcessCategory" type="com.sensus.dm.common.process.model.ProcessCategory"/>
+	</typeAliases>
+
+	<mappers>
+    	<mapper resource="com/sensus/dm/common/process/dac/mybatis/map/process.xml"/>
+    	<mapper resource="com/sensus/dm/elec/action/dac/mybatis/map/action.xml"/>
+    </mappers>
+
+</configuration>

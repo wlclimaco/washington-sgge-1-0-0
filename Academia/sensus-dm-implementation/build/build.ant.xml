@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="Sensus DM Implementation" >
+
+	<include file="..\..\AntConfig\Sensus-ant-common-targets.xml" optional="false" />
+
+	<target name="build">
+		<antcall target="Sensus.mainBuildComponent">
+			<param name="moduleName" value="sensus-dm-implementation" />
+			<param name="pomFile" value="../pom.xml" />
+			<param name="additionalLibDir" value="../../sensus-dm-orchestration-client/build/sensus-dependency-lib" />
+			<param name="installLocal" value="true" />
+		</antcall>
+	</target>
+
+</project>

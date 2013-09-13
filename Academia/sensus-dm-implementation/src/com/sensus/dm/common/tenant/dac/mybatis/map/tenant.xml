@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TenantMap">
+
+	<resultMap id="TenantResult" type="DMTenant" >
+		<result property="key" column="fldMember" />
+		<result property="name" column="fldDescription" />
+	</resultMap>
+
+	<sql id="WithNoLock">
+		<if test="_databaseId == 'Microsoft SQL Server'">
+			WITH (NOLOCK)
+		</if>
+	</sql>
+
+	<select id="fetchTenantDescription" parameterType="TenantRequest"  resultMap="TenantResult">
+		SELECT fldMember, fldDescription
+		  FROM tblconfigdomainmembers <include refid="WithNoLock"/>
+		WHERE fldDomain = 'Customer'
+		  and fldMember = #{tenant.key}
+	</select>
+</mapper>

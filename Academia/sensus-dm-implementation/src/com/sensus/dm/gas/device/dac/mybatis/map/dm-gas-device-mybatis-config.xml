@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<settings>
+		<setting name="lazyLoadingEnabled" value="false" />
+	</settings>
+
+	<typeAliases>
+		<typeAlias alias="InquiryDeviceRequest" type="com.sensus.dm.common.device.model.request.InquiryDeviceRequest"/>
+		<typeAlias alias="DeviceRequest" type="com.sensus.dm.common.device.model.request.DeviceRequest"/>
+		<typeAlias alias="Location" type="com.sensus.cbof.model.Location" />
+		<typeAlias alias="Radio" type="com.sensus.cbof.model.Radio" />
+		<typeAlias alias="Device" type="com.sensus.cbof.model.Device"/>
+		<typeAlias alias="GasMeter" type="com.sensus.dm.gas.device.model.GasMeter" />
+		<typeAlias alias="DeviceModel" type="com.sensus.dm.common.device.model.DeviceModel"/>
+		<typeAlias alias="TimeZoneInfo" type="com.sensus.cbof.model.TimeZoneInfo"/>
+		<typeAlias alias="LifecycleState" type="com.sensus.dm.elec.device.model.LifecycleState"/>
+		<typeAlias alias="ConnectionState" type="com.sensus.dm.elec.device.model.ConnectionState"/>
+		<typeAlias alias="WaterMeter" type="com.sensus.dm.water.device.model.WaterMeter"/>
+		<typeAlias alias="WaterGasMeterStatusCount" type="com.sensus.dm.water.device.model.WaterGasMeterStatusCount"/>
+		<typeAlias alias="WaterGasMeterConfiguration" type="com.sensus.dm.water.device.model.WaterGasMeterConfiguration" />
+		<typeAlias alias="Alarm" type="com.sensus.dm.common.device.model.Alarm"/>
+		<typeAlias alias="WaterLeak" type="com.sensus.dm.water.device.model.WaterLeak"/>
+		<typeAlias alias="AlarmsTypesCount" type="com.sensus.dm.common.device.model.AlarmsTypesCount"/>
+	</typeAliases>
+
+	<mappers>
+    	<mapper resource="com/sensus/dm/gas/device/dac/mybatis/map/gas.xml"/>
+    	<mapper resource="com/sensus/dm/common/device/dac/mybatis/map/deviceResult.xml"/>
+    	<mapper resource="com/sensus/dm/water/device/dac/mybatis/map/water.xml"/>
+    	<mapper resource="com/sensus/dm/gas/device/dac/mybatis/map/gasResult.xml"/>
+    	<mapper resource="com/sensus/dm/water/device/dac/mybatis/map/waterResult.xml"/>
+    </mappers>
+
+</configuration>

@@ -1,0 +1,756 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="WaterMeterMap">
+
+	<!--###################-->
+	<!--####  RESULTS  ####-->
+	<!--###################-->
+
+	<resultMap id="WaterLeakResult" type="WaterLeak" >
+		<result property="waterMeter.radio.flexNetId"   column="endpoint_id" />
+		<result property="waterMeter.deviceId"          column="meter_id" />
+		<result property="leakTime"                     column="leak_time" />
+		<result property="recentConsumption"            column="recent_consumption" />
+		<result property="recentConsumptionPercentage"  column="percent_recent_consumption" />
+		<result property="priorConsumption"             column="prior_consumption" />
+		<result property="priorConsumptionPercentage"   column="percent_prior_consumption" />
+		<result property="dailyConsumptionAverage"      column="avg_daily_consumption" />
+	</resultMap>
+
+	<resultMap id="ConnectionStateResult" type="ConnectionState" >
+		<result property="id" 			column="connection_state_id" />
+		<result property="shortName" 	column="short_name" />
+		<result property="description" 	column="description" />
+	</resultMap>
+
+	<resultMap id="WaterMeterStatusResult" type="WaterGasMeterStatusCount">
+		<result property="waterGasMeterStatusEnumValue"  jdbcType="INTEGER"   column="topLevelStateCode" />
+		<result property="amount"                        jdbcType="INTEGER"	  column="amount" />
+	</resultMap>
+
+	<!--##########################-->
+	<!--####  SQL TO INCLUDE  ####-->
+	<!--##########################-->
+
+	<sql id="deviceTypeTblMeterSelectClause">
+		CASE WHEN vdt.fldMeterType IN ('E','A') THEN 1 /* ELECTRIC */
+		     WHEN vdt.fldMeterType = 'W' THEN 5 /* WATER */
+		     WHEN vdt.fldMeterType = 'G' THEN 6 /* GAS */
+		     ELSE 3 /* Light */
+		END AS device_type_enum
+		,ml.fldDeviceType AS meter_type_enum
+	</sql>
+
+	<sql id="meterByIdSelectClause">
+
+		SELECT   ml.fldRepId 						AS flexnet_id
+				,ml.fldMeterId 						AS device_id
+				,ml.fldPOD 							AS premise_id
+
+				,(SELECT COUNT(mlc.fldRepId) as devicecount
+					FROM tblMeterList mlc <include refid="WithNoLock"/>
+				   INNER JOIN tblUniversalSetup usc <include refid="WithNoLock"/> ON (usc.fldRepId = mlc.fldRepId)
+				   INNER JOIN tblValidDeviceTypes vdtc <include refid="WithNoLock"/> ON (vdtc.fldDeviceType = mlc.fldDeviceType)
+					WHERE mlc.fldCustomerId = ml.fldCustomerId
+					  AND mlc.fldPOD = ml.fldPOD
+					  AND mlc.fldMeterType = 'W') as premise_id_device_count
+
+				,<include refid="deviceTypeTblMeterSelectClause"/>
+				,vdt.fldDescription 				AS device_type_desc
+
+				<if test="_databaseId == 'Oracle'">
+					,fn_dt(ml.fldInstallDate)	AS install_date
+					,trunc(COALESCE(ml.fldLat, 0), 4)    AS latitude
+					,trunc(COALESCE(ml.fldLong, 0), 4)   AS longitude
+				</if>
+				<if test="_databaseId == 'Microsoft SQL Server'">
+					,dbo.fn_dt(ml.fldInstallDate)		AS install_date
+					,ROUND(COALESCE(ml.fldLat, 0), 4, 1) AS latitude
+					,ROUND(COALESCE(ml.fldLong, 0), 4, 1) AS longitude
+				</if>
+
+				,ml.fldAddress 						AS address
+				,ml.fldCity 						AS city
+				,ml.fldZip 							AS zip
+				,ml.fldState 						AS address_state
+				,ml.fldCountry 						AS country
+				<include refid="encryptedStatusSelect"/>
+				,ml.fldMeterType 					AS meter_type_id
+
+				,ml.fldMeterLifecycleStateCode 		AS lifecycle_state
+
+				,ml.fldfirmwareflexnet 				AS firmware_flexnet
+				,ml.fldfirmwaremetrology			AS firmware_meter
+				,ml.esi_bootflasher_firmware		AS firmware_bootloader
+				,ml.esi_application_firmware		AS firmware_zigbee
+
+				,ml.fldCustomerId 					AS customer_id
+				,ml.fldBillingCycle                 AS billing_cycle
+
+				,CASE
+					WHEN us.fldTopLevelState IN (0,1,2,3) THEN us.fldTopLevelState
+					ELSE -1
+				 END								AS topLevelState
+
+				 <include refid="transmitSelect"/>
+
+				,us.fldSupervisoryTransmitRate      AS supervisoryTransmitRate
+				,us.fldSerialNumber					AS meterSerialNumber
+
+				,us.fldHistoryScale					AS historyScale
+				,us.fldMeasurementUnits				AS meterUnits
+				,us.fldResolutionOfCurrentRead		AS readingResolution
+				,us.fldLeakSettingsMeterThreshold	AS leakDetectionThreshold
+				,us.fldLeakSettingsConsecutiveRead	AS leakConsecutiveReads
+				,us.fldBrokenPipeCounts				AS brokenPipe
+				,us.fldReverseFlowDetectThreshold	AS reverseFlowThreshold
+
+				,us.fldMeterSampleRate              AS sample_rate
+				,us.fldReceiverChannel              AS receiver_channel
+				,us.fldTransmitChannelMask          AS transmit_channel_mask
+				,us.fldTransmitterOperationalMode   AS transmitter_operational_mode
+				,us.fldReceiverOperationalMode      AS receiver_operational_mode
+
+				<if test="_databaseId == 'Oracle'">
+					,fn_dt((SELECT MAX(msg.fldToi)
+		  			    FROM tblMsgsOnAir_1 msg <include refid="WithNoLock"/>
+         		       WHERE ml.fldRepId = msg.fldRepId)) AS last_heard
+				</if>
+				<if test="_databaseId == 'Microsoft SQL Server'">
+					,dbo.fn_dt((SELECT MAX(msg.fldToi)
+		  			    FROM tblMsgsOnAir_1 msg <include refid="WithNoLock"/>
+         		       WHERE ml.fldRepId = msg.fldRepId)) AS last_heard
+				</if>
+
+				,(SELECT tzn.tz_region
+				  FROM tz_zone tzn <include refid="WithNoLock"/>
+	              WHERE ml.fldUSTZ = tzn.tzr_id) AS time_zone
+				,UPPER(a.alarm)							AS alarm
+				<if test="_databaseId == 'Oracle'">
+					,fn_dt(get_alarm_first_time(a.fldRepId, a.alarm)) AS alarm_time
+				</if>
+				<if test="_databaseId == 'Microsoft SQL Server'">
+				    ,dbo.fn_dt(dbo.get_alarm_first_time(a.fldRepId, a.alarm)) AS alarm_time
+				</if>
+	</sql>
+
+	<sql id="meterFromClause">
+		FROM tblMeterList ml <include refid="WithNoLock"/>
+	   INNER JOIN tblUniversalSetup us <include refid="WithNoLock"/> ON (us.fldRepId = ml.fldRepId)
+	   INNER JOIN tblValidDeviceTypes vdt <include refid="WithNoLock"/> ON (vdt.fldDeviceType = ml.fldDeviceType)
+	    LEFT OUTER JOIN alarms a <include refid="WithNoLock"/> ON (a.fldRepId = ml.fldRepId AND a.alarm IN <include refid="alarmsWater"/>)
+	</sql>
+
+	<sql id="meterRepIdWhereClause">
+
+		<if test="paginationAllSelected == true and selectionPaginationIds != null">
+	       	AND ml.fldRepId NOT IN
+			<foreach item="item" index="index" collection="selectionPaginationIds" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+        </if>
+
+        <if test="paginationAllSelected == false and selectionPaginationIds != null">
+        	AND ml.fldRepId IN
+			<foreach item="item" index="index" collection="selectionPaginationIds" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+        </if>
+
+	</sql>
+
+	<sql id="meterDeviceWhereClause">
+
+		<if test="_databaseId == 'Oracle'">
+
+			<if test="deviceSearch.waterMeterSearch.waterMeter != null ">
+
+				<if test="deviceSearch.waterMeterSearch.waterMeter.radio != null ">
+
+					<if test="deviceSearch.waterMeterSearch.waterMeter.radio.flexNetId != null">
+						AND ml.fldRepId = #{deviceSearch.waterMeterSearch.waterMeter.radio.flexNetId}
+					</if>
+					<if test="deviceSearch.waterMeterSearch.waterMeter.radio.location != null">
+
+						<if test="deviceSearch.waterMeterSearch.waterMeter.radio.location.address != null">
+							AND UPPER(ml.fldAddress) like '%' || UPPER(#{deviceSearch.waterMeterSearch.waterMeter.radio.location.address}) || '%'
+						</if>
+						<if test="deviceSearch.waterMeterSearch.waterMeter.radio.location.city != null">
+							AND UPPER(ml.fldCity) like '%' || UPPER(#{deviceSearch.waterMeterSearch.waterMeter.radio.location.city}) || '%'
+						</if>
+						<if test="deviceSearch.waterMeterSearch.waterMeter.radio.location.zip != null">
+							AND UPPER(ml.fldZip) = UPPER(#{deviceSearch.waterMeterSearch.waterMeter.radio.location.zip})
+						</if>
+
+					</if>
+				</if>
+				<if test="deviceSearch.waterMeterSearch.waterMeter.deviceId != null">
+					AND ml.fldMeterId like '%' || #{deviceSearch.waterMeterSearch.waterMeter.deviceId} ||'%'
+				</if>
+
+				<if test="deviceSearch.waterMeterSearch.waterMeter.quarantine != null and deviceSearch.waterMeterSearch.waterMeter.quarantine == true">
+					AND (<include refid="quarantineQuery"/>) = 1
+				</if>
+
+				<if test="deviceSearch.waterMeterSearch.waterMeter.configuration != null">
+
+					<if test="deviceSearch.waterMeterSearch.waterMeter.configuration.premiseId != null">
+						AND ml.fldPOD like '%' || #{deviceSearch.waterMeterSearch.waterMeter.configuration.premiseId} ||'%'
+					</if>
+					<if test="deviceSearch.waterMeterSearch.waterMeter.configuration.firmwareMeter != null">
+						AND ml.fldfirmwareflexnet like '%' || #{deviceSearch.waterMeter.waterMeterSearch.waterMeter.firmwareMeter} || '%'
+					</if>
+
+				</if>
+			</if>
+		</if>
+
+		<if test="_databaseId == 'Microsoft SQL Server'">
+
+			<if test="deviceSearch.waterMeterSearch.waterMeter != null ">
+
+				<if test="deviceSearch.waterMeterSearch.waterMeter.radio != null ">
+
+					<if test="deviceSearch.waterMeterSearch.waterMeter.radio.flexNetId != null">
+						AND ml.fldRepId = #{deviceSearch.waterMeterSearch.waterMeter.radio.flexNetId}
+					</if>
+					<if test="deviceSearch.waterMeterSearch.waterMeter.radio.location != null">
+
+						<if test="deviceSearch.waterMeterSearch.waterMeter.radio.location.address != null">
+							AND UPPER(ml.fldAddress) like '%' + UPPER(#{deviceSearch.waterMeterSearch.waterMeter.radio.location.address}) + '%'
+						</if>
+						<if test="deviceSearch.waterMeterSearch.waterMeter.radio.location.city != null">
+							AND UPPER(ml.fldCity) like '%' + UPPER(#{deviceSearch.waterMeterSearch.waterMeter.radio.location.city}) + '%'
+						</if>
+						<if test="deviceSearch.waterMeterSearch.waterMeter.radio.location.zip != null">
+							AND UPPER(ml.fldZip) = UPPER(#{deviceSearch.waterMeterSearch.waterMeter.radio.location.zip})
+						</if>
+
+					</if>
+				</if>
+				<if test="deviceSearch.waterMeterSearch.waterMeter.deviceId != null">
+					AND ml.fldMeterId like '%' + #{deviceSearch.waterMeterSearch.waterMeter.deviceId} +'%'
+				</if>
+
+				<if test="deviceSearch.waterMeterSearch.waterMeter.quarantine != null and deviceSearch.waterMeterSearch.waterMeter.quarantine == true">
+					AND (<include refid="quarantineQuery"/>) = 1
+				</if>
+
+				<if test="deviceSearch.waterMeterSearch.waterMeter.configuration != null">
+					<if test="deviceSearch.waterMeterSearch.waterMeter.configuration.premiseId != null">
+						AND ml.fldPOD like '%' + #{deviceSearch.waterMeterSearch.waterMeter.configuration.premiseId} +'%'
+					</if>
+
+					<if test="deviceSearch.waterMeterSearch.waterMeter.configuration.firmwareMeter != null">
+						AND ml.fldfirmwareflexnet like '%' + #{deviceSearch.waterMeterSearch.waterMeter.configuration.firmwareMeter} + '%'
+					</if>
+				</if>
+			</if>
+		</if>
+
+	</sql>
+
+	<sql id="waterMeterGroupTagWhereClause">
+
+		<if test="deviceSearch.groups != null">
+			AND EXISTS (SELECT 1
+						  FROM endpoint_groupset eg_g <include refid="WithNoLock"/>
+							INNER JOIN groupset_groupset_type ggt_g <include refid="WithNoLock"/> ON (ggt_g.groupset_id = eg_g.groupset_id)
+							INNER JOIN groupset_type gt_g <include refid="WithNoLock"/> ON (gt_g.groupset_type_id = ggt_g.groupset_type_id)
+						 WHERE eg_g.endpoint_id = ml.fldRepId
+						   and gt_g.groupset_type_id IN (4, 6, 7)
+						   AND eg_g.groupset_id IN
+						   <foreach item="g" index="index" collection="deviceSearch.groups" open="(" separator="," close=")">
+								#{g.id}
+						   </foreach>
+					   )
+		</if>
+		<if test="deviceSearch.tags != null">
+			AND EXISTS (SELECT 1
+						  FROM endpoint_groupset eg_t <include refid="WithNoLock"/>
+							INNER JOIN groupset_groupset_type ggt_t <include refid="WithNoLock"/> ON (ggt_t.groupset_id = eg_t.groupset_id)
+							INNER JOIN groupset_type gt_t <include refid="WithNoLock"/> ON (gt_t.groupset_type_id = ggt_t.groupset_type_id)
+						 WHERE eg_t.endpoint_id = ml.fldRepId
+						   and gt_t.groupset_type_id = 2
+						   AND eg_t.groupset_id IN
+						   <foreach item="t" index="index" collection="deviceSearch.tags" open="(" separator="," close=")">
+								#{t.id}
+						   </foreach>
+					   )
+		</if>
+
+	</sql>
+
+	<sql id="fetchMeterByIdWhereClause">
+
+		<where>
+			<if test="radio != null and radio.flexNetId != null">
+				AND ml.fldRepId = #{radio.flexNetId,jdbcType=INTEGER}
+			</if>
+			<if test="deviceId != null">
+				AND ml.fldMeterId = #{deviceId,jdbcType=VARCHAR}
+			</if>
+			AND ml.fldMeterType = 'W'
+		</where>
+
+	</sql>
+
+	<sql id="waterMerterModelWhereClause">
+		<if test="deviceSearch.deviceModels != null">
+			AND ml.fldDeviceType IN
+			<foreach item="deviceModel" index="index" collection="deviceSearch.deviceModels"
+				open="(" separator="," close=")">
+				#{deviceModel.id}
+			</foreach>
+		</if>
+	</sql>
+
+	<sql id="waterGasMeterStatusWhereClause">
+		<if test="deviceSearch.waterMeterSearch.waterGasMeterStatusEnumList != null">
+		      AND CASE
+					WHEN us.fldTopLevelState IN (0,1,2,3) THEN us.fldTopLevelState
+					ELSE -1
+      			      END IN
+				<foreach item="item" index="index" collection="deviceSearch.waterMeterSearch.waterGasMeterStatusEnumList"
+					open="(" separator="," close=")">
+					#{item.waterGasMeterStatusEnum.value}
+			</foreach>
+		</if>
+	</sql>
+
+	<sql id="deviceSearchWhereClause">
+
+       	<if test="deviceSearch.startDate != null or deviceSearch.endDate != null">
+       		<if test="_databaseId == 'Oracle'">
+       			AND ml.fldInstallDate
+					BETWEEN fn_ut(to_char(#{deviceSearch.startDate, jdbcType=TIMESTAMP},'YYYY-MM-DD:HH24:MI:SS'))
+						AND fn_ut(to_char(#{deviceSearch.endDate, jdbcType=TIMESTAMP},'YYYY-MM-DD:HH24:MI:SS'))
+       		</if>
+       		<if test="_databaseId == 'Microsoft SQL Server'">
+				AND ml.fldInstallDate
+				    BETWEEN COALESCE(dbo.fn_ut(#{deviceSearch.startDate, jdbcType=TIMESTAMP}), ml.fldInstallDate)
+				        AND COALESCE(dbo.fn_ut(#{deviceSearch.endDate, jdbcType=TIMESTAMP}), ml.fldInstallDate)
+			</if>
+		</if>
+
+		<if test="deviceSearch.processId != null">
+			AND EXISTS (SELECT 1
+			              FROM process_endpoint pe <include refid="WithNoLock"/>
+			             WHERE pe.endpoint_id = ml.fldRepId
+			               AND pe.process_id  = #{deviceSearch.processId}
+			           )
+		</if>
+
+		<if test="deviceSearch.waterMeterSearch != null">
+
+			<if test="deviceSearch.waterMeterSearch.alarmEnumList != null">
+				AND UPPER(a.alarm) IN
+				<foreach item="item" index="index" collection="deviceSearch.waterMeterSearch.alarmEnumList"
+					open="(" separator="," close=")">
+					#{item.alarm}
+				</foreach>
+			</if>
+
+		</if>
+	</sql>
+
+	<sql id="mapWhereClause">
+
+		<if test="bottomLeftLat != null and bottomLeftLon != null and topRightLat != null and topRightLon != null">
+			AND ml.fldLat  BETWEEN #{bottomLeftLat} AND #{topRightLat}
+			AND ml.fldLong BETWEEN #{bottomLeftLon} AND #{topRightLon}
+		</if>
+
+    	<if test="geocodeLatLongTruncs != null and geoCodeTrunc != null">
+    		AND
+			<foreach item="item" index="index" collection="geocodeLatLongTruncs"
+				open="(" separator=" or " close=")">
+
+					<if test="_databaseId == 'Oracle'">
+						(
+						     TRUNC(ml.fldLat,#{geoCodeTrunc, jdbcType=INTEGER}) = #{item.latitudeTrunc}
+						 AND TRUNC(ml.fldLong,#{geoCodeTrunc, jdbcType=INTEGER}) = #{item.longitudeTrunc}
+						 )
+					</if>
+					<if test="_databaseId == 'Microsoft SQL Server'">
+						(
+							ROUND(ml.fldLat,#{geoCodeTrunc, jdbcType=INTEGER},1) = #{item.latitudeTrunc}
+						AND	ROUND(ml.fldLong,#{geoCodeTrunc, jdbcType=INTEGER},1) = #{item.longitudeTrunc}
+						)
+					</if>
+
+			</foreach>
+    	</if>
+
+	</sql>
+
+	<sql id="WithNoLock">
+
+		<if test="_databaseId == 'Microsoft SQL Server'">
+
+			WITH (NOLOCK)
+
+		</if>
+
+	</sql>
+
+	<sql id="alarmsWater">
+
+		('FLDMETERREADFAIL', 'FLDMETERCOMMFAIL', 'FLDSWAPPEDMETER', 'FLDLEAKDETECTED', 'FLDBACKFLOW', 'FLDBROKENPIPE', 'FLDTAMPER')
+
+	</sql>
+
+	<sql id="encryptedStatusSelect">
+		,ml.fldEnableEncryption 			AS encrypted
+		,(select fldStatus from tblCryptoStatus <include refid="WithNoLock"/> where fldRepId = ml.fldRepId) AS encrypted_status
+	</sql>
+
+	<sql id="transmitSelect">
+		,ml.fldTransmitMode									AS transMode
+		<if test="_databaseId == 'Oracle'">
+			,TRUNC(COALESCE(ml.fldTransmitRate, 0) / 60, 0) AS transRate
+		</if>
+		<if test="_databaseId == 'Microsoft SQL Server'">
+			,ROUND(COALESCE(ml.fldTransmitRate, 0) / 60, 0, 1) AS transRate
+		</if>
+	</sql>
+
+	<sql id="fetchAllWaterMetersConditions">
+
+		FROM tblMeterList ml <include refid="WaterMeterMap.WithNoLock"/>
+	   INNER JOIN tblUniversalSetup us <include refid="WaterMeterMap.WithNoLock"/> ON (us.fldRepId = ml.fldRepId)
+	    LEFT OUTER JOIN (SELECT a.fldRepId,
+	                            MAX(a.fldtoi) AS fldtoi,
+						        CASE WHEN COUNT(a.fldRepId) > 1 THEN 'FLDMULTIPLE' ELSE max(a.alarm) END AS alarm
+						   FROM alarms a <include refid="WaterMeterMap.WithNoLock"/>
+						   WHERE a.alarm IN <include refid="WaterMeterMap.alarmsWater"/>
+						  GROUP BY a.fldRepId) a ON (a.fldRepId = ml.fldRepId)
+		WHERE ml.fldMeterType = 'W'
+		  	AND ml.fldCustomerId = #{tenant.key}
+		    AND ml.flddevicetype IS NOT NULL <!--“Installed” iff in tblUniversalSetup and fldDeviceType not null, no other modifiers per Jim McCrae-->
+
+			<include refid="WaterMeterMap.meterRepIdWhereClause"/>
+
+			<if test="deviceSearch != null">
+
+				<if test="deviceSearch.waterMeterSearch != null">
+
+					<include refid="WaterMeterMap.meterDeviceWhereClause"/>
+
+					<include refid="WaterMeterMap.waterGasMeterStatusWhereClause"/>
+				</if>
+
+				<include refid="WaterMeterMap.waterMeterGroupTagWhereClause"/>
+
+				<include refid="WaterMeterMap.deviceSearchWhereClause"/>
+
+				<include refid="WaterMeterMap.waterMerterModelWhereClause"/>
+
+			</if>
+
+			<include refid="WaterMeterMap.mapWhereClause"/>
+
+	</sql>
+
+	<sql id="fetchWaterMetersBoundsToMap">
+
+		SELECT COALESCE(MAX(ml.fldLat),0) AS topRightLat,
+	   		   COALESCE(MAX(ml.fldLong),0) AS topRightLon,
+       		   COALESCE(MIN(ml.fldLat),0) AS bottomLeftLat,
+       		   COALESCE(MIN(ml.fldLong),0) AS bottomLeftLon
+       	<include refid="WaterMeterMap.fetchAllWaterMetersConditions"/>
+
+	</sql>
+
+	<sql id="fetchCountWaterMeters">
+
+			SELECT COUNT(1)
+			 FROM (
+					SELECT ml.fldRepId
+
+					FROM tblMeterList ml <include refid="WaterMeterMap.WithNoLock"/>
+				         INNER JOIN tblUniversalSetup us <include refid="WaterMeterMap.WithNoLock"/> ON (us.fldRepId = ml.fldRepId)
+
+					<if test="deviceSearch != null">
+
+						<if test="deviceSearch.deviceModels != null">
+							INNER JOIN tblValidDeviceTypes vdt <include refid="WaterMeterMap.WithNoLock"/> ON (vdt.fldDeviceType = ml.fldDeviceType)
+						</if>
+
+						<if test="deviceSearch.waterMeterSearch != null
+						      and deviceSearch.waterMeterSearch.alarmEnumList != null">
+							LEFT OUTER JOIN (SELECT a.fldRepId,
+				                                    MAX(a.fldtoi) AS fldtoi,
+									                CASE WHEN COUNT(a.fldRepId) > 1 THEN 'FLDMULTIPLE' ELSE max(a.alarm) END AS alarm
+									           FROM alarms a <include refid="WaterMeterMap.WithNoLock"/>
+									           WHERE a.alarm IN <include refid="WaterMeterMap.alarmsWater"/>
+									          GROUP BY a.fldRepId) a ON (a.fldRepId = ml.fldRepId)
+						</if>
+					</if>
+
+					WHERE ml.fldMeterType = 'W'
+					  AND ml.flddevicetype IS NOT NULL <!--“Installed” iff in tblUniversalSetup and fldDeviceType not null, no other modifiers per Jim McCrae-->
+				      AND ml.fldCustomerId = #{tenant.key}
+
+						<include refid="WaterMeterMap.meterRepIdWhereClause"/>
+
+						<if test="deviceSearch != null">
+
+							<if test="deviceSearch.waterMeterSearch != null">
+
+			        			<include refid="WaterMeterMap.meterDeviceWhereClause" />
+
+			        			<include refid="WaterMeterMap.waterGasMeterStatusWhereClause"/>
+			        		</if>
+
+						<include refid="WaterMeterMap.deviceSearchWhereClause"/>
+
+						<include refid="WaterMeterMap.waterMeterGroupTagWhereClause"/>
+
+						<include refid="WaterMeterMap.waterMerterModelWhereClause"/>
+					</if>
+
+					<include refid="WaterMeterMap.mapWhereClause"/>
+
+			  ) LST
+
+	</sql>
+
+	<sql id="fetchQuarantine">
+
+		<include refid="quarantineQuery"/> AS quarantine
+
+	</sql>
+
+	<sql id="quarantineQuery">
+
+		COALESCE((SELECT CASE read_detail_type_id WHEN - 3 THEN 1 ELSE 0 END
+					    			 FROM read_detail rd
+						   			WHERE rd.endpoint_id = ml.fldRepId
+							 		  AND rd.sample_point =
+											(SELECT MAX(rds.sample_point)
+							   		   		   FROM read_detail rds
+							  		  		  WHERE rds.endpoint_id = rd.endpoint_id)), 0)
+
+	</sql>
+
+	<!--########################-->
+	<!--####  SQL COMMANDS  ####-->
+	<!--########################-->
+
+
+	<select id="fetchAllWaterMeters" parameterType="InquiryDeviceRequest" resultMap="WaterResultMap.WaterMeterResult">
+
+		SELECT   flexnet_id
+				,device_id
+				,premise_id
+				,topLevelState
+				,device_type_enum
+				,meter_type_enum
+				,device_type_id
+				,(SELECT vdt.flddescription FROM tblvaliddevicetypes vdt <include refid="WithNoLock"/> WHERE vdt.flddevicetype = device_type_id ) AS model
+				,meter_type_id
+				,lifecycle_state
+				,address
+				,city
+				,address_state
+				,zip
+				,country
+				<if test="_databaseId == 'Oracle'">
+					,fn_dt(install_date)	AS install_date
+					,trunc(COALESCE(latitude, 0), 4) as latitude
+					,trunc(COALESCE(longitude, 0), 4) as longitude
+					,fn_dt(alarm_time) AS alarm_time
+					,fn_dt(last_heard) AS last_heard
+				</if>
+
+				<if test="_databaseId == 'Microsoft SQL Server'">
+			        ,dbo.fn_dt(install_date)		AS install_date
+			        ,ROUND(COALESCE(latitude, 0), 4, 1) as latitude
+					,ROUND(COALESCE(longitude, 0), 4, 1) as longitude
+					,dbo.fn_dt(alarm_time) as alarm_time
+					,dbo.fn_dt(last_heard) AS last_heard
+			    </if>
+				,firmware_flexnet
+				,firmware_meter
+				,firmware_bootloader
+				,firmware_zigbee
+				,(SELECT tzn.tz_region
+				  FROM tz_zone tzn <include refid="WithNoLock"/>
+				  WHERE time_zone = tzn.tzr_id) AS time_zone
+				,customer_id
+				,UPPER(alarm) AS alarm
+		        ,COALESCE((SELECT CASE read_detail_type_id WHEN - 3 THEN 1 ELSE 0 END
+			    			 FROM read_detail rd
+				   			WHERE rd.endpoint_id = flexnet_id
+					 		  AND rd.sample_point =
+									(SELECT MAX(rds.sample_point)
+					   		   		   FROM read_detail rds
+					  		  		  WHERE rds.endpoint_id = rd.endpoint_id)), 0) as quarantine
+				,RowNumber
+			FROM (
+					SELECT   flexnet_id
+					,device_id
+					,premise_id
+					,status AS topLevelState
+					,device_type AS device_type_enum
+					,meter_type_enum
+					,device_type_id
+					,device_type_desc
+					,meter_type_id
+					,lifecycle_state
+					,address
+					,city
+					,address_state
+					,zip
+					,country
+					,install_date
+					,latitude
+					,longitude
+					,firmware_flexnet
+					,firmware_meter
+					,firmware_bootloader
+					,firmware_zigbee
+					,time_zone
+					,customer_id
+					,last_heard
+					,alarm
+					,alarm_time
+					,quarantine
+					,ROW_NUMBER() OVER(ORDER BY ${sortExpression}) AS RowNumber
+			  FROM (
+
+					SELECT   ml.fldRepId 						AS flexnet_id
+							,ml.fldMeterId 						AS device_id
+							,ml.fldPOD 							AS premise_id
+							,ml.fldDeviceType 					AS meter_type_enum
+							,ml.fldDeviceType 					AS device_type_id
+
+							<choose>
+								<when test="sortExpression == 'UPPER(device_type_desc) ASC' or sortExpression == 'UPPER(device_type_desc)' or sortExpression == 'UPPER(device_type_desc) DESC'">
+									,(SELECT vdt.fldDescription FROM tblValidDeviceTypes vdt <include refid="WithNoLock"/> WHERE vdt.fldDeviceType = ml.fldDeviceType) AS device_type_desc
+								</when>
+								<otherwise>
+									,NULL 				AS device_type_desc
+								</otherwise>
+							</choose>
+							,5                                  AS device_type
+							,ml.fldInstallDate 					AS install_date
+							,ml.fldAddress 						AS address
+							,ml.fldCity 						AS city
+							,ml.fldZip 							AS zip
+							,ml.fldState 						AS address_state
+							,ml.fldCountry 						AS country
+							,ml.fldLat							AS latitude
+							,ml.fldLong							AS longitude
+							,ml.fldMeterType 					AS meter_type_id
+							,ml.fldMeterLifecycleStateCode		AS lifecycle_state
+							,ml.fldfirmwareflexnet 				AS firmware_flexnet
+							,ml.fldfirmwaremetrology			AS firmware_meter
+							,ml.esi_bootflasher_firmware		AS firmware_bootloader
+							,ml.esi_application_firmware		AS firmware_zigbee
+							,ml.fldUSTZ 						AS time_zone
+							,ml.fldCustomerId 					AS customer_id
+							,CASE
+								WHEN us.fldTopLevelState IN (0,1,2,3) THEN us.fldTopLevelState
+								ELSE -1
+							 END								AS status
+							,(SELECT MAX(msg.fldToi)
+	  						    			  FROM tblMsgsOnAir_1 msg
+        					                     WHERE ml.fldRepId = msg.fldRepId) AS last_heard
+							,a.alarm							AS alarm
+							,a.fldtoi							AS alarm_time
+
+							<choose>
+			 					<when test="sortExpression == 'quarantine ASC' or sortExpression == 'quarantine' or sortExpression == 'quarantine DESC'">
+									,<include refid="fetchQuarantine"/>
+								</when>
+								<otherwise>
+									,NULL AS quarantine
+								</otherwise>
+							</choose>
+
+
+					<include refid="fetchAllWaterMetersConditions"/>
+
+			) LIST
+		) LIST_PAGES
+
+		<choose>
+	      <when test="pageSize != null and pageSize > 0">
+	         WHERE RowNumber BETWEEN #{startRow} + 1 AND (#{startRow} + #{pageSize})
+	      </when>
+	      <otherwise>
+	        WHERE RowNumber BETWEEN 1 AND RowNumber
+	        ORDER BY RowNumber
+	      </otherwise>
+      </choose>
+
+	</select>
+
+	<select id="waterMetersPaginationTotalRows" parameterType="InquiryDeviceRequest" resultType="int">
+
+		<include refid="fetchCountWaterMeters"/>
+
+	</select>
+
+	<select id="fetchWaterMeterById" parameterType="Device" resultMap="WaterResultMap.WaterMeterResult">
+
+		<include refid="meterByIdSelectClause"/>
+		,<include refid="fetchQuarantine"/>
+		<include refid="meterFromClause"/>
+		<include refid="fetchMeterByIdWhereClause"/>
+
+	</select>
+
+	<select id="fetchCommunication"  parameterType="DeviceRequest" resultMap="WaterMeterStatusResult">
+		<!-- fldTopLevelState
+		     -1 - Unknown
+		      0 - Idle
+		      1 - Walk by Drive
+		  	  2 - Fixed Base LAT
+		  	  3 - Fixed Base
+		-->
+		SELECT CASE
+		           WHEN us.fldTopLevelState IN (0,1,2,3) THEN us.fldTopLevelState
+           		   ELSE -1
+       		   END AS topLevelStateCode,
+       		   COUNT(1) AS amount
+		  FROM tblmeterlist ml <include refid="WithNoLock"/>
+			   INNER JOIN tblUniversalSetup us <include refid="WithNoLock"/> ON (us.fldRepId = ml.fldRepId)
+		 WHERE CASE WHEN ml.fldMeterType = 'W' THEN 2 /* WATER */
+				    WHEN ml.fldMeterType = 'G' THEN 3 /* GAS */
+				    WHEN ml.fldMeterType IN ('E','A') THEN 1 /* ELECTRIC */
+				    ELSE 4 /* Light */
+				END = #{serviceTypeEnumValue, jdbcType=INTEGER}
+		   AND ml.fldCustomerId = #{tenant.key}
+		   AND ml.fldDeviceType IS NOT NULL
+		 GROUP BY CASE
+			           WHEN us.fldTopLevelState IN (0,1,2,3) THEN us.fldTopLevelState
+	           		   ELSE -1
+       			  END
+	</select>
+
+	<!--############################-->
+	<!--####  STORED PROCEDURES ####-->
+	<!--############################-->
+
+
+	<select id="fetchLeakReport" statementType="CALLABLE" parameterType="map" resultMap="WaterLeakResult">
+
+		{call get_daily_leaks ( #{p_endpoint_id, jdbcType=INTEGER}
+		                       ,#{p_address, jdbcType=INTEGER}
+							   ,#{p_customer_id, jdbcType=VARCHAR}
+							   ,#{p_error_message, mode=OUT, jdbcType=VARCHAR}
+							   ,#{p_result, mode=OUT, jdbcType=INTEGER}
+							   <if test="_databaseId == 'Oracle'">
+									,#{p_leak_report, mode=OUT, jdbcType=CURSOR, javaType=java.sql.ResultSet, resultMap=WaterLeakResult}
+								</if>
+							   )}
+
+	</select>
+
+</mapper>

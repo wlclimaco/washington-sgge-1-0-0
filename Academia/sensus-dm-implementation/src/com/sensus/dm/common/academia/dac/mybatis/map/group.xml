@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GroupMap">
+
+	<resultMap id="GroupResult" type="Group">
+		<result property="id" 				  		column="groupset_id" />
+		<result property="name" 			  		column="name" />
+		<result property="description" 		  		column="description" />
+		<result property="devicesCount" 	  		column="endpoint_count" />
+		<result property="createDate" 		  		column="modified_date" />
+		<result property="groupTypeEnumValue" 		column="groupset_type_id" jdbcType="INTEGER" />
+		<result property="deviceTypeValue" 			column="device_type_id" jdbcType="INTEGER" />
+		<result property="hanDeviceTypeValue" 		column="han_device_type_id" jdbcType="INTEGER" />
+	</resultMap>
+
+	<resultMap id="DeviceResult" type="Device">
+		<result property="radio.flexNetId" 			column="fldRepId" />
+		<result property="deviceTypeValue"      	column="fldDeviceType" />
+		<result property="deviceId" 				column="device_id" />
+		<result property="radio.location.latitude"  column="fldLat" />
+		<result property="radio.location.longitude" column="fldLong" />
+		<result property="radio.location.address" 	column="address" />
+		<result property="radio.customerId" 		column="customer_id" />
+	</resultMap>
+
+	<sql id="WithNoLock">
+		<if test="_databaseId == 'Microsoft SQL Server'">
+			WITH (NOLOCK)
+		</if>
+	</sql>
+
+	<sql id="addressSelect">
+		(SELECT ml.fldAddress FROM tblMeterList ml <include refid="WithNoLock"/> WHERE ml.fldRepId = hd.fldRepId) AS address
+	</sql>
+
+	<sql id="deviceTypeTblMeterSelectClause">
+		CASE WHEN ml.fldMeterType IN ('E','A') THEN 1 /* ELECTRIC */
+		     WHEN ml.fldMeterType = 'W' THEN 5 /* WATER */
+		     WHEN ml.fldMeterType = 'G' THEN 6 /* GAS */
+		     ELSE 3 /* Light */
+		END AS fldDeviceType
+	</sql>
+
+
+	<sql id="deviceTypeTblHanDeviceSelectClause">
+		CASE WHEN hdt.fldDeviceClassId IN (0,2) THEN 2 /* HAN DEVICE */
+			 WHEN hdt.fldDeviceClassId = 1 THEN 4 /* LCM */
+			 ELSE 3 /* LIGHT */
+		END AS fldDeviceType
+	</sql>
+
+	<sql id="fetchAllGroupsWhereClause">
+
+			<!-- Filter by Group Type -->
+			AND gt.groupset_type_id IN (4, 6, 7)
+			AND g.customer_id = #{tenant.key, jdbcType=VARCHAR}
+
+			<if test="paginationAllSelected != null">
+
+                <if test="paginationAllSelected == true">
+                	AND g.groupset_id NOT IN
+					<foreach item="item" index="index" collection="selectionPaginationIds"
+						open="(" separator="," close=")">
+						#{item}
+					</foreach>
+                </if>
+
+                <if test="paginationAllSelected == false">
+                	AND g.groupset_id IN
+					<foreach item="item" index="index" collection="selectionPaginationIds"
+						open="(" separator="," close=")">
+						#{item}
+					</foreach>
+                </if>
+
+            </if>
+
+            <if test="groups != null and firstGroup.id != null">
+              	AND g.groupset_id IN
+				<foreach item="g" index="index" collection="groups" open="(" separator="," close=")">
+					#{g.id}
+				</foreach>
+            </if>
+
+            <if test="firstGroup != null and firstGroup.name != null">
+            	<if test="_databaseId == 'Oracle'">
+               		AND UPPER(g.name) LIKE UPPER('%' || #{firstGroup.name}|| '%')
+               	</if>
+               	<if test="_databaseId == 'Microsoft SQL Server'">
+               		AND UPPER(g.name) LIKE UPPER('%' + #{firstGroup.name} + '%')
+               	</if>
+            </if>
+
+            <if test="deviceSearch != null">
+
+                <if test="deviceSearch.searchText != null">
+                	<if test="_databaseId == 'Oracle'">
+                		AND UPPER(g.name) LIKE UPPER('%' || #{deviceSearch.searchText} || '%')
+                	</if>
+                	<if test="_databaseId == 'Microsoft SQL Server'">
+                		AND UPPER(g.name) LIKE UPPER('%' + #{deviceSearch.searchText} + '%')
+                	</if>
+                </if>
+
+                <if test="deviceSearch.groupTypes != null">
+	                AND ggt.groupset_type_id IN
+					<foreach item="groupTypeEnum" index="index" collection="deviceSearch.groupTypes"
+						open="(" separator="," close=")">
+						#{groupTypeEnum.value, jdbcType=INTEGER}
+					</foreach>
+                </if>
+
+                <if test="deviceSearch.containDevices != null and deviceSearch.containDevices == true">
+	                	AND EXISTS ( SELECT 1
+			                           FROM endpoint_groupset eg_devices <include refid="WithNoLock"/>
+			                           WHERE eg_devices.groupset_id = g.groupset_id)
+		        </if>
+
+				<if test="serviceTypeEnum.serviceType == 1">
+					<if test="deviceSearch.deviceTypes != null or
+							  deviceSearch.hanDeviceSearch != null and deviceSearch.hanDeviceSearch.hanDeviceTypeEnumList != null">
+
+					 	AND EXISTS (SELECT 1
+									  FROM groupset_groupset_type ggt_dev_type <include refid="WithNoLock"/>
+									 WHERE ggt_dev_type.groupset_id = g.groupset_id
+		                             AND ggt_dev_type.groupset_type_id in (
+		                             <!-- Device Type Electric Meter and LCM -->
+		                             <if test="deviceSearch.deviceTypes != null">
+			                             <foreach item="deviceTypeEnum" index="index" collection="deviceSearch.deviceTypes"
+											open="" separator="," close="">
+											<choose>
+												<when test="deviceTypeEnum.value == 1"> 17 </when>
+												<when test="deviceTypeEnum.value == 2"> 18 </when>
+												<when test="deviceTypeEnum.value == 4"> 19 </when>
+							 				</choose>
+										</foreach>
+									</if>
+									<!-- Device Type Han - SubType Thermostat and IHD -->
+									<if test="deviceSearch.hanDeviceSearch != null and deviceSearch.hanDeviceSearch.hanDeviceTypeEnumList != null">
+										 <if test="deviceSearch.deviceTypes != null"> , </if>
+			                             <foreach item="hanDeviceTypeEnum" index="index" collection="deviceSearch.hanDeviceSearch.hanDeviceTypeEnumList"
+											open="" separator="," close="">
+											<choose>
+												<when test="hanDeviceTypeEnum.value == 0"> 20 </when>
+												<when test="hanDeviceTypeEnum.value == 2"> 21 </when>
+							 				</choose>
+										</foreach>
+									</if>
+									))
+					</if>
+				</if>
+
+		    </if>
+
+	</sql>
+
+	<select id="paginationTotalRows" parameterType="map" resultType="integer">
+
+			SELECT count(g.groupset_id) AS total
+			  FROM groupset g <include refid="WithNoLock"/>
+			 INNER JOIN groupset_groupset_type ggt <include refid="WithNoLock"/> ON (ggt.groupset_id = g.groupset_id)
+			 INNER JOIN groupset_type gt <include refid="WithNoLock"/> ON (gt.groupset_type_id = ggt.groupset_type_id)
+			 <!-- Filter by Group -->
+			 WHERE EXISTS ( SELECT 1
+		                      FROM groupset_groupset_type ggt1 <include refid="WithNoLock"/>
+		                     WHERE ggt1.groupset_id = g.groupset_id
+		                      AND ggt1.groupset_type_id = 1)
+			<!-- Filter by Service Type -->
+		       AND EXISTS ( SELECT 1
+		                      FROM groupset_groupset_type ggt1 <include refid="WithNoLock"/>
+		                     WHERE ggt1.groupset_id = g.groupset_id
+		                      AND ggt1.groupset_type_id = #{serviceTypeEnum.serviceGroupType})
+	         <include refid="fetchAllGroupsWhereClause"/>
+
+	</select>
+
+	<select id="countGroupByName" statementType="CALLABLE" parameterType="map" resultType="int">
+			{call get_count_group_name ( #{group_name, jdbcType=VARCHAR}
+							 			,#{group_type, jdbcType=INTEGER}
+										,#{service_type, jdbcType=INTEGER}
+										,#{customer_id, jdbcType=VARCHAR}
+										<if test="_databaseId == 'Oracle'">
+											,#{p_return, mode=OUT, jdbcType=INTEGER}
+										</if>
+										)}
+	</select>
+
+	<select id="fetchAllGroups" parameterType="InquiryGroupRequest" resultMap="GroupResult">
+	   SELECT groupset_id
+	          ,name
+	          ,description
+	          ,modified_date
+	          ,groupset_type_id
+	          ,endpoint_count
+	          ,device_type_id
+	          ,han_device_type_id
+	          ,RowNumber
+	      FROM (
+
+		    SELECT groupset_id
+		          ,name
+		          ,description
+
+		          <if test="_databaseId == 'Oracle'">
+		          	,fn_date(fn_dt(modified_date)) AS modified_date
+		          </if>
+		          <if test="_databaseId == 'Microsoft SQL Server'">
+		          	,dbo.fn_dt(modified_date) AS modified_date
+		          </if>
+
+		          ,groupset_type_id
+		          ,endpoint_count
+		          ,device_type_id
+		          ,han_device_type_id
+		          ,ROW_NUMBER() OVER (ORDER BY <if test=" sortExpression != null and !sortExpression.isEmpty()">${sortExpression},</if>groupset_id) AS RowNumber
+		      FROM (  SELECT g.groupset_id
+		                    ,g.name
+		                    ,g.description
+		                    ,g.modified_date
+		                    ,ggt.groupset_type_id
+		                    ,CASE WHEN gt.name ='All Others' THEN 'Others'
+		     				 ELSE gt.name
+		     				END AS groupset_type
+		                    ,(SELECT COUNT(1)
+		                      FROM endpoint_groupset epg <include refid="WithNoLock"/>
+		                      WHERE epg.groupset_id = g.groupset_id) AS endpoint_count
+		                    <!-- 1 - Electric Meter, 2 - Han Device, 4 - LCM -->
+		                    ,(SELECT CASE WHEN ggt1.groupset_type_id = 17 THEN 1
+										  WHEN ggt1.groupset_type_id IN (20,21) THEN 2
+										  WHEN ggt1.groupset_type_id = 19 THEN 4
+									 ELSE NULL END
+							  FROM groupset_groupset_type ggt1 <include refid="WithNoLock"/>
+							  WHERE ggt1.groupset_id = ggt.groupset_id
+							  		AND ggt1.groupset_type_id IN (17, 18, 19, 20, 21)) AS device_type_id
+							<!-- 0 - Thermostat, 2 - IHD -->
+		                    ,(SELECT CASE WHEN ggt1.groupset_type_id = 20 THEN 0
+										  WHEN ggt1.groupset_type_id = 21 THEN 2
+									 ELSE NULL END
+							  FROM groupset_groupset_type ggt1 <include refid="WithNoLock"/>
+							  WHERE ggt1.groupset_id = ggt.groupset_id
+							  		AND ggt1.groupset_type_id IN (20,21)) AS han_device_type_id
+							,(SELECT CASE WHEN ggt1.groupset_type_id = 17 THEN 'Meter'
+										  WHEN ggt1.groupset_type_id = 18 THEN 'HAN Device'
+										  WHEN ggt1.groupset_type_id = 19 THEN 'LCM'
+										  WHEN ggt1.groupset_type_id = 20 THEN 'Thermostat'
+										  WHEN ggt1.groupset_type_id = 21 THEN 'IHD'
+									 ELSE NULL END
+							  FROM groupset_groupset_type ggt1 <include refid="WithNoLock"/>
+							  WHERE ggt1.groupset_id = ggt.groupset_id
+							  		AND ggt1.groupset_type_id IN(17, 18, 19, 20, 21)) AS device_type
+		                FROM groupset g <include refid="WithNoLock"/>
+		               INNER JOIN groupset_groupset_type ggt <include refid="WithNoLock"/> ON (ggt.groupset_id = g.groupset_id)
+		               INNER JOIN groupset_type gt <include refid="WithNoLock"/> ON (gt.groupset_type_id = ggt.groupset_type_id)
+		               <!-- Filter by Group -->
+					   WHERE EXISTS ( SELECT 1
+			                          FROM groupset_groupset_type ggt1 <include refid="WithNoLock"/>
+			                          WHERE ggt1.groupset_id = g.groupset_id
+			                             AND ggt1.groupset_type_id = 1)
+						<!-- Filter by Service Type -->
+				 		AND EXISTS ( SELECT 1
+	                            FROM groupset_groupset_type ggt1 <include refid="WithNoLock"/>
+	                           WHERE ggt1.groupset_id = g.groupset_id
+	                             AND ggt1.groupset_type_id = #{serviceTypeEnum.serviceGroupType, jdbcType=INTEGER})
+
+		                 <include refid="fetchAllGroupsWhereClause"/>
+
+		          ) groups
+
+	          ) groups_rownumber
+
+		<if test="pageSize != null and pageSize > 0">
+			WHERE RowNumber BETWEEN #{startRow} + 1 AND (#{startRow} + #{pageSize})
+		</if>
+	</select>
+
+
+	<select id="fetchGroupsByDeviceId" parameterType="Device" resultMap="GroupResult">
+
+	     SELECT g.groupset_id
+	           ,g.name
+	           ,g.description
+	           ,(SELECT COUNT(1)
+	               FROM endpoint_groupset epg <include refid="WithNoLock"/>
+	              WHERE epg.groupset_id =  g.groupset_id) AS endpoint_count
+	      FROM groupset g <include refid="WithNoLock"/>
+	     INNER JOIN groupset_groupset_type ggt <include refid="WithNoLock"/> ON (ggt.groupset_id = g.groupset_id)
+	     INNER JOIN endpoint_groupset epg <include refid="WithNoLock"/> ON (epg.groupset_id = g.groupset_id)
+	     WHERE epg.endpoint_id = #{firstDevice.radio.flexNetId}
+	       AND ggt.groupset_type_id = 1
+
+	</select>
+
+	<select id="fetchDevicesByGroup" parameterType="int" resultMap="DeviceResult">
+
+		SELECT endpoint_id AS fldRepId
+		       ,hd.fldcustomerid AS customer_id
+			   ,hd.fldClientEndPointId AS device_id
+		       ,<include refid="deviceTypeTblHanDeviceSelectClause"/>
+		       ,<include refid="addressSelect"/>
+		FROM endpoint_groupset eg <include refid="WithNoLock"/>
+	   INNER JOIN tblHanDevice hd <include refid="WithNoLock"/> ON (hd.fldRepId = eg.endpoint_id)
+	   INNER JOIN tblHanDeviceType hdt <include refid="WithNoLock"/> ON (hdt.fldHanDeviceTypeId = hd.fldHanDeviceTypeId)
+	   WHERE groupset_id = #{id}
+
+		UNION ALL
+
+		SELECT endpoint_id AS fldRepId
+		       ,ml.fldCustomerId AS customer_id
+			   ,ml.fldMeterId AS device_id
+		       ,<include refid="deviceTypeTblMeterSelectClause"/>
+		       ,ml.fldAddress as address
+		FROM endpoint_groupset eg <include refid="WithNoLock"/>
+	   INNER JOIN tblMeterList ml <include refid="WithNoLock"/> ON (ml.fldRepId = eg.endpoint_id)
+	   WHERE groupset_id = #{id}
+		 AND ml.fldDeviceType != 81
+
+	</select>
+
+	<select id="fetchDevicesByGroups" parameterType="GroupRequest" resultMap="DeviceResult">
+
+		SELECT endpoint_id AS fldRepId
+		FROM endpoint_groupset <include refid="WithNoLock"/>
+
+		<if test="groups != null">
+			WHERE groupset_id IN
+				<foreach item="g" index="index" collection="groups"
+					open="(" separator="," close=")">
+					#{g.id}
+				</foreach>
+		</if>
+
+		GROUP BY endpoint_id
+
+	</select>
+
+	<select id="insertGroup" statementType="CALLABLE" parameterType="map" resultType="int">
+
+			{ call ins_group (#{group_type, jdbcType=INTEGER}
+							 ,#{subgroup_type, jdbcType=INTEGER}
+		  		  			 ,#{group_name, jdbcType=VARCHAR}
+		  		  			 ,#{group_desc, jdbcType=VARCHAR}
+		  		  			 ,#{create_user, jdbcType=VARCHAR}
+		  		  			 ,#{service_type, jdbcType=INTEGER}
+		  		  			 ,#{customer_id, jdbcType=VARCHAR}
+		  		  			 <choose>
+								<!-- Electric Group -->
+		  		  			 	<when test="insert_type == 'group' and service_type == 13">
+			  		  			 	<choose>
+			  		  			 		<!-- Electric Meter -->
+							            <when test="device_type == 1"> ,17 </when>
+							            <!-- Thermostat -->
+							            <when test="device_type == 2 and han_device_type == 0"> ,20 </when>
+							            <!-- IHD -->
+							            <when test="device_type == 2 and han_device_type == 2"> ,21 </when>
+							            <!-- LCM -->
+							            <otherwise> ,19 </otherwise>
+						            </choose>
+						        </when>
+				            	<otherwise>,NULL </otherwise>
+				            </choose>
+				            <if test="_databaseId == 'Oracle'">
+		  		  				,#{p_return, mode=OUT, jdbcType=INTEGER}
+							</if>
+							)}
+
+ 	</select>
+
+ 	<select id="insertDeviceToGroup" statementType="CALLABLE"  parameterType="map" resultType="int">
+
+		{call ins_endpoint_group (#{groupset_id, jdbcType=INTEGER}
+								 ,#{flexnet_id, jdbcType=INTEGER}
+								 ,#{create_user, jdbcType=VARCHAR}
+								 <if test="_databaseId == 'Oracle'">
+									,#{p_return, mode=OUT, jdbcType=INTEGER}
+								 </if>
+								 )}
+
+	</select>
+
+	<!-- Update Group -->
+	<select id="updateGroup" statementType="CALLABLE" parameterType="map" resultType="int">
+
+		{call upd_group (#{group_id, jdbcType=INTEGER}
+					    ,#{subgroup_type, jdbcType=INTEGER}
+		  				,#{group_name, jdbcType=VARCHAR}
+		  				,#{old_name, jdbcType=VARCHAR}
+		  				,#{group_desc, jdbcType=VARCHAR}
+		  				,#{modify_user, jdbcType=VARCHAR}
+		  				<if test="_databaseId == 'Oracle'">
+		  					,#{p_return, mode=OUT, jdbcType=INTEGER}
+						</if>
+						)}
+
+	</select>
+
+	<select id="deleteGroup" statementType="CALLABLE" parameterType="map" resultType="int">
+
+		{call del_group (#{groupset_id, jdbcType=INTEGER}
+						<if test="_databaseId == 'Oracle'">
+							,#{p_return, mode=OUT, jdbcType=INTEGER}
+						</if>
+						)}
+
+	</select>
+
+	<select id="deleteDeviceFromGroup" statementType="CALLABLE" parameterType="map" resultType="int">
+
+			{call del_endpoint_group (#{groupset_id, jdbcType=INTEGER}
+					  		  		 ,#{flexnet_id, jdbcType=INTEGER}
+					  		  		 <if test="_databaseId == 'Oracle'">
+										,#{p_return, mode=OUT, jdbcType=INTEGER}
+									 </if>
+									 )}
+
+	</select>
+
+</mapper>

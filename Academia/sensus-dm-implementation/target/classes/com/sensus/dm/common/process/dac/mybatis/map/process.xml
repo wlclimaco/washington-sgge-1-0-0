@@ -1,0 +1,1663 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProcessMap">
+
+	<!--###############################-->
+	<!--########### RESULTS ###########-->
+	<!--###############################-->
+
+	<resultMap id="ProcessResultDefault" type="DMProcess">
+		<result property="id" column="process_id"/>
+		<result property="description" column="description"/>
+		<result property="processStatusEnumValue" column="status"/>
+		<result property="action.id" column="action_instance_id"/>
+		<result property="action.actionType.actionTypeEnumValue" column="action_type_id"/>
+		<result property="processType.id" column="process_type_id"/>
+		<result property="processType.description" column="process_type_name"/>
+		<result property="processType.processCategory.id" column="process_category_id"/>
+		<result property="processType.processCategory.name" column="process_category_name"/>
+		<result property="createDate" column="modified_date"/>
+		<result property="modifyUser" column="modified_user"/>
+		<result property="startTime" column="start_time"/>
+		<result property="endTime" column="end_time"/>
+		<result property="createUser" column="modified_user"/>
+		<result property="totalSmartpoints" column="items_count" />
+		<result property="failedSmartpoints" column="failed_count" />
+	</resultMap>
+
+	<resultMap id="ScheduledProcessResult" type="DMProcess">
+		<result property="id" column="process_id"/>
+		<result property="description" column="description"/>
+		<result property="processStatusEnumValue" column="status"/>
+		<result property="action.actionType.actionTypeEnumValue" column="action_type_id"/>
+		<result property="createDate" column="modified_date"/>
+		<result property="startTime" column="start_time"/>
+		<result property="endTime" column="end_time"/>
+		<result property="createUser" column="modified_user"/>
+		<result property="totalSmartpoints" column="items_count" />
+		<result property="failedSmartpoints" column="failed_count" />
+		<result property="propertyId" column="property_id" />
+		<result property="propertyValue" column="property_value" />
+	</resultMap>
+
+	<resultMap id="ProcessWithPropertyResult" type="DMProcess" extends="ProcessResultDefault">
+		<result property="propertyDevice" column="property_device" />
+		<result property="propertyId" column="property_id" />
+		<result property="propertyValue" column="property_value" />
+		<result property="propertyFilePath" column="property_file_path" />
+		<result property="propertyMeterId" column="property_meter_id" />
+		<result property="rniEventId" column="rni_event_id" />
+		<result property="propertyDeviceType" column="property_device_type" />
+		<result property="propertyHanDeviceType" column="property_han_device_type" />
+		<result property="propertyLink" column="property_link" />
+	</resultMap>
+
+	<resultMap id="ProcessIdWithPropertyResult" type="DMProcess" extends="ProcessWithPropertyResult">
+		<collection property="properties" column="process_id" select="ProcessMap.fetchProcessProperties"/>
+	</resultMap>
+
+	<resultMap id="ProcessPropertyResult" type="Property">
+		<result property="propertyName" column="property_name"/>
+		<result property="propertyValue" column="value"/>
+	</resultMap>
+
+	<resultMap id="ProcessItemResult" type="ProcessItem">
+		<result property="rowNum" column="row_num"/>
+		<result property="id" column="process_item_id"/>
+		<result property="processItemStatusEnumValue" column="status"/>
+		<result property="participation" column="participation" />
+		<result property="message" column="message" />
+		<result property="modifyUser" column="modified_user" />
+		<result property="modifyDate" column="modified_date" />
+		<association property="device" resultMap="DeviceDiscriminatorResult" />
+		<collection property="properties" column="process_item_id" select="ProcessMap.fetchProcessItemProperty" />
+	</resultMap>
+
+	<resultMap id="DeviceDiscriminatorResult" type="Device">
+		<discriminator javaType="java.lang.Integer" column="device_type_id">
+			<case value="1" resultMap="ElectricMeterResult"/>
+			<case value="2" resultMap="HanDeviceResult"/>
+			<case value="4" resultMap="LcmDeviceResult"/>
+			<case value="5" resultMap="WaterMeterResult"/>
+			<case value="6" resultMap="GasMeterResult"/>
+			<case value="99" resultMap="DeviceResult"/>
+		</discriminator>
+	</resultMap>
+
+	<resultMap id="LocationResult" type="Device">
+		<result property="radio.location.address" 	jdbcType="VARCHAR" 		column="address" />
+	</resultMap>
+
+	<resultMap id="RadioResult" type="Device" extends="LocationResult">
+		<result property="radio.flexNetId" 			jdbcType="INTEGER"		column="flexnet_id" />
+		<result property="radio.customerId" 		jdbcType="VARCHAR"		column="customerId" />
+	</resultMap>
+
+	<resultMap id="DeviceResult" type="Device" extends="RadioResult">
+		<result property="deviceId" 				jdbcType="VARCHAR" 		column="device_id" />
+		<result property="deviceTypeValue" 		jdbcType="INTEGER" 		column="device_type_id" />
+	</resultMap>
+
+	<resultMap id="ElectricMeterResult" type="ElectricMeter" extends="DeviceResult">
+		<result property="remoteConnectStatusEnumValue" jdbcType="INTEGER" column="connection_status" />
+		<result property="configuration.premiseId" column="premise_id" />
+		<result property="electricMeterTypeEnumValue" column="meter_type_enum" />
+	</resultMap>
+
+	<resultMap id="HanDeviceResult" type="HanDevice" extends="DeviceResult">
+		<result property="electricMeterFlexNetId" column="base_rep_id" />
+		<result property="macAddress" column="network_address"/>
+		<result property="hanDeviceTypeEnumValue" column="meter_type_enum" />
+	</resultMap>
+
+	<resultMap id="LcmDeviceResult" type="LCM" extends="DeviceResult">
+		<result property="macAddress" column="network_address"/>
+		<result property="lcmTypeEnumValue" column="meter_type_enum" />
+	</resultMap>
+
+	<resultMap id="WaterMeterResult" type="WaterMeter" extends="DeviceResult">
+		<result property="configuration.premiseId" column="premise_id" />
+		<result property="waterMeterTypeEnumValue" column="meter_type_enum" />
+	</resultMap>
+
+	<resultMap id="GasMeterResult" type="GasMeter" extends="DeviceResult">
+		<result property="configuration.premiseId" column="premise_id" />
+		<result property="gasMeterTypeEnumValue" column="meter_type_enum" />
+	</resultMap>
+
+	<resultMap id="countMonitoredProcessResult" type="HashMap">
+		<result property="count_monitored" column="count_monitored" javaType="java.lang.Integer" />
+		<result property="count_processing" column="count_processing" javaType="java.lang.Integer"/>
+	</resultMap>
+
+	<!--###############################-->
+	<!--####### INCLUDE COLUMNS #######-->
+	<!--###############################-->
+
+	<sql id="WithNoLock">
+		<if test="_databaseId == 'Microsoft SQL Server'">
+			WITH (NOLOCK)
+		</if>
+	</sql>
+
+	<sql id="concatenate">
+		<if test="_databaseId == 'Oracle'">
+			||
+		</if>
+		<if test="_databaseId == 'Microsoft SQL Server'">
+			+
+		</if>
+	</sql>
+
+	<sql id="compareTenantKey">
+		AND p.customer_id = #{tenant.key}
+	</sql>
+
+	<sql id="compareServiceType">
+		AND p.service_type = #{serviceTypeEnum.serviceTypeDescription}
+	</sql>
+
+	<sql id="allProcessesColumns">
+	   	 process_id
+	     ,items_count
+	     ,failed_count
+	     ,modified_user
+	     <if test="_databaseId == 'Oracle'">
+       	 	,fn_date(fn_dt(start_time)) AS start_time
+		 	,fn_date(fn_dt(end_time)) AS end_time
+       	 </if>
+		 <if test="_databaseId == 'Microsoft SQL Server'">
+		 	,CAST(dbo.fn_dt(start_time) AS DATETIME) AS start_time
+       	 	,CAST(dbo.fn_dt(end_time) AS DATETIME) AS end_time
+		 </if>
+	     ,status
+	     ,action_type_id
+		 ,process_type_id
+		 ,process_type_name
+		 ,process_category_id
+		 ,process_category_name
+	</sql>
+
+	<sql id="selectAllProcessesColumns">
+	   	 process_id
+	     ,items_count
+	     ,failed_count
+	     ,modified_user
+	     ,start_time
+		 ,end_time
+	     ,status
+	     ,action_type_id
+		 ,process_type_id
+		 ,process_type_name
+		 ,process_category_id
+		 ,process_category_name
+	</sql>
+
+	<sql id="propertyColumns">
+	   	 ,property_device
+	   	 ,property_id
+	   	 ,property_value
+		 ,property_file_path
+		 ,property_meter_id
+	</sql>
+
+	<sql id="allProcessesByActionTypeColumns">
+	   	 p.process_id
+		 ,p.modified_user
+		 ,p.start_date AS start_time
+		 ,p.end_date  AS end_time
+		 ,CASE WHEN p.status = 1
+			        AND COALESCE(p.end_date,0) = 0
+			        AND COALESCE(p.action_instance_id,0) > 0
+			        AND (SELECT value FROM process_property <include refid="WithNoLock"/> WHERE process_id = p.process_id AND property_name = 'ACTION_DATE')
+						<if test="_databaseId == 'Oracle'">
+			            	> fn_now()
+						</if>
+						<if test="_databaseId == 'Microsoft SQL Server'">
+							> dbo.fn_now()
+						</if>
+			            THEN 8
+			   WHEN p.status = 1
+			        AND COALESCE(p.end_date,0) = 0
+			        AND COALESCE(p.action_instance_id,0) > 0 THEN 9
+          ELSE p.status END AS status
+		 ,ai.action_type_id
+		 ,null as process_type_id
+		 ,null as process_type_name
+		 ,null as process_category_id
+		 ,null as process_category_name
+		<include refid="selectItensCountFailedCount" />
+		,p.rni_event_id
+	</sql>
+
+	<sql id="allStartedProcessesByActionTypeColumns">
+	   	 p.process_id
+		 ,p.modified_user
+		 ,p.start_date AS start_time
+		 ,p.end_date AS end_time
+		 ,8 AS status
+		 ,ai.action_type_id
+		 ,null as process_type_id
+		 ,null as process_type_name
+		 ,null as process_category_id
+		 ,null as process_category_name
+		<include refid="selectItensCountFailedCount" />
+	</sql>
+
+	<sql id="allProcessesByProcessTypeColumns">
+	   	 p.process_id
+		 ,p.modified_user
+		 ,p.start_date AS start_time
+		 ,p.end_date AS end_time
+		 ,p.status
+		 ,null AS action_type_id
+		 ,pt.process_type_id as process_type_id
+		 ,pt.description as process_type_name
+		 ,pc.process_category_id as process_category_id
+		 ,pc.name as process_category_name
+		<include refid="selectItensCountFailedCount" />
+		,p.rni_event_id
+	</sql>
+
+	<sql id="fetchPropertyByProcessColumns">
+		,(select value
+			from process_property pp <include refid="WithNoLock"/>
+			where pp.process_id = p.process_id
+			and pp.property_name = 'DEVICE_ID') as property_device
+		,(select value
+    	    from process_property pp <include refid="WithNoLock"/>
+		    where pp.process_id = p.process_id
+		    and pp.property_name = 'METER_ID') as property_meter_id
+		,(select value
+		  from process_property pp  <include refid="WithNoLock"/>
+		  where pp.process_id = p.process_id
+		  and pp.property_name = 'FILE_PATH') as property_file_path
+		,(select value
+			from process_property pp <include refid="WithNoLock"/>
+			where pp.process_id = p.process_id
+			and pp.property_name IN ('SCHEDULE_ID', 'GROUP_ID', 'TAG_ID', 'ACTION_ID')) as property_id
+		,(select value
+		  from process_property pp
+		  where pp.process_id  = p.process_id
+				and pp.property_name IN ('SCHEDULE_NAME', 'GROUP_NAME','TAG_NAME', 'FILE_NAME')
+		  union all
+		  select max(value)
+		  from process_property pp
+		  where pp.process_id  = p.process_id
+				and pp.property_name IN ('GENERATECSVFILEACTION', 'FILE_DOWNLOADED')
+		  having max(value) IS NOT NULL
+		  union all
+		  select min(value)
+		  from process_property pp
+		  where pp.process_id  = p.process_id
+				and pp.property_name IN ('ACTION_NAME','ON_DEMAND')
+		  having min(value) IS NOT NULL) as property_value
+	</sql>
+
+	<sql id="selectMeterTypeColumns">
+        ,CASE WHEN ml.fldMeterType IN ('E','A') THEN 1 /* ELECTRIC */
+              WHEN ml.fldMeterType = 'W' THEN 5 /* WATER */
+              WHEN ml.fldMeterType = 'G' THEN 6 /* GAS */
+              ELSE 3 /* Light */
+          END AS device_type_id
+ 		,ml.fldDeviceType AS meter_type_enum
+  	</sql>
+
+	<sql id="selectHanDeviceTypeColumns">
+        ,CASE
+            WHEN hdt.fldDeviceClassId IN (0,2) THEN 2 /* HAN DEVICE */
+            WHEN hdt.fldDeviceClassId = 1 THEN 4 /* LCM */
+            ELSE 3 /* LIGHT */
+         END AS device_type_id
+	    ,CASE WHEN hdt.fldDeviceClassId IN (0,2) OR hd.fldHanDeviceTypeId != 26 THEN hdt.fldDeviceClassId
+	          WHEN hd.fldHanDeviceTypeId = 26 THEN 2
+	      END AS meter_type_enum
+	</sql>
+
+	<sql id="selectProcessItemsMeterColumns">
+
+		 pd.process_endpoint_id as process_item_id
+		,ml.fldRepId AS flexNet_id
+		,ml.fldRepId AS network_address
+		,ml.fldPOD AS premise_id
+		,ml.fldAddress AS address
+		,pd.status AS status
+		,pd.message AS message
+		,ml.fldMeterId AS device_id
+		,0 AS connection_status
+		,ml.fldCustomerId AS customerId
+		,pd.participation
+ 		<include refid="selectMeterTypeColumns"/>
+
+ 	</sql>
+
+ 	<sql id="selectProcessItemsHanDeviceColumns">
+
+		 pd.process_endpoint_id as process_item_id
+		,pd.endpoint_id AS flexNet_id
+		,pd.endpoint_id AS network_address
+  			,(SELECT ml.fldPOD
+  			    FROM tblMeterList ml <include refid="WithNoLock"/>
+  			   WHERE ml.fldRepId = hd.fldBaseRepId) AS premise_id
+  			,(SELECT ml.fldAddress
+  			    FROM tblMeterList ml <include refid="WithNoLock"/>
+  			   WHERE ml.fldRepId = hd.fldBaseRepId) AS address
+		,pd.status AS status
+		,pd.message AS message
+		,hd.fldClientEndPointId AS device_id
+      		,(SELECT CAST(hds.device_status AS INTEGER) AS device_type
+      		    FROM han_device_status hds <include refid="WithNoLock"/>
+      		   WHERE hds.mac_address = hd.fldRepId)  AS connection_status
+		,hd.fldCustomerId AS customerId
+		,pd.participation
+	    <include refid="selectHanDeviceTypeColumns"/>
+
+ 	</sql>
+
+ 	<sql id="meterProcessesByScheduleColumns">
+	     sc.schedule_id as process_item_id
+		,ml.fldRepId AS flexNet_id
+		,ml.fldRepId AS network_address
+		,ml.fldPOD AS premise_id
+		,ml.fldAddress AS address
+		,2 AS status
+		,'' AS message
+		,ml.fldMeterId AS device_id
+        <include refid="selectMeterTypeColumns"/>
+	</sql>
+
+	<sql id="hanDeviceProcessesByScheduleColumns">
+	     sc.schedule_id as process_item_id
+		,hd.fldRepId AS flexNet_id
+		,hd.fldRepId AS network_address
+		,ml.fldPOD AS premise_id
+		,ml.fldAddress AS address
+		,2 AS status
+		,'' AS message
+		,hd.fldClientEndPointId AS device_id
+        <include refid="selectHanDeviceTypeColumns"/>
+	</sql>
+
+	<sql id="selectItensCountFailedCount">
+		,(SELECT COUNT(1)
+		    FROM process_endpoint pv <include refid="WithNoLock"/>
+	       WHERE p.process_id = pv.process_id)
+	     +
+	     <if test="_databaseId == 'Oracle'">
+	     	COALESCE(TO_NUMBER(pp_unreach.value),0) AS items_count
+	     </if>
+	     <if test="_databaseId == 'Microsoft SQL Server'">
+	     	COALESCE(pp_unreach.value,0) AS items_count
+	     </if>
+	    ,(SELECT COUNT(1)
+	        FROM process_endpoint pv <include refid="WithNoLock"/>
+	       WHERE p.process_id = pv.process_id
+	         AND pv.status NOT IN (0,1,5,6,8))
+	     +
+	     <if test="_databaseId == 'Oracle'">
+			COALESCE(TO_NUMBER(pp_unreach.value),0) AS failed_count
+	     </if>
+	     <if test="_databaseId == 'Microsoft SQL Server'">
+	     	COALESCE(pp_unreach.value,0) AS failed_count
+		 </if>
+	</sql>
+
+	<!--###############################-->
+	<!--######## INCLUDE FROM #########-->
+	<!--###############################-->
+
+	<sql id="processByActionTypeFromClause">
+		FROM process p <include refid="WithNoLock"/>
+		INNER JOIN action_instance ai <include refid="WithNoLock"/> ON (p.action_instance_id = ai.action_instance_id)
+        LEFT OUTER JOIN process_property pp_unreach <include refid="WithNoLock"/> ON (p.process_id = pp_unreach.process_id AND pp_unreach.property_name = 'UNREACHABLE_IDS')
+	</sql>
+
+	<sql id="processByProcessTypeFromClause">
+		FROM process p <include refid="WithNoLock"/>
+	    INNER JOIN process_type pt <include refid="WithNoLock"/> ON (p.process_type_id = pt.process_type_id)
+        INNER JOIN process_category pc <include refid="WithNoLock"/> ON (pt.process_category_id = pc.process_category_id)
+        LEFT JOIN process_property pp_unreach <include refid="WithNoLock"/> ON (p.process_id = pp_unreach.process_id AND pp_unreach.property_name = 'UNREACHABLE_IDS')
+	</sql>
+
+ 	<sql id="processItemsMeterFrom">
+ 		FROM process_endpoint pd <include refid="WithNoLock"/>
+ 		INNER JOIN process p <include refid="WithNoLock"/> ON (p.process_id = pd.process_id)
+	   INNER JOIN tblMeterList ml <include refid="WithNoLock"/> ON (ml.fldRepId = pd.endpoint_id)
+ 	</sql>
+
+ 	<sql id="processItemsHanDeviceFrom">
+ 		FROM process_endpoint pd <include refid="WithNoLock"/>
+ 			INNER JOIN process p <include refid="WithNoLock"/> ON (p.process_id = pd.process_id)
+			INNER JOIN tblHanDevice hd <include refid="WithNoLock"/> ON (hd.fldRepId = pd.endpoint_id)
+	 	    INNER JOIN tblHanDeviceType hdt <include refid="WithNoLock"/> ON (hdt.fldHanDeviceTypeId = hd.fldHanDeviceTypeId)
+ 	</sql>
+
+
+ 	<!--###############################-->
+	<!--######## INCLUDE WHERE ########-->
+	<!--###############################-->
+
+	<sql id="startedProcessWhereClause">
+
+		<include refid="fetchProcessesWhereClause"/>
+
+		<if test="_databaseId == 'Oracle'">
+			AND NVL(p.end_date,0) = 0
+			AND (SELECT value FROM process_property WHERE process_id = p.process_id AND property_name = 'ACTION_DATE') > fn_now()
+			AND p.status = 1
+        </if>
+
+        <if test="_databaseId == 'Microsoft SQL Server'">
+			AND COALESCE(p.end_date,0) = 0
+			AND (SELECT value FROM process_property WITH (NOLOCK) WHERE process_id = p.process_id AND property_name = 'ACTION_DATE') > dbo.fn_now()
+			AND p.status = 1
+        </if>
+
+	</sql>
+
+ 	<sql id="processItemsWhere">
+		<if test="processItemStatusEnumValue == 2">
+				AND pd.status NOT IN (1,3,5)
+		</if>
+
+		<if test="firstProcess != null">
+				<choose>
+				  <when test="firstProcess.rniEventId != null">
+				  	  AND p.rni_event_id = #{firstProcess.rniEventId, jdbcType=INTEGER}
+				  </when>
+				  <otherwise>
+					  AND pd.process_id = #{firstProcess.id,jdbcType=INTEGER}
+				  </otherwise>
+			  	</choose>
+
+				<if test="firstProcess.firstProcessItem != null and firstProcess.firstProcessItem.device.radio != null and firstProcess.firstProcessItem.device.radio.flexNetId != null">
+					AND pd.endpoint_id = #{firstProcess.firstProcessItem.device.radio.flexNetId}
+				</if>
+
+				<if test="firstProcess.firstProcessItem != null and firstProcess.firstProcessItem.processItemStatusEnum != null">
+					AND pd.status = #{firstProcess.firstProcessItem.processItemStatusEnumValue}
+				</if>
+
+		</if>
+ 	</sql>
+
+ 	<sql id="monitoreProcessWhereClause">
+		<where>
+
+			<if test="firstProcess != null">
+
+				<if test="firstProcess.isMonitoredInstance != null and firstProcess.isMonitoredInstance == true">
+					AND p.is_monitored = 1
+				</if>
+
+				<if test="firstProcess.isDashboardMonitored != null and firstProcess.isDashboardMonitored == true">
+					AND p.is_dashboard_monitored = 1
+				</if>
+
+			</if>
+
+			<if test="userContext != null and userContext.userId != null">
+				AND p.modified_user = #{userContext.userId}
+			</if>
+
+			<include refid="compareTenantKey"/>
+			<include refid="compareServiceType"/>
+
+		</where>
+	</sql>
+
+	<sql id="fetchProcessesCategoriesWhereClauseSQL">
+  	 	<if test="processSearch != null and processSearch.processCategories != null">
+
+  	 		AND pc.process_category_id IN
+  	 		<foreach item="item" index="index" collection="processSearch.processCategories"
+				open="(" separator="," close=")">
+				#{item.id}
+			</foreach>
+
+  	 	</if>
+	</sql>
+
+	<sql id="fetchProcessesActionTypeWhereClauseSQL">
+		<if test="processSearch != null and processSearch.actionTypeEnums != null">
+
+			AND ai.action_type_id IN
+			<foreach item="item" index="index" collection="processSearch.actionTypeEnums"
+				open="(" separator="," close=")">
+				#{item.value}
+			</foreach>
+
+		</if>
+	</sql>
+
+	<sql id="fetchProcessesWhereClause">
+
+		<where>
+
+	  	 	<if test="processSearch != null">
+
+		  	 	<if test="processSearch.searchText != null">
+
+		  	 		<if test="processSearch.searchType.value.equals('ID')">
+		  	 			<if test="_databaseId == 'Oracle'">
+		  	 				AND p.process_id = TO_NUMBER(#{processSearch.searchText, jdbcType=VARCHAR})
+		  	 			</if>
+		  	 			<if test="_databaseId == 'Microsoft SQL Server'">
+		    				AND p.process_id = #{processSearch.searchText, jdbcType=VARCHAR}
+		    			</if>
+		  	 		</if>
+
+		  	 		<if test="processSearch.searchType.value.equals('DEVICE_ID')">
+
+				  	   AND EXISTS (SELECT 1
+							         FROM tblMeterList m <include refid="WithNoLock"/>
+							       	INNER JOIN process_endpoint pd <include refid="WithNoLock"/> ON (pd.endpoint_id = m.fldRepId)
+							        WHERE pd.process_id = p.process_id AND m.fldMeterId = #{processSearch.searchText}
+
+							        UNION ALL
+
+							        SELECT 1
+									  FROM tblHanDevice hd <include refid="WithNoLock"/>
+									 INNER JOIN process_endpoint pd <include refid="WithNoLock"/> ON (pd.endpoint_id = hd.fldRepId)
+									 WHERE pd.process_id = p.process_id AND hd.fldClientEndPointId = #{processSearch.searchText}
+								  )
+
+		  	 		</if>
+
+					<if test="processSearch.searchType.value.equals('FLEXNET_ID')">
+
+				  	   AND EXISTS ( SELECT 1
+							          FROM tblMeterList m <include refid="WithNoLock"/>
+							         INNER JOIN process_endpoint pd <include refid="WithNoLock"/> ON (pd.endpoint_id = m.fldRepId )
+							         WHERE pd.process_id = p.process_id AND m.fldRepId =
+
+							        <if test="_databaseId == 'Oracle'">
+							        	TO_NUMBER(#{processSearch.searchText})
+							        </if>
+							        <if test="_databaseId == 'Microsoft SQL Server'">
+							        	CAST(#{processSearch.searchText} AS BIGINT)
+							        </if>
+
+							        UNION ALL
+
+									SELECT 1
+							          FROM tblHanDevice hd <include refid="WithNoLock"/>
+							         INNER JOIN process_endpoint pd <include refid="WithNoLock"/> ON (pd.endpoint_id = hd.fldRepId)
+							         WHERE pd.process_id = p.process_id AND hd.fldRepId =
+
+							        <if test="_databaseId == 'Oracle'">
+							        	TO_NUMBER(#{processSearch.searchText})
+							        </if>
+							        <if test="_databaseId == 'Microsoft SQL Server'">
+							        	CAST(#{processSearch.searchText} AS BIGINT)
+							        </if>
+						  		  )
+
+		  	 		</if>
+
+
+		  	 		<if test="processSearch.searchType.value.equals('PREMISE_ID')">
+
+						AND EXISTS (SELECT 1
+									  FROM tblMeterList m <include refid="WithNoLock"/>
+									 INNER JOIN process_endpoint pd <include refid="WithNoLock"/> ON (pd.endpoint_id = m.fldRepId)
+									 WHERE pd.process_id = p.process_id AND m.fldPod =
+
+									<if test="_databaseId == 'Oracle'">
+										TO_NUMBER(#{processSearch.searchText})
+									</if>
+									<if test="_databaseId == 'Microsoft SQL Server'">
+										#{processSearch.searchText}
+									</if>
+
+									UNION ALL
+
+									SELECT 1
+								      FROM tblHanDevice hd <include refid="WithNoLock"/>
+									  LEFT OUTER JOIN tblMeterList m <include refid="WithNoLock"/> ON (m.fldRepId = hd.fldBaseRepId)
+								     INNER JOIN process_endpoint pd <include refid="WithNoLock"/> ON (pd.endpoint_id = hd.fldRepId )
+								     WHERE pd.process_id = p.process_id AND m.fldPod =
+
+								    <if test="_databaseId == 'Oracle'">
+								    	TO_NUMBER(#{processSearch.searchText})
+								    </if>
+								    <if test="_databaseId == 'Microsoft SQL Server'">
+								    	#{processSearch.searchText}
+								    </if>
+								   )
+
+		  	 		</if>
+
+			    </if>
+
+			   <if test="processSearch.processStatusEnums != null">
+
+			   	 	AND p.status IN
+			   	 	<foreach item="status" index="index" collection="processSearch.processStatusEnums"
+						open="(" separator="," close=")">
+			   	 		 #{status.value}
+			   	 	</foreach>
+
+			   	</if>
+
+			   	<if test="processSearch.users != null">
+
+					AND p.modified_user IN
+					<foreach item="user" index="index" collection="processSearch.users"
+						open="(" separator="," close=")">
+						#{user.userId}
+					</foreach>
+
+				</if>
+
+			   	<if test="processSearch.startDate != null and processSearch.endDate != null">
+					AND p.start_date BETWEEN #{processSearch.startDateInt} and #{processSearch.endDateInt}
+				</if>
+
+				<if test="processSearch.processItemHistoryStatusEnums != null">
+
+				    AND EXISTS (SELECT 1
+				                  FROM dr_event_reports der <include refid="WithNoLock"/>
+				                 INNER JOIN process_endpoint pe <include refid="WithNoLock"/> ON (pe.process_endpoint_id = der.process_endpoint_id)
+				                 WHERE pe.process_id = p.process_id AND der.event_status IN
+
+								    <foreach item="status" index="index" collection="processSearch.processItemHistoryStatusEnums"
+										open="(" separator="," close=")">
+							   	 		 #{status.value}
+							   	 	</foreach>
+				                )
+			   	</if>
+
+		   	</if>
+
+		   	<if test="firstDevice != null and  firstDevice.radio != null and firstDevice.radio.flexNetId != null">
+			     AND EXISTS (  SELECT 1
+						       FROM tblMeterList m <include refid="WithNoLock"/>
+						            INNER JOIN process_endpoint pd <include refid="WithNoLock"/> ON (pd.endpoint_id = m.fldRepId)
+						       WHERE pd.process_id = p.process_id AND m.fldRepId = #{firstDevice.radio.flexNetId}
+
+						       UNION ALL
+
+						       SELECT 1
+						       FROM tblHanDevice hd <include refid="WithNoLock"/>
+						                INNER JOIN process_endpoint pd <include refid="WithNoLock"/> ON (pd.endpoint_id = hd.fldRepId)
+						           WHERE pd.process_id = p.process_id AND hd.fldRepId = #{firstDevice.radio.flexNetId}
+							)
+		   	</if>
+
+		   	<include refid="compareTenantKey"/>
+		   	<include refid="compareServiceType"/>
+
+		</where>
+
+	</sql>
+
+	<sql id="fetchPropertyLinkByProcessColumns">
+		,CASE WHEN p.items_count = 1 AND p.status != 2 THEN
+			(SELECT
+				CAST(pd.endpoint_id AS VARCHAR(20)) <include refid="concatenate"/> '|' <include refid="concatenate"/> hd.fldClientEndPointId <include refid="concatenate"/> '|' <include refid="concatenate"/>
+				CASE
+					WHEN hdt.fldDeviceClassId IN (0,2) THEN 'HAN_DEVICE' /* HAN DEVICE */
+					WHEN hdt.fldDeviceClassId = 1 THEN 'LCM' /* LCM */
+					ELSE 'LIGHT' /* LIGHT */
+				 END <include refid="concatenate"/> '|' <include refid="concatenate"/>
+				CASE WHEN hd.fldHanDeviceTypeId = 26 THEN 'FLEXNET_LCM'
+					 WHEN hdt.fldDeviceClassId = 0 THEN 'THERMOSTAT'
+					 WHEN hdt.fldDeviceClassId = 1 THEN 'LCM'
+					 WHEN hdt.fldDeviceClassId = 2 THEN 'IHD'
+				END
+			FROM process_endpoint pd <include refid="WithNoLock"/>
+			INNER JOIN tblHanDevice hd <include refid="WithNoLock"/> ON (hd.fldRepId = pd.endpoint_id)
+			INNER JOIN tblHanDeviceType hdt <include refid="WithNoLock"/> ON (hdt.fldHanDeviceTypeId = hd.fldHanDeviceTypeId)
+			WHERE pd.process_id = p.process_id
+
+			UNION ALL
+
+			SELECT
+				CAST(ml.fldRepId AS VARCHAR(10)) <include refid="concatenate"/> '|' <include refid="concatenate"/>
+				ml.fldMeterId <include refid="concatenate"/> '|' <include refid="concatenate"/>
+				CASE WHEN ml.fldMeterType IN ('E','A') THEN 'ELECTRIC_METER' /* ELECTRIC */
+					  WHEN ml.fldMeterType = 'W' THEN 'WATER_METER' /* WATER */
+					  WHEN ml.fldMeterType = 'G' THEN 'GAS_METER' /* GAS */
+					  ELSE 'LIGHT' /* Light */
+				END <include refid="concatenate"/> '|' <include refid="concatenate"/>
+				CASE WHEN ml.fldMeterType IN ('E','A') THEN 'ELECTRIC_METER' /* ELECTRIC */
+					  WHEN ml.fldMeterType = 'W' THEN 'WATER_METER' /* WATER */
+					  WHEN ml.fldMeterType = 'G' THEN 'GAS_METER' /* GAS */
+					  ELSE 'LIGHT' /* Light */
+				END
+			FROM process_endpoint pd <include refid="WithNoLock"/>
+			INNER JOIN tblMeterList ml <include refid="WithNoLock"/> ON (ml.fldRepId = pd.endpoint_id)
+			WHERE pd.process_id = p.process_id
+			  AND ml.fldDeviceType != 81)
+		ELSE
+			NULL
+		END AS property_link
+	</sql>
+
+	<sql id="fetchPropertyDeviceTypeHanDeviceTypeColumns">
+
+		,(select value
+		  from process_property pp <include refid="WithNoLock"/>
+		  where pp.process_id = p.process_id
+		  and pp.property_name = 'DEVICE_TYPE') as property_device_type
+		,(select value
+		  from process_property pp <include refid="WithNoLock"/>
+		  where pp.process_id = p.process_id
+		  and pp.property_name = 'HAN_DEVICE_TYPE') as property_han_device_type
+
+	</sql>
+
+	<!--###############################-->
+	<!--########### FETCHS ############-->
+	<!--###############################-->
+
+	<select id="fetchCountMonitoredProcesses" parameterType="java.util.Map" resultMap="countMonitoredProcessResult">
+
+			SELECT
+				 (
+					SELECT COUNT(p.process_id)
+					  FROM process p <include refid="WithNoLock"/>
+					  <where>
+					  	  <include refid="compareTenantKey"/>
+					  	  <include refid="compareServiceType"/>
+						  AND p.is_monitored = 1
+						  AND p.modified_user = #{userContext.userId}
+					  </where>
+				)  count_monitored,
+				(
+					SELECT COUNT(p.process_id)
+					  FROM process p <include refid="WithNoLock"/>
+					  <where>
+							<include refid="compareTenantKey"/>
+							<include refid="compareServiceType"/>
+							AND p.is_monitored = 1
+						   	AND p.status = 1
+						   	AND p.modified_user = #{userContext.userId}
+					  </where>
+				) count_processing
+			FROM DUAL
+
+	</select>
+
+	<select id="fetchMonitoredProcess" parameterType="map" resultMap="ProcessWithPropertyResult">
+
+		SELECT <include refid="allProcessesColumns" />
+			   <include refid="fetchPropertyByProcessColumns" />
+			   <include refid="fetchPropertyLinkByProcessColumns" />
+		FROM (
+				SELECT
+					<include refid="allProcessesByActionTypeColumns" />
+
+					<include refid="processByActionTypeFromClause"/>
+
+					<include refid="monitoreProcessWhereClause"/>
+
+				UNION ALL
+
+				SELECT
+					<include refid="allProcessesByProcessTypeColumns"/>
+
+					<include refid="processByProcessTypeFromClause"/>
+
+					<include refid="monitoreProcessWhereClause"/>
+
+
+		) P
+		ORDER BY ${sortExpression}
+
+	</select>
+
+	<select id="fetchProcessById" parameterType="DMProcess" resultMap="ProcessIdWithPropertyResult">
+
+		SELECT <include refid="allProcessesColumns" />
+			   <include refid="propertyColumns" />
+			   ,rni_event_id
+			   ,property_device_type
+		FROM (
+				SELECT
+ 		 	   		<include refid="allProcessesByActionTypeColumns" />
+ 		 	   		<include refid="fetchPropertyByProcessColumns" />
+
+					,(select value
+					  from process_property pp <include refid="WithNoLock"/>
+					  where pp.process_id = p.process_id
+					  and pp.property_name = 'FILE_IDS_TYPE') as property_device_type
+
+					<include refid="processByActionTypeFromClause"/>
+
+					WHERE
+						<choose>
+						  <when test="id != null">
+						  	  p.process_id = #{id,jdbcType=INTEGER}
+						  </when>
+						  <otherwise>
+							  p.rni_event_id = #{rniEventId, jdbcType=INTEGER}
+						  </otherwise>
+					  	</choose>
+
+			    UNION ALL
+
+			    SELECT
+					<include refid="allProcessesByProcessTypeColumns"/>
+					<include refid="fetchPropertyByProcessColumns" />
+
+					,(select value
+					  from process_property pp <include refid="WithNoLock"/>
+					  where pp.process_id = p.process_id
+					  and pp.property_name = 'FILE_IDS_TYPE') as property_device_type
+
+					<include refid="processByProcessTypeFromClause"/>
+
+					WHERE
+						<choose>
+						  <when test="id != null">
+						  	  p.process_id = #{id,jdbcType=INTEGER}
+						  </when>
+						  <otherwise>
+							  p.rni_event_id = #{rniEventId, jdbcType=INTEGER}
+						  </otherwise>
+					  	</choose>
+		) LIST
+
+	</select>
+
+	<select id="fetchTodayProcesses" parameterType="InquiryProcessRequest" resultMap="ProcessWithPropertyResult">
+
+		SELECT
+			<include refid="allProcessesColumns" />
+			<include refid="fetchPropertyByProcessColumns" />
+			<include refid="fetchPropertyLinkByProcessColumns" />
+			<include refid="fetchPropertyDeviceTypeHanDeviceTypeColumns" />
+		FROM(
+			  SELECT
+				   <include refid="selectAllProcessesColumns" />
+
+	 		  FROM (
+	 		  		SELECT process_id, modified_user, start_time, end_time ,action_type_id
+	 		 	   		   ,process_type_id
+ 						   ,process_type_name
+ 						   ,process_category_id
+ 						   ,process_category_name
+	 		  			   ,(SELECT COUNT(1)
+				             FROM process_endpoint pv <include refid="WithNoLock"/>
+				             WHERE LIST.process_id = pv.process_id) + COALESCE((SELECT
+				             														<if test="_databaseId == 'Oracle'">
+																						TO_NUMBER(pp_unreach.value)
+																					</if>
+																					<if test="_databaseId == 'Microsoft SQL Server'">
+																						pp_unreach.value
+																					</if>
+				             													from process_property pp_unreach <include refid="WithNoLock"/>
+				             												    WHERE LIST.process_id = pp_unreach.process_id
+                                                                      				   AND pp_unreach.property_name = 'UNREACHABLE_IDS'),0) AS items_count
+                              ,(SELECT COUNT(1)
+				             FROM process_endpoint pv <include refid="WithNoLock"/>
+				             WHERE LIST.process_id = pv.process_id
+				              	   AND pv.status NOT IN (0,1,5,6,8)) + COALESCE((SELECT
+																					<if test="_databaseId == 'Oracle'">
+																						TO_NUMBER(pp_unreach.value)
+																					</if>
+																					<if test="_databaseId == 'Microsoft SQL Server'">
+																						pp_unreach.value
+																					</if>
+																				 from process_property pp_unreach <include refid="WithNoLock"/>
+				             												 	 WHERE LIST.process_id = pp_unreach.process_id
+                                                                      				   	   AND pp_unreach.property_name = 'UNREACHABLE_IDS'),0) AS failed_count
+                              ,CASE WHEN status = 1 AND COALESCE(end_time,0) = 0 AND COALESCE(action_type_id,0) > 0
+						         AND (SELECT value
+						              FROM process_property <include refid="WithNoLock"/>
+						              WHERE process_id = LIST.process_id
+										AND property_name = 'ACTION_DATE') >
+										<if test="_databaseId == 'Oracle'">
+											fn_now()
+										</if>
+										<if test="_databaseId == 'Microsoft SQL Server'">
+											dbo.fn_now()
+										</if>
+										THEN 8 WHEN status = 1
+						         AND COALESCE(end_time,0) = 0
+						         AND COALESCE(action_type_id,0) > 0 THEN 9 ELSE status
+						    END AS status
+						    <if test="_databaseId == 'Microsoft SQL Server'">
+	 		  			   		,ROW_NUMBER() OVER(ORDER BY CAST(dbo.fn_dt(start_date) AS DATETIME) DESC) AS RowNumberRank
+	 		  			   	</if>
+	 		  			   	<if test="_databaseId == 'Oracle'">
+	 		  			   		,ROW_NUMBER() OVER(ORDER BY fn_date(fn_dt(start_date)) DESC) AS RowNumberRank
+	 		  			   	</if>
+	 		  		FROM (
+		 		 	      SELECT p.process_id, p.modified_user ,p.start_date AS start_time ,p.end_date AS end_time, p.status, ai.action_type_id
+		 		 	   			,null as process_type_id
+	 							,null as process_type_name
+	 							,null as process_category_id
+	 							,null as process_category_name
+		 		 	      		,p.start_date
+						  FROM process p <include refid="WithNoLock"/>
+				          	INNER JOIN action_instance ai <include refid="WithNoLock"/> ON (p.action_instance_id = ai.action_instance_id)
+
+							<include refid="fetchProcessesWhereClause"/>
+
+					      UNION ALL
+
+					      SELECT p.process_id, p.modified_user ,p.start_date AS start_time ,p.end_date AS end_time ,p.status ,NULL AS action_type_id
+					            ,pt.process_type_id
+	 							,pt.description as process_type_name
+	 							,pc.process_category_id
+	 							,pc.name as process_category_name
+	 							,p.start_date
+						  FROM process p <include refid="WithNoLock"/>
+				         	INNER JOIN process_type pt <include refid="WithNoLock"/> ON (p.process_type_id = pt.process_type_id)
+				         	INNER JOIN process_category pc <include refid="WithNoLock"/> ON (pt.process_category_id = pc.process_category_id)
+
+							<include refid="fetchProcessesWhereClause"/>
+						 ) LIST
+			  ) LIST_PROCESS
+
+			  <choose>
+				  <when test="pageSize != null and pageSize > 0">
+				  	  WHERE RowNumberRank BETWEEN #{startRow} + 1 AND (#{startRow} + #{pageSize})
+				  </when>
+				  <otherwise>
+					  WHERE RowNumberRank BETWEEN 1 AND RowNumberRank
+				  </otherwise>
+			  </choose>
+		) p
+		ORDER BY ${sortExpression}
+
+	</select>
+
+
+	<select id="fetchProcessesInProcessing" parameterType="InquiryProcessRequest" resultMap="ProcessWithPropertyResult">
+
+		SELECT
+			<include refid="allProcessesColumns" />
+			<include refid="fetchPropertyByProcessColumns" />
+			<include refid="fetchPropertyLinkByProcessColumns" />
+		FROM (
+
+ 		 	    SELECT
+ 		 	   		<include refid="allProcessesByActionTypeColumns" />
+					<include refid="processByActionTypeFromClause" />
+					<include refid="fetchProcessesWhereClause" />
+
+					AND NOT EXISTS(
+
+					         SELECT pr.process_id
+							   FROM process pr <include refid="WithNoLock"/>
+								<include refid="startedProcessWhereClause" />
+								AND pr.process_id = p.process_id
+				    		  )
+
+			    UNION ALL
+
+			    SELECT
+					<include refid="allProcessesByProcessTypeColumns" />
+					<include refid="processByProcessTypeFromClause" />
+					<include refid="fetchProcessesWhereClause" />
+		  ) P
+
+		  ORDER BY ${sortExpression}
+
+	</select>
+
+
+	<select id="fetchProcesses" parameterType="map" resultMap="ProcessWithPropertyResult">
+
+		SELECT
+			<include refid="allProcessesColumns" />
+			<include refid="fetchPropertyByProcessColumns" />
+			<include refid="fetchPropertyLinkByProcessColumns" />
+			<include refid="fetchPropertyDeviceTypeHanDeviceTypeColumns" />
+		FROM(
+			SELECT
+				<include refid="selectAllProcessesColumns" />
+			FROM (
+
+				  SELECT
+					   <include refid="selectAllProcessesColumns" />
+					   ,ROW_NUMBER() OVER(ORDER BY start_date_utc DESC, ${sortExpression}) AS RowNumber
+
+		 		  FROM (
+		 		  	<if test="processSearch == null or
+		 		  	         (processSearch.actionTypeEnums != null or (processSearch.actionTypeEnums == null and processSearch.processCategories == null))">
+			 		 	    SELECT
+			 		 	   		<include refid="allProcessesByActionTypeColumns" />
+
+			 		 	   		<if test="_databaseId == 'Oracle'">
+									<choose>
+									  <when test="timeZone != null and timeZone != '' ">
+									     ,to_date((fn_date(fn_dt(p.start_date)) + ${timeZone}/24),'DD-MM-YYYY') AS start_date_utc
+									  </when>
+									  <otherwise>
+									     ,to_date(fn_date(fn_dt(p.start_date)),'DD-MM-YYYY') AS start_date_utc
+									  </otherwise>
+									</choose>
+			 		 	   		</if>
+
+								<if test="_databaseId == 'Microsoft SQL Server'">
+				 		 	   		<choose>
+								         <when test="timeZone != null and timeZone != ''">
+								            ,CAST(DATEADD(hh,${timeZone}, CAST(dbo.fn_dt(p.start_date) AS DATETIME))AS DATE) AS start_date_utc
+								         </when>
+								         <otherwise>
+								            ,CAST(dbo.fn_dt(p.start_date) AS DATE) AS start_date_utc
+								         </otherwise>
+							        </choose>
+							    </if>
+
+								<include refid="processByActionTypeFromClause"/>
+
+								<include refid="fetchProcessesWhereClause"/>
+								<include refid="fetchProcessesActionTypeWhereClauseSQL"/>
+					</if>
+
+					<if test="processSearch == null or
+							  (processSearch.actionTypeEnums == null and processSearch.processCategories == null) or
+							  (processSearch.actionTypeEnums != null and processSearch.processCategories != null)">
+					    UNION ALL
+					</if>
+
+					<if test="processSearch == null or
+					         (processSearch.processCategories != null or (processSearch.actionTypeEnums == null and processSearch.processCategories == null))">
+					    SELECT
+							<include refid="allProcessesByProcessTypeColumns"/>
+
+							<if test="_databaseId == 'Oracle'">
+								<choose>
+							         <when test="timeZone != null and timeZone != ''">
+							            ,to_date((fn_date(fn_dt(p.start_date)) + ${timeZone}/24),'DD-MM-YYYY') AS start_date_utc
+							         </when>
+							         <otherwise>
+							            ,to_date(fn_date(fn_dt(p.start_date)),'DD-MM-YYYY') AS start_date_utc
+							         </otherwise>
+						         </choose>
+							</if>
+
+							<if test="_databaseId == 'Microsoft SQL Server'">
+								<choose>
+							         <when test="timeZone != null and timeZone != ''">
+							            ,CAST(DATEADD(hh,${timeZone}, CAST(dbo.fn_dt(p.start_date) AS DATETIME))AS DATE) AS start_date_utc
+							         </when>
+							         <otherwise>
+							            ,CAST(dbo.fn_dt(p.start_date) AS DATE) AS start_date_utc
+							         </otherwise>
+						        </choose>
+					        </if>
+
+							<include refid="processByProcessTypeFromClause"/>
+
+							<include refid="fetchProcessesWhereClause"/>
+							<include refid="fetchProcessesCategoriesWhereClauseSQL"/>
+					</if>
+				 	   ) LIST
+			) LIST_PROCESS
+			<choose>
+				<when test="pageSize != null and pageSize > 0">
+					WHERE RowNumber BETWEEN #{startRow, jdbcType=INTEGER} + 1 AND (#{startRow, jdbcType=INTEGER} + #{pageSize, jdbcType=INTEGER})
+				</when>
+				<otherwise>
+					WHERE RowNumber BETWEEN 1 AND RowNumber
+				</otherwise>
+			</choose>
+		) P
+
+	</select>
+
+
+	<select id="paginationTotalRows" parameterType="map" resultType="int">
+			SELECT count(1)
+		      FROM (
+
+		      	    <if test="processSearch == null or
+		      	              (processSearch.actionTypeEnums != null or (processSearch.actionTypeEnums == null and processSearch.processCategories == null))">
+						SELECT p.process_id
+						  FROM process p <include refid="WithNoLock"/>
+						 INNER JOIN action_instance ai <include refid="WithNoLock"/> ON (p.action_instance_id = ai.action_instance_id)
+
+						<include refid="fetchProcessesWhereClause"/>
+						<include refid="fetchProcessesActionTypeWhereClauseSQL"/>
+					</if>
+
+					<if test="processSearch == null or
+							  (processSearch.actionTypeEnums == null and processSearch.processCategories == null) or
+							  (processSearch.actionTypeEnums != null and processSearch.processCategories != null)">
+						UNION ALL
+					</if>
+
+					<if test="processSearch == null or
+					         (processSearch.processCategories != null or (processSearch.actionTypeEnums == null and processSearch.processCategories == null))">
+						SELECT p.process_id
+						  FROM process p <include refid="WithNoLock"/>
+						 INNER JOIN process_type pt <include refid="WithNoLock"/> ON (p.process_type_id = pt.process_type_id)
+						 INNER JOIN process_category pc <include refid="WithNoLock"/> ON (pt.process_category_id = pc.process_category_id)
+
+						<include refid="fetchProcessesWhereClause"/>
+						<include refid="fetchProcessesCategoriesWhereClauseSQL"/>
+					</if>
+
+				 ) LIST
+	</select>
+
+
+	<select id="fetchProcessProperties" parameterType="int" resultMap="ProcessPropertyResult">
+	 	SELECT property_name
+		      ,value
+		  FROM process_property <include refid="WithNoLock"/>
+		 WHERE process_id = #{value, jdbcType=INTEGER}
+	</select>
+
+	<select id="fetchProcessItemsProcessProperty" parameterType="ProcessRequest" resultMap="ProcessItemResult">
+
+		SELECT
+			pd.process_endpoint_id as process_item_id
+			,pd.endpoint_id AS flexNet_id
+			,pd.endpoint_id AS network_address
+			,COALESCE((SELECT MAX(pep.value)
+			   		   FROM process_endpoint_property pep <include refid="WithNoLock"/>
+		      		   WHERE pep.process_endpoint_id = pd.process_endpoint_id
+		        			AND pep.property_name = 'DEVICE_ID'),
+		        	  (SELECT MAX(pp.value)
+		        	   FROM process_property pp <include refid="WithNoLock"/>
+		        	   WHERE pp.process_id = pd.process_id AND pp.property_name = 'DEVICE_ID')) AS device_id
+		    ,pd.status AS status
+			,pd.message AS message
+			,99 AS device_type_id
+			,NULL AS meter_type_enum
+		FROM process_endpoint pd <include refid="WithNoLock"/>
+		INNER JOIN process p <include refid="WithNoLock"/> ON (p.process_id = pd.process_id)
+
+		<where>
+
+			  <include refid="processItemsWhere"/>
+
+		</where>
+
+	</select>
+
+	<select id="fetchProcessItems" parameterType="ProcessRequest" resultMap="ProcessItemResult">
+
+ 		SELECT
+
+		    <include refid="selectProcessItemsHanDeviceColumns"/>
+
+		    <include refid="processItemsHanDeviceFrom"/>
+
+		<where>
+
+			 <include refid="processItemsWhere"/>
+
+			 <if test="firstProcess != null and firstProcess.firstProcessItem != null and firstProcess.firstProcessItem.device != null and firstProcess.firstProcessItem.device.deviceId != null">
+			 	AND hd.fldClientEndPointId IN
+			 	<foreach item="processItem" index="index" collection="firstProcess.processItems" open="(" separator="," close=")">
+					#{processItem.device.deviceId}
+				</foreach>
+			 </if>
+
+		</where>
+
+		UNION ALL
+
+		SELECT
+
+	 		<include refid="selectProcessItemsMeterColumns"/>
+
+	 		<include refid="processItemsMeterFrom"/>
+
+		<where>
+
+			  <include refid="processItemsWhere"/>
+
+			  <if test="firstProcess != null and firstProcess.firstProcessItem != null and firstProcess.firstProcessItem.device != null and firstProcess.firstProcessItem.device.deviceId != null">
+
+			 	<choose>
+					<when test="firstProcess.action != null and firstProcess.action.actionType != null
+								and (firstProcess.action.actionType.actionTypeEnumValue == 8 or firstProcess.action.actionType.actionTypeEnumValue == 12
+									or firstProcess.action.actionType.actionTypeEnumValue == 22 or firstProcess.action.actionType.actionTypeEnumValue == 24)">
+						 AND ml.fldRepId IN ((SELECT fldBaseRepId from tblHandevice <include refid="WithNoLock"/>
+						 					 		   WHERE  fldClientEndPointId IN
+												    		<foreach item="processItem" index="index" collection="firstProcess.processItems" open="(" separator="," close=")">
+																#{processItem.device.deviceId}
+												    		</foreach>
+													   )
+													   UNION ALL
+													   (SELECT m.fldRepId from tblMeterList m <include refid="WithNoLock"/>
+													      WHERE m.fldMeterId IN
+													  	  	<foreach item="processItem" index="index" collection="firstProcess.processItems" open="(" separator="," close=")">
+																#{processItem.device.deviceId}
+													    	</foreach>)
+
+											 )
+					</when>
+					<otherwise>
+						AND ml.fldMeterId IN
+						<foreach item="processItem" index="index" collection="firstProcess.processItems" open="(" separator="," close=")">
+							#{processItem.device.deviceId}
+						</foreach>
+					</otherwise>
+				</choose>
+
+			 </if>
+
+			  AND ml.fldDeviceType != 81
+		</where>
+
+ 	</select>
+
+
+	<select id="checkProcessing" parameterType="DMProcess" resultType="int">
+
+	   		SELECT SUM(status)
+	   		  FROM (
+
+				<if test="properties != null">
+
+					SELECT COUNT(1) AS status
+					  FROM process p <include refid="WithNoLock"/>
+		           		   INNER JOIN process_property pp <include refid="WithNoLock"/>
+		              		  ON (p.process_id = pp.process_id)
+		      		  WHERE pp.property_name = #{firstProperty.propertyValue, jdbcType=VARCHAR}
+		        		AND pp.value = #{firstProperty.propertyValue, jdbcType=VARCHAR}
+		        		AND p.status = #{processStatusEnum.value, jdbcType=VARCHAR}
+		        </if>
+
+	      		<if test="processItems != null and properties != null">
+	      			UNION
+	      		</if>
+
+	      		<if test="firstProcessItem != null">
+
+		      		SELECT COUNT(1) status
+			  		  FROM process p <include refid="WithNoLock"/>
+				           INNER JOIN process_endpoint pe <include refid="WithNoLock"/>
+					  		  ON (p.process_id = pe.process_id)
+			  		  WHERE pe.endpoint_id = #{firstProcessItem.device.radio.flexNetId, jdbcType=INTEGER}
+						AND p.status = #{processStatusEnum.value, jdbcType=VARCHAR}
+				</if>
+
+			) tb
+
+	</select>
+
+
+	<select id="fetchProcessItemsByDevice" parameterType="DMProcess" resultMap="ProcessItemResult">
+		SELECT pe.process_endpoint_id AS process_item_id, 5 AS status, 99 AS device_type_id
+		  FROM process_endpoint pe <include refid="WithNoLock"/>
+			   INNER JOIN process p <include refid="WithNoLock"/> ON (p.process_id = pe.process_id)
+			   INNER JOIN action_instance ai <include refid="WithNoLock"/> ON (ai.action_instance_id = p.action_instance_id)
+		 WHERE pe.status = 1
+		    <if test="action != null and action.actionType != null and action.actionType.actionTypeEnum != null">
+		    	AND ai.action_type_id = (#{action.actionType.actionTypeEnum.actionType})
+		    </if>
+		    <if test="action == null">
+		    	AND ai.action_type_id in (5, 10)
+		    </if>
+
+		    AND EXISTS (SELECT 1
+		                  FROM tblMeterList ml <include refid="WithNoLock"/>
+		                 WHERE ml.fldMeterId = #{firstProcessItem.device.deviceId}
+		                   AND ml.fldRepId   = pe.endpoint_id
+		                UNION ALL
+		                SELECT 1
+		                     FROM tblHanDevice hd <include refid="WithNoLock"/>
+		                    WHERE hd.fldClientEndPointId = #{firstProcessItem.device.deviceId}
+		                      AND hd.fldRepId   = pe.endpoint_id
+		        	   )
+		     <if test="firstProcessItem != null and firstProcessItem.id != null">
+		     	AND pe.process_endpoint_id = #{firstProcessItem.id}
+		     </if>
+	</select>
+
+
+	<select id="fetchProcessItemsByAction" parameterType="DMProcess" resultMap="ProcessItemResult">
+
+		SELECT pe.process_endpoint_id AS process_item_id
+			   ,pe.endpoint_id AS device_id
+			   ,((SELECT 1 FROM tblMeterList ml <include refid="WithNoLock"/> WHERE ml.fldRepId = pe.endpoint_id)
+				 UNION ALL
+			    (SELECT 2 FROM tblHanDevice hd <include refid="WithNoLock"/> WHERE hd.fldRepId = pe.endpoint_id)) AS device_type_enum
+			   ,((SELECT '' FROM tblMeterList ml <include refid="WithNoLock"/> WHERE ml.fldRepId = pe.endpoint_id)
+				 UNION ALL
+			    (SELECT CASE WHEN cs.short_name = 'ARMED' THEN 'DISCONNECT'
+						  ELSE COALESCE(cs.short_name,'DISCONNECT') END
+				   FROM tblHanDevice hd <include refid="WithNoLock"/>
+				   WHERE hd.fldRepId = pe.endpoint_id)) AS connection_status
+		FROM action_instance ai <include refid="WithNoLock"/>
+		INNER JOIN process p <include refid="WithNoLock"/> ON (ai.action_instance_id = p.action_instance_id)
+		INNER JOIN process_endpoint pe <include refid="WithNoLock"/> ON (pe.process_id = p.process_id)
+		WHERE ai.action_instance_id = #{action.id}
+	      AND p.status = 1
+
+	</select>
+
+
+	<select id="fetchProcessItemsBySchedule" parameterType="DMProcess" resultMap="ProcessItemResult">
+		SELECT	 process_item_id
+				,flexNet_id
+				,network_address
+				,premise_id
+				,address
+				,status
+				,message
+				,device_id
+				,device_type_id
+				,meter_type_enum
+				,ROW_NUMBER() OVER (order by device_type_id ASC, flexNet_id ASC ) AS row_num
+		FROM(
+			SELECT
+				<include refid="meterProcessesByScheduleColumns" />
+			FROM schedule sc <include refid="WithNoLock"/>
+			    INNER JOIN action_instance ai <include refid="WithNoLock"/> ON (ai.action_instance_id = sc.action_instance_id)
+			    INNER JOIN action_instance_endpoint ad <include refid="WithNoLock"/> ON(ad.action_instance_id = ai.action_instance_id)
+				INNER JOIN tblMeterList ml <include refid="WithNoLock"/> ON (ml.fldRepId = ad.endpoint_id)
+			WHERE sc.schedule_id = #{id}
+				AND ml.fldDeviceType != 81
+
+			UNION
+
+			SELECT
+				<include refid="meterProcessesByScheduleColumns" />
+			FROM schedule sc <include refid="WithNoLock"/>
+			   INNER JOIN action_instance_groupset ag <include refid="WithNoLock"/> ON(ag.action_instance_id = sc.action_instance_id)
+			   INNER JOIN groupset g  <include refid="WithNoLock"/> ON (g.groupset_id = ag.groupset_id)
+			   INNER JOIN endpoint_groupset eg <include refid="WithNoLock"/> ON (eg.groupset_id = g.groupset_id)
+			   INNER JOIN tblMeterList ml <include refid="WithNoLock"/> ON (ml.fldRepId = eg.endpoint_id)
+			 WHERE sc.schedule_id = #{id}
+			 	AND ml.fldDeviceType != 81
+
+			 UNION
+
+			 SELECT
+				<include refid="hanDeviceProcessesByScheduleColumns" />
+			FROM schedule sc <include refid="WithNoLock"/>
+			    INNER JOIN action_instance ai <include refid="WithNoLock"/> ON (ai.action_instance_id = sc.action_instance_id)
+			    INNER JOIN action_instance_endpoint ad <include refid="WithNoLock"/> ON(ad.action_instance_id = ai.action_instance_id)
+				INNER JOIN tblHanDevice hd <include refid="WithNoLock"/> ON (hd.fldRepId = ad.endpoint_id)
+				LEFT OUTER JOIN tblMeterList ml <include refid="WithNoLock"/> ON (ml.fldRepId = hd.fldBaseRepId)
+				INNER JOIN tblHanDeviceType hdt <include refid="WithNoLock"/> ON (hdt.fldHanDeviceTypeId = hd.fldHanDeviceTypeId)
+			WHERE sc.schedule_id = #{id}
+
+			UNION
+
+			SELECT
+				<include refid="hanDeviceProcessesByScheduleColumns" />
+			FROM schedule sc <include refid="WithNoLock"/>
+			   INNER JOIN action_instance_groupset ag <include refid="WithNoLock"/> ON(ag.action_instance_id = sc.action_instance_id)
+			   INNER JOIN groupset g  <include refid="WithNoLock"/> ON (g.groupset_id = ag.groupset_id)
+			   INNER JOIN endpoint_groupset eg <include refid="WithNoLock"/> ON (eg.groupset_id = g.groupset_id)
+			   INNER JOIN tblHanDevice hd <include refid="WithNoLock"/> ON (hd.fldRepId = eg.endpoint_id)
+			   LEFT OUTER JOIN tblMeterList ml <include refid="WithNoLock"/> ON (ml.fldRepId = hd.fldBaseRepId)
+			   INNER JOIN tblHanDeviceType hdt <include refid="WithNoLock"/> ON (hdt.fldHanDeviceTypeId = hd.fldHanDeviceTypeId)
+			 WHERE sc.schedule_id = #{id}
+		) LST
+	</select>
+
+
+	<select id="fetchStartedProcesses" parameterType="InquiryProcessRequest" resultMap="ProcessWithPropertyResult">
+
+ 		SELECT
+			<include refid="allProcessesColumns" />
+			<include refid="fetchPropertyByProcessColumns" />
+			<include refid="fetchPropertyLinkByProcessColumns" />
+		FROM (
+ 		 	    SELECT
+					<include refid="allStartedProcessesByActionTypeColumns" />
+
+					<include refid="processByActionTypeFromClause"/>
+
+					<include refid="startedProcessWhereClause"/>
+			 ) P
+		ORDER BY ${sortExpression}
+
+	</select>
+
+	<select id="fetchScheduledProcesses" parameterType="ProcessRequest" resultMap="ScheduledProcessResult">
+
+		 SELECT
+				s.schedule_id AS process_id,
+				s.name,
+				s.schedule_id AS property_id,
+		  		s.name AS property_value,
+				s.description,
+				2 as status,
+
+				<if test="_databaseId == 'Oracle'">
+					fn_date(fn_dt(s.start_date)) AS start_time,
+					fn_date(fn_dt(s.end_date)) AS end_time,
+				</if>
+				<if test="_databaseId == 'Microsoft SQL Server'">
+					dbo.fn_dt(s.start_date) AS start_time,
+					dbo.fn_dt(s.end_date) AS end_time,
+				</if>
+
+				s.modified_user,
+				ai.action_type_id,
+				s.action_instance_id,
+				(<include refid="ActionMap.fetchTotalDevicesByAction" />) as items_count,
+				0 as failed_count
+		   FROM schedule s <include refid="WithNoLock"/>
+		  INNER JOIN action_instance ai <include refid="WithNoLock"/> ON (ai.action_instance_id = s.action_instance_id)
+	      WHERE s.status = 1
+		    AND s.service_type = #{serviceTypeEnum.serviceTypeDescription}
+		    AND s.customer_id =  #{tenant.key}
+		    AND s.next_execution BETWEEN #{processSearch.startDateInt} and #{processSearch.endDateInt}
+		    AND NOT EXISTS (
+							SELECT 1
+							  FROM process p <include refid="WithNoLock"/>
+							 WHERE p.action_instance_id = ai.action_instance_id
+							   AND p.start_date BETWEEN #{processSearch.startDateInt} and #{processSearch.endDateInt}
+							   <include refid="compareTenantKey"/>
+							   <include refid="compareServiceType"/>
+			    			)
+			AND NOT EXISTS (SELECT 1
+							  FROM schedule_property sp <include refid="WithNoLock"/>
+							 WHERE sp.schedule_id = s.schedule_id AND sp.property_name = 'ON_DEMAND')
+
+		  ORDER BY ${sortExpression}
+
+	</select>
+
+	<select id="fetchProcessItemProperty" parameterType="int" resultMap="ProcessPropertyResult">
+		SELECT pe.property_name
+		      ,pe.value AS value
+		  FROM process_endpoint_property pe <include refid="WithNoLock"/>
+		 WHERE pe.process_endpoint_id = #{id}
+	</select>
+
+	<select id="fetchProcessByRniEventId" parameterType="DMProcess" resultMap="ProcessIdWithPropertyResult">
+	    SELECT p.process_id
+	    	   ,p.modified_user
+	    	   ,ai.action_type_id
+		  FROM process p <include refid="WithNoLock"/>
+			   INNER JOIN action_instance ai <include refid="WithNoLock"/> ON (ai.action_instance_id = p.action_instance_id)
+		 WHERE p.rni_event_id = #{rniEventId, jdbcType=INTEGER}
+		 	<if test="processStatusEnum != null">
+		 		AND p.status = #{processStatusEnum.value, jdbcType=INTEGER}
+		 	</if>
+		 	<if test="action != null and action.actionType != null and action.actionType.actionTypeEnum != null and action.actionType.actionTypeEnum.actionType != null">
+		   		AND ai.action_type_id = (#{action.actionType.actionTypeEnum.actionType})
+		   	</if>
+	</select>
+
+	<select id="fetchAllProcessItems" parameterType="DMProcess" resultMap="ProcessItemResult">
+		SELECT pe.process_endpoint_id AS process_item_id
+		      ,pe.status
+		      ,pe.endpoint_id as flexnet_id
+		      ,pe.participation
+		      ,pe.modified_user
+			  <if test="_databaseId == 'Oracle'">
+				,fn_date(fn_dt(pe.modified_date)) AS modified_date
+			  </if>
+			  <if test="_databaseId == 'Microsoft SQL Server'">
+				,CAST(dbo.fn_dt(pe.modified_date) AS DATETIME) AS modified_date
+			  </if>
+		      ,pe.message
+		      ,99 AS device_type_id
+		  FROM process_endpoint pe <include refid="WithNoLock"/>
+		 <where>
+		 	<if test="id != null">
+		 		AND pe.process_id = #{id, jdbcType=INTEGER}
+		 	</if>
+
+		 	<if test="firstProcessItem != null">
+
+				<if test="firstProcessItem.id != null">
+					AND pe.process_endpoint_id = #{firstProcessItem.id, jdbcType=INTEGER}
+				</if>
+
+				<if test="firstProcessItem.device != null and firstProcessItem.device.radio != null and firstProcessItem.device.radio.flexNetId != null">
+					AND pe.endpoint_id = #{firstProcessItem.device.radio.flexNetId, jdbcType=INTEGER}
+				</if>
+
+		 		<if test="firstProcessItem.processItemStatusEnumValue != null">
+		 			AND pe.status =  #{firstProcessItem.processItemStatusEnumValue, jdbcType=INTEGER}
+		 		</if>
+
+				<if test="firstProcessItem.modifyUser != null">
+					AND pe.modified_user = #{firstProcessItem.modifyUser, jdbcType=VARCHAR}
+				</if>
+
+			</if>
+		</where>
+	</select>
+
+  	<!--###############################-->
+	<!--########## PROCEDURE ##########-->
+	<!--###############################-->
+
+  	<select id="insertProcessProperty" statementType="CALLABLE" parameterType="map" resultType="int">
+
+		{call ins_process_property (#{process_id, jdbcType=INTEGER},
+									#{property_name, jdbcType=VARCHAR},
+									#{value, jdbcType=VARCHAR},
+									#{modified_user, jdbcType=VARCHAR},
+									#{p_process_property_id, mode=OUT, jdbcType=INTEGER},
+						   			#{p_error_message, mode=OUT, jdbcType=VARCHAR},
+						   			#{p_result, mode=OUT, jdbcType=INTEGER}
+									 )}
+
+  	</select>
+
+  	<select id="insertProcessEndPointProperty" statementType="CALLABLE" parameterType="map" resultType="int">
+
+		{call ins_process_endpoint_property (#{process_id, jdbcType=INTEGER},
+											 #{property_name, jdbcType=VARCHAR},
+											 #{value,jdbcType=VARCHAR},
+											 #{modified_user, jdbcType=VARCHAR},
+											 #{p_process_property_id, mode=OUT, jdbcType=INTEGER},
+											 #{p_error_message, mode=OUT, jdbcType=VARCHAR},
+											 #{p_result, mode=OUT, jdbcType=INTEGER}
+											  )}
+
+  	</select>
+
+  	<!-- Insert Process -->
+ 	<select id="insertProcess" statementType="CALLABLE" parameterType="map" resultType="int">
+
+		{call ins_process (#{action_instance_id, jdbcType=INTEGER},
+						   #{process_type_id, jdbcType=INTEGER},
+						   #{start_time, jdbcType=TIMESTAMP},
+						   #{end_time, jdbcType=TIMESTAMP},
+						   #{status, jdbcType=INTEGER},
+						   #{is_monitored, jdbcType=INTEGER},
+						   #{is_dashboard_monitored, jdbcType=INTEGER},
+						   #{modified_user, jdbcType=VARCHAR},
+						   #{rni_event_id, jdbcType=INTEGER},
+						   #{service_type, jdbcType=VARCHAR},
+						   #{customer_id, jdbcType=VARCHAR},
+						   #{p_process_id, mode=OUT, jdbcType=INTEGER},
+						   #{p_error_message, mode=OUT, jdbcType=VARCHAR},
+						   #{p_result, mode=OUT, jdbcType=INTEGER}
+							)}
+
+ 	</select>
+
+ 	<!-- Update Process -->
+ 	<select id="updateProcess" statementType="CALLABLE" parameterType="map" resultType="int">
+
+		{call upd_process ( #{process_id, jdbcType=INTEGER},
+		                    #{action_instance_id, jdbcType=INTEGER},
+							#{process_type_id, jdbcType=INTEGER},
+							#{start_time, jdbcType=TIMESTAMP},
+							#{end_time, jdbcType=TIMESTAMP},
+							#{status, jdbcType=INTEGER},
+							#{is_monitored, jdbcType=INTEGER},
+							#{is_dashboard_monitored, jdbcType=INTEGER},
+							#{modified_user, jdbcType=VARCHAR},
+							#{rni_event_id, jdbcType=INTEGER},
+							#{p_error_message, mode=OUT, jdbcType=VARCHAR},
+						    #{p_result, mode=OUT, jdbcType=INTEGER}
+							)}
+
+ 	</select>
+
+
+ 	<select id="summarizeProcess" statementType="CALLABLE" parameterType="map" resultType="int">
+
+		{call upd_process_status ( #{process_item_id, jdbcType=INTEGER},
+			                       #{process_item_status, jdbcType=INTEGER},
+								   #{modified_user, jdbcType=VARCHAR},
+								   #{p_error_message, mode=OUT, jdbcType=VARCHAR},
+							       #{p_result, mode=OUT, jdbcType=INTEGER}
+							     )}
+
+ 	</select>
+
+
+ 	<select id="insertProcessItem" statementType="CALLABLE"  parameterType="map" resultType="int">
+
+		{call ins_process_endpoint (#{process_id, jdbcType=INTEGER},
+									#{flexNet_Id, jdbcType=INTEGER},
+									#{status, jdbcType=INTEGER},
+									#{message, jdbcType=VARCHAR},
+									#{participation, jdbcType=VARCHAR},
+									#{modified_user, jdbcType=VARCHAR},
+									#{p_process_endpoint_id, mode=OUT, jdbcType=INTEGER},
+									#{p_error_message, mode=OUT, jdbcType=VARCHAR},
+									#{p_result, mode=OUT, jdbcType=INTEGER}
+									)}
+
+	</select>
+
+
+	<select id="updateProcessItem" statementType="CALLABLE" parameterType="map" resultType="int">
+
+		{call upd_process_endpoint (#{process_item_id, jdbcType=INTEGER},
+		                            #{process_id, jdbcType=INTEGER},
+			                        #{flexNet_Id, jdbcType=INTEGER},
+								    #{status, jdbcType=INTEGER},
+								    #{message, jdbcType=VARCHAR},
+								    #{participation, jdbcType=VARCHAR},
+								    #{modified_user, jdbcType=VARCHAR},
+								    #{p_error_message, mode=OUT, jdbcType=VARCHAR},
+						   			#{p_result, mode=OUT, jdbcType=INTEGER}
+								   )}
+
+	</select>
+
+	<select id="insertDrEventReports" statementType="CALLABLE"  parameterType="map" resultType="int">
+
+		{call ins_dr_event_reports (#{process_item_id, jdbcType=INTEGER},
+									#{mac_address, jdbcType=BIGINT},
+			                        #{process_item_status, jdbcType=VARCHAR},
+								    #{event_status_time, jdbcType=TIMESTAMP},
+								    #{p_process_endpoint_id, mode=OUT, jdbcType=INTEGER},
+						   			#{p_error_message, mode=OUT, jdbcType=VARCHAR},
+						   			#{p_result, mode=OUT, jdbcType=INTEGER}
+								   )}
+
+	</select>
+
+	<select id="deleteProcessItemProperty" statementType="CALLABLE" parameterType="map" resultType="int">
+
+			{call del_process_endpoint_property (#{process_id,jdbcType=INTEGER}
+										,#{property_name,jdbcType=VARCHAR}
+										,#{p_error_message, mode=OUT, jdbcType=VARCHAR}
+								   		,#{p_result, mode=OUT, jdbcType=INTEGER}
+						           		)}
+
+	</select>
+
+</mapper>

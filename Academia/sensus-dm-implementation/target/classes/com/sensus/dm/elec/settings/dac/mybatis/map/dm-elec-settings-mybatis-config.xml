@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<settings>
+		<setting name="lazyLoadingEnabled" value="false" />
+	</settings>
+
+	<typeAliases>
+		<typeAlias alias="UserContext" type="com.sensus.common.model.UserContext"/>
+		<typeAlias alias="PropertyRequest" type="com.sensus.dm.common.property.model.request.PropertyRequest"/>
+	</typeAliases>
+
+	<mappers>
+    	<mapper resource="com/sensus/dm/elec/settings/dac/mybatis/map/settings.xml"/>
+    </mappers>
+
+</configuration>

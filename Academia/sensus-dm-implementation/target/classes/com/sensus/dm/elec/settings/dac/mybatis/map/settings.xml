@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SettingsMap">
+
+		<resultMap id="UserResult" type="UserContext">
+			<result property="userId" column="application_user_id" />
+		</resultMap>
+
+		<select id="fetchAllUsers" parameterType="map" resultMap="UserResult">
+
+			SELECT application_user_id
+              FROM application_user <include refid="WithNoLock"/>
+             WHERE customer_id = #{customer_id, jdbcType=VARCHAR}
+
+		</select>
+
+		<select id="insertUser" statementType="CALLABLE" parameterType="map" resultType="int">
+
+			{call ins_user (#{user, jdbcType=VARCHAR}
+						   ,#{customer_id, jdbcType=VARCHAR}
+						   <if test="_databaseId == 'Oracle'">
+						   		,#{p_return, mode=OUT, jdbcType=INTEGER}
+						   </if>
+						   )}
+
+		</select>
+
+		<sql id="WithNoLock">
+			<if test="_databaseId == 'Microsoft SQL Server'">
+				WITH (NOLOCK)
+			</if>
+		</sql>
+
+</mapper>

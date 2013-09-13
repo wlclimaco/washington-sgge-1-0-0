@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PropertyMap">
+
+		<resultMap type="INTEGER" id="Count"/>
+
+		<resultMap id="PropertyResult" type="Property">
+			<result property="providerType" column="property_provider" />
+			<result property="providerId" column="provider_id" />
+			<result property="propertyName" column="property_name" />
+			<result property="propertyValue" column="property_value" />
+			<result property="labelKey" column="label_key" />
+			<result property="displayOrder" column="display_order" />
+		</resultMap>
+
+		<resultMap id="PropertyValidValueResult" type="PropertyValidValue">
+			<result property="id" column="property_valid_value_id" />
+			<result property="value" column="valid_value" />
+		</resultMap>
+
+		<sql id="WithNoLock">
+			<if test="_databaseId == 'Microsoft SQL Server'">
+				WITH (NOLOCK)
+			</if>
+		</sql>
+
+		<!--########################-->
+		<!--####  SQL COMMANDS  ####-->
+		<!--########################-->
+
+		<select id="fetchProperty" parameterType="map" resultMap="PropertyResult" >
+
+			SELECT pi.property_name
+			        ,pi.property_value
+			        ,p.label_key
+			        ,pi.display_order
+			   FROM property_provider pp <include refid="WithNoLock"/>
+			  INNER JOIN property_instance pi <include refid="WithNoLock"/> ON (pp.property_provider_id = pi.property_provider_id)
+			  INNER JOIN property p <include refid="WithNoLock"/> ON (p.property_name = pi.property_name)
+			  WHERE pp.owner_instance_id = #{provider, jdbcType=VARCHAR}
+			<if test="property_name != null">
+				AND pi.property_name = #{property_name, jdbcType=VARCHAR}
+			</if>
+
+		</select>
+
+		<select id="fetchPropertyValidValueCount" parameterType="Property" resultType="int">
+
+			SELECT COUNT(1)
+			  FROM property_valid_value <include refid="WithNoLock"/>
+			 WHERE property_name = #{propertyName, jdbcType=VARCHAR}
+
+		</select>
+
+
+		<select id="fetchPropertyValidValue" parameterType="Property" resultType="java.lang.Integer">
+
+			SELECT property_valid_value_id
+			  FROM property_valid_value <include refid="WithNoLock"/>
+			 WHERE valid_value = #{propertyValue, jdbcType=VARCHAR}
+			   AND property_name = #{propertyName, jdbcType=VARCHAR}
+
+		</select>
+
+
+		<select id="fetchPropertyProviderByOwnerInstance" parameterType="map" resultType="java.lang.Integer">
+
+			SELECT pp.property_provider_id
+			  FROM property_provider pp <include refid="WithNoLock"/>
+			 WHERE pp.owner_instance_id = #{provider, jdbcType=VARCHAR}
+
+		</select>
+
+	  	<!--###############################-->
+		<!--########## PROCEDURE ##########-->
+		<!--###############################-->
+
+		<select id="fetchPropertyCount" statementType="CALLABLE" parameterType="map" resultType="int">
+
+			{call get_property_count(#{provider, jdbcType=VARCHAR}
+									,#{property_name, jdbcType=VARCHAR}
+									<if test="_databaseId == 'Oracle'">
+										,#{out, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=Count}
+									</if>
+									)}
+
+		</select>
+
+		<select id="deletePropertyProvider" statementType="CALLABLE" parameterType="map">
+
+			{call del_property_provider(#{provider, jdbcType=VARCHAR})}
+
+		</select>
+
+		<select id="deleteProperty" statementType="CALLABLE" parameterType="map">
+
+				{call del_property(#{provider, jdbcType=VARCHAR}
+								  ,#{property_name, jdbcType=VARCHAR}
+								  ,#{property_value, jdbcType=VARCHAR})}
+
+		</select>
+
+		<select id="insertPropertyProvider" statementType="CALLABLE" parameterType="map" resultType="java.lang.Integer">
+
+			{call ins_property_provider(#{provider, jdbcType=VARCHAR}
+									   ,#{user, jdbcType=VARCHAR}
+									   <if test="_databaseId == 'Oracle'">
+									   		,#{out, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=Count}
+									   </if>
+									   )}
+
+		</select>
+
+		<select id="updatePropertyInstance" statementType="CALLABLE" parameterType="map" resultType="int">
+
+			{call upd_property_instance(#{provider, jdbcType=INTEGER}
+									   ,#{property_name, jdbcType=VARCHAR}
+									   ,#{property_value, jdbcType=VARCHAR}
+									   ,#{user, jdbcType=VARCHAR}
+									   ,#{valid_value, jdbcType=INTEGER}
+									   ,#{order, jdbcType=INTEGER}
+									   )}
+
+		</select>
+
+		<select id="insertPropertyInstance" statementType="CALLABLE" parameterType="map">
+
+				{call ins_property_instance(#{provider, jdbcType=INTEGER}
+										   ,#{property_name, jdbcType=VARCHAR}
+										   ,#{property_value, jdbcType=VARCHAR}
+										   ,#{user, jdbcType=VARCHAR}
+										   ,#{valid_value, jdbcType=INTEGER}
+										   ,#{order, jdbcType=INTEGER}
+										   )}
+
+		</select>
+</mapper>

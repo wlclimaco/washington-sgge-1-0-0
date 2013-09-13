@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CustomSearchMap">
+
+	<resultMap id="CustomSearchResult" type="CustomSearch">
+		<result property="id" column="groupset_id" />
+		<result property="name" column="name" />
+		<result property="description" column="description" />
+		<result property="createDate" jdbcType="TIMESTAMP" column="modified_user" />
+		<result property="modifyDate" jdbcType="TIMESTAMP" column="modified_date" />
+		<result property="deviceType" column="device_type_enum" />
+	</resultMap>
+
+	<resultMap id="PropertyResult" type="Property">
+		<result property="providerType" column="property_provider" />
+		<result property="providerId" column="provider_id" />
+		<result property="propertyName" column="property_name" />
+		<result property="propertyValue" column="property_value" />
+		<result property="labelKey" column="label_key" />
+		<result property="displayOrder" column="display_order" />
+	</resultMap>
+
+	<sql id="WithNoLock">
+		<if test="_databaseId == 'Microsoft SQL Server'">
+			WITH (NOLOCK)
+		</if>
+	</sql>
+
+	<sql id="Concatenate">
+		<if test="_databaseId == 'Oracle'">
+			||
+		</if>
+		<if test="_databaseId == 'Microsoft SQL Server'">
+			+
+		</if>
+	</sql>
+
+	<select id="fetchAll" parameterType="map" resultMap="CustomSearchResult">
+
+		SELECT groupset_id
+				,name
+				,endpoint_count
+				,description
+				,modified_date
+				,device_type_enum
+		FROM ( SELECT g.groupset_id
+						,g.name
+						,( SELECT COUNT(1)
+							FROM endpoint_groupset epg <include refid="WithNoLock"/>
+							WHERE epg.groupset_id = g.groupset_id) AS endpoint_count
+						,g.description
+
+						<if test="_databaseId == 'Oracle'">
+							,fn_dt(g.modified_date) AS modified_date
+						</if>
+						<if test="_databaseId == 'Microsoft SQL Server'">
+							,dbo.fn_dt(g.modified_date) AS modified_date
+						</if>
+
+						,(SELECT ppi.property_value
+							FROM property_provider pp <include refid="WithNoLock"/>
+							INNER JOIN property_instance ppi <include refid="WithNoLock"/> ON (ppi.property_provider_id = pp.property_provider_id)
+							WHERE pp.owner_instance_id  =  'EPM.Group '
+							<include refid="Concatenate"/>
+								CAST(g.groupset_id as varchar(10))
+							AND ppi.property_name = 'DEVICE_TYPE_ENUM' ) AS device_type_enum
+
+						,ROW_NUMBER() OVER(ORDER BY g.${sortExpression}) AS RowNumber
+				FROM groupset g <include refid="WithNoLock"/>
+				INNER JOIN groupset_groupset_type ggt <include refid="WithNoLock"/> ON (ggt.groupset_id = g.groupset_id)
+				WHERE ggt.groupset_type_id = #{group_type, jdbcType=INTEGER}
+					AND g.customer_id = #{customer_id, jdbcType=VARCHAR}
+					<if test="CustomSearchId != null">
+						AND g.groupset_id = #{CustomSearchId, jdbcType=INTEGER}
+					</if>
+					AND EXISTS (SELECT 1
+								FROM groupset_groupset_type ggt1
+								WHERE ggt1.groupset_id = g.groupset_id
+									AND ggt1.groupset_type_id = #{service_group_type_id, jdbcType=INTEGER})
+				) list_endpoint
+		<choose>
+			<when test="pageSize != null and pageSize > 0">
+				WHERE RowNumber BETWEEN #{startRow, jdbcType=INTEGER} + 1
+				  AND (#{startRow, jdbcType=INTEGER} + #{pageSize, jdbcType=INTEGER})
+			</when>
+			<otherwise>
+				WHERE RowNumber BETWEEN 1 AND RowNumber
+			</otherwise>
+		</choose>
+
+	</select>
+
+	<select id="fetchPaginationTotalRows" statementType="CALLABLE" parameterType="map" resultType="int">
+
+			{call get_groupset_pagination_count (#{group_type, jdbcType=INTEGER}
+												,#{service_group_type_id, jdbcType=INTEGER}
+												,#{customer_id, jdbcType=VARCHAR}
+												<if test="_databaseId == 'Oracle'">
+													,#{p_return, mode=OUT, jdbcType=INTEGER}
+												</if>
+												)}
+
+	</select>
+
+	<select id="fetchAllColumnFilter" parameterType="map" resultMap="PropertyResult">
+
+		SELECT property_instance_id
+			  ,property_name
+			  ,property_provider_id
+			  ,property_value
+			  ,modified_user
+			  ,modified_date
+			  ,display_order
+	      FROM (
+				SELECT ppi.property_instance_id
+					   ,ppi.property_name
+				  	   ,ppi.property_provider_id
+					   ,ppi.property_value
+				   	   ,ppi.modified_user
+					   ,ppi.modified_date
+					   ,ppi.display_order
+					   ,ROW_NUMBER() OVER(ORDER BY ${order_by}) AS RowNumber
+				  FROM property_provider pp <include refid="WithNoLock"/>
+			     INNER JOIN property_instance ppi <include refid="WithNoLock"/> on (ppi.property_provider_id = pp.property_provider_id)
+				<where>
+					pp.owner_instance_id = #{column_filter, jdbcType=VARCHAR}
+					<if test="property_name != null">
+						AND ppi.property_name IN
+						<foreach item="item" index="index" collection="property_name"
+							open="(" separator="," close=")">
+							#{item}
+						</foreach>
+					</if>
+				</where>
+			   ) list_property
+		<choose>
+			<when test="pageSize != null and pageSize > 0">
+				WHERE RowNumber BETWEEN #{startRow, jdbcType=INTEGER} + 1
+				  AND (#{startRow, jdbcType=INTEGER} + #{pageSize, jdbcType=INTEGER})
+			</when>
+			<otherwise>
+				WHERE RowNumber BETWEEN 1 AND RowNumber
+			</otherwise>
+		</choose>
+
+	</select>
+
+</mapper>

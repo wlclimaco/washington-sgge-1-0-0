@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+<settings>
+	<setting name="lazyLoadingEnabled" value="false" />
+</settings>
+
+<typeAliases>
+	<typeAlias alias="Dietaitens"  type="com.sensus.dm.common.dietaitens.model.Dietaitens"/>
+	<typeAlias alias="DietaitensRequest"  type="com.sensus.dm.common.dietaitens.model.request.DietaitensRequest"/>
+	<typeAlias alias="InquiryDietaitensRequest" type="com.sensus.dm.common.dietaitens.model.request.InquiryDietaitensRequest" />
+	<typeAlias alias="Device" type="com.sensus.cbof.model.Device" />
+	<typeAlias alias="Group" type="com.sensus.dm.common.group.model.Group" />
+	<typeAlias alias="GroupRequest" type="com.sensus.dm.common.group.model.request.GroupRequest" />
+	<typeAlias alias="InquiryGroupRequest" type="com.sensus.dm.common.group.model.request.InquiryGroupRequest" />
+</typeAliases>
+
+<mappers>
+	<mapper resource="com/sensus/dm/common/dietaitens/dac/mybatis/map/dietaitens.xml"/>
+	<mapper resource="com/sensus/dm/common/group/dac/mybatis/map/group.xml" />
+</mappers>
+
+</configuration>

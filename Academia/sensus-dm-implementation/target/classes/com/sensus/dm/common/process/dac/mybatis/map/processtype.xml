@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProcessTypeMap">
+
+	<!--###############################-->
+	<!--########### RESULTS ###########-->
+	<!--###############################-->
+
+	<resultMap id="ProcessTypeSimpleResult" type="ProcessType">
+ 		<result property="id" column="process_type_id" />
+ 	</resultMap>
+
+	<resultMap id="ProcessCategoryResult" type="ProcessCategory">
+		<result property="id" column="process_category_id" />
+		<result property="name" column="name" />
+	</resultMap>
+
+
+	<!--###############################-->
+	<!--####### INCLUDE COLUMNS #######-->
+	<!--###############################-->
+
+	<sql id="WithNoLock">
+		<if test="_databaseId == 'Microsoft SQL Server'">
+			WITH (NOLOCK)
+		</if>
+	</sql>
+
+
+	<!--###############################-->
+	<!--########### FETCHS ############-->
+	<!--###############################-->
+
+	<select id="fetchAllTypeByDescription" parameterType="ProcessType" resultMap="ProcessTypeSimpleResult">
+	    SELECT process_type_id
+		  FROM process_type <include refid="WithNoLock"/>
+	     WHERE description = #{description}
+	</select>
+
+	<select id="fetchAllCategory" parameterType="ProcessRequest" resultMap="ProcessCategoryResult">
+ 		SELECT process_category_id, name
+ 		  FROM process_category <include refid="WithNoLock"/>
+	</select>
+
+</mapper>
