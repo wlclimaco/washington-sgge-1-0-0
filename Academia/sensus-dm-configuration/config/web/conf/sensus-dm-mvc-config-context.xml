@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context
+	   		http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/mvc
+			http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- Scans the classpath for annotated components that will be auto-registered as Spring beans.
+	 For example @Controller and @Service. Make sure to set the correct base-package -->
+	<context:component-scan  base-package="com.sensus.dm.controller">
+		<context:include-filter type="aspectj" expression="com.sensus.dm.controller.*.*" />
+	</context:component-scan>
+
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	    <!-- one of the properties available; the maximum file size in bytes -->
+	    <property name="maxUploadSize" value="100000"/>
+	</bean>
+
+	<!-- #################### Internationalization #################### -->
+	<bean id="messageSource"
+	    class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+	    <property name="basename" value="classpath:locale/messages" />
+	    <property name="defaultEncoding" value="UTF-8"/>
+	</bean>
+
+	<!-- Declare the Interceptor -->
+	<mvc:interceptors>
+	    <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" p:paramName="locale" />
+	</mvc:interceptors>
+
+	<!-- Declare the Resolver -->
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
+
+	<bean id="jacksonObjectMapper" class="com.sensus.common.web.json.CustomObjectMapper">
+	  <property name="dateFormat" value="yyyy-MM-dd-HH-mm-ss-SSS" />
+	</bean>
+
+	<!-- Configures the annotation-driven Spring MVC Controller programming model. -->
+	<mvc:annotation-driven >
+		    <mvc:message-converters>
+		       <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		           <property name="objectMapper" ref="jacksonObjectMapper" />
+		       </bean>
+	       </mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<!--  Maps directly to JSP pages-->
+
+	<mvc:view-controller path="/login" view-name="../login"/>
+	<mvc:view-controller path="/header" view-name="/header"/>
+	<mvc:view-controller path="/servicesOptions" view-name="/services_options"/>
+
+	<!-- Device Detail Tabs -->
+	<mvc:view-controller path="/device/tab/demandReads" view-name="/device_detail/device_detail_demand_reads"/>
+	<mvc:view-controller path="/device/tab/communications" view-name="/device_detail/device_detail_communication"/>
+
+	<!-- Device Detail Dialogs -->
+	<mvc:view-controller path="/device/premiseIdDialog" view-name="/device_detail/device_detail_premise_id_dialog"/>
+	<mvc:view-controller path="/device/hanInformation" view-name="/controller/actions/han_device_information"/>
+	<mvc:view-controller path="/device/endpointInformation" view-name="/controller/actions/endpoint_information"/>
+
+	<!-- Alarm -->
+	<mvc:view-controller path="/device/deviceAlarmInformation" view-name="/controller/actions/alarm_device_information"/>
+
+	<!-- Group -->
+	<mvc:view-controller path="/group/create" view-name="/group/group_create"/>
+	<mvc:view-controller path="/group/dialogDeleteGroup" view-name="/group/delete_groups_instructions"/>
+
+	<!-- Profile -->
+	<mvc:view-controller path="/profile" view-name="/profile/profile_main"/>
+
+	<!-- Tag -->
+	<mvc:view-controller path="/tag" view-name="/tag/tag_main"/>
+
+	<!-- Settings -->
+	<mvc:view-controller path="/systemsettings" view-name="/systemsettings/system_settings_main"/>
+	<mvc:view-controller path="/systemsettings/system" view-name="/systemsettings/system_settings_general_main"/>
+
+	<!-- Schedule -->
+	<mvc:view-controller path="/schedule" view-name="/process/process_main"/>
+	<mvc:view-controller path="/schedule/openScheduleDialog" view-name="/schedule/schedule_view_dialog"/>
+
+	<!-- Action -->
+	<mvc:view-controller path="/action" view-name="/process/process_main"/>
+
+	<!-- Process -->
+	<mvc:view-controller path="/process" view-name="/process/process_main"/>
+	<mvc:view-controller path="/process/today" view-name="/process/process_main"/>
+	<mvc:view-controller path="/process/history" view-name="/process/process_main"/>
+	<mvc:view-controller path="/process/report" view-name="/process/process_main"/>
+
+	<!-- Summary -->
+	<mvc:view-controller path="/summary" view-name="/summary/summary_main"/>
+	<mvc:view-controller path="/summary/communication" view-name="/summary/communication_summary"/>
+	<mvc:view-controller path="/summary/demandResponse" view-name="/summary/demand_response_summary"/>
+	<mvc:view-controller path="summary/demandRead" view-name="/summary/demand_read_summary"/>
+	<mvc:view-controller path="/summary/importHanDevices" view-name="/summary/import_han_devices"/>
+	<mvc:view-controller path="/summary/tamperDetect" view-name="/summary/tamper_detect_summary"/>
+	<mvc:view-controller path="/summary/setupDemandResponse" view-name="/summary/setup_demand_response_summary"/>
+
+	<!-- Process Dialogs -->
+	<mvc:view-controller path="/process/deviceList" view-name="/process/process_device_list_dialog"/>
+	<mvc:view-controller path="/process/hanMessage" view-name="/process/send_han_text_message_dialog"/>
+	<mvc:view-controller path="/process/recentsRequest" view-name="/process/process_recent_dialog"/>
+	<mvc:view-controller path="/process/actionDialog" view-name="/process/process_action_dialog"/>
+	<mvc:view-controller path="/process/monitorDialog" view-name="/process/process_monitor_dialog"/>
+
+	<!-- Device Actions (Dialogs) -->
+	<mvc:view-controller path="/action/dialog/importHanDevice" view-name="/device/import_han_device_dialog"/>
+	<mvc:view-controller path="/action/hanMessage" view-name="/device/actions/device_han_text_message"/>
+  	<mvc:view-controller path="/action/setupDemandResponse" view-name="/device/actions/device_han_demand_response_setup"/>
+  	<mvc:view-controller path="/action/flexnetLcmSetupDemandResponse" view-name="/device/actions/flexnet_lcm_demand_response_setup"/>
+  	<mvc:view-controller path="/action/demandResponse" view-name="/device/actions/device_han_demand_response"/>
+  	<mvc:view-controller path="/action/connect_han_device" view-name="/device/actions/connect_han_device"/>
+  	<mvc:view-controller path="/action/han_device_information" view-name="/device/actions/han_device_information"/>
+  	<mvc:view-controller path="/action/addTag" view-name="/device/device_add_tag"/>
+	<mvc:view-controller path="/action/removeTag" view-name="/device/device_remove_tag"/>
+	<mvc:view-controller path="/action/addGroup" view-name="/device/device_add_group_dialog"/>
+	<mvc:view-controller path="/action/removeGroup" view-name="/device/device_remove_group_dialog"/>
+	<mvc:view-controller path="/action/setTamperTimeout" view-name="/device/device_set_tamper_dialog"/>
+	<mvc:view-controller path="/action/getTamperTimeout" view-name="/device/device_get_tamper_dialog"/>
+	<mvc:view-controller path="/action/getParticipation" view-name="/device/device_get_participation_dialog"/>
+	<mvc:view-controller path="/action/getParticipationLCM" view-name="/device/device_get_participation_lcm_dialog"/>
+
+	<!-- Saved Search -->
+ 	<mvc:view-controller path="/savedSearch/openDialog" view-name="/saved_search/saved_search_dialog"/>
+
+	<!--  Static Content to bypass dispatcher -->
+	<mvc:resources mapping="/images/**" location="/images/"/>
+	<mvc:resources mapping="/scripts/**" location="/scripts/"/>
+	<mvc:resources mapping="/commons/**" location="/commons/"/>
+	<mvc:resources mapping="/styles/**" location="/styles/"/>
+	<mvc:resources mapping="/thirdparty/**" location="/thirdparty/"/>
+
+    <!-- Resolves view names to protected .jsp resources within the /WEB-INF directory -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+	<bean id="uiSettings" class="java.lang.String">
+    	<constructor-arg type="String" value="/WEB-INF/classes/sensus-dm.properties"/>
+    </bean>
+
+   	<bean id="uiMessages" class="java.lang.String">
+    	<constructor-arg type="String" value="/WEB-INF/classes/locale/messages_"/>
+    </bean>
+
+</beans>

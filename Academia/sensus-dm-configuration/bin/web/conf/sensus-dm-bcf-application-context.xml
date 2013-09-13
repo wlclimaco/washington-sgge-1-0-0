@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="actionBCF" class="com.sensus.dm.elec.action.bcf.impl.ActionBCFImpl">
+		<property name="actionBCL" ref="actionBCLTarget" />
+		<property name="actionValidationController" ref="actionValidationController" />
+		<property name="actionRequestValidationController" ref="actionRequestValidationController" />
+		<property name="inquiryActionRequestValidationController" ref="inquiryActionRequestValidationController" />
+		<property name="tenantRequestValidationController" ref="tenantRequestValidationController" />
+		<property name="orderByValidationController" ref="orderByValidationController" />
+		<property name="deviceValidationController" ref="deviceValidationController" />
+	</bean>
+
+	<bean id="customSearchBCF" class="com.sensus.dm.common.device.bcf.impl.CustomSearchBCFImpl">
+		<property name="customSearchBCL" ref="customSearchBCLTarget" />
+		<property name="tenantRequestValidationController" ref="tenantRequestValidationController" />
+		<property name="customSearchValidationController" ref="customSearchValidationController" />
+		<property name="orderByValidationController" ref="orderByValidationController" />
+		<property name="pageSizeValidationController" ref="pageSizeValidationController" />
+		<property name="columnFilterRequestValidationController" ref="columnFilterRequestValidationController" />
+	</bean>
+
+	<bean id="electricMeterBCF" class="com.sensus.dm.elec.device.bcf.impl.ElectricMeterBCFImpl">
+		<property name="electricMeterBCL" ref="electricMeterBCLTarget" />
+		<property name="deviceValidationController" ref="deviceValidationController" />
+		<property name="radioValidationController" ref="radioValidationController" />
+		<property name="inquiryRequestValidationController" ref="inquiryRequestValidationController" />
+		<property name="tenantRequestValidationController" ref="tenantRequestValidationController" />
+		<property name="hanDeviceValidationController" ref="hanDeviceValidationController" />
+		<property name="deviceModelValidationController" ref="deviceModelValidationController" />
+		<property name="deviceSearchValidationController" ref="deviceSearchValidationController" />
+		<property name="locationValidationController" ref="locationValidationController" />
+		<property name="electricMeterValidationController" ref="electricMeterValidationController" />
+		<property name="electricMeterConfigurationValidationController" ref="electricMeterConfigurationValidationController" />
+		<property name="lCMConfigurationValidationController" ref="lCMConfigurationValidationController" />
+		<property name="rangeDateValidationController" ref="rangeDateValidationController" />
+		<property name="lcmValidationController" ref="lcmValidationController" />
+		<property name="inquiryDeviceRequestValidationController" ref="inquiryDeviceRequestValidationController" />
+		<property name="orderByValidationController" ref="orderByValidationController" />
+	</bean>
+
+	<bean id="deviceBCF" class="com.sensus.dm.common.device.bcf.impl.DeviceBCFImpl">
+		<property name="deviceBCL" ref="deviceBCLTarget" />
+		<property name="deviceValidationController" 	   ref="deviceValidationController" />
+		<property name="tenantRequestValidationController" ref="tenantRequestValidationController" />
+		<property name="electricMeterValidationController" ref="electricMeterValidationController" />
+		<property name="deviceRequestValidationController" ref="deviceRequestValidationController" />
+		<property name="alarmValidationController"         ref="alarmValidationController" />
+		<property name="inquiryDeviceRequestValidationController" ref="inquiryDeviceRequestValidationController" />
+	</bean>
+
+	<bean id="waterMeterBCF" class="com.sensus.dm.water.device.bcf.impl.WaterMeterBCFImpl">
+		<property name="waterMeterBCL" ref="waterMeterBCLTarget"/>
+		<property name="deviceValidationController" ref="deviceValidationController" />
+		<property name="inquiryRequestValidationController" ref="inquiryRequestValidationController" />
+		<property name="locationValidationController" ref="locationValidationController" />
+		<property name="tenantRequestValidationController" ref="tenantRequestValidationController" />
+		<property name="waterGasMeterConfigurationValidationController" ref="waterGasMeterConfigurationValidationController" />
+	</bean>
+
+	<bean id="gasMeterBCF" class="com.sensus.dm.gas.device.bcf.impl.GasMeterBCFImpl">
+		<property name="gasMeterBCL" ref="gasMeterBCLTarget"/>
+		<property name="deviceValidationController" ref="deviceValidationController" />
+		<property name="inquiryRequestValidationController" ref="inquiryRequestValidationController" />
+		<property name="locationValidationController" ref="locationValidationController" />
+		<property name="tenantRequestValidationController" ref="tenantRequestValidationController" />
+		<property name="waterGasMeterConfigurationValidationController" ref="waterGasMeterConfigurationValidationController" />
+	</bean>
+
+	<bean id="deviceReadingBCF" class="com.sensus.dm.elec.device.bcf.impl.DeviceReadingBCFImpl">
+		<property name="deviceReadingBCL" ref="deviceReadingBCLTarget" />
+		<property name="deviceValidationController" ref="deviceValidationController" />
+		<property name="tenantRequestValidationController" ref="tenantRequestValidationController" />
+		<property name="rangeDateValidationController" ref="rangeDateValidationController" />
+		<property name="radioValidationController" ref="radioValidationController" />
+	</bean>
+
+	<bean id="groupBCF" class="com.sensus.dm.common.group.bcf.impl.GroupBCFImpl">
+		<property name="groupBCL" ref="groupBCLTarget" />
+		<property name="tenantRequestValidationController" ref="tenantRequestValidationController" />
+		<property name="orderByValidationController" ref="orderByValidationController" />
+		<property name="pageSizeValidationController" ref="pageSizeValidationController" />
+		<property name="baseSearchValidationController" ref="baseSearchValidationController" />
+		<property name="groupValidationController" ref="groupValidationController" />
+		<property name="deviceValidationController" ref="deviceValidationController" />
+		<property name="radioValidationController" ref="radioValidationController" />
+		<property name="deviceSearchValidationController" ref="deviceSearchValidationController" />
+		<property name="inquiryDeviceRequestValidationController" ref="inquiryDeviceRequestValidationController" />
+	</bean>
+
+
+	<bean id="noteBCF" class="com.sensus.dm.common.device.bcf.impl.NoteBCFImpl">
+		<property name="noteBCL" ref="noteBCLTarget" />
+		<property name="noteValidationController" ref="noteValidationController" />
+	</bean>
+
+	<bean id="processBCF" class="com.sensus.dm.common.process.bcf.impl.ProcessBCFImpl">
+		<property name="processBCL" ref="processBCLTarget" />
+		<property name="processValidationController" ref="processValidationController" />
+		<property name="tenantRequestValidationController" ref="tenantRequestValidationController" />
+		<property name="orderByValidationController" ref="orderByValidationController" />
+		<property name="inquiryRequestValidationController" ref="inquiryRequestValidationController" />
+		<property name="rangeDateValidationController" ref="rangeDateValidationController" />
+		<property name="inquiryProcessRequestValidationController" ref="inquiryProcessRequestValidationController" />
+		<property name="deviceValidationController" ref="deviceValidationController" />
+	</bean>
+
+	<bean id="processSummaryBCF" class="com.sensus.dm.common.process.bcf.impl.ProcessSummaryBCFImpl">
+		<property name="processSummaryBCL" ref="processSummaryBCLTarget" />
+		<property name="processValidationController" ref="processValidationController" />
+		<property name="deviceValidationController" ref="deviceValidationController" />
+		<property name="hanDeviceValidationController" ref="hanDeviceValidationController" />
+		<property name="radioValidationController" ref="radioValidationController" />
+	</bean>
+
+	<bean id="processTypeBCF" class="com.sensus.dm.common.process.bcf.impl.ProcessTypeBCFImpl">
+		<property name="processTypeBCL" ref="processTypeBCLTarget" />
+		<property name="tenantRequestValidationController" ref="tenantRequestValidationController" />
+	</bean>
+
+	<bean id="processCSVBCF" class="com.sensus.dm.common.process.bcf.impl.ProcessCSVBCFImpl">
+		<property name="processBCL" ref="processBCLTarget" />
+		<property name="processCSVBCL" ref="processCSVBCLTarget" />
+		<property name="processValidationController" ref="processValidationController" />
+		<property name="tenantRequestValidationController" ref="tenantRequestValidationController" />
+		<property name="deviceValidationController" ref="deviceValidationController" />
+		<property name="inquiryRequestValidationController" ref="inquiryRequestValidationController" />
+		<property name="inquiryProcessRequestValidationController" ref="inquiryProcessRequestValidationController" />
+		<property name="rangeDateValidationController" ref="rangeDateValidationController" />
+	</bean>
+
+	<bean id="scheduleBCF" class="com.sensus.dm.common.schedule.bcf.impl.ScheduleBCFImpl">
+		<property name="scheduleBCL" ref="scheduleBCLTarget" />
+		<property name="scheduleValidationController" ref="scheduleValidationController" />
+		<property name="frequencyValidationController" ref="frequencyValidationController" />
+		<property name="actionValidationController" ref="actionValidationController" />
+		<property name="groupValidationController" ref="groupValidationController" />
+		<property name="deviceValidationController" ref="deviceValidationController" />
+		<property name="inquiryRequestValidationController" ref="inquiryRequestValidationController" />
+		<property name="tenantRequestValidationController" ref="tenantRequestValidationController" />
+		<property name="rangeDateValidationController" ref="rangeDateValidationController" />
+		<property name="radioValidationController" ref="radioValidationController" />
+		<property name="inquiryActionRequestValidationController" ref="inquiryActionRequestValidationController" />
+	</bean>
+
+	<bean id="settingsBCF" class="com.sensus.dm.elec.settings.bcf.impl.SettingsBCFImpl">
+		<property name="settingsBCL" ref="settingsBCLTarget" />
+		<property name="propertyValidationController" ref="propertyValidationController" />
+		<property name="tenantRequestValidationController" ref="tenantRequestValidationController" />
+	</bean>
+
+	<bean id="tagBCF" class="com.sensus.dm.common.tag.bcf.impl.TagBCFImpl">
+		<property name="tagBCL" ref="tagBCLTarget" />
+		<property name="tagValidationController" ref="tagValidationController" />
+		<property name="tenantRequestValidationController" ref="tenantRequestValidationController" />
+		<property name="orderByValidationController" ref="orderByValidationController" />
+		<property name="deviceValidationController" ref="deviceValidationController" />
+		<property name="inquiryRequestValidationController" ref="inquiryRequestValidationController" />
+		<property name="radioValidationController" ref="radioValidationController" />
+	</bean>
+
+	<bean id="tenantBCF" class="com.sensus.dm.common.tenant.bcf.impl.TenantBCFImpl">
+		<property name="tenantBCL" ref="tenantBCLTarget" />
+		<property name="tenantRequestValidationController" ref="tenantRequestValidationController" />
+	</bean>
+
+</beans>

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+	<bean id="actionBCLTarget" class="com.sensus.dm.elec.action.bcl.impl.ActionBCLImpl">
+		<property name="actionDAC" ref="actionDACTarget" />
+		<property name="tempUploadFilePath" value="${uploadcsv.temp.file.path}" />
+		<property name="actionProcessor" ref="actionProcessorTarget" />
+		<property name="electricMeterBCL" ref="electricMeterBCLTarget" />
+		<property name="deviceBCL" ref="deviceBCLTarget" />
+		<property name="processBCL" ref="processBCLTarget" />
+		<property name="tagBCL" ref="tagBCLTarget" />
+		<property name="waterMeterBCL" ref="waterMeterBCLTarget" />
+		<property name="gasMeterBCL" ref="gasMeterBCLTarget" />
+	</bean>
+
+	<bean id="customSearchBCLTarget" class="com.sensus.dm.common.device.bcl.impl.CustomSearchBCLImpl">
+		<property name="groupBCL" ref="groupBCLTarget" />
+		<property name="tagBCL" ref="tagBCLTarget" />
+		<property name="customSearchDAC" ref="customSearchDACTarget" />
+		<property name="propertyBCL" ref="propertyBCLTarget" />
+		<property name="deviceBCL" ref="deviceBCLTarget" />
+	</bean>
+
+	<bean id="electricMeterBCLTarget" class="com.sensus.dm.elec.device.bcl.impl.ElectricMeterBCLImpl">
+		<property name="electricMeterDAC" ref="electricMeterDACTarget" />
+		<property name="processBCL" ref="processBCLTarget" />
+		<property name="electricMeterListAllColumns" ref="csvElectricMeterListAllColumns" />
+		<property name="lcmListAllColumns" ref="csvLcmListAllColumns" />
+		<property name="hanDeviceListAllColumns" ref="csvHanDeviceListAllColumns" />
+		<property name="peakDemandListAllColumns" ref="csvPeakDemandListAllColumns" />
+		<property name="defaultLcmRelays" ref="defaultLcmRelays" />
+	</bean>
+
+	<bean id="deviceBCLTarget" class="com.sensus.dm.common.device.bcl.impl.DeviceBCLImpl">
+		<property name="deviceDAC" ref="deviceDACTarget" />
+		<property name="services" ref="servicesTarget" />
+	</bean>
+
+	<bean id="deviceReadingBCLTarget" class="com.sensus.dm.elec.device.bcl.impl.DeviceReadingBCLImpl">
+		<property name="meterReadingService" ref="bcf.meterReadingService.camel" />
+		<property name="electricMeterBCL" ref="electricMeterBCLTarget" />
+		<property name="waterMeterBCL" ref="waterMeterBCLTarget" />
+		<property name="gasMeterBCL" ref="gasMeterBCLTarget" />
+		<property name="processBCL" ref="processBCLTarget" />
+		<property name="csvIntervalReadListAllColumns" ref="csvIntervalReadListAllColumns" />
+	</bean>
+
+	<bean id="waterMeterBCLTarget" class="com.sensus.dm.water.device.bcl.impl.WaterMeterBCLImpl">
+		<property name="waterMeterDAC" ref="waterMeterDACTarget" />
+		<property name="processBCL" ref="processBCLTarget" />
+		<property name="waterMeterListAllColumns" ref="csvWaterMeterListAllColumns" />
+		<property name="waterLeakListAllColumns" ref="csvWaterLeakListAllColumns" />
+	</bean>
+
+	<bean id="gasMeterBCLTarget" class="com.sensus.dm.gas.device.bcl.impl.GasMeterBCLImpl">
+		<property name="gasMeterDAC" ref="gasMeterDACTarget" />
+		<property name="processBCL" ref="processBCLTarget" />
+		<property name="gasMeterListAllColumns" ref="csvGasMeterListAllColumns" />
+	</bean>
+
+	<bean id="groupBCLTarget" class="com.sensus.dm.common.group.bcl.impl.GroupBCLImpl">
+		<property name="tempUploadFilePath" value="${uploadcsv.temp.file.path}" />
+		<property name="groupDAC" ref="groupDACTarget" />
+		<property name="actionBCL" ref="actionBCLTarget" />
+		<property name="electricMeterBCL" ref="electricMeterBCLTarget" />
+		<property name="deviceBCL" ref="deviceBCLTarget" />
+		<property name="processBCL" ref="processBCLTarget" />
+		<property name="waterMeterBCL" ref="waterMeterBCLTarget" />
+		<property name="gasMeterBCL" ref="gasMeterBCLTarget" />
+		<property name="allPossibleColumns" ref="csvGroupElectricMeterListAllColumns" />
+	</bean>
+
+	<bean id="noteBCLTarget" class="com.sensus.dm.common.device.bcl.impl.NoteBCLImpl">
+		<property name="noteDAC" ref="noteDACTarget" />
+	</bean>
+
+	<bean id="processBCLTarget" class="com.sensus.dm.common.process.bcl.impl.ProcessBCLImpl">
+		<property name="tempFilePath" value="${csv.temp.file.path}" />
+		<property name="activeMqJmxUrl" value="${activemq.jmx.url}" />
+		<property name="activeMqJmxDomain" value="${activemq.jmx.domain}" />
+		<property name="activeMqJmxAttributes" value="${activemq.jmx.attributes}" />
+		<property name="activeMqJmxAttributeValues" value="${activemq.jmx.attribute.values}" />
+		<property name="processDAC" ref="processDACTarget" />
+		<property name="processTypeBCL" ref="processTypeBCLTarget" />
+		<property name="processSummaryBCL" ref="processSummaryBCLTarget" />
+		<property name="defaultLcmRelays" ref="defaultLcmRelays" />
+	</bean>
+
+	<bean id="processSummaryBCLTarget" class="com.sensus.dm.common.process.bcl.impl.ProcessSummaryBCLImpl">
+		<property name="processSummaryDAC" ref="processSummaryDACTarget" />
+	</bean>
+
+	<bean id="processTypeBCLTarget" class="com.sensus.dm.common.process.bcl.impl.ProcessTypeBCLImpl">
+		<property name="processTypeDAC" ref="processTypeDACTarget" />
+	</bean>
+
+	<bean id="processCSVBCLTarget" class="com.sensus.dm.common.process.bcl.impl.ProcessCSVBCLImpl">
+		<property name="processBCL" ref="processBCLTarget" />
+		<property name="processSummaryBCL" ref="processSummaryBCLTarget" />
+		<property name="communicationSummaryColumns" ref="csvCommunicationAllColumns" />
+		<property name="demandResponseSummaryColumns" ref="csvDemandResponseAllColumns" />
+		<property name="demandReadSummaryColumns" ref="csvDemandReadAllColumns" />
+		<property name="importSummaryColumns" ref="csvImportAllColumns" />
+		<property name="tempFilePath" value="${csv.temp.file.path}" />
+		<property name="processItemListAllColumns" ref="csvProcessItemListAllColumns" />
+		<property name="processTodayListAllColumns" ref="csvProcessTodayAllColumns" />
+		<property name="tamperDetectTimeListAllColumns" ref="csvTamperDetectTimeListAllColumns" />
+		<property name="demandResponseSetupListAllColumns" ref="csvDemandResponseSetupListAllColumns" />
+	</bean>
+
+	<bean id="propertyBCLTarget" class="com.sensus.dm.common.property.bcl.impl.PropertyBCLImpl">
+		<property name="propertyDAC" ref="propertyDACTarget" />
+	</bean>
+
+	<bean id="scheduleBCLTarget" class="com.sensus.dm.common.schedule.bcl.impl.ScheduleBCLImpl">
+		<property name="tempUploadFilePath" value="${uploadcsv.temp.file.path}" />
+		<property name="scheduleDAC" ref="scheduleDACTarget" />
+		<property name="actionBCL" ref="actionBCLTarget" />
+		<property name="processBCL" ref="processBCLTarget" />
+		<property name="scheduleColumns" ref="csvScheduleAllColumns" />
+		<property name="scheduleDeviceColums" ref="csvScheduleDeviceAllColumns" />
+	</bean>
+
+	<bean id="settingsBCLTarget" class="com.sensus.dm.elec.settings.bcl.impl.SettingsBCLImpl">
+		<property name="settingsDAC" ref="settingsDACTarget" />
+		<property name="propertyBCL" ref="propertyBCLTarget" />
+		<property name="defaultLanguage" value="${system.settings.language}" />
+		<property name="defaultTimeZone" value="${system.settings.timeZone}" />
+		<property name="defaultDateFormat" value="${system.settings.dateFormat}" />
+		<property name="defaultMonitorRequest" value="${system.settings.monitorRequest}" />
+		<property name="defaultPageSize" value="${system.settings.defaultPageSize}" />
+		<property name="defaultTemperatre" value="${system.settings.defaultTemperature}" />
+		<property name="defaultShowDialogPolygon" value="${system.settings.defaultShowDialogPolygon}" />
+	</bean>
+
+	<bean id="tagBCLTarget" class="com.sensus.dm.common.tag.bcl.impl.TagBCLImpl">
+		<property name="tagDAC" ref="tagDACTarget" />
+		<property name="electricMeterBCL" ref="electricMeterBCLTarget" />
+		<property name="waterMeterBCL" ref="waterMeterBCLTarget" />
+		<property name="gasMeterBCL" ref="gasMeterBCLTarget" />
+		<property name="processBCL" ref="processBCLTarget" />
+	</bean>
+
+	<bean id="tenantBCLTarget" class="com.sensus.dm.common.tenant.bcl.impl.TenantBCLImpl">
+		<property name="tenantDAC" ref="tenantDACTarget" />
+	</bean>
+
+	<!-- ########## Action processors: ########## -->
+
+	<bean id="actionProcessorValidatorTarget" class="com.sensus.dm.elec.action.bcl.impl.DMActionProcessorValidator" />
+
+	<bean id="actionProcessorTarget" class="com.sensus.dm.elec.action.bcl.impl.DMActionProcessor">
+		<property name="processBCL" ref="processBCLTarget" />
+		<property name="meterActionProcessor" ref="meterActionProcessorTarget" />
+		<property name="hanActionProcessor" ref="hanActionProcessorTarget" />
+		<property name="electricMeterBCL" ref="electricMeterBCLTarget" />
+		<property name="processSummaryBCL" ref="processSummaryBCLTarget" />
+		<property name="validator" ref="actionProcessorValidatorTarget" />
+	</bean>
+
+	<bean id="hanActionProcessorTarget" class="com.sensus.dm.elec.action.bcl.impl.HanActionProcessor">
+		<property name="hanService" ref="bcf.hanService" />
+		<property name="electricMeterBCL" ref="electricMeterBCLTarget" />
+		<property name="deviceBCL" ref="deviceBCLTarget" />
+		<property name="processBCL" ref="processBCLTarget" />
+		<property name="processSummaryBCL" ref="processSummaryBCLTarget" />
+		<property name="validator" ref="actionProcessorValidatorTarget" />
+		<property name="defaultFirmwareVersion" value="${system.default.firmwareVersion}" />
+		<property name="defaultZigbeeProtocol" 	value="${system.default.zigbeeProtocol}" />
+	</bean>
+
+	<bean id="meterActionProcessorTarget" class="com.sensus.dm.elec.action.bcl.impl.MeterActionProcessor">
+		<property name="meterReadingService" ref="bcf.meterReadingService.camel" />
+		<property name="meterLifecycleService" ref="bcf.meterLifecycleService.camel" />
+		<property name="drService" ref="bcf.drService" />
+		<property name="clientContextMarshaller" ref="clientContextMarshaller" />
+		<property name="connectDisconnectService" ref="bcf.connectDisconnectService" />
+		<property name="electricMeterBCL" ref="electricMeterBCLTarget" />
+		<property name="processBCL" ref="processBCLTarget" />
+		<property name="processSummaryBCL" ref="processSummaryBCLTarget" />
+		<property name="validator" ref="actionProcessorValidatorTarget" />
+		<property name="demandReadPingProfile" 	value="${system.default.demandReadPingProfile}" />
+	</bean>
+
+	<bean id="scheduleProcessor" class="com.sensus.dm.common.schedule.bcl.impl.DMScheduleProcessor">
+		<property name="scheduleBCL" ref="scheduleBCLTarget" />
+		<property name="actionBCL" ref="actionBCLTarget" />
+	</bean>
+
+	<bean id="lcmRelay1" class="com.sensus.dm.elec.device.model.LCMRelay">
+		<property name="relay" value="${dm.electric.lcmRelay1.relay}"/>
+		<property name="amp" value="${dm.electric.lcmRelay1.amp}"/>
+		<property name="deviceClass" value="${dm.electric.lcmRelay1.deviceClass}" />
+	</bean>
+
+	<bean id="lcmRelay2" class="com.sensus.dm.elec.device.model.LCMRelay">
+		<property name="relay" value="${dm.electric.lcmRelay2.relay}"/>
+		<property name="amp" value="${dm.electric.lcmRelay2.amp}"/>
+		<property name="deviceClass" value="${dm.electric.lcmRelay2.deviceClass}" />
+	</bean>
+
+	<bean id="lcmRelay3" class="com.sensus.dm.elec.device.model.LCMRelay">
+		<property name="relay" value="${dm.electric.lcmRelay3.relay}"/>
+		<property name="amp" value="${dm.electric.lcmRelay3.amp}"/>
+		<property name="deviceClass" value="${dm.electric.lcmRelay3.deviceClass}" />
+	</bean>
+
+	<util:list id="defaultLcmRelays">
+		<ref bean="lcmRelay1" />
+		<ref bean="lcmRelay2" />
+		<ref bean="lcmRelay3" />
+	</util:list>
+
+</beans>

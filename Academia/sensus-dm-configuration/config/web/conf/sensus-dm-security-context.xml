@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/security
+          	http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<security:global-method-security pre-post-annotations="enabled" />
+
+	<security:http pattern="/login-redirect.jsp" security="none" />
+	<security:http pattern="/logout-redirect.jsp" security="none"/>
+	<security:http pattern="/access-denied.jsp" security="none"/>
+	<security:http pattern="/version.jsp" security="none" />
+	<security:http pattern="/images/**" security="none" />
+	
+
+	
+	<security:http auto-config="false" use-expressions="true" entry-point-ref="loginUrlAuthenticationEntryPoint" >
+		<security:intercept-url pattern="/**/**"
+			access="hasAnyRole('ROLE_EPM_ADMIN', 'ROLE_EPM_SYSTEM_OPERATOR', 'ROLE_EPM_CUSTOMER_SUPPORT', 'ROLE_EPM_BILLING_MANAGER') and hasAnyRole('ROLE_EPM_SERVICE_ELECTRIC', 'ROLE_EPM_SERVICE_GAS', 'ROLE_EPM_SERVICE_WATER')" />
+		<security:logout invalidate-session="true" logout-success-url="/logout-redirect.jsp" />	
+		<security:access-denied-handler error-page="/access-denied.jsp?You are not authorized for DM." />		
+		<security:session-management invalid-session-url="/logout-redirect.jsp">
+				<security:concurrency-control max-sessions="5" error-if-maximum-exceeded="true" />
+		</security:session-management>
+		<security:custom-filter position="FORM_LOGIN_FILTER" ref="jossoAuthFilter" />
+	</security:http>
+
+	<!-- ########## Authentication manager. ########## -->
+	<security:authentication-manager alias="authenticationManager">
+	  	<security:authentication-provider ref="authenticationProvider" />
+ 	</security:authentication-manager>
+	  
+	<!-- ########## JOSSO setup. ########## -->
+	<bean id="authenticationProvider"
+		class="com.sensus.common.security.AuthenticationProvider"
+		p:authenticationServiceAdapter-ref="authenticationWithMapperAdapter" />
+
+	<bean id="authenticationServiceAdapter"
+		class="com.sensus.common.security.josso.JOSSOAuthenticationAdapter"
+		p:serviceLocator-ref="jossoGatewayServiceLocator" />
+	
+	<bean id="authenticationWithMapperAdapter" parent="authenticationServiceAdapter"
+		class="com.sensus.common.security.josso.JOSSOAuthenticationWithMapperAdapter"
+		p:userMapper-ref="flexNet1xMapper" />
+	
+	<!-- This mapper understands the layout of roles and customers for LDAP 
+		* The customerIDs that a user has access to is in an LDAP property (default 
+		is "customer") * The permissions that a user is granted are modeled as roles -->
+	<bean id="flexNet1xMapper" 
+		class="com.sensus.security.josso.mapper.DefaultSSOUserMapper">
+		<property name="propertiesOfInterest">
+			<map>
+				<entry key="customer" value="${auth.restriction.prefix}" />
+			</map>
+		</property>
+		<property name="roleMappers">
+			<list>
+				<bean class="com.sensus.security.josso.mapper.DefaultSSORoleMapper"
+					p:grantedAuthorityPrefix="${auth.role.prefix}" />
+			</list>
+		</property>
+	</bean>
+	<!-- This mapper understands the layout of roles and customers for Active 
+		Directory * The customerIDs that a user has access to are modelled as roles 
+		with a special suffix (default is _CUSTOMER_ACCESS) * The permissions that 
+		a user is granted are modeled as roles NOTE: The roleMappers are processed 
+		in order so the one for CustomerIDs must be listed before the default role 
+		mapper. -->
+	<bean id="flexNet2xMapper" 
+		class="com.sensus.security.josso.mapper.DefaultSSOUserMapper">
+		<property name="roleMappers">
+			<list>
+				<bean class="com.sensus.security.josso.mapper.SSORoleMapperBySuffix"
+					p:grantedAuthorityPrefix="${auth.restriction.prefix}" p:roleSuffix="${josso.customer.role.suffix}" />
+				<bean class="com.sensus.security.josso.mapper.DefaultSSORoleMapper"
+					p:grantedAuthorityPrefix="${auth.role.prefix}" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="jossoGatewayServiceLocator" 
+		class="org.josso.gateway.WebserviceGatewayServiceLocator"
+		p:endpoint="${josso.serviceLocation}" p:transportSecurity="${josso.transport.security}" />	
+		
+	<bean id="jossoAuthFilter"
+		class="com.sensus.common.security.SsoUsernamePasswordAuthenticationFilter"
+		p:authenticationManager-ref="authenticationManager"
+		p:authenticationFailureHandler-ref="failureHandler"
+		p:authenticationSuccessHandler-ref="successHandler" 
+		p:authenticationServiceAdapter-ref="authenticationWithMapperAdapter" 
+		p:ssoSessionIdName="org.josso.agent.ssoSessionid"
+		p:ssoCookieName="JOSSO_SESSIONID"
+		p:securityDomain="josso"
+		/>
+
+	<bean id="loginUrlAuthenticationEntryPoint"
+		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint"
+		p:loginFormUrl="/login-redirect.jsp" />
+		
+	<bean id="successHandler" 
+		class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler"
+		p:alwaysUseDefaultTargetUrl="true"
+		p:defaultTargetUrl="/service" />
+
+	<bean id="failureHandler" 
+		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"
+		p:defaultFailureUrl="/login-redirect.jsp" />	
+
+</beans>

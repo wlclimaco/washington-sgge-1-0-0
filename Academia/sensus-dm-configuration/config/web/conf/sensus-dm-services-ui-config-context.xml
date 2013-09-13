@@ -1,0 +1,977 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd" >
+
+	<!-- Injected at Device BCL Layer -->
+	<bean id="servicesTarget" class="com.sensus.dm.common.base.model.ServicesPermissions">
+		<property name="servicesTypePermissions">
+			<list>
+	            <ref bean="electricDeviceTypeTarget" />
+ 	            <ref bean="waterDeviceTypeTarget" />
+	            <ref bean="gasDeviceTypeTarget" />
+			</list>
+		</property>
+	</bean>
+
+	<!--
+	     ##################
+	     #### SERVICES ####
+	     ##################
+	-->
+	<bean id="electricDeviceTypeTarget" class="com.sensus.dm.common.base.model.ServicesTypePermissions">
+		<property name="serviceTypeEnum"    value="ELECTRIC"/>
+		<property name="grantedAuthority"    value="ROLE_EPM_SERVICE_ELECTRIC"/>
+		<property name="deviceTypePermissions">
+			<list>
+	            <ref bean="electricMeterDeviceTypeTarget" />
+	            <ref bean="hanDeviceTypeTarget" />
+	            <ref bean="lcmDeviceTypeTarget" />
+			</list>
+		</property>
+		<property name="dashboardUiModules"        ref="dashboardElectricTarget"/>
+		<property name="scheduleActions"           ref="electricMeterScheduleActionsTarget"/>
+		<property name="listActions"    	       ref="electricMeterListActionsTarget"/>
+		<property name="eventHistoryFilterActions" ref="electricMeterEventHistoryFilterActionsTarget"/>
+	</bean>
+
+	<bean id="waterDeviceTypeTarget" class="com.sensus.dm.common.base.model.ServicesTypePermissions">
+		<property name="serviceTypeEnum"    value="WATER"/>
+		<property name="grantedAuthority"    value="ROLE_EPM_SERVICE_WATER"/>
+		<property name="deviceTypePermissions">
+			<list>
+	            <ref bean="waterMeterDeviceTypeTarget" />
+			</list>
+		</property>
+		<property name="dashboardUiModules"        ref="dashboardWaterTarget"/>
+		<property name="scheduleActions"           ref="waterMeterScheduleActionsTarget"/>
+		<property name="listActions"    	       ref="waterMeterListActionsTarget"/>
+		<property name="eventHistoryFilterActions" ref="waterMeterEventHistoryFilterActionsTarget"/>
+	</bean>
+
+	<bean id="gasDeviceTypeTarget" class="com.sensus.dm.common.base.model.ServicesTypePermissions">
+		<property name="serviceTypeEnum"    value="GAS"/>
+		<property name="grantedAuthority"    value="ROLE_EPM_SERVICE_GAS"/>
+		<property name="deviceTypePermissions">
+			<list>
+	            <ref bean="gasMeterDeviceTypeTarget" />
+			</list>
+		</property>
+		<property name="dashboardUiModules"        ref="dashboardGasTarget"/>
+		<property name="scheduleActions"           ref="gasMeterScheduleActionsTarget"/>
+		<property name="listActions"    	       ref="gasMeterListActionsTarget"/>
+		<property name="eventHistoryFilterActions" ref="gasMeterEventHistoryFilterActionsTarget"/>
+	</bean>
+
+	<!--
+	     ##############################
+	     #### ELECTRIC DEVICE TYPE ####
+	     ##############################
+	-->
+	<bean id="electricMeterDeviceTypeTarget" class="com.sensus.dm.common.base.model.DeviceTypePermissions">
+		<property name="deviceType">
+			<value>ELECTRIC_METER</value>
+		</property>
+		<property name="deviceTypeModels">
+			<list>
+				<ref bean="electricMeterCommonDeviceTypeModelTarget"/>
+		  	</list>
+		</property>
+		<property name="defaultActions" ref="electricMeterDefaultActionsTarget" />
+	</bean>
+
+	<bean id="hanDeviceTypeTarget" class="com.sensus.dm.common.base.model.DeviceTypePermissions">
+		<property name="deviceType">
+			<value>HAN_DEVICE</value>
+		</property>
+		<property name="deviceTypeModels">
+			<list>
+				<ref bean="hanCommonDeviceTypeModelTarget"/>
+		  	</list>
+		</property>
+		<property name="defaultActions" ref="hanDeviceDefaultActionsTarget" />
+	</bean>
+
+	<bean id="lcmDeviceTypeTarget" class="com.sensus.dm.common.base.model.DeviceTypePermissions">
+		<property name="deviceType">
+			<value>LCM</value>
+		</property>
+		<property name="deviceTypeModels">
+			<list>
+ 		  		<ref bean="lcmCommonDeviceTypeModelTarget"/>
+ 		  		<ref bean="lcmTypeModelTarget"/>
+ 		  		<ref bean="flexnetLcmTypeModelTarget"/>
+		  	</list>
+		</property>
+		<property name="defaultActions" ref="lcmDefaultActionsTarget" />
+		<property name="alarms" ref="lcmAlarmsTarget"/>
+	</bean>
+
+	<!--
+	     ##############################
+	     #### WATER DEVICE TYPE ######
+	     ##############################
+	-->
+	<bean id="waterMeterDeviceTypeTarget" class="com.sensus.dm.common.base.model.DeviceTypePermissions">
+		<property name="deviceType">
+			<value>WATER_METER</value>
+		</property>
+		<property name="deviceTypeModels">
+			<list>
+				<ref bean="waterMeterCommonDeviceTypeModelTarget"/>
+		  	</list>
+		</property>
+		<property name="defaultActions" ref="waterMeterDefaultActionsTarget" />
+		<property name="alarms" ref="waterMeterAlarmsTarget"/>
+	</bean>
+
+	<!--
+	     ##############################
+	     #### GAS DEVICE TYPE ######
+	     ##############################
+	-->
+	<bean id="gasMeterDeviceTypeTarget" class="com.sensus.dm.common.base.model.DeviceTypePermissions">
+		<property name="deviceType">
+			<value>GAS_METER</value>
+		</property>
+		<property name="deviceTypeModels">
+			<list>
+				<ref bean="gasMeterCommonDeviceTypeModelTarget"/>
+		  	</list>
+		</property>
+		<property name="defaultActions" ref="gasMeterDefaultActionsTarget" />
+		<property name="alarms" ref="gasMeterAlarmsTarget"/>
+	</bean>
+
+	<!--
+	     ##################################
+	     #### ELECTRIC DEFAULT ACTIONS ####
+	     ##################################
+	-->
+	<bean id="electricMeterDefaultActionsTarget" class="com.sensus.dm.common.base.model.DefaultActionsPermissions">
+		<property name="actions" >
+			<list value-type="com.sensus.dm.common.action.model.ActionType" >
+				<!-- Order by Category Action (Front-end grouping) -->
+				<ref bean="initiateDemandResetAction"/>
+				<ref bean="getConnectionStatusAction"/>
+				<ref bean="getDemandResponseEventStatusAction"/>
+				<ref bean="demandResponseAction"/>
+				<ref bean="sendHanTextMessageAction"/>
+				<ref bean="getRemoteConnectStatusAction"/>
+				<ref bean="remoteArmConnectAction"/>
+				<ref bean="remoteConnectAction"/>
+				<ref bean="remoteDisconnectAction"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="hanDeviceDefaultActionsTarget" class="com.sensus.dm.common.base.model.DefaultActionsPermissions">
+		<property name="actions" >
+			<list value-type="com.sensus.dm.common.action.model.ActionType">
+				<!-- Order by Category Action (Front-end grouping) -->
+				<ref bean="getConnectionStatusAction"/>
+				<ref bean="getDemandResponseSetupStatus"/>
+				<ref bean="setupDemandResponseAction"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="lcmDefaultActionsTarget" class="com.sensus.dm.common.base.model.DefaultActionsPermissions">
+		<property name="actions" >
+			<list value-type="com.sensus.dm.common.action.model.ActionType">
+				<!-- Order by Category Action (Front-end grouping) -->
+				<ref bean="getConnectionStatusAction"/>
+				<ref bean="getDemandResponseSetupStatus"/>
+				<ref bean="setupDemandResponseAction"/>
+				<ref bean="demandResponseAction"/>
+				<ref bean="getDemandResponseEventStatusAction"/>
+				<ref bean="getTamperDetectTimer"/>
+				<ref bean="setTamperDetectTimer"/>
+			</list>
+		</property>
+	</bean>
+
+	<!--
+	     ##################################
+	     #### WATER DEFAULT ACTIONS #######
+	     ##################################
+	-->
+	<bean id="waterMeterDefaultActionsTarget" class="com.sensus.dm.common.base.model.DefaultActionsPermissions">
+		<property name="actions" >
+			<list value-type="com.sensus.dm.common.action.model.ActionType" >
+				<!-- Order by Category Action (Front-end grouping) -->
+				<ref bean="demandReadAction"/>
+			</list>
+		</property>
+	</bean>
+
+	<!--
+	     ##################################
+	     #### GAS DEFAULT ACTIONS #######
+	     ##################################
+	-->
+	<bean id="gasMeterDefaultActionsTarget" class="com.sensus.dm.common.base.model.DefaultActionsPermissions">
+		<property name="actions" >
+			<list value-type="com.sensus.dm.common.action.model.ActionType" >
+				<!-- Order by Category Action (Front-end grouping) -->
+				<ref bean="demandReadAction"/>
+			</list>
+		</property>
+	</bean>
+
+	<!--
+	     #####################################
+	     #### ELECTRIC DEVICE TYPE MODELS ####
+	     #####################################
+	 -->
+	<bean id="electricMeterCommonDeviceTypeModelTarget" class="com.sensus.dm.common.base.model.DeviceTypeModelPermissions">
+		<property name="actions" >
+			<list value-type="com.sensus.dm.common.action.model.ActionType">
+				<!-- Order by Category Action (Front-end grouping) -->
+				<ref bean="initiateDemandResetAction"/>
+				<ref bean="connectHanDeviceAction"/>
+				<ref bean="getConnectionStatusAction"/>
+				<ref bean="demandResponseAction"/>
+				<ref bean="getDemandResponseEventStatusAction"/>
+				<ref bean="sendHanTextMessageAction"/>
+				<ref bean="remoteConnectAction"/>
+				<ref bean="remoteDisconnectAction"/>
+				<ref bean="getRemoteConnectStatusAction"/>
+				<ref bean="remoteArmConnectAction"/>
+			</list>
+		</property>
+		<property name="uiModules" ref="electricMeterCommonUiModuleTarget" />
+		<property name="name" value="COMMON"/>
+	</bean>
+
+	<bean id="hanCommonDeviceTypeModelTarget" class="com.sensus.dm.common.base.model.DeviceTypeModelPermissions">
+		<property name="actions" >
+			<list value-type="com.sensus.dm.common.action.model.ActionType">
+				<!-- Order by Category Action (Front-end grouping) -->
+				<ref bean="connectToHanAction"/>
+				<ref bean="deleteHanDeviceAction"/>
+				<ref bean="disconnectHanDeviceAction"/>
+				<ref bean="getConnectionStatusAction"/>
+				<ref bean="setupDemandResponseAction"/>
+				<ref bean="getDemandResponseSetupStatus"/>
+			</list>
+		</property>
+		<property name="uiModules" ref="hanCommonUiModuleTarget" />
+		<property name="name" value="COMMON"/>
+	</bean>
+
+	<bean id="lcmCommonDeviceTypeModelTarget" class="com.sensus.dm.common.base.model.DeviceTypeModelPermissions">
+		<property name="actions" >
+			<list value-type="com.sensus.dm.common.action.model.ActionType">
+				<!-- Order by Category Action (Front-end grouping) -->
+				<ref bean="deleteHanDeviceAction"/>
+				<ref bean="setupDemandResponseAction"/>
+				<ref bean="getDemandResponseSetupStatus"/>
+			</list>
+		</property>
+		<property name="uiModules" ref="lcmCommonUiModuleTarget" />
+		<property name="name" value="COMMON"/>
+	</bean>
+
+	<bean id="lcmTypeModelTarget" class="com.sensus.dm.common.base.model.DeviceTypeModelPermissions">
+		<property name="actions" >
+			<list value-type="com.sensus.dm.common.action.model.ActionType">
+				<!-- Order by Category Action (Front-end grouping) -->
+				<ref bean="connectToHanAction"/>
+				<ref bean="disconnectHanDeviceAction"/>
+				<ref bean="getConnectionStatusAction"/>
+			</list>
+		</property>
+		<property name="uiModules" ref="lcmUiModuleTarget" />
+		<property name="name" value="LCM"/>
+	</bean>
+
+	<bean id="flexnetLcmTypeModelTarget" class="com.sensus.dm.common.base.model.DeviceTypeModelPermissions">
+		<property name="actions" >
+			<list value-type="com.sensus.dm.common.action.model.ActionType">
+				<!-- Order by Category Action (Front-end grouping) -->
+				<ref bean="demandResponseAction"/>
+				<ref bean="getDemandResponseEventStatusAction"/>
+				<ref bean="getTamperDetectTimer"/>
+				<ref bean="setTamperDetectTimer"/>
+			</list>
+		</property>
+		<property name="uiModules" ref="flexnetLcmUiModuleTarget" />
+		<property name="name" value="FLEXNET_LCM"/>
+	</bean>
+
+	<!--
+	     #####################################
+	     #### WATER DEVICE TYPE MODELS #######
+	     #####################################
+	 -->
+	<bean id="waterMeterCommonDeviceTypeModelTarget" class="com.sensus.dm.common.base.model.DeviceTypeModelPermissions">
+		<property name="actions" >
+			<list value-type="com.sensus.dm.common.action.model.ActionType">
+				<!-- Order by Category Action (Front-end grouping) -->
+				<ref bean="demandReadAction"/>
+			</list>
+		</property>
+		<property name="uiModules" ref="waterMeterCommonUiModuleTarget" />
+		<property name="name" value="COMMON"/>
+	</bean>
+
+	<!--
+	     #####################################
+	     #### GAS DEVICE TYPE MODELS #######
+	     #####################################
+	 -->
+	<bean id="gasMeterCommonDeviceTypeModelTarget" class="com.sensus.dm.common.base.model.DeviceTypeModelPermissions">
+		<property name="actions" >
+			<list value-type="com.sensus.dm.common.action.model.ActionType">
+				<!-- Order by Category Action (Front-end grouping) -->
+				<ref bean="demandReadAction"/>
+			</list>
+		</property>
+		<property name="uiModules" ref="gasMeterCommonUiModuleTarget" />
+		<property name="name" value="COMMON"/>
+	</bean>
+
+	<!--
+         #############################
+	     #### ELECTRIC UI MODULES ####
+	     #############################
+	 -->
+	<bean id="electricMeterCommonUiModuleTarget" class="com.sensus.dm.common.base.model.UiModulesPermissions">
+		<property name="tabs"  			ref="electricMeterCommonTabsTarget" />
+		<property name="summaryDatas"  	ref="electricMeterCommonSummaryDatasTarget" />
+		<property name="contents"  		ref="electricMeterCommonContentsTarget" />
+	</bean>
+
+	<bean id="hanCommonUiModuleTarget" class="com.sensus.dm.common.base.model.UiModulesPermissions">
+		<property name="tabs"  			ref="hanCommonTabsTarget" />
+		<property name="summaryDatas"  	ref="hanCommonSummaryDatasTarget" />
+		<property name="contents"  		ref="hanCommonContentsTarget" />
+	</bean>
+
+	<bean id="lcmCommonUiModuleTarget" class="com.sensus.dm.common.base.model.UiModulesPermissions">
+		<property name="tabs"  			ref="lcmCommonTabsTarget" />
+		<property name="summaryDatas"  	ref="lcmCommonSummaryDatasTarget" />
+		<property name="contents"  		ref="lcmCommonContentsTarget" />
+	</bean>
+
+	<bean id="flexnetLcmUiModuleTarget" class="com.sensus.dm.common.base.model.UiModulesPermissions">
+		<property name="summaryDatas"  	ref="flexnetLcmSummaryDatasTarget" />
+		<property name="contents"  		ref="flexnetLcmContentsTarget" />
+	</bean>
+
+	<bean id="lcmUiModuleTarget" class="com.sensus.dm.common.base.model.UiModulesPermissions">
+		<property name="contents"  		ref="lcmContentsTarget" />
+	</bean>
+
+	<!--
+         #############################
+	     #### WATER UI MODULES ######
+	     #############################
+	 -->
+	<bean id="waterMeterCommonUiModuleTarget" class="com.sensus.dm.common.base.model.UiModulesPermissions">
+		<property name="tabs"  			ref="waterMeterCommonTabsTarget" />
+		<property name="summaryDatas"  	ref="waterMeterCommonSummaryDatasTarget" />
+		<property name="contents"  		ref="waterMeterCommonContentsTarget" />
+	</bean>
+
+	<!--
+         #############################
+	     #### GAS UI MODULES ######
+	     #############################
+	 -->
+	<bean id="gasMeterCommonUiModuleTarget" class="com.sensus.dm.common.base.model.UiModulesPermissions">
+		<property name="tabs"  			ref="gasMeterCommonTabsTarget" />
+		<property name="summaryDatas"  	ref="gasMeterCommonSummaryDatasTarget" />
+		<property name="contents"  		ref="gasMeterCommonContentsTarget" />
+	</bean>
+
+	<!--
+	     ##########################
+	     #### ELECTRIC UI TABS ####
+	     ##########################
+	 -->
+	<util:list id="electricMeterCommonTabsTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>aboutThisDevice</value>
+		<value>history</value>
+		<value>snapshot</value>
+		<value>loadProfile</value>
+		<value>demandReads</value>
+		<value>tou</value>
+	</util:list>
+
+	<util:list id="hanCommonTabsTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>aboutThisDevice</value>
+		<value>history</value>
+	</util:list>
+
+	<util:list id="lcmCommonTabsTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>aboutThisDevice</value>
+		<value>history</value>
+	</util:list>
+
+	<!--
+	     ##########################
+	     #### WATER UI TABS #######
+	     ##########################
+	 -->
+	<util:list id="waterMeterCommonTabsTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>aboutThisDevice</value>
+		<value>readData</value>
+		<value>communications</value>
+		<value>history</value>
+	</util:list>
+
+	<!--
+	     ##########################
+	     #### GAS UI TABS #######
+	     ##########################
+	 -->
+	<util:list id="gasMeterCommonTabsTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>aboutThisDevice</value>
+		<value>readData</value>
+		<value>communications</value>
+		<value>history</value>
+	</util:list>
+
+
+	<!--
+	     ###################################
+	     #### ELECTRIC UI SUMMARY DATAS ####
+	     ###################################
+	 -->
+	<util:list id="electricMeterCommonSummaryDatasTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>messageReceived</value>
+		<value>deviceInformation</value>
+		<value>premiseId</value>
+		<value>networkStatus</value>
+		<value>networkAddress</value>
+		<value>installedDate</value>
+		<value>actions</value>
+	</util:list>
+
+	<util:list id="hanCommonSummaryDatasTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>messageReceived</value>
+		<value>networkStatus</value>
+		<value>parent</value>
+		<value>connectedDate</value>
+		<value>deviceInformation</value>
+		<value>premiseId</value>
+		<value>actions</value>
+	</util:list>
+
+	<util:list id="lcmCommonSummaryDatasTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>parent</value>
+		<value>connectedDate</value>
+		<value>deviceInformation</value>
+		<value>networkStatus</value>
+		<value>premiseId</value>
+		<value>actions</value>
+	</util:list>
+
+	<util:list id="flexnetLcmSummaryDatasTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>networkAddress</value>
+	</util:list>
+
+	<!--
+	     ###################################
+	     #### WATER UI SUMMARY DATAS ######
+	     ###################################
+	 -->
+	<util:list id="waterMeterCommonSummaryDatasTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>messageReceived</value>
+		<value>deviceInformation</value>
+		<value>premiseId</value>
+		<value>lifecycle</value>
+		<value>transmit</value>
+		<value>lastRead</value>
+		<value>smartPoint</value>
+		<value>actions</value>
+	</util:list>
+
+	<!--
+	     ###################################
+	     #### GAS UI SUMMARY DATAS ######
+	     ###################################
+	 -->
+	<util:list id="gasMeterCommonSummaryDatasTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>messageReceived</value>
+		<value>deviceInformation</value>
+		<value>premiseId</value>
+		<value>lifecycle</value>
+		<value>transmit</value>
+		<value>lastRead</value>
+		<value>smartPoint</value>
+		<value>actions</value>
+	</util:list>
+
+	<!--
+	     ##############################
+	     #### ELECTRIC UI CONTENTS ####
+	     ##############################
+	 -->
+	<util:list id="electricMeterCommonContentsTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>group</value>
+		<value>tag</value>
+		<value>postNote</value>
+		<value>location</value>
+		<value>deviceInformation</value>
+		<value>scheduledEvents</value>
+		<value>hanDevices</value>
+	</util:list>
+
+	<util:list id="hanCommonContentsTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>group</value>
+		<value>tag</value>
+		<value>postNote</value>
+		<value>location</value>
+		<value>deviceInformation</value>
+		<value>scheduledEvents</value>
+		<value>demandResponseProgramParticipation</value>
+		<value>demandResponseSetup</value>
+	</util:list>
+
+	<util:list id="lcmCommonContentsTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>group</value>
+		<value>tag</value>
+		<value>postNote</value>
+		<value>location</value>
+		<value>deviceInformation</value>
+		<value>scheduledEvents</value>
+		<value>demandResponseProgramParticipation</value>
+	</util:list>
+
+	<util:list id="flexnetLcmContentsTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>alarmsflexnetLcm</value>
+		<value>lcmRelay</value>
+	</util:list>
+
+	<util:list id="lcmContentsTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>demandResponseSetupLcm</value>
+	</util:list>
+
+	<!--
+	     ##############################
+	     #### WATER UI CONTENTS #######
+	     ##############################
+	 -->
+	<util:list id="waterMeterCommonContentsTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>group</value>
+		<value>tag</value>
+		<value>postNote</value>
+		<value>location</value>
+		<value>waterMeterDeviceInformation</value>
+		<value>scheduledEvents</value>
+		<value>deviceDetails</value>
+		<value>alarmsWaterMeter</value>
+	</util:list>
+
+	<!--
+	     ##############################
+	     #### GAS UI CONTENTS #######
+	     ##############################
+	 -->
+	<util:list id="gasMeterCommonContentsTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>group</value>
+		<value>tag</value>
+		<value>postNote</value>
+		<value>location</value>
+		<value>gasMeterDeviceInformation</value>
+		<value>scheduledEvents</value>
+		<value>deviceDetails</value>
+		<value>alarmsGasMeter</value>
+	</util:list>
+
+	<!--
+	     #######################################
+	     #### ELECTRIC DASHBOARD UI MODULES ####
+	     #######################################
+	 -->
+	<util:list id="dashboardElectricTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>header</value>
+		<value>savedSearches</value>
+		<value>eventsToday</value>
+	</util:list>
+
+	<!--
+	     #######################################
+	     #### WATER DASHBOARD UI MODULES #######
+	     #######################################
+	 -->
+	<util:list id="dashboardWaterTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>header</value>
+		<value>savedSearches</value>
+		<value>eventsToday</value>
+	</util:list>
+
+	<!--
+	     #######################################
+	     #### GAS DASHBOARD UI MODULES #######
+	     #######################################
+	 -->
+	<util:list id="dashboardGasTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>header</value>
+		<value>savedSearches</value>
+		<value>eventsToday</value>
+	</util:list>
+
+
+	<!--
+	     ##################################################
+	     #### ELECTRIC SCHEDULE ACTIONS - ACTION TYPES ####
+	     ##################################################
+	 -->
+	<util:list id="electricMeterScheduleActionsTarget" list-class="java.util.ArrayList" value-type="com.sensus.dm.common.action.model.ActionType">
+		<ref bean="initiateDemandResetAction"/>
+		<ref bean="remoteConnectAction"/>
+		<ref bean="remoteDisconnectAction"/>
+		<ref bean="remoteArmConnectAction"/>
+		<ref bean="sendHanTextMessageAction"/>
+		<ref bean="demandResponseAction"/>
+	</util:list>
+
+	<!--
+	     ##################################################
+	     #### WATER SCHEDULE ACTIONS - ACTION TYPES #######
+	     ##################################################
+	 -->
+	<util:list id="waterMeterScheduleActionsTarget" list-class="java.util.ArrayList" value-type="com.sensus.dm.common.action.model.ActionType">
+		<ref bean="demandReadAction"/>
+	</util:list>
+
+	<!--
+	     ##################################################
+	     #### GAS SCHEDULE ACTIONS - ACTION TYPES #######
+	     ##################################################
+	 -->
+	<util:list id="gasMeterScheduleActionsTarget" list-class="java.util.ArrayList" value-type="com.sensus.dm.common.action.model.ActionType">
+		<ref bean="demandReadAction"/>
+	</util:list>
+
+	<!--
+	     ##################################################
+	     #### ELECTRIC ACTIONS LIST - ACTION TYPES ########
+	     ##################################################
+	 -->
+	<util:list id="electricMeterListActionsTarget" list-class="java.util.ArrayList" value-type="com.sensus.dm.common.action.model.ActionType">
+
+		<!-- Demand Reset Category -->
+		<ref bean="initiateDemandResetAction"/>
+
+		<!-- Demand Response Category -->
+		<ref bean="demandResponseAction"/>
+		<ref bean="setupDemandResponseAction"/>
+		<ref bean="getDemandResponseEventStatusAction"/>
+		<ref bean="getDemandResponseSetupStatus"/>
+
+		<!-- Han Device Category -->
+		<ref bean="connectHanDeviceAction"/>
+		<ref bean="disconnectHanDeviceAction"/>
+		<ref bean="deleteHanDeviceAction"/>
+		<ref bean="getConnectionStatusAction"/>
+		<ref bean="importHanDeviceAction"/>
+		<ref bean="sendHanTextMessageAction"/>
+
+		<!-- Service Switch Category -->
+		<ref bean="remoteDisconnectAction"/>
+		<ref bean="remoteConnectAction"/>
+		<ref bean="getRemoteConnectStatusAction"/>
+		<ref bean="remoteArmConnectAction"/>
+
+		<!-- Manage Alerts Category -->
+		<ref bean="setTamperDetectTimer"/>
+		<ref bean="getTamperDetectTimer"/>
+
+	</util:list>
+
+	<!--
+	     ##################################################
+	     #### WATER ACTIONS LIST - ACTION TYPES ###########
+	     ##################################################
+	 -->
+	<util:list id="waterMeterListActionsTarget" list-class="java.util.ArrayList" value-type="com.sensus.dm.common.action.model.ActionType">
+		<ref bean="demandReadAction"/>
+	</util:list>
+
+	<!--
+	     ##################################################
+	     #### GAS ACTIONS LIST - ACTION TYPES ###########
+	     ##################################################
+	 -->
+	<util:list id="gasMeterListActionsTarget" list-class="java.util.ArrayList" value-type="com.sensus.dm.common.action.model.ActionType">
+		<ref bean="demandReadAction"/>
+	</util:list>
+
+	<!--
+	     ##################################################################
+	     #### ELECTRIC EVENT HISTORY FILTER ACTIONS - ACTION TYPES ########
+	     ##################################################################
+	 -->
+	<util:list id="electricMeterEventHistoryFilterActionsTarget" list-class="java.util.ArrayList" value-type="com.sensus.dm.common.action.model.ActionType">
+
+		<!-- Demand Reset Category -->
+		<ref bean="initiateDemandResetAction"/>
+
+		<!-- Demand Response Category -->
+		<ref bean="demandResponseAction"/>
+		<ref bean="setupDemandResponseAction"/>
+		<ref bean="getDemandResponseEventStatusAction"/>
+		<ref bean="getDemandResponseSetupStatus"/>
+
+		<!-- Han Device Category -->
+		<ref bean="connectHanDeviceAction"/>
+		<ref bean="connectToHanAction"/>
+		<ref bean="disconnectHanDeviceAction"/>
+		<ref bean="deleteHanDeviceAction"/>
+		<ref bean="getConnectionStatusAction"/>
+		<ref bean="importHanDeviceAction"/>
+		<ref bean="sendHanTextMessageAction"/>
+
+		<!-- Service Switch Category -->
+		<ref bean="remoteDisconnectAction"/>
+		<ref bean="remoteConnectAction"/>
+		<ref bean="getRemoteConnectStatusAction"/>
+		<ref bean="remoteArmConnectAction"/>
+
+		<!-- Manage Alerts Category -->
+		<ref bean="setTamperDetectTimer"/>
+		<ref bean="getTamperDetectTimer"/>
+
+	</util:list>
+
+	<!--
+	     ##################################################################
+	     #### WATER EVENT HISTORY FILTER ACTIONS - ACTION TYPES ###########
+	     ##################################################################
+	 -->
+	 <util:list id="waterMeterEventHistoryFilterActionsTarget" list-class="java.util.ArrayList" value-type="com.sensus.dm.common.action.model.ActionType">
+		<ref bean="demandReadAction"/>
+	</util:list>
+
+	<!--
+	     ##################################################################
+	     #### GAS EVENT HISTORY FILTER ACTIONS - ACTION TYPES #############
+	     ##################################################################
+	 -->
+	<util:list id="gasMeterEventHistoryFilterActionsTarget" list-class="java.util.ArrayList" value-type="com.sensus.dm.common.action.model.ActionType">
+		<ref bean="demandReadAction"/>
+	</util:list>
+
+
+	<!--
+	     ########################################
+	     ### GRANTED AUTHORITY - ACTION TYPES ###
+	     ########################################
+	 -->
+
+	<util:list id="grantedAuthorityListTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>ROLE_EPM_ADMIN</value>
+		<value>ROLE_EPM_SYSTEM_OPERATOR</value>
+		<value>ROLE_EPM_CUSTOMER_SUPPORT</value>
+		<value>ROLE_EPM_BILLING_MANAGER</value>
+	</util:list>
+
+	<!--
+	     ########################################
+	     #### GENERAL ACTIONS - ACTION TYPES ####
+	     ########################################
+	 -->
+
+	<!--
+		#### Demand Reset Category ####
+	 -->
+	 <bean id="initiateDemandResetAction" class="com.sensus.dm.common.action.model.ActionType">
+	 	<property name="actionTypeEnum" value="INITIATE_DEMAND_RESET_EVENT"/>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="02/28/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<!--
+		#### Han Device Category ####
+	 -->
+	<bean id="connectToHanAction" class="com.sensus.dm.common.action.model.ActionType">
+		<property name="actionTypeEnum" value="CONNECT_TO_HAN"/>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="02/28/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="connectHanDeviceAction" class="com.sensus.dm.common.action.model.ActionType">
+		<property name="actionTypeEnum" value="CONNECT_HAN_DEVICE"/>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="02/28/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="disconnectHanDeviceAction" class="com.sensus.dm.common.action.model.ActionType">
+		<property name="actionTypeEnum" value="DISCONNECT_HAN_DEVICE"/>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="02/28/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="importHanDeviceAction" class="com.sensus.dm.common.action.model.ActionType">
+		<property name="actionTypeEnum" value="IMPORT_HAN_DEVICE"/>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="02/28/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="deleteHanDeviceAction" class="com.sensus.dm.common.action.model.ActionType">
+		<property name="actionTypeEnum" value="DELETE_HAN_DEVICE"/>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="02/28/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="getConnectionStatusAction" class="com.sensus.dm.common.action.model.ActionType">
+		<property name="actionTypeEnum" value="GET_HAN_CONNECTION_STATUS"/>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="02/28/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="sendHanTextMessageAction" class="com.sensus.dm.common.action.model.ActionType">
+		<property name="actionTypeEnum" value="SEND_HAN_TEXT_MESSAGE"/>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="02/28/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<!--
+		#### Demand Response Category ####
+	 -->
+	<bean id="demandResponseAction" class="com.sensus.dm.common.action.model.ActionType">
+		<property name="actionTypeEnum" value="INITIATE_DEMAND_RESPONSE_EVENT"/>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="02/28/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="setupDemandResponseAction" class="com.sensus.dm.common.action.model.ActionType">
+		<property name="actionTypeEnum" value="INITIATE_DEMAND_RESPONSE_SETUP"/>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="02/28/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="getDemandResponseEventStatusAction" class="com.sensus.dm.common.action.model.ActionType">
+		<property name="actionTypeEnum" value="GET_DEMAND_RESPONSE_EVENT_STATUS"/>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="02/28/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="getDemandResponseSetupStatus" class="com.sensus.dm.common.action.model.ActionType">
+		<property name="actionTypeEnum" value="GET_DEMAND_RESPONSE_SETUP_STATUS"/>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="05/15/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<!--
+		#### Service Switch Category ####
+	 -->
+	<bean id="remoteConnectAction" class="com.sensus.dm.common.action.model.ActionType">
+		<property name="actionTypeEnum" value="REMOTE_CONNECT"/>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="02/28/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="remoteDisconnectAction" class="com.sensus.dm.common.action.model.ActionType">
+		<property name="actionTypeEnum" value="REMOTE_DISCONNECT"/>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="02/28/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="remoteArmConnectAction" class="com.sensus.dm.common.action.model.ActionType">
+		<property name="actionTypeEnum" value="REMOTE_ARM_CONNECT"/>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="02/28/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="getRemoteConnectStatusAction" class="com.sensus.dm.common.action.model.ActionType">
+		<property name="actionTypeEnum" value="GET_REMOTE_CONNECT_STATUS"/>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="02/28/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<!--
+		#### Get Data From Device Category ####
+	 -->
+	<bean id="demandReadAction" class="com.sensus.dm.common.action.model.ActionType">
+		<property name="actionTypeEnum" value="DEMAND_READ"/>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="02/28/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<!--
+		#### Manage Alerts Category ####
+	 -->
+	<bean id="setTamperDetectTimer" class="com.sensus.dm.common.action.model.ActionType">
+		<property name="actionTypeEnum" value="SET_TAMPER_DETECT_TIMER"/>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="05/15/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="getTamperDetectTimer" class="com.sensus.dm.common.action.model.ActionType">
+		<property name="actionTypeEnum" value="GET_TAMPER_DETECT_TIMER"/>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="05/15/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<!--
+	     ###################################
+	     ########## ELECTRIC ALARMS ########
+	     ###################################
+	 -->
+	<util:list id="lcmAlarmsTarget" list-class="java.util.ArrayList" value-type="com.sensus.dm.common.device.model.AlarmEnum">
+		<value>RELAY_CURRENT_TAMPER</value>
+		<value>RELAY_VOLTAGE_TAMPER</value>
+	</util:list>
+
+	<!--
+	     ###################################
+	     ######### WATER ALARMS ############
+	     ###################################
+	 -->
+	<util:list id="waterMeterAlarmsTarget" list-class="java.util.ArrayList" value-type="com.sensus.dm.common.device.model.AlarmEnum">
+		<value>METER_READ_FAIL</value>
+		<value>METER_COMM_FAIL</value>
+		<value>SWAPPED_METER</value>
+		<value>LEAK_DETECTED</value>
+		<value>BACK_FLOW</value>
+		<value>BROKEN_PIPE</value>
+		<value>TAMPER</value>
+		<value>MULTIPLE</value>
+	</util:list>
+
+	<!--
+	     ###################################
+	     ########## GAS ALARMS #############
+	     ###################################
+	 -->
+	<util:list id="gasMeterAlarmsTarget" list-class="java.util.ArrayList" value-type="com.sensus.dm.common.device.model.AlarmEnum">
+		<value>MAGNETIC</value>
+		<value>TILT</value>
+		<value>CUT_WIRE</value>
+		<value>BACK_FLOW</value>
+		<value>BROKEN_PIPE</value>
+		<value>MULTIPLE</value>
+	</util:list>
+
+</beans>
