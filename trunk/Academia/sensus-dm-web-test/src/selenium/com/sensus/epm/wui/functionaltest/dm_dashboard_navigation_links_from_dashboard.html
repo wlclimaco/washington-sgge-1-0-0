@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>click_Installed_links</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">click_Installed_links</td></tr>
+</thead><tbody>
+<!--#5879 and #5878-->
+<tr>
+	<td>storeText</td>
+	<td>css=#header-table td.week:eq(0) a</td>
+	<td>devicesNumber</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#header-table td.today a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=results</td>
+	<td>${devicesNumber}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menu-dashboard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=#header-table td.week:eq(0) a</td>
+	<td>devicesNumber</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#header-table td.week:eq(0) a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=results</td>
+	<td>${devicesNumber}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menu-dashboard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeElementPresent</td>
+	<td>css=#header-table td.week:eq(1) a</td>
+	<td>haveColumn1</td>
+</tr>
+<!--Check if have LCMs column/..-->
+<tr>
+	<td>gotoIf</td>
+	<td>!${haveColumn1}</td>
+	<td>label1</td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=#header-table td.week:eq(1) a</td>
+	<td>devicesNumber</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#header-table td.week:eq(1) a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=results</td>
+	<td>${devicesNumber}</td>
+</tr>
+<!--../-->
+<tr>
+	<td>click</td>
+	<td>id=menu-dashboard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>label1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeElementPresent</td>
+	<td>css=#header-table td.week:eq(2) a</td>
+	<td>haveColumn2</td>
+</tr>
+<!--Check if have Thermostats column/..-->
+<tr>
+	<td>gotoIf</td>
+	<td>!${haveColumn2}</td>
+	<td>label2</td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=#header-table td.week:eq(2) a</td>
+	<td>devicesNumber</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#header-table td.week:eq(2) a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=results</td>
+	<td>${devicesNumber}</td>
+</tr>
+<!--../-->
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menu-dashboard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>label2</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

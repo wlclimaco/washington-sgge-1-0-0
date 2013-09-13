@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>add_one_device_to_tag</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">add_one_device_to_tag</td></tr>
+</thead><tbody>
+<!--#5685-->
+<tr>
+	<td>setSpeed</td>
+	<td>800</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Devices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tbody tr:eq(0) td:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#addTag&quot;, &quot;div.positionHelper&quot;).click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=add_tag_form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>2000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=add_tag_form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tag_add_select_input</td>
+	<td>${tagName}</td>
+</tr>
+<tr>
+	<td>getSysTime</td>
+	<td>currentTime</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${currentTime}</td>
+	<td>actionTime</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.ui-dialog-buttonset &gt; .ui-button </td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=#messaging-main &gt; span</td>
+	<td>We have received your request to Add Device to Tag. View “Event History” for action status.</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>Add Tag &quot;${tagName}&quot; to Device ${deviceId}</td>
+	<td>event</td>
+</tr>
+</tbody></table>
+</body>
+</html>

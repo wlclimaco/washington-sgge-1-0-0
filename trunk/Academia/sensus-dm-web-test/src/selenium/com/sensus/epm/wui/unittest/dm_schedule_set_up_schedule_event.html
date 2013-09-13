@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>set_up_schedule_event</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">set_up_schedule_event</td></tr>
+</thead><tbody>
+<tr>
+	<td>storeGlobal</td>
+	<td>listTable</td>
+	<td>tableID</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Devices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeTextGlobal</td>
+	<td>css=#smartpoint-table tbody tr:eq(5) td:eq(2)</td>
+	<td>device1</td>
+</tr>
+<tr>
+	<td>storeTextGlobal</td>
+	<td>css=#smartpoint-table tbody tr:eq(6) td:eq(2)</td>
+	<td>device2</td>
+</tr>
+<tr>
+	<td>storeTextGlobal</td>
+	<td>css=#smartpoint-table tbody tr:eq(7) td:eq(2)</td>
+	<td>device3</td>
+</tr>
+<tr>
+	<td>storeTextGlobal</td>
+	<td>css=#smartpoint-table tbody tr:eq(5) td:eq(1) a</td>
+	<td>device1M</td>
+</tr>
+<tr>
+	<td>storeTextGlobal</td>
+	<td>css=#smartpoint-table tbody tr:eq(6) td:eq(1) a</td>
+	<td>device2M</td>
+</tr>
+<tr>
+	<td>storeTextGlobal</td>
+	<td>css=#smartpoint-table tbody tr:eq(7) td:eq(1) a</td>
+	<td>device3M</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>3</td>
+	<td>sizeDevices</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>javascript{ Math.floor(Math.random() * 1000)}</td>
+	<td>random</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>Schedule Test Selenium ${random}</td>
+	<td>firstNameSchedule</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${device1},${device2},${device3}</td>
+	<td>networkAddress</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${device1}</td>
+	<td>oneNetworkAddress</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${device1M}</td>
+	<td>oneDeviceId</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${device1M},${device2M},${device3M}</td>
+	<td>deviceIds</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>Schedule Group ${random}</td>
+	<td>nameSchedule</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>Group Selenium Empty ${random}</td>
+	<td>groupEmpty</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>Group Selenium One Device ${random}</td>
+	<td>groupOneDevice</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>Group Selenium Several Devices ${random}</td>
+	<td>groupSeveralDevice</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>11:30pm</td>
+	<td>scheduleEventTime</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menu-systemintelligence</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Scheduled Events</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

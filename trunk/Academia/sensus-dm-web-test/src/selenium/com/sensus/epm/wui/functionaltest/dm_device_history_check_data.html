@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>check_device_history</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">check_device_history</td></tr>
+</thead><tbody>
+<!--# Navigation-->
+<tr>
+	<td>click</td>
+	<td>id=menu-smartpoint</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--#-->
+<tr>
+	<td>assertTitle</td>
+	<td>Devices - Sensus Device Manager</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('li.checkbox[title=&quot;Meters&quot;] input').click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('li.checkbox[title=&quot;Meters&quot;] input').click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeTextGlobal</td>
+	<td>css=#smartpoint-table tbody tr:eq(0) strong</td>
+	<td>deviceId</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('#smartpoint-table strong:contains(${deviceId})').click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--# Getting the total number of rows.-->
+<tr>
+	<td>storeTableRows</td>
+	<td>css=#groups table tbody</td>
+	<td>countRowsGroup</td>
+</tr>
+<tr>
+	<td>storeTableRows</td>
+	<td>css=#groups table tbody</td>
+	<td>countRowsTag</td>
+</tr>
+<!--# Adding new group.-->
+<tr>
+	<td>click</td>
+	<td>id=add-groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#div-groups button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=ul.ui-autocomplete li a:first</td>
+	<td>groupName</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=combo_group_input</td>
+	<td>${groupName}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#div-groups button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#group-submit</td>
+	<td></td>
+</tr>
+<!--# Verifying the total number of rows.-->
+<tr>
+	<td>echo</td>
+	<td>${countRowsGroup}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${countRowsTag}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${countRowsGroup}) + 1</td>
+	<td>countRowsGroup</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${countRowsTag}) + 1</td>
+	<td>countRowsTag</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${countRowsGroup}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${countRowsTag}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTableRows</td>
+	<td>css=#groups table tbody</td>
+	<td>${countRowsGroup}</td>
+</tr>
+<tr>
+	<td>verifyTableRows</td>
+	<td>css=#groups table tbody</td>
+	<td>${countRowsTag}</td>
+</tr>
+<!--# Adding new tag.-->
+<tr>
+	<td>click</td>
+	<td>css=#add-tags</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#combo-tag button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=ul.ui-autocomplete li a</td>
+	<td>tagName</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tag_add_select_smartpoint_input</td>
+	<td>${tagName}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#combo-tag button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tag-submit</td>
+	<td></td>
+</tr>
+<!--# Navigation.-->
+<tr>
+	<td>click</td>
+	<td>link=History</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--# Veryfying if the datas were created correctly.-->
+<tr>
+	<td>storeTableRow</td>
+	<td>Add device to group/3</td>
+	<td>groupRow</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>storedVars['groupRow'] - 3</td>
+	<td>groupRow</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#device-history-table tbody tr:eq(${groupRow}) td:eq(4)</td>
+	<td>Add Device ${deviceId} to &quot;${groupName}&quot;</td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>Add device to tag/3</td>
+	<td>tagRow</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>storedVars['tagRow'] - 3</td>
+	<td>tagRow</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#device-history-table tbody tr:eq(${tagRow}) td:eq(4)</td>
+	<td>Add Tag &quot;${tagName}&quot; to Device ${deviceId}</td>
+</tr>
+<!--# Deleting group which has been created.-->
+<tr>
+	<td>click</td>
+	<td>id=about-deivce</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#detail-header-pane-1 h1</td>
+	<td>Meter ${deviceId}</td>
+</tr>
+<tr>
+	<td>storeTableRows</td>
+	<td>css=#groups table tbody</td>
+	<td>countRowsGroup</td>
+</tr>
+<tr>
+	<td>storeTableRows</td>
+	<td>css=#groups table tbody</td>
+	<td>countRowsTag</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('.groupName:contains(${groupName})').prev().find('a').click();</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('.ui-dialog-buttonpane button:first').click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('.tag-container .title:contains(${tagName})').prev().click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(storedVars['countRowsGroup']) - 1</td>
+	<td>countRowsGroup</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(storedVars['countRowsTag']) - 1</td>
+	<td>countRowsTag</td>
+</tr>
+<tr>
+	<td>verifyTableRows</td>
+	<td>css=#groups table tbody</td>
+	<td>${countRowsGroup}</td>
+</tr>
+<tr>
+	<td>verifyTableRows</td>
+	<td>css=#groups table tbody</td>
+	<td>${countRowsTag}</td>
+</tr>
+<!--# Veryfing if the datas were deleted.-->
+<tr>
+	<td>click</td>
+	<td>link=History</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>Delete device from group/3</td>
+	<td>groupRow</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>storedVars['groupRow'] - 3</td>
+	<td>groupRow</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#device-history-table tbody tr:eq(${groupRow}) td:eq(4)</td>
+	<td>Delete Device ${deviceId} from &quot;${groupName}&quot;</td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>Delete device from tag/3</td>
+	<td>tagRow</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>storedVars['tagRow'] - 3</td>
+	<td>tagRow</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#device-history-table tbody tr:eq(${tagRow}) td:eq(4)</td>
+	<td>Delete Tag &quot;${tagName}&quot; from Device ${deviceId}</td>
+</tr>
+</tbody></table>
+</body>
+</html>

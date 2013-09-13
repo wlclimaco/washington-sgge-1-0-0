@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>set_up_add_several_devices_to_group_already_in</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">set_up_add_several_devices_to_group_already_in</td></tr>
+</thead><tbody>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=header-logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>qatqat</td>
+	<td>pass</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>qat2</td>
+	<td>user</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=j_username</td>
+	<td>${user}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=j_password</td>
+	<td>${pass}</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=jasso_signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=.dashboardLinks</td>
+	<td>alist active</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Manage Electric</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyAttribute</td>
+	<td>id=menu-dashboard@class</td>
+	<td>alist active</td>
+</tr>
+<tr>
+	<td>verifyTitle</td>
+	<td>Dashboard - Sensus Device Manager</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user-name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>Eastern</td>
+	<td>varTimeZone</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=timezone</td>
+	<td>${varTimeZone}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=button-save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log Out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=j_username</td>
+	<td>${user}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=j_password</td>
+	<td>${pass}</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=jasso_signin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=.dashboardLinks</td>
+	<td>alist active</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Manage Electric</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyAttribute</td>
+	<td>id=menu-dashboard@class</td>
+	<td>alist active</td>
+</tr>
+<tr>
+	<td>verifyTitle</td>
+	<td>Dashboard - Sensus Device Manager</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menu-smartpoint</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Devices - Sensus Device Manager</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeTextGlobal</td>
+	<td>css=#smartpoint-table tbody tr:eq(13) td:eq(2)</td>
+	<td>device1</td>
+</tr>
+<tr>
+	<td>storeTextGlobal</td>
+	<td>css=#smartpoint-table tbody tr:eq(14) td:eq(2)</td>
+	<td>device2</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${device1}|${device2}</td>
+	<td>G_devices</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>2</td>
+	<td>devicesTotal</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>Add device to group</td>
+	<td>actionName</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>2</td>
+	<td>devicesFailed</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>Complete</td>
+	<td>status</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>false</td>
+	<td>checkSummary</td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>data_table</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">data_table</td></tr>
+</thead><tbody>
+<!--storeGlobal | Table ID | dataTableID-->
+<tr>
+	<td>storeEval</td>
+	<td>&quot;${tableID}&quot; + &quot;_wrapper&quot;</td>
+	<td>dataTableID</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${dataTableID}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#${dataTableID}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeVisible</td>
+	<td>css=.blankslate</td>
+	<td>isBlank</td>
+</tr>
+<!--If results > 0-->
+<tr>
+	<td>gotoIf</td>
+	<td>${isBlank}</td>
+	<td>jumpBlank</td>
+</tr>
+<!--Per page-->
+<tr>
+	<td>storeEval</td>
+	<td>window.$(&quot;.dataTables_length select option:not([selected=selected]):eq(0)&quot;, &quot;#${dataTableID}&quot;).text()</td>
+	<td>perPage</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=#${dataTableID} .dataTables_length select</td>
+	<td>${perPage}</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=#${dataTableID} .dataTables_length select</td>
+	<td>25</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeCssCount</td>
+	<td>css=#${dataTableID} tbody tr.row-header</td>
+	<td>rowHeader</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>25 + parseInt(${rowHeader})</td>
+	<td>totalPerPage</td>
+</tr>
+<tr>
+	<td>verifyCssCount</td>
+	<td>css=#${dataTableID} tbody tr</td>
+	<td>${totalPerPage}</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>id=results</td>
+	<td>matches</td>
+</tr>
+<tr>
+	<td>storeSelectedValue</td>
+	<td>css=#${dataTableID} .numbers select</td>
+	<td>pagination</td>
+</tr>
+<tr>
+	<td>storeVisible</td>
+	<td>css=#${dataTableID} .paging</td>
+	<td>isPaged</td>
+</tr>
+<!--If pages > 0-->
+<tr>
+	<td>gotoIf</td>
+	<td>!${isPaged}</td>
+	<td>jumpPaging</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#${dataTableID} span.paginate_active</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>css=#${dataTableID} .previous</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>Math.ceil(storedVars['matches'].replace(&quot;,&quot;,&quot;&quot;) / storedVars['pagination'])</td>
+	<td>maxPage</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#${dataTableID} .dataTables_paginate &gt; span:eq(2) &gt; span:last</td>
+	<td>${maxPage}</td>
+</tr>
+<!--Pages Button-->
+<tr>
+	<td>click</td>
+	<td>css=#${dataTableID} .dataTables_paginate &gt; span:eq(2) &gt; span:eq(1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>css=#${dataTableID} .dataTables_paginate &gt; span:eq(2) &gt; span:eq(1)@class</td>
+	<td>paginate_active</td>
+</tr>
+<!--Prev Button-->
+<tr>
+	<td>assertVisible</td>
+	<td>css=#${dataTableID} .previous </td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#${dataTableID} .previous </td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>css=#${dataTableID} .dataTables_paginate &gt; span:eq(2) &gt; span:first@class</td>
+	<td>paginate_active</td>
+</tr>
+<!--Next Button-->
+<tr>
+	<td>assertVisible</td>
+	<td>css=#${dataTableID} .next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#${dataTableID} .next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>css=#${dataTableID} .dataTables_paginate &gt; span:eq(2) &gt; span:eq(1)@class</td>
+	<td>paginate_active</td>
+</tr>
+<!--Last Page Button-->
+<tr>
+	<td>click</td>
+	<td>css=#${dataTableID} .dataTables_paginate &gt; span:eq(2) &gt; span:last</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>css=#${dataTableID} .dataTables_paginate &gt; span:eq(2) &gt; span:last@class</td>
+	<td>paginate_active</td>
+</tr>
+<!--First Page Button-->
+<tr>
+	<td>click</td>
+	<td>css=#${dataTableID} .dataTables_paginate &gt; span:eq(2) &gt; span:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>css=#${dataTableID} .dataTables_paginate &gt; span:eq(2) &gt; span:first@class</td>
+	<td>paginate_active</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>jumpPaging</td>
+	<td></td>
+</tr>
+<!--Ordering-->
+<tr>
+	<td>storeCssCount</td>
+	<td>css=#${dataTableID} th[class*='sorting']:not(.hide, .sorting_disabled)</td>
+	<td>sortableLength</td>
+</tr>
+<tr>
+	<td>while</td>
+	<td>${sortableLength} &gt; 0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>storedVars['sortableLength'] - 1</td>
+	<td>sortableLength</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${sortableLength}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#${dataTableID} th[class*='sorting']:not(.hide, .sorting_disabled):eq(${sortableLength}) span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyAttribute</td>
+	<td>css=#${dataTableID} th[class*='sorting']:not(.hide, .sorting_disabled):eq(${sortableLength})@class</td>
+	<td>glob:*sorting_asc</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#${dataTableID} th[class*='sorting']:not(.hide, .sorting_disabled):eq(${sortableLength}) span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyAttribute</td>
+	<td>css=#${dataTableID} th[class*='sorting']:not(.hide, .sorting_disabled):eq(${sortableLength})@class</td>
+	<td>glob:*sorting_desc</td>
+</tr>
+<tr>
+	<td>endWhile</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>jumpBlank</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

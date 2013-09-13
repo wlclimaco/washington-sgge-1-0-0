@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>updated_group</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">updated_group</td></tr>
+</thead><tbody>
+<!--#5846-->
+<tr>
+	<td>setTimeout</td>
+	<td>50000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#messaging-main&quot;).remove()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=group-table</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>0${groupName}/2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(storedVars['row']) - 2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#group-table tbody tr:eq(${row}) td:eq(2) a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=type</td>
+	<td>Operations</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=group-name-create</td>
+	<td>0${groupName}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=group-description</td>
+	<td>test Description</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=back-group</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=results</td>
+	<td>${groupCount}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=group-table_info</td>
+	<td>Showing 1 - ${groupCount} of ${groupCount} |</td>
+</tr>
+</tbody></table>
+</body>
+</html>

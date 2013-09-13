@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>set_up_action_han_send_text_message</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">set_up_action_han_send_text_message</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>link=Devices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#smartpoint-table</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeTextGlobal</td>
+	<td>css=#smartpoint-table tbody tr:eq(0) td:eq(1)</td>
+	<td>device1</td>
+</tr>
+<tr>
+	<td>storeTextGlobal</td>
+	<td>css=#smartpoint-table tbody tr:eq(1) td:eq(1)</td>
+	<td>device2</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${device2}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>2</td>
+	<td>devicesTotal</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>Send Text Message</td>
+	<td>actionName</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>0</td>
+	<td>devicesFailed</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>Started</td>
+	<td>status</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>false</td>
+	<td>checkSummary</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>Send HAN text message On Demand for &quot;${devicesTotal}&quot; devices.</td>
+	<td>event</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${device1}|${device2}</td>
+	<td>G_devices</td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>Send Text Message</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Send Text Message</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeSpeed</td>
+	<td>currentSpeed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setSpeed</td>
+	<td>200</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.positionHelper&gt;div&gt;ul.detail-actions-height&gt;li:eq(2)&gt;ul&gt;li:eq(1)&gt;a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=textMessageHan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=textMessageHan</td>
+	<td>test text ham message</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=hanMessageDate</td>
+	<td>12/31/2013</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=hanMessageTime</td>
+	<td>11:30pm</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.ui-dialog-buttonset button:eq(0)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setSpeed</td>
+	<td>${currentSpeed}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=#messaging-smartpoint-detail .message</td>
+	<td>We have received your request to send a Text Message. View “Recent Requests” or “Event History” for action status.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-smartpoint-detail .message</td>
+	<td>We have received your request to send a Text Message. View “Recent Requests” or “Event History” for action status.</td>
+</tr>
+</tbody></table>
+</body>
+</html>

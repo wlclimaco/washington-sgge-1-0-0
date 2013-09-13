@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>Try to add Device to group wich it already belong on About this device page</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Try to add Device to group wich it already belong on About this device page</td></tr>
+</thead><tbody>
+<!--#5966-->
+<tr>
+	<td>storeText</td>
+	<td>css=#groups .small-table tr:first .groupName</td>
+	<td>firstGroupName</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add-groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeCssCount</td>
+	<td>css=.small-table .remove-group</td>
+	<td>qtdElements</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//fieldset[@id='div-groups']/ul/li/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=combo_group_input</td>
+	<td>${firstGroupName}</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('.ui-icon-list-ipt-check:visible').click();</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=group-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyCssCount</td>
+	<td>css=.small-table .remove-group</td>
+	<td>${qtdElements}</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>${firstGroupName}</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

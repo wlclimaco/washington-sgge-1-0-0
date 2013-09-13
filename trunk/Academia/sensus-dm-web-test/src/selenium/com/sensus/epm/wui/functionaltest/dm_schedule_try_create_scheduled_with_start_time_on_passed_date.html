@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://gage-web/" />
+<title>W_SCH-CMND-001_try_create_scheduled_with_no_name</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">W_SCH-CMND-001_try_create_scheduled_with_no_name</td></tr>
+</thead><tbody>
+<!--#Enter name over max lenght-->
+<tr>
+	<td>type</td>
+	<td>id=scheduledEventDescription</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=scheduledEventWhen</td>
+	<td>01/01/2001</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=createAction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.formErrorContent</td>
+	<td>Please enter a future date.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.formErrorContent</td>
+	<td>Please enter a future date.</td>
+</tr>
+</tbody></table>
+</body>
+</html>

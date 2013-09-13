@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<!--#6025 and #6024-->
+<tr>
+	<td>setTimeout</td>
+	<td>50000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=System Intelligence</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>System Intelligence - Sensus Device Manager</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Event History</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#load ul.tabs li a.active</td>
+	<td>Event History</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.content-header h1</td>
+	<td>Event History</td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>${actionName}/3</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(storedVars['row']) - 3</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${row}</td>
+	<td>${row}</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${actionName}</td>
+	<td>${actionName}</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${event}</td>
+	<td>${actionName}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#history-table tbody tr:eq(${row}) td:eq(3)</td>
+	<td>${actionName}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#history-table tbody tr:eq(${row}) td:eq(4)</td>
+	<td>${event}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#history-table tbody tr:eq(${row}) td:eq(5)</td>
+	<td>${devicesTotal}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#history-table tbody tr:eq(${row}) td:eq(6)</td>
+	<td>${devicesFailed}</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${row}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#history-table tbody tr:eq(${row}) td:eq(9)</td>
+	<td>${status}</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${checkSummary}</td>
+	<td>jumpSummary</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#history-table tbody tr:eq(${row}) td:eq(10) a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>jumpSummary</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

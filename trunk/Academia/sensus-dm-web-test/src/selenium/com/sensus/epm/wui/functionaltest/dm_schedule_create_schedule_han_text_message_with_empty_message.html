@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>create_schedule_hab_text_message_with_empty_message</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">create_schedule_hab_text_message_with_empty_message</td></tr>
+</thead><tbody>
+<!--#7813-->
+<tr>
+	<td>assertText</td>
+	<td>id=schedule</td>
+	<td>Scheduled Events</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#actions div #ajax-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=scheduledEventName</td>
+	<td>${nameSchedule}43</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=scheduleEventTime</td>
+	<td>11:00pm</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.positionHelper ul.fg-menu li a:contains(&quot;Send Text Message&quot;)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=text_message_duration</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=sendLater</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>preProgramTime</td>
+	<td>11:00pm</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=import-devices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=listSmartPoint</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=listSmartPoint</td>
+	<td>${deviceIds}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=listSmartPoint</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=createAction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td></td>
+	<td>* This field is required</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>50000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>30000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=schedule</td>
+	<td>Scheduled Events</td>
+</tr>
+</tbody></table>
+</body>
+</html>

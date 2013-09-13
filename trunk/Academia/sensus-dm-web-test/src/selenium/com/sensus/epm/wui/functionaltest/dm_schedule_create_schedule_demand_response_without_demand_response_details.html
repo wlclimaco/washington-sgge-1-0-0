@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>create_schedule_demand_response_without_demand_response_details</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">create_schedule_demand_response_without_demand_response_details</td></tr>
+</thead><tbody>
+<!--#7818-->
+<tr>
+	<td>click</td>
+	<td>css=#actions div #ajax-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=scheduledEventName</td>
+	<td>${nameSchedule} 41</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=scheduleEventTime</td>
+	<td>11:00pm</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.positionHelper:last a:contains(Initiate Event):eq(1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=.demand-response-fields</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=select-groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#group-list ul li:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=createAction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=.formErrorContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td></td>
+	<td>* This field is required</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td></td>
+	<td>* Not a valid integer</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>20000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=listTable</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=schedule</td>
+	<td>Scheduled Events</td>
+</tr>
+</tbody></table>
+</body>
+</html>

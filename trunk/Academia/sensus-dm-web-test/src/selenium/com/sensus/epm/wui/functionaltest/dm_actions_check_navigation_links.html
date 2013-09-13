@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>check_navigation_links</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">check_navigation_links</td></tr>
+</thead><tbody>
+<!--#5657-->
+<tr>
+	<td>click</td>
+	<td>id=menu-systemintelligence</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyAttribute</td>
+	<td>id=action@class</td>
+	<td>active</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Disconnect</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Disconnect</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>id=action-dialog</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('.ui-icon-closethick:visible').click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Connect</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Connect</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>id=action-dialog</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('.ui-icon-closethick:visible').click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Initiate Event</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>id=action-dialog</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=h5 &gt; small</td>
+	<td>Initiate on-demand Demand Reset on the device.</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Inspect and report results of the on-demand reset.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('.ui-icon-closethick:visible').click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Initiate Event</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>id=action-dialog</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('.ui-icon-closethick:visible').click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Import Devices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=action-dialog-import</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>id=action-dialog-import</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>HAN Device Import</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Use HAN Device Import to load a file containing HAN devices. Devices can be loaded into the system disconnected or add Device ID and Install Code to connect on import.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('.ui-icon-closethick:visible').click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Disconnect</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>id=action-dialog</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Disconnect</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('.ui-icon-closethick:visible').click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Connect</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>id=action-dialog</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Connect</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('.ui-icon-closethick:visible').click()</td>
+	<td></td>
+</tr>
+<!--#6891-->
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>create action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>edit action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>clone action</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>search_device_id</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">search_device_id</td></tr>
+</thead><tbody>
+<!--#7730-->
+<tr>
+	<td>click</td>
+	<td>id=menu-smartpoint</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Devices - Sensus Device Manager</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Reset Filters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=search-text</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=search-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>500000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=query</td>
+	<td>Raleigh</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=query_type</td>
+	<td>Premise ID</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=go-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=results</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container&gt;li:eq(1)&gt;span</td>
+	<td>Premise ID</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container #query span.title</td>
+	<td>Raleigh</td>
+</tr>
+</tbody></table>
+</body>
+</html>

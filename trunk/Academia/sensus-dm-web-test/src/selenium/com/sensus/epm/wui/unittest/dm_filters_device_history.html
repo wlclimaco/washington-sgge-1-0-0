@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>dm_filters_device_history</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">dm_filters_device_history</td></tr>
+</thead><tbody>
+<!--# Device History-->
+<tr>
+	<td>click</td>
+	<td>css=#meters a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tbody strong:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.tabs a:last</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=device-history-table</td>
+	<td></td>
+</tr>
+<!--Filter by Search-->
+<tr>
+	<td>store</td>
+	<td>197</td>
+	<td>actionId</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=query</td>
+	<td>${actionId}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#search button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(2) span</td>
+	<td>ID</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(2) span:last</td>
+	<td>${actionId}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.filter-container li:eq(2) span:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container a:first</td>
+	<td>Search</td>
+</tr>
+<!--Filter by Date-->
+<tr>
+	<td>getSysDate</td>
+	<td>installDate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${installDate}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>css=#date_filter input:first</td>
+	<td>${installDate}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>css=#date_filter input:last</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#date_filter button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(0) span:first</td>
+	<td>View</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(1) span:first</td>
+	<td>Back</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(0) span:last</td>
+	<td>${installDate}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(1) span:last</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.filter-container li:eq(0) span:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container</td>
+	<td>View</td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container</td>
+	<td>Back</td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container</td>
+	<td>${installDate}</td>
+</tr>
+<!--Filter by Action Type-->
+<tr>
+	<td>storeText</td>
+	<td>css=#all_action_categories .ui-listcombobox span:first</td>
+	<td>actionType</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#all_action_categories .ui-listcombobox input:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(0) span:first</td>
+	<td>Action Type</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(0) span:last</td>
+	<td>${actionType}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.filter-container li:eq(0) span:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container</td>
+	<td>Action Type</td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container</td>
+	<td>${actionType}</td>
+</tr>
+<!--Filter by Users-->
+<tr>
+	<td>click</td>
+	<td>css=#users label</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=#users .ui-listcombobox span:first</td>
+	<td>users</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#users .ui-listcombobox input:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(0) span:first</td>
+	<td>Users</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(0) span:last</td>
+	<td>${users}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.filter-container li:eq(0) span:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container</td>
+	<td>Users</td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container</td>
+	<td>${users}</td>
+</tr>
+<!--Reset Filters-->
+<tr>
+	<td>click</td>
+	<td>css=#all_action_categories .ui-listcombobox input:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#users .ui-listcombobox input:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Reset Filters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyCssCount</td>
+	<td>css=.filter-container .type</td>
+	<td>0</td>
+</tr>
+</tbody></table>
+</body>
+</html>

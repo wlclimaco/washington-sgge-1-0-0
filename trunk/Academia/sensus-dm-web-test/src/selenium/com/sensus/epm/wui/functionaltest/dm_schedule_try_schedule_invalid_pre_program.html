@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<!--#Test Case 9353-->
+<tr>
+	<td>waitForVisible</td>
+	<td>id=listTable</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeAllButtons</td>
+	<td>allButtons</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeAllFields</td>
+	<td>allFields</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${allButtons}</td>
+	<td>allButtons</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${allFields}</td>
+	<td>allFields</td>
+</tr>
+<tr>
+	<td>storeTableRows</td>
+	<td>id=listTable</td>
+	<td>temp</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${temp}</td>
+	<td>count</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Schedule Event</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${count}) - 1</td>
+	<td>temp</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${temp}</td>
+	<td>count</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${count}</td>
+	<td>count</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=scheduledEventName</td>
+	<td>${nameSchedule}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//a[contains(text(),'Send Text Message')])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=scheduledEventWhen</td>
+	<td>10/10/2020</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=textMessageHan</td>
+	<td>test msg</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=text_message_duration</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=sendLater</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=preProgramDate</td>
+	<td>10/10/2021</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=preProgramTime</td>
+	<td>1:00pm</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=select-groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.ui-listcombobox&gt;li&gt;input:eq(0)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=createAction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#messaging-main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Pre Program time must be before or equal action event time.</td>
+	<td></td>
+</tr>
+<!--#Test Case 9343-->
+<tr>
+	<td>click</td>
+	<td>id=sendLater</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=preProgramDate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=createAction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.formErrorContent</td>
+	<td>* This field is required<br />* Invalid date, must be in ??/??/YYYY format</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>* This field is required<br />* Invalid date, must be in ??/??/YYYY format</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=sendLater</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=preProgramTime</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=preProgramDate</td>
+	<td>10/10/2019</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=createAction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.formErrorContent</td>
+	<td>* This field is required<br />* Expected Format hh:mm am|pm</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>* This field is required<br />* Expected Format hh:mm am|pm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=cancel-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

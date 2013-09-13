@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>create_schedule_repeat_years_stop_after_one_ocurrence_importing_by_network_address</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">create_schedule_repeat_years_stop_after_one_ocurrence_importing_by_network_address</td></tr>
+</thead><tbody>
+<!--#6074-->
+<tr>
+	<td>click</td>
+	<td>link=System Intelligence</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Scheduled Events</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=schedule</td>
+	<td>Scheduled Events</td>
+</tr>
+<tr>
+	<td>storeTableRows</td>
+	<td>css=#listTable tbody</td>
+	<td>temp</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${temp}</td>
+	<td>rows</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${rows}</td>
+	<td>countSchedules</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#actions div #ajax-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${firstNameSchedule}43</td>
+	<td>nameSchedule</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=scheduledEventName</td>
+	<td>${nameSchedule}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.positionHelper a:contains(Send Text Message)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=scheduleEventTime</td>
+	<td>${scheduleEventTime}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=repeatCheckBox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=repeats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=repeats</td>
+	<td>Yearly</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>sensus.pages.scheduleEvent.fnChangeRepeatType($(&amp;quot;#repeats&amp;quot;)); sensus.pages.scheduleEvent.fnChangeSummary($(&amp;quot;#repeats&amp;quot;));</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=after-yearly</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=occurrences-yearly</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.ui-dialog-buttonpane:last div button:eq(0)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=textMessageHan</td>
+	<td>Hello World</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=text_message_duration</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=sendLater</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>preProgramTime</td>
+	<td>${scheduleEventTime}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=import-devices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=upload-type-flexnet</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=listSmartPoint</td>
+	<td>${networkAddress}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=listSmartPoint</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=createAction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>100000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=#messaging-main &gt; span.message &gt; strong</td>
+	<td>“${nameSchedule}”</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=query</td>
+	<td>${nameSchedule}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div#query_search .go-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=.request-readonly-action:eq(0)</td>
+	<td>${nameSchedule}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=table#listTable tbody tr:eq(0) td:eq(1) a.request-readonly-action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=action-dialog</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=repeat-enum</td>
+	<td>Yearly</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#dr-fields-container legend</td>
+	<td>ActionHAN, Send Text Message</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=event-fields-container-endpoints</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#event-fields-container-endpoints legend</td>
+	<td>Devices3</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('.ui-dialog-titlebar-close:visible').click();</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Scheduled Events</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=schedule</td>
+	<td>Scheduled Events</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${countSchedules}) + 1</td>
+	<td>temp</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${temp}</td>
+	<td>rows</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${rows}</td>
+	<td>countSchedules</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=results</td>
+	<td>${countSchedules}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=listTable_info</td>
+	<td>Showing 1 - ${countSchedules} of ${countSchedules} |</td>
+</tr>
+<tr>
+	<td>storeTableRows</td>
+	<td>css=#listTable tbody</td>
+	<td>temp</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${temp}</td>
+	<td>rows</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${rows}</td>
+	<td>countSchedules</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=query</td>
+	<td>${nameSchedule}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div#query_search .go-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=.request-readonly-action:eq(0)</td>
+	<td>${nameSchedule}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menu-bt-delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=action-dialog-delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.ui-dialog-buttonpane div button:eq(0)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td>Schedule was successfully cancelled.</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Scheduled Events</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=schedule</td>
+	<td>Scheduled Events</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${countSchedules}) - 1</td>
+	<td>temp</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${temp}</td>
+	<td>rows</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${rows}</td>
+	<td>countSchedules</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=results</td>
+	<td>${countSchedules}</td>
+</tr>
+</tbody></table>
+</body>
+</html>

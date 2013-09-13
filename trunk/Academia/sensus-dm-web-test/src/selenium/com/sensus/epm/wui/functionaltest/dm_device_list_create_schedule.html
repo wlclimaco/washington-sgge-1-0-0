@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>create_schedule</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">create_schedule</td></tr>
+</thead><tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>50000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=System Intelligence</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Scheduled Events</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Schedule Event</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=scheduledEventName</td>
+	<td>${schName}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('a:contains(Initiate Demand Reset):last').click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=Groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#group-list ul li:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=scheduleEventTime</td>
+	<td>11:58pm</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=createAction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=listTable</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#messaging-main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=#messaging-main &gt; span &gt; strong</td>
+	<td>“${schName}”</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main &gt; span &gt; strong</td>
+	<td>“${schName}”</td>
+</tr>
+</tbody></table>
+</body>
+</html>

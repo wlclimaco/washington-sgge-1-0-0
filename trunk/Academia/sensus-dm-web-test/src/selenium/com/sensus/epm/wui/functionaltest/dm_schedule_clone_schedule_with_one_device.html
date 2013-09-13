@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<!--#TestCase6333-->
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=schedule</td>
+	<td>Scheduled Events</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=listTable</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeTableRows</td>
+	<td>css=#listTable tbody</td>
+	<td>temp</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${temp}</td>
+	<td>rows</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${rows}</td>
+	<td>countSchedules</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#actions div #ajax-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=scheduledEventName</td>
+	<td>${nameSchedule} 77</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;div.positionHelper:last a:contains(Send Text Message)&quot;).trigger(&quot;click&quot;);</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=scheduleEventTime</td>
+	<td>11:30pm</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>sensus.pages.scheduleEvent.fnChangeRepeatType($(&quot;#repeats&quot;)); sensus.pages.scheduleEvent.fnChangeSummary($(&quot;#repeats&quot;)); </td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=repeatCheckBox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>sensus.pages.scheduleEvent.fnChangeRepeatType($(&quot;#repeats&quot;)); sensus.pages.scheduleEvent.fnChangeSummary($(&quot;#repeats&quot;)); </td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=repeats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=repeats-every-value</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=date-after-daily</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=date-after-daily</td>
+	<td>12/12/2020</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>2000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.ui-dialog-buttonpane:last div button:eq(0)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>2000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=textMessageHan</td>
+	<td>Hello World</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=text_message_duration</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=sendLater</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>preProgramTime</td>
+	<td>11:30pm</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=groupList</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=createAction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>50000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td>&quot;${nameSchedule} 77&quot; created successfully. Event will begin * at *.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td>&quot;${nameSchedule} 77&quot; created successfully. Event will begin * at *.</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=query</td>
+	<td>${nameSchedule} 77</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#query_search .go-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<!--#Clone schedule -->
+<tr>
+	<td>click</td>
+	<td>id=menu-bt-clone</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=scheduledEventName</td>
+	<td>${nameSchedule} 77 clone</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=import-devices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=listSmartPoint</td>
+	<td>123123</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=listSmartPoint</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=createAction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>50000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>30000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td>${nameSchedule} 77 clone created successfully. Event will begin * at *.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td>${nameSchedule} 77 clone created successfully. Event will begin * at *.</td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>${nameSchedule} 77/${columnScheduleName}</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${row}) - 2</td>
+	<td>temp</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${temp}</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${row}</td>
+	<td>${nameSchedule} 77 clone</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#listTable.${row}.${columnScheduleName}</td>
+	<td>${nameSchedule} 77 clone</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#listTable.${row}.${columnActionName}</td>
+	<td>Send Text Message</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#listTable.${row}.${columnActionType}</td>
+	<td>HAN</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#listTable.${row}.${columnScheduledBy}</td>
+	<td>${user}</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#listTable.${row}.${columnRepeats}</td>
+	<td>Daily</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#listTable.${row}.${columnStatus}</td>
+	<td>Active</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

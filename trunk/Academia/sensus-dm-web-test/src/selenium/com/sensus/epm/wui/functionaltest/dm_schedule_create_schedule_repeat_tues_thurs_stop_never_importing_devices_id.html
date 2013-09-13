@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>create_schedule_repeat_tues_thurs_stop_never_importing_devices_id</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">create_schedule_repeat_tues_thurs_stop_never_importing_devices_id</td></tr>
+</thead><tbody>
+<!--#Test case number 6054-->
+<tr>
+	<td>click</td>
+	<td>css=#actions div #ajax-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=scheduledEventName</td>
+	<td>${nameSchedule} 214</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.positionHelper a:contains(Send Text Message)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=scheduledEventWhen</td>
+	<td>01/01/2020</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>sensus.pages.scheduleEvent.fnChangeRepeatType($(&quot;#repeats&quot;)); sensus.pages.scheduleEvent.fnChangeSummary($(&quot;#repeats&quot;)); </td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=repeatCheckBox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>sensus.pages.scheduleEvent.fnChangeRepeatType($(&quot;#repeats&quot;)); sensus.pages.scheduleEvent.fnChangeSummary($(&quot;#repeats&quot;)); </td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=repeats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=repeats</td>
+	<td>Every Tues and Thu</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>sensus.pages.scheduleEvent.fnChangeRepeatType($(&quot;#repeats&quot;)); sensus.pages.scheduleEvent.fnChangeSummary($(&quot;#repeats&quot;)); </td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.ui-dialog-buttonpane:last div button:eq(0)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>sensus.pages.scheduleEvent.fnChangeRepeatType($(&quot;#repeats&quot;)); sensus.pages.scheduleEvent.fnChangeSummary($(&quot;#repeats&quot;)); </td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=textMessageHan</td>
+	<td>Hello World</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=text_message_duration</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=sendLater</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=pre_program_date</td>
+	<td>01/01/2020</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=import-devices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=listSmartPoint</td>
+	<td>${deviceIds}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=listSmartPoint</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=createAction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>20000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=listTable</td>
+	<td></td>
+</tr>
+<!--# Verifying schedule has been created.-->
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main &gt; span.message </td>
+	<td>“${nameSchedule} 214” created successfully. Event will begin *, 2020 at *.</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>${nameSchedule} 214/${columnScheduleName}</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${row}) - new Number(${linesToBeRemoved})</td>
+	<td>temp</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>${temp}</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#listTable.${row}.${columnScheduleName}</td>
+	<td>${nameSchedule} 214</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#listTable.${row}.${columnActionName}</td>
+	<td>Send Text Message</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#listTable.${row}.${columnActionType}</td>
+	<td>HAN</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#listTable.${row}.${columnScheduledBy}</td>
+	<td>${user}</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#listTable.${row}.${columnRepeats}</td>
+	<td>Weekday</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#listTable.${row}.${columnDevices}</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#listTable.${row}.${columnStatus}</td>
+	<td>Active</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${countSchedules})+1</td>
+	<td>temp</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>${temp}</td>
+	<td>countSchedules</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${temp}</td>
+	<td>countSchedules</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=results</td>
+	<td>${countSchedules}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=listTable_info</td>
+	<td>Showing 1 - ${countSchedules} of * |</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#listTable a:contains(${nameSchedule} 214)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=action-dialog</td>
+	<td></td>
+</tr>
+<!--# Verify the data displayed inside the dialog-->
+<tr>
+	<td>verifyText</td>
+	<td>id=repeat-enum</td>
+	<td>Weekday</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#dr-fields-container legend</td>
+	<td>ActionHAN, Send Text Message</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('.ui-dialog-titlebar-close:visible').click();</td>
+	<td></td>
+</tr>
+<!--#Delete the schedule-->
+<tr>
+	<td>mouseOver</td>
+	<td>css=#listTable tr:eq(${row}) td:eq(${columnActions}) a:contains(Actions)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#listTable tr:eq(${row}) td:eq(${columnActions}) div li:contains(Cancel)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=action-dialog-delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Cancel recurring event “${nameSchedule} 214“. This action cannot be undone.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button:contains(Cancel Event)</td>
+	<td></td>
+</tr>
+<!--# Verifying schedule has been deleted.-->
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main &gt; span.message </td>
+	<td>Schedule was successfully cancelled.</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${countSchedules})-1</td>
+	<td>temp</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>${temp}</td>
+	<td>countSchedules</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${temp}</td>
+	<td>countSchedules</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=results</td>
+	<td>${countSchedules}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=listTable_info</td>
+	<td>Showing 1 - ${countSchedules} of * |</td>
+</tr>
+</tbody></table>
+</body>
+</html>

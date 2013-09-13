@@ -1,0 +1,686 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>dm_filters_device_list</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">dm_filters_device_list</td></tr>
+</thead><tbody>
+<!--# Device List-->
+<tr>
+	<td>click</td>
+	<td>id=menu-smartpoint</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=smartpoint-table</td>
+	<td></td>
+</tr>
+<!--Filter by Device SubType-->
+<tr>
+	<td>click</td>
+	<td>css=#home-area-network a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=[value='THERMOSTAT']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container span:last</td>
+	<td>Meters</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container span:eq(0)</td>
+	<td>Device Type</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container span:last</td>
+	<td>Thermostat</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.filter-container span:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=[value='IHD']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container span:last</td>
+	<td>Thermostats</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container span:eq(0)</td>
+	<td>Device Type</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container span:last</td>
+	<td>IHD</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#sensus-load-control a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=[value='LCM']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container span:last</td>
+	<td>Thermostats</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container span:eq(0)</td>
+	<td>Device Type</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container span:last</td>
+	<td>LCM</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.filter-container span:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container</td>
+	<td>LCM</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=[value='FLEXNET_LCM']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container span:eq(0)</td>
+	<td>Device Type</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container span:last</td>
+	<td>Flexnet LCM</td>
+</tr>
+<!--Filter by Group-->
+<tr>
+	<td>click</td>
+	<td>css=#meters a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=#group .ui-listcombobox span:first&nbsp;&nbsp;&nbsp;</td>
+	<td>groupName</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#group .ui-listcombobox input:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li span:first</td>
+	<td>Groups</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li span:last</td>
+	<td>${groupName}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.filter-container li span:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container</td>
+	<td>Group</td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container</td>
+	<td>${groupName}</td>
+</tr>
+<!--Filter by Lifecycle State-->
+<tr>
+	<td>click</td>
+	<td>css=#lifecycle_state .ui-listcombobox li:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=#lifecycle_state .ui-listcombobox li:eq(0) span</td>
+	<td>lifecycleState</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li span:first</td>
+	<td>Lifecycle State</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li span:last</td>
+	<td>${lifecycleState}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.filter-container li span:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container</td>
+	<td>Lifecycle State</td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container</td>
+	<td>${lifecycleState}</td>
+</tr>
+<!--Filter by Description-->
+<tr>
+	<td>storeText</td>
+	<td>css=#description .ui-listcombobox li:eq(0) span</td>
+	<td>description</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#description .ui-listcombobox li:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(0) span:first</td>
+	<td>Description</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(0) span:last</td>
+	<td>${description}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.filter-container li:eq(0) span:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container</td>
+	<td>Device Description</td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container</td>
+	<td>${description}</td>
+</tr>
+<!--Filter by Install Date-->
+<tr>
+	<td>click</td>
+	<td>css=#install_date label</td>
+	<td></td>
+</tr>
+<tr>
+	<td>getSysDate</td>
+	<td>installDate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=start</td>
+	<td>${installDate}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=end</td>
+	<td>${installDate}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#install_date button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(0) span:first</td>
+	<td>Start</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(1) span:first</td>
+	<td>End</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(0) span:last</td>
+	<td>${installDate}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(1) span:last</td>
+	<td>${installDate}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.filter-container li:eq(0) span:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container</td>
+	<td>Start</td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container</td>
+	<td>End</td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container</td>
+	<td>${installDate}</td>
+</tr>
+<!--Filter by Address-->
+<tr>
+	<td>click</td>
+	<td>css=#address label</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>Street Filter</td>
+	<td>street</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>City Filter</td>
+	<td>city</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>Zip Filter</td>
+	<td>zip</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>css=#address #street</td>
+	<td>${street}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>css=#address #city</td>
+	<td>${city}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>css=#address #zip</td>
+	<td>${zip}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#address button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(1) span:first</td>
+	<td>Street</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(0) span:first</td>
+	<td>City</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(2) span:first</td>
+	<td>Zip</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(1) span:last</td>
+	<td>${street}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(0) span:last</td>
+	<td>${city}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(2) span:last</td>
+	<td>${zip}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.filter-container li:eq(0) span:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container li:eq(1) span:first</td>
+	<td>Street</td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container li:eq(1) span:last</td>
+	<td>${street}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.filter-container li:eq(0) span:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container li:eq(0) span:first</td>
+	<td>City</td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container li:eq(0) span:last</td>
+	<td>${city}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.filter-container li:eq(0) span:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container</td>
+	<td>Zip</td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container</td>
+	<td>${street}</td>
+</tr>
+<!--Filter by Meter Firmware-->
+<tr>
+	<td>click</td>
+	<td>css=#meters a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#meter_firmware label</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>1.1.1.1</td>
+	<td>meterFirmware</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>css=#meter_firmware #firmware</td>
+	<td>${meterFirmware}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#meter_firmware button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(0) span:first</td>
+	<td>Meter Firmware</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(0) span:last</td>
+	<td>${meterFirmware}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.filter-container li:eq(0) span:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container</td>
+	<td>Meter Firmware</td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container</td>
+	<td>${meterFirmware}</td>
+</tr>
+<!--Filter by Tag-->
+<tr>
+	<td>click</td>
+	<td>css=#tag label</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=#tag .ui-listcombobox span:first</td>
+	<td>tagName</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tag .ui-listcombobox input:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(0) span:first</td>
+	<td>Tag</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(0) span:last</td>
+	<td>${tagName}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.filter-container li:eq(0) span:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container</td>
+	<td>Tag</td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container</td>
+	<td>${tagName}</td>
+</tr>
+<!--Reset Filters-->
+<tr>
+	<td>click</td>
+	<td>css=#group .ui-listcombobox input:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#lifecycle_state .ui-listcombobox li:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Reset Filters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyCssCount</td>
+	<td>css=.filter-container .type</td>
+	<td>0</td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/dm/" />
+<title>add_devices_to_tag_that_does_not_exist</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">add_devices_to_tag_that_does_not_exist</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>link=Devices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tbody tr:eq(2) td:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tbody tr:eq(3) td:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#addTag&quot;, &quot;div.positionHelper&quot;).click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=add_tag_form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setSpeed</td>
+	<td>800</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tag_add_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tag_add_select_input</td>
+	<td>${tagNameDoesNotExist}</td>
+</tr>
+<tr>
+	<td>setSpeed</td>
+	<td>0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>getSysTime</td>
+	<td>currentTime</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${currentTime}</td>
+	<td>actionTime</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.ui-dialog-buttonset button:eq(0)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=#messaging-main &gt; span</td>
+	<td>We have received your request to Add Device to Tag. View “Event History” for action status.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main &gt; span</td>
+	<td>We have received your request to Add Device to Tag. View “Event History” for action status.</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>Add Tag &quot;${tagNameDoesNotExist}&quot; to ${devicesTotal} Devices</td>
+	<td>event</td>
+</tr>
+</tbody></table>
+</body>
+</html>

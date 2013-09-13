@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>Meter Tab Table</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Meter Tab Table</td></tr>
+</thead><tbody>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=div.dataTables_wrapper</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeVisible</td>
+	<td>css=.blankslate</td>
+	<td>isBlank</td>
+</tr>
+<!--If results > 0-->
+<tr>
+	<td>gotoIf</td>
+	<td>${isBlank}</td>
+	<td>jumpBlank</td>
+</tr>
+<!--Per page-->
+<tr>
+	<td>storeEval</td>
+	<td>window.$(&quot;.dataTables_length select option:not([selected=selected]):eq(0)&quot;, &quot;div.dataTables_wrapper&quot;).text()</td>
+	<td>perPage</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=div.dataTables_wrapper div.dataTables_length select</td>
+	<td>${perPage}</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=div.dataTables_wrapper div.dataTables_length select</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>id=results</td>
+	<td>matches</td>
+</tr>
+<tr>
+	<td>storeSelectedValue</td>
+	<td>css=div.dataTables_wrapper .numbers select</td>
+	<td>pagination</td>
+</tr>
+<tr>
+	<td>storeVisible</td>
+	<td>css=div.dataTables_wrapper .paging</td>
+	<td>isPaged</td>
+</tr>
+<!--If pages > 0-->
+<tr>
+	<td>gotoIf</td>
+	<td>!${isPaged}</td>
+	<td>jumpPaging</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.dataTables_wrapper span.paginate_active</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>css=div.dataTables_wrapper .previous</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>Math.ceil(storedVars['matches'].replace(&quot;,&quot;,&quot;&quot;) / storedVars['pagination'])</td>
+	<td>maxPage</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.dataTables_wrapper .dataTables_paginate &gt; span:eq(2) &gt; span:last</td>
+	<td>${maxPage}</td>
+</tr>
+<!--Pages Button-->
+<tr>
+	<td>click</td>
+	<td>css=div.dataTables_wrapper .dataTables_paginate &gt; span:eq(2) &gt; span:eq(1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyAttribute</td>
+	<td>css=div.dataTables_wrapper .dataTables_paginate &gt; span:eq(2) &gt; span:eq(1)@class</td>
+	<td>paginate_active</td>
+</tr>
+<!--Prev Button-->
+<tr>
+	<td>verifyVisible</td>
+	<td>css=div.dataTables_wrapper .previous </td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.dataTables_wrapper .previous </td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyAttribute</td>
+	<td>css=div.dataTables_wrapper .dataTables_paginate &gt; span:eq(2) &gt; span:first@class</td>
+	<td>paginate_active</td>
+</tr>
+<!--Next Button-->
+<tr>
+	<td>verifyVisible</td>
+	<td>css=div.dataTables_wrapper .next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.dataTables_wrapper .next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyAttribute</td>
+	<td>css=div.dataTables_wrapper .dataTables_paginate &gt; span:eq(2) &gt; span:eq(1)@class</td>
+	<td>paginate_active</td>
+</tr>
+<!--Last Page Button-->
+<tr>
+	<td>click</td>
+	<td>css=div.dataTables_wrapper .dataTables_paginate &gt; span:eq(2) &gt; span:last</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyAttribute</td>
+	<td>css=div.dataTables_wrapper .dataTables_paginate &gt; span:eq(2) &gt; span:last@class</td>
+	<td>paginate_active</td>
+</tr>
+<!--First Page Button-->
+<tr>
+	<td>click</td>
+	<td>css=div.dataTables_wrapper .dataTables_paginate &gt; span:eq(2) &gt; span:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyAttribute</td>
+	<td>css=div.dataTables_wrapper .dataTables_paginate &gt; span:eq(2) &gt; span:first@class</td>
+	<td>paginate_active</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>jumpPaging</td>
+	<td></td>
+</tr>
+<!--Ordering-->
+<tr>
+	<td>storeEval</td>
+	<td>window.$(&quot;div.dataTables_wrapper th.sorting:visible&quot;).length</td>
+	<td>sortableLength</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${sortableLength}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>while</td>
+	<td>${sortableLength} &gt; 0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>storedVars['sortableLength'] - 1</td>
+	<td>sortableLength</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${sortableLength}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.dataTables_wrapper th.sorting[style!='display: none']:eq(${sortableLength}) a.asc</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyEval</td>
+	<td>window.$(&quot;div.dataTables_wrapper th.sorting[style!='display: none']:eq(${sortableLength})&quot;).hasClass(&quot;sorting_asc&quot;)</td>
+	<td>true</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.dataTables_wrapper th.sorting[style!='display: none']:eq(${sortableLength}) a.desc</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyEval</td>
+	<td>window.$(&quot;div.dataTables_wrapper th.sorting[style!='display: none']:eq(${sortableLength})&quot;).hasClass(&quot;sorting_desc&quot;)</td>
+	<td>true</td>
+</tr>
+<tr>
+	<td>verifyNotVisible</td>
+	<td>css=.status-viewport .blankslate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>endWhile</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>jumpBlank</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>remove_one_device_from_tag</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">remove_one_device_from_tag</td></tr>
+</thead><tbody>
+<!--#5690-->
+<tr>
+	<td>setSpeed</td>
+	<td>800</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#removeTag&quot;, &quot;div.positionHelper&quot;).click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('#tag_remove_select_input').val(&quot;${tagName}&quot;)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=remove_tag_form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tag_remove_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tag_remove_select_input</td>
+	<td>${tagName}</td>
+</tr>
+<tr>
+	<td>setSpeed</td>
+	<td>0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>getSysTime</td>
+	<td>currentTime</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${currentTime}</td>
+	<td>actionTime</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.ui-dialog-buttonset button:eq(0)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=#messaging-main .message</td>
+	<td>Tag “${tagName}“ has been successfully removed from 1 Devices.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main &gt; span</td>
+	<td>Tag “${tagName}“ has been successfully removed from 1 Devices.</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>Delete Tag &quot;${tagName}&quot; from Device ${deviceId}</td>
+	<td>event</td>
+</tr>
+</tbody></table>
+</body>
+</html>

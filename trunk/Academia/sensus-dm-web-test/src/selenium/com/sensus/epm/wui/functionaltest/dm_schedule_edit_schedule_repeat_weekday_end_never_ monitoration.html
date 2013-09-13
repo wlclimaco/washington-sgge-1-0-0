@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>edit_schedule_repeat_weekday_end_never_ monitoration</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">edit_schedule_repeat_weekday_end_never_ monitoration</td></tr>
+</thead><tbody>
+<!--#6182-->
+<tr>
+	<td>assertText</td>
+	<td>id=schedule</td>
+	<td>Scheduled Events</td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>${nameSchedule} 51/${columnScheduleName}</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${row}) - new Number(${linesToBeRemoved})</td>
+	<td>temp</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>${temp}</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>css=#listTable tr:eq(${row}) td:eq(${columnActions}) a:contains(Actions)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#listTable tr:eq(${row}) td:eq(${columnActions}) div li:contains(Edit)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=edit-repeats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=repeats</td>
+	<td>Weekly</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#validate_day_week label:eq(0)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button:contains(Save)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=recentRequestMonitor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=createAction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=schedule</td>
+	<td>Scheduled Events</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=schedule</td>
+	<td>Scheduled Events</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td>“${nameSchedule} 51” edited successfully.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td>“${nameSchedule} 51” edited successfully.</td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>${nameSchedule} 51/${columnScheduleName}</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${row}) - new Number(${linesToBeRemoved})</td>
+	<td>temp</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>${temp}</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#listTable.${row}.${columnScheduleName}</td>
+	<td>${nameSchedule} 51</td>
+</tr>
+</tbody></table>
+</body>
+</html>

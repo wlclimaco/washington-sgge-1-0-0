@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>create_group</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">create_group</td></tr>
+</thead><tbody>
+<!--#Create group necessary to import when schedule a new event-->
+<!--#Go to group page and verify if page is displayed-->
+<tr>
+	<td>click</td>
+	<td>id=menu-group</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyAttribute</td>
+	<td>id=menu-group@class</td>
+	<td>alist active</td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Groups - Sensus Device Manager</td>
+	<td></td>
+</tr>
+<!--#Click on create group and  enter required data-->
+<tr>
+	<td>click</td>
+	<td>link=Create Group</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.content-header h1</td>
+	<td>Create Group</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=type</td>
+	<td>Billing</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=meterType</td>
+	<td>label=Meters</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=group-name-create</td>
+	<td>${nameSchedule} 1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=click</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=upload-list</td>
+	<td>${deviceIds}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-group-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>15000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--#Verify if group was created successfuly-->
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td>“${nameSchedule} 1” created successfully.</td>
+</tr>
+<tr>
+	<td>verifyTitle</td>
+	<td>Groups - Sensus Device Manager</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>15000</td>
+	<td></td>
+</tr>
+<!--#Click on create group and  enter required data-->
+<tr>
+	<td>click</td>
+	<td>link=Create Group</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.content-header h1</td>
+	<td>Create Group</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=type</td>
+	<td>Billing</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=meterType</td>
+	<td>label=Meters</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=group-name-create</td>
+	<td>${nameSchedule} 2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=click</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=upload-type-flexnet</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>upload-list</td>
+	<td>${networkAddress1}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Create Group</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>15000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--#Verify if group was created successfuly-->
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td>“${nameSchedule} 2” created successfully.</td>
+</tr>
+<tr>
+	<td>verifyTitle</td>
+	<td>Groups - Sensus Device Manager</td>
+	<td></td>
+</tr>
+<!--#Click on create group and  enter required data-->
+<tr>
+	<td>click</td>
+	<td>link=Create Group</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>15000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.content-header h1</td>
+	<td>Create Group</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=type</td>
+	<td>Billing</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=meterType</td>
+	<td>label=Meters</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=group-name-create</td>
+	<td>${nameSchedule} 3</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=click</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=upload-type-flexnet</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>upload-list</td>
+	<td>${networkAddress}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Create Group</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>15000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--#Verify if group was created successfuly-->
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td>“${nameSchedule} 3” created successfully.</td>
+</tr>
+<tr>
+	<td>verifyTitle</td>
+	<td>Groups - Sensus Device Manager</td>
+	<td></td>
+</tr>
+<!--#Go to 'Scheduled Events' page-->
+<tr>
+	<td>click</td>
+	<td>id=menu-systemintelligence</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Scheduled Events</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

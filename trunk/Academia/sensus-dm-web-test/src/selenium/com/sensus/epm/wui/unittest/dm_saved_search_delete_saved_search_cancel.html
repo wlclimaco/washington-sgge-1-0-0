@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>delete_saved_search</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">delete_saved_search</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>id=menu-smartpoint</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=saved</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>00${searchName}/1</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>storedVars['row'] - 2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>id=saved-table_info</td>
+	<td>qtdSaves</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#saved-table tbody tr:eq(${row}) td:eq(6) a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=action-dialog</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.ui-dialog-buttonpane button:eq(1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=saved-table_info</td>
+	<td>${qtdSaves}</td>
+</tr>
+</tbody></table>
+</body>
+</html>
