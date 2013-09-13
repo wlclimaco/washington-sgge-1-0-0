@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="Sensus DM web" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<include file="..\..\AntConfig\Sensus-ant-common-targets.xml" optional="false" />
+
+	<property name="antConfigDir" value="..\..\AntConfig" />
+
+	<target name="build">
+		<antcall target="Sensus.mainBuildComponent">
+			<param name="moduleName" value="sensus-dm-web" />
+			<param name="pomFile" value="../pom.xml" />
+			<param name="installLocal" value="true" />
+			<param name="additionalLibDir" value="../../sensus-dm-orchestration-client/build/sensus-dependency-lib" />
+		</antcall>
+	</target>
+
+</project>

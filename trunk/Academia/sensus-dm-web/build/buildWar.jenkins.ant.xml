@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="Sensus war" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<include file="..\..\AntConfig\Sensus-ant-common-targets.xml" optional="false" />
+
+	<!-- *************************************************************************************** -->
+	<!-- This is the main build target. Make sure this target gets invoked and only this target. -->
+	<!-- *************************************************************************************** -->
+	<target name="build">
+		<antcall target="Sensus.mainBuildUIWar">
+			<param name="moduleName" value="sensus-dm-web" />
+			<param name="pomFile" value="../pom.xml" />
+			<param name="noCleanUIWarPost" value="true" />
+			<param name="configurationProjectName" value="sensus-dm-configuration" />
+			<param name="installLocal" value="false" />
+			<param name="noCopyOverXSDFiles" value="true" />
+			<param name="genericWarFileName" value="dm.war" />
+			<param name="dmRelease" value="${releaseNo}" />
+
+			<!-- The directory log4j should be configured to log to in the final war -->
+			<param name="logDir" value="/opt/flexnet-dm/logs" />
+			<!-- The file name log4j should be configured to log to in the final war -->
+			<param name="logFile" value="dm.log" />
+			<!-- The file name log4j should be configured to log to in the final war for users actions -->
+			<param name="logFileUser" value="dm_user.log" />
+
+			<param name="deleteFromWarLibList" value="activation*.jar,guice*.jar,guava*.jar,hibernate*.jar,javax.servlet*.jar,servlet*.jar,jms*.jar,velocity*.jar" />
+		</antcall>
+	</target>
+
+	<!-- Invoked from within the Sensus-ant-common-targets ant file. -->
+	<!-- Do nothing in the context of running under Jenkins. -->
+	<target name="buildUIWarPrerequisites">
+
+	</target>
+
+</project>
