@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<import resource="classpath*:conf/sensus-dm-validators-context.xml" />
+
+	<bean id="SensusAppContext" class="com.sensus.common.util.SensusAppContext"/>
+
+	<bean id="settingsBCF" class="com.sensus.dm.elec.settings.bcf.impl.SettingsBCFImpl">
+		<property name="settingsBCL" ref="settingsBCLMockTarget"/>
+		<property name="propertyValidationController" ref="propertyValidationController" />
+		<property name="tenantRequestValidationController" ref="tenantRequestValidationController" />
+	</bean>
+
+</beans>

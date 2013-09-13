@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="SensusAppContext" class="com.sensus.common.util.SensusAppContext"/>
+
+	<bean id="electricMeterDACImplTarget" class="com.sensus.dm.elec.device.dac.ElectricMeterDACImplTest"/>
+
+	<bean id="electricMeterDACTarget" class="com.sensus.dm.elec.device.dac.mybatis.ElectricMeterDACImpl">
+		<property name="sqlSessionFactory" ref="device-sqlSessionFactory" />
+	</bean>
+
+  	<!-- Setup for mybatis Database Layer DEVICE -->
+	<bean id="device-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation"
+			value="classpath:com/sensus/dm/elec/device/dac/mybatis/map/dm-elec-device-mybatis-config.xml" />
+		<property name="dataSource" ref="epmDataSource" />
+	</bean>
+
+</beans>

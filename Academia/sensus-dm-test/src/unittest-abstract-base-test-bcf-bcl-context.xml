@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<context:property-placeholder location="classpath*:messages/*.properties" />
+
+	<!-- BCF Mocks -->
+	<bean id="customSearchBCFMockTarget" class="com.sensus.dm.common.device.bcf.MockCustomSearchBCF" />
+	<bean id="actionBCFMockTarget" class="com.sensus.dm.elec.action.bcf.MockActionBCF" />
+	<bean id="noteBCFMockTarget" class="com.sensus.dm.common.device.bcf.MockNoteBCF" />
+	<bean id="electricMeterBCFMockTarget" class="com.sensus.dm.elec.device.bcf.MockElectricMeterBCF" />
+	<bean id="deviceBCFMockTarget" class="com.sensus.dm.common.device.bcf.MockDeviceBCF" />
+	<bean id="processBCFMockTarget" class="com.sensus.dm.common.process.bcf.MockProcessBCF" />
+	<bean id="processTypeBCFMockTarget" class="com.sensus.dm.common.process.bcf.MockProcessTypeBCF" />
+	<bean id="processSummaryBCFMockTarget" class="com.sensus.dm.common.process.bcf.MockProcessSummaryBCF" />
+	<bean id="processCSVBCFMockTarget" class="com.sensus.dm.common.process.bcf.MockProcessCSVBCF" />
+	<bean id="scheduleBCFMockTarget" class="com.sensus.dm.common.schedule.bcf.MockScheduleBCF" />
+	<bean id="settingsBCFMockTarget" class="com.sensus.dm.elec.settings.bcf.MockSettingsBCF" />
+	<bean id="waterMeterBCFMockTarget" class="com.sensus.dm.water.device.bcf.MockWaterMeterBCF" />
+	<bean id="gasMeterBCFMockTarget" class="com.sensus.dm.gas.device.bcf.MockGasMeterBCF" />
+
+	<!-- BCL Mocks -->
+	<bean id="customSearchBCLMockTarget" class="com.sensus.dm.common.device.bcl.MockCustomSearchBCL" />
+	<bean id="tagBCLMockTarget" class="com.sensus.dm.common.tag.bcl.MockTagBCL" />
+	<bean id="tenantBCLMockTarget" class="com.sensus.dm.common.tenant.bcl.MockTenantBCL" />
+	<bean id="groupBCLMockTarget" class="com.sensus.dm.common.group.bcl.MockGroupBCL" />
+	<bean id="actionBCLMockTarget" class="com.sensus.dm.elec.action.bcl.MockActionBCL" />
+	<bean id="noteBCLMockTarget" class="com.sensus.dm.common.device.bcl.MockNoteBCL" />
+	<bean id="electricMeterBCLMockTarget" class="com.sensus.dm.elec.device.bcl.MockElectricMeterBCL" />
+	<bean id="deviceBCLMockTarget" class="com.sensus.dm.common.device.bcl.MockDeviceBCL" />
+	<bean id="processBCLMockTarget" class="com.sensus.dm.common.process.bcl.MockProcessBCL" />
+	<bean id="processTypeBCLMockTarget" class="com.sensus.dm.common.process.bcl.MockProcessTypeBCL" />
+	<bean id="processSummaryBCLMockTarget" class="com.sensus.dm.common.process.bcl.MockProcessSummaryBCL" />
+	<bean id="processCSVBCLMockTarget" class="com.sensus.dm.common.process.bcl.MockProcessCSVBCL" />
+	<bean id="propertyBCLMockTarget" class="com.sensus.dm.common.property.bcl.MockPropertyBCL" />
+	<bean id="scheduleBCLMockTarget" class="com.sensus.dm.common.schedule.bcl.MockScheduleBCL" />
+	<bean id="settingsBCLMockTarget" class="com.sensus.dm.elec.settings.bcl.MockSettingsBCL" />
+	<bean id="waterMeterBCLMockTarget" class="com.sensus.dm.water.device.bcl.MockWaterMeterBCL" />
+	<bean id="gasMeterBCLMockTarget" class="com.sensus.dm.gas.device.bcl.MockGasMeterBCL" />
+
+	<bean id="meterReadingServiceMockTarget" class="com.sensus.dm.elec.device.bcl.MockMeterReadingService" />
+	<bean id="deviceReadingBCLMockTarget" class="com.sensus.dm.elec.device.bcl.MockDeviceReadingBCL">
+		<property name="meterReadingService" ref="meterReadingServiceMockTarget" />
+	</bean>
+
+	<!-- DAC Mocks -->
+	<bean id="customSearchDACMockTarget" class="com.sensus.dm.common.device.dac.MockCustomSearchDAC" />
+	<bean id="actionDACMockTarget" class="com.sensus.dm.elec.action.dac.MockActionDAC" />
+	<bean id="deviceDACMockTarget" class="com.sensus.dm.common.device.dac.MockDeviceDAC" />
+	<bean id="electricMeterDACMockTarget" class="com.sensus.dm.elec.device.dac.MockElectricMeterDAC" />
+	<bean id="noteDACMockTarget" class="com.sensus.dm.common.device.dac.MockNoteDAC" />
+	<bean id="groupDACMockTarget" class="com.sensus.dm.common.group.dac.MockGroupDAC" />
+	<bean id="propertyDACMockTarget" class="com.sensus.dm.common.property.dac.MockPropertyDAC" />
+	<bean id="processDACMockTarget" class="com.sensus.dm.common.process.dac.MockProcessDAC" />
+	<bean id="processTypeDACMockTarget" class="com.sensus.dm.common.process.dac.MockProcessTypeDAC" />
+	<bean id="processSummaryDACMockTarget" class="com.sensus.dm.common.process.dac.MockProcessSummaryDAC" />
+	<bean id="settingsDACMockTarget" class="com.sensus.dm.elec.settings.dac.MockSettingsDAC" />
+	<bean id="tagDACMockTarget" class="com.sensus.dm.common.tag.dac.MockTagDAC" />
+	<bean id="tenantDACMockTarget" class="com.sensus.dm.common.tenant.dac.MockTenantDAC" />
+	<bean id="scheduleDACMockTarget" class="com.sensus.dm.common.schedule.dac.MockScheduleDAC" />
+	<bean id="waterMeterDACMockTarget" class="com.sensus.dm.water.device.dac.MockWaterMeterDAC" />
+	<bean id="gasMeterDACMockTarget" class="com.sensus.dm.gas.device.dac.MockGasMeterDAC" />
+
+	<!-- General Beans -->
+	<bean id="SensusAppContext" class="com.sensus.common.util.SensusAppContext" />
+
+
+</beans>

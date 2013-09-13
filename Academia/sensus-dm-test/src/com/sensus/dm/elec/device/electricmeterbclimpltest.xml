@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/util
+            http://www.springframework.org/schema/util/spring-util.xsd
+            ">
+		<import resource="classpath*:conf/sensus-dm-csv-context.xml" />
+
+	<!-- <import resource="classpath*:spring/spring-apibinding-jms.xml" /> <import
+		resource="classpath*:spring/spring-bcf-mrnotif-camel.xml" /> <import resource="classpath*:spring/spring-bcf-cim-mapping.xml"
+		/> <import resource="classpath*:spring/spring-bcf-mrnotif.xml" /> <import
+		resource="classpath*:spring/spring-bcf-mrsvc.xml" /> <import resource="classpath*:spring/spring-bcf-mrsvc-camel.xml"
+		/> -->
+
+	<!-- Message Driven POJO (MDP) for MeterReads -->
+	<bean id="intervalRead.notif.messageReceiver" class="com.sensus.dm.common.schedule.bcl.impl.MeterReadsReceiver"
+		lazy-init="true" />
+
+	<!-- Message Driven POJO (MDP) for Reading Changed Meter Reads -->
+	<bean id="registerRead.notif.messageReceiver" class="com.sensus.dm.common.schedule.bcl.impl.ReadingChangedReceiver"
+		lazy-init="true" />
+
+	<!-- Message Driven POJO (MDP) for GlASS Read Meter Reads -->
+	<bean id="glassRead.notif.messageReceiver" class="com.sensus.dm.common.schedule.bcl.impl.GlassReadReceiver"
+		lazy-init="true">
+		<property name="useGatewayCacheForGlassRead">
+			<value>false</value>
+		</property>
+	</bean>
+
+	<!-- The following map is used to translate from a multispeak field name
+		to a reading type selector. -->
+	<util:map id="fieldNameToReadingTypeSelector" map-class="java.util.HashMap"
+		key-type="java.lang.String"
+		value-type="com.sensus.api.getmeterreadings.messages.ReadingTypeSelector">
+		<entry key="maxDemand">
+			<bean class="com.sensus.api.getmeterreadings.messages.ReadingTypeSelector">
+				<property name="quantityType" value="PEAK_DEMAND"></property>
+			</bean>
+		</entry>
+		<entry key="posKWh">
+			<bean class="com.sensus.api.getmeterreadings.messages.ReadingTypeSelector">
+				<property name="netFlowType" value="FORWARD_ONLY"></property>
+				<property name="quantityType" value="INTERVAL"></property>
+				<property name="unitOfMeasoure" value="ACTIVE_POWER"></property>
+			</bean>
+		</entry>
+		<entry key="negKWh">
+			<bean class="com.sensus.api.getmeterreadings.messages.ReadingTypeSelector">
+				<property name="netFlowType" value="REVERSE_ONLY"></property>
+				<property name="quantityType" value="INTERVAL"></property>
+				<property name="unitOfMeasoure" value="ACTIVE_POWER"></property>
+			</bean>
+		</entry>
+		<entry key="netKWh">
+			<bean class="com.sensus.api.getmeterreadings.messages.ReadingTypeSelector">
+				<property name="netFlowType" value="SIMPLE_NET"></property>
+				<property name="quantityType" value="INTERVAL"></property>
+				<property name="unitOfMeasoure" value="ACTIVE_POWER"></property>
+			</bean>
+		</entry>
+		<entry key="totalKWh">
+			<bean class="com.sensus.api.getmeterreadings.messages.ReadingTypeSelector">
+				<property name="netFlowType" value="REVERSE_ENERGY_DETECTION"></property>
+				<property name="quantityType" value="INTERVAL"></property>
+				<property name="unitOfMeasoure" value="ACTIVE_POWER"></property>
+			</bean>
+		</entry>
+		<entry key="posKVARh">
+			<bean class="com.sensus.api.getmeterreadings.messages.ReadingTypeSelector">
+				<property name="netFlowType" value="FORWARD_ONLY"></property>
+				<property name="quantityType" value="INTERVAL"></property>
+				<property name="unitOfMeasoure" value="REACTIVE_POWER"></property>
+			</bean>
+		</entry>
+		<entry key="netKVARh">
+			<bean class="com.sensus.api.getmeterreadings.messages.ReadingTypeSelector">
+				<property name="netFlowType" value="SIMPLE_NET"></property>
+				<property name="quantityType" value="INTERVAL"></property>
+				<property name="unitOfMeasoure" value="REACTIVE_POWER"></property>
+			</bean>
+		</entry>
+		<entry key="totalKVARh">
+			<bean class="com.sensus.api.getmeterreadings.messages.ReadingTypeSelector">
+				<property name="netFlowType" value="REVERSE_ENERGY_DETECTION"></property>
+				<property name="quantityType" value="INTERVAL"></property>
+				<property name="unitOfMeasoure" value="REACTIVE_POWER"></property>
+			</bean>
+		</entry>
+		<entry key="posKVAh">
+			<bean class="com.sensus.api.getmeterreadings.messages.ReadingTypeSelector">
+				<property name="netFlowType" value="FORWARD_ONLY"></property>
+				<property name="quantityType" value="INTERVAL"></property>
+				<property name="unitOfMeasoure" value="APPARENT_POWER"></property>
+			</bean>
+		</entry>
+		<entry key="negKVAh">
+			<bean class="com.sensus.api.getmeterreadings.messages.ReadingTypeSelector">
+				<property name="netFlowType" value="REVERSE_ONLY"></property>
+				<property name="quantityType" value="INTERVAL"></property>
+				<property name="unitOfMeasoure" value="APPARENT_POWER"></property>
+			</bean>
+		</entry>
+		<entry key="netKVAh">
+			<bean class="com.sensus.api.getmeterreadings.messages.ReadingTypeSelector">
+				<property name="netFlowType" value="SIMPLE_NET"></property>
+				<property name="quantityType" value="INTERVAL"></property>
+				<property name="unitOfMeasoure" value="APPARENT_POWER"></property>
+			</bean>
+		</entry>
+		<entry key="totalKVAh">
+			<bean class="com.sensus.api.getmeterreadings.messages.ReadingTypeSelector">
+				<property name="netFlowType" value="REVERSE_ENERGY_DETECTION"></property>
+				<property name="quantityType" value="INTERVAL"></property>
+				<property name="unitOfMeasoure" value="APPARENT_POWER"></property>
+			</bean>
+		</entry>
+		<entry key="CorrGasVol"> <!-- OR CUBIC_FEET_VOLUME_CORRECTED_PRESSURE_BASE ?? or cubit meter ? -->
+			<bean class="com.sensus.api.getmeterreadings.messages.ReadingTypeSelector">
+				<property name="netFlowType" value="FORWARD_ONLY"></property>
+				<property name="quantityType" value="INTERVAL"></property>
+				<property name="unitOfMeasoure"
+					value="CUBIC_FEET_VOLUME_CORRECTED_BASE_CONDITIONS"></property>
+			</bean>
+		</entry>
+		<entry key="UncorrGasVol">
+			<bean class="com.sensus.api.getmeterreadings.messages.ReadingTypeSelector">
+				<property name="netFlowType" value="FORWARD_ONLY"></property>
+				<property name="quantityType" value="INTERVAL"></property>
+				<property name="unitOfMeasoure" value="CUBIC_FEET_GAS_VOLUME_UNCORRECTED"></property>
+			</bean>
+		</entry>
+		<entry key="WaterVol">
+			<bean class="com.sensus.api.getmeterreadings.messages.ReadingTypeSelector">
+				<property name="netFlowType" value="FORWARD_ONLY"></property>
+				<property name="quantityType" value="INTERVAL"></property>
+				<property name="unitOfMeasoure" value="US_GALLONS"></property>
+			</bean>
+		</entry>
+		<entry key="minVoltage">
+			<bean class="com.sensus.api.getmeterreadings.messages.ReadingTypeSelector">
+				<property name="netFlowType" value="FORWARD_ONLY"></property>
+				<property name="quantityType" value="INTERVAL"></property>
+				<property name="unitOfMeasoure" value="INSTANTANEOUS_VOLTS"></property>
+			</bean>
+		</entry>
+		<entry key="maxVoltage">
+			<bean class="com.sensus.api.getmeterreadings.messages.ReadingTypeSelector">
+				<property name="netFlowType" value="FORWARD_ONLY"></property>
+				<property name="quantityType" value="INTERVAL"></property>
+				<property name="unitOfMeasoure" value="INSTANTANEOUS_VOLTS"></property>
+			</bean>
+		</entry>
+		<entry key="avgVoltage">
+			<bean class="com.sensus.api.getmeterreadings.messages.ReadingTypeSelector">
+				<property name="netFlowType" value="FORWARD_ONLY"></property>
+				<property name="quantityType" value="INTERVAL"></property>
+				<property name="unitOfMeasoure" value="AVERAGE_VOLTS"></property>
+			</bean>
+		</entry>
+		<!-- <entry key="phaseAVoltage"> PHASE A/B/C ???? <bean class="com.sensus.api.getmeterreadings.messages.ReadingTypeSelector">
+			<property name="netFlowType" value="FORWARD_ONLY"></property> <property name="quantityType"
+			value="INTERVAL"></property> <property name="unitOfMeasoure" value="AVERAGE_VOLTS"></property>
+			</bean> </entry> -->
+	</util:map>
+
+	<util:map id="channelTypeSelector" map-class="java.util.HashMap"
+		key-type="java.lang.String">
+		<!-- Start Legacy fieldName mappings -->
+		<entry key="Peak Demand,kVA" value="maxDemand" />
+		<entry key="Peak Demand,VA" value="maxDemand" />
+		<entry key="Peak Demand,kW" value="maxDemand" />
+		<entry key="Peak Demand,W" value="maxDemand" />
+
+		<entry key="DEMAND_TIME,Time" value="maxDemandDateTime" />
+
+		<entry key="NET Summation (F+R),Wh" value="totalKWh" />
+		<entry key="Simple NET (F-R),Wh" value="netKWh" />
+		<entry key="Delivered (R),Wh" value="negKWh" />
+		<entry key="Consumed (F),Wh" value="posKWh" />
+
+		<entry key="NET Summation (F+R),kWh" value="totalKWh" />
+		<entry key="Simple NET (F-R),kWh" value="netKWh" />
+		<entry key="Delivered (R),kWh" value="negKWh" />
+		<entry key="Consumed (F),kWh" value="posKWh" />
+
+		<entry key="Consumed (F),kVARh" value="posKVARh" />
+		<entry key="Simple NET (F-R),kVARh" value="netKVARh" />
+		<entry key="NET Summation (F+R),kVARh" value="totalKVARh" />
+
+		<entry key="Consumed (F),VARh" value="posKVARh" />
+		<entry key="Simple NET (F-R),VARh" value="netKVARh" />
+		<entry key="NET Summation (F+R),VARh" value="totalKVARh" />
+
+		<entry key="Consumed (F),VAh" value="posKVAh" />
+		<entry key="Delivered (R),VAh" value="negKVAh" />
+		<entry key="Simple NET (F-R),VAh" value="netKVAh" />
+		<entry key="NET Summation (F+R),VAh" value="totalKVAh" />
+
+		<entry key="Consumed (F),kVAh" value="posKVAh" />
+		<entry key="Delivered (R),kVAh" value="negKVAh" />
+		<entry key="Simple NET (F-R),kVAh" value="netKVAh" />
+		<entry key="NET Summation (F+R),kVAh" value="totalKVAh" />
+
+
+		<!-- "?" will be replaced with tierID in response fieldName -->
+		<entry key="tou,Consumed (F),VAh" value="tou?PosKVAh" />
+		<entry key="tou,Consumed (F),kVAh" value="tou?PosKVAh" />
+		<entry key="tou,Consumed (F),Wh" value="tou?PosKWh" />
+		<entry key="tou,Consumed (F),kWh" value="tou?PosKWh" />
+		<entry key="tou,Consumed (F),kVARh" value="tou?posKVARh" />
+		<entry key="tou,Consumed (F),VARh" value="tou?posKVARh" />
+		<entry key="tou,Delivered (R),kWh" value="tou?NegKWh" />
+		<entry key="tou,Delivered (R),Wh" value="tou?NegKWh" />
+		<entry key="tou,Delivered (R),kVAh" value="tou?NegKVAh" />
+		<entry key="tou,Delivered (R),VAh" value="tou?NegKVAh" />
+
+
+		<entry key="tou,NET Summation (F+R),VAh" value="tou?totalKVAh" />
+		<entry key="tou,NET Summation (F+R),kVAh" value="tou?totalKVAh" />
+		<entry key="tou,NET Summation (F+R),Wh" value="tou?totalKWh" />
+		<entry key="tou,NET Summation (F+R),kWh" value="tou?totalKWh" />
+		<entry key="tou,NET Summation (F+R),VARh" value="tou?totalKVARh" />
+		<entry key="tou,NET Summation (F+R),kVARh" value="tou?totalKVARh" />
+		<entry key="tou,Simple NET (F-R),VAh" value="tou?netKVAh" />
+		<entry key="tou,Simple NET (F-R),kVAh" value="tou?netKVAh" />
+		<entry key="tou,Simple NET (F-R),Wh" value="tou?netKWh" />
+		<entry key="tou,Simple NET (F-R),kWh" value="tou?netKWh" />
+		<entry key="tou,Simple NET (F-R),VARh" value="tou?netKVARh" />
+		<entry key="tou,Simple NET (F-R),kVARh" value="tou?netKVARh" />
+		<entry key="tou,Peak Demand,VA" value="tou?MaxDemand" />
+		<entry key="tou,Peak Demand,kVA" value="tou?MaxDemand" />
+		<entry key="tou,Peak Demand,W" value="tou?MaxDemand" />
+		<entry key="tou,Peak Demand,kW" value="tou?MaxDemand" />
+		<entry key="tou,Peak Demand,VAR" value="tou?MaxDemand" />
+		<entry key="tou,Peak Demand,kVAR" value="tou?MaxDemand" />
+		<entry key="tou,DEMAND_TIME,Time" value="tou?MaxDemandDateTime" />
+
+
+		<entry key="Corrected Volume,cubic feet" value="CorrGasVol" />
+		<entry key="Uncorrected Volume,cubic feet" value="UncorrGasVol" />
+		<entry key="Corrected Volume,cubic meters" value="CorrGasVol" />
+		<entry key="Uncorrected Volume,cubic meters" value="UncorrGasVol" />
+		<entry key="Gallons,US gl" value="WaterVol" />
+
+		<entry key="Min Voltage,Volts" value="minVoltage" />
+		<entry key="Max Voltage,Volts" value="maxVoltage" />
+		<entry key="Avg Voltage,Volts" value="avgVoltage" />
+		<entry key="Phase A Voltage,Volts" value="phaseAVoltage" />
+		<entry key="Phase B Voltage,Volts" value="phaseBVoltage" />
+		<entry key="Phase C Voltage,Volts" value="phaseCVoltage" />
+		<!-- End Legacy fieldName mappings -->
+
+		<!-- Start ESM based fieldName mappings -->
+		<!-- Energy specific -->
+		<entry key="REVERSE_ENERGY_DETECTION,Wh" value="totalKWh" />
+		<entry key="SIMPLE_NET,Wh" value="netKWh" />
+		<entry key="REVERSE_ONLY,Wh" value="negKWh" />
+		<entry key="FORWARD_ONLY,Wh" value="posKWh" />
+		<entry key="FORWARD_ONLY,VARh" value="posKVARh" />
+		<entry key="SIMPLE_NET,VARh" value="netKVARh" />
+		<entry key="REVERSE_ONLY,VARh" value="negKVARh" />
+		<entry key="REVERSE_ENERGY_DETECTION,VARh" value="totalKVARh" />
+		<entry key="FORWARD_ONLY,VAh" value="posKVAh" />
+		<entry key="SIMPLE_NET,VAh" value="netKVAh" />
+		<entry key="REVERSE_ONLY,VAh" value="negKVAh" />
+		<entry key="REVERSE_ENERGY_DETECTION,VAh" value="totalKVAh" />
+
+		<!-- Power specific -->
+		<entry key="REVERSE_ENERGY_DETECTION,W" value="totalKW" />
+		<entry key="SIMPLE_NET,W" value="netKW" />
+		<entry key="REVERSE_ONLY,W" value="negKW" />
+		<entry key="FORWARD_ONLY,W" value="posKW" />
+		<entry key="FORWARD_ONLY,VAR" value="posKVAR" />
+		<entry key="SIMPLE_NET,VAR" value="netKVAR" />
+		<entry key="REVERSE_ONLY,VAR" value="negKVAR" />
+		<entry key="REVERSE_ENERGY_DETECTION,VAR" value="totalKVAR" />
+		<entry key="FORWARD_ONLY,VA" value="posKVA" />
+		<entry key="SIMPLE_NET,VA" value="netKVA" />
+		<entry key="REVERSE_ONLY,VA" value="negKVA" />
+		<entry key="REVERSE_ENERGY_DETECTION,VA" value="totalKVA" />
+
+
+		<entry key="PHASOR_REACTIVE_POWER,VAR" value="phasorRMSKVAR" />
+		<entry key="DISTORTION_VOLT_AMPERES,VA" value="distorRMSKVA" />
+
+		<!-- Voltage specific -->
+
+		<entry key="NA,NORMAL,V" value="voltage" />
+		<entry key="NA,ABSOLUTE,V" value="absVoltage" />
+		<entry key="NA,AVERAGE,V" value="avgVoltage" />
+		<entry key="NA,MAXIMUM,V" value="maxVoltage" />
+		<entry key="NA,MINIMUM,V" value="minVoltage" />
+		<entry key="NA,NORMAL,V RMS" value="RMSVoltage" />
+		<entry key="NA,ABSOLUTE,V RMS" value="absRMSVoltage" />
+		<entry key="NA,AVERAGE,V RMS" value="avgRMSVoltage" />
+		<entry key="NA,MAXIMUM,V RMS" value="maxRMSVoltage" />
+		<entry key="NA,MINIMUM,V RMS" value="minRMSVoltage" />
+		<entry key="NA,RMS,Vsquared RMS" value="RMSVoltageSquared" />
+		<entry key="PHASE_A,NORMAL,V" value="phaseAVoltage" />
+		<entry key="PHASE_A,ABSOLUTE,V" value="phaseAAbsVoltage" />
+		<entry key="PHASE_A,AVERAGE,V" value="phaseAAvgVoltage" />
+		<entry key="PHASE_A,MAXIMUM,V" value="phaseAMaxVoltage" />
+		<entry key="PHASE_A,MINIMUM,V" value="phaseAMinVoltage" />
+		<entry key="PHASE_A,NORMAL,V RMS" value="phaseARMSVoltage" />
+		<entry key="PHASE_A,ABSOLUTE,V RMS" value="phaseAAbsRMSVoltage" />
+		<entry key="PHASE_A,AVERAGE,V RMS" value="phaseAAvgRMSVoltage" />
+		<entry key="PHASE_A,MAXIMUM,V RMS" value="phaseAMaxRMSVoltage" />
+		<entry key="PHASE_A,MINIMUM,V RMS" value="phaseAMinRMSVoltage" />
+		<entry key="PHASE_A,RMS,Vsquared RMS" value="phaseARMSVoltageSquared" />
+		<entry key="PHASE_B,NORMAL,V" value="phaseBVoltage" />
+		<entry key="PHASE_B,ABSOLUTE,V" value="phaseBAbsVoltage" />
+		<entry key="PHASE_B,AVERAGE,V" value="phaseBAvgVoltage" />
+		<entry key="PHASE_B,MAXIMUM,V" value="phaseBMaxVoltage" />
+		<entry key="PHASE_B,MINIMUM,V" value="phaseBMinVoltage" />
+		<entry key="PHASE_B,NORMAL,V RMS" value="phaseBRMSVoltage" />
+		<entry key="PHASE_B,ABSOLUTE,V RMS" value="phaseBAbsRMSVoltage" />
+		<entry key="PHASE_B,AVERAGE,V RMS" value="phaseBAvgRMSVoltage" />
+		<entry key="PHASE_B,MAXIMUM,V RMS" value="phaseBMaxRMSVoltage" />
+		<entry key="PHASE_B,MINIMUM,V RMS" value="phaseBMinRMSVoltage" />
+		<entry key="PHASE_B,RMS,Vsquared RMS" value="phaseBRMSVoltageSquared" />
+		<entry key="PHASE_C,NORMAL,V" value="phaseCVoltage" />
+		<entry key="PHASE_C,ABSOLUTE,V" value="phaseCAbsVoltage" />
+		<entry key="PHASE_C,AVERAGE,V" value="phaseCAvgVoltage" />
+		<entry key="PHASE_C,MAXIMUM,V" value="phaseCMaxVoltage" />
+		<entry key="PHASE_C,MINIMUM,V" value="phaseCMinVoltage" />
+		<entry key="PHASE_C,NORMAL,V RMS" value="phaseCVoltage" />
+		<entry key="PHASE_C,ABSOLUTE,V RMS" value="phaseCAbsRMSVoltage" />
+		<entry key="PHASE_C,AVERAGE,V RMS" value="phaseCAvgRMSVoltage" />
+		<entry key="PHASE_C,MAXIMUM,V RMS" value="phaseCMaxRMSVoltage" />
+		<entry key="PHASE_C,MINIMUM,V RMS" value="phaseCMinRMSVoltage" />
+		<entry key="PHASE_C,RMS,Vsquared RMS" value="phaseCRMSVoltageSquared" />
+
+		<!-- Current specific -->
+
+		<entry key="NA,NORMAL,Amps" value="current" />
+		<entry key="NA,ABSOLUTE,Amps" value="absCurrent" />
+		<entry key="NA,AVERAGE,Amps" value="avgCurrent" />
+		<entry key="NA,MAXIMUM,Amps" value="maxCurrent" />
+		<entry key="NA,MINIMUM,Amps" value="minCurrent" />
+		<entry key="NA,NORMAL,Amps RMS" value="RMSCurrent" />
+		<entry key="NA,ABSOLUTE,Amps RMS" value="absRMSCurrent" />
+		<entry key="NA,AVERAGE,Amps RMS" value="avgRMSCurrent" />
+		<entry key="NA,MAXIMUM,Amps RMS" value="maxRMSCurrent" />
+		<entry key="NA,MINIMUM,Amps RMS" value="minRMSCurrent" />
+		<entry key="NA,RMS,Ampssquared RMS" value="RMSCurrentSquared" />
+		<entry key="PHASE_A,NORMAL,Amps" value="phaseACurrent" />
+		<entry key="PHASE_A,ABSOLUTE,Amps" value="phaseAAbsCurrent" />
+		<entry key="PHASE_A,AVERAGE,Amps" value="phaseAAvgCurrent" />
+		<entry key="PHASE_A,MAXIMUM,Amps" value="phaseAMaxCurrent" />
+		<entry key="PHASE_A,MINIMUM,Amps" value="phaseAMinCurrent" />
+		<entry key="PHASE_A,NORMAL,Amps RMS" value="phaseARMSCurrent" />
+		<entry key="PHASE_A,ABSOLUTE,Amps RMS" value="phaseAAbsRMSCurrent" />
+		<entry key="PHASE_A,AVERAGE,Amps RMS" value="phaseAAvgRMSCurrent" />
+		<entry key="PHASE_A,MAXIMUM,Amps RMS" value="phaseAMaxRMSCurrent" />
+		<entry key="PHASE_A,MINIMUM,Amps RMS" value="phaseAMinRMSCurrent" />
+		<entry key="PHASE_A,RMS,Ampssquared RMS" value="phaseARMSCurrentSquared" />
+		<entry key="PHASE_B,NORMAL,Amps" value="phaseBCurrent" />
+		<entry key="PHASE_B,ABSOLUTE,Amps" value="phaseBAbsCurrent" />
+		<entry key="PHASE_B,AVERAGE,Amps" value="phaseBAvgCurrent" />
+		<entry key="PHASE_B,MAXIMUM,Amps" value="phaseBMaxCurrent" />
+		<entry key="PHASE_B,MINIMUM,Amps" value="phaseBMinCurrent" />
+		<entry key="PHASE_B,NORMAL,Amps RMS" value="phaseBRMSCurrent" />
+		<entry key="PHASE_B,ABSOLUTE,Amps RMS" value="phaseBAbsRMSCurrent" />
+		<entry key="PHASE_B,AVERAGE,Amps RMS" value="phaseBAvgRMSCurrent" />
+		<entry key="PHASE_B,MAXIMUM,Amps RMS" value="phaseBMaxRMSCurrent" />
+		<entry key="PHASE_B,MINIMUM,Amps RMS" value="phaseBMinRMSCurrent" />
+		<entry key="PHASE_B,RMS,Ampssquared RMS" value="phaseBRMSCurrentSquared" />
+		<entry key="PHASE_C,NORMAL,Amps" value="phaseCCurrent" />
+		<entry key="PHASE_C,ABSOLUTE,Amps" value="phaseCAbsCurrent" />
+		<entry key="PHASE_C,AVERAGE,Amps" value="phaseCAvgCurrent" />
+		<entry key="PHASE_C,MAXIMUM,Amps" value="phaseCMaxCurrent" />
+		<entry key="PHASE_C,MINIMUM,Amps" value="phaseCMinCurrent" />
+		<entry key="PHASE_C,NORMAL,Amps RMS" value="phaseCCurrent" />
+		<entry key="PHASE_C,ABSOLUTE,Amps RMS" value="phaseCAbsRMSCurrent" />
+		<entry key="PHASE_C,AVERAGE,Amps RMS" value="phaseCAvgRMSCurrent" />
+		<entry key="PHASE_C,MAXIMUM,Amps RMS" value="phaseCMaxRMSCurrent" />
+		<entry key="PHASE_C,MINIMUM,Amps RMS" value="phaseCMinRMSCurrent" />
+		<entry key="PHASE_C,RMS,Ampssquared RMS" value="phaseCRMSCurrentSquared" />
+
+		<!-- Voltage Phase Angle -->
+		<entry key="NA,NORMAL,Voltage phase angle" value="voltagePhaseAngle" />
+		<entry key="NA,ABSOLUTE,Voltage phase angle" value="voltagePhaseAngleAbs" />
+		<entry key="NA,AVERAGE,Voltage phase angle" value="voltagePhaseAngleAvg" />
+		<entry key="NA,MAXIMUM,Voltage phase angle" value="voltagePhaseAngleMax" />
+		<entry key="NA,MINIMUM,Voltage phase angle" value="voltagePhaseAngleMin" />
+		<entry key="NA,RMS,Voltage phase angle" value="voltagePhaseAngleRMS" />
+
+		<entry key="PHASE_A,NORMAL,Voltage phase angle" value="phaseAVoltagePhaseAngle" />
+		<entry key="PHASE_A,ABSOLUTE,Voltage phase angle" value="phaseAVoltagePhaseAngleAbs" />
+		<entry key="PHASE_A,AVERAGE,Voltage phase angle" value="phaseAVoltagePhaseAngleAvg" />
+		<entry key="PHASE_A,MAXIMUM,Voltage phase angle" value="phaseAVoltagePhaseAngleMax" />
+		<entry key="PHASE_A,MINIMUM,Voltage phase angle" value="phaseAVoltagePhaseAngleMin" />
+		<entry key="PHASE_A,RMS,Voltage phase angle" value="phaseAVoltagePhaseAngleRMS" />
+
+		<entry key="PHASE_B,NORMAL,Voltage phase angle" value="phaseBVoltagePhaseAngle" />
+		<entry key="PHASE_B,ABSOLUTE,Voltage phase angle" value="phaseBVoltagePhaseAngleAbs" />
+		<entry key="PHASE_B,AVERAGE,Voltage phase angle" value="phaseBVoltagePhaseAngleAvg" />
+		<entry key="PHASE_B,MAXIMUM,Voltage phase angle" value="phaseBVoltagePhaseAngleMax" />
+		<entry key="PHASE_B,MINIMUM,Voltage phase angle" value="phaseBVoltagePhaseAngleMin" />
+		<entry key="PHASE_B,RMS,Voltage phase angle" value="phaseBVoltagePhaseAngleRMS" />
+
+		<entry key="PHASE_C,NORMAL,Voltage phase angle" value="phaseCVoltagePhaseAngle" />
+		<entry key="PHASE_C,ABSOLUTE,Voltage phase angle" value="phaseCVoltagePhaseAngleAbs" />
+		<entry key="PHASE_C,AVERAGE,Voltage phase angle" value="phaseCVoltagePhaseAngleAvg" />
+		<entry key="PHASE_C,MAXIMUM,Voltage phase angle" value="phaseCVoltagePhaseAngleMax" />
+		<entry key="PHASE_C,MINIMUM,Voltage phase angle" value="phaseCVoltagePhaseAngleMin" />
+		<entry key="PHASE_C,RMS,Voltage phase angle" value="phaseCVoltagePhaseAngleRMS" />
+
+		<!-- Current Phase Angle -->
+		<entry key="NA,NORMAL,Current phase angle" value="currentPhaseAngle" />
+		<entry key="NA,ABSOLUTE,Current phase angle" value="currentPhaseAngleAbs" />
+		<entry key="NA,AVERAGE,Current phase angle" value="currentPhaseAngleAvg" />
+		<entry key="NA,MAXIMUM,Current phase angle" value="currentPhaseAngleMax" />
+		<entry key="NA,MINIMUM,Current phase angle" value="currentPhaseAngleMin" />
+		<entry key="NA,RMS,Current phase angle" value="currentPhaseAngle" />
+		<entry key="PHASE_A,NORMAL,Current phase angle" value="phaseACurrentPhaseAngle" />
+		<entry key="PHASE_A,ABSOLUTE,Current phase angle" value="phaseACurrentPhaseAngleAbs" />
+		<entry key="PHASE_A,AVERAGE,Current phase angle" value="phaseACurrentPhaseAngleAvg" />
+		<entry key="PHASE_A,MAXIMUM,Current phase angle" value="phaseACurrentPhaseAngleMax" />
+		<entry key="PHASE_A,MINIMUM,Current phase angle" value="phaseACurrentPhaseAngleMin" />
+		<entry key="PHASE_A,RMS,Current phase angle" value="phaseACurrentPhaseAngle" />
+		<entry key="PHASE_B,NORMAL,Current phase angle" value="phaseBCurrentPhaseAngle" />
+		<entry key="PHASE_B,ABSOLUTE,Current phase angle" value="phaseBCurrentPhaseAngleAbs" />
+		<entry key="PHASE_B,AVERAGE,Current phase angle" value="phaseBCurrentPhaseAngleAvg" />
+		<entry key="PHASE_B,MAXIMUM,Current phase angle" value="phaseBCurrentPhaseAngleMax" />
+		<entry key="PHASE_B,MINIMUM,Current phase angle" value="phaseBCurrentPhaseAngleMin" />
+		<entry key="PHASE_B,RMS,Current phase angle" value="phaseBCurrentPhaseAngle" />
+		<entry key="PHASE_C,NORMAL,Current phase angle" value="phaseCCurrentPhaseAngle" />
+		<entry key="PHASE_C,ABSOLUTE,Current phase angle" value="phaseCCurrentPhaseAngleAbs" />
+		<entry key="PHASE_C,AVERAGE,Current phase angle" value="phaseCCurrentPhaseAngleAvg" />
+		<entry key="PHASE_C,MAXIMUM,Current phase angle" value="phaseCCurrentPhaseAngleMax" />
+		<entry key="PHASE_C,MINIMUM,Current phase angle" value="phaseCCurrentPhaseAngleMin" />
+		<entry key="PHASE_C,RMS,Current phase angle" value="phaseCCurrentPhaseAngle" />
+
+		<!-- Power factor -->
+		<entry key="NA,NORMAL,Power factor" value="pF" />
+		<entry key="NA,ABSOLUTE,Power factor" value="pFAbs" />
+		<entry key="NA,AVERAGE,Power factor" value="pFAvg" />
+		<entry key="NA,MAXIMUM,Power factor" value="pFMax" />
+		<entry key="NA,MINIMUM,Power factor" value="pFMin" />
+		<entry key="NA,RMS,Power factor" value="pFRMS" />
+		<entry key="PHASE_A,NORMAL,Power factor" value="phaseAPF" />
+		<entry key="PHASE_A,ABSOLUTE,Power factor" value="phaseAPFAbs" />
+		<entry key="PHASE_A,AVERAGE,Power factor" value="phaseAPFAvg" />
+		<entry key="PHASE_A,MAXIMUM,Power factor" value="phaseAPFMax" />
+		<entry key="PHASE_A,MINIMUM,Power factor" value="phaseAPFMin" />
+		<entry key="PHASE_A,RMS,Power factor" value="phaseAPFRMS" />
+		<entry key="PHASE_B,NORMAL,Power factor" value="phaseBPF" />
+		<entry key="PHASE_B,ABSOLUTE,Power factor" value="phaseBPFAbs" />
+		<entry key="PHASE_B,AVERAGE,Power factor" value="phaseBPFAvg" />
+		<entry key="PHASE_B,MAXIMUM,Power factor" value="phaseBPFMax" />
+		<entry key="PHASE_B,MINIMUM,Power factor" value="phaseBPFMin" />
+		<entry key="PHASE_B,RMS,Power factor" value="phaseBPFRMS" />
+		<entry key="PHASE_C,NORMAL,Power factor" value="phaseCPF" />
+		<entry key="PHASE_C,ABSOLUTE,Power factor" value="phaseCPFAbs" />
+		<entry key="PHASE_C,AVERAGE,Power factor" value="phaseCPFAvg" />
+		<entry key="PHASE_C,MAXIMUM,Power factor" value="phaseCPFMax" />
+		<entry key="PHASE_C,MINIMUM,Power factor" value="phaseCPFMin" />
+		<entry key="PHASE_C,RMS,Power factor" value="phaseCPFRMS" />
+
+		<!-- Volumne and Flow -->
+		<entry key="cubic meters uncorrected" value="unCorrGasVol" />
+		<entry key="cubic meters corrected" value="corrGasVol" />
+		<entry key="cubic feet uncorrected" value="unCorrGasVol" />
+		<entry key="cubic feet corrected" value="corrGasVol" />
+		<entry key="LIQUID_VOLUME,US gl" value="waterVol" />
+		<entry key="LIQUID_VOLUME,IMP gl" value="waterVol" />
+		<entry key="LIQUID_VOLUME,cubic feet" value="waterVol" />
+		<entry key="LIQUID_VOLUME,cubic meter" value="waterVol" />
+		<entry key="cubic meters per Hr uncorrected" value="unCorrGasFlow" />
+		<entry key="cubic meters per Hr corrected" value="corrGasFlow" />
+		<entry key="cubic feet per Hr uncorrected" value="unCorrGasFlow" />
+		<entry key="cubic feet per Hr corrected" value="corrGasFlow" />
+		<entry key="LIQUID_FLOW,US gl per Hr" value="waterFlow" />
+		<entry key="LIQUID_FLOW,IMP gl per Hr" value="waterFlow" />
+		<entry key="LIQUID_VOLUME,cubic feet per Hr" value="waterFlow" />
+		<entry key="LIQUID_VOLUME,cubic meter per Hr" value="waterFlow" />
+
+		<!-- Demand -->
+		<entry key="ABSOLUTE" value="absDemand" />
+		<entry key="AVERAGE" value="avgDemand" />
+		<entry key="MAXIMUM" value="maxDemand" />
+		<entry key="MINIMUM" value="minDemand" />
+		<entry key="NORMAL" value="demand" />
+
+		<!-- Date and time specific -->
+		<entry key="DATE" value="date" />
+		<entry key="TIME" value="time" />
+		<entry key="DATE_TIME" value="dateTime" />
+
+		<!-- temprature specific -->
+		<entry key="deg C" value="temprature" />
+		<entry key="deg F" value="temprature" />
+		<entry key="deg K" value="temprature" />
+
+		<!-- frequency specific -->
+		<entry key="Frequency" value="frequency" />
+		<!-- End ESM fieldName mappings -->
+	</util:map>
+
+
+	<!-- Mapper uses this map to determine a profile name to use based on the
+		type and list of channels present in the meter read -->
+	<util:map id="profileNameSelector" map-class="java.util.HashMap">
+
+		<!-- Single Channel Profiles -->
+		<entry key="posKWh" value="CONSUMPTION" />
+		<entry key="netKWh" value="NET_C" />
+		<entry key="totalKWh" value="TOTAL_C" />
+		<entry key="posKVAh" value="APPARENT" />
+		<entry key="netKVAh" value="NET_A" />
+		<entry key="totalKVAh" value="TOTAL_A" />
+		<entry key="totalKVARh" value="TOTAL_R" />
+		<entry key="negKWh" value="RECEIVED" />
+
+		<!-- Two Channel Profiles -->
+		<entry key="posKWh,negKWh" value="FULLNET_C" />
+		<entry key="posKVAh,negKVAh" value="FULLNET_A" />
+		<entry key="posKWh,posKVARh" value="C_R" />
+		<entry key="totalKWh,totalKVARh" value="TOTAL_C_R" />
+		<entry key="netKWh,netKVARh" value="NET_C_R" />
+
+		<!-- Two Channels (including demand) -->
+		<entry key="posKWh,maxDemand" value="C_D" />
+		<entry key="netKWh,maxDemand" value="NET_C_D" />
+		<entry key="totalKWh,maxDemand" value="TOTAL_C_D" />
+		<entry key="posKVAh,maxDemand" value="A_D" />
+		<entry key="netKVAh,maxDemand" value="NET_A_D" />
+		<entry key="totalKVAh,maxDemand" value="TOTAL_A_D" />
+
+		<!-- Three Channels (including demand) -->
+		<entry key="posKWh,negKWh,maxDemand" value="FULLNET_C_D" />
+		<entry key="posKVAh,negKVAh,maxDemand" value="FULLNET_A_D" />
+		<entry key="posKWh,posKVARh,maxDemand" value="C_R_D" />
+		<entry key="totalKWh,totalKVARh,maxDemand" value="TOTAL_C_R_D" />
+		<entry key="netKWh,netKVARh,maxDemand" value="NET_C_R_D" />
+
+		<!-- Water/Gas -->
+		<entry key="corrGasVol" value="CORRECTED_CONSUMPTION" />
+		<entry key="unCorrGasVol" value="UNCORRECTED_CONSUMPTION" />
+		<entry key="corrGasVol,unCorrGasVol" value="CC_UC" />
+		<entry key="waterVol" value="CONSUMPTION" />
+		<entry key="corrGasFlow" value="CORRECTED_CONSUMPTION" />
+		<entry key="unCorrGasFlow" value="UNCORRECTED_CONSUMPTION" />
+		<entry key="corrGasFlow,unCorrGasFlow" value="CC_UC" />
+		<entry key="waterFlow" value="CONSUMPTION" />
+	</util:map>
+
+	<!-- Maps the Internal Format Service Type to a specific Multispeak readingType -->
+	<util:map id="serviceTypeToReadingTypeSelector" map-class="java.util.HashMap"
+		key-type="com.sensus.common.messagetypes.service.ServiceType">
+		<entry key="ELECTRIC" value="Billing" />
+		<entry key="WATER" value="Water usage" />
+		<entry key="GAS" value="Gas usage" />
+	</util:map>
+
+	<!-- The following map is used to map the internal format Interval Periods
+		from the Meter Read Publish API to external format interval period.. Also
+		used to create Profile name -->
+	<util:map id="intervalPeriodSelector" map-class="java.util.HashMap"
+		key-type="com.sensus.common.messagetypes.meterread.IntervalPeriod">
+		<entry key="INTERVAL_5_MINUTES" value="5MIN" />
+		<entry key="INTERVAL_15_MINUTES" value="15MIN" />
+		<entry key="INTERVAL_30_MINUTES" value="30MIN" />
+		<entry key="INTERVAL_60_MINUTES" value="1HR" />
+		<entry key="INTERVAL_240_MINUTES" value="4HR" />
+		<entry key="INTERVAL_360_MINUTES" value="6HR" />
+		<entry key="INTERVAL_720_MINUTES" value="12HR" />
+		<entry key="INTERVAL_1440_MINUTES" value="24HR" />
+	</util:map>
+
+	<bean id="SensusAppContext" class="com.sensus.common.util.SensusAppContext" />
+
+	<bean id="electricMeterBCLTarget" class="com.sensus.dm.elec.device.bcl.impl.ElectricMeterBCLImpl">
+		<property name="electricMeterDAC" ref="electricMeterDACMockTarget" />
+		<property name="processBCL" ref="processBCLMockTarget" />
+		<property name="electricMeterListAllColumns" ref="csvElectricMeterListAllColumns" />
+		<property name="lcmListAllColumns" ref="csvLcmListAllColumns" />
+		<property name="hanDeviceListAllColumns" ref="csvHanDeviceListAllColumns" />
+		<property name="peakDemandListAllColumns" ref="csvPeakDemandListAllColumns" />
+		<property name="defaultLcmRelays" ref="defaultLcmRelays" />
+	</bean>
+
+	<bean id="lcmRelay1" class="com.sensus.dm.elec.device.model.LCMRelay">
+		<property name="relay" value="${dm.electric.lcmRelay1.relay}"/>
+		<property name="amp" value="${dm.electric.lcmRelay1.amp}"/>
+		<property name="deviceClass" value="${dm.electric.lcmRelay1.deviceClass}" />
+	</bean>
+
+	<bean id="lcmRelay2" class="com.sensus.dm.elec.device.model.LCMRelay">
+		<property name="relay" value="${dm.electric.lcmRelay2.relay}"/>
+		<property name="amp" value="${dm.electric.lcmRelay2.amp}"/>
+		<property name="deviceClass" value="${dm.electric.lcmRelay2.deviceClass}" />
+	</bean>
+
+	<bean id="lcmRelay3" class="com.sensus.dm.elec.device.model.LCMRelay">
+		<property name="relay" value="${dm.electric.lcmRelay3.relay}"/>
+		<property name="amp" value="${dm.electric.lcmRelay3.amp}"/>
+		<property name="deviceClass" value="${dm.electric.lcmRelay3.deviceClass}" />
+	</bean>
+
+	<util:list id="defaultLcmRelays">
+		<ref bean="lcmRelay1" />
+		<ref bean="lcmRelay2" />
+		<ref bean="lcmRelay3" />
+	</util:list>
+
+</beans>

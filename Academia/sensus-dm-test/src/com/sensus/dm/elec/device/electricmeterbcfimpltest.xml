@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<import resource="classpath*:conf/sensus-dm-validators-context.xml" />
+
+	<bean id="SensusAppContext" class="com.sensus.common.util.SensusAppContext"/>
+
+	<bean id="electricMeterBCF" class="com.sensus.dm.elec.device.bcf.impl.ElectricMeterBCFImpl">
+		<property name="electricMeterBCL" ref="electricMeterBCLMockTarget"/>
+		<property name="deviceModelValidationController" ref="deviceModelValidationController" />
+		<property name="deviceSearchValidationController" ref="deviceSearchValidationController" />
+		<property name="deviceValidationController" ref="deviceValidationController" />
+		<property name="hanDeviceValidationController" ref="hanDeviceValidationController" />
+		<property name="lcmValidationController" ref="lcmValidationController" />
+		<property name="inquiryRequestValidationController" ref="inquiryRequestValidationController" />
+		<property name="locationValidationController" ref="locationValidationController" />
+		<property name="tenantRequestValidationController" ref="tenantRequestValidationController" />
+		<property name="radioValidationController" ref="radioValidationController" />
+		<property name="electricMeterValidationController" ref="electricMeterValidationController" />
+		<property name="electricMeterConfigurationValidationController" ref="electricMeterConfigurationValidationController" />
+		<property name="lCMConfigurationValidationController" ref="lCMConfigurationValidationController" />
+		<property name="rangeDateValidationController" ref="rangeDateValidationController" />
+		<property name="inquiryDeviceRequestValidationController" ref="inquiryDeviceRequestValidationController" />
+		<property name="orderByValidationController" ref="orderByValidationController" />
+	</bean>
+
+</beans>

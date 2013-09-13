@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/util
+            http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<import resource="classpath*:com/sensus/dm/common/process/processtypebclimpltest.xml" />
+
+	<bean id="SensusAppContext" class="com.sensus.common.util.SensusAppContext" />
+
+	<bean id="processBCLTarget" class="com.sensus.dm.common.process.bcl.impl.ProcessBCLImpl">
+		<property name="processDAC" ref="processDACMockTarget" />
+		<property name="processTypeBCL" ref="processTypeBCLMockTarget" />
+		<property name="tempFilePath" value="${csv.temp.file.path}" />
+		<property name="activeMqJmxUrl" value="${activemq.jmx.url}" />
+		<property name="activeMqJmxDomain" value="${activemq.jmx.domain}" />
+		<property name="activeMqJmxAttributes" value="${activemq.jmx.attributes}" />
+		<property name="activeMqJmxAttributeValues" value="${activemq.jmx.attribute.values}" />
+		<property name="processSummaryBCL" ref="processSummaryBCLMockTarget" />
+		<property name="defaultLcmRelays" ref="defaultLcmRelays" />
+	</bean>
+
+	<bean id="lcmRelay1" class="com.sensus.dm.elec.device.model.LCMRelay">
+		<property name="relay" value="${dm.electric.lcmRelay1.relay}"/>
+		<property name="amp" value="${dm.electric.lcmRelay1.amp}"/>
+		<property name="deviceClass" value="${dm.electric.lcmRelay1.deviceClass}" />
+	</bean>
+
+	<bean id="lcmRelay2" class="com.sensus.dm.elec.device.model.LCMRelay">
+		<property name="relay" value="${dm.electric.lcmRelay2.relay}"/>
+		<property name="amp" value="${dm.electric.lcmRelay2.amp}"/>
+		<property name="deviceClass" value="${dm.electric.lcmRelay2.deviceClass}" />
+	</bean>
+
+	<bean id="lcmRelay3" class="com.sensus.dm.elec.device.model.LCMRelay">
+		<property name="relay" value="${dm.electric.lcmRelay3.relay}"/>
+		<property name="amp" value="${dm.electric.lcmRelay3.amp}"/>
+		<property name="deviceClass" value="${dm.electric.lcmRelay3.deviceClass}" />
+	</bean>
+
+	<util:list id="defaultLcmRelays">
+		<ref bean="lcmRelay1" />
+		<ref bean="lcmRelay2" />
+		<ref bean="lcmRelay3" />
+	</util:list>
+
+</beans>

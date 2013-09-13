@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="SensusAppContext" class="com.sensus.common.util.SensusAppContext" />
+	<import resource="classpath*:conf/sensus-dm-csv-context.xml" />
+
+
+	<bean id="processCSVBCLTarget" class="com.sensus.dm.common.process.bcl.impl.ProcessCSVBCLImpl">
+		<property name="processBCL" ref="processBCLMockTarget" />
+		<property name="processSummaryBCL" ref="processSummaryBCLMockTarget" />
+		<property name="communicationSummaryColumns" ref="csvCommunicationAllColumns" />
+		<property name="demandResponseSummaryColumns" ref="csvDemandResponseAllColumns" />
+		<property name="demandReadSummaryColumns" ref="csvDemandReadAllColumns" />
+		<property name="importSummaryColumns" ref="csvImportAllColumns" />
+		<property name="tempFilePath" value="${csv.temp.file.path}" />
+		<property name="processItemListAllColumns" ref="csvProcessItemListAllColumns" />
+		<property name="processTodayListAllColumns" ref="csvProcessTodayAllColumns" />
+		<property name="tamperDetectTimeListAllColumns" ref="csvTamperDetectTimeListAllColumns" />
+		<property name="demandResponseSetupListAllColumns" ref="csvDemandResponseSetupListAllColumns" />
+	</bean>
+
+</beans>

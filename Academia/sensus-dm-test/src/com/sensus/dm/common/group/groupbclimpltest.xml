@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/util
+            http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<import resource="classpath*:conf/sensus-dm-csv-context.xml" />
+
+	<bean id="SensusAppContext" class="com.sensus.common.util.SensusAppContext"/>
+
+	<bean id="groupBCLTarget" class="com.sensus.dm.common.group.bcl.impl.GroupBCLImpl ">
+		<property name="groupDAC" ref="groupDACMockTarget" />
+		<property name="actionBCL" ref="actionBCLMockTarget" />
+		<property name="electricMeterBCL" ref="electricMeterBCLMockTarget" />
+		<property name="processBCL" ref="processBCLMockTarget" />
+		<property name="waterMeterBCL" ref="waterMeterBCLMockTarget" />
+		<property name="gasMeterBCL" ref="gasMeterBCLMockTarget" />
+		<property name="tempUploadFilePath" value="${uploadcsv.temp.file.path}" />
+		<property name="deviceBCL" ref="deviceBCLMockTarget" />
+		<property name="allPossibleColumns" ref="csvGroupElectricMeterListAllColumns" />
+	</bean>
+
+</beans>
