@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="Build QAT Sensus-Framework-Web">
+
+	<include file="..\..\AntConfig\Sensus-ant-common-targets.xml" optional="false" />
+
+	<target name="build">
+		<antcall target="Sensus.mainBuildComponent">
+			<param name="moduleName" value="sensus-qat-framework-web" />
+			<param name="srcDir" value="${projectBaseDir}\src\main\java" />
+			<param name="pomFile" value="../pom.xml" />
+			<param name="localRepositoryPath" value="${user.home}/.m2/repository" />
+			<!-- 				<param name="installLocal" value="true" /> -->
+		</antcall>
+	</target>
+
+</project>

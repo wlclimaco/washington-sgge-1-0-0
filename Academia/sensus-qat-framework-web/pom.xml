@@ -1,0 +1,44 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- Parent POM from Sensus which enables us to publish etc. -->
+	<parent>
+		<artifactId>template-root</artifactId>
+		<groupId>flexnet</groupId>
+		<version>0.0.0-SNAPSHOT</version>
+		<relativePath>../../../projects/template/root/pom.xml</relativePath>
+	</parent>
+
+	<groupId>com.sensus.dm</groupId>
+	<artifactId>sensus-qat-framework-web</artifactId>
+	<packaging>jar</packaging>
+	<version>1.6</version>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.sensus.dm</groupId>
+			<artifactId>sensus-qat-framework-core</artifactId>
+			<version>1.6</version>
+		</dependency>
+	</dependencies>
+
+</project>
