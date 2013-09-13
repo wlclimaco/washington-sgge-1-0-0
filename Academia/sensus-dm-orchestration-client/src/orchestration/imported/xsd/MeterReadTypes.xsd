@@ -1,0 +1,912 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.sensus.com/common/messagetypes/meterread"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"  elementFormDefault="qualified"
+        xmlns:tns="http://www.sensus.com/common/messagetypes/meterread"
+        xmlns:meter="http://www.sensus.com/common/messagetypes/meter"
+        xmlns:meas="http://www.sensus.com/common/messagetypes/measurements"
+        xmlns:read="http://www.sensus.com/common/messagetypes/read"
+        xmlns:status="http://www.sensus.com/common/messagetypes/read/status"
+        xmlns:missing="http://www.sensus.com/common/messagetypes/read/missing"
+        xmlns:svc="http://www.sensus.com/common/messagetypes/service" 
+        xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+   		xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" jaxb:version="2.0"
+   		jaxb:extensionBindingPrefixes="xjc">
+					   		
+	<xs:import schemaLocation="MeterIdentity.xsd"
+		namespace="http://www.sensus.com/common/messagetypes/meter" />
+		
+	<xs:import schemaLocation="ServiceType.xsd" 
+       namespace="http://www.sensus.com/common/messagetypes/service" />
+
+		
+	<xs:import schemaLocation="Measurements.xsd" 
+       namespace="http://www.sensus.com/common/messagetypes/measurements" />
+
+	       
+    <xs:import schemaLocation="ReadTypes.xsd" 
+       namespace="http://www.sensus.com/common/messagetypes/read" />
+       
+    <xs:import schemaLocation="CommonReadStatus.xsd" 
+       namespace="http://www.sensus.com/common/messagetypes/read/status" />
+		 
+    <xs:import schemaLocation="MissingReadStatus.xsd" 
+       namespace="http://www.sensus.com/common/messagetypes/read/missing" />
+	
+	<xs:complexType name="IntervalRead">
+        <xs:annotation>
+			<xs:documentation>Common Interval Read Object</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+			<xs:element  name="intervalPeriod" type="tns:IntervalPeriod">
+				<xs:annotation>
+					<xs:documentation>
+						Enumerated type that identifies the sample interval duration 
+						There is only a fixed number of interval duration options.
+					</xs:documentation>
+		        </xs:annotation>
+		    </xs:element>
+			<xs:element minOccurs="0" maxOccurs="1" name="timeOfIntercept" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>
+						This is the time that the actual flexnet read message 
+						arrived at the TGB (Tower Gateway Base station)
+					</xs:documentation>
+		        </xs:annotation>
+		    </xs:element>
+			<xs:element name="meterRead" type="tns:MeterRead" maxOccurs="unbounded" />						
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	<xs:complexType name="MeterRead">
+        <xs:annotation>
+			<xs:documentation>Common Meter Read Object</xs:documentation>
+        </xs:annotation>
+		<xs:sequence>						
+		   <xs:element  name="dataSetId" type="xs:int"> 
+				<xs:annotation>
+					<xs:documentation>
+						DataSet Id of the meter read data. ESM enabled meters can have multiple data-sets configured per meter 
+						and meter read data is collected per data set.
+						Non-ESM (Legacy) meters have single data-set configured per meter.
+					</xs:documentation>
+		        </xs:annotation>
+		    </xs:element>	
+		    <xs:element name="isLPRead" type="xs:boolean" nillable="true">
+				<xs:annotation>
+					<xs:documentation>
+						Boolean to represent whether or NOT the meter read is from Load Profile (LP) data.
+						Enhanced Supervisory Read Message (ESM)is type of LPRead.
+						Non-ESM read message is not type of LPRead.						
+					</xs:documentation>
+		        </xs:annotation>
+		    </xs:element>	
+			<xs:element minOccurs="0" name="sampleTime" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>
+						Actual sample time is only present at the meter message transmit level 
+						There is NO actual sample time for every interval (ie. packed history)
+					</xs:documentation>
+		        </xs:annotation>
+			</xs:element>
+			<xs:element name="samplePoint" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>
+						The sample point is the time of sample measurement.
+						The sample point assumes fixed points based on fixed interval durations.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="isEndReading" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>
+						Boolean to represent whether or NOT the object refers to a "current read"
+						record where the sampleTime, demand measurements, voltage measurements
+					</xs:documentation>
+		        </xs:annotation>
+		    </xs:element>
+			<xs:element name="commonStatus" type="status:CommonReadStatus" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+						This represents common meter interval status at the time of interval recording.
+						Common Status will only be present when an irregularity occurs.
+						ESM read messages can have multiple Common Status values.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="missingReadStatus" type="missing:MissingReadStatus">
+				<xs:annotation>
+					<xs:documentation>
+						This represents the missing status of this read entry.  It indicates if the read is 
+						a missing read place holder as well has clarifies details about why the read may be
+						missing.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>			
+			<xs:element maxOccurs="unbounded" name="channels" type="tns:Channel">
+				<xs:annotation>
+					<xs:documentation>
+						This List contains all readings recorded by the meter during an interval.
+						Common Status will only be present when an irregularity occurs.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:complexType name="TierRead">
+        <xs:annotation>
+			<xs:documentation>Common Tier Read Object</xs:documentation>
+        </xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="1" maxOccurs="unbounded" name="tiers" type="tns:TierValue">
+				<xs:annotation>
+					<xs:documentation>
+						This List contains all readings recorded by the meter during an interval.
+						Common Status will only be present when an irregularity occurs.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="TierValue">
+		<xs:annotation>
+			<xs:documentation>
+				Tier Reading object that is self describing for the measured quantity.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="1" maxOccurs="1" name="tierId" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						Units of the measured quantity.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="timeOfInsertion" type="xs:dateTime"></xs:element>
+			<xs:element minOccurs="1" maxOccurs="unbounded" name="tierMeasuredQuantities" type="tns:TierMeasurementValue">
+				<xs:annotation>
+					<xs:documentation>
+						This List contains all tier quantities.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	
+	<xs:complexType name="TierMeasurementValue">
+		<xs:annotation>
+			<xs:documentation>
+				Tier Reading object that is self describing for the measured quantity.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="1" maxOccurs="1" name="type" type="tns:ChannelType">
+				<xs:annotation>
+					<xs:documentation>
+						Type of measured quantity that carries NO units.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="1" maxOccurs="1" name="unit" type="tns:UnitOfMeasure">
+				<xs:annotation>
+					<xs:documentation>
+						Units of the measured quantity.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="1" maxOccurs="1" name="quantityType" type="meas:QuantityType">
+			<xs:annotation>
+					<xs:documentation>
+						Quantity type, such as summation, interval, peak_demand, value
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="1" maxOccurs="1" name="value" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						The value of the sample point.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	
+	<xs:complexType name="Channel">
+	<xs:annotation>
+		<xs:documentation>
+			Reading object that is self describing for the
+			measured quantity.
+		</xs:documentation>
+	</xs:annotation>
+	<xs:sequence>
+		<xs:element name="id" type="xs:short" minOccurs="0">
+			<xs:annotation>
+				<xs:documentation>
+					Channel id
+				</xs:documentation>
+			</xs:annotation>
+		</xs:element>
+		
+		<xs:element name="type" type="tns:ChannelType">
+			<xs:annotation>
+				<xs:documentation>
+					Type of measured quantity that carries NO units.
+					</xs:documentation>
+			</xs:annotation>
+		</xs:element>
+		
+		<!-- Start New ESM based API attributes -->
+		<xs:element name="timeAttribute" type="tns:TimeAttribute">
+			<xs:annotation>
+				<xs:documentation>
+					This attribute indicates the time aspect of the measured quantity. 
+					</xs:documentation>
+			</xs:annotation>
+		</xs:element>			
+		<xs:element name="qualifier" type="meas:DataQualifier">
+			<xs:annotation>
+				<xs:documentation>
+					Indicates the salient feature of the measured quantity.
+					Some examples are, maximum, minimum and average.
+					</xs:documentation>
+			</xs:annotation>
+		</xs:element>	
+		<xs:element  name="quantityType"
+			type="meas:QuantityType">
+			<xs:annotation>
+				<xs:documentation>
+					Quantity type, such as summation, interval,
+					peak_demand, value
+				</xs:documentation>
+			</xs:annotation>
+		</xs:element>
+		<xs:element name="netFlowType" type="meas:NetFlowType">
+			<xs:annotation>
+				<xs:documentation>
+					Indicates the flow direction of the measured quantity.
+					</xs:documentation>
+			</xs:annotation>
+		</xs:element>		
+		<xs:element name="segmentation" type="meas:Segmentation">
+			<xs:annotation>
+				<xs:documentation>
+					Indicates the phase related information of the measured quantity
+					</xs:documentation>
+			</xs:annotation>
+		</xs:element>		
+		<xs:element name="multiplier" type="meas:Multiplier">
+			<xs:annotation>
+				<xs:documentation>
+					Indicates the decimal scaling value to apply to the value of measured quantity
+					</xs:documentation>
+			</xs:annotation>
+		</xs:element>
+		<xs:element  name="unit" type="tns:UnitOfMeasure">
+			<xs:annotation>
+				<xs:documentation>
+					Units of the measured quantity.
+					</xs:documentation>
+			</xs:annotation>
+		</xs:element>		
+		<xs:element name="value" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>
+					The value of the sample point for the given
+					quantity type
+				</xs:documentation>
+			</xs:annotation>
+		</xs:element>		
+			<xs:element name="captureTime" type="xs:long" minOccurs="0" >
+			<xs:annotation>
+				<xs:documentation>
+					The time (epoch value in seconds) when the value for the given quantity type is captured.
+					It is an optional field, mainly used for snapshot (such as demand) values.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:element>		
+		<xs:element name="channelStatus" type="read:ReadingValueStatus">
+			<xs:annotation>
+				<xs:documentation>
+					The channel status will always be present.
+					The
+					status is representative of individual quantities measured.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:element>
+		<!-- End ESM based API attributes -->
+	</xs:sequence>
+</xs:complexType>
+	
+	<xs:simpleType name="ChannelType">
+		<xs:annotation>
+			<xs:documentation>
+				Measured quantities are described without units.
+				Strict C12.19 is not followed here.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+		<!-- Start Legacy Types  -->
+			<xs:enumeration value="Peak Demand" />
+			<xs:enumeration value="NET Summation (F+R)" />
+			<xs:enumeration value="Simple NET (F-R)" />
+			<xs:enumeration value="Delivered (R)" />
+			<xs:enumeration value="Consumed (F)" />
+			<xs:enumeration value="Corrected Volume" />
+			<xs:enumeration value="Uncorrected Volume" />
+			<xs:enumeration value="Gallons" />
+			<xs:enumeration value="Min Voltage" />
+			<xs:enumeration value="Max Voltage" />
+			<xs:enumeration value="Avg Voltage" />
+			<xs:enumeration value="Phase A Voltage" />
+			<xs:enumeration value="Phase B Voltage" />
+			<xs:enumeration value="Phase C Voltage" />
+		<!-- End Legacy Types  -->
+		    <xs:enumeration value="ENERGY" />
+			<xs:enumeration value="POWER" />
+			<xs:enumeration value="PHASOR_REACTIVE_POWER" />
+			<xs:enumeration value="QUANTITY_POWER" />
+			<xs:enumeration value="DISTORTION_VOLT_AMPERES" />
+			<xs:enumeration value="VOLTAGE" />
+			<xs:enumeration value="VOLTAGE_FIXED_BLOCK" />
+			<xs:enumeration value="CURRENT" />
+			<xs:enumeration value="TIME" />
+			<xs:enumeration value="DATE" />
+			<xs:enumeration value="DATE_TIME" />
+			<xs:enumeration value="VOLTAGE_PHASE_ANGLE" />
+			<xs:enumeration value="CURRENT_PHASE_ANGLE" />
+			<xs:enumeration value="POWER_FACTOR" />
+			<xs:enumeration value="APPARENT_POWER_FACTOR" />
+			<xs:enumeration value="PHASOR_POWER_FACTOR" />
+			<xs:enumeration value="COUNTER" />
+			<xs:enumeration value="LIQUID_VOLUME" />
+			<xs:enumeration value="LIQUID_FLOW" />
+			<xs:enumeration value="GAS_VOLUME" />
+			<xs:enumeration value="GAS_FLOW" />
+			<xs:enumeration value="TEMPRATURE" />
+			<xs:enumeration value="DEMAND" />
+			<xs:enumeration value="DEMAND_TIME" />
+			<xs:enumeration value="PRESSURE" />
+			<xs:enumeration value="FREQUENCY" />
+			<xs:enumeration value="INSTRUMENTATION" />
+		    
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="UnitOfMeasure">
+		<xs:annotation>
+			<xs:documentation>
+				Units corresponding to the Measured quantities.
+				Strict C12.19 is not followed here.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<!-- Start Legacy UOMs -->
+			
+			<xs:enumeration value="KW" />			
+			<xs:enumeration value="KWh" />		
+			<xs:enumeration value="KVA" />		
+			<xs:enumeration value="KVAh" />			
+			<xs:enumeration value="KVAR" />	
+			<xs:enumeration value="KVARh" />			
+			<xs:enumeration value="Gallons" />					
+			<!-- End Legacy UOMs -->
+			
+			<!-- Start New  UOMs -->
+			<xs:enumeration value="W" />
+			<xs:enumeration value="Wh" />
+			<xs:enumeration value="VA" />
+			<xs:enumeration value="VAh" />
+			<xs:enumeration value="VAR" />
+			<xs:enumeration value="VARh" />
+			<xs:enumeration value="Vrms" />			
+			<xs:enumeration value="Vavg" />			
+			<xs:enumeration value="Vrms^2" />		
+			<xs:enumeration value="V" />			
+			<xs:enumeration value="Vh" />	
+			<xs:enumeration value="Arms" />			
+			<xs:enumeration value="Aavg" />			
+			<xs:enumeration value="Arms^2" />		
+			<xs:enumeration value="A" />
+			<xs:enumeration value="Ah" />			
+			<xs:enumeration value="Voltage Phase Angle" />
+			<xs:enumeration value="Current Phase Angle" />
+			<xs:enumeration value="PF" />
+			<xs:enumeration value="Time" />
+			<xs:enumeration value="Date" />
+			<xs:enumeration value="DateTime" />
+			<xs:enumeration value="Frequency" />
+			<xs:enumeration value="Counter" />
+			<xs:enumeration value="Nbr of Power Outages" />
+			<xs:enumeration value="Nbr of Demand Reset" />
+			<xs:enumeration value="Nbr of Times Programmed" />			
+			<xs:enumeration value="Cubic Meters" />
+			<xs:enumeration value="Corrected Cubic Meters" />
+			<xs:enumeration value="Corrected Cubic Meters per Hr" />
+			<xs:enumeration value="Uncorrected Cubic Meters" />
+			<xs:enumeration value="Uncorrected Cubic Meters per Hr" />
+			<xs:enumeration value="Cubic Feet" />
+			<xs:enumeration value="Corrected Cubic Feet" />
+			<xs:enumeration value="Corrected Cubic Feet per Hr" />
+			<xs:enumeration value="Uncorrected Cubic Feet" />
+			<xs:enumeration value="Uncorrected Cubic Feet per Hr" />
+			<xs:enumeration value="Degree Celsius" />
+			<xs:enumeration value="Degree Fahrenheit" />
+			<xs:enumeration value="Degree Kelvin" />
+			<xs:enumeration value="Static Pascal" />
+			<xs:enumeration value="Differential Pascal" />
+			<xs:enumeration value="US Gallons" />			
+			<xs:enumeration value="US Gallons per Hr" />
+			<xs:enumeration value="IMP Gallons" />
+			<xs:enumeration value="IMP Gallons per Hr" />
+			<xs:enumeration value="Liters" />
+			<xs:enumeration value="Cubic Feet Liquid" />
+			<xs:enumeration value="Cubic Feet Liquid per Hr" />
+			<xs:enumeration value="Cubic Meters Liquid" />
+			<xs:enumeration value="Cubic Meters Liquid per Hr" />
+			
+			<xs:enumeration value="Nbr of sag" />
+			<xs:enumeration value="Nbr of swells" />
+			<xs:enumeration value="Inch H2O" />
+			
+			<xs:enumeration value="AF" />   <!-- Acre Feet -->
+			<!-- End New UOMs -->
+			
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="IntervalPeriod">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass />
+			</xs:appinfo>
+			<xs:documentation>
+				Defines Interval sample rate of fixed duration.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="INTERVAL_1_MINUTES" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="5">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="INTERVAL_5_MINUTES" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="INTERVAL_10_MINUTES" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="15">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="INTERVAL_15_MINUTES" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="20">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="INTERVAL_20_MINUTES" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="30">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="INTERVAL_30_MINUTES" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="60">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="INTERVAL_60_MINUTES" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="120">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="INTERVAL_120_MINUTES" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="240">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="INTERVAL_240_MINUTES" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="360">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="INTERVAL_360_MINUTES" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="480">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="INTERVAL_480_MINUTES" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="720">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="INTERVAL_720_MINUTES" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="1440">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="INTERVAL_1440_MINUTES" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	
+	
+	<xs:simpleType name="TimeAttribute">
+ 		<xs:annotation>
+       		<xs:appinfo>
+           		<jaxb:typesafeEnumClass />
+        	</xs:appinfo>
+			<xs:documentation>
+				Defines Interval sample rate of fixed duration.
+			</xs:documentation>
+		</xs:annotation>
+	    <xs:restriction base="xs:int">
+	    	<xs:enumeration value="0">
+				<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="NA"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	     	<xs:enumeration value="1">
+				<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="INTERVAL_1_MINUTES"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	     	<xs:enumeration value="2">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="INTERVAL_5_MINUTES"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	     	<xs:enumeration value="3">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="INTERVAL_15_MINUTES"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	     	<xs:enumeration value="4">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="INTERVAL_30_MINUTES"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	     	<xs:enumeration value="5">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="INTERVAL_60_MINUTES"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	     	<xs:enumeration value="6">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="INTERVAL_240_MINUTES"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	     	<xs:enumeration value="7">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="INTERVAL_360_MINUTES"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	     	<xs:enumeration value="8">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="INTERVAL_720_MINUTES"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="9">
+				<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="INTERVAL_1440_MINUTES"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	     	<xs:enumeration value="10">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="FIXED_BLOCK_60_MINUTES"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	     	<xs:enumeration value="11">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="FIXED_BLOCK_30_MINUTES"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	     	<xs:enumeration value="12">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="FIXED_BLOCK_20_MINUTES"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	     	<xs:enumeration value="13">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="FIXED_BLOCK_15_MINUTES"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	     	<xs:enumeration value="14">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="FIXED_BLOCK_10_MINUTES"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	     	<xs:enumeration value="15">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="FIXED_BLOCK_5_MINUTES"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	     	<xs:enumeration value="16">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="FIXED_BLOCK_1_MINUTES"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="17">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="ROLLING_BLOCK_60_MIN_SUB_30_MIN"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	     	<xs:enumeration value="18">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="ROLLING_BLOCK_60_MIN_SUB_20_MIN"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	     	<xs:enumeration value="19">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="ROLLING_BLOCK_60_MIN_SUB_15_MIN"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	     	<xs:enumeration value="20">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="ROLLING_BLOCK_60_MIN_SUB_12_MIN"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="21">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="ROLLING_BLOCK_60_MIN_SUB_10_MIN"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="22">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="ROLLING_BLOCK_60_MIN_SUB_6_MIN"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="23">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="ROLLING_BLOCK_60_MIN_SUB_5_MIN"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="24">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="ROLLING_BLOCK_60_MIN_SUB_4_MIN"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="25">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="ROLLING_BLOCK_30_MIN_SUB_15_MIN"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="26">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="ROLLING_BLOCK_30_MIN_SUB_10_MIN"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="27">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="ROLLING_BLOCK_30_MIN_SUB_6_MIN"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="28">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="ROLLING_BLOCK_30_MIN_SUB_5_MIN"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="29">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="ROLLING_BLOCK_30_MIN_SUB_3_MIN"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="30">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="ROLLING_BLOCK_30_MIN_SUB_2_MIN"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="31">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="ROLLING_BLOCK_15_MIN_SUB_5_MIN"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="32">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="ROLLING_BLOCK_15_MIN_SUB_3_MIN"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="33">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="ROLLING_BLOCK_15_MIN_SUB_1_MIN"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="34">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="ROLLING_BLOCK_10_MIN_SUB_5_MIN"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="35">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="ROLLING_BLOCK_10_MIN_SUB_2_MIN"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="36">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="ROLLING_BLOCK_10_MIN_SUB_1_MIN"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="37">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="ROLLING_BLOCK_5_MIN_SUB_1_MIN"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="99">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="COINCIDENT"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="100">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="PREVIOUS"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="101">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="PRESENT"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="102">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="NEXT"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="103">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="INTERVAL_10_MINUTES"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="104">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="INTERVAL_20_MINUTES"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="105">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="INTERVAL_120_MINUTES"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="106">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="INTERVAL_480_MINUTES"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   	</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Used to identity  the read format type-->
+	<xs:simpleType name="ReadFormatType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NORMAL"></xs:enumeration>
+			<xs:enumeration value="TOU"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	
+		
+</xs:schema>

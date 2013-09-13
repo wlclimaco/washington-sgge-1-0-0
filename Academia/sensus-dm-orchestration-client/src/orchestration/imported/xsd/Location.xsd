@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.sensus.com/common/messagetypes/location" 
+			xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified"
+            xmlns:tns="http://www.sensus.com/common/messagetypes/location"
+            xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+	   		xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+            jaxb:version="2.0"
+            jaxb:extensionBindingPrefixes="xjc">
+	
+		
+	<xs:annotation>
+		<xs:documentation>
+			Location type definitions
+			Copyright 2010 Sensus
+			All Rights Reserved
+		</xs:documentation>
+	</xs:annotation>	
+
+		<xs:complexType name="ServiceLocation">
+			<xs:sequence>
+				<xs:element name="address" type="tns:PostalAddress" minOccurs="0" />
+				<xs:element name="gps" type="tns:GPS" minOccurs="0" />
+				<xs:element name="usTimeZone" type="xs:string" minOccurs="0" />		
+				<xs:element name="facilityName" type="xs:string" minOccurs="0" />
+				<xs:element name="projectArea" type="xs:string" minOccurs="0" />
+				<!-- pointOfDelivery is the ID -->
+				<xs:element name="pointOfDelivery" type="xs:string" minOccurs="0" />
+			</xs:sequence>
+		</xs:complexType>
+
+		<xs:complexType name="PostalAddress">
+              <xs:sequence>
+                   <xs:element name="street"  type="xs:string" minOccurs="0" />
+                   <xs:element name="street2" type="xs:string" minOccurs="0" />
+                   <xs:element name="city"    type="xs:string" minOccurs="0" />
+                   <xs:element name="state"   type="xs:string" minOccurs="0" />
+                   <xs:element name="zipCode" type="xs:string" minOccurs="0" />
+                   <xs:element name="country" type="xs:string" minOccurs="0" />
+               </xs:sequence>
+        </xs:complexType>
+        
+		<xs:complexType name="GPS">
+              <xs:sequence>
+                   <xs:element name="latitude"  type="xs:float"/>
+                   <xs:element name="longitude" type="xs:float"/>
+                </xs:sequence>
+        </xs:complexType> 
+
+</xs:schema>

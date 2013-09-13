@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.sensus.com/common/messagetypes/loadshed"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+	xmlns:tns="http://www.sensus.com/common/messagetypes/loadshed"
+	xmlns:mtr="http://www.sensus.com/common/messagetypes/meter"
+	xmlns:conn="http://www.sensus.com/common/messagetypes/connectionstatetype"
+	xmlns:error="http://www.sensus.com/common/messagetypes/error"
+	 xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" jaxb:version="2.0"
+	jaxb:extensionBindingPrefixes="xjc">
+
+	<xs:include schemaLocation="Status.xsd" />
+
+	<xs:import schemaLocation="MeterIdentity.xsd"
+		namespace="http://www.sensus.com/common/messagetypes/meter" />
+		
+	<xs:import schemaLocation="ConnectionStateType.xsd"
+		namespace="http://www.sensus.com/common/messagetypes/connectionstatetype" />
+	
+	<xs:import schemaLocation="ErrorDetail.xsd"
+		namespace="http://www.sensus.com/common/messagetypes/error" />
+
+<xs:element name="loadShedRequestContext" type="tns:LoadShedRequestContext" />
+<xs:element name="loadShedResponseContext" type="tns:LoadShedResponseContext" />
+
+	<xs:element name="loadShedContext" >
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element ref="tns:loadShedRequestContext" />
+			<xs:element ref="tns:loadShedResponseContext"/>
+		</xs:sequence>
+	</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="LoadShedRequestContext">
+		<xs:sequence>
+			<xs:element name="meterIdentity" type="mtr:MeterIdentity" />
+			<xs:element name="flexNetId" type="xs:int" />
+			<xs:element name="requestType" type="tns:LoadShedRequestType" />
+			<xs:element name="transactionId" type="xs:string" />
+			<xs:element name="deviceType" type="xs:int" minOccurs="0"/>
+			<xs:element name="persistedState" type="tns:ConnectionStateInfo" minOccurs="0" />
+			<xs:element name="responseURI" type="xs:string" />
+			<xs:element name="clientContext" type="xs:string" minOccurs="0" />
+			<xs:element name="originalRequestType" type="tns:LoadShedRequestType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						In the case that this is a secondary request, this is the original request type. (ttp 27066 - workaround for LG-19 firmware bug)
+				   </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="loadId" type="xs:int" maxOccurs="unbounded" minOccurs="0" />			
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ConnectionStateInfo">
+	 <xs:sequence>
+	 <xs:element name="primaryState" type="xs:string" />
+	 <xs:element name="secondaryState" type="xs:string" />
+	 </xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="LoadShedResponseContext">
+		<xs:sequence>
+			<!-- Following elements are mapped from the Rx-message  -->
+			<xs:element name="status" type="tns:Status" />
+			<xs:element name="subStatus" type="xs:string" minOccurs="0" />
+			<xs:element name="statusMessages" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="repId" type="xs:int" />
+			<xs:element name="appCode" type="xs:int" />			
+			<xs:element name="loadStatus" type="tns:LoadStatus" />
+			<xs:element name="timeOfIntercept" type="xs:int" />
+			<xs:element name="loadId" type="xs:int" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element name="deviceTypeId" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:complexType name="MeterRelay">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="meterIdentity" type="mtr:MeterIdentity" />
+				<xs:element name="flexnetId" type="xs:int" />
+			</xs:choice>
+			<xs:element name="loadId" type="xs:int" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="MeterRelays">
+	<xs:sequence>
+	<xs:element name="meterIdentity" type="mtr:MeterIdentity" />
+	<xs:element name="loadId"  type="xs:int" minOccurs="0" maxOccurs="unbounded" />	
+	</xs:sequence>
+	</xs:complexType>
+
+  
+	<xs:simpleType name="LoadShedRequestType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CONNECT" />
+			<xs:enumeration value="DISCONNECT" />
+			<xs:enumeration value="ARMED" />
+			<xs:enumeration value="CURRENT_STATE" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- Following destination enumeration is used by remote connect, disconnect, armed and load shed ack orchestrations -->
+	<xs:simpleType name="LoadshedContextDestination">
+	<xs:annotation>
+       		<xs:appinfo>
+           		<jaxb:typesafeEnumClass />
+        	</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value= "orch.remote.correlated.loadshed.requestTimeout.queue">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="CORRELATED_LOADSHED_TIMEOUT"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   	</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="LoadStatus">
+	<xs:annotation>
+       		<xs:appinfo>
+           		<jaxb:typesafeEnumClass />
+        	</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:enumeration value="0">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="LOADRESTORE"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+			<xs:enumeration value="1">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="LOADSHED"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+			<xs:enumeration value="2">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="ARMED"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+			<xs:enumeration value="3">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="LSVS"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+		</xs:restriction>	
+	</xs:simpleType>
+
+	<!--
+		 0 - Leave load in current state (Load Status)
+		 1 - Shed load (Disconnect)
+		 2 - Arm load for restore  
+		 3- Unconditionally restore load 
+	-->
+	<xs:simpleType name="LoadCommand">
+	<xs:annotation>
+       		<xs:appinfo>
+           		<jaxb:typesafeEnumClass />
+        	</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:enumeration value="0">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="NO_CHANGE"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+			<xs:enumeration value="1">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="LOADSHED"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+			<xs:enumeration value="2">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="ARM"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+			<xs:enumeration value="3">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="LOADRESTORE"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+		</xs:restriction>	
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.sensus.com/common/messagetypes/read/status"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+	xmlns:tns="http://www.sensus.com/common/messagetypes/read/status" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" jaxb:version="2.0"
+	jaxb:extensionBindingPrefixes="xjc">
+
+	<xs:simpleType name="CommonReadStatus">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass />
+			</xs:appinfo>
+			<xs:documentation>
+				Common Read Status that would apply to all channels
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:enumeration value="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="NO_EXCEPTION" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="COMMON_DST_CHANGE_FLAG" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="COMMON_POWER_FAIL_FLAG" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="3">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="COMMON_TIME_ADJUST" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="4">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="COMMON_CLOCK_SET_FORWARD" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="5">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="COMMON_CLOCK_SET_BACKWARD" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="98">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="COMMON_CLOCK_OUT_OF_SYNC" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="99">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="COMMON_INVALID_STATUS" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+</xs:schema>

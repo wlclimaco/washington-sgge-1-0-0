@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- WORKAROUND
+This is related to bug JAXB-687 [1] where a binding file is applied multiple
+times in a compilation and causes the "only one globalBindings customization
+is allowed in a whole compilation" error.
+
+It was 'fixed' in jaxb 2.1.13, but not completely. The second fix JAXB-695 [2]
+was fixed only in some version of 2.2.  There does not appear to be a 2.1.14
+on the roadmap. I can't get the plugin to use 2.2. And the new jaxb site at
+highsource.org is down.
+
+So, the workaround is to simply have one schema declare the globalBindings.
+See also ../binding/bindings.xjb.
+
+1. http://java.net/jira/browse/JAXB-687
+2. http://java.net/jira/browse/JAXB-695
+-->
+
+<xs:schema 
+	targetNamespace="http://www.sensus.com/common/messagetypes/globalbinding" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified"
+	xmlns:tns="http://www.sensus.com/common/messagetypes/globalbinding"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+	jaxb:version="2.0"
+	jaxb:extensionBindingPrefixes="xjc">
+
+    <xs:annotation>
+        <xs:appinfo>
+            <jaxb:globalBindings>
+                <jaxb:serializable uid="1"/>
+            </jaxb:globalBindings>
+        </xs:appinfo>
+    </xs:annotation>
+
+</xs:schema>
+

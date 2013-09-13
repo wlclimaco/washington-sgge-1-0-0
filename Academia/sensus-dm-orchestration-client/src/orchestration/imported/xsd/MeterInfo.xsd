@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.sensus.com/common/messagetypes/meterinfo"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+	xmlns:tns="http://www.sensus.com/common/messagetypes/meterinfo"
+	xmlns:meter="http://www.sensus.com/common/messagetypes/meter"
+	xmlns:location="http://www.sensus.com/common/messagetypes/location"
+	xmlns:service="http://www.sensus.com/common/messagetypes/service"
+	xmlns:error="http://www.sensus.com/common/messagetypes/error"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+	jaxb:version="2.0" jaxb:extensionBindingPrefixes="xjc">
+
+	<xs:annotation>
+		<xs:documentation>
+			Meter Info definition
+			Copyright 2011 Sensus
+			All Rights
+			Reserved
+		</xs:documentation>
+	</xs:annotation>
+
+	<xs:import	schemaLocation="MeterIdentity.xsd"
+				namespace="http://www.sensus.com/common/messagetypes/meter" />
+	<xs:import	schemaLocation="Location.xsd"
+				namespace="http://www.sensus.com/common/messagetypes/location" />
+	<xs:import	schemaLocation="ServiceType.xsd"
+				namespace="http://www.sensus.com/common/messagetypes/service" />
+	<xs:import	schemaLocation="ErrorDetail.xsd"
+				namespace="http://www.sensus.com/common/messagetypes/error" />
+		
+	<xs:complexType name="MeterConfigInfo">
+		<xs:sequence>
+			<xs:element name="meterFirmwareVersion"   type="xs:string" minOccurs="0" />
+			<xs:element name="flexnetFirmwareVersion" type="xs:string" minOccurs="0" />
+			<xs:element name="meterClass" type="xs:string" minOccurs="0" />
+			<xs:element name="dials" type="xs:int" minOccurs="0" />
+			<xs:element name="form" type="xs:string" minOccurs="0" />
+			<xs:element name="deviceType" type="xs:int" minOccurs="0" />
+			<xs:element name="remoteDisconnectAvailable" type="xs:boolean" minOccurs="0" />
+			<xs:element name="firmwareIsBetea" type="xs:boolean" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+    <!-- TTP-23389: reverting to revision 114615 - choice/sequence block surrounding 
+                    installedDate / removedDate was causing runtime parser exceptions -->
+	<xs:complexType name="Meter" abstract="false">
+		<xs:sequence>
+			<xs:element name="meterIdentity" type="meter:MeterIdentity" minOccurs="0" />
+			<xs:element name="flexnetId" type="xs:int" />
+			<xs:element name="meterConfigInfo" type="tns:MeterConfigInfo" minOccurs="0" />
+			<xs:element name="lifeCycleState" type="tns:MeterLifeCycleState" minOccurs="0" />
+			<xs:element name="stateDetail" type="tns:MeterStateDetail" minOccurs="0" />
+			<xs:element name="serviceLocation" type="location:ServiceLocation" minOccurs="0" />
+			<xs:element name="billingCycle" type="xs:string" minOccurs="0" />
+			<xs:element name="rateCode" type="xs:string" minOccurs="0" />
+			<xs:element name="installedDate" type="xs:dateTime" minOccurs="0" />
+			<xs:element name="removedDate" type="xs:dateTime" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ElectricMeter">
+		<xs:complexContent>
+			<xs:extension base="tns:Meter">
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="WaterMeter">
+		<xs:complexContent>
+			<xs:extension base="tns:Meter">
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="GasMeter">
+		<xs:complexContent>
+			<xs:extension base="tns:Meter">
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="MeterStateDetail">
+		<xs:sequence>
+			<xs:element	name="previousLifeCycleState" type="tns:MeterLifeCycleState"
+						minOccurs="0" maxOccurs="unbounded" />
+			<xs:element	name="logicalState" type="tns:MeterLogicalState"
+						minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="MeterInfoFeatureType">
+		<xs:annotation>
+			<xs:documentation>
+				This type defines meter Info features,
+				such as configuration, service location and so.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CONFIGURATION"></xs:enumeration>
+			<xs:enumeration value="SERVICE_LOCATION"></xs:enumeration>
+			<xs:enumeration value="STATE_DETAIL"></xs:enumeration>
+		</xs:restriction> 
+	</xs:simpleType>
+
+	<xs:simpleType name="MeterLifeCycleStateType">
+		<xs:annotation>
+			<xs:documentation>
+				This type defines meter life-cycle states.
+				There are two life-cycle states in the RNI: Inventory and Install.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="INVENTORY"></xs:enumeration>
+			<xs:enumeration value="INSTALL"></xs:enumeration>
+			<xs:enumeration value="UNKNOWN"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="MeterLifeCycleState">
+		<xs:annotation>
+			<xs:documentation>
+				This type defines meter life-cycle state and the life-cycle state's effective date.	
+		</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="type" type="tns:MeterLifeCycleStateType" />
+			<xs:element name="effectiveDate" type="xs:dateTime" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="MeterLogicalStateType">
+		<xs:annotation>
+			<xs:documentation>
+				This type defines meter logical states.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ACTIVE"></xs:enumeration>
+			<xs:enumeration value="INACTIVE"></xs:enumeration>
+			<xs:enumeration value="DISCONNECTED"></xs:enumeration>
+			<xs:enumeration value="UNKNOWN"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="MeterLogicalState">
+		<xs:annotation>
+			<xs:documentation>
+				This type defines meter logical state and the logical state's effective date.
+		</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="type" type="tns:MeterLogicalStateType" />
+			<xs:element name="effectiveDate" type="xs:dateTime" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CustomerServiceLocation">
+		<xs:sequence>
+			<xs:element name="customerId" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:choice>
+				<xs:element name="meterServiceInfo" type="tns:MeterServiceInfo" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element name="serviceInfo" type="tns:serviceInfo" minOccurs="0" maxOccurs="1"/>
+			</xs:choice>
+			<xs:element name="serviceLocation" type="location:ServiceLocation" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="MeterServiceInfo">
+		<xs:sequence>
+			<xs:element name="meterNo" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="serviceType" type="service:ServiceType" minOccurs="1" />
+			<xs:element name="billingCycle" type="xs:string" minOccurs="0" />
+			<xs:element name="rateCode" type="xs:string" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="serviceInfo">
+		<xs:sequence>
+			<xs:element name="billingCycle" type="xs:string" minOccurs="0" />
+			<xs:element name="rateCode" type="xs:string" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ServiceLocationError">
+		<xs:sequence>
+	    	<xs:element name="customerId" type="xs:string" minOccurs="0" maxOccurs="1" />
+	    	<xs:element name="pointOfDelivery" type="xs:string" minOccurs="0" maxOccurs="1" />
+			<xs:element ref="error:errorDetail" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

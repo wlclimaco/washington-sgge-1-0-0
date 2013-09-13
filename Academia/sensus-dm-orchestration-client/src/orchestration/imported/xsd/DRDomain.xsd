@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="http://www.sensus.com/common/messagetypes/dr" 
+	xmlns:tns="http://www.sensus.com/common/messagetypes/dr" 
+	elementFormDefault="qualified">
+	
+	<element name="LoadControlParameter">
+    	<complexType>
+    		<sequence>
+   				<element name="parameterIdentifier" type="string"></element>
+   				<element name="parameterValue" type="int"></element>
+    			<element name="relayId" type="int" minOccurs="0" maxOccurs="1"></element>
+    		</sequence>
+    	</complexType>
+    </element>
+    
+    <complexType name="LoadControlParam">
+        <sequence>
+            <element name="parameterIdentifier" type="string"></element>
+            <element name="parameterValue" type="integer"></element>
+        </sequence>
+    </complexType>
+    
+	<element name="LoadControlEvent">
+    	<complexType>
+    		<sequence>
+					<element name="eventId" type="int"></element>
+					<element name="deviceClass" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+					<element name="utilityEnrollmentGroup" type="int"></element>
+					<element name="startTime" type="int"></element>
+					<element name="Duration" type="int"></element>
+					<element name="criticalityLevel" type="int"></element>
+					<element name="coolingTemperatureOffset" type="int"></element>
+					<element name="heatingTemperatureOffset" type="int"></element>
+					<element name="averageLoadAdjustmentPercentage" type="int"></element>
+					<element name="dutyCycle" type="int"></element>
+					<element name="randomizedStartTime" type="boolean"></element>
+					<element name="randomizedEndTime" type="boolean"></element>
+	   		</sequence>
+    	</complexType>
+    </element>
+   	<element name="CPPEvent">
+   	<complexType>
+   		<sequence>
+				<element name="eventId" type="int"></element>
+				<element name="startTime" type="int"></element>
+				<element name="Duration" type="int"></element>
+   		</sequence>
+   	</complexType>
+   </element>
+</schema>

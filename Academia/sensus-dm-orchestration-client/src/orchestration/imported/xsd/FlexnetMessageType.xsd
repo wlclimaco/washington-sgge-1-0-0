@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.sensus.com/common/messagetypes" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified"
+            xmlns:mt="http://www.sensus.com/common/messagetypes"
+            xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+	   		xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+            jaxb:version="2.0"
+            jaxb:extensionBindingPrefixes="xjc">
+
+   		<xs:simpleType name="FlexnetMessageType">
+   			<xs:annotation>
+          		<xs:appinfo>
+              		<jaxb:typesafeEnumClass />
+          		</xs:appinfo>
+	    	</xs:annotation>
+	      	<xs:restriction base="xs:int">
+	     		<xs:enumeration value="10">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="WATER_GAS_METER_READ_WITH_HISTORY"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="13">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CI_METER_READ_WITH_HISTORY"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>		   		
+		   		<xs:enumeration value="40">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="ICONA_SINGLE_PARAMETER_READ"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>		   		
+		   		<xs:enumeration value="41">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="ICONA_DUAL_PARAMETER_READ"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>		   		
+		   		<xs:enumeration value="42">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="ICONA_SINGLE_PARAMETER_READ_WITH_DEMAND"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>		   		
+		   		<xs:enumeration value="43">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="ICONA_DUAL_PARAMETER_READ_WITH_DEMAND"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>		   		
+		   		<xs:enumeration value="55">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CI_HIGH_RESOLUTION_READ_WITH_HISTORY"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>		   		
+			</xs:restriction>
+		</xs:simpleType>
+</xs:schema>

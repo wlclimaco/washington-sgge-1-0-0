@@ -1,0 +1,545 @@
+<xs:schema targetNamespace="http://www.sensus.com/common/messagetypes" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified"
+            xmlns:mt="http://www.sensus.com/common/messagetypes"
+            xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+	   		xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+            jaxb:version="2.0"
+            jaxb:extensionBindingPrefixes="xjc">
+
+   		<xs:simpleType name="UserCommandSubtype">
+   			<xs:annotation>
+          		<xs:appinfo>
+              		<jaxb:typesafeEnumClass/>
+          		</xs:appinfo>
+	    	</xs:annotation>
+	      	<xs:restriction base="xs:int">
+	     		<xs:enumeration value="0">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_NONE_SET"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="1">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_STATIC_CONFIG"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>		   		
+		   		<xs:enumeration value="2">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_VOLTAGE_CONFIG"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>		   		
+		   		<xs:enumeration value="3">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_CRYSTAL_OFFSET"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>		   		
+		   		<xs:enumeration value="4">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_LAT_LONG"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>		   		
+		   		<xs:enumeration value="5">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_DEMAND_READ"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>		   		
+		   		<xs:enumeration value="9">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_TIER_READ"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="10">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_READ"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="11">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_ICONA_FORCE_READ"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="12">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_ICONA_NON_READ"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="13">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_ICONA_BILLING_DATA"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="14">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_ICONA_LOAD_PROFILE"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="15">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_SECONDARY_GROUP_VECTOR"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="16">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_TOU_DAY_TYPE"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="17">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_LPV2_MULTIBLOCK"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="18">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_LPV2_SINGLEBLOCK"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="100">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_CFG_CTPTMULTIPLIER"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	  
+		   		<xs:enumeration value="101">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_CFG_DEMAND_MAIN_SUBINTERVALS"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="102">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_CFG_LCD_DISPLAY_LIST"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="103">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_CFG_LCD_FORMAT"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>			   				   		
+		   		<xs:enumeration value="104">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_CFG_LOAD_LIMITING"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="105">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_CFG_METER_PARAMS"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="106">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_CFG_REVERSE_POWER"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="107">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_CFG_SELF_READ_HOUR"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="108">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_CFG_TIME_ADJUST_THRESH"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="109">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_CFG_TOU_AUTOPUSH_OPTIONS"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="110">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_CFG_TOU_DAY_TYPE"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="111">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_CFG_TOU_EVEN_YR_HOLIDAYS"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="112">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_CFG_TOU_ODD_YR_HOLIDAYS"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	 	
+		   		<xs:enumeration value="113">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_CFG_TOU_SCHEDULE_MAP"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="114">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_CFG_TOU_SEASON_AND_DST_DATES"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="200">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_SET_ADVANCED_VOLTAGE_QUAL"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="202">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_SET_CO_METER_NUM"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="203">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_SET_CRYSTAL_OFFSET"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="204">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_SET_AES_KEY"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="205">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_SET_CUSTOMER_ID"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="206">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_SET_CUSTOMER_LP_CHAN"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="208">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_SET_FIXED_TIME_ZONE"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="209">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_SET_FLEXNET_ID"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="210">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_SET_GROUP_ADDRESS"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="211">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_SET_HISTORY_RESOLUTION"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="212">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_SET_LAT_LONG"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="214">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_SET_PREFERRED_BUDDY"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="215">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_SET_READ_XMIT_RATES"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="216">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_SET_SECONDARY_GROUP"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="217">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_SET_TIME"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="300">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_BACKFILL"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="301">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_BATCH_STATIC"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="302">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_BATCH_VOLATAGE"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="303">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_CRITICAL_TIER_READ"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="304">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_CRITICAL_TIER_WRITE"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="305">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_DEMAND_RESET_REQ"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="306">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_DISCONNECT_REQ"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="307">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_LOAD_STATUS_REQ"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="308">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_LOAD_PROFILE"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="309">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_RECONNECT_REQ"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="310">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_SET_ENCRYPTION"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="311">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_TIER_SET"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="312">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_ZIGBEE_SET"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="313">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_SET_GRP_ADDR_PAD"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="314">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_SET_METER_ID_PAD"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="315">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_ARM_LOAD_REQ"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="400">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_NA2W_GANG_ACK"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>	
+		   		<xs:enumeration value="401">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_NA2W_INSTALL_INITIATION"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="402">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_NA2W_ENCAPSULATED_SERIAL_COMMAND"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="403">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_NA2W_MULTI_TX_WITH_LAT"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="404">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_NA2W_BIND_METER"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="405">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_NA2W_ENDPOINT_SETUP"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="406">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_NA2W_CHANNEL_SETUP"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="407">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_NA2W_ACTIVATE"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="408">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMDST_NA2W_SWITCH_TOPLEVEL_STATE"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="410">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_NA2W_FW_LOAD_BLOCK"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="411">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_NA2W_FW_LOAD_FLASH"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="412">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_NA2W_FW_LOAD_CHECK"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+		   		<xs:enumeration value="413">
+		        	<xs:annotation>
+		           		<xs:appinfo>
+		                	<jaxb:typesafeEnumMember name="CMD_NA2W_FW_LOAD_START"/>
+		              	</xs:appinfo>
+		          	</xs:annotation>
+		   		</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleType>
+</xs:schema>
+
+

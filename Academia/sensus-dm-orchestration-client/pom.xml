@@ -1,0 +1,97 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- Note the use of a parent POM. The parent POM must be installed/published first in order for this to work. -->
+	<parent>
+		<groupId>com.sensus.dm</groupId>
+		<artifactId>sensus-dm-maven</artifactId>
+		<version>0.0.0002-SNAPSHOT</version>
+		<relativePath>../sensus-dm-maven/pom.xml</relativePath>
+	</parent>
+
+	<artifactId>sensus-dm-orchestration-client</artifactId>
+	<packaging>jar</packaging>
+
+
+	<dependencies>
+
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-xjc</artifactId>
+			<version>2.1.13</version>
+		</dependency>
+
+		<dependency>
+			<groupId>flexnet</groupId>
+			<artifactId>bcf-meterreading</artifactId>
+			<version>${project.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>flexnet</groupId>
+			<artifactId>bcf-hanserver</artifactId>
+			<version>${project.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sensus.common</groupId>
+			<artifactId>encoding</artifactId>
+			<version>${project.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>flexnet</groupId>
+			<artifactId>bcf-drserver</artifactId>
+			<version>${project.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>flexnet</groupId>
+			<artifactId>ws-common</artifactId>
+			<version>${project.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sensus.api</groupId>
+			<artifactId>api-getconnectionstate</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sensus.api</groupId>
+			<artifactId>api-meterread-publish</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sensus.api</groupId>
+			<artifactId>api-applicationeventnotification</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>flexnet</groupId>
+			<artifactId>bcf-connectdisconnect</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>flexnet</groupId>
+			<artifactId>bcf-meterlifecycle</artifactId>
+			<version>${project.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+
+	</dependencies>
+</project>

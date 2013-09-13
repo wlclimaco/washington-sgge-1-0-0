@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="Sensus DM Orchestration Client" xmlns:ivy="antlib:org.apache.ivy.ant"  >
+
+	<include file="..\..\AntConfig\Sensus-ant-common-targets.xml" optional="false" />
+
+	<target name="build">
+		<antcall target="Sensus.buildDMOrchestrationClientFromXsd">
+			<param name="moduleName" value="sensus-dm-orchestration-client" />
+			<param name="pomFile" value="../pom.xml" />
+
+			<param name="doNotDeleteGeneratedSrcFolder" value="true" />
+
+			<param name="schemaSrcDir1" value="../src/orchestration/xsd" />
+			<param name="firstXsdToGenFrom" value="MeterReadPublish.xsd" />
+
+			<param name="schemaSrcDir2" value="../src/orchestration/imported/xsd" />
+			<param name="secondXsdToGenFrom" value="FaultDetail.xsd" />
+		</antcall>
+	</target>
+
+</project>

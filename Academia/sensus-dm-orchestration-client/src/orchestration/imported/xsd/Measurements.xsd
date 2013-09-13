@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	targetNamespace="http://www.sensus.com/common/messagetypes/measurements" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified"
+	xmlns:tns="http://www.sensus.com/common/messagetypes/measurements"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+	jaxb:version="2.0"
+	jaxb:extensionBindingPrefixes="xjc">
+		
+	<xs:include schemaLocation="NetFlowType.xsd"/>	
+	<xs:include schemaLocation="QuantityType.xsd" />
+	<xs:include schemaLocation="UnitOfMeasure.xsd" />
+	<xs:include schemaLocation="Multiplier.xsd" />	
+	
+	
+	<xs:simpleType name="DataQualifier">
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:typesafeEnumClass />
+		</xs:appinfo>
+		<xs:documentation>
+			Defines Interval sample rate of fixed duration.
+			</xs:documentation>
+	</xs:annotation>
+	<xs:restriction base="xs:int">
+		<xs:enumeration value="0">
+			<xs:annotation>
+				<xs:appinfo>
+					<jaxb:typesafeEnumMember name="NA" />
+				</xs:appinfo>
+			</xs:annotation>
+		</xs:enumeration>
+		<xs:enumeration value="1">
+			<xs:annotation>
+				<xs:appinfo>
+					<jaxb:typesafeEnumMember name="ABSOLUTE" />
+				</xs:appinfo>
+			</xs:annotation>
+		</xs:enumeration>
+		<xs:enumeration value="2">
+			<xs:annotation>
+				<xs:appinfo>
+					<jaxb:typesafeEnumMember name="AVERAGE" />
+				</xs:appinfo>
+			</xs:annotation>
+		</xs:enumeration>
+		<xs:enumeration value="3">
+			<xs:annotation>
+				<xs:appinfo>
+					<jaxb:typesafeEnumMember name="MAXIMUM" />
+				</xs:appinfo>
+			</xs:annotation>
+		</xs:enumeration>
+		<xs:enumeration value="4">
+			<xs:annotation>
+				<xs:appinfo>
+					<jaxb:typesafeEnumMember name="MINIMUM" />
+				</xs:appinfo>
+			</xs:annotation>
+		</xs:enumeration>
+		<xs:enumeration value="5">
+			<xs:annotation>
+				<xs:appinfo>
+					<jaxb:typesafeEnumMember name="MISSING" />
+				</xs:appinfo>
+			</xs:annotation>
+		</xs:enumeration>
+		<xs:enumeration value="6">
+			<xs:annotation>
+				<xs:appinfo>
+					<jaxb:typesafeEnumMember name="COMPENSATED" />
+				</xs:appinfo>
+			</xs:annotation>
+		</xs:enumeration>
+		<xs:enumeration value="7">
+			<xs:annotation>
+				<xs:appinfo>
+					<jaxb:typesafeEnumMember name="UNCOMPENSATED" />
+				</xs:appinfo>
+			</xs:annotation>
+		</xs:enumeration>
+		<xs:enumeration value="8">
+			<xs:annotation>
+				<xs:appinfo>
+					<jaxb:typesafeEnumMember name="NORMAL" />
+				</xs:appinfo>
+			</xs:annotation>
+		</xs:enumeration>
+		<xs:enumeration value="9">
+			<xs:annotation>
+				<xs:appinfo>
+					<jaxb:typesafeEnumMember name="RMS" />
+				</xs:appinfo>
+			</xs:annotation>
+		</xs:enumeration>		
+		<xs:enumeration value="10">
+			<xs:annotation>
+				<xs:appinfo>
+					<jaxb:typesafeEnumMember name="RELATIVE" />
+				</xs:appinfo>
+			</xs:annotation>
+		</xs:enumeration>
+	</xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="Segmentation">
+ 		<xs:annotation>
+       		<xs:appinfo>
+           		<jaxb:typesafeEnumClass />
+        	</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:enumeration value="0">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="NA"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+			<xs:enumeration value="1">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="PHASE_A_B"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+			<xs:enumeration value="2">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="PHASE_B_C"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+			<xs:enumeration value="3">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="PHASE_C_A"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="4">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="PHASE_N"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="5">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="PHASE_A"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="6">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="PHASE_B"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="7">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="PHASE_C"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

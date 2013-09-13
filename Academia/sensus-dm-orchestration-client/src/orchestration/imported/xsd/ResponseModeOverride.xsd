@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified"
+            xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+	   		xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+            jaxb:version="2.0"
+            jaxb:extensionBindingPrefixes="xjc">
+
+	<xs:simpleType name="ResponseModeOverride">
+   		<xs:annotation>
+          	<xs:appinfo>
+              	<jaxb:typesafeEnumClass />
+          	</xs:appinfo>
+	    </xs:annotation>
+	    <xs:restriction base="xs:int">
+	     	<xs:enumeration value="0">
+		        <xs:annotation>
+		         	<xs:appinfo>
+		            	<jaxb:typesafeEnumMember name="NO_OVERRIDE"/>
+		           	</xs:appinfo>
+		       	</xs:annotation>
+		   	</xs:enumeration>
+	     	<xs:enumeration value="1">
+		    	<xs:annotation>
+		        	<xs:appinfo>
+		            	<jaxb:typesafeEnumMember name="NORMAL_MODE"/>
+		           	</xs:appinfo>
+		      	</xs:annotation>
+		  	</xs:enumeration>
+		 	<xs:enumeration value="2">
+		    	<xs:annotation>
+		        	<xs:appinfo>
+		            	<jaxb:typesafeEnumMember name="MPASS_MODE"/>
+		           	</xs:appinfo>
+		       	</xs:annotation>
+		 	</xs:enumeration>
+	 		<xs:enumeration value="3">
+	      		<xs:annotation>
+	         		<xs:appinfo>
+	              		<jaxb:typesafeEnumMember name="THIRTEEN_FSK_EXTENDED_MODE"/>
+	            	</xs:appinfo>
+	        	</xs:annotation>
+	 		</xs:enumeration>
+	 		<xs:enumeration value="4">
+	      		<xs:annotation>
+	         		<xs:appinfo>
+	              		<jaxb:typesafeEnumMember name="C_I_MODE"/>
+	            	</xs:appinfo>
+	        	</xs:annotation>
+	 		</xs:enumeration>
+	 		<xs:enumeration value="5">
+	      		<xs:annotation>
+	         		<xs:appinfo>
+	              		<jaxb:typesafeEnumMember name="PRIORITY_MODE"/>
+	            	</xs:appinfo>
+	        	</xs:annotation>
+	 		</xs:enumeration>
+	 		<xs:enumeration value="6">
+	      		<xs:annotation>
+	         		<xs:appinfo>
+	              		<jaxb:typesafeEnumMember name="MPASS_LOW_POWER_MODE"/>
+	            	</xs:appinfo>
+	        	</xs:annotation>
+	 		</xs:enumeration>
+	 		<xs:enumeration value="7">
+	      		<xs:annotation>
+	         		<xs:appinfo>
+	              		<jaxb:typesafeEnumMember name="THIRTEEN_FSK_REDUCED_MODE"/>
+	            	</xs:appinfo>
+	        	</xs:annotation>
+	 		</xs:enumeration>
+    <!-- 
+            DEVICE_AUTO_MODE means the caller really wants the device to choose, so
+            the router will do change this to the value for NO_OVERRIDE.  This is 
+            important as there is no "8" RMO on the endpoints.  (This is bit of 
+            nonsense came about on realization that the endpoints really don't know 
+            the best way they should respond, and should virtually never be allowed
+            to choose.  But we have this option just in case.)  This would be simpler
+            with an actual Java enumerated type, which would allow a different value
+            to be associated with the member.
+      -->
+            <xs:enumeration value="8">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <jaxb:typesafeEnumMember name="DEVICE_AUTO_MODE"/>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+		</xs:restriction>
+  	</xs:simpleType>
+ </xs:schema>

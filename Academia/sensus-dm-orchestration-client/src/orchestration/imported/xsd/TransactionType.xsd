@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified"
+            xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+	   		xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+            jaxb:version="2.0"
+            jaxb:extensionBindingPrefixes="xjc">
+   		
+	<xs:simpleType name="TransactionType">
+ 		<xs:annotation>
+       		<xs:appinfo>
+        		<jaxb:typesafeEnumClass />
+       		</xs:appinfo>
+   		</xs:annotation>
+      	<xs:restriction base="xs:string">
+     		<xs:enumeration value="SIMPLE">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="TRANS_TYPE_SIMPLE"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+     		<xs:enumeration value="MULTIREQUEST">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="TRANS_TYPE_MULTI_REQUEST"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="MULTIRESPONSE">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="TRANS_TYPE_MULTI_RESPONSE"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   		<xs:enumeration value="LIST">
+	        	<xs:annotation>
+	           		<xs:appinfo>
+	                	<jaxb:typesafeEnumMember name="TRANS_TYPE_LIST"/>
+	              	</xs:appinfo>
+	          	</xs:annotation>
+	   		</xs:enumeration>
+	   	</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

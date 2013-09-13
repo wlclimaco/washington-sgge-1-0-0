@@ -1,0 +1,33 @@
+<xs:schema 
+	targetNamespace="http://www.sensus.com/common/messagetypes/andorian"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified"
+	xmlns:tns="http://www.sensus.com/common/messagetypes/andorian" 
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" 
+	jaxb:version="2.0"
+	jaxb:extensionBindingPrefixes="xjc">
+
+	<xs:element name="andorianMessageSource">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="fileName" type="xs:string" minOccurs="0"> 
+					<xs:annotation>
+						<xs:documentation>
+							Backspool Filename from which the andorian message was read.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="blockNumber" type="xs:long" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>
+							BlockNumber associated with the packet position within the Backspool file 
+							from which the andorian message was read.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

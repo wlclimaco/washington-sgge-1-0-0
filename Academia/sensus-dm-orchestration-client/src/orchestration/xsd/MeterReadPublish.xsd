@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.sensus.com/api/meterreadpublish/messages"
+        xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:sms="http://www.sensus.com/api/meterreadpublish/messages"
+        xmlns:measure="http://www.sensus.com/common/messagetypes/measurements"
+        xmlns:read="http://www.sensus.com/common/messagetypes/read"
+        xmlns:status="http://www.sensus.com/common/messagetypes/read/status"
+        xmlns:meter="http://www.sensus.com/common/messagetypes/meter"
+        xmlns:svc="http://www.sensus.com/common/messagetypes/service" 
+        xmlns:meterread="http://www.sensus.com/common/messagetypes/meterread"
+        elementFormDefault="qualified"
+        xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+   		xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+   		xmlns:xs="http://www.w3.org/2001/XMLSchema" jaxb:version="2.0"
+   		jaxb:extensionBindingPrefixes="xjc">
+   		
+	<xs:annotation>
+		<xs:documentation>
+			Meter Read Publish API
+			Sensus Service Interface Definiton
+			Copyright 2010 All Rights Reserved
+		</xs:documentation>
+	</xs:annotation>
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:globalBindings>
+				<xjc:serializable uid="1"/>
+			</jaxb:globalBindings>
+		</xs:appinfo>
+	</xs:annotation>
+	
+	 <xs:import schemaLocation="../imported/xsd/ServiceType.xsd" 
+       namespace="http://www.sensus.com/common/messagetypes/service" />
+		
+	<xs:import schemaLocation="../imported/xsd/Measurements.xsd" 
+       namespace="http://www.sensus.com/common/messagetypes/measurements" />
+	       
+    <xs:import schemaLocation="../imported/xsd/ReadTypes.xsd" 
+       namespace="http://www.sensus.com/common/messagetypes/read" />
+		
+    <xs:import schemaLocation="../imported/xsd/CommonReadStatus.xsd" 
+       namespace="http://www.sensus.com/common/messagetypes/read/status" />
+       
+    <xs:import schemaLocation="../imported/xsd/MeterIdentity.xsd" 
+       namespace="http://www.sensus.com/common/messagetypes/meter" />
+       
+    <xs:import schemaLocation="../imported/xsd/MeterReadTypes.xsd" 
+       namespace="http://www.sensus.com/common/messagetypes/meterread" />
+       
+	<xs:element name="MeterReadPublishEvent">
+	<xs:complexType>
+        <xs:annotation>
+			<xs:documentation>Customer SOA Interval Meter Read Publish Event</xs:documentation>
+        </xs:annotation>
+		<xs:sequence>
+		    <xs:element name="meterIdentity" type="meter:MeterIdentity"> 
+				<xs:annotation>
+					<xs:documentation>
+						Unique Meter Identifier Tuple
+					</xs:documentation>
+		        </xs:annotation>
+		    </xs:element>
+			<xs:element  name="flexnetId" type="int"> 
+				<xs:annotation>
+					<xs:documentation>
+						Unique Flexnet Transmitter Identifier that should never change.
+					</xs:documentation>
+		        </xs:annotation>
+		    </xs:element>
+			<xs:element name="deviceType" type="int"> 
+				<xs:annotation>
+					<xs:documentation>
+						Device type integer value.
+					</xs:documentation>
+		        </xs:annotation>
+		    </xs:element>
+		    <xs:element name="intervalRead" type="meterread:IntervalRead">
+				<xs:annotation>
+					<xs:documentation>
+						Interval Read values containing interval period and channels.
+					</xs:documentation>
+		        </xs:annotation>		    
+		    </xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	</xs:element>
+
+
+
+
+
+</xs:schema>

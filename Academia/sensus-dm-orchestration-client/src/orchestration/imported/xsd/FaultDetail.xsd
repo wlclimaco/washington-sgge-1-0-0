@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.sensus.com/common/messagetypes/fault"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified"
+	xmlns:tns="http://www.sensus.com/common/messagetypes/fault" 
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" jaxb:version="2.0"
+	jaxb:extensionBindingPrefixes="xjc">
+
+	<xs:element name="faultDetail">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="domain" type="tns:FaultDomain"
+					minOccurs="0" />
+				<xs:element name="type" type="tns:FaultType" />
+				<xs:element name="actor" type="xs:string" minOccurs="0" />
+				<xs:element name="description" type="xs:string" />
+				<!--
+					faultUUID can be used to communicate back unique system exception
+					id, which can include the host_name of the instance along with
+					unique numeric id for example: faultUUID =
+					<hostName>_45678907080990 (UUID generator can be used here) The
+					global fault handler bean dumps the stack trace adding the unique id to it. 
+					It is communicated back to the client. Client can use it
+					when reporting the problem to the operations team. Operations team
+					then can use this faultUUID to go to the error log on the given
+					server for quick Root Cause Analysis.
+				-->
+				<xs:element name="faultUUID" type="xs:string" />
+				<xs:element name="faultTime" type="xs:dateTime" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:simpleType name="FaultHeader">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="FAULT" />
+		</xs:restriction>
+	</xs:simpleType>
+
+
+	<xs:simpleType name="FaultHeaderValue">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="TRUE" />
+			<xs:enumeration value="FALSE" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="FaultType">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SYSTEM_EXCEPTION">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="SYSTEM_EXCEPTION" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="FaultDomain">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass />
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="DATABASE">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="DATABASE" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LDAP">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="LDAP" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FILE_SYSTEM">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="FILE_SYSTEM" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NETWORK">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="NETWORK" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BROKER">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="BROKER" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CACHE">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:typesafeEnumMember name="CACHE" />
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
