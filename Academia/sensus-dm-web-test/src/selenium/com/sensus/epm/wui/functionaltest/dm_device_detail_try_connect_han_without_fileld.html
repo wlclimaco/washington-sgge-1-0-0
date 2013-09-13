@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>try_connect_han_without_required_field</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">try_connect_han_without_required_field</td></tr>
+</thead><tbody>
+<!--#7742 and #7746-->
+<tr>
+	<td>click</td>
+	<td>id=about-deivce</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#device-han-container &gt; h3 &gt; a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=connect-han-device-form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=mac_address</td>
+	<td>11:11:11:11:11:11:11:11</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=install_code</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//button[@type='button']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.formErrorContent</td>
+	<td>This field is required.</td>
+</tr>
+</tbody></table>
+</body>
+</html>

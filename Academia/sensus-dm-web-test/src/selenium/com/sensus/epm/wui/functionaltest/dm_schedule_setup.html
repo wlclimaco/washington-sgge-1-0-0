@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://gage-web/" />
+<title>Setup schedule</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Setup schedule</td></tr>
+</thead><tbody>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Devices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--#Store 3 valid network addresses-->
+<tr>
+	<td>storeTextGlobal</td>
+	<td>css=#smartpoint-table tbody tr:eq(0) td:eq(2)</td>
+	<td>networkAddress1</td>
+</tr>
+<tr>
+	<td>storeTextGlobal</td>
+	<td>css=#smartpoint-table tbody tr:eq(1) td:eq(2)</td>
+	<td>networkAddress2</td>
+</tr>
+<tr>
+	<td>storeTextGlobal</td>
+	<td>css=#smartpoint-table tbody tr:eq(2) td:eq(2)</td>
+	<td>networkAddress3</td>
+</tr>
+<!--#Store 3 valid device id-->
+<tr>
+	<td>storeTextGlobal</td>
+	<td>css=#smartpoint-table tbody tr:eq(0) strong</td>
+	<td>deviceIds1</td>
+</tr>
+<tr>
+	<td>storeTextGlobal</td>
+	<td>css=#smartpoint-table tbody tr:eq(1) strong</td>
+	<td>deviceIds2</td>
+</tr>
+<tr>
+	<td>storeTextGlobal</td>
+	<td>css=#smartpoint-table tbody tr:eq(2) strong</td>
+	<td>deviceIds3</td>
+</tr>
+<!--#Store the valid network and devices in one single variable-->
+<tr>
+	<td>storeGlobal</td>
+	<td>${networkAddress1},${networkAddress2},${networkAddress3}</td>
+	<td>networkAddress</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${deviceIds1},${deviceIds2},${deviceIds3}</td>
+	<td>deviceIds</td>
+</tr>
+<!--#Store the unique valid random name-->
+<tr>
+	<td>storeGlobal</td>
+	<td>javascript{ Math.floor(Math.random() * 10000)}</td>
+	<td>random</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>Automated Sch ${random}</td>
+	<td>nameSchedule</td>
+</tr>
+<!--#Store position of the columns to be verified-->
+<tr>
+	<td>storeGlobal</td>
+	<td>1</td>
+	<td>columnScheduleName</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>2</td>
+	<td>columnActionName</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>3</td>
+	<td>columnActionType</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>4</td>
+	<td>columnScheduledBy</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>5</td>
+	<td>columnDeliverOn</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>6</td>
+	<td>columnActionDate</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>7</td>
+	<td>columnRepeats</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>8</td>
+	<td>columnDevices</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>9</td>
+	<td>columnStatus</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>11</td>
+	<td>columnActions</td>
+</tr>
+<!--#Lines to be removed is used after search a value on the table. The value returned usually get some quantity above the correct line, so this variable is used to remove this quantity. It is stored in variable because it usually variate from one deploy to another.-->
+<tr>
+	<td>storeGlobal</td>
+	<td>1</td>
+	<td>linesToBeRemoved</td>
+</tr>
+<!--#Store the number of records on the schedule table-->
+<tr>
+	<td>click</td>
+	<td>Link=System Intelligence</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>2000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Scheduled Events</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>2000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeTableRows</td>
+	<td>id=listTable</td>
+	<td>temp</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${temp})</td>
+	<td>temp</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>${temp}</td>
+	<td>countSchedules</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${temp}</td>
+	<td>countSchedules</td>
+</tr>
+</tbody></table>
+</body>
+</html>

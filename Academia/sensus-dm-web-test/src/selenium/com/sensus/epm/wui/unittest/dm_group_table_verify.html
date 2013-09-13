@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>set_up_groups</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">set_up_groups</td></tr>
+</thead><tbody>
+<tr>
+	<td>echo</td>
+	<td>${groupName}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=buttonCreateGroupPage</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeElementPresent</td>
+	<td>css=th.sorting_desc &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeElementPresent</td>
+	<td>css=#group-table thead tr th.sorting_asc</td>
+	<td>asc</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${asc}</td>
+	<td></td>
+</tr>
+<!--If class sorting_asc is NOT present...-->
+<tr>
+	<td>gotoIf</td>
+	<td>!${asc}</td>
+	<td>desc</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#group-table thead tr th:eq(2) span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyAttribute</td>
+	<td>css=#group-table thead tr th:eq(2)@class</td>
+	<td>sorting_desc</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>desc</td>
+	<td></td>
+</tr>
+<!--If class sorting_asc is present...-->
+<tr>
+	<td>gotoIf</td>
+	<td>${asc}</td>
+	<td>asc</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#group-table thead tr th:eq(2) span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyAttribute</td>
+	<td>css=#group-table thead tr th:eq(2)@class</td>
+	<td>sorting_asc</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>asc</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

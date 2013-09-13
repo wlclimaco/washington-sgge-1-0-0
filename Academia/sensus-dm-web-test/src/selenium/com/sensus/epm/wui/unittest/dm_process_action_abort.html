@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>event_history_action_abort</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">event_history_action_abort</td></tr>
+</thead><tbody>
+<!--storeGlobal | Table ID | dataTableID-->
+<tr>
+	<td>storeEval</td>
+	<td>&quot;${tableID}&quot; + &quot;_wrapper&quot;</td>
+	<td>dataTableID</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${dataTableID}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#${dataTableID}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeVisible</td>
+	<td>css=.blankslate</td>
+	<td>isBlank</td>
+</tr>
+<tr>
+	<td>storeElementPresent</td>
+	<td>css=td.button-action-expand a[title='Abort']:eq(0)</td>
+	<td>isActionAbort</td>
+</tr>
+<!--If results > 0 AND any Action Abort Button-->
+<tr>
+	<td>gotoIf</td>
+	<td>${isBlank} || !${isActionAbort}</td>
+	<td>jump1</td>
+</tr>
+<!--Open Abord Confirm Dialog and than Cancel-->
+<tr>
+	<td>click</td>
+	<td>css=td.button-action-expand a[title='Abort']:eq(0)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyEval</td>
+	<td>window.$(&quot;#action-dialog&quot;).dialog(&quot;option&quot;,&quot;title&quot;)</td>
+	<td>Abort Confirm</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#action-dialog&quot;).dialog(&quot;option&quot;,&quot;buttons&quot;).Cancel()</td>
+	<td></td>
+</tr>
+<!--Open Abord Confirm Dialog and than Abort Process-->
+<tr>
+	<td>click</td>
+	<td>css=td.button-action-expand a[title='Abort']:eq(0)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyEval</td>
+	<td>window.$(&quot;#action-dialog&quot;).dialog(&quot;option&quot;,&quot;title&quot;)</td>
+	<td>Abort Confirm</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#action-dialog&quot;).dialog(&quot;option&quot;,&quot;buttons&quot;).Abort()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td>Process was successfully aborted.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td>Process was successfully aborted.</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>jump1</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

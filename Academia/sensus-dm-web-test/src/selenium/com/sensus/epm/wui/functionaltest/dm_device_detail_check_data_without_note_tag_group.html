@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>check_data_without_note_tag_group</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">check_data_without_note_tag_group</td></tr>
+</thead><tbody>
+<!--#5948-->
+<tr>
+	<td>storeElementPresent</td>
+	<td>css=#notes dt</td>
+	<td>element</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${element}</td>
+	<td>label1</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>label2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.delete-dialog</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeElementPresent</td>
+	<td>css=#notes dt</td>
+	<td>element</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${element}</td>
+	<td>label2</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>label1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeElementPresent</td>
+	<td>css=#groups .remove-group</td>
+	<td>element</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${element}</td>
+	<td>label3</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>label4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#groups .removeGroup:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('.ui-dialog-buttonset button:first').click();</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>4000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeElementPresent</td>
+	<td>css=#groups .remove-group</td>
+	<td>element</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${element}</td>
+	<td>label4</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>label3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeElementPresent</td>
+	<td>css=#tags .remove-tag</td>
+	<td>element</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${element}</td>
+	<td>label5</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>label6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tags .remove-tag:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>2000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeElementPresent</td>
+	<td>css=#tags .remove-tag</td>
+	<td>element</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${element}</td>
+	<td>label6</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>label5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>css=#blankslate-group p</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#blankslate-group p</td>
+	<td>There are no Groups associated with this Device</td>
+</tr>
+<!--#5950-->
+<tr>
+	<td>verifyVisible</td>
+	<td>css=#blankslate-tags p</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#blankslate-tags p</td>
+	<td>There are no Tags associated with this Device</td>
+</tr>
+<!--#5952-->
+<tr>
+	<td>verifyVisible</td>
+	<td>css=#blankslate-note p</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#blankslate-note p</td>
+	<td>There are no Notes associated with this Device</td>
+</tr>
+</tbody></table>
+</body>
+</html>

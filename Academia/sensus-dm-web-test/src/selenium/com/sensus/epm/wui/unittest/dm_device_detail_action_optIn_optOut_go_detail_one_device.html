@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>go_detail</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">go_detail</td></tr>
+</thead><tbody>
+<tr>
+	<td>type</td>
+	<td>id=query</td>
+	<td>${nameScheduled}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div#query_search ul li button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.request-readonly-action:eq(0)</td>
+	<td>${nameScheduled}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=table#listTable tbody tr:first td:eq(8)</td>
+	<td>${sizeDevices}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=table#listTable tbody tr:first td:eq(8) a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=action-dialog</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=.selected-points table tbody#list-table tr:first a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.selected-points table tbody#list-table tr:first a</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>handevice</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">handevice</td></tr>
+</thead><tbody>
+<!--Han Device action-->
+<tr>
+	<td>click</td>
+	<td>css=#device-han-container .editConnect</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=mac_address</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=install_code</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>2000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=mac_address</td>
+	<td>${networkAddress}</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#mac_address&quot;).focus();</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=install_code</td>
+	<td>12345</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#mac_address&quot;).blur();</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=select-device-types</td>
+	<td>THERMOSTAT</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=device_name_input</td>
+	<td>${deviceId}</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=select-manufacture</td>
+	<td>Energate</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=select-model-number</td>
+	<td>EG-FZ100</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.ui-dialog-buttonset button:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

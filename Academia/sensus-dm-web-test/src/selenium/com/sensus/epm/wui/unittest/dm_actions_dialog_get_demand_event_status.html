@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>dm_actions_dialog_get_demand_event_status</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">dm_actions_dialog_get_demand_event_status</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>link=Get Event Status</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyEval</td>
+	<td>window.$(&quot;#action-dialog&quot;).dialog(&quot;option&quot;,&quot;title&quot;)</td>
+	<td>System Intelligence Action</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=p.desc</td>
+	<td>The Get Demand Response Event Status will interrogate the device for recent demand response event participation. If you have a device you believe should be participating in a Demand Response event but does not reflect that in Device Manager use this action to verify participation.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=p.desc</td>
+	<td>The Get Demand Response Event Status will interrogate the device for recent demand response event participation. If you have a device you believe should be participating in a Demand Response event but does not reflect that in Device Manager use this action to verify participation.</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>window.$(&quot;#action-dialog&quot;).dialog(&quot;close&quot;)</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

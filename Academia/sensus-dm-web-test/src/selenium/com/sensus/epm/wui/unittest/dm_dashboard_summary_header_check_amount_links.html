@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>dm_dashboard_summary_header_check_amount_links</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">dm_dashboard_summary_header_check_amount_links</td></tr>
+</thead><tbody>
+<tr>
+	<td>storeCssCount</td>
+	<td>#header-table tbody tr td:not(.today) a, #dashboard-summary td:not(#installed) a</td>
+	<td>tableLength</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>0</td>
+	<td>count</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>var string = &quot;${service}&quot;; string.charAt(0).toUpperCase() + string.slice(1);</td>
+	<td>serviceCap</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${tableLength}</td>
+	<td></td>
+</tr>
+<!--Starts while...-->
+<tr>
+	<td>while</td>
+	<td>${count} &lt; ${tableLength}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>############## ${count}</td>
+	<td></td>
+</tr>
+<!--Back to Dashboard...-->
+<tr>
+	<td>click</td>
+	<td>id=menu-dashboard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyAttribute</td>
+	<td>id=menu-dashboard@class</td>
+	<td>active</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=.preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>css=.preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTitle</td>
+	<td>Sensus - Manage ${serviceCap} - Dashboard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>window.$(&quot;#header-table tbody tr td:not(.today) a, #dashboard-summary td:not(#installed) a&quot;).eq(${count}).text()</td>
+	<td>amount</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>############### ${amount}</td>
+	<td></td>
+</tr>
+<!--Go to Devicelist...-->
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#header-table tbody tr td:not(.today) a, #dashboard-summary td:not(#installed) a&quot;).eq(${count}).click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyAttribute</td>
+	<td>css=ul.device-tabs li a.active@class</td>
+	<td>glob:*active</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=results</td>
+	<td>${amount}</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>storedVars['count'] + 1</td>
+	<td>count</td>
+</tr>
+<tr>
+	<td>endWhile</td>
+	<td></td>
+	<td></td>
+</tr>
+<!--End while.-->
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>Try to setup a demand response without Enrollment Code on About this device page</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Try to setup a demand response without Enrollment Code on About this device page</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.positionHelper ul.fg-menu &gt; li:eq(1) a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.positionHelper ul.fg-menu &gt; li:eq(1) &gt; ul &gt; li:eq(2) a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#createDemandResponseForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>2000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>css=#demandResponseTime</td>
+	<td>11:00pm</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>css=#duration</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.ui-dialog-buttonpane .ui-button:eq(0)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=.formError</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.ui-dialog-buttonpane .ui-button:eq(1)</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

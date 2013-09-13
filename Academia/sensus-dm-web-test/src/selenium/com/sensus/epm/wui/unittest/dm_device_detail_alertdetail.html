@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>dm_device_detail_alertdetail</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">dm_device_detail_alertdetail</td></tr>
+</thead><tbody>
+<!--Verify alert detail-->
+<tr>
+	<td>click</td>
+	<td>id=menu-smartpoint</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Sensus Load Control</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('#smartpoint-table th span:contains(Alert)').next().find('a.desc').click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table strong:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('#smartpoint-table tr:eq(1) small').parents().find('tr:eq(0)').eq('0').find('strong').click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeVisible</td>
+	<td>id=device-alarm-content</td>
+	<td>isBlank</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${isBlank}</td>
+	<td>jumpBlank</td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>id=device-alarm-content</td>
+	<td>Black Flow</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#device-alarm-content .alert-detail-action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>2000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>id=dialog-processing-alert-details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.ui-dialog-titlebar-close:last</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>jumpBlank</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

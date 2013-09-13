@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>try_edit_schedule_repeat_zero_years</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">try_edit_schedule_repeat_zero_years</td></tr>
+</thead><tbody>
+<!--#6287-->
+<tr>
+	<td>assertText</td>
+	<td>id=schedule</td>
+	<td>Scheduled Events</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=query</td>
+	<td>${firstNameSchedule}68</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div#query_search .go-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#listTable tbody tr:eq(0) td:eq(1) a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menu-bt-edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=edit-repeats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=repeats</td>
+	<td>Yearly</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=repeats-every-value-yearly</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.ui-dialog-buttonset button.ui-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.formErrorContent</td>
+	<td>* Minimum value is 1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.ui-dialog-buttonpane div button:eq(1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>50000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>30000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=schedule</td>
+	<td>Scheduled Events</td>
+</tr>
+<tr>
+	<td>storeTableRows</td>
+	<td>css=#listTable tbody</td>
+	<td>temp</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${temp}</td>
+	<td>rows</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${rows}</td>
+	<td>countSchedules</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=query</td>
+	<td>${nameSchedule}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div#query_search .go-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>100000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=.request-readonly-action:eq(0)</td>
+	<td>${nameSchedule}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menu-bt-delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=action-dialog-delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.ui-dialog-buttonpane div button:eq(0)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td>Schedule was successfully cancelled.</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Scheduled Events</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=schedule</td>
+	<td>Scheduled Events</td>
+</tr>
+</tbody></table>
+</body>
+</html>

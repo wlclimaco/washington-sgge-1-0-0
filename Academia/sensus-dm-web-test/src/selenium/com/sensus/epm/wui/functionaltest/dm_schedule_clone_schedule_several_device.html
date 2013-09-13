@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>clone_schedule_several_device</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">clone_schedule_several_device</td></tr>
+</thead><tbody>
+<!--#Test case number 6334-->
+<tr>
+	<td>click</td>
+	<td>link=System Intelligence</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Scheduled Events</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=schedule</td>
+	<td>Scheduled Events</td>
+</tr>
+<tr>
+	<td>storeTableRows</td>
+	<td>css=#listTable tbody</td>
+	<td>temp</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${temp}</td>
+	<td>rows</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${rows}</td>
+	<td>countSchedules</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=query</td>
+	<td>${nameSchedule}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button:contains(Go)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menu-bt-clone</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=scheduledEventName</td>
+	<td>${nameSchedule}0123</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=createAction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=#messaging-main &gt; span.message &gt; strong</td>
+	<td>“${nameSchedule}0123”</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=query</td>
+	<td>${nameSchedule}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button:contains(Go)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=.request-readonly-action:eq(0)</td>
+	<td>${nameSchedule}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=table#listTable tbody tr:eq(0) td:eq(1) a.request-readonly-action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=action-dialog</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=repeat-enum</td>
+	<td>Every Tues and Thu</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#dr-fields-container legend</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#dr-fields-container legend</td>
+	<td>ActionHAN, Send Text Message</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=event-fields-container-endpoints</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#event-fields-container-endpoints</td>
+	<td>Devices3</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('.ui-dialog-titlebar-close:visible').click();</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Scheduled Events</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=schedule</td>
+	<td>Scheduled Events</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${countSchedules}) + 1</td>
+	<td>temp</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${temp}</td>
+	<td>rows</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${rows}</td>
+	<td>countSchedules</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=results</td>
+	<td>${countSchedules}</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=listTable_info</td>
+	<td>Showing 1 - ${countSchedules} of ${countSchedules} |</td>
+</tr>
+<tr>
+	<td>storeTableRows</td>
+	<td>css=#listTable tbody</td>
+	<td>temp</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${temp}</td>
+	<td>rows</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${rows}</td>
+	<td>countSchedules</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=query</td>
+	<td>${nameSchedule}0123</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button:contains(Go)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=.request-readonly-action:eq(0)</td>
+	<td>${nameSchedule}0123</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menu-bt-delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=action-dialog-delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.ui-dialog-buttonpane div button:eq(0)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td>Schedule was successfully cancelled.</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Scheduled Events</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=schedule</td>
+	<td>Scheduled Events</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${countSchedules}) - 1</td>
+	<td>temp</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${temp}</td>
+	<td>rows</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${rows}</td>
+	<td>countSchedules</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=results</td>
+	<td>${countSchedules}</td>
+</tr>
+</tbody></table>
+</body>
+</html>

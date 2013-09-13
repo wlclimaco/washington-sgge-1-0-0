@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>dm_action_demand_response_initiate</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">dm_action_demand_response_initiate</td></tr>
+</thead><tbody>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=menu-smartpoint</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menu-smartpoint</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table input:eq(0)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;div.positionHelper:visible ul.fg-menu &gt; li &gt; ul &gt; li a:contains('Initiate Event'):eq(1)&quot;).click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=demandResponseWhen</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=duration</td>
+	<td>25</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=enrollment-code</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#action-dialog&quot;).dialog(&quot;option&quot;, &quot;buttons&quot;)[&quot;Initiate Demand Response&quot;]();</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

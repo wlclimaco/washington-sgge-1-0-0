@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>dm_filters_schedule</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">dm_filters_schedule</td></tr>
+</thead><tbody>
+<!--# Scheduled Events-->
+<tr>
+	<td>click</td>
+	<td>id=menu-systemintelligence</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#load #schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(0) span:first</td>
+	<td>Status</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(0) span:last</td>
+	<td>Active</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Reset Filters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--Filter by Search-->
+<tr>
+	<td>store</td>
+	<td>Search Schedule Name Filter</td>
+	<td>scheduleName</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=query</td>
+	<td>${scheduleName}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#query_search button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(0) span:first</td>
+	<td>Search Name</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(0) span:last</td>
+	<td>${scheduleName}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.filter-container li:eq(0) span:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container a:first</td>
+	<td>Search Name</td>
+</tr>
+<!--Filter by Action Type-->
+<tr>
+	<td>storeText</td>
+	<td>css=#schedule_action_categories .ui-listcombobox span:first</td>
+	<td>actionType</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#schedule_action_categories .ui-listcombobox input:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(0) span:first</td>
+	<td>Action Type</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(0) span:last</td>
+	<td>${actionType}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.filter-container li:eq(0) span:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container a:first</td>
+	<td>Action Type</td>
+</tr>
+<!--Filter by Status-->
+<tr>
+	<td>storeText</td>
+	<td>css=#status_scheduled .ui-listcombobox span:first</td>
+	<td>statusSchedule</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#status_scheduled .ui-listcombobox input:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(0) span:first</td>
+	<td>Status</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(0) span:last</td>
+	<td>${statusSchedule}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.filter-container li:eq(0) span:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container a:first</td>
+	<td>Status</td>
+</tr>
+<!--Filter by Repeats-->
+<tr>
+	<td>storeText</td>
+	<td>css=#repeats .ui-listcombobox span:first</td>
+	<td>repeatSchedule</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#repeats .ui-listcombobox input:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(0) span:first</td>
+	<td>Repeats</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(0) span:last</td>
+	<td>${repeatSchedule}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.filter-container li:eq(0) span:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container a:first</td>
+	<td>Repeats</td>
+</tr>
+<!--Filter by Users-->
+<tr>
+	<td>click</td>
+	<td>css=#users label</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=#users .ui-listcombobox span:first</td>
+	<td>users</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#users .ui-listcombobox input:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(0) span:first</td>
+	<td>Users</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=.filter-container li:eq(0) span:last</td>
+	<td>${users}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.filter-container li:eq(0) span:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=.filter-container a:first</td>
+	<td>Users</td>
+</tr>
+<!--Reset Filters-->
+<tr>
+	<td>type</td>
+	<td>id=query</td>
+	<td>${scheduleName}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#query_search button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#schedule_action_categories .ui-listcombobox input:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#status_scheduled .ui-listcombobox input:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Reset Filters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyCssCount</td>
+	<td>css=.filter-container .type</td>
+	<td>0</td>
+</tr>
+</tbody></table>
+</body>
+</html>

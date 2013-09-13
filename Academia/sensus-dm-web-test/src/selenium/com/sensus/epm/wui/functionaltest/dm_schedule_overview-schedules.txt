@@ -1,0 +1,48 @@
+Verify Page Descriptions
+Set Event Name/Description
+Set Action/Time
+Set Devices
+ Groups
+ Tags
+ List
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+/*var group = "Anna g";
+$("li", "#group-list").each(function(){
+    var $t = $(this);
+    var g = $.trim($t.text());
+    
+    if (g == group) {
+        return false;
+    }
+});*/
+
+//$(".ui-autocomplete-input", "#GroupsDiv").siblings("button").click();
+//$(".ui-listcombobox", "#GroupsDiv")
+var group = "Camila's group 01";
+$("li", ".ui-autocomplete:visible").each(function(){
+    var $t = $(this);
+    var g = $.trim($t.text());
+    console.log(g);
+    
+    if (g == group) {
+        return false;
+    }
+});

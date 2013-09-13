@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>edit_schedule_repeat_mon_wed_friday_end_after_one_ocurrence_importing_valid_devices</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">edit_schedule_repeat_mon_wed_friday_end_after_one_ocurrence_importing_valid_devices</td></tr>
+</thead><tbody>
+<!--#Test Case Number 6197-->
+<tr>
+	<td>assertText</td>
+	<td>id=schedule</td>
+	<td>Scheduled Events</td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>${nameSchedule} 52/${columnScheduleName}</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${row}) - new Number(${linesToBeRemoved})</td>
+	<td>temp</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>${temp}</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>css=#listTable tr:eq(${row}) td:eq(${columnActions}) a:contains(Actions)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#listTable tr:eq(${row}) td:eq(${columnActions}) div li:contains(Edit)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=edit-repeats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=repeats</td>
+	<td>Every Mon, Wed and Fri</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>sensus.pages.scheduleEvent.fnChangeRepeatType($(&quot;#repeats&quot;)); sensus.pages.scheduleEvent.fnChangeSummary($(&quot;#repeats&quot;)); </td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=after-every-other</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=occurrences-every-other</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button:contains(Save)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=import-devices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=listSmartPoint</td>
+	<td>${oneDeviceId}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=listSmartPoint</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=createAction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>20000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main &gt; span.message &gt; strong</td>
+	<td>“${nameSchedule} 52”</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main &gt; span.message &gt; strong</td>
+	<td>“${nameSchedule} 52”</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#listTable.${row}.${columnScheduleName}</td>
+	<td>${nameSchedule} 52</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#listTable.${row}.${columnActionName}</td>
+	<td>Initiate Event</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#listTable.${row}.${columnActionType}</td>
+	<td>Demand Reset</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#listTable.${row}.${columnStatus}</td>
+	<td>Active</td>
+</tr>
+</tbody></table>
+</body>
+</html>

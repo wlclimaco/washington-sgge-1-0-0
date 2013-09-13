@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>dm_common_verify_scheduled_events_navigation</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">dm_common_verify_scheduled_events_navigation</td></tr>
+</thead><tbody>
+<!--#Verify current page-->
+<!--#Verify H1-->
+<tr>
+	<td>storeElementPresent</td>
+	<td>css=#tabs-content h1</td>
+	<td>elementPresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${elementPresent} == false</td>
+	<td>navigateStart</td>
+</tr>
+<!--#Verify Title-->
+<tr>
+	<td>storeText</td>
+	<td>css=#tabs-content h1</td>
+	<td>currentPage</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>Scheduled Events</td>
+	<td>subtitlePage</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>javascript{storedVars['currentPage']==storedVars['subtitlePage']}</td>
+	<td>getStart</td>
+</tr>
+<!--# Navigate start-->
+<tr>
+	<td>label</td>
+	<td>navigateStart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menu-systemintelligence</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyAttribute</td>
+	<td>id=menu-systemintelligence@class</td>
+	<td>alist active</td>
+</tr>
+<tr>
+	<td>verifyAttribute</td>
+	<td>css=ul.tabs li:eq(0) a@class</td>
+	<td>active</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Scheduled Events</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--# Navigate end-->
+<tr>
+	<td>label</td>
+	<td>getStart</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

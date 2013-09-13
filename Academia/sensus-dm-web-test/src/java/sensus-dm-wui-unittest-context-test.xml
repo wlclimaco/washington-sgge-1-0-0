@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context
+	   		http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/mvc
+			http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- Mapping -->
+
+	<bean id="SensusAppContext" class="com.sensus.common.util.SensusAppContext"/>
+
+	<!-- DM -->
+ 	<bean id="actionBCFTarget"				class="com.sensus.dm.controller.action.unittest.ActionBCFMockImpl" />
+ 	<bean id="settingsBCFTarget"			class="com.sensus.dm.controller.settings.unittest.SettingsBCFMockImpl" />
+	<bean id="deviceBCFTarget"				class="com.sensus.dm.controller.device.unittest.DeviceBCFMockImpl" />
+	<bean id="electricMeterBCFTarget"		class="com.sensus.dm.controller.electricmeter.unittest.ElectricMeterBCFMockImpl" />
+	<bean id="groupBCFTarget"				class="com.sensus.dm.controller.group.unittest.GroupBCFMockImpl" />
+	<bean id="processBCFTarget" 			class="com.sensus.dm.controller.process.unittest.ProcessBCFMockImpl" />
+	<bean id="processTypeBCFTarget"			class="com.sensus.dm.controller.process.unittest.ProcessTypeBCFMockImpl" />
+	<bean id="processSummaryBCFTarget"		class="com.sensus.dm.controller.process.unittest.ProcessSummaryBCFMockImpl" />
+	<bean id="tagBCFTarget" 				class="com.sensus.dm.controller.tag.unittest.TagBCFMockImpl" />
+	<bean id="tenantBCFTarget" 				class="com.sensus.dm.controller.unittest.util.TenantBCFMockImpl" />
+	<bean id="scheduleBCFTarget" 			class="com.sensus.dm.controller.schedule.unittest.ScheduleBCFMockImpl" />
+	<bean id="deviceOperationBCFTarget" 	class="com.sensus.dm.controller.deviceoperation.unittest.DeviceReadingBCFMockImpl" />
+	<bean id="customSearchBCFTarget"		class="com.sensus.dm.controller.savedsearch.unittest.CustomSearchBCFMockImpl" />
+	<bean id="processCsvBCFTarget"			class="com.sensus.dm.controller.export.unittest.ProcessCsvBCFMockImpl" />
+	<bean id="deviceReadingBCFTarget"		class="com.sensus.dm.controller.deviceoperation.unittest.DeviceReadingBCFMockImpl" />
+	<bean id="noteBCFTarget"				class="com.sensus.dm.controller.note.unittest.NoteBCFMockImpl" />
+	<bean id="gasMeterBCFTarget"			class="com.sensus.dm.controller.gasmeter.unittest.GasMeterBCFMockImpl" />
+	<bean id="waterMeterBCFTarget"			class="com.sensus.dm.controller.watermeter.unittest.WaterMeterBCFMockImpl" />
+	<bean id="mapperTarget"					class="com.sensus.common.web.json.CustomObjectMapper">
+		<property name="dateFormat" value="dd/MM/yyyy HH:mm"/>
+	</bean>
+
+	<!-- ###################### Bases ###################### -->
+
+	<bean id="baseViewController" class="com.sensus.dm.controller.base.BaseViewController">
+		<property name="mapper" ref="mapperTarget" />
+	</bean>
+
+	<bean id="baseFilterController" class="com.sensus.dm.controller.filter.BaseFilterController">
+		<property name="tagBCF" ref="tagBCFTarget" />
+		<property name="groupBCF" ref="groupBCFTarget" />
+		<property name="settingsBCF" ref="settingsBCFTarget" />
+		<property name="deviceBCF" ref="deviceBCFTarget" />
+		<property name="actionBCF" ref="actionBCFTarget" />
+		<property name="processTypeBCF" ref="processTypeBCFTarget" />
+	</bean>
+
+	<bean id="baseModuleController" class="com.sensus.dm.controller.base.BaseModuleController">
+		<property name="deviceBCF" ref="deviceBCFTarget" />
+	</bean>
+
+	<!-- ###################### APIs ###################### -->
+
+	<bean id="ImportScheduleAPIController" class="com.sensus.dm.controller.importfile.ImportScheduleAPIController">
+		<property name="scheduleBCF" ref="scheduleBCFTarget"/>
+	</bean>
+
+	<bean id="ImportGroupAPIController" class="com.sensus.dm.controller.importfile.ImportGroupAPIController">
+		<property name="groupBCF" ref="groupBCFTarget"/>
+	</bean>
+
+	<bean id="ImportFileAPIController" class="com.sensus.dm.controller.importfile.ImportFileAPIController">
+		<property name="actionBCF" ref="actionBCFTarget"/>
+		<property name="scheduleBCF" ref="scheduleBCFTarget"/>
+		<property name="groupBCF" ref="groupBCFTarget"/>
+	</bean>
+
+	<bean id="ImportActionController" class="com.sensus.dm.controller.importfile.ImportActionController">
+		<property name="actionBCF" ref="actionBCFTarget"/>
+	</bean>
+
+	<bean id="dmController" class="com.sensus.dm.controller.base.DMController">
+		<property name="settingsBCF" ref="settingsBCFTarget"/>
+	</bean>
+
+	<bean id="DMAPIController" class="com.sensus.dm.controller.base.DMAPIController">
+		<property name="deviceBCF" ref="deviceBCFTarget"/>
+		<property name="tenantBCF" ref="tenantBCFTarget"/>
+	</bean>
+
+	<bean id="actionAPIController" class="com.sensus.dm.controller.action.ActionAPIController">
+		<property name="actionBCF" ref="actionBCFTarget" />
+	</bean>
+
+	<bean id="deviceAPIController" class="com.sensus.dm.controller.device.DeviceAPIController">
+		<property name="deviceBCF" ref="deviceBCFTarget" />
+	</bean>
+
+	<bean id="electricDeviceAPIController" class="com.sensus.dm.controller.electricdevice.ElectricDeviceAPIController">
+		<property name="deviceBCF" ref="deviceBCFTarget" />
+		<property name="groupBCF" ref="groupBCFTarget" />
+	</bean>
+
+	<bean id="ElectricMeterDeviceAPIController" class="com.sensus.dm.controller.electricmeter.ElectricMeterDeviceAPIController">
+		<property name="electricMeterBCF" ref="electricMeterBCFTarget"/>
+	</bean>
+
+	<bean id="deviceOperationAPIController" class="com.sensus.dm.controller.deviceoperation.DeviceOperationAPIController">
+ 		<property name="scheduleBCF" ref="scheduleBCFTarget" />
+ 		<property name="deviceReadingBCF" ref="deviceOperationBCFTarget" />
+ 		<property name="electricMeterBCF" ref="electricMeterBCFTarget"/>
+ 		<property name="actionBCF" ref="actionBCFTarget" />
+ 	</bean>
+
+	<bean id="tagAPIController" class="com.sensus.dm.controller.tag.TagAPIController">
+		<property name="tagBCF" ref="tagBCFTarget" />
+	</bean>
+
+	<bean id="summaryAPIController" class="com.sensus.dm.controller.summary.SummaryAPIController">
+		<property name="processBCF" ref="processBCFTarget" />
+		<property name="processSummaryBCF" ref="processSummaryBCFTarget" />
+	</bean>
+
+	<bean id="groupAPIController" class="com.sensus.dm.controller.group.GroupAPIController">
+		<property name="groupBCF" ref="groupBCFTarget" />
+	</bean>
+
+	<bean id="scheduleAPIController" class="com.sensus.dm.controller.schedule.ScheduleAPIController">
+		<property name="scheduleBCF" ref="scheduleBCFTarget" />
+	</bean>
+
+	<bean id="processAPIController" class="com.sensus.dm.controller.process.ProcessAPIController">
+		<property name="processBCF" ref="processBCFTarget" />
+		<property name="processSummaryBCF" ref="processSummaryBCFTarget" />
+	</bean>
+
+	<bean id="noteAPIController" class="com.sensus.dm.controller.note.NoteAPIController">
+		<property name="noteBCF" ref="noteBCFTarget" />
+	</bean>
+
+	<bean id="mapAPIController" class="com.sensus.dm.controller.map.MapAPIController">
+		<property name="deviceBCF" ref="deviceBCFTarget" />
+	</bean>
+
+	<bean id="hanDeviceAPIController" class="com.sensus.dm.controller.handevice.HanDeviceAPIController">
+		<property name="electricMeterBCF" ref="electricMeterBCFTarget" />
+	</bean>
+
+	<bean id="lcmDeviceAPIController" class="com.sensus.dm.controller.lcm.LcmDeviceAPIController">
+		<property name="electricMeterBCF" ref="electricMeterBCFTarget" />
+	</bean>
+
+	<bean id="gasMeterDeviceAPIController" class="com.sensus.dm.controller.gasmeter.GasMeterDeviceAPIController">
+		<property name="gasMeterBCF" ref="gasMeterBCFTarget" />
+	</bean>
+
+	<bean id="waterMeterDeviceAPIController" class="com.sensus.dm.controller.watermeter.WaterMeterDeviceAPIController">
+		<property name="waterMeterBCF" ref="waterMeterBCFTarget" />
+	</bean>
+
+	<bean id="filterAPIController" class="com.sensus.dm.controller.filter.FilterAPIController">
+	</bean>
+
+	<bean id="savedSearchAPIController" class="com.sensus.dm.controller.savedsearch.SavedSearchAPIController">
+		<property name="customSearchBCF" ref="customSearchBCFTarget"/>
+	</bean>
+
+	<bean id="settingsAPIController" class="com.sensus.dm.controller.systemsettings.SettingsAPIController">
+		<property name="settingsBCF" ref="settingsBCFTarget"/>
+	</bean>
+
+	<bean id="exportFileAPIController" class="com.sensus.dm.controller.export.ExportFileAPIController">
+		<property name="groupBCF" ref="groupBCFTarget" />
+		<property name="processCsvBCF" ref="processCsvBCFTarget" />
+		<property name="electricMeterBCF" ref="electricMeterBCFTarget" />
+		<property name="scheduleBCF" ref="scheduleBCFTarget" />
+		<property name="deviceReadingBCF" ref="deviceReadingBCFTarget" />
+		<property name="gasMeterBCF" ref="gasMeterBCFTarget" />
+		<property name="waterMeterBCF" ref="waterMeterBCFTarget" />
+	</bean>
+
+	<bean id="exportFileController" class="com.sensus.dm.controller.export.ExportFileController">
+		<property name="processCsvBCF" ref="processCsvBCFTarget" />
+	</bean>
+
+	<!-- ###################### Views ###################### -->
+
+	<bean id="electricViewController" class="com.sensus.dm.controller.electricdevice.ElectricViewController">
+		<property name="electricMeterBCF" ref="electricMeterBCFTarget" />
+	</bean>
+
+	<bean id="waterViewController" class="com.sensus.dm.controller.watermeter.WaterViewController">
+		<property name="waterMeterBCF" ref="waterMeterBCFTarget" />
+	</bean>
+
+	<bean id="gasViewController" class="com.sensus.dm.controller.gasmeter.GasViewController">
+		<property name="gasMeterBCF" ref="gasMeterBCFTarget" />
+	</bean>
+
+	<bean id="deviceDetailViewController" class="com.sensus.dm.controller.device.detail.DeviceDetailViewController">
+		<property name="deviceReadingBCF" ref="deviceReadingBCFTarget" />
+		<property name="electricMeterBCF" ref="electricMeterBCFTarget" />
+		<property name="gasMeterBCF" ref="gasMeterBCFTarget" />
+		<property name="waterMeterBCF" ref="waterMeterBCFTarget" />
+	</bean>
+
+	<bean id="aboutDeviceViewControllerTest" class="com.sensus.dm.controller.device.detail.AboutDeviceViewController">
+		<property name="electricMeterBCF" ref="electricMeterBCFTarget" />
+		<property name="groupBCF" ref="groupBCFTarget" />
+		<property name="noteBCF" ref="noteBCFTarget" />
+		<property name="processSummaryBCF" ref="processSummaryBCFTarget" />
+		<property name="tagBCF" ref="tagBCFTarget" />
+		<property name="scheduleBCF" ref="scheduleBCFTarget" />
+	</bean>
+
+	<bean id="dashboardViewController" class="com.sensus.dm.controller.dashboard.DashboardViewController">
+		<property name="customSearchBCF" ref="customSearchBCFTarget"/>
+		<property name="processBCF" ref="processBCFTarget" />
+		<property name="waterMeterBCF" ref="waterMeterBCFTarget" />
+	</bean>
+
+	<bean id="scheduleViewController" class="com.sensus.dm.controller.schedule.ScheduleViewController">
+		<property name="scheduleBCF" ref="scheduleBCFTarget" />
+		<property name="groupBCF" ref="groupBCFTarget" />
+		<property name="tagBCF" ref="tagBCFTarget" />
+		<property name="deviceBCF" ref="deviceBCFTarget" />
+		<property name="settingsBCF" ref="settingsBCFTarget" />
+		<property name="mapper" ref="mapperTarget" />
+	</bean>
+
+	<bean id="tagViewController" class="com.sensus.dm.controller.tag.TagViewController">
+		<property name="tagBCF" ref="tagBCFTarget" />
+	</bean>
+
+	<bean id="groupViewController" class="com.sensus.dm.controller.group.GroupViewController">
+	</bean>
+
+	<bean id="savedSearchViewController" class="com.sensus.dm.controller.savedsearch.SavedSearchViewController">
+		<property name="customSearchBCF" ref="customSearchBCFTarget" />
+	</bean>
+
+	<bean id="processViewController" class="com.sensus.dm.controller.process.ProcessViewController">
+		<property name="processBCF" ref="processBCFTarget" />
+	</bean>
+
+	<bean id="deviceReadsViewController" class="com.sensus.dm.controller.device.detail.DeviceReadsViewController">
+		<property name="deviceReadingBCF" ref="deviceReadingBCFTarget" />
+		<property name="electricMeterBCF" ref="electricMeterBCFTarget" />
+		<property name="waterMeterBCF" ref="waterMeterBCFTarget" />
+		<property name="gasMeterBCF" ref="gasMeterBCFTarget" />
+	</bean>
+
+	<bean id="historydeviceViewController" class="com.sensus.dm.controller.device.detail.HistoryDeviceViewController">
+		<property name="processBCF" ref="processBCFTarget" />
+	</bean>
+
+	<bean id="settingsViewController" class="com.sensus.dm.controller.systemsettings.SettingsViewController">
+		<property name="settingsBCF" ref="settingsBCFTarget" />
+	</bean>
+
+	<!-- Scans the classpath for annotated components that will be auto-registered as Spring beans.
+	 For example @Controller and @Service. Make sure to set the correct base-package -->
+	<context:component-scan  base-package="com.sensus.dm.controller.*.unittest"></context:component-scan>
+
+	<!-- Activates various annotations to be detected in bean classes -->
+	<context:annotation-config />
+
+	<!-- Configures the annotation-driven Spring MVC Controller programming model. -->
+	<mvc:annotation-driven ></mvc:annotation-driven>
+
+	<!-- Internationalization -->
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="en" />
+	</bean>
+
+	<bean id="localeChangeInterceptor"
+		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+		<property name="paramName" value="language" />
+	</bean>
+
+	<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping" >
+		<property name="interceptors">
+		   <list>
+			<ref bean="localeChangeInterceptor" />
+		   </list>
+		</property>
+	</bean>
+
+	<!-- Register the welcome.properties -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename">
+			<value>locale\messages</value>
+		</property>
+	</bean>
+
+	<!-- Resolves view names to protected .jsp resources within the /WEB-INF directory -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+	<bean id="uiSettings" class="java.lang.String">
+    	<constructor-arg type="String" value="C:\QATEclipseWorkSpace\sensus-dm-configuration\config\web\classes\ui-settings.properties"/>
+    </bean>
+    <bean id="uiMessages" class="java.lang.String">
+    	<constructor-arg type="String" value="C:\QATEclipseWorkSpace\sensus-dm-configuration\config\web\classes\locale\messages_"/>
+    </bean>
+</beans>

@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>edit_schedule_repeat_one_month_end_never_importing_devices_by_groups</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">edit_schedule_repeat_one_month_end_never_importing_devices_by_groups</td></tr>
+</thead><tbody>
+<!--#test Case 6230-->
+<tr>
+	<td>click</td>
+	<td>id=schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td>active</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td>active</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>css=#schedule@class</td>
+	<td>active</td>
+</tr>
+<!--#Click for edit-->
+<tr>
+	<td>storeTableRow</td>
+	<td>${nameSchedule} 61/${columnScheduleName}</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${row}) - new Number(${linesToBeRemoved})</td>
+	<td>temp</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>${temp}</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>css=#listTable tr:eq(${row}) td:eq(${columnActions}) a:contains(Actions)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#listTable tr:eq(${row}) td:eq(${columnActions}) div li:contains(Edit)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td>active</td>
+</tr>
+<!--#edit schedule-->
+<tr>
+	<td>click</td>
+	<td>id=edit-repeats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=textMessageHan</td>
+	<td>test msg</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=text_message_duration</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=repeats</td>
+	<td>Monthly</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>sensus.pages.scheduleEvent.fnChangeRepeatType($(&quot;#repeats&quot;)); sensus.pages.scheduleEvent.fnChangeSummary($(&quot;#repeats&quot;)); </td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.ui-dialog-buttonpane:last div button:eq(0)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=import-devices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=listSmartPoint</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=listSmartPoint</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=select-groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#group-list ul li:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=listSmartPoint</td>
+	<td>${deviceIds}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=listSmartPoint</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=createAction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>50000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td>“${nameSchedule} 61” edited successfully.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td>“${nameSchedule} 61” edited successfully.</td>
+</tr>
+<!--# Verifying schedule has been created.-->
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>${nameSchedule} 61/${columnScheduleName}</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${row}) - new Number(${linesToBeRemoved})</td>
+	<td>temp</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>${temp}</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#listTable.${row}.${columnScheduleName}</td>
+	<td>${nameSchedule} 61</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#listTable.${row}.${columnActionName}</td>
+	<td>Send Text Message</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#listTable.${row}.${columnActionType}</td>
+	<td>HAN</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#listTable.${row}.${columnScheduledBy}</td>
+	<td>${user}</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#listTable.${row}.${columnRepeats}</td>
+	<td>Monthly</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#listTable.${row}.${columnStatus}</td>
+	<td>Active</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${countSchedules})+1</td>
+	<td>temp</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>${temp}</td>
+	<td>countSchedules</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${temp}</td>
+	<td>countSchedules</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=results</td>
+	<td>${countSchedules}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=listTable_info</td>
+	<td>Showing 1 - ${countSchedules} of * |</td>
+</tr>
+</tbody></table>
+</body>
+</html>

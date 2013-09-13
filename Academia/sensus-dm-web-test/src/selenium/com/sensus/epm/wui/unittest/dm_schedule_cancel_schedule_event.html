@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>cancel_schedule_event</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">cancel_schedule_event</td></tr>
+</thead><tbody>
+<tr>
+	<td>type</td>
+	<td>id=query</td>
+	<td>${nameScheduled}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div#query_search ul li button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=.request-readonly-action:eq(0)</td>
+	<td>${nameScheduled}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menu-bt-delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=action-dialog-delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=.ui-dialog-buttonpane div button:eq(0)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//button[@type='button']</td>
+	<td>Cancel Event</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.ui-dialog-buttonpane div button:eq(0)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>50000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>30000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=span.message</td>
+	<td>Scheduled Event “${nameScheduled}“ was successfully canceled.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.message</td>
+	<td>Scheduled Event “${nameScheduled}“ was successfully canceled.</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${countSchedules}) - 1</td>
+	<td>rows</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${rows}</td>
+	<td>countSchedules</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=results</td>
+	<td>0</td>
+</tr>
+</tbody></table>
+</body>
+</html>

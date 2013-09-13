@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>send_han_text_message</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">send_han_text_message</td></tr>
+</thead><tbody>
+<!--storeGlobal | Table ID | dataTableID-->
+<!--If Send Text Message is present-->
+<tr>
+	<td>storeTextPresent</td>
+	<td>Send Text Message</td>
+	<td>isTextPresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${isTextPresent}</td>
+	<td>jumpTextPresent</td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>Send Text Message/4</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>${row} - 3</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>window.$(&quot;#modified_user&quot;, &quot;#${tableID}&quot;).parent(&quot;th&quot;).index() + 1</td>
+	<td>requestByIndexColumn</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${row}</td>
+	<td>totalDevices</td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=#${tableID} tbody tr:eq(${row}) td.num</td>
+	<td>totalDevices</td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=#${tableID} tbody tr:eq(${row}) td:eq(${requestByIndexColumn})</td>
+	<td>requestBy</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Send Text Message</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyEval</td>
+	<td>window.$(&quot;#action-dialog&quot;).dialog(&quot;option&quot;,&quot;title&quot;)</td>
+	<td>Event Details</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#dr-fields-container &gt; legend</td>
+	<td>Action Send Text Message</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#dr-fields-container div.point-detail-container dd.devices</td>
+	<td>${totalDevices}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#dr-fields-container div.point-detail-container dd.initiated</td>
+	<td>${requestBy}</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#action-dialog&quot;).dialog(&quot;close&quot;)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>jumpTextPresent</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

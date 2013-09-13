@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>send_han_text_message</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">send_han_text_message</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>id=menu-systemintelligence</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Event History</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeValue</td>
+	<td>id=view_from</td>
+	<td>currentDate</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menu-smartpoint</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyAttribute</td>
+	<td>id=menu-smartpoint@class</td>
+	<td>alist active</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table td:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#actions-button &gt; span.ui-icon.ui-icon-triangle-1-s</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('a:contains(Send Text Message):last').click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#textMessageHan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=textMessageHan</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=hanMessageDate</td>
+	<td>01/01/2001</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=hanMessageTime</td>
+	<td>12:00pm</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('.ui-dialog-buttonset .ui-button:eq(0)')</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('.ui-dialog-buttonset button:first').click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.formErrorContent</td>
+	<td>Please enter a future date.</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('.ui-dialog-buttonset button:last').click()</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

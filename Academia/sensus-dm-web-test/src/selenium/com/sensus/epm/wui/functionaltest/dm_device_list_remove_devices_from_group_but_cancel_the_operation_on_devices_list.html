@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>remove_devices_from_group_but_cancel_the_operation_on_devices_list</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">remove_devices_from_group_but_cancel_the_operation_on_devices_list</td></tr>
+</thead><tbody>
+<!--#5679-->
+<tr>
+	<td>click</td>
+	<td>link=Devices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setSpeed</td>
+	<td>800</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tbody tr:eq(0) td:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tbody tr:eq(1) td:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#removeFromGroup&quot;, &quot;div.positionHelper&quot;).click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=add-group-form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.ui-dialog-titlebar &gt; #ui-dialog-title-action-dialog</td>
+	<td>Action - Remove from Group</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=group_add_select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=group_add_select_input</td>
+	<td>${groupName}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.ui-dialog-buttonset button:last</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>css=#messaging-main &gt; span</td>
+	<td>We have received your request to Remove Device From Group. View “Event History” for action status.</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td></td>
+	<td>css=#messaging-main &gt; span</td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>delete_without_select</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">delete_without_select</td></tr>
+</thead><tbody>
+<!--#5861-->
+<tr>
+	<td>setTimeout</td>
+	<td>50000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Groups</td>
+	<td>alist active</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.positionHelper ul.fg-menu li a:eq(0)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>0 Groups selected</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${groupCount}) - 1</td>
+	<td>count</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>class=message rounded ui-state-error</td>
+	<td>0 Groups selected</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=group-table_info</td>
+	<td>Showing 1 - ${groupCount} of ${groupCount} |</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=results</td>
+	<td>${groupCount}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Log Out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyAttribute</td>
+	<td>class=message@class</td>
+	<td>message</td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>waitForAttribute</td>
+	<td>css=#menu-dashboard@class</td>
+	<td>alist active</td>
+</tr>
+<tr>
+	<td>verifyAttribute</td>
+	<td>css=#menu-dashboard@class</td>
+	<td>alist active</td>
+</tr>
+<tr>
+	<td>storeCssCount</td>
+	<td>css=#dashboard-summary td a</td>
+	<td>summaries</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>0</td>
+	<td>count</td>
+</tr>
+<tr>
+	<td>while</td>
+	<td>${count} &lt; ${summaries}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=#dashboard-summary td a:eq(${count})</td>
+	<td>amount</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#dashboard-summary td a:eq(${count})</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=results</td>
+	<td>${amount}</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(storedVars['count']) + 1</td>
+	<td>count</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menu-dashboard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyAttribute</td>
+	<td>id=menu-dashboard@class</td>
+	<td>alist active</td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>css=#menu-dashboard@class</td>
+	<td>alist active</td>
+</tr>
+<tr>
+	<td>verifyAttribute</td>
+	<td>css=#menu-dashboard@class</td>
+	<td>alist active</td>
+</tr>
+<tr>
+	<td>endWhile</td>
+	<td></td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

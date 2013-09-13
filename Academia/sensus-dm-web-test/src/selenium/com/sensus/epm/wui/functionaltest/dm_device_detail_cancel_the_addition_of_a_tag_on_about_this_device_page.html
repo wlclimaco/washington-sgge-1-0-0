@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>Cancel the addition of a tag on About this device page</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Cancel the addition of a tag on About this device page</td></tr>
+</thead><tbody>
+<!--#5951-->
+<tr>
+	<td>click</td>
+	<td>id=add-tags</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeCssCount</td>
+	<td>css=.tag-container li</td>
+	<td>qtdElements</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='combo-tag']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tag_add_select_smartpoint_input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('.ui-icon-list-ipt-check:visible').click();</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=tag-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#tags .cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyCssCount</td>
+	<td>css=.tag-container li</td>
+	<td>${qtdElements}</td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>css=.formError</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

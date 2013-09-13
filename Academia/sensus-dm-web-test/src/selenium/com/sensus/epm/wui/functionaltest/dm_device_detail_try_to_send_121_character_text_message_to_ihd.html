@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>try_to_send_121_character_text_message_to_ihd</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">try_to_send_121_character_text_message_to_ihd</td></tr>
+</thead><tbody>
+<!--#8711 and 8712-->
+<tr>
+	<td>click</td>
+	<td>id=menu-smartpoint</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#home-area-network a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#lifecycle_state .checkbox input[value=&quot;JOINED&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#device_subtype .checkbox input[value=&quot;IHD&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeElementPresent</td>
+	<td>css=#smartpoint-table tbody strong</td>
+	<td>device</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${device}</td>
+	<td>label1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tbody strong:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--#Navigate to HAN > Send Text Message-->
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.positionHelper:last&nbsp;&nbsp;ul.fg-menu &gt; li:eq(0) a:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.positionHelper:last&nbsp;&nbsp;ul.fg-menu &gt; li ul a:contains(&quot;Send Text Message&quot;)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=createTextHanForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeSpeed</td>
+	<td>currentSpeed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setSpeed</td>
+	<td>200</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#createTextHanForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=textMessageHan</td>
+	<td>12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=hanMessageTime</td>
+	<td>11:30pm</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//button[@type='button']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.formErrorContent</td>
+	<td>* Maximum 127 characters allowed</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>label1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//button[@type='button'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setSpeed</td>
+	<td>${currentSpeed}</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

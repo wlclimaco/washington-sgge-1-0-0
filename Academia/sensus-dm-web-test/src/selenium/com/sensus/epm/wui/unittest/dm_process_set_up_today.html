@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>set_up_today</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">set_up_today</td></tr>
+</thead><tbody>
+<tr>
+	<td>storeGlobal</td>
+	<td>today-table</td>
+	<td>tableID</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=System Intelligence</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=.preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>css=.preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyAttribute</td>
+	<td>id=menu-systemintelligence@class</td>
+	<td>active</td>
+</tr>
+<tr>
+	<td>verifyTitle</td>
+	<td>Sensus - Manage Electric - System Intelligence</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyAttribute</td>
+	<td>link=Today@class</td>
+	<td>active</td>
+</tr>
+<!--Get current date, format and store on a var-->
+<tr>
+	<td>storeEval</td>
+	<td>(function(){&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var dToday = new Date();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var sToday = dToday.toDateString();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var aToday = sToday.split(&quot; &quot;);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return aToday[1] + &quot; &quot; + aToday[2] + &quot;, &quot; + aToday[3] })();</td>
+	<td>currentDate</td>
+</tr>
+</tbody></table>
+</body>
+</html>

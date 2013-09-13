@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://elara-web/" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<!--#5850 and #5857-->
+<tr>
+	<td>setTimeout</td>
+	<td>50000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#group-table tbody tr:eq(0) td:eq(2) a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=legend-device</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=upload-list</td>
+	<td>${listDeviceID}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-group-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#messaging-main </td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menu-systemintelligence</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Scheduled Events</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#actions div #ajax-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=scheduledEventName</td>
+	<td>001${groupName}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.positionHelper a:contains(&quot;Send Text Message&quot;)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=scheduleEventTime</td>
+	<td>11:30pm</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=textMessageHan</td>
+	<td>Hello World</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=text_message_duration</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>preProgramTime</td>
+	<td>11:30pm</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=Groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=GroupsDiv</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=groupList</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=createAction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=listTable</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=#messaging-main &gt; span.message &gt; strong</td>
+	<td>“001${groupName}”</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menu-group</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=group-table</td>
+	<td></td>
+</tr>
+<!--#5855-->
+<tr>
+	<td>click</td>
+	<td>name=check_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#group-table tbody tr:eq(0) td:eq(8) a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=action-dialog</td>
+	<td>Group “001${groupName}” is assigned to a Scheduled Event. You will need to remove Group “000000000000${groupName}” from the following Scheduled Events before it can be deleted. </td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.ui-button &gt; span.ui-button-text</td>
+	<td></td>
+</tr>
+<tr>
+<td>end$Template$</td>
+<td>
+<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

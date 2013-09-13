@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>create_schedule_return_to_scheduled_events</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">create_schedule_return_to_scheduled_events</td></tr>
+</thead><tbody>
+<!--#Test case number 6090-->
+<!--#Schedule event-->
+<tr>
+	<td>click</td>
+	<td>css=#actions div #ajax-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=scheduledEventName</td>
+	<td>${nameSchedule} 41</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.positionHelper:last a:contains(Send Text Message)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=scheduledEventWhen</td>
+	<td>01/01/2020</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=on-yearly</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=repeatCheckBox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=repeats</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=repeats</td>
+	<td>Yearly</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=date-after-EveryValueYearly</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=date-after-EveryValueYearly</td>
+	<td>01/01/2020</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button:contains(Save)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=textMessageHan</td>
+	<td>Hello World</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=text_message_duration</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=sendLater</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>preProgramTime</td>
+	<td>11:00pm</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=import-devices</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=upload-type-flexnet</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=listSmartPoint</td>
+	<td>${oneNetworkAddress}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=listSmartPoint</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=createAction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=listTable</td>
+	<td></td>
+</tr>
+<!--# Verifying schedule has been created.-->
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main &gt; span.message </td>
+	<td>“${nameSchedule} 41” created successfully. Event will begin *, 2020 at *.</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>${nameSchedule} 41/${columnScheduleName}</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${row}) - new Number(${linesToBeRemoved})</td>
+	<td>temp</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>${temp}</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#listTable.${row}.${columnScheduleName}</td>
+	<td>${nameSchedule} 41</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#listTable.${row}.${columnActionName}</td>
+	<td>Send Text Message</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#listTable.${row}.${columnActionType}</td>
+	<td>HAN</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#listTable.${row}.${columnScheduledBy}</td>
+	<td>${user}</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#listTable.${row}.${columnRepeats}</td>
+	<td>Yearly</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#listTable.${row}.${columnStatus}</td>
+	<td>Active</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${countSchedules})+1</td>
+	<td>temp</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${temp}</td>
+	<td>countSchedules</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>${temp}</td>
+	<td>countSchedules</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=results</td>
+	<td>${countSchedules}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=listTable_info</td>
+	<td>Showing 1 - ${countSchedules} of * |</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#listTable a:contains(${nameSchedule} 41)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=action-dialog</td>
+	<td></td>
+</tr>
+<!--# Verify the data displayed inside the dialog-->
+<tr>
+	<td>verifyText</td>
+	<td>id=repeat-enum</td>
+	<td>Yearly</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Send Text Message</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=div.selected-points table</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('.ui-dialog-titlebar-close:visible').click();</td>
+	<td></td>
+</tr>
+<!--#Click on delete-->
+<tr>
+	<td>mouseOver</td>
+	<td>css=#listTable tr:eq(${row}) td:eq(${columnActions}) a:contains(Actions)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#listTable tr:eq(${row}) td:eq(${columnActions}) div li:contains(Cancel)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<!--# Verify results-->
+<tr>
+	<td>pause</td>
+	<td>2000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=selected</td>
+	<td>Cancel recurring event “${nameSchedule} 41“. This action cannot be undone.</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.ui-dialog-buttonpane:last button:contains(Cancel Event)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td>Schedule was successfully cancelled.</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#messaging-main a.remove</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${countSchedules})-1</td>
+	<td>temp</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${temp}</td>
+	<td>countSchedules</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>${temp}</td>
+	<td>countSchedules</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=results</td>
+	<td>${countSchedules}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=listTable_info</td>
+	<td>Showing 1 - ${countSchedules} of * |</td>
+</tr>
+</tbody></table>
+</body>
+</html>
