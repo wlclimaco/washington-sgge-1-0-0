@@ -1,0 +1,121 @@
+/* =header */
+.electric .application {
+	background-image: url(../images/electric/bg-body.gif);
+}
+.electric #search-form-container {
+	background: #003c2b;
+}
+
+.electric ul.link-list li {
+	background-image: url(../images/electric/bg-sep-text-list.gif);
+}
+
+.electric ul.link-list li.last {
+    background: none repeat scroll 0 0 transparent;
+}
+
+.electric .action-dialog h2 {
+    background: #003C2B;
+}
+
+ /* =tabs */
+.electric #sensus-menu ul.first-of-type li a.active {
+	background:#003c2b;
+}
+
+.electric #sensus-menu ul.first-of-type li a:hover {
+	background:#016d4e;
+}
+
+ /* =table */
+ .electric #kpi-container {
+	margin-top: 8px;
+}
+
+.electric #kpi-container .header .today {
+	color:#000000;
+	border-bottom:1px solid #999999;
+	border-right:2px solid #999999;
+	border-top:3px solid #666666;
+	/* css3	*/
+	background:-moz-linear-gradient(top, #f0f0f0, #dcdbdb);
+	background-image: linear-gradient(to bottom, #f0f0f0 0%, #dcdbdb 100%);
+   	background:linear-gradient(top, #f0f0f0, #dcdbdb);
+   	filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#f0f0f0', EndColorStr='#dcdbdb');
+	text-shadow: 1px 1px 1px #cccccc;
+	font-size: 125%;
+}
+.electric #kpi-container .header .week,
+.electric #dashboard-visualization-container h3 {
+	color:#000000;
+	border-bottom:1px solid #999999;
+	/* css3	*/
+	background:-moz-linear-gradient(top, #dbdbdb, #c8c8c8);
+   	background:linear-gradient(top, #dbdbdb, #c8c8c8);
+   	background-image: linear-gradient(to bottom, #dbdbdb 0%, #c8c8c8 100%);
+   	filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#dbdbdb', EndColorStr='#c8c8c8');
+	text-shadow: 1px 1px 1px #f0f0f0;
+}
+
+.electric #kpi-container .header .month {
+	color:#000000;
+	border-bottom:1px solid #999999;
+	/* css3	*/
+	background:-moz-linear-gradient(top, #cccccc, #bab7b7);
+   	background:linear-gradient(top, #cccccc, #bab7b7);
+   	background-image: linear-gradient(to bottom, #cccccc 0%, #bab7b7 100%);
+   	filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#cccccc', EndColorStr='#bab7b7');
+	text-shadow: 1px 1px 1px #ffffff;
+}
+.electric #kpi-container .subheader .today {background:#f0f0f0;border-right:2px solid #bbbbbb;}
+.electric #kpi-container .subheader .week {background:#f0f0f0;}
+.electric #kpi-container .subheader .month {background:#8db4dc;}
+.electric #kpi-container .today{border-left:1px solid #bbbbbb;}
+.electric #kpi-container tbody .today{border-right:2px solid #cccccc;border-left:1px solid #cccccc;}
+.electric #kpi-container tbody .bottom .today {border-bottom:2px solid #bbbbbb;}
+.electric #kpi-container tbody .alt .today { background: none repeat scroll 0 0 #FAF5DF;}
+.electric #kpi-container .alt td {background:#f0f0f0;}
+.electric #kpi-container .alt td.v-alt {background:#f7f6f6;}
+.electric #kpi-container table .row-title-sub	{
+		background:#eeeeee;
+		border-bottom:1px solid #cccccc;
+		text-align:left;
+}
+.electric #kpi-container table .alt .row-title-sub {background:#dfdede;}
+
+/* LCM Alarm Detail */
+.electric .alarms .row {
+    background: none repeat scroll 0 0 #F9F9F9;
+    margin: 0.15em 0;
+}
+
+.electric .alarms .row .first {
+	background: none repeat scroll 0 0 #CC0000;
+}
+
+.electric .alarms .row .alarms-summary {
+    font-size: 108%;
+    padding: 1.25em 0.5em 0;
+    vertical-align: middle;
+}
+
+.electric .text-button-mute {
+	color: #333333 !important;
+    text-decoration: none;
+}
+
+.electric .text-button-mute:hover {
+	text-decoration: underline;
+}
+
+.electric .alarms .row .first h5 {
+    color: #FFFFFF;
+    font-size: 123.1%;
+    font-weight: normal;
+    padding: 0.5em;
+}
+
+.electric .alarms .row small {
+    display: block;
+    font-size: 77%;
+}

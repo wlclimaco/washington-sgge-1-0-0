@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- ########## MyBatis session factory definitions: ########## -->
+
+	<bean id="action-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:com/sensus/dm/elec/action/dac/mybatis/map/dm-action-mybatis-config.xml" />
+		<property name="dataSource" ref="epmDataSource" />
+	</bean>
+
+	<bean id="customSearch-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:com/sensus/dm/common/device/dac/mybatis/map/dm-customsearch-mybatis-config.xml" />
+		<property name="dataSource" ref="epmDataSource" />
+	</bean>
+
+	<bean id="electricmeter-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:com/sensus/dm/elec/device/dac/mybatis/map/dm-elec-device-mybatis-config.xml" />
+		<property name="dataSource" ref="epmDataSource" />
+	</bean>
+
+	<bean id="device-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:com/sensus/dm/common/device/dac/mybatis/map/dm-common-device-mybatis-config.xml" />
+		<property name="dataSource" ref="epmDataSource" />
+	</bean>
+
+	<bean id="group-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:com/sensus/dm/common/group/dac/mybatis/map/dm-common-group-mybatis-config.xml" />
+		<property name="dataSource" ref="epmDataSource" />
+	</bean>
+
+	<bean id="note-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:com/sensus/dm/common/device/dac/mybatis/map/dm-note-mybatis-config.xml" />
+		<property name="dataSource" ref="epmDataSource" />
+	</bean>
+
+	<bean id="process-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:com/sensus/dm/common/process/dac/mybatis/map/dm-common-process-mybatis-config.xml" />
+		<property name="dataSource" ref="epmDataSource" />
+	</bean>
+
+	<bean id="process-type-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:com/sensus/dm/common/process/dac/mybatis/map/dm-common-process-type-mybatis-config.xml" />
+		<property name="dataSource" ref="epmDataSource" />
+	</bean>
+
+	<bean id="process-summary-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:com/sensus/dm/common/process/dac/mybatis/map/dm-common-process-summary-mybatis-config.xml" />
+		<property name="dataSource" ref="epmDataSource" />
+	</bean>
+
+	<bean id="property-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:com/sensus/dm/common/property/dac/mybatis/map/dm-common-property-mybatis-config.xml" />
+		<property name="dataSource" ref="epmDataSource" />
+	</bean>
+
+	<bean id="schedule-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:com/sensus/dm/common/schedule/dac/mybatis/map/dm-common-schedule-mybatis-config.xml" />
+		<property name="dataSource" ref="epmDataSource" />
+	</bean>
+
+	<bean id="settings-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:com/sensus/dm/elec/settings/dac/mybatis/map/dm-elec-settings-mybatis-config.xml" />
+		<property name="dataSource" ref="epmDataSource" />
+	</bean>
+
+	<bean id="tag-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:com/sensus/dm/common/tag/dac/mybatis/map/dm-common-tag-mybatis-config.xml" />
+		<property name="dataSource" ref="epmDataSource" />
+	</bean>
+
+	<bean id="tenant-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:com/sensus/dm/common/tenant/dac/mybatis/map/dm-common-tenant-mybatis-config.xml" />
+		<property name="dataSource" ref="epmDataSource" />
+	</bean>
+
+	<!-- ########## DAC implementations: ########## -->
+
+	<bean id="actionDACTarget" class="com.sensus.dm.elec.action.dac.mybatis.ActionDACImpl">
+		<property name="sqlSessionFactory" ref="action-sqlSessionFactory" />
+	</bean>
+
+	<bean id="customSearchDACTarget" class="com.sensus.dm.common.device.dac.mybatis.CustomSearchDACImpl">
+		<property name="sqlSessionFactory" ref="customSearch-sqlSessionFactory" />
+	</bean>
+
+	<bean id="electricMeterDACTarget" class="com.sensus.dm.elec.device.dac.mybatis.ElectricMeterDACImpl">
+		<property name="sqlSessionFactory" ref="electricmeter-sqlSessionFactory" />
+	</bean>
+
+	<bean id="deviceDACTarget" class="com.sensus.dm.common.device.dac.mybatis.DeviceDACImpl">
+		<property name="sqlSessionFactory" ref="device-sqlSessionFactory" />
+	</bean>
+
+	<bean id="groupDACTarget" class="com.sensus.dm.common.group.dac.mybatis.GroupDACImpl">
+		<property name="sqlSessionFactory" ref="group-sqlSessionFactory" />
+	</bean>
+
+	<bean id="noteDACTarget" class="com.sensus.dm.common.device.dac.mybatis.NoteDACImpl">
+		<property name="sqlSessionFactory" ref="note-sqlSessionFactory" />
+	</bean>
+
+	<bean id="processDACTarget" class="com.sensus.dm.common.process.dac.mybatis.ProcessDACImpl">
+		<property name="sqlSessionFactory" ref="process-sqlSessionFactory" />
+	</bean>
+
+	<bean id="processTypeDACTarget" class="com.sensus.dm.common.process.dac.mybatis.ProcessTypeDACImpl">
+		<property name="sqlSessionFactory" ref="process-type-sqlSessionFactory" />
+	</bean>
+
+	<bean id="processSummaryDACTarget" class="com.sensus.dm.common.process.dac.mybatis.ProcessSummaryDACImpl">
+		<property name="sqlSessionFactory" ref="process-summary-sqlSessionFactory" />
+	</bean>
+
+	<bean id="propertyDACTarget" class="com.sensus.dm.common.property.dac.mybatis.PropertyDACImpl">
+		<property name="sqlSessionFactory" ref="property-sqlSessionFactory" />
+	</bean>
+
+	<bean id="scheduleDACTarget" class="com.sensus.dm.common.schedule.dac.mybatis.ScheduleDACImpl">
+		<property name="sqlSessionFactory" ref="schedule-sqlSessionFactory" />
+	</bean>
+
+	<bean id="settingsDACTarget" class="com.sensus.dm.elec.settings.dac.mybatis.SettingsDACImpl">
+		<property name="sqlSessionFactory" ref="settings-sqlSessionFactory" />
+	</bean>
+
+	<bean id="tagDACTarget" class="com.sensus.dm.common.tag.dac.mybatis.TagDACImpl">
+		<property name="sqlSessionFactory" ref="tag-sqlSessionFactory" />
+	</bean>
+
+	<bean id="tenantDACTarget" class="com.sensus.dm.common.tenant.dac.mybatis.TenantDACImpl">
+		<property name="sqlSessionFactory" ref="tenant-sqlSessionFactory" />
+	</bean>
+
+	<!-- ######## Water ######### -->
+
+	<bean id="waterMeter-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation"
+			value="classpath:com/sensus/dm/water/device/dac/mybatis/map/dm-water-device-mybatis-config.xml" />
+		<property name="dataSource" ref="epmDataSource" />
+	</bean>
+
+	<bean id="waterMeterDACTarget" class="com.sensus.dm.water.device.dac.mybatis.WaterMeterDACImpl">
+		<property name="sqlSessionFactory" ref="waterMeter-sqlSessionFactory" />
+	</bean>
+
+	<!-- ######## Gas ######### -->
+
+	<bean id="gasMeter-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation"
+			value="classpath:com/sensus/dm/gas/device/dac/mybatis/map/dm-gas-device-mybatis-config.xml" />
+		<property name="dataSource" ref="epmDataSource" />
+	</bean>
+
+	<bean id="gasMeterDACTarget" class="com.sensus.dm.gas.device.dac.mybatis.GasMeterDACImpl">
+		<property name="sqlSessionFactory" ref="gasMeter-sqlSessionFactory" />
+	</bean>
+
+</beans>
