@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+       http://www.w3.org/1999/XSL/Transform
+       http://www.w3.org/1999/XSL/Transform.xsd
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+ 	   http://www.springframework.org/schema/aop
+ 	   http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- Ref to the mbean server -->
+<!-- 	<bean id="mbeanServer" class="org.springframework.jmx.support.MBeanServerFactoryBean"> -->
+<!-- 		<property name="locateExistingServerIfPossible" value="true" /> -->
+<!-- 	</bean> -->
+
+	<!-- EhCache management and statistics -->
+<!-- 	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean"> -->
+<!-- 		<property name="targetClass" value="net.sf.ehcache.management.ManagementService" /> -->
+<!-- 		<property name="targetMethod" value="registerMBeans" /> -->
+<!-- 		<property name="arguments"> -->
+<!-- 			<list> -->
+<!-- 				<ref bean="epmCacheManager" /> -->
+<!-- 				<ref bean="mbeanServer" /> -->
+<!-- 				<value>true</value> -->
+<!-- 				<value>true</value> -->
+<!-- 				<value>true</value> -->
+<!-- 				<value>true</value> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+
+	<!-- EhCache CacheFactoryBean -->
+<!-- 	<bean id="epmCacheFactory" abstract="true" class="org.springframework.cache.ehcache.EhCacheFactoryBean"> -->
+<!-- 		<property name="cacheManager" ref="epmCacheManager" /> -->
+<!-- 	</bean> -->
+
+	<!-- EhCache CacheManager -->
+	<!-- configLocation: Path to EHCache configuration file -->
+<!-- 	<bean id="epmCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"> -->
+<!-- 		<property name="configLocation" value="classpath:sensus-epm-ehcache.xml" /> -->
+<!-- 	</bean> -->
+
+	<!-- Device Type Cache -->
+<!-- 	<bean id="deviceTypeCacheAspect" class="com.sensus.common.util.CacheAOP"> -->
+<!-- 		<property name="cache"> -->
+<!-- 			<bean id="deviceTypeEhCache" parent="epmCacheFactory"> -->
+<!-- 				<property name="cacheName" value="deviceTypeCache" /> -->
+<!-- 			</bean> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+
+	<!-- Lifecycle State Cache -->
+<!-- 	<bean id="lifecycleStateCacheAspect" class="com.sensus.common.util.CacheAOP"> -->
+<!-- 		<property name="cache"> -->
+<!-- 			<bean id="lifecycleStateEhCache" parent="epmCacheFactory"> -->
+<!-- 				<property name="cacheName" value="lifecycleStateCache" /> -->
+<!-- 			</bean> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+
+	<!-- Property Valid Values Cache -->
+<!-- 	<bean id="propertyValidValuesCacheAspect" class="com.sensus.common.util.CacheAOP"> -->
+<!-- 		<property name="cache"> -->
+<!-- 			<bean id="propertyValidValuesEhCache" parent="epmCacheFactory"> -->
+<!-- 				<property name="cacheName" value="propertyValidValuesCache" /> -->
+<!-- 			</bean> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+
+<!-- 	<aop:config> -->
+		<!-- Pointcuts -->
+
+<!-- 		<aop:pointcut id="deviceTypeCacheObject" expression="bean(deviceDACTarget) and execution(* fetchValidDeviceTypes*(..))" /> -->
+<!-- 		<aop:pointcut id="lifecycleStateCacheObject" expression="bean(deviceDACTarget) and execution(* fetchLifecycleStates*(..))" /> -->
+<!-- 		<aop:pointcut id="propertyValidValuesCacheObject" expression="bean(propertyDACTarget) and execution(* fetchPropertyValidValues*(..))" /> -->
+
+		<!-- Aspects -->
+<!-- 		<aop:aspect id="deviceTypeCacheAspects" ref="deviceTypeCacheAspect"> -->
+<!-- 			<aop:around pointcut-ref="deviceTypeCacheObject" method="cacheObject" /> -->
+<!-- 		</aop:aspect> -->
+<!-- 		<aop:aspect id="lifecycleStateCacheAspects" ref="lifecycleStateCacheAspect"> -->
+<!-- 			<aop:around pointcut-ref="lifecycleStateCacheObject" method="cacheObject" /> -->
+<!-- 		</aop:aspect> -->
+<!-- 		<aop:aspect id="propertyValidValuesCacheAspects" ref="propertyValidValuesCacheAspect"> -->
+<!-- 			<aop:around pointcut-ref="propertyValidValuesCacheObject" method="cacheObject" /> -->
+<!-- 		</aop:aspect> -->
+<!-- 	</aop:config> -->
+
+</beans>

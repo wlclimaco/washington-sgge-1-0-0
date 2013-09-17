@@ -1,0 +1,857 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+	<!--
+	     ######################
+	     ##### PROCESSOR ######
+	     ######################
+	-->
+
+	<bean id="csvWriteCellProcessorMacAddress" class="com.sensus.dm.common.base.util.csv.cellprocessor.ConvertMacAddress"/>
+	<bean id="csvWriteCellProcessorPremiseId" class="com.sensus.dm.common.base.util.csv.cellprocessor.ConvertPremiseId"/>
+ 	<bean id="csvWriteCellProcessorParantDeviceId" class="com.sensus.dm.common.base.util.csv.cellprocessor.ConvertParentDeviceId"/>
+ 	<bean id="csvWriteCellProcessorRemoteConnect" class="com.sensus.dm.common.base.util.csv.cellprocessor.ConvertRemoteConnect"/>
+ 	<bean id="csvWriteCellProcessorEventDescription" class="com.sensus.dm.common.base.util.csv.cellprocessor.ConvertEventDescription"/>
+ 	<bean id="csvWriteCellProcessorRelay" class="com.sensus.dm.common.base.util.csv.cellprocessor.ConvertRelay"/>
+ 	<bean id="csvWriteCellProcessorTamperTime" class="com.sensus.dm.common.base.util.csv.cellprocessor.ConvertTamperTime"/>
+ 	<bean id="csvWriteCellProcessorEnrollmentGroup" class="com.sensus.dm.common.base.util.csv.cellprocessor.ConvertEnrollmentGroup"/>
+
+	<!--
+	     ######################
+	     ######## RADIO #######
+	     ######################
+	-->
+
+	<bean id="csvFlexNetIdColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="FLEXNET_ID" />
+		<property name="headerResourceKey" value="dm.elec.device.csv.flexnet.id" />
+		<property name="propertyPath" value="radio.flexNetId" />
+	</bean>
+
+	<bean id="csvNetWorkAddressColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="NETWORK_ADDRESS" />
+		<property name="headerResourceKey" value="dm.elec.device.csv.network.address" />
+		<property name="propertyPath" value="." />
+		<property name="writeCellProcessor" ref="csvWriteCellProcessorMacAddress" />
+	</bean>
+
+	<!--
+	     ######################
+	     ###### LOCATION ######
+	     ######################
+	-->
+
+	<bean id="csvCityColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="CITY_NAME" />
+		<property name="headerResourceKey" value="dm.elec.device.csv.city" />
+		<property name="propertyPath" value="radio.location.city" />
+	</bean>
+
+	<bean id="csvAddressColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="ADDRESS" />
+		<property name="headerResourceKey" value="dm.common.device.csv.address" />
+		<property name="propertyPath" value="radio.location.address" />
+	</bean>
+
+	<bean id="csvZipColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="ZIP_CODE" />
+		<property name="headerResourceKey" value="dm.elec.device.csv.zip" />
+		<property name="propertyPath" value="radio.location.zip" />
+	</bean>
+
+	<bean id="csvLatitudeColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="LATITUDE" />
+		<property name="headerResourceKey" value="dm.elec.device.csv.latitude" />
+		<property name="propertyPath" value="radio.location.latitude" />
+	</bean>
+
+	<bean id="csvLongitudeColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="LONGITUDE" />
+		<property name="headerResourceKey" value="dm.elec.device.csv.longitude" />
+		<property name="propertyPath" value="radio.location.longitude" />
+	</bean>
+
+	<!--
+	     ######################
+	     #### CONFIGURATION ###
+	     ######################
+	-->
+
+	<bean id="csvInstallDateColumn" class="com.sensus.common.csv.CSVColumn" >
+		<property name="name" value="INSTALL_DATE" />
+		<property name="headerResourceKey" value="dm.elec.device.csv.date.added" />
+		<property name="propertyPath" value="configuration.installDate" />
+	</bean>
+
+	<bean id="csvEncryptedColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="ENCRYPTION_STATUS" />
+		<property name="headerResourceKey" value="dm.elec.device.csv.encryption" />
+		<property name="propertyPath" value="configuration.encrypted" />
+	</bean>
+
+	<bean id="csvEncryptionSupportedColumn" class="com.sensus.common.csv.CSVColumn" >
+		<property name="name" value="ENCRYPTION_SUPPORT" />
+		<property name="headerResourceKey" value="dm.elec.device.csv.encryption.supported" />
+		<property name="propertyPath" value="configuration.encryptionSupported" />
+	</bean>
+
+	<bean id="csvPremiseIdColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="PREMISE_ID" />
+		<property name="headerResourceKey" value="dm.elec.device.csv.premise.id" />
+		<property name="propertyPath" value="configuration.premiseId" />
+	</bean>
+
+	<!--
+	     ######################
+	     #### DEVICE MODEL ####
+	     ######################
+	-->
+
+	<bean id="csvModelColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="DESCRIPTION" />
+		<property name="headerResourceKey" value="dm.elec.device.csv.description" />
+		<property name="propertyPath" value="deviceModel.description" />
+	</bean>
+
+	<bean id="csvManufactureColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="MANUFACTURE" />
+		<property name="headerResourceKey" value="dm.elec.device.csv.manufacture" />
+		<property name="propertyPath" value="deviceModel.manufacture" />
+	</bean>
+
+	<!--
+	     ######################
+	     ####### DEVICE #######
+	     ######################
+	-->
+
+	<bean id="csvDeviceIdColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="DEVICE_ID" />
+		<property name="headerResourceKey" value="dm.common.device.csv.device.id" />
+		<property name="propertyPath" value="deviceId" />
+	</bean>
+
+	<bean id="csvDeviceTypeColumn" class="com.sensus.common.csv.CSVColumn" >
+		<property name="name" value="DEVICE_TYPE" />
+		<property name="headerResourceKey" value="dm.elec.device.csv.device.type" />
+		<property name="propertyPath" value="deviceType" />
+	</bean>
+
+	<!--
+	     ######################
+	     ### ELECTRIC METER ###
+	     ######################
+	-->
+
+	<bean id="csvLifecycleStateColumn" class="com.sensus.common.csv.CSVColumn" >
+		<property name="name" value="LIFECYCLE_STATE" />
+		<property name="headerResourceKey" value="dm.elec.device.csv.state" />
+		<property name="propertyPath" value="." />
+	</bean>
+
+	<bean id="csvRemoteConnectStatusColumn" class="com.sensus.common.csv.CSVColumn" >
+		<property name="name" value="REMOTE_DISCONNECT" />
+		<property name="headerResourceKey" value="dm.elec.device.csv.remote.disconnect" />
+		<property name="propertyPath" value="remoteConnectStatusEnum" />
+	</bean>
+
+	<bean id="csvQuarantineColumn" class="com.sensus.common.csv.CSVColumn" >
+		<property name="name" value="QUARANTINE" />
+		<property name="headerResourceKey" value="dm.elec.device.csv.quarantine" />
+		<property name="propertyPath" value="quarantine" />
+	</bean>
+
+	<!--
+	     ######################
+	     ######### LCM ########
+	     ######################
+	-->
+
+	<bean id="csvParentIdColumn" class="com.sensus.common.csv.CSVColumn" >
+		<property name="name" value="PARENT_ID" />
+		<property name="headerResourceKey" value="dm.elec.device.csv.parent.id" />
+		<property name="propertyPath" value="electricMeterFlexNetId" />
+	</bean>
+
+	<bean id="csvDeviceSubTypeLcmColumn" class="com.sensus.common.csv.CSVColumn" >
+		<property name="name" value="DEVICE_SUBTYPE" />
+		<property name="headerResourceKey" value="dm.elec.device.csv.device.subtype" />
+		<property name="propertyPath" value="lcmTypeEnum" />
+	</bean>
+
+	<!--
+	     ######################
+	     ##### HAN DEVICE #####
+	     ######################
+	-->
+
+	<bean id="csvDeviceSubTypeHanDeviceColumn" class="com.sensus.common.csv.CSVColumn" >
+		<property name="name" value="DEVICE_SUBTYPE" />
+		<property name="headerResourceKey" value="dm.elec.device.csv.device.subtype" />
+		<property name="propertyPath" value="hanDeviceTypeEnum" />
+	</bean>
+
+	<!--
+	     ######################
+	     ### WATERGAS METER ###
+	     ######################
+	-->
+
+	<bean id="csvStatusColumn" class="com.sensus.common.csv.CSVColumn" >
+		<property name="name" value="STATUS" />
+		<property name="headerResourceKey" value="dm.water.device.csv.network.status" />
+		<property name="propertyPath" value="status" />
+	</bean>
+
+	<bean id="csvLastHeardColumn" class="com.sensus.common.csv.CSVColumn" >
+		<property name="name" value="LAST_HEARD" />
+		<property name="headerResourceKey" value="dm.water.device.csv.last.heard" />
+		<property name="propertyPath" value="lastHeard" />
+	</bean>
+
+	<bean id="csvAlarmColumn" class="com.sensus.common.csv.CSVColumn" >
+		<property name="name" value="ALARM" />
+		<property name="headerResourceKey" value="dm.water.device.csv.alarm" />
+		<property name="propertyPath" value="firstAlarm.alarmEnum" />
+	</bean>
+
+	<!--
+	     ######################
+	     #### INTERVAL READ ###
+	     ######################
+	-->
+	<bean id="csvSReadingDateColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="READING_DATE" />
+		<property name="headerResourceKey" value="dm.elec.device.csv.intervals" />
+		<property name="propertyPath" value="readingDate" />
+	</bean>
+
+	<!--
+	     ######################
+	     #### DEMAND READ ####
+	     ######################
+	-->
+	<bean id="csvPeakDemandPeakDemandDateColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="PEAK_DEMAND" />
+		<property name="headerResourceKey" value="dm.elec.device.csv.peak.demand" />
+		<property name="propertyPath" value="peakDemand" />
+	</bean>
+
+	<bean id="csvPeakDemandDemandUnitsDateColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="DEMAND_UNITS" />
+		<property name="headerResourceKey" value="dm.elec.device.csv.demand.units" />
+		<property name="propertyPath" value="demandUnits" />
+	</bean>
+
+	<bean id="csvPeakDemandPeakTimeDateColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="PEAK_TIME" />
+		<property name="headerResourceKey" value="dm.elec.device.csv.peak.time" />
+		<property name="propertyPath" value="peakTime" />
+	</bean>
+
+	<bean id="csvPeakDemandReadingDateDateColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="READING_DATE" />
+		<property name="headerResourceKey" value="dm.elec.device.csv.read" />
+		<property name="propertyPath" value="readingDate" />
+	</bean>
+
+	<bean id="csvPeakDemandResetDateDateColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="RESET_DATE" />
+		<property name="headerResourceKey" value="dm.elec.device.csv.last.reset" />
+		<property name="propertyPath" value="resetDate" />
+	</bean>
+
+	<bean id="csvPeakDemandCounterDateColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="COUNTER" />
+		<property name="headerResourceKey" value="dm.elec.device.csv.counter" />
+		<property name="propertyPath" value="counter" />
+	</bean>
+
+	<bean id="csvPeakDemandTierColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="TIER" />
+		<property name="headerResourceKey" value="dm.elec.device.csv.tier" />
+		<property name="propertyPath" value="tier" />
+	</bean>
+
+	<!--
+		 ###############
+		 #### Group ####
+		 ###############
+	-->
+
+	<bean id="csvGroupNameColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="NAME" />
+		<property name="headerResourceKey" value="dm.common.group.csv.name" />
+		<property name="propertyPath" value="name" />
+	</bean>
+
+	<bean id="csvGroupDescriptionColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="DESCRIPTION" />
+		<property name="headerResourceKey" value="dm.common.group.csv.description" />
+		<property name="propertyPath" value="description" />
+	</bean>
+
+	<bean id="csvGroupTypeColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="GROUP_TYPE" />
+		<property name="headerResourceKey" value="dm.common.group.csv.type" />
+		<property name="propertyPath" value="groupTypeEnum" />
+		<property name="propertyPathSetter" value="groupTypeEnum" />
+	</bean>
+
+	<bean id="csvDeviceCountColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="DEVICE_COUNT" />
+		<property name="headerResourceKey" value="dm.common.group.csv.smartpoints" />
+		<property name="propertyPath" value="devicesCount" />
+	</bean>
+
+	<bean id="csvGroupDateAddedColumn" class="com.sensus.common.csv.CSVColumn" >
+		<property name="name" value="DATE_ADDED" />
+		<property name="headerResourceKey" value="dm.common.group.csv.date.added" />
+		<property name="propertyPath" value="createDate" />
+	</bean>
+
+	<!--
+		 ######################
+	     #### Process Item ####
+	     ######################
+	-->
+	<bean id="csvProcessItemStateColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="PROCESS_ITEM_STATE" />
+		<property name="headerResourceKey" value="dm.common.process.csv.state" />
+		<property name="propertyPath" value="ProcessItemStatusEnum" />
+		<property name="propertyPathSetter" value="processItemStatusEnum" />
+	</bean>
+
+	<bean id="csvProcessItemErrorColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="ERROR" />
+		<property name="headerResourceKey" value="dm.common.process.csv.error" />
+		<property name="propertyPath" value="." />
+	</bean>
+
+	<bean id="csvProcessItemDeviceIdColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="DEVICE_ID" />
+		<property name="headerResourceKey" value="dm.common.device.csv.device.id" />
+		<property name="propertyPath" value="device.deviceId" />
+	</bean>
+
+	<bean id="csvProcessItemPremiseIdColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="PREMISE_ID" />
+		<property name="headerResourceKey" value="dm.elec.device.csv.premise.id" />
+		<property name="propertyPath" value="device" />
+		<property name="writeCellProcessor" ref="csvWriteCellProcessorPremiseId" />
+	</bean>
+
+	<bean id="csvProcessItemAddressColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="ADDRESS" />
+		<property name="headerResourceKey" value="dm.common.device.csv.address" />
+		<property name="propertyPath" value="device.radio.location.address" />
+	</bean>
+
+	<bean id="csvProcessItemNetWorkAddressColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="NETWORK_ADDRESS" />
+		<property name="headerResourceKey" value="dm.common.process.csv.network.address" />
+		<property name="propertyPath" value="device" />
+		<property name="writeCellProcessor" ref="csvWriteCellProcessorMacAddress" />
+	</bean>
+
+	<bean id="csvProcessItemParentDeviceColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="PARANT_DEVICE_ID" />
+		<property name="headerResourceKey" value="dm.common.process.csv.parent.device.id" />
+		<property name="propertyPath" value="device" />
+		<property name="writeCellProcessor" ref="csvWriteCellProcessorParantDeviceId" />
+	</bean>
+
+	<bean id="csvProcessItemNetworkStatusColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="NETWORK_STATUS" />
+		<property name="headerResourceKey" value="dm.common.process.csv.network.status" />
+		<property name="propertyPath" value="device" />
+		<property name="writeCellProcessor" ref="csvWriteCellProcessorRemoteConnect" />
+	</bean>
+
+	<bean id="csvProcessItemFullParticipationColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="FULL_PARTICIPATION" />
+		<property name="headerResourceKey" value="dm.common.process.csv.full.participation" />
+		<property name="propertyPath" value="participation" />
+	</bean>
+
+	<bean id="csvProcessItemParticipationColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="PARTICIPATION" />
+		<property name="headerResourceKey" value="dm.common.process.csv.partial.participation" />
+		<property name="propertyPath" value="participation" />
+	</bean>
+
+	<bean id="csvProcessItemOptOutColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="OPT_OUT" />
+		<property name="headerResourceKey" value="dm.common.process.csv.full.opt.out" />
+		<property name="propertyPath" value="participation" />
+	</bean>
+
+	<bean id="csvProcessItemReadValueColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="READ_VALUE" />
+		<property name="headerResourceKey" value="dm.common.process.csv.read.value" />
+		<property name="propertyPath" value="properties" />
+	</bean>
+
+	<bean id="csvProcessItemReadTimeColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="READ_TIME" />
+		<property name="headerResourceKey" value="dm.common.process.csv.read.time" />
+		<property name="propertyPath" value="properties" />
+	</bean>
+
+	<!--
+	    ######################
+ 	    ##### WATER LEAK #####
+	    ######################
+	-->
+
+	<bean id="csvWaterDeviceIdColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="DEVICE_ID" />
+		<property name="headerResourceKey" value="dm.common.device.csv.device.id" />
+		<property name="propertyPath" value="waterMeter.deviceId" />
+	</bean>
+
+	<bean id="csvFlexnetColumn" class="com.sensus.common.csv.CSVColumn" >
+		<property name="name" value="FLEXNET" />
+		<property name="headerResourceKey" value="dm.common.device.csv.flexnet.id" />
+		<property name="propertyPath" value="waterMeter.radio.flexNetId" />
+	</bean>
+
+	<bean id="csvLeakTimeColumn" class="com.sensus.common.csv.CSVColumn" >
+		<property name="name" value="LEAK_TIME" />
+		<property name="headerResourceKey" value="dm.water.device.csv.leak.time" />
+		<property name="propertyPath" value="leakTime" />
+	</bean>
+
+	<bean id="csvRecentConsumptionColumn" class="com.sensus.common.csv.CSVColumn" >
+		<property name="name" value="RECENT_CONSUMPTION" />
+		<property name="headerResourceKey" value="dm.water.device.csv.recent.consumption" />
+		<property name="propertyPath" value="recentConsumption" />
+	</bean>
+
+	<bean id="csvRecentConsumptionPercentageColumn" class="com.sensus.common.csv.CSVColumn" >
+		<property name="name" value="RECENT_CONSUMPTION_PERCENTAGE" />
+		<property name="headerResourceKey" value="dm.water.device.csv.recent.consumption.percentage" />
+		<property name="propertyPath" value="recentConsumptionPercentage" />
+	</bean>
+
+	<bean id="csvPriorConsumptionColumn" class="com.sensus.common.csv.CSVColumn" >
+		<property name="name" value="PRIOR_CONSUMPTION" />
+		<property name="headerResourceKey" value="dm.water.device.csv.prior.consumption" />
+		<property name="propertyPath" value="priorConsumption" />
+	</bean>
+
+	<bean id="csvPriorConsumptionPercentageColumn" class="com.sensus.common.csv.CSVColumn" >
+		<property name="name" value="PRIOR_CONSUMPTION_PERCENTAGE" />
+		<property name="headerResourceKey" value="dm.water.device.csv.prior.consumption.percentage" />
+		<property name="propertyPath" value="priorConsumptionPercentage" />
+	</bean>
+
+	<bean id="csvDailyConsumptionAverageColumn" class="com.sensus.common.csv.CSVColumn" >
+		<property name="name" value="DAILY_CONSUMPTION_AVERAGE" />
+		<property name="headerResourceKey" value="dm.water.device.csv.daily.consumption.average" />
+		<property name="propertyPath" value="dailyConsumptionAverage" />
+	</bean>
+
+
+	<!--
+		 ######################
+	     ###### Today #########
+	     ######################
+ 	-->
+ 	<bean id="csvProcessActionNameColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="ACTION_NAME" />
+		<property name="headerResourceKey" value="dm.common.process.csv.action.name" />
+		<property name="propertyPath" value="." />
+	</bean>
+
+	<bean id="csvProcessActionTypeColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="ACTION_TYPE" />
+		<property name="headerResourceKey" value="dm.common.process.csv.action.type" />
+		<property name="propertyPath" value="." />
+	</bean>
+
+	<bean id="csvProcessEventColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="EVENT" />
+		<property name="headerResourceKey" value="dm.common.process.csv.event" />
+		<property name="propertyPath" value="." />
+		<property name="writeCellProcessor" ref="csvWriteCellProcessorEventDescription" />
+	</bean>
+
+	<bean id="csvProcessDevicesTotalColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="DEVICES_TOTAL" />
+		<property name="headerResourceKey" value="dm.common.process.csv.smartpoints.total" />
+		<property name="propertyPath" value="." />
+	</bean>
+
+	<bean id="csvProcessDevicesFailedColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="DEVICES_FAILED" />
+		<property name="headerResourceKey" value="dm.common.process.csv.smartpoints.failed" />
+		<property name="propertyPath" value="." />
+	</bean>
+
+	<bean id="csvProcessRequestedByColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="REQUESTED_BY" />
+		<property name="headerResourceKey" value="dm.common.process.csv.requested.by" />
+		<property name="propertyPath" value="createUser" />
+	</bean>
+
+	<bean id="csvProcessStartTimeColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="START_TIME" />
+		<property name="headerResourceKey" value="dm.common.process.csv.start.time" />
+		<property name="propertyPath" value="startTime" />
+	</bean>
+
+		<bean id="csvProcessStatusColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="STATUS" />
+		<property name="headerResourceKey" value="dm.common.process.csv.status" />
+		<property name="propertyPath" value="processStatusEnum" />
+	</bean>
+
+	<!--
+		 ######################
+	     ###### schedule ######
+	     ######################
+ 	-->
+
+	<bean id="csvScheduleEventNameColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="EVENT_NAME" />
+		<property name="headerResourceKey" value="dm.common.schedule.csv.event.name" />
+		<property name="propertyPath" value="name" />
+	</bean>
+
+	<bean id="csvScheduleActionNameColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="ACTION_NAME_SCH" />
+		<property name="headerResourceKey" value="dm.common.schedule.csv.action.name" />
+		<property name="propertyPath" value="dmAction.actionType.actionTypeEnum.actionTypeName" />
+	</bean>
+
+	<bean id="csvScheduleActionTypeColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="ACTION_TYPE_SCH" />
+		<property name="headerResourceKey" value="dm.common.schedule.csv.action.type" />
+		<property name="propertyPath" value="dmAction.actionType.actionTypeEnum.actionCategoryEnum.actionTypeCategoryName" />
+	</bean>
+
+	<bean id="csvScheduleScheduleByColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="SCHEDULE_BY" />
+		<property name="headerResourceKey" value="dm.common.schedule.csv.scheduled.by" />
+		<property name="propertyPath" value="modifyUser" />
+	</bean>
+
+	<bean id="csvScheduleDeliverOnColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="DELIVER_ON" />
+		<property name="headerResourceKey" value="dm.common.schedule.csv.deliver.on" />
+		<property name="propertyPath" value="frequency.nextExecution" />
+	</bean>
+
+	<bean id="csvScheduleActionDateColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="ACTION_DATE_SCH" />
+		<property name="headerResourceKey" value="dm.common.schedule.csv.action.date" />
+		<property name="propertyPath" value="properties" />
+	</bean>
+
+	<bean id="csvScheduleFrequencyColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="FREQUENCY" />
+		<property name="headerResourceKey" value="dm.common.schedule.csv.repeats" />
+		<property name="propertyPath" value="frequency.frequencyTypeEnum" />
+	</bean>
+
+	<bean id="csvScheduleDeviceCountColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="DEVICE_COUNT" />
+		<property name="headerResourceKey" value="dm.common.schedule.csv.smartpoints" />
+		<property name="propertyPath" value="dmAction.totalDevices" />
+	</bean>
+
+	<bean id="csvScheduleStatusColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="SCHEDULE_STATUS" />
+		<property name="headerResourceKey" value="dm.common.schedule.csv.status" />
+		<property name="propertyPath" value="statusEnum" />
+	</bean>
+
+	<!--
+	    ######################
+ 	    ####### RELAY ########
+	    ######################
+	-->
+
+	<bean id="csvRelayColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="RELAY" />
+		<property name="headerResourceKey" value="dm.common.lcm.csv.relay" />
+		<property name="propertyPath" value="device" />
+		<property name="writeCellProcessor" ref="csvWriteCellProcessorRelay" />
+	</bean>
+
+	<bean id="csvTamperTimeColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="TAMPER_TIME" />
+		<property name="headerResourceKey" value="dm.common.lcm.csv.tamper.time" />
+		<property name="propertyPath" value="device" />
+		<property name="writeCellProcessor" ref="csvWriteCellProcessorTamperTime" />
+	</bean>
+
+	<bean id="csvDeviceClassColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="DEVICE_CLASS" />
+		<property name="headerResourceKey" value="dm.common.lcm.csv.device.class" />
+		<property name="propertyPath" value="device" />
+	</bean>
+
+	<bean id="csvEnrollmentGroupColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="ENROLLMENT_GROUP" />
+		<property name="headerResourceKey" value="dm.common.lcm.csv.enrollment.group" />
+		<property name="propertyPath" value="device" />
+		<property name="writeCellProcessor" ref="csvWriteCellProcessorEnrollmentGroup" />
+	</bean>
+
+	<bean id="csvRandomizeDurationColumn" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="RANDOMIZE_DURATION" />
+		<property name="headerResourceKey" value="dm.common.lcm.csv.randomize.duration" />
+		<property name="propertyPath" value="device" />
+	</bean>
+
+	<!--
+	     ######################
+	     #### COLUMNS LIST ####
+	     ######################
+	-->
+
+	<util:list id="csvElectricMeterListAllColumns">
+		<ref bean="csvNetWorkAddressColumn" />
+		<ref bean="csvDeviceIdColumn" />
+		<ref bean="csvDeviceTypeColumn" />
+		<ref bean="csvInstallDateColumn" />
+		<ref bean="csvLifecycleStateColumn" />
+		<ref bean="csvEncryptedColumn" />
+		<ref bean="csvEncryptionSupportedColumn" />
+		<ref bean="csvCityColumn" />
+		<ref bean="csvAddressColumn" />
+		<ref bean="csvZipColumn" />
+		<ref bean="csvLatitudeColumn" />
+		<ref bean="csvLongitudeColumn" />
+		<ref bean="csvRemoteConnectStatusColumn" />
+		<ref bean="csvModelColumn" />
+		<ref bean="csvPremiseIdColumn" />
+		<ref bean="csvQuarantineColumn" />
+	</util:list>
+
+	<util:list id="csvLcmListAllColumns">
+		<ref bean="csvNetWorkAddressColumn" />
+		<ref bean="csvDeviceIdColumn" />
+		<ref bean="csvDeviceTypeColumn" />
+		<ref bean="csvDeviceSubTypeLcmColumn" />
+		<ref bean="csvInstallDateColumn" />
+		<ref bean="csvLifecycleStateColumn" />
+		<ref bean="csvCityColumn" />
+		<ref bean="csvAddressColumn" />
+		<ref bean="csvZipColumn" />
+		<ref bean="csvLatitudeColumn" />
+		<ref bean="csvLongitudeColumn" />
+		<ref bean="csvModelColumn" />
+		<ref bean="csvPremiseIdColumn" />
+		<ref bean="csvParentIdColumn" />
+		<ref bean="csvAlarmColumn" />
+	</util:list>
+
+	<util:list id="csvHanDeviceListAllColumns">
+		<ref bean="csvNetWorkAddressColumn" />
+		<ref bean="csvDeviceIdColumn" />
+		<ref bean="csvDeviceTypeColumn" />
+		<ref bean="csvDeviceSubTypeHanDeviceColumn" />
+		<ref bean="csvInstallDateColumn" />
+		<ref bean="csvLifecycleStateColumn" />
+		<ref bean="csvCityColumn" />
+		<ref bean="csvAddressColumn" />
+		<ref bean="csvZipColumn" />
+		<ref bean="csvLatitudeColumn" />
+		<ref bean="csvLongitudeColumn" />
+		<ref bean="csvModelColumn" />
+		<ref bean="csvPremiseIdColumn" />
+		<ref bean="csvParentIdColumn" />
+	</util:list>
+
+	<util:list id="csvWaterMeterListAllColumns">
+		<ref bean="csvNetWorkAddressColumn" />
+		<ref bean="csvDeviceIdColumn" />
+		<ref bean="csvDeviceTypeColumn" />
+		<ref bean="csvInstallDateColumn" />
+		<ref bean="csvEncryptedColumn" />
+		<ref bean="csvEncryptionSupportedColumn" />
+		<ref bean="csvCityColumn" />
+		<ref bean="csvAddressColumn" />
+		<ref bean="csvZipColumn" />
+		<ref bean="csvLatitudeColumn" />
+		<ref bean="csvLongitudeColumn" />
+		<ref bean="csvModelColumn" />
+		<ref bean="csvPremiseIdColumn" />
+		<ref bean="csvQuarantineColumn" />
+		<ref bean="csvStatusColumn" />
+		<ref bean="csvLastHeardColumn" />
+		<ref bean="csvAlarmColumn" />
+	</util:list>
+
+	<util:list id="csvGasMeterListAllColumns">
+		<ref bean="csvNetWorkAddressColumn" />
+		<ref bean="csvDeviceIdColumn" />
+		<ref bean="csvDeviceTypeColumn" />
+		<ref bean="csvInstallDateColumn" />
+		<ref bean="csvEncryptedColumn" />
+		<ref bean="csvEncryptionSupportedColumn" />
+		<ref bean="csvCityColumn" />
+		<ref bean="csvAddressColumn" />
+		<ref bean="csvZipColumn" />
+		<ref bean="csvLatitudeColumn" />
+		<ref bean="csvLongitudeColumn" />
+		<ref bean="csvModelColumn" />
+		<ref bean="csvPremiseIdColumn" />
+		<ref bean="csvQuarantineColumn" />
+		<ref bean="csvStatusColumn" />
+		<ref bean="csvLastHeardColumn" />
+		<ref bean="csvAlarmColumn" />
+	</util:list>
+
+	<util:list id="csvGroupElectricMeterListAllColumns">
+		<ref bean="csvGroupNameColumn" />
+		<ref bean="csvGroupDescriptionColumn" />
+		<ref bean="csvDeviceTypeColumn" />
+		<ref bean="csvGroupTypeColumn" />
+		<ref bean="csvDeviceCountColumn" />
+		<ref bean="csvGroupDateAddedColumn" />
+	</util:list>
+
+	<util:list id="csvProcessItemListAllColumns">
+		<ref bean="csvProcessItemDeviceIdColumn" />
+		<ref bean="csvProcessItemNetWorkAddressColumn" />
+		<ref bean="csvProcessItemPremiseIdColumn" />
+		<ref bean="csvProcessItemAddressColumn" />
+		<ref bean="csvProcessItemStateColumn" />
+		<ref bean="csvProcessItemErrorColumn" />
+	</util:list>
+
+	<util:list id="csvWaterLeakListAllColumns">
+		<ref bean="csvWaterDeviceIdColumn" />
+		<ref bean="csvFlexnetColumn" />
+		<ref bean="csvLeakTimeColumn" />
+		<ref bean="csvRecentConsumptionColumn" />
+		<ref bean="csvRecentConsumptionPercentageColumn" />
+		<ref bean="csvPriorConsumptionColumn" />
+		<ref bean="csvPriorConsumptionPercentageColumn" />
+		<ref bean="csvDailyConsumptionAverageColumn" />
+	</util:list>
+
+	<util:list id="csvCommunicationAllColumns">
+		<ref bean="csvProcessItemStateColumn" />
+		<ref bean="csvProcessItemErrorColumn" />
+		<ref bean="csvProcessItemDeviceIdColumn" />
+		<ref bean="csvProcessItemPremiseIdColumn" />
+		<ref bean="csvProcessItemAddressColumn" />
+		<ref bean="csvProcessItemNetWorkAddressColumn" />
+	</util:list>
+
+	<util:list id="csvImportAllColumns">
+		<ref bean="csvProcessItemStateColumn" />
+		<ref bean="csvProcessItemErrorColumn" />
+		<ref bean="csvProcessItemDeviceIdColumn" />
+		<ref bean="csvProcessItemPremiseIdColumn" />
+		<ref bean="csvProcessItemAddressColumn" />
+		<ref bean="csvProcessItemNetWorkAddressColumn" />
+	</util:list>
+
+	<util:list id="csvDemandResponseAllColumns">
+		<ref bean="csvProcessItemStateColumn" />
+		<ref bean="csvProcessItemErrorColumn" />
+		<ref bean="csvProcessItemDeviceIdColumn" />
+		<ref bean="csvProcessItemPremiseIdColumn" />
+		<ref bean="csvProcessItemAddressColumn" />
+		<ref bean="csvProcessItemNetWorkAddressColumn" />
+		<ref bean="csvProcessItemNetworkStatusColumn" />
+		<ref bean="csvProcessItemParentDeviceColumn" />
+		<ref bean="csvProcessItemFullParticipationColumn" />
+		<ref bean="csvProcessItemParticipationColumn" />
+		<ref bean="csvProcessItemOptOutColumn" />
+	</util:list>
+
+	<util:list id="csvDemandReadAllColumns">
+		<ref bean="csvProcessItemDeviceIdColumn" />
+		<ref bean="csvProcessItemNetWorkAddressColumn" />
+		<ref bean="csvProcessItemPremiseIdColumn" />
+		<ref bean="csvProcessItemReadValueColumn" />
+		<ref bean="csvProcessItemReadTimeColumn" />
+	</util:list>
+
+	<util:list id="csvScheduleAllColumns">
+		<ref bean="csvScheduleEventNameColumn" />
+		<ref bean="csvScheduleActionNameColumn" />
+		<ref bean="csvScheduleActionTypeColumn" />
+		<ref bean="csvScheduleScheduleByColumn" />
+		<ref bean="csvScheduleDeliverOnColumn" />
+		<ref bean="csvScheduleActionDateColumn" />
+		<ref bean="csvScheduleFrequencyColumn" />
+		<ref bean="csvScheduleDeviceCountColumn" />
+		<ref bean="csvScheduleStatusColumn" />
+	</util:list>
+
+	<util:list id="csvProcessTodayAllColumns">
+		<ref bean="csvProcessActionNameColumn"/>
+		<ref bean="csvProcessActionTypeColumn"/>
+		<ref bean="csvProcessEventColumn"/>
+		<ref bean="csvProcessDevicesTotalColumn"/>
+		<ref bean="csvProcessDevicesFailedColumn"/>
+		<ref bean="csvProcessRequestedByColumn"/>
+		<ref bean="csvProcessStartTimeColumn"/>
+		<ref bean="csvProcessStatusColumn"/>
+	</util:list>
+
+	<util:list id="csvScheduleDeviceAllColumns">
+		<ref bean="csvDeviceIdColumn" />
+		<ref bean="csvAddressColumn" />
+		<ref bean="csvNetWorkAddressColumn" />
+	</util:list>
+
+	<!--
+	     ############################
+	     #### INTERVAL READ LIST ####
+	     ############################
+	-->
+	<util:list id="csvIntervalReadListAllColumns">
+		<ref bean="csvSReadingDateColumn" />
+	</util:list>
+
+	<!--
+	     ############################
+	     #### DEMAND READ LIST #####
+	     ############################
+	-->
+	<util:list id="csvPeakDemandListAllColumns">
+		<ref bean="csvPeakDemandTierColumn" />
+		<ref bean="csvPeakDemandPeakDemandDateColumn" />
+		<ref bean="csvPeakDemandDemandUnitsDateColumn" />
+		<ref bean="csvPeakDemandPeakTimeDateColumn" />
+		<ref bean="csvPeakDemandReadingDateDateColumn" />
+		<ref bean="csvPeakDemandResetDateDateColumn" />
+		<ref bean="csvPeakDemandCounterDateColumn" />
+	</util:list>
+
+	<!--
+	    ######################
+ 	    ####### RELAY ########
+	    ######################
+	-->
+
+	<util:list id="csvTamperDetectTimeListAllColumns">
+		<ref bean="csvProcessItemDeviceIdColumn" />
+		<ref bean="csvProcessItemNetWorkAddressColumn" />
+		<ref bean="csvProcessItemPremiseIdColumn" />
+		<ref bean="csvRelayColumn" />
+		<ref bean="csvTamperTimeColumn" />
+	</util:list>
+
+	<util:list id="csvDemandResponseSetupListAllColumns">
+		<ref bean="csvProcessItemDeviceIdColumn" />
+		<ref bean="csvProcessItemNetWorkAddressColumn" />
+		<ref bean="csvRelayColumn" />
+		<ref bean="csvDeviceClassColumn" />
+		<ref bean="csvEnrollmentGroupColumn" />
+		<ref bean="csvRandomizeDurationColumn" />
+	</util:list>
+
+</beans>
