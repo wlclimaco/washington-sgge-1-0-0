@@ -2,7 +2,7 @@
 <%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags'%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<sec:authorize access="hasAnyRole('ROLE_EPM_SERVICE_ELECTRIC', 'ROLE_EPM_SERVICE_WATER', 'ROLE_EPM_SERVICE_GAS') and 
+<sec:authorize access="hasAnyRole('ROLE_EPM_SERVICE_ELECTRIC', 'ROLE_EPM_SERVICE_WATER', 'ROLE_EPM_SERVICE_GAS') and
 	hasAnyRole('ROLE_EPM_ADMIN', 'ROLE_EPM_SYSTEM_OPERATOR', 'ROLE_EPM_CUSTOMER_SUPPORT', 'ROLE_EPM_BILLING_MANAGER')">
 
 	<div id="bd" class="content-container">
@@ -92,23 +92,13 @@
 									<p><spring:message code="commons.pages.blankGroups2" /></p>
 								</div>
 
-								<table id="group-table" class="list side-slide">
-									<thead>
-										<tr>
-											<th class="hide"><span><spring:message code="commons.pages.id" /></span></th>
-											<th><span id="name"><spring:message code="group.page.groupName" /></span></th>
-											<th><span id="description"><spring:message code="commons.pages.description" /></span></th>
-											<th><span id="device_type"><spring:message code="commons.pages.device_type" /></span></th>
-											<th><span id="groupset_type"><spring:message code="commons.pages.type" /></span></th>
-											<th><span id="endpoint_count"><spring:message code="commons.pages.smartPoints" /></span></th>
-											<th><span id="modified_date"><spring:message code="commons.pages.dateModified" /></span></th>
-											<th></th>
-											<th class="hide"></th>
-										</tr>
-									</thead>
-									<tbody>
-									</tbody>
-								</table>
+							<div style="position:relative">
+							  <div style="width:100%;">
+							    <div id="myGrid" style="width:100%;height:500px;"></div>
+							  </div>
+
+
+							</div>
 							</div>
 						</div>
 						<!-- END update container -->

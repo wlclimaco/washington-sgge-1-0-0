@@ -65,153 +65,143 @@ $(document).ready(function() {
 	});
 
 	// Group jQuery Data Table
-	sensus.pages.group.groupTable = $("#group-table").dataTable(sensus.widgets.datatable.setTable({
+	function requiredFieldValidator(value) {
+    if (value == null || value == undefined || !value.length) {
+      return {valid: false, msg: "This is a required field"};
+    } else {
+      return {valid: true, msg: null};
+    }
+  }
 
-		id : "group-table",
-		sAjaxSource : "api/group/fetchAll",
-		<c:choose>
-			<c:when test="${not empty refresh}">
-				oPreLoadResponse : "refresh",
-			</c:when>
-			<c:when test="${empty response}">
-		    	oPreLoadResponse : null,
-		    </c:when>
-		    <c:otherwise>
-		    	oPreLoadResponse : ${response},
-		    </c:otherwise>
-		</c:choose>
-		bPreLoad : true,
-		aColumns : [
-			{sId: "Id",  bVisible : false},
-			{sId: "groupName", sWidth : "5%", bSortable : true},
-			{sId: "groupDescription", sWidth : "5%", bSortable : false},
-			{sId: "deviceType", sWidth : "5%", bSortable : true},
-			{sId: "groupType", sWidth : "2%", bSortable : true},
-			{sId: "groupSmartPointCount", sWidth : "5%", bSortable : true},
-			{sId: "groupDateAdded", sWidth : "5%", bSortable : true},
-			{sId: "groupRemoveGroup", sWidth : "5%", bSortable : false},
-			{sId: "hanDeviceType", bVisible : false}
-		],
+  var grid;
+  var data = [];
+  var columns = [
+    {id: "title", name: "Title", field: "title", width: 120, cssClass: "cell-title", editor: Slick.Editors.Text, validator: requiredFieldValidator},
+    {id: "desc", name: "Description", field: "description", width: 100, editor: Slick.Editors.Text},
+    {id: "duration", name: "Duration", field: "duration", editor: Slick.Editors.Text},
+    {id: "percent", name: "% Complete", field: "percentComplete", width: 80, resizable: false, formatter: Slick.Formatters.PercentCompleteBar, editor: Slick.Editors.PercentComplete},
+    {id: "start", name: "Start", field: "start", minWidth: 60, editor: Slick.Editors.Date},
+    {id: "finish", name: "Finish", field: "finish", minWidth: 60, editor: Slick.Editors.Date},
+    {id: "effort-driven", name: "Effort Driven", width: 80, minWidth: 20, maxWidth: 80, cssClass: "cell-effort-driven", field: "effortDriven", formatter: Slick.Formatters.Checkmark, editor: Slick.Editors.Checkbox},
+	{id: "finishi", name: "Finishi", field: "finishi", minWidth: 60, formatter: Slick.Formatters.Button},
+	{id: "pesquisa", name: "Pesquisa", field: "pesquisa", minWidth: 300, formatter: Slick.Formatters.Pesquisa}
+  ];
+  var options = {
+    editable: true,
+    enableAddRow: true,
+    enableCellNavigation: true,
+    asyncEditorLoading: false,
+    autoEdit: false
+  };
 
-		oSettings : {
-			oRequest : InquiryGroupRequest,
-			sortEnum : 'GroupColumnEnum',
-			fnRequest : sensus.pages.group.fnRequestAction,
-			sResponseObj : 'groups',
-			aColumns : ['id', 'name', 'description', 'deviceType', 'groupTypeEnum', 'devicesCount', 'createDate', '', 'hanDeviceType'],
-			iMapCol : 6,
-			aSelectedParameters : ["groupName"],
-			iDefaultCol : 1,
-			bCheckbox : true,
-			oDefaultSort : {
-				iCol : 1,
-				sSort : 'asc'
-			}
-			<sec:authorize access="hasAnyRole('ROLE_EPM_ADMIN', 'ROLE_EPM_SYSTEM_OPERATOR')">,
-				edit : {
-					col : "groupName",
-					url : "group/update",
-					bSaveSession : true
-				}
-			</sec:authorize>
-		},
+  function Deletes(id) {
 
-		$exportCSVElement : $csv,
+     data.splice(id, 1);
 
-		fnRowCallback : function(nRow, aData, iDisplayIndex, oColumn) {
+	grid.invalidate();
+	console.log(grid.rows);
 
-			var _get = sensus.locale.get;
+  };
+  function openDetails() {
+    if (grid.getEditorLock().isActive() && !grid.getEditorLock().commitCurrentEdit()) {
+      return;
+    }
 
-			//	Device Type
-			if (sensus.settings.serviceType == sensus.constants.services.electric.name) {
+    var $modal = $("<div class='item-details-form'></div>");
 
-				$("td:eq(" + oColumn.deviceType + ")", nRow).html(
-						_get("commons.pages." + (aData[oColumn.hanDeviceType] || aData[oColumn.deviceType])));
+    $modal = $("#itemDetailsTemplate")
+        .tmpl({
+          context: grid.getDataItem(grid.getActiveCell().row),
+          columns: columns
+        })
+        .appendTo("body");
 
-			} else {
+    $modal.keydown(function (e) {
+      if (e.which == $.ui.keyCode.ENTER) {
+        grid.getEditController().commitCurrentEdit();
+        e.stopPropagation();
+        e.preventDefault();
+      } else if (e.which == $.ui.keyCode.ESCAPE) {
+        grid.getEditController().cancelCurrentEdit();
+        e.stopPropagation();
+        e.preventDefault();
+      }
+    });
 
-				$("td:eq(" + oColumn.deviceType + ")", nRow).hide();
-			}
+    $modal.find("[data-action=save]").click(function () {
+      grid.getEditController().commitCurrentEdit();
+    });
 
-			// Date Added Column, apply date format
-			$("td:eq(" + oColumn.groupDateAdded + ")", nRow).text($.date.dateFormat(aData[oColumn.groupDateAdded]));
+    $modal.find("[data-action=cancel]").click(function () {
+      grid.getEditController().cancelCurrentEdit();
+    });
 
-			// Column Type, Internacionalization
-			$("td:eq(" + oColumn.groupType + ")", nRow).html(_get("group.page." + aData[oColumn.groupType]));
 
-			// Devices Columns, apply link for Device Page
-			if (aData[oColumn.groupSmartPointCount] > 0) {
+    var containers = $.map(columns, function (c) {
+      return $modal.find("[data-editorid=" + c.id + "]");
+    });
 
-				var deviceType = aData[oColumn.deviceType];
-				var aLink;
+    var compositeEditor = new Slick.CompositeEditor(
+        columns,
+        containers,
+        {
+          destroy: function () {
+            $modal.remove();
+          }
+        }
+    );
 
-				if (deviceType) {
+    grid.editActiveCell(compositeEditor);
+  }
 
-					aLink = ["?device_type=", deviceType, "|&group=", aData[oColumn.Id], "|"];
+  $(function () {
+    for (var i = 0; i < 500; i++) {
+      var d = (data[i] = {});
 
-					var deviceSubType = aData[oColumn.hanDeviceType];
+      d["title"] = "Task " + i;
+      d["description"] = "This is a sample task description.\n  It can be multiline";
+      d["duration"] = "5 days";
+      d["percentComplete"] = Math.round(Math.random() * 100);
+      d["start"] = "01/01/2009";
+      d["finish"] = "01/05/2009";
+      d["effortDriven"] = (i % 5 == 0);
+	  d["effortDriven"] = i;
+	  d["effortDriven"] = i;
+    }
 
-					if (deviceSubType) {
+    grid = new Slick.Grid("#myGrid", data, columns, options);
 
-						aLink.push("&device_subtype=", deviceSubType, "|");
-					}
+    grid.onAddNewRow.subscribe(function (e, args) {
+      var item = args.item;
+      var column = args.column;
+      grid.invalidateRow(data.length);
+      data.push(item);
+      grid.updateRowCount();
+      grid.render();
+    });
 
-				} else {
 
-					aLink = ["?group=", aData[oColumn.Id], "|"];
-				}
+    grid.onValidationError.subscribe(function (e, args) {
+      // handle validation errors originating from the CompositeEditor
+      if (args.editor && (args.editor instanceof Slick.CompositeEditor)) {
+        var err;
+        var idx = args.validationResults.errors.length;
+        while (idx--) {
+          err = args.validationResults.errors[idx];
+          $(err.container).stop(true, true).effect("highlight", {color: "red"});
+        }
+      }
+    });
 
-				$("td:eq(" + oColumn.groupSmartPointCount + ")", nRow).html(
-						["<a class='alist' href='", sensus.util.page.fnFormatURLService(), aLink.join(""), "'>",
-						 $.convertionNumber(aData[oColumn.groupSmartPointCount], false, 0).dvalueConverter, "</a>"].join(""))
-					.addClass("num");
+    grid.setActiveCell(0, 0);
 
-			} else {
+  	$('.button').click(function(e) {
+		e.preventDefault();
+		Deletes($(this).attr("id"));
+	});
 
-				$("td:eq(" + oColumn.groupSmartPointCount + ")", nRow).addClass("num");
 
-				// Map Columns, if 0 devices, remove map dialog link
-				var oMapCol = $("td:eq(" + oColumn.groupSmartPointCount + ")", nRow).prev();
-
-				oMapCol.html("<span class='ui-state-disabled'>" + oMapCol.children().text() + "</span>").unbind("click");
-			}
-
-			<sec:authorize access="hasAnyRole('ROLE_EPM_ADMIN', 'ROLE_EPM_SYSTEM_OPERATOR')">
-
-				$("td:eq(" + oColumn.groupRemoveGroup + ")", nRow).html(
-						["<a class='delete delete_dialog delete_col' href=''>", _get("table.action.delete"), "</a>"].join(""));
-
-			</sec:authorize>
-		},
-
-		fnFooterCallback : function(nRow, aaData, iStart, iEnd, aiDisplay, iRecordsDisplay) {
-
-			var oBlankslate, _get;
-
-			if (aaData.length == 0) {
-
-				oBlankslate = $(".blankslate");
-				_get = sensus.locale.get;
-
-				if ($(".filter-container span.remove").length) {
-
-					oBlankslate.find("h5").text(_get("commons.pages.blankResult"));
-					oBlankslate.find("p").text(_get("commons.pages.removefilters"));
-
-				} else {
-
-					oBlankslate.find("h5").text(_get("commons.pages.blankGroups"));
-					oBlankslate.find("p").text(_get("commons.pages.blankGroups2"));
-				}
-			}
-
-			if (sensus.settings.serviceType != sensus.constants.services.electric.name) {
-
-				$("#device_type").parent().hide();
-			}
-		}
-
-	}));
+  })
 
 	// Column Delete Event
 	<sec:authorize access="hasAnyRole('ROLE_EPM_ADMIN', 'ROLE_EPM_SYSTEM_OPERATOR')">
