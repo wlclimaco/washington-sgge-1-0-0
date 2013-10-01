@@ -14,6 +14,11 @@ $(document).ready(function() {
 		head.js("styles/global_styles.css");
 		head.js("thirdparty/jquery/styles/chosen.css");
 		head.js("thirdparty/jquery/styles/jquery.bubblepopup.v2.3.1.css");
+		head.js("thirdparty/jquery/SlickGrid/slick.grid.css");
+	//	head.js("thirdparty/jquery/SlickGrid/css/smoothness/jquery-ui-1.8.16.custom.css");
+		head.js("thirdparty/jquery/SlickGrid/examples/examples.css");
+		head.js("thirdparty/jquery/SlickGrid/controls/slick.pager.css");
+		head.js("thirdparty/jquery/SlickGrid/controls/slick.columnpicker.css");
 		head.js("styles/" + service.toLowerCase() + "_styles.css");
 
 		$.ajax({
