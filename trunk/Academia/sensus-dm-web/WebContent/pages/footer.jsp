@@ -3,33 +3,27 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix='c' uri='http://java.sun.com/jstl/core_rt' %>
 
-<sec:authorize access="hasAnyRole('ROLE_EPM_SERVICE_ELECTRIC', 'ROLE_EPM_SERVICE_WATER', 'ROLE_EPM_SERVICE_GAS') and 
+<sec:authorize access="hasAnyRole('ROLE_EPM_SERVICE_ELECTRIC', 'ROLE_EPM_SERVICE_WATER', 'ROLE_EPM_SERVICE_GAS') and
 	hasAnyRole('ROLE_EPM_ADMIN', 'ROLE_EPM_SYSTEM_OPERATOR', 'ROLE_EPM_CUSTOMER_SUPPORT', 'ROLE_EPM_BILLING_MANAGER')">
 
 	<%-- START Footer --%>
 	<div id="ft" class="yui-g clearfix">
-		<div class="yui-u first"><%-- Footer address section --%>
-			<div class="vcard">
-				<div class="fn org">&copy;<span>${currentYear}</span>
-					<spring:message code="company.org" />
-				</div>
-				<div class="adr">
-					<div class="street-address">
-
-					</div>
-					<div>
-						<span class="locality">
-
-						</span>
-						<span class="region"></span>
-						<span class="postal-code"></span>
-					</div>
-					<div class="country-name"></div>
-					<p class="version"><span id="version-number"></span> <spring:message code="commons.pages.build" /> <span id="build-number"></span></p>
-				</div>
-			</div>
+			<section id="copyright" class="container clearfix headerFooter">
+			  <div class="span12">
+				<p>© Faceboock 2012. All Rights Reserved. </p>
+				<ul class="social">
+				  <li class="facebook"><a href="#">facebook</a></li>
+				  <li class="twitter"><a href="#">twitter</a></li>
+				  <li class="skype"><a href="#">Skype</a></li>
+				  <li class="googleplus"><a href="#">googleplus</a></li>
+				  <li class="flickr"><a href="#">flickr</a></li>
+				  <li class="youtube"><a href="#">youtube</a></li>
+				  <li class="rss"><a href="#">rss</a></li>
+				  <li class="email"><a href="#">flickr</a></li>
+				</ul>
+			  </div>
+			</section>
 		</div>
 		<%-- END Footer --%>
-	</div>
 
 </sec:authorize>

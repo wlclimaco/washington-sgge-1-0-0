@@ -1,0 +1,133 @@
+/*
+Facebook framework
+1. Reset
+2. Grid system (810px)
+3. Clearing
+*/
+
+/*----------------------------------------*/
+/*----- 1. Reset -----*/
+/*----------------------------------------*/
+/* From - http://meyerweb.com/eric/tools/css/reset/  v2.0 | 20110126*/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, nav, nav, output, ruby, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after, q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*----------------------------------------*/
+/*----- 2. Grid for 810px -----*/
+/*----------------------------------------*/
+.row {
+	margin-left: -18px;
+ *zoom: 1;
+}
+.row:before, .row:after {
+	display: table;
+	line-height: 0;
+	content: "";
+}
+.row:after {
+	clear: both;
+}
+
+[class*="span"] {
+ float: left;
+ min-height: 1px;
+margin-left: 18px;
+
+}
+.container {
+	position: relative;
+	width: 1024px;
+	margin: 0 auto;
+
+}
+.span12 {
+	width: 95%;
+}
+.span11 {
+	width: 708px;
+}
+.span10 {
+	width: 642px;
+}
+.span9 {
+	width: 576px;
+}
+.span8 {
+	width: 510px;
+}
+.span7 {
+	width: 444px;
+}
+.span6 {
+	width: 378px;
+}
+.span5 {
+	width: 312px;
+}
+.span4 {
+	width: 246px;
+}
+.span3 {
+	width: 180px;
+}
+.span2 {
+	width: 114px;
+}
+.span1 {
+	width: 48px;
+}
+
+.headerFooter {
+	width: 98%!Important;
+}
+
+.csspossition {
+position:relative;
+left:1px;
+top:12px;
+background-color:#ff0000;
+}
+
+.alpha { margin-left:0;}
+/*----------------------------------------*/
+/*----- 3. Clearing -----*/
+/*----------------------------------------*/
+/* Self Clearing Goodness */
+.clearfix {
+ *zoom: 1;
+}
+.clearfix:before, .clearfix:after {
+	display: table;
+	line-height: 0;
+	content: "";
+}
+.clearfix:after {
+	clear: both;
+}
