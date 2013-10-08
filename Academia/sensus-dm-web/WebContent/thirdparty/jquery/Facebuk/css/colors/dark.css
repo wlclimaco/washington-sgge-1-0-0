@@ -1,0 +1,131 @@
+body {
+	background: #fff;
+	color:#fff;
+}
+.content, #slider {
+	background:url(../../img/dark-r.jpg);
+}
+#header {
+	background:#333;
+}
+h1, h2, h3, h4, h5, h6 {
+	color: #fff;
+}
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+	color: #444444;
+}
+a:link, a:visited {
+	color: #FCEE21;
+}
+a:hover {
+	color: #fff;
+}
+.item a {
+	color:#000;
+}
+.h3s2 a {
+	color:#FCEE21;
+}
+.h3s2 a:hover {
+	color:#fff;
+}
+.mainNav {
+	color: #777777;
+}
+.mainNav li {
+}
+.mainNav ul li a:hover, .mainNav ul li a.selected {
+	color: #fff;
+	background: rgba(0, 0, 0, 0.35) url(../img/tab-underlay.png) repeat-x 0 0;
+}
+.mainNav ul li.homeLink a {
+	background:#FCEE21;
+	color: #000 !important;
+}
+.colored {
+	color: #444444;
+}
+#slider {
+	border-top: 0px solid rgba(255, 255, 255, .5);
+}
+.slider-text-image h1 {
+	color:#444444;
+}
+.services .item:hover h3 a, .services .item.active h3 a {
+	color:#fff !important;
+}
+.services .item .square2:hover, .services .item .square:hover, .services .item:hover .square {
+	background:#FCEE21;
+}
+.services .item:hover img {
+	-webkit-filter: invert(1);
+	-moz-filter: invert(1);
+	filter: invert(1);
+}
+.accordion dd {
+	color:#000;
+}
+.accordion a:hover {
+	color:#444444
+}
+h2 {
+	color:#FCEE21;
+}
+.slider-text-image h1 {
+	color: white;
+	text-shadow: 0px 3px 1px #000;
+}
+.slider-text-image p {
+	color:#fff;
+}
+.services .item .square {
+	background: #000;
+}
+.mainNav ul li.active a {
+	color: #444444;
+}
+.slider-testimonial h6 {
+	color: #fff !important;
+	font-weight:bold;
+}
+.pricing {
+	color:#000;
+}
+.pricing .well.highlighted {
+	border:1px solid #FCEE21;
+}
+.meter > span {
+	background: #FCEE21;
+}
+.meta {
+	color: #fff;
+}
+.als-container {
+	color:#fff;
+}
+.nav-tabs > li > a {
+	background:#FCEE21;
+	color: #000;
+}
+.contactform {
+	color:#fff;
+}
+#portfolio-filter li a:hover, #portfolio-filter li a.current {
+	border-bottom: 3px solid #FCEE21;
+}
+#portfolio-filter li a, #portfolio-filter li a:hover, #portfolio-filter li a.current {
+	color:#fff;
+}
+#portfolio-list li:hover {
+	border-bottom:1px solid #444444;
+}
+#portfolio-list li .title {
+	color: #444444;
+}
+.heading1 {
+	color:#444444;
+}
+.button.color {
+	background:#FCEE21;
+	color:#000;
+}

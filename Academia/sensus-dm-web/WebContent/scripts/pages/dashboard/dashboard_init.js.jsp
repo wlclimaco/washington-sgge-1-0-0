@@ -7,22 +7,6 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 
-			<c:choose>
-				<c:when test="${empty response}">
-					var oResponse = null;
-				</c:when>
-				<c:otherwise>
-					var oResponse = ${response};
-				</c:otherwise>
-			</c:choose>
-
-			sensus.util.page.initMessaging();
-
-			// Load Content Modules
-			sensus.modules.dashboard.loadContentModules(oResponse, sensus.settings.oDeviceTypeParameters.dashboardUiModules);
-
-			$(".button").button();
-
 			sensus.util.page.stopGlobalProgressBar();
 		});
 	</script>

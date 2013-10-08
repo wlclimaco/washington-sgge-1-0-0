@@ -13,7 +13,6 @@
 	<bean id="actionBCLTarget" class="com.sensus.dm.elec.action.bcl.impl.ActionBCLImpl">
 		<property name="actionDAC" ref="actionDACTarget" />
 		<property name="tempUploadFilePath" value="${uploadcsv.temp.file.path}" />
-		<property name="actionProcessor" ref="actionProcessorTarget" />
 		<property name="electricMeterBCL" ref="electricMeterBCLTarget" />
 		<property name="deviceBCL" ref="deviceBCLTarget" />
 		<property name="processBCL" ref="processBCLTarget" />
@@ -158,17 +157,7 @@
 
 	<bean id="actionProcessorValidatorTarget" class="com.sensus.dm.elec.action.bcl.impl.DMActionProcessorValidator" />
 
-	<bean id="actionProcessorTarget" class="com.sensus.dm.elec.action.bcl.impl.DMActionProcessor">
-		<property name="processBCL" ref="processBCLTarget" />
-		<property name="meterActionProcessor" ref="meterActionProcessorTarget" />
-		<property name="hanActionProcessor" ref="hanActionProcessorTarget" />
-		<property name="electricMeterBCL" ref="electricMeterBCLTarget" />
-		<property name="processSummaryBCL" ref="processSummaryBCLTarget" />
-		<property name="validator" ref="actionProcessorValidatorTarget" />
-	</bean>
-
 	<bean id="hanActionProcessorTarget" class="com.sensus.dm.elec.action.bcl.impl.HanActionProcessor">
-		<property name="hanService" ref="bcf.hanService" />
 		<property name="electricMeterBCL" ref="electricMeterBCLTarget" />
 		<property name="deviceBCL" ref="deviceBCLTarget" />
 		<property name="processBCL" ref="processBCLTarget" />
