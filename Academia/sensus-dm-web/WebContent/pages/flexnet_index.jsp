@@ -2,7 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags'%>
 
-<sec:authorize access="hasAnyRole('ROLE_EPM_SERVICE_ELECTRIC', 'ROLE_EPM_SERVICE_WATER', 'ROLE_EPM_SERVICE_GAS') and 
+<sec:authorize access="hasAnyRole('ROLE_EPM_SERVICE_ELECTRIC', 'ROLE_EPM_SERVICE_WATER', 'ROLE_EPM_SERVICE_GAS') and
 	hasAnyRole('ROLE_EPM_ADMIN', 'ROLE_EPM_SYSTEM_OPERATOR', 'ROLE_EPM_CUSTOMER_SUPPORT', 'ROLE_EPM_BILLING_MANAGER')">
 
 	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
@@ -29,6 +29,43 @@
 					<div class="logo yui-g first">
 						<h1><spring:message code="breadcrumbs.label.customer" /></h1>
 					</div>
+
+					<form id="search-form-container" class="rounded">
+						<div class="search-input-container yui-u first">
+							<div id="search-label-container">
+								<a tabindex="1" href="#labelOptions" class="fg-button fg-button-icon-right ui-widget ui-state-default" id="search-label">
+									<span class="ui-icon ui-icon-triangle-1-s"></span>
+									<input id="search-type" value="DEVICE_ID" type="hidden">
+									<span><spring:message code="commons.pages.deviceId"/></span>
+								</a>
+								<div id="labelOptions" class="hidden">
+									<ul>
+										<li class="hide">
+											<a href="#" class="action-option" id="device-id">
+												<input value="DEVICE_ID" type="hidden">
+												<span><spring:message code="commons.pages.deviceId"/></span>
+											</a>
+										</li>
+										<li>
+											<a href="#" class="action-option" id="network-address">
+												<input value="NETWORK_ADDRESS" type="hidden" />
+												<span><spring:message code="commons.pages.networkAddress"/></span>
+											</a>
+										</li>
+										<li>
+											<a href="#" class="action-option" id="premise-id">
+												<input value="PREMISE_ID" type="hidden" />
+												<span><spring:message code="commons.pages.premiseId"/></span>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						<input type="text" id="search-text" value="" />
+
+						</div>
+					</form>
+
 					<div class="yui-g user-settings">
 						<ul class="link-list">
 							<li><spring:message code="header.label.welcome" />[NAME]</li>

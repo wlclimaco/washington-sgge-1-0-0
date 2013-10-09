@@ -32,14 +32,6 @@
 </head>
 <body>
 
-    <div class="span6 csspossition">
-      <div class="item csspossition">
-        <div class="square"><a href="services.html"><img src="thirdparty/jquery/Facebuk/img/icons/branding.png" alt="" /></a></div>
-        <h3><a href="services.html">Branding</a></h3>
-        <p> Designing graphic guidelines with possible variation on multi-support. </p>
-      </div>
-    </div>
-
 <!-- header starts
 ================================================== -->
 
