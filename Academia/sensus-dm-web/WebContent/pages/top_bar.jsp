@@ -9,6 +9,11 @@
 	<div class="logo yui-u first">
 		<h1></h1>
 		<h2 class="hide-settings"></h2>
+		<div class="yui-gc">
+		<form id="search-form-container" class="rounded">
+				<input type="text" id="search-text" value="" />
+		</form>
+	</div>
 	</div>
 	<%-- Login Menu --%>
 	<div class="yui-g user-settings">

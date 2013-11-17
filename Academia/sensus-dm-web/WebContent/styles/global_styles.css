@@ -652,7 +652,6 @@ ul.tabs li a.active {
 	background: #011223;
 	margin-right: 7px;
 	overflow: hidden;
-	padding: 7px 0 7px 7px;
 }
 
 .search-input-container {
@@ -707,10 +706,10 @@ ul.tabs li a.active {
 
 #search-form-container input#search-text {
 	border: 0;
-	float: left;
+	float: right;
 	padding: 7px 7px 7px 7px;
 	margin: 0 5px 0 0;
-	width: 39%;
+	width: 50%;
 }
 
 
@@ -2357,7 +2356,7 @@ table.list.alert th {
     top: 0;
     width: 178px;
     z-index: 2;
-	margin-left: -1.5em;
+	margin-left: 0em !Important;
 }
 
 .slide-filter-form {

@@ -18,17 +18,17 @@ Version: 1
 7. Clients
 8. Sliders
 9. Services
-10. Team 
+10. Team
 11. Footer
 12. Copyright
 13. Tabs
 14. Social Icons
 15. Pricing
-16. Skills Progress Bars 
-17. Portfolio 
-18. Accordion 
-19. Flickr Feed 
-20. Subscription Form 
+16. Skills Progress Bars
+17. Portfolio
+18. Accordion
+19. Flickr Feed
+20. Subscription Form
 21. Contact Form
 22. Carousel
 23. Purchase Panel
@@ -941,7 +941,7 @@ ul.team li:hover img {
 /*----------------------------------------*/
 /*----- 18. Accordion -----*/
 /*----------------------------------------*/
-	
+
 .accordion {
 	width:96%;
 }
@@ -1148,6 +1148,7 @@ input[type="text"]:hover, input[type="text"]:focus, input[type="name"]:hover, in
 	margin:0 0px 20px 20px;
 	padding:20px 0;
 	background: #fff;
+	width:98% !important;
 	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
 	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);

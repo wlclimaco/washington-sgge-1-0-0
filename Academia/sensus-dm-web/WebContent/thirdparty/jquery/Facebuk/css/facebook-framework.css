@@ -83,8 +83,21 @@ margin-left: 18px;
 	width: 510px;
 }
 .span7 {
-	width: 444px;
+	width: 750px;
+	position: absolute!important;
+	top: 0px!important;
+	left: 211px!important;
+	alignment-adjust:central;
+
+	alignment-baseline:central;
+
+	height:900px;
+
+	overflow: visible;
+
+
 }
+
 .span6 {
 	width: 378px;
 }
@@ -102,6 +115,9 @@ margin-left: 18px;
 }
 .span1 {
 	width: 48px;
+	position: relative;
+	top: 80 px;
+	left: 180 px;
 }
 
 .headerFooter {
@@ -109,10 +125,10 @@ margin-left: 18px;
 }
 
 .csspossition {
-position:relative;
-left:296px;
-top:1px;
-background-color:#ff0000;
+	position:relative;
+	left:296px;
+	top:1px;
+	background-color:#FFFFFF;
 }
 
 .alpha { margin-left:0;}
