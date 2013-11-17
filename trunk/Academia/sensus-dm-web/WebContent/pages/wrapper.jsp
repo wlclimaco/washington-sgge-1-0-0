@@ -22,10 +22,100 @@
 </div>
 <%-- END Header 2--%>
 
-<%-- START Page Content --%>
-<div id="bd" class="content-container">
-	<div id="load"><%-- Page Content --%> </div>
-</div>
+<link rel="shortcut icon" href="thirdparty/jquery/Facebuk/img/icons/favicon.ico">
+<link rel="apple-touch-icon" href="thirdparty/jquery/Facebuk/img/icons/apple-touch-icon.png">
+<!--style sheet-->
+
+
+<!--[if IE 7]>
+  	<link rel="stylesheet" href="css/font-awesome-ie7.css">
+  <![endif]-->
+
+<!--jquery libraries / others are at the bottom-->
+<script src="thirdparty/jquery/Facebuk/js/modernizr.js" type="text/javascript"></script>
+</head>
+<body>
+
+<!-- header starts
+================================================== -->
+
+<!-- header ends
+================================================== -->
+<!-- slider starts
+================================================== -->
+
+<!-- slider ends
+================================================== -->
+<!-- content starts
+================================================== -->
+<section class="content dark container clearfix">
+  <div class="services">
+
+  <!-- item 2 -->
+    <div class="span1">
+
+			<ul class="settings-nav views-vert"><h4>Menu</h4><div class="side-slide-toggle"><span class="hide-side-slide ui-icon ui-icon-arrowthick-1-w" style="display: block;"></span><span style="display: none;" class="show-side-slide ui-icon ui-icon-arrowthick-1-e"></span></div>
+				<li>
+					<a href="Serie" class="linkTab">Cadastro Academia</a>
+				</li>
+				<li>
+					<a href="Serie" class="linkTab">Comunidades</a>
+				</li>
+				<li>
+					<a href="Serie" class="linkTab">Cadastro Dieta</a>
+				</li>
+				<li>
+					<a href="Serie" class="linkTab">Fotos</a>
+				</li>
+				<li>
+					<a href="Serie" class="linkTab">Cadastro Medidas</a>
+				</li>
+				<li>
+					<a href="Serie" class="linkTab">Cadastro Serie</a>
+				</li>
+				<li>
+					<a href="Serie" class="linkTab">Cadastro Suplementação</a>
+				</li>
+				<li>
+					<a href="Serie" class="linkTab">Resultados</a>
+				</li>
+			</ul>
+
+    </div>
+    <!-- item 1 -->
+    <div class="span7">
+      <div class="item">
+       <div id="bd" class="content-container">
+			<div id="load"><%-- Page Content --%> </div>
+			<div id="load"><%-- Page Content --%> </div>
+		</div>
+      </div>
+    </div>
+    <!-- End -->
+
+
+
+
+  </div>
+  <!-- End Services -->
+<section>
+<section class="content dark container clearfix">
+  <div class="purchase">
+    <div class="span9">
+      <h2>Contrary to popular belief simply random text.</h2>
+      <p>Lorem Ipsum is simply dummy text of the printing industry.</p>
+    </div>
+    <div class="span3 alpha"> <a href="#" class="button medium color">Purchase Now</a> </div>
+  </div>
+</section>
+
+
+
+
+
+
+<%--                  2 --%>
+
 
 <div id="action-dialog" style="display: none"></div>
 <div id="action-dialog-lrp" style="display: none"></div>
