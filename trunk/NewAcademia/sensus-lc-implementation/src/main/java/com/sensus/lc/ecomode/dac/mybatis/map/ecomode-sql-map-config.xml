@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<settings>
+		<setting name="lazyLoadingEnabled" value="false" />
+	</settings>
+
+	<typeAliases>
+
+
+		<!-- CBOF framework objects -->
+		<typeAlias alias="Device" 						type="com.sensus.cbof.model.Device" />
+		<typeAlias alias="Radio" 						type="com.sensus.cbof.model.Radio" />
+		<typeAlias alias="Location"						type="com.sensus.cbof.model.Location" />
+		<typeAlias alias="TimeZoneInfo"	  			    type="com.sensus.cbof.model.TimeZoneInfo" />
+
+		<!-- EcoMode mapping -->
+		<typeAlias alias="Light" 						type="com.sensus.lc.light.model.Light"/>
+		<typeAlias alias="Consumption" 					type="com.sensus.lc.light.model.Consumption" />
+		<typeAlias alias="InquiryEcoModeRequest" 		type="com.sensus.lc.ecomode.model.request.InquiryEcoModeRequest"/>
+		<typeAlias alias="EcoModeRequest" 		        type="com.sensus.lc.ecomode.model.request.EcoModeRequest"/>
+
+	</typeAliases>
+
+	<mappers>
+    	<mapper resource="com/sensus/lc/ecomode/dac/mybatis/map/ecomode.xml"/>
+    	<mapper resource="com/sensus/lc/light/dac/mybatis/map/device.xml" />
+    </mappers>
+
+</configuration>

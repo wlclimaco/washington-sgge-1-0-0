@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Pessoa">
+
+	<resultMap id="listAllPessoaResults" type="Pessoa" >
+		<result property="cdpessoa" column="cdpessoa" />
+		<result property="cdserie" column="cdserie" />
+		<result property="cdmed" column="cdmed" />
+		<result property="cddieta" column="cddieta" />
+		<result property="cdsuple" column="cdsuple" />
+		<result property="cdamigo" column="cdamigo" />
+		<result property="cdacade" column="cdacade" />
+		<result property="obj" column="obj" />
+		<result property="cdfoto" column="cdfoto" />
+		<result property="dtinicio" column="dtinicio" />
+	</resultMap>
+
+
+	<sql id="allPessoaColumms">
+     	cdpessoa,
+     	cdserie,
+     	cdmed,
+     	cddieta,
+     	cdsuple,
+     	cdamigo,
+     	cdacade,
+     	obj,
+     	cdfoto,
+     	dtinicio,
+	</sql>
+	
+
+	<!-- Insert Pessoa -->
+	<select id="insertPessoa" parameterType="Map" resultType="int">
+		SELECT ins_pessoa (
+		#{cdpessoa,jdbcType=INTEGER},
+		#{cdserie,jdbcType=INTEGER},
+		#{cdmed,jdbcType=INTEGER},
+		#{cddieta,jdbcType=INTEGER},
+		#{cdsuple,jdbcType=INTEGER},
+		#{cdamigo,jdbcType=INTEGER},
+		#{cdacade,jdbcType=INTEGER},
+		#{obj,jdbcType=VARCHAR},
+		#{cdfoto,jdbcType=INTEGER},
+		#{dtinicio,jdbcType=DATE},
+)
+	</select>
+
+	<!-- Update Pessoa -->
+	<select id="updatePessoa" parameterType="Map" resultType="int">
+		SELECT upd_pessoa (
+		#{cdpessoa,jdbcType=INTEGER},
+		#{cdserie,jdbcType=INTEGER},
+		#{cdmed,jdbcType=INTEGER},
+		#{cddieta,jdbcType=INTEGER},
+		#{cdsuple,jdbcType=INTEGER},
+		#{cdamigo,jdbcType=INTEGER},
+		#{cdacade,jdbcType=INTEGER},
+		#{obj,jdbcType=VARCHAR},
+		#{cdfoto,jdbcType=INTEGER},
+		#{dtinicio,jdbcType=DATE},
+)
+	</select>
+
+	<!-- Delete Pessoa -->
+	<select id="deletePessoa" parameterType="Pessoa">
+		SELECT del_pessoa (#{id})
+	</select>
+	
+	<!-- Fetch All Pessoas -->
+	<select id="fetchAllPessoas" parameterType="Map" resultMap="listAllPessoaResults">
+	
+		SELECT  <include refid="allPessoaColumms"/>
+		  FROM pessoa
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM pessoa 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Pessoa By type -->
+	<select id="fetchPessoaByType" parameterType="PessoaRequest"  resultMap="listAllPessoaResults" >
+		SELECT  <include refid="allCustomListPessoaColumns"/>
+		  FROM pessoa
+		 WHERE name = #{pessoa.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Pessoa By Id -->
+	<select id="fetchPessoaById" parameterType="Pessoa" resultMap="listAllPessoaResults" >
+		SELECT <include refid="allCustomListPessoaColumns"/>
+		  FROM pessoa
+		 WHERE pessoa_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Pessoa By Id -->
+	<select id="fetchPessoaNameById" parameterType="Pessoa" resultMap="listAllPessoaResults" >
+		SELECT <include refid="allCustomListPessoaColumns"/>
+		  FROM pessoa
+		 WHERE pessoa_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

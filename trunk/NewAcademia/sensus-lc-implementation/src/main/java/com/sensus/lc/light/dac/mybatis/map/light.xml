@@ -1,0 +1,848 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- Base Mybatis configuration for Light queries. -->
+<mapper namespace="Light">
+
+	<!--############################ -->
+	<!--#### Result Maps #### -->
+	<!--############################ -->
+
+	<!-- Note this DeviceResult extends from Device.deviceResult. -->
+	<!-- The assumption is that the light and device tables are ALWAYS read/joined together. -->
+	<!-- ALL OTHER associations are lazy-loaded. -->
+	<resultMap id="LightBaseResult" type="Light" extends="Device.DeviceResult">
+		<result property="protect" column="protected" />
+		<result property="poleId" column="pole_id" />
+		<result property="lightTypeValue" column="light_type" />
+		<result property="intensityValue" column="intensity" />
+		<result property="blinkStatusValue" column="blink_level" />
+		<result property="overrideTypeValue" column="override" />
+		<result property="lifeCycleStateValue" column="lifecycle_state" />
+		<result property="overridePerDate" jdbcType="TIMESTAMP" column="override_per_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler" />
+		<result property="overrideCreateDate" jdbcType="TIMESTAMP" column="override_create_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler" />
+
+		<!-- Ecomode results -->
+		<result property="ecoMode" column="ecomode" />
+		<result property="ecoModeBaseline.replacedTypeValue" column="ecomode_replaced_type" />
+		<result property="ecoModeBaseline.replacedWattage" column="ecomode_replaced_wattage" />
+
+	</resultMap>
+
+	<resultMap id="LightResultToFetchById" extends="Light.LightBaseResult" type="Light">
+
+		<!-- Lazy-loaded properties -->
+        <association property="lastNotificationHistory" column="notification_history_id" javaType="NotificationHistory" select="NotificationHistory.fetchLastNotificationHistoryByLightId"/>
+		<association property="tenant" column="tenant_id" javaType="Tenant" select="Tenant.fetchById" />
+		<association property="lastOperationalData" column="light_id" javaType="LastOperationalData" select="LastOperationalData.fetchById" />
+		<association property="lightSchedule" column="light_id" javaType="LightSchedule" select="LightSchedule.fetchById" />
+		<association property="lastConsumption" column="light_id" javaType="Consumption" select="Consumption.fetchLastById" />
+		<association property="eventSchedule" column="light_id" javaType="EventSchedule" select="LightSchedule.fetchEventScheduleById" />
+  		<association property="offsetSchedule" column="light_id" javaType="OffsetSchedule" select="LightSchedule.fetchOffsetScheduleById" />
+
+		<!-- Lazy-loaded properties -->
+		<association property="configuration" column="light_id" javaType="Configuration" select="Configuration.fetchById" />
+
+		<!-- Lazy-loaded collection MUST BE LAST. -->
+		<collection property="consumptions" column="light_id" ofType="Consumption" select="Consumption.fetchAllById" />
+	</resultMap>
+
+	<resultMap id="LightResultToFetchAll" extends="Light.LightBaseResult" type="Light">
+
+		<!-- Last operational data properties -->
+		<result property="lastOperationalData.consumption" column="consumption"/>
+
+		<!-- Notification History properties -->
+		<result property="lastNotificationHistory.id" column="notification_history_id"/>
+		<result property="lastNotificationHistory.lightId" column="light_id"/>
+		<result property="lastNotificationHistory.lifeCycleStateValue" column="lifecycle_state"/>
+		<result property="lastNotificationHistory.notificationTypeValue" column="notification_type"/>
+		<result property="lastNotificationHistory.messageDate" column="message_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="lastNotificationHistory.createDate" column="create_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="lastNotificationHistory.updateDate" column="update_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="lastNotificationHistory.precedenceValue" column="precedence"/>
+		<result property="lastNotificationHistory.simpleNotification" column="simple_notification"/>
+		<result property="lastNotificationHistory.trasactionId" column="notification_transation_id"/>
+
+		<!-- Configuration properties -->
+		<result property="configuration.parentId" column="light_id" />
+		<result property="configuration.housing" column="housing" />
+		<result property="configuration.housingColor" column="housing_color" />
+		<result property="configuration.dimmable" column="dimmable" />
+		<result property="configuration.bulbSerialNumber" column="bulb_serial_number" />
+		<result property="configuration.upperAssemblySerial" column="upper_assembly_serial_number" />
+		<result property="configuration.lowerAssemblySerial" column="lower_assembly_serial_number" />
+		<result property="configuration.lampTypeWattageDimmable" column="lamp_type_wattage_dimmable" />
+		<result property="configuration.firmwareVersion" column="firmware_version" />
+		<result property="configuration.dateAdded" column="date_added" />
+		<result property="configuration.modelNumber" column="model_number" />
+		<result property="configuration.colorTemperature" column="color_temperature" />
+		<result property="configuration.inputVoltageRange" column="input_voltage_range" />
+		<result property="configuration.wattageRating" column="wattage_rating" />
+		<result property="configuration.ballastSerialNumber" column="ballast_serial_number" />
+		<result property="configuration.customerSerialNumber" column="customer_serial_number" />
+		<result property="configuration.manufacturer" column="manufacturer" />
+		<result property="configuration.frequency" column="frequency" />
+		<result property="configuration.lightDriverSerialNumber" column="ballast_serial_number" />
+
+
+		<!-- Alert classification properties -->
+		<collection property="lastNotificationHistory.alertClassifications" resultMap="NotificationHistory.NotificationHistoryAlertResult" />
+	</resultMap>
+
+
+	<!--############################ -->
+	<!--#### Column Definition ##### -->
+	<!--############################ -->
+
+	<!-- All Columns Without Alias to Light -->
+	<sql id="allLightColumnns">
+		light.light_id
+		, light_type
+		, light_state
+		, flexnet_id
+		, tenant_id
+		, address
+		, city
+		, state
+		, zip_code
+		, county
+		, timezone
+		, latitude
+		, longitude
+		, light.lifecycle_state
+		, pole_id
+		, protected
+		, intensity
+		, ecomode
+		, ecomode_replaced_type
+		, ecomode_replaced_wattage
+		, calculate_retroactive_ecomode
+		, blink_level
+		, override_per_date
+		, override_create_date
+		, override
+	</sql>
+	<sql id="allLightColumnnsToFetchLightId">
+		<include refid="allLightColumnns"/>
+		, notification_history_id
+	</sql>
+
+	<sql id="allNotificationHistoryColumns">
+         , nh.precedence
+         , nh.notification_history_id
+         , nh.notification_type
+         , nh.message_date
+         , nh.create_date
+         , nh.update_date
+         , nh.simple_notification
+         , nh.notification_transation_id
+	</sql>
+
+	<sql id="alertSubtypeColumns">
+         , ast.label_key
+	</sql>
+
+	<sql id="lightIdColumnn">
+		light.light_id
+	</sql>
+
+	<sql id="allCastColumns">
+       ,CASE lifecycle_state
+             WHEN 3 THEN 'smartpoint.status.MAINTENANCE'
+             WHEN 4 THEN 'smartpoint.status.DEACTIVATED'
+             WHEN 5 THEN 'smartpoint.status.ACTIVE'
+             ELSE 'smartpoint.status.UNKNOWN'
+        END AS lifecycle_state_i18n
+	</sql>
+
+	<!--############################ -->
+	<!--#### Queries Sort #### -->
+	<!--############################ -->
+	 <sql id="orderByToFetchAllLightsInside">
+	  , ROW_NUMBER() OVER(
+	       PARTITION BY nh.notification_history_id
+	           ORDER BY nh.precedence ASC,
+	                    nh.update_date DESC,
+	                    nha.update_date DESC,
+	                    ast.alert_type_id ASC
+	                   )
+	    AS RowNum
+ 	</sql>
+
+	<sql id="orderByToFetchAllLightsOutside">
+           ORDER BY
+           <if test="sortExpression == null">
+           		precedence ASC,
+           </if>
+           <if test="sortExpression != null">
+            <choose>
+             <when test="sortExpression == 'label_key' or sortExpression == 'label_key ASC'">
+                   precedence ASC,
+                   message_date ASC,
+             </when>
+             <when test="sortExpression == 'label_key DESC'">
+                   precedence DESC,
+                   message_date DESC,
+             </when>
+             <otherwise>
+                   ${sortExpression},
+             </otherwise>
+            </choose>
+           </if>
+           <if test="sortExpression == null">
+              classification_update_date DESC,
+              classification_alert_type ASC,
+           </if>
+           flexnet_id
+	</sql>
+
+	<!--############################ -->
+	<!--#### Insert light #### -->
+	<!--############################ -->
+
+	<!-- Insert Light -->
+	<insert id="InsertLight" parameterType="Light">
+
+		<selectKey resultType="int" keyProperty="id" order="BEFORE">
+			SELECT
+			nextval('light_id_seq') AS id
+		</selectKey>
+
+		INSERT INTO light(
+		light_id
+		, create_user
+		, lifecycle_state
+		, light_state
+		, tenant_id
+		, protected
+		, intensity
+		, blink_level
+		, override
+		, override_per_date
+		, override_create_date
+		, pole_id
+		, light_type
+		, flexnet_id
+		, address
+		, city
+		, state
+		, zip_code
+		, county
+		, latitude
+		, longitude
+		, timezone)
+
+		VALUES (
+		 #{id,jdbcType=INTEGER}
+		,#{createUser,jdbcType=VARCHAR}
+		,#{lifeCycleStateValue,jdbcType=INTEGER}
+		,#{deviceLifeCycleState.value,jdbcType=INTEGER}
+		,#{tenant.id,jdbcType=INTEGER}
+		,#{protect,jdbcType=BOOLEAN}
+		,#{intensityValue,jdbcType=INTEGER}
+		,#{blinkStatusValue,jdbcType=INTEGER}
+		,#{overrideTypeValue,jdbcType=INTEGER}
+		,#{overridePerDate,jdbcType=TIMESTAMP}
+		,#{overrideCreateDate,jdbcType=TIMESTAMP}
+		,#{poleId,jdbcType=VARCHAR}
+		,#{lightTypeValue,jdbcType=INTEGER}
+		,#{radio.flexNetId,jdbcType=INTEGER}
+		<!-- this is necessary to avoid null pointer, because location columns can to be null -->
+		<choose>
+			<when test="radio.location != null">
+				,#{radio.location.address,jdbcType=INTEGER}
+				,#{radio.location.city,jdbcType=VARCHAR}
+				,#{radio.location.state,jdbcType=VARCHAR}
+				,#{radio.location.zip,jdbcType=VARCHAR}
+				,#{radio.location.country,jdbcType=VARCHAR}
+				,#{radio.location.latitude,jdbcType=VARCHAR}
+				,#{radio.location.longitude,jdbcType=VARCHAR}
+				<choose>
+					<when test="radio.location.timeZoneInfo != null and radio.location.timeZoneInfo.timeZone">
+						,#{radio.location.timeZoneInfo.timeZone.ID,jdbcType=VARCHAR}
+					</when>
+					<otherwise>
+						,NULL
+					</otherwise>
+				</choose>
+			</when>
+			<otherwise>
+				,NULL
+				,NULL
+				,NULL
+				,NULL
+				,NULL
+				,NULL
+				,NULL
+				,NULL
+			</otherwise>
+		</choose>
+		)
+	</insert>
+
+	<!--############################ -->
+	<!--#### update light #### -->
+	<!--############################ -->
+
+	<update id="UpdateLight" parameterType="Light">
+
+		UPDATE light
+		<trim prefix="SET" prefixOverrides=",">
+			<if test="lightTypeValue                                                           != null"> light_type =
+				#{lightTypeValue}
+			</if>
+			<if test="poleId             			                                           != null"> ,pole_id =
+			    #{poleId}
+			</if>
+			<if test="protect                                                                  != null"> ,protected =
+				#{protect}
+			</if>
+			<if test="intensityValue                                                           != null"> ,intensity =
+				#{intensityValue}
+			</if>
+			<if test="blinkStatusValue                                                         != null"> ,blink_level =
+				#{blinkStatusValue}
+			</if>
+			<if test="overrideTypeValue                                                        != null"> ,override =
+				#{overrideTypeValue}
+			</if>
+			<if test="overridePerDate                                                          != null"> ,override_per_date =
+				#{overridePerDate}
+			</if>
+			<if test="overrideCreateDate                                                       != null"> ,override_create_date =
+			    #{overrideCreateDate}
+			</if>
+			<if test="lifeCycleStateValue                                                      != null"> ,lifecycle_state =
+				#{lifeCycleStateValue}
+			</if>
+			<if test="deviceLifeCycleState != null and deviceLifeCycleState.value              != null"> ,light_state =
+				#{deviceLifeCycleState.value}
+			</if>
+			<if test="radio.location.address                                                   != null"> ,address =
+			    #{radio.location.address}
+			</if>
+			<if test="radio.location.city                                                      != null"> ,city =
+			    #{radio.location.city}
+			</if>
+			<if test="radio.location.state                                                     != null"> ,state =
+			    #{radio.location.state}
+			</if>
+			<if test="radio.location.zip                                                       != null"> ,zip_code =
+			    #{radio.location.zip}
+			</if>
+			<if test="radio.location.country                                                   != null"> ,county =
+			    #{radio.location.country}
+			</if>
+			<if test="radio.location.timeZoneInfo != null and radio.location.timeZoneInfo.timeZone != null"> ,timezone =
+			    #{radio.location.timeZoneInfo.timeZone.ID}
+			</if>
+			<if test="radio.location.latitude                                                  != null"> ,latitude =
+			    #{radio.location.latitude}
+			</if>
+			<if test="radio.location.longitude                                                 != null"> ,longitude =
+			    #{radio.location.longitude}
+			</if>
+			<if test="modifyUser                                                               != null"> ,modify_user =
+				#{modifyUser}
+			</if>
+
+			<!-- Safe code, avoid some type exception -->
+			<if
+				test="lightTypeValue                == null and
+					  poleId                        == null and
+					  protect                       == null and
+					  intensityValue                == null and
+					  blinkStatusValue              == null and
+					  overrideTypeValue             == null and
+					  overridePerDate               == null and
+					  overrideCreateDate            == null and
+					  lifeCycleStateValue           == null and
+					  modifyUser                    == null and
+                      deviceLifeCycleState          == null and
+                      radio.location.address        == null and
+                      radio.location.city           == null and
+                      radio.location.state          == null and
+                      radio.location.zip            == null and
+                      radio.location.country        == null and
+                      radio.location.latitude       == null and
+                      radio.location.latitude       == null and
+                      (radio.location.timeZoneInfo   == null or radio.location.timeZoneInfo.timeZone == null)
+                      ">
+
+				light_type = light_type
+				,lifecycle_state = lifecycle_state
+				,light_state = light_state
+				,modify_user = modify_user
+				,pole_id = pole_id
+				,protected = protected
+				,intensity = intensity
+				,blink_level = blink_level
+				,override = override
+				,override_per_date = override_per_date
+				,override_create_date = override_create_date
+				,address = address
+				,city = city
+				,state = state
+				,zip_code = zip_code
+				,county = county
+				,timezone = timezone
+				,latitude = latitude
+				,longitude = longitude
+			</if>
+		</trim>
+		WHERE light_id = #{id}
+		<!-- This is guarantee better performance -->
+		AND light_id IS NOT NULL
+
+	</update>
+
+	<!--##################################### -->
+	<!--#### fetch all lights by request #### -->
+	<!--##################################### -->
+
+	<sql id="selectedColumns">
+		<include refid="allLightColumnns" />
+		<include refid="allNotificationHistoryColumns" />
+		<include refid="alertSubtypeColumns" />
+		<if test="scheduleCriteria != null and scheduleCriteria.hasFilter()">
+            <include refid="LightSchedule.allScheduleColumns" />
+        </if>
+		<trim prefix=",">
+			<include refid="Configuration.allConfigurationColumns" />
+		</trim>
+		<trim prefix=",">
+			<include refid="LastOperationalData.allLastOperationalDataColumns" />
+		</trim>
+	</sql>
+
+	<select id="fetchAllLightsByRequest" parameterType="LightRequest" resultMap="LightResultToFetchAll">
+		SELECT *
+		       <include refid="allCastColumns"/>
+		  FROM (
+		         SELECT
+		               <include refid="selectedColumns" />
+		               <include refid="LightSchedule.overrideColumn" />
+					   <include refid="Device.mapGeoCodeColumns" />
+					   <trim prefix=",">
+					   		<include refid="NotificationHistory.alertClassificationColumnsToFetchAllLights" />
+					   </trim>
+		               <include refid="orderByToFetchAllLightsInside" />
+		         <!-- From -->
+		               <include refid="fetchAllLightsByRequestFromConditions" />
+
+		         <!-- Where -->
+		               <include refid="fetchAllLightsByRequestWhereConditions" />
+
+		         GROUP BY
+		               <include refid="selectedColumns" />
+		               <include refid="Device.mapGeoCodeColumnsGroupBy" />
+		               <trim prefix=",">
+		               		<include refid="NotificationHistory.alertClassificationColumnsToFetchAllLightsGroupBy" />
+		               </trim>
+
+		) AS LIGHT_PAGE
+
+		<!-- filter to return just last received alert -->
+		WHERE RowNum = 1
+
+		<!-- sort -->
+		<include refid="orderByToFetchAllLightsOutside" />
+
+		<!-- pagination -->
+		<if test="pageSize > 0">
+	        OFFSET #{startRow,jdbcType=INTEGER}
+	         LIMIT #{pageSize,jdbcType=INTEGER}
+		</if>
+	</select>
+
+	<sql id="fetchAllLightsByRequestFromConditions">
+
+		FROM light light
+
+		     <!-- This join is necessary because columns and ordenation -->
+		     LEFT JOIN notification_history nh ON light.notification_history_id = nh.notification_history_id
+             LEFT JOIN notification_history_alert nha ON nh.notification_history_id = nha.notification_history_id
+             LEFT JOIN alert_subtype ast ON nha.alert_subtype_id = ast.alert_subtype_id
+             LEFT JOIN alert_type at ON ast.alert_type_id = at.alert_type_id
+			 LEFT JOIN light_last_operational_data operationalData ON (operationalData.light_id = light.light_id)
+
+		     <!-- This join is necessary because columns and ordenation -->
+			 INNER JOIN light_configuration config ON (config.light_id = light.light_id)
+
+		<!-- Check criteria to create table joins. -->
+		<if test="(groupCriteria != null and groupCriteria.hasFilter()) or (userContext != null and userContext.authorities != null and !userContext.authorities.isEmpty())">
+			INNER JOIN light_grouping grouping ON (grouping.light_id = light.light_id)
+		</if>
+		<if test="tagCriteria != null and tagCriteria.hasFilter()">
+			INNER JOIN light_tag tag ON (tag.light_id = light.light_id)
+		</if>
+		<if test="scheduleCriteria != null and scheduleCriteria.hasSelectedLight()">
+			INNER JOIN light_schedule light_schedule ON (light.light_id = light_schedule.light_id)
+		</if>
+		<if test="processCriteria != null and processCriteria.hasFilter()">
+			INNER JOIN light_process lightProcess ON (lightProcess.light_id = light.light_id)
+		</if>
+		<if test="scheduleCriteria != null and scheduleCriteria.hasSelectedSchedule()">
+			INNER JOIN schedule_membership scheduleMembership ON (light.light_id = scheduleMembership.light_id)
+		</if>
+
+	</sql>
+
+	<!--################################################ -->
+	<!--#### fetch all lights by request conditions #### -->
+	<!--################################################ -->
+	<sql id="fetchAllLightsByRequestWhereConditions">
+
+		<where>
+			light.tenant_id = #{userContext.tenant.id}
+
+			<include refid="Light.lightCriteria" />
+			<include refid="Light.alertCriteria" />
+			<include refid="Device.addressCriteria" />
+			<include refid="Device.geoCodeCriteria" />
+			<include refid="Configuration.configurationCriteria" />
+			<include refid="LastOperationalData.operationalDataCriteria" />
+			<include refid="Light.groupCriteria" />
+			<include refid="Light.tagCriteria" />
+			<include refid="LightSchedule.scheduleCriteria" />
+			<include refid="Light.restrictions" />
+			<include refid="Light.processCriteria" />
+
+		</where>
+	</sql>
+
+	<!--################################################# -->
+	<!--#### fetch attribute changes by request date #### -->
+	<!--################################################# -->
+	<select id="fetchAttributeChanges" parameterType="LightRequest" resultType="BigInteger">
+		SELECT flexnet_id
+  		  FROM light
+ 		<where>
+ 			light.tenant_id = #{userContext.tenant.id}
+			<include refid="Light.lightCriteria"/>
+		</where>
+	</select>
+
+	<!--##################################### -->
+	<!--#### fetch light by id or rni #### -->
+	<!--##################################### -->
+	<select id="fetchLightByIdOrRni" parameterType="FetchByIdRequest" resultMap="LightResultToFetchById">
+
+		SELECT
+
+		<include refid="allLightColumnnsToFetchLightId" />
+
+		FROM light light
+		<if test="userContext != null and userContext.authorities != null and !userContext.authorities.isEmpty()">
+			INNER JOIN light_grouping grouping ON (grouping.light_id = light.light_id)
+		</if>
+		<where>
+			<if test="userContext != null and userContext.tenant != null">
+				AND light.tenant_id = #{userContext.tenant.id}
+			</if>
+
+			<if test="rniId != null">
+				AND light.flexnet_id = #{rniId}
+			</if>
+
+			<if test="lightId != null">
+				AND light.light_id = #{lightId}
+			</if>
+
+			<include refid="Light.restrictions" />
+
+		</where>
+
+	</select>
+
+	<select id="fetchLightById" resultMap="LightResultToFetchById">
+
+		SELECT <include refid="allLightColumnns" />
+		  FROM light light
+		 WHERE light.light_id = #{value}
+
+	</select>
+
+	<!--############################ -->
+	<!--#### Count All By Req. #### -->
+	<!--############################ -->
+	<select id="countAllByRequest" parameterType="LightRequest" resultType="int">
+		SELECT COUNT(light_id)
+		FROM (
+		SELECT light.light_id AS light_id
+
+		<!-- From -->
+		<include refid="fetchAllLightsByRequestFromConditions" />
+
+		<!-- Where -->
+		<include refid="fetchAllLightsByRequestWhereConditions" />
+
+		GROUP BY light.light_id
+		) AS LIGHT_PAGE
+	</select>
+
+	<!-- Delete Light References -->
+	<!--################################# -->
+	<!--#### delete light references #### -->
+	<!--################################# -->
+	<delete id="deleteLightReferences" parameterType="Light">
+
+		DELETE FROM
+		light_tag
+		WHERE light_id = (SELECT light_id FROM
+		light WHERE flexnet_id =
+		#{radio.flexNetId});
+
+		DELETE FROM light_grouping
+		WHERE light_id = (SELECT light_id FROM light
+		WHERE flexnet_id =
+		#{radio.flexNetId});
+
+		DELETE FROM schedule_membership
+		WHERE light_id = (SELECT light_id FROM light
+		WHERE flexnet_id =
+		#{radio.flexNetId});
+	</delete>
+
+	<!--############################## -->
+	<!--#### delete addr tages #### -->
+	<!--############################## -->
+	<delete id="deleteAddrTags" parameterType="Light">
+		DELETE FROM light_tag
+		lt
+		WHERE lt.light_id = (SELECT l.light_id
+		FROM
+		light l
+		WHERE l.flexnet_id = #{radio.flexNetId})
+		AND lt.tag_id IN (SELECT tag_id
+		FROM tag
+		WHERE address_related='Y');
+	</delete>
+
+	<!--################################################### -->
+	<!--#### fetch lights to add communication failure #### -->
+	<!--################################################### -->
+	<select id="fetchLightsToAddCommunicationFailure" resultType="Integer">
+		SELECT DISTINCT(l.light_id) as light_id
+		  FROM light l
+		       JOIN notification_history nh ON l.notification_history_id = nh.notification_history_id
+		       LEFT JOIN notification_history_alert nha ON nh.notification_history_id = nha.notification_history_id
+		 WHERE (  EXTRACT(EPOCH FROM current_timestamp) - EXTRACT(EPOCH FROM nh.update_date) ) &gt; (3600 * #{tenant.minSmartpointCommTime} /* hours by tenant */)
+		   AND l.tenant_id = #{tenant.id}
+		   AND (nha.alert_subtype_id IS NULL
+		    OR nha.alert_subtype_id &lt;&gt; 8) /*communicationfail*/
+		   AND nh.lifecycle_state &lt;&gt; 3 /*maintenance*/
+		   AND nh.lifecycle_state &lt;&gt; 4 /*deactivated*/
+         ORDER BY 1
+        <!-- Pagination using OFFSET and LIMIT -->
+        <if test="pageSize > 0">
+            OFFSET #{startRow,jdbcType=INTEGER} LIMIT #{pageSize,jdbcType=INTEGER}
+        </if>
+	</select>
+
+	<!--################################################### -->
+	<!--#### fetch lights in communication failure #### -->
+	<!--################################################### -->
+	<select id="fetchLightsInCommunicationFailure" resultType="Integer">
+		SELECT DISTINCT(l.light_id) as light_id
+		  FROM light l
+		       JOIN notification_history nh ON l.notification_history_id = nh.notification_history_id
+		       LEFT JOIN notification_history_alert nha ON nh.notification_history_id = nha.notification_history_id
+		 WHERE l.tenant_id = #{tenant.id}
+		   AND (nha.alert_subtype_id IS NULL OR nha.alert_subtype_id = 8) /*communicationfail*/
+         ORDER BY 1
+         <!-- Pagination using OFFSET and LIMIT -->
+        <if test="pageSize > 0">
+            OFFSET #{startRow,jdbcType=INTEGER} LIMIT #{pageSize,jdbcType=INTEGER}
+        </if>
+	</select>
+
+	<select id="calculateLightConsumptionInCommunicationFailure" resultType="string" statementType="CALLABLE">
+		{ call calculate_light_consumption_in_communication_failure(#{tenant.id}, #{lightIds}) }
+	</select>
+
+	<!--#################### -->
+	<!--#### pagination #### -->
+	<!--#################### -->
+	<sql id="pagination">
+		<if test="pageSize > 0">
+			WHERE RowNum BETWEEN #{startRow,jdbcType=INTEGER} + 1 AND
+			(#{startRow,jdbcType=INTEGER} +
+			#{pageSize,jdbcType=INTEGER})
+		</if>
+	</sql>
+
+	<!--############################ -->
+	<!--#### Queries Criteria   #### -->
+	<!--############################ -->
+
+	<!-- Light Criteria -->
+	<sql id="lightCriteria">
+		<if test="lightCriteria != null and lightCriteria.hasFilter()">
+			<!-- IN -->
+			<if test="lightCriteria.lightIdList != null and !(lightCriteria.lightIdList).isEmpty()">
+				AND light.light_id IN
+				<foreach item="item" index="index" collection="lightCriteria.lightIdList" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+
+			<!-- NOT IN -->
+			<if test="lightCriteria.notInlightIdList != null and !(lightCriteria.notInlightIdList).isEmpty()">
+				AND light.light_id NOT IN
+				<foreach item="item" index="index" collection="lightCriteria.notInlightIdList" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+
+			<if test="lightCriteria.lifeCycleStateList != null  and !(lightCriteria.lifeCycleStateList).isEmpty()">
+				AND light.lifecycle_state IN
+				<foreach item="item" index="index" collection="lightCriteria.lifeCycleStateList" open="(" separator="," close=")">
+					#{item.value}
+				</foreach>
+			</if>
+
+			<if test="lightCriteria.lightType != null">
+				AND light.light_type = #{lightCriteria.lightTypeValue}
+			</if>
+
+			<if test="lightCriteria.override != null">
+				AND light.override &lt;&gt; 0 /* all lights that has any kind of override (1-schedule, 2-permanent, 3-per date) */
+			</if>
+
+			<if test="lightCriteria.protect != null">
+				AND light.protected = #{lightCriteria.protect}
+			</if>
+
+			<if test="lightCriteria.flexnetId != null and lightCriteria.flexnetId.value != null">
+				<choose>
+					<when test="lightCriteria.flexnetId.isTermSearchTypeEqual()">
+						AND CAST(light.flexnet_id AS text) = #{lightCriteria.flexnetId.value}
+					</when>
+					<otherwise>
+						AND CAST(light.flexnet_id AS text) LIKE '%' || #{lightCriteria.flexnetId.value} || '%'
+					</otherwise>
+				</choose>
+			</if>
+
+			<if test="lightCriteria.poleId != null and lightCriteria.poleId.value != null">
+				<choose>
+					<when test="lightCriteria.poleId.isTermSearchTypeEqual()">
+						AND UPPER(light.pole_id) = UPPER(#{lightCriteria.poleId.value})
+					</when>
+					<otherwise>
+						AND UPPER(light.pole_id) LIKE UPPER('%' || #{lightCriteria.poleId.value} || '%')
+					</otherwise>
+				</choose>
+			</if>
+
+			<if test="lightCriteria.modifyDate != null">
+				AND light.modified_date > #{lightCriteria.modifyDate.searchValue}
+			</if>
+		</if>
+	</sql>
+
+	<!--########################## -->
+	<!--#### alert criteria #### -->
+	<!--########################## -->
+	<sql id="alertCriteria">
+		<if test="alertCriteria != null and alertCriteria.hasFilter()">
+			<if test="alertCriteria.alertTypeList != null and !(alertCriteria.alertTypeList).isEmpty()">
+				AND at.alert_type_id IN
+				<foreach item="item" index="index" collection="alertCriteria.alertTypeList" open="(" separator="," close=")">
+					#{item.value}
+				</foreach>
+				AND nh.precedence IN
+				<foreach item="item" index="index" collection="alertCriteria.alertTypeList" open="(" separator="," close=")">
+					#{item.precedenceValue}
+				</foreach>
+			</if>
+
+			<if test="alertCriteria.alertSubtypeList != null and !(alertCriteria.alertSubtypeList).isEmpty()">
+				AND ast.alert_subtype_id IN
+				<foreach item="item" index="index" collection="alertCriteria.alertSubtypeList" open="(" separator="," close=")">
+					#{item.value}
+				</foreach>
+			</if>
+
+			<if test="alertCriteria.notAlert != null and alertCriteria.notAlert">
+				AND nha.notification_history_id IS NULL
+			</if>
+		</if>
+	</sql>
+
+	<!--########################## -->
+	<!--#### group criteria #### -->
+	<!--########################## -->
+	<sql id="groupCriteria">
+		<if test="groupCriteria != null and groupCriteria.hasFilter()">
+			<!-- IN -->
+			<if test="groupCriteria.groupIdList != null and !(groupCriteria.groupIdList).isEmpty()">
+				AND grouping.grouping_id IN
+				<foreach item="itemGrp" index="index" collection="groupCriteria.groupIdList" open="(" separator="," close=")">
+					#{itemGrp}
+				</foreach>
+			</if>
+			<!-- NOT IN -->
+			<if test="groupCriteria.notInGroupIdList != null and !(groupCriteria.notInGroupIdList).isEmpty()">
+				AND grouping.grouping_id NOT IN
+				<foreach item="itemNotGrp" index="index" collection="groupCriteria.notInGroupIdList" open="(" separator=","
+					close=")">
+					#{itemNotGrp}
+				</foreach>
+			</if>
+		</if>
+	</sql>
+
+	<!--######################## -->
+	<!--#### tag criteria #### -->
+	<!--######################## -->
+	<sql id="tagCriteria">
+		<if test="tagCriteria != null and tagCriteria.hasFilter()">
+			<!-- IN -->
+			<if test="tagCriteria.tagIdList != null and !(tagCriteria.tagIdList).isEmpty()">
+				AND tag.tag_id IN
+				<foreach item="itemTag" index="index" collection="tagCriteria.tagIdList" open="(" separator="," close=")">
+					#{itemTag}
+				</foreach>
+			</if>
+			<!-- NOT IN -->
+			<if test="tagCriteria.notInTagIdList != null and !(tagCriteria.notInTagIdList).isEmpty()">
+				AND tag.tag_id NOT IN
+				<foreach item="itemTag" index="index" collection="tagCriteria.notInTagIdList" open="(" separator="," close=")">
+					#{itemTag}
+				</foreach>
+			</if>
+		</if>
+	</sql>
+
+	<sql id="restrictions">
+		<if test="userContext != null and userContext.authorities != null and !userContext.authorities.isEmpty()">
+			<!-- User have allowed to view just this groups -->
+			AND grouping.grouping_id IN
+			<foreach item="item" index="index" collection="userContext.authorities" open="(" separator="," close=")">
+				#{item.id}
+			</foreach>
+		</if>
+	</sql>
+
+	<!--######################## -->
+	<!--### process criteria ## -->
+	<!--######################## -->
+	<sql id="processCriteria">
+		<if test="processCriteria != null and processCriteria.hasFilter()">
+			AND lightProcess.process_id = #{processCriteria.processId}
+			<if test="processCriteria.isFailed() != null and processCriteria.isFailed()">
+				AND lightProcess.failure_id IS NOT NULL
+			</if>
+
+			<if test="processCriteria.isFailed() != null and !processCriteria.isFailed()">
+				AND lightProcess.failure_id IS NULL
+			</if>
+		</if>
+	</sql>
+
+</mapper>

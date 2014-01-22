@@ -1,0 +1,82 @@
+a.cancel {
+    color: #0456B9;
+}
+
+.check-pad {
+	margin-left: 10.9em;
+}
+
+.checkbox.select-container {
+	padding: 1em;
+}
+
+.chzn-row.select-group {
+	overflow: visible !important;
+}
+
+.create-action-container {
+	margin-top: -0.5em !important;
+}
+
+.dataTables_processing {
+	height: 0px;
+}
+
+.dataTables_info,.dataTables_length {
+	display: inline;
+}
+
+.highlight.chzn-container {
+	width: 99% !important;
+}
+
+.yui-u.add-action.first {
+	text-align: left;
+}
+
+fieldset legend {
+	width: 99% !important;
+}
+
+fieldset ul li {
+	padding: 0.25em 0.5em;
+	overflow : visible!important
+}
+
+fieldset ul .radio-list {
+	margin-left: -0.5em;
+}
+
+.filters ul li a.export,a.export {
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+
+.map-col a, .map-col span {
+	display: inline !important;
+}
+
+.note.click-form-definition-roles {
+	background: url("../images/icn-note.gif") no-repeat scroll 0 0 transparent;
+    color: #666666;
+    font-size: 77%;
+    margin-left: 1em;
+    padding-left: 1.2em;
+}
+
+#select_groups_chzn {
+	width: 25em !important;
+}
+
+#select_groups_chzn .chzn-drop {
+	width: 99.2% !important;
+}
+
+#select_groups_label {
+	width: 5em;
+}
+
+#user-create-button {
+	width: 7em !important;
+	color: #333333;
+}

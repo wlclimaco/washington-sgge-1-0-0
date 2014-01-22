@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration PUBLIC
+  "-//APACHE//DTD LOG4J 1.2//EN" "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+
+<!-- If you need to debug the log4j configuration itself change debug="false" to debug="true"
+     The threshold attribute can be set to limit the threshold for the entire
+     configuration regardless of what level you set at the logger or root.  So
+     if you set threshold="warn", levels higher (info, debug, trace, all) will be ignored.
+-->
+<log4j:configuration debug="false" threshold="all">
+
+  <!-- param elements correspond to properties in the appender class.
+       Use camel case when specifying them.
+       Put all params first.
+       ISO8601 format is yyyy-MM-DD HH:MM:SS,sss
+  -->
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<param name="target" value="System.out"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="conversionPattern" value="[%-5p][%t][%d{ISO8601}] %l - %m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="FILE" class="org.apache.log4j.RollingFileAppender">
+		<param name="file" value="./bin/batch/data/qat-sysmgmt-d-load-01-job.log"/>
+		<param name="maxFileSize" value="1024KB"/>
+		<!-- Keep one backup file -->
+		<param name="maxBackupIndex" value="5"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="conversionPattern" value="[%-5p][%t][%d{ISO8601}] %l - %m%n"/>
+		</layout>
+	</appender>
+
+	<!-- The AsyncAppender defaults to blocking if its bluffer fills up.
+	     Set the blocking property to false to make it discard messages instead of
+	     slowing your program down.
+	-->
+  <appender name="ASYNC" class="org.apache.log4j.AsyncAppender">
+		<param name="blocking" value="false"/>
+		<appender-ref ref="CONSOLE"/>
+	</appender>
+
+  <!-- When using the AsyncAppender, by default, the location information
+       is set to false which means there will be no effort to extract the
+       location information related to the event.  However, when debugging, this
+       information will be needed, so set the locationInfo property to true on the
+       ASYNC_DEBUG appender
+  -->
+  <appender name="ASYNC_DEBUG" class="org.apache.log4j.AsyncAppender">
+		<param name="locationInfo" value="true"/>
+		<appender-ref ref="FILE"/>
+	</appender>
+
+	<category name="com.ibatis">
+    	<priority value="debug" />
+		<appender-ref ref="ASYNC"/>
+    </category>
+
+    <category name="java.sql">
+    	<priority value="debug" />
+		<appender-ref ref="ASYNC"/>
+   	</category>
+
+	<logger name="org.apache" additivity="false">
+		<level value="debug"/>
+		<appender-ref ref="ASYNC"/>
+		<appender-ref ref="CONSOLE"/>
+	</logger>
+
+	<logger name="com.mybatis" additivity="true">
+		<level value="debug"/>
+		<appender-ref ref="CONSOLE"/>
+	</logger>
+
+	<logger name="java.sql.ResultSet">
+	    <level value="debug"/>
+		<appender-ref ref="ASYNC"/>
+	</logger>
+
+    <logger name="java.sql.PreparedStatement">
+		<level value="debug"/>
+		<appender-ref ref="ASYNC"/>
+    </logger>
+
+	<logger name="org.springframework" additivity="false">
+		<level value="debug"/>
+		<appender-ref ref="ASYNC"/>
+	</logger>
+
+	<!-- level and priority mean the same thing.  Since we have to use level on the loggers
+	     use level instead of priority on root.
+	-->
+	<root>
+		<level value="debug"/>
+		<appender-ref ref="ASYNC"/>
+	</root>
+
+</log4j:configuration>

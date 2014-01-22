@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>try_add_light_to_group_light_already_belong</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">try_add_light_to_group_light_already_belong</td></tr>
+</thead><tbody>
+<!--#2908-->
+<!--Store Global History Vars-->
+<tr>
+	<td>storeGlobal</td>
+	<td>3</td>
+	<td>qtdLightsSelected</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>3</td>
+	<td>totalLight</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${poleID}</td>
+	<td>poleID</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>0</td>
+	<td>percentSuccess</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>100</td>
+	<td>percentFailure</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>Add Light to Group</td>
+	<td>description</td>
+</tr>
+<!--Check page-->
+<tr>
+	<td>assertAttribute</td>
+	<td>id=menu-smartpoints@class</td>
+	<td>alist active</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.positionHelper:last ul.fg-menu a:contains('Add to Group')</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=group-add-select_input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>id=group-add-select_input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=group-add-select_input</td>
+	<td>${groupName}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add-to-group-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<!--Check Message-->
+<tr>
+	<td>waitForText</td>
+	<td>css=#messaging-main .message</td>
+	<td>Lights have been successfully added to Group “${groupName}“.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main .message</td>
+	<td>Lights have been successfully added to Group “${groupName}“.</td>
+</tr>
+</tbody></table>
+</body>
+</html>

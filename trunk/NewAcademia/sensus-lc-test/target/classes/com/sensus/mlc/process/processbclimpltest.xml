@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- Configure Spring-WS client template -->
+
+	<!-- p:defaultUri="http://localhost:9090/mlc-gateway-ws/mlc-gateway-ws" -->
+	<bean id="processBCLTarget" class="com.sensus.lc.process.bcl.impl.ProcessBCLImpl">
+		<property name="processDAC" ref="processDACMockTarget" />
+		<property name="tenantBCL" ref="tenantBCLMockTarget" />
+		<property name="lightCSVBCL" ref="lightCSVBCLMockTarget" />
+		<property name="lightBCL" ref="lightBCLMockTarget" />
+		<property name="mlcGatewayWs" ref="mlcGatewayWSClient" />
+		<property name="factory" ref="objectFactoryMlcServer" />
+		<property name="processExportColumns" ref="csvProcessAllColumns" />
+		<property name="lightSummaryExportColumns" ref="csvLightSummaryAllColumns" />
+		<property name="lightNotificationHistoryBCL" ref="lightNotificationHistoryBCLMockTarget" />
+	</bean>
+
+	<!-- Begin -  Process Actions Beans  -->
+	<bean id="processAdditionSmartpointSchedule" class="com.sensus.lc.process.bcl.impl.ProcessAdditionSmartpointSchedule">
+		<property name="scheduleBCL" ref="scheduleBCLMockTarget" />
+		<property name="lightBCL" ref="lightBCLMockTarget" />
+		<property name="mlcGatewayWs" ref="mlcGatewayWSClient" />
+		<property name="factory" ref="objectFactoryMlcServer" />
+		<property name="systemId" ref="systemIdTarget" />
+		<property name="systemPwd" ref="systemPwdTarget" />
+	</bean>
+
+	<bean id="processDeletionSmartpointSchedule" class="com.sensus.lc.process.bcl.impl.ProcessDeletionSmartpointSchedule">
+		<property name="scheduleBCL" ref="scheduleBCLMockTarget" />
+		<property name="lightBCL" ref="lightBCLMockTarget" />
+		<property name="mlcGatewayWs" ref="mlcGatewayWSClient" />
+		<property name="factory" ref="objectFactoryMlcServer" />
+		<property name="systemId" ref="systemIdTarget" />
+		<property name="systemPwd" ref="systemPwdTarget" />
+	</bean>
+
+	<bean id="processDeletionSchedule" class="com.sensus.lc.process.bcl.impl.ProcessDeletionSchedule">
+		<property name="scheduleBCL" ref="scheduleBCLMockTarget" />
+		<property name="lightBCL" ref="lightBCLMockTarget" />
+		<property name="mlcGatewayWs" ref="mlcGatewayWSClient" />
+		<property name="factory" ref="objectFactoryMlcServer" />
+		<property name="systemId" ref="systemIdTarget" />
+		<property name="systemPwd" ref="systemPwdTarget" />
+	</bean>
+
+	<bean id="processSetupIntensityGroup" class="com.sensus.lc.process.bcl.impl.ProcessSetupIntensityGroup">
+		<property name="lightBCL" ref="lightBCLMockTarget" />
+		<property name="mlcGatewayWs" ref="mlcGatewayWSClient" />
+		<property name="factory" ref="objectFactoryMlcServer" />
+		<property name="systemId" ref="systemIdTarget" />
+		<property name="systemPwd" ref="systemPwdTarget" />
+	</bean>
+
+	<bean id="processSetupDimmingConfiguration" class="com.sensus.lc.process.bcl.impl.ProcessSetupDimmingConfiguration">
+		<property name="lightBCL" ref="lightBCLMockTarget" />
+		<property name="mlcGatewayWs" ref="mlcGatewayWSClient" />
+		<property name="factory" ref="objectFactoryMlcServer" />
+		<property name="systemId" ref="systemIdTarget" />
+		<property name="systemPwd" ref="systemPwdTarget" />
+	</bean>
+
+	<bean id="processRecoveryLightStatus" class="com.sensus.lc.process.bcl.impl.ProcessRecoveryLightStatus">
+		<property name="lightBCL" ref="lightBCLMockTarget" />
+		<property name="mlcGatewayWs" ref="mlcGatewayWSClient" />
+		<property name="factory" ref="objectFactoryMlcServer" />
+		<property name="systemId" ref="systemIdTarget" />
+		<property name="systemPwd" ref="systemPwdTarget" />
+	</bean>
+
+	<bean id="processSetupLightIntensity" class="com.sensus.lc.process.bcl.impl.ProcessSetupLightIntensity">
+		<property name="lightBCL" ref="lightBCLMockTarget" />
+		<property name="mlcGatewayWs" ref="mlcGatewayWSClient" />
+		<property name="factory" ref="objectFactoryMlcServer" />
+		<property name="systemId" ref="systemIdTarget" />
+		<property name="systemPwd" ref="systemPwdTarget" />
+	</bean>
+
+	<bean id="processCleaningAlarm" class="com.sensus.lc.process.bcl.impl.ProcessCleaningAlarm">
+		<property name="lightBCL" ref="lightBCLMockTarget" />
+		<property name="mlcGatewayWs" ref="mlcGatewayWSClient" />
+		<property name="factory" ref="objectFactoryMlcServer" />
+		<property name="systemId" ref="systemIdTarget" />
+		<property name="systemPwd" ref="systemPwdTarget" />
+		<property name="lightProcessorBCL" ref="lightProcessorBCLMockTarget" />
+	</bean>
+
+	<bean id="processSetupLatLng" class="com.sensus.lc.process.bcl.impl.ProcessSetupLatLng">
+		<property name="lightBCL" ref="lightBCLMockTarget" />
+		<property name="mlcGatewayWs" ref="mlcGatewayWSClient" />
+		<property name="factory" ref="objectFactoryMlcServer" />
+		<property name="systemId" ref="systemIdTarget" />
+		<property name="systemPwd" ref="systemPwdTarget" />
+	</bean>
+
+	<bean id="processSetupPoleId" class="com.sensus.lc.process.bcl.impl.ProcessSetupPoleId">
+		<property name="lightBCL" ref="lightBCLMockTarget" />
+		<property name="mlcGatewayWs" ref="mlcGatewayWSClient" />
+		<property name="factory" ref="objectFactoryMlcServer" />
+		<property name="systemId" ref="systemIdTarget" />
+		<property name="systemPwd" ref="systemPwdTarget" />
+	</bean>
+
+	<bean id="processSetupLightStatus" class="com.sensus.lc.process.bcl.impl.ProcessSetupLightStatus">
+		<property name="lightBCL" ref="lightBCLMockTarget" />
+		<property name="mlcGatewayWs" ref="mlcGatewayWSClient" />
+		<property name="factory" ref="objectFactoryMlcServer" />
+		<property name="systemId" ref="systemIdTarget" />
+		<property name="systemPwd" ref="systemPwdTarget" />
+	</bean>
+	<!-- End -  Process Actions Beans  -->
+
+</beans>

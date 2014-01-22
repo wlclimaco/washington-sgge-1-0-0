@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="lightCustomSearchBCLTarget" class="com.sensus.lc.light.bcl.impl.LightCustomSearchBCLImpl">
+		<property name="lightColumnFilterDAC" ref="lightColumnFilterDACMockTarget" />
+		<property name="lightCustomSearchDAC" ref="lightCustomSearchDACMockTarget"/>
+		<property name="tagBCL" ref="tagBCLMockTarget" />
+		<property name="groupBCL" ref="groupBCLMockTarget" />
+		<property name="scheduleBCL" ref="scheduleBCLMockTarget" />
+	</bean>
+
+</beans>

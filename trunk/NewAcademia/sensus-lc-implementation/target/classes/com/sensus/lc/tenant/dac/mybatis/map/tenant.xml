@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Tenant">
+
+	<resultMap id="TenantResult" type="Tenant">
+		<id property="id" column="tenant_id" />
+		<result property="name" column="name" />
+		<result property="description" column="description" />
+		<result property="rniCode" column="rni_code" />
+		<result property="serverName" column="server_name" />
+		<result property="gatewayURL" column="gateway_rni_location" />
+		<result property="latitude" column="latitude" />
+		<result property="longitude" column="longitude" />
+		<result property="minSmartpointCommTime" column="min_smartpoint_comm_time" />
+		<result property="lightTimeZone" column="light_time_zone" />
+		<result property="createUser" column="create_user" />
+		<result property="createDate" column="create_date" />
+		<result property="ecoModeDisable" column="ecomode_disable" />
+		<result property="batchProcessTime" column="batch_process_time" />
+		<result property="communicationCycleTimeout" column="communication_cycle_timeout" />
+		<result property="numberApiAccessHour" column="number_api_access_hour" />
+	</resultMap>
+
+	<resultMap id="ApiControlResult" type="ApiControl">
+		<result property="tenantId"	 column="tenant_id" />
+		<result property="count"     column="count" />
+		<result property="firstDate" column="first_date" />
+	</resultMap>
+
+	<sql id="allTenantColumns">
+		tenant_id
+		,name
+		,description
+		,rni_code
+		,server_name
+		,gateway_rni_location
+		,latitude
+		,longitude
+		,min_smartpoint_comm_time
+		,light_time_zone
+		,create_user
+		,create_date
+		,ecomode_disable
+		,batch_process_time
+		,communication_cycle_timeout
+		,number_api_access_hour
+	</sql>
+
+	<!-- Fetch All Tenants -->
+	<select id="fetchAllTenants" resultMap="TenantResult">
+		SELECT <include refid="allTenantColumns" /> FROM tenant
+	</select>
+
+	<!-- Fetch By Id -->
+	<select id="fetchById" resultMap="TenantResult">
+		SELECT
+		<include refid="allTenantColumns" />
+		FROM tenant
+		WHERE tenant_id= #{value}
+	</select>
+
+	<!-- Fetch Tenant By Server Name -->
+	<select id="fetchTenantByServerName" resultMap="TenantResult">
+		SELECT
+			<include refid="allTenantColumns"/>
+		FROM tenant t
+		WHERE t.server_name = #{value};
+	</select>
+
+	<!-- Fetch Tenant By Rni Code -->
+	<select id="fetchTenantByRniCode" resultMap="TenantResult">
+		SELECT
+			<include refid="allTenantColumns"/>
+          FROM tenant t
+        WHERE t.rni_code = #{value}
+	</select>
+
+	<!-- Api Control -->
+
+	<!--############################ -->
+	<!--#### Update Api Control #### -->
+	<!--############################ -->
+	<select id="UpdateApiControl" parameterType="ApiControl" resultMap="ApiControlResult">
+
+		UPDATE api_control
+		   SET count = TB.value,
+		       first_date = TB.date_value
+		FROM (
+			SELECT CASE WHEN ((CURRENT_TIMESTAMP - ap.first_date::TIMESTAMP) > INTERVAL '1 hour') THEN 1
+			            WHEN ap.count &lt;= t.number_api_access_hour THEN ap.count+1
+			       ELSE ap.count
+			       END AS value,
+
+			       CASE WHEN ((CURRENT_TIMESTAMP - ap.first_date::TIMESTAMP) > INTERVAL '1 hour') THEN CURRENT_TIMESTAMP
+			       ELSE ap.first_date
+			       END AS date_value
+
+			  FROM api_control ap
+			  JOIN tenant t ON ap.tenant_id = t.tenant_id
+			 WHERE t.tenant_id = #{tenantId} FOR UPDATE
+
+		 ) AS TB
+
+		WHERE tenant_id = #{tenantId}
+		RETURNING count, first_date;
+
+	</select>
+
+
+</mapper>

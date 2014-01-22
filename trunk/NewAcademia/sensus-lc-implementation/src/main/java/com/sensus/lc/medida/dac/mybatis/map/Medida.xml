@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Medida">
+
+	<resultMap id="listAllMedidaResults" type="Medida" >
+		<result property="cdmed" column="cdmed" />
+		<result property="altura" column="altura" />
+		<result property="peso" column="peso" />
+		<result property="busto" column="busto" />
+		<result property="bracoesq" column="bracoesq" />
+		<result property="bracodir" column="bracodir" />
+		<result property="abdomen" column="abdomen" />
+		<result property="costa" column="costa" />
+		<result property="cintura" column="cintura" />
+		<result property="quadril" column="quadril" />
+		<result property="culote" column="culote" />
+		<result property="coxdir" column="coxdir" />
+		<result property="coxesq" column="coxesq" />
+		<result property="pantuesq" column="pantuesq" />
+		<result property="pantudir" column="pantudir" />
+		<result property="dtmedida" column="dtmedida" />
+		<result property="imc" column="imc" />
+		<result property="bs" column="bs" />
+	</resultMap>
+
+
+	<sql id="allMedidaColumms">
+     	cdmed,
+     	altura,
+     	peso,
+     	busto,
+     	bracoesq,
+     	bracodir,
+     	abdomen,
+     	costa,
+     	cintura,
+     	quadril,
+     	culote,
+     	coxdir,
+     	coxesq,
+     	pantuesq,
+     	pantudir,
+     	dtmedida,
+     	imc,
+     	bs,
+	</sql>
+	
+
+	<!-- Insert Medida -->
+	<select id="insertMedida" parameterType="Map" resultType="int">
+		SELECT ins_medida (
+		#{cdmed,jdbcType=INTEGER},
+		#{altura,jdbcType=FLOAT},
+		#{peso,jdbcType=FLOAT},
+		#{busto,jdbcType=FLOAT},
+		#{bracoesq,jdbcType=FLOAT},
+		#{bracodir,jdbcType=FLOAT},
+		#{abdomen,jdbcType=FLOAT},
+		#{costa,jdbcType=FLOAT},
+		#{cintura,jdbcType=FLOAT},
+		#{quadril,jdbcType=FLOAT},
+		#{culote,jdbcType=FLOAT},
+		#{coxdir,jdbcType=FLOAT},
+		#{coxesq,jdbcType=FLOAT},
+		#{pantuesq,jdbcType=FLOAT},
+		#{pantudir,jdbcType=FLOAT},
+		#{dtmedida,jdbcType=DATE},
+		#{imc,jdbcType=FLOAT},
+		#{bs,jdbcType=FLOAT},
+)
+	</select>
+
+	<!-- Update Medida -->
+	<select id="updateMedida" parameterType="Map" resultType="int">
+		SELECT upd_medida (
+		#{cdmed,jdbcType=INTEGER},
+		#{altura,jdbcType=FLOAT},
+		#{peso,jdbcType=FLOAT},
+		#{busto,jdbcType=FLOAT},
+		#{bracoesq,jdbcType=FLOAT},
+		#{bracodir,jdbcType=FLOAT},
+		#{abdomen,jdbcType=FLOAT},
+		#{costa,jdbcType=FLOAT},
+		#{cintura,jdbcType=FLOAT},
+		#{quadril,jdbcType=FLOAT},
+		#{culote,jdbcType=FLOAT},
+		#{coxdir,jdbcType=FLOAT},
+		#{coxesq,jdbcType=FLOAT},
+		#{pantuesq,jdbcType=FLOAT},
+		#{pantudir,jdbcType=FLOAT},
+		#{dtmedida,jdbcType=DATE},
+		#{imc,jdbcType=FLOAT},
+		#{bs,jdbcType=FLOAT},
+)
+	</select>
+
+	<!-- Delete Medida -->
+	<select id="deleteMedida" parameterType="Medida">
+		SELECT del_medida (#{id})
+	</select>
+	
+	<!-- Fetch All Medidas -->
+	<select id="fetchAllMedidas" parameterType="Map" resultMap="listAllMedidaResults">
+	
+		SELECT  <include refid="allMedidaColumms"/>
+		  FROM medida
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM medida 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Medida By type -->
+	<select id="fetchMedidaByType" parameterType="MedidaRequest"  resultMap="listAllMedidaResults" >
+		SELECT  <include refid="allCustomListMedidaColumns"/>
+		  FROM medida
+		 WHERE name = #{medida.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Medida By Id -->
+	<select id="fetchMedidaById" parameterType="Medida" resultMap="listAllMedidaResults" >
+		SELECT <include refid="allCustomListMedidaColumns"/>
+		  FROM medida
+		 WHERE medida_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Medida By Id -->
+	<select id="fetchMedidaNameById" parameterType="Medida" resultMap="listAllMedidaResults" >
+		SELECT <include refid="allCustomListMedidaColumns"/>
+		  FROM medida
+		 WHERE medida_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

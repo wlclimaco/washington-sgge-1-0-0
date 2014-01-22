@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>cancel_submission_delete_offset_schedule</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">cancel_submission_delete_offset_schedule</td></tr>
+</thead><tbody>
+<!--#3331-->
+<tr>
+	<td>click</td>
+	<td>link=System Intelligence</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>${eventSchName}002</td>
+	<td>schName</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#messaging-main&quot;).remove();</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=schedule</td>
+	<td>Schedules</td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>${schName}/2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${row}) - 2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#schedule-table tbody tr:eq(${row}) a.delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=#selected-schedule span</td>
+	<td>Schedule “${schName}“ will be deleted.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#selected-schedule span</td>
+	<td>Schedule “${schName}“ will be deleted.</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=delete-schedule-cancel</td>
+	<td></td>
+</tr>
+<!--Check Element in Grid-->
+<tr>
+	<td>verifyTable</td>
+	<td>css=#schedule-table tbody.${row}.2</td>
+	<td>${schName}</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#schedule-table tbody.${row}.3</td>
+	<td>Turn On (100%)</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#schedule-table tbody.${row}.4</td>
+	<td>Event</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#schedule-table tbody.${row}.7</td>
+	<td>${currentDate}</td>
+</tr>
+<!--Check Element count/summariz-->
+<tr>
+	<td>verifyTableRows</td>
+	<td>css=#schedule-table tbody</td>
+	<td>${totalSch}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#actions &gt; span</td>
+	<td>0 of ${totalSch} Schedules Selected</td>
+</tr>
+</tbody></table>
+</body>
+</html>

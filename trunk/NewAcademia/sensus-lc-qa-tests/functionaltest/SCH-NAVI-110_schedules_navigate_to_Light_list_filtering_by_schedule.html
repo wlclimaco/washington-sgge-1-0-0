@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>slc_schedules_navigate_from_schedule_to_Light_list_filtering_by_schedule</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">slc_schedules_navigate_from_schedule_to_Light_list_filtering_by_schedule</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>link=Schedules</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<!--Click on nº of Lights-->
+<tr>
+	<td>verifyAttribute</td>
+	<td>id=schedule@class</td>
+	<td>active</td>
+</tr>
+<tr>
+	<td>storeCssCount</td>
+	<td>css=#schedule-table tbody .checkbox</td>
+	<td>total</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${total}</td>
+	<td>totalSch</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<!--Check Page-->
+<tr>
+	<td>verifyAttribute</td>
+	<td>id=menu-smartpoints@class</td>
+	<td>alist</td>
+</tr>
+<!--Check Lights Filtered-->
+<tr>
+	<td>verifyCssCount</td>
+	<td>css=#smartpoint-table tbody td.checkbox</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menu-smartpoints</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

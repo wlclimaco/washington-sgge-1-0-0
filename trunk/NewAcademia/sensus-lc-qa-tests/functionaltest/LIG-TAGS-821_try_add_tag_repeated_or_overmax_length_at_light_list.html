@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>slc_tags_try_add_tag_repeated_or_overmax_length_at_light_list</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">slc_tags_try_add_tag_repeated_or_overmax_length_at_light_list</td></tr>
+</thead><tbody>
+<!--#7523-->
+<!--Going to Light List /...-->
+<tr>
+	<td>click</td>
+	<td>link=Lights</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<!--Check 'Active'-->
+<tr>
+	<td>waitForVisible</td>
+	<td>css=.clear</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.clear</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=li:contains(Active) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<!--Check 'Warning'-->
+<tr>
+	<td>click</td>
+	<td>css=li:contains(Warning) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<!--Check 'Alarm'-->
+<tr>
+	<td>click</td>
+	<td>css=li:contains(Alarm) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Lights</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=check_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;ul.fg-menu &gt; li:eq(2) &gt; ul &gt; li:eq(0) &gt; a[title='Add Tag']&quot;, &quot;div.positionHelper:visible&quot;).click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=addTagForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>css=#select_tags_chzn ul</td>
+	<td></td>
+</tr>
+<!--# sendKeys abling the script to be ran-->
+<tr>
+	<td>type</td>
+	<td>css=#select_tags_chzn ul input</td>
+	<td>${varTag}</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>css=.chzn-results li:contains(&quot;${varTag}&quot;)</td>
+	<td></td>
+</tr>
+<!--#-->
+<tr>
+	<td>click</td>
+	<td>id=add-tag-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=#messaging-main .message</td>
+	<td>1 lights is already tagged with ${varTag}.</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#messaging-main .message</td>
+	<td>1 lights is already tagged with ${varTag}.</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=check_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;ul.fg-menu &gt; li:eq(2) &gt; ul &gt; li:eq(0) &gt; a[title='Add Tag']&quot;, &quot;div.positionHelper:visible&quot;).click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=addTagForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>css=#select_tags_chzn ul</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>css=#select_tags_chzn ul li input</td>
+	<td>Over max lenght -&nbsp;&nbsp;Over max lenght - Over max lenght - Over max lenght - Over max lenght - Over max lenght - Over max lenght - Over max lenght - Over max lenght - Over max lenght - Over max lenght - Over max lenght - Over max lenght - Over max lenght - Over max lenght - Over max lenght - Over max lenght - Over max lenght - Over max lenght - Over max lenght - Over max lenght - Over max lenght - Over max lenght - Over max lenght - Over max lenght - Over max lenght - Over max lenght - Over max lenght - Over max lenght - Over max lenght - Over max lenght</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add-tag-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.formErrorContent</td>
+	<td>Please select Tag to add.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.formErrorContent</td>
+	<td>Please select Tag to add.</td>
+</tr>
+<!--.../-->
+</tbody></table>
+</body>
+</html>

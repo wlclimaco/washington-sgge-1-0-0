@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Schedule">
+
+	<!-- Fetch All Schedules -->
+	<resultMap id="listScheduleResultsWithCount" type="Schedule">
+		<result property="id" column="schedule_id" />
+		<result property="name" column="name" />
+		<result property="description" column="description" />
+		<result property="lightCount" column="light_count" />
+		<result property="createDate" column="create_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="centerLatitude" column="latitude" />
+		<result property="centerLongitude" column="longitude" />
+		<result property="scheduleTypeValue" column="schedule_type"/>
+		<result property="precedenceValue"  column="precedence" />
+		<discriminator javaType="int" column="schedule_type" >
+			<case value="1" resultMap="OffSetScheduleResult" />
+			<case value="2" resultMap="EventScheduleResult" />
+		</discriminator>
+	</resultMap>
+
+	<resultMap id="OffSetScheduleResult" type="OffSetSchedule"
+		extends="Schedule.listScheduleResultsWithCount">
+		<result property="sunriseOffsetMinutes" column="sunrise_offset" />
+		<result property="sunsetOffsetMinutes" column="sunset_offset" />
+	</resultMap>
+
+	<resultMap id="EventScheduleResult" type="EventSchedule"
+		extends="Schedule.listScheduleResultsWithCount">
+	</resultMap>
+
+	<!-- Properties Result Light -->
+    <resultMap id="PropertiesResultLight" type="LightParameter">
+		<result property="id" jdbcType="INTEGER" column="property_id" />
+		<result property="labelKey" jdbcType="VARCHAR" column="property_name" />
+		<result property="value" jdbcType="VARCHAR" column="property_value" />
+		<result property="dataTypeEnumValue" jdbcType="INTEGER" column="data_type" />
+		<result property="propertyClass" jdbcType="INTEGER" column="property_type" />
+		<result property="createUser" jdbcType="VARCHAR" column="create_user" />
+		<result property="modifyUser" jdbcType="VARCHAR" column="modify_user" />
+		<result property="createDate" jdbcType="TIMESTAMP" column="create_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="modifyDate" jdbcType="TIMESTAMP" column="modified_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="propertyEnumValue" column="property_id" />
+	</resultMap>
+
+	<!-- Fetch Schedule By Id -->
+	<resultMap id="listScheduleResult" type="Schedule">
+		<result property="id" column="schedule_id" />
+		<result property="name" column="name" />
+		<result property="description" column="description" />
+		<result property="createDate" column="create_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="lightCount" column="light_count" />
+		<result property="scheduleTypeValue" column="schedule_type" />
+		<discriminator javaType="java.lang.Integer" column="schedule_type">
+			<case value="1" resultMap="OffSetResult" />
+			<case value="2" resultMap="EventsResult" />
+			<case value="3" resultMap="OffSetResult" />
+			<case value="4" resultMap="EventsResult" />
+		</discriminator>
+	</resultMap>
+
+	<resultMap id="OffSetResult" type="OffSetSchedule"
+		extends="Schedule.listScheduleResult">
+		<result property="sunriseOffsetMinutes" column="sunrise_offset" />
+		<result property="sunsetOffsetMinutes" column="sunset_offset" />
+		<result property="intensity" column="intensity" />
+	</resultMap>
+
+	<resultMap id="EventsResult" type="EventSchedule"
+		extends="Schedule.listScheduleResult">
+		<collection property="events" column="schedule_id"
+			select="Schedule.fetchEventsById" />
+	</resultMap>
+
+	<resultMap id="EventResult" type="Event">
+		<result property="id" column="schedule_event_id" />
+		<result property="time" column="event_time" typeHandler="com.sensus.lc.base.util.DateTimeZoneNoMilSecTypeHandler"/>
+		<result property="lightBlinkEnumValue" column="blink_level" />
+		<result property="intensity" column="intensity" />
+		<collection property="daysValue" column="schedule_event_id"
+			select="Schedule.fetchDaysById" />
+	</resultMap>
+
+	<!-- List Schedule And Light Count -->
+	<resultMap id="listScheduleAndLightCountResults" type="Schedule">
+		<result property="id" column="schedule_id" />
+		<result property="name" column="name" />
+		<result property="description" column="description" />
+		<result property="lightCount" column="lights_effected"/>
+		<result property="createDate" column="create_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+	</resultMap>
+
+	<parameterMap type="Schedule" id="fetchScheduleByIdParameters">
+		<parameter property="id" jdbcType="INTEGER" javaType="int" />
+	</parameterMap>
+
+	<resultMap id="lightWithIDOnly" type="Light">
+		<result property="id" column="light_id" />
+	</resultMap>
+
+	<sql id="allSchedulesColumms">
+		schedule_id, name, description, schedule_type,
+		create_date, sunrise_offset, sunset_offset,
+		tenant_id, latitude, longitude
+	</sql>
+
+	<sql id="allSchedulesColummsWithLightCount">
+		schedule_id, name, description, schedule_type,
+		light_count, create_date, sunrise_offset, sunset_offset,
+		tenant_id, latitude, longitude, precedence
+	</sql>
+
+	<sql id="allCustomEventColumnsWithAlias">
+		s.schedule_event_id, s.event_time, s.intensity, s.blink_level
+	</sql>
+
+	<sql id="allCustomlistLightColumns">
+		flexnet_id, latitude, longitude, light_status
+	</sql>
+
+	<!-- Insert Schedule -->
+	<select id="insertSchedule" parameterType="Map"
+		resultType="int">
+		SELECT ins_schedule(#{name},#{description},#{sunrise_offset},#{sunset_offset},#{tenant_id},#{create_user},#{schedule_type},#{use_sunrise_sunset_tables},#{intensity})
+	</select>
+
+    <!-- Insert Schedule Event -->
+	<select id="insertScheduleEvent" parameterType="Map"
+		resultType="int">
+		SELECT ins_schedule_event(#{event_time}::timestamp without time zone,#{intensity},#{blink_level},#{schedule_id},#{tenant_id},#{create_user})
+	</select>
+
+	<!-- Insert Schedule Event Day Of Week -->
+	<select id="insertScheduleEventDayOfWeek" parameterType="Map"
+		resultType="int">
+		SELECT ins_schedule_event_day_of_week(#{day_of_week_id},#{schedule_event_id},#{create_user})
+	</select>
+
+	<!-- Apply Light Schedule -->
+	<select id="applyLightSchedule" parameterType="Map"
+		resultType="int">
+		SELECT apply_light_in_schedule(#{light_id},#{schedule_id},#{create_user})
+	</select>
+
+	<!-- Apply Unknown Offset Schedule  -->
+	<select id="applyUnknownOffsetSchedule" parameterType="Map"
+		resultType="int">
+		SELECT apply_unknown_offset_schedule(#{light_id},#{schedule_id},#{create_user})
+	</select>
+
+	<!-- Apply Unknown Event Schedule -->
+	<select id="applyUnknownEventSchedule" parameterType="Map"
+		resultType="int">
+		SELECT apply_unknown_event_schedule(#{light_id},#{schedule_id},#{create_user})
+	</select>
+
+	<!-- Update Schedule -->
+	<select id="updateSchedule" parameterType="Map"
+		resultType="int">
+		SELECT upd_schedule(#{schedule_id},#{name},#{description},#{sunrise_offset},#{sunset_offset},#{modify_user},#{intensity})
+	</select>
+
+	<!-- Update Schedule center point -->
+	<select id="updateScheduleCenter" parameterType="Map">
+		SELECT upd_schedule_center(#{schedule_id})
+	</select>
+
+	<!-- Delete Schedule -->
+	<select id="deleteSchedule" parameterType="Schedule">
+		SELECT del_schedule(#{id})
+	</select>
+
+	<!-- Delete ScheduleEvent -->
+	<select id="deleteScheduleEvent" parameterType="Map"
+		resultType="int">
+		SELECT del_schedule_event(#{schedule_id})
+	</select>
+
+	<!-- Delete Light Schedule -->
+	<select id="removeLightSchedule" parameterType="Map">
+	    DELETE
+	      FROM schedule_membership
+	     WHERE schedule_membership.schedule_id IN (SELECT sm.schedule_id
+   													 FROM schedule_membership sm
+   													      INNER JOIN schedule sc ON sc.schedule_id = sm.schedule_id
+   												    WHERE sc.schedule_type = ${schedule_type})
+           AND light_id = #{light_id};
+	</select>
+
+	<select id="fetchAllSchedules" parameterType="Map"
+		resultMap="listScheduleResultsWithCount">
+	 SELECT
+	    <include refid="allSchedulesColummsWithLightCount" />
+		,RowNum
+	  FROM(
+				SELECT
+				<include refid="allSchedulesColummsWithLightCount" />
+				,ROW_NUMBER() OVER(ORDER BY ${orderBy}) as RowNum
+				FROM
+				(
+					SELECT
+					<include refid="allSchedulesColummsWithLightCount" />
+					FROM
+					(SELECT
+						<include refid="allSchedulesColumms" />
+						,( SELECT count(1) AS count
+			                 FROM schedule_membership sch_mship
+			            <if test="allowedGroupIdList != null and !allowedGroupIdList.isEmpty()">
+			            		  ,light_grouping lgt_grp
+			            </if>
+			                WHERE sch_mship.schedule_id = sch.schedule_id
+						<if test="allowedGroupIdList != null and !allowedGroupIdList.isEmpty()">
+							  AND sch_mship.light_id = lgt_grp.light_id
+							  AND lgt_grp.grouping_id IN
+							<foreach item="item" index="index" collection="allowedGroupIdList"
+								open="(" separator="," close=")">
+								#{item}
+							</foreach>
+						</if>
+			             ) AS light_count
+
+			             ,(SELECT MIN(nth.precedence)
+						       FROM notification_history nth
+						       JOIN light l ON (nth.notification_history_id = l.notification_history_id)
+						       JOIN schedule_membership sch_mship ON (sch_mship.schedule_id = sch.schedule_id  AND sch_mship.light_id = l.light_id)
+						  ) AS precedence
+
+					   FROM schedule sch
+					  WHERE sch.schedule_type != '3'
+					    AND sch.schedule_type != '4'
+						AND sch.tenant_id = #{tenant_id,jdbcType=INTEGER}
+					<if test="unSelectedIds != null and !unSelectedIds.isEmpty()">
+						AND sch.schedule_id NOT IN
+						<foreach item="item" index="index" collection="unSelectedIds"
+							open="(" separator="," close=")">
+							#{item}
+						</foreach>
+					</if>
+
+					<if test="selectedIds != null and !selectedIds.isEmpty()">
+						AND sch.schedule_id IN
+						<foreach item="item" index="index" collection="selectedIds"
+							open="(" separator="," close=")">
+							#{item}
+						</foreach>
+					</if>
+					<if test="schedule_type != null">
+						AND sch.schedule_type = #{schedule_type,jdbcType=VARCHAR}
+					</if>
+
+					) AS VW
+			) AS VWF
+			GROUP BY <include refid="allSchedulesColummsWithLightCount" />
+		) AS SCHEDULEPAGE
+			<if test="pageSize > 0">
+				WHERE RowNum BETWEEN #{startRow} + 1 AND (#{startRow} + #{pageSize})
+			</if>
+	</select>
+
+	<select id="PaginationTotalRows" parameterType="Map"
+		resultType="int">
+		SELECT count(*)
+		FROM
+		(SELECT tenant_id
+		FROM schedule
+		WHERE schedule.schedule_type != '3'
+		  AND schedule.schedule_type != '4'
+		  AND schedule.tenant_id = #{tenant_id,jdbcType=INTEGER}
+		<if test="unSelectedIds != null and !unSelectedIds.isEmpty()">
+			AND schedule.schedule_id NOT IN
+			<foreach item="item" index="index" collection="unSelectedIds"
+				open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+
+		<if test="selectedIds != null and !selectedIds.isEmpty()">
+			AND schedule.schedule_id IN
+			<foreach item="item" index="index" collection="selectedIds"
+				open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+
+		) AS SCHEDULEPAGE
+	</select>
+
+	<!--fetchLightProperties Type 1 -->
+	<select id="fetchEventsById" resultMap="EventResult">
+		SELECT
+			<include refid="allCustomEventColumnsWithAlias"/>
+   	      FROM schedule_event s
+        WHERE s.schedule_id = #{schedule_id}
+	</select>
+
+	<select id="fetchDaysById" resultType="int">
+		SELECT s.day_of_week_id
+          FROM schedule_event_day_of_week s
+        WHERE s.schedule_event_id = #{schedule_event_id}
+	</select>
+
+	<select id="fetchScheduleById" parameterType="Map" resultMap="listScheduleResult">
+	    SELECT s.schedule_id
+               ,(SELECT COUNT(1)
+                   FROM schedule_membership
+                  WHERE schedule_membership.schedule_id = s.schedule_id
+
+                ) AS light_count
+               ,s.name
+               ,s.description
+               ,s.create_date
+               ,s.schedule_type
+               ,s.sunrise_offset
+               ,s.sunset_offset
+               ,s.intensity
+       FROM schedule s
+       WHERE s.schedule_id = #{schedule_id}
+	</select>
+
+	<select id="countRunningProcessForSchedule" parameterType="Map"
+		resultType="int">
+		SELECT COUNT(1)
+          FROM process p, process_property pp
+        WHERE p.is_process_complete = false
+          AND p.process_id = pp.process_id
+          AND pp.property_id = #{property_enum_value}
+          AND pp.value = #{schedule_id}
+	</select>
+
+	<select id="listScheduleAndLightCount" resultMap="listScheduleAndLightCountResults">
+	   SELECT t.schedule_id
+		      ,t.name
+		      ,t.description
+		      ,t.sunrise_offset
+		      ,t.sunset_offset
+		      ,COUNT(sm.light_id) as lights_effected
+		      ,t.create_date
+		 FROM schedule_membership sm
+		 RIGHT OUTER JOIN schedule t ON (sm.schedule_id = t.schedule_id)
+      GROUP BY t.schedule_id,t.name,t.description,t.sunrise_offset,t.sunset_offset,t.create_date
+	  ORDER BY t.name
+	</select>
+
+	<select id="countScheduleByName" parameterType="Map"
+		resultType="int">
+	   SELECT COUNT(*)
+	     FROM schedule
+	   WHERE UPPER(schedule.name) = UPPER(#{name})
+	     AND schedule.tenant_id = #{tenant_id}
+	</select>
+
+	<select id="fetchLightBySchedule" parameterType="Map" resultMap="lightWithIDOnly">
+		SELECT l.light_id
+		  FROM schedule_membership sm
+		 INNER JOIN schedule s ON (s.schedule_id =  sm.schedule_id)
+		 INNER JOIN light l ON (sm.light_id = l.light_id)
+		 WHERE sm.schedule_id = #{schedule_id}
+		   AND s.tenant_id = #{tenant_id}
+	</select>
+
+</mapper>

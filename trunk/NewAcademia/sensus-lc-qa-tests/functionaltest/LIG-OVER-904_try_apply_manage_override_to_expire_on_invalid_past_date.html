@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>try_apply_manage_override_to_expire_on_invalid_past_date</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">try_apply_manage_override_to_expire_on_invalid_past_date</td></tr>
+</thead><tbody>
+<!--#8253-->
+<tr>
+	<td>click</td>
+	<td>link=Lights</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<!--Check page-->
+<tr>
+	<td>assertAttribute</td>
+	<td>id=menu-smartpoints@class</td>
+	<td>alist active</td>
+</tr>
+<!--Assert records-->
+<tr>
+	<td>assertNotVisible</td>
+	<td>css=#blankslate</td>
+	<td></td>
+</tr>
+<!--Filter by Active and Warning Status-->
+<tr>
+	<td>click</td>
+	<td>css=.clear</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#LIFECYCLE_STATE li:contains('Active') input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#ALERTS li:contains('Warning') input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#ALERTS li:contains('Alarm') input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<!--Select Lights-->
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table .checkbox:eq(1) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table .checkbox:eq(2) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table .checkbox:eq(3) input</td>
+	<td></td>
+</tr>
+<!--Control Lights Button-->
+<tr>
+	<td>click</td>
+	<td>id=lights-on-off</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=override-date</td>
+	<td></td>
+</tr>
+<!--Try past date-->
+<tr>
+	<td>type</td>
+	<td>id=override-date</td>
+	<td>01/01/2001</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=override-time</td>
+	<td>11:00 PM</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=turn-on-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>getSysDate</td>
+	<td>currentDate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.override-dateformError div.formErrorContent</td>
+	<td>* Date past ${currentDate}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.override-dateformError div.formErrorContent</td>
+	<td>* Date past ${currentDate}</td>
+</tr>
+<!--Try invalid date-->
+<tr>
+	<td>type</td>
+	<td>id=override-date</td>
+	<td>32/32/2001</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=turn-on-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.override-dateformError div.formErrorContent</td>
+	<td>* Invalid date, must be in MM/DD/YYYY format</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.override-dateformError div.formErrorContent</td>
+	<td>* Invalid date, must be in MM/DD/YYYY format</td>
+</tr>
+<!--Cancel-->
+<tr>
+	<td>click</td>
+	<td>id=turn-on-cancel</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

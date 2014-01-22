@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="Sensus LC Test" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<include file="..\..\AntConfig\Sensus-ant-common-targets.xml" optional="false" />
+
+	<target name="build">
+
+		<antcall target="Sensus.mainBuildComponent">
+			<param name="moduleName" value="sensus-lc-test" />
+			<param name="pomFile" value="../pom.xml" />
+<!-- 			<param name="installLocal" value="false" /> -->
+			<param name="srcDir" value="${projectBaseDir}/src/main/java" />
+		</antcall>
+
+	</target>
+
+</project>

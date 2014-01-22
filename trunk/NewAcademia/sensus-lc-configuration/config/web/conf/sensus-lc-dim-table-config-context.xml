@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+			  http://www.springframework.org/schema/beans
+			  http://www.springframework.org/schema/beans/spring-beans.xsd
+			  http://www.springframework.org/schema/util
+			  http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<util:list id="LED Single Ballast 00" value-type="java.util.ArrayList">
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="15" />
+			<property name="currentScale" value="17" />
+			<property name="fullOnRequired" value="0" />
+			<property name="percentage" value="25" />
+			<property name="intensityLevel" value="1" />
+			<property name="dimOnDelay" value="0"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="15" />
+			<property name="currentScale" value="17" />
+			<property name="fullOnRequired" value="0" />
+			<property name="percentage" value="25" />
+			<property name="intensityLevel" value="2" />
+			<property name="dimOnDelay" value="0"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="11" />
+			<property name="currentScale" value="35" />
+			<property name="fullOnRequired" value="0" />
+			<property name="percentage" value="50" />
+			<property name="intensityLevel" value="3" />
+			<property name="dimOnDelay" value="0"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="3" />
+			<property name="currentScale" value="49" />
+			<property name="fullOnRequired" value="0" />
+			<property name="percentage" value="75" />
+			<property name="intensityLevel" value="4" />
+			<property name="dimOnDelay" value="0"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="1" />
+			<property name="currentScale" value="56" />
+			<property name="fullOnRequired" value="0" />
+			<property name="percentage" value="90" />
+			<property name="intensityLevel" value="5" />
+			<property name="dimOnDelay" value="0"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="0" />
+			<property name="currentScale" value="63" />
+			<property name="fullOnRequired" value="0" />
+			<property name="percentage" value="100" />
+			<property name="intensityLevel" value="6" />
+			<property name="dimOnDelay" value="0"/>
+		</bean>
+	</util:list>
+
+	<util:list id="LED Single Ballast 01" value-type="java.util.ArrayList">
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="4" />
+			<property name="currentScale" value="12" />
+			<property name="fullOnRequired" value="0" />
+			<property name="percentage" value="20" />
+			<property name="intensityLevel" value="1" />
+			<property name="dimOnDelay" value="0"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="4" />
+			<property name="currentScale" value="12" />
+			<property name="fullOnRequired" value="0" />
+			<property name="percentage" value="20" />
+			<property name="intensityLevel" value="2" />
+			<property name="dimOnDelay" value="0"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="10" />
+			<property name="currentScale" value="34" />
+			<property name="fullOnRequired" value="0" />
+			<property name="percentage" value="50" />
+			<property name="intensityLevel" value="3" />
+			<property name="dimOnDelay" value="0"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="3" />
+			<property name="currentScale" value="46" />
+			<property name="fullOnRequired" value="0" />
+			<property name="percentage" value="70" />
+			<property name="intensityLevel" value="4" />
+			<property name="dimOnDelay" value="0"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="1" />
+			<property name="currentScale" value="53" />
+			<property name="fullOnRequired" value="0" />
+			<property name="percentage" value="80" />
+			<property name="intensityLevel" value="5" />
+			<property name="dimOnDelay" value="0"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="0" />
+			<property name="currentScale" value="63" />
+			<property name="fullOnRequired" value="0" />
+			<property name="percentage" value="100" />
+			<property name="intensityLevel" value="6" />
+			<property name="dimOnDelay" value="0"/>
+		</bean>
+	</util:list>
+
+	<util:list id="LED Dual Ballast 01" value-type="java.util.ArrayList">
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="4" />
+			<property name="currentScale" value="12" />
+			<property name="fullOnRequired" value="0" />
+			<property name="percentage" value="20" />
+			<property name="intensityLevel" value="1" />
+			<property name="dimOnDelay" value="0"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="4" />
+			<property name="currentScale" value="12" />
+			<property name="fullOnRequired" value="0" />
+			<property name="percentage" value="20" />
+			<property name="intensityLevel" value="2" />
+			<property name="dimOnDelay" value="0"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="10" />
+			<property name="currentScale" value="34" />
+			<property name="fullOnRequired" value="0" />
+			<property name="percentage" value="50" />
+			<property name="intensityLevel" value="3" />
+			<property name="dimOnDelay" value="0"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="3" />
+			<property name="currentScale" value="46" />
+			<property name="fullOnRequired" value="0" />
+			<property name="percentage" value="70" />
+			<property name="intensityLevel" value="4" />
+			<property name="dimOnDelay" value="0"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="1" />
+			<property name="currentScale" value="53" />
+			<property name="fullOnRequired" value="0" />
+			<property name="percentage" value="80" />
+			<property name="intensityLevel" value="5" />
+			<property name="dimOnDelay" value="0"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="0" />
+			<property name="currentScale" value="63" />
+			<property name="fullOnRequired" value="0" />
+			<property name="percentage" value="100" />
+			<property name="intensityLevel" value="6" />
+			<property name="dimOnDelay" value="0"/>
+		</bean>
+	</util:list>
+	<util:list id="200W Induction Ballast 00" value-type="java.util.ArrayList">
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="3" />
+			<property name="currentScale" value="40" />
+			<property name="fullOnRequired" value="1" />
+			<property name="percentage" value="50" />
+			<property name="intensityLevel" value="1" />
+			<property name="dimOnDelay" value="2"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="3" />
+			<property name="currentScale" value="40" />
+			<property name="fullOnRequired" value="1" />
+			<property name="percentage" value="50" />
+			<property name="intensityLevel" value="2" />
+			<property name="dimOnDelay" value="2"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="3" />
+			<property name="currentScale" value="40" />
+			<property name="fullOnRequired" value="1" />
+			<property name="percentage" value="50" />
+			<property name="intensityLevel" value="3" />
+			<property name="dimOnDelay" value="2"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="2" />
+			<property name="currentScale" value="46" />
+			<property name="fullOnRequired" value="1" />
+			<property name="percentage" value="70" />
+			<property name="intensityLevel" value="4" />
+			<property name="dimOnDelay" value="2"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="2" />
+			<property name="currentScale" value="46" />
+			<property name="fullOnRequired" value="1" />
+			<property name="percentage" value="70" />
+			<property name="intensityLevel" value="5" />
+			<property name="dimOnDelay" value="2"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="0" />
+			<property name="currentScale" value="63" />
+			<property name="fullOnRequired" value="1" />
+			<property name="percentage" value="100" />
+			<property name="intensityLevel" value="6" />
+			<property name="dimOnDelay" value="2"/>
+		</bean>
+	</util:list>
+	<util:list id="150W Induction Ballast 00" value-type="java.util.ArrayList">
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="11" />
+			<property name="currentScale" value="37" />
+			<property name="fullOnRequired" value="1" />
+			<property name="percentage" value="50" />
+			<property name="intensityLevel" value="1" />
+			<property name="dimOnDelay" value="2"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="11" />
+			<property name="currentScale" value="37" />
+			<property name="fullOnRequired" value="1" />
+			<property name="percentage" value="50" />
+			<property name="intensityLevel" value="2" />
+			<property name="dimOnDelay" value="2"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="11" />
+			<property name="currentScale" value="37" />
+			<property name="fullOnRequired" value="1" />
+			<property name="percentage" value="50" />
+			<property name="intensityLevel" value="3" />
+			<property name="dimOnDelay" value="2"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="3" />
+			<property name="currentScale" value="43" />
+			<property name="fullOnRequired" value="1" />
+			<property name="percentage" value="60" />
+			<property name="intensityLevel" value="4" />
+			<property name="dimOnDelay" value="2"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="2" />
+			<property name="currentScale" value="48" />
+			<property name="fullOnRequired" value="1" />
+			<property name="percentage" value="75" />
+			<property name="intensityLevel" value="5" />
+			<property name="dimOnDelay" value="2"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="0" />
+			<property name="currentScale" value="63" />
+			<property name="fullOnRequired" value="1" />
+			<property name="percentage" value="100" />
+			<property name="intensityLevel" value="6" />
+			<property name="dimOnDelay" value="2"/>
+		</bean>
+	</util:list>
+	<util:list id="LED 2ND GEN" value-type="java.util.ArrayList">
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="10" />
+			<property name="currentScale" value="6" />
+			<property name="fullOnRequired" value="0" />
+			<property name="percentage" value="10" />
+			<property name="intensityLevel" value="1" />
+			<property name="dimOnDelay" value="0"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="22" />
+			<property name="currentScale" value="16" />
+			<property name="fullOnRequired" value="0" />
+			<property name="percentage" value="25" />
+			<property name="intensityLevel" value="2" />
+			<property name="dimOnDelay" value="0"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="33" />
+			<property name="currentScale" value="25" />
+			<property name="fullOnRequired" value="0" />
+			<property name="percentage" value="40" />
+			<property name="intensityLevel" value="3" />
+			<property name="dimOnDelay" value="0"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="49" />
+			<property name="currentScale" value="38" />
+			<property name="fullOnRequired" value="0" />
+			<property name="percentage" value="60" />
+			<property name="intensityLevel" value="4" />
+			<property name="dimOnDelay" value="0"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="64" />
+			<property name="currentScale" value="50" />
+			<property name="fullOnRequired" value="0" />
+			<property name="percentage" value="80" />
+			<property name="intensityLevel" value="5" />
+			<property name="dimOnDelay" value="0"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="80" />
+			<property name="currentScale" value="63" />
+			<property name="fullOnRequired" value="0" />
+			<property name="percentage" value="100" />
+			<property name="intensityLevel" value="6" />
+			<property name="dimOnDelay" value="0"/>
+		</bean>
+	</util:list>
+
+	<util:list id="AUTEC LED 2ND GEN" value-type="java.util.ArrayList">
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="20" />
+			<property name="currentScale" value="13" />
+			<property name="fullOnRequired" value="0" />
+			<property name="percentage" value="20" />
+			<property name="intensityLevel" value="1" />
+			<property name="dimOnDelay" value="0"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="40" />
+			<property name="currentScale" value="25" />
+			<property name="fullOnRequired" value="0" />
+			<property name="percentage" value="40" />
+			<property name="intensityLevel" value="2" />
+			<property name="dimOnDelay" value="0"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="60" />
+			<property name="currentScale" value="38" />
+			<property name="fullOnRequired" value="0" />
+			<property name="percentage" value="60" />
+			<property name="intensityLevel" value="3" />
+			<property name="dimOnDelay" value="0"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="75" />
+			<property name="currentScale" value="47" />
+			<property name="fullOnRequired" value="0" />
+			<property name="percentage" value="75" />
+			<property name="intensityLevel" value="4" />
+			<property name="dimOnDelay" value="0"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="90" />
+			<property name="currentScale" value="57" />
+			<property name="fullOnRequired" value="0" />
+			<property name="percentage" value="90" />
+			<property name="intensityLevel" value="5" />
+			<property name="dimOnDelay" value="0"/>
+		</bean>
+		<bean class="com.sensus.lc.light.model.PartNumberConfiguration">
+			<property name="hardwareSetting" value="100" />
+			<property name="currentScale" value="63" />
+			<property name="fullOnRequired" value="0" />
+			<property name="percentage" value="100" />
+			<property name="intensityLevel" value="6" />
+			<property name="dimOnDelay" value="0"/>
+		</bean>
+	</util:list>
+
+</beans>

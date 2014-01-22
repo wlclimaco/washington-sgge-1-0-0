@@ -1,0 +1,92 @@
+/* Adjust position of Slider Validation Messages */
+.slider-container {
+	position: relative;
+}
+
+.slider-container label.error {
+	left: 24em;
+	position: absolute;
+	top: -0.2em;
+	width: 15em;
+}
+
+.highlight .lighting-controls.dimmer {
+	background: none repeat scroll 0 0 #F1F6F7 !important;
+}
+
+/* Dimmer Control */
+
+.dimmer fieldset .control {
+	float:left;
+	width:60%; 
+	margin-top: -0.5em;
+}
+
+.dimmer-options {
+	margin-left: -30.6em;
+    width: 5%;
+}
+
+/* Adjust position of Weekday Validation Messages */
+.switch {
+	position: relative;
+}
+
+fieldset .switch label.error {
+	left: 1em;
+	position: absolute;
+	top: 2.25em;
+	width: 22em;
+}
+
+/* Adjust position of OffSet Sunrise/Sunset*/
+.fields #switchSunrise label.error, .fields #switch-sunset label.error{
+	position: abosule;
+	left: 19em;
+	top: -4px;
+}
+
+/* Adjust position of Weekday Validation Messages */
+.event-day-custom {
+	position: relative;
+}
+
+#event-add .event-container {
+	padding-bottom: 0.2em !important;
+}
+
+fieldset .event-day-custom label.error {
+	left: 55em;
+	position: absolute;
+	top: 1em;
+}
+
+#event-add .event-container .fields li {
+	overflow: visible;
+}
+
+fieldset ul .underline {
+	padding: 0.5em 0.5em 1em 0.5em !important;
+}
+
+fieldset ul .submit {
+	border-top: 1px dotted #CCCCCC;
+    margin: 0.8em 0;
+	padding: 1em 0.5em 0.5em 0.5em !important;
+}
+
+fieldset ul li.highlight {
+	padding-bottom: 0 !important;
+}
+
+fieldset legend {
+	width: 98.5%;
+}
+
+fieldset ul li.underline {
+	border: 0px !important;
+}
+
+fieldset#offset {
+	margin-bottom: -1em;
+}

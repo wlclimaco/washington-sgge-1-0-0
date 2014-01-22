@@ -1,0 +1,126 @@
+html, body {
+		width:		100%;
+		height:		100%;
+		padding:	0;
+		margin:		0;
+		overflow:	auto; /* when page gets too small for container min-width/height */
+}
+.wdcontent {
+	FONT-FAMILY:	Arial, Helvetica;
+	FONT-SIZE: 		100%;
+	width:			100%;
+	height:			100%;
+	display:		none;
+}
+.ui-layout-pane {
+	BORDER-BOTTOM: #bbb 1px solid; BORDER-LEFT: #bbb 1px solid; PADDING-BOTTOM: 10px; PADDING-LEFT: 10px; PADDING-RIGHT: 10px; BACKGROUND: #fff; OVERFLOW: auto; BORDER-TOP: #bbb 1px solid; BORDER-RIGHT: #bbb 1px solid; PADDING-TOP: 10px
+}
+.ui-layout-content {
+	POSITION: relative; PADDING-BOTTOM: 10px; PADDING-LEFT: 10px; PADDING-RIGHT: 10px; OVERFLOW: hidden; PADDING-TOP: 5px
+}
+.ui-layout-resizer {
+	BORDER-BOTTOM: #bbb 0px solid; BORDER-LEFT: #bbb 0px solid; BACKGROUND: #ddd; BORDER-TOP: #bbb 0px solid; BORDER-RIGHT: #bbb 0px solid
+}
+.ui-layout-resizer-drag {
+
+}
+.ui-layout-resizer-hover {
+
+}
+.ui-layout-resizer-open-hover {
+	BACKGROUND: #c4e1a4
+}
+.ui-layout-resizer-dragging {
+	BACKGROUND: #c4e1a4
+}
+.ui-layout-resizer-dragging {
+	BORDER-LEFT: #bbb 1px solid; BORDER-RIGHT: #bbb 1px solid
+}
+.ui-layout-resizer-dragging-limit {
+	BACKGROUND: #e1a4a4
+}
+.ui-layout-resizer-closed-hover {
+	BACKGROUND: #ebd5aa
+}
+.ui-layout-resizer-sliding {
+	FILTER: alpha(opacity=10); opacity: .10
+}
+.ui-layout-resizer-sliding-hover {
+	FILTER: alpha(opacity=100); opacity: 1.00
+}
+.ui-layout-resizer-west-sliding-hover {
+	BORDER-RIGHT-WIDTH: 1px
+}
+.ui-layout-toggler {
+	BORDER-BOTTOM: #bbb 1px solid; BORDER-LEFT: #bbb 1px solid; BACKGROUND-COLOR: #bbb; BORDER-TOP: #bbb 1px solid; BORDER-RIGHT: #bbb 1px solid
+}
+.ui-layout-resizer-hover .ui-layout-toggler {
+	FILTER: alpha(opacity=60); opacity: .60
+}
+.ui-layout-resizer-hover .ui-layout-toggler-hover {
+	FILTER: alpha(opacity=100); BACKGROUND-COLOR: #fc6; opacity: 1.00
+}
+.ui-layout-toggler-west {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 1px; BORDER-BOTTOM-WIDTH: 1px; BORDER-LEFT-WIDTH: 0px
+}
+.ui-layout-resizer-sliding ui-layout-toggler {
+	DISPLAY: none
+}
+.ui-layout-toggler .content {
+	PADDING-BOTTOM: 0.35ex; WIDTH: 100%; COLOR: #666; FONT-SIZE: 12px; FONT-WEIGHT: bold
+}
+.ui-layout-west{
+		BORDER-BOTTOM: #777 1px solid; BORDER-LEFT: #777 1px solid; PADDING-BOTTOM: 0px; BACKGROUND-COLOR: #fff; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; OVERFLOW: hidden; BORDER-TOP: #777 1px solid; BORDER-RIGHT: #777 1px solid; PADDING-TOP: 0px
+}
+.west-header {
+	BORDER-BOTTOM: #777 1px solid; POSITION: relative; TEXT-ALIGN: center; PADDING-BOTTOM: 4px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; BACKGROUND: url(../images/wdmenubkg.jpg); OVERFLOW: hidden; FONT-WEIGHT: bold; PADDING-TOP: 2px
+}
+.ui-layout-north {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; background: #f5f8f9 url(../thirdparty/jquery/styles/redmond/images/ui-bg_inset-hard_100_f5f8f9_1x100.png) 50% 50% repeat-x; OVERFLOW: hidden; PADDING-TOP: 0px;
+}
+.header-left {
+	    float:left;  width:33%;  height:55px; PADDING-TOP: 7px;  background: #f5f8f9 url(../thirdparty/jquery/styles/redmond/images/ui-bg_inset-hard_100_f5f8f9_1x100.png) 50% 50% repeat-x;
+}
+.header-center {
+	    float:left;  width:34%;  height:55px;  background: #f5f8f9 url(../thirdparty/jquery/styles/redmond/images/ui-bg_inset-hard_100_f5f8f9_1x100.png) 50% 50% repeat-x;
+}
+
+.ui-layout-center-header { padding: 0px 0px 0px 0px;	 margin: 0;
+}
+
+.header-right {
+		float:left;  width:33%;  height:55px;  background: #f5f8f9 url(../thirdparty/jquery/styles/redmond/images/ui-bg_inset-hard_100_f5f8f9_1x100.png) 50% 50% repeat-x;
+}
+.appname {
+	font-weight: bold; font-size: 14px; color: #1D5987;  font-family: Arial, Helvetica; text-align: center; PADDING-TOP: 25px;
+}
+.ui-layout-south {
+    PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px;  background: #f5f8f9 url(../thirdparty/jquery/styles/redmond/images/ui-bg_inset-hard_100_f5f8f9_1x100.png) 50% 50% repeat-x; OVERFLOW: hidden; PADDING-TOP: 0px; BORDER-TOP:  0px;
+}
+.ui-layout-south-content {
+	font-size:9px;	 font-weight: bold; color: #1D5987;  text-align: center;
+}
+.header-right A:hover { color: #1D5987;	font-family: Arial, Helvetica;	font-weight: bold;	font-size: 11px;
+}
+.header-right A:link { color: #1D5987;	font-family: Arial, Helvetica;	font-weight: normal; font-size: 11px;
+}
+.header-right A:visited { color: #1D5987; font-family: Arial, Helvetica;	font-size: 11px;
+}
+.header-right A:active {	color: #1D5987; font-family: Arial, Helvetica;	font-weight: bold;	font-size: 11px;
+}
+.header-right .img { float: right; padding-right:5px;
+}
+.header-right .time { color: #1D5987; text-decoration: none;	font-family: Arial, Helvetica;	font-weight: bold;	font-size: 10px; text-align: right; clear: right; padding-right:5px;
+}
+.header-right .uname { color: #1D5987; text-decoration: none; font-family: Arial, Helvetica;	font-weight: bold;	font-size: 10px; text-align: right; padding-right:5px
+}
+.ui-accordion .ui-accordion-content { font-family: Arial, Helvetica;	font-size: 12px; margin-top: 0px; padding: 0em 1.0em;
+}
+ul.dynatree-container { border: 0px;
+}
+.ui-tabs .ui-tabs-panel { 	PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; DISPLAY: block; BACKGROUND: none transparent scroll repeat 0% 0%; PADDING-TOP: 0px
+}
+.tabscontent { 	BORDER-BOTTOM: 1px;  BORDER-LEFT: 1px; BORDER-TOP: 1px ; BORDER-RIGHT: 1px;
+}
+.ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header .ui-state-error { z-index: 999;
+}

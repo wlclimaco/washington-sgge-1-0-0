@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "Tag">
+
+	<resultMap id="listAllTagResults" type="Tag" >
+		<result property="id" column="tag_id" />
+		<result property="name" column="name" />
+		<result property="autoGroup" column="auto_group" />
+		<result property="totalLights" column="light_count" />
+		<result property="date" column="create_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+	</resultMap>
+
+	<resultMap id="listTagResults" type="Tag" >
+		<result property="id" column="tag_id" />
+		<result property="name" column="name" />
+		<result property="autoGroup" column="auto_group" />
+	</resultMap>
+
+	<resultMap id="listTagResultsWithLights" type="Tag" extends="listTagResults" >
+		<collection property="lights" column="tag_id" select="Tag.fetchLightsByTagId" />
+	</resultMap>
+
+	<resultMap id="listTagSimpleResults" type="Tag" >
+		<result property="id" column="tag_id" />
+		<result property="name" column="name" />
+		<result property="autoGroup" column="auto_group" />
+	</resultMap>
+
+	<resultMap id="LightsTag" type="Light" >
+		<result property="id" column="light_id" />
+	</resultMap>
+
+	<resultMap id="lightsResults" type="Light">
+		<result property="id" column="light_id" />
+	</resultMap>
+
+	<sql id="allTagColumms">
+		tag_id,name,auto_group,create_date,light_count
+	</sql>
+
+	<sql id="allCustomListTagColumns">
+		tag_id, name, auto_group
+	</sql>
+
+	<!-- Insert Tag -->
+	<select id="insertTag" parameterType="Map" resultType="int">
+		SELECT ins_tag (#{tagname,jdbcType=VARCHAR},
+						#{autogroup,jdbcType=BOOLEAN},
+						#{address_related,jdbcType=BOOLEAN},
+						#{tenantId,jdbcType=INTEGER},
+						#{createUser,jdbcType=VARCHAR})
+	</select>
+
+	<!-- Insert Light To Tag -->
+	<select id="insertLightToTag" parameterType="Map">
+		INSERT INTO light_tag( create_user
+					    ,tag_id
+					    ,light_id)
+		    SELECT #{createUser} AS create_user
+		           ,t.tag_id
+		           ,l.light_id
+		      FROM light l, tag t
+		     WHERE t.tag_id = #{tagId,jdbcType=INTEGER}
+		      AND l.light_id IN
+			     <foreach item="item" index="index" collection="selectionPaginationIds"
+						open="(" separator="," close=")">
+						#{item}
+				  </foreach>
+
+	</select>
+
+	<!-- Update Auto Group Tag -->
+	<select id="updateAutoGroupTag"  parameterType="Tag">
+		SELECT upd_auto_group_tag (#{id,jdbcType=INTEGER},#{autoGroup,jdbcType=BOOLEAN})
+	</select>
+
+	<!-- Delete Light From Tag -->
+	<delete id="deleteLightFromTag"  parameterType="Map">
+		DELETE
+		  FROM light_tag
+         WHERE tag_id = #{tagId}
+           AND light_id IN
+	           <foreach item="item" index="index" collection="selectionPaginationIds"
+						open="(" separator="," close=")">
+						#{item}
+			   </foreach>
+
+	</delete>
+
+	<!-- Delete Tag -->
+	<select id="deleteTag" parameterType="Tag">
+		SELECT del_tag (#{id})
+	</select>
+
+	<!-- Fetch All Tags -->
+	<select id="fetchAllTags" parameterType="Map" resultMap="listAllTagResults">
+
+		SELECT  <include refid="allTagColumms"/>
+		  FROM
+		   (  select ROW_NUMBER() OVER(ORDER BY ${orderBy}) as RowNum
+		             ,t.*
+		        from (SELECT tg.tag_id
+		                    ,tg.name
+		                    ,tg.auto_group
+		                    ,tg.create_date
+		                FROM tag AS tg
+		               WHERE tg.tenant_id = #{tenantId,jdbcType=INTEGER}
+		                 AND tg.tag_id = COALESCE(#{tagId},tg.tag_id)
+		             ) t
+		   ) as TAGPAGE
+		   <if test="pageSize > 0" >
+				WHERE RowNum BETWEEN #{startRow} + 1 AND (#{startRow,jdbcType=INTEGER} + #{pageSize,jdbcType=INTEGER})
+		   </if>
+
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1)
+		  FROM (SELECT tenant_id
+		          FROM tag
+		         WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>
+
+	<!-- Fetch Tag By Name -->
+	<select id="fetchTagByName" parameterType="TagRequest"  resultMap="listTagResults" >
+	    SELECT  <include refid="allCustomListTagColumns"/>
+	      FROM tag
+	     WHERE name = #{tag.name,jdbcType=VARCHAR}
+	       AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+
+	</select>
+
+	<!-- Fetch Tag By Id -->
+	<select id="fetchTagById" parameterType="Tag" resultMap="listTagResultsWithLights" >
+		SELECT <include refid="allCustomListTagColumns"/>
+		  FROM tag
+		 WHERE tag_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Tag By Id -->
+	<select id="fetchTagNameById" parameterType="Tag" resultMap="listTagSimpleResults" >
+		SELECT <include refid="allCustomListTagColumns"/>
+		  FROM tag
+		 WHERE tag_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Tags By Light Id -->
+	<select id="fetchTagsByLightId" parameterType="Map"  resultMap="listTagResults" >
+	   SELECT tag.tag_id AS tag_id, tag.name AS name, tag.auto_group AS auto_group
+		 FROM tag, light_tag, light
+		    WHERE light.light_id IN
+				 <foreach item="item" index="index" collection="selectionPaginationIds"
+					   open="(" separator="," close=")">
+				       #{item}
+			     </foreach>
+		      AND light_tag.tag_id = tag.tag_id
+		      AND light_tag.light_id = light.light_id
+		      AND light.tenant_id = #{tenantId,jdbcType=INTEGER} AND tag.tenant_id = #{tenantId,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Lights Belong -->
+	<select id="fetchLightsBelongTag" parameterType="Map" resultMap="lightsResults">
+		SELECT l.light_id
+		  FROM light_tag AS lgt_tag
+		  JOIN light l ON (l.light_id = lgt_tag.light_id)
+		 WHERE lgt_tag.tag_id = #{tagId,jdbcType=INTEGER}
+		   AND lgt_tag.light_id IN
+		      <foreach item="item" index="index" collection="selectionPaginationIds"
+					open="(" separator="," close=")">
+					#{item}
+			  </foreach>
+	</select>
+
+	<!-- Fetch Lights By Tag Id -->
+	<select id="fetchLightsByTagId" resultMap="LightsTag" >
+		SELECT light.light_id
+		  FROM light_tag, light
+		 WHERE light_tag.tag_id = #{value,jdbcType=INTEGER}
+		   AND light.light_id = light_tag.light_id;
+	</select>
+</mapper>

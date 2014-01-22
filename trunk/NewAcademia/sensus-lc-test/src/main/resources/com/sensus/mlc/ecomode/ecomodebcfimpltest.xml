@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="ecoModeBCFTarget" class="com.sensus.lc.ecomode.bcf.impl.EcoModeBCFImpl">
+		<property name="ecoModeBCL" ref="ecoModeBCLMockTarget" />
+		<property name="processBCF" ref="processBCFMockTarget" />
+		<property name="requestValidationController" ref="requestValidationController" />
+		<property name="inquiryRequestValidationController" ref="inquiryRequestValidationController" />
+		<property name="lightSelectionRequestValidationController" ref="lightSelectionRequestValidationController" />
+		<property name="rangeDateValidationController" ref="rangeDateValidationController" />
+		<property name="csvFileValidationController" ref="csvFileValidationController" />
+		<property name="lightListValidationController" ref="lightListValidationController" />
+	</bean>
+
+</beans>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AlertCommunication">
+
+	<!--############################ -->
+	<!--#### Result Maps        #### -->
+	<!--############################ -->
+
+	<resultMap id="AlertCommunicationResult" type="AlertCommunication">
+
+		<result property="tenantId"		  	column="tenant_id" />
+		<result property="phaseIndicator"  	column="phase_indicator" />
+		<result property="phaseStartTime" 	jdbcType="TIMESTAMP"  column="phase_starttime"  typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="phaseEndTime" 	jdbcType="TIMESTAMP"  column="phase_endtime"    typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="cycleStartTime" 	jdbcType="TIMESTAMP"  column="cycle_starttime"  typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler" />
+		<result property="successIndicator"	column="success_indicator" />
+	</resultMap>
+
+	<resultMap id="AlertCommunicationConfigResult" type="AlertCommunicationConfig">
+
+		<result property="tenantId"		  	column="tenant_id" />
+		<result property="phase"  			column="phase" />
+		<result property="elapsedTime"	 	column="elapsed_time" />
+
+	</resultMap>
+
+	<!--############################ -->
+	<!--#### Queries            #### -->
+	<!--############################ -->
+
+	<select id="fetchAlertCommunicationConfigByRequest" parameterType="AlertCommunicationConfigRequest" resultMap="AlertCommunicationConfigResult">
+
+		SELECT *
+		  FROM alert_communication_config
+		 WHERE tenant_id = #{tenantId}
+	  ORDER BY phase ASC
+
+	</select>
+
+	<select id="fetchAlertCommunicationByRequest" parameterType="AlertCommunicationRequest" resultMap="AlertCommunicationResult">
+
+		SELECT *
+		  FROM alert_communication
+		 WHERE tenant_id = #{tenantId}
+
+	</select>
+
+	<update id="UpdateAlertCommunication" parameterType="AlertCommunication">
+
+		UPDATE alert_communication
+			<trim prefix="SET" prefixOverrides=",">
+				<if test="phaseIndicator != null" >        phase_indicator = #{phaseIndicator} </if>
+				<if test="phaseStartTime != null" >       ,phase_starttime = #{phaseStartTime} </if>
+				<if test="phaseEndTime  != null" >        ,phase_endtime   = #{phaseEndTime} </if>
+				<if test="successIndicator  != null" >    ,success_indicator = #{successIndicator} </if>
+				<if test="cycleStartTime  != null" >      ,cycle_starttime = #{cycleStartTime} </if>
+			</trim>
+	    WHERE tenant_id = #{tenantId}
+
+	</update>
+
+
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="Sensus Checkstyle" >
+
+	<include file="..\..\AntConfig\Sensus-ant-common-targets.xml" optional="false" />
+
+	<target name="build">
+
+		<antcall target="Sensus.runCheckstyle">
+
+			<param name="moduleName" value="sensus-lc-test" />
+			<param name="checkstyleSrc1" value="../../sensus-lc-interface" />
+			<param name="checkstyleSrc2" value="../../sensus-lc-implementation" />
+			<param name="checkstyleSrc3" value="../../sensus-lc-web" />
+
+			<!-- <param name="failBuildBasedOnCheckstyle" value="true" /> -->
+
+		</antcall>
+
+	</target>
+
+</project>

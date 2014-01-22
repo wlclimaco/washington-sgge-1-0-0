@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="analyticsBCLTarget" class="com.sensus.lc.analytics.bcl.impl.AnalyticsBCLImpl">
+		<property name="analyticsDAC" ref="analyticsDACMockTarget" />
+		<property name="processBCL" ref="processBCLMockTarget" />
+		<property name="carbonCreditsFactor" value="0.000717830556540234" />
+		<property name="barrelsOfOilFactor" value="0.0016705069124424" />
+		<property name="metricOfCOFactor" value="0.000717830556540234" />
+		<property name="tempFilePath" value="${csv.temp.file.path}" />
+		<property name="analyticsAlarmExportColumns" ref="csvAnalyticsAllAlarmColumns" />
+		<property name="analyticsWarningsExportColumns" ref="csvAnalyticsAllWarningsColumns" />
+		<property name="analyticsInstalledAndConsumptionExportColumns" ref="csvAnalyticsAllInstalledAndConsumptionColumns" />
+		<property name="analyticsAllEcoModeColumns" ref="csvAnalyticsAllEcoModeColumns" />
+		<property name="analyticsAllCarbonCreditsColumns" ref="csvAnalyticsAllCarbonCreditsColumns" />
+	</bean>
+</beans>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://mallet-app.davis.sensus.lab:8080/" />
+<title>Select group: None, All and Page</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Select group: None, All and Page</td></tr>
+</thead><tbody>
+<tr>
+	<td>storeSelectedValue</td>
+	<td>css=#group-table_length select</td>
+	<td>atualPerPage</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${atualPerPage} == ${groupsPorPage}</td>
+	<td>jumpChangePerPage</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=#group-table_length select</td>
+	<td>${groupsPorPage}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=page-size-cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>jumpChangePerPage</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=groups-select-all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=groups-select-page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>true</td>
+	<td>jump2</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=checked-count</td>
+	<td>${groupsPorPage}</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>jump2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=groups-select-none</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=checked-count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=#group-table_length select</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=page-size-cancel</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

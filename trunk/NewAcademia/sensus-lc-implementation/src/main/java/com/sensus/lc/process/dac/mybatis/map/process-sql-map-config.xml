@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<settings>
+		<setting name="lazyLoadingEnabled" value="false" />
+	</settings>
+
+	<typeAliases>
+		<!-- Process mapping -->
+		<typeAlias alias="Process" 				type="com.sensus.lc.process.model.Process" />
+		<typeAlias alias="ProcessItem" 			type="com.sensus.lc.process.model.ProcessItem" />
+		<typeAlias alias="ProcessStatusReason" 	type="com.sensus.lc.process.model.ProcessStatusReason" />
+		<typeAlias alias="LCAction" 			type="com.sensus.lc.process.model.LCAction" />
+		<typeAlias alias="LCActionParameter" 	type="com.sensus.lc.process.model.LCActionParameter" />
+		<typeAlias alias="Group" 				type="com.sensus.lc.group.model.Group" />
+		<typeAlias alias="Tenant" 				type="com.sensus.lc.tenant.model.Tenant" />
+
+		<!-- Process and Light joint mapping -->
+		<typeAlias alias="Schedule" 			type="com.sensus.lc.schedule.model.Schedule" />
+		<typeAlias alias="OffSetSchedule" 		type="com.sensus.lc.schedule.model.OffsetSchedule" />
+		<typeAlias alias="EventSchedule"  		type="com.sensus.lc.schedule.model.EventSchedule" />
+		<typeAlias alias="Light" 				type="com.sensus.lc.light.model.Light" />
+		<typeAlias alias="NotificationHistory"	type="com.sensus.lc.light.model.NotificationHistory" />
+
+		<!-- Light mapping -->
+		<typeAlias alias="Group" 						  type="com.sensus.lc.group.model.Group" />
+		<typeAlias alias="Tag" 						  	  type="com.sensus.lc.tag.model.Tag" />
+		<typeAlias alias="EventSchedule" 				  type="com.sensus.lc.schedule.model.EventSchedule" />
+		<typeAlias alias="TimeZoneInfo" 				  type="com.sensus.lc.base.model.TimeZoneInfo" />
+		<typeAlias alias="Schedule" 					  type="com.sensus.lc.schedule.model.Schedule" />
+		<typeAlias alias="LightingControlRequest" 		  type="com.sensus.lc.base.model.request.LightingControlRequest" />
+		<typeAlias alias="ScheduleRequest" 				  type="com.sensus.lc.schedule.model.request.ScheduleRequest" />
+
+		<!-- Tenant mapping -->
+		<typeAlias alias="Tenant"		  				type="com.sensus.lc.tenant.model.Tenant" />
+		<typeAlias alias="TenantRequest"				type="com.sensus.lc.tenant.model.request.TenantRequest" />
+		<typeAlias alias="ApiControl"		  			type="com.sensus.lc.tenant.model.ApiControl" />
+  		<typeAlias alias="ApiControlMaintenanceRequest"	type="com.sensus.lc.tenant.model.request.ApiControlMaintenanceRequest" />
+
+	</typeAliases>
+
+	<mappers>
+		<mapper resource="com/sensus/lc/process/dac/mybatis/map/process.xml" />
+		<mapper resource="com/sensus/lc/tenant/dac/mybatis/map/tenant.xml" />
+	</mappers>
+
+</configuration>

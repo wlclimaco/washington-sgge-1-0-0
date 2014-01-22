@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+
+	<!-- ############################# ######## LightHistory ####### ############################# -->
+
+	<bean id="csvLightHistoryName" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="action" />
+		<property name="headerResourceKey" value="lc.light.history.csv.name" />
+		<property name="propertyPath" value="name" />
+	</bean>
+
+	<bean id="csvLightHistoryDescription" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="description" />
+		<property name="headerResourceKey" value="lc.light.history.csv.description" />
+		<property name="propertyPath" value="description" />
+	</bean>
+
+	<bean id="csvLightHistoryCreateUser" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="createUser" />
+		<property name="headerResourceKey" value="lc.light.history.csv.create.user" />
+		<property name="propertyPath" value="createUser" />
+	</bean>
+
+	<bean id="csvLightHistoryDateAdded" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="create_date" />
+		<property name="headerResourceKey" value="lc.light.history.csv.start.time" />
+		<property name="propertyPath" value="." />
+	</bean>
+
+	<bean id="csvLightHistoryStatus" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="status" />
+		<property name="headerResourceKey" value="lc.light.history.csv.status" />
+		<property name="propertyPath" value="status" />
+	</bean>
+
+	<!-- ############################## ######## Light Summary ####### ############################## -->
+	<bean id="csvLightSummaryFlexNetId" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="flexnet_id" />
+		<property name="headerResourceKey" value="lc.common.light.csv.flexnet.id" />
+		<property name="propertyPath" value="radio.flexNetId" />
+	</bean>
+	<bean id="csvLightSummaryLifeCycleState" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="lifecycle_state" />
+		<property name="headerResourceKey" value="lc.common.light.csv.life.cycle.state" />
+		<property name="propertyPath" value="lifeCycleState" />
+	</bean>
+	<bean id="csvLightSummaryAddress" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="address" />
+		<property name="headerResourceKey" value="lc.common.light.csv.address" />
+		<property name="propertyPath" value="radio.location.address" />
+	</bean>
+
+	<!-- ############################# ######## Light Detail ####### ############################# -->
+
+	<bean id="csvLightDetailFlexNetId" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="flexnet_id" />
+		<property name="headerResourceKey" value="lc.common.light.csv.flexnet.id" />
+		<property name="propertyPath" value="radio.flexNetId" />
+	</bean>
+	<bean id="csvLightDetailLifeCycleState" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="lifecycle_state" />
+		<property name="headerResourceKey" value="lc.common.light.csv.life.cycle.state" />
+		<property name="propertyPath" value="." />
+	</bean>
+	<bean id="csvLightDetailDateAdded" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="date_added" />
+		<property name="headerResourceKey" value="lc.light.csv.date.added" />
+		<property name="propertyPath" value="." />
+	</bean>
+	<bean id="csvLightDetailLampTypeWattageDimmable" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="lamp_type_wattage_dimmable" />
+		<property name="headerResourceKey" value="lc.light.configuration.csv.lamp.type.wattage.dimmable" />
+		<property name="propertyPath" value="configuration.lampTypeWattageDimmable" />
+	</bean>
+	<bean id="csvLightDetailCity" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="city" />
+		<property name="headerResourceKey" value="lc.commonlight.csv.city" />
+		<property name="propertyPath" value="radio.location.city" />
+	</bean>
+	<bean id="csvLightDetailProtected" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="protected" />
+		<property name="headerResourceKey" value="lc.light.csv.protect" />
+		<property name="propertyPath" value="protect" />
+	</bean>
+	<bean id="csvLightDetailPoleId" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="pole_id" />
+		<property name="headerResourceKey" value="lc.common.light.csv.pole.id" />
+		<property name="propertyPath" value="poleId" />
+	</bean>
+	<bean id="csvLightDetailBulbSerialNumber" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="bulb_serial_number" />
+		<property name="headerResourceKey" value="lc.light.configuration.csv.bulb.serial.number" />
+		<property name="propertyPath" value="configuration.bulbSerialNumber" />
+	</bean>
+	<bean id="csvLightDetailColorTemperature" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="color_temperature" />
+		<property name="headerResourceKey" value="lc.light.configuration.csv.color.temperature" />
+		<property name="propertyPath" value="configuration.colorTemperature" />
+	</bean>
+	<bean id="csvLightDetailFirmwareVersion" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="firmware_version" />
+		<property name="headerResourceKey" value="lc.light.configuration.csv.firmware.version" />
+		<property name="propertyPath" value="configuration.firmwareVersion" />
+	</bean>
+	<bean id="csvLightDetailHousingColor" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="housing_color" />
+		<property name="headerResourceKey" value="lc.light.configuration.csv.housing.color" />
+		<property name="propertyPath" value="configuration.housingColor" />
+	</bean>
+	<bean id="csvLightDetailSerialNumber" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="serial_number" />
+		<property name="headerResourceKey" value="lc.light.configuration.csv.light.driver.serial.number" />
+		<property name="propertyPath" value="configuration.lightDriverSerialNumber" />
+	</bean>
+	<bean id="csvLightDetailLowerAssemblySerialNumber" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="lower_assembly_serial_number" />
+		<property name="headerResourceKey" value="lc.light.configuration.csv.lower.assembly.serial" />
+		<property name="propertyPath" value="configuration.lowerAssemblySerial" />
+	</bean>
+	<bean id="csvLightDetailUpperAssemblySerialNumber" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="upper_assembly_serial_number" />
+		<property name="headerResourceKey" value="lc.light.configuration.csv.upper.assembly.serial" />
+		<property name="propertyPath" value="configuration.upperAssemblySerial" />
+	</bean>
+	<bean id="csvLightDetailModelNumber" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="model_number" />
+		<property name="headerResourceKey" value="lc.light.configuration.csv.model.number" />
+		<property name="propertyPath" value="configuration.modelNumber" />
+	</bean>
+	<bean id="csvLightDetailInputVoltageRange" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="input_voltage_range" />
+		<property name="headerResourceKey" value="lc.light.configuration.csv.input.voltage.range" />
+		<property name="propertyPath" value="configuration.inputVoltageRange" />
+	</bean>
+	<bean id="csvLightDetailEcoMode" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="ecomode" />
+		<property name="headerResourceKey" value="lc.light.csv.eco.mode" />
+		<property name="propertyPath" value="ecoMode" />
+	</bean>
+	<bean id="csvLightDetailEcoModeReplaceWattage" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="ecomode_replaced_wattage" />
+		<property name="headerResourceKey" value="lc.light.csv.replace.wattage" />
+		<property name="propertyPath" value="ecoModeBaseline.replacedWattage" />
+	</bean>
+	<bean id="csvLightDetailEcoModeReplaceType" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="ecomode_replaced_type" />
+		<property name="headerResourceKey" value="lc.light.csv.replaced.type" />
+		<property name="propertyPath" value="ecoModeBaseline.replacedType" />
+	</bean>
+	<bean id="csvLightDetailConsumption" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="consumption" />
+		<property name="headerResourceKey" value="lc.light.last.operational.data.csv.consumption" />
+		<property name="propertyPath" value="lastOperationalData.consumption" />
+	</bean>
+	<bean id="csvLightDetailNotificationType" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="alerts" />
+		<property name="headerResourceKey" value="lc.light.last.notification.history.csv.alerts" />
+		<property name="propertyPath" value="." />
+	</bean>
+	<bean id="csvLightDetailAlertDate" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="alert_date" />
+		<property name="headerResourceKey" value="lc.light.last.operational.data.csv.alert.date" />
+		<property name="propertyPath" value="." />
+	</bean>
+	<bean id="csvLightDetailStateDate" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="state_date" />
+		<property name="headerResourceKey" value="lc.light.last.operational.data.csv.state.date" />
+		<property name="propertyPath" value="." />
+	</bean>
+
+	<!-- ############################# ######## Light Alerts ####### ############################# -->
+
+	<bean id="csvLightAlertPoleId" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="poleId" />
+		<property name="headerResourceKey" value="lc.common.light.csv.pole.id" />
+		<property name="propertyPath" value="poleId" />
+	</bean>
+
+	<bean id="csvLightAlertFlexNetId" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="flexNetId" />
+		<property name="headerResourceKey" value="lc.common.light.csv.flexnet.id" />
+		<property name="propertyPath" value="flexNetId" />
+	</bean>
+
+	<bean id="csvLightAlertAddress" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="address" />
+		<property name="header" value="Address" />
+		<property name="propertyPath" value="address" />
+	</bean>
+
+	<bean id="csvLightAlertCity" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="city" />
+		<property name="header" value="City" />
+		<property name="propertyPath" value="city" />
+	</bean>
+
+	<bean id="csvLightAlertType" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="alertType" />
+		<property name="headerResourceKey" value="lc.light.csv.alert.type" />
+		<property name="propertyPath" value="alertType" />
+	</bean>
+
+	<bean id="csvLightAlertSubType" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="alertSubType" />
+		<property name="headerResourceKey" value="lc.light.csv.alert.sub.type" />
+		<property name="propertyPath" value="alertSubType" />
+ 	</bean>
+
+	<bean id="csvLightAlertMessageDate" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="messageDate" />
+		<property name="headerResourceKey" value="lc.light.csv.message.date" />
+		<property name="propertyPath" value="messageDate" />
+	</bean>
+
+	<bean id="csvLightAlertVoltage" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="voltage" />
+		<property name="header" value="Voltage" />
+		<property name="propertyPath" value="voltage" />
+	</bean>
+
+	<bean id="csvLightAlertCurrent" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="current" />
+		<property name="header" value="Current" />
+		<property name="propertyPath" value="current" />
+	</bean>
+
+	<bean id="csvLightAlertLifeCycleState" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="lifeCycleState" />
+		<property name="header" value="Life Cycle State" />
+		<property name="propertyPath" value="lifeCycleState" />
+	</bean>
+
+
+	<!-- ############################# ######## Process ####### ################################# -->
+
+	<bean id="csvProcessActionType" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="actionType" />
+		<property name="headerResourceKey" value="lc.process.csv.action.type" />
+		<property name="propertyPath" value="lcAction.description" />
+	</bean>
+	<bean id="csvProcessActionName" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="description" />
+		<property name="headerResourceKey" value="lc.process.csv.action.name" />
+		<property name="propertyPath" value="description" />
+	</bean>
+	<bean id="csvProcessAmount" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="processItemAmount" />
+		<property name="headerResourceKey" value="lc.process.csv.items.amount" />
+		<property name="propertyPath" value="processItemAmount" />
+	</bean>
+	<bean id="csvProcessAmountFaile" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="processItemFailedAmount" />
+		<property name="headerResourceKey" value="lc.process.csv.items.amount.failed" />
+		<property name="propertyPath" value="processItemFailedAmount" />
+ 	</bean>
+	<bean id="csvProcessCreateUser" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="createUser" />
+		<property name="headerResourceKey" value="lc.light.history.csv.create.user" />
+		<property name="propertyPath" value="createUser" />
+	</bean>
+	<bean id="csvProcessStarTime" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="startTime" />
+		<property name="headerResourceKey" value="lc.light.history.csv.start.time" />
+		<property name="propertyPath" value="." />
+	</bean>
+	<bean id="csvProcessStatus" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="status" />
+		<property name="headerResourceKey" value="lc.process.csv.status" />
+		<property name="propertyPath" value="status" />
+	</bean>
+
+	<!-- ############################# ######## EcoMode ####### ################################# -->
+
+	<bean id="csvEcoModeMeasuredConsumption" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="consumption" />
+		<property name="headerResourceKey" value="lc.ecomode.csv.consumption" />
+		<property name="propertyPath" value="consumption" />
+	</bean>
+	<bean id="csvEcoMode" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="ecomode" />
+		<property name="headerResourceKey" value="lc.ecomode.csv.ecoMode" />
+		<property name="propertyPath" value="ecoMode" />
+	</bean>
+	<bean id="csvEcoModeDate" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="day" />
+		<property name="headerResourceKey" value="lc.ecomode.csv.date" />
+		<property name="propertyPath" value="." />
+	</bean>
+	<bean id="csvEcoModeBaseline" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="ecomodeBaseline" />
+		<property name="headerResourceKey" value="lc.ecomode.csv.baseline" />
+		<property name="propertyPath" value="ecomodeBaseline" />
+	</bean>
+
+	<!-- ############################# ######## Analytics Commons ##### ################################# -->
+
+	<bean id="csvAnalyticsGroups" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="name" />
+		<property name="headerResourceKey" value="lc.analytics.csv.groups" />
+		<property name="propertyPath" value="name" />
+	</bean>
+	<bean id="csvAnalyticsTotal" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="Total" />
+		<property name="headerResourceKey" value="lc.analytics.csv.total" />
+		<property name="propertyPath" value="columns" />
+	</bean>
+
+	<!-- ############################# ######## Analytics Alarms ##### ################################# -->
+
+	<bean id="csvAnalyticsLampFailure" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="Lamp Failure" />
+		<property name="headerResourceKey" value="lc.analytics.csv.lamp.failure" />
+		<property name="propertyPath" value="columns" />
+	</bean>
+	<bean id="csvAnalyticsPowerFailure" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="Power Failure" />
+		<property name="headerResourceKey" value="lc.analytics.csv.power.failure" />
+		<property name="propertyPath" value="columns" />
+	</bean>
+	<bean id="csvAnalyticsBoardFailure" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="Board Failure" />
+		<property name="headerResourceKey" value="lc.analytics.csv.board.failure" />
+		<property name="propertyPath" value="columns" />
+	</bean>
+	<bean id="csvAnalyticsMetrologyError" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="Metrology Error" />
+		<property name="headerResourceKey" value="lc.analytics.csv.metrology.error" />
+		<property name="propertyPath" value="columns" />
+	</bean>
+	<bean id="csvAnalyticsMetrologyCOMFailure" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="Metrology COM Failure" />
+		<property name="headerResourceKey" value="lc.analytics.csv.metrology.com.failure" />
+		<property name="propertyPath" value="columns" />
+	</bean>
+
+	<!-- ############################# ######## Analytics Warnings ##### ################################# -->
+
+	<bean id="csvAnalyticsPowerSurge" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="Power Surge" />
+		<property name="headerResourceKey" value="lc.analytics.csv.power.surge" />
+		<property name="propertyPath" value="columns" />
+	</bean>
+	<bean id="csvAnalyticsBrownoutDetected" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="Brownout Detected" />
+		<property name="headerResourceKey" value="lc.analytics.csv.brownout.detected" />
+		<property name="propertyPath" value="columns" />
+	</bean>
+	<bean id="csvAnalyticsCommunicationFail" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="Communication Fail" />
+		<property name="headerResourceKey" value="lc.analytics.csv.communication.fail" />
+		<property name="propertyPath" value="columns" />
+	</bean>
+	<bean id="csvAnalyticsHighCurrent" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="High Current" />
+		<property name="headerResourceKey" value="lc.analytics.csv.high.current" />
+		<property name="propertyPath" value="columns" />
+	</bean>
+	<bean id="csvAnalyticsLowCurrent" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="Low Current" />
+		<property name="headerResourceKey" value="lc.analytics.csv.low.current" />
+		<property name="propertyPath" value="columns" />
+	</bean>
+	<bean id="csvAnalyticsReverseEnergy" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="Reverse Energy" />
+		<property name="headerResourceKey" value="lc.analytics.csv.reverse.energy" />
+		<property name="propertyPath" value="columns" />
+	</bean>
+	<bean id="csvAnalyticsMetrologyReset" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="Metrology Reset" />
+		<property name="headerResourceKey" value="lc.analytics.csv.metrology.reset" />
+		<property name="propertyPath" value="columns" />
+	</bean>
+
+	<!-- ############################# ######## Analytics Installed and Consumption ##### ################################# -->
+
+	<bean id="csvAnalyticsInduction" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="Induction" />
+		<property name="headerResourceKey" value="lc.analytics.csv.induction" />
+		<property name="propertyPath" value="columns" />
+	</bean>
+	<bean id="csvAnalyticsLED" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="LED" />
+		<property name="headerResourceKey" value="lc.analytics.csv.led" />
+		<property name="propertyPath" value="columns" />
+	</bean>
+	<bean id="csvAnalyticsOther" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="Other" />
+		<property name="headerResourceKey" value="lc.analytics.csv.other" />
+		<property name="propertyPath" value="columns" />
+	</bean>
+
+	<!-- ############################# ######## Analytics EcoMode ##### ################################# -->
+
+	<bean id="csvAnalyticsMeasuredConsumption" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="Measured Consumption" />
+		<property name="headerResourceKey" value="lc.analytics.csv.measured.consumption" />
+		<property name="propertyPath" value="columns" />
+	</bean>
+	<bean id="csvAnalyticsBaselineConsumption" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="Baseline Consumption" />
+		<property name="headerResourceKey" value="lc.analytics.csv.baseline.consumption" />
+		<property name="propertyPath" value="columns" />
+	</bean>
+
+	<!-- ############################# ######## Analytics Carbon Credits ##### ################################# -->
+
+	<bean id="csvAnalyticsEnergySaved" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="Energy Saved" />
+		<property name="headerResourceKey" value="lc.analytics.csv.energy.saved" />
+		<property name="propertyPath" value="columns" />
+	</bean>
+	<bean id="csvAnalyticsBarrelsOfOilSaved" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="Barrels of oil Saved" />
+		<property name="headerResourceKey" value="lc.analytics.csv.barrels.of.oil.saved" />
+		<property name="propertyPath" value="columns" />
+	</bean>
+	<bean id="csvAnalyticsMetricTonsOfCOSaved" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="Metric Tons of CO Saved" />
+		<property name="headerResourceKey" value="lc.analytics.csv.metric.tons.of.co.saved" />
+		<property name="propertyPath" value="columns" />
+	</bean>
+
+	<!-- ############################# ######## Column sets ####### ############################# -->
+
+	<util:list id="csvAnalyticsAllCarbonCreditsColumns">
+		<ref bean="csvAnalyticsGroups" />
+		<ref bean="csvAnalyticsTotal" />
+		<ref bean="csvAnalyticsEnergySaved" />
+		<ref bean="csvAnalyticsBarrelsOfOilSaved" />
+		<ref bean="csvAnalyticsMetricTonsOfCOSaved" />
+	</util:list>
+
+	<util:list id="csvAnalyticsAllEcoModeColumns">
+		<ref bean="csvAnalyticsGroups" />
+		<ref bean="csvAnalyticsTotal" />
+		<ref bean="csvAnalyticsMeasuredConsumption" />
+		<ref bean="csvAnalyticsBaselineConsumption" />
+	</util:list>
+
+	<util:list id="csvAnalyticsAllInstalledAndConsumptionColumns">
+		<ref bean="csvAnalyticsGroups" />
+		<ref bean="csvAnalyticsTotal" />
+		<ref bean="csvAnalyticsInduction" />
+		<ref bean="csvAnalyticsLED" />
+		<ref bean="csvAnalyticsOther" />
+	</util:list>
+
+	<util:list id="csvAnalyticsAllWarningsColumns">
+		<ref bean="csvAnalyticsGroups" />
+		<ref bean="csvAnalyticsTotal" />
+		<ref bean="csvAnalyticsPowerSurge" />
+		<ref bean="csvAnalyticsBrownoutDetected" />
+		<ref bean="csvAnalyticsCommunicationFail" />
+		<ref bean="csvAnalyticsHighCurrent" />
+		<ref bean="csvAnalyticsLowCurrent" />
+		<ref bean="csvAnalyticsReverseEnergy" />
+		<ref bean="csvAnalyticsMetrologyReset" />
+	</util:list>
+
+	<util:list id="csvAnalyticsAllAlarmColumns">
+		<ref bean="csvAnalyticsGroups" />
+		<ref bean="csvAnalyticsTotal" />
+		<ref bean="csvAnalyticsLampFailure" />
+		<ref bean="csvAnalyticsPowerFailure" />
+		<ref bean="csvAnalyticsBoardFailure" />
+		<ref bean="csvAnalyticsMetrologyError" />
+		<ref bean="csvAnalyticsMetrologyCOMFailure" />
+	</util:list>
+
+	<util:list id="csvEcoModeAllColumns">
+		<ref bean="csvEcoModeDate" />
+		<ref bean="csvEcoModeMeasuredConsumption" />
+		<ref bean="csvEcoModeBaseline" />
+		<ref bean="csvEcoMode" />
+	</util:list>
+
+	<util:list id="csvProcessAllColumns">
+		<ref bean="csvProcessActionType" />
+		<ref bean="csvProcessActionName" />
+		<ref bean="csvProcessAmount" />
+		<ref bean="csvProcessAmountFaile" />
+		<ref bean="csvProcessCreateUser" />
+		<ref bean="csvProcessStarTime" />
+		<ref bean="csvProcessStatus" />
+	</util:list>
+
+	<util:list id="csvLightAlertAllColumns">
+		<ref bean="csvLightAlertPoleId" />
+		<ref bean="csvLightAlertFlexNetId" />
+		<ref bean="csvLightAlertAddress" />
+		<ref bean="csvLightAlertCity" />
+		<ref bean="csvLightAlertType" />
+		<ref bean="csvLightAlertSubType" />
+		<ref bean="csvLightAlertMessageDate" />
+		<ref bean="csvLightAlertVoltage" />
+		<ref bean="csvLightAlertCurrent" />
+		<ref bean="csvLightAlertLifeCycleState" />
+	</util:list>
+
+	<util:list id="csvLightHistoryAllColumns">
+		<ref bean="csvLightHistoryName" />
+		<ref bean="csvLightHistoryDescription" />
+		<ref bean="csvLightHistoryCreateUser" />
+		<ref bean="csvLightHistoryDateAdded" />
+		<ref bean="csvLightHistoryStatus" />
+	</util:list>
+
+	<util:list id="csvLightSummaryAllColumns">
+		<ref bean="csvLightSummaryFlexNetId" />
+		<ref bean="csvLightSummaryLifeCycleState" />
+		<ref bean="csvLightSummaryAddress" />
+	</util:list>
+
+	<util:list id="csvLightDetailAllColumns">
+		<ref bean="csvLightDetailFlexNetId" />
+		<ref bean="csvLightDetailLifeCycleState" />
+		<ref bean="csvLightDetailDateAdded" />
+		<ref bean="csvLightDetailLampTypeWattageDimmable" />
+		<ref bean="csvLightDetailCity" />
+		<ref bean="csvLightDetailProtected" />
+		<ref bean="csvLightDetailPoleId" />
+		<ref bean="csvLightDetailBulbSerialNumber" />
+		<ref bean="csvLightDetailColorTemperature" />
+		<ref bean="csvLightDetailFirmwareVersion" />
+		<ref bean="csvLightDetailHousingColor" />
+		<ref bean="csvLightDetailSerialNumber" />
+		<ref bean="csvLightDetailLowerAssemblySerialNumber" />
+		<ref bean="csvLightDetailUpperAssemblySerialNumber" />
+		<ref bean="csvLightDetailModelNumber" />
+		<ref bean="csvLightDetailInputVoltageRange" />
+		<ref bean="csvLightDetailEcoMode" />
+		<ref bean="csvLightDetailEcoModeReplaceWattage" />
+		<ref bean="csvLightDetailEcoModeReplaceType" />
+		<ref bean="csvLightDetailConsumption" />
+		<ref bean="csvLightDetailNotificationType" />
+		<ref bean="csvLightDetailAlertDate" />
+		<ref bean="csvLightDetailStateDate" />
+	</util:list>
+
+</beans>

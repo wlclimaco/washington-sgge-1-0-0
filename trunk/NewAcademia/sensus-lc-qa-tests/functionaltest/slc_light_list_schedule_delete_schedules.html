@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>slc_light_list_delete_schedules</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">slc_light_list_delete_schedules</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>link=System Intelligence</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Schedules</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<!--Check Curent Page/...-->
+<tr>
+	<td>waitForText</td>
+	<td>id=schedule</td>
+	<td>Schedules</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=schedule</td>
+	<td>Schedules</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#schedule-table tbody tr:contains('${eventScheduleName}') td:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#schedule-table tbody tr:contains('${offsetScheduleName}') td:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#schedule-table tbody tr:contains('${offsetScheduleName}2') td:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.positionHelper:last ul.fg-menu a:contains('Delete Schedule')</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=delete-schedule-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<!--Check Message/...-->
+<tr>
+	<td>waitForText</td>
+	<td>css=span.message</td>
+	<td>Schedule was successfully deleted.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.message</td>
+	<td>Schedule was successfully deleted.</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menu-groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<!--Check Curent Page/...-->
+<tr>
+	<td>waitForText</td>
+	<td>id=menu-groups</td>
+	<td>Groups</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=menu-groups</td>
+	<td>Groups</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#group-table tbody tr:contains('${groupName}') td:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.positionHelper:last ul.fg-menu a:contains('Delete Group')</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=delete-group-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

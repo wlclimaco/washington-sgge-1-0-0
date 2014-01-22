@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+  Base Mybatis configuration for Light queries (MAP Functionality).
+ -->
+<mapper namespace="Map">
+
+	<!--############################-->
+	<!--####    Result Maps     ####-->
+	<!--############################-->
+
+	<resultMap type="GeocodeLightInfo" id="GeocodeLightResultToMap">
+		<result property="latitudeAvg"           jdbcType="DOUBLE" column="latitudeavg" />
+		<result property="longitudeAvg"          jdbcType="DOUBLE" column="longitudeavg" />
+		<result property="latitudeTrunc"         jdbcType="DOUBLE" column="latitudetrunc" />
+		<result property="longitudeTrunc"        jdbcType="DOUBLE" column="longitudetrunc" />
+		<result property="topRightLat"           jdbcType="DOUBLE" column="topRightLat" />
+		<result property="topRightLon"           jdbcType="DOUBLE" column="topRightLon" />
+		<result property="bottomLeftLat"         jdbcType="DOUBLE" column="bottomLeftLat" />
+		<result property="bottomLeftLon"         jdbcType="DOUBLE" column="bottomLeftLon" />
+		<result property="smartpointsTotalByLatLong" jdbcType="INTEGER" column="total" />
+		<result property="currentLightStatus"    jdbcType="INTEGER" column="status" />
+	</resultMap>
+
+	<!--############################-->
+	<!--####     Queries        ####-->
+	<!--############################-->
+
+	<select id="fetchMapBoundsByRequest" parameterType="LightRequest" resultMap="GeocodeLightResultToMap">
+
+		 SELECT MAX(light.latitude) AS topRightLat
+		       ,MAX(light.longitude) AS topRightLon
+		       ,MIN(light.latitude) AS bottomLeftLat
+		       ,MIN(light.longitude) AS bottomLeftLon
+
+		<!-- From -->
+		<include refid="Light.fetchAllLightsByRequestFromConditions" />
+
+		<!-- Where -->
+		<include refid="Light.fetchAllLightsByRequestWhereConditions" />
+
+	</select>
+
+	<select id="fetchAllToMapByRequest" parameterType="LightRequest" resultMap="GeocodeLightResultToMap">
+
+ 	<!--
+      First, select all the light ids using the basic fetch by request condition.
+      this id list will be available on the light_filter result.
+  	  -->
+
+	WITH light_filter as
+		 (SELECT light.light_id
+  		  	<!-- From -->
+			<include refid="Light.fetchAllLightsByRequestFromConditions" />
+
+			<!-- Where -->
+			<include refid="Light.fetchAllLightsByRequestWhereConditions" />
+		 )
+
+   SELECT total,status,topRightLat,topRightLon,bottomLeftLat,bottomLeftLon,
+	  (topRightLat + bottomLeftLat) / 2 AS latitudeavg,
+	  (topRightLon + bottomLeftLon) / 2 AS longitudeavg,
+	  latitudetrunc,
+	  longitudetrunc
+
+   FROM (
+
+	SELECT count(light_id) AS total
+	     , MIN(precedence) AS status
+	     , MAX(latitude) AS topRightLat
+	     , MAX(longitude) AS topRightLon
+	     , MIN(latitude) AS bottomLeftLat
+	     , MIN(longitude) AS bottomLeftLon
+	     , MAX(trunc(latitude,#{lightCriteria.geoCodeCriteria.trunc})) AS latitudetrunc
+		 , MAX(trunc(longitude,#{lightCriteria.geoCodeCriteria.trunc})) AS longitudetrunc
+	FROM
+		(SELECT light.light_id,
+		 CAST(light.latitude AS NUMERIC) AS latitude,
+		 CAST(light.longitude AS NUMERIC) AS longitude,
+			(SELECT nh.precedence
+			 FROM notification_history nh
+			 WHERE nh.notification_history_id = light.notification_history_id) AS precedence
+		 FROM light light
+		 WHERE light.light_id IN
+		     (SELECT lf.light_id
+		      FROM light_filter lf) ) VWF
+		GROUP BY
+				trunc(latitude,#{lightCriteria.geoCodeCriteria.trunc}),
+	  	  		trunc(longitude,#{lightCriteria.geoCodeCriteria.trunc})
+	) VWF2
+
+	</select>
+
+</mapper>

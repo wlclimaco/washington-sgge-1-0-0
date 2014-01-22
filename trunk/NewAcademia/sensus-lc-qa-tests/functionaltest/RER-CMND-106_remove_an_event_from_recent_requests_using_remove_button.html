@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>remove_an_event_from_recent_requests_using_remove_button </title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">remove_an_event_from_recent_requests_using_remove_button </td></tr>
+</thead><tbody>
+<!--#8667-->
+<tr>
+	<td>click</td>
+	<td>id=menu-smartpoints</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tbody strong:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>if (!$('#light-protect').hasClass('locked')) {&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#update-protect a').click() }</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=lightsOnOff</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=turnOnOffLightsForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=turn-on-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('#system-messaging li:eq(3) a').click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#process-table tbody</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeCssCount</td>
+	<td>css=#process-table tbody .checkbox</td>
+	<td>total</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#process-table tbody tr:first td:last a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=action-dialog</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>2000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#action-dialog div:last</td>
+	<td>Removed Events will be available in “Event History”.</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('.ui-dialog-buttonpane button:visible').click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${total}</td>
+	<td>totalRecentRequests</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${totalRecentRequests}) - 1</td>
+	<td>total</td>
+</tr>
+<tr>
+	<td>verifyCssCount</td>
+	<td>css=#process-table tbody .checkbox</td>
+	<td>${total}</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#action-dialog-lrp&quot;).dialog(&quot;close&quot;);</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

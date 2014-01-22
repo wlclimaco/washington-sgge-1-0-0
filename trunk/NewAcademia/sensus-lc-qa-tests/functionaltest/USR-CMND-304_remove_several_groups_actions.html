@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>remove_one_user_actions</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">remove_one_user_actions</td></tr>
+</thead><tbody>
+<!--#7798-->
+<!--Check Curent Page/...-->
+<tr>
+	<td>click</td>
+	<td>link=Users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Dashboard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.content-header &gt; h1</td>
+	<td></td>
+</tr>
+<!--Check Curent Page/...-->
+<tr>
+	<td>assertText</td>
+	<td>css=div.content-header &gt; h1</td>
+	<td>Users</td>
+</tr>
+<!--.../-->
+<!--Search for the user on the list and delete/...-->
+<tr>
+	<td>storeTableRow</td>
+	<td>${userName}1/2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${row}) - 2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=table[id=user-table]&gt;tbody&gt;tr:eq(${row})&gt;td&gt;input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>${userName}3/2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${row}) - 2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=table[id=user-table]&gt;tbody&gt;tr:eq(${row})&gt;td&gt;input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>${userName}4/2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${row}) - 2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=table[id=user-table]&gt;tbody&gt;tr:eq(${row})&gt;td&gt;input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>${userName}5/2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${row}) - 2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=table[id=user-table]&gt;tbody&gt;tr:eq(${row})&gt;td&gt;input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>${userName}7/2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${row}) - 2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=table[id=user-table]&gt;tbody&gt;tr:eq(${row})&gt;td&gt;input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div[class=&quot;positionHelper&quot;] &gt; div &gt; ul &gt; li &gt; a[id=&quot;deleteUser&quot;]</td>
+	<td></td>
+</tr>
+<!--Verify messages and count/...-->
+<tr>
+	<td>pause</td>
+	<td>2000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div[id=action-dialog]&gt;div&gt;div&gt;span</td>
+	<td>5 Users will be deleted.</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div[class=&quot;ui-dialog-buttonset&quot;] &gt; button:eq(0)</td>
+	<td></td>
+</tr>
+<!--.../-->
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Dashboard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#messaging-main &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main &gt; span</td>
+	<td>All users selected were deleted.</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${totalUsers}) - 5</td>
+	<td>total</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${total}</td>
+	<td>totalUsers</td>
+</tr>
+<tr>
+	<td>verifyCssCount</td>
+	<td>css=#user-table tbody .checkbox</td>
+	<td>${totalUsers}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#actions &gt; span</td>
+	<td>0 of ${totalUsers} Users Selected</td>
+</tr>
+<!--.../-->
+<!--.../-->
+</tbody></table>
+</body>
+</html>

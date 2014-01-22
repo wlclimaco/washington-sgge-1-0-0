@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>slc_tags_remove_tags_from_several_lights_with_some_lights_don't_belong_to_tag</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">slc_tags_remove_tags_from_several_lights_with_some_lights_don't_belong_to_tag</td></tr>
+</thead><tbody>
+<!--#3690-->
+<!--Going to Light List /...-->
+<tr>
+	<td>click</td>
+	<td>link=Lights</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<!--Check 'Active'-->
+<tr>
+	<td>waitForVisible</td>
+	<td>css=.clear</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=.clear</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=li:contains(Active) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Lights</td>
+	<td></td>
+</tr>
+<!--Check 'Warning'-->
+<tr>
+	<td>click</td>
+	<td>css=li:contains(Warning) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Lights</td>
+	<td></td>
+</tr>
+<!--Check 'Alarm'-->
+<tr>
+	<td>click</td>
+	<td>css=li:contains(Alarm) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Lights</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=select-page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;ul.fg-menu &gt; li:eq(2) &gt; ul &gt; li:eq(1) &gt; a[title='Remove Tag']&quot;, &quot;div.positionHelper:visible&quot;).click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=removeTagForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>css=#select_tags_chzn ul</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>css=.chzn-results &gt; li</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=remove-tag-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#messaging-main .message</td>
+	<td>Lights have been successfully removed from Tags.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main .message</td>
+	<td>Lights have been successfully removed from Tags.</td>
+</tr>
+<!--.../-->
+</tbody></table>
+</body>
+</html>

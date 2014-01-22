@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>Try create new Offset Schedule with Invalid data</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Try create new Offset Schedule with Invalid data</td></tr>
+</thead><tbody>
+<!--#3201-->
+<tr>
+	<td>click</td>
+	<td>link=System Intelligence</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=schedule</td>
+	<td>Schedules</td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>${offsetSchName}/2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${row}) - 2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#schedule-table &gt; tbody &gt; tr:eq(${row}) &gt; td &gt; a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.content-header &gt; h1</td>
+	<td>Edit Offset Schedule &quot;${offsetSchName}&quot;</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.content-header &gt; h1</td>
+	<td>Edit Offset Schedule &quot;${offsetSchName}&quot;</td>
+</tr>
+<!--Empty name-->
+<tr>
+	<td>setSpeed</td>
+	<td>800</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=schedule-name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.schedule-nameformError div.formErrorContent</td>
+	<td>* This field is required.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.schedule-nameformError div.formErrorContent</td>
+	<td>* This field is required.</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.schedule-nameformError div.formErrorContent</td>
+	<td></td>
+</tr>
+<!--Over max lenght Name and Description-->
+<tr>
+	<td>type</td>
+	<td>id=schedule-name</td>
+	<td>Offset Schedule Test Maaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaax</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=schedule-description</td>
+	<td>Offset Descriptioooooon Schedule Test Maaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaax</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.schedule-nameformError div.formErrorContent</td>
+	<td>* Maximum 100 characters allowed</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.schedule-nameformError div.formErrorContent</td>
+	<td>* Maximum 100 characters allowed</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.schedule-nameformError div.formErrorContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.schedule-descriptionformError div.formErrorContent</td>
+	<td>* Maximum 150 characters allowed</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.schedule-descriptionformError div.formErrorContent</td>
+	<td>* Maximum 150 characters allowed</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.schedule-descriptionformError div.formErrorContent</td>
+	<td></td>
+</tr>
+<!--No Sunset Time-->
+<tr>
+	<td>type</td>
+	<td>id=schedule-name</td>
+	<td>Offset Schedule Test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=schedule-description</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=offsetSunsetTime</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.offsetSunsetTimeformError div.formErrorContent</td>
+	<td>* This field is required.* Invalid number, use increments of 5</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.offsetSunsetTimeformError div.formErrorContent</td>
+	<td>* This field is required.* Invalid number, use increments of 5</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.offsetSunsetTimeformError div.formErrorContent</td>
+	<td></td>
+</tr>
+<!--Sunset Time not multiple of 5 min-->
+<tr>
+	<td>type</td>
+	<td>id=offsetSunsetTime</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=offsetSunsetTime</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.offsetSunsetTimeformError div.formErrorContent</td>
+	<td>Please enter time in 5 minute increments.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.offsetSunsetTimeformError div.formErrorContent</td>
+	<td>Please enter time in 5 minute increments.</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.offsetSunsetTimeformError div.formErrorContent</td>
+	<td></td>
+</tr>
+<!--Sunset Time not a number-->
+<!--tr>
+	<td>type</td>
+	<td>id=offsetSunsetTime</td>
+	<td>A</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.offsetSunsetTimeformError div.formErrorContent</td>
+	<td>Please enter time in 5 minute increments.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.offsetSunsetTimeformError div.formErrorContent</td>
+	<td>Please enter time in 5 minute increments.</td>
+</tr-->
+<!--Sunset Time Maximun value-->
+<tr>
+	<td>type</td>
+	<td>id=offsetSunsetTime</td>
+	<td>700</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.offsetSunsetTimeformError div.formErrorContent</td>
+	<td>* Maximum value is 635</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.offsetSunsetTimeformError div.formErrorContent</td>
+	<td>* Maximum value is 635</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.offsetSunsetTimeformError div.formErrorContent</td>
+	<td></td>
+</tr>
+<!--Sunset lower than 0-->
+<tr>
+	<td>type</td>
+	<td>id=offsetSunsetTime</td>
+	<td>-5</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.offsetSunsetTimeformError div.formErrorContent</td>
+	<td>* Invalid number, use increments of 5* Minimum value is 0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.offsetSunsetTimeformError div.formErrorContent</td>
+	<td>* Invalid number, use increments of 5* Minimum value is 0</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.offsetSunsetTimeformError div.formErrorContent</td>
+	<td></td>
+</tr>
+<!--No Sunrise Time-->
+<tr>
+	<td>type</td>
+	<td>id=offsetSunsetTime</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=offsetSunriseTime</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.offsetSunriseTimeformError div.formErrorContent</td>
+	<td>* This field is required.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.offsetSunriseTimeformError div.formErrorContent</td>
+	<td>* This field is required.</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.offsetSunriseTimeformError div.formErrorContent</td>
+	<td></td>
+</tr>
+<!--Sunrise Time not multiple of 5 min-->
+<tr>
+	<td>type</td>
+	<td>id=offsetSunriseTime</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=offsetSunsetTime</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.offsetSunriseTimeformError div.formErrorContent</td>
+	<td>Please enter time in 5 minute increments.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.offsetSunriseTimeformError div.formErrorContent</td>
+	<td>Please enter time in 5 minute increments.</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.offsetSunriseTimeformError div.formErrorContent</td>
+	<td></td>
+</tr>
+<!--Sunrise Time not a number-->
+<!--tr>
+	<td>type</td>
+	<td>id=offsetSunriseTime</td>
+	<td>A</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.offsetSunriseTimeformError div.formErrorContent</td>
+	<td>Please enter time in 5 minute increments.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.offsetSunriseTimeformError div.formErrorContent</td>
+	<td>Please enter time in 5 minute increments.</td>
+</tr-->
+<!--Sunrise Time Maximun value-->
+<tr>
+	<td>type</td>
+	<td>id=offsetSunriseTime</td>
+	<td>700</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.offsetSunriseTimeformError div.formErrorContent</td>
+	<td>* Maximum value is 635</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.offsetSunriseTimeformError div.formErrorContent</td>
+	<td>* Maximum value is 635</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.offsetSunriseTimeformError div.formErrorContent</td>
+	<td></td>
+</tr>
+<!--Sunrise lower than 0-->
+<tr>
+	<td>type</td>
+	<td>id=offsetSunriseTime</td>
+	<td>-5</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=create-schedule</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.offsetSunriseTimeformError div.formErrorContent</td>
+	<td>* Minimum value is 0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.offsetSunriseTimeformError div.formErrorContent</td>
+	<td>* Minimum value is 0</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.offsetSunriseTimeformError div.formErrorContent</td>
+	<td></td>
+</tr>
+<!--Cancel Button-->
+<tr>
+	<td>setSpeed</td>
+	<td>0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<!--Check Navigation-->
+<tr>
+	<td>verifyText</td>
+	<td>id=schedule</td>
+	<td>Schedules</td>
+</tr>
+<!--Check Element count/summariz-->
+<tr>
+	<td>verifyTableRows</td>
+	<td>css=#schedule-table tbody</td>
+	<td>${totalSch}</td>
+</tr>
+<!--Check Element in Grid-->
+<tr>
+	<td>storeTableRow</td>
+	<td>${offsetSchName}/2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${row}) - 2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#schedule-table tbody.${row}.2</td>
+	<td>${offsetSchName}</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#schedule-table tbody.${row}.3</td>
+	<td>Description ${offsetSchName}</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#schedule-table tbody.${row}.4</td>
+	<td>Offset</td>
+</tr>
+<tr>
+	<td>verifyTable</td>
+	<td>css=#schedule-table tbody.${row}.7</td>
+	<td>${currentDate}</td>
+</tr>
+</tbody>
+</body>
+</table>
+</html>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "Dietaitens">
+
+	<resultMap id="listAllDietaitensResults" type="Dietaitens" >
+		<result property="cddietitens" column="cddietitens" />
+		<result property="refeicao" column="refeicao" />
+		<result property="opção" column="opção" />
+		<result property="qnt" column="qnt" />
+	</resultMap>
+
+
+	<sql id="allDietaitensColumms">
+     	cddietitens,
+     	refeicao,
+     	opção,
+     	qnt,
+	</sql>
+	
+
+	<!-- Insert Dietaitens -->
+	<select id="insertDietaitens" parameterType="Map" resultType="int">
+		SELECT ins_dietaitens (
+		#{cddietitens,jdbcType=INTEGER},
+		#{refeicao,jdbcType=VARCHAR},
+		#{opção,jdbcType=VARCHAR},
+		#{qnt,jdbcType=FLOAT},
+)
+	</select>
+
+	<!-- Update Dietaitens -->
+	<select id="updateDietaitens" parameterType="Map" resultType="int">
+		SELECT upd_dietaitens (
+		#{cddietitens,jdbcType=INTEGER},
+		#{refeicao,jdbcType=VARCHAR},
+		#{opção,jdbcType=VARCHAR},
+		#{qnt,jdbcType=FLOAT},
+)
+	</select>
+
+	<!-- Delete Dietaitens -->
+	<select id="deleteDietaitens" parameterType="Dietaitens">
+		SELECT del_dietaitens (#{id})
+	</select>
+	
+	<!-- Fetch All Dietaitenss -->
+	<select id="fetchAllDietaitenss" parameterType="Map" resultMap="listAllDietaitensResults">
+	
+		SELECT  <include refid="allDietaitensColumms"/>
+		  FROM dietaitens
+	
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1) 
+		  FROM (SELECT tenant_id 
+				  FROM dietaitens 
+				 WHERE tenant_id = #{tenantId,jdbcType=INTEGER}) AS TAGPAGE
+	</select>	
+
+	<!-- Fetch Dietaitens By type -->
+	<select id="fetchDietaitensByType" parameterType="DietaitensRequest"  resultMap="listAllDietaitensResults" >
+		SELECT  <include refid="allCustomListDietaitensColumns"/>
+		  FROM dietaitens
+		 WHERE name = #{dietaitens.name,jdbcType=VARCHAR}
+		   AND tenant_id = #{tenant.id,jdbcType=INTEGER}
+	
+	</select>
+
+	<!-- Fetch Dietaitens By Id -->
+	<select id="fetchDietaitensById" parameterType="Dietaitens" resultMap="listAllDietaitensResults" >
+		SELECT <include refid="allCustomListDietaitensColumns"/>
+		  FROM dietaitens
+		 WHERE dietaitens_id = #{id,jdbcType=INTEGER};
+	</select>
+
+	<!-- Fetch Dietaitens By Id -->
+	<select id="fetchDietaitensNameById" parameterType="Dietaitens" resultMap="listAllDietaitensResults" >
+		SELECT <include refid="allCustomListDietaitensColumns"/>
+		  FROM dietaitens
+		 WHERE dietaitens_id = #{id,jdbcType=INTEGER};
+	</select>
+</mapper>
+

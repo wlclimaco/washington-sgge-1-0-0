@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<!--#2679-->
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#messaging-main&quot;).remove()</td>
+	<td></td>
+</tr>
+<!--Check Curent Page/...-->
+<tr>
+	<td>assertAttribute</td>
+	<td>id=menu-groups@class</td>
+	<td>alist active</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>click</td>
+	<td>link=Create Group</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.content-header h1</td>
+	<td>Create Group</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=group-name</td>
+	<td>${group_name}1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=group-description</td>
+	<td>Description ${group_name}1</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<!--Cancel Button/...-->
+<tr>
+	<td>click</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<!--.../-->
+<!--Check Element count/summariz-->
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyCssCount</td>
+	<td>css=#group-table tbody .checkbox</td>
+	<td>${totalGrp}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#actions &gt; span</td>
+	<td>0 of ${totalGrp} Groups Selected</td>
+</tr>
+<!--.../-->
+</tbody></table>
+</body>
+</html>

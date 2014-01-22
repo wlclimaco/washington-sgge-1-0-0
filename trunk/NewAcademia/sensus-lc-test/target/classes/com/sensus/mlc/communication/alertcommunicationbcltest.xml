@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Email sender configuration -->
+	<bean id="mailSenderBean" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host"     value="localhost" />
+		<property name="port"     value="25" />
+
+        <property name="javaMailProperties">
+		   <props>
+       	      <prop key="mail.smtp.auth">false</prop>
+       	      <prop key="mail.smtp.starttls.enable">true</prop>
+       	   </props>
+		</property>
+    </bean>
+
+	<bean id="emailServiceBCLTarget" class="com.sensus.lc.communication.bcl.impl.EmailServiceBCLImpl">
+		<property name="mailSender" ref="mailSenderBean"/>
+	</bean>
+
+	<bean id="alertCommunicationBCLTarget" class="com.sensus.lc.communication.bcl.impl.AlertCommunicationBCLImpl">
+		<property name="emailServiceBCL" ref="emailServiceBCLTarget"/>
+		<property name="notificationHistoryBCL" ref="lightNotificationHistoryBCLMockTarget"/>
+		<property name="lightBCL" ref="lightBCLMockTarget"/>
+		<property name="settingsBCL" ref="settingsBCLMockTarget"/>
+		<property name="userBCL" ref="userBCLMockTarget"/>
+		<property name="alertCommunicationDAC" ref="alertCommunicationDACMockTarget"/>
+		<property name="tenantDAC" ref="tenantDACMockTarget" />
+		<property name="alertCSVColumns" ref="csvLightAlertAllColumns"/>
+		<property name="messageSource" ref="messageSource"/>
+	</bean>
+
+</beans>

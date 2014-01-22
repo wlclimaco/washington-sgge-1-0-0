@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd ">
+
+	<!-- ========================= BCF DEFINITIONS ========================= -->
+
+	<bean id="ecoModeBCF" class="com.sensus.lc.ecomode.bcf.impl.EcoModeBCFImpl">
+		<property name="ecoModeBCL" ref="ecoModeBCLTarget" />
+		<property name="processBCF" ref="processBCF" />
+		<property name="requestValidationController" ref="requestValidationController" />
+		<property name="inquiryRequestValidationController" ref="inquiryRequestValidationController" />
+		<property name="lightSelectionRequestValidationController" ref="lightSelectionRequestValidationController" />
+		<property name="rangeDateValidationController" ref="rangeDateValidationController" />
+		<property name="csvFileValidationController" ref="csvFileValidationController" />
+		<property name="lightListValidationController" ref="lightListValidationController" />
+	</bean>
+
+	<bean id="groupBCF" class="com.sensus.lc.group.bcf.impl.GroupBCFImpl">
+		<property name="groupBCL" ref="groupBCLTarget" />
+		<property name="requestValidationController" ref="requestValidationController" />
+		<property name="inquiryRequestValidationController" ref="inquiryRequestValidationController" />
+		<property name="lightingControlRequestValidationController" ref="lightingControlRequestValidationController" />
+		<property name="lightSelectionRequestValidationController" ref="lightSelectionRequestValidationController" />
+		<property name="lightCriteriaValidationController" ref="lightCriteriaValidationController" />
+		<property name="groupValidationController" ref="groupValidationController" />
+		<property name="groupRequestValidationController" ref="groupRequestValidationController" />
+		<property name="groupListValidationController" ref="groupListValidationController" />
+		<property name="mapDataValidationController" ref="mapDataValidationController"/>
+		<property name="lightValidationController" ref="lightValidationController" />
+	</bean>
+
+	<bean id="tagBCF" class="com.sensus.lc.tag.bcf.impl.TagBCFImpl">
+		<property name="tagBCL" ref="tagBCLTarget" />
+		<property name="tagValidationController" ref="tagValidationController" />
+		<property name="tagRequestValidationController" ref="tagRequestValidationController" />
+		<property name="lightCriteriaValidationController" ref="lightCriteriaValidationController" />
+		<property name="lightingControlRequestValidationController" ref="lightingControlRequestValidationController" />
+		<property name="lightValidationController" ref="lightValidationController" />
+		<property name="lightListValidationController" ref="lightListValidationController" />
+		<property name="lightSelectionRequestValidationController" ref="lightSelectionRequestValidationController" />
+		<property name="tagListValidationController" ref="tagListValidationController" />
+		<property name="requestValidationController" ref="requestValidationController" />
+		<property name="inquiryRequestValidationController" ref="inquiryRequestValidationController" />
+	</bean>
+
+	<bean id="lightBCF" class="com.sensus.lc.light.bcf.impl.LightBCFImpl">
+		<property name="lightBCL" ref="lightBCLTarget" />
+		<property name="requestValidationController" ref="requestValidationController" />
+		<property name="inquiryRequestValidationController" ref="inquiryRequestValidationController" />
+		<property name="lightValidationController" ref="lightValidationController" />
+		<property name="rangeDateValidationController" ref="rangeDateValidationController" />
+	</bean>
+
+	<bean id="lightProcessorBCF" class="com.sensus.lc.light.bcf.impl.LightProcessorBCFImpl">
+		<property name="requestValidationController" ref="requestValidationController" />
+		<property name="lightValidationController" ref="lightValidationController" />
+		<property name="lightStatusNotificationRequestValidationController" ref="lightStatusNotificationRequestValidationController" />
+		<property name="alarmNotificationRequestValidationController" ref="alarmNotificationRequestValidationController" />
+		<property name="channelSetupAuditRequestValidationController" ref="channelSetupAuditRequestValidationController" />
+		<property name="lightListValidationController" ref="lightListValidationController" />
+		<property name="lightIntensityValidationController" ref="lightIntensityValidationController" />
+		<property name="geoCodeValidationController" ref="geoCodeValidationController" />
+		<property name="lightProcessorBCL" ref="lightProcessorBCLTarget" />
+	</bean>
+
+	<bean id="lightCustomSearchBCF" class="com.sensus.lc.light.bcf.impl.LightCustomSearchBCFImpl">
+		<property name="lightCustomSearchBCL" ref="lightCustomSearchBCLTarget" />
+		<property name="requestValidationController" ref="requestValidationController" />
+		<property name="customSearchRequestValidatorController" ref="customSearchRequestValidatorController" />
+	</bean>
+
+	<bean id="lightNotificationHistoryBCF" class="com.sensus.lc.light.bcf.impl.LightNotificationHistoryBCFImpl">
+		<property name="notificationHistoryBCL" ref="lightNotificationHistoryBCLTarget"/>
+		<property name="requestValidationController" ref="requestValidationController" />
+		<property name="inquiryRequestValidationController" ref="inquiryRequestValidationController" />
+	</bean>
+
+	<bean id="scheduleBCF" class="com.sensus.lc.schedule.bcf.impl.ScheduleBCFImpl">
+		<property name="scheduleBCL" ref="scheduleBCLTarget" />
+		<property name="scheduleValidationController" 				ref="scheduleValidationController"/>
+		<property name="lightListValidationController" 				ref="lightListValidationController"/>
+		<property name="mapDataValidationController"	 			ref="mapDataValidationController"/>
+		<property name="lightingControlRequestValidationController" ref="lightingControlRequestValidationController" />
+		<property name="lightSelectionRequestValidationController" 	ref="lightSelectionRequestValidationController"/>
+	</bean>
+
+	<bean id="processBCF" class="com.sensus.lc.process.bcf.impl.ProcessBCFImpl">
+		<property name="processBCL" ref="processBCLTarget" />
+		<property name="processValidationController" ref="processValidationController"/>
+		<property name="lightingControlRequestValidationController" ref="lightingControlRequestValidationController" />
+		<property name="lightValidationController" ref="lightValidationController" />
+		<property name="csvFileValidationController" ref="csvFileValidationController" />
+		<property name="requestValidationController" ref="requestValidationController" />
+		<property name="inquiryRequestValidationController" ref="inquiryRequestValidationController" />
+	</bean>
+
+	<bean id="settingsBCF" class="com.sensus.lc.settings.bcf.impl.SettingsBCFImpl">
+		<property name="settingsBCL" ref="settingsBCLTarget" />
+		<property name="lightingControlRequestValidationController" ref="lightingControlRequestValidationController" />
+		<property name="settingListValidationController" ref="settingListValidationController" />
+		<property name="tenantRequestValidationController" ref="tenantRequestValidationController" />
+		<property name="columnFilterValidationController" ref="columnFilterValidationController" />
+	</bean>
+
+	<bean id="mlcServerBCF" class="com.sensus.lc.server.bcf.impl.MlcServerBCFImpl">
+		<property name="mlcServerBCL" ref="mlcServerBCLTarget" />
+		<property name="geoCodeValidationController" ref="geoCodeValidationController"/>
+		<property name="mlcGatewaySupervisoryNotificationValidationController" ref="mlcGatewaySupervisoryNotificationValidationController"/>
+		<property name="mlcServerValidationController" ref="mlcServerValidationController"/>
+		<property name="tenantLightAssociationValidationController" ref="tenantLightAssociationValidationController"/>
+		<property name="mlcServerSmartpointListValidationController" ref="mlcServerSmartpointListValidationController"/>
+	</bean>
+
+	<bean id="analyticsBCF" class="com.sensus.lc.analytics.bcf.impl.AnalyticsBCFImpl">
+		<property name="analyticsBCL" ref="analyticsBCLTarget" />
+		<property name="processBCF" ref="processBCF" />
+		<property name="analyticsTypeValidationController" ref="analyticsTypeValidationController" />
+		<property name="lightingControlRequestValidationController" ref="lightingControlRequestValidationController" />
+		<property name="rangeDateValidationController" ref="rangeDateValidationController" />
+		<property name="requestValidationController" ref="requestValidationController" />
+
+	</bean>
+
+	<bean id="userBCF" class="com.sensus.lc.user.bcf.impl.UserBCFImpl">
+		<property name="userBCL" ref="userBCLTarget" />
+		<property name="lcHelp" ref="lcHelpTarget" />
+		<property name="superUserName" ref="superUserNameTarget" />
+		<property name="userValidationController" ref="userValidationController" />
+		<property name="userRequestValidationController" ref="userRequestValidationController" />
+		<property name="lightingControlRequestValidationController" ref="lightingControlRequestValidationController" />
+		<property name="lightSelectionRequestValidationController" ref="lightSelectionRequestValidationController" />
+		<property name="requestValidationController" ref="requestValidationController" />
+		<property name="inquiryRequestValidationController" ref="inquiryRequestValidationController" />
+	</bean>
+
+	<bean id="tenantBCF" class="com.sensus.lc.tenant.bcf.impl.TenantBCFImpl">
+		<property name="tenantBCL" ref="tenantBCLTarget" />
+	</bean>
+
+	<bean id="lightCSVBCF" class="com.sensus.lc.light.bcf.impl.LightCSVBCFImpl">
+		<property name="lightCSVBCL" ref="lightCSVBCLTarget" />
+	</bean>
+
+	<bean id="academiaBCF" class="com.sensus.lc.academia.bcf.impl.AcademiaBCFImpl">
+		<property name="academiaBCL" ref="academiaBCLTarget" />
+	</bean>
+
+</beans>
