@@ -1,0 +1,200 @@
+package com.sensus.lc.controller.importfile;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.IllegalFormatFlagsException;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.HandlerExceptionResolver;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.sensus.common.model.MessageInfo;
+import com.sensus.common.util.SensusInterfaceUtil;
+import com.sensus.common.validation.ValidationUtil;
+import com.sensus.lc.controller.BaseViewController;
+import com.sensus.lc.controller.importfile.model.EcoModeModel;
+import com.sensus.lc.ecomode.bcf.IEcoModeBCF;
+import com.sensus.lc.ecomode.model.request.EcoModeRequest;
+import com.sensus.lc.ecomode.model.response.EcoModeResponse;
+import com.sensus.lc.tag.model.Tag;
+
+/**
+ * The Class ImportEcoModeAPIController.
+ */
+@Controller
+@RequestMapping("/ecomode")
+public class ImportEcoModeController extends BaseViewController implements HandlerExceptionResolver
+{
+
+	/**
+	 * The logger for this class.
+	 */
+	private static final Logger LOG = LoggerFactory.getLogger(ImportEcoModeController.class);
+
+	/** The Constant CONTROLLER_EXCEPTION_MSG. */
+	private static final String CONTROLLER_EXCEPTION_MSG = "ImportEcoModeController";
+
+	/** The Constant UPLOAD. */
+	private static final String UPLOAD_FILE = "/upload";
+
+	/** The Constant CSV_MIME_TYPE. */
+	private static final String CSV_MIME_TYPE = "text/csv";
+
+	/** The Constant CSV_EXTENSION. */
+	private static final String CSV_EXTENSION = "csv";
+
+	/** The Constant FILE_IS_NOT_CSV. */
+	private static final String FILE_IS_NOT_CSV = "sensus.mlc.csvfilevalidator.file.invalid";
+
+	/** The Constant CSVFILEVALIDATOR_FILE_MAXUPLOADSIZE. */
+	private static final String CSVFILEVALIDATOR_FILE_MAXUPLOADSIZE = "sensus.mlc.csvfilevalidator.file.maxuploadsize";
+
+	/** The Constant FILE_NAME. */
+	public static final String FILE_NAME = "fileName.csv";
+
+	/** The eco mode bcf. */
+	private IEcoModeBCF ecoModeBCF;
+
+	/**
+	 * Gets the eco mode bcf.
+	 * 
+	 * @return the eco mode bcf
+	 */
+	public IEcoModeBCF getEcoModeBCF()
+	{
+		return ecoModeBCF;
+	}
+
+	/**
+	 * Sets the eco mode bcf.
+	 * 
+	 * @param ecoModeBCF the new eco mode bcf
+	 */
+	@Resource
+	public void setEcoModeBCF(IEcoModeBCF ecoModeBCF)
+	{
+		this.ecoModeBCF = ecoModeBCF;
+	}
+
+	/**
+	 * Upload.
+	 * 
+	 * @param groupModel the group model
+	 * @param servletRequest the servlet request
+	 * @return the group model
+	 */
+	@RequestMapping(value = UPLOAD_FILE, method = RequestMethod.POST)
+	public EcoModeModel upload(@RequestParam(value = "uploadTag", required = false) String uploadTag,
+			@RequestParam("upload") MultipartFile upload,
+			MultipartHttpServletRequest request)
+	{
+
+		EcoModeResponse response = new EcoModeResponse();
+
+		EcoModeModel ecoModeModel = new EcoModeModel();
+
+		try
+		{
+			EcoModeRequest ecoModeRequest = new EcoModeRequest();
+
+			// ADD user context to request
+			setUserContext(ecoModeRequest, request);
+
+			if (!ValidationUtil.isNull(uploadTag))
+			{
+				String[] tagIds = uploadTag.split(",");
+				ecoModeRequest.setTags(new ArrayList<Tag>());
+				Tag tag;
+
+				for (String id : tagIds)
+				{
+					tag = new Tag();
+					tag.setId(Integer.parseInt(id.trim()));
+					ecoModeRequest.getTags().add(tag);
+				}
+			}
+
+			// Upload File
+			if (!ValidationUtil.isNull(upload) && upload.getSize() > 0)
+			{
+				String[] extension = StringUtils.splitByWholeSeparator(upload.getOriginalFilename(), ".");
+				if (!CSV_MIME_TYPE.equals(upload.getContentType())
+						&& !CSV_EXTENSION.equals(extension[extension.length - 1]))
+				{
+					ecoModeModel.setMessageCode(FILE_IS_NOT_CSV);
+					ecoModeModel.setOperationSuccess(Boolean.FALSE);
+					throw new IllegalFormatFlagsException(FILE_IS_NOT_CSV);
+				}
+
+				File f = new File(FILE_NAME);
+				upload.transferTo(f);
+				ecoModeRequest.setEcoModeCSVImport(f);
+			}
+
+			response = getEcoModeBCF().importEcoModeBaselineFromFileCSV(ecoModeRequest);
+
+			if (!ValidationUtil.isNullOrEmpty(response.getMessageList()))
+			{
+				MessageInfo messageInfo = response.getMessageInfoList().get(0);
+				ecoModeModel.setArguments(getMapper().writeValueAsString(messageInfo.getArguments()));
+				ecoModeModel.setMessageCode(messageInfo.getCode());
+				ecoModeModel.setOperationSuccess(response.isOperationSuccess());
+			}
+
+		}
+		catch (Exception e)
+		{
+			SensusInterfaceUtil.handleException(LOG, response, e, DEFAULT_EXCEPTION_MSG,
+					new String[] {CONTROLLER_EXCEPTION_MSG});
+		}
+
+		return ecoModeModel;
+	}
+
+	@Override
+	public ModelAndView resolveException(HttpServletRequest arg0, HttpServletResponse arg1, Object object,
+			Exception exception)
+	{
+		ModelAndView modelAndView = new ModelAndView("ecomode/upload");
+		EcoModeModel ecoModeModel = new EcoModeModel();
+
+		if (exception instanceof MaxUploadSizeExceededException)
+		{
+			ecoModeModel.setMessageCode(CSVFILEVALIDATOR_FILE_MAXUPLOADSIZE);
+			ecoModeModel.setOperationSuccess(Boolean.FALSE);
+			try
+			{
+				ecoModeModel.setArguments(getMapper().writeValueAsString(
+						Arrays.asList(((MaxUploadSizeExceededException)exception).getMaxUploadSize())));
+			}
+			catch (Exception e)
+			{
+				LOG.info(new StringBuilder(CONTROLLER_EXCEPTION_MSG).append(e).toString());
+				modelAndView.addObject(RESPONSE, null);
+			}
+		}
+		else
+		{
+			ecoModeModel.setMessageCode(DEFAULT_EXCEPTION_MSG);
+			ecoModeModel.setOperationSuccess(Boolean.FALSE);
+		}
+
+		modelAndView.addObject(ecoModeModel);
+
+		return modelAndView;
+	}
+}

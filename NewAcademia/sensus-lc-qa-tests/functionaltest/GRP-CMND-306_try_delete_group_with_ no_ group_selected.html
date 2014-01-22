@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>delete_one_group</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">delete_one_group</td></tr>
+</thead><tbody>
+<!--#4780-->
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#messaging-main&quot;).remove()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Lights</td>
+	<td></td>
+</tr>
+<!--Check Curent Page/...-->
+<tr>
+	<td>assertAttribute</td>
+	<td>id=menu-groups@class</td>
+	<td>alist active</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;.fg-menu &gt; li:eq(0) &gt; a&quot;, &quot;div.positionHelper&quot;).click()</td>
+	<td></td>
+</tr>
+<!--Check Message/...-->
+<tr>
+	<td>verifyAttribute</td>
+	<td>css=#actions &gt; span@class</td>
+	<td>message rounded ui-state-error</td>
+</tr>
+<!--.../-->
+<!--Check Element count/summariz-->
+<tr>
+	<td>verifyTableRows</td>
+	<td>css=#group-table tbody</td>
+	<td>${totalGrp}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#actions &gt; span</td>
+	<td>0 of ${totalGrp} Groups Selected</td>
+</tr>
+<!--.../-->
+</tbody></table>
+</body>
+</html>

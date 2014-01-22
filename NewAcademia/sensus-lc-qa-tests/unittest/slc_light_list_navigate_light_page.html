@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://mallet-app.davis.sensus.lab:8080/" />
+<title>Navigate Light Page</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Navigate Light Page</td></tr>
+</thead><tbody>
+<tr>
+	<td>assertAttribute</td>
+	<td>id=menu-smartpoints@class</td>
+	<td>alist active</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=lights-on-off</td>
+	<td>Control Lights</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=actions-button</td>
+	<td>Actions</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#smartpoint-table th:eq(1) span</td>
+	<td>Pole ID</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#smartpoint-table th:eq(2) span</td>
+	<td>FlexNet ID</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#smartpoint-table th:eq(3) span</td>
+	<td>Light Type</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#smartpoint-table th:eq(4) span</td>
+	<td>Date Added</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#smartpoint-table th:eq(5) span</td>
+	<td>City</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#smartpoint-table th:eq(6) </td>
+	<td>Map</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#smartpoint-table th:eq(${column}) span</td>
+	<td>State</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#actions span.message span:eq(1)</td>
+	<td>${totalOfLights}</td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://mallet-app.davis.sensus.lab:8080/" />
+<title>lock_lights</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">lock_lights</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>id=menu-smartpoints</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>id=menu-smartpoints@class</td>
+	<td>alist active</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#messaging-main&quot;).remove()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=lights-select-none</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=check_1019</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=check_1049</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=check_1034</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=check_1015</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;.positionHelper ul:visible:eq(1) li:visible:eq(1) a:first&quot;).click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;.positionHelper ul:visible:eq(1) li:visible:eq(1) ul li a:eq(3)&quot;).click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;.positionHelper ul:visible:eq(1) li:visible:eq(1) ul li:eq(3) ul&nbsp;&nbsp;a:eq(0)&quot;).click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>You successfully locked 4 Lights. Locked Lights will not respond to commands from the system.</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

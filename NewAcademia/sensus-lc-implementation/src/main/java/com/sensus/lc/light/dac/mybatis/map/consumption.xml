@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Consumption">
+
+	<resultMap id="ConsumptionResult" type="Consumption">
+
+		<result property="parentId" column="light_id" />
+		<result property="day" column="consumption_day" typeHandler="com.sensus.lc.base.util.DateZoneTypeHandler" />
+		<result property="consumption" column="consumption" />
+		<result property="ecomodeBaseline" column="ecomode_baseline" />
+		<result property="ecoMode" column="ecomode" />
+
+	</resultMap>
+
+	<sql id="allConsumptionColumns">
+		light_id, consumption_day, ecomode, consumption, ecomode_baseline
+	</sql>
+
+	<select id="fetchAllById" resultMap="ConsumptionResult">
+		SELECT
+		<include refid="allConsumptionColumns" />
+		FROM light_daily_consumption
+		WHERE light_id= #{value}
+	</select>
+
+	<select id="fetchLastById" resultMap="ConsumptionResult">
+		select DISTINCT ON(light_id)
+		<include refid="allConsumptionColumns" />
+		FROM light_daily_consumption
+		WHERE light_id= #{value}
+		ORDER BY light_id, consumption_day DESC
+	</select>
+
+</mapper>

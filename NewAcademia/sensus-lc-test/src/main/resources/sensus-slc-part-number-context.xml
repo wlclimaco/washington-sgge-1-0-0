@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/util
+			http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<util:list id="sensusPartNumberList" value-type="java.util.ArrayList">
+		<ref bean="196W_LED_STREET_LIGHT"/>
+		<ref bean="252W_LED_STREET_LIGHT"/>
+		<ref bean="84W_LED_FLOOD_LIGHT"/>
+		<ref bean="196W_LED_FLOOD_LIGHT"/>
+		<ref bean="252W_LED_FLOOD_LIGHT"/>
+		<ref bean="75W_LED_SHEPPARDS_HAT"/>
+		<ref bean="200W_INDUCTION_ACORN"/>
+		<ref bean="150W_INDUCTION_ACORN"/>
+		<ref bean="200W_INDUCTION_STREET_LIGHT_K"/>
+		<ref bean="150W_INDUCTION_STREET_LIGHT_K"/>
+		<ref bean="GENERIC_LED"/>
+		<ref bean="GENERIC_INDUCTION"/>
+		<ref bean="GENERIC_LED_2ND_GEN"/>
+	</util:list>
+
+	<bean id="196W_LED_STREET_LIGHT" class="com.sensus.lc.light.model.PartNumber">
+		<property name="name" value="196W LED STREET LIGHT"/>
+		<property name="productModelNumber" value="539449037C2310"/>
+		<property name="productModelMask">
+			<map>
+				<entry key="5" value="4" />
+				<entry key="8" value="3" />
+				<entry key="9" value="7" />
+				<entry key="10" value="C" />
+			</map>
+		</property>
+		<property name="dimOnDelay" value="0"/>
+		<property name="dimTable" value="LED Dual Ballast 01"/>
+		<property name="blinkSlotTimeEnum" value="0"/>
+	</bean>
+
+	<bean id="252W_LED_STREET_LIGHT" class="com.sensus.lc.light.model.PartNumber">
+		<property name="name" value="252W LED STREET LIGHT"/>
+		<property name="productModelNumber" value="539449037E2310"/>
+		<property name="productModelMask">
+			<map>
+				<entry key="5" value="4" />
+				<entry key="8" value="3" />
+				<entry key="9" value="7" />
+				<entry key="10" value="E" />
+			</map>
+		</property>
+		<property name="dimOnDelay" value="0"/>
+		<property name="dimTable" value="LED Dual Ballast 01"/>
+		<property name="blinkSlotTimeEnum" value="0"/>
+	</bean>
+
+	<bean id="84W_LED_FLOOD_LIGHT" class="com.sensus.lc.light.model.PartNumber">
+		<property name="name" value="84W LED FLOOD LIGHT"/>
+		<property name="productModelNumber" value="53944905782311"/>
+		<property name="productModelMask">
+			<map>
+				<entry key="5" value="4" />
+				<entry key="8" value="5" />
+				<entry key="9" value="7" />
+				<entry key="10" value="8" />
+			</map>
+		</property>
+		<property name="dimOnDelay" value="0"/>
+		<property name="dimTable" value="LED Single Ballast 01"/>
+		<property name="blinkSlotTimeEnum" value="0"/>
+	</bean>
+
+	<bean id="196W_LED_FLOOD_LIGHT" class="com.sensus.lc.light.model.PartNumber">
+		<property name="name" value="196W LED FLOOD LIGHT"/>
+		<property name="productModelNumber" value="539449057C2311"/>
+		<property name="productModelMask">
+			<map>
+				<entry key="5" value="4" />
+				<entry key="8" value="5" />
+				<entry key="9" value="7" />
+				<entry key="10" value="C" />
+			</map>
+		</property>
+		<property name="dimOnDelay" value="0"/>
+		<property name="dimTable" value="LED Dual Ballast 01"/>
+		<property name="blinkSlotTimeEnum" value="0"/>
+	</bean>
+
+	<bean id="252W_LED_FLOOD_LIGHT" class="com.sensus.lc.light.model.PartNumber">
+		<property name="name" value="252W LED FLOOD LIGHT"/>
+		<property name="productModelNumber" value="539449057E2311"/>
+		<property name="productModelMask">
+			<map>
+				<entry key="5" value="4" />
+				<entry key="8" value="5" />
+				<entry key="9" value="7" />
+				<entry key="10" value="E" />
+			</map>
+		</property>
+		<property name="dimOnDelay" value="0"/>
+		<property name="dimTable" value="LED Dual Ballast 01"/>
+		<property name="blinkSlotTimeEnum" value="0"/>
+	</bean>
+
+	<bean id="75W_LED_SHEPPARDS_HAT" class="com.sensus.lc.light.model.PartNumber">
+		<property name="name" value="75W LED SHEPPARDS HAT"/>
+		<property name="productModelNumber" value="539449067F2311"/>
+		<property name="productModelMask">
+			<map>
+				<entry key="5" value="4" />
+				<entry key="8" value="6" />
+				<entry key="9" value="7" />
+				<entry key="10" value="F" />
+			</map>
+		</property>
+		<property name="dimOnDelay" value="0"/>
+		<property name="dimTable" value="LED Single Ballast 01"/>
+		<property name="blinkSlotTimeEnum" value="0"/>
+	</bean>
+
+	<bean id="200W_INDUCTION_ACORN" class="com.sensus.lc.light.model.PartNumber">
+		<property name="name" value="200W INDUCTION ACORN"/>
+		<property name="productModelNumber" value="53944904342316"/>
+		<property name="productModelMask">
+			<map>
+				<entry key="8" value="4" />
+				<entry key="9" value="3" />
+				<entry key="10" value="4" />
+			</map>
+		</property>
+		<property name="dimOnDelay" value="2"/>
+		<property name="dimTable" value="200W Induction Ballast 00"/>
+		<property name="blinkSlotTimeEnum" value="2"/>
+	</bean>
+
+	<bean id="150W_INDUCTION_ACORN" class="com.sensus.lc.light.model.PartNumber">
+		<property name="name" value="150W INDUCTION ACORN"/>
+		<property name="productModelNumber" value="539449043G2316"/>
+		<property name="productModelMask">
+			<map>
+				<entry key="8" value="4" />
+				<entry key="9" value="3" />
+				<entry key="10" value="G" />
+			</map>
+		</property>
+		<property name="dimOnDelay" value="2"/>
+		<property name="dimTable" value="150W Induction Ballast 00"/>
+		<property name="blinkSlotTimeEnum" value="2"/>
+	</bean>
+
+	<bean id="200W_INDUCTION_STREET_LIGHT_K" class="com.sensus.lc.light.model.PartNumber">
+		<property name="name" value="200W INDUCTION STREET LIGHT K"/>
+		<property name="productModelNumber" value="53944902342310"/>
+		<property name="productModelMask">
+			<map>
+				<entry key="8" value="2" />
+				<entry key="9" value="3" />
+				<entry key="10" value="4" />
+			</map>
+		</property>
+		<property name="dimOnDelay" value="2"/>
+		<property name="dimTable" value="200W Induction Ballast 00"/>
+		<property name="blinkSlotTimeEnum" value="2"/>
+	</bean>
+
+	<bean id="150W_INDUCTION_STREET_LIGHT_K" class="com.sensus.lc.light.model.PartNumber">
+		<property name="name" value="150W INDUCTION STREET LIGHT K"/>
+		<property name="productModelNumber" value="539449023G2310"/>
+		<property name="productModelMask">
+			<map>
+				<entry key="8" value="2" />
+				<entry key="9" value="3" />
+				<entry key="10" value="G" />
+			</map>
+		</property>
+		<property name="dimOnDelay" value="2"/>
+		<property name="dimTable" value="150W Induction Ballast 00"/>
+		<property name="blinkSlotTimeEnum" value="2"/>
+	</bean>
+
+	<bean id="GENERIC_LED" class="com.sensus.lc.light.model.PartNumber">
+		<property name="name" value="GENERIC LED"/>
+		<property name="productModelNumber" value="539449037C2310"/>
+		<property name="productModelMask">
+			<map>
+				<entry key="5" value="4" />
+				<entry key="9" value="7" />
+			</map>
+		</property>
+		<property name="dimOnDelay" value="0"/>
+		<property name="dimTable" value="LED Dual Ballast 01"/>
+		<property name="blinkSlotTimeEnum" value="0"/>
+	</bean>
+
+	<bean id="GENERIC_INDUCTION" class="com.sensus.lc.light.model.PartNumber">
+		<property name="name" value="GENERIC INDUCTION"/>
+		<property name="productModelNumber" value="539449023G2310"/>
+		<property name="productModelMask">
+			<map>
+				<entry key="5" value="4" />
+				<entry key="9" value="3" />
+			</map>
+		</property>
+		<property name="dimOnDelay" value="2"/>
+		<property name="dimTable" value="150W Induction Ballast 00"/>
+		<property name="blinkSlotTimeEnum" value="2"/>
+	</bean>
+
+	<bean id="GENERIC_LED_2ND_GEN" class="com.sensus.lc.light.model.PartNumber">
+		<property name="name" value="GENERIC LED 2ND GEN"/>
+		<property name="productModelNumber" value="539439037C2310"/>
+		<property name="productModelMask">
+			<map>
+				<entry key="5" value="3" />
+				<entry key="9" value="7" />
+			</map>
+		</property>
+		<property name="dimOnDelay" value="0"/>
+		<property name="dimTable" value="LED 2ND GEN"/>
+		<property name="blinkSlotTimeEnum" value="0"/>
+	</bean>
+
+</beans>

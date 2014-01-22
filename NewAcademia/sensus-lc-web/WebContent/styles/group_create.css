@@ -1,0 +1,77 @@
+/* group create styles */
+
+/* =filters */
+.tools, .create-action-container {
+	color:#333;margin:0;
+	padding:.0 0 .75em;
+	font-size:93%;
+	background: url(../images/bg-toolbar.gif) repeat-x bottom;
+}
+
+/* create controls */
+.create-action-container {
+	text-align:left;
+	padding:.25em 1em .75em;
+}
+
+.create-action-container a {
+	color:#0456B9;
+}
+
+.content-header {
+	background:none repeat scroll 0 0 #FFFFFF;
+	overflow:hidden;
+	padding:0 0.5em 0.75em;
+	text-align:left;
+}
+
+.content-header h1 {
+	color:#032C5E;
+	font-size:167%;
+	font-weight:normal;
+	letter-spacing:-0.036em;
+	margin:0.5em 0 0;
+}
+
+span.required {
+	color:#CC0000;
+}
+
+/* submit */
+fieldset ul li.submit-row, fieldset ul li.submit-row-pad {
+	border-top:1px dotted #CCCCCC;
+	margin:0.8em 0;
+	padding:1em;
+}
+
+fieldset ul li.submit-row-pad {
+	padding-left:10.7em;
+}
+
+fieldset ul li {
+	clear:both;
+	overflow:hidden;
+	padding:0.5em;
+}
+
+.submit-row-pad .fg-button {
+	color:#333333;
+	line-height: 1.4 !important;
+    width: 8em;
+    margin-left: 15px;
+}
+
+
+
+/* =messaging */
+.messaging {
+	padding:.5em 1em;
+	text-align:center;
+	color:#333333;
+	margin:0 .5em;
+	background:url("../thirdparty/jquery/ui/images/ui-bg_inset-soft_95_fef1ec_1x100.png") repeat-x scroll 50% bottom #FEF1EC;
+	border:1px solid #CD0A0A;
+	color:#CD0A0A;
+}
+
+

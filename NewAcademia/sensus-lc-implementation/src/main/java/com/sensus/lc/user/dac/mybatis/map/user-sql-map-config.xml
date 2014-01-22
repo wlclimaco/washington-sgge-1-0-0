@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<settings>
+		<setting name="lazyLoadingEnabled" value="false" />
+	</settings>
+
+	<typeAliases>
+		<typeAlias alias="User" type="com.sensus.lc.user.model.User"/>
+		<typeAlias alias="Light" type="com.sensus.lc.light.model.Light"/>
+		<typeAlias alias="Group"  type="com.sensus.lc.group.model.Group"/>
+		<typeAlias alias="HashMap" type="java.util.HashMap"/>
+
+	</typeAliases>
+
+	<mappers>
+    	<mapper resource="com/sensus/lc/user/dac/mybatis/map/user.xml"/>
+    </mappers>
+
+</configuration>

@@ -1,0 +1,814 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- ========================= BCL DEFINITIONS ======================== -->
+
+	<bean id="objectFactoryMlcServer" class="com.sensus.mlc.mlcserver.type.ObjectFactory">
+	</bean>
+
+	<bean id="reverseLookup" class="java.lang.String">
+		<constructor-arg>
+			<value>http://maps.googleapis.com/maps/api/geocode/xml?latlng=%s,%s&amp;sensor=false</value>
+		</constructor-arg>
+	</bean>
+
+
+	<!-- Start of configuration related to Google Maps Api -->
+	<bean id="xpathExpressionStatus" class="java.lang.String">
+		<constructor-arg>
+			<value>//GeocodeResponse/status/text()</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="xpathExpressionBase" class="java.lang.String">
+		<constructor-arg>
+			<value>//GeocodeResponse/result/address_component[type/text()=</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="xpathExpressionState" class="java.lang.String">
+		<constructor-arg>
+			<value>'administrative_area_level_1']/long_name</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="xpathExpressionCounty" class="java.lang.String">
+		<constructor-arg>
+			<value>'administrative_area_level_2']/long_name</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="xpathExpressionCity" class="java.lang.String">
+		<constructor-arg>
+			<value>'locality']/long_name</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="xpathExpressionZip" class="java.lang.String">
+		<constructor-arg>
+			<value>'postal_code']/long_name</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="xpathExpressionStreet" class="java.lang.String">
+		<constructor-arg>
+			<value>'route']/long_name</value>
+		</constructor-arg>
+	</bean>
+	<!-- End of configuration related to Google Maps Api -->
+
+	<bean id="incompleteData" class="java.lang.String">
+		<constructor-arg>
+			<value>Incomplete Data</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="lcHelpTarget" class="com.sensus.lc.base.util.LCHelp" />
+
+	<bean id="lcHelpGeoCodingTarget" class="com.sensus.lc.base.util.LCHelpGeoCoding">
+		<property name="reverseLookup" ref="reverseLookup" />
+		<property name="xpathExpressionBase" ref="xpathExpressionBase" />
+		<property name="xpathExpressionStatus" ref="xpathExpressionStatus" />
+		<property name="xpathExpressionState" ref="xpathExpressionState" />
+		<property name="xpathExpressionCounty" ref="xpathExpressionCounty" />
+		<property name="xpathExpressionCity" ref="xpathExpressionCity" />
+		<property name="xpathExpressionZip" ref="xpathExpressionZip" />
+		<property name="xpathExpressionRoute" ref="xpathExpressionStreet" />
+	</bean>
+
+	<bean id="ecoModeBCLTarget" class="com.sensus.lc.ecomode.bcl.impl.EcoModeBCLImpl">
+		<property name="ecoModeDAC" ref="ecoModeDACTarget" />
+		<property name="tagBCL" ref="tagBCLTarget" />
+		<property name="processBCL" ref="processBCLTarget" />
+		<property name="tenantBCL" ref="tenantBCLTarget" />
+		<property name="systemId" ref="systemIdTarget" />
+		<property name="ecoModeExportColumns" ref="csvEcoModeAllColumns" />
+	</bean>
+
+	<bean id="lightBCLTarget" class="com.sensus.lc.light.bcl.impl.LightBCLImpl">
+		<property name="lightDAC" ref="lightDACTarget" />
+		<property name="processBCL" ref="processBCLTarget"/>
+		<property name="partNumberConfigurationDAC" ref="partNumberConfigurationDACTarget"/>
+	</bean>
+
+	<bean id="lightProcessorBCLTarget" class="com.sensus.lc.light.bcl.impl.LightProcessorBCLImpl">
+		<property name="lightDAC" ref="lightDACTarget" />
+		<property name="notificationHistoryDAC" ref="notificationHistoryDACTarget"/>
+		<property name="processBCL" ref="processBCLTarget"/>
+		<property name="tagBCL" ref="tagBCLTarget" />
+		<property name="ecoModeBCL" ref="ecoModeBCLTarget"/>
+		<property name="lightBCL" ref="lightBCLTarget"/>
+		<property name="notificationHistoryBCL" ref="lightNotificationHistoryBCLTarget"/>
+		<property name="analyticsBCL" ref="analyticsBCLTarget"/>
+		<property name="lcHelpGeoCoding" ref="lcHelpGeoCodingTarget"/>
+		<property name="calculateCommFailPageSize" value="${light.settings.calculate.comm_fail.pageSize}" />
+	</bean>
+
+	<bean id="lightCustomSearchBCLTarget" class="com.sensus.lc.light.bcl.impl.LightCustomSearchBCLImpl">
+		<property name="lightColumnFilterDAC" ref="lightColumnFilterDACTarget" />
+		<property name="lightCustomSearchDAC" ref="lightCustomSearchDACTarget"/>
+		<property name="tagBCL" ref="tagBCLTarget" />
+		<property name="groupBCL" ref="groupBCLTarget" />
+		<property name="scheduleBCL" ref="scheduleBCLTarget" />
+	</bean>
+
+	<bean id="lightNotificationHistoryBCLTarget" class="com.sensus.lc.light.bcl.impl.LightNotificationHistoryBCLImpl">
+		<property name="notificationHistoryDAC" ref="notificationHistoryDACTarget"/>
+	</bean>
+
+	<!-- Email sender configuration -->
+	<bean id="mailSenderBean" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host"     value="${communication.mail.send.host}" />
+		<property name="port"     value="${communication.mail.send.port}" />
+        <property name="username" value="${communication.mail.send.user}"/>
+        <property name="password" value="${communication.mail.send.password}"/>
+
+        <property name="javaMailProperties">
+		   <props>
+       	      <prop key="mail.smtp.auth">false</prop>
+       	      <prop key="mail.smtp.starttls.enable">true</prop>
+       	   </props>
+		</property>
+    </bean>
+
+	<bean id="emailServiceBCLTarget" class="com.sensus.lc.communication.bcl.impl.EmailServiceBCLImpl">
+		<property name="mailSender" ref="mailSenderBean"/>
+	</bean>
+
+	<bean id="alertCommunicationBCLTarget" class="com.sensus.lc.communication.bcl.impl.AlertCommunicationBCLImpl">
+		<property name="emailServiceBCL" ref="emailServiceBCLTarget"/>
+		<property name="notificationHistoryBCL" ref="lightNotificationHistoryBCLTarget"/>
+		<property name="lightBCL" ref="lightBCLTarget"/>
+		<property name="settingsBCL" ref="settingsBCLTarget"/>
+		<property name="userBCL" ref="userBCLTarget"/>
+		<property name="groupBCL" ref="groupBCLTarget"/>
+		<property name="alertCommunicationDAC" ref="alertCommunicationDACTarget"/>
+		<property name="tenantDAC" ref="tenantDACTarget" />
+		<property name="alertCSVColumns" ref="csvLightAlertAllColumns"/>
+		<property name="messageSource" ref="messageSourceBCL"/>
+		<property name="fromAddress" value="${communication.mail.from}"/>
+	</bean>
+
+	<bean id="messageSourceBCL"
+	    class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+	    <property name="basename" value="classpath:locale/messages" />
+	    <property name="defaultEncoding" value="UTF-8"/>
+	</bean>
+
+	<bean id="groupBCLTarget" class="com.sensus.lc.group.bcl.impl.GroupBCLImpl">
+		<property name="groupDAC" ref="groupDACTarget" />
+		<property name="tagBCL" ref="tagBCLTarget" />
+		<property name="mlcGatewayWs" ref="mlcGatewayWSClient" />
+		<property name="processBCL" ref="processBCLTarget" />
+		<property name="lightBCL" ref="lightBCLTarget"/>
+		<property name="analyticsBCL" ref="analyticsBCLTarget"/>
+	</bean>
+
+	<bean id="tagBCLTarget" class="com.sensus.lc.tag.bcl.impl.TagBCLImpl">
+		<property name="tagDAC" ref="tagDACTarget" />
+		<property name="processBCL" ref="processBCLTarget" />
+		<property name="lightBCL" ref="lightBCLTarget"/>
+	</bean>
+
+	<bean id="scheduleBCLTarget" class="com.sensus.lc.schedule.bcl.impl.ScheduleBCLImpl">
+		<property name="scheduleDAC" ref="scheduleDACTarget" />
+		<property name="mlcGatewayWs" ref="mlcGatewayWSClient" />
+		<property name="factory" ref="objectFactoryMlcServer" />
+		<property name="processBCL" ref="processBCLTarget" />
+		<property name="lightBCL" ref="lightBCLTarget"/>
+	</bean>
+
+	<bean id="processBCLTarget" class="com.sensus.lc.process.bcl.impl.ProcessBCLImpl">
+		<property name="tenantBCL" ref="tenantBCLTarget" />
+		<property name="processDAC" ref="processDACTarget" />
+		<property name="lightNotificationHistoryBCL" ref="lightNotificationHistoryBCLTarget"/>
+		<property name="systemId" ref="systemLoginTarget" />
+		<property name="systemPwd" ref="systemPwdTarget" />
+		<property name="mlcGatewayWs" ref="mlcGatewayWSClient" />
+		<property name="factory" ref="objectFactoryMlcServer" />
+		<property name="tempFilePath" value="${csv.temp.file.path}" />
+		<property name="processExportColumns" ref="csvProcessAllColumns" />
+		<property name="lightSummaryExportColumns" ref="csvLightSummaryAllColumns" />
+	</bean>
+
+	<!-- Begin - Process Actions Beans -->
+	<bean id="processAdditionSmartpointSchedule" class="com.sensus.lc.process.bcl.impl.ProcessAdditionSmartpointSchedule">
+		<property name="scheduleBCL" ref="scheduleBCLTarget" />
+		<property name="mlcGatewayWs" ref="mlcGatewayWSClient" />
+		<property name="factory" ref="objectFactoryMlcServer" />
+		<property name="systemId" ref="systemLoginTarget" />
+		<property name="systemPwd" ref="systemPwdTarget" />
+		<property name="lightBCL" ref="lightBCLTarget"/>
+	</bean>
+
+	<bean id="processDeletionSmartpointSchedule" class="com.sensus.lc.process.bcl.impl.ProcessDeletionSmartpointSchedule">
+		<property name="scheduleBCL" ref="scheduleBCLTarget" />
+		<property name="mlcGatewayWs" ref="mlcGatewayWSClient" />
+		<property name="factory" ref="objectFactoryMlcServer" />
+		<property name="systemId" ref="systemLoginTarget" />
+		<property name="systemPwd" ref="systemPwdTarget" />
+	</bean>
+
+	<bean id="processDeletionSchedule" class="com.sensus.lc.process.bcl.impl.ProcessDeletionSchedule">
+		<property name="scheduleBCL" ref="scheduleBCLTarget" />
+		<property name="mlcGatewayWs" ref="mlcGatewayWSClient" />
+		<property name="factory" ref="objectFactoryMlcServer" />
+		<property name="systemId" ref="systemLoginTarget" />
+		<property name="systemPwd" ref="systemPwdTarget" />
+	</bean>
+
+	<bean id="processSetupIntensityGroup" class="com.sensus.lc.process.bcl.impl.ProcessSetupIntensityGroup">
+		<property name="mlcGatewayWs" ref="mlcGatewayWSClient" />
+		<property name="factory" ref="objectFactoryMlcServer" />
+		<property name="systemId" ref="systemLoginTarget" />
+		<property name="systemPwd" ref="systemPwdTarget" />
+		<property name="lightBCL" ref="lightBCLTarget" />
+	</bean>
+
+	<bean id="processSetupDimmingConfiguration" class="com.sensus.lc.process.bcl.impl.ProcessSetupDimmingConfiguration">
+		<property name="mlcGatewayWs" ref="mlcGatewayWSClient" />
+		<property name="factory" ref="objectFactoryMlcServer" />
+		<property name="systemId" ref="systemLoginTarget" />
+		<property name="systemPwd" ref="systemPwdTarget" />
+	</bean>
+
+	<bean id="processRecoveryLightStatus" class="com.sensus.lc.process.bcl.impl.ProcessRecoveryLightStatus">
+		<property name="mlcGatewayWs" ref="mlcGatewayWSClient" />
+		<property name="factory" ref="objectFactoryMlcServer" />
+		<property name="systemId" ref="systemLoginTarget" />
+		<property name="systemPwd" ref="systemPwdTarget" />
+	</bean>
+
+	<bean id="processSetupLightIntensity" class="com.sensus.lc.process.bcl.impl.ProcessSetupLightIntensity">
+		<property name="mlcGatewayWs" ref="mlcGatewayWSClient" />
+		<property name="factory" ref="objectFactoryMlcServer" />
+		<property name="systemId" ref="systemLoginTarget" />
+		<property name="systemPwd" ref="systemPwdTarget" />
+		<property name="lightBCL" ref="lightBCLTarget" />
+	</bean>
+
+	<bean id="processCleaningAlarm" class="com.sensus.lc.process.bcl.impl.ProcessCleaningAlarm">
+		<property name="mlcGatewayWs" ref="mlcGatewayWSClient" />
+		<property name="factory" ref="objectFactoryMlcServer" />
+		<property name="systemId" ref="systemLoginTarget" />
+		<property name="systemPwd" ref="systemPwdTarget" />
+		<property name="lightProcessorBCL" ref="lightProcessorBCLTarget" />
+	</bean>
+
+	<bean id="processSetupLatLng" class="com.sensus.lc.process.bcl.impl.ProcessSetupLatLng">
+		<property name="mlcGatewayWs" ref="mlcGatewayWSClient" />
+		<property name="factory" ref="objectFactoryMlcServer" />
+		<property name="systemId" ref="systemLoginTarget" />
+		<property name="systemPwd" ref="systemPwdTarget" />
+	</bean>
+
+	<bean id="processSetupPoleId" class="com.sensus.lc.process.bcl.impl.ProcessSetupPoleId">
+		<property name="mlcGatewayWs" ref="mlcGatewayWSClient" />
+		<property name="factory" ref="objectFactoryMlcServer" />
+		<property name="systemId" ref="systemLoginTarget" />
+		<property name="systemPwd" ref="systemPwdTarget" />
+	</bean>
+
+	<bean id="processSetupLightStatus" class="com.sensus.lc.process.bcl.impl.ProcessSetupLightStatus">
+		<property name="mlcGatewayWs" ref="mlcGatewayWSClient" />
+		<property name="factory" ref="objectFactoryMlcServer" />
+		<property name="systemId" ref="systemLoginTarget" />
+		<property name="systemPwd" ref="systemPwdTarget" />
+	</bean>
+	<!-- End - Process Actions Beans -->
+
+	<bean id="hourlyBatchTarget" class="com.sensus.lc.batch.impl.HourlyBatchImpl">
+		<property name="analyticsBCL" ref="analyticsBCLTarget" />
+		<property name="ecoModeBCL" ref="ecoModeBCLTarget" />
+		<property name="settingsBCL" ref="settingsBCLTarget" />
+		<property name="tenantBCL" ref="tenantBCLTarget" />
+		<property name="lightProcessorBCL" ref="lightProcessorBCLTarget" />
+		<property name="systemId" ref="systemIdTarget" />
+		<property name="calculatePageSize">
+			<value>${ecomode.settings.calculate.pageSize}</value>
+		</property>
+	</bean>
+
+	<bean id="settingsBCLTarget" class="com.sensus.lc.settings.bcl.impl.SettingsBCLImpl">
+		<property name="userBCF" ref="userBCF" />
+		<property name="settingsDAC" ref="settingsDACTarget" />
+		<property name="tenantDAC" ref="tenantDACTarget" />
+		<property name="defaultLanguage" value="${system.settings.language}" />
+		<property name="defaultTimeZone" value="${system.settings.timeZone}" />
+		<property name="defaultDateFormat" value="${system.settings.dateFormat}" />
+		<property name="defaultMonitorRequest" value="${system.settings.monitorRequest}" />
+		<property name="defaultConvertEnergyUnit" value="${system.settings.convertEnergyUnit}" />
+		<property name="defaultPageSize" value="${system.settings.pageSize}" />
+		<property name="defaultPageSizeList" value="${system.settings.pageSizeList}" />
+		<property name="defaultPageSizeShowDialog" value="${system.settings.pageSizeShowDialog}" />
+		<property name="defaultPolygonShowDialog" value="${system.settings.polygonMapShowDialog}" />
+		<property name="defaultLatitude" value="${system.settings.tenant.latitude}" />
+		<property name="defaultLongitude" value="${system.settings.tenant.longitude}" />
+		<property name="defaultShowSubscriptionDialog" value="${system.settings.show.subscription.dialog}" />
+	</bean>
+
+	<bean id="mlcServerBCLTarget" class="com.sensus.lc.server.bcl.impl.MlcServerBCLImpl">
+
+		<property name="lightBCL" ref="lightBCLTarget" />
+		<property name="lightProcessorBCF" ref="lightProcessorBCF" />
+		<property name="tenantBCL" ref="tenantBCLTarget" />
+		<property name="scheduleBCF" ref="scheduleBCF" />
+		<property name="processBCF" ref="processBCF" />
+		<property name="systemId" ref="systemLoginTarget" />
+		<property name="systemPwd" ref="systemPwdTarget" />
+		<property name="systemName" ref="systemIdTarget" />
+		<property name="currentConversionFactor" ref="currentConversionFactorTarget" />
+		<property name="voltageConversionFactor" ref="voltageConversionFactorTarget" />
+		<property name="serialNumberLayout">
+			<list>
+				<ref bean="freqBean" />
+				<ref bean="wattageBean" />
+				<ref bean="voltageBean" />
+				<ref bean="colorTemperatureBean" />
+				<ref bean="lightSourceBean" />
+				<ref bean="lampTypeBean" />
+				<ref bean="lampTypeWattageBean" />
+				<ref bean="housingBean" />
+				<ref bean="dimmableBean" />
+				<ref bean="housingColorBean" />
+				<ref bean="manufacturerBean" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="analyticsBCLTarget" class="com.sensus.lc.analytics.bcl.impl.AnalyticsBCLImpl">
+		<property name="analyticsDAC" ref="analyticsDACTarget" />
+		<property name="processBCL" ref="processBCLTarget" />
+		<property name="carbonCreditsFactor" value="0.000717830556540234" />
+		<property name="barrelsOfOilFactor" value="0.0016705069124424" />
+		<property name="metricOfCOFactor" value="0.000717830556540234" />
+		<property name="tempFilePath" value="${csv.temp.file.path}" />
+		<property name="analyticsAlarmExportColumns" ref="csvAnalyticsAllAlarmColumns" />
+		<property name="analyticsWarningsExportColumns" ref="csvAnalyticsAllWarningsColumns" />
+		<property name="analyticsInstalledAndConsumptionExportColumns" ref="csvAnalyticsAllInstalledAndConsumptionColumns" />
+		<property name="analyticsAllEcoModeColumns" ref="csvAnalyticsAllEcoModeColumns" />
+		<property name="analyticsAllCarbonCreditsColumns" ref="csvAnalyticsAllCarbonCreditsColumns" />
+	</bean>
+
+	<bean id="userBCLTarget" class="com.sensus.lc.user.bcl.impl.UserBCLImpl">
+		<property name="userDAC" ref="userDACTarget" />
+	</bean>
+
+	<bean id="tenantBCLTarget" class="com.sensus.lc.tenant.bcl.impl.TenantBCLImpl">
+		<property name="tenantDAC" ref="tenantDACTarget" />
+	</bean>
+
+	<!-- This is the User and Pwd for LC System activities -->
+	<bean id="systemIdTarget" class="java.lang.String">
+		<constructor-arg>
+			<value>${system.user.name}</value>
+		</constructor-arg>
+	</bean>
+	<bean id="systemLoginTarget" class="java.lang.String">
+		<constructor-arg>
+			<value>${system.user.login}</value>
+		</constructor-arg>
+	</bean>
+	<bean id="systemPwdTarget" class="java.lang.String">
+		<constructor-arg>
+			<value>${system.user.pwd}</value>
+		</constructor-arg>
+	</bean>
+	<bean id="webserviceUserNameTarget" class="java.lang.String">
+		<constructor-arg>
+			<value>${webservice.user.name}</value>
+		</constructor-arg>
+	</bean>
+	<bean id="webserviceUserPwdTarget" class="java.lang.String">
+		<constructor-arg>
+			<value>${webservice.user.pwd}</value>
+		</constructor-arg>
+	</bean>
+	<bean id="superUserNameTarget" class="java.lang.String">
+		<constructor-arg>
+			<value>${super.user.name}</value>
+		</constructor-arg>
+	</bean>
+
+	<!-- Current comes in 20mA units from the device -->
+	<!-- To transform to Ampere, *20/1000 = 0.02 -->
+	<bean id="currentConversionFactorTarget" class="java.lang.Float">
+		<constructor-arg>
+			<value>1.00</value>
+		</constructor-arg>
+	</bean>
+
+	<!-- Voltage comes in 2V units from the device -->
+	<bean id="voltageConversionFactorTarget" class="java.lang.Integer">
+		<constructor-arg>
+			<value>1</value>
+		</constructor-arg>
+	</bean>
+
+
+	<!-- Configuration related to Light Model Number. Each bean is an instance of SerialNumberElement. This class knows how
+		to extract information from the Model Number, since it is given the beginIndex and endIndex of its corresponding field inside
+		the Model Number. It also knows what to return, since it has a list of the possible values it can hold. DO NOT CHANGE THE
+		BEANS BELOW IF YOU DON'T UNDERSTAND WHAT THEY DO. -->
+
+	<!-- Sample Model Number: 5393490123131 -->
+
+	<bean id="freqBean" class="com.sensus.lc.light.model.SerialNumberElement">
+		<property name="name" value="FREQUENCY" />
+		<property name="beginIndex" value="4" />
+		<property name="endIndex" value="5" />
+		<property name="propertyType" value="FREQUENCY" />
+		<property name="validValues">
+			<map>
+				<entry key="3" value="400MHz" />
+				<entry key="4" value="900MHz" />
+			</map>
+		</property>
+	</bean>
+
+	<!-- Dimmable and Extendable are not being used now. When they start being used, replace the current configuration with
+		this one and parse the different pieces in the code -->
+	<!-- <bean id="LightSourceBean" class="com.sensus.lc.light.model.SerialNumberElement"> <property name="name" value="LIGHT_SOURCE"/>
+		<property name="beginIndex" value="8"/> <property name="endIndex" value="9"/> <property name="propertyType" value="LIGHT_SOURCE"/>
+		<property name="validValues"> <map> <entry key="1" value="Induction|Dimmable|Extendable" /> <entry key="2" value="Induction|Non-Dimmable|Extendable"
+		/> <entry key="3" value="Induction|Dimmable|Non-Extendable" /> <entry key="4" value="Induction|Non-Dimmable|Non-Extendable"/>
+		<entry key="5" value="LED|Dimmable|Extendable" /> <entry key="6" value="LED|Non-Dimmable|Extendable" /> <entry key="7" value="LED|Dimmable|Non-Extendable"
+		/> <entry key="8" value="LED|Non-Dimmable|Non-Extendable" /> </map> </property> </bean> -->
+
+	<!-- Sample Model Number: 53934901231311 -->
+
+	<bean id="manufacturerBean" class="com.sensus.lc.light.model.SerialNumberElement">
+		<property name="name" value="MANUFACTURER" />
+		<property name="beginIndex" value="6" />
+		<property name="endIndex" value="7" />
+		<property name="propertyType" value="MANUFACTURER" />
+		<property name="validValues">
+			<map>
+				<entry key="0" value="GGL" />
+				<entry key="1" value="CREE" />
+				<entry key="2" value="GE" />
+				<entry key="3" value="Cooper" />
+				<entry key="4" value="Hubbell" />
+				<entry key="5" value="Acuity" />
+				<entry key="6" value="Phillips" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="lightSourceBean" class="com.sensus.lc.light.model.SerialNumberElement">
+		<property name="name" value="LIGHT_SOURCE" />
+		<property name="beginIndex" value="8" />
+		<property name="endIndex" value="9" />
+		<property name="propertyType" value="LIGHT_SOURCE" />
+		<property name="validValues">
+			<map>
+				<entry key="1" value="I" />
+				<entry key="2" value="I" />
+				<entry key="3" value="I" />
+				<entry key="4" value="I" />
+				<entry key="5" value="L" />
+				<entry key="6" value="L" />
+				<entry key="7" value="L" />
+				<entry key="8" value="L" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="lampTypeBean" class="com.sensus.lc.light.model.SerialNumberElement">
+		<property name="name" value="LAMP_TYPE" />
+		<property name="beginIndex" value="8" />
+		<property name="endIndex" value="9" />
+		<property name="propertyType" value="LAMP_TYPE" />
+		<property name="validValues">
+			<map>
+				<entry key="1" value="Induction" />
+				<entry key="2" value="Induction" />
+				<entry key="3" value="Induction" />
+				<entry key="4" value="Induction" />
+				<entry key="5" value="LED" />
+				<entry key="6" value="LED" />
+				<entry key="7" value="LED" />
+				<entry key="8" value="LED" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="wattageBean" class="com.sensus.lc.light.model.SerialNumberElement">
+		<property name="name" value="WATTAGE" />
+		<property name="beginIndex" value="9" />
+		<property name="endIndex" value="10" />
+		<property name="propertyType" value="WATTAGE_RATING" />
+		<property name="validValues">
+			<map>
+				<entry key="1" value="40W" />
+				<entry key="2" value="80W" />
+				<entry key="3" value="120W" />
+				<entry key="4" value="200W" />
+				<entry key="5" value="300W" />
+				<entry key="6" value="28W" />
+				<entry key="7" value="56W" />
+				<entry key="8" value="84W" />
+				<entry key="9" value="112W" />
+				<entry key="A" value="140W" />
+				<entry key="B" value="168W" />
+				<entry key="C" value="196W" />
+				<entry key="D" value="224W" />
+				<entry key="E" value="252W" />
+				<entry key="F" value="75W" />
+				<entry key="G" value="150W" />
+				<entry key="H" value="250W" />
+				<entry key="J" value="400W" />
+				<entry key="K" value="60W" />
+				<entry key="L" value="100W" />
+				<entry key="M" value="105W" />
+				<entry key="N" value="135W" />
+			</map>
+		</property>
+	</bean>
+	<bean id="lampTypeWattageBean" class="com.sensus.lc.light.model.SerialNumberElement">
+		<property name="name" value="LAMP_TYPE_WATTAGE_DIMMABLE" />
+		<property name="beginIndex" value="8" />
+		<property name="endIndex" value="10" />
+		<property name="propertyType" value="LAMP_TYPE_WATTAGE_DIMMABLE" />
+		<property name="validValues">
+			<map>
+				<!-- Dimmable -->
+				<entry key="11" value="40W Induction" />
+				<entry key="12" value="80W Induction" />
+				<entry key="13" value="120W Induction" />
+				<entry key="14" value="200W Induction" />
+				<entry key="15" value="300W Induction" />
+				<entry key="1G" value="150W Induction" />
+				<entry key="1H" value="250W Induction" />
+				<entry key="1J" value="400W Induction" />
+				<entry key="1K" value="60W Induction" />
+				<entry key="1L" value="100W Induction" />
+				<entry key="1M" value="105W Induction" />
+				<entry key="1N" value="135W Induction" />
+
+				<entry key="21" value="40W Induction" />
+				<entry key="22" value="80W Induction" />
+				<entry key="23" value="120W Induction" />
+				<entry key="24" value="200W Induction" />
+				<entry key="25" value="300W Induction" />
+				<entry key="2G" value="150W Induction" />
+				<entry key="2H" value="250W Induction" />
+				<entry key="2J" value="400W Induction" />
+				<entry key="2K" value="60W Induction" />
+				<entry key="2L" value="100W Induction" />
+				<entry key="2M" value="105W Induction" />
+				<entry key="2N" value="135W Induction" />
+
+				<!-- Dimmable -->
+				<entry key="31" value="40W Induction" />
+				<entry key="32" value="80W Induction" />
+				<entry key="33" value="120W Induction" />
+				<entry key="34" value="200W Induction" />
+				<entry key="35" value="300W Induction" />
+				<entry key="3G" value="150W Induction" />
+				<entry key="3H" value="250W Induction" />
+				<entry key="3J" value="400W Induction" />
+				<entry key="3K" value="60W Induction" />
+				<entry key="3L" value="100W Induction" />
+				<entry key="3M" value="105W Induction" />
+				<entry key="3N" value="135W Induction" />
+
+				<entry key="41" value="40W Induction" />
+				<entry key="42" value="80W Induction" />
+				<entry key="43" value="120W Induction" />
+				<entry key="44" value="200W Induction" />
+				<entry key="45" value="300W Induction" />
+				<entry key="4G" value="150W Induction" />
+				<entry key="4H" value="250W Induction" />
+				<entry key="4J" value="400W Induction" />
+				<entry key="4K" value="60W Induction" />
+				<entry key="4L" value="100W Induction" />
+				<entry key="4M" value="105W Induction" />
+				<entry key="4N" value="135W Induction" />
+
+				<!-- Dimmable -->
+				<entry key="56" value="28W LED" />
+				<entry key="57" value="56W LED" />
+				<entry key="58" value="84W LED" />
+				<entry key="59" value="112W LED" />
+				<entry key="5A" value="140W LED" />
+				<entry key="5B" value="168W LED" />
+				<entry key="5C" value="196W LED" />
+				<entry key="5D" value="224W LED" />
+				<entry key="5E" value="252W LED" />
+				<entry key="5F" value="75W LED" />
+				<entry key="5M" value="105W LED" />
+				<entry key="5N" value="135W LED" />
+
+				<entry key="66" value="28W LED" />
+				<entry key="67" value="56W LED" />
+				<entry key="68" value="84W LED" />
+				<entry key="69" value="112W LED" />
+				<entry key="6A" value="140W LED" />
+				<entry key="6B" value="168W LED" />
+				<entry key="6C" value="196W LED" />
+				<entry key="6D" value="224W LED" />
+				<entry key="6E" value="252W LED" />
+				<entry key="6F" value="75W LED" />
+				<entry key="6M" value="105W LED" />
+				<entry key="6N" value="135W LED" />
+
+				<!-- Dimmable -->
+				<entry key="76" value="28W LED" />
+				<entry key="77" value="56W LED" />
+				<entry key="78" value="84W LED" />
+				<entry key="79" value="112W LED" />
+				<entry key="7A" value="140W LED" />
+				<entry key="7B" value="168W LED" />
+				<entry key="7C" value="196W LED" />
+				<entry key="7D" value="224W LED" />
+				<entry key="7E" value="252W LED" />
+				<entry key="7F" value="75W LED" />
+				<entry key="7L" value="100W LED" />
+				<entry key="7M" value="105W LED" />
+				<entry key="7N" value="135W LED" />
+
+				<entry key="86" value="28W LED" />
+				<entry key="87" value="56W LED" />
+				<entry key="88" value="84W LED" />
+				<entry key="89" value="112W LED" />
+				<entry key="8A" value="140W LED" />
+				<entry key="8B" value="168W LED" />
+				<entry key="8C" value="196W LED" />
+				<entry key="8D" value="224W LED" />
+				<entry key="8E" value="252W LED" />
+				<entry key="8F" value="75W LED" />
+				<entry key="8M" value="105W LED" />
+				<entry key="8N" value="135W LED" />
+
+			</map>
+		</property>
+	</bean>
+
+	<bean id="voltageBean" class="com.sensus.lc.light.model.SerialNumberElement">
+		<property name="name" value="VOLTAGE" />
+		<property name="beginIndex" value="10" />
+		<property name="endIndex" value="11" />
+		<property name="propertyType" value="INPUT_VOLTAGE_RANGE" />
+		<property name="validValues">
+			<map>
+				<entry key="1" value="150-300V" />
+				<entry key="2" value="90-300V" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="colorTemperatureBean" class="com.sensus.lc.light.model.SerialNumberElement">
+		<property name="name" value="COLOR_TEMPERATURE" />
+		<property name="beginIndex" value="11" />
+		<property name="endIndex" value="12" />
+		<property name="propertyType" value="COLOR_TEMPERATURE" />
+		<property name="validValues">
+			<map>
+				<entry key="1" value="3,000K" />
+				<entry key="2" value="4,000K" />
+				<entry key="3" value="5,000K" />
+				<entry key="4" value="6,000K" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="dimmableBean" class="com.sensus.lc.light.model.SerialNumberElement">
+		<property name="name" value="DIMMABLE" />
+		<property name="beginIndex" value="8" />
+		<property name="endIndex" value="9" />
+		<property name="propertyType" value="DIMMABLE" />
+		<property name="validValues">
+			<map>
+				<entry key="1" value="True" />
+				<entry key="2" value="False" />
+				<entry key="3" value="True" />
+				<entry key="4" value="False" />
+				<entry key="5" value="True" />
+				<entry key="6" value="False" />
+				<entry key="7" value="True" />
+				<entry key="8" value="False" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="housingColorBean" class="com.sensus.lc.light.model.SerialNumberElement">
+		<property name="name" value="HOUSING_COLOR" />
+		<property name="beginIndex" value="13" />
+		<property name="endIndex" value="14" />
+		<property name="propertyType" value="HOUSING_COLOR" />
+		<property name="validValues">
+			<map>
+				<entry key="0" value="Gray" />
+				<entry key="1" value="Black" />
+				<entry key="2" value="Silver" />
+				<entry key="3" value="Bronze" />
+				<entry key="4" value="White" />
+				<entry key="5" value="Off-White / Cream" />
+				<entry key="6" value="Green" />
+				<entry key="7" value="Aluminum" />
+				<entry key="8" value="Clear" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="housingBean" class="com.sensus.lc.light.model.SerialNumberElement">
+		<property name="name" value="HOUSING" />
+		<property name="beginIndex" value="7" />
+		<property name="endIndex" value="8" />
+		<property name="propertyType" value="HOUSING" />
+		<property name="validValues">
+			<map>
+				<entry key="1" value="GGL ISTJ" />
+				<entry key="2" value="GGL ISTK" />
+				<entry key="3" value="GGL LED Street" />
+				<entry key="4" value="GGL Decorative Post" />
+				<entry key="5" value="High Bay" />
+				<entry key="6" value="Low Bay" />
+				<entry key="7" value="Tunnel" />
+				<entry key="8" value="Shoebox" />
+				<entry key="9" value="Flood" />
+				<entry key="A" value="Wall Pack" />
+				<entry key="B" value="Post Top" />
+				<entry key="C" value="Shepherd's Hat" />
+			</map>
+		</property>
+	</bean>
+
+	<!-- End of Configuration related to Light Model Number. -->
+
+	<!-- Configure Timer -->
+	<bean id="schedulerTask" class="org.springframework.scheduling.timer.MethodInvokingTimerTaskFactoryBean">
+		<property name="targetObject" ref="processBCLTarget" />
+		<property name="targetMethod" value="checkRniStatus" />
+	</bean>
+
+	<bean id="timerTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<property name="timerTask" ref="schedulerTask" />
+		<property name="delay" value="1000" />
+		<property name="period" value="${rni.check.status.timer.milliseconds}" />
+	</bean>
+
+	<bean class="org.springframework.scheduling.timer.TimerFactoryBean">
+		<property name="scheduledTimerTasks">
+			<list>
+				<ref local="timerTask" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="batchProcessTask" class="org.springframework.scheduling.timer.MethodInvokingTimerTaskFactoryBean">
+		<property name="targetObject" ref="hourlyBatchTarget" />
+		<property name="targetMethod" value="batchHourlyProcess" />
+	</bean>
+
+	<bean id="batchProcessTimerTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<property name="timerTask" ref="batchProcessTask" />
+		<property name="delay" value="1000" />
+		<property name="period" value="${batch.process.check.timer.milliseconds}" />
+	</bean>
+
+	<bean class="org.springframework.scheduling.timer.TimerFactoryBean">
+		<property name="scheduledTimerTasks">
+			<list>
+				<ref local="batchProcessTimerTask" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- Communication Timer Task -->
+	<bean id="communicationTask" class="org.springframework.scheduling.timer.MethodInvokingTimerTaskFactoryBean">
+		<property name="targetObject" ref="alertCommunicationBCLTarget" />
+		<property name="targetMethod" value="verifyAlertCommunication" />
+	</bean>
+
+	<bean id="communicationTimerTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<property name="timerTask" ref="communicationTask" />
+		<property name="delay" value="1000" />
+		<property name="period" value="60000" />
+	</bean>
+
+	<bean class="org.springframework.scheduling.timer.TimerFactoryBean">
+		<property name="scheduledTimerTasks">
+			<list>
+				<ref local="communicationTimerTask" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="lightCSVBCLTarget" class="com.sensus.lc.light.bcl.impl.LightCSVBCLImpl">
+		<property name="processBCL" ref="processBCLTarget" />
+		<property name="lightDAC" ref="lightDACTarget" />
+		<property name="notificationHistoryDAC" ref="notificationHistoryDACTarget" />
+		<property name="lightHistoryExportColumns" ref="csvLightHistoryAllColumns" />
+		<property name="lightSummaryExportColumns" ref="csvLightSummaryAllColumns" />
+		<property name="lightDetailExportColumns" ref="csvLightDetailAllColumns" />
+	</bean>
+
+	<bean id="academiaBCLTarget" class="com.sensus.lc.academia.bcl.impl.AcademiaBCLImpl">
+		<property name="academiaDAC" ref="academiaDACTarget" />
+	</bean>
+
+</beans>

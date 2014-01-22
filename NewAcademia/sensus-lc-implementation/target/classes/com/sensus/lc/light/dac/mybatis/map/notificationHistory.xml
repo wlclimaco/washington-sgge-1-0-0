@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+  Base Mybatis configuration for Notification History, State and Alerts.
+ -->
+ <mapper namespace="NotificationHistory">
+
+
+	<!--############################-->
+	<!--####    Result Maps     ####-->
+	<!--############################-->
+
+	<resultMap  id="NotificationHistoryResult"	 type="NotificationHistory" >
+		<result property="id" jdbcType="INTEGER" column="notification_history_id" />
+		<result property="messageDate" jdbcType="TIMESTAMP" column="message_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="updateDate"  jdbcType="TIMESTAMP" column="update_date"  typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="createDate"  jdbcType="TIMESTAMP" column="create_date"  typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="trasactionId"          column="notification_transation_id" />
+		<result property="lifeCycleStateValue"   column="lifecycle_state" />
+		<result property="notificationTypeValue" column="notification_type" />
+		<result property="precedenceValue"		 column="precedence" />
+		<result property="lightId"				 column="light_id" />
+
+		<!-- Lazy-loaded properties -->
+		<association property="lastMessageDate" column="light_id" javaType="java.util.Date" select="NotificationHistory.fetchLastMessageDateByLightId" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler" />
+		<collection property="alertClassifications"  column="notification_history_id" ofType="AlertClassification"  select="NotificationHistory.fetchNotificationHistoryAlertById" />
+		<collection property="operationalDataValues" column="notification_history_id" ofType="OperationalDataValue" select="NotificationHistory.fetchOperationalDataValueById" />
+	</resultMap>
+
+	<resultMap id="OperationalDataValueResult" type="OperationalDataValue">
+		<result property="value"                    column="value" />
+		<result property="operationalDataTypeValue" column="operational_data_type_id" />
+		<result property="notificationHistoryId"    column="notification_history_id" />
+		<result property="createDate"  jdbcType="TIMESTAMP" column="create_date"  typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+	</resultMap>
+
+	<resultMap id="LightingHistoryResult" type="LightHistory">
+		<result property="createDate" column="create_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="name" column="name" />
+		<result property="description" column="description" />
+		<result property="createUser" column="create_user" />
+		<result property="processId" column="id" />
+		<result property="notificationHistoryId" column="notification_history_id" />
+		<result property="statusComplete" column="status" />
+		<result property="lightCount" column="light_count" />
+		<result property="parameterValue" column="parameter_value" />
+		<result property="alertSubTypeValue" column="alert_subtype_id" />
+	</resultMap>
+
+	<resultMap  id="NotificationHistoryAlertResult"	 type="AlertClassification" >
+		<result property="notificationHistoryId" column="classification_notification_history" />
+		<result property="alertTypeValue" column="classification_alert_type" />
+		<result property="alertSubTypeValue" column="classification_alert_subtype" />
+		<result property="messageDate" jdbcType="TIMESTAMP" column="classification_message_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="updateDate"  jdbcType="TIMESTAMP" column="classification_update_date"  typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="createDate"  jdbcType="TIMESTAMP" column="classification_create_date"  typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="createUser"  column="classification_create_user" />
+	</resultMap>
+
+	<resultMap id="lightHistoryHeaderResult" type="HashMap">
+    	<result property="alarms" column="alarms" javaType="Integer"/>
+    	<result property="warnings" column="warnings" javaType="Integer"/>
+    	<result property="power_failure" column="power_failure" javaType="Integer"/>
+ 	</resultMap>
+
+	<!--############################-->
+	<!--####  Column Definition ####-->
+	<!--############################-->
+
+	<sql id="alertClassificationColumnsToFetchAllLights">
+           nha.notification_history_id AS classification_notification_history
+	     , ast.alert_type_id    AS classification_alert_type
+	     , nha.alert_subtype_id AS classification_alert_subtype
+         , nha.message_date     AS classification_message_date
+	     , nha.update_date      AS classification_update_date
+         , nha.create_date      AS classification_create_date
+	     , nha.create_user      AS classification_create_user
+	</sql>
+
+	<sql id="alertClassificationColumnsToFetchAllLightsGroupBy">
+		   nha.notification_history_id
+         , nha.alert_subtype_id
+         , ast.alert_type_id
+         , nha.message_date
+         , nha.update_date
+         , nha.create_date
+         , nha.create_user
+	</sql>
+
+	<!--############################-->
+	<!--####  Queries Sort      ####-->
+	<!--############################-->
+
+	<sql id="orderByToFetchLightNotificationHistory">
+		ROW_NUMBER()
+		    OVER(
+		         <choose>
+		         	<when test="sortExpression == null">
+		          		ORDER BY start_datetime DESC
+		         	</when>
+		         	<when test="sortExpression == 'START_DATETIME' or sortExpression == 'START_DATETIME ASC' or sortExpression == 'START_DATETIME DESC'">
+		          		ORDER BY ${sortExpression}
+		         	</when>
+		         	<otherwise>
+		          		ORDER BY start_datetime::date DESC
+		         	             ,${sortExpression}
+		         	</otherwise>
+		         </choose>
+			  ) AS RowNum
+	</sql>
+
+	<!--############################-->
+	<!--####  Queries Criteria  ####-->
+	<!--############################-->
+
+	<!--########################################-->
+	<!--####  NotificationHistory Criteria  ####-->
+	<!--########################################-->
+	<sql id="notificationHistoryCriteria">
+		<if test="notificationHistoryCriteria != null">
+			<if test="notificationHistoryCriteria.lightId != null">
+				 AND light.light_id = #{notificationHistoryCriteria.lightId}
+			</if>
+		</if>
+	</sql>
+
+   	<!--##########################-->
+	<!--####  group criteria  ####-->
+	<!--##########################-->
+	<sql id="groupCriteria">
+		<if test="groupCriteria != null">
+			<!-- IN -->
+			<if test="groupCriteria.groupIdList != null and !(groupCriteria.groupIdList).isEmpty()">
+				AND grouping.grouping_id IN
+				<foreach item="itemGrp" index="index" collection="groupCriteria.groupIdList" open="(" separator="," close=")">
+					#{itemGrp}
+				</foreach>
+			</if>
+			<!-- NOT IN -->
+			<if test="groupCriteria.notInGroupIdList != null and !(groupCriteria.notInGroupIdList).isEmpty()">
+				AND grouping.grouping_id NOT IN
+				<foreach item="itemNotGrp" index="index" collection="groupCriteria.notInGroupIdList" open="(" separator="," close=")">
+					#{itemNotGrp}
+				</foreach>
+			</if>
+		</if>
+	</sql>
+
+	<!-- Light Notification History Where Condition -->
+	 <sql id="fetchLightNotificationHistoryWhereCondition">
+   		<if test="notificationHistoryCriteria != null">
+   		 <where>
+			 <if test="notificationHistoryCriteria.actionCategoryList != null">
+				 <foreach item="item" index="index" collection="notificationHistoryCriteria.actionCategoryList"  separator="or" >
+					 (UPPER(lc_action_description) LIKE UPPER('%' || #{item} || '%'))
+			     </foreach>
+		     </if>
+
+   			 <if test="notificationHistoryCriteria.userIds != null">
+				 AND create_user IN (SELECT username FROM users WHERE user_id IN (${notificationHistoryCriteria.userIds}))
+			 </if>
+			 <if test="notificationHistoryCriteria.actionId != null">
+		         AND process_id = #{notificationHistoryCriteria.actionId}
+		     </if>
+			 <if test="notificationHistoryCriteria.searchText != null">
+			   	 AND upper(description) LIKE UPPER('%' || #{notificationHistoryCriteria.searchText} || '%')
+			 </if>
+	    </where>
+   	  </if>
+   </sql>
+
+   <sql id="partQueryToLightHistoryHeader">
+	 	SELECT COUNT(alsub.alert_type_id)
+		  FROM notification_history nh
+		  INNER JOIN notification_history_alert nha ON(nh.notification_history_id = nha.notification_history_id)
+		  INNER JOIN alert_subtype alsub ON (alsub.alert_subtype_id = nha.alert_subtype_id)
+		  INNER JOIN alert_type alt ON (alt.alert_type_id = alsub.alert_type_id)
+		  <if test="groupCriteria != null ">
+		     INNER JOIN light light ON(light.light_id = nh.light_id)
+			 LEFT JOIN light_grouping grouping ON(grouping.light_id = light.light_id)
+		  </if>
+	    WHERE nh.light_id = #{notificationHistoryCriteria.lightId}
+	    <include refid="NotificationHistory.groupCriteria" />
+   </sql>
+
+	<!--####################-->
+	<!--#### pagination ####-->
+	<!--####################-->
+	<sql id="pagination">
+		  <if test="pageSize > 0">
+		   WHERE RowNum BETWEEN #{startRow,jdbcType=INTEGER} + 1 AND (#{startRow,jdbcType=INTEGER} + #{pageSize,jdbcType=INTEGER})
+		  </if>
+	 </sql>
+
+	 <sql id="fetchLightNofiticationHistoryBody">
+
+          SELECT NULL AS process_id ,
+                 0 AS light_count ,
+                 nh.notification_history_id ,
+                 COALESCE(nha.message_date, nh.message_date) AS start_datetime ,
+                 subtype.label_key AS description ,
+                 TRUE AS is_process_complete ,
+                 nh.create_user,
+                 (CASE WHEN subtype.alert_type_id = 1 THEN 'Alarm'
+                       WHEN subtype.alert_type_id = 2 THEN 'Warning'
+                       WHEN nh.lifecycle_state = 3 THEN 'Maintenance'
+                       WHEN nh.lifecycle_state = 4 THEN 'Deactivated'
+                       WHEN nh.lifecycle_state = 5 THEN 'Active'
+                       WHEN nh.lifecycle_state = 6 THEN 'Unknown'
+                  END) AS lc_action_description,
+                  null AS parameter_value,
+                  subtype.alert_subtype_id
+             FROM light light
+                  INNER JOIN notification_history nh
+                             ON (light.light_id = nh.light_id AND (    nh.notification_type = 1 /*Alarm notification*/
+				                                                    OR nh.notification_type = 3 /*Read light status notification*/))
+				  LEFT  JOIN notification_history_alert nha
+				             ON (nha.notification_history_id = nh.notification_history_id)
+                  LEFT JOIN alert_subtype subtype ON (nha.alert_subtype_id = subtype.alert_subtype_id)
+                  LEFT JOIN alert_type type ON (type.alert_type_id = subtype.alert_subtype_id)
+              <if test="groupCriteria != null ">
+                  LEFT JOIN light_grouping grouping ON(grouping.light_id = light.light_id)
+              </if>
+             <where>
+	             <include refid="notificationHistoryCriteria" />
+	             <include refid="NotificationHistory.groupCriteria" />
+	             <if test="notificationHistoryCriteria != null and notificationHistoryCriteria.processFilter != null
+	                       and notificationHistoryCriteria.processFilter.startDate != null and notificationHistoryCriteria.processFilter.endDate != null">
+                     AND nh.message_date BETWEEN #{notificationHistoryCriteria.processFilter.startDate}::timestamp without time zone AND #{notificationHistoryCriteria.processFilter.endDate}::timestamp without time zone
+                 </if>
+             </where>
+
+           UNION ALL
+
+		SELECT p.process_id AS process_id
+			   , 1 AS light_count
+			   ,NULL AS notification_history_id
+			   ,p.start_datetime
+			   ,p.description
+			   ,p.is_process_complete AS is_process_complete
+			   ,p.create_user
+			   ,p.lc_action_description
+			   ,parameter_value
+			   ,NULL as alert_subtype_id
+		  FROM process p
+		       INNER JOIN light_process lp ON(lp.process_id = p.process_id)
+		       INNER JOIN light light ON(light.light_id = lp.light_id)
+		   <if test="groupCriteria != null ">
+			   LEFT JOIN light_grouping grouping ON(grouping.light_id = light.light_id)
+		   </if>
+
+		 <where>
+
+			 <if test="notificationHistoryCriteria != null">
+				<if test="notificationHistoryCriteria.tenantId != null">
+					 AND p.tenant_id = #{notificationHistoryCriteria.tenantId}
+				</if>
+
+				<if test="notificationHistoryCriteria.processFilter != null and notificationHistoryCriteria.processFilter.startDate != null and notificationHistoryCriteria.processFilter.endDate != null">
+				     AND p.create_date BETWEEN #{notificationHistoryCriteria.processFilter.startDate}::timestamp without time zone AND #{notificationHistoryCriteria.processFilter.endDate}::timestamp without time zone
+				</if>
+
+				<if test="notificationHistoryCriteria.eventId != null">
+				      AND p.process_id = #{notificationHistoryCriteria.eventId}
+				</if>
+
+				<if test="notificationHistoryCriteria.searchText != null">
+				   	  AND upper(p.description) LIKE UPPER('%' || #{notificationHistoryCriteria.searchText} || '%')
+				</if>
+
+				<if test="notificationHistoryCriteria.actionId != null">
+		        	 AND p.process_id = #{notificationHistoryCriteria.actionId}
+		        </if>
+			</if>
+
+			<include refid="notificationHistoryCriteria" />
+			<include refid="NotificationHistory.groupCriteria" />
+
+	    </where>
+
+	 </sql>
+
+	<!--############################-->
+	<!--####   Queries          ####-->
+	<!--############################-->
+
+	 <select id="fetchLightNotificationHistory" parameterType="NotificationHistoryRequest" resultMap="LightingHistoryResult">
+ 	   SELECT  process_id AS id
+			   ,start_datetime AS create_date
+			   ,lc_action_description AS name
+			   ,description AS description
+			   ,is_process_complete As status
+			   ,notification_history_id
+			   ,create_user
+			   ,light_count
+			   ,parameter_value
+			   ,alert_subtype_id
+		   FROM (
+		         SELECT  lh.*,
+		                 <include refid="orderByToFetchLightNotificationHistory"/>
+		           FROM (
+				          <include refid="fetchLightNofiticationHistoryBody"/>
+				         ) AS lh
+
+			       <include refid="fetchLightNotificationHistoryWhereCondition"/>
+	             ) AS light_history
+
+		   <include refid="pagination"/>
+	 </select>
+
+	  <select id="fetchLightNotificationHistoryPaginationTotalRows" parameterType="NotificationHistoryRequest" resultType="int">
+			SELECT COUNT(1)
+		  	  FROM (
+				  SELECT lh.*
+				    FROM (
+				           <include refid="fetchLightNofiticationHistoryBody"/>
+				          ) AS lh
+			       <include refid="fetchLightNotificationHistoryWhereCondition"/>
+	             ) AS light_history
+	  </select>
+
+	 <select id="fetchLightHistoryHeader" parameterType="NotificationHistoryRequest" resultMap="lightHistoryHeaderResult">
+		SELECT  (<include refid="partQueryToLightHistoryHeader"/>
+				     AND alsub.alert_type_id = 1
+				) AS alarm
+			   ,(<include refid="partQueryToLightHistoryHeader"/>
+				   AND alsub.alert_type_id = 2
+				) AS warning
+			   ,(<include refid="partQueryToLightHistoryHeader"/>
+				   AND alsub.alert_type_id = 1
+				   AND alsub.alert_subtype_id = 2
+				) AS  power_failure;
+ 	</select>
+
+	<select id="fetchNotificationHistoryAlertById" resultMap="NotificationHistoryAlertResult">
+	   SELECT *
+         FROM(
+		  	  SELECT <include refid="alertClassificationColumnsToFetchAllLights"/>
+				     ,DENSE_RANK() OVER(ORDER BY nha.update_date DESC) as row_num
+			    FROM notification_history_alert AS nha
+			    JOIN alert_subtype ast ON (nha.alert_subtype_id = ast.alert_subtype_id)
+			    JOIN alert_type at ON (ast.alert_type_id = at.alert_type_id)
+   		  	   WHERE notification_history_id = #{value}
+			   GROUP BY <include refid="alertClassificationColumnsToFetchAllLightsGroupBy"/>
+             ) TB
+	   WHERE TB.row_num = 1
+	   ORDER BY classification_alert_type ASC, classification_alert_subtype ASC;
+
+	</select>
+
+	<select id="fetchAllNotificationHistoryAlertById" parameterType="NotificationHistoryRequest" resultMap="NotificationHistoryAlertResult">
+
+	   SELECT <include refid="alertClassificationColumnsToFetchAllLights"/>
+		 FROM notification_history_alert AS nha
+		      JOIN alert_subtype ast ON (nha.alert_subtype_id = ast.alert_subtype_id)
+		      JOIN alert_type at ON (ast.alert_type_id = at.alert_type_id)
+
+		<if test="notificationHistoryCriteria.notificationHistoryId != null ">
+		   WHERE notification_history_id = #{notificationHistoryCriteria.notificationHistoryId}
+		</if>
+
+	 </select>
+
+	<select id="fetchNotificationHistoryById" parameterType="NotificationHistoryRequest" resultMap="NotificationHistoryResult">
+		SELECT nh.*
+		  FROM notification_history nh
+          LEFT JOIN notification_history_alert nha ON(nh.notification_history_id = nha.notification_history_id)
+	      LEFT JOIN alert_subtype alsub ON (alsub.alert_subtype_id = nha.alert_subtype_id)
+	  	 WHERE nh.notification_history_id = #{notificationHistoryCriteria.notificationHistoryId}
+
+ 		<if test="notificationHistoryCriteria != null and notificationHistoryCriteria.alertSubTypeValue != null">
+   	       AND alsub.alert_subtype_id = #{notificationHistoryCriteria.alertSubTypeValue}
+        </if>
+	</select>
+
+	<select id="fetchNotificationHistoryByRequest" parameterType="NotificationHistoryRequest" resultMap="NotificationHistoryResult">
+		SELECT notification_history.*
+		FROM notification_history
+		     <if test="groupCriteria != null">
+		     	INNER JOIN light_grouping grouping ON (grouping.light_id = notification_history.light_id)
+		     </if>
+		     <if test="alertCommunicationCriteria != null">
+		     	INNER JOIN light light ON (light.light_id = notification_history.light_id)
+		     </if>
+		     <if test="notificationHistoryCriteria.fetchNotCommFail">
+		     	LEFT JOIN notification_history_alert ON (notification_history_alert.notification_history_id = notification_history.notification_history_id)
+		     </if>
+		<where>
+			<if test="notificationHistoryCriteria.notificationHistoryId != null ">
+				AND notification_history.notification_history_id = #{notificationHistoryCriteria.notificationHistoryId}
+			</if>
+			<if test="notificationHistoryCriteria.lightId != null">
+				AND notification_history.light_id = #{notificationHistoryCriteria.lightId}
+			</if>
+			<if test="notificationHistoryCriteria.notificationType != null">
+				AND notification_history.notification_type = #{notificationHistoryCriteria.notificationTypeValue}
+			</if>
+			<if test="notificationHistoryCriteria.startDate != null">
+				AND notification_history.message_date >= #{notificationHistoryCriteria.startDate}
+			</if>
+			<if test="groupCriteria != null">
+				<include refid="Light.groupCriteria" />
+			</if>
+			<if test="notificationHistoryCriteria.fetchNotCommFail">
+				AND COALESCE(notification_history_alert.alert_subtype_id,-99) &lt;&gt; #{notificationHistoryCriteria.commFailValue}<!-- Not communication failure -->
+				<!-- This COALESCE -99 is necessary because db require a number to compare, otherwise not return row -->
+			</if>
+			<if test="alertCommunicationCriteria != null">
+				AND light.tenant_id = #{alertCommunicationCriteria.tenantId}
+				AND notification_history.update_date >= #{alertCommunicationCriteria.startDate}
+			</if>
+		</where>
+
+		<if test="notificationHistoryCriteria.fetchLastest">
+			ORDER BY create_date DESC limit 1
+		</if>
+	</select>
+
+	<!-- Leave the queries below separated, these queries are used for lazy loaded attributes -->
+	<select id="fetchOperationalDataValueById" resultMap="OperationalDataValueResult">
+
+		SELECT *
+		  FROM operational_data_value
+		 WHERE notification_history_id = #{value}
+
+	</select>
+
+	<select id="fetchLastNotificationHistoryByLightId" resultMap="NotificationHistoryResult">
+		SELECT *
+		  FROM notification_history
+		 WHERE notification_history_id = #{value}
+	</select>
+
+	<select id="fetchLastMessageDateByLightId" resultType="java.util.Date">
+		SELECT MAX(nh.update_date)
+		  FROM notification_history nh
+		       LEFT JOIN notification_history_alert nha ON nh.notification_history_id = nha.notification_history_id
+		 WHERE light_id = #{value}
+		   AND COALESCE(nha.alert_subtype_id,-1) &lt;&gt; 8
+	</select>
+
+	<!--############################-->
+	<!--####   UPDATE / INSERT  ####-->
+	<!--############################-->
+
+	<insert id="InsertNotificationHistory" parameterType="NotificationHistory">
+
+		<selectKey resultType="int" keyProperty="id" order="BEFORE">
+			SELECT
+			nextval('notification_history_status_message_id_seq') AS id
+		</selectKey>
+
+		  INSERT INTO notification_history (
+					  notification_history_id,
+					  light_id,
+					  message_date,
+					  create_date,
+					  update_date,
+					  create_user,
+					  simple_notification,
+					  notification_transation_id,
+					  precedence,
+					  lifecycle_state,
+					  notification_type)
+			   VALUES (
+			   		  #{id,jdbcType=INTEGER},
+			   		  #{lightId,jdbcType=INTEGER},
+			   		  #{messageDate,jdbcType=TIMESTAMP},
+			          #{createDate,jdbcType=TIMESTAMP},
+			          #{updateDate,jdbcType=TIMESTAMP},
+			          #{createUser,jdbcType=VARCHAR},
+					  #{simpleNotification,jdbcType=BOOLEAN},
+					  #{trasactionId,jdbcType=VARCHAR},
+					  #{precedenceValue,jdbcType=INTEGER},
+					  #{lifeCycleStateValue,jdbcType=INTEGER},
+					  #{notificationTypeValue,jdbcType=INTEGER}
+		  )
+
+	</insert>
+
+	<insert id="InsertAlertClassification" parameterType="AlertClassification">
+
+		  INSERT INTO notification_history_alert (
+		  			  alert_subtype_id,
+					  notification_history_id,
+					  create_date,
+					  update_date,
+					  message_date,
+					  create_user)
+			  VALUES (
+			          #{alertSubTypeValue,jdbcType=INTEGER},
+			  		  #{notificationHistoryId,jdbcType=INTEGER},
+					  #{createDate,jdbcType=TIMESTAMP},
+					  #{updateDate,jdbcType=TIMESTAMP},
+					  #{messageDate,jdbcType=TIMESTAMP},
+					  #{createUser,jdbcType=VARCHAR}
+					  );
+	</insert>
+
+	<update id="UpdateNotificationHistory" parameterType="NotificationHistory">
+
+		UPDATE notification_history
+			<trim prefix="SET" prefixOverrides=",">
+				<if test="lightId != null" >                     light_id = #{lightId} </if>
+				<if test="messageDate != null" >                 ,message_date = #{messageDate} </if>
+				<if test="updateDate  != null" >                 ,update_date = #{updateDate} </if>
+				<if test="simpleNotification  != null" >         ,simple_notification = #{simpleNotification} </if>
+				<if test="trasactionId  != null" >               ,notification_transation_id = #{trasactionId} </if>
+				<if test="precedenceValue  != null" >                 ,precedence = #{precedenceValue} </if>
+				<if test="lifeCycleStateValue  != null" >        ,lifecycle_state = #{lifeCycleStateValue} </if>
+				<if test="notificationTypeValue  != null" >      ,notification_type = #{notificationTypeValue} </if>
+			</trim>
+	    WHERE notification_history_id = #{id}
+
+	</update>
+
+	<update id="UpdateAlertClassification" parameterType="AlertClassification">
+
+		UPDATE notification_history_alert
+		 	<trim prefix="SET" prefixOverrides=",">
+		 		<if test="messageDate  != null" > message_date = #{messageDate,jdbcType=TIMESTAMP} </if>
+		 		<if test="updateDate   != null" > ,update_date = #{updateDate,jdbcType=TIMESTAMP}	</if>
+		 	</trim>
+	    WHERE alert_subtype_id = #{alertSubTypeValue,jdbcType=INTEGER}
+	      AND notification_history_id = #{notificationHistoryId,jdbcType=INTEGER}
+
+	</update>
+
+
+ </mapper>

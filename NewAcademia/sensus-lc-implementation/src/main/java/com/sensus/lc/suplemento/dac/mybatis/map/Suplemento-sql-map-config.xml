@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+<settings>
+	<setting name="lazyLoadingEnabled" value="false" />
+</settings>
+
+<typeAliases>
+	<typeAlias alias="Suplemento"  type="com.sensus.dm.common.suplemento.model.Suplemento"/>
+	<typeAlias alias="SuplementoRequest"  type="com.sensus.dm.common.suplemento.model.request.SuplementoRequest"/>
+	<typeAlias alias="InquirySuplementoRequest" type="com.sensus.dm.common.suplemento.model.request.InquirySuplementoRequest" />
+	<typeAlias alias="Device" type="com.sensus.cbof.model.Device" />
+	<typeAlias alias="Group" type="com.sensus.dm.common.group.model.Group" />
+	<typeAlias alias="GroupRequest" type="com.sensus.dm.common.group.model.request.GroupRequest" />
+	<typeAlias alias="InquiryGroupRequest" type="com.sensus.dm.common.group.model.request.InquiryGroupRequest" />
+</typeAliases>
+
+<mappers>
+	<mapper resource="com/sensus/dm/common/suplemento/dac/mybatis/map/suplemento.xml"/>
+	<mapper resource="com/sensus/dm/common/group/dac/mybatis/map/group.xml" />
+</mappers>
+
+</configuration>

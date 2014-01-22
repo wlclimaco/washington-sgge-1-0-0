@@ -1,0 +1,157 @@
+.actions .info {
+	padding: 0;
+	margin-top: 0.8em;
+}
+
+table#smartpoint-table tr.row_selected { /*background-color: blue;*/
+
+}
+
+#action-dialog {
+	overflow: visible;
+}
+
+#action-dialog-panel form .highlight.dialog-instructions {
+	margin-right: 5em;
+}
+
+#box-list #map {
+	width: 100% !important;
+}
+
+#radio2 {
+	margin-left: 10em;
+}
+
+#smartpoint-table-wrapper {
+	margin: 0px;
+}
+
+#smartpoint-map {
+	padding: 0;
+	height: 500px;
+	width: 100%;
+	margin: auto;
+}
+
+#system-messaging {
+	z-index: 800 !important;
+}
+
+.action-dialog .ui-dialog-buttonpane {
+	border-top: 1px dotted #666666 !important;
+    margin: 0 0.5em;
+}
+
+.dataTables_processing {
+	height: 0px;
+}
+
+.dataTables_info,.dataTables_length {
+	display: inline;
+}
+
+.fg-menu-container {
+	min-height: 200px;
+}
+
+.ui-dialog .selected-smartpoints th {
+	display: none;
+}
+
+.content-inner {
+	margin-top: 1em !important;
+}
+
+table#selected-smartpoints {
+	border-collapse: separate
+}
+
+.result-count.yui-u {
+	float: right !important;
+    margin-right: 43em;
+	width: 15% !important;
+}
+
+.result-count {
+  display: inline-block;
+  font-size: 116%;
+  margin-top: -0.6em;
+  padding: 0.5em;
+  vertical-align: top;
+  float: none !important;
+}
+
+.smartpoint-map-content {
+	width: 1692px !important;
+	height: 500px !important;
+}
+
+#detail-map-container {
+	height: 100%;
+	width: 100%;
+}
+
+#smartpoint-map-container {
+	height: 100%;
+	width: 100%;
+}
+
+#delete,#createGroupWith {
+	color: #9F9F9F;
+}
+
+fieldset ul.radio-list li {
+	padding: 0.25em !important;
+}
+
+/*Sets the scroll bar for the comboxe's*/
+.ui-menu {
+	width: 142px;
+}
+
+.yui-b .tools {
+	padding-top: 0.4em !important;
+}
+
+.yui-t2 #yui-main .yui-b {
+	margin-left: 14.7em;
+}
+
+/** Dialog Customize */
+
+table#smartpoint-table .sort-options, .view-options {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CFE7CE;
+    box-shadow: 0.15em 0.15em 0.25em #666666;
+    margin: 0.5em 0 0 2%;
+    padding: 0;
+    width: 12em;
+	left: auto;
+	top:auto;
+    z-index: 100;
+}
+
+table#smartpoint-table .sort-options span {
+	float : left;
+	padding : 1px 0px;
+	width : 21px;
+
+}
+
+table#smartpoint-table span.icn-sort-asc {
+    background: url("../images/sensus-sprite.png") no-repeat scroll 0 -777px transparent;
+}
+
+table#smartpoint-table span.icn-sort-desc {
+    background: url("../images/sensus-sprite.png") no-repeat scroll 0 -798px transparent;
+}
+
+table#smartpoint-table span.icn-col-select {
+    background: url("../images/sensus-sprite.png") no-repeat scroll 0 -816px transparent;
+}
+
+table#smartpoint-table.ui-dialog.sort-options ul li, .view-options ul li {
+    border-bottom: 1px solid #F0F0F0;
+    font-weight: normal;
+}

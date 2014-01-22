@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="lazyLoadingEnabled" value="true" />
+		<setting name="aggressiveLazyLoading" value="false" />
+	</settings>
+
+	<typeAliases>
+
+		<typeAlias alias="AlertCommunication" 		  		type="com.sensus.lc.communication.model.AlertCommunication" />
+		<typeAlias alias="AlertCommunicationConfig" 		type="com.sensus.lc.communication.model.AlertCommunicationConfig" />
+		<typeAlias alias="AlertCommunicationRequest" 		type="com.sensus.lc.communication.model.request.AlertCommunicationRequest" />
+		<typeAlias alias="AlertCommunicationConfigRequest" 	type="com.sensus.lc.communication.model.request.AlertCommunicationConfigRequest" />
+		<typeAlias alias="AlertCommunicationMaintenanceRequest" type="com.sensus.lc.communication.model.request.AlertCommunicationMaintenanceRequest"/>
+
+	</typeAliases>
+
+	<mappers>
+		<mapper resource="com/sensus/lc/communication/dac/mybatis/map/alertcommunication.xml" />
+	</mappers>
+</configuration>

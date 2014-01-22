@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Settings">
+
+	<resultMap id="SettingsResult" type="Setting">
+		<result property="propertyEnumValue" jdbcType="INTEGER" column="property_id" />
+		<result property="propertyValue" column="property_value" />
+	</resultMap>
+
+	<sql id="allCustomSettingsColumns">
+		property_id, property_value
+	</sql>
+
+	<sql id="allCustomUsersColumns">
+		username, first_name, last_name
+	</sql>
+
+	<sql id="allCustomTenantColumns">
+		tenant_id, name, description, rni_code, gateway_rni_location, latitude, longitude
+	</sql>
+
+	<select id="upsertSettings" parameterType="Map" resultType="String">
+		SELECT upsert_settings(#{user_id,jdbcType=INTEGER}
+							,#{create_user,jdbcType=VARCHAR}
+							,#{tenant_id,jdbcType=INTEGER}
+							,#{property_id,jdbcType=INTEGER}
+							,#{property_value,jdbcType=VARCHAR})
+	</select>
+
+	<select id="upsertSystemSettings" parameterType="Map" resultType="String">
+		SELECT upsert_system_settings(#{create_user,jdbcType=VARCHAR}
+										,#{tenant_id,jdbcType=INTEGER}
+										,#{property_id,jdbcType=INTEGER}
+										,#{property_value,jdbcType=VARCHAR})
+	</select>
+
+	<select id="fetchUserSettings" parameterType="Map" resultMap="SettingsResult">
+		SELECT u_prop.property_id AS property_id
+		      ,prop.property_name AS property_name
+		      ,u_prop.user_setting_property_value AS property_value
+		  FROM property prop
+		      ,user_settings_property  u_prop
+		      ,users usr
+		      ,user_settings u_sett
+		 WHERE u_sett.tenant_id = #{tenant_id,jdbcType=INTEGER}
+		   AND u_sett.user_id = usr.user_id
+		   AND usr.user_id = #{user_id,jdbcType=INTEGER}
+		   AND u_sett.user_settings_id = u_prop.user_settings_id
+		   AND u_prop.property_id = prop.property_id
+		   AND u_prop.property_id IN (37,38,39,40,54,90,101,115,119,120,121,122,123,124,125,126,127,128,129,130,131,132)
+		UNION ALL
+		SELECT u_prop.property_id AS property_id
+		      ,prop.property_name AS property_name
+		      ,u_prop.user_setting_property_value AS property_value
+		  FROM property prop
+		      ,user_settings_property  u_prop
+		      ,user_settings u_sett
+		 WHERE u_sett.tenant_id = #{tenant_id,jdbcType=INTEGER}
+		   AND u_sett.user_id is null
+		   AND u_sett.user_settings_id = u_prop.user_settings_id
+		   AND u_prop.property_id = prop.property_id
+		   AND u_prop.property_id IN (37,38,39,40,54,90,101,115,119,120,121,122,123,124,125,126,127,128,129,130,131,132)
+		   AND NOT EXISTS (SELECT 1
+		                    FROM users usr
+		                        ,user_settings u_sett1
+		                    WHERE u_sett1.tenant_id = #{tenant_id,jdbcType=INTEGER}
+		                     AND u_sett1.user_id = usr.user_id
+		                     AND usr.user_id    = #{user_id,jdbcType=INTEGER});
+	</select>
+
+	<select id="fetchSystemSettings" parameterType="Tenant" resultMap="SettingsResult">
+		SELECT u_prop.property_id AS property_id,
+			   prop.property_name AS property_name,
+			   u_prop.user_setting_property_value AS property_value
+		   FROM user_settings_property u_prop
+		       ,user_settings u_sett
+		       ,property prop
+		  WHERE u_sett.tenant_id = #{id,jdbcType=INTEGER}
+		    AND u_sett.user_id is null
+		    AND u_sett.user_settings_id = u_prop.user_settings_id
+		    AND u_prop.property_id in (37,38,39,40,54,90,101,115,119,120,121,122,123,124,125,126,127,128,129,130,131,132)
+		    AND prop.property_id = u_prop.property_id;
+	</select>
+
+
+	<select id="insertColumnsToUser" parameterType="ColumnFilterRequest" resultType="java.lang.Void" statementType="CALLABLE">
+
+		<foreach item="item" index="index" collection="listColumn" >
+			 select ins_columns_to_user(#{userContext.id,jdbcType=INTEGER},
+										 #{item.columnEnum.value,jdbcType=VARCHAR},
+										 ${index},
+										 #{userContext.userId,jdbcType=VARCHAR},
+										 #{userContext.tenant.id,jdbcType=INTEGER}
+			) ;
+		</foreach>
+	</select>
+
+	<select id="insertFiltersToUser" parameterType="ColumnFilterRequest" resultType="java.lang.Void" statementType="CALLABLE">
+
+		<foreach item="item" index="index" collection="filters">
+			 select ins_filters_to_user(#{userContext.id,jdbcType=INTEGER},
+										 #{item.filterEnum,jdbcType=VARCHAR},
+										 ${index},
+										 #{userContext.userId,jdbcType=VARCHAR},
+										 #{userContext.tenant.id,jdbcType=INTEGER}
+			) ;
+		</foreach>
+	</select>
+
+
+	<select id="deleteColumnsToUser" parameterType="Map" resultType="java.lang.Void" statementType="CALLABLE">
+
+	{ call del_column_to_user( #{tenant_id,jdbcType=INTEGER},
+							   #{user_id,jdbcType=INTEGER}
+
+	)}
+	</select>
+
+	<select id="deleteFiltersToUser" parameterType="Map" resultType="java.lang.Void" statementType="CALLABLE">
+
+	{ call del_filter_to_user(#{tenant_id,jdbcType=INTEGER},
+							  #{user_id,jdbcType=INTEGER}
+
+	)}
+	</select>
+
+	<select id="updateMapCenter" parameterType="Tenant" resultType="java.lang.Void" statementType="CALLABLE">
+		{ call upd_map_center(#{id,jdbcType=INTEGER}) }
+	</select>
+
+</mapper>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>try_add_lights_to_group</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">try_add_lights_to_group</td></tr>
+</thead><tbody>
+<!--#2907-->
+<tr>
+	<td>assertAttribute</td>
+	<td>id=menu-smartpoints@class</td>
+	<td>alist active</td>
+</tr>
+<!--Try add light to group selecting no light-->
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.positionHelper:last ul.fg-menu a:contains('Add to Group')</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyAttribute</td>
+	<td>css=#actions span.message@class</td>
+	<td>message rounded ui-state-error</td>
+</tr>
+<!--Try add lights to group, selecting no group-->
+<tr>
+	<td>click</td>
+	<td>id=select-page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.positionHelper:last ul.fg-menu a:contains('Add to Group')</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=group-add-select_input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=action-dialog-panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>id=group-add-select_input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add-to-group-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=div.group-add-select_inputformError div.formErrorContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.group-add-select_inputformError div.formErrorContent</td>
+	<td>Select one group.</td>
+</tr>
+<!--Try to create a new group with empty name-->
+<tr>
+	<td>click</td>
+	<td>css=a.add-new-group</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>id=control-group-name-create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add-to-group-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=div.control-group-name-createformError div.formErrorContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.control-group-name-createformError div.formErrorContent</td>
+	<td>Please enter Group Name.</td>
+</tr>
+<!--Try to create a new group with not unique name-->
+<tr>
+	<td>type</td>
+	<td>id=control-group-name-create</td>
+	<td>${groupName}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add-to-group-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=div.control-group-name-createformError div.formErrorContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.control-group-name-createformError div.formErrorContent</td>
+	<td>Please add a unique Group Name.</td>
+</tr>
+<!--Try to create a new group with name over max length-->
+<tr>
+	<td>type</td>
+	<td>id=control-group-name-create</td>
+	<td>Group Name Over Maaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaax</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add-to-group-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=div.control-group-name-createformError div.formErrorContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.control-group-name-createformError div.formErrorContent</td>
+	<td>Maximum of 100 characters.</td>
+</tr>
+<!--Try to create a new group with invalid character-->
+<tr>
+	<td>type</td>
+	<td>id=control-group-name-create</td>
+	<td>!@#$%¨&amp;*()_+</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add-to-group-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=div.control-group-name-createformError div.formErrorContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.control-group-name-createformError div.formErrorContent</td>
+	<td>* No special characters allowed - Just ' # -</td>
+</tr>
+<!--Try to create a new group with description over max length.-->
+<tr>
+	<td>type</td>
+	<td>id=control-group-name-create</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=control-group-description</td>
+	<td>Group Name Over Maaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaax</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add-to-group-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=div.control-group-descriptionformError div.formErrorContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.control-group-descriptionformError div.formErrorContent</td>
+	<td>Maximum of 150 characters.</td>
+</tr>
+<!--Cancel submission of Add to Group command-->
+<tr>
+	<td>click</td>
+	<td>id=add-to-group-cancel</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="lazyLoadingEnabled" value="false" />
+	</settings>
+
+	<typeAliases>
+		<typeAlias alias="Tenant" type="com.sensus.lc.tenant.model.Tenant" />
+		<typeAlias alias="TenantRequest" type="com.sensus.lc.tenant.model.request.TenantRequest" />
+		<typeAlias alias="ApiControl"		  			type="com.sensus.lc.tenant.model.ApiControl" />
+        <typeAlias alias="ApiControlMaintenanceRequest"	type="com.sensus.lc.tenant.model.request.ApiControlMaintenanceRequest" />
+	</typeAliases>
+
+	<mappers>
+		<mapper resource="com/sensus/lc/tenant/dac/mybatis/map/tenant.xml" />
+	</mappers>
+</configuration>

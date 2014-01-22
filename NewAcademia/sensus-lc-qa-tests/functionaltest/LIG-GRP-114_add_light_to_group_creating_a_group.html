@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>add_light_to_group_creating_a_group</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">add_light_to_group_creating_a_group</td></tr>
+</thead><tbody>
+<!--#7529-->
+<tr>
+	<td>click</td>
+	<td>link=Lights</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<!--Check page-->
+<tr>
+	<td>assertAttribute</td>
+	<td>id=menu-smartpoints@class</td>
+	<td>alist active</td>
+</tr>
+<tr>
+	<td>storeCssCount</td>
+	<td>css=#GROUPS select &gt; option, #GROUPS ul.ui-listcombobox li</td>
+	<td>totalGroups</td>
+</tr>
+<!--Filter by Active and Warning Status-->
+<tr>
+	<td>click</td>
+	<td>css=.clear</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#LIFECYCLE_STATE ul.ui-listcombobox li:contains(Active) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#ALERTS ul.ui-listcombobox li:contains(Warning) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#ALERTS ul.ui-listcombobox li:contains(Alarm) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<!--Assert records-->
+<tr>
+	<td>assertNotVisible</td>
+	<td>css=#blankslate</td>
+	<td></td>
+</tr>
+<!--Select 1th light-->
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table .checkbox:eq(1) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=#smartpoint-table tbody tr:eq(0) td:eq(1) a</td>
+	<td>poleID</td>
+</tr>
+<tr>
+	<td>storeTextGlobal</td>
+	<td>css=#smartpoint-table tbody tr:eq(0) td:eq(2)</td>
+	<td>flexNetID</td>
+</tr>
+<!--Add group Action-->
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.positionHelper:last ul.fg-menu a:contains('Add to Group')</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=group-add-select_input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=action-dialog-panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=a.add-new-group</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>id=control-group-name-create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=control-group-name-create</td>
+	<td>${groupName}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add-to-group-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<!--Check Message-->
+<tr>
+	<td>waitForText</td>
+	<td>css=#messaging-main .message</td>
+	<td>Lights have been successfully added to Group “${groupName}“.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main .message</td>
+	<td>Lights have been successfully added to Group “${groupName}“.</td>
+</tr>
+<!--Check count-->
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${totalGroups}) + 1</td>
+	<td>totalGroups</td>
+</tr>
+<tr>
+	<td>verifyCssCount</td>
+	<td>css=#GROUPS select &gt; option, #GROUPS ul.ui-listcombobox li</td>
+	<td>${totalGroups}</td>
+</tr>
+<!--Store Global History Vars-->
+<tr>
+	<td>storeGlobal</td>
+	<td>Manage Groups</td>
+	<td>eventType</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>Add Pole ID${poleID} to Group ${groupName}</td>
+	<td>action</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${poleID}</td>
+	<td>poleID</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>true</td>
+	<td>checkSummary</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>1</td>
+	<td>qtdLightsSelected</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>1</td>
+	<td>totalLight</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>100</td>
+	<td>percentSuccess</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>0</td>
+	<td>percentFailure</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>Add Light to Group</td>
+	<td>description</td>
+</tr>
+</tbody></table>
+</body>
+</html>

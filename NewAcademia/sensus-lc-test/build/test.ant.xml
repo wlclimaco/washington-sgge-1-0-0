@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="Sensus LC Test" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<include file="..\..\AntConfig\Sensus-ant-common-targets.xml" optional="false" />
+
+	<target name="build">
+
+		<antcall target="Sensus.runJUnitTests">
+			<param name="moduleName" value="sensus-lc-test" />
+			<param name="pomFile" value="../pom.xml" />
+
+			<param name="configurationDir" value="../../sensus-lc-configuration/config/web" />
+			<param name="configurationDir2" value="${projectBaseDir}/src/main/resources" />
+
+			<param name="includeTestPattern" value="com/sensus/lc/**/**Test.class" />
+<!-- 			<param name="includeTestPattern" value="com/sensus/lc/server/**/**Test.class" /> -->
+
+			<param name="jacocoRootClassDir" value="${projectBaseDir}../../" />
+		</antcall>
+
+		<!-- Clean-up from tests. -->
+		<delete dir="." includes="*.csv" />
+
+	</target>
+
+</project>

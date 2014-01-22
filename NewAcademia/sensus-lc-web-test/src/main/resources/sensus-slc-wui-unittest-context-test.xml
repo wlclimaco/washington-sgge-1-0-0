@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:p="http://www.springframework.org/schema/p"
+		xmlns:mvc="http://www.springframework.org/schema/mvc"
+		xmlns:security="http://www.springframework.org/schema/security"
+
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context
+	   		http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/mvc
+			http://www.springframework.org/schema/mvc/spring-mvc.xsd
+			http://www.springframework.org/schem...-beans-2.5.xsd
+		  	http://www.springframework.org/schema/security
+   			http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+
+<!--  ############################################################
+      Activates various annotations to be detected in bean classes
+      ############################################################ -->
+
+	<context:annotation-config />
+
+	<!-- Scans the classpath for annotated components that will be auto-registered as Spring beans.
+	 For example @Controller and @Service. Make sure to set the correct base-package -->
+	<context:component-scan  base-package="com.sensus.lc.controller.*.unittest"/>
+
+	<bean id="jacksonObjectMapper" class="com.sensus.common.web.json.CustomObjectMapper">
+  		<property name="dateFormat" value="yyyy-MM-dd-HH-mm-ss-SSS" />
+ 	</bean>
+
+	<!-- Configures the annotation-driven Spring MVC Controller programming model. -->
+	<mvc:annotation-driven >
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+				<property name="objectMapper" ref="jacksonObjectMapper" />
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<context:component-scan  base-package="com.sensus.lc.controller">
+		<context:include-filter type="aspectj" expression="com.sensus.lc.controller.*.*" />
+	</context:component-scan>
+
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+
+<!--  ############################################################
+                              BCF targets
+      ############################################################ -->
+
+	<bean id="SensusAppContext" class="com.sensus.common.util.SensusAppContext"/>
+	<bean id="analyticsBCFTarget" class="com.sensus.lc.controller.analytics.unittest.AnalyticsBCFMockImpl" />
+	<bean id="groupBCFTarget" class="com.sensus.lc.controller.groups.unittest.GroupBCFMockImpl" />
+	<bean id="userBCFTarget" class="com.sensus.lc.controller.user.unittest.UserBCFMockImpl" />
+	<bean id="ecoModeBCFTarget" class="com.sensus.lc.controller.ecomode.unittest.EcoModeBCFMockImpl" />
+	<bean id="scheduleBCFTarget" class="com.sensus.lc.controller.schedule.unittest.ScheduleBCFMockImpl" />
+	<bean id="settingsBCFTarget" class="com.sensus.lc.controller.settings.unittest.SettingsBCFMockImpl" />
+	<bean id="tagBCFTarget" class="com.sensus.lc.controller.tags.unittest.TagBCFMockImpl" />
+	<bean id="lightBCFTarget" class="com.sensus.lc.controller.light.unittest.LightBCFMockImpl" />
+	<bean id="lightProcessorBCFTarget" class="com.sensus.lc.controller.light.unittest.LightProcessorBCFMockImpl" />
+	<bean id="lightNotificationHistoryBCFTarget" class="com.sensus.lc.controller.light.unittest.LightNotificationHistoryBCFMockImpl" />
+	<bean id="lightCustomSearchBCFTarget" class="com.sensus.lc.controller.light.unittest.LightCustomSearchBCFMockImpl" />
+	<bean id="processBCFTarget" class="com.sensus.lc.controller.process.unittest.ProcessBCFMockImpl" />
+	<bean id="lightCSVBCF" class="com.sensus.lc.controller.light.unittest.LightCSVBCFMockImpl"/>
+	<bean id="lightCustomSearchBCF" class="com.sensus.lc.controller.light.unittest.LightCustomSearchBCFMockImpl" />
+
+	<!-- Internationalization -->
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="en" />
+	</bean>
+
+	<bean id="localeChangeInterceptor"
+		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+		<property name="paramName" value="language" />
+	</bean>
+
+	<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping" >
+		<property name="interceptors">
+		   <list>
+			<ref bean="localeChangeInterceptor" />
+		   </list>
+		</property>
+	</bean>
+
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>locale/messages</value>
+			</list>
+		</property>
+	</bean>
+
+	<!--  Maps directly to JSP pages-->
+	<mvc:view-controller path="/login" view-name="../login"/>
+	<mvc:view-controller path="/" view-name="redirect:/login"/>
+
+	<mvc:view-controller path="/api/dashboard" view-name="/dashboard"/>
+
+	<!--  Static Content to bypass dispatcher -->
+	<mvc:resources mapping="/images/**" location="/images/"/>
+	<mvc:resources mapping="/scripts/**" location="/scripts/"/>
+	<mvc:resources mapping="/styles/**" location="/styles/"/>
+	<mvc:resources mapping="/thirdparty/**" location="/thirdparty/"/>
+
+    <!-- Resolves view names to protected .jsp resources within the /WEB-INF directory -->
+    <bean id="viewResolver"
+    	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+</beans>
+

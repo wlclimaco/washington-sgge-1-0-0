@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://mallet-app.davis.sensus.lab:8080/" />
+<title>Delete Event Schedule</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Delete Event Schedule</td></tr>
+</thead><tbody>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#messaging-main &gt; span&quot;).text(&quot;&quot;);</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>${UP_eventSchName}/2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${row}) - 2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#schedule-table tbody tr:eq(${row}) td:eq(11) a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Schedule “${UP_eventSchName}“ will be deleted.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#selected-schedule span</td>
+	<td>Schedule “${UP_eventSchName}“ will be deleted.</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=delete-schedule-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=#messaging-main &gt; span.message</td>
+	<td>Schedule was successfully deleted.</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#messaging-main span.message</td>
+	<td>Schedule was successfully deleted.</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${scheTotal}) - 1</td>
+	<td>rowsTotal</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${rowsTotal}</td>
+	<td>scheTotal</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#actions &gt; span.message</td>
+	<td>0 of ${scheTotal} Schedules Selected</td>
+</tr>
+</tbody></table>
+</body>
+</html>

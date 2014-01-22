@@ -1,0 +1,165 @@
+@CHARSET "ISO-8859-1";
+
+/* =messaging */
+.error-messaging {
+	padding:.5em 1em;
+	text-align:center;
+	color:#333333;
+	margin:0 .5em;
+	background:url("../thirdparty/jquery/ui/images/ui-bg_inset-soft_95_fef1ec_1x100.png") repeat-x scroll 50% bottom #FEF1EC;
+	border:1px solid #CD0A0A;
+	color:#CD0A0A;
+}
+
+.note.lights-dim {
+    margin-top: 5.5em !important;
+}
+
+.blankslate {
+	padding: 1.5em !important;
+}
+
+#detail-header-container .summary-kpi {
+	margin-top: 0.5em;
+	margin-bottom: -1em;
+}
+
+#update-status span {
+	color:#333333;
+	font-size:85%;
+	line-height:1;
+	padding:0.15em 0.5em;
+	text-indent:0;
+}
+
+#group_add_select_input {
+	width: 70%;
+	padding: 0.5em;
+}
+
+#groups .submit-short-form  {
+	width: auto !important;
+}
+
+#address span , #configuration, #processing-summary-container span{
+	display:inline-block;
+}
+
+#address dl dt {
+	border-bottom:none;
+	border-top:1px dotted #f0f0f0;
+	clear:left;
+	float:left;
+	margin-bottom:.25em;
+	padding:.5em 0;
+	width:30%;
+}
+
+#address dl dd {
+	border-bottom:none;
+	border-top:1px dotted #f0f0f0;
+	float:left;
+	margin-bottom:.25em;
+	padding:.5em 0;
+	width:70%;
+}
+
+#address dl .bottom{
+	border-bottom:1px dotted #f0f0f0;
+}
+
+#address dl .top {
+	border-top:0; padding:.25em 0;
+}
+
+#history #light-history .status-viewport {
+	float: left;
+    margin-top: 0 !important;
+	margin-left: 0 !important;
+    width: 100% !important;
+}
+
+#history .history-container {
+	margin-top: 0 !important;
+}
+
+.configuration {
+	display: block !important;
+}
+
+.point-type-navigation .first {
+	margin-top: -0.5em !important;
+}
+
+.detail-map {
+	width: 100% !important;
+	height: 300px !important;
+}
+
+.yui-u.numbers {
+	width: 25% !important;
+}
+
+/*Edit Light Status*/
+fieldset ul.radio-list li {
+	padding: 0.25em !important;
+}
+
+/*Sets the scroll bar for the comboxe's*/
+.ui-menu {
+	height:175px;
+	width: 142px;
+	overflow-y:scroll;
+}
+
+.summary_kpi {
+	display: inline;
+}
+
+/* =validation */
+input.error {
+	border: 2px solid #cc0000 !important;
+	margin-bottom: 0 !important;
+}
+
+label.error {
+	float: none;
+	font-size: 77%;
+	color: #fff;
+	background: #c00;
+	margin: 0;
+}
+
+/* =tags */
+#smartpoint-detail .result-count p {
+	font-size: 93%;
+	color: #666666;
+	padding: .25em;
+}
+
+#smartpoint-detail .result-count p {
+	font-size: 93%;
+	color: #666666;
+	padding: .25em;
+}
+
+#light-detail .yui-u {
+	margin-right: -0.5em;
+}
+
+/* =button submit */
+#smartpoint-detail .submit-row-pad {
+	padding-left: 13px;
+}
+
+.paging {
+    width: auto !important;
+}
+
+.right {
+    float: right;
+}
+.time_stamp, .version {
+    font-size: 85%;
+    padding: 0.25em 1em 0;
+}

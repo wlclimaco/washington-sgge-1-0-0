@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+ <settings>
+  <setting name="lazyLoadingEnabled" value="false" />
+ </settings>
+
+<typeAliases>
+
+  <!-- Group mapping -->
+  <typeAlias alias="Tenant"                   type="com.sensus.lc.tenant.model.Tenant" />
+  <typeAlias alias="GroupRequest"             type="com.sensus.lc.group.model.request.GroupRequest" />
+  <typeAlias alias="InquiryPaginationRequest" type="com.sensus.lc.base.model.request.InquiryPaginationRequest" />
+  <typeAlias alias="Group"                    type="com.sensus.lc.group.model.Group"/>
+
+  <!-- Schedule objects -->
+  <typeAlias alias="OffsetSchedule"       type="com.sensus.lc.schedule.model.OffsetSchedule" />
+  <typeAlias alias="EventSchedule"        type="com.sensus.lc.schedule.model.EventSchedule" />
+
+  <!--  Light mapping -->
+  <typeAlias alias="LightParameter"              type="com.sensus.lc.light.model.LightParameter" />
+  <typeAlias alias="FetchByIdRequest"            type="com.sensus.lc.light.model.request.FetchByIdRequest" />
+  <typeAlias alias="LightRequest"                type="com.sensus.lc.light.model.request.LightRequest" />
+  <typeAlias alias="LightHistory"                type="com.sensus.lc.light.model.LightHistory" />
+  <typeAlias alias="LightMaintenanceRequest"     type="com.sensus.lc.light.model.request.LightMaintenanceRequest" />
+  <typeAlias alias="LightMassUpdateRequest"      type="com.sensus.lc.light.model.request.LightMassUpdateRequest" />
+  <typeAlias alias="CommunicationFailureRequest" 	type="com.sensus.lc.light.model.request.CommunicationFailureRequest" />
+  <typeAlias alias="Light"                       type="com.sensus.lc.light.model.Light" />
+  <typeAlias alias="LightSchedule"               type="com.sensus.lc.light.model.LightSchedule" />
+  <typeAlias alias="Configuration"               type="com.sensus.lc.light.model.Configuration" />
+  <typeAlias alias="Consumption"                 type="com.sensus.lc.light.model.Consumption" />
+  <typeAlias alias="LastOperationalData"         type="com.sensus.lc.light.model.LastOperationalData" />
+  <typeAlias alias="OperationalData"             type="com.sensus.lc.light.model.OperationalData" />
+  <typeAlias alias="PartNumberConfiguration"     type="com.sensus.lc.light.model.PartNumberConfiguration" />
+  <typeAlias alias="GeocodeLightInfo"            type="com.sensus.lc.light.model.GeocodeLightInfo" />
+  <typeAlias alias="NotificationHistoryRequest"  type="com.sensus.lc.light.model.request.NotificationHistoryRequest" />
+  <typeAlias alias="Device"                      type="com.sensus.cbof.model.Device" />
+  <typeAlias alias="Radio"                       type="com.sensus.cbof.model.Radio" />
+  <typeAlias alias="Location"                    type="com.sensus.cbof.model.Location" />
+  <typeAlias alias="TimeZoneInfo"	  			    type="com.sensus.cbof.model.TimeZoneInfo" />
+  <typeAlias alias="Tenant"                      type="com.sensus.lc.tenant.model.Tenant" />
+  <typeAlias alias="TenantRequest"               type="com.sensus.lc.tenant.model.request.TenantRequest" />
+  <typeAlias alias="ApiControl"		  			type="com.sensus.lc.tenant.model.ApiControl" />
+  <typeAlias alias="ApiControlMaintenanceRequest"	type="com.sensus.lc.tenant.model.request.ApiControlMaintenanceRequest" />
+  <typeAlias alias="OperationalDataValue"		    type="com.sensus.lc.light.model.OperationalDataValue" />
+
+
+  <!-- Notification History / Alerts and States objects -->
+  <typeAlias alias="NotificationHistory"		  	type="com.sensus.lc.light.model.NotificationHistory" />
+  <typeAlias alias="AlertClassification"		type="com.sensus.lc.light.model.AlertClassification" />
+  <typeAlias alias="AlertSubTypeEnum"	        	type="com.sensus.lc.light.model.AlertSubTypeEnum" />
+  <typeAlias alias="AlertTypeEnum"	        	type="com.sensus.lc.light.model.AlertTypeEnum" />
+
+</typeAliases>
+
+ <typeHandlers>
+   <typeHandler javaType="Date" jdbcType="TIMESTAMP" handler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+    </typeHandlers>
+
+ <mappers>
+     <mapper resource="com/sensus/lc/group/dac/mybatis/map/group.xml"/>
+     <mapper resource="com/sensus/lc/tenant/dac/mybatis/map/tenant.xml" />
+     <mapper resource="com/sensus/lc/light/dac/mybatis/map/device.xml" />
+     <mapper resource="com/sensus/lc/light/dac/mybatis/map/light.xml" />
+     <mapper resource="com/sensus/lc/light/dac/mybatis/map/notificationHistory.xml" />
+     <mapper resource="com/sensus/lc/light/dac/mybatis/map/lastOperationalData.xml" />
+     <mapper resource="com/sensus/lc/light/dac/mybatis/map/configuration.xml" />
+     <mapper resource="com/sensus/lc/light/dac/mybatis/map/consumption.xml" />
+     <mapper resource="com/sensus/lc/light/dac/mybatis/map/map.xml" />
+     <mapper resource="com/sensus/lc/light/dac/mybatis/map/lightSchedule.xml" />
+</mappers>
+
+</configuration>

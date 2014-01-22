@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Device">
+
+	<!--############################ -->
+	<!--#### Result Maps #### -->
+	<!--############################ -->
+
+	<!-- It is assumed all 3 of these are populated from a single query. -->
+	<resultMap id="DeviceResult" type="Device">
+		<!-- Note deviceId is NOT used for SLC. -->
+		<id property="id" column="light_id" />
+		<result property="deviceTypeValue" column="light_type" />
+		<result property="deviceLifeCycleStateValue" column="light_state" />
+		<association property="radio" javaType="Radio" resultMap="RadioResult" />
+	</resultMap>
+
+	<resultMap id="RadioResult" type="Radio">
+		<result property="flexNetId" column="flexnet_id" />
+		<association property="location" javaType="Location" resultMap="LocationResult" />
+	</resultMap>
+
+    <resultMap id="LocationResult" type="Location">
+		<result property="address" column="address" />
+		<result property="city" column="city" />
+		<result property="state" column="state" />
+		<result property="country" column="country" />
+		<result property="zip" column="zip_code" />
+		<result property="latitude" column="latitude" />
+		<result property="longitude" column="longitude" />
+		<association property="timeZoneInfo" javaType="TimeZoneInfo" resultMap="TimeZoneInfoResult" />
+	</resultMap>
+
+	<resultMap id="TimeZoneInfoResult" type="TimeZoneInfo">
+		<constructor>
+			<arg column="timezone" javaType="String" jdbcType="VARCHAR" />
+		</constructor>
+	</resultMap>
+
+
+	<!--############################ -->
+	<!--#### Queries Criteria   #### -->
+	<!--############################ -->
+
+	<!-- Address Criteria -->
+	<sql id="addressCriteria">
+		<if test="addressCriteria != null and addressCriteria.hasFilter()">
+			<if test="addressCriteria.address != null">
+				AND light.address = #{addressCriteria.address}
+			</if>
+
+			<if test="addressCriteria.city != null">
+				AND light.city = #{addressCriteria.city}
+			</if>
+
+			<if test="addressCriteria.state != null">
+				AND light.state = #{addressCriteria.state}
+			</if>
+
+			<if test="addressCriteria.zip != null">
+				AND light.zip_code = #{addressCriteria.zip}
+			</if>
+
+			<if test="addressCriteria.county != null">
+				AND light.county = #{addressCriteria.county}
+			</if>
+		</if>
+	</sql>
+
+
+	<!--###################################### -->
+	<!--#### MAP FUNCTIONALITY CRITERIA #### -->
+	<!--###################################### -->
+
+	<!-- Geo Code and MAP Criteria -->
+	<sql id="geoCodeCriteria">
+
+		<if test="lightCriteria != null and lightCriteria.geoCodeCriteria != null ">
+			<!-- MAP Testing -->
+			<if test="lightCriteria.geoCodeCriteria.middleLatMin == null and
+					  (lightCriteria.geoCodeCriteria.bottomLeftLat != null and
+					   lightCriteria.geoCodeCriteria.bottomLeftLong != null and
+					   lightCriteria.geoCodeCriteria.topRightLat != null and
+					   lightCriteria.geoCodeCriteria.topRightLong != null)">
+				AND latitude BETWEEN #{lightCriteria.geoCodeCriteria.bottomLeftLat} AND #{lightCriteria.geoCodeCriteria.topRightLat}
+				AND longitude BETWEEN #{lightCriteria.geoCodeCriteria.bottomLeftLong} AND #{lightCriteria.geoCodeCriteria.topRightLong}
+			</if>
+
+			<if test="lightCriteria.geoCodeCriteria.middleLatMin != null and
+					  lightCriteria.geoCodeCriteria.middleLongMin != null">
+				AND latitude BETWEEN #{lightCriteria.geoCodeCriteria.middleLatMin} AND #{lightCriteria.geoCodeCriteria.middleLatMax}
+				AND longitude BETWEEN #{lightCriteria.geoCodeCriteria.middleLongMin} AND #{lightCriteria.geoCodeCriteria.middleLongMax}
+			</if>
+
+			<if test="lightCriteria.geoCodeCriteria.locationList != null and !lightCriteria.geoCodeCriteria.locationList.isEmpty()">
+				AND
+				<foreach item="item" index="index" collection="lightCriteria.geoCodeCriteria.locationList"
+					open="(" separator=" or " close=")">
+					    (trunc(CAST(latitude as NUMERIC),#{lightCriteria.geoCodeCriteria.trunc}) = #{item.latitude}
+					 AND trunc(CAST(longitude as NUMERIC),#{lightCriteria.geoCodeCriteria.trunc}) = #{item.longitude})
+				</foreach>
+			</if>
+
+		</if>
+
+	</sql>
+
+	<!-- MAP Columns -->
+	<sql id="mapGeoCodeColumns">
+		<if test="lightCriteria != null">
+			<if test="lightCriteria.geoCodeCriteria != null">
+				<if test="lightCriteria.geoCodeCriteria.trunc == 1">
+					,max(trunc(latitude::NUMERIC,#{lightCriteria.geoCodeCriteria.trunc})) as latitude
+					,max(trunc(longitude::NUMERIC,#{lightCriteria.geoCodeCriteria.trunc})) as longitude
+				</if>
+				<if test="lightCriteria.geoCodeCriteria.trunc > 1">
+					,max(round(latitude::NUMERIC,#{lightCriteria.geoCodeCriteria.trunc})) as latitude
+					,max(round(longitude::NUMERIC,#{lightCriteria.geoCodeCriteria.trunc})) as longitude
+				</if>
+			</if>
+		</if>
+	</sql>
+
+	<sql id="mapGeoCodeColumnsGroupBy">
+		<if test="lightCriteria != null and	lightCriteria.geoCodeCriteria != null">
+				,latitude
+				,longitude
+		</if>
+	</sql>
+
+</mapper>

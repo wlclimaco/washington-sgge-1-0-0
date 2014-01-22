@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="LightFilter">
+
+	<!--###################### -->
+	<!--#### Result Maps #### -->
+	<!--##################### -->
+
+	<resultMap id="LightFilterResult" type="LightFilterValue">
+
+		<id property="id" jdbcType="INTEGER" column="light_filter_value_id" />
+		<result property="filterValue" jdbcType="VARCHAR" column="filter_value" />
+		<result property="lightFilterTypeValue" jdbcType="INTEGER" column="light_filter_type_id" />
+
+	</resultMap>
+
+	<select id="fetchLightFilters" parameterType="LightFilterRequest" resultMap="LightFilterResult">
+		SELECT lf.light_filter_value_id, lf.filter_value, lt.light_filter_type_id
+		FROM light_filter_value lf, light_filter_type lt
+		WHERE lf.light_filter_type_id = lt.light_filter_type_id
+		AND lt.light_filter_type_id IN
+		<foreach item="item" index="index" collection="filterList"
+			open="(" separator="," close=")">
+				#{item.value}
+		</foreach>
+	</select>
+
+</mapper>

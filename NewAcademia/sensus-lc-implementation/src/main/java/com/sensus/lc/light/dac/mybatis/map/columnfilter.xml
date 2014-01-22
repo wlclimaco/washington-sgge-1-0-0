@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ColumnFilter">
+
+	<!--###################### -->
+	<!--#### Result Maps #### -->
+	<!--###################### -->
+
+	<resultMap id="ColumnFilterResult" type="ColumnFilterResponse">
+		<collection property="filters" column="settings_id" select="fetchAllFilters" />
+		<collection property="listColumn" column="settings_id" select="fetchAllColumns" />
+	</resultMap>
+
+	<resultMap id="ColumnResults" type="Column" >
+		<result property="columnEnumValue" column="user_setting_property_value"></result>
+		<result property="displayOrder" column="display_order"></result>
+	</resultMap>
+
+	<resultMap id="LightFilterResult" type="LightFilterValue">
+		<result property="id" jdbcType="INTEGER" column="light_filter_value_id" />
+		<result property="filterValue" jdbcType="VARCHAR" column="filter_value" />
+		<result property="lightFilterTypeValue" jdbcType="INTEGER" column="light_filter_type_id" />
+	</resultMap>
+
+	<resultMap id="FiltersResults" type="Filter">
+		<result property="filterEnumValue" column="filter" />
+		<result property="displayOrder" column="display_order" />
+	</resultMap>
+
+	<!--###################### -->
+	<!--##### Queries     #### -->
+	<!--###################### -->
+
+	<select id="fetchAllColumnFilters" parameterType="ColumnFilterRequest" resultMap="ColumnFilterResult">
+		SELECT us.user_settings_id as
+		settings_id
+		FROM user_settings us
+		WHERE us.user_id = #{userContext.id,jdbcType=INTEGER}
+		AND us.tenant_id = #{tenant.id,jdbcType=INTEGER}
+	</select>
+
+	<select id="fetchAllFilters" resultMap="FiltersResults">
+		SELECT user_setting_property_value as filter,
+		display_order
+		FROM user_settings_property
+		WHERE user_settings_id = #{value}
+		AND property_id = 105
+	</select>
+
+	<select id="fetchAllColumns" resultMap="ColumnResults">
+		SELECT user_setting_property_value,
+		display_order
+		FROM user_settings_property
+		WHERE user_settings_id = #{value}
+		AND property_id = 104
+	</select>
+
+	<select id="fetchLightFilters" parameterType="LightFilterRequest" resultMap="LightFilterResult">
+		SELECT lf.light_filter_value_id, lf.filter_value, lt.light_filter_type_id
+		FROM light_filter_value lf, light_filter_type lt
+		WHERE lf.light_filter_type_id = lt.light_filter_type_id
+		AND lt.light_filter_type_id IN
+		<foreach item="item" index="index" collection="filterList"
+			open="(" separator="," close=")">
+				#{item.value}
+		</foreach>
+	</select>
+
+</mapper>

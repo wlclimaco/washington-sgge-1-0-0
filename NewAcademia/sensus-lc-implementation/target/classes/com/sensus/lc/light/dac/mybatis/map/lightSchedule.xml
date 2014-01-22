@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="LightSchedule">
+
+	<resultMap id="ScheduleResult" type="LightSchedule">
+		<id property="parentId" column="light_id" />
+		<result property="sunriseTime" column="sunrise_time" />
+		<result property="sunriseTimeDate" column="sunrise_time" typeHandler="com.sensus.lc.light.dac.mybatis.typehandler.ScheduleDateTimeTypeHandler" />
+		<result property="sunriseOffset" column="sunrise_offset" />
+		<result property="sunsetTime" column="sunset_time" />
+		<result property="sunsetTimeDate" column="sunset_time" typeHandler="com.sensus.lc.light.dac.mybatis.typehandler.ScheduleDateTimeTypeHandler" />
+		<result property="sunsetOffset" column="sunset_offset" />
+	</resultMap>
+
+	<resultMap id="OffsetScheduleResult" type="OffsetSchedule">
+		<result property="id" column="schedule_id" />
+		<result property="name" column="name" />
+		<result property="description" column="description" />
+		<result property="sunriseOffsetMinutes" column="sunrise_offset"/>
+		<result property="sunsetOffsetMinutes" column="sunset_offset"/>
+		<result property="sunriseBefore" column="sunrise_before"/>
+		<result property="sunsetBefore" column="sunset_before"/>
+	</resultMap>
+
+	<resultMap id="EventScheduleResult" type="EventSchedule">
+		<result property="id" column="schedule_id" />
+		<result property="name" column="name" />
+		<result property="description" column="description" />
+	</resultMap>
+
+	<!--############################-->
+	<!--####  Column Definition ####-->
+	<!--############################-->
+
+	<sql id="allScheduleColumns">
+		, light_schedule.sunrise_time
+		, light_schedule.sunrise_offset
+		, light_schedule.sunset_time
+		, light_schedule.sunset_offset
+	</sql>
+
+	<sql id="overrideColumn">
+		<choose>
+			<when test="scheduleCriteria != null and scheduleCriteria.hasSelectedLight()">
+			   ,CASE WHEN light.override = 1
+					      AND ((light.override_create_date &lt; CAST(CAST(NOW() AS DATE)|| ' '|| (light_schedule.sunrise_time::TIME + ((light_schedule.sunrise_offset || 'minute')::interval)) AS TIMESTAMP)
+						  AND NOW() &gt; CAST(CAST(NOW() AS DATE)|| ' '|| (light_schedule.sunrise_time::TIME + ((light_schedule.sunrise_offset || 'minute')::interval)) AS TIMESTAMP))
+						  OR (light.override_create_date &lt; CAST(CAST(NOW() AS DATE)|| ' '|| (light_schedule.sunset_time::TIME + ((light_schedule.sunset_offset || 'minute')::interval)) AS TIMESTAMP)
+						  AND NOW() &gt; CAST(CAST(NOW() AS DATE)|| ' '|| (light_schedule.sunset_time::TIME + ((light_schedule.sunset_offset || 'minute')::interval)) AS TIMESTAMP))
+						  OR (SELECT MIN(event_time)
+						        FROM schedule_event se INNER JOIN schedule_membership sm on (sm.schedule_id = se.schedule_id)
+							   WHERE sm.light_id = light.light_id) BETWEEN light.override_create_date AND NOW()
+						  )
+						 THEN 0
+				     WHEN light.override = 3 AND light.override_per_date &lt; NOW()
+				     	THEN 0
+		    	ELSE
+				     light.override
+			    END AS override
+			 </when>
+			 <otherwise>
+			 	,override
+			 </otherwise>
+		</choose>
+    </sql>
+
+	<!--############################-->
+	<!--####   Queries          ####-->
+	<!--############################-->
+
+	<select id="fetchById" resultMap="ScheduleResult">
+		SELECT light_schedule.light_id
+		       <include refid="allScheduleColumns" />
+		FROM light_schedule
+		WHERE light_id= #{value}
+	</select>
+
+	<select id="fetchOffsetScheduleById" resultMap="OffsetScheduleResult">
+			SELECT s.schedule_id
+			       ,s.name
+			       ,s.description
+			       ,CASE WHEN s.sunrise_offset &lt; 0 THEN (s.sunrise_offset * -1) ELSE s.sunrise_offset END  sunrise_offset
+			       ,CASE WHEN s.sunset_offset &lt; 0 THEN (s.sunset_offset * -1) ELSE s.sunset_offset END sunset_offset
+			       ,CASE WHEN s.sunrise_offset &lt; 0 THEN true ELSE false END  sunrise_before
+			       ,CASE WHEN s.sunset_offset &lt; 0 THEN true ELSE false END sunset_before
+			  FROM schedule_membership sm
+			  INNER JOIN schedule s ON(s.schedule_id = sm.schedule_id)
+			  INNER JOIN light l ON(l.light_id = sm.light_id AND l.tenant_id = s.tenant_id)
+			WHERE (s.schedule_type = 1 or s.schedule_type = 3)
+			  AND l.light_id = #{value}
+	</select>
+
+	<select id="fetchEventScheduleById" resultMap="EventScheduleResult">
+		SELECT s.schedule_id
+		       ,s.name
+		       ,s.description
+		  FROM schedule_membership sm
+		  INNER JOIN schedule s ON(s.schedule_id = sm.schedule_id)
+		  INNER JOIN light l ON(l.light_id = sm.light_id AND l.tenant_id = s.tenant_id)
+		WHERE (s.schedule_type = 2 or s.schedule_type = 4)
+		  AND l.light_id = #{value}
+	</select>
+
+	<!--############################-->
+	<!--####   Criteria         ####-->
+	<!--############################-->
+
+	<sql id="scheduleCriteria">
+		<if test="scheduleCriteria != null and scheduleCriteria.hasSelectedLight()">
+
+			<!-- in Light List -->
+			AND light.light_id IN
+	    	<foreach item="item" index="index" collection="scheduleCriteria.lightIdList" open="(" separator="," close=")">
+				     #{item}
+			</foreach>
+
+		</if>
+
+		<if test="scheduleCriteria != null and scheduleCriteria.hasSelectedSchedule()">
+		    AND scheduleMembership.schedule_id IN
+		    <foreach item="item" index="index" collection="scheduleCriteria.lightSchedule" open="(" separator="," close=")">
+				     #{item}
+			</foreach>
+		</if>
+	</sql>
+
+	<!--############################-->
+	<!--####   insert schedule  ####-->
+	<!--############################-->
+
+	<insert id="InsertSchedule" parameterType="LightSchedule">
+		 INSERT INTO light_schedule(
+				light_id
+                ,sunrise_time
+                ,sunrise_offset
+                ,sunset_time
+                ,sunset_offset
+                ,create_user )
+	    VALUES
+		   	    (#{parentId,jdbcType=INTEGER}
+		   	     ,#{sunriseTime,jdbcType=VARCHAR}
+	             ,#{sunriseOffset,jdbcType=INTEGER}
+	             ,#{sunsetTime,jdbcType=VARCHAR}
+	             ,#{sunsetOffset,jdbcType=INTEGER}
+	             ,#{createUser,jdbcType=VARCHAR})
+	</insert>
+
+
+	<!--############################-->
+	<!--####   update schedule  ####-->
+	<!--############################-->
+
+	<update id="UpdateSchedule" parameterType="LightSchedule">
+
+		UPDATE light_schedule
+		<trim prefix="SET" prefixOverrides=",">
+			<if test="sunriseTime   != null"	> sunrise_time    = #{sunriseTime,jdbcType=VARCHAR}</if>
+			<if test="sunriseOffset != null"	>,sunrise_offset  = #{sunriseOffset,jdbcType=INTEGER}</if>
+			<if test="sunsetTime    != null"	>,sunset_time     = #{sunsetTime,jdbcType=VARCHAR}</if>
+			<if test="sunsetOffset  != null"	>,sunset_offset   = #{sunsetOffset,jdbcType=INTEGER}</if>
+			<if test="modifyUser    != null"	>,modified_user   = #{modifyUser,jdbcType=VARCHAR}</if>
+
+			<!-- Safe code, avoid some type exception -->
+			<if test="sunriseTime   == null and
+			          sunriseOffset == null and
+			          sunsetTime    == null and
+			          sunsetOffset  == null and
+			          modifyUser    == null">
+				 sunrise_time    = sunrise_time
+				,sunrise_offset  = sunrise_offset
+				,sunset_time     = sunset_time
+				,sunset_offset   = sunset_offset
+				,modified_user   = modified_user
+			</if>
+		</trim>
+		WHERE light_id = #{parentId}
+
+	</update>
+
+
+
+</mapper>

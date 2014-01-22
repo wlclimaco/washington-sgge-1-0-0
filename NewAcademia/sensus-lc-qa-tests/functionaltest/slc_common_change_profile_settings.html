@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>change_profile_settings</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">change_profile_settings</td></tr>
+</thead><tbody>
+<!--#-->
+<tr>
+	<td>click</td>
+	<td>id=user-name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeSelectedValue</td>
+	<td>id=pagesize</td>
+	<td>resultPerPage</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${resultPerPage} == ${pagesize}</td>
+	<td>jumpResult</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=pagesize</td>
+	<td>${pagesize}</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>jumpResult</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeSelectedValue</td>
+	<td>id=dateformat</td>
+	<td>dateFormat</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>'${dateFormat}' == 'mm/dd/yyyy'</td>
+	<td>jumpDateFormat</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=dateformat</td>
+	<td>mm/dd/yyyy</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>jumpDateFormat</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>css=#prompt-monitor input:first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user-profile-save</td>
+	<td></td>
+</tr>
+<!--Go to Users Page to store user name-->
+<tr>
+	<td>storeText</td>
+	<td>id=user-name</td>
+	<td>userName</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${userName}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=users-list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>${userName}/2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${userName}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${row}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${row}) - 2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${row}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=#user-table tbody tr:eq(${row}) td:eq(3)</td>
+	<td>userName</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${userName}</td>
+	<td>userName</td>
+</tr>
+</tbody></table>
+</body>
+</html>

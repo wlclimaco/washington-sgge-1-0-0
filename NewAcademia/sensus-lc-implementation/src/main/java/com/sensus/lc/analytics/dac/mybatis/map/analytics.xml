@@ -1,0 +1,1476 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Analytics">
+
+	 <resultMap id="LightResult" extends="Device.DeviceResult" type="Light">
+		<result property="id" column="light_id" />
+		<result property="poleId" column="pole_id" />
+		<result property="deviceLifeCycleStateValue" column="light_state" />
+		<result property="lifeCycleStateValue" column="lifecycle_state" />
+		<result property="lastNotificationHistory.messageDate" column="message_date" jdbcType="TIMESTAMP" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="lastNotificationHistory.precedenceValue" column="precedence" />
+	 </resultMap>
+
+	<resultMap id="StatusMessageSubTypeResult" type="java.util.Map">
+		<result property="lamp_failure" column="lamp_failure" javaType="java.lang.Integer" />
+		<result property="power_failure" column="power_failure" javaType="java.lang.Integer" />
+		<result property="board_failure" column="board_failure" javaType="java.lang.Integer" />
+		<result property="metrology_error" column="metrology_error" javaType="java.lang.Integer" />
+		<result property="metrology_com_failure" column="metrology_com_failure" javaType="java.lang.Integer" />
+		<result property="power_surge" column="power_surge" javaType="java.lang.Integer" />
+		<result property="brownout_detected" column="brownout_detected" javaType="java.lang.Integer" />
+		<result property="communication_fail" column="communication_fail" javaType="java.lang.Integer" />
+		<result property="high_current" column="high_current" javaType="java.lang.Integer" />
+		<result property="low_current" column="low_current" javaType="java.lang.Integer" />
+		<result property="reverse_energy" column="reverse_energy" javaType="java.lang.Integer" />
+		<result property="metrology_reset" column="metrology_reset" javaType="java.lang.Integer" />
+	</resultMap>
+
+	<resultMap id="AnalyticsGroupColumnsResult" type="AnalyticsGroupColumns">
+		<result property="description" column="description" />
+		<result property="date" column="date_time" jdbcType="TIMESTAMP" typeHandler="com.sensus.lc.base.util.DateZoneTypeHandler"/>
+		<result property="value" column="amount" />
+	</resultMap>
+
+	<resultMap id="AnalyticsGroupColumnsResultWithoutTypeHandler" type="AnalyticsGroupColumns">
+		<result property="description" column="description" />
+		<result property="date" column="date_time" jdbcType="TIMESTAMP"/>
+		<result property="value" column="amount" />
+	</resultMap>
+
+	<resultMap id="AnalyticsGroupColumnsFullResult" type="AnalyticsGroupColumns">
+		<result property="analyticsTypeEnumValue" column="description" />
+		<result property="dashboardViewTypeEnumValue" column="view_mode_id" />
+		<result property="value"   column="amount"  />
+		<result property="average" column="average" />
+		<result property="change"  column="change"  />
+		<result property="trends"  column="trends"  />
+	</resultMap>
+
+	<resultMap id="AnalyticsGroupAlarmResult" type="AnalyticsGroupAlarm">
+		<result property="id" column="group_id" />
+		<result property="name" column="group_name" />
+		<result property="lampFailure" column="lamp_failure" />
+		<result property="powerFailure" column="power_failure" />
+		<result property="boardFailure" column="board_failure" />
+		<result property="metrologyError" column="metrology_error"/>
+		<result property="metrologyComFailure" column="metrology_com_failure"/>
+		<result property="total" column="total" />
+	</resultMap>
+
+	<resultMap id="AnalyticsGroupWarningResult" type="AnalyticsGroupWarning">
+		<result property="id" column="group_id" />
+		<result property="name" column="group_name" />
+		<result property="powerSurge" column="power_surge" />
+		<result property="brownoutDetected" column="brownout_detected" />
+		<result property="communicationFail" column="communication_fail" />
+		<result property="highCurrent" column="high_current" />
+		<result property="lowCurrent" column="low_current"/>
+		<result property="reverseEnergy" column="reverse_energy" />
+		<result property="metrologyReset" column="metrology_reset" />
+		<result property="total" column="total" />
+	</resultMap>
+
+	<resultMap id="AnalyticsGroupTypeLightResult" type="AnalyticsGroupTypeLight">
+		<result property="id" column="group_id" />
+		<result property="name" column="group_name" />
+		<result property="induction" column="induction" />
+		<result property="led" column="led" />
+		<result property="other" column="other" />
+		<result property="total" column="total" />
+	</resultMap>
+
+	<resultMap id="AnalyticsGroupEcoModeResult" type="AnalyticsGroupEcoMode">
+		<result property="id" column="group_id" />
+		<result property="name" column="group_name" />
+        <result property="ecoModePercent" column="ecomode_percent" />
+		<result property="measuredConsumption" column="ecomode_measured" />
+		<result property="baselineConsumption" column="ecomode_baseline" />
+	</resultMap>
+
+	<resultMap id="AnalyticsGroupCarbonCreditsResult" type="AnalyticsGroupCarbonCredits">
+		<result property="id" column="group_id" />
+		<result property="name" column="group_name" />
+		<result property="creditsCreated" column="credits_created" />
+		<result property="energySaved" column="energy_saved" />
+		<result property="barrelsOfOilSaved" column="barrels_of_oil_saved" />
+		<result property="tonsOfCOSaved" column="tons_of_co_saved" />
+	</resultMap>
+
+	<resultMap id="AnalyticGroupResult" type="AnalyticsGroup">
+		<result property="id" column="group_id" />
+		<result property="name" column="group_name" />
+	</resultMap>
+
+	<!-- Fetch Tag By Id -->
+	<resultMap id="listTagResults" type="Tag">
+		<result property="id" column="tag_id" />
+		<result property="name" column="name" />
+		<result property="autoGroup" column="auto_group" />
+		<collection property="lights" column="tag_id"
+			select="Analytics.fetchLightsByTagId" />
+	</resultMap>
+
+	<!-- Lights Tags -->
+	<resultMap id="LightsTag" type="Light">
+		<result property="id" column="light_id" />
+	</resultMap>
+
+	<sql id="allCustomPropertiesResultLightColumns">
+		p.property_id, p.property_name, property_value, data_type, create_user, modify_user, create_date, modified_date
+	</sql>
+
+	<sql id="allDashboardResumeColumms">
+		tenant_id, view_mode_id, description, amount, average, change, trends
+	</sql>
+
+	<sql id="allCustomLightColumns">
+		light_id, rni_id, pole_id, status_message_id, grouping_id
+	</sql>
+
+	<sql id="allCustomStatusMessageSubTypeColumns">
+		lamp_failure, power_failure, power_surge, brownout_detected
+	</sql>
+
+	<sql id="allAnalyticsGroupAlarmColumms">
+		group_id, group_name, lamp_failure, power_failure, board_failure
+		, metrology_error, metrology_com_failure, total
+	</sql>
+
+	<sql id="allAnalyticsGroupWarningsColumms">
+		group_id, group_name, power_surge, brownout_detected, communication_fail
+		, high_current, low_current, reverse_energy, metrology_reset, total
+	</sql>
+
+	<sql id="allCustomAnalyticsGroupColumns">
+		description, date_time, amount
+	</sql>
+
+	<sql id="allStatusMessageColumns">
+		status_message_id, message_date, status
+	</sql>
+
+	<sql id="allCustomListTagColumns">
+		tag_id, name, auto_group
+	</sql>
+
+	<sql id="allCustomLightsTagColumns">
+		light_id
+	</sql>
+
+	<sql id="allCustomParameterColumns">
+		property_id, value, label_key, property_id, create_user, create_date,
+		modify_user, modified_date, property_valid_value_id
+	</sql>
+
+	<!-- All Analytics Group Type Light Columns -->
+	<sql id="allAnalyticsGroupTypeLightColumms">
+		group_id, group_name, induction, led, other, total
+	</sql>
+
+	 <!-- insert Analytics Summarized without values -->
+	<select id="insertAnalyticsSummarized"  parameterType="Map">
+
+	    INSERT INTO analytics_installed_summarized (date_time, induction, led, other, group_id, range_date, tenant_id)
+             VALUES ((SELECT CURRENT_DATE - INTERVAL '1 day'),0,0,0,(SELECT analytic_group_id FROM analytics_group WHERE tenant_id = #{tenant_id} AND grouping_id = #{analytics_group_id}), #{range_date},#{tenant_id});
+
+        INSERT INTO analytics_alarms_summarized (date_time, lamp_failure, power_failure, board_failure, metrology_error, metrology_com_failure, group_id, range_date, tenant_id)
+             VALUES  ((SELECT CURRENT_DATE - INTERVAL '1 day'),0,0,0,0,0,(SELECT analytic_group_id FROM analytics_group WHERE tenant_id = #{tenant_id} AND grouping_id = #{analytics_group_id}),#{range_date},#{tenant_id});
+
+ 	    INSERT INTO analytics_warnings_summarized (date_time, power_surge_detected, brownout_detected, communication_fail, high_current, low_current, reverse_energy, metrology_reset, group_id, range_date, tenant_id)
+     	     VALUES ((SELECT CURRENT_DATE - INTERVAL '1 day'),0,0,0,0,0,0,0,(SELECT analytic_group_id FROM analytics_group WHERE tenant_id = #{tenant_id} AND grouping_id = #{analytics_group_id}),#{range_date},#{tenant_id});
+
+	</select>
+
+	<select id="updateAnalyticsAlarmsWarnings" resultType="int" parameterType="Map">
+		SELECT upd_analytics_alarms_warnings(#{notification_history_id},#{alert_subtype_id},#{create_user},#{alert_type},#{operator})
+	</select>
+
+    <!-- Fetch Dash Board Resume -->
+    <select id="fetchDashboardResume" parameterType="Map" resultMap="AnalyticsGroupColumnsFullResult">
+	   SELECT <include refid="allDashboardResumeColumms" />
+		  FROM (
+		    <!-- for today - Alarm values -->
+		    SELECT
+			     #{tenant_id} AS tenant_id
+			     ,'today'::character varying AS view_mode_id
+			     ,'1'::character varying AS description /* 1 = Alarm type */
+			     ,get_analytics_alarms_total(#{tenant_id}, NULL, #{init_date}::timestamp, #{end_date}::timestamp, NULL, #{allowedGroupsToProc}) AS amount
+			     ,0 AS average
+			     ,0 AS change
+			     ,NULL::character varying AS trends
+			     ,NULL::integer AS grouping_id
+
+		  UNION ALL
+			<!-- for today - Warning values -->
+		    SELECT
+			     #{tenant_id} AS tenant_id
+			     ,'today'::character varying AS view_mode_id
+			     ,'2'::character varying AS description /* 2 = Warning type */
+			     ,get_analytics_warnings_total(#{tenant_id}, NULL, #{init_date}::timestamp, #{end_date}::timestamp, NULL, #{allowedGroupsToProc}) AS amount
+			     ,0 AS average
+			     ,0 AS change
+			     ,NULL::character varying AS trends
+			     ,NULL::integer AS grouping_id
+
+		  UNION ALL
+		  	<!-- for today - Installed values -->
+			SELECT #{tenant_id} AS tenant_id
+				,'today'::character varying AS view_mode_id
+				,'3'::character varying AS alert_type_id /* 3 = 'Simulation' to Installed type */
+				, coalesce(count(1),0) AS amount
+				,0 AS average
+				,0 AS change
+				,NULL::character varying AS trends
+				,NULL::integer AS grouping_id
+		    FROM light l
+		    <if test="allowedGroupIdList != null">
+		      INNER JOIN light_grouping lt_grp ON (lt_grp.light_id = l.light_id)
+		    </if>
+		   WHERE l.tenant_id = #{tenant_id}
+		     AND l.create_date BETWEEN #{init_date}::timestamp AND #{end_date}::timestamp
+		    <if test="allowedGroupIdList != null">
+		     AND lt_grp.grouping_id IN
+		     <foreach item="item" index="index" collection="allowedGroupIdList"
+			     open="(" separator="," close=")">
+			    #{item}
+			     </foreach>
+		     </if>
+
+		     UNION ALL
+		  <!-- for week and month get the value directly FROM the consolidation data table -->
+		  SELECT tenant_id
+			     ,view_mode             view_mode_id
+			     ,analytics_type        alert_type_id
+			     ,value amount
+			     ,average
+			     ,change
+			     ,trends
+			     ,grouping_id
+		    FROM dashboard_resume
+		   WHERE tenant_id = #{tenant_id}
+		  <if test="allowedGroupIdList == null">
+		     AND grouping_id IS NULL
+		  </if>
+		  <if test="allowedGroupIdList != null">
+		     AND grouping_id IN
+		   <foreach item="item" index="index" collection="allowedGroupIdList"
+		    open="(" separator="," close=")">
+		    #{item}
+		   </foreach>
+		  </if>
+		  ) tb
+
+	 </select>
+
+	<!-- Fetch Analytics Alarms By Status Id -->
+	<select id="fetchAnalyticsAlarmsByStatusId" parameterType="map" resultMap="LightResult">
+		SELECT l.light_id,
+		       l.pole_id,
+		       l.light_state,
+		       l.lifecycle_state,
+		       l.latitude,
+		       l.longitude,
+		       l.timezone,
+		       nha.message_date,
+		          COALESCE((SELECT precedence FROM light lgt LEFT JOIN notification_history n on lgt.notification_history_id = n.notification_history_id WHERE lgt.light_id = l.light_id), 5/*Unknown*/)
+		       AS precedence,
+		       l.flexnet_id
+		    FROM notification_history nh
+		    INNER JOIN notification_history_alert nha ON (nha.notification_history_id = nh.notification_history_id)
+		    INNER JOIN alert_subtype subtype ON (subtype.alert_subtype_id = nha.alert_subtype_id)
+		    INNER JOIN light l ON(l.light_id = nh.light_id)
+		  <if test="allowedGroupIdList != null">
+			JOIN light_grouping lt_grp ON (lt_grp.light_id = l.light_id)
+		  </if>
+		 WHERE subtype.alert_type_id = #{alarm_type_id,jdbcType=INTEGER}
+		   AND nha.alert_subtype_id = #{alarm_subtype_id,jdbcType=INTEGER}
+		   AND nh.notification_type = 1 /* type = NOTIFICATION ALARM */
+		   AND l.tenant_id = #{tenant_id,jdbcType=INTEGER}
+		   <if test="allowedGroupIdList != null">
+			  AND lt_grp.grouping_id IN
+			   <foreach item="item" index="index" collection="allowedGroupIdList"
+						open="(" separator="," close=")">
+					#{item}
+			   </foreach>
+		    </if>
+		 ORDER BY nh.message_date DESC LIMIT 5;
+	</select>
+
+	<!-- Fetch Analytics Alerts By Type -->
+	<select id="fetchAnalyticsAlertsByType" parameterType="map"	resultMap="StatusMessageSubTypeResult">
+	SELECT  (SELECT sum(amount) as amount
+			   FROM dashboard_resume_chart
+		  	 WHERE alert_subtype_id = 1
+			   AND tenant_id = #{tenant_id}
+			 <if test="allowedGroupIdList != null">
+				 AND grouping_id IN
+					   <foreach item="item" index="index" collection="allowedGroupIdList"
+						    open="(" separator="," close=")">
+						    #{item}
+					   </foreach>
+		     </if>
+		     <if test="allowedGroupIdList == null">
+				 AND grouping_id is null
+		     </if>
+			) lamp_failure
+			,(SELECT  sum(amount) as amount
+				  FROM dashboard_resume_chart
+				WHERE alert_subtype_id = 2
+				  AND tenant_id = #{tenant_id}
+				<if test="allowedGroupIdList != null">
+					AND grouping_id IN
+						  <foreach item="item" index="index" collection="allowedGroupIdList"
+							   open="(" separator="," close=")">
+							   #{item}
+						  </foreach>
+			    </if>
+			    <if test="allowedGroupIdList == null">
+					AND grouping_id is null
+			    </if>
+			) power_failure
+			,(SELECT  sum(amount) as amount
+				  FROM dashboard_resume_chart
+				WHERE alert_subtype_id = 3
+				  AND tenant_id = #{tenant_id}
+				<if test="allowedGroupIdList != null">
+					AND grouping_id IN
+						  <foreach item="item" index="index" collection="allowedGroupIdList"
+							   open="(" separator="," close=")">
+							   #{item}
+						  </foreach>
+			     </if>
+			     <if test="allowedGroupIdList == null">
+					AND grouping_id is null
+			    </if>
+			) board_failure
+			,(SELECT  sum(amount) as amount
+				  FROM dashboard_resume_chart
+				WHERE alert_subtype_id = 4
+				  AND tenant_id = #{tenant_id}
+				<if test="allowedGroupIdList != null">
+					AND grouping_id IN
+						  <foreach item="item" index="index" collection="allowedGroupIdList"
+							   open="(" separator="," close=")">
+							   #{item}
+						  </foreach>
+			    </if>
+			    <if test="allowedGroupIdList == null">
+					AND grouping_id is null
+			    </if>
+			) metrology_error
+			,(SELECT  sum(amount) as amount
+				  FROM dashboard_resume_chart
+				WHERE alert_subtype_id = 5
+				  AND tenant_id = #{tenant_id}
+				<if test="allowedGroupIdList != null">
+					AND grouping_id IN
+						  <foreach item="item" index="index" collection="allowedGroupIdList"
+							   open="(" separator="," close=")">
+							   #{item}
+						  </foreach>
+			    </if>
+			    <if test="allowedGroupIdList == null">
+					AND grouping_id is null
+			    </if>
+			) metrology_com_failure
+			,(SELECT  sum(amount) as amount
+				  FROM dashboard_resume_chart
+				WHERE alert_subtype_id = 6
+				  AND tenant_id = #{tenant_id}
+				<if test="allowedGroupIdList != null">
+					AND grouping_id IN
+						  <foreach item="item" index="index" collection="allowedGroupIdList"
+							   open="(" separator="," close=")">
+							   #{item}
+						  </foreach>
+			    </if>
+			    <if test="allowedGroupIdList == null">
+					AND grouping_id is null
+			    </if>
+			) power_surge
+			,(SELECT  sum(amount) as amount
+				  FROM dashboard_resume_chart
+				WHERE alert_subtype_id = 7
+				  AND tenant_id = #{tenant_id}
+				<if test="allowedGroupIdList != null">
+					AND grouping_id IN
+						  <foreach item="item" index="index" collection="allowedGroupIdList"
+							   open="(" separator="," close=")">
+							   #{item}
+						  </foreach>
+			    </if>
+			    <if test="allowedGroupIdList == null">
+					AND grouping_id is null
+			    </if>
+			) brownout_detected
+			,(SELECT  sum(amount) as amount
+				  FROM dashboard_resume_chart
+				WHERE alert_subtype_id = 8
+				  AND tenant_id = #{tenant_id}
+				<if test="allowedGroupIdList != null">
+					AND grouping_id IN
+						  <foreach item="item" index="index" collection="allowedGroupIdList"
+							   open="(" separator="," close=")">
+							   #{item}
+						  </foreach>
+			    </if>
+			    <if test="allowedGroupIdList == null">
+					AND grouping_id is null
+			    </if>
+			) communication_fail
+			,(SELECT  sum(amount) as amount
+				  FROM dashboard_resume_chart
+				WHERE alert_subtype_id = 9
+				  AND tenant_id = #{tenant_id}
+				<if test="allowedGroupIdList != null">
+					AND grouping_id IN
+						  <foreach item="item" index="index" collection="allowedGroupIdList"
+							   open="(" separator="," close=")">
+							   #{item}
+						  </foreach>
+			    </if>
+			    <if test="allowedGroupIdList == null">
+					AND grouping_id is null
+			    </if>
+			) high_current
+			,(SELECT  sum(amount) as amount
+				  FROM dashboard_resume_chart
+				WHERE alert_subtype_id = 10
+				  AND tenant_id = #{tenant_id}
+				<if test="allowedGroupIdList != null">
+					AND grouping_id IN
+						  <foreach item="item" index="index" collection="allowedGroupIdList"
+							   open="(" separator="," close=")">
+							   #{item}
+						  </foreach>
+			    </if>
+			    <if test="allowedGroupIdList == null">
+					AND grouping_id is null
+			    </if>
+			) low_current
+			,(SELECT  sum(amount) as amount
+				  FROM dashboard_resume_chart
+				WHERE alert_subtype_id = 11
+				  AND tenant_id = #{tenant_id}
+				<if test="allowedGroupIdList != null">
+					AND grouping_id IN
+						  <foreach item="item" index="index" collection="allowedGroupIdList"
+							   open="(" separator="," close=")">
+							   #{item}
+						  </foreach>
+			    </if>
+			    <if test="allowedGroupIdList == null">
+					AND grouping_id is null
+			    </if>
+			) reverse_energy
+			,(SELECT  sum(amount) as amount
+				  FROM dashboard_resume_chart
+				WHERE alert_subtype_id = 12
+				  AND tenant_id = #{tenant_id}
+				<if test="allowedGroupIdList != null">
+					AND grouping_id IN
+						  <foreach item="item" index="index" collection="allowedGroupIdList"
+							   open="(" separator="," close=")">
+							   #{item}
+						  </foreach>
+			    </if>
+			    <if test="allowedGroupIdList == null">
+					AND grouping_id is null
+			    </if>
+			) metrology_reset
+	</select>
+	<!-- Fetch Analytics Alarms By Group -->
+	<select id="fetchAnalyticsAlarmsByGroup" parameterType="map"
+		resultMap="AnalyticsGroupAlarmResult">
+			    <choose>
+			      <when test="range_date_id == null or range_date_id == 0 or range_date_id == 1">
+		      		  WITH analytics_alarms_total AS
+					  (
+						SELECT aa.analytics_alarm_subtype,
+							   ag.analytic_group_id,
+							   COALESCE(SUM(aa.value),0) AS amount
+						  FROM analytics_alarms  aa
+						       ,analytics_group_by_date agbd
+						       ,analytics_group ag
+						 WHERE ag.tenant_id = #{tenant_id}
+						   AND ag.analytic_group_id = agbd.analytic_group_id
+						   AND agbd.analytic_date BETWEEN #{init_date}::timestamp AND #{end_date}::timestamp
+						   AND agbd.analytic_group_by_date_id  = aa.analytic_group_by_date_id
+						   AND (aa.analytics_alarm_subtype IN (SELECT alert_subtype_id FROM alert_subtype WHERE alert_type_id = 1))
+						   GROUP BY aa.analytics_alarm_subtype,ag.analytic_group_id
+					  )
+		             SELECT
+	 				    <include refid="allAnalyticsGroupAlarmColumms" />
+					   FROM
+					      (
+		      				 SELECT ROW_NUMBER() OVER(ORDER BY case when t.group_name = 'All' then 0 else 1 end asc, ${orderBy}) as RowNum
+								         ,t.group_id
+								         ,CASE t.group_name WHEN 'All' THEN 'All Lights' ELSE t.group_name END as group_name
+								         ,coalesce(t.lamp_failure,0) AS lamp_failure, coalesce(t.power_failure,0) AS power_failure, coalesce(t.board_failure,0) AS board_failure
+								         ,coalesce(t.metrology_error,0) AS metrology_error, coalesce(t.metrology_com_failure,0) AS metrology_com_failure, coalesce(t.total,0) AS total
+				               FROM
+				               (
+				               		SELECT ag.analytic_group_id group_id ,
+									       ag.analytic_group_name group_name
+									       ,ag.grouping_id
+									       ,(select aat.amount from analytics_alarms_total aat where aat.analytics_alarm_subtype = #{lamp_failure_id} and ag.analytic_group_id = aat.analytic_group_id) AS lamp_failure
+									       ,(select aat.amount from analytics_alarms_total aat where aat.analytics_alarm_subtype = #{power_failure_id} and ag.analytic_group_id = aat.analytic_group_id) AS power_failure
+									       ,(select aat.amount from analytics_alarms_total aat where aat.analytics_alarm_subtype = #{board_failure_id} and ag.analytic_group_id = aat.analytic_group_id) AS board_failure
+									       ,(select aat.amount from analytics_alarms_total aat where aat.analytics_alarm_subtype = #{metrology_error_id} and ag.analytic_group_id = aat.analytic_group_id) AS metrology_error
+									       ,(select aat.amount from analytics_alarms_total aat where aat.analytics_alarm_subtype = #{metrology_com_failure_id} and ag.analytic_group_id = aat.analytic_group_id) AS metrology_com_failure
+									       ,(select sum(aat.amount) from analytics_alarms_total aat where ag.analytic_group_id = aat.analytic_group_id) AS total
+									 FROM analytics_group ag
+									WHERE ag.tenant_id = #{tenant_id}
+				               		 <if test="allowedGroupIdList == null and group_id != null">
+										  AND ag.analytic_group_id = #{group_id}
+									 </if>
+									  <if test="allowedGroupIdList != null">
+									   	  AND ag.analytic_group_id IN (SELECT analytic_group_id
+								   		                                 FROM analytics_group
+								   		                                WHERE grouping_id IN
+								   		                                 <foreach item="item" index="index" collection="allowedGroupIdList"
+																               	open="(" separator="," close=")">
+																    	      #{item}
+															            </foreach>)
+									      AND ag.grouping_id IN
+									      <foreach item="item" index="index" collection="allowedGroupIdList"
+								               	open="(" separator="," close=")">
+								    	      #{item}
+								          </foreach>
+									</if>
+				               ) AS t
+		                   ) AS ANALYTICS_ALARM_GROUP_PAGE
+			      </when>
+			      <otherwise>
+			      	SELECT
+				     <include refid="allAnalyticsGroupAlarmColumms" />
+					  FROM
+						(
+						 SELECT group_id
+						        ,CASE group_name WHEN 'All' THEN 'All Lights' ELSE group_name END AS group_name
+						        ,lamp_failure
+						        ,power_failure
+						        ,board_failure
+						        ,metrology_error
+						        ,metrology_com_failure
+						        ,total
+						        ,ROW_NUMBER() OVER(ORDER BY CASE WHEN group_name = 'All' THEN 0 ELSE 1 END ASC, ${orderBy}) AS RowNum
+						   FROM
+						     (SELECT t.group_id
+								     ,t.group_name
+								     ,t.lamp_failure
+							         ,t.power_failure
+								     ,t.board_failure
+								     ,t.metrology_error
+								     ,t.metrology_com_failure
+								     ,(t.lamp_failure + t.power_failure + t.board_failure + t.metrology_error + t.metrology_com_failure) total
+						      FROM
+						        (SELECT ag.analytic_group_name AS group_name
+						                ,sum(aas.lamp_failure) AS lamp_failure
+						                ,sum(aas.power_failure) AS power_failure
+						                ,sum(aas.board_failure) AS board_failure
+						                ,sum(aas.metrology_error) AS metrology_error
+						                ,sum(aas.metrology_com_failure) AS metrology_com_failure
+						                ,aas.group_id
+							       FROM analytics_alarms_summarized aas
+							       INNER JOIN analytics_group ag ON(ag.analytic_group_id = aas.group_id)
+						           <if test="allowedGroupIdList != null">
+								      INNER JOIN light_grouping lg ON (lg.grouping_id = ag.grouping_id)
+								   </if>
+								   WHERE aas.tenant_id = #{tenant_id}
+								   	AND aas.range_date = #{range_date_id}
+								   <if test="allowedGroupIdList != null and group_id == null">
+								     AND lg.grouping_id IN
+								      <foreach item="item" index="index" collection="allowedGroupIdList"
+							               	open="(" separator="," close=")">
+							    	      #{item}
+							          </foreach>
+								   </if>
+								   <if test="group_id != null">
+								     AND aas.group_id = #{group_id}
+								   </if>
+						          GROUP BY ag.analytic_group_name, aas.group_id
+						          ORDER BY aas.group_id
+						       ) AS t
+				            ) AS ANALYTICS_GROUP_PAGE
+				        ) AS ANALYTICS_ALARM_GROUP_PAGE
+			      </otherwise>
+			    </choose>
+			<if test="pageSize > 0">
+	            OFFSET #{startRow,jdbcType=INTEGER}
+	            LIMIT #{pageSize,jdbcType=INTEGER}
+		    </if>
+	</select>
+
+	<!-- Fetch Analytics Warnings By Group -->
+	<select id="fetchAnalyticsWarningsByGroup" parameterType="map"
+		resultMap="AnalyticsGroupWarningResult">
+			   <choose>
+			     <when test="range_date_id == null or range_date_id == 0 or range_date_id == 1">
+				     WITH analytics_warnings_total AS
+						(
+							SELECT aw.analytics_warning_subtype,
+								ag.analytic_group_id,
+								COALESCE(SUM(aw.value),0)   AS amount
+							  FROM analytics_warnings aw
+								  ,analytics_group_by_date agbd
+								  ,analytics_group ag
+							 WHERE ag.tenant_id = #{tenant_id}
+							   AND ag.analytic_group_id = agbd.analytic_group_id
+							   AND agbd.analytic_date BETWEEN #{init_date}::timestamp AND #{end_date}::timestamp
+							   AND agbd.analytic_group_by_date_id  = aw.analytic_group_by_date_id
+							   AND (aw.analytics_warning_subtype IN (SELECT alert_subtype_id FROM alert_subtype WHERE alert_type_id = 2))
+							   GROUP BY aw.analytics_warning_subtype,ag.analytic_group_id
+						 )
+				     	SELECT
+						<include refid="allAnalyticsGroupWarningsColumms" />
+						   FROM
+				            (
+						       SELECT ROW_NUMBER() OVER(ORDER BY case when t.group_name = 'All' then 0 else 1 end asc, ${orderBy}) as RowNum
+									  ,t.group_id
+									  , CASE t.group_name WHEN 'All' THEN 'All Lights' ELSE t.group_name END as group_name
+									  , coalesce(t.power_surge,0) AS power_surge, coalesce(t.brownout_detected,0) AS brownout_detected, coalesce(t.communication_fail,0) AS communication_fail
+									  , t.grouping_id, coalesce(t.high_current,0) AS high_current,coalesce(t.low_current,0) AS low_current, coalesce(t.reverse_energy,0) AS reverse_energy
+									  , coalesce(t.metrology_reset,0) AS metrology_reset, coalesce(t.total,0) AS total
+								FROM
+									(
+										SELECT ag.analytic_group_id group_id ,
+				                               ag.analytic_group_name group_name
+				                               ,ag.grouping_id
+				                               ,(select awt.amount from analytics_warnings_total awt where awt.analytics_warning_subtype = #{power_surge_id} and ag.analytic_group_id = awt.analytic_group_id) as power_surge
+											   ,(select awt.amount from analytics_warnings_total awt where awt.analytics_warning_subtype = #{brownout_detected_id} and ag.analytic_group_id = awt.analytic_group_id) AS brownout_detected
+											   ,(select awt.amount from analytics_warnings_total awt where awt.analytics_warning_subtype = #{communication_fail_id} and ag.analytic_group_id = awt.analytic_group_id) AS communication_fail
+											   ,(select awt.amount from analytics_warnings_total awt where awt.analytics_warning_subtype = #{high_current_id} and ag.analytic_group_id = awt.analytic_group_id) AS high_current
+											   ,(select awt.amount from analytics_warnings_total awt where awt.analytics_warning_subtype = #{low_current_id} and ag.analytic_group_id = awt.analytic_group_id) AS low_current
+											   ,(select awt.amount from analytics_warnings_total awt where awt.analytics_warning_subtype = #{reverse_energy_id} and ag.analytic_group_id = awt.analytic_group_id) AS reverse_energy
+											   ,(select awt.amount from analytics_warnings_total awt where awt.analytics_warning_subtype = #{metrology_reset_id} and ag.analytic_group_id = awt.analytic_group_id) AS metrology_reset
+											   ,(select sum(awt.amount) from analytics_warnings_total awt where ag.analytic_group_id = awt.analytic_group_id) AS total
+									      FROM analytics_group ag
+										 WHERE ag.tenant_id = #{tenant_id}
+										   <if test="allowedGroupIdList == null and group_id != null">
+											           AND ag.analytic_group_id = #{group_id}
+										   </if>
+											  <if test="allowedGroupIdList != null">
+											   		   AND ag.analytic_group_id IN (SELECT analytic_group_id
+											   		                                   FROM analytics_group
+											   		                                 WHERE grouping_id IN
+											   		                                 <foreach item="item" index="index" collection="allowedGroupIdList"
+																			               	open="(" separator="," close=")">
+																			    	      #{item}
+																		            </foreach>)
+
+												      AND ag.grouping_id IN
+												      <foreach item="item" index="index" collection="allowedGroupIdList"
+											               	open="(" separator="," close=")">
+											    	      #{item}
+											          </foreach>
+											</if>
+										) t
+						 ) AS ANALYTICS_WARNING_GROUP_PAGE
+			  </when>
+			  <otherwise>
+			  SELECT
+				<include refid="allAnalyticsGroupWarningsColumms" />
+				   FROM
+		            (
+					  SELECT group_id
+					         ,CASE group_name WHEN 'All' THEN 'All Lights' ELSE group_name END AS group_name
+					         ,power_surge
+					         ,brownout_detected
+					         ,communication_fail
+					         ,high_current
+					         ,low_current
+					         ,reverse_energy
+					         ,metrology_reset
+					         ,total
+					         ,ROW_NUMBER() OVER(ORDER BY CASE WHEN group_name = 'All' THEN 0 ELSE 1 END ASC, ${orderBy}) AS RowNum
+					   FROM
+					     (SELECT t.group_id
+						         ,t.group_name
+						         ,t.power_surge
+					             ,t.brownout_detected
+					             ,t.communication_fail
+					             ,t.high_current
+					             ,t.low_current
+					             ,t.reverse_energy
+					             ,t.metrology_reset
+						         ,(t.power_surge + t.brownout_detected + t.communication_fail + t.high_current + t.low_current + t.reverse_energy + t.metrology_reset) total
+					      FROM
+					        (SELECT ag.analytic_group_name AS group_name
+					                ,sum(aws.power_surge_detected) AS power_surge
+					                ,sum(aws.brownout_detected) AS brownout_detected
+					                ,sum(aws.communication_fail) AS communication_fail
+					                ,sum(aws.high_current) AS high_current
+					                ,sum(aws.low_current) AS low_current
+					                ,sum(aws.reverse_energy) AS reverse_energy
+					                ,sum(aws.metrology_reset) AS metrology_reset
+					                ,aws.group_id
+					         FROM analytics_warnings_summarized aws
+					         INNER JOIN analytics_group ag ON(ag.analytic_group_id = aws.group_id)
+					         <if test="allowedGroupIdList != null">
+								INNER JOIN light_grouping lg ON (lg.grouping_id = ag.grouping_id)
+							 </if>
+					        WHERE aws.tenant_id = #{tenant_id}
+							  AND aws.range_date = #{range_date_id}
+							 <if test="allowedGroupIdList != null and group_id == null">
+							   AND lg.grouping_id IN
+							      <foreach item="item" index="index" collection="allowedGroupIdList"
+						               	open="(" separator="," close=")">
+						    	      #{item}
+						          </foreach>
+							 </if>
+							 <if test="group_id != null">
+							   	 AND aws.group_id = #{group_id}
+							 </if>
+					         GROUP BY ag.analytic_group_name, aws.group_id
+					         ORDER BY aws.group_id
+					        ) AS t
+					    ) AS ANALYTICS_GROUP_PAGE
+				  ) AS ANALYTICS_WARNING_GROUP_PAGE
+			    </otherwise>
+			    </choose>
+			<if test="pageSize > 0">
+	            OFFSET #{startRow,jdbcType=INTEGER}
+	            LIMIT #{pageSize,jdbcType=INTEGER}
+		    </if>
+	</select>
+	<!-- Fetch All Analytics Groups Installed -->
+	<select id="fetchAllAnalyticsGroupsInstalled" parameterType="map"
+		resultMap="AnalyticsGroupTypeLightResult">
+		    <choose>
+		     <when test="range_date_id == null or range_date_id == 0 or range_date_id == 1">
+		     	WITH analytics_installed_total AS
+				  (
+					SELECT ai.light_type_id,
+					       ag.analytic_group_id,
+					       COALESCE(SUM(ai.value),0) AS amount
+					  FROM analytics_installed ai
+					       ,analytics_group_by_date agbd
+					       ,analytics_group ag
+					 WHERE ag.tenant_id = #{tenant_id}
+					   AND ag.analytic_group_id = agbd.analytic_group_id
+					   AND agbd.analytic_date BETWEEN #{init_date}::timestamp AND #{end_date}::timestamp
+					   AND agbd.analytic_group_by_date_id  = ai.analytic_group_by_date_id
+					   GROUP BY ai.light_type_id,ag.analytic_group_id
+				  )
+		     	  SELECT
+				    <include refid="allAnalyticsGroupTypeLightColumms" />
+				    FROM
+					(
+					    SELECT ROW_NUMBER() OVER(ORDER BY case when t.group_name = 'All' then 0 else 1 end asc, ${orderBy}) as RowNum
+								,t.group_id
+								,CASE t.group_name WHEN 'All' THEN 'All Lights' ELSE t.group_name END as group_name
+								,coalesce(t.induction,0) AS induction, coalesce(t.led,0) AS led, coalesce(t.other,0) AS other, coalesce(t.total,0) AS total, t.grouping_id
+					      FROM
+					      (
+								SELECT ag.analytic_group_id group_id ,
+								       ag.analytic_group_name group_name
+								       ,ag.grouping_id
+								       ,(select ait.amount from analytics_installed_total ait where ait.light_type_id = #{induction_type_id} and ag.analytic_group_id = ait.analytic_group_id) AS induction
+								       ,(select ait.amount from analytics_installed_total ait where ait.light_type_id = #{led_type_id} and ag.analytic_group_id = ait.analytic_group_id) AS LED
+								       ,(select ait.amount from analytics_installed_total ait where ait.light_type_id = #{other_type_id} and ag.analytic_group_id = ait.analytic_group_id) AS other
+								       ,(select sum(ait.amount) from analytics_installed_total ait where ag.analytic_group_id = ait.analytic_group_id) AS total
+								 FROM analytics_group ag
+								WHERE ag.tenant_id = #{tenant_id}
+								 <if test="allowedGroupIdList == null and group_id != null">
+										AND ag.analytic_group_id = #{group_id}
+								 </if>
+								  <if test="allowedGroupIdList != null">
+								   		AND ag.analytic_group_id IN (SELECT analytic_group_id
+								   		                               FROM analytics_group
+								   		                              WHERE grouping_id IN
+							   		                                 <foreach item="item" index="index" collection="allowedGroupIdList"
+															               	open="(" separator="," close=")">
+															    	      #{item}
+														            </foreach>)
+
+									      AND ag.grouping_id IN
+									      <foreach item="item" index="index" collection="allowedGroupIdList"
+								               	open="(" separator="," close=")">
+								    	      #{item}
+								          </foreach>
+								 </if>
+					      ) AS t
+				    ) AS ANALYTICS_INSTALLED_GROUP_PAGE
+		     </when>
+		     <otherwise>
+		       SELECT
+			     <include refid="allAnalyticsGroupTypeLightColumms" />
+			     FROM
+				  (
+				   SELECT group_id
+					      ,CASE group_name WHEN 'All' THEN 'All Lights' ELSE group_name END AS group_name
+					      ,induction
+					      ,led
+					      ,other
+					      ,total
+					      ,ROW_NUMBER() OVER(ORDER BY case when group_name = 'All' then 0 else 1 end asc, ${orderBy}) as RowNum
+				   FROM
+				     (
+						SELECT t.group_id
+						       ,t.group_name
+						       ,t.induction
+						       ,t.led
+						       ,t.other
+						       ,(t.induction + t.led + t.other) total
+						  FROM
+						    (
+								 SELECT ag.analytic_group_name AS group_name
+								        ,sum(ais.induction) AS induction
+								        ,sum(ais.led) AS led
+								        ,sum(ais.other) AS other
+								        ,ais.group_id
+								  FROM analytics_installed_summarized ais
+								  INNER JOIN analytics_group ag ON(ag.analytic_group_id = ais.group_id)
+								   <if test="allowedGroupIdList != null">
+								      INNER JOIN light_grouping lg ON (lg.grouping_id = ag.grouping_id)
+								   </if>
+								 WHERE ais.tenant_id = #{tenant_id}
+							   	   AND ais.range_date = #{range_date_id}
+								 <if test="allowedGroupIdList != null and group_id == null">
+								   AND lg.grouping_id IN
+								      <foreach item="item" index="index" collection="allowedGroupIdList"
+							               	open="(" separator="," close=")">
+							    	      #{item}
+							          </foreach>
+								 </if>
+								 <if test="group_id != null">
+						   	       AND ais.group_id = #{group_id}
+						         </if>
+								GROUP BY ag.analytic_group_name, ais.group_id
+								ORDER BY ais.group_id
+						    ) AS t
+				    ) AS ANALYTICS_GROUP_PAGE
+				 ) AS ANALYTICS_INSTALLED_GROUP_PAGE
+		  </otherwise>
+		</choose>
+		<if test="pageSize > 0">
+            OFFSET #{startRow,jdbcType=INTEGER}
+            LIMIT #{pageSize,jdbcType=INTEGER}
+	    </if>
+	</select>
+
+	<!-- Fetch All Analytics Groups Consumption -->
+	<select id="fetchAllAnalyticsGroupsConsumption" parameterType="map"
+		resultMap="AnalyticsGroupTypeLightResult">
+
+		  WITH analytics_consumption_total AS
+		  (
+			SELECT ac.light_type_id,
+			       ag.analytic_group_id,
+			       COALESCE(SUM(ac.value),0) AS amount
+			  FROM analytics_consumption  ac
+			       ,analytics_group_by_date agbd
+			       ,analytics_group ag
+			 WHERE ag.tenant_id = #{tenant_id}
+			   AND ag.analytic_group_id = agbd.analytic_group_id
+			   AND agbd.analytic_date BETWEEN #{init_date}::timestamp AND #{end_date}::timestamp
+			   AND agbd.analytic_group_by_date_id  = ac.analytic_group_by_date_id
+			   GROUP BY ac.light_type_id,ag.analytic_group_id
+		  )
+		  SELECT group_id
+		         ,group_name
+			     ,round(cast(induction AS numeric),3) AS	induction
+			     ,round(cast(led AS numeric),3) AS led, round(cast(other AS numeric),3) AS other
+			     ,round(cast(total AS numeric),3) AS total
+			FROM
+			   (
+				SELECT ROW_NUMBER() OVER(ORDER BY case when t.group_name = 'All' then 0 else 1 end asc, ${orderBy}) as RowNum
+					  ,t.group_id
+					  ,CASE t.group_name WHEN 'All' THEN 'All Lights' ELSE t.group_name END as group_name
+					  ,coalesce(t.induction,0) AS induction, coalesce(t.led,0) AS led, coalesce(t.other,0) AS other, coalesce(t.total,0) AS total, t.grouping_id
+				 FROM
+			     (
+			       SELECT  ag.analytic_group_id group_id ,
+					       ag.analytic_group_name group_name
+					       ,ag.grouping_id
+					       ,(select act.amount from analytics_consumption_total act where act.light_type_id = #{induction_type_id} and ag.analytic_group_id = act.analytic_group_id) AS induction
+					       ,(select act.amount from analytics_consumption_total act where act.light_type_id = #{led_type_id} and ag.analytic_group_id = act.analytic_group_id) AS LED
+					       ,(select act.amount from analytics_consumption_total act where act.light_type_id = #{other_type_id} and ag.analytic_group_id = act.analytic_group_id) AS other
+					       ,(select sum(act.amount) from analytics_consumption_total act where ag.analytic_group_id = act.analytic_group_id) AS total
+					 FROM analytics_group ag
+					WHERE ag.tenant_id = #{tenant_id}
+			     	<if test="allowedGroupIdList == null and group_id != null">
+							AND ag.analytic_group_id = #{group_id}
+				    </if>
+					<if test="allowedGroupIdList != null">
+					   		AND ag.analytic_group_id IN (SELECT analytic_group_id
+					   		                               FROM analytics_group
+					   		                              WHERE grouping_id IN
+				   		                                 <foreach item="item" index="index" collection="allowedGroupIdList"
+												               	open="(" separator="," close=")">
+												    	      #{item}
+											            </foreach>)
+
+					       AND ag.grouping_id IN
+					       <foreach item="item" index="index" collection="allowedGroupIdList"
+				                	open="(" separator="," close=")">
+				    	       #{item}
+				          </foreach>
+				   </if>
+
+				 ) AS t
+			) AS ANALYTICS_GROUP_PAGE
+		<if test="pageSize > 0">
+            OFFSET #{startRow,jdbcType=INTEGER}
+            LIMIT #{pageSize,jdbcType=INTEGER}
+		</if>
+	</select>
+
+	<!-- Fetch Analytics Eco-Mode By Group -->
+	<select id="fetchAnalyticsEcoModeByGroup" parameterType="map" resultMap="AnalyticsGroupEcoModeResult">
+		SELECT group_id
+		       ,group_name
+		       ,total as ecomode_percent
+		       ,ecomode_measured
+		       ,ecomode_baseline
+		 FROM
+			(
+				 SELECT analytic_group_id AS group_id
+				       ,CASE group_name WHEN 'All' THEN 'All Lights' ELSE group_name END as group_name
+				       ,total
+				       ,ecomode_measured
+				       ,ecomode_baseline
+				       ,ROW_NUMBER() OVER(ORDER BY case when group_name = 'All' then 0 else 1 end asc, ${orderBy}) as RowNum
+				   FROM (
+						SELECT ag1.analytic_group_id
+						       ,ag1.analytic_group_name as group_name
+						       ,coalesce(ecomode_percent,0) as total
+						       ,coalesce(ecomode_measured,0) as ecomode_measured
+						       ,coalesce(ecomode_baseline,0) as ecomode_baseline
+						  FROM analytics_group ag1
+						LEFT JOIN (
+									 SELECT ag.analytic_group_id
+										,ag.analytic_group_name
+										,CASE WHEN COALESCE(sum(ae.ecomode_baseline),0) > 0
+								                  THEN ((sum(ae.ecomode_baseline) - sum(ecomode_measured)) / sum(ae.ecomode_baseline)) * 100
+								                  ELSE NULL
+								              END
+								         AS ecomode_percent
+										,sum(ecomode_measured) as ecomode_measured
+										,sum(ecomode_baseline) as ecomode_baseline
+									   FROM analytics_ecomode ae
+									   INNER JOIN analytics_group_by_date agbd on (agbd.analytic_group_by_date_id = ae.analytic_group_by_date_id)
+									   INNER JOIN analytics_group ag on (ag.analytic_group_id = agbd.analytic_group_id)
+									 WHERE ag.tenant_id = #{tenant_id}
+									   AND agbd.analytic_date BETWEEN #{init_date}::timestamp AND #{end_date}::timestamp
+									   GROUP BY ag.analytic_group_id,ag.analytic_group_name
+							     ) ls on (ag1.analytic_group_id = ls.analytic_group_id)
+					   WHERE tenant_id = #{tenant_id}
+					      <if test="allowedGroupIdList != null and group_id == null">
+					        AND ag1.grouping_id IN
+									               <foreach item="item" index="index" collection="allowedGroupIdList"
+										               	open="(" separator="," close=")">
+										    	       #{item}
+										           </foreach>
+                         </if>
+                         <if test="group_id != null">
+					   	   AND ag1.analytic_group_id = #{group_id}
+					     </if>
+
+			        ) analytic_ecomode
+			) AS ANALYTICS_GROUP_PAGE
+		<if test="pageSize > 0 ">
+			WHERE
+			RowNum BETWEEN #{startRow} AND (#{startRow} + #{pageSize})
+			OFFSET (  #{startPage} * #{pageSize} )
+			LIMIT #{pageSize}
+		</if>
+	</select>
+
+	<!-- Fetch Analytics Carbon Credits By Group -->
+	<select id="fetchAnalyticsCarbonCreditsByGroup" parameterType="map"	resultMap="AnalyticsGroupCarbonCreditsResult">
+		SELECT group_id, group_name,
+	           coalesce(round(cast(total AS numeric),3),0) AS credits_created,
+               coalesce(round(cast(energy_saved AS numeric),3),0) AS energy_saved,
+               coalesce(round(cast(barrels_of_oil_saved AS numeric),3),0) AS barrels_of_oil_saved,
+               coalesce(round(cast(tons_of_co_saved AS numeric),3),0) AS tons_of_co_saved
+		 FROM
+			(
+			  SELECT ROW_NUMBER() OVER(ORDER BY case when t.group_name = 'All' then 0 else 1 end asc, ${orderBy}) as RowNum
+					,t.group_id
+					,CASE t.group_name WHEN 'All' THEN 'All Lights' ELSE t.group_name END as group_name
+					,t.total
+					,t.energy_saved
+					,t.barrels_of_oil_saved
+					,t.tons_of_co_saved
+					,t.grouping_id
+			   FROM (
+			       <if test="allowedGroupIdList == null">
+
+					      SELECT ag.analytic_group_id group_id
+									,ag.analytic_group_name group_name
+						            ,ag.grouping_id
+									,get_analytics_carbon_credits_total(#{tenant_id},ag.analytic_group_id,#{init_date}::TIMESTAMP,#{end_date}::TIMESTAMP,#{carbon_credits_factor},NULL,#{allowedGroupsToProc}) AS total
+									,get_analytics_energy_savings_total(#{tenant_id},ag.analytic_group_id,#{init_date}::TIMESTAMP,#{end_date}::TIMESTAMP,#{allowedGroupsToProc}) AS energy_saved
+									,get_analytics_carbon_credits_total(#{tenant_id},ag.analytic_group_id,#{init_date}::TIMESTAMP,#{end_date}::TIMESTAMP,#{barrels_of_oil_factor},NULL,#{allowedGroupsToProc}) AS barrels_of_oil_saved
+									,get_analytics_carbon_credits_total(#{tenant_id},ag.analytic_group_id,#{init_date}::TIMESTAMP,#{end_date}::TIMESTAMP,#{metric_of_co_factor},NULL,#{allowedGroupsToProc}) AS tons_of_co_saved
+							  FROM analytics_group ag
+							 WHERE ag.tenant_id = #{tenant_id}
+							   <if test="group_id == null">
+							   	   AND NULL IS NULL
+						        </if>
+							    <if test="group_id != null">
+							   	   AND #{group_id} IS NULL
+							    </if>
+						  UNION ALL
+			      </if>
+					SELECT ag1.analytic_group_id group_id
+						  ,ag1.analytic_group_name group_name
+				          ,ag1.grouping_id
+				           <if test="allowedGroupsToProc == null ">
+						      ,get_analytics_carbon_credits_total(#{tenant_id},ag1.analytic_group_id,#{init_date}::TIMESTAMP,#{end_date}::TIMESTAMP,#{carbon_credits_factor},NULL,#{allowedGroupsToProc}) AS total
+							  ,get_analytics_energy_savings_total(#{tenant_id},ag1.analytic_group_id,#{init_date}::TIMESTAMP,#{end_date}::TIMESTAMP,#{allowedGroupsToProc}) AS energy_saved
+							  ,get_analytics_carbon_credits_total(#{tenant_id},ag1.analytic_group_id,#{init_date}::TIMESTAMP,#{end_date}::TIMESTAMP,#{barrels_of_oil_factor},NULL,#{allowedGroupsToProc}) AS barrels_of_oil_saved
+							  ,get_analytics_carbon_credits_total(#{tenant_id},ag1.analytic_group_id,#{init_date}::TIMESTAMP,#{end_date}::TIMESTAMP,#{metric_of_co_factor},NULL,#{allowedGroupsToProc}) AS tons_of_co_saved
+				          </if>
+				          <if test="allowedGroupsToProc != null ">
+						      ,get_analytics_carbon_credits_total(#{tenant_id},ag1.analytic_group_id,#{init_date}::TIMESTAMP,#{end_date}::TIMESTAMP,#{carbon_credits_factor},NULL,to_char(ag1.grouping_id,'9999')) AS total
+							  ,get_analytics_energy_savings_total(#{tenant_id},ag1.analytic_group_id,#{init_date}::TIMESTAMP,#{end_date}::TIMESTAMP,to_char(ag1.grouping_id,'9999')) AS energy_saved
+							  ,get_analytics_carbon_credits_total(#{tenant_id},ag1.analytic_group_id,#{init_date}::TIMESTAMP,#{end_date}::TIMESTAMP,#{barrels_of_oil_factor},NULL,to_char(ag1.grouping_id,'9999')) AS barrels_of_oil_saved
+							  ,get_analytics_carbon_credits_total(#{tenant_id},ag1.analytic_group_id,#{init_date}::TIMESTAMP,#{end_date}::TIMESTAMP,#{metric_of_co_factor},NULL,to_char(ag1.grouping_id,'9999')) AS tons_of_co_saved
+				          </if>
+
+					 FROM analytics_group ag1
+					WHERE ag1.tenant_id = #{tenant_id}
+				     <if test="allowedGroupIdList == null">
+					           AND ag1.analytic_group_id = #{group_id}
+					 </if>
+					  <if test="allowedGroupIdList != null">
+					   		   AND ag1.analytic_group_id IN (SELECT analytic_group_id
+					   		                                   FROM analytics_group
+					   		                                 WHERE grouping_id IN
+					   		                                 <foreach item="item" index="index" collection="allowedGroupIdList"
+													               	open="(" separator="," close=")">
+													    	      #{item}
+												            </foreach>)
+
+						      AND ag1.grouping_id IN
+						      <foreach item="item" index="index" collection="allowedGroupIdList"
+					               	open="(" separator="," close=")">
+					    	      #{item}
+					          </foreach>
+					</if>
+					) t
+			) AS
+		ANALYTICS_GROUP_PAGE
+		<if test="pageSize > 0 ">
+			WHERE
+			RowNum BETWEEN #{startRow} AND (#{startRow} + #{pageSize})
+			OFFSET (  #{startPage} * #{pageSize} )
+			LIMIT #{pageSize}
+		</if>
+	</select>
+
+	<!-- Fetch Dash Board Header -->
+	<select id="fetchDashboardHeader" resultMap="AnalyticsGroupColumnsResult">
+		SELECT 	description, date_time, amount
+		  FROM get_dashboard_header(#{tenant_id},#{carbon_credits_factor}, #{allowedGroupsToProc})
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="paginationTotalRows" parameterType="map" resultType="int">
+	    SELECT COUNT(1)
+             FROM (SELECT analytic_group_id
+                     FROM analytics_group
+                   WHERE tenant_id = #{tenant_id}
+                     AND ((<if test="group_id == null">null</if>
+                           <if test="group_id != null">#{group_id}</if>is not null
+                     AND analytic_group_id = <if test="group_id == null">null</if>
+                                             <if test="group_id != null">(SELECT analytic_group_id FROM analytics_group WHERE grouping_id = #{group_id})</if>)
+                        OR ( <if test="group_id == null">null</if>
+                             <if test="group_id != null">#{group_id}</if> is null))
+                     <if test="allowedGroupIdList != null">
+				     AND grouping_id IN
+				     <foreach item="item" index="index" collection="allowedGroupIdList"
+			           	open="(" separator="," close=")">
+			   	      #{item}
+			         </foreach>
+			 	  </if>
+               ) AS ANALYTICS_PAGE
+
+	</select>
+
+<!--     Fetch Status Message By Id -->
+<!-- 	<select id="fetchStatusMessageById" resultMap="StatusMessageResult"> -->
+
+<!-- 		 SELECT s.status_message_id -->
+<!-- 				,CASE WHEN (SELECT count(1) FROM status_message sm WHERE sm.light_id = #{light_id} AND sm.message_type = 99) > 0 -->
+<!-- 			          THEN -->
+<!-- 						(SELECT sm.message_date FROM status_message sm WHERE sm.light_id = #{light_id} AND sm.message_type = 99) -->
+<!-- 				      ELSE -->
+<!-- 				      	s.message_date -->
+<!-- 				 END AS message_date -->
+<!-- 				,s.status_id as status -->
+<!-- 		   FROM status_message s JOIN current_alarm_warning_message cawm ON s.status_message_id = cawm.status_message_id -->
+<!-- 		  WHERE s.status_message_transation_id = (SELECT status_message_transation_id FROM light WHERE light_id = #{light_id}) -->
+<!-- 		  ORDER BY s.status_message_id DESC -->
+<!-- 		  LIMIT 1; -->
+
+<!-- 	</select> -->
+
+	<!-- Fetch All Analytics Alarms By Date -->
+	<select id="fetchAllAnalyticsAlarmsByDate" resultMap="AnalyticsGroupColumnsResult">
+		<choose>
+			  <when test="group_id == null and (range_date_id == null or range_date_id == 0 or range_date_id == 1)">
+	   				SELECT date_time, description, amount FROM get_analytics_alarms_summarized(#{tenant_id}
+	   				                                                                              ,(SELECT analytic_group_id
+																									  FROM analytics_group
+																									 WHERE analytic_group_name = 'All'
+																									   AND tenant_id = #{tenant_id})
+	   				                                                                              , null
+	   				                                                                              , #{init_date}::timestamp
+	   				                                                                              , #{end_date}::timestamp)
+			</when>
+			<when test="group_id == null and range_date_id > 1">
+	   				SELECT date_time, description, amount FROM get_analytics_alarms_summarized(#{tenant_id}
+	   				                                                                              ,(SELECT analytic_group_id
+																									  FROM analytics_group
+																									 WHERE analytic_group_name = 'All'
+																									   AND tenant_id = #{tenant_id})
+	   				                                                                              ,#{range_date_id}
+	   				                                                                              , #{init_date}::timestamp
+	   				                                                                              , #{end_date}::timestamp)
+			</when>
+			<when test="group_id != null and (range_date_id == null or range_date_id == 0 or range_date_id == 1)">
+	   				SELECT date_time, description, amount FROM get_analytics_alarms_summarized(#{tenant_id}
+	   				                                                                              ,#{group_id}
+	   				                                                                              , null
+	   				                                                                              , #{init_date}::timestamp
+	   				                                                                              , #{end_date}::timestamp)
+			</when>
+			<otherwise>
+			   SELECT date_time, description, amount FROM get_analytics_alarms_summarized(#{tenant_id},#{group_id},#{range_date_id}, #{init_date}::timestamp, #{end_date}::timestamp)
+			</otherwise>
+		</choose>
+	</select>
+
+	<!-- Fetch All Analytics Warnings By Date -->
+	<select id="fetchAllAnalyticsWarningsByDate" resultMap="AnalyticsGroupColumnsResult">
+		<choose>
+			<when test="group_id == null and (range_date_id == null or range_date_id == 0 or range_date_id == 1)">
+	   				SELECT date_time, description, amount FROM get_analytics_warnings_summarized(#{tenant_id}
+	   				                                                                              ,(SELECT analytic_group_id
+																									  FROM analytics_group
+																									 WHERE analytic_group_name = 'All'
+																									   AND tenant_id = #{tenant_id})
+	   				                                                                              , null
+	   				                                                                              , #{init_date}::timestamp
+	   				                                                                              , #{end_date}::timestamp)
+			</when>
+			<when test="group_id == null and range_date_id > 1">
+	   				SELECT date_time, description, amount FROM get_analytics_warnings_summarized(#{tenant_id}
+	   				                                                                              ,(SELECT analytic_group_id
+																									  FROM analytics_group
+																									 WHERE analytic_group_name = 'All'
+																									   AND tenant_id = #{tenant_id})
+	   				                                                                              ,#{range_date_id}
+	   				                                                                              , #{init_date}::timestamp
+	   				                                                                              , #{end_date}::timestamp)
+			</when>
+			<when test="group_id != null and (range_date_id == null or range_date_id == 0 or range_date_id == 1)">
+	   				SELECT date_time, description, amount FROM get_analytics_warnings_summarized(#{tenant_id}
+	   				                                                                              ,#{group_id}
+	   				                                                                              , null
+	   				                                                                              , #{init_date}::timestamp
+	   				                                                                              , #{end_date}::timestamp)
+			</when>
+			<otherwise>
+			   SELECT date_time, description, amount FROM get_analytics_warnings_summarized(#{tenant_id},#{group_id},#{range_date_id}, #{init_date}::timestamp, #{end_date}::timestamp)
+			</otherwise>
+	  </choose>
+   </select>
+
+	<!-- Fetch All Analytics Installed By Date -->
+	<select id="fetchAllAnalyticsInstalledByDate" resultMap="AnalyticsGroupColumnsResult">
+	  <choose>
+			<when test="group_id == null and (range_date_id == null or range_date_id == 0 or range_date_id == 1)">
+	   				SELECT date_time, description, amount FROM get_analytics_installed_summarized(#{tenant_id}
+	   				                                                                              ,(SELECT analytic_group_id
+																									  FROM analytics_group
+																									 WHERE analytic_group_name = 'All'
+																									   AND tenant_id = #{tenant_id})
+	   				                                                                              , null
+	   				                                                                              , #{init_date}::timestamp
+	   				                                                                              , #{end_date}::timestamp)
+			</when>
+			<when test="group_id == null and range_date_id > 1">
+	   				SELECT date_time, description, amount FROM get_analytics_installed_summarized(#{tenant_id}
+	   				                                                                              ,(SELECT analytic_group_id
+																									  FROM analytics_group
+																									 WHERE analytic_group_name = 'All'
+																									   AND tenant_id = #{tenant_id})
+	   				                                                                              ,#{range_date_id}
+	   				                                                                              , #{init_date}::timestamp
+	   				                                                                              , #{end_date}::timestamp)
+			</when>
+			<when test="group_id != null and (range_date_id == null or range_date_id == 0 or range_date_id == 1)">
+	   				SELECT date_time, description, amount FROM get_analytics_installed_summarized(#{tenant_id}
+	   				                                                                              ,#{group_id}
+	   				                                                                              , null
+	   				                                                                              , #{init_date}::timestamp
+	   				                                                                              , #{end_date}::timestamp)
+			</when>
+			<otherwise>
+			   SELECT date_time, description, amount FROM get_analytics_installed_summarized(#{tenant_id},#{group_id},#{range_date_id}, #{init_date}::timestamp, #{end_date}::timestamp)
+			</otherwise>
+	  </choose>
+	</select>
+
+	<!-- Fetch All Analytics Consumption By Date -->
+	<select id="fetchAllAnalyticsConsumptionByDate" resultMap="AnalyticsGroupColumnsResult">
+		SELECT TABLE_1.date AS date_time, TABLE_1.description, SUM(COALESCE(TABLE_2.value,0)) AS amount
+		  FROM
+		  (SELECT CASE WHEN (#{end_date}::DATE - #{init_date}::DATE) > ${month_days} THEN generate_series(#{init_date}::TIMESTAMP, #{end_date}::TIMESTAMP, INTERVAL '1 months')
+			       WHEN (#{end_date}::TIMESTAMP - #{init_date}::TIMESTAMP) = '23:59:59' THEN generate_series(#{init_date}::TIMESTAMP, #{end_date}::TIMESTAMP, INTERVAL '1 HOUR')
+			  ELSE generate_series(#{init_date}::TIMESTAMP, #{end_date}::TIMESTAMP, INTERVAL '1 day')
+			  END AS date,
+			  'sensus.mlc.lamp_type.induction' description,
+			   0 AS value
+		   UNION SELECT CASE WHEN (#{end_date}::DATE - #{init_date}::DATE) > ${month_days} THEN generate_series(#{init_date}::TIMESTAMP, #{end_date}::TIMESTAMP, INTERVAL '1 months')
+				     WHEN (#{end_date}::TIMESTAMP - #{init_date}::TIMESTAMP) = '23:59:59' THEN generate_series(#{init_date}::TIMESTAMP, #{end_date}::TIMESTAMP, INTERVAL '1 HOUR')
+				ELSE generate_series(#{init_date}::TIMESTAMP, #{end_date}::TIMESTAMP, INTERVAL '1 day')
+				END AS date,
+				'sensus.mlc.lamp_type.led' description,
+				0 AS value
+		   UNION SELECT CASE WHEN (#{end_date}::DATE - #{init_date}::DATE) > ${month_days} THEN generate_series(#{init_date}::TIMESTAMP, #{end_date}::TIMESTAMP, INTERVAL '1 months')
+				     WHEN (#{end_date}::TIMESTAMP - #{init_date}::TIMESTAMP) = '23:59:59' THEN generate_series(#{init_date}::TIMESTAMP, #{end_date}::TIMESTAMP, INTERVAL '1 HOUR')
+				ELSE generate_series(#{init_date}::TIMESTAMP, #{end_date}::TIMESTAMP, INTERVAL '1 day')
+				END AS date,
+				'sensus.mlc.lamp_type.other' description,
+				0 AS value
+		   ) AS TABLE_1
+		  LEFT JOIN
+		   (
+		      SELECT alt.label_key AS description ,CASE WHEN (#{end_date}::DATE - #{init_date}::DATE) > ${month_days} THEN date_trunc('MONTH',agbd.analytic_date)
+									    WHEN (#{end_date}::TIMESTAMP - #{init_date}::TIMESTAMP) = '23:59:59' THEN date_trunc('HOUR',agbd.analytic_date)
+									ELSE date_trunc('day',agbd.analytic_date)
+									END AS date  ,ac.value
+			FROM analytics_light_type alt
+			INNER JOIN analytics_consumption ac on (ac.light_type_id = alt.light_type_id)
+			INNER JOIN analytics_group_by_date agbd ON (agbd.analytic_group_by_date_id = ac.analytic_group_by_date_id)
+			INNER JOIN analytics_group ag ON (ag.analytic_group_id = agbd.analytic_group_id)
+		      WHERE ag.tenant_id = #{tenant_id}
+			AND agbd.analytic_date BETWEEN #{init_date}::TIMESTAMP AND #{end_date}::TIMESTAMP
+
+			  <if test="allowedGroupIdList != null and group_id == null">
+				   AND ag.grouping_id IN
+				       <foreach item="item" index="index" collection="allowedGroupIdList"
+						open="(" separator="," close=")">
+					       #{item}
+					   </foreach>
+		      </if>
+		      <if test="group_id != null">
+			  AND ag.analytic_group_id = #{group_id}
+		     </if>
+		     <if test="group_id == null">
+		         AND ag.analytic_group_id = (SELECT analytic_group_id FROM analytics_group WHERE analytic_group_name = 'All' AND tenant_id = #{tenant_id})
+		     </if>
+
+		   ) TABLE_2 ON (CASE WHEN (#{end_date}::DATE - #{init_date}::DATE) > ${month_days} THEN date_trunc('MONTH',TABLE_1.date)
+				      WHEN (#{end_date}::TIMESTAMP - #{init_date}::TIMESTAMP) = '23:59:59' THEN TABLE_1.date::TIMESTAMP
+				 ELSE TABLE_1.date::date
+				 END) =
+				(CASE WHEN (#{end_date}::DATE - #{init_date}::DATE) > ${month_days} THEN date_trunc('MONTH',TABLE_2.date)
+				      WHEN (#{end_date}::TIMESTAMP - #{init_date}::TIMESTAMP) = '23:59:59' THEN TABLE_2.date::TIMESTAMP
+				 ELSE TABLE_2.date::date
+				 END)
+				AND TABLE_1.description = TABLE_2.description::text
+		GROUP BY TABLE_1.description,TABLE_1.date
+		ORDER BY TABLE_1.date
+	</select>
+
+	<!-- Fetch All Analytics Eco-Mode By Date -->
+	<select id="fetchAllAnalyticsEcoModeByDate" resultMap="AnalyticsGroupColumnsResultWithoutTypeHandler">
+	  SELECT TABLE_1.date AS date_time, TABLE_1.description, SUM(COALESCE(TABLE_2.value,0)) AS amount
+		  FROM
+		  (
+           SELECT CASE WHEN (#{end_date}::DATE - #{init_date}::DATE) > ${month_days} THEN generate_series(#{init_date}::TIMESTAMP, #{end_date}::TIMESTAMP, INTERVAL '1 months')
+		               WHEN (#{end_date}::TIMESTAMP - #{init_date}::TIMESTAMP) = '23:59:59' THEN generate_series(#{init_date}::TIMESTAMP, #{end_date}::TIMESTAMP, INTERVAL '1 HOUR')
+		          ELSE generate_series(#{init_date}::TIMESTAMP, #{end_date}::TIMESTAMP, INTERVAL '1 day')
+		          END AS date,
+		          'sensus.mlc.ecomode_consumption.measured' description,
+		           0 AS value
+		        UNION
+		        SELECT CASE WHEN (#{end_date}::DATE - #{init_date}::DATE) > ${month_days} THEN generate_series(#{init_date}::TIMESTAMP, #{end_date}::TIMESTAMP, INTERVAL '1 months')
+		                     WHEN (#{end_date}::TIMESTAMP - #{init_date}::TIMESTAMP) = '23:59:59' THEN generate_series(#{init_date}::TIMESTAMP, #{end_date}::TIMESTAMP, INTERVAL '1 HOUR')
+		                ELSE generate_series(#{init_date}::TIMESTAMP, #{end_date}::TIMESTAMP, INTERVAL '1 day')
+		                END AS date,
+		                'sensus.mlc.ecomode_consumption.baseline' description,
+		                0 AS value
+
+		  ) AS TABLE_1
+	      LEFT JOIN
+		  (
+			SELECT analytic_date
+			       ,description
+			       ,value
+			  FROM(
+						SELECT label_key as description
+						       ,CASE WHEN label_key = 'sensus.mlc.ecomode_consumption.measured' THEN ecomode_measured ELSE ecomode_baseline END AS value
+						       ,CASE WHEN (#{end_date}::DATE - #{init_date}::DATE) > ${month_days} THEN date_trunc('MONTH',agbd.analytic_date)
+							     WHEN (#{end_date}::TIMESTAMP - #{init_date}::TIMESTAMP) = '23:59:59' THEN date_trunc('HOUR',agbd.analytic_date)
+							   ELSE date_trunc('day',agbd.analytic_date)
+							   END AS analytic_date
+						  FROM analytics_eco_mode_type aet
+						  CROSS JOIN  analytics_ecomode ae
+						  INNER JOIN analytics_group_by_date agbd ON (agbd.analytic_group_by_date_id = ae.analytic_group_by_date_id)
+						  INNER JOIN analytics_group ag ON (ag.analytic_group_id = agbd.analytic_group_id)
+						WHERE ag.tenant_id = #{tenant_id}
+						  AND agbd.analytic_date BETWEEN #{init_date}::TIMESTAMP AND  #{end_date}::TIMESTAMP
+					     <if test="allowedGroupIdList != null and group_id == null">
+						   AND ag.grouping_id IN
+						       <foreach item="item" index="index" collection="allowedGroupIdList"
+								open="(" separator="," close=")">
+							       #{item}
+							   </foreach>
+					      </if>
+					      <if test="group_id != null">
+						  AND ag.analytic_group_id = #{group_id}
+					     </if>
+					     <if test="group_id == null">
+					         AND ag.analytic_group_id = (SELECT analytic_group_id FROM analytics_group WHERE analytic_group_name = 'All' AND tenant_id = #{tenant_id})
+					     </if>
+			      )t
+	         )TABLE_2 ON (CASE WHEN (#{end_date}::DATE - #{init_date}::DATE) > ${month_days} THEN date_trunc('MONTH',TABLE_1.date)
+		                      WHEN (#{end_date}::TIMESTAMP - #{init_date}::TIMESTAMP) = '23:59:59' THEN TABLE_1.date::TIMESTAMP
+		                 ELSE TABLE_1.date::date
+		                 END) =
+		                (CASE WHEN (#{end_date}::DATE - #{init_date}::DATE) > ${month_days} THEN date_trunc('MONTH',TABLE_2.analytic_date)
+		                      WHEN (#{end_date}::TIMESTAMP - #{init_date}::TIMESTAMP) = '23:59:59' THEN TABLE_2.analytic_date::TIMESTAMP
+		                 ELSE TABLE_2.analytic_date::date
+		                 END)
+		                AND TABLE_1.description = TABLE_2.description::text
+		GROUP BY TABLE_1.description,TABLE_1.date
+		ORDER BY TABLE_1.date
+	</select>
+
+	<!-- Fetch All Analytics Carbon Credits By Date -->
+	<select id="fetchAllAnalyticsCarbonCreditsByDate" parameterType="map" resultMap="AnalyticsGroupColumnsResult">
+		SELECT 'sensus.mlc.conservation.credits_created'::character varying AS description,
+			       result.date_time::TIMESTAMP,
+			       SUM(result.amount) AS amount
+			  FROM (
+				SELECT  CASE WHEN (#{end_date}::DATE - #{init_date}::DATE) > ${month_days} THEN date_trunc('month',vw_dt.date)::date
+					     WHEN (#{end_date}::TIMESTAMP - #{init_date}::TIMESTAMP) = '23:59:59' THEN  date_trunc('hour',vw_dt.date)::timestamp
+					     ELSE date_trunc('day',vw_dt.date)::date
+					END AS date_time,
+					COALESCE(get_analytics_carbon_credits_total(#{tenant_id}, #{group_id},vw_dt.date::TIMESTAMP, (vw_dt.date:: date || ' 23:59:59')::TIMESTAMP,#{carbon_credits_factor},NULL,#{allowedGroupsToProc}),0)::NUMERIC AS amount
+				  FROM (
+					SELECT CASE WHEN (#{end_date}::TIMESTAMP - #{init_date}::TIMESTAMP) = '23:59:59' THEN generate_series(#{init_date}::TIMESTAMP, #{end_date}::TIMESTAMP, INTERVAL '1 hour')
+						    ELSE generate_series(#{init_date}::TIMESTAMP, #{end_date}::TIMESTAMP, INTERVAL '1 day')
+						END AS date
+					) vw_dt
+			       ) result
+			GROUP BY result.date_time
+
+			UNION
+
+			SELECT 'sensus.mlc.conservation.energy_saved'::character varying AS  description,
+			       result.date_time::TIMESTAMP,
+			       SUM(result.amount) AS amount
+			  FROM (
+				SELECT  CASE WHEN (#{end_date}::DATE - #{init_date}::DATE) > ${month_days} THEN date_trunc('month',vw_dt.date)::date
+					     WHEN (#{end_date}::TIMESTAMP - #{init_date}::TIMESTAMP) = '23:59:59' THEN  date_trunc('hour',vw_dt.date)::timestamp
+					     ELSE date_trunc('day',vw_dt.date)::date
+					END AS date_time,
+					COALESCE(get_analytics_energy_savings_total(#{tenant_id}, #{group_id},vw_dt.date::TIMESTAMP, (vw_dt.date:: date || ' 23:59:59')::TIMESTAMP,#{allowedGroupsToProc}),0)::NUMERIC AS amount
+				  FROM (
+					SELECT CASE WHEN (#{end_date}::TIMESTAMP - #{init_date}::TIMESTAMP) = '23:59:59' THEN generate_series(#{init_date}::TIMESTAMP, #{end_date}::TIMESTAMP, INTERVAL '1 hour')
+						    ELSE generate_series(#{init_date}::TIMESTAMP, #{end_date}::TIMESTAMP, INTERVAL '1 day')
+						END AS date
+					) vw_dt
+			       ) result
+			GROUP BY result.date_time
+
+			UNION
+
+			SELECT 'sensus.mlc.conservation.barrels_oil_saved'::character varying AS  description,
+			       result.date_time::TIMESTAMP,
+			       SUM(result.amount) AS amount
+			  FROM (
+				SELECT  CASE WHEN (#{end_date}::DATE - #{init_date}::DATE) > ${month_days} THEN date_trunc('month',vw_dt.date)::date
+					     WHEN (#{end_date}::TIMESTAMP - #{init_date}::TIMESTAMP) = '23:59:59' THEN  date_trunc('hour',vw_dt.date)::timestamp
+					     ELSE date_trunc('day',vw_dt.date)::date
+					END AS date_time,
+					COALESCE(get_analytics_carbon_credits_total(#{tenant_id}, #{group_id},vw_dt.date::TIMESTAMP, (vw_dt.date:: date || ' 23:59:59')::TIMESTAMP,#{barrels_of_oil_factor},NULL,#{allowedGroupsToProc}),0)::NUMERIC AS amount
+				  FROM (
+					SELECT CASE WHEN (#{end_date}::TIMESTAMP - #{init_date}::TIMESTAMP) = '23:59:59' THEN generate_series(#{init_date}::TIMESTAMP, #{end_date}::TIMESTAMP, INTERVAL '1 hour')
+						    ELSE generate_series(#{init_date}::TIMESTAMP, #{end_date}::TIMESTAMP, INTERVAL '1 day')
+						END AS date
+					) vw_dt
+			       ) result
+			GROUP BY result.date_time
+
+			UNION
+
+			SELECT 'sensus.mlc.conservation.metric_tons_co'::character varying AS  description,
+			       result.date_time::TIMESTAMP,
+			       SUM(result.amount) AS amount
+			  FROM (
+				SELECT  CASE WHEN (#{end_date}::DATE - #{init_date}::DATE) > ${month_days} THEN date_trunc('month',vw_dt.date)::date
+					     WHEN (#{end_date}::TIMESTAMP - #{init_date}::TIMESTAMP) = '23:59:59' THEN  date_trunc('hour',vw_dt.date)::timestamp
+					     ELSE date_trunc('day',vw_dt.date)::date
+					END AS date_time,
+					COALESCE(get_analytics_carbon_credits_total(#{tenant_id}, #{group_id},vw_dt.date::TIMESTAMP, (vw_dt.date:: date || ' 23:59:59')::TIMESTAMP,#{metric_of_co_factor},NULL,#{allowedGroupsToProc}),0)::NUMERIC AS amount
+				  FROM (
+					SELECT CASE WHEN (#{end_date}::TIMESTAMP - #{init_date}::TIMESTAMP) = '23:59:59' THEN generate_series(#{init_date}::TIMESTAMP, #{end_date}::TIMESTAMP, INTERVAL '1 hour')
+						    ELSE generate_series(#{init_date}::TIMESTAMP, #{end_date}::TIMESTAMP, INTERVAL '1 day')
+						END AS date
+					) vw_dt
+			       ) result
+			GROUP BY result.date_time
+
+			ORDER BY 2,1
+	</select>
+
+	<!-- Calculate Dash Board Resume -->
+	<select id="calculateDashboardResume" parameterType="java.util.Map" resultType="java.lang.String">
+		SELECT calculate_dashboard_resume(#{carbon_credits_factor}, #{tenant_id}, #{group_id})
+	</select>
+
+	<!-- Fetch Tag By Id -->
+	<select id="fetchTagById" resultMap="listTagResults">
+		SELECT
+			<include refid="allCustomListTagColumns"/>
+			FROM get_tag_by_id (#{tag_id})
+	</select>
+
+	<!-- Fetch Lights By Tag Id -->
+	<select id="fetchLightsByTagId" resultMap="LightsTag">
+		SELECT
+			<include refid="allCustomLightsTagColumns"/>
+			FROM get_lights_by_tag_id (#{tag_id})
+	</select>
+
+	<!-- Fetch All Analytics Group -->
+	<select id="fetchAllAnalytcsGroup" resultMap="AnalyticGroupResult">
+		SELECT analytic_group_id AS group_id
+		       , analytic_group_name AS group_name
+		  FROM analytics_group
+  	    WHERE tenant_id = #{tenant_id}
+  	    <if test="allowedGroupIdList != null">
+		  AND grouping_id IN
+		  <foreach item="item" index="index" collection="allowedGroupIdList"
+			      	open="(" separator="," close=")">
+			#{item}
+		  </foreach>
+	    </if>
+  	    ORDER BY CASE WHEN analytic_group_name = 'All' THEN 0 ELSE 1 END ASC
+  	                       ,analytic_group_name
+	</select>
+
+	<select id="fetchAllGroupsByTenantForDashboard" parameterType="int" resultMap ="AnalyticGroupResult">
+		  SELECT group_id FROM get_all_groups_by_tenant_for_dashboard(#{value,jdbcType=INTEGER})
+
+	</select>
+
+	<select id="deleteDashboardResume" parameterType="int" resultType="string" statementType="CALLABLE">
+		{ call del_dashboard_resume(#{value}) }
+	</select>
+
+</mapper>

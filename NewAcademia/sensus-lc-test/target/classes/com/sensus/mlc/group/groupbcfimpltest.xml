@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="groupBCFTarget" class="com.sensus.lc.group.bcf.impl.GroupBCFImpl">
+		<property name="groupBCL" ref="groupBCLMockTarget"/>
+		<property name="lightingControlRequestValidationController" ref="lightingControlRequestValidationController" />
+		<property name="groupValidationController" ref="groupValidationController" />
+		<property name="groupRequestValidationController" ref="groupRequestValidationController" />
+		<property name="groupListValidationController" ref="groupListValidationController" />
+		<property name="lightSelectionRequestValidationController" ref="lightSelectionRequestValidationController" />
+		<property name="lightValidationController" ref="lightValidationController" />
+		<property name="mapDataValidationController" ref="mapDataValidationController"/>
+		<property name="lightCriteriaValidationController" ref="lightCriteriaValidationController"/>
+		<property name="requestValidationController" ref="requestValidationController" />
+		<property name="inquiryRequestValidationController" ref="inquiryRequestValidationController" />
+	</bean>
+</beans>

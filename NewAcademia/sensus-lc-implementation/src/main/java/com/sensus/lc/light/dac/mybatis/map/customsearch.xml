@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="LightCustomSearch">
+
+	<!--###################### -->
+	<!--#### Result Maps #### -->
+	<!--##################### -->
+
+	<resultMap id="CustomSearchResult" type="CustomSearch">
+		<result property="id" column="custom_search_id" />
+		<result property="name" column="custom_search_name" />
+		<result property="description" column="custom_search_description" />
+		<result property="createDate" jdbcType="TIMESTAMP" column="create_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="modifyDate" jdbcType="TIMESTAMP" column="modified_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<collection property="searchParameters" column="custom_search_id" select="LightCustomSearch.fetchCustomSearchParameters" />
+	</resultMap>
+
+	<resultMap id="SearchParameterResult" type="SearchParameter">
+		<result property="id" column="custom_search_id" />
+		<result property="value" column="custom_search_property_value" />
+		<result property="name" column="custom_search_property_name" />
+		<result property="labelKey" column="label_key" />
+		<result property="propertyEnumValue" column="property_id" />
+		<result property="createUser" jdbcType="VARCHAR" column="create_user" />
+		<result property="createDate" jdbcType="TIMESTAMP" column="create_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="modifyUser" jdbcType="VARCHAR" column="modified_user" />
+		<result property="modifyDate" jdbcType="TIMESTAMP" column="modified_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+	</resultMap>
+
+	<!--############################-->
+	<!--####  Queries Sort      ####-->
+	<!--############################-->
+
+	<sql id="orderByToCustomSearch">
+		ROW_NUMBER() OVER(ORDER BY
+		<choose>
+			<when test="sortExpression == null">custom_search_name </when>
+			<otherwise>${sortExpression}</otherwise>
+		</choose>
+		) AS RowNum
+	</sql>
+
+	<!--####################-->
+	<!--#### pagination ####-->
+	<!--####################-->
+	<sql id="pagination">
+	  <if test="pageSize > 0">
+	   WHERE RowNum BETWEEN #{startRow,jdbcType=INTEGER} + 1 AND (#{startRow,jdbcType=INTEGER} + #{pageSize,jdbcType=INTEGER})
+	  </if>
+	 </sql>
+
+	<!--############################-->
+	<!--####  Queries Criteria  ####-->
+	<!--############################-->
+
+   	<!--##########################-->
+	<!--####  group criteria  ####-->
+	<!--##########################-->
+	<sql id="groupCriteria">
+		<if test="groupCriteria != null">
+			<!-- IN -->
+			<if test="groupCriteria.groupIdList != null and !(groupCriteria.groupIdList).isEmpty()">
+				AND grp.grouping_id IN
+				<foreach item="itemGrp" index="index" collection="groupCriteria.groupIdList" open="(" separator="," close=")">
+					#{itemGrp}
+				</foreach>
+			</if>
+			<!-- NOT IN -->
+			<if test="groupCriteria.notInGroupIdList != null and !(groupCriteria.notInGroupIdList).isEmpty()">
+				AND grp.grouping_id NOT IN
+				<foreach item="itemNotGrp" index="index" collection="groupCriteria.notInGroupIdList" open="(" separator="," close=")">
+					#{itemNotGrp}
+				</foreach>
+			</if>
+		</if>
+	</sql>
+
+	<!--############################-->
+	<!--####   Queries          ####-->
+	<!--############################-->
+
+	<select id="insertCustomSearch" parameterType="CustomSearchRequest" resultType="int">
+		INSERT INTO custom_search (custom_search_name
+                                  ,custom_search_description
+                                  ,create_user
+                                  ,user_id
+                                  ,tenant_id)
+                           VALUES (#{customSearch.name,jdbcType=VARCHAR}
+                                  ,#{customSearch.description,jdbcType=VARCHAR}
+                                  ,#{userContext.userId,jdbcType=VARCHAR}
+                                  ,#{userContext.id,jdbcType=INTEGER}
+                                  ,#{userContext.tenant.id,jdbcType=INTEGER})
+        RETURNING custom_search_id
+	</select>
+
+	<select id="insertCustomSearchProperty" parameterType="CustomSearchRequest" resultType="int">
+		INSERT INTO custom_search_property (custom_search_id
+                                           ,property_id
+                                           ,create_user
+                                           ,custom_search_property_value)
+    								VALUES (#{customSearch.id,jdbcType=INTEGER}
+            							   ,#{customSearch.propertyId,jdbcType=INTEGER}
+            							   ,#{userContext.userId,jdbcType=VARCHAR}
+            							   ,#{customSearch.propertyValue,jdbcType=VARCHAR})
+        RETURNING custom_search_property_id
+	</select>
+
+	<select id="insertColumnsToCustomSearch" parameterType="ColumnFilterRequest"
+		resultType="java.lang.Void" statementType="CALLABLE">
+
+		<foreach item="item" index="index" collection="listColumn" >
+			INSERT INTO custom_search_property (custom_search_id
+											   ,property_id
+											   ,create_date
+											   ,create_user
+											   ,custom_search_property_value
+											   ,display_order)
+									    VALUES (#{customSearchId,jdbcType=INTEGER}
+									           ,104
+									           ,CURRENT_TIMESTAMP
+									           ,#{userContext.userId,jdbcType=VARCHAR}
+									           ,#{item.columnEnum.value,jdbcType=VARCHAR}
+									           ,${index});
+		</foreach>
+	</select>
+
+	<select id="insertFilterToCustomSearch" parameterType="ColumnFilterRequest"
+		resultType="java.lang.Void" statementType="CALLABLE">
+
+		<foreach item="item" index="index" collection="filters">
+			INSERT INTO custom_search_property(custom_search_id
+											  ,property_id
+											  ,create_date
+											  ,create_user
+											  ,custom_search_property_value
+											  ,display_order)
+		         					   VALUES (#{customSearchId,jdbcType=INTEGER}
+		         					          ,105
+		         					          ,CURRENT_TIMESTAMP
+		         					          ,#{userContext.userId,jdbcType=VARCHAR}
+		         					          ,#{item.filterEnum,jdbcType=VARCHAR}
+		         					          ,${index});
+		</foreach>
+	</select>
+
+	<select id="fetchCustomSearchParameters" resultMap="SearchParameterResult">
+		 SELECT csp.custom_search_id
+				,p.property_id
+				,p.property_name
+				,p.label_key
+				,csp.create_user
+				,csp.create_date
+				,csp.modified_user
+				,csp.modified_date
+				,csp.custom_search_property_value
+				,CASE csp.property_id WHEN 21 THEN g.name
+									  WHEN 42 THEN s.name
+									  WHEN 43 THEN s.name
+									  WHEN 25 THEN t.name
+									  WHEN 96 THEN ss.label_key
+									  WHEN 97 THEN ss.label_key
+									  END custom_search_property_name
+				,csp.operator_id
+		   FROM property p
+				,custom_search_property csp
+				LEFT OUTER JOIN grouping g ON g.grouping_id = CAST(csp.custom_search_property_value AS integer) AND csp.property_id = 21
+				LEFT OUTER JOIN schedule s ON s.schedule_id = CAST(csp.custom_search_property_value AS integer) AND (csp.property_id = 42 OR csp.property_id = 43)
+				LEFT OUTER JOIN tag t ON t.tag_id = CAST(csp.custom_search_property_value AS integer) AND csp.property_id = 25
+				LEFT OUTER JOIN alert_subtype ss ON ss.alert_subtype_id = CAST(csp.custom_search_property_value AS integer) AND csp.property_id IN (96,97)
+		  WHERE csp.custom_search_id = #{value,jdbcType=INTEGER}
+			AND (csp.property_id = 21
+			OR csp.property_id = 25
+			OR csp.property_id = 42
+			OR csp.property_id = 43
+			OR csp.property_id = 96
+			OR csp.property_id = 97)
+			AND csp.property_id = p.property_id
+		UNION ALL
+			SELECT csp.custom_search_id
+					,p.property_id
+					,p.property_name
+					,p.label_key
+					,csp.create_user
+					,csp.create_date
+					,csp.modified_user
+					,csp.modified_date
+					,csp.custom_search_property_value
+					,csp.custom_search_property_value custom_search_property_name
+					,csp.operator_id
+			  FROM property p
+					,custom_search_property csp
+			WHERE csp.custom_search_id = #{value,jdbcType=INTEGER}
+
+			AND csp.property_id != 21
+			AND csp.property_id != 25
+			AND csp.property_id != 42
+			AND csp.property_id != 43
+			AND csp.property_id != 96
+			AND csp.property_id != 97
+			AND csp.property_id = p.property_id
+	</select>
+
+	<select id="fetchAllCustomSearch" parameterType="LightRequest" resultMap="CustomSearchResult">
+			SELECT
+				custom_search_id
+				, custom_search_name
+				, custom_search_description
+				, create_date
+				, modified_date
+			FROM
+			    (
+				   SELECT  cs.custom_search_id
+							,cs.custom_search_name
+							,cs.custom_search_description
+							,cs.create_date
+							,cs.modified_date
+							,<include refid="orderByToCustomSearch"/>
+					FROM custom_search cs
+					  <if test="groupCriteria != null ">
+						   INNER JOIN tenant t ON cs.tenant_id = t.tenant_id
+			          	   INNER JOIN grouping grp ON t.tenant_id = grp.tenant_id
+		           	  </if>
+		           	  <where>
+			           	  AND cs.user_id = #{userContext.id,jdbcType=INTEGER}
+						  AND cs.tenant_id = #{userContext.tenant.id, jdbcType=INTEGER}
+						  <if test="lightCustomSearchCriteria != null and lightCustomSearchCriteria.customSearchName != null">
+						     AND UPPER(cs.custom_search_name) = UPPER(#{lightCustomSearchCriteria.customSearchName,jdbcType=VARCHAR})
+						  </if>
+				  		<include refid="LightCustomSearch.groupCriteria" />
+		           	  </where>
+				) AS SEARCH_LIGHT_PAGE
+				<include refid="pagination"/>
+	</select>
+
+    <select id="paginationTotalRowsCustomSearch" parameterType="LightRequest" resultType="int">
+		SELECT count(1)
+		  FROM (
+				SELECT custom_search_id
+				  FROM custom_search cs
+					<if test="groupCriteria != null ">
+					   INNER JOIN tenant t ON cs.tenant_id = t.tenant_id
+		          	   INNER JOIN grouping grp ON t.tenant_id = grp.tenant_id
+	           	    </if>
+			  		<where>
+		           	     AND cs.user_id = #{userContext.id,jdbcType=INTEGER}
+						 AND cs.tenant_id = #{userContext.tenant.id,jdbcType=INTEGER}
+	           	  		<include refid="LightCustomSearch.groupCriteria" />
+	           	  </where>
+				) AS CUSTOM_SEARCH_PAGE
+  	</select>
+
+  	<!--############################-->
+	<!--####   DELETE           ####-->
+	<!--############################-->
+
+  	<delete id="deleteCustomSearch" parameterType="CustomSearch">
+		DELETE FROM
+		custom_search
+		WHERE custom_search_id = #{id};
+	</delete>
+
+</mapper>

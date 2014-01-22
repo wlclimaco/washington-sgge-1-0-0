@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://mallet-app.davis.sensus.lab:8080/" />
+<title>Select All, Page or None Lights</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Select All, Page or None Lights</td></tr>
+</thead><tbody>
+<tr>
+	<td>assertAttribute</td>
+	<td>id=menu-smartpoints@class</td>
+	<td>alist active</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=smartpoint-table_length</td>
+	<td>${perPage}</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;select[name='smartpoint-table_length']&quot;).change()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=page-size-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=#page-size-form &gt; p</td>
+	<td>Would you like to make ${perPage}&nbsp;&nbsp;your default Results Per Page</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#page-size-form &gt; p</td>
+	<td>Would you like to make ${perPage}&nbsp;&nbsp;your default Results Per Page</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=page-size-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=page-size-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=lights-select-all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=checked-count</td>
+	<td>${totalOfLights}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#actions span.message span:eq(1)</td>
+	<td>${totalOfLights}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=lights-select-page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=checked-count</td>
+	<td>${perPage}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#actions span.message span:eq(1)</td>
+	<td>${totalOfLights}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=lights-select-none</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=checked-count</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#actions span.message span:eq(1)</td>
+	<td>${totalOfLights}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tbody tr:eq(0) td:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=checked-count</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tbody tr:eq(1) td:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=checked-count</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#smartpoint-table tbody tr:eq(0) td:eq(0) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=checked-count</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=smartpoint-table_length</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;select[name='smartpoint-table_length']&quot;).change()</td>
+	<td>${perPage}</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=page-size-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=#page-size-form &gt; p</td>
+	<td>Would you like to make 100&nbsp;&nbsp;your default Results Per Page</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#page-size-form &gt; p</td>
+	<td>Would you like to make 100&nbsp;&nbsp;your default Results Per Page</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=page-size-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=lights-select-none</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

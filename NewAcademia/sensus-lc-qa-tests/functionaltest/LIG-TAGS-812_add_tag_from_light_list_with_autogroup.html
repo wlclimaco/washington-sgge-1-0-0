@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>slc_tags_add_tag_to__several_light_list_with_autogroup</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">slc_tags_add_tag_to__several_light_list_with_autogroup</td></tr>
+</thead><tbody>
+<!--#3823-->
+<!--Going to Light List /...-->
+<tr>
+	<td>click</td>
+	<td>link=Lights</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<!--Check 'Active'-->
+<tr>
+	<td>click</td>
+	<td>css=li:contains(Active) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<!--Check 'Warning'-->
+<tr>
+	<td>click</td>
+	<td>css=li:contains(Warning) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<!--Check 'Alarm'-->
+<tr>
+	<td>click</td>
+	<td>css=li:contains(Alarm) input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=select-page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=actions-button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;ul.fg-menu &gt; li:eq(2) &gt; ul &gt; li:eq(0) &gt; a[title='Add Tag']&quot;, &quot;div.positionHelper:visible&quot;).click()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=addTagForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeSpeed</td>
+	<td>currSpeed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setSpeed</td>
+	<td>200</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>${varTag}SL</td>
+	<td>tagName</td>
+</tr>
+<!--Need to click, type and press enter -- the stuff below does not work!-->
+<tr>
+	<td>echo</td>
+	<td>typing ${tagName}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>doubleClickAt</td>
+	<td>css=#select_tags_chzn ul input</td>
+	<td>10,10</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>css=.chzn-results li</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>id=addTagForm</td>
+	<td></td>
+</tr>
+<!--#-->
+<tr>
+	<td>click</td>
+	<td>id=add-tag-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setSpeed</td>
+	<td>0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=#messaging-main .message</td>
+	<td>Lights have been successfully added to Tags.</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#messaging-main .message</td>
+	<td>Lights have been successfully added to Tags.</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>keyPress</td>
+	<td>css=#select_tags_chzn ul input</td>
+	<td>\13</td>
+</tr>
+<tr>
+	<td>mouseDown</td>
+	<td>css=#select_tags_chzn ul input</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

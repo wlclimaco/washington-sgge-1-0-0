@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+<settings>
+	<setting name="lazyLoadingEnabled" value="false" />
+</settings>
+
+<typeAliases>
+	<typeAlias alias="Tenant"    type="com.sensus.lc.tenant.model.Tenant" />
+	<typeAlias alias="Academia"  type="com.sensus.lc.academia.model.Academia"/>
+	<typeAlias alias="AcademiaRequest"  type="com.sensus.lc.academia.model.request.AcademiaRequest"/>
+	<typeAlias alias="InquiryAcademiaRequest" type="com.sensus.lc.academia.model.request.InquiryAcademiaRequest" />
+
+</typeAliases>
+
+<mappers>
+	<mapper resource="com/sensus/lc/academia/dac/mybatis/map/academia.xml"/>
+</mappers>
+
+</configuration>

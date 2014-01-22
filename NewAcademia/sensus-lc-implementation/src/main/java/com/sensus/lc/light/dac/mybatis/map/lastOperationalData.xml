@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="LastOperationalData">
+
+	<!--############################ -->
+	<!--#### Result Maps #### -->
+	<!--############################ -->
+
+	<resultMap id="LastOperationalDataResult" type="LastOperationalData">
+
+		<id property="parentId" column="light_id" />
+		<result property="acVoltage" column="ac_voltage" />
+		<result property="acVoltageMin" column="ac_voltage_min" />
+		<result property="acVoltageMinDate" column="ac_voltage_min_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler" jdbcType="TIMESTAMP" />
+		<result property="acVoltageMax" column="ac_voltage_max" />
+		<result property="acVoltageMaxDate" column="ac_voltage_max_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler" jdbcType="TIMESTAMP"/>
+		<result property="acCurrent" column="ac_current" />
+		<result property="acCurrentMin" column="ac_current_min" />
+		<result property="acCurrentMinDate" column="ac_current_min_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler" jdbcType="TIMESTAMP"/>
+		<result property="acCurrentMax" column="ac_current_max" />
+		<result property="acCurrentMaxDate" column="ac_current_max_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler" jdbcType="TIMESTAMP"/>
+		<result property="consumption" column="consumption" />
+		<result property="consumptionMin" column="consumption_min" />
+		<result property="consumptionMax" column="consumption_max" />
+		<result property="consumptionDate" column="modified_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler" jdbcType="TIMESTAMP"/>
+	</resultMap>
+
+	<!--############################ -->
+	<!--#### Queries Criteria #### -->
+	<!--############################ -->
+
+	<sql id="allLastOperationalDataColumns">
+		operationalData.light_id, ac_voltage, ac_voltage_min, ac_voltage_min_date, ac_voltage_max, ac_voltage_max_date, ac_current, ac_current_min,
+		ac_current_max, ac_current_max_date, consumption, consumption_min, consumption_max, operationalData.modified_date, operationalData.create_user,
+		operationalData.modified_date, operationalData.modified_user
+	</sql>
+
+	<!-- Fetch All Groups -->
+	<select id="fetchById" resultMap="LastOperationalDataResult">
+		SELECT
+		<include refid="allLastOperationalDataColumns" />
+		FROM light_last_operational_data operationalData
+		WHERE light_id= #{value}
+	</select>
+
+	<!--############################ -->
+	<!--#### Queries Criteria #### -->
+	<!--############################ -->
+
+	<!-- Operational Data Criteria -->
+	<sql id="operationalDataCriteria">
+		<if test="operationalDataCriteria != null and operationalDataCriteria.hasFilter()">
+			<if test="operationalDataCriteria.voltageGreater != null">
+				AND operationalData.ac_voltage > #{operationalDataCriteria.voltageGreater}
+			</if>
+
+			<if test="operationalDataCriteria.voltageLess != null">
+				AND #{operationalDataCriteria.voltageLess} > operationalData.ac_voltage
+			</if>
+
+			<if test="operationalDataCriteria.currentGreater != null">
+				AND operationalData.ac_current > #{operationalDataCriteria.currentGreater}
+			</if>
+
+			<if test="operationalDataCriteria.currentLess != null">
+				AND #{operationalDataCriteria.currentGreater} > operationalData.ac_current
+			</if>
+
+			<if test="operationalDataCriteria.consumptionGreater != null">
+				AND operationalData.consumption > #{operationalDataCriteria.consumptionGreater}
+			</if>
+
+			<if test="operationalDataCriteria.consumptionLess != null">
+				AND #{operationalDataCriteria.consumptionGreater} > operationalData.consumption
+			</if>
+		</if>
+	</sql>
+
+	<!--#########################################-->
+	<!--####   insert last operational data  ####-->
+	<!--#########################################-->
+
+	<insert id="InsertLastOperationalData" parameterType="LastOperationalData">
+		INSERT INTO light_last_operational_data
+		(
+			light_id
+			, ac_voltage
+			, ac_voltage_min
+			, ac_voltage_min_date
+			, ac_voltage_max
+			, ac_voltage_max_date
+			, ac_current
+			, ac_current_min
+			, ac_current_max
+			, ac_current_max_date
+			, consumption
+			, consumption_min
+			, consumption_max
+			, create_user
+			, create_date
+			, modified_date
+		)
+
+		VALUES(
+			#{parentId}
+			, #{acVoltage}
+			, #{acVoltageMin}
+			, #{acVoltageMinDate}
+			, #{acVoltageMax}
+			, #{acVoltageMaxDate}
+			, #{acCurrent}
+			, #{acCurrentMin}
+			, #{acCurrentMax}
+			, #{acCurrentMaxDate}
+			, #{consumption}
+			, #{consumptionMin}
+			, #{consumptionMax}
+			, #{createUser}
+			, #{createDate}::timestamp
+			, #{modifyDate}::timestamp
+		)
+	</insert>
+
+	<!--#########################################-->
+	<!--####   update last operational data  ####-->
+	<!--#########################################-->
+
+	<update id="UpdateLastOperationalData" parameterType="LastOperationalData">
+
+		UPDATE light_last_operational_data
+		<trim prefix="SET" prefixOverrides=",">
+			<if test="acVoltage        != null" >  ac_voltage 			= #{acVoltage}</if>
+			<if test="acVoltageMin     != null"	>, ac_voltage_min 		= #{acVoltageMin}</if>
+			<if test="acVoltageMinDate != null"	>, ac_voltage_min_date 	= #{acVoltageMinDate}::timestamp</if>
+			<if test="acVoltageMax     != null"	>, ac_voltage_max 		= #{acVoltageMax}</if>
+			<if test="acVoltageMaxDate != null"	>, ac_voltage_max_date 	= #{acVoltageMaxDate}::timestamp</if>
+			<if test="acCurrent        != null" >, ac_current 			= #{acCurrent}</if>
+			<if test="acCurrentMin     != null"	>, ac_current_min 		= #{acCurrentMin}</if>
+			<if test="acCurrentMax     != null"	>, ac_current_max 		= #{acCurrentMax}</if>
+			<if test="acCurrentMaxDate != null"	>, ac_current_max_date 	= #{acCurrentMaxDate}::timestamp</if>
+			<if test="consumption      != null"	>, consumption 			= #{consumption}</if>
+			<if test="consumptionMin   != null"	>, consumption_min 		= #{consumptionMin}</if>
+			<if test="consumptionMax   != null"	>, consumption_max 		= #{consumptionMax}</if>
+			<if test="modifyUser       != null" >, modified_user 		= #{modifyUser}</if>
+			<if test="modifyDate       != null" >, modified_date 		= #{modifyDate}::timestamp</if>
+
+			<!-- Safe code, avoid some type exception -->
+			<if test="acVoltage        == null and
+					  acVoltageMin     == null and
+					  acVoltageMinDate == null and
+					  acVoltageMax     == null and
+					  acVoltageMaxDate == null and
+					  acCurrent        == null and
+					  acCurrentMin     == null and
+					  acCurrentMax     == null and
+					  acCurrentMaxDate == null and
+					  consumption      == null and
+					  consumptionMin   == null and
+					  consumptionMax   == null and
+					  modifyUser       == null and
+					  modifyDate       == null">
+
+				  ac_voltage 			= ac_voltage
+				, ac_voltage_min 		= ac_voltage_min
+				, ac_voltage_min_date 	= ac_voltage_min_date
+				, ac_voltage_max 		= ac_voltage_max
+				, ac_voltage_max_date 	= ac_voltage_max_date
+				, ac_current 			= ac_current
+				, ac_current_min 		= ac_current_min
+				, ac_current_max 		= ac_current_max
+				, ac_current_max_date 	= ac_current_max_date
+				, consumption 			= consumption
+				, consumption_min 		= consumption_min
+				, consumption_max 		= consumption_max
+				, modified_user 		= modified_user
+				, modified_date 		= modified_date
+			</if>
+		</trim>
+		WHERE light_id = #{parentId}
+
+	</update>
+
+	<update id="resetMinMax" parameterType="LastOperationalData">
+	  UPDATE light_last_operational_data llod
+	     SET ac_current_min = llod.ac_current
+	         ,ac_current_max = llod.ac_current
+	         ,ac_current_min_date = modified_date
+	         ,ac_current_max_date = modified_date
+	         ,ac_voltage_min = llod.ac_voltage
+	         ,ac_voltage_max = llod.ac_voltage
+	         ,ac_voltage_min_date = modified_date
+	         ,ac_voltage_max_date = modified_date
+	         ,modified_user = #{modifyUser}
+	  WHERE llod.light_id = #{parentId};
+	</update>
+
+	<delete id="DeleteLastOperationalData" parameterType="LastOperationalData">
+		DELETE FROM last_operational_data
+		WHERE light_id = #{parentId}
+	</delete>
+
+	<insert id="InsertOperationalDataValue" parameterType="OperationalData">
+		INSERT INTO operational_data_value
+           (notification_history_id
+           ,operational_data_type_id
+           ,value
+           ,create_user
+           ,create_date)
+        VALUES
+           (#{notificationHistoryId}
+            ,#{operationalDataTypeValue}
+            ,#{value}
+            ,#{createUser}
+            ,#{createDate}::timestamp);
+	</insert>
+
+</mapper>

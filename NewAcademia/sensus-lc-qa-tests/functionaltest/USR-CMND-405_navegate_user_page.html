@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>navegate_user_page</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">navegate_user_page</td></tr>
+</thead><tbody>
+<!--#7792-->
+<!--Check Curent Page/...-->
+<tr>
+	<td>click</td>
+	<td>link=Users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Dashboard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.content-header &gt; h1</td>
+	<td></td>
+</tr>
+<!--Check Curent Page/...-->
+<tr>
+	<td>assertText</td>
+	<td>css=div.content-header &gt; h1</td>
+	<td>Users</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Manage User access to the Sensus Lighting Control System.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=user_name</td>
+	<td>User</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=full_name</td>
+	<td>Name</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=role</td>
+	<td>Role</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=email</td>
+	<td>Email</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=total_lights</td>
+	<td>Lights</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=date_modify</td>
+	<td>Date Modified</td>
+</tr>
+</tbody></table>
+</body>
+</html>

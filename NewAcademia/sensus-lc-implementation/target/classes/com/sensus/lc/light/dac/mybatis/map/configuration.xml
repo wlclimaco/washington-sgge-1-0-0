@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Configuration">
+
+	<!--############################-->
+	<!--####    Result Maps     ####-->
+	<!--############################-->
+
+	<resultMap id="ConfigurationResult" type="Configuration">
+
+		<result property="parentId" column="light_id" />
+		<result property="housing" column="housing" />
+		<result property="housingColor" column="housing_color" />
+		<result property="dimmable" column="dimmable" />
+		<result property="bulbSerialNumber" column="bulb_serial_number" />
+		<result property="upperAssemblySerial" column="upper_assembly_serial_number" />
+		<result property="lowerAssemblySerial" column="lower_assembly_serial_number" />
+		<result property="lampTypeWattageDimmable" column="lamp_type_wattage_dimmable" />
+		<result property="firmwareVersion" column="firmware_version" />
+		<result property="dateAdded" column="date_added" />
+		<result property="modelNumber" column="model_number" />
+		<result property="colorTemperature" column="color_temperature" />
+		<result property="inputVoltageRange" column="input_voltage_range" />
+		<result property="wattageRating" column="wattage_rating" />
+		<result property="ballastSerialNumber" column="ballast_serial_number" />
+		<result property="customerSerialNumber" column="customer_serial_number" />
+		<result property="manufacturer" column="manufacturer" />
+		<result property="frequency" column="frequency" />
+		<result property="lightDriverSerialNumber" column="ballast_serial_number" />
+		<collection property="partNumberConfigurations" column="model_number" ofType="PartNumberConfiguration" typeHandler="com.sensus.lc.light.dac.mybatis.typehandler.PartNumberConfigurationTypeHandler"/>
+
+	</resultMap>
+
+	<sql id="allConfigurationColumns">
+		  config.light_id
+		, housing
+		, housing_color
+		, dimmable
+		, bulb_serial_number
+		, upper_assembly_serial_number
+		, lower_assembly_serial_number
+		, lamp_type_wattage_dimmable
+		, firmware_version
+		, date_added
+		, model_number
+		, color_temperature
+		, input_voltage_range
+		, wattage_rating
+		, ballast_serial_number
+		, manufacturer, frequency
+		, customer_serial_number
+	</sql>
+
+	<!--############################-->
+	<!--####   Queries Body     ####-->
+	<!--############################-->
+
+	<!-- Fetch All Groups -->
+	<select id="fetchById" resultMap="ConfigurationResult">
+		SELECT
+		<include refid="allConfigurationColumns" />
+		FROM light_configuration config
+		WHERE light_id= #{value}
+	</select>
+
+	<!--############################-->
+	<!--####  Queries Criteria  ####-->
+	<!--############################-->
+
+	<!-- Configuration Criteria -->
+	<sql id="configurationCriteria">
+
+		<if test="configurationCriteria != null and configurationCriteria.hasFilter()">
+
+			<if test="configurationCriteria.housing != null">
+					AND config.housing = #{configurationCriteria.housing}
+			</if>
+
+			<if test="configurationCriteria.housingColor != null  and !(configurationCriteria.housingColor).isEmpty()">
+				AND config.housing_color IN
+				<foreach item="item" index="index" collection="configurationCriteria.housingColor" open="(" separator="," close=")">
+					'${item}'
+				</foreach>
+			</if>
+
+			<if test="configurationCriteria.dimmable != null">
+					AND config.dimmable = #{configurationCriteria.dimmable}
+			</if>
+
+			<if test="configurationCriteria.wattageRating != null">
+					AND config.wattage_rating = #{configurationCriteria.wattageRating}
+			</if>
+
+			<if test="configurationCriteria.upperAssemblySerial != null">
+					AND config.upper_assembly_serial_number like '%' || #{configurationCriteria.upperAssemblySerial} || '%'
+			</if>
+
+			<if test="configurationCriteria.lowerAssemblySerial != null">
+					AND config.lower_assembly_serial_numberlike '%' || #{configurationCriteria.lowerAssemblySerial} || '%'
+			</if>
+
+			<if test="configurationCriteria.bulbSerialNumber != null">
+					AND config.bulb_serial_number like '%' || #{configurationCriteria.bulbSerialNumber} || '%'
+			</if>
+
+			<if test="configurationCriteria.ballastSerialNumber != null">
+					AND config.ballast_serial_number like '%' || #{configurationCriteria.ballastSerialNumber} || '%'
+			</if>
+
+			<if test="configurationCriteria.inputVoltageRange != null  and !(configurationCriteria.inputVoltageRange).isEmpty()">
+				AND config.input_voltage_range IN
+				<foreach item="item" index="index" collection="configurationCriteria.inputVoltageRange" open="(" separator="," close=")">
+					CAST(#{item} AS text)
+				</foreach>
+			</if>
+
+			<if test="configurationCriteria.colorTemperature != null">
+					AND UPPER(config.color_temperature) = UPPER(#{configurationCriteria.colorTemperature})
+			</if>
+
+			<if test="configurationCriteria.dateAdded != null">
+					AND DATE_TRUNC('day',config.date_added) = DATE_TRUNC('day',#{configurationCriteria.dateAdded})
+			</if>
+		</if>
+
+	</sql>
+
+	<!--##############################-->
+	<!--#### insert configuration ####-->
+	<!--##############################-->
+
+	<insert id="InsertConfiguration" parameterType="Configuration">
+
+	    INSERT INTO light_configuration(
+         		light_id
+				,housing
+				,housing_color
+				,dimmable
+				,lamp_type_wattage_dimmable
+				,wattage_rating
+				,input_voltage_range
+				,color_temperature
+				,manufacturer
+				,firmware_version
+				,model_number
+				,lower_assembly_serial_number
+				,upper_assembly_serial_number
+				,frequency
+	        	,date_added
+				,bulb_serial_number
+				,ballast_serial_number
+				,customer_serial_number
+         		,create_user)
+		 VALUES
+				(#{parentId,jdbcType=INTEGER}
+				,#{housing,jdbcType=VARCHAR}
+				,#{housingColor,jdbcType=VARCHAR}
+				,#{dimmable,jdbcType=BOOLEAN}
+				,#{lampTypeWattageDimmable,jdbcType=VARCHAR}
+				,#{wattageRating,jdbcType=VARCHAR}
+				,#{inputVoltageRange,jdbcType=VARCHAR}
+				,#{colorTemperature,jdbcType=VARCHAR}
+				,#{manufacturer,jdbcType=VARCHAR}
+				,#{firmwareVersion,jdbcType=VARCHAR}
+				,#{modelNumber,jdbcType=VARCHAR}
+				,#{lowerAssemblySerial,jdbcType=VARCHAR}
+				,#{upperAssemblySerial,jdbcType=VARCHAR}
+				,#{frequency,jdbcType=VARCHAR}
+				,#{dateAdded,jdbcType=TIMESTAMP}
+				,#{bulbSerialNumber,jdbcType=VARCHAR}
+				,#{ballastSerialNumber,jdbcType=VARCHAR}
+				,#{customerSerialNumber,jdbcType=VARCHAR}
+				,#{createUser,jdbcType=VARCHAR})
+	</insert>
+
+	<!--##############################-->
+	<!--#### update configuration ####-->
+	<!--##############################-->
+	<update id="UpdateConfiguration" parameterType="Configuration">
+
+		UPDATE light_configuration
+		   <trim prefix="SET" prefixOverrides=",">
+		   		<if test="housing                  != null" > housing 					   = #{housing,jdbcType=VARCHAR}</if>
+			   	<if test="housingColor             != null"	>,housing_color 			   = #{housingColor,jdbcType=VARCHAR}</if>
+				<if test="dimmable                 != null"	>,dimmable 					   = #{dimmable,jdbcType=BOOLEAN}</if>
+				<if test="lampTypeWattageDimmable  != null"	>,lamp_type_wattage_dimmable   = #{lampTypeWattageDimmable,jdbcType=VARCHAR}</if>
+				<if test="wattageRating            != null" >,wattage_rating 			   = #{wattageRating,jdbcType=VARCHAR}</if>
+				<if test="inputVoltageRange        != null" >,input_voltage_range 		   = #{inputVoltageRange,jdbcType=VARCHAR}</if>
+				<if test="colorTemperature         != null"	>,color_temperature 		   = #{colorTemperature,jdbcType=VARCHAR}</if>
+				<if test="manufacturer             != null"	>,manufacturer 				   = #{manufacturer,jdbcType=VARCHAR}</if>
+				<if test="firmwareVersion          != null"	>,firmware_version 			   = #{firmwareVersion,jdbcType=VARCHAR}</if>
+				<if test="modelNumber              != null"	>,model_number 				   = #{modelNumber,jdbcType=VARCHAR}</if>
+				<if test="lowerAssemblySerial      != null"	>,lower_assembly_serial_number = #{lowerAssemblySerial,jdbcType=VARCHAR}</if>
+				<if test="upperAssemblySerial      != null"	>,upper_assembly_serial_number = #{upperAssemblySerial,jdbcType=VARCHAR}</if>
+				<if test="frequency                != null" >,frequency 				   = #{frequency,jdbcType=VARCHAR}</if>
+				<if test="dateAdded                != null" >,date_added 				   = #{dateAdded,jdbcType=TIMESTAMP}</if>
+				<if test="bulbSerialNumber         != null"	>,bulb_serial_number 		   = #{bulbSerialNumber,jdbcType=VARCHAR}</if>
+				<if test="ballastSerialNumber      != null"	>,ballast_serial_number 	   = #{ballastSerialNumber,jdbcType=VARCHAR}</if>
+				<if test="customerSerialNumber     != null"	>,customer_serial_number 	   = #{customerSerialNumber,jdbcType=VARCHAR}</if>
+				<if test="modifyUser               != null" >,modified_user 			   = #{modifyUser,jdbcType=VARCHAR}</if>
+
+                <!-- Safe code, avoid some type exception -->
+				<if test="housing                  == null and
+						  housingColor             == null and
+						  dimmable                 == null and
+						  lampTypeWattageDimmable  == null and
+						  wattageRating            == null and
+						  inputVoltageRange        == null and
+						  colorTemperature         == null and
+						  manufacturer             == null and
+						  firmwareVersion          == null and
+						  modelNumber              == null and
+						  lowerAssemblySerial      == null and
+						  upperAssemblySerial      == null and
+						  frequency                == null and
+						  dateAdded                == null and
+						  bulbSerialNumber         == null and
+						  ballastSerialNumber      == null and
+						  customerSerialNumber     == null and
+						  modifyUser               == null">
+					 housing 					   = housing
+					,housing_color 			   	   = housing_color
+					,dimmable 					   = dimmable
+					,lamp_type_wattage_dimmable    = lamp_type_wattage_dimmable
+					,wattage_rating 			   = wattage_rating
+					,input_voltage_range 		   = input_voltage_range
+					,color_temperature 		       = color_temperature
+					,manufacturer 				   = manufacturer
+					,firmware_version 			   = firmware_version
+					,model_number 				   = model_number
+					,lower_assembly_serial_number  = lower_assembly_serial_number
+					,upper_assembly_serial_number  = upper_assembly_serial_number
+					,frequency 				       = frequency
+					,date_added 				   = date_added
+					,bulb_serial_number 		   = bulb_serial_number
+					,ballast_serial_number 	       = ballast_serial_number
+					,customer_serial_number 	   = customer_serial_number
+					,modified_user 			       = modified_user
+				</if>
+		   </trim>
+		WHERE light_id = #{parentId}
+
+	</update>
+</mapper>

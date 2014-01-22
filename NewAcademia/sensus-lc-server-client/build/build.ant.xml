@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="Sensus MLC Server Client" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<include file="..\..\AntConfig\Sensus-ant-common-targets.xml" optional="false" />
+
+	<target name="build">
+		<antcall target="Sensus.buildJavaFromXsd">
+			<param name="pomFile" value="../pom.xml" />
+			<param name="generatedPackageName" value="com.sensus.mlc.mlcserver.type" />
+			<param name="schemaSrcDir" value="../src/main/resources/wsxsd" />
+			<param name="doNotDeleteGeneratedSrcFolder" value="true" />
+		</antcall>
+
+		<antcall target="Sensus.mainBuildComponent">
+			<param name="moduleName" value="sensus-lc-server-client" />
+			<param name="pomFile" value="../pom.xml" />
+			<param name="installLocal" value="true" />
+		</antcall>
+	</target>
+
+</project>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="lazyLoadingEnabled" value="false" />
+	</settings>
+
+	<typeAliases>
+		<typeAlias alias="AnalyticsGroup" 				type="com.sensus.lc.analytics.model.AnalyticsGroup" 				/>
+		<typeAlias alias="AnalyticsGroupAlarm" 			type="com.sensus.lc.analytics.model.AnalyticsGroupAlarm" 			/>
+		<typeAlias alias="AnalyticsGroupWarning" 		type="com.sensus.lc.analytics.model.AnalyticsGroupWarning" 		/>
+		<typeAlias alias="AnalyticsGroupTypeLight" 		type="com.sensus.lc.analytics.model.AnalyticsGroupTypeLight" 		/>
+		<typeAlias alias="AnalyticsGroupCarbonCredits" 	type="com.sensus.lc.analytics.model.AnalyticsGroupCarbonCredits" 	/>
+		<typeAlias alias="AnalyticsGroupEcoMode" 	    type="com.sensus.lc.analytics.model.AnalyticsGroupEcoMode"    	    />
+		<typeAlias alias="AnalyticsGroupColumns" 		type="com.sensus.lc.analytics.model.AnalyticsGroupColumns" 		/>
+		<typeAlias alias="Tenant" 						type="com.sensus.lc.tenant.model.Tenant" 							/>
+		<typeAlias alias="Tag"  						type="com.sensus.lc.tag.model.Tag"									/>
+		<typeAlias alias="Parameter"					type="com.sensus.lc.base.model.Parameter" 							/>
+		<typeAlias alias="AnalyticsRequest"				type="com.sensus.lc.analytics.model.request.AnalyticsRequest" 		/>
+		<typeAlias alias="Light"                        type="com.sensus.lc.light.model.Light" />
+		<typeAlias alias="Device"                      type="com.sensus.cbof.model.Device" />
+		<typeAlias alias="Radio"                       type="com.sensus.cbof.model.Radio" />
+		<typeAlias alias="Location"                    type="com.sensus.cbof.model.Location" />
+		<typeAlias alias="TimeZoneInfo"	  			    type="com.sensus.cbof.model.TimeZoneInfo" />
+	</typeAliases>
+
+	<mappers>
+  		<mapper resource="com/sensus/lc/analytics/dac/mybatis/map/analytics.xml"/>
+  		<mapper resource="com/sensus/lc/light/dac/mybatis/map/device.xml" />
+    </mappers>
+</configuration>

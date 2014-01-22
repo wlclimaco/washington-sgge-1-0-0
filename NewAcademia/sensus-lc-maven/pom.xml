@@ -1,0 +1,18 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- This is the master/parent POM for all the other SLC project POM's. -->
+	<!-- This POM defines the Maven group-id and the overall version number for all the projects. -->
+	<!-- These properties are inherited by the child POM's where these properties are used/referenced. -->
+
+	<properties>
+		<product.version>1.2.0</product.version>
+	</properties>
+
+	<groupId>com.sensus.lc</groupId>
+	<artifactId>sensus-lc-maven</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
+
+</project>

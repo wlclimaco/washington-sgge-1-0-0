@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>try_update_with_empty_field_then_cancel</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">try_update_with_empty_field_then_cancel</td></tr>
+</thead><tbody>
+<!--#7767-->
+<!--Check Curent Page/...-->
+<tr>
+	<td>click</td>
+	<td>link=Users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Dashboard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.content-header &gt; h1</td>
+	<td></td>
+</tr>
+<!--Check Curent Page/...-->
+<tr>
+	<td>assertText</td>
+	<td>css=div.content-header &gt; h1</td>
+	<td>Users</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>click</td>
+	<td>css=a:contains(${userName}7)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=user-first-create</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user-first-create</td>
+	<td>12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user-last-create</td>
+	<td>${userName}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user-user</td>
+	<td>${userName}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user-email-create</td>
+	<td>${userName}@${userName}.com</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user-create-button</td>
+	<td></td>
+</tr>
+<!--Check Message/...-->
+<tr>
+	<td>waitForText</td>
+	<td>css=div.formErrorContent</td>
+	<td>* Maximum 50 characters allowed</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.formErrorContent</td>
+	<td>* Maximum 50 characters allowed</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>type</td>
+	<td>id=user-first-create</td>
+	<td>${userName}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user-last-create</td>
+	<td>12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user-create-button</td>
+	<td></td>
+</tr>
+<!--Check Message/...-->
+<tr>
+	<td>waitForText</td>
+	<td>css=div.formErrorContent</td>
+	<td>* Maximum 50 characters allowed</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.formErrorContent</td>
+	<td>* Maximum 50 characters allowed</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>type</td>
+	<td>id=user-user</td>
+	<td>${userName}7</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user-last-create</td>
+	<td>Test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=user-email-create</td>
+	<td>12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890@12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890.com</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user-create-button</td>
+	<td></td>
+</tr>
+<!--Check Message/...-->
+<tr>
+	<td>pause</td>
+	<td>2000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.formErrorContent</td>
+	<td>* Maximum 50 characters allowed</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.formErrorContent</td>
+	<td>* Maximum 50 characters allowed</td>
+</tr>
+<!--.../-->
+<tr>
+	<td>type</td>
+	<td>id=user-email-create</td>
+	<td>${userName}@${userName}.com</td>
+</tr>
+<!--Check Message/...-->
+<tr>
+	<td>click</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<!--.../-->
+<!--.../-->
+<tr>
+	<td>click</td>
+	<td>id=users-list</td>
+	<td></td>
+</tr>
+<!--Check Element count/summariz-->
+<tr>
+	<td>verifyCssCount</td>
+	<td>css=#user-table tbody .checkbox</td>
+	<td>${totalUsers}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#actions &gt; span</td>
+	<td>0 of ${totalUsers} Users Selected</td>
+</tr>
+<!--.../-->
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,649 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>slc_dashboard_verify_links_about_today</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">slc_dashboard_verify_links_about_today</td></tr>
+</thead><tbody>
+<!--#9460-->
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Analytics</td>
+	<td></td>
+</tr>
+<tr>
+	<td>getSysDate</td>
+	<td>today</td>
+	<td></td>
+</tr>
+<!--Verify alarms today-->
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=#lighting_alarm_today&gt;a</td>
+	<td>countTotal</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#lighting_alarm_today&gt;a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Analytics</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=datepicker1</td>
+	<td>${today}</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=datepicker2</td>
+	<td>${today}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#analytics-table tr:eq(1) td:eq(1)</td>
+	<td>${countTotal}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Dashboard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Analytics</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<!--Verify alarms week-->
+<tr>
+	<td>getSysDate</td>
+	<td>date1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>incrementDate</td>
+	<td>date1</td>
+	<td>-7</td>
+</tr>
+<tr>
+	<td>getSysDate</td>
+	<td>date2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>incrementDate</td>
+	<td>date2</td>
+	<td>-1</td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=#lighting_alarm_week&gt;a</td>
+	<td>countTotal</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#lighting_alarm_week&gt;a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=datepicker1</td>
+	<td>${date1}</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=datepicker2</td>
+	<td>${date2}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#analytics-table tr:eq(1) td:eq(1)</td>
+	<td>${countTotal}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Dashboard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<!--Verify alarms month-->
+<tr>
+	<td>getSysDate</td>
+	<td>date1</td>
+	<td></td>
+</tr>
+<!--VERIFY if month is 30 days or 31 days-->
+<tr>
+	<td>incrementDate</td>
+	<td>date1</td>
+	<td>-30</td>
+</tr>
+<tr>
+	<td>getSysDate</td>
+	<td>date2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>incrementDate</td>
+	<td>date2</td>
+	<td>-1</td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=#lighting_alarm_month&gt;a</td>
+	<td>countTotal</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#lighting_alarm_month&gt;a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=datepicker1</td>
+	<td>${date1}</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=datepicker2</td>
+	<td>${date2}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#analytics-table tr:eq(1) td:eq(1)</td>
+	<td>${countTotal}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Dashboard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<!--verify warning today-->
+<tr>
+	<td>storeText</td>
+	<td>css=#lighting_warning_today&gt;a</td>
+	<td>countTotal</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#lighting_warning_today&gt;a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Analytics</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=datepicker1</td>
+	<td>${today}</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=datepicker2</td>
+	<td>${today}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#analytics-table tr:eq(1) td:eq(1)</td>
+	<td>${countTotal}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Dashboard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Analytics</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<!--verify warning week-->
+<tr>
+	<td>getSysDate</td>
+	<td>date1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>incrementDate</td>
+	<td>date1</td>
+	<td>-7</td>
+</tr>
+<tr>
+	<td>getSysDate</td>
+	<td>date2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>incrementDate</td>
+	<td>date2</td>
+	<td>-1</td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=#lighting_warning_week&gt;a</td>
+	<td>countTotal</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#lighting_warning_week&gt;a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Analytics</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=datepicker1</td>
+	<td>${date1}</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=datepicker2</td>
+	<td>${date2}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#analytics-table tr:eq(1) td:eq(1)</td>
+	<td>${countTotal}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Dashboard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Analytics</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<!--verify warning month-->
+<tr>
+	<td>getSysDate</td>
+	<td>date1</td>
+	<td></td>
+</tr>
+<!--VERIFY if month is 30 days or 31 days-->
+<tr>
+	<td>incrementDate</td>
+	<td>date1</td>
+	<td>-30</td>
+</tr>
+<tr>
+	<td>getSysDate</td>
+	<td>date2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>incrementDate</td>
+	<td>date2</td>
+	<td>-1</td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=#lighting_warning_month&gt;a</td>
+	<td>countTotal</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#lighting_warning_month&gt;a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Analytics</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=datepicker1</td>
+	<td>${date1}</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=datepicker2</td>
+	<td>${date2}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#analytics-table tr:eq(1) td:eq(1)</td>
+	<td>${countTotal}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Dashboard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Analytics</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<!--verify installed today-->
+<tr>
+	<td>storeText</td>
+	<td>css=#lighting_installed_today&gt;a</td>
+	<td>countTotal</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#lighting_installed_today&gt;a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Analytics</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=datepicker1</td>
+	<td>${today}</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=datepicker2</td>
+	<td>${today}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#analytics-table tr:eq(1) td:eq(1)</td>
+	<td>${countTotal}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Dashboard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Analytics</td>
+	<td></td>
+</tr>
+<!--verify installed week-->
+<tr>
+	<td>getSysDate</td>
+	<td>date1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>incrementDate</td>
+	<td>date1</td>
+	<td>-7</td>
+</tr>
+<tr>
+	<td>getSysDate</td>
+	<td>date2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>incrementDate</td>
+	<td>date2</td>
+	<td>-1</td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=#lighting_installed_week&gt;a</td>
+	<td>countTotal</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#lighting_installed_week&gt;a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Analytics</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=datepicker1</td>
+	<td>${date1}</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=datepicker2</td>
+	<td>${date2}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#analytics-table tr:eq(1) td:eq(1)</td>
+	<td>${countTotal}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Dashboard</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Analytics</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<!--verify installed month-->
+<tr>
+	<td>getSysDate</td>
+	<td>date1</td>
+	<td></td>
+</tr>
+<!--VERIFY if month is 30 days or 31 days-->
+<tr>
+	<td>incrementDate</td>
+	<td>date1</td>
+	<td>-30</td>
+</tr>
+<tr>
+	<td>getSysDate</td>
+	<td>date2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>incrementDate</td>
+	<td>date2</td>
+	<td>-1</td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>css=#lighting_installed_month&gt;a</td>
+	<td>countTotal</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#lighting_installed_month&gt;a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Analytics</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=datepicker1</td>
+	<td>${date1}</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=datepicker2</td>
+	<td>${date2}</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#analytics-table tr:eq(1) td:eq(1)</td>
+	<td>${countTotal}</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

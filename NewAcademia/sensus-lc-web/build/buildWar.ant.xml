@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="Sensus war" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<include file="..\..\AntConfig\Sensus-ant-common-targets.xml" optional="false" />
+
+	<!-- <property name="antConfigDir" value="..\..\AntConfig" /> -->
+
+	<!-- *************************************************************************************** -->
+	<!-- This is the main build target. Make sure this target gets invoked and only this target. -->
+	<!-- *************************************************************************************** -->
+	<target name="build">
+
+		<antcall target="Sensus.mainBuildUIWar">
+			<param name="moduleName" value="sensus-lc-web" />
+			<param name="pomFile" value="../pom.xml" />
+			<param name="noCleanUIWarPost" value="true" />
+			<param name="configurationProjectName" value="sensus-lc-configuration" />
+			<param name="installLocal" value="true" />
+			<param name="genericWarFileName" value="slc.war" />
+			<!-- <param name="noCopyOverXSDFiles" value="true" /> -->
+			<param name="xsdRootSourceDir" value="../../sensus-lc-server-client/src/main/resources/wsxsd" />
+			<param name="releaseNumber" value="1.2.0" />
+			<param name="productInitials" value="lc" />
+
+			<!-- The directory log4j should be configured to log to in the final war -->
+			<param name="logDir" value="/opt/flexnet-slc/logs" />
+			<!-- The file name log4j should be configured to log to in the final war -->
+			<param name="logFile" value="slc.log" />
+			<!-- The file name log4j should be configured to log to in the final war for users actions -->
+			<param name="logFileUser" value="slc_user.log" />
+
+			<!-- Please keep these entries sorted so it's easy to find what you are looking for. -->
+			<!-- Also make sure the list has a comma at the beginning and end of every line and after the last entry. -->
+			<!-- Finally, if you update this list then also update the same list in the buildWar.jenkins.ant.xml file. -->
+			<param name="deleteFromWarLibList">
+				,activation*.jar, avalon*.jar, axis*.jar, batik*.jar, bcprov*.jar, cas*.jar,
+				,commons-beanutils-core*.jar, commons-logging-api*.jar, encoding*.jar, esapi*.jar, guava*.jar, guice*.jar,
+				,hibernate*.jar, jasypt*.jar, javax-jms*.jar, javax.servlet*.jar, jcip*.jar, jettison*.jar, jms*.jar, joda*.jar,
+				,josso*.jar, jsp*.jar, jul*.jar, layer*.jar, logkit*.jar, log4j-over-slf4j-1.6.1.jar, neethi*, not-yet*.jar,
+				,openid*.jar, opensaml*.jar, openws*.jar, opencsv*.jar, servlet*.jar, stax*.jar, spring-ldap-core*.jar, velocity*.jar,
+				,woodstox*.jar, wsit*.jar, xbean*.jar, xerces*.jar, xml-apis*.jar, xml-resolver*.jar, xmldsig*.jar, xmlschema*.jar,
+				,xmltooling*.jar, xws*.jar,
+			</param>
+
+		</antcall>
+	</target>
+
+
+	<!-- Invoked from within the Sensus-ant-common-targets ant file. -->
+	<target name="buildUIWarPrerequisites">
+
+		<antcall target="Sensus.mainBuildComponent">
+			<param name="moduleName" value="sensus-lc-interface" />
+			<param name="projectBaseDir" value="..\..\sensus-lc-interface" />
+			<param name="pomFile" value="..\..\sensus-lc-interface\pom.xml" />
+			<param name="srcDir" value="..\..\sensus-lc-interface\src\main\java" />
+		</antcall>
+
+		<antcall target="Sensus.mainBuildComponent">
+			<param name="moduleName" value="sensus-lc-implementation" />
+			<param name="projectBaseDir" value="..\..\sensus-lc-implementation" />
+			<param name="pomFile" value="..\..\sensus-lc-implementation\pom.xml" />
+			<param name="srcDir" value="..\..\sensus-lc-implementation\src\main\java" />
+		</antcall>
+
+		<antcall target="Sensus.mainBuildComponent">
+			<param name="moduleName" value="sensus-lc-web" />
+			<param name="projectBaseDir" value="..\..\sensus-lc-web" />
+			<param name="pomFile" value="..\..\sensus-lc-web\pom.xml" />
+			<param name="srcDir" value="..\..\sensus-lc-web\src\main\java" />
+		</antcall>
+
+	</target>
+
+</project>

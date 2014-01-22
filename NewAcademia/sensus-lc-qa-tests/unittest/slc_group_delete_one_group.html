@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://mallet-app.davis.sensus.lab:8080/" />
+<title>delete_one_group</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">delete_one_group</td></tr>
+</thead><tbody>
+<tr>
+	<td>runScript</td>
+	<td>$(&quot;#messaging-main&quot;).remove()</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeTableRows</td>
+	<td>css=#group-table tbody</td>
+	<td>rows</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${rows}</td>
+	<td>countGroups</td>
+</tr>
+<tr>
+	<td>storeTableRow</td>
+	<td>${updatedGroup}/2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(storedVars['row']) - 2</td>
+	<td>row</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#group-table tbody tr:eq(${row}) td:eq(10) a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=action-dialog</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=selected</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=selected</td>
+	<td>Group “${updatedGroup}“ will be deleted. Deleted Groups will remain in the system to retain historical data. You will not be able to use this Group Name again.</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=button.ui-button &gt; span.ui-button-text</td>
+	<td>Delete</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.ui-button &gt; span.ui-button-text</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=loading</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Group was successfully deleted.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#messaging-main &gt; span</td>
+	<td>Group was successfully deleted.</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>new Number(${countGroups}) - 1</td>
+	<td>rows</td>
+</tr>
+<tr>
+	<td>storeGlobal</td>
+	<td>${rows}</td>
+	<td>countGroups</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${countGroups}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=group-table_info</td>
+	<td>Showing 1 - ${countGroups} of ${countGroups} |</td>
+</tr>
+</tbody></table>
+</body>
+</html>

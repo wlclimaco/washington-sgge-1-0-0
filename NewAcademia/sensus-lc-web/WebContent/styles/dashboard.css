@@ -1,0 +1,36 @@
+.blanks-late {
+	padding:10% 15%
+}
+
+.content-inner {
+	width: 99.3% !important;
+}
+
+.content-inner .yui-t2 {
+	margin-top: 0 !important;
+}
+
+#detail-map-container {
+	height: 100%;
+	width: 100%;
+}
+
+#dashboard-lightfailure-table_wrapper .table-footer {
+	display: none !important;
+}
+
+#dashboard-powerfailure-table_wrapper .table-footer {
+	display: none !important;
+}
+
+#kwh-3, #kwh-7, #kwh-5, #kwh-9{
+	color : #032C5E !important;
+}
+
+#dashboard .blankslate {
+	padding: 6em 4em;
+}
+
+#dashboard .blankslate h5 {
+	font-size: 130%;
+}

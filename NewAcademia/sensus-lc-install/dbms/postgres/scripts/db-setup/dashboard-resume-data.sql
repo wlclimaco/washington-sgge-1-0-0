@@ -1,0 +1,1 @@
+select * from calculate_dashboard_resume(0.000717830556540234, 1,  NULL);

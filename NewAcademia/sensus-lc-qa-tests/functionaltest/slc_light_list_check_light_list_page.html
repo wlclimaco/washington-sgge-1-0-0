@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>check_light_list_page</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">check_light_list_page</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>link=Lights</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=preload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=pole_id</td>
+	<td>Pole ID</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=flexnet_id</td>
+	<td>FlexNet ID</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=lamp_type_wattage_dimmable</td>
+	<td>Light Type</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=date_added</td>
+	<td>Date Added</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=th[id=&quot;city&quot;]</td>
+	<td>City</td>
+</tr>
+<tr>
+	<td>storeElementPresent</td>
+	<td>id=ecomode</td>
+	<td>ecoModeEnable</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${ecoModeEnable}</td>
+	<td>ecoModeJumpLabel</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>id=menu-smartpoints@class</td>
+	<td>alist active</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=ecomode</td>
+	<td>Eco-Mode</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>ecoModeJumpLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#LIFECYCLE_STATE label</td>
+	<td>LifeCycle State</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#ALERTS label</td>
+	<td>Alerts</td>
+</tr>
+</tbody></table>
+</body>
+</html>
