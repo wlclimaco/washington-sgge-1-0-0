@@ -1404,8 +1404,7 @@
 
 				var oRequest = new settingsRequest(aSettingsList);
 
-				$.sc.getJson('api/settings/upsert', oRequest, false, null, $.sc
-						.locale("action.savesettings.success"), true);
+				$.sc.getJson('api/settings/upsert', oRequest, false, null, $.sc.locale("action.savesettings.success"), true);
 
 				if ($(".dataTables_length").find("option:selected").val()) {
 					$.sc.stopProgressBar(null, false);
@@ -1413,8 +1412,7 @@
 
 			};
 
-			$.sc.getJson("api/settings/fetchproperties", null, false,
-					fnCallback, null, true);
+			$.sc.getJson("api/settings/fetchproperties", null, false,fnCallback, null, true);
 
 		};
 
