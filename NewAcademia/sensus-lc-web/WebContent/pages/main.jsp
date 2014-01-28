@@ -20,6 +20,11 @@
 		<link rel="stylesheet" href="/slc/thirdparty/jquery/ui/jquery.validate.password.css" />
 		<link rel="stylesheet" href="/slc/styles/common_grid.css"/>
 	    <link rel="stylesheet" href="/slc/styles/slick.pager.css"/>
+		<link rel="stylesheet" href="/slc/thirdparty/SlickGrid/slick.grid.css" type="text/css"/>
+	    <link rel="stylesheet" href="/slc/thirdparty/SlickGrid/controls/slick.pager.css" type="text/css"/>
+	    <link rel="stylesheet" href="/slc/thirdparty/SlickGrid/css/smoothness/jquery-ui-1.8.16.custom.css" type="text/css"/>
+	    <link rel="stylesheet" href="/slc/thirdparty/SlickGrid/examples.css" type="text/css"/>
+	    <link rel="stylesheet" href="/slc/thirdparty/SlickGrid/controls/slick.columnpicker.css" type="text/css"/>
 		<jsp:include page="user_info.jsp" flush="true"/>
 	</head>
 	<body>
@@ -103,19 +108,19 @@
 		 <script src="scripts/config/wd_config.js"></script>
 
 		<script src="scripts/util/process_util.js"></script>
-		<script src="thirdparty/jquery/jquery-ui-layout-resize-accordions.js"></script>
-		<script src="thirdparty/jquery/slick.core.js"></script>
-		<script src="thirdparty/jquery/slick.rowselectionmodel.js"></script>
-		<script src="thirdparty/jquery/slick.cellrangedecorator.js"></script>
-		<script src="thirdparty/jquery/slick.cellrangeselector.js"></script>
-		<script src="thirdparty/jquery/slick.cellselectionmodel.js"></script>
-		<script src="thirdparty/jquery/slick.formatters.js"></script>
-		<script src="thirdparty/jquery/slick.editors.js"></script>
-		<script src="thirdparty/jquery/slick.grid.js"></script>
-		<script src="commons/scripts/util/wd_core_3.0.0.js"></script>
-		<script src="commons/scripts/model/user_context.js"></script>
 		<script src="commons/scripts/model/request_objects.js"></script>
 		<script src="commons/scripts/model/domain_objects.js"></script>
+
+		<script src="thirdparty/SlickGrid/lib/jquery.event.drag-2.2.js"></script>
+
+		<script src="thirdparty/SlickGrid/slick.core.js"></script>
+		<script src="thirdparty/SlickGrid/slick.formatters.js"></script>
+		<script src="thirdparty/SlickGrid/slick.editors.js"></script>
+		<script src="thirdparty/SlickGrid/plugins/slick.rowselectionmodel.js"></script>
+		<script src="thirdparty/SlickGrid/slick.grid.js"></script>
+		<script src="thirdparty/SlickGrid/slick.dataview.js"></script>
+		<script src="thirdparty/SlickGrid/controls/slick.pager.js"></script>
+		<script src="thirdparty/SlickGrid/controls/slick.columnpicker.js"></script>
 
 
 
