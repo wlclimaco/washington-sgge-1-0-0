@@ -2,8 +2,13 @@
 <script type="text/javascript">
 var dataView;
 var grid;
+var aRowChg = new Array();
+var pgrid;
 var data = [];
 var rowChg;
+var rowValue = 0;
+var ploader = new Slick.Data.RemoteModel();
+var onProcDataLoading = new EventHelper();
 var columns = [
   {id: "sel", name: "#", field: "num", behavior: "select", cssClass: "cell-selection", width: 40, cannotTriggerInsert: true, resizable: false, selectable: false },
   {id: "title", name: "Title", field: "title", width: 120, minWidth: 120, cssClass: "cell-title", editor: Slick.Editors.Text, validator: requiredFieldValidator, sortable: true},
@@ -71,8 +76,8 @@ $(".grid-header .ui-icon")
         .mouseout(function (e) {
           $(e.target).removeClass("ui-state-hover")
         });
+function renderTable(){
 
-$(function () {
   // prepare the data
   var d = (data[0] = {});
   d["id"] = "";
@@ -84,8 +89,11 @@ $(function () {
   d["finish"] = "";
   d["effortDriven"] = 0;
 
-  data = sensus.pages.grupoMuscular2.callPagedFetchWS(null,null);
+  var oData = sensus.pages.grupoMuscular2.callPagedFetchWS(null,null);
 
+   for (var i = 0; i < oData.length; i++) {
+     data.push(oData[i]);
+   }
 
   dataView = new Slick.Data.DataView({ inlineFilters: true });
   grid = new Slick.Grid("#myGrid", dataView, columns, options);
@@ -247,17 +255,17 @@ $(function () {
 {
 	if (wd.core.isEmpty(data[rowValue].pcode))
 	{
-		pgrid.gotoCell(rowValue,3,true);
-		$(pgrid.getActiveCellNode()).addClass("invalid");
-		$(pgrid.getActiveCellNode()).stop(true,true).effect("highlight", {color:"red"}, 300);
-		wd.core.displayNotificationMessage('#StatusBar',procedure.requiredfield.msg, false, 'error', 5000);
+		/* grid.gotoCell(rowValue,2,true);
+		$(grid.getActiveCellNode()).addClass("invalid");
+		$(grid.getActiveCellNode()).stop(true,true).effect("highlight", {color:"red"}, 300);
+		wd.core.displayNotificationMessage('#StatusBar',procedure.requiredfield.msg, false, 'error', 5000); */
 	}
 	else if (wd.core.isEmpty(data[rowValue].pdesc))
 	{
-		pgrid.gotoCell(rowValue,4,true);
-		$(pgrid.getActiveCellNode()).addClass("invalid");
-		$(pgrid.getActiveCellNode()).stop(true,true).effect("highlight", {color:"red"}, 300);
-		wd.core.displayNotificationMessage('#StatusBar',procedure.requiredfield.msg, false, 'error', 5000);
+		/* grid.gotoCell(rowValue,1,true);
+		$(grid.getActiveCellNode()).addClass("invalid");
+		$(grid.getActiveCellNode()).stop(true,true).effect("highlight", {color:"red"}, 300);
+		wd.core.displayNotificationMessage('#StatusBar',procedure.requiredfield.msg, false, 'error', 5000); */
 	}
 	else
 	{
@@ -268,24 +276,45 @@ $(function () {
 
   $('#myGrid').keyup(function(e)
   {
-  console.log(e.keyCode);
+
 	if (e.keyCode == 13)
 	{
-		if (rowChg >= 1 )
+	debugger;
+		if (rowValue >= 1 )
 		{
-			sensus.pages.grupoMuscular2.callUpdateWS(aRowChg);
+			sensus.pages.grupoMuscular2.callUpdateWS(rowValue);
 		}
 		else
 		{
-			if (validateFields(0))
-			{
-				sensus.pages.grupoMuscular2.callInsertWS();
-			}
+/* 			if (validateFields(0))
+			{ */
+			console.log(data[0]);
+				sensus.pages.grupoMuscular2.callInsertWS(grid,new academiaRequest(
+		0,
+		data[0].duration,
+		data[0].duration,
+		data[0].duration,
+		data[0].duration,
+		data[0].duration,
+		data[0].duration,
+		data[0].duration,
+		data[0].start,
+		data[0].finish,
+		true
+	));
+	/* 		} */
+
 		}
+		onProcDataLoading.notify({});
 	}
 });
 
 
   $.sc.stopGlobalProgressBar();
+
+}
+
+$(function () {
+renderTable();
 })
 </script>

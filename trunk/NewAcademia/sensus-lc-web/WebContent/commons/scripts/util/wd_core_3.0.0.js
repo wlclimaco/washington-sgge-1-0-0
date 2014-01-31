@@ -41,7 +41,6 @@ var layoutSettings_WebDaptive =
 	// west or navigation settings
 	,	west__size:				250
 	,	west__showOverflowOnHover:  true
-	,	west__onresize:		$.layout.callbacks.resizePaneAccordions
 };
 
 

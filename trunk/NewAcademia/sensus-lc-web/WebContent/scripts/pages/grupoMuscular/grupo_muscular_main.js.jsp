@@ -15,9 +15,26 @@
  */
 sensus.pages.grupoMuscular2 = {
 callInsertWS : function(sUrl, oRequest) {
-	onProcDataLoading.notify({});
+/* 	onProcDataLoading.notify({});
 	var oData = new qat.model.reqProc(null, new qat.model.procedure(0,0,data[0].pcode,data[0].pdesc,0.0),true,true);
-	rest_post_call('qat-webdaptive/procedure/api/insertBAS', oData, fill_data, process_error);
+	rest_post_call('qat-webdaptive/procedure/api/insertBAS', oData, fill_data, process_error); */
+
+var fnCallBack = function(data){
+
+	if (data.operationSuccess){
+		sensus.pages.grupoMuscular2.callPagedFetchWS();
+	//	renderTable();
+	}
+};
+
+//		sIdUrl = sensus.widgets.datatable.isAllRows && nIds.length <= 0 ? "" : nIds;
+
+	$(this).dialog('close');
+	$.sc.startProgressBar(null,true);
+
+
+	$.sc.getJson('api/academia/insert',oRequest, false, fnCallBack);
+	//sUrl.render();
 },
 
 callUpdateWS : function(sUrl, oRequest) {

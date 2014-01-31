@@ -65,6 +65,7 @@
 		<script src="thirdparty/openlayers/OpenLayers.js"></script>
 		<script src="commons/widget-ui/sensus_commons-maps-0.1.js"></script>
 		<script src="commons/widget-ui/sensus_commons-filters-0.1.js"></script>
+		<script src="commons/scripts/util/wd_core_3.0.0.js"></script>
 
 		<script src="thirdparty/jquery/jquery.dataTables.min.js"></script>
 		<script src="thirdparty/jquery/custom/jquery.dataTables.custom.js"></script>
