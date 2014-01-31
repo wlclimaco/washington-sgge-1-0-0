@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.sensus.common.model.UserContext;
+import com.sensus.lc.base.model.request.LightSelectionRequest;
 import com.sensus.lc.grupomuscular.model.Grupomuscular;
-import com.sensus.lc.tenant.model.request.TenantRequest;
 
 /**
  * The Class GrupomuscularRequest.
  * 
  * @author Washington
  */
-public class GrupomuscularRequest extends TenantRequest
+public class GrupomuscularRequest extends LightSelectionRequest
 {
 	/** The grupomusculars. */
 	private List<Grupomuscular> grupomusculars;
