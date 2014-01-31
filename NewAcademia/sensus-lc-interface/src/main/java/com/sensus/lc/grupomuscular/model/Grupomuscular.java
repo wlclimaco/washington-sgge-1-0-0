@@ -2,14 +2,57 @@ package com.sensus.lc.grupomuscular.model;
 
 import com.sensus.common.model.SensusModel;
 
+/**
+ * The Class Grupomuscular.
+ */
 @SuppressWarnings("serial")
 public class Grupomuscular extends SensusModel
 {
 	/** The Constant FIRST. */
 	private static final Integer FIRST = 0;
+
+	/** The cdgrmusc. */
 	private Integer cdgrmusc;
+
+	/** The musculo. */
 	private String musculo;
+
+	/** The dsgrmusc. */
 	private String dsgrmusc;
+
+	/**
+	 * Instantiates a new grupomuscular.
+	 */
+	public Grupomuscular()
+	{
+		super();
+	}
+
+	/**
+	 * Instantiates a new grupomuscular.
+	 * 
+	 * @param cdgrmusc the cdgrmusc
+	 * @param musculo the musculo
+	 * @param dsgrmusc the dsgrmusc
+	 */
+	public Grupomuscular(Integer cdgrmusc, String musculo, String dsgrmusc)
+	{
+		super();
+		this.cdgrmusc = cdgrmusc;
+		this.musculo = musculo;
+		this.dsgrmusc = dsgrmusc;
+	}
+
+	/**
+	 * Instantiates a new grupomuscular.
+	 * 
+	 * @param cdgrmusc the cdgrmusc
+	 */
+	public Grupomuscular(Integer cdgrmusc)
+	{
+		super();
+		this.cdgrmusc = cdgrmusc;
+	}
 
 	/**
 	 * Gets the cdgrmusc.

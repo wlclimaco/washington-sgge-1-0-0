@@ -5,6 +5,7 @@ import com.sensus.lc.grupomuscular.model.request.InquiryGrupomuscularRequest;
 import com.sensus.lc.grupomuscular.model.response.GrupomuscularResponse;
 import com.sensus.lc.grupomuscular.model.response.InquiryGrupomuscularResponse;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Interface IGrupomuscularBCF.
  * 
@@ -61,5 +62,13 @@ public interface IGrupomuscularBCF
 	 * @return the grupomuscular response
 	 */
 	GrupomuscularResponse deleteGrupomuscular(GrupomuscularRequest grupomuscularRequest);
+
+	/**
+	 * Fetch all grupomuscular by user.
+	 * 
+	 * @param inquiryGrupomuscularRequest the inquiry grupomuscular request
+	 * @return the inquiry grupomuscular response
+	 */
+	InquiryGrupomuscularResponse fetchAllGrupomuscularByUser(InquiryGrupomuscularRequest inquiryGrupomuscularRequest);
 
 }
