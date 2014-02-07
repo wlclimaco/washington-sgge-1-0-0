@@ -13,12 +13,18 @@ function ActionCriteria(iPercentage, sBlinkStatus, sOverride, dOverridePerDate, 
 
 }
 
+function GrupomuscularRequest(cdgrmusc,musculo,dsgrmusc)
+{
+	this.grupomusculars = [{}];
+    var alarmsTypeList = [{cdgrmusc: parseInt(cdgrmusc, 10), musculo : musculo,dsgrmusc:dsgrmusc,createdate: $.datepicker.formatDate('yy-mm-dd',new Date()) + '-00-00-00-000',createuser	: sensus.settings.userContext.userId,tenantid : parseInt(sensus.settings.userContext.tenant.id,10),userid : parseInt(sensus.settings.userContext.id,10) }]
+	this.grupomusculars = alarmsTypeList;
+}
 
 
 function academiaRequest(cdacad,academ,lograd,numen,bairr,cidade,cep,telef,dataini,datafin,atual)
 {
 //debugger;
-	this.academia = {};
+	this.academia = [{}];
 	this.academia.cdacad = cdacad;
 	this.academia.academ = academ;
 	this.academia.lograd = lograd;

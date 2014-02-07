@@ -1,5 +1,7 @@
 package com.sensus.lc.grupomuscular.model;
 
+import java.util.Date;
+
 import com.sensus.common.model.SensusModel;
 
 /**
@@ -19,6 +21,18 @@ public class Grupomuscular extends SensusModel
 
 	/** The dsgrmusc. */
 	private String dsgrmusc;
+
+	/** The createdate. */
+	private Date createdate;
+
+	/** The createuser. */
+	private String createuser;
+
+	/** The tenantid. */
+	private Integer tenantid;
+
+	/** The tenantid. */
+	private Integer userid;
 
 	/**
 	 * Instantiates a new grupomuscular.
@@ -41,6 +55,34 @@ public class Grupomuscular extends SensusModel
 		this.cdgrmusc = cdgrmusc;
 		this.musculo = musculo;
 		this.dsgrmusc = dsgrmusc;
+	}
+
+	public Grupomuscular(Integer cdgrmusc, Integer tenantid, Integer userid)
+	{
+		super();
+		this.cdgrmusc = cdgrmusc;
+		this.tenantid = tenantid;
+		this.userid = userid;
+	}
+
+	public Grupomuscular(Integer cdgrmusc, Integer userid)
+	{
+		super();
+		this.cdgrmusc = cdgrmusc;
+		this.userid = userid;
+	}
+
+	public Grupomuscular(Integer cdgrmusc, String musculo, String dsgrmusc, Date createdate, String createuser,
+			Integer tenantid, Integer userid)
+	{
+		super();
+		this.cdgrmusc = cdgrmusc;
+		this.musculo = musculo;
+		this.dsgrmusc = dsgrmusc;
+		this.createdate = createdate;
+		this.createuser = createuser;
+		this.tenantid = tenantid;
+		this.userid = userid;
 	}
 
 	/**
@@ -114,6 +156,86 @@ public class Grupomuscular extends SensusModel
 		this.dsgrmusc = dsgrmusc;
 	}
 
+	/**
+	 * Gets the createdate.
+	 * 
+	 * @return the createdate
+	 */
+	public Date getCreatedate()
+	{
+		return createdate;
+	}
+
+	/**
+	 * Sets the createdate.
+	 * 
+	 * @param createdate the new createdate
+	 */
+	public void setCreatedate(Date createdate)
+	{
+		this.createdate = createdate;
+	}
+
+	/**
+	 * Gets the createuser.
+	 * 
+	 * @return the createuser
+	 */
+	public String getCreateuser()
+	{
+		return createuser;
+	}
+
+	/**
+	 * Sets the createuser.
+	 * 
+	 * @param createuser the new createuser
+	 */
+	public void setCreateuser(String createuser)
+	{
+		this.createuser = createuser;
+	}
+
+	/**
+	 * Gets the tenantid.
+	 * 
+	 * @return the tenantid
+	 */
+	public Integer getTenantid()
+	{
+		return tenantid;
+	}
+
+	/**
+	 * Sets the tenantid.
+	 * 
+	 * @param tenantid the new tenantid
+	 */
+	public void setTenantid(Integer tenantid)
+	{
+		this.tenantid = tenantid;
+	}
+
+	/**
+	 * Gets the userid.
+	 * 
+	 * @return the userid
+	 */
+	public Integer getUserid()
+	{
+		return userid;
+	}
+
+	/**
+	 * Sets the userid.
+	 * 
+	 * @param userid the new userid
+	 */
+	public void setUserid(Integer userid)
+	{
+		this.userid = userid;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see com.sensus.common.model.SensusModel#toString()
@@ -121,8 +243,10 @@ public class Grupomuscular extends SensusModel
 	@Override
 	public String toString()
 	{
-		return "Grupomuscular[ getCdgrmusc()=" + getCdgrmusc() + ", getMusculo()=" + getMusculo() + ", getDsgrmusc()="
-				+ getDsgrmusc()
-				+ "]";
+		return "Grupomuscular [getCdgrmusc()=" + getCdgrmusc() + ", getMusculo()=" + getMusculo() + ", getDsgrmusc()="
+				+ getDsgrmusc() + ", getCreatedate()=" + getCreatedate() + ", getCreateuser()=" + getCreateuser()
+				+ ", getTenantid()=" + getTenantid() + ", getUserid()=" + getUserid() + ", toString()="
+				+ super.toString() + "]";
 	}
+
 }

@@ -5,7 +5,6 @@ import com.sensus.lc.grupomuscular.model.request.InquiryGrupomuscularRequest;
 import com.sensus.lc.grupomuscular.model.response.GrupomuscularResponse;
 import com.sensus.lc.grupomuscular.model.response.InquiryGrupomuscularResponse;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface IGrupomuscularBCF.
  * 

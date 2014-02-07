@@ -811,4 +811,8 @@
 		<property name="academiaDAC" ref="academiaDACTarget" />
 	</bean>
 
+	<bean id="grupomuscularBCLTarget" class="com.sensus.lc.grupomuscular.bcl.impl.GrupomuscularBCLImpl">
+		<property name="grupomuscularDAC" ref="grupomuscularDACTarget" />
+	</bean>
+
 </beans>
