@@ -24,7 +24,6 @@ import com.sensus.lc.grupomuscular.model.request.InquiryGrupomuscularRequest;
  */
 public class GrupomuscularDACImpl extends SqlSessionDaoSupport implements IGrupomuscularDAC
 {
-	private static final String FETCH_ALL_GRUPOMUSCULAR_BY_USER = "fetchAllGrupomuscularByUser";
 
 	// -------------------------------------------------------------------------
 	// Symbols, characters and etc (not i18n).
@@ -109,6 +108,8 @@ public class GrupomuscularDACImpl extends SqlSessionDaoSupport implements IGrupo
 	/** The Constant DELETE_GRUPOMUSCULAR. */
 	private static final String DELETE_GRUPOMUSCULAR = GRUPOMUSCULAR_MAP + "deleteGrupomuscular";
 
+	private static final String FETCH_ALL_GRUPOMUSCULAR_BY_USER = GRUPOMUSCULAR_MAP + "fetchAllGrupomuscularByUser";
+
 	/** The Constant FETCH_ALL_GRUPOMUSCULARS. */
 	private static final String FETCH_ALL_GRUPOMUSCULARS = GRUPOMUSCULAR_MAP + "fetchAllGrupomusculars";
 
@@ -175,21 +176,14 @@ public class GrupomuscularDACImpl extends SqlSessionDaoSupport implements IGrupo
 	public InternalResultsResponse<Grupomuscular> insertGrupomuscular(GrupomuscularRequest grupomuscularRequest)
 	{
 		HashMap<String, Object> paramMap = new HashMap<String, Object>(PARAMSIZE10);
-		//
-		// paramMap.put("academ", grupomuscularRequest.getGrupomuscular().getAcadem());
-		// paramMap.put("lograd", grupomuscularRequest.getGrupomuscular().getLograd());
-		// paramMap.put("numen", grupomuscularRequest.getGrupomuscular().getNumen());
-		// paramMap.put("bairr", grupomuscularRequest.getGrupomuscular().getBairr());
-		// paramMap.put("cidade", grupomuscularRequest.getGrupomuscular().getCidade());
-		// paramMap.put("cep", grupomuscularRequest.getGrupomuscular().getCep());
-		// paramMap.put("telef", grupomuscularRequest.getGrupomuscular().getTelef());
-		// paramMap.put("dataini", grupomuscularRequest.getGrupomuscular().getDataini());
-		// paramMap.put("dataFin", grupomuscularRequest.getGrupomuscular().getDatafin());
-		// paramMap.put("createDate", grupomuscularRequest.getGrupomuscular().getCreatedate());
-		// paramMap.put("createUser", grupomuscularRequest.getGrupomuscular().getCreateuser());
-		// paramMap.put("tenantid", grupomuscularRequest.getGrupomuscular().getTenantid());
-		// paramMap.put("userid", grupomuscularRequest.getGrupomuscular().getUserid());
-		// paramMap.put("atual", grupomuscularRequest.getGrupomuscular().getAtual());
+
+		paramMap.put("cdGropoMusc", grupomuscularRequest.getGrupomusculars().get(0).getCdgrmusc());
+		paramMap.put("nome", grupomuscularRequest.getGrupomusculars().get(0).getMusculo());
+		paramMap.put("descricao", grupomuscularRequest.getGrupomusculars().get(0).getDsgrmusc());
+		paramMap.put("create_date", grupomuscularRequest.getGrupomusculars().get(0).getCreatedate());
+		paramMap.put("create_user", grupomuscularRequest.getGrupomusculars().get(0).getCreateuser());
+		paramMap.put("tenant_id", grupomuscularRequest.getGrupomusculars().get(0).getTenantid());
+		paramMap.put("userid", grupomuscularRequest.getGrupomusculars().get(0).getUserid());
 
 		Integer grupomuscularId =
 				(Integer)SensusMyBatisDacHelper.doQueryForObject(getSqlSession(), INSERT_GRUPOMUSCULAR, paramMap);
@@ -220,21 +214,13 @@ public class GrupomuscularDACImpl extends SqlSessionDaoSupport implements IGrupo
 	{
 		HashMap<String, Object> paramMap = new HashMap<String, Object>(PARAMSIZE11);
 
-		// paramMap.put("cdacad", grupomuscularRequest.getGrupomuscular().getCdacad());
-		// paramMap.put("academ", grupomuscularRequest.getGrupomuscular().getAcadem());
-		// paramMap.put("lograd", grupomuscularRequest.getGrupomuscular().getLograd());
-		// paramMap.put("numen", grupomuscularRequest.getGrupomuscular().getNumen());
-		// paramMap.put("bairr", grupomuscularRequest.getGrupomuscular().getBairr());
-		// paramMap.put("cidade", grupomuscularRequest.getGrupomuscular().getCidade());
-		// paramMap.put("cep", grupomuscularRequest.getGrupomuscular().getCep());
-		// paramMap.put("telef", grupomuscularRequest.getGrupomuscular().getTelef());
-		// paramMap.put("dataini", grupomuscularRequest.getGrupomuscular().getDataini());
-		// paramMap.put("dataFin", grupomuscularRequest.getGrupomuscular().getDatafin());
-		// paramMap.put("createDate", grupomuscularRequest.getGrupomuscular().getCreatedate());
-		// paramMap.put("createUser", grupomuscularRequest.getGrupomuscular().getCreateuser());
-		// paramMap.put("tenantid", grupomuscularRequest.getGrupomuscular().getTenantid());
-		// paramMap.put("userid", grupomuscularRequest.getGrupomuscular().getUserid());
-		// paramMap.put("atual", grupomuscularRequest.getGrupomuscular().getAtual());
+		paramMap.put("cdGropoMusc", grupomuscularRequest.getGrupomusculars().get(0).getCdgrmusc());
+		paramMap.put("nome", grupomuscularRequest.getGrupomusculars().get(0).getMusculo());
+		paramMap.put("descricao", grupomuscularRequest.getGrupomusculars().get(0).getDsgrmusc());
+		paramMap.put("create_date", grupomuscularRequest.getGrupomusculars().get(0).getCreatedate());
+		paramMap.put("create_user", grupomuscularRequest.getGrupomusculars().get(0).getCreateuser());
+		paramMap.put("tenant_id", grupomuscularRequest.getGrupomusculars().get(0).getTenantid());
+		paramMap.put("userid", grupomuscularRequest.getGrupomusculars().get(0).getUserid());
 
 		String result =
 				(String)SensusMyBatisDacHelper.doQueryForObject(getSqlSession(), UPDATE_GRUPOMUSCULAR, paramMap);
@@ -247,7 +233,7 @@ public class GrupomuscularDACImpl extends SqlSessionDaoSupport implements IGrupo
 		}
 		else
 		{
-			// response.getResultsList().add(grupomuscularRequest.getGrupomusculars());
+			response.getResultsList().add((Grupomuscular)grupomuscularRequest.getGrupomusculars());
 		}
 
 		return response;
@@ -276,11 +262,11 @@ public class GrupomuscularDACImpl extends SqlSessionDaoSupport implements IGrupo
 		paramMap.put(PAGE_SIZE, inquiryGrupomuscularRequest.getPageSize());
 		paramMap.put(START_PAGE, inquiryGrupomuscularRequest.getStartPage());
 		paramMap.put(START_ROW, inquiryGrupomuscularRequest.getStartRow());
-		paramMap.put(ORDERBY, "cdacad");
+		paramMap.put(ORDERBY, "cdgrmusc");
 
 		if (!ValidationUtil.isNullOrEmpty(inquiryGrupomuscularRequest.getSortExpressions()))
 		{
-			paramMap.put(ORDERBY, "cdacad");
+			paramMap.put(ORDERBY, "cdgrmusc");
 		}
 
 		doQueryForList(getSqlSession(), FETCH_ALL_GRUPOMUSCULARS, paramMap, response);
@@ -328,12 +314,12 @@ public class GrupomuscularDACImpl extends SqlSessionDaoSupport implements IGrupo
 		paramMap.put(PAGE_SIZE, inquiryGrupomuscularRequest.getPageSize());
 		paramMap.put(START_PAGE, inquiryGrupomuscularRequest.getStartPage());
 		paramMap.put(START_ROW, inquiryGrupomuscularRequest.getStartRow());
-		// paramMap.put(USER, inquiryGrupomuscularRequest.getGrupomusculars().get(0).getCreateuser());
-		paramMap.put(ORDERBY, "cdacad");
+		paramMap.put(USER, inquiryGrupomuscularRequest.getGrupomusculars().get(0).getCreateuser());
+		paramMap.put(ORDERBY, "cdGropoMusc");
 
 		if (!ValidationUtil.isNullOrEmpty(inquiryGrupomuscularRequest.getSortExpressions()))
 		{
-			paramMap.put(ORDERBY, "cdacad");
+			paramMap.put(ORDERBY, "cdGropoMusc");
 		}
 
 		doQueryForList(getSqlSession(), FETCH_ALL_GRUPOMUSCULAR_BY_USER, paramMap, response);
