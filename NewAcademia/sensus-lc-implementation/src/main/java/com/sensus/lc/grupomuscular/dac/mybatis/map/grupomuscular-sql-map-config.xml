@@ -11,14 +11,14 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 
 <typeAliases>
 	<typeAlias alias="Tenant"    type="com.sensus.lc.tenant.model.Tenant" />
-	<typeAlias alias="Academia"  type="com.sensus.lc.academia.model.Academia"/>
-	<typeAlias alias="AcademiaRequest"  type="com.sensus.lc.academia.model.request.AcademiaRequest"/>
-	<typeAlias alias="InquiryAcademiaRequest" type="com.sensus.lc.academia.model.request.InquiryAcademiaRequest" />
+	<typeAlias alias="Grupomuscular"  type="com.sensus.lc.grupomuscular.model.Grupomuscular"/>
+	<typeAlias alias="GrupomuscularRequest"  type="com.sensus.lc.grupomuscular.model.request.GrupomuscularRequest"/>
+	<typeAlias alias="InquiryGrupomuscularRequest" type="com.sensus.lc.grupomuscular.model.request.InquiryGrupomuscularRequest" />
 
 </typeAliases>
 
 <mappers>
-	<mapper resource="com/sensus/lc/academia/dac/mybatis/map/academia.xml"/>
+	<mapper resource="com/sensus/lc/grupomuscular/dac/mybatis/map/grupomuscular.xml"/>
 </mappers>
 
 </configuration>
