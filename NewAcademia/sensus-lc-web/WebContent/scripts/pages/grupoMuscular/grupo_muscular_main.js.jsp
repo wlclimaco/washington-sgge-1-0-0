@@ -73,37 +73,17 @@ callRefreshWS : function(sUrl, oRequest)
 	var oData = new qat.model.refreshRequest(null, _i, true, true);
 	rest_post_call('qat-webdaptive/procedure/api/refreshBAS', oData, fill_data, process_error);
 },
-callPagedFetchWS : function(sUrl, oRequest)
+callPagedFetchWS : function(sUrl, oRequest,fnCallback)
 {
 
-var oData = [];
-
-		var fnCallback = function(response){
-			for (var i = 0; i < response.academias.length; i++) {
-				var d = (oData[i] = {});
-
-				d["id"] = response.academias[i].cdacad;
-				d["num"] = response.academias[i].cdacad;
-				d["title"] = response.academias[i].academ;
-				d["duration"] = response.academias[i].tenantid;
-				d["percentComplete"] = response.academias[i].tenantid;
-				d["start"] = response.academias[i].dataini;
-				d["finish"] = response.academias[i].datafin;
-				d["effortDriven"] = response.academias[i].atual;
-			}
-
-
-			//console.log(oData);
-		};
 
 
 	//$.ajaxValidator.fnDoCall("api/academia/fetchall", inquiryAcademiaRequest, false, null,null,true);
-	$.sc.getJson("api/academia/fetchall", {"startRow":0,"endRow":0,"pageSize":25,"sortExpressions":[{"field":"NAME","direction":"Ascending"}],"academias":[{"createuser":"superuser","tenantid":1,"userid":1}]}, false,fnCallback, null, true);
+	$.sc.getJson("api/grupoMuscular/fetchall", {"startRow":0,"endRow":0,"pageSize":25,"sortExpressions":[{"field":"NAME","direction":"Ascending"}],"grupomusculars":[{"createuser":"superuser","tenantid":1,"userid":1}]}, false,fnCallback, null, true);
 
 
 	//onProcDataLoading.notify({});
 
-	return oData;
 }
 
 };

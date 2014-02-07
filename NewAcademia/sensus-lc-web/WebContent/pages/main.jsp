@@ -130,6 +130,7 @@
 		<script src="scripts/pages/process/long_running_process_main.js"></script>
 		<script src="scripts/pages/process/long_running_process_actions.js"></script>
 		<script src="scripts/pages/process/long_running_process_init.js"></script>
+		<script src="scripts/util/cSlider_functions.js"></script>
 	</body>
 	<%-- END Main Document --%>
 

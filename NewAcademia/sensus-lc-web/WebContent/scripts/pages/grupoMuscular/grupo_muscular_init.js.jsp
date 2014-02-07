@@ -2,21 +2,16 @@
 <script type="text/javascript">
 var dataView;
 var grid;
+var rowChg;
 var aRowChg = new Array();
 var pgrid;
 var data = [];
-var rowChg;
 var rowValue = 0;
-var ploader = new Slick.Data.RemoteModel();
 var onProcDataLoading = new EventHelper();
 var columns = [
-  {id: "sel", name: "#", field: "num", behavior: "select", cssClass: "cell-selection", width: 40, cannotTriggerInsert: true, resizable: false, selectable: false },
-  {id: "title", name: "Title", field: "title", width: 120, minWidth: 120, cssClass: "cell-title", editor: Slick.Editors.Text, validator: requiredFieldValidator, sortable: true},
-  {id: "duration", name: "Duration", field: "duration", editor: Slick.Editors.Text, sortable: true},
-  {id: "%", defaultSortAsc: false, name: "% Complete", field: "percentComplete", width: 80, resizable: false, formatter: Slick.Formatters.PercentCompleteBar, editor: Slick.Editors.PercentComplete, sortable: true},
-  {id: "start", name: "Start", field: "start", minWidth: 60, editor: Slick.Editors.Date, sortable: true},
-  {id: "finish", name: "Finish", field: "finish", minWidth: 60, editor: Slick.Editors.Date, sortable: true},
-  {id: "effort-driven", name: "Effort Driven", width: 80, minWidth: 20, maxWidth: 80, cssClass: "cell-effort-driven", field: "effortDriven", formatter: Slick.Formatters.Checkmark, editor: Slick.Editors.Checkbox, cannotTriggerInsert: true, sortable: true}
+  {id: "cdgrmusc", name: "cdgrmusc", field: "cdgrmusc", behavior: "select", cssClass: "cell-selection", width: 40, cannotTriggerInsert: true, resizable: false, selectable: false },
+  {id: "musculo", name: "musculo", field: "musculo", width: 120, minWidth: 120, cssClass: "cell-title", editor: Slick.Editors.Text, validator: requiredFieldValidator, sortable: true},
+  {id: "dsgrmusc", name: "dsgrmusc", field: "dsgrmusc", editor: Slick.Editors.Text, sortable: true}
 ];
 
 var options = {
@@ -28,7 +23,7 @@ var options = {
   topPanelHeight: 25
 };
 
-var sortcol = "title";
+var sortcol = "cdgrmusc";
 var sortdir = 1;
 var percentCompleteThreshold = 0;
 var searchString = "";
@@ -47,15 +42,11 @@ function myFilter(item, args) {
     return false;
   }
 
-  if (args.searchString != "" && item["title"].indexOf(args.searchString) == -1) {
+  if (args.searchString != "" && item["cdgrmusc"].indexOf(args.searchString) == -1) {
     return false;
   }
 
   return true;
-}
-
-function percentCompleteSort(a, b) {
-  return a["percentComplete"] - b["percentComplete"];
 }
 
 function comparer(a, b) {
@@ -77,19 +68,31 @@ $(".grid-header .ui-icon")
           $(e.target).removeClass("ui-state-hover")
         });
 function renderTable(){
+	var oData = [];
+
+	var fnCallback = function(response){
+
+		for (var i = 0; i < response.grupomusculars.length; i++) {
+			var d = (oData[i] = {});
+			d["id"] = response.grupomusculars[i].cdgrmusc;
+			d["cdgrmusc"] = response.grupomusculars[i].cdgrmusc;
+			d["musculo"] = response.grupomusculars[i].musculo;
+			d["dsgrmusc"] = response.grupomusculars[i].dsgrmusc;
+		}
+
+
+		//console.log(oData);
+	};
 
   // prepare the data
   var d = (data[0] = {});
-  d["id"] = "";
-  d["num"] = 0;
-  d["title"] = "";
-  d["duration"] = "";
-  d["percentComplete"] = 0;
-  d["start"] = "";
-  d["finish"] = "";
-  d["effortDriven"] = 0;
+	  d["id"] = 0;
+	  d["cdgrmusc"] = 0;
+	  d["musculo"] = "";
+	  d["dsgrmusc"] = "";
 
-  var oData = sensus.pages.grupoMuscular2.callPagedFetchWS(null,null);
+ //sensus.pages.grupoMuscular2.callPagedFetchWS(null,null,fnCallback);
+ sensus.pages.cSlider.callPagedFetchWS(null,null,fnCallback);
 
    for (var i = 0; i < oData.length; i++) {
      data.push(oData[i]);
@@ -102,7 +105,7 @@ function renderTable(){
   var pager = new Slick.Controls.Pager(dataView, grid, $("#pager"));
   var columnpicker = new Slick.Controls.ColumnPicker(columns, grid, options);
 
-
+console.log(grid);
   // move the filter panel defined in a hidden div into grid top panel
   $("#inlineFilterPanel")
       .appendTo(grid.getTopPanel())
@@ -110,6 +113,8 @@ function renderTable(){
 
   grid.onCellChange.subscribe(function (e, args) {
     dataView.updateItem(args.item.id, args.item);
+
+	rowValue = args.row;
   });
 
   grid.onAddNewRow.subscribe(function (e, args) {
@@ -274,35 +279,40 @@ function renderTable(){
 	return false;
 };
 
+
   $('#myGrid').keyup(function(e)
   {
 
 	if (e.keyCode == 13)
 	{
-	debugger;
+console.log(rowValue);
 		if (rowValue >= 1 )
 		{
-			sensus.pages.grupoMuscular2.callUpdateWS(rowValue);
+			sensus.pages.cSlider.callUpdateWS("api/grupoMuscular/update",new GrupomuscularRequest(data[rowValue].cdgrmusc,data[rowValue].musculo,data[rowValue].dsgrmusc));
 		}
 		else
 		{
 /* 			if (validateFields(0))
 			{ */
-			console.log(data[0]);
-				sensus.pages.grupoMuscular2.callInsertWS(grid,new academiaRequest(
-		0,
-		data[0].duration,
-		data[0].duration,
-		data[0].duration,
-		data[0].duration,
-		data[0].duration,
-		data[0].duration,
-		data[0].duration,
-		data[0].start,
-		data[0].finish,
-		true
-	));
-	/* 		} */
+
+					fnCallBack1 = function(datas){
+
+
+						if (datas.operationSuccess){
+							$.sc.startProgressBar(null,true);
+						    var  dd = dataView.getItems().length + 1;
+							var Object = {id: dd,cdgrmusc:data[0].cdgrmusc, musculo:data[0].musculo,dsgrmusc:data[0].dsgrmusc};
+							dataView.insertItem(1, Object);
+							grid.render();
+							$.sc.stopGlobalProgressBar();
+						}else{
+							$.sc.stopGlobalProgressBar();
+						}
+					};
+
+
+				sensus.pages.cSlider.callInsertWS("api/grupoMuscular/insert","api/grupoMuscular/fetchall",new GrupomuscularRequest(data[0].cdgrmusc,data[0].musculo,data[0].dsgrmusc),{"startRow":0,"endRow":0,"pageSize":25,"sortExpressions":[{"field":"NAME","direction":"Ascending"}],"grupomusculars":[{"createuser":"superuser","tenantid":1,"userid":1}]},fnCallBack1);
+
 
 		}
 		onProcDataLoading.notify({});
