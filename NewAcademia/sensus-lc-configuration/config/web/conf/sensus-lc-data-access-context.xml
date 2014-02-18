@@ -27,6 +27,13 @@
 		<property name="dataSource" ref="mlcDataSource" />
 	</bean>
 
+	<bean id="exercicio-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation"
+			value="classpath:com/sensus/lc/exercicio/dac/mybatis/map/exercicio-sql-map-config.xml" />
+		<property name="dataSource" ref="mlcDataSource" />
+	</bean>
+
+
 	<!-- SqlMap setup for myBATIS Database Layer TAG -->
 	<bean id="tag-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="configLocation"
@@ -160,6 +167,10 @@
 
 	<bean id="grupomuscularDACTarget" class="com.sensus.lc.grupomuscular.dac.mybatis.GrupomuscularDACImpl">
 		<property name="sqlSessionFactory" ref="grupomuscular-sqlSessionFactory" />
+	</bean>
+
+	<bean id="exercicioDACTarget" class="com.sensus.lc.exercicio.dac.mybatis.ExercicioDACImpl">
+		<property name="sqlSessionFactory" ref="exercicio-sqlSessionFactory" />
 	</bean>
 
 

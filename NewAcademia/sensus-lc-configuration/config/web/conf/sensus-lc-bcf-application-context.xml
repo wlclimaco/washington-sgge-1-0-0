@@ -152,4 +152,8 @@
 		<property name="grupomuscularBCL" ref="grupomuscularBCLTarget" />
 	</bean>
 
+	<bean id="exercicioBCF" class="com.sensus.lc.exercicio.bcf.impl.ExercicioBCFImpl">
+		<property name="exercicioBCL" ref="exercicioBCLTarget" />
+	</bean>
+
 </beans>
