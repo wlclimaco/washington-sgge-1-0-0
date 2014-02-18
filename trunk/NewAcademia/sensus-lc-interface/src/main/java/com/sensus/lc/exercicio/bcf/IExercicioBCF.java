@@ -62,4 +62,6 @@ public interface IExercicioBCF
 	 */
 	ExercicioResponse deleteExercicio(ExercicioRequest exercicioRequest);
 
+	InquiryExercicioResponse fetchAllExercicioByUser(InquiryExercicioRequest inquiryExercicioRequest);
+
 }

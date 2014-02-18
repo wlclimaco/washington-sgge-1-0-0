@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.sensus.common.model.UserContext;
+import com.sensus.lc.base.model.request.LightSelectionRequest;
 import com.sensus.lc.exercicio.model.Exercicio;
-import com.sensus.lc.tenant.model.request.TenantRequest;
 
 /**
  * The Class ExercicioRequest.
  * 
  * @author Washington
  */
-public class ExercicioRequest extends TenantRequest
+public class ExercicioRequest extends LightSelectionRequest
 {
 	/** The exercicios. */
 	private List<Exercicio> exercicios;
