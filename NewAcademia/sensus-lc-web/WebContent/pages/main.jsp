@@ -131,6 +131,11 @@
 		<script src="scripts/pages/process/long_running_process_actions.js"></script>
 		<script src="scripts/pages/process/long_running_process_init.js"></script>
 		<script src="scripts/util/cSlider_functions.js"></script>
+
+		<script src="commons/scripts/model/user_context.js"></script>
+		<script src="commons/scripts/model/request_objects.js"></script>
+		<script src="commons/scripts/model/domain_objects.js"></script>
+		<script src="commons/scripts/widget/slick.pager.js"></script>
 	</body>
 	<%-- END Main Document --%>
 

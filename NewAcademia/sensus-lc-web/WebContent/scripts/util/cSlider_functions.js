@@ -47,7 +47,7 @@ sensus.pages.cSlider = {
 
 
 		//$.ajaxValidator.fnDoCall("api/academia/fetchall", inquiryAcademiaRequest, false, null,null,true);
-		$.sc.getJson("api/grupoMuscular/fetchall", {"startRow":0,"endRow":0,"pageSize":25,"sortExpressions":[{"field":"NAME","direction":"Ascending"}],"grupomusculars":[{"createuser":"superuser","tenantid":1,"userid":1}]}, false,fnCallback, null, true);
+		$.sc.getJson(sUrl, oRequest, false,fnCallback, null, true);
 
 
 		//onProcDataLoading.notify({});

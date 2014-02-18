@@ -9,9 +9,11 @@ var data = [];
 var rowValue = 0;
 var onProcDataLoading = new EventHelper();
 var columns = [
-  {id: "cdgrmusc", name: "cdgrmusc", field: "cdgrmusc", behavior: "select", cssClass: "cell-selection", width: 40, cannotTriggerInsert: true, resizable: false, selectable: false },
-  {id: "musculo", name: "musculo", field: "musculo", width: 120, minWidth: 120, cssClass: "cell-title", editor: Slick.Editors.Text, validator: requiredFieldValidator, sortable: true},
-  {id: "dsgrmusc", name: "dsgrmusc", field: "dsgrmusc", editor: Slick.Editors.Text, sortable: true}
+  {id: "cdexerc", name: "cdexerc", field: "cdexerc", behavior: "select", cssClass: "cell-selection", width: 40, cannotTriggerInsert: true, resizable: false, selectable: false },
+  {id: "nmexerc", name: "nmexerc", field: "nmexerc", width: 120, minWidth: 120, cssClass: "cell-title", editor: Slick.Editors.Text, validator: requiredFieldValidator, sortable: true},
+  {id: "dsexerc", name: "dsexerc", field: "dsexerc", editor: Slick.Editors.Text, sortable: true},
+  {id: "grupomuscular", name: "grupomuscular", field: "grupomuscular", editor: Slick.Editors.Text, sortable: true},
+  {id: "ftexerc", name: "ftexerc", field: "ftexerc", editor: Slick.Editors.Text, sortable: true}
 ];
 
 var options = {
@@ -23,7 +25,7 @@ var options = {
   topPanelHeight: 25
 };
 
-var sortcol = "cdgrmusc";
+var sortcol = "cdexerc";
 var sortdir = 1;
 var percentCompleteThreshold = 0;
 var searchString = "";
@@ -69,15 +71,16 @@ $(".grid-header .ui-icon")
         });
 function renderTable(){
 	var oData = [];
-
 	var fnCallback = function(response){
 
-		for (var i = 0; i < response.grupomusculars.length; i++) {
+		for (var i = 0; i < response.exercicios.length; i++) {
 			var d = (oData[i] = {});
-			d["id"] = response.grupomusculars[i].cdgrmusc;
-			d["cdgrmusc"] = response.grupomusculars[i].cdgrmusc;
-			d["musculo"] = response.grupomusculars[i].musculo;
-			d["dsgrmusc"] = response.grupomusculars[i].dsgrmusc;
+			d["id"] = response.exercicios[i].cdgrmusc;
+			d["cdexerc"] = response.exercicios[i].cdexerc;
+			d["nmexerc"] = response.exercicios[i].nmexerc;
+			d["dsexerc"] = response.exercicios[i].dsexerc;
+			d["grupomuscular"] = response.exercicios[i].grupomuscular;
+			d["ftexerc"] = response.exercicios[i].ftexerc;
 		}
 
 
@@ -87,12 +90,14 @@ function renderTable(){
   // prepare the data
   var d = (data[0] = {});
 	  d["id"] = 0;
-	  d["cdgrmusc"] = 0;
-	  d["musculo"] = "";
-	  d["dsgrmusc"] = "";
+	  d["cdexerc"] = 0;
+	  d["nmexerc"] = "";
+	  d["dsexerc"] = "";
+	  d["grupomuscular"] = "";
+	  d["ftexerc"] = "";
 
  //sensus.pages.grupoMuscular2.callPagedFetchWS(null,null,fnCallback);
- sensus.pages.cSlider.callPagedFetchWS("api/grupoMuscular/fetchall",{"startRow":0,"endRow":0,"pageSize":25,"sortExpressions":[{"field":"NAME","direction":"Ascending"}],"grupomusculars":[{"createuser":"superuser","tenantid":1,"userid":1}]},fnCallback);
+ sensus.pages.cSlider.callPagedFetchWS("api/exercicio/fetchall",{"startRow":0,"endRow":0,"pageSize":25,"sortExpressions":[{"field":"NAME","direction":"Ascending"}],"exercicio":[{"createuser":"superuser","tenantid":1,"userid":1}]},fnCallback);
 
    for (var i = 0; i < oData.length; i++) {
      data.push(oData[i]);
