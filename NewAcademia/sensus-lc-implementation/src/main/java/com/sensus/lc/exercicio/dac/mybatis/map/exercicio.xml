@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "Exercicio">
+
+	<resultMap id="listAllExercicioResults" type="Exercicio" >
+		<result property="cdacad" column="cdacad" />
+		<result property="academ" column="academ" />
+		<result property="lograd" column="lograd" />
+		<result property="numen" column="numen" />
+		<result property="bairr" column="bairr" />
+		<result property="cidade" column="cidade" />
+		<result property="cep" column="cep" />
+		<result property="telef" column="telef" />
+		<result property="dataini" column="dataini" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="datafin" column="datafin" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="createdate" column="create_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="createuser" column="create_user" />
+		<result property="tenantid" column="tenant_id" />
+		<result property="latitude" column="latitude" />
+		<result property="longitude" column="longitude" />
+		<result property="atual" column="atual" />
+
+	</resultMap>
+
+
+	<sql id="allExercicioColumms">
+     	cdacad,
+     	academ,
+     	lograd,
+     	numen,
+     	bairr,
+     	cidade,
+     	cep,
+     	telef,
+     	dataini,
+     	datafin,
+     	create_date,
+		create_user,
+		tenant_id,
+		latitude,
+		longitude,
+		atual
+	</sql>
+
+	<!-- Insert Exercicio -->
+ 	<select id="insertExercicio" parameterType="Map" resultType="int" statementType="CALLABLE">
+	{ call ins_exercicio(#{academ,jdbcType=VARCHAR},
+		#{lograd,jdbcType=VARCHAR},
+		#{numen,jdbcType=INTEGER},
+		#{bairr,jdbcType=VARCHAR},
+		#{cidade,jdbcType=VARCHAR},
+		#{cep,jdbcType=VARCHAR},
+		#{telef,jdbcType=VARCHAR},
+		#{dataini,jdbcType=TIMESTAMP}::timestamp without time zone,
+		#{dataFin,jdbcType=TIMESTAMP}::timestamp without time zone,
+		#{createDate,jdbcType=TIMESTAMP}::timestamp without time zone,
+		#{createUser,jdbcType=VARCHAR},
+		#{tenantid,jdbcType=INTEGER},
+		#{userid,jdbcType=INTEGER},
+		#{atual,jdbcType=BOOLEAN} ) }
+
+	</select>
+
+	<select id="updateExercicio" parameterType="Map" resultType="string" statementType="CALLABLE">
+	{ call upd_exercicio(
+	    #{cdacad,jdbcType=INTEGER},
+		#{academ,jdbcType=VARCHAR},
+		#{lograd,jdbcType=VARCHAR},
+		#{numen,jdbcType=INTEGER},
+		#{bairr,jdbcType=VARCHAR},
+		#{cidade,jdbcType=VARCHAR},
+		#{cep,jdbcType=VARCHAR},
+		#{telef,jdbcType=VARCHAR},
+		#{dataini,jdbcType=TIMESTAMP}::timestamp without time zone,
+		#{dataFin,jdbcType=TIMESTAMP}::timestamp without time zone,
+		#{createDate,jdbcType=TIMESTAMP}::timestamp without time zone,
+		#{createUser,jdbcType=VARCHAR},
+		#{tenantid,jdbcType=INTEGER},
+		#{userid,jdbcType=INTEGER},
+		#{atual,jdbcType=BOOLEAN} ) }
+
+	</select>
+
+	<!-- Delete Exercicio -->
+	<select id="deleteExercicio" parameterType="Exercicio">
+		delete from exercicio where cdacad = (#{cdacad})
+	</select>
+
+	<!-- Fetch All Exercicios -->
+	<select id="fetchAllExercicios" parameterType="Map" resultMap="listAllExercicioResults">
+
+		SELECT  <include refid="allExercicioColumms"/>
+		  FROM exercicio
+
+	</select>
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1)
+		  FROM (SELECT cdacad
+				  FROM exercicio) AS ACADPAGE
+	</select>
+
+	<select id="PaginationTotalRowsByUser" parameterType="Map" resultType="int">
+		SELECT count(1)
+		  FROM (SELECT cdacad
+				  FROM exercicio
+				 WHERE  create_user = #{user} ) AS ACADPAGE
+	</select>
+
+
+
+	<select id="fetchAllExercicioByUser" parameterType="Map" resultMap="listAllExercicioResults">
+
+		  SELECT  <include refid="allExercicioColumms"/>
+		  FROM
+		   (  select ROW_NUMBER() OVER(ORDER BY ${orderBy}) as RowNum
+		             ,t.*
+		        from ( select <include refid="allExercicioColumms"/>
+		                FROM exercicio AS tg
+		               WHERE tg.cdacad = COALESCE(#{cdacad},tg.cdacad)
+		                 AND tg.create_user = #{user}
+		             ) t
+		   ) as ACADPAGE
+		   <if test="pageSize > 0" >
+				WHERE RowNum BETWEEN #{startRow} + 1 AND (#{startRow,jdbcType=INTEGER} + #{pageSize,jdbcType=INTEGER})
+		   </if>
+
+
+	</select>
+
+
+</mapper>
+
