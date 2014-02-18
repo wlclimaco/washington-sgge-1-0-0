@@ -49,30 +49,16 @@
 				<h5><s:message code="widgets.blankslate.noresults" /></h5>
 				<p><s:message code="widgets.blankslate.detail" /></p>
 				</div>
-				<table id="event-history-table" class="list">
-					<thead>
-						<tr>
-							<th class="hide" rowspan="2"><span id="process.process_id"><s:message code="longRunning.table.header.id" /></span></th>
-							<th rowspan="2"><span id="lc_action_description"><s:message code="longRunning.table.header.action" /></span></th>
-							<th class="hide" rowspan="2"></th>
-							<th rowspan="2"><s:message code="longRunning.table.header.description" /></th>
-							<th colspan="2"><span><s:message code="longRunning.table.header.smartpoint" /></span></th>
-							<th rowspan="2"><span id="create_user"><s:message code="longRunning.table.header.requestBy" /></span></th>
-							<th rowspan="2"><span id="start_datetime"><s:message code="longRunning.table.header.startTime" /></span></th>
-							<th rowspan="2"><span id="is_process_complete"><s:message code="longRunning.table.header.status" /></span></th>
-							<th class="hide" rowspan="2"></th>
-							<th class="hide" rowspan="2"></th>
-							<th class="hide" rowspan="2"></th>
-							<th class="hide" rowspan="2"></th>
-						</tr>
-						<tr class="sub-head">
-							<th class="sub-head"><span id="light_count"><s:message code="longRunning.table.header.total" /></span></th>
-							<th class="sub-head"><span id="light_failed_count"><s:message code="longRunning.table.header.failed" /></span></th>
-						</tr>
-					</thead>
-					<tbody>
-					</tbody>
-				</table>
+				<!-- START status grid -->
+				<div id="grid_main" style="width:100%;">
+					<div class="grid-header" style="width:100%">
+					  <label>SlickGrid</label>
+					  <span style="float:right" class="ui-icon ui-icon-search" title="Toggle search panel"
+							onclick="toggleFilterRow()"></span>
+					</div>
+					<div id="myGrid" style="width:100%;height:500px;"></div>
+					<div id="pager" style="width:100%;height:20px;"></div>
+				</div>
             </div>
        </div>
      </div>
@@ -84,3 +70,6 @@
 <%@ include file="../../scripts/pages/process/process_main.js.jsp" %>
 <%@ include file="../../scripts/pages/process/process_actions.js.jsp" %>
 <%@ include file="../../scripts/pages/process/process_init.js.jsp" %>
+<jsp:include page="../../commons/scripts/util/app_reuse_functions.js.jsp" flush="true"/>
+<jsp:include page="../../scripts/pages/exercicio/exercicio_main.js.jsp" flush="true"/>
+<jsp:include page="../../scripts/pages/exercicio/exercicio_init.js.jsp" flush="true"/>
