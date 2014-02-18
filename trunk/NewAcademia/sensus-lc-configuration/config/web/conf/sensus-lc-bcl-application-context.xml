@@ -815,4 +815,8 @@
 		<property name="grupomuscularDAC" ref="grupomuscularDACTarget" />
 	</bean>
 
+	<bean id="exercicioBCLTarget" class="com.sensus.lc.exercicio.bcl.impl.ExercicioBCLImpl">
+		<property name="exercicioDAC" ref="exercicioDACTarget" />
+	</bean>
+
 </beans>
