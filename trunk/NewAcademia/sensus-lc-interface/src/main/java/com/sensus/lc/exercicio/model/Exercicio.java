@@ -43,6 +43,11 @@ public class Exercicio extends SensusModel
 	/** The grupomuscular. */
 	private Grupomuscular grupomuscular;
 
+	public Exercicio()
+	{
+		super();
+	}
+
 	/**
 	 * Instantiates a new exercicio.
 	 * 

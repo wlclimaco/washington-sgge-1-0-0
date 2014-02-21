@@ -314,7 +314,7 @@ public class ExercicioDACImpl extends SqlSessionDaoSupport implements IExercicio
 		paramMap.put(PAGE_SIZE, inquiryExercicioRequest.getPageSize());
 		paramMap.put(START_PAGE, inquiryExercicioRequest.getStartPage());
 		paramMap.put(START_ROW, inquiryExercicioRequest.getStartRow());
-		paramMap.put(USER, inquiryExercicioRequest.getUserContext().getUserId());
+		paramMap.put(USER, inquiryExercicioRequest.getUserContext().getUserId().toString());
 		paramMap.put(ORDERBY, "cdexerc");
 
 		if (!ValidationUtil.isNullOrEmpty(inquiryExercicioRequest.getSortExpressions()))
