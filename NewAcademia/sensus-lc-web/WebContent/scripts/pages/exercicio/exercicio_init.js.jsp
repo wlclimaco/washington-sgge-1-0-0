@@ -2,53 +2,30 @@
 <script type="text/javascript">
 var dataView;
 var grid;
-var rowChg;
-var aRowChg = new Array();
-var pgrid;
 var data = [];
-var rowValue = 0;
-var onProcDataLoading = new EventHelper();
 var columns = [
-  {id: "cdexerc", name: "cdexerc", field: "cdexerc", behavior: "select", cssClass: "cell-selection", width: 40, cannotTriggerInsert: true, resizable: false, selectable: false },
-  {id: "nmexerc", name: "nmexerc", field: "nmexerc", width: 120, minWidth: 120, cssClass: "cell-title", editor: Slick.Editors.Text, validator: requiredFieldValidator, sortable: true},
-  {id: "dsexerc", name: "dsexerc", field: "dsexerc", editor: Slick.Editors.Text, sortable: true},
-  {id: "grupomuscular", name: "grupomuscular", field: "grupomuscular", editor: Slick.Editors.Text, sortable: true},
-  {id: "ftexerc", name: "ftexerc", field: "ftexerc", editor: Slick.Editors.Text, sortable: true}
+  {id: "sel", name: "#", field: "cdexerc", cssClass: "cell-selection", width: 40, resizable: false, selectable: false, focusable: false },
+  {id: "nmexerc", name: "nmexerc", field: "nmexerc", width: 70, minWidth: 50, cssClass: "cell-title", sortable: true, editor: Slick.Editors.Text},
+  {id: "grupomuscular", name: "grupomuscular", field: "grupomuscular", minWidth: 60, sortable: true},
+  {id: "createdate", name: "createdate", field: "createdate", minWidth: 60, sortable: true},
+  {id: "tenantid", name: "tenantid", field: "tenantid", minWidth: 60, sortable: true},
+  {id: "userid", name: "userid", field: "userid", minWidth: 60, sortable: true},
+  {id: "ftexerc", name: "ftexerc", field: "ftexerc", minWidth: 60, sortable: true}
+
 ];
 
 var options = {
-  editable: true,
-  enableAddRow: true,
   enableCellNavigation: true,
-  asyncEditorLoading: true,
-  forceFitColumns: false,
-  topPanelHeight: 25
+  editable: true
 };
 
-var sortcol = "cdexerc";
+var sortcol = "title";
 var sortdir = 1;
 var percentCompleteThreshold = 0;
-var searchString = "";
+var prevPercentCompleteThreshold = 0;
 
-function requiredFieldValidator(value) {
-  if (value == null || value == undefined || !value.length) {
-    return {valid: false, msg: "This is a required field"};
-  }
-  else {
-    return {valid: true, msg: null};
-  }
-}
-
-function myFilter(item, args) {
-  if (item["percentComplete"] < args.percentCompleteThreshold) {
-    return false;
-  }
-
-  if (args.searchString != "" && item["cdgrmusc"].indexOf(args.searchString) == -1) {
-    return false;
-  }
-
-  return true;
+function percentCompleteSort(a, b) {
+  return a["percentComplete"] - b["percentComplete"];
 }
 
 function comparer(a, b) {
@@ -56,92 +33,111 @@ function comparer(a, b) {
   return (x == y ? 0 : (x > y ? 1 : -1));
 }
 
-function toggleFilterRow() {
-  grid.setTopPanelVisibility(!grid.getOptions().showTopPanel);
+function groupByDuration() {
+  dataView.setGrouping({
+    getter: "grupomuscular",
+    formatter: function (g) {
+      return "grupomuscular:  " + g.value + "  <span style='color:green'>(" + g.count + " items)</span>";
+    },
+    aggregateCollapsed: false,
+    lazyTotalsCalculation: true
+  });
 }
 
+function loadData(count) {
+  var someDates = ["01/01/2009", "02/02/2009", "03/03/2009"];
+  data = [];
+  // prepare the data
+  for (var i = 0; i < count; i++) {
+    var d = (data[i] = {});
 
-$(".grid-header .ui-icon")
-        .addClass("ui-state-default ui-corner-all")
-        .mouseover(function (e) {
-          $(e.target).addClass("ui-state-hover")
-        })
-        .mouseout(function (e) {
-          $(e.target).removeClass("ui-state-hover")
-        });
-function renderTable(){
-	var oData = [];
+    d["id"] = "id_" + i;
+    d["cdexerc"] = i;
+    d["nmexerc"] = "Task " + i;
+    d["grupomuscular"] = Math.round(Math.random() * 30);
+    d["createdate"] = someDates[ Math.floor((Math.random()*2)) ];
+    d["tenantid"] = 1;
+    d["userid"] = "superuser"
+    d["ftexerc"] = "Foto " + i;
+  }
+
+  //+++++++++++++++++++++++++++++++++
+
 	var fnCallback = function(response){
-
-		for (var i = 0; i < response.exercicios.length; i++) {
+/*
+		for (var i = 0; i < response.grupomusculars.length; i++) {
 			var d = (oData[i] = {});
-			d["id"] = response.exercicios[i].cdgrmusc;
-			d["cdexerc"] = response.exercicios[i].cdexerc;
-			d["nmexerc"] = response.exercicios[i].nmexerc;
-			d["dsexerc"] = response.exercicios[i].dsexerc;
-			d["grupomuscular"] = response.exercicios[i].grupomuscular;
-			d["ftexerc"] = response.exercicios[i].ftexerc;
+			d["id"] = response.grupomusculars[i].cdgrmusc;
+			d["cdgrmusc"] = response.grupomusculars[i].cdgrmusc;
+			d["musculo"] = response.grupomusculars[i].musculo;
+			d["dsgrmusc"] = response.grupomusculars[i].dsgrmusc;
 		}
+*/
 
-
-		//console.log(oData);
+		console.log(response);
 	};
 
-  // prepare the data
-  var d = (data[0] = {});
-	  d["id"] = 0;
-	  d["cdexerc"] = 0;
-	  d["nmexerc"] = "";
-	  d["dsexerc"] = "";
-	  d["grupomuscular"] = "";
-	  d["ftexerc"] = "";
 
  //sensus.pages.grupoMuscular2.callPagedFetchWS(null,null,fnCallback);
- sensus.pages.cSlider.callPagedFetchWS("api/exercicio/fetchall",{"startRow":0,"endRow":0,"pageSize":25,"sortExpressions":[{"field":"NAME","direction":"Ascending"}],"exercicio":[{"createuser":"superuser","tenantid":1,"userid":1}]},fnCallback);
+ sensus.pages.cSlider.callPagedFetchWS("api/exercicio/fetchall",{"startRow":0,"endRow":0,"pageSize":25,"sortExpressions":[{"field":"NAME","direction":"Ascending"}],"exercicios":[]},fnCallback);
 
    for (var i = 0; i < oData.length; i++) {
      data.push(oData[i]);
    }
 
-  dataView = new Slick.Data.DataView({ inlineFilters: true });
+
+  //+++++++++++++++++++++++++++++++++
+
+
+
+  /*private Integer cdexerc;
+
+	private String nmexerc;
+
+	private String dsexerc;
+
+	private Date createdate;
+
+	private String createuser;
+
+	private Integer tenantid;
+
+	private Integer userid;
+
+	private List<Foto> ftexerc;
+
+	private List<Grupomuscular> grupomuscular;
+
+
+  */
+  dataView.setItems(data);
+}
+
+
+$(".grid-header .ui-icon")
+    .addClass("ui-state-default ui-corner-all")
+    .mouseover(function (e) {
+      $(e.target).addClass("ui-state-hover")
+    })
+    .mouseout(function (e) {
+      $(e.target).removeClass("ui-state-hover")
+    });
+
+$(function () {
+  var groupItemMetadataProvider = new Slick.Data.GroupItemMetadataProvider();
+  dataView = new Slick.Data.DataView({
+    groupItemMetadataProvider: groupItemMetadataProvider,
+    inlineFilters: true
+  });
   grid = new Slick.Grid("#myGrid", dataView, columns, options);
-  grid.setSelectionModel(new Slick.RowSelectionModel());
+
+  // register the group item metadata provider to add expand/collapse group handlers
+  grid.registerPlugin(groupItemMetadataProvider);
+  grid.setSelectionModel(new Slick.CellSelectionModel());
 
   var pager = new Slick.Controls.Pager(dataView, grid, $("#pager"));
   var columnpicker = new Slick.Controls.ColumnPicker(columns, grid, options);
 
-console.log(grid);
-  // move the filter panel defined in a hidden div into grid top panel
-  $("#inlineFilterPanel")
-      .appendTo(grid.getTopPanel())
-      .show();
-
-  grid.onCellChange.subscribe(function (e, args) {
-    dataView.updateItem(args.item.id, args.item);
-
-	rowValue = args.row;
-  });
-
-  grid.onAddNewRow.subscribe(function (e, args) {
-    var item = {"num": data.length, "id": "new_" + (Math.round(Math.random() * 10000)), "title": "New task", "duration": "1 day", "percentComplete": 0, "start": "01/01/2009", "finish": "01/01/2009", "effortDriven": false};
-    $.extend(item, args.item);
-    dataView.addItem(item);
-  });
-
-  grid.onKeyDown.subscribe(function (e) {
-    // select all rows on ctrl-a
-    if (e.which != 65 || !e.ctrlKey) {
-      return false;
-    }
-
-    var rows = [];
-    for (var i = 0; i < dataView.getLength(); i++) {
-      rows.push(i);
-    }
-
-    grid.setSelectedRows(rows);
-    e.preventDefault();
-  });
 
   grid.onSort.subscribe(function (e, args) {
     sortdir = args.sortAsc ? 1 : -1;
@@ -164,7 +160,8 @@ console.log(grid);
 
       // use numeric sort of % and lexicographic for everything else
       dataView.fastSort((sortcol == "percentComplete") ? percentCompleteValueFn : sortcol, args.sortAsc);
-    } else {
+    }
+    else {
       // using native sort with comparer
       // preferred method but can be very slow in IE with huge datasets
       dataView.sort(comparer, args.sortAsc);
@@ -182,16 +179,6 @@ console.log(grid);
     grid.render();
   });
 
-  dataView.onPagingInfoChanged.subscribe(function (e, pagingInfo) {
-    var isLastPage = pagingInfo.pageNum == pagingInfo.totalPages - 1;
-    var enableAddRow = isLastPage || pagingInfo.pageSize == 0;
-    var options = grid.getOptions();
-
-    if (options.enableAddRow != enableAddRow) {
-      grid.setOptions({enableAddRow: enableAddRow});
-    }
-  });
-
 
   var h_runfilters = null;
 
@@ -203,133 +190,42 @@ console.log(grid);
 
       if (percentCompleteThreshold != ui.value) {
         window.clearTimeout(h_runfilters);
-        h_runfilters = window.setTimeout(updateFilter, 10);
+        h_runfilters = window.setTimeout(filterAndUpdate, 10);
         percentCompleteThreshold = ui.value;
       }
     }
   });
 
 
-  // wire up the search textbox to apply the filter to the model
-  $("#txtSearch,#txtSearch2").keyup(function (e) {
-    Slick.GlobalEditorLock.cancelCurrentEdit();
+  function filterAndUpdate() {
+    var isNarrowing = percentCompleteThreshold > prevPercentCompleteThreshold;
+    var isExpanding = percentCompleteThreshold < prevPercentCompleteThreshold;
+    var renderedRange = grid.getRenderedRange();
 
-    // clear on Esc
-    if (e.which == 27) {
-      this.value = "";
-    }
-
-    searchString = this.value;
-    updateFilter();
-  });
-
-  function updateFilter() {
     dataView.setFilterArgs({
-      percentCompleteThreshold: percentCompleteThreshold,
-      searchString: searchString
+      percentComplete: percentCompleteThreshold
+    });
+    dataView.setRefreshHints({
+      ignoreDiffsBefore: renderedRange.top,
+      ignoreDiffsAfter: renderedRange.bottom + 1,
+      isFilterNarrowing: isNarrowing,
+      isFilterExpanding: isExpanding
     });
     dataView.refresh();
+
+    prevPercentCompleteThreshold = percentCompleteThreshold;
   }
-
-  $("#btnSelectRows").click(function () {
-    if (!Slick.GlobalEditorLock.commitCurrentEdit()) {
-      return;
-    }
-
-    var rows = [];
-    for (var i = 0; i < 10 && i < dataView.getLength(); i++) {
-      rows.push(i);
-    }
-
-    grid.setSelectedRows(rows);
-  });
-
 
   // initialize the model after all the events have been hooked up
   dataView.beginUpdate();
-  dataView.setItems(data);
+  //dataView.setFilter(myFilter);
   dataView.setFilterArgs({
-    percentCompleteThreshold: percentCompleteThreshold,
-    searchString: searchString
+    percentComplete: percentCompleteThreshold
   });
-  dataView.setFilter(myFilter);
+  loadData(50);
+  groupByDuration();
   dataView.endUpdate();
 
-  // if you don't want the items that are not visible (due to being filtered out
-  // or being on a different page) to stay selected, pass 'false' to the second arg
-  dataView.syncGridSelection(grid, true);
-
   $("#gridContainer").resizable();
-
-  function validateFields(rowValue)
-{
-	if (wd.core.isEmpty(data[rowValue].pcode))
-	{
-		/* grid.gotoCell(rowValue,2,true);
-		$(grid.getActiveCellNode()).addClass("invalid");
-		$(grid.getActiveCellNode()).stop(true,true).effect("highlight", {color:"red"}, 300);
-		wd.core.displayNotificationMessage('#StatusBar',procedure.requiredfield.msg, false, 'error', 5000); */
-	}
-	else if (wd.core.isEmpty(data[rowValue].pdesc))
-	{
-		/* grid.gotoCell(rowValue,1,true);
-		$(grid.getActiveCellNode()).addClass("invalid");
-		$(grid.getActiveCellNode()).stop(true,true).effect("highlight", {color:"red"}, 300);
-		wd.core.displayNotificationMessage('#StatusBar',procedure.requiredfield.msg, false, 'error', 5000); */
-	}
-	else
-	{
-		return true;
-	}
-	return false;
-};
-
-
-  $('#myGrid').keyup(function(e)
-  {
-
-	if (e.keyCode == 13)
-	{
-console.log(rowValue);
-		if (rowValue >= 1 )
-		{
-			sensus.pages.cSlider.callUpdateWS("api/grupoMuscular/update",new GrupomuscularRequest(data[rowValue].cdgrmusc,data[rowValue].musculo,data[rowValue].dsgrmusc));
-		}
-		else
-		{
-/* 			if (validateFields(0))
-			{ */
-
-					fnCallBack1 = function(datas){
-
-
-						if (datas.operationSuccess){
-							$.sc.startProgressBar(null,true);
-						    var  dd = dataView.getItems().length + 1;
-							var Object = {id: dd,cdgrmusc:data[0].cdgrmusc, musculo:data[0].musculo,dsgrmusc:data[0].dsgrmusc};
-							dataView.insertItem(1, Object);
-							grid.render();
-							$.sc.stopGlobalProgressBar();
-						}else{
-							$.sc.stopGlobalProgressBar();
-						}
-					};
-
-
-				sensus.pages.cSlider.callInsertWS("api/grupoMuscular/insert","api/grupoMuscular/fetchall",new GrupomuscularRequest(data[0].cdgrmusc,data[0].musculo,data[0].dsgrmusc),{"startRow":0,"endRow":0,"pageSize":25,"sortExpressions":[{"field":"NAME","direction":"Ascending"}],"grupomusculars":[{"createuser":"superuser","tenantid":1,"userid":1}]},fnCallBack1);
-
-
-		}
-		onProcDataLoading.notify({});
-	}
-});
-
-
-  $.sc.stopGlobalProgressBar();
-
-}
-
-$(function () {
-renderTable();
 })
 </script>

@@ -24,7 +24,6 @@ import com.sensus.lc.exercicio.model.request.InquiryExercicioRequest;
  */
 public class ExercicioDACImpl extends SqlSessionDaoSupport implements IExercicioDAC
 {
-	private static final String FETCH_ALL_EXERCICIO_BY_USER = "fetchAllExercicioByUser";
 
 	// -------------------------------------------------------------------------
 	// Symbols, characters and etc (not i18n).
@@ -105,6 +104,8 @@ public class ExercicioDACImpl extends SqlSessionDaoSupport implements IExercicio
 
 	/** The Constant EXERCICIO_MAP. */
 	private static final String EXERCICIO_MAP = "Exercicio.";
+
+	private static final String FETCH_ALL_EXERCICIO_BY_USER = EXERCICIO_MAP + "fetchAllExercicioByUser";
 
 	/** The Constant DELETE_EXERCICIO. */
 	private static final String DELETE_EXERCICIO = EXERCICIO_MAP + "deleteExercicio";
@@ -313,17 +314,17 @@ public class ExercicioDACImpl extends SqlSessionDaoSupport implements IExercicio
 		paramMap.put(PAGE_SIZE, inquiryExercicioRequest.getPageSize());
 		paramMap.put(START_PAGE, inquiryExercicioRequest.getStartPage());
 		paramMap.put(START_ROW, inquiryExercicioRequest.getStartRow());
-		// paramMap.put(USER, inquiryExercicioRequest.getExercicios().get(0).getCreateuser());
-		paramMap.put(ORDERBY, "cdacad");
+		paramMap.put(USER, inquiryExercicioRequest.getUserContext().getUserId());
+		paramMap.put(ORDERBY, "cdexerc");
 
 		if (!ValidationUtil.isNullOrEmpty(inquiryExercicioRequest.getSortExpressions()))
 		{
-			paramMap.put(ORDERBY, "cdacad");
+			paramMap.put(ORDERBY, "cdexerc");
 		}
 
 		doQueryForList(getSqlSession(), FETCH_ALL_EXERCICIO_BY_USER, paramMap, response);
 		Integer totalRows =
-				(Integer)doQueryForObject(getSqlSession(), "PaginationTotalRowsByUser", paramMap);
+				(Integer)doQueryForObject(getSqlSession(), "Exercicio.PaginationTotalRowsByUser", paramMap);
 		response.getResultsSetInfo().setTotalRowsAvailable(totalRows);
 
 		return response;

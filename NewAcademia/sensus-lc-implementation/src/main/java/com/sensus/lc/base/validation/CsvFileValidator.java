@@ -3,7 +3,6 @@ package com.sensus.lc.base.validation;
 import static com.sensus.common.validation.ValidationUtil.isNull;
 import static com.sensus.common.validation.ValidationUtil.isNullOrEmpty;
 import static com.sensus.lc.base.model.ObjectToBeValidatedKeyEnum.COLUMN_LIST;
-import static com.sensus.lc.base.model.ObjectToBeValidatedKeyEnum.CSV_FILE;
 import static com.sensus.lc.base.model.ObjectToBeValidatedKeyEnum.CSV_FILE_NAME;
 import static com.sensus.lc.base.util.CSVFileReader.getRowsAmount;
 
@@ -65,10 +64,6 @@ public class CsvFileValidator implements IValidator
 
 		switch (action)
 		{
-			case IMPORT_CSV_FILE:
-				File csvFile = (File)validationContext.getObjectToBeValidated(CSV_FILE.getValue());
-				validateCSVFile(list, csvFile);
-				return;
 			case GENERATE_FILE_CSV:
 				String csvFileName = (String)validationContext.getObjectToBeValidated(CSV_FILE_NAME.getValue());
 				validateCSVFileName(list, csvFileName);

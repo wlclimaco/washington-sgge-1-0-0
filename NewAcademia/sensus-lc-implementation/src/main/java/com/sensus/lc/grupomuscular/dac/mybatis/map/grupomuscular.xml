@@ -59,6 +59,17 @@
 
 	</select>
 
+
+	<!-- Fetch All Grupomusculars -->
+	<select id="fetchAllGrupomuscularById" resultMap="listAllGrupomuscularResults">
+
+		SELECT  <include refid="allGrupomuscularColumms"/>
+		  FROM grupomuscular
+		  WHERE cdGropoMusc=#{value}
+
+	</select>
+
+
 	<!-- Pagination Total Rows -->
 	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
 		SELECT count(1)

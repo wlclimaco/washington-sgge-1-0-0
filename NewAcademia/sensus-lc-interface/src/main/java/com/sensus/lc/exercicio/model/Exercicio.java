@@ -1,6 +1,5 @@
 package com.sensus.lc.exercicio.model;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -42,7 +41,7 @@ public class Exercicio extends SensusModel
 	private List<Foto> ftexerc;
 
 	/** The grupomuscular. */
-	private List<Grupomuscular> grupomuscular;
+	private Grupomuscular grupomuscular;
 
 	/**
 	 * Instantiates a new exercicio.
@@ -51,7 +50,7 @@ public class Exercicio extends SensusModel
 	 * @param ftexerc the ftexerc
 	 * @param grupomuscular the grupomuscular
 	 */
-	public Exercicio(Integer cdexerc, List<Foto> ftexerc, List<Grupomuscular> grupomuscular)
+	public Exercicio(Integer cdexerc, List<Foto> ftexerc, Grupomuscular grupomuscular)
 	{
 		super();
 		this.cdexerc = cdexerc;
@@ -93,7 +92,7 @@ public class Exercicio extends SensusModel
 	 * @param grupomuscular the grupomuscular
 	 */
 	public Exercicio(Integer cdexerc, String nmexerc, String dsexerc, List<Foto> ftexerc,
-			List<Grupomuscular> grupomuscular)
+			Grupomuscular grupomuscular)
 	{
 		super();
 		this.cdexerc = cdexerc;
@@ -148,7 +147,7 @@ public class Exercicio extends SensusModel
 	 * 
 	 * @return the grupomuscular
 	 */
-	public List<Grupomuscular> getGrupomuscular()
+	public Grupomuscular getGrupomuscular()
 	{
 		return grupomuscular;
 	}
@@ -158,7 +157,7 @@ public class Exercicio extends SensusModel
 	 * 
 	 * @param grupomuscular the new grupomuscular
 	 */
-	public void setGrupomuscular(List<Grupomuscular> grupomuscular)
+	public void setGrupomuscular(Grupomuscular grupomuscular)
 	{
 		this.grupomuscular = grupomuscular;
 	}
@@ -243,36 +242,6 @@ public class Exercicio extends SensusModel
 		this.ftexerc = ftexerc;
 	}
 
-	/**
-	 * Adds the Grupomuscular.
-	 * 
-	 * @param grupomuscular the Grupomuscular
-	 */
-	public void addGrupomuscular(Grupomuscular grupomuscular)
-	{
-		if (getGrupomuscular() == null)
-		{
-			setGrupomuscular(new ArrayList<Grupomuscular>());
-		}
-
-		getGrupomuscular().add(grupomuscular);
-	}
-
-	/**
-	 * Gets the first grupomuscular.
-	 * 
-	 * @return the first grupomuscular
-	 */
-	public Grupomuscular getFirstGrupomuscular()
-	{
-		if ((getGrupomuscular() != null) && !getGrupomuscular().isEmpty())
-		{
-			return getGrupomuscular().get(FIRST);
-		}
-
-		return null;
-	}
-
 	@Override
 	public String toString()
 	{
@@ -282,6 +251,6 @@ public class Exercicio extends SensusModel
 				+ ", getCreateuser()=" + getCreateuser() + ", getTenantid()=" + getTenantid() + ", getUserid()="
 				+ getUserid() + ", getGrupomuscular()=" + getGrupomuscular() + ", getCdexerc()=" + getCdexerc()
 				+ ", getNmexerc()=" + getNmexerc() + ", getDsexerc()=" + getDsexerc() + ", getFtexerc()="
-				+ getFtexerc() + ", getFirstGrupomuscular()=" + getFirstGrupomuscular() + "]";
+				+ getFtexerc() + "]";
 	}
 }

@@ -2,7 +2,23 @@
 	pageEncoding="utf-8"%>
 <%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags' %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
+ <style>
+    .cell-effort-driven {
+      text-align: center;
+    }
 
+    .slick-group-title[level='0'] {
+      font-weight: bold;
+    }
+
+    .slick-group-title[level='1'] {
+      text-decoration: underline;
+    }
+
+    .slick-group-title[level='2'] {
+      font-style: italic;
+    }
+  </style>
 <div id="process-main">
 	<div class="content-inner">
 	<div class="content-header">
@@ -50,15 +66,13 @@
 				<p><s:message code="widgets.blankslate.detail" /></p>
 				</div>
 				<!-- START status grid -->
-				<div id="grid_main" style="width:100%;">
-					<div class="grid-header" style="width:100%">
-					  <label>SlickGrid</label>
-					  <span style="float:right" class="ui-icon ui-icon-search" title="Toggle search panel"
-							onclick="toggleFilterRow()"></span>
-					</div>
-					<div id="myGrid" style="width:100%;height:500px;"></div>
-					<div id="pager" style="width:100%;height:20px;"></div>
+				<div style="width:600px;">
+				<div class="grid-header" style="width:100%">
+				  <label>SlickGrid</label>
 				</div>
+				<div id="myGrid" style="width:100%;height:500px;"></div>
+				<div id="pager" style="width:100%;height:20px;"></div>
+			  </div>
             </div>
        </div>
      </div>

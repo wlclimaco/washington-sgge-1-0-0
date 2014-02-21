@@ -1,15 +1,19 @@
 package com.sensus.lc.controller.importfile;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.IllegalFormatFlagsException;
 
 import javax.annotation.Resource;
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -129,32 +133,65 @@ public class ImportEcoModeController extends BaseViewController implements Handl
 			}
 
 			// Upload File
-			if (!ValidationUtil.isNull(upload) && upload.getSize() > 0)
+			if (!ValidationUtil.isNull(upload))
 			{
-				String[] extension = StringUtils.splitByWholeSeparator(upload.getOriginalFilename(), ".");
-				if (!CSV_MIME_TYPE.equals(upload.getContentType())
-						&& !CSV_EXTENSION.equals(extension[extension.length - 1]))
+				// String[] extension = StringUtils.splitByWholeSeparator(upload.getOriginalFilename(), ".");
+				// if (!CSV_MIME_TYPE.equals(upload.getContentType())
+				// && !CSV_EXTENSION.equals(extension[extension.length - 1]))
+				// {
+				// ecoModeModel.setMessageCode(FILE_IS_NOT_CSV);
+				// ecoModeModel.setOperationSuccess(Boolean.FALSE);
+				// throw new IllegalFormatFlagsException(FILE_IS_NOT_CSV);
+				// }
+
+				// File f = new File(FILE_NAME);
+				// upload.transferTo(f);
+				// Some type of file processing...
+				System.err.println("-------------------------------------------");
+				System.err.println("Test upload: " + upload.getName());
+				System.err.println("-------------------------------------------");
+
+				MultipartFile file = upload;
+				String fileName = null;
+				InputStream inputStream = null;
+				OutputStream outputStream = null;
+				if (file.getSize() > 0)
 				{
-					ecoModeModel.setMessageCode(FILE_IS_NOT_CSV);
-					ecoModeModel.setOperationSuccess(Boolean.FALSE);
-					throw new IllegalFormatFlagsException(FILE_IS_NOT_CSV);
+					inputStream = file.getInputStream();
+
+					System.out.println("size::" + file.getSize());
+					fileName = "c:/images/"
+							+ file.getOriginalFilename();
+					outputStream = new FileOutputStream(fileName);
+					System.out.println("fileName:" + file.getOriginalFilename());
+
+					int readBytes = 0;
+					byte[] buffer = new byte[10000];
+					while ((readBytes = inputStream.read(buffer, 0, 10000)) != -1)
+					{
+						outputStream.write(buffer, 0, readBytes);
+					}
+					outputStream.close();
+					inputStream.close();
+
+					BufferedImage src = ImageIO.read(new ByteArrayInputStream(upload.getBytes()));
+					// BufferedImage src = ImageIO.read(new ByteArrayInputStream(file.getBytes()));
+					File destination = new File("c:/images/"); // something like
+																// C:/Users/tom/Documents/nameBasedOnSomeId.png
+					ImageIO.write(src, "jpg", destination);
+					// ecoModeRequest.setEcoModeCSVImport(upload.get);
 				}
 
-				File f = new File(FILE_NAME);
-				upload.transferTo(f);
-				ecoModeRequest.setEcoModeCSVImport(f);
+				response = getEcoModeBCF().importEcoModeBaselineFromFileCSV(ecoModeRequest);
+
+				if (!ValidationUtil.isNullOrEmpty(response.getMessageList()))
+				{
+					MessageInfo messageInfo = response.getMessageInfoList().get(0);
+					ecoModeModel.setArguments(getMapper().writeValueAsString(messageInfo.getArguments()));
+					ecoModeModel.setMessageCode(messageInfo.getCode());
+					ecoModeModel.setOperationSuccess(response.isOperationSuccess());
+				}
 			}
-
-			response = getEcoModeBCF().importEcoModeBaselineFromFileCSV(ecoModeRequest);
-
-			if (!ValidationUtil.isNullOrEmpty(response.getMessageList()))
-			{
-				MessageInfo messageInfo = response.getMessageInfoList().get(0);
-				ecoModeModel.setArguments(getMapper().writeValueAsString(messageInfo.getArguments()));
-				ecoModeModel.setMessageCode(messageInfo.getCode());
-				ecoModeModel.setOperationSuccess(response.isOperationSuccess());
-			}
-
 		}
 		catch (Exception e)
 		{
