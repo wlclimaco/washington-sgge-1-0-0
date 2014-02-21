@@ -86,3 +86,57 @@ CREATE OR REPLACE FUNCTION connectby(text,text,text,text,text,int)
 RETURNS setof record
 AS '$libdir/tablefunc','connectby_text_serial'
 LANGUAGE C STABLE STRICT;
+
+//========================================
+
+-- Table: exercicio
+
+-- DROP TABLE exercicio;
+
+CREATE TABLE exercicio
+(
+  cdexerc serial NOT NULL,
+  nmexerc character varying(100) NOT NULL,
+  dsexerc character varying(150),
+  cdgrmusc integer,
+  create_date timestamp with time zone,
+  create_user character varying(20),
+  tenant_id integer,
+  CONSTRAINT cdexerc_pkey PRIMARY KEY (cdexerc),
+  CONSTRAINT fk_tenant_cdacad FOREIGN KEY (tenant_id)
+      REFERENCES tenant (tenant_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE CASCADE
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE exercicio
+  OWNER TO postgres;
+//=================]]]
+
+
+-- Table: foto
+
+-- DROP TABLE foto;
+
+CREATE TABLE foto
+(
+  cdfoto serial NOT NULL,
+  nmfoto character varying(100) NOT NULL,
+  lcfoto character varying(150),
+  ttfoto character varying(150),
+  fototypeenun character varying(20) NOT NULL,
+  create_date timestamp with time zone,
+  create_user character varying(20),
+  tenant_id integer,
+  CONSTRAINT cdfoto_pkey PRIMARY KEY (cdfoto),
+  CONSTRAINT fk_tenant_cdacad FOREIGN KEY (tenant_id)
+      REFERENCES tenant (tenant_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE CASCADE
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE foto
+  OWNER TO postgres;
+

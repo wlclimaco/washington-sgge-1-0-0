@@ -7,7 +7,8 @@
 
 	<resultMap id="listAllExercicioResults" type="Exercicio" >
 		<result property="cdexerc" column="cdexerc" />
-		<result property="academ" column="nmexerc" />
+		<result property="nmexerc" column="nmexerc" />
+		<result property="dsexerc" column="dsexerc" />
 		<result property="createdate" column="create_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
 		<result property="createuser" column="create_user" />
 		<result property="tenantid" column="tenant_id" />
@@ -88,7 +89,7 @@
 		SELECT count(1)
 		  FROM (SELECT cdexerc
 				  FROM exercicio
-				 WHERE  create_user = #{user,jdbcType=VARCHAR} ) AS EXERPAGE
+				 WHERE  create_user = #{user} ) AS EXERPAGE
 	</select>
 
 
@@ -102,7 +103,7 @@
 		        from ( select <include refid="allExercicioColumms"/>
 		                FROM exercicio AS tg
 		               WHERE tg.cdexerc = COALESCE(#{cdexerc},tg.cdexerc)
-		                 AND tg.create_user = #{user,jdbcType=VARCHAR}
+		                 AND tg.create_user = #{user}
 		             ) t
 		   ) as EXERPAGE
 		   <if test="pageSize > 0" >
