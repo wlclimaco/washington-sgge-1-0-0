@@ -6,43 +6,23 @@
 <mapper namespace = "Exercicio">
 
 	<resultMap id="listAllExercicioResults" type="Exercicio" >
-		<result property="cdacad" column="cdacad" />
-		<result property="academ" column="academ" />
-		<result property="lograd" column="lograd" />
-		<result property="numen" column="numen" />
-		<result property="bairr" column="bairr" />
-		<result property="cidade" column="cidade" />
-		<result property="cep" column="cep" />
-		<result property="telef" column="telef" />
-		<result property="dataini" column="dataini" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
-		<result property="datafin" column="datafin" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="cdexerc" column="cdexerc" />
+		<result property="academ" column="nmexerc" />
 		<result property="createdate" column="create_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
 		<result property="createuser" column="create_user" />
 		<result property="tenantid" column="tenant_id" />
-		<result property="latitude" column="latitude" />
-		<result property="longitude" column="longitude" />
-		<result property="atual" column="atual" />
-
+		<association property="grupomuscular" column="cdgrmusc" javaType="Grupomuscular" select="Grupomuscular.fetchAllGrupomuscularById" />
 	</resultMap>
 
 
 	<sql id="allExercicioColumms">
-     	cdacad,
-     	academ,
-     	lograd,
-     	numen,
-     	bairr,
-     	cidade,
-     	cep,
-     	telef,
-     	dataini,
-     	datafin,
-     	create_date,
-		create_user,
-		tenant_id,
-		latitude,
-		longitude,
-		atual
+     	cdexerc,
+	  	nmexerc,
+	  	dsexerc,
+	  	cdgrmusc,
+	  	create_date,
+	  	create_user,
+	  	tenant_id
 	</sql>
 
 	<!-- Insert Exercicio -->
@@ -100,15 +80,15 @@
 	<!-- Pagination Total Rows -->
 	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
 		SELECT count(1)
-		  FROM (SELECT cdacad
-				  FROM exercicio) AS ACADPAGE
+		  FROM (SELECT cdexerc
+				  FROM exercicio) AS EXERPAGE
 	</select>
 
 	<select id="PaginationTotalRowsByUser" parameterType="Map" resultType="int">
 		SELECT count(1)
-		  FROM (SELECT cdacad
+		  FROM (SELECT cdexerc
 				  FROM exercicio
-				 WHERE  create_user = #{user} ) AS ACADPAGE
+				 WHERE  create_user = #{user,jdbcType=VARCHAR} ) AS EXERPAGE
 	</select>
 
 
@@ -121,10 +101,10 @@
 		             ,t.*
 		        from ( select <include refid="allExercicioColumms"/>
 		                FROM exercicio AS tg
-		               WHERE tg.cdacad = COALESCE(#{cdacad},tg.cdacad)
-		                 AND tg.create_user = #{user}
+		               WHERE tg.cdexerc = COALESCE(#{cdexerc},tg.cdexerc)
+		                 AND tg.create_user = #{user,jdbcType=VARCHAR}
 		             ) t
-		   ) as ACADPAGE
+		   ) as EXERPAGE
 		   <if test="pageSize > 0" >
 				WHERE RowNum BETWEEN #{startRow} + 1 AND (#{startRow,jdbcType=INTEGER} + #{pageSize,jdbcType=INTEGER})
 		   </if>

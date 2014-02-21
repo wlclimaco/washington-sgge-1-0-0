@@ -12,6 +12,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 <typeAliases>
 	<typeAlias alias="Tenant"    type="com.sensus.lc.tenant.model.Tenant" />
 	<typeAlias alias="Exercicio"  type="com.sensus.lc.exercicio.model.Exercicio"/>
+	<typeAlias alias="Grupomuscular"  type="com.sensus.lc.grupomuscular.model.Grupomuscular"/>
 	<typeAlias alias="ExercicioRequest"  type="com.sensus.lc.exercicio.model.request.ExercicioRequest"/>
 	<typeAlias alias="InquiryExercicioRequest" type="com.sensus.lc.exercicio.model.request.InquiryExercicioRequest" />
 
@@ -19,6 +20,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 
 <mappers>
 	<mapper resource="com/sensus/lc/exercicio/dac/mybatis/map/exercicio.xml"/>
+	<mapper resource="com/sensus/lc/grupomuscular/dac/mybatis/map/grupomuscular.xml"/>
 </mappers>
 
 </configuration>

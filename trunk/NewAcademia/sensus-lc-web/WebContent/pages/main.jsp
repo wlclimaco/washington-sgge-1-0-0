@@ -118,7 +118,11 @@
 		<script src="thirdparty/SlickGrid/slick.formatters.js"></script>
 		<script src="thirdparty/SlickGrid/slick.editors.js"></script>
 		<script src="thirdparty/SlickGrid/plugins/slick.rowselectionmodel.js"></script>
+		<script src="thirdparty/SlickGrid/plugins/slick.cellrangedecorator.js"></script>
+		<script src="thirdparty/SlickGrid/plugins/slick.cellrangeselector.js"></script>
+		<script src="thirdparty/SlickGrid/plugins/slick.cellselectionmodel.js"></script>
 		<script src="thirdparty/SlickGrid/slick.grid.js"></script>
+		<script src="thirdparty/SlickGrid/slick.groupitemmetadataprovider.js"></script>
 		<script src="thirdparty/SlickGrid/slick.dataview.js"></script>
 		<script src="thirdparty/SlickGrid/controls/slick.pager.js"></script>
 		<script src="thirdparty/SlickGrid/controls/slick.columnpicker.js"></script>
@@ -136,6 +140,10 @@
 		<script src="commons/scripts/model/request_objects.js"></script>
 		<script src="commons/scripts/model/domain_objects.js"></script>
 		<script src="commons/scripts/widget/slick.pager.js"></script>
+
+		<script src="../lib/jquery.event.drag-2.2.js"></script>
+
+
 	</body>
 	<%-- END Main Document --%>
 
