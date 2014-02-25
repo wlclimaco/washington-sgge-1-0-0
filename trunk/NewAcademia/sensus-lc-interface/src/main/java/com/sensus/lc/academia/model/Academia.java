@@ -2,14 +2,13 @@ package com.sensus.lc.academia.model;
 
 import java.util.Date;
 
-import com.sensus.common.model.SensusModel;
+import com.sensus.lc.base.model.PrincipalClass;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Academia.
  */
 @SuppressWarnings("serial")
-public class Academia extends SensusModel
+public class Academia extends PrincipalClass
 {
 
 	/** The cdacad. */
@@ -41,18 +40,6 @@ public class Academia extends SensusModel
 
 	/** The modify date. */
 	private Date datafin;
-
-	/** The createdate. */
-	private Date createdate;
-
-	/** The createuser. */
-	private String createuser;
-
-	/** The tenantid. */
-	private Integer tenantid;
-
-	/** The tenantid. */
-	private Integer userid;
 
 	/** The latitude. */
 	private Double latitude;
@@ -90,46 +77,6 @@ public class Academia extends SensusModel
 	public Integer getCdacad()
 	{
 		return cdacad;
-	}
-
-	/**
-	 * Gets the createuser.
-	 * 
-	 * @return the createuser
-	 */
-	public String getCreateuser()
-	{
-		return createuser;
-	}
-
-	/**
-	 * Sets the createuser.
-	 * 
-	 * @param createuser the new createuser
-	 */
-	public void setCreateuser(String createuser)
-	{
-		this.createuser = createuser;
-	}
-
-	/**
-	 * Gets the tenantid.
-	 * 
-	 * @return the tenantid
-	 */
-	public Integer getTenantid()
-	{
-		return tenantid;
-	}
-
-	/**
-	 * Sets the tenantid.
-	 * 
-	 * @param tenantid the new tenantid
-	 */
-	public void setTenantid(Integer tenantid)
-	{
-		this.tenantid = tenantid;
 	}
 
 	/**
@@ -342,70 +289,58 @@ public class Academia extends SensusModel
 		this.atual = atual;
 	}
 
+	/**
+	 * Gets the dataini.
+	 * 
+	 * @return the dataini
+	 */
 	public Date getDataini()
 	{
 		return dataini;
 	}
 
+	/**
+	 * Sets the dataini.
+	 * 
+	 * @param dataini the new dataini
+	 */
 	public void setDataini(Date dataini)
 	{
 		this.dataini = dataini;
 	}
 
+	/**
+	 * Gets the datafin.
+	 * 
+	 * @return the datafin
+	 */
 	public Date getDatafin()
 	{
 		return datafin;
 	}
 
+	/**
+	 * Sets the datafin.
+	 * 
+	 * @param datafin the new datafin
+	 */
 	public void setDatafin(Date datafin)
 	{
 		this.datafin = datafin;
 	}
 
-	public Date getCreatedate()
-	{
-		return createdate;
-	}
-
-	public void setCreatedate(Date createdate)
-	{
-		this.createdate = createdate;
-	}
-
-	/**
-	 * Gets the userid.
-	 * 
-	 * @return the userid
-	 */
-	public Integer getUserid()
-	{
-		return userid;
-	}
-
-	/**
-	 * Sets the userid.
-	 * 
-	 * @param userid the new userid
-	 */
-	public void setUserid(Integer userid)
-	{
-		this.userid = userid;
-	}
-
 	/*
 	 * (non-Javadoc)
-	 * @see com.sensus.common.model.SensusModel#toString()
+	 * @see com.sensus.lc.base.model.PrincipalClass#toString()
 	 */
 	@Override
 	public String toString()
 	{
-		return "Academia [getCdacad()=" + getCdacad() + ", getCreateuser()=" + getCreateuser() + ", getTenantid()="
-				+ getTenantid() + ", getLatitude()=" + getLatitude() + ", getLongitude()=" + getLongitude()
-				+ ", getAcadem()=" + getAcadem() + ", getLograd()=" + getLograd() + ", getNumen()=" + getNumen()
-				+ ", getBairr()=" + getBairr() + ", getCidade()=" + getCidade() + ", getCep()=" + getCep()
+		return "Academia [getCdacad()=" + getCdacad() + ", getLatitude()=" + getLatitude() + ", getLongitude()="
+				+ getLongitude() + ", getAcadem()=" + getAcadem() + ", getLograd()=" + getLograd() + ", getNumen()="
+				+ getNumen() + ", getBairr()=" + getBairr() + ", getCidade()=" + getCidade() + ", getCep()=" + getCep()
 				+ ", getTelef()=" + getTelef() + ", getAtual()=" + getAtual() + ", getDataini()=" + getDataini()
-				+ ", getDatafin()=" + getDatafin() + ", getCreatedate()=" + getCreatedate() + ", getUserid()="
-				+ getUserid() + "]";
+				+ ", getDatafin()=" + getDatafin() + ", toString()=" + super.toString() + "]";
 	}
 
 }

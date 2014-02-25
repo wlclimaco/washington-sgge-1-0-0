@@ -2,10 +2,10 @@ package com.sensus.lc.suplemento.model;
 
 import java.sql.Date;
 
-import com.sensus.common.model.SensusModel;
+import com.sensus.lc.base.model.PrincipalClass;
 
 @SuppressWarnings("serial")
-public class Suplemento extends SensusModel
+public class Suplemento extends PrincipalClass
 {
 	/** The Constant FIRST. */
 	private static final Integer FIRST = 0;

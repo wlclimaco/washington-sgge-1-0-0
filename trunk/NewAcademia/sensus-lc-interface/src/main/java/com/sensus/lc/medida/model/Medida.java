@@ -2,13 +2,12 @@ package com.sensus.lc.medida.model;
 
 import java.sql.Date;
 
-import com.sensus.common.model.SensusModel;
+import com.sensus.lc.base.model.PrincipalClass;
 
 @SuppressWarnings("serial")
-public class Medida extends SensusModel
+public class Medida extends PrincipalClass
 {
-	/** The Constant FIRST. */
-	private static final Integer FIRST = 0;
+
 	private Integer cdmed;
 	private Float altura;
 	private Float peso;

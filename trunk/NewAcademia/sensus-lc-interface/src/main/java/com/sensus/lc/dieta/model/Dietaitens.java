@@ -1,9 +1,9 @@
 package com.sensus.lc.dieta.model;
 
-import com.sensus.common.model.SensusModel;
+import com.sensus.lc.base.model.PrincipalClass;
 
 @SuppressWarnings("serial")
-public class Dietaitens extends SensusModel
+public class Dietaitens extends PrincipalClass
 {
 	/** The Constant FIRST. */
 	private static final Integer FIRST = 0;

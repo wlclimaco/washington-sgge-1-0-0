@@ -4,11 +4,11 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sensus.common.model.SensusModel;
+import com.sensus.lc.base.model.PrincipalClass;
 import com.sensus.lc.exercicio.model.Exercicio;
 
 @SuppressWarnings("serial")
-public class Serieitens extends SensusModel
+public class Serieitens extends PrincipalClass
 {
 	/** The Constant FIRST. */
 	private static final Integer FIRST = 0;

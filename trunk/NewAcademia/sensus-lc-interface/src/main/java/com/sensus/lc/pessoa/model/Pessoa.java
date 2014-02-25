@@ -4,8 +4,8 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sensus.common.model.SensusModel;
 import com.sensus.lc.academia.model.Academia;
+import com.sensus.lc.base.model.PrincipalClass;
 import com.sensus.lc.dieta.model.Dieta;
 import com.sensus.lc.foto.model.Foto;
 import com.sensus.lc.medida.model.Medida;
@@ -13,7 +13,7 @@ import com.sensus.lc.serie.model.Serie;
 import com.sensus.lc.suplemento.model.Suplemento;
 
 @SuppressWarnings("serial")
-public class Pessoa extends SensusModel
+public class Pessoa extends PrincipalClass
 {
 	/** The Constant FIRST. */
 	private static final Integer FIRST = 0;
