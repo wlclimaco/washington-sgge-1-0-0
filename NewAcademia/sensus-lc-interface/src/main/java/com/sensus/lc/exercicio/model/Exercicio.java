@@ -1,20 +1,14 @@
 package com.sensus.lc.exercicio.model;
 
-import java.util.Date;
-import java.util.List;
-
-import com.sensus.common.model.SensusModel;
-import com.sensus.lc.foto.model.Foto;
+import com.sensus.lc.base.model.PrincipalClass;
 import com.sensus.lc.grupomuscular.model.Grupomuscular;
 
 /**
  * The Class Exercicio.
  */
 @SuppressWarnings("serial")
-public class Exercicio extends SensusModel
+public class Exercicio extends PrincipalClass
 {
-	/** The Constant FIRST. */
-	private static final Integer FIRST = 0;
 
 	/** The cdexerc. */
 	private Integer cdexerc;
@@ -25,55 +19,15 @@ public class Exercicio extends SensusModel
 	/** The dsexerc. */
 	private String dsexerc;
 
-	/** The createdate. */
-	private Date createdate;
-
-	/** The createuser. */
-	private String createuser;
-
-	/** The tenantid. */
-	private Integer tenantid;
-
-	/** The tenantid. */
-	private Integer userid;
-
-	/** The ftexerc. */
-	private List<Foto> ftexerc;
-
 	/** The grupomuscular. */
 	private Grupomuscular grupomuscular;
 
+	/**
+	 * Instantiates a new exercicio.
+	 */
 	public Exercicio()
 	{
 		super();
-	}
-
-	/**
-	 * Instantiates a new exercicio.
-	 * 
-	 * @param cdexerc the cdexerc
-	 * @param ftexerc the ftexerc
-	 * @param grupomuscular the grupomuscular
-	 */
-	public Exercicio(Integer cdexerc, List<Foto> ftexerc, Grupomuscular grupomuscular)
-	{
-		super();
-		this.cdexerc = cdexerc;
-		this.ftexerc = ftexerc;
-		this.grupomuscular = grupomuscular;
-	}
-
-	/**
-	 * Instantiates a new exercicio.
-	 * 
-	 * @param cdexerc the cdexerc
-	 * @param ftexerc the ftexerc
-	 */
-	public Exercicio(Integer cdexerc, List<Foto> ftexerc)
-	{
-		super();
-		this.cdexerc = cdexerc;
-		this.ftexerc = ftexerc;
 	}
 
 	/**
@@ -85,66 +39,6 @@ public class Exercicio extends SensusModel
 	{
 		super();
 		this.cdexerc = cdexerc;
-	}
-
-	/**
-	 * Instantiates a new exercicio.
-	 * 
-	 * @param cdexerc the cdexerc
-	 * @param nmexerc the nmexerc
-	 * @param dsexerc the dsexerc
-	 * @param ftexerc the ftexerc
-	 * @param grupomuscular the grupomuscular
-	 */
-	public Exercicio(Integer cdexerc, String nmexerc, String dsexerc, List<Foto> ftexerc,
-			Grupomuscular grupomuscular)
-	{
-		super();
-		this.cdexerc = cdexerc;
-		this.nmexerc = nmexerc;
-		this.dsexerc = dsexerc;
-		this.ftexerc = ftexerc;
-		this.grupomuscular = grupomuscular;
-	}
-
-	public Date getCreatedate()
-	{
-		return createdate;
-	}
-
-	public void setCreatedate(Date createdate)
-	{
-		this.createdate = createdate;
-	}
-
-	public String getCreateuser()
-	{
-		return createuser;
-	}
-
-	public void setCreateuser(String createuser)
-	{
-		this.createuser = createuser;
-	}
-
-	public Integer getTenantid()
-	{
-		return tenantid;
-	}
-
-	public void setTenantid(Integer tenantid)
-	{
-		this.tenantid = tenantid;
-	}
-
-	public Integer getUserid()
-	{
-		return userid;
-	}
-
-	public void setUserid(Integer userid)
-	{
-		this.userid = userid;
 	}
 
 	/**
@@ -227,35 +121,16 @@ public class Exercicio extends SensusModel
 		this.dsexerc = dsexerc;
 	}
 
-	/**
-	 * Gets the ftexerc.
-	 * 
-	 * @return the ftexerc
+	/*
+	 * (non-Javadoc)
+	 * @see com.sensus.lc.base.model.PrincipalClass#toString()
 	 */
-	public List<Foto> getFtexerc()
-	{
-		return ftexerc;
-	}
-
-	/**
-	 * Sets the ftexerc.
-	 * 
-	 * @param ftexerc the new ftexerc
-	 */
-	public void setFtexerc(List<Foto> ftexerc)
-	{
-		this.ftexerc = ftexerc;
-	}
-
 	@Override
 	public String toString()
 	{
-		return "Exercicio [cdexerc=" + cdexerc + ", nmexerc=" + nmexerc + ", dsexerc=" + dsexerc + ", createdate="
-				+ createdate + ", createuser=" + createuser + ", tenantid=" + tenantid + ", userid=" + userid
-				+ ", ftexerc=" + ftexerc + ", grupomuscular=" + grupomuscular + ", getCreatedate()=" + getCreatedate()
-				+ ", getCreateuser()=" + getCreateuser() + ", getTenantid()=" + getTenantid() + ", getUserid()="
-				+ getUserid() + ", getGrupomuscular()=" + getGrupomuscular() + ", getCdexerc()=" + getCdexerc()
-				+ ", getNmexerc()=" + getNmexerc() + ", getDsexerc()=" + getDsexerc() + ", getFtexerc()="
-				+ getFtexerc() + "]";
+		return "Exercicio [getGrupomuscular()=" + getGrupomuscular() + ", getCdexerc()=" + getCdexerc()
+				+ ", getNmexerc()=" + getNmexerc() + ", getDsexerc()=" + getDsexerc() + ", toString()="
+				+ super.toString() + "]";
 	}
+
 }
