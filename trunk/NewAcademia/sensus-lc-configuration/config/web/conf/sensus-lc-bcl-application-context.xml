@@ -819,4 +819,8 @@
 		<property name="exercicioDAC" ref="exercicioDACTarget" />
 	</bean>
 
+	<bean id="comumBCLTarget" class="com.sensus.lc.comum.bcl.impl.ComumBCLImpl">
+		<property name="comumDAC" ref="comumDACTarget" />
+	</bean>
+
 </beans>

@@ -134,6 +134,7 @@
 	<mvc:view-controller path="/light/removeToGroup" view-name="/light/light_remove_from_group"/>
 	<mvc:view-controller path="/light/addToTag" view-name="/light/light_add_tag"/>
 	<mvc:view-controller path="/light/removeToTag" view-name="/light/light_remove_tag"/>
+	<mvc:view-controller path="/exercicio/exerciciocreate" view-name="/exercicio/exercicio_create"/>
 
 <!--  Utils  -->
 	<mvc:view-controller path="/util/summary" view-name="../commons/pages/summary"/>
