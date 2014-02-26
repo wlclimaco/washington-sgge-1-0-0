@@ -1,9 +1,9 @@
 /***
  * Contains basic SlickGrid formatters.
- * 
+ *
  * NOTE:  These are merely examples.  You will most likely need to implement something more
  *        robust/extensible/localizable/etc. for your use!
- * 
+ *
  * @module Formatters
  * @namespace Slick
  */
@@ -16,6 +16,7 @@
         "PercentComplete": PercentCompleteFormatter,
         "PercentCompleteBar": PercentCompleteBarFormatter,
         "YesNo": YesNoFormatter,
+		"Buttons":Buttons,
         "Checkmark": CheckmarkFormatter
       }
     }
@@ -51,6 +52,10 @@
 
   function YesNoFormatter(row, cell, value, columnDef, dataContext) {
     return value ? "Yes" : "No";
+  }
+
+  function Buttons(row, cell, value, columnDef, dataContext) {
+    return '<a href="#" class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only " role="button" aria-disabled="false">Delete</a>  <a href="#" class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only " role="button" aria-disabled="false">Edit</a>';
   }
 
   function CheckmarkFormatter(row, cell, value, columnDef, dataContext) {

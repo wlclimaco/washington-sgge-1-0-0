@@ -30,7 +30,11 @@
 		</div>
 	<div id="yui-main">
       <div id="history-box" class="yui-b">
+
+
+
       		<div class="tools">
+			 <a tabindex="0" id="ajax-button" href="exercicio/exerciciocreate" class="fg-button ui-widget ui-state-default ui-corner-all group-create alist">Create Exercicio</a>
             	<div class="export-select">
                 	<ul class="link-list">
                     	<li class="last export-type"><small><strong><s:message code="analytics.page.export" /></strong> <a href="" class="csv" id="csv"><s:message code="analytics.page.csv" /></a></small></li>
@@ -66,7 +70,7 @@
 				<p><s:message code="widgets.blankslate.detail" /></p>
 				</div>
 				<!-- START status grid -->
-				<div style="width:600px;">
+				<div style="width:100%;">
 				<div class="grid-header" style="width:100%">
 				  <label>SlickGrid</label>
 				</div>
