@@ -1,4 +1,4 @@
-package com.sensus.lc.comentario.model.response;
+package com.sensus.lc.curtir.model.response;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -7,41 +7,41 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 
 import com.sensus.common.model.response.InquiryResponse;
-import com.sensus.lc.foto.model.Foto;
+import com.sensus.lc.curtir.model.Curtir;
 
 /**
  * The Class InquiryFotoResponse.
  * 
  * @author - Washington
  */
-public class InquiryFotoResponse extends InquiryResponse
+public class InquiryCurtirResponse extends InquiryResponse
 {
 
-	/** The fotos. */
+	/** The curtir. */
 	@XmlElement(nillable = true)
-	private List<Foto> fotos;
+	private List<Curtir> curtir;
 
 	/** The file name. */
 	private String fileName;
 
 	/**
-	 * Gets the fotos.
+	 * Gets the curtir.
 	 * 
-	 * @return the fotos
+	 * @return the curtir
 	 */
-	public List<Foto> getFotos()
+	public List<Curtir> getCurtir()
 	{
-		return fotos;
+		return curtir;
 	}
 
 	/**
-	 * Sets the fotos.
+	 * Sets the curtir.
 	 * 
-	 * @param fotoList the new fotos
+	 * @param fotoList the new curtir
 	 */
-	public void setFotos(List<Foto> fotoList)
+	public void setCurtir(List<Curtir> fotoList)
 	{
-		fotos = fotoList;
+		curtir = fotoList;
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class InquiryFotoResponse extends InquiryResponse
 	@Override
 	public void addResults(Collection coll)
 	{
-		setFotos(new ArrayList<Foto>(coll));
+		setCurtir(new ArrayList<Curtir>(coll));
 	}
 
 	/*
@@ -82,7 +82,7 @@ public class InquiryFotoResponse extends InquiryResponse
 	@Override
 	public String toString()
 	{
-		return "InquiryFotoResponse [fotos=" + fotos + ", fileName=" + fileName + ", getFotos()=" + getFotos()
+		return "InquiryFotoResponse [curtir=" + curtir + ", fileName=" + fileName + ", getCurtir()=" + getCurtir()
 				+ ", getFileName()=" + getFileName() + "]";
 	}
 }
