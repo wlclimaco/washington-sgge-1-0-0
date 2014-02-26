@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
@@ -103,7 +104,7 @@ public class ImportEcoModeController extends BaseViewController implements Handl
 	 */
 	@RequestMapping(value = UPLOAD_FILE, method = RequestMethod.POST)
 	public EcoModeModel upload(@RequestParam(value = "uploadTag", required = false) String uploadTag,
-			@RequestParam("upload") MultipartFile upload,
+			@RequestParam("upload") List<MultipartFile> files,
 			MultipartHttpServletRequest request)
 	{
 
@@ -133,7 +134,7 @@ public class ImportEcoModeController extends BaseViewController implements Handl
 			}
 
 			// Upload File
-			if (!ValidationUtil.isNull(upload))
+			if (!ValidationUtil.isNull(files))
 			{
 				// String[] extension = StringUtils.splitByWholeSeparator(upload.getOriginalFilename(), ".");
 				// if (!CSV_MIME_TYPE.equals(upload.getContentType())
@@ -148,10 +149,10 @@ public class ImportEcoModeController extends BaseViewController implements Handl
 				// upload.transferTo(f);
 				// Some type of file processing...
 				System.err.println("-------------------------------------------");
-				System.err.println("Test upload: " + upload.getName());
+				System.err.println("Test upload: " + files.get(0).getName());
 				System.err.println("-------------------------------------------");
 
-				MultipartFile file = upload;
+				MultipartFile file = files.get(0);
 				String fileName = null;
 				InputStream inputStream = null;
 				OutputStream outputStream = null;
@@ -174,7 +175,7 @@ public class ImportEcoModeController extends BaseViewController implements Handl
 					outputStream.close();
 					inputStream.close();
 
-					BufferedImage src = ImageIO.read(new ByteArrayInputStream(upload.getBytes()));
+					BufferedImage src = ImageIO.read(new ByteArrayInputStream(files.get(0).getBytes()));
 					// BufferedImage src = ImageIO.read(new ByteArrayInputStream(file.getBytes()));
 					File destination = new File("c:/images/"); // something like
 																// C:/Users/tom/Documents/nameBasedOnSomeId.png
