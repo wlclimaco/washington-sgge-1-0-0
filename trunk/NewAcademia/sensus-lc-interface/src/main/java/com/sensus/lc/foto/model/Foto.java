@@ -3,6 +3,7 @@ package com.sensus.lc.foto.model;
 import java.sql.Date;
 
 import com.sensus.common.model.SensusModel;
+import com.sensus.lc.base.model.AcaoTabelaEnum;
 
 @SuppressWarnings("serial")
 public class Foto extends SensusModel
@@ -13,6 +14,7 @@ public class Foto extends SensusModel
 	private Date dtpost;
 	private String coment;
 	private String foto;
+	private AcaoTabelaEnum acaoComentarioEnum;
 
 	/**
 	 * Gets the cdfoto.
