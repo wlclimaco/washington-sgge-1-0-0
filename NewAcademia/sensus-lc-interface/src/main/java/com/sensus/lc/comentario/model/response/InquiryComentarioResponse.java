@@ -1,4 +1,4 @@
-package com.sensus.lc.curtir.model.response;
+package com.sensus.lc.comentario.model.response;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -7,41 +7,41 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 
 import com.sensus.common.model.response.InquiryResponse;
-import com.sensus.lc.foto.model.Foto;
+import com.sensus.lc.comentario.model.Comentario;
 
 /**
- * The Class InquiryFotoResponse.
+ * The Class InquiryComentarioResponse.
  * 
  * @author - Washington
  */
-public class InquiryFotoResponse extends InquiryResponse
+public class InquiryComentarioResponse extends InquiryResponse
 {
 
-	/** The fotos. */
+	/** The comentarios. */
 	@XmlElement(nillable = true)
-	private List<Foto> fotos;
+	private List<Comentario> comentarios;
 
 	/** The file name. */
 	private String fileName;
 
 	/**
-	 * Gets the fotos.
+	 * Gets the comentarios.
 	 * 
-	 * @return the fotos
+	 * @return the comentarios
 	 */
-	public List<Foto> getFotos()
+	public List<Comentario> getComentarios()
 	{
-		return fotos;
+		return comentarios;
 	}
 
 	/**
-	 * Sets the fotos.
+	 * Sets the comentarios.
 	 * 
-	 * @param fotoList the new fotos
+	 * @param comentarioList the new comentarios
 	 */
-	public void setFotos(List<Foto> fotoList)
+	public void setComentarios(List<Comentario> comentarioList)
 	{
-		fotos = fotoList;
+		comentarios = comentarioList;
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class InquiryFotoResponse extends InquiryResponse
 	@Override
 	public void addResults(Collection coll)
 	{
-		setFotos(new ArrayList<Foto>(coll));
+		setComentarios(new ArrayList<Comentario>(coll));
 	}
 
 	/*
@@ -82,7 +82,8 @@ public class InquiryFotoResponse extends InquiryResponse
 	@Override
 	public String toString()
 	{
-		return "InquiryFotoResponse [fotos=" + fotos + ", fileName=" + fileName + ", getFotos()=" + getFotos()
+		return "InquiryComentarioResponse [comentarios=" + comentarios + ", fileName=" + fileName
+				+ ", getComentarios()=" + getComentarios()
 				+ ", getFileName()=" + getFileName() + "]";
 	}
 }

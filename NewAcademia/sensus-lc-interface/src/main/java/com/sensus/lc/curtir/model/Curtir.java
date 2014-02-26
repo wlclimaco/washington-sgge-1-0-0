@@ -1,19 +1,32 @@
 package com.sensus.lc.curtir.model;
 
-import java.sql.Date;
-
 import com.sensus.common.model.SensusModel;
 import com.sensus.lc.base.model.AcaoTabelaEnum;
+import com.sensus.lc.pessoa.model.Pessoa;
 
+/**
+ * The Class Curtir.
+ */
 @SuppressWarnings("serial")
 public class Curtir extends SensusModel
 {
 	/** The Constant FIRST. */
 	private static final Integer FIRST = 0;
+
+	/** The cd curtir. */
+	private Integer cdCurtir;
+
+	/** The curtir type enum. */
+	private CurtirTypeEnum curtirTypeEnum;
+
+	/** The acao enum. */
 	private AcaoTabelaEnum acaoEnum;
-	private Date dtcurtir;
-	private String coment;
-	private String curtir;
+
+	/** The pessoa. */
+	private Pessoa pessoa;
+
+	/** The cd evento. */
+	private Integer cdEvento;
 
 	/**
 	 * Gets the cdcurtir.
@@ -36,63 +49,103 @@ public class Curtir extends SensusModel
 	}
 
 	/**
-	 * Gets the dtpost.
+	 * Gets the cd curtir.
 	 * 
-	 * @return the dtpost
+	 * @return the cd curtir
 	 */
-	public Date getDtpost()
+	public Integer getCdCurtir()
 	{
-		return dtcurtir;
+		return cdCurtir;
 	}
 
 	/**
-	 * Sets the dtpost.
+	 * Sets the cd curtir.
 	 * 
-	 * @param dtpost the new dtpost
+	 * @param cdCurtir the new cd curtir
 	 */
-	public void setDtpost(Date dtpost)
+	public void setCdCurtir(Integer cdCurtir)
 	{
-		dtcurtir = dtpost;
+		this.cdCurtir = cdCurtir;
 	}
 
 	/**
-	 * Gets the coment.
+	 * Gets the curtir type enum.
 	 * 
-	 * @return the coment
+	 * @return the curtir type enum
 	 */
-	public String getComent()
+	public CurtirTypeEnum getCurtirTypeEnum()
 	{
-		return coment;
+		return curtirTypeEnum;
 	}
 
 	/**
-	 * Sets the coment.
+	 * Sets the curtir type enum.
 	 * 
-	 * @param coment the new coment
+	 * @param curtirTypeEnum the new curtir type enum
 	 */
-	public void setComent(String coment)
+	public void setCurtirTypeEnum(CurtirTypeEnum curtirTypeEnum)
 	{
-		this.coment = coment;
+		this.curtirTypeEnum = curtirTypeEnum;
 	}
 
 	/**
-	 * Gets the curtir.
+	 * Gets the acao enum.
 	 * 
-	 * @return the curtir
+	 * @return the acao enum
 	 */
-	public String getFoto()
+	public AcaoTabelaEnum getAcaoEnum()
 	{
-		return curtir;
+		return acaoEnum;
 	}
 
 	/**
-	 * Sets the curtir.
+	 * Sets the acao enum.
 	 * 
-	 * @param curtir the new curtir
+	 * @param acaoEnum the new acao enum
 	 */
-	public void setFoto(String curtir)
+	public void setAcaoEnum(AcaoTabelaEnum acaoEnum)
 	{
-		this.curtir = curtir;
+		this.acaoEnum = acaoEnum;
+	}
+
+	/**
+	 * Gets the pessoa.
+	 * 
+	 * @return the pessoa
+	 */
+	public Pessoa getPessoa()
+	{
+		return pessoa;
+	}
+
+	/**
+	 * Sets the pessoa.
+	 * 
+	 * @param pessoa the new pessoa
+	 */
+	public void setPessoa(Pessoa pessoa)
+	{
+		this.pessoa = pessoa;
+	}
+
+	/**
+	 * Gets the cd evento.
+	 * 
+	 * @return the cd evento
+	 */
+	public Integer getCdEvento()
+	{
+		return cdEvento;
+	}
+
+	/**
+	 * Sets the cd evento.
+	 * 
+	 * @param cdEvento the new cd evento
+	 */
+	public void setCdEvento(Integer cdEvento)
+	{
+		this.cdEvento = cdEvento;
 	}
 
 	/*
@@ -102,8 +155,8 @@ public class Curtir extends SensusModel
 	@Override
 	public String toString()
 	{
-		return "Foto[ getCdcurtir()=" + getCdcurtir() + ", getDtpost()=" + getDtpost() + ", getComent()=" + getComent()
-				+ ", getFoto()=" + getFoto()
-				+ "]";
+		return "Curtir [getCdcurtir()=" + getCdcurtir() + ", getCdCurtir()=" + getCdCurtir() + ", getCurtirTypeEnum()="
+				+ getCurtirTypeEnum() + ", getAcaoEnum()=" + getAcaoEnum() + ", getPessoa()=" + getPessoa()
+				+ ", getCdEvento()=" + getCdEvento() + ", toString()=" + super.toString() + "]";
 	}
 }

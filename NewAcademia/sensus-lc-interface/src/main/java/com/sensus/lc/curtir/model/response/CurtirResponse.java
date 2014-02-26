@@ -5,44 +5,44 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 
 import com.sensus.common.model.response.Response;
-import com.sensus.lc.foto.model.Foto;
+import com.sensus.lc.curtir.model.Curtir;
 
 /**
- * The Class FotoResponse.
+ * The Class CurtirResponse.
  * 
  * @author - Washington
  */
-public class FotoResponse extends Response
+public class CurtirResponse extends Response
 {
 
-	/** The fotos. */
+	/** The curtir. */
 	@XmlElement(nillable = true)
-	private List<Foto> fotos;
+	private List<Curtir> curtir;
 
 	/** The is foto name unique. */
-	private Boolean isFotoNameUnique;
+	private Boolean isCurtirNameUnique;
 
 	/** The process id. */
 	private Integer processId;
 
 	/**
-	 * Gets the fotos.
+	 * Gets the curtir.
 	 * 
-	 * @return the fotos
+	 * @return the curtir
 	 */
-	public List<Foto> getFotos()
+	public List<Curtir> getCurtir()
 	{
-		return fotos;
+		return curtir;
 	}
 
 	/**
-	 * Sets the fotos.
+	 * Sets the curtir.
 	 * 
-	 * @param fotoObjects the new fotos
+	 * @param fotoObjects the new curtir
 	 */
-	public void setFotos(List<Foto> fotoObjects)
+	public void setCurtir(List<Curtir> fotoObjects)
 	{
-		fotos = fotoObjects;
+		curtir = fotoObjects;
 	}
 
 	/**
@@ -50,19 +50,19 @@ public class FotoResponse extends Response
 	 * 
 	 * @return the checks if is foto name unique
 	 */
-	public Boolean getIsFotoNameUnique()
+	public Boolean getIsCurtirNameUnique()
 	{
-		return isFotoNameUnique;
+		return isCurtirNameUnique;
 	}
 
 	/**
 	 * Sets the checks if is foto name unique.
 	 * 
-	 * @param isFotoNameUnique the new checks if is foto name unique
+	 * @param isCurtirNameUnique the new checks if is foto name unique
 	 */
-	public void setIsFotoNameUnique(Boolean isFotoNameUnique)
+	public void setIsCurtirNameUnique(Boolean isCurtirNameUnique)
 	{
-		this.isFotoNameUnique = isFotoNameUnique;
+		this.isCurtirNameUnique = isCurtirNameUnique;
 	}
 
 	/**
@@ -88,11 +88,11 @@ public class FotoResponse extends Response
 	@Override
 	public String toString()
 	{
-		return "FotoResponse [getFotos()=" + getFotos() + ", getMessageIterator()=" + getMessageIterator()
+		return "CurtirResponse [getCurtir()=" + getCurtir() + ", getMessageIterator()=" + getMessageIterator()
 				+ ", getMessageList()=" + getMessageList() + ", getMessageInfoList()=" + getMessageInfoList()
 				+ ", getProcessId()=" + getProcessId()
-				+ ", isOperationSuccess()=" + isOperationSuccess() + ", getIsFotoNameUnique()="
-				+ getIsFotoNameUnique() + "]";
+				+ ", isOperationSuccess()=" + isOperationSuccess() + ", getIsCurtirNameUnique()="
+				+ getIsCurtirNameUnique() + "]";
 	}
 
 }
