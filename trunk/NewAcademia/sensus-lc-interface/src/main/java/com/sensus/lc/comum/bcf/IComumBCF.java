@@ -8,7 +8,12 @@ import com.sensus.lc.curtir.model.request.CurtirRequest;
 import com.sensus.lc.curtir.model.request.InquiryCurtirRequest;
 import com.sensus.lc.curtir.model.response.CurtirResponse;
 import com.sensus.lc.curtir.model.response.InquiryCurtirResponse;
+import com.sensus.lc.foto.model.request.FotoRequest;
+import com.sensus.lc.foto.model.request.InquiryFotoRequest;
+import com.sensus.lc.foto.model.response.FotoResponse;
+import com.sensus.lc.foto.model.response.InquiryFotoResponse;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Interface IDietaBCF.
  * 
@@ -32,7 +37,7 @@ public interface IComumBCF
 	 * @param inquiryComentarioRequest the inquiry dieta request
 	 * @return the dieta response
 	 */
-	ComentarioResponse fetchComentarioById(InquiryComentarioRequest inquiryComentarioRequest);
+	InquiryComentarioResponse fetchComentarioById(InquiryComentarioRequest inquiryComentarioRequest);
 
 	/**
 	 * Insert dieta.
@@ -74,7 +79,7 @@ public interface IComumBCF
 	 * @param inquiryCurtirRequest the inquiry dieta request
 	 * @return the dieta response
 	 */
-	CurtirResponse fetchCurtirById(InquiryCurtirRequest inquiryCurtirRequest);
+	InquiryCurtirResponse fetchCurtirById(InquiryCurtirRequest inquiryCurtirRequest);
 
 	/**
 	 * Insert dieta.
@@ -107,7 +112,7 @@ public interface IComumBCF
 	 * @param inquiryFotoRequest the inquiry dieta request
 	 * @return the inquiry dieta response
 	 */
-	InquiryComentarioResponse fetchAllFotos(InquiryComentarioRequest inquiryFotoRequest);
+	InquiryFotoResponse fetchAllFotos(InquiryFotoRequest inquiryFotoRequest);
 
 	/**
 	 * Fetch dieta by id.
@@ -115,7 +120,7 @@ public interface IComumBCF
 	 * @param inquiryFotoRequest the inquiry dieta request
 	 * @return the dieta response
 	 */
-	ComentarioResponse fetchFotoById(InquiryComentarioRequest inquiryFotoRequest);
+	InquiryFotoResponse fetchFotoById(InquiryFotoRequest inquiryFotoRequest);
 
 	/**
 	 * Insert dieta.
@@ -123,7 +128,7 @@ public interface IComumBCF
 	 * @param dietaRequest the dieta request
 	 * @return the dieta response
 	 */
-	ComentarioResponse insertFoto(ComentarioRequest dietaRequest);
+	FotoResponse insertFoto(FotoRequest dietaRequest);
 
 	/**
 	 * Update dieta.
@@ -131,7 +136,7 @@ public interface IComumBCF
 	 * @param dietaRequest the dieta request
 	 * @return the dieta response
 	 */
-	ComentarioResponse updateFoto(ComentarioRequest dietaRequest);
+	FotoResponse updateFoto(FotoRequest dietaRequest);
 
 	/**
 	 * Delete dieta.
@@ -139,6 +144,6 @@ public interface IComumBCF
 	 * @param dietaRequest the dieta request
 	 * @return the dieta response
 	 */
-	ComentarioResponse deleteFoto(ComentarioRequest dietaRequest);
+	FotoResponse deleteFoto(FotoRequest dietaRequest);
 
 }
