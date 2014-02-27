@@ -142,6 +142,7 @@
 		<script src="commons/scripts/widget/slick.pager.js"></script>
 
 		<script src="../lib/jquery.event.drag-2.2.js"></script>
+		<script src="http://malsup.github.com/jquery.form.js"></script>
 
 
 	</body>

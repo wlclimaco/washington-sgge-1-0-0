@@ -17,6 +17,18 @@
     <div id="bd" class="content-container">
 		<!-- END - Subnavigation -->
 		<div class="content-inner">
+
+		 <form enctype="multipart/form-data" action="ecomode/upload" method="post" name="forms" id="forms" class="">
+
+    <div id="file">
+        <input type="file" id="files" name="upload" multiple>
+        <br ><br >
+        <progress value="0" max="100"></progress><span id="porcentagem">0%</span>
+
+    </div>
+    <br />
+ <input type="submit">
+</form>
             <!-- Messaging -->
             	<div id="messaging-main" class="messaging"><span class="message"></span><a href="" class="remove">close</a></div>
                 <div id="yui-main">
@@ -63,8 +75,12 @@
                                             <textarea id="schedule-description" tabindex="2" class="long"></textarea>
                                         </li>
 										<li>
-<input type="file" id="files" name="files[]" multiple />
+<input type="file" id="files" name="filesd[]" multiple />
 <output id="list"></output>
+
+
+
+
                                         </li>
                                     </ul>
                                 </fieldset>
@@ -102,7 +118,7 @@
                 <span class="btn btn-success fileinput-button">
                     <i class="glyphicon glyphicon-plus"></i>
                     <span>Add files...</span>
-                    <input type="file" multiple="" name="files[]">
+                    <input type="file" multiple="" name="filesd[]">
                 </span>
                 <button class="btn btn-primary start" type="submit">
                     <i class="glyphicon glyphicon-upload"></i>
@@ -193,6 +209,47 @@
                        </div>
 				</div>
               </div>
+			  <form enctype="multipart/form-data" method="POST" action="ecomode/upload" id="fileuploads">
+        <!-- Redirect browsers with JavaScript disabled to the origin page -->
+        <noscript>&lt;input type="hidden" name="redirect" value="http://blueimp.github.io/jQuery-File-Upload/"&gt;</noscript>
+        <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+        <div class="row fileupload-buttonbar">
+            <div class="col-lg-7">
+                <!-- The fileinput-button span is used to style the file input field as button -->
+                <span class="btn btn-success fileinput-button">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <span>Add files...</span>
+                    <input type="file" multiple="" name="filese">
+                </span>
+                <button class="btn btn-primary start" type="submit">
+                    <i class="glyphicon glyphicon-upload"></i>
+                    <span>Start upload</span>
+                </button>
+                <button class="btn btn-warning cancel" type="reset">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Cancel upload</span>
+                </button>
+                <button class="btn btn-danger delete" type="button">
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <span>Delete</span>
+                </button>
+                <input type="checkbox" class="toggle">
+                <!-- The global file processing state -->
+                <span class="fileupload-process"></span>
+            </div>
+            <!-- The global progress state -->
+            <div class="col-lg-5 fileupload-progress fade">
+                <!-- The global progress bar -->
+                <div aria-valuemax="100" aria-valuemin="0" role="progressbar" class="progress progress-striped active">
+                    <div style="width:0%;" class="progress-bar progress-bar-success"></div>
+                </div>
+                <!-- The extended global progress state -->
+                <div class="progress-extended">&nbsp;</div>
+            </div>
+        </div>
+        <!-- The table listing the files available for upload/download -->
+        <table class="table table-striped" role="presentation"><tbody class="files"></tbody></table>
+    <div class="alert alert-danger">Upload server currently unavailable - Wed Feb 26 2014 22:10:41 GMT-0300</div></form>
             </div>
 		</div>
       </div>
@@ -297,6 +354,9 @@
 
 
 
+
+
+
 <script>
   function handleFileSelect(evt) {
     var files = evt.target.files; // FileList object
@@ -328,7 +388,63 @@
     }
   }
 
-  document.getElementById('files').addEventListener('change', handleFileSelect, false);
+$(document).ready(function(){
+/*     $('form').bind('submit', function(){
+        var params = $(this.elements).serialize();
+        $.ajax({
+            type: 'POST',
+	    url: "ecomode/upload",
+            data: params,
+            beforeSend: function(){
+		$('#loading').show(),
+                $('#loading').html("Carregando...");
+            },
+            success: function(txt){
+		$('#loading').hide(),
+                $('#conteudo').prepend(txt);
+            }
+        })
+        return false;
+    }); */
+
+/*
+			 $('#form_upload_img').ajaxSubmit({
+                target: '#retorno',
+                beforeSubmit: antes,
+                success: sucesso
+            });
+
+
+    function antes()  {
+        $('#retorno').html(''); //Apaga o conteúdo atual do elemento de retorno [Erase the actual content of the return element]
+        $('#logo_img').fadeOut('fast'); //Esconde a imagem atual. [hides the actual image]
+
+        //Vc pode tb colocar no lugar uma imagem de carregando... [you can also put an image of "loading..."]
+    };
+
+    function sucesso(dados) {
+        console.log(dados)
+    };     */
+
+	$('#forms').ajaxForm({
+
+        uploadProgress: function(event, position, total, percentComplete) {
+            $('progress').attr('value',percentComplete);
+            $('#porcentagem').html(percentComplete+'%');
+        },
+		beforeSubmit: function(data) {
+             document.getElementById('files').addEventListener('change', handleFileSelect, false);
+        },
+        success: function(data) {
+            $('progress').attr('value','100');
+        $('#porcentagem').html('100%');
+            $('pre').html(data);
+        }
+
+});
+
+});
+
 </script>
 </div>
 <div id="dialog-map"></div>
@@ -337,3 +453,5 @@
 <jsp:include page="../../scripts/pages/exercicio/exercicio_create_init.js.jsp" flush="true"/>
 
 </sec:authorize>
+
+
