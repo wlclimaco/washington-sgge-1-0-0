@@ -1,0 +1,711 @@
+
+.async_throbber .async_saving {
+    background: url("/rsrc.php/v2/yb/r/GsNJNwuI-UM.gif") no-repeat scroll right center rgba(0, 0, 0, 0);
+    padding-right: 20px;
+}
+.async_throbber_left .async_saving {
+    background: url("/rsrc.php/v2/yb/r/GsNJNwuI-UM.gif") no-repeat scroll left center rgba(0, 0, 0, 0);
+    padding-left: 20px;
+}
+.threadRow .snippet {
+    max-width: 430px;
+    overflow: hidden;
+    position: absolute;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.threadRow .snippet .indicator, #fbMessagesItemList .snippet .indicator {
+    vertical-align: middle;
+}
+#profile_minifeed .reportHide {
+    display: none;
+}
+.fbProfileStream .uiStreamMessage .passiveName {
+    font-weight: normal;
+}
+.fbProfileStream .uiStreamMessage a.passiveName {
+    font-weight: bold;
+}
+.sp_adnfzo {
+    background-image: url("/rsrc.php/v2/yU/r/hVwagfGTW2H.png");
+    background-repeat: no-repeat;
+    background-size: auto auto;
+    display: inline-block;
+    height: 8px;
+    width: 8px;
+}
+.sx_314f6c {
+    background-position: -13px -96px;
+    height: 14px;
+    width: 13px;
+}
+.selected .sx_314f6c {
+    background-position: 0 -96px;
+}
+.sx_39d105 {
+    background-position: 0 -152px;
+    height: 16px;
+    width: 15px;
+}
+.sx_a9f10a {
+    background-position: 0 -135px;
+    height: 16px;
+    width: 16px;
+}
+.sx_d43b7f {
+    background-position: 0 0;
+    height: 32px;
+    width: 28px;
+}
+.sx_733dbf {
+    background-position: 0 -33px;
+    height: 32px;
+    width: 23px;
+}
+.sx_079104 {
+    background-position: -18px -117px;
+}
+.sx_2a3b95 {
+    background-position: -18px -126px;
+}
+.sx_a202a8 {
+    background-position: 0 -66px;
+    height: 29px;
+    width: 29px;
+}
+.sx_e399e0 {
+    background-position: -9px -111px;
+    height: 5px;
+    width: 9px;
+}
+.selected .sx_e399e0 {
+    background-position: 0 -111px;
+}
+.sx_ede2f3 {
+    background-position: -8px -169px;
+}
+.selected .sx_ede2f3 {
+    background-position: 0 -169px;
+}
+.sx_4f4c5a {
+    background-position: 0 -117px;
+    height: 17px;
+    width: 17px;
+}
+.sp_e9kazu {
+    background-image: url("/rsrc.php/v2/yS/r/ZwVqBCgBV4_.png");
+    background-repeat: no-repeat;
+    background-size: auto auto;
+    display: inline-block;
+    height: 28px;
+    width: 78px;
+}
+.sx_113280 {
+    background-position: 0 -129px;
+    height: 18px;
+    width: 18px;
+}
+.sx_db45d1 {
+    background-position: -19px -129px;
+    height: 18px;
+    width: 18px;
+}
+.sx_73a126 {
+    background-position: 0 0;
+}
+.sx_d001ac {
+    background-position: 0 -84px;
+    height: 23px;
+    width: 63px;
+}
+.sx_1eefbf {
+    background-position: 0 -29px;
+}
+.sx_ec4164 {
+    background-position: 0 -108px;
+    height: 20px;
+    width: 63px;
+}
+.sx_5e53ac {
+    background-position: 0 -58px;
+    height: 25px;
+}
+.uiStream .uiStreamMessage {
+    color: #000000;
+    font-size: 11px;
+    font-weight: normal;
+    margin: 0 0 5px;
+}
+.uiStream .uiStreamHeadline {
+    margin-bottom: 0;
+    outline: medium none;
+}
+.uiStreamHeadline .uiLikePage {
+    float: right;
+    margin: 0 -15px 0 15px;
+}
+.uiStreamHeadline .uiJoinGroupButton {
+    margin: -5px 30px 0 0;
+}
+.uiLikePage.newChevronButton {
+    margin-right: -10px;
+}
+.uiStreamHeadlineWithLikeButton {
+    min-height: 31px;
+}
+.uiStream .uiStreamPassive {
+    margin-bottom: 5px;
+}
+.Locale_zh_CN .uiStream .uiStreamMessage, .Locale_zh_TW .uiStream .uiStreamMessage, .Locale_zh_HK .uiStream .uiStreamMessage {
+    font-size: 13px;
+}
+.Locale_ja_JP .uiStream .uiStreamMessage {
+    font-size: 12px;
+}
+.uiStreamMessage, .uiAttachmentTitle, .uiAttachmentDesc {
+    word-wrap: break-word;
+}
+.uiStreamMessage .actorDescription {
+    margin-bottom: 3px;
+}
+.uiStreamMessage .suggestionBio .actorDescription {
+    padding-bottom: 0;
+}
+.uiStreamMessage .suggestionBio {
+    width: 410px;
+}
+div.uiAttachmentTitle {
+    color: #333333;
+}
+.permalink_stream {
+    position: relative;
+}
+.uiStreamStory .mainWrapper {
+    margin: 0 35px 14px 0;
+    padding-top: 14px;
+}
+.uiStreamStory .actorPhoto {
+    margin-bottom: 14px;
+    margin-top: 14px;
+}
+.uiStreamStory .storyContent .storyInnerContent {
+    margin-left: 60px;
+}
+.uiStreamStory .uiStreamSubstory .storyInnerContentSmallPic {
+    margin-left: 40px;
+}
+.uiStream .uiStreamHide {
+    margin-top: 18px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.uiStream .substoryHideSelector {
+    float: right;
+    margin: -2px 0 0;
+}
+.holdoutAdStory {
+    display: none;
+}
+.holdoutAdStory:first-child + .uiStreamStory {
+    border-top: medium none;
+}
+.uiStreamStory {
+    padding: 0;
+    position: static;
+}
+.homeWiderContent .uiStreamStory {
+    margin-left: -18px;
+    padding-left: 18px;
+}
+.uiStream .uiStreamHide .uiSelectorButton, .uiStream a.uiCloseButton.uiStreamHide, .uiStream .uiStreamStory:hover .uiStreamSubstory .uiStreamHide .uiSelectorButton {
+    left: -9999px;
+    position: absolute;
+}
+.uiStream .uiStreamStory:hover .uiStreamHide .uiSelectorButton, .uiStream .uiStreamStory:hover a.uiCloseButton.uiStreamHide, .uiStream .uiStreamStory .uiStreamSubstory:hover .uiStreamHide .uiSelectorButton, .uiStream .uiStreamStory .uiStreamHide .openToggler .uiSelectorButton, .uiStream .uiStreamStory:hover .uiStreamSubstory .uiStreamHide .openToggler .uiSelectorButton {
+    left: auto;
+}
+.uiStream a.uiCloseButton.uiStreamHide.alwaysShowHideButton, .uiStream .uiSelectorButton:focus {
+    left: auto !important;
+}
+.uiStream a.uiCloseButton.uiStreamHide.alwaysShowHideButton.xButtonInTab {
+    background-image: url("/rsrc.php/v2/yS/r/ZwVqBCgBV4_.png");
+    background-position: 0 -129px;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+    height: 19px;
+    margin-top: -1px;
+    width: 18px;
+}
+.uiStream a.uiCloseButton.uiStreamHide.alwaysShowHideButton.xButtonInTab:hover {
+    background-image: url("/rsrc.php/v2/yS/r/ZwVqBCgBV4_.png");
+    background-position: -19px -129px;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+}
+.uiStreamStory:first-child a.uiCloseButton.uiStreamHide.alwaysShowHideButton.xButtonInTab, .uiStreamStory:first-child a.uiCloseButton.uiStreamHide.alwaysShowHideButton.xButtonInTab:hover {
+    margin-top: 0;
+}
+.uiStreamHide .uiStreamContextButton, .uiStreamStory:hover .uiStreamSubstory .uiStreamHide .uiStreamContextButton {
+    left: -9999px;
+    position: absolute;
+}
+.uiStreamStory:hover .uiStreamHide .uiStreamContextButton, .uiStreamStory .uiStreamSubstory:hover .uiStreamHide .uiStreamContextButton, .uiStreamStory .uiStreamHide.openToggler .uiStreamContextButton, .uiStreamStory:hover .uiStreamSubstory .uiStreamHide.openToggler .uiStreamContextButton {
+    left: auto;
+}
+.uiStreamStory .uiStreamContextButton:focus {
+    left: auto !important;
+}
+.uiStream .uiAttachmentDesc, .uiStream .uiStreamPassive, .uiStream .uiStreamRobotextBeforeMessage, .uiStream .uiAdminAttribution {
+    color: #808080;
+}
+.uiStream .tagIcon {
+    vertical-align: bottom;
+}
+.uiStream .text_exposed_link {
+    display: block;
+    font-size: 11px;
+    padding-left: 0;
+    padding-top: 4px;
+}
+.storyContent {
+    padding-bottom: 2px;
+    position: relative;
+}
+.uiStream .uiStreamStoryHide .storyContent {
+    display: none;
+}
+.uiStream .uiStreamStoryHidden {
+    display: none;
+}
+.uiStreamAttachments .external.photoLink {
+    overflow: hidden;
+    position: relative;
+}
+.uiStreamAttachments .external .linkOverlay {
+    background: url("/rsrc.php/v2/yj/r/QijIVO3ZIrO.png") repeat-x scroll 0 0 rgba(0, 0, 0, 0);
+    bottom: 0;
+    color: #FFFFFF;
+    height: 36px;
+    left: 0;
+    position: absolute;
+    right: 0;
+}
+.uiStreamAttachments .external .shareIcon {
+    bottom: 5px;
+    height: 16px;
+    position: absolute;
+    right: 5px;
+    width: 16px;
+}
+.uiStreamAttachments .profilePhotoAttachment, .uiStreamAttachments .external img {
+    max-height: 90px;
+    max-width: 90px;
+}
+.uiStreamAttachments.streamAttachmentWidePhoto .external img {
+    max-height: 210px;
+    max-width: 210px;
+}
+.uiStream .uiAttachmentDetails {
+    color: #333333;
+}
+.uiAttachmentInline .uiAttachmentTitle, .uiAttachmentInline .uiAttachmentDesc {
+    display: inline;
+}
+.uiStreamMessage .actorName, .uiStreamMessage .passiveName {
+    font-weight: bold;
+}
+.uiStreamMessage .wallArrowIcon {
+    background-image: url("/rsrc.php/v2/ye/r/ZiskGiGS0Vw.png");
+    background-position: 0 -472px;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+    height: 9px;
+    margin: 0 5px;
+    width: 11px;
+}
+.uiAttachmentNoMedia {
+    border-left: 2px solid #CCCCCC;
+}
+.uiAttachmentMedia {
+    float: left;
+}
+.uiAttachmentMediaFiles {
+    outline: medium none;
+    width: 100%;
+}
+.uiStreamAttachments .text_exposed .truncatedMediaInfo {
+    clear: both;
+    display: block;
+    padding-left: 0;
+    width: auto;
+}
+.uiStreamAttachments .truncatedMediaItem {
+    display: none;
+}
+.uiStreamAttachments .text_exposed .truncatedMediaItem {
+    display: block;
+}
+.uiStreamAttachments .truncatedMediaInfo {
+    display: table;
+}
+.uiStreamCollapsed {
+    border-top: 1px solid #EEEEEE;
+}
+.uiStreamSubstories li.showAll {
+    line-height: 15px;
+    padding: 0;
+}
+.uiStreamSubstories li.showAll a {
+    color: #6D84B4;
+    display: block;
+    padding: 8px 0 0;
+}
+.uiStreamSubstories .uiUfi {
+    width: 350px;
+}
+.uiStream .uiStreamSeparator {
+    background-color: #E9E9E9;
+    border: 0 none;
+    height: 7px;
+    margin: 6px 0;
+    padding: 0;
+    text-align: center;
+}
+.uiStream .uiStreamSeparatorText {
+    background-color: #FFFFFF;
+    padding: 0 5px;
+    position: relative;
+    top: -4px;
+}
+.uiStream .suppressBorder {
+    border-top: 0 none;
+}
+.uiStreamEdgeStoryLineTx {
+    background-color: #FFFFFF;
+    color: #808080;
+    left: 32px;
+    padding: 0 8px;
+    position: relative;
+    top: -20px;
+}
+.uiStreamEdgeStoryLine hr {
+    background: none repeat scroll 0 0 #E5E5E5;
+    margin: 8px 0 10px;
+}
+.uiStreamEdgeStoryLineWithLabel {
+    height: 23px;
+    padding-top: 1px;
+}
+.uiStreamFooter, .uiStreamSource, .uiStreamSource a, .uiStreamSource .uiLinkSubtle, .uiStreamFooter .uiStreamSource a, .uiStreamFooter .uiStreamSource .uiLinkSubtle, .uiStreamAdditionalLogging, .uiStreamSponsoredLink, .uiStreamPrivacyContainer {
+    color: #999999;
+}
+.uiStreamNub {
+    border-bottom: 1px solid #C2CBE1;
+    margin-top: 2px;
+}
+html .uiStreamFooter {
+    display: table-cell;
+}
+.uiStreamFooter {
+    width: 10000px;
+}
+.uiStreamHomepage .uiStreamStory:first-child {
+    margin-top: -6px;
+}
+.uiStreamHomepage .uiStreamStory:first-child .actorPhoto {
+    margin-top: 18px;
+}
+.uiStreamHomepage .uiStreamStory:first-child .mainWrapper {
+    padding-top: 18px;
+}
+.uiStreamActionFooter .UIActionLinks_bottom a {
+    color: #3B5998;
+}
+.uiStream .uiStreamStory .highlightSelector {
+    margin: -2px 10px 0 0;
+}
+.uiStream .uiStreamStory .substoryHideSelector {
+    margin: -2px 0 0;
+}
+.permalink_stream .highlightSelector .uiSelectorMenuWrapper, .uiStream .uiStreamStory .highlightSelector .uiSelectorMenuWrapper {
+    margin: -3px 1px 0 0;
+}
+.permalink_stream .fbStreamPermalinkHeader .highlightSelector {
+    float: right;
+    margin-right: 0;
+    margin-top: 0;
+}
+.permalink_stream .highlightSelector .highlightSelectorButton {
+    background-image: url("/rsrc.php/v2/yS/r/ZwVqBCgBV4_.png");
+    background-position: 0 -108px;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+    border: 0 none;
+    box-shadow: none;
+    display: inline-block;
+    height: 21px;
+    line-height: 21px;
+    overflow: hidden;
+    padding: 0;
+    text-indent: 50px;
+    width: 21px;
+}
+.permalink_stream .bigHideButton .highlightSelectorButton {
+    background-image: url("/rsrc.php/v2/yS/r/ZwVqBCgBV4_.png");
+    background-position: 0 -58px;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+}
+.uiStream .uiStreamStory .highlightSelector .uiSelectorButton, .uiStream .highlightSelector .highlightSelectorButton {
+    background-image: url("/rsrc.php/v2/y5/r/qs7LEkK2L_M.png");
+    background-position: 0 -72px;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+}
+.uiStream .bigHideButton .highlightSelectorButton {
+    background-image: url("/rsrc.php/v2/yS/r/ZwVqBCgBV4_.png");
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+}
+.highlightEditSelectorButton {
+    background-image: url("/rsrc.php/v2/yS/r/ZwVqBCgBV4_.png");
+    background-position: 0 -84px;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+}
+.bigHideButton .highlightEditSelectorButton {
+    background-image: url("/rsrc.php/v2/yS/r/ZwVqBCgBV4_.png");
+    background-position: 0 -29px;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+}
+.uiStream .uiStreamStory .highlightSelector .uiSelectorButton, .uiStream .highlightSelector .highlightSelectorButton, .highlightEditSelectorButton {
+    border: 0 none;
+    box-shadow: none;
+    display: inline-block;
+    height: 24px;
+    line-height: 24px;
+    overflow: hidden;
+    padding: 0;
+    text-indent: 50px;
+    width: 21px;
+}
+.permalink_stream .highlightSelector .highlightSelectorButton, .permalink_stream .highlightSelector .highlightSelectorButton:active, .permalink_stream .highlightSelector .highlightSelectorButton:focus, .permalink_stream .highlightSelector .highlightSelectorButton:hover {
+    background-color: rgba(0, 0, 0, 0);
+    border: 0 none;
+    height: 21px;
+    padding: 0;
+    width: 21px;
+}
+.permalink_stream .bigHideButton .highlightSelectorButton, .permalink_stream .bigHideButton .highlightSelectorButton:active, .permalink_stream .bigHideButton .highlightSelectorButton:focus, .permalink_stream .bigHideButton .highlightSelectorButton:hover {
+    height: 25px;
+    width: 26px;
+}
+.uiStream .uiStreamStory .highlightSelector .uiSelectorButton, .uiStream .uiStreamStory .highlightSelector .uiSelectorButton:active, .uiStream .uiStreamStory .highlightSelector .uiSelectorButton:focus, .uiStream .uiStreamStory .highlightSelector .uiSelectorButton:hover, .uiStream .highlightSelector .highlightSelectorButton, .uiStream .highlightSelector .highlightSelectorButton:active, .uiStream .highlightSelector .highlightSelectorButton:focus, .uiStream .highlightSelector .highlightSelectorButton:hover, .highlightSelector .highlightEditSelectorButton {
+    background-color: rgba(0, 0, 0, 0);
+    border: 0 none;
+    height: 24px;
+    padding: 0;
+    width: 21px;
+}
+.uiStream .uiStreamStory .bigHideButton .uiSelectorButton, .uiStream .uiStreamStory .bigHideButton .uiSelectorButton:active, .uiStream .uiStreamStory .bigHideButton .uiSelectorButton:focus, .uiStream .uiStreamStory .bigHideButton .uiSelectorButton:hover, .uiStream .bigHideButton .highlightSelectorButton, .uiStream .bigHideButton .highlightSelectorButton:active, .uiStream .bigHideButton .highlightSelectorButton:focus, .uiStream .bigHideButton .highlightSelectorButton:hover, .bigHideButton .highlightEditSelectorButton {
+    height: 28px;
+    width: 26px;
+}
+.permalink_stream .highlightSelector .highlightSelectorButton:hover {
+    background-image: url("/rsrc.php/v2/yS/r/ZwVqBCgBV4_.png");
+    background-position: -21px -108px;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+    border: 0 none;
+    padding: 0;
+}
+.permalink_stream .bigHideButton .highlightSelectorButton:hover {
+    background-image: url("/rsrc.php/v2/yS/r/ZwVqBCgBV4_.png");
+    background-position: -26px -58px;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+}
+.uiStream .uiStreamStory .highlightSelector .uiSelectorButton:hover, .highlightSelector .highlightSelectorButton:hover {
+    background-image: url("/rsrc.php/v2/y5/r/qs7LEkK2L_M.png");
+    background-position: -21px -72px;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+    border: 0 none;
+    padding: 0;
+}
+.uiStream .uiStreamStory .bigHideButton .uiSelectorButton:hover, .bigHideButton .highlightSelectorButton:hover {
+    background-image: url("/rsrc.php/v2/yS/r/ZwVqBCgBV4_.png");
+    background-position: -26px 0;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+}
+.highlightSelector .highlightEditSelectorButton:hover {
+    background-image: url("/rsrc.php/v2/yS/r/ZwVqBCgBV4_.png");
+    background-position: -21px -84px;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+    border: 0 none;
+    padding: 0;
+}
+.bigHideButton .highlightEditSelectorButton:hover {
+    background-image: url("/rsrc.php/v2/yS/r/ZwVqBCgBV4_.png");
+    background-position: -26px -29px;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+}
+.permalink_stream .highlightSelector .openToggler .highlightSelectorButton, .permalink_stream .highlightSelector.openToggler .highlightSelectorButton, .permalink_stream .highlightSelector .openToggler .highlightSelectorButton:hover {
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url("/rsrc.php/v2/yS/r/ZwVqBCgBV4_.png");
+    background-position: -42px -108px;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+    border: 0 none;
+    height: 21px;
+    padding: 0;
+    width: 21px;
+}
+.permalink_stream .bigHideButton .openToggler .highlightSelectorButton, .permalink_stream .bigHideButton.openToggler .highlightSelectorButton, .permalink_stream .bigHideButton .openToggler .highlightSelectorButton:hover {
+    background-image: url("/rsrc.php/v2/yS/r/ZwVqBCgBV4_.png");
+    background-position: -52px -58px;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+    height: 25px;
+    width: 26px;
+}
+.uiStream .uiStreamStory .highlightSelector .openToggler .uiSelectorButton, .uiStream .uiStreamStory .highlightSelector .openToggler .uiSelectorButton:hover, .highlightSelector .openToggler .highlightSelectorButton, .highlightSelector.openToggler .highlightSelectorButton, .permalink_stream .highlightSelector .openToggler .highlightEditSelectorButton:hover, .highlightSelector .openToggler .highlightEditSelectorButton, .highlightSelector.openToggler .highlightEditSelectorButton {
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url("/rsrc.php/v2/y5/r/qs7LEkK2L_M.png");
+    background-position: -42px -72px;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+    border: 0 none;
+    height: 24px;
+    padding: 0;
+    width: 21px;
+}
+.uiStream .uiStreamStory .bigHideButton .openToggler .uiSelectorButton, .uiStream .uiStreamStory .bigHideButton .openToggler .uiSelectorButton:hover, .bigHideButton .openToggler .highlightSelectorButton, .bigHideButton.openToggler .highlightSelectorButton, .permalink_stream .bigHideButton .openToggler .highlightEditSelectorButton:hover, .bigHideButton .openToggler .highlightEditSelectorButton, .openToggler.bigHideButton .highlightEditSelectorButton {
+    background-image: url("/rsrc.php/v2/yS/r/ZwVqBCgBV4_.png");
+    background-position: -52px 0;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+    height: 28px;
+    width: 26px;
+}
+.highlightSelector .openToggler .highlightEditSelectorButton, .highlightSelector.openToggler .highlightEditSelectorButton, .permalink_stream .highlightSelector .openToggler .highlightEditSelectorButton:hover {
+    background-image: url("/rsrc.php/v2/yS/r/ZwVqBCgBV4_.png");
+    background-position: -42px -84px;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+}
+.bigHideButton .openToggler .highlightEditSelectorButton, .bigHideButton.openToggler .highlightEditSelectorButton, .permalink_stream .bigHideButton .openToggler .highlightEditSelectorButton:hover {
+    background-image: url("/rsrc.php/v2/yS/r/ZwVqBCgBV4_.png");
+    background-position: -52px -29px;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+}
+.uiStreamBoulderThemeAgg .substoryActorPic img, .uiStreamBoulderThemeAgg .uiStreamInlineAction .inlineActionInputPic {
+    height: 32px;
+    width: 32px;
+}
+.uiStreamBoulderThemeAgg .storyContent {
+    padding-bottom: 2px;
+}
+.uiStreamBoulderThemeAgg .uiStreamSubstory {
+    margin: 0;
+    padding: 5px 0;
+}
+.uiStreamSubstories .uiStreamSubstory div.storyContent {
+    padding-bottom: 2px;
+}
+.uiStreamBoulderThemeAgg .uiStreamSubstories > li:first-child .uiStreamSubstory {
+    padding-top: 0;
+}
+.uiStreamStory .uiStreamSubstory .storyContent {
+    padding: 0;
+}
+.uiStreamLoader {
+    text-align: center;
+}
+.uiStreamBoulderThemeAgg .uiStreamSubstories {
+    margin-top: 0;
+    padding-top: 0;
+}
+.uiStreamBoulderThemeAgg .uiStreamSubstories .uiStreamShowAll {
+    border-bottom: 0 none;
+    text-align: left;
+}
+.uiStreamBoulderThemeAgg .uiStreamSubstories .uiStreamShowAll span {
+    font-weight: normal;
+}
+.uiStreamBoulderThemeAgg .inlineSubstory .uiStreamSubstory {
+    border-bottom: 1px solid #E5E5E5;
+    padding-bottom: 10px;
+}
+.uiStreamBoulderThemeAgg .uiStreamAttachments .external {
+    display: block;
+    margin: 0;
+    padding-bottom: 5px;
+    padding-right: 10px;
+}
+.uiStreamBoulderThemeAgg .uiStreamAttachments .external img {
+    max-height: 100px;
+    max-width: 120px;
+}
+.uiStreamInlineTextarea {
+    display: block;
+    height: 19px;
+    width: 100%;
+}
+.uiStreamShareLikePageBox {
+    border-top: 1px solid #E9E9E9;
+    padding-top: 10px;
+}
+.uiStreamShareLikePageBox .uiPageLikeButton {
+    margin-top: 4px;
+}
+.uiStreamSubstory .storyInnerContent .rfloat.PageLikeButton, .uiStreamSubstory .storyInnerContent .rfloat .PageLikeButton {
+    margin-right: 25px;
+}
+.uiStreamSubstory .uiStreamHide.substoryHideSelector {
+    margin: -12px 10px 0;
+}
+.uiHelpLink {
+    background: url("/rsrc.php/v2/yt/r/7rpZ7CHyvX7.gif") no-repeat scroll 0 center rgba(0, 0, 0, 0);
+    display: inline-block;
+    height: 9px;
+    width: 12px;
+}
+.uiHelpLink .right {
+    left: auto;
+    right: -4px;
+}
+.uiMoreLinkCaret {
+    margin-left: 2px;
+    padding-bottom: 2px;
+}
+.uiToolbarBordered {
+    margin: 0 -7px;
+    padding: 6px 7px 6px 1px;
+}
+.uiToolbar .uiToolbarItem {
+    float: left;
+    margin-left: 6px;
+    vertical-align: top;
+}
+.uiToolbarUnbordered .uiToolbarItem:first-child {
+    margin-left: 0;
+}
+.uiToolbar .uiToolbarDivider {
+    background: none repeat scroll 0 0 #D6D6D6;
+    height: 23px;
+    width: 1px;
+}
+#bootloader_6s6XX {
+    height: 42px;
+}
+.bootloader_6s6XX {
+    display: block !important;
+}
