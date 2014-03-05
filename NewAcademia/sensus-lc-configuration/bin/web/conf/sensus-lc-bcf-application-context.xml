@@ -148,4 +148,16 @@
 		<property name="academiaBCL" ref="academiaBCLTarget" />
 	</bean>
 
+	<bean id="grupomuscularBCF" class="com.sensus.lc.grupomuscular.bcf.impl.GrupomuscularBCFImpl">
+		<property name="grupomuscularBCL" ref="grupomuscularBCLTarget" />
+	</bean>
+
+	<bean id="exercicioBCF" class="com.sensus.lc.exercicio.bcf.impl.ExercicioBCFImpl">
+		<property name="exercicioBCL" ref="exercicioBCLTarget" />
+	</bean>
+
+	<bean id="comumBCF" class="com.sensus.lc.comum.bcf.impl.ComumBCFImpl">
+		<property name="comumBCL" ref="comumBCLTarget" />
+	</bean>
+
 </beans>
