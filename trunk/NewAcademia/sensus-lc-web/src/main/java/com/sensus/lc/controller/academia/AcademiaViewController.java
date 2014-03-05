@@ -2,6 +2,7 @@ package com.sensus.lc.controller.academia;
 
 import java.io.IOException;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -38,10 +39,10 @@ public class AcademiaViewController extends BaseViewController
 	public static final String FETCH_UPDATE = "/update";
 
 	/** The Constant VIEW_GROUP_CREATE. */
-	private static final String VIEW_GROUP_CREATE = "/group/group_create";
+	private static final String VIEW_GROUP_CREATE = "/academia/academia_create";
 
 	/** The Constant VIEW_GROUP_MAIN. */
-	private static final String VIEW_GROUP_MAIN = "/group/group_main";
+	private static final String VIEW_GROUP_MAIN = "/academia/academia_main";
 
 	/** The Constant GROUP_ID. */
 	private static final String GROUP_ID = "groupId";
@@ -66,6 +67,7 @@ public class AcademiaViewController extends BaseViewController
 		return academiaBCF;
 	}
 
+	@Resource
 	public void setAcademiaBCF(IAcademiaBCF academiaBCF)
 	{
 		this.academiaBCF = academiaBCF;

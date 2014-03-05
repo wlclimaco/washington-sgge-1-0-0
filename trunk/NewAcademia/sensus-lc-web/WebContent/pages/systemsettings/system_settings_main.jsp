@@ -26,6 +26,31 @@
 							<a href="settingsEcomode" ><s:message code="systemsettings.page.tab.eco-mode" /></a>
 						</li>
 					</sec:authorize>
+					<sec:authorize access="hasAnyRole('ROLE_Role.Admin')">
+						<li>
+							<a href="academia/academiacreate" >Fotos</a>
+						</li>
+					</sec:authorize>
+					<sec:authorize access="hasAnyRole('ROLE_Role.Admin')">
+						<li>
+							<a href="settingsEcomode" >Exercicios</a>
+						</li>
+					</sec:authorize>
+					<sec:authorize access="hasAnyRole('ROLE_Role.Admin')">
+						<li>
+							<a href="academia" >Academia</a>
+						</li>
+					</sec:authorize>
+					<sec:authorize access="hasAnyRole('ROLE_Role.Admin')">
+						<li>
+							<a href="settingsEcomode" >Grupo Muscular</a>
+						</li>
+					</sec:authorize>
+					<sec:authorize access="hasAnyRole('ROLE_Role.Admin')">
+						<li>
+							<a href="settingsEcomode" >Serie de treino</a>
+						</li>
+					</sec:authorize>
 				</ul>
 
 			</div>

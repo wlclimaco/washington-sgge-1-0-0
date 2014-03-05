@@ -72,25 +72,25 @@
     </logger>
 
 	<logger name="org.apache" additivity="false">
-		<level value="ERROR"/>
+		<level value="DEBUG"/>
 		<appender-ref ref="ASYNC_DEBUG"/>
 	</logger>
 
     <logger name="org.springframework" additivity="false">
-        <level value="ERROR" />
+        <level value="DEBUG" />
 		<appender-ref ref="ASYNC_DEBUG"/>
 	</logger>
 
     <logger name="java.sql" additivity="false">
-        <level value="ERROR" />
+        <level value="DEBUG" />
  		<appender-ref ref="ASYNC_DEBUG"/>
     </logger>
 
     <logger name="org.apache.ibatis" additivity="false">
-        <level value="ERROR" />
+        <level value="DEBUG" />
 		<appender-ref ref="ASYNC_DEBUG"/>
     </logger>
-    
+
     <logger name="com.sensus.lc.batch.impl" additivity="false">
 		<level value="DEBUG"/>
 		<appender-ref ref="ASYNC_DEBUG"/>
@@ -105,7 +105,7 @@
 	     use level instead of priority on root.
 	-->
 	<root>
-		<level value="ERROR"/>
+		<level value="DEBUG"/>
 		<appender-ref ref="ASYNC_DEBUG"/>
 	</root>
 

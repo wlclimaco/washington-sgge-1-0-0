@@ -86,6 +86,9 @@
 	<mvc:view-controller path="/group/insert" view-name="/group/group_create"/>
 	<mvc:view-controller path="/groupcreate" view-name="/group/group_create"/>
 
+	<!--  academia  -->
+	<mvc:view-controller path="/academia/academiacreate" view-name="/academia/academia_create"/>
+
 <!-- Light  Detail -->
 	<mvc:view-controller path="/lightDetail/openlightdetailComponent" view-name="light/modules/modules_controller_main"/>
 	<mvc:view-controller path="/about" view-name="light/modules/module_about_this_light"/>
@@ -125,7 +128,7 @@
 	<mvc:view-controller path="/tag/includeAutoNoGroupDialog" view-name="/tag/auto_no_group"/>
 	<mvc:view-controller path="/tag/includeAutoExistingGroupDialog" view-name="/tag/auto_existing_group"/>
 	<mvc:view-controller path="/tag/suspendAutoGroupDialog" view-name="/tag/suspend_auto_group"/>
-	<mvc:view-controller path="/academia/academiacreate" view-name="/academia/academia_create"/>
+
 	<mvc:view-controller path="/light/monitorDialog" view-name="/light/light_process_dialog"/>
 	<mvc:view-controller path="/light/editDialog" view-name="light/light_edit_dialog"/>
 	<mvc:view-controller path="/light/alertDetailDialog" view-name="light/light_alert_detail"/>
@@ -134,6 +137,7 @@
 	<mvc:view-controller path="/light/removeToGroup" view-name="/light/light_remove_from_group"/>
 	<mvc:view-controller path="/light/addToTag" view-name="/light/light_add_tag"/>
 	<mvc:view-controller path="/light/removeToTag" view-name="/light/light_remove_tag"/>
+	<mvc:view-controller path="/exercicio/exerciciocreate" view-name="/exercicio/exercicio_create"/>
 
 <!--  Utils  -->
 	<mvc:view-controller path="/util/summary" view-name="../commons/pages/summary"/>
