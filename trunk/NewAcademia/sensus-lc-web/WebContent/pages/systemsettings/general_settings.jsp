@@ -2,213 +2,711 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags' %>
 
-<div id="profile-main">
-	<fieldset>
-		<ul class="ui-tabs">
-			<li>
-				<label><s:message code="profile.page.languagepreference" /> : </label>
-				<select id="language">
-					<option value="en_US">
-						<s:message code="profile.page.englishEN" />
-					</option>
-					<option value="pt_BR">
-						<s:message code="profile.page.portugueseBR" />
-					</option>
-					<option value="es_MX">
-						<s:message code="profile.page.spanish" />
-					</option>
-				</select>
-			</li>
-			<li>
-				<label><s:message code="profile.page.defaulttimezone" /> : </label>
-				<select id="timezone" name="timezone" class="chzn-select" data-placeholder="Select Time Zone">
-					<optgroup label="US">
-						<option value="US/Alaska">Alaska </option>
-						<option value="US/Aleutian">Aleutian </option>
-						<option value="US/Arizona">Arizona </option>
-						<option value="CST">Central </option>
-						<option value="US/East-Indiana">East-Indiana </option>
-						<option value="US/Eastern">Eastern </option>
-						<option value="US/Hawaii0">Hawaii </option>
-						<option value="US/Indiana-Starke">Indiana-Starke </option>
-						<option value="US/Michigan">Michigan </option>
-						<option value="MST">Mountain </option>
-						<option value="SystemV/PST8">Pacific </option>
-						<option value="US/Pacific-New">Pacific-New </option>
-						<option value="Pacific/Samoa">Samoa </option>
-					</optgroup>
-					<optgroup label="Canada">
-						<option value="America/Toronto">Atlantic </option>
-						<option value="Canada/Central">Central </option>
-						<option value="Canada/East-Saskatchewan">East-Saskatchewan </option>
-						<option value="Canada/Eastern">Eastern </option>
-						<option value="Canada/Mountain">Mountain </option>
-						<option value="Canada/Newfoundland">Newfoundland </option>
-						<option value="Canada/Pacific">Pacific </option>
-						<option value="Canada/Saskatchewan">Saskatchewan </option>
-						<option value="Canada/Yukon">Yukon </option>
-					</optgroup>
-					<optgroup label="Europe">
-						<option value="Europe/Amsterdam">Amsterdam </option>
-						<option value="Europe/Andorra">Andorra </option>
-						<option value="Europe/Athens">Athens </option>
-						<option value="Europe/Belfast">Belfast </option>
-						<option value="Europe/Belgrade">Belgrade </option>
-						<option value="Europe/Berlin">Berlin </option>
-						<option value="Europe/Bratislava">Bratislava </option>
-						<option value="Europe/Brussels">Brussels </option>
-						<option value="Europe/Bucharest">Bucharest </option>
-						<option value="Europe/Budapest">Budapest </option>
-						<option value="Europe/Chisinau">Chisinau </option>
-						<option value="Europe/Copenhagen">Copenhagen </option>
-						<option value="Europe/Dublin">Dublin </option>
-						<option value="Europe/Gibraltar">Gibraltar </option>
-						<option value="Europe/Guernsey">Guernsey </option>
-						<option value="Europe/Helsinki">Helsinki </option>
-						<option value="Europe/Isle_of_Man">Isle_of_Man </option>
-						<option value="Europe/Istanbul">Istanbul </option>
-						<option value="Europe/Jersey">Jersey </option>
-						<option value="Europe/Kaliningrad">Kaliningrad </option>
-						<option value="Europe/Kiev">Kiev </option>
-						<option value="Europe/Lisbon">Lisbon </option>
-						<option value="Europe/Ljubljana">Ljubljana </option>
-						<option value="Europe/London">London </option>
-						<option value="Europe/Luxembourg">Luxembourg </option>
-						<option value="Europe/Madrid">Madrid </option>
-						<option value="Europe/Malta">Malta </option>
-						<option value="Europe/Mariehamn">Mariehamn </option>
-						<option value="Europe/Minsk">Minsk </option>
-						<option value="Europe/Monaco">Monaco </option>
-						<option value="Europe/Moscow">Moscow </option>
-						<option value="Europe/Nicosia">Nicosia </option>
-						<option value="Europe/Oslo">Oslo </option>
-						<option value="Europe/Paris">Paris </option>
-						<option value="Europe/Podgorica">Podgorica </option>
-						<option value="Europe/Prague">Prague </option>
-						<option value="Europe/Riga">Riga </option>
-						<option value="Europe/Rome">Rome </option>
-						<option value="Europe/Samara">Samara </option>
-						<option value="Europe/San_Marino">San_Marino </option>
-						<option value="Europe/Sarajevo">Sarajevo </option>
-						<option value="Europe/Simferopol">Simferopol </option>
-						<option value="Europe/Skopje">Skopje </option>
-						<option value="Europe/Sofia">Sofia </option>
-						<option value="Europe/Stockholm">Stockholm </option>
-						<option value="Europe/Tallinn">Tallinn </option>
-						<option value="Europe/Tirane">Tirane </option>
-						<option value="Europe/Tiraspol">Tiraspol </option>
-						<option value="Europe/Uzhgorod">Uzhgorod </option>
-						<option value="Europe/Vaduz">Vaduz </option>
-						<option value="Europe/Vatican">Vatican </option>
-						<option value="Europe/Vienna">Vienna </option>
-						<option value="Europe/Vilnius">Vilnius </option>
-						<option value="Europe/Volgograd">Volgograd </option>
-						<option value="Europe/Warsaw">Warsaw </option>
-						<option value="Europe/Zagreb">Zagreb </option>
-						<option value="Europe/Zaporozhye">Zaporozhye </option>
-						<option value="Europe/Zurich">Zurich </option>
-					</optgroup>
-					<optgroup label="Australia">
-						<option value="Australia/ACT">ACT </option>
-						<option value="Australia/Adelaide">Adelaide</option>
-						<option value="Australia/Brisbane">Brisbane </option>
-						<option value="Australia/Broken_Hill">Broken_Hill </option>
-						<option value="Australia/Canberra">Canberra </option>
-						<option value="Australia/Currie">Currie </option>
-						<option value="Australia/Darwin">Darwin </option>
-						<option value="Australia/Eucla">Eucla </option>
-						<option value="Australia/Hobart">Hobart </option>
-						<option value="Australia/LHI">LHI </option>
-						<option value="Australia/Lindeman">Lindeman </option>
-						<option value="Australia/Lord_Howe">Lord_Howe </option>
-						<option value="Australia/Melbourne">Melbourne </option>
-						<option value="Australia/NSW">NSW </option>
-						<option value="Australia/North">North </option>
-						<option value="Australia/Perth">Perth </option>
-						<option value="Australia/Queensland">Queensland </option>
-						<option value="Australia/South">South </option>
-						<option value="Australia/Sydney">Sydney </option>
-						<option value="Australia/Tasmania">Tasmania </option>
-						<option value="Australia/Victoria">Victoria </option>
-						<option value="Australia/West">West </option>
-						<option value="Australia/Yancowinna">Yancowinna </option>
-					</optgroup>
-				</select>
-			</li>
-			<li>
-					<label><s:message code="profile.page.defaultdateformat" /> : </label>
+                        <div role="main" id="contentArea">
+                           <div data-referrer="stream_pagelet" id="stream_pagelet">
+                              <div data-referrer="pagelet_megaphone" id="pagelet_megaphone"></div>
+                              <div data-referrer="pagelet_composer" id="pagelet_composer">
+                                 <div onclick="run_with(this, [&quot;legacy:ComposerXControllerBootload&quot;], function() {});" data-location="maincolumn" id="u_0_1b" class="_119 stat_elem focus_target mtm mbl _5bsm">
+                                    <form id="u_0_1y" onsubmit="return window.Event &amp;&amp; Event.__inlineSubmit &amp;&amp; Event.__inlineSubmit(this,event)" method="post" action="#" class="_2_4" rel="async">
+                                       <input type="hidden" autocomplete="off" value="AQAaGq-k" name="fb_dtsg">
+                                       <div class="clearfix _5142">
+                                          <img width="16" height="11" alt="" src="https://fbstatic-a.akamaihd.net/rsrc.php/v2/yb/r/GsNJNwuI-UM.gif" class="_mi rfloat _ohf uiLoadingIndicatorAsync img">
+                                          <div>
+                                             <ul class="uiList _1dsl _509- _4ki _6-h _6-j _6-i">
+                                                <li data-ft="{&quot;tn&quot;:&quot;*t&quot;}" class="_4j _519b"><a data-endpoint="/ajax/composerx/attachment/status/" role="button" href="#" aria-pressed="true" class="_9lb" data-onclick="[[&quot;ComposerXAttachmentBootstrap&quot;,&quot;bootstrap&quot;]]"><span class="uiIconText _51z7"><i class="img sp_acb80g sx_e67e47"></i>Status<i class="_2wr"></i></span></a></li>
+                                                <li data-ft="{&quot;tn&quot;:&quot;*u&quot;}" class="_92"><a data-endpoint="/ajax/composerx/attachment/media/chooser/" role="button" href="#" aria-pressed="false" class="_9lb" data-onclick="[[&quot;ComposerXAttachmentBootstrap&quot;,&quot;bootstrap&quot;]]"><span class="uiIconText _51z7"><i class="img sp_acb80g sx_ee1678"></i>Adicionar fotos/vídeo<i class="_2wr"></i></span></a></li>
+                                             </ul>
+                                          </div>
+                                       </div>
+                                       <input type="hidden" value="u_0_1b" name="composerid" autocomplete="off"><input type="hidden" value="100003058100735" name="targetid" autocomplete="off"><input type="hidden" value="1" name="ishome" autocomplete="off"><input type="hidden" value="1" name="islitestand" autocomplete="off"><input type="hidden" value="maininput" name="loaded_components[]" autocomplete="off"><input type="hidden" value="withtaggericon" name="loaded_components[]" autocomplete="off"><input type="hidden" value="placetaggericon" name="loaded_components[]" autocomplete="off"><input type="hidden" value="ogtaggericon" name="loaded_components[]" autocomplete="off"><input type="hidden" value="mainprivacywidget" name="loaded_components[]" autocomplete="off"><input type="hidden" value="u_0_1b" name="composerid" autocomplete="off"><input type="hidden" name="loaded_components[]" value="ogtaggericon"><input type="hidden" name="loaded_components[]" value="mainprivacywidget"><input type="hidden" name="loaded_components[]" value="withtaggericon"><input type="hidden" name="loaded_components[]" value="placetaggericon"><input type="hidden" name="loaded_components[]" value="maininput">
+                                    </form>
+                                    <div class="_55d0">
+                                       <form id="u_0_1c" onsubmit="return window.Event &amp;&amp; Event.__inlineSubmit &amp;&amp; Event.__inlineSubmit(this,event)" method="post" action="/ajax/updatestatus.php" rel="async">
+                                          <input type="hidden" autocomplete="off" value="AQAaGq-k" name="fb_dtsg">
+                                          <div class="_2yg">
+                                             <div class="_1zja">
+                                                <div class="_1zjb"><span class="_1zjd">Arrastar link/fotos aqui</span><span class="_4_9w">Soltar link</span><span class="_4_9x">Soltar foto</span><span class="_4_9y">Soltar fotos</span></div>
+                                             </div>
+                                             <input type="hidden" value="home" name="xhpc_context" autocomplete="off"><input type="hidden" value="1" name="xhpc_ismeta" autocomplete="off"><input type="hidden" value="" name="xhpc_timeline" autocomplete="off"><input type="hidden" value="u_0_1b" name="xhpc_composerid" autocomplete="off"><input type="hidden" value="1" name="xhpc_litestand" autocomplete="off"><input type="hidden" value="100003058100735" name="xhpc_targetid" autocomplete="off">
+                                             <div data-onfocus="[[&quot;ComposerXStatusAttachmentBootloader&quot;,&quot;emptyFunction&quot;]]">
+                                                <div id="u_0_1d">
+                                                   <div id="u_0_1l" class="uiMentionsInput _11a">
+                                                      <div class="highlighter">
+                                                         <div><span class="highlighterContent"></span></div>
+                                                      </div>
+                                                      <div id="u_0_1m" class="uiTypeahead composerTypeahead mentionsTypeahead">
+                                                         <input type="hidden" name="clp" value="{&quot;cl_impid&quot;:&quot;145860f6&quot;,&quot;clearcounter&quot;:0,&quot;elementid&quot;:&quot;u_0_1n&quot;,&quot;version&quot;:&quot;x&quot;,&quot;parent_fbid&quot;:100003058100735}">
+                                                         <div class="wrap">
+                                                            <input type="hidden" class="hiddenInput" autocomplete="off">
+                                                            <div class="innerWrap"><textarea id="u_0_1n" onkeydown="run_with(this, [&quot;legacy:control-textarea&quot;], function() {TextAreaControl.getInstance(this)});" aria-owns="typeahead_list_u_0_1m" aria-expanded="false" autocomplete="off" aria-autocomplete="list" role="textbox" placeholder="No que você está pensando?" name="xhpc_message" title="No que você está pensando?" class="DOMControl_placeholder uiTextareaAutogrow input autofocus mentionsTextarea textInput" aria-label="No que você está pensando?">No que você está pensando?</textarea></div>
+                                                         </div>
+                                                      </div>
+                                                      <input type="hidden" class="mentionsHidden" autocomplete="off">
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <div class="_3-6"></div>
+                                             <div class="_1dsp _4-">
+                                                <div class="clearfix">
+                                                   <div class="_52lb _3-7 lfloat _ohe">
+                                                      <div id="u_0_1e" class="lfloat"><a id="u_0_1f" title="Marcar pessoas em sua publicação" aria-label="Marcar pessoas em sua publicação" role="button" data-gt="{&quot;composer&quot;:{&quot;comp&quot;:&quot;people&quot;,&quot;ua_id&quot;:&quot;composer:post&quot;}}" href="#" class="_1dsq _1dsv"><span class="_1dsr"><span class="_4-px ellipsis">Marcar pessoas</span></span></a></div>
+                                                      <div id="u_0_1g" class="lfloat"><a id="u_0_1h" role="button" aria-label="Adicionar uma localização à publicação" data-gt="{&quot;composer&quot;:{&quot;comp&quot;:&quot;location&quot;,&quot;ua_id&quot;:&quot;composer:post&quot;}}" href="#" class="_1dsq _1dss"></a></div>
+                                                      <div class="lfloat _1dsq _1dsw">
+                                                         <div class="_1dsr"></div>
+                                                      </div>
+                                                      <div id="u_0_1i" class="lfloat"><a id="composerActionTagger" title="Diga o que você está fazendo" aria-label="Diga o que você está fazendo" role="button" data-gt="{&quot;composer&quot;:{&quot;comp&quot;:&quot;action&quot;,&quot;ua_id&quot;:&quot;composer:post&quot;}}" href="#" class="_1dsq _4-jj"><span class="_1dsr"><span class="hidden_elem _5xlw"><span class="countValue fss">1</span></span><span class="_4-px ellipsis">Ação de marcação</span></span></a></div>
+                                                   </div>
+                                                   <ul class="uiList _1dso rfloat _ohf _509- _4ki _6-h _6-j _6-i">
+                                                      <li>
+                                                         <div id="u_0_1j">
+                                                            <div id="u_0_1k" class="composerAudienceWrapper stat_elem widget fbComposerAudienceTourContext">
+                                                               <div data-name="audience[0][value]" id="u_0_1o" class="uiSelector inlineBlock audienceSelector composerAudienceSelector dynamicIconSelector uiSelectorRight uiSelectorNormal uiSelectorDynamicLabel uiSelectorDynamicTooltip">
+                                                                  <div class="uiToggle wrap">
+                                                                     <a rel="toggle" data-length="30" data-label="" aria-expanded="false" aria-haspopup="1" role="button" href="#" class="uiSelectorButton uiButton uiButtonSuppressed" data-tooltip-alignh="right" aria-label="Seus amigos" data-hover="tooltip"><i class="mrs itemIcon img sp_2x6xe0 sx_8a50c8 customimg"></i><span class="uiButtonText">Amigos</span></a>
+                                                                     <div class="uiSelectorMenuWrapper uiToggleFlyout">
+                                                                        <div class="uiMenu uiSelectorMenu" role="menu">
+                                                                           <ul class="uiMenuInner">
+                                                                              <li data-label="Público" class="uiMenuItem uiMenuItemRadio uiSelectorOption fbPrivacyAudienceSelectorOption"><a ajaxify="/ajax/privacy/simple_save.php?id=0&amp;audience_json=%5B%7B%22value%22%3A80%7D%5D&amp;source=composer_options" rel="async-post" aria-checked="false" href="#" tabindex="0" role="menuitemradio" class="itemAnchor itemWithIcon"><i class="mrs itemIcon img sp_acb80g sx_713753"></i><span class="itemLabel fsm">Público</span></a></li>
+                                                                              <li id="u_0_1p" data-label="Amigos" class="uiMenuItem uiMenuItemRadio uiSelectorOption fbPrivacyAudienceSelectorOption checked"><a ajaxify="/ajax/privacy/simple_save.php?id=0&amp;audience_json=%5B%7B%22value%22%3A40%7D%5D&amp;source=composer_options" rel="async-post" aria-checked="true" href="#" tabindex="-1" role="menuitemradio" class="itemAnchor itemWithIcon"><i class="mrs itemIcon img sp_2x6xe0 sx_8a50c8"></i><span class="itemLabel fsm">Amigos<span class="plusLabel hidden_elem fcg"> (+)</span></span></a></li>
+                                                                              <li id="u_0_1q" data-label="Amigos exceto conhecidos" class="uiMenuItem uiMenuItemRadio uiSelectorOption fbPrivacyAudienceSelectorOption"><a ajaxify="/ajax/privacy/simple_save.php?id=0&amp;audience_json=%5B%7B%22value%22%3A127%7D%5D&amp;source=composer_options" rel="async-post" aria-checked="false" href="#" tabindex="-1" role="menuitemradio" class="itemAnchor itemWithIcon"><i class="mrs itemIcon img sp_2x6xe0 sx_4324bd"></i><span class="itemLabel fsm">Amigos exceto conhecidos<span class="plusLabel hidden_elem fcg"> (+)</span></span></a></li>
+                                                                              <li id="u_0_1r" data-label="Somente eu" class="uiMenuItem uiMenuItemRadio uiSelectorOption fbPrivacyAudienceSelectorOption"><a ajaxify="/ajax/privacy/simple_save.php?id=0&amp;audience_json=%5B%7B%22value%22%3A10%7D%5D&amp;source=composer_options" rel="async-post" aria-checked="false" href="#" tabindex="-1" role="menuitemradio" class="itemAnchor itemWithIcon"><i class="mrs itemIcon img sp_2x6xe0 sx_60152d"></i><span class="itemLabel fsm">Somente eu<span class="plusLabel hidden_elem fcg"> (+)</span></span></a></li>
+                                                                              <li id="u_0_1s" data-label="Personalizado" class="uiMenuItem uiMenuItemRadio uiSelectorOption fbPrivacyAudienceSelectorOption"><a aria-checked="false" href="#" tabindex="-1" role="menuitemradio" class="itemAnchor itemWithIcon"><i class="mrs itemIcon img sp_acb80g sx_6fd63b"></i><span class="itemLabel fsm">Personalizado<span class="plusLabel hidden_elem fcg"> (+)</span><span class="customPrivacyInputs"></span></span></a></li>
+                                                                              <li class="uiMenuSeparator"></li>
+                                                                              <li id="u_0_1t" data-label="QAT Global" class="uiMenuItem uiMenuItemRadio uiSelectorOption fbPrivacyAudienceSelectorOption friendListOption specialOption primaryOption"><a ajaxify="/ajax/privacy/simple_save.php?id=0&amp;audience_json=%5B%7B%22value%22%3A231521273626474%7D%5D&amp;source=composer_options" rel="async-post" data-dynamic="1" data-flid="231521273626474" aria-checked="false" href="#" tabindex="-1" role="menuitemradio" class="itemAnchor itemWithIcon"><i class="mrs itemIcon img sp_2x6xe0 sx_ecb918"></i><span class="itemLabel fsm">QAT Global</span></a></li>
+                                                                              <li id="u_0_1v" data-label="Uberaba" class="uiMenuItem uiMenuItemRadio uiSelectorOption fbPrivacyAudienceSelectorOption friendListOption specialOption primaryOption"><a ajaxify="/ajax/privacy/simple_save.php?id=0&amp;audience_json=%5B%7B%22value%22%3A210682715710330%7D%5D&amp;source=composer_options" rel="async-post" data-dynamic="1" data-flid="210682715710330" aria-checked="false" href="#" tabindex="-1" role="menuitemradio" class="itemAnchor itemWithIcon"><i class="mrs itemIcon img sp_2x6xe0 sx_ef279b"></i><span class="itemLabel fsm">Uberaba</span></a></li>
+                                                                              <li data-label="Ver todas as listas..." class="uiMenuItem uiMenuItemRadio uiSelectorOption moreOption specialOption"><a data-type="friendList" aria-checked="false" href="#" tabindex="-1" role="menuitemradio" class="itemAnchor"><span class="itemLabel fsm">Ver todas as listas...</span></a></li>
+                                                                              <li id="u_0_1w" data-label="Família" class="uiMenuItem uiMenuItemRadio uiSelectorOption fbPrivacyAudienceSelectorOption friendListOption specialOption secondaryOption"><a ajaxify="/ajax/privacy/simple_save.php?id=0&amp;audience_json=%5B%7B%22value%22%3A120789564699646%7D%5D&amp;source=composer_options" rel="async-post" aria-checked="false" href="#" tabindex="-1" role="menuitemradio" class="itemAnchor itemWithIcon"><i class="mrs itemIcon img sp_2x6xe0 sx_0287e2"></i><span class="itemLabel fsm">Família</span></a></li>
+                                                                              <li id="u_0_1x" data-label="Conhecidos" class="uiMenuItem uiMenuItemRadio uiSelectorOption fbPrivacyAudienceSelectorOption friendListOption specialOption secondaryOption"><a ajaxify="/ajax/privacy/simple_save.php?id=0&amp;audience_json=%5B%7B%22value%22%3A117704495008153%7D%5D&amp;source=composer_options" rel="async-post" data-flid="117704495008153" aria-checked="false" href="#" tabindex="-1" role="menuitemradio" class="itemAnchor itemWithIcon"><i class="mrs itemIcon img sp_2x6xe0 sx_a321e2"></i><span class="itemLabel fsm">Conhecidos</span></a></li>
+                                                                              <li class="uiMenuSeparator secondaryOption"></li>
+                                                                              <li data-label="Voltar" class="uiMenuItem uiMenuItemRadio uiSelectorOption returnOption secondaryOption specialOption"><a aria-checked="false" href="#" tabindex="-1" role="menuitemradio" class="itemAnchor"><span class="itemLabel fsm">Voltar</span></a></li>
+                                                                           </ul>
+                                                                        </div>
+                                                                     </div>
+                                                                  </div>
+                                                                  <select name="audience[0][value]">
+                                                                     <option value=""></option>
+                                                                     <option value="80">Público</option>
+                                                                     <option selected="1" value="40">Amigos</option>
+                                                                     <option value="127">Amigos exceto conhecidos</option>
+                                                                     <option value="10">Somente eu</option>
+                                                                     <option value="111">Personalizado</option>
+                                                                     <option value="231521273626474">QAT Global</option>
+                                                                     <option value="210682715710330">Uberaba</option>
+                                                                     <option value="Ver todas as listas...">Ver todas as listas...</option>
+                                                                     <option value="120789564699646">Família</option>
+                                                                     <option value="117704495008153">Conhecidos</option>
+                                                                     <option value="Voltar">Voltar</option>
+                                                                  </select>
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                      </li>
+                                                      <li><button type="submit" class="_42ft _42fu _11b selected _42g-" value="1">Publicar</button></li>
+                                                   </ul>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </form>
+                                    </div>
+                                 </div>
+                              </div>
+                              <h2 class="accessible_elem">Feed de notícias</h2>
+                              <ul class="uiStream _5pcc">
+                                 <li class="mts uiStreamHeader">
+                                    <span class="plm uiStreamHeaderText fss fwb"></span>
+                                    <div id="u_0_17" class="_6a uiPopover uiStreamHeaderChronologicalForm"><a id="u_0_18" role="button" rel="toggle" aria-expanded="false" aria-haspopup="true" href="#" class="sortLink _p">CLASSIFICAR: MAIS RECENTES</a></div>
+                                 </li>
+                              </ul>
+                              <div data-gt="{&quot;ref&quot;:&quot;nf&quot;}" data-referrer="topnews_main_stream_408239535924329" id="topnews_main_stream_408239535924329">
+                                 <div id="u_0_20" class="_5pcb">
+                                    <div data-referrer="substream_0" id="substream_0" class="_4ikz">
+                                       <div>
+                                          <div id="u_0_22" data-timestamp="1393510750" data-dedupekey="7612005740322855558" data-cursor="MTM5MzUxMDc2NjoxMzkzNTEwNzY2OjE6NzYxMjAwNTc0MDMyMjg1NTU1ODoxMzkzNTEwNzUwOjA=" data-ft="{&quot;qid&quot;:&quot;5985083167438739933&quot;,&quot;mf_story_key&quot;:&quot;7612005740322855558&quot;,&quot;fbfeed_location&quot;:1}" class="_5jmm _5pat _5uch" data-insertion-position="0">
+                                             <div class="clearfix userContentWrapper _5pcr">
+                                                <a data-hovercard="/ajax/hovercard/user.php?id=100003083124027" data-ft="{&quot;tn&quot;:&quot;m&quot;}" href="https://www.facebook.com/tayana.make" class="_5pb8"><img alt="" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash1/t5/372446_100003083124027_396214797_q.jpg" class="_s0 _5xib _rw img"></a>
+                                                <div class="_5pax">
+                                                   <h5 data-ft="{&quot;tn&quot;:&quot;C&quot;}" class="_5pbw">
+                                                      <div class="fwn fcg"><span data-ft="{&quot;tn&quot;:&quot;;&quot;}" class="fwb fcg"><a data-hovercard="/ajax/hovercard/user.php?id=100003083124027" href="https://www.facebook.com/tayana.make">Tayana Isabela Coiffeur</a></span></div>
+                                                   </h5>
+                                                   <div data-ft="{&quot;tn&quot;:&quot;K&quot;}" class="mbs _5pbx userContent">Meninas não vou trabalhar sábado pois é carnaval kkk</div>
+                                                   <form onsubmit="return window.Event &amp;&amp; Event.__inlineSubmit &amp;&amp; Event.__inlineSubmit(this,event)" id="u_0_2n" data-live="{&quot;seq&quot;:0}" action="/ajax/ufi/modify.php" method="post" class="live_514194405359992_316526391751760 commentable_item collapsed_comments autoexpand_mode" rel="async">
+                                                      <input type="hidden" value="€,´,€,´,?,?,?" name="charset_test"><input type="hidden" autocomplete="off" value="AQAaGq-k" name="fb_dtsg"><input type="hidden" value="{&quot;actor&quot;:&quot;100003083124027&quot;,&quot;target_fbid&quot;:&quot;514194405359992&quot;,&quot;target_profile_id&quot;:&quot;100003083124027&quot;,&quot;type_id&quot;:&quot;22&quot;,&quot;assoc_obj_id&quot;:&quot;&quot;,&quot;source_app_id&quot;:&quot;0&quot;,&quot;extra_story_params&quot;:[],&quot;content_timestamp&quot;:&quot;1393510750&quot;,&quot;check_hash&quot;:&quot;AQB2xDd95mQiLu9X&quot;,&quot;source&quot;:&quot;13&quot;}" name="feedback_params" autocomplete="off"><input type="hidden" value="1" name="data_only_response" autocomplete="off">
+                                                      <div class="_5pcp"><span><a data-reactid=".2" data-ft="{&quot;tn&quot;:&quot;&gt;&quot;}" title="Curtiram isso" aria-live="polite" role="button" href="#" class="UFILikeLink">Curtir</a></span> · <label title="Deixar um comentário" class="uiLinkButton comment_link"><input type="button" onclick="return fc_click(this);" value="Comentar" data-ft="{&quot;type&quot;:24,&quot;tn&quot;:&quot;S&quot;}" class="uiLinkButtonInput"></label> · <a role="button" title="Enviar para amigos ou publicar na sua linha do tempo." data-ft="{&quot;tn&quot;:&quot;J&quot;,&quot;type&quot;:25}" rel="dialog" href="/ajax/sharer/?s=22&amp;appid=25554907596&amp;p%5B0%5D=100003083124027&amp;p%5B1%5D=514194405359992&amp;share_source_type=unknown" class="share_action_link">Compartilhar</a> · <span><a href="/tayana.make/posts/514194405359992?stream_ref=1" class="_5pcq"><abbr class="_5ptz timestamp livetimestamp" data-utime="1393510750" title="Quinta, 27 de fevereiro de 2014 às 11:19">há 17 segundos</abbr></a></span> · <a id="u_0_2v" role="button" href="#" class="uiStreamPrivacy inlineBlock fbStreamPrivacy fbPrivacyAudienceIndicator _5pcq" data-hover="tooltip" aria-label="Compartilhado com: Público"><i class="lock img sp_acb80g sx_130b4d"></i></a></div>
+                                                      <div id="u_0_2s" class="uiUfi UFIContainer _5pc9">
+                                                         <ul data-reactid=".b" data-ft="{&quot;tn&quot;:&quot;]&quot;}" class="UFIList">
+                                                            <li data-reactid=".b.0" class="UFIArrow"><i data-reactid=".b.0.0"></i></li>
+                                                            <li data-reactid=".b.1:4" data-ft="{&quot;tn&quot;:&quot;[&quot;}" class="UFIRow  UFIAddComment UFIAddCommentWithPhotoAttacher UFIFirstComponent UFILastComponent">
+                                                               <div data-reactid=".b.1:4.0" class="clearfix UFIMentionsInputWrap">
+                                                                  <div data-reactid=".b.1:4.0.$left" class="_ohe lfloat">
+                                                                     <div data-reactid=".b.1:4.0.$left.0" class="img _8o _8r UFIImageBlockImage UFIReplyActorPhotoWrapper"><img data-reactid=".b.1:4.0.$left.0.0" alt="Washington Climaco" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/t5/s32x32/186438_100003058100735_793796532_q.jpg" class="img UFIActorImage _54ru"></div>
+                                                                  </div>
+                                                                  <div data-reactid=".b.1:4.0.$right" class="">
+                                                                     <div data-reactid=".b.1:4.0.$right.0" class="UFIImageBlockContent _42ef _8u">
+                                                                        <div data-reactid=".b.1:4.0.$right.0.0" class="UFICommentContainer">
+                                                                           <div data-reactid=".b.1:4.0.$right.0.0.0" class="UFIInputContainer">
+                                                                              <div data-reactid=".b.1:4.0.$right.0.0.0.0" class="uiMentionsInput textBoxContainer ReactLegacyMentionsInput">
+                                                                                 <div data-reactid=".b.1:4.0.$right.0.0.0.0.0" class="highlighter">
+                                                                                    <div data-reactid=".b.1:4.0.$right.0.0.0.0.0.0"><span data-reactid=".b.1:4.0.$right.0.0.0.0.0.0.0" class="highlighterContent hidden_elem"></span></div>
+                                                                                 </div>
+                                                                                 <div data-reactid=".b.1:4.0.$right.0.0.0.0.1" class="uiTypeahead mentionsTypeahead">
+                                                                                    <div data-reactid=".b.1:4.0.$right.0.0.0.0.1.0" class="wrap">
+                                                                                       <input type="hidden" data-reactid=".b.1:4.0.$right.0.0.0.0.1.0.0" class="hiddenInput" autocomplete="off">
+                                                                                       <div data-reactid=".b.1:4.0.$right.0.0.0.0.1.0.1" class="innerWrap"><textarea data-reactid=".b.1:4.0.$right.0.0.0.0.1.0.1.0" value="Escreva um comentário..." placeholder="Escreva um comentário..." title="Escreva um comentário..." class="textInput mentionsTextarea uiTextareaAutogrow uiTextareaNoResize UFIAddCommentInput DOMControl_placeholder" name="add_comment_text">Escreva um comentário...</textarea></div>
+                                                                                    </div>
+                                                                                 </div>
+                                                                                 <input type="hidden" data-reactid=".b.1:4.0.$right.0.0.0.0.2" value="" class="mentionsHidden" autocomplete="off">
+                                                                              </div>
+                                                                              <div data-reactid=".b.1:4.0.$right.0.0.0.1" class="UFICommentAttachmentButtons clearfix">
+                                                                                 <div data-reactid=".b.1:4.0.$right.0.0.0.1.0" aria-label="Anexar uma foto" data-tooltip-alignh="center" data-hover="tooltip" class="UFIPhotoAttachLinkWrapper _m"><i data-reactid=".b.1:4.0.$right.0.0.0.1.0.0" class="UFICommentPhotoIcon"><input type="file" accept="image/*" class="_n" name="file[]" multiple="" title="Selecione um arquivo para enviar" aria-label="Selecione um arquivo para enviar"></i></div>
+                                                                              </div>
+                                                                           </div>
+                                                                        </div>
+                                                                     </div>
+                                                                  </div>
+                                                               </div>
+                                                            </li>
+                                                         </ul>
+                                                      </div>
+                                                   </form>
+                                                </div>
+                                                <div data-ft="{&quot;tn&quot;:&quot;V&quot;}" id="u_0_27" class="_6a uiPopover _5pbi"><a id="u_0_2e" rel="toggle" aria-expanded="false" aria-haspopup="true" href="#" role="button" aria-label="Opções da história" class="_5pbj _p"></a></div>
+                                             </div>
+                                          </div>
+                                          <div id="u_0_23" data-dedupekey="-4917806268519240029" data-cursor="MTM5MzUxMDc2NjoxMzkzNTEwNzY2OjI6LTQ5MTc4MDYyNjg1MTkyNDAwMjk6MTM5MzUxMDc2Njow" data-ft="{&quot;qid&quot;:&quot;5985083167438739933&quot;,&quot;mf_story_key&quot;:&quot;-4917806268519240029&quot;,&quot;ei&quot;:&quot;AQKrgjNbLLIdpOsGXjk213Opum3yqI71X06jKAR1S_aYG105s9Z17EFOle-LkCAj8hclQbUTywTFAEILJJDyI7CTyaWFD_R7j1u7ZxQY9T4-ODP68scE-Gbhz8G8hyPaIMDKoHQSdEdMkcCwBiBCbVmi8bftXYP50EBbIXF_zADYupuNyx8DZhYNXQgNM0yG_zkHg1CD61lR6SP4d73Cd9Uyg283stmaqR-XjdX5MHR7z_aaiZW6LWpBV4I9_iHwhBqMgqp3zAMogxR6QUWLz4c-cKn2KzkXL27hmdc2ylapOnBrSmts-HIBlkDC4o7g0HWeSqh8O8EVDcb_d8JDq2FYHyaLZMIuqpkPQVxbdZvXY9AbDbAFEYT2aUshrrvVEeEp_GhCESNafBo8Gy0Bcj0uC92iY6PsrotattBBxaLdpA0Gbp3OzQ-As8mw-eeVVET1PfUtebJmDgmkeQtQl22G2WRGjl3Mxtwio02ILRzJ7KTxMl2RnL9Q6EzO7Q-RWeQABbRhQqb9ThEOOTwJrhSXwtZlKqLNiObGz84uNZQhJhFZyPfseWXgJSOuIvvGlcce0O_QEBm5m7zgLZ979M90tDPa77b0U83QC-UCuaS7u897hZ1t2yRcHdMlW8aQs0aTT8xNg3vPIjxIHvMuFoWqSFqsc4xZ-v3g6BVJwGVIA1D3S78tU0QwTuPthRfkYyvzOF0lL0F5BRw7mzOUCpT7zDHkFF60uAM8zxBU3OjOLYPPwHy0jjPYShvrpDHnrHVws0ADBjplR4aeEluPx24xj3UjmVRo7iCR_EkN1neY4F-A3k2uV7Ps-1oluDoqz55WXu4HCioH4UaUtWnPWBcix2gMj-z7Ny0kjYfkJ0OdP9J0o_Y4X39wcKbiRM-8E-D4WhFICaePou2_dwBYL_RUkoeG-mHgZcClkr6J6PY26uoqWnIDPIxzojU0GwkzPYiTr7V026LB1m6tPGodiT9hNIP036fo_UM4U7401DNeffBcn7VQZlbrSzG6aMbCk31riIPgrFgErthe7HXZCbhL9lZ-31e-OIBuhXYOusld_BDn7AviS5lnp_4wCWNGaXUsvHlqjiThxH5jw_5eKo0ZDwIn4bgnXGDXHOz8siKk22uFU94u8rtasIENquP0XDR-ittqC8NiAd7n7RipOIJvIkmYu_W7RIf7kwlCudCHDgyzZwAQQC2DKQ8wU8xACIZhaJXqDGRNIluUwm0jYS1RRiVzHrb0p_TJDVgv1WPHx9lXfoOPRy3J3LJeQ6tPFTdHKdwxVhawrVpdemHK6VJ0HJd0VaOiIum5A3csZF-N2xRFzSggI19bg1mjYVYyNgdDfGyvuyxXzu4fOTtULPGRl5ajMXt8icFN4T3leNyRhVsbFnbEEJNfriU50oE_UzdU1zK_zK8VRjsQ5az6UnrlAu8d8EZNsLS6fAGDPPeA5NabLAhAUF78KdWkINMiFM3zChs7w7z6lPjL2jmtVV1o5_YIQ-0acPR7aZpRDyhbawpjhdJgL-2lwo6kueqyEYeaZTphDxVQprS9PppY9bmmdGsn7ZMTioW49I_khzcDasJz4nJjGJz46KPmzVk2iE8xFDjrAPzGZkxwOquZzg2ghZfXvM-S0KAGxTnnZQEzMow2fRIJNAZU5V8GY8a52O7itRjrltTeM4sfhTk4d-sTTAnM_aPgiHdgYDgJnxU6bEefVMcp5DluMFNiM2Cxu-RqTiVaadLE8KY56Lo--xsmSGiKrQwtQ4tu-ZAb_xutBv2shQHEqOOJpABZJeJU6svru_B0i49iVtAV2-YGVmjw1S3rzAEApZuPaPZMY-SdlnOJ1pKZ5tqyy8n9cFdvuPM3N7ZrpRymiGSq3hFzMfR1XVJl4M19FPpBqBMnWMg8vK72AK_PKh3SKjvPRvyuhf3VNx0EvX-RyZzi6_28yr0lxnQvo84IAOibbWQA6MClUyVtzMnTCO11ZtUo5oO17jYPBcBywaB2jy4vZ8cUo1wvSV1syh6N-SwDHMbsIIRbnwJaii8uw8uwk6bQph3dX0XxSKDhIO7Kd5LG70CkjasAq415bqMxhU_W6u0wGfYa_ibp9c2l7BgA1wpftDu3XamXOtDIuihHXyz20rx9OxhMeGOoXQzY89IQQb7Zbr0cLvW2BuV7JPTBTXI3q6yBhkQ&quot;,&quot;fbfeed_location&quot;:1}" class="_5jmm _5pat _5uch" data-insertion-position="1">
+                                             <div class="clearfix userContentWrapper _5pcr">
+                                                <a data-hovercard="/ajax/hovercard/page.php?id=18276844469" data-ft="{&quot;tn&quot;:&quot;\u003C&quot;}" href="https://www.facebook.com/healthdesigns?ft[tn]=%3C&amp;ft[qid]=5985083167438739933&amp;ft[mf_story_key]=-4917806268519240029&amp;ft[ei]=AQKrgjNbLLIdpOsGXjk213Opum3yqI71X06jKAR1S_aYG105s9Z17EFOle-LkCAj8hclQbUTywTFAEILJJDyI7CTyaWFD_R7j1u7ZxQY9T4-ODP68scE-Gbhz8G8hyPaIMDKoHQSdEdMkcCwBiBCbVmi8bftXYP50EBbIXF_zADYupuNyx8DZhYNXQgNM0yG_zkHg1CD61lR6SP4d73Cd9Uyg283stmaqR-XjdX5MHR7z_aaiZW6LWpBV4I9_iHwhBqMgqp3zAMogxR6QUWLz4c-cKn2KzkXL27hmdc2ylapOnBrSmts-HIBlkDC4o7g0HWeSqh8O8EVDcb_d8JDq2FYHyaLZMIuqpkPQVxbdZvXY9AbDbAFEYT2aUshrrvVEeEp_GhCESNafBo8Gy0Bcj0uC92iY6PsrotattBBxaLdpA0Gbp3OzQ-As8mw-eeVVET1PfUtebJmDgmkeQtQl22G2WRGjl3Mxtwio02ILRzJ7KTxMl2RnL9Q6EzO7Q-RWeQABbRhQqb9ThEOOTwJrhSXwtZlKqLNiObGz84uNZQhJhFZyPfseWXgJSOuIvvGlcce0O_QEBm5m7zgLZ979M90tDPa77b0U83QC-UCuaS7u897hZ1t2yRcHdMlW8aQs0aTT8xNg3vPIjxIHvMuFoWqSFqsc4xZ-v3g6BVJwGVIA1D3S78tU0QwTuPthRfkYyvzOF0lL0F5BRw7mzOUCpT7zDHkFF60uAM8zxBU3OjOLYPPwHy0jjPYShvrpDHnrHVws0ADBjplR4aeEluPx24xj3UjmVRo7iCR_EkN1neY4F-A3k2uV7Ps-1oluDoqz55WXu4HCioH4UaUtWnPWBcix2gMj-z7Ny0kjYfkJ0OdP9J0o_Y4X39wcKbiRM-8E-D4WhFICaePou2_dwBYL_RUkoeG-mHgZcClkr6J6PY26uoqWnIDPIxzojU0GwkzPYiTr7V026LB1m6tPGodiT9hNIP036fo_UM4U7401DNeffBcn7VQZlbrSzG6aMbCk31riIPgrFgErthe7HXZCbhL9lZ-31e-OIBuhXYOusld_BDn7AviS5lnp_4wCWNGaXUsvHlqjiThxH5jw_5eKo0ZDwIn4bgnXGDXHOz8siKk22uFU94u8rtasIENquP0XDR-ittqC8NiAd7n7RipOIJvIkmYu_W7RIf7kwlCudCHDgyzZwAQQC2DKQ8wU8xACIZhaJXqDGRNIluUwm0jYS1RRiVzHrb0p_TJDVgv1WPHx9lXfoOPRy3J3LJeQ6tPFTdHKdwxVhawrVpdemHK6VJ0HJd0VaOiIum5A3csZF-N2xRFzSggI19bg1mjYVYyNgdDfGyvuyxXzu4fOTtULPGRl5ajMXt8icFN4T3leNyRhVsbFnbEEJNfriU50oE_UzdU1zK_zK8VRjsQ5az6UnrlAu8d8EZNsLS6fAGDPPeA5NabLAhAUF78KdWkINMiFM3zChs7w7z6lPjL2jmtVV1o5_YIQ-0acPR7aZpRDyhbawpjhdJgL-2lwo6kueqyEYeaZTphDxVQprS9PppY9bmmdGsn7ZMTioW49I_khzcDasJz4nJjGJz46KPmzVk2iE8xFDjrAPzGZkxwOquZzg2ghZfXvM-S0KAGxTnnZQEzMow2fRIJNAZU5V8GY8a52O7itRjrltTeM4sfhTk4d-sTTAnM_aPgiHdgYDgJnxU6bEefVMcp5DluMFNiM2Cxu-RqTiVaadLE8KY56Lo--xsmSGiKrQwtQ4tu-ZAb_xutBv2shQHEqOOJpABZJeJU6svru_B0i49iVtAV2-YGVmjw1S3rzAEApZuPaPZMY-SdlnOJ1pKZ5tqyy8n9cFdvuPM3N7ZrpRymiGSq3hFzMfR1XVJl4M19FPpBqBMnWMg8vK72AK_PKh3SKjvPRvyuhf3VNx0EvX-RyZzi6_28yr0lxnQvo84IAOibbWQA6MClUyVtzMnTCO11ZtUo5oO17jYPBcBywaB2jy4vZ8cUo1wvSV1syh6N-SwDHMbsIIRbnwJaii8uw8uwk6bQph3dX0XxSKDhIO7Kd5LG70CkjasAq415bqMxhU_W6u0wGfYa_ibp9c2l7BgA1wpftDu3XamXOtDIuihHXyz20rx9OxhMeGOoXQzY89IQQb7Zbr0cLvW2BuV7JPTBTXI3q6yBhkQ&amp;ft[fbfeed_location]=1&amp;__md__=0" class="_5pb8" onmousedown="this.href = this.href.replace('__md__=0', '__md__=1');"><img alt="" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/t5/1086440_18276844469_510474384_q.jpg" class="_s0 _5xib _rw img"></a>
+                                                <div class="_5pax">
+                                                   <h5 data-ft="{&quot;tn&quot;:&quot;C&quot;}" class="_5pbw">
+                                                      <div class="fwn fcg"><span data-ft="{&quot;tn&quot;:&quot;k&quot;}" class="fwb fcg"><a data-hovercard="/ajax/hovercard/page.php?id=18276844469" href="https://www.facebook.com/healthdesigns?ft[tn]=kC&amp;ft[qid]=5985083167438739933&amp;ft[mf_story_key]=-4917806268519240029&amp;ft[ei]=AQKrgjNbLLIdpOsGXjk213Opum3yqI71X06jKAR1S_aYG105s9Z17EFOle-LkCAj8hclQbUTywTFAEILJJDyI7CTyaWFD_R7j1u7ZxQY9T4-ODP68scE-Gbhz8G8hyPaIMDKoHQSdEdMkcCwBiBCbVmi8bftXYP50EBbIXF_zADYupuNyx8DZhYNXQgNM0yG_zkHg1CD61lR6SP4d73Cd9Uyg283stmaqR-XjdX5MHR7z_aaiZW6LWpBV4I9_iHwhBqMgqp3zAMogxR6QUWLz4c-cKn2KzkXL27hmdc2ylapOnBrSmts-HIBlkDC4o7g0HWeSqh8O8EVDcb_d8JDq2FYHyaLZMIuqpkPQVxbdZvXY9AbDbAFEYT2aUshrrvVEeEp_GhCESNafBo8Gy0Bcj0uC92iY6PsrotattBBxaLdpA0Gbp3OzQ-As8mw-eeVVET1PfUtebJmDgmkeQtQl22G2WRGjl3Mxtwio02ILRzJ7KTxMl2RnL9Q6EzO7Q-RWeQABbRhQqb9ThEOOTwJrhSXwtZlKqLNiObGz84uNZQhJhFZyPfseWXgJSOuIvvGlcce0O_QEBm5m7zgLZ979M90tDPa77b0U83QC-UCuaS7u897hZ1t2yRcHdMlW8aQs0aTT8xNg3vPIjxIHvMuFoWqSFqsc4xZ-v3g6BVJwGVIA1D3S78tU0QwTuPthRfkYyvzOF0lL0F5BRw7mzOUCpT7zDHkFF60uAM8zxBU3OjOLYPPwHy0jjPYShvrpDHnrHVws0ADBjplR4aeEluPx24xj3UjmVRo7iCR_EkN1neY4F-A3k2uV7Ps-1oluDoqz55WXu4HCioH4UaUtWnPWBcix2gMj-z7Ny0kjYfkJ0OdP9J0o_Y4X39wcKbiRM-8E-D4WhFICaePou2_dwBYL_RUkoeG-mHgZcClkr6J6PY26uoqWnIDPIxzojU0GwkzPYiTr7V026LB1m6tPGodiT9hNIP036fo_UM4U7401DNeffBcn7VQZlbrSzG6aMbCk31riIPgrFgErthe7HXZCbhL9lZ-31e-OIBuhXYOusld_BDn7AviS5lnp_4wCWNGaXUsvHlqjiThxH5jw_5eKo0ZDwIn4bgnXGDXHOz8siKk22uFU94u8rtasIENquP0XDR-ittqC8NiAd7n7RipOIJvIkmYu_W7RIf7kwlCudCHDgyzZwAQQC2DKQ8wU8xACIZhaJXqDGRNIluUwm0jYS1RRiVzHrb0p_TJDVgv1WPHx9lXfoOPRy3J3LJeQ6tPFTdHKdwxVhawrVpdemHK6VJ0HJd0VaOiIum5A3csZF-N2xRFzSggI19bg1mjYVYyNgdDfGyvuyxXzu4fOTtULPGRl5ajMXt8icFN4T3leNyRhVsbFnbEEJNfriU50oE_UzdU1zK_zK8VRjsQ5az6UnrlAu8d8EZNsLS6fAGDPPeA5NabLAhAUF78KdWkINMiFM3zChs7w7z6lPjL2jmtVV1o5_YIQ-0acPR7aZpRDyhbawpjhdJgL-2lwo6kueqyEYeaZTphDxVQprS9PppY9bmmdGsn7ZMTioW49I_khzcDasJz4nJjGJz46KPmzVk2iE8xFDjrAPzGZkxwOquZzg2ghZfXvM-S0KAGxTnnZQEzMow2fRIJNAZU5V8GY8a52O7itRjrltTeM4sfhTk4d-sTTAnM_aPgiHdgYDgJnxU6bEefVMcp5DluMFNiM2Cxu-RqTiVaadLE8KY56Lo--xsmSGiKrQwtQ4tu-ZAb_xutBv2shQHEqOOJpABZJeJU6svru_B0i49iVtAV2-YGVmjw1S3rzAEApZuPaPZMY-SdlnOJ1pKZ5tqyy8n9cFdvuPM3N7ZrpRymiGSq3hFzMfR1XVJl4M19FPpBqBMnWMg8vK72AK_PKh3SKjvPRvyuhf3VNx0EvX-RyZzi6_28yr0lxnQvo84IAOibbWQA6MClUyVtzMnTCO11ZtUo5oO17jYPBcBywaB2jy4vZ8cUo1wvSV1syh6N-SwDHMbsIIRbnwJaii8uw8uwk6bQph3dX0XxSKDhIO7Kd5LG70CkjasAq415bqMxhU_W6u0wGfYa_ibp9c2l7BgA1wpftDu3XamXOtDIuihHXyz20rx9OxhMeGOoXQzY89IQQb7Zbr0cLvW2BuV7JPTBTXI3q6yBhkQ&amp;ft[fbfeed_location]=1&amp;__md__=0" onmousedown="this.href = this.href.replace('__md__=0', '__md__=1');">HealthDesigns.com</a></span></div>
+                                                   </h5>
+                                                   <div data-ft="{&quot;tn&quot;:&quot;K&quot;}" class="mbs _5pbx userContent">"Like" this post if you have worked out 3 or more times already this week!</div>
+                                                   <form onsubmit="return window.Event &amp;&amp; Event.__inlineSubmit &amp;&amp; Event.__inlineSubmit(this,event)" id="u_0_2j" action="/ajax/ufi/modify.php" method="post" class="commentable_item hidden_add_comment collapsed_comments" rel="async">
+                                                      <input type="hidden" value="€,´,€,´,?,?,?" name="charset_test"><input type="hidden" autocomplete="off" value="AQAaGq-k" name="fb_dtsg"><input type="hidden" value="{&quot;actor&quot;:&quot;18276844469&quot;,&quot;target_fbid&quot;:&quot;10152261737404470&quot;,&quot;target_profile_id&quot;:&quot;18276844469&quot;,&quot;type_id&quot;:&quot;22&quot;,&quot;assoc_obj_id&quot;:&quot;&quot;,&quot;source_app_id&quot;:&quot;0&quot;,&quot;extra_story_params&quot;:[],&quot;content_timestamp&quot;:&quot;1393438329&quot;,&quot;check_hash&quot;:&quot;AQDfhBerpaicUe9Z&quot;,&quot;source&quot;:&quot;13&quot;}" name="feedback_params" autocomplete="off"><input type="hidden" value="1" name="data_only_response" autocomplete="off">
+                                                      <div class="_5pcp"><span><a data-reactid=".4" data-ft="{&quot;tn&quot;:&quot;&gt;&quot;}" title="Curtiram isso" aria-live="polite" role="button" href="#" class="UFILikeLink">Curtir</a></span> · <label title="Deixar um comentário" class="uiLinkButton comment_link"><input type="button" onclick="return fc_click(this);" value="Comentar" data-ft="{&quot;type&quot;:24,&quot;tn&quot;:&quot;S&quot;}" class="uiLinkButtonInput"></label> · <a role="button" title="Enviar para amigos ou publicar na sua linha do tempo." data-ft="{&quot;tn&quot;:&quot;J&quot;,&quot;type&quot;:25}" rel="dialog" href="/ajax/sharer/?s=22&amp;appid=25554907596&amp;p%5B0%5D=18276844469&amp;p%5B1%5D=10152261737404470&amp;share_source_type=unknown" class="share_action_link">Compartilhar</a> · <span><a data-reactid=".3" rel="ignore" aria-label="215 curtidas 11 comentários " data-ft="{&quot;tn&quot;:&quot;O&quot;}" href="/healthdesigns/posts/10152261737404470" class="UFIBlingBox uiBlingBox feedbackBling"><span data-reactid=".3.$like"><i data-reactid=".3.$like.0" class=" UFIBlingBoxLikeIcon UFIBlingBoxSprite"></i><span data-reactid=".3.$like.1" class="UFIBlingBoxText">215</span></span><span data-reactid=".3.$comment"><i data-reactid=".3.$comment.0" class="mls UFIBlingBoxCommentIcon UFIBlingBoxSprite"></i><span data-reactid=".3.$comment.1" class="UFIBlingBoxText">11</span></span></a></span> · <a role="button" href="#" class="uiStreamPrivacy inlineBlock fbStreamPrivacy fbPrivacyAudienceIndicator _5pcq" aria-label="Personalizado" data-hover="tooltip"><i class="lock img sp_acb80g sx_550b52"></i></a> · <span data-ft="{&quot;tn&quot;:&quot;j&quot;}" class="uiStreamAdditionalLogging _5paw"><a href="https://www.facebook.com/about/ads?ft[tn]=j&amp;ft[qid]=5985083167438739933&amp;ft[mf_story_key]=-4917806268519240029&amp;ft[ei]=AQKrgjNbLLIdpOsGXjk213Opum3yqI71X06jKAR1S_aYG105s9Z17EFOle-LkCAj8hclQbUTywTFAEILJJDyI7CTyaWFD_R7j1u7ZxQY9T4-ODP68scE-Gbhz8G8hyPaIMDKoHQSdEdMkcCwBiBCbVmi8bftXYP50EBbIXF_zADYupuNyx8DZhYNXQgNM0yG_zkHg1CD61lR6SP4d73Cd9Uyg283stmaqR-XjdX5MHR7z_aaiZW6LWpBV4I9_iHwhBqMgqp3zAMogxR6QUWLz4c-cKn2KzkXL27hmdc2ylapOnBrSmts-HIBlkDC4o7g0HWeSqh8O8EVDcb_d8JDq2FYHyaLZMIuqpkPQVxbdZvXY9AbDbAFEYT2aUshrrvVEeEp_GhCESNafBo8Gy0Bcj0uC92iY6PsrotattBBxaLdpA0Gbp3OzQ-As8mw-eeVVET1PfUtebJmDgmkeQtQl22G2WRGjl3Mxtwio02ILRzJ7KTxMl2RnL9Q6EzO7Q-RWeQABbRhQqb9ThEOOTwJrhSXwtZlKqLNiObGz84uNZQhJhFZyPfseWXgJSOuIvvGlcce0O_QEBm5m7zgLZ979M90tDPa77b0U83QC-UCuaS7u897hZ1t2yRcHdMlW8aQs0aTT8xNg3vPIjxIHvMuFoWqSFqsc4xZ-v3g6BVJwGVIA1D3S78tU0QwTuPthRfkYyvzOF0lL0F5BRw7mzOUCpT7zDHkFF60uAM8zxBU3OjOLYPPwHy0jjPYShvrpDHnrHVws0ADBjplR4aeEluPx24xj3UjmVRo7iCR_EkN1neY4F-A3k2uV7Ps-1oluDoqz55WXu4HCioH4UaUtWnPWBcix2gMj-z7Ny0kjYfkJ0OdP9J0o_Y4X39wcKbiRM-8E-D4WhFICaePou2_dwBYL_RUkoeG-mHgZcClkr6J6PY26uoqWnIDPIxzojU0GwkzPYiTr7V026LB1m6tPGodiT9hNIP036fo_UM4U7401DNeffBcn7VQZlbrSzG6aMbCk31riIPgrFgErthe7HXZCbhL9lZ-31e-OIBuhXYOusld_BDn7AviS5lnp_4wCWNGaXUsvHlqjiThxH5jw_5eKo0ZDwIn4bgnXGDXHOz8siKk22uFU94u8rtasIENquP0XDR-ittqC8NiAd7n7RipOIJvIkmYu_W7RIf7kwlCudCHDgyzZwAQQC2DKQ8wU8xACIZhaJXqDGRNIluUwm0jYS1RRiVzHrb0p_TJDVgv1WPHx9lXfoOPRy3J3LJeQ6tPFTdHKdwxVhawrVpdemHK6VJ0HJd0VaOiIum5A3csZF-N2xRFzSggI19bg1mjYVYyNgdDfGyvuyxXzu4fOTtULPGRl5ajMXt8icFN4T3leNyRhVsbFnbEEJNfriU50oE_UzdU1zK_zK8VRjsQ5az6UnrlAu8d8EZNsLS6fAGDPPeA5NabLAhAUF78KdWkINMiFM3zChs7w7z6lPjL2jmtVV1o5_YIQ-0acPR7aZpRDyhbawpjhdJgL-2lwo6kueqyEYeaZTphDxVQprS9PppY9bmmdGsn7ZMTioW49I_khzcDasJz4nJjGJz46KPmzVk2iE8xFDjrAPzGZkxwOquZzg2ghZfXvM-S0KAGxTnnZQEzMow2fRIJNAZU5V8GY8a52O7itRjrltTeM4sfhTk4d-sTTAnM_aPgiHdgYDgJnxU6bEefVMcp5DluMFNiM2Cxu-RqTiVaadLE8KY56Lo--xsmSGiKrQwtQ4tu-ZAb_xutBv2shQHEqOOJpABZJeJU6svru_B0i49iVtAV2-YGVmjw1S3rzAEApZuPaPZMY-SdlnOJ1pKZ5tqyy8n9cFdvuPM3N7ZrpRymiGSq3hFzMfR1XVJl4M19FPpBqBMnWMg8vK72AK_PKh3SKjvPRvyuhf3VNx0EvX-RyZzi6_28yr0lxnQvo84IAOibbWQA6MClUyVtzMnTCO11ZtUo5oO17jYPBcBywaB2jy4vZ8cUo1wvSV1syh6N-SwDHMbsIIRbnwJaii8uw8uwk6bQph3dX0XxSKDhIO7Kd5LG70CkjasAq415bqMxhU_W6u0wGfYa_ibp9c2l7BgA1wpftDu3XamXOtDIuihHXyz20rx9OxhMeGOoXQzY89IQQb7Zbr0cLvW2BuV7JPTBTXI3q6yBhkQ&amp;ft[fbfeed_location]=1&amp;__md__=0" class="uiStreamSponsoredLink" onmousedown="this.href = this.href.replace('__md__=0', '__md__=1');">Patrocinado</a></span></div>
+                                                      <div id="u_0_2u" class="uiUfi UFIContainer _5pc9">
+                                                         <ul data-reactid=".c" data-ft="{&quot;tn&quot;:&quot;]&quot;}" class="UFIList">
+                                                            <li data-reactid=".c.0" class="UFIArrow"><i data-reactid=".c.0.0"></i></li>
+                                                            <li data-reactid=".c.1:0" class="UFIRow UFILikeSentence UFIFirstComponent">
+                                                               <div data-reactid=".c.1:0.0" class="clearfix">
+                                                                  <div data-reactid=".c.1:0.0.$left" class="_ohe lfloat"><a data-reactid=".c.1:0.0.$left.0" aria-label="Curtiram isso" role="button" title="Curtiram isso" tabindex="-1" href="#" class="img _8o _8r UFIImageBlockImage UFILikeThumb"><i data-reactid=".c.1:0.0.$left.0.0" class="UFILikeIcon"></i></a></div>
+                                                                  <div data-reactid=".c.1:0.0.$right" class="">
+                                                                     <div data-reactid=".c.1:0.0.$right.0" class="UFIImageBlockContent _42ef _8u">
+                                                                        <div data-reactid=".c.1:0.0.$right.0.0" class="UFILikeSentenceText"><span data-reactid=".c.1:0.0.$right.0.0.0"><a data-reactid=".c.1:0.0.$right.0.0.0.$range0:0" role="button" data-tooltip-uri="/ajax/like/tooltip.php?comment_fbid=10152261737404470&amp;comment_from=100003058100735&amp;seen_user_fbids=true" data-tooltip-alignh="center" data-hover="tooltip" href="/browse/likes?id=10152261737404470" ajaxify="/ajax/browser/dialog/likes?id=10152261737404470" rel="dialog">215 pessoas</a><span data-reactid=".c.1:0.0.$right.0.0.0.$end:0:$0:0"> curtiram isso.</span></span></div>
+                                                                     </div>
+                                                                  </div>
+                                                               </div>
+                                                            </li>
+                                                            <li data-reactid=".c.1:3:$allPager" data-ft="{&quot;tn&quot;:&quot;Q&quot;}" class="UFIRow UFIPagerRow UFIFirstCommentComponent">
+                                                               <div data-reactid=".c.1:3:$allPager.0" class="clearfix">
+                                                                  <div data-reactid=".c.1:3:$allPager.0.$left" class="_ohe lfloat"><a data-reactid=".c.1:3:$allPager.0.$left.0" aria-hidden="true" tabindex="-1" role="button" href="#" class="img _8o _8r UFIImageBlockImage UFIPagerIcon"></a></div>
+                                                                  <div data-reactid=".c.1:3:$allPager.0.$right" class="">
+                                                                     <div data-reactid=".c.1:3:$allPager.0.$right.0" class="clearfix UFIImageBlockContent _42ef _8u">
+                                                                        <div data-reactid=".c.1:3:$allPager.0.$right.0.$right" class="_ohf rfloat"><span data-reactid=".c.1:3:$allPager.0.$right.0.$right.0" class="fcg UFIPagerCount"></span></div>
+                                                                        <div data-reactid=".c.1:3:$allPager.0.$right.0.$left" class=""><a data-reactid=".c.1:3:$allPager.0.$right.0.$left.0" role="button" href="#" class="UFIPagerLink"><span data-reactid=".c.1:3:$allPager.0.$right.0.$left.0.0" class="">Ver mais 9 comentários</span></a></div>
+                                                                     </div>
+                                                                  </div>
+                                                               </div>
+                                                            </li>
+                                                            <li data-reactid=".c.1:3:1:$comment10152261737404470_29690163:0" data-ft="{&quot;tn&quot;:&quot;R0&quot;}" class="UFIRow UFIComment display UFIFirstComment">
+                                                               <div data-reactid=".c.1:3:1:$comment10152261737404470_29690163:0.0" class="clearfix">
+                                                                  <div data-reactid=".c.1:3:1:$comment10152261737404470_29690163:0.0.$left" class="_ohe lfloat"><a data-reactid=".c.1:3:1:$comment10152261737404470_29690163:0.0.$left.0" aria-hidden="true" tabindex="-1" data-ft="{&quot;tn&quot;:&quot;T&quot;}" data-hovercard="/ajax/hovercard/hovercard.php?id=366521186820707&amp;extragetparams=%7B%22hc_location%22%3A%22ufi%22%7D" href="https://www.facebook.com/pages/Health-Designs-Depress%C3%A3o/366521186820707?ft[tn]=TR0]&amp;ft[qid]=5985083167438739933&amp;ft[mf_story_key]=-4917806268519240029&amp;ft[ei]=AQKrgjNbLLIdpOsGXjk213Opum3yqI71X06jKAR1S_aYG105s9Z17EFOle-LkCAj8hclQbUTywTFAEILJJDyI7CTyaWFD_R7j1u7ZxQY9T4-ODP68scE-Gbhz8G8hyPaIMDKoHQSdEdMkcCwBiBCbVmi8bftXYP50EBbIXF_zADYupuNyx8DZhYNXQgNM0yG_zkHg1CD61lR6SP4d73Cd9Uyg283stmaqR-XjdX5MHR7z_aaiZW6LWpBV4I9_iHwhBqMgqp3zAMogxR6QUWLz4c-cKn2KzkXL27hmdc2ylapOnBrSmts-HIBlkDC4o7g0HWeSqh8O8EVDcb_d8JDq2FYHyaLZMIuqpkPQVxbdZvXY9AbDbAFEYT2aUshrrvVEeEp_GhCESNafBo8Gy0Bcj0uC92iY6PsrotattBBxaLdpA0Gbp3OzQ-As8mw-eeVVET1PfUtebJmDgmkeQtQl22G2WRGjl3Mxtwio02ILRzJ7KTxMl2RnL9Q6EzO7Q-RWeQABbRhQqb9ThEOOTwJrhSXwtZlKqLNiObGz84uNZQhJhFZyPfseWXgJSOuIvvGlcce0O_QEBm5m7zgLZ979M90tDPa77b0U83QC-UCuaS7u897hZ1t2yRcHdMlW8aQs0aTT8xNg3vPIjxIHvMuFoWqSFqsc4xZ-v3g6BVJwGVIA1D3S78tU0QwTuPthRfkYyvzOF0lL0F5BRw7mzOUCpT7zDHkFF60uAM8zxBU3OjOLYPPwHy0jjPYShvrpDHnrHVws0ADBjplR4aeEluPx24xj3UjmVRo7iCR_EkN1neY4F-A3k2uV7Ps-1oluDoqz55WXu4HCioH4UaUtWnPWBcix2gMj-z7Ny0kjYfkJ0OdP9J0o_Y4X39wcKbiRM-8E-D4WhFICaePou2_dwBYL_RUkoeG-mHgZcClkr6J6PY26uoqWnIDPIxzojU0GwkzPYiTr7V026LB1m6tPGodiT9hNIP036fo_UM4U7401DNeffBcn7VQZlbrSzG6aMbCk31riIPgrFgErthe7HXZCbhL9lZ-31e-OIBuhXYOusld_BDn7AviS5lnp_4wCWNGaXUsvHlqjiThxH5jw_5eKo0ZDwIn4bgnXGDXHOz8siKk22uFU94u8rtasIENquP0XDR-ittqC8NiAd7n7RipOIJvIkmYu_W7RIf7kwlCudCHDgyzZwAQQC2DKQ8wU8xACIZhaJXqDGRNIluUwm0jYS1RRiVzHrb0p_TJDVgv1WPHx9lXfoOPRy3J3LJeQ6tPFTdHKdwxVhawrVpdemHK6VJ0HJd0VaOiIum5A3csZF-N2xRFzSggI19bg1mjYVYyNgdDfGyvuyxXzu4fOTtULPGRl5ajMXt8icFN4T3leNyRhVsbFnbEEJNfriU50oE_UzdU1zK_zK8VRjsQ5az6UnrlAu8d8EZNsLS6fAGDPPeA5NabLAhAUF78KdWkINMiFM3zChs7w7z6lPjL2jmtVV1o5_YIQ-0acPR7aZpRDyhbawpjhdJgL-2lwo6kueqyEYeaZTphDxVQprS9PppY9bmmdGsn7ZMTioW49I_khzcDasJz4nJjGJz46KPmzVk2iE8xFDjrAPzGZkxwOquZzg2ghZfXvM-S0KAGxTnnZQEzMow2fRIJNAZU5V8GY8a52O7itRjrltTeM4sfhTk4d-sTTAnM_aPgiHdgYDgJnxU6bEefVMcp5DluMFNiM2Cxu-RqTiVaadLE8KY56Lo--xsmSGiKrQwtQ4tu-ZAb_xutBv2shQHEqOOJpABZJeJU6svru_B0i49iVtAV2-YGVmjw1S3rzAEApZuPaPZMY-SdlnOJ1pKZ5tqyy8n9cFdvuPM3N7ZrpRymiGSq3hFzMfR1XVJl4M19FPpBqBMnWMg8vK72AK_PKh3SKjvPRvyuhf3VNx0EvX-RyZzi6_28yr0lxnQvo84IAOibbWQA6MClUyVtzMnTCO11ZtUo5oO17jYPBcBywaB2jy4vZ8cUo1wvSV1syh6N-SwDHMbsIIRbnwJaii8uw8uwk6bQph3dX0XxSKDhIO7Kd5LG70CkjasAq415bqMxhU_W6u0wGfYa_ibp9c2l7BgA1wpftDu3XamXOtDIuihHXyz20rx9OxhMeGOoXQzY89IQQb7Zbr0cLvW2BuV7JPTBTXI3q6yBhkQ&amp;ft[fbfeed_location]=1&amp;__md__=0" class="img _8o _8s UFIImageBlockImage" onmousedown="this.href = this.href.replace('__md__=0', '__md__=1');"><img data-reactid=".c.1:3:1:$comment10152261737404470_29690163:0.0.$left.0.0" alt="" class="img UFIActorImage _54ru" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn2/t5/s32x32/592216_366521186820707_222831955_q.jpg"></a></div>
+                                                                  <div data-reactid=".c.1:3:1:$comment10152261737404470_29690163:0.0.$right" class="">
+                                                                     <div data-reactid=".c.1:3:1:$comment10152261737404470_29690163:0.0.$right.0" class="clearfix UFIImageBlockContent _42ef">
+                                                                        <div data-reactid=".c.1:3:1:$comment10152261737404470_29690163:0.0.$right.0.$right" class="_ohf rfloat"><a data-reactid=".c.1:3:1:$comment10152261737404470_29690163:0.0.$right.0.$right.0" tabindex="-1" class="uiCloseButton UFICommentCloseButtonFake" role="button" href="#"><img data-reactid=".c.1:3:1:$comment10152261737404470_29690163:0.0.$right.0.$right.0.0" src="/images/chat/tab/close.png" class="img uiCloseButtonHighContrast"></a></div>
+                                                                        <div data-reactid=".c.1:3:1:$comment10152261737404470_29690163:0.0.$right.0.$left" class="">
+                                                                           <div data-reactid=".c.1:3:1:$comment10152261737404470_29690163:0.0.$right.0.$left.0" class="UFICommentContentBlock">
+                                                                              <div data-reactid=".c.1:3:1:$comment10152261737404470_29690163:0.0.$right.0.$left.0.0" class="UFICommentContent"><a data-reactid=".c.1:3:1:$comment10152261737404470_29690163:0.0.$right.0.$left.0.0.0:$author" data-ft="{&quot;tn&quot;:&quot;;&quot;}" data-hovercard="/ajax/hovercard/hovercard.php?id=366521186820707&amp;extragetparams=%7B%22hc_location%22%3A%22ufi%22%7D" href="https://www.facebook.com/pages/Health-Designs-Depress%C3%A3o/366521186820707?ft[tn]=%3BR0]&amp;ft[qid]=5985083167438739933&amp;ft[mf_story_key]=-4917806268519240029&amp;ft[ei]=AQKrgjNbLLIdpOsGXjk213Opum3yqI71X06jKAR1S_aYG105s9Z17EFOle-LkCAj8hclQbUTywTFAEILJJDyI7CTyaWFD_R7j1u7ZxQY9T4-ODP68scE-Gbhz8G8hyPaIMDKoHQSdEdMkcCwBiBCbVmi8bftXYP50EBbIXF_zADYupuNyx8DZhYNXQgNM0yG_zkHg1CD61lR6SP4d73Cd9Uyg283stmaqR-XjdX5MHR7z_aaiZW6LWpBV4I9_iHwhBqMgqp3zAMogxR6QUWLz4c-cKn2KzkXL27hmdc2ylapOnBrSmts-HIBlkDC4o7g0HWeSqh8O8EVDcb_d8JDq2FYHyaLZMIuqpkPQVxbdZvXY9AbDbAFEYT2aUshrrvVEeEp_GhCESNafBo8Gy0Bcj0uC92iY6PsrotattBBxaLdpA0Gbp3OzQ-As8mw-eeVVET1PfUtebJmDgmkeQtQl22G2WRGjl3Mxtwio02ILRzJ7KTxMl2RnL9Q6EzO7Q-RWeQABbRhQqb9ThEOOTwJrhSXwtZlKqLNiObGz84uNZQhJhFZyPfseWXgJSOuIvvGlcce0O_QEBm5m7zgLZ979M90tDPa77b0U83QC-UCuaS7u897hZ1t2yRcHdMlW8aQs0aTT8xNg3vPIjxIHvMuFoWqSFqsc4xZ-v3g6BVJwGVIA1D3S78tU0QwTuPthRfkYyvzOF0lL0F5BRw7mzOUCpT7zDHkFF60uAM8zxBU3OjOLYPPwHy0jjPYShvrpDHnrHVws0ADBjplR4aeEluPx24xj3UjmVRo7iCR_EkN1neY4F-A3k2uV7Ps-1oluDoqz55WXu4HCioH4UaUtWnPWBcix2gMj-z7Ny0kjYfkJ0OdP9J0o_Y4X39wcKbiRM-8E-D4WhFICaePou2_dwBYL_RUkoeG-mHgZcClkr6J6PY26uoqWnIDPIxzojU0GwkzPYiTr7V026LB1m6tPGodiT9hNIP036fo_UM4U7401DNeffBcn7VQZlbrSzG6aMbCk31riIPgrFgErthe7HXZCbhL9lZ-31e-OIBuhXYOusld_BDn7AviS5lnp_4wCWNGaXUsvHlqjiThxH5jw_5eKo0ZDwIn4bgnXGDXHOz8siKk22uFU94u8rtasIENquP0XDR-ittqC8NiAd7n7RipOIJvIkmYu_W7RIf7kwlCudCHDgyzZwAQQC2DKQ8wU8xACIZhaJXqDGRNIluUwm0jYS1RRiVzHrb0p_TJDVgv1WPHx9lXfoOPRy3J3LJeQ6tPFTdHKdwxVhawrVpdemHK6VJ0HJd0VaOiIum5A3csZF-N2xRFzSggI19bg1mjYVYyNgdDfGyvuyxXzu4fOTtULPGRl5ajMXt8icFN4T3leNyRhVsbFnbEEJNfriU50oE_UzdU1zK_zK8VRjsQ5az6UnrlAu8d8EZNsLS6fAGDPPeA5NabLAhAUF78KdWkINMiFM3zChs7w7z6lPjL2jmtVV1o5_YIQ-0acPR7aZpRDyhbawpjhdJgL-2lwo6kueqyEYeaZTphDxVQprS9PppY9bmmdGsn7ZMTioW49I_khzcDasJz4nJjGJz46KPmzVk2iE8xFDjrAPzGZkxwOquZzg2ghZfXvM-S0KAGxTnnZQEzMow2fRIJNAZU5V8GY8a52O7itRjrltTeM4sfhTk4d-sTTAnM_aPgiHdgYDgJnxU6bEefVMcp5DluMFNiM2Cxu-RqTiVaadLE8KY56Lo--xsmSGiKrQwtQ4tu-ZAb_xutBv2shQHEqOOJpABZJeJU6svru_B0i49iVtAV2-YGVmjw1S3rzAEApZuPaPZMY-SdlnOJ1pKZ5tqyy8n9cFdvuPM3N7ZrpRymiGSq3hFzMfR1XVJl4M19FPpBqBMnWMg8vK72AK_PKh3SKjvPRvyuhf3VNx0EvX-RyZzi6_28yr0lxnQvo84IAOibbWQA6MClUyVtzMnTCO11ZtUo5oO17jYPBcBywaB2jy4vZ8cUo1wvSV1syh6N-SwDHMbsIIRbnwJaii8uw8uwk6bQph3dX0XxSKDhIO7Kd5LG70CkjasAq415bqMxhU_W6u0wGfYa_ibp9c2l7BgA1wpftDu3XamXOtDIuihHXyz20rx9OxhMeGOoXQzY89IQQb7Zbr0cLvW2BuV7JPTBTXI3q6yBhkQ&amp;ft[fbfeed_location]=1&amp;__md__=0" class="UFICommentActorName" onmousedown="this.href = this.href.replace('__md__=0', '__md__=1');">Health Designs Depressão</a><span data-reactid=".c.1:3:1:$comment10152261737404470_29690163:0.0.$right.0.$left.0.0.0:2"> </span><span data-reactid=".c.1:3:1:$comment10152261737404470_29690163:0.0.$right.0.$left.0.0.0:$comment-body" data-ft="{&quot;tn&quot;:&quot;K&quot;}"><span data-reactid=".c.1:3:1:$comment10152261737404470_29690163:0.0.$right.0.$left.0.0.0:$comment-body.0"><a data-reactid=".c.1:3:1:$comment10152261737404470_29690163:0.0.$right.0.$left.0.0.0:$comment-body.0.$range0:0" target="_blank" dir="ltr" class="profileLink" href="https://www.facebook.com/366521186820707/photos/a.366527856820040.1073741827.366521186820707/366688793470613/?type=1&amp;ft[tn]=KR0]&amp;ft[qid]=5985083167438739933&amp;ft[mf_story_key]=-4917806268519240029&amp;ft[ei]=AQKrgjNbLLIdpOsGXjk213Opum3yqI71X06jKAR1S_aYG105s9Z17EFOle-LkCAj8hclQbUTywTFAEILJJDyI7CTyaWFD_R7j1u7ZxQY9T4-ODP68scE-Gbhz8G8hyPaIMDKoHQSdEdMkcCwBiBCbVmi8bftXYP50EBbIXF_zADYupuNyx8DZhYNXQgNM0yG_zkHg1CD61lR6SP4d73Cd9Uyg283stmaqR-XjdX5MHR7z_aaiZW6LWpBV4I9_iHwhBqMgqp3zAMogxR6QUWLz4c-cKn2KzkXL27hmdc2ylapOnBrSmts-HIBlkDC4o7g0HWeSqh8O8EVDcb_d8JDq2FYHyaLZMIuqpkPQVxbdZvXY9AbDbAFEYT2aUshrrvVEeEp_GhCESNafBo8Gy0Bcj0uC92iY6PsrotattBBxaLdpA0Gbp3OzQ-As8mw-eeVVET1PfUtebJmDgmkeQtQl22G2WRGjl3Mxtwio02ILRzJ7KTxMl2RnL9Q6EzO7Q-RWeQABbRhQqb9ThEOOTwJrhSXwtZlKqLNiObGz84uNZQhJhFZyPfseWXgJSOuIvvGlcce0O_QEBm5m7zgLZ979M90tDPa77b0U83QC-UCuaS7u897hZ1t2yRcHdMlW8aQs0aTT8xNg3vPIjxIHvMuFoWqSFqsc4xZ-v3g6BVJwGVIA1D3S78tU0QwTuPthRfkYyvzOF0lL0F5BRw7mzOUCpT7zDHkFF60uAM8zxBU3OjOLYPPwHy0jjPYShvrpDHnrHVws0ADBjplR4aeEluPx24xj3UjmVRo7iCR_EkN1neY4F-A3k2uV7Ps-1oluDoqz55WXu4HCioH4UaUtWnPWBcix2gMj-z7Ny0kjYfkJ0OdP9J0o_Y4X39wcKbiRM-8E-D4WhFICaePou2_dwBYL_RUkoeG-mHgZcClkr6J6PY26uoqWnIDPIxzojU0GwkzPYiTr7V026LB1m6tPGodiT9hNIP036fo_UM4U7401DNeffBcn7VQZlbrSzG6aMbCk31riIPgrFgErthe7HXZCbhL9lZ-31e-OIBuhXYOusld_BDn7AviS5lnp_4wCWNGaXUsvHlqjiThxH5jw_5eKo0ZDwIn4bgnXGDXHOz8siKk22uFU94u8rtasIENquP0XDR-ittqC8NiAd7n7RipOIJvIkmYu_W7RIf7kwlCudCHDgyzZwAQQC2DKQ8wU8xACIZhaJXqDGRNIluUwm0jYS1RRiVzHrb0p_TJDVgv1WPHx9lXfoOPRy3J3LJeQ6tPFTdHKdwxVhawrVpdemHK6VJ0HJd0VaOiIum5A3csZF-N2xRFzSggI19bg1mjYVYyNgdDfGyvuyxXzu4fOTtULPGRl5ajMXt8icFN4T3leNyRhVsbFnbEEJNfriU50oE_UzdU1zK_zK8VRjsQ5az6UnrlAu8d8EZNsLS6fAGDPPeA5NabLAhAUF78KdWkINMiFM3zChs7w7z6lPjL2jmtVV1o5_YIQ-0acPR7aZpRDyhbawpjhdJgL-2lwo6kueqyEYeaZTphDxVQprS9PppY9bmmdGsn7ZMTioW49I_khzcDasJz4nJjGJz46KPmzVk2iE8xFDjrAPzGZkxwOquZzg2ghZfXvM-S0KAGxTnnZQEzMow2fRIJNAZU5V8GY8a52O7itRjrltTeM4sfhTk4d-sTTAnM_aPgiHdgYDgJnxU6bEefVMcp5DluMFNiM2Cxu-RqTiVaadLE8KY56Lo--xsmSGiKrQwtQ4tu-ZAb_xutBv2shQHEqOOJpABZJeJU6svru_B0i49iVtAV2-YGVmjw1S3rzAEApZuPaPZMY-SdlnOJ1pKZ5tqyy8n9cFdvuPM3N7ZrpRymiGSq3hFzMfR1XVJl4M19FPpBqBMnWMg8vK72AK_PKh3SKjvPRvyuhf3VNx0EvX-RyZzi6_28yr0lxnQvo84IAOibbWQA6MClUyVtzMnTCO11ZtUo5oO17jYPBcBywaB2jy4vZ8cUo1wvSV1syh6N-SwDHMbsIIRbnwJaii8uw8uwk6bQph3dX0XxSKDhIO7Kd5LG70CkjasAq415bqMxhU_W6u0wGfYa_ibp9c2l7BgA1wpftDu3XamXOtDIuihHXyz20rx9OxhMeGOoXQzY89IQQb7Zbr0cLvW2BuV7JPTBTXI3q6yBhkQ&amp;ft[fbfeed_location]=1&amp;__md__=0" onmousedown="this.href = this.href.replace('__md__=0', '__md__=1');">https://www.facebook.com/366521186820707/photos/a.366527856820040.1073741827.366521186820707/366688793470613/?type=1&amp;theater</a></span></span><span data-reactid=".c.1:3:1:$comment10152261737404470_29690163:0.0.$right.0.$left.0.0.3"></span></div>
+                                                                              <div data-reactid=".c.1:3:1:$comment10152261737404470_29690163:0.0.$right.0.$left.0.3" class="fsm fwn fcg UFICommentActions"><span data-reactid=".c.1:3:1:$comment10152261737404470_29690163:0.0.$right.0.$left.0.3.$metadata:0"><a data-reactid=".c.1:3:1:$comment10152261737404470_29690163:0.0.$right.0.$left.0.3.$metadata:0.$timestamp-message" data-ft="{&quot;tn&quot;:&quot;N&quot;}" href="https://www.facebook.com/healthdesigns/posts/10152261737404470?comment_id=29690163&amp;offset=0&amp;total_comments=11&amp;ft[tn]=NR0]&amp;ft[qid]=5985083167438739933&amp;ft[mf_story_key]=-4917806268519240029&amp;ft[ei]=AQKrgjNbLLIdpOsGXjk213Opum3yqI71X06jKAR1S_aYG105s9Z17EFOle-LkCAj8hclQbUTywTFAEILJJDyI7CTyaWFD_R7j1u7ZxQY9T4-ODP68scE-Gbhz8G8hyPaIMDKoHQSdEdMkcCwBiBCbVmi8bftXYP50EBbIXF_zADYupuNyx8DZhYNXQgNM0yG_zkHg1CD61lR6SP4d73Cd9Uyg283stmaqR-XjdX5MHR7z_aaiZW6LWpBV4I9_iHwhBqMgqp3zAMogxR6QUWLz4c-cKn2KzkXL27hmdc2ylapOnBrSmts-HIBlkDC4o7g0HWeSqh8O8EVDcb_d8JDq2FYHyaLZMIuqpkPQVxbdZvXY9AbDbAFEYT2aUshrrvVEeEp_GhCESNafBo8Gy0Bcj0uC92iY6PsrotattBBxaLdpA0Gbp3OzQ-As8mw-eeVVET1PfUtebJmDgmkeQtQl22G2WRGjl3Mxtwio02ILRzJ7KTxMl2RnL9Q6EzO7Q-RWeQABbRhQqb9ThEOOTwJrhSXwtZlKqLNiObGz84uNZQhJhFZyPfseWXgJSOuIvvGlcce0O_QEBm5m7zgLZ979M90tDPa77b0U83QC-UCuaS7u897hZ1t2yRcHdMlW8aQs0aTT8xNg3vPIjxIHvMuFoWqSFqsc4xZ-v3g6BVJwGVIA1D3S78tU0QwTuPthRfkYyvzOF0lL0F5BRw7mzOUCpT7zDHkFF60uAM8zxBU3OjOLYPPwHy0jjPYShvrpDHnrHVws0ADBjplR4aeEluPx24xj3UjmVRo7iCR_EkN1neY4F-A3k2uV7Ps-1oluDoqz55WXu4HCioH4UaUtWnPWBcix2gMj-z7Ny0kjYfkJ0OdP9J0o_Y4X39wcKbiRM-8E-D4WhFICaePou2_dwBYL_RUkoeG-mHgZcClkr6J6PY26uoqWnIDPIxzojU0GwkzPYiTr7V026LB1m6tPGodiT9hNIP036fo_UM4U7401DNeffBcn7VQZlbrSzG6aMbCk31riIPgrFgErthe7HXZCbhL9lZ-31e-OIBuhXYOusld_BDn7AviS5lnp_4wCWNGaXUsvHlqjiThxH5jw_5eKo0ZDwIn4bgnXGDXHOz8siKk22uFU94u8rtasIENquP0XDR-ittqC8NiAd7n7RipOIJvIkmYu_W7RIf7kwlCudCHDgyzZwAQQC2DKQ8wU8xACIZhaJXqDGRNIluUwm0jYS1RRiVzHrb0p_TJDVgv1WPHx9lXfoOPRy3J3LJeQ6tPFTdHKdwxVhawrVpdemHK6VJ0HJd0VaOiIum5A3csZF-N2xRFzSggI19bg1mjYVYyNgdDfGyvuyxXzu4fOTtULPGRl5ajMXt8icFN4T3leNyRhVsbFnbEEJNfriU50oE_UzdU1zK_zK8VRjsQ5az6UnrlAu8d8EZNsLS6fAGDPPeA5NabLAhAUF78KdWkINMiFM3zChs7w7z6lPjL2jmtVV1o5_YIQ-0acPR7aZpRDyhbawpjhdJgL-2lwo6kueqyEYeaZTphDxVQprS9PppY9bmmdGsn7ZMTioW49I_khzcDasJz4nJjGJz46KPmzVk2iE8xFDjrAPzGZkxwOquZzg2ghZfXvM-S0KAGxTnnZQEzMow2fRIJNAZU5V8GY8a52O7itRjrltTeM4sfhTk4d-sTTAnM_aPgiHdgYDgJnxU6bEefVMcp5DluMFNiM2Cxu-RqTiVaadLE8KY56Lo--xsmSGiKrQwtQ4tu-ZAb_xutBv2shQHEqOOJpABZJeJU6svru_B0i49iVtAV2-YGVmjw1S3rzAEApZuPaPZMY-SdlnOJ1pKZ5tqyy8n9cFdvuPM3N7ZrpRymiGSq3hFzMfR1XVJl4M19FPpBqBMnWMg8vK72AK_PKh3SKjvPRvyuhf3VNx0EvX-RyZzi6_28yr0lxnQvo84IAOibbWQA6MClUyVtzMnTCO11ZtUo5oO17jYPBcBywaB2jy4vZ8cUo1wvSV1syh6N-SwDHMbsIIRbnwJaii8uw8uwk6bQph3dX0XxSKDhIO7Kd5LG70CkjasAq415bqMxhU_W6u0wGfYa_ibp9c2l7BgA1wpftDu3XamXOtDIuihHXyz20rx9OxhMeGOoXQzY89IQQb7Zbr0cLvW2BuV7JPTBTXI3q6yBhkQ&amp;ft[fbfeed_location]=1&amp;__md__=0" class="uiLinkSubtle" onmousedown="this.href = this.href.replace('__md__=0', '__md__=1');"><abbr data-reactid=".c.1:3:1:$comment10152261737404470_29690163:0.0.$right.0.$left.0.3.$metadata:0.$timestamp-message.0" data-utime="1393469582" title="Quarta, 26 de fevereiro de 2014 às 23:53" class="livetimestamp">há 11 horas</abbr></a></span><span data-reactid=".c.1:3:1:$comment10152261737404470_29690163:0.0.$right.0.$left.0.3.$likeToggle:0:$MIDDOT:0"> · </span><a data-reactid=".c.1:3:1:$comment10152261737404470_29690163:0.0.$right.0.$left.0.3.$likeToggle:0:$action:0" title="Curtir este comentário" data-ft="{&quot;tn&quot;:&quot;&gt;&quot;}" role="button" href="#" class="UFILikeLink">Curtir</a></div>
+                                                                              <a data-reactid=".c.1:3:1:$comment10152261737404470_29690163:0.0.$right.0.$left.0.4" class="uiCloseButton UFICommentCloseButton" data-tooltip-alignh="center" data-hover="tooltip" aria-label="Ocultar" role="button" href="#"><img data-reactid=".c.1:3:1:$comment10152261737404470_29690163:0.0.$right.0.$left.0.4.0" src="/images/chat/tab/close.png" class="img uiCloseButtonHighContrast"></a>
+                                                                           </div>
+                                                                        </div>
+                                                                     </div>
+                                                                  </div>
+                                                               </div>
+                                                            </li>
+                                                            <li data-reactid=".c.1:3:1:$comment10152261737404470_29691972:0" data-ft="{&quot;tn&quot;:&quot;R&quot;}" class="UFIRow UFIComment display UFILastComment UFILastCommentComponent">
+                                                               <div data-reactid=".c.1:3:1:$comment10152261737404470_29691972:0.0" class="clearfix">
+                                                                  <div data-reactid=".c.1:3:1:$comment10152261737404470_29691972:0.0.$left" class="_ohe lfloat"><a data-reactid=".c.1:3:1:$comment10152261737404470_29691972:0.0.$left.0" aria-hidden="true" tabindex="-1" data-ft="{&quot;tn&quot;:&quot;T&quot;}" data-hovercard="/ajax/hovercard/hovercard.php?id=100003759133698&amp;extragetparams=%7B%22hc_location%22%3A%22ufi%22%7D" href="https://www.facebook.com/ronaldo.idalencio?ft[tn]=TR]&amp;ft[qid]=5985083167438739933&amp;ft[mf_story_key]=-4917806268519240029&amp;ft[ei]=AQKrgjNbLLIdpOsGXjk213Opum3yqI71X06jKAR1S_aYG105s9Z17EFOle-LkCAj8hclQbUTywTFAEILJJDyI7CTyaWFD_R7j1u7ZxQY9T4-ODP68scE-Gbhz8G8hyPaIMDKoHQSdEdMkcCwBiBCbVmi8bftXYP50EBbIXF_zADYupuNyx8DZhYNXQgNM0yG_zkHg1CD61lR6SP4d73Cd9Uyg283stmaqR-XjdX5MHR7z_aaiZW6LWpBV4I9_iHwhBqMgqp3zAMogxR6QUWLz4c-cKn2KzkXL27hmdc2ylapOnBrSmts-HIBlkDC4o7g0HWeSqh8O8EVDcb_d8JDq2FYHyaLZMIuqpkPQVxbdZvXY9AbDbAFEYT2aUshrrvVEeEp_GhCESNafBo8Gy0Bcj0uC92iY6PsrotattBBxaLdpA0Gbp3OzQ-As8mw-eeVVET1PfUtebJmDgmkeQtQl22G2WRGjl3Mxtwio02ILRzJ7KTxMl2RnL9Q6EzO7Q-RWeQABbRhQqb9ThEOOTwJrhSXwtZlKqLNiObGz84uNZQhJhFZyPfseWXgJSOuIvvGlcce0O_QEBm5m7zgLZ979M90tDPa77b0U83QC-UCuaS7u897hZ1t2yRcHdMlW8aQs0aTT8xNg3vPIjxIHvMuFoWqSFqsc4xZ-v3g6BVJwGVIA1D3S78tU0QwTuPthRfkYyvzOF0lL0F5BRw7mzOUCpT7zDHkFF60uAM8zxBU3OjOLYPPwHy0jjPYShvrpDHnrHVws0ADBjplR4aeEluPx24xj3UjmVRo7iCR_EkN1neY4F-A3k2uV7Ps-1oluDoqz55WXu4HCioH4UaUtWnPWBcix2gMj-z7Ny0kjYfkJ0OdP9J0o_Y4X39wcKbiRM-8E-D4WhFICaePou2_dwBYL_RUkoeG-mHgZcClkr6J6PY26uoqWnIDPIxzojU0GwkzPYiTr7V026LB1m6tPGodiT9hNIP036fo_UM4U7401DNeffBcn7VQZlbrSzG6aMbCk31riIPgrFgErthe7HXZCbhL9lZ-31e-OIBuhXYOusld_BDn7AviS5lnp_4wCWNGaXUsvHlqjiThxH5jw_5eKo0ZDwIn4bgnXGDXHOz8siKk22uFU94u8rtasIENquP0XDR-ittqC8NiAd7n7RipOIJvIkmYu_W7RIf7kwlCudCHDgyzZwAQQC2DKQ8wU8xACIZhaJXqDGRNIluUwm0jYS1RRiVzHrb0p_TJDVgv1WPHx9lXfoOPRy3J3LJeQ6tPFTdHKdwxVhawrVpdemHK6VJ0HJd0VaOiIum5A3csZF-N2xRFzSggI19bg1mjYVYyNgdDfGyvuyxXzu4fOTtULPGRl5ajMXt8icFN4T3leNyRhVsbFnbEEJNfriU50oE_UzdU1zK_zK8VRjsQ5az6UnrlAu8d8EZNsLS6fAGDPPeA5NabLAhAUF78KdWkINMiFM3zChs7w7z6lPjL2jmtVV1o5_YIQ-0acPR7aZpRDyhbawpjhdJgL-2lwo6kueqyEYeaZTphDxVQprS9PppY9bmmdGsn7ZMTioW49I_khzcDasJz4nJjGJz46KPmzVk2iE8xFDjrAPzGZkxwOquZzg2ghZfXvM-S0KAGxTnnZQEzMow2fRIJNAZU5V8GY8a52O7itRjrltTeM4sfhTk4d-sTTAnM_aPgiHdgYDgJnxU6bEefVMcp5DluMFNiM2Cxu-RqTiVaadLE8KY56Lo--xsmSGiKrQwtQ4tu-ZAb_xutBv2shQHEqOOJpABZJeJU6svru_B0i49iVtAV2-YGVmjw1S3rzAEApZuPaPZMY-SdlnOJ1pKZ5tqyy8n9cFdvuPM3N7ZrpRymiGSq3hFzMfR1XVJl4M19FPpBqBMnWMg8vK72AK_PKh3SKjvPRvyuhf3VNx0EvX-RyZzi6_28yr0lxnQvo84IAOibbWQA6MClUyVtzMnTCO11ZtUo5oO17jYPBcBywaB2jy4vZ8cUo1wvSV1syh6N-SwDHMbsIIRbnwJaii8uw8uwk6bQph3dX0XxSKDhIO7Kd5LG70CkjasAq415bqMxhU_W6u0wGfYa_ibp9c2l7BgA1wpftDu3XamXOtDIuihHXyz20rx9OxhMeGOoXQzY89IQQb7Zbr0cLvW2BuV7JPTBTXI3q6yBhkQ&amp;ft[fbfeed_location]=1&amp;__md__=0" class="img _8o _8s UFIImageBlockImage" onmousedown="this.href = this.href.replace('__md__=0', '__md__=1');"><img data-reactid=".c.1:3:1:$comment10152261737404470_29691972:0.0.$left.0.0" alt="" class="img UFIActorImage _54ru" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc1/t5/s32x32/369040_100003759133698_640716538_q.jpg"></a></div>
+                                                                  <div data-reactid=".c.1:3:1:$comment10152261737404470_29691972:0.0.$right" class="">
+                                                                     <div data-reactid=".c.1:3:1:$comment10152261737404470_29691972:0.0.$right.0" class="clearfix UFIImageBlockContent _42ef">
+                                                                        <div data-reactid=".c.1:3:1:$comment10152261737404470_29691972:0.0.$right.0.$right" class="_ohf rfloat"><a data-reactid=".c.1:3:1:$comment10152261737404470_29691972:0.0.$right.0.$right.0" tabindex="-1" class="uiCloseButton UFICommentCloseButtonFake" role="button" href="#"><img data-reactid=".c.1:3:1:$comment10152261737404470_29691972:0.0.$right.0.$right.0.0" src="/images/chat/tab/close.png" class="img uiCloseButtonHighContrast"></a></div>
+                                                                        <div data-reactid=".c.1:3:1:$comment10152261737404470_29691972:0.0.$right.0.$left" class="">
+                                                                           <div data-reactid=".c.1:3:1:$comment10152261737404470_29691972:0.0.$right.0.$left.0" class="UFICommentContentBlock">
+                                                                              <div data-reactid=".c.1:3:1:$comment10152261737404470_29691972:0.0.$right.0.$left.0.0" class="UFICommentContent"><a data-reactid=".c.1:3:1:$comment10152261737404470_29691972:0.0.$right.0.$left.0.0.0:$author" data-ft="{&quot;tn&quot;:&quot;;&quot;}" data-hovercard="/ajax/hovercard/hovercard.php?id=100003759133698&amp;extragetparams=%7B%22hc_location%22%3A%22ufi%22%7D" href="https://www.facebook.com/ronaldo.idalencio?ft[tn]=%3BR]&amp;ft[qid]=5985083167438739933&amp;ft[mf_story_key]=-4917806268519240029&amp;ft[ei]=AQKrgjNbLLIdpOsGXjk213Opum3yqI71X06jKAR1S_aYG105s9Z17EFOle-LkCAj8hclQbUTywTFAEILJJDyI7CTyaWFD_R7j1u7ZxQY9T4-ODP68scE-Gbhz8G8hyPaIMDKoHQSdEdMkcCwBiBCbVmi8bftXYP50EBbIXF_zADYupuNyx8DZhYNXQgNM0yG_zkHg1CD61lR6SP4d73Cd9Uyg283stmaqR-XjdX5MHR7z_aaiZW6LWpBV4I9_iHwhBqMgqp3zAMogxR6QUWLz4c-cKn2KzkXL27hmdc2ylapOnBrSmts-HIBlkDC4o7g0HWeSqh8O8EVDcb_d8JDq2FYHyaLZMIuqpkPQVxbdZvXY9AbDbAFEYT2aUshrrvVEeEp_GhCESNafBo8Gy0Bcj0uC92iY6PsrotattBBxaLdpA0Gbp3OzQ-As8mw-eeVVET1PfUtebJmDgmkeQtQl22G2WRGjl3Mxtwio02ILRzJ7KTxMl2RnL9Q6EzO7Q-RWeQABbRhQqb9ThEOOTwJrhSXwtZlKqLNiObGz84uNZQhJhFZyPfseWXgJSOuIvvGlcce0O_QEBm5m7zgLZ979M90tDPa77b0U83QC-UCuaS7u897hZ1t2yRcHdMlW8aQs0aTT8xNg3vPIjxIHvMuFoWqSFqsc4xZ-v3g6BVJwGVIA1D3S78tU0QwTuPthRfkYyvzOF0lL0F5BRw7mzOUCpT7zDHkFF60uAM8zxBU3OjOLYPPwHy0jjPYShvrpDHnrHVws0ADBjplR4aeEluPx24xj3UjmVRo7iCR_EkN1neY4F-A3k2uV7Ps-1oluDoqz55WXu4HCioH4UaUtWnPWBcix2gMj-z7Ny0kjYfkJ0OdP9J0o_Y4X39wcKbiRM-8E-D4WhFICaePou2_dwBYL_RUkoeG-mHgZcClkr6J6PY26uoqWnIDPIxzojU0GwkzPYiTr7V026LB1m6tPGodiT9hNIP036fo_UM4U7401DNeffBcn7VQZlbrSzG6aMbCk31riIPgrFgErthe7HXZCbhL9lZ-31e-OIBuhXYOusld_BDn7AviS5lnp_4wCWNGaXUsvHlqjiThxH5jw_5eKo0ZDwIn4bgnXGDXHOz8siKk22uFU94u8rtasIENquP0XDR-ittqC8NiAd7n7RipOIJvIkmYu_W7RIf7kwlCudCHDgyzZwAQQC2DKQ8wU8xACIZhaJXqDGRNIluUwm0jYS1RRiVzHrb0p_TJDVgv1WPHx9lXfoOPRy3J3LJeQ6tPFTdHKdwxVhawrVpdemHK6VJ0HJd0VaOiIum5A3csZF-N2xRFzSggI19bg1mjYVYyNgdDfGyvuyxXzu4fOTtULPGRl5ajMXt8icFN4T3leNyRhVsbFnbEEJNfriU50oE_UzdU1zK_zK8VRjsQ5az6UnrlAu8d8EZNsLS6fAGDPPeA5NabLAhAUF78KdWkINMiFM3zChs7w7z6lPjL2jmtVV1o5_YIQ-0acPR7aZpRDyhbawpjhdJgL-2lwo6kueqyEYeaZTphDxVQprS9PppY9bmmdGsn7ZMTioW49I_khzcDasJz4nJjGJz46KPmzVk2iE8xFDjrAPzGZkxwOquZzg2ghZfXvM-S0KAGxTnnZQEzMow2fRIJNAZU5V8GY8a52O7itRjrltTeM4sfhTk4d-sTTAnM_aPgiHdgYDgJnxU6bEefVMcp5DluMFNiM2Cxu-RqTiVaadLE8KY56Lo--xsmSGiKrQwtQ4tu-ZAb_xutBv2shQHEqOOJpABZJeJU6svru_B0i49iVtAV2-YGVmjw1S3rzAEApZuPaPZMY-SdlnOJ1pKZ5tqyy8n9cFdvuPM3N7ZrpRymiGSq3hFzMfR1XVJl4M19FPpBqBMnWMg8vK72AK_PKh3SKjvPRvyuhf3VNx0EvX-RyZzi6_28yr0lxnQvo84IAOibbWQA6MClUyVtzMnTCO11ZtUo5oO17jYPBcBywaB2jy4vZ8cUo1wvSV1syh6N-SwDHMbsIIRbnwJaii8uw8uwk6bQph3dX0XxSKDhIO7Kd5LG70CkjasAq415bqMxhU_W6u0wGfYa_ibp9c2l7BgA1wpftDu3XamXOtDIuihHXyz20rx9OxhMeGOoXQzY89IQQb7Zbr0cLvW2BuV7JPTBTXI3q6yBhkQ&amp;ft[fbfeed_location]=1&amp;__md__=0" class="UFICommentActorName" onmousedown="this.href = this.href.replace('__md__=0', '__md__=1');">Ronaldo Idalencio</a><span data-reactid=".c.1:3:1:$comment10152261737404470_29691972:0.0.$right.0.$left.0.0.0:2"> </span><span data-reactid=".c.1:3:1:$comment10152261737404470_29691972:0.0.$right.0.$left.0.0.0:$comment-body" data-ft="{&quot;tn&quot;:&quot;K&quot;}"><span data-reactid=".c.1:3:1:$comment10152261737404470_29691972:0.0.$right.0.$left.0.0.0:$comment-body.0"><span data-reactid=".c.1:3:1:$comment10152261737404470_29691972:0.0.$right.0.$left.0.0.0:$comment-body.0.$end:0:$0:0">Minha compra de agosto de 2013 chegou hoje kkkkk</span></span></span><span data-reactid=".c.1:3:1:$comment10152261737404470_29691972:0.0.$right.0.$left.0.0.3"></span></div>
+                                                                              <div data-reactid=".c.1:3:1:$comment10152261737404470_29691972:0.0.$right.0.$left.0.3" class="fsm fwn fcg UFICommentActions"><span data-reactid=".c.1:3:1:$comment10152261737404470_29691972:0.0.$right.0.$left.0.3.$metadata:0"><a data-reactid=".c.1:3:1:$comment10152261737404470_29691972:0.0.$right.0.$left.0.3.$metadata:0.$timestamp-message" data-ft="{&quot;tn&quot;:&quot;N&quot;}" href="https://www.facebook.com/healthdesigns/posts/10152261737404470?comment_id=29691972&amp;offset=0&amp;total_comments=11&amp;ft[tn]=NR]&amp;ft[qid]=5985083167438739933&amp;ft[mf_story_key]=-4917806268519240029&amp;ft[ei]=AQKrgjNbLLIdpOsGXjk213Opum3yqI71X06jKAR1S_aYG105s9Z17EFOle-LkCAj8hclQbUTywTFAEILJJDyI7CTyaWFD_R7j1u7ZxQY9T4-ODP68scE-Gbhz8G8hyPaIMDKoHQSdEdMkcCwBiBCbVmi8bftXYP50EBbIXF_zADYupuNyx8DZhYNXQgNM0yG_zkHg1CD61lR6SP4d73Cd9Uyg283stmaqR-XjdX5MHR7z_aaiZW6LWpBV4I9_iHwhBqMgqp3zAMogxR6QUWLz4c-cKn2KzkXL27hmdc2ylapOnBrSmts-HIBlkDC4o7g0HWeSqh8O8EVDcb_d8JDq2FYHyaLZMIuqpkPQVxbdZvXY9AbDbAFEYT2aUshrrvVEeEp_GhCESNafBo8Gy0Bcj0uC92iY6PsrotattBBxaLdpA0Gbp3OzQ-As8mw-eeVVET1PfUtebJmDgmkeQtQl22G2WRGjl3Mxtwio02ILRzJ7KTxMl2RnL9Q6EzO7Q-RWeQABbRhQqb9ThEOOTwJrhSXwtZlKqLNiObGz84uNZQhJhFZyPfseWXgJSOuIvvGlcce0O_QEBm5m7zgLZ979M90tDPa77b0U83QC-UCuaS7u897hZ1t2yRcHdMlW8aQs0aTT8xNg3vPIjxIHvMuFoWqSFqsc4xZ-v3g6BVJwGVIA1D3S78tU0QwTuPthRfkYyvzOF0lL0F5BRw7mzOUCpT7zDHkFF60uAM8zxBU3OjOLYPPwHy0jjPYShvrpDHnrHVws0ADBjplR4aeEluPx24xj3UjmVRo7iCR_EkN1neY4F-A3k2uV7Ps-1oluDoqz55WXu4HCioH4UaUtWnPWBcix2gMj-z7Ny0kjYfkJ0OdP9J0o_Y4X39wcKbiRM-8E-D4WhFICaePou2_dwBYL_RUkoeG-mHgZcClkr6J6PY26uoqWnIDPIxzojU0GwkzPYiTr7V026LB1m6tPGodiT9hNIP036fo_UM4U7401DNeffBcn7VQZlbrSzG6aMbCk31riIPgrFgErthe7HXZCbhL9lZ-31e-OIBuhXYOusld_BDn7AviS5lnp_4wCWNGaXUsvHlqjiThxH5jw_5eKo0ZDwIn4bgnXGDXHOz8siKk22uFU94u8rtasIENquP0XDR-ittqC8NiAd7n7RipOIJvIkmYu_W7RIf7kwlCudCHDgyzZwAQQC2DKQ8wU8xACIZhaJXqDGRNIluUwm0jYS1RRiVzHrb0p_TJDVgv1WPHx9lXfoOPRy3J3LJeQ6tPFTdHKdwxVhawrVpdemHK6VJ0HJd0VaOiIum5A3csZF-N2xRFzSggI19bg1mjYVYyNgdDfGyvuyxXzu4fOTtULPGRl5ajMXt8icFN4T3leNyRhVsbFnbEEJNfriU50oE_UzdU1zK_zK8VRjsQ5az6UnrlAu8d8EZNsLS6fAGDPPeA5NabLAhAUF78KdWkINMiFM3zChs7w7z6lPjL2jmtVV1o5_YIQ-0acPR7aZpRDyhbawpjhdJgL-2lwo6kueqyEYeaZTphDxVQprS9PppY9bmmdGsn7ZMTioW49I_khzcDasJz4nJjGJz46KPmzVk2iE8xFDjrAPzGZkxwOquZzg2ghZfXvM-S0KAGxTnnZQEzMow2fRIJNAZU5V8GY8a52O7itRjrltTeM4sfhTk4d-sTTAnM_aPgiHdgYDgJnxU6bEefVMcp5DluMFNiM2Cxu-RqTiVaadLE8KY56Lo--xsmSGiKrQwtQ4tu-ZAb_xutBv2shQHEqOOJpABZJeJU6svru_B0i49iVtAV2-YGVmjw1S3rzAEApZuPaPZMY-SdlnOJ1pKZ5tqyy8n9cFdvuPM3N7ZrpRymiGSq3hFzMfR1XVJl4M19FPpBqBMnWMg8vK72AK_PKh3SKjvPRvyuhf3VNx0EvX-RyZzi6_28yr0lxnQvo84IAOibbWQA6MClUyVtzMnTCO11ZtUo5oO17jYPBcBywaB2jy4vZ8cUo1wvSV1syh6N-SwDHMbsIIRbnwJaii8uw8uwk6bQph3dX0XxSKDhIO7Kd5LG70CkjasAq415bqMxhU_W6u0wGfYa_ibp9c2l7BgA1wpftDu3XamXOtDIuihHXyz20rx9OxhMeGOoXQzY89IQQb7Zbr0cLvW2BuV7JPTBTXI3q6yBhkQ&amp;ft[fbfeed_location]=1&amp;__md__=0" class="uiLinkSubtle" onmousedown="this.href = this.href.replace('__md__=0', '__md__=1');"><abbr data-reactid=".c.1:3:1:$comment10152261737404470_29691972:0.0.$right.0.$left.0.3.$metadata:0.$timestamp-message.0" data-utime="1393485566" title="Quinta, 27 de fevereiro de 2014 às 04:19" class="livetimestamp">há 7 horas</abbr></a></span><span data-reactid=".c.1:3:1:$comment10152261737404470_29691972:0.0.$right.0.$left.0.3.$likeToggle:0:$MIDDOT:0"> · </span><a data-reactid=".c.1:3:1:$comment10152261737404470_29691972:0.0.$right.0.$left.0.3.$likeToggle:0:$action:0" title="Curtir este comentário" data-ft="{&quot;tn&quot;:&quot;&gt;&quot;}" role="button" href="#" class="UFILikeLink">Curtir</a><span data-reactid=".c.1:3:1:$comment10152261737404470_29691972:0.0.$right.0.$left.0.3.$likeCount:0:$MIDDOT:0"> · </span><a data-reactid=".c.1:3:1:$comment10152261737404470_29691972:0.0.$right.0.$left.0.3.$likeCount:0:$action:0" href="/browse/likes?id=10152263222954470" ajaxify="/ajax/browser/dialog/likes?id=10152263222954470" data-tooltip-uri="/ajax/like/tooltip.php?comment_fbid=10152263222954470&amp;comment_from=100003759133698&amp;comment_likecount=1&amp;comment_id=10152261737404470_29691972&amp;cache_buster=0" data-tooltip-alignh="center" data-hover="tooltip" rel="dialog" role="button" class="UFICommentLikeButton"><i data-reactid=".c.1:3:1:$comment10152261737404470_29691972:0.0.$right.0.$left.0.3.$likeCount:0:$action:0.0" class="UFICommentLikeIcon"></i><span data-reactid=".c.1:3:1:$comment10152261737404470_29691972:0.0.$right.0.$left.0.3.$likeCount:0:$action:0.1">1</span></a></div>
+                                                                              <a data-reactid=".c.1:3:1:$comment10152261737404470_29691972:0.0.$right.0.$left.0.4" class="uiCloseButton UFICommentCloseButton" data-tooltip-alignh="center" data-hover="tooltip" aria-label="Ocultar" role="button" href="#"><img data-reactid=".c.1:3:1:$comment10152261737404470_29691972:0.0.$right.0.$left.0.4.0" src="/images/chat/tab/close.png" class="img uiCloseButtonHighContrast"></a>
+                                                                           </div>
+                                                                        </div>
+                                                                     </div>
+                                                                  </div>
+                                                               </div>
+                                                            </li>
+                                                            <li data-reactid=".c.1:4" data-ft="{&quot;tn&quot;:&quot;[&quot;}" class="UFIRow  UFIAddComment UFILastComponent">
+                                                               <div data-reactid=".c.1:4.0" class="clearfix UFIMentionsInputWrap">
+                                                                  <div data-reactid=".c.1:4.0.$left" class="_ohe lfloat">
+                                                                     <div data-reactid=".c.1:4.0.$left.0" class="img _8o _8r UFIImageBlockImage UFIReplyActorPhotoWrapper"><img data-reactid=".c.1:4.0.$left.0.0" alt="Washington Climaco" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/t5/s32x32/186438_100003058100735_793796532_q.jpg" class="img UFIActorImage _54ru"></div>
+                                                                  </div>
+                                                                  <div data-reactid=".c.1:4.0.$right" class="">
+                                                                     <div data-reactid=".c.1:4.0.$right.0" class="UFIImageBlockContent _42ef _8u">
+                                                                        <div data-reactid=".c.1:4.0.$right.0.0" class="UFICommentContainer">
+                                                                           <div data-reactid=".c.1:4.0.$right.0.0.0" class="UFIInputContainer">
+                                                                              <div data-reactid=".c.1:4.0.$right.0.0.0.0" class="uiMentionsInput textBoxContainer ReactLegacyMentionsInput">
+                                                                                 <div data-reactid=".c.1:4.0.$right.0.0.0.0.0" class="highlighter">
+                                                                                    <div data-reactid=".c.1:4.0.$right.0.0.0.0.0.0"><span data-reactid=".c.1:4.0.$right.0.0.0.0.0.0.0" class="highlighterContent hidden_elem"></span></div>
+                                                                                 </div>
+                                                                                 <div data-reactid=".c.1:4.0.$right.0.0.0.0.1" class="uiTypeahead mentionsTypeahead">
+                                                                                    <div data-reactid=".c.1:4.0.$right.0.0.0.0.1.0" class="wrap">
+                                                                                       <input type="hidden" data-reactid=".c.1:4.0.$right.0.0.0.0.1.0.0" class="hiddenInput" autocomplete="off">
+                                                                                       <div data-reactid=".c.1:4.0.$right.0.0.0.0.1.0.1" class="innerWrap"><textarea data-reactid=".c.1:4.0.$right.0.0.0.0.1.0.1.0" value="Escreva um comentário..." placeholder="Escreva um comentário..." title="Escreva um comentário..." class="textInput mentionsTextarea uiTextareaAutogrow uiTextareaNoResize UFIAddCommentInput DOMControl_placeholder" name="add_comment_text">Escreva um comentário...</textarea></div>
+                                                                                    </div>
+                                                                                 </div>
+                                                                                 <input type="hidden" data-reactid=".c.1:4.0.$right.0.0.0.0.2" value="" class="mentionsHidden" autocomplete="off">
+                                                                              </div>
+                                                                              <div data-reactid=".c.1:4.0.$right.0.0.0.1" class="UFICommentAttachmentButtons clearfix"></div>
+                                                                           </div>
+                                                                        </div>
+                                                                     </div>
+                                                                  </div>
+                                                               </div>
+                                                            </li>
+                                                         </ul>
+                                                      </div>
+                                                   </form>
+                                                </div>
+                                                <div data-ft="{&quot;tn&quot;:&quot;V&quot;}" id="u_0_26" class="_6a uiPopover _5pbi"><a id="u_0_2g" rel="toggle" aria-expanded="false" aria-haspopup="true" href="#" role="button" aria-label="Opções da história" class="_5pbj _p"></a></div>
+                                             </div>
+                                             <iframe width="0" scrolling="no" height="0" frameborder="0" src="/xti.php?xt=7.qid.5985083167438739933%3Amf_story_key.-4917806268519240029%3Aei.AQKrgjNbLLIdpOsGXjk213Opum3yqI71X06jKAR1S_aYG105s9Z17EFOle-LkCAj8hclQbUTywTFAEILJJDyI7CTyaWFD_R7j1u7ZxQY9T4-ODP68scE-Gbhz8G8hyPaIMDKoHQSdEdMkcCwBiBCbVmi8bftXYP50EBbIXF_zADYupuNyx8DZhYNXQgNM0yG_zkHg1CD61lR6SP4d73Cd9Uyg283stmaqR-XjdX5MHR7z_aaiZW6LWpBV4I9_iHwhBqMgqp3zAMogxR6QUWLz4c-cKn2KzkXL27hmdc2ylapOnBrSmts-HIBlkDC4o7g0HWeSqh8O8EVDcb_d8JDq2FYHyaLZMIuqpkPQVxbdZvXY9AbDbAFEYT2aUshrrvVEeEp_GhCESNafBo8Gy0Bcj0uC92iY6PsrotattBBxaLdpA0Gbp3OzQ-As8mw-eeVVET1PfUtebJmDgmkeQtQl22G2WRGjl3Mxtwio02ILRzJ7KTxMl2RnL9Q6EzO7Q-RWeQABbRhQqb9ThEOOTwJrhSXwtZlKqLNiObGz84uNZQhJhFZyPfseWXgJSOuIvvGlcce0O_QEBm5m7zgLZ979M90tDPa77b0U83QC-UCuaS7u897hZ1t2yRcHdMlW8aQs0aTT8xNg3vPIjxIHvMuFoWqSFqsc4xZ-v3g6BVJwGVIA1D3S78tU0QwTuPthRfkYyvzOF0lL0F5BRw7mzOUCpT7zDHkFF60uAM8zxBU3OjOLYPPwHy0jjPYShvrpDHnrHVws0ADBjplR4aeEluPx24xj3UjmVRo7iCR_EkN1neY4F-A3k2uV7Ps-1oluDoqz55WXu4HCioH4UaUtWnPWBcix2gMj-z7Ny0kjYfkJ0OdP9J0o_Y4X39wcKbiRM-8E-D4WhFICaePou2_dwBYL_RUkoeG-mHgZcClkr6J6PY26uoqWnIDPIxzojU0GwkzPYiTr7V026LB1m6tPGodiT9hNIP036fo_UM4U7401DNeffBcn7VQZlbrSzG6aMbCk31riIPgrFgErthe7HXZCbhL9lZ-31e-OIBuhXYOusld_BDn7AviS5lnp_4wCWNGaXUsvHlqjiThxH5jw_5eKo0ZDwIn4bgnXGDXHOz8siKk22uFU94u8rtasIENquP0XDR-ittqC8NiAd7n7RipOIJvIkmYu_W7RIf7kwlCudCHDgyzZwAQQC2DKQ8wU8xACIZhaJXqDGRNIluUwm0jYS1RRiVzHrb0p_TJDVgv1WPHx9lXfoOPRy3J3LJeQ6tPFTdHKdwxVhawrVpdemHK6VJ0HJd0VaOiIum5A3csZF-N2xRFzSggI19bg1mjYVYyNgdDfGyvuyxXzu4fOTtULPGRl5ajMXt8icFN4T3leNyRhVsbFnbEEJNfriU50oE_UzdU1zK_zK8VRjsQ5az6UnrlAu8d8EZNsLS6fAGDPPeA5NabLAhAUF78KdWkINMiFM3zChs7w7z6lPjL2jmtVV1o5_YIQ-0acPR7aZpRDyhbawpjhdJgL-2lwo6kueqyEYeaZTphDxVQprS9PppY9bmmdGsn7ZMTioW49I_khzcDasJz4nJjGJz46KPmzVk2iE8xFDjrAPzGZkxwOquZzg2ghZfXvM-S0KAGxTnnZQEzMow2fRIJNAZU5V8GY8a52O7itRjrltTeM4sfhTk4d-sTTAnM_aPgiHdgYDgJnxU6bEefVMcp5DluMFNiM2Cxu-RqTiVaadLE8KY56Lo--xsmSGiKrQwtQ4tu-ZAb_xutBv2shQHEqOOJpABZJeJU6svru_B0i49iVtAV2-YGVmjw1S3rzAEApZuPaPZMY-SdlnOJ1pKZ5tqyy8n9cFdvuPM3N7ZrpRymiGSq3hFzMfR1XVJl4M19FPpBqBMnWMg8vK72AK_PKh3SKjvPRvyuhf3VNx0EvX-RyZzi6_28yr0lxnQvo84IAOibbWQA6MClUyVtzMnTCO11ZtUo5oO17jYPBcBywaB2jy4vZ8cUo1wvSV1syh6N-SwDHMbsIIRbnwJaii8uw8uwk6bQph3dX0XxSKDhIO7Kd5LG70CkjasAq415bqMxhU_W6u0wGfYa_ibp9c2l7BgA1wpftDu3XamXOtDIuihHXyz20rx9OxhMeGOoXQzY89IQQb7Zbr0cLvW2BuV7JPTBTXI3q6yBhkQ" class="fbEmuTracking"></iframe>
+                                          </div>
+                                          <div id="u_0_24" data-timestamp="1393510735" data-dedupekey="1524453756358394754" data-cursor="MTM5MzUxMDc2NjoxMzkzNTEwNzY2OjM6MTUyNDQ1Mzc1NjM1ODM5NDc1NDoxMzkzNTEwNzM1OjA=" data-ft="{&quot;qid&quot;:&quot;5985083167438739933&quot;,&quot;mf_story_key&quot;:&quot;1524453756358394754&quot;,&quot;fbfeed_location&quot;:1}" class="_5jmm _5pat _5uch" data-insertion-position="2">
+                                             <div class="clearfix userContentWrapper _5pcr">
+                                                <a data-hovercard="/ajax/hovercard/user.php?id=100002162882809" data-ft="{&quot;tn&quot;:&quot;m&quot;}" href="https://www.facebook.com/andrezza.c.faria" class="_5pb8"><img alt="" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn2/t5/211525_100002162882809_750104634_q.jpg" class="_s0 _5xib _rw img"></a>
+                                                <div class="_5pax">
+                                                   <h5 data-ft="{&quot;tn&quot;:&quot;C&quot;}" class="_5pbw">
+                                                      <div class="fwn fcg"><span class="fcg"><span class="fwb"><a data-hovercard="/ajax/hovercard/user.php?id=100002162882809" data-ft="{&quot;tn&quot;:&quot;l&quot;}" href="https://www.facebook.com/andrezza.c.faria" class="profileLink">Andrezza C. Faria</a></span> compartilhou a <a data-ft="{&quot;tn&quot;:&quot;E&quot;}" href="https://www.facebook.com/photo.php?fbid=674954782571906&amp;set=a.568840163183369.1073741832.100001721728318&amp;type=1" class="profileLink">foto</a> de <a data-hovercard="/ajax/hovercard/user.php?id=100001721728318" data-ft="{&quot;tn&quot;:&quot;l&quot;}" href="https://www.facebook.com/edgar.humberto.902" class="profileLink">Edgar Humberto</a>.</span></div>
+                                                   </h5>
+                                                   <div data-ft="{&quot;tn&quot;:&quot;K&quot;}" class="mbs _5pbx userContent">Kkkkkk!!! Cuidadooo</div>
+                                                   <div>
+                                                      <div class="_5r69">
+                                                         <div class="mvm">
+                                                            <div data-ft="{&quot;tn&quot;:&quot;H&quot;}" class="_5ys3">
+                                                               <div class="clearfix _5pb_ _2-ha mvm">
+                                                                  <a data-ft="{&quot;tn&quot;:&quot;E&quot;}" ajaxify="https://www.facebook.com/photo.php?fbid=674954782571906&amp;set=a.568840163183369.1073741832.100001721728318&amp;type=1&amp;src=https%3A%2F%2Fscontent-b-atl.xx.fbcdn.net%2Fhphotos-prn1%2Ft1%2F1962733_674954782571906_1665593591_n.jpg&amp;size=508%2C460&amp;source=12" rel="theater" href="https://www.facebook.com/photo.php?fbid=674954782571906&amp;set=a.568840163183369.1073741832.100001721728318&amp;type=1" class="_5pc0 _2-ha _5dec">
+                                                                     <div style="width:353px;height:320px;" class="uiScaledImageContainer _5pc3"><img width="353" height="320" alt="Fato." src="https://scontent-b-atl.xx.fbcdn.net/hphotos-prn1/t1/p320x320/1962733_674954782571906_1665593591_n.jpg" class="scaledImageFitWidth img"></div>
+                                                                  </a>
+                                                               </div>
+                                                            </div>
+                                                            <div class="plm _5pcm">
+                                                               <div data-ft="{&quot;tn&quot;:&quot;K&quot;}" class="mvm _5pco">Fato.</div>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <form onsubmit="return window.Event &amp;&amp; Event.__inlineSubmit &amp;&amp; Event.__inlineSubmit(this,event)" id="u_0_2o" data-live="{&quot;seq&quot;:0}" action="/ajax/ufi/modify.php" method="post" class="live_594010970680994_316526391751760 commentable_item autoexpand_mode" rel="async">
+                                                      <input type="hidden" value="€,´,€,´,?,?,?" name="charset_test"><input type="hidden" autocomplete="off" value="AQAaGq-k" name="fb_dtsg"><input type="hidden" value="{&quot;actor&quot;:&quot;100002162882809&quot;,&quot;target_fbid&quot;:&quot;594010970680994&quot;,&quot;target_profile_id&quot;:&quot;100002162882809&quot;,&quot;type_id&quot;:&quot;17&quot;,&quot;assoc_obj_id&quot;:&quot;&quot;,&quot;source_app_id&quot;:&quot;0&quot;,&quot;extra_story_params&quot;:[],&quot;content_timestamp&quot;:&quot;1393510735&quot;,&quot;check_hash&quot;:&quot;AQCjXb3p7RDV8Zcc&quot;,&quot;source&quot;:&quot;13&quot;}" name="feedback_params" autocomplete="off"><input type="hidden" value="1" name="data_only_response" autocomplete="off">
+                                                      <div class="_5pcp"><span><a data-reactid=".1" data-ft="{&quot;tn&quot;:&quot;&gt;&quot;}" title="Curtiram isso" aria-live="polite" role="button" href="#" class="UFILikeLink">Curtir</a></span> · <label title="Deixar um comentário" class="uiLinkButton comment_link"><input type="button" onclick="return fc_click(this);" value="Comentar" data-ft="{&quot;type&quot;:24,&quot;tn&quot;:&quot;S&quot;}" class="uiLinkButtonInput"></label> · <a role="button" title="Enviar para amigos ou publicar na sua linha do tempo." data-ft="{&quot;tn&quot;:&quot;J&quot;,&quot;type&quot;:25}" rel="dialog" href="/ajax/sharer/?s=2&amp;appid=2305272732&amp;p%5B0%5D=100001721728318&amp;p%5B1%5D=1073742358&amp;share_source_type=unknown" class="share_action_link">Compartilhar</a> · <span><a href="/andrezza.c.faria/posts/594010970680994?stream_ref=1" class="_5pcq"><abbr class="_5ptz timestamp livetimestamp" data-utime="1393510735" title="Quinta, 27 de fevereiro de 2014 às 11:18">há 32 segundos</abbr></a></span> · <a id="u_0_2w" role="button" href="#" class="uiStreamPrivacy inlineBlock fbStreamPrivacy fbPrivacyAudienceIndicator _5pcq" data-hover="tooltip" aria-label="Compartilhado com: Público"><i class="lock img sp_acb80g sx_130b4d"></i></a></div>
+                                                      <div id="u_0_2q" class="uiUfi UFIContainer _5pc9">
+                                                         <ul data-reactid=".a" data-ft="{&quot;tn&quot;:&quot;]&quot;}" class="UFIList">
+                                                            <li data-reactid=".a.0" class="UFIArrow"><i data-reactid=".a.0.0"></i></li>
+                                                            <li data-reactid=".a.1:4" data-ft="{&quot;tn&quot;:&quot;[&quot;}" class="UFIRow  UFIAddComment UFIAddCommentWithPhotoAttacher UFIFirstComponent UFILastComponent">
+                                                               <div data-reactid=".a.1:4.0" class="clearfix UFIMentionsInputWrap">
+                                                                  <div data-reactid=".a.1:4.0.$left" class="_ohe lfloat">
+                                                                     <div data-reactid=".a.1:4.0.$left.0" class="img _8o _8r UFIImageBlockImage UFIReplyActorPhotoWrapper"><img data-reactid=".a.1:4.0.$left.0.0" alt="Washington Climaco" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/t5/s32x32/186438_100003058100735_793796532_q.jpg" class="img UFIActorImage _54ru"></div>
+                                                                  </div>
+                                                                  <div data-reactid=".a.1:4.0.$right" class="">
+                                                                     <div data-reactid=".a.1:4.0.$right.0" class="UFIImageBlockContent _42ef _8u">
+                                                                        <div data-reactid=".a.1:4.0.$right.0.0" class="UFICommentContainer">
+                                                                           <div data-reactid=".a.1:4.0.$right.0.0.0" class="UFIInputContainer">
+                                                                              <div data-reactid=".a.1:4.0.$right.0.0.0.0" class="uiMentionsInput textBoxContainer ReactLegacyMentionsInput">
+                                                                                 <div data-reactid=".a.1:4.0.$right.0.0.0.0.0" class="highlighter">
+                                                                                    <div data-reactid=".a.1:4.0.$right.0.0.0.0.0.0"><span data-reactid=".a.1:4.0.$right.0.0.0.0.0.0.0" class="highlighterContent hidden_elem"></span></div>
+                                                                                 </div>
+                                                                                 <div data-reactid=".a.1:4.0.$right.0.0.0.0.1" class="uiTypeahead mentionsTypeahead">
+                                                                                    <div data-reactid=".a.1:4.0.$right.0.0.0.0.1.0" class="wrap">
+                                                                                       <input type="hidden" data-reactid=".a.1:4.0.$right.0.0.0.0.1.0.0" class="hiddenInput" autocomplete="off">
+                                                                                       <div data-reactid=".a.1:4.0.$right.0.0.0.0.1.0.1" class="innerWrap"><textarea data-reactid=".a.1:4.0.$right.0.0.0.0.1.0.1.0" value="Escreva um comentário..." placeholder="Escreva um comentário..." title="Escreva um comentário..." class="textInput mentionsTextarea uiTextareaAutogrow uiTextareaNoResize UFIAddCommentInput DOMControl_placeholder" name="add_comment_text">Escreva um comentário...</textarea></div>
+                                                                                    </div>
+                                                                                 </div>
+                                                                                 <input type="hidden" data-reactid=".a.1:4.0.$right.0.0.0.0.2" value="" class="mentionsHidden" autocomplete="off">
+                                                                              </div>
+                                                                              <div data-reactid=".a.1:4.0.$right.0.0.0.1" class="UFICommentAttachmentButtons clearfix">
+                                                                                 <div data-reactid=".a.1:4.0.$right.0.0.0.1.0" aria-label="Anexar uma foto" data-tooltip-alignh="center" data-hover="tooltip" class="UFIPhotoAttachLinkWrapper _m"><i data-reactid=".a.1:4.0.$right.0.0.0.1.0.0" class="UFICommentPhotoIcon"><input type="file" accept="image/*" class="_n" name="file[]" multiple="" title="Selecione um arquivo para enviar" aria-label="Selecione um arquivo para enviar"></i></div>
+                                                                              </div>
+                                                                           </div>
+                                                                        </div>
+                                                                     </div>
+                                                                  </div>
+                                                               </div>
+                                                            </li>
+                                                         </ul>
+                                                      </div>
+                                                   </form>
+                                                </div>
+                                                <div data-ft="{&quot;tn&quot;:&quot;V&quot;}" id="u_0_2a" class="_6a uiPopover _5pbi"><a id="u_0_2i" rel="toggle" aria-expanded="false" aria-haspopup="true" href="#" role="button" aria-label="Opções da história" class="_5pbj _p"></a></div>
+                                             </div>
+                                          </div>
+                                          <div id="u_0_25" data-timestamp="1393510686" data-dedupekey="9042039212767232893" data-cursor="MTM5MzUxMDcyNDoxMzkzNTEwNzI0OjE6OTA0MjAzOTIxMjc2NzIzMjg5MzoxMzkzNTEwNjg2OjA=" data-ft="{&quot;qid&quot;:&quot;5985083167438739933&quot;,&quot;mf_story_key&quot;:&quot;9042039212767232893&quot;,&quot;fbfeed_location&quot;:1}" class="_5jmm _5pat _5uch">
+                                             <div class="clearfix userContentWrapper _5pcr">
+                                                <a data-hovercard="/ajax/hovercard/user.php?id=100001042478311" data-ft="{&quot;tn&quot;:&quot;m&quot;}" href="https://www.facebook.com/lidiane.araujo.718" class="_5pb8"><img alt="" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn2/t5/275706_100001042478311_1335037046_q.jpg" class="_s0 _5xib _rw img"></a>
+                                                <div class="_5pax">
+                                                   <h5 data-ft="{&quot;tn&quot;:&quot;C&quot;}" class="_5pbw">
+                                                      <div class="fwn fcg"><span data-ft="{&quot;tn&quot;:&quot;;&quot;}" class="fwb fcg"><a data-hovercard="/ajax/hovercard/user.php?id=100001042478311" href="https://www.facebook.com/lidiane.araujo.718">Lidiane Araujo</a></span></div>
+                                                   </h5>
+                                                   <div data-ft="{&quot;tn&quot;:&quot;K&quot;}" class="mbs _5pbx userContent">Fica a dica!!!!!!!!</div>
+                                                   <div data-ft="{&quot;tn&quot;:&quot;H&quot;}" class="_5ys3">
+                                                      <div class="clearfix _5pb_ _2-ha mvm">
+                                                         <a data-ft="{&quot;tn&quot;:&quot;E&quot;}" ajaxify="https://www.facebook.com/photo.php?fbid=703951649649578&amp;set=a.584839091560835.1073741828.100001042478311&amp;type=1&amp;src=https%3A%2F%2Ffbcdn-sphotos-h-a.akamaihd.net%2Fhphotos-ak-ash3%2Ft1%2F1912313_703951649649578_1098543097_n.jpg&amp;size=600%2C450&amp;source=12" rel="theater" href="https://www.facebook.com/photo.php?fbid=703951649649578&amp;set=a.584839091560835.1073741828.100001042478311&amp;type=1" class="_5pc0 _2-ha _5dec">
+                                                            <div style="width:398px;height:298px;" class="_46-h _5pc3"><img width="403" height="302" alt="Fica a dica!!!!!!!!" style="left:-2px; top:0px;" src="https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-ash3/t1/s403x403/1912313_703951649649578_1098543097_n.jpg" class="_46-i img"></div>
+                                                         </a>
+                                                      </div>
+                                                   </div>
+                                                   <form onsubmit="return window.Event &amp;&amp; Event.__inlineSubmit &amp;&amp; Event.__inlineSubmit(this,event)" id="u_0_2k" data-live="{&quot;seq&quot;:0}" action="/ajax/ufi/modify.php" method="post" class="live_703951649649578_316526391751760 commentable_item autoexpand_mode" rel="async">
+                                                      <input type="hidden" value="€,´,€,´,?,?,?" name="charset_test"><input type="hidden" autocomplete="off" value="AQAaGq-k" name="fb_dtsg"><input type="hidden" value="{&quot;actor&quot;:&quot;100001042478311&quot;,&quot;target_fbid&quot;:&quot;703951649649578&quot;,&quot;target_profile_id&quot;:&quot;100001042478311&quot;,&quot;type_id&quot;:&quot;7&quot;,&quot;assoc_obj_id&quot;:&quot;&quot;,&quot;source_app_id&quot;:&quot;0&quot;,&quot;extra_story_params&quot;:[],&quot;content_timestamp&quot;:&quot;1393510686&quot;,&quot;check_hash&quot;:&quot;AQA1hd0QKeH2C5pA&quot;,&quot;source&quot;:&quot;13&quot;}" name="feedback_params" autocomplete="off"><input type="hidden" value="1" name="data_only_response" autocomplete="off">
+                                                      <div class="_5pcp"><span><a data-reactid=".0" data-ft="{&quot;tn&quot;:&quot;&gt;&quot;}" title="Curtiram isso" aria-live="polite" role="button" href="#" class="UFILikeLink">Curtir</a></span> · <label title="Deixar um comentário" class="uiLinkButton comment_link"><input type="button" onclick="return fc_click(this);" value="Comentar" data-ft="{&quot;type&quot;:24,&quot;tn&quot;:&quot;S&quot;}" class="uiLinkButtonInput"></label> · <a role="button" title="Enviar para amigos ou publicar na sua linha do tempo." data-ft="{&quot;tn&quot;:&quot;J&quot;,&quot;type&quot;:25}" rel="dialog" href="/ajax/sharer/?s=2&amp;appid=2305272732&amp;p%5B0%5D=100001042478311&amp;p%5B1%5D=1073742158&amp;share_source_type=unknown" class="share_action_link">Compartilhar</a> · <span><a ajaxify="https://www.facebook.com/photo.php?fbid=703951649649578&amp;set=a.584839091560835.1073741828.100001042478311&amp;type=1&amp;src=https%3A%2F%2Ffbcdn-sphotos-h-a.akamaihd.net%2Fhphotos-ak-ash3%2Ft1%2F1912313_703951649649578_1098543097_n.jpg&amp;size=600%2C450&amp;source=12" rel="theater" href="https://www.facebook.com/photo.php?fbid=703951649649578&amp;set=a.584839091560835.1073741828.100001042478311&amp;type=1" class="_5pcq"><abbr class="_5ptz timestamp livetimestamp" data-utime="1393510686" title="Quinta, 27 de fevereiro de 2014 às 11:18">há ± um minuto</abbr></a></span> · <a id="u_0_2x" role="button" href="#" class="uiStreamPrivacy inlineBlock fbStreamPrivacy fbPrivacyAudienceIndicator _5pcq" data-hover="tooltip" aria-label="Compartilhado com: Amigos de Lidiane"><i class="lock img sp_acb80g sx_dfe04f"></i></a></div>
+                                                      <div id="u_0_2m" class="uiUfi UFIContainer _5pc9">
+                                                         <ul data-reactid=".9" data-ft="{&quot;tn&quot;:&quot;]&quot;}" class="UFIList">
+                                                            <li data-reactid=".9.0" class="UFIArrow"><i data-reactid=".9.0.0"></i></li>
+                                                            <li data-reactid=".9.1:4" data-ft="{&quot;tn&quot;:&quot;[&quot;}" class="UFIRow  UFIAddComment UFIAddCommentWithPhotoAttacher UFIFirstComponent UFILastComponent">
+                                                               <div data-reactid=".9.1:4.0" class="clearfix UFIMentionsInputWrap">
+                                                                  <div data-reactid=".9.1:4.0.$left" class="_ohe lfloat">
+                                                                     <div data-reactid=".9.1:4.0.$left.0" class="img _8o _8r UFIImageBlockImage UFIReplyActorPhotoWrapper"><img data-reactid=".9.1:4.0.$left.0.0" alt="Washington Climaco" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/t5/s32x32/186438_100003058100735_793796532_q.jpg" class="img UFIActorImage _54ru"></div>
+                                                                  </div>
+                                                                  <div data-reactid=".9.1:4.0.$right" class="">
+                                                                     <div data-reactid=".9.1:4.0.$right.0" class="UFIImageBlockContent _42ef _8u">
+                                                                        <div data-reactid=".9.1:4.0.$right.0.0" class="UFICommentContainer">
+                                                                           <div data-reactid=".9.1:4.0.$right.0.0.0" class="UFIInputContainer">
+                                                                              <div data-reactid=".9.1:4.0.$right.0.0.0.0" class="uiMentionsInput textBoxContainer ReactLegacyMentionsInput">
+                                                                                 <div data-reactid=".9.1:4.0.$right.0.0.0.0.0" class="highlighter">
+                                                                                    <div data-reactid=".9.1:4.0.$right.0.0.0.0.0.0"><span data-reactid=".9.1:4.0.$right.0.0.0.0.0.0.0" class="highlighterContent hidden_elem"></span></div>
+                                                                                 </div>
+                                                                                 <div data-reactid=".9.1:4.0.$right.0.0.0.0.1" class="uiTypeahead mentionsTypeahead">
+                                                                                    <div data-reactid=".9.1:4.0.$right.0.0.0.0.1.0" class="wrap">
+                                                                                       <input type="hidden" data-reactid=".9.1:4.0.$right.0.0.0.0.1.0.0" class="hiddenInput" autocomplete="off">
+                                                                                       <div data-reactid=".9.1:4.0.$right.0.0.0.0.1.0.1" class="innerWrap"><textarea data-reactid=".9.1:4.0.$right.0.0.0.0.1.0.1.0" value="Escreva um comentário..." placeholder="Escreva um comentário..." title="Escreva um comentário..." class="textInput mentionsTextarea uiTextareaAutogrow uiTextareaNoResize UFIAddCommentInput DOMControl_placeholder" name="add_comment_text">Escreva um comentário...</textarea></div>
+                                                                                    </div>
+                                                                                 </div>
+                                                                                 <input type="hidden" data-reactid=".9.1:4.0.$right.0.0.0.0.2" value="" class="mentionsHidden" autocomplete="off">
+                                                                              </div>
+                                                                              <div data-reactid=".9.1:4.0.$right.0.0.0.1" class="UFICommentAttachmentButtons clearfix">
+                                                                                 <div data-reactid=".9.1:4.0.$right.0.0.0.1.0" aria-label="Anexar uma foto" data-tooltip-alignh="center" data-hover="tooltip" class="UFIPhotoAttachLinkWrapper _m"><i data-reactid=".9.1:4.0.$right.0.0.0.1.0.0" class="UFICommentPhotoIcon"><input type="file" accept="image/*" class="_n" name="file[]" multiple="" title="Selecione um arquivo para enviar" aria-label="Selecione um arquivo para enviar"></i></div>
+                                                                              </div>
+                                                                           </div>
+                                                                        </div>
+                                                                     </div>
+                                                                  </div>
+                                                               </div>
+                                                            </li>
+                                                         </ul>
+                                                      </div>
+                                                   </form>
+                                                </div>
+                                                <div data-ft="{&quot;tn&quot;:&quot;V&quot;}" id="u_0_28" class="_6a uiPopover _5pbi"><a id="u_0_2c" rel="toggle" aria-expanded="false" aria-haspopup="true" href="#" role="button" aria-label="Opções da história" class="_5pbj _p"></a></div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div data-referrer="substream_1" id="substream_1" class="_4ikz">
+                                       <div>
+                                          <div id="u_0_3i" data-timestamp="1393510660" data-dedupekey="5172535423531618988" data-cursor="MTM5MzUxMDcyNDoxMzkzNTEwNzI0OjI6NTE3MjUzNTQyMzUzMTYxODk4ODoxMzkzNTEwNjYwOjA=" data-ft="{&quot;qid&quot;:&quot;5985083167438739933&quot;,&quot;mf_story_key&quot;:&quot;5172535423531618988&quot;,&quot;fbfeed_location&quot;:1}" class="_5jmm _5pat _5uch">
+                                             <div class="clearfix userContentWrapper _5pcr">
+                                                <a data-hovercard="/ajax/hovercard/user.php?id=100003644419004" data-ft="{&quot;tn&quot;:&quot;m&quot;}" href="https://www.facebook.com/lavilleempreendimentos" class="_5pb8"><img alt="" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn2/t5/211957_100003644419004_145859059_q.jpg" class="_s0 _5xib _rw img"></a>
+                                                <div class="_5pax">
+                                                   <h5 data-ft="{&quot;tn&quot;:&quot;C&quot;}" class="_5pbw">
+                                                      <div class="fwn fcg"><span data-ft="{&quot;tn&quot;:&quot;;&quot;}" class="fwb fcg"><a data-hovercard="/ajax/hovercard/user.php?id=100003644419004&amp;extragetparams=%7B%22directed_target_id%22%3A504320812956711%7D" href="https://www.facebook.com/lavilleempreendimentos">LA Ville Empreendimentos</a><i class="mhs img sp_2x6xe0 sx_673939"></i><span>&lrm;</span><a data-hovercard="/ajax/hovercard/group.php?id=504320812956711" href="/groups/504320812956711/">UBERABA - NEGÓCIOS</a></span></div>
+                                                   </h5>
+                                                   <div data-ft="{&quot;tn&quot;:&quot;K&quot;}" class="mbs _5pbx userContent">SÃO APENAS 49 IMÓVEIS NA PLANTA, LOTES DE 200M² LOCALIZADOS NA PARTE ALTA QUE VÃO DAR DE FRENTE PARA A AVENIDA, ÓTIMA OPORTUNIDADE.</div>
+                                                   <div data-ft="{&quot;tn&quot;:&quot;H&quot;}" class="_5ys3">
+                                                      <div class="clearfix _5pb_ mvm">
+                                                         <div data-ft="{&quot;tn&quot;:&quot;E&quot;}" class="_5pc1 mrs">
+                                                            <a ajaxify="https://www.facebook.com/photo.php?fbid=436314429833367&amp;set=pcb.645862332135891&amp;type=1&amp;src=https%3A%2F%2Fscontent-a-atl.xx.fbcdn.net%2Fhphotos-prn2%2Ft1%2F1622205_436314429833367_97668180_n.jpg&amp;size=960%2C480&amp;source=12" rel="theater" href="https://www.facebook.com/photo.php?fbid=436314429833367&amp;set=pcb.645862332135891&amp;type=1" class="_5dec">
+                                                               <div style="width:129px;height:129px;" class="_46-h _5pc3"><img width="260" height="130" alt="Foto de LA Ville Empreendimentos." style="left:-65px; top:0px;" src="https://scontent-a-atl.xx.fbcdn.net/hphotos-prn2/t1/p130x130/1622205_436314429833367_97668180_n.jpg" class="_46-i img"></div>
+                                                            </a>
+                                                         </div>
 
-					<select name="dateformat" id="dateformat">
-					   <option value="<s:message code="profile.page.endataformat" />"><s:message code="profile.page.endataformat" /></option>
-					   <option value="<s:message code="profile.page.ptdataformat" />"><s:message code="profile.page.ptdataformat" /></option>
-					</select>
-			</li>
-			<li>
-					<label><s:message code="profile.page.pagesize" /> : </label>
-
-					<select name="pagesize" id="pagesize">
-						<option value="<s:message code="option.pagesize.fifteen" />"><s:message code="option.pagesize.fifteen" /></option>
-						<option value="<s:message code="option.pagesize.twentyFive" />"><s:message code="option.pagesize.twentyFive" /></option>
-						<option value="<s:message code="option.pagesize.fifty" />"><s:message code="option.pagesize.fifty" /></option>
-						<option value="<s:message code="option.pagesize.hundred" />"><s:message code="option.pagesize.hundred" /></option>
-					</select>
-			</li>
-
-		</ul>
-			</fieldset>
-			<fieldset>
-				<legend><s:message code="profile.page.unitsConversion" /> : </legend>
-				<ul>
-					<li class="checkbox"><input id="unit-convert" type="checkbox" name="" /><label><s:message code="profile.page.consertUnitsDescription" /> </label></li>
-					<li>
-						<table id="units-table" class="list">
-							<thead>
-								<tr>
-									<th><s:message code="profile.page.convertUnit.value" /></th>
-									<th><s:message code="profile.page.convertUnit.symbol" /></th>
-									<th><s:message code="profile.page.convertUnit.name" /></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td class="unit-kwh" ><s:message code="profile.page.convertUnit.base" /><sup></sup></td>
-									<td><s:message code="profile.page.convertUnit.kwh" /></td>
-									<td><s:message code="profile.page.convertUnit.kilowattHhour" /></td>
-								</tr>
-								<tr class="alt">
-									<td class="unit-mwh"><s:message code="profile.page.convertUnit.base" /><sup></sup></td>
-									<td><s:message code="profile.page.convertUnit.MWh" /></td>
-									<td><s:message code="profile.page.convertUnit.megawattHour" /></td>
-								</tr>
-								<tr>
-									<td class="unit-gwh"><s:message code="profile.page.convertUnit.base" /><sup></sup></td>
-									<td><s:message code="profile.page.convertUnit.GWh" /></td>
-									<td><s:message code="profile.page.convertUnit.gigawattHour" /></td>
-								</tr>
-								<tr class="alt">
-									<td class="unit-twh"><s:message code="profile.page.convertUnit.base" /><sup></sup></td>
-									<td><s:message code="profile.page.convertUnit.TWh" /></td>
-									<td><s:message code="profile.page.convertUnit.terawattHour" /></td>
-								</tr>
-								<tr>
-									<td class="unit-pwh"><s:message code="profile.page.convertUnit.base" /><sup></sup></td>
-									<td><s:message code="profile.page.convertUnit.PWh" /></td>
-									<td><s:message code="profile.page.convertUnit.petawattHour" /></td>
-								</tr>
-							</tbody>
-						</table>
-					</li>
-				</ul>
-				<ul>
-					<li class="submit-row">
-						<a id="save" href="#" class="button save-settings"><s:message code="profile.page.save" /></a>
-						<s:message code="profile.page.or" />
-						<a id="cancel" href="settings/" class="cancel alist"><s:message code="profile.page.cancel" /></a>
-					</li>
-				</ul>
-			</fieldset>
+                                                      </div>
+                                                   </div>
+                                                   <form onsubmit="return window.Event &amp;&amp; Event.__inlineSubmit &amp;&amp; Event.__inlineSubmit(this,event)" id="u_0_45" data-live="{&quot;seq&quot;:0}" action="/ajax/ufi/modify.php" method="post" class="live_645862332135891_316526391751760 commentable_item collapsed_comments autoexpand_mode" rel="async">
+                                                      <input type="hidden" value="€,´,€,´,?,?,?" name="charset_test"><input type="hidden" autocomplete="off" value="AQAaGq-k" name="fb_dtsg"><input type="hidden" value="{&quot;actor&quot;:&quot;100003644419004&quot;,&quot;target_fbid&quot;:&quot;645862332135891&quot;,&quot;target_profile_id&quot;:&quot;&quot;,&quot;type_id&quot;:&quot;308&quot;,&quot;assoc_obj_id&quot;:&quot;504320812956711&quot;,&quot;source_app_id&quot;:&quot;0&quot;,&quot;extra_story_params&quot;:[],&quot;content_timestamp&quot;:&quot;1393510655&quot;,&quot;check_hash&quot;:&quot;AQDYx4jUnhwm6IMS&quot;,&quot;source&quot;:&quot;13&quot;}" name="feedback_params" autocomplete="off"><input type="hidden" value="1" name="data_only_response" autocomplete="off">
+                                                      <div class="_5pcp"><span><a data-reactid=".8" data-ft="{&quot;tn&quot;:&quot;&gt;&quot;}" title="Curtiram isso" aria-live="polite" role="button" href="#" class="UFILikeLink">Curtir</a></span> · <label title="Deixar um comentário" class="uiLinkButton comment_link"><input type="button" onclick="return fc_click(this);" value="Comentar" data-ft="{&quot;type&quot;:24,&quot;tn&quot;:&quot;S&quot;}" class="uiLinkButtonInput"></label> · <a role="button" title="Enviar para amigos ou publicar na sua linha do tempo." data-ft="{&quot;tn&quot;:&quot;J&quot;,&quot;type&quot;:25}" rel="dialog" href="/ajax/sharer/?s=37&amp;appid=2309869772&amp;p%5B0%5D=645862332135891&amp;share_source_type=unknown" class="share_action_link">Compartilhar</a> · <span><a href="/groups/504320812956711/permalink/645862332135891/?stream_ref=1" class="_5pcq"><abbr class="_5ptz timestamp livetimestamp" data-utime="1393510660" title="Quinta, 27 de fevereiro de 2014 às 11:17">há ± um minuto</abbr></a></span> · <a id="u_0_4a" role="button" href="#" class="uiStreamPrivacy inlineBlock fbStreamPrivacy fbPrivacyAudienceIndicator _5pcq" data-hover="tooltip" aria-label="Compartilhado com: Público"><i class="lock img sp_acb80g sx_130b4d"></i></a></div>
+                                                      <div id="u_0_49" class="uiUfi UFIContainer _5pc9">
+                                                         <ul data-reactid=".g" data-ft="{&quot;tn&quot;:&quot;]&quot;}" class="UFIList">
+                                                            <li data-reactid=".g.0" class="UFIArrow"><i data-reactid=".g.0.0"></i></li>
+                                                            <li data-reactid=".g.1:4" data-ft="{&quot;tn&quot;:&quot;[&quot;}" class="UFIRow  UFIAddComment UFIAddCommentWithPhotoAttacher UFIFirstComponent UFILastComponent">
+                                                               <div data-reactid=".g.1:4.0" class="clearfix UFIMentionsInputWrap">
+                                                                  <div data-reactid=".g.1:4.0.$left" class="_ohe lfloat">
+                                                                     <div data-reactid=".g.1:4.0.$left.0" class="img _8o _8r UFIImageBlockImage UFIReplyActorPhotoWrapper"><img data-reactid=".g.1:4.0.$left.0.0" alt="Washington Climaco" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/t5/s32x32/186438_100003058100735_793796532_q.jpg" class="img UFIActorImage _54ru"></div>
+                                                                  </div>
+                                                                  <div data-reactid=".g.1:4.0.$right" class="">
+                                                                     <div data-reactid=".g.1:4.0.$right.0" class="UFIImageBlockContent _42ef _8u">
+                                                                        <div data-reactid=".g.1:4.0.$right.0.0" class="UFICommentContainer">
+                                                                           <div data-reactid=".g.1:4.0.$right.0.0.0" class="UFIInputContainer">
+                                                                              <div data-reactid=".g.1:4.0.$right.0.0.0.0" class="uiMentionsInput textBoxContainer ReactLegacyMentionsInput">
+                                                                                 <div data-reactid=".g.1:4.0.$right.0.0.0.0.0" class="highlighter">
+                                                                                    <div data-reactid=".g.1:4.0.$right.0.0.0.0.0.0"><span data-reactid=".g.1:4.0.$right.0.0.0.0.0.0.0" class="highlighterContent hidden_elem"></span></div>
+                                                                                 </div>
+                                                                                 <div data-reactid=".g.1:4.0.$right.0.0.0.0.1" class="uiTypeahead mentionsTypeahead">
+                                                                                    <div data-reactid=".g.1:4.0.$right.0.0.0.0.1.0" class="wrap">
+                                                                                       <input type="hidden" data-reactid=".g.1:4.0.$right.0.0.0.0.1.0.0" class="hiddenInput" autocomplete="off">
+                                                                                       <div data-reactid=".g.1:4.0.$right.0.0.0.0.1.0.1" class="innerWrap"><textarea data-reactid=".g.1:4.0.$right.0.0.0.0.1.0.1.0" value="Escreva um comentário..." placeholder="Escreva um comentário..." title="Escreva um comentário..." class="textInput mentionsTextarea uiTextareaAutogrow uiTextareaNoResize UFIAddCommentInput DOMControl_placeholder" name="add_comment_text">Escreva um comentário...</textarea></div>
+                                                                                    </div>
+                                                                                 </div>
+                                                                                 <input type="hidden" data-reactid=".g.1:4.0.$right.0.0.0.0.2" value="" class="mentionsHidden" autocomplete="off">
+                                                                              </div>
+                                                                              <div data-reactid=".g.1:4.0.$right.0.0.0.1" class="UFICommentAttachmentButtons clearfix">
+                                                                                 <div data-reactid=".g.1:4.0.$right.0.0.0.1.0" aria-label="Anexar uma foto" data-tooltip-alignh="center" data-hover="tooltip" class="UFIPhotoAttachLinkWrapper _m"><i data-reactid=".g.1:4.0.$right.0.0.0.1.0.0" class="UFICommentPhotoIcon"><input type="file" accept="image/*" class="_n" name="file[]" multiple="" title="Selecione um arquivo para enviar" aria-label="Selecione um arquivo para enviar"></i></div>
+                                                                              </div>
+                                                                           </div>
+                                                                        </div>
+                                                                     </div>
+                                                                  </div>
+                                                               </div>
+                                                            </li>
+                                                         </ul>
+                                                      </div>
+                                                   </form>
+                                                </div>
+                                                <div data-ft="{&quot;tn&quot;:&quot;V&quot;}" id="u_0_3r" class="_6a uiPopover _5pbi"><a id="u_0_3z" rel="toggle" aria-expanded="false" aria-haspopup="true" href="#" role="button" aria-label="Opções da história" class="_5pbj _p"></a></div>
+                                             </div>
+                                          </div>
+                                          <div id="u_0_3j" data-timestamp="1393510575" data-dedupekey="4462530796128418908" data-cursor="MTM5MzUxMDY0NToxMzkzNTEwNjQ1OjE6NDQ2MjUzMDc5NjEyODQxODkwODoxMzkzNTEwNTc1OjA=" data-ft="{&quot;qid&quot;:&quot;5985083167438739933&quot;,&quot;mf_story_key&quot;:&quot;4462530796128418908&quot;,&quot;fbfeed_location&quot;:1}" class="_5jmm _5pat _5uch">
+                                             <div class="clearfix userContentWrapper _5pcr">
+                                                <a data-hovercard="/ajax/hovercard/user.php?id=100002123722432" data-ft="{&quot;tn&quot;:&quot;m&quot;}" href="https://www.facebook.com/flavia.roberta.313" class="_5pb8"><img alt="" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn2/t5/260860_100002123722432_766635371_q.jpg" class="_s0 _5xib _rw img"></a>
+                                                <div class="_5pax">
+                                                   <h5 data-ft="{&quot;tn&quot;:&quot;C&quot;}" class="_5pbw">
+                                                      <div class="fwn fcg"><span class="fcg"><span class="fwb"><a data-hovercard="/ajax/hovercard/user.php?id=100002123722432" data-ft="{&quot;tn&quot;:&quot;l&quot;}" href="https://www.facebook.com/flavia.roberta.313" class="profileLink">Flavia Roberta</a></span> atualizou a foto da capa dela.</span></div>
+                                                   </h5>
+                                                   <div class="userContent mbs"></div>
+                                                   <div data-ft="{&quot;tn&quot;:&quot;H&quot;}" class="_5ys3">
+                                                      <div class="mvm">
+                                                         <a data-ft="{&quot;tn&quot;:&quot;E&quot;}" ajaxify="https://www.facebook.com/photo.php?fbid=609567325790719&amp;set=a.354608274619960.87994.100002123722432&amp;type=1&amp;src=https%3A%2F%2Ffbcdn-sphotos-a-a.akamaihd.net%2Fhphotos-ak-prn2%2Ft1%2F1979502_609567325790719_942986944_n.jpg&amp;size=600%2C681&amp;source=12" rel="theater" href="https://www.facebook.com/photo.php?fbid=609567325790719&amp;set=a.354608274619960.87994.100002123722432&amp;type=1" class="_5dec">
+                                                            <div style="width:398px;height:147px;" class="_46-h"><img width="403" height="457" alt="Foto de Flavia Roberta." style="left:-2px; top:-56px;" src="https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-prn2/t1/p403x403/1979502_609567325790719_942986944_n.jpg" class="_46-i img"></div>
+                                                         </a>
+                                                      </div>
+                                                   </div>
+                                                   <form onsubmit="return window.Event &amp;&amp; Event.__inlineSubmit &amp;&amp; Event.__inlineSubmit(this,event)" id="u_0_3x" data-live="{&quot;seq&quot;:0}" action="/ajax/ufi/modify.php" method="post" class="live_609567325790719_316526391751760 commentable_item autoexpand_mode" rel="async">
+                                                      <input type="hidden" value="€,´,€,´,?,?,?" name="charset_test"><input type="hidden" autocomplete="off" value="AQAaGq-k" name="fb_dtsg"><input type="hidden" value="{&quot;actor&quot;:&quot;100002123722432&quot;,&quot;target_fbid&quot;:&quot;609567325790719&quot;,&quot;target_profile_id&quot;:&quot;100002123722432&quot;,&quot;type_id&quot;:&quot;7&quot;,&quot;assoc_obj_id&quot;:&quot;&quot;,&quot;source_app_id&quot;:&quot;0&quot;,&quot;extra_story_params&quot;:[],&quot;content_timestamp&quot;:&quot;1393510573&quot;,&quot;check_hash&quot;:&quot;AQDRnHsLofFHi1bz&quot;,&quot;source&quot;:&quot;13&quot;}" name="feedback_params" autocomplete="off"><input type="hidden" value="1" name="data_only_response" autocomplete="off">
+                                                      <div class="_5pcp"><span><a data-reactid=".6" data-ft="{&quot;tn&quot;:&quot;&gt;&quot;}" title="Curtiram isso" aria-live="polite" role="button" href="#" class="UFILikeLink">Curtir</a></span> · <label title="Deixar um comentário" class="uiLinkButton comment_link"><input type="button" onclick="return fc_click(this);" value="Comentar" data-ft="{&quot;type&quot;:24,&quot;tn&quot;:&quot;S&quot;}" class="uiLinkButtonInput"></label> · <a role="button" title="Enviar para amigos ou publicar na sua linha do tempo." data-ft="{&quot;tn&quot;:&quot;J&quot;,&quot;type&quot;:25}" rel="dialog" href="/ajax/sharer/?s=2&amp;appid=2305272732&amp;p%5B0%5D=100002123722432&amp;p%5B1%5D=1073743202&amp;share_source_type=unknown" class="share_action_link">Compartilhar</a> · <span><a ajaxify="https://www.facebook.com/photo.php?fbid=609567325790719&amp;set=a.354608274619960.87994.100002123722432&amp;type=1&amp;src=https%3A%2F%2Ffbcdn-sphotos-a-a.akamaihd.net%2Fhphotos-ak-prn2%2Ft1%2F1979502_609567325790719_942986944_n.jpg&amp;size=600%2C681&amp;source=12" rel="theater" href="https://www.facebook.com/photo.php?fbid=609567325790719&amp;set=a.354608274619960.87994.100002123722432&amp;type=1" class="_5pcq"><abbr class="_5ptz timestamp livetimestamp" data-utime="1393510575" title="Quinta, 27 de fevereiro de 2014 às 11:16">há 3 minutos</abbr></a></span> · <a id="u_0_4b" role="button" href="#" class="uiStreamPrivacy inlineBlock fbStreamPrivacy fbPrivacyAudienceIndicator _5pcq" data-hover="tooltip" aria-label="Compartilhado com: Público"><i class="lock img sp_acb80g sx_130b4d"></i></a></div>
+                                                      <div id="u_0_43" class="uiUfi UFIContainer _5pc9">
+                                                         <ul data-reactid=".e" data-ft="{&quot;tn&quot;:&quot;]&quot;}" class="UFIList">
+                                                            <li data-reactid=".e.0" class="UFIArrow"><i data-reactid=".e.0.0"></i></li>
+                                                            <li data-reactid=".e.1:0" class="UFIRow UFILikeSentence UFIFirstComponent">
+                                                               <div data-reactid=".e.1:0.0" class="clearfix">
+                                                                  <div data-reactid=".e.1:0.0.$left" class="_ohe lfloat"><a data-reactid=".e.1:0.0.$left.0" aria-label="Curtiram isso" role="button" title="Curtiram isso" tabindex="-1" href="#" class="img _8o _8r UFIImageBlockImage UFILikeThumb"><i data-reactid=".e.1:0.0.$left.0.0" class="UFILikeIcon"></i></a></div>
+                                                                  <div data-reactid=".e.1:0.0.$right" class="">
+                                                                     <div data-reactid=".e.1:0.0.$right.0" class="UFIImageBlockContent _42ef _8u">
+                                                                        <div data-reactid=".e.1:0.0.$right.0.0" class="UFILikeSentenceText"><span data-reactid=".e.1:0.0.$right.0.0.0"><a data-reactid=".e.1:0.0.$right.0.0.0.$range0:0" data-hovercard="/ajax/hovercard/hovercard.php?id=100002334506251&amp;extragetparams=%7B%22hc_location%22%3A%22ufi%22%7D" dir="ltr" class="profileLink" href="https://www.facebook.com/thiago.aguilla">Thiago Aguilla</a><span data-reactid=".e.1:0.0.$right.0.0.0.$end:0:$0:0"> curtiu isto.</span></span></div>
+                                                                     </div>
+                                                                  </div>
+                                                               </div>
+                                                            </li>
+                                                            <li data-reactid=".e.1:4" data-ft="{&quot;tn&quot;:&quot;[&quot;}" class="UFIRow  UFIAddComment UFIAddCommentWithPhotoAttacher UFILastComponent">
+                                                               <div data-reactid=".e.1:4.0" class="clearfix UFIMentionsInputWrap">
+                                                                  <div data-reactid=".e.1:4.0.$left" class="_ohe lfloat">
+                                                                     <div data-reactid=".e.1:4.0.$left.0" class="img _8o _8r UFIImageBlockImage UFIReplyActorPhotoWrapper"><img data-reactid=".e.1:4.0.$left.0.0" alt="Washington Climaco" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/t5/s32x32/186438_100003058100735_793796532_q.jpg" class="img UFIActorImage _54ru"></div>
+                                                                  </div>
+                                                                  <div data-reactid=".e.1:4.0.$right" class="">
+                                                                     <div data-reactid=".e.1:4.0.$right.0" class="UFIImageBlockContent _42ef _8u">
+                                                                        <div data-reactid=".e.1:4.0.$right.0.0" class="UFICommentContainer">
+                                                                           <div data-reactid=".e.1:4.0.$right.0.0.0" class="UFIInputContainer">
+                                                                              <div data-reactid=".e.1:4.0.$right.0.0.0.0" class="uiMentionsInput textBoxContainer ReactLegacyMentionsInput">
+                                                                                 <div data-reactid=".e.1:4.0.$right.0.0.0.0.0" class="highlighter">
+                                                                                    <div data-reactid=".e.1:4.0.$right.0.0.0.0.0.0"><span data-reactid=".e.1:4.0.$right.0.0.0.0.0.0.0" class="highlighterContent hidden_elem"></span></div>
+                                                                                 </div>
+                                                                                 <div data-reactid=".e.1:4.0.$right.0.0.0.0.1" class="uiTypeahead mentionsTypeahead">
+                                                                                    <div data-reactid=".e.1:4.0.$right.0.0.0.0.1.0" class="wrap">
+                                                                                       <input type="hidden" data-reactid=".e.1:4.0.$right.0.0.0.0.1.0.0" class="hiddenInput" autocomplete="off">
+                                                                                       <div data-reactid=".e.1:4.0.$right.0.0.0.0.1.0.1" class="innerWrap"><textarea data-reactid=".e.1:4.0.$right.0.0.0.0.1.0.1.0" value="Escreva um comentário..." placeholder="Escreva um comentário..." title="Escreva um comentário..." class="textInput mentionsTextarea uiTextareaAutogrow uiTextareaNoResize UFIAddCommentInput DOMControl_placeholder" name="add_comment_text">Escreva um comentário...</textarea></div>
+                                                                                    </div>
+                                                                                 </div>
+                                                                                 <input type="hidden" data-reactid=".e.1:4.0.$right.0.0.0.0.2" value="" class="mentionsHidden" autocomplete="off">
+                                                                              </div>
+                                                                              <div data-reactid=".e.1:4.0.$right.0.0.0.1" class="UFICommentAttachmentButtons clearfix">
+                                                                                 <div data-reactid=".e.1:4.0.$right.0.0.0.1.0" aria-label="Anexar uma foto" data-tooltip-alignh="center" data-hover="tooltip" class="UFIPhotoAttachLinkWrapper _m"><i data-reactid=".e.1:4.0.$right.0.0.0.1.0.0" class="UFICommentPhotoIcon"><input type="file" accept="image/*" class="_n" name="file[]" multiple="" title="Selecione um arquivo para enviar" aria-label="Selecione um arquivo para enviar"></i></div>
+                                                                              </div>
+                                                                           </div>
+                                                                        </div>
+                                                                     </div>
+                                                                  </div>
+                                                               </div>
+                                                            </li>
+                                                         </ul>
+                                                      </div>
+                                                   </form>
+                                                </div>
+                                                <div data-ft="{&quot;tn&quot;:&quot;V&quot;}" id="u_0_3m" class="_6a uiPopover _5pbi"><a id="u_0_3p" rel="toggle" aria-expanded="false" aria-haspopup="true" href="#" role="button" aria-label="Opções da história" class="_5pbj _p"></a></div>
+                                             </div>
+                                          </div>
+                                          <div id="u_0_3k" data-timestamp="1393510569" data-dedupekey="5958901619856068717" data-cursor="MTM5MzUxMDY0NToxMzkzNTEwNjQ1OjI6NTk1ODkwMTYxOTg1NjA2ODcxNzoxMzkzNTEwNTY5OjA=" data-ft="{&quot;qid&quot;:&quot;5985083167438739933&quot;,&quot;mf_story_key&quot;:&quot;5958901619856068717&quot;,&quot;fbfeed_location&quot;:1}" class="_5jmm _5pat _5uch">
+                                             <div class="clearfix userContentWrapper _5pcr">
+                                                <a data-hovercard="/ajax/hovercard/user.php?id=1264483924" data-ft="{&quot;tn&quot;:&quot;m&quot;}" href="https://www.facebook.com/xande775" class="_5pb8"><img alt="" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn1/t5/371912_1264483924_216476340_q.jpg" class="_s0 _5xib _rw img"></a>
+                                                <div class="_5pax">
+                                                   <h5 data-ft="{&quot;tn&quot;:&quot;C&quot;}" class="_5pbw">
+                                                      <div class="fwn fcg"><span class="fcg"><span class="fwb"><a data-hovercard="/ajax/hovercard/user.php?id=1264483924&amp;extragetparams=%7B%22directed_target_id%22%3A481982051872647%7D" data-ft="{&quot;tn&quot;:&quot;l&quot;}" href="https://www.facebook.com/xande775" class="profileLink">Alexandre Mesquita</a></span> adicionou fotos ao álbum <a href="https://www.facebook.com/media/set/?set=oa.634061033331414&amp;type=1">27 de fevereiro de 2014</a> em <a data-hovercard="/ajax/hovercard/group.php?id=481982051872647&amp;extragetparams=%7B%22directed_target_id%22%3A481982051872647%7D" href="/groups/481982051872647/" class="profileLink">UBERABA - COMPRA E VENDE</a>.</span></div>
+                                                   </h5>
+                                                   <div data-ft="{&quot;tn&quot;:&quot;K&quot;}" class="mbs _5pbx userContent">Frigobar espaçoso e bem conservado tudo funcionando<br> R$300.00 pra vender hoje<br> </div>
+                                                   <div data-ft="{&quot;tn&quot;:&quot;H&quot;}" class="_5ys3">
+                                                      <div class="clearfix _5pb_ mvm">
+                                                         <div data-ft="{&quot;tn&quot;:&quot;E&quot;}" class="_5pc1 mrs">
+                                                            <a ajaxify="https://www.facebook.com/photo.php?fbid=10201588101805428&amp;set=oa.634061033331414&amp;type=1&amp;src=https%3A%2F%2Ffbcdn-sphotos-b-a.akamaihd.net%2Fhphotos-ak-frc3%2Ft1%2F1969323_10201588101805428_1195511305_n.jpg&amp;size=720%2C960&amp;source=12" rel="theater" href="https://www.facebook.com/photo.php?fbid=10201588101805428&amp;set=oa.634061033331414&amp;type=1" class="_5dec">
+                                                               <div style="width:196px;height:196px;" class="_46-h _5pc3"><img width="200" height="266" alt="Foto de Alexandre Mesquita." style="left:-2px; top:0px;" src="https://fbcdn-sphotos-b-a.akamaihd.net/hphotos-ak-frc3/t1/p200x200/1969323_10201588101805428_1195511305_n.jpg" class="_46-i img"></div>
+                                                            </a>
+                                                         </div>
+                                                         <div data-ft="{&quot;tn&quot;:&quot;E&quot;}" class="_5pc1">
+                                                            <a ajaxify="https://www.facebook.com/photo.php?fbid=10201588102365442&amp;set=oa.634061033331414&amp;type=1&amp;src=https%3A%2F%2Fscontent-b-atl.xx.fbcdn.net%2Fhphotos-ash3%2Ft1%2F577395_10201588102365442_1470263300_n.jpg&amp;size=720%2C960&amp;source=12" rel="theater" href="https://www.facebook.com/photo.php?fbid=10201588102365442&amp;set=oa.634061033331414&amp;type=1" class="_5dec">
+                                                               <div style="width:197px;height:196px;" class="_46-h _5pc3"><img width="200" height="266" alt="Foto de Alexandre Mesquita." style="left:-1px; top:0px;" src="https://scontent-b-atl.xx.fbcdn.net/hphotos-ash3/t1/p200x200/577395_10201588102365442_1470263300_n.jpg" class="_46-i img"></div>
+                                                            </a>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <form onsubmit="return window.Event &amp;&amp; Event.__inlineSubmit &amp;&amp; Event.__inlineSubmit(this,event)" id="u_0_44" data-live="{&quot;seq&quot;:0}" action="/ajax/ufi/modify.php" method="post" class="live_634061029998081_316526391751760 commentable_item collapsed_comments autoexpand_mode" rel="async">
+                                                      <input type="hidden" value="€,´,€,´,?,?,?" name="charset_test"><input type="hidden" autocomplete="off" value="AQAaGq-k" name="fb_dtsg"><input type="hidden" value="{&quot;actor&quot;:&quot;1264483924&quot;,&quot;target_fbid&quot;:&quot;634061029998081&quot;,&quot;target_profile_id&quot;:&quot;&quot;,&quot;type_id&quot;:&quot;308&quot;,&quot;assoc_obj_id&quot;:&quot;481982051872647&quot;,&quot;source_app_id&quot;:&quot;0&quot;,&quot;extra_story_params&quot;:[],&quot;content_timestamp&quot;:&quot;1393510352&quot;,&quot;check_hash&quot;:&quot;AQBRclptHXMuIAaJ&quot;,&quot;source&quot;:&quot;13&quot;}" name="feedback_params" autocomplete="off"><input type="hidden" value="1" name="data_only_response" autocomplete="off">
+                                                      <div class="_5pcp"><span><a data-reactid=".7" data-ft="{&quot;tn&quot;:&quot;&gt;&quot;}" title="Curtiram isso" aria-live="polite" role="button" href="#" class="UFILikeLink">Curtir</a></span> · <label title="Deixar um comentário" class="uiLinkButton comment_link"><input type="button" onclick="return fc_click(this);" value="Comentar" data-ft="{&quot;type&quot;:24,&quot;tn&quot;:&quot;S&quot;}" class="uiLinkButtonInput"></label> · <a role="button" title="Enviar para amigos ou publicar na sua linha do tempo." data-ft="{&quot;tn&quot;:&quot;J&quot;,&quot;type&quot;:25}" rel="dialog" href="/ajax/sharer/?s=37&amp;appid=2309869772&amp;p%5B0%5D=634061029998081&amp;share_source_type=unknown" class="share_action_link">Compartilhar</a> · <span><a href="/groups/481982051872647/permalink/634061029998081/?stream_ref=1" class="_5pcq"><abbr class="_5ptz timestamp livetimestamp" data-utime="1393510569" title="Quinta, 27 de fevereiro de 2014 às 11:16">há 3 minutos</abbr></a></span> · <a id="u_0_4c" role="button" href="#" class="uiStreamPrivacy inlineBlock fbStreamPrivacy fbPrivacyAudienceIndicator _5pcq" data-hover="tooltip" aria-label="Compartilhado com: Público"><i class="lock img sp_acb80g sx_130b4d"></i></a></div>
+                                                      <div id="u_0_47" class="uiUfi UFIContainer _5pc9">
+                                                         <ul data-reactid=".f" data-ft="{&quot;tn&quot;:&quot;]&quot;}" class="UFIList">
+                                                            <li data-reactid=".f.0" class="UFIArrow"><i data-reactid=".f.0.0"></i></li>
+                                                            <li data-reactid=".f.1:4" data-ft="{&quot;tn&quot;:&quot;[&quot;}" class="UFIRow  UFIAddComment UFIAddCommentWithPhotoAttacher UFIFirstComponent UFILastComponent">
+                                                               <div data-reactid=".f.1:4.0" class="clearfix UFIMentionsInputWrap">
+                                                                  <div data-reactid=".f.1:4.0.$left" class="_ohe lfloat">
+                                                                     <div data-reactid=".f.1:4.0.$left.0" class="img _8o _8r UFIImageBlockImage UFIReplyActorPhotoWrapper"><img data-reactid=".f.1:4.0.$left.0.0" alt="Washington Climaco" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/t5/s32x32/186438_100003058100735_793796532_q.jpg" class="img UFIActorImage _54ru"></div>
+                                                                  </div>
+                                                                  <div data-reactid=".f.1:4.0.$right" class="">
+                                                                     <div data-reactid=".f.1:4.0.$right.0" class="UFIImageBlockContent _42ef _8u">
+                                                                        <div data-reactid=".f.1:4.0.$right.0.0" class="UFICommentContainer">
+                                                                           <div data-reactid=".f.1:4.0.$right.0.0.0" class="UFIInputContainer">
+                                                                              <div data-reactid=".f.1:4.0.$right.0.0.0.0" class="uiMentionsInput textBoxContainer ReactLegacyMentionsInput">
+                                                                                 <div data-reactid=".f.1:4.0.$right.0.0.0.0.0" class="highlighter">
+                                                                                    <div data-reactid=".f.1:4.0.$right.0.0.0.0.0.0"><span data-reactid=".f.1:4.0.$right.0.0.0.0.0.0.0" class="highlighterContent hidden_elem"></span></div>
+                                                                                 </div>
+                                                                                 <div data-reactid=".f.1:4.0.$right.0.0.0.0.1" class="uiTypeahead mentionsTypeahead">
+                                                                                    <div data-reactid=".f.1:4.0.$right.0.0.0.0.1.0" class="wrap">
+                                                                                       <input type="hidden" data-reactid=".f.1:4.0.$right.0.0.0.0.1.0.0" class="hiddenInput" autocomplete="off">
+                                                                                       <div data-reactid=".f.1:4.0.$right.0.0.0.0.1.0.1" class="innerWrap"><textarea data-reactid=".f.1:4.0.$right.0.0.0.0.1.0.1.0" value="Escreva um comentário..." placeholder="Escreva um comentário..." title="Escreva um comentário..." class="textInput mentionsTextarea uiTextareaAutogrow uiTextareaNoResize UFIAddCommentInput DOMControl_placeholder" name="add_comment_text">Escreva um comentário...</textarea></div>
+                                                                                    </div>
+                                                                                 </div>
+                                                                                 <input type="hidden" data-reactid=".f.1:4.0.$right.0.0.0.0.2" value="" class="mentionsHidden" autocomplete="off">
+                                                                              </div>
+                                                                              <div data-reactid=".f.1:4.0.$right.0.0.0.1" class="UFICommentAttachmentButtons clearfix">
+                                                                                 <div data-reactid=".f.1:4.0.$right.0.0.0.1.0" aria-label="Anexar uma foto" data-tooltip-alignh="center" data-hover="tooltip" class="UFIPhotoAttachLinkWrapper _m"><i data-reactid=".f.1:4.0.$right.0.0.0.1.0.0" class="UFICommentPhotoIcon"><input type="file" accept="image/*" class="_n" name="file[]" multiple="" title="Selecione um arquivo para enviar" aria-label="Selecione um arquivo para enviar"></i></div>
+                                                                              </div>
+                                                                           </div>
+                                                                        </div>
+                                                                     </div>
+                                                                  </div>
+                                                               </div>
+                                                            </li>
+                                                         </ul>
+                                                      </div>
+                                                   </form>
+                                                </div>
+                                                <div data-ft="{&quot;tn&quot;:&quot;V&quot;}" id="u_0_3q" class="_6a uiPopover _5pbi"><a id="u_0_3w" rel="toggle" aria-expanded="false" aria-haspopup="true" href="#" role="button" aria-label="Opções da história" class="_5pbj _p"></a></div>
+                                             </div>
+                                          </div>
+                                          <div id="u_0_3l" data-timestamp="1393510562" data-dedupekey="6251113080196215788" data-cursor="MTM5MzUxMDY0NToxMzkzNTEwNjQ1OjM6NjI1MTExMzA4MDE5NjIxNTc4ODoxMzkzNTEwNTYyOjA=" data-ft="{&quot;qid&quot;:&quot;5985083167438739933&quot;,&quot;mf_story_key&quot;:&quot;6251113080196215788&quot;,&quot;fbfeed_location&quot;:1}" class="_5jmm _5pat _5uch">
+                                             <div class="clearfix userContentWrapper _5pcr">
+                                                <a data-hovercard="/ajax/hovercard/page.php?id=437190599646090" data-ft="{&quot;tn&quot;:&quot;\u003C&quot;}" href="https://www.facebook.com/MaraBeatrizII" class="_5pb8"><img alt="" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/t5/1086765_437190599646090_2020100579_q.jpg" class="_s0 _5xib _rw img"></a>
+                                                <div class="_5pax">
+                                                   <h5 data-ft="{&quot;tn&quot;:&quot;C&quot;}" class="_5pbw">
+                                                      <div class="fwn fcg"><span class="fcg"><span class="fwb"><a data-hovercard="/ajax/hovercard/page.php?id=437190599646090" data-ft="{&quot;tn&quot;:&quot;k&quot;}" href="https://www.facebook.com/MaraBeatrizII?ref=stream" class="profileLink">Mara Beatriz</a></span> compartilhou a <a data-ft="{&quot;tn&quot;:&quot;E&quot;}" href="https://www.facebook.com/LEUCEMIAZERONOBRASILOFICIAL/photos/a.491274257638057.1073741926.128707653894721/497240540374762/?type=1" class="profileLink">foto</a> de <a data-hovercard="/ajax/hovercard/page.php?id=128707653894721" data-ft="{&quot;tn&quot;:&quot;k&quot;}" href="https://www.facebook.com/LEUCEMIAZERONOBRASILOFICIAL" class="profileLink">LEUCEMIA "ZERO" NO BRASIL (OFICIAL)</a>.</span></div>
+                                                   </h5>
+                                                   <div data-ft="{&quot;tn&quot;:&quot;K&quot;}" class="mbs _5pbx userContent">Não se esqueçam dele! Vá até o Hemocentro da sua cidade e seja um doador de medula.</div>
+                                                   <div>
+                                                      <div class="_5r69">
+                                                         <div class="mvm">
+                                                            <div data-ft="{&quot;tn&quot;:&quot;H&quot;}" class="_5ys3">
+                                                               <div class="clearfix _5pb_ _2-ha mvm">
+                                                                  <a data-ft="{&quot;tn&quot;:&quot;E&quot;}" ajaxify="https://www.facebook.com/LEUCEMIAZERONOBRASILOFICIAL/photos/a.491274257638057.1073741926.128707653894721/497240540374762/?type=1&amp;src=https%3A%2F%2Fscontent-b-atl.xx.fbcdn.net%2Fhphotos-ash3%2Fl%2Ft1%2F994054_497240540374762_208856028_n.jpg&amp;size=752%2C485&amp;fbid=497240540374762&amp;source=12" rel="theater" href="https://www.facebook.com/LEUCEMIAZERONOBRASILOFICIAL/photos/a.491274257638057.1073741926.128707653894721/497240540374762/?type=1" class="_5pc0 _2-ha _5dec">
+                                                                     <div style="width:398px;height:256px;" class="_46-h _5pc3"><img width="403" height="259" alt="? @[128707653894721:274:LEUCEMIA &quot;ZERO&quot; NO BRASIL (OFICIAL)] ?
+                                                                        VAMOS LÁ BRASILLLLLLLLLLLLLLLLLLL
+                                                                        Vídeo do Guerreirinho Roberth: http://www.youtube.com/watch?feature=player_detailpage&amp;v=5u7JkEswpD8
+                                                                        DIGA SIM A VIDA!
+                                                                        DOE MEDULA ÓSSEA!
+                                                                        VAMOS SALVAR VIDAS ?
+                                                                        Somos a Cura para estes Guerreirinhos!
+                                                                        Somos o milagre que eles tanto esperam!
+                                                                        #DOECURA
+                                                                        #DOEMEDULAÓSSEA
+                                                                        #SALVEVIDAS
+                                                                        DOE MEDULA ÓSSEA! MUDE ESTA HISTÓRIA!
+                                                                        Ao Cadastrar e ser compatível com um Guerreiro, vamos ser lembrados para sempre por eles e por seus familiares... sabe porque? Porque estaremos doando VIDA!!!!
+                                                                        Ser compatível é uma Benção Divina!
+                                                                        Vamos que vamos então! Vamos deixar nossa marquinha no coração destes Guerreiros e seus familiares
+                                                                        Cadastre-se! Seja um Doador de Medula Óssea! Você pode salvar vidas!
+                                                                        Para fazer o Cadastro, vá ao Hemocentro mais próximo à sua Residência ou a um grande Hospital (geralmente fazem o cadastro)... leve Documentos de Identificação, não é necessário jejum! Lá será colhida uma amostra do seu sangue (bem pouquinho), seus dados vão para o Banco de Medula Óssea (REDOME) pronto! Cadastro feito!
+                                                                        Aqui no Blog da campanha, você vai encontrar alguns endereços para Cadastro além de várias outras informações
+                                                                        http://leucemiazerobr.blogspot.com.br/p/hemocentros
+                                                                        #LEUCEMIAZERONOBRASIL
+                                                                        #DOESANGUE
+                                                                        #DOEMEDULAOSSEA
+                                                                        #LEUCEMIATEMCURA
+                                                                        #NÓSSOMOSACURAPARAALEUCEMIA
+                                                                        #VEMCOMAGENTE
+                                                                        #VAMOQUEVAMO" style="left:-2px; top:0px;" src="https://scontent-b-atl.xx.fbcdn.net/hphotos-ash3/l/t1/s403x403/994054_497240540374762_208856028_n.jpg" class="_46-i img"></div>
+                                                                  </a>
+                                                               </div>
+                                                            </div>
+                                                            <div class="plm _5pcm">
+                                                               <div data-ft="{&quot;tn&quot;:&quot;K&quot;}" class="mvm _5pco">
+                                                                  <div class="text_exposed_root" id="id_530f496f9689e2891341915"><i class="_4-k1 img sp_acb80g sx_7b3c6b"></i> <a data-hovercard="/ajax/hovercard/page.php?id=128707653894721" href="https://www.facebook.com/LEUCEMIAZERONOBRASILOFICIAL" class="profileLink">LEUCEMIA "ZERO" NO BRASIL (OFICIAL)</a> <i class="_4-k1 img sp_acb80g sx_7b3c6b"></i><br> <br> VAMOS LÁ BRASILLLLLLLLLLLLLLLLLLL<br> <br> Vídeo do Guerreirinho Roberth: <a onclick="LinkshimAsyncLink.swap(this, &quot;http:\/\/www.facebook.com\/l.php?u=http\u00253A\u00252F\u00252Fwww.youtube.com\u00252Fwatch\u00253Ffeature\u00253Dplayer_detailpage\u002526v\u00253D5u7JkEswpD8&amp;h=3AQGzTmTI&amp;enc=AZMqd-SU8SaBFk3hpZItNAWkiK14OVzv01cRlBfGlnIyFULTdP6QPTU88-zDCQl3JZXAuZIEoxIMRKeQYu8YQhSi9IUHQ28IsHgSclP-gnypD7hczE3YH0ZzqbJ47Xcocd8GKZQcqmzX59uMIHfLeo4QrgVY-yFuBc-Va5REP2sPRg&amp;s=1&quot;);" onmouseover="LinkshimAsyncLink.swap(this, &quot;http:\/\/www.youtube.com\/watch?feature=player_detailpage&amp;v=5u7JkEswpD8&quot;);" rel="nofollow" target="_blank" href="http://www.facebook.com/l.php?u=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Ffeature%3Dplayer_detailpage%26v%3D5u7JkEswpD8&amp;h=3AQGzTmTI&amp;enc=AZMqd-SU8SaBFk3hpZItNAWkiK14OVzv01cRlBfGlnIyFULTdP6QPTU88-zDCQl3JZXAuZIEoxIMRKeQYu8YQhSi9IUHQ28IsHgSclP-gnypD7hczE3YH0ZzqbJ47Xcocd8GKZQcqmzX59uMIHfLeo4QrgVY-yFuBc-Va5REP2sPRg&amp;s=1">http://www.youtube.com/watch?feature=player_detailpage&amp;<span class="text_exposed_hide">...</span><span class="text_exposed_show">v=5u7JkEswpD8</span></a><span class="text_exposed_show"><br> <br> DIGA SIM A VIDA!<br> DOE MEDULA ÓSSEA!<br> <br> VAMOS SALVAR VIDAS <i class="_4-k1 img sp_acb80g sx_7b3c6b"></i><br> <br> Somos a Cura para estes Guerreirinhos!<br> Somos o milagre que eles tanto esperam!<br> <br> <a data-ft="{&quot;tn&quot;:&quot;*N&quot;,&quot;type&quot;:104}" href="https://www.facebook.com/hashtag/doecura?source=feed_text" class="_58cn"><span class="_58cl">?#&lrm;</span><span class="_58cm">DOECURA?</span></a><br> <a data-ft="{&quot;tn&quot;:&quot;*N&quot;,&quot;type&quot;:104}" href="https://www.facebook.com/hashtag/doemedula%C3%B3ssea?source=feed_text" class="_58cn"><span class="_58cl">?#&lrm;</span><span class="_58cm">DOEMEDULAÓSSEA?</span></a><br> <a data-ft="{&quot;tn&quot;:&quot;*N&quot;,&quot;type&quot;:104}" href="https://www.facebook.com/hashtag/salvevidas?source=feed_text" class="_58cn"><span class="_58cl">?#&lrm;</span><span class="_58cm">SALVEVIDAS?</span></a><br> <br> DOE MEDULA ÓSSEA! MUDE ESTA HISTÓRIA!<br> <br> Ao Cadastrar e ser compatível com um Guerreiro, vamos ser lembrados para sempre por eles e por seus familiares... sabe porque? Porque estaremos doando VIDA!!!!<br> <br> Ser compatível é uma Benção Divina!<br> Vamos que vamos então! Vamos deixar nossa marquinha no coração destes Guerreiros e seus familiares<br> <br> Cadastre-se! Seja um Doador de Medula Óssea! Você pode salvar vidas!<br> <br> Para fazer o Cadastro, vá ao Hemocentro mais próximo à sua Residência ou a um grande Hospital (geralmente fazem o cadastro)... leve Documentos de Identificação, não é necessário jejum! Lá será colhida uma amostra do seu sangue (bem pouquinho), seus dados vão para o Banco de Medula Óssea (REDOME) pronto! Cadastro feito!<br> <br> <br> Aqui no Blog da campanha, você vai encontrar alguns endereços para Cadastro além de várias outras informações<br> <br> <a onclick="LinkshimAsyncLink.swap(this, &quot;http:\/\/www.facebook.com\/l.php?u=http\u00253A\u00252F\u00252Fleucemiazerobr.blogspot.com.br\u00252Fp\u00252Fhemocentros&amp;h=FAQFQL9Mw&amp;enc=AZN4Nn7qL5RdBZp2TK0YeSxQ_mPVCPdjInaz5bIeGvXRWEf3nuiB_Ln0M1bBPxwly5gOD7uUtd_If4o8bwEJRqrdyIG8t1DmoAMvohxjFOscVDxRvRmEZfE_XVADoNCKIh0pSCVmLD8rV0018frWhXbe1KPriMQXJ1JC6TQapye6Dw&amp;s=1&quot;);" onmouseover="LinkshimAsyncLink.swap(this, &quot;http:\/\/leucemiazerobr.blogspot.com.br\/p\/hemocentros&quot;);" rel="nofollow" target="_blank" href="http://www.facebook.com/l.php?u=http%3A%2F%2Fleucemiazerobr.blogspot.com.br%2Fp%2Fhemocentros&amp;h=FAQFQL9Mw&amp;enc=AZN4Nn7qL5RdBZp2TK0YeSxQ_mPVCPdjInaz5bIeGvXRWEf3nuiB_Ln0M1bBPxwly5gOD7uUtd_If4o8bwEJRqrdyIG8t1DmoAMvohxjFOscVDxRvRmEZfE_XVADoNCKIh0pSCVmLD8rV0018frWhXbe1KPriMQXJ1JC6TQapye6Dw&amp;s=1">http://leucemiazerobr.blogspot.com.br/p/hemocentros</a><br> <br> <a data-ft="{&quot;tn&quot;:&quot;*N&quot;,&quot;type&quot;:104}" href="https://www.facebook.com/hashtag/leucemiazeronobrasil?source=feed_text" class="_58cn"><span class="_58cl">?#&lrm;</span><span class="_58cm">LEUCEMIAZERONOBRASIL?</span></a><br> <a data-ft="{&quot;tn&quot;:&quot;*N&quot;,&quot;type&quot;:104}" href="https://www.facebook.com/hashtag/doesangue?source=feed_text" class="_58cn"><span class="_58cl">?#&lrm;</span><span class="_58cm">DOESANGUE?</span></a><br> <a data-ft="{&quot;tn&quot;:&quot;*N&quot;,&quot;type&quot;:104}" href="https://www.facebook.com/hashtag/doemedulaossea?source=feed_text" class="_58cn"><span class="_58cl">?#&lrm;</span><span class="_58cm">DOEMEDULAOSSEA?</span></a><br> <a data-ft="{&quot;tn&quot;:&quot;*N&quot;,&quot;type&quot;:104}" href="https://www.facebook.com/hashtag/leucemiatemcura?source=feed_text" class="_58cn"><span class="_58cl">?#&lrm;</span><span class="_58cm">LEUCEMIATEMCURA?</span></a><br> <a data-ft="{&quot;tn&quot;:&quot;*N&quot;,&quot;type&quot;:104}" href="https://www.facebook.com/hashtag/n%C3%B3ssomosacuraparaaleucemia?source=feed_text" class="_58cn"><span class="_58cl">?#&lrm;</span><span class="_58cm">NÓSSOMOSACURAPARAALEUCEMIA?</span></a><br> <a data-ft="{&quot;tn&quot;:&quot;*N&quot;,&quot;type&quot;:104}" href="https://www.facebook.com/hashtag/vemcomagente?source=feed_text" class="_58cn"><span class="_58cl">?#&lrm;</span><span class="_58cm">VEMCOMAGENTE?</span></a><br> <a data-ft="{&quot;tn&quot;:&quot;*N&quot;,&quot;type&quot;:104}" href="https://www.facebook.com/hashtag/vamoquevamo?source=feed_text" class="_58cn"><span class="_58cl">?#&lrm;</span><span class="_58cm">VAMOQUEVAMO?</span></a></span><span class="text_exposed_hide"><span class="text_exposed_link"><a data-ft="{&quot;tn&quot;:&quot;e&quot;}" onclick="var parent = Parent.byClass(this, &quot;text_exposed_root&quot;); if (parent &amp;&amp; parent.getAttribute(&quot;id&quot;) == &quot;id_530f496f9689e2891341915&quot;) { CSS.addClass(parent, &quot;text_exposed&quot;); Arbiter.inform(&quot;reflow&quot;); }">Ver mais</a></span></span></div>
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <form onsubmit="return window.Event &amp;&amp; Event.__inlineSubmit &amp;&amp; Event.__inlineSubmit(this,event)" id="u_0_3u" action="/ajax/ufi/modify.php" method="post" class="commentable_item collapsed_comments autoexpand_mode" rel="async">
+                                                      <input type="hidden" value="€,´,€,´,?,?,?" name="charset_test"><input type="hidden" autocomplete="off" value="AQAaGq-k" name="fb_dtsg"><input type="hidden" value="{&quot;actor&quot;:&quot;437190599646090&quot;,&quot;target_fbid&quot;:&quot;508257389285182&quot;,&quot;target_profile_id&quot;:&quot;437190599646090&quot;,&quot;type_id&quot;:&quot;17&quot;,&quot;assoc_obj_id&quot;:&quot;&quot;,&quot;source_app_id&quot;:&quot;0&quot;,&quot;extra_story_params&quot;:[],&quot;content_timestamp&quot;:&quot;1393510562&quot;,&quot;check_hash&quot;:&quot;AQDh8M6jEcHY8RWU&quot;,&quot;source&quot;:&quot;13&quot;}" name="feedback_params" autocomplete="off"><input type="hidden" value="1" name="data_only_response" autocomplete="off">
+                                                      <div class="_5pcp"><span><a data-reactid=".5" data-ft="{&quot;tn&quot;:&quot;&gt;&quot;}" title="Curtiram isso" aria-live="polite" role="button" href="#" class="UFILikeLink">Curtir</a></span> · <label title="Deixar um comentário" class="uiLinkButton comment_link"><input type="button" onclick="return fc_click(this);" value="Comentar" data-ft="{&quot;type&quot;:24,&quot;tn&quot;:&quot;S&quot;}" class="uiLinkButtonInput"></label> · <a role="button" title="Enviar para amigos ou publicar na sua linha do tempo." data-ft="{&quot;tn&quot;:&quot;J&quot;,&quot;type&quot;:25}" rel="dialog" href="/ajax/sharer/?s=2&amp;appid=2305272732&amp;p%5B0%5D=128707653894721&amp;p%5B1%5D=1073746012&amp;share_source_type=unknown" class="share_action_link">Compartilhar</a> · <span><a href="/MaraBeatrizII/posts/508257389285182?stream_ref=1" class="_5pcq"><abbr class="_5ptz timestamp livetimestamp" data-utime="1393510562" title="Quinta, 27 de fevereiro de 2014 às 11:16">há 3 minutos</abbr></a></span> · <a role="button" href="#" class="uiStreamPrivacy inlineBlock fbStreamPrivacy fbPrivacyAudienceIndicator _5pcq" aria-label="Público" data-hover="tooltip"><i class="lock img sp_acb80g sx_130b4d"></i></a></div>
+                                                      <div id="u_0_41" class="uiUfi UFIContainer _5pc9">
+                                                         <ul data-reactid=".d" data-ft="{&quot;tn&quot;:&quot;]&quot;}" class="UFIList">
+                                                            <li data-reactid=".d.0" class="UFIArrow"><i data-reactid=".d.0.0"></i></li>
+                                                            <li data-reactid=".d.1:2" data-ft="{&quot;tn&quot;:&quot;[&quot;}" class="UFIRow  UFIAddComment UFIAddCommentWithPhotoAttacher UFIFirstComponent UFILastComponent">
+                                                               <div data-reactid=".d.1:2.0" class="clearfix UFIMentionsInputWrap">
+                                                                  <div data-reactid=".d.1:2.0.$left" class="_ohe lfloat">
+                                                                     <div data-reactid=".d.1:2.0.$left.0" class="img _8o _8r UFIImageBlockImage UFIReplyActorPhotoWrapper"><img data-reactid=".d.1:2.0.$left.0.0" alt="Washington Climaco" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/t5/s32x32/186438_100003058100735_793796532_q.jpg" class="img UFIActorImage _54ru"></div>
+                                                                  </div>
+                                                                  <div data-reactid=".d.1:2.0.$right" class="">
+                                                                     <div data-reactid=".d.1:2.0.$right.0" class="UFIImageBlockContent _42ef _8u">
+                                                                        <div data-reactid=".d.1:2.0.$right.0.0" class="UFICommentContainer">
+                                                                           <div data-reactid=".d.1:2.0.$right.0.0.0" class="UFIInputContainer">
+                                                                              <div data-reactid=".d.1:2.0.$right.0.0.0.0" class="uiMentionsInput textBoxContainer ReactLegacyMentionsInput">
+                                                                                 <div data-reactid=".d.1:2.0.$right.0.0.0.0.0" class="highlighter">
+                                                                                    <div data-reactid=".d.1:2.0.$right.0.0.0.0.0.0"><span data-reactid=".d.1:2.0.$right.0.0.0.0.0.0.0" class="highlighterContent hidden_elem"></span></div>
+                                                                                 </div>
+                                                                                 <div data-reactid=".d.1:2.0.$right.0.0.0.0.1" class="uiTypeahead mentionsTypeahead">
+                                                                                    <div data-reactid=".d.1:2.0.$right.0.0.0.0.1.0" class="wrap">
+                                                                                       <input type="hidden" data-reactid=".d.1:2.0.$right.0.0.0.0.1.0.0" class="hiddenInput" autocomplete="off">
+                                                                                       <div data-reactid=".d.1:2.0.$right.0.0.0.0.1.0.1" class="innerWrap"><textarea data-reactid=".d.1:2.0.$right.0.0.0.0.1.0.1.0" value="Escreva um comentário..." placeholder="Escreva um comentário..." title="Escreva um comentário..." class="textInput mentionsTextarea uiTextareaAutogrow uiTextareaNoResize UFIAddCommentInput DOMControl_placeholder" name="add_comment_text">Escreva um comentário...</textarea></div>
+                                                                                    </div>
+                                                                                 </div>
+                                                                                 <input type="hidden" data-reactid=".d.1:2.0.$right.0.0.0.0.2" value="" class="mentionsHidden" autocomplete="off">
+                                                                              </div>
+                                                                              <div data-reactid=".d.1:2.0.$right.0.0.0.1" class="UFICommentAttachmentButtons clearfix">
+                                                                                 <div data-reactid=".d.1:2.0.$right.0.0.0.1.0" aria-label="Anexar uma foto" data-tooltip-alignh="center" data-hover="tooltip" class="UFIPhotoAttachLinkWrapper _m"><i data-reactid=".d.1:2.0.$right.0.0.0.1.0.0" class="UFICommentPhotoIcon"><input type="file" accept="image/*" class="_n" name="file[]" multiple="" title="Selecione um arquivo para enviar" aria-label="Selecione um arquivo para enviar"></i></div>
+                                                                              </div>
+                                                                           </div>
+                                                                        </div>
+                                                                     </div>
+                                                                  </div>
+                                                               </div>
+                                                            </li>
+                                                         </ul>
+                                                      </div>
+                                                   </form>
+                                                </div>
+                                                <div data-ft="{&quot;tn&quot;:&quot;V&quot;}" id="u_0_3n" class="_6a uiPopover _5pbi"><a id="u_0_3t" rel="toggle" aria-expanded="false" aria-haspopup="true" href="#" role="button" aria-label="Opções da história" class="_5pbj _p"></a></div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div data-referrer="more_pager_pagelet_530f496f1d1e69666522901" id="more_pager_pagelet_530f496f1d1e69666522901">
+                                       <div id="u_0_4w" class="mtl pam _5pan uiBoxLightblue">
+                                          <a role="button" href="#" class="_5pc7">Mais histórias<i class="mts mls arrow img sp_8jd5ay sx_fd6c2c"></i></a>
+                                          <div class="_5pc6"><img width="16" height="11" alt="" src="https://fbstatic-a.akamaihd.net/rsrc.php/v2/yb/r/GsNJNwuI-UM.gif" class="img"></div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
 
 <%@ include file="../../scripts/pages/profile/profile_main.js.jsp" %>
 <%@ include file="../../scripts/pages/systemsettings/system_settings_init.js.jsp" %>
 <%@ include file="../../scripts/pages/profile/profile_init.js.jsp" %>
-</div>
