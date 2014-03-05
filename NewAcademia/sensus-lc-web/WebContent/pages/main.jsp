@@ -25,6 +25,15 @@
 	    <link rel="stylesheet" href="/slc/thirdparty/SlickGrid/css/smoothness/jquery-ui-1.8.16.custom.css" type="text/css"/>
 	    <link rel="stylesheet" href="/slc/thirdparty/SlickGrid/examples.css" type="text/css"/>
 	    <link rel="stylesheet" href="/slc/thirdparty/SlickGrid/controls/slick.columnpicker.css" type="text/css"/>
+
+	   <link href="/slc/thirdparty/New folder/face.css" rel="stylesheet" type="text/css">
+      <link href="/slc/thirdparty/New folder/face1.css" rel="stylesheet" type="text/css">
+      <link href="/slc/thirdparty/New folder/face2.css" rel="stylesheet" type="text/css">
+
+
+
+
+      <link href="/slc/thirdparty/New folder/face10.css" rel="stylesheet" type="text/css">
 		<jsp:include page="user_info.jsp" flush="true"/>
 	</head>
 	<body>
