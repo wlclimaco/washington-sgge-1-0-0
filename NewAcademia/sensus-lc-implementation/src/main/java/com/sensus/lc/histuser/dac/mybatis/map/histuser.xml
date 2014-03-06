@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "HistUser">
+
+	<resultMap id="listAllHistUserResults" type="HistUser" >
+	 	<result property="cdHistUser" column="cdhistuser" />
+  		<result property="acao" column="acao" />
+  		<result property="cdTable" column="cdtable" />
+		<result property="createdate" column="create_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="id" column="id" />
+		<result property="tenantid" column="tenant_id" />
+		<result property="cdUser" column="create_user" />
+		<association property="cdUser" column="create_user" javaType="User" select="User.fetchUserById" />
+		<collection property="posts" column="create_user , acao" javaType="Post" select="HistUser.fetchAllPost" />
+	</resultMap>
+
+	<resultMap id="listAllPostsResults" type="Posts" >
+	 	<result property="id" column="id" />
+  		<result property="texto" column="texto" />
+  		<!-- <collection property="fotos" column="foto" javaType="Post" select="HistUser.fetchAllPost" /> -->
+	</resultMap>
+
+
+
+	<sql id="allGrupomuscularColumms">
+     	 cdhistuser,
+ 		 cdtable,
+ 		 id,
+ 		 acao,
+  		 create_date,
+  		 create_use,
+  		 tenant_id
+	</sql>
+
+	<!-- Insert Grupomuscular -->
+ 	<select id="insertGrupomuscular" parameterType="Map">
+
+	    INSERT INTO GRUPOMUSCULAR (nome,descricao,create_date,create_user,tenant_id)
+            VALUES (#{nome,jdbcType=VARCHAR},#{descricao,jdbcType=VARCHAR},#{create_date},#{create_user},#{tenant_id});
+
+		INSERT INTO histuser(
+            cdhistuser, cdtable, id, create_date, create_user, tenant_id)
+    	VALUES (?, ?, ?, ?, ?, ?);
+
+
+	</select>
+
+	<select id="updateGrupomuscular" parameterType="Map">
+		update GRUPOMUSCULAR set create_date = #{create_date}
+
+		<if test="nome != null" >
+				,nome = #{nome,jdbcType=VARCHAR}
+		</if>
+		<if test="descricao != null" >
+				,descricao = #{descricao,jdbcType=VARCHAR}
+		</if>
+			where cdGropoMusc = #{cdGropoMusc}
+
+	</select>
+
+	<!-- Delete Grupomuscular -->
+	<select id="fetchAllPost" parameterType="Map" resultMap="listAllPostsResults">
+
+	     <if test="acao = 0"> ,select cdexerc,nmexerc from exercicio where create_user #{create_user}   </if>
+
+	</select>
+
+	<!-- Fetch All Grupomusculars -->
+	<select id="fetchAllGrupomusculars" parameterType="Map" resultMap="listAllGrupomuscularResults">
+
+		SELECT  <include refid="allGrupomuscularColumms"/>
+		  FROM histuser
+
+	</select>
+
+
+	<!-- Fetch All Grupomusculars -->
+	<select id="fetchAllhistuser" resultMap="listAllGrupomuscularResults">
+
+		SELECT  <include refid="allGrupomuscularColumms"/>
+		  FROM grupomuscular
+		  WHERE cdGropoMusc=#{value}
+
+	</select>
+
+
+	<!-- Pagination Total Rows -->
+	<select id="PaginationTotalRows" parameterType="Map" resultType="int">
+		SELECT count(1)
+		  FROM (SELECT cdGropoMusc
+				  FROM grupomuscular) AS ACADPAGE
+	</select>
+
+	<select id="PaginationTotalRowsByUser" parameterType="Map" resultType="int">
+		SELECT count(1)
+		  FROM (SELECT cdGropoMusc
+				  FROM grupomuscular
+				 WHERE  create_user = #{user} ) AS ACADPAGE
+	</select>
+
+
+
+	<select id="fetchAllGrupomuscularByUser" parameterType="Map" resultMap="listAllGrupomuscularResults">
+
+		   SELECT  <include refid="allGrupomuscularColumms"/>
+		  FROM
+		   (  select ROW_NUMBER() OVER(ORDER BY ${orderBy}) as RowNum
+		             ,t.*
+		        from ( select <include refid="allGrupomuscularColumms"/>
+		                FROM grupomuscular AS tg
+		               WHERE tg.create_user = #{user}
+		             ) t
+		   ) as ACADPAGE
+		   <if test="pageSize > 0" >
+				WHERE RowNum BETWEEN #{startRow} + 1 AND (#{startRow,jdbcType=INTEGER} + #{pageSize,jdbcType=INTEGER})
+		   </if>
+
+
+	</select>
+
+
+</mapper>
+

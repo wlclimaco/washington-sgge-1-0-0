@@ -823,4 +823,8 @@
 		<property name="comumDAC" ref="comumDACTarget" />
 	</bean>
 
+	<bean id="histUserBCLTarget" class="com.sensus.lc.histuser.bcl.impl.HistUserBCLImpl">
+		<property name="histUserDAC" ref="histUserDACTarget" />
+	</bean>
+
 </beans>

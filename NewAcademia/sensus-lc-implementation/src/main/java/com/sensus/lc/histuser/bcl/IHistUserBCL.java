@@ -1,5 +1,6 @@
 package com.sensus.lc.histuser.bcl;
 
+import com.sensus.common.model.response.InternalResponse;
 import com.sensus.common.model.response.InternalResultsResponse;
 import com.sensus.lc.histuser.model.HistUser;
 import com.sensus.lc.histuser.model.request.HistUserRequest;
@@ -41,6 +42,6 @@ public interface IHistUserBCL
 	 * @param groupRequest the group request
 	 * @return the internal results response
 	 */
-	InternalResultsResponse<HistUser> insertHistUser(HistUserRequest histUserRequest);
+	InternalResponse insertHistUser(HistUserRequest histUserRequest);
 
 }

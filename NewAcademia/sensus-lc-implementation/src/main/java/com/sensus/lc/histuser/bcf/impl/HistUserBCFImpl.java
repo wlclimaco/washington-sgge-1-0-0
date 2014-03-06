@@ -6,6 +6,7 @@ import static com.sensus.common.util.SensusInterfaceUtil.handleOperationStatusAn
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.sensus.common.model.response.InternalResponse;
 import com.sensus.common.model.response.InternalResultsResponse;
 import com.sensus.common.validation.ValidationContext;
 import com.sensus.common.validation.ValidationController;
@@ -247,14 +248,14 @@ public class HistUserBCFImpl extends AbstractBaseBCF implements IHistUserBCF
 	public HistUserResponse insertHistUser(HistUserRequest histUserRequest)
 	{
 		HistUserResponse response = new HistUserResponse();
-		InternalResultsResponse<HistUser> internalResponse = null;
+		InternalResponse internalResponse = null;
 
 		try
 		{
 			ValidationContext context = new ValidationContext();
 
 			internalResponse = getHistUserBCL().insertHistUser(histUserRequest);
-			response.setHistUsers(internalResponse.getResultsList());
+			// response.setHistUsers(internalResponse.getResu);
 
 			handleOperationStatusAndMessages(response, internalResponse, context.getMessages(), true);
 		}

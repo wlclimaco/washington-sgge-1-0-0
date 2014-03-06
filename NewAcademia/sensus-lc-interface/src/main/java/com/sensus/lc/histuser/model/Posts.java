@@ -12,12 +12,23 @@ import com.sensus.lc.foto.model.Foto;
 @SuppressWarnings("serial")
 public class Posts extends PrincipalClass
 {
+	private Integer id;
 
 	/** The academ. */
 	private String texto;
 
 	/** The lograd. */
 	private List<Foto> fotos;
+
+	public Integer getId()
+	{
+		return id;
+	}
+
+	public void setId(Integer id)
+	{
+		this.id = id;
+	}
 
 	/**
 	 * Gets the texto.
@@ -59,15 +70,11 @@ public class Posts extends PrincipalClass
 		this.fotos = fotos;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.sensus.lc.base.model.PrincipalClass#toString()
-	 */
 	@Override
 	public String toString()
 	{
-		return "Posts [getTexto()=" + getTexto() + ", getFotos()=" + getFotos() + ", toString()=" + super.toString()
-				+ "]";
+		return "Posts [getId()=" + getId() + ", getTexto()=" + getTexto() + ", getFotos()=" + getFotos()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }
