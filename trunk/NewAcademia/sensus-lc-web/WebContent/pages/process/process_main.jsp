@@ -20,46 +20,14 @@
     }
   </style>
 <div id="process-main">
-	<div class="content-inner">
-	<div class="content-header">
-
-   </div>
-       <div class="yui-t2">
-       	<div class="yui-b">
-			<div id="w-filters"></div>
-		</div>
-	<div id="yui-main">
-      <div id="history-box" class="yui-b">
-
-
-
-      		<div class="tools">
-			 <a tabindex="0" id="ajax-button" href="exercicio/exerciciocreate" class="fg-button ui-widget ui-state-default ui-corner-all group-create alist">Create Exercicio</a>
-            	<div class="export-select">
-                	<ul class="link-list">
-                    	<li class="last export-type"><small><strong><s:message code="analytics.page.export" /></strong> <a href="" class="csv" id="csv"><s:message code="analytics.page.csv" /></a></small></li>
-                    </ul>
-                </div>
-    	    </div>
-	<%-- START Filter Bar --%>
-	<div class="filter-results-container">
-		<div class="yui-ge">
-			<div class="yui-u first">
-				<ul class="filter-container">
-					<li id='tag-clear'>
-						<a href="#" class="clear"><s:message code="smartpoint.filter.reset" /></a>
-					</li>
-				</ul>
-			</div>
-			<div class="yui-u results">
-				<span id="total-records"></span>
-				<span id="label-total-records"><s:message code="table.result.matches"/></span>
-			</div>
-
-		</div>
+<div class="tools">
+ <a tabindex="0" id="ajax-button" href="exercicio/exerciciocreate" class="fg-button ui-widget ui-state-default ui-corner-all group-create alist">Create Exercicio</a>
+	<div class="export-select">
+		<ul class="link-list">
+			<li class="last export-type"><small><strong><s:message code="analytics.page.export" /></strong> <a href="" class="csv" id="csv"><s:message code="analytics.page.csv" /></a></small></li>
+		</ul>
 	</div>
-
-	<%-- END Filter Bar --%>
+</div>
     <div id="history" class="history-container">
 
 		  <!-- START status viewport -->
@@ -80,10 +48,6 @@
             </div>
        </div>
      </div>
-     </div>
- </div>
-</div>
-</div>
 
 <%@ include file="../../scripts/pages/process/process_main.js.jsp" %>
 <%@ include file="../../scripts/pages/process/process_actions.js.jsp" %>

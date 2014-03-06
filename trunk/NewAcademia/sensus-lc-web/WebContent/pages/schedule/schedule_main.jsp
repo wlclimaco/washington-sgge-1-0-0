@@ -1,8 +1,7 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-  <title>SlickGrid example 4: Model</title>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="utf-8"%>
+<%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags' %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
   <style>
     .cell-title {
       font-weight: bold;
@@ -25,8 +24,6 @@
       background-color: transparent; /* show default selected row background */
     }
   </style>
-</head>
-<body>
 <div style="position:relative">
   <div id="grid_main" style="width:100%;">
     <div class="grid-header" style="width:100%">
@@ -44,11 +41,6 @@
   and % at least &nbsp;
   <div style="width:100px;display:inline-block;" id="pcSlider2"></div>
 </div>
-
-
-
-</body>
-</html>
 
 <jsp:include page="../../scripts/pages/grupoMuscular/grupo_muscular_main.js.jsp" flush="true"/>
 <jsp:include page="../../scripts/pages/grupoMuscular/grupo_muscular_init.js.jsp" flush="true"/>
