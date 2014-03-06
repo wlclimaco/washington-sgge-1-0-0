@@ -263,3 +263,25 @@ WITH (
 ALTER TABLE foto
   OWNER TO postgres;
 
+  ------------------------------
+
+
+CREATE TABLE histuser
+(
+  cdhistuser serial NOT NULL,
+  cdtable integer NOT NULL,
+  id integer NOT NULL,,
+  create_date timestamp with time zone,
+  create_user character varying(20),
+  tenant_id integer,
+  CONSTRAINT cdhistuser_pkey PRIMARY KEY (cdhistuser),
+  CONSTRAINT fk_tenant_cdhistuser FOREIGN KEY (tenant_id)
+      REFERENCES tenant (tenant_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE CASCADE
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE histuser
+  OWNER TO qat;
+
