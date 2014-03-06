@@ -206,9 +206,9 @@ public class HistUserBCLImpl implements IHistUserBCL
 	 * com.sensus.mlc.histUser.bcl.IHistUserBCL#insertHistUser(com.sensus.mlc.histUser.model.request.HistUserRequest)
 	 */
 	@Override
-	public InternalResultsResponse<HistUser> insertHistUser(HistUserRequest histUserRequest)
+	public InternalResponse insertHistUser(HistUserRequest histUserRequest)
 	{
-		InternalResultsResponse<HistUser> response = getHistUserDAC().insertHistUser(histUserRequest);
+		InternalResponse response = getHistUserDAC().insertHistUser(histUserRequest);
 
 		if (!response.isInError())
 		{

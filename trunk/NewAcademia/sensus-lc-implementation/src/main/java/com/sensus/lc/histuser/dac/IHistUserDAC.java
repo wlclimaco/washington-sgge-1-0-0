@@ -1,5 +1,6 @@
 package com.sensus.lc.histuser.dac;
 
+import com.sensus.common.model.response.InternalResponse;
 import com.sensus.common.model.response.InternalResultsResponse;
 import com.sensus.lc.histuser.model.HistUser;
 import com.sensus.lc.histuser.model.request.HistUserRequest;
@@ -17,7 +18,7 @@ public interface IHistUserDAC
 	 * @param histUserRequest the hist user request
 	 * @return the internal results response
 	 */
-	InternalResultsResponse<HistUser> insertHistUser(HistUserRequest histUserRequest);
+	InternalResponse insertHistUser(HistUserRequest histUserRequest);
 
 	/**
 	 * Fetch group by id.
