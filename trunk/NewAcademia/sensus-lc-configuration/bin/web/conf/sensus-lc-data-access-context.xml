@@ -39,6 +39,12 @@
 		<property name="dataSource" ref="mlcDataSource" />
 	</bean>
 
+	<bean id="histUser-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation"
+			value="classpath:com/sensus/lc/histuser/dac/mybatis/map/histUser-sql-map-config.xml" />
+		<property name="dataSource" ref="mlcDataSource" />
+	</bean>
+
 
 	<!-- SqlMap setup for myBATIS Database Layer TAG -->
 	<bean id="tag-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -181,6 +187,10 @@
 
 	<bean id="comumDACTarget" class="com.sensus.lc.comum.dac.mybatis.ComumDACImpl">
 		<property name="sqlSessionFactory" ref="comum-sqlSessionFactory" />
+	</bean>
+
+	<bean id="histUserDACTarget" class="com.sensus.lc.histuser.dac.mybatis.HistUserDACImpl">
+		<property name="sqlSessionFactory" ref="histUser-sqlSessionFactory" />
 	</bean>
 
 

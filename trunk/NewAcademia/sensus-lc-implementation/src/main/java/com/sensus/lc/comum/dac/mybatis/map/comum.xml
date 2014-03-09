@@ -5,6 +5,83 @@
 
 <mapper namespace = "Comum">
 
+	<resultMap id="comentarioResults" type="Comentario">
+		<result property="cdcomentario" column="cdcomentario" />
+		<result property="acaoComentarioEnum" column="cdtable" />
+		<result property="id" column="id" />
+		<result property="coment" column="texto" />
+		<result property="dtpost" column="create_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="createuser" column="create_user" />
+		<result property="tenantid" column="tenant_id" />
+		<collection property="curtis" column="cdcomentario" ofType="Curtir" select="Consumption.fetchAllById" />
+		<collection property="fotos" column="cdcomentario" ofType="Foto" select="Consumption.fetchAllById" />
+	</resultMap>
+
+	<resultMap id="curtirResults" type="Curtir">
+		<result property="cdCurtir" column="cdcurtir" />
+		<result property="acaoEnum" column="cdtable" />
+		<result property="id" column="id" />
+		<result property="curtirTypeEnum" column="status" />
+		<result property="createdate" column="create_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="createuser" column="create_user" />
+		<result property="tenantid" column="tenant_id" />
+	</resultMap>
+
+	<resultMap id="fotosResults" type="Fotos">
+		<result property="cdfoto" column="cdfoto" />
+		<result property="nmfoto" column="nmfoto" />
+		<result property="lcfoto" column="lcfoto" />
+		<result property="ttfoto" column="ttfoto" />
+		<result property="comentario" column="comentario" />
+		<result property="cdtable" column="fototypeenun" />
+		<result property="id" column="id" />
+		<result property="createdate" column="create_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="createuser" column="create_user" />
+		<result property="tenantid" column="tenant_id" />
+	</resultMap>
+
+	<select id="insertComentario" parameterType="Map" resultType="int" statementType="CALLABLE">
+     { call ins_comentario(
+     		#{cdtable,jdbcType=INTEGER},
+            #{id,jdbcType=INTEGER},
+            #{texto,jdbcType=VARCHAR},
+            #{acao,jdbcType=INTEGER},
+            #{create_user,jdbcType=VARCHAR},
+            #{tenant_id,jdbcType=INTEGER}
+
+       ) }
+
+    </select >
+
+    <select id="insertCurtir" parameterType="Map" resultType="int" statementType="CALLABLE">
+
+     { call ins_histuser(
+     		#{cdtable,jdbcType=INTEGER},
+            #{id,jdbcType=INTEGER},
+            #{p_status,jdbcType=INTEGER},
+            #{create_user,jdbcType=VARCHAR},
+            #{tenant_id,jdbcType=INTEGER}
+
+       ) }
+
+    </select >
+
+    <select id="insertFotos" parameterType="Map" resultType="int" statementType="CALLABLE">
+
+     { call ins_foto(
+     		#{nmfoto,jdbcType=VARCHAR},
+     		#{lcfoto,jdbcType=VARCHAR},
+     		#{p_ttfoto,jdbcType=VARCHAR},
+     		#{comentario,jdbcType=VARCHAR},
+     		#{cdtable,jdbcType=INTEGER},
+            #{id,jdbcType=INTEGER},
+            #{create_user,jdbcType=VARCHAR},
+            #{tenant_id,jdbcType=INTEGER}
+
+       ) }
+
+    </select >
+
 
 </mapper>
 

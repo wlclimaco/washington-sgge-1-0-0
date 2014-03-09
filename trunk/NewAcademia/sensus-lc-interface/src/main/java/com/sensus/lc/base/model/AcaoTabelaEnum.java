@@ -9,13 +9,13 @@ public enum AcaoTabelaEnum implements IIntegerEnum
 {
 
 	/** The economy. */
-	ACADEMIA(1),
+	INSERT_ACADEMIA(1),
 
 	/** The value. */
-	GRUPOMUSCULAR(2),
+	INSERT_GRUPO_MUSCULAR(2),
 
 	/** The security. */
-	EXERCICIO(3);
+	INSERT_EXERCICIO(3);
 
 	/** The list type enum id. */
 	private Integer listTypeEnumId;

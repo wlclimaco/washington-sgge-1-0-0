@@ -25,7 +25,7 @@ public class HistUser extends PrincipalClass
 	private Integer cdTable;
 
 	/** The id. */
-	private String id;
+	private Integer id;
 
 	/** The posts. */
 	List<Posts> posts;
@@ -115,7 +115,7 @@ public class HistUser extends PrincipalClass
 	 * 
 	 * @return the id
 	 */
-	public String getId()
+	public Integer getId()
 	{
 		return id;
 	}
@@ -125,7 +125,7 @@ public class HistUser extends PrincipalClass
 	 * 
 	 * @param id the new id
 	 */
-	public void setId(String id)
+	public void setId(Integer id)
 	{
 		this.id = id;
 	}
