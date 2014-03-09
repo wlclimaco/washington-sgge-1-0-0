@@ -3,6 +3,7 @@ package com.sensus.lc.histuser.dac.mybatis;
 import static com.sensus.common.util.SensusMyBatisDacHelper.doInsert;
 import static com.sensus.common.util.SensusMyBatisDacHelper.doQueryForList;
 
+import java.util.Date;
 import java.util.HashMap;
 
 import org.apache.commons.logging.Log;
@@ -144,9 +145,12 @@ public class HistUserDACImpl extends SqlSessionDaoSupport implements IHistUserDA
 	{
 		HashMap<String, Object> paramMap = new HashMap<String, Object>(PARAMSIZE5);
 
-		paramMap.put(HISTUSER_ID, histUserRequest.getHistUser().getId());
-		paramMap.put(CREATE_USER, histUserRequest.getUserContext().getUserId());
-		paramMap.put(SELECTION_PAGINATION_IDS, histUserRequest.getSelectionPaginationIds());
+		paramMap.put("cdtable", histUserRequest.getFirstHistUser().getCdTable());
+		paramMap.put("id", histUserRequest.getFirstHistUser().getId());
+		paramMap.put("acao", histUserRequest.getFirstHistUser().getAcao());
+		paramMap.put("create_date", new Date());
+		paramMap.put("create_user", histUserRequest.getFirstHistUser().getCdUser().getUserName());
+		paramMap.put("tenant_id", histUserRequest.getFirstHistUser().getTenantid());
 
 		InternalResponse response = new InternalResponse();
 		doInsert(getSqlSession(), INSERT_HISTUSER, paramMap, response);

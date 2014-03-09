@@ -24,14 +24,18 @@
 		tenant_id
 	</sql>
 
-	<!-- Insert Grupomuscular -->
- 	<select id="insertGrupomuscular" parameterType="Map">
+	<select id="insertGrupomuscular" parameterType="Map" resultType="int" statementType="CALLABLE">
 
-	    INSERT INTO GRUPOMUSCULAR (nome,descricao,create_date,create_user,tenant_id)
-            VALUES (#{nome,jdbcType=VARCHAR},#{descricao,jdbcType=VARCHAR},#{create_date},#{create_user},#{tenant_id});
+     { call ins_grupoMuscular(
+     		#{nome,jdbcType=VARCHAR},
+     		#{descricao,jdbcType=VARCHAR},
+     		#{create_user},
+     		#{tenant_id}
 
+       ) }
 
-	</select>
+    </select >
+
 
 	<select id="updateGrupomuscular" parameterType="Map">
 		update GRUPOMUSCULAR set create_date = #{create_date}

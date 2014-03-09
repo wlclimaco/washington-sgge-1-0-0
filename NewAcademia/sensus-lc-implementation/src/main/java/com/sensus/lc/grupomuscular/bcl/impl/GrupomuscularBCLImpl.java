@@ -9,12 +9,18 @@ import com.sensus.common.csv.CSVColumn;
 import com.sensus.common.model.response.InternalResponse;
 import com.sensus.common.model.response.InternalResultsResponse;
 import com.sensus.common.validation.ValidationUtil;
+import com.sensus.lc.base.model.AcaoTabelaEnum;
+import com.sensus.lc.base.model.TabelaEnum;
 import com.sensus.lc.grupomuscular.bcl.IGrupomuscularBCL;
 import com.sensus.lc.grupomuscular.dac.IGrupomuscularDAC;
 import com.sensus.lc.grupomuscular.model.Grupomuscular;
 import com.sensus.lc.grupomuscular.model.request.GrupomuscularRequest;
 import com.sensus.lc.grupomuscular.model.request.InquiryGrupomuscularRequest;
+import com.sensus.lc.histuser.dac.IHistUserDAC;
+import com.sensus.lc.histuser.model.HistUser;
+import com.sensus.lc.histuser.model.request.HistUserRequest;
 import com.sensus.lc.process.bcl.IProcessBCL;
+import com.sensus.lc.user.model.User;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -76,6 +82,9 @@ public class GrupomuscularBCLImpl implements IGrupomuscularBCL
 
 	/** The grupomuscular dac. */
 	private IGrupomuscularDAC grupomuscularDAC;
+
+	/** The grupomuscular dac. */
+	private IHistUserDAC histUserDAC;
 
 	/** The process bcl. */
 	private IProcessBCL processBCL;
@@ -141,6 +150,26 @@ public class GrupomuscularBCLImpl implements IGrupomuscularBCL
 	public void setProcessBCL(IProcessBCL processBCL)
 	{
 		this.processBCL = processBCL;
+	}
+
+	/**
+	 * Gets the hist user dac.
+	 * 
+	 * @return the hist user dac
+	 */
+	public IHistUserDAC getHistUserDAC()
+	{
+		return histUserDAC;
+	}
+
+	/**
+	 * Sets the hist user dac.
+	 * 
+	 * @param histUserDAC the new hist user dac
+	 */
+	public void setHistUserDAC(IHistUserDAC histUserDAC)
+	{
+		this.histUserDAC = histUserDAC;
 	}
 
 	/**
@@ -247,28 +276,21 @@ public class GrupomuscularBCLImpl implements IGrupomuscularBCL
 			return grupomuscularResponse;
 		}
 
-		// insert grupomuscular
-		grupomuscularResponse = getGrupomuscularDAC().insertGrupomuscular(grupomuscularRequest);
-		if (grupomuscularResponse.isInError())
+		if (!grupomuscularResponse.isInError())
 		{
-			return grupomuscularResponse;
-		}
 
-		// insert process for grupomuscular creation
-		//
-		// InternalResultsResponse<DMProcess> processResponse =
-		// insertGrupomuscularProcess(grupomuscularRequest.getFirstGrupomuscular(), false,
-		// "CreateGrupomuscularAction.ACTION", ProcessStatusEnum.COMPLETED,
-		// null, grupomuscularRequest);
-		//
-		// if (processResponse.isInError())
-		// {
-		// grupomuscularResponse.setStatus(processResponse.getStatus());
-		// grupomuscularResponse.addMessages(processResponse.getMessageInfoList());
-		// return grupomuscularResponse;
-		// }
-		//
-		// grupomuscularRequest.setProcessId(processResponse.getFirstResult().getId());
+			HistUser histUser = new HistUser();
+			histUser.setId(grupomuscularResponse.getFirstResult().getCdgrmusc());
+			histUser.setCdTable(TabelaEnum.GRUPOMUSCULAR.getValue());
+			histUser.setAcao(AcaoTabelaEnum.INSERT_GRUPO_MUSCULAR.getValue());
+			histUser.setId(grupomuscularResponse.getFirstResult().getCdgrmusc());
+			histUser.setTenantid(grupomuscularRequest.getUserContext().getTenant().getId());
+			User user = new User(grupomuscularRequest.getUserContext().getUserId());
+			histUser.setCdUser(user);
+			HistUserRequest histUserRequest = new HistUserRequest(histUser);
+			getHistUserDAC().insertHistUser(histUserRequest);
+
+		}
 
 		return grupomuscularResponse;
 	}
@@ -371,6 +393,12 @@ public class GrupomuscularBCLImpl implements IGrupomuscularBCL
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.sensus.lc.grupomuscular.bcl.IGrupomuscularBCL#fetchAllGrupomuscularByUser(com.sensus.lc.grupomuscular.model
+	 * .request.InquiryGrupomuscularRequest)
+	 */
 	@Override
 	public InternalResultsResponse<Grupomuscular> fetchAllGrupomuscularByUser(
 			InquiryGrupomuscularRequest inquiryGrupomuscularRequest)

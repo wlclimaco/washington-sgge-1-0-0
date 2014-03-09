@@ -813,6 +813,7 @@
 
 	<bean id="grupomuscularBCLTarget" class="com.sensus.lc.grupomuscular.bcl.impl.GrupomuscularBCLImpl">
 		<property name="grupomuscularDAC" ref="grupomuscularDACTarget" />
+		<property name="histUserDAC" ref="histUserDACTarget" />
 	</bean>
 
 	<bean id="exercicioBCLTarget" class="com.sensus.lc.exercicio.bcl.impl.ExercicioBCLImpl">
@@ -821,6 +822,10 @@
 
 	<bean id="comumBCLTarget" class="com.sensus.lc.comum.bcl.impl.ComumBCLImpl">
 		<property name="comumDAC" ref="comumDACTarget" />
+	</bean>
+
+	<bean id="histUserBCLTarget" class="com.sensus.lc.histuser.bcl.impl.HistUserBCLImpl">
+		<property name="histUserDAC" ref="histUserDACTarget" />
 	</bean>
 
 </beans>

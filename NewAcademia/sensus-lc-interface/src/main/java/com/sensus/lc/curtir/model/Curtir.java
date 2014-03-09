@@ -1,8 +1,10 @@
+/*
+ *
+ */
 package com.sensus.lc.curtir.model;
 
 import com.sensus.common.model.SensusModel;
-import com.sensus.lc.base.model.AcaoTabelaEnum;
-import com.sensus.lc.pessoa.model.Pessoa;
+import com.sensus.lc.base.model.TabelaEnum;
 
 /**
  * The Class Curtir.
@@ -20,33 +22,10 @@ public class Curtir extends SensusModel
 	private CurtirTypeEnum curtirTypeEnum;
 
 	/** The acao enum. */
-	private AcaoTabelaEnum acaoEnum;
+	private TabelaEnum acaoEnum;
 
-	/** The pessoa. */
-	private Pessoa pessoa;
-
-	/** The cd evento. */
-	private Integer cdEvento;
-
-	/**
-	 * Gets the cdcurtir.
-	 * 
-	 * @return the cdcurtir
-	 */
-	public AcaoTabelaEnum getCdcurtir()
-	{
-		return acaoEnum;
-	}
-
-	/**
-	 * Sets the cdcurtir.
-	 * 
-	 * @param cdcurtir the new cdcurtir
-	 */
-	public void setCdcurtir(AcaoTabelaEnum cdcurtir)
-	{
-		acaoEnum = cdcurtir;
-	}
+	/** The id. */
+	private Integer id;
 
 	/**
 	 * Gets the cd curtir.
@@ -93,7 +72,7 @@ public class Curtir extends SensusModel
 	 * 
 	 * @return the acao enum
 	 */
-	public AcaoTabelaEnum getAcaoEnum()
+	public TabelaEnum getAcaoEnum()
 	{
 		return acaoEnum;
 	}
@@ -103,60 +82,36 @@ public class Curtir extends SensusModel
 	 * 
 	 * @param acaoEnum the new acao enum
 	 */
-	public void setAcaoEnum(AcaoTabelaEnum acaoEnum)
+	public void setAcaoEnum(TabelaEnum acaoEnum)
 	{
 		this.acaoEnum = acaoEnum;
 	}
 
 	/**
-	 * Gets the pessoa.
+	 * Gets the id.
 	 * 
-	 * @return the pessoa
+	 * @return the id
 	 */
-	public Pessoa getPessoa()
+	public Integer getId()
 	{
-		return pessoa;
+		return id;
 	}
 
 	/**
-	 * Sets the pessoa.
+	 * Sets the id.
 	 * 
-	 * @param pessoa the new pessoa
+	 * @param id the new id
 	 */
-	public void setPessoa(Pessoa pessoa)
+	public void setId(Integer id)
 	{
-		this.pessoa = pessoa;
+		this.id = id;
 	}
 
-	/**
-	 * Gets the cd evento.
-	 * 
-	 * @return the cd evento
-	 */
-	public Integer getCdEvento()
-	{
-		return cdEvento;
-	}
-
-	/**
-	 * Sets the cd evento.
-	 * 
-	 * @param cdEvento the new cd evento
-	 */
-	public void setCdEvento(Integer cdEvento)
-	{
-		this.cdEvento = cdEvento;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.sensus.common.model.SensusModel#toString()
-	 */
 	@Override
 	public String toString()
 	{
-		return "Curtir [getCdcurtir()=" + getCdcurtir() + ", getCdCurtir()=" + getCdCurtir() + ", getCurtirTypeEnum()="
-				+ getCurtirTypeEnum() + ", getAcaoEnum()=" + getAcaoEnum() + ", getPessoa()=" + getPessoa()
-				+ ", getCdEvento()=" + getCdEvento() + ", toString()=" + super.toString() + "]";
+		return "Curtir [getCdCurtir()=" + getCdCurtir() + ", getCurtirTypeEnum()=" + getCurtirTypeEnum()
+				+ ", getAcaoEnum()=" + getAcaoEnum() + ", getId()=" + getId() + ", toString()=" + super.toString()
+				+ "]";
 	}
 }

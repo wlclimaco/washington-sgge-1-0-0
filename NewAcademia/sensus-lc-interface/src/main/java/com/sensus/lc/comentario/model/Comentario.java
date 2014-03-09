@@ -5,50 +5,105 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.sensus.common.model.SensusModel;
-import com.sensus.lc.base.model.AcaoTabelaEnum;
+import com.sensus.lc.base.model.TabelaEnum;
 import com.sensus.lc.curtir.model.Curtir;
+import com.sensus.lc.foto.model.Foto;
 
+/**
+ * The Class Comentario.
+ */
 @SuppressWarnings("serial")
 public class Comentario extends SensusModel
 {
 	/** The Constant FIRST. */
 	private static final Integer FIRST = 0;
+
+	/** The cdcomentario. */
 	private Integer cdcomentario;
+
+	/** The dtpost. */
 	private Date dtpost;
+
+	/** The coment. */
 	private String coment;
-	private AcaoTabelaEnum acaoComentarioEnum;
+
+	/** The id. */
+	private Integer id;
+
+	/** The acao comentario enum. */
+	private TabelaEnum acaoComentarioEnum;
+
+	/** The curtis. */
 	private List<Curtir> curtis;
 
+	/** The fotos. */
+	private List<Foto> fotos;
+
+	/**
+	 * Gets the cdcomentario.
+	 * 
+	 * @return the cdcomentario
+	 */
 	public Integer getCdcomentario()
 	{
 		return cdcomentario;
 	}
 
+	/**
+	 * Sets the cdcomentario.
+	 * 
+	 * @param cdcomentario the new cdcomentario
+	 */
 	public void setCdcomentario(Integer cdcomentario)
 	{
 		this.cdcomentario = cdcomentario;
 	}
 
-	public AcaoTabelaEnum getAcaoComentarioEnum()
+	/**
+	 * Gets the acao comentario enum.
+	 * 
+	 * @return the acao comentario enum
+	 */
+	public TabelaEnum getAcaoComentarioEnum()
 	{
 		return acaoComentarioEnum;
 	}
 
-	public void setAcaoComentarioEnum(AcaoTabelaEnum acaoComentarioEnum)
+	/**
+	 * Sets the acao comentario enum.
+	 * 
+	 * @param acaoComentarioEnum the new acao comentario enum
+	 */
+	public void setAcaoComentarioEnum(TabelaEnum acaoComentarioEnum)
 	{
 		this.acaoComentarioEnum = acaoComentarioEnum;
 	}
 
+	/**
+	 * Gets the curtis.
+	 * 
+	 * @return the curtis
+	 */
 	public List<Curtir> getCurtis()
 	{
 		return curtis;
 	}
 
+	/**
+	 * Sets the curtis.
+	 * 
+	 * @param curtis the new curtis
+	 */
 	public void setCurtis(List<Curtir> curtis)
 	{
 		this.curtis = curtis;
 	}
 
+	/**
+	 * Adds the curtir.
+	 * 
+	 * @param exercicio the exercicio
+	 */
 	public void addCurtir(Curtir exercicio)
 	{
 		if (getCurtis() == null)
@@ -57,6 +112,41 @@ public class Comentario extends SensusModel
 		}
 
 		getCurtis().add(exercicio);
+	}
+
+	/**
+	 * Gets the fotos.
+	 * 
+	 * @return the fotos
+	 */
+	public List<Foto> getFotos()
+	{
+		return fotos;
+	}
+
+	/**
+	 * Sets the fotos.
+	 * 
+	 * @param fotos the new fotos
+	 */
+	public void setFotos(List<Foto> fotos)
+	{
+		this.fotos = fotos;
+	}
+
+	/**
+	 * Adds the fotos.
+	 * 
+	 * @param exercicio the exercicio
+	 */
+	public void addFotos(Foto exercicio)
+	{
+		if (getFotos() == null)
+		{
+			setFotos(new ArrayList<Foto>());
+		}
+
+		getFotos().add(exercicio);
 	}
 
 	/**
@@ -120,31 +210,35 @@ public class Comentario extends SensusModel
 	}
 
 	/**
-	 * Gets the foto.
+	 * Gets the id.
 	 * 
-	 * @return the foto
+	 * @return the id
 	 */
-	public AcaoTabelaEnum getFoto()
+	public Integer getId()
 	{
-		return acaoComentarioEnum;
+		return id;
 	}
 
 	/**
-	 * Sets the foto.
+	 * Sets the id.
 	 * 
-	 * @param foto the new foto
+	 * @param id the new id
 	 */
-	public void setFoto(AcaoTabelaEnum foto)
+	public void setId(Integer id)
 	{
-		acaoComentarioEnum = foto;
+		this.id = id;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.sensus.common.model.SensusModel#toString()
+	 */
 	@Override
 	public String toString()
 	{
 		return "Comentario [getCdcomentario()=" + getCdcomentario() + ", getAcaoComentarioEnum()="
-				+ getAcaoComentarioEnum() + ", getCurtis()=" + getCurtis() + ", getCdfoto()=" + getCdfoto()
-				+ ", getDtpost()=" + getDtpost() + ", getComent()=" + getComent() + ", getFoto()=" + getFoto()
-				+ ", toString()=" + super.toString() + "]";
+				+ getAcaoComentarioEnum() + ", getCurtis()=" + getCurtis() + ", getFotos()=" + getFotos()
+				+ ", getCdfoto()=" + getCdfoto() + ", getDtpost()=" + getDtpost() + ", getComent()=" + getComent()
+				+ ", getId()=" + getId() + ", toString()=" + super.toString() + "]";
 	}
 }

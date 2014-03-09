@@ -1,24 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration
-PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-config.dtd">
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
 
-<settings>
-	<setting name="lazyLoadingEnabled" value="false" />
-</settings>
+ <settings>
+  <setting name="lazyLoadingEnabled" value="false" />
+ </settings>
 
 <typeAliases>
-	<typeAlias alias="Tenant"    type="com.sensus.lc.tenant.model.Tenant" />
-	<typeAlias alias="HistUser"  type="com.sensus.lc.histuser.model.HistUser"/>
-	<typeAlias alias="Posts"  type="com.sensus.lc.histuser.model.Posts"/>
-	<typeAlias alias="InquiryGrupomuscularRequest" type="com.sensus.lc.grupomuscular.model.request.InquiryGrupomuscularRequest" />
+
+  <!-- Group mapping -->
+  <typeAlias alias="Tenant"                   type="com.sensus.lc.tenant.model.Tenant" />
+  <typeAlias alias="HistUserRequest"             type="com.sensus.lc.histuser.model.request.HistUserRequest" />
+  <typeAlias alias="InquiryHistUserRequest" type="com.sensus.lc.histuser.model.request.InquiryHistUserRequest" />
+  <typeAlias alias="HistUser"                    type="com.sensus.lc.histuser.model.HistUser"/>
+
 
 </typeAliases>
 
-<mappers>
-	<mapper resource="com/sensus/lc/histUser/dac/mybatis/map/histuser.xml"/>
+ <typeHandlers>
+   <typeHandler javaType="Date" jdbcType="TIMESTAMP" handler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+    </typeHandlers>
+
+ <mappers>
+     <mapper resource="com/sensus/lc/histuser/dac/mybatis/map/histUser.xml"/>
+
 </mappers>
 
 </configuration>

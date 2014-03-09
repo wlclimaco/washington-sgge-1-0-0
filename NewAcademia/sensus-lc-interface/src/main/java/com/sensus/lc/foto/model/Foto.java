@@ -1,20 +1,36 @@
 package com.sensus.lc.foto.model;
 
-import java.sql.Date;
-
 import com.sensus.common.model.SensusModel;
-import com.sensus.lc.base.model.AcaoTabelaEnum;
+import com.sensus.lc.base.model.TabelaEnum;
 
+/**
+ * The Class Foto.
+ */
 @SuppressWarnings("serial")
 public class Foto extends SensusModel
 {
 	/** The Constant FIRST. */
 	private static final Integer FIRST = 0;
+
+	/** The cdfoto. */
 	private Integer cdfoto;
-	private Date dtpost;
-	private String coment;
-	private String foto;
-	private AcaoTabelaEnum acaoComentarioEnum;
+
+	/** The id. */
+	private Integer id;
+
+	/** The coment. */
+	private String nmfoto;
+
+	/** The lcfoto. */
+	private String lcfoto;
+
+	/** The ttfoto. */
+	private String ttfoto;
+
+	private String comentario;
+
+	/** The acao comentario enum. */
+	private TabelaEnum acaoComentarioEnum;
 
 	/**
 	 * Gets the cdfoto.
@@ -37,74 +53,121 @@ public class Foto extends SensusModel
 	}
 
 	/**
-	 * Gets the dtpost.
+	 * Gets the id.
 	 * 
-	 * @return the dtpost
+	 * @return the id
 	 */
-	public Date getDtpost()
+	public Integer getId()
 	{
-		return dtpost;
+		return id;
 	}
 
 	/**
-	 * Sets the dtpost.
+	 * Sets the id.
 	 * 
-	 * @param dtpost the new dtpost
+	 * @param id the new id
 	 */
-	public void setDtpost(Date dtpost)
+	public void setId(Integer id)
 	{
-		this.dtpost = dtpost;
+		this.id = id;
 	}
 
 	/**
-	 * Gets the coment.
+	 * Gets the nmfoto.
 	 * 
-	 * @return the coment
+	 * @return the nmfoto
 	 */
-	public String getComent()
+	public String getNmfoto()
 	{
-		return coment;
+		return nmfoto;
 	}
 
 	/**
-	 * Sets the coment.
+	 * Sets the nmfoto.
 	 * 
-	 * @param coment the new coment
+	 * @param nmfoto the new nmfoto
 	 */
-	public void setComent(String coment)
+	public void setNmfoto(String nmfoto)
 	{
-		this.coment = coment;
+		this.nmfoto = nmfoto;
 	}
 
 	/**
-	 * Gets the foto.
+	 * Gets the lcfoto.
 	 * 
-	 * @return the foto
+	 * @return the lcfoto
 	 */
-	public String getFoto()
+	public String getLcfoto()
 	{
-		return foto;
+		return lcfoto;
 	}
 
 	/**
-	 * Sets the foto.
+	 * Sets the lcfoto.
 	 * 
-	 * @param foto the new foto
+	 * @param lcfoto the new lcfoto
 	 */
-	public void setFoto(String foto)
+	public void setLcfoto(String lcfoto)
 	{
-		this.foto = foto;
+		this.lcfoto = lcfoto;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.sensus.common.model.SensusModel#toString()
+	/**
+	 * Gets the ttfoto.
+	 * 
+	 * @return the ttfoto
 	 */
+	public String getTtfoto()
+	{
+		return ttfoto;
+	}
+
+	/**
+	 * Sets the ttfoto.
+	 * 
+	 * @param ttfoto the new ttfoto
+	 */
+	public void setTtfoto(String ttfoto)
+	{
+		this.ttfoto = ttfoto;
+	}
+
+	/**
+	 * Gets the acao comentario enum.
+	 * 
+	 * @return the acao comentario enum
+	 */
+	public TabelaEnum getAcaoComentarioEnum()
+	{
+		return acaoComentarioEnum;
+	}
+
+	/**
+	 * Sets the acao comentario enum.
+	 * 
+	 * @param acaoComentarioEnum the new acao comentario enum
+	 */
+	public void setAcaoComentarioEnum(TabelaEnum acaoComentarioEnum)
+	{
+		this.acaoComentarioEnum = acaoComentarioEnum;
+	}
+
+	public String getComentario()
+	{
+		return comentario;
+	}
+
+	public void setComentario(String comentario)
+	{
+		this.comentario = comentario;
+	}
+
 	@Override
 	public String toString()
 	{
-		return "Foto[ getCdfoto()=" + getCdfoto() + ", getDtpost()=" + getDtpost() + ", getComent()=" + getComent()
-				+ ", getFoto()=" + getFoto()
+		return "Foto [getCdfoto()=" + getCdfoto() + ", getId()=" + getId() + ", getNmfoto()=" + getNmfoto()
+				+ ", getLcfoto()=" + getLcfoto() + ", getTtfoto()=" + getTtfoto() + ", getAcaoComentarioEnum()="
+				+ getAcaoComentarioEnum() + ", getComentario()=" + getComentario() + ", toString()=" + super.toString()
 				+ "]";
 	}
 }

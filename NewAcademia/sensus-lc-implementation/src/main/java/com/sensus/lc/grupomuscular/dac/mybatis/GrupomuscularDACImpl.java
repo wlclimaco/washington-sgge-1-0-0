@@ -192,8 +192,9 @@ public class GrupomuscularDACImpl extends SqlSessionDaoSupport implements IGrupo
 
 		if (!ValidationUtil.isNull(grupomuscularId))
 		{
-			// grupomuscularRequest.getGrupomusculars().setgrupomuscularId);
-			// response.addResult(grupomuscularRequest.getGrupomuscular());
+			Grupomuscular grupomuscular = new Grupomuscular(grupomuscularId);
+			grupomuscularRequest.getGrupomusculars().add(grupomuscular);
+			response.addResult(grupomuscularRequest.getFirstGrupomuscular());
 			return response;
 		}
 
