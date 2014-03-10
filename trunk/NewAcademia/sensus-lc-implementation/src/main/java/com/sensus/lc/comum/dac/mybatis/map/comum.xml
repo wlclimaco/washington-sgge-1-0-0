@@ -27,7 +27,7 @@
 		<result property="tenantid" column="tenant_id" />
 	</resultMap>
 
-	<resultMap id="fotosResults" type="Fotos">
+	<resultMap id="fotosResults" type="Foto">
 		<result property="cdfoto" column="cdfoto" />
 		<result property="nmfoto" column="nmfoto" />
 		<result property="lcfoto" column="lcfoto" />

@@ -41,7 +41,7 @@
 
 	<bean id="histUser-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="configLocation"
-			value="classpath:com/sensus/lc/histuser/dac/mybatis/map/histUser-sql-map-config.xml" />
+			value="classpath:com/sensus/lc/histuser/dac/mybatis/map/histuser-sql-map-config.xml" />
 		<property name="dataSource" ref="mlcDataSource" />
 	</bean>
 

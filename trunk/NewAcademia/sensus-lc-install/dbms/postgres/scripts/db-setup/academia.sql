@@ -285,3 +285,194 @@ WITH (
 ALTER TABLE histuser
   OWNER TO qat;
 
+-- Function: ins_comentario(integer, integer, character varying, character varying, integer)
+
+-- DROP FUNCTION ins_comentario(integer, integer, character varying, character varying, integer);
+
+CREATE OR REPLACE FUNCTION ins_comentario(p_cdtable integer, p_id integer, p_texto character varying, p_create_user character varying, p_tenant_id integer)
+  RETURNS integer AS
+$BODY$
+DECLARE
+		id int;
+BEGIN
+
+INSERT INTO comentario(
+            cdcomentario, cdtable, id, texto, create_date, create_user, tenant_id)
+    VALUES ((select last_value from grupomuscular_cdgropomusc_seq), p_cdtable, p_id, p_texto,((SELECT TIMESTAMP 'now')), p_create_user, p_tenant_id) RETURNING cdcomentario INTO id;
+
+RETURN id;
+END
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION ins_comentario(integer, integer, character varying, character varying, integer)
+  OWNER TO qat;
+
+
+  -- Function: ins_curtir(integer, integer, integer, character varying, integer)
+
+-- DROP FUNCTION ins_curtir(integer, integer, integer, character varying, integer);
+
+CREATE OR REPLACE FUNCTION ins_curtir(p_cdtable integer, p_id integer, p_status integer, p_create_user character varying, p_tenant_id integer)
+  RETURNS integer AS
+$BODY$
+DECLARE
+		id int;
+BEGIN
+
+INSERT INTO curtir(
+            cdcurtir, cdtable, id, status, create_date, create_user, tenant_id)
+     VALUES ((select last_value from grupomuscular_cdgropomusc_seq), p_cdtable, p_id, p_status,((SELECT TIMESTAMP 'now')), p_create_user, p_tenant_id) RETURNING cdcurtir INTO id;
+
+RETURN id;
+END
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION ins_curtir(integer, integer, integer, character varying, integer)
+  OWNER TO qat;
+
+
+  -- Function: ins_foto(character varying, character varying, character varying, character varying, integer, integer, character varying, integer)
+
+-- DROP FUNCTION ins_foto(character varying, character varying, character varying, character varying, integer, integer, character varying, integer);
+
+CREATE OR REPLACE FUNCTION ins_foto(p_nmfoto character varying, p_lcfoto character varying, p_ttfoto character varying, p_comentario character varying, p_cdtable integer, p_id integer, p_create_user character varying, p_tenant_id integer)
+  RETURNS integer AS
+$BODY$
+DECLARE
+		id int;
+BEGIN
+
+INSERT INTO foto(cdfoto                                           , nmfoto  , lcfoto  , ttfoto  , comentario  , fototypeenun, id  ,create_date             , create_user  , tenant_id)
+    VALUES ((select last_value from grupomuscular_cdgropomusc_seq), p_nmfoto, p_lcfoto, p_ttfoto, p_comentario, p_cdtable   , p_id,(SELECT TIMESTAMP 'now'), p_create_user, p_tenant_id) RETURNING cdfoto INTO id;
+
+RETURN id;
+END
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION ins_foto(character varying, character varying, character varying, character varying, integer, integer, character varying, integer)
+  OWNER TO postgres;
+
+
+  -- Function: ins_foto(character varying, character varying, character varying, character varying, integer, integer, character varying, integer)
+
+-- DROP FUNCTION ins_foto(character varying, character varying, character varying, character varying, integer, integer, character varying, integer);
+
+CREATE OR REPLACE FUNCTION ins_foto(p_nmfoto character varying, p_lcfoto character varying, p_ttfoto character varying, p_comentario character varying, p_cdtable integer, p_id integer, p_create_user character varying, p_tenant_id integer)
+  RETURNS integer AS
+$BODY$
+DECLARE
+		id int;
+BEGIN
+
+INSERT INTO foto(cdfoto                                           , nmfoto  , lcfoto  , ttfoto  , comentario  , fototypeenun, id  ,create_date             , create_user  , tenant_id)
+    VALUES ((select last_value from grupomuscular_cdgropomusc_seq), p_nmfoto, p_lcfoto, p_ttfoto, p_comentario, p_cdtable   , p_id,(SELECT TIMESTAMP 'now'), p_create_user, p_tenant_id) RETURNING cdfoto INTO id;
+
+RETURN id;
+END
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION ins_foto(character varying, character varying, character varying, character varying, integer, integer, character varying, integer)
+  OWNER TO postgres;
+
+
+  -- Function: ins_histuser(integer, integer, integer, character varying, integer)
+
+-- DROP FUNCTION ins_histuser(integer, integer, integer, character varying, integer);
+
+CREATE OR REPLACE FUNCTION ins_histuser(p_cdtable integer, p_id integer, p_acao integer, p_create_user character varying, p_tenant_id integer)
+  RETURNS integer AS
+$BODY$
+DECLARE
+		id int;
+BEGIN
+
+INSERT INTO histuser(cdtable, id, acao, create_date, create_user, tenant_id)
+    VALUES (p_cdtable, p_id, p_acao, (SELECT TIMESTAMP 'now'), p_create_user, p_tenant_id ) RETURNING cdhistuser INTO id;
+
+RETURN id;
+END
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION ins_histuser(integer, integer, integer, character varying, integer)
+  OWNER TO qat;
+
+
+  -- Table: comentario
+
+-- DROP TABLE comentario;
+
+CREATE TABLE comentario
+(
+  cdcomentario integer NOT NULL,
+  cdtable integer NOT NULL,
+  id integer NOT NULL,
+  texto integer NOT NULL,
+  create_date timestamp with time zone,
+  create_user character varying(20),
+  tenant_id integer,
+  CONSTRAINT cdcomentario_pkey PRIMARY KEY (cdcomentario),
+  CONSTRAINT fk_tenant_cdcurtir FOREIGN KEY (tenant_id)
+      REFERENCES tenant (tenant_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE CASCADE
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE comentario
+  OWNER TO qat;
+-- Table: curtir
+
+-- DROP TABLE curtir;
+
+CREATE TABLE curtir
+(
+  cdcurtir integer NOT NULL,
+  cdtable integer NOT NULL,
+  id integer NOT NULL,
+  status integer NOT NULL,
+  create_date timestamp with time zone,
+  create_user character varying(20),
+  tenant_id integer,
+  CONSTRAINT cdcurtir_pkeyd PRIMARY KEY (cdcurtir),
+  CONSTRAINT fk_tenant_cdcurtir FOREIGN KEY (tenant_id)
+      REFERENCES tenant (tenant_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE CASCADE
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE curtir
+  OWNER TO qat;
+
+
+  -- Table: foto
+
+-- DROP TABLE foto;
+
+CREATE TABLE foto
+(
+  cdfoto integer NOT NULL,
+  id integer NOT NULL,
+  nmfoto character varying(100) NOT NULL,
+  lcfoto character varying(150),
+  ttfoto character varying(150),
+  comentario character varying(150),
+  fototypeenun integer NOT NULL,
+  create_date timestamp with time zone,
+  create_user character varying(20),
+  tenant_id integer,
+  CONSTRAINT cdfoto_pkey1 PRIMARY KEY (cdfoto),
+  CONSTRAINT fk_tenant_cdacad FOREIGN KEY (tenant_id)
+      REFERENCES tenant (tenant_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE CASCADE
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE foto
+  OWNER TO qat;
