@@ -42,6 +42,24 @@ $(document).ready(function() {
 		}
 	});
 
+	fnCallBack1 = function(data){
+console.log(data);
+			if (data.operationSuccess){
+				$.sc.startProgressBar(null,true);
+		//		$.sc.getJson(sUrlFetch,oRequestFetch, false,fnCallBack1, null, true);
+				$.sc.stopGlobalProgressBar();
+			}else{
+				$.sc.stopGlobalProgressBar();
+			}
+		};
+
+	$('.UFICommentPhotoIcon').click(function(e)
+	{
+		e.preventDefault();
+		console.log('dd');
+		$.sc.getJson("api/comum/insertComentario", {"texto":"5555555"}, false,fnCallBack1, null, true);
+	});
+
 
 	/** The Save Settings on System Settings */
 	$(".save-settings").click(function(e)

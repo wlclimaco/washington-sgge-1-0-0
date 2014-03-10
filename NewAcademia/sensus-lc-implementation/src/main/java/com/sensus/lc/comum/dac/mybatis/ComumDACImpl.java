@@ -281,8 +281,8 @@ public class ComumDACImpl extends SqlSessionDaoSupport implements IComumDAC
 		paramMap.put("cdCurtir", dietaRequest.getFirstCurtir().getCdCurtir());
 		paramMap.put("curtirTypeEnum", dietaRequest.getFirstCurtir().getCurtirTypeEnum());
 		paramMap.put("acaoEnum", dietaRequest.getFirstCurtir().getAcaoEnum());
-		paramMap.put("pessoa", dietaRequest.getFirstCurtir().getPessoa());
-		paramMap.put("cdEvento", dietaRequest.getFirstCurtir().getCdEvento());
+		// paramMap.put("pessoa", dietaRequest.getFirstCurtir().getPessoa());
+		// paramMap.put("cdEvento", dietaRequest.getFirstCurtir().getCdEvento());
 
 		Integer academiaId =
 				(Integer)SensusMyBatisDacHelper.doQueryForObject(getSqlSession(), INSERT_COMENTARIO, paramMap);
@@ -308,8 +308,8 @@ public class ComumDACImpl extends SqlSessionDaoSupport implements IComumDAC
 		paramMap.put("cdCurtir", curtirRequest.getFirstCurtir().getCdCurtir());
 		paramMap.put("curtirTypeEnum", curtirRequest.getFirstCurtir().getCurtirTypeEnum());
 		paramMap.put("acaoEnum", curtirRequest.getFirstCurtir().getAcaoEnum());
-		paramMap.put("pessoa", curtirRequest.getFirstCurtir().getPessoa());
-		paramMap.put("cdEvento", curtirRequest.getFirstCurtir().getCdEvento());
+		// paramMap.put("pessoa", curtirRequest.getFirstCurtir().getPessoa());
+		// paramMap.put("cdEvento", curtirRequest.getFirstCurtir().getCdEvento());
 
 		String result = (String)SensusMyBatisDacHelper.doQueryForObject(getSqlSession(), UPDATE_CURTIR, paramMap);
 
@@ -389,7 +389,7 @@ public class ComumDACImpl extends SqlSessionDaoSupport implements IComumDAC
 		HashMap<String, Object> paramMap = new HashMap<String, Object>(PARAMSIZE10);
 
 		paramMap.put("cdfoto", dietaRequest.getFirstFoto().getCdfoto());
-		paramMap.put("foto", dietaRequest.getFirstFoto().getFoto());
+		paramMap.put("foto", dietaRequest.getFirstFoto().getCdfoto());
 
 		Integer academiaId =
 				(Integer)SensusMyBatisDacHelper.doQueryForObject(getSqlSession(), INSERT_FOTO, paramMap);
@@ -413,7 +413,7 @@ public class ComumDACImpl extends SqlSessionDaoSupport implements IComumDAC
 		HashMap<String, Object> paramMap = new HashMap<String, Object>(PARAMSIZE11);
 
 		paramMap.put("cdfoto", fotoRequest.getFirstFoto().getCdfoto());
-		paramMap.put("foto", fotoRequest.getFirstFoto().getFoto());
+		paramMap.put("foto", fotoRequest.getFirstFoto().getCdfoto());
 
 		String result = (String)SensusMyBatisDacHelper.doQueryForObject(getSqlSession(), UPDATE_CURTIR, paramMap);
 
