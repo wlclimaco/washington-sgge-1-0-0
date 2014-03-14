@@ -39,6 +39,28 @@ public class Comentario extends SensusModel
 	/** The fotos. */
 	private List<Foto> fotos;
 
+	public Comentario(Integer cdcomentario, String coment, Integer id, TabelaEnum acaoComentarioEnum)
+	{
+		super();
+		this.cdcomentario = cdcomentario;
+		this.coment = coment;
+		this.id = id;
+		this.acaoComentarioEnum = acaoComentarioEnum;
+	}
+
+	public Comentario(Integer cdcomentario, Date dtpost, String coment, Integer id, TabelaEnum acaoComentarioEnum,
+			List<Curtir> curtis, List<Foto> fotos)
+	{
+		super();
+		this.cdcomentario = cdcomentario;
+		this.dtpost = dtpost;
+		this.coment = coment;
+		this.id = id;
+		this.acaoComentarioEnum = acaoComentarioEnum;
+		this.curtis = curtis;
+		this.fotos = fotos;
+	}
+
 	/**
 	 * Gets the cdcomentario.
 	 * 

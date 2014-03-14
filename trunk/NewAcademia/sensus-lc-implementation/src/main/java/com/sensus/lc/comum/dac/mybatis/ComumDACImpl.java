@@ -108,7 +108,7 @@ public class ComumDACImpl extends SqlSessionDaoSupport implements IComumDAC
 
 	private static final String FETCH_FOTO_BY_ID = COMUM_MAP + "comentarioFoto";
 
-	private static final String INSERT_COMENTARIO = COMUM_MAP + "comentarioFoto";
+	private static final String INSERT_COMENTARIO = COMUM_MAP + "insertComentario";
 
 	private static final String INSERT_FOTO = COMUM_MAP + "comentarioFoto";
 
@@ -167,11 +167,12 @@ public class ComumDACImpl extends SqlSessionDaoSupport implements IComumDAC
 	{
 		HashMap<String, Object> paramMap = new HashMap<String, Object>(PARAMSIZE10);
 
-		paramMap.put("cdcomentario", dietaRequest.getFirstComentario().getCdcomentario());
-		paramMap.put("dtpost", dietaRequest.getFirstComentario().getDtpost());
+		paramMap.put("cdtable", dietaRequest.getFirstComentario().getAcaoComentarioEnum().getValue());
+		paramMap.put("id", dietaRequest.getFirstComentario().getId());
 		paramMap.put("coment", dietaRequest.getFirstComentario().getComent());
-		paramMap.put("acaoComentarioEnum", dietaRequest.getFirstComentario().getAcaoComentarioEnum());
-		paramMap.put("curtis", dietaRequest.getFirstComentario().getCurtis());
+		paramMap.put("acao", 0);
+		paramMap.put("create_user", dietaRequest.getUserContext().getUserId());
+		paramMap.put("tenant_id", dietaRequest.getUserContext().getTenant().getId());
 
 		Integer academiaId =
 				(Integer)SensusMyBatisDacHelper.doQueryForObject(getSqlSession(), INSERT_COMENTARIO, paramMap);

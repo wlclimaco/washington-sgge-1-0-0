@@ -1,5 +1,6 @@
 package com.sensus.lc.controller.comum;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -17,6 +18,8 @@ import com.sensus.common.model.response.Response;
 import com.sensus.common.util.SensusInterfaceUtil;
 import com.sensus.lc.academia.model.request.AcademiaRequest;
 import com.sensus.lc.academia.model.response.AcademiaResponse;
+import com.sensus.lc.base.model.TabelaEnum;
+import com.sensus.lc.comentario.model.Comentario;
 import com.sensus.lc.comentario.model.request.ComentarioRequest;
 import com.sensus.lc.comentario.model.request.InquiryComentarioRequest;
 import com.sensus.lc.comentario.model.response.ComentarioResponse;
@@ -338,6 +341,10 @@ public class ComumAPIController extends BaseController
 			ComentarioRequest comentarioRequest = new ComentarioRequest();
 			// ADD user context to request
 			setUserContext(comentarioRequest, request);
+			comentarioRequest.setComentarios(new ArrayList<Comentario>());
+			comentarioRequest.getComentarios().add(
+					new Comentario(Integer.valueOf(jsonRequest.get("id").toString()), jsonRequest.get("texto")
+							.toString(), Integer.valueOf(jsonRequest.get("table").toString()), TabelaEnum.ACADEMIA));
 
 			academiaResponse = getComumBCF().insertComentario(comentarioRequest);
 
