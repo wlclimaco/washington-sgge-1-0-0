@@ -44,12 +44,13 @@
      { call ins_comentario(
      		#{cdtable,jdbcType=INTEGER},
             #{id,jdbcType=INTEGER},
-            #{texto,jdbcType=VARCHAR},
+            #{coment,jdbcType=VARCHAR},
             #{acao,jdbcType=INTEGER},
             #{create_user,jdbcType=VARCHAR},
             #{tenant_id,jdbcType=INTEGER}
 
        ) }
+
 
     </select >
 

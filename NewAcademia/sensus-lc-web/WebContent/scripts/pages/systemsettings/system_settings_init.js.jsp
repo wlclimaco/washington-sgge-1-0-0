@@ -57,7 +57,7 @@ console.log(data);
 	{
 		e.preventDefault();
 		console.log('dd');
-		$.sc.getJson("api/comum/insertComentario", {"texto":"5555555"}, false,fnCallBack1, null, true);
+		$.sc.getJson("api/comum/insertComentario", {"texto":"5555555","id":"1","table":"1"}, false,fnCallBack1, null, true);
 	});
 
 
