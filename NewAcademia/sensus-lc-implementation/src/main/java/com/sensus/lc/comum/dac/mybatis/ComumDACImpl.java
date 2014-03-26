@@ -12,6 +12,7 @@ import com.sensus.common.model.response.InternalResponse.Status;
 import com.sensus.common.model.response.InternalResultsResponse;
 import com.sensus.common.util.SensusMyBatisDacHelper;
 import com.sensus.common.validation.ValidationUtil;
+import com.sensus.lc.base.model.TabelaEnum;
 import com.sensus.lc.comentario.model.Comentario;
 import com.sensus.lc.comentario.model.request.ComentarioRequest;
 import com.sensus.lc.comentario.model.request.InquiryComentarioRequest;
@@ -62,7 +63,7 @@ public class ComumDACImpl extends SqlSessionDaoSupport implements IComumDAC
 	// Not i18n messages/words.
 
 	/** The Constant TENANTID. */
-	private static final String TENANTID = "tenantid";
+	private static final String TENANTID = "tenant_id";
 
 	/** The Constant SELECTED_IDS. */
 	private static final String PAGINATION_ALL_SELECTED = "paginationAllSelected";
@@ -110,7 +111,7 @@ public class ComumDACImpl extends SqlSessionDaoSupport implements IComumDAC
 
 	private static final String INSERT_COMENTARIO = COMUM_MAP + "insertComentario";
 
-	private static final String INSERT_FOTO = COMUM_MAP + "comentarioFoto";
+	private static final String INSERT_FOTO = COMUM_MAP + "insertFoto";
 
 	private static final String UPDATE_COMENTARIO = COMUM_MAP + "comentarioFoto";
 
@@ -389,8 +390,52 @@ public class ComumDACImpl extends SqlSessionDaoSupport implements IComumDAC
 	{
 		HashMap<String, Object> paramMap = new HashMap<String, Object>(PARAMSIZE10);
 
-		paramMap.put("cdfoto", dietaRequest.getFirstFoto().getCdfoto());
-		paramMap.put("foto", dietaRequest.getFirstFoto().getCdfoto());
+		if (!ValidationUtil.isNull(dietaRequest.getFirstFoto().getCdfoto()))
+		{
+			paramMap.put("cdfoto", dietaRequest.getFirstFoto().getCdfoto());
+		}
+		if (!ValidationUtil.isNull(dietaRequest.getFirstFoto().getId()))
+		{
+			paramMap.put("id", dietaRequest.getFirstFoto().getId());
+		}
+		else
+		{
+			paramMap.put("id", 0);
+		}
+		if (!ValidationUtil.isNull(dietaRequest.getFirstFoto().getLcfoto()))
+		{
+			paramMap.put("lcfoto", dietaRequest.getFirstFoto().getLcfoto());
+		}
+		else
+		{
+			paramMap.put("lcfoto", "");
+		}
+		if (!ValidationUtil.isNull(dietaRequest.getFirstFoto().getNmfoto()))
+		{
+			paramMap.put("nmfoto", dietaRequest.getFirstFoto().getNmfoto());
+		}
+		else
+		{
+			paramMap.put("nmfoto", "");
+		}
+		if (!ValidationUtil.isNull(dietaRequest.getFirstFoto().getTtfoto()))
+		{
+			paramMap.put("ttfoto", dietaRequest.getFirstFoto().getTtfoto());
+		}
+		if (!ValidationUtil.isNull(dietaRequest.getFirstFoto().getComentario()))
+		{
+			paramMap.put("comentario", dietaRequest.getFirstFoto().getComentario());
+		}
+		else
+		{
+			paramMap.put("comentario", "");
+		}
+		if (!ValidationUtil.isNull(dietaRequest.getFirstFoto().getAcaoComentarioEnum()))
+		{
+			paramMap.put("cdtable", TabelaEnum.EXERCICIO.getValue());
+		}
+		paramMap.put(TENANTID, 1);
+		paramMap.put("create_user", "superuser");
 
 		Integer academiaId =
 				(Integer)SensusMyBatisDacHelper.doQueryForObject(getSqlSession(), INSERT_FOTO, paramMap);

@@ -1,8 +1,5 @@
 package com.sensus.lc.controller.importfile;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -10,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.annotation.Resource;
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -29,11 +25,16 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sensus.common.model.MessageInfo;
 import com.sensus.common.util.SensusInterfaceUtil;
 import com.sensus.common.validation.ValidationUtil;
+import com.sensus.lc.base.model.TabelaEnum;
+import com.sensus.lc.comum.bcf.IComumBCF;
 import com.sensus.lc.controller.BaseViewController;
 import com.sensus.lc.controller.importfile.model.EcoModeModel;
 import com.sensus.lc.ecomode.bcf.IEcoModeBCF;
 import com.sensus.lc.ecomode.model.request.EcoModeRequest;
 import com.sensus.lc.ecomode.model.response.EcoModeResponse;
+import com.sensus.lc.foto.model.Foto;
+import com.sensus.lc.foto.model.request.FotoRequest;
+import com.sensus.lc.foto.model.response.FotoResponse;
 import com.sensus.lc.tag.model.Tag;
 
 /**
@@ -72,6 +73,19 @@ public class ImportEcoModeController extends BaseViewController implements Handl
 
 	/** The eco mode bcf. */
 	private IEcoModeBCF ecoModeBCF;
+
+	private IComumBCF comumBCF;
+
+	public IComumBCF getComumBCF()
+	{
+		return comumBCF;
+	}
+
+	@Resource
+	public void setComumBCF(IComumBCF comumBCF)
+	{
+		this.comumBCF = comumBCF;
+	}
 
 	/**
 	 * Gets the eco mode bcf.
@@ -175,12 +189,19 @@ public class ImportEcoModeController extends BaseViewController implements Handl
 					outputStream.close();
 					inputStream.close();
 
-					BufferedImage src = ImageIO.read(new ByteArrayInputStream(file.getBytes()));
 					// BufferedImage src = ImageIO.read(new ByteArrayInputStream(file.getBytes()));
-					File destination = new File("c:/images/"); // something like
-																// C:/Users/tom/Documents/nameBasedOnSomeId.png
-					ImageIO.write(src, "jpg", destination);
+					// BufferedImage src = ImageIO.read(new ByteArrayInputStream(file.getBytes()));
+					// File destination = new File("c:/images/"); // something like
+					// C:/Users/tom/Documents/nameBasedOnSomeId.png
+					// ImageIO.write(src, "jpg", destination);
 					// ecoModeRequest.setEcoModeCSVImport(upload.get);
+
+					Foto foto =
+							new Foto(fileName.toString(), "c:/images/", files.getOriginalFilename().toString(),
+									TabelaEnum.EXERCICIO);
+					FotoRequest fotoRequest = new FotoRequest(foto);
+					FotoResponse fotoresponse = getComumBCF().insertFoto(fotoRequest);
+					ecoModeModel.setMessageCode(fotoresponse.getFotos().get(0).getCdfoto().toString());
 				}
 			}
 			response = getEcoModeBCF().importEcoModeBaselineFromFileCSV(ecoModeRequest);
@@ -189,7 +210,6 @@ public class ImportEcoModeController extends BaseViewController implements Handl
 			{
 				MessageInfo messageInfo = response.getMessageInfoList().get(0);
 				ecoModeModel.setArguments(getMapper().writeValueAsString(messageInfo.getArguments()));
-				ecoModeModel.setMessageCode(messageInfo.getCode());
 				ecoModeModel.setOperationSuccess(response.isOperationSuccess());
 			}
 			// }

@@ -67,12 +67,12 @@
 
     </select >
 
-    <select id="insertFotos" parameterType="Map" resultType="int" statementType="CALLABLE">
+    <select id="insertFoto" parameterType="Map" resultType="int" statementType="CALLABLE">
 
      { call ins_foto(
      		#{nmfoto,jdbcType=VARCHAR},
      		#{lcfoto,jdbcType=VARCHAR},
-     		#{p_ttfoto,jdbcType=VARCHAR},
+     		#{ttfoto,jdbcType=VARCHAR},
      		#{comentario,jdbcType=VARCHAR},
      		#{cdtable,jdbcType=INTEGER},
             #{id,jdbcType=INTEGER},
