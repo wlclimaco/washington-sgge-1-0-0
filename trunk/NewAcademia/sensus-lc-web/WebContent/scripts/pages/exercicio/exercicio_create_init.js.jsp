@@ -12,6 +12,33 @@ $(document).ready(function() {
 	/* ===========================================
 		Initialize
 	 =========================================== */
+$('#save').click(function() {
+		var test = $('#fotos').val()
+		a =  test.split('|')
+		x=0;
+
+		var fotos = [{}];
+		while( x < a.length)
+		{
+		if((a[x] != ' ')&&(a[x] != ''))
+			{
+				var foto = {};
+				foto.cdfoto=a[x];
+				fotos.push(foto);
+			}
+			x++;
+		}
+		var fnCallBack = function(data){
+		alert('11');
+		debugger;
+			if (data.operationSuccess){
+			//	sensus.widgets.datatable.reloadTable(sensus.pages.group.groupTable);
+			}
+		};
+		var oRequest = '{"exercicios":[{"cdexerc":0,"nmexerc":"4","dsexerc":"44","createdate":"2014-03-26-00-00-00-000","createuser":"superuser","tenantid":1,"userid":1,"grupomuscular":{"cdgrmusc":"1"},"listFotos":[{'+fotos+'}]}]}'
+
+		$.sc.getJson('api/exercicio/insert',oRequest, false, fnCallBack);
+});
 		//INIT UI
 		//Hide
 		$('.reset-container, .sort-options, .view-options, #dialog-analyze, .missing-data, .status-viewport-loading, .spindown-child, #request-complete, .summary-container .summary, .filter-select, #processing-container, #system-messaging, #message-map, .messaging, .action-dialog, #dialog-map, .blankslate, #request-processing, .ui-state-error, .cp-title, #cp-active-container').hide();

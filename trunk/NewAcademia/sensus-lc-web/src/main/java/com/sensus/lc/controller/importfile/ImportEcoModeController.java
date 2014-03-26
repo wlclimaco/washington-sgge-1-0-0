@@ -3,7 +3,6 @@ package com.sensus.lc.controller.importfile;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.annotation.Resource;
@@ -16,13 +15,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sensus.common.model.MessageInfo;
 import com.sensus.common.util.SensusInterfaceUtil;
 import com.sensus.common.validation.ValidationUtil;
 import com.sensus.lc.base.model.TabelaEnum;
@@ -35,7 +34,6 @@ import com.sensus.lc.ecomode.model.response.EcoModeResponse;
 import com.sensus.lc.foto.model.Foto;
 import com.sensus.lc.foto.model.request.FotoRequest;
 import com.sensus.lc.foto.model.response.FotoResponse;
-import com.sensus.lc.tag.model.Tag;
 
 /**
  * The Class ImportEcoModeAPIController.
@@ -55,15 +53,6 @@ public class ImportEcoModeController extends BaseViewController implements Handl
 
 	/** The Constant UPLOAD. */
 	private static final String UPLOAD_FILE = "/upload";
-
-	/** The Constant CSV_MIME_TYPE. */
-	private static final String CSV_MIME_TYPE = "text/csv";
-
-	/** The Constant CSV_EXTENSION. */
-	private static final String CSV_EXTENSION = "csv";
-
-	/** The Constant FILE_IS_NOT_CSV. */
-	private static final String FILE_IS_NOT_CSV = "sensus.mlc.csvfilevalidator.file.invalid";
 
 	/** The Constant CSVFILEVALIDATOR_FILE_MAXUPLOADSIZE. */
 	private static final String CSVFILEVALIDATOR_FILE_MAXUPLOADSIZE = "sensus.mlc.csvfilevalidator.file.maxuploadsize";
@@ -115,7 +104,9 @@ public class ImportEcoModeController extends BaseViewController implements Handl
 	 * @param servletRequest the servlet request
 	 * @return the group model
 	 */
+
 	@RequestMapping(value = UPLOAD_FILE, method = RequestMethod.POST)
+	@ResponseBody
 	public EcoModeModel upload(@RequestParam(value = "uploadTag", required = false) String uploadTag,
 			@RequestParam("upload") MultipartFile file,
 			MultipartHttpServletRequest request)
@@ -132,40 +123,9 @@ public class ImportEcoModeController extends BaseViewController implements Handl
 			// ADD user context to request
 			setUserContext(ecoModeRequest, request);
 
-			if (!ValidationUtil.isNull(uploadTag))
-			{
-				String[] tagIds = uploadTag.split(",");
-				ecoModeRequest.setTags(new ArrayList<Tag>());
-				Tag tag;
-
-				for (String id : tagIds)
-				{
-					tag = new Tag();
-					tag.setId(Integer.parseInt(id.trim()));
-					ecoModeRequest.getTags().add(tag);
-				}
-			}
-
 			// Upload File
 			if (!ValidationUtil.isNull(file))
 			{
-				// String[] extension = StringUtils.splitByWholeSeparator(upload.getOriginalFilename(), ".");
-				// if (!CSV_MIME_TYPE.equals(upload.getContentType())
-				// && !CSV_EXTENSION.equals(extension[extension.length - 1]))
-				// {
-				// ecoModeModel.setMessageCode(FILE_IS_NOT_CSV);
-				// ecoModeModel.setOperationSuccess(Boolean.FALSE);
-				// throw new IllegalFormatFlagsException(FILE_IS_NOT_CSV);
-				// }
-
-				// File f = new File(FILE_NAME);
-				// upload.transferTo(f);
-				// Some type of file processing...
-				System.err.println("-------------------------------------------");
-				System.err.println("Test upload: " + file);
-				System.err.println("-------------------------------------------");
-				// for (Integer i = 0; i < files.size(); i++)
-				// {
 				MultipartFile files = file;
 				String fileName = null;
 				InputStream inputStream = null;
@@ -189,30 +149,17 @@ public class ImportEcoModeController extends BaseViewController implements Handl
 					outputStream.close();
 					inputStream.close();
 
-					// BufferedImage src = ImageIO.read(new ByteArrayInputStream(file.getBytes()));
-					// BufferedImage src = ImageIO.read(new ByteArrayInputStream(file.getBytes()));
-					// File destination = new File("c:/images/"); // something like
-					// C:/Users/tom/Documents/nameBasedOnSomeId.png
-					// ImageIO.write(src, "jpg", destination);
-					// ecoModeRequest.setEcoModeCSVImport(upload.get);
-
-					Foto foto =
-							new Foto(fileName.toString(), "c:/images/", files.getOriginalFilename().toString(),
-									TabelaEnum.EXERCICIO);
-					FotoRequest fotoRequest = new FotoRequest(foto);
+					FotoRequest fotoRequest =
+							new FotoRequest(new Foto(fileName.toString(), "c:/images/", files.getOriginalFilename()
+									.toString(),
+									TabelaEnum.EXERCICIO));
+					setUserContext(fotoRequest, request);
 					FotoResponse fotoresponse = getComumBCF().insertFoto(fotoRequest);
 					ecoModeModel.setMessageCode(fotoresponse.getFotos().get(0).getCdfoto().toString());
+					ecoModeModel.setFoto(fotoresponse.getFotos().get(0));
 				}
 			}
-			response = getEcoModeBCF().importEcoModeBaselineFromFileCSV(ecoModeRequest);
 
-			if (!ValidationUtil.isNullOrEmpty(response.getMessageList()))
-			{
-				MessageInfo messageInfo = response.getMessageInfoList().get(0);
-				ecoModeModel.setArguments(getMapper().writeValueAsString(messageInfo.getArguments()));
-				ecoModeModel.setOperationSuccess(response.isOperationSuccess());
-			}
-			// }
 		}
 		catch (Exception e)
 		{
