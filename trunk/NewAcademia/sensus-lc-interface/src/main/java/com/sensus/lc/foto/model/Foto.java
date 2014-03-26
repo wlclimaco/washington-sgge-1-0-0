@@ -32,6 +32,15 @@ public class Foto extends SensusModel
 	/** The acao comentario enum. */
 	private TabelaEnum acaoComentarioEnum;
 
+	public Foto(String nmfoto, String lcfoto, String ttfoto, TabelaEnum acaoComentarioEnum)
+	{
+		super();
+		this.nmfoto = nmfoto;
+		this.lcfoto = lcfoto;
+		this.ttfoto = ttfoto;
+		this.acaoComentarioEnum = acaoComentarioEnum;
+	}
+
 	/**
 	 * Gets the cdfoto.
 	 * 

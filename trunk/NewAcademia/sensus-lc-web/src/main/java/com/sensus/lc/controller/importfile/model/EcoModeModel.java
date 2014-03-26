@@ -1,5 +1,6 @@
 package com.sensus.lc.controller.importfile.model;
 
+import com.sensus.lc.foto.model.Foto;
 
 /**
  * The Class EcoModeModel.
@@ -15,6 +16,9 @@ public class EcoModeModel
 
 	/** The arguments. */
 	private String arguments;
+
+	/** The foto. */
+	private Foto foto;
 
 	/**
 	 * Gets the operation success.
@@ -76,6 +80,26 @@ public class EcoModeModel
 		this.arguments = arguments;
 	}
 
+	/**
+	 * Gets the foto.
+	 * 
+	 * @return the foto
+	 */
+	public Foto getFoto()
+	{
+		return foto;
+	}
+
+	/**
+	 * Sets the foto.
+	 * 
+	 * @param foto the new foto
+	 */
+	public void setFoto(Foto foto)
+	{
+		this.foto = foto;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -84,7 +108,8 @@ public class EcoModeModel
 	public String toString()
 	{
 		return "EcoModeModel [getOperationSuccess()=" + getOperationSuccess() + ", getMessageCode()="
-				+ getMessageCode() + ", getArguments()=" + getArguments() + "]";
+				+ getMessageCode() + ", getArguments()=" + getArguments() + ", getFoto()=" + getFoto()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }
