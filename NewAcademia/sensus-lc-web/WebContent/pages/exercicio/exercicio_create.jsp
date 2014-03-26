@@ -47,15 +47,15 @@
                                 <fieldset>
                                     <ul>
                                         <li>
-                                            <label for="schedule-name-create">Name exercicio:<span class="required">*</span></label>
-                                            <input type="text" id="schedule-name-create" tabindex="1" class="required long"/>
+                                            <label for="exercicio-name-create">Name exercicio:<span class="required">*</span></label>
+                                            <input type="text" id="exercicio-name-create" tabindex="1" class="required long"/>
                                         </li>
                                         <li>
-                                            <label for="schedule-description">Description:</label>
-                                            <textarea id="schedule-description" tabindex="2" class="long"></textarea>
+                                            <label for="exercicio-description">Description:</label>
+                                            <textarea id="exercicio-description" tabindex="2" class="long"></textarea>
                                         </li>
 										<li class="centro">
-											 <select id="repeats">
+											 <select id="grupo-muscular">
 												<option value="day">Daily</option>
 												<option value="weekday">Every weekday (Mon-Fri)</option>
 												<option value="every-other">Every Mon., Wed., and Fri</option>
@@ -87,7 +87,7 @@
                                             </div>
                                     </div>
 							 </fieldset>
-							  <button class="btn btn-warning cancel ui-button-text">
+							  <button id="save" class="btn btn-warning cancel ui-button-text">
                        </div>
 					  <p class=hide id="fotos"></p>
 				</div>
@@ -128,7 +128,6 @@
 
   document.getElementById('files').addEventListener('change', handleFileSelect, false);
 
-  $('#fotos').val($('#fotos').val()+'|'+document.getElementById('files'));
   $(document).ready(function(){
 
 
@@ -177,13 +176,14 @@
             $('#porcentagem').html(percentComplete+'%');
         },
 		beforeSubmit: function(data) {
-			 console.log(document.getElementById('files').addEventListener('change', handleFileSelect, false))
              document.getElementById('files').addEventListener('change', handleFileSelect, false);
         },
         success: function(data) {
             $('progress').attr('value','100');
-        $('#porcentagem').html('100%');
+			$('#porcentagem').html('100%');
+			$('.btn-primary').hide();
 		console.log(data);
+		$('#fotos').val($('#fotos').val()+"|"+data.foto.cdfoto);
             $('pre').html(data);
         }
 
