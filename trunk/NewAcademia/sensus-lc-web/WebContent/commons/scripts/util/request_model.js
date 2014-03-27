@@ -20,6 +20,16 @@ function GrupomuscularRequest(cdgrmusc,musculo,dsgrmusc)
 	this.grupomusculars = alarmsTypeList;
 }
 
+function ExercicioRequest(cdexerc,nmexerc,dsexerc,cdgrmusc,fotos)
+{
+
+	this.exercicios = [{}];
+	listFotos = [{}];
+	listFotos = fotos;
+    var alarmsTypeList = [{cdexerc: parseInt(cdexerc, 10), nmexerc : nmexerc,dsexerc:dsexerc,createdate: $.datepicker.formatDate('yy-mm-dd',new Date()) + '-00-00-00-000',createuser	: sensus.settings.userContext.userId,tenantid : parseInt(sensus.settings.userContext.tenant.id,10),userid : parseInt(sensus.settings.userContext.id,10),grupomuscular:{cdgrmusc:parseInt(cdgrmusc, 10)},listFotos:listFotos}];
+	this.exercicios = alarmsTypeList;
+}
+
 
 function academiaRequest(cdacad,academ,lograd,numen,bairr,cidade,cep,telef,dataini,datafin,atual)
 {
