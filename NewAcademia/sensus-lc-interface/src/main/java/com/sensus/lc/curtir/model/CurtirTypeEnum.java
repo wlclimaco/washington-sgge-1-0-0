@@ -17,34 +17,36 @@ public enum CurtirTypeEnum implements IIntegerEnum
 	/** The security. */
 	EXERCICIO(3);
 
-	/** The list type enum id. */
-	private Integer listTypeEnumId;
+	/** The data type. */
+	private Integer dataType;
 
 	/**
-	 * Instantiates a new list type enum.
+	 * Instantiates a new data type enum.
 	 * 
-	 * @param listTypeEnumIdParam the list type enum id param
+	 * @param dataTypeInd the data type ind
 	 */
-	private CurtirTypeEnum(Integer listTypeEnumIdParam)
+	private CurtirTypeEnum(Integer dataTypeInd)
 	{
-		listTypeEnumId = listTypeEnumIdParam;
+		dataType = dataTypeInd;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.sensus.common.model.IIntegerEnum#getValue()
+	/**
+	 * Gets the value.
+	 * 
+	 * @return the value
 	 */
 	@Override
 	public Integer getValue()
 	{
-		return listTypeEnumId;
+
+		return dataType;
 	}
 
 	/**
 	 * Enum for value.
 	 * 
 	 * @param value the value
-	 * @return the list type enum
+	 * @return the data type enum
 	 */
 	public static CurtirTypeEnum enumForValue(Integer value)
 	{
@@ -77,5 +79,4 @@ public enum CurtirTypeEnum implements IIntegerEnum
 		}
 		return enumValue.toString();
 	}
-
 }

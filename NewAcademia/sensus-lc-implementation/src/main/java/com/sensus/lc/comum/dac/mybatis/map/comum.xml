@@ -20,7 +20,7 @@
 	<resultMap id="curtirResults" type="Curtir">
 		<result property="cdCurtir" column="cdcurtir" />
 		<result property="acaoEnum" column="cdtable" />
-		<result property="curtirTypeEnum" column="status" />
+		<result property="curtirTypeEnumValue" column="status" />
 		<result property="id" column="id" />
 		<result property="curtirTypeEnum" column="status" />
 		<result property="createdate" column="create_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
