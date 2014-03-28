@@ -8,7 +8,9 @@ import com.sensus.common.model.SensusModel;
 import com.sensus.lc.comentario.model.Comentario;
 import com.sensus.lc.curtir.model.Curtir;
 import com.sensus.lc.foto.model.Foto;
+import com.sensus.lc.video.model.Video;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class PrincipalClass.
  */
@@ -38,6 +40,9 @@ public class PrincipalClass extends SensusModel
 
 	/** The list comentarios. */
 	private List<Comentario> listComentarios;
+
+	/** The list videos. */
+	private List<Video> listVideos;
 
 	/**
 	 * Gets the createdate.
@@ -224,6 +229,26 @@ public class PrincipalClass extends SensusModel
 		getListComentarios().add(exercicio);
 	}
 
+	/**
+	 * Gets the list videos.
+	 * 
+	 * @return the list videos
+	 */
+	public List<Video> getListVideos()
+	{
+		return listVideos;
+	}
+
+	/**
+	 * Sets the list videos.
+	 * 
+	 * @param listVideos the new list videos
+	 */
+	public void setListVideos(List<Video> listVideos)
+	{
+		this.listVideos = listVideos;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see com.sensus.common.model.SensusModel#toString()
@@ -234,7 +259,8 @@ public class PrincipalClass extends SensusModel
 		return "PrincipalClass [getCreatedate()=" + getCreatedate() + ", getCreateuser()=" + getCreateuser()
 				+ ", getTenantid()=" + getTenantid() + ", getUserid()=" + getUserid() + ", getListCurtir()="
 				+ getListCurtir() + ", getListFotos()=" + getListFotos() + ", getListComentarios()="
-				+ getListComentarios() + ", toString()=" + super.toString() + "]";
+				+ getListComentarios() + ", getListVideos()=" + getListVideos() + ", toString()=" + super.toString()
+				+ "]";
 	}
 
 }

@@ -121,15 +121,11 @@ public class Exercicio extends PrincipalClass
 		this.dsexerc = dsexerc;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.sensus.lc.base.model.PrincipalClass#toString()
-	 */
 	@Override
 	public String toString()
 	{
-		return "Exercicio [getGrupomuscular()=" + getGrupomuscular() + ", getCdexerc()=" + getCdexerc()
-				+ ", getNmexerc()=" + getNmexerc() + ", getDsexerc()=" + getDsexerc() + ", toString()="
+		return "Exercicio [getGrupomuscular()=" + getGrupomuscular() + ", getCdexerc()="
+				+ getCdexerc() + ", getNmexerc()=" + getNmexerc() + ", getDsexerc()=" + getDsexerc() + ", toString()="
 				+ super.toString() + "]";
 	}
 

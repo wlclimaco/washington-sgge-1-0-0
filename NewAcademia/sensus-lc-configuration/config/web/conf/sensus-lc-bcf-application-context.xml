@@ -158,6 +158,7 @@
 
 	<bean id="comumBCF" class="com.sensus.lc.comum.bcf.impl.ComumBCFImpl">
 		<property name="comumBCL" ref="comumBCLTarget" />
+
 	</bean>
 
 	<bean id="histUserBCF" class="com.sensus.lc.histuser.bcf.impl.HistUserBCFImpl">
