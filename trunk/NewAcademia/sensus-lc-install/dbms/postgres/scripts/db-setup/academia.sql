@@ -476,3 +476,22 @@ WITH (
 );
 ALTER TABLE foto
   OWNER TO qat;
+
+  ======================================
+  CREATE OR REPLACE FUNCTION ins_exercicio(p_nmexerc character varying, p_dsexerc character varying, p_cdgrmusc integer, p_create_user character varying, p_tenant_id integer)
+  RETURNS integer AS
+$BODY$
+DECLARE
+		id int;
+BEGIN
+
+INSERT INTO exercicio(nmexerc ,  dsexerc,  cdgrmusc, create_date            , create_user , tenant_id)
+    VALUES          (p_nmexerc,p_dsexerc,p_cdgrmusc,(SELECT TIMESTAMP 'now'),p_create_user,p_tenant_id) RETURNING cdexerc INTO id;
+
+RETURN id;
+END
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION ins_exercicio(character varying,character varying,integer,character varying,integer)
+  OWNER TO postgres;

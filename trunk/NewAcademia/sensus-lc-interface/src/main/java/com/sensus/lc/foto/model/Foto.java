@@ -1,13 +1,13 @@
 package com.sensus.lc.foto.model;
 
-import com.sensus.common.model.SensusModel;
+import com.sensus.lc.base.model.PrincipalClass;
 import com.sensus.lc.base.model.TabelaEnum;
 
 /**
  * The Class Foto.
  */
 @SuppressWarnings("serial")
-public class Foto extends SensusModel
+public class Foto extends PrincipalClass
 {
 	/** The Constant FIRST. */
 	private static final Integer FIRST = 0;
@@ -49,6 +49,22 @@ public class Foto extends SensusModel
 	public Integer getCdfoto()
 	{
 		return cdfoto;
+	}
+
+	public Foto()
+	{
+		super();
+	}
+
+	public Foto(Integer cdfoto, Integer id, String nmfoto, String lcfoto, String ttfoto, String comentario)
+	{
+		super();
+		this.cdfoto = cdfoto;
+		this.id = id;
+		this.nmfoto = nmfoto;
+		this.lcfoto = lcfoto;
+		this.ttfoto = ttfoto;
+		this.comentario = comentario;
 	}
 
 	/**
