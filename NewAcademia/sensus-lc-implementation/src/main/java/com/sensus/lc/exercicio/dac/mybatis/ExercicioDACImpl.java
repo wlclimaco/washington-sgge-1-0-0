@@ -16,6 +16,7 @@ import com.sensus.lc.exercicio.dac.IExercicioDAC;
 import com.sensus.lc.exercicio.model.Exercicio;
 import com.sensus.lc.exercicio.model.request.ExercicioRequest;
 import com.sensus.lc.exercicio.model.request.InquiryExercicioRequest;
+import com.sensus.lc.foto.model.Foto;
 
 /**
  * The Class ExercicioDACImpl.
@@ -171,21 +172,13 @@ public class ExercicioDACImpl extends SqlSessionDaoSupport implements IExercicio
 	public InternalResultsResponse<Exercicio> insertExercicio(ExercicioRequest exercicioRequest)
 	{
 		HashMap<String, Object> paramMap = new HashMap<String, Object>(PARAMSIZE10);
-		//
-		// paramMap.put("academ", exercicioRequest.getExercicio().getAcadem());
-		// paramMap.put("lograd", exercicioRequest.getExercicio().getLograd());
-		// paramMap.put("numen", exercicioRequest.getExercicio().getNumen());
-		// paramMap.put("bairr", exercicioRequest.getExercicio().getBairr());
-		// paramMap.put("cidade", exercicioRequest.getExercicio().getCidade());
-		// paramMap.put("cep", exercicioRequest.getExercicio().getCep());
-		// paramMap.put("telef", exercicioRequest.getExercicio().getTelef());
-		// paramMap.put("dataini", exercicioRequest.getExercicio().getDataini());
-		// paramMap.put("dataFin", exercicioRequest.getExercicio().getDatafin());
-		// paramMap.put("createDate", exercicioRequest.getExercicio().getCreatedate());
-		// paramMap.put("createUser", exercicioRequest.getExercicio().getCreateuser());
-		// paramMap.put("tenantid", exercicioRequest.getExercicio().getTenantid());
-		// paramMap.put("userid", exercicioRequest.getExercicio().getUserid());
-		// paramMap.put("atual", exercicioRequest.getExercicio().getAtual());
+
+		paramMap.put("cdexerc", exercicioRequest.getFirstExercicio().getCdexerc());
+		paramMap.put("dsexerc", exercicioRequest.getFirstExercicio().getDsexerc());
+		paramMap.put("nmexerc", exercicioRequest.getFirstExercicio().getNmexerc());
+		paramMap.put("cdgrmusc", exercicioRequest.getFirstExercicio().getGrupomuscular().getCdgrmusc());
+		paramMap.put("create_user", exercicioRequest.getFirstExercicio().getCreateuser());
+		paramMap.put("tenant_id", exercicioRequest.getFirstExercicio().getTenantid());
 
 		Integer exercicioId =
 				(Integer)SensusMyBatisDacHelper.doQueryForObject(getSqlSession(), INSERT_EXERCICIO, paramMap);
@@ -194,8 +187,18 @@ public class ExercicioDACImpl extends SqlSessionDaoSupport implements IExercicio
 
 		if (!ValidationUtil.isNull(exercicioId))
 		{
-			// exercicioRequest.getExercicio().setCdacad(exercicioId);
-			// response.addResult(exercicioRequest.getExercicio());
+			exercicioRequest.getFirstExercicio().setCdexerc(exercicioId);
+			response.addResult(exercicioRequest.getFirstExercicio());
+
+			for (Foto foto : exercicioRequest.getFirstExercicio().getListFotos())
+			{
+				paramMap = new HashMap<String, Object>(2);
+				paramMap.put("cdexerc", exercicioId);
+				paramMap.put("cdfoto", foto.getCdfoto());
+
+				doQueryForList(getSqlSession(), "Exercicio.updateFoto", paramMap, response);
+			}
+
 			return response;
 		}
 

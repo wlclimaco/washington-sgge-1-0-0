@@ -20,6 +20,7 @@
 	<resultMap id="curtirResults" type="Curtir">
 		<result property="cdCurtir" column="cdcurtir" />
 		<result property="acaoEnum" column="cdtable" />
+		<result property="curtirTypeEnum" column="status" />
 		<result property="id" column="id" />
 		<result property="curtirTypeEnum" column="status" />
 		<result property="createdate" column="create_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
@@ -29,16 +30,16 @@
 
 	<resultMap id="fotosResults" type="Foto">
 		<result property="cdfoto" column="cdfoto" />
+		<result property="id" column="id" />
 		<result property="nmfoto" column="nmfoto" />
 		<result property="lcfoto" column="lcfoto" />
 		<result property="ttfoto" column="ttfoto" />
 		<result property="comentario" column="comentario" />
-		<result property="cdtable" column="fototypeenun" />
-		<result property="id" column="id" />
 		<result property="createdate" column="create_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
 		<result property="createuser" column="create_user" />
 		<result property="tenantid" column="tenant_id" />
 	</resultMap>
+
 
 	<select id="insertComentario" parameterType="Map" resultType="int" statementType="CALLABLE">
      { call ins_comentario(
@@ -53,6 +54,8 @@
 
 
     </select >
+
+
 
     <select id="insertCurtir" parameterType="Map" resultType="int" statementType="CALLABLE">
 

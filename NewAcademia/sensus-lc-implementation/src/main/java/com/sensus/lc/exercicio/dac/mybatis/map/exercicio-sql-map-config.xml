@@ -11,16 +11,23 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 
 <typeAliases>
 	<typeAlias alias="Tenant"    type="com.sensus.lc.tenant.model.Tenant" />
-	<typeAlias alias="Exercicio"  type="com.sensus.lc.exercicio.model.Exercicio"/>
+	<typeAlias alias="Exercicio" type="com.sensus.lc.exercicio.model.Exercicio"/>
+	<typeAlias alias="Foto"      type="com.sensus.lc.foto.model.Foto"/>
 	<typeAlias alias="Grupomuscular"  type="com.sensus.lc.grupomuscular.model.Grupomuscular"/>
+	<typeAlias alias="Curtir"  type="com.sensus.lc.curtir.model.Curtir"/>
+	<typeAlias alias="Comentario"  type="com.sensus.lc.comentario.model.Comentario"/>
 	<typeAlias alias="ExercicioRequest"  type="com.sensus.lc.exercicio.model.request.ExercicioRequest"/>
-	<typeAlias alias="InquiryExercicioRequest" type="com.sensus.lc.exercicio.model.request.InquiryExercicioRequest" />
+	<typeAlias alias="InquiryExercicioRequest" type="com.sensus.lc.exercicio.model.request.InquiryExercicioRequest"/>
+	<typeAlias alias="CurtirTypeEnum" type="com.sensus.lc.curtir.model.CurtirTypeEnum" />
+	<typeAlias alias="TabelaEnum"   	type="com.sensus.lc.base.model.TabelaEnum" />
+	<typeAlias alias="CurtirTypeEnum"     	type="com.sensus.lc.curtir.model.CurtirTypeEnum" />
 
 </typeAliases>
 
 <mappers>
 	<mapper resource="com/sensus/lc/exercicio/dac/mybatis/map/exercicio.xml"/>
 	<mapper resource="com/sensus/lc/grupomuscular/dac/mybatis/map/grupomuscular.xml"/>
+	<mapper resource="com/sensus/lc/comum/dac/mybatis/map/comum.xml"/>
 </mappers>
 
 </configuration>

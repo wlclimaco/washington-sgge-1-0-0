@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<typeAlias alias="Tenant"    type="com.sensus.lc.tenant.model.Tenant" />
 	<typeAlias alias="Comentario"  type="com.sensus.lc.comentario.model.Comentario"/>
 	<typeAlias alias="Curtir"  type="com.sensus.lc.curtir.model.Curtir"/>
-	<typeAlias alias="Foto" type="com.sensus.lc.foto.model.Foto" />
+	<typeAlias alias="Foto"  type="com.sensus.lc.foto.model.Foto"/>
 
 </typeAliases>
 
