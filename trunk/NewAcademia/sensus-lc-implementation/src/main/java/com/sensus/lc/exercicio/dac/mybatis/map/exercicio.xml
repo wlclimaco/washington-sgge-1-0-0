@@ -12,8 +12,60 @@
 		<result property="createdate" column="create_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
 		<result property="createuser" column="create_user" />
 		<result property="tenantid" column="tenant_id" />
-		<association property="grupomuscular" column="cdgrmusc" javaType="Grupomuscular" select="Grupomuscular.fetchAllGrupomuscularById" />
+		<association property="grupomuscular"  column="cdgrmusc" javaType="Grupomuscular" select="Grupomuscular.fetchAllGrupomuscularById" />
+		<collection property="listFotos"       column="cdexerc"  select="fetchAllFotoByExercicio" />
+		<collection property="listCurtir"      column="cdexerc"  select="fetchAllCurtirByExercicio" />
+		<collection property="listComentarios" column="cdexerc"  select="fetchAllComentarioByExercicio" />
 	</resultMap>
+
+	<resultMap id="fotoResults" type="Foto">
+		<result property="cdfoto" column="cdfoto" />
+		<result property="id" column="id" />
+		<result property="nmfoto" column="nmfoto" />
+		<result property="lcfoto" column="lcfoto" />
+		<result property="ttfoto" column="ttfoto" />
+		<result property="comentario" column="comentario" />
+		<result property="acaoComentarioEnum" jdbcType="INTEGER" column="fototypeenun" />
+		<result property="createdate" column="create_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="createuser" column="create_user" />
+		<result property="tenantid" column="tenant_id" />
+	</resultMap>
+
+	<resultMap id="comentarioResults" type="Comentario">
+		<result property="cdcomentario" column="cdcomentario" />
+		<result property="acaoComentarioEnum" jdbcType="INTEGER" column="cdtable" />
+		<result property="id" column="id" />
+		<result property="coment" column="texto" />
+		<result property="dtpost" column="create_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="createuser" column="create_user" />
+		<result property="tenantid" column="tenant_id" />
+	</resultMap>
+
+	<resultMap id="curtirResults" type="Curtir">
+		<result property="cdCurtir" column="cdcurtir" />
+		<result property="id" column="id" />
+		<result property="curtirTypeEnumValue" jdbcType="INTEGER" column="status" />
+		<result property="createdate" column="create_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="createuser" column="create_user" />
+		<result property="tenantid" column="tenant_id" />
+	</resultMap>
+
+	    <!-- Insert Exercicio -->
+ 	<select id="fetchAllFotoByExercicio" resultMap="fotoResults">
+		SELECT cdfoto, id, nmfoto, lcfoto, ttfoto, comentario,
+		       create_date, create_user, tenant_id
+		  FROM foto where fototypeenun = 3 and id = #{cdexerc};
+	</select>
+
+	<select id="fetchAllCurtirByExercicio" resultMap="curtirResults">
+		SELECT cdcurtir, cdtable, id, status, create_date, create_user, tenant_id
+  		FROM curtir where cdtable = 3 and id = #{cdexerc};
+	</select>
+
+	<select id="fetchAllComentarioByExercicio" resultMap="comentarioResults">
+		SELECT cdcomentario, cdtable, id, texto, create_date, create_user, tenant_id
+  		FROM comentario where cdtable = 3 and id = #{cdexerc};
+	</select>
 
 
 	<sql id="allExercicioColumms">
@@ -26,22 +78,16 @@
 	  	tenant_id
 	</sql>
 
+
+
 	<!-- Insert Exercicio -->
  	<select id="insertExercicio" parameterType="Map" resultType="int" statementType="CALLABLE">
-	{ call ins_exercicio(#{academ,jdbcType=VARCHAR},
-		#{lograd,jdbcType=VARCHAR},
-		#{numen,jdbcType=INTEGER},
-		#{bairr,jdbcType=VARCHAR},
-		#{cidade,jdbcType=VARCHAR},
-		#{cep,jdbcType=VARCHAR},
-		#{telef,jdbcType=VARCHAR},
-		#{dataini,jdbcType=TIMESTAMP}::timestamp without time zone,
-		#{dataFin,jdbcType=TIMESTAMP}::timestamp without time zone,
-		#{createDate,jdbcType=TIMESTAMP}::timestamp without time zone,
-		#{createUser,jdbcType=VARCHAR},
-		#{tenantid,jdbcType=INTEGER},
-		#{userid,jdbcType=INTEGER},
-		#{atual,jdbcType=BOOLEAN} ) }
+	{ call ins_exercicio(
+		#{nmexerc,jdbcType=VARCHAR},
+		#{dsexerc,jdbcType=VARCHAR},
+		#{cdgrmusc,jdbcType=INTEGER},
+		#{create_user,jdbcType=VARCHAR},
+		#{tenant_id,jdbcType=VARCHAR}) }
 
 	</select>
 
@@ -69,6 +115,13 @@
 	<select id="deleteExercicio" parameterType="Exercicio">
 		delete from exercicio where cdacad = (#{cdacad})
 	</select>
+
+	<select id="updateFoto" parameterType="Map">
+
+		update foto set id = #{cdexerc} WHERE cdfoto = #{cdfoto}
+
+	</select>
+
 
 	<!-- Fetch All Exercicios -->
 	<select id="fetchAllExercicios" parameterType="Map" resultMap="listAllExercicioResults">
