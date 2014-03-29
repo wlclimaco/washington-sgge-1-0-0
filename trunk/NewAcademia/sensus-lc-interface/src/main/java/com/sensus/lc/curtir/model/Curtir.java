@@ -3,14 +3,14 @@
  */
 package com.sensus.lc.curtir.model;
 
-import com.sensus.common.model.SensusModel;
+import com.sensus.lc.base.model.PrincipalClass;
 import com.sensus.lc.base.model.TabelaEnum;
 
 /**
  * The Class Curtir.
  */
 @SuppressWarnings("serial")
-public class Curtir extends SensusModel
+public class Curtir extends PrincipalClass
 {
 	/** The Constant FIRST. */
 	private static final Integer FIRST = 0;
@@ -19,7 +19,7 @@ public class Curtir extends SensusModel
 	private Integer cdCurtir;
 
 	/** The curtir type enum. */
-	private CurtirTypeEnum curtirTypeEnum;
+	private Integer curtirTypeEnum;
 
 	/** The acao enum. */
 	private TabelaEnum acaoEnum;
@@ -52,7 +52,7 @@ public class Curtir extends SensusModel
 	 * 
 	 * @return the curtir type enum
 	 */
-	public CurtirTypeEnum getCurtirTypeEnum()
+	public Integer getCurtirTypeEnum()
 	{
 		return curtirTypeEnum;
 	}
@@ -62,7 +62,7 @@ public class Curtir extends SensusModel
 	 * 
 	 * @param curtirTypeEnum the new curtir type enum
 	 */
-	public void setCurtirTypeEnum(CurtirTypeEnum curtirTypeEnum)
+	public void setCurtirTypeEnum(Integer curtirTypeEnum)
 	{
 		this.curtirTypeEnum = curtirTypeEnum;
 	}
