@@ -36,13 +36,25 @@ $('#save').click(function() {
 			}
 		};
 		var oRequest = new ExercicioRequest(1,"cc","aaa",1,fotos);
-console.log(oRequest);
-debugger
+
 		$.sc.getJson('api/exercicio/insert',oRequest, false, fnCallBack);
 
 
 
 		//{"grupomusculars":[{"cdgrmusc":0,"musculo":"55","dsgrmusc":"55","createdate":"2014-03-27-00-00-00-000","createuser":"superuser","tenantid":1,"userid":1}]}
+});
+
+$('#uploadvideos').click(function() {
+
+ var span = document.createElement('span');
+		  span.innerHTML = ['<table class="table table-striped" role="presentation"><tbody class="files">'+
+				'<tr class="template-upload fade in"><td><span class="preview" ><iframe class="thumb" src="//www.youtube.com/embed/IAnzAWt5tCI" frameborder="0" allowfullscreen></iframe></span></td>'+
+				'<td class="test"><button class="btn btn-warning cancel ui-button-text"><i class="glyphicon glyphicon-ban-circle"></i><span>Cancel</span></button></td></tr></tbody></table>'].join('');
+
+
+          document.getElementById('videos').insertBefore(span, null);
+
+
 });
 		//INIT UI
 		//Hide

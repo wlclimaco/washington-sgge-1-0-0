@@ -44,7 +44,7 @@
 	<resultMap id="curtirResults" type="Curtir">
 		<result property="cdCurtir" column="cdcurtir" />
 		<result property="id" column="id" />
-		<result property="curtirTypeEnumValue" jdbcType="INTEGER" column="status" />
+		<result property="curtirTypeEnum" column="status" />
 		<result property="createdate" column="create_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
 		<result property="createuser" column="create_user" />
 		<result property="tenantid" column="tenant_id" />

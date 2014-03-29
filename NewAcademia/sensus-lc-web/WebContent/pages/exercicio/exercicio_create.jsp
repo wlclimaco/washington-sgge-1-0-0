@@ -66,6 +66,9 @@
 												<option value="custom">Custom</option>
 											</select>
 										 </li>
+										 <li>
+
+										  </li>
                                     </ul>
                                 </fieldset>
                                 <fieldset>
@@ -86,8 +89,29 @@
                                                 </div>
                                             </div>
                                     </div>
-							 </fieldset>
+								</fieldset>
+								<fieldset>
+                                    <legend><a href="" class="text-button spindown"><span class="ui-icon-triangle-1-e ui-icon"></span> Videos</a></legend>
+                                    <div class="spindown-child">
+                                            <!-- START: Group Search -->
+                                            <div class="advanced-search-container group yui-gf">
+                                                <div class="yui-u first">
+                                                    <h5>Videos
+
+                                                    </h5>
+                                                </div>
+                                                <div class="yui-u">
+												<label for="exercicio-name-create">Link Video :<span></span></label>
+													<input type="text" id="exercicio-name-create" tabindex="1" class="required long"/> <button id="uploadvideos" class="btn btn-warning cancel ui-button-text">
+													 <output id="videos"></output>
+													 <!--<iframe class="thumb" src="//www.youtube.com/embed/IAnzAWt5tCI" frameborder="0" allowfullscreen></iframe>-->
+                                                </div>
+                                            </div>
+                                    </div>
+							    </fieldset>
+							 <fieldset>
 							  <button id="save" class="btn btn-warning cancel ui-button-text">
+							  <fieldset>
                        </div>
 					  <p class=hide id="fotos"></p>
 				</div>

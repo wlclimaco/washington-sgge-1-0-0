@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sensus.common.model.SensusModel;
+import com.sensus.lc.base.model.PrincipalClass;
 import com.sensus.lc.base.model.TabelaEnum;
 import com.sensus.lc.curtir.model.Curtir;
 import com.sensus.lc.foto.model.Foto;
@@ -13,7 +13,7 @@ import com.sensus.lc.foto.model.Foto;
  * The Class Comentario.
  */
 @SuppressWarnings("serial")
-public class Comentario extends SensusModel
+public class Comentario extends PrincipalClass
 {
 	/** The Constant FIRST. */
 	private static final Integer FIRST = 0;
