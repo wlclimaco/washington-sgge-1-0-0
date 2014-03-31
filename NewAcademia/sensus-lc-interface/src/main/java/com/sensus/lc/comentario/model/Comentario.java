@@ -1,13 +1,7 @@
 package com.sensus.lc.comentario.model;
 
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.sensus.lc.base.model.PrincipalClass;
 import com.sensus.lc.base.model.TabelaEnum;
-import com.sensus.lc.curtir.model.Curtir;
-import com.sensus.lc.foto.model.Foto;
 
 /**
  * The Class Comentario.
@@ -21,9 +15,6 @@ public class Comentario extends PrincipalClass
 	/** The cdcomentario. */
 	private Integer cdcomentario;
 
-	/** The dtpost. */
-	private Date dtpost;
-
 	/** The coment. */
 	private String coment;
 
@@ -33,12 +24,14 @@ public class Comentario extends PrincipalClass
 	/** The acao comentario enum. */
 	private TabelaEnum acaoComentarioEnum;
 
-	/** The curtis. */
-	private List<Curtir> curtis;
-
-	/** The fotos. */
-	private List<Foto> fotos;
-
+	/**
+	 * Instantiates a new comentario.
+	 * 
+	 * @param cdcomentario the cdcomentario
+	 * @param coment the coment
+	 * @param id the id
+	 * @param acaoComentarioEnum the acao comentario enum
+	 */
 	public Comentario(Integer cdcomentario, String coment, Integer id, TabelaEnum acaoComentarioEnum)
 	{
 		super();
@@ -48,17 +41,12 @@ public class Comentario extends PrincipalClass
 		this.acaoComentarioEnum = acaoComentarioEnum;
 	}
 
-	public Comentario(Integer cdcomentario, Date dtpost, String coment, Integer id, TabelaEnum acaoComentarioEnum,
-			List<Curtir> curtis, List<Foto> fotos)
+	/**
+	 * Instantiates a new comentario.
+	 */
+	public Comentario()
 	{
 		super();
-		this.cdcomentario = cdcomentario;
-		this.dtpost = dtpost;
-		this.coment = coment;
-		this.id = id;
-		this.acaoComentarioEnum = acaoComentarioEnum;
-		this.curtis = curtis;
-		this.fotos = fotos;
 	}
 
 	/**
@@ -102,76 +90,6 @@ public class Comentario extends PrincipalClass
 	}
 
 	/**
-	 * Gets the curtis.
-	 * 
-	 * @return the curtis
-	 */
-	public List<Curtir> getCurtis()
-	{
-		return curtis;
-	}
-
-	/**
-	 * Sets the curtis.
-	 * 
-	 * @param curtis the new curtis
-	 */
-	public void setCurtis(List<Curtir> curtis)
-	{
-		this.curtis = curtis;
-	}
-
-	/**
-	 * Adds the curtir.
-	 * 
-	 * @param exercicio the exercicio
-	 */
-	public void addCurtir(Curtir exercicio)
-	{
-		if (getCurtis() == null)
-		{
-			setCurtis(new ArrayList<Curtir>());
-		}
-
-		getCurtis().add(exercicio);
-	}
-
-	/**
-	 * Gets the fotos.
-	 * 
-	 * @return the fotos
-	 */
-	public List<Foto> getFotos()
-	{
-		return fotos;
-	}
-
-	/**
-	 * Sets the fotos.
-	 * 
-	 * @param fotos the new fotos
-	 */
-	public void setFotos(List<Foto> fotos)
-	{
-		this.fotos = fotos;
-	}
-
-	/**
-	 * Adds the fotos.
-	 * 
-	 * @param exercicio the exercicio
-	 */
-	public void addFotos(Foto exercicio)
-	{
-		if (getFotos() == null)
-		{
-			setFotos(new ArrayList<Foto>());
-		}
-
-		getFotos().add(exercicio);
-	}
-
-	/**
 	 * Gets the cdfoto.
 	 * 
 	 * @return the cdfoto
@@ -189,26 +107,6 @@ public class Comentario extends PrincipalClass
 	public void setCdfoto(Integer cdfoto)
 	{
 		cdcomentario = cdfoto;
-	}
-
-	/**
-	 * Gets the dtpost.
-	 * 
-	 * @return the dtpost
-	 */
-	public Date getDtpost()
-	{
-		return dtpost;
-	}
-
-	/**
-	 * Sets the dtpost.
-	 * 
-	 * @param dtpost the new dtpost
-	 */
-	public void setDtpost(Date dtpost)
-	{
-		this.dtpost = dtpost;
 	}
 
 	/**
@@ -251,16 +149,11 @@ public class Comentario extends PrincipalClass
 		this.id = id;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.sensus.common.model.SensusModel#toString()
-	 */
 	@Override
 	public String toString()
 	{
 		return "Comentario [getCdcomentario()=" + getCdcomentario() + ", getAcaoComentarioEnum()="
-				+ getAcaoComentarioEnum() + ", getCurtis()=" + getCurtis() + ", getFotos()=" + getFotos()
-				+ ", getCdfoto()=" + getCdfoto() + ", getDtpost()=" + getDtpost() + ", getComent()=" + getComent()
+				+ getAcaoComentarioEnum() + ", getCdfoto()=" + getCdfoto() + ", getComent()=" + getComent()
 				+ ", getId()=" + getId() + ", toString()=" + super.toString() + "]";
 	}
 }

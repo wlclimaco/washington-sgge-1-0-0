@@ -197,10 +197,8 @@ public class ComumDACImpl extends SqlSessionDaoSupport implements IComumDAC
 		HashMap<String, Object> paramMap = new HashMap<String, Object>(PARAMSIZE11);
 
 		paramMap.put("cdcomentario", comentarioRequest.getFirstComentario().getCdcomentario());
-		paramMap.put("dtpost", comentarioRequest.getFirstComentario().getDtpost());
 		paramMap.put("coment", comentarioRequest.getFirstComentario().getComent());
 		paramMap.put("acaoComentarioEnum", comentarioRequest.getFirstComentario().getAcaoComentarioEnum());
-		paramMap.put("curtis", comentarioRequest.getFirstComentario().getCurtis());
 
 		String result = (String)SensusMyBatisDacHelper.doQueryForObject(getSqlSession(), UPDATE_COMENTARIO, paramMap);
 

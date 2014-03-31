@@ -33,10 +33,9 @@
 
 	<resultMap id="comentarioResults" type="Comentario">
 		<result property="cdcomentario" column="cdcomentario" />
-		<result property="acaoComentarioEnum" jdbcType="INTEGER" column="cdtable" />
 		<result property="id" column="id" />
 		<result property="coment" column="texto" />
-		<result property="dtpost" column="create_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
+		<result property="createdate" column="create_date" typeHandler="com.sensus.lc.base.util.DateTimeZoneTypeHandler"/>
 		<result property="createuser" column="create_user" />
 		<result property="tenantid" column="tenant_id" />
 	</resultMap>

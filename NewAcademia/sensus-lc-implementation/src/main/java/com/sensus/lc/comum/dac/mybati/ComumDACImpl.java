@@ -168,10 +168,8 @@ public class ComumDACImpl extends SqlSessionDaoSupport implements IComumDAC
 		HashMap<String, Object> paramMap = new HashMap<String, Object>(PARAMSIZE10);
 
 		paramMap.put("cdcomentario", dietaRequest.getFirstComentario().getCdcomentario());
-		paramMap.put("dtpost", dietaRequest.getFirstComentario().getDtpost());
 		paramMap.put("coment", dietaRequest.getFirstComentario().getComent());
 		paramMap.put("acaoComentarioEnum", dietaRequest.getFirstComentario().getAcaoComentarioEnum());
-		paramMap.put("curtis", dietaRequest.getFirstComentario().getCurtis());
 
 		Integer academiaId =
 				(Integer)SensusMyBatisDacHelper.doQueryForObject(getSqlSession(), INSERT_COMENTARIO, paramMap);
@@ -195,10 +193,8 @@ public class ComumDACImpl extends SqlSessionDaoSupport implements IComumDAC
 		HashMap<String, Object> paramMap = new HashMap<String, Object>(PARAMSIZE11);
 
 		paramMap.put("cdcomentario", comentarioRequest.getFirstComentario().getCdcomentario());
-		paramMap.put("dtpost", comentarioRequest.getFirstComentario().getDtpost());
 		paramMap.put("coment", comentarioRequest.getFirstComentario().getComent());
 		paramMap.put("acaoComentarioEnum", comentarioRequest.getFirstComentario().getAcaoComentarioEnum());
-		paramMap.put("curtis", comentarioRequest.getFirstComentario().getCurtis());
 
 		String result = (String)SensusMyBatisDacHelper.doQueryForObject(getSqlSession(), UPDATE_COMENTARIO, paramMap);
 
