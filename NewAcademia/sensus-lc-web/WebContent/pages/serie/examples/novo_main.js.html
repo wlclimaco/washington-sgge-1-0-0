@@ -1,0 +1,14 @@
+<script type="text/javascript">
+
+sensus.pages.dragdrobTable = {
+avgTotalsFormatter : (function(totals, columnDef) {
+debugger;
+  var val = totals.avg && totals.avg[columnDef.field];
+  if (val != null) {
+    return "avg: " + Math.round(val) + "%";
+  }
+  return "";
+}
+
+};
+</script>
