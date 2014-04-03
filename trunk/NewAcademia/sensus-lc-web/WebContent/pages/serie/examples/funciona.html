@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <title>SlickGrid example: Grouping</title>
+  <link rel="stylesheet" href="../slick.grid.css" type="text/css"/>
+  <link rel="stylesheet" href="../controls/slick.pager.css" type="text/css"/>
+  <link rel="stylesheet" href="../css/smoothness/jquery-ui-1.8.16.custom.css" type="text/css"/>
+  <link rel="stylesheet" href="examples.css" type="text/css"/>
+  <link rel="stylesheet" href="../controls/slick.columnpicker.css" type="text/css"/>
+  <style>
+    .cell-effort-driven {
+      text-align: center;
+    }
+
+    .slick-group-title[level='0'] {
+      font-weight: bold;
+    }
+
+    .slick-group-title[level='1'] {
+      text-decoration: underline;
+    }
+
+    .slick-group-title[level='2'] {
+      font-style: italic;
+    }
+    .cell-effort-driven {
+      text-align: center;
+    }
+
+    .cell-reorder {
+      cursor: move;
+      background: url("../images/drag-handle.png") no-repeat center center;
+    }
+
+    .cell-selection {
+      border-right-color: silver;
+      border-right-style: solid;
+      background: #f5f5f5;
+      color: gray;
+      text-align: right;
+      font-size: 10px;
+    }
+
+    .slick-row.selected .cell-selection {
+      background-color: transparent; /* show default selected row background */
+    }
+
+    .recycle-bin {
+      width: 120px;
+      border: 1px solid gray;
+      background: beige;
+      padding: 4px;
+      font-size: 12pt;
+      font-weight: bold;
+      color: black;
+      text-align: center;
+      -moz-border-radius: 10px;
+    }
+
+    .red {
+      background: red;
+    }
+
+    .bold {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+<div style="position:relative">
+  <div style="width:600px;">
+    <div class="grid-header" style="width:100%">
+      <label>SlickGrid</label>
+    </div>
+    <div id="myGrid" style="width:100%;height:500px;"></div>
+    <div id="pager" style="width:100%;height:20px;"></div>
+  </div>
+
+  <div id="dropzones" class="options-panel" style="width:100%;">
+	<!-- <div id="myGrid2"  class="myGrid" style="width:100%;height:500px;"></div>-->
+  
+  <div style="position:absolute;left:0px;top:2px;width:300px;height:400px;z-index:1;">
+   <div class="grid-header" style="width:100%">
+      <label>SlickGrid</label>
+    </div>
+	<div id="myGrid2"  class="myGrid dropzone" style="width:100%;height:400px;"></div>	
+  </div>
+  <div style="position:absolute;left:320px;top:2px;width:300px;height:50px;z-index:1;">
+	<div id="myGrid3"  class="myGrid dropzone" style="width:100%;height:400px;"></div>	
+  </div>;
+  <div style="position:absolute;left:640px;top:2px;width:300px;height:50px;z-index:1;">
+	<div id="myGrid4"  class="myGrid dropzone" style="width:100%;height:400px;"></div>	
+  </div>;
+  <div style="position:absolute;left:960px;top:2px;width:300px;height:50px;z-index:1;">
+	<div id="myGrid5"  class="myGrid dropzone" style="width:100%;height:400px;"></div>	
+  </div>;
+  <div style="position:absolute;left:0px;top:530px;width:300px;height:50px;z-index:1;">
+	<div id="myGrid6"  class="myGrid dropzone" style="width:100%;height:400px;"></div>	
+   <div style="position:absolute;left:0px;top:830px;width:300px;height:50px;z-index:1;">
+	<div id="myGrid7"  class="myGrid dropzone" style="width:100%;height:400px;"></div>	
+  </div>
+  </div>
+</div>
+
+
+<script src="../lib/firebugx.js"></script>
+
+<script src="../lib/jquery-1.7.min.js"></script>
+<script src="../lib/jquery-ui-1.8.16.custom.min.js"></script>
+<script src="../lib/jquery.event.drag-2.2.js"></script>
+<script src="../lib/jquery.event.drop-2.2.js"></script>
+
+<script src="../slick.core.js"></script>
+<script src="../slick.formatters.js"></script>
+<script src="../slick.editors.js"></script>
+<script src="../plugins/slick.cellrangedecorator.js"></script>
+<script src="../plugins/slick.cellrangeselector.js"></script>
+<script src="../plugins/slick.rowselectionmodel.js"></script>
+<script src="../plugins/slick.rowmovemanager.js"></script>
+<script src="../plugins/slick.cellselectionmodel.js"></script>
+<script src="../slick.grid.js"></script>
+<script src="../slick.groupitemmetadataprovider.js"></script>
+<script src="../slick.dataview.js"></script>
+<script src="../controls/slick.pager.js"></script>
+<script src="../controls/slick.columnpicker.js"></script>
+
+
+<script src="dragDrob_main.js"></script>
+
+<script src="table001.js"></script>
+<script src="table003.js"></script>
+<script src="table004.js"></script>
+<script src="table005.js"></script>
+<script src="table006.js"></script>
+<script src="table007.js"></script>
+<script src="table002.js"></script>
+
+
+</body>
+</html>
