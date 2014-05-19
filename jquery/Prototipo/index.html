@@ -16,6 +16,7 @@
       <meta property="og:image" content="http://cdn.tomatoes-static.com/images/c/100917-80.png" />
       <meta property="og:site_name" content="MeuCarrinho" />
       <meta property="fb:app_id" content="146744538733216" />
+	  <link rel="stylesheet" type="text/css" href="style/global_styles.css">
       <link href="style/templates/basic/favicon.ico" rel="shortcut icon" type="image/x-icon" />
       <link rel="stylesheet" href="style/main.css" type="text/css" />
       <link rel="stylesheet" href="style/templates/basic/css/style.css" type="text/css" />
@@ -31,19 +32,18 @@
       <link rel="stylesheet" href="style/modules/header.css" type="text/css" />
 	  <link rel="stylesheet" href="javaScript/media/css/demo_page.css" type="text/css" />
 	  <link rel="stylesheet" href="javaScript/media/css/demo_table.css" type="text/css" />
-	  <link rel="stylesheet" type="text/css" href="style/global_styles.css">
 
-      <style type="text/css">
-         <!--
-            img.afterload { display:none; } 
-               -->
-      </style>
 	  
 	  		<style type="text/css">
 			.expanded-group{
 				background: url("javaScript/media/images/minus.jpg") no-repeat scroll left center transparent;
 				padding-left: 15px !important
 			}
+			
+			.imgpos {
+					position: relative;
+					left: 32%
+				} 
 
 			.collapsed-group{
 				background: url("javaScript/media/images/plus.jpg") no-repeat scroll left center transparent;
@@ -51,212 +51,24 @@
 			}
 
 		</style>
-		
-	  <script src="javaScript/23809903.js"></script>
-	  <script type="text/javascript" src="javaScript/main.js"></script>
-      <script type="text/javascript" src="javaScript/default.js"></script>
-      <script type="text/javascript" src="javaScript/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
-      <script type="text/javascript" src="javaScript/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-      <script type="text/javascript" src="javaScript/EAS_tag.1.0.js"></script>
-      <script type="text/javascript" src="javaScript/elements/sidebar.js"></script>
-      <script type="text/javascript" src="javaScript/elements/box.js"></script>
-      <script type="text/javascript" src="javaScript/elements/listbuttons.js"></script>
-      <script type="text/javascript" src="style/templates/basic/tmpl/footer.js"></script>
-      <script type="text/javascript" src="javaScript/ui.widget.js"></script>
-      <script type="text/javascript" src="javaScript/ui.autocomplete.js"></script>
-      <script type="text/javascript" src="javaScript/search.js"></script>
-      <script type="text/javascript" src="javaScript/categories.js"></script>
-      <script type="text/javascript" src="javaScript/header.js"></script>
-      <script type="text/javascript">
-         $(window).bind("load", function(){$("img.afterload").show();}); 
-         var Itemid = 117005, content_width = 900;
-                            $(function() {
-                                $(".item").find(".item-options").show();
-                                $(".item").mouseenter(function() {
-                                    $(this).find(".item-icon").show();
-                                });
-                                $(".item").mouseleave(function() {
-                                    $(this).find(".item-icon").hide();
-                                    $(this).find(".icon-selected").show();
-                                });
-                            });
-                        
-                    var _gaq = _gaq || [];
-                    _gaq.push(['_setAccount', 'UA-12110552-8']);
-                    _gaq.push(["_trackPageview"]);
-         
-         
-                    (function() {
-                        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-                    })();
-                
-         $(function() { kite.register('mainmenu_1', {"menu-group":"public_pages","module_id":"bdec2d23cb8ed7231efd13025ee7bb5b0bo"}); });
-         $(function() { kite.register('mainmenu_2', {"menu-group":"public_more","module_id":"3946199ab605fd260c192bdfe08a15610bo"}); });
-          
-      </script>
-	    <script type="text/javascript" src="javaScript/template.js"></script>
-      <script id="navegg" type="text/javascript" src="javaScript/ltcef7.js?14011"></script>
-		<!-- <script src="media/js/jquery.min.js" type="text/javascript"></script> -->
-		 <script type="text/javascript" src="style/templates/basic/tmpl/footer.js"></script>
-      <script type="text/javascript" src="javaScript/ui.widget.js"></script>
-      <script type="text/javascript" src="javaScript/ui.autocomplete.js"></script>
-      <script type="text/javascript" src="javaScript/search.js"></script>
-      <script type="text/javascript" src="javaScript/categories.js"></script>
-      <script type="text/javascript" src="javaScript/header.js"></script>
-        <script src="javaScript/media/js/jquery.dataTables.min.js" type="text/javascript"></script>
 
-        <!-- <script src="media/js/jquery-ui.js" type="text/javascript"></script> -->
-
-        <script src="javaScript/media/js/jquery.dataTables.rowGrouping.js" type="text/javascript"></script>
-		<script type="text/javascript" charset="utf-8">
+	<script type="text/javascript" src="javaScript/assets/scripts/jquery-1.6.1.min.js"></script>
+	<script type="text/javascript" src="javaScript/assets/scripts/jquery.menu.js"></script>
+	<script type="text/javascript" src="javaScript/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="javaScript/jquery-ui-1.10.4.custom.js"></script>
+    <script src="javaScript/media/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="javaScript/media/js/jquery.dataTables.rowGrouping.js" type="text/javascript"></script>
+	<script type="text/javascript" src="javaScript/assets/scripts/base.js"></script>
+ <script type="text/javascript">
 			$(document).ready( function () {
 				$('#example').dataTable({ "bLengthChange": false, "bPaginate": false}).rowGrouping({bExpandableGrouping: true});
-			
-			$('#map').hide();		
-		$('#system-messaging').show();
-		
-		//bubbles		
-		$('.bubble').CreateBubblePopup();
-		//set customized mouseover event for each button
-		$('.bubble').mouseover(function(){
-			//remove title 
-			$this = $(this);
-			$.data(this, 'title', $this.attr('title'));
-			$this.removeAttr('title');			
-
-			//show the bubble popup with new options
-			$(this).ShowBubblePopup({
-				innerHtml: $.data(this, 'title'),
-				width: '200px',
-				themeMargins: {
-					total: '5px',
-					difference: '5px'
-					},
-				innerHtmlStyle: {
-									color: ($(this).attr('id')!='azure' ? '#000000' : '#333333'), 
-									'text-align':'center'
-								},										
-				themeName: 	$(this).attr('rel'),
-				themePath: 	'../assets/images/jquerybubblepopup-theme'								 
-		  });
-
-		});
-		
-		$('.bubble').mouseout(function(){
-			// add title back
-			$this = $(this);
-			$this.attr('title', $.data(this, 'title'));					
-		});
-
-		//FPT GOOGLE MAPS
-		//INIT FPO MAP
-				var map = new GMap2($("#map").get(0));
-				var portlandOR = new GLatLng(45.521383,-122.673683);
-				map.setCenter(portlandOR, 11);
-				// setup 10 random points
-				var bounds = map.getBounds();
-				var southWest = bounds.getSouthWest();
-				var northEast = bounds.getNorthEast();
-				var lngSpan = northEast.lng() - southWest.lng();
-				var latSpan = northEast.lat() - southWest.lat();
-				var markers = [];
-				for (var i = 0; i < 50; i++) {
-				    var point = new GLatLng(southWest.lat() + latSpan * Math.random(),
-				        southWest.lng() + lngSpan * Math.random());
-					marker = new GMarker(point);
-					map.addOverlay(marker);
-					markers[i] = marker;
-				}
-				
-				var altValue = 0;
-				$(markers).each(function(i,marker){
-					/*$("<li />")
-						.html("Point "+i)
-						.click(function(){
-							displayPoint(marker, i);
-						})
-						.appendTo("#list");*/
-					if(altValue == 0)
-					{
-						$(".infowindow-title").addClass("error");
-						$(".ui-state-error").show();
-						altValue =1;
-						}
-					else
-					{altValue =0;}
-					GEvent.addListener(marker, "click", function(){
-						displayPoint(marker, i);
-						//marker.openInfoWindowHtml($("#messageMap").html());
-					});
+				$(".event-day-custom").buttonset();
+				$("#categories").click(function (e) {
+					e.preventDefault();
+					$('#subMenu').removeClass('hide');
 				});
-				//map.setMapType(G_HYBRID_MAP);
-				map.setUIToDefault();		
-				map.disableScrollWheelZoom();
-
-				$("#message-map").appendTo(map.getPane(G_MAP_FLOAT_SHADOW_PANE));
-				
-				function displayPoint(marker, index){
-					$("#message-map").hide();					
-					/*var moveEnd = GEvent.addListener(map, "moveend", function(){
-						var markerOffset = map.fromLatLngToDivPixel(marker.getLatLng());
-						$("#messageMap")
-							.fadeIn()
-							.css({ top:markerOffset.y, left:markerOffset.x });					
-						GEvent.removeListener(moveEnd);
-					});*/
-					var markerOffset = map.fromLatLngToDivPixel(marker.getLatLng());
-					$("#message-map")
-						.fadeIn()
-						.css({ top:markerOffset.y, left:markerOffset.x });					
-
-					GEvent.addListener(map, "click", function(){
-						$("#message-map").hide();
-					});
-					//map.panTo(marker.getLatLng());
-				}
-
-				
-		//INIT FPO MAP
-		var mapdetail = new GMap2(document.getElementById('dialog-map')); 
-		mapdetail.setCenter(portlandOR, 16); 
-		
-		/* Add 10 markers to the map at random locations
-		var point = new GLatLng(southWest.lat() + latSpan * Math.random(),
-		southWest.lng() + lngSpan * Math.random());
-		marker = new GMarker(point); 
-		mapdetail.addOverlay(marker); 
-		  */
-		  
-	//Fake state based on value 
-	var nvpairs = getUrlVars(); 
-	if(nvpairs["value"]=="m")
-	{
-		//Default state for saved TOU definition
-		showMessage("messaging-main","The data below reflects a saved search. You are viewing <strong>Saved Search 1</strong>","confirm");
-		//Define button state for TOU			
-		$('#create-action').button( "option", "disabled", false );					
-	}
-	else
-		$('.messaging').hide();
-			
 			} );
 		</script>
-		
-		<script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-17838786-5']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
 		
       <link rel="next" href="2/index.html" />
       <link rel="canonical" href="index.html" />
@@ -279,6 +91,21 @@
                </a>
             </div>
          </div>
+		  <!-- search -->
+         <!-- Search Google -->
+		 <div id="mc-header-categories">
+		 <center>
+		<form class="google-style">
+			<input type="text" id="q" title="Pesquisar" onkeydown="document.getElementById('x').style.display='block'" onblur="if(this.value==='')document.getElementById('x').style.display='none'"/>
+			<button type="reset" id="x" title="Limpar pesquisa" onclick="this.style.display='none'">×</button>
+			<div class="button-box">
+			<button class="submit">Pesquisar</button>
+			</div>
+			<br class="clear" />
+		</form>
+		</center>
+		</div>
+<!-- Search Google -->
          <div id="mc-header-categories">
             <ul id="categories" class="ui-helper-clearfix ui-corner-bottom">
                <li id="cat1">
@@ -318,6 +145,22 @@
                </li>
             </ul>
          </div>
+		 <div id="mc-header-categories">
+			<li id="day-custom-container style="float: center;">
+			
+				<div id="" class="event-day-custom checkbox">
+						<input type="checkbox" id="Salsicha" value="Salsicha"> <label for="Salsicha">Salsicha</label>
+						<input type="checkbox" id="Lingui"   value="Lingui">   <label for="Lingui">Linguica</label>
+						<input type="checkbox" id="Bovina"   value="Bovina">   <label for="Bovina">Carne Bovina</label>
+						<input type="checkbox" id="Aves"     value="Aves">     <label for="Aves">Aves</label>
+						<input type="checkbox" id="Suína"    value="Suína">    <label for="Suína">Carne Suína</label>
+						<input type="checkbox" id="Peixe"    value="Peixe">    <label for="Peixe">Peixe</label>
+						<input type="checkbox" id="Frutos"   value="Frutos">   <label for="Frutos">Frutos do Mar</label>
+						<input type="checkbox" id="Outras"   value="Outras">   <label for="Outras">Outras Carnes</label>
+				</div>
+			
+            </li>
+		 </div>
       </div>
       <div id="box" class="ui-helper-clearfix">
          <div id="content" class="ui-corner-all" style="float: left;">
@@ -845,196 +688,6 @@
                     </div>
                     </div>
                 </div>
-				  
-				  
-				  
-				  
-				  
-				  
-				  <!-- 
-                  <ul id="subcategories">
-                     <li >
-                        <a href="../../../../torrada/pao-de-acucar-delivery/1106522/102009/index.html" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Torrada'])" title="Torrada" class="category-title">Torrada</a>
-                     </li>
-                     <li >
-                        <a href="../../../../chocolate-em-barra/pao-de-acucar-delivery/1106522/105875/index.html" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Chocolate em Barra'])" title="Chocolate em Barra" class="category-title">Chocolate em Barra</a>
-                     </li>
-                     <li >
-                        <a href="../../../../bombom/pao-de-acucar-delivery/1106522/105883/index.html" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Bombom'])" title="Bombom" class="category-title">Bombom</a>
-                     </li>
-                     <li >
-                        <a href="../../../../bolo/pao-de-acucar-delivery/1106522/100976/index.html" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Bolo'])" title="Bolo" class="category-title">Bolo</a>
-                     </li>
-                     <li >
-                        <a href="../../../../lanches-e-salgados/pao-de-acucar-delivery/1106522/106644/index.html" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Lanches e Salgados'])" title="Lanches e Salgados" class="category-title">Lanches e Salgados</a>
-                     </li>
-                     <li >
-                        <a href="../../../../frutas-secas/pao-de-acucar-delivery/1106522/109055/index.html" title="Frutas Secas" class="more category-title"><span class="more-icon"></span>Frutas Secas</a>
-                        <ul class="menu" >
-                           <li >
-                              <a href="../../../../uva-passa/pao-de-acucar-delivery/1106522/111027/index.html" title="Uva passa" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Frutas Secas','Uva passa'])";>Uva passa</a>
-                           </li>
-                           <li >
-                              <a href="../../../../nozes/pao-de-acucar-delivery/1106522/111023/index.html" title="Nozes" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Frutas Secas','Nozes'])";>Nozes</a>
-                           </li>
-                           <li >
-                              <a href="../../../../damasco/pao-de-acucar-delivery/1106522/111026/index.html" title="Damasco" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Frutas Secas','Damasco'])";>Damasco</a>
-                           </li>
-                           <li >
-                              <a href="../../../../amendoa/pao-de-acucar-delivery/1106522/111024/index.html" title="Amêndoa" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Frutas Secas','Amêndoa'])";>Amêndoa</a>
-                           </li>
-                           <li >
-                              <a href="../../../../avela/pao-de-acucar-delivery/1106522/111025/index.html" title="Avelã" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Frutas Secas','Avelã'])";>Avelã</a>
-                           </li>
-                        </ul>
-                     </li>
-                     <li >
-                        <a href="../../../../folhados/pao-de-acucar-delivery/1106522/103373/index.html" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Folhados'])" title="Folhados" class="category-title">Folhados</a>
-                     </li>
-                     <li >
-                        <a href="../../../../alfajor/pao-de-acucar-delivery/1106522/107662/index.html" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Alfajor'])" title="Alfajor" class="category-title">Alfajor</a>
-                     </li>
-                     <li >
-                        <a href="../../../../outros-chocolates/pao-de-acucar-delivery/1106522/110440/index.html" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Outros Chocolates'])" title="Outros Chocolates" class="category-title">Outros Chocolates</a>
-                     </li>
-                     <li >
-                        <a href="../../../../outros-artigos-de-padaria/pao-de-acucar-delivery/1106522/102122/index.html" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Outros Artigos de Padaria'])" title="Outros Artigos de Padaria" class="category-title">Outros Artigos de Padaria</a>
-                     </li>
-                     <li >
-                        <a href="../../../../paes/pao-de-acucar-delivery/1106522/103383/index.html" title="Pães" class="more category-title"><span class="more-icon"></span>Pães</a>
-                        <ul class="menu" >
-                           <li >
-                              <a href="../../../../pao-de-forma/pao-de-acucar-delivery/1106522/110123/index.html" title="Pão de Forma" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Pães','Pão de Forma'])";>Pão de Forma</a>
-                           </li>
-                           <li >
-                              <a href="../../../../bisnaguinha/pao-de-acucar-delivery/1106522/110124/index.html" title="Bisnaguinha" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Pães','Bisnaguinha'])";>Bisnaguinha</a>
-                           </li>
-                           <li >
-                              <a href="../../../../baguete/pao-de-acucar-delivery/1106522/110125/index.html" title="Baguete" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Pães','Baguete'])";>Baguete</a>
-                           </li>
-                           <li >
-                              <a href="../../../../pao-de-alho/pao-de-acucar-delivery/1106522/110121/index.html" title="Pão de Alho" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Pães','Pão de Alho'])";>Pão de Alho</a>
-                           </li>
-                           <li >
-                              <a href="../../../../pao-doce/pao-de-acucar-delivery/1106522/110122/index.html" title="Pão Doce" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Pães','Pão Doce'])";>Pão Doce</a>
-                           </li>
-                           <li >
-                              <a href="../../../../outros-paes/pao-de-acucar-delivery/1106522/110126/index.html" title="Outros Pães" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Pães','Outros Pães'])";>Outros Pães</a>
-                           </li>
-                           <li >
-                              <a href="../../../../panetone/pao-de-acucar-delivery/1106522/106036/index.html" title="Panetone" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Pães','Panetone'])";>Panetone</a>
-                           </li>
-                           <li >
-                              <a href="../../../../pao-frances/pao-de-acucar-delivery/1106522/15/index.html" title="Pão Francês" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Pães','Pão Francês'])";>Pão Francês</a>
-                           </li>
-                           <li >
-                              <a href="../../../../chocotone/pao-de-acucar-delivery/1106522/110367/index.html" title="Chocotone" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Pães','Chocotone'])";>Chocotone</a>
-                           </li>
-                        </ul>
-                     </li>
-                     <li >
-                        <a href="../../../../bomboniere/pao-de-acucar-delivery/1106522/100487/index.html" title="Bomboniere" class="more category-title"><span class="more-icon"></span>Bomboniere</a>
-                        <ul class="menu" >
-                           <li >
-                              <a href="../../../../salgadinho/pao-de-acucar-delivery/1106522/100647/index.html" title="Salgadinho" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Bomboniere','Salgadinho'])";>Salgadinho</a>
-                           </li>
-                           <li >
-                              <a href="../../../../amendoim/pao-de-acucar-delivery/1106522/101375/index.html" title="Amendoim" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Bomboniere','Amendoim'])";>Amendoim</a>
-                           </li>
-                           <li >
-                              <a href="../../../../bala/pao-de-acucar-delivery/1106522/103148/index.html" title="Bala" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Bomboniere','Bala'])";>Bala</a>
-                           </li>
-                           <li >
-                              <a href="../../../../castanhas/pao-de-acucar-delivery/1106522/102091/index.html" title="Castanhas" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Bomboniere','Castanhas'])";>Castanhas</a>
-                           </li>
-                           <li >
-                              <a href="../../../../goma-de-mascar/pao-de-acucar-delivery/1106522/100489/index.html" title="Goma de Mascar" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Bomboniere','Goma de Mascar'])";>Goma de Mascar</a>
-                           </li>
-                           <li >
-                              <a href="../../../../pirulito/pao-de-acucar-delivery/1106522/103150/index.html" title="Pirulito" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Bomboniere','Pirulito'])";>Pirulito</a>
-                           </li>
-                           <li >
-                              <a href="../../../../outros-artigos-de-bomboniere/pao-de-acucar-delivery/1106522/102147/index.html" title="Outros Artigos de Bomboniere" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Bomboniere','Outros Artigos de Bomboniere'])";>Outros Artigos de Bomboniere</a>
-                           </li>
-                        </ul>
-                     </li>
-                     <li >
-                        <a href="../../../../sobremesas-e-confeitaria/pao-de-acucar-delivery/1106522/100910/index.html" title="Sobremesas e Confeitaria" class="more category-title"><span class="more-icon"></span>Sobremesas e Confeitaria</a>
-                        <ul class="menu" >
-                           <li >
-                              <a href="../../../../sorvete/pao-de-acucar-delivery/1106522/102074/index.html" title="Sorvete" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Sobremesas e Confeitaria','Sorvete'])";>Sorvete</a>
-                           </li>
-                           <li >
-                              <a href="../../../../fermento/pao-de-acucar-delivery/1106522/110202/index.html" title="Fermento" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Sobremesas e Confeitaria','Fermento'])";>Fermento</a>
-                           </li>
-                           <li >
-                              <a href="../../../../gelatina/pao-de-acucar-delivery/1106522/102037/index.html" title="Gelatina" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Sobremesas e Confeitaria','Gelatina'])";>Gelatina</a>
-                           </li>
-                           <li >
-                              <a href="../../../../mistura-para-bolo/pao-de-acucar-delivery/1106522/110203/index.html" title="Mistura para Bolo" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Sobremesas e Confeitaria','Mistura para Bolo'])";>Mistura para Bolo</a>
-                           </li>
-                           <li >
-                              <a href="../../../../coco-ralado/pao-de-acucar-delivery/1106522/100922/index.html" title="Coco Ralado" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Sobremesas e Confeitaria','Coco Ralado'])";>Coco Ralado</a>
-                           </li>
-                           <li >
-                              <a href="../../../../outros-doces/pao-de-acucar-delivery/1106522/102019/index.html" title="Outros Doces" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Sobremesas e Confeitaria','Outros Doces'])";>Outros Doces</a>
-                           </li>
-                           <li >
-                              <a href="../../../../goiabada/pao-de-acucar-delivery/1106522/110206/index.html" title="Goiabada" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Sobremesas e Confeitaria','Goiabada'])";>Goiabada</a>
-                           </li>
-                           <li >
-                              <a href="../../../../doce-de-leite/pao-de-acucar-delivery/1106522/110205/index.html" title="Doce de Leite" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Sobremesas e Confeitaria','Doce de Leite'])";>Doce de Leite</a>
-                           </li>
-                           <li >
-                              <a href="../../../../ingredientes-para-doces/pao-de-acucar-delivery/1106522/102096/index.html" title="Ingredientes para Doces" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Sobremesas e Confeitaria','Ingredientes para Doces'])";>Ingredientes para Doces</a>
-                           </li>
-                           <li >
-                              <a href="../../../../cobertura-para-sorvete/pao-de-acucar-delivery/1106522/102251/index.html" title="Cobertura para Sorvete" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Sobremesas e Confeitaria','Cobertura para Sorvete'])";>Cobertura para Sorvete</a>
-                           </li>
-                           <li >
-                              <a href="../../../../acai/pao-de-acucar-delivery/1106522/110204/index.html" title="Açaí" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Sobremesas e Confeitaria','Açaí'])";>Açaí</a>
-                           </li>
-                           <li >
-                              <a href="../../../../chantili/pao-de-acucar-delivery/1106522/100919/index.html" title="Chantili" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Sobremesas e Confeitaria','Chantili'])";>Chantili</a>
-                           </li>
-                           <li >
-                              <a href="../../../../pacoca/pao-de-acucar-delivery/1106522/101078/index.html" title="Paçoca" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Sobremesas e Confeitaria','Paçoca'])";>Paçoca</a>
-                           </li>
-                           <li >
-                              <a href="../../../../pao-de-mel/pao-de-acucar-delivery/1106522/109015/index.html" title="Pão de Mel" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Sobremesas e Confeitaria','Pão de Mel'])";>Pão de Mel</a>
-                           </li>
-                        </ul>
-                     </li>
-                     <li >
-                        <a href="../../../../pascoa/pao-de-acucar-delivery/1106522/105884/index.html" title="Páscoa" class="more category-title"><span class="more-icon"></span>Páscoa</a>
-                        <ul class="menu" >
-                           <li >
-                              <a href="../../../../ovo-de-pascoa/pao-de-acucar-delivery/1106522/102390/index.html" title="Ovo de Páscoa" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Páscoa','Ovo de Páscoa'])";>Ovo de Páscoa</a>
-                           </li>
-                           <li >
-                              <a href="../../../../colomba-pascal/pao-de-acucar-delivery/1106522/105885/index.html" title="Colomba Pascal" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Páscoa','Colomba Pascal'])";>Colomba Pascal</a>
-                           </li>
-                           <li >
-                              <a href="../../../../coelho-chocolate-de-pascoa/pao-de-acucar-delivery/1106522/106471/index.html" title="Coelho / Chocolate de Páscoa" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Páscoa','Coelho / Chocolate de Páscoa'])";>Coelho / Chocolate de Páscoa</a>
-                           </li>
-                           <li >
-                              <a href="../../../../forma-para-ovos-de-pascoa/pao-de-acucar-delivery/1106522/109996/index.html" title="Forma para Ovos de Páscoa" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Páscoa','Forma para Ovos de Páscoa'])";>Forma para Ovos de Páscoa</a>
-                           </li>
-                           <li >
-                              <a href="../../../../arranjos-cestas-de-pascoa/pao-de-acucar-delivery/1106522/106469/index.html" title="Arranjos / Cestas de Páscoa" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Páscoa','Arranjos / Cestas de Páscoa'])";>Arranjos / Cestas de Páscoa</a>
-                           </li>
-                           <li >
-                              <a href="../../../../embalagens-para-ovos-de-pascoa/pao-de-acucar-delivery/1106522/109995/index.html" title="Embalagens para Ovos de Páscoa" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Páscoa','Embalagens para Ovos de Páscoa'])";>Embalagens para Ovos de Páscoa</a>
-                           </li>
-                           <li >
-                              <a href="../../../../suporte-para-ovos-de-pascoa/pao-de-acucar-delivery/1106522/109998/index.html" title="Suporte para Ovos de Páscoa" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Páscoa','Suporte para Ovos de Páscoa'])";>Suporte para Ovos de Páscoa</a>
-                           </li>
-                           <li >
-                              <a href="../../../../outros-artigos-para-pascoa/pao-de-acucar-delivery/1106522/108809/index.html" title="Outros Artigos para Páscoa" onclick="_gaq.push(['_trackEvent','Categoria_Lateral','Páscoa','Outros Artigos para Páscoa'])";>Outros Artigos para Páscoa</a>
-                           </li>
-                        </ul>
-                     </li>
-                  </ul> -->
                </div>
             </div>
          </div>

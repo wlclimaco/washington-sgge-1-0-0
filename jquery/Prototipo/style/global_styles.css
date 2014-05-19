@@ -376,7 +376,7 @@ ul.tabs li a.active {background:#fff;}
 
 /* =search */
 #search-form-container {background:#011223;overflow:hidden;padding:7px 0 7px 7px; margin-right:7px;}
-.search-input-container {background:#fff;overflow:hidden;}
+.search-input-container {background:#fff;overflow:hidden;padding:0.4em 5.5em;}
 #search-label-container{float:left;}
 #search-label-container .fg-button{margin:0;top:7px;}
 #search-form-container input#search-text {float:left;border:0;width:150px;padding:7px 0 7px 5px;}
@@ -2122,4 +2122,77 @@ table.summary-kpi td sup {font-size:50%;}
 	height:175px; 
 	margin: 0 auto 	
 	}
+	
+form.google-style {
+font: normal normal normal arial, sans-serif;
+border-bottom: 1px solid #E7E7E7;
+border-right: 1px solid #E7E7E7;
+width:291px;;
+padding:0;
+margin:0;
+position:relative;
+}
+
+form.google-style input{
+font-size:17px;
+margin:0;
+border:1px solid #9A9A9A;
+border-top-color: #CCCCCC;
+border-right-color: #CCCCCC;
+padding: 0;
+float:left;
+height:24px;
+padding:6px 29px 0 4px;
+width:175px;
+vertical-align: top; 
+}
+
+form.google-style .button-box{ 
+float:left;
+border:1px solid #9A9A9A;
+border-top-color: #CCCCCC;
+border-right-color: 1px solid #9A9A9A;
+border-left:none;
+height: 30px;
+}
+ 
+form.google-style .submit{
+vertical-align: top;
+font-size:15px;
+margin:0;
+background:#F1F1F1;
+border:none;
+border-top:1px solid #fff;
+width:80px;
+border-left:none;
+background: -moz-linear-gradient(top, #F1F1F1, #DCDCDC);
+background: -webkit-gradient(linear, left top, left bottom, from(#F1F1F1), to(#DCDCDC));
+padding:5px 3px; 
+filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#F1F1F1', EndColorStr='#DCDCDC', GradientType=0);
+height: 30px;
+cursor:pointer;
+}
+
+form.google-style .submit:active{background:#CCCCCC;}
+ 
+input[type="text"], input[type="password"], textarea, select {outline: none;}
+ 
+form.google-style #x {
+color:#A1B9ED;
+background:none;
+position:absolute;
+right:90px;
+font-size:28px;
+text-decoration:none;
+padding:0;
+border:none;
+width:20px;
+height:25px;
+cursor:pointer;
+display:none;
+}
+
+form.google-style #x:hover {color:#4272DB;}
+ 
+.clear {clear:both;}
 
