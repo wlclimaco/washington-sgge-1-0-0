@@ -1,0 +1,16 @@
+.form-buttonset {
+    padding: 10px;
+}
+.form-buttonset-fixed {
+    position: fixed;
+    bottom: -100px;
+    right: 10%;
+    z-index: 1000;
+}
+.form-buttonset-center {
+    display: block;
+    width: 80%;
+    margin: 10px auto;
+    position: relative;
+    text-align: center;
+}

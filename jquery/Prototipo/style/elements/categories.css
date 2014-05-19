@@ -1,0 +1,134 @@
+ul#categories {
+    font-family: 'Dosis-Medium';
+    font-size: 12px;
+    height: 78px;
+    list-style: none;
+    width: 980px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+}
+ul#categories li {
+    background: transparent url(../../../../s3.amazonaws.com/meucarrinho/site/categories/categories.png) 0 0 no-repeat;
+    border-left: solid 1px #ddd;
+    float: left;
+    height: 78px;
+    line-height: 15px;
+    margin: 0;
+    max-height: 75px;
+    padding-top: 3px;
+    position: relative;
+    text-align: center;
+    width: 88px;
+}
+ul#categories li:first-child {
+    border-left: none;
+}
+ul#categories li.selected {
+    cursor: pointer;
+}
+ul#categories li:hover a,
+ul#categories li.selected a {
+    color: white;
+}
+ul#categories li#cat1:hover,
+ul#categories li#cat1.selected {
+    background-position: 0 -79px;
+}
+ul#categories li#cat2 {
+    background-position: -88px 0;
+}
+ul#categories li#cat2:hover,
+ul#categories li#cat2.selected {
+    background-position: -88px -79px;
+}
+ul#categories li#cat3 {
+    background-position: -176px 0;
+}
+ul#categories li#cat3:hover,
+ul#categories li#cat3.selected {
+    background-position: -176px -79px;
+}
+ul#categories li#cat4 {
+    background-position: -264px 0;
+}
+ul#categories li#cat4:hover,
+ul#categories li#cat4.selected {
+    background-position: -264px -79px;
+}
+ul#categories li#cat5 {
+    background-position: -352px 0;
+}
+ul#categories li#cat5:hover,
+ul#categories li#cat5.selected {
+    background-position: -352px -79px;
+}
+ul#categories li#cat6 {
+    background-position: -440px 0;
+}
+ul#categories li#cat6:hover,
+ul#categories li#cat6.selected {
+    background-position: -440px -79px;
+}
+ul#categories li#cat7 {
+    background-position: -528px 0;
+}
+ul#categories li#cat7:hover,
+ul#categories li#cat7.selected {
+    background-position: -528px -79px;
+}
+ul#categories li#cat8 {
+    background-position: -616px 0;
+}
+ul#categories li#cat8:hover,
+ul#categories li#cat8.selected {
+    background-position: -616px -79px;
+}
+ul#categories li#cat9 {
+    background-position: -704px 0;
+}
+ul#categories li#cat9:hover,
+ul#categories li#cat9.selected {
+    background-position: -704px -79px;
+}
+ul#categories li#cat10 {
+    background-position: -792px 0;
+}
+ul#categories li#cat10:hover,
+ul#categories li#cat10.selected {
+    background-position: -792px -79px;
+}
+ul#categories li#cat11 {
+    background-position: -880px 0;
+}
+ul#categories li#cat11:hover,
+ul#categories li#cat11.selected {
+    background-position: -880px -79px;
+}
+
+ul#categories li a {
+    color: #7c7c7c;
+    display: block;
+    height: 78px;
+    margin: 0;
+    max-height: 38px;
+    padding: 40px 0 0 0;
+    position: relative;
+    text-decoration: none;
+    width: 100%;
+}
+
+ul#categories li a span {
+    display: table-cell;
+    height: 30px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    vertical-align: middle;
+    width: 89px;
+}
+ul#categories li span {
+    display: block;
+    margin-top: 36px;
+}

@@ -1,0 +1,125 @@
+div.login-form {
+    width:640px;
+    margin:0 auto;
+}
+
+div.login-form div.col-1, div.login-form div.col-2 {
+    float: left;
+    width: 280px;
+    margin: 0;
+    padding: 0;
+    height: 300px;
+}
+
+p.bottom-message {
+    font-size: 14px;
+    text-align: right;
+}
+p.bottom-message a {
+    font-weight: bold;
+}
+
+div.login-form div.col-2 {
+    width: 357px;
+    padding: 0;
+    padding-left: 77px;
+    max-width: 280px;
+    background: transparent url(../../../../s3.amazonaws.com/meucarrinho/site/images/login-register-or.png) no-repeat;
+}
+
+div.login-form div.col-2 h2 {
+    margin-bottom: 25px;
+}
+
+div#col-middle {
+    background: white url(../../../../s3.amazonaws.com/meucarrinho/site/images/register-sep.png) no-repeat;
+    float: left;
+    height: 430px;
+    margin-left: 60px;
+    width: 20px;
+}
+div.user-fbconnect,
+div.user-form {
+    margin: 0 auto;
+    padding: 5px 10px;
+    position: relative;
+    width: 280px;
+}
+div.user-form label {
+    display: inline-block;
+    text-align: right;
+    width: 45px;
+}
+div.user-form input.inputtext {
+    height: 24px;
+    width: 210px;
+}
+div.user-form .submit {
+    font-size: 16px;
+    height: 30px;
+    margin-left: 50px;
+    width: 210px;
+}
+div.user-form div.form-error-message {
+    border: solid 1px #cccc66;
+    background-color: #ffff99;
+    padding: 0 5px;
+}
+.recipe-title {
+    color: #757575;
+    display: block;
+    float: left;
+    font-family: 'Dosis-SemiBold', sans-serif;
+    font-size: 20px;
+    height: 40px;
+    line-height: 40px;
+    margin: 0;
+    overflow: hidden;
+    overflow-text: ellipsis;
+    width: 320px;
+    white-space: nowrap;
+}
+.recipe-items {
+    color: #757575;
+}
+#list-info,
+#recipe-info {
+    background-color: #f6f6f6;
+    margin-bottom: 50px;
+    max-width: 520px;
+    padding: 10px;
+    width: 540px;
+}
+div.list-price {
+    color: #f96900;
+    float: right;
+    font-family: 'Dosis-SemiBold', sans-serif;
+    font-size: 18px;
+    padding: 20px 0;
+    text-align: right;
+    width: 100px;
+}
+div.list-price span.price-dec {
+    font-family: 'Dosis-SemiBold', sans-serif;
+    font-size: 28px;
+}
+ul#features {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+ul#features li {
+    color: #999;
+    font-size: 16px;
+    line-height: 40px;
+}
+ul#features li img {
+    float: left;
+    margin-right: 10px;
+}
+p#pitch {
+    color: #809d00;
+    font-size: 18px;
+    line-height: 27px;
+    margin-bottom: 30px;
+}

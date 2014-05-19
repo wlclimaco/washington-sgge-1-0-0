@@ -1,0 +1,54 @@
+div.timeline {
+	margin: 0 auto;
+	overflow: hidden;
+}
+div.timeline a {
+    border: 0;
+}
+ul.year_timeline {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	overflow: hidden;
+}
+.current-year {
+    font-size:16px;
+    font-weight: bold;
+}
+li.year_item {
+	margin-right: 10px;
+    font-size: 13px;
+    line-height: 19.5px;
+    height: 20px;
+	float: left;
+}
+ul.mon_timeline {
+	margin: 0;
+	padding: 10px 0 0 0;
+	background-image: url(../../../ext/images/timeline.gif);
+	background-repeat: repeat-x;
+	list-style-type: none;
+	overflow: auto;
+}
+ul.mon_timeline_v {
+	margin: 0;
+	padding: 0 0 0 5px;
+	background-image: url(../../../ext/images/timeline_v.gif);
+	background-repeat: repeat-y;
+	list-style-type: none;
+	overflow: auto;
+}
+li.mon_item {
+	width: 40px;
+	text-align: center;
+	float: left;
+	overflow: hidden;
+}
+div.mon_item.top {
+	background: url(../../../ext/images/timeline_mon.gif) center bottom no-repeat;
+    padding-bottom: 5px;
+}
+div.mon_item.bottom {
+	background: url(../../../ext/images/timeline_mon.gif) center top no-repeat;
+    padding-top: 5px;
+}

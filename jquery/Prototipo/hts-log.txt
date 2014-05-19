@@ -1,0 +1,130 @@
+HTTrack3.48-8+htsswf+htsjava launched on Sat, 17 May 2014 19:27:41 at http://wlclimaco%40gmail.com:n6j7y7a5@www.meucarrinho.com.br/ +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar
+(winhttrack -qwC2%Ps2u1%s%uN0%I0p3DaK0H0%kf2A25000%f#f -F "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)" -%F "<!-- Mirrored from %s%s by HTTrack Website Copier/3.x [XR&CO'2014], %s -->" -%l "en, *" http://wlclimaco%40gmail%2ecom:n6j7y7a5@www.meucarrinho.com.br/ -O1 "C:\Users\washington\Desktop\super" +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+19:29:46	Warning: 	See other for wlclimaco%40gmail.com:n6j7y7a5@www.meucarrinho.com.br/produtos/
+19:29:46	Warning: 	File has moved from wlclimaco%40gmail.com:n6j7y7a5@www.meucarrinho.com.br/produtos/ to http://www.meucarrinho.com.br/s/padaria-e-sobremesas/pao-de-acucar-delivery/1106522/100917/
+19:29:48	Error: 	"Forbidden" (403) at link dxjqyap5rv5t.cloudfront.net/includes/1f61a46117d80a87b103f51f41f0073e/images/ui-bg_flat_75_ffffff_40x100.png (from dxjqyap5rv5t.cloudfront.net/includes/1f61a46117d80a87b103f51f41f0073e/main.css)
+19:29:48	Error: 	"Forbidden" (403) at link dxjqyap5rv5t.cloudfront.net/includes/1f61a46117d80a87b103f51f41f0073e/images/ui-bg_highlight-soft_0_f6f6f6_1x100.png (from dxjqyap5rv5t.cloudfront.net/includes/1f61a46117d80a87b103f51f41f0073e/main.css)
+19:29:48	Error: 	"Forbidden" (403) at link dxjqyap5rv5t.cloudfront.net/includes/1f61a46117d80a87b103f51f41f0073e/images/ui-bg_highlight-soft_25_fa6900_1x100.png (from dxjqyap5rv5t.cloudfront.net/includes/1f61a46117d80a87b103f51f41f0073e/main.css)
+19:29:48	Error: 	"Forbidden" (403) at link dxjqyap5rv5t.cloudfront.net/includes/1f61a46117d80a87b103f51f41f0073e/images/ui-bg_glass_0_fa6900_1x400.png (from dxjqyap5rv5t.cloudfront.net/includes/1f61a46117d80a87b103f51f41f0073e/main.css)
+19:29:49	Error: 	"Forbidden" (403) at link dxjqyap5rv5t.cloudfront.net/includes/1f61a46117d80a87b103f51f41f0073e/images/ui-bg_glass_65_ffffff_1x400.png (from dxjqyap5rv5t.cloudfront.net/includes/1f61a46117d80a87b103f51f41f0073e/main.css)
+19:29:50	Error: 	"Forbidden" (403) at link dxjqyap5rv5t.cloudfront.net/includes/1f61a46117d80a87b103f51f41f0073e/images/ui-bg_glass_0_f0fdaf_1x400.png (from dxjqyap5rv5t.cloudfront.net/includes/1f61a46117d80a87b103f51f41f0073e/main.css)
+19:29:50	Error: 	"Forbidden" (403) at link dxjqyap5rv5t.cloudfront.net/includes/1f61a46117d80a87b103f51f41f0073e/images/ui-bg_inset-soft_95_fef1ec_1x100.png (from dxjqyap5rv5t.cloudfront.net/includes/1f61a46117d80a87b103f51f41f0073e/main.css)
+19:29:50	Error: 	"Forbidden" (403) at link dxjqyap5rv5t.cloudfront.net/includes/1f61a46117d80a87b103f51f41f0073e/images/ui-icons_333333_256x240.png (from dxjqyap5rv5t.cloudfront.net/includes/1f61a46117d80a87b103f51f41f0073e/main.css)
+19:29:51	Error: 	"Forbidden" (403) at link dxjqyap5rv5t.cloudfront.net/includes/1f61a46117d80a87b103f51f41f0073e/images/ui-icons_5a8b0b_256x240.png (from dxjqyap5rv5t.cloudfront.net/includes/1f61a46117d80a87b103f51f41f0073e/main.css)
+19:29:51	Error: 	"Forbidden" (403) at link dxjqyap5rv5t.cloudfront.net/includes/1f61a46117d80a87b103f51f41f0073e/images/ui-icons_ffffff_256x240.png (from dxjqyap5rv5t.cloudfront.net/includes/1f61a46117d80a87b103f51f41f0073e/main.css)
+19:29:51	Error: 	"Forbidden" (403) at link dxjqyap5rv5t.cloudfront.net/includes/1f61a46117d80a87b103f51f41f0073e/images/ui-icons_cd0a0a_256x240.png (from dxjqyap5rv5t.cloudfront.net/includes/1f61a46117d80a87b103f51f41f0073e/main.css)
+19:29:52	Error: 	"Forbidden" (403) at link dxjqyap5rv5t.cloudfront.net/includes/1f61a46117d80a87b103f51f41f0073e/images/ui-bg_flat_0_aaaaaa_40x100.png (from dxjqyap5rv5t.cloudfront.net/includes/1f61a46117d80a87b103f51f41f0073e/main.css)
+19:29:53	Error: 	"Forbidden" (403) at link dxjqyap5rv5t.cloudfront.net/templates/system/images/notice-info.png (from dxjqyap5rv5t.cloudfront.net/includes/1f61a46117d80a87b103f51f41f0073e/main.css)
+19:29:53	Error: 	"Forbidden" (403) at link dxjqyap5rv5t.cloudfront.net/templates/system/images/notice-alert.png (from dxjqyap5rv5t.cloudfront.net/includes/1f61a46117d80a87b103f51f41f0073e/main.css)
+19:29:54	Error: 	"Forbidden" (403) at link dxjqyap5rv5t.cloudfront.net/templates/system/images/notice-note.png (from dxjqyap5rv5t.cloudfront.net/includes/1f61a46117d80a87b103f51f41f0073e/main.css)
+19:29:54	Warning: 	File not parsed, looks like binary: wlclimaco%40gmail.com:n6j7y7a5@www.meucarrinho.com.br/templates/basic/fonts/Dosis-ExtraLight.ttf
+19:29:54	Warning: 	File not parsed, looks like binary: wlclimaco%40gmail.com:n6j7y7a5@www.meucarrinho.com.br/templates/basic/fonts/Dosis-Bold.ttf
+19:29:54	Warning: 	File not parsed, looks like binary: wlclimaco%40gmail.com:n6j7y7a5@www.meucarrinho.com.br/templates/basic/fonts/Dosis-Light.ttf
+19:29:54	Warning: 	File not parsed, looks like binary: wlclimaco%40gmail.com:n6j7y7a5@www.meucarrinho.com.br/templates/basic/fonts/Dosis-Medium.ttf
+19:29:54	Warning: 	File not parsed, looks like binary: wlclimaco%40gmail.com:n6j7y7a5@www.meucarrinho.com.br/templates/basic/fonts/Dosis-Regular.ttf
+19:29:54	Warning: 	File not parsed, looks like binary: wlclimaco%40gmail.com:n6j7y7a5@www.meucarrinho.com.br/templates/basic/fonts/Dosis-SemiBold.ttf
+19:30:00	Warning: 	Link wlclimaco%40gmail.com:n6j7y7a5@www.meucarrinho.com.br/na-midia/?tmpl=component&print=1 not scanned (follow robots meta tag)
+19:30:00	Warning: 	Link wlclimaco%40gmail.com:n6j7y7a5@www.meucarrinho.com.br/sobre/?tmpl=component&print=1 not scanned (follow robots meta tag)
+19:31:00	Warning: 	Link wlclimaco%40gmail.com:n6j7y7a5@www.meucarrinho.com.br/termos/?tmpl=component&print=1 not scanned (follow robots meta tag)
+19:31:00	Warning: 	Link wlclimaco%40gmail.com:n6j7y7a5@www.meucarrinho.com.br/privacidade/?tmpl=component&print=1 not scanned (follow robots meta tag)
+19:31:40	Warning: 	File not parsed, looks like binary: wlclimaco%40gmail.com:n6j7y7a5@www.meucarrinho.com.br/libraries/kite/css/zocial/zocial-regular-webfont.eot
+19:31:41	Warning: 	File not parsed, looks like binary: wlclimaco%40gmail.com:n6j7y7a5@www.meucarrinho.com.br/libraries/kite/css/zocial/zocial-regular-webfont.ttf
+19:31:46	Warning: 	See other for wlclimaco%40gmail.com:n6j7y7a5@www.meucarrinho.com.br/l/8E73DCAA0/
+19:31:46	Warning: 	File has moved from wlclimaco%40gmail.com:n6j7y7a5@www.meucarrinho.com.br/l/8E73DCAA0/ to http://www.meucarrinho.com.br/listas/?view=userlists&task=listnotfound
+19:31:47	Warning: 	Link wlclimaco%40gmail.com:n6j7y7a5@www.meucarrinho.com.br/blog/2011/4/compartilhar-lista-de-compras/?tmpl=component&print=1 not scanned (follow robots meta tag)
+19:31:48	Warning: 	Link www.meucarrinho.com.br/blog/2011/4/compartilhar-lista-de-compras/?utm_source=web&utm_campaign=social&utm_medium=plusone&tmpl=component&print=1 not scanned (follow robots meta tag)
+19:31:49	Warning: 	Link www.meucarrinho.com.br/blog/2011/4/compartilhar-lista-de-compras/?utm_source=web&utm_campaign=social&utm_medium=facebook&tmpl=component&print=1 not scanned (follow robots meta tag)
+19:31:50	Warning: 	Link www.meucarrinho.com.br/blog/2011/4/compartilhar-lista-de-compras/?utm_source=web&utm_campaign=social&utm_medium=twitter&tmpl=component&print=1 not scanned (follow robots meta tag)
+19:31:53	Warning: 	Moved Permanently for wlclimaco%40gmail.com:n6j7y7a5@www.meucarrinho.com.br/?option=com_page&Itemid=26
+19:31:53	Warning: 	Redirected link is identical because of 'URL Hack' option: wlclimaco%40gmail.com:n6j7y7a5@www.meucarrinho.com.br/?option=com_page&Itemid=26 and www.meucarrinho.com.br/?option=com_page&Itemid=26
+19:31:53	Warning: 	File has moved from wlclimaco%40gmail.com:n6j7y7a5@www.meucarrinho.com.br/?option=com_page&Itemid=26 to http://www.meucarrinho.com.br/?option=com_page&Itemid=26
+19:31:54	Warning: 	Link wlclimaco%40gmail.com:n6j7y7a5@www.meucarrinho.com.br/blog/2011/3/comprando-em-supermercados-online/?tmpl=component&print=1 not scanned (follow robots meta tag)
+19:31:56	Warning: 	Link www.meucarrinho.com.br/blog/2011/3/comprando-em-supermercados-online/?utm_source=web&utm_campaign=social&utm_medium=plusone&tmpl=component&print=1 not scanned (follow robots meta tag)
+19:31:57	Warning: 	Link www.meucarrinho.com.br/blog/2011/3/comprando-em-supermercados-online/?utm_source=web&utm_campaign=social&utm_medium=facebook&tmpl=component&print=1 not scanned (follow robots meta tag)
+19:31:59	Warning: 	Link www.meucarrinho.com.br/blog/2011/3/comprando-em-supermercados-online/?utm_source=web&utm_campaign=social&utm_medium=twitter&tmpl=component&print=1 not scanned (follow robots meta tag)
+19:32:12	Warning: 	Link wlclimaco%40gmail.com:n6j7y7a5@www.meucarrinho.com.br/blog/2000/0/meucarrinho-para-iphone/?tmpl=component&print=1 not scanned (follow robots meta tag)
+19:32:12	Warning: 	Link www.meucarrinho.com.br/blog/2000/0/meucarrinho-para-iphone/?utm_source=web&utm_campaign=social&utm_medium=plusone&tmpl=component&print=1 not scanned (follow robots meta tag)
+19:32:12	Warning: 	Link www.meucarrinho.com.br/blog/2000/0/meucarrinho-para-iphone/?utm_source=web&utm_campaign=social&utm_medium=facebook&tmpl=component&print=1 not scanned (follow robots meta tag)
+19:32:12	Warning: 	Link www.meucarrinho.com.br/blog/2000/0/meucarrinho-para-iphone/?utm_source=web&utm_campaign=social&utm_medium=twitter&tmpl=component&print=1 not scanned (follow robots meta tag)
+19:32:13	Warning: 	Link wlclimaco%40gmail.com:n6j7y7a5@www.meucarrinho.com.br/blog/2000/0/meucarrinho-e-buscape/?tmpl=component&print=1 not scanned (follow robots meta tag)
+19:32:13	Warning: 	Link www.meucarrinho.com.br/blog/2000/0/meucarrinho-e-buscape/?utm_source=web&utm_campaign=social&utm_medium=plusone&tmpl=component&print=1 not scanned (follow robots meta tag)
+19:32:13	Warning: 	Link www.meucarrinho.com.br/blog/2000/0/meucarrinho-e-buscape/?utm_source=web&utm_campaign=social&utm_medium=facebook&tmpl=component&print=1 not scanned (follow robots meta tag)
+19:32:13	Warning: 	Link www.meucarrinho.com.br/blog/2000/0/meucarrinho-e-buscape/?utm_source=web&utm_campaign=social&utm_medium=twitter&tmpl=component&print=1 not scanned (follow robots meta tag)
+19:32:13	Warning: 	See other for wlclimaco%40gmail.com:n6j7y7a5@www.meucarrinho.com.br/a/
+19:32:13	Warning: 	File has moved from wlclimaco%40gmail.com:n6j7y7a5@www.meucarrinho.com.br/a/ to http://www.meucarrinho.com.br/s/padaria-e-sobremesas/pao-de-acucar-delivery/1106522/100917/
+19:32:13	Warning: 	Link wlclimaco%40gmail.com:n6j7y7a5@www.meucarrinho.com.br/blog/p/5/?tmpl=component&print=1 not scanned (follow robots meta tag)
+19:32:13	Warning: 	Link www.meucarrinho.com.br/blog/p/5/?utm_source=web&utm_campaign=social&utm_medium=plusone&tmpl=component&print=1 not scanned (follow robots meta tag)
+19:32:13	Warning: 	Link www.meucarrinho.com.br/blog/p/5/?utm_source=web&utm_campaign=social&utm_medium=facebook&tmpl=component&print=1 not scanned (follow robots meta tag)
+19:32:13	Warning: 	Link www.meucarrinho.com.br/blog/p/5/?utm_source=web&utm_campaign=social&utm_medium=twitter&tmpl=component&print=1 not scanned (follow robots meta tag)
+19:43:13	Warning: 	file not stored in cache due to bogus state (incomplete type with OK (200), size 1811): thumbs.buscape.com.br/T100x100/__2.1106522-6486388.jpg
+19:44:16	Warning: 	file not stored in cache due to bogus state (incomplete type with OK (200), size 1476): thumbs.buscape.com.br/T100x100/__2.1106522-5d7588b.jpg
+19:44:40	Warning: 	file not stored in cache due to bogus state (incomplete type with OK (200), size 2648): thumbs.buscape.com.br/T100x100/__2.1106522-5d71dbf.jpg
+19:45:21	Warning: 	Moved Permanently for www.meucarrinho.com.br/produtos/?category_id=100917&seller_id=1106522&page=0
+19:45:21	Warning: 	File has moved from www.meucarrinho.com.br/produtos/?category_id=100917&seller_id=1106522&page=0 to http://www.meucarrinho.com.br/s/padaria-e-sobremesas/pao-de-acucar-delivery/1106522/100917/
+19:45:22	Warning: 	Moved Permanently for www.meucarrinho.com.br/produtos/?category_id=100917&seller_id=67498&page=0
+19:45:22	Warning: 	File has moved from www.meucarrinho.com.br/produtos/?category_id=100917&seller_id=67498&page=0 to http://www.meucarrinho.com.br/s/padaria-e-sobremesas/sonda-delivery/67498/100917/
+19:45:22	Warning: 	Moved Permanently for www.meucarrinho.com.br/produtos/?category_id=100917&seller_id=1106532&page=0
+19:45:22	Warning: 	File has moved from www.meucarrinho.com.br/produtos/?category_id=100917&seller_id=1106532&page=0 to http://www.meucarrinho.com.br/s/padaria-e-sobremesas/varanda/1106532/100917/
+19:45:23	Warning: 	See other for www.meucarrinho.com.br/?view=sellers
+19:45:23	Warning: 	File has moved from www.meucarrinho.com.br/?view=sellers to http://www.meucarrinho.com.br/login/?view=login
+19:46:29	Warning: 	file not stored in cache due to bogus state (incomplete type with OK (200), size 1880): www.paodeacucar.com.br/img/legacyImages/38/3821473_r1.jpg
+19:46:35	Warning: 	file not stored in cache due to bogus state (incomplete type with OK (200), size 2548): thumbs.buscape.com.br/T100x100/__2.1106522-803e166.jpg
+19:47:44	Warning: 	file not stored in cache due to bogus state (incomplete type with OK (200), size 2643): thumbs.buscape.com.br/T100x100/__2.1106522-82a4dcd.jpg
+19:48:46	Warning: 	file not stored in cache due to bogus state (incomplete type with OK (200), size 1553): thumbs.buscape.com.br/T100x100/__2.1106522-5d72098.jpg
+19:48:47	Warning: 	file not stored in cache due to bogus state (incomplete type with OK (200), size 2700): thumbs.buscape.com.br/T100x100/__2.1106522-5d75881.jpg
+19:49:56	Warning: 	file not stored in cache due to bogus state (incomplete type with OK (200), size 3642): thumbs.buscape.com.br/T100x100/__2.1106522-6b52a1d.jpg
+19:51:50	Warning: 	file not stored in cache due to bogus state (incomplete type with OK (200), size 2697): thumbs.buscape.com.br/T100x100/__2.1106522-5d764bc.jpg
+19:51:51	Warning: 	file not stored in cache due to bogus state (incomplete type with OK (200), size 3119): thumbs.buscape.com.br/T100x100/__2.1106522-5d76253.jpg
+19:51:52	Warning: 	file not stored in cache due to bogus state (incomplete type with OK (200), size 3205): thumbs.buscape.com.br/T100x100/__2.1106522-7e9b54e.jpg
+19:51:56	Warning: 	file not stored in cache due to bogus state (incomplete type with OK (200), size 2826): thumbs.buscape.com.br/T100x100/__2.1106522-82ce088.jpg
+19:55:18	Warning: 	Link www.meucarrinho.com.br/blog/2011/4/compartilhar-lista-de-compras/?utm_source=web&utm_campaign=social&utm_medium=linkedin&tmpl=component&print=1 not scanned (follow robots meta tag)
+19:55:19	Warning: 	Link www.meucarrinho.com.br/blog/2011/3/comprando-em-supermercados-online/?utm_source=web&utm_campaign=social&utm_medium=linkedin&tmpl=component&print=1 not scanned (follow robots meta tag)
+19:55:19	Warning: 	Moved Permanently for www.meucarrinho.com.br/?option=com_page%26Itemid=26
+19:55:19	Warning: 	File has moved from www.meucarrinho.com.br/?option=com_page%26Itemid=26 to http://www.meucarrinho.com.br/?option=com_page&Itemid=26
+19:55:19	Warning: 	Link www.meucarrinho.com.br/blog/2000/0/meucarrinho-para-iphone/?utm_source=web&utm_campaign=social&utm_medium=linkedin&tmpl=component&print=1 not scanned (follow robots meta tag)
+19:55:19	Warning: 	Link www.meucarrinho.com.br/blog/2000/0/meucarrinho-e-buscape/?utm_source=web&utm_campaign=social&utm_medium=linkedin&tmpl=component&print=1 not scanned (follow robots meta tag)
+19:55:20	Warning: 	Link www.meucarrinho.com.br/blog/p/5/?utm_source=web&utm_campaign=social&utm_medium=linkedin&tmpl=component&print=1 not scanned (follow robots meta tag)
+19:57:20	Warning: 	Moved Permanently for www.meucarrinho.com.br/produtos/?category_id=100917&seller_id=1106522&page=2
+19:57:20	Warning: 	File has moved from www.meucarrinho.com.br/produtos/?category_id=100917&seller_id=1106522&page=2 to http://www.meucarrinho.com.br/s/padaria-e-sobremesas/pao-de-acucar-delivery/1106522/100917/
+19:57:21	Warning: 	Moved Permanently for www.meucarrinho.com.br/produtos/?category_id=100917&seller_id=67498&page=2
+19:57:21	Warning: 	File has moved from www.meucarrinho.com.br/produtos/?category_id=100917&seller_id=67498&page=2 to http://www.meucarrinho.com.br/s/padaria-e-sobremesas/sonda-delivery/67498/100917/
+19:57:22	Warning: 	Moved Permanently for www.meucarrinho.com.br/produtos/?category_id=100917&seller_id=1106532&page=2
+19:57:22	Warning: 	File has moved from www.meucarrinho.com.br/produtos/?category_id=100917&seller_id=1106532&page=2 to http://www.meucarrinho.com.br/s/padaria-e-sobremesas/varanda/1106532/100917/
+19:57:43	Warning: 	file not stored in cache due to bogus state (incomplete type with OK (200), size 2147): thumbs.buscape.com.br/T100x100/__2.1106522-6e607cb.jpg
+20:02:02	Warning: 	Moved Permanently for www.meucarrinho.com.br/produtos/?category_id=100918&seller_id=1106522&page=0
+20:02:02	Warning: 	File has moved from www.meucarrinho.com.br/produtos/?category_id=100918&seller_id=1106522&page=0 to http://www.meucarrinho.com.br/s/carnes/pao-de-acucar-delivery/1106522/100918/
+20:02:02	Warning: 	Moved Permanently for www.meucarrinho.com.br/produtos/?category_id=100918&seller_id=67498&page=0
+20:02:02	Warning: 	File has moved from www.meucarrinho.com.br/produtos/?category_id=100918&seller_id=67498&page=0 to http://www.meucarrinho.com.br/s/carnes/sonda-delivery/67498/100918/
+20:02:03	Warning: 	Moved Permanently for www.meucarrinho.com.br/produtos/?category_id=100918&seller_id=1106532&page=0
+20:02:03	Warning: 	File has moved from www.meucarrinho.com.br/produtos/?category_id=100918&seller_id=1106532&page=0 to http://www.meucarrinho.com.br/s/carnes/varanda/1106532/100918/
+20:02:29	Warning: 	file not stored in cache due to bogus state (incomplete type with OK (200), size 2841): thumbs.buscape.com.br/T100x100/__2.1106522-6b529ba.jpg
+20:02:31	Warning: 	file not stored in cache due to bogus state (incomplete type with OK (200), size 2848): thumbs.buscape.com.br/T100x100/__2.1106522-5d72130.jpg
+20:06:05	Warning: 	file not stored in cache due to bogus state (incomplete type with OK (200), size 2421): thumbs.buscape.com.br/T100x100/__2.1106522-5d76e02.jpg
+20:06:10	Error: 	Exit requested by shell or user
+20:06:10	Warning: 	File not added due to mirror cancel: thumbs.buscape.com.br/T100x100/__2.1106522-5d72d82.jpg
+20:06:10	Warning: 	File not added due to mirror cancel: thumbs.buscape.com.br/T100x100/__2.1106522-5d72d82.jpg
+20:06:10	Warning: 	File not added due to mirror cancel: thumbs.buscape.com.br/T100x100/__2.1106522-5d72d82.jpg
+20:06:10	Warning: 	File not added due to mirror cancel: thumbs.buscape.com.br/T100x100/__2.1106522-5d72d82.jpg
+20:06:12	Warning: 	Moved Permanently for www.meucarrinho.com.br/produtos/?category_id=100912&seller_id=1106522&page=0
+20:06:12	Warning: 	File has moved from www.meucarrinho.com.br/produtos/?category_id=100912&seller_id=1106522&page=0 to http://www.meucarrinho.com.br/s/frutas-ovos-e-verduras/pao-de-acucar-delivery/1106522/100912/
+20:06:12	Warning: 	Moved Permanently for www.meucarrinho.com.br/produtos/?category_id=100912&seller_id=67498&page=0
+20:06:12	Warning: 	File has moved from www.meucarrinho.com.br/produtos/?category_id=100912&seller_id=67498&page=0 to http://www.meucarrinho.com.br/s/frutas-ovos-e-verduras/sonda-delivery/67498/100912/
+20:06:12	Warning: 	Moved Permanently for www.meucarrinho.com.br/produtos/?category_id=100912&seller_id=1106532&page=0
+20:06:12	Warning: 	File has moved from www.meucarrinho.com.br/produtos/?category_id=100912&seller_id=1106532&page=0 to http://www.meucarrinho.com.br/s/frutas-ovos-e-verduras/varanda/1106532/100912/
+20:06:17	Warning: 	Moved Permanently for www.meucarrinho.com.br/produtos/?category_id=100249&seller_id=1106522&page=0
+20:06:17	Warning: 	File has moved from www.meucarrinho.com.br/produtos/?category_id=100249&seller_id=1106522&page=0 to http://www.meucarrinho.com.br/s/saude-e-beleza/pao-de-acucar-delivery/1106522/100249/
+20:06:17	Warning: 	Moved Permanently for www.meucarrinho.com.br/produtos/?category_id=100249&seller_id=67498&page=0
+20:06:17	Warning: 	File has moved from www.meucarrinho.com.br/produtos/?category_id=100249&seller_id=67498&page=0 to http://www.meucarrinho.com.br/s/saude-e-beleza/sonda-delivery/67498/100249/
+20:06:17	Warning: 	Moved Permanently for www.meucarrinho.com.br/produtos/?category_id=100249&seller_id=1106532&page=0
+20:06:17	Warning: 	File has moved from www.meucarrinho.com.br/produtos/?category_id=100249&seller_id=1106532&page=0 to http://www.meucarrinho.com.br/s/saude-e-beleza/varanda/1106532/100249/
+20:06:18	Error: 	Exit requested by shell or user
+* * MIRROR ABORTED! * *
+The current temporary cache is required for any update operation and only contains data downloaded during the present aborted session.
+The former cache might contain more complete information; if you do not want to lose that information, you have to restore it and delete the current cache.
+This can easily be done here by erasing the hts-cache/new.* files]

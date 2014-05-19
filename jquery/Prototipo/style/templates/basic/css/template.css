@@ -1,0 +1,34 @@
+#navigation {
+    display: none;
+}
+#box {
+    margin: 0 auto;
+    padding: 0;
+    position: relative;
+    width: 980px;
+} 
+#content {
+    margin: 0 auto;
+    position: relative;
+    width: 980px;
+}
+#page_footer_buttons {
+    text-align: right;
+}
+.post-content {
+    margin-bottom: 50px;
+}
+p.ano-mes-header {
+    display: none;
+}
+#mc-mob-download-app {
+    background-color: #f3f7b6;
+    font-size: 200%;
+    height: 100px;
+    line-height: 100px;
+    padding: 0 10px;
+}
+#mc-mob-download-app a {
+    color: #000;
+    display: block;
+}

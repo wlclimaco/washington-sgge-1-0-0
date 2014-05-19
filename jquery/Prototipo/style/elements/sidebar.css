@@ -1,0 +1,131 @@
+#sidebar {
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 180px;
+}
+#sidebar a.category-title {
+    font-family: 'Dosis-SemiBold';
+    font-size: 18px;
+    line-height: 27px;
+    margin: 0;
+    max-width: 170px;
+    padding: 5px 5px;
+    width: 180px;
+}
+#sidebar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+#sidebar ul li {
+    margin: 10px 0;
+}
+#sidebar ul.menu {
+    display: none;
+    margin-left: 16px;
+}
+#sidebar span.more-icon {
+    background: transparent url(../images/split_bt_list.png) -72px 5px no-repeat;
+    display: inline-block;
+    height: 16px;
+    width: 18px;
+}
+#sidebar .selected {
+    background-color: #eee;
+} 
+#sidebar #seller-select {
+    background: transparent url(components/com_meucarrinho/images/select-arrow.png) 165px 30px no-repeat;
+    bottom: 0px;
+    left: 0;
+    height: 70px;
+    position: absolute;
+    width: 180px;
+}
+#sidebar #seller-select img {
+    margin: 10px 40px;
+}
+#sidebar #sellers-available {
+    background-color: white;
+    border: solid 1px #eaeaea;
+    display: none;
+    font-family: 'Dosis-Regular', sans-serif;
+    font-size: 12px;
+    left: 0;
+    max-height: 300px;
+    max-width: 168px;
+    overflow: auto;
+    padding: 5px;
+    position: absolute;
+    top: 0;
+    z-index: 999;
+    width: 178px;
+}
+#sidebar #sellers-available ul {
+    margin-left: 0;
+}
+#sidebar-banner-app {
+    background-color: #f6f6f6;
+    border: solid 1px #ddd;
+    height: 400px;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 178px;
+}
+#sidebar-banner-app-img {
+    background: transparent url(../../../../s3.amazonaws.com/meucarrinho/site/images/banner-app-download-split.png) 10px bottom no-repeat;
+    border-bottom: solid 1px #ddd;
+    float: left;
+    height: 200px;
+    margin: 70px 0 0 0;
+    width: 178px;
+}
+#sidebar-banner-text {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    color: #757575;
+    font-family: 'Dosis-SemiBold', sans-serif;
+    font-size: 20px;
+    line-height: 30px;
+    width: 160px;
+}
+#sidebar-banner-text-small {
+    position: absolute;
+    left: 10px;
+    top: 280px;
+    color: #757575;
+    font-family: 'Dosis-SemiBold', sans-serif;
+    font-size: 16px;
+    width: 160px;
+}
+#sidebar-banner-app a {
+    position: absolute;
+    bottom: 10px;
+    left: 5px;
+    background: transparent url(../../../../s3.amazonaws.com/meucarrinho/site/images/banner-app-download-split.png) -170px 0 no-repeat;
+    display: block;
+    height: 77px;
+    width: 81px;
+}
+#sidebar-banner-app a.app-download-iphone {
+    left: 92px;
+    background-position: -261px 0;
+}
+#sidebar-banner-app a.app-download-android:hover {
+    background-position: -170px -85px;
+}
+#sidebar-banner-app a.app-download-iphone:hover {
+    background-position: -261px -85px;
+}
+div.banner-item-price {
+    font-family: 'Dosis-SemiBold', sans-serif;
+}
+span.banner-item-unit-price {
+    color: #f96900;
+    font-size: 14px;
+}
+div.banner-item-price span.banner-item-unit-price span.price-dec {
+    font-size: 24px;
+}

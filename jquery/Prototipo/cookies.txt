@@ -1,0 +1,7 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+www.meucarrinho.com.br	TRUE	/	FALSE	1999999999	77ee29cc913871437e34fa8506ea6a4c	k86n50ge2n7eut02j5qo51lsp3
+.navdmp.com	TRUE	/	FALSE	1999999999	ac3	1
+.google.com	TRUE	/	FALSE	1999999999	NID	67=Ep8_uUDE1MzL_6J33RGS7-Pja0r1CX79OGD4rO_RAYTWx1BHzboYzaeF-oGOGt_qTvbboZ1PCKh63nNY_ptdbOBoVptPYyljCHdBIsiyZHYC65ntxBInIZAbdF5WSUwm
+www.meucarrinho.com.br	TRUE	/	FALSE	1999999999	device	%7B%22d%22%3A%22W1ZmKdZMeXR23%22%2C%22s%22%3A%22web%22%2C%22m%22%3A%22linkedin%22%2C%22c%22%3A%22comparador%22%2C%22u%22%3A0%2C%22f%22%3A1400367947%7D
+
