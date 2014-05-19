@@ -1,0 +1,205 @@
+#mc-header-box {
+    background: #fafafa url(../images/header_bg.png) repeat;
+    margin: 0 0 40px 0;
+    padding: 0;
+    width: 100%;
+}
+#mc-header-home-box {
+    background:#fafafa url(../../../../s3.amazonaws.com/meucarrinho/site/images/header_home_bg.jpg) repeat;
+    height: 60px;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+#mc-header-home {
+    height:60px;
+    margin: 0 auto;
+    position: relative;
+    width: 980px;
+}
+#mc-header-simple {
+    background-color: #82aa2c;
+    height: 40px;
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+}
+#mc-header-config {
+    color: #7c7c7c;
+    font-size: 12px;
+    font-family: 'Dosis-Regular';
+    line-height: 30px;
+    height: 30px;
+    margin: 0 auto;
+    max-height: 20px;
+    padding: 5px 0;
+    position: relative;
+    width: 980px;
+}
+#mc-header-config a.menu {
+    border: solid 1px #eaeaea;
+    border-bottom: none;
+    padding: 2px 2px 8px 5px;
+}
+#mc-header-config a.selected {
+    background-color: white;
+}
+#mc-header-config a img {
+    vertical-align: middle;
+    margin: 0 2px;
+}
+#mc-header-config-list {
+    left: 270px;
+    position: absolute;
+    top: 0;
+}
+#mc-header-config-user-options,
+#mc-header-config-seller-options,
+#mc-header-config-cep-options,
+#mc-header-config-list-options {
+    background-color: white;
+    border: solid 1px #eaeaea;
+    border-top: none;
+    display: none;
+    left: 0;
+    line-height: 20px;
+    top: 0;
+    max-height: 400px;
+    min-width: 200px;
+    overflow: auto;
+    padding: 10px;
+    position: absolute;
+    z-index: 100;
+}
+#mc-header-config-cep-options {
+    overflow: visible;
+    width: 300px;
+}
+#mc-header-config-user-options {
+    min-width: 77px;
+}
+#mc-header-config-list-options {
+    width: 300px;
+}
+#mc-header-config-user span,
+#mc-header-config-seller span,
+#mc-header-config-cep span,
+#mc-header-config-list span {
+    display: inline-block;
+    height: 20px;
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#mc-header-config-cep span {
+    max-width: 80px;
+}
+#mc-header-config-user span {
+    max-width: 70px;
+}
+#mc-header-config-user a#bt-login, #mc-header-config-user a#bt-register {
+    font-family: 'Dosis-SemiBold', sans-serif;
+    font-size: 16px;
+}
+#mc-header-config-cep-options {
+    padding: 20px 0;
+    position: absolute;
+    z-index: 100;
+}
+#mc-header-config-cep {
+    left: 480px;
+    position: absolute;
+    top: 0;
+}
+#mc-header-config-seller {
+    left: 600px;
+    position: absolute;
+    top: 0;
+}
+#mc-header-config-user {
+    right: 0;
+    position: absolute;
+    top: 0;
+}
+#mc-header {
+    height: 90px;
+    margin: 0 auto;
+    max-height: 44px;
+    padding: 23px 0;
+    width: 980px;
+}
+#mc-header-categories {
+    background: white url(../images/categories_bg.png) repeat-x;
+    border-top: solid 3px #709e02;
+    width: 100%;
+}
+#mc-header-login {
+    float: right;
+    margin: 16px 0;
+    position: relative;
+    width: 220px;
+}
+#mc-header-logo {
+    float: left;
+    position: relative;
+    width: 200px;
+}
+#mc-header-search {
+    float: right;
+    margin: 0;
+    width: auto;
+}
+#mc-header-logo h1.home {
+    background: transparent url(../../../../s3.amazonaws.com/meucarrinho/site/images/home_logo.png) center left no-repeat;
+    height: 60px;
+    line-height: 0;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 182px;
+}
+#mc-header-logo h1.home span {
+    display: none;
+}
+ul.social-icons {
+    list-style: none;
+    margin: 0;
+    padding: 5px 0;
+    text-align: right;
+}
+ul.social-icons li {
+    display: inline;
+    margin: 0 5px;
+    width: 32px;
+}
+#mc-header-import-list {
+    float: right;
+}
+#mc-header-import-list > a {
+    background: transparent url(../../../../s3.amazonaws.com/meucarrinho/site/images/bt-importlist.png) no-repeat 0 0;
+    display: block;
+    height: 38px;
+    width: 199px;
+}
+#mc-header-import-list > a:hover {
+    background: transparent url(../../../../s3.amazonaws.com/meucarrinho/site/images/bt-importlist.png) no-repeat 0 -38px;
+    cursor: pointer;
+}
+#mc-header-import-list > p {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+#mc-header-import-price {
+    color: #FA6900;
+    float: right;
+    font-family: 'Dosis-SemiBold', sans-serif;
+    font-size: 18px;
+    height: 44px;
+    line-height: 44px;
+    margin: 0 10px;
+}
+#mc-header-import-price span.price-dec {
+    font-size: 36px;
+}

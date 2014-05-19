@@ -1,0 +1,24 @@
+@charset "utf-8";
+/* CSS Document */
+
+#search-form-container {}
+
+/* =table filters */
+.filters ul li a.active {padding:.9em 1em .6em 2.5em;}
+
+/* =search form */
+#search-form-container input#search-text {	width:11.5em;}
+#search-form-container input#search-submit {padding:0;}
+#search-form-container {padding:1.4em 1em;}
+
+/* =index */
+ul#dashboard-links{padding:2em 1em 8em}
+
+/* tabs */
+ul.tabs {margin-bottom:-1em;}
+
+/* tools */
+#meter-tools .next, #meter-tools .date {background-position: 0;	}
+.filter-vert .ui-autocomplete-input {width:70% !important;padding:5px 0 !important}
+
+#sensus-menu ul.first-of-type {margin-top:1em;}

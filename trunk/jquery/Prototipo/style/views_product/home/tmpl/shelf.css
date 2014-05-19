@@ -1,0 +1,10 @@
+div.product-shelf {
+    float: right;
+    width: 760px;
+}
+div.product-shelf div.header-box {
+    width: 760px;
+}
+div.product-shelf div.header-box h1 {
+    display: block;
+}

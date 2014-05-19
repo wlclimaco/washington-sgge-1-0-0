@@ -1,0 +1,132 @@
+div.item-list {
+    position: relative;
+    padding: 0;
+    width: 175px;
+}
+div.item-list-status {
+    background: transparent url('../../../../s3.amazonaws.com/meucarrinho/site/images/split_bt_list.png') 0 -76px no-repeat;
+    height: 40px;
+    line-height: 40px;
+    padding: 0;
+    position: relative;
+    width: 175px;
+}
+div.item-list-qtd,
+input.item-list-qtd {
+    border: solid 1px #ccc;
+    float: left;
+    height: 26px;
+    line-height: 26px;
+    margin: 6px 5px;
+    max-width: 77px;
+    position: relative;
+    padding: 0 3px;
+    text-align: center;
+    width: 83px;
+}
+div.item-list-qtd {
+    background-color: white;
+    color: #999;
+    overflow: hidden;
+}
+span.item-order {
+    font-size: 13px;
+}
+span.item-qtd {
+    font-family: 'Dosis-SemiBold', sans-serif;
+    font-size: 16px;
+}
+input.item-list-qtd {
+    display: none;
+}
+input.item-list-un {
+    float: right;
+    margin: 0;
+    padding: 0;
+    width: 25px;
+}
+div.item-list a.login,
+div.item-list a.item-list-bigadd {
+    background: transparent url('../../../../s3.amazonaws.com/meucarrinho/site/images/split_bt_list.png') 0 -126px no-repeat;
+    display: block;
+    height: 40px;
+    font-weight: bold;
+    padding: 0;
+    position: relative;
+    text-decoration: none;
+    text-align: center;
+    width: 175px;
+}
+div.item-list a.login:hover,
+div.item-list a.item-list-bigadd:hover {
+    background: transparent url('../../../../s3.amazonaws.com/meucarrinho/site/images/split_bt_list.png') 0 -176px no-repeat;
+}
+div.item-list a.item-list-add,
+div.item-list a.item-list-remove {
+    display: block;
+    position: relative;
+    height: 28px;
+    margin: 6px;
+    width: 29px;
+    padding: 0;
+    position: relative;
+}
+div.item-list a.item-list-remove {
+    background: transparent url('../../../../s3.amazonaws.com/meucarrinho/site/images/split_bt_list.png') 0 0 no-repeat;
+    float: left;
+}
+div.item-list a.item-list-add {
+    background: transparent url('../../../../s3.amazonaws.com/meucarrinho/site/images/split_bt_list.png') -33px 0 no-repeat;
+    float: right;
+}
+div.item-list a.item-list-remove:hover {
+    background: transparent url('../../../../s3.amazonaws.com/meucarrinho/site/images/split_bt_list.png') 0 -38px no-repeat;
+}
+div.item-list a.item-list-add:hover {
+    background: transparent url('../../../../s3.amazonaws.com/meucarrinho/site/images/split_bt_list.png') -33px -38px no-repeat;
+}
+div.item-list .ui-selectmenu-icon { 
+    display: none;
+}
+div.item-list .ui-selectmenu {
+    height: 18px;
+    padding: 0;
+}
+div.item-list a.item-list-swap {
+    background: transparent url('../../../../s3.amazonaws.com/meucarrinho/site/images/split_bt_list.png') 0 -226px no-repeat;
+    display: block;
+    height: 40px;
+    padding: 0;
+    position: relative;
+    text-align: center;
+    width: 175px;
+}
+div.item-list a.item-list-swap:hover {
+    background: transparent url('../../../../s3.amazonaws.com/meucarrinho/site/images/split_bt_list.png') 0 -274px no-repeat;
+}
+#swapitem-prev {
+    background: transparent url('../../../../s3.amazonaws.com/meucarrinho/site/images/split_bt_list.png') -104px 0 no-repeat;
+    cursor: pointer;
+    height: 34px;
+    left: 0;
+    position: absolute;
+    top: 80px;
+    width: 32px;
+    z-index: 999;
+}
+#swapitem-prev:hover {
+    background: transparent url('../../../../s3.amazonaws.com/meucarrinho/site/images/split_bt_list.png') -104px -40px no-repeat;
+}
+#swapitem-next {
+    background: transparent url('../../../../s3.amazonaws.com/meucarrinho/site/images/split_bt_list.png') -144px 0 no-repeat;
+    cursor: pointer;
+    height: 34px;
+    position: absolute;
+    right: 0;
+    top: 80px;
+    width: 32px;
+    z-index: 999;
+}
+#swapitem-next:hover {
+    background: transparent url('../../../../s3.amazonaws.com/meucarrinho/site/images/split_bt_list.png') -144px -40px no-repeat;
+}

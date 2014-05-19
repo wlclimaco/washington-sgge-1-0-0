@@ -1,0 +1,208 @@
+body {
+    font-size: 13px;
+    font-family: 'Dosis-Regular', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    line-height:18px;
+}
+table, th, td {
+    padding: 4px; 
+    border-collapse: collapse;
+}
+table tr td {
+    vertical-align: top;
+}
+table tr th {
+    text-align: left;
+}
+table.imprensa tr td {
+    padding-top: 20px;
+}
+a {
+    color: #709d02;
+    text-decoration: none;
+}
+b {
+    font-family: 'Dosis-SemiBold', sans-serif;
+}
+h1, h2, h3, .product-title, p.step {
+    font-family: 'Dosis-Light', sans-serif;
+}
+h1 {
+    border-bottom: solid 1px #d8d8d8;
+    color: #7c7c7c;
+    font-family: 'Dosis-ExtraLight';
+    font-size: 40px; 
+    line-height: 60px; 
+    margin: 0;
+    padding: 0 0 10px 0;
+}
+h1.descr {
+    border: none;
+    font-size: 24px;
+    line-height: 36px;
+}
+#mc-header-logo h1 {
+    border: none;
+}
+h2 {
+    font-family:  'Dosis-Regular';
+    font-size: 20px;
+    line-height: 30px;
+    color: #709d02;
+    text-transform: uppercase;
+}
+h3 {
+    margin-top: 0;
+    font-size: 18px;
+    line-height: 27px;
+    color: #757575;
+}
+h4 {
+    font-size: 14px;
+    color: #555;
+}
+hr {
+    border: 0;
+    border-bottom: dotted 1px #ccc;
+}
+fieldset {
+    border-top: solid 1px #ccc;
+    border-bottom:none;
+    border-left:none;
+    border-right:none;
+}
+
+.index {
+    width: 440px;
+    margin: 0 auto;
+    background-color: #EEEEEE;
+    padding: 4px;
+    padding-bottom: 0;
+    border: dashed 1px #DDDDDD;
+    font-size: 90%;
+    margin-bottom: 20px;
+}
+.index ul {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.content ul li {
+    margin: 6px 0;
+}
+ul.list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+ul.list li {
+    border-bottom: dashed 1px #ddd;
+    clear: both;
+    margin-bottom: 10px;
+    padding: 0 0 5px 0;
+    position: relative;
+    display: inline-block;
+}
+/* required comment for clearfix to work in Opera \*/
+* html ul.list li { 
+    height:1%; 
+}
+ul.list li {
+    display:block; 
+}
+/* end clearfix */
+ul.list li:after {
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden; 
+}
+ul.list img {
+    float: left;
+    height: 80px;
+    margin: 0 5px;
+    position: relative;
+    width: 80px;
+}
+ul.list div.info {
+    margin-left: 95px;
+}
+ul.list a {
+    display: block;
+    width: 100%;
+}
+ul.menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+ul.menu li a {
+    color: #7c7c7c;
+    font-family: 'Dosis-Regular';
+    display: block;
+    margin: 0;
+    max-width: 90%;
+    padding: 5px 5%;
+    width: 100%;
+} 
+ul.menu li a:hover {
+    background-color: #ebebeb;
+}
+.title-info {
+    width: 100%;
+    background-color: #EDB11B;
+}
+.title-info img {
+    padding: 5px;
+}
+
+form.default-form {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 100%;
+}
+form.default-form label {
+    display: inline-block;
+    text-align: right;
+    width: 20%;
+}
+form.default-form input.text {
+    height: 24px;
+    width: 78%;
+}
+form.default-form textarea {
+    height: 40px;
+    width: 78%;
+}
+
+/* @import url(http://fonts.googleapis.com/css?family=Dosis:200,400,500,600,700); */
+
+@font-face {
+    font-family: 'Dosis-ExtraLight';
+    src: url('../fonts/Dosis-ExtraLight.html');
+}
+@font-face {
+    font-family: 'Dosis-Bold';
+    src: url('../fonts/Dosis-Bold.html');
+}
+@font-face {
+    font-family: 'Dosis-Light';
+    src: url('../fonts/Dosis-Light.html');
+}
+@font-face {
+    font-family: 'Dosis-Medium';
+    src: url('../fonts/Dosis-Medium.html');
+}
+@font-face {
+    font-family: 'Dosis-Regular';
+    src: url('../fonts/Dosis-Regular.html');
+}
+@font-face {
+    font-family: 'Dosis-SemiBold';
+    src: url('../fonts/Dosis-SemiBold.html');
+}

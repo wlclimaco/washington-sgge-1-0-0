@@ -1,0 +1,261 @@
+/*********** Item ***********/
+div.item {
+    color: #7c7c7c;
+    float: left;
+    font-family: 'Dosis-Regular', sans-serif;
+    font-size: 14px;
+    line-height: 21px;
+    margin: 0;
+    margin-top: 30px;
+    max-width: 175px;
+    overflow: hidden;
+    padding: 20px 5px;
+    position: relative;
+    text-align: center;
+    width: 185px;
+}
+div.item div.item-info {
+    height: 140px;
+    margin-top: 20px;
+    text-align: left;
+}
+div.item span.item-unit-price span.price-dec {
+    font-size: 32px;
+}
+div.item div.options {
+    display: block;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 16px;
+    z-index: 800;
+}
+div.item-col-left {
+    background: transparent url(../images/col_left_bg.png) 0 110px no-repeat;
+}
+div.item-col-right {
+    background: transparent url(../images/col_right_bg.png) 0 110px no-repeat;
+}
+div.item-col-middle {
+    background: transparent url(../images/col_middle_bg.png) 0 110px no-repeat;
+}
+div.item-price {
+    bottom: 80px;
+    left: 5px;
+    position: absolute;
+    width: 100%;
+}
+span.item-unit-price {
+    color: #f96900;
+    font-family: 'Dosis-SemiBold', sans-serif;
+    font-size: 16px;
+}
+a.item-url {
+    color: #7c7c7c;
+    display: block;
+}
+a.item-url:hover {
+    text-decoration: none;
+}
+.icon-hide,
+.item-hide {
+    display: none;
+}
+div.item-highlight {
+    background-color: #D4EE5E;
+}
+div.item div.item-list {
+    background: transparent url(../images/split_bt_list.png) 0 -76px no-repeat;
+    height: 40px;
+    width: 175px;
+}
+span.promoted-label {
+    font-size: 11px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+div.item-promoted .item-info{
+    background-color: #fdfdf5;
+}
+
+/********** Extended **********/
+#product-page div.item {
+    max-height: 40px;
+    background: transparent url(../images/produto_header_bg.png) repeat-x;
+    float: left;
+    height: 220px;
+    margin: 0;
+    max-height: 180px;
+    max-width: 720px;
+    padding: 20px;
+    position: relative;
+    width: 760px;
+}
+#product-page div.item div.item-image {
+    background: transparent url(../images/produto_img_box.png) no-repeat;
+    float: left;
+    height: 200px;
+    margin-right: 20px;
+    width: 200px;
+}
+#product-page div.item div.item-image img {
+    margin: 40px;
+}
+#product-page div.item-info {
+    margin: 0;
+}
+#product-page div.favorite {
+    color: #999;
+    display: block;
+    right: 20px;
+    position: absolute;
+    bottom: 20px;
+    width: 80px;
+}
+#product-page div.item div.item-list-box {
+    bottom: 10px;
+    position: absolute;
+    left: 430px;
+}
+#product-page div.item div.item-price {
+    bottom: 0;
+    color: #999;
+    font-size: 18px;
+    left: 240px;
+    position: absolute;
+    text-align: left;
+    width: 180px;
+}
+#product-page span.item-unit-price {
+    color: #f96900;
+    font-size: 22px;
+}
+#product-page div.item span.item-unit-price span.price-dec {
+    font-size: 54px;
+}
+#product-page div.item div.item-list {
+    background: transparent url(../images/split_bt_list.png) 0 -76px no-repeat;
+    height: 40px;
+    width: 175px;
+}
+#product-page div.item h1.descr {
+    color: #6c7d02;
+    margin: 0;
+    width: 700px;
+}
+    
+
+/********* Pagina *********/
+a.close {
+    float: right;
+    margin: 10px 0;
+}
+div.header-box h1 {
+    display: none;
+}
+.related-offer {
+    border-bottom: solid 1px #ddd;
+    font-family: 'Dosis-Regular', sans-serif;
+    padding: 5px 0;
+    width: 100%;
+}
+.related-offer a img {
+    float: left;
+    height: 80px;
+    margin-right: 10px;
+    position: relative;
+    width: 80px;
+}
+.related-offer a.related-image {
+    display: block;
+}
+.related-offer div.related-seller,
+.related-offer div.related-descr {
+    color: #666;
+    float: left;
+    font-size: 12px;
+    margin-right: 10px;
+}
+.related-offer div.related-seller {
+    width: 220px;
+}
+.related-offer div.related-seller img {
+    float: left;
+    height: 30px;
+    margin-right: 10px;
+    width: 50px;
+}
+.related-offer div.related-descr {
+    width: 220px;
+}
+.related-offer div.related-price {
+    float: right;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    text-align: center;
+    width: 160px;
+}
+.related-offer div.related-price a {
+    text-decoration: underline;
+}
+.related-offer div.related-price p.related-unit-price {
+    color: #f96900;
+    font-size: 14px;
+}
+.related-offer div.related-price span.price-dec {
+    font-size: 32px;
+}
+#tabs h2 {
+    color: #333;
+    font-size: 12px;
+}
+#tabs {
+    border: none;
+}
+#tabs-pages h1 {
+    border-bottom: none;
+}
+#tabs-pages ul.pages {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+#tabs-pages ul.pages li {
+    border-bottom: dashed 1px #ccc;
+    font-family: 'Dosis-Regular', sans-serif;
+    height: 100px;
+    width: 100%;
+}
+#tabs-pages ul.pages li a {
+    display: block;
+    width: 100%;
+}
+#tabs-pages ul.pages img {
+    float: left;
+    height: 80px;
+    margin-right: 10px;
+    width: 80px;
+}
+#tabs-pages ul.pages li div.page-title {
+    float: left;
+    width: 600px;
+}
+#tabs-pages ul.pages div.page {
+    display: none;
+}
+p.breadcrumbs {
+    margin: 0;
+}
+p.breadcrumbs strong,
+p.breadcrumbs a {
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    max-width: 200px;
+    overflow: hidden;
+    padding: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

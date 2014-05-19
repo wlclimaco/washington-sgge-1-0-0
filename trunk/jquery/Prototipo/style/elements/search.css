@@ -1,0 +1,49 @@
+form#form-search input {
+    border: solid 1px #dedede;
+    color: #c4c4c4;
+    float: left;
+    font-family: 'Dosis-Regular';
+    font-size: 18px; 
+    height: 44px;
+    line-height: 44px;
+    padding: 0;
+    position: relative; 
+}
+form#form-search input.search {
+    border-right: none;
+}
+form#form-search input.button-search {
+    border-left: none;
+}
+form#form-search input.button {
+    background-color: #94BC19;
+    color: white; 
+    cursor: pointer;
+    float: left;
+    font-size: 16px;
+    font-weight: bold;
+    height: 46px;
+    line-height: 46px;
+    padding: 0;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+}
+form#form-search input.button-search {
+    background: white url(../../../../s3.amazonaws.com/meucarrinho/site/images/search_button.png) 0 0 no-repeat;
+    height: 46px;
+    width: 45px;
+}
+form#form-search .ui-autocomplete {
+    max-height: 300px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+    /* add padding to account for vertical scrollbar */
+    padding-right: 20px;
+}
+/* IE 6 doesn't support max-height
+ */
+* html form#form-search .ui-autocomplete {
+    height: 100px;
+}

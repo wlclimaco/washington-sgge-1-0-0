@@ -1,0 +1,95 @@
+#footer_bg {
+    background-color: #f7f7f7;
+    border-top: solid 1px #e5e5e5;
+    margin:  60px auto 0 auto;
+    padding: 10px 0;
+    position: relative;
+    width: 100%;
+}
+#company_bg {
+    background-color: #ededed;
+    border-top: solid 1px #fcfcfc;
+    padding: 10px 0;
+    position: relative;
+    width: 100%;
+}
+#company {
+    color: #666;
+    font-size: 12px;
+}
+#company,
+#footer {
+    color: #999;
+    margin: 10px auto 0 auto;
+    padding: 0;
+    position: relative;
+    width: 980px;
+}
+#footer a {
+    color: #999;
+}
+#footer div.footer-menus ul li {
+    border-left: dotted 1px #ccc;
+}
+#footer ul {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: auto;
+}
+#footer ul li {
+    float: left;
+    margin: 0;
+    padding: 0 10px;
+    position: relative;
+}
+#footer ul li a {
+    display: inline;
+}
+#footer ul.social-icons li {
+    margin: 0 10px;
+    padding: 0;
+}
+#footer ul.social-icons li a {
+    display: block;
+    height: 44px;
+    padding: 0;
+    width: 42px;
+}
+#footer ul.social-icons li a {
+    background: transparent url(../../../../s3.amazonaws.com/meucarrinho/site/images/split_footer.png) 0 -50px no-repeat;
+}
+#footer ul.social-icons li a#social-facebook {
+    background-position: -50px -50px;
+}
+#footer ul.social-icons li a#social-feed {
+    background-position: -100px -50px;
+}
+#footer div.footer-menus {
+    float: left;
+    margin: 12px  0 0 10px;
+    padding: 0;
+    position: relative;
+    width: 580px;
+}
+#footer div.footer-logo {
+    background: transparent url(../../../../s3.amazonaws.com/meucarrinho/site/images/split_footer.png) 0 0 no-repeat;
+    float: left;
+    height: 50px;
+    font-size: 11px;
+    position: relative;
+    width: 60px;
+}
+#company div.bp-logo a {
+    background: transparent url(../../../../s3.amazonaws.com/meucarrinho/site/images/split_footer.png) -86px 0 no-repeat;
+    display: block;
+    float: left;
+    height: 28px;
+    margin-right: 10px;
+    width: 70px;
+}
+#footer div.footer-social {
+    float: left;
+    position: relative;
+    width: 160px;
+}
