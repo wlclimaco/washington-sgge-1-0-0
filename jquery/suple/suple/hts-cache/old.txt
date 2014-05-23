@@ -1,0 +1,3 @@
+date	size'/'remotesize	flags(request:Update,Range state:File response:Modified,Chunked,gZipped)	statuscode	status ('servermsg')	MIME	Etag|Date	URL	localfile	(from URL)
+10:08:52	3350/3350	---M-Z	200	added ('OK')	text/plain	date:Tue,%2020%20May%202014%2013:08:52%20GMT	http://www.corpoidealsuplementos.com.br/robots.txt		(from )
+10:08:52	223381/223381	---M-Z	200	added ('OK')	text/html	date:Tue,%2020%20May%202014%2013:08:52%20GMT	http://www.corpoidealsuplementos.com.br/	C:/Users/QATEmployee/Desktop/suple/suple/index-2.html	(from )
