@@ -1,0 +1,10 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+corpoidealsuplementos.com.br	TRUE	/	FALSE	1999999999	ASP.NET_SessionId	cvy5dg3xya1et1nra30nshth
+corpoidealsuplementos.com.br	TRUE	/	FALSE	1999999999	tkt	3bd2013c-d3bf-4e90-a481-98c940adc2c6
+corpoidealsuplementos.com.br	TRUE	/	FALSE	1999999999	Vary-Cookie	1_1
+.google.com	TRUE	/	FALSE	1999999999	NID	67=AMAlDWmEfQulCXWJCx01aj1EepkE-ZJDz0nIM-nx_F4NMN1aN3fqGGXdppX-UPnovVB4ZnIPGOlNsQvXu6KrTCm2F_xr0t7487DYrln6Kw_MLdzHLajS5NRQo3I38POV
+www.corpoidealsuplementos.com.br	TRUE	/	FALSE	1999999999	__RequestVerificationToken	gSo37mxPdth6OURCIpJtyPn1DyFOeV5evZkmUkALLnwmU6IAOTnDJACERJyrz1JGUnVrzE2tOHEF3ZKfN-7hdWoE4lpxK1rkAWp9mysuAXoOjNwGIuVKmPxePY4Zinsz17QR9g2
+.siteblindado.com	TRUE	/	FALSE	1999999999	incap_ses_169_25439	haouQzm5lyy5llPedWlYAktXe1MAAAAAAp183f3vSRbuu6iLXY+Usg==
+.siteblindado.com	TRUE	/	FALSE	1999999999	visid_incap_25439	+wH02c10SDykzI1hvuquZzWasVIAAAAAQkIPAAAAAABhZLArJQUYwXPqBi8J8Mzs
+
