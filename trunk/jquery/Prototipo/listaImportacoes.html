@@ -1,0 +1,447 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="" lang="" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
+   <!-- Mirrored from www.meucarrinho.com.br/s/padaria-e-sobremesas/pao-de-acucar-delivery/1106522/100917/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2014 22:31:00 GMT -->
+   <!-- Added by HTTrack -->
+   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+   <!-- /Added by HTTrack -->
+   <head>
+      <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+      <meta name="robots" content="index, follow" />
+      <meta name="keywords" content="MeuCarrinho, Padaria e Sobremesas, pre谳, supermercado, P䯠de A趣ar Delivery" />
+      <meta name="description" content="Compare pre谳 de Padaria e Sobremesas no supermercado P䯠de A趣ar Delivery, confira opini񥳠de outros consumidores e monte sua lista de compras no MeuCarrinho!" />
+      <meta name="generator" content="e-Social Kite - Copyright (C) 2009-2011 e-Social. All rights reserved. www.e-Social.com.br" />
+      <title>Padaria e Sobremesas - Pre谳 no supermercado P䯠de A趣ar Delivery - MeuCarrinho</title>
+      <meta property="og:title" content="Padaria e Sobremesas - Pre谳 no supermercado P䯠de A趣ar Delivery" />
+      <meta property="og:description" content="Compare pre谳 de Padaria e Sobremesas no supermercado P䯠de A趣ar Delivery, confira opini񥳠de outros consumidores e monte sua lista de compras no MeuCarrinho!" />
+      <meta property="og:image" content="http://cdn.tomatoes-static.com/images/c/100917-80.png" />
+      <meta property="og:site_name" content="MeuCarrinho" />
+      <meta property="fb:app_id" content="146744538733216" />
+	  <link rel="stylesheet" type="text/css" href="style/global_styles.css">
+      <link href="style/templates/basic/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+      <link rel="stylesheet" href="style/main.css" type="text/css" />
+      <link rel="stylesheet" href="style/templates/basic/css/style.css" type="text/css" />
+      <link rel="stylesheet" href="javaScript/fancybox/jquery.fancybox-1.3.4.css" type="text/css" />
+      <link rel="stylesheet" href="javaScript/elements/paginator.css" type="text/css" />
+      <link rel="stylesheet" href="style/elements/sidebar.css" type="text/css" />
+      <link rel="stylesheet" href="style/css/product.css" type="text/css" />
+      <link rel="stylesheet" href="style/css/listbuttons.css" type="text/css" />
+      <link rel="stylesheet" href="style/views_product/home/tmpl/shelf.css" type="text/css" />
+      <link rel="stylesheet" href="style/templates/basic/tmpl/footer.css" type="text/css" />
+      <link rel="stylesheet" href="style/elements/search.css" type="text/css" />
+      <link rel="stylesheet" href="style/elements/categories.css" type="text/css" />
+      <link rel="stylesheet" href="style/modules/header.css" type="text/css" />
+	  <link rel="stylesheet" href="javaScript/media/css/demo_page.css" type="text/css" />
+	  <link rel="stylesheet" href="javaScript/media/css/demo_table.css" type="text/css" />
+		<link rel="stylesheet" href="style/pai.css" type="text/css" />
+	  
+	  		<style type="text/css">
+			
+<!---->
+td.highlight {
+        font-weight: bold;
+        color: blue;
+    }
+
+		</style>
+
+	<script type="text/javascript" src="javaScript/assets/scripts/jquery-1.6.1.min.js"></script>
+	<script type="text/javascript" src="javaScript/assets/scripts/jquery.menu.js"></script>
+	<script type="text/javascript" src="javaScript/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="javaScript/jquery-ui-1.10.4.custom.js"></script>
+    <script src="javaScript/media/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="javaScript/media/js/jquery.dataTables.rowGrouping.js" type="text/javascript"></script>
+	<script type="text/javascript" src="javaScript/assets/scripts/base.js"></script>
+ <script type="text/javascript">
+			$(document).ready( function () {
+				
+				$("#Menu").click(function(e) {
+					e.preventDefault();
+					$actionDialogAddMenu.dialog('open');
+				});
+    $('#example').dataTable( {
+
+		"fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+		
+		$('td:eq(1)', nRow).html('<a href="#" id="description" class="" role="button" aria-disabled="false">5</a>');
+		oAction = $('<div></div>');
+		oAppendLi = $('<tr></tr>')
+		oActionUl = $('<ul/>');
+		oActionSummary="";
+		oActionSummary = $('<a href="#" id="deletar" class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only " role="button" aria-disabled="false">'
+					+ "Deletar"
+					+ '</a>').click(function(e) {
+
+				e.preventDefault();
+				var href = this.id;
+				if(href == "abort")
+					$actionDialogAddPreco.dialog('open');
+				if(href == "editar")
+					$actionDialogAdd.dialog('open');
+				if(href == "deletar")
+					$actionDialogAdd.dialog('open');
+
+			});
+			
+		oAppendLi.append(oActionSummary);
+		oActionUl.append(oAppendLi);
+		oAction.append(oActionUl);
+		$('td:eq(4)', nRow).html('');
+		$('td:eq(4)', nRow).append(oAction);
+		  
+    },
+        "fnDrawCallback": function( oSettings ) {
+			$( "button" ).button();
+			$( "#example_length").hide();
+			//Trigger LRP on click
+			$("#listas").click(function(e) {
+				e.preventDefault();
+				$actionDialogAdd.dialog('open');
+			});
+			
+			$("#description").click(function(e) {
+				e.preventDefault();
+				$actionDialogAddSub.dialog('open');
+			});
+			
+    }
+    } );
+
+				$(".event-day-custom").buttonset();
+				$("#categories").click(function (e) {
+					e.preventDefault();
+					$('#subMenu').removeClass('hide');
+				});
+				$( "button" ).button();
+				
+				
+		$actionDialogAdd = $("#action-dialog-repeat-define").dialog({
+			autoOpen: false,
+			title: 'Lista de Menu',
+			width: 600,
+			minheight: 150,
+			modal: true,
+			buttons: {
+				'Done': function() {						
+					//TODO: figure out why these validation classes are not working here
+					 /*$("#createGroupForm").validate({
+						rules: {
+							controlGroupNameCreate: "required"
+							}
+						});
+					 */
+						showMessage("messaging-main","Event repeats created successfully.","confirm");
+						
+						$(this).dialog('close');
+				},
+				Cancel: function() {
+					$(this).dialog('close');
+				}
+			},
+			dialogClass: 'action-dialog',
+			resizable: false
+		});
+		
+		$actionDialogAddSub = $("#action-dialog-repeat-define-sub").dialog({
+			autoOpen: false,
+			title: 'Lista de Menu',
+			width: 600,
+			minheight: 150,
+			modal: true,
+			buttons: {
+				'Done': function() {						
+					//TODO: figure out why these validation classes are not working here
+					 /*$("#createGroupForm").validate({
+						rules: {
+							controlGroupNameCreate: "required"
+							}
+						});
+					 */
+						showMessage("messaging-main","Event repeats created successfully.","confirm");
+						
+						$(this).dialog('close');
+				},
+				Cancel: function() {
+					$(this).dialog('close');
+				}
+			},
+			dialogClass: 'action-dialog',
+			resizable: false
+		});
+		
+		$actionDialogAddPreco = $("#action-dialog-repeat-define-preco").dialog({
+			autoOpen: false,
+			title: 'Lista de Menu',
+			width: 600,
+			minheight: 150,
+			modal: true,
+			buttons: {
+				'Done': function() {						
+					//TODO: figure out why these validation classes are not working here
+					 /*$("#createGroupForm").validate({
+						rules: {
+							controlGroupNameCreate: "required"
+							}
+						});
+					 */
+						showMessage("messaging-main","Event repeats created successfully.","confirm");
+						
+						$(this).dialog('close');
+				},
+				Cancel: function() {
+					$(this).dialog('close');
+				}
+			},
+			dialogClass: 'action-dialog',
+			resizable: false
+		});
+		
+		 //Define Tier Action 
+
+
+		
+			} );
+			
+		</script>
+		
+      <link rel="next" href="2/index.html" />
+      <link rel="canonical" href="index.html" />
+      <link rel="stylesheet" href="style/templates/basic/css/template.css" type="text/css" />
+   </head>
+   <body>
+      <div id="fb-root"></div>
+
+      <div id="mc-header-home-box" style="margin-bottom:120px">
+<label for="upload-ids">Upload File:</label>
+                                                <input type="file" id="upload-ids" />
+                                                <span class="note">##########</span>  
+				  <!-- data table inicio  -->
+                  <div style="margin: 0; padding: 0;">
+				  
+	<table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th style="width:240px;">Arquivo</th>
+                <th>Data Importação</th>
+				<th>Qnt Itens</th>
+                <th>Usuario</th>
+                <th style="width:240px;"></th>
+
+            </tr>
+        </thead>
+ 
+        <tbody>
+            <tr>
+                <td>Arquivo0001.txt</td>
+                <td>20/05/2014 10:50:50</td>
+                <td>100</td>
+                <td>Washington</td>
+                <td></td>
+
+            </tr>
+            <tr>
+                <td>Arquivo0002.txt</td>
+                <td>20/05/2014 10:50:50</td>
+                <td>100</td>
+                <td>Washington</td>
+                <td></td>
+
+            </tr>
+            <tr>
+               <td>Arquivo0003.txt</td>
+                <td>20/05/2014 10:50:50</td>
+                <td>100</td>
+                <td>Washington</td>
+                <td></td>
+
+            </tr>
+            
+        </tbody>
+    </table>
+                     
+                  </div>
+
+               </div>
+
+            </div>
+         </div>
+   
+	  <!-- teste -->
+	  
+
+
+
+
+</div> 
+<!-- END: view Demand Reset -->
+<!-- DIALOG START - Add Time -->
+<div id="action-dialog-repeat-define" class="action-dialog">
+	<div class="wd-title">Cadastro SubMenu</div>
+      <!-- HEADER -->
+
+   <div class="wd-content">
+      <!-- CONTENT -->
+      <script> 	var wdProfileRegisterAnimationTime = 500; 	var wdProfileRegisterEnableSlideAnimate = true; </script>     	 		 			 			 		 	  	 		 			 		 	   	
+      <form method="post">
+         <!--CUSTOMER DATA -->    		
+         <fieldset class="customer-type-data">
+            <div class="input-wrapper input-wrapper-city addorsetaddress-0-city">
+               <label for="AddOrSetAddress-0-City">
+               <span class="required">*</span> 
+               Produto:
+               </label>
+               <input type="text" data-required="true" value="" maxlength="45" name="AddOrSetAddress[0].City" id="AddOrSetAddress-0-City" size="40" class="text-city required">
+               <!--[[Cache{error_for:WidgetID=wd74|Key=AddOrSetAddress[0].City|Template=wd.error.for.template|jsoptions=}]]-->
+            </div>
+			
+			<div class="input-wrapper input-wrapper-city addorsetaddress-0-city">
+               <label for="AddOrSetAddress-0-City">
+               <span class="required">*</span> 
+               Codigo de barra:
+               </label>
+               <input type="text" data-required="true" value="" maxlength="45" name="AddOrSetAddress[0].City" id="AddOrSetAddress-0-City" size="40" class="text-city required">
+               <!--[[Cache{error_for:WidgetID=wd74|Key=AddOrSetAddress[0].City|Template=wd.error.for.template|jsoptions=}]]-->
+            </div>
+			
+			<div class="input-wrapper input-wrapper-city addorsetaddress-0-city">
+               <label for="AddOrSetAddress-0-City">
+               <span class="required">*</span> 
+               SubMenu:
+               </label>
+               <select data-required="true" name="AddOrSetAddress[0].State" id="AddOrSetAddress-0-State" class="select-state">
+                  <option value="">Selecione</option>
+                  <option reference="AC" value="AC">Carne</option>
+                  <option reference="AL" value="AL">Frutas, Ovos e Verduras</option>
+                  <option reference="AP" value="AP">Saude e Beleza</option>
+               </select>
+               <button href="" id="Menu" class="item-list-bigadd login" style="" title="Lista de compra ">          Inserir novo Menu         </button><br><br><br>
+            </div>
+			
+			<div class="input-wrapper input-wrapper-city addorsetaddress-0-city">
+               <label for="AddOrSetAddress-0-City">
+               <span class="required">*</span> 
+               Filtro:
+               </label>
+              <select data-required="true" name="AddOrSetAddress[0].State" id="AddOrSetAddress-0-State" class="select-state">
+                  <option value="">Selecione</option>
+                  <option reference="AC" value="AC">Carne</option>
+                  <option reference="AL" value="AL">Frutas, Ovos e Verduras</option>
+                  <option reference="AP" value="AP">Saude e Beleza</option>
+               </select>
+               <button href="" id="Menu" class="item-list-bigadd login" style="" title="Lista de compra ">          Inserir novo Menu         </button><br><br><br>
+            </div>
+			
+			<div data-required="true" class="input-wrapper input-wrapper-state addorsetaddress-0-state">
+               <label for="AddOrSetAddress-0-State">
+               * Marca:
+               </label>
+               <select data-required="true" name="AddOrSetAddress[0].State" id="AddOrSetAddress-0-State" class="select-state">
+                  <option value="">Selecione</option>
+                  <option reference="AC" value="AC">Carne</option>
+                  <option reference="AL" value="AL">Frutas, Ovos e Verduras</option>
+                  <option reference="AP" value="AP">Saude e Beleza</option>
+               </select>
+               <button href="" id="Menu" class="item-list-bigadd login" style="" title="Lista de compra ">          Inserir novo Menu         </button><br><br><br>
+            </div>
+			
+         </fieldset>
+         <!--CONTACT DATA --> 		 			
+         
+      </form>
+   </div>
+</div> 
+
+<!-- DIALOG START - Add Time -->
+<div id="action-dialog-repeat-define-preco" class="action-dialog">
+	<div class="wd-title">Cadastro Menu</div>
+      <!-- HEADER -->
+
+   <div class="wd-content">
+      <!-- CONTENT -->
+      <script> 	var wdProfileRegisterAnimationTime = 500; 	var wdProfileRegisterEnableSlideAnimate = true; </script>     	 		 			 			 		 	  	 		 			 		 	   	
+      <form method="post">
+         <!--CUSTOMER DATA -->    		
+
+			
+         </fieldset>
+		 <fieldset class="customer-type-data">
+            <div class="input-wrapper input-wrapper-city addorsetaddress-0-city">
+               <label for="AddOrSetAddress-0-City">
+               <span class="required">*</span> 
+               Bretas :
+               </label>
+               <input type="text" data-required="true" value="R$ 113,90" maxlength="45" name="AddOrSetAddress[0].City" id="AddOrSetAddress-0-City" size="40" class="text-city required">
+               <!--[[Cache{error_for:WidgetID=wd74|Key=AddOrSetAddress[0].City|Template=wd.error.for.template|jsoptions=}]]-->
+            </div>
+			
+         </fieldset>
+		 <fieldset class="customer-type-data">
+            <div class="input-wrapper input-wrapper-city addorsetaddress-0-city">
+               <label for="AddOrSetAddress-0-City">
+               <span class="required">*</span> 
+               LS Guarato:
+               </label>
+               <input type="text" data-required="true" value="R$ 113,90" maxlength="45" name="AddOrSetAddress[0].City" id="AddOrSetAddress-0-City" size="40" class="text-city required">
+               <!--[[Cache{error_for:WidgetID=wd74|Key=AddOrSetAddress[0].City|Template=wd.error.for.template|jsoptions=}]]-->
+            </div>
+			
+         </fieldset>
+		 <fieldset class="customer-type-data">
+            <div class="input-wrapper input-wrapper-city addorsetaddress-0-city">
+               <label for="AddOrSetAddress-0-City">
+               <span class="required">*</span> 
+               Macro:
+               </label>
+               <input type="text" data-required="true" value="R$ 113,90" maxlength="45" name="AddOrSetAddress[0].City" id="AddOrSetAddress-0-City" size="40" class="text-city required">
+               <!--[[Cache{error_for:WidgetID=wd74|Key=AddOrSetAddress[0].City|Template=wd.error.for.template|jsoptions=}]]-->
+            </div>
+			
+         </fieldset>
+         <!--CONTACT DATA --> 		 			
+         
+      </form>
+   </div>
+</div> 
+
+<!-- DIALOG START - Add Time -->
+<div id="action-dialog-repeat-define-sub" class="action-dialog">
+	<div class="wd-title">Cadastro Menu</div>
+      <!-- HEADER -->
+
+   <div class="wd-content">
+      <!-- CONTENT -->
+      <script> 	var wdProfileRegisterAnimationTime = 500; 	var wdProfileRegisterEnableSlideAnimate = true; </script>     	 		 			 			 		 	  	 		 			 		 	   	
+      <form method="post">
+              <table>
+         <thead>
+            <tr>
+               <th class="product" colspan="2" width="50%"><span class="icon">Produtos</span></th>
+			   <th> 						<span class="icon">Cod Barra</span> 					</th>
+               <th> 						<span class="icon">Preço</span> 					</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+                <td>Frango Inteiro Congelado por Kg com Peso Aprox. 2,500 Kg</td>
+				<td></td>
+                <td>11111145454</td>
+                <td>R$ 113,90</td>
+            </tr>
+			<tr>
+                <td>Frango Inteiro Congelado por Kg com Peso Aprox. 2,500 Kg</td>
+                <td></td>
+				<td>11111145454</td>
+                <td>R$ 110,90</td>
+            </tr>
+			<tr>
+                <td>Frango Inteiro Congelado por Kg com Peso Aprox. 2,500 Kg</td>
+                <td></td>
+				<td>11111145454</td>
+                <td>R$ 109,90</td>
+            </tr>
+         </tbody>
+		  
+      </table>
+      </form>
+   </div>
+</div> 
+</html>

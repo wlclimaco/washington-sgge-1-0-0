@@ -3,19 +3,24 @@
     border-top: 2px solid #E08C45;
     bottom: 0;
     color: #FFFFFF;
-    height: 100%;
-    left: 53%;
+    height: 400px!important;
+    left: 995px;
     margin: 0;
-    padding: 0;
+    padding: 6;
     position: fixed;
-    width: 19%;
+    width: 150;
     z-index: 99999;
-	top:41%;
+	top:183px;
+	
 }
 #bar {
+
     margin: 9px auto;
     width: 348px!important;
+	height: 70%!important;
+	overflow:scroll;
 }
+#bar1 {overflow:scroll!important;background: url("../imagens/RRM5662.jpg") repeat-x scroll 0 0 rgba(0, 0, 0, 0);width: 348px!important;}
 #bar div.seller-more-info {
     background-color: #FFFFFF;
     border: 1px solid #779100;
@@ -11942,4 +11947,7 @@ height:17%;
 }
 .dataTables_filter {
 display: none;
+}
+.ui-state-default a{
+color:#000000!important;
 }
