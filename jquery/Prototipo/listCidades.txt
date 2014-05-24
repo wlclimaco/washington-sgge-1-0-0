@@ -1,0 +1,741 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="" lang="" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
+   <!-- Mirrored from www.meucarrinho.com.br/s/padaria-e-sobremesas/pao-de-acucar-delivery/1106522/100917/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2014 22:31:00 GMT -->
+   <!-- Added by HTTrack -->
+   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+   <!-- /Added by HTTrack -->
+   <head>
+      <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+      <meta name="robots" content="index, follow" />
+      <meta name="keywords" content="MeuCarrinho, Padaria e Sobremesas, pre谳, supermercado, P䯠de A趣ar Delivery" />
+      <meta name="description" content="Compare pre谳 de Padaria e Sobremesas no supermercado P䯠de A趣ar Delivery, confira opini񥳠de outros consumidores e monte sua lista de compras no MeuCarrinho!" />
+      <meta name="generator" content="e-Social Kite - Copyright (C) 2009-2011 e-Social. All rights reserved. www.e-Social.com.br" />
+      <title>Padaria e Sobremesas - Pre谳 no supermercado P䯠de A趣ar Delivery - MeuCarrinho</title>
+      <meta property="og:title" content="Padaria e Sobremesas - Pre谳 no supermercado P䯠de A趣ar Delivery" />
+      <meta property="og:description" content="Compare pre谳 de Padaria e Sobremesas no supermercado P䯠de A趣ar Delivery, confira opini񥳠de outros consumidores e monte sua lista de compras no MeuCarrinho!" />
+      <meta property="og:image" content="http://cdn.tomatoes-static.com/images/c/100917-80.png" />
+      <meta property="og:site_name" content="MeuCarrinho" />
+      <meta property="fb:app_id" content="146744538733216" />
+	  <link rel="stylesheet" type="text/css" href="style/global_styles.css">
+      <link href="style/templates/basic/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+      <link rel="stylesheet" href="style/main.css" type="text/css" />
+      <link rel="stylesheet" href="style/templates/basic/css/style.css" type="text/css" />
+      <link rel="stylesheet" href="javaScript/fancybox/jquery.fancybox-1.3.4.css" type="text/css" />
+      <link rel="stylesheet" href="javaScript/elements/paginator.css" type="text/css" />
+      <link rel="stylesheet" href="style/elements/sidebar.css" type="text/css" />
+      <link rel="stylesheet" href="style/css/product.css" type="text/css" />
+      <link rel="stylesheet" href="style/css/listbuttons.css" type="text/css" />
+      <link rel="stylesheet" href="style/views_product/home/tmpl/shelf.css" type="text/css" />
+      <link rel="stylesheet" href="style/templates/basic/tmpl/footer.css" type="text/css" />
+      <link rel="stylesheet" href="style/elements/search.css" type="text/css" />
+      <link rel="stylesheet" href="style/elements/categories.css" type="text/css" />
+      <link rel="stylesheet" href="style/modules/header.css" type="text/css" />
+	  <link rel="stylesheet" href="javaScript/media/css/demo_page.css" type="text/css" />
+	  <link rel="stylesheet" href="javaScript/media/css/demo_table.css" type="text/css" />
+		<link rel="stylesheet" href="style/pai.css" type="text/css" />
+	  
+	  		<style type="text/css">
+			
+<!---->
+td.highlight {
+        font-weight: bold;
+        color: blue;
+    }
+
+		</style>
+
+	<script type="text/javascript" src="javaScript/assets/scripts/jquery-1.6.1.min.js"></script>
+	<script type="text/javascript" src="javaScript/assets/scripts/jquery.menu.js"></script>
+	<script type="text/javascript" src="javaScript/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="javaScript/jquery-ui-1.10.4.custom.js"></script>
+    <script src="javaScript/media/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="javaScript/media/js/jquery.dataTables.rowGrouping.js" type="text/javascript"></script>
+	<script type="text/javascript" src="javaScript/assets/scripts/base.js"></script>
+ <script type="text/javascript">
+			$(document).ready( function () {
+				$(document).ready(function() {
+    $('#example').dataTable( {
+		"fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+		oAction = $('<div></div>');
+		oAppendLi = $('<tr></tr>')
+		oActionUl = $('<ul/>');
+		oActionSummary="";
+		oActionSummary = $('<a href="#" id="abort" class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only " role="button" aria-disabled="false">'
+					+ "Lista de Compra"
+					+ '</a>').click(function(e) {
+
+				e.preventDefault();
+				$actionDialogAdd.dialog('open');
+
+			});
+			
+		oAppendLi.append(oActionSummary);
+		oActionUl.append(oAppendLi);
+		oAction.append(oActionUl);
+		$('td:eq(6)', nRow).html('');
+		$('td:eq(6)', nRow).append(oAction);
+		
+       // $('td:eq(6)', nRow).html( '<button href="" id="listas" class="item-list-bigadd login" style="" title="Lista de compra ">Lista de Compra</button>' );
+		$('td:eq(7)', nRow).html( '<button href="" class="item-list-bigadd login" style="" title="Lista de compra ">Usar lista</button>' );
+  
+    },
+        "fnDrawCallback": function( oSettings ) {
+			$( "button" ).button();
+			//Trigger LRP on click
+			$("#listas").click(function(e) {
+				e.preventDefault();
+				$actionDialogAdd.dialog('open');
+			});
+    }
+    } );
+} );
+				$(".event-day-custom").buttonset();
+				$("#categories").click(function (e) {
+					e.preventDefault();
+					$('#subMenu').removeClass('hide');
+				});
+				$( "button" ).button();
+				
+				
+		$actionDialogAdd = $("#action-dialog-repeat-define").dialog({
+			autoOpen: false,
+			title: 'Lista de compras',
+			width: 600,
+			minheight: 150,
+			modal: true,
+			buttons: {
+				'Done': function() {						
+					//TODO: figure out why these validation classes are not working here
+					 /*$("#createGroupForm").validate({
+						rules: {
+							controlGroupNameCreate: "required"
+							}
+						});
+					 */
+						showMessage("messaging-main","Event repeats created successfully.","confirm");
+						
+						$(this).dialog('close');
+				},
+				Cancel: function() {
+					$(this).dialog('close');
+				}
+			},
+			dialogClass: 'action-dialog',
+			resizable: false
+		});
+		
+		 //Define Tier Action 
+
+
+		
+			} );
+			
+		</script>
+		
+      <link rel="next" href="2/index.html" />
+      <link rel="canonical" href="index.html" />
+      <link rel="stylesheet" href="style/templates/basic/css/template.css" type="text/css" />
+   </head>
+   <body>
+      <div id="fb-root"></div>
+
+      <div id="mc-header-home-box" style="margin-bottom:120px">
+	  			<!---->
+				
+<!-- 				<div class="divdeexemplo">
+				<CENTER>
+				<div> <div class="divLeft">Bem vindo ao supermercado! </div><div class=""><button type="submit" id="widget75-submit" name="Login.Submit">Login</button></div><div class="divRigth"> Meus dados </div>
+								
+				</div>
+				</CENTER>
+				</div> -->
+				
+
+<div class="box-1">
+   <div class="wrapper">
+      <div data-hovertimer="250" data-messages="{&quot;TextHello&quot;:&quot;Ol᧱uot;,&quot;TextClickHere&quot;:&quot;Clique aqui para ver seus pedidos&quot;,&quot;TextLeave&quot;:&quot;Sair&quot;,&quot;TextHelloVisitor&quot;:&quot;&lt;b&gt;Olᡖisitante&lt;/b&gt;. Clique aqui para se cadastrar.&quot;,&quot;TextHelloVisitorEmbeded&quot; : &quot;Bem-vindo ࡃorpo Ideal Suplementos&quot;,&quot;TextShowLoginEmbeded&quot;:&quot;Login&quot;,&quot;TextNewAccount&quot;:&quot;&lt;b&gt;+&lt;/b&gt; &lt;i&gt;Nova conta&lt;/i&gt;&quot;}" id="wd1" class="wd-profile-welcome-shopper">
+         <input type="hidden" value="/" name="widget-base-url" class="">   <input type="hidden" value="/?secp=13&amp;secs=67" name="widget-current-url" class="">   <input type="hidden" value="Cached" name="widget-cache-strategy" class="">   
+         <div class="widget-content">
+            <div class="status-wrapper shopper-not-authenticated">
+               <div class="login-simple">
+                  <span class="title"><b class="tata">Bem-vindo ࠣ###################</b><span class="icon"> </span></span> 				
+                  <div class="login-wrapper">
+                     <span class="login-title">Login</span> 					
+                     <div data-widget-js="{ &quot;handler&quot;: &quot;ProfileLogin&quot;, &quot;options&quot;: {} }" data-widget="profile_login" class="wd-profile-login wd-widget wd-widget-js">
+                        <!-- BEFORE -->
+                        <!-- CONTENT -->
+                        <input type="hidden" value="/" name="widget-base-url">  	
+                        <form class="js-login" method="POST" action="/Login">
+                           <input type="hidden" value="FhTFF98Zf96A-VhMqUbGJ1D_BIToK34Ce8biV0xUKNwEeRAnTbHgBGo3VDCni66UpIejniiykoOtR0MDxQEmS15qKyGeOpUVmPqf3KPGOUMS-EeK-qhy2WsZ23rPhB6bF29k4Q2" name="__RequestVerificationToken"> 		
+                           <div class="input-wrapper"> 			<label for="widget75-email">:</label> 			<input type="text" placeholder="Email" value="" id="widget75-email" class="email" name="Login.Email"> 		</div>
+                           <div class="input-wrapper">
+                              <label for="widget75-password">:</label> 			<input type="password" placeholder="Senha" class="password" name="Login.Password" id="widget75-password"> 			<button name="Login.Submit" id="widget75-submit" type="submit">ENTRAR</button>  			
+                              <div class="load hidden"></div>
+                           </div>
+                           <a title="Esqueci minha senha" class="js-login-recoverpassword recover-password" href="#"> 			<span class="icon"></span>Esqueci minha senha 		</a> 		 		 	
+                        </form>
+                        <div class="wd-profile-login wd-profile-login-recover-password wd-profile-login" id="wd4">
+                           <!-- BEFORE -->
+                           <div class=" wd-widget">
+                              <div class="wd-header">
+                                 <span class="wd-icon"></span>
+                                 <div class="wd-title">Esqueceu sua senha?</div>
+                                 <!-- HEADER -->
+                              </div>
+                              <div class="wd-content">
+                                 <!-- CONTENT -->
+                                 <form action="/Login/RecoverPassword" method="post">
+                                    <div class="input-wrapper">                 <label for="Email">*E-mail:</label>                 <input type="text" maxlength="50" size="50" id="Email" name="Email">             </div>
+                                    <button class="recover-password-button" type="submit">Enviar</button>             
+                                    <p>* Informe o e-mail utilizado no seu cadastro.<br>* As instru趥s para altera褯 da senha ser䯠enviadas para o seu e-mail</p>
+                                    <ul class="js-result"></ul>
+                                 </form>
+                              </div>
+                              <div class="wd-footer">
+                                 <span class="wd-icon"></span>
+                                 <!-- FOOTER -->
+                              </div>
+                           </div>
+                           <!-- AFTER -->
+                        </div>
+                        <!-- AFTER -->
+                     </div>
+                     <div class="wd-profile-login-oauth" id="wd5">
+                        <input type="hidden" value="/" name="widget-base-url">   <input type="hidden" value="/widget/browsing_welcome_shopper?Template=welcome.shopper.data.template&amp;TextHello=Ol%C3%A1&amp;TextClickHere=Clique+aqui+para+ver+seus+pedidos&amp;TextLeave=Sair&amp;TextHelloVisitor=%3Cb%3EOl%C3%A1+Visitante%3C/b%3E.+Clique+aqui+para+se+cadastrar.&amp;TextHelloVisitorEmbeded=Bem-vindo+%C3%A0+Corpo+Ideal+Suplementos&amp;TextShowLoginEmbeded=Login&amp;TextNewAccount=%3Cb%3E+%3C/b%3E+%3Ci%3ENova+conta%3C/i%3E&amp;_=1400813148983" name="url-current">   <input type="hidden" value="/cadastro/Index" name="url-callback">       
+                        <div class="facebook-modal">
+                           <a href="#" class="loginFacebook login-link" title="Facebook"></a>      
+                           <div class="wrapper-form-profile-login-oauth"></div>
+                        </div>
+                        <a href="#" class="loginTwitter login-link" title="Twitter"></a>    
+                     </div>
+                  </div>
+                  <a href="/cadastro" class="new-account"><b>+</b> <i>Nova conta</i></a> 			
+               </div>
+            </div>
+         </div>
+         <div style="display:none">
+            <div data-widget-js="{ &quot;handler&quot;: &quot;ProfileLogin&quot;, &quot;options&quot;: {} }" data-widget="profile_login" class="wd-profile-login wd-widget wd-widget-js" id="wd2">
+               <!-- BEFORE -->
+               <!-- CONTENT -->
+               <input type="hidden" value="/" name="widget-base-url" class="">  	
+               <form class="js-login" method="POST" action="/Login">
+                  <input type="hidden" value="nN4_H0q3CqulLFSMQlISo5EtIdedI8jJKwz6CQv6-hKv6SOIBKIJax8j6_gJXbkVzOv8bJCgxtjhegl_fQ-vFsz5IAvpeXzNtMUN6XxgUugOzTSpA_5UIVB2ch0LsEaztqvLGg2" name="__RequestVerificationToken" class=""> 		
+                  <div class="input-wrapper"> 			<label for="widget75-email">:</label> 			<input type="text" placeholder="Email" value="" id="widget75-email" class="email" name="Login.Email"> 		</div>
+                  <div class="input-wrapper">
+                     <label for="widget75-password">:</label> 			<input type="password" placeholder="Senha" class="password" name="Login.Password" id="widget75-password"> 			<button name="Login.Submit" id="widget75-submit" type="submit" class="">ENTRAR</button>  			
+                     <div class="load hidden"></div>
+                  </div>
+                  <a title="Esqueci minha senha" class="js-login-recoverpassword recover-password" href="/#"> 			<span class="icon"></span>Esqueci minha senha 		</a> 		 		 	
+               </form>
+               <div class="wd-profile-login wd-profile-login-recover-password wd-profile-login" id="wd4">
+                  <!-- BEFORE -->
+                  <div class=" wd-widget">
+                     <div class="wd-header">
+                        <span class="wd-icon"></span>
+                        <div class="wd-title">Esqueceu sua senha?</div>
+                        <!-- HEADER -->
+                     </div>
+                     <div class="wd-content">
+                        <!-- CONTENT -->
+                        <form action="/Login/RecoverPassword" method="post">
+                           <div class="input-wrapper">                 <label for="Email">*E-mail:</label>                 <input type="text" maxlength="50" size="50" id="Email" name="Email" class="">             </div>
+                           <button class="recover-password-button" type="submit">Enviar</button>             
+                           <p>* Informe o e-mail utilizado no seu cadastro.<br>* As instru趥s para altera褯 da senha ser䯠enviadas para o seu e-mail</p>
+                           <ul class="js-result"></ul>
+                        </form>
+                     </div>
+                     <div class="wd-footer">
+                        <span class="wd-icon"></span>
+                        <!-- FOOTER -->
+                     </div>
+                  </div>
+                  <!-- AFTER -->
+               </div>
+               <!-- AFTER -->
+            </div>
+            <div class="wd-profile-login-oauth" id="wd5">
+               <input type="hidden" value="/" name="widget-base-url" class="">   <input type="hidden" value="/?secp=13&amp;secs=67" name="url-current" class="">   <input type="hidden" value="/cadastro/Index" name="url-callback" class="">       
+               <div class="facebook-modal">
+                  <a href="/#" class="loginFacebook login-link" title="Facebook"></a>      
+                  <div class="wrapper-form-profile-login-oauth"></div>
+               </div>
+               <a href="/#" class="loginTwitter login-link" title="Twitter"></a>    
+            </div>
+         </div>
+      </div>
+      <!-- 		<a class="chat" onclick="abrir('http://www.easychat.com.br/easy/iframe_new.php?chat_id=1179&clie_id=1144&check_sum=3467')" href="javascript:void(0);" alt="Chat" title="Chat" class="chat-online">Chat</a> 		--> 		<span class="phone-number"><span class="icon"> </span><b></b></span> 		 		<!-- profile_order_tracking(OpenMode="hover", Title="RASTREAR PEDIDO RIDO", TextLabelCode="Digite o c󤩧o de rastreamento", TextButtonSubmit="RASTREAR", TextInformation="Encontre sua encomenda") --> 		<script> 			function abreSRO() { 				var numerosro = document.getElementById('OrderTracking').value; 				window.open('http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&amp;P_TIPO=001&amp;P_COD_UNI='+numerosro,'_blank'); 			} 		</script> 		<!-- MODIFICAȃO --> 		
+      <div data-hovertimer="250" data-openmode="hover" class="wd-profile-order-tracking">
+         <a class="meu-cadastro" href="/painel-do-cliente/dados-cadastrais"><span class="title">LISTA DE PEDIDOS</span></a>  	
+<!--          <div class="wrapper-form-profile-order-tracking hover">
+            <div class="input-wrapper"> 				<label for="OrderTracking">Digite o c󤩧o de rastreamento</label> 				<input type="text" id="OrderTracking" name="OrderTracking"> 				<button onclick="abreSRO();" type="submit">RASTREAR</button> 			</div>
+            <p>Encontre sua encomenda</p>
+            <ul class="js-result"></ul>
+         </div> -->
+      </div>
+      <a class="meu-cadastro" href="/painel-do-cliente/dados-cadastrais">MEU CADASTRO</a> 		 	
+   </div>
+</div>
+		  <!-- search -->
+         <!-- Search Google -->
+		 <div id="mc-header-categories">
+		 <center>
+		<form class="google-style">
+			<input type="text" id="q" title="Pesquisar" onkeydown="document.getElementById('x').style.display='block'" onblur="if(this.value==='')document.getElementById('x').style.display='none'"/>
+			<button type="reset" id="x" title="Limpar pesquisa" onclick="this.style.display='none'">׼/button>
+			<div class="button-box">
+			<button class="submit">Pesquisar</button>
+			</div>
+			<br class="clear" />
+		</form>
+		</center>
+		</div>
+<!-- Search Google -->
+         <div id="mc-header-categories">
+            <ul id="categories" class="ui-helper-clearfix ui-corner-bottom">
+               <li id="cat1">
+                  <a href="" target="_self" title="Favoritos"><span>Favoritos</span></a>
+               </li>
+               <li id="cat2"><a href="../../../../carnes/pao-de-acucar-delivery/1106522/100918/index.html" target="_self" title="Carnes"><span>Carnes</span></a>
+               </li>
+               <li id="cat3"><a href="../../../../frutas-ovos-e-verduras/pao-de-acucar-delivery/1106522/100912/index.html" target="_self" title="Frutas, Ovos e Verduras"><span>Frutas, Ovos e Verduras</span></a>
+               </li>
+               <li id="cat4"><a href="../../../../saude-e-beleza/pao-de-acucar-delivery/1106522/100249/index.html" target="_self" title="Sa򤥠e Beleza"><span>Sa򤥠e Beleza</span></a>
+               </li>
+               <li id="cat5"><a href="../../../../frios-leites-e-derivados/pao-de-acucar-delivery/1106522/100614/index.html" target="_self" title="Frios, Leites e Derivados"><span>Frios, Leites e Derivados</span></a>
+               </li>
+               <li id="cat6"><a href="../../../../bebidas/pao-de-acucar-delivery/1106522/1/index.html" target="_self" title="Bebidas"><span>Bebidas</span></a>
+               </li>
+               <li id="cat7"><a href="../../../../comidas-prontas-e-congelados/pao-de-acucar-delivery/1106522/100930/index.html" target="_self" title="Comidas Prontas e Congelados"><span>Comidas Prontas e Congelados</span></a>
+               </li>
+               <li id="cat8"><a href="../../../../mercearia/pao-de-acucar-delivery/1106522/100564/index.html" target="_self" title="Mercearia"><span>Mercearia</span></a>
+               </li>
+               <li id="cat9" class="selected"><a href="index.html" target="_self" title="Padaria e Sobremesas"><span>Padaria e Sobremesas</span></a>
+               </li>
+               <li id="cat10"><a href="../../../../brinquedos-e-lazer/pao-de-acucar-delivery/1106522/100179/index.html" target="_self" title="Brinquedos e Lazer"><span>Brinquedos e Lazer</span></a>
+               </li>
+               <li id="cat11"><a href="../../../../bazar-e-limpeza/pao-de-acucar-delivery/1106522/100219/index.html" target="_self" title="Bazar e Limpeza"><span>Bazar e Limpeza</span></a>
+               </li>
+               <li id="cat12"><a href="../../../../higiene-pessoal/pao-de-acucar-delivery/1106522/2/index.html" target="_self" title="Higiene Pessoal"><span>Higiene Pessoal</span></a>
+               </li>
+               <li id="cat13"><a href="../../../../moda-e-acessorios/pao-de-acucar-delivery/1106522/102468/index.html" target="_self" title="Moda e acess󲩯s"><span>Moda e acess󲩯s</span></a>
+               </li>
+               <li id="cat14"><a href="../../../../eletronicos/pao-de-acucar-delivery/1106522/100001/index.html" target="_self" title="Eletr𮩣os"><span>Eletr𮩣os</span></a>
+               </li>
+               <li id="cat15"><a href="../../../../farmacia/pao-de-acucar-delivery/1106522/55/index.html" target="_self" title="Farm⤩a"><span>Farm⤩a</span></a>
+               </li>
+               <li id="cat16"><a href="../../../../eletrodomesticos/pao-de-acucar-delivery/1106522/100116/index.html" target="_self" title="Eletrodom괴icos"><span>Eletrodom괴icos</span></a>
+               </li>
+               <li id="cat17"><a href="../../../../papelaria/pao-de-acucar-delivery/1106522/16/index.html" target="_self" title="Papelaria"><span>Papelaria</span></a>
+               </li>
+            </ul>
+         </div>
+		 <div id="mc-header-categories">
+			<li id="day-custom-container style="float: center;">
+			
+				<div id="" class="event-day-custom checkbox">
+						<input type="checkbox" id="Salsicha" value="Salsicha"> <label for="Salsicha">Salsicha</label>
+						<input type="checkbox" id="Lingui"   value="Lingui">   <label for="Lingui">Linguica</label>
+						<input type="checkbox" id="Bovina"   value="Bovina">   <label for="Bovina">Carne Bovina</label>
+						<input type="checkbox" id="Aves"     value="Aves">     <label for="Aves">Aves</label>
+						<input type="checkbox" id="Su"    value="Su">    <label for="Su">Carne Su</label>
+						<input type="checkbox" id="Peixe"    value="Peixe">    <label for="Peixe">Peixe</label>
+						<input type="checkbox" id="Frutos"   value="Frutos">   <label for="Frutos">Frutos do Mar</label>
+						<input type="checkbox" id="Outras"   value="Outras">   <label for="Outras">Outras Carnes</label>
+				</div>
+			
+            </li>
+		 </div>
+      </div>
+      <div id="box" class="ui-helper-clearfix">
+         <div id="content" class="ui-corner-all" style="float: left;">
+            <div class="header-box clearfix">
+               <h1>Padaria e Sobremesas - Pre谳 no supermercado P䯠de A趣ar Delivery</h1>
+               <p class="breadcrumbs"></p>
+            </div>
+            <div class="content ui-helper-clearfix">
+               <div style="margin:0 auto 20px auto;width:728px;">
+                  
+               </div>
+               <div class="product-shelf">
+                  <div class="header-box">
+                     <h1>Padaria e Sobremesas</h1>
+                  </div>
+				  <!-- data table inicio  -->
+                  <div style="margin: 0; padding: 0;">
+				  
+	<table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Data Lista</th>
+                <th>Supermercado</th>
+                <th>Itens</th>
+                <th>Valor na data </th>
+				<th>Valor na Agora </th>
+                <th></th>
+				<th></th>
+            </tr>
+        </thead>
+ 
+        <tbody>
+            <tr>
+                <td>Tiger Nixon</td>
+                <td>10/05/2014</td>
+                <td>Bretas,Guarato</td>
+                <td>61</td>
+                <td>$320,80</td>
+				 <td>$325,80</td>
+                <td></td>
+				<td></td>
+            </tr>
+            <tr>
+                <td>Washington Lista</td>
+                <td>20/05/2014</td>
+                <td>Guarato</td>
+                <td>50</td>
+                <td>$100,80</td>
+				 <td>$200,80</td>
+                <td></td>
+				<td></td>
+            </tr>
+            <tr>
+               <td>Graziane List</td>
+                <td>21/05/2014</td>
+                <td>Macro</td>
+                <td>10</td>
+                <td>$80,00</td>
+				 <td>$60,00</td>
+                <td></td>
+				<td></td>
+            </tr>
+            
+        </tbody>
+    </table>
+                     
+                  </div>
+
+               </div>
+               <div id="sidebar" class="default">
+                  <div style="border-bottom: solid 1px #ccc; height: 70px; position: relative;">
+
+                     <div id="sellers-available">
+                        <ul class="menu" style="display: block">
+                           <li class="nowrap">
+                              <a href="../../../../../produtos/index1fda.html?category_id=100917&amp;seller_id=1106522&amp;page=0">
+                                 <img src="imagens/providers/1_30.png" style="float: left; margin-right: 5px;" />
+                                 <div>P䯠de A趣ar Delivery<br /><span style="color: #999;">S䯠Paulo e regi䯼/span></div>
+                              </a>
+                           </li>
+                           <li class="nowrap">
+                              <a href="../../../../../produtos/indexeb48.html?category_id=100917&amp;seller_id=67498&amp;page=0">
+                                 <img src="imagens/providers/2_30.png" style="float: left; margin-right: 5px;" />
+                                 <div>Sonda Delivery<br /><span style="color: #999;">S䯠Paulo</span></div>
+                              </a>
+                           </li>
+                           <li class="nowrap">
+                              <a href="../../../../../produtos/index0ad7.html?category_id=100917&amp;seller_id=1106532&amp;page=0">
+                                 <img src="imagens/providers/11_30.png" style="float: left; margin-right: 5px;" />
+                                 <div>Varanda<br /><span style="color: #999;">S䯠Paulo</span></div>
+                              </a>
+                           </li>
+                           <hr />
+                           <li>
+                              <a href="../../../../../index0488.html?view=sellers">Mais supermercados</a>
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+                  <p>
+                     <b>Categorias relacionadas:</b>
+                  </p>
+				  <div class="yui-b">
+                    <div class="filter-vert rounded">
+                        <h3 class="rounded-top">Busca Marca</h3>
+                        <div class="filter-input search ui-widget">
+                            <ul>
+                                <li><input id="filter-zip" type="text" value="A234*" /></li>
+                                <li><button>Buscar</button></li>
+                            </ul>
+                        </div>  
+                    </div>
+                    <div class="filter-vert rounded">
+                        <h3 class="rounded-top">Marcas</h3>
+                        <!-- START : save filters action -->
+                        <div class="reset-container">
+                            <a href="" class="text-button"><small>Reset</small></a>
+                        </div>
+                        <!-- END : save filters action -->
+                         
+                    <div class="filter-input status ui-widget">
+						<div class="collapse">
+                            <ul class="all-checked"><li class="checkbox"><input type="checkbox" checked="checked"> <strong>All States </strong></li></ul>
+                            <ul class="">
+                                <li class="checkbox"><input type="checkbox" id="filter-active" value="normal" /><label>Installed</label></li>
+                                <li class="checkbox"><input type="checkbox" id="filter-active" value="normal" /><label>Inventory</label></li>
+	                        	<li class="checkbox"><input type="checkbox" id="filter-active" value="normal" /><label>Not Assigned</label></li>
+	                        	<li class="checkbox"><input type="checkbox" id="filter-active" value="normal" /><label>RMA</label></li>
+								<select id="combobox-tag" class="listcombobox"> 
+									<option value="">Type to search...</option> 
+									<option value="a">Abernathy</option> 
+									<option value="b">Burnside</option> 
+									<option value="c">Center Street</option> 
+									<option value="m">Main Street</option> 
+									<option value="p">Park Center</option> 
+									<option value="p">Park Center</option> 
+									<option value="s">Saturday Market</option> 
+									<option value="s">Sellwood</option> 
+								</select> 
+					
+                            </ul>
+                        </div>
+                    </div>                   
+                    </div>
+                </div>
+               </div>
+            </div>
+         </div>
+   
+	  <!-- teste -->
+	  
+
+
+
+<!-----FOOTER-->
+<div id="bar-box">
+            <div id="bar">																
+																	
+      <table>
+         <thead>
+            <tr>
+               <th class="product" colspan="2" width="50%"><span class="icon">Produtos</span></th>
+               <th> 						<span class="icon">Quantidade </span> 					</th>
+               <th> 						<span class="icon">Pre诼br> Unit⳩o</span> 					</th>
+               <th> 						<span class="icon">Subtotal</span> 					</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr class="item" id="basket-item-234921">
+               <td class="product" colspan="2">
+                  <div>
+                     <input type="hidden" class="js-basketitemid" value="234921" name="BasketItemID">
+					 <input type="hidden" class="js-productid" value="39402" name="ProductID" data-skuid="3918-7967">
+					 <div><img src="imagens/T100x100/__2.1106522-5d71ed2.jpg" title="Torrada Canapes BAUDUCCO Caixa 110g" alt="Torrada Canapes BAUDUCCO Caixa 110g" class="lazy-product" width="80px" height="80px" /></div>							 								 								 								 								
+					 <span class="skuoptions"></span> 								 								 							
+					 </div>
+                     <div>
+					 </div>
+                  </div>
+               </td>
+               <td class="quantity">
+                  <div>
+                     <div class="change">
+					 <input type="text" value="1" class="js-qty" size="3" name="quantity"> 														
+					 </div>
+                     <br> 							
+					 <button title="Remover" class="remove"><span class="icon"></span></button> 						
+                  </div>
+               </td>
+               <td class="price">
+                  <div>R$ 113,90 </div>
+               </td>
+               <td class="subtotal">
+                  <div>R$ 113,90</div>
+               </td>
+            </tr>
+			<tr class="item" id="basket-item-234921">
+               <td class="product" colspan="2">
+                  <div>
+                     <input type="hidden" class="js-basketitemid" value="234921" name="BasketItemID">
+					 <input type="hidden" class="js-productid" value="39402" name="ProductID" data-skuid="3918-7967">
+					 <div><img src="imagens/T100x100/__2.1106522-5d71ed2.jpg" title="Torrada Canapes BAUDUCCO Caixa 110g" alt="Torrada Canapes BAUDUCCO Caixa 110g" class="lazy-product" width="80px" height="80px" /></div>						 								 								 								 								
+					 <span class="skuoptions"></span> 								 								 							
+					 </div>
+                     <div>
+					 </div>
+                  </div>
+               </td>
+               <td class="quantity">
+                  <div>
+                     <div class="change">
+					 <input type="text" value="1" class="js-qty" size="3" name="quantity"> 														
+					 </div>
+                     <br> 							
+					 <button title="Remover" class="btn remove js-remove"><span class="icon"></span></button> 						
+                  </div>
+               </td>
+               <td class="price">
+                  <div>
+					<del>R$ 135,90</del>R$ 113,90 </div>
+               </td>
+               <td class="subtotal">
+                  <div>R$ 113,90</div>
+               </td>
+            </tr>
+         </tbody>
+         <tfoot>
+            <tr>
+               <td colspan="4">Subtotal:</td>
+               <td class=""><span>R$ 113,90</span></td>
+            </tr>
+         </tfoot>
+		  
+      </table>
+
+</div>
+            </div>
+
+<!----------->
+   </div>	  
+	  <!---->
+      <div id="footer_bg">
+         <div id="footer" class="ui-helper-clearfix">
+            <div class="footer-logo">
+            </div>
+            <div style="width: 105px; float: left; margin: 12px 0 0 10px; position: relative;">
+               ɠ2012, MeuCarrinho
+            </div>
+            <div class="footer-menus">
+               <div class="ui-helper-clearfix">
+                  <div style="float: left; position: relative; width: auto;">
+                     <div id="mainmenu_1" class="menu-main menu-module-box" style="position:relative;width:auto">
+                        <div class="kmenu-outer ui-helper-clearfix">
+                           <ul class=" ui-helper-clearfix kui-list kui-list-horizontal">
+                              <li><a href="../../../../../sobre/index.html" title="Sobre"><span>Sobre</span></a></li>
+                              <li><a href="../../../../../na-midia/index.html" title="Na ma"><span>Na ma</span></a></li>
+                              <li><a href="../../../../../blog/index.html" title="Blog"><span>Blog</span></a></li>
+                              <li><a href="../../../../../termos/index.html" title="Termos"><span>Termos</span></a></li>
+                              <li><a href="../../../../../privacidade/index.html" title="Privacidade"><span>Privacidade</span></a></li>
+                              <li><a href="../../../../../fale-conosco/index.html" title="Fale Conosco"><span>Fale Conosco</span></a></li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+                  <div style="float: left; position: relative; width: auto;">
+                     <ul class="kui-list kui-list-horizontal menu-main ui-helper-clearfix">
+                        <li class="active"><a href="../../../../../produtos/index.html" title="Produtos" id="menu-product"><span>Produtos</span></a></li>
+                     </ul>
+                  </div>
+               </div>
+               <div id="mainmenu_2" class="menu-more menu-module-box" style="position:relative;width:auto">
+                  <div class="kmenu-outer ui-helper-clearfix">
+                     <ul class=" ui-helper-clearfix kui-list kui-list-horizontal"></ul>
+                  </div>
+               </div>
+            </div>
+            <div class="footer-social">
+               <ul class="ui-helper-clearfix kui-list kui-list-horizontal social-icons">
+                  <li>
+                     <a href="http://facebook.com/meucarrinho" target="_blank" id="social-facebook" title="MeuCarrinho no Facebook"></a>
+                  </li>
+                  <li>
+                     <a href="http://twitter.com/meucarrinho" target="_blank" id="social-twitter" title="MeuCarrinho no Twitter"></a>
+                  </li>
+                  <li>
+                     <a href="http://feeds.feedburner.com/meucarrinho" target="_blank" id="social-feed" title="Assine nosso feed"></a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div id="company_bg">
+         <div id="company">
+            <div class="bp-logo">
+               <a href="http://www.buscapecompany.com/" title="buscap顣ompany" target="_blank"></a>
+            </div>
+            <p>Outros produtos:
+               <a target="_blank" href="http://www.buscape.com.br/" title="Buscap颾Buscap鼯a>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               <a target="_blank" href="http://www.bondfaro.com.br/" title="Bondfaro">Bondfaro</a>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               <a target="_blank" href="http://www.saveme.com.br/" title="SaveMe">SaveMe</a>
+            </p>
+         </div>
+      </div>
+   </body>
+   <!-- Mirrored from www.meucarrinho.com.br/s/padaria-e-sobremesas/pao-de-acucar-delivery/1106522/100917/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2014 22:31:40 GMT -->
+   <!-- *****************************************************************************************
+	MODAL OPERATIONS AND ACTIONS
+    ***************************************************************************************** -->
+
+<!-- View demand reset dialog -->
+<!-- DIALOG START - Add Time -->
+<div id="action-dialog-repeat-define" class="action-dialog">
+	<table>
+         <thead>
+            <tr>
+               <th class="product" colspan="2" width="50%"><span class="icon">Produtos</span></th>
+               <th> 						<span class="icon">Quantidade </span> 					</th>
+               <th> 						<span class="icon">Pre诼br> Unit⳩o</span> 					</th>
+               <th> 						<span class="icon">Subtotal</span> 					</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr class="item" id="basket-item-234921">
+               <td class="product" colspan="2">
+                  <div>
+                     <input type="hidden" class="js-basketitemid" value="234921" name="BasketItemID">
+					 <input type="hidden" class="js-productid" value="39402" name="ProductID" data-skuid="3918-7967">
+					 <div><img src="imagens/T100x100/__2.1106522-5d71ed2.jpg" title="Torrada Canapes BAUDUCCO Caixa 110g" alt="Torrada Canapes BAUDUCCO Caixa 110g" class="lazy-product" width="80px" height="80px" /></div>							 								 								 								 								
+					 <span class="skuoptions"></span> 								 								 							
+					 </div>
+                     <div>
+					 </div>
+                  </div>
+               </td>
+               <td class="quantity">
+                  <div>
+                     <div class="change">
+					 <input type="text" value="1" class="js-qty" size="3" name="quantity"> 														
+					 </div>
+                     <br> 							
+					 <button title="Remover" class="remove"><span class="icon"></span></button> 						
+                  </div>
+               </td>
+               <td class="price">
+                  <div>R$ 113,90 </div>
+               </td>
+               <td class="subtotal">
+                  <div>R$ 113,90</div>
+               </td>
+            </tr>
+			<tr class="item" id="basket-item-234921">
+               <td class="product" colspan="2">
+                  <div>
+                     <input type="hidden" class="js-basketitemid" value="234921" name="BasketItemID">
+					 <input type="hidden" class="js-productid" value="39402" name="ProductID" data-skuid="3918-7967">
+					 <div><img src="imagens/T100x100/__2.1106522-5d71ed2.jpg" title="Torrada Canapes BAUDUCCO Caixa 110g" alt="Torrada Canapes BAUDUCCO Caixa 110g" class="lazy-product" width="80px" height="80px" /></div>						 								 								 								 								
+					 <span class="skuoptions"></span> 								 								 							
+					 </div>
+                     <div>
+					 </div>
+                  </div>
+               </td>
+               <td class="quantity">
+                  <div>
+                     <div class="change">
+					 <input type="text" value="1" class="js-qty" size="3" name="quantity"> 														
+					 </div>
+                     <br> 							
+					 <button title="Remover" class="btn remove js-remove"><span class="icon"></span></button> 						
+                  </div>
+               </td>
+               <td class="price">
+                  <div>
+					<del>R$ 135,90</del>R$ 113,90 </div>
+               </td>
+               <td class="subtotal">
+                  <div>R$ 113,90</div>
+               </td>
+            </tr>
+         </tbody>
+         <tfoot>
+            <tr>
+               <td colspan="4">Subtotal:</td>
+               <td class=""><span>R$ 113,90</span></td>
+            </tr>
+         </tfoot>
+		  
+      </table>
+</div> 
+<!-- END: view Demand Reset -->
+</html>

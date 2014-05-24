@@ -1,14 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="pt-BR">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="" lang="" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
+   <!-- Mirrored from www.meucarrinho.com.br/s/padaria-e-sobremesas/pao-de-acucar-delivery/1106522/100917/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2014 22:31:00 GMT -->
+   <!-- Added by HTTrack -->
+   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+   <!-- /Added by HTTrack -->
    <head>
       <meta http-equiv="content-type" content="text/html; charset=utf-8" />
       <meta name="robots" content="index, follow" />
-      <meta name="keywords" content="MeuCarrinho, Padaria e Sobremesas, preços, supermercado, Pão de Açucar Delivery" />
-      <meta name="description" content="Compare preços de Padaria e Sobremesas no supermercado Pão de Açucar Delivery, confira opiniões de outros consumidores e monte sua lista de compras no MeuCarrinho!" />
+      <meta name="keywords" content="MeuCarrinho, Padaria e Sobremesas, preè°³, supermercado, Pä¯ de Aè¶£ar Delivery" />
+      <meta name="description" content="Compare preè°³ de Padaria e Sobremesas no supermercado Pä¯ de Aè¶£ar Delivery, confira opiniñ¥³ de outros consumidores e monte sua lista de compras no MeuCarrinho!" />
       <meta name="generator" content="e-Social Kite - Copyright (C) 2009-2011 e-Social. All rights reserved. www.e-Social.com.br" />
-      <title>Padaria e Sobremesas - Preços no supermercado Pão de Açucar Delivery - MeuCarrinho</title>
-      <meta property="og:title" content="Padaria e Sobremesas - Preços no supermercado Pão de Açucar Delivery" />
-      <meta property="og:description" content="Compare preços de Padaria e Sobremesas no supermercado Pão de Açucar Delivery, confira opiniões de outros consumidores e monte sua lista de compras no MeuCarrinho!" />
+      <title>Padaria e Sobremesas - Preè°³ no supermercado Pä¯ de Aè¶£ar Delivery - MeuCarrinho</title>
+      <meta property="og:title" content="Padaria e Sobremesas - Preè°³ no supermercado Pä¯ de Aè¶£ar Delivery" />
+      <meta property="og:description" content="Compare preè°³ de Padaria e Sobremesas no supermercado Pä¯ de Aè¶£ar Delivery, confira opiniñ¥³ de outros consumidores e monte sua lista de compras no MeuCarrinho!" />
       <meta property="og:image" content="http://cdn.tomatoes-static.com/images/c/100917-80.png" />
       <meta property="og:site_name" content="MeuCarrinho" />
       <meta property="fb:app_id" content="146744538733216" />
@@ -28,48 +32,15 @@
       <link rel="stylesheet" href="style/modules/header.css" type="text/css" />
 	  <link rel="stylesheet" href="javaScript/media/css/demo_page.css" type="text/css" />
 	  <link rel="stylesheet" href="javaScript/media/css/demo_table.css" type="text/css" />
-	  <link rel="stylesheet" href="style/asset27d6.css" type="text/css" />
-
+		<link rel="stylesheet" href="style/pai.css" type="text/css" />
 	  
 	  		<style type="text/css">
-			.expanded-group{
-				background: url("javaScript/media/images/minus.jpg") no-repeat scroll left center transparent;
-				padding-left: 15px !important
-			}
 			
-			.imgpos {
-					position: relative;
-					left: 32%
-				} 
-
-			.collapsed-group{
-				background: url("javaScript/media/images/plus.jpg") no-repeat scroll left center transparent;
-				padding-left: 15px !important
-			}
-			.divdeexemplo{
-				color:#fff;
-				background:#000;
-				text-decoration:none;
-				width:100%
-			}
-			
-			.divLeft{
-				float:left;
-				width:30%
-			}
-			.divCenter{
-				width:30%
-			}
-			.divRigth{
-				float:right
-			}
-			
-			#create-event-form{
-				padding-top:8em
-			}
-			.test{
-				  padding-top: 60px;
-			}
+<!---->
+td.highlight {
+        font-weight: bold;
+        color: blue;
+    }
 
 		</style>
 
@@ -82,13 +53,84 @@
 	<script type="text/javascript" src="javaScript/assets/scripts/base.js"></script>
  <script type="text/javascript">
 			$(document).ready( function () {
-				$('#example').dataTable({ "bLengthChange": false, "bPaginate": false}).rowGrouping({bExpandableGrouping: true});
+				$(document).ready(function() {
+    $('#example').dataTable( {
+		"fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+		oAction = $('<div></div>');
+		oAppendLi = $('<tr></tr>')
+		oActionUl = $('<ul/>');
+		oActionSummary="";
+		oActionSummary = $('<a href="#" id="abort" class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only " role="button" aria-disabled="false">'
+					+ "Editar"
+					+ '</a>').click(function(e) {
+
+				e.preventDefault();
+				$actionDialogAdd.dialog('open');
+
+			});
+			
+		oAppendLi.append(oActionSummary);
+		oActionUl.append(oAppendLi);
+		oAction.append(oActionUl);
+		$('td:eq(6)', nRow).html('');
+		$('td:eq(6)', nRow).append(oAction);
+		
+       // $('td:eq(6)', nRow).html( '<button href="" id="listas" class="item-list-bigadd login" style="" title="Lista de compra ">Lista de Compra</button>' );
+		$('td:eq(7)', nRow).html( '<button href="" class="item-list-bigadd login" style="" title="Lista de compra ">Deletar</button>' );
+  
+    },
+        "fnDrawCallback": function( oSettings ) {
+			$( "button" ).button();
+			$( "#example_length").hide();
+			//Trigger LRP on click
+			$("#listas").click(function(e) {
+				e.preventDefault();
+				$actionDialogAdd.dialog('open');
+			});
+    }
+    } );
+} );
 				$(".event-day-custom").buttonset();
 				$("#categories").click(function (e) {
 					e.preventDefault();
 					$('#subMenu').removeClass('hide');
 				});
+				$( "button" ).button();
+				
+				
+		$actionDialogAdd = $("#action-dialog-repeat-define").dialog({
+			autoOpen: false,
+			title: 'Lista de compras',
+			width: 600,
+			minheight: 150,
+			modal: true,
+			buttons: {
+				'Gravar': function() {						
+					//TODO: figure out why these validation classes are not working here
+					 /*$("#createGroupForm").validate({
+						rules: {
+							controlGroupNameCreate: "required"
+							}
+						});
+					 */
+						showMessage("messaging-main","Event repeats created successfully.","confirm");
+						
+						$(this).dialog('close');
+				},
+				Cancel: function() {
+					$(this).dialog('close');
+				}
+			},
+			dialogClass: 'action-dialog',
+			resizable: false
+		});
+		
+		 //Define Tier Action 
+
+
+		
 			} );
+			
 		</script>
 		
       <link rel="next" href="2/index.html" />
@@ -96,19 +138,88 @@
       <link rel="stylesheet" href="style/templates/basic/css/template.css" type="text/css" />
    </head>
    <body>
+      <div id="fb-root"></div>
 
-   <div class="wd-header">
-      <span class="wd-icon"></span>
-      <div class="wd-title">Dados cadastrais</div>
+      <div id="mc-header-home-box" style="margin-bottom:120px">
+<button id="listas" href="" class="item-list-bigadd login" style="" title="Lista de compra ">          Inserir nova Cidade          </button><br><br><br>
+				  <!-- data table inicio  -->
+                  <div style="margin: 0; padding: 0;">
+				  
+	<table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Estado</th>
+                <th>Cidade</th>
+                <th>Quantidade Supermercado</th>
+                <th>Quantidade Usuarios</th>
+                <th>Quantidade Listas Compras</th>
+				<th>Data cadastro</th>
+                <th></th>
+				<th></th>
+            </tr>
+        </thead>
+ 
+        <tbody>
+            <tr>
+                <td>Minas Gerais</td>
+                <td>Uberaba</td>
+                <td>5</td>
+                <td>61</td>
+                <td>100</td>
+				<td>10/05/2014</td>
+                <td></td>
+				<td></td>
+            </tr>
+            <tr>
+                <td>Minas Gerais</td>
+                <td>Uberlandia</td>
+                <td>6</td>
+                <td>100</td>
+                <td>1000</td>
+				<td>10/05/2014</td>
+                <td></td>
+				<td></td>
+            </tr>
+            <tr>
+               <td>Minas Gerais</td>
+                <td>Sacramento</td>
+                <td>6</td>
+                <td>100</td>
+                <td>1000</td>
+				<td>10/05/2014</td>
+                <td></td>
+				<td></td>
+            </tr>
+            
+        </tbody>
+    </table>
+                     
+                  </div>
+
+               </div>
+
+            </div>
+         </div>
+   
+	  <!-- teste -->
+	  
+
+
+
+
+</div> 
+<!-- DIALOG START - Add Time -->
+<div id="action-dialog-repeat-define" class="action-dialog">
+	<div class="wd-title">Cadastro Cidade</div>
       <!-- HEADER -->
-   </div>
+
    <div class="wd-content">
       <!-- CONTENT -->
       <script> 	var wdProfileRegisterAnimationTime = 500; 	var wdProfileRegisterEnableSlideAnimate = true; </script>     	 		 			 			 		 	  	 		 			 		 	   	
       <form method="post">
          <!--CUSTOMER DATA -->    		
          <fieldset class="customer-type-data">
-            <span class="wd-subtitle">Dados pessoais</span>
+            <span class="wd-subtitle">Cidade </span>
             <div data-required="true" class="input-wrapper input-wrapper-state addorsetaddress-0-state">
                <label for="AddOrSetAddress-0-State">
                * Estado:
@@ -117,26 +228,26 @@
                   <option value="">Selecione</option>
                   <option reference="AC" value="AC">Acre</option>
                   <option reference="AL" value="AL">Alagoas</option>
-                  <option reference="AP" value="AP">Amapá</option>
+                  <option reference="AP" value="AP">Amapá¼¯option>
                   <option reference="AM" value="AM">Amazonas</option>
                   <option reference="BA" value="BA">Bahia</option>
-                  <option reference="CE" value="CE">Ceará</option>
+                  <option reference="CE" value="CE">Ceará¼¯option>
                   <option reference="DF" value="DF">Distrito Federal</option>
-                  <option reference="ES" value="ES">Espírito Santo</option>
+                  <option reference="ES" value="ES">Espî³©to Santo</option>
                   <option reference="GO" value="GO">Goias</option>
                   <option reference="MA" value="MA">Maranhao</option>
                   <option reference="MT" value="MT">Mato Grosso</option>
                   <option reference="MS" value="MS">Mato Grosso do Sul</option>
                   <option reference="MG" value="MG">Minas Gerais</option>
-                  <option reference="PA" value="PA">Pará</option>
-                  <option reference="PB" value="PB">Paraíba</option>
-                  <option reference="PR" value="PR">Paraná</option>
+                  <option reference="PA" value="PA">Pará¼¯option>
+                  <option reference="PB" value="PB">Paraî£¡</option>
+                  <option reference="PR" value="PR">Paraná¼¯option>
                   <option reference="PE" value="PE">Pernambuco</option>
-                  <option reference="PI" value="PI">Piauí</option>
+                  <option reference="PI" value="PI">Piauó›±¯ption>
                   <option reference="RJ" value="RJ">Rio de Janeiro</option>
                   <option reference="RN" value="RN">Rio Grande do Norte</option>
                   <option reference="RS" value="RS">Rio Grande do Sul</option>
-                  <option reference="RO" value="RO">Rondônia</option>
+                  <option reference="RO" value="RO">Rondð®©¡</option>
                   <option reference="RR" value="RR">Roraima</option>
                   <option reference="SC" value="SC">Santa Catarina</option>
                   <option reference="SP" value="SP">Sao Paulo</option>
@@ -158,11 +269,5 @@
          
       </form>
    </div>
-   <div class="wd-footer">
-      <span class="wd-icon"></span>
-      <!-- FOOTER -->
-   </div>
-
-   </body>
-   <!-- Mirrored from www.meucarrinho.com.br/s/padaria-e-sobremesas/pao-de-acucar-delivery/1106522/100917/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 May 2014 22:31:40 GMT -->
+</div> 
 </html>
