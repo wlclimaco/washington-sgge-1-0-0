@@ -1,0 +1,18 @@
+insert into person values(99,'First','Middle', 'Last',400,0);
+insert into person values(199,'First1','Middle1', 'Last1',500,0);
+insert into person values(299,'First2','Middle2', 'Last2',600,0);
+insert into person values(399,'Rich','E', 'Barndt',700,0);
+insert into contact values(299,1,1,'Y','1-Jan-09','30-Dec-52');
+insert into contact values(299,2,1,'Y','1-Jan-12','30-Dec-52');
+insert into contact values(299,3,3,'Y','1-Jan-12','30-Dec-52');
+insert into contact values(299,4,2,'Y','1-Jan-12','30-Dec-52');
+insert into contact values(299,5,1,'Y','1-Jan-12','30-Dec-52');
+insert into contact values(299,6,2,'Y','1-Jan-12','30-Dec-52');
+insert into contact values(399,6,2,'Y','1-Jan-12','30-Dec-52');
+insert into address values(299,3,'1122 Boogie Boogie Ave','','Omaha','NE','SP','US','68136','Test Note Rich');
+insert into address values(299,6,'222 South 15th Street','Suite 1001 North','Omaha','NE','DO','US','68102','14th Floor South Building');
+insert into address values(399,6,'222 South 15th Street','Suite 1001 North','Omaha','NE','DO','US','68102','14th Floor South Building');
+insert into phone values(299,1,'001','678','3614388','');
+insert into phone values(299,4,'001','402','4919200','');
+insert into email values(299,2,'rich_barndt@yahoo.com');
+insert into email values(299,5,'rich_barndt@qat.com');

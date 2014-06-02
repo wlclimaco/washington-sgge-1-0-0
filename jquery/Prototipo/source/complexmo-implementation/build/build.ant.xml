@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="Build QAT-Sample-complexmo-compimpl" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<include file="${ivyConfigPath}\..\AntConfig\QAT-ant-common-targets.xml" optional="false" />
+
+	<!-- This IVY/Ant build script will build the current project based on the dependencies found in the -->
+	<!-- MAKE SURE you update the ivy.xml file before you run this script.                               -->
+	<target name="build">
+		<antcall target="QAT.mainBuild">
+			<param name="moduleName" value="qat-sample-complexmo-implementation" />
+			<param name="publishProjectLocal" value="true" />
+			<param name="ivyUseCacheOnly" value="true"/>
+		</antcall>
+	</target>
+
+</project>

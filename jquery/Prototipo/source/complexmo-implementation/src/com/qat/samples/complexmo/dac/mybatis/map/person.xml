@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PersonMap">
+	<!-- Result maps describe the mapping between the columns returned from a query, and the class properties. 
+		A result map isn't necessary if the columns (or aliases) match to the properties exactly. -->
+	<resultMap id="PersonResult" type="Person">
+		<result property="id" column="per_id" />
+		<result property="firstName" column="per_first_name" />
+		<result property="middleName" column="per_middle_name" />
+		<result property="lastName" column="per_last_name" />
+		<result property="employeeNumber" column="per_employee_number" />
+		<result property="version" column="per_versn_lock_num" />
+		<association property="eft" column="per_id" javaType="EFT" select="EFTMap.fetchEftByPersonId" />
+		<collection property="contactList" column="per_id" select="ContactMap.fetchContactsByPersonId" />
+	</resultMap>
+
+	<sql id="allPersonColumnsWithAlias">
+		per.id as per_id, per.first_name as per_first_name, per.middle_name as per_middle_name,
+		per.last_name as per_last_name, per.employee_number as per_employee_number, per.versn_lock_num as
+		per_versn_lock_num
+	</sql>
+
+	<sql id="allPersonColumns">
+		id, first_name, middle_name, last_name, employee_number, versn_lock_num
+	</sql>
+
+	<select id="fetchAllPersons" resultMap="PersonResult">
+		SELECT
+		<include refid="allPersonColumnsWithAlias" />
+		FROM PERSON per
+	</select>
+
+	<select id="fetchVersionNumber" parameterType="Person" resultType="int">
+		SELECT versn_lock_num FROM
+		PERSON per
+		WHERE per.id = #{id}
+	</select>
+
+	<!-- FetchByRequest uses the 'dynamic' capabilities of mybatis. Based on a given request property being 
+		set the SQL where clause is built. See the mybatis users guide for more information. -->
+	<select id="fetchPersonByRequest" parameterType="PersonRequest" resultMap="PersonResult">
+		SELECT
+		<include refid="allPersonColumnsWithAlias" />
+		FROM PERSON per
+		<where>
+			<if test="person.id > 0">per.id = #{person.id}</if>
+			<if test="person.firstName != null">AND per.first_name = #{person.firstName}</if>
+			<if test="person.lastName != null">
+				AND per.last_name
+				<if test="lastNameSoundsLike = true">LIKE #{person.lastName}</if>
+				<if test="lastNameSoundsLike = false"> = #{person.lastName}</if>
+			</if>
+			<if test="person.middleName != null">AND per.middle_name = #{person.middleName}</if>
+			<if test="person.employeeNumber > 0">AND per.employee_number = = #{person.employeeNumber}</if>
+		</where>
+	</select>
+
+	<select id="fetchPersonByFancyRequest" parameterType="PersonFancyRequest" resultMap="PersonResult">
+		SELECT
+		<include refid="allPersonColumnsWithAlias" />
+		FROM PERSON per
+		<where>
+			<if test="id != null ">per.id = #{id}</if>
+			<if test="id == null">
+				<if test="firstName != null">
+					<choose>
+						<when test="firstName.searchType.toString() == 'STARTS_WITH'">
+							per.first_name LIKE #{firstName.workingValue}
+						</when>
+						<when test="firstName.searchType.toString() == 'EXACT_MATCH'">
+							per.first_name = #{firstName.workingValue}
+						</when>
+					</choose>
+				</if>
+				<if test="lastName != null">
+					<choose>
+						<when test="lastName.searchType.toString() == 'STARTS_WITH'">
+							AND per.last_name LIKE #{lastName.workingValue}
+						</when>
+						<when test="lastName.searchType.toString() == 'EXACT_MATCH'">
+							AND per.last_name = #{lastName.workingValue}
+						</when>
+						<otherwise>
+							AND Should not be here
+						</otherwise>
+					</choose>
+				</if>
+			</if>
+			<if test="employeeNumber != null">
+				<choose>
+					<when test="employeeNumber.searchType.toString() == 'BETWEEN'">
+						AND per.employee_number BETWEEN #{employeeNumber.fromSearchValue} AND #{employeeNumber.toSearchValue}
+					</when>
+				</choose>
+			</if>
+		</where>
+	</select>
+
+
+	<select id="fetchPersonById" resultMap="PersonResult">
+		SELECT
+		<include refid="allPersonColumnsWithAlias" />
+		FROM PERSON per
+		WHERE per.id = #{id}
+	</select>
+
+	<insert id="InsertPerson" parameterType="Person">
+		<selectKey resultType="int" keyProperty="id" order="BEFORE">
+			<if test="_databaseId == 'Oracle'">
+				SELECT PERSON_SEQ.nextval AS id FROM DUAL
+			</if>
+			<if test="_databaseId == 'PostgreSQL'">
+				SELECT nextval('person_id_seq') AS id
+			</if>
+		</selectKey>
+		INSERT INTO Person (
+		<include refid="allPersonColumns" />
+		)
+		VALUES( #{id}, #{firstName}, #{lastName}, #{middleName}, #{employeeNumber}, #{version})
+	</insert>
+
+	<update id="UpdatePerson" parameterType="Person">
+		UPDATE Person
+		<set>
+			<if test="firstName != null">first_name = #{firstName},</if>
+			<if test="lastName != null">last_name = #{lastName},</if>
+			<if test="middleName != null">middle_name = #{middleName},</if>
+			<if test="employeeNumber != null">employee_number = #{employeeNumber}</if>
+		</set>
+		WHERE id = #{id} AND versn_lock_num = #{version}
+	</update>
+
+	<delete id="DeletePerson" parameterType="Person">
+		DELETE FROM Person
+		WHERE id = #{id} AND
+		versn_lock_num = #{version}
+	</delete>
+
+</mapper>

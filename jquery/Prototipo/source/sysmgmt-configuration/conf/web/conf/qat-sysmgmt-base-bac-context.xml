@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- ========================= BAC DEFINITIONS ======================== -->
+
+	<bean id="procedureBACTarget" class="com.qat.samples.sysmgmt.bac.impl.ProcedureBACImpl">
+		<property name="procedureDAC" ref="procedureDACTarget"/>
+	</bean>
+
+	<bean id="countyBACTarget" class="com.qat.samples.sysmgmt.bac.impl.CountyBACImpl">
+		<property name="countyDAC" ref="countyDACTarget"/>
+	</bean>
+
+	<bean id="drugBACTarget" class="com.qat.samples.sysmgmt.bac.impl.DrugBACImpl">
+		<property name="drugDAC" ref="drugDACTarget"/>
+	</bean>
+
+	<bean id="bundleBACTarget" class="com.qat.samples.sysmgmt.bac.impl.BundleBACImpl">
+		<property name="bundleDAC" ref="bundleDACTarget"/>
+	</bean>
+	<!-- ========================= ASPECT CONFIGURATION ======================== -->
+
+	<bean id="cidadeBACTarget" class="com.qat.samples.sysmgmt.cidade.bac.impl.CidadeBACImpl">
+		<property name="cidadeDAC" ref="cidadeDACTarget"/>
+	</bean>
+
+
+	<bean id="clienteBACTarget" class="com.qat.samples.sysmgmt.cliente.bac.impl.ClienteBACImpl">
+		<property name="clienteDAC" ref="clienteDACTarget"/>
+	</bean>
+
+	<bean id="marcamenuBACTarget" class="com.qat.samples.sysmgmt.marcamenu.bac.impl.MarcaMenuBACImpl">
+		<property name="marcamenuDAC" ref="marcamenuDACTarget"/>
+	</bean>
+
+	<bean id="produtoBACTarget" class="com.qat.samples.sysmgmt.produto.bac.impl.ProdutoBACImpl">
+		<property name="produtoDAC" ref="produtoDACTarget"/>
+	</bean>
+
+	<bean id="supermercadoBACTarget" class="com.qat.samples.sysmgmt.supermercado.bac.impl.SupermercadoBACImpl">
+		<property name="supermercadoDAC" ref="supermercadoDACTarget"/>
+	</bean>
+</beans>

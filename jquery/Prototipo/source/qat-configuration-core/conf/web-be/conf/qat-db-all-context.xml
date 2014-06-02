@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  - Application context definition for the QAT data access layer.
+  -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:jee="http://www.springframework.org/schema/jee"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
+
+
+	<!-- ========================= RESOURCE DEFINITIONS ========================= -->
+	<beans profile="tomcat">
+		<jee:jndi-lookup id="qatDataSource" jndi-name="jdbc/QATDS"/>
+
+		<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+			<property name="dataSource" ref="qatDataSource" />
+		</bean>
+	</beans>
+
+	<beans profile="jboss">
+		<jee:jndi-lookup id="qatDataSource" jndi-name="java:/jdbc/QATDS"/>
+
+		<tx:jta-transaction-manager/>
+	</beans>
+
+	<beans profile="none">
+	</beans>
+
+</beans>

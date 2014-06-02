@@ -1,0 +1,12 @@
+ insert into procedure values(1,'UN1', 'UN1DESC',10.0,0);
+ insert into procedure values(2,'UN12', 'UN12DESC',10.0,0);
+ insert into procedure values(3,'UN13', 'UN13DESC',10.0,0);
+ insert into procedure values(4,'UN14', 'UN14DESC',10.0,0);
+ insert into procedure values(5,'UN15', 'UN15DESC',10.0,0);
+ insert into procedure values(6,'UN16', 'UN16DESC',10.0,0);
+ insert into procedure values(7,'UN17', 'UN17DESC',10.0,0);
+ insert into procedure values(8,'UN18', 'UN18DESC',10.0,0);
+ insert into procedure values(9,'UN19', 'UN19DESC',10.0,0);
+ insert into procedure values(10,'UN1A', 'UN1ADESC',10.0,0);
+ insert into procedure values(11,'UN1B', 'UN1BDESC',10.0,0);
+ insert into procedure values(12, 'UN1C', 'UN1CDESC',10.0,0);

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ZooMap">
+
+  <!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="ZooResult" type="Zoo">
+    <result property="id" column="NDC_CODE"/>
+    <result property="code" column="NDC_DESC"/>
+	<!-- <collection property="animalList" column="ANIMAL_ID" select="ContactMap.fetchContactsByPersonId" /> -->
+  </resultMap>
+
+  <sql id="allZooColumns">
+		ZOO_ID, ZOO_NAME,VERSN_LOCK_NUM
+  </sql>
+
+   <sql id="allZooColumnsWithQualifier">
+		ZOO_ID, ZOO_NAME,
+  </sql>
+
+  <select id="fetchZooRowCount" resultType="Integer">
+      <if test="_databaseId == 'PostgreSQL'">
+			SELECT COUNT(*) AS RECORD_COUNT FROM DRUG WHERE NDC_CODE IS NOT NULL
+      </if>
+
+   	  <if test="_databaseId == 'Oracle'">
+		 	SELECT COUNT(NDC_CODE) AS RECORD_COUNT FROM DRUG
+      </if>
+  </select>
+
+  <insert id="insertNDC" parameterType="Zoo">
+  	INSERT INTO DRUG (
+    <include refid="allZooColumns" />
+      )
+    VALUES ( #{code} , #{description} )
+  </insert>
+
+  <update id="updateNDC" parameterType="Zoo">
+	UPDATE DRUG SET	NDC_DESC = #{description}
+	WHERE NDC_CODE = #{code}
+  </update>
+
+  <delete id="deleteZooByNDC" parameterType="Zoo">
+    DELETE FROM DRUG WHERE NDC_CODE = #{code}
+  </delete>
+
+  <delete id="deleteAllZoos">
+	DELETE FROM DRUG
+  </delete>
+
+</mapper>

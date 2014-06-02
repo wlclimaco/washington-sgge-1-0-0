@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- ========================= BAI DEFINITIONS ======================== -->
+	<!-- this bean implements procedure bai methods -->
+	<bean id="procedureBAI" class="com.qat.samples.sysmgmt.bai.impl.ProcedureBAIImpl">
+		<property name="procedureBAC" ref="procedureBACTarget"/>
+		<property name="validationController" ref="procedureValidationController"/>
+	</bean>
+
+	<!-- this bean implements county bai methods -->
+	<bean id="countyBAI" class="com.qat.samples.sysmgmt.bai.impl.CountyBAIImpl">
+		<property name="countyBAC" ref="countyBACTarget"/>
+		<property name="validationController" ref="countyValidationController"/>
+	</bean>
+
+	<!-- this bean implements drug bai methods -->
+	<bean id="drugBAI" class="com.qat.samples.sysmgmt.bai.impl.DrugBAIImpl">
+		<property name="drugBAC" ref="drugBACTarget"/>
+		<property name="validationController" ref="drugValidationController"/>
+	</bean>
+
+		<!-- this bean implements drug bai methods -->
+	<bean id="bundleBAI" class="com.qat.samples.sysmgmt.bai.impl.BundleBAIImpl">
+		<property name="bundleBAC" ref="bundleBACTarget"/>
+		<property name="validationController" ref="bundleValidationController"/>
+	</bean>
+
+	<bean id="cidadeBAI" class="com.qat.samples.sysmgmt.cidade.bai.impl.CidadeBAIImpl">
+		<property name="cidadeBAC" ref="cidadeBACTarget"/>
+		<property name="validationController" ref="bundleValidationController"/>
+	</bean>
+
+
+</beans>

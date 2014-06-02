@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+
+	<info organisation="${userId}" module="qat-sample-complexmo-test" revision="0.0.1" status="release" />
+
+	<publications>
+		<artifact name="qat-framework-batch" type="jar" ext="jar" />
+	</publications>
+
+	<dependencies>
+		<dependency org="qat" name="qat-framework-core" rev="latest.release" />
+		<dependency org="spring" name="spring-unit-virtual" rev="latest.release" />
+		<dependency org="postgres" name="postgresql" rev="latest.release" />
+		<dependency org="cglib" name="cglib-nodep" rev="latest.release" />
+		<dependency org="apache" name="commons-virtual" rev="latest.release" />
+
+		<dependency org="slf4j" name="jcl-over-slf4j" rev="latest.release" />
+		<dependency org="slf4j" name="slf4j-log4j12" rev="latest.release" />
+
+		<dependency org="apache" name="log4j" rev="latest.release" />
+
+		<dependency org="${userId}" name="qat-sample-complexmo-interface" rev="latest.revision" />
+		<dependency org="${userId}" name="qat-sample-complexmo-implementation" rev="latest.revision" />
+
+	</dependencies>
+
+</ivy-module>

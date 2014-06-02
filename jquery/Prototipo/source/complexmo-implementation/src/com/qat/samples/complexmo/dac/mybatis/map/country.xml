@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="CountryMap">
+
+  <!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties 
+       exactly. -->
+  <resultMap id="CountryResult" type="Country">    	
+	<result property="code" column="ctry_code" />
+	<result property="description" column="ctry_description" />
+  </resultMap>
+  
+  <sql id="allCountryColumns">
+  	ctry.code as ctry_code, ctry.description as ctry_description
+  </sql>
+
+  <select id="fetchAllCountries" resultMap="CountryResult">
+  	SELECT <include refid="allCountryColumns" /> 
+  	FROM Country ctry ORDER BY ctry.code
+  </select>
+
+  <select id="fetchCountryByCode" parameterType="String" resultMap="CountryResult">
+  	SELECT <include refid="allCountryColumns" /> 
+  	FROM Country ctry
+  	WHERE ctry.code = #{value}
+  </select>
+  
+</mapper>

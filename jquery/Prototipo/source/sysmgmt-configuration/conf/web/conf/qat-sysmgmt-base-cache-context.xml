@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  - Application context definition for the QAT business area ehcache layer.
+  -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 	   xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+       http://www.w3.org/1999/XSL/Transform http://www.w3.org/1999/XSL/Transform.xsd
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+ 	   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- Ref to the mbean server -->
+	<bean id="mbeanServer" class="org.springframework.jmx.support.MBeanServerFactoryBean">
+    <property name="locateExistingServerIfPossible" value="true" />
+	</bean>
+
+	<!-- EhCache management and statistics -->
+	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+    <property name="targetClass" value="net.sf.ehcache.management.ManagementService" />
+    <property name="targetMethod" value="registerMBeans" />
+    <property name="arguments">
+        <list>
+            <ref bean="sysMgmtCacheManager" />
+            <ref bean="mbeanServer" />
+            <value>true</value>
+            <value>true</value>
+            <value>true</value>
+            <value>true</value>
+        </list>
+    </property>
+	</bean>
+
+  <!-- EhCache CacheFactoryBean  -->
+   <bean id="sysMgmtCacheFactory" abstract="true" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+	<property name="cacheManager" ref="sysMgmtCacheManager" />
+  </bean>
+
+  <!-- EhCache CacheManager -->
+  <!-- configLocation: Path to EHCache configuration file -->
+  <bean id="sysMgmtCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+    <property name="configLocation" value="classpath:qat-sysmgmt-base-ehcache.xml" />
+  </bean>
+
+  <!-- County Cache -->
+  <bean id="countyCacheAspect" class="com.qat.framework.aop.CacheAOP" >
+	<property name="cache">
+		<bean id="countyEhCache" parent="sysMgmtCacheFactory">
+			<property name="cacheName" value="countyCache" />
+		</bean>
+	</property>
+ </bean>
+
+  <aop:config>
+	<!-- Pointcuts -->
+	<aop:pointcut id="countyCacheObject" expression="bean(countyDACTarget) and execution(* fetch*(..)) and !execution(* fetchCountiesByRequest(..))" />
+	<aop:pointcut id="countyFlushInsert" expression="bean(countyDACTarget) and execution(* insert*(..))" />
+	<aop:pointcut id="countyFlushUpdate" expression="bean(countyDACTarget) and execution(* update*(..))" />
+	<aop:pointcut id="countyFlushDelete" expression="bean(countyDACTarget) and execution(* delete*(..))" />
+	<!-- Aspects -->
+	<aop:aspect id="countyCacheAspects" ref="countyCacheAspect">
+		<aop:around pointcut-ref="countyCacheObject" method="cacheObject"/>
+		<aop:after pointcut-ref="countyFlushInsert" method="flushCache" />
+		<aop:after pointcut-ref="countyFlushUpdate" method="flushCache" />
+		<aop:after pointcut-ref="countyFlushDelete" method="flushCache" />
+	</aop:aspect>
+ </aop:config>
+
+
+  <!-- Procedure Cache -->
+  <bean id="procedureCacheAspect" class="com.qat.framework.aop.CacheAOP" >
+	<property name="cache">
+		<bean id="procedureEhCache" parent="sysMgmtCacheFactory">
+			<property name="cacheName" value="procedureCache" />
+		</bean>
+	</property>
+ </bean>
+
+  <aop:config>
+	<!-- Pointcuts -->
+	<aop:pointcut id="procedureCacheObject" expression="bean(procedureDACTarget) and execution(* fetch*(..)) and !execution(* fetchProceduresByRequest(..))" />
+	<aop:pointcut id="procedureFlushInsert" expression="bean(procedureDACTarget) and execution(* insert*(..))" />
+	<aop:pointcut id="procedureFlushUpdate" expression="bean(procedureDACTarget) and execution(* update*(..))" />
+	<aop:pointcut id="procedureFlushDelete" expression="bean(procedureDACTarget) and execution(* delete*(..))" />
+	<!-- Aspects -->
+	<aop:aspect id="procedureCacheAspects" ref="procedureCacheAspect">
+		<aop:around pointcut-ref="procedureCacheObject" method="cacheObject"/>
+		<aop:after pointcut-ref="procedureFlushInsert" method="flushCache" />
+		<aop:after pointcut-ref="procedureFlushUpdate" method="flushCache" />
+		<aop:after pointcut-ref="procedureFlushDelete" method="flushCache" />
+	</aop:aspect>
+ </aop:config>
+  <!-- Bundle Cache -->
+  <aop:config>
+	<!-- Pointcuts -->
+	<aop:pointcut id="bundleCacheObject" expression="bean(bundleDACTarget) and execution(* fetch*(..)) and !execution(* fetchBundlesByRequest(..))" />
+	<aop:pointcut id="bundleFlushInsert" expression="bean(bundleDACTarget) and execution(* insert*(..))" />
+	<aop:pointcut id="bundleFlushUpdate" expression="bean(bundleDACTarget) and execution(* update*(..))" />
+	<aop:pointcut id="bundleFlushDelete" expression="bean(bundleDACTarget) and execution(* delete*(..))" />
+	<!-- Aspects -->
+	<aop:aspect id="procedureCacheAspects" ref="procedureCacheAspect">
+		<aop:around pointcut-ref="bundleCacheObject" method="cacheObject"/>
+		<aop:after pointcut-ref="bundleFlushInsert" method="flushCache" />
+		<aop:after pointcut-ref="bundleFlushUpdate" method="flushCache" />
+		<aop:after pointcut-ref="bundleFlushDelete" method="flushCache" />
+	</aop:aspect>
+ </aop:config>
+
+
+ <!-- County Cache -->
+  <bean id="cidadeCacheAspect" class="com.qat.framework.aop.CacheAOP" >
+	<property name="cache">
+		<bean id="cidadeEhCache" parent="sysMgmtCacheFactory">
+			<property name="cacheName" value="cidadeCache" />
+		</bean>
+	</property>
+ </bean>
+ <!-- Bundle Cache -->
+  <aop:config>
+	<!-- Pointcuts -->
+	<aop:pointcut id="cidadeCacheObject" expression="bean(cidadeDACTarget) and execution(* fetch*(..)) and !execution(* fetchBundlesByRequest(..))" />
+	<aop:pointcut id="cidadeFlushInsert" expression="bean(cidadeDACTarget) and execution(* insert*(..))" />
+	<aop:pointcut id="cidadeFlushUpdate" expression="bean(cidadeDACTarget) and execution(* update*(..))" />
+	<aop:pointcut id="cidadeFlushDelete" expression="bean(cidadeDACTarget) and execution(* delete*(..))" />
+	<!-- Aspects -->
+	<aop:aspect id="procedureCacheAspects" ref="procedureCacheAspect">
+		<aop:around pointcut-ref="cidadeCacheObject" method="cacheObject"/>
+		<aop:after pointcut-ref="cidadeFlushInsert" method="flushCache" />
+		<aop:after pointcut-ref="cidadeFlushUpdate" method="flushCache" />
+		<aop:after pointcut-ref="cidadeFlushDelete" method="flushCache" />
+	</aop:aspect>
+ </aop:config>
+
+   <!-- Drug Cache -->
+  <bean id="drugCacheAspect" class="com.qat.framework.aop.CacheAOP" >
+	<property name="cache">
+		<bean id="drugEhCache" parent="sysMgmtCacheFactory">
+			<property name="cacheName" value="drugCache" />
+		</bean>
+	</property>
+ </bean>
+
+  <aop:config>
+	<!-- Pointcuts -->
+	<aop:pointcut id="drugCacheObject" expression="bean(drugDACTarget) and execution(* fetch*(..)) and !execution(* fetchDrugsByRequest(..))" />
+	<aop:pointcut id="drugFlushInsert" expression="bean(drugDACTarget) and execution(* insert*(..))" />
+	<aop:pointcut id="drugFlushUpdate" expression="bean(drugDACTarget) and execution(* update*(..))" />
+	<aop:pointcut id="drugFlushDelete" expression="bean(drugDACTarget) and execution(* delete*(..))" />
+	<!-- Aspects -->
+	<aop:aspect id="drugCacheAspects" ref="drugCacheAspect">
+		<aop:around pointcut-ref="drugCacheObject" method="cacheObject"/>
+		<aop:after pointcut-ref="drugFlushInsert" method="flushCache" />
+		<aop:after pointcut-ref="drugFlushUpdate" method="flushCache" />
+		<aop:after pointcut-ref="drugFlushDelete" method="flushCache" />
+	</aop:aspect>
+ </aop:config>
+
+</beans>

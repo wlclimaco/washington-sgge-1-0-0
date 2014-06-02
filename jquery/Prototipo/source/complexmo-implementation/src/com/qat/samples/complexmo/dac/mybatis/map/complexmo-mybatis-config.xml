@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+  	<settings>
+		<setting name="lazyLoadingEnabled" value="true" />
+		<setting name="defaultExecutorType" value="REUSE"/>
+	</settings>
+
+  	<typeAliases>
+ 		<typeAlias alias="State" type="com.qat.samples.complexmo.model.State"/>
+  		<typeAlias alias="County" type="com.qat.samples.complexmo.model.County"/>
+  		<typeAlias alias="Country" type="com.qat.samples.complexmo.model.Country"/>
+		<typeAlias alias="Help" type="com.qat.samples.complexmo.model.Help" />
+		<typeAlias alias="HelpInquiryRequest" type="com.qat.samples.complexmo.model.request.HelpInquiryRequest" />
+		<typeAlias alias="EFT" type="com.qat.samples.complexmo.model.EFT" />
+		<typeAlias alias="Person" type="com.qat.samples.complexmo.model.Person" />
+		<typeAlias alias="PersonRequest" type="com.qat.samples.complexmo.model.request.PersonRequest" />
+		<typeAlias alias="AnimalRequest" type="com.qat.samples.complexmo.model.request.AnimalRequest" />
+		<typeAlias alias="PersonFancyRequest" type="com.qat.samples.complexmo.model.request.PersonFancyRequest" />
+		<typeAlias alias="AnimalFancyRequest" type="com.qat.samples.complexmo.model.request.AnimalFancyRequest" />
+		<typeAlias alias="Contact" type="com.qat.samples.complexmo.model.Contact" />
+		<typeAlias alias="Address" type="com.qat.samples.complexmo.model.Address" />
+		<typeAlias alias="Phone" type="com.qat.samples.complexmo.model.Phone" />
+		<typeAlias alias="EMail" type="com.qat.samples.complexmo.model.Email" />
+  		<typeAlias alias="Animal" type="com.qat.samples.complexmo.model.Animal" />
+		<typeAlias alias="Zoo" type="com.qat.samples.complexmo.model.Zoo" />
+  	</typeAliases>
+
+  	<typeHandlers>
+		<typeHandler javaType="com.qat.samples.complexmo.model.State" jdbcType="VARCHAR" handler="com.qat.samples.complexmo.dac.mybatis.MybatisStateTypeHandler" />
+	</typeHandlers>
+
+ 	<mappers>
+		<mapper resource="com/qat/samples/complexmo/dac/mybatis/map/state.xml" />
+		<mapper resource="com/qat/samples/complexmo/dac/mybatis/map/contact.xml" />
+		<mapper resource="com/qat/samples/complexmo/dac/mybatis/map/county.xml" />
+		<mapper resource="com/qat/samples/complexmo/dac/mybatis/map/country.xml" />
+		<mapper resource="com/qat/samples/complexmo/dac/mybatis/map/person.xml" />
+		<mapper resource="com/qat/samples/complexmo/dac/mybatis/map/help.xml" />
+		<mapper resource="com/qat/samples/complexmo/dac/mybatis/map/eft.xml" />
+ 		<mapper resource="com/qat/samples/complexmo/dac/mybatis/map/animal.xml" />
+		<mapper resource="com/qat/samples/complexmo/dac/mybatis/map/zoo.xml" />
+ 	</mappers>
+</configuration>

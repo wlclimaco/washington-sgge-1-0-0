@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  - Application context definition for the QAT business area data access layer.
+  -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Setup for mybatis Database Layer -->
+  	<bean id="sysMgmt-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    	<property name="configLocation" value="classpath:com/qat/samples/sysmgmt/dac/mybatis/map/sysmgmt-base-mybatis-config.xml" />
+    	<property name="dataSource" ref="qatDataSource" />
+  	</bean>
+
+	<!-- ========================= DAC DEFINITIONS================================= -->
+  	<bean id="countyDACTarget" class="com.qat.samples.sysmgmt.dac.mybatis.CountyDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="drugDACTarget" class="com.qat.samples.sysmgmt.dac.mybatis.DrugDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="procedureDACTarget" class="com.qat.samples.sysmgmt.dac.mybatis.ProcedureDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="bundleDACTarget" class="com.qat.samples.sysmgmt.dac.mybatis.BundleDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="cidadeDACTarget" class="com.qat.samples.sysmgmt.cidade.dac.mybatis.CidadeDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+</beans>

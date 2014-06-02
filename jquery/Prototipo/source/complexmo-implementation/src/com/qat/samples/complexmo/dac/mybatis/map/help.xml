@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="HelpMap">
+	<!--
+		Result maps describe the mapping between the columns returned from a query, and the class properties. A result map
+		isn't necessary if the columns (or aliases) match to the properties exactly.
+	-->
+	<resultMap id="HelpResult" type="Help">
+		<result property="topic" column="TOPIC" />
+		<result property="sequence" column="SEQUENCE" />
+		<result property="information" column="INFORMATION" />
+	</resultMap>
+
+	<!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+	<sql id="allHelpColumns">
+		TOPIC, SEQUENCE, INFORMATION
+ 	</sql>
+
+	<!--
+		SQL select statements
+ 	-->
+	<select id="fetchAllHelp" resultMap="HelpResult">
+		SELECT
+		<include refid="allHelpColumns" />
+		FROM Help
+	</select>
+
+	<!-- Note the startPage and pageSize property values are passed on with the request object. -->
+	<select id="fetchHelpByPage" parameterType="HelpInquiryRequest" resultMap="HelpResult">
+	  	<if test="_databaseId == 'Oracle'">
+			SELECT * FROM (
+			SELECT * FROM (
+			SELECT
+			<include refid="allHelpColumns" /> , ROWNUM ROWNUM_ from Help ORDER BY SEQUENCE ASC
+			)
+			WHERE ROWNUM_ <![CDATA[ > ]]>
+			( #{startPage} * #{pageSize} )
+			) WHERE ROWNUM <![CDATA[ <= ]]>
+			#{pageSize}
+   		</if>
+
+   	 	<if test="_databaseId == 'PostgreSQL'">
+			SELECT <include refid="allHelpColumns" />
+			FROM Help h
+			ORDER BY SEQUENCE ASC
+			OFFSET (  #{startPage} * #{pageSize} )
+			LIMIT #{pageSize}
+    	</if>
+	</select>
+
+</mapper>

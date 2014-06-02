@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="Build QAT-Sample-sysmgmt-web" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<include file="${ivyConfigPath}\..\AntConfig\QAT-ant-common-targets.xml" optional="false" />
+
+	<target name="build">
+	<echoproperties />
+		<antcall target="QAT.mainBuildWar">
+			<param name="moduleName" value="qat-sample-sysmgmt-web" />
+			<param name="configurationProjectName" value="sysmgmt-configuration" />
+			<param name="coreConfigurationSubDir" value="web-be" />
+<!-- 			<param name="coreConfigurationDir" value="../../../BackEnd/qat-configuration-core" /> -->
+			<param name="coreConfigurationDir" value="../../qat-configuration-core" />
+			<param name="spring.profiles.active" value="tomcat" />
+ 			<param name="logFile" value="qat-sysmgmt-sample.log" />
+ 			<param name="logDir" value="../logs" />
+			<param name="ivyUseCacheOnly" value="false" />
+			<param name="deleteFromWarLibList" value="javax.activation*.jar,javax.jms*.jar,javax.mail*.jar" />
+		</antcall>
+
+		<!-- Quick fix to make sure the war file matches the old war file name. -->
+		<copy file="../dist/qat-sample-sysmgmt-web-0.0.5.war" tofile="../dist/qat-sysmgmt-sample.war" overwrite="true" />
+	</target>
+
+</project>

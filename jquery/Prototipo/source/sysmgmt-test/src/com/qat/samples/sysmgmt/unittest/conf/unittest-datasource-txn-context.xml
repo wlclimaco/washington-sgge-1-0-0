@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+ 
+ <bean id="QATAppContext" class="com.qat.framework.util.QATAppContext"></bean>
+ <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="qatDataSource" />
+ </bean>
+ 
+ <beans profile="oracle">   
+	  <bean id="qatDataSource" class="oracle.jdbc.pool.OracleDataSource" destroy-method="close">
+	    <property name="URL" value="jdbc:oracle:thin:@localhost:1521:XE" />
+	    <property name="user" value="qat" />
+	    <property name="password" value="qat" />
+	    <property name="implicitCachingEnabled" value="true" />  
+	    <property name="connectionCachingEnabled" value="true" /> 
+	    <property name="connectionCacheProperties">
+	      <value>
+	         InitialLimit:3
+	         MinLimit:5
+	         MaxLimit:10
+	         MaxStatementsLimit:100
+	         ConnectionWaitTimeout:10
+	         InactivityTimeout:180
+	         AbandonedConnectionTimeout:30
+	         ValidateConnection:true
+	       </value>
+	    </property>
+	  </bean>
+ </beans>
+ 
+ <beans profile="postgres">
+	  <bean id="qatDataSource" class="org.postgresql.ds.PGPoolingDataSource" destroy-method="close">
+		<property name="serverName" value="localhost" />
+		<property name="databaseName" value="qatdb" />
+		<property name="portNumber" value="5432" />
+		<property name="user" value="qat" />
+		<property name="password" value="qat" />
+		<property name="initialConnections" value="5" />
+		<property name="maxConnections" value="10" />    
+	  </bean>
+ </beans>
+ 
+</beans>

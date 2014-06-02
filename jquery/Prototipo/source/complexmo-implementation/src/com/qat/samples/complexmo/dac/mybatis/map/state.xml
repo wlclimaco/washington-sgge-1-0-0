@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="StateMap">
+ 
+  <!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties 
+       exactly. -->
+  <resultMap id="StateResult" type="State">    	
+	<result property="code" column="st_code" />
+	<result property="description" column="st_description" />
+  </resultMap>
+  
+  <sql id="allStateColumns">
+  	st.code as st_code, st.description as st_description
+  </sql>
+
+  <select id="fetchAllStates" resultMap="StateResult">
+  	SELECT
+  	<include refid="allStateColumns" /> order by code
+  	FROM State st
+  </select>
+
+  <select id="fetchStateByCode" parameterType="String" resultMap="StateResult">
+  	SELECT
+  	<include refid="allStateColumns" /> 
+  	FROM State st
+  	WHERE st.code=#{value}
+  </select>
+  
+</mapper>

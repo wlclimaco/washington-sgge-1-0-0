@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CountyMap">
+
+  <!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="CountyResult" type="County">
+    <result property="id" column="COUNTY_ID"/>
+    <result property="description" column="COUNTY_DESC"/>
+  </resultMap>
+
+  <sql id="allCountyColumns">
+		COUNTY_ID, COUNTY_DESC
+  </sql>
+
+  <sql id="allCountyColumnsWithQualifier">
+		c.COUNTY_ID, c.COUNTY_DESC
+  </sql>
+
+  <select id="fetchAllCounties" resultMap="CountyResult">
+    SELECT
+	<include refid="allCountyColumns" />
+    FROM COUNTY ORDER BY COUNTY_ID ASC
+  </select>
+
+  <select id="fetchCountyById" parameterType="Integer" resultMap="CountyResult">
+    SELECT
+	<include refid="allCountyColumns" />
+    FROM COUNTY WHERE COUNTY_ID = #{fetchid}
+  </select>
+
+  <select id="fetchAllCountiesRequest" parameterType="PagedInquiryRequest" resultMap="CountyResult">
+  	<if test="_databaseId == 'Oracle'">
+		SELECT * FROM (
+		SELECT * FROM (
+		SELECT <include refid="allCountyColumnsWithQualifier" />,
+		ROWNUM ROWNUM_ FROM COUNTY c ORDER BY COUNTY_ID ASC
+		) WHERE ROWNUM_ <![CDATA[ > ]]>
+		( #{startPage} * #{pageSize} )
+		) WHERE ROWNUM <![CDATA[ <= ]]>
+		#{pageSize}
+    </if>
+
+   	 <if test="_databaseId == 'PostgreSQL'">
+		SELECT <include refid="allCountyColumns" />
+   		  FROM COUNTY ORDER BY COUNTY_ID ASC
+		  OFFSET ( #{startPage} * #{pageSize} )
+		  LIMIT #{pageSize}
+    </if>
+  </select>
+
+  <select id="fetchCountyRowCount" resultType="Integer">
+      <if test="_databaseId == 'PostgreSQL'">
+			SELECT COUNT(*) AS RECORD_COUNT FROM COUNTY WHERE COUNTY_ID IS NOT NULL
+      </if>
+
+   	  <if test="_databaseId == 'Oracle'">
+		 	SELECT COUNT(COUNTY_ID) AS RECORD_COUNT FROM COUNTY
+      </if>
+  </select>
+
+  <insert id="insertCounty" parameterType="County">
+  	INSERT INTO COUNTY (
+	<include refid="allCountyColumns" />
+      )
+    VALUES ( #{id} , #{description} )
+  </insert>
+
+  <update id="updateCounty" parameterType="County">
+    UPDATE COUNTY SET
+      COUNTY_DESC = #{description}
+    WHERE
+      COUNTY_ID = #{id}
+  </update>
+
+  <delete id="deleteCountyById" parameterType="County">
+    DELETE FROM COUNTY WHERE COUNTY_ID = #{id}
+  </delete>
+
+  <delete id="deleteAllCounties">
+	DELETE FROM COUNTY
+  </delete>
+</mapper>
