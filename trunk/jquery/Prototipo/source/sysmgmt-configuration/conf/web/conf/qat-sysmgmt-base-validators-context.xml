@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<bean id="CountyValidator" class="com.qat.samples.sysmgmt.validation.CountyValidator">
+		<property name="descriptionLength" value="50" />
+	</bean>
+
+	<bean id="countyValidationController" class="com.qat.framework.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="CountyValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="ProcedureValidator" class="com.qat.samples.sysmgmt.validation.ProcedureValidator" />
+
+	<bean id="procedureValidationController" class="com.qat.framework.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="ProcedureValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="drugValidationController" class="com.qat.framework.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="DrugValidator" />
+				<ref bean="DrugPriceValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="DrugValidator" class="com.qat.samples.sysmgmt.validation.DrugValidator" />
+
+	<bean id="DrugPriceValidator" class="com.qat.samples.sysmgmt.validation.DrugPriceValidator" />
+
+	<bean id="BundleValidator" class="com.qat.samples.sysmgmt.validation.BundleValidator" />
+
+	<bean id="bundleValidationController" class="com.qat.framework.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="BundleValidator" />
+			</list>
+		</property>
+	</bean>
+
+</beans>

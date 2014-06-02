@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+
+	<info organisation="wcosta" module="qat-sample-complexmo-interface" revision="0.0.1" status="release" publication="20131220155645"/>
+
+	<publications>
+		<artifact name="qat-sample-complexmo-interface" type="jar" ext="jar"/>
+	</publications>
+
+	<dependencies>
+		<dependency org="qat" name="qat-framework-core" rev="0.0.57" revConstraint="latest.release"/>
+		<dependency org="apache" name="commons-virtual" rev="1.0.3" revConstraint="latest.release"/>
+	</dependencies>
+
+</ivy-module>

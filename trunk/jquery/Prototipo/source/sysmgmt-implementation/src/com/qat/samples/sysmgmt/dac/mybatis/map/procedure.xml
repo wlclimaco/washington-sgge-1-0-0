@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProcedureMap">
+
+
+  <!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="ProcedureResult" type="Procedure">
+    <result property="id" column="PROC_ID"/>
+    <result property="code" column="PROC_CODE"/>
+    <result property="description" column="PROC_DESC"/>
+    <result property="price" column="PROC_PRICE"/>
+    <result property="version" column="VERSN_LOCK_NUM"/>
+  </resultMap>
+
+  <sql id="allProcedureColumns">
+		PROC_ID, PROC_CODE, PROC_DESC,PROC_PRICE,VERSN_LOCK_NUM
+  </sql>
+
+  <sql id="allProcedureColumnsWithQualifier">
+		p.PROC_ID, p.PROC_CODE, p.PROC_DESC, p.PROC_PRICE, p.VERSN_LOCK_NUM
+  </sql>
+
+  <select id="fetchAllProcedures" resultMap="ProcedureResult">
+    SELECT
+    <include refid="allProcedureColumns" />
+    FROM PROCEDURE ORDER BY PROC_ID ASC
+  </select>
+
+  <select id="fetchAllProceduresPagedBatch" resultMap="ProcedureResult">
+  	<if test="_databaseId == 'Oracle'">
+		SELECT * FROM (
+		SELECT * FROM (
+		SELECT <include refid="allProcedureColumnsWithQualifier" />,
+		ROWNUM ROWNUM_ FROM PROCEDURE p ORDER BY PROC_ID ASC
+		) WHERE ROWNUM_ <![CDATA[ > ]]>
+		( #{_page} * #{_pagesize} )
+		) WHERE ROWNUM <![CDATA[ <= ]]>
+		#{_pagesize}mo
+    </if>
+
+   	 <if test="_databaseId == 'PostgreSQL'">
+		SELECT <include refid="allProcedureColumns" />
+   		  FROM PROCEDURE ORDER BY PROC_ID ASC
+		  OFFSET ( #{_page} * #{_pagesize} )
+		  LIMIT #{_pagesize}
+    </if>
+  </select>
+
+  <select id="fetchProcedureRowCount" resultType="Integer">
+      <if test="_databaseId == 'PostgreSQL'">
+			SELECT COUNT(*) AS RECORD_COUNT FROM PROCEDURE WHERE PROC_ID IS NOT NULL
+      </if>
+
+   	  <if test="_databaseId == 'Oracle'">
+		 	SELECT COUNT(PROC_ID) AS RECORD_COUNT FROM PROCEDURE
+      </if>
+  </select>
+
+  <select id="fetchAllProceduresRequest" parameterType="PagedInquiryRequest" resultMap="ProcedureResult">
+  	<if test="_databaseId == 'Oracle'">
+		SELECT * FROM (
+		SELECT * FROM (
+		SELECT <include refid="allProcedureColumnsWithQualifier" />,
+		ROWNUM ROWNUM_ FROM PROCEDURE p ORDER BY PROC_ID ASC
+		) WHERE ROWNUM_ <![CDATA[ > ]]>
+		( #{startPage} * #{pageSize} )
+		) WHERE ROWNUM <![CDATA[ <= ]]>
+		#{pageSize}
+    </if>
+
+   	 <if test="_databaseId == 'PostgreSQL'">
+		SELECT <include refid="allProcedureColumns" />
+   		  FROM PROCEDURE ORDER BY PROC_ID ASC
+		  OFFSET ( #{startPage} * #{pageSize} )
+		  LIMIT #{pageSize}
+    </if>
+  </select>
+
+  <select id="fetchProcedureById" parameterType="Integer" resultMap="ProcedureResult">
+    SELECT
+   <include refid="allProcedureColumns" />
+    FROM PROCEDURE WHERE PROC_ID = #{fetchid}
+  </select>
+
+  <select id="fetchVersionNumber" parameterType="Procedure" resultType="int">
+	SELECT VERSN_LOCK_NUM FROM PROCEDURE WHERE PROC_ID = #{id}
+  </select>
+
+  <insert id="insertProcedure" parameterType="Procedure">
+   	<selectKey resultType="int" keyProperty="id" order="BEFORE">
+  	 	<if test="_databaseId == 'Oracle'">
+			SELECT PROC_SEQ.nextval AS id FROM DUAL
+    	</if>
+  	 	<if test="_databaseId == 'PostgreSQL'">
+			SELECT nextval('procedure_proc_id_seq') AS id
+    	</if>
+	</selectKey>
+  	INSERT INTO PROCEDURE (
+      PROC_ID,
+      PROC_CODE,
+      PROC_DESC,
+      PROC_PRICE )
+    VALUES ( #{id} , #{code} , #{description} , #{price} )
+  </insert>
+
+  <update id="updateProcedure" parameterType="Procedure">
+    UPDATE PROCEDURE SET
+      PROC_CODE = #{code},
+      PROC_DESC = #{description},
+      PROC_PRICE = #{price}
+    WHERE
+      PROC_ID = #{id} AND VERSN_LOCK_NUM = #{version}
+  </update>
+
+  <delete id="deleteProcedureById" parameterType="Procedure">
+    DELETE FROM PROCEDURE WHERE PROC_ID = #{id}
+  </delete>
+
+  <delete id="deleteAllProcedures">
+	DELETE FROM PROCEDURE
+  </delete>
+</mapper>

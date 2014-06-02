@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-settings>
+
+	<property name="userId" value="wcosta" />
+
+	<property name="ivyHost" value="192.168.3.2" />
+
+	<property name="base_repos_url" value="http://${ivyHost}:8081/artifactory" />
+
+	<property name='base_cache_dir' value="${user.home}/.ivy2/cache" override="false" />
+	
+	<caches defaultCacheDir="${base_cache_dir}" />
+	
+	<settings defaultResolver="main" />
+
+	<resolvers>
+		<chain name="main" returnFirst="true">
+			<url name="qat-framework-release" m2compatible="false" checkmodified="yes">
+				<ivy
+					pattern="${base_repos_url}/libs-qat-framework-release/[organization]/[module]/[revision]/ivy-[revision].xml" />
+				<artifact
+					pattern="${base_repos_url}/libs-qat-framework-release/[organization]/[module]/[revision]/[artifact]-[revision].[ext]" />
+			</url>
+			
+			<url name="qat-configuration-release" m2compatible="false" checkmodified="yes">
+				<ivy
+					pattern="${base_repos_url}/libs-qat-configuration-release/[organization]/[module]/[revision]/ivy-[revision].xml" />
+				<artifact
+					pattern="${base_repos_url}/libs-qat-configuration-release/[organization]/[module]/[revision]/[artifact]-[revision].[ext]" />
+			</url>
+
+			<url name="opensource-release" m2compatible="false">
+				<ivy
+					pattern="${base_repos_url}/libs-opensource-release/[organization]/[module]/[revision]/ivy-[revision].xml" />
+				<artifact
+					pattern="${base_repos_url}/libs-opensource-release/[organization]/[module]/[revision]/[artifact]-[revision].[ext]" />
+			</url>
+
+			<filesystem name="my-local-repo" m2compatible="false" force="false" local="true">
+				<ivy
+					pattern="${ivy.default.ivy.user.dir}/localrepo/[organization]/[module]/[revision]/ivy-[revision].xml" />
+				<artifact
+					pattern="${ivy.default.ivy.user.dir}/localrepo/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
+			</filesystem>
+		</chain>
+	</resolvers>
+
+</ivy-settings>

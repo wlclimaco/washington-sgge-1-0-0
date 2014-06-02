@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AnimalMap">
+
+
+  <!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="AnimalResult" type="Animal">
+    <result property="id" column="ANIMAL_ID"/>
+    <result property="parentKey" column="PARENTKEY"/>
+    <result property="name" column="NAME"/>
+    <result property="animalTypeValue" column="CATEGORYTYPE"/>
+    <association property="countryOfOrigin" column="country_origin" javaType="Country" select="CountryMap.fetchCountryByCode" />
+
+  <!--    <association property="eft" column="per_id" javaType="EFT" select="EFTMap.fetchEftByPersonId" />
+	<collection property="contactList" column="per_id" select="ContactMap.fetchContactsByPersonId" /> -->
+  </resultMap>
+
+
+  <sql id="allAnimalColumns">
+		ani.animal_id as animal_id, ani.parentkey as parentkey, ani.name as name, ani.categorytype as categorytype, ani.country_origin as country_origin
+  </sql>
+
+
+  <select id="fetchAllAnimals" resultMap="AnimalResult">
+    SELECT
+    <include refid="allAnimalColumns" />
+    FROM ANIMAL ani ORDER BY ani.animal_id  ASC
+  </select>
+
+  <!-- FetchByRequest uses the 'dynamic' capabilities of mybatis. Based on a given request property being
+		set the SQL where clause is built. See the mybatis users guide for more information. -->
+	<select id="fetchAnimalByRequest" parameterType="AnimalRequest" resultMap="AnimalResult">
+		SELECT
+		<include refid="allAnimalColumns" />
+		FROM ANIMAL ani
+		<where>
+			<if test="animal.id > 0">ani.animal_id = #{animal.id}</if>
+			<if test="animal.name != null">AND ani.name = #{animal.name}</if>
+			<if test="animal.animalTypeValue > 0">AND ani.categorytype = #{animal.animalTypeValue}</if>
+	<!-- 		<if test="animal.coutry.code != null">AND ani.COUNTRY_ORIGIN = #{animal.coutry.code}</if> -->
+		</where>
+	</select>
+
+	<select id="fetchAnimalByFancyRequest" parameterType="AnimalFancyRequest" resultMap="AnimalResult">
+		SELECT
+		<include refid="allAnimalColumns" />
+		FROM ANIMAL ani
+		<where>
+			<if test="id != null ">ani.animal_id = #{id}</if>
+			<if test="id == null">
+				<if test="name != null">
+					<choose>
+						<when test="name.searchType.toString() == 'STARTS_WITH'">
+							ani.name LIKE #{name.workingValue}
+						</when>
+						<when test="firstName.searchType.toString() == 'EXACT_MATCH'">
+							ani.name = #{name.workingValue}
+						</when>
+					</choose>
+				</if>
+			</if>
+		</where>
+	</select>
+
+
+	<select id="fetchPersonById" resultMap="AnimalResult">
+		SELECT
+		<include refid="allAnimalColumns" />
+		FROM ANIMAL ani
+		WHERE ani.animal_id = #{id}
+	</select>
+
+
+
+  <select id="fetchAllAnimalsPagedBatch" resultMap="AnimalResult">
+  	<if test="_databaseId == 'Oracle'">
+		SELECT * FROM (
+		SELECT * FROM (
+		SELECT <include refid="allAnimalColumns" />,
+		ROWNUM ROWNUM_ FROM THEBUNDLE p ORDER BY BUNDLE_ID ASC
+		) WHERE ROWNUM_ <![CDATA[ > ]]>
+		( #{_page} * #{_pagesize} )
+		) WHERE ROWNUM <![CDATA[ <= ]]>
+		#{_pagesize}mo
+    </if>
+
+   	 <if test="_databaseId == 'PostgreSQL'">
+		SELECT <include refid="allAnimalColumns" />
+   		  FROM THEBUNDLE ORDER BY BUNDLE_ID ASC
+		  OFFSET ( #{_page} * #{_pagesize} )
+		  LIMIT #{_pagesize}
+    </if>
+  </select>
+
+  <select id="fetchAnimalRowCount" resultType="Integer">
+      <if test="_databaseId == 'PostgreSQL'">
+			SELECT COUNT(*) AS RECORD_COUNT FROM THEBUNDLE WHERE BUNDLE_ID IS NOT NULL
+      </if>
+
+   	  <if test="_databaseId == 'Oracle'">
+		 	SELECT COUNT(BUNDLE_ID) AS RECORD_COUNT FROM THEBUNDLE
+      </if>
+  </select>
+
+  <select id="fetchAnimalById" parameterType="Integer" resultMap="AnimalResult">
+    SELECT
+   <include refid="allAnimalColumns" />
+    FROM ANIMAL ani  where ani.animal_id = #{id}
+  </select>
+
+  <select id="fetchVersionNumber" parameterType="Animal" resultType="int">
+	SELECT VERSN_LOCK_NUM FROM THEBUNDLE WHERE BUNDLE_ID = #{id}
+  </select>
+
+  <insert id="insertAnimal" parameterType="Animal">
+   	<selectKey resultType="int" keyProperty="id" order="BEFORE">
+  	 	<if test="_databaseId == 'Oracle'">
+			SELECT BUNDLE_SEQ.nextval AS id FROM DUAL
+    	</if>
+  	 	<if test="_databaseId == 'PostgreSQL'">
+			SELECT nextval('thebundle_bundle_id_seq') AS id
+    	</if>
+	</selectKey>
+  	INSERT INTO THEBUNDLE (
+      BUNDLE_ID,
+      BUNDLE_CODE,
+      BUNDLE_DESC,
+      BUNDLE_PRICE )
+    VALUES ( #{id} , #{code} , #{description} , #{price} )
+  </insert>
+
+  <update id="updateAnimal" parameterType="Animal">
+    UPDATE THEBUNDLE SET
+      BUNDLE_CODE = #{code},
+      BUNDLE_DESC = #{description},
+      BUNDLE_PRICE = #{price}
+    WHERE
+      BUNDLE_ID = #{id} AND VERSN_LOCK_NUM = #{version}
+  </update>
+
+  <delete id="deleteAnimalById" parameterType="Animal">
+    DELETE FROM THEBUNDLE WHERE BUNDLE_ID = #{id}
+  </delete>
+
+  <delete id="deleteAllAnimals">
+	DELETE FROM THEBUNDLE
+  </delete>
+</mapper>

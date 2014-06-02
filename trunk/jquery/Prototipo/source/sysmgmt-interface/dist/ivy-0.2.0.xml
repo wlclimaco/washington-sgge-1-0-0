@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+
+	<info organisation="wcosta" module="qat-sample-sysmgmt-interface" revision="0.2.0" status="release" publication="20140601202711"/>
+
+	<publications>
+		<artifact name="qat-sample-sysmgmt-interface" type="jar" ext="jar"/>
+	</publications>
+
+	<dependencies>
+		<dependency org="qat" name="qat-framework-core" rev="0.0.57" revConstraint="latest.release"/>
+	</dependencies>
+
+</ivy-module>

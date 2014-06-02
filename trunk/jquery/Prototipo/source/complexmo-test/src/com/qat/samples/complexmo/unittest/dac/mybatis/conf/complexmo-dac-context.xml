@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Setup for mybatis Database Layer -->
+  	<bean id="complexMO-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    	<property name="configLocation" value="classpath:com/qat/samples/complexmo/dac/mybatis/map/complexmo-mybatis-config.xml" />
+    	<property name="dataSource" ref="qatDataSource" />
+  	</bean>
+
+	<!-- ========================= DAC DEFINITIONS================================= -->
+	<bean id="personDACTarget" class="com.qat.samples.complexmo.dac.mybatis.PersonDACImpl">
+		<property name="sqlSessionFactory" ref="complexMO-sqlSessionFactory" />
+	</bean>
+
+	<bean id="helpDACTarget" class="com.qat.samples.complexmo.dac.mybatis.HelpDACImpl">
+		<property name="sqlSessionFactory" ref="complexMO-sqlSessionFactory" />
+	</bean>
+
+	<!-- This BAI  & DAC Definition not normally here just for unittest example normally in separate BAI context xml file -->
+	<bean id="stateDACTarget" class="com.qat.samples.complexmo.dac.mybatis.StateDACImpl">
+		<property name="sqlSessionFactory" ref="complexMO-sqlSessionFactory" />
+	</bean>
+
+	<bean id="stateEntityBAITarget" class="com.qat.samples.complexmo.bai.impl.StateBAIImpl">
+		<property name="stateDAC" ref="stateDACTarget" />
+	</bean>
+
+    <bean id="animalDACTarget" class="com.qat.samples.complexmo.dac.mybatis.AnimalDACImpl">
+		<property name="sqlSessionFactory" ref="complexMO-sqlSessionFactory" />
+	</bean>
+
+	<bean id="zooDACTarget" class="com.qat.samples.complexmo.dac.mybatis.ZooDACImpl">
+		<property name="sqlSessionFactory" ref="complexMO-sqlSessionFactory" />
+	</bean>
+
+	<!-- mybatis Type Handler -->
+	<bean id="stateTypeHandler" class="com.qat.samples.complexmo.dac.mybatis.MybatisStateTypeHandler">
+		<property name="entityStateBAI" ref="stateEntityBAITarget" />
+	</bean>
+</beans>

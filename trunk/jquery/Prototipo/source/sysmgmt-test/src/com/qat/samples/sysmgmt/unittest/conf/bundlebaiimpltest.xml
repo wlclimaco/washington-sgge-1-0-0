@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="QATAppContext" class="com.qat.framework.util.QATAppContext"/>
+	<bean id="bundleBAI" class="com.qat.samples.sysmgmt.bai.impl.BundleBAIImpl">
+		<property name="bundleBAC" ref="bundleBACTarget"/>
+		<property name="validationController" ref="bundleValidationController"/>
+	</bean>
+	<bean id="bundleBACTarget" class="com.qat.samples.sysmgmt.unittest.bai.BundleBAIImplTest$MockBundleBAC">
+	</bean>
+</beans>

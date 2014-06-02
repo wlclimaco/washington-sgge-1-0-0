@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+ 	<settings>
+		<setting name="lazyLoadingEnabled" value="false" />
+	</settings>
+
+  	<typeAliases>
+  		<typeAlias alias="County" type="com.qat.samples.sysmgmt.model.County"/>
+  		<typeAlias alias="Drug" type="com.qat.samples.sysmgmt.model.Drug"/>
+  		<typeAlias alias="DrugPrice" type="com.qat.samples.sysmgmt.model.DrugPrice"/>
+  		<typeAlias alias="Procedure" type="com.qat.samples.sysmgmt.model.Procedure"/>
+  		<typeAlias alias="Bundle" type="com.qat.samples.sysmgmt.model.Bundle"/>
+  		<typeAlias alias="PagedInquiryRequest" type="com.qat.samples.sysmgmt.model.request.PagedInquiryRequest"/>
+  	</typeAliases>
+
+ 	<mappers>
+    	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/county.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/drug.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/procedure.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/bundle.xml"/>
+    </mappers>
+
+</configuration>

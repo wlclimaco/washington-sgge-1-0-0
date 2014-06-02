@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="EFTMap">
+	<!--
+		Result maps describe the mapping between the columns returned from a query, and the class properties. A result map
+		isn't necessary if the columns (or aliases) match to the properties exactly.
+	-->
+	<resultMap id="EFTResult" type="EFT">
+		<result property="parentKey" column="eft_parentkey" />
+		<result property="bank" column="eft_bank" />
+		<result property="accountNumber" column="eft_account_number" />
+		<result property="effectiveStartDate" column="eft_eff_start_date" />
+		<result property="effectiveEndDate" column="eft_eff_end_date" />
+	</resultMap>
+
+	<sql id="allEftColumnsWithAlias">
+		eft.parentkey as eft_parentkey, eft.bank as eft_bank, eft.account_number as eft_account_number,
+		eft.eff_start_date as eft_eff_start_date, eft.eff_end_date as eft_eff_end_date
+  	</sql>
+
+	<sql id="allEftColumns">
+		parentkey, bank , account_number, eff_start_date, eff_end_date
+  	</sql>
+
+	<select id="fetchEftByPersonId" resultMap="EFTResult">
+		SELECT
+		<include refid="allEftColumnsWithAlias" />
+		FROM Eft eft
+		WHERE eft.parentkey=#{value}
+	</select>
+
+	<insert id="InsertEft" parameterType="EFT">
+		INSERT INTO EFT (
+			<include refid="allEftColumns" />
+		)
+		VALUES( #{parentKey}, #{bank}, #{accountNumber}, #{effectiveStartDate}, #{effectiveEndDate} )
+	</insert>
+
+	<update id="UpdateEft" parameterType="EFT">
+		UPDATE Eft
+		<set>
+			<if test="bank != null">bank = #{bank},</if>
+			<if test="accountNumber != null">account_number = #{accountNumber},</if>
+			<if test="effectiveStartDate != null">eff_start_date = #{effectiveStartDate},</if>
+			<if test="effectiveEndDate != null">eff_end_date = #{effectiveEndDate},</if>			
+		</set>
+		WHERE parentkey = #{parentKey}
+	</update>
+</mapper>

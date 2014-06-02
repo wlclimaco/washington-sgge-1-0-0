@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="QAT-Sample-sysmgmt-batch" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<include file="${ivyConfigPath}\..\AntConfig\QAT-ant-common-targets.xml" optional="false" />
+
+	<target name="build">
+		<antcall target="QAT.mainBuild">
+			<param name="moduleName" value="qat-sample-sysmgmt-batch" />
+			<param name="publishProjectLocal" value="true" />
+			<param name="ivyUseCacheOnly" value="false"/>
+		</antcall>
+	</target>
+
+</project>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CidadeMap">
+
+
+  <!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="CidadeResult" type="Cidade">
+    <result property="id" column="cidade_id"/>
+    <result property="estado" column="estado"/>
+    <result property="cidade" column="cidade"/>
+    <result property="version" column="VERSN_LOCK_NUM"/>
+  </resultMap>
+
+  <sql id="allCidadeColumns">
+		cidade_id, estado, cidade,VERSN_LOCK_NUM
+  </sql>
+
+  <sql id="allCidadeColumnsWithQualifier">
+		p.cidade_id, p.estado, p.cidade,p.VERSN_LOCK_NUM
+  </sql>
+
+  <select id="fetchAllCidades" resultMap="CidadeResult">
+    SELECT
+    <include refid="allCidadeColumns" />
+    FROM CIDADE ORDER BY CIDADE_ID ASC
+  </select>
+
+  <select id="fetchAllCidadesPagedBatch" resultMap="CidadeResult">
+  	<if test="_databaseId == 'Oracle'">
+		SELECT * FROM (
+		SELECT * FROM (
+		SELECT <include refid="allCidadeColumnsWithQualifier" />,
+		ROWNUM ROWNUM_ FROM CIDADE p ORDER BY CIDADE_ID ASC
+		) WHERE ROWNUM_ <![CDATA[ > ]]>
+		( #{_page} * #{_pagesize} )
+		) WHERE ROWNUM <![CDATA[ <= ]]>
+		#{_pagesize}mo
+    </if>
+
+   	 <if test="_databaseId == 'PostgreSQL'">
+		SELECT <include refid="allCidadeColumns" />
+   		  FROM CIDADE ORDER BY CIDADE_ID ASC
+		  OFFSET ( #{_page} * #{_pagesize} )
+		  LIMIT #{_pagesize}
+    </if>
+  </select>
+
+  <select id="fetchCidadeRowCount" resultType="Integer">
+      <if test="_databaseId == 'PostgreSQL'">
+			SELECT COUNT(*) AS RECORD_COUNT FROM CIDADE WHERE CIDADE IS NOT NULL
+      </if>
+
+   	  <if test="_databaseId == 'Oracle'">
+		 	SELECT COUNT(CIDADE_ID) AS RECORD_COUNT FROM CIDADE
+      </if>
+  </select>
+
+  <select id="fetchAllCidadesRequest" parameterType="PagedInquiryRequest" resultMap="CidadeResult">
+  	<if test="_databaseId == 'Oracle'">
+		SELECT * FROM (
+		SELECT * FROM (
+		SELECT <include refid="allCidadeColumnsWithQualifier" />,
+		ROWNUM ROWNUM_ FROM CIDADE p ORDER BY CIDADE_ID ASC
+		) WHERE ROWNUM_ <![CDATA[ > ]]>
+		( #{startPage} * #{pageSize} )
+		) WHERE ROWNUM <![CDATA[ <= ]]>
+		#{pageSize}
+    </if>
+
+   	 <if test="_databaseId == 'PostgreSQL'">
+		SELECT <include refid="allCidadeColumns" />
+   		  FROM CIDADE ORDER BY CIDADE_ID ASC
+		  OFFSET ( #{startPage} * #{pageSize} )
+		  LIMIT #{pageSize}
+    </if>
+  </select>
+
+  <select id="fetchCidadeById" parameterType="Integer" resultMap="CidadeResult">
+    SELECT
+   <include refid="allCidadeColumns" />
+    FROM CIDADE WHERE CIDADE_ID = #{fetchid}
+  </select>
+
+  <select id="fetchVersionNumber" parameterType="Cidade" resultType="int">
+	SELECT VERSN_LOCK_NUM FROM CIDADE WHERE CIDADE_ID = #{id}
+  </select>
+
+  <insert id="insertCidade" parameterType="Cidade">
+   	<selectKey resultType="int" keyProperty="id" order="BEFORE">
+  	 	<if test="_databaseId == 'Oracle'">
+			SELECT CIDADE_SEQ.nextval AS id FROM DUAL
+    	</if>
+  	 	<if test="_databaseId == 'PostgreSQL'">
+			SELECT nextval('cidade_cidade_id_seq') AS id
+    	</if>
+	</selectKey>
+  	INSERT INTO CIDADE (
+      CIDADE_ID,
+      ESTADO,
+      CIDADE)
+    VALUES ( #{id} , #{estado} , #{cidade})
+  </insert>
+
+  <update id="updateCidade" parameterType="Cidade">
+    UPDATE CIDADE SET
+      cidade = #{code},
+      estado = #{description}
+    WHERE
+      CIDADE_ID = #{id} AND VERSN_LOCK_NUM = #{version}
+  </update>
+
+  <delete id="deleteCidadeById" parameterType="Cidade">
+    DELETE FROM CIDADE WHERE CIDADE_ID = #{id}
+  </delete>
+
+  <delete id="deleteAllCidades">
+	DELETE FROM CIDADE
+  </delete>
+</mapper>

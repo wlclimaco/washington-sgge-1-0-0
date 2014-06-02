@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<import resource="classpath:web/conf/webdaptive-mvc-config.xml" />
+	<import resource="classpath:web/conf/webdaptive-application-context.xml" />
+	<import resource="classpath:web/conf/webdaptive-resourcebundles-context.xml" />
+	<import resource="classpath:web/conf/qat-sysmgmt-base-bai-application-context.xml" />
+	<import resource="classpath:web/conf/qat-webdaptive-bai-application-context.xml" />
+</beans>

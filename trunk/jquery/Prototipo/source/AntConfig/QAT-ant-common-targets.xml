@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project name="QAT" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<!-- Typically this file is included as follows -->
+	<!-- <include file="${ivyConfigPath}\..\AntConfig\QAT-ant-common-targets.xml" optional="false" " /> -->
+	<!-- Note the all of these targets must be prefixed with QAT. -->
+	<!-- Don't change the project name of this ANY file. -->
+
+	<!-- Must be overriden by calling target. -->
+	<property name="moduleName" value="Must be overriden" />
+	<property name="configurationProjectName" value="Must be overriden" />
+	<property name="envConfigurationProjectName" value="Must be overridden if copyOverEnvContextFiles is true" />
+
+	<!-- Setup default property values. -->
+	<property name="javadocWorkingDir" value="../javadoc" />
+	<property name="qatConfidentialPrefix" value="QAT Confidential" />
+	<property name="binDir" value="../bin" />
+	<property name="srcDir" value="../src" />
+
+	<property name="projectBaseDir" value="${basedir}\.." />
+	<property name="destDir" value="${projectBaseDir}\dist" />
+
+	<property name="coreConfigurationProjectName" value="qat-configuration-core" />
+
+
+	<property name="buildWorkArea" value="${destDir}\buildWorkArea" />
+	<property name="warLibDir" value="${buildWorkArea}\warLib" />
+	<property name="warWebInfDir" value="${buildWorkArea}\web-inf" />
+	<property name="webContentDir" value="${buildWorkArea}\WebContent" />
+
+	<property name="spring.profiles.active" value="jboss" />
+	<property name="logDir" value="../logs" />
+	<property name="logFile" value="qat-sysmgmt-sample.log" />
+
+	<property name="libDir" value="../../../lib" />
+
+	<!-- IVY control properties. -->
+	<!-- Make sure ivyConfig is set prior to invoking these targets. -->
+	<!-- <property name="ivySettingsFile" value="${ivyConfigPath}/${ivySettingsFileName}"/> -->
+
+	<property name="ivySettingsFileName" value="ivysettings.xml" />
+	<property name="ivyFileName" value="ivy.xml" />
+	<property name="ivyJarLocation" value="${ivyConfigPath}/ivy-2.3.0.jar" />
+	<property name="ivyUseCacheOnly" value="false"/>
+
+	<!-- Define IVY tasks -->
+	<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant">
+		<classpath>
+			<pathelement location="${ivyJarLocation}" />
+		</classpath>
+	</taskdef>
+
+	<target name="mainBuild">
+		<property name="ivySettingsFile" value="${ivyConfigPath}/${ivySettingsFileName}" />
+
+		<antcall target="QAT.buildProject" />
+		<antcall target="QAT.buildJavadoc" />
+		<antcall target="QAT.publishProjectLocal" />
+	</target>
+
+	<target name="mainBuildWar">
+		<property name="ivySettingsFile" value="${ivyConfigPath}/${ivySettingsFileName}" />
+
+		<!-- <antcall target="QAT.buildProject" /> -->
+		<antcall target="QAT.cleanWarPre" />
+		<antcall target="QAT.getDependencies" />
+		<antcall target="QAT.buildWar" />
+		<antcall target="QAT.cleanWarPost" />
+	</target>
+
+	<target name="mainLocalBuildWar">
+		<property name="ivySettingsFile" value="${ivyConfigPath}/${ivySettingsFileName}" />
+
+		<!-- <antcall target="QAT.buildProject" /> -->
+		<antcall target="QAT.cleanWarPre" />
+		<antcall target="QAT.getDependencies" />
+
+		<antcall target="QAT.buildWar" />
+		<antcall target="QAT.cleanWarPost" />
+	</target>
+
+	<target name="mainPublish">
+
+		<property name="ivySettingsFile" value="${ivyConfigPath}/${ivySettingsFileName}" />
+
+		<!-- Configure IVY -->
+		<ivy:configure file="${ivySettingsFile}" />
+
+		<!-- Get some IVY properties. -->
+		<ivy:info file="${projectBaseDir}/build/${ivyFileName}" />
+
+		<antcall target="QAT.mainBuild">
+			<param name="createJavadoc" value="true" />
+			<param name="moduleName" value="${ivy.module}" />
+		</antcall>
+		<antcall target="QAT.publish" />
+	</target>
+
+	<!-- <target name="mainPublishOnly"> -->
+
+	<!-- <property name="ivySettingsFile" value="${ivyConfigPath}/${ivySettingsFileName}" /> -->
+
+	<!-- Configure IVY -->
+	<!-- <ivy:configure file="${ivySettingsFile}" /> -->
+
+	<!-- Get some IVY properties. -->
+	<!-- <ivy:info file="${ivyFile}" /> -->
+
+	<!-- <ivy:publish resolver="${publishResolver}" organisation="${ivy.organisation}" module="${ivy.module}" -->
+	<!-- status="${ivy.status}" update="true" overwrite="true" forcedeliver="true"> -->
+	<!-- <ivy:artifacts pattern="${artifactPattern}" /> -->
+	<!-- </ivy:publish> -->
+	<!-- </target> -->
+
+	<target name="mainIvyConfigureRetrievePublish">
+
+		<property name="ivySettingsFile" value="${ivyConfigPath}/${ivySettingsFileName}" />
+
+		<!-- Configure IVY -->
+		<ivy:configure file="${ivySettingsFile}" />
+
+		<ivy:retrieve file="${ivyFile}" pattern="[artifact].[ext]" />
+
+		<ivy:publish resolver="${publishResolver}" organisation="${ivy.organisation}" module="${ivy.module}"
+			status="release" update="true" overwrite="true" forcedeliver="true">
+			<ivy:artifacts pattern="${artifactPattern}" />
+		</ivy:publish>
+
+	</target>
+
+
+	<target name="mainPublishTrainingModule">
+
+		<property name="ivySettingsFile" value="${ivyConfigPath}/ivySettingsTraining.xml" />
+
+		<!-- Configure IVY -->
+		<ivy:configure file="${ivySettingsFile}" />
+
+		<!-- Get some IVY properties. -->
+		<ivy:info file="${projectBaseDir}/build/${ivyFileName}" />
+
+		<!-- Call build but do not build javadoc -->
+		<antcall target="QAT.mainBuild">
+			<param name="moduleName" value="${ivy.module}" />
+		</antcall>
+
+		<!-- Publish to user-id specific organization and the training repository. -->
+		<ivy:publish resolver="qat-training-release" organisation="${userId}" module="${ivy.module}"
+			status="release" update="true" overwrite="true" forcedeliver="true">
+			<ivy:artifacts pattern="${destDir}/[artifact]-[revision].[ext]" />
+		</ivy:publish>
+
+	</target>
+
+
+	<target name="publish">
+		<!-- Configure IVY -->
+		<ivy:configure file="${ivySettingsFile}" />
+
+		<!-- Get some IVY properties. -->
+		<ivy:info file="${projectBaseDir}/build/${ivyFileName}" />
+
+		<ivy:publish resolver="${publishResolver}" organisation="${ivy.organisation}" module="${ivy.module}"
+			status="release" update="true" overwrite="true" forcedeliver="true">
+			<ivy:artifacts pattern="${destDir}/[artifact]-[revision].[ext]" />
+		</ivy:publish>
+	</target>
+
+	<target name="publishProjectLocal" if="publishProjectLocal">
+		<!-- Configure IVY -->
+		<ivy:configure file="${ivySettingsFile}" />
+
+		<!-- Get some IVY properties. -->
+		<ivy:info file="${projectBaseDir}/build/${ivyFileName}" />
+
+		<ivy:publish resolver="my-local-repo" organisation="${ivy.organisation}" module="${ivy.module}"
+			status="release" update="true" overwrite="true" forcedeliver="true">
+			<ivy:artifacts pattern="${destDir}/[artifact]-[revision].[ext]" />
+		</ivy:publish>
+
+	</target>
+
+	<target name="cleanWarPre">
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset dir="${buildWorkArea}" includes="**/*" />
+		</delete>
+		<mkdir dir="${buildWorkArea}" />
+		<mkdir dir="${warLibDir}" />
+		<mkdir dir="${webContentDir}" />
+
+		<delete failonerror="false">
+			<fileset dir="${destDir}" />
+		</delete>
+	</target>
+
+	<target name="cleanWarPost" unless="noCleanWarPost">
+		<delete dir="${buildWorkArea}" includeemptydirs="true" failonerror="false" />
+	</target>
+	
+	<target name="trimWarLibDir" if="deleteFromWarLibList">
+		<delete verbose="true">
+			<fileset dir="${warLibDir}" includes="${deleteFromWarLibList}" />
+		</delete>
+	</target>
+
+	<target name="getDependencies">
+		<property name="ivySettingsFile" value="${ivyConfigPath}/${ivySettingsFileName}" />
+
+		<antcall target="QAT.obtainDependencies">
+			<param name="projectBaseDirectory" value="${projectDir}" />
+			<param name="retrieveDir" value="${warLibDir}" />
+		</antcall>
+
+	</target>
+
+	<target name="copyOverWebXml" unless="noCopyOverWebXml">
+
+		<copy file="${coreConfigurationDir}/conf/${coreConfigurationSubDir}/web.xml.template" tofile='${warWebInfDir}/web.xml'
+			filtering='true' overwrite='true'>
+			<filterset>
+				<filter token="REPLACEMEORFAIL" value="${spring.profiles.active}" />
+			</filterset>
+		</copy>
+
+	</target>
+
+	<target name="copyOverForJMS" if="includeJMS">
+
+		<copy todir='${warWebInfDir}/classes'>
+			<fileset dir="${coreConfigurationDir}/conf/jms/classes" includes="*.properties" />
+		</copy>
+
+	</target>
+
+	<target name="copyOverCoreLog4j">
+
+		<copy file="${coreConfigurationDir}/conf/${coreConfigurationSubDir}/classes/log4j.xml.template"
+			tofile='${warWebInfDir}/classes/log4j.xml' filtering='true' overwrite='true'>
+			<filterset>
+				<filter token="LOG_DIR" value="${logDir}" />
+				<filter token="LOG_FILE" value="${logFile}" />
+			</filterset>
+		</copy>
+
+	</target>
+
+	<target name="copyOverCoreContextFiles" unless="noCopyOverCoreContextFiles">
+		<copy todir='${warWebInfDir}/conf'>
+			<fileset dir="${coreConfigurationDir}/conf/${coreConfigurationSubDir}/conf" />
+		</copy>
+	</target>
+
+<!-- 	<target name="copyOverEnvContextFiles" if="copyOverEnvContextFiles"> -->
+<!-- 		<copy todir='${warWebInfDir}/classes'> -->
+<!-- 			<fileset dir="${envConfigurationDir}/conf" /> -->
+<!-- 		</copy> -->
+<!-- 	</target> -->
+
+	<target name="copyWebInfToWorkArea" unless="noCopyWebInfToWorkArea">
+		<copy todir='${warWebInfDir}'>
+			<fileset dir="${configurationProjectDir}/conf/web" />
+		</copy>
+	</target>
+
+	<target name="copyLocalWebContent" if="localWebContentDir">
+		<copy todir='${webContentDir}'>
+			<fileset dir="${localWebContentDir}" />
+		</copy>
+	</target>
+
+	<target name="copyLocalClasses" if="localClassesDir">
+		<copy todir='${warWebInfDir}/classes'>
+			<fileset dir="${localClassesDir}" />
+		</copy>
+	</target>
+
+	<target name="copyOverFilesForWar">
+		<antcall target="QAT.copyWebInfToWorkArea" />
+		<antcall target="QAT.copyOverWebXml" />
+		<antcall target="QAT.copyOverForJMS" />
+		<antcall target="QAT.copyLocalWebContent" />
+		<antcall target="QAT.copyLocalClasses" />
+		<antcall target="QAT.copyOverCoreLog4j" />
+		<antcall target="QAT.copyOverCoreContextFiles" />
+<!-- 		<antcall target="QAT.copyOverEnvContextFiles" /> -->
+	</target>
+
+	<target name="buildWar">
+
+		<property name="coreConfigurationDir" value="${projectBaseDir}\..\..\${coreConfigurationProjectName}" />
+
+		<property name="configurationProjectDir" value="${projectBaseDir}\..\${configurationProjectName}" />
+
+		<property name="envConfigurationDir" value="${projectBaseDir}\..\${envConfigurationProjectName}" />
+
+		<!-- set up work are with all the correct files. -->
+		<antcall target="QAT.copyOverFilesForWar" />
+
+		<mkdir dir="${warWebInfDir}/classes" />
+
+		<!-- Configure IVY -->
+		<ivy:configure file="${ivySettingsFile}" />
+
+		<!-- Get some IVY properties. -->
+		<ivy:info file="${projectBaseDir}/build/${ivyFileName}" />
+
+		<property name="warFileName" value="${destDir}/${moduleName}-${ivy.revision}.war" />
+
+		<!--  Remove a few unwanted jar files from the war lib. -->
+		<antcall target="QAT.trimWarLibDir">
+		</antcall>
+			
+		<war destfile="${warFileName}">
+			<webinf dir="${warWebInfDir}" />
+
+			<lib dir="${warLibDir}">
+				<exclude name="**/*javadoc*" />
+			</lib>
+
+			<fileset dir="${buildWorkArea}/WebContent" />
+
+			<!-- <classes dir="${warWebInfDir}/classes" /> -->
+		</war>
+	</target>
+
+	<target name="obtainDependencies">
+		<ivy:configure file="${ivySettingsFile}" />
+		<ivy:resolve file="${projectBaseDir}/build/${ivyFileName}" useCacheOnly="${ivyUseCacheOnly}" />
+		<ivy:retrieve pattern="${retrieveDir}/[artifact]-[revision].[ext]" />
+	</target>
+
+	<target name="buildProject">
+
+		<!-- Configure IVY -->
+		<ivy:configure file="${ivySettingsFile}" />
+
+		<!-- Resolve all the dependencies. -->
+		<ivy:resolve file="${projectBaseDir}/build/${ivyFileName}" useCacheOnly="${ivyUseCacheOnly}" />
+
+		<!-- Define the ivy cache location where all the dependent jars reside. -->
+		<ivy:cachepath pathid="ivy.path" />
+
+		<!-- Do some clean up. -->
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset dir="${destDir}" includes="**/*" />
+		</delete>
+		<mkdir dir="${destDir}" />
+
+
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset dir="${binDir}" includes="**/*" />
+		</delete>
+		<mkdir dir="${binDir}" />
+
+		<!-- Compile the source. -->
+		<echo message="Compiling the source" />
+		<javac srcdir="${srcDir}" debug="true" destdir="${binDir}" includeantruntime="false">
+			<classpath>
+				<path refid="ivy.path" />
+			</classpath>
+		</javac>
+
+		<property name="jarFileName" value="${destDir}/${moduleName}-${ivy.revision}.jar" />
+
+		<!-- Jar the class and source files. -->
+		<echo message="Jar Packaging into ${jarFileName}" />
+		<jar destfile="${jarFileName}">
+			<fileset dir="${binDir}" includes="**/com/**" />
+			<fileset dir="${srcDir}" excludes="**/bin/** **/dist/** **/build/** " />
+			<!-- <fileset dir="${srcDir}" excludes="**/bin/** **/dist/** **/build/** **/config/**" /> -->
+			<manifest>
+				<!-- Who is building this jar? -->
+				<attribute name="Built-By" value="${user.name}" />
+				<!-- Information about the program itself -->
+				<attribute name="Specification-Version" value="${ivy.revision}" />
+				<attribute name="Specification-Vendor" value="QAT" />
+				<attribute name="Implementation-Version" value="${ivy.revision}" />
+				<attribute name="Implementation-Vendor" value="QAT" />
+			</manifest>
+		</jar>
+
+	</target>
+
+	<target name="buildJavadoc" if="createJavadoc">
+
+		<!-- Get timestamp for javadoc. -->
+		<tstamp>
+			<format property="javaDocGenerateTimestamp" pattern="MM/dd/yyyy hh:mm aa" />
+			<format property="javaDocGenerateYear" pattern="yyyy" />
+		</tstamp>
+
+		<!-- Configure IVY -->
+		<ivy:configure file="${ivySettingsFile}" />
+
+		<!-- Resolve all the dependencies. -->
+		<ivy:resolve file="${projectBaseDir}/build/${ivyFileName}" log="quite" useCacheOnly="${ivyUseCacheOnly}" />
+
+		<!-- Define the ivy cache location where all the dependent jars reside. -->
+		<ivy:cachepath pathid="ivy.path" />
+
+		<!-- Create the javadoc. -->
+		<javadoc sourcepath="${srcDir}" destdir="${javadocWorkingDir}" classpathref="ivy.path"
+			source="1.6" Windowtitle="${moduleName}-javadoc created ${javaDocGenerateTimestamp}">
+
+			<bottom>
+				<![CDATA[<i>${qatConfidentialPrefix} &#169; Copyright ${javaDocGenerateYear} QA Technologies, Inc. All Rights Reserved.</i>]]></bottom>
+		</javadoc>
+
+		<property name="javadocFileName" value="${destDir}/${moduleName}-javadoc-${ivy.revision}.zip" />
+		<!-- Zip the javadoc. -->
+		<zip destfile="${javadocFileName}" basedir="${javadocWorkingDir}" />
+		<echo message="Javadoc zip'd into ${javadocFileName}" />
+
+		<!-- Final clean up of javadoc. -->
+		<delete dir="${javadocWorkingDir}" />
+
+	</target>
+
+</project>

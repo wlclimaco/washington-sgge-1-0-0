@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+
+	<!-- Update the organizsation attribute with your user id. -->
+	<info organisation="${userId}" module="qat-sample-complexmo-implementation" revision="0.0.1"
+		status="release" />
+
+	<publications>
+		<artifact name="qat-sample-complexmo-implementation" type="jar" ext="jar" />
+	</publications>
+
+	<dependencies>
+		<dependency org="qat" name="qat-framework-core" rev="latest.release" />
+		<dependency org="apache" name="commons-virtual" rev="latest.release" />
+
+		<dependency org="${userId}" name="qat-sample-complexmo-interface" rev="latest.revision" />
+	</dependencies>
+
+</ivy-module>

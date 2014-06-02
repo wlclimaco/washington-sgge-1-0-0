@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="ContactMap">
+	<!--
+		Result maps describe the mapping between the columns returned from a query, and the class properties.
+		
+		Note the use of property attributes that end in Value.  These are convenience properties provided 
+		by the model object so that usage of TypeHandlers for enums can be avoided here. 
+	-->
+	<resultMap id="ContactResult" type="Contact">
+		<result property="parentKey" column="con_parentkey" />
+		<result property="contactTypeValue" column="con_contact_type" />
+		<result property="priority" column="con_priority" />
+		<result property="verifiedValue" column="con_verified" />
+		<result property="effectiveStartDate" column="con_eff_start_date" />
+		<result property="effectiveEndDate" column="con_eff_end_date" />
+		<discriminator javaType="java.lang.Integer" column="con_contact_type">
+			<case value="1" resultMap="PhoneResult" />
+			<case value="2" resultMap="EMailResult" />			
+			<case value="3" resultMap="AddressResult" />
+			<case value="4" resultMap="PhoneResult" />
+			<case value="5" resultMap="EMailResult" />			
+			<case value="6" resultMap="AddressResult" />			
+		</discriminator>
+	</resultMap>
+
+	<resultMap id="AddressResult" type="Address" extends="ContactMap.ContactResult">
+		<result property="addressline1" column="addr_addressline1" />
+		<result property="addressline2" column="addr_addressline2" />		
+		<result property="city" column="addr_city" />
+		<result property="postalCode" column="addr_postal_code" />
+		<result property="note" column="addr_note" />
+		<result property="state" column="addr_state" jdbcType="VARCHAR" typeHandler="com.qat.samples.complexmo.dac.mybatis.MybatisStateTypeHandler" />		
+		<association property="county" column="addr_county"  javaType="County" select="CountyMap.fetchCountyByCode" />
+		<association property="country" column="addr_country"  javaType="Country" select="CountryMap.fetchCountryByCode" />
+	</resultMap>
+
+	<resultMap id="PhoneResult" type="Phone" extends="ContactMap.ContactResult">
+		<result property="countryCode" column="ph_country_code" />
+		<result property="areaCode" column="ph_area_code" />
+		<result property="number" column="ph_base_number" />
+		<result property="extension" column="ph_extension" />
+	</resultMap>
+	
+	<resultMap id="EMailResult" type="EMail" extends="ContactMap.ContactResult">
+		<result property="emailaddress" column="em_emailaddress" />
+	</resultMap>	
+
+	<!-- 
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements. 
+	-->
+	<sql id="allContactColumnsWithAlias">
+		con.parentkey as con_parentkey, con.contact_type as con_contact_type, con.priority as con_priority, con.verified as con_verified,
+		con.eff_start_date as con_eff_start_date, con.eff_end_date as con_eff_end_date
+  	</sql>
+
+	<sql id="allContactColumns">
+		parentkey, contact_type, priority, verified, eff_start_date, eff_end_date
+  	</sql>
+
+	<sql id="allAddressColumnsWithAlias">
+		addr.addressline1 as addr_addressline1,
+		addr.addressline2 as addr_addressline2,		
+		addr.city as addr_city, addr.state as addr_state, addr.postal_code as addr_postal_code,
+		addr.county as addr_county, addr.country as addr_country,
+		addr.note as addr_note
+  	</sql>
+
+	<sql id="allAddressColumns">
+		addressline1, addressline2, city, state, postal_code, county, country, note
+  	</sql>
+
+	<sql id="allPhoneColumnsWithAlias">
+		ph.country_code as ph_country_code, ph.area_code as ph_area_code, 
+		ph.base_number as ph_base_number, ph.extension as ph_extension
+  	</sql>
+
+	<sql id="allPhoneColumns">
+		country_code, area_code, base_number, extension 
+  	</sql>
+  	
+ 	<sql id="allEmailColumnsWithAlias">
+		em.emailaddress as em_emailaddress
+  	</sql>
+
+	<sql id="allEmailColumns">
+		emailaddress 
+  	</sql> 	
+
+	<select id="fetchAllContacts" resultMap="ContactResult">
+		SELECT
+		<include refid="allContactColumnsWithAlias" />
+		,
+		<include refid="allAddressColumnsWithAlias" />
+		,
+		<include refid="allPhoneColumnsWithAlias" />
+		,
+		<include refid="allEmailColumnsWithAlias" />			
+		FROM Contact con
+		LEFT OUTER JOIN Address addr ON con.parentkey = addr.parentkey AND con.contact_type = addr.contact_type
+		LEFT OUTER JOIN Phone ph ON con.parentkey = ph.parentkey AND con.contact_type = ph.contact_type
+		LEFT OUTER JOIN Email em ON	con.parentkey = em.parentkey AND con.contact_type = em.contact_type			
+	</select>
+
+	<select id="fetchContactsByPersonId" resultMap="ContactResult">
+		SELECT
+		<include refid="allContactColumnsWithAlias" />
+		,
+		<include refid="allAddressColumnsWithAlias" />
+		,
+		<include refid="allPhoneColumnsWithAlias" />
+		,
+		<include refid="allEmailColumnsWithAlias" />		
+		FROM Contact con
+		LEFT OUTER JOIN Address addr ON con.parentkey = addr.parentkey AND con.contact_type = addr.contact_type
+		LEFT OUTER JOIN Phone ph ON	con.parentkey = ph.parentkey AND con.contact_type = ph.contact_type
+		LEFT OUTER JOIN Email em ON	con.parentkey = em.parentkey AND con.contact_type = em.contact_type		
+		WHERE con.parentkey=#{value}
+	</select>
+
+	<!-- 
+		SQL Insert Statements.
+ 	-->
+	<insert id="InsertContact" parameterType="Contact">
+		INSERT INTO Contact ( 
+		<include refid="allContactColumns" />
+		)
+		VALUES( #{parentKey},
+			#{contactTypeValue},
+			#{priority},
+			#{verifiedValue},
+			#{effectiveStartDate},
+			#{effectiveEndDate}
+		)
+	</insert>
+
+	<insert id="InsertAddress" parameterType="Address">
+		INSERT INTO Address ( parentkey, contact_type,
+			<include refid="allAddressColumns" />
+		)
+		VALUES( #{parentKey}, #{contactTypeValue}, #{addressline1}, #{addressline2}, #{city}, #{state.code}, #{postalCode}, 
+		#{county.code}, #{country.code}, #{note} )
+	</insert>
+
+	<insert id="InsertPhone" parameterType="Phone">
+		INSERT INTO Phone ( parentkey, contact_type,
+		<include refid="allPhoneColumns" />
+		)
+		VALUES( #{parentKey}, #{contactTypeValue}, #{countryCode}, #{areaCode}, #{number}, #{extension})
+	</insert>
+	
+	<insert id="InsertEmail" parameterType="EMail">
+		INSERT INTO Email ( parentkey, contact_type,
+			<include refid="allEmailColumns" />
+		)
+		VALUES( #{parentKey}, #{contactTypeValue}, #{emailaddress} )
+	</insert>	
+
+	<update id="UpdateContact" parameterType="Contact">
+		UPDATE Contact
+		<set>
+			<if test="priority != null">priority = #{priority},</if>	
+			<if test="verified != null">verified = #{verifiedValue},</if>	
+			<if test="effectiveStartDate != null">eff_start_date = #{effectiveStartDate},</if>	
+			<if test="effectiveEndDate != null">eff_end_date = #{effectiveEndDate}</if>	
+		</set>
+		WHERE parentkey = #{parentKey} AND contact_type = #{contactTypeValue}
+	</update>
+
+	<update id="UpdateAddress" parameterType="Address">
+		UPDATE Address
+		<set>
+			<if test="addressline1 != null">addressline1 = #{addressline1},</if>		
+			<if test="addressline2 != null">addressline2 = #{addressline2},</if>		
+			<if test="city != null">city = #{city},</if>
+			<if test="state != null">state = #{state.code},</if>	
+			<if test="county != null">county = #{county.code},</if>	
+			<if test="country != null">country = #{country.code},</if>	
+			<if test="postalCode != null">postal_code = #{postalCode},</if>									
+			<if test="note != null">note = #{note}</if>	
+
+		</set>
+		WHERE parentkey = #{parentKey} AND contact_type = #{contactTypeValue}
+	</update>
+
+	<update id="UpdatePhone" parameterType="Phone">
+		UPDATE Phone
+		<set>
+			<if test="countryCode != null">country_code = #{countryCode},</if>	
+			<if test="areaCode != null">area_code = #{areaCode},</if>
+			<if test="number != null">base_number = #{number},</if>		
+			<if test="extension != null">extension = #{extension}</if>	
+		</set>
+		WHERE parentkey = #{parentKey} AND contact_type = #{contactTypeValue}
+	</update>
+	
+	<update id="UpdateEmail" parameterType="EMail">
+		UPDATE EMail
+		<set>
+			<if test="emailaddress != null">emailaddress = #{emailaddress}</if>			
+		</set>
+		WHERE parentkey = #{parentKey}  AND contact_type = #{contactTypeValue}
+	</update>	
+</mapper>
