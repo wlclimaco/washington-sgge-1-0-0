@@ -16,6 +16,7 @@
   		<typeAlias alias="Procedure" type="com.qat.samples.sysmgmt.model.Procedure"/>
   		<typeAlias alias="Bundle" type="com.qat.samples.sysmgmt.model.Bundle"/>
   		<typeAlias alias="PagedInquiryRequest" type="com.qat.samples.sysmgmt.model.request.PagedInquiryRequest"/>
+  		<typeAlias alias="Cidade" type="com.qat.samples.sysmgmt.cidade.model.Cidade"/>
   	</typeAliases>
 
  	<mappers>
@@ -23,6 +24,7 @@
      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/drug.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/procedure.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/bundle.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/cidade/dac/mybatis/map/cidade.xml"/>
     </mappers>
 
 </configuration>

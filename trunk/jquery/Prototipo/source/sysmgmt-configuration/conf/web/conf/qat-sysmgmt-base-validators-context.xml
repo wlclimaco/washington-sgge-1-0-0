@@ -50,4 +50,14 @@
 		</property>
 	</bean>
 
+	<bean id="CidadeValidator" class="com.qat.samples.sysmgmt.validation.CidadeValidator" />
+
+	<bean id="cidadeValidationController" class="com.qat.framework.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="CidadeValidator" />
+			</list>
+		</property>
+	</bean>
+
 </beans>

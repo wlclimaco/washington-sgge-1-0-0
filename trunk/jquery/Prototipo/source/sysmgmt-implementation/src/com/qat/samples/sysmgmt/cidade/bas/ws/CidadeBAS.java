@@ -2,124 +2,124 @@ package com.qat.samples.sysmgmt.cidade.bas.ws;
 
 import javax.jws.WebService;
 
-import com.qat.samples.sysmgmt.bai.IBundleBAI;
-import com.qat.samples.sysmgmt.bas.IBundleBAS;
-import com.qat.samples.sysmgmt.model.request.BundleMaintenanceRequest;
+import com.qat.samples.sysmgmt.cidade.bai.ICidadeBAI;
+import com.qat.samples.sysmgmt.cidade.bas.ICidadeBAS;
+import com.qat.samples.sysmgmt.cidade.model.request.CidadeMaintenanceRequest;
+import com.qat.samples.sysmgmt.cidade.model.response.CidadeResponse;
 import com.qat.samples.sysmgmt.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.RefreshRequest;
-import com.qat.samples.sysmgmt.model.response.BundleResponse;
 
 /**
  * Standard implementation of a BAS where the operations are delegated to a BAI.
  * Note the BAI is injected by Spring.
  */
 @WebService(targetNamespace = "http://qat.com/sysmgmt")
-public class CidadeBAS implements IBundleBAS
+public class CidadeBAS implements ICidadeBAS
 {
 
-	/** The bundle bai. */
-	private IBundleBAI bundleBAI; // injected by Spring through setter
+	/** The cidade bai. */
+	private ICidadeBAI cidadeBAI; // injected by Spring through setter
 
 	/**
-	 * Spring Sets the bundle bai.
+	 * Spring Sets the cidade bai.
 	 * 
-	 * @param bundleBAI the new bundle bai
+	 * @param cidadeBAI the new cidade bai
 	 */
-	public void setBundleBAI(IBundleBAI bundleBAI)
+	public void setCidadeBAI(ICidadeBAI cidadeBAI)
 	{
-		this.bundleBAI = bundleBAI;
+		this.cidadeBAI = cidadeBAI;
 	}
 
 	/**
-	 * Gets the bundle bac.
+	 * Gets the cidade bac.
 	 * 
-	 * @return the bundle bac
+	 * @return the cidade bac
 	 */
-	public IBundleBAI getBundleBAI()
+	public ICidadeBAI getCidadeBAI()
 	{
-		return bundleBAI;
+		return cidadeBAI;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.qat.samples.sysmgmt.bas.IBundleBAS#insertBundle(com.qat.samples.sysmgmt.model.request.BundleMaintenanceRequest
+	 * com.qat.samples.sysmgmt.bas.ICidadeBAS#insertCidade(com.qat.samples.sysmgmt.model.request.CidadeMaintenanceRequest
 	 * )
 	 */
 	@Override
-	public BundleResponse insertBundle(BundleMaintenanceRequest request)
+	public CidadeResponse insertCidade(CidadeMaintenanceRequest request)
 	{
-		return getBundleBAI().insertBundle(request);
+		return getCidadeBAI().insertCidade(request);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.qat.samples.sysmgmt.bas.IBundleBAS#updateBundle(com.qat.samples.sysmgmt.model.request.BundleMaintenanceRequest
+	 * com.qat.samples.sysmgmt.bas.ICidadeBAS#updateCidade(com.qat.samples.sysmgmt.model.request.CidadeMaintenanceRequest
 	 * )
 	 */
 	@Override
-	public BundleResponse updateBundle(BundleMaintenanceRequest request)
+	public CidadeResponse updateCidade(CidadeMaintenanceRequest request)
 	{
-		return getBundleBAI().updateBundle(request);
+		return getCidadeBAI().updateCidade(request);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.qat.samples.sysmgmt.bas.IBundleBAS#deleteBundle(com.qat.samples.sysmgmt.model.request.BundleMaintenanceRequest
+	 * com.qat.samples.sysmgmt.bas.ICidadeBAS#deleteCidade(com.qat.samples.sysmgmt.model.request.CidadeMaintenanceRequest
 	 * )
 	 */
 	@Override
-	public BundleResponse deleteBundle(BundleMaintenanceRequest request)
+	public CidadeResponse deleteCidade(CidadeMaintenanceRequest request)
 	{
-		return getBundleBAI().deleteBundle(request);
+		return getCidadeBAI().deleteCidade(request);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bas.IBundleBAS#refreshBundles(com.qat.samples.sysmgmt.model.request.RefreshRequest)
+	 * @see com.qat.samples.sysmgmt.bas.ICidadeBAS#refreshCidades(com.qat.samples.sysmgmt.model.request.RefreshRequest)
 	 */
 	@Override
-	public BundleResponse refreshBundles(RefreshRequest request)
+	public CidadeResponse refreshCidades(RefreshRequest request)
 	{
 		// This method is demo code only. Do not view this as a QAT Global Standard.
-		return getBundleBAI().refreshBundles(request);
+		return getCidadeBAI().refreshCidades(request);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.qat.samples.sysmgmt.bas.IBundleBAS#fetchAllBundles(com.qat.samples.sysmgmt.model.request.FetchAllRequest)
+	 * com.qat.samples.sysmgmt.bas.ICidadeBAS#fetchAllCidades(com.qat.samples.sysmgmt.model.request.FetchAllRequest)
 	 */
 	@Override
-	public BundleResponse fetchAllBundles(FetchAllRequest request)
+	public CidadeResponse fetchAllCidades(FetchAllRequest request)
 	{
-		return getBundleBAI().fetchAllBundles(request);
+		return getCidadeBAI().fetchAllCidades(request);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.qat.samples.sysmgmt.bas.IBundleBAS#fetchBundleById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
+	 * com.qat.samples.sysmgmt.bas.ICidadeBAS#fetchCidadeById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
 	 */
 	@Override
-	public BundleResponse fetchBundleById(FetchByIdRequest request)
+	public CidadeResponse fetchCidadeById(FetchByIdRequest request)
 	{
-		return getBundleBAI().fetchBundleById(request);
+		return getCidadeBAI().fetchCidadeById(request);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bas.IBundleBAS#fetchBundlesByRequest(com.qat.samples.sysmgmt.model.request.
+	 * @see com.qat.samples.sysmgmt.bas.ICidadeBAS#fetchCidadesByRequest(com.qat.samples.sysmgmt.model.request.
 	 * PagedInquiryRequest)
 	 */
 	@Override
-	public BundleResponse fetchBundlesByRequest(PagedInquiryRequest request)
+	public CidadeResponse fetchCidadesByRequest(PagedInquiryRequest request)
 	{
-		return getBundleBAI().fetchBundlesByRequest(request);
+		return getCidadeBAI().fetchCidadesByRequest(request);
 	}
 
 }

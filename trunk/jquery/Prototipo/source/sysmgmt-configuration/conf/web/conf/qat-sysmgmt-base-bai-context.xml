@@ -31,7 +31,7 @@
 
 	<bean id="cidadeBAI" class="com.qat.samples.sysmgmt.cidade.bai.impl.CidadeBAIImpl">
 		<property name="cidadeBAC" ref="cidadeBACTarget"/>
-		<property name="validationController" ref="bundleValidationController"/>
+		<property name="validationController" ref="cidadeValidationController"/>
 	</bean>
 
 

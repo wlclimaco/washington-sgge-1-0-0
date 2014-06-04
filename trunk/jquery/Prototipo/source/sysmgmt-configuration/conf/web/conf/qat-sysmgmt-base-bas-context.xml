@@ -88,14 +88,6 @@
 		</jaxrs:providers>
   	</jaxrs:server>
 
-  	<bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
-  	<jaxrs:server id="cidadeBASREST" address="/rest/CidadeService">
-  		<jaxrs:serviceBeans><ref bean="cidadeRESTBAS"/></jaxrs:serviceBeans>
-  		<jaxrs:providers>
-			<ref bean='jsonProvider' />
-		</jaxrs:providers>
-  	</jaxrs:server>
-
 	<!-- ========================= BAS DEFINITIONS Web Services======================== -->
 
 	<!-- this bean implements procedure bas methods -->
