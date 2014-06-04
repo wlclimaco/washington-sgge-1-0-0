@@ -7,101 +7,101 @@ import javax.jws.WebService;
 
 import org.apache.cxf.annotations.WSDLDocumentation;
 
-import com.qat.samples.sysmgmt.documento.model.request.DocumentoMaintenanceRequest;
-import com.qat.samples.sysmgmt.documento.model.response.DocumentoResponse;
+import com.qat.samples.sysmgmt.cidade.model.request.CidadeMaintenanceRequest;
+import com.qat.samples.sysmgmt.cidade.model.response.CidadeResponse;
 import com.qat.samples.sysmgmt.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.RefreshRequest;
 
 /**
- * The Interface IDocumentoBAS. (Business Area Service - BAS)
+ * The Interface ICidadeBAS. (Business Area Service - BAS)
  */
-@WebService(serviceName = "DocumentoService", targetNamespace = "http://qat.com/sysmgmt", portName = "DocumentoServicePort")
+@WebService(serviceName = "CidadeService", targetNamespace = "http://qat.com/sysmgmt", portName = "CidadeServicePort")
 public interface ICidadeBAS
 {
 
 	/**
-	 * Insert bundle.
+	 * Insert cidade.
 	 * 
 	 * @param request the request
 	 * 
-	 * @return the bundle response
+	 * @return the cidade response
 	 */
-	@WebMethod(action = "insertDocumento")
-	@WebResult(name = "insertDocumentoReturn")
-	@WSDLDocumentation(value = "Insert a bundle record and optionally returns a list of bundles.")
-	public DocumentoResponse insertDocumento(@WebParam(name = "request") DocumentoMaintenanceRequest request);
+	@WebMethod(action = "insertCidade")
+	@WebResult(name = "insertCidadeReturn")
+	@WSDLDocumentation(value = "Insert a cidade record and optionally returns a list of cidades.")
+	public CidadeResponse insertCidade(@WebParam(name = "request") CidadeMaintenanceRequest request);
 
 	/**
-	 * Update bundle.
+	 * Update cidade.
 	 * 
 	 * @param request the request
 	 * 
-	 * @return the bundle response
+	 * @return the cidade response
 	 */
-	@WebMethod(action = "updateDocumento")
-	@WebResult(name = "updateDocumentoReturn")
-	@WSDLDocumentation(value = "Updates the selected bundle record and optionally returns a list of bundles.")
-	public DocumentoResponse updateDocumento(@WebParam(name = "request") DocumentoMaintenanceRequest request);
+	@WebMethod(action = "updateCidade")
+	@WebResult(name = "updateCidadeReturn")
+	@WSDLDocumentation(value = "Updates the selected cidade record and optionally returns a list of cidades.")
+	public CidadeResponse updateCidade(@WebParam(name = "request") CidadeMaintenanceRequest request);
 
 	/**
-	 * Delete bundle.
+	 * Delete cidade.
 	 * 
 	 * @param request the request
 	 * 
-	 * @return the bundle response
+	 * @return the cidade response
 	 */
-	@WebMethod(action = "deleteDocumento")
-	@WebResult(name = "deleteDocumentoReturn")
-	@WSDLDocumentation(value = "Deletes a bundle record and optionally returns a list of bundles.")
-	public DocumentoResponse deleteDocumento(@WebParam(name = "request") DocumentoMaintenanceRequest request);
+	@WebMethod(action = "deleteCidade")
+	@WebResult(name = "deleteCidadeReturn")
+	@WSDLDocumentation(value = "Deletes a cidade record and optionally returns a list of cidades.")
+	public CidadeResponse deleteCidade(@WebParam(name = "request") CidadeMaintenanceRequest request);
 
 	/**
-	 * Fetch all bundles.
+	 * Fetch all cidades.
 	 * 
 	 * @param request the request
 	 * 
-	 * @return the bundle response
+	 * @return the cidade response
 	 */
-	@WebMethod(action = "fetchAllDocumentos")
-	@WebResult(name = "fetchAllDocumentosReturn")
-	@WSDLDocumentation(value = "Returns a complete list of all bundles.")
-	public DocumentoResponse fetchAllDocumentos(@WebParam(name = "request") FetchAllRequest request);
+	@WebMethod(action = "fetchAllCidades")
+	@WebResult(name = "fetchAllCidadesReturn")
+	@WSDLDocumentation(value = "Returns a complete list of all cidades.")
+	public CidadeResponse fetchAllCidades(@WebParam(name = "request") FetchAllRequest request);
 
 	/**
-	 * Fetch bundle by id.
+	 * Fetch cidade by id.
 	 * 
 	 * @param request the request
 	 * 
-	 * @return the bundle response
+	 * @return the cidade response
 	 */
-	@WebMethod(action = "fetchDocumentoById")
-	@WebResult(name = "fetchDocumentoByIdReturn")
-	@WSDLDocumentation(value = "Returns the desired bundle.")
-	public DocumentoResponse fetchDocumentoById(@WebParam(name = "request") FetchByIdRequest request);
+	@WebMethod(action = "fetchCidadeById")
+	@WebResult(name = "fetchCidadeByIdReturn")
+	@WSDLDocumentation(value = "Returns the desired cidade.")
+	public CidadeResponse fetchCidadeById(@WebParam(name = "request") FetchByIdRequest request);
 
 	/**
-	 * Refresh bundles.
+	 * Refresh cidades.
 	 * 
 	 * @param request the request
 	 * 
-	 * @return the bundle response
+	 * @return the cidade response
 	 */
-	@WebMethod(action = "refreshDocumentos")
-	@WebResult(name = "refreshDocumentosReturn")
-	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the bundle tables.")
-	public DocumentoResponse refreshDocumentos(@WebParam(name = "request") RefreshRequest request);
+	@WebMethod(action = "refreshCidades")
+	@WebResult(name = "refreshCidadesReturn")
+	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the cidade tables.")
+	public CidadeResponse refreshCidades(@WebParam(name = "request") RefreshRequest request);
 
 	/**
-	 * Fetch bundles by request.
+	 * Fetch cidades by request.
 	 * 
 	 * @param request the request
-	 * @return the bundle paged response
+	 * @return the cidade paged response
 	 */
-	@WebMethod(action = "fetchDocumentosByRequest")
-	@WebResult(name = "fetchDocumentosByRequestReturn")
-	@WSDLDocumentation(value = "Returns a list of bundles paged.")
-	public DocumentoResponse fetchDocumentosByRequest(@WebParam(name = "request") PagedInquiryRequest request);
+	@WebMethod(action = "fetchCidadesByRequest")
+	@WebResult(name = "fetchCidadesByRequestReturn")
+	@WSDLDocumentation(value = "Returns a list of cidades paged.")
+	public CidadeResponse fetchCidadesByRequest(@WebParam(name = "request") PagedInquiryRequest request);
 
 }

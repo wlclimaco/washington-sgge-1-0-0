@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="QATAppContext" class="com.qat.framework.util.QATAppContext" />
+
+	<bean id="cidadeBACTarget" class="com.qat.samples.sysmgmt.cidade.bac.impl.CidadeBACImpl">
+		<property name="cidadeDAC" ref="cidadeDACTarget" />
+	</bean>
+
+	<bean id="cidadeDACTarget" class="com.qat.samples.sysmgmt.unittest.bac.CidadeBACImplTest$MockCidadeDAC"></bean>
+</beans>
