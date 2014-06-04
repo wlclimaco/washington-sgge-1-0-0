@@ -24,7 +24,7 @@
      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/drug.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/procedure.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/bundle.xml"/>
-     	<mapper resource="com/qat/samples/sysmgmt/cidade/dac/mybatis/map/cidade.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/cidade.xml"/>
     </mappers>
 
 </configuration>
