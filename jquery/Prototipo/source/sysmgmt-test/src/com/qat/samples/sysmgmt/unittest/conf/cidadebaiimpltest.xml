@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="QATAppContext" class="com.qat.framework.util.QATAppContext"/>
+	<bean id="cidadeBAI" class="com.qat.samples.sysmgmt.cidade.bai.impl.CidadeBAIImpl">
+		<property name="cidadeBAC" ref="cidadeBACTarget"/>
+		<property name="validationController" ref="cidadeValidationController"/>
+	</bean>
+	<bean id="cidadeBACTarget" class="com.qat.samples.sysmgmt.unittest.bai.CidadeBAIImplTest$MockCidadeBAC">
+	</bean>
+</beans>
