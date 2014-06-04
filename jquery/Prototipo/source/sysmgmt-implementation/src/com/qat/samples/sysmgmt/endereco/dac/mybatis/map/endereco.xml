@@ -12,18 +12,18 @@
        necessary if the columns (or aliases) match to the properties
        exactly. -->
   <resultMap id="CidadeResult" type="Cidade">
-    <result property="id" column="cidade_id"/>
+    <result property="id" column="id"/>
     <result property="estado" column="estado"/>
     <result property="cidade" column="cidade"/>
     <result property="version" column="VERSN_LOCK_NUM"/>
   </resultMap>
 
   <sql id="allCidadeColumns">
-		cidade_id, estado, cidade,VERSN_LOCK_NUM
+		id, estado, cidade,VERSN_LOCK_NUM
   </sql>
 
   <sql id="allCidadeColumnsWithQualifier">
-		p.cidade_id, p.estado, p.cidade,p.VERSN_LOCK_NUM
+		p.id, p.estado, p.cidade,p.VERSN_LOCK_NUM
   </sql>
 
   <select id="fetchAllCidades" resultMap="CidadeResult">

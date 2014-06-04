@@ -59,6 +59,7 @@ public class CidadeDACImpl extends SqlSessionDaoSupport implements ICidadeDAC
 	@Override
 	public InternalResponse insertCidade(Cidade cidade)
 	{
+
 		InternalResponse response = new InternalResponse();
 		QATMyBatisDacHelper.doInsert(getSqlSession(), STMT_INSERT, cidade, response);
 		return response;
