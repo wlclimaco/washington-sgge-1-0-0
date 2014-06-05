@@ -8,6 +8,7 @@ import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.produto.bac.IProdutoBAC;
 import com.qat.samples.sysmgmt.produto.dac.IProdutoDAC;
+import com.qat.samples.sysmgmt.produto.model.Cadastro;
 import com.qat.samples.sysmgmt.produto.model.Produto;
 
 /**
@@ -159,6 +160,55 @@ public class ProdutoBACImpl implements IProdutoBAC
 	public InternalResultsResponse<Produto> fetchProdutosByRequest(PagedInquiryRequest request)
 	{
 		return getProdutoDAC().fetchProdutosByRequest(request);
+	}
+
+	@Override
+	public InternalResponse insertCadastro(Cadastro procedure)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResponse updateCadastro(Cadastro procedure)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResponse deleteCadastro(Cadastro procedure)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void refreshCadastros(Integer refreshNumber)
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public InternalResultsResponse<Cadastro> fetchCadastroById(FetchByIdRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Cadastro> fetchAllCadastros()
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Cadastro> fetchCadastrosByRequest(PagedInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
