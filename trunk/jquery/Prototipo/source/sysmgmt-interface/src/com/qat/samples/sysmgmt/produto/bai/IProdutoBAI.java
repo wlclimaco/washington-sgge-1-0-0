@@ -4,7 +4,9 @@ import com.qat.samples.sysmgmt.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.RefreshRequest;
+import com.qat.samples.sysmgmt.produto.model.request.CadastroMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.response.CadastroResponse;
 import com.qat.samples.sysmgmt.produto.model.response.ProdutoResponse;
 
 /**
@@ -68,5 +70,62 @@ public interface IProdutoBAI
 	 * @return the produto paged response
 	 */
 	public ProdutoResponse fetchProdutosByRequest(PagedInquiryRequest request);
+
+	// =======================
+	/**
+	 * Insert property.
+	 * 
+	 * @param request the request
+	 * @return the property paged response
+	 */
+	public CadastroResponse insertCadastro(CadastroMaintenanceRequest request);
+
+	/**
+	 * Update property.
+	 * 
+	 * @param request the request
+	 * @return the property paged response
+	 */
+	public CadastroResponse updateCadastro(CadastroMaintenanceRequest request);
+
+	/**
+	 * Delete property.
+	 * 
+	 * @param request the request
+	 * @return the property paged response
+	 */
+	public CadastroResponse deleteCadastro(CadastroMaintenanceRequest request);
+
+	/**
+	 * Fetch all propertys.
+	 * 
+	 * @param request the request
+	 * @return the property response
+	 */
+	public CadastroResponse fetchAllCadastros(FetchAllRequest request);
+
+	/**
+	 * Refresh propertys.
+	 * 
+	 * @param request the request
+	 * @return the property paged response
+	 */
+	public CadastroResponse refreshCadastros(RefreshRequest request);
+
+	/**
+	 * Fetch property by id.
+	 * 
+	 * @param request the request
+	 * @return the property response
+	 */
+	public CadastroResponse fetchCadastroById(FetchByIdRequest request);
+
+	/**
+	 * Fetch propertys by request.
+	 * 
+	 * @param request the request
+	 * @return the property paged response
+	 */
+	public CadastroResponse fetchCadastrosByRequest(PagedInquiryRequest request);
 
 }
