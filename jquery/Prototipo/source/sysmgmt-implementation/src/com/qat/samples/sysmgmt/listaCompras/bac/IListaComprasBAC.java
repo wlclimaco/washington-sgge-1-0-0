@@ -1,16 +1,15 @@
-package com.qat.samples.sysmgmt.produto.bac;
+package com.qat.samples.sysmgmt.listaCompras.bac;
 
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.listaCompras.model.ListaCompras;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
-import com.qat.samples.sysmgmt.produto.model.Cadastro;
-import com.qat.samples.sysmgmt.produto.model.Produto;
 
 /**
- * The Interface IProdutoBAC. (Business Area Component - BAC)
+ * The Interface IListaComprasBAC. (Business Area Component - BAC)
  */
-public interface IProdutoBAC
+public interface IListaComprasBAC
 {
 
 	/**
@@ -20,7 +19,7 @@ public interface IProdutoBAC
 	 * 
 	 * @return the internal response
 	 */
-	public InternalResponse insertProduto(Produto procedure);
+	public InternalResponse insertListaCompras(ListaCompras procedure);
 
 	/**
 	 * Update procedure.
@@ -29,7 +28,7 @@ public interface IProdutoBAC
 	 * 
 	 * @return the internal response
 	 */
-	public InternalResponse updateProduto(Produto procedure);
+	public InternalResponse updateListaCompras(ListaCompras procedure);
 
 	/**
 	 * Delete procedure.
@@ -38,7 +37,7 @@ public interface IProdutoBAC
 	 * 
 	 * @return the internal response
 	 */
-	public InternalResponse deleteProduto(Produto procedure);
+	public InternalResponse deleteListaCompras(ListaCompras procedure);
 
 	/**
 	 * Refresh procedures.
@@ -46,7 +45,7 @@ public interface IProdutoBAC
 	 * @param refreshNumber the value of the number of procedures you want refreshed
 	 * 
 	 */
-	public void refreshProdutos(Integer refreshNumber);
+	public void refreshListaComprass(Integer refreshNumber);
 
 	/**
 	 * Fetch procedure by id.
@@ -54,14 +53,14 @@ public interface IProdutoBAC
 	 * @param request the request
 	 * @return the internal results response
 	 */
-	public InternalResultsResponse<Produto> fetchProdutoById(FetchByIdRequest request);
+	public InternalResultsResponse<ListaCompras> fetchListaComprasById(FetchByIdRequest request);
 
 	/**
 	 * Fetch all procedures.
 	 * 
 	 * @return the internal results response< procedure>
 	 */
-	public InternalResultsResponse<Produto> fetchAllProdutos();
+	public InternalResultsResponse<ListaCompras> fetchAllListaComprass();
 
 	/**
 	 * Fetch procedures by request.
@@ -69,18 +68,11 @@ public interface IProdutoBAC
 	 * @param request the request
 	 * @return the internal results response
 	 */
-	public InternalResultsResponse<Produto> fetchProdutosByRequest(PagedInquiryRequest request);
+	public InternalResultsResponse<ListaCompras> fetchListaComprassByRequest(PagedInquiryRequest request);
 
-	// ==============
+	// ===================================
 
-	/**
-	 * Insert procedure.
-	 * 
-	 * @param procedure the procedure
-	 * 
-	 * @return the internal response
-	 */
-	public InternalResponse insertCadastro(Cadastro procedure);
+	public InternalResponse insertListaComprasItens(ListaCompras procedure);
 
 	/**
 	 * Update procedure.
@@ -89,7 +81,7 @@ public interface IProdutoBAC
 	 * 
 	 * @return the internal response
 	 */
-	public InternalResponse updateCadastro(Cadastro procedure);
+	public InternalResponse updateListaComprasItens(ListaCompras procedure);
 
 	/**
 	 * Delete procedure.
@@ -98,7 +90,7 @@ public interface IProdutoBAC
 	 * 
 	 * @return the internal response
 	 */
-	public InternalResponse deleteCadastro(Cadastro procedure);
+	public InternalResponse deleteListaComprasItens(ListaCompras procedure);
 
 	/**
 	 * Refresh procedures.
@@ -106,7 +98,7 @@ public interface IProdutoBAC
 	 * @param refreshNumber the value of the number of procedures you want refreshed
 	 * 
 	 */
-	public void refreshCadastros(Integer refreshNumber);
+	public void refreshListaComprasItenss(Integer refreshNumber);
 
 	/**
 	 * Fetch procedure by id.
@@ -114,14 +106,14 @@ public interface IProdutoBAC
 	 * @param request the request
 	 * @return the internal results response
 	 */
-	public InternalResultsResponse<Cadastro> fetchCadastroById(FetchByIdRequest request);
+	public InternalResultsResponse<ListaCompras> fetchListaComprasItensById(FetchByIdRequest request);
 
 	/**
 	 * Fetch all procedures.
 	 * 
 	 * @return the internal results response< procedure>
 	 */
-	public InternalResultsResponse<Cadastro> fetchAllCadastros();
+	public InternalResultsResponse<ListaCompras> fetchAllListaComprasItenss();
 
 	/**
 	 * Fetch procedures by request.
@@ -129,6 +121,6 @@ public interface IProdutoBAC
 	 * @param request the request
 	 * @return the internal results response
 	 */
-	public InternalResultsResponse<Cadastro> fetchCadastrosByRequest(PagedInquiryRequest request);
+	public InternalResultsResponse<ListaCompras> fetchListaComprasItenssByRequest(PagedInquiryRequest request);
 
 }

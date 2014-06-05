@@ -11,6 +11,7 @@ import com.qat.samples.sysmgmt.dacd.mybatis.PagedResultsDACD;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.produto.dac.IProdutoDAC;
+import com.qat.samples.sysmgmt.produto.model.Cadastro;
 import com.qat.samples.sysmgmt.produto.model.Produto;
 
 /**
@@ -138,4 +139,95 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 				response);
 		return response;
 	}
+
+	// ===============================
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.qat.samples.sysmgmt.base.dac.IProdutoDAC#insertProduto(com.qat.samples.sysmgmt.base.model.Produto)
+	 */
+	@Override
+	public InternalResponse insertCadastro(Cadastro produto)
+	{
+		InternalResponse response = new InternalResponse();
+		QATMyBatisDacHelper.doInsert(getSqlSession(), STMT_INSERT, produto, response);
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.qat.samples.sysmgmt.base.dac.ICadastroDAC#updateCadastro(com.qat.samples.sysmgmt.base.model.Cadastro)
+	 */
+	@Override
+	public InternalResponse updateCadastro(Cadastro produto)
+	{
+		InternalResponse response = new InternalResponse();
+		QATMyBatisDacHelper.doUpdateOL(getSqlSession(), STMT_UPDATE, produto, STMT_VERSION, response);
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.qat.samples.sysmgmt.base.dac.ICadastroDAC#deleteCadastro(com.qat.samples.sysmgmt.base.model.Cadastro)
+	 */
+	@Override
+	public InternalResponse deleteCadastro(Cadastro produto)
+	{
+		InternalResponse response = new InternalResponse();
+		QATMyBatisDacHelper.doRemove(getSqlSession(), STMT_DELETE, produto, response);
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.base.dac.ICadastroDAC#deleteAllCadastros()
+	 */
+	@Override
+	public InternalResponse deleteAllCadastros()
+	{
+		InternalResponse response = new InternalResponse();
+		QATMyBatisDacHelper.doRemove(getSqlSession(), STMT_DELETE_ALL, response);
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.qat.samples.sysmgmt.base.dac.ICadastroDAC#fetchCadastroById
+	 * (com.qat.samples.sysmgmt.base.model.Cadastro
+	 * )
+	 */
+	@Override
+	public Cadastro fetchCadastroById(FetchByIdRequest request)
+	{
+		return (Cadastro)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), STMT_FETCH, request.getFetchId());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.base.dac.ICadastroDAC#fetchAllCadastros()
+	 */
+	@Override
+	public List<Cadastro> fetchAllCadastros()
+	{
+		return QATMyBatisDacHelper.doQueryForList(getSqlSession(), STMT_FETCH_ALL);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.dac.ICadastroDAC#fetchCadastrosByRequest(com.qat.samples.sysmgmt.model.request.
+	 * CadastroInquiryRequest)
+	 */
+	@Override
+	public InternalResultsResponse<Cadastro> fetchCadastrosByRequest(PagedInquiryRequest request)
+	{
+		InternalResultsResponse<Cadastro> response = new InternalResultsResponse<Cadastro>();
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, STMT_FETCH_COUNT, STMT_FETCH_ALL_REQUEST,
+				response);
+		return response;
+	}
+
 }
