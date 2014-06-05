@@ -2,15 +2,15 @@ package com.qat.samples.sysmgmt.produto.model;
 
 import javax.xml.bind.annotation.XmlType;
 
-import com.qat.framework.model.QATModelOL;
+import com.qat.samples.sysmgmt.util.Util;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "Bundle", propOrder = {"id", "code", "description", "price"})
-public class Cadastro extends QATModelOL
+@XmlType(name = "Cadastro", propOrder = {"id", "type", "nome", "descricao"})
+public class Cadastro extends Util
 {
 
 	/** The id. */
@@ -48,6 +48,7 @@ public class Cadastro extends QATModelOL
 	 * 
 	 * @return the id
 	 */
+	@Override
 	public Integer getId()
 	{
 		return id;
@@ -58,6 +59,7 @@ public class Cadastro extends QATModelOL
 	 * 
 	 * @param id the id to set
 	 */
+	@Override
 	public void setId(Integer id)
 	{
 		this.id = id;

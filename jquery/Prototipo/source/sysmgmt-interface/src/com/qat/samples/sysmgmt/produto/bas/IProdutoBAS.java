@@ -11,7 +11,9 @@ import com.qat.samples.sysmgmt.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.RefreshRequest;
+import com.qat.samples.sysmgmt.produto.model.request.CadastroMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.response.CadastroResponse;
 import com.qat.samples.sysmgmt.produto.model.response.ProdutoResponse;
 
 /**
@@ -103,5 +105,89 @@ public interface IProdutoBAS
 	@WebResult(name = "fetchProdutosByRequestReturn")
 	@WSDLDocumentation(value = "Returns a list of produtos paged.")
 	public ProdutoResponse fetchProdutosByRequest(@WebParam(name = "request") PagedInquiryRequest request);
+
+	// ======================================================
+	/**
+	 * Insert produto.
+	 * 
+	 * @param request the request
+	 * 
+	 * @return the produto response
+	 */
+	@WebMethod(action = "insertCadastro")
+	@WebResult(name = "insertCadastroReturn")
+	@WSDLDocumentation(value = "Insert a produto record and optionally returns a list of produtos.")
+	public CadastroResponse insertCadastro(@WebParam(name = "request") CadastroMaintenanceRequest request);
+
+	/**
+	 * Update produto.
+	 * 
+	 * @param request the request
+	 * 
+	 * @return the produto response
+	 */
+	@WebMethod(action = "updateCadastro")
+	@WebResult(name = "updateCadastroReturn")
+	@WSDLDocumentation(value = "Updates the selected produto record and optionally returns a list of produtos.")
+	public CadastroResponse updateCadastro(@WebParam(name = "request") CadastroMaintenanceRequest request);
+
+	/**
+	 * Delete produto.
+	 * 
+	 * @param request the request
+	 * 
+	 * @return the produto response
+	 */
+	@WebMethod(action = "deleteCadastro")
+	@WebResult(name = "deleteCadastroReturn")
+	@WSDLDocumentation(value = "Deletes a produto record and optionally returns a list of produtos.")
+	public CadastroResponse deleteCadastro(@WebParam(name = "request") CadastroMaintenanceRequest request);
+
+	/**
+	 * Fetch all produtos.
+	 * 
+	 * @param request the request
+	 * 
+	 * @return the produto response
+	 */
+	@WebMethod(action = "fetchAllCadastros")
+	@WebResult(name = "fetchAllCadastrosReturn")
+	@WSDLDocumentation(value = "Returns a complete list of all produtos.")
+	public CadastroResponse fetchAllCadastros(@WebParam(name = "request") FetchAllRequest request);
+
+	/**
+	 * Fetch produto by id.
+	 * 
+	 * @param request the request
+	 * 
+	 * @return the produto response
+	 */
+	@WebMethod(action = "fetchCadastroById")
+	@WebResult(name = "fetchCadastroByIdReturn")
+	@WSDLDocumentation(value = "Returns the desired produto.")
+	public CadastroResponse fetchCadastroById(@WebParam(name = "request") FetchByIdRequest request);
+
+	/**
+	 * Refresh produtos.
+	 * 
+	 * @param request the request
+	 * 
+	 * @return the produto response
+	 */
+	@WebMethod(action = "refreshCadastros")
+	@WebResult(name = "refreshCadastrosReturn")
+	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the produto tables.")
+	public CadastroResponse refreshCadastros(@WebParam(name = "request") RefreshRequest request);
+
+	/**
+	 * Fetch produtos by request.
+	 * 
+	 * @param request the request
+	 * @return the produto paged response
+	 */
+	@WebMethod(action = "fetchCadastrosByRequest")
+	@WebResult(name = "fetchCadastrosByRequestReturn")
+	@WSDLDocumentation(value = "Returns a list of produtos paged.")
+	public CadastroResponse fetchCadastrosByRequest(@WebParam(name = "request") PagedInquiryRequest request);
 
 }

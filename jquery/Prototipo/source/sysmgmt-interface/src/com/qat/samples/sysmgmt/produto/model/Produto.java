@@ -10,7 +10,7 @@ import com.qat.framework.model.QATModelOL;
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "Bundle", propOrder = {"id", "code", "description", "price"})
+@XmlType(name = "Produto", propOrder = {"id", "marca", "menu", "submenu", "trimenu", "unimed"})
 public class Produto extends QATModelOL
 {
 
