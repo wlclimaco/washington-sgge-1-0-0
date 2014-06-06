@@ -11,7 +11,7 @@ import com.qat.framework.model.QATModelOL;
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "Bundle", propOrder = {"id", "code", "description", "price"})
+@XmlType(name = "Tabelapreco", propOrder = {"idProduto", "type", "preco", "dateIni", "dateFim"})
 public class Tabelapreco extends QATModelOL
 {
 

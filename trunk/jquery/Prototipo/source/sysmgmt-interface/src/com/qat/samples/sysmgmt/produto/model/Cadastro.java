@@ -4,7 +4,6 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.qat.samples.sysmgmt.util.Util;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Model Object Procedure.
  */
