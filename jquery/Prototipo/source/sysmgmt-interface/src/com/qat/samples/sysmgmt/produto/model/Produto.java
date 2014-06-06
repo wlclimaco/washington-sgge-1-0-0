@@ -10,12 +10,14 @@ import com.qat.framework.model.QATModelOL;
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "Produto", propOrder = {"id", "marca", "menu", "submenu", "trimenu", "unimed"})
+@XmlType(name = "Produto", propOrder = {"id", "marca", "menu", "submenu", "unimed", "trimenu", "nome", "descricao",
+		"foto",
+		"precos"})
 public class Produto extends QATModelOL
 {
 
 	/** The id. */
-	private String id;
+	private Integer id;
 
 	/** The code. */
 	private CadastroTypeEnum marca;
@@ -57,7 +59,7 @@ public class Produto extends QATModelOL
 	 * 
 	 * @return the id
 	 */
-	public String getId()
+	public Integer getId()
 	{
 		return id;
 	}
@@ -67,7 +69,7 @@ public class Produto extends QATModelOL
 	 * 
 	 * @param id the id to set
 	 */
-	public void setId(String id)
+	public void setId(Integer id)
 	{
 		this.id = id;
 	}

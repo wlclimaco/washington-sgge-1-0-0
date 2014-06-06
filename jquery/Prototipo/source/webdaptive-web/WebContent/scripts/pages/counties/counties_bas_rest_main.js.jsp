@@ -72,7 +72,8 @@ $.validator.setDefaults({
 		{
 		    onCountyDataLoading.notify({});
 		    var oData = new qat.model.fetchAllRequest(null);
-			rest_post_call('qat-sysmgmt-sample/services/rest/CountyService/fetchAllCounties', oData, fill_data, process_error);
+			//rest_post_call('qat-sysmgmt-sample/services/rest/CountyService/fetchAllCounties', oData, fill_data, process_error);
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos', {}, fill_data, process_error);
 		}
 
 		function fill_data(countyResponse)
