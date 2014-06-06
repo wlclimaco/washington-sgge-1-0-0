@@ -155,4 +155,28 @@
 	</aop:aspect>
  </aop:config>
 
+  <!-- County Cache -->
+  <bean id="produtoCacheAspect" class="com.qat.framework.aop.CacheAOP" >
+	<property name="cache">
+		<bean id="produtoEhCache" parent="sysMgmtCacheFactory">
+			<property name="cacheName" value="produtoCache" />
+		</bean>
+	</property>
+ </bean>
+ <!-- Bundle Cache -->
+  <aop:config>
+	<!-- Pointcuts -->
+	<aop:pointcut id="produtoCacheObject" expression="bean(produtoDACTarget) and execution(* fetch*(..)) and !execution(* fetchBundlesByRequest(..))" />
+	<aop:pointcut id="produtoFlushInsert" expression="bean(produtoDACTarget) and execution(* insert*(..))" />
+	<aop:pointcut id="produtoFlushUpdate" expression="bean(produtoDACTarget) and execution(* update*(..))" />
+	<aop:pointcut id="produtoFlushDelete" expression="bean(produtoDACTarget) and execution(* delete*(..))" />
+	<!-- Aspects -->
+	<aop:aspect id="procedureCacheAspects" ref="procedureCacheAspect">
+		<aop:around pointcut-ref="produtoCacheObject" method="cacheObject"/>
+		<aop:after pointcut-ref="produtoFlushInsert" method="flushCache" />
+		<aop:after pointcut-ref="produtoFlushUpdate" method="flushCache" />
+		<aop:after pointcut-ref="produtoFlushDelete" method="flushCache" />
+	</aop:aspect>
+ </aop:config>
+
 </beans>

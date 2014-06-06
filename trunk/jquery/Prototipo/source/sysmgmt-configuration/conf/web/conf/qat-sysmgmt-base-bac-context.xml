@@ -27,4 +27,8 @@
 		<property name="cidadeDAC" ref="cidadeDACTarget"/>
 	</bean>
 
+	<bean id="produtoBACTarget" class="com.qat.samples.sysmgmt.produto.bac.impl.ProdutoBACImpl">
+		<property name="produtoDAC" ref="produtoDACTarget"/>
+	</bean>
+
 </beans>

@@ -34,5 +34,10 @@
 		<property name="validationController" ref="cidadeValidationController"/>
 	</bean>
 
+	<bean id="produtoBAI" class="com.qat.samples.sysmgmt.produto.bai.impl.ProdutoBAIImpl">
+		<property name="produtoBAC" ref="produtoBACTarget"/>
+		<property name="validationController" ref="produtoValidationController"/>
+	</bean>
+
 
 </beans>
