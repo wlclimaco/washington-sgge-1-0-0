@@ -43,7 +43,7 @@
         		<entry key="insertBundle" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
         		<entry key="updateBundle" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
         		<entry key="refreshBundles" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
-        		
+
         		<entry key="fetchAllCidades" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
         		<entry key="fetchCidadeById" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
         		<entry key="fetchCidadesByRequest" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
@@ -51,6 +51,14 @@
         		<entry key="insertCidade" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
         		<entry key="updateCidade" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
         		<entry key="refreshCidades" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+
+        		<entry key="fetchAllProdutos" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchProdutoById" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchProdutosByRequest" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="deleteProduto" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="insertProduto" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="updateProduto" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="refreshProdutos" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
       		</map>
    		</property>
 	</bean>
@@ -86,8 +94,8 @@
       <sec:protect-pointcut
         expression="execution(* com.qat.samples.sysmgmt.bas.rest.CountyBAS.refreshCounties(*))"
         access="ROLE_DOMAIN ADMINS"/>
-        
-        
+
+
         <!-- ===================================== -->
         <sec:protect-pointcut
         expression="execution(* com.qat.samples.sysmgmt.cidade.bas.rest.CidadeBAS.fetchAllCidades(*))"
@@ -109,6 +117,29 @@
         access="ROLE_DOMAIN ADMINS"/>
       <sec:protect-pointcut
         expression="execution(* com.qat.samples.sysmgmt.cidade.bas.rest.CidadeBAS.refreshCidades(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+
+
+        <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS.fetchAllProdutos(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS.fetchProdutosByRequest(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS.fetchProdutoById(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS.deleteProduto(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS.insertProduto(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS.updateProduto(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS.refreshProdutos(*))"
         access="ROLE_DOMAIN ADMINS"/>
   	</sec:global-method-security>
 

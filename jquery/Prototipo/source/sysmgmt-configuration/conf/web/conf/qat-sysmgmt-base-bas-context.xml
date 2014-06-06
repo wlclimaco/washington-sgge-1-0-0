@@ -79,10 +79,27 @@
 		</jaxws:properties>
 	</jaxws:endpoint>
 
+	<jaxws:endpoint id="produtoBASWS" implementor="#produtoBAS" address="/ws/ProdutoService" >
+		<jaxws:inInterceptors>
+        	<ref bean="wsAuthenticationInterceptor"/>
+   			<ref bean="wsAuthorizationInterceptor"/>
+ 		</jaxws:inInterceptors>
+		<jaxws:properties>
+			<entry key="set-jaxb-validation-event-handler" value="false" />
+			<entry key="ws-security.validate.token" value="false" />
+		</jaxws:properties>
+	</jaxws:endpoint>
+
 	<!-- ========================= BAS DEFINITIONS REST Services======================== -->
 	<bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
   	<jaxrs:server id="countyBASREST" address="/rest/CountyService">
   		<jaxrs:serviceBeans><ref bean="countyRESTBAS"/></jaxrs:serviceBeans>
+  		<jaxrs:providers>
+			<ref bean='jsonProvider' />
+		</jaxrs:providers>
+	</jaxrs:server>
+  	<jaxrs:server id="produtoBASREST" address="/rest/ProdutoService">
+  		<jaxrs:serviceBeans><ref bean="produtoRESTBAS"/></jaxrs:serviceBeans>
   		<jaxrs:providers>
 			<ref bean='jsonProvider' />
 		</jaxrs:providers>
@@ -113,6 +130,10 @@
 		<property name="cidadeBAI" ref="cidadeBAI"/>
 	</bean>
 
+	<bean id="produtoBAS" class="com.qat.samples.sysmgmt.produto.bas.ws.ProdutoBAS">
+		<property name="produtoBAI" ref="produtoBAI"/>
+	</bean>
+
 	<!-- ========================= BAS DEFINITIONS REST Services======================== -->
 	<!-- this bean implements county bas methods -->
 	<bean id="countyRESTBAS" class="com.qat.samples.sysmgmt.bas.rest.CountyBAS">
@@ -121,5 +142,9 @@
 
 	<bean id="cidadeRESTBAS" class="com.qat.samples.sysmgmt.cidade.bas.rest.CidadeBAS">
 		<property name="cidadeBAI" ref="cidadeBAI"/>
+	</bean>
+
+	<bean id="produtoRESTBAS" class="com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS">
+		<property name="produtoBAI" ref="produtoBAI"/>
 	</bean>
 </beans>
