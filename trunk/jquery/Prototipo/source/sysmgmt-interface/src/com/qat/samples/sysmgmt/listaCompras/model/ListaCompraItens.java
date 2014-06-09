@@ -50,7 +50,7 @@ public class ListaCompraItens extends Util
 	 * (non-Javadoc)
 	 * @see com.qat.samples.sysmgmt.util.Util#getId()
 	 */
-	@Override
+
 	public Integer getId()
 	{
 		return id;
@@ -60,7 +60,7 @@ public class ListaCompraItens extends Util
 	 * (non-Javadoc)
 	 * @see com.qat.samples.sysmgmt.util.Util#setId(java.lang.Integer)
 	 */
-	@Override
+
 	public void setId(Integer id)
 	{
 		this.id = id;

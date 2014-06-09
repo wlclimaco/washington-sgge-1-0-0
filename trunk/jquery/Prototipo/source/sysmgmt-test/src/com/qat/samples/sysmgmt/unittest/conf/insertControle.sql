@@ -1,0 +1,12 @@
+INSERT INTO controle(controleid, data, usuarioid, acao, idAcao, tableType) values(1,'10/10/2013:21:59:59', 1,1,1,1);
+INSERT INTO controle(controleid, data, usuarioid, acao, idAcao, tableType) values(2,'10/10/2013:21:59:59', 1,2,1,1);
+INSERT INTO controle(controleid, data, usuarioid, acao, idAcao, tableType) values(3,'10/10/2013:21:59:59', 1,3,1,1);
+INSERT INTO controle(controleid, data, usuarioid, acao, idAcao, tableType) values(4,'10/10/2013:21:59:59', 1,4,1,1);
+INSERT INTO controle(controleid, data, usuarioid, acao, idAcao, tableType) values(5,'10/10/2013:21:59:59', 1,5,1,1);
+INSERT INTO controle(controleid, data, usuarioid, acao, idAcao, tableType) values(6,'10/10/2013:21:59:59', 1,1,1,1);
+INSERT INTO controle(controleid, data, usuarioid, acao, idAcao, tableType) values(7,'10/10/2013:21:59:59', 1,2,1,1);
+INSERT INTO controle(controleid, data, usuarioid, acao, idAcao, tableType) values(8,'10/10/2013:21:59:59', 1,3,1,1);
+INSERT INTO controle(controleid, data, usuarioid, acao, idAcao, tableType) values(9,'10/10/2013:21:59:59', 1,4,1,1);
+INSERT INTO controle(controleid, data, usuarioid, acao, idAcao, tableType) values(10,'10/10/2013:21:59:59', 1,5,1,1);
+INSERT INTO controle(controleid, data, usuarioid, acao, idAcao, tableType) values(11,'10/10/2013:21:59:59', 1,1,1,1);
+INSERT INTO controle(controleid, data, usuarioid, acao, idAcao, tableType) values(12, '10/10/2013:21:59:59', 1,1,1,1);

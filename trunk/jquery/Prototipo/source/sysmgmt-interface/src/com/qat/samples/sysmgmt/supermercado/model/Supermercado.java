@@ -4,29 +4,21 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlType;
 
-import com.qat.framework.model.QATModelOL;
 import com.qat.samples.sysmgmt.documento.model.Documento;
 import com.qat.samples.sysmgmt.endereco.model.Endereco;
+import com.qat.samples.sysmgmt.util.Util;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
 @XmlType(name = "Supermercado", propOrder = {"id", "code", "description", "price"})
-public class Supermercado extends QATModelOL
+public class Supermercado extends Util
 {
-
-	/** The id. */
-	private Integer id;
 
 	/** The code. */
 	private List<Endereco> enderecos;
-
-	/** The description. */
-	private String nome;
-
-	/** The price. */
-	private String razaoSocial;
 
 	/** The usuario. */
 	private String usuario;
@@ -49,16 +41,6 @@ public class Supermercado extends QATModelOL
 	public Supermercado()
 	{
 
-	}
-
-	/**
-	 * Instantiates a new bundle.
-	 * 
-	 * @param id the id
-	 */
-	public Supermercado(Integer id)
-	{
-		this.id = id;
 	}
 
 	/**
@@ -99,46 +81,6 @@ public class Supermercado extends QATModelOL
 	public void setEnderecos(List<Endereco> enderecos)
 	{
 		this.enderecos = enderecos;
-	}
-
-	/**
-	 * Gets the nome.
-	 * 
-	 * @return the nome
-	 */
-	public String getNome()
-	{
-		return nome;
-	}
-
-	/**
-	 * Sets the nome.
-	 * 
-	 * @param nome the nome to set
-	 */
-	public void setNome(String nome)
-	{
-		this.nome = nome;
-	}
-
-	/**
-	 * Gets the razao social.
-	 * 
-	 * @return the razaoSocial
-	 */
-	public String getRazaoSocial()
-	{
-		return razaoSocial;
-	}
-
-	/**
-	 * Sets the razao social.
-	 * 
-	 * @param razaoSocial the razaoSocial to set
-	 */
-	public void setRazaoSocial(String razaoSocial)
-	{
-		this.razaoSocial = razaoSocial;
 	}
 
 	/**
@@ -241,17 +183,54 @@ public class Supermercado extends QATModelOL
 		this.documentos = documentos;
 	}
 
+	/** The id. */
+	private Integer id;
+
+	/**
+	 * Instantiates a new supermercado.
+	 * 
+	 * @param id the id
+	 */
+	public Supermercado(Integer id)
+	{
+		super();
+		this.id = id;
+	}
+
+	/**
+	 * Instantiates a new supermercado.
+	 * 
+	 * @param id the id
+	 * @param enderecos the enderecos
+	 * @param usuario the usuario
+	 * @param senha the senha
+	 * @param email the email
+	 * @param site the site
+	 * @param documentos the documentos
+	 */
+	public Supermercado(Integer id, List<Endereco> enderecos, String usuario, String senha, String email, String site,
+			List<Documento> documentos)
+	{
+		super();
+		this.id = id;
+		this.enderecos = enderecos;
+		this.usuario = usuario;
+		this.senha = senha;
+		this.email = email;
+		this.site = site;
+		this.documentos = documentos;
+	}
+
 	/*
 	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	 * @see com.qat.samples.sysmgmt.util.Util#toString()
 	 */
 	@Override
 	public String toString()
 	{
-		return "Supermercado [getId()=" + getId() + ", getEnderecos()=" + getEnderecos() + ", getNome()=" + getNome()
-				+ ", getRazaoSocial()=" + getRazaoSocial() + ", getUsuario()=" + getUsuario() + ", getSenha()="
-				+ getSenha() + ", getEmail()=" + getEmail() + ", getSite()=" + getSite() + ", getDocumentos()="
-				+ getDocumentos() + ", toString()=" + super.toString() + "]";
+		return "Supermercado [getId()=" + getId() + ", getEnderecos()=" + getEnderecos() + ", getUsuario()="
+				+ getUsuario() + ", getSenha()=" + getSenha() + ", getEmail()=" + getEmail() + ", getSite()="
+				+ getSite() + ", getDocumentos()=" + getDocumentos() + ", toString()=" + super.toString() + "]";
 	}
 
 }

@@ -1,36 +1,21 @@
 package com.qat.samples.sysmgmt.util;
 
-import java.sql.Date;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlType;
 
 import com.qat.framework.model.QATModelOL;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "Foto", propOrder = {"id", "user", "local", "data", "tenantId", "acao"})
+@XmlType(name = "Util", propOrder = {"acessos"})
 public class Util extends QATModelOL
 {
 
-	/** The id. */
-	private Integer id;
-
-	/** The code. */
-	private String user;
-
-	/** The description. */
-	private String local;
-
-	/** The data. */
-	private Date data;
-
-	/** The tenant id. */
-	private Integer tenantId;
-
-	private AcaoTypeEnum acao;
+	/** The acessos. */
+	List<ControleAcess> acessos;
 
 	/**
 	 * Instantiates a new bundle.
@@ -41,131 +26,44 @@ public class Util extends QATModelOL
 	}
 
 	/**
-	 * Instantiates a new bundle.
+	 * Gets the acessos.
 	 * 
-	 * @param id the id
+	 * @return the acessos
 	 */
-	public Util(Integer id)
+	public List<ControleAcess> getAcessos()
 	{
-		this.id = id;
+		return acessos;
 	}
 
 	/**
-	 * Gets the id.
+	 * Sets the acessos.
 	 * 
-	 * @return the id
+	 * @param acessos the new acessos
 	 */
-	public Integer getId()
+	public void setAcessos(List<ControleAcess> acessos)
 	{
-		return id;
+		this.acessos = acessos;
 	}
 
 	/**
-	 * Sets the id.
+	 * Instantiates a new util.
 	 * 
-	 * @param id the id to set
+	 * @param acessos the acessos
 	 */
-	public void setId(Integer id)
+	public Util(List<ControleAcess> acessos)
 	{
-		this.id = id;
+		super();
+		this.acessos = acessos;
 	}
 
-	/**
-	 * Gets the code.
-	 * 
-	 * @return the code
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.framework.model.QATModel#toString()
 	 */
-	public String getUser()
-	{
-		return user;
-	}
-
-	/**
-	 * Sets the code.
-	 * 
-	 * @param user the new code
-	 */
-	public void setUser(String user)
-	{
-		this.user = user;
-	}
-
-	/**
-	 * Gets the description.
-	 * 
-	 * @return the description
-	 */
-	public String getLocal()
-	{
-		return local;
-	}
-
-	/**
-	 * Sets the description.
-	 * 
-	 * @param local the new description
-	 */
-	public void setLocal(String local)
-	{
-		this.local = local;
-	}
-
-	/**
-	 * Gets the data.
-	 * 
-	 * @return the data
-	 */
-	public Date getData()
-	{
-		return data;
-	}
-
-	/**
-	 * Sets the data.
-	 * 
-	 * @param data the new data
-	 */
-	public void setData(Date data)
-	{
-		this.data = data;
-	}
-
-	/**
-	 * Gets the tenant id.
-	 * 
-	 * @return the tenant id
-	 */
-	public Integer getTenantId()
-	{
-		return tenantId;
-	}
-
-	/**
-	 * Sets the tenant id.
-	 * 
-	 * @param tenantId the new tenant id
-	 */
-	public void setTenantId(Integer tenantId)
-	{
-		this.tenantId = tenantId;
-	}
-
-	public AcaoTypeEnum getAcao()
-	{
-		return acao;
-	}
-
-	public void setAcao(AcaoTypeEnum acao)
-	{
-		this.acao = acao;
-	}
-
 	@Override
 	public String toString()
 	{
-		return "Util [getId()=" + getId() + ", getUser()=" + getUser() + ", getLocal()=" + getLocal() + ", getData()="
-				+ getData() + ", getTenantId()=" + getTenantId() + ", getAcao()=" + getAcao() + ", toString()="
-				+ super.toString() + "]";
+		return "Util [getAcessos()=" + getAcessos() + ", toString()=" + super.toString() + "]";
 	}
 
 }

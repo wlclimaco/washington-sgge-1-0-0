@@ -1,26 +1,101 @@
 package com.qat.samples.sysmgmt.documento.model;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.xml.bind.annotation.XmlType;
 
-import com.qat.framework.model.QATModelOL;
+import com.qat.samples.sysmgmt.util.TableTypeEnum;
+import com.qat.samples.sysmgmt.util.Util;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
 @XmlType(name = "Documento", propOrder = {"id", "indentificacaos", "dateNascimento"})
-public class Documento extends QATModelOL
+public class Documento extends Util
 {
+
+	/** The id. */
+
+	private Integer documentoid;
 
 	/** The id. */
 	private Integer id;
 
 	/** The code. */
-	private List<Indentificacao> indentificacaos;
+	private String rgInc;
+
+	/** The cpf cnpj. */
+	private String cpfCnpj;
+
+	/** The nome. */
+	private String nome;
+
+	/** The razao. */
+	private String razao;
+
+	private TableTypeEnum tabela;
+
+	/**
+	 * Instantiates a new documento.
+	 * 
+	 * @param id the id
+	 * @param rgInc the rg inc
+	 * @param cpfCnpj the cpf cnpj
+	 * @param nome the nome
+	 * @param razao the razao
+	 * @param dateNascimento the date nascimento
+	 */
+	public Documento(Integer id, String rgInc, String cpfCnpj, String nome, String razao, Date dateNascimento)
+	{
+		super();
+		this.id = id;
+		this.rgInc = rgInc;
+		this.cpfCnpj = cpfCnpj;
+		this.nome = nome;
+		this.razao = razao;
+		this.dateNascimento = dateNascimento;
+	}
+
+	/**
+	 * Gets the nome.
+	 * 
+	 * @return the nome
+	 */
+	public String getNome()
+	{
+		return nome;
+	}
+
+	/**
+	 * Sets the nome.
+	 * 
+	 * @param nome the new nome
+	 */
+	public void setNome(String nome)
+	{
+		this.nome = nome;
+	}
+
+	/**
+	 * Gets the razao.
+	 * 
+	 * @return the razao
+	 */
+	public String getRazao()
+	{
+		return razao;
+	}
+
+	/**
+	 * Sets the razao.
+	 * 
+	 * @param razao the new razao
+	 */
+	public void setRazao(String razao)
+	{
+		this.razao = razao;
+	}
 
 	/** The description. */
 	private Date dateNascimento;
@@ -31,30 +106,6 @@ public class Documento extends QATModelOL
 	public Documento()
 	{
 		super();
-	}
-
-	/**
-	 * Instantiates a new documento.
-	 * 
-	 * @param id the id
-	 */
-	public Documento(Integer id)
-	{
-		super();
-		this.id = id;
-	}
-
-	/**
-	 * Instantiates a new documento.
-	 * 
-	 * @param id the id
-	 * @param indentificacaos the indentificacaos
-	 */
-	public Documento(Integer id, List<Indentificacao> indentificacaos)
-	{
-		super();
-		this.id = id;
-		this.indentificacaos = indentificacaos;
 	}
 
 	/**
@@ -70,7 +121,7 @@ public class Documento extends QATModelOL
 	/**
 	 * Sets the id.
 	 * 
-	 * @param id the id to set
+	 * @param id the new id
 	 */
 	public void setId(Integer id)
 	{
@@ -78,29 +129,49 @@ public class Documento extends QATModelOL
 	}
 
 	/**
-	 * Gets the indentificacaos.
+	 * Gets the code.
 	 * 
-	 * @return the indentificacaos
+	 * @return the code
 	 */
-	public List<Indentificacao> getIndentificacaos()
+	public String getRgInc()
 	{
-		return indentificacaos;
+		return rgInc;
 	}
 
 	/**
-	 * Sets the indentificacaos.
+	 * Sets the code.
 	 * 
-	 * @param indentificacaos the indentificacaos to set
+	 * @param rgInc the new code
 	 */
-	public void setIndentificacaos(List<Indentificacao> indentificacaos)
+	public void setRgInc(String rgInc)
 	{
-		this.indentificacaos = indentificacaos;
+		this.rgInc = rgInc;
 	}
 
 	/**
-	 * Gets the date nascimento.
+	 * Gets the cpf cnpj.
 	 * 
-	 * @return the dateNascimento
+	 * @return the cpf cnpj
+	 */
+	public String getCpfCnpj()
+	{
+		return cpfCnpj;
+	}
+
+	/**
+	 * Sets the cpf cnpj.
+	 * 
+	 * @param cpfCnpj the new cpf cnpj
+	 */
+	public void setCpfCnpj(String cpfCnpj)
+	{
+		this.cpfCnpj = cpfCnpj;
+	}
+
+	/**
+	 * Gets the description.
+	 * 
+	 * @return the description
 	 */
 	public Date getDateNascimento()
 	{
@@ -108,24 +179,130 @@ public class Documento extends QATModelOL
 	}
 
 	/**
-	 * Sets the date nascimento.
+	 * Sets the description.
 	 * 
-	 * @param dateNascimento the dateNascimento to set
+	 * @param dateNascimento the new description
 	 */
 	public void setDateNascimento(Date dateNascimento)
 	{
 		this.dateNascimento = dateNascimento;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	/**
+	 * Instantiates a new documento.
+	 * 
+	 * @param id the id
+	 * @param rgInc the rg inc
+	 * @param cpfCnpj the cpf cnpj
+	 * @param dateNascimento the date nascimento
 	 */
+	public Documento(Integer id, String rgInc, String cpfCnpj, Date dateNascimento)
+	{
+		super();
+		this.id = id;
+		this.rgInc = rgInc;
+		this.cpfCnpj = cpfCnpj;
+		this.dateNascimento = dateNascimento;
+	}
+
+	/**
+	 * Instantiates a new documento.
+	 * 
+	 * @param id the id
+	 * @param rgInc the rg inc
+	 * @param cpfCnpj the cpf cnpj
+	 */
+	public Documento(Integer id, String rgInc, String cpfCnpj)
+	{
+		super();
+		this.id = id;
+		this.rgInc = rgInc;
+		this.cpfCnpj = cpfCnpj;
+	}
+
+	/**
+	 * Gets the id.
+	 * 
+	 * @return the id
+	 */
+	public Integer getDocumenroid()
+	{
+		return documentoid;
+	}
+
+	/**
+	 * Sets the id.
+	 * 
+	 * @param documenroid the new id
+	 */
+	public void setDocumenroid(Integer documenroid)
+	{
+		this.documentoid = documenroid;
+	}
+
+	/**
+	 * Instantiates a new documento.
+	 * 
+	 * @param documenroid the documenroid
+	 * @param id the id
+	 * @param rgInc the rg inc
+	 * @param cpfCnpj the cpf cnpj
+	 * @param nome the nome
+	 * @param razao the razao
+	 * @param dateNascimento the date nascimento
+	 */
+	public Documento(Integer documenroid, Integer id, String rgInc, String cpfCnpj, String nome, String razao,
+			Date dateNascimento)
+	{
+		super();
+		this.documentoid = documenroid;
+		this.id = id;
+		this.rgInc = rgInc;
+		this.cpfCnpj = cpfCnpj;
+		this.nome = nome;
+		this.razao = razao;
+		this.dateNascimento = dateNascimento;
+	}
+
+	public TableTypeEnum getTabela()
+	{
+		return tabela;
+	}
+
+	/**
+	 * Methods that follow the naming pattern get.....Value() provide convenience for returning the primitive value of
+	 * an enum. For example, database mapping of an enum to a database column could make use of this method.
+	 * 
+	 * @return the table type value
+	 */
+	public Integer getTableTypeValue()
+	{
+		return tabela.getValue();
+	}
+
+	/**
+	 * Methods that follow the naming pattern set.....Value(argValue) provide convenience for assigning the primitive
+	 * value of an enum. For example, database mapping of an database column to an enum could make use of this method.
+	 * 
+	 * @param cadastroTypeValue the new table type value
+	 */
+	public void setTableTypeValue(Integer cadastroTypeValue)
+	{
+		tabela = TableTypeEnum.enumForValue(cadastroTypeValue);
+	}
+
+	public void setTabela(TableTypeEnum tabela)
+	{
+		this.tabela = tabela;
+	}
+
 	@Override
 	public String toString()
 	{
-		return "Documento [getId()=" + getId() + ", getIndentificacaos()=" + getIndentificacaos()
-				+ ", getDateNascimento()=" + getDateNascimento() + ", toString()=" + super.toString() + "]";
+		return "Documento [getNome()=" + getNome() + ", getRazao()=" + getRazao() + ", getId()=" + getId()
+				+ ", getRgInc()=" + getRgInc() + ", getCpfCnpj()=" + getCpfCnpj() + ", getDateNascimento()="
+				+ getDateNascimento() + ", getDocumenroid()=" + getDocumenroid() + ", getTabela()=" + getTabela()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }
