@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ControleAcessMap">
+
+
+  <!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="ControleAcessResult" type="ControleAcess">
+    <result property="controleid" column="controleid"/>
+    <result property="data" column="data"/>
+    <result property="tenantId" column="usuarioid"/>
+    <result property="acaoTypeValue" column="acao"/>
+    <result property="acaoId" column="idAcao"/>
+    <result property="tableTypeValue" column="tableType"/>
+  </resultMap>
+
+  <sql id="allControleAcessColumns">
+            controleid, data, usuarioid, acao, idAcao, tableType
+  </sql>
+
+   <sql id="allControleAcessColumnsWithQualifier">
+            p.controleid, p.data, p.usuarioid, p.acao,p.idAcao, p.tableType
+  </sql>
+   <select id="fetchAllControleBySupermercado" resultMap="ControleAcessResult">
+   		 SELECT <include refid="allControleAcessColumns" /> FROM CONTROLE WHERE tabletype = 1 AND IDACAO = #{ID}
+   </select>
+  <select id="fetchAllControleAcesss" resultMap="ControleAcessResult">
+    SELECT
+    <include refid="allControleAcessColumns" />
+    FROM CONTROLE ORDER BY CONTROLEID ASC
+  </select>
+
+    <select id="fetchControleAcessByProduto" parameterType="Integer" resultMap="ControleAcessResult">
+	    SELECT
+	    <include refid="allControleAcessColumns" />
+	    FROM CONTROLE WHERE idAcao = #{value} and tableType = 2 ORDER BY CONTROLEID ASC
+    </select>
+
+  <select id="fetchAllControleAcesssPagedBatch" resultMap="ControleAcessResult">
+  	<if test="_databaseId == 'Oracle'">
+		SELECT * FROM (
+		SELECT * FROM (
+		SELECT <include refid="allControleAcessColumnsWithQualifier" />,
+		ROWNUM ROWNUM_ FROM CONTROLE p ORDER BY CONTROLEID ASC
+		) WHERE ROWNUM_ <![CDATA[ > ]]>
+		( #{_page} * #{_pagesize} )
+		) WHERE ROWNUM <![CDATA[ <= ]]>
+		#{_pagesize}mo
+    </if>
+
+   	 <if test="_databaseId == 'PostgreSQL'">
+		SELECT <include refid="allControleAcessColumns" />
+   		  FROM CONTROLE ORDER BY CONTROLEID ASC
+		  OFFSET ( #{_page} * #{_pagesize} )
+		  LIMIT #{_pagesize}
+    </if>
+  </select>
+
+  <select id="fetchControleAcessRowCount" resultType="Integer">
+      <if test="_databaseId == 'PostgreSQL'">
+			SELECT COUNT(*) AS RECORD_COUNT FROM CONTROLE WHERE CONTROLEID IS NOT NULL
+      </if>
+
+   	  <if test="_databaseId == 'Oracle'">
+		 	SELECT COUNT(CONTROLEID) AS RECORD_COUNT FROM CONTROLE
+      </if>
+  </select>
+
+  <select id="fetchAllControleAcesssRequest" parameterType="PagedInquiryRequest" resultMap="ControleAcessResult">
+  	<if test="_databaseId == 'Oracle'">
+		SELECT * FROM (
+		SELECT * FROM (
+		SELECT <include refid="allControleAcessColumnsWithQualifier" />,
+		ROWNUM ROWNUM_ FROM CONTROLE p ORDER BY CONTROLEID ASC
+		) WHERE ROWNUM_ <![CDATA[ > ]]>
+		( #{startPage} * #{pageSize} )
+		) WHERE ROWNUM <![CDATA[ <= ]]>
+		#{pageSize}
+    </if>
+
+   	 <if test="_databaseId == 'PostgreSQL'">
+		SELECT <include refid="allControleAcessColumns" />
+   		  FROM CONTROLE ORDER BY CONTROLEID ASC
+		  OFFSET ( #{startPage} * #{pageSize} )
+		  LIMIT #{pageSize}
+    </if>
+  </select>
+
+  <select id="fetchControleAcessById" parameterType="Integer" resultMap="ControleAcessResult">
+    SELECT
+   <include refid="allControleAcessColumns" />
+    FROM CONTROLE WHERE CONTROLEID = #{fetchid}
+  </select>
+
+  <select id="fetchControleAcessByType" parameterType="ControleAcess" resultMap="ControleAcessResult">
+    SELECT
+   <include refid="allControleAcessColumns" />
+    FROM CONTROLE WHERE TABLETYPE = #{tableTypeValue}
+  </select>
+
+  <select id="fetchControleAcessByAcao" parameterType="Integer" resultMap="ControleAcessResult">
+    SELECT
+   <include refid="allControleAcessColumns" />
+    FROM CONTROLE WHERE IDACAO = #{value}
+  </select>
+
+  <insert id="insertControleAcess" parameterType="ControleAcess">
+   	<selectKey resultType="int" keyProperty="id" order="BEFORE">
+  	 	<if test="_databaseId == 'Oracle'">
+			SELECT BUNDLE_SEQ.nextval AS id FROM DUAL
+    	</if>
+  	 	<if test="_databaseId == 'PostgreSQL'">
+			SELECT nextval('controle_controleid_seq') AS id
+    	</if>
+	</selectKey>
+  	INSERT INTO CONTROLE (
+		controleid, data, usuarioid, acao, idAcao, tableType )
+    VALUES ( #{controleid} , #{data} , #{userId} , #{acaoTypeValue},#{acaoId} , #{tableTypeValue} )
+  </insert>
+
+
+</mapper>

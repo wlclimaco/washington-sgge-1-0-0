@@ -4,123 +4,212 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="CidadeMap">
+<mapper namespace="ProdutoMap">
 
 
   <!-- Result maps describe the mapping between the columns returned
        from a query, and the class properties.  A result map isn't
        necessary if the columns (or aliases) match to the properties
-       exactly. -->
-  <resultMap id="CidadeResult" type="Cidade">
-    <result property="id" column="id"/>
-    <result property="estado" column="estado"/>
-    <result property="cidade" column="cidade"/>
-    <result property="version" column="VERSN_LOCK_NUM"/>
+       exactly. produtoid, codbarra, nome, marca, menu, submenu, trimenu, unimed,
+            precoid, controleid, foto, supermercadoid-->
+  <resultMap id="ProdutoResult" type="Produto">
+    <result property="id" column="produtoid"/>
+    <result property="codBarra" column="codbarra"/>
+    <result property="nome" column="nome"/>
+    <result property="descricao" column="descricao"/>
+    <result property="foto" column="foto"/>
+    <association property="marca" column="marca" javaType="Cadastro" select="fetchMarcaByCode" />
+    <association property="menu" column="menu" javaType="Cadastro" select="fetchMenuByCode" />
+    <association property="submenu" column="submenu" javaType="Cadastro" select="fetchSubMenuByCode" />
+    <association property="trimenu" column="trimenu" javaType="Cadastro" select="fetchTriMenuByCode" />
+    <association property="unimed" column="unimed" javaType="Cadastro" select="fetchUniMedByCode" />
+    <collection property="precos" column="produtoid" select="fetchPrecoByProduto" />
+    <collection property="acessos" column="produtoid" select="ControleAcessMap.fetchControleAcessByProduto" />
   </resultMap>
 
-  <sql id="allCidadeColumns">
-		id, estado, cidade,VERSN_LOCK_NUM
+   <resultMap id="CadastroResult" type="Cadastro">
+    <result property="id" column="cadastroid"/>
+    <result property="cadastroTypeValue" column="acao"/>
+    <result property="nome" column="nome"/>
+    <result property="descricao" column="descricao"/>
+    <result property="controleid" column="controleid"/>
+    <collection property="acessos" column="cadastroid" select="ControleAcessMap.fetchControleAcessByAcao" />
+  </resultMap>
+
+    <resultMap id="PrecoResult" type="Tabelapreco">
+    <result property="precoid" column="precoid"/>
+    <result property="idProduto" column="produtoid"/>
+    <result property="date" column="data"/>
+    <result property="preco" column="preco"/>
+    <result property="precopromo" column="precopromo"/>
+    <result property="promocao" column="promocao"/>
+    <result property="dateIni" column="dataini"/>
+    <result property="dateFim" column="datafin"/>
+    <association property="supermercadoid" column="supermercadoid" javaType="Supermercado" select="SupermercadoMap.fetchSupermercadoById" />
+    <collection property="acessos" column="cadastroid" select="ControleAcessMap.fetchControleAcessByAcao" />
+  </resultMap>
+
+
+
+  <sql id="allPrecoColumns">
+		precoid, produtoid, supermercadoid, data, preco, precopromo, promocao, dataini, datafin
   </sql>
 
-  <sql id="allCidadeColumnsWithQualifier">
-		p.id, p.estado, p.cidade,p.VERSN_LOCK_NUM
+  <sql id="allCadastroColumns">
+		cadastroid, acao, nome,descricao
   </sql>
 
-  <select id="fetchAllCidades" resultMap="CidadeResult">
+  <sql id="allCadastroColumnsWithQualifier">
+		p.cadastroid, p.acao, p.nome,p.descricao
+  </sql>
+
+<sql id="allProdutoColumns">
+		PRODUTOID, CODBARRA, NOME, MARCA, MENU, SUBMENU, TRIMENU, UNIMED,PRECOID, CONTROLEID, FOTO, SUPERMERCADOID
+  </sql>
+
+  <sql id="allProdutoColumnsWithQualifier">
+		p.PRODUTOID, p.CODBARRA, p.NOME, p.MARCA, p.MENU, p.SUBMENU, p.TRIMENU, p.UNIMED,
+            p.PRECOID, p.CONTROLEID, p.FOTO, p.SUPERMERCADOID
+  </sql>
+
+
+
+     <select id="fetchPrecoByProduto" parameterType="int" resultMap="PrecoResult">
+	    SELECT
+	    <include refid="allPrecoColumns" />
+	    FROM preco where precoid = #{id}  ORDER BY date ASC
+    </select>
+
+    <select id="fetchMarcaByCode" parameterType="int" resultMap="CadastroResult">
+	    SELECT
+	    <include refid="allCadastroColumns" />
+	    FROM cadastro where acao = 1 and cadastroid = #{id}  ORDER BY ID ASC
+    </select>
+
+    <select id="fetchMenuByCode" parameterType="int" resultMap="CadastroResult">
+	    SELECT
+	    <include refid="allCadastroColumns" />
+	    FROM cadastro where acao = 2 and cadastroid = #{id}  ORDER BY ID ASC
+    </select>
+
+    <select id="fetchSubMenuByCode" parameterType="int" resultMap="CadastroResult">
+	    SELECT
+	    <include refid="allCadastroColumns" />
+	    FROM cadastro where acao = 3 and cadastroid = #{id}  ORDER BY ID ASC
+    </select>
+
+    <select id="fetchTriMenuByCode" parameterType="int" resultMap="CadastroResult">
+	    SELECT
+	    <include refid="allCadastroColumns" />
+	    FROM cadastro where acao = 4 and cadastroid = #{id}  ORDER BY ID ASC
+    </select>
+
+    <select id="fetchUniMedByCode" parameterType="int" resultMap="CadastroResult">
+	    SELECT
+	    <include refid="allCadastroColumns" />
+	    FROM cadastro where acao = 5 and cadastroid = #{id}  ORDER BY ID ASC
+    </select>
+
+  <select id="fetchAllCadastro" parameterType="Cadastro" resultMap="CadastroResult">
     SELECT
-    <include refid="allCidadeColumns" />
-    FROM CIDADE ORDER BY CIDADE_ID ASC
+    <include refid="allCadastroColumns" />
+    FROM cadastro where acao = #{cadastroTypeValue}} ORDER BY ID ASC
   </select>
 
-  <select id="fetchAllCidadesPagedBatch" resultMap="CidadeResult">
-  	<if test="_databaseId == 'Oracle'">
-		SELECT * FROM (
-		SELECT * FROM (
-		SELECT <include refid="allCidadeColumnsWithQualifier" />,
-		ROWNUM ROWNUM_ FROM CIDADE p ORDER BY CIDADE_ID ASC
-		) WHERE ROWNUM_ <![CDATA[ > ]]>
-		( #{_page} * #{_pagesize} )
-		) WHERE ROWNUM <![CDATA[ <= ]]>
-		#{_pagesize}mo
-    </if>
+   <select id="fetchAllProduto" parameterType="Produto" resultMap="ProdutoResult">
+    SELECT
+    <include refid="allProdutoColumns" />
+    FROM produto  ORDER BY ID ASC
+  </select>
 
-   	 <if test="_databaseId == 'PostgreSQL'">
-		SELECT <include refid="allCidadeColumns" />
-   		  FROM CIDADE ORDER BY CIDADE_ID ASC
+  <select id="fetchAllCadastroPagedBatch" parameterType="Cadastro" resultMap="CadastroResult">
+
+		SELECT <include refid="allCadastroColumns" />
+   		  FROM cadastro where acao =  #{cadastroTypeValue} ORDER BY cadastroid ASC
 		  OFFSET ( #{_page} * #{_pagesize} )
 		  LIMIT #{_pagesize}
-    </if>
   </select>
 
-  <select id="fetchCidadeRowCount" resultType="Integer">
-      <if test="_databaseId == 'PostgreSQL'">
-			SELECT COUNT(*) AS RECORD_COUNT FROM CIDADE WHERE CIDADE IS NOT NULL
-      </if>
+   <select id="fetchAllProdutoPagedBatch" parameterType="Produto" resultMap="ProdutoResult">
 
-   	  <if test="_databaseId == 'Oracle'">
-		 	SELECT COUNT(CIDADE_ID) AS RECORD_COUNT FROM CIDADE
-      </if>
+		SELECT <include refid="allProdutoColumns" />
+   		  FROM produto  ORDER BY id ASC
+		  OFFSET ( #{_page} * #{_pagesize} )
+		  LIMIT #{_pagesize}
   </select>
 
-  <select id="fetchAllCidadesRequest" parameterType="PagedInquiryRequest" resultMap="CidadeResult">
-  	<if test="_databaseId == 'Oracle'">
-		SELECT * FROM (
-		SELECT * FROM (
-		SELECT <include refid="allCidadeColumnsWithQualifier" />,
-		ROWNUM ROWNUM_ FROM CIDADE p ORDER BY CIDADE_ID ASC
-		) WHERE ROWNUM_ <![CDATA[ > ]]>
-		( #{startPage} * #{pageSize} )
-		) WHERE ROWNUM <![CDATA[ <= ]]>
-		#{pageSize}
-    </if>
+  <select id="fetchCadastroRowCount" parameterType="CadastroInquiryRequest" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM CADASTRO WHERE ACAO =  #{cadastro.cadastroTypeValue}
+  </select>
 
-   	 <if test="_databaseId == 'PostgreSQL'">
-		SELECT <include refid="allCidadeColumns" />
-   		  FROM CIDADE ORDER BY CIDADE_ID ASC
+  <select id="fetchProdutoRowCount" parameterType="ProdutoInquiryRequest" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM PRODUTO
+  </select>
+
+  <select id="fetchAllCadastrosRequest" parameterType="CadastroInquiryRequest" resultMap="CadastroResult">
+		SELECT <include refid="allCadastroColumns" />
+   		  FROM cadastro where acao =  #{cadastro.cadastroTypeValue} ORDER BY cadastroid ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
-    </if>
   </select>
 
-  <select id="fetchCidadeById" parameterType="Integer" resultMap="CidadeResult">
+  <select id="fetchAllProdutosRequest" parameterType="ProdutoInquiryRequest" resultMap="ProdutoResult">
+		SELECT <include refid="allProdutoColumns" />
+   		  FROM PRODUTO ORDER BY id ASC
+		  OFFSET ( #{startPage} * #{pageSize} )
+		  LIMIT #{pageSize}
+  </select>
+
+
+  <select id="fetchCadastroById" parameterType="Cadastro" resultMap="CadastroResult">
     SELECT
-   <include refid="allCidadeColumns" />
-    FROM CIDADE WHERE CIDADE_ID = #{fetchid}
+   <include refid="allCadastroColumns" />
+     FROM cadastro where acao =  #{cadastroTypeValue} AND cadastroid = #{id}
   </select>
 
-  <select id="fetchVersionNumber" parameterType="Cidade" resultType="int">
-	SELECT VERSN_LOCK_NUM FROM CIDADE WHERE CIDADE_ID = #{id}
+   <select id="fetchProdutoById" parameterType="Produto" resultMap="ProdutoResult">
+    SELECT
+   <include refid="allProdutoColumns" />
+     FROM PRODUTO where cadastroid = #{id}
   </select>
 
-  <insert id="insertCidade" parameterType="Cidade">
-   	<selectKey resultType="int" keyProperty="id" order="BEFORE">
-  	 	<if test="_databaseId == 'Oracle'">
-			SELECT CIDADE_SEQ.nextval AS id FROM DUAL
-    	</if>
-  	 	<if test="_databaseId == 'PostgreSQL'">
-			SELECT nextval('cidade_cidade_id_seq') AS id
-    	</if>
-	</selectKey>
-  	INSERT INTO CIDADE (
-      CIDADE_ID,
-      ESTADO,
-      CIDADE)
-    VALUES ( #{id} , #{estado} , #{cidade})
-  </insert>
 
-  <update id="updateCidade" parameterType="Cidade">
-    UPDATE CIDADE SET
-      cidade = #{code},
-      estado = #{description}
+  <select id="insertCadastro" parameterType="Produto" resultType="int" statementType="CALLABLE">
+        { call ins_cadastro( #{descricao}, #{nome},#{cadastroTypeValue} ) }
+
+  </select>
+
+  <select id="insertProduto" parameterType="Produto" resultType="int" statementType="CALLABLE">
+        { call ins_cadastro( #{descricao}, #{nome},#{cadastroTypeValue} ) }
+
+  </select>
+
+  <update id="updateCadastro" parameterType="Cadastro">
+    UPDATE CADASTRO SET
+      nome = #{nome},
+      descricao = #{descricao}
     WHERE
-      CIDADE_ID = #{id} AND VERSN_LOCK_NUM = #{version}
+      cadastroid = #{id}
   </update>
 
-  <delete id="deleteCidadeById" parameterType="Cidade">
-    DELETE FROM CIDADE WHERE CIDADE_ID = #{id}
+  <select id="updateProduto" parameterType="Produto" resultType="int" statementType="CALLABLE">
+        { call upd_cadastro( #{descricao}, #{nome},#{cadastroTypeValue} ) }
+
+  </select>
+
+  <delete id="deleteCadastroById" parameterType="Cadastro">
+    DELETE FROM CADASTRO WHERE ID = #{id}
   </delete>
 
-  <delete id="deleteAllCidades">
-	DELETE FROM CIDADE
+  <delete id="deleteAllCadastros">
+	DELETE FROM cADASTRO
+  </delete>
+
+  <delete id="deleteProdutoById" parameterType="Produto">
+    DELETE FROM PRODUTO WHERE ID = #{id}
+  </delete>
+
+  <delete id="deleteAllProdutos">
+	DELETE FROM PRODUTO
   </delete>
 </mapper>
