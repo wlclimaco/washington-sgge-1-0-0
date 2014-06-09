@@ -4,40 +4,44 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="CidadeMap">
+<mapper namespace="SupermercadoMap">
 
 
   <!-- Result maps describe the mapping between the columns returned
        from a query, and the class properties.  A result map isn't
        necessary if the columns (or aliases) match to the properties
        exactly. -->
-  <resultMap id="CidadeResult" type="Cidade">
-    <result property="id" column="id"/>
-    <result property="estado" column="estado"/>
-    <result property="cidade" column="cidade"/>
-    <result property="version" column="VERSN_LOCK_NUM"/>
+  <resultMap id="SupermercadoResult" type="Supermercado">
+    <result property="id" column="supermercadoid"/>
+    <result property="usuario" column="usuario"/>
+    <result property="senha" column="senha"/>
+    <result property="site" column="site"/>
+    <result property="email" column="email"/>
+    <collection property="documentos" column="supermercadoid" select="DocumentoMap.fetchAllDocumentosBySupermercado" />
+    <collection property="enderecos" column="supermercadoid" select="EnderecoAcessMap.fetchAllEnderecosBySupermercado" />
+    <collection property="acessos" column="supermercadoid" select="ControleAcessMap.fetchAllControleBySupermercado" />
   </resultMap>
 
-  <sql id="allCidadeColumns">
-		id, estado, cidade,VERSN_LOCK_NUM
+  <sql id="allSupermercadoColumns">
+		 supermercadoid, usuario, email, site, controleid, senha
   </sql>
 
-  <sql id="allCidadeColumnsWithQualifier">
-		p.id, p.estado, p.cidade,p.VERSN_LOCK_NUM
+  <sql id="allSupermercadoColumnsWithQualifier">
+		p.supermercadoid, p.usuario, p.email, p.site, p.controleid, p.senha
   </sql>
 
-  <select id="fetchAllCidades" resultMap="CidadeResult">
+  <select id="fetchAllSupermercados" resultMap="SupermercadoResult">
     SELECT
-    <include refid="allCidadeColumns" />
-    FROM CIDADE ORDER BY CIDADE_ID ASC
+    <include refid="allSupermercadoColumns" />
+    FROM SUPERMERCADO ORDER BY SUPERMERCADOID ASC
   </select>
 
-  <select id="fetchAllCidadesPagedBatch" resultMap="CidadeResult">
+  <select id="fetchAllSupermercadosPagedBatch" resultMap="SupermercadoResult">
   	<if test="_databaseId == 'Oracle'">
 		SELECT * FROM (
 		SELECT * FROM (
-		SELECT <include refid="allCidadeColumnsWithQualifier" />,
-		ROWNUM ROWNUM_ FROM CIDADE p ORDER BY CIDADE_ID ASC
+		SELECT <include refid="allSupermercadoColumnsWithQualifier" />,
+		ROWNUM ROWNUM_ FROM SUPERMERCADO p ORDER BY SUPERMERCADOID ASC
 		) WHERE ROWNUM_ <![CDATA[ > ]]>
 		( #{_page} * #{_pagesize} )
 		) WHERE ROWNUM <![CDATA[ <= ]]>
@@ -45,29 +49,29 @@
     </if>
 
    	 <if test="_databaseId == 'PostgreSQL'">
-		SELECT <include refid="allCidadeColumns" />
-   		  FROM CIDADE ORDER BY CIDADE_ID ASC
+		SELECT <include refid="allSupermercadoColumns" />
+   		  FROM SUPERMERCADO ORDER BY SUPERMERCADOID ASC
 		  OFFSET ( #{_page} * #{_pagesize} )
 		  LIMIT #{_pagesize}
     </if>
   </select>
 
-  <select id="fetchCidadeRowCount" resultType="Integer">
+  <select id="fetchSupermercadoRowCount" resultType="Integer">
       <if test="_databaseId == 'PostgreSQL'">
-			SELECT COUNT(*) AS RECORD_COUNT FROM CIDADE WHERE CIDADE IS NOT NULL
+			SELECT COUNT(*) AS RECORD_COUNT FROM SUPERMERCADO WHERE SUPERMERCADO IS NOT NULL
       </if>
 
    	  <if test="_databaseId == 'Oracle'">
-		 	SELECT COUNT(CIDADE_ID) AS RECORD_COUNT FROM CIDADE
+		 	SELECT COUNT(SUPERMERCADOID) AS RECORD_COUNT FROM SUPERMERCADO
       </if>
   </select>
 
-  <select id="fetchAllCidadesRequest" parameterType="PagedInquiryRequest" resultMap="CidadeResult">
+  <select id="fetchAllSupermercadosRequest" parameterType="PagedInquiryRequest" resultMap="SupermercadoResult">
   	<if test="_databaseId == 'Oracle'">
 		SELECT * FROM (
 		SELECT * FROM (
-		SELECT <include refid="allCidadeColumnsWithQualifier" />,
-		ROWNUM ROWNUM_ FROM CIDADE p ORDER BY CIDADE_ID ASC
+		SELECT <include refid="allSupermercadoColumnsWithQualifier" />,
+		ROWNUM ROWNUM_ FROM SUPERMERCADO p ORDER BY SUPERMERCADOID ASC
 		) WHERE ROWNUM_ <![CDATA[ > ]]>
 		( #{startPage} * #{pageSize} )
 		) WHERE ROWNUM <![CDATA[ <= ]]>
@@ -75,52 +79,36 @@
     </if>
 
    	 <if test="_databaseId == 'PostgreSQL'">
-		SELECT <include refid="allCidadeColumns" />
-   		  FROM CIDADE ORDER BY CIDADE_ID ASC
+		SELECT <include refid="allSupermercadoColumns" />
+   		  FROM SUPERMERCADO ORDER BY SUPERMERCADOID ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
     </if>
   </select>
 
-  <select id="fetchCidadeById" parameterType="Integer" resultMap="CidadeResult">
+  <select id="fetchSupermercadoById" parameterType="Integer" resultMap="SupermercadoResult">
     SELECT
-   <include refid="allCidadeColumns" />
-    FROM CIDADE WHERE CIDADE_ID = #{fetchid}
+   <include refid="allSupermercadoColumns" />
+    FROM SUPERMERCADO WHERE SUPERMERCADOID = #{fetchid}
   </select>
 
-  <select id="fetchVersionNumber" parameterType="Cidade" resultType="int">
-	SELECT VERSN_LOCK_NUM FROM CIDADE WHERE CIDADE_ID = #{id}
+  <select id="fetchVersionNumber" parameterType="Supermercado" resultType="int">
+	SELECT VERSN_LOCK_NUM FROM SUPERMERCADO WHERE SUPERMERCADOID = #{id}
   </select>
 
-  <insert id="insertCidade" parameterType="Cidade">
-   	<selectKey resultType="int" keyProperty="id" order="BEFORE">
-  	 	<if test="_databaseId == 'Oracle'">
-			SELECT CIDADE_SEQ.nextval AS id FROM DUAL
-    	</if>
-  	 	<if test="_databaseId == 'PostgreSQL'">
-			SELECT nextval('cidade_cidade_id_seq') AS id
-    	</if>
-	</selectKey>
-  	INSERT INTO CIDADE (
-      CIDADE_ID,
-      ESTADO,
-      CIDADE)
-    VALUES ( #{id} , #{estado} , #{cidade})
-  </insert>
+  <select id="insertSupermercado" parameterType="Supermercado" resultType="int" statementType="CALLABLE">
+        { call ins_supermercado( #{usuario}, #{email},#{site},#{senha},#{logradouro},  #{bairro}, #{estado}, #{cidade}, #{numero}, #{cep}, #{nome}, #{complemento},#{usuarioid}, #{rginscmuni},  #{cpfcnpj}, #{razao}) }
+  </select>
 
-  <update id="updateCidade" parameterType="Cidade">
-    UPDATE CIDADE SET
-      cidade = #{code},
-      estado = #{description}
-    WHERE
-      CIDADE_ID = #{id} AND VERSN_LOCK_NUM = #{version}
-  </update>
+   <select id="updateSupermercado" parameterType="Supermercado" resultType="int" statementType="CALLABLE">
+        { call upd_supermercado( #{supermercadoid},#{usuario}, #{email},#{site},#{senha},#{enderecoid},#{id},#{logradouro},  #{bairro}, #{estado}, #{cidade}, #{numero}, #{cep}, #{nome}, #{complemento},#{documentoid},#{usuarioid}, #{rginscmuni},  #{cpfcnpj}, #{razao}) }
+  </select>
 
-  <delete id="deleteCidadeById" parameterType="Cidade">
-    DELETE FROM CIDADE WHERE CIDADE_ID = #{id}
+  <delete id="deleteSupermercadoById" parameterType="Supermercado">
+    DELETE FROM SUPERMERCADO WHERE SUPERMERCADOID = #{id}
   </delete>
 
-  <delete id="deleteAllCidades">
-	DELETE FROM CIDADE
+  <delete id="deleteAllSupermercados">
+	DELETE FROM SUPERMERCADO
   </delete>
 </mapper>

@@ -18,7 +18,8 @@ public final class PagedResultsDACD extends SqlSessionDaoSupport
 	/** The Constant ZERO. */
 	private static final int ZERO = 0;
 
-	public static void fetchObjectsByRequest(SqlSession sqlSession, PagedInquiryRequest request, String countStatement, String fetchPagedStatement,
+	public static void fetchObjectsByRequest(SqlSession sqlSession, PagedInquiryRequest request, String countStatement,
+			String fetchPagedStatement,
 			InternalResultsResponse<?> response)
 	{
 
@@ -26,7 +27,8 @@ public final class PagedResultsDACD extends SqlSessionDaoSupport
 		if (request.isPreQueryCount())
 		{
 			// set the total rows available in the response
-			response.getResultsSetInfo().setTotalRowsAvailable((Integer)QATMyBatisDacHelper.doQueryForObject(sqlSession, countStatement, request));
+			response.getResultsSetInfo().setTotalRowsAvailable(
+					(Integer)QATMyBatisDacHelper.doQueryForObject(sqlSession, countStatement, request));
 
 			if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO)
 			{
@@ -44,7 +46,8 @@ public final class PagedResultsDACD extends SqlSessionDaoSupport
 		// move request page size to response page size
 		response.getResultsSetInfo().setPageSize(request.getPageSize());
 
-		// calculate correct startPage for more rows available comparison, since it is zero based, we have to offset by 1.
+		// calculate correct startPage for more rows available comparison, since it is zero based, we have to offset by
+		// 1.
 		int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
 
 		// set moreRowsAvailable in response based on total rows compared to (page size * start page)

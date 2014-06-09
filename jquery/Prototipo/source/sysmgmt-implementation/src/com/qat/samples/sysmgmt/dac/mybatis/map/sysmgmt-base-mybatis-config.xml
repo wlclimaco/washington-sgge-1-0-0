@@ -16,7 +16,16 @@
   		<typeAlias alias="Procedure" type="com.qat.samples.sysmgmt.model.Procedure"/>
   		<typeAlias alias="Bundle" type="com.qat.samples.sysmgmt.model.Bundle"/>
   		<typeAlias alias="PagedInquiryRequest" type="com.qat.samples.sysmgmt.model.request.PagedInquiryRequest"/>
+  		<typeAlias alias="CadastroInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest"/>
+  		<typeAlias alias="ProdutoInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest"/>
   		<typeAlias alias="Cidade" type="com.qat.samples.sysmgmt.cidade.model.Cidade"/>
+  		<typeAlias alias="Produto" type="com.qat.samples.sysmgmt.produto.model.Produto"/>
+  		<typeAlias alias="Cadastro" type="com.qat.samples.sysmgmt.produto.model.Cadastro"/>
+  		<typeAlias alias="ControleAcess" type="com.qat.samples.sysmgmt.util.ControleAcess"/>
+  		<typeAlias alias="Documento" type="com.qat.samples.sysmgmt.documento.model.Documento"/>
+  		<typeAlias alias="Endereco" type="com.qat.samples.sysmgmt.endereco.model.Endereco"/>
+  		<typeAlias alias="Supermercado" type="com.qat.samples.sysmgmt.supermercado.model.Supermercado"/>
+  		<typeAlias alias="Tabelapreco" type="com.qat.samples.sysmgmt.produto.model.Tabelapreco"/>
   	</typeAliases>
 
  	<mappers>
@@ -25,6 +34,11 @@
      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/procedure.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/bundle.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/cidade.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/produto.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/controleAcess.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/endereco.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/documento.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/supermercado/dac/mybatis/map/supermercado.xml"/>
     </mappers>
 
 </configuration>

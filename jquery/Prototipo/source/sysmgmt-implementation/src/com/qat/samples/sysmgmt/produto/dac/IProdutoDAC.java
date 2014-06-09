@@ -8,6 +8,7 @@ import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.Cadastro;
 import com.qat.samples.sysmgmt.produto.model.Produto;
+import com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest;
 
 /**
  * The Interface IProdutoDAC. (Data Access Component - DAC)
@@ -105,14 +106,14 @@ public interface IProdutoDAC
 	 * 
 	 * @return the internal response
 	 */
-	public InternalResponse deleteAllCadastros();
+	public InternalResponse deleteAllCadastros(Cadastro cadastro);
 
 	/**
 	 * Fetch all produtos.
 	 * 
 	 * @return the list< produto>
 	 */
-	public List<Cadastro> fetchAllCadastros();
+	public List<Cadastro> fetchAllCadastros(Cadastro cadastro);
 
 	/**
 	 * Fetch county by id.
@@ -121,7 +122,7 @@ public interface IProdutoDAC
 	 * @return the cached results response
 	 */
 
-	public Cadastro fetchCadastroById(FetchByIdRequest request);
+	public Cadastro fetchCadastroById(Cadastro request);
 
 	/**
 	 * Fetch produtos by request.
@@ -129,6 +130,6 @@ public interface IProdutoDAC
 	 * @param request the request
 	 * @return the internal results response
 	 */
-	public InternalResultsResponse<Cadastro> fetchCadastrosByRequest(PagedInquiryRequest request);
+	public InternalResultsResponse<Cadastro> fetchCadastrosByRequest(CadastroInquiryRequest request);
 
 }

@@ -1,12 +1,16 @@
 package com.qat.samples.sysmgmt.supermercado.dac.mybatis;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResponse.Status;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.samples.sysmgmt.dac.mybatis.DocumentoDACImpl;
+import com.qat.samples.sysmgmt.dac.mybatis.EnderecoDACImpl;
 import com.qat.samples.sysmgmt.dacd.mybatis.PagedResultsDACD;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
@@ -20,6 +24,28 @@ public class SupermercadoDACImpl extends SqlSessionDaoSupport implements ISuperm
 {
 	/** The Constant ZERO. */
 	private static final int ZERO = 0;
+
+	private static final Integer PARAMSIZE11 = 11;
+
+	private static final String CDACAD = "cdacad";
+	/** The Constant ACADEM. */
+	private static final String ACADEM = "academ";
+	/** The Constant LOGRAD. */
+	private static final String LOGRAD = "lograd";
+	/** The Constant NUMEN. */
+	private static final String NUMEN = "numen";
+	/** The Constant BAIRR. */
+	private static final String BAIRR = "bairr";
+	/** The Constant CIDADE. */
+	private static final String CIDADE = "cidade";
+	/** The Constant CEP. */
+	private static final String CEP = "cep";
+	/** The Constant TELEF. */
+	private static final String TELEF = "telef";
+	/** The Constant LATLOG. */
+	private static final String LATLOG = "latlog";
+
+	private static final String USER = "user";
 
 	/** The Constant NAMESPACE. */
 	private static final String NAMESPACE = "SupermercadoMap.";
@@ -60,8 +86,28 @@ public class SupermercadoDACImpl extends SqlSessionDaoSupport implements ISuperm
 	@Override
 	public InternalResponse insertSupermercado(Supermercado supermercado)
 	{
+
+		HashMap<String, Object> paramMap = new HashMap<String, Object>(16);
+		paramMap.put("usuario", supermercado.getUsuario());
+		paramMap.put("email", supermercado.getEmail());
+		paramMap.put("site", supermercado.getSite());
+		paramMap.put("senha", supermercado.getSenha());
+		paramMap.put("logradouro", supermercado.getEnderecos().get(0).getLogradouro());
+		paramMap.put("bairro", supermercado.getEnderecos().get(0).getBairro());
+		paramMap.put("estado", supermercado.getEnderecos().get(0).getEstado());
+		paramMap.put("cidade", supermercado.getEnderecos().get(0).getCidade());
+		paramMap.put("numero", supermercado.getEnderecos().get(0).getNumero());
+		paramMap.put("cep", supermercado.getEnderecos().get(0).getCep());
+		paramMap.put("nome", supermercado.getEnderecos().get(0).getNome());
+		paramMap.put("complemento", supermercado.getEnderecos().get(0).getComplemento());
+		paramMap.put("usuarioid", supermercado.getDocumentos().get(0).getId());
+		paramMap.put("rginscmuni", supermercado.getDocumentos().get(0).getRgInc());
+		paramMap.put("cpfcnpj", supermercado.getDocumentos().get(0).getCpfCnpj());
+		paramMap.put("razao", supermercado.getDocumentos().get(0).getRazao());
 		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doInsert(getSqlSession(), STMT_INSERT, supermercado, response);
+
+		Integer academiaId =
+				(Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), STMT_INSERT, paramMap);
 		return response;
 	}
 
@@ -74,8 +120,31 @@ public class SupermercadoDACImpl extends SqlSessionDaoSupport implements ISuperm
 	@Override
 	public InternalResponse updateSupermercado(Supermercado supermercado)
 	{
+		HashMap<String, Object> paramMap = new HashMap<String, Object>(20);
+		paramMap.put("supermercadoid", supermercado.getId());
+		paramMap.put("usuario", supermercado.getUsuario());
+		paramMap.put("email", supermercado.getEmail());
+		paramMap.put("site", supermercado.getSite());
+		paramMap.put("senha", supermercado.getSenha());
+		paramMap.put("enderecoid", supermercado.getEnderecos().get(0).getEnderecoid());
+		paramMap.put("id", supermercado.getEnderecos().get(0).getId());
+		paramMap.put("logradouro", supermercado.getEnderecos().get(0).getLogradouro());
+		paramMap.put("bairro", supermercado.getEnderecos().get(0).getBairro());
+		paramMap.put("estado", supermercado.getEnderecos().get(0).getEstado());
+		paramMap.put("cidade", supermercado.getEnderecos().get(0).getCidade());
+		paramMap.put("numero", supermercado.getEnderecos().get(0).getNumero());
+		paramMap.put("cep", supermercado.getEnderecos().get(0).getCep());
+		paramMap.put("nome", supermercado.getEnderecos().get(0).getNome());
+		paramMap.put("complemento", supermercado.getEnderecos().get(0).getComplemento());
+		paramMap.put("documentoid", supermercado.getDocumentos().get(0).getDocumenroid());
+		paramMap.put("usuarioid", supermercado.getDocumentos().get(0).getId());
+		paramMap.put("rginscmuni", supermercado.getDocumentos().get(0).getRgInc());
+		paramMap.put("cpfcnpj", supermercado.getDocumentos().get(0).getCpfCnpj());
+		paramMap.put("razao", supermercado.getDocumentos().get(0).getRazao());
+
 		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doUpdateOL(getSqlSession(), STMT_UPDATE, supermercado, STMT_VERSION, response);
+		Integer academiaId =
+				(Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), STMT_UPDATE, paramMap);
 		return response;
 	}
 
@@ -89,7 +158,20 @@ public class SupermercadoDACImpl extends SqlSessionDaoSupport implements ISuperm
 	public InternalResponse deleteSupermercado(Supermercado supermercado)
 	{
 		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doRemove(getSqlSession(), STMT_DELETE, supermercado, response);
+		EnderecoDACImpl endereco = new EnderecoDACImpl();
+		response = endereco.deleteEndereco(supermercado.getEnderecos().get(0));
+		if (response.getStatus().equals(Status.OperationSuccess))
+		{
+			DocumentoDACImpl documento = new DocumentoDACImpl();
+			response = documento.deleteDocumento(supermercado.getDocumentos().get(0));
+			if (response.getStatus().equals(Status.OperationSuccess))
+			{
+				QATMyBatisDacHelper.doRemove(getSqlSession(), STMT_DELETE, supermercado, response);
+				return response;
+			}
+
+		}
+		response.setStatus(Status.NoRowsInsertedError);
 		return response;
 	}
 
