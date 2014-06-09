@@ -1,11 +1,22 @@
-package com.qat.samples.sysmgmt.produto.model;
+package com.qat.samples.sysmgmt.util;
 
 import com.qat.framework.model.IIntegerEnum;
 
-public enum CadastroTypeEnum implements IIntegerEnum
+public enum TableTypeEnum implements IIntegerEnum
 {
-	MARCA(1), MENU(2), SUBMENU(3), TRIMENU(4), UNIMED(5);
 
+	SUPERMERCADO(1),
+	PRODUTO(2),
+	MARCA(3),
+	MENU(4),
+	SUBMENU(5),
+	TRIMENU(6),
+	UNIMED(7),
+	CLIENTE(8),
+	LISTA(9),
+	ENDERECO(10),
+	DOCUMENTO(11),
+	TABPRECO(12);
 	/** The code. */
 	private Integer code;
 
@@ -14,7 +25,7 @@ public enum CadastroTypeEnum implements IIntegerEnum
 	 * 
 	 * @param value the value
 	 */
-	private CadastroTypeEnum(int value)
+	private TableTypeEnum(int value)
 	{
 		code = value;
 	}
@@ -32,9 +43,9 @@ public enum CadastroTypeEnum implements IIntegerEnum
 	 * @param value
 	 * @return
 	 */
-	public static CadastroTypeEnum enumForValue(Integer value)
+	public static TableTypeEnum enumForValue(Integer value)
 	{
-		for (CadastroTypeEnum e : values())
+		for (TableTypeEnum e : values())
 		{
 			if (e.getValue().equals(value))
 			{
@@ -52,11 +63,11 @@ public enum CadastroTypeEnum implements IIntegerEnum
 	 */
 	public static String getValidValues()
 	{
-		CadastroTypeEnum[] enums = CadastroTypeEnum.class.getEnumConstants();
+		TableTypeEnum[] enums = TableTypeEnum.class.getEnumConstants();
 
 		String comma = "";
 		StringBuilder sb = new StringBuilder();
-		for (CadastroTypeEnum i : enums)
+		for (TableTypeEnum i : enums)
 		{
 			sb.append(comma + i.getValue());
 			comma = ", ";

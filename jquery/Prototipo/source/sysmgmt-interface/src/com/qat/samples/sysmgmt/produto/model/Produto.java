@@ -4,35 +4,40 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlType;
 
-import com.qat.framework.model.QATModelOL;
+import com.qat.samples.sysmgmt.util.Util;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "Produto", propOrder = {"id", "marca", "menu", "submenu", "unimed", "trimenu", "nome", "descricao",
+@XmlType(name = "Produto", propOrder = {"id", "codBarra", "marca", "menu", "submenu", "unimed", "trimenu", "nome",
+		"descricao",
 		"foto",
 		"precos"})
-public class Produto extends QATModelOL
+public class Produto extends Util
 {
 
 	/** The id. */
 	private Integer id;
 
+	/** The cod barra. */
+	private String codBarra;
+
 	/** The code. */
-	private CadastroTypeEnum marca;
+	private Cadastro marca;
 
 	/** The menu. */
-	private CadastroTypeEnum menu;
+	private Cadastro menu;
 
 	/** The submenu. */
-	private CadastroTypeEnum submenu;
+	private Cadastro submenu;
 
 	/** The trimenu. */
-	private CadastroTypeEnum trimenu;
+	private Cadastro trimenu;
 
 	/** The unimed. */
-	private CadastroTypeEnum unimed;
+	private Cadastro unimed;
 
 	/** The description. */
 	private String nome;
@@ -55,6 +60,64 @@ public class Produto extends QATModelOL
 	}
 
 	/**
+	 * Instantiates a new produto.
+	 * 
+	 * @param id the id
+	 * @param codBarra the cod barra
+	 * @param marca the marca
+	 * @param menu the menu
+	 * @param submenu the submenu
+	 * @param trimenu the trimenu
+	 * @param unimed the unimed
+	 * @param nome the nome
+	 * @param descricao the descricao
+	 * @param foto the foto
+	 * @param precos the precos
+	 */
+	public Produto(Integer id, String codBarra, Cadastro marca, Cadastro menu, Cadastro submenu, Cadastro trimenu,
+			Cadastro unimed, String nome, String descricao, String foto, List<Tabelapreco> precos)
+	{
+		super();
+		this.id = id;
+		this.codBarra = codBarra;
+		this.marca = marca;
+		this.menu = menu;
+		this.submenu = submenu;
+		this.trimenu = trimenu;
+		this.unimed = unimed;
+		this.nome = nome;
+		this.descricao = descricao;
+		this.foto = foto;
+		this.precos = precos;
+	}
+
+	/**
+	 * Instantiates a new produto.
+	 * 
+	 * @param id the id
+	 * @param codBarra the cod barra
+	 * @param marca the marca
+	 * @param menu the menu
+	 * @param submenu the submenu
+	 * @param trimenu the trimenu
+	 * @param unimed the unimed
+	 * @param precos the precos
+	 */
+	public Produto(Integer id, String codBarra, Cadastro marca, Cadastro menu, Cadastro submenu, Cadastro trimenu,
+			Cadastro unimed, List<Tabelapreco> precos)
+	{
+		super();
+		this.id = id;
+		this.codBarra = codBarra;
+		this.marca = marca;
+		this.menu = menu;
+		this.submenu = submenu;
+		this.trimenu = trimenu;
+		this.unimed = unimed;
+		this.precos = precos;
+	}
+
+	/**
 	 * Gets the id.
 	 * 
 	 * @return the id
@@ -67,7 +130,7 @@ public class Produto extends QATModelOL
 	/**
 	 * Sets the id.
 	 * 
-	 * @param id the id to set
+	 * @param id the new id
 	 */
 	public void setId(Integer id)
 	{
@@ -75,21 +138,41 @@ public class Produto extends QATModelOL
 	}
 
 	/**
-	 * Gets the marca.
+	 * Gets the cod barra.
 	 * 
-	 * @return the marca
+	 * @return the cod barra
 	 */
-	public CadastroTypeEnum getMarca()
+	public String getCodBarra()
+	{
+		return codBarra;
+	}
+
+	/**
+	 * Sets the cod barra.
+	 * 
+	 * @param codBarra the new cod barra
+	 */
+	public void setCodBarra(String codBarra)
+	{
+		this.codBarra = codBarra;
+	}
+
+	/**
+	 * Gets the code.
+	 * 
+	 * @return the code
+	 */
+	public Cadastro getMarca()
 	{
 		return marca;
 	}
 
 	/**
-	 * Sets the marca.
+	 * Sets the code.
 	 * 
-	 * @param marca the marca to set
+	 * @param marca the new code
 	 */
-	public void setMarca(CadastroTypeEnum marca)
+	public void setMarca(Cadastro marca)
 	{
 		this.marca = marca;
 	}
@@ -99,7 +182,7 @@ public class Produto extends QATModelOL
 	 * 
 	 * @return the menu
 	 */
-	public CadastroTypeEnum getMenu()
+	public Cadastro getMenu()
 	{
 		return menu;
 	}
@@ -107,9 +190,9 @@ public class Produto extends QATModelOL
 	/**
 	 * Sets the menu.
 	 * 
-	 * @param menu the menu to set
+	 * @param menu the new menu
 	 */
-	public void setMenu(CadastroTypeEnum menu)
+	public void setMenu(Cadastro menu)
 	{
 		this.menu = menu;
 	}
@@ -119,7 +202,7 @@ public class Produto extends QATModelOL
 	 * 
 	 * @return the submenu
 	 */
-	public CadastroTypeEnum getSubmenu()
+	public Cadastro getSubmenu()
 	{
 		return submenu;
 	}
@@ -127,9 +210,9 @@ public class Produto extends QATModelOL
 	/**
 	 * Sets the submenu.
 	 * 
-	 * @param submenu the submenu to set
+	 * @param submenu the new submenu
 	 */
-	public void setSubmenu(CadastroTypeEnum submenu)
+	public void setSubmenu(Cadastro submenu)
 	{
 		this.submenu = submenu;
 	}
@@ -139,7 +222,7 @@ public class Produto extends QATModelOL
 	 * 
 	 * @return the trimenu
 	 */
-	public CadastroTypeEnum getTrimenu()
+	public Cadastro getTrimenu()
 	{
 		return trimenu;
 	}
@@ -147,9 +230,9 @@ public class Produto extends QATModelOL
 	/**
 	 * Sets the trimenu.
 	 * 
-	 * @param trimenu the trimenu to set
+	 * @param trimenu the new trimenu
 	 */
-	public void setTrimenu(CadastroTypeEnum trimenu)
+	public void setTrimenu(Cadastro trimenu)
 	{
 		this.trimenu = trimenu;
 	}
@@ -159,7 +242,7 @@ public class Produto extends QATModelOL
 	 * 
 	 * @return the unimed
 	 */
-	public CadastroTypeEnum getUnimed()
+	public Cadastro getUnimed()
 	{
 		return unimed;
 	}
@@ -167,17 +250,17 @@ public class Produto extends QATModelOL
 	/**
 	 * Sets the unimed.
 	 * 
-	 * @param unimed the unimed to set
+	 * @param unimed the new unimed
 	 */
-	public void setUnimed(CadastroTypeEnum unimed)
+	public void setUnimed(Cadastro unimed)
 	{
 		this.unimed = unimed;
 	}
 
 	/**
-	 * Gets the nome.
+	 * Gets the description.
 	 * 
-	 * @return the nome
+	 * @return the description
 	 */
 	public String getNome()
 	{
@@ -185,9 +268,9 @@ public class Produto extends QATModelOL
 	}
 
 	/**
-	 * Sets the nome.
+	 * Sets the description.
 	 * 
-	 * @param nome the nome to set
+	 * @param nome the new description
 	 */
 	public void setNome(String nome)
 	{
@@ -195,9 +278,9 @@ public class Produto extends QATModelOL
 	}
 
 	/**
-	 * Gets the descricao.
+	 * Gets the price.
 	 * 
-	 * @return the descricao
+	 * @return the price
 	 */
 	public String getDescricao()
 	{
@@ -205,9 +288,9 @@ public class Produto extends QATModelOL
 	}
 
 	/**
-	 * Sets the descricao.
+	 * Sets the price.
 	 * 
-	 * @param descricao the descricao to set
+	 * @param descricao the new price
 	 */
 	public void setDescricao(String descricao)
 	{
@@ -215,9 +298,9 @@ public class Produto extends QATModelOL
 	}
 
 	/**
-	 * Gets the foto.
+	 * Gets the usuario.
 	 * 
-	 * @return the foto
+	 * @return the usuario
 	 */
 	public String getFoto()
 	{
@@ -225,9 +308,9 @@ public class Produto extends QATModelOL
 	}
 
 	/**
-	 * Sets the foto.
+	 * Sets the usuario.
 	 * 
-	 * @param foto the foto to set
+	 * @param foto the new usuario
 	 */
 	public void setFoto(String foto)
 	{
@@ -235,9 +318,9 @@ public class Produto extends QATModelOL
 	}
 
 	/**
-	 * Gets the precos.
+	 * Gets the senha.
 	 * 
-	 * @return the precos
+	 * @return the senha
 	 */
 	public List<Tabelapreco> getPrecos()
 	{
@@ -245,9 +328,9 @@ public class Produto extends QATModelOL
 	}
 
 	/**
-	 * Sets the precos.
+	 * Sets the senha.
 	 * 
-	 * @param precos the precos to set
+	 * @param precos the new senha
 	 */
 	public void setPrecos(List<Tabelapreco> precos)
 	{
@@ -256,15 +339,16 @@ public class Produto extends QATModelOL
 
 	/*
 	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	 * @see com.qat.samples.sysmgmt.util.Util#toString()
 	 */
 	@Override
 	public String toString()
 	{
-		return "Produto [getId()=" + getId() + ", getMarca()=" + getMarca() + ", getMenu()=" + getMenu()
-				+ ", getSubmenu()=" + getSubmenu() + ", getTrimenu()=" + getTrimenu() + ", getUnimed()=" + getUnimed()
-				+ ", getNome()=" + getNome() + ", getDescricao()=" + getDescricao() + ", getFoto()=" + getFoto()
-				+ ", getPrecos()=" + getPrecos() + ", toString()=" + super.toString() + "]";
+		return "Produto [getId()=" + getId() + ", getCodBarra()=" + getCodBarra() + ", getMarca()=" + getMarca()
+				+ ", getMenu()=" + getMenu() + ", getSubmenu()=" + getSubmenu() + ", getTrimenu()=" + getTrimenu()
+				+ ", getUnimed()=" + getUnimed() + ", getNome()=" + getNome() + ", getDescricao()=" + getDescricao()
+				+ ", getFoto()=" + getFoto() + ", getPrecos()=" + getPrecos() + ", toString()=" + super.toString()
+				+ "]";
 	}
 
 }

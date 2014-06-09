@@ -86,12 +86,12 @@
 
   COMMIT;
 
-  DROP TABLE  "contAcess";
+  DROP TABLE  "controle";
   CREATE TABLE controle
     (controleID                SERIAL PRIMARY KEY,
      data                      DATE,
      usuarioId                 INTEGER       ,
-     acao	                   VARCHAR(1) ,
+     acao	                   VARCHAR(1)
 	);
 
   COMMIT;

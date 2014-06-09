@@ -1,54 +1,43 @@
 package com.qat.samples.sysmgmt.util;
 
-import com.qat.framework.model.IStringEnum;
+import com.qat.framework.model.IIntegerEnum;
 
-/**
- * The Enum SexIndEnum for DrugPrice.
- */
-public enum AcaoTypeEnum implements IStringEnum
+public enum AcaoTypeEnum implements IIntegerEnum
 {
 
-	/** The Male. */
-	INSERT("1"),
-	/** The Female. */
-	UPDATE("2"),
-	DELETE("3"),
-	FETCHALL("4"),
-	FETCHID("5");
-	/** The Both. */
+	INSERT(1),
+	UPDATE(2),
+	DELETE(3),
+	FETCHALL(4),
+	FETCHID(5);
 
-	/** The sex. */
-	private String sex;
+	/** The code. */
+	private Integer code;
 
 	/**
-	 * Instantiates a new sex ind enum.
-	 * 
-	 * @param sexInd the sex ind
-	 */
-	AcaoTypeEnum(String sexInd)
-	{
-		sex = sexInd;
-	}
-
-	/**
-	 * Gets the value.
-	 * 
-	 * @return the value
-	 */
-	@Override
-	public String getValue()
-	{
-		return sex;
-	}
-
-	/**
-	 * Enum for value.
+	 * Instantiates a new contact purpose enum.
 	 * 
 	 * @param value the value
-	 * 
-	 * @return the sex ind enum
 	 */
-	public static AcaoTypeEnum enumForValue(String value)
+	private AcaoTypeEnum(int value)
+	{
+		code = value;
+	}
+
+	@Override
+	public Integer getValue()
+	{
+		return code;
+	}
+
+	/**
+	 * This static method is used to convert an internal value into the enum. This is useful when a value from an
+	 * external source such as a database needs to be converted to an enum.
+	 * 
+	 * @param value
+	 * @return
+	 */
+	public static AcaoTypeEnum enumForValue(Integer value)
 	{
 		for (AcaoTypeEnum e : values())
 		{
@@ -71,13 +60,12 @@ public enum AcaoTypeEnum implements IStringEnum
 		AcaoTypeEnum[] enums = AcaoTypeEnum.class.getEnumConstants();
 
 		String comma = "";
-		StringBuilder enumValue = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 		for (AcaoTypeEnum i : enums)
 		{
-			enumValue.append(comma + i.getValue());
+			sb.append(comma + i.getValue());
 			comma = ", ";
 		}
-		return enumValue.toString();
+		return sb.toString();
 	}
-
 }

@@ -24,6 +24,8 @@ public class Cadastro extends Util
 	/** The price. */
 	private String descricao;
 
+	private Util controlAcess;
+
 	/**
 	 * Instantiates a new bundle.
 	 */
@@ -42,23 +44,11 @@ public class Cadastro extends Util
 		this.id = id;
 	}
 
-	/**
-	 * Gets the id.
-	 * 
-	 * @return the id
-	 */
-	@Override
 	public Integer getId()
 	{
 		return id;
 	}
 
-	/**
-	 * Sets the id.
-	 * 
-	 * @param id the id to set
-	 */
-	@Override
 	public void setId(Integer id)
 	{
 		this.id = id;
@@ -122,6 +112,28 @@ public class Cadastro extends Util
 	public void setDescricao(String descricao)
 	{
 		this.descricao = descricao;
+	}
+
+	/**
+	 * Methods that follow the naming pattern get.....Value() provide convenience for returning the primitive value of
+	 * an enum. For example, database mapping of an enum to a database column could make use of this method.
+	 * 
+	 * @return
+	 */
+	public Integer getCadastroTypeValue()
+	{
+		return type.getValue();
+	}
+
+	/**
+	 * Methods that follow the naming pattern set.....Value(argValue) provide convenience for assigning the primitive
+	 * value of an enum. For example, database mapping of an database column to an enum could make use of this method.
+	 * 
+	 * @return
+	 */
+	public void setCadastroTypeValue(Integer cadastroTypeValue)
+	{
+		type = CadastroTypeEnum.enumForValue(cadastroTypeValue);
 	}
 
 	/**

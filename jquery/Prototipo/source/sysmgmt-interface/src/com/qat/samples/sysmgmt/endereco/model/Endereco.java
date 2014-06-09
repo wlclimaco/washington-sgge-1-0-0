@@ -2,19 +2,22 @@ package com.qat.samples.sysmgmt.endereco.model;
 
 import javax.xml.bind.annotation.XmlType;
 
-import com.qat.framework.model.QATModelOL;
+import com.qat.samples.sysmgmt.util.TableTypeEnum;
+import com.qat.samples.sysmgmt.util.Util;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
 @XmlType(name = "Bundle", propOrder = {"id", "code", "description", "price"})
-public class Endereco extends QATModelOL
+public class Endereco extends Util
 {
 
 	/** The id. */
 	private Integer id;
+
+	/** The enderecoid. */
+	private Integer enderecoid;
 
 	/** The code. */
 	private String logradouro;
@@ -39,6 +42,9 @@ public class Endereco extends QATModelOL
 
 	/** The complemento. */
 	private String complemento;
+
+	/** The tabela. */
+	private TableTypeEnum tabela;
 
 	/**
 	 * Instantiates a new bundle.
@@ -238,9 +244,70 @@ public class Endereco extends QATModelOL
 		this.complemento = complemento;
 	}
 
+	/**
+	 * Gets the enderecoid.
+	 * 
+	 * @return the enderecoid
+	 */
+	public Integer getEnderecoid()
+	{
+		return enderecoid;
+	}
+
+	/**
+	 * Sets the enderecoid.
+	 * 
+	 * @param enderecoid the new enderecoid
+	 */
+	public void setEnderecoid(Integer enderecoid)
+	{
+		this.enderecoid = enderecoid;
+	}
+
+	/**
+	 * Gets the tabela.
+	 * 
+	 * @return the tabela
+	 */
+	public TableTypeEnum getTabela()
+	{
+		return tabela;
+	}
+
+	/**
+	 * Sets the tabela.
+	 * 
+	 * @param tabela the new tabela
+	 */
+	public void setTabela(TableTypeEnum tabela)
+	{
+		this.tabela = tabela;
+	}
+
+	/**
+	 * Gets the table type value.
+	 * 
+	 * @return the table type value
+	 */
+	public Integer getTableTypeValue()
+	{
+		return tabela.getValue();
+	}
+
+	/**
+	 * Methods that follow the naming pattern set.....Value(argValue) provide convenience for assigning the primitive
+	 * value of an enum. For example, database mapping of an database column to an enum could make use of this method.
+	 * 
+	 * @param cadastroTypeValue the new table type value
+	 */
+	public void setTableTypeValue(Integer cadastroTypeValue)
+	{
+		tabela = TableTypeEnum.enumForValue(cadastroTypeValue);
+	}
+
 	/*
 	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	 * @see com.qat.framework.model.QATModel#toString()
 	 */
 	@Override
 	public String toString()
@@ -248,7 +315,8 @@ public class Endereco extends QATModelOL
 		return "Endereco [getId()=" + getId() + ", getLogradouro()=" + getLogradouro() + ", getBairro()=" + getBairro()
 				+ ", getEstado()=" + getEstado() + ", getCidade()=" + getCidade() + ", getNumero()=" + getNumero()
 				+ ", getCep()=" + getCep() + ", getNome()=" + getNome() + ", getComplemento()=" + getComplemento()
-				+ ", toString()=" + super.toString() + "]";
+				+ ", getEnderecoid()=" + getEnderecoid() + ", getTabela()=" + getTabela() + ", getTableTypeValue()="
+				+ getTableTypeValue() + ", toString()=" + super.toString() + "]";
 	}
 
 }

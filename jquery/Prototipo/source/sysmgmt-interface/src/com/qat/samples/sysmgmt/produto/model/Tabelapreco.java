@@ -3,26 +3,36 @@ package com.qat.samples.sysmgmt.produto.model;
 import java.sql.Date;
 
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.crypto.Data;
 
-import com.qat.framework.model.QATModelOL;
+import com.qat.samples.sysmgmt.supermercado.model.Supermercado;
+import com.qat.samples.sysmgmt.util.Util;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
 @XmlType(name = "Tabelapreco", propOrder = {"idProduto", "type", "preco", "dateIni", "dateFim"})
-public class Tabelapreco extends QATModelOL
+public class Tabelapreco extends Util
 {
 
+	private Integer precoid;
 	/** The id. */
 	private Integer idProduto;
+
+	private Supermercado supermercadoid;
+
+	private Data data;
 
 	/** The code. */
 	private PrecoTypeEnum type;
 
 	/** The description. */
 	private Double preco;
+
+	private Double precopromo;
+
+	private Boolean promocao;
 
 	/** The date ini. */
 	private Date dateIni;
@@ -38,116 +48,140 @@ public class Tabelapreco extends QATModelOL
 
 	}
 
-	/**
-	 * Gets the id produto.
-	 * 
-	 * @return the idProduto
-	 */
+	public Tabelapreco(Integer precoid, Integer idProduto, Supermercado supermercadoid, Data data, PrecoTypeEnum type,
+			Double preco, Double precopromo, Boolean promocao, Date dateIni, Date dateFim)
+	{
+		super();
+		this.precoid = precoid;
+		this.idProduto = idProduto;
+		this.supermercadoid = supermercadoid;
+		this.data = data;
+		this.type = type;
+		this.preco = preco;
+		this.precopromo = precopromo;
+		this.promocao = promocao;
+		this.dateIni = dateIni;
+		this.dateFim = dateFim;
+	}
+
+	public Tabelapreco(Integer precoid, Integer idProduto, Supermercado supermercadoid, PrecoTypeEnum type, Double preco)
+	{
+		super();
+		this.precoid = precoid;
+		this.idProduto = idProduto;
+		this.supermercadoid = supermercadoid;
+		this.type = type;
+		this.preco = preco;
+	}
+
+	public Integer getPrecoid()
+	{
+		return precoid;
+	}
+
+	public void setPrecoid(Integer precoid)
+	{
+		this.precoid = precoid;
+	}
+
 	public Integer getIdProduto()
 	{
 		return idProduto;
 	}
 
-	/**
-	 * Sets the id produto.
-	 * 
-	 * @param idProduto the idProduto to set
-	 */
 	public void setIdProduto(Integer idProduto)
 	{
 		this.idProduto = idProduto;
 	}
 
-	/**
-	 * Gets the type.
-	 * 
-	 * @return the type
-	 */
+	public Supermercado getSupermercadoid()
+	{
+		return supermercadoid;
+	}
+
+	public void setSupermercadoid(Supermercado supermercadoid)
+	{
+		this.supermercadoid = supermercadoid;
+	}
+
+	public Data getData()
+	{
+		return data;
+	}
+
+	public void setData(Data data)
+	{
+		this.data = data;
+	}
+
 	public PrecoTypeEnum getType()
 	{
 		return type;
 	}
 
-	/**
-	 * Sets the type.
-	 * 
-	 * @param type the type to set
-	 */
 	public void setType(PrecoTypeEnum type)
 	{
 		this.type = type;
 	}
 
-	/**
-	 * Gets the preco.
-	 * 
-	 * @return the preco
-	 */
 	public Double getPreco()
 	{
 		return preco;
 	}
 
-	/**
-	 * Sets the preco.
-	 * 
-	 * @param preco the preco to set
-	 */
 	public void setPreco(Double preco)
 	{
 		this.preco = preco;
 	}
 
-	/**
-	 * Gets the date ini.
-	 * 
-	 * @return the dateIni
-	 */
+	public Double getPrecopromo()
+	{
+		return precopromo;
+	}
+
+	public void setPrecopromo(Double precopromo)
+	{
+		this.precopromo = precopromo;
+	}
+
+	public Boolean getPromocao()
+	{
+		return promocao;
+	}
+
+	public void setPromocao(Boolean promocao)
+	{
+		this.promocao = promocao;
+	}
+
 	public Date getDateIni()
 	{
 		return dateIni;
 	}
 
-	/**
-	 * Sets the date ini.
-	 * 
-	 * @param dateIni the dateIni to set
-	 */
 	public void setDateIni(Date dateIni)
 	{
 		this.dateIni = dateIni;
 	}
 
-	/**
-	 * Gets the date fim.
-	 * 
-	 * @return the dateFim
-	 */
 	public Date getDateFim()
 	{
 		return dateFim;
 	}
 
-	/**
-	 * Sets the date fim.
-	 * 
-	 * @param dateFim the dateFim to set
-	 */
 	public void setDateFim(Date dateFim)
 	{
 		this.dateFim = dateFim;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString()
 	{
-		return "Tabelapreco [getIdProduto()=" + getIdProduto() + ", getType()=" + getType() + ", getPreco()="
-				+ getPreco() + ", getDateIni()=" + getDateIni() + ", getDateFim()=" + getDateFim() + ", toString()="
-				+ super.toString() + "]";
+		return "Tabelapreco [getPrecoid()=" + getPrecoid() + ", getIdProduto()=" + getIdProduto()
+				+ ", getSupermercadoid()=" + getSupermercadoid() + ", getData()=" + getData() + ", getType()="
+				+ getType() + ", getPreco()=" + getPreco() + ", getPrecopromo()=" + getPrecopromo()
+				+ ", getPromocao()=" + getPromocao() + ", getDateIni()=" + getDateIni() + ", getDateFim()="
+				+ getDateFim() + ", toString()=" + super.toString() + "]";
 	}
 
 }

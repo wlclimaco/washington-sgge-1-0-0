@@ -13,7 +13,7 @@ public class Foto extends Util
 {
 
 	/** The id. */
-	private Integer id;
+	private Integer fotoid;
 
 	/** The code. */
 	private String nome;
@@ -34,31 +34,23 @@ public class Foto extends Util
 	 * 
 	 * @param id the id
 	 */
-	public Foto(Integer id)
+
+	public Integer getFotoid()
 	{
-		this.id = id;
+		return fotoid;
 	}
 
-	/**
-	 * Gets the id.
-	 * 
-	 * @return the id
-	 */
-	@Override
-	public Integer getId()
+	public Foto(Integer fotoid, String nome, String local)
 	{
-		return id;
+		super();
+		this.fotoid = fotoid;
+		this.nome = nome;
+		this.local = local;
 	}
 
-	/**
-	 * Sets the id.
-	 * 
-	 * @param id the id to set
-	 */
-	@Override
-	public void setId(Integer id)
+	public void setFotoid(Integer fotoid)
 	{
-		this.id = id;
+		this.fotoid = fotoid;
 	}
 
 	/**
@@ -86,7 +78,7 @@ public class Foto extends Util
 	 * 
 	 * @return the description
 	 */
-	@Override
+
 	public String getLocal()
 	{
 		return local;
@@ -97,21 +89,17 @@ public class Foto extends Util
 	 * 
 	 * @param local the new description
 	 */
-	@Override
+
 	public void setLocal(String local)
 	{
 		this.local = local;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.qat.framework.model.QATModel#toString()
-	 */
 	@Override
 	public String toString()
 	{
-		return "Foto [getId()=" + getId() + ", getNome()=" + getNome() + ", getLocal()=" + getLocal() + ", toString()="
-				+ super.toString() + "]";
+		return "Foto [getFotoid()=" + getFotoid() + ", getNome()=" + getNome() + ", getLocal()=" + getLocal()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }

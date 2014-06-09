@@ -1,0 +1,17 @@
+INSERT INTO cadastro(cadastroid, descricao, nome, acao, controleid) values(1,'UN1DESC','NOME01',1,1);
+INSERT INTO cadastro(cadastroid, descricao, nome, acao, controleid) values(2,'UN1DESC','NOME01',2,1);
+INSERT INTO cadastro(cadastroid, descricao, nome, acao, controleid) values(3,'UN1DESC','NOME01',3,1);
+INSERT INTO cadastro(cadastroid, descricao, nome, acao, controleid) values(4,'UN1DESC','NOME01',4,1);
+INSERT INTO cadastro(cadastroid, descricao, nome, acao, controleid) values(5,'UN1DESC','NOME01',5,1);
+INSERT INTO controle(controleid, data, usuarioid, acao, idAcao, tableType) values(1,'10/10/2013:21:59:59', 1,2,2,1);
+INSERT INTO controle(controleid, data, usuarioid, acao, idAcao, tableType) values(2,'10/10/2013:21:59:59', 1,2,2,1);
+INSERT INTO controle(controleid, data, usuarioid, acao, idAcao, tableType) values(3,'10/10/2013:21:59:59', 1,2,2,1);
+INSERT INTO endereco(enderecoid, id, logradouro, bairro, estado, cidade, numero, cep, nome, complemento, acao)VALUES (1,1,'logradouro','bairro','estado','cidade', 'cep', 'nome', 'complemento', 'numero', 1);
+INSERT INTO endereco(enderecoid, id, logradouro, bairro, estado, cidade, numero, cep, nome, complemento, acao)VALUES (2,1,'logradouro','bairro','estado','cidade', 'cep', 'nome', 'complemento', 'numero', 1);
+INSERT INTO documentos(documentoid, id, rginscmuni, cpfcnpj, nome, razao, controleid, tabela)VALUES (1,1,'rginscmuni','cpfcnpj', 'nome', 'razao', 1, 1);
+INSERT INTO controle(controleid, data, usuarioid, acao, idAcao, tableType) values(1,'10/10/2013:21:59:59', 1,2,2,1);
+INSERT INTO controle(controleid, data, usuarioid, acao, idAcao, tableType) values(2,'10/10/2013:21:59:59', 1,2,2,1);
+INSERT INTO controle(controleid, data, usuarioid, acao, idAcao, tableType) values(3,'10/10/2013:21:59:59', 1,2,2,1);
+INSERT INTO supermercado(supermercadoid, usuario, email, site, controleid, senha) VALUES (1,'usuario','email', 'site', 1, 'senha');
+INSERT INTO produto(produtoid, codbarra, nome, marca, menu, submenu, trimenu, unimed,foto, supermercadoid)VALUES (1,'111111','nome',1,2,3,4,5,'c:/',1);
+INSERT INTO tabpreco(precoid, produtoid, supermercadoid, data, preco) VALUES (1, 1, 1,'10/10/2010',12.50);
