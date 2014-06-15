@@ -15,7 +15,7 @@ var columns = [
 
 var options =
 {
-	editable: false,
+	editable: true,
 	enableAddRow: false,
 	forceFitColumns: true,
 	enableCellNavigation: true,
@@ -44,18 +44,19 @@ $.validator.setDefaults({
 		function callMaintainWS(_csak, _cdesc, _action)
 		{
 			onCountyDataLoading.notify({});
-			var oData = new qat.model.reqCounty(null, new qat.model.county(_csak,_cdesc),true, false);
+			var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(1,null,"Test",_cdesc,null),true, false);
+			//var oData = {};
 			var mUrl = "";
 			switch (_action)
 			{
 				case 'I':
-					mUrl = 'qat-sysmgmt-sample/services/rest/CountyService/insertCounty';
+					mUrl = 'qat-sysmgmt-sample/services/rest/ProdutoService/insertCadastro'
 					break;
 				case 'U':
-					mUrl = 'qat-sysmgmt-sample/services/rest/CountyService/updateCounty';
+					mUrl = 'qat-sysmgmt-sample/services/rest/ProdutoService/updateCadastro';
 					break;
 				case 'D':
-					mUrl = 'qat-sysmgmt-sample/services/rest/CountyService/deleteCounty';
+					mUrl = 'qat-sysmgmt-sample/services/rest/ProdutoService/deleteCadastroById';
 					break;
 			}
 			rest_post_call(mUrl, oData, fill_data, process_error);

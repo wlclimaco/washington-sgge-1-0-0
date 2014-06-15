@@ -8,7 +8,7 @@ import com.qat.samples.sysmgmt.util.Util;
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "Cadastro", propOrder = {"id", "type", "nome", "descricao"})
+@XmlType(name = "Cadastro", propOrder = {"id", "type", "nome", "descricao", "controlAcess"})
 public class Cadastro extends Util
 {
 

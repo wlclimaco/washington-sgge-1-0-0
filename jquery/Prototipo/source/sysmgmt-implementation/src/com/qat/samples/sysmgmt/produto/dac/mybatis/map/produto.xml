@@ -18,6 +18,7 @@
     <result property="nome" column="nome"/>
     <result property="descricao" column="descricao"/>
     <result property="foto" column="foto"/>
+    <association property="supermercadoid" column="supermercadoid" javaType="Supermercado" select="SupermercadoMap.fetchSupermercadoById" />
     <association property="marca" column="marca" javaType="Cadastro" select="fetchMarcaByCode" />
     <association property="menu" column="menu" javaType="Cadastro" select="fetchMenuByCode" />
     <association property="submenu" column="submenu" javaType="Cadastro" select="fetchSubMenuByCode" />
@@ -39,20 +40,19 @@
     <resultMap id="PrecoResult" type="Tabelapreco">
     <result property="precoid" column="precoid"/>
     <result property="idProduto" column="produtoid"/>
-    <result property="date" column="data"/>
     <result property="preco" column="preco"/>
     <result property="precopromo" column="precopromo"/>
     <result property="promocao" column="promocao"/>
     <result property="dateIni" column="dataini"/>
     <result property="dateFim" column="datafin"/>
     <association property="supermercadoid" column="supermercadoid" javaType="Supermercado" select="SupermercadoMap.fetchSupermercadoById" />
-    <collection property="acessos" column="cadastroid" select="ControleAcessMap.fetchControleAcessByAcao" />
+    <collection property="acessos" column="precoid" select="ControleAcessMap.fetchControleAcessByAcao" />
   </resultMap>
 
 
 
   <sql id="allPrecoColumns">
-		precoid, produtoid, supermercadoid, data, preco, precopromo, promocao, dataini, datafin
+		precoid, produtoid, supermercadoid,  preco, precopromo, promocao, dataini, datafin
   </sql>
 
   <sql id="allCadastroColumns">
@@ -77,43 +77,43 @@
      <select id="fetchPrecoByProduto" parameterType="int" resultMap="PrecoResult">
 	    SELECT
 	    <include refid="allPrecoColumns" />
-	    FROM preco where precoid = #{id}  ORDER BY date ASC
+	    FROM tabpreco where precoid = #{id}  ORDER BY data ASC
     </select>
 
     <select id="fetchMarcaByCode" parameterType="int" resultMap="CadastroResult">
 	    SELECT
 	    <include refid="allCadastroColumns" />
-	    FROM cadastro where acao = 1 and cadastroid = #{id}  ORDER BY ID ASC
+	    FROM cadastro where acao = 1 and cadastroid = #{id}  ORDER BY cadastroid ASC
     </select>
 
     <select id="fetchMenuByCode" parameterType="int" resultMap="CadastroResult">
 	    SELECT
 	    <include refid="allCadastroColumns" />
-	    FROM cadastro where acao = 2 and cadastroid = #{id}  ORDER BY ID ASC
+	    FROM cadastro where acao = 2 and cadastroid = #{id}  ORDER BY cadastroid ASC
     </select>
 
     <select id="fetchSubMenuByCode" parameterType="int" resultMap="CadastroResult">
 	    SELECT
 	    <include refid="allCadastroColumns" />
-	    FROM cadastro where acao = 3 and cadastroid = #{id}  ORDER BY ID ASC
+	    FROM cadastro where acao = 3 and cadastroid = #{id}  ORDER BY cadastroid ASC
     </select>
 
     <select id="fetchTriMenuByCode" parameterType="int" resultMap="CadastroResult">
 	    SELECT
 	    <include refid="allCadastroColumns" />
-	    FROM cadastro where acao = 4 and cadastroid = #{id}  ORDER BY ID ASC
+	    FROM cadastro where acao = 4 and cadastroid = #{id}  ORDER BY cadastroid ASC
     </select>
 
     <select id="fetchUniMedByCode" parameterType="int" resultMap="CadastroResult">
 	    SELECT
 	    <include refid="allCadastroColumns" />
-	    FROM cadastro where acao = 5 and cadastroid = #{id}  ORDER BY ID ASC
+	    FROM cadastro where acao = 5 and cadastroid = #{id}  ORDER BY cadastroid ASC
     </select>
 
   <select id="fetchAllCadastro" parameterType="Cadastro" resultMap="CadastroResult">
     SELECT
     <include refid="allCadastroColumns" />
-    FROM cadastro where acao = #{cadastroTypeValue}} ORDER BY ID ASC
+    FROM cadastro where acao = #{cadastroTypeValue}} ORDER BY cadastroid ASC
   </select>
 
    <select id="fetchAllProduto" parameterType="Produto" resultMap="ProdutoResult">
@@ -133,7 +133,7 @@
    <select id="fetchAllProdutoPagedBatch" parameterType="Produto" resultMap="ProdutoResult">
 
 		SELECT <include refid="allProdutoColumns" />
-   		  FROM produto  ORDER BY id ASC
+   		  FROM produto  ORDER BY produtoid ASC
 		  OFFSET ( #{_page} * #{_pagesize} )
 		  LIMIT #{_pagesize}
   </select>
@@ -155,9 +155,14 @@
 
   <select id="fetchAllProdutosRequest" parameterType="ProdutoInquiryRequest" resultMap="ProdutoResult">
 		SELECT <include refid="allProdutoColumns" />
-   		  FROM PRODUTO ORDER BY id ASC
+   		  FROM PRODUTO ORDER BY produtoid ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
+  </select>
+
+  <select id="fetchAllProdutos" parameterType="ProdutoInquiryRequest" resultMap="ProdutoResult">
+		SELECT <include refid="allProdutoColumns" />
+   		  FROM PRODUTO ORDER BY produtoid ASC
   </select>
 
 
@@ -170,7 +175,7 @@
    <select id="fetchProdutoById" parameterType="Produto" resultMap="ProdutoResult">
     SELECT
    <include refid="allProdutoColumns" />
-     FROM PRODUTO where cadastroid = #{id}
+     FROM PRODUTO where produtoid = #{id}
   </select>
 
 
@@ -180,7 +185,8 @@
   </select>
 
   <select id="insertProduto" parameterType="Produto" resultType="int" statementType="CALLABLE">
-        { call ins_cadastro( #{descricao}, #{nome},#{cadastroTypeValue} ) }
+        { call ins_produto( #{produtoid} , #{codbarra} , #{nome} , #{marca} , #{menu} , #{submenu} , #{trimenu} , #{unimed} , #{precoid} , #{controleid} , #{foto} , #{supermercadoid} , #{preco}, #{usuarioid} ) }
+
 
   </select>
 
@@ -193,7 +199,7 @@
   </update>
 
   <select id="updateProduto" parameterType="Produto" resultType="int" statementType="CALLABLE">
-        { call upd_cadastro( #{descricao}, #{nome},#{cadastroTypeValue} ) }
+        { call upd_produto( #{produtoid} , #{codbarra} , #{nome} , #{marca} , #{menu} , #{submenu} , #{trimenu} , #{unimed} , #{precoid} , #{controleid} , #{foto} , #{supermercadoid} , #{preco}, #{usuarioid} ) }
 
   </select>
 
@@ -206,7 +212,7 @@
   </delete>
 
   <delete id="deleteProdutoById" parameterType="Produto">
-    DELETE FROM PRODUTO WHERE ID = #{id}
+    DELETE FROM PRODUTO WHERE cadastroid = #{id}
   </delete>
 
   <delete id="deleteAllProdutos">

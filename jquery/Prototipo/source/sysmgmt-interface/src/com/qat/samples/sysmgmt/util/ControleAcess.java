@@ -10,7 +10,8 @@ import com.qat.framework.model.QATModelOL;
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "controleAcess", propOrder = {"id", "user", "local", "data", "tenantId", "acao"})
+@XmlType(name = "controleAcess", propOrder = {"controleid", "user", "local", "data", "tenantId", "userId"
+		, "tableEnum", "acaoId", "acao"})
 public class ControleAcess extends QATModelOL
 {
 
@@ -37,6 +38,9 @@ public class ControleAcess extends QATModelOL
 
 	/** The acao id. */
 	private Integer acaoId;
+
+	/** The acao. */
+	private AcaoTypeEnum acao;
 
 	/**
 	 * Gets the user id.
@@ -97,9 +101,6 @@ public class ControleAcess extends QATModelOL
 	{
 		this.acaoId = acaoId;
 	}
-
-	/** The acao. */
-	private AcaoTypeEnum acao;
 
 	/**
 	 * Instantiates a new bundle.

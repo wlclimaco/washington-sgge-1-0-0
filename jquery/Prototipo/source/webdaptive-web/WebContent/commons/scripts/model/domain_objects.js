@@ -17,3 +17,12 @@
 		this.description = _procDesc;
 		this.price = _procPrice;
 	};
+
+	qat.model.cadastro = function(_Id, _type, _nome, _descricao,_controlAcess)
+	{
+		this.id = _Id;
+		this.type = 1;
+		this.nome = _nome;
+		this.descricao = _descricao;
+	//	this.controlAcess = _controlAcess;
+	};

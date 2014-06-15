@@ -31,7 +31,7 @@
 	<!--	 ========================= Web Service Client Definitions ======================== -->
     <jaxws:client id="countyBASClientTarget"
                   serviceClass="com.qat.samples.sysmgmt.bas.ICountyBAS"
-                 address="http://localhost:8080/qat-sysmgmt-sample/services/ws/CountyService">
+                 address="http://supermercado.web1021.kinghost.net/qat-sysmgmt-sample/services/ws/CountyService">
     	<jaxws:outInterceptors>
         	<ref bean="wss4jOutInterceptor"/>
  		</jaxws:outInterceptors>
@@ -39,7 +39,7 @@
 
     <jaxws:client id="procedureBASClientTarget"
                   serviceClass="com.qat.samples.sysmgmt.bas.IProcedureBAS"
-                 address="http://localhost:8080/qat-sysmgmt-sample/services/ws/ProcedureService">
+                 address="http://supermercado.web1021.kinghost.net/qat-sysmgmt-sample/services/ws/ProcedureService">
     	<jaxws:outInterceptors>
         	<ref bean="wss4jOutInterceptor"/>
  		</jaxws:outInterceptors>

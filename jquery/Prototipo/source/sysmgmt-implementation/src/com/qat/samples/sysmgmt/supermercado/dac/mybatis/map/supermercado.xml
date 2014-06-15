@@ -18,7 +18,7 @@
     <result property="site" column="site"/>
     <result property="email" column="email"/>
     <collection property="documentos" column="supermercadoid" select="DocumentoMap.fetchAllDocumentosBySupermercado" />
-    <collection property="enderecos" column="supermercadoid" select="EnderecoAcessMap.fetchAllEnderecosBySupermercado" />
+    <collection property="enderecos" column="supermercadoid" select="EnderecoMap.fetchAllEnderecosBySupermercado" />
     <collection property="acessos" column="supermercadoid" select="ControleAcessMap.fetchAllControleBySupermercado" />
   </resultMap>
 

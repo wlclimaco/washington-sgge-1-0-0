@@ -4,14 +4,16 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlType;
 
+import com.qat.samples.sysmgmt.supermercado.model.Supermercado;
 import com.qat.samples.sysmgmt.util.Util;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "Produto", propOrder = {"id", "codBarra", "marca", "menu", "submenu", "unimed", "trimenu", "nome",
+@XmlType(name = "Produto", propOrder = {"id", "supermercadoid", "codBarra", "marca", "menu", "submenu", "unimed",
+		"trimenu",
+		"nome",
 		"descricao",
 		"foto",
 		"precos"})
@@ -20,6 +22,9 @@ public class Produto extends Util
 
 	/** The id. */
 	private Integer id;
+
+	/** The supermercadoid. */
+	private Supermercado supermercadoid;
 
 	/** The cod barra. */
 	private String codBarra;
@@ -118,6 +123,46 @@ public class Produto extends Util
 	}
 
 	/**
+	 * Instantiates a new produto.
+	 * 
+	 * @param id the id
+	 * @param supermercadoid the supermercadoid
+	 * @param codBarra the cod barra
+	 * @param marca the marca
+	 * @param menu the menu
+	 * @param submenu the submenu
+	 * @param trimenu the trimenu
+	 * @param unimed the unimed
+	 * @param nome the nome
+	 * @param descricao the descricao
+	 * @param foto the foto
+	 * @param precos the precos
+	 */
+	public Produto(Integer id, Supermercado supermercadoid, String codBarra, Cadastro marca, Cadastro menu,
+			Cadastro submenu, Cadastro trimenu, Cadastro unimed, String nome, String descricao, String foto,
+			List<Tabelapreco> precos)
+	{
+		super();
+		this.id = id;
+		this.codBarra = codBarra;
+		this.marca = marca;
+		this.menu = menu;
+		this.submenu = submenu;
+		this.trimenu = trimenu;
+		this.unimed = unimed;
+		this.nome = nome;
+		this.descricao = descricao;
+		this.foto = foto;
+		this.precos = precos;
+	}
+
+	/**
+	 * Gets the supermercadoid.
+	 * 
+	 * @return the supermercadoid
+	 */
+
+	/**
 	 * Gets the id.
 	 * 
 	 * @return the id
@@ -125,6 +170,16 @@ public class Produto extends Util
 	public Integer getId()
 	{
 		return id;
+	}
+
+	public Supermercado getSupermercadoid()
+	{
+		return supermercadoid;
+	}
+
+	public void setSupermercadoid(Supermercado supermercadoid)
+	{
+		this.supermercadoid = supermercadoid;
 	}
 
 	/**
@@ -344,11 +399,11 @@ public class Produto extends Util
 	@Override
 	public String toString()
 	{
-		return "Produto [getId()=" + getId() + ", getCodBarra()=" + getCodBarra() + ", getMarca()=" + getMarca()
-				+ ", getMenu()=" + getMenu() + ", getSubmenu()=" + getSubmenu() + ", getTrimenu()=" + getTrimenu()
-				+ ", getUnimed()=" + getUnimed() + ", getNome()=" + getNome() + ", getDescricao()=" + getDescricao()
-				+ ", getFoto()=" + getFoto() + ", getPrecos()=" + getPrecos() + ", toString()=" + super.toString()
-				+ "]";
+		return "Produto [getSupermercadoid()=" + getSupermercadoid() + ", getId()=" + getId() + ", getCodBarra()="
+				+ getCodBarra() + ", getMarca()=" + getMarca() + ", getMenu()=" + getMenu() + ", getSubmenu()="
+				+ getSubmenu() + ", getTrimenu()=" + getTrimenu() + ", getUnimed()=" + getUnimed() + ", getNome()="
+				+ getNome() + ", getDescricao()=" + getDescricao() + ", getFoto()=" + getFoto() + ", getPrecos()="
+				+ getPrecos() + ", toString()=" + super.toString() + "]";
 	}
 
 }

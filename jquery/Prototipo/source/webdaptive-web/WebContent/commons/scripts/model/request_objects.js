@@ -57,6 +57,22 @@
 		this.returnListPaged = _bPagedList;
 	};
 
+	//CountyMaintenanceRequest Object
+	qat.model.reqCadastro = function(_oUC, _oCadastro, _bList, _bPagedList)
+	{
+		if (_oUC == null)
+		{
+			this.userContext = new qat.base.model.userContext();
+		}
+		else
+		{
+			this.userContext = _oUC;
+		}
+		this.cadastro = _oCadastro;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
+	};
+
 	//ProcedureMaintenanceRequest
 	qat.model.reqProc = function (_oUC, _oProc, _bList, _bPagedList)
 	{

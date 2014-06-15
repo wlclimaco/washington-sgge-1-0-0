@@ -107,7 +107,7 @@
   <select id="fetchControleAcessByAcao" parameterType="Integer" resultMap="ControleAcessResult">
     SELECT
    <include refid="allControleAcessColumns" />
-    FROM CONTROLE WHERE IDACAO = #{value}
+    FROM CONTROLE WHERE IDACAO = #{id}
   </select>
 
   <insert id="insertControleAcess" parameterType="ControleAcess">

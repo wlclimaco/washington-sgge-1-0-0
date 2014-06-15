@@ -163,10 +163,9 @@ public class ProdutoBACImpl implements IProdutoBAC
 	}
 
 	@Override
-	public InternalResponse insertCadastro(Cadastro procedure)
+	public InternalResponse insertCadastro(Cadastro cadastro)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getProdutoDAC().insertCadastro(cadastro);
 	}
 
 	@Override

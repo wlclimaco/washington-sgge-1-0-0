@@ -17,7 +17,7 @@ import com.qat.samples.sysmgmt.produto.model.response.ProdutoResponse;
  * Standard implementation of a BAS where the operations are delegated to a BAI.
  * Note the BAI is injected by Spring.
  */
-@WebService(targetNamespace = "http://qat.com/sysmgmt")
+@WebService(targetNamespace = "http://www.supermercado.kinghost.net/sysmgmt")
 public class ProdutoBAS implements IProdutoBAS
 {
 
@@ -128,8 +128,7 @@ public class ProdutoBAS implements IProdutoBAS
 	@Override
 	public CadastroResponse insertCadastro(CadastroMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getProdutoBAI().insertCadastro(request);
 	}
 
 	@Override
