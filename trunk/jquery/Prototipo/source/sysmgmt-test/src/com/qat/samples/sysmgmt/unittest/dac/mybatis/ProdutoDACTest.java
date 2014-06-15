@@ -31,6 +31,7 @@ import com.qat.samples.sysmgmt.produto.model.CadastroTypeEnum;
 import com.qat.samples.sysmgmt.produto.model.Produto;
 import com.qat.samples.sysmgmt.produto.model.Tabelapreco;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest;
+import com.qat.samples.sysmgmt.supermercado.model.Supermercado;
 import com.qat.samples.sysmgmt.util.ControleAcess;
 
 @ContextConfiguration(locations = {
@@ -59,7 +60,7 @@ public class ProdutoDACTest extends AbstractTransactionalJUnit4SpringContextTest
 	@Test
 	public void testInsertProduto() throws Exception
 	{
-		getProdutoDAC().deleteAllProdutos();
+		// getProdutoDAC().deleteAllProdutos();
 		Produto produto = createProduto();
 		getProdutoDAC().insertProduto(produto);
 		FetchByIdRequest request = createFetchByIdRequest(produto.getId());
@@ -182,6 +183,8 @@ public class ProdutoDACTest extends AbstractTransactionalJUnit4SpringContextTest
 				"foto",
 				list
 				);
+		Supermercado supermercado = new Supermercado(1);
+		produto.setSupermercadoid(supermercado);
 		List<ControleAcess> lista = new ArrayList<ControleAcess>();
 		ControleAcess controle = new ControleAcess();
 		controle.setUserId(1);

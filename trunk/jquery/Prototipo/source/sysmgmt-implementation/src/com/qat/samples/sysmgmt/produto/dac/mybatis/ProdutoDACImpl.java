@@ -99,24 +99,26 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	public InternalResponse insertProduto(Produto produto)
 	{
 
-		HashMap<String, Object> paramMap = new HashMap<String, Object>(16);
+		HashMap<String, Object> paramMap = new HashMap<String, Object>(14);
 		paramMap.put("produtoid", produto.getId());
 		paramMap.put("codbarra", produto.getCodBarra());
 		paramMap.put("nome", produto.getNome());
 		paramMap.put("marca", produto.getMarca().getId());
-		paramMap.put("menu", supermercado.getEnderecos().get(0).getLogradouro());
-		paramMap.put("submenu", supermercado.getEnderecos().get(0).getBairro());
-		paramMap.put("trimenu", supermercado.getEnderecos().get(0).getEstado());
-		paramMap.put("unimed", supermercado.getEnderecos().get(0).getCidade());
-		paramMap.put("precoid", supermercado.getEnderecos().get(0).getNumero());
-		paramMap.put("controleid", supermercado.getEnderecos().get(0).getCep());
-		paramMap.put("foto", supermercado.getEnderecos().get(0).getNome());
-		paramMap.put("supermercadoid", supermercado.getEnderecos().get(0).getComplemento());
-		paramMap.put("preco", supermercado.getDocumentos().get(0).getId());
-		paramMap.put("usuarioid", supermercado.getDocumentos().get(0).getRgInc());
-
+		paramMap.put("menu", produto.getMenu().getId());
+		paramMap.put("submenu", produto.getSubmenu().getId());
+		paramMap.put("trimenu", produto.getTrimenu().getId());
+		paramMap.put("unimed", produto.getUnimed().getId());
+		paramMap.put("precoid", 1);
+		paramMap.put("controleid", 1);
+		paramMap.put("foto", produto.getFoto());
+		paramMap.put("supermercadoid", produto.getSupermercadoid().getId());
+		paramMap.put("preco", new Double(2.2));
+		paramMap.put("usuarioid", produto.getMarca().getId());
 		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doInsert(getSqlSession(), STMT_INSERT, produto, paramMap);
+		// integer, character varying, character varying, integer, integer, integer, integer, integer, integer, integer,
+		// character varying, integer, double precision, integer
+		Integer academiaId =
+				(Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), STMT_INSERT, paramMap);
 		return response;
 	}
 
@@ -128,9 +130,28 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	@Override
 	public InternalResponse updateProduto(Produto produto)
 	{
+		HashMap<String, Object> paramMap = new HashMap<String, Object>(14);
+		paramMap.put("produtoid", produto.getId());
+		paramMap.put("codbarra", produto.getCodBarra());
+		paramMap.put("nome", produto.getNome());
+		paramMap.put("marca", produto.getMarca().getId());
+		paramMap.put("menu", produto.getMenu().getId());
+		paramMap.put("submenu", produto.getSubmenu().getId());
+		paramMap.put("trimenu", produto.getTrimenu().getId());
+		paramMap.put("unimed", produto.getUnimed().getId());
+		paramMap.put("precoid", 1);
+		paramMap.put("controleid", 1);
+		paramMap.put("foto", produto.getFoto());
+		paramMap.put("supermercadoid", produto.getSupermercadoid().getId());
+		paramMap.put("preco", new Double(2.2));
+		paramMap.put("usuarioid", produto.getMarca().getId());
+
 		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doUpdateOL(getSqlSession(), STMT_UPDATE, produto, STMT_VERSION, response);
+
+		Integer academiaId =
+				(Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), STMT_UPDATE, paramMap);
 		return response;
+
 	}
 
 	/*
@@ -168,7 +189,9 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	@Override
 	public Produto fetchProdutoById(FetchByIdRequest request)
 	{
-		return (Produto)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), STMT_FETCH, request.getFetchId());
+		Produto produto = new Produto();
+		produto = (Produto)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), STMT_FETCH, request.getFetchId());
+		return produto;
 	}
 
 	/*

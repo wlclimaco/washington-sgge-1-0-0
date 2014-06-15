@@ -12,7 +12,8 @@ import com.qat.samples.sysmgmt.util.Util;
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "Tabelapreco", propOrder = {"idProduto", "type", "preco", "dateIni", "dateFim"})
+@XmlType(name = "Tabelapreco", propOrder = {"precoid", "idProduto", "supermercadoid", "type", "preco",
+		"precopromo", "promocao", "dateIni", "dateFim"})
 public class Tabelapreco extends Util
 {
 
@@ -21,8 +22,6 @@ public class Tabelapreco extends Util
 	private Integer idProduto;
 
 	private Supermercado supermercadoid;
-
-	private Data data;
 
 	/** The code. */
 	private PrecoTypeEnum type;
@@ -55,7 +54,6 @@ public class Tabelapreco extends Util
 		this.precoid = precoid;
 		this.idProduto = idProduto;
 		this.supermercadoid = supermercadoid;
-		this.data = data;
 		this.type = type;
 		this.preco = preco;
 		this.precopromo = precopromo;
@@ -102,16 +100,6 @@ public class Tabelapreco extends Util
 	public void setSupermercadoid(Supermercado supermercadoid)
 	{
 		this.supermercadoid = supermercadoid;
-	}
-
-	public Data getData()
-	{
-		return data;
-	}
-
-	public void setData(Data data)
-	{
-		this.data = data;
 	}
 
 	public PrecoTypeEnum getType()
@@ -178,7 +166,7 @@ public class Tabelapreco extends Util
 	public String toString()
 	{
 		return "Tabelapreco [getPrecoid()=" + getPrecoid() + ", getIdProduto()=" + getIdProduto()
-				+ ", getSupermercadoid()=" + getSupermercadoid() + ", getData()=" + getData() + ", getType()="
+				+ ", getSupermercadoid()=" + getSupermercadoid() + ", getType()="
 				+ getType() + ", getPreco()=" + getPreco() + ", getPrecopromo()=" + getPrecopromo()
 				+ ", getPromocao()=" + getPromocao() + ", getDateIni()=" + getDateIni() + ", getDateFim()="
 				+ getDateFim() + ", toString()=" + super.toString() + "]";

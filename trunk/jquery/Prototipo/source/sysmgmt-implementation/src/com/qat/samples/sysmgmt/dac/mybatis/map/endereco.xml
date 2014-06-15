@@ -23,7 +23,7 @@
     <result property="cep" column="nome"/>
     <result property="complemento" column="complemento"/>
     <result property="tableTypeValue" column="acao"/>
-    <collection property="acessos" column="documentoid" select="ControleAcessMap.fetchControleAcessByAcao" />
+    <collection property="acessos" column="enderecoid" select="ControleAcessMap.fetchControleAcessByAcao" />
   </resultMap>
 
 	  <sql id="allEnderecoColumns">
@@ -37,6 +37,11 @@
    		 SELECT <include refid="allEnderecoColumns" /> FROM ENDERECO WHERE ACAO = 1 AND ID = #{ID}
    </select>
 
+ <select id="fetchAllEnderecosBySupermercado" parameterType="Integer" resultMap="EnderecoResult">
+  SELECT
+    <include refid="allEnderecoColumns" />
+    FROM ENDERECO where enderecoid = #{id} ORDER BY enderecoid ASC
+  </select>
 
   <select id="fetchAllEnderecos" resultMap="EnderecoResult">
     SELECT

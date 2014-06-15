@@ -225,8 +225,17 @@ public class ProdutoBAIImpl implements IProdutoBAI
 	@Override
 	public CadastroResponse insertCadastro(CadastroMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		CadastroResponse response = new CadastroResponse();
+		try
+		{
+			ProdutoBAID.maintainCadastro(getProdutoBAC(), ValidationContextIndicator.INSERT, getValidationController(),
+					PersistanceActionEnum.INSERT, request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
 	}
 
 	@Override

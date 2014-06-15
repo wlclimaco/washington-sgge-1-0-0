@@ -8,12 +8,11 @@ import com.qat.samples.sysmgmt.documento.model.Documento;
 import com.qat.samples.sysmgmt.endereco.model.Endereco;
 import com.qat.samples.sysmgmt.util.Util;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "Supermercado", propOrder = {"id", "code", "description", "price"})
+@XmlType(name = "Supermercado", propOrder = {"id", "enderecos", "usuario", "senha", "email", "site", "documentos"})
 public class Supermercado extends Util
 {
 

@@ -9,7 +9,10 @@ import com.qat.samples.sysmgmt.util.Util;
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "Bundle", propOrder = {"id", "code", "description", "price"})
+@XmlType(name = "Endereco", propOrder = {"id", "enderecoid", "logradouro", "bairro", "estado", "cidade", "numero",
+		"cep",
+		"nome"
+		, "complemento", "tabela"})
 public class Endereco extends Util
 {
 

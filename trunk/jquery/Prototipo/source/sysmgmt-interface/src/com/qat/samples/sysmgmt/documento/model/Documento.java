@@ -11,7 +11,8 @@ import com.qat.samples.sysmgmt.util.Util;
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "Documento", propOrder = {"id", "indentificacaos", "dateNascimento"})
+@XmlType(name = "Documento", propOrder = {"documentoid", "id", "rgInc", "cpfCnpj",
+		"nome", "razao", "tabela", "dateNascimento"})
 public class Documento extends Util
 {
 
@@ -35,6 +36,9 @@ public class Documento extends Util
 	private String razao;
 
 	private TableTypeEnum tabela;
+
+	/** The description. */
+	private Date dateNascimento;
 
 	/**
 	 * Instantiates a new documento.
@@ -96,9 +100,6 @@ public class Documento extends Util
 	{
 		this.razao = razao;
 	}
-
-	/** The description. */
-	private Date dateNascimento;
 
 	/**
 	 * Instantiates a new documento.
@@ -237,7 +238,7 @@ public class Documento extends Util
 	 */
 	public void setDocumenroid(Integer documenroid)
 	{
-		this.documentoid = documenroid;
+		documentoid = documenroid;
 	}
 
 	/**
@@ -255,7 +256,7 @@ public class Documento extends Util
 			Date dateNascimento)
 	{
 		super();
-		this.documentoid = documenroid;
+		documentoid = documenroid;
 		this.id = id;
 		this.rgInc = rgInc;
 		this.cpfCnpj = cpfCnpj;

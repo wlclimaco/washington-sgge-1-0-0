@@ -34,9 +34,7 @@
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
   	</bean>
 
-  	<bean id="produtoDACTarget" class="com.qat.samples.sysmgmt.produto.dac.mybatis.ProdutoDACImpl">
-		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
-  	</bean>
+
   	<bean id="contoleAcessDACTarget" class="com.qat.samples.sysmgmt.dac.mybatis.ControleAcessDACImpl">
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
   	</bean>
@@ -49,6 +47,10 @@
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
   	</bean>
   	<bean id="supermercadoAcessDACTarget" class="com.qat.samples.sysmgmt.supermercado.dac.mybatis.SupermercadoDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="produtoDACTarget" class="com.qat.samples.sysmgmt.produto.dac.mybatis.ProdutoDACImpl">
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
   	</bean>
 

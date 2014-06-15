@@ -124,8 +124,7 @@ public class ProdutoBAS implements IProdutoRESTBAS
 	@Override
 	public CadastroResponse insertCadastro(CadastroMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getProdutoBAI().insertCadastro(request);
 	}
 
 	@Override

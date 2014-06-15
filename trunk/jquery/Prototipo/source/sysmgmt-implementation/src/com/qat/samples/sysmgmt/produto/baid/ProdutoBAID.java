@@ -16,8 +16,11 @@ import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.RefreshRequest;
 import com.qat.samples.sysmgmt.produto.bac.IProdutoBAC;
+import com.qat.samples.sysmgmt.produto.model.Cadastro;
 import com.qat.samples.sysmgmt.produto.model.Produto;
+import com.qat.samples.sysmgmt.produto.model.request.CadastroMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.response.CadastroResponse;
 import com.qat.samples.sysmgmt.produto.model.response.ProdutoResponse;
 
 /**
@@ -95,6 +98,49 @@ public final class ProdutoBAID
 		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, context.getMessages(), false);
 	}
 
+	public static void maintainCadastro(IProdutoBAC produtoBAC, ValidationContextIndicator validationIndicator,
+			ValidationController controller,
+			PersistanceActionEnum persistType, CadastroMaintenanceRequest request, CadastroResponse response)
+	{
+		ValidationContext context =
+				new ValidationContext(Produto.class.getSimpleName(), request.getCadastro(), validationIndicator);
+
+		InternalResponse internalResponse = new InternalResponse();
+		if (controller.validate(context))
+		{
+			// perform persistence
+			switch (persistType)
+			{
+				case INSERT:
+					internalResponse = produtoBAC.insertCadastro(request.getCadastro());
+					break;
+				case UPDATE:
+					internalResponse = produtoBAC.updateCadastro(request.getCadastro());
+					break;
+				case DELETE:
+					internalResponse = produtoBAC.deleteCadastro(request.getCadastro());
+					break;
+				default:
+					if (LOG.isDebugEnabled())
+					{
+						LOG.debug("persistType missing! Setting Unspecified Error status.");
+					}
+					internalResponse.setStatus(InternalResponse.Status.UnspecifiedError);
+					break;
+			}
+
+			// If the persistence worked
+			if (internalResponse.getStatus() == Status.OperationSuccess)
+			{
+				// Call maintain to see if we need to return the county list and if so whether it should be paged or not
+				maintainReturnListCadastro(request.getReturnList(), request.getReturnListPaged(), response, produtoBAC);
+			}
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, context.getMessages(), false);
+	}
+
 	/**
 	 * Refresh produtos.
 	 * 
@@ -128,6 +174,18 @@ public final class ProdutoBAID
 		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
 	}
 
+	public static void fetchAllCadastros(IProdutoBAC produtoBAC, CadastroResponse response)
+	{
+		InternalResultsResponse<Cadastro> internalResponse = produtoBAC.fetchAllCadastros();
+		if (internalResponse.getStatus() != Status.OperationSuccess)
+		{
+			response.addOperationFailedMessage(DEFAULT_BUNDLE_BAID_EXCEPTION_MSG, new Object[] {internalResponse
+					.getStatus().toString()});
+		}
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
 	/**
 	 * Fetch produtos paged.
 	 * 
@@ -138,6 +196,19 @@ public final class ProdutoBAID
 	public static void fetchProdutosPaged(IProdutoBAC produtoBAC, PagedInquiryRequest request, ProdutoResponse response)
 	{
 		InternalResultsResponse<Produto> internalResponse = produtoBAC.fetchProdutosByRequest(request);
+		if (internalResponse.getStatus() != Status.OperationSuccess)
+		{
+			response.addOperationFailedMessage(DEFAULT_BUNDLE_BAID_EXCEPTION_MSG, new Object[] {internalResponse
+					.getStatus().toString()});
+		}
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	public static void fetchCadastrosPaged(IProdutoBAC produtoBAC, PagedInquiryRequest request,
+			CadastroResponse response)
+	{
+		InternalResultsResponse<Cadastro> internalResponse = produtoBAC.fetchCadastrosByRequest(request);
 		if (internalResponse.getStatus() != Status.OperationSuccess)
 		{
 			response.addOperationFailedMessage(DEFAULT_BUNDLE_BAID_EXCEPTION_MSG, new Object[] {internalResponse
@@ -195,6 +266,28 @@ public final class ProdutoBAID
 			{
 				// otherwise return all rows not paged
 				fetchAllProdutos(produtoBAC, response);
+			}
+		}
+	}
+
+	private static void maintainReturnListCadastro(Boolean listIndicator, Boolean pageListIndicator,
+			CadastroResponse response,
+			IProdutoBAC produtoBAC)
+	{
+		// Fetch again if requested.
+		if (listIndicator)
+		{
+			// Fetch Paged is requested.
+			if (pageListIndicator)
+			{
+				PagedInquiryRequest request = new PagedInquiryRequest();
+				request.setPreQueryCount(true);
+				fetchCadastrosPaged(produtoBAC, request, response);
+			}
+			else
+			{
+				// otherwise return all rows not paged
+				fetchAllCadastros(produtoBAC, response);
 			}
 		}
 	}
