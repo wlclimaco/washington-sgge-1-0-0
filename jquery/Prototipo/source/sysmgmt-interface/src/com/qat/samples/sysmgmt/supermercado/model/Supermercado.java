@@ -6,13 +6,15 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.qat.samples.sysmgmt.documento.model.Documento;
 import com.qat.samples.sysmgmt.endereco.model.Endereco;
+import com.qat.samples.sysmgmt.util.Imagem;
 import com.qat.samples.sysmgmt.util.Util;
 
 /**
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "Supermercado", propOrder = {"id", "enderecos", "usuario", "senha", "email", "site", "documentos"})
+@XmlType(name = "Supermercado", propOrder = {"id", "enderecos", "usuario", "senha", "email", "site", "documentos",
+		"imagens"})
 public class Supermercado extends Util
 {
 
@@ -33,6 +35,8 @@ public class Supermercado extends Util
 
 	/** The documentos. */
 	private List<Documento> documentos;
+
+	private List<Imagem> imagens;
 
 	/**
 	 * Instantiates a new bundle.
@@ -182,6 +186,16 @@ public class Supermercado extends Util
 		this.documentos = documentos;
 	}
 
+	public List<Imagem> getImagens()
+	{
+		return imagens;
+	}
+
+	public void setImagens(List<Imagem> imagens)
+	{
+		this.imagens = imagens;
+	}
+
 	/** The id. */
 	private Integer id;
 
@@ -220,16 +234,13 @@ public class Supermercado extends Util
 		this.documentos = documentos;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.util.Util#toString()
-	 */
 	@Override
 	public String toString()
 	{
 		return "Supermercado [getId()=" + getId() + ", getEnderecos()=" + getEnderecos() + ", getUsuario()="
 				+ getUsuario() + ", getSenha()=" + getSenha() + ", getEmail()=" + getEmail() + ", getSite()="
-				+ getSite() + ", getDocumentos()=" + getDocumentos() + ", toString()=" + super.toString() + "]";
+				+ getSite() + ", getDocumentos()=" + getDocumentos() + ", getImagens()=" + getImagens()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }
