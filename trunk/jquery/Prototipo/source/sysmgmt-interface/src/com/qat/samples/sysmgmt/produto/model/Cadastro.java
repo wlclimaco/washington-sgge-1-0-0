@@ -2,6 +2,7 @@ package com.qat.samples.sysmgmt.produto.model;
 
 import javax.xml.bind.annotation.XmlType;
 
+import com.qat.samples.sysmgmt.util.TableTypeEnum;
 import com.qat.samples.sysmgmt.util.Util;
 
 /**
@@ -16,7 +17,7 @@ public class Cadastro extends Util
 	private Integer id;
 
 	/** The code. */
-	private CadastroTypeEnum type;
+	private TableTypeEnum type;
 
 	/** The description. */
 	private String nome;
@@ -59,7 +60,7 @@ public class Cadastro extends Util
 	 * 
 	 * @return the type
 	 */
-	public CadastroTypeEnum getType()
+	public TableTypeEnum getType()
 	{
 		return type;
 	}
@@ -69,7 +70,7 @@ public class Cadastro extends Util
 	 * 
 	 * @param type the type to set
 	 */
-	public void setType(CadastroTypeEnum type)
+	public void setType(TableTypeEnum type)
 	{
 		this.type = type;
 	}
@@ -133,7 +134,7 @@ public class Cadastro extends Util
 	 */
 	public void setCadastroTypeValue(Integer cadastroTypeValue)
 	{
-		type = CadastroTypeEnum.enumForValue(cadastroTypeValue);
+		type = TableTypeEnum.enumForValue(cadastroTypeValue);
 	}
 
 	/**
@@ -142,7 +143,7 @@ public class Cadastro extends Util
 	 * @param id the id
 	 * @param type the type
 	 */
-	public Cadastro(Integer id, CadastroTypeEnum type)
+	public Cadastro(Integer id, TableTypeEnum type)
 	{
 		super();
 		this.id = id;
@@ -156,7 +157,7 @@ public class Cadastro extends Util
 	 * @param type the type
 	 * @param nome the nome
 	 */
-	public Cadastro(Integer id, CadastroTypeEnum type, String nome)
+	public Cadastro(Integer id, TableTypeEnum type, String nome)
 	{
 		super();
 		this.id = id;

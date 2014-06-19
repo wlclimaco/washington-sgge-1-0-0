@@ -5,6 +5,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlType;
 
 import com.qat.samples.sysmgmt.supermercado.model.Supermercado;
+import com.qat.samples.sysmgmt.util.Imagem;
 import com.qat.samples.sysmgmt.util.Util;
 
 /**
@@ -16,7 +17,8 @@ import com.qat.samples.sysmgmt.util.Util;
 		"nome",
 		"descricao",
 		"foto",
-		"precos"})
+		"precos",
+		"imagens"})
 public class Produto extends Util
 {
 
@@ -55,6 +57,8 @@ public class Produto extends Util
 
 	/** The senha. */
 	private List<Tabelapreco> precos;
+
+	private List<Imagem> imagens;
 
 	/**
 	 * Instantiates a new bundle.
@@ -392,18 +396,24 @@ public class Produto extends Util
 		this.precos = precos;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.util.Util#toString()
-	 */
+	public List<Imagem> getImagens()
+	{
+		return imagens;
+	}
+
+	public void setImagens(List<Imagem> imagens)
+	{
+		this.imagens = imagens;
+	}
+
 	@Override
 	public String toString()
 	{
-		return "Produto [getSupermercadoid()=" + getSupermercadoid() + ", getId()=" + getId() + ", getCodBarra()="
+		return "Produto [getId()=" + getId() + ", getSupermercadoid()=" + getSupermercadoid() + ", getCodBarra()="
 				+ getCodBarra() + ", getMarca()=" + getMarca() + ", getMenu()=" + getMenu() + ", getSubmenu()="
 				+ getSubmenu() + ", getTrimenu()=" + getTrimenu() + ", getUnimed()=" + getUnimed() + ", getNome()="
 				+ getNome() + ", getDescricao()=" + getDescricao() + ", getFoto()=" + getFoto() + ", getPrecos()="
-				+ getPrecos() + ", toString()=" + super.toString() + "]";
+				+ getPrecos() + ", getImagens()=" + getImagens() + ", toString()=" + super.toString() + "]";
 	}
 
 }
