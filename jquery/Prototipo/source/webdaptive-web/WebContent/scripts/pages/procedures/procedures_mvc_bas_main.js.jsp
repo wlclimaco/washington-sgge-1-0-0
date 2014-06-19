@@ -27,6 +27,7 @@ var columns = [
     {id:"psak", name: procedure.grid.psak.title, field:"psak", resizable:false, cssClass:"cell-center", width:75},
     {id:"pcode", name: procedure.grid.pcode.title, field:"pcode", editor:Slick.Editors.Text, validator:requiredFieldValidator},
 	{id:"pdesc", name: procedure.grid.pdesc.title, field:"pdesc", width:250, editor:Slick.Editors.Text, validator:requiredFieldValidator},
+	{id:"col1", name:"test", field:"col1",  width:135, editable:true, cssClass:"pad-4-left", sortable:true, editor:Slick.Editors.Auto},
 	{id:"pprice", name: procedure.grid.pprice.title, field:"pprice", cssClass:"cell-center", resizable:false, width:150, formatter:Slick.Formatters.Currency},
 	{id:"pversion", name: procedure.grid.pversion.title, field:"pversion", resizable:false, cssClass:"cell-center", width:135}
 ];
@@ -106,10 +107,12 @@ var options =
 			if (viewLoadedObject == null)
 			{
 			    var oData = new qat.model.pagedInquiryRequest(null, _iPageSize, _iStartPage, true);
-				rest_post_call('qat-webdaptive/procedure/api/fetchByRequestBAS', oData, fill_data, process_error);
+				//rest_post_call('qat-webdaptive/procedure/api/fetchByRequestBAS', oData, fill_data, process_error);
+				rest_post_call('qat-sysmgmt-sample/services/rest/CountyService/fetchAllCounties', {}, fill_data, process_error);
 			}
 			else
 			{
+				rest_post_call('qat-sysmgmt-sample/services/rest/CountyService/fetchAllCounties', {}, fill_data, process_error);
 				fill_data(viewLoadedObject);
 				viewLoadedObject = null;
 			}
