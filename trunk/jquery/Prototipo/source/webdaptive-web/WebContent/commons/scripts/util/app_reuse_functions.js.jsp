@@ -140,13 +140,13 @@ function procedure_fill_data(procResponse,data2)
 //          function cadastro
 function cadastro_fill_data(procResponse,data2)
 {
-debugger;
+
 	data2[0] =
 	{
 		cellno: 0,
 		action: "<span>Novo>>></span>",
-		pprod: 0,
-		pid: null,
+		pprod: 2,
+		pid: 1,
 		pnome: null,
 		pdesc: null
 	};

@@ -12,7 +12,7 @@ import com.qat.samples.sysmgmt.util.Util;
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "Cadastro", propOrder = {"id", "type", "nome", "descricao", "imagens"})
+@XmlType(name = "Cadastro", propOrder = {"id", "type", "nome", "produtos", "descricao", "imagens"})
 public class Cadastro extends Util
 {
 
@@ -24,6 +24,8 @@ public class Cadastro extends Util
 
 	/** The description. */
 	private String nome;
+
+	private List<Produto> produtos;
 
 	/** The price. */
 	private String descricao;
@@ -58,6 +60,16 @@ public class Cadastro extends Util
 	public void setId(Integer id)
 	{
 		this.id = id;
+	}
+
+	public List<Produto> getProdutos()
+	{
+		return produtos;
+	}
+
+	public void setProdutos(List<Produto> produtos)
+	{
+		this.produtos = produtos;
 	}
 
 	/**
@@ -183,8 +195,8 @@ public class Cadastro extends Util
 	@Override
 	public String toString()
 	{
-		return "Cadastro [getId()=" + getId() + ", getType()=" + getType() + ", getNome()=" + getNome()
-				+ ", getDescricao()=" + getDescricao() + ", getImagens()=" + getImagens()
+		return "Cadastro [getId()=" + getId() + ", getProdutos()=" + getProdutos() + ", getType()=" + getType()
+				+ ", getNome()=" + getNome() + ", getDescricao()=" + getDescricao() + ", getImagens()=" + getImagens()
 				+ ", getTableTypeEnumValue()=" + getTableTypeEnumValue() + ", toString()=" + super.toString() + "]";
 	}
 

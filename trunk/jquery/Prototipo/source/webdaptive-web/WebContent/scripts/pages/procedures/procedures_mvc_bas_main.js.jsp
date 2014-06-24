@@ -25,10 +25,10 @@ var columns = [
 	{id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:"cell-center", width:30},
 	{id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML},
     {id:"pid", name: procedure.grid.psak.title, field:"pid", resizable:false, cssClass:"cell-center", width:75},
-    {id:"pprod", name: procedure.grid.pcode.title, field:"pprod"},
-	{id:"pnome", name: procedure.grid.pdesc.title, field:"pnome", width:250},
+    {id:"pprod", name: procedure.grid.pcode.title, field:"pprod", editable:true},
+	{id:"pnome", name: procedure.grid.pcode.title, field:"pnome", editor:Slick.Editors.Text},
 	{id:"col1", name:"test", field:"col1",  width:135, editable:true, cssClass:"pad-4-left", sortable:true, editor:Slick.Editors.Auto},
-	{id:"pdesc", name: procedure.grid.pprice.title, field:"pdesc", cssClass:"cell-center", resizable:false, width:150}
+	{id:"pdesc", name: procedure.grid.pcode.title, field:"pdesc", editor:Slick.Editors.Text}
 ];
 
 //grid options
@@ -55,8 +55,13 @@ var options =
 		function callInsertWS()
 		{
 			onProcDataLoading.notify({});
-		    var oData = new qat.model.reqProc(null, new qat.model.procedure(0,0,data[0].pcode,data[0].pdesc,0.0),true,true);
-			rest_post_call('qat-webdaptive/procedure/api/insertBAS', oData, fill_data, process_error);
+		   // var oData = new qat.model.reqCadastro(null, new qat.model.procedure(0,0,data[0].pcode,data[0].pdesc,0.0),true,true);qat.model.cadastro = function(_Id, _type, _nome, _descricao,_controlAcess)
+			var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(1,1,data[0].pnome,data[0].pdesc,null),true,true);
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/insertCadastro', oData, fill_data, process_error);
+			debugger;
+			var oData = new qat.model.pagedInquiryRequest(null, 20, 0, true);
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {}, fill_data, process_error);
+
 		}
 
 		function callUpdateWS()
@@ -206,10 +211,10 @@ $('#procGrid').keyup(function(e)
 		}
 		else
 		{
-			if (validateFields(0))
-			{
+		//	if (validateFields(0))
+		//	{
 				ploader.callInsertWS();
-			}
+		//	}
 		}
 	}
 });
