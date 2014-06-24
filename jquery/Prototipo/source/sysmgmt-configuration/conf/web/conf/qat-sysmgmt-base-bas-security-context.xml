@@ -66,6 +66,7 @@
         		<entry key="fetchCadastrosByRequest" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
         		<entry key="deleteCadastro" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
         		<entry key="insertCadastro" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="insertFoto" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
         		<entry key="updateCadastro" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
         		<entry key="refreshCadastros" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
       		</map>
@@ -172,6 +173,9 @@
         access="ROLE_DOMAIN ADMINS"/>
       <sec:protect-pointcut
         expression="execution(* com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS.refreshCadastros(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+       <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS.insertFoto(*))"
         access="ROLE_DOMAIN ADMINS"/>
   	</sec:global-method-security>
 

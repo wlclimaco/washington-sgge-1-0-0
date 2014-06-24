@@ -151,8 +151,7 @@ public class ProdutoBAS implements IProdutoRESTBAS
 	@Override
 	public CadastroResponse fetchAllCadastros(FetchAllRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getProdutoBAI().fetchAllCadastros(request);
 	}
 
 	@Override

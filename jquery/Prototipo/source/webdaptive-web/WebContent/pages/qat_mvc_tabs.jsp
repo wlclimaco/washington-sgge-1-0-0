@@ -17,6 +17,7 @@
 		<li><a href="../county/fetchAllCountiesBAI" title="qatmvctab-2"><span>Counties MVC BAI</span></a></li>
 		<li><a href="../county/fetchAllCountiesBAS" title="qatmvctab-3"><span>Counties MVC BAS</span></a></li>
 		<li><a href="../procedure/fetchProceduresByRequestBAS" title="qatmvctab-4"><span>Procedures MVC BAS</span></a></li>
+		<li><a href="../procedure/fetchFotoByRequestBAS" title="qatmvctab-5"><span>Insert Foto</span></a></li>
 		</sec:authorize>
 	</ul>
 	<div class="tabscontent">
@@ -25,6 +26,7 @@
 		<div id="qatmvctab-2"></div>
 		<div id="qatmvctab-3"></div>
 		<div id="qatmvctab-4"></div>
+		<div id="qatmvctab-5"></div>
 		</sec:authorize>
 	</div>
 </div>

@@ -24,12 +24,11 @@ var viewLoadedObject;
 var columns = [
 	{id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:"cell-center", width:30},
 	{id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML},
-    {id:"psak", name: procedure.grid.psak.title, field:"psak", resizable:false, cssClass:"cell-center", width:75},
-    {id:"pcode", name: procedure.grid.pcode.title, field:"pcode", editor:Slick.Editors.Text, validator:requiredFieldValidator},
-	{id:"pdesc", name: procedure.grid.pdesc.title, field:"pdesc", width:250, editor:Slick.Editors.Text, validator:requiredFieldValidator},
+    {id:"pid", name: procedure.grid.psak.title, field:"pid", resizable:false, cssClass:"cell-center", width:75},
+    {id:"pprod", name: procedure.grid.pcode.title, field:"pprod"},
+	{id:"pnome", name: procedure.grid.pdesc.title, field:"pnome", width:250},
 	{id:"col1", name:"test", field:"col1",  width:135, editable:true, cssClass:"pad-4-left", sortable:true, editor:Slick.Editors.Auto},
-	{id:"pprice", name: procedure.grid.pprice.title, field:"pprice", cssClass:"cell-center", resizable:false, width:150, formatter:Slick.Formatters.Currency},
-	{id:"pversion", name: procedure.grid.pversion.title, field:"pversion", resizable:false, cssClass:"cell-center", width:135}
+	{id:"pdesc", name: procedure.grid.pprice.title, field:"pdesc", cssClass:"cell-center", resizable:false, width:150}
 ];
 
 //grid options
@@ -108,11 +107,11 @@ var options =
 			{
 			    var oData = new qat.model.pagedInquiryRequest(null, _iPageSize, _iStartPage, true);
 				//rest_post_call('qat-webdaptive/procedure/api/fetchByRequestBAS', oData, fill_data, process_error);
-				rest_post_call('qat-sysmgmt-sample/services/rest/CountyService/fetchAllCounties', {}, fill_data, process_error);
+				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {}, fill_data, process_error);
 			}
 			else
 			{
-				rest_post_call('qat-sysmgmt-sample/services/rest/CountyService/fetchAllCounties', {}, fill_data, process_error);
+				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {}, fill_data, process_error);
 				fill_data(viewLoadedObject);
 				viewLoadedObject = null;
 			}
@@ -120,7 +119,7 @@ var options =
 
 		function fill_data(procResponse)
 		{
-			data = reuse_fill_data(procResponse,data,"procedure");
+			data = reuse_fill_data(procResponse,data,"cadastro");
 			onProcDataLoaded.notify({});
 		}
 

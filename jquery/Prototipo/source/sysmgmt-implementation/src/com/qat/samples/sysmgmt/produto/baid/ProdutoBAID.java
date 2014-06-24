@@ -176,7 +176,8 @@ public final class ProdutoBAID
 
 	public static void fetchAllCadastros(IProdutoBAC produtoBAC, CadastroResponse response)
 	{
-		InternalResultsResponse<Cadastro> internalResponse = produtoBAC.fetchAllCadastros();
+		InternalResultsResponse<Cadastro> internalResponse =
+				produtoBAC.fetchAllCadastros(new Cadastro());
 		if (internalResponse.getStatus() != Status.OperationSuccess)
 		{
 			response.addOperationFailedMessage(DEFAULT_BUNDLE_BAID_EXCEPTION_MSG, new Object[] {internalResponse

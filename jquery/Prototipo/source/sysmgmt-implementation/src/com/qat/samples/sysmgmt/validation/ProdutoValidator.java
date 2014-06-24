@@ -6,7 +6,8 @@ import com.qat.framework.model.MessageInfo;
 import com.qat.framework.validation.IValidator;
 import com.qat.framework.validation.ValidationContext;
 import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.model.Bundle;
+import com.qat.samples.sysmgmt.produto.model.Cadastro;
+import com.qat.samples.sysmgmt.produto.model.Produto;
 
 /**
  * The Class BundleDValidator.
@@ -24,7 +25,7 @@ public class ProdutoValidator implements IValidator
 	@Override
 	public void validate(ValidationContext validationContext)
 	{
-		Bundle bundle = (Bundle)validationContext.getObjectToBeValidated(Bundle.class.getSimpleName());
+		Cadastro bundle = (Cadastro)validationContext.getObjectToBeValidated(Produto.class.getSimpleName());
 
 		switch (validationContext.getValidationContextIndicator())
 		{
@@ -43,19 +44,19 @@ public class ProdutoValidator implements IValidator
 		}
 	}
 
-	private void validateProcId(List<MessageInfo> list, Bundle bundle)
+	private void validateProcId(List<MessageInfo> list, Cadastro bundle)
 	{
 		ValidationUtil.isNullOrZero(bundle.getId(), SYSMGMT_BASE_BUNDLEVALIDATOR_ID_REQUIRED, list);
 	}
 
-	private void validateProcCode(List<MessageInfo> list, Bundle bundle)
+	private void validateProcCode(List<MessageInfo> list, Cadastro bundle)
 	{
-		ValidationUtil.isNullOrEmpty(bundle.getCode(), SYSMGMT_BASE_BUNDLEVALIDATOR_PROCCODE_REQUIRED, list);
+		ValidationUtil.isNullOrEmpty(bundle.getNome(), SYSMGMT_BASE_BUNDLEVALIDATOR_PROCCODE_REQUIRED, list);
 	}
 
-	private void validateProcDesc(List<MessageInfo> list, Bundle bundle)
+	private void validateProcDesc(List<MessageInfo> list, Cadastro bundle)
 	{
-		ValidationUtil.isNullOrEmpty(bundle.getDescription(), SYSMGMT_BASE_BUNDLEVALIDATOR_PROCDESC_REQUIRED,
+		ValidationUtil.isNullOrEmpty(bundle.getDescricao(), SYSMGMT_BASE_BUNDLEVALIDATOR_PROCDESC_REQUIRED,
 				list);
 	}
 }
