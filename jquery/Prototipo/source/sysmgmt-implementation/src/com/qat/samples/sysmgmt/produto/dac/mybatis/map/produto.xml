@@ -34,10 +34,11 @@
     <result property="nome" column="nome"/>
     <result property="descricao" column="descricao"/>
     <result property="controleid" column="controleid"/>
-    <collection property="acessos" column="cadastroid" select="ControleAcessMap.fetchControleAcessByAcao" />
+    <collection property="acessos" column="produtoid" select="ControleAcessMap.fetchControleAcessByProduto" />
+    <collection property="produtos" column="cadastroid" select="fetchProdutosByMarca" />
   </resultMap>
 
-    <resultMap id="PrecoResult" type="Tabelapreco">
+  <resultMap id="PrecoResult" type="Tabelapreco">
     <result property="precoid" column="precoid"/>
     <result property="idProduto" column="produtoid"/>
     <result property="preco" column="preco"/>
@@ -84,6 +85,41 @@
 	    SELECT
 	    <include refid="allCadastroColumns" />
 	    FROM cadastro where acao = 1 and cadastroid = #{id}  ORDER BY cadastroid ASC
+    </select>
+
+    <select id="fetchProdutosByMenu" parameterType="int" resultMap="ProdutoResult">
+	    SELECT
+	    <include refid="allProdutoColumns" />
+	    FROM produto where menu = #{id}  ORDER BY PRODUTOID ASC
+    </select>
+
+     <select id="fetchProdutosByMarca" parameterType="int" resultMap="ProdutoResult">
+	    SELECT
+	    <include refid="allProdutoColumns" />
+	    FROM produto where marca = #{id} or
+	    				   MENU = #{id} or
+	    				   SUBMENU = #{id} or
+	    				   TRIMENU = #{id} or
+	    				   UNIMED = #{id}
+	    				 ORDER BY PRODUTOID ASC
+    </select>
+
+     <select id="fetchProdutosBySubMenu" parameterType="int" resultMap="ProdutoResult">
+	    SELECT
+	    <include refid="allProdutoColumns" />
+	    FROM produto where submenu = #{id}  ORDER BY PRODUTOID ASC
+    </select>
+
+    <select id="fetchProdutosByTriMenu" parameterType="int" resultMap="ProdutoResult">
+	    SELECT
+	    <include refid="allProdutoColumns" />
+	    FROM produto where trimenu = #{id}  ORDER BY PRODUTOID ASC
+    </select>
+
+    <select id="fetchProdutosByUnimed" parameterType="int" resultMap="ProdutoResult">
+	    SELECT
+	    <include refid="allProdutoColumns" />
+	    FROM produto where unimed = #{id}  ORDER BY PRODUTOID ASC
     </select>
 
     <select id="fetchMenuByCode" parameterType="int" resultMap="CadastroResult">
