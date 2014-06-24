@@ -14,14 +14,16 @@
   <resultMap id="ControleAcessResult" type="ControleAcess">
     <result property="controleid" column="controleid"/>
     <result property="data" column="data"/>
-    <result property="tenantId" column="usuarioid"/>
+    <result property="tenantId" column="tenantid"/>
+     <result property="userId" column="usuarioid"/>
     <result property="acaoTypeValue" column="acao"/>
     <result property="acaoId" column="idAcao"/>
     <result property="tableTypeValue" column="tableType"/>
   </resultMap>
 
+
   <sql id="allControleAcessColumns">
-            controleid, data, usuarioid, acao, idAcao, tableType
+            controleid, data, usuarioid,tenantid, acao, idAcao, tableType
   </sql>
 
    <sql id="allControleAcessColumnsWithQualifier">

@@ -121,7 +121,7 @@ public interface IProdutoBAC
 	 * 
 	 * @return the internal results response< procedure>
 	 */
-	public InternalResultsResponse<Cadastro> fetchAllCadastros();
+	public InternalResultsResponse<Cadastro> fetchAllCadastros(Cadastro cadastro);
 
 	/**
 	 * Fetch procedures by request.

@@ -30,7 +30,7 @@
 
    <resultMap id="CadastroResult" type="Cadastro">
     <result property="id" column="cadastroid"/>
-    <result property="cadastroTypeValue" column="acao"/>
+    <result property="tableTypeEnumValue" column="acao"/>
     <result property="nome" column="nome"/>
     <result property="descricao" column="descricao"/>
     <result property="controleid" column="controleid"/>
@@ -113,7 +113,7 @@
   <select id="fetchAllCadastro" parameterType="Cadastro" resultMap="CadastroResult">
     SELECT
     <include refid="allCadastroColumns" />
-    FROM cadastro where acao = #{cadastroTypeValue}} ORDER BY cadastroid ASC
+    FROM cadastro where acao = #{tableTypeEnumValue}} ORDER BY cadastroid ASC
   </select>
 
    <select id="fetchAllProduto" parameterType="Produto" resultMap="ProdutoResult">
@@ -125,7 +125,7 @@
   <select id="fetchAllCadastroPagedBatch" parameterType="Cadastro" resultMap="CadastroResult">
 
 		SELECT <include refid="allCadastroColumns" />
-   		  FROM cadastro where acao =  #{cadastroTypeValue} ORDER BY cadastroid ASC
+   		  FROM cadastro where acao =  #{tableTypeEnumValue} ORDER BY cadastroid ASC
 		  OFFSET ( #{_page} * #{_pagesize} )
 		  LIMIT #{_pagesize}
   </select>
@@ -139,7 +139,7 @@
   </select>
 
   <select id="fetchCadastroRowCount" parameterType="CadastroInquiryRequest" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM CADASTRO WHERE ACAO =  #{cadastro.cadastroTypeValue}
+		SELECT COUNT(*) AS RECORD_COUNT FROM CADASTRO WHERE ACAO =  #{cadastro.tableTypeEnumValue}
   </select>
 
   <select id="fetchProdutoRowCount" parameterType="ProdutoInquiryRequest" resultType="Integer">
@@ -148,7 +148,7 @@
 
   <select id="fetchAllCadastrosRequest" parameterType="CadastroInquiryRequest" resultMap="CadastroResult">
 		SELECT <include refid="allCadastroColumns" />
-   		  FROM cadastro where acao =  #{cadastro.cadastroTypeValue} ORDER BY cadastroid ASC
+   		  FROM cadastro where acao =  #{cadastro.tableTypeEnumValue} ORDER BY cadastroid ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
   </select>
@@ -165,11 +165,15 @@
    		  FROM PRODUTO ORDER BY produtoid ASC
   </select>
 
+ <select id="fetchAllCadastros" parameterType="Cadastro" resultMap="CadastroResult">
+		SELECT <include refid="allCadastroColumns" />
+   		  FROM Cadastro ORDER BY cadastroid ASC
+  </select>
 
   <select id="fetchCadastroById" parameterType="Cadastro" resultMap="CadastroResult">
     SELECT
    <include refid="allCadastroColumns" />
-     FROM cadastro where acao =  #{cadastroTypeValue} AND cadastroid = #{id}
+     FROM cadastro where acao =  #{tableTypeEnumValue} AND cadastroid = #{id}
   </select>
 
    <select id="fetchProdutoById" parameterType="Produto" resultMap="ProdutoResult">
@@ -179,8 +183,8 @@
   </select>
 
 
-  <select id="insertCadastro" parameterType="Produto" resultType="int" statementType="CALLABLE">
-        { call ins_cadastro( #{descricao}, #{nome},#{cadastroTypeValue} ) }
+  <select id="insertCadastro" parameterType="Cadastro" resultType="int" statementType="CALLABLE">
+        { call ins_cadastro( #{descricao}, #{nome},#{tableTypeEnumValue},#{userId} ) }
 
   </select>
 
@@ -191,11 +195,7 @@
   </select>
 
   <update id="updateCadastro" parameterType="Cadastro">
-    UPDATE CADASTRO SET
-      nome = #{nome},
-      descricao = #{descricao}
-    WHERE
-      cadastroid = #{id}
+     { call upd_cadastro(  #{id},#{descricao}, #{nome},#{tableTypeEnumValue},#{userId} ) }
   </update>
 
   <select id="updateProduto" parameterType="Produto" resultType="int" statementType="CALLABLE">

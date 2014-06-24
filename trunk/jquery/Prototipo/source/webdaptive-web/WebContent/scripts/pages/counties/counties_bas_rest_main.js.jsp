@@ -44,7 +44,7 @@ $.validator.setDefaults({
 		function callMaintainWS(_csak, _cdesc, _action)
 		{
 			onCountyDataLoading.notify({});
-			var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(1,null,"Test",_cdesc,null),true, false);
+			var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(1,1,"Test",_cdesc,null),true, false);
 			//var oData = {};
 			var mUrl = "";
 			switch (_action)
@@ -74,7 +74,7 @@ $.validator.setDefaults({
 		    onCountyDataLoading.notify({});
 		    var oData = new qat.model.fetchAllRequest(null);
 			//rest_post_call('qat-sysmgmt-sample/services/rest/CountyService/fetchAllCounties', oData, fill_data, process_error);
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos', {}, fill_data, process_error);
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {}, fill_data, process_error);
 		}
 
 		function fill_data(countyResponse)

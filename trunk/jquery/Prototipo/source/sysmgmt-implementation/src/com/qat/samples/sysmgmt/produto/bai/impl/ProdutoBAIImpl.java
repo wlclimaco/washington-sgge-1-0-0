@@ -255,8 +255,16 @@ public class ProdutoBAIImpl implements IProdutoBAI
 	@Override
 	public CadastroResponse fetchAllCadastros(FetchAllRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		CadastroResponse response = new CadastroResponse();
+		try
+		{
+			ProdutoBAID.fetchAllCadastros(getProdutoBAC(), response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
 	}
 
 	@Override

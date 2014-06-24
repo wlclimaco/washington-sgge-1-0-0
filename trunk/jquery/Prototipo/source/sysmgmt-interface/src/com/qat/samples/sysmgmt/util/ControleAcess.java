@@ -10,16 +10,13 @@ import com.qat.framework.model.QATModelOL;
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "controleAcess", propOrder = {"controleid", "user", "local", "data", "tenantId", "userId"
+@XmlType(name = "controleAcess", propOrder = {"controleid", "local", "data", "tenantId", "userId"
 		, "tableEnum", "acaoId", "acao"})
 public class ControleAcess extends QATModelOL
 {
 
 	/** The id. */
 	private Integer controleid;
-
-	/** The code. */
-	private String user;
 
 	/** The description. */
 	private String local;
@@ -31,7 +28,7 @@ public class ControleAcess extends QATModelOL
 	private Integer tenantId;
 
 	/** The user id. */
-	private Integer userId;
+	private String userId;
 
 	/** The table enum. */
 	private TableTypeEnum tableEnum;
@@ -47,7 +44,7 @@ public class ControleAcess extends QATModelOL
 	 * 
 	 * @return the user id
 	 */
-	public Integer getUserId()
+	public String getUserId()
 	{
 		return userId;
 	}
@@ -57,7 +54,7 @@ public class ControleAcess extends QATModelOL
 	 * 
 	 * @param userId the new user id
 	 */
-	public void setUserId(Integer userId)
+	public void setUserId(String userId)
 	{
 		this.userId = userId;
 	}
@@ -117,11 +114,10 @@ public class ControleAcess extends QATModelOL
 	 * @param user the user
 	 * @param tenantId the tenant id
 	 */
-	public ControleAcess(Integer controleid, String user, Integer tenantId)
+	public ControleAcess(Integer controleid, Integer tenantId)
 	{
 		super();
 		this.controleid = controleid;
-		this.user = user;
 		this.tenantId = tenantId;
 	}
 
@@ -135,11 +131,10 @@ public class ControleAcess extends QATModelOL
 	 * @param tenantId the tenant id
 	 * @param acao the acao
 	 */
-	public ControleAcess(Integer controleid, String user, String local, Date data, Integer tenantId, AcaoTypeEnum acao)
+	public ControleAcess(Integer controleid, String local, Date data, Integer tenantId, AcaoTypeEnum acao)
 	{
 		super();
 		this.controleid = controleid;
-		this.user = user;
 		this.local = local;
 		this.data = data;
 		this.tenantId = tenantId;
@@ -177,7 +172,7 @@ public class ControleAcess extends QATModelOL
 	 * @param acaoId the acao id
 	 * @param acao the acao
 	 */
-	public ControleAcess(Integer controleid, Date data, Integer tenantId, Integer userId, TableTypeEnum tableEnum,
+	public ControleAcess(Integer controleid, Date data, Integer tenantId, String userId, TableTypeEnum tableEnum,
 			Integer acaoId, AcaoTypeEnum acao)
 	{
 		super();
@@ -188,26 +183,6 @@ public class ControleAcess extends QATModelOL
 		this.tableEnum = tableEnum;
 		this.acaoId = acaoId;
 		this.acao = acao;
-	}
-
-	/**
-	 * Gets the code.
-	 * 
-	 * @return the code
-	 */
-	public String getUser()
-	{
-		return user;
-	}
-
-	/**
-	 * Sets the code.
-	 * 
-	 * @param user the new code
-	 */
-	public void setUser(String user)
-	{
-		this.user = user;
 	}
 
 	/**
@@ -342,7 +317,7 @@ public class ControleAcess extends QATModelOL
 	public String toString()
 	{
 		return "ControleAcess [getUserId()=" + getUserId() + ", getTableEnum()=" + getTableEnum() + ", getAcaoId()="
-				+ getAcaoId() + ", getControleid()=" + getControleid() + ", getUser()=" + getUser() + ", getLocal()="
+				+ getAcaoId() + ", getControleid()=" + getControleid() + ", getLocal()="
 				+ getLocal() + ", getData()=" + getData() + ", getTenantId()=" + getTenantId() + ", getAcao()="
 				+ getAcao() + ", getAcaoTypeValue()=" + getAcaoTypeValue() + ", getTableTypeValue()="
 				+ getTableTypeValue() + ", toString()=" + super.toString() + "]";

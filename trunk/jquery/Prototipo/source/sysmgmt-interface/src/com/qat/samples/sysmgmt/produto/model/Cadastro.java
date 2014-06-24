@@ -1,7 +1,10 @@
 package com.qat.samples.sysmgmt.produto.model;
 
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlType;
 
+import com.qat.samples.sysmgmt.util.Imagem;
 import com.qat.samples.sysmgmt.util.TableTypeEnum;
 import com.qat.samples.sysmgmt.util.Util;
 
@@ -9,7 +12,7 @@ import com.qat.samples.sysmgmt.util.Util;
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "Cadastro", propOrder = {"id", "type", "nome", "descricao", "controlAcess"})
+@XmlType(name = "Cadastro", propOrder = {"id", "type", "nome", "descricao", "imagens"})
 public class Cadastro extends Util
 {
 
@@ -17,7 +20,7 @@ public class Cadastro extends Util
 	private Integer id;
 
 	/** The code. */
-	private TableTypeEnum type;
+	private TableTypeEnum type = TableTypeEnum.CLIENTE;
 
 	/** The description. */
 	private String nome;
@@ -25,7 +28,7 @@ public class Cadastro extends Util
 	/** The price. */
 	private String descricao;
 
-	private Util controlAcess;
+	private List<Imagem> imagens;
 
 	/**
 	 * Instantiates a new bundle.
@@ -45,11 +48,13 @@ public class Cadastro extends Util
 		this.id = id;
 	}
 
+	@Override
 	public Integer getId()
 	{
 		return id;
 	}
 
+	@Override
 	public void setId(Integer id)
 	{
 		this.id = id;
@@ -115,13 +120,23 @@ public class Cadastro extends Util
 		this.descricao = descricao;
 	}
 
+	public List<Imagem> getImagens()
+	{
+		return imagens;
+	}
+
+	public void setImagens(List<Imagem> imagens)
+	{
+		this.imagens = imagens;
+	}
+
 	/**
 	 * Methods that follow the naming pattern get.....Value() provide convenience for returning the primitive value of
 	 * an enum. For example, database mapping of an enum to a database column could make use of this method.
 	 * 
 	 * @return
 	 */
-	public Integer getCadastroTypeValue()
+	public Integer getTableTypeEnumValue()
 	{
 		return type.getValue();
 	}
@@ -132,9 +147,9 @@ public class Cadastro extends Util
 	 * 
 	 * @return
 	 */
-	public void setCadastroTypeValue(Integer cadastroTypeValue)
+	public void setTableTypeEnumValue(Integer tableTypeEnumValue)
 	{
-		type = TableTypeEnum.enumForValue(cadastroTypeValue);
+		type = TableTypeEnum.enumForValue(tableTypeEnumValue);
 	}
 
 	/**
@@ -165,15 +180,12 @@ public class Cadastro extends Util
 		this.nome = nome;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString()
 	{
 		return "Cadastro [getId()=" + getId() + ", getType()=" + getType() + ", getNome()=" + getNome()
-				+ ", getDescricao()=" + getDescricao() + ", toString()=" + super.toString() + "]";
+				+ ", getDescricao()=" + getDescricao() + ", getImagens()=" + getImagens()
+				+ ", getTableTypeEnumValue()=" + getTableTypeEnumValue() + ", toString()=" + super.toString() + "]";
 	}
 
 }

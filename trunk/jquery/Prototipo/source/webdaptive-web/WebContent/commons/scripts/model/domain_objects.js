@@ -20,9 +20,15 @@
 
 	qat.model.cadastro = function(_Id, _type, _nome, _descricao,_controlAcess)
 	{
+	    var userContext = new qat.base.model.userContext();
 		this.id = _Id;
-		this.type = 1;
+		this.type = _type;
 		this.nome = _nome;
 		this.descricao = _descricao;
+		this.userId = userContext.userId;
+		this.id = userContext.id;
+		this.tenant = userContext.tenant;
+		this.userRole = userContext.userRole;
+
 	//	this.controlAcess = _controlAcess;
 	};
