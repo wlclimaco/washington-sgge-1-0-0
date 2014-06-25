@@ -102,10 +102,9 @@
     	</if>
 	</selectKey>
   	INSERT INTO CIDADE (
-      ID,
       ESTADO,
       CIDADE)
-    VALUES ( #{id} , #{estado} , #{cidade})
+    VALUES ( #{estado} , #{cidade})
   </insert>
 
   <update id="updateCidade" parameterType="Cidade">

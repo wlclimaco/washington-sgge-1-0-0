@@ -4,16 +4,16 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlType;
 
-import com.qat.framework.model.QATModelOL;
 import com.qat.samples.sysmgmt.documento.model.Documento;
 import com.qat.samples.sysmgmt.endereco.model.Endereco;
+import com.qat.samples.sysmgmt.util.Util;
 
 /**
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "Bundle", propOrder = {"id", "code", "description", "price"})
-public class Cliente extends QATModelOL
+@XmlType(name = "Cliente", propOrder = {"id", "code", "description", "price"})
+public class Cliente extends Util
 {
 
 	/** The id. */
@@ -66,6 +66,7 @@ public class Cliente extends QATModelOL
 	 * 
 	 * @return the id
 	 */
+	@Override
 	public Integer getId()
 	{
 		return id;
@@ -76,6 +77,7 @@ public class Cliente extends QATModelOL
 	 * 
 	 * @param id the id to set
 	 */
+	@Override
 	public void setId(Integer id)
 	{
 		this.id = id;

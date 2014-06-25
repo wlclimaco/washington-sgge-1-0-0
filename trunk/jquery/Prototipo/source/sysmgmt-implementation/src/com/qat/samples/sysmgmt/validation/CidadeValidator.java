@@ -6,7 +6,7 @@ import com.qat.framework.model.MessageInfo;
 import com.qat.framework.validation.IValidator;
 import com.qat.framework.validation.ValidationContext;
 import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.model.Bundle;
+import com.qat.samples.sysmgmt.cidade.model.Cidade;
 
 /**
  * The Class BundleDValidator.
@@ -24,38 +24,38 @@ public class CidadeValidator implements IValidator
 	@Override
 	public void validate(ValidationContext validationContext)
 	{
-		Bundle bundle = (Bundle)validationContext.getObjectToBeValidated(Bundle.class.getSimpleName());
+		Cidade bundle = (Cidade)validationContext.getObjectToBeValidated(Cidade.class.getSimpleName());
 
 		switch (validationContext.getValidationContextIndicator())
 		{
 			case DELETE:
-				validateProcId(validationContext.getMessages(), bundle);
+				validateCidadeId(validationContext.getMessages(), bundle);
 				break;
 			case UPDATE:
-				validateProcId(validationContext.getMessages(), bundle);
-				validateProcCode(validationContext.getMessages(), bundle);
-				validateProcDesc(validationContext.getMessages(), bundle);
+				validateCidadeId(validationContext.getMessages(), bundle);
+				validateCidadeCidade(validationContext.getMessages(), bundle);
+				validateCidadeEstado(validationContext.getMessages(), bundle);
 				break;
 			default:
-				validateProcCode(validationContext.getMessages(), bundle);
-				validateProcDesc(validationContext.getMessages(), bundle);
+				validateCidadeCidade(validationContext.getMessages(), bundle);
+				validateCidadeEstado(validationContext.getMessages(), bundle);
 				break;
 		}
 	}
 
-	private void validateProcId(List<MessageInfo> list, Bundle bundle)
+	private void validateCidadeId(List<MessageInfo> list, Cidade bundle)
 	{
 		ValidationUtil.isNullOrZero(bundle.getId(), SYSMGMT_BASE_BUNDLEVALIDATOR_ID_REQUIRED, list);
 	}
 
-	private void validateProcCode(List<MessageInfo> list, Bundle bundle)
+	private void validateCidadeCidade(List<MessageInfo> list, Cidade bundle)
 	{
-		ValidationUtil.isNullOrEmpty(bundle.getCode(), SYSMGMT_BASE_BUNDLEVALIDATOR_PROCCODE_REQUIRED, list);
+		ValidationUtil.isNullOrEmpty(bundle.getCidade(), SYSMGMT_BASE_BUNDLEVALIDATOR_PROCCODE_REQUIRED, list);
 	}
 
-	private void validateProcDesc(List<MessageInfo> list, Bundle bundle)
+	private void validateCidadeEstado(List<MessageInfo> list, Cidade bundle)
 	{
-		ValidationUtil.isNullOrEmpty(bundle.getDescription(), SYSMGMT_BASE_BUNDLEVALIDATOR_PROCDESC_REQUIRED,
+		ValidationUtil.isNullOrEmpty(bundle.getEstado(), SYSMGMT_BASE_BUNDLEVALIDATOR_PROCDESC_REQUIRED,
 				list);
 	}
 }

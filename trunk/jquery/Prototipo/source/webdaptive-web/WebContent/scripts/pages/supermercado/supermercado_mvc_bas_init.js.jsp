@@ -9,7 +9,7 @@ $(document).ready(function ()
     });
 
 	//sets up initial grid ...no data yet...but binds to the object that will fill it
-	pgrid = new Slick.Grid($("#procGrid"), ploader.data, columns, options);
+	pgrid = new Slick.Grid($("#supGrid"), ploader.data, columns, options);
 	pgrid.setSelectionModel(new Slick.CellSelectionModel());
 	gridPager = new Slick.Controls.Pager(ploader, $("#pager"));
 	gridPager.init();

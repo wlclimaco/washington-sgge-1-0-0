@@ -2,14 +2,14 @@ package com.qat.samples.sysmgmt.cidade.model;
 
 import javax.xml.bind.annotation.XmlType;
 
-import com.qat.framework.model.QATModelOL;
+import com.qat.samples.sysmgmt.util.Util;
 
 /**
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
 @XmlType(name = "Cidade", propOrder = {"id", "estado", "cidade"})
-public class Cidade extends QATModelOL
+public class Cidade extends Util
 {
 
 	/** The id. */
@@ -73,6 +73,7 @@ public class Cidade extends QATModelOL
 	 * 
 	 * @return the id
 	 */
+	@Override
 	public Integer getId()
 	{
 		return id;
@@ -83,6 +84,7 @@ public class Cidade extends QATModelOL
 	 * 
 	 * @param id the id to set
 	 */
+	@Override
 	public void setId(Integer id)
 	{
 		this.id = id;

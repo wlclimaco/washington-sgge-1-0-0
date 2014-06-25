@@ -104,6 +104,12 @@
 			<ref bean='jsonProvider' />
 		</jaxrs:providers>
   	</jaxrs:server>
+  	<jaxrs:server id="cidadeBASREST" address="/rest/CidadeService">
+  		<jaxrs:serviceBeans><ref bean="cidadeRESTBAS"/></jaxrs:serviceBeans>
+  		<jaxrs:providers>
+			<ref bean='jsonProvider' />
+		</jaxrs:providers>
+  	</jaxrs:server>
 
 	<!-- ========================= BAS DEFINITIONS Web Services======================== -->
 
