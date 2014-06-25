@@ -73,6 +73,21 @@
 		this.returnListPaged = _bPagedList;
 	};
 
+	qat.model.reqCidade = function(_oUC, _oCidade, _bList, _bPagedList)
+	{
+		if (_oUC == null)
+		{
+			this.userContext = new qat.base.model.userContext();
+		}
+		else
+		{
+			this.userContext = _oUC;
+		}
+		this.cidade = _oCidade;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
+	};
+
 	//ProcedureMaintenanceRequest
 	qat.model.reqProc = function (_oUC, _oProc, _bList, _bPagedList)
 	{

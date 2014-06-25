@@ -12,21 +12,33 @@
 <body>
 <div id="qatmvctabs">
 	<ul>
-		<li><a href="../county/fetchCounties?view=full" title="qatmvctab-1"><span>Counties MVC</span></a></li>
-        <sec:authorize access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
-		<li><a href="../county/fetchAllCountiesBAI" title="qatmvctab-2"><span>Counties MVC BAI</span></a></li>
-		<li><a href="../county/fetchAllCountiesBAS" title="qatmvctab-3"><span>Counties MVC BAS</span></a></li>
-		<li><a href="../produto/fetchProdutosByRequestBAS" title="qatmvctab-4"><span>Procedures MVC BAS</span></a></li>
-		<li><a href="../produto/fetchFotoByRequestBAS" title="qatmvctab-5"><span>Insert Foto</span></a></li>
+		<sec:authorize access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
+			<li><a href="../cidade/fetchCidadesByRequestBAS" title="qatmvctab-1"><span>Cidade</span></a></li>
+	        <li><a href="../supermercado/fetchSupermercadosByRequestBAS" title="qatmvctab-2"><span>Supermercado</span></a></li>
+	        <li><a href="../cliente/fetchClientesByRequestBAS" title="qatmvctab-3"><span>Cliente</span></a></li>
+			<li><a href="../produto/fetchMenusByRequestBAS" title="qatmvctab-4"><span>Menu</span></a></li>
+			<li><a href="../produto/fetchSubMenusByRequestBAS" title="qatmvctab-5"><span>SubMenu</span></a></li>
+			<li><a href="../produto/fetchTriMenusByRequestBAS" title="qatmvctab-6"><span>TriMenu</span></a></li>
+			<li><a href="../produto/fetchUniMedsByRequestBAS" title="qatmvctab-7"><span>Unidade Medida</span></a></li>
+			<li><a href="../produto/fetchMarcasByRequestBAS" title="qatmvctab-8"><span>Marca</span></a></li>
+			<li><a href="../produto/fetchProdutoByRequestBAS" title="qatmvctab-9"><span>Produto</span></a></li>
+			<li><a href="../cidade/fetchCidadesByRequestBAS" title="qatmvctab-10"><span>Procedures MVC BAS</span></a></li>
+			<li><a href="../cidade/fetchCidadesByRequestBAS" title="qatmvctab-11"><span>Insert Foto</span></a></li>
 		</sec:authorize>
 	</ul>
 	<div class="tabscontent">
-		<div id="qatmvctab-1">	</div>
 		<sec:authorize access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
-		<div id="qatmvctab-2"></div>
-		<div id="qatmvctab-3"></div>
-		<div id="qatmvctab-4"></div>
-		<div id="qatmvctab-5"></div>
+			<div id="qatmvctab-1">	</div>
+			<div id="qatmvctab-2"></div>
+			<div id="qatmvctab-3"></div>
+			<div id="qatmvctab-4"></div>
+			<div id="qatmvctab-5"></div>
+			<div id="qatmvctab-6">	</div>
+			<div id="qatmvctab-7"></div>
+			<div id="qatmvctab-8"></div>
+			<div id="qatmvctab-9"></div>
+			<div id="qatmvctab-10"></div>
+			<div id="qatmvctab-11"></div>
 		</sec:authorize>
 	</div>
 </div>
