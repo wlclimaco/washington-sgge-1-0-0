@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
+import com.qat.samples.sysmgmt.cidade.model.request.CidadeInquiryRequest;
 
 /**
  * The Class CidadeViewController.
@@ -32,7 +32,7 @@ public class CidadeViewController extends CidadeBaseController
 	@RequestMapping(value = "/fetchCidadesByRequestBAS", method = RequestMethod.GET)
 	public ModelAndView fetchCidadesbyRequestBAS()
 	{
-		PagedInquiryRequest request = new PagedInquiryRequest();
+		CidadeInquiryRequest request = new CidadeInquiryRequest();
 		// we will be paging so set the default values
 		request.setStartPage(ZERO);
 		request.setPageSize(TWENTY);

@@ -189,7 +189,8 @@ public final class CidadeBAID
 			{
 				CidadeInquiryRequest request = new CidadeInquiryRequest();
 				request.setPreQueryCount(true);
-				fetchCidadesPaged(cidadeBAC, request, response);
+				// fetchCidadesPaged(cidadeBAC, request, response);
+				fetchAllCidades(cidadeBAC, response);
 			}
 			else
 			{

@@ -17,7 +17,7 @@ import com.qat.samples.sysmgmt.produto.model.response.ProdutoResponse;
  * Standard implementation of a BAS where the operations are delegated to a BAI.
  * Note the BAI is injected by Spring.
  */
-@WebService(targetNamespace = "http://www.supermercado.kinghost.net/sysmgmt")
+@WebService(targetNamespace = "http://qat.com/sysmgmt")
 public class ProdutoBAS implements IProdutoBAS
 {
 
