@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.qat.framework.model.QATModel.PersistanceActionEnum;
+import com.qat.samples.sysmgmt.cidade.model.request.CidadeInquiryRequest;
 import com.qat.samples.sysmgmt.cidade.model.request.CidadeMaintenanceRequest;
 import com.qat.samples.sysmgmt.cidade.model.response.CidadeResponse;
-import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.RefreshRequest;
 
 /**
@@ -80,7 +80,7 @@ public class CidadeAPIController extends CidadeBaseController
 	 */
 	@RequestMapping(value = "/fetchByRequestBAS", method = RequestMethod.POST)
 	@ResponseBody
-	public CidadeResponse fetchByRequestBAS(@RequestBody PagedInquiryRequest request)
+	public CidadeResponse fetchByRequestBAS(@RequestBody CidadeInquiryRequest request)
 	{
 		return cidadeFetchByRequest(request);
 	}

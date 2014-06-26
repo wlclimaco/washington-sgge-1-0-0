@@ -111,19 +111,19 @@
   <bean id="cidadeCacheAspect" class="com.qat.framework.aop.CacheAOP" >
 	<property name="cache">
 		<bean id="cidadeEhCache" parent="sysMgmtCacheFactory">
-			<property name="cacheName" value="cidadeCache" />
+			<property name="cacheName" value="procedureCache" />
 		</bean>
 	</property>
  </bean>
  <!-- Bundle Cache -->
   <aop:config>
 	<!-- Pointcuts -->
-	<aop:pointcut id="cidadeCacheObject" expression="bean(cidadeDACTarget) and execution(* fetch*(..)) and !execution(* fetchBundlesByRequest(..))" />
+	<aop:pointcut id="cidadeCacheObject" expression="bean(cidadeDACTarget) and execution(* fetch*(..)) and !execution(* fetchCidadesByRequest(..))" />
 	<aop:pointcut id="cidadeFlushInsert" expression="bean(cidadeDACTarget) and execution(* insert*(..))" />
 	<aop:pointcut id="cidadeFlushUpdate" expression="bean(cidadeDACTarget) and execution(* update*(..))" />
 	<aop:pointcut id="cidadeFlushDelete" expression="bean(cidadeDACTarget) and execution(* delete*(..))" />
 	<!-- Aspects -->
-	<aop:aspect id="procedureCacheAspects" ref="procedureCacheAspect">
+	<aop:aspect id="cidadeCacheAspects" ref="cidadeCacheAspect">
 		<aop:around pointcut-ref="cidadeCacheObject" method="cacheObject"/>
 		<aop:after pointcut-ref="cidadeFlushInsert" method="flushCache" />
 		<aop:after pointcut-ref="cidadeFlushUpdate" method="flushCache" />

@@ -74,7 +74,9 @@ public class CidadeDACImpl extends SqlSessionDaoSupport implements ICidadeDAC
 	public InternalResponse updateCidade(Cidade cidade)
 	{
 		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doUpdateOL(getSqlSession(), STMT_UPDATE, cidade, STMT_VERSION, response);
+
+		Integer academiaId =
+				(Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), STMT_UPDATE, cidade);
 		return response;
 	}
 

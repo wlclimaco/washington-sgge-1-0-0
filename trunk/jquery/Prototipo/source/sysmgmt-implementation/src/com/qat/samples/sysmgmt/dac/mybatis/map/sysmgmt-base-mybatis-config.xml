@@ -18,6 +18,7 @@
   		<typeAlias alias="PagedInquiryRequest" type="com.qat.samples.sysmgmt.model.request.PagedInquiryRequest"/>
   		<typeAlias alias="CadastroInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest"/>
   		<typeAlias alias="ProdutoInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest"/>
+  		<typeAlias alias="CidadeInquiryRequest" type="com.qat.samples.sysmgmt.cidade.model.request.CidadeInquiryRequest"/>
   		<typeAlias alias="Cidade" type="com.qat.samples.sysmgmt.cidade.model.Cidade"/>
   		<typeAlias alias="Produto" type="com.qat.samples.sysmgmt.produto.model.Produto"/>
   		<typeAlias alias="Cadastro" type="com.qat.samples.sysmgmt.produto.model.Cadastro"/>
@@ -33,7 +34,7 @@
      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/drug.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/procedure.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/bundle.xml"/>
-     	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/cidade.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/cidade/dac/mybatis/map/cidade.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/produto.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/controleAcess.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/endereco.xml"/>

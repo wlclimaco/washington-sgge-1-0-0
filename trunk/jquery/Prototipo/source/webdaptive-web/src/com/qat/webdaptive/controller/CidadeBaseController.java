@@ -9,9 +9,9 @@ import com.qat.framework.model.QATModel.PersistanceActionEnum;
 import com.qat.framework.util.QATAppContext;
 import com.qat.framework.util.QATInterfaceUtil;
 import com.qat.samples.sysmgmt.cidade.bas.ICidadeBAS;
+import com.qat.samples.sysmgmt.cidade.model.request.CidadeInquiryRequest;
 import com.qat.samples.sysmgmt.cidade.model.request.CidadeMaintenanceRequest;
 import com.qat.samples.sysmgmt.cidade.model.response.CidadeResponse;
-import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.RefreshRequest;
 
 /**
@@ -36,7 +36,7 @@ public class CidadeBaseController
 	 * @param returnViewName the return view name
 	 * @return the model and view
 	 */
-	protected ModelAndView cidadeMAV(PagedInquiryRequest request, String returnViewName)
+	protected ModelAndView cidadeMAV(CidadeInquiryRequest request, String returnViewName)
 	{
 		ModelAndView modelAndView = new ModelAndView(returnViewName);
 		ObjectMapper mapper = new ObjectMapper();
@@ -120,7 +120,7 @@ public class CidadeBaseController
 	 * @param request the request
 	 * @return the cidade response
 	 */
-	protected CidadeResponse cidadeFetchByRequest(PagedInquiryRequest request)
+	protected CidadeResponse cidadeFetchByRequest(CidadeInquiryRequest request)
 	{
 		CidadeResponse response = new CidadeResponse();
 		try

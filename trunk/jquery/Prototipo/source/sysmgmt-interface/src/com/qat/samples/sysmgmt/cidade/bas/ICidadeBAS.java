@@ -17,7 +17,7 @@ import com.qat.samples.sysmgmt.model.request.RefreshRequest;
 /**
  * The Interface ICidadeBAS. (Business Area Service - BAS)
  */
-@WebService(serviceName = "CidadeService", targetNamespace = "http://www.supermercado.kinghost.net/sysmgmt", portName = "CidadeServicePort")
+@WebService(serviceName = "CidadeService", targetNamespace = "http://qat.com/sysmgmt", portName = "CidadeServicePort")
 public interface ICidadeBAS
 {
 

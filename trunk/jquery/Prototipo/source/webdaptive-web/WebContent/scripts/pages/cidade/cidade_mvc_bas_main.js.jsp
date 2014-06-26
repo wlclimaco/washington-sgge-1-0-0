@@ -83,8 +83,8 @@ var options =
 				var oData = new qat.model.reqCidade(null, new qat.model.cidade(data[aRowChg[a]].pqntsup,data[aRowChg[a]].pcidade,data[aRowChg[a]].pestado),bList,true);
 				//rest_post_call('qat-webdaptive/procedure/api/updateBAS', oData, fill_data, process_error);
 				rest_post_call('qat-sysmgmt-sample/services/rest/CidadeService/updateCidade', oData, fill_data, process_error);
-				var oData = new qat.model.pagedInquiryRequest(null, 20, 0, true);
-				rest_post_call('qat-sysmgmt-sample/services/rest/CidadeService/fetchAllCidades', {}, fill_data, process_error);
+				//var oData = new qat.model.pagedInquiryRequest(null, 20, 0, true);
+				//rest_post_call('qat-sysmgmt-sample/services/rest/CidadeService/fetchAllCidades', {}, fill_data, process_error);
 			}
 		}
 
