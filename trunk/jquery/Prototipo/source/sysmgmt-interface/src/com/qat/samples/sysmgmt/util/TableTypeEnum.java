@@ -16,7 +16,8 @@ public enum TableTypeEnum implements IIntegerEnum
 	LISTA(9),
 	ENDERECO(10),
 	DOCUMENTO(11),
-	TABPRECO(12);
+	TABPRECO(12),
+	CIDADE(13);
 	/** The code. */
 	private Integer code;
 

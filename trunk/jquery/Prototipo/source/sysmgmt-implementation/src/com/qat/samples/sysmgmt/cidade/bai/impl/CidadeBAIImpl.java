@@ -10,11 +10,11 @@ import com.qat.framework.validation.ValidationController;
 import com.qat.samples.sysmgmt.cidade.bac.ICidadeBAC;
 import com.qat.samples.sysmgmt.cidade.bai.ICidadeBAI;
 import com.qat.samples.sysmgmt.cidade.baid.CidadeBAID;
+import com.qat.samples.sysmgmt.cidade.model.request.CidadeInquiryRequest;
 import com.qat.samples.sysmgmt.cidade.model.request.CidadeMaintenanceRequest;
 import com.qat.samples.sysmgmt.cidade.model.response.CidadeResponse;
 import com.qat.samples.sysmgmt.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.RefreshRequest;
 
 /**
@@ -205,7 +205,7 @@ public class CidadeBAIImpl implements ICidadeBAI
 	}
 
 	@Override
-	public CidadeResponse fetchCidadesByRequest(PagedInquiryRequest request)
+	public CidadeResponse fetchCidadesByRequest(CidadeInquiryRequest request)
 	{
 		CidadeResponse response = new CidadeResponse();
 		try

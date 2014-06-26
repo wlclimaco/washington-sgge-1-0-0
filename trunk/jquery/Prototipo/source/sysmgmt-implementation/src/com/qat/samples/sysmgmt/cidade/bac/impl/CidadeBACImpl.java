@@ -7,8 +7,8 @@ import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.cidade.bac.ICidadeBAC;
 import com.qat.samples.sysmgmt.cidade.dac.ICidadeDAC;
 import com.qat.samples.sysmgmt.cidade.model.Cidade;
+import com.qat.samples.sysmgmt.cidade.model.request.CidadeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 
 /**
  * Implementation of the ICidadeBAC leveraging a BAD, CidadeBAD.
@@ -118,10 +118,6 @@ public class CidadeBACImpl implements ICidadeBAC
 		getCidadeDAC().deleteAllCidades();
 		refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
 
-		for (int i = 1; i <= refreshNumber; i++)
-		{
-			getCidadeDAC().insertCidade(new Cidade(i, "CidadeDesc", "REFRESH_SEED"));
-		}
 	}
 
 	/*
@@ -156,7 +152,7 @@ public class CidadeBACImpl implements ICidadeBAC
 	 * CidadeInquiryRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Cidade> fetchCidadesByRequest(PagedInquiryRequest request)
+	public InternalResultsResponse<Cidade> fetchCidadesByRequest(CidadeInquiryRequest request)
 	{
 		return getCidadeDAC().fetchCidadesByRequest(request);
 	}

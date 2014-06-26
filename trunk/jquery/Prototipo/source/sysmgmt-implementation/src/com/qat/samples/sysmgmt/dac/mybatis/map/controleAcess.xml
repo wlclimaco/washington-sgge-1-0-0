@@ -44,6 +44,12 @@
 	    FROM CONTROLE WHERE idAcao = #{value} and tableType = 2 ORDER BY CONTROLEID ASC
     </select>
 
+     <select id="fetchControleAcessByCidade" parameterType="Integer" resultMap="ControleAcessResult">
+	    SELECT
+	    <include refid="allControleAcessColumns" />
+	    FROM CONTROLE WHERE idAcao = #{value} and tableType = 13 ORDER BY CONTROLEID ASC
+    </select>
+
   <select id="fetchAllControleAcesssPagedBatch" resultMap="ControleAcessResult">
   	<if test="_databaseId == 'Oracle'">
 		SELECT * FROM (

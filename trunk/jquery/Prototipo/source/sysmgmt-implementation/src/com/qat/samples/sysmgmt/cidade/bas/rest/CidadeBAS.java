@@ -2,11 +2,11 @@ package com.qat.samples.sysmgmt.cidade.bas.rest;
 
 import com.qat.samples.sysmgmt.cidade.bai.ICidadeBAI;
 import com.qat.samples.sysmgmt.cidade.bas.ICidadeRESTBAS;
+import com.qat.samples.sysmgmt.cidade.model.request.CidadeInquiryRequest;
 import com.qat.samples.sysmgmt.cidade.model.request.CidadeMaintenanceRequest;
 import com.qat.samples.sysmgmt.cidade.model.response.CidadeResponse;
 import com.qat.samples.sysmgmt.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.RefreshRequest;
 
 /**
@@ -113,7 +113,7 @@ public class CidadeBAS implements ICidadeRESTBAS
 	 * PagedInquiryRequest)
 	 */
 	@Override
-	public CidadeResponse fetchCidadesByRequest(PagedInquiryRequest request)
+	public CidadeResponse fetchCidadesByRequest(CidadeInquiryRequest request)
 	{
 		return getCidadeBAI().fetchCidadesByRequest(request);
 	}

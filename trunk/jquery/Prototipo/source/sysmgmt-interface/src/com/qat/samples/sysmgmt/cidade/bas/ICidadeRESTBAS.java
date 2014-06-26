@@ -5,11 +5,11 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
+import com.qat.samples.sysmgmt.cidade.model.request.CidadeInquiryRequest;
 import com.qat.samples.sysmgmt.cidade.model.request.CidadeMaintenanceRequest;
 import com.qat.samples.sysmgmt.cidade.model.response.CidadeResponse;
 import com.qat.samples.sysmgmt.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.RefreshRequest;
 
 /**
@@ -94,5 +94,5 @@ public interface ICidadeRESTBAS
 	 */
 	@POST
 	@Path("/fetchCidadesByRequest/")
-	public CidadeResponse fetchCidadesByRequest(PagedInquiryRequest request);
+	public CidadeResponse fetchCidadesByRequest(CidadeInquiryRequest request);
 }

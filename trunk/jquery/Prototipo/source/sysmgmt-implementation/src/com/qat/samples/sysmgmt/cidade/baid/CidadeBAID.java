@@ -14,10 +14,10 @@ import com.qat.framework.validation.ValidationController;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.cidade.bac.ICidadeBAC;
 import com.qat.samples.sysmgmt.cidade.model.Cidade;
+import com.qat.samples.sysmgmt.cidade.model.request.CidadeInquiryRequest;
 import com.qat.samples.sysmgmt.cidade.model.request.CidadeMaintenanceRequest;
 import com.qat.samples.sysmgmt.cidade.model.response.CidadeResponse;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.RefreshRequest;
 
 /**
@@ -135,7 +135,7 @@ public final class CidadeBAID
 	 * @param request the request
 	 * @param response the response
 	 */
-	public static void fetchCidadesPaged(ICidadeBAC cidadeBAC, PagedInquiryRequest request, CidadeResponse response)
+	public static void fetchCidadesPaged(ICidadeBAC cidadeBAC, CidadeInquiryRequest request, CidadeResponse response)
 	{
 		InternalResultsResponse<Cidade> internalResponse = cidadeBAC.fetchCidadesByRequest(request);
 		if (internalResponse.getStatus() != Status.OperationSuccess)
@@ -187,7 +187,7 @@ public final class CidadeBAID
 			// Fetch Paged is requested.
 			if (pageListIndicator)
 			{
-				PagedInquiryRequest request = new PagedInquiryRequest();
+				CidadeInquiryRequest request = new CidadeInquiryRequest();
 				request.setPreQueryCount(true);
 				fetchCidadesPaged(cidadeBAC, request, response);
 			}
