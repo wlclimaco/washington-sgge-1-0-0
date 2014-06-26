@@ -18,21 +18,6 @@
 		this.price = _procPrice;
 	};
 
-	/** The id. */
-	private Integer id;/** The supermercadoid. */
-	private Supermercado supermercadoid;/** The cod barra. */
-	private String codBarra;/** The code. */
-	private Cadastro marca;/** The menu. */
-	private Cadastro menu;/** The submenu. */
-	private Cadastro submenu;	/** The trimenu. */
-	private Cadastro trimenu;	/** The unimed. */
-	private Cadastro unimed;	/** The description. */
-	private String nome;	/** The price. */
-	private String descricao;	/** The usuario. */
-	private String foto;	/** The senha. */
-	private List<Tabelapreco> precos;
-	private List<Imagem> imagens;
-
 	qat.model.produto = function(_Id, _supermercadoid, _codBarra, _marca,_menu, _submenu,_trimenu, _unimed,_nome, _descricao,_foto, _precos,_imagens)
 	{
 	    var userContext = new qat.base.model.userContext();
@@ -103,7 +88,7 @@
 	qat.model.cidade = function(_Id,_cidade, _estado)
 	{
 	    var userContext = new qat.base.model.userContext();
-		this.id = _Id;
+		this.cidadeId = _Id;
 		this.cidade = _cidade;
 		this.estado = _estado;
 		this.userId = userContext.userId;

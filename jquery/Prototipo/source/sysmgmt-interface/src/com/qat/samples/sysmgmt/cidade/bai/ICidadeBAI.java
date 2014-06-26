@@ -1,10 +1,10 @@
 package com.qat.samples.sysmgmt.cidade.bai;
 
+import com.qat.samples.sysmgmt.cidade.model.request.CidadeInquiryRequest;
 import com.qat.samples.sysmgmt.cidade.model.request.CidadeMaintenanceRequest;
 import com.qat.samples.sysmgmt.cidade.model.response.CidadeResponse;
 import com.qat.samples.sysmgmt.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.RefreshRequest;
 
 /**
@@ -67,6 +67,6 @@ public interface ICidadeBAI
 	 * @param request the request
 	 * @return the cidade paged response
 	 */
-	public CidadeResponse fetchCidadesByRequest(PagedInquiryRequest request);
+	public CidadeResponse fetchCidadesByRequest(CidadeInquiryRequest request);
 
 }

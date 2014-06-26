@@ -12,10 +12,11 @@
        necessary if the columns (or aliases) match to the properties
        exactly. -->
   <resultMap id="CidadeResult" type="Cidade">
-    <result property="id" column="id"/>
+    <result property="cidadeId" column="id"/>
     <result property="estado" column="estado"/>
     <result property="cidade" column="cidade"/>
     <result property="version" column="VERSN_LOCK_NUM"/>
+    <collection property="acessos" column="id" select="ControleAcessMap.fetchControleAcessByCidade" />
   </resultMap>
 
   <sql id="allCidadeColumns">
@@ -89,36 +90,24 @@
   </select>
 
   <select id="fetchVersionNumber" parameterType="Cidade" resultType="int">
-	SELECT VERSN_LOCK_NUM FROM CIDADE WHERE ID = #{id}
+	SELECT VERSN_LOCK_NUM FROM CIDADE WHERE ID = #{cidadeId}
   </select>
 
-  <insert id="insertCidade" parameterType="Cidade">
-   	<selectKey resultType="int" keyProperty="id" order="BEFORE">
-  	 	<if test="_databaseId == 'Oracle'">
-			SELECT CIDADE_SEQ.nextval AS id FROM DUAL
-    	</if>
-  	 	<if test="_databaseId == 'PostgreSQL'">
-			SELECT nextval('cidade_id_seq') AS id
-    	</if>
-	</selectKey>
-  	INSERT INTO CIDADE (
-      ID,
-      ESTADO,
-      CIDADE)
-    VALUES ( #{id} , #{estado} , #{cidade})
-  </insert>
+  <select id="insertCidade" parameterType="Cidade" resultType="int" statementType="CALLABLE">
+        { call ins_cidade( #{cidade}, #{estado},#{userId} ) }
 
-  <update id="updateCidade" parameterType="Cidade">
-    UPDATE CIDADE SET
-      cidade = #{code},
-      estado = #{description}
-    WHERE
-      ID = #{id} AND VERSN_LOCK_NUM = #{version}
-  </update>
+  </select>
 
-  <delete id="deleteCidadeById" parameterType="Cidade">
-    DELETE FROM CIDADE WHERE ID = #{id}
-  </delete>
+  <select id="updateCidade" parameterType="Cidade" resultType="int" statementType="CALLABLE">
+        { call upd_cidade( #{cidadeId},#{cidade}, #{estado},#{userId} ) }
+
+  </select>
+
+   <select id="deleteCidadeById" parameterType="Cidade" resultType="int" statementType="CALLABLE">
+        { call del_cidade( #{cidadeId},#{userId} ) }
+
+  </select>
+
 
   <delete id="deleteAllCidades">
 	DELETE FROM CIDADE

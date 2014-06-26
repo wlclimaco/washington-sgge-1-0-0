@@ -236,15 +236,15 @@ function cidade_fill_data(procResponse,data2)
 			{
 				cellno:     i,
 				<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
-				action: 	"<a href='#' onclick='javascript:ploader.callDeleteWS(" + procResponse.cidades[oi].id +");'>Delete</a>",
+				action: 	"<a href='#' onclick='javascript:ploader.callDeleteWS(" + procResponse.cidades[oi].cidadeId +");'>Delete</a>",
 				</sec:authorize>
 				<sec:authorize ifAllGranted="ROLE_GUEST">
 				action: 'None',
 				</sec:authorize>
-				pid: 		procResponse.cidades[oi].id,
-				pqntsup:	procResponse.cidades[oi].id,
+				pid: 		procResponse.cidades[oi].cidadeId,
+				pqntsup:	procResponse.cidades[oi].cidadeId,
 				pcidade:	procResponse.cidades[oi].cidade,
-				pestado:  	procResponse.cadastros[oi].estado
+				pestado:  	procResponse.cidades[oi].estado
 			}
 			oi++;
 		}

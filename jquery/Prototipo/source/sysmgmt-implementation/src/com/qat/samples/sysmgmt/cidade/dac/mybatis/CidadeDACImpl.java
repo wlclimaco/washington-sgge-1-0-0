@@ -9,9 +9,9 @@ import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.samples.sysmgmt.cidade.dac.ICidadeDAC;
 import com.qat.samples.sysmgmt.cidade.model.Cidade;
+import com.qat.samples.sysmgmt.cidade.model.request.CidadeInquiryRequest;
 import com.qat.samples.sysmgmt.dacd.mybatis.PagedResultsDACD;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 
 /**
  * The Class CidadeDACImpl. (Data Access Component - DAC)
@@ -132,10 +132,11 @@ public class CidadeDACImpl extends SqlSessionDaoSupport implements ICidadeDAC
 	 * CidadeInquiryRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Cidade> fetchCidadesByRequest(PagedInquiryRequest request)
+	public InternalResultsResponse<Cidade> fetchCidadesByRequest(CidadeInquiryRequest request)
 	{
 		InternalResultsResponse<Cidade> response = new InternalResultsResponse<Cidade>();
-		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, STMT_FETCH_COUNT, STMT_FETCH_ALL_REQUEST,
+		PagedResultsDACD.fetchObjectsByRequestCidade(getSqlSession(), request, STMT_FETCH_COUNT,
+				STMT_FETCH_ALL_REQUEST,
 				response);
 		return response;
 	}

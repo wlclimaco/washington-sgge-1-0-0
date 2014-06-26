@@ -7,11 +7,11 @@ import javax.jws.WebService;
 
 import org.apache.cxf.annotations.WSDLDocumentation;
 
+import com.qat.samples.sysmgmt.cidade.model.request.CidadeInquiryRequest;
 import com.qat.samples.sysmgmt.cidade.model.request.CidadeMaintenanceRequest;
 import com.qat.samples.sysmgmt.cidade.model.response.CidadeResponse;
 import com.qat.samples.sysmgmt.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.RefreshRequest;
 
 /**
@@ -102,6 +102,6 @@ public interface ICidadeBAS
 	@WebMethod(action = "fetchCidadesByRequest")
 	@WebResult(name = "fetchCidadesByRequestReturn")
 	@WSDLDocumentation(value = "Returns a list of cidades paged.")
-	public CidadeResponse fetchCidadesByRequest(@WebParam(name = "request") PagedInquiryRequest request);
+	public CidadeResponse fetchCidadesByRequest(@WebParam(name = "request") CidadeInquiryRequest request);
 
 }

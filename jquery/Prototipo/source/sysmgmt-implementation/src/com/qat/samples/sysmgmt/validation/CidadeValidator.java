@@ -45,7 +45,7 @@ public class CidadeValidator implements IValidator
 
 	private void validateCidadeId(List<MessageInfo> list, Cidade bundle)
 	{
-		ValidationUtil.isNullOrZero(bundle.getId(), SYSMGMT_BASE_BUNDLEVALIDATOR_ID_REQUIRED, list);
+		ValidationUtil.isNullOrZero(bundle.getCidadeId(), SYSMGMT_BASE_BUNDLEVALIDATOR_ID_REQUIRED, list);
 	}
 
 	private void validateCidadeCidade(List<MessageInfo> list, Cidade bundle)

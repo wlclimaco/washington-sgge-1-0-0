@@ -54,10 +54,8 @@ var options =
 		function callInsertWS()
 		{
 			onProcDataLoading.notify({});
-		   // var oData = new qat.model.reqCadastro(null, new qat.model.cidade(0,data[0].pcidade,data[0].pestado,0.0),true,true);qat.model.cadastro = function(_Id, _type, _nome, _descricao,_controlAcess)
 			var oData = new qat.model.reqCidade(null, new qat.model.cidade(1,data[0].pcidade,data[0].pestado),true,true);
 			rest_post_call('qat-sysmgmt-sample/services/rest/CidadeService/insertCidade', oData, fill_data, process_error);
-			debugger;
 			var oData = new qat.model.pagedInquiryRequest(null, 20, 0, true);
 			rest_post_call('qat-sysmgmt-sample/services/rest/CidadeService/fetchAllCidades', {}, fill_data, process_error);
 
@@ -82,17 +80,22 @@ var options =
 				{
 					bList = false;
 				}
-
-				var oData = new qat.model.reqProc(null, new qat.model.procedure(data[aRowChg[a]].pversion,data[aRowChg[a]].psak,data[aRowChg[a]].pcode,data[aRowChg[a]].pdesc,0.0), bList, true);
-				rest_post_call('qat-webdaptive/procedure/api/updateBAS', oData, fill_data, process_error);
+				var oData = new qat.model.reqCidade(null, new qat.model.cidade(data[aRowChg[a]].pqntsup,data[aRowChg[a]].pcidade,data[aRowChg[a]].pestado),bList,true);
+				//rest_post_call('qat-webdaptive/procedure/api/updateBAS', oData, fill_data, process_error);
+				rest_post_call('qat-sysmgmt-sample/services/rest/CidadeService/updateCidade', oData, fill_data, process_error);
+				var oData = new qat.model.pagedInquiryRequest(null, 20, 0, true);
+				rest_post_call('qat-sysmgmt-sample/services/rest/CidadeService/fetchAllCidades', {}, fill_data, process_error);
 			}
 		}
 
 		function callDeleteWS(_procId)
 		{
 			onProcDataLoading.notify({});
-		    var oData = new qat.model.reqProc(null, new qat.model.procedure(0,_procId,"","",0.0),true,true);
-			rest_post_call('qat-webdaptive/procedure/api/deleteBAS', oData, fill_data, process_error);
+			var oData = new qat.model.reqCidade(null, new qat.model.cidade(_procId,null,null),true,true);
+		  //  var oData = new qat.model.reqProc(null, new qat.model.procedure(0,_procId,"","",0.0),true,true);
+			rest_post_call('qat-sysmgmt-sample/services/rest/CidadeService/deleteCidade', oData, fill_data, process_error);
+			var oData = new qat.model.pagedInquiryRequest(null, 20, 0, true);
+			rest_post_call('qat-sysmgmt-sample/services/rest/CidadeService/fetchAllCidades', {}, fill_data, process_error);
 		}
 
 		function callRefreshWS(_i)
@@ -123,7 +126,7 @@ var options =
 
 		function fill_data(procResponse)
 		{
-			data = reuse_fill_data(procResponse,data,"cadastro");
+			data = reuse_fill_data(procResponse,data,"cidade");
 			onProcDataLoaded.notify({});
 		}
 
