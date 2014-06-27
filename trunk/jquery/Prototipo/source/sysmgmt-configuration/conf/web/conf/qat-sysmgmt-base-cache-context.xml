@@ -106,15 +106,6 @@
 	</aop:aspect>
  </aop:config>
 
-
- <!-- County Cache -->
-  <bean id="cidadeCacheAspect" class="com.qat.framework.aop.CacheAOP" >
-	<property name="cache">
-		<bean id="cidadeEhCache" parent="sysMgmtCacheFactory">
-			<property name="cacheName" value="procedureCache" />
-		</bean>
-	</property>
- </bean>
  <!-- Bundle Cache -->
   <aop:config>
 	<!-- Pointcuts -->
@@ -123,11 +114,27 @@
 	<aop:pointcut id="cidadeFlushUpdate" expression="bean(cidadeDACTarget) and execution(* update*(..))" />
 	<aop:pointcut id="cidadeFlushDelete" expression="bean(cidadeDACTarget) and execution(* delete*(..))" />
 	<!-- Aspects -->
-	<aop:aspect id="cidadeCacheAspects" ref="cidadeCacheAspect">
+	<aop:aspect id="procedureCacheAspects" ref="procedureCacheAspect">
 		<aop:around pointcut-ref="cidadeCacheObject" method="cacheObject"/>
 		<aop:after pointcut-ref="cidadeFlushInsert" method="flushCache" />
 		<aop:after pointcut-ref="cidadeFlushUpdate" method="flushCache" />
 		<aop:after pointcut-ref="cidadeFlushDelete" method="flushCache" />
+	</aop:aspect>
+ </aop:config>
+
+ <!-- Supermercado Cache -->
+  <aop:config>
+	<!-- Pointcuts -->
+	<aop:pointcut id="supermercadoCacheObject" expression="bean(supermercadoDACTarget) and execution(* fetch*(..)) and !execution(* fetchSupermercadosByRequest(..))" />
+	<aop:pointcut id="supermercadoFlushInsert" expression="bean(supermercadoDACTarget) and execution(* insert*(..))" />
+	<aop:pointcut id="supermercadoFlushUpdate" expression="bean(supermercadoDACTarget) and execution(* update*(..))" />
+	<aop:pointcut id="supermercadoFlushDelete" expression="bean(supermercadoDACTarget) and execution(* delete*(..))" />
+	<!-- Aspects -->
+	<aop:aspect id="procedureCacheAspects" ref="procedureCacheAspect">
+		<aop:around pointcut-ref="supermercadoCacheObject" method="cacheObject"/>
+		<aop:after pointcut-ref="supermercadoFlushInsert" method="flushCache" />
+		<aop:after pointcut-ref="supermercadoFlushUpdate" method="flushCache" />
+		<aop:after pointcut-ref="supermercadoFlushDelete" method="flushCache" />
 	</aop:aspect>
  </aop:config>
 

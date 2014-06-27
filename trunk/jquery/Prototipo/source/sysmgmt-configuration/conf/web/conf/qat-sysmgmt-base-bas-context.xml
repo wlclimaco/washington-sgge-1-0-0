@@ -79,6 +79,17 @@
 		</jaxws:properties>
 	</jaxws:endpoint>
 
+	<jaxws:endpoint id="supermercadoBASWS" implementor="#supermercadoBAS" address="/ws/SupermercadoService" >
+		<jaxws:inInterceptors>
+        	<ref bean="wsAuthenticationInterceptor"/>
+   			<ref bean="wsAuthorizationInterceptor"/>
+ 		</jaxws:inInterceptors>
+		<jaxws:properties>
+			<entry key="set-jaxb-validation-event-handler" value="false" />
+			<entry key="ws-security.validate.token" value="false" />
+		</jaxws:properties>
+	</jaxws:endpoint>
+
 	<jaxws:endpoint id="produtoBASWS" implementor="#produtoBAS" address="/ws/ProdutoService" >
 		<jaxws:inInterceptors>
         	<ref bean="wsAuthenticationInterceptor"/>
@@ -106,6 +117,13 @@
   	</jaxrs:server>
   	<jaxrs:server id="cidadeBASREST" address="/rest/CidadeService">
   		<jaxrs:serviceBeans><ref bean="cidadeRESTBAS"/></jaxrs:serviceBeans>
+  		<jaxrs:providers>
+			<ref bean='jsonProvider' />
+		</jaxrs:providers>
+  	</jaxrs:server>
+
+  	<jaxrs:server id="supermercadoBASREST" address="/rest/SupermercadoService">
+  		<jaxrs:serviceBeans><ref bean="supermercadoRESTBAS"/></jaxrs:serviceBeans>
   		<jaxrs:providers>
 			<ref bean='jsonProvider' />
 		</jaxrs:providers>
@@ -140,6 +158,10 @@
 		<property name="produtoBAI" ref="produtoBAI"/>
 	</bean>
 
+	<bean id="supermercadoBAS" class="com.qat.samples.sysmgmt.supermercado.bas.ws.SupermercadoBAS">
+		<property name="supermercadoBAI" ref="supermercadoBAI"/>
+	</bean>
+
 	<!-- ========================= BAS DEFINITIONS REST Services======================== -->
 	<!-- this bean implements county bas methods -->
 	<bean id="countyRESTBAS" class="com.qat.samples.sysmgmt.bas.rest.CountyBAS">
@@ -152,5 +174,9 @@
 
 	<bean id="produtoRESTBAS" class="com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS">
 		<property name="produtoBAI" ref="produtoBAI"/>
+	</bean>
+
+	<bean id="supermercadoRESTBAS" class="com.qat.samples.sysmgmt.supermercado.bas.rest.SupermercadoBAS">
+		<property name="supermercadoBAI" ref="supermercadoBAI"/>
 	</bean>
 </beans>

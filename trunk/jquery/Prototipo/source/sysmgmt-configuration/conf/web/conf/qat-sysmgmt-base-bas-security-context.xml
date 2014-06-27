@@ -52,6 +52,16 @@
         		<entry key="updateCidade" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
         		<entry key="refreshCidades" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
 
+
+        		<entry key="fetchAllSupermercados" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchSupermercadoById" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchSupermercadosByRequest" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="deleteSupermercado" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="insertSupermercado" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="updateSupermercado" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="refreshSupermercados" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+
+
         		<entry key="fetchAllProdutos" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
         		<entry key="fetchProdutoById" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
         		<entry key="fetchProdutosByRequest" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
@@ -127,6 +137,29 @@
         access="ROLE_DOMAIN ADMINS"/>
       <sec:protect-pointcut
         expression="execution(* com.qat.samples.sysmgmt.cidade.bas.rest.CidadeBAS.refreshCidades(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+
+         <!-- ===================================== -->
+        <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.supermercado.bas.rest.SupermercadoBAS.fetchAllSupermercados(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.supermercado.bas.rest.SupermercadoBAS.fetchSupermercadosByRequest(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.supermercado.bas.rest.SupermercadoBAS.fetchSupermercadoById(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.supermercado.bas.rest.SupermercadoBAS.deleteSupermercado(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.supermercado.bas.rest.SupermercadoBAS.insertSupermercado(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.supermercado.bas.rest.SupermercadoBAS.updateSupermercado(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.supermercado.bas.rest.SupermercadoBAS.refreshSupermercados(*))"
         access="ROLE_DOMAIN ADMINS"/>
 
 

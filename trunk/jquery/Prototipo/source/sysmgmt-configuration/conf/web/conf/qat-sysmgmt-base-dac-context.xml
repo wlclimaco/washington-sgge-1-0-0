@@ -43,10 +43,10 @@
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
   	</bean>
 
-  	<bean id="enderecoAcessDACTarget" class="com.qat.samples.sysmgmt.dac.mybatis.EnderecoDACImpl">
+  	<bean id="enderecoDACTarget" class="com.qat.samples.sysmgmt.dac.mybatis.EnderecoDACImpl">
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
   	</bean>
-  	<bean id="supermercadoAcessDACTarget" class="com.qat.samples.sysmgmt.supermercado.dac.mybatis.SupermercadoDACImpl">
+  	<bean id="supermercadoDACTarget" class="com.qat.samples.sysmgmt.supermercado.dac.mybatis.SupermercadoDACImpl">
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
   	</bean>
 
