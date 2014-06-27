@@ -132,22 +132,6 @@
 		this.userRole = userContext.userRole;
 	};
 
-	qat.model.documento = function(_documentoid,_id, _rgInc,_cpfCnpj,_nome,_razao,_tabela,_dateNascimento)
-	{
-	    var userContext = new qat.base.model.userContext();
-		this.documentoid = _documentoid;
-		this.id = _id;
-		this.rgInc = _rgInc;
-		this.cpfCnpj = _cpfCnpj;
-		this.nome = _nome;
-		this.razao = _razao;
-		this.tabela = _tabela;
-		this.dateNascimento = _dateNascimento;
-		this.userId = userContext.userId;
-		this.id = userContext.id;
-		this.tenant = userContext.tenant;
-		this.userRole = userContext.userRole;
-	};
 
 	qat.model.endereco = function(_enderecoid,_id, _logradouro,_bairro,_estado,_cidade,_numero,_cep,_nome,_complemento,_tabela)
 	{
@@ -169,6 +153,20 @@
 		this.userRole = userContext.userRole;
 	};
 
-
+	qat.model.supermercado = function(_supermercadoid,_usuario, _email,_site,_usuario,_senha,_enderecoid,_eid,_endereco,_logradouro,_bairro,_estado,_cidade,_numero,_cep,_nome,_complemento,_documenroid,_did,_rgInc,_cpfCnpj,_razao,_dateNascimento)
+	{
+	    var userContext = new qat.base.model.userContext();
+		this.id = _supermercadoid;
+		this.usuario = _usuario;
+		this.email = _email;
+		this.site = _site;
+		this.senha = _senha;
+		this.enderecos = [new qat.model.endereco (_enderecoid,_eid, _logradouro,_bairro,_estado,_cidade,_numero,_cep,_nome,_complemento,1)];
+		this.documentos = [qat.model.documento(_documenroid,_did, _rgInc,_cpfCnpj,"teste",_razao,1,_dateNascimento)];
+		this.userId = userContext.userId;
+		this.id = userContext.id;
+		this.tenant = userContext.tenant;
+		this.userRole = userContext.userRole;
+	};
 
 

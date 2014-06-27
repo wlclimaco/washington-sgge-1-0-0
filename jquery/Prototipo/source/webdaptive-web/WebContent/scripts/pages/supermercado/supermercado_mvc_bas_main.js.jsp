@@ -12,23 +12,39 @@ var viewLoadedObject;
 
 //loads object if being served via controller
 <c:choose>
-    <c:when test="${empty procedureResponse}">
+    <c:when test="${empty supermercadoResponse}">
 			viewLoadedObject = null;
     </c:when>
     <c:otherwise>
-			viewLoadedObject = ${procedureResponse};
+			viewLoadedObject = ${supermercadoResponse};
     </c:otherwise>
 </c:choose>
-
+console.log(viewLoadedObject);
 //columns & column settings for the grid
 var columns = [
 	{id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:"cell-center", width:30},
 	{id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML},
-    {id:"pid", name: procedure.grid.psak.title, field:"pid", resizable:false, cssClass:"cell-center", width:75},
-    {id:"pprod", name: procedure.grid.pcode.title, field:"pprod", editable:true},
-	{id:"pnome", name: procedure.grid.pcode.title, field:"pnome", editor:Slick.Editors.Text},
-	{id:"col1", name:"test", field:"col1",  width:135, editable:true, cssClass:"pad-4-left", sortable:true, editor:Slick.Editors.Auto},
-	{id:"pdesc", name: procedure.grid.pcode.title, field:"pdesc", editor:Slick.Editors.Text}
+    {id:"supermercadoid", name: procedure.grid.psak.title, field:"supermercadoid", editor:Slick.Editors.Text},
+    {id:"usuario", name: procedure.grid.pcode.title, field:"usuario", editor:Slick.Editors.Text},
+	{id:"email", name: procedure.grid.pcode.title, field:"email", editor:Slick.Editors.Text},
+	{id:"site", name: procedure.grid.pcode.title, field:"site", editor:Slick.Editors.Text},
+	{id:"enderecoid", name: procedure.grid.pcode.title, field:"enderecoid", editor:Slick.Editors.Text},
+	{id:"eid", name: procedure.grid.pcode.title, field:"eid", editor:Slick.Editors.Text},
+	{id:"logradouro", name: procedure.grid.pcode.title, field:"logradouro", editor:Slick.Editors.Text},
+	{id:"bairro", name: procedure.grid.pcode.title, field:"bairro", editor:Slick.Editors.Text},
+	{id:"estado", name: procedure.grid.pcode.title, field:"estado", editor:Slick.Editors.Text},
+	{id:"cidade", name: procedure.grid.pcode.title, field:"cidade", editor:Slick.Editors.Text},
+	{id:"numero", name: procedure.grid.pcode.title, field:"numero", editor:Slick.Editors.Text},
+	{id:"cep", name: procedure.grid.pcode.title, field:"cep", editor:Slick.Editors.Text},
+	{id:"nome", name: procedure.grid.pcode.title, field:"nome", editor:Slick.Editors.Text},
+	{id:"complemento", name: procedure.grid.pcode.title, field:"complemento", editor:Slick.Editors.Text},
+	{id:"documenroid", name: procedure.grid.pcode.title, field:"documenroid", editor:Slick.Editors.Text},
+	{id:"did", name: procedure.grid.pcode.title, field:"did", editor:Slick.Editors.Text},
+	{id:"rgInc", name: procedure.grid.pcode.title, field:"rgInc", editor:Slick.Editors.Text},
+	{id:"cpfCnpj", name: procedure.grid.pcode.title, field:"cpfCnpj", editor:Slick.Editors.Text},
+	{id:"razao", name: procedure.grid.pcode.title, field:"razao", editor:Slick.Editors.Text}
+
+
 ];
 
 //grid options
@@ -55,12 +71,12 @@ var options =
 		function callInsertWS()
 		{
 			onProcDataLoading.notify({});
+
 		   // var oData = new qat.model.reqCadastro(null, new qat.model.procedure(0,0,data[0].pcode,data[0].pdesc,0.0),true,true);qat.model.cadastro = function(_Id, _type, _nome, _descricao,_controlAcess)
-			var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(1,1,data[0].pnome,data[0].pdesc,null),true,true);
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/insertCadastro', oData, fill_data, process_error);
-			debugger;
-			var oData = new qat.model.pagedInquiryRequest(null, 20, 0, true);
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {}, fill_data, process_error);
+			var oData = new qat.model.reqSupermercado(null, new qat.model.supermercado(data[0].supermercadoid,data[0].usuario, data[0].email,data[0].site,data[0].usuario,data[0].senha,data[0].enderecoid,data[0].eid,data[0].endereco,data[0].logradouro,data[0].bairro,data[0].estado,data[0].cidade,data[0].numero,data[0].cep,data[0].nome,data[0].complemento,data[0].documenroid,data[0].did,data[0].rgInc,data[0].rgInc,data[0].cpfCnpj,data[0].razao),true,true);
+			console.log(oData);
+			rest_post_call('qat-sysmgmt-sample/services/rest/SupermercadoService/insertSupermercado', oData, fill_data, process_error);
+			//rest_post_call('qat-sysmgmt-sample/services/rest/CidadeService/insertCidade', oData, fill_data, process_error);
 
 		}
 
@@ -112,11 +128,11 @@ var options =
 			{
 			    var oData = new qat.model.pagedInquiryRequest(null, _iPageSize, _iStartPage, true);
 				//rest_post_call('qat-webdaptive/procedure/api/fetchByRequestBAS', oData, fill_data, process_error);
-				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {}, fill_data, process_error);
+				rest_post_call('qat-sysmgmt-sample/services/rest/SupermercadoService/fetchAllSupermercados', {}, fill_data, process_error);
 			}
 			else
 			{
-				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {}, fill_data, process_error);
+				rest_post_call('qat-sysmgmt-sample/services/rest/SupermercadoService/fetchAllSupermercados', {}, fill_data, process_error);
 				fill_data(viewLoadedObject);
 				viewLoadedObject = null;
 			}
@@ -124,7 +140,7 @@ var options =
 
 		function fill_data(procResponse)
 		{
-			data = reuse_fill_data(procResponse,data,"cadastro");
+			data = reuse_fill_data(procResponse,data,"supermercado");
 			onProcDataLoaded.notify({});
 		}
 
@@ -201,7 +217,7 @@ function validateFields(rowValue)
 };
 
 <sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
-$('#procGrid').keyup(function(e)
+$('#supGrid').keyup(function(e)
 {
 	if (e.keyCode == 13)
 	{
@@ -219,11 +235,11 @@ $('#procGrid').keyup(function(e)
 	}
 });
 
-$('#refreshproc').click(function() {
+$('#refreshsup').click(function() {
 	ploader.callRefreshWS(135);
 });
 </sec:authorize>
-$('#listproc').click(function() {
+$('#listsup').click(function() {
 	 ploader.callPagedFetchWS(20,0);
 });
 </script>

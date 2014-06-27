@@ -1,6 +1,6 @@
 package com.qat.samples.sysmgmt.util;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlType;
 

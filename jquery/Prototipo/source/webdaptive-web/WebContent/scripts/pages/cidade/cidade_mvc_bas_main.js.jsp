@@ -56,8 +56,8 @@ var options =
 			onProcDataLoading.notify({});
 			var oData = new qat.model.reqCidade(null, new qat.model.cidade(1,data[0].pcidade,data[0].pestado),true,true);
 			rest_post_call('qat-sysmgmt-sample/services/rest/CidadeService/insertCidade', oData, fill_data, process_error);
-			var oData = new qat.model.pagedInquiryRequest(null, 20, 0, true);
-			rest_post_call('qat-sysmgmt-sample/services/rest/CidadeService/fetchAllCidades', {}, fill_data, process_error);
+		//	var oData = new qat.model.pagedInquiryRequest(null, 20, 0, true);
+		//	rest_post_call('qat-sysmgmt-sample/services/rest/CidadeService/fetchAllCidades', {}, fill_data, process_error);
 
 		}
 

@@ -130,3 +130,18 @@
 	 	this.moreRowsAvailable =  _bRowsAvailable;
 	 	this.totalRowsAvailable = _totalRows;
 	};
+
+	qat.model.reqSupermercado = function(_oUC, _oSupermercado, _bList, _bPagedList)
+	{
+		if (_oUC == null)
+		{
+			this.userContext = new qat.base.model.userContext();
+		}
+		else
+		{
+			this.userContext = _oUC;
+		}
+		this.supermercado = _oSupermercado;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
+	};
