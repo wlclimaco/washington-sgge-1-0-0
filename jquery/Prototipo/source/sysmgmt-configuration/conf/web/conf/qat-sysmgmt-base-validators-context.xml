@@ -60,6 +60,16 @@
 		</property>
 	</bean>
 
+	<bean id="SupermercadoValidator" class="com.qat.samples.sysmgmt.validation.SupermercadoValidator" />
+
+	<bean id="supermercadoValidationController" class="com.qat.framework.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="SupermercadoValidator" />
+			</list>
+		</property>
+	</bean>
+
 	<bean id="ProdutoValidator" class="com.qat.samples.sysmgmt.validation.ProdutoValidator" />
 
 	<bean id="produtoValidationController" class="com.qat.framework.validation.ValidationController">

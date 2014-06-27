@@ -31,4 +31,8 @@
 		<property name="produtoDAC" ref="produtoDACTarget"/>
 	</bean>
 
+	<bean id="supermercadoBACTarget" class="com.qat.samples.sysmgmt.supermercado.bac.impl.SupermercadoBACImpl">
+		<property name="supermercadoDAC" ref="supermercadoDACTarget"/>
+	</bean>
+
 </beans>
