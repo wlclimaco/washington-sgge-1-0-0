@@ -57,6 +57,10 @@ function reuse_fill_data(response,data2,gridProcess)
 		{
 			data2 = cidade_fill_data(response,data2);
 		}
+		else if (gridProcess === "supermercado" )
+		{
+			data2 = supermercado_fill_data(response,data2);
+		}
 	}
 	else
 	{
@@ -247,6 +251,83 @@ function cidade_fill_data(procResponse,data2)
 				pcidade:	procResponse.cidades[oi].cidade,
 				pestado:  	procResponse.cidades[oi].estado
 			}
+			oi++;
+		}
+	}
+	console.log(data2);
+	return data2;
+};
+
+//=========================================================
+
+//============================SUPERMERCADO=======================
+
+function supermercado_fill_data(procResponse,data2)
+{
+
+	data2[0] =
+	{
+		cellno: 0,
+		action: "<span>Novo>>></span>",
+		pid: 1,
+		pqntsup: 0,
+		pcidade: null,
+		pestado: null
+	};
+
+	//Fill paging data
+	if (procResponse.resultsSetInfo != undefined)
+	{
+	 	pagingData.pageSize =  parseInt(procResponse.resultsSetInfo.pageSize);
+	 	pagingData.startPage =  parseInt(procResponse.resultsSetInfo.startPage);
+	 	pagingData.moreRowsAvailable =  procResponse.resultsSetInfo.moreRowsAvailable;
+	 	pagingData.totalRowsAvailable =  parseInt(procResponse.resultsSetInfo.totalRowsAvailable);
+	}
+
+
+	//make sure return is an array
+	if ($.isArray(procResponse.supermercados))
+	{
+		var oi = 0;
+		var tmpLength = procResponse.supermercados.length;
+		<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
+		for (var i=1; i <= tmpLength; i++)
+		</sec:authorize>
+		<sec:authorize  access="hasRole('ROLE_GUEST')">
+		for (var i=0; i < tmpLength; i++)
+		</sec:authorize>
+		{
+			data2[i] =
+			{
+				cellno:     i,
+				<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
+				action: 	"<a href='#' onclick='javascript:ploader.callDeleteWS(" + procResponse.supermercados[oi].supermercadoid +");'>Delete</a>",
+				</sec:authorize>
+				<sec:authorize ifAllGranted="ROLE_GUEST">
+				action: 'None',
+				</sec:authorize>
+				supermercadoid:	procResponse.supermercados[oi].supermercadoid,
+				usuario:		procResponse.supermercados[oi].usuario,
+				email:			procResponse.supermercados[oi].email,
+				site:  			procResponse.supermercados[oi].site,
+				senha:  		procResponse.supermercados[oi].senha,
+				enderecoid:  	procResponse.supermercados[oi].enderecos[0].enderecoid,
+				eid:  			procResponse.supermercados[oi].enderecos[0].id,
+				logradouro:  	procResponse.supermercados[oi].enderecos[0].logradouro,
+				bairro:  		procResponse.supermercados[oi].enderecos[0].bairro,
+				estado:  		procResponse.supermercados[oi].enderecos[0].estado,
+				cidade:  		procResponse.supermercados[oi].enderecos[0].cidade,
+				numero:  		procResponse.supermercados[oi].enderecos[0].numero,
+				cep:  			procResponse.supermercados[oi].enderecos[0].cep,
+				nome:  			procResponse.supermercados[oi].enderecos[0].nome,
+				complemento:  	procResponse.supermercados[oi].enderecos[0].complemento,
+				documenroid:	procResponse.supermercados[oi].documentos[0].documenroid,
+				did:  	    	procResponse.supermercados[oi].documentos[0].id,
+				rgInc:  		procResponse.supermercados[oi].documentos[0].rgInc,
+				cpfCnpj:  		procResponse.supermercados[oi].documentos[0].cpfCnpj,
+				razao:  		procResponse.supermercados[oi].documentos[0].razao
+			}
+
 			oi++;
 		}
 	}
