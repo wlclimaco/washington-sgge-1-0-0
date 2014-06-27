@@ -15,7 +15,6 @@
     <result property="cidadeId" column="id"/>
     <result property="estado" column="estado"/>
     <result property="cidade" column="cidade"/>
-    <result property="version" column="VERSN_LOCK_NUM"/>
     <collection property="acessos" column="id" select="ControleAcessMap.fetchControleAcessByCidade" />
   </resultMap>
 
