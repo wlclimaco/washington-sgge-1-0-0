@@ -13,7 +13,7 @@
        exactly. -->
   <resultMap id="ControleAcessResult" type="ControleAcess">
     <result property="controleid" column="controleid"/>
-    <result property="data" column="data"/>
+    <result property="data" jdbcType="DATE" column="data"/>
     <result property="tenantId" column="tenantid"/>
      <result property="userId" column="usuarioid"/>
     <result property="acaoTypeValue" column="acao"/>
