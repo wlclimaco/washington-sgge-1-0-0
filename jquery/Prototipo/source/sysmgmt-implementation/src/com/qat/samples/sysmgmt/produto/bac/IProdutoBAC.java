@@ -6,6 +6,7 @@ import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.Cadastro;
 import com.qat.samples.sysmgmt.produto.model.Produto;
+import com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest;
 
 /**
  * The Interface IProdutoBAC. (Business Area Component - BAC)
@@ -129,6 +130,6 @@ public interface IProdutoBAC
 	 * @param request the request
 	 * @return the internal results response
 	 */
-	public InternalResultsResponse<Cadastro> fetchCadastrosByRequest(PagedInquiryRequest request);
+	public InternalResultsResponse<Cadastro> fetchCadastrosByRequest(CadastroInquiryRequest request);
 
 }

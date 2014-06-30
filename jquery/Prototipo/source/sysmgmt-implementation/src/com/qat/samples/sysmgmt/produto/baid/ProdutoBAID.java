@@ -18,6 +18,7 @@ import com.qat.samples.sysmgmt.model.request.RefreshRequest;
 import com.qat.samples.sysmgmt.produto.bac.IProdutoBAC;
 import com.qat.samples.sysmgmt.produto.model.Cadastro;
 import com.qat.samples.sysmgmt.produto.model.Produto;
+import com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.response.CadastroResponse;
@@ -206,7 +207,7 @@ public final class ProdutoBAID
 		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
 	}
 
-	public static void fetchCadastrosPaged(IProdutoBAC produtoBAC, PagedInquiryRequest request,
+	public static void fetchCadastrosPaged(IProdutoBAC produtoBAC, CadastroInquiryRequest request,
 			CadastroResponse response)
 	{
 		InternalResultsResponse<Cadastro> internalResponse = produtoBAC.fetchCadastrosByRequest(request);
@@ -281,7 +282,7 @@ public final class ProdutoBAID
 			// Fetch Paged is requested.
 			if (pageListIndicator)
 			{
-				PagedInquiryRequest request = new PagedInquiryRequest();
+				CadastroInquiryRequest request = new CadastroInquiryRequest();
 				request.setPreQueryCount(true);
 				fetchCadastrosPaged(produtoBAC, request, response);
 			}
