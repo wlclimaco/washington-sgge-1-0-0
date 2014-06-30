@@ -68,6 +68,13 @@
         	<ref bean="wss4jOutInterceptor"/>
  		</jaxws:outInterceptors>
      </jaxws:client>
+      <jaxws:client id="produtoBASClientTarget"
+                  serviceClass="com.qat.samples.sysmgmt.produto.bas.IProdutoBAS"
+                 address="http://localhost:8080/qat-sysmgmt-sample/services/ws/ProdutoService">
+    	<jaxws:outInterceptors>
+        	<ref bean="wss4jOutInterceptor"/>
+ 		</jaxws:outInterceptors>
+     </jaxws:client>
 
 	<bean id="wss4jOutInterceptor" class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor">
     	<property name="properties">
