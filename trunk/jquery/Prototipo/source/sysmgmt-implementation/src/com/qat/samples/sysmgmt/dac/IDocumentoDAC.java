@@ -2,6 +2,7 @@ package com.qat.samples.sysmgmt.dac;
 
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.samples.sysmgmt.documento.model.Documento;
+import com.qat.samples.sysmgmt.model.response.InternalResponseLocal;
 
 /**
  * The Interface IDocumentoDAC. (Data Access Component - DAC)
@@ -15,7 +16,7 @@ public interface IDocumentoDAC
 	 * @param documento the documento
 	 * @return the internal response
 	 */
-	public InternalResponse insertDocumento(Documento documento);
+	public InternalResponseLocal insertDocumento(Documento documento);
 
 	/**
 	 * Update documento.
@@ -24,7 +25,7 @@ public interface IDocumentoDAC
 	 * 
 	 * @return the internal response
 	 */
-	public InternalResponse updateDocumento(Documento documento);
+	public InternalResponseLocal updateDocumento(Documento documento);
 
 	/**
 	 * Delete documento.

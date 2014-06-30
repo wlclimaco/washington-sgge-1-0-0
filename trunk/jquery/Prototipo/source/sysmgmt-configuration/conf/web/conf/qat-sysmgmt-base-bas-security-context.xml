@@ -53,6 +53,15 @@
         		<entry key="refreshCidades" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
 
 
+        		<entry key="fetchAllClientes" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchClienteById" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchClientesByRequest" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="deleteCliente" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="insertCliente" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="updateCliente" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="refreshClientes" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+
+
         		<entry key="fetchAllSupermercados" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
         		<entry key="fetchSupermercadoById" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
         		<entry key="fetchSupermercadosByRequest" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
@@ -137,6 +146,31 @@
         access="ROLE_DOMAIN ADMINS"/>
       <sec:protect-pointcut
         expression="execution(* com.qat.samples.sysmgmt.cidade.bas.rest.CidadeBAS.refreshCidades(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+
+         <!-- ===================================== -->
+
+         <!-- ===================================== -->
+        <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.cliente.bas.rest.ClienteBAS.fetchAllClientes(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.cliente.bas.rest.ClienteBAS.fetchClientesByRequest(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.cliente.bas.rest.ClienteBAS.fetchClienteById(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.cliente.bas.rest.ClienteBAS.deleteCliente(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.cliente.bas.rest.ClienteBAS.insertCliente(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.cliente.bas.rest.ClienteBAS.updateCliente(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.cliente.bas.rest.ClienteBAS.refreshClientes(*))"
         access="ROLE_DOMAIN ADMINS"/>
 
          <!-- ===================================== -->

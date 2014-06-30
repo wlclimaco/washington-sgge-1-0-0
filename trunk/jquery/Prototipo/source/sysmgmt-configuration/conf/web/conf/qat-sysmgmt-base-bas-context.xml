@@ -101,6 +101,17 @@
 		</jaxws:properties>
 	</jaxws:endpoint>
 
+	<jaxws:endpoint id="clienteBASWS" implementor="#clienteBAS" address="/ws/ClienteService" >
+		<jaxws:inInterceptors>
+        	<ref bean="wsAuthenticationInterceptor"/>
+   			<ref bean="wsAuthorizationInterceptor"/>
+ 		</jaxws:inInterceptors>
+		<jaxws:properties>
+			<entry key="set-jaxb-validation-event-handler" value="false" />
+			<entry key="ws-security.validate.token" value="false" />
+		</jaxws:properties>
+	</jaxws:endpoint>
+
 	<!-- ========================= BAS DEFINITIONS REST Services======================== -->
 	<bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
   	<jaxrs:server id="countyBASREST" address="/rest/CountyService">
@@ -124,6 +135,13 @@
 
   	<jaxrs:server id="supermercadoBASREST" address="/rest/SupermercadoService">
   		<jaxrs:serviceBeans><ref bean="supermercadoRESTBAS"/></jaxrs:serviceBeans>
+  		<jaxrs:providers>
+			<ref bean='jsonProvider' />
+		</jaxrs:providers>
+  	</jaxrs:server>
+
+  	<jaxrs:server id="clienteBASREST" address="/rest/ClienteService">
+  		<jaxrs:serviceBeans><ref bean="clienteRESTBAS"/></jaxrs:serviceBeans>
   		<jaxrs:providers>
 			<ref bean='jsonProvider' />
 		</jaxrs:providers>
@@ -162,6 +180,10 @@
 		<property name="supermercadoBAI" ref="supermercadoBAI"/>
 	</bean>
 
+	<bean id="clienteBAS" class="com.qat.samples.sysmgmt.cliente.bas.ws.ClienteBAS">
+		<property name="clienteBAI" ref="clienteBAI"/>
+	</bean>
+
 	<!-- ========================= BAS DEFINITIONS REST Services======================== -->
 	<!-- this bean implements county bas methods -->
 	<bean id="countyRESTBAS" class="com.qat.samples.sysmgmt.bas.rest.CountyBAS">
@@ -178,5 +200,9 @@
 
 	<bean id="supermercadoRESTBAS" class="com.qat.samples.sysmgmt.supermercado.bas.rest.SupermercadoBAS">
 		<property name="supermercadoBAI" ref="supermercadoBAI"/>
+	</bean>
+
+	<bean id="clienteRESTBAS" class="com.qat.samples.sysmgmt.cliente.bas.rest.ClienteBAS">
+		<property name="clienteBAI" ref="clienteBAI"/>
 	</bean>
 </beans>

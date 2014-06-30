@@ -7,6 +7,7 @@ import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.cliente.model.Cliente;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
+import com.qat.samples.sysmgmt.model.response.InternalResponseLocal;
 
 /**
  * The Interface IClienteDAC. (Data Access Component - DAC)
@@ -20,7 +21,7 @@ public interface IClienteDAC
 	 * @param cliente the cliente
 	 * @return the internal response
 	 */
-	public InternalResponse insertCliente(Cliente cliente);
+	public InternalResponseLocal insertCliente(Cliente cliente);
 
 	/**
 	 * Update cliente.
@@ -29,7 +30,7 @@ public interface IClienteDAC
 	 * 
 	 * @return the internal response
 	 */
-	public InternalResponse updateCliente(Cliente cliente);
+	public InternalResponseLocal updateCliente(Cliente cliente);
 
 	/**
 	 * Delete cliente.

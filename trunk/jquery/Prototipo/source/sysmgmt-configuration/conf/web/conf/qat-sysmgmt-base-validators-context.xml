@@ -80,4 +80,13 @@
 		</property>
 	</bean>
 
+	<bean id="ClienteValidator" class="com.qat.samples.sysmgmt.validation.ClienteValidator" />
+
+	<bean id="clienteValidationController" class="com.qat.framework.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="ClienteValidator" />
+			</list>
+		</property>
+	</bean>
 </beans>

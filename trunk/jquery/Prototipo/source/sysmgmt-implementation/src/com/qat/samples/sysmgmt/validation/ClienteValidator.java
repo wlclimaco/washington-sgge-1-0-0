@@ -6,12 +6,12 @@ import com.qat.framework.model.MessageInfo;
 import com.qat.framework.validation.IValidator;
 import com.qat.framework.validation.ValidationContext;
 import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.supermercado.model.Supermercado;
+import com.qat.samples.sysmgmt.cliente.model.Cliente;
 
 /**
  * The Class BundleDValidator.
  */
-public class SupermercadoValidator implements IValidator
+public class ClienteValidator implements IValidator
 {
 
 	private static final String SYSMGMT_BASE_BUNDLEVALIDATOR_PROCDESC_REQUIRED =
@@ -24,8 +24,8 @@ public class SupermercadoValidator implements IValidator
 	@Override
 	public void validate(ValidationContext validationContext)
 	{
-		Supermercado bundle =
-				(Supermercado)validationContext.getObjectToBeValidated(Supermercado.class.getSimpleName());
+		Cliente bundle =
+				(Cliente)validationContext.getObjectToBeValidated(Cliente.class.getSimpleName());
 
 		switch (validationContext.getValidationContextIndicator())
 		{
@@ -44,18 +44,18 @@ public class SupermercadoValidator implements IValidator
 		}
 	}
 
-	private void validateCidadeId(List<MessageInfo> list, Supermercado bundle)
+	private void validateCidadeId(List<MessageInfo> list, Cliente bundle)
 	{
-		ValidationUtil.isNullOrZero(bundle.getSuperId(), SYSMGMT_BASE_BUNDLEVALIDATOR_ID_REQUIRED, list);
+		ValidationUtil.isNullOrZero(bundle.getClienteid(), SYSMGMT_BASE_BUNDLEVALIDATOR_ID_REQUIRED, list);
 	}
 
-	private void validateCidadeCidade(List<MessageInfo> list, Supermercado bundle)
+	private void validateCidadeCidade(List<MessageInfo> list, Cliente bundle)
 	{
-		ValidationUtil.isNullOrEmpty(bundle.getEnderecos().get(0).getNome(),
+		ValidationUtil.isNullOrEmpty(bundle.getEnderecos().get(0).getLogradouro(),
 				SYSMGMT_BASE_BUNDLEVALIDATOR_PROCCODE_REQUIRED, list);
 	}
 
-	private void validateCidadeEstado(List<MessageInfo> list, Supermercado bundle)
+	private void validateCidadeEstado(List<MessageInfo> list, Cliente bundle)
 	{
 		ValidationUtil.isNullOrEmpty(bundle.getDocumentos().get(0).getCpfCnpj(),
 				SYSMGMT_BASE_BUNDLEVALIDATOR_PROCDESC_REQUIRED,

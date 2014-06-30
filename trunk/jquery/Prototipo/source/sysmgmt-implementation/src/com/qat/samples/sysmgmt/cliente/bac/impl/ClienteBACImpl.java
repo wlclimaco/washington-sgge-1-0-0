@@ -4,11 +4,18 @@ import com.qat.framework.model.Message;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResponse.Status;
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.cliente.bac.IClienteBAC;
 import com.qat.samples.sysmgmt.cliente.dac.IClienteDAC;
 import com.qat.samples.sysmgmt.cliente.model.Cliente;
+import com.qat.samples.sysmgmt.dac.IDocumentoDAC;
+import com.qat.samples.sysmgmt.dac.IEnderecoDAC;
+import com.qat.samples.sysmgmt.documento.model.Documento;
+import com.qat.samples.sysmgmt.endereco.model.Endereco;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
+import com.qat.samples.sysmgmt.model.response.InternalResponseLocal;
+import com.qat.samples.sysmgmt.util.TableTypeEnum;
 
 /**
  * Implementation of the IClienteBAC leveraging a BAD, ClienteBAD.
@@ -34,6 +41,10 @@ public class ClienteBACImpl implements IClienteBAC
 	/** The cidade dac. */
 	private IClienteDAC cidadeDAC; // injected by Spring through setter
 
+	private IEnderecoDAC enderecoDAC; // injected by Spring through setter
+
+	private IDocumentoDAC documentoDAC; // injected by Spring through setter
+
 	/**
 	 * Spring Sets the cidade dac.
 	 * 
@@ -54,16 +65,57 @@ public class ClienteBACImpl implements IClienteBAC
 		return cidadeDAC;
 	}
 
+	public IEnderecoDAC getEnderecoDAC()
+	{
+		return enderecoDAC;
+	}
+
+	public void setEnderecoDAC(IEnderecoDAC enderecoDAC)
+	{
+		this.enderecoDAC = enderecoDAC;
+	}
+
+	public IDocumentoDAC getDocumentoDAC()
+	{
+		return documentoDAC;
+	}
+
+	public void setDocumentoDAC(IDocumentoDAC documentoDAC)
+	{
+		this.documentoDAC = documentoDAC;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bac.IClienteBAC#insertCliente(com.qat.samples.sysmgmt.base.model.Cliente)
 	 */
 	@Override
-	public InternalResponse insertCliente(Cliente cidade)
+	public InternalResponse insertCliente(Cliente cliente)
 	{
-		// cidade.setPrice(ClienteBAD.calculatePrice(INSERT_SEED));
-		return getClienteDAC().insertCliente(cidade);
+		InternalResponseLocal internal = new InternalResponseLocal();
+		internal = getClienteDAC().insertCliente(cliente);
+
+		if (!ValidationUtil.isNull(internal.getId()))
+		{
+			InternalResponseLocal responseEndereco = new InternalResponseLocal();
+			Endereco endereco = new Endereco();
+			endereco = cliente.getEnderecos().get(0);
+			endereco.setId(internal.getId());
+			endereco.setTabela(TableTypeEnum.CLIENTE);
+			responseEndereco = getEnderecoDAC().insertEndereco(endereco);
+			if (!ValidationUtil.isNull(responseEndereco.getId()))
+			{
+				InternalResponseLocal responseDocumento = new InternalResponseLocal();
+				Documento documento = new Documento();
+				documento = cliente.getDocumentos().get(0);
+				documento.setId(internal.getId());
+				documento.setTabela(TableTypeEnum.CLIENTE);
+				responseDocumento = getDocumentoDAC().insertDocumento(documento);
+			}
+		}
+
+		return internal;
 	}
 
 	/*
@@ -72,18 +124,34 @@ public class ClienteBACImpl implements IClienteBAC
 	 * com.qat.samples.sysmgmt.base.bac.IClienteBAC#updateCliente(com.qat.samples.sysmgmt.base.model.Cliente)
 	 */
 	@Override
-	public InternalResponse updateCliente(Cliente cidade)
+	public InternalResponse updateCliente(Cliente cliente)
 	{
-		// cidade.setPrice(ClienteBAD.calculatePrice(UPDATE_SEED));
-		InternalResponse internalResponse = getClienteDAC().updateCliente(cidade);
-		// Check for error because in business case all non-success returns are failures (updating of zero rows or
-		// optimistic locking error) according to the business
-		if (internalResponse.getStatus() != Status.OperationSuccess)
+		InternalResponseLocal internal = new InternalResponseLocal();
+		InternalResponse internalResponse = new InternalResponse();
+		internal = getClienteDAC().updateCliente(cliente);
+		if (internal.getStatus().equals(Status.OperationSuccess))
 		{
-			internalResponse.addMessage(DEFAULT_PROCEDURE_BAC_EXCEPTION_MSG, Message.MessageSeverity.Error,
-					Message.MessageLevel.Object, new Object[] {internalResponse
-							.getStatus().toString()});
+			InternalResponseLocal responseEndereco = new InternalResponseLocal();
+			Endereco endereco = new Endereco();
+			endereco = cliente.getEnderecos().get(0);
+			endereco.setTabela(TableTypeEnum.CLIENTE);
+			responseEndereco = getEnderecoDAC().insertEndereco(endereco);
+			if (responseEndereco.getStatus().equals(Status.OperationSuccess))
+			{
+				InternalResponseLocal responseDocumento = new InternalResponseLocal();
+				Documento documento = new Documento();
+				documento = cliente.getDocumentos().get(0);
+				documento.setTabela(TableTypeEnum.CLIENTE);
+				responseDocumento = getDocumentoDAC().insertDocumento(documento);
+			}
+			if (internal.getStatus() != Status.OperationSuccess)
+			{
+				internal.addMessage(DEFAULT_PROCEDURE_BAC_EXCEPTION_MSG, Message.MessageSeverity.Error,
+						Message.MessageLevel.Object, new Object[] {internal
+								.getStatus().toString()});
+			}
 		}
+		internalResponse = internal;
 		return internalResponse;
 	}
 
@@ -120,7 +188,7 @@ public class ClienteBACImpl implements IClienteBAC
 
 		for (int i = 1; i <= refreshNumber; i++)
 		{
-			getClienteDAC().insertCliente(new Cliente(i));
+			// getClienteDAC().insertCliente(new Cliente(i));
 		}
 	}
 

@@ -6,6 +6,7 @@ import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.samples.sysmgmt.dac.IDocumentoDAC;
 import com.qat.samples.sysmgmt.documento.model.Documento;
+import com.qat.samples.sysmgmt.model.response.InternalResponseLocal;
 
 /**
  * The Class DocumentoDACImpl. (Data Access Component - DAC)
@@ -36,10 +37,13 @@ public class DocumentoDACImpl extends SqlSessionDaoSupport implements IDocumento
 	 * com.qat.samples.sysmgmt.base.dac.IDocumentoDAC#insertDocumento(com.qat.samples.sysmgmt.base.model.Documento)
 	 */
 	@Override
-	public InternalResponse insertDocumento(Documento documento)
+	public InternalResponseLocal insertDocumento(Documento documento)
 	{
-		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doInsert(getSqlSession(), STMT_INSERT, documento, response);
+		InternalResponseLocal response = new InternalResponseLocal();
+
+		Integer academiaId =
+				(Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), STMT_INSERT, documento);
+		response.setId(academiaId);
 		return response;
 	}
 
@@ -49,11 +53,15 @@ public class DocumentoDACImpl extends SqlSessionDaoSupport implements IDocumento
 	 * com.qat.samples.sysmgmt.base.dac.IDocumentoDAC#updateDocumento(com.qat.samples.sysmgmt.base.model.Documento)
 	 */
 	@Override
-	public InternalResponse updateDocumento(Documento documento)
+	public InternalResponseLocal updateDocumento(Documento documento)
 	{
-		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doUpdateOL(getSqlSession(), STMT_UPDATE, documento, STMT_VERSION, response);
+		InternalResponseLocal response = new InternalResponseLocal();
+
+		Integer academiaId =
+				(Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), STMT_UPDATE, documento);
+		response.setId(academiaId);
 		return response;
+
 	}
 
 	/*

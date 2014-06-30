@@ -4,6 +4,8 @@ import com.qat.framework.model.Message;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResponse.Status;
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.dac.IDocumentoDAC;
+import com.qat.samples.sysmgmt.dac.IEnderecoDAC;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.supermercado.bac.ISupermercadoBAC;
@@ -35,6 +37,10 @@ public class SupermercadoBACImpl implements ISupermercadoBAC
 	/** The supermercado dac. */
 	private ISupermercadoDAC supermercadoDAC; // injected by Spring through setter
 
+	private IEnderecoDAC enderecoDAC; // injected by Spring through setter
+
+	private IDocumentoDAC documentoDAC; // injected by Spring through setter
+
 	/**
 	 * Spring Sets the supermercado dac.
 	 * 
@@ -61,10 +67,33 @@ public class SupermercadoBACImpl implements ISupermercadoBAC
 	 * com.qat.samples.sysmgmt.base.bac.ISupermercadoBAC#insertSupermercado(com.qat.samples.sysmgmt.base.model.Supermercado
 	 * )
 	 */
+	public IEnderecoDAC getEnderecoDAC()
+	{
+		return enderecoDAC;
+	}
+
+	public void setEnderecoDAC(IEnderecoDAC enderecoDAC)
+	{
+		this.enderecoDAC = enderecoDAC;
+	}
+
+	public IDocumentoDAC getDocumentoDAC()
+	{
+		return documentoDAC;
+	}
+
+	public void setDocumentoDAC(IDocumentoDAC documentoDAC)
+	{
+		this.documentoDAC = documentoDAC;
+	}
+
 	@Override
 	public InternalResponse insertSupermercado(Supermercado supermercado)
 	{
 		// supermercado.setPrice(SupermercadoBAD.calculatePrice(INSERT_SEED));
+		// InternalResponseLocal responseEndereco = new InternalResponseLocal();
+		// responseEndereco = getEnderecoDAC().insertEndereco(supermercado.getEnderecos().get(0));
+		// supermercado.getEnderecos().get(0).setId(responseEndereco.getId());
 		return getSupermercadoDAC().insertSupermercado(supermercado);
 	}
 

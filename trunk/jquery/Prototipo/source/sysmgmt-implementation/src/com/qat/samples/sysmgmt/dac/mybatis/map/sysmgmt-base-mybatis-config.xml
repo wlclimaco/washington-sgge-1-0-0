@@ -27,6 +27,7 @@
   		<typeAlias alias="Endereco" type="com.qat.samples.sysmgmt.endereco.model.Endereco"/>
   		<typeAlias alias="Supermercado" type="com.qat.samples.sysmgmt.supermercado.model.Supermercado"/>
   		<typeAlias alias="Tabelapreco" type="com.qat.samples.sysmgmt.produto.model.Tabelapreco"/>
+  		<typeAlias alias="Cliente" type="com.qat.samples.sysmgmt.cliente.model.Cliente"/>
   	</typeAliases>
 
  	<mappers>
@@ -40,6 +41,7 @@
      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/endereco.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/documento.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/supermercado/dac/mybatis/map/supermercado.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/cliente/dac/mybatis/map/cliente.xml"/>
     </mappers>
 
 </configuration>

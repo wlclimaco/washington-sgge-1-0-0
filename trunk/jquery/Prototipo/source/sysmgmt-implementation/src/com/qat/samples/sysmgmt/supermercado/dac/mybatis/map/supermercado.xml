@@ -12,7 +12,7 @@
        necessary if the columns (or aliases) match to the properties
        exactly. -->
   <resultMap id="SupermercadoResult" type="Supermercado">
-    <result property="id" column="supermercadoid"/>
+    <result property="superId" column="supermercadoid"/>
     <result property="usuario" column="usuario"/>
     <result property="senha" column="senha"/>
     <result property="site" column="site"/>
@@ -58,7 +58,7 @@
 
   <select id="fetchSupermercadoRowCount" resultType="Integer">
       <if test="_databaseId == 'PostgreSQL'">
-			SELECT COUNT(*) AS RECORD_COUNT FROM SUPERMERCADO WHERE SUPERMERCADO IS NOT NULL
+			SELECT COUNT(*) AS RECORD_COUNT FROM SUPERMERCADO WHERE SUPERMERCADOID IS NOT NULL
       </if>
 
    	  <if test="_databaseId == 'Oracle'">
@@ -101,12 +101,13 @@
   </select>
 
    <select id="updateSupermercado" parameterType="Supermercado" resultType="int" statementType="CALLABLE">
-        { call upd_supermercado( #{supermercadoid},#{usuario}, #{email},#{site},#{senha},#{enderecoid},#{id},#{logradouro},  #{bairro}, #{estado}, #{cidade}, #{numero}, #{cep}, #{nome}, #{complemento},#{documentoid},#{usuarioid}, #{rginscmuni},  #{cpfcnpj}, #{razao}) }
+        { call upd_supermercado( #{superId},#{usuario}, #{email},#{site},#{senha},#{enderecoid},#{id},#{logradouro},  #{bairro}, #{estado}, #{cidade}, #{numero}, #{cep}, #{nome}, #{complemento},#{documentoid},#{usuarioid}, #{rginscmuni},  #{cpfcnpj}, #{razao}) }
   </select>
 
-  <delete id="deleteSupermercadoById" parameterType="Supermercado">
-    DELETE FROM SUPERMERCADO WHERE SUPERMERCADOID = #{id}
-  </delete>
+  <select id="deleteSupermercadoById" parameterType="Supermercado" resultType="int" statementType="CALLABLE">
+        { call del_supermercado( #{superId},#{userId} ) }
+
+  </select>
 
   <delete id="deleteAllSupermercados">
 	DELETE FROM SUPERMERCADO

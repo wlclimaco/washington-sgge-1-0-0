@@ -109,6 +109,16 @@ public class Documento extends Util
 		super();
 	}
 
+	public Integer getDocumentoid()
+	{
+		return documentoid;
+	}
+
+	public void setDocumentoid(Integer documentoid)
+	{
+		this.documentoid = documentoid;
+	}
+
 	/**
 	 * Gets the id.
 	 * 
@@ -300,9 +310,10 @@ public class Documento extends Util
 	@Override
 	public String toString()
 	{
-		return "Documento [getNome()=" + getNome() + ", getRazao()=" + getRazao() + ", getId()=" + getId()
-				+ ", getRgInc()=" + getRgInc() + ", getCpfCnpj()=" + getCpfCnpj() + ", getDateNascimento()="
-				+ getDateNascimento() + ", getDocumenroid()=" + getDocumenroid() + ", getTabela()=" + getTabela()
+		return "Documento [getNome()=" + getNome() + ", getRazao()=" + getRazao() + ", getDocumentoid()="
+				+ getDocumentoid() + ", getId()=" + getId() + ", getRgInc()=" + getRgInc() + ", getCpfCnpj()="
+				+ getCpfCnpj() + ", getDateNascimento()=" + getDateNascimento() + ", getDocumenroid()="
+				+ getDocumenroid() + ", getTabela()=" + getTabela() + ", getTableTypeValue()=" + getTableTypeValue()
 				+ ", toString()=" + super.toString() + "]";
 	}
 

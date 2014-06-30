@@ -11,7 +11,7 @@ import com.qat.framework.model.Tenant;
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "Util", propOrder = {"acessos", "userId", "id", "tenant", "userRole"})
+@XmlType(name = "Util", propOrder = {"acessos", "userId", "tenant", "userRole"})
 public class Util extends QATModelOL
 {
 
@@ -20,9 +20,6 @@ public class Util extends QATModelOL
 
 	/** The user id. */
 	String userId;
-
-	/** The id. */
-	Integer id;
 
 	/** The tenant. */
 	Tenant tenant;
@@ -63,7 +60,6 @@ public class Util extends QATModelOL
 		super();
 		this.acessos = acessos;
 		this.userId = userId;
-		this.id = id;
 		this.tenant = tenant;
 		this.userRole = userRole;
 	}
@@ -91,7 +87,6 @@ public class Util extends QATModelOL
 	{
 		super();
 		this.userId = userId;
-		this.id = id;
 		this.tenant = tenant;
 		this.userRole = userRole;
 	}
@@ -114,26 +109,6 @@ public class Util extends QATModelOL
 	public void setUserId(String userId)
 	{
 		this.userId = userId;
-	}
-
-	/**
-	 * Gets the id.
-	 * 
-	 * @return the id
-	 */
-	public Integer getId()
-	{
-		return id;
-	}
-
-	/**
-	 * Sets the id.
-	 * 
-	 * @param id the new id
-	 */
-	public void setId(Integer id)
-	{
-		this.id = id;
 	}
 
 	/**
@@ -203,7 +178,7 @@ public class Util extends QATModelOL
 	@Override
 	public String toString()
 	{
-		return "Util [getUserId()=" + getUserId() + ", getId()=" + getId() + ", getTenant()=" + getTenant()
+		return "Util [getUserId()=" + getUserId() + ", getTenant()=" + getTenant()
 				+ ", getUserRole()=" + getUserRole() + ", getAcessos()=" + getAcessos() + ", toString()="
 				+ super.toString() + "]";
 	}

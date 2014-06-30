@@ -40,7 +40,13 @@
  <select id="fetchAllEnderecosBySupermercado" parameterType="Integer" resultMap="EnderecoResult">
   SELECT
     <include refid="allEnderecoColumns" />
-    FROM ENDERECO where enderecoid = #{id} ORDER BY enderecoid ASC
+    FROM ENDERECO where id = #{id} and acao = 1 ORDER BY enderecoid ASC
+  </select>
+
+  <select id="fetchAllEnderecosByCliente" parameterType="Integer" resultMap="EnderecoResult">
+  SELECT
+    <include refid="allEnderecoColumns" />
+    FROM ENDERECO where id = #{id} and acao = 8 ORDER BY enderecoid ASC
   </select>
 
   <select id="fetchAllEnderecos" resultMap="EnderecoResult">
@@ -109,23 +115,14 @@
 	SELECT VERSN_LOCK_NUM FROM ENDERECO WHERE enderecoid = #{id}
   </select>
 
-  <insert id="insertEndereco" parameterType="Endereco">
-   	<selectKey resultType="int" keyProperty="enderecoid" order="BEFORE">
-			SELECT nextval('endereco_enderecoid_seq') AS enderecoid
-	</selectKey>
-  	INSERT INTO ENDERECO (enderecoid, id, logradouro, bairro, estado, cidade, numero, cep,nome, complemento,acao)
-    VALUES (#{enderecoid}, #{id}, #{logradouro}, #{bairro}, #{estado}, #{cidade}, #{numero},#{cep},#{nome}, #{complemento},#{tableTypeValue})
+  <select id="insertEndereco" parameterType="Endereco" resultType="int" statementType="CALLABLE">
+        { call ins_endereco(#{id},  #{logradouro}, #{bairro}, #{estado},  #{cidade},  #{numero}, #{cep} , #{nome}, #{complemento}, #{tableTypeValue}, #{userId}) }
+  </select>
 
-  </insert>
 
-  <update id="updateEndereco" parameterType="Endereco">
-    UPDATE ENDERECO SET
-      BUNDLE_CODE = #{code},
-      BUNDLE_DESC = #{description},
-      BUNDLE_PRICE = #{price}
-    WHERE
-      enderecoid = #{id} AND VERSN_LOCK_NUM = #{version}
-  </update>
+  <select id="updateEndereco" parameterType="Endereco" resultType="int" statementType="CALLABLE">
+        { call ins_endereco(#{enderecoid},#{id},  #{logradouro}, #{bairro}, #{estado},  #{cidade},  #{numero}, #{cep}, #{nome}, #{complemento}, #{tableTypeValue}, #{userId}) }
+  </select>
 
   <delete id="deleteEnderecoById" parameterType="Endereco">
     DELETE FROM ENDERECO WHERE enderecoid = #{id}

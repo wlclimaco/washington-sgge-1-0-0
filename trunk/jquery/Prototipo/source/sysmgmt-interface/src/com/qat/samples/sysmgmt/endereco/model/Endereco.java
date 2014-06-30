@@ -35,7 +35,7 @@ public class Endereco extends Util
 	private String cidade;
 
 	/** The numero. */
-	private String numero;
+	private Integer numero;
 
 	/** The description. */
 	private String cep;
@@ -172,7 +172,7 @@ public class Endereco extends Util
 	 * 
 	 * @return the numero
 	 */
-	public String getNumero()
+	public Integer getNumero()
 	{
 		return numero;
 	}
@@ -182,7 +182,7 @@ public class Endereco extends Util
 	 * 
 	 * @param numero the numero to set
 	 */
-	public void setNumero(String numero)
+	public void setNumero(Integer numero)
 	{
 		this.numero = numero;
 	}
