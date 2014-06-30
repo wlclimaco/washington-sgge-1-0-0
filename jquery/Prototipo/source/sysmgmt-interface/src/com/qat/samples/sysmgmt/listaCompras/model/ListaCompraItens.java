@@ -10,12 +10,12 @@ import com.qat.samples.sysmgmt.util.Util;
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "Cidade", propOrder = {"id", "estado", "cidade"})
+@XmlType(name = "ListaCompraItens", propOrder = {"listaitensid", "produto", "supermercado"})
 public class ListaCompraItens extends Util
 {
 
 	/** The id. */
-	private Integer id;
+	private Integer listaitensid;
 
 	/** The produtos. */
 	private Produto produto;
@@ -41,7 +41,6 @@ public class ListaCompraItens extends Util
 	public ListaCompraItens(Integer id, Produto produto, Supermercado supermercado)
 	{
 		super();
-		this.id = id;
 		this.produto = produto;
 		this.supermercado = supermercado;
 	}
@@ -51,21 +50,6 @@ public class ListaCompraItens extends Util
 	 * @see com.qat.samples.sysmgmt.util.Util#getId()
 	 */
 
-	public Integer getId()
-	{
-		return id;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.util.Util#setId(java.lang.Integer)
-	 */
-
-	public void setId(Integer id)
-	{
-		this.id = id;
-	}
-
 	/**
 	 * Gets the produtos.
 	 * 
@@ -74,6 +58,16 @@ public class ListaCompraItens extends Util
 	public Produto getProduto()
 	{
 		return produto;
+	}
+
+	public Integer getListaitensid()
+	{
+		return listaitensid;
+	}
+
+	public void setListaitensid(Integer listaitensid)
+	{
+		this.listaitensid = listaitensid;
 	}
 
 	/**
@@ -106,15 +100,11 @@ public class ListaCompraItens extends Util
 		this.supermercado = supermercado;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.util.Util#toString()
-	 */
 	@Override
 	public String toString()
 	{
-		return "ListaCompraItens [getId()=" + getId() + ", getProduto()=" + getProduto() + ", getSupermercado()="
-				+ getSupermercado() + ", toString()=" + super.toString() + "]";
+		return "ListaCompraItens [getProduto()=" + getProduto() + ", getListaitensid()=" + getListaitensid()
+				+ ", getSupermercado()=" + getSupermercado() + ", toString()=" + super.toString() + "]";
 	}
 
 }

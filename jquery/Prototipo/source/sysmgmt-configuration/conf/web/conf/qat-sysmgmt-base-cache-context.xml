@@ -138,6 +138,22 @@
 	</aop:aspect>
  </aop:config>
 
+ <!-- Cliente Cache -->
+  <aop:config>
+	<!-- Pointcuts -->
+	<aop:pointcut id="clienteCacheObject" expression="bean(clienteDACTarget) and execution(* fetch*(..)) and !execution(* fetchClientesByRequest(..))" />
+	<aop:pointcut id="clienteFlushInsert" expression="bean(clienteDACTarget) and execution(* insert*(..))" />
+	<aop:pointcut id="clienteFlushUpdate" expression="bean(clienteDACTarget) and execution(* update*(..))" />
+	<aop:pointcut id="clienteFlushDelete" expression="bean(clienteDACTarget) and execution(* delete*(..))" />
+	<!-- Aspects -->
+	<aop:aspect id="procedureCacheAspects" ref="procedureCacheAspect">
+		<aop:around pointcut-ref="clienteCacheObject" method="cacheObject"/>
+		<aop:after pointcut-ref="clienteFlushInsert" method="flushCache" />
+		<aop:after pointcut-ref="clienteFlushUpdate" method="flushCache" />
+		<aop:after pointcut-ref="clienteFlushDelete" method="flushCache" />
+	</aop:aspect>
+ </aop:config>
+
    <!-- Drug Cache -->
   <bean id="drugCacheAspect" class="com.qat.framework.aop.CacheAOP" >
 	<property name="cache">

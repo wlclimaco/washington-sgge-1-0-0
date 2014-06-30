@@ -6,11 +6,8 @@ import java.util.List;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResponse;
-import com.qat.framework.model.response.InternalResponse.Status;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
-import com.qat.samples.sysmgmt.dac.mybatis.DocumentoDACImpl;
-import com.qat.samples.sysmgmt.dac.mybatis.EnderecoDACImpl;
 import com.qat.samples.sysmgmt.dacd.mybatis.PagedResultsDACD;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
@@ -121,7 +118,7 @@ public class SupermercadoDACImpl extends SqlSessionDaoSupport implements ISuperm
 	public InternalResponse updateSupermercado(Supermercado supermercado)
 	{
 		HashMap<String, Object> paramMap = new HashMap<String, Object>(20);
-		paramMap.put("supermercadoid", supermercado.getId());
+		paramMap.put("supermercadoid", supermercado.getSuperId());
 		paramMap.put("usuario", supermercado.getUsuario());
 		paramMap.put("email", supermercado.getEmail());
 		paramMap.put("site", supermercado.getSite());
@@ -158,21 +155,10 @@ public class SupermercadoDACImpl extends SqlSessionDaoSupport implements ISuperm
 	public InternalResponse deleteSupermercado(Supermercado supermercado)
 	{
 		InternalResponse response = new InternalResponse();
-		EnderecoDACImpl endereco = new EnderecoDACImpl();
-		response = endereco.deleteEndereco(supermercado.getEnderecos().get(0));
-		if (response.getStatus().equals(Status.OperationSuccess))
-		{
-			DocumentoDACImpl documento = new DocumentoDACImpl();
-			response = documento.deleteDocumento(supermercado.getDocumentos().get(0));
-			if (response.getStatus().equals(Status.OperationSuccess))
-			{
-				QATMyBatisDacHelper.doRemove(getSqlSession(), STMT_DELETE, supermercado, response);
-				return response;
-			}
 
-		}
-		response.setStatus(Status.NoRowsInsertedError);
+		QATMyBatisDacHelper.doRemove(getSqlSession(), STMT_DELETE, supermercado, response);
 		return response;
+
 	}
 
 	/*

@@ -13,7 +13,7 @@
        exactly. -->
   <resultMap id="DocumentoResult" type="Documento">
     <result property="documentoid" column="documentoid"/>
-     <result property="id" column="id"/>
+    <result property="id" column="id"/>
     <result property="rgInc" column="rginscmuni"/>
     <result property="cpfCnpj" column="cpfcnpj"/>
     <result property="nome" column="nome"/>
@@ -30,8 +30,12 @@
 		p.documentoid,p.id, p.rginscmuni, p.cpfcnpj, p.nome, p.razao,p.tabela
   </sql>
 
-     <select id="fetchAllDocumentosBySupermercado" resultMap="DocumentoResult">
+   <select id="fetchAllDocumentosBySupermercado" resultMap="DocumentoResult">
          SELECT <include refid="allDocumentoColumns" /> FROM DOCUMENTOS WHERE TABELA = 1 AND ID = #{ID}
+   </select>
+
+   <select id="fetchAllDocumentosByCliente" resultMap="DocumentoResult">
+         SELECT <include refid="allDocumentoColumns" /> FROM DOCUMENTOS WHERE TABELA = 8 AND ID = #{ID}
    </select>
 
   <select id="fetchAllDocumentos" resultMap="DocumentoResult">
@@ -100,23 +104,13 @@
 	SELECT VERSN_LOCK_NUM FROM DOCUMENTOS WHERE documentoid = #{id}
   </select>
 
-  <insert id="insertDocumento" parameterType="Documento">
-   	<selectKey resultType="int" keyProperty="documentoid" order="BEFORE">
-			SELECT nextval('documentos_documentoid_seq') AS documentoid
-	</selectKey>
-  	INSERT INTO DOCUMENTOS (
-      documentoid,id,rginscmuni, cpfcnpj, nome, razao,tabela )
-    VALUES ( #{documentoid} , #{id},#{rgInc} , #{cpfCnpj} , #{nome} , #{razao}, #{tableTypeValue})
-  </insert>
+   	<select id="insertDocumento" parameterType="Documento" resultType="int" statementType="CALLABLE">
+        { call ins_documento(#{id},  #{rgInc}, #{cpfCnpj}, #{nome},  #{razao},  #{tableTypeValue}, #{userId}) }
+    </select>
 
-  <update id="updateDocumento" parameterType="Documento">
-    UPDATE DOCUMENTOS SET
-      BUNDLE_CODE = #{code},
-      BUNDLE_DESC = #{description},
-      BUNDLE_PRICE = #{price}
-    WHERE
-      documentoid = #{id} AND VERSN_LOCK_NUM = #{version}
-  </update>
+  	<select id="updateDocumento" parameterType="Documento" resultType="int" statementType="CALLABLE">
+        { call ins_documento(#{documentoid},#{id},  #{rgInc}, #{cpfCnpj}, #{nome},  #{razao},  #{tableTypeValue}, #{userId}) }
+    </select>
 
   <delete id="deleteDocumentoById" parameterType="Documento">
     DELETE FROM DOCUMENTOS WHERE documentoid = #{id}

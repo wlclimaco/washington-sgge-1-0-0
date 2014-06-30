@@ -3,9 +3,11 @@ package com.qat.samples.sysmgmt.dac.mybatis;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResponse.Status;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.samples.sysmgmt.dac.IEnderecoDAC;
 import com.qat.samples.sysmgmt.endereco.model.Endereco;
+import com.qat.samples.sysmgmt.model.response.InternalResponseLocal;
 
 /**
  * The Class EnderecoDACImpl. (Data Access Component - DAC)
@@ -33,10 +35,14 @@ public class EnderecoDACImpl extends SqlSessionDaoSupport implements IEnderecoDA
 	 * com.qat.samples.sysmgmt.base.dac.IEnderecoDAC#insertEndereco(com.qat.samples.sysmgmt.base.model.Endereco)
 	 */
 	@Override
-	public InternalResponse insertEndereco(Endereco endereco)
+	public InternalResponseLocal insertEndereco(Endereco endereco)
 	{
-		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doInsert(getSqlSession(), STMT_INSERT, endereco, response);
+		InternalResponseLocal response = new InternalResponseLocal();
+
+		Integer academiaId =
+				(Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), STMT_INSERT, endereco);
+		response.setStatus(Status.NoRowsInsertedError);
+		response.setId(academiaId);
 		return response;
 	}
 
@@ -46,10 +52,15 @@ public class EnderecoDACImpl extends SqlSessionDaoSupport implements IEnderecoDA
 	 * com.qat.samples.sysmgmt.base.dac.IEnderecoDAC#updateEndereco(com.qat.samples.sysmgmt.base.model.Endereco)
 	 */
 	@Override
-	public InternalResponse updateEndereco(Endereco endereco)
+	public InternalResponseLocal updateEndereco(Endereco endereco)
 	{
-		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doUpdateOL(getSqlSession(), STMT_UPDATE, endereco, STMT_VERSION, response);
+
+		InternalResponseLocal response = new InternalResponseLocal();
+
+		Integer academiaId =
+				(Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), STMT_UPDATE, endereco);
+		response.setStatus(Status.NoRowsInsertedError);
+		response.setId(academiaId);
 		return response;
 	}
 

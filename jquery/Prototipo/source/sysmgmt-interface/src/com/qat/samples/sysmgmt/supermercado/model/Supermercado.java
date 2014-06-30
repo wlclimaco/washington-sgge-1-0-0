@@ -13,10 +13,14 @@ import com.qat.samples.sysmgmt.util.Util;
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "Supermercado", propOrder = {"id", "enderecos", "usuario", "senha", "email", "site", "documentos",
+@XmlType(name = "Supermercado", propOrder = {"superId", "enderecos", "usuario", "senha", "email", "site",
+		"documentos",
 		"imagens"})
 public class Supermercado extends Util
 {
+
+	/** The id. */
+	private Integer superId;
 
 	/** The code. */
 	private List<Endereco> enderecos;
@@ -51,20 +55,6 @@ public class Supermercado extends Util
 	 * 
 	 * @return the id
 	 */
-	public Integer getId()
-	{
-		return id;
-	}
-
-	/**
-	 * Sets the id.
-	 * 
-	 * @param id the id to set
-	 */
-	public void setId(Integer id)
-	{
-		this.id = id;
-	}
 
 	/**
 	 * Gets the enderecos.
@@ -74,6 +64,16 @@ public class Supermercado extends Util
 	public List<Endereco> getEnderecos()
 	{
 		return enderecos;
+	}
+
+	public Integer getSuperId()
+	{
+		return superId;
+	}
+
+	public void setSuperId(Integer superId)
+	{
+		this.superId = superId;
 	}
 
 	/**
@@ -196,9 +196,6 @@ public class Supermercado extends Util
 		this.imagens = imagens;
 	}
 
-	/** The id. */
-	private Integer id;
-
 	/**
 	 * Instantiates a new supermercado.
 	 * 
@@ -207,7 +204,6 @@ public class Supermercado extends Util
 	public Supermercado(Integer id)
 	{
 		super();
-		this.id = id;
 	}
 
 	/**
@@ -225,7 +221,6 @@ public class Supermercado extends Util
 			List<Documento> documentos)
 	{
 		super();
-		this.id = id;
 		this.enderecos = enderecos;
 		this.usuario = usuario;
 		this.senha = senha;
@@ -237,7 +232,7 @@ public class Supermercado extends Util
 	@Override
 	public String toString()
 	{
-		return "Supermercado [getId()=" + getId() + ", getEnderecos()=" + getEnderecos() + ", getUsuario()="
+		return "Supermercado [getEnderecos()=" + getEnderecos() + ", getSuperId()=" + getSuperId() + ", getUsuario()="
 				+ getUsuario() + ", getSenha()=" + getSenha() + ", getEmail()=" + getEmail() + ", getSite()="
 				+ getSite() + ", getDocumentos()=" + getDocumentos() + ", getImagens()=" + getImagens()
 				+ ", toString()=" + super.toString() + "]";

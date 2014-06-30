@@ -6,18 +6,20 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.qat.samples.sysmgmt.documento.model.Documento;
 import com.qat.samples.sysmgmt.endereco.model.Endereco;
+import com.qat.samples.sysmgmt.listaCompras.model.ListaCompras;
 import com.qat.samples.sysmgmt.util.Util;
 
 /**
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "Cliente", propOrder = {"id", "code", "description", "price"})
+@XmlType(name = "Cliente", propOrder = {"clienteid", "type", "nome", "sobrenome", "usuario", "senha",
+		"email", "documentos", "enderecos", "listaCompras"})
 public class Cliente extends Util
 {
 
 	/** The id. */
-	private Integer id;
+	private Integer clienteid;
 
 	/** The code. */
 	private ClienteTypeEnum type;
@@ -43,6 +45,8 @@ public class Cliente extends Util
 	/** The enderecos. */
 	private List<Endereco> enderecos;
 
+	private List<ListaCompras> listaCompras;
+
 	/**
 	 * Instantiates a new bundle.
 	 */
@@ -56,32 +60,6 @@ public class Cliente extends Util
 	 * 
 	 * @param id the id
 	 */
-	public Cliente(Integer id)
-	{
-		this.id = id;
-	}
-
-	/**
-	 * Gets the id.
-	 * 
-	 * @return the id
-	 */
-	@Override
-	public Integer getId()
-	{
-		return id;
-	}
-
-	/**
-	 * Sets the id.
-	 * 
-	 * @param id the id to set
-	 */
-	@Override
-	public void setId(Integer id)
-	{
-		this.id = id;
-	}
 
 	/**
 	 * Gets the type.
@@ -91,6 +69,16 @@ public class Cliente extends Util
 	public ClienteTypeEnum getType()
 	{
 		return type;
+	}
+
+	public Integer getClienteid()
+	{
+		return clienteid;
+	}
+
+	public void setClienteid(Integer clienteid)
+	{
+		this.clienteid = clienteid;
 	}
 
 	/**
@@ -243,17 +231,46 @@ public class Cliente extends Util
 		this.enderecos = enderecos;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	public List<ListaCompras> getListaCompras()
+	{
+		return listaCompras;
+	}
+
+	public void setListaCompras(List<ListaCompras> listaCompras)
+	{
+		this.listaCompras = listaCompras;
+	}
+
+	/**
+	 * Methods that follow the naming pattern get.....Value() provide convenience for returning the primitive value of
+	 * an enum. For example, database mapping of an enum to a database column could make use of this method.
+	 * 
+	 * @return
 	 */
+	public Integer getClienteTypeEnumValue()
+	{
+		return type.getValue();
+	}
+
+	/**
+	 * Methods that follow the naming pattern set.....Value(argValue) provide convenience for assigning the primitive
+	 * value of an enum. For example, database mapping of an database column to an enum could make use of this method.
+	 * 
+	 * @return
+	 */
+	public void setClienteTypeEnumValue(Integer tableTypeEnumValue)
+	{
+		type = ClienteTypeEnum.enumForValue(tableTypeEnumValue);
+	}
+
 	@Override
 	public String toString()
 	{
-		return "Cliente [getId()=" + getId() + ", getType()=" + getType() + ", getNome()=" + getNome()
+		return "Cliente [getType()=" + getType() + ", getClienteid()=" + getClienteid() + ", getNome()=" + getNome()
 				+ ", getSobrenome()=" + getSobrenome() + ", getUsuario()=" + getUsuario() + ", getSenha()="
 				+ getSenha() + ", getEmail()=" + getEmail() + ", getDocumentos()=" + getDocumentos()
-				+ ", getEnderecos()=" + getEnderecos() + ", toString()=" + super.toString() + "]";
+				+ ", getEnderecos()=" + getEnderecos() + ", getListaCompras()=" + getListaCompras()
+				+ ", getClienteTypeEnumValue()=" + getClienteTypeEnumValue() + ", toString()=" + super.toString() + "]";
 	}
 
 }

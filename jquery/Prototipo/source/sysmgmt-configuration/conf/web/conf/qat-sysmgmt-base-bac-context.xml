@@ -23,6 +23,7 @@
 	</bean>
 	<!-- ========================= ASPECT CONFIGURATION ======================== -->
 
+
 	<bean id="cidadeBACTarget" class="com.qat.samples.sysmgmt.cidade.bac.impl.CidadeBACImpl">
 		<property name="cidadeDAC" ref="cidadeDACTarget"/>
 	</bean>
@@ -33,6 +34,12 @@
 
 	<bean id="supermercadoBACTarget" class="com.qat.samples.sysmgmt.supermercado.bac.impl.SupermercadoBACImpl">
 		<property name="supermercadoDAC" ref="supermercadoDACTarget"/>
+	</bean>
+
+	<bean id="clienteBACTarget" class="com.qat.samples.sysmgmt.cliente.bac.impl.ClienteBACImpl">
+		<property name="clienteDAC" ref="clienteDACTarget"/>
+		<property name="enderecoDAC" ref="enderecoDACTarget"/>
+		<property name="documentoDAC" ref="documentoDACTarget"/>
 	</bean>
 
 </beans>

@@ -44,5 +44,10 @@
 		<property name="validationController" ref="produtoValidationController"/>
 	</bean>
 
+	<bean id="clienteBAI" class="com.qat.samples.sysmgmt.cliente.bai.impl.ClienteBAIImpl">
+		<property name="clienteBAC" ref="clienteBACTarget"/>
+		<property name="validationController" ref="clienteValidationController"/>
+	</bean>
+
 
 </beans>

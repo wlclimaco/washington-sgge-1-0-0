@@ -32,6 +32,11 @@
    <select id="fetchAllControleBySupermercado" resultMap="ControleAcessResult">
    		 SELECT <include refid="allControleAcessColumns" /> FROM CONTROLE WHERE tabletype = 1 AND IDACAO = #{ID}
    </select>
+
+    <select id="fetchAllControleByCliente" resultMap="ControleAcessResult">
+   		 SELECT <include refid="allControleAcessColumns" /> FROM CONTROLE WHERE tabletype = 8 AND IDACAO = #{ID}
+   </select>
+
   <select id="fetchAllControleAcesss" resultMap="ControleAcessResult">
     SELECT
     <include refid="allControleAcessColumns" />

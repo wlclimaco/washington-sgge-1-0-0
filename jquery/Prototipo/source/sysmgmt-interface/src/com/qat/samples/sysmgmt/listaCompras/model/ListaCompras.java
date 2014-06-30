@@ -11,12 +11,12 @@ import com.qat.samples.sysmgmt.util.Util;
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "Cidade", propOrder = {"id", "estado", "cidade"})
+@XmlType(name = "ListaCompras", propOrder = {"listaid", "dataLista", "descricao", "nome", "produtos"})
 public class ListaCompras extends Util
 {
 
 	/** The id. */
-	private Integer id;
+	private Integer listaid;
 
 	/** The code. */
 	private Date dataLista;
@@ -49,7 +49,6 @@ public class ListaCompras extends Util
 	public ListaCompras(Integer id, Date dataLista, String descricao, String nome)
 	{
 		super();
-		this.id = id;
 		this.dataLista = dataLista;
 		this.descricao = descricao;
 		this.nome = nome;
@@ -67,7 +66,6 @@ public class ListaCompras extends Util
 	public ListaCompras(Integer id, Date dataLista, String descricao, String nome, List<ListaCompraItens> produtos)
 	{
 		super();
-		this.id = id;
 		this.dataLista = dataLista;
 		this.descricao = descricao;
 		this.nome = nome;
@@ -82,27 +80,16 @@ public class ListaCompras extends Util
 	public ListaCompras(Integer id)
 	{
 		super();
-		this.id = id;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.util.Util#getId()
-	 */
-
-	public Integer getId()
+	public Integer getListaid()
 	{
-		return id;
+		return listaid;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.util.Util#setId(java.lang.Integer)
-	 */
-
-	public void setId(Integer id)
+	public void setListaid(Integer listaid)
 	{
-		this.id = id;
+		this.listaid = listaid;
 	}
 
 	/**
@@ -185,16 +172,12 @@ public class ListaCompras extends Util
 		this.produtos = produtos;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.util.Util#toString()
-	 */
 	@Override
 	public String toString()
 	{
-		return "ListaCompras [getId()=" + getId() + ", getDataLista()=" + getDataLista() + ", getDescricao()="
-				+ getDescricao() + ", getNome()=" + getNome() + ", getProdutos()=" + getProdutos() + ", toString()="
-				+ super.toString() + "]";
+		return "ListaCompras [getListaid()=" + getListaid() + ", getDataLista()=" + getDataLista()
+				+ ", getDescricao()=" + getDescricao() + ", getNome()=" + getNome() + ", getProdutos()="
+				+ getProdutos() + ", toString()=" + super.toString() + "]";
 	}
 
 }

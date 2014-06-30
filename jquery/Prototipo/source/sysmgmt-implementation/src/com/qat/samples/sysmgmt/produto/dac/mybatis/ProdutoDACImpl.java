@@ -105,7 +105,7 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 		paramMap.put("precoid", 1);
 		paramMap.put("controleid", 1);
 		paramMap.put("foto", produto.getFoto());
-		paramMap.put("supermercadoid", produto.getSupermercadoid().getId());
+		paramMap.put("supermercadoid", produto.getSupermercadoid().getSuperId());
 		paramMap.put("preco", new Double(2.2));
 		paramMap.put("usuarioid", produto.getUserId());
 		InternalResponse response = new InternalResponse();
@@ -136,7 +136,7 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 		paramMap.put("precoid", 1);
 		paramMap.put("controleid", 1);
 		paramMap.put("foto", produto.getFoto());
-		paramMap.put("supermercadoid", produto.getSupermercadoid().getId());
+		paramMap.put("supermercadoid", produto.getSupermercadoid().getSuperId());
 		paramMap.put("preco", new Double(2.2));
 		paramMap.put("usuarioid", produto.getUserId());
 
