@@ -29,7 +29,7 @@ public class ClienteViewController extends ClienteBaseController
 	 * 
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/fetchProceduresByRequestBAS", method = RequestMethod.GET)
+	@RequestMapping(value = "/fetchClientesByRequestBAS", method = RequestMethod.GET)
 	public ModelAndView fetchProceduresbyRequestBAS()
 	{
 		PagedInquiryRequest request = new PagedInquiryRequest();

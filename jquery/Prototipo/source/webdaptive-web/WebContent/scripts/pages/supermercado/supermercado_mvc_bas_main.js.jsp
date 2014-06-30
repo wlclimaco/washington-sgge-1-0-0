@@ -42,7 +42,9 @@ var columns = [
 	{id:"did", name: procedure.grid.pcode.title, field:"did", editor:Slick.Editors.Text},
 	{id:"rgInc", name: procedure.grid.pcode.title, field:"rgInc", editor:Slick.Editors.Text},
 	{id:"cpfCnpj", name: procedure.grid.pcode.title, field:"cpfCnpj", editor:Slick.Editors.Text},
-	{id:"razao", name: procedure.grid.pcode.title, field:"razao", editor:Slick.Editors.Text}
+	{id:"razao", name: procedure.grid.pcode.title, field:"razao", editor:Slick.Editors.Text},
+	{id:"dateNascimento", name: procedure.grid.pcode.title, field:"dateNascimento", editor:Slick.Editors.Text}
+
 
 
 ];
@@ -73,7 +75,7 @@ var options =
 			onProcDataLoading.notify({});
 
 		   // var oData = new qat.model.reqCadastro(null, new qat.model.procedure(0,0,data[0].pcode,data[0].pdesc,0.0),true,true);qat.model.cadastro = function(_Id, _type, _nome, _descricao,_controlAcess)
-			var oData = new qat.model.reqSupermercado(null, new qat.model.supermercado(data[0].supermercadoid,data[0].usuario, data[0].email,data[0].site,data[0].usuario,data[0].senha,data[0].enderecoid,data[0].eid,data[0].endereco,data[0].logradouro,data[0].bairro,data[0].estado,data[0].cidade,data[0].numero,data[0].cep,data[0].nome,data[0].complemento,data[0].documenroid,data[0].did,data[0].rgInc,data[0].rgInc,data[0].cpfCnpj,data[0].razao),true,true);
+			var oData = new qat.model.reqSupermercado(null, new qat.model.supermercado(data[0].supermercadoid,data[0].usuario, data[0].email,data[0].site,data[0].usuario,data[0].senha,data[0].enderecoid,data[0].eid,data[0].endereco,data[0].logradouro,data[0].bairro,data[0].estado,data[0].cidade,data[0].numero,data[0].cep,data[0].nome,data[0].complemento,data[0].documenroid,data[0].did,data[0].rgInc,data[0].cpfCnpj,data[0].razao,data[0].dateNascimento),true,true);
 			console.log(oData);
 			rest_post_call('qat-sysmgmt-sample/services/rest/SupermercadoService/insertSupermercado', oData, fill_data, process_error);
 			//rest_post_call('qat-sysmgmt-sample/services/rest/CidadeService/insertCidade', oData, fill_data, process_error);
@@ -100,16 +102,23 @@ var options =
 					bList = false;
 				}
 
-				var oData = new qat.model.reqProc(null, new qat.model.procedure(data[aRowChg[a]].pversion,data[aRowChg[a]].psak,data[aRowChg[a]].pcode,data[aRowChg[a]].pdesc,0.0), bList, true);
-				rest_post_call('qat-webdaptive/procedure/api/updateBAS', oData, fill_data, process_error);
+				var oData = new qat.model.reqSupermercado(null,
+				new qat.model.supermercado(data[aRowChg[a]].supermercadoid,data[aRowChg[a]].usuario, data[aRowChg[a]].email,data[aRowChg[a]].site,data[aRowChg[a]].usuario,data[aRowChg[a]].senha,data[aRowChg[a]].enderecoid,data[aRowChg[a]].eid,data[aRowChg[a]].endereco,data[aRowChg[a]].logradouro,data[aRowChg[a]].bairro,data[aRowChg[a]].estado,data[aRowChg[a]].cidade,data[aRowChg[a]].numero,data[aRowChg[a]].cep,data[aRowChg[a]].nome,data[aRowChg[a]].complemento,data[aRowChg[a]].documenroid,data[aRowChg[a]].did,data[aRowChg[a]].rgInc,data[aRowChg[a]].cpfCnpj,data[aRowChg[a]].razao,data[aRowChg[a]].dateNascimento)
+				, bList, true);
+				//rest_post_call('qat-webdaptive/procedure/api/updateBAS', oData, fill_data, process_error);
+				rest_post_call('qat-sysmgmt-sample/services/rest/SupermercadoService/updateSupermercado', oData, fill_data, process_error);
 			}
 		}
 
 		function callDeleteWS(_procId)
 		{
 			onProcDataLoading.notify({});
-		    var oData = new qat.model.reqProc(null, new qat.model.procedure(0,_procId,"","",0.0),true,true);
-			rest_post_call('qat-webdaptive/procedure/api/deleteBAS', oData, fill_data, process_error);
+		    var oData = new qat.model.reqSupermercado(null,
+			new qat.model.supermercado(_procId,"","","","","","","","","","","","","","","","","","","","")
+			,true,true);
+			rest_post_call('qat-sysmgmt-sample/services/rest/SupermercadoService/deleteSupermercado', oData, fill_data, process_error);
+
+		//	rest_post_call('qat-sysmgmt-sample/services/rest/SupermercadoService/fetchAllSupermercados', {}, fill_data, process_error);
 		}
 
 		function callRefreshWS(_i)
@@ -132,7 +141,7 @@ var options =
 			}
 			else
 			{
-				rest_post_call('qat-sysmgmt-sample/services/rest/SupermercadoService/fetchAllSupermercados', {}, fill_data, process_error);
+				//rest_post_call('qat-sysmgmt-sample/services/rest/SupermercadoService/fetchAllSupermercados', {}, fill_data, process_error);
 				fill_data(viewLoadedObject);
 				viewLoadedObject = null;
 			}

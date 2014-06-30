@@ -118,7 +118,6 @@ var options =
 			}
 			else
 			{
-				rest_post_call('qat-sysmgmt-sample/services/rest/CidadeService/fetchAllCidades', {}, fill_data, process_error);
 				fill_data(viewLoadedObject);
 				viewLoadedObject = null;
 			}
