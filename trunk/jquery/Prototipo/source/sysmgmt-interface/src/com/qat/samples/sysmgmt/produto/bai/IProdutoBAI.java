@@ -4,6 +4,7 @@ import com.qat.samples.sysmgmt.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.RefreshRequest;
+import com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.response.CadastroResponse;
@@ -126,6 +127,6 @@ public interface IProdutoBAI
 	 * @param request the request
 	 * @return the property paged response
 	 */
-	public CadastroResponse fetchCadastrosByRequest(PagedInquiryRequest request);
+	public CadastroResponse fetchCadastrosByRequest(CadastroInquiryRequest request);
 
 }

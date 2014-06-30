@@ -16,11 +16,11 @@
 			<li><a href="../cidade/fetchCidadesByRequestBAS" title="qatmvctab-1"><span>Cidade</span></a></li>
 	        <li><a href="../supermercado/fetchSupermercadosByRequestBAS" title="qatmvctab-2"><span>Supermercado</span></a></li>
 	        <li><a href="../cliente/fetchClientesByRequestBAS" title="qatmvctab-3"><span>Cliente</span></a></li>
-			<li><a href="../produto/fetchMenusByRequestBAS" title="qatmvctab-4"><span>Menu</span></a></li>
-			<li><a href="../produto/fetchSubMenusByRequestBAS" title="qatmvctab-5"><span>SubMenu</span></a></li>
-			<li><a href="../produto/fetchTriMenusByRequestBAS" title="qatmvctab-6"><span>TriMenu</span></a></li>
-			<li><a href="../produto/fetchUniMedsByRequestBAS" title="qatmvctab-7"><span>Unidade Medida</span></a></li>
-			<li><a href="../produto/fetchMarcasByRequestBAS" title="qatmvctab-8"><span>Marca</span></a></li>
+			<li><a href="../cadastro/fetcMenusByRequestBAS" title="qatmvctab-4"><span>Menu</span></a></li>
+			<li><a href="../cadastro/fetchSubMenusByRequestBAS" title="qatmvctab-5"><span>SubMenu</span></a></li>
+			<li><a href="../cadastro/fetchTriMenusByRequestBAS" title="qatmvctab-6"><span>TriMenu</span></a></li>
+			<li><a href="../cadastro/fetchUniMEdByRequestBAS" title="qatmvctab-7"><span>Unidade Medida</span></a></li>
+			<li><a href="../cadastro/fetchMarcasByRequestBAS" title="qatmvctab-8"><span>Marca</span></a></li>
 			<li><a href="../produto/fetchProdutoByRequestBAS" title="qatmvctab-9"><span>Produto</span></a></li>
 			<li><a href="../cidade/fetchCidadesByRequestBAS" title="qatmvctab-10"><span>Procedures MVC BAS</span></a></li>
 			<li><a href="../cidade/fetchCidadesByRequestBAS" title="qatmvctab-11"><span>Insert Foto</span></a></li>

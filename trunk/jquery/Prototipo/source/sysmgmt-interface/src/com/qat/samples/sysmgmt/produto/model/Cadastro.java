@@ -190,6 +190,12 @@ public class Cadastro extends Util
 		this.nome = nome;
 	}
 
+	public Cadastro(TableTypeEnum type)
+	{
+		super();
+		this.type = type;
+	}
+
 	@Override
 	public String toString()
 	{

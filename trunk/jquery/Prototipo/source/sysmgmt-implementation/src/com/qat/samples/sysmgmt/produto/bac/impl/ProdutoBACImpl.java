@@ -10,6 +10,7 @@ import com.qat.samples.sysmgmt.produto.bac.IProdutoBAC;
 import com.qat.samples.sysmgmt.produto.dac.IProdutoDAC;
 import com.qat.samples.sysmgmt.produto.model.Cadastro;
 import com.qat.samples.sysmgmt.produto.model.Produto;
+import com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest;
 
 /**
  * Implementation of the IProdutoBAC leveraging a BAD, ProdutoBAD.
@@ -205,10 +206,9 @@ public class ProdutoBACImpl implements IProdutoBAC
 	}
 
 	@Override
-	public InternalResultsResponse<Cadastro> fetchCadastrosByRequest(PagedInquiryRequest request)
+	public InternalResultsResponse<Cadastro> fetchCadastrosByRequest(CadastroInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getProdutoDAC().fetchCadastrosByRequest(request);
 	}
 
 }

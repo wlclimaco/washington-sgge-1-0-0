@@ -14,12 +14,12 @@
 <body>
 	<div style="width:100%;height:100%;float:left;">
 		<div class="grid-header" style="width:100%">
-		    <span id="listcad" style="float:left; width: 16px; height: 16px; background-image:url('../images/text_list.png')" title="List Procedures"></span>
+		    <span id="listsubmenu" style="float:left; width: 16px; height: 16px; background-image:url('../images/text_list.png')" title="List Procedures"></span>
 			<sec:authorize access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
-		    <span id="refreshcad" style="float:right" class="ui-icon ui-icon-refresh" title="Rebuild Procedures"></span>
+		    <span id="refreshsubmenu" style="float:right" class="ui-icon ui-icon-refresh" title="Rebuild Procedures"></span>
 			</sec:authorize>
 		</div>
-		<div id="cadGrid" style="width:100%; height:95%;" class="wdgrid" ></div>
+		<div id="submenuGrid" style="width:100%; height:95%;" class="wdgrid" ></div>
 		<div id="pager" style="width:100%; height:3%;"></div>
 	</div>
 <script type="text/javascript" src="../commons/scripts/model/user_context.js"></script>
@@ -27,7 +27,7 @@
 <script type="text/javascript" src="../commons/scripts/model/domain_objects.js"></script>
 <script type="text/javascript" src="../commons/scripts/widget/slick.pager.js"></script>
 <jsp:include page="../../commons/scripts/util/app_reuse_functions.js.jsp" flush="true"/>
-<jsp:include page="../../scripts/pages/cadastro/cadastro_mvc_bas_main.js.jsp" flush="true"/>
-<jsp:include page="../../scripts/pages/cadastreo/cadastro_mvc_bas_init.js.jsp" flush="true"/>
+<jsp:include page="../../scripts/pages/cadastro/submenu_mvc_bas_main.js.jsp" flush="true"/>
+<jsp:include page="../../scripts/pages/cadastreo/submenu_mvc_bas_init.js.jsp" flush="true"/>
 </body>
 </html>

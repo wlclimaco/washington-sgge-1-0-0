@@ -8,6 +8,7 @@ import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.RefreshRequest;
 import com.qat.samples.sysmgmt.produto.bai.IProdutoBAI;
 import com.qat.samples.sysmgmt.produto.bas.IProdutoBAS;
+import com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.response.CadastroResponse;
@@ -166,10 +167,9 @@ public class ProdutoBAS implements IProdutoBAS
 	}
 
 	@Override
-	public CadastroResponse fetchCadastrosByRequest(PagedInquiryRequest request)
+	public CadastroResponse fetchCadastrosByRequest(CadastroInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getProdutoBAI().fetchCadastrosByRequest(request);
 	}
 
 }
