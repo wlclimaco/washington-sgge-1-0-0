@@ -61,6 +61,10 @@ function reuse_fill_data(response,data2,gridProcess)
 		{
 			data2 = supermercado_fill_data(response,data2);
 		}
+		else if (gridProcess === "cliente" )
+		{
+			data2 = cliente_fill_data(response,data2);
+		}
 	}
 	else
 	{
@@ -284,12 +288,12 @@ function supermercado_fill_data(procResponse,data2)
 	 	pagingData.totalRowsAvailable =  parseInt(procResponse.resultsSetInfo.totalRowsAvailable);
 	}
 
-
 	//make sure return is an array
 	if ($.isArray(procResponse.supermercados))
 	{
 		var oi = 0;
 		var tmpLength = procResponse.supermercados.length;
+
 		<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
 		for (var i=1; i <= tmpLength; i++)
 		</sec:authorize>
@@ -301,12 +305,12 @@ function supermercado_fill_data(procResponse,data2)
 			{
 				cellno:     i,
 				<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
-				action: 	"<a href='#' onclick='javascript:ploader.callDeleteWS(" + procResponse.supermercados[oi].supermercadoid +");'>Delete</a>",
+				action: 	"<a href='#' onclick='javascript:ploader.callDeleteWS(" + procResponse.supermercados[oi].superId +");'>Delete</a>",
 				</sec:authorize>
 				<sec:authorize ifAllGranted="ROLE_GUEST">
 				action: 'None',
 				</sec:authorize>
-				supermercadoid:	procResponse.supermercados[oi].supermercadoid,
+				supermercadoid:	procResponse.supermercados[oi].superId,
 				usuario:		procResponse.supermercados[oi].usuario,
 				email:			procResponse.supermercados[oi].email,
 				site:  			procResponse.supermercados[oi].site,
@@ -325,17 +329,109 @@ function supermercado_fill_data(procResponse,data2)
 				did:  	    	procResponse.supermercados[oi].documentos[0].id,
 				rgInc:  		procResponse.supermercados[oi].documentos[0].rgInc,
 				cpfCnpj:  		procResponse.supermercados[oi].documentos[0].cpfCnpj,
-				razao:  		procResponse.supermercados[oi].documentos[0].razao
+				razao:  		procResponse.supermercados[oi].documentos[0].razao,
+				dateNascimento: procResponse.supermercados[oi].documentos[0].dateNascimento
 			}
 
 			oi++;
 		}
 	}
-	console.log(data2);
+
 	return data2;
 };
 
 //=========================================================
+
+
+//============================CLIENTE=======================
+
+function cliente_fill_data(procResponse,data2)
+{
+console.log('ddd');
+	data2[0] =
+	{
+		cellno: 0,
+		action: "<span>Novo>>></span>",
+		clienteid:		0,
+		type:			"",
+		nome:			"",
+		sobrenome:  	"",
+		usuario:  		"",
+		senha:  		"",
+		email:  		"",
+		enderecoid:  	0,
+		eid:  			0,
+		logradouro:  	"",
+		bairro:  		"",
+		estado:  		""
+	};
+
+	//Fill paging data
+	if (procResponse.resultsSetInfo != undefined)
+	{
+	 	pagingData.pageSize =  parseInt(procResponse.resultsSetInfo.pageSize);
+	 	pagingData.startPage =  parseInt(procResponse.resultsSetInfo.startPage);
+	 	pagingData.moreRowsAvailable =  procResponse.resultsSetInfo.moreRowsAvailable;
+	 	pagingData.totalRowsAvailable =  parseInt(procResponse.resultsSetInfo.totalRowsAvailable);
+	}
+
+	//make sure return is an array
+	if ($.isArray(procResponse.clientes))
+	{
+		var oi = 0;
+		var tmpLength = procResponse.clientes.length;
+
+		<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
+		for (var i=1; i <= tmpLength; i++)
+		</sec:authorize>
+		<sec:authorize  access="hasRole('ROLE_GUEST')">
+		for (var i=0; i < tmpLength; i++)
+		</sec:authorize>
+		{
+			data2[i] =
+			{
+				cellno:     i,
+				<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
+				action: 	"<a href='#' onclick='javascript:ploader.callDeleteWS(" + procResponse.clientes[oi].clienteid +");'>Delete</a>",
+				</sec:authorize>
+				<sec:authorize ifAllGranted="ROLE_GUEST">
+				action: 'None',
+				</sec:authorize>
+
+				clienteid:		procResponse.clientes[oi].clienteid,
+				type:			procResponse.clientes[oi].type,
+				nome:			procResponse.clientes[oi].nome,
+				sobrenome:  	procResponse.clientes[oi].sobrenome,
+				usuario:  		procResponse.clientes[oi].usuario,
+				senha:  		procResponse.clientes[oi].sobrenome,
+				email:  		procResponse.clientes[oi].usuario,
+				enderecoid:  	procResponse.clientes[oi].enderecos[0].enderecoid,
+				eid:  			procResponse.clientes[oi].enderecos[0].id,
+				logradouro:  	procResponse.clientes[oi].enderecos[0].logradouro,
+				bairro:  		procResponse.clientes[oi].enderecos[0].bairro,
+				estado:  		procResponse.clientes[oi].enderecos[0].estado,
+				cidade:  		procResponse.clientes[oi].enderecos[0].cidade,
+				numero:  		procResponse.clientes[oi].enderecos[0].numero,
+				cep:  			procResponse.clientes[oi].enderecos[0].cep,
+				nome:  			procResponse.clientes[oi].enderecos[0].nome,
+				complemento:  	procResponse.clientes[oi].enderecos[0].complemento,
+				documenroid:	procResponse.clientes[oi].documentos[0].documenroid,
+				did:  	    	procResponse.clientes[oi].documentos[0].id,
+				rgInc:  		procResponse.clientes[oi].documentos[0].rgInc,
+				cpfCnpj:  		procResponse.clientes[oi].documentos[0].cpfCnpj,
+				razao:  		procResponse.clientes[oi].documentos[0].razao,
+				dateNascimento: procResponse.clientes[oi].documentos[0].dateNascimento
+			}
+
+			oi++;
+		}
+	}
+
+	return data2;
+};
+
+//=========================================================
+
 
 //error routine for all ajax calls to the back-end or MVC
 function fill_data_error(response)
