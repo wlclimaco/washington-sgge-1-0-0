@@ -113,7 +113,7 @@ public interface IProdutoDAC
 	 * 
 	 * @return the list< produto>
 	 */
-	public List<Cadastro> fetchAllCadastros(Cadastro cadastro);
+	public List<Cadastro> fetchAllCadastros(CadastroInquiryRequest cadastro);
 
 	/**
 	 * Fetch county by id.

@@ -65,6 +65,10 @@ function reuse_fill_data(response,data2,gridProcess)
 		{
 			data2 = cliente_fill_data(response,data2);
 		}
+		else if (gridProcess === "menu" )
+		{
+			data2 = menu_fill_data(response,data2);
+		}
 	}
 	else
 	{
@@ -431,6 +435,78 @@ console.log('ddd');
 };
 
 //=========================================================
+
+//============================MENU=======================
+
+function menu_fill_data(procResponse,data2)
+{
+console.log('ddd');
+	data2[0] =
+	{
+		cellno: 0,
+		action: "<span>Novo>>></span>",
+		id:		0,
+		nome:			"",
+		produtos:		"",
+		descricao:  	"",
+		imagens:  		"",
+		userId:  		""
+
+	};
+
+	//Fill paging data
+	if (procResponse.resultsSetInfo != undefined)
+	{
+	 	pagingData.pageSize =  parseInt(procResponse.resultsSetInfo.pageSize);
+	 	pagingData.startPage =  parseInt(procResponse.resultsSetInfo.startPage);
+	 	pagingData.moreRowsAvailable =  procResponse.resultsSetInfo.moreRowsAvailable;
+	 	pagingData.totalRowsAvailable =  parseInt(procResponse.resultsSetInfo.totalRowsAvailable);
+	}
+
+	//make sure return is an array
+	if ($.isArray(procResponse.cadastros))
+	{
+		var oi = 0;
+		var tmpLength = procResponse.cadastros.length;
+
+		<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
+		for (var i=1; i <= tmpLength; i++)
+		</sec:authorize>
+		<sec:authorize  access="hasRole('ROLE_GUEST')">
+		for (var i=0; i < tmpLength; i++)
+		</sec:authorize>
+		{
+			if(procResponse.cadastros[oi].produtos != null){
+					var a =		procResponse.cadastros[oi].produtos.length;
+				}else{
+				a= 0;}
+			data2[i] =
+			{
+
+				cellno:     i,
+				<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
+				action: 	"<a href='#' onclick='javascript:ploader.callDeleteWS(" + procResponse.cadastros[oi].id +");'>Delete</a>",
+				</sec:authorize>
+				<sec:authorize ifAllGranted="ROLE_GUEST">
+				action: 'None',
+				</sec:authorize>
+				id:				procResponse.cadastros[oi].id,
+				nome:			procResponse.cadastros[oi].nome,
+				descricao:  	procResponse.cadastros[oi].descricao,
+				imagens:  		procResponse.cadastros[oi].imagens,
+				produtos:		a,
+				userId:  		procResponse.cadastros[oi].userId
+			}
+
+			oi++;
+		}
+	}
+
+	return data2;
+};
+
+//=========================================================
+
 
 
 //error routine for all ajax calls to the back-end or MVC

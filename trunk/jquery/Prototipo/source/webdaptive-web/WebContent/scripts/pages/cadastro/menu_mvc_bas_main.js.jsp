@@ -19,16 +19,18 @@ var viewLoadedObject;
 			viewLoadedObject = ${cadastroResponse};
     </c:otherwise>
 </c:choose>
-
+console.log(viewLoadedObject);
 //columns & column settings for the grid
 var columns = [
 	{id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:"cell-center", width:30},
 	{id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML},
-    {id:"pid", name: procedure.grid.psak.title, field:"pid", resizable:false, cssClass:"cell-center", width:75},
-    {id:"pprod", name: procedure.grid.pcode.title, field:"pprod", editable:true},
-	{id:"pnome", name: procedure.grid.pcode.title, field:"pnome", editor:Slick.Editors.Text},
-	{id:"col1", name:"test", field:"col1",  width:135, editable:true, cssClass:"pad-4-left", sortable:true, editor:Slick.Editors.Auto},
-	{id:"pdesc", name: procedure.grid.pcode.title, field:"pdesc", editor:Slick.Editors.Text}
+    {id:"id", name: procedure.grid.psak.title, field:"id", resizable:false, cssClass:"cell-center", width:75},
+    {id:"nome", name: procedure.grid.pcode.title, field:"nome", editor:Slick.Editors.Text},
+	{id:"descricao", name: procedure.grid.pcode.title, field:"descricao", editor:Slick.Editors.Text},
+	{id:"imagens", name: procedure.grid.pcode.title, field:"imagens", editor:Slick.Editors.Text},
+	{id:"produtos", name: procedure.grid.pcode.title, field:"produtos", editor:Slick.Editors.Text},
+	{id:"userId", name: procedure.grid.pcode.title, field:"userId", editor:Slick.Editors.Text}
+
 ];
 
 //grid options
@@ -56,11 +58,9 @@ var options =
 		{
 			onProcDataLoading.notify({});
 		   // var oData = new qat.model.reqCadastro(null, new qat.model.procedure(0,0,data[0].pcode,data[0].pdesc,0.0),true,true);qat.model.cadastro = function(_Id, _type, _nome, _descricao,_controlAcess)
-			var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(1,1,data[0].pnome,data[0].pdesc,null),true,true);
+			var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(1,3,data[0].nome,data[0].descricao,null),true,true);
 			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/insertCadastro', oData, fill_data, process_error);
-			debugger;
-			var oData = new qat.model.pagedInquiryRequest(null, 20, 0, true);
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {}, fill_data, process_error);
+
 
 		}
 
@@ -116,7 +116,6 @@ var options =
 			}
 			else
 			{
-				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {}, fill_data, process_error);
 				fill_data(viewLoadedObject);
 				viewLoadedObject = null;
 			}
@@ -124,7 +123,7 @@ var options =
 
 		function fill_data(procResponse)
 		{
-			data = reuse_fill_data(procResponse,data,"cadastro");
+			data = reuse_fill_data(procResponse,data,"menu");
 			onProcDataLoaded.notify({});
 		}
 

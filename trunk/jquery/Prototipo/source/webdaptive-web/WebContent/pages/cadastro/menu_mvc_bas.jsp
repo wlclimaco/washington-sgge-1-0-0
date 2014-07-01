@@ -28,6 +28,6 @@
 <script type="text/javascript" src="../commons/scripts/widget/slick.pager.js"></script>
 <jsp:include page="../../commons/scripts/util/app_reuse_functions.js.jsp" flush="true"/>
 <jsp:include page="../../scripts/pages/cadastro/menu_mvc_bas_main.js.jsp" flush="true"/>
-<jsp:include page="../../scripts/pages/cadastreo/menu_mvc_bas_init.js.jsp" flush="true"/>
+<jsp:include page="../../scripts/pages/cadastro/menu_mvc_bas_init.js.jsp" flush="true"/>
 </body>
 </html>
