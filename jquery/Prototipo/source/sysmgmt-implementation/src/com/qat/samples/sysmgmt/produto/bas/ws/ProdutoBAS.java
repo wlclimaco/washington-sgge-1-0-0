@@ -147,7 +147,7 @@ public class ProdutoBAS implements IProdutoBAS
 	}
 
 	@Override
-	public CadastroResponse fetchAllCadastros(FetchAllRequest request)
+	public CadastroResponse fetchAllCadastros(CadastroInquiryRequest request)
 	{
 		return getProdutoBAI().fetchAllCadastros(request);
 	}

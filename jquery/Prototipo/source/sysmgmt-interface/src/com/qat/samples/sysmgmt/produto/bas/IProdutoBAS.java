@@ -154,7 +154,7 @@ public interface IProdutoBAS
 	@WebMethod(action = "fetchAllCadastros")
 	@WebResult(name = "fetchAllCadastrosReturn")
 	@WSDLDocumentation(value = "Returns a complete list of all produtos.")
-	public CadastroResponse fetchAllCadastros(@WebParam(name = "request") FetchAllRequest request);
+	public CadastroResponse fetchAllCadastros(@WebParam(name = "request") CadastroInquiryRequest request);
 
 	/**
 	 * Fetch produto by id.

@@ -91,7 +91,7 @@ public final class ProdutoBAID
 			if (internalResponse.getStatus() == Status.OperationSuccess)
 			{
 				// Call maintain to see if we need to return the county list and if so whether it should be paged or not
-				maintainReturnList(request.getReturnList(), request.getReturnListPaged(), response, produtoBAC);
+				maintainReturnList(request.getReturnList(), request.getReturnListPaged(), response, produtoBAC, null);
 			}
 		}
 
@@ -129,13 +129,6 @@ public final class ProdutoBAID
 					internalResponse.setStatus(InternalResponse.Status.UnspecifiedError);
 					break;
 			}
-
-			// If the persistence worked
-			if (internalResponse.getStatus() == Status.OperationSuccess)
-			{
-				// Call maintain to see if we need to return the county list and if so whether it should be paged or not
-				maintainReturnListCadastro(request.getReturnList(), request.getReturnListPaged(), response, produtoBAC);
-			}
 		}
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
@@ -154,7 +147,7 @@ public final class ProdutoBAID
 		// This method is demo code only. Do not view this as a QAT Standard.
 		produtoBAC.refreshProdutos(request.getRefreshInt());
 		// Call maintain to see if we need to return the county list and if so whether it should be paged or not
-		maintainReturnList(request.getReturnList(), request.getReturnListPaged(), response, produtoBAC);
+		maintainReturnList(request.getReturnList(), request.getReturnListPaged(), response, produtoBAC, null);
 	}
 
 	/**
@@ -163,7 +156,7 @@ public final class ProdutoBAID
 	 * @param produtoBAC the produto bac
 	 * @param response the response
 	 */
-	public static void fetchAllProdutos(IProdutoBAC produtoBAC, ProdutoResponse response)
+	public static void fetchAllProdutos(IProdutoBAC produtoBAC, ProdutoResponse response, CadastroInquiryRequest request)
 	{
 		InternalResultsResponse<Produto> internalResponse = produtoBAC.fetchAllProdutos();
 		if (internalResponse.getStatus() != Status.OperationSuccess)
@@ -175,10 +168,11 @@ public final class ProdutoBAID
 		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
 	}
 
-	public static void fetchAllCadastros(IProdutoBAC produtoBAC, CadastroResponse response)
+	public static void fetchAllCadastros(IProdutoBAC produtoBAC, CadastroResponse response,
+			CadastroInquiryRequest request)
 	{
 		InternalResultsResponse<Cadastro> internalResponse =
-				produtoBAC.fetchAllCadastros(new Cadastro());
+				produtoBAC.fetchAllCadastros(request);
 		if (internalResponse.getStatus() != Status.OperationSuccess)
 		{
 			response.addOperationFailedMessage(DEFAULT_BUNDLE_BAID_EXCEPTION_MSG, new Object[] {internalResponse
@@ -252,7 +246,7 @@ public final class ProdutoBAID
 	 * @param produtoBAC the produto bac
 	 */
 	private static void maintainReturnList(Boolean listIndicator, Boolean pageListIndicator, ProdutoResponse response,
-			IProdutoBAC produtoBAC)
+			IProdutoBAC produtoBAC, CadastroInquiryRequest request)
 	{
 		// Fetch again if requested.
 		if (listIndicator)
@@ -260,21 +254,21 @@ public final class ProdutoBAID
 			// Fetch Paged is requested.
 			if (pageListIndicator)
 			{
-				PagedInquiryRequest request = new PagedInquiryRequest();
+				PagedInquiryRequest request1 = new PagedInquiryRequest();
 				request.setPreQueryCount(true);
-				fetchProdutosPaged(produtoBAC, request, response);
+				fetchProdutosPaged(produtoBAC, request1, response);
 			}
 			else
 			{
 				// otherwise return all rows not paged
-				fetchAllProdutos(produtoBAC, response);
+				fetchAllProdutos(produtoBAC, response, request);
 			}
 		}
 	}
 
 	private static void maintainReturnListCadastro(Boolean listIndicator, Boolean pageListIndicator,
 			CadastroResponse response,
-			IProdutoBAC produtoBAC)
+			IProdutoBAC produtoBAC, CadastroInquiryRequest request)
 	{
 		// Fetch again if requested.
 		if (listIndicator)
@@ -282,14 +276,13 @@ public final class ProdutoBAID
 			// Fetch Paged is requested.
 			if (pageListIndicator)
 			{
-				CadastroInquiryRequest request = new CadastroInquiryRequest();
 				request.setPreQueryCount(true);
-				fetchCadastrosPaged(produtoBAC, request, response);
+				fetchAllCadastros(produtoBAC, response, request);
 			}
 			else
 			{
 				// otherwise return all rows not paged
-				fetchAllCadastros(produtoBAC, response);
+				fetchAllCadastros(produtoBAC, response, request);
 			}
 		}
 	}

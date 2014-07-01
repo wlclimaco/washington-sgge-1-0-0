@@ -103,7 +103,7 @@ public interface IProdutoBAI
 	 * @param request the request
 	 * @return the property response
 	 */
-	public CadastroResponse fetchAllCadastros(FetchAllRequest request);
+	public CadastroResponse fetchAllCadastros(CadastroInquiryRequest request);
 
 	/**
 	 * Refresh propertys.

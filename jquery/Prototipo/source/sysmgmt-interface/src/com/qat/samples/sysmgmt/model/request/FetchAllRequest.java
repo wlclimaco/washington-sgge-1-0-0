@@ -2,7 +2,6 @@ package com.qat.samples.sysmgmt.model.request;
 
 import com.qat.framework.model.request.Request;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class FetchAllRequest.
  */

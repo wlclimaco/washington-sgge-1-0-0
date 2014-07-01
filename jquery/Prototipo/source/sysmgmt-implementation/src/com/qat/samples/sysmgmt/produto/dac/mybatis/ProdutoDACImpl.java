@@ -226,7 +226,7 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 		Integer academiaId =
 				(Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), STMT_INSERT_CADASTRO, cadastro);
 
-		response.setStatus(Status.NoRowsInsertedError);
+		response.setStatus(Status.OperationSuccess);
 		return response;
 	}
 
@@ -317,10 +317,8 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	}
 
 	@Override
-	public List<Cadastro> fetchAllCadastros(Cadastro cadastro)
+	public List<Cadastro> fetchAllCadastros(CadastroInquiryRequest cadastro)
 	{
-		System.out.println("test");
-
 		return QATMyBatisDacHelper.doQueryForList(getSqlSession(), STMT_FETCH_ALL_CADASTRO, cadastro);
 
 	}

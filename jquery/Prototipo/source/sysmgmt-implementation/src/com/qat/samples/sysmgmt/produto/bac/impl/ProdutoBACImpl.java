@@ -198,10 +198,11 @@ public class ProdutoBACImpl implements IProdutoBAC
 	}
 
 	@Override
-	public InternalResultsResponse<Cadastro> fetchAllCadastros(Cadastro cadastro)
+	public InternalResultsResponse<Cadastro> fetchAllCadastros(CadastroInquiryRequest cadastro)
+
 	{
 		InternalResultsResponse<Cadastro> response = new InternalResultsResponse<Cadastro>();
-		response.getResultsList().addAll(getProdutoDAC().fetchAllCadastros(new Cadastro(1)));
+		response.getResultsList().addAll(getProdutoDAC().fetchAllCadastros(cadastro));
 		return response;
 	}
 

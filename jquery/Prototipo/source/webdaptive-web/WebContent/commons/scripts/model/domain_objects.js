@@ -154,7 +154,7 @@
 
 	qat.model.supermercado = function(_supermercadoid,_usuario, _email,_site,_usuario,_senha,_enderecoid,_eid,_endereco,_logradouro,_bairro,_estado,_cidade,_numero,_cep,_nome,_complemento,_documenroid,_did,_rgInc,_cpfCnpj,_razao,_dateNascimento)
 	{
-	console.log(_supermercadoid);
+
 	    var userContext = new qat.base.model.userContext();
 		this.superId = _supermercadoid;
 		this.usuario = _usuario;

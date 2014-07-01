@@ -179,7 +179,7 @@ public class ProdutoBAIImpl implements IProdutoBAI
 		ProdutoResponse response = new ProdutoResponse();
 		try
 		{
-			ProdutoBAID.fetchAllProdutos(getProdutoBAC(), response);
+			ProdutoBAID.fetchAllProdutos(getProdutoBAC(), response, null);
 		}
 		catch (Exception ex)
 		{
@@ -254,12 +254,12 @@ public class ProdutoBAIImpl implements IProdutoBAI
 	}
 
 	@Override
-	public CadastroResponse fetchAllCadastros(FetchAllRequest request)
+	public CadastroResponse fetchAllCadastros(CadastroInquiryRequest request)
 	{
 		CadastroResponse response = new CadastroResponse();
 		try
 		{
-			ProdutoBAID.fetchAllCadastros(getProdutoBAC(), response);
+			ProdutoBAID.fetchAllCadastros(getProdutoBAC(), response, request);
 		}
 		catch (Exception ex)
 		{
