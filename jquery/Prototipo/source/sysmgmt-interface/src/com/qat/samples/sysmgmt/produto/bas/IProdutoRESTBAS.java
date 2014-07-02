@@ -175,5 +175,5 @@ public interface IProdutoRESTBAS
 	 */
 	@POST
 	@Path("/fetchCadastrosByRequest/")
-	public CadastroResponse fetchCadastrosByRequest(PagedInquiryRequest request);
+	public CadastroResponse fetchCadastrosByRequest(CadastroInquiryRequest request);
 }

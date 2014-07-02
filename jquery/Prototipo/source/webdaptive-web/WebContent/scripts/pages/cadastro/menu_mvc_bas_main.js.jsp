@@ -20,18 +20,23 @@ var viewLoadedObject;
     </c:otherwise>
 </c:choose>
 console.log(viewLoadedObject);
-//columns & column settings for the grid
-var columns = [
-	{id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:"cell-center", width:30},
-	{id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML},
-    {id:"id", name: procedure.grid.psak.title, field:"id", resizable:false, cssClass:"cell-center", width:75},
-    {id:"nome", name: procedure.grid.pcode.title, field:"nome", editor:Slick.Editors.Text},
-	{id:"descricao", name: procedure.grid.pcode.title, field:"descricao", editor:Slick.Editors.Text},
-	{id:"imagens", name: procedure.grid.pcode.title, field:"imagens", editor:Slick.Editors.Text},
-	{id:"produtos", name: procedure.grid.pcode.title, field:"produtos", editor:Slick.Editors.Text},
-	{id:"userId", name: procedure.grid.pcode.title, field:"userId", editor:Slick.Editors.Text}
+var columns=[];
+ var checkboxSelector = new Slick.CheckboxSelectColumn({
+      cssClass: "slick-cell-checkboxsel"
+    });
 
-];
+    columns.push(checkboxSelector.getColumnDefinition());
+//columns & column settings for the grid
+columns[1] = {id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:"cell-center", width:30};
+columns[2] = {id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
+columns[3] = {id:"id", name: procedure.grid.psak.title, field:"id", resizable:false, cssClass:"cell-center", width:75};
+columns[4] = {id:"nome", name: procedure.grid.pcode.title, field:"nome", editor:Slick.Editors.Text};
+columns[5] = {id:"descricao", name: procedure.grid.pcode.title, field:"descricao", editor:Slick.Editors.Text};
+columns[6] = {id:"imagens", name: procedure.grid.pcode.title, field:"imagens", editor:Slick.Editors.Text};
+columns[7] = {id:"produtos", name: procedure.grid.pcode.title, field:"produtos", editor:Slick.Editors.Text};
+columns[8] = {id:"userId", name: procedure.grid.pcode.title, field:"userId", editor:Slick.Editors.Text};
+
+//];
 
 //grid options
 var options =
@@ -42,7 +47,9 @@ var options =
 	enableAddRow: false,
 	forceFitColumns: true,
 	enableCellNavigation: true,
-	explicitInitialization: true
+	explicitInitialization: true,
+    asyncEditorLoading: false,
+    autoEdit: false
 };
 
 //Custom RemoteModel Extension for SlickGrid
@@ -60,7 +67,8 @@ var options =
 		   // var oData = new qat.model.reqCadastro(null, new qat.model.procedure(0,0,data[0].pcode,data[0].pdesc,0.0),true,true);qat.model.cadastro = function(_Id, _type, _nome, _descricao,_controlAcess)
 			var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(1,3,data[0].nome,data[0].descricao,null),true,true);
 			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/insertCadastro', oData, fill_data, process_error);
-
+			var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(null,3),true,true);
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {cadastro:{type:3,userId:'rod'}}, fill_data, process_error);
 
 		}
 
@@ -83,9 +91,12 @@ var options =
 				{
 					bList = false;
 				}
+				//	var oData = new qat.model.reqProc(null, new qat.model.cadastro(data[aRowChg[a]].pversion,data[aRowChg[a]].psak,data[aRowChg[a]].pcode,data[aRowChg[a]].pdesc,0.0), bList, true);
+				var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(data[aRowChg[a]].id,3,data[aRowChg[a]].nome,data[aRowChg[a]].descricao),bList,true);
+				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/updateCadastro', oData, fill_data, process_error);
+				var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(1,3),true,true);
+				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros',{cadastro:{type:3,userId:'rod'}}, fill_data, process_error);
 
-				var oData = new qat.model.reqProc(null, new qat.model.cadastro(data[aRowChg[a]].pversion,data[aRowChg[a]].psak,data[aRowChg[a]].pcode,data[aRowChg[a]].pdesc,0.0), bList, true);
-				rest_post_call('qat-webdaptive/cadastro/api/updateBAS', oData, fill_data, process_error);
 			}
 		}
 

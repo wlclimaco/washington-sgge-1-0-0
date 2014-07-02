@@ -131,15 +131,13 @@ public class ProdutoBAS implements IProdutoRESTBAS
 	@Override
 	public CadastroResponse updateCadastro(CadastroMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getProdutoBAI().updateCadastro(request);
 	}
 
 	@Override
 	public CadastroResponse deleteCadastro(CadastroMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getProdutoBAI().deleteCadastro(request);
 	}
 
 	@Override
@@ -158,14 +156,12 @@ public class ProdutoBAS implements IProdutoRESTBAS
 	@Override
 	public CadastroResponse fetchCadastroById(FetchByIdRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getProdutoBAI().fetchCadastroById(request);
 	}
 
 	@Override
-	public CadastroResponse fetchCadastrosByRequest(PagedInquiryRequest request)
+	public CadastroResponse fetchCadastrosByRequest(CadastroInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getProdutoBAI().fetchCadastrosByRequest(request);
 	}
 }

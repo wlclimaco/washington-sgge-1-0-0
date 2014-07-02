@@ -169,6 +169,22 @@
 	</aop:aspect>
  </aop:config>
 
+
+ <aop:config>
+	<!-- Pointcuts -->
+	<aop:pointcut id="cadastroCacheObject" expression="bean(produtoDACTarget) and execution(* fetch*(..)) and !execution(* fetch*ByRequest(..))" />
+	<aop:pointcut id="cadastroFlushInsert" expression="bean(produtoDACTarget) and execution(* insert*(..))" />
+	<aop:pointcut id="cadastroFlushUpdate" expression="bean(produtoDACTarget) and execution(* update*(..))" />
+	<aop:pointcut id="cadastroFlushDelete" expression="bean(produtoDACTarget) and execution(* delete*(..))" />
+	<!-- Aspects -->
+	<aop:aspect id="procedureCacheAspects" ref="procedureCacheAspect">
+		<aop:around pointcut-ref="cadastroCacheObject" method="cacheObject"/>
+		<aop:after pointcut-ref="cadastroFlushInsert" method="flushCache" />
+		<aop:after pointcut-ref="cadastroFlushUpdate" method="flushCache" />
+		<aop:after pointcut-ref="cadastroFlushDelete" method="flushCache" />
+	</aop:aspect>
+ </aop:config>
+
    <!-- Drug Cache -->
   <bean id="drugCacheAspect" class="com.qat.framework.aop.CacheAOP" >
 	<property name="cache">

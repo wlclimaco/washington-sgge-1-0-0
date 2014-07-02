@@ -8,8 +8,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <link type="text/css" href="../styles/common_grid.css" rel="stylesheet" />
 <link type="text/css" href="../styles/slick.pager.css" rel="stylesheet" />
+<style>
+    .slick-cell-checkboxsel {
+      background: #f0f0f0;
+      border-right-color: silver;
+      border-right-style: solid;
+    }
+  </style>
 </head>
 <body>
 	<div style="width:100%;height:100%;float:left;">
