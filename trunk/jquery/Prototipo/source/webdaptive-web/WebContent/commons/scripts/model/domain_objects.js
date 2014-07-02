@@ -72,17 +72,17 @@
 		this.userRole = userContext.userRole;
 	};
 
-	qat.model.cadastro = function(_Id, _type, _nome, _descricao,_controlAcess)
+	qat.model.cadastro = function(_Id, _type, _nome, _descricao)
 	{
+	//console.log()
 	    var userContext = new qat.base.model.userContext();
 		this.id = _Id;
 		this.type = _type;
 		this.nome = _nome;
 		this.descricao = _descricao;
 		this.userId = userContext.userId;
-		this.id = userContext.id;
-		this.tenant = userContext.tenant;
-		this.userRole = userContext.userRole;
+	//	this.tenant = userContext.tenant;
+	//	this.userRole = userContext.userRole;
 	};
 
 	qat.model.cidade = function(_Id,_cidade, _estado)

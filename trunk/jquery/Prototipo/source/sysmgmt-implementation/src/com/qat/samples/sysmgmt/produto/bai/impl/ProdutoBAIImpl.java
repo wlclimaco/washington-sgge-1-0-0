@@ -242,15 +242,33 @@ public class ProdutoBAIImpl implements IProdutoBAI
 	@Override
 	public CadastroResponse updateCadastro(CadastroMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		CadastroResponse response = new CadastroResponse();
+		try
+		{
+			ProdutoBAID.maintainCadastro(getProdutoBAC(), ValidationContextIndicator.UPDATE, getValidationController(),
+					PersistanceActionEnum.UPDATE, request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
 	}
 
 	@Override
 	public CadastroResponse deleteCadastro(CadastroMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		CadastroResponse response = new CadastroResponse();
+		try
+		{
+			ProdutoBAID.maintainCadastro(getProdutoBAC(), ValidationContextIndicator.DELETE, getValidationController(),
+					PersistanceActionEnum.DELETE, request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
 	}
 
 	@Override
@@ -278,8 +296,16 @@ public class ProdutoBAIImpl implements IProdutoBAI
 	@Override
 	public CadastroResponse fetchCadastroById(FetchByIdRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		CadastroResponse response = new CadastroResponse();
+		try
+		{
+			ProdutoBAID.fetchCadastroById(getProdutoBAC(), request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
 	}
 
 	@Override

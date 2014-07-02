@@ -203,7 +203,14 @@
 
  <select id="fetchAllCadastros" parameterType="Cadastro" resultMap="CadastroResult">
 		SELECT <include refid="allCadastroColumns" />
-   		  FROM Cadastro ORDER BY cadastroid ASC
+   		  FROM Cadastro
+		<where>
+			<if test="tableTypeEnumValue != null">acao = #{tableTypeEnumValue}</if>
+			<if test="descricao != null">and descricao = #{descricao}</if>
+			<if test="nome != null">AND nome = #{nome}</if>
+
+		</where>
+   		  ORDER BY cadastroid ASC
   </select>
 
   <select id="fetchCadastroById" parameterType="Cadastro" resultMap="CadastroResult">
@@ -230,9 +237,9 @@
 
   </select>
 
-  <update id="updateCadastro" parameterType="Cadastro">
+  <select id="updateCadastro" parameterType="Cadastro" resultType="int" statementType="CALLABLE">
      { call upd_cadastro(  #{id},#{descricao}, #{nome},#{tableTypeEnumValue},#{userId} ) }
-  </update>
+  </select>
 
   <select id="updateProduto" parameterType="Produto" resultType="int" statementType="CALLABLE">
         { call upd_produto( #{produtoid} , #{codbarra} , #{nome} , #{marca} , #{menu} , #{submenu} , #{trimenu} , #{unimed} , #{precoid} , #{controleid} , #{foto} , #{supermercadoid} , #{preco}, #{usuarioid} ) }

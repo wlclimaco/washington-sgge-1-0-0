@@ -16,7 +16,7 @@ function rest_post_call(_url, _oData, _successFunction, _errorFunction)
 			data		: $.toJSON(_oData),
 			contentType : "application/json; charset=utf-8",
 			//timeout		: 5000,
-			//async		: bAsync,
+			async		: false,
 			success		: _successFunction,
 			error		: _errorFunction
  	});

@@ -170,17 +170,34 @@ public class ProdutoBACImpl implements IProdutoBAC
 	}
 
 	@Override
-	public InternalResponse updateCadastro(Cadastro procedure)
+	public InternalResponse updateCadastro(Cadastro cadastro)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		// produto.setPrice(ProdutoBAD.calculatePrice(UPDATE_SEED));
+		InternalResponse internalResponse = getProdutoDAC().updateCadastro(cadastro);
+		// Check for error because in business case all non-success returns are failures (updating of zero rows or
+		// optimistic locking error) according to the business
+		if (internalResponse.getStatus() != Status.OperationSuccess)
+		{
+			internalResponse.addMessage(DEFAULT_PROCEDURE_BAC_EXCEPTION_MSG, Message.MessageSeverity.Error,
+					Message.MessageLevel.Object, new Object[] {internalResponse
+							.getStatus().toString()});
+		}
+		return internalResponse;
 	}
 
 	@Override
-	public InternalResponse deleteCadastro(Cadastro procedure)
+	public InternalResponse deleteCadastro(Cadastro cadastro)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		InternalResponse internalResponse = getProdutoDAC().deleteCadastro(cadastro);
+		// Check for error because in business case all non-success returns are failures (removal of zero rows)
+		// according to the business
+		if (internalResponse.getStatus() != Status.OperationSuccess)
+		{
+			internalResponse.addMessage(DEFAULT_PROCEDURE_BAC_EXCEPTION_MSG, Message.MessageSeverity.Error,
+					Message.MessageLevel.Object, new Object[] {internalResponse
+							.getStatus().toString()});
+		}
+		return internalResponse;
 	}
 
 	@Override
@@ -193,8 +210,10 @@ public class ProdutoBACImpl implements IProdutoBAC
 	@Override
 	public InternalResultsResponse<Cadastro> fetchCadastroById(FetchByIdRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		InternalResultsResponse<Cadastro> response = new InternalResultsResponse<Cadastro>();
+		Cadastro cadastro = new Cadastro(request.getFetchId());
+		response.getResultsList().add(getProdutoDAC().fetchCadastroById(cadastro));
+		return response;
 	}
 
 	@Override

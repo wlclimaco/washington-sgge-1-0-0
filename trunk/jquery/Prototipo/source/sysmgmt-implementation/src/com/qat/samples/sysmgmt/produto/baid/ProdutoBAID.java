@@ -237,6 +237,22 @@ public final class ProdutoBAID
 		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
 	}
 
+	public static void fetchCadastroById(IProdutoBAC produtoBAC, FetchByIdRequest request, CadastroResponse response)
+	{
+		InternalResultsResponse<Cadastro> internalResponse = new InternalResultsResponse<Cadastro>();
+		// validate fetchId field
+		if (ValidationUtil.isNull(request.getFetchId()))
+		{
+			internalResponse.addFieldErrorMessage(SYSMGMT_BASE_ID_REQUIRED);
+		}
+		else
+		{
+			internalResponse = produtoBAC.fetchCadastroById(request);
+		}
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
 	/**
 	 * Maintain return list.
 	 * 

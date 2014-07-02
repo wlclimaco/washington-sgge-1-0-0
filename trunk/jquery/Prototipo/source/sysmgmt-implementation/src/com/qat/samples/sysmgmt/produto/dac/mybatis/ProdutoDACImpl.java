@@ -16,7 +16,6 @@ import com.qat.samples.sysmgmt.produto.dac.IProdutoDAC;
 import com.qat.samples.sysmgmt.produto.model.Cadastro;
 import com.qat.samples.sysmgmt.produto.model.Produto;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest;
-import com.qat.samples.sysmgmt.util.AcaoTypeEnum;
 
 /**
  * The Class ProdutoDACImpl. (Data Access Component - DAC)
@@ -241,11 +240,6 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 		InternalResponse response = new InternalResponse();
 		QATMyBatisDacHelper.doUpdateOL(getSqlSession(), STMT_UPDATE_CADASTRO, cadastro, STMT_VERSION, response);
 
-		if (response.getStatus().equals(Status.OperationSuccess))
-		{
-			return insertCadastroControle(cadastro, cadastro.getId(), AcaoTypeEnum.UPDATE);
-		}
-
 		return response;
 	}
 
@@ -259,11 +253,6 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	{
 		InternalResponse response = new InternalResponse();
 		QATMyBatisDacHelper.doRemove(getSqlSession(), STMT_DELETE_CADASTRO, cadastro, response);
-
-		if (response.getStatus().equals(Status.OperationSuccess))
-		{
-			return insertCadastroControle(cadastro, cadastro.getId(), AcaoTypeEnum.DELETE);
-		}
 
 		return response;
 	}
@@ -309,17 +298,10 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 		return response;
 	}
 
-	public InternalResponse insertCadastroControle(Cadastro cadastro, Integer value, AcaoTypeEnum acao)
-	{
-
-		return null;
-
-	}
-
 	@Override
 	public List<Cadastro> fetchAllCadastros(CadastroInquiryRequest cadastro)
 	{
-		return QATMyBatisDacHelper.doQueryForList(getSqlSession(), STMT_FETCH_ALL_CADASTRO, cadastro);
+		return QATMyBatisDacHelper.doQueryForList(getSqlSession(), STMT_FETCH_ALL_CADASTRO, cadastro.getCadastro());
 
 	}
 
