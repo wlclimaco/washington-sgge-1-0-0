@@ -10,7 +10,10 @@ $(document).ready(function ()
 
 	//sets up initial grid ...no data yet...but binds to the object that will fill it
 	pgrid = new Slick.Grid($("#marcaGrid"), ploader.data, columns, options);
-	pgrid.setSelectionModel(new Slick.CellSelectionModel());
+	pgrid.setSelectionModel(new Slick.RowSelectionModel({selectActiveRow: false}));
+    pgrid.registerPlugin(checkboxSelector);
+
+    var columnpicker = new Slick.Controls.ColumnPicker(columns, pgrid, options);
 	gridPager = new Slick.Controls.Pager(ploader, $("#pager"));
 	gridPager.init();
 	setTimeout('pgrid.init()', 250);

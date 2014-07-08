@@ -221,7 +221,9 @@ function cidade_fill_data(procResponse,data2)
 		pid: 1,
 		pqntsup: 0,
 		pcidade: null,
-		pestado: null
+		pestado: null,
+		pdata :null,
+		puser :null
 	};
 
 	//Fill paging data
@@ -245,6 +247,23 @@ function cidade_fill_data(procResponse,data2)
 		for (var i=0; i < tmpLength; i++)
 		</sec:authorize>
 		{
+				if (procResponse.cidades[oi].acessos != null){
+					var count = procResponse.cidades[oi].acessos.length;
+					if(procResponse.cidades[oi].acessos[count-1] != null){
+						var b =     procResponse.cidades[oi].acessos[count-1].userId
+					}else{
+						var b= "";
+					}
+					if(procResponse.cidades[oi].acessos[count-1] != null){
+						var c =     procResponse.cidades[oi].acessos[count-1].data
+					}else{
+						var c= "";
+					}
+				}else{
+					var b= "";
+					var c= "";
+				}
+
 			data2[i] =
 			{
 				cellno:     i,
@@ -257,12 +276,14 @@ function cidade_fill_data(procResponse,data2)
 				pid: 		procResponse.cidades[oi].cidadeId,
 				pqntsup:	procResponse.cidades[oi].cidadeId,
 				pcidade:	procResponse.cidades[oi].cidade,
-				pestado:  	procResponse.cidades[oi].estado
+				pestado:  	procResponse.cidades[oi].estado,
+				pdata :c,
+				puser :b
+
 			}
 			oi++;
 		}
 	}
-	console.log(data2);
 	return data2;
 };
 
@@ -440,7 +461,6 @@ console.log('ddd');
 
 function menu_fill_data(procResponse,data2)
 {
-console.log('ddd');
 	data2[0] =
 	{
 		cellno: 0,
@@ -450,6 +470,7 @@ console.log('ddd');
 		produtos:		"",
 		descricao:  	"",
 		imagens:  		"",
+		data  :         "",
 		userId:  		""
 
 	};
@@ -468,7 +489,6 @@ console.log('ddd');
 	{
 		var oi = 0;
 		var tmpLength = procResponse.cadastros.length;
-
 		<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
 		for (var i=1; i <= tmpLength; i++)
 		</sec:authorize>
@@ -480,6 +500,19 @@ console.log('ddd');
 					var a =		procResponse.cadastros[oi].produtos.length;
 				}else{
 				a= 0;}
+				if (procResponse.cadastros[oi].acessos != null){
+					var count = procResponse.cadastros[oi].acessos.length;
+					if(procResponse.cadastros[oi].acessos[count-1] != null){
+						var b =     procResponse.cadastros[oi].acessos[count-1].userId;
+						var c =     procResponse.cadastros[oi].acessos[count-1].data;
+					}else{
+						var b= "";
+						var c= "";
+					}
+				}else{
+					var b= "";
+					var c= "";
+				}
 			data2[i] =
 			{
 
@@ -495,7 +528,8 @@ console.log('ddd');
 				descricao:  	procResponse.cadastros[oi].descricao,
 				imagens:  		procResponse.cadastros[oi].imagens,
 				produtos:		a,
-				userId:  		procResponse.cadastros[oi].userId
+				data:  		    c,
+				userId:  		b
 			}
 
 			oi++;

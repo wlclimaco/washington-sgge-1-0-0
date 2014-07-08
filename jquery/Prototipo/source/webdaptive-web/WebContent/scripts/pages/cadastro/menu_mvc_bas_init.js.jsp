@@ -12,6 +12,18 @@ $(document).ready(function ()
 	pgrid = new Slick.Grid($("#menuGrid"), ploader.data, columns, options);
 	pgrid.setSelectionModel(new Slick.RowSelectionModel({selectActiveRow: false}));
     pgrid.registerPlugin(checkboxSelector);
+	pgrid.onClick.subscribe(function (e, args) {
+        if ($(e.target).hasClass("btn")) {
+
+            openDialog("item");
+        }
+        e.stopImmediatePropagation();
+    });
+
+	var openDialog = function(row){
+		var dom = "<div>" + row.toString() + "</div>";
+		$(dom).dialog();
+	};
 
     var columnpicker = new Slick.Controls.ColumnPicker(columns, pgrid, options);
 	gridPager = new Slick.Controls.Pager(ploader, $("#pager"));

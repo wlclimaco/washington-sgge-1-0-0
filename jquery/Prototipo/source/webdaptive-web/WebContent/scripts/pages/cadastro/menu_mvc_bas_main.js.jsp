@@ -19,24 +19,29 @@ var viewLoadedObject;
 			viewLoadedObject = ${cadastroResponse};
     </c:otherwise>
 </c:choose>
-console.log(viewLoadedObject);
 var columns=[];
  var checkboxSelector = new Slick.CheckboxSelectColumn({
       cssClass: "slick-cell-checkboxsel"
     });
+
+	var buttonFormat = function (row, cell, value, columnDef, dataContext) {
+		if(row > 0)
+			return "<input type='button' value='Detail' class='btn ' />"
+		else
+			return ""
+	}
 
     columns.push(checkboxSelector.getColumnDefinition());
 //columns & column settings for the grid
 columns[1] = {id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:"cell-center", width:30};
 columns[2] = {id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
 columns[3] = {id:"id", name: procedure.grid.psak.title, field:"id", resizable:false, cssClass:"cell-center", width:75};
-columns[4] = {id:"nome", name: procedure.grid.pcode.title, field:"nome", editor:Slick.Editors.Text};
-columns[5] = {id:"descricao", name: procedure.grid.pcode.title, field:"descricao", editor:Slick.Editors.Text};
-columns[6] = {id:"imagens", name: procedure.grid.pcode.title, field:"imagens", editor:Slick.Editors.Text};
-columns[7] = {id:"produtos", name: procedure.grid.pcode.title, field:"produtos", editor:Slick.Editors.Text};
-columns[8] = {id:"userId", name: procedure.grid.pcode.title, field:"userId", editor:Slick.Editors.Text};
-
-//];
+columns[4] = {id:"nome", name: menu.grid.pnome.title, field:"nome", editor:Slick.Editors.Text};
+columns[5] = {id:"descricao", name: menu.grid.pdescricao.title, field:"descricao", editor:Slick.Editors.Text};
+columns[6] = {id:"imagens", name: menu.grid.pimagens.title, field:"imagens", formatter: buttonFormat};
+columns[7] = {id:"produtos", name: menu.grid.pprodutos.title, field:"produtos", editor:Slick.Editors.Text};
+columns[8] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
+columns[9] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
 
 //grid options
 var options =
@@ -47,9 +52,7 @@ var options =
 	enableAddRow: false,
 	forceFitColumns: true,
 	enableCellNavigation: true,
-	explicitInitialization: true,
-    asyncEditorLoading: false,
-    autoEdit: false
+	explicitInitialization: true
 };
 
 //Custom RemoteModel Extension for SlickGrid

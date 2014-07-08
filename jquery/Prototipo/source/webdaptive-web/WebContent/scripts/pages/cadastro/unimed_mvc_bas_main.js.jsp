@@ -19,17 +19,30 @@ var viewLoadedObject;
 			viewLoadedObject = ${cadastroResponse};
     </c:otherwise>
 </c:choose>
-
+console.log(viewLoadedObject);
+var columns=[];
+ var checkboxSelector = new Slick.CheckboxSelectColumn({
+      cssClass: "slick-cell-checkboxsel"
+    });
+	var buttonFormat = function (row, cell, value, columnDef, dataContext) {
+		if(row > 0)
+			return "<input type='button' value='Detail' class='btn ' />"
+		else
+			return ""
+	}
+}
+    columns.push(checkboxSelector.getColumnDefinition());
 //columns & column settings for the grid
-var columns = [
-	{id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:"cell-center", width:30},
-	{id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML},
-    {id:"pid", name: procedure.grid.psak.title, field:"pid", resizable:false, cssClass:"cell-center", width:75},
-    {id:"pprod", name: procedure.grid.pcode.title, field:"pprod", editable:true},
-	{id:"pnome", name: procedure.grid.pcode.title, field:"pnome", editor:Slick.Editors.Text},
-	{id:"col1", name:"test", field:"col1",  width:135, editable:true, cssClass:"pad-4-left", sortable:true, editor:Slick.Editors.Auto},
-	{id:"pdesc", name: procedure.grid.pcode.title, field:"pdesc", editor:Slick.Editors.Text}
-];
+columns[1] = {id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:"cell-center", width:30};
+columns[2] = {id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
+columns[3] = {id:"id", name: procedure.grid.psak.title, field:"id", resizable:false, cssClass:"cell-center", width:75};
+columns[4] = {id:"nome", name: unimed.grid.punimed.title, field:"nome", editor:Slick.Editors.Text};
+columns[5] = {id:"descricao", name: unimed.grid.pdescricao.title, field:"descricao", editor:Slick.Editors.Text};
+columns[6] = {id:"produtos", name: menu.grid.pprodutos.title, field:"produtos", formatter: buttonFormat};
+columns[7] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
+columns[8] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
+
+//];
 
 //grid options
 var options =
@@ -55,12 +68,10 @@ var options =
 		function callInsertWS()
 		{
 			onProcDataLoading.notify({});
-		   // var oData = new qat.model.reqCadastro(null, new qat.model.procedure(0,0,data[0].pcode,data[0].pdesc,0.0),true,true);qat.model.cadastro = function(_Id, _type, _nome, _descricao,_controlAcess)
-			var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(1,1,data[0].pnome,data[0].pdesc,null),true,true);
+
+			var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(1,6,data[0].nome,data[0].descricao,null),true,true);
 			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/insertCadastro', oData, fill_data, process_error);
-			debugger;
-			var oData = new qat.model.pagedInquiryRequest(null, 20, 0, true);
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {}, fill_data, process_error);
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {cadastro:{type:6,userId:'rod'}}, fill_data, process_error);
 
 		}
 
@@ -84,23 +95,26 @@ var options =
 					bList = false;
 				}
 
-				var oData = new qat.model.reqProc(null, new qat.model.cadastro(data[aRowChg[a]].pversion,data[aRowChg[a]].psak,data[aRowChg[a]].pcode,data[aRowChg[a]].pdesc,0.0), bList, true);
-				rest_post_call('qat-webdaptive/cadastro/api/updateBAS', oData, fill_data, process_error);
+				var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(data[aRowChg[a]].id,6,data[aRowChg[a]].nome,data[aRowChg[a]].descricao),bList,true);
+				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/updateCadastro', oData, fill_data, process_error);
+				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros',{cadastro:{type:6,userId:'rod'}}, fill_data, process_error);
+
 			}
 		}
 
 		function callDeleteWS(_procId)
 		{
+
+		    var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(_procId,6),true,true);
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/deleteCadastro', oData, fill_data, process_error);
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {cadastro:{type:6,userId:'rod'}}, fill_data, process_error);
 			onProcDataLoading.notify({});
-		    var oData = new qat.model.reqProc(null, new qat.model.cadastro(0,_procId,"","",0.0),true,true);
-			rest_post_call('qat-webdaptive/cadastro/api/deleteBAS', oData, fill_data, process_error);
 		}
 
 		function callRefreshWS(_i)
 		{
 			onProcDataLoading.notify({});
-			var oData = new qat.model.refreshRequest(null, _i, true, true);
-			rest_post_call('qat-webdaptive/cadastro/api/refreshBAS', oData, fill_data, process_error);
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros',{cadastro:{type:6,userId:'rod'}}, fill_data, process_error);
 		}
 		</sec:authorize>
 
@@ -111,12 +125,10 @@ var options =
 			if (viewLoadedObject == null)
 			{
 			    var oData = new qat.model.pagedInquiryRequest(null, _iPageSize, _iStartPage, true);
-				//rest_post_call('qat-webdaptive/cadastro/api/fetchByRequestBAS', oData, fill_data, process_error);
-				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {}, fill_data, process_error);
+				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros',{cadastro:{type:6,userId:'rod'}}, fill_data, process_error);
 			}
 			else
 			{
-				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {}, fill_data, process_error);
 				fill_data(viewLoadedObject);
 				viewLoadedObject = null;
 			}
@@ -124,7 +136,7 @@ var options =
 
 		function fill_data(procResponse)
 		{
-			data = reuse_fill_data(procResponse,data,"cadastro");
+			data = reuse_fill_data(procResponse,data,"menu");
 			onProcDataLoaded.notify({});
 		}
 

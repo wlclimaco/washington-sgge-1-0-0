@@ -34,7 +34,7 @@
     <result property="nome" column="nome"/>
     <result property="descricao" column="descricao"/>
     <result property="controleid" column="controleid"/>
-    <collection property="acessos" column="produtoid" select="ControleAcessMap.fetchControleAcessByProduto" />
+    <collection property="acessos" column="cadastroid" select="ControleAcessMap.fetchControleAcessByProduto" />
     <collection property="produtos" column="cadastroid" select="fetchProdutosByMarca" />
   </resultMap>
 
@@ -246,9 +246,10 @@
 
   </select>
 
-  <delete id="deleteCadastroById" parameterType="Cadastro">
-    DELETE FROM CADASTRO WHERE ID = #{id}
-  </delete>
+  <select id="deleteCadastroById" parameterType="Cadastro" resultType="int" statementType="CALLABLE">
+        { call del_cadastro( #{id} , #{tableTypeEnumValue}, #{userId} ) }
+
+  </select>
 
   <delete id="deleteAllCadastros">
 	DELETE FROM cADASTRO
