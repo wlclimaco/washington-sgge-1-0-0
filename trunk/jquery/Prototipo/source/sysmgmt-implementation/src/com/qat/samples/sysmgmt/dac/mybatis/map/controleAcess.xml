@@ -46,7 +46,7 @@
     <select id="fetchControleAcessByProduto" parameterType="Integer" resultMap="ControleAcessResult">
 	    SELECT
 	    <include refid="allControleAcessColumns" />
-	    FROM CONTROLE WHERE idAcao = #{value} and tableType = 2 ORDER BY CONTROLEID ASC
+	    FROM CONTROLE WHERE idAcao =  #{value} and tableType in (3,4,5,6,7) ORDER BY DATA DESC
     </select>
 
      <select id="fetchControleAcessByCidade" parameterType="Integer" resultMap="ControleAcessResult">

@@ -25,9 +25,11 @@ var columns = [
 	{id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:"cell-center", width:30},
 	{id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML},
     {id:"pid", name: procedure.grid.psak.title, field:"pid", resizable:false, cssClass:"cell-center", width:75},
-    {id:"pqntsup", name: procedure.grid.pcode.title, field:"pqntsup", editable:true},
-	{id:"pcidade", name: procedure.grid.pcode.title, field:"pcidade", editor:Slick.Editors.Text},
-	{id:"pestado", name: procedure.grid.pcode.title, field:"pestado", editor:Slick.Editors.Text}
+	{id:"pcidade", name: cidade.grid.pcidade.title, field:"pcidade", editor:Slick.Editors.Text},
+	{id:"pestado", name: cidade.grid.pestado.title, field:"pestado", editor:Slick.Editors.Text},
+	{id:"pqntsup", name: cidade.grid.pqntsup.title, field:"pqntsup", editable:true},
+	{id:"pdata", name: cidade.grid.pdata.title, field:"pdata", editable:true},
+	{id:"puser", name: cidade.grid.puser.title, field:"puser", editable:true}
 ];
 
 //grid options

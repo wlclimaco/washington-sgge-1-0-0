@@ -21,30 +21,7 @@
     }
   });
 
-  var availableTags = [
-                       "ActionScript",
-                       "AppleScript",
-                       "Asp",
-                       "BASIC",
-                       "C",
-                       "C++",
-                       "Clojure",
-                       "COBOL",
-                       "ColdFusion",
-                       "Erlang",
-                       "Fortran",
-                       "Groovy",
-                       "Haskell",
-                       "Java",
-                       "JavaScript",
-                       "Lisp",
-                       "Perl",
-                       "PHP",
-                       "Python",
-                       "Ruby",
-                       "Scala",
-                       "Scheme"
-                     ];
+  var availableTags = [];
 
   function AutoCompleteEditor(args) {
     var $input;
@@ -53,6 +30,17 @@
     var calendarOpen = false;
 
     this.init = function () {
+
+		var callback = function  (oResponse)
+		{
+			 var cadastros = oResponse.cadastros;
+			 var tmpLength = cadastros.length;
+			 availableTags = [];
+			for (var i=0; i < tmpLength; i++){
+				availableTags.push(cadastros[i].nome);
+			}
+		}
+	  rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {cadastro:{type:3,userId:'rod'}}, callback, null);
       $input = $("<INPUT id='tags' class='editor-text' />");
       $input.appendTo(args.container);
       $input.focus().select();
