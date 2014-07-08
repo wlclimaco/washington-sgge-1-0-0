@@ -12,37 +12,25 @@ var viewLoadedObject;
 
 //loads object if being served via controller
 <c:choose>
-    <c:when test="${empty cadastroResponse}">
+    <c:when test="${empty cidadeResponse}">
 			viewLoadedObject = null;
     </c:when>
     <c:otherwise>
-			viewLoadedObject = ${cadastroResponse};
+			viewLoadedObject = ${cidadeResponse};
     </c:otherwise>
 </c:choose>
 console.log(viewLoadedObject);
-var columns=[];
- var checkboxSelector = new Slick.CheckboxSelectColumn({
-      cssClass: "slick-cell-checkboxsel"
-    });
-	var buttonFormat = function (row, cell, value, columnDef, dataContext) {
-		if(row > 0)
-			return "<input type='button' value='Detail' class='btn ' />"
-		else
-			return ""
-	}
-
-    columns.push(checkboxSelector.getColumnDefinition());
 //columns & column settings for the grid
-columns[1] = {id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:"cell-center", width:30};
-columns[2] = {id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
-columns[3] = {id:"id", name: procedure.grid.psak.title, field:"id", resizable:false, cssClass:"cell-center", width:75};
-columns[4] = {id:"nome", name: unimed.grid.punimed.title, field:"nome", editor:Slick.Editors.Text};
-columns[5] = {id:"descricao", name: unimed.grid.pdescricao.title, field:"descricao", editor:Slick.Editors.Text};
-columns[6] = {id:"produtos", name: menu.grid.pprodutos.title, field:"produtos", formatter: buttonFormat};
-columns[7] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
-columns[8] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
-
-//];
+var columns = [
+	{id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:"cell-center", width:30},
+	{id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML},
+    {id:"pid", name: procedure.grid.psak.title, field:"pid", resizable:false, cssClass:"cell-center", width:75},
+	{id:"pcidade", name: cidade.grid.pcidade.title, field:"pcidade", editor:Slick.Editors.Text},
+	{id:"pestado", name: cidade.grid.pestado.title, field:"pestado", editor:Slick.Editors.Text},
+	{id:"pqntsup", name: cidade.grid.pqntsup.title, field:"pqntsup", editable:true},
+	{id:"pdata", name: cidade.grid.pdata.title, field:"pdata", editable:true},
+	{id:"puser", name: cidade.grid.puser.title, field:"puser", editable:true}
+];
 
 //grid options
 var options =
@@ -68,10 +56,10 @@ var options =
 		function callInsertWS()
 		{
 			onProcDataLoading.notify({});
-
-			var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(1,6,data[0].nome,data[0].descricao,null),true,true);
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/insertCadastro', oData, fill_data, process_error);
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {cadastro:{type:6,userId:'rod'}}, fill_data, process_error);
+			var oData = new qat.model.reqCidade(null, new qat.model.cidade(1,data[0].pcidade,data[0].pestado),true,true);
+			rest_post_call('qat-sysmgmt-sample/services/rest/CidadeService/insertCidade', oData, fill_data, process_error);
+		//	var oData = new qat.model.pagedInquiryRequest(null, 20, 0, true);
+		//	rest_post_call('qat-sysmgmt-sample/services/rest/CidadeService/fetchAllCidades', {}, fill_data, process_error);
 
 		}
 
@@ -94,27 +82,29 @@ var options =
 				{
 					bList = false;
 				}
-
-				var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(data[aRowChg[a]].id,6,data[aRowChg[a]].nome,data[aRowChg[a]].descricao),bList,true);
-				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/updateCadastro', oData, fill_data, process_error);
-				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros',{cadastro:{type:6,userId:'rod'}}, fill_data, process_error);
-
+				var oData = new qat.model.reqCidade(null, new qat.model.cidade(data[aRowChg[a]].pqntsup,data[aRowChg[a]].pcidade,data[aRowChg[a]].pestado),bList,true);
+				//rest_post_call('qat-webdaptive/procedure/api/updateBAS', oData, fill_data, process_error);
+				rest_post_call('qat-sysmgmt-sample/services/rest/CidadeService/updateCidade', oData, fill_data, process_error);
+				//var oData = new qat.model.pagedInquiryRequest(null, 20, 0, true);
+				//rest_post_call('qat-sysmgmt-sample/services/rest/CidadeService/fetchAllCidades', {}, fill_data, process_error);
 			}
 		}
 
 		function callDeleteWS(_procId)
 		{
-
-		    var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(_procId,6),true,true);
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/deleteCadastro', oData, fill_data, process_error);
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {cadastro:{type:6,userId:'rod'}}, fill_data, process_error);
 			onProcDataLoading.notify({});
+			var oData = new qat.model.reqCidade(null, new qat.model.cidade(_procId,null,null),true,true);
+		  //  var oData = new qat.model.reqProc(null, new qat.model.procedure(0,_procId,"","",0.0),true,true);
+			rest_post_call('qat-sysmgmt-sample/services/rest/CidadeService/deleteCidade', oData, fill_data, process_error);
+			var oData = new qat.model.pagedInquiryRequest(null, 20, 0, true);
+			rest_post_call('qat-sysmgmt-sample/services/rest/CidadeService/fetchAllCidades', {}, fill_data, process_error);
 		}
 
 		function callRefreshWS(_i)
 		{
 			onProcDataLoading.notify({});
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros',{cadastro:{type:6,userId:'rod'}}, fill_data, process_error);
+			var oData = new qat.model.refreshRequest(null, _i, true, true);
+			rest_post_call('qat-webdaptive/procedure/api/refreshBAS', oData, fill_data, process_error);
 		}
 		</sec:authorize>
 
@@ -125,7 +115,8 @@ var options =
 			if (viewLoadedObject == null)
 			{
 			    var oData = new qat.model.pagedInquiryRequest(null, _iPageSize, _iStartPage, true);
-				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros',{cadastro:{type:6,userId:'rod'}}, fill_data, process_error);
+				//rest_post_call('qat-webdaptive/procedure/api/fetchByRequestBAS', oData, fill_data, process_error);
+				rest_post_call('qat-sysmgmt-sample/services/rest/CidadeService/fetchAllCidades', {}, fill_data, process_error);
 			}
 			else
 			{
@@ -136,7 +127,7 @@ var options =
 
 		function fill_data(procResponse)
 		{
-			data = reuse_fill_data(procResponse,data,"menu");
+			data = reuse_fill_data(procResponse,data,"cidade");
 			onProcDataLoaded.notify({});
 		}
 
@@ -213,7 +204,7 @@ function validateFields(rowValue)
 };
 
 <sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
-$('#unimedGrid').keyup(function(e)
+$('#cidGrid').keyup(function(e)
 {
 	if (e.keyCode == 13)
 	{
@@ -231,11 +222,11 @@ $('#unimedGrid').keyup(function(e)
 	}
 });
 
-$('#refreshunimed').click(function() {
+$('#refreshproc').click(function() {
 	ploader.callRefreshWS(135);
 });
 </sec:authorize>
-$('#listunimed').click(function() {
+$('#listproc').click(function() {
 	 ploader.callPagedFetchWS(20,0);
 });
 </script>

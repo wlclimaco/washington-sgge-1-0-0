@@ -117,12 +117,12 @@ head(function()
 					children: [
 								{title: wdtree.node1.title, isFolder: true, expand: true, tooltip: wdtree.node1.tooltip,
 									children: [
-										{title: wdtree.node1.child1.marca, key: 'qatmvctabs', url: "qat_mvc_tabs.jsp"},
-										{title: wdtree.node1.child1.menu, key: 'qatmvctabs1', url: "qat_mvc_tabs.jsp"},
-										{title: wdtree.node1.child1.submenu, key: 'qatmvctabss', url: "qat_mvc_tabs.jsp"},
-										{title: wdtree.node1.child1.trimenu, key: 'qatmvctabsss', url: "qat_mvc_tabs.jsp"},
-										{title: wdtree.node1.child1.unimed, key: 'qatmvctabsssss', url: "qat_mvc_tabs.jsp"},
-										{title: wdtree.node1.child1.produto, key: 'qatmvctabsssss', url: "qat_mvc_tabs.jsp"}
+										{title: wdtree.node1.child1.marca, key: 'qatmvctabsMarca',  url: "qat_marc_tabs.jsp"},
+										{title: wdtree.node1.child1.menu,  key: 'qatmvctabsMenu',   url: "qat_menu_tabs.jsp"},
+										{title: wdtree.node1.child1.submenu, key: 'qatmvctabsSub',  url: "qat_sub_tabs.jsp"},
+										{title: wdtree.node1.child1.trimenu, key: 'qatmvctabsTri',  url: "qat_tri_tabs.jsp"},
+										{title: wdtree.node1.child1.unimed, key: 'qatmvctabsUnimed',url: "qat_unimed_tabs.jsp"},
+										{title: wdtree.node1.child1.produto, key: 'qatmvctabsProd', url: "qat_prod_tabs.jsp"}
 									]
 								},
 								{title: wdtree.node2.title, isFolder: true, expand: true, tooltip: wdtree.node2.tooltip,
@@ -132,18 +132,18 @@ head(function()
 								},
 								{title: wdtree.node3.title, isFolder: true, expand: true, tooltip: wdtree.node2.tooltip,
 									children: [
-										{title: wdtree.node2.child1.title, key: 'qatbastabs', url: "qat_bas_tabs.jsp"},
+										{title: wdtree.node2.child1.title, key: 'qatmvctabsCli', url: "qat_cli_tabs.jsp"},
 									]
 								},
 								{title: wdtree.node4.title, isFolder: true, expand: true, tooltip: wdtree.node2.tooltip,
 									children: [
-										{title: wdtree.node2.child1.title, key: 'qatbastabs', url: "qat_bas_tabs.jsp"},
+										{title: wdtree.node3.child1.title, key: 'qatmvctabsSup', url: "qat_sup_tabs.jsp"},
 									]
 								},
 						        <sec:authorize ifAllGranted="ROLE_DOMAIN ADMINS">
 								{title: wdtree.node5.title, isFolder: true, expand: true, tooltip: wdtree.node3.tooltip,
 									children: [
-										{title: wdtree.node3.child1.title, key: 'wdothertabs', url: "wd_other_tabs.jsp"},
+										{title: wdtree.node4.child1.title, key: 'qatmvctabsGer', url: "qat_ger_tabs.jsp"},
 									]
 								},
 								</sec:authorize>

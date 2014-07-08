@@ -30,7 +30,7 @@ var columns=[];
 		else
 			return ""
 	}
-}
+
 
     columns.push(checkboxSelector.getColumnDefinition());
 //columns & column settings for the grid
