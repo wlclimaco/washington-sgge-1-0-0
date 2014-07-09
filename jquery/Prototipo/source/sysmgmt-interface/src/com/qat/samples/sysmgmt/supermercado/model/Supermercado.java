@@ -13,7 +13,7 @@ import com.qat.samples.sysmgmt.util.Util;
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "Supermercado", propOrder = {"superId", "enderecos", "usuario", "senha", "email", "site",
+@XmlType(name = "Supermercado", propOrder = {"superId", "enderecos", "nome", "usuario", "senha", "email", "site",
 		"documentos",
 		"imagens"})
 public class Supermercado extends Util
@@ -24,6 +24,9 @@ public class Supermercado extends Util
 
 	/** The code. */
 	private List<Endereco> enderecos;
+
+	/** The senha. */
+	private String nome;
 
 	/** The usuario. */
 	private String usuario;
@@ -176,6 +179,16 @@ public class Supermercado extends Util
 		return documentos;
 	}
 
+	public String getNome()
+	{
+		return nome;
+	}
+
+	public void setNome(String nome)
+	{
+		this.nome = nome;
+	}
+
 	/**
 	 * Sets the documentos.
 	 * 
@@ -234,8 +247,8 @@ public class Supermercado extends Util
 	{
 		return "Supermercado [getEnderecos()=" + getEnderecos() + ", getSuperId()=" + getSuperId() + ", getUsuario()="
 				+ getUsuario() + ", getSenha()=" + getSenha() + ", getEmail()=" + getEmail() + ", getSite()="
-				+ getSite() + ", getDocumentos()=" + getDocumentos() + ", getImagens()=" + getImagens()
-				+ ", toString()=" + super.toString() + "]";
+				+ getSite() + ", getDocumentos()=" + getDocumentos() + ", getNome()=" + getNome() + ", getImagens()="
+				+ getImagens() + ", toString()=" + super.toString() + "]";
 	}
 
 }

@@ -18,6 +18,8 @@ public class ClienteViewController extends ClienteBaseController
 	/** The Constant PROCEDURE_MVC_BAS_RETURN. */
 	private static final String PROCEDURE_MVC_BAS_RETURN = "/cliente/cliente_mvc_bas";
 
+	private static final String CADASTRO_MVC_BAS_RETURN = "/cliente/cadCli";
+
 	/** The Constant ZERO. */
 	private static final int ZERO = 0;
 
@@ -38,6 +40,17 @@ public class ClienteViewController extends ClienteBaseController
 		request.setPageSize(TWENTY);
 		request.setPreQueryCount(true);
 		return clienteMAV(request, PROCEDURE_MVC_BAS_RETURN);
+	}
+
+	@RequestMapping(value = "/cadastroClientesByRequestBAS", method = RequestMethod.GET)
+	public ModelAndView cadastroClientesByRequestBAS()
+	{
+		PagedInquiryRequest request = new PagedInquiryRequest();
+		// we will be paging so set the default values
+		request.setStartPage(ZERO);
+		request.setPageSize(TWENTY);
+		request.setPreQueryCount(true);
+		return cadastroMAV(request, CADASTRO_MVC_BAS_RETURN);
 	}
 
 }

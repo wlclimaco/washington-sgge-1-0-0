@@ -29,9 +29,6 @@ public class Documento extends Util
 	/** The cpf cnpj. */
 	private String cpfCnpj;
 
-	/** The nome. */
-	private String nome;
-
 	/** The razao. */
 	private String razao;
 
@@ -56,29 +53,8 @@ public class Documento extends Util
 		this.id = id;
 		this.rgInc = rgInc;
 		this.cpfCnpj = cpfCnpj;
-		this.nome = nome;
 		this.razao = razao;
 		this.dateNascimento = dateNascimento;
-	}
-
-	/**
-	 * Gets the nome.
-	 * 
-	 * @return the nome
-	 */
-	public String getNome()
-	{
-		return nome;
-	}
-
-	/**
-	 * Sets the nome.
-	 * 
-	 * @param nome the new nome
-	 */
-	public void setNome(String nome)
-	{
-		this.nome = nome;
 	}
 
 	/**
@@ -270,7 +246,6 @@ public class Documento extends Util
 		this.id = id;
 		this.rgInc = rgInc;
 		this.cpfCnpj = cpfCnpj;
-		this.nome = nome;
 		this.razao = razao;
 		this.dateNascimento = dateNascimento;
 	}
@@ -310,7 +285,7 @@ public class Documento extends Util
 	@Override
 	public String toString()
 	{
-		return "Documento [getNome()=" + getNome() + ", getRazao()=" + getRazao() + ", getDocumentoid()="
+		return "Documento [getRazao()=" + getRazao() + ", getDocumentoid()="
 				+ getDocumentoid() + ", getId()=" + getId() + ", getRgInc()=" + getRgInc() + ", getCpfCnpj()="
 				+ getCpfCnpj() + ", getDateNascimento()=" + getDateNascimento() + ", getDocumenroid()="
 				+ getDocumenroid() + ", getTabela()=" + getTabela() + ", getTableTypeValue()=" + getTableTypeValue()
