@@ -52,6 +52,22 @@ public class ClienteBaseController
 		return modelAndView;
 	}
 
+	protected ModelAndView cadastroMAV(PagedInquiryRequest request, String returnViewName)
+	{
+		ModelAndView modelAndView = new ModelAndView(returnViewName);
+		ObjectMapper mapper = new ObjectMapper();
+		try
+		{
+			modelAndView.addObject(CLIENTE_RESPONSE, null);
+		}
+		catch (Exception ex)
+		{
+			LOG.error(DEFAULT_EXCEPTION_MSG + ":" + ex);
+			modelAndView.addObject(CLIENTE_RESPONSE, null);
+		}
+		return modelAndView;
+	}
+
 	/**
 	 * Refresh clientes.
 	 * 

@@ -14,11 +14,13 @@
 	<ul>
 		<sec:authorize access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
 	        <li><a href="../cliente/fetchClientesByRequestBAS" title="qatmvctab-1"><span>Cliente</span></a></li>
+	        <li><a href="../cliente/cadastroClientesByRequestBAS" title="qatmvctab-1"><span>Cliente</span></a></li>
 		</sec:authorize>
 	</ul>
 	<div class="tabscontent">
 		<sec:authorize access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
 			<div id="qatmvctab-1"></div>
+			<div id="qatmvctab-2"></div>
 		</sec:authorize>
 	</div>
 </div>
