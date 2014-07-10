@@ -9,25 +9,9 @@ $(document).ready(function ()
     });
 
 	//sets up initial grid ...no data yet...but binds to the object that will fill it
-	pgrid = new Slick.Grid($("#prodGrid"), ploader.data, columns, options);
+	pgrid = new Slick.Grid($("#submenuGrid"), ploader.data, columns, options);
 	pgrid.setSelectionModel(new Slick.RowSelectionModel({selectActiveRow: false}));
     pgrid.registerPlugin(checkboxSelector);
-	pgrid.onClick.subscribe(function (e, args) {
-        if ($(e.target).hasClass("btn")) {
-
-            openDialog("item");
-        }
-        e.stopImmediatePropagation();
-    });
-
-	var openDialog = function(row){
-		var dom = "<div>" + row.toString() + "</div>";
-
-		$(dom).load('../produto/cadastroProdutosByRequestBAS?id=1').dialog({height: 800,
-            width: 800,
-            modal: true});
-	};
-
 
     var columnpicker = new Slick.Controls.ColumnPicker(columns, pgrid, options);
 	gridPager = new Slick.Controls.Pager(ploader, $("#pager"));

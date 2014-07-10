@@ -8,7 +8,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script language="javascript" type="text/javascript" src="niceforms.js"></script>
 <link rel="stylesheet" type="text/css" media="all" href="../thirdparty/jquery/Niceforms-master/niceforms-default.css" />
 </head>
 <body><div id="container">

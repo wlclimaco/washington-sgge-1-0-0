@@ -12,7 +12,7 @@ import com.qat.samples.sysmgmt.util.Util;
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "Produto", propOrder = {"id", "supermercadoid", "codBarra", "marca", "menu", "submenu", "unimed",
+@XmlType(name = "Produto", propOrder = {"id", "codBarra", "marca", "menu", "submenu", "unimed",
 		"trimenu",
 		"nome",
 		"descricao",
@@ -24,9 +24,6 @@ public class Produto extends Util
 
 	/** The id. */
 	private Integer id;
-
-	/** The supermercadoid. */
-	private Supermercado supermercadoid;
 
 	/** The cod barra. */
 	private String codBarra;
@@ -174,16 +171,6 @@ public class Produto extends Util
 	public Integer getId()
 	{
 		return id;
-	}
-
-	public Supermercado getSupermercadoid()
-	{
-		return supermercadoid;
-	}
-
-	public void setSupermercadoid(Supermercado supermercadoid)
-	{
-		this.supermercadoid = supermercadoid;
 	}
 
 	/**
@@ -409,7 +396,7 @@ public class Produto extends Util
 	@Override
 	public String toString()
 	{
-		return "Produto [getId()=" + getId() + ", getSupermercadoid()=" + getSupermercadoid() + ", getCodBarra()="
+		return "Produto [getId()=" + getId() + ", getCodBarra()="
 				+ getCodBarra() + ", getMarca()=" + getMarca() + ", getMenu()=" + getMenu() + ", getSubmenu()="
 				+ getSubmenu() + ", getTrimenu()=" + getTrimenu() + ", getUnimed()=" + getUnimed() + ", getNome()="
 				+ getNome() + ", getDescricao()=" + getDescricao() + ", getFoto()=" + getFoto() + ", getPrecos()="
