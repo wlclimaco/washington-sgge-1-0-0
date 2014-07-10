@@ -69,6 +69,11 @@ function reuse_fill_data(response,data2,gridProcess)
 		{
 			data2 = menu_fill_data(response,data2);
 		}
+
+		else if (gridProcess === "produto" )
+		{
+			data2 = produto_fill_data(response,data2);
+		}
 	}
 	else
 	{
@@ -539,8 +544,137 @@ function menu_fill_data(procResponse,data2)
 	return data2;
 };
 
-//=========================================================
+//=========================================================produto_fill_data
 
+//============================MENU=======================
+
+function produto_fill_data(procResponse,data2)
+{
+	data2[0] =
+	{
+		cellno:          0,
+		id:		         0,
+		codBarra:		"",
+		nome:  	        "",
+		unimed  :       "",
+		descricao:  	"",
+		marca:  	    "",
+		menu:  		    "",
+		submenu  :      "",
+		trimenu  :      "",
+		supermercadoId: "",
+		preco  :        "",
+		imagens:  		"",
+		cellno1:        ""
+
+	};
+
+	//Fill paging data
+	if (procResponse.resultsSetInfo != undefined)
+	{
+	 	pagingData.pageSize =  parseInt(procResponse.resultsSetInfo.pageSize);
+	 	pagingData.startPage =  parseInt(procResponse.resultsSetInfo.startPage);
+	 	pagingData.moreRowsAvailable =  procResponse.resultsSetInfo.moreRowsAvailable;
+	 	pagingData.totalRowsAvailable =  parseInt(procResponse.resultsSetInfo.totalRowsAvailable);
+	}
+
+	//make sure return is an array
+	if ($.isArray(procResponse.produtos))
+	{
+		var oi = 0;
+		var tmpLength = procResponse.produtos.length;
+		<sec:authorize  access="hasRole('ROLE_GUEST')">
+		for (var i=0; i < tmpLength; i++)
+		</sec:authorize>
+		{
+			if(procResponse.produtos[oi].marca != null){
+				var a =		procResponse.produtos[oi].marca[0].nome;
+			}else{
+				a= 0;
+			}
+			if(procResponse.produtos[oi].menu != null){
+				var b =		procResponse.produtos[oi].marca[0].menu;
+			}else{
+				b= 0;
+			}
+			if(procResponse.produtos[oi].submenu != null){
+				var c =		procResponse.produtos[oi].marca[0].submenu;
+			}else{
+				c= 0;
+			}
+			if(procResponse.produtos[oi].trimenu != null){
+				var d =		procResponse.produtos[oi].marca[0].trimenu;
+			}else{
+				d= 0;
+			}
+			if(procResponse.produtos[oi].unimed != null){
+				var e =		procResponse.produtos[oi].marca[0].unimed;
+			}else{
+				e= 0;
+			}
+			if (procResponse.produtos[oi].acessos != null){
+				var count = procResponse.produtos[oi].acessos.length;
+				if(procResponse.produtos[oi].acessos[count-1] != null){
+					var f =     procResponse.produtos[oi].acessos[count-1].userId;
+					var g =     procResponse.produtos[oi].acessos[count-1].data;
+				}else{
+					var f= "";
+					var g= "";
+				}
+			}else{
+				var f= "";
+				var g= "";
+			}
+			if (procResponse.produtos[oi].precos != null){
+				var count = procResponse.produtos[oi].precos.length;
+				if(procResponse.produtos[oi].precos[count-1] != null){
+					var h =     procResponse.produtos[oi].precos[count-1].supermercadoid;
+					if(procResponse.produtos[oi].precos[count-1].promocao == true)
+						var j =     procResponse.produtos[oi].precos[count-1].precopromo
+					else
+						var j =     procResponse.produtos[oi].precos[count-1].preco
+				}else{
+					var h= "";
+					var j= "";
+				}
+			}else{
+				var h= "";
+				var j= "";
+			}
+			data2[i] =
+			{
+
+				cellno:     i,
+				<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
+				action: 	"<a href='#' onclick='javascript:ploader.callDeleteWS(" + procResponse.produtos[oi].id +");'>Delete</a>",
+				</sec:authorize>
+				<sec:authorize ifAllGranted="ROLE_GUEST">
+				action: 'None',
+				</sec:authorize>
+				id:		        procResponse.produtos[oi].id,
+				codBarra:		procResponse.produtos[oi].codBarra,
+				nome:  	        procResponse.produtos[oi].nome,
+				unimed  :       e,
+				descricao:  	procResponse.produtos[oi].descricao,
+				marca:  	    a,
+				menu:  		    b,
+				submenu  :      c,
+				trimenu  :      d,
+				supermercadoId: h,
+				preco  :        j,
+				imagens:  		procResponse.produtos[oi].imagens,
+				data:  		    e,
+				userId:  		f
+			}
+
+			oi++;
+		}
+	}
+
+	return data2;
+};
+
+//=========================================================
 
 
 //error routine for all ajax calls to the back-end or MVC

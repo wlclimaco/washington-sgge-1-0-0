@@ -8,8 +8,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script language="javascript" type="text/javascript" src="niceforms.js"></script>
-<link rel="stylesheet" type="text/css" media="all" href="../thirdparty/Niceforms-master/niceforms-default.css" />
+<link rel="stylesheet" type="text/css" media="all" href="../thirdparty/jquery/Niceforms-master/niceforms-default.css" />
+<link type="text/css" href="../styles/common_grid.css" rel="stylesheet" />
+<link type="text/css" href="../styles/slick.pager.css" rel="stylesheet" />
 </head>
 <body><div id="container">
 <form action="vars.php" method="post" class="niceform">
@@ -118,6 +119,19 @@
             <dd><input type="file" name="upload" id="upload" /></dd>
         </dl>
     </fieldset>
+     <fieldset>
+     <legend>Cadastro Preços</legend>
+	    <div style="width:100%;height:100%;float:left;">
+			<div class="grid-header" style="width:100%">
+			    <span id="listpreco" style="float:left; width: 16px; height: 16px; background-image:url('../images/text_list.png')" title="List Preços"></span>
+				<sec:authorize access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
+			    <span id="refreshpreco" style="float:right" class="ui-icon ui-icon-refresh" title="Rebuild Procedures"></span>
+				</sec:authorize>
+			</div>
+			<div id="precoGrid" style="width:100%; height:95%;" class="wdgrid" ></div>
+			<div id="pager" style="width:100%; height:3%;"></div>
+		</div>
+	 </fieldset>
     <fieldset class="action">
     	<input type="submit" name="submit" id="submit" value="Submit" />
     	<input type="submit" name="submit" id="submit" value="Submit" />
@@ -126,4 +140,11 @@
 
 </div></body>
 <script type="text/javascript" src="../thirdparty/jquery/Niceforms-master/niceforms.js"></script>
+<script type="text/javascript" src="../commons/scripts/model/user_context.js"></script>
+<script type="text/javascript" src="../commons/scripts/model/request_objects.js"></script>
+<script type="text/javascript" src="../commons/scripts/model/domain_objects.js"></script>
+<script type="text/javascript" src="../commons/scripts/widget/slick.pager.js"></script>
+<jsp:include page="../../commons/scripts/util/app_reuse_functions.js.jsp" flush="true"/>
+<jsp:include page="../../scripts/pages/produto/preco_mvc_bas_main.js.jsp" flush="true"/>
+<jsp:include page="../../scripts/pages/produto/preco_mvc_bas_init.js.jsp" flush="true"/>
 </html>

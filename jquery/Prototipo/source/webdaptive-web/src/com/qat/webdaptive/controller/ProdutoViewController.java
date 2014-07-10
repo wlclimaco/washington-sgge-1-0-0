@@ -16,9 +16,11 @@ public class ProdutoViewController extends ProdutoBaseController
 {
 
 	/** The Constant PROCEDURE_MVC_BAS_RETURN. */
-	private static final String PROCEDURE_MVC_BAS_RETURN = "/produtos/produtos_mvc_bas";
+	private static final String PROCEDURE_MVC_BAS_RETURN = "/produto/produto_mvc_bas";
 
 	private static final String FOTO_MVC_BAS_RETURN = "/fotos/fotos_mvc_bas";
+
+	private static final String CADASTRO_MVC_BAS_RETURN = "/produto/cadProduto";
 
 	/** The Constant ZERO. */
 	private static final int ZERO = 0;
@@ -40,6 +42,13 @@ public class ProdutoViewController extends ProdutoBaseController
 		request.setPageSize(TWENTY);
 		request.setPreQueryCount(true);
 		return produtoMAV(request, PROCEDURE_MVC_BAS_RETURN);
+	}
+
+	@RequestMapping(value = "/cadastroProdutosByRequestBAS", method = RequestMethod.GET)
+	public ModelAndView cadastroProdutosByRequestBAS()
+	{
+		ModelAndView modelAndView = new ModelAndView(CADASTRO_MVC_BAS_RETURN);
+		return modelAndView;
 	}
 
 	@RequestMapping(value = "/fetchMarcasByRequestBAS", method = RequestMethod.GET)
