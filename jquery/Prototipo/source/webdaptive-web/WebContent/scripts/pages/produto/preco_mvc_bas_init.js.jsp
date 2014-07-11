@@ -9,7 +9,7 @@ $(document).ready(function ()
     });
 
 	//sets up initial grid ...no data yet...but binds to the object that will fill it
-	pgrid = new Slick.Grid($("#submenuGrid"), ploader.data, columns, options);
+	pgrid = new Slick.Grid($("#precoGrid"), ploader.data, columns, options);
 	pgrid.setSelectionModel(new Slick.RowSelectionModel({selectActiveRow: false}));
     pgrid.registerPlugin(checkboxSelector);
 
@@ -57,7 +57,12 @@ $(document).ready(function ()
 		}
     });
 	</sec:authorize>
+		$(".action").on("click", "#insert", function(e) {
 
+			e.preventDefault();
+			debugger;
+			ploader.callInsertWS();
+		});
 	// load the Grid first time
 	ploader.callPagedFetchWS(20,0);
 });

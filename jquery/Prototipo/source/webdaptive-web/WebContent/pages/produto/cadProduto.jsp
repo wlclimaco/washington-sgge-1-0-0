@@ -11,6 +11,16 @@
 <link rel="stylesheet" type="text/css" media="all" href="../thirdparty/jquery/Niceforms-master/niceforms-default.css" />
 <link type="text/css" href="../styles/common_grid.css" rel="stylesheet" />
 <link type="text/css" href="../styles/slick.pager.css" rel="stylesheet" />
+<style type="text/css">
+
+<!---->
+.gugu {
+
+	width:			800px!important;
+	height:			400px!important;
+    }
+
+</style>
 </head>
 <body><div id="container">
 <form action="vars.php" method="post" class="niceform">
@@ -32,15 +42,7 @@
         <dt><label for="unimed">Unidade de Medida:</label></dt>
             <dd>
             	<select size="1" name="unimed" id="unimed">
-                    <option value="Guy">Guy</option>
-                    <option value="Girl">Girl</option>
-                    <option value="Dude">Dude</option>
-                    <option value="Chic">Chic</option>
-                    <option value="Gentleman">Gentleman</option>
-                    <option value="Lady">Lady</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Don't Ask">Don't Ask</option>
+
             	</select>
             </dd>
             </dl>
@@ -51,15 +53,7 @@
            <dt><label for="marca">Marca:</label></dt>
             <dd>
             	<select size="1" name="marca" id="marca">
-                    <option value="Guy">Guy</option>
-                    <option value="Girl">Girl</option>
-                    <option value="Dude">Dude</option>
-                    <option value="Chic">Chic</option>
-                    <option value="Gentleman">Gentleman</option>
-                    <option value="Lady">Lady</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Don't Ask">Don't Ask</option>
+
             	</select>
             </dd>
            </dl>
@@ -67,15 +61,7 @@
            <dt><label for="menu">Menu:</label></dt>
             <dd>
             	<select size="1" name="menu" id="menu">
-                    <option value="Guy">Guy</option>
-                    <option value="Girl">Girl</option>
-                    <option value="Dude">Dude</option>
-                    <option value="Chic">Chic</option>
-                    <option value="Gentleman">Gentleman</option>
-                    <option value="Lady">Lady</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Don't Ask">Don't Ask</option>
+
             	</select>
             </dd>
             </dl>
@@ -83,15 +69,7 @@
             <dt><label for="submenu">Sub Menu:</label></dt>
             <dd>
             	<select size="1" name="submenu" id="submenu">
-                    <option value="Guy">Guy</option>
-                    <option value="Girl">Girl</option>
-                    <option value="Dude">Dude</option>
-                    <option value="Chic">Chic</option>
-                    <option value="Gentleman">Gentleman</option>
-                    <option value="Lady">Lady</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Don't Ask">Don't Ask</option>
+
             	</select>
             </dd>
             </dl>
@@ -99,15 +77,7 @@
             <dt><label for="trimenu">Tri Menu:</label></dt>
             <dd>
             	<select size="1" name="trimenu" id="trimenu">
-                    <option value="Guy">Guy</option>
-                    <option value="Girl">Girl</option>
-                    <option value="Dude">Dude</option>
-                    <option value="Chic">Chic</option>
-                    <option value="Gentleman">Gentleman</option>
-                    <option value="Lady">Lady</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Don't Ask">Don't Ask</option>
+
             	</select>
             </dd>
             </dl>
@@ -119,9 +89,9 @@
             <dd><input type="file" name="upload" id="upload" /></dd>
         </dl>
     </fieldset>
-     <fieldset>
+     <fieldset class="gugu">
      <legend>Cadastro Preços</legend>
-	    <div style="width:100%;height:100%;float:left;">
+	    <div style="width:800px;height:200px;float:left;">
 			<div class="grid-header" style="width:100%">
 			    <span id="listpreco" style="float:left; width: 16px; height: 16px; background-image:url('../images/text_list.png')" title="List Preços"></span>
 				<sec:authorize access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
@@ -133,7 +103,7 @@
 		</div>
 	 </fieldset>
     <fieldset class="action">
-    	<input type="submit" name="submit" id="submit" value="Submit" />
+    	<input type="submit" name="submit" id="insert" value="Insert" />
     	<input type="submit" name="submit" id="submit" value="Submit" />
     </fieldset>
 </form>

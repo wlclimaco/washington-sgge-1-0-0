@@ -37,7 +37,7 @@ function reuse_fill_data(response,data2,gridProcess)
 		else
 		{
 			//it exists zero out the old one
-			data2.length=0;
+			//data2.length=0;
 		}
 
 		//call proc or county
@@ -73,6 +73,15 @@ function reuse_fill_data(response,data2,gridProcess)
 		else if (gridProcess === "produto" )
 		{
 			data2 = produto_fill_data(response,data2);
+		}
+		else if (gridProcess === "insertproduto" )
+		{
+			data2 = insertProduto_fill_data(response,data2);
+		}
+		else if (gridProcess === "preco" )
+		{
+
+			data2 = preco_fill_data(response,data2);
 		}
 	}
 	else
@@ -377,7 +386,6 @@ function supermercado_fill_data(procResponse,data2)
 
 function cliente_fill_data(procResponse,data2)
 {
-console.log('ddd');
 	data2[0] =
 	{
 		cellno: 0,
@@ -670,6 +678,154 @@ function produto_fill_data(procResponse,data2)
 			oi++;
 		}
 	}
+
+	return data2;
+};
+
+//=========================================================
+
+
+//============================MENU=======================
+
+function insertProduto_fill_data(procResponse,data2)
+{
+
+	function fill_data(oResponse)
+	{
+	  var menu = '';
+	  var submenu = '';
+	  var trimenu = '';
+	  var marca = '';
+	  var unimed = '';
+      for (var i = 0; i < oResponse.cadastros.length; i++) {
+		if(oResponse.cadastros[i].tableTypeEnumValue == 3){
+			marca +=   '<option value="' + oResponse.cadastros[i].id + '">' + oResponse.cadastros[i].nome + '</option>';
+		}else if(oResponse.cadastros[i].tableTypeEnumValue == 4){
+			menu +=    '<option value="' + oResponse.cadastros[i].id + '">' + oResponse.cadastros[i].nome + '</option>';
+		}else if(oResponse.cadastros[i].tableTypeEnumValue == 5){
+			submenu += '<option value="' + oResponse.cadastros[i].id + '">' + oResponse.cadastros[i].nome + '</option>';
+		}else if(oResponse.cadastros[i].tableTypeEnumValue == 6){
+			trimenu += '<option value="' + oResponse.cadastros[i].id + '">' + oResponse.cadastros[i].nome + '</option>';
+		}else if(oResponse.cadastros[i].tableTypeEnumValue == 7){
+			unimed +=  '<option value="' + oResponse.cadastros[i].id + '">' + oResponse.cadastros[i].nome + '</option>';
+		}
+      }
+      $("select#marca").html(marca);
+	  $("select#menu").html(menu);
+	  $("select#submenu").html(submenu);
+	  $("select#trimenu").html(trimenu);
+	  $("select#unimed").html(unimed);
+	}
+	rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros',{cadastro:{type:0,userId:'rod'}}, fill_data, null);
+
+	data2[0] =
+	{
+		cellno: 0,
+		action: "<span>Novo>>></span>",
+		id:		0,
+		supermercadoid:	"",
+		preco:		"",
+		precopromo:  	"",
+		promocao:  		"",
+		data  :         "",
+		userId:  		""
+
+	};
+
+	//Fill paging data
+	if (procResponse.resultsSetInfo != undefined)
+	{
+	 	pagingData.pageSize =  parseInt(procResponse.resultsSetInfo.pageSize);
+	 	pagingData.startPage =  parseInt(procResponse.resultsSetInfo.startPage);
+	 	pagingData.moreRowsAvailable =  procResponse.resultsSetInfo.moreRowsAvailable;
+	 	pagingData.totalRowsAvailable =  parseInt(procResponse.resultsSetInfo.totalRowsAvailable);
+	}
+
+	//make sure return is an array
+	if (($.isArray(procResponse.produtos[0].precos))&&(procResponse.produtos[0].precos.precoid != null))
+	{
+		var oi = 0;
+		var tmpLength = procResponse.produtos[0].precos.length;
+		<sec:authorize  access="hasRole('ROLE_GUEST')">
+		for (var i=0; i < tmpLength; i++)
+		</sec:authorize>
+		{
+			if (procResponse.produtos[0].precos[oi].acessos != null){
+				var count = procResponse.produtos[0].precos[oi].acessos.length;
+				if(procResponse.produtos[0].precos[oi].acessos[count-1] != null){
+					var b =     procResponse.produtos[0].precos[oi].acessos[count-1].userId;
+					var c =     procResponse.produtos[0].precos[oi].acessos[count-1].data;
+				}else{
+					var b= "";
+					var c= "";
+				}
+			}else{
+				var b= "";
+				var c= "";
+			}
+			data2[i] =
+			{
+
+
+				cellno:     i,
+				<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
+				action: 	"<a href='#' onclick='javascript:ploader.callDeleteWS(" + procResponse.produtos[0].precos[oi].precoid +");'>Delete</a>",
+				</sec:authorize>
+				<sec:authorize ifAllGranted="ROLE_GUEST">
+				action: 'None',
+				</sec:authorize>
+				id:				procResponse.produtos[0].precos[oi].precoid,
+				supermercadoid:	procResponse.produtos[0].precos[oi].supermercadoid,
+				preco:			procResponse.produtos[0].precos[oi].preco,
+				precopromo:  	procResponse.produtos[0].precos[oi].precopromo,
+				promocao:  		procResponse.produtos[0].precos[oi].promocao,
+				data  :         c,
+				userId:  		b
+			}
+
+			oi++;
+		}
+	}
+
+	return data2;
+};
+
+//=========================================================
+
+//============================PRECO=======================
+
+function preco_fill_data(procResponse,data2)
+{
+
+	var tmpLength = procResponse.length;
+
+	data2[tmpLength] =
+	{
+		cellno:     tmpLength,
+		<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
+		action: 	"<a href='#' onclick='javascript:ploader.callDeleteWS(" + procResponse.id +");'>Delete</a>",
+		</sec:authorize>
+		<sec:authorize ifAllGranted="ROLE_GUEST">
+		action: 'None',
+		</sec:authorize>
+		id:				procResponse[0].id,
+		supermercadoid:	procResponse[0].supermercadoid,
+		preco:			parseFloat(procResponse[0].preco),
+		precopromo:  	parseFloat(procResponse[0].precopromo),
+		promocao:  		procResponse[0].promocao,
+	};
+
+	data2[0] =
+	{
+		cellno: 0,
+		action: "<span>Novo>>></span>",
+		pid: 1,
+		id:				0,
+		supermercadoid:	0,
+		preco:			0.00,
+		precopromo:  	0.00,
+		promocao:  		true
+	};
 
 	return data2;
 };
