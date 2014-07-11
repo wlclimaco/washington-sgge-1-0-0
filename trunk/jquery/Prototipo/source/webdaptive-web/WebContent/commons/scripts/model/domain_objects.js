@@ -18,17 +18,17 @@
 		this.price = _procPrice;
 	};
 
-	qat.model.produto = function(_Id, _supermercadoid, _codBarra, _marca,_menu, _submenu,_trimenu, _unimed,_nome, _descricao,_foto, _precos,_imagens)
+	qat.model.produto = function(_Id, _supermercadoid, _codBarra, _marca,_menu, _submenu,_trimenu, _unimed,_nome, _descricao,_foto,_precos, _imagens)
 	{
 	    var userContext = new qat.base.model.userContext();
 		this.id = _Id;
 		this.supermercadoid = _supermercadoid;
 		this.codBarra = _codBarra;
-		this.marca = _marca;
-		this.menu = _menu;
-		this.submenu = _submenu;
-		this.trimenu = _trimenu;
-		this.unimed = _unimed;
+		this.marca = {id:parseInt(_marca),userId:'rod'};
+		this.menu = {id:parseInt(_menu),userId:'rod'};
+		this.submenu = {id:parseInt(_submenu),userId:'rod'};
+		this.trimenu = {id:parseInt(_trimenu),userId:'rod'};
+		this.unimed = {id:parseInt(_unimed),userId:'rod'};
 		this.nome = _nome;
 		this.descricao = _descricao;
 		this.foto = _foto;
@@ -54,35 +54,35 @@
 		this.userRole = userContext.userRole;
 	};
 
-	qat.model.preco = function(_precoid, _idProduto, _supermercadoid, _type,_preco, _promocao, _dateIni, _dateFim)
+	qat.model.preco = function(_precoid, _idProduto, _supermercadoid, _type,_preco, _promocao,_precopromo, _dateIni, _dateFim)
 	{
 	    var userContext = new qat.base.model.userContext();
 		this.precoid = _precoid;
 		this.idProduto = _idProduto;
-		this.supermercadoid = _supermercadoid;
-		this.type = _type;
+		this.supermercadoid = new qat.model.supermercado(parseInt(_supermercadoid),null, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
 		this.preco = _preco;
 		this.precopromo = _precopromo;
-		this.promocao = _promocao;
-		this.dateIni = _dateIni;
-		this.dateFim = _dateFim;
+		if(_promocao == "true")
+			this.promocao = true
+		else
+			this.promocao = false;
+
 		this.userId = userContext.userId;
-		this.id = userContext.id;
 		this.tenant = userContext.tenant;
 		this.userRole = userContext.userRole;
 	};
 
 	qat.model.cadastro = function(_Id, _type, _nome, _descricao)
 	{
-	//console.log()
+
 	    var userContext = new qat.base.model.userContext();
 		this.id = _Id;
 		this.type = _type;
 		this.nome = _nome;
 		this.descricao = _descricao;
 		this.userId = userContext.userId;
-	//	this.tenant = userContext.tenant;
-	//	this.userRole = userContext.userRole;
+		this.tenant = userContext.tenant;
+		this.userRole = userContext.userRole;
 	};
 
 	qat.model.cidade = function(_Id,_cidade, _estado)

@@ -12,11 +12,11 @@ var viewLoadedObject;
 
 //loads object if being served via controller
 <c:choose>
-    <c:when test="${empty cadastroResponse}">
+    <c:when test="${empty precoResponse}">
 			viewLoadedObject = null;
     </c:when>
     <c:otherwise>
-			viewLoadedObject = ${cadastroResponse};
+			viewLoadedObject = ${precoResponse};
     </c:otherwise>
 </c:choose>
 console.log(viewLoadedObject);
@@ -31,18 +31,17 @@ var columns=[];
 			return ""
 	}
 
-
-    columns.push(checkboxSelector.getColumnDefinition());
-//columns & column settings for the grid
-columns[1] = {id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:"cell-center", width:30};
-columns[2] = {id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
-columns[3] = {id:"id", name: procedure.grid.psak.title, field:"id", resizable:false, cssClass:"cell-center", width:75};
-columns[4] = {id:"nome", name:submenu.grid.pmenu.title, field:"nome",  width:135, editable:true, cssClass:"pad-4-left", sortable:true, editor:Slick.Editors.Auto},
-columns[5] = {id:"descricao", name: submenu.grid.psubmenu.title, field:"descricao", editor:Slick.Editors.Text};
-columns[6] = {id:"imagens", name: menu.grid.pimagens.title, field:"imagens", formatter: buttonFormat};
-columns[7] = {id:"produtos", name: menu.grid.pprodutos.title, field:"produtos", formatter: buttonFormat};
-columns[8] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
-columns[9] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
+	//columns & column settings for the grid
+	columns.push(checkboxSelector.getColumnDefinition());
+	columns[1] = {id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:"cell-center", width:30};
+	columns[2] = {id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
+	columns[3] = {id:"id", name: procedure.grid.psak.title, field:"id", resizable:false, cssClass:"cell-center", width:75};
+	columns[4] = {id:"supermercadoid", name:preco.grid.supermercadoid.title, field:"supermercadoid",  width:135, editable:true, cssClass:"pad-4-left", sortable:true,editor:Slick.Editors.Text},
+	columns[5] = {id:"preco", name: preco.grid.preco.title, field:"preco", editor:Slick.Editors.Text};
+	columns[6] = {id:"promocao", name: preco.grid.promocao.title, field:"promocao" ,editor:Slick.Editors.Text};
+	columns[7] = {id:"precopromo", name: preco.grid.precopromo.title, field:"precopromo",editor:Slick.Editors.Text};
+	columns[8] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
+	columns[9] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
 
 //];
 
@@ -69,13 +68,12 @@ var options =
 		<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
 		function callInsertWS()
 		{
+			debugger;
 			onProcDataLoading.notify({});
-		   // var oData = new qat.model.reqCadastro(null, new qat.model.procedure(0,0,data[0].pcode,data[0].pdesc,0.0),true,true);qat.model.cadastro = function(_Id, _type, _nome, _descricao,_controlAcess)
-			var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(1,4,data[0].nome,data[0].descricao,null),true,true);
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/insertCadastro', oData, fill_data, process_error);
-			var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(null,3),true,true);
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {cadastro:{type:4,userId:'rod'}}, fill_data, process_error);
-
+			var oData = callCreateObject();
+			var oData = new qat.model.reqProduto(null, oData, true, true);
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/insertProduto', oData, fill_data, process_error);
+			debugger;
 		}
 
 		function callUpdateWS()
@@ -124,24 +122,41 @@ var options =
 
 		function callPagedFetchWS(_iPageSize, _iStartPage)
 		{
-		    onProcDataLoading.notify({});
-		    //if viewLOaddedObject filled by controller don't make a ajax call
-			if (viewLoadedObject == null)
-			{
-			    var oData = new qat.model.pagedInquiryRequest(null, _iPageSize, _iStartPage, true);
-				//rest_post_call('qat-webdaptive/cadastro/api/fetchByRequestBAS', oData, fill_data, process_error);
-				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {}, fill_data, process_error);
+		    var oData = new qat.model.pagedInquiryRequest(null, _iPageSize, _iStartPage, true);
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchProdutoById', {fetchId:1}, fill_data, process_error);
+
+		}
+		function callCreateObject(_id)
+		{
+			var tmpLength = data.length;
+			var oDataPreco =[];
+			for (var i=1; i < tmpLength; i++){
+				oDataPreco.push(new qat.model.preco(data[i].id, null, data[i].supermercadoid, null,data[i].preco, data[i].promocao,data[i].precopromo, null, null));
 			}
-			else
-			{
-				fill_data(viewLoadedObject);
-				viewLoadedObject = null;
-			}
+			return new qat.model.produto(_id,
+									 null,
+									 $('#codbarra').val(),
+									 $('#marca').val(),
+									 $('#menu').val(),
+									 $('#submenu').val(),
+									 $('#trimenu').val(),
+									 $('#unimed').val(),
+									 $('#nomeProd').val(),
+									 $('#descr').val(),
+									 null,
+									 oDataPreco,
+									 null);
 		}
 
 		function fill_data(procResponse)
 		{
-			data = reuse_fill_data(procResponse,data,"menu");
+			data = reuse_fill_data(procResponse,data,"insertproduto");
+			onProcDataLoaded.notify({});
+		}
+		function fill_data2(datas)
+		{
+			data = datas;
+			console.log(data);
 			onProcDataLoaded.notify({});
 		}
 
@@ -168,9 +183,15 @@ var options =
 			"isProcDataLoaded": isProcDataLoaded,
 			"callPagedFetchWS": callPagedFetchWS,
 			<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
+
+			"fill_data2"  : fill_data2,
 			"callDeleteWS": callDeleteWS,
 			"callInsertWS": callInsertWS,
 			"callUpdateWS": callUpdateWS,
+	//		"callDeletePC": callDeletePC,
+	//		"callInsertPC": callInsertPC,
+	//		"callUpdatePC": callUpdatePC,
+	//		"callPagedFetchPC": callPagedFetchPC,
 			"callRefreshWS": callRefreshWS,
 			</sec:authorize>
 			// events
@@ -218,7 +239,7 @@ function validateFields(rowValue)
 };
 
 <sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
-$('#submenuGrid').keyup(function(e)
+$('#precoGrid').keyup(function(e)
 {
 	if (e.keyCode == 13)
 	{
@@ -230,7 +251,10 @@ $('#submenuGrid').keyup(function(e)
 		{
 		//	if (validateFields(0))
 		//	{
-				ploader.callInsertWS();
+				var data3 = data;
+				data.operationSuccess = true;
+				ploader.fill_data2(reuse_fill_data(data,data3,"preco"));
+				//console.log(data);
 		//	}
 		}
 	}

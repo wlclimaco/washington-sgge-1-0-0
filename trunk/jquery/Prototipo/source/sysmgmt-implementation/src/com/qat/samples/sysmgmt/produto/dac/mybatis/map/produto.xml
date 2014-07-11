@@ -205,7 +205,7 @@
 		SELECT <include refid="allCadastroColumns" />
    		  FROM Cadastro
 		<where>
-			<if test="tableTypeEnumValue != null">acao = #{tableTypeEnumValue}</if>
+			<if test="tableTypeEnumValue != 1">acao = #{tableTypeEnumValue}</if>
 			<if test="descricao != null">and descricao = #{descricao}</if>
 			<if test="nome != null">AND nome = #{nome}</if>
 

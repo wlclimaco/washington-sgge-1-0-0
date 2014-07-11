@@ -24,6 +24,7 @@ import com.qat.samples.sysmgmt.produto.bac.IProdutoBAC;
 import com.qat.samples.sysmgmt.produto.bai.IProdutoBAI;
 import com.qat.samples.sysmgmt.produto.model.Cadastro;
 import com.qat.samples.sysmgmt.produto.model.Produto;
+import com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.response.ProdutoResponse;
 
@@ -493,14 +494,14 @@ public class ProdutoBAIImplTest extends AbstractJUnit4SpringContextTests
 		}
 
 		@Override
-		public InternalResultsResponse<Cadastro> fetchAllCadastros()
+		public InternalResultsResponse<Cadastro> fetchAllCadastros(CadastroInquiryRequest)
 		{
 			// TODO Auto-generated method stub
 			return null;
 		}
 
 		@Override
-		public InternalResultsResponse<Cadastro> fetchCadastrosByRequest(PagedInquiryRequest request)
+		public InternalResultsResponse<Cadastro> fetchCadastrosByRequest(CadastroInquiryRequest request)
 		{
 			// TODO Auto-generated method stub
 			return null;

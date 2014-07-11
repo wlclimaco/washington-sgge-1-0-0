@@ -160,3 +160,19 @@
 		this.returnList = _bList;
 		this.returnListPaged = _bPagedList;
 	};
+
+	//CountyMaintenanceRequest Object
+	qat.model.reqProduto = function(_oUC, _oProduto, _bList, _bPagedList)
+	{
+		if (_oUC == null)
+		{
+			this.userContext = new qat.base.model.userContext();
+		}
+		else
+		{
+			this.userContext = _oUC;
+		}
+		this.produto         = _oProduto;
+		this.returnList      = _bList;
+		this.returnListPaged = _bPagedList;
+	};

@@ -25,23 +25,46 @@ public class ProdutoValidator implements IValidator
 	@Override
 	public void validate(ValidationContext validationContext)
 	{
-		Cadastro bundle = (Cadastro)validationContext.getObjectToBeValidated(Produto.class.getSimpleName());
-
-		switch (validationContext.getValidationContextIndicator())
+		if (!ValidationUtil.isNull(validationContext.getObjectToBeValidated(Produto.class.getSimpleName())))
 		{
-			case DELETE:
-				validateProcId(validationContext.getMessages(), bundle);
-				break;
-			case UPDATE:
-				validateProcId(validationContext.getMessages(), bundle);
-				validateProcCode(validationContext.getMessages(), bundle);
-				validateProcDesc(validationContext.getMessages(), bundle);
-				break;
-			default:
-				validateProcCode(validationContext.getMessages(), bundle);
-				validateProcDesc(validationContext.getMessages(), bundle);
-				break;
+			Cadastro bundle = (Cadastro)validationContext.getObjectToBeValidated(Produto.class.getSimpleName());
+			switch (validationContext.getValidationContextIndicator())
+			{
+				case DELETE:
+					validateProcId(validationContext.getMessages(), bundle);
+					break;
+				case UPDATE:
+					validateProcId(validationContext.getMessages(), bundle);
+					validateProcCode(validationContext.getMessages(), bundle);
+					validateProcDesc(validationContext.getMessages(), bundle);
+					break;
+				default:
+					validateProcCode(validationContext.getMessages(), bundle);
+					validateProcDesc(validationContext.getMessages(), bundle);
+					break;
+			}
 		}
+		else
+		{
+			Produto bundle = (Produto)validationContext.getObjectToBeValidated(Produto.class.getSimpleName());
+
+			switch (validationContext.getValidationContextIndicator())
+			{
+				case DELETE:
+					validateProdId(validationContext.getMessages(), bundle);
+					break;
+				case UPDATE:
+					validateProdId(validationContext.getMessages(), bundle);
+					validateProdNome(validationContext.getMessages(), bundle);
+					validateProdSup(validationContext.getMessages(), bundle);
+					break;
+				default:
+					validateProdId(validationContext.getMessages(), bundle);
+					validateProdNome(validationContext.getMessages(), bundle);
+					break;
+			}
+		}
+
 	}
 
 	private void validateProcId(List<MessageInfo> list, Cadastro bundle)
@@ -57,6 +80,24 @@ public class ProdutoValidator implements IValidator
 	private void validateProcDesc(List<MessageInfo> list, Cadastro bundle)
 	{
 		ValidationUtil.isNullOrEmpty(bundle.getDescricao(), SYSMGMT_BASE_BUNDLEVALIDATOR_PROCDESC_REQUIRED,
+				list);
+	}
+
+	// ===========
+	private void validateProdId(List<MessageInfo> list, Produto bundle)
+	{
+		ValidationUtil.isNullOrZero(bundle.getId(), SYSMGMT_BASE_BUNDLEVALIDATOR_ID_REQUIRED, list);
+	}
+
+	private void validateProdNome(List<MessageInfo> list, Produto bundle)
+	{
+		ValidationUtil.isNullOrEmpty(bundle.getNome(), SYSMGMT_BASE_BUNDLEVALIDATOR_PROCCODE_REQUIRED, list);
+	}
+
+	private void validateProdSup(List<MessageInfo> list, Produto bundle)
+	{
+		ValidationUtil.isNullOrZero(bundle.getSupermercadoid().getSuperId(),
+				SYSMGMT_BASE_BUNDLEVALIDATOR_PROCDESC_REQUIRED,
 				list);
 	}
 }
