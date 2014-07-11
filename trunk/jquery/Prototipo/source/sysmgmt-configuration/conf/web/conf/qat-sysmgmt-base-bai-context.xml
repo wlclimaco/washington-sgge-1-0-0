@@ -42,7 +42,6 @@
 	<bean id="produtoBAI" class="com.qat.samples.sysmgmt.produto.bai.impl.ProdutoBAIImpl">
 		<property name="produtoBAC" ref="produtoBACTarget"/>
 		<property name="validationController" ref="produtoValidationController"/>
-		<property name="validationControllerCadastro" ref="cadastroValidationController"/>
 	</bean>
 
 	<bean id="clienteBAI" class="com.qat.samples.sysmgmt.cliente.bai.impl.ClienteBAIImpl">
