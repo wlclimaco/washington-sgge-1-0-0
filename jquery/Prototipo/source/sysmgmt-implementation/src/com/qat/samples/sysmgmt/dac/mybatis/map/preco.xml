@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PrecoMap">
+
+
+  <!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+   <resultMap id="PrecoResult" type="Tabelapreco">
+    <result property="precoid" column="precoid"/>
+    <result property="idProduto" column="produtoid"/>
+    <result property="preco" column="preco"/>
+    <result property="dataCreate" column="data"/>
+    <result property="precopromo" column="precopromo"/>
+    <result property="promocao" column="promocao"/>
+    <result property="dateIni" column="dataini"/>
+    <result property="dateFim" column="datafin"/>
+    <association property="supermercadoid" column="supermercadoid" javaType="Supermercado" select="SupermercadoMap.fetchSupermercadoById" />
+    <collection property="acessos" column="precoid" select="ControleAcessMap.fetchControleAcessByAcao" />
+  </resultMap>
+
+  <sql id="allPrecoColumns">
+		precoid, produtoid, data,supermercadoid,  preco, precopromo, promocao, dataini, datafin
+  </sql>
+
+  <sql id="allPrecoColumnsWithQualifier">
+  		p.precoid, p.produtoid,p.data, p.supermercadoid,  p.preco, p.precopromo, p.promocao, p.dataini, p.datafin
+  </sql>
+
+
+  <select id="fetchAllPrecos" resultMap="PrecoResult">
+    SELECT
+    <include refid="allPrecoColumns" />
+    FROM TABPRECO ORDER BY DATA DESC
+  </select>
+
+   <select id="fetchPrecoByProduto" parameterType="int" resultMap="PrecoResult">
+	    SELECT
+	    <include refid="allPrecoColumns" />
+	    FROM tabpreco where precoid = #{id}  ORDER BY DATA DESC
+    </select>
+
+  <select id="fetchAllPrecosPagedBatch" resultMap="PrecoResult">
+  	<if test="_databaseId == 'Oracle'">
+		SELECT * FROM (
+		SELECT * FROM (
+		SELECT <include refid="allPrecoColumnsWithQualifier" />,
+		ROWNUM ROWNUM_ FROM TABPRECO p ORDER BY DATA DESC
+		) WHERE ROWNUM_ <![CDATA[ > ]]>
+		( #{_page} * #{_pagesize} )
+		) WHERE ROWNUM <![CDATA[ <= ]]>
+		#{_pagesize}mo
+    </if>
+
+   	 <if test="_databaseId == 'PostgreSQL'">
+		SELECT <include refid="allPrecoColumns" />
+   		  FROM TABPRECO ORDER BY DATA DESC
+		  OFFSET ( #{_page} * #{_pagesize} )
+		  LIMIT #{_pagesize}
+    </if>
+  </select>
+
+  <select id="fetchPrecoRowCount" resultType="Integer">
+      <if test="_databaseId == 'PostgreSQL'">
+			SELECT COUNT(*) AS RECORD_COUNT FROM TABPRECO WHERE BUNDLE_ID IS NOT NULL
+      </if>
+
+   	  <if test="_databaseId == 'Oracle'">
+		 	SELECT COUNT(BUNDLE_ID) AS RECORD_COUNT FROM TABPRECO
+      </if>
+  </select>
+
+  <select id="fetchAllPrecosRequest" parameterType="PagedInquiryRequest" resultMap="PrecoResult">
+  	<if test="_databaseId == 'Oracle'">
+		SELECT * FROM (
+		SELECT * FROM (
+		SELECT <include refid="allPrecoColumnsWithQualifier" />,
+		ROWNUM ROWNUM_ FROM TABPRECO p ORDER BY DATA DESC
+		) WHERE ROWNUM_ <![CDATA[ > ]]>
+		( #{startPage} * #{pageSize} )
+		) WHERE ROWNUM <![CDATA[ <= ]]>
+		#{pageSize}
+    </if>
+
+   	 <if test="_databaseId == 'PostgreSQL'">
+		SELECT <include refid="allPrecoColumns" />
+   		  FROM TABPRECO ORDER BY DATA DESC
+		  OFFSET ( #{startPage} * #{pageSize} )
+		  LIMIT #{pageSize}
+    </if>
+  </select>
+
+  <select id="fetchPrecoById" parameterType="Integer" resultMap="PrecoResult">
+    SELECT
+   <include refid="allPrecoColumns" />
+    FROM TABPRECO WHERE BUNDLE_ID = #{fetchid}
+  </select>
+
+  <select id="fetchVersionNumber" parameterType="Tabelapreco" resultType="int">
+	SELECT VERSN_LOCK_NUM FROM TABPRECO WHERE BUNDLE_ID = #{id}
+  </select>
+
+  <select id="insertPreco" parameterType="tabelapreco" resultType="int" statementType="CALLABLE">
+        { call ins_preco( #{produtoid} , #{codbarra} , #{nome} , #{marca} , #{menu} , #{submenu} , #{trimenu} , #{unimed} , #{precoid} , #{controleid} , #{foto} , #{supermercadoid} , #{preco}, #{usuarioid} ) }
+  </select>
+
+    <select id="updatePreco" parameterType="tabelapreco" resultType="int" statementType="CALLABLE">
+        { call ins_preco( #{produtoid} , #{codbarra} , #{nome} , #{marca} , #{menu} , #{submenu} , #{trimenu} , #{unimed} , #{precoid} , #{controleid} , #{foto} , #{supermercadoid} , #{preco}, #{usuarioid} ) }
+  </select>
+
+
+  <delete id="deletePrecoById" parameterType="Tabelapreco">
+    DELETE FROM TABPRECO WHERE PRECOID = #{id}
+  </delete>
+
+  <delete id="deleteAllPrecos">
+	DELETE FROM TABPRECO
+  </delete>
+</mapper>

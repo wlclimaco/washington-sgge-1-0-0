@@ -21,10 +21,8 @@
     <association property="supermercadoid" column="supermercadoid" javaType="Supermercado" select="SupermercadoMap.fetchSupermercadoById" />
     <association property="marca" column="marca" javaType="Cadastro" select="fetchMarcaByCode" />
     <association property="menu" column="menu" javaType="Cadastro" select="fetchMenuByCode" />
-    <association property="submenu" column="submenu" javaType="Cadastro" select="fetchSubMenuByCode" />
-    <association property="trimenu" column="trimenu" javaType="Cadastro" select="fetchTriMenuByCode" />
     <association property="unimed" column="unimed" javaType="Cadastro" select="fetchUniMedByCode" />
-    <collection property="precos" column="produtoid" select="fetchPrecoByProduto" />
+    <collection property="precos" column="produtoid" select="PrecoMap.fetchPrecoByProduto" />
     <collection property="acessos" column="produtoid" select="ControleAcessMap.fetchControleAcessByProduto" />
   </resultMap>
 
@@ -38,23 +36,9 @@
     <collection property="produtos" column="cadastroid" select="fetchProdutosByMarca" />
   </resultMap>
 
-  <resultMap id="PrecoResult" type="Tabelapreco">
-    <result property="precoid" column="precoid"/>
-    <result property="idProduto" column="produtoid"/>
-    <result property="preco" column="preco"/>
-    <result property="precopromo" column="precopromo"/>
-    <result property="promocao" column="promocao"/>
-    <result property="dateIni" column="dataini"/>
-    <result property="dateFim" column="datafin"/>
-    <association property="supermercadoid" column="supermercadoid" javaType="Supermercado" select="SupermercadoMap.fetchSupermercadoById" />
-    <collection property="acessos" column="precoid" select="ControleAcessMap.fetchControleAcessByAcao" />
-  </resultMap>
 
 
 
-  <sql id="allPrecoColumns">
-		precoid, produtoid, supermercadoid,  preco, precopromo, promocao, dataini, datafin
-  </sql>
 
   <sql id="allCadastroColumns">
 		cadastroid, acao, nome,descricao
@@ -72,14 +56,6 @@
 		p.PRODUTOID, p.CODBARRA, p.NOME, p.MARCA, p.MENU, p.SUBMENU, p.TRIMENU, p.UNIMED,
             p.PRECOID, p.CONTROLEID, p.FOTO, p.SUPERMERCADOID
   </sql>
-
-
-
-     <select id="fetchPrecoByProduto" parameterType="int" resultMap="PrecoResult">
-	    SELECT
-	    <include refid="allPrecoColumns" />
-	    FROM tabpreco where precoid = #{id}  ORDER BY data ASC
-    </select>
 
     <select id="fetchMarcaByCode" parameterType="int" resultMap="CadastroResult">
 	    SELECT
@@ -232,9 +208,7 @@
   </select>
 
   <select id="insertProduto" parameterType="Produto" resultType="int" statementType="CALLABLE">
-        { call ins_produto( #{produtoid} , #{codbarra} , #{nome} , #{marca} , #{menu} , #{submenu} , #{trimenu} , #{unimed} , #{precoid} , #{controleid} , #{foto} , #{supermercadoid} , #{preco}, #{usuarioid} ) }
-
-
+        { call ins_produto( #{produtoid} , #{codbarra} , #{nome} , #{marca} , #{menu}, #{unimed} , #{foto} , #{supermercadoid} ,  #{usuarioid} ) }
   </select>
 
   <select id="updateCadastro" parameterType="Cadastro" resultType="int" statementType="CALLABLE">

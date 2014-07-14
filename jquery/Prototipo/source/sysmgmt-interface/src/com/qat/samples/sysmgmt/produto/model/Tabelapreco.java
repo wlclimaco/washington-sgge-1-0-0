@@ -12,7 +12,7 @@ import com.qat.samples.sysmgmt.util.Util;
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "Tabelapreco", propOrder = {"precoid", "idProduto", "supermercadoid", "type", "preco",
+@XmlType(name = "Tabelapreco", propOrder = {"precoid", "idProduto", "supermercadoid", "preco", "dataCreate",
 		"precopromo", "promocao", "dateIni", "dateFim"})
 public class Tabelapreco extends Util
 {
@@ -23,11 +23,10 @@ public class Tabelapreco extends Util
 
 	private Supermercado supermercadoid;
 
-	/** The code. */
-	private PrecoTypeEnum type;
-
 	/** The description. */
 	private Double preco;
+
+	private Date dataCreate;
 
 	private Double precopromo;
 
@@ -54,7 +53,6 @@ public class Tabelapreco extends Util
 		this.precoid = precoid;
 		this.idProduto = idProduto;
 		this.supermercadoid = supermercadoid;
-		this.type = type;
 		this.preco = preco;
 		this.precopromo = precopromo;
 		this.promocao = promocao;
@@ -68,7 +66,6 @@ public class Tabelapreco extends Util
 		this.precoid = precoid;
 		this.idProduto = idProduto;
 		this.supermercadoid = supermercadoid;
-		this.type = type;
 		this.preco = preco;
 	}
 
@@ -100,16 +97,6 @@ public class Tabelapreco extends Util
 	public void setSupermercadoid(Supermercado supermercadoid)
 	{
 		this.supermercadoid = supermercadoid;
-	}
-
-	public PrecoTypeEnum getType()
-	{
-		return type;
-	}
-
-	public void setType(PrecoTypeEnum type)
-	{
-		this.type = type;
 	}
 
 	public Double getPreco()
@@ -162,14 +149,24 @@ public class Tabelapreco extends Util
 		this.dateFim = dateFim;
 	}
 
+	public Date getDataCreate()
+	{
+		return dataCreate;
+	}
+
+	public void setDataCreate(Date dataCreate)
+	{
+		this.dataCreate = dataCreate;
+	}
+
 	@Override
 	public String toString()
 	{
 		return "Tabelapreco [getPrecoid()=" + getPrecoid() + ", getIdProduto()=" + getIdProduto()
-				+ ", getSupermercadoid()=" + getSupermercadoid() + ", getType()="
-				+ getType() + ", getPreco()=" + getPreco() + ", getPrecopromo()=" + getPrecopromo()
-				+ ", getPromocao()=" + getPromocao() + ", getDateIni()=" + getDateIni() + ", getDateFim()="
-				+ getDateFim() + ", toString()=" + super.toString() + "]";
+				+ ", getSupermercadoid()=" + getSupermercadoid() + ", getPreco()="
+				+ getPreco() + ", getPrecopromo()=" + getPrecopromo() + ", getPromocao()=" + getPromocao()
+				+ ", getDateIni()=" + getDateIni() + ", getDateFim()=" + getDateFim() + ", getDataCreate()="
+				+ getDataCreate() + ", toString()=" + super.toString() + "]";
 	}
 
 }
