@@ -589,11 +589,11 @@ function produto_fill_data(procResponse,data2)
 	//make sure return is an array
 	if ($.isArray(procResponse.produtos))
 	{
+
 		var oi = 0;
 		var tmpLength = procResponse.produtos.length;
-		<sec:authorize  access="hasRole('ROLE_GUEST')">
+		console.log(tmpLength);
 		for (var i=0; i < tmpLength; i++)
-		</sec:authorize>
 		{
 			if(procResponse.produtos[oi].marca != null){
 				var a =		procResponse.produtos[oi].marca[0].nome;

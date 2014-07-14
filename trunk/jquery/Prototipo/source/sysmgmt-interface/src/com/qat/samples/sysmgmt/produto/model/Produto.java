@@ -12,8 +12,7 @@ import com.qat.samples.sysmgmt.util.Util;
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "Produto", propOrder = {"id", "codBarra", "marca", "menu", "submenu", "unimed",
-		"trimenu",
+@XmlType(name = "Produto", propOrder = {"id", "codBarra", "marca", "menu", "unimed",
 		"nome",
 		"descricao",
 		"foto",
@@ -33,12 +32,6 @@ public class Produto extends Util
 
 	/** The menu. */
 	private Cadastro menu;
-
-	/** The submenu. */
-	private Cadastro submenu;
-
-	/** The trimenu. */
-	private Cadastro trimenu;
 
 	/** The unimed. */
 	private Cadastro unimed;
@@ -88,8 +81,6 @@ public class Produto extends Util
 		this.codBarra = codBarra;
 		this.marca = marca;
 		this.menu = menu;
-		this.submenu = submenu;
-		this.trimenu = trimenu;
 		this.unimed = unimed;
 		this.nome = nome;
 		this.descricao = descricao;
@@ -117,8 +108,6 @@ public class Produto extends Util
 		this.codBarra = codBarra;
 		this.marca = marca;
 		this.menu = menu;
-		this.submenu = submenu;
-		this.trimenu = trimenu;
 		this.unimed = unimed;
 		this.precos = precos;
 	}
@@ -148,8 +137,6 @@ public class Produto extends Util
 		this.codBarra = codBarra;
 		this.marca = marca;
 		this.menu = menu;
-		this.submenu = submenu;
-		this.trimenu = trimenu;
 		this.unimed = unimed;
 		this.nome = nome;
 		this.descricao = descricao;
@@ -241,46 +228,6 @@ public class Produto extends Util
 	public void setMenu(Cadastro menu)
 	{
 		this.menu = menu;
-	}
-
-	/**
-	 * Gets the submenu.
-	 * 
-	 * @return the submenu
-	 */
-	public Cadastro getSubmenu()
-	{
-		return submenu;
-	}
-
-	/**
-	 * Sets the submenu.
-	 * 
-	 * @param submenu the new submenu
-	 */
-	public void setSubmenu(Cadastro submenu)
-	{
-		this.submenu = submenu;
-	}
-
-	/**
-	 * Gets the trimenu.
-	 * 
-	 * @return the trimenu
-	 */
-	public Cadastro getTrimenu()
-	{
-		return trimenu;
-	}
-
-	/**
-	 * Sets the trimenu.
-	 * 
-	 * @param trimenu the new trimenu
-	 */
-	public void setTrimenu(Cadastro trimenu)
-	{
-		this.trimenu = trimenu;
 	}
 
 	/**
@@ -396,11 +343,10 @@ public class Produto extends Util
 	@Override
 	public String toString()
 	{
-		return "Produto [getId()=" + getId() + ", getCodBarra()="
-				+ getCodBarra() + ", getMarca()=" + getMarca() + ", getMenu()=" + getMenu() + ", getSubmenu()="
-				+ getSubmenu() + ", getTrimenu()=" + getTrimenu() + ", getUnimed()=" + getUnimed() + ", getNome()="
-				+ getNome() + ", getDescricao()=" + getDescricao() + ", getFoto()=" + getFoto() + ", getPrecos()="
-				+ getPrecos() + ", getImagens()=" + getImagens() + ", toString()=" + super.toString() + "]";
+		return "Produto [getId()=" + getId() + ", getCodBarra()=" + getCodBarra() + ", getMarca()=" + getMarca()
+				+ ", getMenu()=" + getMenu() + ", getUnimed()=" + getUnimed() + ", getNome()=" + getNome()
+				+ ", getDescricao()=" + getDescricao() + ", getFoto()=" + getFoto() + ", getPrecos()=" + getPrecos()
+				+ ", getImagens()=" + getImagens() + ", toString()=" + super.toString() + "]";
 	}
 
 }

@@ -25,13 +25,9 @@ var columns=[];
       cssClass: "slick-cell-checkboxsel"
     });
 	var buttonFormat = function (row, cell, value, columnDef, dataContext) {
-		console.log(row);
-		console.log(cell);
-		console.log(value);
-		if(row > 0)
-			return "<input type='button' value='Editar' class='btn ' />"
-		else
-			return ""
+
+		return "<input type='button' value='Editar' class='btn "+value+"' />"
+
 	}
 
 

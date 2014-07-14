@@ -98,13 +98,10 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 		paramMap.put("nome", produto.getNome());
 		paramMap.put("marca", produto.getMarca().getId());
 		paramMap.put("menu", produto.getMenu().getId());
-		paramMap.put("submenu", produto.getSubmenu().getId());
-		paramMap.put("trimenu", produto.getTrimenu().getId());
 		paramMap.put("unimed", produto.getUnimed().getId());
 		paramMap.put("precoid", 1);
 		paramMap.put("controleid", 1);
 		paramMap.put("foto", produto.getFoto());
-		paramMap.put("supermercadoid", produto.getSupermercadoid().getSuperId());
 		paramMap.put("preco", new Double(2.2));
 		paramMap.put("usuarioid", produto.getUserId());
 		InternalResponse response = new InternalResponse();
@@ -129,13 +126,10 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 		paramMap.put("nome", produto.getNome());
 		paramMap.put("marca", produto.getMarca().getId());
 		paramMap.put("menu", produto.getMenu().getId());
-		paramMap.put("submenu", produto.getSubmenu().getId());
-		paramMap.put("trimenu", produto.getTrimenu().getId());
 		paramMap.put("unimed", produto.getUnimed().getId());
 		paramMap.put("precoid", 1);
 		paramMap.put("controleid", 1);
 		paramMap.put("foto", produto.getFoto());
-		paramMap.put("supermercadoid", produto.getSupermercadoid().getSuperId());
 		paramMap.put("preco", new Double(2.2));
 		paramMap.put("usuarioid", produto.getUserId());
 
