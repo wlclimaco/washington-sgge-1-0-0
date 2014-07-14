@@ -60,43 +60,39 @@ public final class ProdutoBAID
 			ValidationController controller,
 			PersistanceActionEnum persistType, ProdutoMaintenanceRequest request, ProdutoResponse response)
 	{
-		ValidationContext context =
-				new ValidationContext(Produto.class.getSimpleName(), request.getProduto(), validationIndicator);
 
 		InternalResponse internalResponse = new InternalResponse();
-		if (controller.validate(context))
-		{
-			// perform persistence
-			switch (persistType)
-			{
-				case INSERT:
-					internalResponse = produtoBAC.insertProduto(request.getProduto());
-					break;
-				case UPDATE:
-					internalResponse = produtoBAC.updateProduto(request.getProduto());
-					break;
-				case DELETE:
-					internalResponse = produtoBAC.deleteProduto(request.getProduto());
-					break;
-				default:
-					if (LOG.isDebugEnabled())
-					{
-						LOG.debug("persistType missing! Setting Unspecified Error status.");
-					}
-					internalResponse.setStatus(InternalResponse.Status.UnspecifiedError);
-					break;
-			}
 
-			// If the persistence worked
-			if (internalResponse.getStatus() == Status.OperationSuccess)
-			{
-				// Call maintain to see if we need to return the county list and if so whether it should be paged or not
-				maintainReturnList(request.getReturnList(), request.getReturnListPaged(), response, produtoBAC, null);
-			}
+		// perform persistence
+		switch (persistType)
+		{
+			case INSERT:
+				internalResponse = produtoBAC.insertProduto(request.getProduto());
+				break;
+			case UPDATE:
+				internalResponse = produtoBAC.updateProduto(request.getProduto());
+				break;
+			case DELETE:
+				internalResponse = produtoBAC.deleteProduto(request.getProduto());
+				break;
+			default:
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("persistType missing! Setting Unspecified Error status.");
+				}
+				internalResponse.setStatus(InternalResponse.Status.UnspecifiedError);
+				break;
+		}
+
+		// If the persistence worked
+		if (internalResponse.getStatus() == Status.OperationSuccess)
+		{
+			// Call maintain to see if we need to return the county list and if so whether it should be paged or not
+			maintainReturnList(request.getReturnList(), request.getReturnListPaged(), response, produtoBAC, null);
 		}
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, context.getMessages(), false);
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, null, false);
 	}
 
 	public static void maintainCadastro(IProdutoBAC produtoBAC, ValidationContextIndicator validationIndicator,

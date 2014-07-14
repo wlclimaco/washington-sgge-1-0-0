@@ -96,7 +96,7 @@ public class ProdutoValidator implements IValidator
 
 	private void validateProdSup(List<MessageInfo> list, Produto bundle)
 	{
-		ValidationUtil.isNullOrZero(bundle.getSupermercadoid().getSuperId(),
+		ValidationUtil.isNullOrZero(bundle.getPrecos().get(0).getIdProduto(),
 				SYSMGMT_BASE_BUNDLEVALIDATOR_PROCDESC_REQUIRED,
 				list);
 	}
