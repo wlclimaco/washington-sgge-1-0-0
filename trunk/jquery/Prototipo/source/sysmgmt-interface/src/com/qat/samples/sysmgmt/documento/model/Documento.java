@@ -11,8 +11,7 @@ import com.qat.samples.sysmgmt.util.Util;
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "Documento", propOrder = {"documentoid", "id", "rgInc", "cpfCnpj",
-		"nome", "razao", "tabela", "dateNascimento"})
+@XmlType(name = "Documento", propOrder = {"documentoid", "id", "rgInc", "cpfCnpj", "razao", "tabela", "dateNascimento"})
 public class Documento extends Util
 {
 

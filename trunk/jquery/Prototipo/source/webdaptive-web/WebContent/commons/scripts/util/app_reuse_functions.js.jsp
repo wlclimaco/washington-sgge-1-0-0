@@ -568,8 +568,6 @@ function produto_fill_data(procResponse,data2)
 		descricao:  	"",
 		marca:  	    "",
 		menu:  		    "",
-		submenu  :      "",
-		trimenu  :      "",
 		supermercadoId: "",
 		preco  :        "",
 		imagens:  		"",
@@ -592,7 +590,7 @@ function produto_fill_data(procResponse,data2)
 
 		var oi = 0;
 		var tmpLength = procResponse.produtos.length;
-		console.log(tmpLength);
+
 		for (var i=0; i < tmpLength; i++)
 		{
 			if(procResponse.produtos[oi].marca != null){
@@ -666,8 +664,6 @@ function produto_fill_data(procResponse,data2)
 				descricao:  	procResponse.produtos[oi].descricao,
 				marca:  	    a,
 				menu:  		    b,
-				submenu  :      c,
-				trimenu  :      d,
 				supermercadoId: h,
 				preco  :        j,
 				imagens:  		procResponse.produtos[oi].imagens,

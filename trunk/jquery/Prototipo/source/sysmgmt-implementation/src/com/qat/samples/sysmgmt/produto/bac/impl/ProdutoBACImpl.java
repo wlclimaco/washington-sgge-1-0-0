@@ -4,8 +4,10 @@ import com.qat.framework.model.Message;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResponse.Status;
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.dac.IPrecoDAC;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
+import com.qat.samples.sysmgmt.model.response.InternalResponseLocal;
 import com.qat.samples.sysmgmt.produto.bac.IProdutoBAC;
 import com.qat.samples.sysmgmt.produto.dac.IProdutoDAC;
 import com.qat.samples.sysmgmt.produto.model.Cadastro;
@@ -36,6 +38,8 @@ public class ProdutoBACImpl implements IProdutoBAC
 	/** The produto dac. */
 	private IProdutoDAC produtoDAC; // injected by Spring through setter
 
+	private IPrecoDAC precoDAC; // injected by Spring through setter
+
 	/**
 	 * Spring Sets the produto dac.
 	 * 
@@ -56,6 +60,16 @@ public class ProdutoBACImpl implements IProdutoBAC
 		return produtoDAC;
 	}
 
+	public IPrecoDAC getPrecoDAC()
+	{
+		return precoDAC;
+	}
+
+	public void setPrecoDAC(IPrecoDAC precoDAC)
+	{
+		this.precoDAC = precoDAC;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see
@@ -65,7 +79,18 @@ public class ProdutoBACImpl implements IProdutoBAC
 	public InternalResponse insertProduto(Produto produto)
 	{
 		// produto.setPrice(ProdutoBAD.calculatePrice(INSERT_SEED));
-		return getProdutoDAC().insertProduto(produto);
+		InternalResponseLocal internalResponse = (InternalResponseLocal)getProdutoDAC().insertProduto(produto);
+		if (internalResponse.getStatus() != Status.OperationSuccess)
+		{
+
+			for (Integer i = 0; i < produto.getPrecos().size(); i++)
+			{
+				produto.getPrecos().get(i).setIdProduto(internalResponse.getId());
+				internalResponse = (InternalResponseLocal)getPrecoDAC().insertPreco(produto.getPrecos().get(i));
+			}
+		}
+
+		return internalResponse;
 	}
 
 	/*

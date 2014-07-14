@@ -12,6 +12,7 @@ import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.samples.sysmgmt.dacd.mybatis.PagedResultsDACD;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
+import com.qat.samples.sysmgmt.model.response.InternalResponseLocal;
 import com.qat.samples.sysmgmt.produto.dac.IProdutoDAC;
 import com.qat.samples.sysmgmt.produto.model.Cadastro;
 import com.qat.samples.sysmgmt.produto.model.Produto;
@@ -89,26 +90,14 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	 * com.qat.samples.sysmgmt.base.dac.IProdutoDAC#insertProduto(com.qat.samples.sysmgmt.base.model.Produto)
 	 */
 	@Override
-	public InternalResponse insertProduto(Produto produto)
+	public InternalResponseLocal insertProduto(Produto produto)
 	{
 
-		HashMap<String, Object> paramMap = new HashMap<String, Object>(14);
-		paramMap.put("produtoid", produto.getId());
-		paramMap.put("codbarra", produto.getCodBarra());
-		paramMap.put("nome", produto.getNome());
-		paramMap.put("marca", produto.getMarca().getId());
-		paramMap.put("menu", produto.getMenu().getId());
-		paramMap.put("unimed", produto.getUnimed().getId());
-		paramMap.put("precoid", 1);
-		paramMap.put("controleid", 1);
-		paramMap.put("foto", produto.getFoto());
-		paramMap.put("preco", new Double(2.2));
-		paramMap.put("usuarioid", produto.getUserId());
-		InternalResponse response = new InternalResponse();
-		// integer, character varying, character varying, integer, integer, integer, integer, integer, integer, integer,
-		// character varying, integer, double precision, integer
-		Integer academiaId =
-				(Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), STMT_INSERT, paramMap);
+		InternalResponseLocal response = new InternalResponseLocal();
+
+		response.setId(
+				(Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), STMT_INSERT, produto));
+		response.setStatus(Status.OperationSuccess);
 		return response;
 	}
 
