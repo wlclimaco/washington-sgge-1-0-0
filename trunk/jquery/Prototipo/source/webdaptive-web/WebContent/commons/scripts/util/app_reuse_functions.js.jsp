@@ -685,7 +685,7 @@ function produto_fill_data(procResponse,data2)
 
 function insertProduto_fill_data(procResponse,data2)
 {
-
+debugger;
 	function fill_data(oResponse)
 	{
 
@@ -721,7 +721,7 @@ function insertProduto_fill_data(procResponse,data2)
 
 	};
 
-	if($.isArray(procResponse)){
+	if(procResponse != null){
 		var codbarra = procResponse.produtos[0].codBarra ,
 			nomeProd = procResponse.produtos[0].nome,
 			descr    = procResponse.produtos[0].descricao,
