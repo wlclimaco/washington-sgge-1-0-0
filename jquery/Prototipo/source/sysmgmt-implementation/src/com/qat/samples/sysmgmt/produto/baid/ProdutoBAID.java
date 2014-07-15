@@ -84,13 +84,6 @@ public final class ProdutoBAID
 				break;
 		}
 
-		// If the persistence worked
-		if (internalResponse.getStatus() == Status.OperationSuccess)
-		{
-			// Call maintain to see if we need to return the county list and if so whether it should be paged or not
-			maintainReturnList(request.getReturnList(), request.getReturnListPaged(), response, produtoBAC, null);
-		}
-
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
 		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, null, false);
 	}

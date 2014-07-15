@@ -206,16 +206,17 @@
 
   </select>
 
-  <select id="insertProduto" parameterType="Produto" resultType="int" statementType="CALLABLE">
-        { call ins_produto( #{produtoid} , #{codbarra} , #{nome} , #{marca} , #{menu}, #{unimed} , #{foto} , #{supermercadoid} ,  #{usuarioid} ) }
+  <select id="insertProduto" parameterType="HashMap" resultType="int" statementType="CALLABLE">
+        { call ins_produto( #{produtoid} , #{codbarra} , #{nome} , #{marca} , #{menu}, #{unimed} , #{foto} ,#{supermercadoId} ,  #{usuarioid} ) }
   </select>
+
 
   <select id="updateCadastro" parameterType="Cadastro" resultType="int" statementType="CALLABLE">
      { call upd_cadastro(  #{id},#{descricao}, #{nome},#{tableTypeEnumValue},#{userId} ) }
   </select>
 
   <select id="updateProduto" parameterType="Produto" resultType="int" statementType="CALLABLE">
-        { call upd_produto( #{produtoid} , #{codbarra} , #{nome} , #{marca} , #{menu} , #{submenu} , #{trimenu} , #{unimed} , #{precoid} , #{controleid} , #{foto} , #{supermercadoid} , #{preco}, #{usuarioid} ) }
+
 
   </select>
 

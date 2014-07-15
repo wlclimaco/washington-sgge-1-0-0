@@ -15,7 +15,7 @@
     <result property="controleid" column="controleid"/>
     <result property="data" jdbcType="DATE" column="data"/>
     <result property="tenantId" column="tenantid"/>
-     <result property="userId" column="usuarioid"/>
+    <result property="userId" column="usuarioid"/>
     <result property="acaoTypeValue" column="acao"/>
     <result property="acaoId" column="idAcao"/>
     <result property="tableTypeValue" column="tableType"/>
@@ -36,7 +36,9 @@
     <select id="fetchAllControleByCliente" resultMap="ControleAcessResult">
    		 SELECT <include refid="allControleAcessColumns" /> FROM CONTROLE WHERE tabletype = 8 AND IDACAO = #{ID}
    </select>
-
+ <select id="fetchControleAcessByPreco" resultMap="ControleAcessResult">
+   		 SELECT <include refid="allControleAcessColumns" /> FROM CONTROLE WHERE tabletype = 12 AND IDACAO = #{ID}
+   </select>
   <select id="fetchAllControleAcesss" resultMap="ControleAcessResult">
     SELECT
     <include refid="allControleAcessColumns" />

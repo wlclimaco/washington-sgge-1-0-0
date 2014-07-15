@@ -79,18 +79,19 @@ public class ProdutoBACImpl implements IProdutoBAC
 	public InternalResponse insertProduto(Produto produto)
 	{
 		// produto.setPrice(ProdutoBAD.calculatePrice(INSERT_SEED));
+		InternalResponse response = new InternalResponse();
 		InternalResponseLocal internalResponse = (InternalResponseLocal)getProdutoDAC().insertProduto(produto);
-		if (internalResponse.getStatus() != Status.OperationSuccess)
+		if (internalResponse.getStatus() == Status.OperationSuccess)
 		{
 
 			for (Integer i = 0; i < produto.getPrecos().size(); i++)
 			{
 				produto.getPrecos().get(i).setIdProduto(internalResponse.getId());
-				internalResponse = (InternalResponseLocal)getPrecoDAC().insertPreco(produto.getPrecos().get(i));
+				response = getPrecoDAC().insertPreco(produto.getPrecos().get(i));
 			}
 		}
 
-		return internalResponse;
+		return response;
 	}
 
 	/*

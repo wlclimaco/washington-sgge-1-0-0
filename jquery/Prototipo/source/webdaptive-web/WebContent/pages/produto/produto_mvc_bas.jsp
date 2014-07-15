@@ -12,6 +12,7 @@
 <link type="text/css" href="../styles/slick.pager.css" rel="stylesheet" />
 </head>
 <body>
+	<input type="button" name="button" id="insertButon" value="Inserir Novo Produto" />
 	<div style="width:100%;height:100%;float:left;">
 		<div class="grid-header" style="width:100%">
 		    <span id="listprod" style="float:left; width: 16px; height: 16px; background-image:url('../images/text_list.png')" title="List Procedures"></span>

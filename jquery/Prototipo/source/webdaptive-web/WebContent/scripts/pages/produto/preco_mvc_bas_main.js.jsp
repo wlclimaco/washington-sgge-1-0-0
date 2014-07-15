@@ -68,12 +68,14 @@ var options =
 		<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
 		function callInsertWS()
 		{
-			debugger;
+
 			onProcDataLoading.notify({});
 			var oData = callCreateObject();
 			var oData = new qat.model.reqProduto(null, oData, true, true);
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/insertProduto', oData, fill_data, process_error);
-			debugger;
+			if($('#codId').val() != null)
+				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/insertProduto', oData, fill_data, process_error);
+			else
+				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/updateCadastro', oData, fill_data, process_error);
 		}
 
 		function callUpdateWS()
@@ -120,10 +122,14 @@ var options =
 		}
 		</sec:authorize>
 
-		function callPagedFetchWS(_iPageSize, _iStartPage)
+		function callPagedFetchWS(_iPageSize, _iStartPage,iId)
 		{
 		    var oData = new qat.model.pagedInquiryRequest(null, _iPageSize, _iStartPage, true);
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchProdutoById', {fetchId:1}, fill_data, process_error);
+			if(iId > 0)
+				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchProdutoById', {fetchId:iId}, fill_data, process_error)
+			else{
+				insertProduto_fill_data(null,data);
+			}
 
 		}
 		function callCreateObject(_id)

@@ -19,6 +19,7 @@
 	width:			800px!important;
 	height:			400px!important;
     }
+.hide{display:none;}
 
 </style>
 </head>
@@ -29,6 +30,7 @@
         <dl>
         	<dt><label for="codbarra">Codigo de Barra:</label></dt>
             <dd><input type="text" name="codbarra" id="codbarra" size="32" maxlength="60" /></dd>
+			<dd><input type="text" name="codId" id="codId" size="32" maxlength="60" class="hide" /></dd>
         </dl>
         <dl>
         	<dt><label for="nomeProd">Nome Produro:</label></dt>
@@ -46,6 +48,9 @@
             	</select>
             </dd>
             </dl>
+			<br>
+			<br>
+			<br>
     </fieldset>
     <fieldset>
     	<legend>Configuração Sistema</legend>
@@ -65,22 +70,9 @@
             	</select>
             </dd>
             </dl>
-            <dl>
-            <dt><label for="submenu">Sub Menu:</label></dt>
-            <dd>
-            	<select size="1" name="submenu" id="submenu">
-
-            	</select>
-            </dd>
-            </dl>
-            <dl>
-            <dt><label for="trimenu">Tri Menu:</label></dt>
-            <dd>
-            	<select size="1" name="trimenu" id="trimenu">
-
-            	</select>
-            </dd>
-            </dl>
+			<br>
+			<br>
+			<br>
     </fieldset>
      <fieldset>
     	<legend>Imagens</legend>
@@ -88,6 +80,9 @@
         	<dt><label for="upload">Upload a File:</label></dt>
             <dd><input type="file" name="upload" id="upload" /></dd>
         </dl>
+		<br>
+			<br>
+			<br>
     </fieldset>
      <fieldset class="gugu">
      <legend>Cadastro Preços</legend>
@@ -104,7 +99,7 @@
 	 </fieldset>
     <fieldset class="action">
     	<input type="submit" name="submit" id="insert" value="Insert" />
-    	<input type="submit" name="submit" id="submit" value="Submit" />
+    	<input type="submit" name="submit" id="cancel" value="Cancel" />
     </fieldset>
 </form>
 
