@@ -14,20 +14,28 @@ $(document).ready(function ()
     pgrid.registerPlugin(checkboxSelector);
 	pgrid.onClick.subscribe(function (e, args) {
         if ($(e.target).hasClass("btn")) {
-
-            openDialog("item");
+			var classs = $(e.target).attr('class');
+			var a = classs.split(' ');
+            openDialog(a[1]);
         }
         e.stopImmediatePropagation();
     });
 
 	var openDialog = function(row){
-		var dom = "<div>" + row.toString() + "</div>";
+		var dom = "<div class='id'>" + row.toString() + "</div>";
 
 		$(dom).load('../produto/cadastroProdutosByRequestBAS?id=1').dialog({height: 800,
             width: 800,
             modal: true});
+			$.address.value('?prodId='+row+'&type=edit');
 	};
 
+	insertButon
+	$("#qatmvctabsProd").on("click", "#insertButon", function(e) {
+
+		e.preventDefault();
+		openDialog(0);
+	});
 
     var columnpicker = new Slick.Controls.ColumnPicker(columns, pgrid, options);
 	gridPager = new Slick.Controls.Pager(ploader, $("#pager"));

@@ -15,13 +15,13 @@
     <result property="precoid" column="precoid"/>
     <result property="idProduto" column="produtoid"/>
     <result property="preco" column="preco"/>
-    <result property="dataCreate" column="data"/>
+    <result property="dataCreate" jdbcType="DATE" column="data"/>
     <result property="precopromo" column="precopromo"/>
     <result property="promocao" column="promocao"/>
-    <result property="dateIni" column="dataini"/>
-    <result property="dateFim" column="datafin"/>
+    <result property="dateIni" jdbcType="DATE" column="dataini"/>
+    <result property="dateFim" jdbcType="DATE" column="datafin"/>
     <association property="supermercadoid" column="supermercadoid" javaType="Supermercado" select="SupermercadoMap.fetchSupermercadoById" />
-    <collection property="acessos" column="precoid" select="ControleAcessMap.fetchControleAcessByAcao" />
+    <collection property="acessos" column="precoid" select="ControleAcessMap.fetchControleAcessByPreco" />
   </resultMap>
 
   <sql id="allPrecoColumns">
@@ -106,11 +106,11 @@
   </select>
 
   <select id="insertPreco" parameterType="tabelapreco" resultType="int" statementType="CALLABLE">
-        { call ins_preco( #{produtoid} , #{codbarra} , #{nome} , #{marca} , #{menu} , #{submenu} , #{trimenu} , #{unimed} , #{precoid} , #{controleid} , #{foto} , #{supermercadoid} , #{preco}, #{usuarioid} ) }
+        { call ins_preco( #{idProduto} , #{supermercadoid.superId} , null , #{preco} , #{precopromo} , #{promocao} ,null , null, #{userId} ) }
   </select>
 
     <select id="updatePreco" parameterType="tabelapreco" resultType="int" statementType="CALLABLE">
-        { call ins_preco( #{produtoid} , #{codbarra} , #{nome} , #{marca} , #{menu} , #{submenu} , #{trimenu} , #{unimed} , #{precoid} , #{controleid} , #{foto} , #{supermercadoid} , #{preco}, #{usuarioid} ) }
+        { call ins_preco( #{produtoid} , #{p_supermercadoid} , #{nome} , #{marca} , #{menu} , #{submenu} , #{trimenu} , #{unimed} , #{precoid} , #{controleid} , #{foto} , #{supermercadoid} , #{preco}, #{usuarioid} ) }
   </select>
 
 

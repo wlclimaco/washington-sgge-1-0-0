@@ -95,8 +95,19 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 
 		InternalResponseLocal response = new InternalResponseLocal();
 
+		HashMap<String, Object> paramMap = new HashMap<String, Object>(14);
+		paramMap.put("produtoid", produto.getId());
+		paramMap.put("codbarra", produto.getCodBarra());
+		paramMap.put("nome", produto.getNome());
+		paramMap.put("marca", produto.getMarca().getId());
+		paramMap.put("menu", produto.getMenu().getId());
+		paramMap.put("unimed", produto.getUnimed().getId());
+		paramMap.put("supermercadoId", 0);
+		paramMap.put("foto", produto.getFoto());
+		paramMap.put("usuarioid", produto.getUserId());
+
 		response.setId(
-				(Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), STMT_INSERT, produto));
+				(Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), STMT_INSERT, paramMap));
 		response.setStatus(Status.OperationSuccess);
 		return response;
 	}

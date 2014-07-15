@@ -688,28 +688,21 @@ function insertProduto_fill_data(procResponse,data2)
 
 	function fill_data(oResponse)
 	{
+
 	  var menu = '';
-	  var submenu = '';
-	  var trimenu = '';
 	  var marca = '';
 	  var unimed = '';
       for (var i = 0; i < oResponse.cadastros.length; i++) {
 		if(oResponse.cadastros[i].tableTypeEnumValue == 3){
-			marca +=   '<option value="' + oResponse.cadastros[i].id + '">' + oResponse.cadastros[i].nome + '</option>';
-		}else if(oResponse.cadastros[i].tableTypeEnumValue == 4){
-			menu +=    '<option value="' + oResponse.cadastros[i].id + '">' + oResponse.cadastros[i].nome + '</option>';
-		}else if(oResponse.cadastros[i].tableTypeEnumValue == 5){
-			submenu += '<option value="' + oResponse.cadastros[i].id + '">' + oResponse.cadastros[i].nome + '</option>';
-		}else if(oResponse.cadastros[i].tableTypeEnumValue == 6){
-			trimenu += '<option value="' + oResponse.cadastros[i].id + '">' + oResponse.cadastros[i].nome + '</option>';
+			marca  +=   '<option value="' + oResponse.cadastros[i].id + '">' + oResponse.cadastros[i].nome + '</option>';
+		}else if((oResponse.cadastros[i].tableTypeEnumValue == 4)||(oResponse.cadastros[i].tableTypeEnumValue == 5)||(oResponse.cadastros[i].tableTypeEnumValue == 6)){
+			menu   +=    '<option value="' + oResponse.cadastros[i].id + '">' + oResponse.cadastros[i].nome + '</option>';
 		}else if(oResponse.cadastros[i].tableTypeEnumValue == 7){
 			unimed +=  '<option value="' + oResponse.cadastros[i].id + '">' + oResponse.cadastros[i].nome + '</option>';
 		}
       }
       $("select#marca").html(marca);
 	  $("select#menu").html(menu);
-	  $("select#submenu").html(submenu);
-	  $("select#trimenu").html(trimenu);
 	  $("select#unimed").html(unimed);
 	}
 	rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros',{cadastro:{type:0,userId:'rod'}}, fill_data, null);
@@ -728,61 +721,73 @@ function insertProduto_fill_data(procResponse,data2)
 
 	};
 
-	//Fill paging data
-	if (procResponse.resultsSetInfo != undefined)
-	{
-	 	pagingData.pageSize =  parseInt(procResponse.resultsSetInfo.pageSize);
-	 	pagingData.startPage =  parseInt(procResponse.resultsSetInfo.startPage);
-	 	pagingData.moreRowsAvailable =  procResponse.resultsSetInfo.moreRowsAvailable;
-	 	pagingData.totalRowsAvailable =  parseInt(procResponse.resultsSetInfo.totalRowsAvailable);
-	}
+	if($.isArray(procResponse)){
+		var codbarra = procResponse.produtos[0].codBarra ,
+			nomeProd = procResponse.produtos[0].nome,
+			descr    = procResponse.produtos[0].descricao,
+			foto    = procResponse.produtos[0].foto;
 
-	//make sure return is an array
-	if (($.isArray(procResponse.produtos[0].precos))&&(procResponse.produtos[0].precos.precoid != null))
-	{
-		var oi = 0;
-		var tmpLength = procResponse.produtos[0].precos.length;
-		<sec:authorize  access="hasRole('ROLE_GUEST')">
-		for (var i=0; i < tmpLength; i++)
-		</sec:authorize>
+		$('#codbarra').val(codbarra);
+		$('#nomeProd').val(nomeProd);
+		$('#descr').val(descr);
+		$('#foto').val(foto);
+		$('#codId').val(procResponse.produtos[0].id);
+
+
+
+		//Fill paging data
+		if (procResponse.resultsSetInfo != undefined)
 		{
-			if (procResponse.produtos[0].precos[oi].acessos != null){
-				var count = procResponse.produtos[0].precos[oi].acessos.length;
-				if(procResponse.produtos[0].precos[oi].acessos[count-1] != null){
-					var b =     procResponse.produtos[0].precos[oi].acessos[count-1].userId;
-					var c =     procResponse.produtos[0].precos[oi].acessos[count-1].data;
+			pagingData.pageSize =  parseInt(procResponse.resultsSetInfo.pageSize);
+			pagingData.startPage =  parseInt(procResponse.resultsSetInfo.startPage);
+			pagingData.moreRowsAvailable =  procResponse.resultsSetInfo.moreRowsAvailable;
+			pagingData.totalRowsAvailable =  parseInt(procResponse.resultsSetInfo.totalRowsAvailable);
+		}
+
+		//make sure return is an array
+		if (($.isArray(procResponse.produtos[0].precos))&&(procResponse.produtos[0].precos[0].precoid != null))
+		{
+			var oi = 0;
+			var tmpLength = procResponse.produtos[0].precos.length;
+			for (var i=1; i <= tmpLength; i++)
+			{
+				if (procResponse.produtos[0].precos[oi].acessos != null){
+					var count = procResponse.produtos[0].precos[oi].acessos.length;
+					if(procResponse.produtos[0].precos[oi].acessos[count-1] != null){
+						var b =     procResponse.produtos[0].precos[oi].acessos[count-1].userId;
+						var c =     procResponse.produtos[0].precos[oi].acessos[count-1].data;
+					}else{
+						var b= "";
+						var c= "";
+					}
 				}else{
 					var b= "";
 					var c= "";
 				}
-			}else{
-				var b= "";
-				var c= "";
+				data2[i] =
+				{
+
+
+					cellno:     i,
+					<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
+					action: 	"<a href='#' onclick='javascript:ploader.callDeleteWS(" + procResponse.produtos[0].precos[oi].precoid +");'>Delete</a>",
+					</sec:authorize>
+					<sec:authorize ifAllGranted="ROLE_GUEST">
+					action: 'None',
+					</sec:authorize>
+					id:				procResponse.produtos[0].precos[oi].precoid,
+					supermercadoid:	procResponse.produtos[0].precos[oi].supermercadoid,
+					preco:			procResponse.produtos[0].precos[oi].preco,
+					precopromo:  	procResponse.produtos[0].precos[oi].precopromo,
+					promocao:  		procResponse.produtos[0].precos[oi].promocao,
+					data  :         c,
+					userId:  		b
+				}
+
+				oi++;
 			}
-			data2[i] =
-			{
-
-
-				cellno:     i,
-				<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
-				action: 	"<a href='#' onclick='javascript:ploader.callDeleteWS(" + procResponse.produtos[0].precos[oi].precoid +");'>Delete</a>",
-				</sec:authorize>
-				<sec:authorize ifAllGranted="ROLE_GUEST">
-				action: 'None',
-				</sec:authorize>
-				id:				procResponse.produtos[0].precos[oi].precoid,
-				supermercadoid:	procResponse.produtos[0].precos[oi].supermercadoid,
-				preco:			procResponse.produtos[0].precos[oi].preco,
-				precopromo:  	procResponse.produtos[0].precos[oi].precopromo,
-				promocao:  		procResponse.produtos[0].precos[oi].promocao,
-				data  :         c,
-				userId:  		b
-			}
-
-			oi++;
 		}
 	}
-
 	return data2;
 };
 

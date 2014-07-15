@@ -22,12 +22,9 @@
 	{
 	    var userContext = new qat.base.model.userContext();
 		this.id = _Id;
-		this.supermercadoid = _supermercadoid;
 		this.codBarra = _codBarra;
 		this.marca = {id:parseInt(_marca),userId:'rod'};
 		this.menu = {id:parseInt(_menu),userId:'rod'};
-		this.submenu = {id:parseInt(_submenu),userId:'rod'};
-		this.trimenu = {id:parseInt(_trimenu),userId:'rod'};
 		this.unimed = {id:parseInt(_unimed),userId:'rod'};
 		this.nome = _nome;
 		this.descricao = _descricao;
@@ -35,7 +32,6 @@
 		this.precos = _precos;
 		this.imagens = _imagens;
 		this.userId = userContext.userId;
-		this.id = userContext.id;
 		this.tenant = userContext.tenant;
 		this.userRole = userContext.userRole;
 	};
@@ -59,13 +55,14 @@
 	    var userContext = new qat.base.model.userContext();
 		this.precoid = _precoid;
 		this.idProduto = _idProduto;
+		this.dataCreate = null;
 		this.supermercadoid = new qat.model.supermercado(parseInt(_supermercadoid),null, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
-		this.preco = _preco;
-		this.precopromo = _precopromo;
+		this.preco = parseFloat(_preco);
+		this.precopromo =  parseFloat(_precopromo);
 		if(_promocao == "true")
-			this.promocao = true
+			this.promocao = 1
 		else
-			this.promocao = false;
+			this.promocao = 2;
 
 		this.userId = userContext.userId;
 		this.tenant = userContext.tenant;
@@ -121,7 +118,6 @@
 		this.id = _id ;
 		this.rgInc = _rgInc ;
 		this.cpfCnpj = _cpfCnpj ;
-		this.nome = _nome ;
 		this.razao = _razao ;
 		this.tabela = _tabela ;
 		this.dateNascimento = _dateNascimento ;

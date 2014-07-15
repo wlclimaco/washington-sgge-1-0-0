@@ -60,10 +60,10 @@ $(document).ready(function ()
 		$(".action").on("click", "#insert", function(e) {
 
 			e.preventDefault();
-			debugger;
 			ploader.callInsertWS();
 		});
 	// load the Grid first time
-	ploader.callPagedFetchWS(20,0);
+	tabval = ($.address.parameter('prodId'));
+	ploader.callPagedFetchWS(20,0,tabval);
 });
 </script>

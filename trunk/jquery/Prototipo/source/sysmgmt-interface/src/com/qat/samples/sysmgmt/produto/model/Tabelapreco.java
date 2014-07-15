@@ -1,9 +1,8 @@
 package com.qat.samples.sysmgmt.produto.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.crypto.Data;
 
 import com.qat.samples.sysmgmt.supermercado.model.Supermercado;
 import com.qat.samples.sysmgmt.util.Util;
@@ -30,7 +29,7 @@ public class Tabelapreco extends Util
 
 	private Double precopromo;
 
-	private Boolean promocao;
+	private Integer promocao;
 
 	/** The date ini. */
 	private Date dateIni;
@@ -44,20 +43,6 @@ public class Tabelapreco extends Util
 	public Tabelapreco()
 	{
 
-	}
-
-	public Tabelapreco(Integer precoid, Integer idProduto, Supermercado supermercadoid, Data data, PrecoTypeEnum type,
-			Double preco, Double precopromo, Boolean promocao, Date dateIni, Date dateFim)
-	{
-		super();
-		this.precoid = precoid;
-		this.idProduto = idProduto;
-		this.supermercadoid = supermercadoid;
-		this.preco = preco;
-		this.precopromo = precopromo;
-		this.promocao = promocao;
-		this.dateIni = dateIni;
-		this.dateFim = dateFim;
 	}
 
 	public Tabelapreco(Integer precoid, Integer idProduto, Supermercado supermercadoid, PrecoTypeEnum type, Double preco)
@@ -119,12 +104,12 @@ public class Tabelapreco extends Util
 		this.precopromo = precopromo;
 	}
 
-	public Boolean getPromocao()
+	public Integer getPromocao()
 	{
 		return promocao;
 	}
 
-	public void setPromocao(Boolean promocao)
+	public void setPromocao(Integer promocao)
 	{
 		this.promocao = promocao;
 	}
@@ -163,10 +148,10 @@ public class Tabelapreco extends Util
 	public String toString()
 	{
 		return "Tabelapreco [getPrecoid()=" + getPrecoid() + ", getIdProduto()=" + getIdProduto()
-				+ ", getSupermercadoid()=" + getSupermercadoid() + ", getPreco()="
-				+ getPreco() + ", getPrecopromo()=" + getPrecopromo() + ", getPromocao()=" + getPromocao()
-				+ ", getDateIni()=" + getDateIni() + ", getDateFim()=" + getDateFim() + ", getDataCreate()="
-				+ getDataCreate() + ", toString()=" + super.toString() + "]";
+				+ ", getSupermercadoid()=" + getSupermercadoid() + ", getPreco()=" + getPreco() + ", getPrecopromo()="
+				+ getPrecopromo() + ", getPromocao()=" + getPromocao() + ", getDateIni()=" + getDateIni()
+				+ ", getDateFim()=" + getDateFim() + ", getDataCreate()=" + getDataCreate() + ", toString()="
+				+ super.toString() + "]";
 	}
 
 }
