@@ -594,27 +594,17 @@ function produto_fill_data(procResponse,data2)
 		for (var i=0; i < tmpLength; i++)
 		{
 			if(procResponse.produtos[oi].marca != null){
-				var a =		procResponse.produtos[oi].marca[0].nome;
+				var a =		procResponse.produtos[oi].marca.nome;
 			}else{
 				a= 0;
 			}
 			if(procResponse.produtos[oi].menu != null){
-				var b =		procResponse.produtos[oi].marca[0].menu;
+				var b =		procResponse.produtos[oi].menu.nome;
 			}else{
 				b= 0;
 			}
-			if(procResponse.produtos[oi].submenu != null){
-				var c =		procResponse.produtos[oi].marca[0].submenu;
-			}else{
-				c= 0;
-			}
-			if(procResponse.produtos[oi].trimenu != null){
-				var d =		procResponse.produtos[oi].marca[0].trimenu;
-			}else{
-				d= 0;
-			}
 			if(procResponse.produtos[oi].unimed != null){
-				var e =		procResponse.produtos[oi].marca[0].unimed;
+				var e =		procResponse.produtos[oi].unimed.nome;
 			}else{
 				e= 0;
 			}
