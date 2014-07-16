@@ -23,14 +23,13 @@ $(document).ready(function ()
 
 	var openDialog = function(row){
 		var dom = "<div class='id'>" + row.toString() + "</div>";
-
+		$('.ui-dialog').empty();
 		$(dom).load('../produto/cadastroProdutosByRequestBAS?id=1').dialog({height: 800,
             width: 800,
             modal: true});
 			$.address.value('?prodId='+row+'&type=edit');
 	};
 
-	insertButon
 	$("#qatmvctabsProd").on("click", "#insertButon", function(e) {
 
 		e.preventDefault();

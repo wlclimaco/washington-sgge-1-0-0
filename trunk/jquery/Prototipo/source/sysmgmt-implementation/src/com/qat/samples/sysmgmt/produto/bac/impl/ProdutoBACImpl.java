@@ -12,6 +12,7 @@ import com.qat.samples.sysmgmt.produto.bac.IProdutoBAC;
 import com.qat.samples.sysmgmt.produto.dac.IProdutoDAC;
 import com.qat.samples.sysmgmt.produto.model.Cadastro;
 import com.qat.samples.sysmgmt.produto.model.Produto;
+import com.qat.samples.sysmgmt.produto.model.Tabelapreco;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest;
 
 /**
@@ -104,6 +105,34 @@ public class ProdutoBACImpl implements IProdutoBAC
 	{
 		// produto.setPrice(ProdutoBAD.calculatePrice(UPDATE_SEED));
 		InternalResponse internalResponse = getProdutoDAC().updateProduto(produto);
+		FetchByIdRequest fetchByIdRequest = new FetchByIdRequest();
+		Tabelapreco preco = new Tabelapreco();
+		if (internalResponse.getStatus() == Status.OperationSuccess)
+		{
+
+			for (Integer i = 0; i < produto.getPrecos().size(); i++)
+			{
+				if (produto.getPrecos().get(i).getPrecoid() != 0)
+				{
+					fetchByIdRequest.setFetchId(produto.getPrecos().get(i).getPrecoid());
+					preco = getPrecoDAC().fetchPrecoById(fetchByIdRequest);
+					if ((preco.getPreco() == produto.getPrecos().get(i).getPreco())
+							&& (preco.getPrecopromo() == produto.getPrecos().get(i).getPrecopromo()))
+					{
+						internalResponse = getPrecoDAC().updatePreco(produto.getPrecos().get(i));
+					}
+					else
+					{
+						internalResponse = getPrecoDAC().insertPreco(produto.getPrecos().get(i));
+					}
+				}
+				else
+				{
+					internalResponse = getPrecoDAC().insertPreco(produto.getPrecos().get(i));
+				}
+			}
+		}
+
 		// Check for error because in business case all non-success returns are failures (updating of zero rows or
 		// optimistic locking error) according to the business
 		if (internalResponse.getStatus() != Status.OperationSuccess)

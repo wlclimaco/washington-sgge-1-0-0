@@ -31,7 +31,7 @@
     <result property="nome" column="nome"/>
     <result property="descricao" column="descricao"/>
     <result property="controleid" column="controleid"/>
-    <collection property="acessos" column="cadastroid" select="ControleAcessMap.fetchControleAcessByProduto" />
+    <collection property="acessos" column="cadastroid" select="ControleAcessMap.fetchControleAcessByCadastro" />
     <collection property="produtos" column="cadastroid" select="fetchProdutosByMarca" />
   </resultMap>
 

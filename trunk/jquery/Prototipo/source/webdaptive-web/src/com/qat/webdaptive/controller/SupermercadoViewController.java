@@ -18,6 +18,8 @@ public class SupermercadoViewController extends SupermercadoBaseController
 	/** The Constant SUPERMERCADO_MVC_BAS_RETURN. */
 	private static final String SUPERMERCADO_MVC_BAS_RETURN = "/supermercado/supermercado_mvc_bas";
 
+	private static final String SUPERMERCADO_MVC_BAS_EDIT = "/supermercado/cadSup";
+
 	/** The Constant ZERO. */
 	private static final int ZERO = 0;
 
@@ -38,5 +40,12 @@ public class SupermercadoViewController extends SupermercadoBaseController
 		request.setPageSize(TWENTY);
 		request.setPreQueryCount(true);
 		return supermercadoMAV(request, SUPERMERCADO_MVC_BAS_RETURN);
+	}
+
+	@RequestMapping(value = "/fetchSupermercadosByEdit", method = RequestMethod.GET)
+	public ModelAndView fetchSupermercadosbyEdit()
+	{
+		ModelAndView modelAndView = new ModelAndView(SUPERMERCADO_MVC_BAS_EDIT);
+		return modelAndView;
 	}
 }

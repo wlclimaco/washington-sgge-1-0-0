@@ -19,7 +19,7 @@ var viewLoadedObject;
 			viewLoadedObject = ${produtoResponse};
     </c:otherwise>
 </c:choose>
-console.log(viewLoadedObject);
+
 var columns=[];
  var checkboxSelector = new Slick.CheckboxSelectColumn({
       cssClass: "slick-cell-checkboxsel"

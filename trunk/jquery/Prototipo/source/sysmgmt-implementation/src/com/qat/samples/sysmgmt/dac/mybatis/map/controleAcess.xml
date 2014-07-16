@@ -13,7 +13,7 @@
        exactly. -->
   <resultMap id="ControleAcessResult" type="ControleAcess">
     <result property="controleid" column="controleid"/>
-    <result property="data" jdbcType="DATE" column="data"/>
+    <result property="data" jdbcType="TIMESTAMP" column="data"/>
     <result property="tenantId" column="tenantid"/>
     <result property="userId" column="usuarioid"/>
     <result property="acaoTypeValue" column="acao"/>
@@ -46,6 +46,12 @@
   </select>
 
     <select id="fetchControleAcessByProduto" parameterType="Integer" resultMap="ControleAcessResult">
+	    SELECT
+	    <include refid="allControleAcessColumns" />
+	    FROM CONTROLE WHERE idAcao =  #{value} and tableType = 2 ORDER BY DATA DESC
+    </select>
+
+     <select id="fetchControleAcessByCadastro" parameterType="Integer" resultMap="ControleAcessResult">
 	    SELECT
 	    <include refid="allControleAcessColumns" />
 	    FROM CONTROLE WHERE idAcao =  #{value} and tableType in (3,4,5,6,7) ORDER BY DATA DESC

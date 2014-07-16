@@ -15,11 +15,11 @@
     <result property="precoid" column="precoid"/>
     <result property="idProduto" column="produtoid"/>
     <result property="preco" column="preco"/>
-    <result property="dataCreate" jdbcType="DATE" column="data"/>
+    <result property="dataCreate" jdbcType="TIMESTAMP"  column="data"/>
     <result property="precopromo" column="precopromo"/>
     <result property="promocao" column="promocao"/>
-    <result property="dateIni" jdbcType="DATE" column="dataini"/>
-    <result property="dateFim" jdbcType="DATE" column="datafin"/>
+    <result property="dateIni" jdbcType="TIMESTAMP"  column="dataini"/>
+    <result property="dateFim" jdbcType="TIMESTAMP"  column="datafin"/>
     <association property="supermercadoid" column="supermercadoid" javaType="Supermercado" select="SupermercadoMap.fetchSupermercadoById" />
     <collection property="acessos" column="precoid" select="ControleAcessMap.fetchControleAcessByPreco" />
   </resultMap>

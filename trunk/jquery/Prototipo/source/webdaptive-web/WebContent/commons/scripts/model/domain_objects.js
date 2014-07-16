@@ -21,7 +21,7 @@
 	qat.model.produto = function(_Id, _supermercadoid, _codBarra, _marca,_menu, _submenu,_trimenu, _unimed,_nome, _descricao,_foto,_precos, _imagens)
 	{
 	    var userContext = new qat.base.model.userContext();
-		this.id = _Id;
+		this.id = parseInt(_Id);
 		this.codBarra = _codBarra;
 		this.marca = {id:parseInt(_marca),userId:'rod'};
 		this.menu = {id:parseInt(_menu),userId:'rod'};

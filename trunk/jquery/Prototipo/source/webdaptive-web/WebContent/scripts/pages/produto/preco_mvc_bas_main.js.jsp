@@ -68,14 +68,17 @@ var options =
 		<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
 		function callInsertWS()
 		{
-
 			onProcDataLoading.notify({});
-			var oData = callCreateObject();
-			var oData = new qat.model.reqProduto(null, oData, true, true);
-			if($('#codId').val() != null)
+
+			if($('#codId').val() != null){
+				var oData = callCreateObject($('#codId').val());
+				var oData = new qat.model.reqProduto(null, oData, true, true);
+				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/updateProduto', oData, fill_data, process_error);
+			}else{
+				var oData = callCreateObject();
+				var oData = new qat.model.reqProduto(null, oData, true, true);
 				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/insertProduto', oData, fill_data, process_error);
-			else
-				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/updateCadastro', oData, fill_data, process_error);
+			}
 		}
 
 		function callUpdateWS()
@@ -137,7 +140,7 @@ var options =
 			var tmpLength = data.length;
 			var oDataPreco =[];
 			for (var i=1; i < tmpLength; i++){
-				oDataPreco.push(new qat.model.preco(data[i].id, null, data[i].supermercadoid, null,data[i].preco, data[i].promocao,data[i].precopromo, null, null));
+				oDataPreco.push(new qat.model.preco(data[i].id, _id, data[i].supermercadoid, null,data[i].preco, data[i].promocao,data[i].precopromo, null, null));
 			}
 			return new qat.model.produto(_id,
 									 null,
