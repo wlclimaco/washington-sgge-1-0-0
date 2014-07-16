@@ -42,14 +42,12 @@ columns[6]  = {id:"unimed", name: produto.grid.unimed.title, field:"unimed"};
 columns[7]  = {id:"descricao", name: produto.grid.descricao.title, field:"descricao"};
 columns[8]  = {id:"marca", name:produto.grid.marca.title, field:"marca",  width:135, editable:true, cssClass:"pad-4-left", sortable:true},
 columns[9]  = {id:"menu", name: produto.grid.menu.title, field:"menu"};
-columns[10] = {id:"submenu", name: produto.grid.submenu.title, field:"submenu"};
-columns[11] = {id:"trimenu", name: produto.grid.trimenu.title, field:"trimenu"};
-columns[12] = {id:"supermercadoId", name: produto.grid.supermercadoId.title, field:"supermercadoId"};
-columns[13] = {id:"preco", name: produto.grid.preco.title, field:"preco"};
-columns[14] = {id:"imagens", name: produto.grid.imagens.title, field:"imagens"};
-columns[15] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
-columns[16] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
-columns[17] = {id:"id", name: " ", field:"id",  width:100,formatter: buttonFormat};
+columns[10] = {id:"supermercadoId", name: produto.grid.supermercadoId.title, field:"supermercadoId"};
+columns[11] = {id:"preco", name: produto.grid.preco.title, field:"preco"};
+columns[12] = {id:"imagens", name: produto.grid.imagens.title, field:"imagens"};
+columns[13] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
+columns[14] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
+columns[15] = {id:"id", name: " ", field:"id",  width:100,formatter: buttonFormat};
 
 
 

@@ -35,6 +35,15 @@
     <collection property="produtos" column="cadastroid" select="fetchProdutosByMarca" />
   </resultMap>
 
+  <resultMap id="CadastroResults" type="Cadastro">
+    <result property="id" column="cadastroid"/>
+    <result property="tableTypeEnumValue" column="acao"/>
+    <result property="nome" column="nome"/>
+    <result property="descricao" column="descricao"/>
+    <result property="controleid" column="controleid"/>
+    <collection property="acessos" column="cadastroid" select="ControleAcessMap.fetchControleAcessByProduto" />
+  </resultMap>
+
 
 
 
@@ -56,10 +65,10 @@
             p.PRECOID, p.CONTROLEID, p.FOTO, p.SUPERMERCADOID
   </sql>
 
-    <select id="fetchMarcaByCode" parameterType="int" resultMap="CadastroResult">
+    <select id="fetchMarcaByCode" parameterType="int" resultMap="CadastroResults">
 	    SELECT
 	    <include refid="allCadastroColumns" />
-	    FROM cadastro where acao = 1 and cadastroid = #{id}  ORDER BY cadastroid ASC
+	    FROM cadastro where acao = 3 and cadastroid = #{id}  ORDER BY cadastroid ASC
     </select>
 
     <select id="fetchProdutosByMenu" parameterType="int" resultMap="ProdutoResult">
@@ -73,8 +82,6 @@
 	    <include refid="allProdutoColumns" />
 	    FROM produto where marca = #{id} or
 	    				   MENU = #{id} or
-	    				   SUBMENU = #{id} or
-	    				   TRIMENU = #{id} or
 	    				   UNIMED = #{id}
 	    				 ORDER BY PRODUTOID ASC
     </select>
@@ -97,10 +104,10 @@
 	    FROM produto where unimed = #{id}  ORDER BY PRODUTOID ASC
     </select>
 
-    <select id="fetchMenuByCode" parameterType="int" resultMap="CadastroResult">
+    <select id="fetchMenuByCode" parameterType="int" resultMap="CadastroResults">
 	    SELECT
 	    <include refid="allCadastroColumns" />
-	    FROM cadastro where acao = 2 and cadastroid = #{id}  ORDER BY cadastroid ASC
+	    FROM cadastro where acao in(4,5,6) and cadastroid = #{id}  ORDER BY cadastroid ASC
     </select>
 
     <select id="fetchSubMenuByCode" parameterType="int" resultMap="CadastroResult">
@@ -115,10 +122,10 @@
 	    FROM cadastro where acao = 4 and cadastroid = #{id}  ORDER BY cadastroid ASC
     </select>
 
-    <select id="fetchUniMedByCode" parameterType="int" resultMap="CadastroResult">
+    <select id="fetchUniMedByCode" parameterType="int" resultMap="CadastroResults">
 	    SELECT
 	    <include refid="allCadastroColumns" />
-	    FROM cadastro where acao = 5 and cadastroid = #{id}  ORDER BY cadastroid ASC
+	    FROM cadastro where acao = 7 and cadastroid = #{id}  ORDER BY cadastroid ASC
     </select>
 
   <select id="fetchAllCadastro" parameterType="Cadastro" resultMap="CadastroResult">
