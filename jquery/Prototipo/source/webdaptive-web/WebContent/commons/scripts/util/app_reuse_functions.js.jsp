@@ -22,6 +22,16 @@ function rest_post_call(_url, _oData, _successFunction, _errorFunction)
  	});
 };
 
+function convertData(_time){
+
+	a = new Date();
+	a.setTime(_time);
+	b = a.toString("yyyy-MM-ddTHH:mm:ss")
+	c = b.split(" ")
+	d = c[2] +"/" + c[1] +"/" + c[3] +" " + c[4];
+	return d;
+}
+
 //Common routine to process reponse & grid data
 function reuse_fill_data(response,data2,gridProcess)
 {
@@ -269,7 +279,8 @@ function cidade_fill_data(procResponse,data2)
 						var b= "";
 					}
 					if(procResponse.cidades[oi].acessos[count-1] != null){
-						var c =     procResponse.cidades[oi].acessos[count-1].data
+						var c =    convertData(procResponse.cidades[oi].acessos[count-1].data)
+
 					}else{
 						var c= "";
 					}
@@ -517,7 +528,7 @@ function menu_fill_data(procResponse,data2)
 					var count = procResponse.cadastros[oi].acessos.length;
 					if(procResponse.cadastros[oi].acessos[count-1] != null){
 						var b =     procResponse.cadastros[oi].acessos[count-1].userId;
-						var c =     procResponse.cadastros[oi].acessos[count-1].data;
+						var c =     convertData(procResponse.cadastros[oi].acessos[count-1].data);
 					}else{
 						var b= "";
 						var c= "";
@@ -612,7 +623,7 @@ function produto_fill_data(procResponse,data2)
 				var count = procResponse.produtos[oi].acessos.length;
 				if(procResponse.produtos[oi].acessos[count-1] != null){
 					var f =     procResponse.produtos[oi].acessos[count-1].userId;
-					var g =     procResponse.produtos[oi].acessos[count-1].data;
+					var g =     convertData(procResponse.produtos[oi].acessos[count-1].data);
 				}else{
 					var f= "";
 					var g= "";
@@ -657,7 +668,7 @@ function produto_fill_data(procResponse,data2)
 				supermercadoId: h,
 				preco  :        j,
 				imagens:  		procResponse.produtos[oi].imagens,
-				data:  		    e,
+				data:  		    g,
 				userId:  		f
 			}
 
@@ -675,7 +686,7 @@ function produto_fill_data(procResponse,data2)
 
 function insertProduto_fill_data(procResponse,data2)
 {
-debugger;
+
 	function fill_data(oResponse)
 	{
 
@@ -715,13 +726,19 @@ debugger;
 		var codbarra = procResponse.produtos[0].codBarra ,
 			nomeProd = procResponse.produtos[0].nome,
 			descr    = procResponse.produtos[0].descricao,
-			foto    = procResponse.produtos[0].foto;
+			foto    = procResponse.produtos[0].foto,
+			menu    = procResponse.produtos[0].menu.id,
+			unimed  = procResponse.produtos[0].unimed.id,
+			marca   = procResponse.produtos[0].marca.id;
 
 		$('#codbarra').val(codbarra);
 		$('#nomeProd').val(nomeProd);
 		$('#descr').val(descr);
 		$('#foto').val(foto);
 		$('#codId').val(procResponse.produtos[0].id);
+		$('#menu').val(menu);
+		$('#unimed').val(unimed);
+		$('#marca').val(marca);
 
 
 
@@ -745,7 +762,7 @@ debugger;
 					var count = procResponse.produtos[0].precos[oi].acessos.length;
 					if(procResponse.produtos[0].precos[oi].acessos[count-1] != null){
 						var b =     procResponse.produtos[0].precos[oi].acessos[count-1].userId;
-						var c =     procResponse.produtos[0].precos[oi].acessos[count-1].data;
+						var c =     convertData(procResponse.produtos[0].precos[oi].acessos[count-1].data);
 					}else{
 						var b= "";
 						var c= "";

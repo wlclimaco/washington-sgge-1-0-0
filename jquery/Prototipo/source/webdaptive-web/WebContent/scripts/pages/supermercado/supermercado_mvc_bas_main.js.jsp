@@ -19,34 +19,24 @@ var viewLoadedObject;
 			viewLoadedObject = ${supermercadoResponse};
     </c:otherwise>
 </c:choose>
-console.log(viewLoadedObject);
-//columns & column settings for the grid
+
+var buttonFormat = function (row, cell, value, columnDef, dataContext) {
+
+	return "<input type='button' value='Editar' class='btn "+value+"' />"
+
+}
+
 var columns = [
 	{id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:"cell-center", width:30},
 	{id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML},
     {id:"supermercadoid", name: procedure.grid.psak.title, field:"supermercadoid", editor:Slick.Editors.Text},
-    {id:"usuario", name: procedure.grid.pcode.title, field:"usuario", editor:Slick.Editors.Text},
-	{id:"email", name: procedure.grid.pcode.title, field:"email", editor:Slick.Editors.Text},
-	{id:"site", name: procedure.grid.pcode.title, field:"site", editor:Slick.Editors.Text},
-	{id:"enderecoid", name: procedure.grid.pcode.title, field:"enderecoid", editor:Slick.Editors.Text},
-	{id:"eid", name: procedure.grid.pcode.title, field:"eid", editor:Slick.Editors.Text},
+	{id:"razao", name: procedure.grid.pcode.title, field:"razao", editor:Slick.Editors.Text},
+	{id:"cpfCnpj", name: procedure.grid.pcode.title, field:"cpfCnpj", editor:Slick.Editors.Text},
+	{id:"rgInc", name: procedure.grid.pcode.title, field:"rgInc", editor:Slick.Editors.Text},
 	{id:"logradouro", name: procedure.grid.pcode.title, field:"logradouro", editor:Slick.Editors.Text},
 	{id:"bairro", name: procedure.grid.pcode.title, field:"bairro", editor:Slick.Editors.Text},
-	{id:"estado", name: procedure.grid.pcode.title, field:"estado", editor:Slick.Editors.Text},
 	{id:"cidade", name: procedure.grid.pcode.title, field:"cidade", editor:Slick.Editors.Text},
-	{id:"numero", name: procedure.grid.pcode.title, field:"numero", editor:Slick.Editors.Text},
-	{id:"cep", name: procedure.grid.pcode.title, field:"cep", editor:Slick.Editors.Text},
-	{id:"nome", name: procedure.grid.pcode.title, field:"nome", editor:Slick.Editors.Text},
-	{id:"complemento", name: procedure.grid.pcode.title, field:"complemento", editor:Slick.Editors.Text},
-	{id:"documenroid", name: procedure.grid.pcode.title, field:"documenroid", editor:Slick.Editors.Text},
-	{id:"did", name: procedure.grid.pcode.title, field:"did", editor:Slick.Editors.Text},
-	{id:"rgInc", name: procedure.grid.pcode.title, field:"rgInc", editor:Slick.Editors.Text},
-	{id:"cpfCnpj", name: procedure.grid.pcode.title, field:"cpfCnpj", editor:Slick.Editors.Text},
-	{id:"razao", name: procedure.grid.pcode.title, field:"razao", editor:Slick.Editors.Text},
-	{id:"dateNascimento", name: procedure.grid.pcode.title, field:"dateNascimento", editor:Slick.Editors.Text}
-
-
-
+	{id:"id", name: " ", field:"id",  width:100,formatter: buttonFormat}
 ];
 
 //grid options

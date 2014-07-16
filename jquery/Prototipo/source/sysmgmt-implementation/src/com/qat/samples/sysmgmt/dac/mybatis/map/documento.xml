@@ -16,7 +16,6 @@
     <result property="id" column="id"/>
     <result property="rgInc" column="rginscmuni"/>
     <result property="cpfCnpj" column="cpfcnpj"/>
-    <result property="nome" column="nome"/>
     <result property="razao" column="razao"/>
     <result property="tableTypeValue" column="tabela"/>
     <collection property="acessos" column="documentoid" select="ControleAcessMap.fetchControleAcessByAcao" />
