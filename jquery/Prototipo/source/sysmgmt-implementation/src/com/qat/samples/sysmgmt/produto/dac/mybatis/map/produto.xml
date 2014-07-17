@@ -180,7 +180,16 @@
 
   <select id="fetchAllProdutos" parameterType="ProdutoInquiryRequest" resultMap="ProdutoResult">
 		SELECT <include refid="allProdutoColumns" />
-   		  FROM PRODUTO ORDER BY produtoid ASC
+   		  FROM PRODUTO
+   		  <where>
+   		  	1 = 1
+			<if test="marca.id != null">and marca = #{marca.id}</if>
+			<if test="menu.id != null">and menu = #{menu.id}</if>
+			<if test="codBarra != null">and codBarra = #{codBarra}</if>
+			<if test="nome != null">AND nome = #{nome}</if>
+			<if test="unimed.id != null">AND unimed = #{unimed.id}</if>
+		</where>
+   		  ORDER BY produtoid ASC
   </select>
 
  <select id="fetchAllCadastros" parameterType="Cadastro" resultMap="CadastroResult">

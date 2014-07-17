@@ -29,13 +29,14 @@ var buttonFormat = function (row, cell, value, columnDef, dataContext) {
 var columns = [
 	{id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:"cell-center", width:30},
 	{id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML},
-    {id:"supermercadoid", name: procedure.grid.psak.title, field:"supermercadoid", editor:Slick.Editors.Text},
-	{id:"razao", name: procedure.grid.pcode.title, field:"razao", editor:Slick.Editors.Text},
-	{id:"cpfCnpj", name: procedure.grid.pcode.title, field:"cpfCnpj", editor:Slick.Editors.Text},
-	{id:"rgInc", name: procedure.grid.pcode.title, field:"rgInc", editor:Slick.Editors.Text},
-	{id:"logradouro", name: procedure.grid.pcode.title, field:"logradouro", editor:Slick.Editors.Text},
-	{id:"bairro", name: procedure.grid.pcode.title, field:"bairro", editor:Slick.Editors.Text},
-	{id:"cidade", name: procedure.grid.pcode.title, field:"cidade", editor:Slick.Editors.Text},
+	{id:"supermercadoid", name: procedure.grid.psak.title, field:"supermercadoid", editor:Slick.Editors.Text},
+	{id:"razao", name: supermercado.grid.prazao.title, field:"razao", editor:Slick.Editors.Text},
+	{id:"cpfCnpj", name: supermercado.grid.pcnpj.title, field:"cpfCnpj", editor:Slick.Editors.Text},
+	{id:"rgInc", name: supermercado.grid.pincmun.title, field:"rgInc", editor:Slick.Editors.Text},
+	{id:"id", name: supermercado.grid.pprod.title, field:"id",  width:100,formatter: buttonFormat},
+	{id:"logradouro", name: supermercado.grid.plogradouro.title, field:"logradouro", editor:Slick.Editors.Text},
+	{id:"bairro", name: supermercado.grid.pbairro.title, field:"bairro", editor:Slick.Editors.Text},
+	{id:"cidade", name: supermercado.grid.pcidade.title, field:"cidade", editor:Slick.Editors.Text},
 	{id:"id", name: " ", field:"id",  width:100,formatter: buttonFormat}
 ];
 
