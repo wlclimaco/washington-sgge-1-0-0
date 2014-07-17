@@ -295,8 +295,15 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	@Override
 	public List<Cadastro> fetchAllCadastros(CadastroInquiryRequest cadastro)
 	{
-		return QATMyBatisDacHelper.doQueryForList(getSqlSession(), STMT_FETCH_ALL_CADASTRO, cadastro.getCadastro());
+		if (cadastro.getCadastro().getTableTypeEnumValue() == 1)
+		{
+			return QATMyBatisDacHelper
+					.doQueryForList(getSqlSession(), "fetchAllCadastrosTotal", cadastro.getCadastro());
+		}
+		else
+		{
+			return QATMyBatisDacHelper.doQueryForList(getSqlSession(), STMT_FETCH_ALL_CADASTRO, cadastro.getCadastro());
+		}
 
 	}
-
 }

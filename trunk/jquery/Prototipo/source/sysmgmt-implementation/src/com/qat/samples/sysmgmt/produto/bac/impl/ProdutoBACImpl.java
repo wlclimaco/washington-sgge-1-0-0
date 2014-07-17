@@ -116,14 +116,15 @@ public class ProdutoBACImpl implements IProdutoBAC
 				{
 					fetchByIdRequest.setFetchId(produto.getPrecos().get(i).getPrecoid());
 					preco = getPrecoDAC().fetchPrecoById(fetchByIdRequest);
-					if ((preco.getPreco() == produto.getPrecos().get(i).getPreco())
-							&& (preco.getPrecopromo() == produto.getPrecos().get(i).getPrecopromo()))
+					if (((preco.getPreco() - produto.getPrecos().get(i).getPreco()) > new Double(0))
+							&& ((preco.getPrecopromo() - produto.getPrecos().get(i).getPrecopromo()) > new Double(0)))
 					{
-						internalResponse = getPrecoDAC().updatePreco(produto.getPrecos().get(i));
+
+						internalResponse = getPrecoDAC().insertPreco(produto.getPrecos().get(i));
 					}
 					else
 					{
-						internalResponse = getPrecoDAC().insertPreco(produto.getPrecos().get(i));
+						internalResponse = getPrecoDAC().updatePreco(produto.getPrecos().get(i));
 					}
 				}
 				else
@@ -135,6 +136,7 @@ public class ProdutoBACImpl implements IProdutoBAC
 
 		// Check for error because in business case all non-success returns are failures (updating of zero rows or
 		// optimistic locking error) according to the business
+
 		if (internalResponse.getStatus() != Status.OperationSuccess)
 		{
 			internalResponse.addMessage(DEFAULT_PROCEDURE_BAC_EXCEPTION_MSG, Message.MessageSeverity.Error,

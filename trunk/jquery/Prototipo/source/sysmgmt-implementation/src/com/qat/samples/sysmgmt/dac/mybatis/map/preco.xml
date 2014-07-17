@@ -42,7 +42,7 @@
    <select id="fetchPrecoByProduto" parameterType="int" resultMap="PrecoResult">
 	    SELECT
 	    <include refid="allPrecoColumns" />
-	    FROM tabpreco where precoid = #{id}  ORDER BY DATA DESC
+	    FROM tabpreco where produtoid = #{id}  ORDER BY DATA DESC
     </select>
 
   <select id="fetchAllPrecosPagedBatch" resultMap="PrecoResult">
@@ -98,7 +98,7 @@
   <select id="fetchPrecoById" parameterType="Integer" resultMap="PrecoResult">
     SELECT
    <include refid="allPrecoColumns" />
-    FROM TABPRECO WHERE BUNDLE_ID = #{fetchid}
+    FROM TABPRECO WHERE PRECOID = #{fetchid}
   </select>
 
   <select id="fetchVersionNumber" parameterType="Tabelapreco" resultType="int">
@@ -110,7 +110,7 @@
   </select>
 
     <select id="updatePreco" parameterType="tabelapreco" resultType="int" statementType="CALLABLE">
-        { call ins_preco( #{produtoid} , #{p_supermercadoid} , #{nome} , #{marca} , #{menu} , #{submenu} , #{trimenu} , #{unimed} , #{precoid} , #{controleid} , #{foto} , #{supermercadoid} , #{preco}, #{usuarioid} ) }
+        { call upd_preco( #{idProduto} , #{supermercadoid.superId} , null , #{preco} , #{precopromo} , #{promocao} ,null , null, #{userId} ) }
   </select>
 
 
