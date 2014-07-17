@@ -106,7 +106,7 @@ var options =
 					bList = false;
 				}
 				//	var oData = new qat.model.reqProc(null, new qat.model.cadastro(data[aRowChg[a]].pversion,data[aRowChg[a]].psak,data[aRowChg[a]].pcode,data[aRowChg[a]].pdesc,0.0), bList, true);
-				var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(data[aRowChg[a]].id,4,data[aRowChg[a]].nome,data[aRowChg[a]].descricao),bList,true);
+				var oData = new qat.model.reqProduto(null, new qat.model.produto(data[aRowChg[a]].id,4,data[aRowChg[a]].nome,data[aRowChg[a]].descricao),bList,true);
 				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/ProdutoCadastro', oData, fill_data, process_error);
 				var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(1,3),true,true);
 				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos',{cadastro:{type:4,userId:'rod'}}, fill_data, process_error);
@@ -117,9 +117,9 @@ var options =
 		function callDeleteWS(_procId)
 		{
 			onProcDataLoading.notify({});
-		    var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(_procId,4),true,true);
+		    var oData = new qat.model.reqProduto(null, new qat.model.produto(_procId,4),true,true);
 			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/deleteProduto', oData, fill_data, process_error);
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos', {cadastro:{type:4,userId:'rod'}}, fill_data, process_error);
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos', {Produto:{userId:'rod'}}, fill_data, process_error);
 		}
 
 		function callRefreshWS(_i)

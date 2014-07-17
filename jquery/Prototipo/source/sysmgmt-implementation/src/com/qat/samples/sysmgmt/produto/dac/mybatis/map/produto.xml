@@ -57,11 +57,11 @@
   </sql>
 
 <sql id="allProdutoColumns">
-		PRODUTOID, CODBARRA, NOME, MARCA, MENU, SUBMENU, TRIMENU, UNIMED,PRECOID, CONTROLEID, FOTO, SUPERMERCADOID
+		PRODUTOID, CODBARRA, NOME, MARCA, MENU,DESCRICAO SUBMENU, TRIMENU, UNIMED,PRECOID, CONTROLEID, FOTO, SUPERMERCADOID
   </sql>
 
   <sql id="allProdutoColumnsWithQualifier">
-		p.PRODUTOID, p.CODBARRA, p.NOME, p.MARCA, p.MENU, p.SUBMENU, p.TRIMENU, p.UNIMED,
+		p.PRODUTOID, p.CODBARRA, p.NOME,p.DESCRICAO, p.MARCA, p.MENU, p.SUBMENU, p.TRIMENU, p.UNIMED,
             p.PRECOID, p.CONTROLEID, p.FOTO, p.SUPERMERCADOID
   </sql>
 
@@ -195,6 +195,12 @@
    		  ORDER BY cadastroid ASC
   </select>
 
+  <select id="fetchAllCadastrosTotal" parameterType="Cadastro" resultMap="CadastroResult">
+		SELECT <include refid="allCadastroColumns" />
+   		  FROM Cadastro
+   		  ORDER BY cadastroid ASC
+  </select>
+
   <select id="fetchCadastroById" parameterType="Cadastro" resultMap="CadastroResult">
     SELECT
    <include refid="allCadastroColumns" />
@@ -214,7 +220,7 @@
   </select>
 
   <select id="insertProduto" parameterType="HashMap" resultType="int" statementType="CALLABLE">
-        { call ins_produto( #{produtoid} , #{codbarra} , #{nome} , #{marca} , #{menu}, #{unimed} , #{foto} ,#{supermercadoId} ,  #{usuarioid} ) }
+        { call ins_produto( #{produtoid} , #{codbarra} , #{nome} , #{marca} , #{menu}, #{unimed} , #{foto} ,#{descricao} ,  #{usuarioid} ) }
   </select>
 
 
@@ -223,8 +229,7 @@
   </select>
 
   <select id="updateProduto" parameterType="Produto" resultType="int" statementType="CALLABLE">
-
-
+	{ call upd_produto( #{produtoid} , #{codbarra} , #{nome} , #{marca} , #{menu}, #{unimed} , #{foto} ,#{descricao} ,  #{usuarioid} ) }
   </select>
 
   <select id="deleteCadastroById" parameterType="Cadastro" resultType="int" statementType="CALLABLE">
@@ -236,9 +241,9 @@
 	DELETE FROM cADASTRO
   </delete>
 
-  <delete id="deleteProdutoById" parameterType="Produto">
-    DELETE FROM PRODUTO WHERE cadastroid = #{id}
-  </delete>
+   <select id="deleteProdutoById" parameterType="Produto" resultType="int" statementType="CALLABLE">
+   { call del_produto( #{id} , #{userId} ) }
+  </select>
 
   <delete id="deleteAllProdutos">
 	DELETE FROM PRODUTO

@@ -752,46 +752,49 @@ function insertProduto_fill_data(procResponse,data2)
 		}
 
 		//make sure return is an array
-		if (($.isArray(procResponse.produtos[0].precos))&&(procResponse.produtos[0].precos[0].precoid != null))
-		{
-			var oi = 0;
-			var tmpLength = procResponse.produtos[0].precos.length;
-			for (var i=1; i <= tmpLength; i++)
+		if ($.isArray(procResponse.produtos[0].precos)){
+
+			if(procResponse.produtos[0].precos != [])
 			{
-				if (procResponse.produtos[0].precos[oi].acessos != null){
-					var count = procResponse.produtos[0].precos[oi].acessos.length;
-					if(procResponse.produtos[0].precos[oi].acessos[count-1] != null){
-						var b =     procResponse.produtos[0].precos[oi].acessos[count-1].userId;
-						var c =     convertData(procResponse.produtos[0].precos[oi].acessos[count-1].data);
+				var oi = 0;
+				var tmpLength = procResponse.produtos[0].precos.length;
+				for (var i=1; i <= tmpLength; i++)
+				{
+					if (procResponse.produtos[0].precos[oi].acessos != null){
+						var count = procResponse.produtos[0].precos[oi].acessos.length;
+						if(procResponse.produtos[0].precos[oi].acessos[count-1] != null){
+							var b =     procResponse.produtos[0].precos[oi].acessos[count-1].userId;
+							var c =     convertData(procResponse.produtos[0].precos[oi].acessos[count-1].data);
+						}else{
+							var b= "";
+							var c= "";
+						}
 					}else{
 						var b= "";
 						var c= "";
 					}
-				}else{
-					var b= "";
-					var c= "";
+					data2[i] =
+					{
+
+
+						cellno:     i,
+						<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
+						action: 	"<a href='#' onclick='javascript:ploader.callDeleteWS(" + procResponse.produtos[0].precos[oi].precoid +");'>Delete</a>",
+						</sec:authorize>
+						<sec:authorize ifAllGranted="ROLE_GUEST">
+						action: 'None',
+						</sec:authorize>
+						id:				procResponse.produtos[0].precos[oi].precoid,
+						supermercadoid:	procResponse.produtos[0].precos[oi].supermercadoid,
+						preco:			procResponse.produtos[0].precos[oi].preco,
+						precopromo:  	procResponse.produtos[0].precos[oi].precopromo,
+						promocao:  		procResponse.produtos[0].precos[oi].promocao,
+						data  :         c,
+						userId:  		b
+					}
+
+					oi++;
 				}
-				data2[i] =
-				{
-
-
-					cellno:     i,
-					<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
-					action: 	"<a href='#' onclick='javascript:ploader.callDeleteWS(" + procResponse.produtos[0].precos[oi].precoid +");'>Delete</a>",
-					</sec:authorize>
-					<sec:authorize ifAllGranted="ROLE_GUEST">
-					action: 'None',
-					</sec:authorize>
-					id:				procResponse.produtos[0].precos[oi].precoid,
-					supermercadoid:	procResponse.produtos[0].precos[oi].supermercadoid,
-					preco:			procResponse.produtos[0].precos[oi].preco,
-					precopromo:  	procResponse.produtos[0].precos[oi].precopromo,
-					promocao:  		procResponse.produtos[0].precos[oi].promocao,
-					data  :         c,
-					userId:  		b
-				}
-
-				oi++;
 			}
 		}
 	}
