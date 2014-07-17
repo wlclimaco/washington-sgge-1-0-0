@@ -12,7 +12,16 @@ $(document).ready(function ()
 	pgrid = new Slick.Grid($("#supGrid"), ploader.data, columns, options);
 	pgrid.setSelectionModel(new Slick.CellSelectionModel());
 	gridPager = new Slick.Controls.Pager(ploader, $("#pager"));
+
 	gridPager.init();
+	pgrid.onClick.subscribe(function (e, args) {
+        if ($(e.target).hasClass("btn")) {
+			var classs = $(e.target).attr('class');
+			var a = classs.split(' ');
+            openDialog(a[1]);
+        }
+        e.stopImmediatePropagation();
+    });
 	setTimeout('pgrid.init()', 250);
 
 	//this events fires to blockui while the data is retrieved
@@ -54,6 +63,35 @@ $(document).ready(function ()
 		}
     });
 	</sec:authorize>
+		var openDialog = function(row){
+			var dom = "<div class='id'>" + row.toString() + "</div>";
+			$actionTagDialog = $("#action-tag-dialog").load('../supermercado/fetchSupermercadosByEdit').dialog({
+				autoOpen: false,
+				title: 'Action - Add Tag to SmartPoint',
+				width: 500,
+				minheight: 500,
+				modal: true,
+				buttons: {
+					'Gravar': function() {
+						qat.model.supermercado.page.gravar($('#codId').val());
+					},
+					Cancel: function() {
+						$(this).dialog('close');
+					}
+				},
+				dialogClass: 'action-dialog buttons-left',
+				resizable: false
+			});
+			$.address.value('?prodId='+row+'&type=edit');
+			$actionTagDialog.empty();
+			$actionTagDialog.dialog('open');
+		};
+
+	$(".ui-layout-center").on("click", "#insertButon", function(e) {
+
+		e.preventDefault();
+		openDialog(0);
+	});
 
 	// load the Grid first time
 	ploader.callPagedFetchWS(20,0);

@@ -8,8 +8,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script language="javascript" type="text/javascript" src="niceforms.js"></script>
-<link rel="stylesheet" type="text/css" media="all" href="../thirdparty/Niceforms-master/niceforms-default.css" />
+<link rel="stylesheet" type="text/css" media="all" href="../dthirdparty/jquery/Niceforms-master/niceforms-default.css" />
+<style type="text/css">
+
+<!---->
+.gugu {
+
+	width:			800px!important;
+	height:			400px!important;
+    }
+.hide{display:none;}
+
+</style>
 </head>
 <body><div id="container">
 <form action="vars.php" method="post" class="niceform">
@@ -18,6 +28,9 @@
         <dl>
         	<dt><label for="nome">Nome:</label></dt>
             <dd><input type="text" name="nome" id="nome" size="32" maxlength="100" /></dd>
+			<dd><input type="text" name="codId" id="codId" size="32" maxlength="60" class="hide" /></dd>
+			<dd><input type="text" name="codEnd" id="codId" size="32" maxlength="60" class="hide" /></dd>
+			<dd><input type="text" name="codDoc" id="codId" size="32" maxlength="60" class="hide" /></dd>
         </dl>
         <dl>
         	<dt><label for="site">Site:</label></dt>
@@ -39,15 +52,15 @@
     <fieldset>
     	<legend>Documentos</legend>
     	<dl>
-        	<dt><label for="rg">RG:</label></dt>
+        	<dt><label for="rg">Incrição Municipal:</label></dt>
             <dd><input type="text" name="rg" id="rg" size="32" maxlength="100" /></dd>
         </dl>
         <dl>
-        	<dt><label for="cpf">CPF:</label></dt>
+        	<dt><label for="cpf">CNPJ:</label></dt>
             <dd><input type="text" name="cpf" id="cpf" size="32" maxlength="100" /></dd>
         </dl>
           <dl>
-        	<dt><label for="dtnasci">Data Nascimento:</label></dt>
+        	<dt><label for="dtnasci">Data Abertura:</label></dt>
             <dd><input type="text" name="dtnasci" id="dtnasci" size="32" maxlength="100" /></dd>
         </dl>
     </fieldset>
@@ -113,12 +126,13 @@
             <dd><input type="text" name="complemento" id="complemento" size="32" maxlength="100" /></dd>
         </dl>
     </fieldset>
-    <fieldset class="action">
-    	<input type="submit" name="submit" id="submit" value="Submit" />
-    	<input type="submit" name="submit" id="submit" value="Submit" />
-    </fieldset>
 </form>
 
 </div></body>
 <script type="text/javascript" src="../thirdparty/jquery/Niceforms-master/niceforms.js"></script>
+<script type="text/javascript" src="../commons/scripts/model/user_context.js"></script>
+<script type="text/javascript" src="../commons/scripts/model/request_objects.js"></script>
+<script type="text/javascript" src="../commons/scripts/model/domain_objects.js"></script>
+<jsp:include page="../../scripts/pages/supermercado/supermercado_create_mvc_bas_main.js.jsp" flush="true"/>
+<jsp:include page="../../scripts/pages/supermercado/supermercado_create_mvc_bas_init.js.jsp" flush="true"/>
 </html>

@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" media="all" href="../thirdparty/jquery/Niceforms-master/niceforms-default.css" />
+<link rel="stylesheet" type="text/css" media="all" href="../sthirdparty/jquery/Niceforms-master/niceforms-default.css" />
 <link type="text/css" href="../styles/common_grid.css" rel="stylesheet" />
 <link type="text/css" href="../styles/slick.pager.css" rel="stylesheet" />
 <style type="text/css">

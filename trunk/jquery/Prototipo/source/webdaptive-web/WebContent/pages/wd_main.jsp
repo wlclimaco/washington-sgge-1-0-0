@@ -118,6 +118,13 @@ if (head.desktop)
 		   "../thirdparty/jquery/slick.grid.js",
 		   "../thirdparty/jquery/jquery.dataTables.min.js",
 		   "../commons/scripts/util/wd_yahoo_finance_stock_data.js",
+		   "../thirdparty/jquery/custom/jquery.bubblepopup.v2.3.1.min.js",
+		   "../thirdparty/jquery/custom/jquery.cookie.js",
+		   "../thirdparty/jquery/custom/jquery.ez-pinned-footer.js",
+		   "../thirdparty/jquery/custom/jquery.menu.js",
+		   "../thirdparty/jquery/custom/jquery.sparkline.min.js",
+		   "../thirdparty/jquery/custom/jquery.validate.min.js",
+		   "../scripts/util/base.js",
 		   "../commons/scripts/util/wd_core_3.0.0.js"
 	);
 }
