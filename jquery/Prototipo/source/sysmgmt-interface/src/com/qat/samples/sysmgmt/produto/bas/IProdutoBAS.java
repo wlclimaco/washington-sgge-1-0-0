@@ -7,12 +7,12 @@ import javax.jws.WebService;
 
 import org.apache.cxf.annotations.WSDLDocumentation;
 
-import com.qat.samples.sysmgmt.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.RefreshRequest;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.response.CadastroResponse;
 import com.qat.samples.sysmgmt.produto.model.response.ProdutoResponse;
@@ -70,7 +70,7 @@ public interface IProdutoBAS
 	@WebMethod(action = "fetchAllProdutos")
 	@WebResult(name = "fetchAllProdutosReturn")
 	@WSDLDocumentation(value = "Returns a complete list of all produtos.")
-	public ProdutoResponse fetchAllProdutos(@WebParam(name = "request") FetchAllRequest request);
+	public ProdutoResponse fetchAllProdutos(@WebParam(name = "request") ProdutoInquiryRequest request);
 
 	/**
 	 * Fetch produto by id.

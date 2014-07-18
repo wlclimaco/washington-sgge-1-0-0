@@ -18,7 +18,7 @@ public class Tabelapreco extends Util
 
 	private Integer precoid;
 	/** The id. */
-	private Integer idProduto;
+	private Produto idProduto;
 
 	private Supermercado supermercadoid;
 
@@ -45,7 +45,7 @@ public class Tabelapreco extends Util
 
 	}
 
-	public Tabelapreco(Integer precoid, Integer idProduto, Supermercado supermercadoid, PrecoTypeEnum type, Double preco)
+	public Tabelapreco(Integer precoid, Produto idProduto, Supermercado supermercadoid, PrecoTypeEnum type, Double preco)
 	{
 		super();
 		this.precoid = precoid;
@@ -64,12 +64,12 @@ public class Tabelapreco extends Util
 		this.precoid = precoid;
 	}
 
-	public Integer getIdProduto()
+	public Produto getIdProduto()
 	{
 		return idProduto;
 	}
 
-	public void setIdProduto(Integer idProduto)
+	public void setIdProduto(Produto idProduto)
 	{
 		this.idProduto = idProduto;
 	}

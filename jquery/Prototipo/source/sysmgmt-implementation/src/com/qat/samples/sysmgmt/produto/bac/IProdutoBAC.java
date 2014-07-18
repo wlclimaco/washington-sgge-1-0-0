@@ -7,6 +7,7 @@ import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.Cadastro;
 import com.qat.samples.sysmgmt.produto.model.Produto;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
 
 /**
  * The Interface IProdutoBAC. (Business Area Component - BAC)
@@ -62,7 +63,7 @@ public interface IProdutoBAC
 	 * 
 	 * @return the internal results response< procedure>
 	 */
-	public InternalResultsResponse<Produto> fetchAllProdutos();
+	public InternalResultsResponse<Produto> fetchAllProdutos(ProdutoInquiryRequest request);
 
 	/**
 	 * Fetch procedures by request.

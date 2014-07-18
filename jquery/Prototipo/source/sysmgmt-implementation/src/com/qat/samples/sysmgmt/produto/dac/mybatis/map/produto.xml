@@ -181,13 +181,18 @@
   <select id="fetchAllProdutos" parameterType="ProdutoInquiryRequest" resultMap="ProdutoResult">
 		SELECT <include refid="allProdutoColumns" />
    		  FROM PRODUTO
+   		  ORDER BY produtoid ASC
+  </select>
+
+   <select id="fetchAllProdutosSupermercado" parameterType="ProdutoInquiryRequest" resultMap="ProdutoResult">
+		SELECT <include refid="allProdutoColumns" />
+   		  FROM PRODUTO
    		  <where>
-   		  	1 = 1
-			<if test="marca.id != null">and marca = #{marca.id}</if>
-			<if test="menu.id != null">and menu = #{menu.id}</if>
-			<if test="codBarra != null">and codBarra = #{codBarra}</if>
-			<if test="nome != null">AND nome = #{nome}</if>
-			<if test="unimed.id != null">AND unimed = #{unimed.id}</if>
+			<if test="produto.marca.id != null">and marca = #{produto.marca.id}</if>
+			<if test="produto.menu.id != null">and menu = #{produto.menu.id}</if>
+			<if test="produto.codBarra != null">and codBarra = #{produto.codBarra}</if>
+			<if test="produto.nome != null">AND nome = #{produto.nome}</if>
+			<if test="produto.unimed.id != null">AND unimed = #{produto.unimed.id}</if>
 		</where>
    		  ORDER BY produtoid ASC
   </select>

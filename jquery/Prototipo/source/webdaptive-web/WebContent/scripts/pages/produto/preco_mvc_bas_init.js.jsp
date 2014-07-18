@@ -57,11 +57,6 @@ $(document).ready(function ()
 		}
     });
 	</sec:authorize>
-		$(".action").on("click", "#insert", function(e) {
-
-			e.preventDefault();
-			ploader.callInsertWS();
-		});
 	// load the Grid first time
 	tabval = ($.address.parameter('prodId'));
 	ploader.callPagedFetchWS(20,0,tabval);

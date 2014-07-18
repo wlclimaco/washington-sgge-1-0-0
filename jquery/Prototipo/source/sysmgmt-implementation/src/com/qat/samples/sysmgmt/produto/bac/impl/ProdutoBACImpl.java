@@ -1,5 +1,8 @@
 package com.qat.samples.sysmgmt.produto.bac.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.qat.framework.model.Message;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResponse.Status;
@@ -14,6 +17,8 @@ import com.qat.samples.sysmgmt.produto.model.Cadastro;
 import com.qat.samples.sysmgmt.produto.model.Produto;
 import com.qat.samples.sysmgmt.produto.model.Tabelapreco;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
+import com.qat.samples.sysmgmt.util.TableTypeEnum;
 
 /**
  * Implementation of the IProdutoBAC leveraging a BAD, ProdutoBAD.
@@ -87,7 +92,7 @@ public class ProdutoBACImpl implements IProdutoBAC
 
 			for (Integer i = 0; i < produto.getPrecos().size(); i++)
 			{
-				produto.getPrecos().get(i).setIdProduto(internalResponse.getId());
+				produto.getPrecos().get(i).setIdProduto(new Produto(internalResponse.getId()));
 				response = getPrecoDAC().insertPreco(produto.getPrecos().get(i));
 			}
 		}
@@ -188,10 +193,24 @@ public class ProdutoBACImpl implements IProdutoBAC
 	 * @see com.qat.samples.sysmgmt.base.bac.IProdutoBAC#fetchAllProdutos()
 	 */
 	@Override
-	public InternalResultsResponse<Produto> fetchAllProdutos()
+	public InternalResultsResponse<Produto> fetchAllProdutos(ProdutoInquiryRequest request)
 	{
 		InternalResultsResponse<Produto> response = new InternalResultsResponse<Produto>();
-		response.getResultsList().addAll(getProdutoDAC().fetchAllProdutos());
+		if (request.getProduto().getTabela().equals(TableTypeEnum.TABPRECO))
+		{
+			List<Tabelapreco> a = getProdutoDAC().fetchAllProdutosPreco(request);
+			Produto produto = new Produto();
+			produto.setNome("test");
+			produto.setPrecos(a);
+			List<Produto> b = new ArrayList<Produto>();
+			b.add(produto);
+			response.getResultsList().addAll(b);
+		}
+		else
+		{
+			response.getResultsList().addAll(getProdutoDAC().fetchAllProdutos(request));
+		}
+
 		return response;
 	}
 

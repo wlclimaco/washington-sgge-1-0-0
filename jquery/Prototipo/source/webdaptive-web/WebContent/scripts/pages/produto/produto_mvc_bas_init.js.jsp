@@ -23,11 +23,27 @@ $(document).ready(function ()
 
 	var openDialog = function(row){
 		var dom = "<div class='id'>" + row.toString() + "</div>";
-		$('.ui-dialog').empty();
-		$(dom).load('../produto/cadastroProdutosByRequestBAS?id=1').dialog({height: 800,
-            width: 800,
-            modal: true});
-			$.address.value('?prodId='+row+'&type=edit');
+		$actionTagDialog = $("#action-produto-dialog").load('../produto/cadastroProdutosByRequestBAS').dialog({
+			autoOpen: false,
+			title: 'Action - Add Tag to SmartPoint',
+			width: 800,
+			minheight: 500,
+			height: 800,
+			modal: true,
+			buttons: {
+				'Gravar': function() {
+					ploader.callInsertWS(row);
+				},
+				Cancel: function() {
+					$(this).dialog('close');
+				}
+			},
+			dialogClass: 'action-dialog buttons-left',
+			resizable: false
+		});
+		$.address.value('?prodId='+row+'&type=edit');
+		$actionTagDialog.empty();
+		$actionTagDialog.dialog('open');
 	};
 
 	$("#qatmvctabsProd").on("click", "#insertButon", function(e) {

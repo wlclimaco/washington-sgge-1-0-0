@@ -97,10 +97,6 @@
 			<div id="pager" style="width:100%; height:3%;"></div>
 		</div>
 	 </fieldset>
-    <fieldset class="action">
-    	<input type="submit" name="submit" id="insert" value="Insert" />
-    	<input type="submit" name="submit" id="cancel" value="Cancel" />
-    </fieldset>
 </form>
 
 </div></body>

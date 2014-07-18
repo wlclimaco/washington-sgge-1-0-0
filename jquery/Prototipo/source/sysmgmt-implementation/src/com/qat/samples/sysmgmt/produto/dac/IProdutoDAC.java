@@ -8,7 +8,9 @@ import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.Cadastro;
 import com.qat.samples.sysmgmt.produto.model.Produto;
+import com.qat.samples.sysmgmt.produto.model.Tabelapreco;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
 
 /**
  * The Interface IProdutoDAC. (Data Access Component - DAC)
@@ -54,7 +56,9 @@ public interface IProdutoDAC
 	 * 
 	 * @return the list< produto>
 	 */
-	public List<Produto> fetchAllProdutos();
+	public List<Produto> fetchAllProdutos(ProdutoInquiryRequest request);
+
+	public List<Tabelapreco> fetchAllProdutosPreco(ProdutoInquiryRequest request);
 
 	/**
 	 * Fetch county by id.

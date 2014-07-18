@@ -27,7 +27,7 @@ var buttonFormat = function (row, cell, value, columnDef, dataContext) {
 }
 var buttonFormats = function (row, cell, value, columnDef, dataContext) {
 
-	return "<input type='button' value='Editar' class='btnProd "+value+"' />"
+	return "<input type='button' value='Produtos' class='btnProd "+value+"' />"
 
 }
 
@@ -38,7 +38,7 @@ var columns = [
 	{id:"razao", name: supermercado.grid.prazao.title, field:"razao", editor:Slick.Editors.Text},
 	{id:"cpfCnpj", name: supermercado.grid.pcnpj.title, field:"cpfCnpj", editor:Slick.Editors.Text},
 	{id:"rgInc", name: supermercado.grid.pincmun.title, field:"rgInc", editor:Slick.Editors.Text},
-	{id:"supermercadoid", name: supermercado.grid.pprod.title, field:"supermercadoid",  width:100,formatter: buttonFormat},
+	{id:"supermercadoid", name: supermercado.grid.pprod.title, field:"supermercadoid",  width:100,formatter: buttonFormats},
 	{id:"logradouro", name: supermercado.grid.plogradouro.title, field:"logradouro", editor:Slick.Editors.Text},
 	{id:"bairro", name: supermercado.grid.pbairro.title, field:"bairro", editor:Slick.Editors.Text},
 	{id:"cidade", name: supermercado.grid.pcidade.title, field:"cidade", editor:Slick.Editors.Text},
@@ -49,7 +49,7 @@ var columns = [
 var options =
 {
 	<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
-	editable: true,
+	editable: false,
 	</sec:authorize>
 	enableAddRow: false,
 	forceFitColumns: true,
