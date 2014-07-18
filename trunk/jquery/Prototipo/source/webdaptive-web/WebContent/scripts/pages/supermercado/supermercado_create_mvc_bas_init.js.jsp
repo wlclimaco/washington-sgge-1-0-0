@@ -3,7 +3,7 @@
 $(document).ready(function ()
 {
 
-	qat.model.supermercado.page.openPagedFetchWS(1);
+	qat.model.supermercado.page.openPagedFetchWS($.address.parameter('prodId'));
 
 
 });

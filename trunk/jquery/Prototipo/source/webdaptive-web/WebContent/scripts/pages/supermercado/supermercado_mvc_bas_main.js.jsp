@@ -25,6 +25,11 @@ var buttonFormat = function (row, cell, value, columnDef, dataContext) {
 	return "<input type='button' value='Editar' class='btn "+value+"' />"
 
 }
+var buttonFormats = function (row, cell, value, columnDef, dataContext) {
+
+	return "<input type='button' value='Editar' class='btnProd "+value+"' />"
+
+}
 
 var columns = [
 	{id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:"cell-center", width:30},
@@ -33,11 +38,11 @@ var columns = [
 	{id:"razao", name: supermercado.grid.prazao.title, field:"razao", editor:Slick.Editors.Text},
 	{id:"cpfCnpj", name: supermercado.grid.pcnpj.title, field:"cpfCnpj", editor:Slick.Editors.Text},
 	{id:"rgInc", name: supermercado.grid.pincmun.title, field:"rgInc", editor:Slick.Editors.Text},
-	{id:"id", name: supermercado.grid.pprod.title, field:"id",  width:100,formatter: buttonFormat},
+	{id:"supermercadoid", name: supermercado.grid.pprod.title, field:"supermercadoid",  width:100,formatter: buttonFormat},
 	{id:"logradouro", name: supermercado.grid.plogradouro.title, field:"logradouro", editor:Slick.Editors.Text},
 	{id:"bairro", name: supermercado.grid.pbairro.title, field:"bairro", editor:Slick.Editors.Text},
 	{id:"cidade", name: supermercado.grid.pcidade.title, field:"cidade", editor:Slick.Editors.Text},
-	{id:"id", name: " ", field:"id",  width:100,formatter: buttonFormat}
+	{id:"supermercadoid", name: " ", field:"supermercadoid",  width:100,formatter: buttonFormat}
 ];
 
 //grid options

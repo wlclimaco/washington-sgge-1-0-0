@@ -98,10 +98,11 @@
 
   <select id="insertSupermercado" parameterType="Supermercado" resultType="int" statementType="CALLABLE">
         { call ins_supermercado( #{usuario}, #{email},#{site},#{senha},#{logradouro},  #{bairro}, #{estado}, #{cidade}, #{numero}, #{cep}, #{nome}, #{complemento},#{usuarioid}, #{rginscmuni},  #{cpfcnpj}, #{razao}) }
+
   </select>
 
    <select id="updateSupermercado" parameterType="Supermercado" resultType="int" statementType="CALLABLE">
-        { call upd_supermercado( #{superId},#{usuario}, #{email},#{site},#{senha},#{enderecoid},#{id},#{logradouro},  #{bairro}, #{estado}, #{cidade}, #{numero}, #{cep}, #{nome}, #{complemento},#{documentoid},#{usuarioid}, #{rginscmuni},  #{cpfcnpj}, #{razao}) }
+        { call upd_supermercado( #{supermercadoid},#{usuario}, #{email},#{site},#{senha},#{enderecoid},#{id},#{logradouro},  #{bairro}, #{estado}, #{cidade}, #{numero}, #{cep}, #{nome}, #{complemento},#{documentoid},#{usuarioid}, #{rginscmuni},  #{cpfcnpj}, #{razao}) }
   </select>
 
   <select id="deleteSupermercadoById" parameterType="Supermercado" resultType="int" statementType="CALLABLE">

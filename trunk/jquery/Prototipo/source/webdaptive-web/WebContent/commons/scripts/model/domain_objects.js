@@ -105,13 +105,13 @@
 		this.senha = _senha;
 		this.email = _email;
 		this.enderecos  = [new qat.model.endereco (_enderecoid,_eid, _logradouro,_bairro,_estado,_cidade,_numero,_cep,_nome,_complemento,1)];
-		this.documentos = [new qat.model.documento(_documenroid,_did, _rgInc,_cpfCnpj,"teste",_razao,1,_dateNascimento)];
+		this.documentos = [new qat.model.documento(_documenroid,_did, _rgInc,_cpfCnpj,_razao,1,_dateNascimento)];
 		this.userId = userContext.userId;
 		this.tenant = userContext.tenant;
 		this.userRole = userContext.userRole;
 	};
 
-	qat.model.documento = function(_documentoid,_id, _rgInc,_cpfCnpj,_nome,_razao,_tabela,_dateNascimento)
+	qat.model.documento = function(_documentoid,_id, _rgInc,_cpfCnpj,_razao,_tabela,_dateNascimento)
 	{
 	    var userContext = new qat.base.model.userContext();
 		this.documentoid = _documentoid ;
@@ -120,9 +120,9 @@
 		this.cpfCnpj = _cpfCnpj ;
 		this.razao = _razao ;
 		this.tabela = _tabela ;
-		this.dateNascimento = _dateNascimento ;
+		a = new Date(_dateNascimento);
+		this.dateNascimento = a ;
 		this.userId = userContext.userId;
-		this.id = userContext.id;
 		this.tenant = userContext.tenant;
 		this.userRole = userContext.userRole;
 	};
@@ -143,12 +143,11 @@
 		this.complemento = _complemento;
 		this.tabela = _tabela;
 		this.userId = userContext.userId;
-		this.id = userContext.id;
 		this.tenant = userContext.tenant;
 		this.userRole = userContext.userRole;
 	};
 
-	qat.model.supermercado = function(_supermercadoid,_usuario, _email,_site,_usuario,_senha,_enderecoid,_eid,_endereco,_logradouro,_bairro,_estado,_cidade,_numero,_cep,_nome,_complemento,_documenroid,_did,_rgInc,_cpfCnpj,_razao,_dateNascimento)
+	qat.model.supermercado = function(_supermercadoid,_usuario, _email,_site,_usuario,_senha,_enderecoid,_eid,_logradouro,_bairro,_estado,_cidade,_numero,_cep,_nome,_complemento,_documenroid,_did,_rgInc,_cpfCnpj,_razao,_dateNascimento)
 	{
 
 	    var userContext = new qat.base.model.userContext();
@@ -158,7 +157,7 @@
 		this.site = _site;
 		this.senha = _senha;
 		this.enderecos = [new qat.model.endereco (_enderecoid,_eid, _logradouro,_bairro,_estado,_cidade,_numero,_cep,_nome,_complemento,1)];
-		this.documentos = [new qat.model.documento(_documenroid,_did, _rgInc,_cpfCnpj,"teste",_razao,1,_dateNascimento)];
+		this.documentos = [new qat.model.documento(_documenroid,_did, _rgInc,_cpfCnpj,_razao,1,_dateNascimento)];
 		this.userId = userContext.userId;
 		this.tenant = userContext.tenant;
 		this.userRole = userContext.userRole;
