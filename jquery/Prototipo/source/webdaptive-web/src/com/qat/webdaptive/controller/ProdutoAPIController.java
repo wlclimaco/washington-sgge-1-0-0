@@ -1,6 +1,5 @@
 package com.qat.webdaptive.controller;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import au.com.bytecode.opencsv.CSVWriter;
 
 import com.qat.framework.model.QATModel.PersistanceActionEnum;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
@@ -166,16 +163,16 @@ public class ProdutoAPIController extends ProdutoBaseController
 		System.out.println("\n**** writeAllExample ****");
 
 		String csv = "C:\\work\\output2.csv";
-		CSVWriter writer = new CSVWriter(new FileWriter(csv));
+		// CSVWriter writer = new CSVWriter(new FileWriter(csv));
 
 		List<String[]> data = new ArrayList<String[]>();
 		data.add(new String[] {"India", "New Delhi"});
 		data.add(new String[] {"United States", "Washington D.C"});
 		data.add(new String[] {"Germany", "Berlin"});
 
-		writer.writeAll(data);
+		// writer.writeAll(data);
 		System.out.println("CSV written successfully.");
-		writer.close();
+		// writer.close();
 	}
 
 }

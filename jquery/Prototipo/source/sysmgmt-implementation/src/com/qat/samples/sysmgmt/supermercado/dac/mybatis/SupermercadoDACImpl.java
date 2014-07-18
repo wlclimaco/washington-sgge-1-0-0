@@ -101,6 +101,7 @@ public class SupermercadoDACImpl extends SqlSessionDaoSupport implements ISuperm
 		paramMap.put("rginscmuni", supermercado.getDocumentos().get(0).getRgInc());
 		paramMap.put("cpfcnpj", supermercado.getDocumentos().get(0).getCpfCnpj());
 		paramMap.put("razao", supermercado.getDocumentos().get(0).getRazao());
+
 		InternalResponse response = new InternalResponse();
 
 		Integer academiaId =

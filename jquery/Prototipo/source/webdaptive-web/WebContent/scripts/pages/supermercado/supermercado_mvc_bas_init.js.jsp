@@ -64,7 +64,7 @@ $(document).ready(function ()
     });
 	</sec:authorize>
 		var openDialog = function(row){
-			var dom = "<div class='id'>" + row.toString() + "</div>";
+			dom = "<div class='id'>" + row.toString() + "</div>";
 			$actionTagDialog = $("#action-tag-dialog").load('../supermercado/fetchSupermercadosByEdit').dialog({
 				autoOpen: false,
 				title: 'Action - Add Tag to SmartPoint',
@@ -73,7 +73,7 @@ $(document).ready(function ()
 				modal: true,
 				buttons: {
 					'Gravar': function() {
-						qat.model.supermercado.page.gravar($('#codId').val());
+						qat.model.supermercado.page.gravar(row);
 					},
 					Cancel: function() {
 						$(this).dialog('close');

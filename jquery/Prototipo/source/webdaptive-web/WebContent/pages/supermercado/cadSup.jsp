@@ -29,9 +29,12 @@
         	<dt><label for="nome">Nome:</label></dt>
             <dd><input type="text" name="nome" id="nome" size="32" maxlength="100" /></dd>
 			<dd><input type="text" name="codId" id="codId" size="32" maxlength="60" class="hide" /></dd>
-			<dd><input type="text" name="codEnd" id="codId" size="32" maxlength="60" class="hide" /></dd>
-			<dd><input type="text" name="codDoc" id="codId" size="32" maxlength="60" class="hide" /></dd>
+			<dd><input type="text" name="codEnd" id="codEnd" size="32" maxlength="60" class="hide" /></dd>
+			<dd><input type="text" name="endId" id="endId" size="32" maxlength="60" class="hide" /></dd>
+			<dd><input type="text" name="codDoc" id="codDoc" size="32" maxlength="60" class="hide" /></dd>
+			<dd><input type="text" name="idDoc" id="idDoc" size="32" maxlength="60" class="hide" /></dd>
         </dl>
+
         <dl>
         	<dt><label for="site">Site:</label></dt>
             <dd><input type="text" name="site" id="site" size="32" maxlength="100" /></dd>
