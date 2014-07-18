@@ -2,7 +2,6 @@ package com.qat.samples.sysmgmt.produto.bas.ws;
 
 import javax.jws.WebService;
 
-import com.qat.samples.sysmgmt.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.RefreshRequest;
@@ -10,6 +9,7 @@ import com.qat.samples.sysmgmt.produto.bai.IProdutoBAI;
 import com.qat.samples.sysmgmt.produto.bas.IProdutoBAS;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.response.CadastroResponse;
 import com.qat.samples.sysmgmt.produto.model.response.ProdutoResponse;
@@ -99,7 +99,7 @@ public class ProdutoBAS implements IProdutoBAS
 	 * com.qat.samples.sysmgmt.bas.IProdutoBAS#fetchAllProdutos(com.qat.samples.sysmgmt.model.request.FetchAllRequest)
 	 */
 	@Override
-	public ProdutoResponse fetchAllProdutos(FetchAllRequest request)
+	public ProdutoResponse fetchAllProdutos(ProdutoInquiryRequest request)
 	{
 		return getProdutoBAI().fetchAllProdutos(request);
 	}

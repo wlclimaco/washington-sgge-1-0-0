@@ -16,7 +16,9 @@ import com.qat.samples.sysmgmt.model.response.InternalResponseLocal;
 import com.qat.samples.sysmgmt.produto.dac.IProdutoDAC;
 import com.qat.samples.sysmgmt.produto.model.Cadastro;
 import com.qat.samples.sysmgmt.produto.model.Produto;
+import com.qat.samples.sysmgmt.produto.model.Tabelapreco;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
 
 /**
  * The Class ProdutoDACImpl. (Data Access Component - DAC)
@@ -186,9 +188,17 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	 * @see com.qat.samples.sysmgmt.base.dac.IProdutoDAC#fetchAllProdutos()
 	 */
 	@Override
-	public List<Produto> fetchAllProdutos()
+	public List<Produto> fetchAllProdutos(ProdutoInquiryRequest request)
 	{
-		return QATMyBatisDacHelper.doQueryForList(getSqlSession(), STMT_FETCH_ALL);
+		return QATMyBatisDacHelper.doQueryForList(getSqlSession(), STMT_FETCH_ALL, request);
+
+	}
+
+	@Override
+	public List<Tabelapreco> fetchAllProdutosPreco(ProdutoInquiryRequest request)
+	{
+		return QATMyBatisDacHelper.doQueryForList(getSqlSession(), "PrecoMap.fetchAllPrecosSup", request
+				.getProduto().getPrecos().get(0).getSupermercadoid().getSuperId());
 	}
 
 	/*

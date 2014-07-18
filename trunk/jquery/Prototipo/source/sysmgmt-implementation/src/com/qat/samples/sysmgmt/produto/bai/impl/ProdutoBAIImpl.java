@@ -7,7 +7,6 @@ import com.qat.framework.model.QATModel.PersistanceActionEnum;
 import com.qat.framework.util.QATInterfaceUtil;
 import com.qat.framework.validation.ValidationContextIndicator;
 import com.qat.framework.validation.ValidationController;
-import com.qat.samples.sysmgmt.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.RefreshRequest;
@@ -16,6 +15,7 @@ import com.qat.samples.sysmgmt.produto.bai.IProdutoBAI;
 import com.qat.samples.sysmgmt.produto.baid.ProdutoBAID;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.response.CadastroResponse;
 import com.qat.samples.sysmgmt.produto.model.response.ProdutoResponse;
@@ -174,12 +174,12 @@ public class ProdutoBAIImpl implements IProdutoBAI
 	 * com.qat.samples.sysmgmt.bai.IProdutoBAI#fetchAllProdutos(com.qat.samples.sysmgmt.model.request.FetchAllRequest)
 	 */
 	@Override
-	public ProdutoResponse fetchAllProdutos(FetchAllRequest request)
+	public ProdutoResponse fetchAllProdutos(ProdutoInquiryRequest request)
 	{
 		ProdutoResponse response = new ProdutoResponse();
 		try
 		{
-			ProdutoBAID.fetchAllProdutos(getProdutoBAC(), response, null);
+			ProdutoBAID.fetchAllProdutos(getProdutoBAC(), response, request);
 		}
 		catch (Exception ex)
 		{

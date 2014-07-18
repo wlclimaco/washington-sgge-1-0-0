@@ -19,7 +19,11 @@ $(document).ready(function ()
 			var classs = $(e.target).attr('class');
 			var a = classs.split(' ');
             openDialog(a[1]);
-        }
+        }else if($(e.target).hasClass("btnProd")){
+			var classs = $(e.target).attr('class');
+			var a = classs.split(' ');
+			openDialogProduto(a[1]);
+		}
         e.stopImmediatePropagation();
     });
 	setTimeout('pgrid.init()', 250);
@@ -68,6 +72,31 @@ $(document).ready(function ()
 			$actionTagDialog = $("#action-tag-dialog").load('../supermercado/fetchSupermercadosByEdit').dialog({
 				autoOpen: false,
 				title: 'Action - Add Tag to SmartPoint',
+				width: 500,
+				minheight: 500,
+				height: 800,
+				modal: true,
+				buttons: {
+					'Gravar': function() {
+						qat.model.supermercado.page.gravar(row);
+					},
+					Cancel: function() {
+						$(this).dialog('close');
+					}
+				},
+				dialogClass: 'action-dialog buttons-left',
+				resizable: false
+			});
+			$.address.value('?prodId='+row+'&type=edit');
+			$actionTagDialog.empty();
+			$actionTagDialog.dialog('open');
+		};
+
+		var openDialogProduto = function(row){
+			dom = "<div class='id'>" + row.toString() + "</div>";
+			$actionTagDialog = $("#action-produto-dialog").load('../produto/produtosDialogByRequestBAS').dialog({
+				autoOpen: false,
+				title: 'Lista Produto Supermercado',
 				width: 500,
 				minheight: 500,
 				modal: true,

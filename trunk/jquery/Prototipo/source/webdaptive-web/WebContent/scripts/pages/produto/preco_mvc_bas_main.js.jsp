@@ -66,18 +66,18 @@ var options =
 		var onProcDataLoaded = new EventHelper();
 
 		<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
-		function callInsertWS()
+		function callInsertWS(_Id)
 		{
 			onProcDataLoading.notify({});
 
 			if($('#codId').val() != null){
 				var oData = callCreateObject($('#codId').val());
-				var oData = new qat.model.reqProduto(null, oData, true, true);
-				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/updateProduto', oData, fill_data, process_error);
+				var oData = new qat.model.reqProduto(null, oData, false, false);
+				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/updateProduto', oData, fill_data_2, process_error);
 			}else{
 				var oData = callCreateObject();
-				var oData = new qat.model.reqProduto(null, oData, true, true);
-				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/insertProduto', oData, fill_data, process_error);
+				var oData = new qat.model.reqProduto(null, oData, false, false);
+				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/insertProduto', oData, fill_data_2, process_error);
 			}
 		}
 
@@ -162,10 +162,20 @@ var options =
 			data = reuse_fill_data(procResponse,data,"insertproduto");
 			onProcDataLoaded.notify({});
 		}
+		function fill_data_2(procResponse)
+		{
+			$("#action-produto-dialog").dialog('close');
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos', {}, fill_data_3, process_error);
+			onProcDataLoaded.notify({});
+		}
+		function fill_data_3(procResponse)
+		{
+			data = reuse_fill_data(procResponse,data,"produto");
+			onProcDataLoaded.notify({});
+		}
 		function fill_data2(datas)
 		{
 			data = datas;
-			console.log(data);
 			onProcDataLoaded.notify({});
 		}
 
@@ -269,11 +279,11 @@ $('#precoGrid').keyup(function(e)
 	}
 });
 
-$('#refreshmenu').click(function() {
+$('#refreshpreco').click(function() {
 	ploader.callRefreshWS(135);
 });
 </sec:authorize>
-$('#listmenu').click(function() {
+$('#listpreco').click(function() {
 	 ploader.callPagedFetchWS(20,0);
 });
 </script>

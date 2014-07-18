@@ -22,6 +22,8 @@ public class ProdutoViewController extends ProdutoBaseController
 
 	private static final String CADASTRO_MVC_BAS_RETURN = "/produto/cadProduto";
 
+	private static final String DIALOG_MVC_BAS_RETURN = "/produto/produto_dialog";
+
 	/** The Constant ZERO. */
 	private static final int ZERO = 0;
 
@@ -36,18 +38,21 @@ public class ProdutoViewController extends ProdutoBaseController
 	@RequestMapping(value = "/fetchProdutosByRequestBAS", method = RequestMethod.GET)
 	public ModelAndView fetchProdutosbyRequestBAS()
 	{
-		PagedInquiryRequest request = new PagedInquiryRequest();
-		// we will be paging so set the default values
-		request.setStartPage(ZERO);
-		request.setPageSize(TWENTY);
-		request.setPreQueryCount(true);
-		return produtoMAV(request, PROCEDURE_MVC_BAS_RETURN);
+		ModelAndView modelAndView = new ModelAndView(PROCEDURE_MVC_BAS_RETURN);
+		return modelAndView;
 	}
 
 	@RequestMapping(value = "/cadastroProdutosByRequestBAS", method = RequestMethod.GET)
 	public ModelAndView cadastroProdutosByRequestBAS()
 	{
 		ModelAndView modelAndView = new ModelAndView(CADASTRO_MVC_BAS_RETURN);
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/produtosDialogByRequestBAS", method = RequestMethod.GET)
+	public ModelAndView produtosDialogByRequestBAS()
+	{
+		ModelAndView modelAndView = new ModelAndView(DIALOG_MVC_BAS_RETURN);
 		return modelAndView;
 	}
 

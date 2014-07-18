@@ -5,12 +5,12 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
-import com.qat.samples.sysmgmt.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.RefreshRequest;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.response.CadastroResponse;
 import com.qat.samples.sysmgmt.produto.model.response.ProdutoResponse;
@@ -76,7 +76,7 @@ public interface IProdutoRESTBAS
 	 */
 	@POST
 	@Path("/fetchAllProdutos/")
-	public ProdutoResponse fetchAllProdutos(FetchAllRequest request);
+	public ProdutoResponse fetchAllProdutos(ProdutoInquiryRequest request);
 
 	/**
 	 * Fetch county by id.

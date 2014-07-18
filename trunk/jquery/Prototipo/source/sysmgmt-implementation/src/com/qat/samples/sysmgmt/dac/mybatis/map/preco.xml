@@ -13,7 +13,6 @@
        exactly. -->
    <resultMap id="PrecoResult" type="Tabelapreco">
     <result property="precoid" column="precoid"/>
-    <result property="idProduto" column="produtoid"/>
     <result property="preco" column="preco"/>
     <result property="dataCreate" jdbcType="TIMESTAMP"  column="data"/>
     <result property="precopromo" column="precopromo"/>
@@ -21,6 +20,19 @@
     <result property="dateIni" jdbcType="TIMESTAMP"  column="dataini"/>
     <result property="dateFim" jdbcType="TIMESTAMP"  column="datafin"/>
     <association property="supermercadoid" column="supermercadoid" javaType="Supermercado" select="SupermercadoMap.fetchSupermercadoById" />
+    <collection property="acessos" column="precoid" select="ControleAcessMap.fetchControleAcessByPreco" />
+  </resultMap>
+
+   <resultMap id="PrecoResultProd" type="Tabelapreco">
+    <result property="precoid" column="precoid"/>
+    <result property="preco" column="preco"/>
+    <result property="dataCreate" jdbcType="TIMESTAMP"  column="data"/>
+    <result property="precopromo" column="precopromo"/>
+    <result property="promocao" column="promocao"/>
+    <result property="dateIni" jdbcType="TIMESTAMP"  column="dataini"/>
+    <result property="dateFim" jdbcType="TIMESTAMP"  column="datafin"/>
+    <association property="supermercadoid" column="supermercadoid" javaType="Supermercado" select="SupermercadoMap.fetchSupermercadoById" />
+    <association property="idProduto" column="produtoid" javaType="Supermercado" select="SupermercadoMap.fetchSupermercadoById" />
     <collection property="acessos" column="precoid" select="ControleAcessMap.fetchControleAcessByPreco" />
   </resultMap>
 
@@ -39,6 +51,9 @@
     FROM TABPRECO ORDER BY DATA DESC
   </select>
 
+ 	<select id="fetchAllPrecosSup" parameterType="int" resultMap="PrecoResultProd">
+		select t.* from tabpreco t,produto p where p.produtoid = t.produtoid and t.supermercadoid = #{id}  ORDER BY DATA DESC
+	</select>
    <select id="fetchPrecoByProduto" parameterType="int" resultMap="PrecoResult">
 	    SELECT
 	    <include refid="allPrecoColumns" />

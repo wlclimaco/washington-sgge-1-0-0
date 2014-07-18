@@ -20,6 +20,7 @@ import com.qat.samples.sysmgmt.produto.model.Cadastro;
 import com.qat.samples.sysmgmt.produto.model.Produto;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.response.CadastroResponse;
 import com.qat.samples.sysmgmt.produto.model.response.ProdutoResponse;
@@ -145,9 +146,9 @@ public final class ProdutoBAID
 	 * @param produtoBAC the produto bac
 	 * @param response the response
 	 */
-	public static void fetchAllProdutos(IProdutoBAC produtoBAC, ProdutoResponse response, CadastroInquiryRequest request)
+	public static void fetchAllProdutos(IProdutoBAC produtoBAC, ProdutoResponse response, ProdutoInquiryRequest request)
 	{
-		InternalResultsResponse<Produto> internalResponse = produtoBAC.fetchAllProdutos();
+		InternalResultsResponse<Produto> internalResponse = produtoBAC.fetchAllProdutos(request);
 		if (internalResponse.getStatus() != Status.OperationSuccess)
 		{
 			response.addOperationFailedMessage(DEFAULT_BUNDLE_BAID_EXCEPTION_MSG, new Object[] {internalResponse
@@ -251,7 +252,7 @@ public final class ProdutoBAID
 	 * @param produtoBAC the produto bac
 	 */
 	private static void maintainReturnList(Boolean listIndicator, Boolean pageListIndicator, ProdutoResponse response,
-			IProdutoBAC produtoBAC, CadastroInquiryRequest request)
+			IProdutoBAC produtoBAC, ProdutoInquiryRequest request)
 	{
 		// Fetch again if requested.
 		if (listIndicator)

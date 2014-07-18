@@ -150,6 +150,12 @@ public class Produto extends Util
 	 * @return the supermercadoid
 	 */
 
+	public Produto(Integer id)
+	{
+		super();
+		this.id = id;
+	}
+
 	/**
 	 * Gets the id.
 	 * 
