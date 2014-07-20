@@ -3,11 +3,13 @@
 var ploader = new Slick.Data.RemoteModel();
 $(document).ready(function ()
 {
+var  arrayList=[];
 	//initializes statusbar
 	$('#StatusBar').jnotifyInizialize({
         oneAtTime: true
     });
-
+	$( "#menu" ).menu();
+//	$.address.value('?prodId='+row+'&type=edit');
 	//sets up initial grid ...no data yet...but binds to the object that will fill it
 	pgrid = new Slick.Grid($("#prodGridDialog"), ploader.data, columns, options);
 	pgrid.setSelectionModel(new Slick.RowSelectionModel({selectActiveRow: false}));
@@ -20,6 +22,28 @@ $(document).ready(function ()
         }
         e.stopImmediatePropagation();
     });
+	 var rowIndex;
+
+        pgrid.onCellChange.subscribe(function (e, args) {
+            console.log('onCellChange');
+            rowIndex = args.row;
+        });
+
+        if (pgrid.getActiveCell()) {
+
+        }
+        //onSelectedRowsChanged event, if row number was changed call some function.
+
+        pgrid.onSelectedRowsChanged.subscribe(function (e, args) {
+            if (pgrid.getSelectedRows([0])[0] !== rowIndex) {
+				var count = args.rows.length;
+				arrayList = [];
+				for(var i = 0;i<count;i++){
+					arrayList.push(args.grid.getDataItem(args.rows[i]))
+				}
+				console.log(arrayList);
+            }
+        });
 
 	var openDialog = function(row){
 		var dom = "<div class='id'>" + row.toString() + "</div>";
@@ -86,6 +110,34 @@ $(document).ready(function ()
 		}
     });
 	</sec:authorize>
+	$("#menu").on("click", "#addSup", function(e) {
+
+		e.preventDefault();
+		$actionTagDialog = $("#action-produto-dialog1").load('../supermercado/fetchSupermercadosByRequestBASUtil').dialog({
+			autoOpen: false,
+			title: 'Action - Add Tag to SmartPoint',
+			width: 800,
+			minheight: 500,
+			height: 800,
+			modal: true,
+			buttons: {
+				'Gravar': function() {
+					ploader.callInsertWS(row);
+				},
+				Cancel: function() {
+					$(this).dialog('close');
+				}
+			},
+			dialogClass: 'action-dialog buttons-left',
+			resizable: false
+		});
+		$actionTagDialog.dialog('open');
+	});
+	$("#menu").on("click", "#remSup", function(e) {
+
+		e.preventDefault();
+		rest_post_call('qat-webdaptive/produto/api/produtoCSV', {}, null, null);
+	});
 
 	// load the Grid first time
 	ploader.callPagedFetchWS(20,0);

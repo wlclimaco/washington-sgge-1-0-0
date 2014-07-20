@@ -97,13 +97,10 @@ $(document).ready(function ()
 			$actionTagDialog = $("#action-produto-dialog").load('../produto/produtosDialogByRequestBAS').dialog({
 				autoOpen: false,
 				title: 'Lista Produto Supermercado',
-				width: 500,
-				minheight: 500,
+				width: 1024,
+				height: 400,
 				modal: true,
 				buttons: {
-					'Gravar': function() {
-						qat.model.supermercado.page.gravar(row);
-					},
 					Cancel: function() {
 						$(this).dialog('close');
 					}
@@ -111,7 +108,7 @@ $(document).ready(function ()
 				dialogClass: 'action-dialog buttons-left',
 				resizable: false
 			});
-			$.address.value('?prodId='+row+'&type=edit');
+			$.address.value('?supId='+row+'&type=edit');
 			$actionTagDialog.empty();
 			$actionTagDialog.dialog('open');
 		};
