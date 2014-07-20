@@ -10,37 +10,25 @@
 <head>
 <link type="text/css" href="../styles/common_grid.css" rel="stylesheet" />
 <link type="text/css" href="../styles/slick.pager.css" rel="stylesheet" />
+<style type="text/css">
+.hide{display:none;}
+.ui-menu { width: 450px; }
+</style>
 </head>
 <body>
-	<div id="actions" class="actions yui-u first">
-	     <div class="yui-pad">
-	         <a tabindex="1" href="#actions-options" class="fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all" id="actions-button"><span class="ui-icon ui-icon-triangle-1-s"></span>Actions</a>
-	           <div id="actions-options" class="hidden">
-	                 <ul>
-	                     <li><a href="#" class="action-option" id="header-configuration">Demand Reset</a>
-	                     	<ul>
-	                             <!--<li><a href="#" class="action-option" id="dr-schedule">Preset Demand Reset</a>-->
-	                             <li><a href="#" class="action-option" id="dr-initiate">Initiate Demand Reset</a>
-	                         </ul>
-	                     </li>
-	                     <!--<li><a href="#" class="action-option" id="header-group">TOU Delivery Analysis</a>-->
-	                      <li><a href="#" class="action-option" id="header-group">Groups</a>
-	                      	<ul>
-	                              <li><a href="#" class="action-option" id="add-group">Add to Group</a></li>
-	                        <li><a href="" id="remove-group">Remove from Group</a></li>
-	                          </ul>
-	                      </li>
-	                      <li><a href="#" class="action-option" id="header-tag">Tags</a>
-	                      	<ul>
-	                              <li><a href="" id="add-tag">Add Tag</a></li>
-	                              <li><a href="" id="remove-tag">Remove Tag</a></li>
-	                          </ul>
-	                      </li>
-	                  </ul>
-	              </div>
-	              <span class="message rounded"><span class="checked-count">0</span> SmartPoints Selected</span>
-	       </div>
-	</div>
+<ul id="menu">
+  <li>Acoes
+    <ul>
+      <li id='addSup'>Adicionar produto a Supermercado</li>
+      <li id='remSup'>Remover produto do Supermercado</li>
+	  <li id='addPro'>Adicionar produto promoçao</li>
+	  <li id='remPro'>Remover produto da promoção</li>
+    </ul>
+  </li>
+</ul>
+
+
+
 	 <div class="export-select">
 	     <ul class="link-list">
 	         <li class="last export-type"><small><strong>Export</strong>:<a href="" class="csv">CSV</a></small></li>
@@ -56,6 +44,8 @@
 		<div id="prodGridDialog" style="width:100%; height:95%;" class="wdgrid" ></div>
 		<div id="pager" style="width:100%; height:3%;"></div>
 	</div>
+<dd><input type="text" name="supId" id="supId" size="32" maxlength="60" class="hide" /></dd>
+<div id="action-produto-dialog1" class="action-dialog"></div>
 <script type="text/javascript" src="../commons/scripts/model/user_context.js"></script>
 <script type="text/javascript" src="../commons/scripts/model/request_objects.js"></script>
 <script type="text/javascript" src="../commons/scripts/model/domain_objects.js"></script>

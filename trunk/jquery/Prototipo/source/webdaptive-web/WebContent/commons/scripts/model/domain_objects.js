@@ -18,7 +18,7 @@
 		this.price = _procPrice;
 	};
 
-	qat.model.produto = function(_Id, _supermercadoid, _codBarra, _marca,_menu, _submenu,_trimenu, _unimed,_nome, _descricao,_foto,_precos, _imagens)
+	qat.model.produto = function(_Id, _supermercadoid, _codBarra, _marca,_menu, _submenu,_trimenu, _unimed,_nome, _descricao,_foto,_precos, _imagens,_tabela)
 	{
 	    var userContext = new qat.base.model.userContext();
 		this.id = parseInt(_Id);
@@ -31,6 +31,7 @@
 		this.foto = _foto;
 		this.precos = _precos;
 		this.imagens = _imagens;
+		this.tabela  = _tabela
 		this.userId = userContext.userId;
 		this.tenant = userContext.tenant;
 		this.userRole = userContext.userRole;

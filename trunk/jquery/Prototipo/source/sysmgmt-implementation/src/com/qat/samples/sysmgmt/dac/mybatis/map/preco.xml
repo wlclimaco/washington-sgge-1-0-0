@@ -32,7 +32,7 @@
     <result property="dateIni" jdbcType="TIMESTAMP"  column="dataini"/>
     <result property="dateFim" jdbcType="TIMESTAMP"  column="datafin"/>
     <association property="supermercadoid" column="supermercadoid" javaType="Supermercado" select="SupermercadoMap.fetchSupermercadoById" />
-    <association property="idProduto" column="produtoid" javaType="Supermercado" select="SupermercadoMap.fetchSupermercadoById" />
+    <association property="idProduto" column="produtoid" javaType="Produto" select="ProdutoMap.fetchProdutoByIdInt" />
     <collection property="acessos" column="precoid" select="ControleAcessMap.fetchControleAcessByPreco" />
   </resultMap>
 
@@ -52,7 +52,12 @@
   </select>
 
  	<select id="fetchAllPrecosSup" parameterType="int" resultMap="PrecoResultProd">
-		select t.* from tabpreco t,produto p where p.produtoid = t.produtoid and t.supermercadoid = #{id}  ORDER BY DATA DESC
+		select p.produtoid, p.nome, p.marca, p.menu, p.submenu, p.trimenu, p.unimed, p.precoid,
+            p.controleid, p.supermercadoid, p.codbarra, p.foto, p.descricao
+            from tabpreco t,produto p where p.produtoid = t.produtoid and t.supermercadoid = #{id}
+	    group by
+	     p.produtoid, p.nome, p.marca, p.menu, p.submenu, p.trimenu, p.unimed, p.precoid,
+         p.controleid, p.supermercadoid, p.codbarra, p.foto, p.descricao
 	</select>
    <select id="fetchPrecoByProduto" parameterType="int" resultMap="PrecoResult">
 	    SELECT
@@ -121,7 +126,7 @@
   </select>
 
   <select id="insertPreco" parameterType="tabelapreco" resultType="int" statementType="CALLABLE">
-        { call ins_preco( #{idProduto} , #{supermercadoid.superId} , null , #{preco} , #{precopromo} , #{promocao} ,null , null, #{userId} ) }
+        { call ins_preco( #{idProduto.id} , #{supermercadoid.superId} , null , #{preco} , #{precopromo} , #{promocao} ,null , null, #{userId} ) }
   </select>
 
     <select id="updatePreco" parameterType="tabelapreco" resultType="int" statementType="CALLABLE">

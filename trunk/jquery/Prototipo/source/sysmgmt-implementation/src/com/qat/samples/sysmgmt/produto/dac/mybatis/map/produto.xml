@@ -226,6 +226,11 @@
    <include refid="allProdutoColumns" />
      FROM PRODUTO where produtoid = #{id}
   </select>
+  <select id="fetchProdutoByIdInt" parameterType="int" resultMap="ProdutoResult">
+    SELECT
+   <include refid="allProdutoColumns" />
+     FROM PRODUTO where produtoid = #{id}
+  </select>
 
 
   <select id="insertCadastro" parameterType="Cadastro" resultType="int" statementType="CALLABLE">

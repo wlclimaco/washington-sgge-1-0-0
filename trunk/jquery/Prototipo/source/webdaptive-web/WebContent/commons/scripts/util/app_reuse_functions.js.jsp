@@ -92,6 +92,10 @@ function reuse_fill_data(response,data2,gridProcess)
 		{
 
 			data2 = preco_fill_data(response,data2);
+		}else if (gridProcess === "produtoDialog" )
+		{
+
+			data2 = produtoDialog_fill_data(response,data2);
 		}
 	}
 	else
@@ -843,6 +847,114 @@ function preco_fill_data(procResponse,data2)
 
 //=========================================================
 
+function produtoDialog_fill_data(procResponse,data2)
+{
+	data2[0] =
+	{
+		cellno:          0,
+		id:		         0,
+		codBarra:		"",
+		nome:  	        "",
+		unimed  :       "",
+		marca:  	    "",
+		supermercadoId: "",
+		preco  :        "",
+		promocao:  		"",
+		precopro:  		"",
+		cellno1:        ""
+
+	};
+
+	//Fill paging data
+	if (procResponse.resultsSetInfo != undefined)
+	{
+	 	pagingData.pageSize =  parseInt(procResponse.resultsSetInfo.pageSize);
+	 	pagingData.startPage =  parseInt(procResponse.resultsSetInfo.startPage);
+	 	pagingData.moreRowsAvailable =  procResponse.resultsSetInfo.moreRowsAvailable;
+	 	pagingData.totalRowsAvailable =  parseInt(procResponse.resultsSetInfo.totalRowsAvailable);
+	}
+
+	//make sure return is an array
+	if (($.isArray(procResponse.produtos))&&(procResponse.produtos[0].precos != null))
+	{
+
+		var oi = 0;
+		var tmpLength = procResponse.produtos[0].precos.length;
+console.log('sss = '+ $('#supId').val())
+		for (var i=1; i <= tmpLength; i++)
+		{
+			if(procResponse.produtos[0].precos[oi].idProduto.marca != null){
+				var a =		procResponse.produtos[0].precos[oi].idProduto.marca.nome;
+			}else{
+				a= 0;
+			}
+			if(procResponse.produtos[0].precos[oi].idProduto.unimed != null){
+				var e =		procResponse.produtos[0].precos[oi].idProduto.unimed.nome;
+			}else{
+				e= 0;
+			}
+			var conta = procResponse.produtos[0].precos[oi].idProduto.precos.length;
+			var preco = procResponse.produtos[0].precos[oi].idProduto.precos;
+			var precoId = 0;
+			for(var ac = 0;ac<conta;ac++){
+				if(preco[ac].supermercadoid != null){
+					if(preco[ac].supermercadoid.superId == parseInt($('#supId').val())){
+						if(preco[ac].precoid > precoId){
+							if (preco[ac].acessos != null){
+								var count = preco[ac].acessos.length;
+								if(preco[ac].acessos[count-1] != null){
+									var f =     preco[ac].acessos[count-1].userId;
+									var g =     convertData(preco[ac].acessos[count-1].data);
+								}else{
+									var f= "";
+									var g= "";
+								}
+							}else{
+								var f= "";
+								var g= "";
+							}
+							var h =     $('#supId').val();
+							if(preco != null){
+								var w =    preco[ac].preco;
+								var y =    preco[ac].promocao;
+								var z =    preco[ac].precopromo;
+							}else{
+								var w = "";
+								var y = "";
+								var z = "";
+							}
+							precoId = preco[ac].precoid;
+						}
+					}
+				}
+			}
+			data2[i] =
+			{
+
+				cellno:         i,
+				id:		        procResponse.produtos[0].precos[oi].idProduto.id,
+				codBarra:		procResponse.produtos[0].precos[oi].idProduto.codBarra,
+				nome:  	        procResponse.produtos[0].precos[oi].idProduto.nome,
+				unimed  :       e,
+				marca:  	    a,
+				supermercadoId: h,
+				preco  :        w,
+				promocao:  		y,
+				precopro:  		z,
+				data:  		    g,
+				userId:  		f,
+				cellno1:        ""
+
+			}
+
+			oi++;
+		}
+	}
+
+	return data2;
+};
+
+//==========================================================
 
 //error routine for all ajax calls to the back-end or MVC
 function fill_data_error(response)

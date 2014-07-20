@@ -10,16 +10,6 @@ var pagingData = new qat.model.pageData(null,null,null,null);
 var id = $("div[id*='tabs']" ).attr("id");
 var viewLoadedObject;
 
-//loads object if being served via controller
-<c:choose>
-    <c:when test="${empty produtoResponse}">
-			viewLoadedObject = null;
-    </c:when>
-    <c:otherwise>
-			viewLoadedObject = ${produtoResponse};
-    </c:otherwise>
-</c:choose>
-
 var columns=[];
  var checkboxSelector = new Slick.CheckboxSelectColumn({
       cssClass: "slick-cell-checkboxsel"
@@ -34,20 +24,17 @@ var columns=[];
     columns.push(checkboxSelector.getColumnDefinition());
 //columns & column settings for the grid
 columns[1]  = {id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:"cell-center", width:30};
-columns[3]  = {id:"id", name: procedure.grid.psak.title, field:"id", resizable:false, cssClass:"cell-center", width:75};
-columns[4]  = {id:"codBarra", name:produto.grid.codBarra, field:"codBarra",  width:135, editable:true, cssClass:"pad-4-left", sortable:true},
-columns[5]  = {id:"nome", name: produto.grid.nome.title, field:"nome"};
-columns[6]  = {id:"unimed", name: produto.grid.unimed.title, field:"unimed"};
-columns[7]  = {id:"descricao", name: produto.grid.descricao.title, field:"descricao"};
-columns[8]  = {id:"marca", name:produto.grid.marca.title, field:"marca",  width:135, editable:true, cssClass:"pad-4-left", sortable:true},
-columns[9]  = {id:"menu", name: produto.grid.menu.title, field:"menu"};
-columns[10] = {id:"supermercadoId", name: produto.grid.supermercadoId.title, field:"supermercadoId"};
-columns[11] = {id:"preco", name: produto.grid.preco.title, field:"preco"};
-columns[12] = {id:"imagens", name: produto.grid.imagens.title, field:"imagens"};
-columns[13] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
-columns[14] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
-
-
+columns[2]  = {id:"id", name: procedure.grid.psak.title, field:"id", resizable:false, cssClass:"cell-center", width:75};
+columns[3]  = {id:"codBarra", name:produto.grid.codBarra.title, field:"codBarra",  width:135, editable:true, cssClass:"pad-4-left", sortable:true},
+columns[4]  = {id:"nome", name: produto.grid.nome.title, field:"nome"};
+columns[5]  = {id:"unimed", name: produto.grid.unimed.title, field:"unimed"};
+columns[6]  = {id:"marca", name:produto.grid.marca.title, field:"marca",  width:135, editable:true, cssClass:"pad-4-left", sortable:true},
+columns[7]  = {id:"supermercadoId", name: produto.grid.supermercadoId.title, field:"supermercadoId"};
+columns[8]  = {id:"preco", name: produto.grid.preco.title, field:"preco",editor:Slick.Editors.Text};
+columns[9]  = {id:"promocao", name: produto.grid.promocao.title, field:"promocao",editor:Slick.Editors.Text};
+columns[10] = {id:"precopro", name: produto.grid.precopro.title, field:"precopro",editor:Slick.Editors.Text};
+columns[11] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
+columns[12] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
 
 
 //];
@@ -56,7 +43,7 @@ columns[14] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
 var options =
 {
 	<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
-	editable: false,
+	editable: true,
 	</sec:authorize>
 	enableAddRow: false,
 	forceFitColumns: true,
@@ -76,6 +63,7 @@ var options =
 
 		function callUpdateWS()
 		{
+
 			var tempLength = aRowChg.length;
 			if (tempLength > 0)
 			{
@@ -93,13 +81,14 @@ var options =
 				{
 					bList = false;
 				}
-				//	var oData = new qat.model.reqProc(null, new qat.model.cadastro(data[aRowChg[a]].pversion,data[aRowChg[a]].psak,data[aRowChg[a]].pcode,data[aRowChg[a]].pdesc,0.0), bList, true);
-				var oData = new qat.model.reqProduto(null, new qat.model.produto(data[aRowChg[a]].id,4,data[aRowChg[a]].nome,data[aRowChg[a]].descricao),bList,true);
-				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/ProdutoCadastro', oData, fill_data, process_error);
-				var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(1,3),true,true);
-				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos',{cadastro:{type:4,userId:'rod'}}, fill_data, process_error);
+				var oPreco = new qat.model.preco(null, data[aRowChg[a]].id, data[aRowChg[a]].supermercadoId, null,data[aRowChg[a]].preco,data[aRowChg[a]].promocao,data[aRowChg[a]].precopro, null, null);
+				var oData = new qat.model.reqProduto(null, new qat.model.produto(1,1, null,null,null,null,null,null,null,null,null,[oPreco], null,11),bList,true);
+				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/insertProduto', oData, fill_data, process_error);
+
+				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos', {produto:{tabela:11,precos:[{supermercadoid:{superId:parseInt($('#supId').val())}}],userId:'rod'}}, fill_data, process_error);
 
 			}
+
 		}
 
 
@@ -113,13 +102,15 @@ var options =
 
 		function callPagedFetchWS(_iPageSize, _iStartPage)
 		{
+			tabval = ($.address.parameter('supId'));
+			$('#supId').val(tabval);
 		    onProcDataLoading.notify({});
 		    //if viewLOaddedObject filled by controller don't make a ajax call
 			if (viewLoadedObject == null)
 			{
 			    var oData = new qat.model.pagedInquiryRequest(null, _iPageSize, _iStartPage, true);
 				//rest_post_call('qat-webdaptive/cadastro/api/fetchByRequestBAS', oData, fill_data, process_error);
-			    rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos', {produto:{tabela:11,precos:[{supermercadoid:{superId:8}}],userId:'rod'}}, fill_data, process_error);
+			    rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos', {produto:{tabela:11,precos:[{supermercadoid:{superId:parseInt($('#supId').val())}}],userId:'rod'}}, fill_data, process_error);
 			}
 			else
 			{
@@ -130,7 +121,7 @@ var options =
 
 		function fill_data(procResponse)
 		{
-			data = reuse_fill_data(procResponse,data,"produto");
+			data = reuse_fill_data(procResponse,data,"produtoDialog");
 			onProcDataLoaded.notify({});
 		}
 
@@ -207,19 +198,10 @@ function validateFields(rowValue)
 <sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
 $('#prodGridDialog').keyup(function(e)
 {
+
 	if (e.keyCode == 13)
 	{
-		if (rowChg >= 1 )
-		{
 			ploader.callUpdateWS(aRowChg);
-		}
-		else
-		{
-		//	if (validateFields(0))
-		//	{
-				ploader.callInsertWS();
-		//	}
-		}
 	}
 });
 

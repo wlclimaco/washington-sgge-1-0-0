@@ -84,20 +84,28 @@ public class ProdutoBACImpl implements IProdutoBAC
 	@Override
 	public InternalResponse insertProduto(Produto produto)
 	{
-		// produto.setPrice(ProdutoBAD.calculatePrice(INSERT_SEED));
-		InternalResponse response = new InternalResponse();
-		InternalResponseLocal internalResponse = (InternalResponseLocal)getProdutoDAC().insertProduto(produto);
-		if (internalResponse.getStatus() == Status.OperationSuccess)
+		if (!produto.getTabela().equals(TableTypeEnum.TABPRECO))
 		{
-
-			for (Integer i = 0; i < produto.getPrecos().size(); i++)
+			InternalResponse response = new InternalResponse();
+			InternalResponseLocal internalResponse = (InternalResponseLocal)getProdutoDAC().insertProduto(produto);
+			if (internalResponse.getStatus() == Status.OperationSuccess)
 			{
-				produto.getPrecos().get(i).setIdProduto(new Produto(internalResponse.getId()));
-				response = getPrecoDAC().insertPreco(produto.getPrecos().get(i));
-			}
-		}
 
-		return response;
+				for (Integer i = 0; i < produto.getPrecos().size(); i++)
+				{
+					produto.getPrecos().get(i).setIdProduto(new Produto(internalResponse.getId()));
+					response = getPrecoDAC().insertPreco(produto.getPrecos().get(i));
+				}
+			}
+
+			return response;
+		}
+		else
+		{
+			InternalResponse response = new InternalResponse();
+			response = getPrecoDAC().insertPreco(produto.getPrecos().get(0));
+			return response;
+		}
 	}
 
 	/*
