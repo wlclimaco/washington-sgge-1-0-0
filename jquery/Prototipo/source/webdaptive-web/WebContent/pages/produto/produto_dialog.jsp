@@ -26,7 +26,7 @@
     </ul>
   </li>
 </ul>
-
+<span class="message rounded"><span class="checked-count">0</span> SmartPoints Selected</span>
 
 
 	 <div class="export-select">

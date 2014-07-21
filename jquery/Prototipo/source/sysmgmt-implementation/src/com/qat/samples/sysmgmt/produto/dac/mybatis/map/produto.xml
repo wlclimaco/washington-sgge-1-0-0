@@ -247,7 +247,7 @@
      { call upd_cadastro(  #{id},#{descricao}, #{nome},#{tableTypeEnumValue},#{userId} ) }
   </select>
 
-  <select id="updateProduto" parameterType="Produto" resultType="int" statementType="CALLABLE">
+  <select id="updateProduto" parameterType="HashMap" resultType="int" statementType="CALLABLE">
 	{ call upd_produto( #{produtoid} , #{codbarra} , #{nome} , #{marca} , #{menu}, #{unimed} , #{foto} ,#{descricao} ,  #{usuarioid} ) }
   </select>
 

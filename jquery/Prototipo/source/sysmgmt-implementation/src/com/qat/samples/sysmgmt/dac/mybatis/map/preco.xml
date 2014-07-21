@@ -130,7 +130,7 @@
   </select>
 
     <select id="updatePreco" parameterType="tabelapreco" resultType="int" statementType="CALLABLE">
-        { call upd_preco( #{idProduto} , #{supermercadoid.superId} , null , #{preco} , #{precopromo} , #{promocao} ,null , null, #{userId} ) }
+        { call upd_preco( #{idProduto.id} , #{supermercadoid.superId} , null , #{preco} , #{precopromo} , #{promocao} ,null , null, #{userId} ) }
   </select>
 
 
