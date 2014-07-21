@@ -24,6 +24,8 @@ import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.response.CadastroResponse;
 import com.qat.samples.sysmgmt.produto.model.response.ProdutoResponse;
+import com.qat.samples.sysmgmt.supermercado.model.Supermercado;
+import com.qat.samples.sysmgmt.util.TableTypeEnum;
 
 /**
  * Delegate class for Produto BAI. Note this is a final class with ONLY static methods so everything must be
@@ -71,7 +73,35 @@ public final class ProdutoBAID
 				internalResponse = produtoBAC.insertProduto(request.getProduto());
 				break;
 			case UPDATE:
-				internalResponse = produtoBAC.updateProduto(request.getProduto());
+				if (!ValidationUtil.isNull(request.getProdutos()))
+				{
+					for (Integer i = 0; i < request.getProdutos().size(); i++)
+					{
+						if (request.getProdutos().get(i).getTabela().equals(TableTypeEnum.PRODUTO))
+						{
+							InternalResultsResponse<Produto> produto = new InternalResultsResponse<Produto>();
+							produto =
+									produtoBAC.fetchProdutoById(new FetchByIdRequest(request.getProdutos().get(i)
+											.getId()));
+							if (produto.getStatus().equals(Status.OperationSuccess))
+							{
+
+								Produto produtos = new Produto();
+								produtos = produto.getFirstResult();
+								Supermercado supermercado = new Supermercado();
+								supermercado.setSuperId(request.getProdutos().get(i).getPrecos().get(0)
+										.getSupermercadoid().getSuperId());
+								produtos.getPrecos().get(0).setSupermercadoid(supermercado);
+								internalResponse = produtoBAC.insertProduto(produtos);
+							}
+						}
+					}
+
+				}
+				else
+				{
+					internalResponse = produtoBAC.updateProduto(request.getProduto());
+				}
 				break;
 			case DELETE:
 				internalResponse = produtoBAC.deleteProduto(request.getProduto());

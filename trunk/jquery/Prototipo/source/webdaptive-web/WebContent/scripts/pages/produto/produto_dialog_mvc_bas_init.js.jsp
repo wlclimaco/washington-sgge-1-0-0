@@ -116,13 +116,13 @@ var  arrayList=[];
 		$actionTagDialog = $("#action-produto-dialog1").load('../supermercado/fetchSupermercadosByRequestBASUtil').dialog({
 			autoOpen: false,
 			title: 'Action - Add Tag to SmartPoint',
-			width: 800,
-			minheight: 500,
-			height: 800,
+			width: 500,
+			minheight: 300,
+			height: 300,
 			modal: true,
 			buttons: {
-				'Gravar': function() {
-					ploader.callInsertWS(row);
+				'Adicionar': function() {
+					qat.model.supermercado.pages.gravar(arrayList);
 				},
 				Cancel: function() {
 					$(this).dialog('close');
