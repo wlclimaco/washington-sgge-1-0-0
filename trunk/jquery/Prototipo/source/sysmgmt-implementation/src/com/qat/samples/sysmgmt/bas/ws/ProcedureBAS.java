@@ -15,7 +15,7 @@ import com.qat.samples.sysmgmt.model.response.ProcedureResponse;
  * Standard implementation of a BAS where the operations are delegated to a BAI.
  * Note the BAI is injected by Spring.
  */
-@WebService(targetNamespace = "http://qat.com/sysmgmt")
+@WebService(targetNamespace = "http://www.supermercado.kinghost.net/sysmgmt")
 public class ProcedureBAS implements IProcedureBAS
 {
 
@@ -44,7 +44,8 @@ public class ProcedureBAS implements IProcedureBAS
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bas.IProcedureBAS#insertProcedure(com.qat.samples.sysmgmt.model.request.ProcedureMaintenanceRequest)
+	 * @see com.qat.samples.sysmgmt.bas.IProcedureBAS#insertProcedure(com.qat.samples.sysmgmt.model.request.
+	 * ProcedureMaintenanceRequest)
 	 */
 	@Override
 	public ProcedureResponse insertProcedure(ProcedureMaintenanceRequest request)
@@ -54,7 +55,8 @@ public class ProcedureBAS implements IProcedureBAS
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bas.IProcedureBAS#updateProcedure(com.qat.samples.sysmgmt.model.request.ProcedureMaintenanceRequest)
+	 * @see com.qat.samples.sysmgmt.bas.IProcedureBAS#updateProcedure(com.qat.samples.sysmgmt.model.request.
+	 * ProcedureMaintenanceRequest)
 	 */
 	@Override
 	public ProcedureResponse updateProcedure(ProcedureMaintenanceRequest request)
@@ -64,7 +66,8 @@ public class ProcedureBAS implements IProcedureBAS
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bas.IProcedureBAS#deleteProcedure(com.qat.samples.sysmgmt.model.request.ProcedureMaintenanceRequest)
+	 * @see com.qat.samples.sysmgmt.bas.IProcedureBAS#deleteProcedure(com.qat.samples.sysmgmt.model.request.
+	 * ProcedureMaintenanceRequest)
 	 */
 	@Override
 	public ProcedureResponse deleteProcedure(ProcedureMaintenanceRequest request)
@@ -74,7 +77,8 @@ public class ProcedureBAS implements IProcedureBAS
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bas.IProcedureBAS#refreshProcedures(com.qat.samples.sysmgmt.model.request.RefreshRequest)
+	 * @see
+	 * com.qat.samples.sysmgmt.bas.IProcedureBAS#refreshProcedures(com.qat.samples.sysmgmt.model.request.RefreshRequest)
 	 */
 	@Override
 	public ProcedureResponse refreshProcedures(RefreshRequest request)
@@ -85,7 +89,9 @@ public class ProcedureBAS implements IProcedureBAS
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bas.IProcedureBAS#fetchAllProcedures(com.qat.samples.sysmgmt.model.request.FetchAllRequest)
+	 * @see
+	 * com.qat.samples.sysmgmt.bas.IProcedureBAS#fetchAllProcedures(com.qat.samples.sysmgmt.model.request.FetchAllRequest
+	 * )
 	 */
 	@Override
 	public ProcedureResponse fetchAllProcedures(FetchAllRequest request)
@@ -95,7 +101,9 @@ public class ProcedureBAS implements IProcedureBAS
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bas.IProcedureBAS#fetchProcedureById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
+	 * @see
+	 * com.qat.samples.sysmgmt.bas.IProcedureBAS#fetchProcedureById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+	 * )
 	 */
 	@Override
 	public ProcedureResponse fetchProcedureById(FetchByIdRequest request)
@@ -105,7 +113,8 @@ public class ProcedureBAS implements IProcedureBAS
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bas.IProcedureBAS#fetchProceduresByRequest(com.qat.samples.sysmgmt.model.request.PagedInquiryRequest)
+	 * @see com.qat.samples.sysmgmt.bas.IProcedureBAS#fetchProceduresByRequest(com.qat.samples.sysmgmt.model.request.
+	 * PagedInquiryRequest)
 	 */
 	@Override
 	public ProcedureResponse fetchProceduresByRequest(PagedInquiryRequest request)
