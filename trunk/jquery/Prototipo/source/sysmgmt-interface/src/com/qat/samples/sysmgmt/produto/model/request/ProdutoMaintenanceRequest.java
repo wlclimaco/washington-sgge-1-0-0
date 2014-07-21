@@ -1,5 +1,8 @@
 package com.qat.samples.sysmgmt.produto.model.request;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlElement;
 
 import com.qat.framework.model.request.MaintenanceRequest;
@@ -14,6 +17,7 @@ public class ProdutoMaintenanceRequest extends MaintenanceRequest
 	/** The produto. */
 	@XmlElement(nillable = true)
 	private Produto produto;
+	private List<Produto> produtos;
 
 	/**
 	 * The return list.
@@ -111,16 +115,32 @@ public class ProdutoMaintenanceRequest extends MaintenanceRequest
 		this.returnListPaged = returnListPaged;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	public List<Produto> getProdutos()
+	{
+		return produtos;
+	}
+
+	public void setProdutos(List<Produto> produtos)
+	{
+		this.produtos = produtos;
+	}
+
+	public void addProduto(Produto produto)
+	{
+		if (getProdutos() == null)
+		{
+			setProdutos(new ArrayList<Produto>());
+		}
+
+		getProdutos().add(produto);
+	}
+
 	@Override
 	public String toString()
 	{
 		return "ProdutoMaintenanceRequest [getProduto()=" + getProduto() + ", getReturnList()=" + getReturnList()
-				+ ", getReturnListPaged()=" + getReturnListPaged()
-				+ ", getUserContext()=" + getUserContext() + "]";
+				+ ", getReturnListPaged()=" + getReturnListPaged() + ", getProdutos()=" + getProdutos()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }

@@ -88,7 +88,9 @@ public final class ProdutoBAID
 
 								Produto produtos = new Produto();
 								produtos = produto.getFirstResult();
+								produtos.setTabela(TableTypeEnum.PRODUTO);
 								Supermercado supermercado = new Supermercado();
+								supermercado = produtos.getPrecos().get(0).getSupermercadoid();
 								supermercado.setSuperId(request.getProdutos().get(i).getPrecos().get(0)
 										.getSupermercadoid().getSuperId());
 								produtos.getPrecos().get(0).setSupermercadoid(supermercado);
