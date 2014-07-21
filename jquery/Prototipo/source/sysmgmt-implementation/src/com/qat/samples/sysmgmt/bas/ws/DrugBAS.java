@@ -14,7 +14,7 @@ import com.qat.samples.sysmgmt.model.response.DrugResponse;
 /**
  * The Class DrugBAS.
  */
-@WebService(targetNamespace = "http://qat.com/sysmgmt")
+@WebService(targetNamespace = "http://www.supermercado.kinghost.net/sysmgmt")
 public class DrugBAS implements IDrugBAS
 {
 
@@ -54,7 +54,8 @@ public class DrugBAS implements IDrugBAS
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bas.IDrugBAS#updateDrug(com.qat.samples.sysmgmt.model.request.DrugMaintenanceRequest)
+	 * @see
+	 * com.qat.samples.sysmgmt.bas.IDrugBAS#updateDrug(com.qat.samples.sysmgmt.model.request.DrugMaintenanceRequest)
 	 */
 	@Override
 	public DrugResponse updateDrug(DrugMaintenanceRequest request)
@@ -64,7 +65,8 @@ public class DrugBAS implements IDrugBAS
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bas.IDrugBAS#deleteDrug(com.qat.samples.sysmgmt.model.request.DrugMaintenanceRequest)
+	 * @see
+	 * com.qat.samples.sysmgmt.bas.IDrugBAS#deleteDrug(com.qat.samples.sysmgmt.model.request.DrugMaintenanceRequest)
 	 */
 	@Override
 	public DrugResponse deleteDrug(DrugMaintenanceRequest request)
@@ -94,7 +96,8 @@ public class DrugBAS implements IDrugBAS
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bas.IDrugBAS#fetchDrugByCode(com.qat.samples.sysmgmt.model.request.FetchByCodeRequest)
+	 * @see
+	 * com.qat.samples.sysmgmt.bas.IDrugBAS#fetchDrugByCode(com.qat.samples.sysmgmt.model.request.FetchByCodeRequest)
 	 */
 	@Override
 	public DrugResponse fetchDrugByCode(FetchByCodeRequest request)
@@ -104,7 +107,9 @@ public class DrugBAS implements IDrugBAS
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bas.IDrugBAS#fetchDrugsByRequest(com.qat.samples.sysmgmt.model.request.PagedInquiryRequest)
+	 * @see
+	 * com.qat.samples.sysmgmt.bas.IDrugBAS#fetchDrugsByRequest(com.qat.samples.sysmgmt.model.request.PagedInquiryRequest
+	 * )
 	 */
 	@Override
 	public DrugResponse fetchDrugsByRequest(PagedInquiryRequest request)

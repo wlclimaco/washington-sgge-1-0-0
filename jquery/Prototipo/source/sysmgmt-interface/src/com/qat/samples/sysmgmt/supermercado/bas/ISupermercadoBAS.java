@@ -17,7 +17,7 @@ import com.qat.samples.sysmgmt.supermercado.model.response.SupermercadoResponse;
 /**
  * The Interface ISupermercadoBAS. (Business Area Service - BAS)
  */
-@WebService(serviceName = "SupermercadoService", targetNamespace = "http://qat.com/sysmgmt", portName = "SupermercadoServicePort")
+@WebService(serviceName = "SupermercadoService", targetNamespace = "http://www.supermercado.kinghost.net/sysmgmt", portName = "SupermercadoServicePort")
 public interface ISupermercadoBAS
 {
 

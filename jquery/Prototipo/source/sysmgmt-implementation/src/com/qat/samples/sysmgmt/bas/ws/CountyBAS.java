@@ -15,7 +15,7 @@ import com.qat.samples.sysmgmt.model.response.CountyResponse;
  * Standard implementation of a BAS where the operations are delegated to a BAI.
  * Note the BAI is injected by Spring.
  */
-@WebService(targetNamespace = "http://qat.com/sysmgmt")
+@WebService(targetNamespace = "http://www.supermercado.kinghost.net/sysmgmt")
 public class CountyBAS implements ICountyBAS
 {
 
@@ -44,7 +44,9 @@ public class CountyBAS implements ICountyBAS
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bas.ICountyBAS#insertCounty(com.qat.samples.sysmgmt.model.request.CountyMaintenanceRequest)
+	 * @see
+	 * com.qat.samples.sysmgmt.bas.ICountyBAS#insertCounty(com.qat.samples.sysmgmt.model.request.CountyMaintenanceRequest
+	 * )
 	 */
 	@Override
 	public CountyResponse insertCounty(CountyMaintenanceRequest request)
@@ -54,7 +56,9 @@ public class CountyBAS implements ICountyBAS
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bas.ICountyBAS#updateCounty(com.qat.samples.sysmgmt.model.request.CountyMaintenanceRequest)
+	 * @see
+	 * com.qat.samples.sysmgmt.bas.ICountyBAS#updateCounty(com.qat.samples.sysmgmt.model.request.CountyMaintenanceRequest
+	 * )
 	 */
 	@Override
 	public CountyResponse updateCounty(CountyMaintenanceRequest request)
@@ -64,7 +68,9 @@ public class CountyBAS implements ICountyBAS
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bas.ICountyBAS#deleteCounty(com.qat.samples.sysmgmt.model.request.CountyMaintenanceRequest)
+	 * @see
+	 * com.qat.samples.sysmgmt.bas.ICountyBAS#deleteCounty(com.qat.samples.sysmgmt.model.request.CountyMaintenanceRequest
+	 * )
 	 */
 	@Override
 	public CountyResponse deleteCounty(CountyMaintenanceRequest request)
@@ -85,7 +91,8 @@ public class CountyBAS implements ICountyBAS
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bas.ICountyBAS#fetchAllCounties(com.qat.samples.sysmgmt.model.request.FetchAllRequest)
+	 * @see
+	 * com.qat.samples.sysmgmt.bas.ICountyBAS#fetchAllCounties(com.qat.samples.sysmgmt.model.request.FetchAllRequest)
 	 */
 	@Override
 	public CountyResponse fetchAllCounties(FetchAllRequest request)
@@ -95,7 +102,8 @@ public class CountyBAS implements ICountyBAS
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bas.ICountyBAS#fetchCountyById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
+	 * @see
+	 * com.qat.samples.sysmgmt.bas.ICountyBAS#fetchCountyById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
 	 */
 	@Override
 	public CountyResponse fetchCountyById(FetchByIdRequest request)
@@ -105,7 +113,8 @@ public class CountyBAS implements ICountyBAS
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bas.ICountyBAS#fetchCountiesByRequest(com.qat.samples.sysmgmt.model.request.PagedInquiryRequest)
+	 * @see com.qat.samples.sysmgmt.bas.ICountyBAS#fetchCountiesByRequest(com.qat.samples.sysmgmt.model.request.
+	 * PagedInquiryRequest)
 	 */
 	@Override
 	public CountyResponse fetchCountiesByRequest(PagedInquiryRequest request)

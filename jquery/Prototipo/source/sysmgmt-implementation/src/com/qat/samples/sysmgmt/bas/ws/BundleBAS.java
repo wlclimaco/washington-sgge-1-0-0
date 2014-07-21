@@ -15,7 +15,7 @@ import com.qat.samples.sysmgmt.model.response.BundleResponse;
  * Standard implementation of a BAS where the operations are delegated to a BAI.
  * Note the BAI is injected by Spring.
  */
-@WebService(targetNamespace = "http://qat.com/sysmgmt")
+@WebService(targetNamespace = "http://www.supermercado.kinghost.net/sysmgmt")
 public class BundleBAS implements IBundleBAS
 {
 

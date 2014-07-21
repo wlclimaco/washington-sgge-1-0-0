@@ -17,7 +17,7 @@ import com.qat.samples.sysmgmt.model.response.BundleResponse;
 /**
  * The Interface IBundleBAS. (Business Area Service - BAS)
  */
-@WebService(serviceName = "BundleService", targetNamespace = "http://qat.com/sysmgmt", portName = "BundleServicePort")
+@WebService(serviceName = "BundleService", targetNamespace = "http://www.supermercado.kinghost.net/sysmgmt", portName = "BundleServicePort")
 public interface IBundleBAS
 {
 
