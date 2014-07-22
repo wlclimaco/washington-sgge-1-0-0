@@ -77,24 +77,44 @@ public final class ProdutoBAID
 				{
 					for (Integer i = 0; i < request.getProdutos().size(); i++)
 					{
-						if (request.getProdutos().get(i).getTabela().equals(TableTypeEnum.PRODUTO))
-						{
-							InternalResultsResponse<Produto> produto = new InternalResultsResponse<Produto>();
-							produto =
-									produtoBAC.fetchProdutoById(new FetchByIdRequest(request.getProdutos().get(i)
-											.getId()));
-							if (produto.getStatus().equals(Status.OperationSuccess))
-							{
 
-								Produto produtos = new Produto();
-								produtos = produto.getFirstResult();
+						InternalResultsResponse<Produto> produto = new InternalResultsResponse<Produto>();
+						produto =
+								produtoBAC.fetchProdutoById(new FetchByIdRequest(request.getProdutos().get(i)
+										.getId()));
+						if (produto.getStatus().equals(Status.OperationSuccess))
+						{
+
+							Produto produtos = new Produto();
+							produtos = produto.getFirstResult();
+							Supermercado supermercado = new Supermercado();
+							supermercado = produtos.getPrecos().get(0).getSupermercadoid();
+							supermercado.setSuperId(request.getProdutos().get(i).getPrecos().get(0)
+									.getSupermercadoid().getSuperId());
+							produtos.getPrecos().get(0).setSupermercadoid(supermercado);
+							if (request.getProdutos().get(i).getTabela().equals(TableTypeEnum.PRODUTO))
+							{
 								produtos.setTabela(TableTypeEnum.PRODUTO);
-								Supermercado supermercado = new Supermercado();
-								supermercado = produtos.getPrecos().get(0).getSupermercadoid();
-								supermercado.setSuperId(request.getProdutos().get(i).getPrecos().get(0)
-										.getSupermercadoid().getSuperId());
-								produtos.getPrecos().get(0).setSupermercadoid(supermercado);
 								internalResponse = produtoBAC.insertProduto(produtos);
+							}
+
+							else if (request.getProdutos().get(i).getTabela().equals(TableTypeEnum.MARCA))
+							{
+								internalResponse = produtoBAC.deletePreco(produtos);
+							}
+							else if (request.getProdutos().get(i).getTabela().equals(TableTypeEnum.MENU))
+							{
+								produtos.getPrecos().get(0).setPromocao(1);
+								internalResponse = produtoBAC.updateProduto(produtos);
+							}
+							else if (request.getProdutos().get(i).getTabela().equals(TableTypeEnum.SUBMENU))
+							{
+								produtos.getPrecos().get(0).setPromocao(2);
+								internalResponse = produtoBAC.updateProduto(produtos);
+							}
+							else
+							{
+								internalResponse = produtoBAC.updateProduto(request.getProduto());
 							}
 						}
 					}

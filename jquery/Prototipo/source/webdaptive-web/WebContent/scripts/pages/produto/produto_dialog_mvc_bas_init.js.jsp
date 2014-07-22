@@ -60,11 +60,15 @@ var  arrayList=[];
 		openDialog(0);
 	});
 
-	$("#qatmvctabsProd").on("click", ".csv", function(e) {
+	$(".export-type").on("click", ".csv", function(e) {
 
 		e.preventDefault();
-		rest_post_call('qat-webdaptive/produto/api/produtoCSV', {}, null, null);
+		var data = $('#txt').val();
+        if(data == '')
+            return;
+		ploader.exportCSV();
 	});
+
 
     var columnpicker = new Slick.Controls.ColumnPicker(columns, pgrid, options);
 	gridPager = new Slick.Controls.Pager(ploader, $("#pager"));
@@ -110,9 +114,10 @@ var  arrayList=[];
 		}
     });
 	</sec:authorize>
-	$("#menu").on("click", "#addSup", function(e) {
+	$(".ui-menu-item").on("click", ".items", function(e) {
 
 		e.preventDefault();
+		var acao = $(this).attr('id');
 		$actionTagDialog = $("#action-produto-dialog1").load('../supermercado/fetchSupermercadosByRequestBASUtil').dialog({
 			autoOpen: false,
 			title: 'Action - Add Tag to SmartPoint',
@@ -122,7 +127,7 @@ var  arrayList=[];
 			modal: true,
 			buttons: {
 				'Adicionar': function() {
-					qat.model.supermercado.pages.gravar(arrayList);
+					qat.model.supermercado.pages.gravar(arrayList,acao);
 				},
 				Cancel: function() {
 					$(this).dialog('close');

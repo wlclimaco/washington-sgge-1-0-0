@@ -315,4 +315,19 @@ public class ProdutoBACImpl implements IProdutoBAC
 		return getProdutoDAC().fetchCadastrosByRequest(request);
 	}
 
+	@Override
+	public InternalResponse deletePreco(Produto procedure)
+	{
+		InternalResponse internalResponse = getPrecoDAC().deletePreco(procedure.getPrecos().get(0));
+		// Check for error because in business case all non-success returns are failures (removal of zero rows)
+		// according to the business
+		if (internalResponse.getStatus() != Status.OperationSuccess)
+		{
+			internalResponse.addMessage(DEFAULT_PROCEDURE_BAC_EXCEPTION_MSG, Message.MessageSeverity.Error,
+					Message.MessageLevel.Object, new Object[] {internalResponse
+							.getStatus().toString()});
+		}
+		return internalResponse;
+	}
+
 }

@@ -119,10 +119,24 @@ var options =
 			}
 		}
 
+		function exportCSV(_iPageSize, _iStartPage)
+		{
+		    onProcDataLoading.notify({});
+			var oData = new qat.model.pagedInquiryRequest(null, _iPageSize, _iStartPage, true);
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos', {produto:{tabela:11,precos:[{supermercadoid:{superId:parseInt($('#supId').val())}}],userId:'rod'}}, fill_dataCSV, process_error);
+		}
+
 		function fill_data(procResponse)
 		{
 			data = reuse_fill_data(procResponse,data,"produtoDialog");
 			onProcDataLoaded.notify({});
+		}
+		function fill_dataCSV(procResponse)
+		{
+			data = reuse_fill_data(procResponse,data,"produtoDialog");
+			qat.model.supermercado.pages.JSONToCSVConvertor(data, "Vehicle Report", true);
+			onProcDataLoaded.notify({});
+
 		}
 
 		function process_error(jqXHR, textStatus, errorThrown)
@@ -149,6 +163,7 @@ var options =
 			"callPagedFetchWS": callPagedFetchWS,
 			<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
 			"callUpdateWS": callUpdateWS,
+			"exportCSV":exportCSV,
 			"callRefreshWS": callRefreshWS,
 			</sec:authorize>
 			// events
