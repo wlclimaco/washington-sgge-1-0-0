@@ -100,15 +100,18 @@ public final class ProdutoBAID
 
 							else if (request.getProdutos().get(i).getTabela().equals(TableTypeEnum.MARCA))
 							{
+								produtos.setTabela(TableTypeEnum.PRODUTO);
 								internalResponse = produtoBAC.deletePreco(produtos);
 							}
 							else if (request.getProdutos().get(i).getTabela().equals(TableTypeEnum.MENU))
 							{
+								produtos.setTabela(TableTypeEnum.PRODUTO);
 								produtos.getPrecos().get(0).setPromocao(1);
 								internalResponse = produtoBAC.updateProduto(produtos);
 							}
 							else if (request.getProdutos().get(i).getTabela().equals(TableTypeEnum.SUBMENU))
 							{
+								produtos.setTabela(TableTypeEnum.PRODUTO);
 								produtos.getPrecos().get(0).setPromocao(2);
 								internalResponse = produtoBAC.updateProduto(produtos);
 							}

@@ -62,7 +62,7 @@
 	{
 		if (_oUC == null)
 		{
-			this.userContext = new qat.base.model.userContext();
+		//	this.userContext = new qat.base.model.userContext();
 		}
 		else
 		{

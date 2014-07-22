@@ -96,6 +96,10 @@ function reuse_fill_data(response,data2,gridProcess)
 		{
 
 			data2 = produtoDialog_fill_data(response,data2);
+		}else if (gridProcess === "produtoDialog2" )
+		{
+
+			data2 = produtoDialog_fill_data2(response,data2);
 		}
 	}
 	else
@@ -526,6 +530,9 @@ function menu_fill_data(procResponse,data2)
 		{
 			if(procResponse.cadastros[oi].produtos != null){
 					var a =		procResponse.cadastros[oi].produtos.length;
+					var w=[];
+					w.push(a);
+					w.push(procResponse.cadastros[oi].id);
 				}else{
 				a= 0;}
 				if (procResponse.cadastros[oi].acessos != null){
@@ -555,7 +562,7 @@ function menu_fill_data(procResponse,data2)
 				nome:			procResponse.cadastros[oi].nome,
 				descricao:  	procResponse.cadastros[oi].descricao,
 				imagens:  		procResponse.cadastros[oi].imagens,
-				produtos:		a,
+				produtos:		"<a href='#' onclick='javascript:ploader.openProdutos(" + procResponse.cadastros[oi].id +");'><span>"+a+"<span></a>",
 				data:  		    c,
 				userId:  		b
 			}
@@ -880,7 +887,6 @@ function produtoDialog_fill_data(procResponse,data2)
 
 		var oi = 0;
 		var tmpLength = procResponse.produtos[0].precos.length;
-console.log('sss = '+ $('#supId').val())
 		for (var i=1; i <= tmpLength; i++)
 		{
 			if(procResponse.produtos[0].precos[oi].idProduto.marca != null){
@@ -941,6 +947,120 @@ console.log('sss = '+ $('#supId').val())
 				preco  :        w,
 				promocao:  		y,
 				precopro:  		z,
+				data:  		    g,
+				userId:  		f,
+				cellno1:        ""
+
+			}
+
+			oi++;
+		}
+	}
+
+	return data2;
+};
+
+//==========================================================
+
+
+
+//=========================================================
+
+function produtoDialog_fill_data2(procResponse,data2)
+{
+
+	data2[0] =
+	{
+		cellno:          0,
+		id:		         0,
+		codBarra:		"",
+		nome:  	        "",
+		unimed  :       "",
+		marca:  	    "",
+		supermercadoId: "",
+		preco  :        "",
+		promocao:  		"",
+		precopro:  		"",
+		cellno1:        ""
+
+	};
+
+	//Fill paging data
+	if (procResponse.resultsSetInfo != undefined)
+	{
+	 	pagingData.pageSize =  parseInt(procResponse.resultsSetInfo.pageSize);
+	 	pagingData.startPage =  parseInt(procResponse.resultsSetInfo.startPage);
+	 	pagingData.moreRowsAvailable =  procResponse.resultsSetInfo.moreRowsAvailable;
+	 	pagingData.totalRowsAvailable =  parseInt(procResponse.resultsSetInfo.totalRowsAvailable);
+	}
+
+	//make sure return is an array
+	if (($.isArray(procResponse.produtos))&&(procResponse.produtos != null))
+	{
+
+		var oi = 0;
+		var tmpLength = procResponse.produtos.length;
+		for (var i=1; i <= tmpLength; i++)
+		{
+			if(procResponse.produtos[oi].marca != null){
+				var a =		procResponse.produtos[oi].marca.nome;
+			}else{
+				a= 0;
+			}
+			if(procResponse.produtos[oi].menu != null){
+				var b =		procResponse.produtos[oi].menu.nome;
+			}else{
+				b= 0;
+			}
+			if(procResponse.produtos[oi].unimed != null){
+				var e =		procResponse.produtos[oi].unimed.nome;
+			}else{
+				e= 0;
+			}
+			if (procResponse.produtos[oi].acessos != null){
+				var count = procResponse.produtos[oi].acessos.length;
+				if(procResponse.produtos[oi].acessos[count-1] != null){
+					var f =     procResponse.produtos[oi].acessos[count-1].userId;
+					var g =     convertData(procResponse.produtos[oi].acessos[count-1].data);
+				}else{
+					var f= "";
+					var g= "";
+				}
+			}else{
+				var f= "";
+				var g= "";
+			}
+			if (procResponse.produtos[oi].precos != null){
+				var count = procResponse.produtos[oi].precos.length;
+				if(procResponse.produtos[oi].precos[count-1] != null){
+					var h =     procResponse.produtos[oi].precos[count-1].supermercadoid;
+					var j =     procResponse.produtos[oi].precos[count-1].precopromo
+					var w =     procResponse.produtos[oi].precos[count-1].preco
+					var y =     procResponse.produtos[oi].precos[count-1].promocao
+
+				}else{
+					var h= "";
+					var j= "";
+					var w= "";
+					var y= "";
+				}
+			}else{
+				var h= "";
+				var j= "";
+			}
+			data2[i] =
+			{
+
+				cellno:         i,
+				id:		        procResponse.produtos[0].id,
+				codBarra:		procResponse.produtos[0].codBarra,
+				nome:  	        procResponse.produtos[0].nome,
+				unimed  :       e,
+				marca:  	    a,
+				supermercadoId: h,
+				preco  :        w,
+				promocao:  		y,
+				precopro:  		j,
 				data:  		    g,
 				userId:  		f,
 				cellno1:        ""

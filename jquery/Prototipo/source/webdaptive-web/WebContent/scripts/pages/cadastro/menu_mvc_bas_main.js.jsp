@@ -38,10 +38,11 @@ columns[2] = {id:"action", name: procedure.grid.act.title, field:"action", resiz
 columns[3] = {id:"id", name: procedure.grid.psak.title, field:"id", resizable:false, cssClass:"cell-center", width:75};
 columns[4] = {id:"nome", name: menu.grid.pnome.title, field:"nome", editor:Slick.Editors.Text};
 columns[5] = {id:"descricao", name: menu.grid.pdescricao.title, field:"descricao", editor:Slick.Editors.Text};
-columns[6] = {id:"imagens", name: menu.grid.pimagens.title, field:"imagens", formatter: buttonFormat};
-columns[7] = {id:"produtos", name: menu.grid.pprodutos.title, field:"produtos", editor:Slick.Editors.Text};
-columns[8] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
-columns[9] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
+//columns[6] = {id:"imagens", name: menu.grid.pimagens.title, field:"imagens", formatter: buttonFormat};
+//columns[7] = {id:"produtos", name: menu.grid.pprodutos.title, field:"produtos", editor:Slick.Editors.Text};
+columns[6] = {id:"produtos", name: menu.grid.pprodutos.title, field:"produtos",resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
+columns[7] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
+columns[8] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
 
 //grid options
 var options =
@@ -124,9 +125,7 @@ var options =
 		    //if viewLOaddedObject filled by controller don't make a ajax call
 			if (viewLoadedObject == null)
 			{
-			    var oData = new qat.model.pagedInquiryRequest(null, _iPageSize, _iStartPage, true);
-				//rest_post_call('qat-webdaptive/cadastro/api/fetchByRequestBAS', oData, fill_data, process_error);
-				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {}, fill_data, process_error);
+				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros',{cadastro:{type:3,userId:'rod'}}, fill_data, process_error);
 			}
 			else
 			{
@@ -155,6 +154,38 @@ var options =
 			}
 			return true;
 		}
+		function openProdutos(value){
+			dom = "<div class='id'>" + value + "</div>";
+		//	openDialogCadastro({produto:{tabela:3,menu:{id:parseInt(value),userId:'rod'},userId:'rod'}});
+			valueGlobal = parseInt(value);
+			$('#tableId').val(3);
+			qat.model.supermercado.pages.openProdutos({produto:{tabela:3,menu:{id:parseInt(value),userId:'rod'},userId:'rod'}},3);
+		}
+		function openDialogCadastro(oData)
+		{
+
+		    onProcDataLoading.notify({});
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos',oData , fill_data2, process_error);
+
+		}
+		function fill_data2(procResponse)
+		{
+			data = reuse_fill_data(procResponse,data,"produtoDialog2");
+			onProcDataLoaded.notify({});
+		}
+		function exportCSVProd()
+		{
+			debugger;
+		    onProcDataLoading.notify({});
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos',{produto:{tabela:2,marca:{id:parseInt(valueGlobal),userId:'rod'},userId:'rod'}} , fill_dataCSV, process_error);
+		}
+		function fill_dataCSV(procResponse)
+		{
+			data = reuse_fill_data(procResponse,data,"produtoDialog2");
+			qat.model.supermercado.pages.JSONToCSVConvertor(data, "Supermercado", true);
+			onProcDataLoaded.notify({});
+
+		}
 
 		return{
 			// properties
@@ -167,6 +198,7 @@ var options =
 			"callDeleteWS": callDeleteWS,
 			"callInsertWS": callInsertWS,
 			"callUpdateWS": callUpdateWS,
+			"openProdutos":openProdutos,
 			"callRefreshWS": callRefreshWS,
 			</sec:authorize>
 			// events
@@ -192,14 +224,7 @@ function requiredFieldValidator(value)
 
 function validateFields(rowValue)
 {
-	if (wd.core.isEmpty(data[rowValue].pcode))
-	{
-		pgrid.gotoCell(rowValue,3,true);
-		$(pgrid.getActiveCellNode()).addClass("invalid");
-		$(pgrid.getActiveCellNode()).stop(true,true).effect("highlight", {color:"red"}, 300);
-		wd.core.displayNotificationMessage('#StatusBar',procedure.requiredfield.msg, false, 'error', 5000);
-	}
-	else if (wd.core.isEmpty(data[rowValue].pdesc))
+	if (wd.core.isEmpty(data[rowValue].nome))
 	{
 		pgrid.gotoCell(rowValue,4,true);
 		$(pgrid.getActiveCellNode()).addClass("invalid");
@@ -220,14 +245,17 @@ $('#menuGrid').keyup(function(e)
 	{
 		if (rowChg >= 1 )
 		{
-			ploader.callUpdateWS(aRowChg);
+			if (validateFields(rowChg))
+			{
+				ploader.callUpdateWS(aRowChg);
+			}
 		}
 		else
 		{
-		//	if (validateFields(0))
-		//	{
+			if (validateFields(0))
+			{
 				ploader.callInsertWS();
-		//	}
+			}
 		}
 	}
 });

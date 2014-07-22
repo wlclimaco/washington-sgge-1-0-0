@@ -6,8 +6,8 @@ var rowChg;
 var data = new Array();
 var pgrid;
 var gridPager;
+var valueGlobal;
 var pagingData = new qat.model.pageData(null,null,null,null);
-var id = $("div[id*='tabs']" ).attr("id");
 var viewLoadedObject;
 
 var columns=[];
@@ -61,7 +61,7 @@ var options =
 
 		<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
 
-		function callUpdateWS()
+		function callUpdateWSProd()
 		{
 
 			var tempLength = aRowChg.length;
@@ -92,7 +92,7 @@ var options =
 		}
 
 
-		function callRefreshWS(_i)
+		function callRefreshWSProd(_i)
 		{
 			onProcDataLoading.notify({});
 			var oData = new qat.model.refreshRequest(null, _i, true, true);
@@ -100,7 +100,7 @@ var options =
 		}
 		</sec:authorize>
 
-		function callPagedFetchWS(_iPageSize, _iStartPage)
+		function callPagedFetchWSProd(_iPageSize, _iStartPage)
 		{
 			tabval = ($.address.parameter('supId'));
 			$('#supId').val(tabval);
@@ -118,17 +118,23 @@ var options =
 				viewLoadedObject = null;
 			}
 		}
-
-		function exportCSV(_iPageSize, _iStartPage)
+/*
+		function exportCSVProd(_iPageSize, _iStartPage)
 		{
 		    onProcDataLoading.notify({});
 			var oData = new qat.model.pagedInquiryRequest(null, _iPageSize, _iStartPage, true);
 			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos', {produto:{tabela:11,precos:[{supermercadoid:{superId:parseInt($('#supId').val())}}],userId:'rod'}}, fill_dataCSV, process_error);
 		}
-
+*/
 		function fill_data(procResponse)
 		{
 			data = reuse_fill_data(procResponse,data,"produtoDialog");
+			onProcDataLoaded.notify({});
+		}
+		function fill_data2(procResponse)
+		{
+			debugger
+			data = reuse_fill_data(procResponse,data,"produtoDialog2");
 			onProcDataLoaded.notify({});
 		}
 		function fill_dataCSV(procResponse)
@@ -145,7 +151,7 @@ var options =
 			onProcDataLoaded.notify({});
 		}
 
-		function isProcDataLoaded()
+		function isProcDataLoadedProd()
 		{
 			if (data == undefined || data == null)
 			{
@@ -154,17 +160,67 @@ var options =
 			return true;
 		}
 
+		function openProdutos(value){
+			dom = "<div class='id'>" + value + "</div>";
+			$actionTagDialog = $("#action-produto-dialog").load('../produto/produtosDialogByRequestBAS').dialog({
+				autoOpen: false,
+				title: 'Lista Produto Supermercado',
+				width: 1024,
+				height: 400,
+				modal: true,
+				buttons: {
+					Cancel: function() {
+						$(this).dialog('close');
+					}
+				},
+				dialogClass: 'action-dialog buttons-left',
+				resizable: false
+			});
+			$actionTagDialog.empty();
+			$actionTagDialog.dialog('open');
+			openDialogCadastro({produto:{tabela:2,marca:{id:parseInt(value),userId:'rod'},userId:'rod'}});
+			valueGlobal = parseInt(value);
+		}
+		function openDialogCadastro(oData)
+		{
+
+		    onProcDataLoading.notify({});
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos',oData , fill_data2, process_error);
+
+		}
+		function fill_data2(procResponse)
+		{
+			data = reuse_fill_data(procResponse,data,"produtoDialog2");
+			onProcDataLoaded.notify({});
+		}
+		function exportCSVProd()
+		{
+			debugger;
+		    onProcDataLoading.notify({});
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos',{produto:{tabela:2,marca:{id:parseInt(valueGlobal),userId:'rod'},userId:'rod'}} , fill_dataCSV, process_error);
+		}
+		function fill_dataCSV(procResponse)
+		{
+			data = reuse_fill_data(procResponse,data,"produtoDialog2");
+			qat.model.supermercado.pages.JSONToCSVConvertor(data, "Supermercado", true);
+			onProcDataLoaded.notify({});
+
+		}
+
 		return{
 			// properties
 			"data": data,
 
 			// methods
-			"isProcDataLoaded": isProcDataLoaded,
-			"callPagedFetchWS": callPagedFetchWS,
+			"isProcDataLoadedProd": isProcDataLoadedProd,
+			"callPagedFetchWSProd": callPagedFetchWSProd,
 			<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
-			"callUpdateWS": callUpdateWS,
-			"exportCSV":exportCSV,
-			"callRefreshWS": callRefreshWS,
+			"callUpdateWSProd": callUpdateWSProd,
+			"exportCSVProd":exportCSVProd,
+
+
+			"openProdutos":openProdutos,
+			"callRefreshWSProd": callRefreshWSProd,
 			</sec:authorize>
 			// events
 			"onProcDataLoading": onProcDataLoading,
@@ -216,15 +272,15 @@ $('#prodGridDialog').keyup(function(e)
 
 	if (e.keyCode == 13)
 	{
-			ploader.callUpdateWS(aRowChg);
+			ploader.callUpdateWSProd(aRowChg);
 	}
 });
 
 $('#refreshprodDialog').click(function() {
-	ploader.callRefreshWS(135);
+	ploader.callRefreshWSProd(135);
 });
 </sec:authorize>
 $('#listprodDialog').click(function() {
-	 ploader.callPagedFetchWS(20,0);
+	 ploader.callPagedFetchWSProd(20,0);
 });
 </script>

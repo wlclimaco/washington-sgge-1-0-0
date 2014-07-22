@@ -55,11 +55,50 @@
  	<select id="fetchAllPrecosSup" parameterType="int" resultMap="PrecoResultProd">
 		select p.produtoid, p.nome, p.marca, p.menu, p.submenu, p.trimenu, p.unimed, p.precoid,
             p.controleid, p.supermercadoid, p.codbarra, p.foto, p.descricao
-            from tabpreco t,produto p where p.produtoid = t.produtoid and t.supermercadoid = #{id} and status != 'c'
+            from tabpreco t,produto p where p.produtoid = t.produtoid and t.supermercadoid = #{id}
 	    group by
 	     p.produtoid, p.nome, p.marca, p.menu, p.submenu, p.trimenu, p.unimed, p.precoid,
          p.controleid, p.supermercadoid, p.codbarra, p.foto, p.descricao
 	</select>
+
+
+ 	<select id="fetchAllPrecosMarca" parameterType="int" resultMap="PrecoResultProd">
+		select
+            p.produtoid, p.nome, p.marca, p.menu, p.submenu, p.trimenu, p.unimed, p.precoid,
+            p.controleid, p.supermercadoid, p.codbarra, p.foto, p.descricao
+        from produto p
+		LEFT JOIN tabpreco t ON p.produtoid = t.produtoid
+ 		where p.marca = #{id}
+	    group by
+		     p.produtoid, p.nome, p.marca, p.menu, p.submenu, p.trimenu, p.unimed, p.precoid,
+	         p.controleid, p.supermercadoid, p.codbarra, p.foto, p.descricao
+	</select>
+
+	 	<select id="fetchAllPrecosMenu" parameterType="int" resultMap="PrecoResultProd">
+		select
+            p.produtoid, p.nome, p.marca, p.menu, p.submenu, p.trimenu, p.unimed, p.precoid,
+            p.controleid, p.supermercadoid, p.codbarra, p.foto, p.descricao
+        from produto p
+		LEFT JOIN tabpreco t ON p.produtoid = t.produtoid
+ 		where p.menu = #{id}
+	    group by
+		     p.produtoid, p.nome, p.marca, p.menu, p.submenu, p.trimenu, p.unimed, p.precoid,
+	         p.controleid, p.supermercadoid, p.codbarra, p.foto, p.descricao
+	</select>
+
+	 	<select id="fetchAllPrecosUniMed" parameterType="int" resultMap="PrecoResultProd">
+		select
+            p.produtoid, p.nome, p.marca, p.menu, p.submenu, p.trimenu, p.unimed, p.precoid,
+            p.controleid, p.supermercadoid, p.codbarra, p.foto, p.descricao
+        from produto p
+		LEFT JOIN tabpreco t ON p.produtoid = t.produtoid
+ 		where p.unimed = #{id}
+	    group by
+		     p.produtoid, p.nome, p.marca, p.menu, p.submenu, p.trimenu, p.unimed, p.precoid,
+	         p.controleid, p.supermercadoid, p.codbarra, p.foto, p.descricao
+	</select>
+
+
    <select id="fetchPrecoByProduto" parameterType="int" resultMap="PrecoResult">
 	    SELECT
 	    <include refid="allPrecoColumns" />
