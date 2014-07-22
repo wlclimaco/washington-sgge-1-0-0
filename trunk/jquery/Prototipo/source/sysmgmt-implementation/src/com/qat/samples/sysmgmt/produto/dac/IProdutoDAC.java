@@ -54,10 +54,41 @@ public interface IProdutoDAC
 	/**
 	 * Fetch all produtos.
 	 * 
+	 * @param request the request
 	 * @return the list< produto>
 	 */
 	public List<Produto> fetchAllProdutos(ProdutoInquiryRequest request);
 
+	/**
+	 * Fetch all produtos marca.
+	 * 
+	 * @param request the request
+	 * @return the list
+	 */
+	public List<Tabelapreco> fetchAllProdutosMarca(ProdutoInquiryRequest request);
+
+	/**
+	 * Fetch all produtos menu.
+	 * 
+	 * @param request the request
+	 * @return the list
+	 */
+	public List<Tabelapreco> fetchAllProdutosMenu(ProdutoInquiryRequest request);
+
+	/**
+	 * Fetch all produtos uni med.
+	 * 
+	 * @param request the request
+	 * @return the list
+	 */
+	public List<Tabelapreco> fetchAllProdutosUniMed(ProdutoInquiryRequest request);
+
+	/**
+	 * Fetch all produtos preco.
+	 * 
+	 * @param request the request
+	 * @return the list
+	 */
 	public List<Tabelapreco> fetchAllProdutosPreco(ProdutoInquiryRequest request);
 
 	/**
@@ -108,6 +139,7 @@ public interface IProdutoDAC
 	/**
 	 * Delete all produtos.
 	 * 
+	 * @param cadastro the cadastro
 	 * @return the internal response
 	 */
 	public InternalResponse deleteAllCadastros(Cadastro cadastro);
@@ -115,6 +147,7 @@ public interface IProdutoDAC
 	/**
 	 * Fetch all produtos.
 	 * 
+	 * @param cadastro the cadastro
 	 * @return the list< produto>
 	 */
 	public List<Cadastro> fetchAllCadastros(CadastroInquiryRequest cadastro);

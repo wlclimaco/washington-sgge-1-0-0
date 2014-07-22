@@ -125,7 +125,12 @@ if (head.desktop)
 		   "../thirdparty/jquery/custom/jquery.sparkline.min.js",
 		   "../thirdparty/jquery/custom/jquery.validate.min.js",
 		   "../scripts/util/base.js",
-		   "../commons/scripts/util/wd_core_3.0.0.js"
+		   "../commons/scripts/util/wd_core_3.0.0.js",
+		   "../commons/scripts/model/user_context.js",
+           "../commons/scripts/model/request_objects.js",
+		   "../commons/scripts/model/domain_objects.js",
+           "../commons/scripts/widget/slick.pager.js"
+
 	);
 }
 else
@@ -136,5 +141,6 @@ else
 <jsp:include page="../scripts/pages/wd_main_main.js.jsp" flush="true"/>
 <jsp:include page="../scripts/pages/wd_main_init.js.jsp" flush="true"/>
 <jsp:include page="user_info.jsp" flush="true"/>
+<jsp:include page="../commons/scripts/util/app_reuse_functions.js.jsp" flush="true"/>
 </BODY>
 </HTML>

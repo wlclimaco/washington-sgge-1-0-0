@@ -214,9 +214,68 @@ public class ProdutoBACImpl implements IProdutoBAC
 			b.add(produto);
 			response.getResultsList().addAll(b);
 		}
+		else if (request.getProduto().getTabela().equals(TableTypeEnum.MARCA))
+		{
+			List<Tabelapreco> a = getProdutoDAC().fetchAllProdutosMarca(request);
+			Produto produto = new Produto();
+			List<Produto> b = new ArrayList<Produto>();
+			for (Integer i = 0; i < a.size(); i++)
+			{
+				produto = a.get(i).getIdProduto();
+				produto.setPrecos(a.get(i).getIdProduto().getPrecos());
+				b.add(produto);
+			}
+			response.getResultsList().addAll(b);
+		}
+		else if (request.getProduto().getTabela().equals(TableTypeEnum.MENU))
+		{
+			List<Tabelapreco> a = getProdutoDAC().fetchAllProdutosMenu(request);
+			Produto produto = new Produto();
+			produto.setNome("test");
+			produto.setPrecos(a);
+			List<Produto> b = new ArrayList<Produto>();
+			b.add(produto);
+			response.getResultsList().addAll(b);
+		}
+		else if (request.getProduto().getTabela().equals(TableTypeEnum.SUBMENU))
+		{
+			List<Tabelapreco> a = getProdutoDAC().fetchAllProdutosMenu(request);
+			Produto produto = new Produto();
+			produto.setNome("test");
+			produto.setPrecos(a);
+			List<Produto> b = new ArrayList<Produto>();
+			b.add(produto);
+			response.getResultsList().addAll(b);
+		}
+		else if (request.getProduto().getTabela().equals(TableTypeEnum.TRIMENU))
+		{
+			List<Tabelapreco> a = getProdutoDAC().fetchAllProdutosMenu(request);
+			Produto produto = new Produto();
+			produto.setNome("test");
+			produto.setPrecos(a);
+			List<Produto> b = new ArrayList<Produto>();
+			b.add(produto);
+			response.getResultsList().addAll(b);
+		}
+		else if (request.getProduto().getTabela().equals(TableTypeEnum.UNIMED))
+		{
+			List<Tabelapreco> a = getProdutoDAC().fetchAllProdutosUniMed(request);
+			Produto produto = new Produto();
+			produto.setNome("test");
+			produto.setPrecos(a);
+			List<Produto> b = new ArrayList<Produto>();
+			b.add(produto);
+			response.getResultsList().addAll(b);
+		}
 		else
 		{
-			response.getResultsList().addAll(getProdutoDAC().fetchAllProdutos(request));
+			List<Tabelapreco> a = getProdutoDAC().fetchAllProdutosPreco(request);
+			Produto produto = new Produto();
+			produto.setNome("test");
+			produto.setPrecos(a);
+			List<Produto> b = new ArrayList<Produto>();
+			b.add(produto);
+			response.getResultsList().addAll(b);
 		}
 
 		return response;

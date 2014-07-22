@@ -9,7 +9,6 @@ var  arrayList=[];
         oneAtTime: true
     });
 	$( "#menu" ).menu();
-//	$.address.value('?prodId='+row+'&type=edit');
 	//sets up initial grid ...no data yet...but binds to the object that will fill it
 	pgrid = new Slick.Grid($("#prodGridDialog"), ploader.data, columns, options);
 	pgrid.setSelectionModel(new Slick.RowSelectionModel({selectActiveRow: false}));
@@ -63,10 +62,9 @@ var  arrayList=[];
 	$(".export-type").on("click", ".csv", function(e) {
 
 		e.preventDefault();
-		var data = $('#txt').val();
         if(data == '')
             return;
-		ploader.exportCSV();
+		ploader.exportCSVProd();
 	});
 
 
@@ -145,6 +143,6 @@ var  arrayList=[];
 	});
 
 	// load the Grid first time
-	ploader.callPagedFetchWS(20,0);
+	//ploader.callPagedFetchWSProd(20,0);
 });
 </script>

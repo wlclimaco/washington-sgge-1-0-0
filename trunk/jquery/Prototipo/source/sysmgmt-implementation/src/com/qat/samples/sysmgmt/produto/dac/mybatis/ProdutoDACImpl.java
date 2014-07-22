@@ -316,4 +316,25 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 		}
 
 	}
+
+	@Override
+	public List<Tabelapreco> fetchAllProdutosMarca(ProdutoInquiryRequest request)
+	{
+		return QATMyBatisDacHelper.doQueryForList(getSqlSession(), "PrecoMap.fetchAllPrecosMarca", request
+				.getProduto().getMarca().getId());
+	}
+
+	@Override
+	public List<Tabelapreco> fetchAllProdutosMenu(ProdutoInquiryRequest request)
+	{
+		return QATMyBatisDacHelper.doQueryForList(getSqlSession(), "PrecoMap.fetchAllPrecosMenu", request
+				.getProduto().getMenu().getId());
+	}
+
+	@Override
+	public List<Tabelapreco> fetchAllProdutosUniMed(ProdutoInquiryRequest request)
+	{
+		return QATMyBatisDacHelper.doQueryForList(getSqlSession(), "PrecoMap.fetchAllPrecosUniMed", request
+				.getProduto().getUnimed().getId());
+	}
 }

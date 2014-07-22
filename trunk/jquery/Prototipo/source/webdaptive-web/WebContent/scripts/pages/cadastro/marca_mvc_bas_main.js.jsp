@@ -19,7 +19,7 @@ var viewLoadedObject;
 			viewLoadedObject = ${cadastroResponse};
     </c:otherwise>
 </c:choose>
-console.log(viewLoadedObject);
+
 var columns=[];
  var checkboxSelector = new Slick.CheckboxSelectColumn({
       cssClass: "slick-cell-checkboxsel"
@@ -37,10 +37,10 @@ columns[1] = {id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:
 columns[2] = {id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
 columns[3] = {id:"id", name: procedure.grid.psak.title, field:"id", resizable:false, cssClass:"cell-center", width:75};
 columns[4] = {id:"nome", name: marca.grid.pmarca.title, field:"nome", editor:Slick.Editors.Text};
-columns[5] = {id:"imagens", name: menu.grid.pimagens.title, field:"imagens", formatter: buttonFormat};
-columns[6] = {id:"produtos", name: menu.grid.pprodutos.title, field:"produtos", formatter: buttonFormat};
-columns[7] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
-columns[8] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
+//columns[5] = {id:"imagens", name: menu.grid.pimagens.title, field:"imagens", formatter: buttonFormat};
+columns[5] = {id:"produtos", name: menu.grid.pprodutos.title, field:"produtos",resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
+columns[6] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
+columns[7] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
 
 //];
 
@@ -101,6 +101,27 @@ var options =
 
 			}
 		}
+		function openProdutos(value){
+			dom = "<div class='id'>" + value + "</div>";
+			$actionTagDialog = $("#action-produto-dialog").load('../produto/produtosDialogByRequestBAS').dialog({
+				autoOpen: false,
+				title: 'Lista Produto Supermercado',
+				width: 1024,
+				height: 400,
+				modal: true,
+				buttons: {
+					Cancel: function() {
+						$(this).dialog('close');
+					}
+				},
+				dialogClass: 'action-dialog buttons-left',
+				resizable: false
+			});
+			$actionTagDialog.empty();
+			$actionTagDialog.dialog('open');
+			openDialogCadastro({produto:{tabela:2,marca:{id:parseInt(value),userId:'rod'},userId:'rod'}});
+			valueGlobal = parseInt(value);
+		}
 
 		function callDeleteWS(_procId)
 		{
@@ -109,6 +130,34 @@ var options =
 			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/deleteCadastro', oData, fill_data, process_error);
 			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {cadastro:{type:2,userId:'rod'}}, fill_data, process_error);
 			onProcDataLoading.notify({});
+		}
+
+		function openDialogCadastro(oData)
+		{
+
+		    onProcDataLoading.notify({});
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos',oData , fill_data2, process_error);
+
+		}
+		function fill_data2(procResponse)
+		{
+
+			data = reuse_fill_data(procResponse,data,"produtoDialog2");
+			onProcDataLoaded.notify({});
+		}
+
+		function exportCSVProd()
+		{
+			debugger;
+		    onProcDataLoading.notify({});
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos',{produto:{tabela:2,marca:{id:parseInt(valueGlobal),userId:'rod'},userId:'rod'}} , fill_dataCSV, process_error);
+		}
+		function fill_dataCSV(procResponse)
+		{
+			data = reuse_fill_data(procResponse,data,"produtoDialog2");
+			qat.model.supermercado.pages.JSONToCSVConvertor(data, "Supermercado", true);
+			onProcDataLoaded.notify({});
+
 		}
 
 		function callRefreshWS(_i)
@@ -163,10 +212,13 @@ var options =
 			"isProcDataLoaded": isProcDataLoaded,
 			"callPagedFetchWS": callPagedFetchWS,
 			<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
-			"callDeleteWS": callDeleteWS,
-			"callInsertWS": callInsertWS,
-			"callUpdateWS": callUpdateWS,
+			"callDeleteWS" : callDeleteWS,
+			"callInsertWS" : callInsertWS,
+			"callUpdateWS" : callUpdateWS,
 			"callRefreshWS": callRefreshWS,
+			"openProdutos" : openProdutos,
+			"exportCSVProd":exportCSVProd,
+			"openDialogCadastro" : openDialogCadastro,
 			</sec:authorize>
 			// events
 			"onProcDataLoading": onProcDataLoading,
@@ -191,14 +243,7 @@ function requiredFieldValidator(value)
 
 function validateFields(rowValue)
 {
-	if (wd.core.isEmpty(data[rowValue].pcode))
-	{
-		pgrid.gotoCell(rowValue,3,true);
-		$(pgrid.getActiveCellNode()).addClass("invalid");
-		$(pgrid.getActiveCellNode()).stop(true,true).effect("highlight", {color:"red"}, 300);
-		wd.core.displayNotificationMessage('#StatusBar',procedure.requiredfield.msg, false, 'error', 5000);
-	}
-	else if (wd.core.isEmpty(data[rowValue].pdesc))
+	if (wd.core.isEmpty(data[rowValue].nome))
 	{
 		pgrid.gotoCell(rowValue,4,true);
 		$(pgrid.getActiveCellNode()).addClass("invalid");
@@ -219,14 +264,18 @@ $('#marcaGrid').keyup(function(e)
 	{
 		if (rowChg >= 1 )
 		{
-			ploader.callUpdateWS(aRowChg);
+		if (validateFields(rowChg))
+			{
+				ploader.callUpdateWS(aRowChg);
+			}
+
 		}
 		else
 		{
-		//	if (validateFields(0))
-		//	{
+			if (validateFields(0))
+			{
 				ploader.callInsertWS();
-		//	}
+			}
 		}
 	}
 });

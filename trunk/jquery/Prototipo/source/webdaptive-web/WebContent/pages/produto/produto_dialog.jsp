@@ -44,6 +44,7 @@
 		<div id="pager" style="width:100%; height:3%;"></div>
 	</div>
 <dd><input type="text" name="supId" id="supId" size="32" maxlength="60" class="hide" /></dd>
+<dd><input type="text" name="tableId" id="tableId" size="32" maxlength="60" class="hide" /></dd>
 <div id="action-produto-dialog1" class="action-dialog"></div>
 <script type="text/javascript" src="../commons/scripts/model/user_context.js"></script>
 <script type="text/javascript" src="../commons/scripts/model/request_objects.js"></script>

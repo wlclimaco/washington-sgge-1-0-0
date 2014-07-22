@@ -3,7 +3,7 @@
 <script type="text/javascript">
 
 qat.model.supermercado.pages  = {
-
+    var data = new Array();
 	openPagedFetchWS : function (iId)
 	{
 	    //if viewLOaddedObject filled by controller don't make a ajax call
@@ -139,7 +139,44 @@ qat.model.supermercado.pages  = {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-}
+},
+	openProdutos function(oData){
+		$actionTagDialog = $("#action-produto-dialog").load('../produto/produtosDialogByRequestBAS').dialog({
+			autoOpen: false,
+			title: 'Lista Produto Supermercado',
+			width: 1024,
+			height: 400,
+			modal: true,
+			buttons: {
+				Cancel: function() {
+					$(this).dialog('close');
+				}
+			},
+			dialogClass: 'action-dialog buttons-left',
+			resizable: false
+		});
+		$actionTagDialog.empty();
+		$actionTagDialog.dialog('open');
+		qat.model.supermercado.pages.openDialogCadastro(oData);
+	},
+	openDialogCadastro function(oData,process_error)
+	{
+		rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos',oData , qat.model.supermercado.pages.fill_data2, process_error);
+	},
+	fill_data2 function(procResponse)
+	{
+		qat.model.supermercado.pages.data = reuse_fill_data(procResponse,qat.model.supermercado.pages.data,"produtoDialog2");
+	},
+	exportCSVProd function(oData,process_error)
+	{
+		rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos',oData , fill_dataCSV, process_error);
+	},
+	fill_dataCSV function(procResponse)
+	{
+		qat.model.supermercado.pages.data = reuse_fill_data(procResponse,qat.model.supermercado.pages.data,"produtoDialog2");
+		qat.model.supermercado.pages.JSONToCSVConvertor(qat.model.supermercado.pages.data, "Supermercado", true);
+
+	}
 }
 
 </script>
