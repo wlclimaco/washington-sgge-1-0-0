@@ -29,6 +29,7 @@
     <result property="dataCreate" jdbcType="TIMESTAMP"  column="data"/>
     <result property="precopromo" column="precopromo"/>
     <result property="promocao" column="promocao"/>
+     <result property="status" column="status"/>
     <result property="dateIni" jdbcType="TIMESTAMP"  column="dataini"/>
     <result property="dateFim" jdbcType="TIMESTAMP"  column="datafin"/>
     <association property="supermercadoid" column="supermercadoid" javaType="Supermercado" select="SupermercadoMap.fetchSupermercadoById" />
@@ -37,11 +38,11 @@
   </resultMap>
 
   <sql id="allPrecoColumns">
-		precoid, produtoid, data,supermercadoid,  preco, precopromo, promocao, dataini, datafin
+		precoid, produtoid, data,supermercadoid,  preco, precopromo, promocao, dataini, datafin,status
   </sql>
 
   <sql id="allPrecoColumnsWithQualifier">
-  		p.precoid, p.produtoid,p.data, p.supermercadoid,  p.preco, p.precopromo, p.promocao, p.dataini, p.datafin
+  		p.precoid, p.produtoid,p.data, p.supermercadoid,  p.preco, p.precopromo, p.promocao, p.dataini, p.datafin,p.status
   </sql>
 
 
@@ -54,7 +55,7 @@
  	<select id="fetchAllPrecosSup" parameterType="int" resultMap="PrecoResultProd">
 		select p.produtoid, p.nome, p.marca, p.menu, p.submenu, p.trimenu, p.unimed, p.precoid,
             p.controleid, p.supermercadoid, p.codbarra, p.foto, p.descricao
-            from tabpreco t,produto p where p.produtoid = t.produtoid and t.supermercadoid = #{id}
+            from tabpreco t,produto p where p.produtoid = t.produtoid and t.supermercadoid = #{id} and status != 'c'
 	    group by
 	     p.produtoid, p.nome, p.marca, p.menu, p.submenu, p.trimenu, p.unimed, p.precoid,
          p.controleid, p.supermercadoid, p.codbarra, p.foto, p.descricao
@@ -134,9 +135,9 @@
   </select>
 
 
-  <delete id="deletePrecoById" parameterType="Tabelapreco">
-    DELETE FROM TABPRECO WHERE PRECOID = #{id}
-  </delete>
+  <update id="deletePrecoById" parameterType="Tabelapreco">
+    update TABPRECO SET STATUS = 'C' WHERE PRECOID = #{precoid} and supermercadoid = #{precosupermercadoid.superId}
+  </update>
 
   <delete id="deleteAllPrecos">
 	DELETE FROM TABPRECO

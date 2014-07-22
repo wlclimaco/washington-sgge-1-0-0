@@ -42,6 +42,8 @@ public interface IProdutoBAC
 	 */
 	public InternalResponse deleteProduto(Produto procedure);
 
+	public InternalResponse deletePreco(Produto procedure);
+
 	/**
 	 * Refresh procedures.
 	 * 

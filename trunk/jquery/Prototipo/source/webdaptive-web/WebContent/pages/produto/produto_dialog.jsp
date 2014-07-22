@@ -19,15 +19,14 @@
 <ul id="menu">
   <li>Acoes
     <ul>
-      <li id='addSup'>Adicionar produto a Supermercado</li>
-      <li id='remSup'>Remover produto do Supermercado</li>
-	  <li id='addPro'>Adicionar produto promoçao</li>
-	  <li id='remPro'>Remover produto da promoção</li>
+      <li id='addSup' class='items'>Adicionar produto a Supermercado</li>
+      <li id='remSup' class='items'>Remover produto do Supermercado</li>
+	  <li id='addPro' class='items'>Adicionar produto promoçao</li>
+	  <li id='remPro' class='items'>Remover produto da promoção</li>
     </ul>
   </li>
 </ul>
 <span class="message rounded"><span class="checked-count">0</span> SmartPoints Selected</span>
-
 
 	 <div class="export-select">
 	     <ul class="link-list">
@@ -53,5 +52,6 @@
 <jsp:include page="../../commons/scripts/util/app_reuse_functions.js.jsp" flush="true"/>
 <jsp:include page="../../scripts/pages/produto/produto_dialog_mvc_bas_main.js.jsp" flush="true"/>
 <jsp:include page="../../scripts/pages/produto/produto_dialog_mvc_bas_init.js.jsp" flush="true"/>
+<jsp:include page="../../scripts/util/util_mvc_bas_main.js.jsp" flush="true"/>
 </body>
 </html>
