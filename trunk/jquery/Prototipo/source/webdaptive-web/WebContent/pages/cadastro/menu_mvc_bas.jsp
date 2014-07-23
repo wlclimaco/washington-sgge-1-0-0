@@ -30,11 +30,13 @@
 		<div id="menuGrid" style="width:100%; height:95%;" class="wdgrid" ></div>
 		<div id="pager" style="width:100%; height:3%;"></div>
 	</div>
+<div id="action-produto-dialog" class="action-dialog"></div>
 <script type="text/javascript" src="../commons/scripts/model/user_context.js"></script>
 <script type="text/javascript" src="../commons/scripts/model/request_objects.js"></script>
 <script type="text/javascript" src="../commons/scripts/model/domain_objects.js"></script>
 <script type="text/javascript" src="../commons/scripts/widget/slick.pager.js"></script>
 <jsp:include page="../../commons/scripts/util/app_reuse_functions.js.jsp" flush="true"/>
+<jsp:include page="../../scripts/pages/produto/produto_dialog_mvc_bas_main.js.jsp" flush="true"/>
 <jsp:include page="../../scripts/pages/cadastro/menu_mvc_bas_main.js.jsp" flush="true"/>
 <jsp:include page="../../scripts/pages/cadastro/menu_mvc_bas_init.js.jsp" flush="true"/>
 <jsp:include page="../../scripts/util/util_mvc_bas_main.js.jsp" flush="true"/>

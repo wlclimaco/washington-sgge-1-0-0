@@ -102,7 +102,7 @@ var options =
 
 		function callPagedFetchWSProd(_iPageSize, _iStartPage)
 		{
-			tabval = ($.address.parameter('supId'));
+			//tabval = ($.address.parameter('supId'));
 			$('#supId').val(tabval);
 		    onProcDataLoading.notify({});
 		    //if viewLOaddedObject filled by controller don't make a ajax call
@@ -126,6 +126,14 @@ var options =
 			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos', {produto:{tabela:11,precos:[{supermercadoid:{superId:parseInt($('#supId').val())}}],userId:'rod'}}, fill_dataCSV, process_error);
 		}
 */
+		function openProdutosProd(value){
+			dom = "<div class='id'>" + value + "</div>";
+		//	openDialogCadastro({produto:{tabela:3,menu:{id:parseInt(value),userId:'rod'},userId:'rod'}});
+			valueGlobal = parseInt(value);
+			$('#tableId').val(3);
+			debugger;
+			data =  qat.model.supermercado.pages.openProdutos(value,data,process_error);
+		}
 		function fill_data(procResponse)
 		{
 			data = reuse_fill_data(procResponse,data,"produtoDialog");
@@ -160,27 +168,7 @@ var options =
 			return true;
 		}
 
-		function openProdutos(value){
-			dom = "<div class='id'>" + value + "</div>";
-			$actionTagDialog = $("#action-produto-dialog").load('../produto/produtosDialogByRequestBAS').dialog({
-				autoOpen: false,
-				title: 'Lista Produto Supermercado',
-				width: 1024,
-				height: 400,
-				modal: true,
-				buttons: {
-					Cancel: function() {
-						$(this).dialog('close');
-					}
-				},
-				dialogClass: 'action-dialog buttons-left',
-				resizable: false
-			});
-			$actionTagDialog.empty();
-			$actionTagDialog.dialog('open');
-			openDialogCadastro({produto:{tabela:2,marca:{id:parseInt(value),userId:'rod'},userId:'rod'}});
-			valueGlobal = parseInt(value);
-		}
+
 		function openDialogCadastro(oData)
 		{
 
@@ -219,7 +207,7 @@ var options =
 			"exportCSVProd":exportCSVProd,
 
 
-			"openProdutos":openProdutos,
+			"openProdutosProd":openProdutosProd,
 			"callRefreshWSProd": callRefreshWSProd,
 			</sec:authorize>
 			// events
@@ -272,15 +260,15 @@ $('#prodGridDialog').keyup(function(e)
 
 	if (e.keyCode == 13)
 	{
-			ploader.callUpdateWSProd(aRowChg);
+			ploaderDiaprod.callUpdateWSProd(aRowChg);
 	}
 });
 
 $('#refreshprodDialog').click(function() {
-	ploader.callRefreshWSProd(135);
+	ploaderDiaprod.callRefreshWSProd(135);
 });
 </sec:authorize>
 $('#listprodDialog').click(function() {
-	 ploader.callPagedFetchWSProd(20,0);
+	 ploaderDiaprod.callPagedFetchWSProd(20,0);
 });
 </script>

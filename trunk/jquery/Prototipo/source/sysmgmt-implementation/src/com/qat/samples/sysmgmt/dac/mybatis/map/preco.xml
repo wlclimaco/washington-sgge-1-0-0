@@ -166,7 +166,7 @@
   </select>
 
   <select id="insertPreco" parameterType="tabelapreco" resultType="int" statementType="CALLABLE">
-        { call ins_preco( #{idProduto.id} , #{supermercadoid.superId} , null , #{preco} , #{precopromo} , #{promocao} ,null , null, #{userId} ) }
+        { call ins_preco( #{idProduto.id} , #{supermercadoid.superId} , null , #{preco} , #{precopromo} , #{promocao} ,null , null, #{userId}, #{status} ) }
   </select>
 
     <select id="updatePreco" parameterType="tabelapreco" resultType="int" statementType="CALLABLE">

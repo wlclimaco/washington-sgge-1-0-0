@@ -1,6 +1,6 @@
 <%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags' %>
 <script type="text/javascript">
-var ploader = new Slick.Data.RemoteModel();
+var ploaderDiaprod = new Slick.Data.RemoteModel();
 $(document).ready(function ()
 {
 var  arrayList=[];
@@ -10,7 +10,7 @@ var  arrayList=[];
     });
 	$( "#menu" ).menu();
 	//sets up initial grid ...no data yet...but binds to the object that will fill it
-	pgrid = new Slick.Grid($("#prodGridDialog"), ploader.data, columns, options);
+	pgrid = new Slick.Grid($("#prodGridDialog"), ploaderDiaprod.data, columns, options);
 	pgrid.setSelectionModel(new Slick.RowSelectionModel({selectActiveRow: false}));
     pgrid.registerPlugin(checkboxSelector);
 	pgrid.onClick.subscribe(function (e, args) {
@@ -50,7 +50,7 @@ var  arrayList=[];
 		$(dom).load('../produto/cadastroProdutosByRequestBAS?id=1').dialog({height: 800,
             width: 800,
             modal: true});
-			$.address.value('?prodId='+row+'&type=edit');
+			//$.address.value('?prodId='+row+'&type=edit');
 	};
 
 	$("#qatmvctabsProd").on("click", "#insertButon", function(e) {
@@ -64,23 +64,23 @@ var  arrayList=[];
 		e.preventDefault();
         if(data == '')
             return;
-		ploader.exportCSVProd();
+		ploaderDiaprod.exportCSVProd();
 	});
 
 
     var columnpicker = new Slick.Controls.ColumnPicker(columns, pgrid, options);
-	gridPager = new Slick.Controls.Pager(ploader, $("#pager"));
+	gridPager = new Slick.Controls.Pager(ploaderDiaprod, $("#pager"));
 	gridPager.init();
 	setTimeout('pgrid.init()', 250);
 
 	//this events fires to blockui while the data is retrieved
-	ploader.onProcDataLoading.subscribe(function()
+	ploaderDiaprod.onProcDataLoading.subscribe(function()
 	{
 		wd.core.blockUIMessage('div.ui-layout-center',true,true,wdloading.title,wdloading.msg);
 	});
 
 	//this events fires to unblockui when the data is retruned and fills the grid
-	ploader.onProcDataLoaded.subscribe(function()
+	ploaderDiaprod.onProcDataLoaded.subscribe(function()
 	{
 		aRowChg.length=0;
 		pgrid.invalidateAllRows();
@@ -94,7 +94,6 @@ var  arrayList=[];
 		//load grid pager control
 		gridPager.setPagingOptions({totalRows: pagingData.totalRowsAvailable, pageSize: pagingData.pageSize, pageNum: pagingData.startPage});
 		gridPager.updatePager(gridPager.getPagingInfo());
-		$.address.value('wdtree?id=' + id + '&tab=' + $('#'+ id).tabs( "option", "active" ));
 		wd.core.unblockUIMessage('div.ui-layout-center');
 	});
 	<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
@@ -143,6 +142,6 @@ var  arrayList=[];
 	});
 
 	// load the Grid first time
-	//ploader.callPagedFetchWSProd(20,0);
+	//ploaderDiaprod.callPagedFetchWSProd(20,0);
 });
 </script>

@@ -3,7 +3,7 @@
 <script type="text/javascript">
 
 qat.model.supermercado.pages  = {
-    var data = new Array();
+
 	openPagedFetchWS : function (iId)
 	{
 	    //if viewLOaddedObject filled by controller don't make a ajax call
@@ -140,7 +140,8 @@ qat.model.supermercado.pages  = {
     link.click();
     document.body.removeChild(link);
 },
-	openProdutos function(oData){
+	openProdutos : function(value,data,process_error){
+
 		$actionTagDialog = $("#action-produto-dialog").load('../produto/produtosDialogByRequestBAS').dialog({
 			autoOpen: false,
 			title: 'Lista Produto Supermercado',
@@ -157,21 +158,46 @@ qat.model.supermercado.pages  = {
 		});
 		$actionTagDialog.empty();
 		$actionTagDialog.dialog('open');
-		qat.model.supermercado.pages.openDialogCadastro(oData);
+		tabval = ($.address.parameter('id'));
+		if(tabval == "qatmvctabsMarca"){
+			var oData = {produto:{tabela:2,marca:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+		}else if(tabval == "qatmvctabsMenu"){
+			var oData = {produto:{tabela:3,menu:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+		}else if(tabval == "qatmvctabsSub"){
+			var oData = {produto:{tabela:4,marca:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+		}else if(tabval == "qatmvctabsTri"){
+			var oData = {produto:{tabela:5,marca:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+		}else if(tabval == "qatmvctabsUnimed"){
+			var oData = {produto:{tabela:6,unimed:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+		}
+		qat.model.supermercado.pages.openDialogCadastro(oData,data,process_error);
 	},
-	openDialogCadastro function(oData,process_error)
+	openDialogCadastro : function(oData,data,process_error)
 	{
+
 		rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos',oData , qat.model.supermercado.pages.fill_data2, process_error);
 	},
-	fill_data2 function(procResponse)
+	fill_data2  : function(procResponse,data,process_error)
 	{
-		qat.model.supermercado.pages.data = reuse_fill_data(procResponse,qat.model.supermercado.pages.data,"produtoDialog2");
+		return data = reuse_fill_data(procResponse,data,"produtoDialog2");
 	},
-	exportCSVProd function(oData,process_error)
+	exportCSVProd : function(process_error)
 	{
+	tabval = ($.address.parameter('id'));
+		if(tabval = "qatmvctabsMarca"){
+			var oData = {produto:{tabela:3,marca:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+		}else if(tabval == "qatmvctabsMenu"){
+			var oData = {produto:{tabela:4,menu:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+		}else if(tabval == "qatmvctabsSub"){
+			var oData = {produto:{tabela:5,marca:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+		}else if(tabval == "qatmvctabsTri"){
+			var oData = {produto:{tabela:6,marca:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+		}else if(tabval == "qatmvctabsUnimed"){
+			var oData = {produto:{tabela:7,unimed:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+		}
 		rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos',oData , fill_dataCSV, process_error);
 	},
-	fill_dataCSV function(procResponse)
+	fill_dataCSV : function(procResponse)
 	{
 		qat.model.supermercado.pages.data = reuse_fill_data(procResponse,qat.model.supermercado.pages.data,"produtoDialog2");
 		qat.model.supermercado.pages.JSONToCSVConvertor(qat.model.supermercado.pages.data, "Supermercado", true);

@@ -138,7 +138,7 @@ var options =
 
 		function fill_data(procResponse)
 		{
-			data = reuse_fill_data(procResponse,data,"menu");
+			data = reuse_fill_data(procResponse,data,"trimenu");
 			onProcDataLoaded.notify({});
 		}
 
@@ -221,23 +221,26 @@ $('#trimenuGrid').keyup(function(e)
 	{
 		if (rowChg >= 1 )
 		{
-			ploader.callUpdateWS(aRowChg);
+			if (validateFields(rowChg))
+			{
+				ploaderTri.callUpdateWS(aRowChg);
+			}
 		}
 		else
 		{
-		//	if (validateFields(0))
-		//	{
-				ploader.callInsertWS();
-		//	}
+		if (validateFields(0))
+			{
+				ploaderTri.callInsertWS();
+			}
 		}
 	}
 });
 
 $('#refreshtrimenu').click(function() {
-	ploader.callRefreshWS(135);
+	ploaderTri.callRefreshWS(135);
 });
 </sec:authorize>
 $('#listtrimenu').click(function() {
-	 ploader.callPagedFetchWS(20,0);
+	 ploaderTri.callPagedFetchWS(20,0);
 });
 </script>
