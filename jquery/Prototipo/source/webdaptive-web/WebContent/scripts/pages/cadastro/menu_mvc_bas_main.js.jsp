@@ -59,6 +59,7 @@ var options =
 //Custom RemoteModel Extension for SlickGrid
 (function($)
 {
+var tabval="";
 	function RemoteModel()
 	{
 		var onProcDataLoading = new EventHelper();
@@ -107,8 +108,10 @@ var options =
 		function callDeleteWS(_procId)
 		{
 			onProcDataLoading.notify({});
-		    var oData = new qat.model.reqProc(null, new qat.model.cadastro(0,_procId,"","",0.0),true,true);
-			rest_post_call('qat-webdaptive/cadastro/api/deleteBAS', oData, fill_data, process_error);
+		   	var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(_procId,3),true,true);
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/deleteCadastro', oData, fill_data, process_error);
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {cadastro:{type:3,userId:'rod'}}, fill_data, process_error);
+			onProcDataLoading.notify({});
 		}
 
 		function callRefreshWS(_i)
@@ -136,7 +139,7 @@ var options =
 
 		function fill_data(procResponse)
 		{
-			data = reuse_fill_data(procResponse,data,"menu");
+			data = reuse_fill_data(procResponse,data,"menu",ploaderMenu);
 			onProcDataLoaded.notify({});
 		}
 
@@ -154,13 +157,42 @@ var options =
 			}
 			return true;
 		}
-		function openProdutos(value){
-			dom = "<div class='id'>" + value + "</div>";
-		//	openDialogCadastro({produto:{tabela:3,menu:{id:parseInt(value),userId:'rod'},userId:'rod'}});
-			valueGlobal = parseInt(value);
-			$('#tableId').val(3);
-			qat.model.supermercado.pages.openProdutos({produto:{tabela:3,menu:{id:parseInt(value),userId:'rod'},userId:'rod'}},3);
+
+		function openProdutos(value)
+		{
+		$actionTagDialog = $("#action-produto-dialog").load('../produto/produtosDialogByRequestBAS').dialog({
+			autoOpen: false,
+			title: 'Lista Produto Supermercado',
+			width: 1024,
+			height: 400,
+			modal: true,
+			buttons: {
+				Cancel: function() {
+					$(this).dialog('close');
+
+				}
+			},
+			dialogClass: 'action-dialog buttons-left',
+			resizable: false
+		});
+		$actionTagDialog.empty();
+		$actionTagDialog.dialog('open');
+		if($.address.parameter('id') != null){
+			tabval = ($.address.parameter('id'));
 		}
+		if(tabval == "qatmvctabsMarca"){
+			var oData = {produto:{tabela:2,marca:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+		}else if(tabval == "qatmvctabsMenu"){
+			var oData = {produto:{tabela:3,menu:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+		}else if(tabval == "qatmvctabsSub"){
+			var oData = {produto:{tabela:4,marca:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+		}else if(tabval == "qatmvctabsTri"){
+			var oData = {produto:{tabela:5,marca:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+		}else if(tabval == "qatmvctabsUnimed"){
+			var oData = {produto:{tabela:6,unimed:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+		}
+		openDialogCadastro(oData);
+	}
 		function openDialogCadastro(oData)
 		{
 
@@ -170,22 +202,30 @@ var options =
 		}
 		function fill_data2(procResponse)
 		{
-			data = reuse_fill_data(procResponse,data,"produtoDialog2");
+			data = reuse_fill_data(procResponse,data,"produtoDialog2",ploaderMenu);
 			onProcDataLoaded.notify({});
 		}
-		function exportCSVProd()
+		function exportCSV()
 		{
-			debugger;
-		    onProcDataLoading.notify({});
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos',{produto:{tabela:2,marca:{id:parseInt(valueGlobal),userId:'rod'},userId:'rod'}} , fill_dataCSV, process_error);
+			if(tabval = "qatmvctabsMarca"){
+				var oData = {produto:{tabela:3,marca:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+			}else if(tabval == "qatmvctabsMenu"){
+				var oData = {produto:{tabela:4,menu:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+			}else if(tabval == "qatmvctabsSub"){
+				var oData = {produto:{tabela:5,marca:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+			}else if(tabval == "qatmvctabsTri"){
+				var oData = {produto:{tabela:6,marca:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+			}else if(tabval == "qatmvctabsUnimed"){
+				var oData = {produto:{tabela:7,unimed:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+			}
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos',oData , fill_dataCSV, process_error);
 		}
-		function fill_dataCSV(procResponse)
-		{
-			data = reuse_fill_data(procResponse,data,"produtoDialog2");
-			qat.model.supermercado.pages.JSONToCSVConvertor(data, "Supermercado", true);
-			onProcDataLoaded.notify({});
+	function fill_dataCSV(procResponse)
+	{
+		qat.model.supermercado.pages.data = reuse_fill_data(procResponse,data,"produtoDialog2",ploaderMenu);
+		qat.model.supermercado.pages.JSONToCSVConvertor(qat.model.supermercado.pages.data, "Supermercado", true);
 
-		}
+	}
 
 		return{
 			// properties
@@ -199,6 +239,7 @@ var options =
 			"callInsertWS": callInsertWS,
 			"callUpdateWS": callUpdateWS,
 			"openProdutos":openProdutos,
+			"exportCSV":exportCSV,
 			"callRefreshWS": callRefreshWS,
 			</sec:authorize>
 			// events
@@ -247,24 +288,24 @@ $('#menuGrid').keyup(function(e)
 		{
 			if (validateFields(rowChg))
 			{
-				ploader.callUpdateWS(aRowChg);
+				ploaderMenu.callUpdateWS(aRowChg);
 			}
 		}
 		else
 		{
 			if (validateFields(0))
 			{
-				ploader.callInsertWS();
+				ploaderMenu.callInsertWS();
 			}
 		}
 	}
 });
 
 $('#refreshmenu').click(function() {
-	ploader.callRefreshWS(135);
+	ploaderMenu.callRefreshWS(135);
 });
 </sec:authorize>
 $('#listmenu').click(function() {
-	 ploader.callPagedFetchWS(20,0);
+	 ploaderMenu.callPagedFetchWS(20,0);
 });
 </script>

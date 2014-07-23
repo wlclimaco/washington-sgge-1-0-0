@@ -191,16 +191,16 @@ function requiredFieldValidator(value)
 
 function validateFields(rowValue)
 {
-	if (wd.core.isEmpty(data[rowValue].pcode))
+	if (wd.core.isEmpty(data[rowValue].nome))
 	{
-		pgrid.gotoCell(rowValue,3,true);
+		pgrid.gotoCell(rowValue,4,true);
 		$(pgrid.getActiveCellNode()).addClass("invalid");
 		$(pgrid.getActiveCellNode()).stop(true,true).effect("highlight", {color:"red"}, 300);
 		wd.core.displayNotificationMessage('#StatusBar',procedure.requiredfield.msg, false, 'error', 5000);
 	}
-	else if (wd.core.isEmpty(data[rowValue].pdesc))
+	else if (wd.core.isEmpty(data[rowValue].descricao))
 	{
-		pgrid.gotoCell(rowValue,4,true);
+		pgrid.gotoCell(rowValue,5,true);
 		$(pgrid.getActiveCellNode()).addClass("invalid");
 		$(pgrid.getActiveCellNode()).stop(true,true).effect("highlight", {color:"red"}, 300);
 		wd.core.displayNotificationMessage('#StatusBar',procedure.requiredfield.msg, false, 'error', 5000);
@@ -219,23 +219,26 @@ $('#unimedGrid').keyup(function(e)
 	{
 		if (rowChg >= 1 )
 		{
-			ploader.callUpdateWS(aRowChg);
+			if (validateFields(rowChg))
+			{
+				ploaderUni.callUpdateWS(aRowChg);
+			}
 		}
 		else
 		{
-		//	if (validateFields(0))
-		//	{
-				ploader.callInsertWS();
-		//	}
+			if (validateFields(0))
+			{
+				ploaderUni.callInsertWS();
+			}
 		}
 	}
 });
 
 $('#refreshunimed').click(function() {
-	ploader.callRefreshWS(135);
+	ploaderUni.callRefreshWS(135);
 });
 </sec:authorize>
 $('#listunimed').click(function() {
-	 ploader.callPagedFetchWS(20,0);
+	 ploaderUni.callPagedFetchWS(20,0);
 });
 </script>

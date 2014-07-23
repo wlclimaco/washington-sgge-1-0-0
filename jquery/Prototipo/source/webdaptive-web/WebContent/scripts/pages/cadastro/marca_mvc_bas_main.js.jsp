@@ -185,7 +185,7 @@ var options =
 
 		function fill_data(procResponse)
 		{
-			data = reuse_fill_data(procResponse,data,"menu");
+			data = reuse_fill_data(procResponse,data,"marca");
 			onProcDataLoaded.notify({});
 		}
 
@@ -266,7 +266,7 @@ $('#marcaGrid').keyup(function(e)
 		{
 		if (validateFields(rowChg))
 			{
-				ploader.callUpdateWS(aRowChg);
+				ploaderMarca.callUpdateWS(aRowChg);
 			}
 
 		}
@@ -274,17 +274,17 @@ $('#marcaGrid').keyup(function(e)
 		{
 			if (validateFields(0))
 			{
-				ploader.callInsertWS();
+				ploaderMarca.callInsertWS();
 			}
 		}
 	}
 });
 
 $('#refreshmarca').click(function() {
-	ploader.callRefreshWS(135);
+	ploaderMarca.callRefreshWS(135);
 });
 </sec:authorize>
 $('#listmarca').click(function() {
-	 ploader.callPagedFetchWS(20,0);
+	 ploaderMarca.callPagedFetchWS(20,0);
 });
 </script>

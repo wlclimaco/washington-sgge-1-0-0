@@ -79,6 +79,22 @@ function reuse_fill_data(response,data2,gridProcess)
 		{
 			data2 = menu_fill_data(response,data2);
 		}
+		else if (gridProcess === "marca" )
+		{
+			data2 = marca_fill_data(response,data2);
+		}
+		else if (gridProcess === "submenu" )
+		{
+			data2 = submenu_fill_data(response,data2);
+		}
+		else if (gridProcess === "trimenu" )
+		{
+			data2 = trimenu_fill_data(response,data2);
+		}
+		else if (gridProcess === "unimed" )
+		{
+			data2 = unimed_fill_data(response,data2);
+		}
 
 		else if (gridProcess === "produto" )
 		{
@@ -553,7 +569,7 @@ function menu_fill_data(procResponse,data2)
 
 				cellno:     i,
 				<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
-				action: 	"<a href='#' onclick='javascript:ploader.callDeleteWS(" + procResponse.cadastros[oi].id +");'>Delete</a>",
+				action: 	"<a href='#' onclick='javascript:ploaderMenu.callDeleteWS(" + procResponse.cadastros[oi].id +");'>Delete</a>",
 				</sec:authorize>
 				<sec:authorize ifAllGranted="ROLE_GUEST">
 				action: 'None',
@@ -562,7 +578,7 @@ function menu_fill_data(procResponse,data2)
 				nome:			procResponse.cadastros[oi].nome,
 				descricao:  	procResponse.cadastros[oi].descricao,
 				imagens:  		procResponse.cadastros[oi].imagens,
-				produtos:		"<a href='#' onclick='javascript:ploader.openProdutos(" + procResponse.cadastros[oi].id +");'><span>"+a+"<span></a>",
+				produtos:		"<a href='#' onclick='javascript:ploaderMenu.openProdutos(" + procResponse.cadastros[oi].id +");'><span>"+a+"<span></a>",
 				data:  		    c,
 				userId:  		b
 			}
@@ -574,9 +590,351 @@ function menu_fill_data(procResponse,data2)
 	return data2;
 };
 
-//=========================================================produto_fill_data
+//=========================================================
 
 //============================MENU=======================
+
+function marca_fill_data(procResponse,data2)
+{
+	data2[0] =
+	{
+		cellno: 0,
+		action: "<span>Novo>>></span>",
+		id:		0,
+		nome:			"",
+		produtos:		"",
+		descricao:  	"",
+		imagens:  		"",
+		data  :         "",
+		userId:  		""
+
+	};
+
+	//Fill paging data
+	if (procResponse.resultsSetInfo != undefined)
+	{
+	 	pagingData.pageSize =  parseInt(procResponse.resultsSetInfo.pageSize);
+	 	pagingData.startPage =  parseInt(procResponse.resultsSetInfo.startPage);
+	 	pagingData.moreRowsAvailable =  procResponse.resultsSetInfo.moreRowsAvailable;
+	 	pagingData.totalRowsAvailable =  parseInt(procResponse.resultsSetInfo.totalRowsAvailable);
+	}
+
+	//make sure return is an array
+	if ($.isArray(procResponse.cadastros))
+	{
+		var oi = 0;
+		var tmpLength = procResponse.cadastros.length;
+		<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
+		for (var i=1; i <= tmpLength; i++)
+		</sec:authorize>
+		<sec:authorize  access="hasRole('ROLE_GUEST')">
+		for (var i=0; i < tmpLength; i++)
+		</sec:authorize>
+		{
+			if(procResponse.cadastros[oi].produtos != null){
+					var a =		procResponse.cadastros[oi].produtos.length;
+					var w=[];
+					w.push(a);
+					w.push(procResponse.cadastros[oi].id);
+				}else{
+				a= 0;}
+				if (procResponse.cadastros[oi].acessos != null){
+					var count = procResponse.cadastros[oi].acessos.length;
+					if(procResponse.cadastros[oi].acessos[count-1] != null){
+						var b =     procResponse.cadastros[oi].acessos[count-1].userId;
+						var c =     convertData(procResponse.cadastros[oi].acessos[count-1].data);
+					}else{
+						var b= "";
+						var c= "";
+					}
+				}else{
+					var b= "";
+					var c= "";
+				}
+			data2[i] =
+			{
+
+				cellno:     i,
+				<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
+				action: 	"<a href='#' onclick='javascript:ploaderMarca.callDeleteWS(" + procResponse.cadastros[oi].id +");'>Delete</a>",
+				</sec:authorize>
+				<sec:authorize ifAllGranted="ROLE_GUEST">
+				action: 'None',
+				</sec:authorize>
+				id:				procResponse.cadastros[oi].id,
+				nome:			procResponse.cadastros[oi].nome,
+				descricao:  	procResponse.cadastros[oi].descricao,
+				imagens:  		procResponse.cadastros[oi].imagens,
+				produtos:		"<a href='#' onclick='javascript:ploaderMarca.openProdutos(" + procResponse.cadastros[oi].id +");'><span>"+a+"<span></a>",
+				data:  		    c,
+				userId:  		b
+			}
+
+			oi++;
+		}
+	}
+
+	return data2;
+};
+
+//============================MENU=======================
+
+function submenu_fill_data(procResponse,data2)
+{
+	data2[0] =
+	{
+		cellno: 0,
+		action: "<span>Novo>>></span>",
+		id:		0,
+		nome:			"",
+		produtos:		"",
+		descricao:  	"",
+		imagens:  		"",
+		data  :         "",
+		userId:  		""
+
+	};
+
+	//Fill paging data
+	if (procResponse.resultsSetInfo != undefined)
+	{
+	 	pagingData.pageSize =  parseInt(procResponse.resultsSetInfo.pageSize);
+	 	pagingData.startPage =  parseInt(procResponse.resultsSetInfo.startPage);
+	 	pagingData.moreRowsAvailable =  procResponse.resultsSetInfo.moreRowsAvailable;
+	 	pagingData.totalRowsAvailable =  parseInt(procResponse.resultsSetInfo.totalRowsAvailable);
+	}
+
+	//make sure return is an array
+	if ($.isArray(procResponse.cadastros))
+	{
+		var oi = 0;
+		var tmpLength = procResponse.cadastros.length;
+		<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
+		for (var i=1; i <= tmpLength; i++)
+		</sec:authorize>
+		<sec:authorize  access="hasRole('ROLE_GUEST')">
+		for (var i=0; i < tmpLength; i++)
+		</sec:authorize>
+		{
+			if(procResponse.cadastros[oi].produtos != null){
+					var a =		procResponse.cadastros[oi].produtos.length;
+					var w=[];
+					w.push(a);
+					w.push(procResponse.cadastros[oi].id);
+				}else{
+				a= 0;}
+				if (procResponse.cadastros[oi].acessos != null){
+					var count = procResponse.cadastros[oi].acessos.length;
+					if(procResponse.cadastros[oi].acessos[count-1] != null){
+						var b =     procResponse.cadastros[oi].acessos[count-1].userId;
+						var c =     convertData(procResponse.cadastros[oi].acessos[count-1].data);
+					}else{
+						var b= "";
+						var c= "";
+					}
+				}else{
+					var b= "";
+					var c= "";
+				}
+			data2[i] =
+			{
+
+				cellno:     i,
+				<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
+				action: 	"<a href='#' onclick='javascript:ploaderSub.callDeleteWS(" + procResponse.cadastros[oi].id +");'>Delete</a>",
+				</sec:authorize>
+				<sec:authorize ifAllGranted="ROLE_GUEST">
+				action: 'None',
+				</sec:authorize>
+				id:				procResponse.cadastros[oi].id,
+				nome:			procResponse.cadastros[oi].nome,
+				descricao:  	procResponse.cadastros[oi].descricao,
+				imagens:  		procResponse.cadastros[oi].imagens,
+				produtos:		"<a href='#' onclick='javascript:ploaderSub.openProdutos(" + procResponse.cadastros[oi].id +");'><span>"+a+"<span></a>",
+				data:  		    c,
+				userId:  		b
+			}
+
+			oi++;
+		}
+	}
+
+	return data2;
+};
+
+//============================MENU=======================
+
+function trimenu_fill_data(procResponse,data2)
+{
+	data2[0] =
+	{
+		cellno: 0,
+		action: "<span>Novo>>></span>",
+		id:		0,
+		nome:			"",
+		produtos:		"",
+		descricao:  	"",
+		imagens:  		"",
+		data  :         "",
+		userId:  		""
+
+	};
+
+	//Fill paging data
+	if (procResponse.resultsSetInfo != undefined)
+	{
+	 	pagingData.pageSize =  parseInt(procResponse.resultsSetInfo.pageSize);
+	 	pagingData.startPage =  parseInt(procResponse.resultsSetInfo.startPage);
+	 	pagingData.moreRowsAvailable =  procResponse.resultsSetInfo.moreRowsAvailable;
+	 	pagingData.totalRowsAvailable =  parseInt(procResponse.resultsSetInfo.totalRowsAvailable);
+	}
+
+	//make sure return is an array
+	if ($.isArray(procResponse.cadastros))
+	{
+		var oi = 0;
+		var tmpLength = procResponse.cadastros.length;
+		<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
+		for (var i=1; i <= tmpLength; i++)
+		</sec:authorize>
+		<sec:authorize  access="hasRole('ROLE_GUEST')">
+		for (var i=0; i < tmpLength; i++)
+		</sec:authorize>
+		{
+			if(procResponse.cadastros[oi].produtos != null){
+					var a =		procResponse.cadastros[oi].produtos.length;
+					var w=[];
+					w.push(a);
+					w.push(procResponse.cadastros[oi].id);
+				}else{
+				a= 0;}
+				if (procResponse.cadastros[oi].acessos != null){
+					var count = procResponse.cadastros[oi].acessos.length;
+					if(procResponse.cadastros[oi].acessos[count-1] != null){
+						var b =     procResponse.cadastros[oi].acessos[count-1].userId;
+						var c =     convertData(procResponse.cadastros[oi].acessos[count-1].data);
+					}else{
+						var b= "";
+						var c= "";
+					}
+				}else{
+					var b= "";
+					var c= "";
+				}
+			data2[i] =
+			{
+
+				cellno:     i,
+				<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
+				action: 	"<a href='#' onclick='javascript:ploaderTri.callDeleteWS(" + procResponse.cadastros[oi].id +");'>Delete</a>",
+				</sec:authorize>
+				<sec:authorize ifAllGranted="ROLE_GUEST">
+				action: 'None',
+				</sec:authorize>
+				id:				procResponse.cadastros[oi].id,
+				nome:			procResponse.cadastros[oi].nome,
+				descricao:  	procResponse.cadastros[oi].descricao,
+				imagens:  		procResponse.cadastros[oi].imagens,
+				produtos:		"<a href='#' onclick='javascript:ploaderTri.openProdutos(" + procResponse.cadastros[oi].id +");'><span>"+a+"<span></a>",
+				data:  		    c,
+				userId:  		b
+			}
+
+			oi++;
+		}
+	}
+
+	return data2;
+};
+
+//============================MENU=======================
+
+function unimed_fill_data(procResponse,data2)
+{
+	data2[0] =
+	{
+		cellno: 0,
+		action: "<span>Novo>>></span>",
+		id:		0,
+		nome:			"",
+		produtos:		"",
+		descricao:  	"",
+		imagens:  		"",
+		data  :         "",
+		userId:  		""
+
+	};
+
+	//Fill paging data
+	if (procResponse.resultsSetInfo != undefined)
+	{
+	 	pagingData.pageSize =  parseInt(procResponse.resultsSetInfo.pageSize);
+	 	pagingData.startPage =  parseInt(procResponse.resultsSetInfo.startPage);
+	 	pagingData.moreRowsAvailable =  procResponse.resultsSetInfo.moreRowsAvailable;
+	 	pagingData.totalRowsAvailable =  parseInt(procResponse.resultsSetInfo.totalRowsAvailable);
+	}
+
+	//make sure return is an array
+	if ($.isArray(procResponse.cadastros))
+	{
+		var oi = 0;
+		var tmpLength = procResponse.cadastros.length;
+		<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
+		for (var i=1; i <= tmpLength; i++)
+		</sec:authorize>
+		<sec:authorize  access="hasRole('ROLE_GUEST')">
+		for (var i=0; i < tmpLength; i++)
+		</sec:authorize>
+		{
+			if(procResponse.cadastros[oi].produtos != null){
+					var a =		procResponse.cadastros[oi].produtos.length;
+					var w=[];
+					w.push(a);
+					w.push(procResponse.cadastros[oi].id);
+				}else{
+				a= 0;}
+				if (procResponse.cadastros[oi].acessos != null){
+					var count = procResponse.cadastros[oi].acessos.length;
+					if(procResponse.cadastros[oi].acessos[count-1] != null){
+						var b =     procResponse.cadastros[oi].acessos[count-1].userId;
+						var c =     convertData(procResponse.cadastros[oi].acessos[count-1].data);
+					}else{
+						var b= "";
+						var c= "";
+					}
+				}else{
+					var b= "";
+					var c= "";
+				}
+			data2[i] =
+			{
+
+				cellno:     i,
+				<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
+				action: 	"<a href='#' onclick='javascript:ploaderUni.callDeleteWS(" + procResponse.cadastros[oi].id +");'>Delete</a>",
+				</sec:authorize>
+				<sec:authorize ifAllGranted="ROLE_GUEST">
+				action: 'None',
+				</sec:authorize>
+				id:				procResponse.cadastros[oi].id,
+				nome:			procResponse.cadastros[oi].nome,
+				descricao:  	procResponse.cadastros[oi].descricao,
+				imagens:  		procResponse.cadastros[oi].imagens,
+				produtos:		"<a href='#' onclick='javascript:ploaderUni.openProdutos(" + procResponse.cadastros[oi].id +");'><span>"+a+"<span></a>",
+				data:  		    c,
+				userId:  		b
+			}
+
+			oi++;
+		}
+	}
+
+	return data2;
+};
+
+
+
+//============================PRODUTO=======================
 
 function produto_fill_data(procResponse,data2)
 {
@@ -664,7 +1022,7 @@ function produto_fill_data(procResponse,data2)
 
 				cellno:     i,
 				<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
-				action: 	"<a href='#' onclick='javascript:ploader.callDeleteWS(" + procResponse.produtos[oi].id +");'>Delete</a>",
+				action: 	"<a href='#' onclick='javascript:ploaderProd.callDeleteWS(" + procResponse.produtos[oi].id +");'>Delete</a>",
 				</sec:authorize>
 				<sec:authorize ifAllGranted="ROLE_GUEST">
 				action: 'None',
@@ -1030,13 +1388,18 @@ function produtoDialog_fill_data2(procResponse,data2)
 				var f= "";
 				var g= "";
 			}
+
 			if (procResponse.produtos[oi].precos != null){
 				var count = procResponse.produtos[oi].precos.length;
 				if(procResponse.produtos[oi].precos[count-1] != null){
-					var h =     procResponse.produtos[oi].precos[count-1].supermercadoid;
-					var j =     procResponse.produtos[oi].precos[count-1].precopromo
-					var w =     procResponse.produtos[oi].precos[count-1].preco
-					var y =     procResponse.produtos[oi].precos[count-1].promocao
+					if(procResponse.produtos[oi].precos[0].supermercadoid != null){
+						var h =     procResponse.produtos[oi].precos[0].supermercadoid.superId;
+					}else{
+						var h = "";
+					}
+					var j =     procResponse.produtos[oi].precos[0].precopromo
+					var w =     procResponse.produtos[oi].precos[0].preco
+					var y =     procResponse.produtos[oi].precos[0].promocao
 
 				}else{
 					var h= "";

@@ -60,6 +60,7 @@ public class PrecoDACImpl extends SqlSessionDaoSupport implements IPrecoDAC
 	public InternalResponse insertPreco(Tabelapreco preco)
 	{
 		InternalResponse response = new InternalResponse();
+		preco.setStatus("A");
 		QATMyBatisDacHelper.doInsert(getSqlSession(), STMT_INSERT, preco, response);
 		return response;
 	}

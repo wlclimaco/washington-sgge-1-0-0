@@ -46,10 +46,6 @@
 <dd><input type="text" name="supId" id="supId" size="32" maxlength="60" class="hide" /></dd>
 <dd><input type="text" name="tableId" id="tableId" size="32" maxlength="60" class="hide" /></dd>
 <div id="action-produto-dialog1" class="action-dialog"></div>
-<script type="text/javascript" src="../commons/scripts/model/user_context.js"></script>
-<script type="text/javascript" src="../commons/scripts/model/request_objects.js"></script>
-<script type="text/javascript" src="../commons/scripts/model/domain_objects.js"></script>
-<script type="text/javascript" src="../commons/scripts/widget/slick.pager.js"></script>
 <jsp:include page="../../commons/scripts/util/app_reuse_functions.js.jsp" flush="true"/>
 <jsp:include page="../../scripts/pages/produto/produto_dialog_mvc_bas_main.js.jsp" flush="true"/>
 <jsp:include page="../../scripts/pages/produto/produto_dialog_mvc_bas_init.js.jsp" flush="true"/>
