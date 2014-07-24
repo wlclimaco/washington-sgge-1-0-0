@@ -38,7 +38,7 @@ var columns = [
 	{id:"razao", name: supermercado.grid.prazao.title, field:"razao", editor:Slick.Editors.Text},
 	{id:"cpfCnpj", name: supermercado.grid.pcnpj.title, field:"cpfCnpj", editor:Slick.Editors.Text},
 	{id:"rgInc", name: supermercado.grid.pincmun.title, field:"rgInc", editor:Slick.Editors.Text},
-	{id:"supermercadoid", name: supermercado.grid.pprod.title, field:"supermercadoid",  width:100,formatter: buttonFormats},
+	{id:"supermercadoid", name: supermercado.grid.pprod.title, field:"supermercadoid",  resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML},
 	{id:"logradouro", name: supermercado.grid.plogradouro.title, field:"logradouro", editor:Slick.Editors.Text},
 	{id:"bairro", name: supermercado.grid.pbairro.title, field:"bairro", editor:Slick.Editors.Text},
 	{id:"cidade", name: supermercado.grid.pcidade.title, field:"cidade", editor:Slick.Editors.Text},

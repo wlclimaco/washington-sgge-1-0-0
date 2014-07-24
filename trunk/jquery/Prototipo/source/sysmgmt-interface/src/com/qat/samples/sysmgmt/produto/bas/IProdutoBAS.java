@@ -12,9 +12,12 @@ import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.RefreshRequest;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.EmbalagemInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.EmbalagemMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.response.CadastroResponse;
+import com.qat.samples.sysmgmt.produto.model.response.EmbalagemResponse;
 import com.qat.samples.sysmgmt.produto.model.response.ProdutoResponse;
 
 /**
@@ -190,5 +193,95 @@ public interface IProdutoBAS
 	@WebResult(name = "fetchCadastrosByRequestReturn")
 	@WSDLDocumentation(value = "Returns a list of produtos paged.")
 	public CadastroResponse fetchCadastrosByRequest(@WebParam(name = "request") CadastroInquiryRequest request);
+
+	// ===================================
+	/**
+	 * Insert produto.
+	 * 
+	 * @param request the request
+	 * @return the produto paged response
+	 */
+	@WebMethod(action = "insertEmbalagem")
+	@WebResult(name = "insertEmbalagemReturn")
+	@WSDLDocumentation(value = "Returns a list of produtos paged.")
+	public EmbalagemResponse insertEmbalagem(@WebParam(name = "request") EmbalagemMaintenanceRequest request);
+
+	/**
+	 * Update produto.
+	 * 
+	 * @param request the request
+	 * @return the produto paged response
+	 */
+	@WebMethod(action = "updateEmbalagem")
+	@WebResult(name = "updateEmbalagemReturn")
+	@WSDLDocumentation(value = "Returns a list of produtos paged.")
+	public EmbalagemResponse updateEmbalagem(@WebParam(name = "request") EmbalagemMaintenanceRequest request);
+
+	/**
+	 * Delete produto.
+	 * 
+	 * @param request the request
+	 * @return the produto paged response
+	 */
+	@WebMethod(action = "deleteEmbalagem")
+	@WebResult(name = "deleteEmbalagemReturn")
+	@WSDLDocumentation(value = "Returns a list of produtos paged.")
+	public EmbalagemResponse deleteEmbalagem(@WebParam(name = "request") EmbalagemMaintenanceRequest request);
+
+	/**
+	 * Fetch all produtos.
+	 * 
+	 * @param request the request
+	 * @return the produto response
+	 */
+	@WebMethod(action = "fetchAllEmbalagems")
+	@WebResult(name = "fetchAllEmbalagemsReturn")
+	@WSDLDocumentation(value = "Returns a list of produtos paged.")
+	public EmbalagemResponse fetchAllEmbalagems(@WebParam(name = "request") EmbalagemInquiryRequest request);
+
+	// ================
+	/**
+	 * Insert produto.
+	 * 
+	 * @param request the request
+	 * @return the produto paged response
+	 */
+	@WebMethod(action = "insertUniMed")
+	@WebResult(name = "insertUniMedReturn")
+	@WSDLDocumentation(value = "Returns a list of produtos paged.")
+	public EmbalagemResponse insertUniMed(@WebParam(name = "request") EmbalagemMaintenanceRequest request);
+
+	/**
+	 * Update produto.
+	 * 
+	 * @param request the request
+	 * @return the produto paged response
+	 */
+	@WebMethod(action = "updateUniMed")
+	@WebResult(name = "updateUniMedReturn")
+	@WSDLDocumentation(value = "Returns a list of produtos paged.")
+	public EmbalagemResponse updateUniMed(@WebParam(name = "request") EmbalagemMaintenanceRequest request);
+
+	/**
+	 * Delete produto.
+	 * 
+	 * @param request the request
+	 * @return the produto paged response
+	 */
+	@WebMethod(action = "deleteUniMed")
+	@WebResult(name = "deleteUniMedReturn")
+	@WSDLDocumentation(value = "Returns a list of produtos paged.")
+	public EmbalagemResponse deleteUniMed(@WebParam(name = "request") EmbalagemMaintenanceRequest request);
+
+	/**
+	 * Fetch all produtos.
+	 * 
+	 * @param request the request
+	 * @return the produto response
+	 */
+	@WebMethod(action = "fetchAllUniMeds")
+	@WebResult(name = "fetchAllUniMedsReturn")
+	@WSDLDocumentation(value = "Returns a list of produtos paged.")
+	public EmbalagemResponse fetchAllUniMeds(@WebParam(name = "request") EmbalagemInquiryRequest request);
 
 }

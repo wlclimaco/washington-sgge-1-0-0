@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.qat.samples.sysmgmt.documento.model.Documento;
 import com.qat.samples.sysmgmt.endereco.model.Endereco;
+import com.qat.samples.sysmgmt.produto.model.Produto;
 import com.qat.samples.sysmgmt.util.Imagem;
 import com.qat.samples.sysmgmt.util.Util;
 
@@ -14,7 +15,7 @@ import com.qat.samples.sysmgmt.util.Util;
  */
 @SuppressWarnings("serial")
 @XmlType(name = "Supermercado", propOrder = {"superId", "enderecos", "nome", "usuario", "senha", "email", "site",
-		"documentos",
+		"documentos", "produtos",
 		"imagens"})
 public class Supermercado extends Util
 {
@@ -24,6 +25,8 @@ public class Supermercado extends Util
 
 	/** The code. */
 	private List<Endereco> enderecos;
+
+	private List<Produto> produtos;
 
 	/** The senha. */
 	private String nome;
@@ -58,6 +61,16 @@ public class Supermercado extends Util
 	 * 
 	 * @return the id
 	 */
+
+	public List<Produto> getProdutos()
+	{
+		return produtos;
+	}
+
+	public void setProdutos(List<Produto> produtos)
+	{
+		this.produtos = produtos;
+	}
 
 	/**
 	 * Gets the enderecos.
@@ -245,10 +258,11 @@ public class Supermercado extends Util
 	@Override
 	public String toString()
 	{
-		return "Supermercado [getEnderecos()=" + getEnderecos() + ", getSuperId()=" + getSuperId() + ", getUsuario()="
-				+ getUsuario() + ", getSenha()=" + getSenha() + ", getEmail()=" + getEmail() + ", getSite()="
-				+ getSite() + ", getDocumentos()=" + getDocumentos() + ", getNome()=" + getNome() + ", getImagens()="
-				+ getImagens() + ", toString()=" + super.toString() + "]";
+		return "Supermercado [getProdutos()=" + getProdutos() + ", getEnderecos()=" + getEnderecos()
+				+ ", getSuperId()=" + getSuperId() + ", getUsuario()=" + getUsuario() + ", getSenha()=" + getSenha()
+				+ ", getEmail()=" + getEmail() + ", getSite()=" + getSite() + ", getDocumentos()=" + getDocumentos()
+				+ ", getNome()=" + getNome() + ", getImagens()=" + getImagens() + ", toString()=" + super.toString()
+				+ "]";
 	}
 
 }

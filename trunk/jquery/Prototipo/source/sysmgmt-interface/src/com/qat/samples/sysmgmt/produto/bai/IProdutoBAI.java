@@ -5,9 +5,12 @@ import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.RefreshRequest;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.EmbalagemInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.EmbalagemMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.response.CadastroResponse;
+import com.qat.samples.sysmgmt.produto.model.response.EmbalagemResponse;
 import com.qat.samples.sysmgmt.produto.model.response.ProdutoResponse;
 
 /**
@@ -128,5 +131,72 @@ public interface IProdutoBAI
 	 * @return the property paged response
 	 */
 	public CadastroResponse fetchCadastrosByRequest(CadastroInquiryRequest request);
+
+	// ===
+
+	/**
+	 * Insert produto.
+	 * 
+	 * @param request the request
+	 * @return the produto paged response
+	 */
+	public EmbalagemResponse insertEmbalagem(EmbalagemMaintenanceRequest request);
+
+	/**
+	 * Update produto.
+	 * 
+	 * @param request the request
+	 * @return the produto paged response
+	 */
+	public EmbalagemResponse updateEmbalagem(EmbalagemMaintenanceRequest request);
+
+	/**
+	 * Delete produto.
+	 * 
+	 * @param request the request
+	 * @return the produto paged response
+	 */
+	public EmbalagemResponse deleteEmbalagem(EmbalagemMaintenanceRequest request);
+
+	/**
+	 * Fetch all produtos.
+	 * 
+	 * @param request the request
+	 * @return the produto response
+	 */
+	public EmbalagemResponse fetchAllEmbalagems(EmbalagemInquiryRequest request);
+
+	// ================
+	/**
+	 * Insert produto.
+	 * 
+	 * @param request the request
+	 * @return the produto paged response
+	 */
+	public EmbalagemResponse insertUniMed(EmbalagemMaintenanceRequest request);
+
+	/**
+	 * Update produto.
+	 * 
+	 * @param request the request
+	 * @return the produto paged response
+	 */
+	public EmbalagemResponse updateUniMed(EmbalagemMaintenanceRequest request);
+
+	/**
+	 * Delete produto.
+	 * 
+	 * @param request the request
+	 * @return the produto paged response
+	 */
+	public EmbalagemResponse deleteUniMed(EmbalagemMaintenanceRequest request);
+
+	/**
+	 * Fetch all produtos.
+	 * 
+	 * @param request the request
+	 * @return the produto response
+	 */
+	public EmbalagemResponse fetchAllUniMeds(EmbalagemInquiryRequest request);
 
 }

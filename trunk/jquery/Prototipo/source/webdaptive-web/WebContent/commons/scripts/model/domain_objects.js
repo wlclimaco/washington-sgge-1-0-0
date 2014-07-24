@@ -33,7 +33,7 @@
 		this.imagens = _imagens;
 		this.tabela  = _tabela
 		this.userId = userContext.userId;
-		this.tenant = userContext.tenant;
+	//	this.tenant = userContext.tenant;
 		this.userRole = userContext.userRole;
 	};
 
@@ -66,7 +66,7 @@
 			this.promocao = 2;
 
 		this.userId = userContext.userId;
-		this.tenant = userContext.tenant;
+	//	this.tenant = userContext.tenant;
 		this.userRole = userContext.userRole;
 	};
 
@@ -161,7 +161,7 @@
 		this.enderecos = [new qat.model.endereco (_enderecoid,_eid, _logradouro,_bairro,_estado,_cidade,_numero,_cep,_nome,_complemento,1)];
 		this.documentos = [new qat.model.documento(_documenroid,_did, _rgInc,_cpfCnpj,_razao,1,_dateNascimento)];
 		this.userId = userContext.userId;
-		this.tenant = userContext.tenant;
+		//this.tenant = userContext.tenant;
 		this.userRole = userContext.userRole;
 	};
 

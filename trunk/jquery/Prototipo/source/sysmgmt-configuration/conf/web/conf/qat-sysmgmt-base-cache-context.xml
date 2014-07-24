@@ -122,6 +122,22 @@
 	</aop:aspect>
  </aop:config>
 
+ <!-- Bundle Cache -->
+  <aop:config>
+	<!-- Pointcuts -->
+	<aop:pointcut id="controleCacheObject" expression="bean(controleDACTarget) and execution(* fetch*(..)) and !execution(* fetchCadastrosByRequest(..))" />
+	<aop:pointcut id="controleFlushInsert" expression="bean(controleDACTarget) and execution(* insert*(..))" />
+	<aop:pointcut id="controleFlushUpdate" expression="bean(controleDACTarget) and execution(* update*(..))" />
+	<aop:pointcut id="controleFlushDelete" expression="bean(controleDACTarget) and execution(* delete*(..))" />
+	<!-- Aspects -->
+	<aop:aspect id="procedureCacheAspects" ref="procedureCacheAspect">
+		<aop:around pointcut-ref="controleCacheObject" method="cacheObject"/>
+		<aop:after pointcut-ref="controleFlushInsert" method="flushCache" />
+		<aop:after pointcut-ref="controleFlushUpdate" method="flushCache" />
+		<aop:after pointcut-ref="controleFlushDelete" method="flushCache" />
+	</aop:aspect>
+ </aop:config>
+
  <!-- Supermercado Cache -->
   <aop:config>
 	<!-- Pointcuts -->

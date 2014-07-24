@@ -26,8 +26,6 @@
     </ul>
   </li>
 </ul>
-<span class="message rounded"><span class="checked-count">0</span> SmartPoints Selected</span>
-
 	 <div class="export-select">
 	     <ul class="link-list">
 	         <li class="last export-type"><small><strong>Export</strong>:<a href="" class="csv">CSV</a></small></li>

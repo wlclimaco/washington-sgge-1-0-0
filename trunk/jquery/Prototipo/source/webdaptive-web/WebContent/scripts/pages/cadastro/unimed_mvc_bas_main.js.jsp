@@ -6,6 +6,7 @@ var rowChg;
 var data = new Array();
 var pgrid;
 var gridPager;
+var availableTags = [];
 var pagingData = new qat.model.pageData(null,null,null,null);
 var id = $("div[id*='tabs']" ).attr("id");
 var viewLoadedObject;
@@ -19,7 +20,6 @@ var viewLoadedObject;
 			viewLoadedObject = ${cadastroResponse};
     </c:otherwise>
 </c:choose>
-console.log(viewLoadedObject);
 var columns=[];
  var checkboxSelector = new Slick.CheckboxSelectColumn({
       cssClass: "slick-cell-checkboxsel"
@@ -31,16 +31,14 @@ var columns=[];
 			return ""
 	}
 
-    columns.push(checkboxSelector.getColumnDefinition());
-//columns & column settings for the grid
-columns[1] = {id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:"cell-center", width:30};
-columns[2] = {id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
-columns[3] = {id:"id", name: procedure.grid.psak.title, field:"id", resizable:false, cssClass:"cell-center", width:75};
-columns[4] = {id:"nome", name: unimed.grid.punimed.title, field:"nome", editor:Slick.Editors.Text};
-columns[5] = {id:"descricao", name: unimed.grid.pdescricao.title, field:"descricao", editor:Slick.Editors.Text};
-columns[6] = {id:"produtos", name: menu.grid.pprodutos.title, field:"produtos", formatter: buttonFormat};
-columns[7] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
-columns[8] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
+columns[0] = {id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:"cell-center", width:30};
+columns[1] = {id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
+columns[2] = {id:"id", name: procedure.grid.psak.title, field:"id", resizable:false, cssClass:"cell-center", width:75};
+columns[3] = {id:"nome", name: unimed.grid.punimed.title, field:"nome", editor:Slick.Editors.Text};
+columns[4] = {id:"descricao", name: unimed.grid.pdescricao.title, field:"descricao", editor:Slick.Editors.Text};
+columns[5] = {id:"produtos", name: menu.grid.pprodutos.title, field:"produtos",resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
+columns[6] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
+columns[7] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
 
 //];
 
@@ -68,11 +66,8 @@ var options =
 		function callInsertWS()
 		{
 			onProcDataLoading.notify({});
-
 			var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(1,6,data[0].nome,data[0].descricao,null),true,true);
 			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/insertCadastro', oData, fill_data, process_error);
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {cadastro:{type:6,userId:'rod'}}, fill_data, process_error);
-
 		}
 
 		function callUpdateWS()
@@ -94,38 +89,32 @@ var options =
 				{
 					bList = false;
 				}
-
 				var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(data[aRowChg[a]].id,6,data[aRowChg[a]].nome,data[aRowChg[a]].descricao),bList,true);
 				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/updateCadastro', oData, fill_data, process_error);
-				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros',{cadastro:{type:6,userId:'rod'}}, fill_data, process_error);
 
 			}
 		}
 
 		function callDeleteWS(_procId)
 		{
-
+			onProcDataLoading.notify({});
 		    var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(_procId,6),true,true);
 			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/deleteCadastro', oData, fill_data, process_error);
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {cadastro:{type:6,userId:'rod'}}, fill_data, process_error);
-			onProcDataLoading.notify({});
 		}
 
 		function callRefreshWS(_i)
 		{
 			onProcDataLoading.notify({});
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros',{cadastro:{type:6,userId:'rod'}}, fill_data, process_error);
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros',{cadastro:{type:6,userId:'rod'}}, fill_data, process_error,true);
 		}
 		</sec:authorize>
 
 		function callPagedFetchWS(_iPageSize, _iStartPage)
 		{
 		    onProcDataLoading.notify({});
-		    //if viewLOaddedObject filled by controller don't make a ajax call
 			if (viewLoadedObject == null)
 			{
-			    var oData = new qat.model.pagedInquiryRequest(null, _iPageSize, _iStartPage, true);
-				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros',{cadastro:{type:6,userId:'rod'}}, fill_data, process_error);
+			    rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros',{cadastro:{type:6,userId:'rod'}}, fill_data, process_error,true);
 			}
 			else
 			{
@@ -136,7 +125,7 @@ var options =
 
 		function fill_data(procResponse)
 		{
-			data = reuse_fill_data(procResponse,data,"menu");
+			data = reuse_fill_data(procResponse,data,"unimed");
 			onProcDataLoaded.notify({});
 		}
 
@@ -154,6 +143,74 @@ var options =
 			}
 			return true;
 		}
+		function openProdutos(value)
+		{
+			$actionTagDialog = $("#action-produto-dialog").load('../produto/produtosDialogByRequestBAS').dialog({
+				autoOpen: false,
+				title: 'Lista Produto Supermercado',
+				width: 1024,
+				height: 400,
+				modal: true,
+				buttons: {
+					Cancel: function() {
+						$(this).dialog('close');
+
+					}
+				},
+				dialogClass: 'action-dialog buttons-left',
+				resizable: false
+			});
+			$actionTagDialog.empty();
+			$actionTagDialog.dialog('open');
+			if($.address.parameter('id') != null){
+				tabval = ($.address.parameter('id'));
+			}
+			if(tabval == "qatmvctabsMarca"){
+				var oData = {produto:{tabela:2,marca:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+			}else if(tabval == "qatmvctabsMenu"){
+				var oData = {produto:{tabela:3,menu:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+			}else if(tabval == "qatmvctabsSub"){
+				var oData = {produto:{tabela:4,menu:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+			}else if(tabval == "qatmvctabsTri"){
+				var oData = {produto:{tabela:5,menu:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+			}else if(tabval == "qatmvctabsUnimed"){
+				var oData = {produto:{tabela:6,unimed:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+			}
+			openDialogCadastro(oData);
+		}
+		function openDialogCadastro(oData)
+		{
+
+		    onProcDataLoading.notify({});
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos',oData , fill_data2, process_error);
+
+		}
+		function fill_data2(procResponse)
+		{
+			data = reuse_fill_data(procResponse,data,"produtoDialog2");
+			onProcDataLoaded.notify({});
+		}
+		function exportCSV()
+		{
+			if(tabval = "qatmvctabsMarca"){
+				var oData = {produto:{tabela:3,marca:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+			}else if(tabval == "qatmvctabsMenu"){
+				var oData = {produto:{tabela:4,menu:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+			}else if(tabval == "qatmvctabsSub"){
+				var oData = {produto:{tabela:5,marca:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+			}else if(tabval == "qatmvctabsTri"){
+				var oData = {produto:{tabela:6,marca:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+			}else if(tabval == "qatmvctabsUnimed"){
+				var oData = {produto:{tabela:7,unimed:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+			}
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos',oData , fill_dataCSV, process_error);
+		}
+		function fill_dataCSV(procResponse)
+		{
+			qat.model.supermercado.pages.data = reuse_fill_data(procResponse,data,"produtoDialog2");
+			qat.model.supermercado.pages.JSONToCSVConvertor(qat.model.supermercado.pages.data, "Supermercado", true);
+
+		}
 
 		return{
 			// properties
@@ -167,6 +224,7 @@ var options =
 			"callInsertWS": callInsertWS,
 			"callUpdateWS": callUpdateWS,
 			"callRefreshWS": callRefreshWS,
+			"openProdutos":openProdutos,
 			</sec:authorize>
 			// events
 			"onProcDataLoading": onProcDataLoading,
@@ -189,23 +247,24 @@ function requiredFieldValidator(value)
 	}
 };
 
-function validateFields(rowValue)
+
+function validateFieldsSub(rowValue)
 {
+
 	if (wd.core.isEmpty(data[rowValue].nome))
 	{
-		pgrid.gotoCell(rowValue,4,true);
+		pgrid.gotoCell(rowValue,3,true);
 		$(pgrid.getActiveCellNode()).addClass("invalid");
 		$(pgrid.getActiveCellNode()).stop(true,true).effect("highlight", {color:"red"}, 300);
 		wd.core.displayNotificationMessage('#StatusBar',procedure.requiredfield.msg, false, 'error', 5000);
 	}
 	else if (wd.core.isEmpty(data[rowValue].descricao))
 	{
-		pgrid.gotoCell(rowValue,5,true);
+		pgrid.gotoCell(rowValue,4,true);
 		$(pgrid.getActiveCellNode()).addClass("invalid");
 		$(pgrid.getActiveCellNode()).stop(true,true).effect("highlight", {color:"red"}, 300);
 		wd.core.displayNotificationMessage('#StatusBar',procedure.requiredfield.msg, false, 'error', 5000);
-	}
-	else
+	}else
 	{
 		return true;
 	}
@@ -219,14 +278,14 @@ $('#unimedGrid').keyup(function(e)
 	{
 		if (rowChg >= 1 )
 		{
-			if (validateFields(rowChg))
+			if (validateFieldsSub(rowChg))
 			{
 				ploaderUni.callUpdateWS(aRowChg);
 			}
 		}
 		else
 		{
-			if (validateFields(0))
+			if (validateFieldsSub(0))
 			{
 				ploaderUni.callInsertWS();
 			}

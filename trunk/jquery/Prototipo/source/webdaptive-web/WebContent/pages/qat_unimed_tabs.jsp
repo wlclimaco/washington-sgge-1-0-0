@@ -13,12 +13,14 @@
 <div id="qatmvctabsUnimed">
 	<ul>
 		<sec:authorize access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
+			<li><a href="../cadastro/fetchEmbalagemByRequestBAS" title="qatmvctab-7"><span>Embalagem</span></a></li>
 	        <li><a href="../cadastro/fetchUniMEdByRequestBAS" title="qatmvctab-7"><span>Unidade Medida</span></a></li>
 		</sec:authorize>
 	</ul>
 	<div class="tabscontent">
 		<sec:authorize access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
 			<div id="qatmvctab-1"></div>
+			<div id="qatmvctab-2"></div>
 		</sec:authorize>
 	</div>
 </div>

@@ -36,6 +36,9 @@
 	<bean id="supermercadoBACTarget" class="com.qat.samples.sysmgmt.supermercado.bac.impl.SupermercadoBACImpl">
 		<property name="supermercadoDAC" ref="supermercadoDACTarget"/>
 	</bean>
+	<bean id="controleBACTarget" class="com.qat.samples.sysmgmt.controle.bac.impl.ControleBACImpl">
+		<property name="controleDAC" ref="controleDACTarget"/>
+	</bean>
 
 	<bean id="clienteBACTarget" class="com.qat.samples.sysmgmt.cliente.bac.impl.ClienteBACImpl">
 		<property name="clienteDAC" ref="clienteDACTarget"/>

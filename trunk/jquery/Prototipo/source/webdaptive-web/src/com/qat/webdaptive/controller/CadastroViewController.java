@@ -5,10 +5,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.qat.samples.sysmgmt.produto.model.Cadastro;
-import com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest;
-import com.qat.samples.sysmgmt.util.TableTypeEnum;
-
 /**
  * The Class SupermercadoViewController.
  */
@@ -42,65 +38,35 @@ public class CadastroViewController extends CadastroBaseController
 	@RequestMapping(value = "/fetcMenusByRequestBAS", method = RequestMethod.GET)
 	public ModelAndView fetcMenusByRequestBAS()
 	{
-		CadastroInquiryRequest request = new CadastroInquiryRequest();
-		// we will be paging so set the default values
-		Cadastro cadastro = new Cadastro(TableTypeEnum.MENU);
-		request.setCadastro(cadastro);
-		request.setStartPage(ZERO);
-		request.setPageSize(TWENTY);
-		request.setPreQueryCount(true);
-		return cadastroMAV(request, MENU_MVC_BAS_RETURN);
+		ModelAndView modelAndView = new ModelAndView(MENU_MVC_BAS_RETURN);
+		return modelAndView;
 	}
 
 	@RequestMapping(value = "/fetchSubMenusByRequestBAS", method = RequestMethod.GET)
 	public ModelAndView fetchSubMenusByRequestBAS()
 	{
-		CadastroInquiryRequest request = new CadastroInquiryRequest();
-		// we will be paging so set the default values
-		request.setStartPage(ZERO);
-		request.setPageSize(TWENTY);
-		request.setPreQueryCount(true);
-		Cadastro cadastro = new Cadastro(TableTypeEnum.SUBMENU);
-		request.setCadastro(cadastro);
-		return cadastroMAV(request, SUBMENU_MVC_BAS_RETURN);
+		ModelAndView modelAndView = new ModelAndView(SUBMENU_MVC_BAS_RETURN);
+		return modelAndView;
 	}
 
 	@RequestMapping(value = "/fetchTriMenusByRequestBAS", method = RequestMethod.GET)
 	public ModelAndView fetchTriMenusByRequestBAS()
 	{
-		CadastroInquiryRequest request = new CadastroInquiryRequest();
-		// we will be paging so set the default values
-		request.setStartPage(ZERO);
-		request.setPageSize(TWENTY);
-		request.setPreQueryCount(true);
-		Cadastro cadastro = new Cadastro(TableTypeEnum.TRIMENU);
-		request.setCadastro(cadastro);
-		return cadastroMAV(request, TRIMENU_MVC_BAS_RETURN);
+		ModelAndView modelAndView = new ModelAndView(TRIMENU_MVC_BAS_RETURN);
+		return modelAndView;
 	}
 
 	@RequestMapping(value = "/fetchUniMEdByRequestBAS", method = RequestMethod.GET)
 	public ModelAndView fetchUniMEdByRequestBAS()
 	{
-		CadastroInquiryRequest request = new CadastroInquiryRequest();
-		// we will be paging so set the default values
-		request.setStartPage(ZERO);
-		request.setPageSize(TWENTY);
-		request.setPreQueryCount(true);
-		Cadastro cadastro = new Cadastro(TableTypeEnum.UNIMED);
-		request.setCadastro(cadastro);
-		return cadastroMAV(request, UNIMED_MVC_BAS_RETURN);
+		ModelAndView modelAndView = new ModelAndView(UNIMED_MVC_BAS_RETURN);
+		return modelAndView;
 	}
 
 	@RequestMapping(value = "/fetchMarcasByRequestBAS", method = RequestMethod.GET)
 	public ModelAndView fetchMarcasByRequestBAS()
 	{
-		CadastroInquiryRequest request = new CadastroInquiryRequest();
-		// we will be paging so set the default values
-		request.setStartPage(ZERO);
-		request.setPageSize(TWENTY);
-		request.setPreQueryCount(true);
-		Cadastro cadastro = new Cadastro(TableTypeEnum.MARCA);
-		request.setCadastro(cadastro);
-		return cadastroMAV(request, MARCA_MVC_BAS_RETURN);
+		ModelAndView modelAndView = new ModelAndView(MARCA_MVC_BAS_RETURN);
+		return modelAndView;
 	}
 }
