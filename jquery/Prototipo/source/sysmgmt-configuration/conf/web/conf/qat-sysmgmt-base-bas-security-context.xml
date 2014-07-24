@@ -88,6 +88,24 @@
         		<entry key="insertFoto" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
         		<entry key="updateCadastro" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
         		<entry key="refreshCadastros" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+
+        		<entry key="fetchAllEmbalagems" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="deleteEmbalagem" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="insertEmbalagem" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="updateEmbalagem" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+
+        		<entry key="fetchAllUniMeds" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="deleteUniMed" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="insertUniMed" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="updateUniMed" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+
+
+
+        		<entry key="fetchAllControles" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchAllAcessos" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchControleByPage" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchControlesByRequest" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="fetchControleByAction" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
       		</map>
    		</property>
 	</bean>
@@ -243,7 +261,29 @@
         access="ROLE_DOMAIN ADMINS"/>
        <sec:protect-pointcut
         expression="execution(* com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS.insertFoto(*))"
-        access="ROLE_DOMAIN ADMINS"/>
+         access="ROLE_DOMAIN ADMINS"/>
+
+
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.controle.bas.rest.ControleBAS.fetchAllControles(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+
+         <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.controle.bas.rest.ControleBAS.fetchAllAcessos(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+
+         <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.controle.bas.rest.ControleBAS.fetchControleByPage(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+
+         <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.controle.bas.rest.ControleBAS.fetchControlesByRequest(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+
+         <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.controle.bas.rest.ControleBAS.fetchControleByAction(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+
   	</sec:global-method-security>
 
  	<!-- ========================= Spring Security Settings for REST Services ======================== -->

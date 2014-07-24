@@ -22,6 +22,8 @@
 		<div id="submenuGrid" style="width:100%; height:95%;" class="wdgrid" ></div>
 		<div id="pager" style="width:100%; height:3%;"></div>
 	</div>
+<div class="hide" id="test"></div>
+<div id="action-produto-dialog" class="action-dialog"></div>
 <script type="text/javascript" src="../commons/scripts/model/user_context.js"></script>
 <script type="text/javascript" src="../commons/scripts/model/request_objects.js"></script>
 <script type="text/javascript" src="../commons/scripts/model/domain_objects.js"></script>

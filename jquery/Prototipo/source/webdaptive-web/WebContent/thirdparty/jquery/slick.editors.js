@@ -40,13 +40,20 @@
 				availableTags.push(cadastros[i].nome);
 			}
 		}
-	  rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {cadastro:{type:3,userId:'rod'}}, callback, null);
-      $input = $("<INPUT id='tags' class='editor-text' />");
-      $input.appendTo(args.container);
-      $input.focus().select();
-      $input.autocomplete({
-           source: availableTags
-       });
+
+		if(availableTags.length == 0){
+			var onProcDataLoading = new EventHelper();
+			onProcDataLoading.notify({});
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {cadastro:{type:3,userId:'rod'}}, callback, null,false);
+		}
+			$input = $("<INPUT id='tags' class='editor-text' />");
+			$input.appendTo(args.container);
+			$input.focus().select();
+			$input.autocomplete({
+				  source: availableTags
+			});
+			console.log(availableTags);
+
     };
 
     this.destroy = function () {

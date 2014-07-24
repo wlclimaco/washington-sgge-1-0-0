@@ -31,18 +31,14 @@ var columns=[];
 			return ""
 	}
 
-    columns.push(checkboxSelector.getColumnDefinition());
-//columns & column settings for the grid
-columns[1] = {id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:"cell-center", width:30};
-columns[2] = {id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
-columns[3] = {id:"id", name: procedure.grid.psak.title, field:"id", resizable:false, cssClass:"cell-center", width:75};
-columns[4] = {id:"nome", name: menu.grid.pnome.title, field:"nome", editor:Slick.Editors.Text};
-columns[5] = {id:"descricao", name: menu.grid.pdescricao.title, field:"descricao", editor:Slick.Editors.Text};
-//columns[6] = {id:"imagens", name: menu.grid.pimagens.title, field:"imagens", formatter: buttonFormat};
-//columns[7] = {id:"produtos", name: menu.grid.pprodutos.title, field:"produtos", editor:Slick.Editors.Text};
-columns[6] = {id:"produtos", name: menu.grid.pprodutos.title, field:"produtos",resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
-columns[7] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
-columns[8] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
+columns[0] = {id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:"cell-center", width:30};
+columns[1] = {id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
+columns[2] = {id:"id", name: procedure.grid.psak.title, field:"id", resizable:false, cssClass:"cell-center", width:75};
+columns[3] = {id:"nome", name: menu.grid.pnome.title, field:"nome", editor:Slick.Editors.Text};
+columns[4] = {id:"descricao", name: menu.grid.pdescricao.title, field:"descricao", editor:Slick.Editors.Text};
+columns[5] = {id:"produtos", name: menu.grid.pprodutos.title, field:"produtos",resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
+columns[6] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
+columns[7] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
 
 //grid options
 var options =
@@ -69,12 +65,8 @@ var tabval="";
 		function callInsertWS()
 		{
 			onProcDataLoading.notify({});
-		   // var oData = new qat.model.reqCadastro(null, new qat.model.procedure(0,0,data[0].pcode,data[0].pdesc,0.0),true,true);qat.model.cadastro = function(_Id, _type, _nome, _descricao,_controlAcess)
 			var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(1,3,data[0].nome,data[0].descricao,null),true,true);
 			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/insertCadastro', oData, fill_data, process_error);
-			var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(null,3),true,true);
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {cadastro:{type:3,userId:'rod'}}, fill_data, process_error);
-
 		}
 
 		function callUpdateWS()
@@ -96,12 +88,8 @@ var tabval="";
 				{
 					bList = false;
 				}
-				//	var oData = new qat.model.reqProc(null, new qat.model.cadastro(data[aRowChg[a]].pversion,data[aRowChg[a]].psak,data[aRowChg[a]].pcode,data[aRowChg[a]].pdesc,0.0), bList, true);
 				var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(data[aRowChg[a]].id,3,data[aRowChg[a]].nome,data[aRowChg[a]].descricao),bList,true);
 				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/updateCadastro', oData, fill_data, process_error);
-				var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(1,3),true,true);
-				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros',{cadastro:{type:3,userId:'rod'}}, fill_data, process_error);
-
 			}
 		}
 
@@ -110,22 +98,18 @@ var tabval="";
 			onProcDataLoading.notify({});
 		   	var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(_procId,3),true,true);
 			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/deleteCadastro', oData, fill_data, process_error);
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {cadastro:{type:3,userId:'rod'}}, fill_data, process_error);
-			onProcDataLoading.notify({});
 		}
 
 		function callRefreshWS(_i)
 		{
 			onProcDataLoading.notify({});
-			var oData = new qat.model.refreshRequest(null, _i, true, true);
-			rest_post_call('qat-webdaptive/cadastro/api/refreshBAS', oData, fill_data, process_error);
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {cadastro:{type:3,userId:'rod'}}, fill_data, process_error);
 		}
 		</sec:authorize>
 
 		function callPagedFetchWS(_iPageSize, _iStartPage)
 		{
 		    onProcDataLoading.notify({});
-		    //if viewLOaddedObject filled by controller don't make a ajax call
 			if (viewLoadedObject == null)
 			{
 				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros',{cadastro:{type:3,userId:'rod'}}, fill_data, process_error);
@@ -160,39 +144,39 @@ var tabval="";
 
 		function openProdutos(value)
 		{
-		$actionTagDialog = $("#action-produto-dialog").load('../produto/produtosDialogByRequestBAS').dialog({
-			autoOpen: false,
-			title: 'Lista Produto Supermercado',
-			width: 1024,
-			height: 400,
-			modal: true,
-			buttons: {
-				Cancel: function() {
-					$(this).dialog('close');
+			$actionTagDialog = $("#action-produto-dialog").load('../produto/produtosDialogByRequestBAS').dialog({
+				autoOpen: false,
+				title: 'Lista Produto Supermercado',
+				width: 1024,
+				height: 400,
+				modal: true,
+				buttons: {
+					Cancel: function() {
+						$(this).dialog('close');
 
-				}
-			},
-			dialogClass: 'action-dialog buttons-left',
-			resizable: false
-		});
-		$actionTagDialog.empty();
-		$actionTagDialog.dialog('open');
-		if($.address.parameter('id') != null){
-			tabval = ($.address.parameter('id'));
+					}
+				},
+				dialogClass: 'action-dialog buttons-left',
+				resizable: false
+			});
+			$actionTagDialog.empty();
+			$actionTagDialog.dialog('open');
+			if($.address.parameter('id') != null){
+				tabval = ($.address.parameter('id'));
+			}
+			if(tabval == "qatmvctabsMarca"){
+				var oData = {produto:{tabela:2,marca:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+			}else if(tabval == "qatmvctabsMenu"){
+				var oData = {produto:{tabela:3,menu:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+			}else if(tabval == "qatmvctabsSub"){
+				var oData = {produto:{tabela:4,marca:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+			}else if(tabval == "qatmvctabsTri"){
+				var oData = {produto:{tabela:5,marca:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+			}else if(tabval == "qatmvctabsUnimed"){
+				var oData = {produto:{tabela:6,unimed:{id:parseInt(value),userId:'rod'},userId:'rod'}}
+			}
+			openDialogCadastro(oData);
 		}
-		if(tabval == "qatmvctabsMarca"){
-			var oData = {produto:{tabela:2,marca:{id:parseInt(value),userId:'rod'},userId:'rod'}}
-		}else if(tabval == "qatmvctabsMenu"){
-			var oData = {produto:{tabela:3,menu:{id:parseInt(value),userId:'rod'},userId:'rod'}}
-		}else if(tabval == "qatmvctabsSub"){
-			var oData = {produto:{tabela:4,marca:{id:parseInt(value),userId:'rod'},userId:'rod'}}
-		}else if(tabval == "qatmvctabsTri"){
-			var oData = {produto:{tabela:5,marca:{id:parseInt(value),userId:'rod'},userId:'rod'}}
-		}else if(tabval == "qatmvctabsUnimed"){
-			var oData = {produto:{tabela:6,unimed:{id:parseInt(value),userId:'rod'},userId:'rod'}}
-		}
-		openDialogCadastro(oData);
-	}
 		function openDialogCadastro(oData)
 		{
 
@@ -267,7 +251,7 @@ function validateFields(rowValue)
 {
 	if (wd.core.isEmpty(data[rowValue].nome))
 	{
-		pgrid.gotoCell(rowValue,4,true);
+		pgrid.gotoCell(rowValue,3,true);
 		$(pgrid.getActiveCellNode()).addClass("invalid");
 		$(pgrid.getActiveCellNode()).stop(true,true).effect("highlight", {color:"red"}, 300);
 		wd.core.displayNotificationMessage('#StatusBar',procedure.requiredfield.msg, false, 'error', 5000);

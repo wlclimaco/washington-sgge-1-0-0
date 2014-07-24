@@ -61,4 +61,8 @@
   	<bean id="precoDACTarget" class="com.qat.samples.sysmgmt.dac.mybatis.PrecoDACImpl">
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
   	</bean>
+
+  	<bean id="controleDACTarget" class="com.qat.samples.sysmgmt.controle.dac.mybatis.ControleDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
 </beans>

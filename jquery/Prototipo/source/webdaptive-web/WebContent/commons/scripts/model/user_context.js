@@ -22,7 +22,7 @@
 
 		this.id = null;
 		this.localeString = WDi18nLanguage;
-		this.tenant = new qat.base.model.tenant();
+//		this.tenant = new qat.base.model.tenant();
 		this.authorities = new Array();
 		this.authorities[0] = new qat.base.model.authority();
 	};

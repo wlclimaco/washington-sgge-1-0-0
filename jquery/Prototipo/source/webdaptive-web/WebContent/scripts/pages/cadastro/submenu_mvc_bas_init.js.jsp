@@ -1,6 +1,6 @@
 <%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags' %>
 <script type="text/javascript">
-var ploaderSubSub = new Slick.Data.RemoteModel();
+var ploaderSub = new Slick.Data.RemoteModel();
 $(document).ready(function ()
 {
 	//initializes statusbar

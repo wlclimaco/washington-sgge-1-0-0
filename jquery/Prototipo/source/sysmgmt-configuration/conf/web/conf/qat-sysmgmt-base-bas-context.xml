@@ -112,6 +112,17 @@
 		</jaxws:properties>
 	</jaxws:endpoint>
 
+	<jaxws:endpoint id="controleBASWS" implementor="#controleBAS" address="/ws/ControleService" >
+		<jaxws:inInterceptors>
+        	<ref bean="wsAuthenticationInterceptor"/>
+   			<ref bean="wsAuthorizationInterceptor"/>
+ 		</jaxws:inInterceptors>
+		<jaxws:properties>
+			<entry key="set-jaxb-validation-event-handler" value="false" />
+			<entry key="ws-security.validate.token" value="false" />
+		</jaxws:properties>
+	</jaxws:endpoint>
+
 	<!-- ========================= BAS DEFINITIONS REST Services======================== -->
 	<bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
   	<jaxrs:server id="countyBASREST" address="/rest/CountyService">
@@ -142,6 +153,12 @@
 
   	<jaxrs:server id="clienteBASREST" address="/rest/ClienteService">
   		<jaxrs:serviceBeans><ref bean="clienteRESTBAS"/></jaxrs:serviceBeans>
+  		<jaxrs:providers>
+			<ref bean='jsonProvider' />
+		</jaxrs:providers>
+  	</jaxrs:server>
+  	<jaxrs:server id="controleBASREST" address="/rest/ControleService">
+  		<jaxrs:serviceBeans><ref bean="controleRESTBAS"/></jaxrs:serviceBeans>
   		<jaxrs:providers>
 			<ref bean='jsonProvider' />
 		</jaxrs:providers>
@@ -184,6 +201,10 @@
 		<property name="clienteBAI" ref="clienteBAI"/>
 	</bean>
 
+	<bean id="controleBAS" class="com.qat.samples.sysmgmt.controle.bas.ws.ControleBAS">
+		<property name="controleBAI" ref="controleBAI"/>
+	</bean>
+
 	<!-- ========================= BAS DEFINITIONS REST Services======================== -->
 	<!-- this bean implements county bas methods -->
 	<bean id="countyRESTBAS" class="com.qat.samples.sysmgmt.bas.rest.CountyBAS">
@@ -204,5 +225,9 @@
 
 	<bean id="clienteRESTBAS" class="com.qat.samples.sysmgmt.cliente.bas.rest.ClienteBAS">
 		<property name="clienteBAI" ref="clienteBAI"/>
+	</bean>
+
+	<bean id="controleRESTBAS" class="com.qat.samples.sysmgmt.controle.bas.rest.ControleBAS">
+		<property name="controleBAI" ref="controleBAI"/>
 	</bean>
 </beans>

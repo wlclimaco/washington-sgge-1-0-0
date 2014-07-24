@@ -3,7 +3,7 @@
 <script type="text/javascript">
 var aRowChg = new Array();
 var rowChg;
-var data = new Array();
+var dataProd = new Array();
 var pgrid;
 var gridPager;
 var pagingData = new qat.model.pageData(null,null,null,null);
@@ -31,23 +31,20 @@ var columns=[];
 	}
 
 
-    columns.push(checkboxSelector.getColumnDefinition());
-//columns & column settings for the grid
+columns.push(checkboxSelector.getColumnDefinition());
 columns[1]  = {id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:"cell-center", width:30};
 columns[2]  = {id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
 columns[3]  = {id:"id", name: procedure.grid.psak.title, field:"id", resizable:false, cssClass:"cell-center", width:75};
-columns[4]  = {id:"codBarra", name:produto.grid.codBarra, field:"codBarra",  width:135, editable:true, cssClass:"pad-4-left", sortable:true},
+columns[4]  = {id:"codBarra", name:produto.grid.codBarra.title, field:"codBarra",  width:135, editable:true, cssClass:"pad-4-left", sortable:true},
 columns[5]  = {id:"nome", name: produto.grid.nome.title, field:"nome"};
 columns[6]  = {id:"unimed", name: produto.grid.unimed.title, field:"unimed"};
-columns[7]  = {id:"descricao", name: produto.grid.descricao.title, field:"descricao"};
-columns[8]  = {id:"marca", name:produto.grid.marca.title, field:"marca",  width:135, editable:true, cssClass:"pad-4-left", sortable:true},
-columns[9]  = {id:"menu", name: produto.grid.menu.title, field:"menu"};
-columns[10] = {id:"supermercadoId", name: produto.grid.supermercadoId.title, field:"supermercadoId"};
-columns[11] = {id:"preco", name: produto.grid.preco.title, field:"preco"};
-columns[12] = {id:"imagens", name: produto.grid.imagens.title, field:"imagens"};
-columns[13] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
-columns[14] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
-columns[15] = {id:"id", name: " ", field:"id",  width:100,formatter: buttonFormat};
+columns[7]  = {id:"marca", name:produto.grid.marca.title, field:"marca",  width:135, editable:true, cssClass:"pad-4-left", sortable:true},
+columns[8]  = {id:"menu", name: produto.grid.menu.title, field:"menu"};
+columns[9] = {id:"supermercadoId", name: produto.grid.supermercadoId.title, field:"supermercadoId"};
+columns[10] = {id:"preco", name: produto.grid.preco.title, field:"preco"};
+columns[11] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
+columns[12] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
+columns[13] = {id:"id", name: " ", field:"id",  cssClass:"cell-center",formatter:  buttonFormat,width:72};
 
 
 
@@ -74,70 +71,16 @@ var options =
 		var onProcDataLoading = new EventHelper();
 		var onProcDataLoaded = new EventHelper();
 
-		<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
-		function callInsertWS()
-		{
-			onProcDataLoading.notify({});
-		   // var oData = new qat.model.reqCadastro(null, new qat.model.procedure(0,0,data[0].pcode,data[0].pdesc,0.0),true,true);qat.model.cadastro = function(_Id, _type, _nome, _descricao,_controlAcess)
-			var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(1,4,data[0].nome,data[0].descricao,null),true,true);
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/insertProduto', oData, fill_data, process_error);
-			var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(null,3),true,true);
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos', {cadastro:{type:4,userId:'rod'}}, fill_data, process_error);
-
-		}
-
-		function callUpdateWS()
-		{
-			var tempLength = aRowChg.length;
-			if (tempLength > 0)
-			{
-				onProcDataLoading.notify({});
-			}
-
-			var bList = true;
-			for(a=0; a < (tempLength); a++)
-			{
-				if (a==(tempLength-1))
-				{
-					bList = true;
-				}
-				else
-				{
-					bList = false;
-				}
-				//	var oData = new qat.model.reqProc(null, new qat.model.cadastro(data[aRowChg[a]].pversion,data[aRowChg[a]].psak,data[aRowChg[a]].pcode,data[aRowChg[a]].pdesc,0.0), bList, true);
-				var oData = new qat.model.reqProduto(null, new qat.model.produto(data[aRowChg[a]].id,4,data[aRowChg[a]].nome,data[aRowChg[a]].descricao),bList,true);
-				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/ProdutoCadastro', oData, fill_data, process_error);
-				var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(1,3),true,true);
-				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos',{cadastro:{type:4,userId:'rod'}}, fill_data, process_error);
-
-			}
-		}
-
-		function callDeleteWS(_procId)
-		{
-			onProcDataLoading.notify({});
-		    var oData = new qat.model.reqProduto(null, new qat.model.produto(_procId,4),true,true);
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/deleteProduto', oData, fill_data, process_error);
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos', {Produto:{userId:'rod'}}, fill_data, process_error);
-		}
-
 		function callRefreshWS(_i)
 		{
 			onProcDataLoading.notify({});
-			var oData = new qat.model.refreshRequest(null, _i, true, true);
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos', {cadastro:{type:4,userId:'rod'}}, fill_data, process_error);
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos', {produto:{tabela:1,userId:'rod'}}, fill_data, process_error);
 		}
-		</sec:authorize>
-
 		function callPagedFetchWS(_iPageSize, _iStartPage)
 		{
 		    onProcDataLoading.notify({});
-		    //if viewLOaddedObject filled by controller don't make a ajax call
 			if (viewLoadedObject == null)
 			{
-			    var oData = new qat.model.pagedInquiryRequest(null, _iPageSize, _iStartPage, true);
-				//rest_post_call('qat-webdaptive/cadastro/api/fetchByRequestBAS', oData, fill_data, process_error);
 			    rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos', {produto:{tabela:1,userId:'rod'}}, fill_data, process_error);
 			}
 			else
@@ -147,11 +90,7 @@ var options =
 			}
 		}
 
-		function fill_data(procResponse)
-		{
-			data = reuse_fill_data(procResponse,data,"produto");
-			onProcDataLoaded.notify({});
-		}
+
 
 		function process_error(jqXHR, textStatus, errorThrown)
 		{
@@ -161,25 +100,68 @@ var options =
 
 		function isProcDataLoaded()
 		{
-			if (data == undefined || data == null)
+			if (dataProd == undefined || dataProd == null)
 			{
 				return false;
 			}
 			return true;
 		}
+		function callInsertWS(_Id)
+		{
+			onProcDataLoading.notify({});
+			if(_Id > 0){
+				var oData = callCreateObject(_Id);
+				var oData = new qat.model.reqProduto(null, oData, true, true);
+				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/updateProduto', oData, fill_data2, process_error);
+			}else{
+				var oData = callCreateObject();
+				var oData = new qat.model.reqProduto(null, oData, true, true);
+				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/insertProduto', oData, fill_data2, process_error);
+			}
+		}
 
+		function callCreateObject(_id)
+		{
+			var tmpLength = dataProd.length;
+			var oDataPreco =[];
+			for (var i=1; i < tmpLength; i++){
+				oDataPreco.push(new qat.model.preco(dataProd[i].id, parseInt(_id), dataProd[i].supermercadoid, null,dataProd[i].preco, dataProd[i].promocao,dataProd[i].precopromo, null, null));
+			}
+			return new qat.model.produto(parseInt(_id),
+									 null,
+									 $('#codbarra').val(),
+									 $('#marca').val(),
+									 $('#menu').val(),
+									 $('#submenu').val(),
+									 $('#trimenu').val(),
+									 $('#unimed').val(),
+									 $('#nomeProd').val(),
+									 $('#descr').val(),
+									 null,
+									 oDataPreco,
+									 null,
+									 1);
+		}
+		function fill_data(procResponse)
+		{
+			dataProd = reuse_fill_data(procResponse,dataProd,"produto");
+			onProcDataLoaded.notify({});
+		}
+		function fill_data2(procResponse)
+		{
+			$("#action-produto-dialog").dialog('close');
+			dataProd = reuse_fill_data(procResponse,dataProd,"produto");
+			onProcDataLoaded.notify({});
+		}
 		return{
 			// properties
-			"data": data,
-
+			"data": dataProd,
 			// methods
 			"isProcDataLoaded": isProcDataLoaded,
 			"callPagedFetchWS": callPagedFetchWS,
 			<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
-			"callDeleteWS": callDeleteWS,
-			"callInsertWS": callInsertWS,
-			"callUpdateWS": callUpdateWS,
 			"callRefreshWS": callRefreshWS,
+			"callInsertWS":callInsertWS,
 			</sec:authorize>
 			// events
 			"onProcDataLoading": onProcDataLoading,
@@ -189,66 +171,11 @@ var options =
 	$.extend(true, window, { Slick: { Data: { RemoteModel: RemoteModel }}});
 })(jQuery);
 
-function requiredFieldValidator(value)
-{
-	if (wd.core.isEmpty(value))
-	{
-		wd.core.displayNotificationMessage('#StatusBar',procedure.requiredfield.msg, false, 'error', 5000);
-		return {valid:false, msg:null};
-	}
-	else
-	{
-		return {valid:true, msg:null};
-	}
-};
-
-function validateFields(rowValue)
-{
-	if (wd.core.isEmpty(data[rowValue].pcode))
-	{
-		pgrid.gotoCell(rowValue,3,true);
-		$(pgrid.getActiveCellNode()).addClass("invalid");
-		$(pgrid.getActiveCellNode()).stop(true,true).effect("highlight", {color:"red"}, 300);
-		wd.core.displayNotificationMessage('#StatusBar',procedure.requiredfield.msg, false, 'error', 5000);
-	}
-	else if (wd.core.isEmpty(data[rowValue].pdesc))
-	{
-		pgrid.gotoCell(rowValue,4,true);
-		$(pgrid.getActiveCellNode()).addClass("invalid");
-		$(pgrid.getActiveCellNode()).stop(true,true).effect("highlight", {color:"red"}, 300);
-		wd.core.displayNotificationMessage('#StatusBar',procedure.requiredfield.msg, false, 'error', 5000);
-	}
-	else
-	{
-		return true;
-	}
-	return false;
-};
-
-<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
-$('#prodGrid').keyup(function(e)
-{
-	if (e.keyCode == 13)
-	{
-		if (rowChg >= 1 )
-		{
-			ploader.callUpdateWS(aRowChg);
-		}
-		else
-		{
-		//	if (validateFields(0))
-		//	{
-				ploader.callInsertWS();
-		//	}
-		}
-	}
-});
 
 $('#refreshprod').click(function() {
-	ploader.callRefreshWS(135);
+	ploaderPro.callRefreshWS(135);
 });
-</sec:authorize>
 $('#listprod').click(function() {
-	 ploader.callPagedFetchWS(20,0);
+	 ploaderPro.callPagedFetchWS(20,0);
 });
 </script>

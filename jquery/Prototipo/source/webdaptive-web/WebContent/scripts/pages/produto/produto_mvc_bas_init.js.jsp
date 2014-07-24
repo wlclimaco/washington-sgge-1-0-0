@@ -1,15 +1,15 @@
 <%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags' %>
 <script type="text/javascript">
-var ploader = new Slick.Data.RemoteModel();
+var ploaderPro = new Slick.Data.RemoteModel();
 $(document).ready(function ()
 {
 	//initializes statusbar
 	$('#StatusBar').jnotifyInizialize({
         oneAtTime: true
     });
-
+	$( "#menu" ).menu();
 	//sets up initial grid ...no data yet...but binds to the object that will fill it
-	pgrid = new Slick.Grid($("#prodGrid"), ploader.data, columns, options);
+	pgrid = new Slick.Grid($("#prodGrid"), ploaderPro.data, columns, options);
 	pgrid.setSelectionModel(new Slick.RowSelectionModel({selectActiveRow: false}));
     pgrid.registerPlugin(checkboxSelector);
 	pgrid.onClick.subscribe(function (e, args) {
@@ -25,14 +25,14 @@ $(document).ready(function ()
 		var dom = "<div class='id'>" + row.toString() + "</div>";
 		$actionTagDialog = $("#action-produto-dialog").load('../produto/cadastroProdutosByRequestBAS').dialog({
 			autoOpen: false,
-			title: 'Action - Add Tag to SmartPoint',
+			title: 'Incluir Produto',
 			width: 800,
 			minheight: 500,
 			height: 800,
 			modal: true,
 			buttons: {
 				'Gravar': function() {
-					ploader.callInsertWS(row);
+					ploaderPro.callInsertWS(row);
 				},
 				Cancel: function() {
 					$(this).dialog('close');
@@ -59,18 +59,18 @@ $(document).ready(function ()
 	});
 
     var columnpicker = new Slick.Controls.ColumnPicker(columns, pgrid, options);
-	gridPager = new Slick.Controls.Pager(ploader, $("#pager"));
+	gridPager = new Slick.Controls.Pager(ploaderPro, $("#pager"));
 	gridPager.init();
 	setTimeout('pgrid.init()', 250);
 
 	//this events fires to blockui while the data is retrieved
-	ploader.onProcDataLoading.subscribe(function()
+	ploaderPro.onProcDataLoading.subscribe(function()
 	{
 		wd.core.blockUIMessage('div.ui-layout-center',true,true,wdloading.title,wdloading.msg);
 	});
 
 	//this events fires to unblockui when the data is retruned and fills the grid
-	ploader.onProcDataLoaded.subscribe(function()
+	ploaderPro.onProcDataLoaded.subscribe(function()
 	{
 		aRowChg.length=0;
 		pgrid.invalidateAllRows();
@@ -104,6 +104,6 @@ $(document).ready(function ()
 	</sec:authorize>
 
 	// load the Grid first time
-	ploader.callPagedFetchWS(20,0);
+	ploaderPro.callPagedFetchWS(20,0);
 });
 </script>

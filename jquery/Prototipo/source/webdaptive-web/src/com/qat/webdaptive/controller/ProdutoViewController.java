@@ -5,8 +5,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
-
 /**
  * The Class ProdutoViewController.
  */
@@ -59,77 +57,49 @@ public class ProdutoViewController extends ProdutoBaseController
 	@RequestMapping(value = "/fetchMarcasByRequestBAS", method = RequestMethod.GET)
 	public ModelAndView fetchmarcasbyRequestBAS()
 	{
-		PagedInquiryRequest request = new PagedInquiryRequest();
-		// we will be paging so set the default values
-		request.setStartPage(ZERO);
-		request.setPageSize(TWENTY);
-		request.setPreQueryCount(true);
-		return produtoMAV(request, PROCEDURE_MVC_BAS_RETURN);
+		ModelAndView modelAndView = new ModelAndView(PROCEDURE_MVC_BAS_RETURN);
+		return modelAndView;
 	}
 
 	@RequestMapping(value = "/fetchMenusByRequestBAS", method = RequestMethod.GET)
 	public ModelAndView fetchMenusbyRequestBAS()
 	{
-		PagedInquiryRequest request = new PagedInquiryRequest();
-		// we will be paging so set the default values
-		request.setStartPage(ZERO);
-		request.setPageSize(TWENTY);
-		request.setPreQueryCount(true);
-		return produtoMAV(request, PROCEDURE_MVC_BAS_RETURN);
+		ModelAndView modelAndView = new ModelAndView(PROCEDURE_MVC_BAS_RETURN);
+		return modelAndView;
 	}
 
 	@RequestMapping(value = "/fetchTriMenusByRequestBAS", method = RequestMethod.GET)
 	public ModelAndView fetchTriMenusbyRequestBAS()
 	{
-		PagedInquiryRequest request = new PagedInquiryRequest();
-		// we will be paging so set the default values
-		request.setStartPage(ZERO);
-		request.setPageSize(TWENTY);
-		request.setPreQueryCount(true);
-		return produtoMAV(request, PROCEDURE_MVC_BAS_RETURN);
+		ModelAndView modelAndView = new ModelAndView(PROCEDURE_MVC_BAS_RETURN);
+		return modelAndView;
 	}
 
 	@RequestMapping(value = "/fetchSubMenusByRequestBAS", method = RequestMethod.GET)
 	public ModelAndView fetchSubMenusbyRequestBAS()
 	{
-		PagedInquiryRequest request = new PagedInquiryRequest();
-		// we will be paging so set the default values
-		request.setStartPage(ZERO);
-		request.setPageSize(TWENTY);
-		request.setPreQueryCount(true);
-		return produtoMAV(request, PROCEDURE_MVC_BAS_RETURN);
+		ModelAndView modelAndView = new ModelAndView(PROCEDURE_MVC_BAS_RETURN);
+		return modelAndView;
 	}
 
 	@RequestMapping(value = "/fetchUniMedsByRequestBAS", method = RequestMethod.GET)
 	public ModelAndView fetchUniMedsbyRequestBAS()
 	{
-		PagedInquiryRequest request = new PagedInquiryRequest();
-		// we will be paging so set the default values
-		request.setStartPage(ZERO);
-		request.setPageSize(TWENTY);
-		request.setPreQueryCount(true);
-		return produtoMAV(request, PROCEDURE_MVC_BAS_RETURN);
+		ModelAndView modelAndView = new ModelAndView(PROCEDURE_MVC_BAS_RETURN);
+		return modelAndView;
 	}
 
 	@RequestMapping(value = "/fetchProdutoByRequestBAS", method = RequestMethod.GET)
 	public ModelAndView fetchProdutobyRequestBAS()
 	{
-		PagedInquiryRequest request = new PagedInquiryRequest();
-		// we will be paging so set the default values
-		request.setStartPage(ZERO);
-		request.setPageSize(TWENTY);
-		request.setPreQueryCount(true);
-		return produtoMAV(request, PROCEDURE_MVC_BAS_RETURN);
+		ModelAndView modelAndView = new ModelAndView(PROCEDURE_MVC_BAS_RETURN);
+		return modelAndView;
 	}
 
 	@RequestMapping(value = "/fetchFotoByRequestBAS", method = RequestMethod.GET)
 	public ModelAndView fetchFotobyRequestBAS()
 	{
-		PagedInquiryRequest request = new PagedInquiryRequest();
-		// we will be paging so set the default values
-		request.setStartPage(ZERO);
-		request.setPageSize(TWENTY);
-		request.setPreQueryCount(true);
-		return produtoMAV(request, FOTO_MVC_BAS_RETURN);
+		ModelAndView modelAndView = new ModelAndView(FOTO_MVC_BAS_RETURN);
+		return modelAndView;
 	}
 }

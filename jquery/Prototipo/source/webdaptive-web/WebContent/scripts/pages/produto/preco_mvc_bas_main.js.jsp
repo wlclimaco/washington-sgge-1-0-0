@@ -1,3 +1,4 @@
+
 <%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags' %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
@@ -19,7 +20,6 @@ var viewLoadedObject;
 			viewLoadedObject = ${precoResponse};
     </c:otherwise>
 </c:choose>
-console.log(viewLoadedObject);
 var columns=[];
  var checkboxSelector = new Slick.CheckboxSelectColumn({
       cssClass: "slick-cell-checkboxsel"
@@ -43,7 +43,7 @@ var columns=[];
 	columns[8] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
 	columns[9] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
 
-//];
+
 
 //grid options
 var options =
@@ -68,10 +68,10 @@ var options =
 		<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
 		function callInsertWS(_Id)
 		{
-			onProcDataLoading.notify({});
 
-			if($('#codId').val() != null){
-				var oData = callCreateObject($('#codId').val());
+			onProcDataLoading.notify({});
+			if(_Id > 0){
+				var oData = callCreateObject(_Id);
 				var oData = new qat.model.reqProduto(null, oData, false, false);
 				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/updateProduto', oData, fill_data_2, process_error);
 			}else{
@@ -79,49 +79,6 @@ var options =
 				var oData = new qat.model.reqProduto(null, oData, false, false);
 				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/insertProduto', oData, fill_data_2, process_error);
 			}
-		}
-
-		function callUpdateWS()
-		{
-			var tempLength = aRowChg.length;
-			if (tempLength > 0)
-			{
-				onProcDataLoading.notify({});
-			}
-
-			var bList = true;
-			for(a=0; a < (tempLength); a++)
-			{
-				if (a==(tempLength-1))
-				{
-					bList = true;
-				}
-				else
-				{
-					bList = false;
-				}
-				//	var oData = new qat.model.reqProc(null, new qat.model.cadastro(data[aRowChg[a]].pversion,data[aRowChg[a]].psak,data[aRowChg[a]].pcode,data[aRowChg[a]].pdesc,0.0), bList, true);
-				var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(data[aRowChg[a]].id,4,data[aRowChg[a]].nome,data[aRowChg[a]].descricao),bList,true);
-				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/updateCadastro', oData, fill_data, process_error);
-				var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(1,3),true,true);
-				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros',{cadastro:{type:4,userId:'rod'}}, fill_data, process_error);
-
-			}
-		}
-
-		function callDeleteWS(_procId)
-		{
-			onProcDataLoading.notify({});
-		    var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(_procId,4),true,true);
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/deleteCadastro', oData, fill_data, process_error);
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {cadastro:{type:4,userId:'rod'}}, fill_data, process_error);
-		}
-
-		function callRefreshWS(_i)
-		{
-			onProcDataLoading.notify({});
-			var oData = new qat.model.refreshRequest(null, _i, true, true);
-			rest_post_call('qat-webdaptive/cadastro/api/refreshBAS', oData, fill_data, process_error);
 		}
 		</sec:authorize>
 
@@ -140,9 +97,9 @@ var options =
 			var tmpLength = data.length;
 			var oDataPreco =[];
 			for (var i=1; i < tmpLength; i++){
-				oDataPreco.push(new qat.model.preco(data[i].id, _id, data[i].supermercadoid, null,data[i].preco, data[i].promocao,data[i].precopromo, null, null));
+				oDataPreco.push(new qat.model.preco(data[i].id, parseInt(_id), data[i].supermercadoid, null,data[i].preco, data[i].promocao,data[i].precopromo, null, null));
 			}
-			return new qat.model.produto(_id,
+			return new qat.model.produto(parseInt(_id),
 									 null,
 									 $('#codbarra').val(),
 									 $('#marca').val(),
@@ -154,7 +111,8 @@ var options =
 									 $('#descr').val(),
 									 null,
 									 oDataPreco,
-									 null);
+									 null,
+									 1);
 		}
 
 		function fill_data(procResponse)
@@ -204,14 +162,7 @@ var options =
 			<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
 
 			"fill_data2"  : fill_data2,
-			"callDeleteWS": callDeleteWS,
 			"callInsertWS": callInsertWS,
-			"callUpdateWS": callUpdateWS,
-	//		"callDeletePC": callDeletePC,
-	//		"callInsertPC": callInsertPC,
-	//		"callUpdatePC": callUpdatePC,
-	//		"callPagedFetchPC": callPagedFetchPC,
-			"callRefreshWS": callRefreshWS,
 			</sec:authorize>
 			// events
 			"onProcDataLoading": onProcDataLoading,
@@ -236,21 +187,40 @@ function requiredFieldValidator(value)
 
 function validateFields(rowValue)
 {
-	if (wd.core.isEmpty(data[rowValue].pcode))
+
+	if (wd.core.isEmpty(data[rowValue].supermercadoid))
 	{
 		pgrid.gotoCell(rowValue,3,true);
 		$(pgrid.getActiveCellNode()).addClass("invalid");
 		$(pgrid.getActiveCellNode()).stop(true,true).effect("highlight", {color:"red"}, 300);
 		wd.core.displayNotificationMessage('#StatusBar',procedure.requiredfield.msg, false, 'error', 5000);
 	}
-	else if (wd.core.isEmpty(data[rowValue].pdesc))
+	else if (wd.core.isEmpty(data[rowValue].preco))
 	{
 		pgrid.gotoCell(rowValue,4,true);
 		$(pgrid.getActiveCellNode()).addClass("invalid");
 		$(pgrid.getActiveCellNode()).stop(true,true).effect("highlight", {color:"red"}, 300);
 		wd.core.displayNotificationMessage('#StatusBar',procedure.requiredfield.msg, false, 'error', 5000);
 	}
-	else
+	else if ((wd.core.isEmpty(data[rowValue].promocao))||(!wd.core.isEmpty(data[rowValue].promocao)))
+	{
+		if(wd.core.isEmpty(data[rowValue].promocao)){
+			pgrid.gotoCell(rowValue,5,true);
+			$(pgrid.getActiveCellNode()).addClass("invalid");
+			$(pgrid.getActiveCellNode()).stop(true,true).effect("highlight", {color:"red"}, 300);
+			wd.core.displayNotificationMessage('#StatusBar',procedure.requiredfield.msg, false, 'error', 5000);
+		}else if (data[rowValue].promocao == "1"){
+			if(wd.core.isEmpty(data[rowValue].precopromo)){
+				pgrid.gotoCell(rowValue,6,true);
+				$(pgrid.getActiveCellNode()).addClass("invalid");
+				$(pgrid.getActiveCellNode()).stop(true,true).effect("highlight", {color:"red"}, 300);
+				wd.core.displayNotificationMessage('#StatusBar',procedure.requiredfield.msg, false, 'error', 5000);
+			}
+			else{return true;}
+		}else{
+			return true;
+		}
+	}else
 	{
 		return true;
 	}
@@ -264,26 +234,27 @@ $('#precoGrid').keyup(function(e)
 	{
 		if (rowChg >= 1 )
 		{
-			ploader.callUpdateWS(aRowChg);
+			var data3 = data;
+			data.operationSuccess = true;
+			ploaderPre.fill_data2(reuse_fill_data(data,data3,"preco"));
 		}
 		else
 		{
-		//	if (validateFields(0))
-		//	{
+			if (validateFields(0))
+			{
 				var data3 = data;
 				data.operationSuccess = true;
-				ploader.fill_data2(reuse_fill_data(data,data3,"preco"));
-				//console.log(data);
-		//	}
+				ploaderPre.fill_data2(reuse_fill_data(data,data3,"preco"));
+			}
 		}
 	}
 });
 
 $('#refreshpreco').click(function() {
-	ploader.callRefreshWS(135);
+	ploaderPre.callPagedFetchWS(135);
 });
 </sec:authorize>
 $('#listpreco').click(function() {
-	 ploader.callPagedFetchWS(20,0);
+	 ploaderPre.callPagedFetchWS(20,0);
 });
 </script>

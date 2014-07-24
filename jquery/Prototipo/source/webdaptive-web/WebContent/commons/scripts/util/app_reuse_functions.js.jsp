@@ -6,8 +6,11 @@
  * @author Rich Barndt
  */
 
-function rest_post_call(_url, _oData, _successFunction, _errorFunction)
+function rest_post_call(_url, _oData, _successFunction, _errorFunction,_async)
 {
+	if(_async == null){
+		_async = true;
+	}
 	$.ajax({
 			type		: "POST",
 			url			: WDHost + _url,
@@ -16,7 +19,7 @@ function rest_post_call(_url, _oData, _successFunction, _errorFunction)
 			data		: $.toJSON(_oData),
 			contentType : "application/json; charset=utf-8",
 			//timeout		: 5000,
-			async		: false,
+			async		: _async,
 			success		: _successFunction,
 			error		: _errorFunction
  	});
@@ -346,11 +349,15 @@ function supermercado_fill_data(procResponse,data2)
 	data2[0] =
 	{
 		cellno: 0,
-		action: "<span>Novo>>></span>",
-		pid: 1,
-		pqntsup: 0,
-		pcidade: null,
-		pestado: null
+		action:"",
+		supermercadoid:0,
+		razao:"",
+		cpfCnpj:"",
+		rgInc:"",
+		produto:"",
+		logradouro:"",
+		bairro:"",
+		cidade:""
 	};
 
 	//Fill paging data
@@ -375,36 +382,25 @@ function supermercado_fill_data(procResponse,data2)
 		for (var i=0; i < tmpLength; i++)
 		</sec:authorize>
 		{
+			if(procResponse.supermercados[oi].superId != null){
+				var a =		procResponse.supermercados[oi].produtos.length
+			}else{
+				var a =	0;
+			}
 			data2[i] =
 			{
 				cellno:     i,
-				<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
 				action: 	"<a href='#' onclick='javascript:ploader.callDeleteWS(" + procResponse.supermercados[oi].superId +");'>Delete</a>",
-				</sec:authorize>
-				<sec:authorize ifAllGranted="ROLE_GUEST">
-				action: 'None',
-				</sec:authorize>
-				supermercadoid:	procResponse.supermercados[oi].superId,
-				usuario:		procResponse.supermercados[oi].usuario,
-				email:			procResponse.supermercados[oi].email,
-				site:  			procResponse.supermercados[oi].site,
-				senha:  		procResponse.supermercados[oi].senha,
-				enderecoid:  	procResponse.supermercados[oi].enderecos[0].enderecoid,
-				eid:  			procResponse.supermercados[oi].enderecos[0].id,
-				logradouro:  	procResponse.supermercados[oi].enderecos[0].logradouro,
-				bairro:  		procResponse.supermercados[oi].enderecos[0].bairro,
-				estado:  		procResponse.supermercados[oi].enderecos[0].estado,
-				cidade:  		procResponse.supermercados[oi].enderecos[0].cidade,
-				numero:  		procResponse.supermercados[oi].enderecos[0].numero,
-				cep:  			procResponse.supermercados[oi].enderecos[0].cep,
-				nome:  			procResponse.supermercados[oi].enderecos[0].nome,
-				complemento:  	procResponse.supermercados[oi].enderecos[0].complemento,
-				documenroid:	procResponse.supermercados[oi].documentos[0].documenroid,
-				did:  	    	procResponse.supermercados[oi].documentos[0].id,
-				rgInc:  		procResponse.supermercados[oi].documentos[0].rgInc,
-				cpfCnpj:  		procResponse.supermercados[oi].documentos[0].cpfCnpj,
-				razao:  		procResponse.supermercados[oi].documentos[0].razao,
-				dateNascimento: procResponse.supermercados[oi].documentos[0].dateNascimento
+				cellno: procResponse.supermercados[oi].superId,
+				supermercadoid:procResponse.supermercados[oi].superId,
+				razao:procResponse.supermercados[oi].documentos[0].razao,
+				cpfCnpj:procResponse.supermercados[oi].documentos[0].cpfCnpj,
+				rgInc:procResponse.supermercados[oi].documentos[0].rgInc,
+				produto:"<a href='#' onclick='javascript:ploaderSub.openProdutos(" + procResponse.supermercados[oi].superId +");'><span>"+a+"<span></a>",
+				logradouro:procResponse.supermercados[oi].enderecos[0].logradouro,
+				bairro:procResponse.supermercados[oi].enderecos[0].bairro,
+				cidade:procResponse.supermercados[oi].enderecos[0].cidade,
+				supermercadoid:	procResponse.supermercados[oi].superId
 			}
 
 			oi++;
@@ -509,6 +505,11 @@ function cliente_fill_data(procResponse,data2)
 
 function menu_fill_data(procResponse,data2)
 {
+	var co = data2.length -1;
+	data2[co-1] = null;
+	frutas = data2;
+	frutas.splice(co, 1);
+	data2 = frutas;
 	data2[0] =
 	{
 		cellno: 0,
@@ -592,10 +593,15 @@ function menu_fill_data(procResponse,data2)
 
 //=========================================================
 
-//============================MENU=======================
+//============================MARCA=======================
 
 function marca_fill_data(procResponse,data2)
 {
+	var co = data2.length -1;
+	data2[co-1] = null;
+	frutas = data2;
+	frutas.splice(co, 1);
+	data2 = frutas;
 	data2[0] =
 	{
 		cellno: 0,
@@ -677,10 +683,15 @@ function marca_fill_data(procResponse,data2)
 	return data2;
 };
 
-//============================MENU=======================
+//============================SUBMENU=======================
 
 function submenu_fill_data(procResponse,data2)
 {
+	var co = data2.length -1;
+	data2[co-1] = null;
+	frutas = data2;
+	frutas.splice(co, 1);
+	data2 = frutas;
 	data2[0] =
 	{
 		cellno: 0,
@@ -762,10 +773,15 @@ function submenu_fill_data(procResponse,data2)
 	return data2;
 };
 
-//============================MENU=======================
+//============================TRIMENU=======================
 
 function trimenu_fill_data(procResponse,data2)
 {
+	var co = data2.length -1;
+	data2[co-1] = null;
+	frutas = data2;
+	frutas.splice(co, 1);
+	data2 = frutas;
 	data2[0] =
 	{
 		cellno: 0,
@@ -847,10 +863,15 @@ function trimenu_fill_data(procResponse,data2)
 	return data2;
 };
 
-//============================MENU=======================
+//============================UNIMED=======================
 
 function unimed_fill_data(procResponse,data2)
 {
+	var co = data2.length -1;
+	data2[co-1] = null;
+	frutas = data2;
+	frutas.splice(co, 1);
+	data2 = frutas;
 	data2[0] =
 	{
 		cellno: 0,
@@ -1004,7 +1025,11 @@ function produto_fill_data(procResponse,data2)
 			if (procResponse.produtos[oi].precos != null){
 				var count = procResponse.produtos[oi].precos.length;
 				if(procResponse.produtos[oi].precos[count-1] != null){
-					var h =     procResponse.produtos[oi].precos[count-1].supermercadoid;
+					if(procResponse.produtos[oi].precos[count-1].supermercadoid != null)
+						var h =     procResponse.produtos[oi].precos[count-1].supermercadoid.superId
+					else{
+						var h = "";
+					}
 					if(procResponse.produtos[oi].precos[count-1].promocao == true)
 						var j =     procResponse.produtos[oi].precos[count-1].precopromo
 					else
@@ -1075,6 +1100,8 @@ function insertProduto_fill_data(procResponse,data2)
 	  $("select#menu").html(menu);
 	  $("select#unimed").html(unimed);
 	}
+	var onProcDataLoading = new EventHelper();
+	onProcDataLoading.notify({});
 	rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros',{cadastro:{type:0,userId:'rod'}}, fill_data, null);
 
 	data2[0] =
@@ -1142,6 +1169,11 @@ function insertProduto_fill_data(procResponse,data2)
 						var b= "";
 						var c= "";
 					}
+					if(procResponse.produtos[0].precos[oi].supermercadoid != null){
+							var sup = procResponse.produtos[0].precos[oi].supermercadoid.superId;
+					}else{
+							var sup = "";
+					}
 					data2[i] =
 					{
 
@@ -1154,7 +1186,7 @@ function insertProduto_fill_data(procResponse,data2)
 						action: 'None',
 						</sec:authorize>
 						id:				procResponse.produtos[0].precos[oi].precoid,
-						supermercadoid:	procResponse.produtos[0].precos[oi].supermercadoid,
+						supermercadoid:	sup,
 						preco:			procResponse.produtos[0].precos[oi].preco,
 						precopromo:  	procResponse.produtos[0].precos[oi].precopromo,
 						promocao:  		procResponse.produtos[0].precos[oi].promocao,
