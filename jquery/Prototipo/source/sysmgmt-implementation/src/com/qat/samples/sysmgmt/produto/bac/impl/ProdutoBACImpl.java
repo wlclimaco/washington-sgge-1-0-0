@@ -14,9 +14,12 @@ import com.qat.samples.sysmgmt.model.response.InternalResponseLocal;
 import com.qat.samples.sysmgmt.produto.bac.IProdutoBAC;
 import com.qat.samples.sysmgmt.produto.dac.IProdutoDAC;
 import com.qat.samples.sysmgmt.produto.model.Cadastro;
+import com.qat.samples.sysmgmt.produto.model.Embalagem;
 import com.qat.samples.sysmgmt.produto.model.Produto;
 import com.qat.samples.sysmgmt.produto.model.Tabelapreco;
+import com.qat.samples.sysmgmt.produto.model.UniMed;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.EmbalagemInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
 import com.qat.samples.sysmgmt.util.TableTypeEnum;
 
@@ -283,13 +286,7 @@ public class ProdutoBACImpl implements IProdutoBAC
 		}
 		else
 		{
-			List<Tabelapreco> a = getProdutoDAC().fetchAllProdutosPreco(request);
-			Produto produto = new Produto();
-			produto.setNome("test");
-			produto.setPrecos(a);
-			List<Produto> b = new ArrayList<Produto>();
-			b.add(produto);
-			response.getResultsList().addAll(b);
+			response.getResultsList().addAll(getProdutoDAC().fetchAllProdutos(request));
 		}
 
 		return response;
@@ -401,6 +398,82 @@ public class ProdutoBACImpl implements IProdutoBAC
 							.getStatus().toString()});
 		}
 		return internalResponse;
+	}
+
+	@Override
+	public InternalResponse insertEmbalagem(Embalagem request)
+	{
+		InternalResponse response = new InternalResponse();
+		response = getProdutoDAC().insertEmbalagem(request);
+		return response;
+	}
+
+	@Override
+	public InternalResponse updateEmbalagem(Embalagem request)
+	{
+		InternalResponse response = new InternalResponse();
+		response = getProdutoDAC().updateEmbalagem(request);
+		return response;
+	}
+
+	@Override
+	public InternalResponse deleteEmbalagem(Embalagem request)
+	{
+		InternalResponse response = new InternalResponse();
+		response = getProdutoDAC().deleteEmbalagem(request);
+		if (response.getStatus() != Status.OperationSuccess)
+		{
+			response.addMessage(DEFAULT_PROCEDURE_BAC_EXCEPTION_MSG, Message.MessageSeverity.Error,
+					Message.MessageLevel.Object, new Object[] {response
+							.getStatus().toString()});
+		}
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Embalagem> fetchAllEmbalagems(EmbalagemInquiryRequest request)
+	{
+		InternalResultsResponse<Embalagem> response = new InternalResultsResponse<Embalagem>();
+		response.getResultsList().addAll(getProdutoDAC().fetchAllEmbalagems(request));
+		return response;
+	}
+
+	@Override
+	public InternalResponse insertUniMed(Embalagem request)
+	{
+		InternalResponse response = new InternalResponse();
+		response = getProdutoDAC().insertUniMed(request);
+		return response;
+	}
+
+	@Override
+	public InternalResponse updateUniMed(Embalagem request)
+	{
+		InternalResponse response = new InternalResponse();
+		response = getProdutoDAC().updateUniMed(request);
+		return response;
+	}
+
+	@Override
+	public InternalResponse deleteUniMed(Embalagem request)
+	{
+		InternalResponse response = new InternalResponse();
+		response = getProdutoDAC().deleteUniMed(request);
+		if (response.getStatus() != Status.OperationSuccess)
+		{
+			response.addMessage(DEFAULT_PROCEDURE_BAC_EXCEPTION_MSG, Message.MessageSeverity.Error,
+					Message.MessageLevel.Object, new Object[] {response
+							.getStatus().toString()});
+		}
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<UniMed> fetchAllUniMeds(EmbalagemInquiryRequest request)
+	{
+		InternalResultsResponse<UniMed> response = new InternalResultsResponse<UniMed>();
+		response.getResultsList().addAll(getProdutoDAC().fetchAllUniMeds(request));
+		return response;
 	}
 
 }

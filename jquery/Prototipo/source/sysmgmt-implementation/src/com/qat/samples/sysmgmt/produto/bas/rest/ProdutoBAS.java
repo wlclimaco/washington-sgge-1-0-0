@@ -7,9 +7,12 @@ import com.qat.samples.sysmgmt.produto.bai.IProdutoBAI;
 import com.qat.samples.sysmgmt.produto.bas.IProdutoRESTBAS;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.EmbalagemInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.EmbalagemMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.response.CadastroResponse;
+import com.qat.samples.sysmgmt.produto.model.response.EmbalagemResponse;
 import com.qat.samples.sysmgmt.produto.model.response.ProdutoResponse;
 
 /**
@@ -143,8 +146,7 @@ public class ProdutoBAS implements IProdutoRESTBAS
 	@Override
 	public CadastroResponse refreshCadastros(RefreshRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getProdutoBAI().refreshCadastros(request);
 	}
 
 	@Override
@@ -163,5 +165,53 @@ public class ProdutoBAS implements IProdutoRESTBAS
 	public CadastroResponse fetchCadastrosByRequest(CadastroInquiryRequest request)
 	{
 		return getProdutoBAI().fetchCadastrosByRequest(request);
+	}
+
+	@Override
+	public EmbalagemResponse insertEmbalagem(EmbalagemMaintenanceRequest request)
+	{
+		return getProdutoBAI().insertEmbalagem(request);
+	}
+
+	@Override
+	public EmbalagemResponse updateEmbalagem(EmbalagemMaintenanceRequest request)
+	{
+		return getProdutoBAI().updateEmbalagem(request);
+	}
+
+	@Override
+	public EmbalagemResponse deleteEmbalagem(EmbalagemMaintenanceRequest request)
+	{
+		return getProdutoBAI().deleteEmbalagem(request);
+	}
+
+	@Override
+	public EmbalagemResponse fetchAllEmbalagems(EmbalagemInquiryRequest request)
+	{
+		return getProdutoBAI().fetchAllEmbalagems(request);
+	}
+
+	@Override
+	public EmbalagemResponse insertUniMed(EmbalagemMaintenanceRequest request)
+	{
+		return getProdutoBAI().insertUniMed(request);
+	}
+
+	@Override
+	public EmbalagemResponse updateUniMed(EmbalagemMaintenanceRequest request)
+	{
+		return getProdutoBAI().updateUniMed(request);
+	}
+
+	@Override
+	public EmbalagemResponse deleteUniMed(EmbalagemMaintenanceRequest request)
+	{
+		return getProdutoBAI().deleteUniMed(request);
+	}
+
+	@Override
+	public EmbalagemResponse fetchAllUniMeds(EmbalagemInquiryRequest request)
+	{
+		return getProdutoBAI().fetchAllUniMeds(request);
 	}
 }

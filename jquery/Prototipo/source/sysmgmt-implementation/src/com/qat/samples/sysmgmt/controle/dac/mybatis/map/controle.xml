@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ControleMap">
+
+
+  <!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="ControleResult" type="Controle">
+    <result property="controleId" column="id"/>
+    <result property="estado" column="estado"/>
+    <result property="controle" column="controle"/>
+    <collection property="acessos" column="id" select="ControleAcessMap.fetchControleAcessByControle" />
+  </resultMap>
+
+  <sql id="allControleColumns">
+		id, estado, controle,VERSN_LOCK_NUM
+  </sql>
+
+  <sql id="allControleColumnsWithQualifier">
+		p.id, p.estado, p.controle,p.VERSN_LOCK_NUM
+  </sql>
+
+  <select id="fetchAllControles" resultMap="ControleResult">
+    SELECT
+    <include refid="allControleColumns" />
+    FROM CONTROLE ORDER BY ID ASC
+  </select>
+
+  <select id="fetchAllControlesPagedBatch" resultMap="ControleResult">
+  	<if test="_databaseId == 'Oracle'">
+		SELECT * FROM (
+		SELECT * FROM (
+		SELECT <include refid="allControleColumnsWithQualifier" />,
+		ROWNUM ROWNUM_ FROM CONTROLE p ORDER BY ID ASC
+		) WHERE ROWNUM_ <![CDATA[ > ]]>
+		( #{_page} * #{_pagesize} )
+		) WHERE ROWNUM <![CDATA[ <= ]]>
+		#{_pagesize}mo
+    </if>
+
+   	 <if test="_databaseId == 'PostgreSQL'">
+		SELECT <include refid="allControleColumns" />
+   		  FROM CONTROLE ORDER BY ID ASC
+		  OFFSET ( #{_page} * #{_pagesize} )
+		  LIMIT #{_pagesize}
+    </if>
+  </select>
+
+  <select id="fetchControleRowCount" resultType="Integer">
+      <if test="_databaseId == 'PostgreSQL'">
+			SELECT COUNT(*) AS RECORD_COUNT FROM CONTROLE WHERE CONTROLE IS NOT NULL
+      </if>
+
+   	  <if test="_databaseId == 'Oracle'">
+		 	SELECT COUNT(ID) AS RECORD_COUNT FROM CONTROLE
+      </if>
+  </select>
+
+  <select id="fetchAllControlesRequest" parameterType="ControleInquiryRequest" resultMap="ControleResult">
+  	<if test="_databaseId == 'Oracle'">
+		SELECT * FROM (
+		SELECT * FROM (
+		SELECT <include refid="allControleColumnsWithQualifier" />,
+		ROWNUM ROWNUM_ FROM CONTROLE p ORDER BY ID ASC
+		) WHERE ROWNUM_ <![CDATA[ > ]]>
+		( #{startPage} * #{pageSize} )
+		) WHERE ROWNUM <![CDATA[ <= ]]>
+		#{pageSize}
+    </if>
+
+   	 <if test="_databaseId == 'PostgreSQL'">
+		SELECT <include refid="allControleColumns" />
+   		  FROM CONTROLE ORDER BY ID ASC
+		  OFFSET ( #{startPage} * #{pageSize} )
+		  LIMIT #{pageSize}
+    </if>
+  </select>
+
+  <select id="fetchControleById" parameterType="Integer" resultMap="ControleResult">
+    SELECT
+   <include refid="allControleColumns" />
+    FROM CONTROLE WHERE ID = #{fetchid}
+  </select>
+
+  <select id="fetchVersionNumber" parameterType="Controle" resultType="int">
+	SELECT VERSN_LOCK_NUM FROM CONTROLE WHERE ID = #{controleId}
+  </select>
+
+  <select id="insertControle" parameterType="Controle" resultType="int" statementType="CALLABLE">
+        { call ins_controle( #{controle}, #{estado},#{userId} ) }
+
+  </select>
+
+  <select id="updateControle" parameterType="Controle" resultType="int" statementType="CALLABLE">
+        { call upd_controle( #{controleId},#{controle}, #{estado},#{userId} ) }
+
+  </select>
+
+   <select id="deleteControleById" parameterType="Controle" resultType="int" statementType="CALLABLE">
+        { call del_controle( #{controleId},#{userId} ) }
+
+  </select>
+
+
+  <delete id="deleteAllControles">
+	DELETE FROM CONTROLE
+  </delete>
+</mapper>

@@ -65,6 +65,18 @@
             p.PRECOID, p.CONTROLEID, p.FOTO, p.SUPERMERCADOID
   </sql>
 
+
+  <select id="fetchAllProdutosBySupermercado" parameterType="int" resultMap="ProdutoResult">
+	select p.produtoid,p.nome,p.marca,p.menu,p.submenu,p.trimenu,p.unimed,p.precoid,p.controleid,p.supermercadoid,p.codbarra,p.foto,p.descricao
+	from produto p ,tabpreco t ,supermercado s
+	where
+	      t.supermercadoid = s.supermercadoid and
+	      p.produtoid = t.produtoid and
+	      s.supermercadoid = #{id}
+	group by p.produtoid,p.nome,p.marca,p.menu,p.submenu,p.trimenu,p.unimed,p.precoid,p.controleid,p.supermercadoid,p.codbarra,p.foto,p.descricao
+	order by p.nome
+    </select>
+
     <select id="fetchMarcaByCode" parameterType="int" resultMap="CadastroResults">
 	    SELECT
 	    <include refid="allCadastroColumns" />
