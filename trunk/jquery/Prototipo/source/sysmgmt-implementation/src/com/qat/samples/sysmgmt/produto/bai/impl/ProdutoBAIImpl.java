@@ -15,9 +15,12 @@ import com.qat.samples.sysmgmt.produto.bai.IProdutoBAI;
 import com.qat.samples.sysmgmt.produto.baid.ProdutoBAID;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.EmbalagemInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.EmbalagemMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.response.CadastroResponse;
+import com.qat.samples.sysmgmt.produto.model.response.EmbalagemResponse;
 import com.qat.samples.sysmgmt.produto.model.response.ProdutoResponse;
 
 /**
@@ -315,6 +318,135 @@ public class ProdutoBAIImpl implements IProdutoBAI
 		try
 		{
 			ProdutoBAID.fetchCadastrosPaged(getProdutoBAC(), request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	@Override
+	public EmbalagemResponse insertEmbalagem(EmbalagemMaintenanceRequest request)
+	{
+		EmbalagemResponse response = new EmbalagemResponse();
+		try
+		{
+			ProdutoBAID.maintainEmbalagem(getProdutoBAC(), ValidationContextIndicator.INSERT,
+					getValidationController(),
+					PersistanceActionEnum.INSERT, request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	@Override
+	public EmbalagemResponse updateEmbalagem(EmbalagemMaintenanceRequest request)
+	{
+		EmbalagemResponse response = new EmbalagemResponse();
+		try
+		{
+			ProdutoBAID.maintainEmbalagem(getProdutoBAC(), ValidationContextIndicator.INSERT,
+					getValidationController(),
+					PersistanceActionEnum.INSERT, request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	@Override
+	public EmbalagemResponse deleteEmbalagem(EmbalagemMaintenanceRequest request)
+	{
+		EmbalagemResponse response = new EmbalagemResponse();
+		try
+		{
+			ProdutoBAID.maintainEmbalagem(getProdutoBAC(), ValidationContextIndicator.INSERT,
+					getValidationController(),
+					PersistanceActionEnum.INSERT, request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	@Override
+	public EmbalagemResponse fetchAllEmbalagems(EmbalagemInquiryRequest request)
+	{
+		EmbalagemResponse response = new EmbalagemResponse();
+		try
+		{
+			ProdutoBAID.fetchAllEmbalagens(getProdutoBAC(), response, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	@Override
+	public EmbalagemResponse insertUniMed(EmbalagemMaintenanceRequest request)
+	{
+		EmbalagemResponse response = new EmbalagemResponse();
+		try
+		{
+			ProdutoBAID.maintainUniMed(getProdutoBAC(), ValidationContextIndicator.INSERT, getValidationController(),
+					PersistanceActionEnum.INSERT, request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	@Override
+	public EmbalagemResponse updateUniMed(EmbalagemMaintenanceRequest request)
+	{
+		EmbalagemResponse response = new EmbalagemResponse();
+		try
+		{
+			ProdutoBAID.maintainUniMed(getProdutoBAC(), ValidationContextIndicator.INSERT, getValidationController(),
+					PersistanceActionEnum.INSERT, request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	@Override
+	public EmbalagemResponse deleteUniMed(EmbalagemMaintenanceRequest request)
+	{
+		EmbalagemResponse response = new EmbalagemResponse();
+		try
+		{
+			ProdutoBAID.maintainUniMed(getProdutoBAC(), ValidationContextIndicator.INSERT, getValidationController(),
+					PersistanceActionEnum.INSERT, request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	@Override
+	public EmbalagemResponse fetchAllUniMeds(EmbalagemInquiryRequest request)
+	{
+		EmbalagemResponse response = new EmbalagemResponse();
+		try
+		{
+			ProdutoBAID.fetchAllUniMeds(getProdutoBAC(), response, request);
 		}
 		catch (Exception ex)
 		{

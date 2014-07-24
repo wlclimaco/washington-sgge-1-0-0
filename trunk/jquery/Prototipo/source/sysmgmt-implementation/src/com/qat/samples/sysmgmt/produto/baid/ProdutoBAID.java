@@ -17,12 +17,17 @@ import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.RefreshRequest;
 import com.qat.samples.sysmgmt.produto.bac.IProdutoBAC;
 import com.qat.samples.sysmgmt.produto.model.Cadastro;
+import com.qat.samples.sysmgmt.produto.model.Embalagem;
 import com.qat.samples.sysmgmt.produto.model.Produto;
+import com.qat.samples.sysmgmt.produto.model.UniMed;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.EmbalagemInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.EmbalagemMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.response.CadastroResponse;
+import com.qat.samples.sysmgmt.produto.model.response.EmbalagemResponse;
 import com.qat.samples.sysmgmt.produto.model.response.ProdutoResponse;
 import com.qat.samples.sysmgmt.supermercado.model.Supermercado;
 import com.qat.samples.sysmgmt.util.TableTypeEnum;
@@ -140,6 +145,17 @@ public final class ProdutoBAID
 				break;
 		}
 
+		if (internalResponse.getStatus() == Status.OperationSuccess)
+		{
+			// Call maintain to see if we need to return the county list and if so whether it should be paged or not
+			ProdutoInquiryRequest requestCadastro = new ProdutoInquiryRequest();
+			Produto cadastro = new Produto();
+			cadastro.setTabela(TableTypeEnum.PRODUTO);
+			requestCadastro.setProduto(cadastro);
+			maintainReturnListProduto(request.getReturnList(), request.getReturnListPaged(), response, produtoBAC,
+					requestCadastro);
+		}
+
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
 		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, null, false);
 	}
@@ -175,6 +191,15 @@ public final class ProdutoBAID
 					break;
 			}
 		}
+		if (internalResponse.getStatus() == Status.OperationSuccess)
+		{
+			// Call maintain to see if we need to return the county list and if so whether it should be paged or not
+			CadastroInquiryRequest requestCadastro = new CadastroInquiryRequest();
+			Cadastro cadastro = new Cadastro(0, request.getCadastro().getType());
+			requestCadastro.setCadastro(cadastro);
+			maintainReturnListCadastro(request.getReturnList(), request.getReturnListPaged(), response, produtoBAC,
+					requestCadastro);
+		}
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
 		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, context.getMessages(), false);
@@ -192,7 +217,7 @@ public final class ProdutoBAID
 		// This method is demo code only. Do not view this as a QAT Standard.
 		produtoBAC.refreshProdutos(request.getRefreshInt());
 		// Call maintain to see if we need to return the county list and if so whether it should be paged or not
-		maintainReturnList(request.getReturnList(), request.getReturnListPaged(), response, produtoBAC, null);
+
 	}
 
 	/**
@@ -204,6 +229,32 @@ public final class ProdutoBAID
 	public static void fetchAllProdutos(IProdutoBAC produtoBAC, ProdutoResponse response, ProdutoInquiryRequest request)
 	{
 		InternalResultsResponse<Produto> internalResponse = produtoBAC.fetchAllProdutos(request);
+		if (internalResponse.getStatus() != Status.OperationSuccess)
+		{
+			response.addOperationFailedMessage(DEFAULT_BUNDLE_BAID_EXCEPTION_MSG, new Object[] {internalResponse
+					.getStatus().toString()});
+		}
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	public static void fetchAllEmbalagens(IProdutoBAC produtoBAC, EmbalagemResponse response,
+			EmbalagemInquiryRequest request)
+	{
+		InternalResultsResponse<Embalagem> internalResponse = produtoBAC.fetchAllEmbalagems(request);
+		if (internalResponse.getStatus() != Status.OperationSuccess)
+		{
+			response.addOperationFailedMessage(DEFAULT_BUNDLE_BAID_EXCEPTION_MSG, new Object[] {internalResponse
+					.getStatus().toString()});
+		}
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	public static void fetchAllUniMeds(IProdutoBAC produtoBAC, EmbalagemResponse response,
+			EmbalagemInquiryRequest request)
+	{
+		InternalResultsResponse<UniMed> internalResponse = produtoBAC.fetchAllUniMeds(request);
 		if (internalResponse.getStatus() != Status.OperationSuccess)
 		{
 			response.addOperationFailedMessage(DEFAULT_BUNDLE_BAID_EXCEPTION_MSG, new Object[] {internalResponse
@@ -298,6 +349,84 @@ public final class ProdutoBAID
 		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
 	}
 
+	public static void maintainEmbalagem(IProdutoBAC produtoBAC, ValidationContextIndicator validationIndicator,
+			ValidationController controller,
+			PersistanceActionEnum persistType, EmbalagemMaintenanceRequest request, EmbalagemResponse response)
+	{
+		InternalResponse internalResponse = new InternalResponse();
+		switch (persistType)
+		{
+			case INSERT:
+				internalResponse = produtoBAC.insertEmbalagem(request.getEmbalagem());
+				break;
+			case UPDATE:
+				internalResponse = produtoBAC.updateEmbalagem(request.getEmbalagem());
+				break;
+			case DELETE:
+				internalResponse = produtoBAC.deleteEmbalagem(request.getEmbalagem());
+				break;
+			default:
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("persistType missing! Setting Unspecified Error status.");
+				}
+				internalResponse.setStatus(InternalResponse.Status.UnspecifiedError);
+				break;
+		}
+		if (internalResponse.getStatus() == Status.OperationSuccess)
+		{
+			// Call maintain to see if we need to return the county list and if so whether it should be paged or not
+			EmbalagemInquiryRequest requestCadastro = new EmbalagemInquiryRequest();
+			Embalagem cadastro = new Embalagem();
+			cadastro = request.getEmbalagem();
+			requestCadastro.setEmbalagem(cadastro);
+			maintainReturnListEmbalagem(request.getReturnList(), request.getReturnListPaged(), response, produtoBAC,
+					requestCadastro);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, null, false);
+	}
+
+	public static void maintainUniMed(IProdutoBAC produtoBAC, ValidationContextIndicator validationIndicator,
+			ValidationController controller,
+			PersistanceActionEnum persistType, EmbalagemMaintenanceRequest request, EmbalagemResponse response)
+	{
+		InternalResponse internalResponse = new InternalResponse();
+		switch (persistType)
+		{
+			case INSERT:
+				internalResponse = produtoBAC.insertUniMed(request.getEmbalagem());
+				break;
+			case UPDATE:
+				internalResponse = produtoBAC.updateUniMed(request.getEmbalagem());
+				break;
+			case DELETE:
+				internalResponse = produtoBAC.deleteUniMed(request.getEmbalagem());
+				break;
+			default:
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("persistType missing! Setting Unspecified Error status.");
+				}
+				internalResponse.setStatus(InternalResponse.Status.UnspecifiedError);
+				break;
+		}
+		if (internalResponse.getStatus() == Status.OperationSuccess)
+		{
+			// Call maintain to see if we need to return the county list and if so whether it should be paged or not
+			EmbalagemInquiryRequest requestCadastro = new EmbalagemInquiryRequest();
+			Embalagem cadastro = new Embalagem();
+			cadastro = request.getEmbalagem();
+			requestCadastro.setEmbalagem(cadastro);
+			maintainReturnListEmbalagem(request.getReturnList(), request.getReturnListPaged(), response, produtoBAC,
+					requestCadastro);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, null, false);
+	}
+
 	/**
 	 * Maintain return list.
 	 * 
@@ -306,7 +435,29 @@ public final class ProdutoBAID
 	 * @param response the response
 	 * @param produtoBAC the produto bac
 	 */
-	private static void maintainReturnList(Boolean listIndicator, Boolean pageListIndicator, ProdutoResponse response,
+	private static void maintainReturnListEmbalagem(Boolean listIndicator, Boolean pageListIndicator,
+			EmbalagemResponse response,
+			IProdutoBAC produtoBAC, EmbalagemInquiryRequest request)
+	{
+		// Fetch again if requested.
+		if (listIndicator)
+		{
+			// Fetch Paged is requested.
+			if (pageListIndicator)
+			{
+				request.setPreQueryCount(true);
+				fetchAllEmbalagens(produtoBAC, response, request);
+			}
+			else
+			{
+				// otherwise return all rows not paged
+				fetchAllEmbalagens(produtoBAC, response, request);
+			}
+		}
+	}
+
+	private static void maintainReturnListUniMed(Boolean listIndicator, Boolean pageListIndicator,
+			ProdutoResponse response,
 			IProdutoBAC produtoBAC, ProdutoInquiryRequest request)
 	{
 		// Fetch again if requested.
@@ -344,6 +495,27 @@ public final class ProdutoBAID
 			{
 				// otherwise return all rows not paged
 				fetchAllCadastros(produtoBAC, response, request);
+			}
+		}
+	}
+
+	private static void maintainReturnListProduto(Boolean listIndicator, Boolean pageListIndicator,
+			ProdutoResponse response,
+			IProdutoBAC produtoBAC, ProdutoInquiryRequest request)
+	{
+		// Fetch again if requested.
+		if (listIndicator)
+		{
+			// Fetch Paged is requested.
+			if (pageListIndicator)
+			{
+				request.setPreQueryCount(true);
+				fetchAllProdutos(produtoBAC, response, request);
+			}
+			else
+			{
+				// otherwise return all rows not paged
+				fetchAllProdutos(produtoBAC, response, request);
 			}
 		}
 	}
