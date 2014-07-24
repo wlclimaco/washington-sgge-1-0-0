@@ -25,6 +25,18 @@
     <collection property="acessos" column="produtoid" select="ControleAcessMap.fetchControleAcessByProduto" />
   </resultMap>
 
+  <resultMap id="ProdutoResult2" type="Produto">
+    <result property="id" column="produtoid"/>
+    <result property="codBarra" column="codbarra"/>
+    <result property="nome" column="nome"/>
+    <result property="descricao" column="descricao"/>
+    <result property="foto" column="foto"/>
+    <association property="marca" column="marca" javaType="Cadastro" select="fetchMarcaByCode" />
+    <association property="menu" column="menu" javaType="Cadastro" select="fetchMenuByCode" />
+    <association property="unimed" column="unimed" javaType="Cadastro" select="fetchUniMedByCode" />
+    <collection property="acessos" column="produtoid" select="ControleAcessMap.fetchControleAcessByProduto" />
+  </resultMap>
+
    <resultMap id="CadastroResult" type="Cadastro">
     <result property="id" column="cadastroid"/>
     <result property="tableTypeEnumValue" column="acao"/>
@@ -66,7 +78,7 @@
   </sql>
 
 
-  <select id="fetchAllProdutosBySupermercado" parameterType="int" resultMap="ProdutoResult">
+  <select id="fetchAllProdutosBySupermercado" parameterType="int" resultMap="ProdutoResult2">
 	select p.produtoid,p.nome,p.marca,p.menu,p.submenu,p.trimenu,p.unimed,p.precoid,p.controleid,p.supermercadoid,p.codbarra,p.foto,p.descricao
 	from produto p ,tabpreco t ,supermercado s
 	where
