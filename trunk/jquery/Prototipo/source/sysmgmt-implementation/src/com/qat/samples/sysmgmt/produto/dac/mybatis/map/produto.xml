@@ -20,7 +20,7 @@
     <result property="foto" column="foto"/>
     <association property="marca" column="marca" javaType="Cadastro" select="fetchMarcaByCode" />
     <association property="menu" column="menu" javaType="Cadastro" select="fetchMenuByCode" />
-    <association property="unimed" column="unimed" javaType="Cadastro" select="fetchUniMedByCode" />
+    <association property="unimed" column="unimed" javaType="UniMed" select="fetchUniMedByCode" />
     <collection property="precos" column="produtoid" select="PrecoMap.fetchPrecoByProduto" />
     <collection property="acessos" column="produtoid" select="ControleAcessMap.fetchControleAcessByProduto" />
   </resultMap>
@@ -33,7 +33,7 @@
     <result property="foto" column="foto"/>
     <association property="marca" column="marca" javaType="Cadastro" select="fetchMarcaByCode" />
     <association property="menu" column="menu" javaType="Cadastro" select="fetchMenuByCode" />
-    <association property="embalagem" column="embalagem" javaType="Embalagem" select="fetchUniMedByCode" />
+    <association property="unimed" column="unimed" javaType="UniMed" select="fetchUniMedByCode" />
     <collection property="acessos" column="produtoid" select="ControleAcessMap.fetchControleAcessByProduto" />
   </resultMap>
 
@@ -61,7 +61,7 @@
     <result property="nome" column="nome"/>
     <result property="qnt" column="qnt"/>
     <association property="produtos" column="id" javaType="Integer" select="fetchCountEmbalagem"/>
-    <collection property="unimed" column="unimed" select="fetchAllDocumentosBySupermercado" />
+    <association property="unimedid" column="unimedid" javaType="UniMed" select="fetchUniMedByCode" />
     <collection property="acessos" column="id" select="ControleAcessMap.fetchAllControleBySupermercado" />
   </resultMap>
 
@@ -72,11 +72,9 @@
     <collection property="acessos" column="id" select="ControleAcessMap.fetchAllControleBySupermercado" />
   </resultMap>
 
-  <select id="fetchCountEmbalagem" parameterType="Integer" resultType="Integer">
-   select count(*) as total from produto p ,embalagem e where p.embalagem = e.id and p.embalagem = #{id}
-  </select>
 
-  <select id="fetchUniMedByEmbalagem" parameterType="int" resultMap="UniMedResult">
+
+  <select id="fetchUniMedByEmbalagem" parameterType="int" resultMap="EmbalagemResult">
 	    SELECT
 	    <include refid="allEmbalagemColumns" />
 	    FROM embalagem where id = #{id}  ORDER BY id DESC
@@ -90,6 +88,9 @@
 		id, sigla, nome
    </sql>
 
+ <select id="fetchCountEmbalagem" parameterType="Integer" resultType="Integer">
+   select count(*) as total from produto p ,embalagem e where p.embalagem = e.id and p.embalagem = #{id}
+  </select>
 
 
   <sql id="allCadastroColumns">
@@ -178,10 +179,10 @@
 	    FROM cadastro where acao = 4 and cadastroid = #{id}  ORDER BY cadastroid ASC
     </select>
 
-    <select id="fetchUniMedByCode" parameterType="int" resultMap="CadastroResults">
+    <select id="fetchUniMedByCode" parameterType="int" resultMap="UniMedResult">
 	    SELECT
-	    <include refid="allEmbalagemColumns" />
-	    FROM embalagem where id = #{id}  ORDER BY id DESC
+	    <include refid="allUniMedColumns" />
+	    FROM unimed where id = #{id}  ORDER BY id DESC
     </select>
 
   <select id="fetchAllCadastro" parameterType="Cadastro" resultMap="CadastroResult">
@@ -326,21 +327,21 @@
 
 
     <select id="insertEmbalagem" parameterType="Embalagem" resultType="int" statementType="CALLABLE">
-        { call ins_embalagem( #{nome} , #{qnt} , #{unimedid},  #{userId} ) }
+        { call ins_embalagem( #{nome} , #{qnt} , #{unimedid.id},  #{userId} ) }
 
   </select>
 
   <select id="insertUniMed" parameterType="UniMed" resultType="int" statementType="CALLABLE">
-        { call ins_unimed( #{nome} , #{sigla} ,  #{userId} ) }
+        { call ins_unimed( #{sigla},#{nome},  #{userId} ) }
   </select>
 
 
   <select id="updateEmbalagem" parameterType="Embalagem" resultType="int" statementType="CALLABLE">
-     { call upd_embalagem(  #{id}, #{nome} , #{qnt} , #{unimedid},  #{userId} ) }
+     { call upd_embalagem(  #{id}, #{nome} , #{qnt} , #{unimedid.id},  #{userId} ) }
   </select>
 
   <select id="updateUniMed" parameterType="UniMed" resultType="int" statementType="CALLABLE">
-	{ call upd_unimed( #{id},#{nome} , #{sigla} ,  #{userId} ) }
+	{ call upd_unimed( #{id},#{sigla},#{nome} ,  #{userId} ) }
   </select>
 
   <select id="deleteEmbalagemById" parameterType="Embalagem" resultType="int" statementType="CALLABLE">
@@ -358,8 +359,7 @@
 			<if test="id !=null">id is not null</if>
 			<if test="id !=null">and id = #{id}</if>
 			<if test="nome != null">and nome = #{nome}</if>
-			<if test="qnt > 0">and qnt = #{qnt}</if>
-			<if test="unimed.id != null">AND unimedid = #{unimed.id}</if>
+			<if test="qnt != null">and qnt = #{qnt}</if>
 
 		</where>
    		  ORDER BY id DESC

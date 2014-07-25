@@ -377,9 +377,6 @@ public final class ProdutoBAID
 		{
 			// Call maintain to see if we need to return the county list and if so whether it should be paged or not
 			EmbalagemInquiryRequest requestCadastro = new EmbalagemInquiryRequest();
-			Embalagem cadastro = new Embalagem();
-			cadastro = request.getEmbalagem();
-			requestCadastro.setEmbalagem(cadastro);
 			maintainReturnListEmbalagem(request.getReturnList(), request.getReturnListPaged(), response, produtoBAC,
 					requestCadastro);
 		}
@@ -417,9 +414,8 @@ public final class ProdutoBAID
 			// Call maintain to see if we need to return the county list and if so whether it should be paged or not
 			EmbalagemInquiryRequest requestCadastro = new EmbalagemInquiryRequest();
 			Embalagem cadastro = new Embalagem();
-			cadastro = request.getEmbalagem();
 			requestCadastro.setEmbalagem(cadastro);
-			maintainReturnListEmbalagem(request.getReturnList(), request.getReturnListPaged(), response, produtoBAC,
+			maintainReturnListUniMed(request.getReturnList(), request.getReturnListPaged(), response, produtoBAC,
 					requestCadastro);
 		}
 
@@ -457,8 +453,8 @@ public final class ProdutoBAID
 	}
 
 	private static void maintainReturnListUniMed(Boolean listIndicator, Boolean pageListIndicator,
-			ProdutoResponse response,
-			IProdutoBAC produtoBAC, ProdutoInquiryRequest request)
+			EmbalagemResponse response,
+			IProdutoBAC produtoBAC, EmbalagemInquiryRequest request)
 	{
 		// Fetch again if requested.
 		if (listIndicator)
@@ -466,14 +462,13 @@ public final class ProdutoBAID
 			// Fetch Paged is requested.
 			if (pageListIndicator)
 			{
-				PagedInquiryRequest request1 = new PagedInquiryRequest();
 				request.setPreQueryCount(true);
-				fetchProdutosPaged(produtoBAC, request1, response);
+				fetchAllUniMeds(produtoBAC, response, request);
 			}
 			else
 			{
 				// otherwise return all rows not paged
-				fetchAllProdutos(produtoBAC, response, request);
+				fetchAllUniMeds(produtoBAC, response, request);
 			}
 		}
 	}

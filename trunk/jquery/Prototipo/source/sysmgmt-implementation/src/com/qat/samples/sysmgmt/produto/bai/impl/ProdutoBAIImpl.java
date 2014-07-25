@@ -349,9 +349,9 @@ public class ProdutoBAIImpl implements IProdutoBAI
 		EmbalagemResponse response = new EmbalagemResponse();
 		try
 		{
-			ProdutoBAID.maintainEmbalagem(getProdutoBAC(), ValidationContextIndicator.INSERT,
+			ProdutoBAID.maintainEmbalagem(getProdutoBAC(), ValidationContextIndicator.UPDATE,
 					getValidationController(),
-					PersistanceActionEnum.INSERT, request, response);
+					PersistanceActionEnum.UPDATE, request, response);
 		}
 		catch (Exception ex)
 		{
@@ -366,9 +366,9 @@ public class ProdutoBAIImpl implements IProdutoBAI
 		EmbalagemResponse response = new EmbalagemResponse();
 		try
 		{
-			ProdutoBAID.maintainEmbalagem(getProdutoBAC(), ValidationContextIndicator.INSERT,
+			ProdutoBAID.maintainEmbalagem(getProdutoBAC(), ValidationContextIndicator.DELETE,
 					getValidationController(),
-					PersistanceActionEnum.INSERT, request, response);
+					PersistanceActionEnum.DELETE, request, response);
 		}
 		catch (Exception ex)
 		{
@@ -414,8 +414,8 @@ public class ProdutoBAIImpl implements IProdutoBAI
 		EmbalagemResponse response = new EmbalagemResponse();
 		try
 		{
-			ProdutoBAID.maintainUniMed(getProdutoBAC(), ValidationContextIndicator.INSERT, getValidationController(),
-					PersistanceActionEnum.INSERT, request, response);
+			ProdutoBAID.maintainUniMed(getProdutoBAC(), ValidationContextIndicator.UPDATE, getValidationController(),
+					PersistanceActionEnum.UPDATE, request, response);
 		}
 		catch (Exception ex)
 		{
@@ -430,8 +430,8 @@ public class ProdutoBAIImpl implements IProdutoBAI
 		EmbalagemResponse response = new EmbalagemResponse();
 		try
 		{
-			ProdutoBAID.maintainUniMed(getProdutoBAC(), ValidationContextIndicator.INSERT, getValidationController(),
-					PersistanceActionEnum.INSERT, request, response);
+			ProdutoBAID.maintainUniMed(getProdutoBAC(), ValidationContextIndicator.DELETE, getValidationController(),
+					PersistanceActionEnum.DELETE, request, response);
 		}
 		catch (Exception ex)
 		{

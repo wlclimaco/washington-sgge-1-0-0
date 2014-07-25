@@ -10,16 +10,6 @@ var availableTags = [];
 var pagingData = new qat.model.pageData(null,null,null,null);
 var id = $("div[id*='tabs']" ).attr("id");
 var viewLoadedObject;
-
-//loads object if being served via controller
-<c:choose>
-    <c:when test="${empty cadastroResponse}">
-			viewLoadedObject = null;
-    </c:when>
-    <c:otherwise>
-			viewLoadedObject = ${cadastroResponse};
-    </c:otherwise>
-</c:choose>
 var columns=[];
  var checkboxSelector = new Slick.CheckboxSelectColumn({
       cssClass: "slick-cell-checkboxsel"
@@ -35,10 +25,9 @@ columns[0] = {id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:
 columns[1] = {id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
 columns[2] = {id:"id", name: procedure.grid.psak.title, field:"id", resizable:false, cssClass:"cell-center", width:75};
 columns[3] = {id:"nome", name: unimed.grid.punimed.title, field:"nome", editor:Slick.Editors.Text};
-columns[4] = {id:"descricao", name: unimed.grid.pdescricao.title, field:"descricao", editor:Slick.Editors.Text};
-columns[5] = {id:"produtos", name: menu.grid.pprodutos.title, field:"produtos",resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
-columns[6] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
-columns[7] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
+columns[4] = {id:"sigla", name: "Sigla", field:"sigla", editor:Slick.Editors.Text};
+columns[5] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
+columns[6] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
 
 //];
 
@@ -66,8 +55,8 @@ var options =
 		function callInsertWS()
 		{
 			onProcDataLoading.notify({});
-			var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(1,6,data[0].nome,data[0].descricao,null),true,true);
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/insertCadastro', oData, fill_data, process_error);
+			var oData = new qat.model.reqUniMed(null, new qat.model.unimedid(0,data[0].nome,data[0].sigla),true,true);
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/insertUniMed', oData, fill_data, process_error);
 		}
 
 		function callUpdateWS()
@@ -89,8 +78,8 @@ var options =
 				{
 					bList = false;
 				}
-				var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(data[aRowChg[a]].id,6,data[aRowChg[a]].nome,data[aRowChg[a]].descricao),bList,true);
-				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/updateCadastro', oData, fill_data, process_error);
+				var oData = new qat.model.reqUniMed(null, new qat.model.unimedid(data[aRowChg[a]].id,6,data[aRowChg[a]].nome,data[aRowChg[a]].sigla),bList,true);
+				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/updateUniMed', oData, fill_data, process_error);
 
 			}
 		}
@@ -98,14 +87,14 @@ var options =
 		function callDeleteWS(_procId)
 		{
 			onProcDataLoading.notify({});
-		    var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(_procId,6),true,true);
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/deleteCadastro', oData, fill_data, process_error);
+		    var oData = new qat.model.reqUniMed(null, new qat.model.unimed(_procId),true,true);
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/deleteUniMed', oData, fill_data, process_error);
 		}
 
 		function callRefreshWS(_i)
 		{
 			onProcDataLoading.notify({});
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros',{cadastro:{type:6,userId:'rod'}}, fill_data, process_error,true);
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllUniMeds',{embalagem:{unimedid:{}}}, fill_data, process_error,true);
 		}
 		</sec:authorize>
 
@@ -114,7 +103,7 @@ var options =
 		    onProcDataLoading.notify({});
 			if (viewLoadedObject == null)
 			{
-			    rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros',{cadastro:{type:6,userId:'rod'}}, fill_data, process_error,true);
+			    rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllUniMeds',{embalagem:{unimedid:{}}}, fill_data, process_error,true);
 			}
 			else
 			{
@@ -258,7 +247,7 @@ function validateFieldsSub(rowValue)
 		$(pgrid.getActiveCellNode()).stop(true,true).effect("highlight", {color:"red"}, 300);
 		wd.core.displayNotificationMessage('#StatusBar',procedure.requiredfield.msg, false, 'error', 5000);
 	}
-	else if (wd.core.isEmpty(data[rowValue].descricao))
+	else if (wd.core.isEmpty(data[rowValue].sigla))
 	{
 		pgrid.gotoCell(rowValue,4,true);
 		$(pgrid.getActiveCellNode()).addClass("invalid");
