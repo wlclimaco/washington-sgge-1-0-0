@@ -136,17 +136,19 @@ var options =
 		}
 		function fill_data(procResponse)
 		{
+			onProcDataLoading.notify({});
 			data = reuse_fill_data(procResponse,data,"produtoDialog");
 			onProcDataLoaded.notify({});
 		}
 		function fill_data2(procResponse)
 		{
-			debugger
+			onProcDataLoading.notify({});
 			data = reuse_fill_data(procResponse,data,"produtoDialog2");
 			onProcDataLoaded.notify({});
 		}
 		function fill_dataCSV(procResponse)
 		{
+			onProcDataLoading.notify({});
 			data = reuse_fill_data(procResponse,data,"produtoDialog");
 			qat.model.supermercado.pages.JSONToCSVConvertor(data, "Vehicle Report", true);
 			onProcDataLoaded.notify({});

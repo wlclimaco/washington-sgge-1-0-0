@@ -5,8 +5,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
-
 /**
  * The Class SupermercadoViewController.
  */
@@ -36,12 +34,8 @@ public class SupermercadoViewController extends SupermercadoBaseController
 	@RequestMapping(value = "/fetchSupermercadosByRequestBAS", method = RequestMethod.GET)
 	public ModelAndView fetchSupermercadosbyRequestBAS()
 	{
-		PagedInquiryRequest request = new PagedInquiryRequest();
-		// we will be paging so set the default values
-		request.setStartPage(ZERO);
-		request.setPageSize(TWENTY);
-		request.setPreQueryCount(true);
-		return supermercadoMAV(request, SUPERMERCADO_MVC_BAS_RETURN);
+		ModelAndView modelAndView = new ModelAndView(SUPERMERCADO_MVC_BAS_RETURN);
+		return modelAndView;
 	}
 
 	@RequestMapping(value = "/fetchSupermercadosByEdit", method = RequestMethod.GET)
@@ -54,11 +48,8 @@ public class SupermercadoViewController extends SupermercadoBaseController
 	@RequestMapping(value = "/fetchSupermercadosByRequestBASUtil", method = RequestMethod.GET)
 	public ModelAndView fetchSupermercadosbyRequestBASUtil()
 	{
-		PagedInquiryRequest request = new PagedInquiryRequest();
-		// we will be paging so set the default values
-		request.setStartPage(ZERO);
-		request.setPageSize(TWENTY);
-		request.setPreQueryCount(true);
-		return supermercadoMAV(request, SUPERMERCADO_MVC_BAS_UTIL);
+		ModelAndView modelAndView = new ModelAndView(SUPERMERCADO_MVC_BAS_UTIL);
+		return modelAndView;
+
 	}
 }

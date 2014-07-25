@@ -346,7 +346,7 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	{
 		InternalResponse response = new InternalResponse();
 		Integer academiaId =
-				(Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), STMT_INSERT_CADASTRO,
+				(Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), "ProdutoMap.insertEmbalagem",
 						request);
 
 		response.setStatus(Status.OperationSuccess);
@@ -358,7 +358,7 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	{
 		InternalResponse response = new InternalResponse();
 		Integer academiaId =
-				(Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), STMT_INSERT_CADASTRO,
+				(Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), "ProdutoMap.updateEmbalagem",
 						request);
 
 		response.setStatus(Status.OperationSuccess);
@@ -369,14 +369,15 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	public InternalResponse deleteEmbalagem(Embalagem request)
 	{
 		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doRemove(getSqlSession(), STMT_DELETE_ALL_CADASTRO, request, response);
+		QATMyBatisDacHelper.doRemove(getSqlSession(), "ProdutoMap.deleteEmbalagem", request, response);
 		return response;
 	}
 
 	@Override
 	public List<Embalagem> fetchAllEmbalagems(EmbalagemInquiryRequest request)
 	{
-		return QATMyBatisDacHelper.doQueryForList(getSqlSession(), STMT_FETCH_ALL, request.getEmbalagem());
+		return QATMyBatisDacHelper.doQueryForList(getSqlSession(), "ProdutoMap.fetchAllEmbalagems",
+				request.getEmbalagem());
 	}
 
 	@Override
@@ -384,8 +385,8 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	{
 		InternalResponse response = new InternalResponse();
 		Integer academiaId =
-				(Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), STMT_INSERT_CADASTRO,
-						request);
+				(Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), "ProdutoMap.insertUniMed",
+						request.getUnimed());
 
 		response.setStatus(Status.OperationSuccess);
 		return response;
@@ -396,8 +397,8 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	{
 		InternalResponse response = new InternalResponse();
 		Integer academiaId =
-				(Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), STMT_INSERT_CADASTRO,
-						request);
+				(Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), "ProdutoMap.updateUniMed",
+						request.getUnimed());
 
 		response.setStatus(Status.OperationSuccess);
 		return response;
@@ -407,13 +408,21 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	public InternalResponse deleteUniMed(Embalagem request)
 	{
 		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doRemove(getSqlSession(), STMT_DELETE_ALL_CADASTRO, request, response);
+		QATMyBatisDacHelper.doRemove(getSqlSession(), "ProdutoMap.deleteUniMed", request.getUnimed(), response);
 		return response;
 	}
 
 	@Override
 	public List<UniMed> fetchAllUniMeds(EmbalagemInquiryRequest request)
 	{
-		return QATMyBatisDacHelper.doQueryForList(getSqlSession(), STMT_FETCH_ALL, request.getEmbalagem());
+		return QATMyBatisDacHelper.doQueryForList(getSqlSession(), "ProdutoMap.fetchAllUniMeds", request.getEmbalagem()
+				.getUnimed());
+	}
+
+	@Override
+	public List<Tabelapreco> fetchAllProdutosSupermercado(ProdutoInquiryRequest request)
+	{
+		return QATMyBatisDacHelper.doQueryForList(getSqlSession(), "PrecoMap.fetchAllPrecosSupermercado", request
+				.getProduto().getMenu().getId());
 	}
 }

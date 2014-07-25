@@ -4,6 +4,7 @@
 var aRowChg = new Array();
 var rowChg;
 var data = new Array();
+var dataDialog = new Array();
 var pgrid;
 var gridPager;
 var pagingData = new qat.model.pageData(null,null,null,null);
@@ -38,7 +39,7 @@ var columns = [
 	{id:"razao", name: supermercado.grid.prazao.title, field:"razao", editor:Slick.Editors.Text},
 	{id:"cpfCnpj", name: supermercado.grid.pcnpj.title, field:"cpfCnpj", editor:Slick.Editors.Text},
 	{id:"rgInc", name: supermercado.grid.pincmun.title, field:"rgInc", editor:Slick.Editors.Text},
-	{id:"supermercadoid", name: supermercado.grid.pprod.title, field:"supermercadoid",  resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML},
+	{id:"produto", name: procedure.grid.act.title, field:"produto", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML},
 	{id:"logradouro", name: supermercado.grid.plogradouro.title, field:"logradouro", editor:Slick.Editors.Text},
 	{id:"bairro", name: supermercado.grid.pbairro.title, field:"bairro", editor:Slick.Editors.Text},
 	{id:"cidade", name: supermercado.grid.pcidade.title, field:"cidade", editor:Slick.Editors.Text},
@@ -69,13 +70,8 @@ var options =
 		function callInsertWS()
 		{
 			onProcDataLoading.notify({});
-
-		   // var oData = new qat.model.reqCadastro(null, new qat.model.procedure(0,0,data[0].pcode,data[0].pdesc,0.0),true,true);qat.model.cadastro = function(_Id, _type, _nome, _descricao,_controlAcess)
 			var oData = new qat.model.reqSupermercado(null, new qat.model.supermercado(data[0].supermercadoid,data[0].usuario, data[0].email,data[0].site,data[0].usuario,data[0].senha,data[0].enderecoid,data[0].eid,data[0].endereco,data[0].logradouro,data[0].bairro,data[0].estado,data[0].cidade,data[0].numero,data[0].cep,data[0].nome,data[0].complemento,data[0].documenroid,data[0].did,data[0].rgInc,data[0].cpfCnpj,data[0].razao,data[0].dateNascimento),true,true);
-			console.log(oData);
 			rest_post_call('qat-sysmgmt-sample/services/rest/SupermercadoService/insertSupermercado', oData, fill_data, process_error);
-			//rest_post_call('qat-sysmgmt-sample/services/rest/CidadeService/insertCidade', oData, fill_data, process_error);
-
 		}
 
 		function callUpdateWS()
@@ -101,7 +97,6 @@ var options =
 				var oData = new qat.model.reqSupermercado(null,
 				new qat.model.supermercado(data[aRowChg[a]].supermercadoid,data[aRowChg[a]].usuario, data[aRowChg[a]].email,data[aRowChg[a]].site,data[aRowChg[a]].usuario,data[aRowChg[a]].senha,data[aRowChg[a]].enderecoid,data[aRowChg[a]].eid,data[aRowChg[a]].endereco,data[aRowChg[a]].logradouro,data[aRowChg[a]].bairro,data[aRowChg[a]].estado,data[aRowChg[a]].cidade,data[aRowChg[a]].numero,data[aRowChg[a]].cep,data[aRowChg[a]].nome,data[aRowChg[a]].complemento,data[aRowChg[a]].documenroid,data[aRowChg[a]].did,data[aRowChg[a]].rgInc,data[aRowChg[a]].cpfCnpj,data[aRowChg[a]].razao,data[aRowChg[a]].dateNascimento)
 				, bList, true);
-				//rest_post_call('qat-webdaptive/procedure/api/updateBAS', oData, fill_data, process_error);
 				rest_post_call('qat-sysmgmt-sample/services/rest/SupermercadoService/updateSupermercado', oData, fill_data, process_error);
 			}
 		}
@@ -113,8 +108,6 @@ var options =
 			new qat.model.supermercado(_procId,"","","","","","","","","","","","","","","","","","","","")
 			,true,true);
 			rest_post_call('qat-sysmgmt-sample/services/rest/SupermercadoService/deleteSupermercado', oData, fill_data, process_error);
-
-		//	rest_post_call('qat-sysmgmt-sample/services/rest/SupermercadoService/fetchAllSupermercados', {}, fill_data, process_error);
 		}
 
 		function callRefreshWS(_i)
@@ -128,11 +121,9 @@ var options =
 		function callPagedFetchWS(_iPageSize, _iStartPage)
 		{
 		    onProcDataLoading.notify({});
-		    //if viewLOaddedObject filled by controller don't make a ajax call
 			if (viewLoadedObject == null)
 			{
 			    var oData = new qat.model.pagedInquiryRequest(null, _iPageSize, _iStartPage, true);
-				//rest_post_call('qat-webdaptive/procedure/api/fetchByRequestBAS', oData, fill_data, process_error);
 				rest_post_call('qat-sysmgmt-sample/services/rest/SupermercadoService/fetchAllSupermercados', {}, fill_data, process_error);
 			}
 			else
@@ -141,6 +132,54 @@ var options =
 				fill_data(viewLoadedObject);
 				viewLoadedObject = null;
 			}
+		}
+
+
+		function openProdutos(value){
+			dom = "<div class='id'>" + value + "</div>";
+			$actionTagDialog = $("#action-produto-dialog").load('../produto/produtosDialogByRequestBAS').dialog({
+				autoOpen: false,
+				title: 'Lista Produto Supermercado',
+				width: 1024,
+				height: 400,
+				modal: true,
+				buttons: {
+					Cancel: function() {
+						$(this).dialog('close');
+					}
+				},
+				dialogClass: 'action-dialog buttons-left',
+				resizable: false
+			});
+			$actionTagDialog.empty();
+			$actionTagDialog.dialog('open');
+			openDialogCadastro({produto:{tabela:1,precos:[{precoid:parseInt(value),supermercadoid:{superId:parseInt(value)}}],userId:'rod'}});
+			valueGlobal = parseInt(value);
+		}
+		function openDialogCadastro(oData)
+		{
+
+		    onProcDataLoading.notify({});
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos',oData , fill_data2, process_error);
+
+		}
+		function fill_data2(procResponse)
+		{
+
+			data = reuse_fill_data(procResponse,data,"produtoDialog2");
+			onProcDataLoaded.notify({});
+		}
+
+		function exportCSVProd()
+		{
+		    onProcDataLoading.notify({});
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos',{produto:{tabela:1,precos:[{precoid:parseInt(valueGlobal),supermercadoid:{superId:parseInt(valueGlobal)}}],userId:'rod'}} , fill_dataCSV, process_error);
+		}
+		function fill_dataCSV(procResponse)
+		{
+			onProcDataLoading.notify({});
+			data = reuse_fill_data(procResponse,data,"produtoDialog2");
+			qat.model.supermercado.pages.JSONToCSVConvertor(data, "Supermercado", true);
 		}
 
 		function fill_data(procResponse)
@@ -176,6 +215,7 @@ var options =
 			"callInsertWS": callInsertWS,
 			"callUpdateWS": callUpdateWS,
 			"callRefreshWS": callRefreshWS,
+			"openProdutos" : openProdutos,
 			</sec:authorize>
 			// events
 			"onProcDataLoading": onProcDataLoading,
@@ -228,23 +268,23 @@ $('#supGrid').keyup(function(e)
 	{
 		if (rowChg >= 1 )
 		{
-			ploader.callUpdateWS(aRowChg);
+			ploaderSup.callUpdateWS(aRowChg);
 		}
 		else
 		{
 		//	if (validateFields(0))
 		//	{
-				ploader.callInsertWS();
+				ploaderSup.callInsertWS();
 		//	}
 		}
 	}
 });
 
 $('#refreshsup').click(function() {
-	ploader.callRefreshWS(135);
+	ploaderSup.callRefreshWS(135);
 });
 </sec:authorize>
 $('#listsup').click(function() {
-	 ploader.callPagedFetchWS(20,0);
+	 ploaderSup.callPagedFetchWS(20,0);
 });
 </script>

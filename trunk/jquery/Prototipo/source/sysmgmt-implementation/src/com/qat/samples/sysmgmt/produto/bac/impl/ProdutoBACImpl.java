@@ -225,7 +225,6 @@ public class ProdutoBACImpl implements IProdutoBAC
 			{
 				Produto produto = new Produto();
 				produto = a.get(i).getIdProduto();
-				produto.setPrecos(a.get(i).getIdProduto().getPrecos());
 				b.add(produto);
 			}
 			response.getResultsList().addAll(b);
@@ -238,7 +237,6 @@ public class ProdutoBACImpl implements IProdutoBAC
 			{
 				Produto produto = new Produto();
 				produto = a.get(i).getIdProduto();
-				produto.setPrecos(a.get(i).getIdProduto().getPrecos());
 				b.add(produto);
 			}
 			response.getResultsList().addAll(b);
@@ -251,7 +249,6 @@ public class ProdutoBACImpl implements IProdutoBAC
 			{
 				Produto produto = new Produto();
 				produto = a.get(i).getIdProduto();
-				produto.setPrecos(a.get(i).getIdProduto().getPrecos());
 				b.add(produto);
 			}
 			response.getResultsList().addAll(b);
@@ -265,7 +262,6 @@ public class ProdutoBACImpl implements IProdutoBAC
 			{
 				Produto produto = new Produto();
 				produto = a.get(i).getIdProduto();
-				produto.setPrecos(a.get(i).getIdProduto().getPrecos());
 				b.add(produto);
 			}
 			response.getResultsList().addAll(b);
@@ -279,7 +275,19 @@ public class ProdutoBACImpl implements IProdutoBAC
 			{
 				Produto produto = new Produto();
 				produto = a.get(i).getIdProduto();
-				produto.setPrecos(a.get(i).getIdProduto().getPrecos());
+				b.add(produto);
+			}
+			response.getResultsList().addAll(b);
+		}
+		else if (request.getProduto().getTabela().equals(TableTypeEnum.SUPERMERCADO))
+		{
+			List<Tabelapreco> a = getProdutoDAC().fetchAllProdutosSupermercado(request);
+			Produto produto = new Produto();
+			List<Produto> b = new ArrayList<Produto>();
+			for (Integer i = 0; i < a.size(); i++)
+			{
+				produto = new Produto();
+				produto = a.get(i).getIdProduto();
 				b.add(produto);
 			}
 			response.getResultsList().addAll(b);

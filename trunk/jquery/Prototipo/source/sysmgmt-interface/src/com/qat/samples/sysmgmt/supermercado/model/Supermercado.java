@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.qat.samples.sysmgmt.documento.model.Documento;
 import com.qat.samples.sysmgmt.endereco.model.Endereco;
-import com.qat.samples.sysmgmt.produto.model.Produto;
 import com.qat.samples.sysmgmt.util.Imagem;
 import com.qat.samples.sysmgmt.util.Util;
 
@@ -26,7 +25,7 @@ public class Supermercado extends Util
 	/** The code. */
 	private List<Endereco> enderecos;
 
-	private List<Produto> produtos;
+	private Integer produtos;
 
 	/** The senha. */
 	private String nome;
@@ -62,12 +61,12 @@ public class Supermercado extends Util
 	 * @return the id
 	 */
 
-	public List<Produto> getProdutos()
+	public Integer getProdutos()
 	{
 		return produtos;
 	}
 
-	public void setProdutos(List<Produto> produtos)
+	public void setProdutos(Integer produtos)
 	{
 		this.produtos = produtos;
 	}

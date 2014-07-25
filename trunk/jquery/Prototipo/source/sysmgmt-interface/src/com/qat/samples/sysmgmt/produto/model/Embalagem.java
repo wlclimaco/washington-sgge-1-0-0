@@ -1,7 +1,5 @@
 package com.qat.samples.sysmgmt.produto.model;
 
-import java.util.List;
-
 import javax.xml.bind.annotation.XmlType;
 
 import com.qat.samples.sysmgmt.util.Util;
@@ -24,10 +22,10 @@ public class Embalagem extends Util
 	private Integer qnt;
 
 	/** The produtos. */
-	private List<Produto> produtos;
+	private Integer produtos;
 
 	/** The unimed. */
-	private List<UniMed> unimed;
+	private UniMed unimed;
 
 	/**
 	 * Gets the id.
@@ -94,7 +92,7 @@ public class Embalagem extends Util
 	 * 
 	 * @return the produtos
 	 */
-	public List<Produto> getProdutos()
+	public Integer getProdutos()
 	{
 		return produtos;
 	}
@@ -104,7 +102,7 @@ public class Embalagem extends Util
 	 * 
 	 * @param produtos the new produtos
 	 */
-	public void setProdutos(List<Produto> produtos)
+	public void setProdutos(Integer produtos)
 	{
 		this.produtos = produtos;
 	}
@@ -114,7 +112,7 @@ public class Embalagem extends Util
 	 * 
 	 * @return the unimed
 	 */
-	public List<UniMed> getUnimed()
+	public UniMed getUnimed()
 	{
 		return unimed;
 	}
@@ -124,7 +122,7 @@ public class Embalagem extends Util
 	 * 
 	 * @param unimed the new unimed
 	 */
-	public void setUnimed(List<UniMed> unimed)
+	public void setUnimed(UniMed unimed)
 	{
 		this.unimed = unimed;
 	}
@@ -144,7 +142,7 @@ public class Embalagem extends Util
 	 * @param qnt the qnt
 	 * @param unimed the unimed
 	 */
-	public Embalagem(String nome, Integer qnt, List<UniMed> unimed)
+	public Embalagem(String nome, Integer qnt, UniMed unimed)
 	{
 		super();
 		this.nome = nome;

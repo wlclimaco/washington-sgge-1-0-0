@@ -86,7 +86,7 @@
 	         p.controleid, p.supermercadoid, p.codbarra, p.foto, p.descricao
 	</select>
 
-	 	<select id="fetchAllPrecosUniMed" parameterType="int" resultMap="PrecoResultProd">
+	<select id="fetchAllPrecosUniMed" parameterType="int" resultMap="PrecoResultProd">
 		select
             p.produtoid, p.nome, p.marca, p.menu, p.submenu, p.trimenu, p.unimed, p.precoid,
             p.controleid, p.supermercadoid, p.codbarra, p.foto, p.descricao
@@ -98,6 +98,11 @@
 	         p.controleid, p.supermercadoid, p.codbarra, p.foto, p.descricao
 	</select>
 
+	<select id="fetchAllPrecosSupermercado" parameterType="int" resultMap="PrecoResultProd">
+		select  p.produtoid, p.nome, p.marca, p.menu, p.submenu, p.trimenu, p.unimed, p.precoid,
+                p.controleid, p.supermercadoid, p.codbarra, p.foto, p.descricao
+		 from tabpreco t  ,produto p where p.produtoid= t.produtoId and t.supermercadoid = #{id}
+	</select>
 
    <select id="fetchPrecoByProduto" parameterType="int" resultMap="PrecoResult">
 	    SELECT

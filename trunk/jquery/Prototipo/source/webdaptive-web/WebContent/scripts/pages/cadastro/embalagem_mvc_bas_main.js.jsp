@@ -37,7 +37,8 @@ columns[0] = {id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:
 columns[1] = {id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
 columns[2] = {id:"id", name: procedure.grid.psak.title, field:"id", resizable:false, cssClass:"cell-center", width:75};
 columns[3] = {id:"nome", name: marca.grid.pmarca.title, field:"nome", editor:Slick.Editors.Text};
-//columns[5] = {id:"imagens", name: menu.grid.pimagens.title, field:"imagens", formatter: buttonFormat};
+columns[3] = {id:"qnt", name: "Quantidade", field:"qnt", editor:Slick.Editors.Text};
+columns[3] = {id:"unimed", name: "Unidade de Medida", field:"unimed", editor:Slick.Editors.Text};
 columns[4] = {id:"produtos", name: menu.grid.pprodutos.title, field:"produtos",resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
 columns[5] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
 columns[6] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
@@ -69,7 +70,7 @@ var options =
 		{
 			onMarcaDataLoading.notify({});
 			var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(1,2,data[0].nome,data[0].descricao,null),true,true);
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/insertCadastro', oData, fill_data, process_error,true);
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/insertEmbalagem', oData, fill_data, process_error,true);
 		}
 
 		function callUpdateWS()
@@ -93,7 +94,7 @@ var options =
 				}
 				onMarcaDataLoading.notify({});
 				var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(data[aRowChg[a]].id,2,data[aRowChg[a]].nome,data[aRowChg[a]].descricao),bList,true);
-				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/updateCadastro', oData, fill_data, process_error,true);
+				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/updateEmbalagem', oData, fill_data, process_error,true);
 			}
 		}
 		function openProdutos(value){
@@ -130,7 +131,7 @@ var options =
 		{
 
 		    onMarcaDataLoading.notify({});
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos',oData , fill_data2, process_error);
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllEmbalagems',oData , fill_data2, process_error);
 
 		}
 		function fill_data2(procResponse)
@@ -157,7 +158,7 @@ var options =
 		function callRefreshWS(_i)
 		{
 			onMarcaDataLoading.notify({});
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros',{cadastro:{type:2,userId:'rod'}}, fill_data, process_error,true);
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllEmbalagems',{cadastro:{type:2,userId:'rod'}}, fill_data, process_error,true);
 		}
 		</sec:authorize>
 
@@ -168,7 +169,7 @@ var options =
 			if (viewLoadedObject == null)
 			{
 			    var oData = new qat.model.pagedInquiryRequest(null, _iPageSize, _iStartPage, true);
-				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros',{cadastro:{type:2,userId:'rod'}}, fill_data, process_error,true);
+				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllEmbalagems',{cadastro:{type:2,userId:'rod'}}, fill_data, process_error,true);
 			}
 			else
 			{
@@ -260,7 +261,7 @@ $('#marcaGrid').keyup(function(e)
 		{
 		if (validateFieldsMarca(rowChg))
 			{
-				ploaderMarca.callUpdateWS(aRowChg);
+				ploaderEmb.callUpdateWS(aRowChg);
 			}
 
 		}
@@ -268,17 +269,17 @@ $('#marcaGrid').keyup(function(e)
 		{
 			if (validateFieldsMarca(0))
 			{
-				ploaderMarca.callInsertWS();
+				ploaderEmb.callInsertWS();
 			}
 		}
 	}
 });
 
 $('#refreshmarca').click(function() {
-	ploaderMarca.callRefreshWS(135);
+	ploaderEmb.callRefreshWS(135);
 });
 </sec:authorize>
 $('#listmarca').click(function() {
-	 ploaderMarca.callPagedFetchWS(20,0);
+	 ploaderEmb.callPagedFetchWS(20,0);
 });
 </script>

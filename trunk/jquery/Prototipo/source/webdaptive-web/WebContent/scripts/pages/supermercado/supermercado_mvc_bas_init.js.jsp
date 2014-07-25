@@ -1,6 +1,6 @@
 <%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags' %>
 <script type="text/javascript">
-var ploader = new Slick.Data.RemoteModel();
+var ploaderSup = new Slick.Data.RemoteModel();
 $(document).ready(function ()
 {
 	//initializes statusbar
@@ -9,9 +9,9 @@ $(document).ready(function ()
     });
 
 	//sets up initial grid ...no data yet...but binds to the object that will fill it
-	pgrid = new Slick.Grid($("#supGrid"), ploader.data, columns, options);
+	pgrid = new Slick.Grid($("#supGrid"), ploaderSup.data, columns, options);
 	pgrid.setSelectionModel(new Slick.CellSelectionModel());
-	gridPager = new Slick.Controls.Pager(ploader, $("#pager"));
+	gridPager = new Slick.Controls.Pager(ploaderSup, $("#pager"));
 
 	gridPager.init();
 	pgrid.onClick.subscribe(function (e, args) {
@@ -29,13 +29,13 @@ $(document).ready(function ()
 	setTimeout('pgrid.init()', 250);
 
 	//this events fires to blockui while the data is retrieved
-	ploader.onProcDataLoading.subscribe(function()
+	ploaderSup.onProcDataLoading.subscribe(function()
 	{
 		wd.core.blockUIMessage('div.ui-layout-center',true,true,wdloading.title,wdloading.msg);
 	});
 
 	//this events fires to unblockui when the data is retruned and fills the grid
-	ploader.onProcDataLoaded.subscribe(function()
+	ploaderSup.onProcDataLoaded.subscribe(function()
 	{
 		aRowChg.length=0;
 		pgrid.invalidateAllRows();
@@ -120,6 +120,6 @@ $(document).ready(function ()
 	});
 
 	// load the Grid first time
-	ploader.callPagedFetchWS(20,0);
+	ploaderSup.callPagedFetchWS(20,0);
 });
 </script>
