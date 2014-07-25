@@ -31,8 +31,9 @@
   		<typeAlias alias="Controle" type="com.qat.samples.sysmgmt.controle.model.Controle"/>
   		<typeAlias alias="AcessosInquiryRequest" type="com.qat.samples.sysmgmt.controle.model.request.AcessosInquiryRequest"/>
   		<typeAlias alias="ControleInquiryRequest" type="com.qat.samples.sysmgmt.controle.model.request.ControleInquiryRequest"/>
+  		<typeAlias alias="UniMed"    type="com.qat.samples.sysmgmt.produto.model.UniMed"/>
   		<typeAlias alias="Embalagem" type="com.qat.samples.sysmgmt.produto.model.Embalagem"/>
-  		<typeAlias alias="UniMed" type="com.qat.samples.sysmgmt.produto.model.UniMed"/>
+
   	</typeAliases>
 
  	<mappers>

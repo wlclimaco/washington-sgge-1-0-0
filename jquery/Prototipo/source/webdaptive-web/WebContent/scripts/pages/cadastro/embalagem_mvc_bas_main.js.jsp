@@ -6,19 +6,12 @@ var rowChg;
 var data = new Array();
 var pgrid;
 var gridPager;
+var availableTags = [];
 var pagingData = new qat.model.pageData(null,null,null,null);
 var id = $("div[id*='tabs']" ).attr("id");
 var viewLoadedObject;
 
 //loads object if being served via controller
-<c:choose>
-    <c:when test="${empty cadastroResponse}">
-			viewLoadedObject = null;
-    </c:when>
-    <c:otherwise>
-			viewLoadedObject = ${cadastroResponse};
-    </c:otherwise>
-</c:choose>
 
 var columns=[];
  var checkboxSelector = new Slick.CheckboxSelectColumn({
@@ -31,17 +24,148 @@ var columns=[];
 			return ""
 	}
 
+	  function AutoCompleteEditor(args) {
+		    var $input;
+		    var defaultValue;
+		    var scope = this;
+		    var calendarOpen = false;
+
+		    this.init = function () {
+
+				var callback = function  (oResponse)
+				{
+					var embalagems = oResponse.embalagem;
+					var tmpLength = embalagems.length;
+					for (var i=0; i < tmpLength; i++){
+						availableTags.push(embalagems[i].id+" - "+embalagems[i].nome);
+					}
+				}
+
+				if(availableTags.length == 0){
+					var onProcDataLoading = new EventHelper();
+					onProcDataLoading.notify({});
+					rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllUniMeds', {embalagem:{unimedid:{}}}, callback, null,false);
+				}
+					$input = $("<INPUT id='tags' class='editor-text' />");
+					$input.appendTo(args.container);
+					$input.focus().select();
+					$input.autocomplete({
+						  source: availableTags
+					});
+
+		    };
+
+		    this.destroy = function () {
+		      $input.autocomplete("destroy");
+		    };
+
+		    this.focus = function () {
+		      $input.focus();
+		    };
+
+		    this.loadValue = function (item) {
+		      defaultValue = item[args.column.field];
+		      $input.val(defaultValue);
+		      $input[0].defaultValue = defaultValue;
+		      $input.select();
+		    };
+
+		    this.serializeValue = function () {
+		      return $input.val();
+		    };
+
+		    this.applyValue = function (item, state) {
+		      item[args.column.field] = state;
+		    };
+
+		    this.isValueChanged = function () {
+		      return (!($input.val() == "" && defaultValue == null)) && ($input.val() != defaultValue);
+		    };
+
+		    this.validate = function () {
+		      return {
+		        valid: true,
+		        msg: null
+		      };
+		    };
+
+		    this.init();
+		  }
+	function SelectEditor(args) {
+    var $select;
+    var defaultValue;
+    var scope = this;
+
+    this.init = function() {
+
+        if(args.column.editorOptions.options){
+            tabOptions = args.column.editorOptions.options.split(',');
+            if(args.column.editorOptions.values)
+                tabValues = args.column.editorOptions.values.split(',');
+        }else{
+            tabOptions ="yes,no".split(',');
+        }
+        var option_str = "";
+        for( i in tabOptions ){
+            var opt = $.trim( tabOptions[i] ); // remove any white space including spaces after comma
+            //var val = (typeof tabValues == 'undefined') ? tabOptions[i] : tabValues[i];
+            option_str += "<OPTION value='"+opt+"'>"+opt+"</OPTION>";
+        }
+        $select = $("<SELECT tabIndex='0' class='editor-select'>"+ option_str +"</SELECT>");
+        $select.appendTo(args.container);
+        $select.focus();
+    };
+
+    this.destroy = function() {
+        $select.remove();
+    };
+
+    this.focus = function() {
+        $select.focus();
+    };
+
+    this.loadValue = function(item) {
+        defaultValue = item[args.column.field];
+        $select.val(defaultValue);
+    };
+
+    this.serializeValue = function() {
+        if(args.column.editorOptions.options){
+            return $select.val();
+        }else{
+            return ($select.val() == "yes");
+        }
+    };
+
+    this.applyValue = function(item,state) {
+        item[args.column.field] = state;
+    };
+
+    this.isValueChanged = function() {
+        return ($select.val() != defaultValue);
+    };
+
+    this.validate = function() {
+        return {
+            valid: true,
+            msg: null
+        };
+    };
+
+    this.init();
+}
 //    columns.push(checkboxSelector.getColumnDefinition());
 //columns & column settings for the grid
 columns[0] = {id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:"cell-center", width:30};
 columns[1] = {id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
 columns[2] = {id:"id", name: procedure.grid.psak.title, field:"id", resizable:false, cssClass:"cell-center", width:75};
 columns[3] = {id:"nome", name: marca.grid.pmarca.title, field:"nome", editor:Slick.Editors.Text};
-columns[3] = {id:"qnt", name: "Quantidade", field:"qnt", editor:Slick.Editors.Text};
-columns[3] = {id:"unimed", name: "Unidade de Medida", field:"unimed", editor:Slick.Editors.Text};
-columns[4] = {id:"produtos", name: menu.grid.pprodutos.title, field:"produtos",resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
-columns[5] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
-columns[6] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
+columns[4] = {id:"qnt", name: "Quantidade", field:"qnt", editor:Slick.Editors.Text};
+columns[5] = {id:"unimed", name:submenu.grid.pmenu.title, field:"unimed",  width:135, editable:true, cssClass:"pad-4-left", sortable:true, editor:AutoCompleteEditor},
+columns[6] = {id:"produtos", name: menu.grid.pprodutos.title, field:"produtos",resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
+columns[7] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
+columns[8] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
+columns[9] = { id:'column1', field:'column1', name: "Column 1", width:75, editor: SelectEditor, editorOptions:{options:"val1,val2,val3"}  }
 
 //];
 
@@ -69,7 +193,10 @@ var options =
 		function callInsertWS()
 		{
 			onMarcaDataLoading.notify({});
-			var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(1,2,data[0].nome,data[0].descricao,null),true,true);
+			//debugger
+			var ac = data[0].unimed;
+			var ab = ac.split('-');
+			var oData = new qat.model.reqEmbalagem(null, new qat.model.embalagem(0,data[0].nome,data[0].qnt,parseInt(ab[0]),null, null),true,true);
 			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/insertEmbalagem', oData, fill_data, process_error,true);
 		}
 
@@ -93,7 +220,9 @@ var options =
 					bList = false;
 				}
 				onMarcaDataLoading.notify({});
-				var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(data[aRowChg[a]].id,2,data[aRowChg[a]].nome,data[aRowChg[a]].descricao),bList,true);
+				var ac = data[aRowChg[a]].unimed;
+				var ab = ac.split('-');
+				var oData = new qat.model.reqEmbalagem(null, new qat.model.embalagem(data[aRowChg[a]].id,data[aRowChg[a]].nome,data[aRowChg[a]].qnt,parseInt(ab[0]),null, null),true,true);
 				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/updateEmbalagem', oData, fill_data, process_error,true);
 			}
 		}
@@ -122,8 +251,8 @@ var options =
 		function callDeleteWS(_procId)
 		{
 			onMarcaDataLoading.notify({});
-		    var oData = new qat.model.reqCadastro(null, new qat.model.cadastro(_procId,2),true,true);
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/deleteCadastro', oData, fill_data, process_error,true);
+		    var oData = new qat.model.reqEmbalagem(null, new qat.model.embalagem(_procId),true,true);
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/deleteEmbalagem', oData, fill_data, process_error,true);
 
 		}
 
@@ -158,7 +287,7 @@ var options =
 		function callRefreshWS(_i)
 		{
 			onMarcaDataLoading.notify({});
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllEmbalagems',{cadastro:{type:2,userId:'rod'}}, fill_data, process_error,true);
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllEmbalagems',{}, fill_data, process_error,true);
 		}
 		</sec:authorize>
 
@@ -169,7 +298,7 @@ var options =
 			if (viewLoadedObject == null)
 			{
 			    var oData = new qat.model.pagedInquiryRequest(null, _iPageSize, _iStartPage, true);
-				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllEmbalagems',{cadastro:{type:2,userId:'rod'}}, fill_data, process_error,true);
+				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllEmbalagems',{}, fill_data, process_error,true);
 			}
 			else
 			{
@@ -180,7 +309,7 @@ var options =
 
 		function fill_data(procResponse)
 		{
-			data = reuse_fill_data(procResponse,data,"marca");
+			data = reuse_fill_data(procResponse,data,"embalagem");
 			onMarcaDataLoaded.notify({});
 		}
 
@@ -244,6 +373,18 @@ function validateFieldsMarca(rowValue)
 		$(pgrid.getActiveCellNode()).addClass("invalid");
 		$(pgrid.getActiveCellNode()).stop(true,true).effect("highlight", {color:"red"}, 300);
 		wd.core.displayNotificationMessage('#StatusBar',procedure.requiredfield.msg, false, 'error', 5000);
+	}
+	else if (wd.core.isEmpty(data[rowValue].qnt))
+	{
+		pgrid.gotoCell(rowValue,4,true);
+		$(pgrid.getActiveCellNode()).addClass("invalid");
+		$(pgrid.getActiveCellNode()).stop(true,true).effect("highlight", {color:"red"}, 300);
+		wd.core.displayNotificationMessage('#StatusBar',procedure.requiredfield.msg, false, 'error', 5000);
+	}else if ( $.inArray(data[rowValue].unimed,availableTags) == -1){
+			pgrid.gotoCell(rowValue,5,true);
+			$(pgrid.getActiveCellNode()).addClass("invalid");
+			$(pgrid.getActiveCellNode()).stop(true,true).effect("highlight", {color:"red"}, 300);
+			wd.core.displayNotificationMessage('#StatusBar',"UNIDADE MEDIDA NÃO CADASTRADO FAVOR ENTRAR NO MENU > CADASTRO MENU E CADASTRAR!", false, 'error', 5000);
 	}
 	else
 	{

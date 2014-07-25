@@ -223,9 +223,7 @@ public class ProdutoBACImpl implements IProdutoBAC
 			List<Produto> b = new ArrayList<Produto>();
 			for (Integer i = 0; i < a.size(); i++)
 			{
-				Produto produto = new Produto();
-				produto = a.get(i).getIdProduto();
-				b.add(produto);
+				b.add(a.get(i).getIdProduto());
 			}
 			response.getResultsList().addAll(b);
 		}
@@ -235,9 +233,7 @@ public class ProdutoBACImpl implements IProdutoBAC
 			List<Produto> b = new ArrayList<Produto>();
 			for (Integer i = 0; i < a.size(); i++)
 			{
-				Produto produto = new Produto();
-				produto = a.get(i).getIdProduto();
-				b.add(produto);
+				b.add(a.get(i).getIdProduto());
 			}
 			response.getResultsList().addAll(b);
 		}
@@ -247,9 +243,7 @@ public class ProdutoBACImpl implements IProdutoBAC
 			List<Produto> b = new ArrayList<Produto>();
 			for (Integer i = 0; i < a.size(); i++)
 			{
-				Produto produto = new Produto();
-				produto = a.get(i).getIdProduto();
-				b.add(produto);
+				b.add(a.get(i).getIdProduto());
 			}
 			response.getResultsList().addAll(b);
 		}
@@ -260,9 +254,7 @@ public class ProdutoBACImpl implements IProdutoBAC
 			List<Produto> b = new ArrayList<Produto>();
 			for (Integer i = 0; i < a.size(); i++)
 			{
-				Produto produto = new Produto();
-				produto = a.get(i).getIdProduto();
-				b.add(produto);
+				b.add(a.get(i).getIdProduto());
 			}
 			response.getResultsList().addAll(b);
 		}
@@ -273,9 +265,7 @@ public class ProdutoBACImpl implements IProdutoBAC
 			List<Produto> b = new ArrayList<Produto>();
 			for (Integer i = 0; i < a.size(); i++)
 			{
-				Produto produto = new Produto();
-				produto = a.get(i).getIdProduto();
-				b.add(produto);
+				b.add(a.get(i).getIdProduto());
 			}
 			response.getResultsList().addAll(b);
 		}
@@ -286,9 +276,7 @@ public class ProdutoBACImpl implements IProdutoBAC
 			List<Produto> b = new ArrayList<Produto>();
 			for (Integer i = 0; i < a.size(); i++)
 			{
-				produto = new Produto();
-				produto = a.get(i).getIdProduto();
-				b.add(produto);
+				b.add(a.get(i).getIdProduto());
 			}
 			response.getResultsList().addAll(b);
 		}

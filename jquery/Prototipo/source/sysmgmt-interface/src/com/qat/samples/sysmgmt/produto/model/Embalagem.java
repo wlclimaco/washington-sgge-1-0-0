@@ -8,7 +8,7 @@ import com.qat.samples.sysmgmt.util.Util;
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "Embalagem", propOrder = {"id", "unimed", "nome", "qnt", "produtos"})
+@XmlType(name = "Embalagem", propOrder = {"id", "unimedid", "nome", "qnt", "produtos"})
 public class Embalagem extends Util
 {
 
@@ -25,7 +25,7 @@ public class Embalagem extends Util
 	private Integer produtos;
 
 	/** The unimed. */
-	private UniMed unimed;
+	private UniMed unimedid;
 
 	/**
 	 * Gets the id.
@@ -107,24 +107,14 @@ public class Embalagem extends Util
 		this.produtos = produtos;
 	}
 
-	/**
-	 * Gets the unimed.
-	 * 
-	 * @return the unimed
-	 */
-	public UniMed getUnimed()
+	public UniMed getUnimedid()
 	{
-		return unimed;
+		return unimedid;
 	}
 
-	/**
-	 * Sets the unimed.
-	 * 
-	 * @param unimed the new unimed
-	 */
-	public void setUnimed(UniMed unimed)
+	public void setUnimedid(UniMed unimedid)
 	{
-		this.unimed = unimed;
+		this.unimedid = unimedid;
 	}
 
 	/**
@@ -142,12 +132,12 @@ public class Embalagem extends Util
 	 * @param qnt the qnt
 	 * @param unimed the unimed
 	 */
-	public Embalagem(String nome, Integer qnt, UniMed unimed)
+	public Embalagem(String nome, Integer qnt, UniMed unimedid)
 	{
 		super();
 		this.nome = nome;
 		this.qnt = qnt;
-		this.unimed = unimed;
+		this.unimedid = unimedid;
 	}
 
 	/**
@@ -172,7 +162,7 @@ public class Embalagem extends Util
 	public String toString()
 	{
 		return "Embalagem [getId()=" + getId() + ", getNome()=" + getNome() + ", getQnt()=" + getQnt()
-				+ ", getProdutos()=" + getProdutos() + ", getUnimed()=" + getUnimed() + ", toString()="
+				+ ", getProdutos()=" + getProdutos() + ", getUnimed()=" + getUnimedid() + ", toString()="
 				+ super.toString() + "]";
 	}
 

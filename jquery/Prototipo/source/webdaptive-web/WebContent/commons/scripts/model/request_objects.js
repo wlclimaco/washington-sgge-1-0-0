@@ -176,3 +176,32 @@
 		this.returnList      = _bList;
 		this.returnListPaged = _bPagedList;
 	};
+	//CountyMaintenanceRequest Object
+	qat.model.reqUniMed = function(_oUC, _oCadastro, _bList, _bPagedList)
+	{
+		if (_oUC == null)
+		{
+		//	this.userContext = new qat.base.model.userContext();
+		}
+		else
+		{
+			this.userContext = _oUC;
+		}
+		this.embalagem = {unimedid :_oCadastro};
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
+	};
+	qat.model.reqEmbalagem = function(_oUC, _oEmbalagem, _bList, _bPagedList)
+	{
+		if (_oUC == null)
+		{
+			this.userContext = new qat.base.model.userContext();
+		}
+		else
+		{
+			this.userContext = _oUC;
+		}
+		this.embalagem       = _oEmbalagem;
+		this.returnList      = _bList;
+		this.returnListPaged = _bPagedList;
+	};

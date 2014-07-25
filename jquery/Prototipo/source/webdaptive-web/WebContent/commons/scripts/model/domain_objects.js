@@ -165,4 +165,27 @@
 		this.userRole = userContext.userRole;
 	};
 
+	qat.model.unimed = function(_Id,_nome, _sigla)
+	{
+	    var userContext = new qat.base.model.userContext();
+		this.id = _Id;
+		this.nome   = _nome;
+		this.sigla  = _sigla;
+		this.userId = userContext.userId;
+		this.tenant = userContext.tenant;
+		this.userRole = userContext.userRole;
+	};
+
+	qat.model.embalagem = function(_Id,_nome, _qnt,_IdUni,_nomeU, _sigla)
+	{
+	    var userContext = new qat.base.model.userContext();
+		this.id = _Id;
+		this.nome = _nome;
+		this.qnt = _qnt;
+		this.unimedid = new qat.model.unimed(_IdUni,_nome, _sigla,7);
+		this.userId = userContext.userId;
+		this.tenant = userContext.tenant;
+		this.userRole = userContext.userRole;
+	};
+
 

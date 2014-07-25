@@ -369,7 +369,7 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	public InternalResponse deleteEmbalagem(Embalagem request)
 	{
 		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doRemove(getSqlSession(), "ProdutoMap.deleteEmbalagem", request, response);
+		QATMyBatisDacHelper.doRemove(getSqlSession(), "ProdutoMap.deleteEmbalagemById", request, response);
 		return response;
 	}
 
@@ -386,7 +386,7 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 		InternalResponse response = new InternalResponse();
 		Integer academiaId =
 				(Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), "ProdutoMap.insertUniMed",
-						request.getUnimed());
+						request.getUnimedid());
 
 		response.setStatus(Status.OperationSuccess);
 		return response;
@@ -398,7 +398,7 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 		InternalResponse response = new InternalResponse();
 		Integer academiaId =
 				(Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), "ProdutoMap.updateUniMed",
-						request.getUnimed());
+						request.getUnimedid());
 
 		response.setStatus(Status.OperationSuccess);
 		return response;
@@ -408,7 +408,7 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	public InternalResponse deleteUniMed(Embalagem request)
 	{
 		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doRemove(getSqlSession(), "ProdutoMap.deleteUniMed", request.getUnimed(), response);
+		QATMyBatisDacHelper.doRemove(getSqlSession(), "ProdutoMap.deleteUniMed", request.getUnimedid(), response);
 		return response;
 	}
 
@@ -416,7 +416,7 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	public List<UniMed> fetchAllUniMeds(EmbalagemInquiryRequest request)
 	{
 		return QATMyBatisDacHelper.doQueryForList(getSqlSession(), "ProdutoMap.fetchAllUniMeds", request.getEmbalagem()
-				.getUnimed());
+				.getUnimedid());
 	}
 
 	@Override
