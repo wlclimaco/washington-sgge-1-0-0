@@ -103,6 +103,11 @@ function reuse_fill_data(response,data2,gridProcess)
 		{
 			data2 = produto_fill_data(response,data2);
 		}
+		else if (gridProcess === "embalagem" )
+		{
+
+			data2 = embalagem_fill_data(response,data2);
+		}
 		else if (gridProcess === "insertproduto" )
 		{
 			data2 = insertProduto_fill_data(response,data2);
@@ -382,21 +387,21 @@ function supermercado_fill_data(procResponse,data2)
 		for (var i=0; i < tmpLength; i++)
 		</sec:authorize>
 		{
-			if(procResponse.supermercados[oi].superId != null){
-				var a =		procResponse.supermercados[oi].produtos.length
+			if(procResponse.supermercados[oi].produtos != null){
+				var a =		procResponse.supermercados[oi].produtos
 			}else{
 				var a =	0;
 			}
 			data2[i] =
 			{
 				cellno:     i,
-				action: 	"<a href='#' onclick='javascript:ploader.callDeleteWS(" + procResponse.supermercados[oi].superId +");'>Delete</a>",
+				action: 	"<a href='#' onclick='javascript:ploaderSup.callDeleteWS(" + procResponse.supermercados[oi].superId +");'>Delete</a>",
 				cellno: procResponse.supermercados[oi].superId,
 				supermercadoid:procResponse.supermercados[oi].superId,
 				razao:procResponse.supermercados[oi].documentos[0].razao,
 				cpfCnpj:procResponse.supermercados[oi].documentos[0].cpfCnpj,
 				rgInc:procResponse.supermercados[oi].documentos[0].rgInc,
-				produto:"<a href='#' onclick='javascript:ploaderSub.openProdutos(" + procResponse.supermercados[oi].superId +");'><span>"+a+"<span></a>",
+				produto:"<a href='#' onclick='javascript:ploaderSup.openProdutos(" + procResponse.supermercados[oi].superId +");'><span>"+a+"<span></a>",
 				logradouro:procResponse.supermercados[oi].enderecos[0].logradouro,
 				bairro:procResponse.supermercados[oi].enderecos[0].bairro,
 				cidade:procResponse.supermercados[oi].enderecos[0].cidade,
@@ -952,7 +957,94 @@ function unimed_fill_data(procResponse,data2)
 
 	return data2;
 };
+//============================SUBMENU=======================
 
+function embalagem_fill_data(procResponse,data2)
+{
+	var co = data2.length -1;
+	data2[co-1] = null;
+	frutas = data2;
+	frutas.splice(co, 1);
+	data2 = frutas;
+	data2[0] =
+	{
+		cellno: 0,
+		action: "<span>Novo>>></span>",
+		id:		        0,
+		nome:			"",
+		qnt:			0,
+		unimed:			"",
+		produtos:		0,
+		data  :         "",
+		userId:  		""
+	};
+
+	//Fill paging data
+	if (procResponse.resultsSetInfo != undefined)
+	{
+	 	pagingData.pageSize =  parseInt(procResponse.resultsSetInfo.pageSize);
+	 	pagingData.startPage =  parseInt(procResponse.resultsSetInfo.startPage);
+	 	pagingData.moreRowsAvailable =  procResponse.resultsSetInfo.moreRowsAvailable;
+	 	pagingData.totalRowsAvailable =  parseInt(procResponse.resultsSetInfo.totalRowsAvailable);
+	}
+
+	//make sure return is an array
+	if ($.isArray(procResponse.embalagems))
+	{
+		var oi = 0;
+		var tmpLength = procResponse.embalagems.length;
+		<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
+		for (var i=1; i <= tmpLength; i++)
+		</sec:authorize>
+		<sec:authorize  access="hasRole('ROLE_GUEST')">
+		for (var i=0; i < tmpLength; i++)
+		</sec:authorize>
+		{
+			if(procResponse.embalagems[oi].produtos != null){
+					var a =		procResponse.embalagems[oi].produtos.length;
+					var w=[];
+					w.push(a);
+					w.push(procResponse.embalagems[oi].id);
+				}else{
+				a= 0;}
+				if (procResponse.embalagems[oi].acessos != null){
+					var count = procResponse.embalagems[oi].acessos.length;
+					if(procResponse.embalagems[oi].acessos[count-1] != null){
+						var b =     procResponse.embalagems[oi].acessos[count-1].userId;
+						var c =     convertData(procResponse.embalagems[oi].acessos[count-1].data);
+					}else{
+						var b= "";
+						var c= "";
+					}
+				}else{
+					var b= "";
+					var c= "";
+				}
+			data2[i] =
+			{
+
+				cellno:     i,
+				<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
+				action: 	"<a href='#' onclick='javascript:ploaderSub.callDeleteWS(" + procResponse.embalagems[oi].id +");'>Delete</a>",
+				</sec:authorize>
+				<sec:authorize ifAllGranted="ROLE_GUEST">
+				action: 'None',
+				</sec:authorize>
+				id:				procResponse.embalagems[oi].id,
+				nome:			procResponse.embalagems[oi].nome,
+				qnt:			procResponse.embalagems[oi].qnt,
+				unimed:			procResponse.embalagems[oi].unimed.nome,
+				produtos:		"<a href='#' onclick='javascript:ploaderSub.openProdutos(" + procResponse.embalagems[oi].id +");'><span>"+a+"<span></a>",
+				data:  		    c,
+				userId:  		b
+			}
+
+			oi++;
+		}
+	}
+
+	return data2;
+};
 
 
 //============================PRODUTO=======================

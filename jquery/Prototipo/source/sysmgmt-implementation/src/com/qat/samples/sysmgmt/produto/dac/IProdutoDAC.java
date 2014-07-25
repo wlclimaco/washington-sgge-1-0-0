@@ -95,6 +95,14 @@ public interface IProdutoDAC
 	public List<Tabelapreco> fetchAllProdutosPreco(ProdutoInquiryRequest request);
 
 	/**
+	 * Fetch all produtos supermercado.
+	 * 
+	 * @param request the request
+	 * @return the list
+	 */
+	public List<Tabelapreco> fetchAllProdutosSupermercado(ProdutoInquiryRequest request);
+
+	/**
 	 * Fetch county by id.
 	 * 
 	 * @param request the request

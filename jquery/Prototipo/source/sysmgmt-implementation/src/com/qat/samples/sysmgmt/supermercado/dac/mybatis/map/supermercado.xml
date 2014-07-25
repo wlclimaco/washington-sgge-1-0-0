@@ -17,7 +17,7 @@
     <result property="senha" column="senha"/>
     <result property="site" column="site"/>
     <result property="email" column="email"/>
-    <collection property="produtos" column="supermercadoid" select="ProdutoMap.fetchAllProdutosBySupermercado" />
+    <association property="produtos" column="supermercadoid" javaType="Integer" select="fetchCountPreco"/>
     <collection property="documentos" column="supermercadoid" select="DocumentoMap.fetchAllDocumentosBySupermercado" />
     <collection property="enderecos" column="supermercadoid" select="EnderecoMap.fetchAllEnderecosBySupermercado" />
     <collection property="acessos" column="supermercadoid" select="ControleAcessMap.fetchAllControleBySupermercado" />
@@ -30,6 +30,10 @@
   <sql id="allSupermercadoColumnsWithQualifier">
 		p.supermercadoid, p.usuario, p.email, p.site, p.controleid, p.senha
   </sql>
+
+  <select id="fetchCountPreco" parameterType="Integer" resultType="Integer">
+    select count(*) as Total from tabpreco t where t.supermercadoid = #{id}
+  </select>
 
   <select id="fetchAllSupermercados" resultMap="SupermercadoResult">
     SELECT

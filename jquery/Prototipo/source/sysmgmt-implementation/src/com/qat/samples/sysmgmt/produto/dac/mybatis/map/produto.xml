@@ -33,7 +33,7 @@
     <result property="foto" column="foto"/>
     <association property="marca" column="marca" javaType="Cadastro" select="fetchMarcaByCode" />
     <association property="menu" column="menu" javaType="Cadastro" select="fetchMenuByCode" />
-    <association property="unimed" column="unimed" javaType="Cadastro" select="fetchUniMedByCode" />
+    <association property="embalagem" column="embalagem" javaType="Embalagem" select="fetchUniMedByCode" />
     <collection property="acessos" column="produtoid" select="ControleAcessMap.fetchControleAcessByProduto" />
   </resultMap>
 
@@ -56,7 +56,39 @@
     <collection property="acessos" column="cadastroid" select="ControleAcessMap.fetchControleAcessByProduto" />
   </resultMap>
 
+  <resultMap id="EmbalagemResult" type="Embalagem">
+    <result property="id" column="id"/>
+    <result property="nome" column="nome"/>
+    <result property="qnt" column="qnt"/>
+    <association property="produtos" column="id" javaType="Integer" select="fetchCountEmbalagem"/>
+    <collection property="unimed" column="unimed" select="fetchAllDocumentosBySupermercado" />
+    <collection property="acessos" column="id" select="ControleAcessMap.fetchAllControleBySupermercado" />
+  </resultMap>
 
+  <resultMap id="UniMedResult" type="UniMed">
+    <result property="id" column="id"/>
+    <result property="nome" column="nome"/>
+    <result property="sigla" column="sigla"/>
+    <collection property="acessos" column="id" select="ControleAcessMap.fetchAllControleBySupermercado" />
+  </resultMap>
+
+  <select id="fetchCountEmbalagem" parameterType="Integer" resultType="Integer">
+   select count(*) as total from produto p ,embalagem e where p.embalagem = e.id and p.embalagem = #{id}
+  </select>
+
+  <select id="fetchUniMedByEmbalagem" parameterType="int" resultMap="UniMedResult">
+	    SELECT
+	    <include refid="allEmbalagemColumns" />
+	    FROM embalagem where id = #{id}  ORDER BY id DESC
+    </select>
+
+   <sql id="allEmbalagemColumns">
+		id, nome, qnt, unimedid
+   </sql>
+
+   <sql id="allUniMedColumns">
+		id, sigla, nome
+   </sql>
 
 
 
@@ -148,8 +180,8 @@
 
     <select id="fetchUniMedByCode" parameterType="int" resultMap="CadastroResults">
 	    SELECT
-	    <include refid="allCadastroColumns" />
-	    FROM cadastro where acao = 7 and cadastroid = #{id}  ORDER BY cadastroid ASC
+	    <include refid="allEmbalagemColumns" />
+	    FROM embalagem where id = #{id}  ORDER BY id DESC
     </select>
 
   <select id="fetchAllCadastro" parameterType="Cadastro" resultMap="CadastroResult">
@@ -221,7 +253,7 @@
    		  ORDER BY produtoid ASC
   </select>
 
- <select id="fetchAllCadastros" parameterType="Cadastro" resultMap="CadastroResult">
+  <select id="fetchAllCadastros" parameterType="Cadastro" resultMap="CadastroResult">
 		SELECT <include refid="allCadastroColumns" />
    		  FROM Cadastro
 		<where>
@@ -291,4 +323,59 @@
   <delete id="deleteAllProdutos">
 	DELETE FROM PRODUTO
   </delete>
+
+
+    <select id="insertEmbalagem" parameterType="Embalagem" resultType="int" statementType="CALLABLE">
+        { call ins_embalagem( #{nome} , #{qnt} , #{unimedid},  #{userId} ) }
+
+  </select>
+
+  <select id="insertUniMed" parameterType="UniMed" resultType="int" statementType="CALLABLE">
+        { call ins_unimed( #{nome} , #{sigla} ,  #{userId} ) }
+  </select>
+
+
+  <select id="updateEmbalagem" parameterType="Embalagem" resultType="int" statementType="CALLABLE">
+     { call upd_embalagem(  #{id}, #{nome} , #{qnt} , #{unimedid},  #{userId} ) }
+  </select>
+
+  <select id="updateUniMed" parameterType="UniMed" resultType="int" statementType="CALLABLE">
+	{ call upd_unimed( #{id},#{nome} , #{sigla} ,  #{userId} ) }
+  </select>
+
+  <select id="deleteEmbalagemById" parameterType="Embalagem" resultType="int" statementType="CALLABLE">
+        { call del_embalagem( #{id} , #{userId} ) }
+  </select>
+
+   <select id="deleteUniMedById" parameterType="UniMed" resultType="int" statementType="CALLABLE">
+        { call del_unimed( #{id} ,  #{userId} ) }
+  </select>
+
+  <select id="fetchAllEmbalagems" parameterType="Embalagem" resultMap="EmbalagemResult">
+		SELECT <include refid="allEmbalagemColumns" />
+   		  FROM Embalagem
+		<where>
+			<if test="id !=null">id is not null</if>
+			<if test="id !=null">and id = #{id}</if>
+			<if test="nome != null">and nome = #{nome}</if>
+			<if test="qnt > 0">and qnt = #{qnt}</if>
+			<if test="unimed.id != null">AND unimedid = #{unimed.id}</if>
+
+		</where>
+   		  ORDER BY id DESC
+  </select>
+
+  <select id="fetchAllUniMeds" parameterType="UniMed" resultMap="UniMedResult">
+		SELECT <include refid="allUniMedColumns" />
+   		  FROM unimed
+		<where>
+			<if test="id !=null">id is not null</if>
+			<if test="id !=null">and id = #{id}</if>
+			<if test="nome != null">nome = #{nome}</if>
+			<if test="sigla != null">and sigla = #{sigla}</if>
+
+		</where>
+   		  ORDER BY id DESC
+  </select>
+
 </mapper>

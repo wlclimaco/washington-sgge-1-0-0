@@ -13,7 +13,7 @@
 <div id="qatmvctabsUnimed">
 	<ul>
 		<sec:authorize access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
-			<li><a href="../cadastro/fetchEmbalagemByRequestBAS" title="qatmvctab-7"><span>Embalagem</span></a></li>
+			<li><a href="../produto/fetchEmbalagemByRequestBAS" title="qatmvctab-7"><span>Embalagem</span></a></li>
 	        <li><a href="../cadastro/fetchUniMEdByRequestBAS" title="qatmvctab-7"><span>Unidade Medida</span></a></li>
 		</sec:authorize>
 	</ul>

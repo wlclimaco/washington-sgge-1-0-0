@@ -22,6 +22,8 @@ public class ProdutoViewController extends ProdutoBaseController
 
 	private static final String DIALOG_MVC_BAS_RETURN = "/produto/produto_dialog";
 
+	private static final String EMBALAGEM_MVC_BAS_RETURN = "/cadastro/embalagem_mvc_bas";
+
 	/** The Constant ZERO. */
 	private static final int ZERO = 0;
 
@@ -100,6 +102,13 @@ public class ProdutoViewController extends ProdutoBaseController
 	public ModelAndView fetchFotobyRequestBAS()
 	{
 		ModelAndView modelAndView = new ModelAndView(FOTO_MVC_BAS_RETURN);
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/fetchEmbalagemByRequestBAS", method = RequestMethod.GET)
+	public ModelAndView fetchEmbalagembyRequestBAS()
+	{
+		ModelAndView modelAndView = new ModelAndView(EMBALAGEM_MVC_BAS_RETURN);
 		return modelAndView;
 	}
 }
