@@ -29,6 +29,11 @@
 		<sec:authentication-provider>
 			<sec:user-service>
 				<sec:user name="rod" password="koala" authorities="ROLE_DOMAIN ADMINS" />
+				<sec:user name="washington" password="koala" authorities="ROLE_DOMAIN ADMINS" />
+				<sec:user name="kessius" password="kessius123" authorities="ROLE_DOMAIN ADMINS" />
+				<sec:user name="cesar" password="cesar123" authorities="ROLE_DOMAIN ADMINS" />
+				<sec:user name="graziane" password="graziane123" authorities="ROLE_DOMAIN ADMINS" />
+				<sec:user name="damiao" password="damiao123" authorities="ROLE_DOMAIN ADMINS" />
 				<sec:user name="dianne" password="emu"	authorities="ROLE_GUEST" />
 				<sec:user name="scott" password="wombat" authorities="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS" />
 				<sec:user name="peter" password="opal" authorities="ROLE_DOMAIN USERS" />

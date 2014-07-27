@@ -24,7 +24,7 @@ var columns=[];
 			return ""
 	}
 
-	  function AutoCompleteEditor(args) {
+	  function AutoCompleteEditor2(args) {
 		    var $input;
 		    var defaultValue;
 		    var scope = this;
@@ -161,7 +161,7 @@ columns[1] = {id:"action", name: procedure.grid.act.title, field:"action", resiz
 columns[2] = {id:"id", name: procedure.grid.psak.title, field:"id", resizable:false, cssClass:"cell-center", width:75};
 columns[3] = {id:"nome", name: marca.grid.pmarca.title, field:"nome", editor:Slick.Editors.Text};
 columns[4] = {id:"qnt", name: "Quantidade", field:"qnt", editor:Slick.Editors.Text};
-columns[5] = {id:"unimed", name:submenu.grid.pmenu.title, field:"unimed",  width:135, editable:true, cssClass:"pad-4-left", sortable:true, editor:AutoCompleteEditor},
+columns[5] = {id:"unimed", name:submenu.grid.pmenu.title, field:"unimed",  width:135, editable:true, cssClass:"pad-4-left", sortable:true, editor:AutoCompleteEditor2},
 columns[6] = {id:"produtos", name: menu.grid.pprodutos.title, field:"produtos",resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
 columns[7] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
 columns[8] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};

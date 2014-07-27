@@ -552,9 +552,6 @@ function menu_fill_data(procResponse,data2)
 		{
 			if(procResponse.cadastros[oi].produtos != null){
 					var a =		procResponse.cadastros[oi].produtos.length;
-					var w=[];
-					w.push(a);
-					w.push(procResponse.cadastros[oi].id);
 				}else{
 				a= 0;}
 				if (procResponse.cadastros[oi].acessos != null){
@@ -1174,17 +1171,24 @@ function insertProduto_fill_data(procResponse,data2)
 			marca  +=   '<option value="' + oResponse.cadastros[i].id + '">' + oResponse.cadastros[i].nome + '</option>';
 		}else if((oResponse.cadastros[i].tableTypeEnumValue == 4)||(oResponse.cadastros[i].tableTypeEnumValue == 5)||(oResponse.cadastros[i].tableTypeEnumValue == 6)){
 			menu   +=    '<option value="' + oResponse.cadastros[i].id + '">' + oResponse.cadastros[i].nome + '</option>';
-		}else if(oResponse.cadastros[i].tableTypeEnumValue == 7){
-			unimed +=  '<option value="' + oResponse.cadastros[i].id + '">' + oResponse.cadastros[i].nome + '</option>';
 		}
       }
       $("select#marca").html(marca);
 	  $("select#menu").html(menu);
+	}
+	function callback(oResponse)
+	{
+	  var unimed = '';
+	  console.log(oResponse);
+      for (var i = 0; i < oResponse.embalagem.length; i++) {
+		unimed  +=   '<option value="' + oResponse.embalagem[i].id + '">' + oResponse.embalagem[i].qnt + ' '+oResponse.embalagem[i].unimedid.nome+'</option>';
+      }
 	  $("select#unimed").html(unimed);
 	}
 	var onProcDataLoading = new EventHelper();
 	onProcDataLoading.notify({});
 	rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros',{cadastro:{type:0,userId:'rod'}}, fill_data, null);
+	rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllEmbalagems',{}, callback, null);
 
 	data2[0] =
 	{

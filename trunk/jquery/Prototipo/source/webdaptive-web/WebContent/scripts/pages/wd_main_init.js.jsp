@@ -127,17 +127,17 @@ head(function()
 								},
 								{title: wdtree.node2.title, isFolder: true, expand: true, tooltip: wdtree.node2.tooltip,
 									children: [
-										{title: wdtree.node2.child1.title, key: 'qatbastabs', url: "qat_bas_tabs.jsp"},
+										{title: wdtree.node2.child1.title, key: 'qatmvctabsCli', url: "qat_cli_tabs.jsp"},
 									]
 								},
 								{title: wdtree.node3.title, isFolder: true, expand: true, tooltip: wdtree.node2.tooltip,
 									children: [
-										{title: wdtree.node2.child1.title, key: 'qatmvctabsCli', url: "qat_cli_tabs.jsp"},
+										{title: wdtree.node3.child1.title, key: 'qatmvctabsSup', url: "qat_sup_tabs.jsp"},
 									]
 								},
 								{title: wdtree.node4.title, isFolder: true, expand: true, tooltip: wdtree.node2.tooltip,
 									children: [
-										{title: wdtree.node3.child1.title, key: 'qatmvctabsSup', url: "qat_sup_tabs.jsp"},
+										{title: wdtree.node4.child1.title, key: 'qatmvctabsCid', url: "qat_cid_tabs.jsp"},
 									]
 								},
 						        <sec:authorize ifAllGranted="ROLE_DOMAIN ADMINS">

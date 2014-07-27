@@ -55,7 +55,7 @@ var options =
 		function callInsertWS()
 		{
 			onProcDataLoading.notify({});
-			var oData = new qat.model.reqUniMed(null, new qat.model.unimedid(0,data[0].nome,data[0].sigla),true,true);
+			var oData = new qat.model.reqUniMed(null, new qat.model.unimed(0,data[0].nome,data[0].sigla),true,true);
 			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/insertUniMed', oData, fill_data, process_error);
 		}
 
@@ -78,7 +78,7 @@ var options =
 				{
 					bList = false;
 				}
-				var oData = new qat.model.reqUniMed(null, new qat.model.unimedid(data[aRowChg[a]].id,6,data[aRowChg[a]].nome,data[aRowChg[a]].sigla),bList,true);
+				var oData = new qat.model.reqUniMed(null, new qat.model.unimed(data[aRowChg[a]].id,data[aRowChg[a]].nome,data[aRowChg[a]].sigla),bList,true);
 				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/updateUniMed', oData, fill_data, process_error);
 
 			}

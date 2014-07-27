@@ -25,7 +25,7 @@
 		this.codBarra = _codBarra;
 		this.marca = {id:parseInt(_marca),userId:'rod'};
 		this.menu = {id:parseInt(_menu),userId:'rod'};
-		this.unimed = {id:parseInt(_unimed),userId:'rod'};
+		this.embalagem = {id:parseInt(_unimed),userId:'rod'};
 		this.nome = _nome;
 		this.descricao = _descricao;
 		this.foto = _foto;
