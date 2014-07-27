@@ -1,7 +1,7 @@
 // Vars setting WebDaptive Web Settings
 //Web UI Host
 var WDHost = "auto";
-var WDContext = "qat-webdaptive";
+var WDContext = "retaguarda";
 if (WDHost == "auto") {
     WDHost = top.location.href.substring(0, top.location.href.indexOf(WDContext));
 }

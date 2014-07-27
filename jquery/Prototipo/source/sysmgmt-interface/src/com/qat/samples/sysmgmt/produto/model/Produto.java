@@ -12,7 +12,7 @@ import com.qat.samples.sysmgmt.util.Util;
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "Produto", propOrder = {"id", "codBarra", "marca", "menu", "unimed",
+@XmlType(name = "Produto", propOrder = {"id", "codBarra", "marca", "menu", "embalagem",
 		"nome",
 		"descricao",
 		"foto",
@@ -34,7 +34,7 @@ public class Produto extends Util
 	private Cadastro menu;
 
 	/** The unimed. */
-	private Cadastro unimed;
+	private Embalagem embalagem;
 
 	/** The description. */
 	private String nome;
@@ -81,7 +81,6 @@ public class Produto extends Util
 		this.codBarra = codBarra;
 		this.marca = marca;
 		this.menu = menu;
-		this.unimed = unimed;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.foto = foto;
@@ -108,7 +107,6 @@ public class Produto extends Util
 		this.codBarra = codBarra;
 		this.marca = marca;
 		this.menu = menu;
-		this.unimed = unimed;
 		this.precos = precos;
 	}
 
@@ -137,7 +135,6 @@ public class Produto extends Util
 		this.codBarra = codBarra;
 		this.marca = marca;
 		this.menu = menu;
-		this.unimed = unimed;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.foto = foto;
@@ -236,24 +233,14 @@ public class Produto extends Util
 		this.menu = menu;
 	}
 
-	/**
-	 * Gets the unimed.
-	 * 
-	 * @return the unimed
-	 */
-	public Cadastro getUnimed()
+	public Embalagem getEmbalagem()
 	{
-		return unimed;
+		return embalagem;
 	}
 
-	/**
-	 * Sets the unimed.
-	 * 
-	 * @param unimed the new unimed
-	 */
-	public void setUnimed(Cadastro unimed)
+	public void setEmbalagem(Embalagem embalagem)
 	{
-		this.unimed = unimed;
+		this.embalagem = embalagem;
 	}
 
 	/**
@@ -350,7 +337,7 @@ public class Produto extends Util
 	public String toString()
 	{
 		return "Produto [getId()=" + getId() + ", getCodBarra()=" + getCodBarra() + ", getMarca()=" + getMarca()
-				+ ", getMenu()=" + getMenu() + ", getUnimed()=" + getUnimed() + ", getNome()=" + getNome()
+				+ ", getMenu()=" + getMenu() + ", getEmbalagem()=" + getEmbalagem() + ", getNome()=" + getNome()
 				+ ", getDescricao()=" + getDescricao() + ", getFoto()=" + getFoto() + ", getPrecos()=" + getPrecos()
 				+ ", getImagens()=" + getImagens() + ", toString()=" + super.toString() + "]";
 	}

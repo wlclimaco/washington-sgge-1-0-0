@@ -12,7 +12,11 @@ import com.qat.samples.sysmgmt.model.request.RefreshRequest;
 import com.qat.samples.sysmgmt.produto.bas.IProdutoBAS;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.EmbalagemInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.response.CadastroResponse;
+import com.qat.samples.sysmgmt.produto.model.response.EmbalagemResponse;
+import com.qat.samples.sysmgmt.produto.model.response.ProdutoResponse;
 
 /**
  * The Class CountyBaseController.
@@ -137,4 +141,67 @@ public class CadastroBaseController
 		return response;
 	}
 
+	protected CadastroResponse cadastroBEFetchAll(boolean useBAI, CadastroInquiryRequest request)
+	{
+		CadastroResponse response = new CadastroResponse();
+		try
+		{
+			IProdutoBAS client = (IProdutoBAS)QATAppContext.getBean("produtoBASClientTarget");
+			response = client.fetchAllCadastros(request);
+
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG);
+		}
+		return response;
+	}
+
+	protected EmbalagemResponse uniMedBEFetchAll(boolean useBAI, EmbalagemInquiryRequest request)
+	{
+		EmbalagemResponse response = new EmbalagemResponse();
+		try
+		{
+			IProdutoBAS client = (IProdutoBAS)QATAppContext.getBean("produtoBASClientTarget");
+			response = client.fetchAllUniMeds(request);
+
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG);
+		}
+		return response;
+	}
+
+	protected EmbalagemResponse embalagemBEFetchAll(boolean useBAI, EmbalagemInquiryRequest request)
+	{
+		EmbalagemResponse response = new EmbalagemResponse();
+		try
+		{
+			IProdutoBAS client = (IProdutoBAS)QATAppContext.getBean("produtoBASClientTarget");
+			response = client.fetchAllEmbalagems(request);
+
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG);
+		}
+		return response;
+	}
+
+	protected ProdutoResponse produtoBEFetchAll(boolean useBAI, ProdutoInquiryRequest request)
+	{
+		ProdutoResponse response = new ProdutoResponse();
+		try
+		{
+			IProdutoBAS client = (IProdutoBAS)QATAppContext.getBean("produtoBASClientTarget");
+			response = client.fetchAllProdutos(request);
+
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG);
+		}
+		return response;
+	}
 }

@@ -11,6 +11,7 @@ import com.qat.framework.util.QATInterfaceUtil;
 import com.qat.samples.sysmgmt.cliente.bas.IClienteBAS;
 import com.qat.samples.sysmgmt.cliente.model.request.ClienteMaintenanceRequest;
 import com.qat.samples.sysmgmt.cliente.model.response.ClienteResponse;
+import com.qat.samples.sysmgmt.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.RefreshRequest;
 
@@ -144,6 +145,22 @@ public class ClienteBaseController
 		{
 			IClienteBAS client = (IClienteBAS)QATAppContext.getBean("clienteBASClientTarget");
 			response = client.fetchClientesByRequest(request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG);
+		}
+		return response;
+	}
+
+	protected ClienteResponse clienteBEFetchAll(boolean useBAI, FetchAllRequest request)
+	{
+		ClienteResponse response = new ClienteResponse();
+		try
+		{
+			IClienteBAS client = (IClienteBAS)QATAppContext.getBean("clienteBASClientTarget");
+			response = client.fetchAllClientes(request);
+
 		}
 		catch (Exception ex)
 		{

@@ -8,9 +8,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.qat.framework.model.QATModel.PersistanceActionEnum;
 import com.qat.framework.util.QATAppContext;
 import com.qat.framework.util.QATInterfaceUtil;
+import com.qat.samples.sysmgmt.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.RefreshRequest;
 import com.qat.samples.sysmgmt.supermercado.bas.ISupermercadoBAS;
+import com.qat.samples.sysmgmt.supermercado.model.request.SupermercadoInquiryRequest;
 import com.qat.samples.sysmgmt.supermercado.model.request.SupermercadoMaintenanceRequest;
 import com.qat.samples.sysmgmt.supermercado.model.response.SupermercadoResponse;
 
@@ -137,4 +139,19 @@ public class SupermercadoBaseController
 		return response;
 	}
 
+	protected SupermercadoResponse supermercadoBEFetchAll(boolean useBAI, SupermercadoInquiryRequest request)
+	{
+		SupermercadoResponse response = new SupermercadoResponse();
+		try
+		{
+			ISupermercadoBAS client = (ISupermercadoBAS)QATAppContext.getBean("supermercadoBASClientTarget");
+			response = client.fetchAllSupermercados(new FetchAllRequest());
+
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG);
+		}
+		return response;
+	}
 }

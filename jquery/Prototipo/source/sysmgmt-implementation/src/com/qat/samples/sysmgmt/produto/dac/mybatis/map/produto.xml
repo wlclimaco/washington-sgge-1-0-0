@@ -20,7 +20,7 @@
     <result property="foto" column="foto"/>
     <association property="marca" column="marca" javaType="Cadastro" select="fetchMarcaByCode" />
     <association property="menu" column="menu" javaType="Cadastro" select="fetchMenuByCode" />
-    <association property="unimed" column="unimed" javaType="UniMed" select="fetchUniMedByCode" />
+    <association property="embalagem" column="unimed" javaType="Embalagem" select="fetchUniMedByEmbalagem" />
     <collection property="precos" column="produtoid" select="PrecoMap.fetchPrecoByProduto" />
     <collection property="acessos" column="produtoid" select="ControleAcessMap.fetchControleAcessByProduto" />
   </resultMap>
@@ -33,7 +33,7 @@
     <result property="foto" column="foto"/>
     <association property="marca" column="marca" javaType="Cadastro" select="fetchMarcaByCode" />
     <association property="menu" column="menu" javaType="Cadastro" select="fetchMenuByCode" />
-    <association property="unimed" column="unimed" javaType="UniMed" select="fetchUniMedByCode" />
+    <association property="embalagem" column="unimed" javaType="Embalagem" select="fetchUniMedByEmbalagem" />
     <collection property="acessos" column="produtoid" select="ControleAcessMap.fetchControleAcessByProduto" />
   </resultMap>
 
@@ -341,7 +341,7 @@
   </select>
 
   <select id="updateUniMed" parameterType="UniMed" resultType="int" statementType="CALLABLE">
-	{ call upd_unimed( #{id},#{sigla},#{nome} ,  #{userId} ) }
+	{ call upd_unimed( #{id}, #{sigla}, #{nome},  #{userId} ) }
   </select>
 
   <select id="deleteEmbalagemById" parameterType="Embalagem" resultType="int" statementType="CALLABLE">

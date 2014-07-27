@@ -3,8 +3,10 @@ package com.qat.webdaptive.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.qat.samples.sysmgmt.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 
 /**
@@ -25,6 +27,14 @@ public class ClienteViewController extends ClienteBaseController
 
 	/** The Constant TWENTY. */
 	private static final int TWENTY = 20;
+
+	// ================ MENU ========================
+	private static final String MOBILE = "mobile";
+	private static final String CLIENTE_RESPONSE = "clienteResponse";
+	private static final String CLIENTE_MVC_RETURN = "/cliente/cliente_mvc";
+	private static final String CLIENTE_MVC_M_RETURN = "/mobile/cliente/cliente_mvc.m";
+
+	// ==============================================
 
 	/**
 	 * Fetch clientesby request bas.
@@ -51,6 +61,18 @@ public class ClienteViewController extends ClienteBaseController
 		request.setPageSize(TWENTY);
 		request.setPreQueryCount(true);
 		return cadastroMAV(request, CADASTRO_MVC_BAS_RETURN);
+	}
+
+	@RequestMapping(value = "/fetchClientes", method = RequestMethod.GET)
+	public ModelAndView fetchAllSupermercadosMVC(@RequestParam String view)
+	{
+		// if mobile send back mobile view
+		if (view.equalsIgnoreCase(MOBILE))
+		{
+			return new ModelAndView(CLIENTE_MVC_M_RETURN, CLIENTE_RESPONSE, clienteBEFetchAll(true,
+					new FetchAllRequest()));
+		}
+		return null;
 	}
 
 }
