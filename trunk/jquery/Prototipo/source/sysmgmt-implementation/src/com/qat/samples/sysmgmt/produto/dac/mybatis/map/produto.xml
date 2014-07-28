@@ -43,8 +43,8 @@
     <result property="nome" column="nome"/>
     <result property="descricao" column="descricao"/>
     <result property="controleid" column="controleid"/>
+    <association property="produtos" column="cadastroid" javaType="Integer" select="fetchCountProduto"/>
     <collection property="acessos" column="cadastroid" select="ControleAcessMap.fetchControleAcessByCadastro" />
-    <collection property="produtos" column="cadastroid" select="fetchProdutosByMarca" />
   </resultMap>
 
   <resultMap id="CadastroResults" type="Cadastro">
@@ -79,6 +79,10 @@
 	    <include refid="allEmbalagemColumns" />
 	    FROM embalagem where id = #{id}  ORDER BY id DESC
     </select>
+
+  <select id="fetchCountProduto" parameterType="Integer" resultType="Integer">
+    select count(*) as Total from produto t where t.menu = #{id}
+  </select>
 
    <sql id="allEmbalagemColumns">
 		id, nome, qnt, unimedid

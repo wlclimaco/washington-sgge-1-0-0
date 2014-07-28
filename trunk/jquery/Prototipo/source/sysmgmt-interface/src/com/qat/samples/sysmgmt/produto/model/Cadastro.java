@@ -25,7 +25,7 @@ public class Cadastro extends Util
 	/** The description. */
 	private String nome;
 
-	private List<Produto> produtos;
+	private Integer produtos;
 
 	/** The price. */
 	private String descricao;
@@ -60,12 +60,12 @@ public class Cadastro extends Util
 		this.id = id;
 	}
 
-	public List<Produto> getProdutos()
+	public Integer getProdutos()
 	{
 		return produtos;
 	}
 
-	public void setProdutos(List<Produto> produtos)
+	public void setProdutos(Integer produtos)
 	{
 		this.produtos = produtos;
 	}
