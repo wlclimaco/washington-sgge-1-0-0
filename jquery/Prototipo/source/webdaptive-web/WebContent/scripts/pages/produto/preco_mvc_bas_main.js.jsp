@@ -6,6 +6,7 @@ var aRowChg = new Array();
 var rowChg;
 var data = new Array();
 var pgrid;
+var availableTags = [];
 var gridPager;
 var pagingData = new qat.model.pageData(null,null,null,null);
 var id = $("div[id*='tabs']" ).attr("id");
@@ -101,17 +102,17 @@ var columns=[];
 
 				var callback = function  (oResponse)
 				{
-					var embalagems = oResponse.embalagem;
+					var embalagems = oResponse.supermercados;
 					var tmpLength = embalagems.length;
 					for (var i=0; i < tmpLength; i++){
-						availableTags.push(embalagems[i].id+" - "+embalagems[i].nome);
+						availableTags.push(embalagems[i].superId+" - "+embalagems[i].documentos[0].razao);
 					}
 				}
 
 				if(availableTags.length == 0){
 					var onProcDataLoading = new EventHelper();
 					onProcDataLoading.notify({});
-					rest_post_call('qat-sysmgmt-sample/services/rest/SupermercadoService/fetchAllSupermercados', {}, callback, process_error);
+					rest_post_call('qat-sysmgmt-sample/services/rest/SupermercadoService/fetchAllSupermercados', {}, callback, null);
 				}
 					$input = $("<INPUT id='tags' class='editor-text' />");
 					$input.appendTo(args.container);
@@ -166,9 +167,8 @@ var columns=[];
 	columns[3] = {id:"id", name: procedure.grid.psak.title, field:"id", resizable:false, cssClass:"cell-center", width:75};
 	columns[4] = {id:"supermercadoid", name:preco.grid.supermercadoid.title, field:"supermercadoid",  width:135, editable:true, cssClass:"pad-4-left", sortable:true, editor:AutoCompleteEditor3},
 	columns[5] = {id:"preco", name: preco.grid.preco.title, field:"preco", editor:Slick.Editors.Text};
-	columns[6] = {id:"promocao", name: preco.grid.promocao.title, field:"promocao" ,editor:Slick.Editors.Text};
-	//columns[7] = {id:"precopromo", name: preco.grid.precopromo.title, field:"precopromo",editor:Slick.Editors.Text};
-	columns[7] = {id:"precopromo", name:preco.grid.precopromo.title, field:"precopromo",  options: "Locked,Unlocked", editor: SelectCellEditor};
+	columns[6] = {id:"promocao", name:preco.grid.promocao.title, field:"promocao",  options: "Sim,Não", editor: SelectCellEditor};
+	columns[7] = {id:"precopromo", name: preco.grid.precopromo.title, field:"precopromo",editor:Slick.Editors.Text};
 	columns[8] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
 	columns[9] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
 

@@ -1165,7 +1165,6 @@ function insertProduto_fill_data(procResponse,data2)
 
 	  var menu = '';
 	  var marca = '';
-	  var unimed = '';
       for (var i = 0; i < oResponse.cadastros.length; i++) {
 		if(oResponse.cadastros[i].tableTypeEnumValue == 3){
 			marca  +=   '<option value="' + oResponse.cadastros[i].id + '">' + oResponse.cadastros[i].nome + '</option>';
@@ -1179,7 +1178,6 @@ function insertProduto_fill_data(procResponse,data2)
 	function callback(oResponse)
 	{
 	  var unimed = '';
-	  console.log(oResponse);
       for (var i = 0; i < oResponse.embalagem.length; i++) {
 		unimed  +=   '<option value="' + oResponse.embalagem[i].id + '">' + oResponse.embalagem[i].qnt + ' '+oResponse.embalagem[i].unimedid.nome+'</option>';
       }
@@ -1187,8 +1185,8 @@ function insertProduto_fill_data(procResponse,data2)
 	}
 	var onProcDataLoading = new EventHelper();
 	onProcDataLoading.notify({});
-	rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros',{cadastro:{type:0,userId:'rod'}}, fill_data, null);
-	rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllEmbalagems',{}, callback, null);
+	rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros',{cadastro:{type:0,userId:'rod'}}, fill_data, null,false);
+	rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllEmbalagems',{}, callback, null,false);
 
 	data2[0] =
 	{
@@ -1208,10 +1206,23 @@ function insertProduto_fill_data(procResponse,data2)
 		var codbarra = procResponse.produtos[0].codBarra ,
 			nomeProd = procResponse.produtos[0].nome,
 			descr    = procResponse.produtos[0].descricao,
-			foto    = procResponse.produtos[0].foto,
-			menu    = procResponse.produtos[0].menu.id,
-			unimed  = procResponse.produtos[0].unimed.id,
-			marca   = procResponse.produtos[0].marca.id;
+			foto    = procResponse.produtos[0].foto;
+
+			if(procResponse.produtos[0].menu != null)
+				var menu    = procResponse.produtos[0].menu.id
+			else
+			   var menu = "SELECIONE"
+
+			if(procResponse.produtos[0].embalagem != null)
+				var unimed  = procResponse.produtos[0].embalagem.id
+			else
+			   var unimed = "SELECIONE"
+
+			if(procResponse.produtos[0].marca != null)
+				var marca   = procResponse.produtos[0].marca.id
+			else
+			   var marca = "SELECIONE"
+
 
 		$('#codbarra').val(codbarra);
 		$('#nomeProd').val(nomeProd);
@@ -1399,6 +1410,10 @@ function produtoDialog_fill_data(procResponse,data2)
 							if(preco != null){
 								var w =    preco[ac].preco;
 								var y =    preco[ac].promocao;
+								if(y==1)
+									y = "Sim"
+								else
+								    y = "Não"
 								var z =    preco[ac].precopromo;
 							}else{
 								var w = "";
