@@ -31,7 +31,7 @@
 	<!--	 ========================= Web Service Client Definitions ======================== -->
     <jaxws:client id="countyBASClientTarget"
                   serviceClass="com.qat.samples.sysmgmt.bas.ICountyBAS"
-                 address="http://www.supermercado.kinghost.net/qat-sysmgmt-sample/services/ws/CountyService">
+                 address="http://localhost:8080/qat-sysmgmt-sample/services/ws/CountyService">
     	<jaxws:outInterceptors>
         	<ref bean="wss4jOutInterceptor"/>
  		</jaxws:outInterceptors>
@@ -39,7 +39,7 @@
 
     <jaxws:client id="procedureBASClientTarget"
                   serviceClass="com.qat.samples.sysmgmt.bas.IProcedureBAS"
-                 address="http://www.supermercado.kinghost.net/qat-sysmgmt-sample/services/ws/ProcedureService">
+                 address="http://localhost:8080/qat-sysmgmt-sample/services/ws/ProcedureService">
     	<jaxws:outInterceptors>
         	<ref bean="wss4jOutInterceptor"/>
  		</jaxws:outInterceptors>
@@ -47,7 +47,7 @@
 
       <jaxws:client id="cidadeBASClientTarget"
                   serviceClass="com.qat.samples.sysmgmt.cidade.bas.ICidadeBAS"
-                 address="http://www.supermercado.kinghost.net/qat-sysmgmt-sample/services/ws/CidadeService">
+                 address="http://localhost:8080/qat-sysmgmt-sample/services/ws/CidadeService">
     	<jaxws:outInterceptors>
         	<ref bean="wss4jOutInterceptor"/>
  		</jaxws:outInterceptors>
@@ -55,7 +55,7 @@
 
      <jaxws:client id="clienteBASClientTarget"
                   serviceClass="com.qat.samples.sysmgmt.cliente.bas.IClienteBAS"
-                 address="http://www.supermercado.kinghost.net/qat-sysmgmt-sample/services/ws/ClienteService">
+                 address="http://localhost:8080/qat-sysmgmt-sample/services/ws/ClienteService">
     	<jaxws:outInterceptors>
         	<ref bean="wss4jOutInterceptor"/>
  		</jaxws:outInterceptors>
@@ -63,14 +63,22 @@
 
       <jaxws:client id="supermercadoBASClientTarget"
                   serviceClass="com.qat.samples.sysmgmt.supermercado.bas.ISupermercadoBAS"
-                 address="http://www.supermercado.kinghost.net/qat-sysmgmt-sample/services/ws/SupermercadoService">
+                 address="http://localhost:8080/qat-sysmgmt-sample/services/ws/SupermercadoService">
     	<jaxws:outInterceptors>
         	<ref bean="wss4jOutInterceptor"/>
  		</jaxws:outInterceptors>
      </jaxws:client>
       <jaxws:client id="produtoBASClientTarget"
                   serviceClass="com.qat.samples.sysmgmt.produto.bas.IProdutoBAS"
-                 address="http://www.supermercado.kinghost.net/qat-sysmgmt-sample/services/ws/ProdutoService">
+                 address="http://localhost:8080/qat-sysmgmt-sample/services/ws/ProdutoService">
+    	<jaxws:outInterceptors>
+        	<ref bean="wss4jOutInterceptor"/>
+ 		</jaxws:outInterceptors>
+     </jaxws:client>
+
+      <jaxws:client id="controleBASClientTarget"
+                  serviceClass="com.qat.samples.sysmgmt.controle.bas.IControleBAS"
+                 address="http://localhost:8080/qat-sysmgmt-sample/services/ws/ControleService">
     	<jaxws:outInterceptors>
         	<ref bean="wss4jOutInterceptor"/>
  		</jaxws:outInterceptors>

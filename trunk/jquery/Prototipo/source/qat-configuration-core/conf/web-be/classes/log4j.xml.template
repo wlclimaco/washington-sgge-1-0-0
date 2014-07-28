@@ -43,7 +43,7 @@
 
 	<logger name="org.apache" additivity="false">
 		<level value="debug"/>
-		<appender-ref ref="CONSOLE"/>
+		<appender-ref ref="ASYNC_DEBUG"/>
 	</logger>
 
     <logger name="java.sql" additivity="false">
@@ -58,7 +58,7 @@
 
     <logger name="net.sf.ehcache" additivity="false">
         <level value="warn" />
-		<appender-ref ref="CONSOLE"/>
+		<appender-ref ref="ASYNC_DEBUG"/>
     </logger>
 
     <logger name="org.springframework" additivity="false">
