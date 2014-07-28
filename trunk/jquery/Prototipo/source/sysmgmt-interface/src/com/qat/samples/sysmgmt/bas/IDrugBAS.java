@@ -17,7 +17,7 @@ import com.qat.samples.sysmgmt.model.response.DrugResponse;
 /**
  * The Interface IDrugBAS. (Business Area Service - BAS)
  */
-@WebService(serviceName = "DrugService", targetNamespace = "http://www.supermercado.kinghost.net/sysmgmt", portName = "DrugServicePort")
+@WebService(serviceName = "DrugService", targetNamespace = "http://qat.com/sysmgmt", portName = "DrugServicePort")
 public interface IDrugBAS
 {
 

@@ -23,7 +23,7 @@ import com.qat.samples.sysmgmt.produto.model.response.ProdutoResponse;
 /**
  * The Interface IProdutoBAS. (Business Area Service - BAS)
  */
-@WebService(serviceName = "ProdutoService", targetNamespace = "http://www.supermercado.kinghost.net/sysmgmt", portName = "ProdutoServicePort")
+@WebService(serviceName = "ProdutoService", targetNamespace = "http://qat.com/sysmgmt", portName = "ProdutoServicePort")
 public interface IProdutoBAS
 {
 

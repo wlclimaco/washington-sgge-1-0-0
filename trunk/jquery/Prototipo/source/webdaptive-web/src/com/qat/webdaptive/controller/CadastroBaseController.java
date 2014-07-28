@@ -9,6 +9,7 @@ import com.qat.framework.model.QATModel.PersistanceActionEnum;
 import com.qat.framework.util.QATAppContext;
 import com.qat.framework.util.QATInterfaceUtil;
 import com.qat.samples.sysmgmt.model.request.RefreshRequest;
+import com.qat.samples.sysmgmt.produto.bai.IProdutoBAI;
 import com.qat.samples.sysmgmt.produto.bas.IProdutoBAS;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroMaintenanceRequest;
@@ -32,6 +33,19 @@ public class CadastroBaseController
 
 	/** The Constant SUPERMERCADO_RESPONSE. */
 	private static final String SUPERMERCADO_RESPONSE = "cadastroResponse";
+
+	/** The county bai. */
+	private IProdutoBAI produtoBAI; // injected by @Resource
+
+	public IProdutoBAI getProdutoBAI()
+	{
+		return produtoBAI;
+	}
+
+	public void setProdutoBAI(IProdutoBAI produtoBAI)
+	{
+		this.produtoBAI = produtoBAI;
+	}
 
 	/**
 	 * Cadastro mav.
@@ -146,8 +160,10 @@ public class CadastroBaseController
 		CadastroResponse response = new CadastroResponse();
 		try
 		{
-			IProdutoBAS client = (IProdutoBAS)QATAppContext.getBean("produtoBASClientTarget");
-			response = client.fetchAllCadastros(request);
+			// IProdutoBAS client = (IProdutoBAS)QATAppContext.getBean("produtoBASClientTarget");
+			// response = client.fetchAllCadastros(request);
+
+			response = getProdutoBAI().fetchAllCadastros(request);
 
 		}
 		catch (Exception ex)

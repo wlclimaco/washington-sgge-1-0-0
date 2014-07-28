@@ -65,7 +65,7 @@
 	</div>
 
     <div data-theme="b" data-role="footer">
-        <h4>-TIA CHICA All rights reserved.</h4>
+        <h4>-TIA PECHINCHA All rights reserved.</h4>
     </div>
 </div>
 

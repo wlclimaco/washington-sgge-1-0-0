@@ -17,7 +17,7 @@ import com.qat.samples.sysmgmt.model.response.ProcedureResponse;
 /**
  * The Interface IProcedureBAS. (Business Area Service - BAS)
  */
-@WebService(serviceName = "ProcedureService", targetNamespace = "http://www.supermercado.kinghost.net/sysmgmt", portName = "ProcedureServicePort")
+@WebService(serviceName = "ProcedureService", targetNamespace = "http://qat.com/sysmgmt", portName = "ProcedureServicePort")
 public interface IProcedureBAS
 {
 

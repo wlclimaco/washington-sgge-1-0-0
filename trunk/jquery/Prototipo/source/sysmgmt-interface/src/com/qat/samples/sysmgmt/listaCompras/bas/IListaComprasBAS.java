@@ -17,7 +17,7 @@ import com.qat.samples.sysmgmt.model.request.RefreshRequest;
 /**
  * The Interface IListaComprasBAS. (Business Area Service - BAS)
  */
-@WebService(serviceName = "ListaComprasService", targetNamespace = "http://www.supermercado.kinghost.net/sysmgmt", portName = "ListaComprasServicePort")
+@WebService(serviceName = "ListaComprasService", targetNamespace = "http://qat.com/sysmgmt", portName = "ListaComprasServicePort")
 public interface IListaComprasBAS
 {
 
