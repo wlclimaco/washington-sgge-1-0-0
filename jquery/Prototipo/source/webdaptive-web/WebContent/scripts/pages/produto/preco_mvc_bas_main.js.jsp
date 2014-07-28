@@ -197,7 +197,7 @@ var options =
 		<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
 		function callInsertWS(_Id)
 		{
-
+			debugger;
 			onProcDataLoading.notify({});
 			if(_Id > 0){
 				var oData = callCreateObject(_Id);

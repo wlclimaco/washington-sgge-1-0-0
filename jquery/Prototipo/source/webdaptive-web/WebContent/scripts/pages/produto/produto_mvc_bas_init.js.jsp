@@ -32,7 +32,7 @@ $(document).ready(function ()
 			modal: true,
 			buttons: {
 				'Gravar': function() {
-					ploaderPro.callInsertWS(row);
+					ploaderPre.callInsertWS(row);
 				},
 				Cancel: function() {
 					$(this).dialog('close');

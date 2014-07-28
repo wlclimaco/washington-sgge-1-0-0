@@ -17,7 +17,7 @@ import com.qat.samples.sysmgmt.model.response.CountyResponse;
 /**
  * The Interface ICountyBAS. (Business Area Service - BAS)
  */
-@WebService(serviceName = "CountyService", targetNamespace = "http://www.supermercado.kinghost.net/sysmgmt", portName = "CountyServicePort")
+@WebService(serviceName = "CountyService", targetNamespace = "http://qat.com/sysmgmt", portName = "CountyServicePort")
 public interface ICountyBAS
 {
 

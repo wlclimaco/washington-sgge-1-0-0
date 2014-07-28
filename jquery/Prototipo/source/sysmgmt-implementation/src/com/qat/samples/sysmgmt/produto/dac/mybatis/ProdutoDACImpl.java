@@ -106,7 +106,7 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 		paramMap.put("nome", produto.getNome());
 		paramMap.put("marca", produto.getMarca().getId());
 		paramMap.put("menu", produto.getMenu().getId());
-		paramMap.put("unimed", produto.getUnimed().getId());
+		paramMap.put("unimed", produto.getEmbalagem().getId());
 		paramMap.put("supermercadoId", 0);
 		paramMap.put("foto", produto.getFoto());
 		paramMap.put("usuarioid", produto.getUserId());
@@ -131,7 +131,7 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 		paramMap.put("nome", produto.getNome());
 		paramMap.put("marca", produto.getMarca().getId());
 		paramMap.put("menu", produto.getMenu().getId());
-		paramMap.put("unimed", produto.getUnimed().getId());
+		paramMap.put("unimed", produto.getEmbalagem().getId());
 		paramMap.put("precoid", 1);
 		paramMap.put("controleid", 1);
 		paramMap.put("foto", produto.getFoto());
@@ -338,7 +338,7 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	public List<Tabelapreco> fetchAllProdutosUniMed(ProdutoInquiryRequest request)
 	{
 		return QATMyBatisDacHelper.doQueryForList(getSqlSession(), "PrecoMap.fetchAllPrecosUniMed", request
-				.getProduto().getUnimed().getId());
+				.getProduto().getEmbalagem().getId());
 	}
 
 	@Override

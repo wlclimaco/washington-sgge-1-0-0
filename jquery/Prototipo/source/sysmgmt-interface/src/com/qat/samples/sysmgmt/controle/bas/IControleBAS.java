@@ -15,7 +15,7 @@ import com.qat.samples.sysmgmt.controle.model.response.ControleResponse;
 /**
  * The Interface ICidadeBAS. (Business Area Service - BAS)
  */
-@WebService(serviceName = "ControleService", targetNamespace = "http://www.supermercado.kinghost.net/sysmgmt", portName = "ControleServicePort")
+@WebService(serviceName = "ControleService", targetNamespace = "http://qat.com/sysmgmt", portName = "ControleServicePort")
 public interface IControleBAS
 {
 

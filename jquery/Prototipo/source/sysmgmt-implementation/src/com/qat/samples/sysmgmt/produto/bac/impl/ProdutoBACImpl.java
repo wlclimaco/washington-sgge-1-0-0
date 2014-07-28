@@ -123,6 +123,7 @@ public class ProdutoBACImpl implements IProdutoBAC
 		InternalResponse internalResponse = getProdutoDAC().updateProduto(produto);
 		FetchByIdRequest fetchByIdRequest = new FetchByIdRequest();
 		Tabelapreco preco = new Tabelapreco();
+		Double a;
 		if (internalResponse.getStatus() == Status.OperationSuccess)
 		{
 
@@ -132,8 +133,16 @@ public class ProdutoBACImpl implements IProdutoBAC
 				{
 					fetchByIdRequest.setFetchId(produto.getPrecos().get(i).getPrecoid());
 					preco = getPrecoDAC().fetchPrecoById(fetchByIdRequest);
+					if (produto.getPrecos().get(i).getPrecopromo() != null)
+					{
+						a = produto.getPrecos().get(i).getPrecopromo();
+					}
+					else
+					{
+						a = new Double(0.0);
+					}
 					if (((preco.getPreco() - produto.getPrecos().get(i).getPreco()) > new Double(0))
-							&& ((preco.getPrecopromo() - produto.getPrecos().get(i).getPrecopromo()) > new Double(0)))
+							&& ((preco.getPrecopromo() - a) > new Double(0)))
 					{
 
 						internalResponse = getPrecoDAC().insertPreco(produto.getPrecos().get(i));

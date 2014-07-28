@@ -108,6 +108,7 @@ var options =
 		}
 		function callInsertWS(_Id)
 		{
+			debugger;
 			onProcDataLoading.notify({});
 			if(_Id > 0){
 				var oData = callCreateObject(_Id);
@@ -122,6 +123,7 @@ var options =
 
 		function callCreateObject(_id)
 		{
+			debugger;
 			var tmpLength = dataProd.length;
 			var oDataPreco =[];
 			for (var i=1; i < tmpLength; i++){

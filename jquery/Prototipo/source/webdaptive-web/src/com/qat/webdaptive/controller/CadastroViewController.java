@@ -35,39 +35,39 @@ public class CadastroViewController extends CadastroBaseController
 	private static final String MOBILE = "mobile";
 	private static final String CADASTRO_RESPONSE = "cadastroResponse";
 	private static final String MENU_MVC_RETURN = "/cadastro/counties_mvc";
-	private static final String MENU_MVC_M_RETURN = "/mobile/cadastro/menu_mvc.m";
+	private static final String MENU_MVC_M_RETURN = "/mobile/cadastros/menu_mvc.m";
 	// ==============================================
 
 	// ================ SUBMENU ========================
 	private static final String SUBMENU_MVC_RETURN = "/cadastro/counties_mvc";
-	private static final String SUBMENU_MVC_M_RETURN = "/mobile/cadastro/submenu_mvc.m";
+	private static final String SUBMENU_MVC_M_RETURN = "/mobile/cadastros/submenu_mvc.m";
 	// ==============================================
 
 	// ================ TRIMENU ========================
 	private static final String TRIMENU_MVC_RETURN = "/cadastro/counties_mvc";
-	private static final String TRIMENU_MVC_M_RETURN = "/mobile/cadastro/trimenu_mvc.m";
+	private static final String TRIMENU_MVC_M_RETURN = "/mobile/cadastros/trimenu_mvc.m";
 	// ==============================================
 
 	// ================ MARCA ========================
 	private static final String MARCA_MVC_RETURN = "/cadastro/counties_mvc";
-	private static final String MARCA_MVC_M_RETURN = "/mobile/cadastro/marca_mvc.m";
+	private static final String MARCA_MVC_M_RETURN = "/mobile/cadastros/marca_mvc.m";
 	// ==============================================
 
 	// ================ UNIMED ========================
 	private static final String EMBALAGEM_RESPONSE = "embalagemResponse";
 	private static final String UNIMED_MVC_RETURN = "/cadastro/counties_mvc";
-	private static final String UNIMED_MVC_M_RETURN = "/mobile/cadastro/unimed_mvc.m";
+	private static final String UNIMED_MVC_M_RETURN = "/mobile/cadastros/unimed_mvc.m";
 	// ==============================================
 
 	// ================ EMBALAGEM ========================
 	private static final String EMBALAGEM_MVC_RETURN = "/cadastro/counties_mvc";
-	private static final String EMBALAGEM_MVC_M_RETURN = "/mobile/cadastro/embalagem_mvc.m";
+	private static final String EMBALAGEM_MVC_M_RETURN = "/mobile/cadastros/embalagem_mvc.m";
 	// ==============================================
 
 	// ================ PRODUTO ========================
 	private static final String PRODUTO_RESPONSE = "produtoResponse";
 	private static final String PRODUTO_MVC_RETURN = "/cadastro/counties_mvc";
-	private static final String PRODUTO_MVC_M_RETURN = "/mobile/cadastro/produto_mvc.m";
+	private static final String PRODUTO_MVC_M_RETURN = "/mobile/produto/produto_mvc.m";
 	// =====================================================
 	/** The Constant ZERO. */
 	private static final int ZERO = 0;
