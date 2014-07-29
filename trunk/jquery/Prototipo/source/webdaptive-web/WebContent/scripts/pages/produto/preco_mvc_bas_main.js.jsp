@@ -254,11 +254,7 @@ var options =
 			//rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos', {}, fill_data_3, process_error);
 			onProcDataLoaded.notify({});
 		}
-		function fill_data_3(procResponse)
-		{
-			dataPre = reuse_fill_data(procResponse,dataPre,"produto");
-			onProcDataLoaded.notify({});
-		}
+
 		function fill_data2(datas)
 		{
 			dataPre = datas;
@@ -282,7 +278,7 @@ var options =
 
 		return{
 			// properties
-			"data": dataPre,
+			"dataPre": dataPre,
 
 			// methods
 			"isPrecDataLoaded": isPrecDataLoaded,

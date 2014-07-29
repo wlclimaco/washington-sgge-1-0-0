@@ -9,7 +9,7 @@ $(document).ready(function ()
     });
 
 	//sets up initial grid ...no data yet...but binds to the object that will fill it
-	pgrid = new Slick.Grid($("#precoGrid"), ploaderPre.data, columns, options);
+	pgrid = new Slick.Grid($("#precoGrid"), ploaderPre.dataPre, columns, options);
 	pgrid.setSelectionModel(new Slick.RowSelectionModel({selectActiveRow: false}));
     pgrid.registerPlugin(checkboxSelector);
 

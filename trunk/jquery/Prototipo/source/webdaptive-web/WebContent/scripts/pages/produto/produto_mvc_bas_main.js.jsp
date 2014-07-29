@@ -4,7 +4,7 @@
 var aRowChg = new Array();
 var rowChg;
 var dataProd = new Array();
-var pgrid;
+var pgrid1;
 var gridPager;
 var pagingData = new qat.model.pageData(null,null,null,null);
 var id = $("div[id*='tabs']" ).attr("id");
@@ -20,7 +20,7 @@ var viewLoadedObject;
     </c:otherwise>
 </c:choose>
 
-var columns=[];
+var columnss=[];
  var checkboxSelector = new Slick.CheckboxSelectColumn({
       cssClass: "slick-cell-checkboxsel"
     });
@@ -31,20 +31,20 @@ var columns=[];
 	}
 
 
-columns.push(checkboxSelector.getColumnDefinition());
-columns[1]  = {id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:"cell-center", width:30};
-columns[2]  = {id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
-columns[3]  = {id:"id", name: procedure.grid.psak.title, field:"id", resizable:false, cssClass:"cell-center", width:75};
-columns[4]  = {id:"codBarra", name:produto.grid.codBarra.title, field:"codBarra",  width:135, editable:true, cssClass:"pad-4-left", sortable:true},
-columns[5]  = {id:"nome", name: produto.grid.nome.title, field:"nome"};
-columns[6]  = {id:"unimed", name: produto.grid.unimed.title, field:"unimed"};
-columns[7]  = {id:"marca", name:produto.grid.marca.title, field:"marca",  width:135, editable:true, cssClass:"pad-4-left", sortable:true},
-columns[8]  = {id:"menu", name: produto.grid.menu.title, field:"menu"};
-columns[9] = {id:"supermercadoId", name: produto.grid.supermercadoId.title, field:"supermercadoId"};
-columns[10] = {id:"preco", name: produto.grid.preco.title, field:"preco"};
-columns[11] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
-columns[12] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
-columns[13] = {id:"id", name: " ", field:"id",  cssClass:"cell-center",formatter:  buttonFormat,width:72};
+columnss.push(checkboxSelector.getColumnDefinition());
+columnss[1]  = {id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:"cell-center", width:30};
+columnss[2]  = {id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
+columnss[3]  = {id:"id", name: procedure.grid.psak.title, field:"id", resizable:false, cssClass:"cell-center", width:75};
+columnss[4]  = {id:"codBarra", name:produto.grid.codBarra.title, field:"codBarra",  width:135, editable:true, cssClass:"pad-4-left", sortable:true},
+columnss[5]  = {id:"nome", name: produto.grid.nome.title, field:"nome"};
+columnss[6]  = {id:"unimed", name: produto.grid.unimed.title, field:"unimed"};
+columnss[7]  = {id:"marca", name:produto.grid.marca.title, field:"marca",  width:135, editable:true, cssClass:"pad-4-left", sortable:true},
+columnss[8]  = {id:"menu", name: produto.grid.menu.title, field:"menu"};
+columnss[9] =  {id:"supermercadoId", name: produto.grid.supermercadoId.title, field:"supermercadoId"};
+columnss[10] = {id:"preco", name: produto.grid.preco.title, field:"preco"};
+columnss[11] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
+columnss[12] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
+columnss[13] = {id:"id", name: " ", field:"id",  cssClass:"cell-center",formatter:  buttonFormat,width:72};
 
 
 
@@ -165,7 +165,8 @@ var options =
 		function fill_data_3(procResponse)
 		{
 			$("#action-produto-dialog").dialog('close');
-			//rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos', {}, fill_data_3, process_error);
+			dataProd = reuse_fill_data(procResponse,dataProd,"produto");
+			debugger;
 			onProDataLoaded.notify({});
 		}
 		return{
