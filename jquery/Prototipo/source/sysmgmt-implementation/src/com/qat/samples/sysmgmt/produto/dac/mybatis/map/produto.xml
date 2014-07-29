@@ -33,7 +33,7 @@
     <result property="foto" column="foto"/>
     <association property="marca" column="marca" javaType="Cadastro" select="fetchMarcaByCode" />
     <association property="menu" column="menu" javaType="Cadastro" select="fetchMenuByCode" />
-    <association property="embalagem" column="unimed" javaType="Embalagem" select="fetchUniMedByEmbalagem" />
+    <association property="embalagem" column="embalagem" javaType="Embalagem" select="fetchUniMedByEmbalagem" />
     <collection property="acessos" column="produtoid" select="ControleAcessMap.fetchControleAcessByProduto" />
   </resultMap>
 
