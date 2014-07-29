@@ -71,7 +71,7 @@ $(document).ready(function ()
 			dom = "<div class='id'>" + row.toString() + "</div>";
 			$actionTagDialog = $("#action-tag-dialog").load('../supermercado/fetchSupermercadosByEdit').dialog({
 				autoOpen: false,
-				title: 'Action - Add Tag to SmartPoint',
+				title: 'Supermercado Insert/Edit',
 				width: 500,
 				minheight: 500,
 				height: 800,

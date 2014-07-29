@@ -159,13 +159,13 @@ var columns=[];
 columns[0] = {id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:"cell-center", width:30};
 columns[1] = {id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
 columns[2] = {id:"id", name: procedure.grid.psak.title, field:"id", resizable:false, cssClass:"cell-center", width:75};
-columns[3] = {id:"nome", name: marca.grid.pmarca.title, field:"nome", editor:Slick.Editors.Text};
+columns[3] = {id:"nome", name:"Embalagem", field:"nome", editor:Slick.Editors.Text};
 columns[4] = {id:"qnt", name: "Quantidade", field:"qnt", editor:Slick.Editors.Text};
-columns[5] = {id:"unimed", name:submenu.grid.pmenu.title, field:"unimed",  width:135, editable:true, cssClass:"pad-4-left", sortable:true, editor:AutoCompleteEditor2},
+columns[5] = {id:"unimed", name:"Unidade Medida", field:"unimed",  width:135, editable:true, cssClass:"pad-4-left", sortable:true, editor:AutoCompleteEditor2},
 columns[6] = {id:"produtos", name: menu.grid.pprodutos.title, field:"produtos",resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
 columns[7] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
 columns[8] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
-columns[9] = { id:'column1', field:'column1', name: "Column 1", width:75, editor: SelectEditor, editorOptions:{options:"val1,val2,val3"}  }
+//columns[9] = { id:'column1', field:'column1', name: "Column 1", width:75, editor: SelectEditor, editorOptions:{options:"val1,val2,val3"}  }
 
 //];
 
@@ -193,7 +193,6 @@ var options =
 		function callInsertWS()
 		{
 			onMarcaDataLoading.notify({});
-			//debugger
 			var ac = data[0].unimed;
 			var ab = ac.split('-');
 			var oData = new qat.model.reqEmbalagem(null, new qat.model.embalagem(0,data[0].nome,data[0].qnt,parseInt(ab[0]),null, null),true,true);
@@ -272,7 +271,6 @@ var options =
 
 		function exportCSVProd()
 		{
-			debugger;
 		    onMarcaDataLoading.notify({});
 			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos',{produto:{tabela:2,marca:{id:parseInt(valueGlobal),userId:'rod'},userId:'rod'}} , fill_dataCSV, process_error);
 		}

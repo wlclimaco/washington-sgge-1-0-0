@@ -68,17 +68,17 @@ var options =
 {
 	function RemoteModel()
 	{
-		var onProcDataLoading = new EventHelper();
-		var onProcDataLoaded = new EventHelper();
+		var onProDataLoading = new EventHelper();
+		var onProDataLoaded = new EventHelper();
 
 		function callRefreshWS(_i)
 		{
-			onProcDataLoading.notify({});
+			onProDataLoading.notify({});
 			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos', {produto:{tabela:1,userId:'rod'}}, fill_data, process_error);
 		}
 		function callPagedFetchWS(_iPageSize, _iStartPage)
 		{
-		    onProcDataLoading.notify({});
+		    onProDataLoading.notify({});
 			if (viewLoadedObject == null)
 			{
 			    rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos', {produto:{tabela:1,userId:'rod'}}, fill_data, process_error);
@@ -95,7 +95,7 @@ var options =
 		function process_error(jqXHR, textStatus, errorThrown)
 		{
 			wd.core.process_xhr_error(jqXHR, textStatus, errorThrown);
-			onProcDataLoaded.notify({});
+			onProDataLoaded.notify({});
 		}
 
 		function isProcDataLoaded()
@@ -108,8 +108,8 @@ var options =
 		}
 		function callInsertWS(_Id)
 		{
-			debugger;
-			onProcDataLoading.notify({});
+			onProDataLoading.notify({});
+
 			if(_Id > 0){
 				var oData = callCreateObject(_Id);
 				var oData = new qat.model.reqProduto(null, oData, true, true);
@@ -121,9 +121,16 @@ var options =
 			}
 		}
 
+		function callDeleteWS(_procId)
+		{
+			onProDataLoading.notify({});
+		   	var oData = new qat.model.reqProduto(null, new qat.model.produto(_procId),true,true);
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/deleteProduto', oData, fill_data2, process_error);
+		}
+
 		function callCreateObject(_id)
 		{
-			debugger;
+			onProDataLoading.notify({});
 			var tmpLength = dataProd.length;
 			var oDataPreco =[];
 			for (var i=1; i < tmpLength; i++){
@@ -147,27 +154,35 @@ var options =
 		function fill_data(procResponse)
 		{
 			dataProd = reuse_fill_data(procResponse,dataProd,"produto");
-			onProcDataLoaded.notify({});
+			onProDataLoaded.notify({});
 		}
 		function fill_data2(procResponse)
 		{
 			$("#action-produto-dialog").dialog('close');
 			dataProd = reuse_fill_data(procResponse,dataProd,"produto");
-			onProcDataLoaded.notify({});
+			onProDataLoaded.notify({});
+		}
+		function fill_data_3(procResponse)
+		{
+			$("#action-produto-dialog").dialog('close');
+			//rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos', {}, fill_data_3, process_error);
+			onProDataLoaded.notify({});
 		}
 		return{
 			// properties
-			"data": dataProd,
+			"dataProd": dataProd,
 			// methods
 			"isProcDataLoaded": isProcDataLoaded,
 			"callPagedFetchWS": callPagedFetchWS,
 			<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
 			"callRefreshWS": callRefreshWS,
+			"callDeleteWS":callDeleteWS,
 			"callInsertWS":callInsertWS,
+			"fill_data_3":fill_data_3,
 			</sec:authorize>
 			// events
-			"onProcDataLoading": onProcDataLoading,
-			"onProcDataLoaded": onProcDataLoaded
+			"onProDataLoading": onProDataLoading,
+			"onProDataLoaded": onProDataLoaded
 		};
 	};
 	$.extend(true, window, { Slick: { Data: { RemoteModel: RemoteModel }}});

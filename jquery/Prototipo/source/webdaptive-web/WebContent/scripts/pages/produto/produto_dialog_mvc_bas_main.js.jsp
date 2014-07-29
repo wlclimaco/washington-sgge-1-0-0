@@ -131,7 +131,6 @@ var options =
 		//	openDialogCadastro({produto:{tabela:3,menu:{id:parseInt(value),userId:'rod'},userId:'rod'}});
 			valueGlobal = parseInt(value);
 			$('#tableId').val(3);
-			debugger;
 			data =  qat.model.supermercado.pages.openProdutos(value,data,process_error);
 		}
 		function fill_data(procResponse)
@@ -185,7 +184,6 @@ var options =
 		}
 		function exportCSVProd()
 		{
-			debugger;
 		    onProcDataLoading.notify({});
 			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos',{produto:{tabela:2,marca:{id:parseInt(valueGlobal),userId:'rod'},userId:'rod'}} , fill_dataCSV, process_error);
 		}

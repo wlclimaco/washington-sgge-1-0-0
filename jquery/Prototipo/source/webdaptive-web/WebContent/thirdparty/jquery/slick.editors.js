@@ -23,6 +23,7 @@
   });
 
   var availableTags = [];
+  var availableTags1 = [];
 
     function AutoCompleteEditor0(args) {
     var $input;
@@ -38,12 +39,11 @@
 			 var tmpLength = cadastros.length;
 			 availableTags = [];
 			for (var i=0; i < tmpLength; i++){
-				availableTags.push(cadastros[i].nome);
+				availableTags.push(cadastros[i].descricao);
 			}
 		}
 
 		if(availableTags.length == 0){
-
 			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {cadastro:{type:4,userId:'rod'}}, callback, null,false);
 		}
 			$input = $("<INPUT id='tags' class='editor-text' />");
@@ -105,13 +105,13 @@
 		{
 			 var cadastros = oResponse.cadastros;
 			 var tmpLength = cadastros.length;
-			 availableTags = [];
+			 availableTags1 = [];
 			for (var i=0; i < tmpLength; i++){
-				availableTags.push(cadastros[i].nome);
+				availableTags1.push(cadastros[i].nome);
 			}
 		}
 
-		if(availableTags.length == 0){
+		if(availableTags1.length == 0){
 
 			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {cadastro:{type:3,userId:'rod'}}, callback, null,false);
 		}
@@ -120,7 +120,7 @@
 			$input.appendTo(args.container);
 			$input.focus().select();
 			$input.autocomplete({
-				  source: availableTags
+				  source: availableTags1
 			});
 
     };

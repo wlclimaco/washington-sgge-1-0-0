@@ -35,7 +35,7 @@ public class Endereco extends Util
 	private String cidade;
 
 	/** The numero. */
-	private Integer numero;
+	private String numero;
 
 	/** The description. */
 	private String cep;
@@ -172,7 +172,7 @@ public class Endereco extends Util
 	 * 
 	 * @return the numero
 	 */
-	public Integer getNumero()
+	public String getNumero()
 	{
 		return numero;
 	}
@@ -182,7 +182,7 @@ public class Endereco extends Util
 	 * 
 	 * @param numero the numero to set
 	 */
-	public void setNumero(Integer numero)
+	public void setNumero(String numero)
 	{
 		this.numero = numero;
 	}
@@ -272,6 +272,7 @@ public class Endereco extends Util
 	 * 
 	 * @return the tabela
 	 */
+	@Override
 	public TableTypeEnum getTabela()
 	{
 		return tabela;
@@ -282,6 +283,7 @@ public class Endereco extends Util
 	 * 
 	 * @param tabela the new tabela
 	 */
+	@Override
 	public void setTabela(TableTypeEnum tabela)
 	{
 		this.tabela = tabela;

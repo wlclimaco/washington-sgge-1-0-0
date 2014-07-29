@@ -72,7 +72,6 @@ qat.model.supermercado.page = {
 		}
 	},
 	gravar : function (_iId){
-	debugger;
 		if(_iId == 0){
 			var oData = new qat.model.reqSupermercado(null,qat.model.supermercado.page.callCreateObject(_iId) ,true,true);
 			rest_post_call('qat-sysmgmt-sample/services/rest/SupermercadoService/insertSupermercado', oData, qat.model.supermercado.page.fill_data, qat.model.supermercado.page.process_error);

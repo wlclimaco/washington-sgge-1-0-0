@@ -37,10 +37,6 @@
             <dd><input type="text" name="nomeProd" id="nomeProd" size="32" maxlength="200" /></dd>
         </dl>
         <dl>
-        	<dt><label for="descr">Descrição:</label></dt>
-            <dd><input type="text" name="descr" id="descr" size="32" maxlength="200" /></dd>
-        </dl>
-        <dl>
         <dt><label for="unimed">Unidade de Medida:</label></dt>
             <dd>
             	<select size="1" name="unimed" id="unimed">
@@ -106,6 +102,7 @@
 <script type="text/javascript" src="../commons/scripts/model/domain_objects.js"></script>
 <script type="text/javascript" src="../commons/scripts/widget/slick.pager.js"></script>
 <jsp:include page="../../commons/scripts/util/app_reuse_functions.js.jsp" flush="true"/>
+<jsp:include page="../../scripts/pages/produto/produto_mvc_bas_main.js.jsp" flush="true"/>
 <jsp:include page="../../scripts/pages/produto/preco_mvc_bas_main.js.jsp" flush="true"/>
 <jsp:include page="../../scripts/pages/produto/preco_mvc_bas_init.js.jsp" flush="true"/>
 </html>

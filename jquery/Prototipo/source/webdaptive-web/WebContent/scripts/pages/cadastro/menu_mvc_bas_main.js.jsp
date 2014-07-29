@@ -35,10 +35,10 @@ columns[0] = {id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:
 columns[1] = {id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
 columns[2] = {id:"id", name: procedure.grid.psak.title, field:"id", resizable:false, cssClass:"cell-center", width:75};
 columns[3] = {id:"nome", name: menu.grid.pnome.title, field:"nome", editor:Slick.Editors.Text};
-columns[4] = {id:"descricao", name: menu.grid.pdescricao.title, field:"descricao", editor:Slick.Editors.Text};
-columns[5] = {id:"produtos", name: menu.grid.pprodutos.title, field:"produtos",resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
-columns[6] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
-columns[7] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
+//columns[4] = {id:"descricao", name: menu.grid.pdescricao.title, field:"descricao", editor:Slick.Editors.Text};
+columns[4] = {id:"produtos", name: menu.grid.pprodutos.title, field:"produtos",resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
+columns[5] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
+columns[6] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
 
 //grid options
 var options =

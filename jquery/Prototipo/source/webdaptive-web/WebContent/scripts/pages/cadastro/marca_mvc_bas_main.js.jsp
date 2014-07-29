@@ -142,7 +142,6 @@ var options =
 
 		function exportCSVProd()
 		{
-			debugger;
 		    onMarcaDataLoading.notify({});
 			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos',{produto:{tabela:2,marca:{id:parseInt(valueGlobal),userId:'rod'},userId:'rod'}} , fill_dataCSV, process_error);
 		}

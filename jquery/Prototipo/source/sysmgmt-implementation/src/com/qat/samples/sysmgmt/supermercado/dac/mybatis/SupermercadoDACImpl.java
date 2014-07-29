@@ -135,7 +135,7 @@ public class SupermercadoDACImpl extends SqlSessionDaoSupport implements ISuperm
 		paramMap.put("nome", supermercado.getEnderecos().get(0).getNome());
 		paramMap.put("complemento", supermercado.getEnderecos().get(0).getComplemento());
 		paramMap.put("documentoid", supermercado.getDocumentos().get(0).getDocumenroid());
-		paramMap.put("usuarioid", supermercado.getDocumentos().get(0).getId());
+		paramMap.put("usuarioid", supermercado.getUserId());
 		paramMap.put("rginscmuni", supermercado.getDocumentos().get(0).getRgInc());
 		paramMap.put("cpfcnpj", supermercado.getDocumentos().get(0).getCpfCnpj());
 		paramMap.put("razao", supermercado.getDocumentos().get(0).getRazao());
