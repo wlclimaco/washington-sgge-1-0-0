@@ -9,10 +9,10 @@ $(document).ready(function ()
     });
 	$( "#menu" ).menu();
 	//sets up initial grid ...no data yet...but binds to the object that will fill it
-	pgrid = new Slick.Grid($("#prodGrid"), ploaderPro.dataProd, columns, options);
-	pgrid.setSelectionModel(new Slick.RowSelectionModel({selectActiveRow: false}));
-    pgrid.registerPlugin(checkboxSelector);
-	pgrid.onClick.subscribe(function (e, args) {
+	pgrid1 = new Slick.Grid($("#prodGrid"), ploaderPro.dataProd, columnss, options);
+	pgrid1.setSelectionModel(new Slick.RowSelectionModel({selectActiveRow: false}));
+    pgrid1.registerPlugin(checkboxSelector);
+	pgrid1.onClick.subscribe(function (e, args) {
         if ($(e.target).hasClass("btn")) {
 			var classs = $(e.target).attr('class');
 			var a = classs.split(' ');
@@ -58,10 +58,10 @@ $(document).ready(function ()
 		rest_post_call('qat-webdaptive/produto/api/produtoCSV', {}, null, null);
 	});
 
-    var columnpicker = new Slick.Controls.ColumnPicker(columns, pgrid, options);
+    var columnpicker = new Slick.Controls.ColumnPicker(columnss, pgrid1, options);
 	gridPager = new Slick.Controls.Pager(ploaderPro, $("#pager"));
 	gridPager.init();
-	setTimeout('pgrid.init()', 250);
+	setTimeout('pgrid1.init()', 250);
 
 	//this events fires to blockui while the data is retrieved
 	ploaderPro.onProDataLoading.subscribe(function()
@@ -73,13 +73,13 @@ $(document).ready(function ()
 	ploaderPro.onProDataLoaded.subscribe(function()
 	{
 		aRowChg.length=0;
-		pgrid.invalidateAllRows();
-		pgrid.updateRowCount();
-		pgrid.setSelectedRows([]);
-		pgrid.resetActiveCell();
-		pgrid.render();
+		pgrid1.invalidateAllRows();
+		pgrid1.updateRowCount();
+		pgrid1.setSelectedRows([]);
+		pgrid1.resetActiveCell();
+		pgrid1.render();
 		<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
-		pgrid.gotoCell(0,3,true);
+		pgrid1.gotoCell(0,3,true);
 		</sec:authorize>
 		//load grid pager control
 		gridPager.setPagingOptions({totalRows: pagingData.totalRowsAvailable, pageSize: pagingData.pageSize, pageNum: pagingData.startPage});
@@ -89,7 +89,7 @@ $(document).ready(function ()
 	});
 	<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
 	//checks & stores any rows numbers that change
-    pgrid.onCellChange.subscribe(function (e, args)
+    pgrid1.onCellChange.subscribe(function (e, args)
 	{
 		rowChg = args.row;
 		if (args.row != 0)

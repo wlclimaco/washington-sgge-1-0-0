@@ -62,14 +62,14 @@
     <result property="qnt" column="qnt"/>
     <association property="produtos" column="id" javaType="Integer" select="fetchCountEmbalagem"/>
     <association property="unimedid" column="unimedid" javaType="UniMed" select="fetchUniMedByCode" />
-    <collection property="acessos" column="id" select="ControleAcessMap.fetchAllControleBySupermercado" />
+    <collection property="acessos" column="id" select="ControleAcessMap.fetchAllControleByEmbalagem" />
   </resultMap>
 
   <resultMap id="UniMedResult" type="UniMed">
     <result property="id" column="id"/>
     <result property="nome" column="nome"/>
     <result property="sigla" column="sigla"/>
-    <collection property="acessos" column="id" select="ControleAcessMap.fetchAllControleBySupermercado" />
+    <collection property="acessos" column="id" select="ControleAcessMap.fetchAllControleByUnimed" />
   </resultMap>
 
 

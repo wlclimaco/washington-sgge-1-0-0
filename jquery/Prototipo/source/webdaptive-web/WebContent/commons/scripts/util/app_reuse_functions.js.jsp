@@ -1038,6 +1038,7 @@ function embalagem_fill_data(procResponse,data2)
 
 function produto_fill_data(procResponse,data2)
 {
+
 	data2[0] =
 	{
 		cellno:          0,

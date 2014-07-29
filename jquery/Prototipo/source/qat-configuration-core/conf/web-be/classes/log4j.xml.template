@@ -6,7 +6,7 @@
      configuration regardless of what level you set at the logger or root.  So
      if you set threshold="warn", levels higher (info, debug, trace, all) will be ignored. Ed
 -->
-<log4j:configuration debug="false" threshold="all">
+<log4j:configuration debug="false" threshold="off">
 
   <!-- param elements correspond to properties in the appender class.
        Use camel case when specifying them.

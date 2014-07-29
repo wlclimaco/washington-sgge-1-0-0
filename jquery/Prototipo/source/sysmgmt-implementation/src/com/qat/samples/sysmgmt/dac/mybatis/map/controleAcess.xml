@@ -33,6 +33,15 @@
    		 SELECT <include refid="allControleAcessColumns" /> FROM CONTROLE WHERE tabletype = 1 AND IDACAO = #{ID}
    </select>
 
+   <select id="fetchAllControleByEmbalagem" resultMap="ControleAcessResult">
+   		 SELECT <include refid="allControleAcessColumns" /> FROM CONTROLE WHERE tabletype = 14 AND IDACAO = #{ID}
+   </select>
+
+      <select id="fetchAllControleByUnimed" resultMap="ControleAcessResult">
+   		 SELECT <include refid="allControleAcessColumns" /> FROM CONTROLE WHERE tabletype = 7 AND IDACAO = #{ID}
+   </select>
+
+
     <select id="fetchAllControleByCliente" resultMap="ControleAcessResult">
    		 SELECT <include refid="allControleAcessColumns" /> FROM CONTROLE WHERE tabletype = 8 AND IDACAO = #{ID}
    </select>
