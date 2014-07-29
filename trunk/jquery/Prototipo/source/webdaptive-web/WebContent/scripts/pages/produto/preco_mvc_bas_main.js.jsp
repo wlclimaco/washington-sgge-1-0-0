@@ -4,7 +4,7 @@
 <script type="text/javascript">
 var aRowChg = new Array();
 var rowChg;
-var data = new Array();
+var dataPre = new Array();
 var pgrid;
 var availableTags = [];
 var gridPager;
@@ -195,38 +195,37 @@ var options =
 		var onProcDataLoaded = new EventHelper();
 
 		<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
-		function callInsertWS(_Id)
+		function callInsertWSPrec(_Id)
 		{
-			debugger;
 			onProcDataLoading.notify({});
 			if(_Id > 0){
 				var oData = callCreateObject(_Id);
-				var oData = new qat.model.reqProduto(null, oData, false, false);
-				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/updateProduto', oData, fill_data_2, process_error);
+				var oData = new qat.model.reqProduto(null, oData, true, true);
+				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/updateProduto', oData, ploaderPro.fill_data_3, process_error);
 			}else{
 				var oData = callCreateObject();
-				var oData = new qat.model.reqProduto(null, oData, false, false);
-				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/insertProduto', oData, fill_data_2, process_error);
+				var oData = new qat.model.reqProduto(null, oData, true, true);
+				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/insertProduto', oData, ploaderPro.fill_data_3, process_error);
 			}
 		}
 		</sec:authorize>
 
-		function callPagedFetchWS(_iPageSize, _iStartPage,iId)
+		function callPagedFetchWSPrec(_iPageSize, _iStartPage,iId)
 		{
 		    var oData = new qat.model.pagedInquiryRequest(null, _iPageSize, _iStartPage, true);
 			if(iId > 0)
 				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchProdutoById', {fetchId:iId}, fill_data, process_error)
 			else{
-				insertProduto_fill_data(null,data);
+				insertProduto_fill_data(null,dataPre);
 			}
 
 		}
 		function callCreateObject(_id)
 		{
-			var tmpLength = data.length;
+			var tmpLength = dataPre.length;
 			var oDataPreco =[];
 			for (var i=1; i < tmpLength; i++){
-				oDataPreco.push(new qat.model.preco(data[i].id, parseInt(_id), data[i].supermercadoid, null,data[i].preco, data[i].promocao,data[i].precopromo, null, null));
+				oDataPreco.push(new qat.model.preco(dataPre[i].id, parseInt(_id), dataPre[i].supermercadoid, null,dataPre[i].preco, dataPre[i].promocao,dataPre[i].precopromo, null, null));
 			}
 			return new qat.model.produto(parseInt(_id),
 									 null,
@@ -246,23 +245,23 @@ var options =
 
 		function fill_data(procResponse)
 		{
-			data = reuse_fill_data(procResponse,data,"insertproduto");
+			dataPre = reuse_fill_data(procResponse,dataPre,"insertproduto");
 			onProcDataLoaded.notify({});
 		}
 		function fill_data_2(procResponse)
 		{
 			$("#action-produto-dialog").dialog('close');
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos', {}, fill_data_3, process_error);
+			//rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos', {}, fill_data_3, process_error);
 			onProcDataLoaded.notify({});
 		}
 		function fill_data_3(procResponse)
 		{
-			data = reuse_fill_data(procResponse,data,"produto");
+			dataPre = reuse_fill_data(procResponse,dataPre,"produto");
 			onProcDataLoaded.notify({});
 		}
 		function fill_data2(datas)
 		{
-			data = datas;
+			dataPre = datas;
 			onProcDataLoaded.notify({});
 		}
 
@@ -272,9 +271,9 @@ var options =
 			onProcDataLoaded.notify({});
 		}
 
-		function isProcDataLoaded()
+		function isPrecDataLoaded()
 		{
-			if (data == undefined || data == null)
+			if (dataPre == undefined || dataPre == null)
 			{
 				return false;
 			}
@@ -283,15 +282,15 @@ var options =
 
 		return{
 			// properties
-			"data": data,
+			"data": dataPre,
 
 			// methods
-			"isProcDataLoaded": isProcDataLoaded,
-			"callPagedFetchWS": callPagedFetchWS,
+			"isPrecDataLoaded": isPrecDataLoaded,
+			"callPagedFetchWSPrec": callPagedFetchWSPrec,
 			<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
 
 			"fill_data2"  : fill_data2,
-			"callInsertWS": callInsertWS,
+			"callInsertWSPrec": callInsertWSPrec,
 			</sec:authorize>
 			// events
 			"onProcDataLoading": onProcDataLoading,
@@ -317,29 +316,29 @@ function requiredFieldValidator(value)
 function validateFields(rowValue)
 {
 
-	if (wd.core.isEmpty(data[rowValue].supermercadoid))
+	if (wd.core.isEmpty(dataPre[rowValue].supermercadoid))
 	{
 		pgrid.gotoCell(rowValue,3,true);
 		$(pgrid.getActiveCellNode()).addClass("invalid");
 		$(pgrid.getActiveCellNode()).stop(true,true).effect("highlight", {color:"red"}, 300);
 		wd.core.displayNotificationMessage('#StatusBar',procedure.requiredfield.msg, false, 'error', 5000);
 	}
-	else if (wd.core.isEmpty(data[rowValue].preco))
+	else if (wd.core.isEmpty(dataPre[rowValue].preco))
 	{
 		pgrid.gotoCell(rowValue,4,true);
 		$(pgrid.getActiveCellNode()).addClass("invalid");
 		$(pgrid.getActiveCellNode()).stop(true,true).effect("highlight", {color:"red"}, 300);
 		wd.core.displayNotificationMessage('#StatusBar',procedure.requiredfield.msg, false, 'error', 5000);
 	}
-	else if ((wd.core.isEmpty(data[rowValue].promocao))||(!wd.core.isEmpty(data[rowValue].promocao)))
+	else if ((wd.core.isEmpty(dataPre[rowValue].promocao))||(!wd.core.isEmpty(dataPre[rowValue].promocao)))
 	{
-		if(wd.core.isEmpty(data[rowValue].promocao)){
+		if(wd.core.isEmpty(dataPre[rowValue].promocao)){
 			pgrid.gotoCell(rowValue,5,true);
 			$(pgrid.getActiveCellNode()).addClass("invalid");
 			$(pgrid.getActiveCellNode()).stop(true,true).effect("highlight", {color:"red"}, 300);
 			wd.core.displayNotificationMessage('#StatusBar',procedure.requiredfield.msg, false, 'error', 5000);
-		}else if (data[rowValue].promocao == "1"){
-			if(wd.core.isEmpty(data[rowValue].precopromo)){
+		}else if (dataPre[rowValue].promocao == "1"){
+			if(wd.core.isEmpty(dataPre[rowValue].precopromo)){
 				pgrid.gotoCell(rowValue,6,true);
 				$(pgrid.getActiveCellNode()).addClass("invalid");
 				$(pgrid.getActiveCellNode()).stop(true,true).effect("highlight", {color:"red"}, 300);
@@ -363,27 +362,27 @@ $('#precoGrid').keyup(function(e)
 	{
 		if (rowChg >= 1 )
 		{
-			var data3 = data;
+			var data3 = dataPre;
 			data.operationSuccess = true;
-			ploaderPre.fill_data2(reuse_fill_data(data,data3,"preco"));
+			ploaderPre.fill_data2(reuse_fill_data(dataPre,data3,"preco"));
 		}
 		else
 		{
 			if (validateFields(0))
 			{
-				var data3 = data;
-				data.operationSuccess = true;
-				ploaderPre.fill_data2(reuse_fill_data(data,data3,"preco"));
+				var data3 = dataPre;
+				dataPre.operationSuccess = true;
+				ploaderPre.fill_data2(reuse_fill_data(dataPre,data3,"preco"));
 			}
 		}
 	}
 });
 
 $('#refreshpreco').click(function() {
-	ploaderPre.callPagedFetchWS(135);
+	ploaderPre.callPagedFetchWSPrec(135);
 });
 </sec:authorize>
 $('#listpreco').click(function() {
-	 ploaderPre.callPagedFetchWS(20,0);
+	 ploaderPre.callPagedFetchWSPrec(20,0);
 });
 </script>

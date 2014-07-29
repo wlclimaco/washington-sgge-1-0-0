@@ -41,7 +41,6 @@ qat.model.supermercado.pages  = {
 		if(oLista.length > 0){
 			var oData=[];
 			var id = parseInt($('#estado').val());
-			debugger;
 			if(acao == "addSup"){
 				for(var i = 0; i< oLista.length;i++ ){
 					preco = new qat.model.preco(0, oLista[i].id, id, null,0.0, 1,0.0, null, null);

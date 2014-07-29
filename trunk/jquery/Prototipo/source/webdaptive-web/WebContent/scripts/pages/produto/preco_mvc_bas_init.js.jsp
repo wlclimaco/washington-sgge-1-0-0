@@ -59,6 +59,6 @@ $(document).ready(function ()
 	</sec:authorize>
 	// load the Grid first time
 	tabval = ($.address.parameter('prodId'));
-	ploaderPre.callPagedFetchWS(20,0,tabval);
+	ploaderPre.callPagedFetchWSPrec(20,0,tabval);
 });
 </script>

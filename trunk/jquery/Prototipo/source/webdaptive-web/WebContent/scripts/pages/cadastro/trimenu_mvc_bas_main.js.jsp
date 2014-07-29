@@ -36,7 +36,6 @@ columns[1] = {id:"action", name: procedure.grid.act.title, field:"action", resiz
 columns[2] = {id:"id", name: procedure.grid.psak.title, field:"id", resizable:false, cssClass:"cell-center", width:75};
 columns[3] = {id:"nome", name:submenu.grid.psubmenu.title, field:"nome",  width:135, editable:true, cssClass:"pad-4-left", sortable:true, editor:Slick.Editors.completeTriMenu},
 columns[4] = {id:"descricao", name: trimenu.grid.ptrimenu.title, field:"descricao", editor:Slick.Editors.Text};
-
 //columns[6] = {id:"imagens", name: menu.grid.pimagens.title, field:"imagens", formatter: buttonFormat};
 columns[5] = {id:"produtos", name: menu.grid.pprodutos.title, field:"produtos",resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML};
 columns[6] = {id:"data", name: cidade.grid.pdata.title, field:"data"};

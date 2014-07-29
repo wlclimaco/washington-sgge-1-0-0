@@ -53,12 +53,8 @@
   </select>
 
  	<select id="fetchAllPrecosSup" parameterType="int" resultMap="PrecoResultProd">
-		select p.produtoid, p.nome, p.marca, p.menu, p.submenu, p.trimenu, p.unimed, p.precoid,
-            p.controleid, p.supermercadoid, p.codbarra, p.foto, p.descricao
-            from tabpreco t,produto p where p.produtoid = t.produtoid and t.supermercadoid = #{id}
-	    group by
-	     p.produtoid, p.nome, p.marca, p.menu, p.submenu, p.trimenu, p.unimed, p.precoid,
-         p.controleid, p.supermercadoid, p.codbarra, p.foto, p.descricao
+         select p.* from produto p,tabpreco t where p.produtoid = t.produtoid and t.supermercadoid = #{id}
+         order by nome asc
 	</select>
 
 

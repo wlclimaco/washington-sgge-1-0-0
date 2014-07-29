@@ -551,7 +551,7 @@ function menu_fill_data(procResponse,data2)
 		</sec:authorize>
 		{
 			if(procResponse.cadastros[oi].produtos != null){
-					var a =		procResponse.cadastros[oi].produtos.length;
+					var a =		procResponse.cadastros[oi].produtos;
 				}else{
 				a= 0;}
 				if (procResponse.cadastros[oi].acessos != null){
@@ -640,7 +640,7 @@ function marca_fill_data(procResponse,data2)
 		</sec:authorize>
 		{
 			if(procResponse.cadastros[oi].produtos != null){
-					var a =		procResponse.cadastros[oi].produtos.length;
+					var a =		procResponse.cadastros[oi].produtos;
 					var w=[];
 					w.push(a);
 					w.push(procResponse.cadastros[oi].id);
@@ -730,7 +730,7 @@ function submenu_fill_data(procResponse,data2)
 		</sec:authorize>
 		{
 			if(procResponse.cadastros[oi].produtos != null){
-					var a =		procResponse.cadastros[oi].produtos.length;
+					var a =		procResponse.cadastros[oi].produtos;
 					var w=[];
 					w.push(a);
 					w.push(procResponse.cadastros[oi].id);
@@ -820,7 +820,7 @@ function trimenu_fill_data(procResponse,data2)
 		</sec:authorize>
 		{
 			if(procResponse.cadastros[oi].produtos != null){
-					var a =		procResponse.cadastros[oi].produtos.length;
+					var a =		procResponse.cadastros[oi].produtos;
 					var w=[];
 					w.push(a);
 					w.push(procResponse.cadastros[oi].id);
@@ -1079,12 +1079,12 @@ function produto_fill_data(procResponse,data2)
 				a= 0;
 			}
 			if(procResponse.produtos[oi].menu != null){
-				var b =		procResponse.produtos[oi].menu.nome;
+				var b =		procResponse.produtos[oi].menu.descricao;
 			}else{
 				b= 0;
 			}
-			if(procResponse.produtos[oi].unimed != null){
-				var e =		procResponse.produtos[oi].unimed.nome;
+			if(procResponse.produtos[oi].embalagem != null){
+				var e =		procResponse.produtos[oi].embalagem.qnt + ' '+procResponse.produtos[oi].embalagem.unimedid.nome;
 			}else{
 				e= 0;
 			}
@@ -1103,16 +1103,16 @@ function produto_fill_data(procResponse,data2)
 			}
 			if (procResponse.produtos[oi].precos != null){
 				var count = procResponse.produtos[oi].precos.length;
-				if(procResponse.produtos[oi].precos[count-1] != null){
-					if(procResponse.produtos[oi].precos[count-1].supermercadoid != null)
-						var h =     procResponse.produtos[oi].precos[count-1].supermercadoid.superId
+				if(procResponse.produtos[oi].precos[0] != null){
+					if(procResponse.produtos[oi].precos[0].supermercadoid != null)
+						var h =     procResponse.produtos[oi].precos[0].supermercadoid.documentos[0].razao
 					else{
 						var h = "";
 					}
-					if(procResponse.produtos[oi].precos[count-1].promocao == true)
-						var j =     procResponse.produtos[oi].precos[count-1].precopromo
+					if(procResponse.produtos[oi].precos[0].promocao == true)
+						var j =     procResponse.produtos[oi].precos[0].precopromo
 					else
-						var j =     procResponse.produtos[oi].precos[count-1].preco
+						var j =     procResponse.produtos[oi].precos[0].preco
 				}else{
 					var h= "";
 					var j= "";
@@ -1126,7 +1126,7 @@ function produto_fill_data(procResponse,data2)
 
 				cellno:     i,
 				<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
-				action: 	"<a href='#' onclick='javascript:ploaderProd.callDeleteWS(" + procResponse.produtos[oi].id +");'>Delete</a>",
+				action: 	"<a href='#' onclick='javascript:ploaderPro.callDeleteWS(" + procResponse.produtos[oi].id +");'>Delete</a>",
 				</sec:authorize>
 				<sec:authorize ifAllGranted="ROLE_GUEST">
 				action: 'None',
@@ -1169,7 +1169,7 @@ function insertProduto_fill_data(procResponse,data2)
 		if(oResponse.cadastros[i].tableTypeEnumValue == 3){
 			marca  +=   '<option value="' + oResponse.cadastros[i].id + '">' + oResponse.cadastros[i].nome + '</option>';
 		}else if((oResponse.cadastros[i].tableTypeEnumValue == 4)||(oResponse.cadastros[i].tableTypeEnumValue == 5)||(oResponse.cadastros[i].tableTypeEnumValue == 6)){
-			menu   +=    '<option value="' + oResponse.cadastros[i].id + '">' + oResponse.cadastros[i].nome + '</option>';
+			menu   +=    '<option value="' + oResponse.cadastros[i].id + '">' + oResponse.cadastros[i].descricao + '</option>';
 		}
       }
       $("select#marca").html(marca);

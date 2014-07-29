@@ -38,13 +38,13 @@ BODY {
 <body onload='init();'>
 <div class="login">
 	<form id="loginForm" name="loginForm" action="j_spring_security_check" method="post">
-		<div id="login-warning" class="login-msg">This is a private network all unauthorized use will be prosecuted to the fullest extent of the law.</div>
-		<div id="uidlabel" class="login-label">Username</div>
+		<div id="login-warning" class="login-msg">Esta é uma rede privada todo o uso não autorizado serão processados ​​em toda a extensão da lei.</div>
+		<div id="uidlabel" class="login-label">Usuario</div>
 		<div class="login-data"><input id="j_username" name="j_username" type="text" size=17 maxlength=25 tabindex="1" value=""/></div>
-		<div id="pwdlabel" class="login-label">Password</div>
+		<div id="pwdlabel" class="login-label">Senha</div>
 		<div class="login-data"><input id="j_password" name="j_password" type="password" size=17 maxlength=25 tabindex="2" value=""></div>
 		<div class="login-buttons"><input type="submit" value="Login" />&nbsp;&nbsp;<input type="reset" value="Reset" /></div>
-		<div id="login-error" class="login-error-msg">Please Login.</div>
+		<div id="login-error" class="login-error-msg">Por Favor Faça Login.</div>
 	</form>
 </div>
 <script type="text/javascript">

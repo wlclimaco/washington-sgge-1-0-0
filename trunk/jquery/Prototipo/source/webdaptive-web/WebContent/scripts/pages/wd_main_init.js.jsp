@@ -213,7 +213,7 @@ head(function()
 	            });
 
 				//Set WebDaptive Footer
-				$('#footer').html("Copyright &copy; QAT Global 1995-" + (new Date().getFullYear()) + ". All rights reserved.");
+				$('#footer').html("Copyright &copy; " + (new Date().getFullYear()) + ". .");
 			}
 		});
 	});

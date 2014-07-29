@@ -20,7 +20,7 @@
     <result property="foto" column="foto"/>
     <association property="marca" column="marca" javaType="Cadastro" select="fetchMarcaByCode" />
     <association property="menu" column="menu" javaType="Cadastro" select="fetchMenuByCode" />
-    <association property="embalagem" column="unimed" javaType="Embalagem" select="fetchUniMedByEmbalagem" />
+    <association property="embalagem" column="embalagem" javaType="Embalagem" select="fetchUniMedByEmbalagem" />
     <collection property="precos" column="produtoid" select="PrecoMap.fetchPrecoByProduto" />
     <collection property="acessos" column="produtoid" select="ControleAcessMap.fetchControleAcessByProduto" />
   </resultMap>
@@ -116,26 +116,20 @@
 
 
   <select id="fetchAllProdutosBySupermercado" parameterType="int" resultMap="ProdutoResult2">
-	select p.produtoid,p.nome,p.marca,p.menu,p.submenu,p.trimenu,p.unimed,p.precoid,p.controleid,p.supermercadoid,p.codbarra,p.foto,p.descricao
-	from produto p ,tabpreco t ,supermercado s
-	where
-	      t.supermercadoid = s.supermercadoid and
-	      p.produtoid = t.produtoid and
-	      s.supermercadoid = #{id}
-	group by p.produtoid,p.nome,p.marca,p.menu,p.submenu,p.trimenu,p.unimed,p.precoid,p.controleid,p.supermercadoid,p.codbarra,p.foto,p.descricao
+	select p.* from produto p,tabpreco t where p.produtoid = t.produtoid and t.supermercadoid = #{id}
 	order by p.nome
     </select>
 
     <select id="fetchMarcaByCode" parameterType="int" resultMap="CadastroResults">
 	    SELECT
 	    <include refid="allCadastroColumns" />
-	    FROM cadastro where acao = 3 and cadastroid = #{id}  ORDER BY cadastroid ASC
+	    FROM cadastro where acao = 3 and cadastroid = #{id}  ORDER BY nome ASC
     </select>
 
     <select id="fetchProdutosByMenu" parameterType="int" resultMap="ProdutoResult">
 	    SELECT
 	    <include refid="allProdutoColumns" />
-	    FROM produto where menu = #{id}  ORDER BY PRODUTOID ASC
+	    FROM produto where menu = #{id}  ORDER BY nome ASC
     </select>
 
      <select id="fetchProdutosByMarca" parameterType="int" resultMap="ProdutoResult">
@@ -144,61 +138,67 @@
 	    FROM produto where marca = #{id} or
 	    				   MENU = #{id} or
 	    				   UNIMED = #{id}
-	    				 ORDER BY PRODUTOID ASC
+	    				 ORDER BY nome ASC
     </select>
 
      <select id="fetchProdutosBySubMenu" parameterType="int" resultMap="ProdutoResult">
 	    SELECT
 	    <include refid="allProdutoColumns" />
-	    FROM produto where submenu = #{id}  ORDER BY PRODUTOID ASC
+	    FROM produto where submenu = #{id}  ORDER BY nome ASC
     </select>
 
     <select id="fetchProdutosByTriMenu" parameterType="int" resultMap="ProdutoResult">
 	    SELECT
 	    <include refid="allProdutoColumns" />
-	    FROM produto where trimenu = #{id}  ORDER BY PRODUTOID ASC
+	    FROM produto where trimenu = #{id}  ORDER BY nome ASC
     </select>
 
     <select id="fetchProdutosByUnimed" parameterType="int" resultMap="ProdutoResult">
 	    SELECT
 	    <include refid="allProdutoColumns" />
-	    FROM produto where unimed = #{id}  ORDER BY PRODUTOID ASC
+	    FROM produto where unimed = #{id}  ORDER BY nome ASC
     </select>
 
     <select id="fetchMenuByCode" parameterType="int" resultMap="CadastroResults">
 	    SELECT
 	    <include refid="allCadastroColumns" />
-	    FROM cadastro where acao in(4,5,6) and cadastroid = #{id}  ORDER BY cadastroid ASC
+	    FROM cadastro where acao in(4,5,6) and cadastroid = #{id}  ORDER BY nome ASC
+    </select>
+
+    <select id="fetchMenuByProduto" parameterType="int" resultMap="CadastroResults">
+	    SELECT
+	    <include refid="allCadastroColumns" />
+	    FROM cadastro where acao in(4,5,6)  ORDER BY nome ASC
     </select>
 
     <select id="fetchSubMenuByCode" parameterType="int" resultMap="CadastroResult">
 	    SELECT
 	    <include refid="allCadastroColumns" />
-	    FROM cadastro where acao = 3 and cadastroid = #{id}  ORDER BY cadastroid ASC
+	    FROM cadastro where acao = 3 and cadastroid = #{id}  ORDER BY nome ASC
     </select>
 
     <select id="fetchTriMenuByCode" parameterType="int" resultMap="CadastroResult">
 	    SELECT
 	    <include refid="allCadastroColumns" />
-	    FROM cadastro where acao = 4 and cadastroid = #{id}  ORDER BY cadastroid ASC
+	    FROM cadastro where acao = 4 and cadastroid = #{id}  ORDER BY nome ASC
     </select>
 
     <select id="fetchUniMedByCode" parameterType="int" resultMap="UniMedResult">
 	    SELECT
 	    <include refid="allUniMedColumns" />
-	    FROM unimed where id = #{id}  ORDER BY id DESC
+	    FROM unimed where id = #{id}  ORDER BY nome DESC
     </select>
 
   <select id="fetchAllCadastro" parameterType="Cadastro" resultMap="CadastroResult">
     SELECT
     <include refid="allCadastroColumns" />
-    FROM cadastro where acao = #{tableTypeEnumValue}} ORDER BY cadastroid ASC
+    FROM cadastro where acao = #{tableTypeEnumValue}} ORDER BY nome ASC
   </select>
 
    <select id="fetchAllProduto" parameterType="Produto" resultMap="ProdutoResult">
     SELECT
     <include refid="allProdutoColumns" />
-    FROM produto  ORDER BY ID ASC
+    FROM produto  ORDER BY nome ASC
   </select>
 
   <select id="fetchAllCadastroPagedBatch" parameterType="Cadastro" resultMap="CadastroResult">
@@ -242,7 +242,7 @@
   <select id="fetchAllProdutos" parameterType="ProdutoInquiryRequest" resultMap="ProdutoResult">
 		SELECT <include refid="allProdutoColumns" />
    		  FROM PRODUTO
-   		  ORDER BY produtoid ASC
+   		  ORDER BY nome ASC
   </select>
 
    <select id="fetchAllProdutosSupermercado" parameterType="ProdutoInquiryRequest" resultMap="ProdutoResult">
@@ -255,7 +255,7 @@
 			<if test="produto.nome != null">AND nome = #{produto.nome}</if>
 			<if test="produto.unimed.id != null">AND unimed = #{produto.unimed.id}</if>
 		</where>
-   		  ORDER BY produtoid ASC
+   		  ORDER BY nome ASC
   </select>
 
   <select id="fetchAllCadastros" parameterType="Cadastro" resultMap="CadastroResult">
@@ -267,7 +267,7 @@
 			<if test="nome != null">AND nome = #{nome}</if>
 
 		</where>
-   		  ORDER BY cadastroid ASC
+   		  ORDER BY nome ASC
   </select>
 
   <select id="fetchAllCadastrosTotal" parameterType="Cadastro" resultMap="CadastroResult">
@@ -366,7 +366,7 @@
 			<if test="qnt != null">and qnt = #{qnt}</if>
 
 		</where>
-   		  ORDER BY id DESC
+   		  ORDER BY qnt ASC
   </select>
 
   <select id="fetchAllUniMeds" parameterType="UniMed" resultMap="UniMedResult">

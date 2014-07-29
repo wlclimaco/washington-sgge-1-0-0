@@ -9,7 +9,7 @@ $(document).ready(function ()
     });
 	$( "#menu" ).menu();
 	//sets up initial grid ...no data yet...but binds to the object that will fill it
-	pgrid = new Slick.Grid($("#prodGrid"), ploaderPro.data, columns, options);
+	pgrid = new Slick.Grid($("#prodGrid"), ploaderPro.dataProd, columns, options);
 	pgrid.setSelectionModel(new Slick.RowSelectionModel({selectActiveRow: false}));
     pgrid.registerPlugin(checkboxSelector);
 	pgrid.onClick.subscribe(function (e, args) {
@@ -32,7 +32,7 @@ $(document).ready(function ()
 			modal: true,
 			buttons: {
 				'Gravar': function() {
-					ploaderPre.callInsertWS(row);
+					ploaderPre.callInsertWSPrec(row);
 				},
 				Cancel: function() {
 					$(this).dialog('close');
@@ -64,13 +64,13 @@ $(document).ready(function ()
 	setTimeout('pgrid.init()', 250);
 
 	//this events fires to blockui while the data is retrieved
-	ploaderPro.onProcDataLoading.subscribe(function()
+	ploaderPro.onProDataLoading.subscribe(function()
 	{
 		wd.core.blockUIMessage('div.ui-layout-center',true,true,wdloading.title,wdloading.msg);
 	});
 
 	//this events fires to unblockui when the data is retruned and fills the grid
-	ploaderPro.onProcDataLoaded.subscribe(function()
+	ploaderPro.onProDataLoaded.subscribe(function()
 	{
 		aRowChg.length=0;
 		pgrid.invalidateAllRows();
