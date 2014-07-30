@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
-	response.setContentType("text/html; charset=iso-8859-1");
+	response.setContentType("text/html; charset=utf-8");
 	response.setHeader("Cache-Control", "no-cache, private, must-revalidate, max-stale=0, post-check=0, pre-check=0 no-store"); // HTTP 1.1.
 	response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
 	response.setDateHeader("Expires", 0); // Proxies.
@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>WebDaptive-jDaptive Login</title>
+<title>TIA PECHINCHA</title>
 <style type="text/css">
 BODY {
 	FONT-FAMILY: Arial, Helvetica; FONT-SIZE: 100%
