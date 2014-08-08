@@ -162,12 +162,48 @@ var options =
 			dataProd = reuse_fill_data(procResponse,dataProd,"produto");
 			onProDataLoaded.notify({});
 		}
+		function exportCSVProd(_iPageSize, _iStartPage)
+		{
+			var oData = new qat.model.pagedInquiryRequest(null, _iPageSize, _iStartPage, true);
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos', {produto:{tabela:1,userId:'rod'}}, fill_dataCSV,  process_error);
+			onProDataLoaded.notify({});
+		}
+
+		function fill_dataCSV(procResponse)
+		{
+			onProDataLoading.notify({});
+			dataProd = reuse_fill_data(procResponse,dataProd,"produto");
+			qat.model.supermercado.pages.JSONToCSVConvertor(dataProd, "Produtos", true);
+			onProDataLoaded.notify({});
+
+		}
 		function fill_data_3(procResponse)
 		{
 			$("#action-produto-dialog").dialog('close');
 			dataProd = reuse_fill_data(procResponse,dataProd,"produto");
 			debugger;
 			onProDataLoaded.notify({});
+		}
+		function fnFillFilter (oPreLoad) {
+
+			var filterUtil = qat.model.filter.filters;
+			var filters = {
+				query_search 	: filterUtil.query_search,
+				group_type 		: filterUtil.group_type
+			};
+
+			// search hint 'Search Groups'
+			filterUtil.query_search.inputs.query.hint = "group.page.searchGroups";
+
+			qat.model.filter.init(oPreLoad, filters, function(oResponse) {
+
+				$("#w-filters").filters({
+					tagsDiv : ".filter-results-containter div.first",
+					title : "filter.group.label",
+					table : 'qat.model.pages.group.groupTable',
+					filters : oResponse
+				});
+			});
 		}
 		return{
 			// properties
@@ -180,6 +216,8 @@ var options =
 			"callDeleteWS":callDeleteWS,
 			"callInsertWS":callInsertWS,
 			"fill_data_3":fill_data_3,
+			"fnFillFilter":fnFillFilter,
+			"exportCSVProd":exportCSVProd,
 			</sec:authorize>
 			// events
 			"onProDataLoading": onProDataLoading,

@@ -13,7 +13,7 @@ head(function()
 			cache: false
 		});
 		//long polling every 3 seconds
-	    setInterval(getMessages, 3000);
+
 	  	//adding to async data in the backend
 	    $('#send_async').click(function() {
 	    		$.ajax({

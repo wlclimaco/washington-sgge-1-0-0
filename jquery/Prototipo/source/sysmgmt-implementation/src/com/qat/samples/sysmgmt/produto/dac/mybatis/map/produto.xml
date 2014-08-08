@@ -77,7 +77,7 @@
   <select id="fetchUniMedByEmbalagem" parameterType="int" resultMap="EmbalagemResult">
 	    SELECT
 	    <include refid="allEmbalagemColumns" />
-	    FROM embalagem where id = #{id}
+	    FROM embalagem where id = #{id} order by nome,qnt
     </select>
 
   <select id="fetchCountProduto" parameterType="Integer" resultType="Integer">

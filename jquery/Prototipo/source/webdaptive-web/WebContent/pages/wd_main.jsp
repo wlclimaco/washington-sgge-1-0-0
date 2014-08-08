@@ -57,7 +57,22 @@
 
 				<h3><a href="#Maps" rel="address:#Maps">Filtros</a></h3>
 				<div>
-					qat_mvc_tabs.jsp
+					<!-- START filter bar -->
+					<div class="filter-results-containter">
+						<div class="yui-ge">
+							<div class="yui-u first hide">
+								<ul class="filter-container">
+									<li>
+										<a href="" class="clear">
+											<spring:message code="commons.pages.resetfilters" />
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="results yui-u"></div>
+						</div>
+					</div>
+					<!-- END -->
 				</div>
 			</div>
 	</div>
@@ -129,7 +144,9 @@ if (head.desktop)
 		   "../commons/scripts/model/user_context.js",
            "../commons/scripts/model/request_objects.js",
 		   "../commons/scripts/model/domain_objects.js",
-           "../commons/scripts/widget/slick.pager.js"
+           "../commons/scripts/widget/slick.pager.js",
+           "../commons/scripts/widget/widget_filter_1.0.js",
+           "../commons/scripts/widget/filter_util.js"
 
 	);
 }
