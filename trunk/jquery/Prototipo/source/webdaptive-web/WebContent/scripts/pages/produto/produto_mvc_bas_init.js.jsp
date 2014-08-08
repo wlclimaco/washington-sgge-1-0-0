@@ -55,7 +55,8 @@ $(document).ready(function ()
 	$("#qatmvctabsProd").on("click", ".csv", function(e) {
 
 		e.preventDefault();
-		rest_post_call('qat-webdaptive/produto/api/produtoCSV', {}, null, null);
+		ploaderPro.exportCSVProd();
+
 	});
 
     var columnpicker = new Slick.Controls.ColumnPicker(columnss, pgrid1, options);
@@ -102,6 +103,7 @@ $(document).ready(function ()
 		}
     });
 	</sec:authorize>
+//	ploaderPro.fnFillFilter();
 
 	// load the Grid first time
 	ploaderPro.callPagedFetchWS(20,0);

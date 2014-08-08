@@ -53,5 +53,6 @@
 <jsp:include page="../../commons/scripts/util/app_reuse_functions.js.jsp" flush="true"/>
 <jsp:include page="../../scripts/pages/produto/produto_mvc_bas_main.js.jsp" flush="true"/>
 <jsp:include page="../../scripts/pages/produto/produto_mvc_bas_init.js.jsp" flush="true"/>
+<jsp:include page="../../scripts/util/util_mvc_bas_main.js.jsp" flush="true"/>
 </body>
 </html>
