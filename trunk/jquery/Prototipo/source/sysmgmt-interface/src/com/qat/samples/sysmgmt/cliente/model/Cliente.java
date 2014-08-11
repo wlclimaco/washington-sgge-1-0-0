@@ -263,6 +263,18 @@ public class Cliente extends Util
 		type = ClienteTypeEnum.enumForValue(tableTypeEnumValue);
 	}
 
+	public Cliente(Integer clienteid)
+	{
+		super();
+		this.clienteid = clienteid;
+	}
+
+	public Cliente(String nome)
+	{
+		super();
+		this.nome = nome;
+	}
+
 	@Override
 	public String toString()
 	{

@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlElement;
 
 import com.qat.framework.model.response.InquiryResponse;
 import com.qat.samples.sysmgmt.produto.model.Produto;
+import com.qat.samples.sysmgmt.util.Criteria;
 
 /**
  * The Model Object ProdutoResponse.
@@ -17,6 +18,9 @@ public class ProdutoResponse extends InquiryResponse
 	/** The produto. */
 	@XmlElement(nillable = true)
 	private List<Produto> produto;
+
+	/** The criteria. */
+	private List<Criteria> criteria;
 
 	/**
 	 * Gets the produto.
@@ -38,6 +42,26 @@ public class ProdutoResponse extends InquiryResponse
 		this.produto = produto;
 	}
 
+	public List<Produto> getProduto()
+	{
+		return produto;
+	}
+
+	public void setProduto(List<Produto> produto)
+	{
+		this.produto = produto;
+	}
+
+	public List<Criteria> getCriteria()
+	{
+		return criteria;
+	}
+
+	public void setCriteria(List<Criteria> criteria)
+	{
+		this.criteria = criteria;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see com.qat.framework.model.response.InquiryResponse#addResults(java.util.Collection)
@@ -51,11 +75,11 @@ public class ProdutoResponse extends InquiryResponse
 	@Override
 	public String toString()
 	{
-		// return some interesting information for logging/debugging
-		// avoid personally identifying information
-		return "ProdutoResponse [getProdutos()=" + getProdutos() + ", getResultsSetInfo()=" + getResultsSetInfo()
-				+ ", getMessageList()=" + getMessageList()
-				+ ", isOperationSuccess()=" + isOperationSuccess() + "]";
+		return "ProdutoResponse [getProdutos()=" + getProdutos() + ", getProduto()=" + getProduto()
+				+ ", getCriteria()=" + getCriteria() + ", getResultsSetInfo()=" + getResultsSetInfo()
+				+ ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()=" + getMessageList()
+				+ ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()=" + isOperationSuccess()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }

@@ -2,6 +2,7 @@ package com.qat.samples.sysmgmt.produto.model.request;
 
 import com.qat.framework.model.request.InquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.Produto;
+import com.qat.samples.sysmgmt.util.Criteria;
 
 /**
  * The Model Object PagedInquiryRequest.
@@ -12,12 +13,25 @@ public class ProdutoInquiryRequest extends InquiryRequest
 	/** The cadastro. */
 	private Produto produto;
 
+	/** The criteria. */
+	private Criteria criteria;
+
 	/**
 	 * Instantiates a new cadastro inquiry request.
 	 */
 	public ProdutoInquiryRequest()
 	{
 
+	}
+
+	public Criteria getCriteria()
+	{
+		return criteria;
+	}
+
+	public void setCriteria(Criteria criteria)
+	{
+		this.criteria = criteria;
 	}
 
 	/**
@@ -51,14 +65,11 @@ public class ProdutoInquiryRequest extends InquiryRequest
 		this.produto = produto;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString()
 	{
-		return "ProdutoInquiryRequest [getProduto()=" + getProduto() + ", toString()=" + super.toString() + "]";
+		return "ProdutoInquiryRequest [getCriteria()=" + getCriteria() + ", getProduto()=" + getProduto()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }

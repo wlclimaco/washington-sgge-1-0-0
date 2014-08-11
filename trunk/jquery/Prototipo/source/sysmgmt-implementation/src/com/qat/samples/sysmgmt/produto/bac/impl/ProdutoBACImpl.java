@@ -12,6 +12,7 @@ import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.model.response.InternalResponseLocal;
 import com.qat.samples.sysmgmt.produto.bac.IProdutoBAC;
+import com.qat.samples.sysmgmt.produto.bad.ProdutoBAD;
 import com.qat.samples.sysmgmt.produto.dac.IProdutoDAC;
 import com.qat.samples.sysmgmt.produto.model.Cadastro;
 import com.qat.samples.sysmgmt.produto.model.Embalagem;
@@ -21,6 +22,7 @@ import com.qat.samples.sysmgmt.produto.model.UniMed;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.EmbalagemInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
+import com.qat.samples.sysmgmt.util.Criteria;
 import com.qat.samples.sysmgmt.util.TableTypeEnum;
 
 /**
@@ -291,7 +293,24 @@ public class ProdutoBACImpl implements IProdutoBAC
 		}
 		else
 		{
-			response.getResultsList().addAll(getProdutoDAC().fetchAllProdutos(request));
+			if (request.getCriteria().getViews() == true)
+			{
+				CadastroInquiryRequest requestCadastro =
+						new CadastroInquiryRequest(request.getCriteria().getCadastros().get(0));
+				Criteria criteria = new Criteria();
+				criteria.setCadastros(getProdutoDAC().fetchAllCadastros(requestCadastro));
+				criteria.setEmbalagens(getProdutoDAC().fetchAllEmbalagems(new EmbalagemInquiryRequest()));
+				response.getResultsList().addAll(getProdutoDAC().fetchAllProdutos(request));
+
+			}
+			else
+			{
+
+				response.getResultsList().addAll(
+						getProdutoDAC().fetchAllProdutos(
+								ProdutoBAD.MontarFiltrosProd(request.getCriteria().getFilters())));
+			}
+
 		}
 
 		return response;

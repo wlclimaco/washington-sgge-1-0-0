@@ -1,7 +1,10 @@
 package com.qat.samples.sysmgmt.produto.model.request;
 
+import java.util.List;
+
 import com.qat.framework.model.request.InquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.Cadastro;
+import com.qat.samples.sysmgmt.util.Criteria;
 
 /**
  * The Model Object PagedInquiryRequest.
@@ -11,6 +14,9 @@ public class CadastroInquiryRequest extends InquiryRequest
 
 	/** The cadastro. */
 	private Cadastro cadastro;
+
+	/** The criteria. */
+	private List<Criteria> criteria;
 
 	/**
 	 * Instantiates a new cadastro inquiry request.
@@ -51,14 +57,21 @@ public class CadastroInquiryRequest extends InquiryRequest
 		this.cadastro = cadastro;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	public List<Criteria> getCriteria()
+	{
+		return criteria;
+	}
+
+	public void setCriteria(List<Criteria> criteria)
+	{
+		this.criteria = criteria;
+	}
+
 	@Override
 	public String toString()
 	{
-		return "CadastroInquiryRequest [getCadastro()=" + getCadastro() + ", toString()=" + super.toString() + "]";
+		return "CadastroInquiryRequest [getCadastro()=" + getCadastro() + ", getCriteria()=" + getCriteria()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }

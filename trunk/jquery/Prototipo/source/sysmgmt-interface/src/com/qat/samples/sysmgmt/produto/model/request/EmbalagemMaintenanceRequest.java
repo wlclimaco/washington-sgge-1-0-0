@@ -1,9 +1,12 @@
 package com.qat.samples.sysmgmt.produto.model.request;
 
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlElement;
 
 import com.qat.framework.model.request.MaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.Embalagem;
+import com.qat.samples.sysmgmt.util.Criteria;
 
 /**
  * The Class EmbalagemMaintenanceRequest.
@@ -14,6 +17,9 @@ public class EmbalagemMaintenanceRequest extends MaintenanceRequest
 	/** The embalagem. */
 	@XmlElement(nillable = true)
 	private Embalagem embalagem;
+
+	/** The criteria. */
+	private List<Criteria> criteria;
 
 	/**
 	 * The return list.
@@ -111,16 +117,22 @@ public class EmbalagemMaintenanceRequest extends MaintenanceRequest
 		this.returnListPaged = returnListPaged;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	public List<Criteria> getCriteria()
+	{
+		return criteria;
+	}
+
+	public void setCriteria(List<Criteria> criteria)
+	{
+		this.criteria = criteria;
+	}
+
 	@Override
 	public String toString()
 	{
 		return "EmbalagemMaintenanceRequest [getEmbalagem()=" + getEmbalagem() + ", getReturnList()=" + getReturnList()
-				+ ", getReturnListPaged()=" + getReturnListPaged()
-				+ ", getUserContext()=" + getUserContext() + "]";
+				+ ", getReturnListPaged()=" + getReturnListPaged() + ", getCriteria()=" + getCriteria()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }

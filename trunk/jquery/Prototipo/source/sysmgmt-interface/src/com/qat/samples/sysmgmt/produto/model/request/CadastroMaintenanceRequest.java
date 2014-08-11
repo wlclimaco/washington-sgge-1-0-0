@@ -1,9 +1,12 @@
 package com.qat.samples.sysmgmt.produto.model.request;
 
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlElement;
 
 import com.qat.framework.model.request.MaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.Cadastro;
+import com.qat.samples.sysmgmt.util.Criteria;
 
 /**
  * The Class CadastroMaintenanceRequest.
@@ -14,6 +17,9 @@ public class CadastroMaintenanceRequest extends MaintenanceRequest
 	/** The cadastro. */
 	@XmlElement(nillable = true)
 	private Cadastro cadastro;
+
+	/** The criteria. */
+	private List<Criteria> criteria;
 
 	/**
 	 * The return list.
@@ -111,16 +117,22 @@ public class CadastroMaintenanceRequest extends MaintenanceRequest
 		this.returnListPaged = returnListPaged;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	public List<Criteria> getCriteria()
+	{
+		return criteria;
+	}
+
+	public void setCriteria(List<Criteria> criteria)
+	{
+		this.criteria = criteria;
+	}
+
 	@Override
 	public String toString()
 	{
 		return "CadastroMaintenanceRequest [getCadastro()=" + getCadastro() + ", getReturnList()=" + getReturnList()
-				+ ", getReturnListPaged()=" + getReturnListPaged()
-				+ ", getUserContext()=" + getUserContext() + "]";
+				+ ", getReturnListPaged()=" + getReturnListPaged() + ", getCriteria()=" + getCriteria()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }

@@ -52,6 +52,31 @@ public class Cidade extends Util
 		this.cidade = cidade;
 	}
 
+	public Cidade(Integer cidadeId)
+	{
+		super();
+		this.cidadeId = cidadeId;
+	}
+
+	public Cidade(String cidade)
+	{
+		super();
+		this.cidade = cidade;
+	}
+
+	public Cidade(String estado, String cidade, Integer cidadeId)
+	{
+		super();
+		this.estado = estado;
+		this.cidade = cidade;
+		this.cidadeId = cidadeId;
+	}
+
+	public Cidade()
+	{
+		super();
+	}
+
 	@Override
 	public String toString()
 	{

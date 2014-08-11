@@ -11,7 +11,7 @@ import com.qat.framework.model.Tenant;
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "Util", propOrder = {"acessos", "userId", "tenant", "userRole", "tabela", "status"})
+@XmlType(name = "Util", propOrder = {"acessos", "userId", "tenant", "userRole", "tabela", "status", "stringIds"})
 public class Util extends QATModelOL
 {
 
@@ -26,6 +26,8 @@ public class Util extends QATModelOL
 
 	/** The user role. */
 	String userRole;
+
+	String stringIds;
 
 	/** The tabela. */
 	TableTypeEnum tabela;
@@ -206,12 +208,22 @@ public class Util extends QATModelOL
 		this.status = status;
 	}
 
+	public String getStringIds()
+	{
+		return stringIds;
+	}
+
+	public void setStringIds(String stringIds)
+	{
+		this.stringIds = stringIds;
+	}
+
 	@Override
 	public String toString()
 	{
 		return "Util [getUserId()=" + getUserId() + ", getTenant()=" + getTenant() + ", getUserRole()=" + getUserRole()
 				+ ", getAcessos()=" + getAcessos() + ", getTabela()=" + getTabela() + ", getStatus()=" + getStatus()
-				+ ", toString()=" + super.toString() + "]";
+				+ ", getStringIds()=" + getStringIds() + ", toString()=" + super.toString() + "]";
 	}
 
 }
