@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlElement;
 
 import com.qat.framework.model.response.InquiryResponse;
 import com.qat.samples.sysmgmt.produto.model.Cadastro;
+import com.qat.samples.sysmgmt.util.Criteria;
 
 /**
  * The Model Object CadastroResponse.
@@ -17,6 +18,8 @@ public class CadastroResponse extends InquiryResponse
 	/** The cadastro. */
 	@XmlElement(nillable = true)
 	private List<Cadastro> cadastro;
+
+	private List<Criteria> criteria;
 
 	/**
 	 * Gets the cadastro.
@@ -48,14 +51,34 @@ public class CadastroResponse extends InquiryResponse
 		setCadastros((List<Cadastro>)coll);
 	}
 
+	public List<Cadastro> getCadastro()
+	{
+		return cadastro;
+	}
+
+	public void setCadastro(List<Cadastro> cadastro)
+	{
+		this.cadastro = cadastro;
+	}
+
+	public List<Criteria> getCriteria()
+	{
+		return criteria;
+	}
+
+	public void setCriteria(List<Criteria> criteria)
+	{
+		this.criteria = criteria;
+	}
+
 	@Override
 	public String toString()
 	{
-		// return some interesting information for logging/debugging
-		// avoid personally identifying information
-		return "CadastroResponse [getCadastros()=" + getCadastros() + ", getResultsSetInfo()=" + getResultsSetInfo()
-				+ ", getMessageList()=" + getMessageList()
-				+ ", isOperationSuccess()=" + isOperationSuccess() + "]";
+		return "CadastroResponse [getCadastros()=" + getCadastros() + ", getCadastro()=" + getCadastro()
+				+ ", getCriteria()=" + getCriteria() + ", getResultsSetInfo()=" + getResultsSetInfo()
+				+ ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()=" + getMessageList()
+				+ ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()=" + isOperationSuccess()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }

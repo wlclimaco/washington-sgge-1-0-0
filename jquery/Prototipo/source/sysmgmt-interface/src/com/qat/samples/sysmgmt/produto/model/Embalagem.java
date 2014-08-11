@@ -153,6 +153,18 @@ public class Embalagem extends Util
 		this.qnt = qnt;
 	}
 
+	public Embalagem(Integer id)
+	{
+		super();
+		this.id = id;
+	}
+
+	public Embalagem(String nome)
+	{
+		super();
+		this.nome = nome;
+	}
+
 	/**
 	 * To string.
 	 * 

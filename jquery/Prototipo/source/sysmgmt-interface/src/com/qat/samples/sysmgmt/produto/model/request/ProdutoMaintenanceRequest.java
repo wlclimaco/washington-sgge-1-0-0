@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlElement;
 
 import com.qat.framework.model.request.MaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.Produto;
+import com.qat.samples.sysmgmt.util.Criteria;
 
 /**
  * The Class ProdutoMaintenanceRequest.
@@ -18,6 +19,8 @@ public class ProdutoMaintenanceRequest extends MaintenanceRequest
 	@XmlElement(nillable = true)
 	private Produto produto;
 	private List<Produto> produtos;
+	/** The criteria. */
+	private List<Criteria> criteria;
 
 	/**
 	 * The return list.
@@ -125,6 +128,16 @@ public class ProdutoMaintenanceRequest extends MaintenanceRequest
 		this.produtos = produtos;
 	}
 
+	public List<Criteria> getCriteria()
+	{
+		return criteria;
+	}
+
+	public void setCriteria(List<Criteria> criteria)
+	{
+		this.criteria = criteria;
+	}
+
 	public void addProduto(Produto produto)
 	{
 		if (getProdutos() == null)
@@ -140,7 +153,7 @@ public class ProdutoMaintenanceRequest extends MaintenanceRequest
 	{
 		return "ProdutoMaintenanceRequest [getProduto()=" + getProduto() + ", getReturnList()=" + getReturnList()
 				+ ", getReturnListPaged()=" + getReturnListPaged() + ", getProdutos()=" + getProdutos()
-				+ ", toString()=" + super.toString() + "]";
+				+ ", getCriteria()=" + getCriteria() + ", toString()=" + super.toString() + "]";
 	}
 
 }

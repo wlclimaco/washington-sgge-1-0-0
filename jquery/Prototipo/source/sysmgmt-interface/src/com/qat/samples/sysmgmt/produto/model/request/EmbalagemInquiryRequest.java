@@ -2,6 +2,7 @@ package com.qat.samples.sysmgmt.produto.model.request;
 
 import com.qat.framework.model.request.InquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.Embalagem;
+import com.qat.samples.sysmgmt.util.Criteria;
 
 /**
  * The Model Object PagedInquiryRequest.
@@ -11,6 +12,9 @@ public class EmbalagemInquiryRequest extends InquiryRequest
 
 	/** The cadastro. */
 	private Embalagem embalagem;
+
+	/** The criteria. */
+	private Criteria criteria;
 
 	/**
 	 * Instantiates a new cadastro inquiry request.
@@ -41,14 +45,21 @@ public class EmbalagemInquiryRequest extends InquiryRequest
 		this.embalagem = embalagem;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	public Criteria getCriteria()
+	{
+		return criteria;
+	}
+
+	public void setCriteria(Criteria criteria)
+	{
+		this.criteria = criteria;
+	}
+
 	@Override
 	public String toString()
 	{
-		return "CadastroInquiryRequest [getEmbalagem()=" + getEmbalagem() + ", toString()=" + super.toString() + "]";
+		return "EmbalagemInquiryRequest [getEmbalagem()=" + getEmbalagem() + ", getCriteria()=" + getCriteria()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }
