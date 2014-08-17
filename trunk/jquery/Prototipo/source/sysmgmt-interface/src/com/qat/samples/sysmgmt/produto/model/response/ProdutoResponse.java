@@ -20,7 +20,7 @@ public class ProdutoResponse extends InquiryResponse
 	private List<Produto> produto;
 
 	/** The criteria. */
-	private List<Criteria> criteria;
+	private Criteria criteria;
 
 	/**
 	 * Gets the produto.
@@ -52,12 +52,12 @@ public class ProdutoResponse extends InquiryResponse
 		this.produto = produto;
 	}
 
-	public List<Criteria> getCriteria()
+	public Criteria getCriteria()
 	{
 		return criteria;
 	}
 
-	public void setCriteria(List<Criteria> criteria)
+	public void setCriteria(Criteria criteria)
 	{
 		this.criteria = criteria;
 	}

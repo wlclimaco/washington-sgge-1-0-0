@@ -22,7 +22,6 @@ import com.qat.samples.sysmgmt.produto.model.UniMed;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.EmbalagemInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
-import com.qat.samples.sysmgmt.util.Criteria;
 import com.qat.samples.sysmgmt.util.TableTypeEnum;
 
 /**
@@ -293,23 +292,10 @@ public class ProdutoBACImpl implements IProdutoBAC
 		}
 		else
 		{
-			if (request.getCriteria().getViews() == true)
-			{
-				CadastroInquiryRequest requestCadastro =
-						new CadastroInquiryRequest(request.getCriteria().getCadastros().get(0));
-				Criteria criteria = new Criteria();
-				criteria.setCadastros(getProdutoDAC().fetchAllCadastros(requestCadastro));
-				criteria.setEmbalagens(getProdutoDAC().fetchAllEmbalagems(new EmbalagemInquiryRequest()));
-				response.getResultsList().addAll(getProdutoDAC().fetchAllProdutos(request));
 
-			}
-			else
-			{
-
-				response.getResultsList().addAll(
-						getProdutoDAC().fetchAllProdutos(
-								ProdutoBAD.MontarFiltrosProd(request.getCriteria().getFilters())));
-			}
+			response.getResultsList().addAll(
+					getProdutoDAC().fetchAllProdutos(
+							ProdutoBAD.MontarFiltrosProd(request.getCriteria().getFilters())));
 
 		}
 

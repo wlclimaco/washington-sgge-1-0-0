@@ -241,15 +241,8 @@
 
   <select id="fetchAllProdutos" parameterType="ProdutoInquiryRequest" resultMap="ProdutoResult">
 		SELECT <include refid="allProdutoColumns" />
-   		  FROM PRODUTO where
-   		  <where>
-   		  	<if test="produto.id == null"> 1 = 1</if>
-			<if test="criteria.produto[0].nome != null">and nome = #{criteria.produtos[0].nome}</if>
-			<if test="criteria.produto[0].stringIds != null">and produtoid in(#{criteria.produtos[0].stringIds})</if>
-			<if test="criteria.cadastros[0].stringIds != null">and marca = #{criteria.cadastros[0].stringIds}</if>
-			<if test="criteria.cadastros[0].stringIds != null">and codBarra = #{criteria.cadastros[0].stringIds}</if>
-			<if test="criteria.embalagens[0].stringIds != null">AND embalagem in(#{criteria.embalagens[0].stringIds})</if>
-		</where>
+   		  FROM PRODUTO
+
    		  ORDER BY nome ASC
   </select>
 

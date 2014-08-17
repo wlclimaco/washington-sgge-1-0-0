@@ -37,14 +37,13 @@ columnss[2]  = {id:"action", name: procedure.grid.act.title, field:"action", res
 columnss[3]  = {id:"id", name: procedure.grid.psak.title, field:"id", resizable:false, cssClass:"cell-center", width:75};
 columnss[4]  = {id:"codBarra", name:produto.grid.codBarra.title, field:"codBarra",  width:135, editable:true, cssClass:"pad-4-left", sortable:true},
 columnss[5]  = {id:"nome", name: produto.grid.nome.title, field:"nome"};
-columnss[6]  = {id:"unimed", name: produto.grid.unimed.title, field:"unimed"};
-columnss[7]  = {id:"marca", name:produto.grid.marca.title, field:"marca",  width:135, editable:true, cssClass:"pad-4-left", sortable:true},
-columnss[8]  = {id:"menu", name: produto.grid.menu.title, field:"menu"};
-columnss[9] =  {id:"supermercadoId", name: produto.grid.supermercadoId.title, field:"supermercadoId"};
-columnss[10] = {id:"preco", name: produto.grid.preco.title, field:"preco"};
-columnss[11] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
-columnss[12] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
-columnss[13] = {id:"id", name: " ", field:"id",  cssClass:"cell-center",formatter:  buttonFormat,width:72};
+columnss[6]  = {id:"qnt",  name: submenu.grid.psubmenu.title, field:"qnt", editor:Slick.Editors.Text};
+columnss[7]  = {id:"unimed", name: produto.grid.unimed.title, field:"unimed",  width:135, editable:true, cssClass:"pad-4-left", sortable:true, editor:Slick.Editors.unimed};
+columnss[8]  = {id:"marca", name:produto.grid.marca.title, field:"marca",  width:135, editable:true, cssClass:"pad-4-left", sortable:true, editor:Slick.Editors.marca},
+columnss[9]  = {id:"menu", name: produto.grid.menu.title, field:"menu",  width:135, editable:true, cssClass:"pad-4-left", sortable:true, editor:Slick.Editors.completeMenu};
+columnss[10] = {id:"data", name: cidade.grid.pdata.title, field:"data"};
+columnss[11] = {id:"userId", name: cidade.grid.puser.title, field:"userId"};
+columnss[12] = {id:"id", name: " ", field:"id",  cssClass:"cell-center",formatter:  buttonFormat,width:72};
 
 
 
@@ -74,14 +73,14 @@ var options =
 		function callRefreshWS(_i)
 		{
 			onProDataLoading.notify({});
-			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos', {produto:{tabela:1,userId:'rod'}}, fill_data, process_error);
+			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos', {produto:{tabela:1,userId:'rod',id:1},criteria:{views: true,cadastros:[{}],produto:[{nome:"ddd"}],embalagens:[{}]}}, fill_data, process_error);
 		}
 		function callPagedFetchWS(_iPageSize, _iStartPage)
 		{
 		    onProDataLoading.notify({});
 			if (viewLoadedObject == null)
 			{
-			    rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos', {produto:{tabela:1,userId:'rod'}}, fill_data, process_error);
+			    rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllProdutos', {produto:{tabela:1,userId:'rod',id:1},criteria:{views: false,cadastros:[{}],embalagem:{stringIds:null},menu:{stringIds:null},cadastro:{stringIds:null},produto:{nome:null}}}, fill_data, process_error);
 			}
 			else
 			{

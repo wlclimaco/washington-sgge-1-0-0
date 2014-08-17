@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.qat.framework.model.QATModel.PersistanceActionEnum;
+import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATInterfaceUtil;
 import com.qat.framework.validation.ValidationContextIndicator;
 import com.qat.framework.validation.ValidationController;
@@ -13,6 +14,8 @@ import com.qat.samples.sysmgmt.model.request.RefreshRequest;
 import com.qat.samples.sysmgmt.produto.bac.IProdutoBAC;
 import com.qat.samples.sysmgmt.produto.bai.IProdutoBAI;
 import com.qat.samples.sysmgmt.produto.baid.ProdutoBAID;
+import com.qat.samples.sysmgmt.produto.model.Cadastro;
+import com.qat.samples.sysmgmt.produto.model.Embalagem;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.CadastroMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.EmbalagemInquiryRequest;
@@ -22,6 +25,7 @@ import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.response.CadastroResponse;
 import com.qat.samples.sysmgmt.produto.model.response.EmbalagemResponse;
 import com.qat.samples.sysmgmt.produto.model.response.ProdutoResponse;
+import com.qat.samples.sysmgmt.util.Criteria;
 
 /**
  * The Class ProdutoBAIImpl.
@@ -180,9 +184,33 @@ public class ProdutoBAIImpl implements IProdutoBAI
 	public ProdutoResponse fetchAllProdutos(ProdutoInquiryRequest request)
 	{
 		ProdutoResponse response = new ProdutoResponse();
+		CadastroResponse cadastroResponse = new CadastroResponse();
 		try
 		{
+
 			ProdutoBAID.fetchAllProdutos(getProdutoBAC(), response, request);
+			if (request.getCriteria().getViews() == true)
+			{
+
+				Criteria criteria = new Criteria();
+				CadastroInquiryRequest requestCadastro =
+						new CadastroInquiryRequest(request.getCriteria().getCadastro());
+				InternalResultsResponse<Cadastro> internalResponses =
+						produtoBAC.fetchAllCadastros(requestCadastro);
+				criteria.setCadastros(internalResponses.getResultsList());
+
+				// ==============
+
+				EmbalagemInquiryRequest requestEmb =
+						new EmbalagemInquiryRequest();
+				InternalResultsResponse<Embalagem> internalResponsess =
+						produtoBAC.fetchAllEmbalagems(requestEmb);
+
+				criteria.setEmbalagens(internalResponsess.getResultsList());
+				response.setCriteria(criteria);
+
+			}
+
 		}
 		catch (Exception ex)
 		{

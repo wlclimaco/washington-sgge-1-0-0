@@ -1,5 +1,6 @@
 package com.qat.samples.sysmgmt.util;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlType;
@@ -16,36 +17,55 @@ import com.qat.samples.sysmgmt.supermercado.model.Supermercado;
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "Filter", propOrder = {"filters", "cadastros", "embalagens", "unimed", "table", "views"
-		, "cidade", "cliente", "produto", "supermercado"})
+@XmlType(name = "Criteria", propOrder = {"filters", "cadastros", "embalagens", "unimeds", "table", "views"
+		, "cidades", "clientes", "produtos", "supermercados",
+		"produto", "cadastro", "embalagem", "supermercado", "menu"})
 public class Criteria extends Util
 {
 
 	/** The nome. */
-	private List<Filter> filters;
+	private List<Filter> filters = new ArrayList<Filter>();
 
 	/** The cadastros. */
-	private List<Cadastro> cadastros;
+	private List<Cadastro> cadastros = new ArrayList<Cadastro>();
 
 	/** The embalagens. */
-	private List<Embalagem> embalagens;
+	private List<Embalagem> embalagens = new ArrayList<Embalagem>();
 
 	/** The unimed. */
-	private List<UniMed> unimed;
+	private List<UniMed> unimeds = new ArrayList<UniMed>();
 
-	private List<Cidade> cidade;
+	/** The cidades. */
+	private List<Cidade> cidades = new ArrayList<Cidade>();
 
-	private List<Cliente> cliente;
+	/** The clientes. */
+	private List<Cliente> clientes = new ArrayList<Cliente>();
 
-	private List<Produto> produto;
+	/** The produtos. */
+	private List<Produto> produtos = new ArrayList<Produto>();
 
-	private List<Supermercado> supermercado;
+	/** The supermercados. */
+	private List<Supermercado> supermercados = new ArrayList<Supermercado>();
 
 	/** The table. */
 	private TableTypeEnum table;
 
 	/** The views. */
 	private Boolean views;
+
+	/** The produto. */
+	private Produto produto;
+
+	/** The cadastro. */
+	private Cadastro cadastro;
+
+	private Cadastro menu;
+
+	/** The embalagem. */
+	private Embalagem embalagem;
+
+	/** The supermercado. */
+	private Supermercado supermercado;
 
 	/**
 	 * Instantiates a new imagem.
@@ -144,19 +164,99 @@ public class Criteria extends Util
 	 * 
 	 * @return the unimed
 	 */
-	public List<UniMed> getUnimed()
+	public List<UniMed> getUnimeds()
 	{
-		return unimed;
+		return unimeds;
 	}
 
 	/**
 	 * Sets the unimed.
 	 * 
-	 * @param unimed the new unimed
+	 * @param unimeds the new unimed
 	 */
-	public void setUnimed(List<UniMed> unimed)
+	public void setUnimeds(List<UniMed> unimeds)
 	{
-		this.unimed = unimed;
+		this.unimeds = unimeds;
+	}
+
+	/**
+	 * Gets the cidades.
+	 * 
+	 * @return the cidades
+	 */
+	public List<Cidade> getCidades()
+	{
+		return cidades;
+	}
+
+	/**
+	 * Sets the cidades.
+	 * 
+	 * @param cidades the new cidades
+	 */
+	public void setCidades(List<Cidade> cidades)
+	{
+		this.cidades = cidades;
+	}
+
+	/**
+	 * Gets the clientes.
+	 * 
+	 * @return the clientes
+	 */
+	public List<Cliente> getClientes()
+	{
+		return clientes;
+	}
+
+	/**
+	 * Sets the clientes.
+	 * 
+	 * @param clientes the new clientes
+	 */
+	public void setClientes(List<Cliente> clientes)
+	{
+		this.clientes = clientes;
+	}
+
+	/**
+	 * Gets the produtos.
+	 * 
+	 * @return the produtos
+	 */
+	public List<Produto> getProdutos()
+	{
+		return produtos;
+	}
+
+	/**
+	 * Sets the produtos.
+	 * 
+	 * @param produtos the new produtos
+	 */
+	public void setProdutos(List<Produto> produtos)
+	{
+		this.produtos = produtos;
+	}
+
+	/**
+	 * Gets the supermercados.
+	 * 
+	 * @return the supermercados
+	 */
+	public List<Supermercado> getSupermercados()
+	{
+		return supermercados;
+	}
+
+	/**
+	 * Sets the supermercados.
+	 * 
+	 * @param supermercados the new supermercados
+	 */
+	public void setSupermercados(List<Supermercado> supermercados)
+	{
+		this.supermercados = supermercados;
 	}
 
 	/**
@@ -199,53 +299,106 @@ public class Criteria extends Util
 		this.views = views;
 	}
 
-	public List<Cidade> getCidade()
-	{
-		return cidade;
-	}
-
-	public void setCidade(List<Cidade> cidade)
-	{
-		this.cidade = cidade;
-	}
-
-	public List<Cliente> getCliente()
-	{
-		return cliente;
-	}
-
-	public void setCliente(List<Cliente> cliente)
-	{
-		this.cliente = cliente;
-	}
-
-	public List<Produto> getProduto()
+	/**
+	 * Gets the produto.
+	 * 
+	 * @return the produto
+	 */
+	public Produto getProduto()
 	{
 		return produto;
 	}
 
-	public void setProduto(List<Produto> produto)
+	/**
+	 * Sets the produto.
+	 * 
+	 * @param produto the new produto
+	 */
+	public void setProduto(Produto produto)
 	{
 		this.produto = produto;
 	}
 
-	public List<Supermercado> getSupermercado()
+	/**
+	 * Gets the cadastro.
+	 * 
+	 * @return the cadastro
+	 */
+	public Cadastro getCadastro()
+	{
+		return cadastro;
+	}
+
+	/**
+	 * Sets the cadastro.
+	 * 
+	 * @param cadastro the new cadastro
+	 */
+	public void setCadastro(Cadastro cadastro)
+	{
+		this.cadastro = cadastro;
+	}
+
+	/**
+	 * Gets the embalagem.
+	 * 
+	 * @return the embalagem
+	 */
+	public Embalagem getEmbalagem()
+	{
+		return embalagem;
+	}
+
+	/**
+	 * Sets the embalagem.
+	 * 
+	 * @param embalagem the new embalagem
+	 */
+	public void setEmbalagem(Embalagem embalagem)
+	{
+		this.embalagem = embalagem;
+	}
+
+	/**
+	 * Gets the supermercado.
+	 * 
+	 * @return the supermercado
+	 */
+	public Supermercado getSupermercado()
 	{
 		return supermercado;
 	}
 
-	public void setSupermercado(List<Supermercado> supermercado)
+	/**
+	 * Sets the supermercado.
+	 * 
+	 * @param supermercado the new supermercado
+	 */
+	public void setSupermercado(Supermercado supermercado)
 	{
 		this.supermercado = supermercado;
+	}
+
+	public Cadastro getMenu()
+	{
+		return menu;
+	}
+
+	public void setMenu(Cadastro menu)
+	{
+		this.menu = menu;
 	}
 
 	@Override
 	public String toString()
 	{
 		return "Criteria [getFilters()=" + getFilters() + ", getCadastros()=" + getCadastros() + ", getEmbalagens()="
-				+ getEmbalagens() + ", getUnimed()=" + getUnimed() + ", getTable()=" + getTable() + ", getViews()="
-				+ getViews() + ", getCidade()=" + getCidade() + ", getCliente()=" + getCliente() + ", getProduto()="
-				+ getProduto() + ", getSupermercado()=" + getSupermercado() + ", toString()=" + super.toString() + "]";
+				+ getEmbalagens() + ", getUnimeds()=" + getUnimeds() + ", getCidades()=" + getCidades()
+				+ ", getClientes()=" + getClientes() + ", getProdutos()=" + getProdutos() + ", getSupermercados()="
+				+ getSupermercados() + ", getTable()=" + getTable() + ", getViews()=" + getViews() + ", getProduto()="
+				+ getProduto() + ", getCadastro()=" + getCadastro() + ", getEmbalagem()=" + getEmbalagem()
+				+ ", getSupermercado()=" + getSupermercado() + ", getMenu()=" + getMenu() + ", toString()="
+				+ super.toString() + "]";
 	}
 
 }
