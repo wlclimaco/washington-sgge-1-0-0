@@ -58,7 +58,7 @@ public final class ProdutoBAD
 			}
 		}
 		Criteria criteria = new Criteria();
-		criteria.setSupermercado(listSuper);
+		criteria.setSupermercados(listSuper);
 		request.setCriteria(criteria);
 		return request;
 	}
@@ -147,7 +147,7 @@ public final class ProdutoBAD
 		}
 
 		Criteria criteria = new Criteria();
-		criteria.setProduto(listSuper);
+		criteria.setProdutos(listSuper);
 		criteria.setCadastros(listCad);
 		criteria.setEmbalagens(listEmb);
 		request.setCriteria(criteria);

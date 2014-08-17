@@ -11,6 +11,9 @@
       "Editors": {
         "completeTriMenu": AutoCompleteEditor0,
 		"completeSubMenu": AutoCompleteEditor1,
+		"completeMenu": AutoCompleteEditor2,
+		"unimed": AutoCompleteEditor3,
+		"marca": AutoCompleteEditor4,
         "Text": TextEditor,
         "Integer": IntegerEditor,
         "Date": DateEditor,
@@ -24,6 +27,9 @@
 
   var availableTags = [];
   var availableTags1 = [];
+  var availableTags2 = [];
+  var availableTags3 = [];
+  var availableTags4 = [];
 
     function AutoCompleteEditor0(args) {
     var $input;
@@ -162,6 +168,75 @@
     this.init();
   }
 
+    function AutoCompleteEditor2(args) {
+        var $input;
+        var defaultValue;
+        var scope = this;
+        var calendarOpen = false;
+
+        this.init = function () {
+
+    		var callback = function  (oResponse)
+    		{
+    			 var cadastros = oResponse.cadastros;
+    			 var tmpLength = cadastros.length;
+    			 availableTags2 = [];
+    			for (var i=0; i < tmpLength; i++){
+    				availableTags2.push(cadastros[i].nome);
+    			}
+    		}
+
+    		if(availableTags2.length == 0){
+
+    			rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {cadastro:{type:0,userId:'rod'}}, callback, null,false);
+    		}
+
+    			$input = $("<INPUT id='tagss' class='editor-text' />");
+    			$input.appendTo(args.container);
+    			$input.focus().select();
+    			$input.autocomplete({
+    				  source: availableTags2
+    			});
+
+        };
+
+        this.destroy = function () {
+          $input.remove();
+        };
+
+        this.focus = function () {
+          $input.focus();
+        };
+
+        this.loadValue = function (item) {
+          defaultValue = item[args.column.field];
+          $input.val(defaultValue);
+          $input[0].defaultValue = defaultValue;
+          $input.select();
+        };
+
+        this.serializeValue = function () {
+          return $input.val();
+        };
+
+        this.applyValue = function (item, state) {
+          item[args.column.field] = state;
+        };
+
+        this.isValueChanged = function () {
+          return (!($input.val() == "" && defaultValue == null)) && ($input.val() != defaultValue);
+        };
+
+        this.validate = function () {
+          return {
+            valid: true,
+            msg: null
+          };
+        };
+
+        this.init();
+      }
+
   function TextEditor(args) {
     var $input;
     var defaultValue;
@@ -231,6 +306,142 @@
     this.init();
   }
 
+  function AutoCompleteEditor3(args) {
+	    var $input;
+	    var defaultValue;
+	    var scope = this;
+	    var calendarOpen = false;
+
+	    this.init = function () {
+
+			var callback = function  (oResponse)
+			{
+				 var cadastros = oResponse.embalagem;
+				 var tmpLength = cadastros.length;
+				 availableTags3 = [];
+				for (var i=0; i < tmpLength; i++){
+					availableTags3.push(cadastros[i].nome);
+				}
+			}
+
+			if(availableTags3.length == 0){
+
+				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllUniMeds',{embalagem:{unimedid:{}}}, callback, null,false);
+			}
+
+				$input = $("<INPUT id='tagss' class='editor-text' />");
+				$input.appendTo(args.container);
+				$input.focus().select();
+				$input.autocomplete({
+					  source: availableTags3
+				});
+
+	    };
+
+	    this.destroy = function () {
+	      $input.remove();
+	    };
+
+	    this.focus = function () {
+	      $input.focus();
+	    };
+
+	    this.loadValue = function (item) {
+	      defaultValue = item[args.column.field];
+	      $input.val(defaultValue);
+	      $input[0].defaultValue = defaultValue;
+	      $input.select();
+	    };
+
+	    this.serializeValue = function () {
+	      return $input.val();
+	    };
+
+	    this.applyValue = function (item, state) {
+	      item[args.column.field] = state;
+	    };
+
+	    this.isValueChanged = function () {
+	      return (!($input.val() == "" && defaultValue == null)) && ($input.val() != defaultValue);
+	    };
+
+	    this.validate = function () {
+	      return {
+	        valid: true,
+	        msg: null
+	      };
+	    };
+
+	    this.init();
+	  }
+  function AutoCompleteEditor4(args) {
+	    var $input;
+	    var defaultValue;
+	    var scope = this;
+	    var calendarOpen = false;
+
+	    this.init = function () {
+
+			var callback = function  (oResponse)
+			{
+				 var cadastros = oResponse.cadastros;
+				 var tmpLength = cadastros.length;
+				 availableTags4 = [];
+				for (var i=0; i < tmpLength; i++){
+					availableTags4.push(cadastros[i].nome);
+				}
+			}
+
+			if(availableTags4.length == 0){
+
+				rest_post_call('qat-sysmgmt-sample/services/rest/ProdutoService/fetchAllCadastros', {cadastro:{type:2,userId:'rod'}}, callback, null,false);
+			}
+
+				$input = $("<INPUT id='tagss' class='editor-text' />");
+				$input.appendTo(args.container);
+				$input.focus().select();
+				$input.autocomplete({
+					  source: availableTags4
+				});
+
+	    };
+
+	    this.destroy = function () {
+	      $input.remove();
+	    };
+
+	    this.focus = function () {
+	      $input.focus();
+	    };
+
+	    this.loadValue = function (item) {
+	      defaultValue = item[args.column.field];
+	      $input.val(defaultValue);
+	      $input[0].defaultValue = defaultValue;
+	      $input.select();
+	    };
+
+	    this.serializeValue = function () {
+	      return $input.val();
+	    };
+
+	    this.applyValue = function (item, state) {
+	      item[args.column.field] = state;
+	    };
+
+	    this.isValueChanged = function () {
+	      return (!($input.val() == "" && defaultValue == null)) && ($input.val() != defaultValue);
+	    };
+
+	    this.validate = function () {
+	      return {
+	        valid: true,
+	        msg: null
+	      };
+	    };
+
+	    this.init();
+	  }
   function IntegerEditor(args) {
     var $input;
     var defaultValue;

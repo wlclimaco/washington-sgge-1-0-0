@@ -1045,12 +1045,11 @@ function produto_fill_data(procResponse,data2)
 		id:		         0,
 		codBarra:		"",
 		nome:  	        "",
+		qnt     :0,
 		unimed  :       "",
 		descricao:  	"",
 		marca:  	    "",
 		menu:  		    "",
-		supermercadoId: "",
-		preco  :        "",
 		imagens:  		"",
 		cellno1:        ""
 
@@ -1072,7 +1071,7 @@ function produto_fill_data(procResponse,data2)
 		var oi = 0;
 		var tmpLength = procResponse.produtos.length;
 
-		for (var i=0; i < tmpLength; i++)
+		for (var i=1; i < tmpLength; i++)
 		{
 			if(procResponse.produtos[oi].marca != null){
 				var a =		procResponse.produtos[oi].marca.nome;
@@ -1085,7 +1084,8 @@ function produto_fill_data(procResponse,data2)
 				b= 0;
 			}
 			if(procResponse.produtos[oi].embalagem != null){
-				var e =		procResponse.produtos[oi].embalagem.qnt + ' '+procResponse.produtos[oi].embalagem.unimedid.nome;
+				var e =		procResponse.produtos[oi].embalagem.unimedid.nome;
+				var u =		procResponse.produtos[oi].embalagem.qnt;
 			}else{
 				e= 0;
 			}
@@ -1102,26 +1102,6 @@ function produto_fill_data(procResponse,data2)
 				var f= "";
 				var g= "";
 			}
-			if (procResponse.produtos[oi].precos != null){
-				var count = procResponse.produtos[oi].precos.length;
-				if(procResponse.produtos[oi].precos[0] != null){
-					if(procResponse.produtos[oi].precos[0].supermercadoid != null)
-						var h =     procResponse.produtos[oi].precos[0].supermercadoid.documentos[0].razao
-					else{
-						var h = "";
-					}
-					if(procResponse.produtos[oi].precos[0].promocao == true)
-						var j =     procResponse.produtos[oi].precos[0].precopromo
-					else
-						var j =     procResponse.produtos[oi].precos[0].preco
-				}else{
-					var h= "";
-					var j= "";
-				}
-			}else{
-				var h= "";
-				var j= "";
-			}
 			data2[i] =
 			{
 
@@ -1135,12 +1115,11 @@ function produto_fill_data(procResponse,data2)
 				id:		        procResponse.produtos[oi].id,
 				codBarra:		procResponse.produtos[oi].codBarra,
 				nome:  	        procResponse.produtos[oi].nome,
+				qnt  :          u,
 				unimed  :       e,
 				descricao:  	procResponse.produtos[oi].descricao,
 				marca:  	    a,
 				menu:  		    b,
-				supermercadoId: h,
-				preco  :        j,
 				imagens:  		procResponse.produtos[oi].imagens,
 				data:  		    g,
 				userId:  		f
