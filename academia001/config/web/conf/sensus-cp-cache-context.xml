@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  - Application context definition for the QAT business area ehcache layer.
+  -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 	   xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+       http://www.w3.org/1999/XSL/Transform http://www.w3.org/1999/XSL/Transform.xsd
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+ 	   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- Ref to the mbean server
+	<bean id="mbeanServer" class="org.springframework.jmx.support.MBeanServerFactoryBean">
+    <property name="locateExistingServerIfPossible" value="true" />
+	</bean>
+
+	 EhCache management and statistics
+	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+    <property name="targetClass" value="net.sf.ehcache.management.ManagementService" />
+    <property name="targetMethod" value="registerMBeans" />
+    <property name="arguments">
+        <list>
+            <ref bean="cpCacheManager" />
+            <ref bean="mbeanServer" />
+            <value>true</value>
+            <value>true</value>
+            <value>true</value>
+            <value>true</value>
+        </list>
+    </property>
+	</bean>
+
+   EhCache CacheFactoryBean
+   <bean id="cpCacheFactory" abstract="true" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+	<property name="cacheManager" ref="cpCacheManager" />
+  </bean>
+
+  EhCache CacheManager
+   configLocation: Path to EHCache configuration file
+  <bean id="cpCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+    <property name="configLocation" value="classpath:sensus-cp-base-ehcache.xml" />
+  </bean>
+
+  Light Map queries cache
+  <bean id="mapCacheAspect" class="com.sensus.common.aop.CacheAOP" >
+	<property name="cache">
+		<bean id="mapEhCache" parent="cpCacheFactory">
+			<property name="cacheName" value="mapCache" />
+		</bean>
+	</property>
+ </bean>
+
+ <aop:config>
+	 Pointcuts
+	<aop:pointcut id="mapCacheObject" expression="bean(lightDACTarget) and execution(* fetchAllToMapByRequest*(..)))" />
+	<aop:pointcut id="mapFlushInsert" expression="bean(lightDACTarget) and execution(* insert*(..))" />
+	<aop:pointcut id="mapFlushUpdate" expression="bean(lightDACTarget) and execution(* update*(..))" />
+	<aop:pointcut id="mapFlushDelete" expression="bean(lightDACTarget) and execution(* delete*(..))" />
+	 Aspects
+	<aop:aspect id="cpCacheAspects" ref="mapCacheAspect">
+		<aop:around pointcut-ref="mapCacheObject" method="cacheObject"/>
+		<aop:after pointcut-ref="mapFlushInsert" method="flushCache" />
+		<aop:after pointcut-ref="mapFlushUpdate" method="flushCache" />
+		<aop:after pointcut-ref="mapFlushDelete" method="flushCache" />
+	</aop:aspect>
+ </aop:config> -->
+
+</beans>

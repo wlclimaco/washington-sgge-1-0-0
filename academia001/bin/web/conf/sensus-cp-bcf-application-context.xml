@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd ">
+
+	<!-- ========================= BCF DEFINITIONS ========================= -->
+
+	<bean id="tagBCF" class="com.sensus.cp.tag.bcf.impl.TagBCFImpl">
+		<property name="tagBCL" ref="tagBCLTarget" />
+		<property name="tagValidationController" ref="tagValidationController" />
+		<property name="tagMemberMaintenanceRequestValidationController" ref="tagMemberMaintenanceRequestValidationController" />
+		<property name="requestValidationController" ref="requestValidationController" />
+		<property name="selectionCriteriaValidationController" ref="selectionCriteriaValidationController" />
+	</bean>
+
+	<bean id="groupBCF" class="com.sensus.cp.group.bcf.impl.GroupBCFImpl">
+		<property name="groupBCL" ref="groupBCLTarget" />
+		<property name="groupValidationController" ref="groupValidationController" />
+		<property name="groupMemberMaintenanceRequestValidationController" ref="groupMemberMaintenanceRequestValidationController" />
+		<property name="requestValidationController" ref="requestValidationController" />
+		<property name="selectionCriteriaValidationController" ref="selectionCriteriaValidationController" />
+		<property name="groupMemberCriteriaValidationController" ref="groupMemberCriteriaValidationController" />
+		<property name="csvRequestValidationController" ref="csvRequestValidationController" />
+	</bean>
+
+	<bean id="settingsBCF" class="com.sensus.cp.settings.bcf.impl.SettingsBCFImpl">
+		<property name="settingsBCL" ref="settingsBCLTarget" />
+		<property name="requestValidationController" ref="requestValidationController" />
+		<property name="settingsValidationController" ref="settingsValidationController" />
+		<property name="settingsCriteriaValidationController" ref="settingsCriteriaValidationController" />
+	</bean>
+
+	<bean id="userBCF" class="com.sensus.cp.user.bcf.impl.UserBCFImpl">
+		<property name="userBCL" ref="userBCLTarget" />
+		<property name="requestValidationController" ref="requestValidationController" />
+		<property name="userValidationController" ref="userValidationController" />
+		<property name="userCriteriaValidationController" ref="userCriteriaValidationController" />
+		<property name="selectionCriteriaValidationController" ref="selectionCriteriaValidationController" />
+	</bean>
+
+	<bean id="tenantBCF" class="com.sensus.cp.tenant.bcf.impl.TenantBCFImpl">
+		<property name="tenantBCL" ref="tenantBCLTarget" />
+		<property name="tenantCriteriaValidationController" ref="tenantCriteriaValidationController" />
+	</bean>
+
+	<bean id="dietaBCF" class="com.sensus.cp.dieta.bcf.impl.DietaBCFImpl">
+		<property name="dietaBCL" ref="dietaBCLTarget" />
+	</bean>
+
+</beans>

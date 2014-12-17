@@ -1,0 +1,770 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd" >
+
+	<!-- Injected at Device BCL Layer -->
+	<bean id="servicesTarget" class="com.sensus.cp.common.model.ServicesPermissions">
+		<property name="servicesTypePermissions">
+			<list>
+	            <ref bean="cathodicGasServicesTypeTarget" />
+			</list>
+		</property>
+	</bean>
+
+	<!--
+	     ##################
+	     #### SERVICES ####
+	     ##################
+	-->
+
+	<bean id="cathodicGasServicesTypeTarget" class="com.sensus.cp.common.model.ServicesTypePermissions">
+		<property name="serviceTypeEnum"    value="CATHODIC_GAS"/>
+		<property name="grantedAuthority"   value="ROLE_CP_SERVICE_CATHODIC_GAS"/>
+		<property name="deviceTypePermissions">
+			<list>
+	            <ref bean="pipeSectionTarget" />
+	            <ref bean="rectifierDeviceTypeTarget" />
+	            <ref bean="testPointDeviceTypeTarget" />
+	            <ref bean="alertTarget" />
+			</list>
+		</property>
+		<property name="dashboardUiModules"        ref="dashboardCathodicGasTarget"/>
+		<property name="eventHistoryFilterActions" ref="cathodicGasEventHistoryFilterActionsTarget"/>
+	</bean>
+
+	<!--
+	     ###########################################
+	     #### CATHODIC GAS DASHBOARD UI MODULES ####
+	     ###########################################
+	 -->
+	<util:list id="dashboardCathodicGasTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>map</value>
+		<value>divisions</value>
+		<value>protectionGraph</value>
+	</util:list>
+
+	<!--
+	     ###########################################################################
+	     #### CATHODIC GAS EVENT HISTORY FILTER ACTIONS - ACTION TYPES #############
+	     ###########################################################################
+	 -->
+	<util:list id="cathodicGasEventHistoryFilterActionsTarget" list-class="java.util.ArrayList" value-type="com.sensus.cp.permissions.model.ActionType">
+
+		<!-- Alert Category -->
+		<ref bean="clearAllAlertsAction"/>
+		<ref bean="clearAlertAction"/>
+		<ref bean="deleteAlertAction"/>
+		<ref bean="followUpAlertAction"/>
+		<ref bean="serviceOrderAlertAction"/>
+
+		<!-- Survey Category -->
+		<ref bean="onDemandSurveyAction"/>
+		<ref bean="manualSurveyAction"/>
+		<ref bean="pspOnAction"/>
+		<ref bean="pspOffAction"/>
+		<ref bean="psp100mvPolarizationAction"/>
+
+		<!-- Tag Category -->
+		<ref bean="createTagAction"/>
+		<ref bean="removeTagAction"/>
+		<ref bean="addAssetTagAction"/>
+		<ref bean="deleteAssetTagAction"/>
+
+	</util:list>
+
+	<!--
+	     ###########################
+	     #### PIPE SECTION TYPE ####
+	     ###########################
+	-->
+	<bean id="pipeSectionTarget" class="com.sensus.cp.common.model.DeviceTypePermissions">
+		<property name="deviceTypeModels">
+			<list>
+				<ref bean="pipeSectionCommonDeviceTypeModelTarget"/>
+		  	</list>
+		</property>
+		<property name="defaultActions" ref="pipeSectionDefaultActionsTarget" />
+	</bean>
+
+	<!--
+	     ###############################
+	     #### RECTIFIER DEVICE TYPE ####
+	     ###############################
+	-->
+	<bean id="rectifierDeviceTypeTarget" class="com.sensus.cp.common.model.DeviceTypePermissions">
+		<property name="deviceType">
+			<value>CP_RECTIFIER</value>
+		</property>
+		<property name="deviceTypeModels">
+			<list>
+				<ref bean="rectifierCommonDeviceTypeModelTarget"/>
+		  	</list>
+		</property>
+		<property name="defaultActions" ref="rectifierDefaultActionsTarget" />
+	</bean>
+
+	<!--
+	     ################################
+	     #### TEST_POINT DEVICE TYPE ####
+	     ################################
+	-->
+	<bean id="testPointDeviceTypeTarget" class="com.sensus.cp.common.model.DeviceTypePermissions">
+		<property name="deviceType">
+			<value>CP_TEST_POINT</value>
+		</property>
+		<property name="deviceTypeModels">
+			<list>
+				<ref bean="testPointCommonDeviceTypeModelTarget"/>
+		  	</list>
+		</property>
+		<property name="defaultActions" ref="testPointDefaultActionsTarget" />
+	</bean>
+
+	<!--
+	     ####################
+	     #### ALERT TYPE ####
+	     ####################
+	-->
+	<bean id="alertTarget" class="com.sensus.cp.common.model.DeviceTypePermissions">
+		<property name="defaultActions" ref="alertDefaultActionsTarget" />
+	</bean>
+
+	<!--
+	     ############################################
+	     #### PIPE SECTION DEVICE TYPE MODELS #######
+	     ############################################
+	 -->
+	<bean id="pipeSectionCommonDeviceTypeModelTarget" class="com.sensus.cp.common.model.DeviceTypeModelPermissions">
+		<property name="actions" >
+			<list value-type="com.sensus.cp.permissions.model.ActionType">
+				<!-- Order by Category Action (Front-end grouping) -->
+				<ref bean="deletePipeSectionAction"/>
+				<ref bean="healthCheckAction"/>
+				<ref bean="manageTestPointsAction"/>
+				<ref bean="pspOnAction"/>
+				<ref bean="pspOffAction"/>
+				<ref bean="psp100mvPolarizationAction"/>
+			</list>
+		</property>
+		<property name="actionsByAlert" ref="actionsByAlert" />
+		<property name="uiModules" ref="pipeSectionCommonUiModuleTarget" />
+		<property name="name" value="COMMON"/>
+	</bean>
+
+	<!--
+	     #########################################
+	     #### RECTIFIER DEVICE TYPE MODELS #######
+	     #########################################
+	 -->
+	<bean id="rectifierCommonDeviceTypeModelTarget" class="com.sensus.cp.common.model.DeviceTypeModelPermissions">
+		<property name="actions" >
+			<list value-type="com.sensus.cp.permissions.model.ActionType">
+				<!-- Order by Category Action (Front-end grouping) -->
+				<ref bean="deleteRectifierAction"/>
+				<ref bean="healthCheckAction"/>
+				<ref bean="manualSurveyAction"/>
+			</list>
+		</property>
+		<property name="actionsByAlert" ref="actionsByAlert" />
+		<property name="uiModules" ref="rectifierCommonUiModuleTarget" />
+		<property name="name" value="COMMON"/>
+	</bean>
+
+	<!--
+	     ##########################################
+	     #### TEST POINT DEVICE TYPE MODELS #######
+	     ##########################################
+	 -->
+	<bean id="testPointCommonDeviceTypeModelTarget" class="com.sensus.cp.common.model.DeviceTypeModelPermissions">
+		<property name="actions" >
+			<list value-type="com.sensus.cp.permissions.model.ActionType">
+				<!-- Order by Category Action (Front-end grouping) -->
+				<ref bean="onDemandSurveyAction"/>
+				<ref bean="clearAllAlertsAction"/>
+				<ref bean="manualSurveyAction"/>
+			</list>
+		</property>
+		<property name="actionsByAlert" ref="actionsByAlert" />
+		<property name="uiModules" ref="testPointCommonUiModuleTarget" />
+		<property name="name" value="COMMON"/>
+	</bean>
+
+
+	<!--
+         ###################################
+	     #### PIPE SECTION UI MODULES ######
+	     ###################################
+	 -->
+	<bean id="pipeSectionCommonUiModuleTarget" class="com.sensus.cp.common.model.UiModulesPermissions">
+		<property name="tabs"  			ref="pipeSectionCommonTabsTarget" />
+		<property name="summaryDatas"  	ref="pipeSectionCommonSummaryDatasTarget" />
+		<property name="contents"  		ref="pipeSectionCommonContentsTarget" />
+	</bean>
+
+	<!--
+         ################################
+	     #### RECTIFIER UI MODULES ######
+	     ################################
+	 -->
+	<bean id="rectifierCommonUiModuleTarget" class="com.sensus.cp.common.model.UiModulesPermissions">
+		<property name="tabs"  			ref="rectifierCommonTabsTarget" />
+		<property name="summaryDatas"  	ref="rectifierCommonSummaryDatasTarget" />
+		<property name="contents"  		ref="rectifierCommonContentsTarget" />
+	</bean>
+
+	<!--
+         #################################
+	     #### TEST POINT UI MODULES ######
+	     #################################
+	 -->
+	<bean id="testPointCommonUiModuleTarget" class="com.sensus.cp.common.model.UiModulesPermissions">
+		<property name="tabs"  			ref="testPointCommonTabsTarget" />
+		<property name="summaryDatas"  	ref="testPointCommonSummaryDatasTarget" />
+		<property name="contents"  		ref="testPointCommonContentsTarget" />
+	</bean>
+
+
+	<!--
+	     #################################
+	     #### PIPE SECTION UI TABS #######
+	     #################################
+	 -->
+	<util:list id="pipeSectionCommonTabsTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>summary</value>
+		<value>surveys</value>
+		<value>assets</value>
+		<value>history</value>
+	</util:list>
+
+	<!--
+	     #########################################
+	     #### PIPE SECTION UI SUMMARY DATAS ######
+	     #########################################
+	 -->
+	<util:list id="pipeSectionCommonSummaryDatasTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>information</value>
+		<value>protectionType</value>
+		<value>zone</value>
+		<value>pipeLineSize</value>
+		<value>pipeLineLength</value>
+		<value>rectifiers</value>
+		<value>testPoints</value>
+		<value>lastSurvey</value>
+		<value>actions</value>
+	</util:list>
+
+	<!--
+	     #####################################
+	     #### PIPE SECTION UI CONTENTS #######
+	     #####################################
+	 -->
+	<util:list id="pipeSectionCommonContentsTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>alert</value>
+		<value>location</value>
+		<value>information</value>
+		<value>configuration</value>
+		<value>group</value>
+		<value>tag</value>
+		<value>postNote</value>
+		<value>rectifiers</value>
+		<value>testPoints</value>
+	</util:list>
+
+	<!--
+	     ##############################
+	     #### RECTIFIER UI TABS #######
+	     ##############################
+	 -->
+	<util:list id="rectifierCommonTabsTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>summary</value>
+		<value>surveys</value>
+		<value>history</value>
+	</util:list>
+
+	<!--
+	     ######################################
+	     #### RECTIFIER UI SUMMARY DATAS ######
+	     ######################################
+	 -->
+	<util:list id="rectifierCommonSummaryDatasTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>information</value>
+		<value>flexNetId</value>
+		<value>inputAcVoltage</value>
+		<value>outputAcVoltage</value>
+		<value>outputDcVoltage</value>
+		<value>str</value>
+		<value>pipeSection</value>
+		<value>lastSurvey</value>
+		<value>actions</value>
+	</util:list>
+
+	<!--
+	     ##################################
+	     #### RECTIFIER UI CONTENTS #######
+	     ##################################
+	 -->
+	<util:list id="rectifierCommonContentsTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>alert</value>
+		<value>chart</value>
+		<value>alerts</value>
+		<value>location</value>
+		<value>information</value>
+		<value>configuration</value>
+		<value>group</value>
+		<value>tag</value>
+		<value>postNote</value>
+	</util:list>
+
+	<!--
+	     ###############################
+	     #### TEST POINT UI TABS #######
+	     ###############################
+	 -->
+	<util:list id="testPointCommonTabsTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>summary</value>
+		<value>surveys</value>
+		<value>history</value>
+	</util:list>
+
+	<!--
+	     #######################################
+	     #### TEST POINT UI SUMMARY DATAS ######
+	     #######################################
+	 -->
+	<util:list id="testPointCommonSummaryDatasTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>information</value>
+		<value>flexNetId</value>
+		<value>installDate</value>
+		<value>str</value>
+		<value>lastRead</value>
+		<value>protectionType</value>
+		<value>lastSurvey</value>
+		<value>actions</value>
+	</util:list>
+
+	<!--
+	     ###################################
+	     #### TEST POINT UI CONTENTS #######
+	     ###################################
+	 -->
+	<util:list id="testPointCommonContentsTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>alert</value>
+		<value>chart</value>
+		<value>alerts</value>
+		<value>location</value>
+		<value>information</value>
+		<value>configuration</value>
+		<value>group</value>
+		<value>tag</value>
+		<value>postNote</value>
+	</util:list>
+
+
+	<!--
+	     #########################################
+	     #### PIPE SECTION DEFAULT ACTIONS #######
+	     #########################################
+	-->
+	<bean id="pipeSectionDefaultActionsTarget" class="com.sensus.cp.common.model.DefaultActionsPermissions">
+		<property name="actions" >
+			<list value-type="com.sensus.cp.permissions.model.ActionType" >
+				<!-- Order by Category Action (Front-end grouping) -->
+				<ref bean="onDemandSurveyAction"/>
+				<ref bean="clearAllAlertsAction"/>
+				<ref bean="deletePipeSectionAction"/>
+				<ref bean="addAssetTagAction"/>
+				<ref bean="deleteAssetTagAction"/>
+				<ref bean="pspOnAction"/>
+				<ref bean="pspOffAction"/>
+				<ref bean="psp100mvPolarizationAction"/>
+			</list>
+		</property>
+	</bean>
+
+	<!--
+	     ######################################
+	     #### RECTIFIER DEFAULT ACTIONS #######
+	     ######################################
+	-->
+	<bean id="rectifierDefaultActionsTarget" class="com.sensus.cp.common.model.DefaultActionsPermissions">
+		<property name="actions" >
+			<list value-type="com.sensus.cp.permissions.model.ActionType" >
+				<!-- Order by Category Action (Front-end grouping) -->
+				<ref bean="clearAllAlertsAction"/>
+				<ref bean="deleteRectifierAction"/>
+				<ref bean="healthCheckAction"/>
+				<ref bean="addAssetTagAction"/>
+				<ref bean="deleteAssetTagAction"/>
+				<ref bean="pspOnAction"/>
+				<ref bean="pspOffAction"/>
+				<ref bean="psp100mvPolarizationAction"/>
+			</list>
+		</property>
+	</bean>
+
+	<!--
+	     #######################################
+	     #### TEST POINT DEFAULT ACTIONS #######
+	     #######################################
+	-->
+	<bean id="testPointDefaultActionsTarget" class="com.sensus.cp.common.model.DefaultActionsPermissions">
+		<property name="actions" >
+			<list value-type="com.sensus.cp.permissions.model.ActionType" >
+				<!-- Order by Category Action (Front-end grouping) -->
+				<ref bean="addTestPointRectifierAction"/>
+				<ref bean="onDemandSurveyAction"/>
+				<ref bean="clearAllAlertsAction"/>
+				<ref bean="configurationTestPointAction"/>
+				<ref bean="deleteTestPointAction"/>
+				<ref bean="addAssetTagAction"/>
+				<ref bean="deleteAssetTagAction"/>
+			</list>
+		</property>
+	</bean>
+
+	<!--
+	     ##################################
+	     #### ALERT DEFAULT ACTIONS #######
+	     ##################################
+	-->
+	<bean id="alertDefaultActionsTarget" class="com.sensus.cp.common.model.DefaultActionsPermissions">
+		<property name="actions" >
+			<list value-type="com.sensus.cp.permissions.model.ActionType" >
+				<!-- Order by Category Action (Front-end grouping) -->
+				<ref bean="clearAlertAction"/>
+				<ref bean="deleteAlertAction"/>
+				<ref bean="followUpAlertAction"/>
+				<ref bean="quietAlertAction"/>
+				<ref bean="serviceOrderAlertAction"/>
+				<ref bean="verifyAlertAction"/>
+				<ref bean="createTagAction"/>
+				<ref bean="removeTagAction"/>
+			</list>
+		</property>
+		<property name="actionsByAlert" ref="actionsByAlert" />
+	</bean>
+
+	<!--
+	     ########################################
+	     #### GENERAL ACTIONS - ACTION TYPES ####
+	     ########################################
+	 -->
+
+	<bean id="onDemandSurveyAction" class="com.sensus.cp.permissions.model.ActionType">
+		<property name="actionType">
+			<value type="com.sensus.cp.base.model.SurveyActionEnum">ON_DEMAND_SURVEY</value>
+		</property>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="11/25/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="manualSurveyAction" class="com.sensus.cp.permissions.model.ActionType">
+		<property name="actionType">
+			<value type="com.sensus.cp.base.model.SurveyActionEnum">MANUAL_SURVEY</value>
+		</property>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="11/25/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="pspOnAction" class="com.sensus.cp.permissions.model.ActionType">
+		<property name="actionType">
+			<value type="com.sensus.cp.base.model.SurveyActionEnum">PSP_ON</value>
+		</property>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="11/25/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="pspOffAction" class="com.sensus.cp.permissions.model.ActionType">
+		<property name="actionType">
+			<value type="com.sensus.cp.base.model.SurveyActionEnum">PSP_OFF</value>
+		</property>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="11/25/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="psp100mvPolarizationAction" class="com.sensus.cp.permissions.model.ActionType">
+		<property name="actionType">
+			<value type="com.sensus.cp.base.model.SurveyActionEnum">PSP_100mV_POLARIZATION</value>
+		</property>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="11/25/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="healthCheckAction" class="com.sensus.cp.permissions.model.ActionType">
+		<property name="actionType">
+			<value type="com.sensus.cp.base.model.TestPointSurveyActionEnum">ANODE_HEALTH_CHECK</value>
+		</property>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="11/25/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="createPipeSectionAction" class="com.sensus.cp.permissions.model.ActionType">
+		<property name="actionType">
+			<value type="com.sensus.cp.base.model.PipeSectionActionEnum">CREATE_PIPE_SECTION</value>
+		</property>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="11/25/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="deletePipeSectionAction" class="com.sensus.cp.permissions.model.ActionType">
+		<property name="actionType">
+			<value type="com.sensus.cp.base.model.PipeSectionActionEnum">DELETE_PIPE_SECTION</value>
+		</property>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="11/25/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="createRectifierAction" class="com.sensus.cp.permissions.model.ActionType">
+		<property name="actionType">
+			<value type="com.sensus.cp.base.model.RectifierActionEnum">CREATE_RECTIFIER</value>
+		</property>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="11/25/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="deleteRectifierAction" class="com.sensus.cp.permissions.model.ActionType">
+		<property name="actionType">
+			<value type="com.sensus.cp.base.model.RectifierActionEnum">DELETE_RECTIFIER</value>
+		</property>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="11/25/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="manageTestPointsAction" class="com.sensus.cp.permissions.model.ActionType">
+		<property name="actionType">
+			<value type="com.sensus.cp.base.model.TestPointActionEnum">MANAGE_TEST_POINTS</value>
+		</property>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="11/25/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="createTestPointAction" class="com.sensus.cp.permissions.model.ActionType">
+		<property name="actionType">
+			<value type="com.sensus.cp.base.model.TestPointActionEnum">CREATE_TEST_POINT</value>
+		</property>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="11/25/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="deleteTestPointAction" class="com.sensus.cp.permissions.model.ActionType">
+		<property name="actionType">
+			<value type="com.sensus.cp.base.model.TestPointActionEnum">DELETE_TEST_POINT</value>
+		</property>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="11/25/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="addTestPointRectifierAction" class="com.sensus.cp.permissions.model.ActionType">
+		<property name="actionType">
+			<value type="com.sensus.cp.base.model.RectifierActionEnum">ADD_TEST_POINT_TO_RECTIFIER</value>
+		</property>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="11/25/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="configurationTestPointAction" class="com.sensus.cp.permissions.model.ActionType">
+		<property name="actionType">
+			<value type="com.sensus.cp.base.model.TestPointActionEnum">CONFIGURATION_TEST_POINT</value>
+		</property>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="11/25/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="clearAllAlertsAction" class="com.sensus.cp.permissions.model.ActionType">
+		<property name="actionType">
+			<value type="com.sensus.cp.base.model.LifecycleActionEnum">CLEAR_ALL</value>
+		</property>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="11/25/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="clearAlertAction" class="com.sensus.cp.permissions.model.ActionType">
+		<property name="actionType">
+			<value type="com.sensus.cp.base.model.LifecycleActionEnum">CLEAR</value>
+		</property>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="11/25/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="deleteAlertAction" class="com.sensus.cp.permissions.model.ActionType">
+		<property name="actionType">
+			<value type="com.sensus.cp.base.model.LifecycleActionEnum">DELETE</value>
+		</property>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="11/25/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="followUpAlertAction" class="com.sensus.cp.permissions.model.ActionType">
+		<property name="actionType">
+			<value type="com.sensus.cp.base.model.LifecycleActionEnum">FOLLOW_UP</value>
+		</property>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="11/25/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="quietAlertAction" class="com.sensus.cp.permissions.model.ActionType">
+		<property name="actionType">
+			<value type="com.sensus.cp.base.model.LifecycleActionEnum">QUIET</value>
+		</property>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="11/25/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="serviceOrderAlertAction" class="com.sensus.cp.permissions.model.ActionType">
+		<property name="actionType">
+			<value type="com.sensus.cp.base.model.LifecycleActionEnum">SERVICE_ORDER</value>
+		</property>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="11/25/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="verifyAlertAction" class="com.sensus.cp.permissions.model.ActionType">
+		<property name="actionType">
+			<value type="com.sensus.cp.base.model.LifecycleActionEnum">VERIFY</value>
+		</property>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="11/25/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+
+	<!--
+		#### Group Category ####
+	 -->
+	<bean id="createGroupAction" class="com.sensus.cp.permissions.model.ActionType">
+		<property name="actionType">
+			<value type="com.sensus.cp.base.model.GroupActionEnum">ADD</value>
+		</property>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="11/25/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="removeGroupAction" class="com.sensus.cp.permissions.model.ActionType">
+		<property name="actionType">
+			<value type="com.sensus.cp.base.model.GroupActionEnum">DELETE</value>
+		</property>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="11/25/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="addAssetGroupAction" class="com.sensus.cp.permissions.model.ActionType">
+		<property name="actionType">
+			<value type="com.sensus.cp.base.model.GroupActionEnum">ADD_MEMBER_TO_GROUP</value>
+		</property>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="11/25/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="deleteAssetGroupAction" class="com.sensus.cp.permissions.model.ActionType">
+		<property name="actionType">
+			<value type="com.sensus.cp.base.model.GroupActionEnum">DELETE_MEMBER_FROM_GROUP</value>
+		</property>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="11/25/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<!--
+		#### Tag Category ####
+	 -->
+	<bean id="createTagAction" class="com.sensus.cp.permissions.model.ActionType">
+		<property name="actionType">
+			<value type="com.sensus.cp.base.model.TagActionEnum">ADD</value>
+		</property>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="11/25/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="removeTagAction" class="com.sensus.cp.permissions.model.ActionType">
+		<property name="actionType">
+			<value type="com.sensus.cp.base.model.TagActionEnum">DELETE</value>
+		</property>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="11/25/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="addAssetTagAction" class="com.sensus.cp.permissions.model.ActionType">
+		<property name="actionType">
+			<value type="com.sensus.cp.base.model.TagActionEnum">ADD_MEMBER_TO_TAG</value>
+		</property>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="11/25/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<bean id="deleteAssetTagAction" class="com.sensus.cp.permissions.model.ActionType">
+		<property name="actionType">
+			<value type="com.sensus.cp.base.model.TagActionEnum">DELETE_MEMBER_FROM_TAG</value>
+		</property>
+		<property name="modifyUser" value="System"/>
+		<property name="modifyDate" value="11/25/2013" />
+		<property name="grantedAuthorityList" ref="grantedAuthorityListTarget"/>
+	</bean>
+
+	<util:map id="actionsByAlert" key-type="java.lang.String" value-type="java.util.ArrayList" >
+		<entry key="NEW">
+			<list value-type="com.sensus.cp.permissions.model.ActionType">
+				<ref bean="clearAlertAction" />
+				<ref bean="deleteAlertAction" />
+				<ref bean="followUpAlertAction" />
+				<ref bean="quietAlertAction" />
+				<ref bean="serviceOrderAlertAction" />
+				<ref bean="verifyAlertAction" />
+			</list>
+		</entry>
+		<entry key="FOLLOW_UP">
+			<list value-type="com.sensus.cp.permissions.model.ActionType">
+				<ref bean="clearAlertAction" />
+				<ref bean="deleteAlertAction" />
+				<ref bean="followUpAlertAction" />
+				<ref bean="serviceOrderAlertAction" />
+			</list>
+		</entry>
+	</util:map>
+
+	<!--
+	     ########################################
+	     ### GRANTED AUTHORITY - ACTION TYPES ###
+	     ########################################
+	 -->
+
+	<util:list id="grantedAuthorityListTarget" list-class="java.util.ArrayList" value-type="java.lang.String">
+		<value>ROLE_CP_ADMIN</value>
+		<value>ROLE_CP_SYSTEM_OPERATOR</value>
+		<value>ROLE_CP_CUSTOMER_SUPPORT</value>
+	</util:list>
+
+</beans>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  - Application context definition for the QAT data access layer.
+  -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:jee="http://www.springframework.org/schema/jee"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
+
+
+	<!-- ========================= RESOURCE DEFINITIONS ========================= -->
+	<!-- Main JNDI DataSource for JEE environments -->
+	<!-- Refers to the main database, containing data -->
+	<jee:jndi-lookup id="cpDataSource" jndi-name="jdbc/cpDataSource"/>
+	<!-- Configure the Spring framework to use JDBC transaction manager  -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="cpDataSource" />
+	</bean>
+</beans>

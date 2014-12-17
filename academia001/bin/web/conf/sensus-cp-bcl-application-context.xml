@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- ========================= BCL DEFINITIONS ======================== -->
+
+	<bean id="tagBCLTarget" class="com.sensus.cp.tag.bcl.impl.TagBCLImpl">
+		<property name="tagDAC" ref="tagDACTarget" />
+	</bean>
+
+	<bean id="groupBCLTarget" class="com.sensus.cp.group.bcl.impl.GroupBCLImpl">
+		<property name="groupDAC" ref="groupDACTarget" />
+		<property name="tagBCL" ref="tagBCLTarget" />
+		<property name="csvGroupSummaryExportColumns" ref="csvGroupSummaryExportColumns" />
+	</bean>
+
+	<bean id="settingsBCLTarget" class="com.sensus.cp.settings.bcl.impl.SettingsBCLImpl">
+		<property name="settingsDAC" ref="settingsDACTarget" />
+		<property name="superUserName" value="${super.user.name}" />
+		<property name="defaultLanguage" value="${system.settings.language}" />
+		<property name="defaultTimeZone" value="${system.settings.timeZone}" />
+		<property name="defaultDateFormat" value="${system.settings.dateFormat}" />
+		<property name="defaultPageSize" value="${system.settings.pageSize}" />
+	</bean>
+
+	<bean id="userBCLTarget" class="com.sensus.cp.user.bcl.impl.UserBCLImpl">
+		<property name="userDAC" ref="userDACTarget" />
+	</bean>
+
+	<bean id="tenantBCLTarget" class="com.sensus.cp.tenant.bcl.impl.TenantBCLImpl">
+		<property name="tenantDAC" ref="tenantDACTarget" />
+	</bean>
+
+	<bean id="dietaBCLTarget" class="com.sensus.cp.dieta.bcl.impl.DietaBCLImpl">
+		<property name="dietaDAC" ref="dietaDACTarget" />
+	</bean>
+
+</beans>
