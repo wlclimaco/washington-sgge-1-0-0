@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+	<display-name>CP</display-name>
+	<description>CP UI</description>
+	<!--
+		- Key of the system property that should specify the root directory of this
+		- web app. Applied by WebAppRootListener or Log4jConfigListener.
+	-->
+		<!-- Filters -->
+
+
+
+     <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+
+    <filter-mapping>
+      <filter-name>springSecurityFilterChain</filter-name>
+      <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+	<context-param>
+		<param-name>webAppRootKey</param-name>
+		<param-value>qat.root</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/conf/*-context.xml</param-value>
+	</context-param>
+	<!--
+		- Loads the root application context of this web app at startup,
+		- by default from "/WEB-INF/applicationContext.xml".
+		- Note that you need to fall back to Spring's ContextLoaderServlet for
+		- J2EE servers that do not follow the Servlet 2.4 initialization order.
+		-
+		- Use WebApplicationContextUtils.getWebApplicationContext(servletContext)
+		- to access it anywhere in the web application, outside of the framework.
+		-
+		- The root context is the parent of all servlet-specific contexts.
+		- This means that its beans are automatically available in these child contexts,
+		- both for getBean(name) calls and (external) bean references.
+	-->
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+    <listener>
+      <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+    </listener>
+
+
+	<!-- Dispatcher Spring MVC -->
+    <servlet>
+        <servlet-name>springMVCDispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>
+                /WEB-INF/conf/sensus-cp-mvc-config-context.xml
+            </param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>springMVCDispatcher</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+
+	<!-- TimeOut -->
+ 	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+
+	<!-- MainFile -->
+	<welcome-file-list>
+		<welcome-file>/login.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!-- WS server -->
+	<!--
+	<servlet>
+		<servlet-name>mlc-gateway-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>WEB-INF/conf/sensus-lc-ws-application-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>mlc-gateway-ws</servlet-name>
+		<url-pattern>/MLCGatewayService/*</url-pattern>
+	</servlet-mapping>
+	-->
+</web-app>

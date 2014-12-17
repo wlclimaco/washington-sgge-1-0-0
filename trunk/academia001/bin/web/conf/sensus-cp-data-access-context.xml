@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- - Application context definition for the QAT business area data access layer. -->
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
+
+
+
+
+	<!-- SqlMap setup for myBATIS Database Layer Group -->
+	<bean id="group-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation"
+			value="classpath:com/sensus/cp/group/dac/mybatis/map/group-sql-map-config.xml" />
+		<property name="dataSource" ref="cpDataSource" />
+	</bean>
+
+	<bean id="dieta-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation"
+			value="classpath:com/sensus/cp/dieta/dac/mybatis/map/dieta-sql-map-config.xml" />
+		<property name="dataSource" ref="cpDataSource" />
+	</bean>
+
+	<!-- SqlMap setup for myBATIS Database Layer Tag -->
+	<bean id="tag-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation"
+			value="classpath:com/sensus/cp/tag/dac/mybatis/map/cp-tag-mybatis-config.xml" />
+		<property name="dataSource" ref="cpDataSource" />
+	</bean>
+
+	<!-- SqlMap setup for myBATIS Database Layer Settings -->
+	<bean id="settings-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation"
+			value="classpath:com/sensus/cp/settings/dac/mybatis/map/settings-sql-map-config.xml" />
+		<property name="dataSource" ref="cpDataSource" />
+	</bean>
+
+	<!-- SqlMap setup for myBATIS Database Layer User -->
+	<bean id="user-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation"
+			value="classpath:com/sensus/cp/user/dac/mybatis/map/user-sql-map-config.xml" />
+		<property name="dataSource" ref="cpDataSource" />
+	</bean>
+
+	<!-- SqlMap setup for myBATIS Database Layer Tenant -->
+	<bean id="tenant-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation"
+			value="classpath:com/sensus/cp/tenant/dac/mybatis/map/tenant-sql-map-config.xml" />
+		<property name="dataSource" ref="cpDataSource" />
+	</bean>
+
+
+	<!-- ========================= DAC DEFINITIONS: MYBATIS IMPLEMENTATIONS ========================= -->
+
+
+	<bean id="tagDACTarget" class="com.sensus.cp.tag.dac.mybatis.TagDACImpl">
+		<property name="sqlSessionFactory" ref="tag-sqlSessionFactory" />
+	</bean>
+
+	<bean id="groupDACTarget" class="com.sensus.cp.group.dac.mybatis.GroupDACImpl">
+		<property name="sqlSessionFactory" ref="group-sqlSessionFactory" />
+	</bean>
+
+	<bean id="settingsDACTarget" class="com.sensus.cp.settings.dac.mybatis.SettingsDACImpl">
+		<property name="sqlSessionFactory" ref="settings-sqlSessionFactory" />
+	</bean>
+
+	<bean id="userDACTarget" class="com.sensus.cp.user.dac.mybatis.UserDACImpl">
+		<property name="sqlSessionFactory" ref="user-sqlSessionFactory" />
+	</bean>
+
+	<bean id="tenantDACTarget" class="com.sensus.cp.tenant.dac.mybatis.TenantDACImpl">
+		<property name="sqlSessionFactory" ref="tenant-sqlSessionFactory" />
+	</bean>
+
+	<bean id="dietaDACTarget" class="com.sensus.cp.dieta.dac.mybatis.DietaDACImpl">
+		<property name="sqlSessionFactory" ref="dieta-sqlSessionFactory" />
+	</bean>
+
+</beans>

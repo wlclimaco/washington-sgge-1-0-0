@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+	<!-- Configure Jaxb2Marshaller
+	<bean id="marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller"
+		p:contextPath="com.sensus.mlc.mlcserver.type" />
+
+
+	WS Client
+
+	 Configure Spring-WS client template
+	<bean id="wsTemplate" class="org.springframework.ws.client.core.WebServiceTemplate"
+		p:defaultUri="${gateway.uri}" p:marshaller-ref="marshaller"
+		p:unmarshaller-ref="marshaller">
+		<property name="interceptors">
+			<list merge="true">
+				<ref bean="mlc.interceptor.authentication" />
+			</list>
+		</property>
+	</bean>
+
+	 Configure the Spring-WS client
+	<bean id="mlcGatewayWSClient" class="com.sensus.lc.server.client.MlcServerClient"
+		lazy-init="false">
+		<property name="wsTemplate" ref="wsTemplate" />
+	</bean>
+
+
+	 Spring-Ws server BEGIN
+
+	 Endpoint
+	<bean id="MLCGatewayService"
+		class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition">
+		This is how you do it to include all referenced schemas inline
+		<property name="schema">
+			<bean class="org.springframework.xml.xsd.SimpleXsdSchema">
+				<property name="xsd" value="/xsd/mlc.xsd" />
+			</bean>
+		</property>
+		<property name="portTypeName" value="mlc" />
+		<property name="locationUri" value="/MLCGatewayService/" />
+		<property name="requestSuffix" value="Notification" />
+		<property name="responseSuffix" value="NotificationResult" />
+	</bean>
+
+	Endpoint Mapper
+	<bean
+		class="org.springframework.ws.server.endpoint.mapping.PayloadRootAnnotationMethodEndpointMapping">
+		<description>An endpoint mapping strategy that looks for @Endpoint
+			and
+			@PayloadRoot annotations.</description>
+		 Security disabled
+		<property name="interceptors">
+			<list merge="true">
+				<ref bean="securityInterceptor" />
+			</list>
+		</property>
+	</bean>
+
+	 Marshalling Endpoint Adapter
+	<bean
+		class="org.springframework.ws.server.endpoint.adapter.MarshallingMethodEndpointAdapter">
+		<description>Enables the MessageDispatchServlet to invoke methods
+			requiring OXM marshalling.</description>
+		<constructor-arg ref="marshaller" />
+	</bean>
+
+
+	 Spring-Ws END
+
+	<bean id="wsServer" class="com.sensus.lc.server.service.MlcServer">
+		<property name="mlcServerBCF" ref="mlcServerBCF" />
+	</bean> -->
+</beans>

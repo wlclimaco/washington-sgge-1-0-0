@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+
+	<!-- ############################# ######## Test Point Summary ####### ############################# -->
+
+	<bean id="csvTestPointName" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="test_point" />
+		<property name="headerResourceKey" value="cp.common.csv.testpoint.name" />
+		<property name="propertyPath" value="name" />
+	</bean>
+
+	<bean id="csvTestPointLocation" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="location" />
+		<property name="headerResourceKey" value="cp.common.csv.location" />
+		<property name="propertyPath" value="location" />
+	</bean>
+
+	<bean id="csvTestPointCity" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="city" />
+		<property name="headerResourceKey" value="cp.common.csv.city" />
+		<property name="propertyPath" value="city" />
+	</bean>
+
+	<bean id="csvTestPointProtectionType" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="protection_type" />
+		<property name="headerResourceKey" value="cp.common.csv.protection.type" />
+		<property name="propertyPath" value="." />
+	</bean>
+
+	<bean id="csvTestPointPipeSectionName" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="pipe_section_name" />
+		<property name="headerResourceKey" value="cp.common.csv.pipesection.name" />
+		<property name="propertyPath" value="pipeSectionName" />
+	</bean>
+
+	<bean id="csvTestPointLastRead" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="last_read" />
+		<property name="headerResourceKey" value="cp.common.csv.last.read" />
+		<property name="propertyPath" value="." />
+	</bean>
+
+	<bean id="csvTestPointLastReadDate" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="last_read_date" />
+		<property name="headerResourceKey" value="cp.testpoint.csv.last.read.date" />
+		<property name="propertyPath" value="." />
+	</bean>
+
+	<bean id="csvTestPointAlertSubType" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="alert_subtype" />
+		<property name="headerResourceKey" value="cp.common.csv.alert.subtype" />
+		<property name="propertyPath" value="." />
+	</bean>
+
+	<bean id="csvTestPointAlertRecieveDateUtc" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="alert_receive_date_utc" />
+		<property name="headerResourceKey" value="cp.testpoint.csv.alert.recieve.date.utc" />
+		<property name="propertyPath" value="." />
+	</bean>
+
+	<bean id="csvTestPointAlertType" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="alert_type" />
+		<property name="headerResourceKey" value="cp.common.csv.alert.type" />
+		<property name="propertyPath" value="." />
+	</bean>
+
+	<bean id="csvTestPointSampleDate" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="sample_date" />
+		<property name="headerResourceKey" value="cp.testpoint.csv.sample.date" />
+		<property name="propertyPath" value="." />
+	</bean>
+
+	<bean id="csvTestPointSampleTime" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="sample_time" />
+		<property name="headerResourceKey" value="cp.testpoint.csv.sample.time" />
+		<property name="propertyPath" value="." />
+	</bean>
+
+	<bean id="csvTestPointPipeSoilPotential" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="pipe_to_soil_potential" />
+		<property name="headerResourceKey" value="cp.testpoint.csv.pipe.soil.potential" />
+		<property name="propertyPath" value="pipeToSoilPotential" />
+		<property name="writeCellProcessor" ref="pipeSoilPotentialCellProcessor" />
+	</bean>
+
+	<bean id="pipeSoilPotentialCellProcessor" class="com.sensus.cp.base.csv.PipeSoilPotentialCellProcessor" />
+
+	<bean id="csvTestPointAudit" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="audit" />
+		<property name="headerResourceKey" value="cp.testpoint.csv.audit" />
+		<property name="propertyPath" value="isAudit" />
+		<property name="writeCellProcessor" ref="auditCellProcessor" />
+	</bean>
+
+	<bean id="auditCellProcessor" class="com.sensus.cp.base.csv.AuditCellProcessor" />
+
+	<!-- ############################# ######## Test Point Column sets ####### ############################# -->
+
+	<util:list id="csvTestPointSummaryExportColumns">
+		<ref bean="csvTestPointName" />
+		<ref bean="csvTestPointLocation" />
+		<ref bean="csvTestPointCity" />
+		<ref bean="csvTestPointProtectionType" />
+		<ref bean="csvTestPointPipeSectionName" />
+		<ref bean="csvTestPointLastRead" />
+		<ref bean="csvTestPointLastReadDate" />
+		<ref bean="csvTestPointAlertType" />
+		<ref bean="csvTestPointAlertSubType" />
+		<ref bean="csvTestPointAlertRecieveDateUtc" />
+	</util:list>
+
+	<util:list id="csvTestPointMessageExportColumns">
+		<ref bean="csvTestPointAudit" />
+		<ref bean="csvTestPointAlertType" />
+		<ref bean="csvTestPointAlertSubType" />
+		<ref bean="csvTestPointSampleDate" />
+		<ref bean="csvTestPointSampleTime" />
+		<ref bean="csvTestPointPipeSoilPotential" />
+	</util:list>
+
+	<!-- ############################# ######## Group Summary ####### ############################# -->
+
+	<bean id="csvGroupName" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="group_name" />
+		<property name="headerResourceKey" value="cp.group.csv.group.name" />
+		<property name="propertyPath" value="groupName" />
+	</bean>
+
+	<bean id="csvGroupDescription" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="description" />
+		<property name="headerResourceKey" value="cp.group.csv.description" />
+		<property name="propertyPath" value="." />
+	</bean>
+
+	<bean id="csvGroupAssets" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="assets" />
+		<property name="headerResourceKey" value="cp.group.csv.assets" />
+		<property name="propertyPath" value="assetTotal" />
+	</bean>
+
+	<bean id="csvGroupDateAdded" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="date_added" />
+		<property name="headerResourceKey" value="cp.group.csv.date.added" />
+		<property name="propertyPath" value="." />
+	</bean>
+
+	<!-- ############################# ######## Group Column sets ####### ############################# -->
+
+	<util:list id="csvGroupSummaryExportColumns">
+		<ref bean="csvGroupName" />
+		<ref bean="csvGroupDescription" />
+		<ref bean="csvGroupAssets" />
+		<ref bean="csvGroupDateAdded" />
+	</util:list>
+
+	<!-- ############################# ######## Alert Summary ####### ############################# -->
+
+	<bean id="csvAlertSubtype" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="alert_subtype" />
+		<property name="headerResourceKey" value="cp.common.csv.alert.subtype" />
+		<property name="propertyPath" value="." />
+	</bean>
+
+	<bean id="csvAlertLifeCycle" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="alert_life_cycle" />
+		<property name="headerResourceKey" value="cp.alert.csv.alert.lifecycle" />
+		<property name="propertyPath" value="." />
+	</bean>
+
+	<bean id="csvAlertDeviceName" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="device_name" />
+		<property name="headerResourceKey" value="cp.alert.csv.alert.device.name" />
+		<property name="propertyPath" value="deviceName" />
+	</bean>
+
+	<bean id="csvAlertDeviceType" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="device_type" />
+		<property name="headerResourceKey" value="cp.alert.csv.alert.devicetype" />
+		<property name="propertyPath" value="." />
+	</bean>
+
+	<bean id="csvAlertLocation" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="location" />
+		<property name="headerResourceKey" value="cp.alert.csv.alert.location" />
+		<property name="propertyPath" value="address" />
+	</bean>
+
+	<bean id="csvAlertPipeLine" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="pipeline" />
+		<property name="headerResourceKey" value="cp.alert.csv.pipeline" />
+		<property name="propertyPath" value="pipeSectionName" />
+	</bean>
+
+	<bean id="csvAlertProtectionType" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="protection_type" />
+		<property name="headerResourceKey" value="cp.alert.csv.protection" />
+		<property name="propertyPath" value="." />
+	</bean>
+
+	<bean id="csvAlertLastRead" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="last_read" />
+		<property name="headerResourceKey" value="cp.common.csv.last.read" />
+		<property name="propertyPath" value="." />
+	</bean>
+
+	<bean id="csvAlertType" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="alert_type" />
+		<property name="headerResourceKey" value="cp.common.csv.alert.type" />
+		<property name="propertyPath" value="." />
+	</bean>
+
+	<bean id="csvAlertReceived" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="alert_receive_date" />
+		<property name="headerResourceKey" value="cp.alert.csv.received" />
+		<property name="propertyPath" value="." />
+	</bean>
+
+	<!-- ############################# ######## Alert Column sets ####### ############################# -->
+
+	<util:list id="csvAlertSummaryExportColumns">
+		<ref bean="csvAlertSubtype" />
+		<ref bean="csvAlertLifeCycle" />
+		<ref bean="csvAlertDeviceName" />
+		<ref bean="csvAlertLocation" />
+		<ref bean="csvAlertPipeLine" />
+		<ref bean="csvAlertDeviceType" />
+		<ref bean="csvAlertProtectionType" />
+		<ref bean="csvAlertLastRead" />
+		<ref bean="csvAlertType" />
+		<ref bean="csvAlertReceived" />
+	</util:list>
+
+	<!-- ######## ######## Pipe Section Summary ####### ################### -->
+
+	<bean id="csvPipeSectionName" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="name" />
+		<property name="headerResourceKey" value="cp.common.csv.pipesection.name" />
+		<property name="propertyPath" value="name" />
+	</bean>
+
+	<bean id="csvPipeSectionLocation" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="location" />
+		<property name="headerResourceKey" value="cp.common.csv.location" />
+		<property name="propertyPath" value="location" />
+	</bean>
+
+	<bean id="csvTPipeSectionCity" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="city" />
+		<property name="headerResourceKey" value="cp.common.csv.city" />
+		<property name="propertyPath" value="city" />
+	</bean>
+
+	<bean id="csvPipeSectionProtectionType" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="protection_type" />
+		<property name="headerResourceKey" value="cp.common.csv.protection.type" />
+		<property name="propertyPath" value="." />
+	</bean>
+
+	<bean id="csvPipeSectionRectifiers" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="rectifier_total" />
+		<property name="headerResourceKey" value="cp.pipesection.csv.rectifiers" />
+		<property name="propertyPath" value="rectifiers" />
+	</bean>
+
+	<bean id="csvPipeSectionTestPoints" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="test_point_total" />
+		<property name="headerResourceKey" value="cp.pipesection.csv.testpoints" />
+		<property name="propertyPath" value="testPoints" />
+	</bean>
+
+	<bean id="csvPipeSectionAlerts" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="total_alerts" />
+		<property name="headerResourceKey" value="cp.pipesection.csv.total.alerts" />
+		<property name="propertyPath" value="totalAlerts" />
+	</bean>
+
+	<!-- ############################# ######## Pipe Section Column sets #################################### -->
+
+	<util:list id="csvPipeSectionSummaryExportColumns">
+		<ref bean="csvPipeSectionName" />
+		<ref bean="csvPipeSectionLocation" />
+		<ref bean="csvTPipeSectionCity" />
+		<ref bean="csvPipeSectionProtectionType" />
+		<ref bean="csvPipeSectionRectifiers" />
+		<ref bean="csvPipeSectionTestPoints" />
+		<ref bean="csvPipeSectionAlerts" />
+	</util:list>
+
+	<!-- ######## ######## Application Message History ####### ################### -->
+
+	<bean id="csvApplicationMessageHistoryActionType" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="action_type" />
+		<property name="headerResourceKey" value="cp.applicatiomessage.history.csv.action.type" />
+		<property name="propertyPath" value="ApplicationMessageSummary" />
+	</bean>
+
+	<bean id="csvApplicationMessageHistoryActionName" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="action_name" />
+		<property name="headerResourceKey" value="cp.applicatiomessage.history.csv.action.name" />
+		<property name="propertyPath" value="ApplicationMessageSummary" />
+	</bean>
+
+	<bean id="csvApplicationMessageHistoryEventName" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="event_name" />
+		<property name="headerResourceKey" value="cp.applicatiomessage.history.csv.event.name" />
+		<property name="propertyPath" value="ApplicationMessageSummary" />
+	</bean>
+
+	<bean id="csvApplicationMessageHistoryRequestBy" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="requested_by" />
+		<property name="headerResourceKey" value="cp.applicatiomessage.history.csv.request.by" />
+		<property name="propertyPath" value="ApplicationMessageSummary.requestBy" />
+	</bean>
+
+	<bean id="csvApplicationMessageHistoryStartTime" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="create_date" />
+		<property name="headerResourceKey" value="cp.applicatiomessage.history.csv.start.time" />
+		<property name="propertyPath" value="ApplicationMessageSummary" />
+	</bean>
+
+	<bean id="csvApplicationMessageHistoryStatus" class="com.sensus.common.csv.CSVColumn">
+		<property name="name" value="status" />
+		<property name="headerResourceKey" value="cp.applicatiomessage.history.csv.status" />
+		<property name="propertyPath" value="ApplicationMessageSummary" />
+	</bean>
+
+	<!-- ############################# ######## Application Message History Column sets #################################### -->
+
+	<util:list id="csvApplicationMessageHistoryExportColumns">
+		<ref bean="csvApplicationMessageHistoryActionType" />
+		<ref bean="csvApplicationMessageHistoryActionName" />
+		<ref bean="csvApplicationMessageHistoryEventName" />
+		<ref bean="csvApplicationMessageHistoryRequestBy" />
+		<ref bean="csvApplicationMessageHistoryStartTime" />
+		<ref bean="csvApplicationMessageHistoryStatus" />
+	</util:list>
+
+
+</beans>

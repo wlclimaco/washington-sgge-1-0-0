@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- General -->
+	<bean id="requestValidator" class="com.sensus.cp.base.validation.RequestValidator" />
+	<bean id="requestValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="requestValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="selectionCriteriaValidator" class="com.sensus.cp.base.validation.SelectionCriteriaValidator"/>
+	<bean id="selectionCriteriaValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="selectionCriteriaValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- Test Point -->
+	<bean id="testPointCriteriaValidator" class="com.sensus.cp.base.validation.TestPointCriteriaValidator"/>
+	<bean id="testPointCriteriaValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="testPointCriteriaValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="testPointValidator" class="com.sensus.cp.base.validation.TestPointValidator" />
+	<bean id="testPointValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="testPointValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="testPointMessageCriteriaValidator" class="com.sensus.cp.base.validation.TestPointMessageCriteriaValidator" />
+	<bean id="testPointMessageCriteriaValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="testPointMessageCriteriaValidator" />
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- Tag -->
+	<bean id="TagValidator" class="com.sensus.cp.tag.validation.TagValidator">
+		<property name="nameLength" value="60" />
+	</bean>
+	<bean id="tagValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="TagValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="tagMemberMaintenanceRequestValidator" class="com.sensus.cp.tag.validation.TagMemberMaintenanceRequestValidator"/>
+	<bean id="tagMemberMaintenanceRequestValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="tagMemberMaintenanceRequestValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<!--Group -->
+	<bean id="groupValidator" class="com.sensus.cp.group.validation.GroupValidator"/>
+	<bean id="groupValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="groupValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="groupMemberMaintenanceRequestValidator" class="com.sensus.cp.group.validation.GroupMemberMaintenanceRequestValidator"/>
+	<bean id="groupMemberMaintenanceRequestValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="groupMemberMaintenanceRequestValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="groupMemberCriteriaValidator" class="com.sensus.cp.group.validation.GroupMemberCriteriaValidator"/>
+	<bean id="groupMemberCriteriaValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="groupMemberCriteriaValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<!--Settings -->
+	<bean id="settingsValidator" class="com.sensus.cp.settings.validation.SettingsValidator"/>
+	<bean id="settingsValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="settingsValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="settingsCriteriaValidator" class="com.sensus.cp.settings.validation.SettingsCriteriaValidator"/>
+	<bean id="settingsCriteriaValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="settingsCriteriaValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<!--User -->
+	<bean id="userValidator" class="com.sensus.cp.user.validation.UserValidator" >
+		<property name="userBCL" ref="userBCLTarget" />
+	</bean>
+	<bean id="userValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="userValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userCriteriaValidator" class="com.sensus.cp.user.validation.UserCriteriaValidator"/>
+	<bean id="userCriteriaValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="userCriteriaValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- Tenant -->
+	<bean id="tenantCriteriaValidator" class="com.sensus.cp.tenant.validation.TenantCriteriaValidator"/>
+	<bean id="tenantCriteriaValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="tenantCriteriaValidator" />
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- CSV -->
+	<bean id="csvRequestValidator" class="com.sensus.cp.base.validation.CSVRequestValidator"/>
+	<bean id="csvRequestValidationController" class="com.sensus.common.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="csvRequestValidator" />
+			</list>
+		</property>
+	</bean>
+
+
+</beans>

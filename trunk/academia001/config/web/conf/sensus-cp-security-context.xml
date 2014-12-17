@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/security
+          	http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<!-- ########## HTTP requests security. ########## -->
+
+	<security:global-method-security pre-post-annotations="enabled" />
+
+	<security:http pattern="/login*" security="none" />
+	<security:http pattern="/timeout*" security="none"/>
+	<security:http pattern="/access-denied*" security="none"/>
+	<security:http pattern="/images/**" security="none" />
+	<security:http pattern="/version.jsp" security="none" />
+
+	<!--  The spring security authentication-manager -->
+	<security:authentication-manager alias="authenticationManager" />
+
+	<security:http auto-config="false" use-expressions="true"
+		access-denied-page="/login.jsp?Session timed out." entry-point-ref="loginUrlAuthenticationEntryPoint">
+		<security:custom-filter position="FORM_LOGIN_FILTER" ref="customUsernamePasswordAuthenticationFilter" />
+		<security:custom-filter position="CONCURRENT_SESSION_FILTER" ref="concurrencyFilter" />
+		<security:intercept-url pattern="/process/**" access="isAuthenticated()" />
+		<security:intercept-url pattern="/**/**" access="hasAnyRole('ROLE_CP_ADMIN', 'ROLE_CP_SYSTEM_OPERATOR', 'ROLE_CP_CUSTOMER_SUPPORT') and hasAnyRole('ROLE_CP_SERVICE_CATHODIC_GAS')" />
+		<security:logout invalidate-session="true" logout-success-url="/login.jsp?Successful Logout." />
+	</security:http>
+
+	<bean id="loginUrlAuthenticationEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+		<property name="loginFormUrl" value="/login.jsp?Please Login." />
+	</bean>
+
+ 	<bean id="customUsernamePasswordAuthenticationFilter" class="com.sensus.cp.security.CustomUsernamePasswordAuthenticationFilter">
+		<property name="authenticationManager" ref="customAuthenticationManager" />
+		<property name="authenticationSuccessHandler" ref="successHandler" />
+		<property name="authenticationFailureHandler" ref="failureHandler" />
+		<property name="sessionAuthenticationStrategy" ref="sessionAuthenticationStrategy" />
+	</bean>
+
+	<bean id="concurrencyFilter" class="org.springframework.security.web.session.ConcurrentSessionFilter">
+		<property name="sessionRegistry" ref="sessionRegistry" />
+		<property name="expiredUrl" value="/timeout.jsp" />
+	</bean>
+
+	<bean id="successHandler" class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
+		<property name="defaultTargetUrl" value="/main" />
+		<property name="alwaysUseDefaultTargetUrl" value="true" />
+	</bean>
+
+	<bean id="failureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+		<property name="defaultFailureUrl" value="/login.jsp?error=true" />
+	</bean>
+
+	<bean id="sessionAuthenticationStrategy" class="org.springframework.security.web.authentication.session.ConcurrentSessionControlStrategy">
+		<constructor-arg name="sessionRegistry" ref="sessionRegistry" />
+		<property name="maximumSessions" value="5" />
+		<property name="exceptionIfMaximumExceeded" value="true"/>
+    </bean>
+
+    <bean id="sessionRegistry" class="org.springframework.security.core.session.SessionRegistryImpl" />
+
+	<!-- Custom authentication manager. In order to authenticate username/password and Tenant -->
+	<bean id="customAuthenticationManager" class="com.sensus.cp.security.CustomAuthenticationManager">
+    	<property name="tenantBCF" ref="tenantBCF" />
+		<property name="userBCF" ref="userBCF" />
+		<property name="superUserName" value="${super.user.name}" />
+	</bean>
+
+</beans>
