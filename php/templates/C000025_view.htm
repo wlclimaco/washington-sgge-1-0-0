@@ -1,0 +1,474 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<title>{$pagetitle}</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=7">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+		{BEGIN pageCSSFiles}
+		<link REL="stylesheet" href="{$pagestylepath}" type="text/css">
+		{END pageCSSFiles}
+		<!--[if IE]>
+			<link REL="stylesheet" href="styles/defaultIE.css" type="text/css">
+			{BEGIN IEcssFiles}
+			<link REL="stylesheet" href="{$stylepathIE}" type="text/css">
+			{END IEcssFiles}
+		<![endif]-->
+	</head>
+	
+	<body class="{$stylename}" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+		<table   cellpadding="0" class="runner-toptable">
+			<tr class="runner-header">
+				<td class="runner-top" colspan=3>
+					
+
+
+
+{BEGIN container_view}
+<table class="runner-c runner-c-view" cellpadding="0" align=center>
+
+
+<tr class="runner-toprow style2 header"><td class="runner-cl"><img src="images/spacer.gif"></td><td class="runner-cc" ><div  class="runner-b-viewheader {$brickclass_viewheader}">C000025, Exibir Registro [
+Código: {$show_key1}
+]</div></td><td class="runner-cr"><img src="images/spacer.gif"></td></tr>
+
+
+
+<tr  class="runner-row style1 runner-b-wrapper {$wrapperclass_fields}"><td class="runner-cl"></td><td class="runner-cc runner-brickcontents runner-wrapper" >
+
+{BEGIN container_fields}
+<table class="runner-c runner-c-fields" cellpadding="0" >
+
+
+	{BEGIN CODIGO_fieldblock}
+	<tr class="runner-toprow header style1 runner-b-viewfields"><td class="runner-cl"><img src="images/spacer.gif"></td>
+	<td class="runner-cc runner-cc1">
+		<div class="fieldlabel_CODIGO {$fielddispclass_CODIGO}">
+			<b>Código</b>
+		</div>
+		</td>
+		<td class="runner-cc alt">
+		<div class="fieldvalue_CODIGO {$fielddispclass_CODIGO}">
+			{$CODIGO_value}&nbsp;
+		</div>
+		</td>
+	<td class="runner-cr alt"><img src="images/spacer.gif"></td></tr>
+{END CODIGO_fieldblock}
+	{BEGIN SITUACAO_fieldblock}
+	<tr class="runner-row style1 runner-b-viewfields"><td class="runner-cl"></td>
+	<td class="runner-cc runner-cc1">
+		<div class="fieldlabel_SITUACAO {$fielddispclass_SITUACAO}">
+			<b>Situação</b>
+		</div>
+		</td>
+		<td class="runner-cc alt">
+		<div class="fieldvalue_SITUACAO {$fielddispclass_SITUACAO}">
+			{$SITUACAO_value}&nbsp;
+		</div>
+		</td>
+	<td class="runner-cr alt"></td></tr>
+{END SITUACAO_fieldblock}
+	{BEGIN CODBARRA_fieldblock}
+	<tr class="runner-row style1 runner-b-viewfields"><td class="runner-cl"></td>
+	<td class="runner-cc runner-cc1">
+		<div class="fieldlabel_CODBARRA {$fielddispclass_CODBARRA}">
+			<b>Código de Barra</b>
+		</div>
+		</td>
+		<td class="runner-cc alt">
+		<div class="fieldvalue_CODBARRA {$fielddispclass_CODBARRA}">
+			{$CODBARRA_value}&nbsp;
+		</div>
+		</td>
+	<td class="runner-cr alt"></td></tr>
+{END CODBARRA_fieldblock}
+	{BEGIN PRODUTO_fieldblock}
+	<tr class="runner-row style1 runner-b-viewfields"><td class="runner-cl"></td>
+	<td class="runner-cc runner-cc1">
+		<div class="fieldlabel_PRODUTO {$fielddispclass_PRODUTO}">
+			<b>Produto</b>
+		</div>
+		</td>
+		<td class="runner-cc alt">
+		<div class="fieldvalue_PRODUTO {$fielddispclass_PRODUTO}">
+			{$PRODUTO_value}&nbsp;
+		</div>
+		</td>
+	<td class="runner-cr alt"></td></tr>
+{END PRODUTO_fieldblock}
+	{BEGIN UNIDADE_fieldblock}
+	<tr class="runner-row style1 runner-b-viewfields"><td class="runner-cl"></td>
+	<td class="runner-cc runner-cc1">
+		<div class="fieldlabel_UNIDADE {$fielddispclass_UNIDADE}">
+			<b>Unidade</b>
+		</div>
+		</td>
+		<td class="runner-cc alt">
+		<div class="fieldvalue_UNIDADE {$fielddispclass_UNIDADE}">
+			{$UNIDADE_value}&nbsp;
+		</div>
+		</td>
+	<td class="runner-cr alt"></td></tr>
+{END UNIDADE_fieldblock}
+	{BEGIN CODGRUPO_fieldblock}
+	<tr class="runner-row style1 runner-b-viewfields"><td class="runner-cl"></td>
+	<td class="runner-cc runner-cc1">
+		<div class="fieldlabel_CODGRUPO {$fielddispclass_CODGRUPO}">
+			<b>Grupo</b>
+		</div>
+		</td>
+		<td class="runner-cc alt">
+		<div class="fieldvalue_CODGRUPO {$fielddispclass_CODGRUPO}">
+			{$CODGRUPO_value}&nbsp;
+		</div>
+		</td>
+	<td class="runner-cr alt"></td></tr>
+{END CODGRUPO_fieldblock}
+	{BEGIN CODSUBGRUPO_fieldblock}
+	<tr class="runner-row style1 runner-b-viewfields"><td class="runner-cl"></td>
+	<td class="runner-cc runner-cc1">
+		<div class="fieldlabel_CODSUBGRUPO {$fielddispclass_CODSUBGRUPO}">
+			<b>Sub Grupo</b>
+		</div>
+		</td>
+		<td class="runner-cc alt">
+		<div class="fieldvalue_CODSUBGRUPO {$fielddispclass_CODSUBGRUPO}">
+			{$CODSUBGRUPO_value}&nbsp;
+		</div>
+		</td>
+	<td class="runner-cr alt"></td></tr>
+{END CODSUBGRUPO_fieldblock}
+	{BEGIN CODFORNECEDOR_fieldblock}
+	<tr class="runner-row style1 runner-b-viewfields"><td class="runner-cl"></td>
+	<td class="runner-cc runner-cc1">
+		<div class="fieldlabel_CODFORNECEDOR {$fielddispclass_CODFORNECEDOR}">
+			<b>Fornecedor</b>
+		</div>
+		</td>
+		<td class="runner-cc alt">
+		<div class="fieldvalue_CODFORNECEDOR {$fielddispclass_CODFORNECEDOR}">
+			{$CODFORNECEDOR_value}&nbsp;
+		</div>
+		</td>
+	<td class="runner-cr alt"></td></tr>
+{END CODFORNECEDOR_fieldblock}
+	{BEGIN CODMARCA_fieldblock}
+	<tr class="runner-row style1 runner-b-viewfields"><td class="runner-cl"></td>
+	<td class="runner-cc runner-cc1">
+		<div class="fieldlabel_CODMARCA {$fielddispclass_CODMARCA}">
+			<b>Marca</b>
+		</div>
+		</td>
+		<td class="runner-cc alt">
+		<div class="fieldvalue_CODMARCA {$fielddispclass_CODMARCA}">
+			{$CODMARCA_value}&nbsp;
+		</div>
+		</td>
+	<td class="runner-cr alt"></td></tr>
+{END CODMARCA_fieldblock}
+	{BEGIN DATA_CADASTRO_fieldblock}
+	<tr class="runner-row style1 runner-b-viewfields"><td class="runner-cl"></td>
+	<td class="runner-cc runner-cc1">
+		<div class="fieldlabel_DATA_CADASTRO {$fielddispclass_DATA_CADASTRO}">
+			<b>Data de Cadastro</b>
+		</div>
+		</td>
+		<td class="runner-cc alt">
+		<div class="fieldvalue_DATA_CADASTRO {$fielddispclass_DATA_CADASTRO}">
+			{$DATA_CADASTRO_value}&nbsp;
+		</div>
+		</td>
+	<td class="runner-cr alt"></td></tr>
+{END DATA_CADASTRO_fieldblock}
+	{BEGIN PRECOCUSTO_fieldblock}
+	<tr class="runner-row style1 runner-b-viewfields"><td class="runner-cl"></td>
+	<td class="runner-cc runner-cc1">
+		<div class="fieldlabel_PRECOCUSTO {$fielddispclass_PRECOCUSTO}">
+			<b>Preço de Custo</b>
+		</div>
+		</td>
+		<td class="runner-cc alt">
+		<div class="fieldvalue_PRECOCUSTO {$fielddispclass_PRECOCUSTO}">
+			{$PRECOCUSTO_value}&nbsp;
+		</div>
+		</td>
+	<td class="runner-cr alt"></td></tr>
+{END PRECOCUSTO_fieldblock}
+	{BEGIN PRECOVENDA_fieldblock}
+	<tr class="runner-row style1 runner-b-viewfields"><td class="runner-cl"></td>
+	<td class="runner-cc runner-cc1">
+		<div class="fieldlabel_PRECOVENDA {$fielddispclass_PRECOVENDA}">
+			<b>Preço de Venda</b>
+		</div>
+		</td>
+		<td class="runner-cc alt">
+		<div class="fieldvalue_PRECOVENDA {$fielddispclass_PRECOVENDA}">
+			{$PRECOVENDA_value}&nbsp;
+		</div>
+		</td>
+	<td class="runner-cr alt"></td></tr>
+{END PRECOVENDA_fieldblock}
+	{BEGIN ESTOQUE_fieldblock}
+	<tr class="runner-row style1 runner-b-viewfields"><td class="runner-cl"></td>
+	<td class="runner-cc runner-cc1">
+		<div class="fieldlabel_ESTOQUE {$fielddispclass_ESTOQUE}">
+			<b>Estoque</b>
+		</div>
+		</td>
+		<td class="runner-cc alt">
+		<div class="fieldvalue_ESTOQUE {$fielddispclass_ESTOQUE}">
+			{$ESTOQUE_value}&nbsp;
+		</div>
+		</td>
+	<td class="runner-cr alt"></td></tr>
+{END ESTOQUE_fieldblock}
+	{BEGIN ESTOQUEMINIMO_fieldblock}
+	<tr class="runner-row style1 runner-b-viewfields"><td class="runner-cl"></td>
+	<td class="runner-cc runner-cc1">
+		<div class="fieldlabel_ESTOQUEMINIMO {$fielddispclass_ESTOQUEMINIMO}">
+			<b>Estoque Mínimo</b>
+		</div>
+		</td>
+		<td class="runner-cc alt">
+		<div class="fieldvalue_ESTOQUEMINIMO {$fielddispclass_ESTOQUEMINIMO}">
+			{$ESTOQUEMINIMO_value}&nbsp;
+		</div>
+		</td>
+	<td class="runner-cr alt"></td></tr>
+{END ESTOQUEMINIMO_fieldblock}
+	{BEGIN CODALIQUOTA_fieldblock}
+	<tr class="runner-row style1 runner-b-viewfields"><td class="runner-cl"></td>
+	<td class="runner-cc runner-cc1">
+		<div class="fieldlabel_CODALIQUOTA {$fielddispclass_CODALIQUOTA}">
+			<b>Alíquota</b>
+		</div>
+		</td>
+		<td class="runner-cc alt">
+		<div class="fieldvalue_CODALIQUOTA {$fielddispclass_CODALIQUOTA}">
+			{$CODALIQUOTA_value}&nbsp;
+		</div>
+		</td>
+	<td class="runner-cr alt"></td></tr>
+{END CODALIQUOTA_fieldblock}
+	{BEGIN LOCALICAZAO_fieldblock}
+	<tr class="runner-row style1 runner-b-viewfields"><td class="runner-cl"></td>
+	<td class="runner-cc runner-cc1">
+		<div class="fieldlabel_LOCALICAZAO {$fielddispclass_LOCALICAZAO}">
+			<b>Localização</b>
+		</div>
+		</td>
+		<td class="runner-cc alt">
+		<div class="fieldvalue_LOCALICAZAO {$fielddispclass_LOCALICAZAO}">
+			{$LOCALICAZAO_value}&nbsp;
+		</div>
+		</td>
+	<td class="runner-cr alt"></td></tr>
+{END LOCALICAZAO_fieldblock}
+	{BEGIN PESO_fieldblock}
+	<tr class="runner-row style1 runner-b-viewfields"><td class="runner-cl"></td>
+	<td class="runner-cc runner-cc1">
+		<div class="fieldlabel_PESO {$fielddispclass_PESO}">
+			<b>Peso</b>
+		</div>
+		</td>
+		<td class="runner-cc alt">
+		<div class="fieldvalue_PESO {$fielddispclass_PESO}">
+			{$PESO_value}&nbsp;
+		</div>
+		</td>
+	<td class="runner-cr alt"></td></tr>
+{END PESO_fieldblock}
+	{BEGIN CST_fieldblock}
+	<tr class="runner-row style1 runner-b-viewfields"><td class="runner-cl"></td>
+	<td class="runner-cc runner-cc1">
+		<div class="fieldlabel_CST {$fielddispclass_CST}">
+			<b>CST</b>
+		</div>
+		</td>
+		<td class="runner-cc alt">
+		<div class="fieldvalue_CST {$fielddispclass_CST}">
+			{$CST_value}&nbsp;
+		</div>
+		</td>
+	<td class="runner-cr alt"></td></tr>
+{END CST_fieldblock}
+	{BEGIN TAMANHO_fieldblock}
+	<tr class="runner-row style1 runner-b-viewfields"><td class="runner-cl"></td>
+	<td class="runner-cc runner-cc1">
+		<div class="fieldlabel_TAMANHO {$fielddispclass_TAMANHO}">
+			<b>Tamanho</b>
+		</div>
+		</td>
+		<td class="runner-cc alt">
+		<div class="fieldvalue_TAMANHO {$fielddispclass_TAMANHO}">
+			{$TAMANHO_value}&nbsp;
+		</div>
+		</td>
+	<td class="runner-cr alt"></td></tr>
+{END TAMANHO_fieldblock}
+	{BEGIN COR_fieldblock}
+	<tr class="runner-row style1 runner-b-viewfields"><td class="runner-cl"></td>
+	<td class="runner-cc runner-cc1">
+		<div class="fieldlabel_COR {$fielddispclass_COR}">
+			<b>Cor</b>
+		</div>
+		</td>
+		<td class="runner-cc alt">
+		<div class="fieldvalue_COR {$fielddispclass_COR}">
+			{$COR_value}&nbsp;
+		</div>
+		</td>
+	<td class="runner-cr alt"></td></tr>
+{END COR_fieldblock}
+	{BEGIN CSOSN_fieldblock}
+	<tr class="runner-row style1 runner-b-viewfields"><td class="runner-cl"></td>
+	<td class="runner-cc runner-cc1">
+		<div class="fieldlabel_CSOSN {$fielddispclass_CSOSN}">
+			<b>CSOSN</b>
+		</div>
+		</td>
+		<td class="runner-cc alt">
+		<div class="fieldvalue_CSOSN {$fielddispclass_CSOSN}">
+			{$CSOSN_value}&nbsp;
+		</div>
+		</td>
+	<td class="runner-cr alt"></td></tr>
+{END CSOSN_fieldblock}
+	{BEGIN NOTAFISCAL_fieldblock}
+	<tr class="runner-row style1 runner-b-viewfields"><td class="runner-cl"></td>
+	<td class="runner-cc runner-cc1">
+		<div class="fieldlabel_NOTAFISCAL {$fielddispclass_NOTAFISCAL}">
+			<b>Nota Fiscal</b>
+		</div>
+		</td>
+		<td class="runner-cc alt">
+		<div class="fieldvalue_NOTAFISCAL {$fielddispclass_NOTAFISCAL}">
+			{$NOTAFISCAL_value}&nbsp;
+		</div>
+		</td>
+	<td class="runner-cr alt"></td></tr>
+{END NOTAFISCAL_fieldblock}
+	{BEGIN VALIDADE_fieldblock}
+	<tr class="runner-row style1 runner-b-viewfields"><td class="runner-cl"></td>
+	<td class="runner-cc runner-cc1">
+		<div class="fieldlabel_VALIDADE {$fielddispclass_VALIDADE}">
+			<b>Validade</b>
+		</div>
+		</td>
+		<td class="runner-cc alt">
+		<div class="fieldvalue_VALIDADE {$fielddispclass_VALIDADE}">
+			{$VALIDADE_value}&nbsp;
+		</div>
+		</td>
+	<td class="runner-cr alt"></td></tr>
+{END VALIDADE_fieldblock}
+	{BEGIN CLASSIFICACAO_FISCAL_fieldblock}
+	<tr class="runner-row style1 runner-b-viewfields"><td class="runner-cl"></td>
+	<td class="runner-cc runner-cc1">
+		<div class="fieldlabel_CLASSIFICACAO_FISCAL {$fielddispclass_CLASSIFICACAO_FISCAL}">
+			<b>Class. Fiscal</b>
+		</div>
+		</td>
+		<td class="runner-cc alt">
+		<div class="fieldvalue_CLASSIFICACAO_FISCAL {$fielddispclass_CLASSIFICACAO_FISCAL}">
+			{$CLASSIFICACAO_FISCAL_value}&nbsp;
+		</div>
+		</td>
+	<td class="runner-cr alt"></td></tr>
+{END CLASSIFICACAO_FISCAL_fieldblock}
+	{BEGIN NCM_fieldblock}
+	<tr class="runner-row style1 runner-b-viewfields"><td class="runner-cl"></td>
+	<td class="runner-cc runner-cc1">
+		<div class="fieldlabel_NCM {$fielddispclass_NCM}">
+			<b>NCM</b>
+		</div>
+		</td>
+		<td class="runner-cc alt">
+		<div class="fieldvalue_NCM {$fielddispclass_NCM}">
+			{$NCM_value}&nbsp;
+		</div>
+		</td>
+	<td class="runner-cr alt"></td></tr>
+{END NCM_fieldblock}
+
+
+
+
+<tr  class="runner-row style2 runner-b-viewbuttons {$brickclass_viewbuttons}"><td class="runner-cl"></td><td class="runner-cc runner-brickcontents" colspan=2>{BEGIN prev_button}
+<span class="runner-btnframe">
+<span class="runner-btnleft"></span>
+<span class="runner-btnright"></span>
+<a href="#" class="runner-button" {$prevbutton_attrs}>&lt;&lt;&lt;</a>
+</span>
+{END prev_button}
+{BEGIN back_button}
+<span class="runner-btnframe">
+<span class="runner-btnleft"></span>
+<span class="runner-btnright"></span>
+<a href="#" class="runner-button" {$backbutton_attrs}>Voltar à Lista</a>
+</span>
+{END back_button}
+{BEGIN next_button}
+<span class="runner-btnframe">
+<span class="runner-btnleft"></span>
+<span class="runner-btnright"></span>
+<a href="#" class="runner-button" {$nextbutton_attrs}>&gt;&gt;&gt;</a>
+</span>
+{END next_button}
+</td><td class="runner-cr"></td></tr>
+
+
+<tr class="{$cfooterclass_fields}">
+<td class="runner-cl"><img src="images/spacer.gif"></td>
+<td class="runner-cc"></td><td class="runner-cc"></td><td class="runner-cr"><img src="images/spacer.gif"></td>
+</tr>
+</table>
+{END container_fields}
+
+</td><td class="runner-cr"></td></tr>
+
+
+<tr class="{$cfooterclass_view}">
+<td class="runner-cl"><img src="images/spacer.gif"></td>
+<td class="runner-cc"></td><td class="runner-cr"><img src="images/spacer.gif"></td>
+</tr>
+</table>
+{END container_view}
+
+
+
+
+				</td>
+			</tr>
+			<tr class="runner-body">
+				
+				<td class="runner-left {$blockclass_left}" >
+					
+				</td>	
+				
+				<td class="runner-center {$blockclass_center}">
+					
+				</td>	
+
+				<td class="runner-right {$blockclass_right}">
+					
+				</td>	
+			</tr>
+			<tr class="runner-footer">
+				<td class="runner-bottom" colspan=3>
+					<!--%%bottom%%-->
+				</td>
+			</tr>
+		</table>
+		{$footer}
+	{END body}
+	</body>
+</html>

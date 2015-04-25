@@ -1,0 +1,15 @@
+{BEGIN mainmenu_block}
+<table class="runner-hmenu" cellpadding="0">
+	<tr>
+	##if !IsAdminTable(@TABLE)##
+	##foreach @BUILDER.MenuNodes as @menu filter !@menu.parent##
+		<td id="item##@menu.id##" view="topitem" class="##@menu.type##">
+		##include templates\topmenuitem_preview.htm##
+		</td>
+	##endfor##
+	##else##
+	##include templates\mainmenu_adminarea_horiz_preview.htm##
+	##endif##
+  </tr>
+</table>  
+{END mainmenu_block}

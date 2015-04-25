@@ -1,0 +1,165 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<title>{$pagetitle}</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=7">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+		{BEGIN pageCSSFiles}
+		<link REL="stylesheet" href="{$pagestylepath}" type="text/css">
+		{END pageCSSFiles}
+		<!--[if IE]>
+			<link REL="stylesheet" href="styles/defaultIE.css" type="text/css">
+			{BEGIN IEcssFiles}
+			<link REL="stylesheet" href="{$stylepathIE}" type="text/css">
+			{END IEcssFiles}
+		<![endif]-->
+	</head>
+	
+	<body class="{$stylename}" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+		<table   cellpadding="0" class="runner-toptable">
+			<tr class="runner-header">
+				<td class="runner-top" colspan=3>
+					
+
+{BEGIN container_export}
+<table class="runner-c runner-c-export" cellpadding="0" align=center>
+
+
+<tr class="runner-toprow style2 header"><td class="runner-cl"><img src="images/spacer.gif"></td><td class="runner-cc" ><div  class="runner-b-exportheader {$brickclass_exportheader}">Exportar</div></td><td class="runner-cr"><img src="images/spacer.gif"></td></tr>
+
+
+
+<tr  class="runner-row style1 runner-b-wrapper {$wrapperclass_range}"><td class="runner-cl"></td><td class="runner-cc runner-brickcontents runner-wrapper" >
+
+{BEGIN container_range}
+<table class="runner-c runner-c-range" cellpadding="0" >
+<tr class="{$cheaderclass_range}">
+<td class="runner-cl"><img src="images/spacer.gif"></td>
+<td class="runner-cc"></td><td class="runner-cr"><img src="images/spacer.gif"></td>
+</tr>
+
+{BEGIN rangeheader_block}
+<tr  class="runner-row style1 runner-b-exprange_header {$brickclass_exprange_header}"><td class="runner-cl"></td><td class="runner-cc runner-brickcontents" >Faixa de Dados</td><td class="runner-cr"></td></tr>{END rangeheader_block}
+
+
+{BEGIN range_block}
+<tr class="runner-row style1 runner-b-exprange"><td class="runner-cl"></td>
+	<td class="runner-cc runner-cc1">
+		<INPUT TYPE="radio" class="runner-radio-button" NAME="records" VALUE="all" CHECKED {$allpageradio_attrs}>
+		<span class="runner-radio-label"> Todos os Registros&nbsp;&nbsp;&nbsp; </span>
+		<INPUT TYPE="radio" class="runner-radio-button" NAME="records" VALUE="page" {$pageradio_attrs}>
+		<span class="runner-radio-label">  Apenas Página Atual </span>
+	</td>
+<td class="runner-cr"></td></tr>{END range_block}
+
+
+<tr class="{$cfooterclass_range}">
+<td class="runner-cl"><img src="images/spacer.gif"></td>
+<td class="runner-cc"></td><td class="runner-cr"><img src="images/spacer.gif"></td>
+</tr>
+</table>
+{END container_range}
+
+</td><td class="runner-cr"></td></tr>
+
+
+
+<tr  class="runner-row style1 runner-b-wrapper {$wrapperclass_fields}"><td class="runner-cl"></td><td class="runner-cc runner-brickcontents runner-wrapper" >
+
+{BEGIN container_fields}
+<table class="runner-c runner-c-fields" cellpadding="0" >
+<tr class="{$cheaderclass_fields}">
+<td class="runner-cl"><img src="images/spacer.gif"></td>
+<td class="runner-cc"></td><td class="runner-cr"><img src="images/spacer.gif"></td>
+</tr>
+
+
+<tr  class="runner-row style1 runner-b-expoutput_header {$brickclass_expoutput_header}"><td class="runner-cl"></td><td class="runner-cc runner-brickcontents" >Formato de Output</td><td class="runner-cr"></td></tr>
+
+
+
+{BEGIN groupExcel}
+<tr class="runner-row style1 runner-b-expoutput"><td class="runner-cl"></td>
+	<td class="runner-cc runner-cc1">
+		<INPUT TYPE="radio" class="runner-radio-button" NAME="type" VALUE="excel2007" CHECKED {$excelradio_attrs}><span class="runner-radio-label"> <img src="images/excel.gif" align="absmiddle" alt=" ">&nbsp;Excel 2007</span>
+	</td>
+<td class="runner-cr"></td></tr>
+<tr class="runner-row style1 runner-b-expoutput"><td class="runner-cl"></td>
+	<td class="runner-cc runner-cc1">
+		<INPUT TYPE="radio" class="runner-radio-button" NAME="type" VALUE="excel5" {$excelradio_attrs}><span class="runner-radio-label"> <img src="images/excel.gif" align="absmiddle" alt=" ">&nbsp;Excel 5</span>
+	</td>
+<td class="runner-cr"></td></tr>
+{END groupExcel}
+<tr class="runner-row style1 runner-b-expoutput"><td class="runner-cl"></td>
+	<td class="runner-cc runner-cc1"><INPUT TYPE="radio" class="runner-radio-button" NAME="type" VALUE="word" {$wordradio_attrs}><span class="runner-radio-label"> <img src="images/word.gif" align="absmiddle" alt=" ">&nbsp;Word</span></td>
+<td class="runner-cr"></td></tr>
+<tr class="runner-row style1 runner-b-expoutput"><td class="runner-cl"></td>
+	<td class="runner-cc runner-cc1"><INPUT TYPE="radio" class="runner-radio-button" NAME="type" VALUE="csv" {$csvradio_attrs}><span class="runner-radio-label"> <img src="images/csv.gif" align="absmiddle" alt=" ">&nbsp;CSV (delimitado por vírgulas)</span></td>
+<td class="runner-cr"></td></tr>
+<tr class="runner-row style1 runner-b-expoutput"><td class="runner-cl"></td>
+	<td class="runner-cc runner-cc1"><INPUT TYPE="radio" class="runner-radio-button" NAME="type" VALUE="xml" {$xmlradio_attrs}><span class="runner-radio-label"> <img src="images/xml.gif" align="absmiddle" alt=" ">&nbsp;XML</span></td>
+<td class="runner-cr"></td></tr>
+
+
+
+<tr class="{$cfooterclass_fields}">
+<td class="runner-cl"><img src="images/spacer.gif"></td>
+<td class="runner-cc"></td><td class="runner-cr"><img src="images/spacer.gif"></td>
+</tr>
+</table>
+{END container_fields}
+
+</td><td class="runner-cr"></td></tr>
+
+
+
+<tr  class="runner-row style2 runner-b-expbuttons {$brickclass_expbuttons}"><td class="runner-cl"></td><td class="runner-cc runner-brickcontents" ><span class="runner-btnframe">
+<span class="runner-btnleft"></span>
+<span class="runner-btnright"></span>
+<a href="#" class="runner-button" {$exportlink_attrs}>Exportar</a>
+</span></td><td class="runner-cr"></td></tr>
+
+
+<tr class="{$cfooterclass_export}">
+<td class="runner-cl"><img src="images/spacer.gif"></td>
+<td class="runner-cc"></td><td class="runner-cr"><img src="images/spacer.gif"></td>
+</tr>
+</table>
+{END container_export}
+
+
+				</td>
+			</tr>
+			<tr class="runner-body">
+				
+				<td class="runner-left {$blockclass_left}" >
+					
+				</td>	
+				
+				<td class="runner-center {$blockclass_center}">
+					
+				</td>	
+
+				<td class="runner-right {$blockclass_right}">
+					
+				</td>	
+			</tr>
+			<tr class="runner-footer">
+				<td class="runner-bottom" colspan=3>
+					<!--%%bottom%%-->
+				</td>
+			</tr>
+		</table>
+		{$footer}
+	{END body}
+	</body>
+</html>

@@ -1,0 +1,114 @@
+.page-search3,
+  .runner-pagewrapper .page-search3,
+  .runner-pagewrapper .runner-pagewrapper .page-search3
+{
+padding-top:10px; padding-left:10px;
+}
+.page-search3 .runner-c-search,
+  .runner-pagewrapper .page-search3 .runner-c-search,
+  .runner-pagewrapper .runner-pagewrapper .page-search3 .runner-c-search
+{
+margin-bottom:5px;
+}
+.page-search3 .runner-c-search,
+  .runner-pagewrapper .page-search3 .runner-c-search,
+  .runner-pagewrapper .runner-pagewrapper .page-search3 .runner-c-search
+{
+width:500px;
+}
+body.page-search3 .runner-c-search
+{
+margin-left:auto; margin-right:auto;
+}
+.page-search3 .runner-b-srchheader, .page-search3 .runner-b-srchheader,
+.page-search3 .runner-b-srchheader, .page-search3 .runner-b-srchheader > *,
+  .runner-pagewrapper .page-search3 .runner-b-srchheader, .page-search3 .runner-b-srchheader,
+  .runner-pagewrapper .page-search3 .runner-b-srchheader, .page-search3 .runner-b-srchheader > *,
+  .runner-pagewrapper .runner-pagewrapper .page-search3 .runner-b-srchheader, .page-search3 .runner-b-srchheader,
+  .runner-pagewrapper .runner-pagewrapper .page-search3 .runner-b-srchheader, .page-search3 .runner-b-srchheader > *
+{
+white-space: nowrap;
+}
+.page-search3 .runner-b-srchheader, .page-search3 .runner-b-srchheader,
+.page-search3 .runner-b-srchheader, .page-search3 .runner-b-srchheader > *,
+  .runner-pagewrapper .page-search3 .runner-b-srchheader, .page-search3 .runner-b-srchheader,
+  .runner-pagewrapper .page-search3 .runner-b-srchheader, .page-search3 .runner-b-srchheader > *,
+  .runner-pagewrapper .runner-pagewrapper .page-search3 .runner-b-srchheader, .page-search3 .runner-b-srchheader,
+  .runner-pagewrapper .runner-pagewrapper .page-search3 .runner-b-srchheader, .page-search3 .runner-b-srchheader > *
+{
+text-align: right;
+}
+.page-search3 .runner-b-srchconditions, .page-search3 .runner-b-srchconditions,
+.page-search3 .runner-b-srchconditions, .page-search3 .runner-b-srchconditions > *,
+  .runner-pagewrapper .page-search3 .runner-b-srchconditions, .page-search3 .runner-b-srchconditions,
+  .runner-pagewrapper .page-search3 .runner-b-srchconditions, .page-search3 .runner-b-srchconditions > *,
+  .runner-pagewrapper .runner-pagewrapper .page-search3 .runner-b-srchconditions, .page-search3 .runner-b-srchconditions,
+  .runner-pagewrapper .runner-pagewrapper .page-search3 .runner-b-srchconditions, .page-search3 .runner-b-srchconditions > *
+{
+white-space: nowrap;
+}
+.page-search3 .runner-b-srchconditions, .page-search3 .runner-b-srchconditions,
+.page-search3 .runner-b-srchconditions, .page-search3 .runner-b-srchconditions > *,
+  .runner-pagewrapper .page-search3 .runner-b-srchconditions, .page-search3 .runner-b-srchconditions,
+  .runner-pagewrapper .page-search3 .runner-b-srchconditions, .page-search3 .runner-b-srchconditions > *,
+  .runner-pagewrapper .runner-pagewrapper .page-search3 .runner-b-srchconditions, .page-search3 .runner-b-srchconditions,
+  .runner-pagewrapper .runner-pagewrapper .page-search3 .runner-b-srchconditions, .page-search3 .runner-b-srchconditions > *
+{
+text-align: right;
+}
+.page-search3 .runner-c-fields,
+  .runner-pagewrapper .page-search3 .runner-c-fields,
+  .runner-pagewrapper .runner-pagewrapper .page-search3 .runner-c-fields
+{
+margin-bottom:5px;
+}
+.page-search3 .runner-c-fields,
+  .runner-pagewrapper .page-search3 .runner-c-fields,
+  .runner-pagewrapper .runner-pagewrapper .page-search3 .runner-c-fields
+{
+width:100%;
+}
+.page-search3 .runner-b-srchfields, .page-search3 .runner-b-srchfields,
+.page-search3 .runner-b-srchfields, .page-search3 .runner-b-srchfields > *,
+  .runner-pagewrapper .page-search3 .runner-b-srchfields, .page-search3 .runner-b-srchfields,
+  .runner-pagewrapper .page-search3 .runner-b-srchfields, .page-search3 .runner-b-srchfields > *,
+  .runner-pagewrapper .runner-pagewrapper .page-search3 .runner-b-srchfields, .page-search3 .runner-b-srchfields,
+  .runner-pagewrapper .runner-pagewrapper .page-search3 .runner-b-srchfields, .page-search3 .runner-b-srchfields > *
+{
+white-space: nowrap;
+}
+.page-search3 .runner-b-srchfields, .page-search3 .runner-b-srchfields,
+.page-search3 .runner-b-srchfields, .page-search3 .runner-b-srchfields > *,
+  .runner-pagewrapper .page-search3 .runner-b-srchfields, .page-search3 .runner-b-srchfields,
+  .runner-pagewrapper .page-search3 .runner-b-srchfields, .page-search3 .runner-b-srchfields > *,
+  .runner-pagewrapper .runner-pagewrapper .page-search3 .runner-b-srchfields, .page-search3 .runner-b-srchfields,
+  .runner-pagewrapper .runner-pagewrapper .page-search3 .runner-b-srchfields, .page-search3 .runner-b-srchfields > *
+{
+text-align: right;
+}
+.page-search3 .runner-b-srchbuttons, .page-search3 .runner-b-srchbuttons,
+.page-search3 .runner-b-srchbuttons, .page-search3 .runner-b-srchbuttons > *,
+  .runner-pagewrapper .page-search3 .runner-b-srchbuttons, .page-search3 .runner-b-srchbuttons,
+  .runner-pagewrapper .page-search3 .runner-b-srchbuttons, .page-search3 .runner-b-srchbuttons > *,
+  .runner-pagewrapper .runner-pagewrapper .page-search3 .runner-b-srchbuttons, .page-search3 .runner-b-srchbuttons,
+  .runner-pagewrapper .runner-pagewrapper .page-search3 .runner-b-srchbuttons, .page-search3 .runner-b-srchbuttons > *
+{
+white-space: nowrap;
+}
+.page-search3 .runner-b-srchbuttons, .page-search3 .runner-b-srchbuttons,
+.page-search3 .runner-b-srchbuttons, .page-search3 .runner-b-srchbuttons > *,
+  .runner-pagewrapper .page-search3 .runner-b-srchbuttons, .page-search3 .runner-b-srchbuttons,
+  .runner-pagewrapper .page-search3 .runner-b-srchbuttons, .page-search3 .runner-b-srchbuttons > *,
+  .runner-pagewrapper .runner-pagewrapper .page-search3 .runner-b-srchbuttons, .page-search3 .runner-b-srchbuttons,
+  .runner-pagewrapper .runner-pagewrapper .page-search3 .runner-b-srchbuttons, .page-search3 .runner-b-srchbuttons > *
+{
+text-align: right;
+}
+body.page-search3 .runner-toptable
+{
+width:100%;
+}
+body.page-search3 .runner-top
+{
+padding-right: 5px;
+}

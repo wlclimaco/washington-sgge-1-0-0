@@ -1,0 +1,86 @@
+.page-print,
+  .runner-pagewrapper .page-print,
+  .runner-pagewrapper .runner-pagewrapper .page-print
+{
+padding-top:10px; padding-left:10px;
+}
+.page-print .runner-c-grid,
+  .runner-pagewrapper .page-print .runner-c-grid,
+  .runner-pagewrapper .runner-pagewrapper .page-print .runner-c-grid
+{
+margin-bottom:5px;
+}
+.page-print .runner-b-printgrid, .page-print .runner-b-printgrid,
+.page-print .runner-b-printgrid, .page-print .runner-b-printgrid > *,
+  .runner-pagewrapper .page-print .runner-b-printgrid, .page-print .runner-b-printgrid,
+  .runner-pagewrapper .page-print .runner-b-printgrid, .page-print .runner-b-printgrid > *,
+  .runner-pagewrapper .runner-pagewrapper .page-print .runner-b-printgrid, .page-print .runner-b-printgrid,
+  .runner-pagewrapper .runner-pagewrapper .page-print .runner-b-printgrid, .page-print .runner-b-printgrid > *
+{
+white-space: nowrap;
+}
+.page-print .runner-b-printgrid, .page-print .runner-b-printgrid,
+.page-print .runner-b-printgrid, .page-print .runner-b-printgrid > *,
+  .runner-pagewrapper .page-print .runner-b-printgrid, .page-print .runner-b-printgrid,
+  .runner-pagewrapper .page-print .runner-b-printgrid, .page-print .runner-b-printgrid > *,
+  .runner-pagewrapper .runner-pagewrapper .page-print .runner-b-printgrid, .page-print .runner-b-printgrid,
+  .runner-pagewrapper .runner-pagewrapper .page-print .runner-b-printgrid, .page-print .runner-b-printgrid > *
+{
+text-align: left;
+}
+body.page-print .runner-center
+{
+padding-right: 5px;
+}
+.page-print .runner-c-master,
+  .runner-pagewrapper .page-print .runner-c-master,
+  .runner-pagewrapper .runner-pagewrapper .page-print .runner-c-master
+{
+margin-bottom:5px;
+}
+.page-print .runner-b-masterinfoprint, .page-print .runner-b-masterinfoprint,
+.page-print .runner-b-masterinfoprint, .page-print .runner-b-masterinfoprint > *,
+  .runner-pagewrapper .page-print .runner-b-masterinfoprint, .page-print .runner-b-masterinfoprint,
+  .runner-pagewrapper .page-print .runner-b-masterinfoprint, .page-print .runner-b-masterinfoprint > *,
+  .runner-pagewrapper .runner-pagewrapper .page-print .runner-b-masterinfoprint, .page-print .runner-b-masterinfoprint,
+  .runner-pagewrapper .runner-pagewrapper .page-print .runner-b-masterinfoprint, .page-print .runner-b-masterinfoprint > *
+{
+white-space: nowrap;
+}
+.page-print .runner-b-masterinfoprint, .page-print .runner-b-masterinfoprint,
+.page-print .runner-b-masterinfoprint, .page-print .runner-b-masterinfoprint > *,
+  .runner-pagewrapper .page-print .runner-b-masterinfoprint, .page-print .runner-b-masterinfoprint,
+  .runner-pagewrapper .page-print .runner-b-masterinfoprint, .page-print .runner-b-masterinfoprint > *,
+  .runner-pagewrapper .runner-pagewrapper .page-print .runner-b-masterinfoprint, .page-print .runner-b-masterinfoprint,
+  .runner-pagewrapper .runner-pagewrapper .page-print .runner-b-masterinfoprint, .page-print .runner-b-masterinfoprint > *
+{
+text-align: left;
+}
+.page-print .runner-c-pdf,
+  .runner-pagewrapper .page-print .runner-c-pdf,
+  .runner-pagewrapper .runner-pagewrapper .page-print .runner-c-pdf
+{
+margin-bottom:5px;
+}
+.page-print .runner-b-printpdf, .page-print .runner-b-printpdf,
+.page-print .runner-b-printpdf, .page-print .runner-b-printpdf > *,
+  .runner-pagewrapper .page-print .runner-b-printpdf, .page-print .runner-b-printpdf,
+  .runner-pagewrapper .page-print .runner-b-printpdf, .page-print .runner-b-printpdf > *,
+  .runner-pagewrapper .runner-pagewrapper .page-print .runner-b-printpdf, .page-print .runner-b-printpdf,
+  .runner-pagewrapper .runner-pagewrapper .page-print .runner-b-printpdf, .page-print .runner-b-printpdf > *
+{
+white-space: nowrap;
+}
+.page-print .runner-b-printpdf, .page-print .runner-b-printpdf,
+.page-print .runner-b-printpdf, .page-print .runner-b-printpdf > *,
+  .runner-pagewrapper .page-print .runner-b-printpdf, .page-print .runner-b-printpdf,
+  .runner-pagewrapper .page-print .runner-b-printpdf, .page-print .runner-b-printpdf > *,
+  .runner-pagewrapper .runner-pagewrapper .page-print .runner-b-printpdf, .page-print .runner-b-printpdf,
+  .runner-pagewrapper .runner-pagewrapper .page-print .runner-b-printpdf, .page-print .runner-b-printpdf > *
+{
+text-align: left;
+}
+body.page-print .runner-top
+{
+padding-right: 5px;
+}

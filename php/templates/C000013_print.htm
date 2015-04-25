@@ -1,0 +1,307 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<title>{$pagetitle}</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=7">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+		{BEGIN pageCSSFiles}
+		<link REL="stylesheet" href="{$pagestylepath}" type="text/css">
+		{END pageCSSFiles}
+		<!--[if IE]>
+			<link REL="stylesheet" href="styles/defaultIE.css" type="text/css">
+			{BEGIN IEcssFiles}
+			<link REL="stylesheet" href="{$stylepathIE}" type="text/css">
+			{END IEcssFiles}
+		<![endif]-->
+	</head>
+	
+	<body class="{$stylename}" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+		<table   cellpadding="0" class="runner-toptable">
+			<tr class="runner-header">
+				<td class="runner-top" colspan=3>
+					
+
+
+
+
+				</td>
+			</tr>
+			<tr class="runner-body">
+				
+				<td class="runner-left {$blockclass_left}" >
+					
+				</td>	
+				
+				<td class="runner-center {$blockclass_center}">
+					
+
+{BEGIN container_grid}
+
+
+{BEGIN grid_block}
+{BEGIN page}
+<h1>C000013</h1>
+<span>
+{BEGIN page_number}
+Página {$pageno} de {$maxpages} 
+{END page_number}
+</span>
+
+	<div class="runner-s-grid">	
+	<table class="runner-c runner-c-grid" cellpadding="0">
+		<thead>
+		{BEGIN grid_header}
+		<tr class="runner-toprow style1">
+			<td class="runner-cl"><img src="images/spacer.gif"></td>
+			{BEGIN record_header}
+					{BEGIN NUMERO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN NUMERO_fieldheader}
+	<b>Número</b>
+	{END NUMERO_fieldheader}
+</th>
+{END NUMERO_fieldheadercolumn}
+	{BEGIN TITULAR_CONTA_PADRAO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN TITULAR_CONTA_PADRAO_fieldheader}
+	<b>Titular</b>
+	{END TITULAR_CONTA_PADRAO_fieldheader}
+</th>
+{END TITULAR_CONTA_PADRAO_fieldheadercolumn}
+	{BEGIN BANCO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN BANCO_fieldheader}
+	<b>Bando</b>
+	{END BANCO_fieldheader}
+</th>
+{END BANCO_fieldheadercolumn}
+	{BEGIN CARTAO_CREDITO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN CARTAO_CREDITO_fieldheader}
+	<b>Cartão de Crédito</b>
+	{END CARTAO_CREDITO_fieldheader}
+</th>
+{END CARTAO_CREDITO_fieldheadercolumn}
+	{BEGIN FINANCEIRA_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN FINANCEIRA_fieldheader}
+	<b>Financeira</b>
+	{END FINANCEIRA_fieldheader}
+</th>
+{END FINANCEIRA_fieldheadercolumn}
+	{BEGIN RESSARCIMENTO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN RESSARCIMENTO_fieldheader}
+	<b>Ressarcimento</b>
+	{END RESSARCIMENTO_fieldheader}
+</th>
+{END RESSARCIMENTO_fieldheadercolumn}
+	{BEGIN PRAZO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN PRAZO_fieldheader}
+	<b>Prazo</b>
+	{END PRAZO_fieldheader}
+</th>
+{END PRAZO_fieldheadercolumn}
+	{BEGIN COMISSAO_CREDITO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN COMISSAO_CREDITO_fieldheader}
+	<b>Comissão Crédito</b>
+	{END COMISSAO_CREDITO_fieldheader}
+</th>
+{END COMISSAO_CREDITO_fieldheadercolumn}
+	{BEGIN COMISSAO_DEBITO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN COMISSAO_DEBITO_fieldheader}
+	<b>Comissão Débito</b>
+	{END COMISSAO_DEBITO_fieldheader}
+</th>
+{END COMISSAO_DEBITO_fieldheadercolumn}
+	{BEGIN REC_DEBITO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN REC_DEBITO_fieldheader}
+	<b>Rec. Débito</b>
+	{END REC_DEBITO_fieldheader}
+</th>
+{END REC_DEBITO_fieldheadercolumn}
+	{BEGIN REC_CREDITO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN REC_CREDITO_fieldheader}
+	<b>Rec. Crédito</b>
+	{END REC_CREDITO_fieldheader}
+</th>
+{END REC_CREDITO_fieldheadercolumn}
+	{BEGIN CONTA_PADRAO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN CONTA_PADRAO_fieldheader}
+	<b>Conta</b>
+	{END CONTA_PADRAO_fieldheader}
+</th>
+{END CONTA_PADRAO_fieldheadercolumn}
+		
+			{END record_header}
+			<td class="runner-cr"><img src="images/spacer.gif"></td>
+			{BEGIN endrecordheader_block}
+			<td class="runner-cs">&nbsp;</td>
+			{END endrecordheader_block}
+		</tr>
+	{END grid_header}
+		</thead>
+		<tbody>	
+		{BEGIN grid_row}
+	<tr class="runner-row style1" {$rowattrs} {$rowstyle} {$rowstyle}>
+		<td class="runner-cl"></td>
+		{BEGIN grid_record}
+				{BEGIN NUMERO_fieldcolumn}
+<td  class="runner-cc {$NUMERO_class}" {$NUMERO_style}>
+	{$NUMERO_value}
+</td>
+{END NUMERO_fieldcolumn}
+	{BEGIN TITULAR_CONTA_PADRAO_fieldcolumn}
+<td  class="runner-cc {$TITULAR_CONTA_PADRAO_class}" {$TITULAR_CONTA_PADRAO_style}>
+	{$TITULAR_CONTA_PADRAO_value}
+</td>
+{END TITULAR_CONTA_PADRAO_fieldcolumn}
+	{BEGIN BANCO_fieldcolumn}
+<td  class="runner-cc {$BANCO_class}" {$BANCO_style}>
+	{$BANCO_value}
+</td>
+{END BANCO_fieldcolumn}
+	{BEGIN CARTAO_CREDITO_fieldcolumn}
+<td  class="runner-cc {$CARTAO_CREDITO_class}" {$CARTAO_CREDITO_style}>
+	{$CARTAO_CREDITO_value}
+</td>
+{END CARTAO_CREDITO_fieldcolumn}
+	{BEGIN FINANCEIRA_fieldcolumn}
+<td  class="runner-cc {$FINANCEIRA_class}" {$FINANCEIRA_style}>
+	{$FINANCEIRA_value}
+</td>
+{END FINANCEIRA_fieldcolumn}
+	{BEGIN RESSARCIMENTO_fieldcolumn}
+<td  class="runner-cc {$RESSARCIMENTO_class}" {$RESSARCIMENTO_style}>
+	{$RESSARCIMENTO_value}
+</td>
+{END RESSARCIMENTO_fieldcolumn}
+	{BEGIN PRAZO_fieldcolumn}
+<td  class="runner-cc {$PRAZO_class}" {$PRAZO_style}>
+	{$PRAZO_value}
+</td>
+{END PRAZO_fieldcolumn}
+	{BEGIN COMISSAO_CREDITO_fieldcolumn}
+<td  class="runner-cc {$COMISSAO_CREDITO_class}" {$COMISSAO_CREDITO_style}>
+	{$COMISSAO_CREDITO_value}
+</td>
+{END COMISSAO_CREDITO_fieldcolumn}
+	{BEGIN COMISSAO_DEBITO_fieldcolumn}
+<td  class="runner-cc {$COMISSAO_DEBITO_class}" {$COMISSAO_DEBITO_style}>
+	{$COMISSAO_DEBITO_value}
+</td>
+{END COMISSAO_DEBITO_fieldcolumn}
+	{BEGIN REC_DEBITO_fieldcolumn}
+<td  class="runner-cc {$REC_DEBITO_class}" {$REC_DEBITO_style}>
+	{$REC_DEBITO_value}
+</td>
+{END REC_DEBITO_fieldcolumn}
+	{BEGIN REC_CREDITO_fieldcolumn}
+<td  class="runner-cc {$REC_CREDITO_class}" {$REC_CREDITO_style}>
+	{$REC_CREDITO_value}
+</td>
+{END REC_CREDITO_fieldcolumn}
+	{BEGIN CONTA_PADRAO_fieldcolumn}
+<td  class="runner-cc {$CONTA_PADRAO_class}" {$CONTA_PADRAO_style}>
+	{$CONTA_PADRAO_value}
+</td>
+{END CONTA_PADRAO_fieldcolumn}
+
+		{END grid_record}
+		<td class="runner-cr"></td>
+		{BEGIN endrecord_block}
+		<td class="runner-cs">&nbsp;</td>
+		{END endrecord_block}
+	</tr>
+{END grid_row}
+										
+								<tr class="runner-bottomrow style1">
+									<td class="runner-cl"><img src="images/spacer.gif"></td>
+									{BEGIN record_footer}
+									{BEGIN NUMERO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END NUMERO_fieldfootercolumn}
+{BEGIN TITULAR_CONTA_PADRAO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END TITULAR_CONTA_PADRAO_fieldfootercolumn}
+{BEGIN BANCO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END BANCO_fieldfootercolumn}
+{BEGIN CARTAO_CREDITO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END CARTAO_CREDITO_fieldfootercolumn}
+{BEGIN FINANCEIRA_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END FINANCEIRA_fieldfootercolumn}
+{BEGIN RESSARCIMENTO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END RESSARCIMENTO_fieldfootercolumn}
+{BEGIN PRAZO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END PRAZO_fieldfootercolumn}
+{BEGIN COMISSAO_CREDITO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END COMISSAO_CREDITO_fieldfootercolumn}
+{BEGIN COMISSAO_DEBITO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END COMISSAO_DEBITO_fieldfootercolumn}
+{BEGIN REC_DEBITO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END REC_DEBITO_fieldfootercolumn}
+{BEGIN REC_CREDITO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END REC_CREDITO_fieldfootercolumn}
+{BEGIN CONTA_PADRAO_fieldfootercolumn}
+<td class="runner-cc runner-clast"></td>
+{END CONTA_PADRAO_fieldfootercolumn}
+
+									{END record_footer}
+									<td class="runner-cr"><img src="images/spacer.gif"></td>
+									{BEGIN endrecordtotals_block}
+									<td class="runner-cs"></td>
+									{END endrecordtotals_block}
+								</tr>
+
+		</tbody>
+	</table>
+</div>	
+{END page}
+
+{END grid_block}
+
+
+
+{END container_grid}
+
+
+				</td>	
+
+				<td class="runner-right {$blockclass_right}">
+					
+				</td>	
+			</tr>
+			<tr class="runner-footer">
+				<td class="runner-bottom" colspan=3>
+					<!--%%bottom%%-->
+				</td>
+			</tr>
+		</table>
+		{$footer}
+	{END body}
+	</body>
+</html>

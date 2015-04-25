@@ -1,0 +1,11 @@
+##if @menu.type!="Separator"##
+<table cellpadding="0">
+	<tr class="runner-menutab##if @menu.table==@TABLE.strDataSourceTable## current##endif##">
+		<td class="runner-cl"><img src="images/spacer.gif"></td>
+		<td class="runner-cc">	
+			<a id="itemlink##@menu.id##" ##if @menu.style## style="##@menu.style##"##endif## title="##if @menu.name && @menu.nameType=="CustomID"####@menu.name 8h####elseif @menu.name####@menu.name 8h####elseif @menu.PageType=="WebReports"####message WEBREPORTS_SHORT####else####caption @menu.table####endif##">##if @menu.name && @menu.nameType=="CustomID"####custom @menu.name####elseif @menu.name####@menu.name 8h####elseif @menu.PageType=="WebReports"####message WEBREPORTS_SHORT####else####caption @menu.table####endif##</a>
+		</td>
+		<td class="runner-cr"><img src="images/spacer.gif"></td>
+	</tr>
+</table>	
+##endif##	

@@ -1,0 +1,502 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<title>{$pagetitle}</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=7">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+		{BEGIN pageCSSFiles}
+		<link REL="stylesheet" href="{$pagestylepath}" type="text/css">
+		{END pageCSSFiles}
+		<!--[if IE]>
+			<link REL="stylesheet" href="styles/defaultIE.css" type="text/css">
+			{BEGIN IEcssFiles}
+			<link REL="stylesheet" href="{$stylepathIE}" type="text/css">
+			{END IEcssFiles}
+		<![endif]-->
+	</head>
+	
+	<body class="{$stylename}" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+		<table   cellpadding="0" class="runner-toptable">
+			<tr class="runner-header">
+				<td class="runner-top" colspan=3>
+					
+
+
+
+
+				</td>
+			</tr>
+			<tr class="runner-body">
+				
+				<td class="runner-left {$blockclass_left}" >
+					
+				</td>	
+				
+				<td class="runner-center {$blockclass_center}">
+					
+
+{BEGIN container_grid}
+
+
+{BEGIN grid_block}
+{BEGIN page}
+<h1>C000040</h1>
+<span>
+{BEGIN page_number}
+Página {$pageno} de {$maxpages} 
+{END page_number}
+</span>
+
+	<div class="runner-s-grid">	
+	<table class="runner-c runner-c-grid" cellpadding="0">
+		<thead>
+		{BEGIN grid_header}
+		<tr class="runner-toprow style1">
+			<td class="runner-cl"><img src="images/spacer.gif"></td>
+			{BEGIN record_header}
+					{BEGIN CODIGO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN CODIGO_fieldheader}
+	<b>Código</b>
+	{END CODIGO_fieldheader}
+</th>
+{END CODIGO_fieldheadercolumn}
+	{BEGIN TITULAR_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN TITULAR_fieldheader}
+	<b>Titular</b>
+	{END TITULAR_fieldheader}
+</th>
+{END TITULAR_fieldheadercolumn}
+	{BEGIN EMISSAO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN EMISSAO_fieldheader}
+	<b>Emissão</b>
+	{END EMISSAO_fieldheader}
+</th>
+{END EMISSAO_fieldheadercolumn}
+	{BEGIN VENCIMENTO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN VENCIMENTO_fieldheader}
+	<b>Vencimento</b>
+	{END VENCIMENTO_fieldheader}
+</th>
+{END VENCIMENTO_fieldheadercolumn}
+	{BEGIN DATA_DEPOSITO1_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN DATA_DEPOSITO1_fieldheader}
+	<b>Data Depósito nº1</b>
+	{END DATA_DEPOSITO1_fieldheader}
+</th>
+{END DATA_DEPOSITO1_fieldheadercolumn}
+	{BEGIN DATA_DEPOSITO2_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN DATA_DEPOSITO2_fieldheader}
+	<b>Data Depósito nº2</b>
+	{END DATA_DEPOSITO2_fieldheader}
+</th>
+{END DATA_DEPOSITO2_fieldheadercolumn}
+	{BEGIN DATA_DEVOLUCAO1_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN DATA_DEVOLUCAO1_fieldheader}
+	<b>Data Devolução nº1</b>
+	{END DATA_DEVOLUCAO1_fieldheader}
+</th>
+{END DATA_DEVOLUCAO1_fieldheadercolumn}
+	{BEGIN DATA_DEVOLUCAO2_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN DATA_DEVOLUCAO2_fieldheader}
+	<b>Data Devolução nº2</b>
+	{END DATA_DEVOLUCAO2_fieldheader}
+</th>
+{END DATA_DEVOLUCAO2_fieldheadercolumn}
+	{BEGIN SITUACAO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN SITUACAO_fieldheader}
+	<b>Situação</b>
+	{END SITUACAO_fieldheader}
+</th>
+{END SITUACAO_fieldheadercolumn}
+	{BEGIN CODCLIENTE_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN CODCLIENTE_fieldheader}
+	<b>Código Cliente</b>
+	{END CODCLIENTE_fieldheader}
+</th>
+{END CODCLIENTE_fieldheadercolumn}
+	{BEGIN CODBANCO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN CODBANCO_fieldheader}
+	<b>Código Banco</b>
+	{END CODBANCO_fieldheader}
+</th>
+{END CODBANCO_fieldheadercolumn}
+	{BEGIN AGENCIA_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN AGENCIA_fieldheader}
+	<b>Agência</b>
+	{END AGENCIA_fieldheader}
+</th>
+{END AGENCIA_fieldheadercolumn}
+	{BEGIN CONTA_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN CONTA_fieldheader}
+	<b>Conta</b>
+	{END CONTA_fieldheader}
+</th>
+{END CONTA_fieldheadercolumn}
+	{BEGIN DATA_CONTA_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN DATA_CONTA_fieldheader}
+	<b>Data da Conta</b>
+	{END DATA_CONTA_fieldheader}
+</th>
+{END DATA_CONTA_fieldheadercolumn}
+	{BEGIN NUMERO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN NUMERO_fieldheader}
+	<b>Número</b>
+	{END NUMERO_fieldheader}
+</th>
+{END NUMERO_fieldheadercolumn}
+	{BEGIN VALOR_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN VALOR_fieldheader}
+	<b>Valor</b>
+	{END VALOR_fieldheader}
+</th>
+{END VALOR_fieldheadercolumn}
+	{BEGIN DESCONTO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN DESCONTO_fieldheader}
+	<b>Desconto</b>
+	{END DESCONTO_fieldheader}
+</th>
+{END DESCONTO_fieldheadercolumn}
+	{BEGIN LIQUIDO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN LIQUIDO_fieldheader}
+	<b>Líquido</b>
+	{END LIQUIDO_fieldheader}
+</th>
+{END LIQUIDO_fieldheadercolumn}
+	{BEGIN CODVENDA_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN CODVENDA_fieldheader}
+	<b>Código da Venda</b>
+	{END CODVENDA_fieldheader}
+</th>
+{END CODVENDA_fieldheadercolumn}
+	{BEGIN CODCONTAS_PAGAR_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN CODCONTAS_PAGAR_fieldheader}
+	<b>Código Contas a Pagar</b>
+	{END CODCONTAS_PAGAR_fieldheader}
+</th>
+{END CODCONTAS_PAGAR_fieldheadercolumn}
+	{BEGIN DESTINO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN DESTINO_fieldheader}
+	<b>Destino</b>
+	{END DESTINO_fieldheader}
+</th>
+{END DESTINO_fieldheadercolumn}
+	{BEGIN DATA_BAIXA_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN DATA_BAIXA_fieldheader}
+	<b>Data da Baixa</b>
+	{END DATA_BAIXA_fieldheader}
+</th>
+{END DATA_BAIXA_fieldheadercolumn}
+	{BEGIN CODCONTA_CORRENTE_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN CODCONTA_CORRENTE_fieldheader}
+	<b>Conta Corrente</b>
+	{END CODCONTA_CORRENTE_fieldheader}
+</th>
+{END CODCONTA_CORRENTE_fieldheadercolumn}
+	{BEGIN CODCONTA_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN CODCONTA_fieldheader}
+	<b>Conta</b>
+	{END CODCONTA_fieldheader}
+</th>
+{END CODCONTA_fieldheadercolumn}
+	{BEGIN OBS1_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN OBS1_fieldheader}
+	<b>OBS</b>
+	{END OBS1_fieldheader}
+</th>
+{END OBS1_fieldheadercolumn}
+		
+			{END record_header}
+			<td class="runner-cr"><img src="images/spacer.gif"></td>
+			{BEGIN endrecordheader_block}
+			<td class="runner-cs">&nbsp;</td>
+			{END endrecordheader_block}
+		</tr>
+	{END grid_header}
+		</thead>
+		<tbody>	
+		{BEGIN grid_row}
+	<tr class="runner-row style1" {$rowattrs} {$rowstyle} {$rowstyle}>
+		<td class="runner-cl"></td>
+		{BEGIN grid_record}
+				{BEGIN CODIGO_fieldcolumn}
+<td  class="runner-cc {$CODIGO_class}" {$CODIGO_style}>
+	{$CODIGO_value}
+</td>
+{END CODIGO_fieldcolumn}
+	{BEGIN TITULAR_fieldcolumn}
+<td  class="runner-cc {$TITULAR_class}" {$TITULAR_style}>
+	{$TITULAR_value}
+</td>
+{END TITULAR_fieldcolumn}
+	{BEGIN EMISSAO_fieldcolumn}
+<td  class="runner-cc {$EMISSAO_class}" {$EMISSAO_style}>
+	{$EMISSAO_value}
+</td>
+{END EMISSAO_fieldcolumn}
+	{BEGIN VENCIMENTO_fieldcolumn}
+<td  class="runner-cc {$VENCIMENTO_class}" {$VENCIMENTO_style}>
+	{$VENCIMENTO_value}
+</td>
+{END VENCIMENTO_fieldcolumn}
+	{BEGIN DATA_DEPOSITO1_fieldcolumn}
+<td  class="runner-cc {$DATA_DEPOSITO1_class}" {$DATA_DEPOSITO1_style}>
+	{$DATA_DEPOSITO1_value}
+</td>
+{END DATA_DEPOSITO1_fieldcolumn}
+	{BEGIN DATA_DEPOSITO2_fieldcolumn}
+<td  class="runner-cc {$DATA_DEPOSITO2_class}" {$DATA_DEPOSITO2_style}>
+	{$DATA_DEPOSITO2_value}
+</td>
+{END DATA_DEPOSITO2_fieldcolumn}
+	{BEGIN DATA_DEVOLUCAO1_fieldcolumn}
+<td  class="runner-cc {$DATA_DEVOLUCAO1_class}" {$DATA_DEVOLUCAO1_style}>
+	{$DATA_DEVOLUCAO1_value}
+</td>
+{END DATA_DEVOLUCAO1_fieldcolumn}
+	{BEGIN DATA_DEVOLUCAO2_fieldcolumn}
+<td  class="runner-cc {$DATA_DEVOLUCAO2_class}" {$DATA_DEVOLUCAO2_style}>
+	{$DATA_DEVOLUCAO2_value}
+</td>
+{END DATA_DEVOLUCAO2_fieldcolumn}
+	{BEGIN SITUACAO_fieldcolumn}
+<td  class="runner-cc {$SITUACAO_class}" {$SITUACAO_style}>
+	{$SITUACAO_value}
+</td>
+{END SITUACAO_fieldcolumn}
+	{BEGIN CODCLIENTE_fieldcolumn}
+<td  class="runner-cc {$CODCLIENTE_class}" {$CODCLIENTE_style}>
+	{$CODCLIENTE_value}
+</td>
+{END CODCLIENTE_fieldcolumn}
+	{BEGIN CODBANCO_fieldcolumn}
+<td  class="runner-cc {$CODBANCO_class}" {$CODBANCO_style}>
+	{$CODBANCO_value}
+</td>
+{END CODBANCO_fieldcolumn}
+	{BEGIN AGENCIA_fieldcolumn}
+<td  class="runner-cc {$AGENCIA_class}" {$AGENCIA_style}>
+	{$AGENCIA_value}
+</td>
+{END AGENCIA_fieldcolumn}
+	{BEGIN CONTA_fieldcolumn}
+<td  class="runner-cc {$CONTA_class}" {$CONTA_style}>
+	{$CONTA_value}
+</td>
+{END CONTA_fieldcolumn}
+	{BEGIN DATA_CONTA_fieldcolumn}
+<td  class="runner-cc {$DATA_CONTA_class}" {$DATA_CONTA_style}>
+	{$DATA_CONTA_value}
+</td>
+{END DATA_CONTA_fieldcolumn}
+	{BEGIN NUMERO_fieldcolumn}
+<td  class="runner-cc {$NUMERO_class}" {$NUMERO_style}>
+	{$NUMERO_value}
+</td>
+{END NUMERO_fieldcolumn}
+	{BEGIN VALOR_fieldcolumn}
+<td  class="runner-cc {$VALOR_class}" {$VALOR_style}>
+	{$VALOR_value}
+</td>
+{END VALOR_fieldcolumn}
+	{BEGIN DESCONTO_fieldcolumn}
+<td  class="runner-cc {$DESCONTO_class}" {$DESCONTO_style}>
+	{$DESCONTO_value}
+</td>
+{END DESCONTO_fieldcolumn}
+	{BEGIN LIQUIDO_fieldcolumn}
+<td  class="runner-cc {$LIQUIDO_class}" {$LIQUIDO_style}>
+	{$LIQUIDO_value}
+</td>
+{END LIQUIDO_fieldcolumn}
+	{BEGIN CODVENDA_fieldcolumn}
+<td  class="runner-cc {$CODVENDA_class}" {$CODVENDA_style}>
+	{$CODVENDA_value}
+</td>
+{END CODVENDA_fieldcolumn}
+	{BEGIN CODCONTAS_PAGAR_fieldcolumn}
+<td  class="runner-cc {$CODCONTAS_PAGAR_class}" {$CODCONTAS_PAGAR_style}>
+	{$CODCONTAS_PAGAR_value}
+</td>
+{END CODCONTAS_PAGAR_fieldcolumn}
+	{BEGIN DESTINO_fieldcolumn}
+<td  class="runner-cc {$DESTINO_class}" {$DESTINO_style}>
+	{$DESTINO_value}
+</td>
+{END DESTINO_fieldcolumn}
+	{BEGIN DATA_BAIXA_fieldcolumn}
+<td  class="runner-cc {$DATA_BAIXA_class}" {$DATA_BAIXA_style}>
+	{$DATA_BAIXA_value}
+</td>
+{END DATA_BAIXA_fieldcolumn}
+	{BEGIN CODCONTA_CORRENTE_fieldcolumn}
+<td  class="runner-cc {$CODCONTA_CORRENTE_class}" {$CODCONTA_CORRENTE_style}>
+	{$CODCONTA_CORRENTE_value}
+</td>
+{END CODCONTA_CORRENTE_fieldcolumn}
+	{BEGIN CODCONTA_fieldcolumn}
+<td  class="runner-cc {$CODCONTA_class}" {$CODCONTA_style}>
+	{$CODCONTA_value}
+</td>
+{END CODCONTA_fieldcolumn}
+	{BEGIN OBS1_fieldcolumn}
+<td  class="runner-cc {$OBS1_class}" {$OBS1_style}>
+	{$OBS1_value}
+</td>
+{END OBS1_fieldcolumn}
+
+		{END grid_record}
+		<td class="runner-cr"></td>
+		{BEGIN endrecord_block}
+		<td class="runner-cs">&nbsp;</td>
+		{END endrecord_block}
+	</tr>
+{END grid_row}
+										
+								<tr class="runner-bottomrow style1">
+									<td class="runner-cl"><img src="images/spacer.gif"></td>
+									{BEGIN record_footer}
+									{BEGIN CODIGO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END CODIGO_fieldfootercolumn}
+{BEGIN TITULAR_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END TITULAR_fieldfootercolumn}
+{BEGIN EMISSAO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END EMISSAO_fieldfootercolumn}
+{BEGIN VENCIMENTO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END VENCIMENTO_fieldfootercolumn}
+{BEGIN DATA_DEPOSITO1_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END DATA_DEPOSITO1_fieldfootercolumn}
+{BEGIN DATA_DEPOSITO2_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END DATA_DEPOSITO2_fieldfootercolumn}
+{BEGIN DATA_DEVOLUCAO1_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END DATA_DEVOLUCAO1_fieldfootercolumn}
+{BEGIN DATA_DEVOLUCAO2_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END DATA_DEVOLUCAO2_fieldfootercolumn}
+{BEGIN SITUACAO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END SITUACAO_fieldfootercolumn}
+{BEGIN CODCLIENTE_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END CODCLIENTE_fieldfootercolumn}
+{BEGIN CODBANCO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END CODBANCO_fieldfootercolumn}
+{BEGIN AGENCIA_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END AGENCIA_fieldfootercolumn}
+{BEGIN CONTA_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END CONTA_fieldfootercolumn}
+{BEGIN DATA_CONTA_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END DATA_CONTA_fieldfootercolumn}
+{BEGIN NUMERO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END NUMERO_fieldfootercolumn}
+{BEGIN VALOR_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END VALOR_fieldfootercolumn}
+{BEGIN DESCONTO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END DESCONTO_fieldfootercolumn}
+{BEGIN LIQUIDO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END LIQUIDO_fieldfootercolumn}
+{BEGIN CODVENDA_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END CODVENDA_fieldfootercolumn}
+{BEGIN CODCONTAS_PAGAR_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END CODCONTAS_PAGAR_fieldfootercolumn}
+{BEGIN DESTINO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END DESTINO_fieldfootercolumn}
+{BEGIN DATA_BAIXA_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END DATA_BAIXA_fieldfootercolumn}
+{BEGIN CODCONTA_CORRENTE_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END CODCONTA_CORRENTE_fieldfootercolumn}
+{BEGIN CODCONTA_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END CODCONTA_fieldfootercolumn}
+{BEGIN OBS1_fieldfootercolumn}
+<td class="runner-cc runner-clast"></td>
+{END OBS1_fieldfootercolumn}
+
+									{END record_footer}
+									<td class="runner-cr"><img src="images/spacer.gif"></td>
+									{BEGIN endrecordtotals_block}
+									<td class="runner-cs"></td>
+									{END endrecordtotals_block}
+								</tr>
+
+		</tbody>
+	</table>
+</div>	
+{END page}
+
+{END grid_block}
+
+
+
+{END container_grid}
+
+
+				</td>	
+
+				<td class="runner-right {$blockclass_right}">
+					
+				</td>	
+			</tr>
+			<tr class="runner-footer">
+				<td class="runner-bottom" colspan=3>
+					<!--%%bottom%%-->
+				</td>
+			</tr>
+		</table>
+		{$footer}
+	{END body}
+	</body>
+</html>

@@ -1,0 +1,16 @@
+{BEGIN mainmenu_block}
+<table class="runner-hmenu" cellpadding="0">
+  <tr>
+  ##foreach @BUILDER.MenuNodes as @menu filter !@menu.parent##
+    <td id="item##@menu.id##" view="topitem" class="##@menu.type##">
+      ##include templates\topmenuitem_menupage_preview.htm##
+    </td>
+    ##if @last##
+    ##if @BUILDER.bDynamicPermissions##   
+      ##include templates\menuitem_adminarea_horiz_preview.htm##
+    ##endif##
+    ##endif##   
+  ##endfor##
+  </tr>
+</table>  
+{END mainmenu_block}

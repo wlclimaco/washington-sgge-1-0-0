@@ -1,0 +1,150 @@
+.page-view3,
+  .runner-pagewrapper .page-view3,
+  .runner-pagewrapper .runner-pagewrapper .page-view3
+{
+padding-top:10px; padding-left:10px;
+}
+.page-view3 .runner-c-pdf,
+  .runner-pagewrapper .page-view3 .runner-c-pdf,
+  .runner-pagewrapper .runner-pagewrapper .page-view3 .runner-c-pdf
+{
+margin-bottom:5px;
+}
+.page-view3 .runner-b-viewpdf, .page-view3 .runner-b-viewpdf,
+.page-view3 .runner-b-viewpdf, .page-view3 .runner-b-viewpdf > *,
+  .runner-pagewrapper .page-view3 .runner-b-viewpdf, .page-view3 .runner-b-viewpdf,
+  .runner-pagewrapper .page-view3 .runner-b-viewpdf, .page-view3 .runner-b-viewpdf > *,
+  .runner-pagewrapper .runner-pagewrapper .page-view3 .runner-b-viewpdf, .page-view3 .runner-b-viewpdf,
+  .runner-pagewrapper .runner-pagewrapper .page-view3 .runner-b-viewpdf, .page-view3 .runner-b-viewpdf > *
+{
+white-space: nowrap;
+}
+.page-view3 .runner-b-viewpdf, .page-view3 .runner-b-viewpdf,
+.page-view3 .runner-b-viewpdf, .page-view3 .runner-b-viewpdf > *,
+  .runner-pagewrapper .page-view3 .runner-b-viewpdf, .page-view3 .runner-b-viewpdf,
+  .runner-pagewrapper .page-view3 .runner-b-viewpdf, .page-view3 .runner-b-viewpdf > *,
+  .runner-pagewrapper .runner-pagewrapper .page-view3 .runner-b-viewpdf, .page-view3 .runner-b-viewpdf,
+  .runner-pagewrapper .runner-pagewrapper .page-view3 .runner-b-viewpdf, .page-view3 .runner-b-viewpdf > *
+{
+text-align: right;
+}
+.page-view3 .runner-c-view,
+  .runner-pagewrapper .page-view3 .runner-c-view,
+  .runner-pagewrapper .runner-pagewrapper .page-view3 .runner-c-view
+{
+margin-bottom:5px;
+}
+.page-view3 .runner-c-view,
+  .runner-pagewrapper .page-view3 .runner-c-view,
+  .runner-pagewrapper .runner-pagewrapper .page-view3 .runner-c-view
+{
+width:500px;
+}
+body.page-view3 .runner-c-view
+{
+margin-left:auto; margin-right:auto;
+}
+.page-view3 .runner-b-viewheader, .page-view3 .runner-b-viewheader,
+.page-view3 .runner-b-viewheader, .page-view3 .runner-b-viewheader > *,
+  .runner-pagewrapper .page-view3 .runner-b-viewheader, .page-view3 .runner-b-viewheader,
+  .runner-pagewrapper .page-view3 .runner-b-viewheader, .page-view3 .runner-b-viewheader > *,
+  .runner-pagewrapper .runner-pagewrapper .page-view3 .runner-b-viewheader, .page-view3 .runner-b-viewheader,
+  .runner-pagewrapper .runner-pagewrapper .page-view3 .runner-b-viewheader, .page-view3 .runner-b-viewheader > *
+{
+white-space: nowrap;
+}
+.page-view3 .runner-b-viewheader, .page-view3 .runner-b-viewheader,
+.page-view3 .runner-b-viewheader, .page-view3 .runner-b-viewheader > *,
+  .runner-pagewrapper .page-view3 .runner-b-viewheader, .page-view3 .runner-b-viewheader,
+  .runner-pagewrapper .page-view3 .runner-b-viewheader, .page-view3 .runner-b-viewheader > *,
+  .runner-pagewrapper .runner-pagewrapper .page-view3 .runner-b-viewheader, .page-view3 .runner-b-viewheader,
+  .runner-pagewrapper .runner-pagewrapper .page-view3 .runner-b-viewheader, .page-view3 .runner-b-viewheader > *
+{
+text-align: right;
+}
+.page-view3 .runner-c-fields,
+  .runner-pagewrapper .page-view3 .runner-c-fields,
+  .runner-pagewrapper .runner-pagewrapper .page-view3 .runner-c-fields
+{
+margin-bottom:5px;
+}
+.page-view3 .runner-c-fields,
+  .runner-pagewrapper .page-view3 .runner-c-fields,
+  .runner-pagewrapper .runner-pagewrapper .page-view3 .runner-c-fields
+{
+width:100%;
+}
+.page-view3 .runner-b-viewfields, .page-view3 .runner-b-viewfields,
+.page-view3 .runner-b-viewfields, .page-view3 .runner-b-viewfields > *,
+  .runner-pagewrapper .page-view3 .runner-b-viewfields, .page-view3 .runner-b-viewfields,
+  .runner-pagewrapper .page-view3 .runner-b-viewfields, .page-view3 .runner-b-viewfields > *,
+  .runner-pagewrapper .runner-pagewrapper .page-view3 .runner-b-viewfields, .page-view3 .runner-b-viewfields,
+  .runner-pagewrapper .runner-pagewrapper .page-view3 .runner-b-viewfields, .page-view3 .runner-b-viewfields > *
+{
+white-space: normal;
+}
+.page-view3 .runner-b-viewfields, .page-view3 .runner-b-viewfields,
+.page-view3 .runner-b-viewfields, .page-view3 .runner-b-viewfields > *,
+  .runner-pagewrapper .page-view3 .runner-b-viewfields, .page-view3 .runner-b-viewfields,
+  .runner-pagewrapper .page-view3 .runner-b-viewfields, .page-view3 .runner-b-viewfields > *,
+  .runner-pagewrapper .runner-pagewrapper .page-view3 .runner-b-viewfields, .page-view3 .runner-b-viewfields,
+  .runner-pagewrapper .runner-pagewrapper .page-view3 .runner-b-viewfields, .page-view3 .runner-b-viewfields > *
+{
+text-align: left;
+}
+.page-view3 .runner-b-viewbuttons, .page-view3 .runner-b-viewbuttons,
+.page-view3 .runner-b-viewbuttons, .page-view3 .runner-b-viewbuttons > *,
+  .runner-pagewrapper .page-view3 .runner-b-viewbuttons, .page-view3 .runner-b-viewbuttons,
+  .runner-pagewrapper .page-view3 .runner-b-viewbuttons, .page-view3 .runner-b-viewbuttons > *,
+  .runner-pagewrapper .runner-pagewrapper .page-view3 .runner-b-viewbuttons, .page-view3 .runner-b-viewbuttons,
+  .runner-pagewrapper .runner-pagewrapper .page-view3 .runner-b-viewbuttons, .page-view3 .runner-b-viewbuttons > *
+{
+white-space: nowrap;
+}
+.page-view3 .runner-b-viewbuttons, .page-view3 .runner-b-viewbuttons,
+.page-view3 .runner-b-viewbuttons, .page-view3 .runner-b-viewbuttons > *,
+  .runner-pagewrapper .page-view3 .runner-b-viewbuttons, .page-view3 .runner-b-viewbuttons,
+  .runner-pagewrapper .page-view3 .runner-b-viewbuttons, .page-view3 .runner-b-viewbuttons > *,
+  .runner-pagewrapper .runner-pagewrapper .page-view3 .runner-b-viewbuttons, .page-view3 .runner-b-viewbuttons,
+  .runner-pagewrapper .runner-pagewrapper .page-view3 .runner-b-viewbuttons, .page-view3 .runner-b-viewbuttons > *
+{
+text-align: right;
+}
+.page-view3 .runner-c-details,
+  .runner-pagewrapper .page-view3 .runner-c-details,
+  .runner-pagewrapper .runner-pagewrapper .page-view3 .runner-c-details
+{
+margin-bottom:5px;
+}
+.page-view3 .runner-c-details,
+  .runner-pagewrapper .page-view3 .runner-c-details,
+  .runner-pagewrapper .runner-pagewrapper .page-view3 .runner-c-details
+{
+width:500px;
+}
+.page-view3 .runner-b-viewdetails, .page-view3 .runner-b-viewdetails,
+.page-view3 .runner-b-viewdetails, .page-view3 .runner-b-viewdetails > *,
+  .runner-pagewrapper .page-view3 .runner-b-viewdetails, .page-view3 .runner-b-viewdetails,
+  .runner-pagewrapper .page-view3 .runner-b-viewdetails, .page-view3 .runner-b-viewdetails > *,
+  .runner-pagewrapper .runner-pagewrapper .page-view3 .runner-b-viewdetails, .page-view3 .runner-b-viewdetails,
+  .runner-pagewrapper .runner-pagewrapper .page-view3 .runner-b-viewdetails, .page-view3 .runner-b-viewdetails > *
+{
+white-space: nowrap;
+}
+.page-view3 .runner-b-viewdetails, .page-view3 .runner-b-viewdetails,
+.page-view3 .runner-b-viewdetails, .page-view3 .runner-b-viewdetails > *,
+  .runner-pagewrapper .page-view3 .runner-b-viewdetails, .page-view3 .runner-b-viewdetails,
+  .runner-pagewrapper .page-view3 .runner-b-viewdetails, .page-view3 .runner-b-viewdetails > *,
+  .runner-pagewrapper .runner-pagewrapper .page-view3 .runner-b-viewdetails, .page-view3 .runner-b-viewdetails,
+  .runner-pagewrapper .runner-pagewrapper .page-view3 .runner-b-viewdetails, .page-view3 .runner-b-viewdetails > *
+{
+text-align: right;
+}
+body.page-view3 .runner-toptable
+{
+width:100%;
+}
+body.page-view3 .runner-top
+{
+padding-right: 5px;
+}

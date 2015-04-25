@@ -1,0 +1,502 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<title>{$pagetitle}</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=7">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+		{BEGIN pageCSSFiles}
+		<link REL="stylesheet" href="{$pagestylepath}" type="text/css">
+		{END pageCSSFiles}
+		<!--[if IE]>
+			<link REL="stylesheet" href="styles/defaultIE.css" type="text/css">
+			{BEGIN IEcssFiles}
+			<link REL="stylesheet" href="{$stylepathIE}" type="text/css">
+			{END IEcssFiles}
+		<![endif]-->
+	</head>
+	
+	<body class="{$stylename}" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+		<table   cellpadding="0" class="runner-toptable">
+			<tr class="runner-header">
+				<td class="runner-top" colspan=3>
+					
+
+
+
+
+				</td>
+			</tr>
+			<tr class="runner-body">
+				
+				<td class="runner-left {$blockclass_left}" >
+					
+				</td>	
+				
+				<td class="runner-center {$blockclass_center}">
+					
+
+{BEGIN container_grid}
+
+
+{BEGIN grid_block}
+{BEGIN page}
+<h1>C000025</h1>
+<span>
+{BEGIN page_number}
+Página {$pageno} de {$maxpages} 
+{END page_number}
+</span>
+
+	<div class="runner-s-grid">	
+	<table class="runner-c runner-c-grid" cellpadding="0">
+		<thead>
+		{BEGIN grid_header}
+		<tr class="runner-toprow style1">
+			<td class="runner-cl"><img src="images/spacer.gif"></td>
+			{BEGIN record_header}
+					{BEGIN CODIGO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN CODIGO_fieldheader}
+	<b>Código</b>
+	{END CODIGO_fieldheader}
+</th>
+{END CODIGO_fieldheadercolumn}
+	{BEGIN CODBARRA_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN CODBARRA_fieldheader}
+	<b>Código de Barra</b>
+	{END CODBARRA_fieldheader}
+</th>
+{END CODBARRA_fieldheadercolumn}
+	{BEGIN PRODUTO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN PRODUTO_fieldheader}
+	<b>Produto</b>
+	{END PRODUTO_fieldheader}
+</th>
+{END PRODUTO_fieldheadercolumn}
+	{BEGIN SITUACAO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN SITUACAO_fieldheader}
+	<b>Situação</b>
+	{END SITUACAO_fieldheader}
+</th>
+{END SITUACAO_fieldheadercolumn}
+	{BEGIN CODGRUPO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN CODGRUPO_fieldheader}
+	<b>Grupo</b>
+	{END CODGRUPO_fieldheader}
+</th>
+{END CODGRUPO_fieldheadercolumn}
+	{BEGIN CODSUBGRUPO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN CODSUBGRUPO_fieldheader}
+	<b>Sub Grupo</b>
+	{END CODSUBGRUPO_fieldheader}
+</th>
+{END CODSUBGRUPO_fieldheadercolumn}
+	{BEGIN CODMARCA_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN CODMARCA_fieldheader}
+	<b>Marca</b>
+	{END CODMARCA_fieldheader}
+</th>
+{END CODMARCA_fieldheadercolumn}
+	{BEGIN UNIDADE_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN UNIDADE_fieldheader}
+	<b>Unidade</b>
+	{END UNIDADE_fieldheader}
+</th>
+{END UNIDADE_fieldheadercolumn}
+	{BEGIN DATA_CADASTRO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN DATA_CADASTRO_fieldheader}
+	<b>Data de Cadastro</b>
+	{END DATA_CADASTRO_fieldheader}
+</th>
+{END DATA_CADASTRO_fieldheadercolumn}
+	{BEGIN PRECOCUSTO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN PRECOCUSTO_fieldheader}
+	<b>Preço de Custo</b>
+	{END PRECOCUSTO_fieldheader}
+</th>
+{END PRECOCUSTO_fieldheadercolumn}
+	{BEGIN PRECOVENDA_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN PRECOVENDA_fieldheader}
+	<b>Preço de Venda</b>
+	{END PRECOVENDA_fieldheader}
+</th>
+{END PRECOVENDA_fieldheadercolumn}
+	{BEGIN ESTOQUE_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN ESTOQUE_fieldheader}
+	<b>Estoque</b>
+	{END ESTOQUE_fieldheader}
+</th>
+{END ESTOQUE_fieldheadercolumn}
+	{BEGIN ESTOQUEMINIMO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN ESTOQUEMINIMO_fieldheader}
+	<b>Estoque Mínimo</b>
+	{END ESTOQUEMINIMO_fieldheader}
+</th>
+{END ESTOQUEMINIMO_fieldheadercolumn}
+	{BEGIN CODALIQUOTA_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN CODALIQUOTA_fieldheader}
+	<b>Alíquota</b>
+	{END CODALIQUOTA_fieldheader}
+</th>
+{END CODALIQUOTA_fieldheadercolumn}
+	{BEGIN LOCALICAZAO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN LOCALICAZAO_fieldheader}
+	<b>Localização</b>
+	{END LOCALICAZAO_fieldheader}
+</th>
+{END LOCALICAZAO_fieldheadercolumn}
+	{BEGIN PESO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN PESO_fieldheader}
+	<b>Peso</b>
+	{END PESO_fieldheader}
+</th>
+{END PESO_fieldheadercolumn}
+	{BEGIN CST_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN CST_fieldheader}
+	<b>CST</b>
+	{END CST_fieldheader}
+</th>
+{END CST_fieldheadercolumn}
+	{BEGIN TAMANHO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN TAMANHO_fieldheader}
+	<b>Tamanho</b>
+	{END TAMANHO_fieldheader}
+</th>
+{END TAMANHO_fieldheadercolumn}
+	{BEGIN COR_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN COR_fieldheader}
+	<b>Cor</b>
+	{END COR_fieldheader}
+</th>
+{END COR_fieldheadercolumn}
+	{BEGIN CSOSN_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN CSOSN_fieldheader}
+	<b>CSOSN</b>
+	{END CSOSN_fieldheader}
+</th>
+{END CSOSN_fieldheadercolumn}
+	{BEGIN NOTAFISCAL_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN NOTAFISCAL_fieldheader}
+	<b>Nota Fiscal</b>
+	{END NOTAFISCAL_fieldheader}
+</th>
+{END NOTAFISCAL_fieldheadercolumn}
+	{BEGIN VALIDADE_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN VALIDADE_fieldheader}
+	<b>Validade</b>
+	{END VALIDADE_fieldheader}
+</th>
+{END VALIDADE_fieldheadercolumn}
+	{BEGIN CLASSIFICACAO_FISCAL_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN CLASSIFICACAO_FISCAL_fieldheader}
+	<b>Class. Fiscal</b>
+	{END CLASSIFICACAO_FISCAL_fieldheader}
+</th>
+{END CLASSIFICACAO_FISCAL_fieldheadercolumn}
+	{BEGIN NCM_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN NCM_fieldheader}
+	<b>NCM</b>
+	{END NCM_fieldheader}
+</th>
+{END NCM_fieldheadercolumn}
+	{BEGIN CODFORNECEDOR_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN CODFORNECEDOR_fieldheader}
+	<b>Fornecedor</b>
+	{END CODFORNECEDOR_fieldheader}
+</th>
+{END CODFORNECEDOR_fieldheadercolumn}
+		
+			{END record_header}
+			<td class="runner-cr"><img src="images/spacer.gif"></td>
+			{BEGIN endrecordheader_block}
+			<td class="runner-cs">&nbsp;</td>
+			{END endrecordheader_block}
+		</tr>
+	{END grid_header}
+		</thead>
+		<tbody>	
+		{BEGIN grid_row}
+	<tr class="runner-row style1" {$rowattrs} {$rowstyle} {$rowstyle}>
+		<td class="runner-cl"></td>
+		{BEGIN grid_record}
+				{BEGIN CODIGO_fieldcolumn}
+<td  class="runner-cc {$CODIGO_class}" {$CODIGO_style}>
+	{$CODIGO_value}
+</td>
+{END CODIGO_fieldcolumn}
+	{BEGIN CODBARRA_fieldcolumn}
+<td  class="runner-cc {$CODBARRA_class}" {$CODBARRA_style}>
+	{$CODBARRA_value}
+</td>
+{END CODBARRA_fieldcolumn}
+	{BEGIN PRODUTO_fieldcolumn}
+<td  class="runner-cc {$PRODUTO_class}" {$PRODUTO_style}>
+	{$PRODUTO_value}
+</td>
+{END PRODUTO_fieldcolumn}
+	{BEGIN SITUACAO_fieldcolumn}
+<td  class="runner-cc {$SITUACAO_class}" {$SITUACAO_style}>
+	{$SITUACAO_value}
+</td>
+{END SITUACAO_fieldcolumn}
+	{BEGIN CODGRUPO_fieldcolumn}
+<td  class="runner-cc {$CODGRUPO_class}" {$CODGRUPO_style}>
+	{$CODGRUPO_value}
+</td>
+{END CODGRUPO_fieldcolumn}
+	{BEGIN CODSUBGRUPO_fieldcolumn}
+<td  class="runner-cc {$CODSUBGRUPO_class}" {$CODSUBGRUPO_style}>
+	{$CODSUBGRUPO_value}
+</td>
+{END CODSUBGRUPO_fieldcolumn}
+	{BEGIN CODMARCA_fieldcolumn}
+<td  class="runner-cc {$CODMARCA_class}" {$CODMARCA_style}>
+	{$CODMARCA_value}
+</td>
+{END CODMARCA_fieldcolumn}
+	{BEGIN UNIDADE_fieldcolumn}
+<td  class="runner-cc {$UNIDADE_class}" {$UNIDADE_style}>
+	{$UNIDADE_value}
+</td>
+{END UNIDADE_fieldcolumn}
+	{BEGIN DATA_CADASTRO_fieldcolumn}
+<td  class="runner-cc {$DATA_CADASTRO_class}" {$DATA_CADASTRO_style}>
+	{$DATA_CADASTRO_value}
+</td>
+{END DATA_CADASTRO_fieldcolumn}
+	{BEGIN PRECOCUSTO_fieldcolumn}
+<td  class="runner-cc {$PRECOCUSTO_class}" {$PRECOCUSTO_style}>
+	{$PRECOCUSTO_value}
+</td>
+{END PRECOCUSTO_fieldcolumn}
+	{BEGIN PRECOVENDA_fieldcolumn}
+<td  class="runner-cc {$PRECOVENDA_class}" {$PRECOVENDA_style}>
+	{$PRECOVENDA_value}
+</td>
+{END PRECOVENDA_fieldcolumn}
+	{BEGIN ESTOQUE_fieldcolumn}
+<td  class="runner-cc {$ESTOQUE_class}" {$ESTOQUE_style}>
+	{$ESTOQUE_value}
+</td>
+{END ESTOQUE_fieldcolumn}
+	{BEGIN ESTOQUEMINIMO_fieldcolumn}
+<td  class="runner-cc {$ESTOQUEMINIMO_class}" {$ESTOQUEMINIMO_style}>
+	{$ESTOQUEMINIMO_value}
+</td>
+{END ESTOQUEMINIMO_fieldcolumn}
+	{BEGIN CODALIQUOTA_fieldcolumn}
+<td  class="runner-cc {$CODALIQUOTA_class}" {$CODALIQUOTA_style}>
+	{$CODALIQUOTA_value}
+</td>
+{END CODALIQUOTA_fieldcolumn}
+	{BEGIN LOCALICAZAO_fieldcolumn}
+<td  class="runner-cc {$LOCALICAZAO_class}" {$LOCALICAZAO_style}>
+	{$LOCALICAZAO_value}
+</td>
+{END LOCALICAZAO_fieldcolumn}
+	{BEGIN PESO_fieldcolumn}
+<td  class="runner-cc {$PESO_class}" {$PESO_style}>
+	{$PESO_value}
+</td>
+{END PESO_fieldcolumn}
+	{BEGIN CST_fieldcolumn}
+<td  class="runner-cc {$CST_class}" {$CST_style}>
+	{$CST_value}
+</td>
+{END CST_fieldcolumn}
+	{BEGIN TAMANHO_fieldcolumn}
+<td  class="runner-cc {$TAMANHO_class}" {$TAMANHO_style}>
+	{$TAMANHO_value}
+</td>
+{END TAMANHO_fieldcolumn}
+	{BEGIN COR_fieldcolumn}
+<td  class="runner-cc {$COR_class}" {$COR_style}>
+	{$COR_value}
+</td>
+{END COR_fieldcolumn}
+	{BEGIN CSOSN_fieldcolumn}
+<td  class="runner-cc {$CSOSN_class}" {$CSOSN_style}>
+	{$CSOSN_value}
+</td>
+{END CSOSN_fieldcolumn}
+	{BEGIN NOTAFISCAL_fieldcolumn}
+<td  class="runner-cc {$NOTAFISCAL_class}" {$NOTAFISCAL_style}>
+	{$NOTAFISCAL_value}
+</td>
+{END NOTAFISCAL_fieldcolumn}
+	{BEGIN VALIDADE_fieldcolumn}
+<td  class="runner-cc {$VALIDADE_class}" {$VALIDADE_style}>
+	{$VALIDADE_value}
+</td>
+{END VALIDADE_fieldcolumn}
+	{BEGIN CLASSIFICACAO_FISCAL_fieldcolumn}
+<td  class="runner-cc {$CLASSIFICACAO_FISCAL_class}" {$CLASSIFICACAO_FISCAL_style}>
+	{$CLASSIFICACAO_FISCAL_value}
+</td>
+{END CLASSIFICACAO_FISCAL_fieldcolumn}
+	{BEGIN NCM_fieldcolumn}
+<td  class="runner-cc {$NCM_class}" {$NCM_style}>
+	{$NCM_value}
+</td>
+{END NCM_fieldcolumn}
+	{BEGIN CODFORNECEDOR_fieldcolumn}
+<td  class="runner-cc {$CODFORNECEDOR_class}" {$CODFORNECEDOR_style}>
+	{$CODFORNECEDOR_value}
+</td>
+{END CODFORNECEDOR_fieldcolumn}
+
+		{END grid_record}
+		<td class="runner-cr"></td>
+		{BEGIN endrecord_block}
+		<td class="runner-cs">&nbsp;</td>
+		{END endrecord_block}
+	</tr>
+{END grid_row}
+										
+								<tr class="runner-bottomrow style1">
+									<td class="runner-cl"><img src="images/spacer.gif"></td>
+									{BEGIN record_footer}
+									{BEGIN CODIGO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END CODIGO_fieldfootercolumn}
+{BEGIN CODBARRA_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END CODBARRA_fieldfootercolumn}
+{BEGIN PRODUTO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END PRODUTO_fieldfootercolumn}
+{BEGIN SITUACAO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END SITUACAO_fieldfootercolumn}
+{BEGIN CODGRUPO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END CODGRUPO_fieldfootercolumn}
+{BEGIN CODSUBGRUPO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END CODSUBGRUPO_fieldfootercolumn}
+{BEGIN CODMARCA_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END CODMARCA_fieldfootercolumn}
+{BEGIN UNIDADE_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END UNIDADE_fieldfootercolumn}
+{BEGIN DATA_CADASTRO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END DATA_CADASTRO_fieldfootercolumn}
+{BEGIN PRECOCUSTO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END PRECOCUSTO_fieldfootercolumn}
+{BEGIN PRECOVENDA_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END PRECOVENDA_fieldfootercolumn}
+{BEGIN ESTOQUE_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END ESTOQUE_fieldfootercolumn}
+{BEGIN ESTOQUEMINIMO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END ESTOQUEMINIMO_fieldfootercolumn}
+{BEGIN CODALIQUOTA_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END CODALIQUOTA_fieldfootercolumn}
+{BEGIN LOCALICAZAO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END LOCALICAZAO_fieldfootercolumn}
+{BEGIN PESO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END PESO_fieldfootercolumn}
+{BEGIN CST_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END CST_fieldfootercolumn}
+{BEGIN TAMANHO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END TAMANHO_fieldfootercolumn}
+{BEGIN COR_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END COR_fieldfootercolumn}
+{BEGIN CSOSN_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END CSOSN_fieldfootercolumn}
+{BEGIN NOTAFISCAL_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END NOTAFISCAL_fieldfootercolumn}
+{BEGIN VALIDADE_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END VALIDADE_fieldfootercolumn}
+{BEGIN CLASSIFICACAO_FISCAL_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END CLASSIFICACAO_FISCAL_fieldfootercolumn}
+{BEGIN NCM_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END NCM_fieldfootercolumn}
+{BEGIN CODFORNECEDOR_fieldfootercolumn}
+<td class="runner-cc runner-clast"></td>
+{END CODFORNECEDOR_fieldfootercolumn}
+
+									{END record_footer}
+									<td class="runner-cr"><img src="images/spacer.gif"></td>
+									{BEGIN endrecordtotals_block}
+									<td class="runner-cs"></td>
+									{END endrecordtotals_block}
+								</tr>
+
+		</tbody>
+	</table>
+</div>	
+{END page}
+
+{END grid_block}
+
+
+
+{END container_grid}
+
+
+				</td>	
+
+				<td class="runner-right {$blockclass_right}">
+					
+				</td>	
+			</tr>
+			<tr class="runner-footer">
+				<td class="runner-bottom" colspan=3>
+					<!--%%bottom%%-->
+				</td>
+			</tr>
+		</table>
+		{$footer}
+	{END body}
+	</body>
+</html>

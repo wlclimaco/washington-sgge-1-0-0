@@ -1,0 +1,402 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<title>{$pagetitle}</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=7">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+		{BEGIN pageCSSFiles}
+		<link REL="stylesheet" href="{$pagestylepath}" type="text/css">
+		{END pageCSSFiles}
+		<!--[if IE]>
+			<link REL="stylesheet" href="styles/defaultIE.css" type="text/css">
+			{BEGIN IEcssFiles}
+			<link REL="stylesheet" href="{$stylepathIE}" type="text/css">
+			{END IEcssFiles}
+		<![endif]-->
+	</head>
+	
+	<body class="{$stylename}" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+		<table   cellpadding="0" class="runner-toptable">
+			<tr class="runner-header">
+				<td class="runner-top" colspan=3>
+					
+
+{BEGIN container_search}
+<table class="runner-c runner-c-search" cellpadding="0" align=center>
+
+
+<tr class="runner-toprow style2 header"><td class="runner-cl"><img src="images/spacer.gif"></td><td class="runner-cc" ><div  class="runner-b-srchheader {$brickclass_srchheader}">C000025 - Busca Avancada
+{$CrossElem}</div></td><td class="runner-cr"><img src="images/spacer.gif"></td></tr>
+
+
+{BEGIN conditions_block}
+<tr  class="runner-row style1 runner-b-srchconditions {$brickclass_srchconditions}"><td class="runner-cl"></td><td class="runner-cc runner-brickcontents" >	<center>
+	<span class=fieldname>Critério:&nbsp;</span>	
+	<input type="radio" class="runner-radio-button" name="srchType" {$all_checkbox}><label for="all_checkbox"> Todas condições</label>
+	&nbsp;&nbsp;&nbsp;
+	<input type="radio" class="runner-radio-button" name="srchType" {$any_checkbox}><label for="any_checkbox"> Qualquer condição</label>
+	</center></td><td class="runner-cr"></td></tr>{END conditions_block}
+
+
+
+<tr  class="runner-row style1 runner-b-wrapper {$wrapperclass_fields}"><td class="runner-cl"></td><td class="runner-cc runner-brickcontents runner-wrapper" >
+
+{BEGIN container_fields}
+<table class="runner-c runner-c-fields" cellpadding="0" >
+
+
+<tr class="runner-toprow header style2 runner-b-srchfields"><td class="runner-cl"><img src="images/spacer.gif"></td>
+	<td class="runner-cc">&nbsp;</td>
+	<td class="runner-cc">Não</td>
+	<td class="runner-cc" colspan=3>&nbsp; </td>
+<td class="runner-cr"></td></tr>
+	{BEGIN CODIGO_fieldblock}		
+	<tr class="runner-row style1 runner-b-srchfields"><td class="runner-cl"></td>
+		<td class="runner-cc runner-cc1">
+			<div class="fieldlabel_CODIGO {$fielddispclass_CODIGO}">
+				Código
+			</div>
+		</td>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldoption_CODIGO {$fielddispclass_CODIGO}">
+			<input type="checkbox" {$CODIGO_notbox}>
+		</div>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldoption_CODIGO {$fielddispclass_CODIGO}">
+			{$searchtype_CODIGO}
+		</div>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldcontrol_CODIGO {$fielddispclass_CODIGO}">
+			{$CODIGO_editcontrol}&nbsp;
+		</div>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldcontrol_CODIGO {$fielddispclass_CODIGO}">
+			{$CODIGO_editcontrol1}&nbsp;
+		</div>
+	</td>
+	<td class="runner-cr alt"></td></tr>
+{END CODIGO_fieldblock}
+	{BEGIN CODBARRA_fieldblock}		
+	<tr class="runner-row style1 runner-b-srchfields"><td class="runner-cl"></td>
+		<td class="runner-cc runner-cc1">
+			<div class="fieldlabel_CODBARRA {$fielddispclass_CODBARRA}">
+				Código de Barra
+			</div>
+		</td>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldoption_CODBARRA {$fielddispclass_CODBARRA}">
+			<input type="checkbox" {$CODBARRA_notbox}>
+		</div>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldoption_CODBARRA {$fielddispclass_CODBARRA}">
+			{$searchtype_CODBARRA}
+		</div>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldcontrol_CODBARRA {$fielddispclass_CODBARRA}">
+			{$CODBARRA_editcontrol}&nbsp;
+		</div>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldcontrol_CODBARRA {$fielddispclass_CODBARRA}">
+			{$CODBARRA_editcontrol1}&nbsp;
+		</div>
+	</td>
+	<td class="runner-cr alt"></td></tr>
+{END CODBARRA_fieldblock}
+	{BEGIN PRODUTO_fieldblock}		
+	<tr class="runner-row style1 runner-b-srchfields"><td class="runner-cl"></td>
+		<td class="runner-cc runner-cc1">
+			<div class="fieldlabel_PRODUTO {$fielddispclass_PRODUTO}">
+				Produto
+			</div>
+		</td>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldoption_PRODUTO {$fielddispclass_PRODUTO}">
+			<input type="checkbox" {$PRODUTO_notbox}>
+		</div>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldoption_PRODUTO {$fielddispclass_PRODUTO}">
+			{$searchtype_PRODUTO}
+		</div>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldcontrol_PRODUTO {$fielddispclass_PRODUTO}">
+			{$PRODUTO_editcontrol}&nbsp;
+		</div>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldcontrol_PRODUTO {$fielddispclass_PRODUTO}">
+			{$PRODUTO_editcontrol1}&nbsp;
+		</div>
+	</td>
+	<td class="runner-cr alt"></td></tr>
+{END PRODUTO_fieldblock}
+	{BEGIN NOTAFISCAL_fieldblock}		
+	<tr class="runner-row style1 runner-b-srchfields"><td class="runner-cl"></td>
+		<td class="runner-cc runner-cc1">
+			<div class="fieldlabel_NOTAFISCAL {$fielddispclass_NOTAFISCAL}">
+				Nota Fiscal
+			</div>
+		</td>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldoption_NOTAFISCAL {$fielddispclass_NOTAFISCAL}">
+			<input type="checkbox" {$NOTAFISCAL_notbox}>
+		</div>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldoption_NOTAFISCAL {$fielddispclass_NOTAFISCAL}">
+			{$searchtype_NOTAFISCAL}
+		</div>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldcontrol_NOTAFISCAL {$fielddispclass_NOTAFISCAL}">
+			{$NOTAFISCAL_editcontrol}&nbsp;
+		</div>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldcontrol_NOTAFISCAL {$fielddispclass_NOTAFISCAL}">
+			{$NOTAFISCAL_editcontrol1}&nbsp;
+		</div>
+	</td>
+	<td class="runner-cr alt"></td></tr>
+{END NOTAFISCAL_fieldblock}
+	{BEGIN VALIDADE_fieldblock}		
+	<tr class="runner-row style1 runner-b-srchfields"><td class="runner-cl"></td>
+		<td class="runner-cc runner-cc1">
+			<div class="fieldlabel_VALIDADE {$fielddispclass_VALIDADE}">
+				Validade
+			</div>
+		</td>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldoption_VALIDADE {$fielddispclass_VALIDADE}">
+			<input type="checkbox" {$VALIDADE_notbox}>
+		</div>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldoption_VALIDADE {$fielddispclass_VALIDADE}">
+			{$searchtype_VALIDADE}
+		</div>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldcontrol_VALIDADE {$fielddispclass_VALIDADE}">
+			{$VALIDADE_editcontrol}&nbsp;
+		</div>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldcontrol_VALIDADE {$fielddispclass_VALIDADE}">
+			{$VALIDADE_editcontrol1}&nbsp;
+		</div>
+	</td>
+	<td class="runner-cr alt"></td></tr>
+{END VALIDADE_fieldblock}
+	{BEGIN CODGRUPO_fieldblock}		
+	<tr class="runner-row style1 runner-b-srchfields"><td class="runner-cl"></td>
+		<td class="runner-cc runner-cc1">
+			<div class="fieldlabel_CODGRUPO {$fielddispclass_CODGRUPO}">
+				Grupo
+			</div>
+		</td>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldoption_CODGRUPO {$fielddispclass_CODGRUPO}">
+			<input type="checkbox" {$CODGRUPO_notbox}>
+		</div>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldoption_CODGRUPO {$fielddispclass_CODGRUPO}">
+			{$searchtype_CODGRUPO}
+		</div>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldcontrol_CODGRUPO {$fielddispclass_CODGRUPO}">
+			{$CODGRUPO_editcontrol}&nbsp;
+		</div>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldcontrol_CODGRUPO {$fielddispclass_CODGRUPO}">
+			{$CODGRUPO_editcontrol1}&nbsp;
+		</div>
+	</td>
+	<td class="runner-cr alt"></td></tr>
+{END CODGRUPO_fieldblock}
+	{BEGIN CODSUBGRUPO_fieldblock}		
+	<tr class="runner-row style1 runner-b-srchfields"><td class="runner-cl"></td>
+		<td class="runner-cc runner-cc1">
+			<div class="fieldlabel_CODSUBGRUPO {$fielddispclass_CODSUBGRUPO}">
+				Sub Grupo
+			</div>
+		</td>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldoption_CODSUBGRUPO {$fielddispclass_CODSUBGRUPO}">
+			<input type="checkbox" {$CODSUBGRUPO_notbox}>
+		</div>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldoption_CODSUBGRUPO {$fielddispclass_CODSUBGRUPO}">
+			{$searchtype_CODSUBGRUPO}
+		</div>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldcontrol_CODSUBGRUPO {$fielddispclass_CODSUBGRUPO}">
+			{$CODSUBGRUPO_editcontrol}&nbsp;
+		</div>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldcontrol_CODSUBGRUPO {$fielddispclass_CODSUBGRUPO}">
+			{$CODSUBGRUPO_editcontrol1}&nbsp;
+		</div>
+	</td>
+	<td class="runner-cr alt"></td></tr>
+{END CODSUBGRUPO_fieldblock}
+	{BEGIN CODFORNECEDOR_fieldblock}		
+	<tr class="runner-row style1 runner-b-srchfields"><td class="runner-cl"></td>
+		<td class="runner-cc runner-cc1">
+			<div class="fieldlabel_CODFORNECEDOR {$fielddispclass_CODFORNECEDOR}">
+				Fornecedor
+			</div>
+		</td>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldoption_CODFORNECEDOR {$fielddispclass_CODFORNECEDOR}">
+			<input type="checkbox" {$CODFORNECEDOR_notbox}>
+		</div>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldoption_CODFORNECEDOR {$fielddispclass_CODFORNECEDOR}">
+			{$searchtype_CODFORNECEDOR}
+		</div>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldcontrol_CODFORNECEDOR {$fielddispclass_CODFORNECEDOR}">
+			{$CODFORNECEDOR_editcontrol}&nbsp;
+		</div>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldcontrol_CODFORNECEDOR {$fielddispclass_CODFORNECEDOR}">
+			{$CODFORNECEDOR_editcontrol1}&nbsp;
+		</div>
+	</td>
+	<td class="runner-cr alt"></td></tr>
+{END CODFORNECEDOR_fieldblock}
+	{BEGIN CODMARCA_fieldblock}		
+	<tr class="runner-row style1 runner-b-srchfields"><td class="runner-cl"></td>
+		<td class="runner-cc runner-cc1">
+			<div class="fieldlabel_CODMARCA {$fielddispclass_CODMARCA}">
+				Marca
+			</div>
+		</td>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldoption_CODMARCA {$fielddispclass_CODMARCA}">
+			<input type="checkbox" {$CODMARCA_notbox}>
+		</div>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldoption_CODMARCA {$fielddispclass_CODMARCA}">
+			{$searchtype_CODMARCA}
+		</div>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldcontrol_CODMARCA {$fielddispclass_CODMARCA}">
+			{$CODMARCA_editcontrol}&nbsp;
+		</div>
+	</td>
+	<td class="runner-cc alt">
+		<div class="fieldcontrol_CODMARCA {$fielddispclass_CODMARCA}">
+			{$CODMARCA_editcontrol1}&nbsp;
+		</div>
+	</td>
+	<td class="runner-cr alt"></td></tr>
+{END CODMARCA_fieldblock}
+
+
+
+<tr class="{$cfooterclass_fields}">
+<td class="runner-cl"><img src="images/spacer.gif"></td>
+<td class="runner-cc"></td><td class="runner-cc alt"></td><td class="runner-cc alt"></td><td class="runner-cc alt"></td><td class="runner-cc alt"></td><td class="runner-cr alt"><img src="images/spacer.gif"></td>
+</tr>
+</table>
+{END container_fields}
+
+</td><td class="runner-cr"></td></tr>
+
+
+
+<tr  class="runner-row style2 runner-b-srchbuttons {$brickclass_srchbuttons}"><td class="runner-cl"></td><td class="runner-cc runner-brickcontents" >{BEGIN search_button}
+<span class="runner-btnframe">
+<span class="runner-btnleft"></span>
+<span class="runner-btnright"></span>
+<a href="#" class="runner-button" {$searchbutton_attrs}>Buscar</a>
+</span>
+{END search_button} 
+{BEGIN reset_button}
+<span class="runner-btnframe">
+<span class="runner-btnleft"></span>
+<span class="runner-btnright"></span>
+<a href="#" class="runner-button" {$resetbutton_attrs}>Limpar</a>
+</span>
+{END reset_button}
+{BEGIN back_button}
+<span class="runner-btnframe">
+<span class="runner-btnleft"></span>
+<span class="runner-btnright"></span>
+<a href="#" class="runner-button" {$backbutton_attrs}>Voltar à Lista</a>
+</span>
+{END back_button}</td><td class="runner-cr"></td></tr>
+
+
+<tr class="{$cfooterclass_search}">
+<td class="runner-cl"><img src="images/spacer.gif"></td>
+<td class="runner-cc"></td><td class="runner-cr"><img src="images/spacer.gif"></td>
+</tr>
+</table>
+{END container_search}
+
+
+				</td>
+			</tr>
+			<tr class="runner-body">
+				
+				<td class="runner-left {$blockclass_left}" >
+					
+				</td>	
+				
+				<td class="runner-center {$blockclass_center}">
+					
+				</td>	
+
+				<td class="runner-right {$blockclass_right}">
+					
+				</td>	
+			</tr>
+			<tr class="runner-footer">
+				<td class="runner-bottom" colspan=3>
+					<!--%%bottom%%-->
+				</td>
+			</tr>
+		</table>
+		{$footer}
+	{END body}
+	</body>
+</html>
