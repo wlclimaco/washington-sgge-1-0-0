@@ -1,0 +1,127 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<title>{$pagetitle}</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=7">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+		{BEGIN pageCSSFiles}
+		<link REL="stylesheet" href="{$pagestylepath}" type="text/css">
+		{END pageCSSFiles}
+		<!--[if IE]>
+			<link REL="stylesheet" href="styles/defaultIE.css" type="text/css">
+			{BEGIN IEcssFiles}
+			<link REL="stylesheet" href="{$stylepathIE}" type="text/css">
+			{END IEcssFiles}
+		<![endif]-->
+	</head>
+	
+	<body class="{$stylename}" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+		<table   cellpadding="0" class="runner-toptable">
+			<tr class="runner-header">
+				<td class="runner-top" colspan=3>
+					
+
+{BEGIN container_import}
+<table class="runner-c runner-c-import" cellpadding="0" align=center>
+
+
+<tr class="runner-toprow style2 header"><td class="runner-cl"><img src="images/spacer.gif"></td><td class="runner-cc" ><div  class="runner-b-importheader {$brickclass_importheader}">Importar</div></td><td class="runner-cr"><img src="images/spacer.gif"></td></tr>
+
+
+
+<tr  class="runner-row style1 runner-b-errormessage {$brickclass_errormessage}"><td class="runner-cl"></td><td class="runner-cc runner-brickcontents" >{$error_message}</td><td class="runner-cr"></td></tr>
+
+
+
+<tr  class="runner-row style1 runner-b-wrapper {$wrapperclass_importfields}"><td class="runner-cl"></td><td class="runner-cc runner-brickcontents runner-wrapper" >
+
+{BEGIN container_importfields}
+<table class="runner-c runner-c-importfields" cellpadding="0" >
+<tr class="{$cheaderclass_importfields}">
+<td class="runner-cl"><img src="images/spacer.gif"></td>
+<td class="runner-cc"></td><td class="runner-cc"></td><td class="runner-cr"><img src="images/spacer.gif"></td>
+</tr>
+
+
+	<tr class="runner-row style1 runner-b-importfields"><td class="runner-cl"></td>
+		<td class="runner-cc runner-cc1">
+			Selecione arquivo com dados.</td>
+		<td class="runner-cc runner-cc1">
+			<input type="File" {$importfile_attrs}>
+		</td>
+<td class="runner-cr"></td></tr>
+
+
+
+<tr class="{$cfooterclass_importfields}">
+<td class="runner-cl"><img src="images/spacer.gif"></td>
+<td class="runner-cc"></td><td class="runner-cc"></td><td class="runner-cr"><img src="images/spacer.gif"></td>
+</tr>
+</table>
+{END container_importfields}
+
+</td><td class="runner-cr"></td></tr>
+
+
+
+<tr  class="runner-row style1 runner-b-importheader_text {$brickclass_importheader_text}"><td class="runner-cl"></td><td class="runner-cc runner-brickcontents" >Browse to the comma-separated (.csv) or to the Excel (.xls) file that you wish to import.<br>
+The first line in the file should contain the field names.
+</td><td class="runner-cr"></td></tr>
+
+
+
+<tr  class="runner-row style2 runner-b-importbuttons {$brickclass_importbuttons}"><td class="runner-cl"></td><td class="runner-cc runner-brickcontents" ><span class="runner-btnframe">
+<span class="runner-btnleft"></span>
+<span class="runner-btnright"></span>
+<a href="#" class="runner-button" {$importlink_attrs}>Importar</a>
+</span>
+<span class="runner-btnframe">
+<span class="runner-btnleft"></span>
+<span class="runner-btnright"></span>
+<a href="#" class="runner-button" {$backtolist_attrs}>Voltar à Lista</a>
+</span></td><td class="runner-cr"></td></tr>
+
+
+<tr class="{$cfooterclass_import}">
+<td class="runner-cl"><img src="images/spacer.gif"></td>
+<td class="runner-cc"></td><td class="runner-cr"><img src="images/spacer.gif"></td>
+</tr>
+</table>
+{END container_import}
+
+
+				</td>
+			</tr>
+			<tr class="runner-body">
+				
+				<td class="runner-left {$blockclass_left}" >
+					
+				</td>	
+				
+				<td class="runner-center {$blockclass_center}">
+					
+				</td>	
+
+				<td class="runner-right {$blockclass_right}">
+					
+				</td>	
+			</tr>
+			<tr class="runner-footer">
+				<td class="runner-bottom" colspan=3>
+					<!--%%bottom%%-->
+				</td>
+			</tr>
+		</table>
+		{$footer}
+	{END body}
+	</body>
+</html>

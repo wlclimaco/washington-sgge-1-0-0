@@ -1,0 +1,95 @@
+##foreach @BUILDER.MenuNodes as @m0 filter !@m0.parent##
+##foreach @BUILDER.MenuNodes as @menu filter @menu.id=@m0.id##
+	{BEGIN item##@m0.id##_menulink}
+	<tr id="item##@m0.id##" view="topitem" class="runner-b-vmenu runner-vmenu simple ##@m0.type##{BEGIN item##@menu.id##_current} current{END item##@menu.id##_current}">
+		<td class="runner-cl"></td>	
+		<td class="runner-cc">
+			##include templates\menuitem.htm##
+	##foreach @BUILDER.MenuNodes as @m1 filter @m1.parent = @m0.id##
+	##if @first##
+		<ul id="group##@m0.id##">
+	##endif##
+	##foreach @BUILDER.MenuNodes as @menu filter @menu.id=@m1.id##
+			{BEGIN item##@m1.id##_menulink}
+			<li id="item##@m1.id##" parent="group##@m1.parent##" class="##@m1.type##{BEGIN item##@menu.id##_current} current{END item##@menu.id##_current}">
+			##include templates\menuitem.htm##
+			##foreach @BUILDER.MenuNodes as @m2 filter @m2.parent = @m1.id##
+			##if @first##
+				<ul id="group##@m1.id##" >
+			##endif##
+			##foreach @BUILDER.MenuNodes as @menu filter @menu.id=@m2.id##
+					{BEGIN item##@m2.id##_menulink}
+					<li id="item##@m2.id##" parent="group##@m2.parent##" class="##@m2.type##{BEGIN item##@menu.id##_current} current{END item##@menu.id##_current}">
+					##include templates\menuitem.htm##
+					##foreach @BUILDER.MenuNodes as @m3 filter @m3.parent = @m2.id##
+					##if @first##
+						<ul id="group##@m2.id##">
+					##endif##
+					##foreach @BUILDER.MenuNodes as @menu filter @menu.id=@m3.id##
+							{BEGIN item##@m3.id##_menulink}
+							<li id="item##@m3.id##" parent="group##@m3.parent##" class="##@m3.type##{BEGIN item##@menu.id##_current} current{END item##@menu.id##_current}">
+							##include templates\menuitem.htm##
+							##foreach @BUILDER.MenuNodes as @m4 filter @m4.parent = @m3.id##
+							##if @first##
+								<ul id="group##@m3.id##">
+							##endif##
+							##foreach @BUILDER.MenuNodes as @menu filter @menu.id=@m4.id##
+									{BEGIN item##@m4.id##_menulink}
+									<li id="item##@m4.id##" parent="group##@m4.parent##" class="##@m4.type##{BEGIN item##@menu.id##_current} current{END item##@menu.id##_current}">
+									##include templates\menuitem.htm##
+									##foreach @BUILDER.MenuNodes as @m5 filter @m5.parent = @m4.id##
+									##if @first##
+										<ul id="group##@m4.id##">
+									##endif##
+									##foreach @BUILDER.MenuNodes as @menu filter @menu.id=@m5.id##
+											{BEGIN item##@m5.id##_menulink}
+											<li id="item##@m5.id##" parent="group##@m5.parent##" class="##@m5.type##{BEGIN item##@menu.id##_current} current{END item##@menu.id##_current}">
+											##include templates\menuitem.htm##
+											</li>
+											{END item##@m5.id##_menulink}
+									##endfor##			
+									##if @last##
+										</ul>
+									##endif##
+									##endfor##			
+									</li>
+									{END item##@m4.id##_menulink}
+							##endfor##			
+							##if @last##
+								</ul>
+							##endif##
+							##endfor##			
+							</li>
+							{END item##@m3.id##_menulink}
+					##endfor##			
+					##if @last##
+						</ul>
+					##endif##
+					##endfor##			
+					</li>
+					{END item##@m2.id##_menulink}
+			##endfor##			
+			##if @last##
+				</ul>
+			##endif##
+			##endfor##			
+			</li>
+			{END item##@m1.id##_menulink}
+	##endfor##			
+	##if @last##
+		</ul>
+	##endif##
+	##endfor##			
+		</td>
+		<td class="runner-cr"></td>
+	</tr>
+	{END item##@m0.id##_menulink}
+##endfor##
+##if @last##
+##if @BUILDER.bDynamicPermissions##		
+	{BEGIN adminarea_link}
+	##include templates\menuitem_adminarea.htm##
+	{END adminarea_link}
+##endif##
+##endif##			
+##endfor##

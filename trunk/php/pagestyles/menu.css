@@ -1,0 +1,98 @@
+.page-menu,
+  .runner-pagewrapper .page-menu,
+  .runner-pagewrapper .runner-pagewrapper .page-menu
+{
+padding-top:10px; padding-left:10px;
+}
+.page-menu .runner-c-menu,
+  .runner-pagewrapper .page-menu .runner-c-menu,
+  .runner-pagewrapper .runner-pagewrapper .page-menu .runner-c-menu
+{
+margin-bottom:5px;
+}
+.page-menu .runner-c-menu,
+  .runner-pagewrapper .page-menu .runner-c-menu,
+  .runner-pagewrapper .runner-pagewrapper .page-menu .runner-c-menu
+{
+width:400px;
+}
+.page-menu .runner-b-menulogas, .page-menu .runner-b-menulogas,
+.page-menu .runner-b-menulogas, .page-menu .runner-b-menulogas > *,
+  .runner-pagewrapper .page-menu .runner-b-menulogas, .page-menu .runner-b-menulogas,
+  .runner-pagewrapper .page-menu .runner-b-menulogas, .page-menu .runner-b-menulogas > *,
+  .runner-pagewrapper .runner-pagewrapper .page-menu .runner-b-menulogas, .page-menu .runner-b-menulogas,
+  .runner-pagewrapper .runner-pagewrapper .page-menu .runner-b-menulogas, .page-menu .runner-b-menulogas > *
+{
+white-space: nowrap;
+}
+.page-menu .runner-b-menulogas, .page-menu .runner-b-menulogas,
+.page-menu .runner-b-menulogas, .page-menu .runner-b-menulogas > *,
+  .runner-pagewrapper .page-menu .runner-b-menulogas, .page-menu .runner-b-menulogas,
+  .runner-pagewrapper .page-menu .runner-b-menulogas, .page-menu .runner-b-menulogas > *,
+  .runner-pagewrapper .runner-pagewrapper .page-menu .runner-b-menulogas, .page-menu .runner-b-menulogas,
+  .runner-pagewrapper .runner-pagewrapper .page-menu .runner-b-menulogas, .page-menu .runner-b-menulogas > *
+{
+text-align: left;
+}
+.page-menu .runner-b-menulogout, .page-menu .runner-b-menulogout,
+.page-menu .runner-b-menulogout, .page-menu .runner-b-menulogout > *,
+  .runner-pagewrapper .page-menu .runner-b-menulogout, .page-menu .runner-b-menulogout,
+  .runner-pagewrapper .page-menu .runner-b-menulogout, .page-menu .runner-b-menulogout > *,
+  .runner-pagewrapper .runner-pagewrapper .page-menu .runner-b-menulogout, .page-menu .runner-b-menulogout,
+  .runner-pagewrapper .runner-pagewrapper .page-menu .runner-b-menulogout, .page-menu .runner-b-menulogout > *
+{
+white-space: nowrap;
+}
+.page-menu .runner-b-menulogout, .page-menu .runner-b-menulogout,
+.page-menu .runner-b-menulogout, .page-menu .runner-b-menulogout > *,
+  .runner-pagewrapper .page-menu .runner-b-menulogout, .page-menu .runner-b-menulogout,
+  .runner-pagewrapper .page-menu .runner-b-menulogout, .page-menu .runner-b-menulogout > *,
+  .runner-pagewrapper .runner-pagewrapper .page-menu .runner-b-menulogout, .page-menu .runner-b-menulogout,
+  .runner-pagewrapper .runner-pagewrapper .page-menu .runner-b-menulogout, .page-menu .runner-b-menulogout > *
+{
+text-align: left;
+}
+.page-menu .runner-b-menuchangepwd, .page-menu .runner-b-menuchangepwd,
+.page-menu .runner-b-menuchangepwd, .page-menu .runner-b-menuchangepwd > *,
+  .runner-pagewrapper .page-menu .runner-b-menuchangepwd, .page-menu .runner-b-menuchangepwd,
+  .runner-pagewrapper .page-menu .runner-b-menuchangepwd, .page-menu .runner-b-menuchangepwd > *,
+  .runner-pagewrapper .runner-pagewrapper .page-menu .runner-b-menuchangepwd, .page-menu .runner-b-menuchangepwd,
+  .runner-pagewrapper .runner-pagewrapper .page-menu .runner-b-menuchangepwd, .page-menu .runner-b-menuchangepwd > *
+{
+white-space: nowrap;
+}
+.page-menu .runner-b-menuchangepwd, .page-menu .runner-b-menuchangepwd,
+.page-menu .runner-b-menuchangepwd, .page-menu .runner-b-menuchangepwd > *,
+  .runner-pagewrapper .page-menu .runner-b-menuchangepwd, .page-menu .runner-b-menuchangepwd,
+  .runner-pagewrapper .page-menu .runner-b-menuchangepwd, .page-menu .runner-b-menuchangepwd > *,
+  .runner-pagewrapper .runner-pagewrapper .page-menu .runner-b-menuchangepwd, .page-menu .runner-b-menuchangepwd,
+  .runner-pagewrapper .runner-pagewrapper .page-menu .runner-b-menuchangepwd, .page-menu .runner-b-menuchangepwd > *
+{
+text-align: left;
+}
+.page-menu .runner-b-vmenu, .page-menu .runner-b-vmenu,
+.page-menu .runner-b-vmenu, .page-menu .runner-b-vmenu > *,
+  .runner-pagewrapper .page-menu .runner-b-vmenu, .page-menu .runner-b-vmenu,
+  .runner-pagewrapper .page-menu .runner-b-vmenu, .page-menu .runner-b-vmenu > *,
+  .runner-pagewrapper .runner-pagewrapper .page-menu .runner-b-vmenu, .page-menu .runner-b-vmenu,
+  .runner-pagewrapper .runner-pagewrapper .page-menu .runner-b-vmenu, .page-menu .runner-b-vmenu > *
+{
+white-space: nowrap;
+}
+.page-menu .runner-b-vmenu, .page-menu .runner-b-vmenu,
+.page-menu .runner-b-vmenu, .page-menu .runner-b-vmenu > *,
+  .runner-pagewrapper .page-menu .runner-b-vmenu, .page-menu .runner-b-vmenu,
+  .runner-pagewrapper .page-menu .runner-b-vmenu, .page-menu .runner-b-vmenu > *,
+  .runner-pagewrapper .runner-pagewrapper .page-menu .runner-b-vmenu, .page-menu .runner-b-vmenu,
+  .runner-pagewrapper .runner-pagewrapper .page-menu .runner-b-vmenu, .page-menu .runner-b-vmenu > *
+{
+text-align: left;
+}
+body.page-menu .runner-toptable
+{
+width:100%;
+}
+body.page-menu .runner-top
+{
+padding-right: 5px;
+}

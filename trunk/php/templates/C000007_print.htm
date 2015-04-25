@@ -1,0 +1,442 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<title>{$pagetitle}</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=7">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+		{BEGIN pageCSSFiles}
+		<link REL="stylesheet" href="{$pagestylepath}" type="text/css">
+		{END pageCSSFiles}
+		<!--[if IE]>
+			<link REL="stylesheet" href="styles/defaultIE.css" type="text/css">
+			{BEGIN IEcssFiles}
+			<link REL="stylesheet" href="{$stylepathIE}" type="text/css">
+			{END IEcssFiles}
+		<![endif]-->
+	</head>
+	
+	<body class="{$stylename}" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+		<table   cellpadding="0" class="runner-toptable">
+			<tr class="runner-header">
+				<td class="runner-top" colspan=3>
+					
+
+
+
+
+				</td>
+			</tr>
+			<tr class="runner-body">
+				
+				<td class="runner-left {$blockclass_left}" >
+					
+				</td>	
+				
+				<td class="runner-center {$blockclass_center}">
+					
+
+{BEGIN container_grid}
+
+
+{BEGIN grid_block}
+{BEGIN page}
+<h1>C000007</h1>
+<span>
+{BEGIN page_number}
+Página {$pageno} de {$maxpages} 
+{END page_number}
+</span>
+
+	<div class="runner-s-grid">	
+	<table class="runner-c runner-c-grid" cellpadding="0">
+		<thead>
+		{BEGIN grid_header}
+		<tr class="runner-toprow style1">
+			<td class="runner-cl"><img src="images/spacer.gif"></td>
+			{BEGIN record_header}
+					{BEGIN CODIGO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN CODIGO_fieldheader}
+	<b>Código</b>
+	{END CODIGO_fieldheader}
+</th>
+{END CODIGO_fieldheadercolumn}
+	{BEGIN SITUACAO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN SITUACAO_fieldheader}
+	<b>Situação</b>
+	{END SITUACAO_fieldheader}
+</th>
+{END SITUACAO_fieldheadercolumn}
+	{BEGIN NOME_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN NOME_fieldheader}
+	<b>Nome</b>
+	{END NOME_fieldheader}
+</th>
+{END NOME_fieldheadercolumn}
+	{BEGIN ENDERECO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN ENDERECO_fieldheader}
+	<b>Endereço</b>
+	{END ENDERECO_fieldheader}
+</th>
+{END ENDERECO_fieldheadercolumn}
+	{BEGIN BAIRRO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN BAIRRO_fieldheader}
+	<b>Bairro</b>
+	{END BAIRRO_fieldheader}
+</th>
+{END BAIRRO_fieldheadercolumn}
+	{BEGIN CIDADE_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN CIDADE_fieldheader}
+	<b>Cidade</b>
+	{END CIDADE_fieldheader}
+</th>
+{END CIDADE_fieldheadercolumn}
+	{BEGIN UF_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN UF_fieldheader}
+	<b>UF</b>
+	{END UF_fieldheader}
+</th>
+{END UF_fieldheadercolumn}
+	{BEGIN CEP_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN CEP_fieldheader}
+	<b>CEP</b>
+	{END CEP_fieldheader}
+</th>
+{END CEP_fieldheadercolumn}
+	{BEGIN COMPLEMENTO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN COMPLEMENTO_fieldheader}
+	<b>Complemento</b>
+	{END COMPLEMENTO_fieldheader}
+</th>
+{END COMPLEMENTO_fieldheadercolumn}
+	{BEGIN TELEFONE1_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN TELEFONE1_fieldheader}
+	<b>Telefone1</b>
+	{END TELEFONE1_fieldheader}
+</th>
+{END TELEFONE1_fieldheadercolumn}
+	{BEGIN TELEFONE2_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN TELEFONE2_fieldheader}
+	<b>Telefone2</b>
+	{END TELEFONE2_fieldheader}
+</th>
+{END TELEFONE2_fieldheadercolumn}
+	{BEGIN TELEFONE3_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN TELEFONE3_fieldheader}
+	<b>Telefone3</b>
+	{END TELEFONE3_fieldheader}
+</th>
+{END TELEFONE3_fieldheadercolumn}
+	{BEGIN CELULAR_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN CELULAR_fieldheader}
+	<b>Celular</b>
+	{END CELULAR_fieldheader}
+</th>
+{END CELULAR_fieldheadercolumn}
+	{BEGIN EMAIL_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN EMAIL_fieldheader}
+	<b>E-mail</b>
+	{END EMAIL_fieldheader}
+</th>
+{END EMAIL_fieldheadercolumn}
+	{BEGIN RG_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN RG_fieldheader}
+	<b>RG</b>
+	{END RG_fieldheader}
+</th>
+{END RG_fieldheadercolumn}
+	{BEGIN CPF_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN CPF_fieldheader}
+	<b>CPF</b>
+	{END CPF_fieldheader}
+</th>
+{END CPF_fieldheadercolumn}
+	{BEGIN ESTADOCIVIL_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN ESTADOCIVIL_fieldheader}
+	<b>Estado Civil</b>
+	{END ESTADOCIVIL_fieldheader}
+</th>
+{END ESTADOCIVIL_fieldheadercolumn}
+	{BEGIN CONJUGE_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN CONJUGE_fieldheader}
+	<b>Conjugue</b>
+	{END CONJUGE_fieldheader}
+</th>
+{END CONJUGE_fieldheadercolumn}
+	{BEGIN NASCIMENTO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN NASCIMENTO_fieldheader}
+	<b>Nascimento</b>
+	{END NASCIMENTO_fieldheader}
+</th>
+{END NASCIMENTO_fieldheadercolumn}
+	{BEGIN SEXO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN SEXO_fieldheader}
+	<b>Sexo</b>
+	{END SEXO_fieldheader}
+</th>
+{END SEXO_fieldheadercolumn}
+	{BEGIN OBS1_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN OBS1_fieldheader}
+	<b>OBS</b>
+	{END OBS1_fieldheader}
+</th>
+{END OBS1_fieldheadercolumn}
+		
+			{END record_header}
+			<td class="runner-cr"><img src="images/spacer.gif"></td>
+			{BEGIN endrecordheader_block}
+			<td class="runner-cs">&nbsp;</td>
+			{END endrecordheader_block}
+		</tr>
+	{END grid_header}
+		</thead>
+		<tbody>	
+		{BEGIN grid_row}
+	<tr class="runner-row style1" {$rowattrs} {$rowstyle} {$rowstyle}>
+		<td class="runner-cl"></td>
+		{BEGIN grid_record}
+				{BEGIN CODIGO_fieldcolumn}
+<td  class="runner-cc {$CODIGO_class}" {$CODIGO_style}>
+	{$CODIGO_value}
+</td>
+{END CODIGO_fieldcolumn}
+	{BEGIN SITUACAO_fieldcolumn}
+<td  class="runner-cc {$SITUACAO_class}" {$SITUACAO_style}>
+	{$SITUACAO_value}
+</td>
+{END SITUACAO_fieldcolumn}
+	{BEGIN NOME_fieldcolumn}
+<td  class="runner-cc {$NOME_class}" {$NOME_style}>
+	{$NOME_value}
+</td>
+{END NOME_fieldcolumn}
+	{BEGIN ENDERECO_fieldcolumn}
+<td  class="runner-cc {$ENDERECO_class}" {$ENDERECO_style}>
+	{$ENDERECO_value}
+</td>
+{END ENDERECO_fieldcolumn}
+	{BEGIN BAIRRO_fieldcolumn}
+<td  class="runner-cc {$BAIRRO_class}" {$BAIRRO_style}>
+	{$BAIRRO_value}
+</td>
+{END BAIRRO_fieldcolumn}
+	{BEGIN CIDADE_fieldcolumn}
+<td  class="runner-cc {$CIDADE_class}" {$CIDADE_style}>
+	{$CIDADE_value}
+</td>
+{END CIDADE_fieldcolumn}
+	{BEGIN UF_fieldcolumn}
+<td  class="runner-cc {$UF_class}" {$UF_style}>
+	{$UF_value}
+</td>
+{END UF_fieldcolumn}
+	{BEGIN CEP_fieldcolumn}
+<td  class="runner-cc {$CEP_class}" {$CEP_style}>
+	{$CEP_value}
+</td>
+{END CEP_fieldcolumn}
+	{BEGIN COMPLEMENTO_fieldcolumn}
+<td  class="runner-cc {$COMPLEMENTO_class}" {$COMPLEMENTO_style}>
+	{$COMPLEMENTO_value}
+</td>
+{END COMPLEMENTO_fieldcolumn}
+	{BEGIN TELEFONE1_fieldcolumn}
+<td  class="runner-cc {$TELEFONE1_class}" {$TELEFONE1_style}>
+	{$TELEFONE1_value}
+</td>
+{END TELEFONE1_fieldcolumn}
+	{BEGIN TELEFONE2_fieldcolumn}
+<td  class="runner-cc {$TELEFONE2_class}" {$TELEFONE2_style}>
+	{$TELEFONE2_value}
+</td>
+{END TELEFONE2_fieldcolumn}
+	{BEGIN TELEFONE3_fieldcolumn}
+<td  class="runner-cc {$TELEFONE3_class}" {$TELEFONE3_style}>
+	{$TELEFONE3_value}
+</td>
+{END TELEFONE3_fieldcolumn}
+	{BEGIN CELULAR_fieldcolumn}
+<td  class="runner-cc {$CELULAR_class}" {$CELULAR_style}>
+	{$CELULAR_value}
+</td>
+{END CELULAR_fieldcolumn}
+	{BEGIN EMAIL_fieldcolumn}
+<td  class="runner-cc {$EMAIL_class}" {$EMAIL_style}>
+	{$EMAIL_value}
+</td>
+{END EMAIL_fieldcolumn}
+	{BEGIN RG_fieldcolumn}
+<td  class="runner-cc {$RG_class}" {$RG_style}>
+	{$RG_value}
+</td>
+{END RG_fieldcolumn}
+	{BEGIN CPF_fieldcolumn}
+<td  class="runner-cc {$CPF_class}" {$CPF_style}>
+	{$CPF_value}
+</td>
+{END CPF_fieldcolumn}
+	{BEGIN ESTADOCIVIL_fieldcolumn}
+<td  class="runner-cc {$ESTADOCIVIL_class}" {$ESTADOCIVIL_style}>
+	{$ESTADOCIVIL_value}
+</td>
+{END ESTADOCIVIL_fieldcolumn}
+	{BEGIN CONJUGE_fieldcolumn}
+<td  class="runner-cc {$CONJUGE_class}" {$CONJUGE_style}>
+	{$CONJUGE_value}
+</td>
+{END CONJUGE_fieldcolumn}
+	{BEGIN NASCIMENTO_fieldcolumn}
+<td  class="runner-cc {$NASCIMENTO_class}" {$NASCIMENTO_style}>
+	{$NASCIMENTO_value}
+</td>
+{END NASCIMENTO_fieldcolumn}
+	{BEGIN SEXO_fieldcolumn}
+<td  class="runner-cc {$SEXO_class}" {$SEXO_style}>
+	{$SEXO_value}
+</td>
+{END SEXO_fieldcolumn}
+	{BEGIN OBS1_fieldcolumn}
+<td  class="runner-cc {$OBS1_class}" {$OBS1_style}>
+	{$OBS1_value}
+</td>
+{END OBS1_fieldcolumn}
+
+		{END grid_record}
+		<td class="runner-cr"></td>
+		{BEGIN endrecord_block}
+		<td class="runner-cs">&nbsp;</td>
+		{END endrecord_block}
+	</tr>
+{END grid_row}
+										
+								<tr class="runner-bottomrow style1">
+									<td class="runner-cl"><img src="images/spacer.gif"></td>
+									{BEGIN record_footer}
+									{BEGIN CODIGO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END CODIGO_fieldfootercolumn}
+{BEGIN SITUACAO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END SITUACAO_fieldfootercolumn}
+{BEGIN NOME_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END NOME_fieldfootercolumn}
+{BEGIN ENDERECO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END ENDERECO_fieldfootercolumn}
+{BEGIN BAIRRO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END BAIRRO_fieldfootercolumn}
+{BEGIN CIDADE_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END CIDADE_fieldfootercolumn}
+{BEGIN UF_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END UF_fieldfootercolumn}
+{BEGIN CEP_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END CEP_fieldfootercolumn}
+{BEGIN COMPLEMENTO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END COMPLEMENTO_fieldfootercolumn}
+{BEGIN TELEFONE1_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END TELEFONE1_fieldfootercolumn}
+{BEGIN TELEFONE2_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END TELEFONE2_fieldfootercolumn}
+{BEGIN TELEFONE3_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END TELEFONE3_fieldfootercolumn}
+{BEGIN CELULAR_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END CELULAR_fieldfootercolumn}
+{BEGIN EMAIL_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END EMAIL_fieldfootercolumn}
+{BEGIN RG_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END RG_fieldfootercolumn}
+{BEGIN CPF_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END CPF_fieldfootercolumn}
+{BEGIN ESTADOCIVIL_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END ESTADOCIVIL_fieldfootercolumn}
+{BEGIN CONJUGE_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END CONJUGE_fieldfootercolumn}
+{BEGIN NASCIMENTO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END NASCIMENTO_fieldfootercolumn}
+{BEGIN SEXO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END SEXO_fieldfootercolumn}
+{BEGIN OBS1_fieldfootercolumn}
+<td class="runner-cc runner-clast"></td>
+{END OBS1_fieldfootercolumn}
+
+									{END record_footer}
+									<td class="runner-cr"><img src="images/spacer.gif"></td>
+									{BEGIN endrecordtotals_block}
+									<td class="runner-cs"></td>
+									{END endrecordtotals_block}
+								</tr>
+
+		</tbody>
+	</table>
+</div>	
+{END page}
+
+{END grid_block}
+
+
+
+{END container_grid}
+
+
+				</td>	
+
+				<td class="runner-right {$blockclass_right}">
+					
+				</td>	
+			</tr>
+			<tr class="runner-footer">
+				<td class="runner-bottom" colspan=3>
+					<!--%%bottom%%-->
+				</td>
+			</tr>
+		</table>
+		{$footer}
+	{END body}
+	</body>
+</html>

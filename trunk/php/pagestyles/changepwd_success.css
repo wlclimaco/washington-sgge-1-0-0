@@ -1,0 +1,84 @@
+.page-changepwd_success,
+  .runner-pagewrapper .page-changepwd_success,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd_success
+{
+padding-top:10px; padding-left:10px;
+}
+.page-changepwd_success .runner-c-fields,
+  .runner-pagewrapper .page-changepwd_success .runner-c-fields,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd_success .runner-c-fields
+{
+margin-bottom:5px;
+}
+.page-changepwd_success .runner-c-fields,
+  .runner-pagewrapper .page-changepwd_success .runner-c-fields,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd_success .runner-c-fields
+{
+width:500px;
+}
+body.page-changepwd_success .runner-c-fields
+{
+margin-left:auto; margin-right:auto;
+}
+.page-changepwd_success .runner-b-changeheader, .page-changepwd_success .runner-b-changeheader,
+.page-changepwd_success .runner-b-changeheader, .page-changepwd_success .runner-b-changeheader > *,
+  .runner-pagewrapper .page-changepwd_success .runner-b-changeheader, .page-changepwd_success .runner-b-changeheader,
+  .runner-pagewrapper .page-changepwd_success .runner-b-changeheader, .page-changepwd_success .runner-b-changeheader > *,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd_success .runner-b-changeheader, .page-changepwd_success .runner-b-changeheader,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd_success .runner-b-changeheader, .page-changepwd_success .runner-b-changeheader > *
+{
+white-space: nowrap;
+}
+.page-changepwd_success .runner-b-changeheader, .page-changepwd_success .runner-b-changeheader,
+.page-changepwd_success .runner-b-changeheader, .page-changepwd_success .runner-b-changeheader > *,
+  .runner-pagewrapper .page-changepwd_success .runner-b-changeheader, .page-changepwd_success .runner-b-changeheader,
+  .runner-pagewrapper .page-changepwd_success .runner-b-changeheader, .page-changepwd_success .runner-b-changeheader > *,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd_success .runner-b-changeheader, .page-changepwd_success .runner-b-changeheader,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd_success .runner-b-changeheader, .page-changepwd_success .runner-b-changeheader > *
+{
+text-align: left;
+}
+.page-changepwd_success .runner-b-changepwd_message, .page-changepwd_success .runner-b-changepwd_message,
+.page-changepwd_success .runner-b-changepwd_message, .page-changepwd_success .runner-b-changepwd_message > *,
+  .runner-pagewrapper .page-changepwd_success .runner-b-changepwd_message, .page-changepwd_success .runner-b-changepwd_message,
+  .runner-pagewrapper .page-changepwd_success .runner-b-changepwd_message, .page-changepwd_success .runner-b-changepwd_message > *,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd_success .runner-b-changepwd_message, .page-changepwd_success .runner-b-changepwd_message,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd_success .runner-b-changepwd_message, .page-changepwd_success .runner-b-changepwd_message > *
+{
+white-space: nowrap;
+}
+.page-changepwd_success .runner-b-changepwd_message, .page-changepwd_success .runner-b-changepwd_message,
+.page-changepwd_success .runner-b-changepwd_message, .page-changepwd_success .runner-b-changepwd_message > *,
+  .runner-pagewrapper .page-changepwd_success .runner-b-changepwd_message, .page-changepwd_success .runner-b-changepwd_message,
+  .runner-pagewrapper .page-changepwd_success .runner-b-changepwd_message, .page-changepwd_success .runner-b-changepwd_message > *,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd_success .runner-b-changepwd_message, .page-changepwd_success .runner-b-changepwd_message,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd_success .runner-b-changepwd_message, .page-changepwd_success .runner-b-changepwd_message > *
+{
+text-align: left;
+}
+.page-changepwd_success .runner-b-changesuccessbutton, .page-changepwd_success .runner-b-changesuccessbutton,
+.page-changepwd_success .runner-b-changesuccessbutton, .page-changepwd_success .runner-b-changesuccessbutton > *,
+  .runner-pagewrapper .page-changepwd_success .runner-b-changesuccessbutton, .page-changepwd_success .runner-b-changesuccessbutton,
+  .runner-pagewrapper .page-changepwd_success .runner-b-changesuccessbutton, .page-changepwd_success .runner-b-changesuccessbutton > *,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd_success .runner-b-changesuccessbutton, .page-changepwd_success .runner-b-changesuccessbutton,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd_success .runner-b-changesuccessbutton, .page-changepwd_success .runner-b-changesuccessbutton > *
+{
+white-space: nowrap;
+}
+.page-changepwd_success .runner-b-changesuccessbutton, .page-changepwd_success .runner-b-changesuccessbutton,
+.page-changepwd_success .runner-b-changesuccessbutton, .page-changepwd_success .runner-b-changesuccessbutton > *,
+  .runner-pagewrapper .page-changepwd_success .runner-b-changesuccessbutton, .page-changepwd_success .runner-b-changesuccessbutton,
+  .runner-pagewrapper .page-changepwd_success .runner-b-changesuccessbutton, .page-changepwd_success .runner-b-changesuccessbutton > *,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd_success .runner-b-changesuccessbutton, .page-changepwd_success .runner-b-changesuccessbutton,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd_success .runner-b-changesuccessbutton, .page-changepwd_success .runner-b-changesuccessbutton > *
+{
+text-align: left;
+}
+body.page-changepwd_success .runner-toptable
+{
+width:100%;
+}
+body.page-changepwd_success .runner-top
+{
+padding-right: 5px;
+}

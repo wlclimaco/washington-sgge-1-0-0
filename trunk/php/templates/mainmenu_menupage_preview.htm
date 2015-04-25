@@ -1,0 +1,45 @@
+{BEGIN mainmenu_block}
+##if @BUILDER.InlineMenu##
+  <tr class="runner-vmenu tree">
+    <td class="runner-cl"></td>
+    <td class="runner-cc">
+      <div class="manage">
+        <a href="#"><img alt="*" src="images/plus.gif">
+          ##message EXPAND_ALL##
+        </a>
+      </div>
+    </td>
+    <td class="runner-cr"></td>
+  </tr>
+##endif##
+
+##foreach @BUILDER.MenuNodes as @m0 filter !@m0.parent##
+##foreach @BUILDER.MenuNodes as @menu filter @menu.id=@m0.id##
+	<tr id="item##@m0.id##" view="topitem" class="runner-b-vmenu runner-vmenu ##if @BUILDER.InlineMenu##tree##else##simple##endif## ##@m0.type##">
+		<td class="runner-cl"></td>	
+		<td class="runner-cc">
+			##include templates\menuitem_preview.htm##
+		</td>
+		<td class="runner-cr"></td>
+	</tr>	
+	##if @BUILDER.InlineMenu##
+	##foreach @BUILDER.MenuNodes as @m1 filter @m1.parent = @m0.id##
+	##foreach @BUILDER.MenuNodes as @menu filter @menu.id=@m1.id##
+		<tr id="item##@m1.id##" class="runner-b-vmenu runner-vmenu tree level1 ##@m1.type##">
+			<td class="runner-cl"></td>	
+			<td class="runner-cc">
+				##include templates\menuitem_preview.htm##
+			</td>
+			<td class="runner-cr"></td>
+		</tr>	
+	##endfor##			
+	##endfor##	
+	##endif##	
+##endfor##
+	##if @last##
+	##if @BUILDER.bDynamicPermissions## 
+	##include templates\menuitem_adminarea_preview.htm##
+	##endif##
+	##endif##
+##endfor##	
+{END mainmenu_block}

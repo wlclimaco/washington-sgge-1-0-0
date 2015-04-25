@@ -1,0 +1,28 @@
+li, .runner-toprow > .runner-cc, .runner-cc.alt
+{
+	text-align:right !important;
+}
+li, .runner-toprow > .runner-bc
+{
+	text-align:center !important;
+}
+
+.runner-button, .runner-hmenu
+{
+	direction:rtl;
+}
+
+.runner-btnframe
+{
+	direction:ltr;
+}
+
+.runner-b-hmenu
+{
+	direction:ltr;
+}
+
+.runner-dpreviewrow .dpinline
+{
+	text-align:right;
+}

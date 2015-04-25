@@ -1,0 +1,61 @@
+<div class="searchOptions bottomPanelBorder" {$srchOpt_attrs}>
+	
+	<!-- Search panel content -->
+	<div class="srchCritTop" style="display: none;">
+		Critério:&nbsp;
+		<input type="radio" name="srchType" class="runner-radio-button" {$all_checkbox}> {BEGIN all_checkbox_label}Todos{END all_checkbox_label}
+		&nbsp;&nbsp;&nbsp;
+		<input type="radio" name="srchType" class="runner-radio-button" {$any_checkbox}> {BEGIN any_checkbox_label}Qualquer{END any_checkbox_label}
+	</div>
+	
+	<div class="addOption">
+		<span class="runner-btnframe">
+		<span class="runner-btnleft"></span>
+		<span class="runner-btnright"></span>
+		<a href="#" id="showHideControlChooseMenu{$id}" class="runner-button" {$showHideCtrls_attrs}>Adicionar campo</a>
+		</span>
+		&nbsp;&nbsp;&nbsp;
+		<span class="runner-btnframe">
+		<span class="runner-btnleft"></span>
+		<span class="runner-btnright"></span>
+		<a href="#" id="showHideSearchType{$id}" class="runner-button" {$showHideCtrlsOpt_attrs}>{$showHideOpt_mess}</a>
+		</span>
+	</div>
+	
+	<!-- choose controls div -->
+	<div class="runner-panel controlChooseMenu" {$controlChooseMenuDiv_attrs}>
+		{BEGIN addSearch_CODIGO}
+			<a href="#" id="addSearchControl_CODIGO" class="addSearchControl" {$addSearchControl_CODIGO_attrs}>Código</a><br>
+		{END addSearch_CODIGO}
+		{BEGIN addSearch_NOME}
+			<a href="#" id="addSearchControl_NOME" class="addSearchControl" {$addSearchControl_NOME_attrs}>Empresa</a><br>
+		{END addSearch_NOME}
+		{BEGIN addSearch_CNPJ}
+			<a href="#" id="addSearchControl_CNPJ" class="addSearchControl" {$addSearchControl_CNPJ_attrs}>CNPJ</a><br>
+		{END addSearch_CNPJ}
+		{BEGIN addSearch_IE}
+			<a href="#" id="addSearchControl_IE" class="addSearchControl" {$addSearchControl_IE_attrs}>IE</a><br>
+		{END addSearch_IE}
+	</div>
+	
+	<table class="controlsBlock">
+	{BEGIN searchCtrlBlock}
+		<tr class="srchPanelRow" {$filterRow_attrs}>
+			<td class="srchPanelCell">{$delCtrlButt}</td>
+			<td class="srchPanelCell">{$fLabel}:&nbsp;</td>
+			<td class="srchPanelCell srchPanelCell2">
+				<div class="runner-searchtype">{$searchtype}</div>
+				<div class="runner-searchcontrol">{$searchcontrol}</div>
+				<div class="runner-searchcontrol">{$searchcontrol1}</div>
+		</tr>
+	{END searchCtrlBlock}
+	</table>
+	
+	<div class="bottomSearchButt" align="left" {$bottomSearchButt_attrs}>
+		<span class="runner-btnframe">
+		<span class="runner-btnleft"></span>
+		<span class="runner-btnright"></span>
+		<a href="#" class="runner-button" {$searchbutton_attrs}>Buscar</a>
+		</span>
+	</div>
+</div>

@@ -1,0 +1,71 @@
+<div class="searchOptions bottomPanelBorder" {$srchOpt_attrs}>
+	<!-- Search panel content -->
+	<div class="srchCritTop" style="display: none;">
+		Critério:&nbsp;
+		<input type="radio" name="srchType" class="runner-radio-button" {$all_checkbox}> {BEGIN all_checkbox_label}Todos{END all_checkbox_label}
+		&nbsp;&nbsp;&nbsp;
+		<input type="radio" name="srchType" class="runner-radio-button" {$any_checkbox}> {BEGIN any_checkbox_label}Qualquer{END any_checkbox_label}
+	</div>
+	
+	<div class="addOption">
+		<span class="runner-btnframe">
+		<span class="runner-btnleft"></span>
+		<span class="runner-btnright"></span>
+		<a href="#" id="showHideControlChooseMenu{$id}" class="runner-button" {$showHideCtrls_attrs}>Adicionar campo</a>
+		</span>
+		&nbsp;&nbsp;&nbsp;
+		<span class="runner-btnframe">
+		<span class="runner-btnleft"></span>
+		<span class="runner-btnright"></span>
+		<a href="#" id="showHideSearchType{$id}" class="runner-button" {$showHideCtrlsOpt_attrs}>{$showHideOpt_mess}</a>
+		</span>
+	</div>
+	
+	<!-- choose controls div -->
+	<div class="runner-panel controlChooseMenu" {$controlChooseMenuDiv_attrs}>
+		{BEGIN addSearch_CODIGO}
+			<a href="#" id="addSearchControl_CODIGO" class="addSearchControl" {$addSearchControl_CODIGO_attrs}>Código</a><br>
+		{END addSearch_CODIGO}
+		{BEGIN addSearch_CODBARRA}
+			<a href="#" id="addSearchControl_CODBARRA" class="addSearchControl" {$addSearchControl_CODBARRA_attrs}>Código de Barra</a><br>
+		{END addSearch_CODBARRA}
+		{BEGIN addSearch_PRODUTO}
+			<a href="#" id="addSearchControl_PRODUTO" class="addSearchControl" {$addSearchControl_PRODUTO_attrs}>Produto</a><br>
+		{END addSearch_PRODUTO}
+		{BEGIN addSearch_NOTAFISCAL}
+			<a href="#" id="addSearchControl_NOTAFISCAL" class="addSearchControl" {$addSearchControl_NOTAFISCAL_attrs}>Nota Fiscal</a><br>
+		{END addSearch_NOTAFISCAL}
+		{BEGIN addSearch_VALIDADE}
+			<a href="#" id="addSearchControl_VALIDADE" class="addSearchControl" {$addSearchControl_VALIDADE_attrs}>Validade</a><br>
+		{END addSearch_VALIDADE}
+		{BEGIN addSearch_CODGRUPO}
+			<a href="#" id="addSearchControl_CODGRUPO" class="addSearchControl" {$addSearchControl_CODGRUPO_attrs}>Grupo</a><br>
+		{END addSearch_CODGRUPO}
+		{BEGIN addSearch_CODSUBGRUPO}
+			<a href="#" id="addSearchControl_CODSUBGRUPO" class="addSearchControl" {$addSearchControl_CODSUBGRUPO_attrs}>Sub Grupo</a><br>
+		{END addSearch_CODSUBGRUPO}
+		{BEGIN addSearch_CODFORNECEDOR}
+			<a href="#" id="addSearchControl_CODFORNECEDOR" class="addSearchControl" {$addSearchControl_CODFORNECEDOR_attrs}>Fornecedor</a><br>
+		{END addSearch_CODFORNECEDOR}
+		{BEGIN addSearch_CODMARCA}
+			<a href="#" id="addSearchControl_CODMARCA" class="addSearchControl" {$addSearchControl_CODMARCA_attrs}>Marca</a><br>
+		{END addSearch_CODMARCA}
+	</div>
+	
+	<div class="controlsBlock">
+		{BEGIN searchCtrlBlock}
+		<div class="srchPanelRow" {$filterRow_attrs}>
+			<div class="srchPanelCell">{$delCtrlButt}&nbsp;{$fLabel}:&nbsp;</div>
+			<div class="srchPanelCell srchPanelCell2">{$searchtype} {$searchcontrol} {$searchcontrol1}</div>
+		</div>
+		{END searchCtrlBlock}
+	</div>
+		
+	<div class="bottomSearchButt" align="left" {$bottomSearchButt_attrs}>
+		<span class="runner-btnframe">
+		<span class="runner-btnleft"></span>
+		<span class="runner-btnright"></span>
+		<a href="#" class="runner-button" {$searchbutton_attrs}>Buscar</a>
+		</span>
+	</div>
+</div>

@@ -1,0 +1,64 @@
+/*body {
+	min-width: 600px;
+	font-family: arial,helvetica,clean,sans-serif;
+	font-size: 9pt;
+	line-height: 1.32em;
+}*/
+.textstyle {
+	font-size:100%;
+	font-family: Arial,Helvetica,sans-serif;
+	border-color: #A7A7A7 #CCCCCC #CCCCCC #CCCCCC;
+	border-style:solid;
+	border-width:1px;
+	color:#555555;
+	font-size:1em;
+}
+.alignToRight {
+	text-align:right;
+	vertical-align:top;
+}
+/* Some round fancies */
+.topl, .topr, .bottoml, .bottomr {
+	background: url(../images/corners.gif);
+	width: 10px;
+	height: 10px;
+	font-size: 0;
+}
+
+.topl, .bottoml {
+	float: left;
+}
+.topr, .bottomr {
+	float: right;
+}
+
+.shiny_box {
+	width: 210px;
+	overflow: hidden;	
+}
+.shiny_box p {
+	margin:10px;
+}
+
+.shiny_box_body {
+	clear: both;
+	padding: 0 10px;
+	overflow: hidden;
+	color: #666666;
+	padding:4px;
+}
+
+* html .shiny_box_body {
+	height: 1%;	
+}
+
+.simple_box {
+	width:200px;
+	padding:10px;
+	background-color:#0066FF;
+	border:1px solid #F2F2F2;
+	color:#F2F2F2;
+	font-weight:bold;
+	font-size:11px;
+	text-align: center;
+}

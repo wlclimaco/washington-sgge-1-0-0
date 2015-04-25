@@ -1,0 +1,17 @@
+##foreach @BUILDER.Tables as @t filter IsAdminTable(@t)##
+<tr id="item##@t.strShortTableName##" view="topitem" class="runner-vmenu runner-b-vmenu ##if @BUILDER.InlineMenu##tree##else##simple##endif## Leaf##if @t.strDataSourceTable==@TABLE.strDataSourceTable## current##endif##">
+	<td class="runner-cl"></td>	
+	<td class="runner-cc">
+		<a id="itemlink##@t.strShortTableName##">
+		##if @t.strDataSourceTable=="admin_users"##
+			##message AA_ADDEDIT_USERS##
+		##elseif @t.strDataSourceTable=="admin_members"##
+			##message AA_ASSIGN_USERS##
+		##elseif @t.strDataSourceTable=="admin_rights"##
+			##message AA_PERMISSIONS##
+		##endif##
+		</a>
+	</td>
+	<td class="runner-cr"></td>
+</tr>
+##endfor##

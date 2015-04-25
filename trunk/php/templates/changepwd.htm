@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<HTML {$html_attrs}><HEAD><TITLE>{$pagetitle}</TITLE>
+<META content=IE=7 http-equiv=X-UA-Compatible>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK rel=stylesheet type=text/css href="styles/default.css">{BEGIN rtlCSS}<LINK rel=stylesheet type=text/css href="styles/defaultRTL.css">{END rtlCSS}{BEGIN styleCSSFiles}<LINK rel=stylesheet type=text/css href="{$stylepath}">{END styleCSSFiles}{BEGIN pageCSSFiles}<LINK rel=stylesheet type=text/css href="{$pagestylepath}">{END pageCSSFiles}<!--[if IE]><LINK rel=stylesheet type=text/css href="styles/defaultIE.css">{BEGIN IEcssFiles}<LINK rel=stylesheet type=text/css href="{$stylepathIE}">{END IEcssFiles}<![endif]-->
+<META name=GENERATOR content="MSHTML 8.00.6001.23543"></HEAD>
+<BODY class="{$stylename}" {$bodyattrs}>{BEGIN body}{$header} 
+<TABLE class=runner-toptable cellPadding=0>
+  <TBODY>
+  <TR class=runner-header>
+    <TD class=runner-top colSpan=3>
+      {BEGIN container_fields}
+      <TABLE class="runner-c runner-c-fields" cellPadding=0 align=center>
+        <TBODY>
+        <TR class="runner-toprow style2 header">
+          <TD class=runner-cl><IMG src="images/spacer.gif"></TD>
+          <TD class=runner-cc colSpan=2>
+            
+            <DIV 
+            class="runner-b-changeheader {$brickclass_changeheader}"><B><FONT 
+            size=+1>Mudar senha</FONT></B></DIV></TD>
+          <TD class=runner-cr><IMG src="images/spacer.gif"></TD></TR>
+        {BEGIN message_block}<TR class="runner-row style1 runner-b-message {$brickclass_message}">
+          <TD class=runner-cl></TD>
+          <TD class="runner-cc runner-brickcontents" colSpan=2>
+            
+            <DIV class=runner-message>{$message}</DIV></TD>
+          <TD class=runner-cr></TD></TR>
+        {END message_block}<TR class="runner-row style1 runner-b-changefields">
+          <TD class=runner-cl></TD>
+          <TD class="runner-cc runner-cc1">
+            
+            <DIV align=left>Senha atual:</DIV></TD>
+          <TD class="runner-cc alt">
+            <INPUT type=password 
+            name=opass {$opass_attrs}></TD>
+          <TD class="runner-cr alt"></TD></TR>
+        <TR class="runner-row style1 runner-b-changefields">
+          <TD class=runner-cl></TD>
+          <TD class="runner-cc runner-cc1">
+            
+            <DIV align=left>Nova senha:</DIV></TD>
+          <TD class="runner-cc alt">
+            <INPUT type=password 
+            name=newpass {$npass_attrs}></TD>
+          <TD class="runner-cr alt"></TD></TR>
+        <TR class="runner-row style1 runner-b-changefields">
+          <TD class=runner-cl></TD>
+          <TD class="runner-cc runner-cc1">
+            
+            <DIV align=left>Confirme a senha:</DIV></TD>
+          <TD class="runner-cc alt">
+            <INPUT type=password 
+            name=cpass {$cpass_attrs}></TD>
+          <TD class="runner-cr alt"></TD></TR>
+        <TR 
+        class="runner-row style2 runner-b-changebuttons {$brickclass_changebuttons}">
+          <TD class=runner-cl></TD>
+          <TD class="runner-cc runner-brickcontents" colSpan=2>
+            <SPAN class=runner-btnframe><SPAN class=runner-btnleft></SPAN><SPAN class=runner-btnright></SPAN><A class=runner-button href="#" {$loginlink_attrs}>Entrar Athenas 
+            WEB</A> </SPAN><SPAN class=runner-btnframe><SPAN class=runner-btnleft></SPAN><SPAN class=runner-btnright></SPAN><A class=runner-button {$backlink_attrs}>Voltar</A> 
+            </SPAN></TD>
+          <TD class=runner-cr></TD></TR>
+        <TR class="{$cfooterclass_fields}">
+          <TD class=runner-cl><IMG src="images/spacer.gif"></TD>
+          <TD class=runner-cc></TD>
+          <TD class=runner-cc></TD>
+          <TD class=runner-cr><IMG src="images/spacer.gif"></TD></TR></TBODY></TABLE>{END container_fields}</TD></TR>
+  <TR class=runner-body>
+    <TD class="runner-left {$blockclass_left}"></TD>
+    <TD class="runner-center {$blockclass_center}"></TD>
+    <TD class="runner-right {$blockclass_right}"></TD></TR>
+  <TR class=runner-footer>
+    <TD class=runner-bottom 
+colSpan=3><!--%%bottom%%--></TD></TR></TBODY></TABLE>{$footer}{END body} </BODY></HTML>

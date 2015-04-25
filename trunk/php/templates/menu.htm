@@ -1,0 +1,107 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<title>{$pagetitle}</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=7">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+		{BEGIN pageCSSFiles}
+		<link REL="stylesheet" href="{$pagestylepath}" type="text/css">
+		{END pageCSSFiles}
+		<!--[if IE]>
+			<link REL="stylesheet" href="styles/defaultIE.css" type="text/css">
+			{BEGIN IEcssFiles}
+			<link REL="stylesheet" href="{$stylepathIE}" type="text/css">
+			{END IEcssFiles}
+		<![endif]-->
+	</head>
+	
+	<body class="{$stylename}" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+		<table   cellpadding="0" class="runner-toptable">
+			<tr class="runner-header">
+				<td class="runner-top" colspan=3>
+					
+
+{BEGIN container_menu}
+<table class="runner-c runner-c-menu" cellpadding="0" >
+<tr class="{$cheaderclass_menu}">
+<td class="runner-cl"><img src="images/spacer.gif"></td>
+<td class="runner-cc"></td><td class="runner-cr"><img src="images/spacer.gif"></td>
+</tr>
+
+{BEGIN loggedas_block}
+<tr  class="runner-row style1 runner-b-menulogas {$brickclass_menulogas}"><td class="runner-cl"></td><td class="runner-cc runner-brickcontents" ><span>Logado Como&nbsp;<b>{$username}</b></span></td><td class="runner-cr"></td></tr>{END loggedas_block}
+
+
+{BEGIN logout_link}
+<tr  class="runner-row style1 runner-b-menulogout {$brickclass_menulogout}"><td class="runner-cl"></td><td class="runner-cc runner-brickcontents" >{BEGIN guestloginbutton}
+<span class="runner-btnframe">
+<span class="runner-btnleft"></span>
+<span class="runner-btnright"></span>
+<a href="#" class="runner-button" {$guestloginlink_attrs}>Login</a>
+</span>
+{END guestloginbutton}
+{BEGIN logoutbutton}
+<span class="runner-btnframe">
+<span class="runner-btnleft"></span>
+<span class="runner-btnright"></span>
+<a href="#" class="runner-button" {$logoutlink_attrs}>Log Out</a>
+</span>
+{END logoutbutton}</td><td class="runner-cr"></td></tr>{END logout_link}
+
+
+{BEGIN changepwd_link}
+<tr  class="runner-row style1 runner-b-menuchangepwd {$brickclass_menuchangepwd}"><td class="runner-cl"></td><td class="runner-cc runner-brickcontents" ><span class="runner-btnframe">
+<span class="runner-btnleft"></span>
+<span class="runner-btnright"></span>
+<a href="#" class="runner-button" {$changepwdlink_attrs}>Mudar senha</a>
+</span></td><td class="runner-cr"></td></tr>{END changepwd_link}
+
+
+{BEGIN menu_block}
+{$mainmenu}
+{END menu_block}
+
+
+<tr class="{$cfooterclass_menu}">
+<td class="runner-cl"><img src="images/spacer.gif"></td>
+<td class="runner-cc"></td><td class="runner-cr"><img src="images/spacer.gif"></td>
+</tr>
+</table>
+{END container_menu}
+
+
+				</td>
+			</tr>
+			<tr class="runner-body">
+				
+				<td class="runner-left {$blockclass_left}" >
+					
+				</td>	
+				
+				<td class="runner-center {$blockclass_center}">
+					
+				</td>	
+
+				<td class="runner-right {$blockclass_right}">
+					
+				</td>	
+			</tr>
+			<tr class="runner-footer">
+				<td class="runner-bottom" colspan=3>
+					<!--%%bottom%%-->
+				</td>
+			</tr>
+		</table>
+		{$footer}
+	{END body}
+	</body>
+</html>

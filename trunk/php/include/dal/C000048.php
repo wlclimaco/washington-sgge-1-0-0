@@ -1,0 +1,43 @@
+<?php
+$dalTableC000048 = array();
+$dalTableC000048["CODIGO"] = array("type"=>200,"varname"=>"CODIGO");
+$dalTableC000048["CODCAIXA"] = array("type"=>200,"varname"=>"CODCAIXA");
+$dalTableC000048["CODVENDEDOR"] = array("type"=>200,"varname"=>"CODVENDEDOR");
+$dalTableC000048["DATA"] = array("type"=>135,"varname"=>"DATA");
+$dalTableC000048["CODCLIENTE"] = array("type"=>200,"varname"=>"CODCLIENTE");
+$dalTableC000048["OBS"] = array("type"=>200,"varname"=>"OBS");
+$dalTableC000048["MEIO_DINHEIRO"] = array("type"=>131,"varname"=>"MEIO_DINHEIRO");
+$dalTableC000048["MEIO_CHEQUEAV"] = array("type"=>131,"varname"=>"MEIO_CHEQUEAV");
+$dalTableC000048["MEIO_CHEQUEAP"] = array("type"=>131,"varname"=>"MEIO_CHEQUEAP");
+$dalTableC000048["MEIO_CARTAOCRED"] = array("type"=>131,"varname"=>"MEIO_CARTAOCRED");
+$dalTableC000048["MEIO_CARTAODEB"] = array("type"=>131,"varname"=>"MEIO_CARTAODEB");
+$dalTableC000048["MEIO_CREDIARIO"] = array("type"=>131,"varname"=>"MEIO_CREDIARIO");
+$dalTableC000048["SUBTOTAL"] = array("type"=>131,"varname"=>"SUBTOTAL");
+$dalTableC000048["DESCONTO"] = array("type"=>131,"varname"=>"DESCONTO");
+$dalTableC000048["ACRESCIMO"] = array("type"=>131,"varname"=>"ACRESCIMO");
+$dalTableC000048["TOTAL"] = array("type"=>131,"varname"=>"TOTAL");
+$dalTableC000048["CUPOM_FISCAL"] = array("type"=>3,"varname"=>"CUPOM_FISCAL");
+$dalTableC000048["NUMERO_CUPOM_FISCAL"] = array("type"=>200,"varname"=>"NUMERO_CUPOM_FISCAL");
+$dalTableC000048["RETIRADO"] = array("type"=>200,"varname"=>"RETIRADO");
+$dalTableC000048["MEIO_CONVENIO"] = array("type"=>131,"varname"=>"MEIO_CONVENIO");
+$dalTableC000048["P5"] = array("type"=>131,"varname"=>"P5");
+$dalTableC000048["P3"] = array("type"=>131,"varname"=>"P3");
+$dalTableC000048["MEIO_FINANCEIRA"] = array("type"=>131,"varname"=>"MEIO_FINANCEIRA");
+$dalTableC000048["COD_FINANCEIRA"] = array("type"=>200,"varname"=>"COD_FINANCEIRA");
+$dalTableC000048["COD_FINANCEIRA_LANCTO"] = array("type"=>200,"varname"=>"COD_FINANCEIRA_LANCTO");
+$dalTableC000048["COD_FINANCEIRA_LACTO"] = array("type"=>200,"varname"=>"COD_FINANCEIRA_LACTO");
+$dalTableC000048["CODCONVENIO"] = array("type"=>200,"varname"=>"CODCONVENIO");
+$dalTableC000048["SITUACAO"] = array("type"=>3,"varname"=>"SITUACAO");
+$dalTableC000048["CODTRANSPORTADOR"] = array("type"=>200,"varname"=>"CODTRANSPORTADOR");
+$dalTableC000048["CODVEICULO"] = array("type"=>200,"varname"=>"CODVEICULO");
+$dalTableC000048["FRETE_VALOR"] = array("type"=>131,"varname"=>"FRETE_VALOR");
+$dalTableC000048["FRETE_OBS"] = array("type"=>200,"varname"=>"FRETE_OBS");
+$dalTableC000048["FRETE_LANCAR"] = array("type"=>3,"varname"=>"FRETE_LANCAR");
+$dalTableC000048["ECF_SERIAL"] = array("type"=>200,"varname"=>"ECF_SERIAL");
+$dalTableC000048["CODNFSAIDA"] = array("type"=>200,"varname"=>"CODNFSAIDA");
+$dalTableC000048["ATACADO_VAREJO"] = array("type"=>2,"varname"=>"ATACADO_VAREJO");
+$dalTableC000048["NRVENDA"] = array("type"=>200,"varname"=>"NRVENDA");
+$dalTableC000048["FILTRO"] = array("type"=>3,"varname"=>"FILTRO");
+$dal_info["C000048"]=&$dalTableC000048;
+
+?>

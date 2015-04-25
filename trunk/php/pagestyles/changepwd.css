@@ -1,0 +1,102 @@
+.page-changepwd,
+  .runner-pagewrapper .page-changepwd,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd
+{
+padding-top:10px; padding-left:10px;
+}
+.page-changepwd .runner-c-fields,
+  .runner-pagewrapper .page-changepwd .runner-c-fields,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd .runner-c-fields
+{
+margin-bottom:5px;
+}
+.page-changepwd .runner-c-fields,
+  .runner-pagewrapper .page-changepwd .runner-c-fields,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd .runner-c-fields
+{
+width:500px;
+}
+body.page-changepwd .runner-c-fields
+{
+margin-left:auto; margin-right:auto;
+}
+.page-changepwd .runner-b-changeheader, .page-changepwd .runner-b-changeheader,
+.page-changepwd .runner-b-changeheader, .page-changepwd .runner-b-changeheader > *,
+  .runner-pagewrapper .page-changepwd .runner-b-changeheader, .page-changepwd .runner-b-changeheader,
+  .runner-pagewrapper .page-changepwd .runner-b-changeheader, .page-changepwd .runner-b-changeheader > *,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd .runner-b-changeheader, .page-changepwd .runner-b-changeheader,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd .runner-b-changeheader, .page-changepwd .runner-b-changeheader > *
+{
+white-space: nowrap;
+}
+.page-changepwd .runner-b-changeheader, .page-changepwd .runner-b-changeheader,
+.page-changepwd .runner-b-changeheader, .page-changepwd .runner-b-changeheader > *,
+  .runner-pagewrapper .page-changepwd .runner-b-changeheader, .page-changepwd .runner-b-changeheader,
+  .runner-pagewrapper .page-changepwd .runner-b-changeheader, .page-changepwd .runner-b-changeheader > *,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd .runner-b-changeheader, .page-changepwd .runner-b-changeheader,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd .runner-b-changeheader, .page-changepwd .runner-b-changeheader > *
+{
+text-align: left;
+}
+.page-changepwd .runner-b-message, .page-changepwd .runner-b-message,
+.page-changepwd .runner-b-message, .page-changepwd .runner-b-message > *,
+  .runner-pagewrapper .page-changepwd .runner-b-message, .page-changepwd .runner-b-message,
+  .runner-pagewrapper .page-changepwd .runner-b-message, .page-changepwd .runner-b-message > *,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd .runner-b-message, .page-changepwd .runner-b-message,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd .runner-b-message, .page-changepwd .runner-b-message > *
+{
+white-space: nowrap;
+}
+.page-changepwd .runner-b-message, .page-changepwd .runner-b-message,
+.page-changepwd .runner-b-message, .page-changepwd .runner-b-message > *,
+  .runner-pagewrapper .page-changepwd .runner-b-message, .page-changepwd .runner-b-message,
+  .runner-pagewrapper .page-changepwd .runner-b-message, .page-changepwd .runner-b-message > *,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd .runner-b-message, .page-changepwd .runner-b-message,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd .runner-b-message, .page-changepwd .runner-b-message > *
+{
+text-align: left;
+}
+.page-changepwd .runner-b-changefields, .page-changepwd .runner-b-changefields,
+.page-changepwd .runner-b-changefields, .page-changepwd .runner-b-changefields > *,
+  .runner-pagewrapper .page-changepwd .runner-b-changefields, .page-changepwd .runner-b-changefields,
+  .runner-pagewrapper .page-changepwd .runner-b-changefields, .page-changepwd .runner-b-changefields > *,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd .runner-b-changefields, .page-changepwd .runner-b-changefields,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd .runner-b-changefields, .page-changepwd .runner-b-changefields > *
+{
+white-space: nowrap;
+}
+.page-changepwd .runner-b-changefields, .page-changepwd .runner-b-changefields,
+.page-changepwd .runner-b-changefields, .page-changepwd .runner-b-changefields > *,
+  .runner-pagewrapper .page-changepwd .runner-b-changefields, .page-changepwd .runner-b-changefields,
+  .runner-pagewrapper .page-changepwd .runner-b-changefields, .page-changepwd .runner-b-changefields > *,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd .runner-b-changefields, .page-changepwd .runner-b-changefields,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd .runner-b-changefields, .page-changepwd .runner-b-changefields > *
+{
+text-align: left;
+}
+.page-changepwd .runner-b-changebuttons, .page-changepwd .runner-b-changebuttons,
+.page-changepwd .runner-b-changebuttons, .page-changepwd .runner-b-changebuttons > *,
+  .runner-pagewrapper .page-changepwd .runner-b-changebuttons, .page-changepwd .runner-b-changebuttons,
+  .runner-pagewrapper .page-changepwd .runner-b-changebuttons, .page-changepwd .runner-b-changebuttons > *,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd .runner-b-changebuttons, .page-changepwd .runner-b-changebuttons,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd .runner-b-changebuttons, .page-changepwd .runner-b-changebuttons > *
+{
+white-space: nowrap;
+}
+.page-changepwd .runner-b-changebuttons, .page-changepwd .runner-b-changebuttons,
+.page-changepwd .runner-b-changebuttons, .page-changepwd .runner-b-changebuttons > *,
+  .runner-pagewrapper .page-changepwd .runner-b-changebuttons, .page-changepwd .runner-b-changebuttons,
+  .runner-pagewrapper .page-changepwd .runner-b-changebuttons, .page-changepwd .runner-b-changebuttons > *,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd .runner-b-changebuttons, .page-changepwd .runner-b-changebuttons,
+  .runner-pagewrapper .runner-pagewrapper .page-changepwd .runner-b-changebuttons, .page-changepwd .runner-b-changebuttons > *
+{
+text-align: left;
+}
+body.page-changepwd .runner-toptable
+{
+width:100%;
+}
+body.page-changepwd .runner-top
+{
+padding-right: 5px;
+}

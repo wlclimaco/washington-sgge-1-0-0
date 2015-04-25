@@ -1,0 +1,231 @@
+<rs>
+<row>
+<marked>No</marked>
+<Keywords>error SQL syntax</Keywords>
+<ID>13</ID>
+<ErrorNumber>256</ErrorNumber>
+<ErrorDescription>Error description You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where 1&amp;lt;0' at line 1 URL localhost/databas2/kodreferens_list.php Error file C:wampwwwdatabas2includedbconnection.php Error line 26 </ErrorDescription>
+<Solution>&lt;P&gt;This is a general error. It occurs when there is an error in event code or in SQL.&lt;/P&gt;</Solution>
+</row>
+<row>
+<marked>No</marked>
+<Keywords>duplicate entry key</Keywords>
+<ID>14</ID>
+<ErrorNumber>100</ErrorNumber>
+<ErrorDescription>PHP Fatal error: Duplicate entry '0' for key 1 in E:appwebwwwrootstagingincludedbconnection.php on line 26 </ErrorDescription>
+<Solution>&lt;P&gt;It seems that you add duplicate key fields.&lt;/P&gt;&lt;P&gt;Please check data you enter on the ADD or REGISTER page.&lt;/P&gt;</Solution>
+</row>
+<row>
+<marked>No</marked>
+<Keywords>unknown ##connecthost## fatal</Keywords>
+<ID>15</ID>
+<ErrorNumber>102</ErrorNumber>
+<ErrorDescription>Warning: mysql_connect(): Unknown MySQL Server Host '##CONNECTHOST##' (1) Fatal error: Unknown MySQL Server Host '##CONNECTHOST##' (1) </ErrorDescription>
+<Solution>it seems that PHPRunner files are corrupted. Please close all instances of PHPRunner, download it anew: http://www.asprunner.com/files/phprunner-setup.exe and install. </Solution>
+</row>
+<row>
+<marked>No</marked>
+<Keywords>headers</Keywords>
+<ID>16</ID>
+<ErrorNumber>2</ErrorNumber>
+<ErrorDescription>&lt;P&gt;Error type 2 &lt;/P&gt;&lt;P&gt;Error description Cannot modify header information - headers already sent by (output started at /data/apache/htdocs/iap/auction/include/jsvariables.php:23) URL 192.168.42.89/iap/auction/AuctionDetail_list.php? Error file /data/apache/htdocs/iap/auction/include/AuctionDetail_events.php Error line 54 &lt;/P&gt;</ErrorDescription>
+<Solution>Redirect option don't work for ListOnLoad event.&lt;BR&gt;You can do it using JavaScript. &lt;BR&gt;See my example below:&lt;BR&gt;------------------------------------------&lt;BR&gt;function ListOnLoad($strSQL)&lt;BR&gt;{&lt;BR&gt;if (!isset($_SESSION["AuctionDetail_masterkey"])){&lt;BR&gt;?&amp;gt;&lt;BR&gt;&amp;lt;script&amp;gt;&lt;BR&gt;window.location='./Auction_list.php';&lt;BR&gt;&amp;lt;/script&amp;gt;&lt;BR&gt;&amp;lt;?php&lt;BR&gt;exit();&lt;BR&gt;}&lt;BR&gt;}&lt;BR&gt;</Solution>
+</row>
+<row>
+<marked>No</marked>
+<Keywords>&lt;NULL&gt;</Keywords>
+<ID>17</ID>
+<ErrorNumber>8</ErrorNumber>
+<ErrorDescription></ErrorDescription>
+<Solution></Solution>
+</row>
+<row>
+<marked>No</marked>
+<Keywords>oci_fetch_array</Keywords>
+<ID>18</ID>
+<ErrorNumber>103</ErrorNumber>
+<ErrorDescription>Fatal error: Call to undefined function: oci_fetch_array() in C:inetpubwwwrootmisamsrptsincludedbconnection.php on line 32 </ErrorDescription>
+<Solution>PHPRunner-created pages work with Oracle under PHP5 only. We plan to add PHP4 Oracle support in one of next updates of PHPRunner. </Solution>
+</row>
+<row>
+<marked>No</marked>
+<Keywords>headers</Keywords>
+<ID>19</ID>
+<ErrorNumber>104</ErrorNumber>
+<ErrorDescription>Warning: session_start(): open(/var/php_sessions/sess_1685a837fea144fcefdc4c43e0863813, O_RDWR) failed: No such file or directory (2) in /hermes/web03/b2876/moo.brierneck/members/login.php on line 4 Warning: session_start(): Cannot send session cookie - headers already sent by (output started at /hermes/web03/b2876/moo.brierneck/members/login.php:4) in /hermes/web03/b2876/moo.brierneck/members/login.php on line 4 Warning: session_start(): Cannot send session cache limiter - headers already sent (output started at /hermes/web03/b2876/moo.brierneck/members/login.php:4) in /hermes/web03/b2876/moo.brierneck/members/login.php on line 4 Warning: Cannot modify header information - headers already sent by (output started at /hermes/web03/b2876/moo.brierneck/members/login.php:4) in /hermes/web03/b2876/moo.brierneck/members/include/dbcommon.php on line 17 </ErrorDescription>
+<Solution>this error occurs because of session-specific settings on your hosting. You should contact your hosting admin to resolve this. Show him the first warning and ask what's wrong with sessions configuration. </Solution>
+</row>
+<row>
+<marked>No</marked>
+<Keywords>Unknown()</Keywords>
+<ID>20</ID>
+<ErrorNumber>105</ErrorNumber>
+<ErrorDescription>PHP Warning: Unknown(): Failed to write session data (files). Please verify that the current setting of session.save_path is correct (/var/php_sessions) in Unknown on line 0 PHP Warning: Unknown(): open(/var/php_sessions/sess_f9ee19f5902df557ff04d01613fb0de1, O_RDWR) failed: No such file or directory (2) in Unknown on line 0 PHP Warning: Cannot modify header information - headers already sent by (output started at /hermes/web03/b2876/moo.brierneck/members/login.php:4) in /hermes/web03/b2876/moo.brierneck/members/include/dbcommon.php on line 17 PHP Warning: session_start(): Cannot send session cache limiter - headers already sent (output started at /hermes/web03/b2876/moo.brierneck/members/login.php:4) in /hermes/web03/b2876/moo.brierneck/members/login.php on line 4 PHP Warning: session_start(): Cannot send session cookie - headers already sent by (output started at /hermes/web03/b2876/moo.brierneck/members/login.php:4) in /hermes/web03/b2876/moo.brierneck/members/login.php on line 4 PHP Warning: session_start(): open(/var/php_sessions/sess_f9ee19f5902df557ff04d01613fb0de1, O_RDWR) failed: No such file or directory (2) in /hermes/web03/b2876/moo.brierneck/members/login.php on line 4 </ErrorDescription>
+<Solution>PHP tells that it can not use session.save_path configuration setting. Either this option is wrong or your hoster has special requirements on using sessions. In both cases you should contact your admin to fix the setting or to find out their requirements. </Solution>
+</row>
+<row>
+<marked>No</marked>
+<Keywords>parse error</Keywords>
+<ID>21</ID>
+<ErrorNumber>106</ErrorNumber>
+<ErrorDescription>Parse error: parse error in C:mydirectoryincludemypage_functions.php on line 629 </ErrorDescription>
+<Solution></Solution>
+</row>
+<row>
+<marked>No</marked>
+<Keywords>file_get_contents</Keywords>
+<ID>22</ID>
+<ErrorNumber>107</ErrorNumber>
+<ErrorDescription>file_get_contents</ErrorDescription>
+<Solution>file_get_contents function appeared in PHP 4.3.0 only. So either upgrade your PHP or add the following code to the end of includedbcommon.php file: QUOTE function file_get_contents($filename) { $handle = fopen($filename, "rb"); $contents = fread($handle, filesize($filename)); fclose($handle); return $contents; } We'll resolve this issue in the next PHPRunner version. BTW, you should use Database image View and Edit type instead of Document upload for BLOB field. </Solution>
+</row>
+<row>
+<marked>No</marked>
+<Keywords>move_uploaded_file</Keywords>
+<ID>23</ID>
+<ErrorNumber>108</ErrorNumber>
+<ErrorDescription>move_uploaded_file(): open_basedir restriction in effect. File(/upload/mytest.jpg) is not within the allowed path(s): (/home/httpd/vhosts/domainhere/httpdocs:/tmp) </ErrorDescription>
+<Solution>It seems that you type incorrect path to subfolder where files reside. The path should be relative to the folder for generated pages. Type upload/ in the Folder where files reside box on the "Edit as settings" dialog on the "Visual Editor" Tab. </Solution>
+</row>
+<row>
+<marked>No</marked>
+<Keywords>&lt;NULL&gt;</Keywords>
+<ID>24</ID>
+<ErrorNumber>10060</ErrorNumber>
+<ErrorDescription>no</ErrorDescription>
+<Solution>error 10060 (Connection timed out) is a general network error.
+It occurs if:
+1) the database host or MySQL server is down;
+2) network is down;
+3) your computer is not connected to network.
+</Solution>
+</row>
+<row>
+<marked>No</marked>
+<Keywords>filesize</Keywords>
+<ID>25</ID>
+<ErrorNumber>109</ErrorNumber>
+<ErrorDescription>Warning: filesize() [function.filesize]: stat failed for upload/untitled1.bmp in C:Tempsalesman_download.php on line 95 </ErrorDescription>
+<Solution>no file in the directory </Solution>
+</row>
+<row>
+<marked>No</marked>
+<Keywords>&lt;NULL&gt;</Keywords>
+<ID>39</ID>
+<ErrorNumber>1061</ErrorNumber>
+<ErrorDescription>1061</ErrorDescription>
+<Solution>It seems that your query returns duplicate field names.Try to use the field alias.</Solution>
+</row>
+<row>
+<marked>No</marked>
+<Keywords>localtime timezone</Keywords>
+<ID>70</ID>
+<ErrorNumber>50</ErrorNumber>
+<ErrorDescription>&lt;SPAN class=text8&gt;localtime() [function.localtime]: It is not safe to rely on the system's timezone settings. Please use the date.timezone setting, the TZ environment variable or the date_default_timezone_set() function. In case you used any of those methods and you are still getting this warning, you most likely misspelled the timezone identifier. We selected 'America/Los_Angeles' for '-8.0/no DST' instead&lt;/SPAN&gt; </ErrorDescription>
+<Solution>With the latest version of PHP you have to tweak php.ini&lt;BR&gt;&lt;BR&gt;Uncomment ;date.timezone = &lt;BR&gt;and change it to&lt;BR&gt;date.timezone = "America/Los_Angeles" or whatever your timezone is.&lt;BR&gt;&lt;BR&gt;Then restart your web server.&lt;BR&gt;&lt;BR&gt;The full list of supported timezones can be found here&lt;BR&gt;http://www.php.net/manual/en/timezones.php </Solution>
+</row>
+<row>
+<marked>No</marked>
+<Keywords>&lt;NULL&gt;</Keywords>
+<ID>71</ID>
+<ErrorNumber>51</ErrorNumber>
+<ErrorDescription>&lt;SPAN class=text8&gt;When I choose PostgreSQL in the Step 2 of 12 the program breaks. &lt;BR&gt;&lt;BR&gt;The message is "PHPRunner has encountered a problem and needs to be closed. We are sorry for the inconvenience"&lt;BR&gt;&lt;/SPAN&gt;</ErrorDescription>
+<Solution>This appears to be PostgreSQL compartability issue. &lt;BR&gt;Please locate &lt;B&gt;libpq.dll&lt;/B&gt; file within your PostgreSQL installation folder and copy it to &lt;B&gt;C:\Program Files\PHPRunner&lt;/B&gt;</Solution>
+</row>
+<row>
+<marked>No</marked>
+<Keywords>session_start</Keywords>
+<ID>72</ID>
+<ErrorNumber>52</ErrorNumber>
+<ErrorDescription>&lt;SPAN class=text8&gt;Warning: session_start... &lt;/SPAN&gt;</ErrorDescription>
+<Solution>please see the article about it here: &lt;P&gt;&lt;A href="http://xlinesoft.com/phprunner/faq.htm#1"&gt;http://xlinesoft.com/phprunner/faq.htm#1&lt;/A&gt; &lt;/P&gt;</Solution>
+</row>
+<row>
+<marked>No</marked>
+<Keywords>authentication upgrading</Keywords>
+<ID>73</ID>
+<ErrorNumber>53</ErrorNumber>
+<ErrorDescription>Client does not support authentication protocol requested by server; consider upgrading MySQL client </ErrorDescription>
+<Solution>&lt;P&gt;MySQL 4.1 and later is not fully compatible with older clients. The complete description of this issue can be found at http://dev.mysql.com/doc/mysql/en/old-client.html&lt;BR&gt;Following the instructions in this article is the only way to solve this problem if you use PHP 4 or older. &lt;BR&gt;If you use PHP 5, then you can just upgrade MySQL client library used by PHP. To do that replace libmysql.dll file in your PHP installation folder and in C:WindowsSystem32 folder with the same file found in your MySQL installation. Usually it resides in C:/MySQL/bin &lt;/P&gt;&lt;P&gt; &lt;A href="http://xlinesoft.com/phprunner/faq.htm#2"&gt;http://xlinesoft.com/phprunner/faq.htm#2&lt;/A&gt;&lt;/P&gt;</Solution>
+</row>
+<row>
+<marked>No</marked>
+<Keywords>mysql_connect</Keywords>
+<ID>74</ID>
+<ErrorNumber>54</ErrorNumber>
+<ErrorDescription>&lt;SPAN class=text8&gt;Call to undefined function mysql_connect() in c:Inetpubwwwroot unnerincludedbconnection.php on line 9&amp;nbsp; &lt;/SPAN&gt;</ErrorDescription>
+<Solution>&lt;SPAN class=text8&gt;PHP needs to be set up to use it with MySQL. &lt;BR&gt;To do that please open php.ini file in your C:Windows directory with a text editor, find the string&lt;BR&gt;&lt;BR&gt;;extension=php_mysql.dll&lt;BR&gt;&lt;BR&gt;and remove a semicolon from the beginning.&lt;BR&gt;Then find the string beginning with&lt;BR&gt;&lt;BR&gt;;extension_dir = &lt;BR&gt;&lt;BR&gt;and make sure that this points to folder within your PHP installation where php_mysql.dll file resides. Usually it is "c:phpextensions"&lt;BR&gt;And at last copy libmysql.dll from your MySQL installation into the C:WindowsSystem32 directory. &lt;/SPAN&gt;</Solution>
+</row>
+<row>
+<marked>No</marked>
+<Keywords>XML</Keywords>
+<ID>75</ID>
+<ErrorNumber>55</ErrorNumber>
+<ErrorDescription>&lt;SPAN class=text8&gt;The XML page cannot be displayed &lt;BR&gt;Cannot view XML input using style sheet. Please correct the error and then click the Refresh button, or try again later. &lt;BR&gt;&lt;BR&gt;&lt;BR&gt;--------------------------------------------------------------------------------&lt;BR&gt;&lt;BR&gt;XML document must have a top level element. Error processing resource 'http://www.criminogenics.com/phprunner.php?todo=sche... &lt;/SPAN&gt;</ErrorDescription>
+<Solution>&lt;SPAN class=text8&gt;this error occurs on some hostings. We work on this issue.&lt;BR&gt;Actually browsing PHPRunner php intends for testing only. So you can skip this step and enter the connection information in PHPRunner (Step2). &lt;/SPAN&gt;</Solution>
+</row>
+<row>
+<marked>No</marked>
+<Keywords>ociplogon</Keywords>
+<ID>77</ID>
+<ErrorNumber>54</ErrorNumber>
+<ErrorDescription>Call to undefined function ociplogon() in c:Inetpubwwwroot unnerincludedbconnection.php on line 9 </ErrorDescription>
+<Solution>&lt;P&gt;PHP needs to be set up to use it with Oracle.&lt;BR&gt;To do that please open php.ini file in your C:Windows directory with a text editor, find the string&lt;BR&gt;&lt;BR&gt;;extension=php_oci8.dll&lt;BR&gt;&lt;BR&gt;and remove a semicolon from the beginning.&lt;BR&gt;&lt;/P&gt;</Solution>
+</row>
+<row>
+<marked>No</marked>
+<Keywords>pg_connect</Keywords>
+<ID>78</ID>
+<ErrorNumber>54</ErrorNumber>
+<ErrorDescription>Call to undefined function pg_connect() in c:Inetpubwwwroot unnerincludedbconnection.php on line 9 </ErrorDescription>
+<Solution>&lt;P&gt;&lt;SPAN class=text8&gt;PHP needs to be set up to use it with PostgreSQL. &lt;BR&gt;To do that please open php.ini file in your C:Windows directory with a text editor, find the string&lt;BR&gt;&lt;BR&gt;;extension=php_pgsql.dll&lt;BR&gt;&lt;BR&gt;and remove a semicolon from the beginning.&lt;BR&gt;&lt;/SPAN&gt;&lt;/P&gt;</Solution>
+</row>
+<row>
+<marked>No</marked>
+<Keywords>odbc_connect</Keywords>
+<ID>79</ID>
+<ErrorNumber>54</ErrorNumber>
+<ErrorDescription>Call to undefined function odbc_connect() in c:Inetpubwwwroot unnerincludedbconnection.php on line 9 </ErrorDescription>
+<Solution>Support of the Access database is on the Windows-based hosting. I recommend you to switch to the MySQL or MSSQL.</Solution>
+</row>
+<row>
+<marked>No</marked>
+<Keywords>updateable</Keywords>
+<ID>80</ID>
+<ErrorNumber>54</ErrorNumber>
+<ErrorDescription>Microsoft OLE DB Provider for ODBC Drivers error '80004005'
+[Microsoft][ODBC Microsoft Access Driver] Operation must use an updateable query. /tablename_edit.asp, line xxx</ErrorDescription>
+<Solution>This error occurs when your files don't have required permissions. Please see the article about it here:&lt;P&gt;&lt;A href="http://xlinesoft.com/asprunner/docs/troubleshooting__operation_must_use_an_updateable_query__errors.htm&lt;/A&gt; &lt;/P&gt;
+</Solution>
+</row>
+<row>
+<marked>No</marked>
+<Keywords>fopen writeable connections</Keywords>
+<ID>81</ID>
+<ErrorNumber>2</ErrorNumber>
+<ErrorDescription>fopen(http://www.andresimha.com/ultimatelevel42/covers/th_small_l42_retroglide_xmas.jpg) [function.fopen]: failed to open stream: HTTP wrapper does not support writeable connections</ErrorDescription>
+<Solution>It's a permission-related error. Set write permissions for web user to the folder where your uploaded files reside. 
+&lt;BR&gt;To set permissions in Windows:
+&lt;BR&gt; Right-click on your folder, go to Properties -&gt; Security, add user named UISR_&lt;machine name&gt; (if don't exists) and assign Full Permissions for this user. Then click OK.
+&lt;BR&gt;To set up permissions in Unix you can do the following:
+&lt;BR&gt; set up write permissions for user EVERYONE on the control panel
+&lt;BR&gt; or if you have shell access (telnet or ssh) to your server run this command: chmod upload_folder 777
+</Solution>
+</row>
+<row>
+<marked>No</marked>
+<Keywords>Smarty templates_c</Keywords>
+<ID>81</ID>
+<ErrorNumber>2</ErrorNumber>
+<ErrorDescription>Smarty::include(templates_c/%%6C^6C0^6C04D25E%%login.htm.php) [function.Smarty-include]: failed to open stream: No such file or directory 
+URL www.autovillebg.com/autoville_php/login.php? 
+</ErrorDescription>
+<Solution>It's a permission-related error. Set write permissions for web user to the folder &lt;B&gt;templates_c&lt;/B&gt;. 
+&lt;BR&gt;To set permissions in Windows:
+&lt;BR&gt; Right-click on your folder, go to Properties -&gt; Security, add user named UISR_&lt;machine name&gt; (if don't exists) and assign Full Permissions for this user. Then click OK.
+&lt;BR&gt;To set up permissions in Unix you can do the following:
+&lt;BR&gt; set up write permissions for user EVERYONE on the control panel
+&lt;BR&gt; or if you have shell access (telnet or ssh) to your server run this command: chmod templates_c 777
+</Solution>
+</row>
+</rs>

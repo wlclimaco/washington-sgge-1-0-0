@@ -1,0 +1,337 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+		<title>{$pagetitle}</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=7">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link REL="stylesheet" href="styles/default.css" type="text/css">
+		{BEGIN rtlCSS}
+		<link REL="stylesheet" href="styles/defaultRTL.css" type="text/css">
+		{END rtlCSS}
+		{BEGIN styleCSSFiles}
+		<link REL="stylesheet" href="{$stylepath}" type="text/css">
+		{END styleCSSFiles}
+		{BEGIN pageCSSFiles}
+		<link REL="stylesheet" href="{$pagestylepath}" type="text/css">
+		{END pageCSSFiles}
+		<!--[if IE]>
+			<link REL="stylesheet" href="styles/defaultIE.css" type="text/css">
+			{BEGIN IEcssFiles}
+			<link REL="stylesheet" href="{$stylepathIE}" type="text/css">
+			{END IEcssFiles}
+		<![endif]-->
+	</head>
+	
+	<body class="{$stylename}" {$bodyattrs}>
+	{BEGIN body}
+		{$header}
+		<table   cellpadding="0" class="runner-toptable">
+			<tr class="runner-header">
+				<td class="runner-top" colspan=3>
+					
+
+
+
+
+				</td>
+			</tr>
+			<tr class="runner-body">
+				
+				<td class="runner-left {$blockclass_left}" >
+					
+				</td>	
+				
+				<td class="runner-center {$blockclass_center}">
+					
+
+{BEGIN container_grid}
+
+
+{BEGIN grid_block}
+{BEGIN page}
+<h1>C000054</h1>
+<span>
+{BEGIN page_number}
+Página {$pageno} de {$maxpages} 
+{END page_number}
+</span>
+
+	<div class="runner-s-grid">	
+	<table class="runner-c runner-c-grid" cellpadding="0">
+		<thead>
+		{BEGIN grid_header}
+		<tr class="runner-toprow style1">
+			<td class="runner-cl"><img src="images/spacer.gif"></td>
+			{BEGIN record_header}
+					{BEGIN CODIGO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN CODIGO_fieldheader}
+	<b>Código</b>
+	{END CODIGO_fieldheader}
+</th>
+{END CODIGO_fieldheadercolumn}
+	{BEGIN SITUACAO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN SITUACAO_fieldheader}
+	<b>Situação</b>
+	{END SITUACAO_fieldheader}
+</th>
+{END SITUACAO_fieldheadercolumn}
+	{BEGIN NOME_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN NOME_fieldheader}
+	<b>Nome do Veículo</b>
+	{END NOME_fieldheader}
+</th>
+{END NOME_fieldheadercolumn}
+	{BEGIN ANO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN ANO_fieldheader}
+	<b>Ano</b>
+	{END ANO_fieldheader}
+</th>
+{END ANO_fieldheadercolumn}
+	{BEGIN COMBUSTIVEL_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN COMBUSTIVEL_fieldheader}
+	<b>Combustível</b>
+	{END COMBUSTIVEL_fieldheader}
+</th>
+{END COMBUSTIVEL_fieldheadercolumn}
+	{BEGIN PLACA_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN PLACA_fieldheader}
+	<b>Placa</b>
+	{END PLACA_fieldheader}
+</th>
+{END PLACA_fieldheadercolumn}
+	{BEGIN UFPLACA_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN UFPLACA_fieldheader}
+	<b>UF da Placa</b>
+	{END UFPLACA_fieldheader}
+</th>
+{END UFPLACA_fieldheadercolumn}
+	{BEGIN COR_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN COR_fieldheader}
+	<b>Cor</b>
+	{END COR_fieldheader}
+</th>
+{END COR_fieldheadercolumn}
+	{BEGIN CIDADE_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN CIDADE_fieldheader}
+	<b>Cidade</b>
+	{END CIDADE_fieldheader}
+</th>
+{END CIDADE_fieldheadercolumn}
+	{BEGIN SEGURO_OBRIGATORIO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN SEGURO_OBRIGATORIO_fieldheader}
+	<b>Seguro Obrigatório</b>
+	{END SEGURO_OBRIGATORIO_fieldheader}
+</th>
+{END SEGURO_OBRIGATORIO_fieldheadercolumn}
+	{BEGIN COD_MARCA_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN COD_MARCA_fieldheader}
+	<b>Marca</b>
+	{END COD_MARCA_fieldheader}
+</th>
+{END COD_MARCA_fieldheadercolumn}
+	{BEGIN COD_MODELO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN COD_MODELO_fieldheader}
+	<b>Modelo</b>
+	{END COD_MODELO_fieldheader}
+</th>
+{END COD_MODELO_fieldheadercolumn}
+	{BEGIN LICENCIAMENTO_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN LICENCIAMENTO_fieldheader}
+	<b>Licenciamento</b>
+	{END LICENCIAMENTO_fieldheader}
+</th>
+{END LICENCIAMENTO_fieldheadercolumn}
+	{BEGIN OBS1_fieldheadercolumn}
+<th class="runner-cc">
+	{BEGIN OBS1_fieldheader}
+	<b>OBS</b>
+	{END OBS1_fieldheader}
+</th>
+{END OBS1_fieldheadercolumn}
+		
+			{END record_header}
+			<td class="runner-cr"><img src="images/spacer.gif"></td>
+			{BEGIN endrecordheader_block}
+			<td class="runner-cs">&nbsp;</td>
+			{END endrecordheader_block}
+		</tr>
+	{END grid_header}
+		</thead>
+		<tbody>	
+		{BEGIN grid_row}
+	<tr class="runner-row style1" {$rowattrs} {$rowstyle} {$rowstyle}>
+		<td class="runner-cl"></td>
+		{BEGIN grid_record}
+				{BEGIN CODIGO_fieldcolumn}
+<td  class="runner-cc {$CODIGO_class}" {$CODIGO_style}>
+	{$CODIGO_value}
+</td>
+{END CODIGO_fieldcolumn}
+	{BEGIN SITUACAO_fieldcolumn}
+<td  class="runner-cc {$SITUACAO_class}" {$SITUACAO_style}>
+	{$SITUACAO_value}
+</td>
+{END SITUACAO_fieldcolumn}
+	{BEGIN NOME_fieldcolumn}
+<td  class="runner-cc {$NOME_class}" {$NOME_style}>
+	{$NOME_value}
+</td>
+{END NOME_fieldcolumn}
+	{BEGIN ANO_fieldcolumn}
+<td  class="runner-cc {$ANO_class}" {$ANO_style}>
+	{$ANO_value}
+</td>
+{END ANO_fieldcolumn}
+	{BEGIN COMBUSTIVEL_fieldcolumn}
+<td  class="runner-cc {$COMBUSTIVEL_class}" {$COMBUSTIVEL_style}>
+	{$COMBUSTIVEL_value}
+</td>
+{END COMBUSTIVEL_fieldcolumn}
+	{BEGIN PLACA_fieldcolumn}
+<td  class="runner-cc {$PLACA_class}" {$PLACA_style}>
+	{$PLACA_value}
+</td>
+{END PLACA_fieldcolumn}
+	{BEGIN UFPLACA_fieldcolumn}
+<td  class="runner-cc {$UFPLACA_class}" {$UFPLACA_style}>
+	{$UFPLACA_value}
+</td>
+{END UFPLACA_fieldcolumn}
+	{BEGIN COR_fieldcolumn}
+<td  class="runner-cc {$COR_class}" {$COR_style}>
+	{$COR_value}
+</td>
+{END COR_fieldcolumn}
+	{BEGIN CIDADE_fieldcolumn}
+<td  class="runner-cc {$CIDADE_class}" {$CIDADE_style}>
+	{$CIDADE_value}
+</td>
+{END CIDADE_fieldcolumn}
+	{BEGIN SEGURO_OBRIGATORIO_fieldcolumn}
+<td  class="runner-cc {$SEGURO_OBRIGATORIO_class}" {$SEGURO_OBRIGATORIO_style}>
+	{$SEGURO_OBRIGATORIO_value}
+</td>
+{END SEGURO_OBRIGATORIO_fieldcolumn}
+	{BEGIN COD_MARCA_fieldcolumn}
+<td  class="runner-cc {$COD_MARCA_class}" {$COD_MARCA_style}>
+	{$COD_MARCA_value}
+</td>
+{END COD_MARCA_fieldcolumn}
+	{BEGIN COD_MODELO_fieldcolumn}
+<td  class="runner-cc {$COD_MODELO_class}" {$COD_MODELO_style}>
+	{$COD_MODELO_value}
+</td>
+{END COD_MODELO_fieldcolumn}
+	{BEGIN LICENCIAMENTO_fieldcolumn}
+<td  class="runner-cc {$LICENCIAMENTO_class}" {$LICENCIAMENTO_style}>
+	{$LICENCIAMENTO_value}
+</td>
+{END LICENCIAMENTO_fieldcolumn}
+	{BEGIN OBS1_fieldcolumn}
+<td  class="runner-cc {$OBS1_class}" {$OBS1_style}>
+	{$OBS1_value}
+</td>
+{END OBS1_fieldcolumn}
+
+		{END grid_record}
+		<td class="runner-cr"></td>
+		{BEGIN endrecord_block}
+		<td class="runner-cs">&nbsp;</td>
+		{END endrecord_block}
+	</tr>
+{END grid_row}
+										
+								<tr class="runner-bottomrow style1">
+									<td class="runner-cl"><img src="images/spacer.gif"></td>
+									{BEGIN record_footer}
+									{BEGIN CODIGO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END CODIGO_fieldfootercolumn}
+{BEGIN SITUACAO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END SITUACAO_fieldfootercolumn}
+{BEGIN NOME_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END NOME_fieldfootercolumn}
+{BEGIN ANO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END ANO_fieldfootercolumn}
+{BEGIN COMBUSTIVEL_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END COMBUSTIVEL_fieldfootercolumn}
+{BEGIN PLACA_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END PLACA_fieldfootercolumn}
+{BEGIN UFPLACA_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END UFPLACA_fieldfootercolumn}
+{BEGIN COR_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END COR_fieldfootercolumn}
+{BEGIN CIDADE_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END CIDADE_fieldfootercolumn}
+{BEGIN SEGURO_OBRIGATORIO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END SEGURO_OBRIGATORIO_fieldfootercolumn}
+{BEGIN COD_MARCA_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END COD_MARCA_fieldfootercolumn}
+{BEGIN COD_MODELO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END COD_MODELO_fieldfootercolumn}
+{BEGIN LICENCIAMENTO_fieldfootercolumn}
+<td class="runner-cc "></td>
+{END LICENCIAMENTO_fieldfootercolumn}
+{BEGIN OBS1_fieldfootercolumn}
+<td class="runner-cc runner-clast"></td>
+{END OBS1_fieldfootercolumn}
+
+									{END record_footer}
+									<td class="runner-cr"><img src="images/spacer.gif"></td>
+									{BEGIN endrecordtotals_block}
+									<td class="runner-cs"></td>
+									{END endrecordtotals_block}
+								</tr>
+
+		</tbody>
+	</table>
+</div>	
+{END page}
+
+{END grid_block}
+
+
+
+{END container_grid}
+
+
+				</td>	
+
+				<td class="runner-right {$blockclass_right}">
+					
+				</td>	
+			</tr>
+			<tr class="runner-footer">
+				<td class="runner-bottom" colspan=3>
+					<!--%%bottom%%-->
+				</td>
+			</tr>
+		</table>
+		{$footer}
+	{END body}
+	</body>
+</html>

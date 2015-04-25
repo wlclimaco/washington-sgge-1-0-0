@@ -1,0 +1,11 @@
+##foreach @BUILDER.Tables as @t filter IsAdminTable(@t)##
+{BEGIN item##@t.strShortTableName##_menulink}
+<tr id="item##@t.strShortTableName##" view="topitem" class="runner-b-vmenu runner-vmenu ##if @BUILDER.InlineMenu##tree##else##simple##endif## Leaf{BEGIN item##@t.strShortTableName##_current} current{END item##@t.strShortTableName##_current}">
+	<td class="runner-cl"></td>	
+	<td class="runner-cc">
+		<a {$item##@t.strShortTableName##_menulink_attrs}>{$item##@t.strShortTableName##_title}</a>
+	</td>
+	<td class="runner-cr"></td>
+</tr>
+{END item##@t.strShortTableName##_menulink}
+##endfor##

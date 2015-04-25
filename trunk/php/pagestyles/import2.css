@@ -1,0 +1,132 @@
+.page-import2,
+  .runner-pagewrapper .page-import2,
+  .runner-pagewrapper .runner-pagewrapper .page-import2
+{
+padding-top:10px; padding-left:10px;
+}
+.page-import2 .runner-c-import,
+  .runner-pagewrapper .page-import2 .runner-c-import,
+  .runner-pagewrapper .runner-pagewrapper .page-import2 .runner-c-import
+{
+margin-bottom:5px;
+}
+.page-import2 .runner-c-import,
+  .runner-pagewrapper .page-import2 .runner-c-import,
+  .runner-pagewrapper .runner-pagewrapper .page-import2 .runner-c-import
+{
+width:500px;
+}
+body.page-import2 .runner-c-import
+{
+margin-left:auto; margin-right:auto;
+}
+.page-import2 .runner-b-importheader, .page-import2 .runner-b-importheader,
+.page-import2 .runner-b-importheader, .page-import2 .runner-b-importheader > *,
+  .runner-pagewrapper .page-import2 .runner-b-importheader, .page-import2 .runner-b-importheader,
+  .runner-pagewrapper .page-import2 .runner-b-importheader, .page-import2 .runner-b-importheader > *,
+  .runner-pagewrapper .runner-pagewrapper .page-import2 .runner-b-importheader, .page-import2 .runner-b-importheader,
+  .runner-pagewrapper .runner-pagewrapper .page-import2 .runner-b-importheader, .page-import2 .runner-b-importheader > *
+{
+white-space: nowrap;
+}
+.page-import2 .runner-b-importheader, .page-import2 .runner-b-importheader,
+.page-import2 .runner-b-importheader, .page-import2 .runner-b-importheader > *,
+  .runner-pagewrapper .page-import2 .runner-b-importheader, .page-import2 .runner-b-importheader,
+  .runner-pagewrapper .page-import2 .runner-b-importheader, .page-import2 .runner-b-importheader > *,
+  .runner-pagewrapper .runner-pagewrapper .page-import2 .runner-b-importheader, .page-import2 .runner-b-importheader,
+  .runner-pagewrapper .runner-pagewrapper .page-import2 .runner-b-importheader, .page-import2 .runner-b-importheader > *
+{
+text-align: left;
+}
+.page-import2 .runner-b-errormessage, .page-import2 .runner-b-errormessage,
+.page-import2 .runner-b-errormessage, .page-import2 .runner-b-errormessage > *,
+  .runner-pagewrapper .page-import2 .runner-b-errormessage, .page-import2 .runner-b-errormessage,
+  .runner-pagewrapper .page-import2 .runner-b-errormessage, .page-import2 .runner-b-errormessage > *,
+  .runner-pagewrapper .runner-pagewrapper .page-import2 .runner-b-errormessage, .page-import2 .runner-b-errormessage,
+  .runner-pagewrapper .runner-pagewrapper .page-import2 .runner-b-errormessage, .page-import2 .runner-b-errormessage > *
+{
+white-space: nowrap;
+}
+.page-import2 .runner-b-errormessage, .page-import2 .runner-b-errormessage,
+.page-import2 .runner-b-errormessage, .page-import2 .runner-b-errormessage > *,
+  .runner-pagewrapper .page-import2 .runner-b-errormessage, .page-import2 .runner-b-errormessage,
+  .runner-pagewrapper .page-import2 .runner-b-errormessage, .page-import2 .runner-b-errormessage > *,
+  .runner-pagewrapper .runner-pagewrapper .page-import2 .runner-b-errormessage, .page-import2 .runner-b-errormessage,
+  .runner-pagewrapper .runner-pagewrapper .page-import2 .runner-b-errormessage, .page-import2 .runner-b-errormessage > *
+{
+text-align: left;
+}
+.page-import2 .runner-c-importfields,
+  .runner-pagewrapper .page-import2 .runner-c-importfields,
+  .runner-pagewrapper .runner-pagewrapper .page-import2 .runner-c-importfields
+{
+margin-bottom:5px;
+}
+.page-import2 .runner-c-importfields,
+  .runner-pagewrapper .page-import2 .runner-c-importfields,
+  .runner-pagewrapper .runner-pagewrapper .page-import2 .runner-c-importfields
+{
+width:100%;
+}
+.page-import2 .runner-b-importfields, .page-import2 .runner-b-importfields,
+.page-import2 .runner-b-importfields, .page-import2 .runner-b-importfields > *,
+  .runner-pagewrapper .page-import2 .runner-b-importfields, .page-import2 .runner-b-importfields,
+  .runner-pagewrapper .page-import2 .runner-b-importfields, .page-import2 .runner-b-importfields > *,
+  .runner-pagewrapper .runner-pagewrapper .page-import2 .runner-b-importfields, .page-import2 .runner-b-importfields,
+  .runner-pagewrapper .runner-pagewrapper .page-import2 .runner-b-importfields, .page-import2 .runner-b-importfields > *
+{
+white-space: nowrap;
+}
+.page-import2 .runner-b-importfields, .page-import2 .runner-b-importfields,
+.page-import2 .runner-b-importfields, .page-import2 .runner-b-importfields > *,
+  .runner-pagewrapper .page-import2 .runner-b-importfields, .page-import2 .runner-b-importfields,
+  .runner-pagewrapper .page-import2 .runner-b-importfields, .page-import2 .runner-b-importfields > *,
+  .runner-pagewrapper .runner-pagewrapper .page-import2 .runner-b-importfields, .page-import2 .runner-b-importfields,
+  .runner-pagewrapper .runner-pagewrapper .page-import2 .runner-b-importfields, .page-import2 .runner-b-importfields > *
+{
+text-align: left;
+}
+.page-import2 .runner-b-importheader_text, .page-import2 .runner-b-importheader_text,
+.page-import2 .runner-b-importheader_text, .page-import2 .runner-b-importheader_text > *,
+  .runner-pagewrapper .page-import2 .runner-b-importheader_text, .page-import2 .runner-b-importheader_text,
+  .runner-pagewrapper .page-import2 .runner-b-importheader_text, .page-import2 .runner-b-importheader_text > *,
+  .runner-pagewrapper .runner-pagewrapper .page-import2 .runner-b-importheader_text, .page-import2 .runner-b-importheader_text,
+  .runner-pagewrapper .runner-pagewrapper .page-import2 .runner-b-importheader_text, .page-import2 .runner-b-importheader_text > *
+{
+white-space: nowrap;
+}
+.page-import2 .runner-b-importheader_text, .page-import2 .runner-b-importheader_text,
+.page-import2 .runner-b-importheader_text, .page-import2 .runner-b-importheader_text > *,
+  .runner-pagewrapper .page-import2 .runner-b-importheader_text, .page-import2 .runner-b-importheader_text,
+  .runner-pagewrapper .page-import2 .runner-b-importheader_text, .page-import2 .runner-b-importheader_text > *,
+  .runner-pagewrapper .runner-pagewrapper .page-import2 .runner-b-importheader_text, .page-import2 .runner-b-importheader_text,
+  .runner-pagewrapper .runner-pagewrapper .page-import2 .runner-b-importheader_text, .page-import2 .runner-b-importheader_text > *
+{
+text-align: left;
+}
+.page-import2 .runner-b-importbuttons, .page-import2 .runner-b-importbuttons,
+.page-import2 .runner-b-importbuttons, .page-import2 .runner-b-importbuttons > *,
+  .runner-pagewrapper .page-import2 .runner-b-importbuttons, .page-import2 .runner-b-importbuttons,
+  .runner-pagewrapper .page-import2 .runner-b-importbuttons, .page-import2 .runner-b-importbuttons > *,
+  .runner-pagewrapper .runner-pagewrapper .page-import2 .runner-b-importbuttons, .page-import2 .runner-b-importbuttons,
+  .runner-pagewrapper .runner-pagewrapper .page-import2 .runner-b-importbuttons, .page-import2 .runner-b-importbuttons > *
+{
+white-space: nowrap;
+}
+.page-import2 .runner-b-importbuttons, .page-import2 .runner-b-importbuttons,
+.page-import2 .runner-b-importbuttons, .page-import2 .runner-b-importbuttons > *,
+  .runner-pagewrapper .page-import2 .runner-b-importbuttons, .page-import2 .runner-b-importbuttons,
+  .runner-pagewrapper .page-import2 .runner-b-importbuttons, .page-import2 .runner-b-importbuttons > *,
+  .runner-pagewrapper .runner-pagewrapper .page-import2 .runner-b-importbuttons, .page-import2 .runner-b-importbuttons,
+  .runner-pagewrapper .runner-pagewrapper .page-import2 .runner-b-importbuttons, .page-import2 .runner-b-importbuttons > *
+{
+text-align: left;
+}
+body.page-import2 .runner-toptable
+{
+width:100%;
+}
+body.page-import2 .runner-top
+{
+padding-right: 5px;
+}
