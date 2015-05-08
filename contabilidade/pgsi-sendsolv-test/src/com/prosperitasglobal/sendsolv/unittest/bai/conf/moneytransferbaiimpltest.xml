@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mockito="http://www.mockito.org/spring/mockito"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+					    http://www.mockito.org/spring/mockito http://www.mockito.org/spring/mockito.xsd">
+
+	<bean id="QATAppContext" class="com.qat.framework.util.QATAppContext"/>
+
+ 	 <bean id="moneyTransferBAI" class="com.prosperitasglobal.sendsolv.bai.impl.MoneyTransferBAIImpl">
+ 		<property name="moneyTransferBAC" ref="moneyTransferBACTarget"/>
+ 		<property name="moneyTransferInquiryRequestValidationController" ref="moneyTransferInquiryRequestValidationController"/>
+		<property name="moneyTransferBatchInquiryRequestValidationController" ref="moneyTransferBatchInquiryRequestValidationController"/>
+		<property name="moneyTransferValidationController" ref="moneyTransferValidationController"/>
+		<property name="moneyTransferBatchValidationController" ref="moneyTransferBatchValidationController"/>
+		<property name="moneyTransferBatchStatusMaintenanceRequestValidationController" ref="moneyTransferBatchStatusMaintenanceRequestValidationController"/>
+		<property name="moneyTransferStatusMaintenanceRequestValidationController" ref="moneyTransferStatusMaintenanceRequestValidationController"/>
+		<property name="moneyTransferBatchCreateRequestValidationController" ref="moneyTransferBatchCreateRequestValidationController"/>
+		<property name="moneyTransferCreateRequestValidationController" ref="moneyTransferCreateRequestValidationController"/>
+		<property name="moneyTransferAutoApprovalRequestValidationController" ref="moneyTransferAutoApprovalRequestValidationController"/>
+ 	</bean>
+
+	<bean id="moneyTransferBACTarget" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.prosperitasglobal.sendsolv.bac.IMoneyTransferBAC"/>
+	</bean>
+</beans>

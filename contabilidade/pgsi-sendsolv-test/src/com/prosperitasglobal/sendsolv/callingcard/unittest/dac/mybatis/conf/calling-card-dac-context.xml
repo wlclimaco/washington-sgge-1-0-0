@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans 	xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Setup for mybatis Database Layer -->
+  	<bean id="cc-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    	<property name="configLocation" value="classpath:com/prosperitasglobal/sendsolv/dac/mybatis/map/sendsolv-mybatis-config.xml" />
+    	<property name="dataSource" ref="pgsiDataSource" />
+    	<property name="databaseIdProvider" ref="databaseIdProvider"/>
+  	</bean>
+
+	<!-- ========================= DAC DEFINITIONS================================= -->
+
+	<bean id="callingCardDACTarget" class="com.prosperitasglobal.sendsolv.callingcard.dac.mybatis.CallingCardDACImpl">
+		<property name="sqlSessionFactory" ref="cc-sqlSessionFactory" />
+	</bean>
+
+</beans>

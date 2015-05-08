@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:util="http://www.springframework.org/schema/util"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd ">
+
+  	<bean id="sdnMatchValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+  				<ref bean="SdnMatchBusinessValidator" />
+  				<ref bean="SdnMatchMemberValidator" />
+  				<ref bean="SdnMatchRecipientValidator" />
+  				<ref bean="SdnMatchLiaisonValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+	<bean id="SdnHistoryValidator"       		 class="com.prosperitasglobal.sendsolv.sdn.validation.SdnHistoryValidator" />
+	<bean id="SdnStatusHistoryValidator"       	 class="com.prosperitasglobal.sendsolv.sdn.validation.SdnStatusHistoryValidator" />
+	<bean id="SdnMatchMemberValidator"    		 class="com.prosperitasglobal.sendsolv.validation.SdnMatchMemberValidator" />
+	<bean id="SdnMatchRecipientValidator" 		 class="com.prosperitasglobal.sendsolv.validation.SdnMatchRecipientValidator" />
+	<bean id="SdnMatchLiaisonValidator"   		 class="com.prosperitasglobal.sendsolv.validation.SdnMatchLiaisonValidator" />
+
+	<bean id="sdnStatusHistoryController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+  				<ref bean="SdnStatusHistoryValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+	<bean id="sdnHistoryController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+  				<ref bean="SdnHistoryValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+
+	<bean id="SdnMatchBusinessValidator"         class="com.prosperitasglobal.sendsolv.validation.SdnMatchBusinessValidator">
+		<property name="industryClassificationDAC" ref="industryClassificationDACTarget"/>
+	</bean>
+
+	<bean id="sdnCheckerBACTarget" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.prosperitasglobal.sendsolv.sdn.bac.ISdnCheckerBAC"/>
+	</bean>
+
+ 	 <bean id="sdnChecherBAI" class="com.prosperitasglobal.sendsolv.sdn.bai.impl.SdnCheckerBAIImpl">
+ 		<property name="sdnCheckerBAC" ref="sdnCheckerBACTarget"/>
+ 		<property name="sdnMatchValidationController" ref="sdnMatchValidationController"/>
+ 		<property name="sdnStatusHistoryController" ref="sdnStatusHistoryController"/>
+ 	</bean>
+
+ 	<bean id="currentSDNStatusHandler" class="com.prosperitasglobal.sendsolv.sdn.dac.mybatis.MyBatisCurrentSDNStatusEnumTypeHandler">
+ 		<property name="sdnCheckerBAI" ref="sdnChecherBAI" />
+ 	</bean>
+</beans>

@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:util="http://www.springframework.org/schema/util"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd ">
+
+	<!-- Setup for mybatis Database Layer -->
+  	<bean id="pgsi-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    	<property name="configLocation" value="classpath:com/prosperitasglobal/sendsolv/dac/mybatis/map/sendsolv-mybatis-config.xml" />
+    	<property name="dataSource" ref="pgsiDataSource" />
+    	<property name="databaseIdProvider" ref="databaseIdProvider"/>
+  	</bean>
+
+	<!-- ========================= DAC DEFINITIONS================================= -->
+	<bean id="organizationDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.OrganizationDACImpl">
+		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+		<property name="contactDAC" ref="contactDACTarget" />
+		<property name="organizationInquiryValidSortFields" ref="organizationInquiryValidSortFields"/>
+	</bean>
+
+	<bean id="locationDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.LocationDACImpl">
+		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+		<property name="contactDAC" ref="contactDACTarget" />
+	</bean>
+
+	<bean id="personDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.PersonDACImpl">
+		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+		<property name="contactDAC" ref="contactDACTarget" />
+		<property name="noteDAC" ref="noteDACTarget" />
+		<property name="documentTypeDAC" ref="documentTypeDACTarget" />
+		<property name="memberInquiryValidSortFields" ref="memberInquiryValidSortFields"/>
+		<property name="recipientInquiryValidSortFields" ref="recipientInquiryValidSortFields"/>
+		<property name="securityQuestionDAC" ref="securityQuestionDACTarget" />
+	</bean>
+
+	<bean id="payerDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.PayerDACImpl">
+		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+		<property name="currencyPurchaseDAC" ref="currencyPurchaseDACTarget"/>
+		<property name="dailyCurrencyRateDAC" ref="dailyCurrencyRateDACTarget"/>
+		<property name="payerInquiryValidSortFields" ref="payerInquiryValidSortFields"/>
+	</bean>
+
+	<bean id="currencyPurchaseDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.CurrencyPurchaseDACImpl">
+		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+	</bean>
+
+	<bean id="dailyCurrencyRateDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.DailyCurrencyRateDACImpl">
+		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+	</bean>
+
+	<bean id="contactDACTarget" class="com.prosperitasglobal.cbof.dac.mybatis.ContactDACImpl">
+		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+	</bean>
+
+	<bean id="noteDACTarget" class="com.prosperitasglobal.cbof.dac.mybatis.NoteDACImpl">
+		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+	</bean>
+
+	<bean id="codeValueDACTarget" class="com.prosperitasglobal.cbof.dac.mybatis.CodeValueDACImpl">
+		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+	</bean>
+
+	<bean id="documentTypeDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.DocumentTypeDACImpl">
+		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+	</bean>
+
+	<bean id="languageDACTarget" class="com.prosperitasglobal.cbof.dac.mybatis.LanguageDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
+	<bean id="btsConfirmationNumberDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.BtsConfirmationNumberDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
+	<bean id="securityQuestionDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.SecurityQuestionDACImpl">
+		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+	</bean>
+
+	<bean id="participantIdDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.ParticipantIdDACImpl">
+    	<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+       	<property name="initialContactParticipantId">
+    		<bean class="com.prosperitasglobal.sendsolv.model.ContactParticipantId">
+    			<property name="upperId" value='A'/>
+    			<property name="lowerId" value='A'/>
+    			<property name="sequence" value='1'/>
+    			<property name="maximumSequence" value='99999'/>
+    		</bean>
+    	</property>
+       	<property name="initialLocationParticipantId">
+    		<bean class="com.prosperitasglobal.sendsolv.model.LocationParticipantId">
+    			<property name="upperId" value='A'/>
+    			<property name="lowerId" value='A'/>
+    			<property name="sequence" value='1'/>
+    			<property name="maximumSequence" value='99999'/>
+    		</bean>
+    	</property>
+    	<property name="initialMemberParticipantId">
+    		<bean class="com.prosperitasglobal.sendsolv.model.MemberParticipantId">
+    			<property name="upperId" value='A'/>
+    			<property name="lowerId" value='A'/>
+    			<property name="sequence" value='1'/>
+    			<property name="maximumSequence" value='99999'/>
+    		</bean>
+    	</property>
+    	<property name="initialMoneyTransferBatchParticipantId">
+    		<bean class="com.prosperitasglobal.sendsolv.model.MoneyTransferBatchParticipantId">
+    			<property name="upperId" value='A'/>
+    			<property name="lowerId" value='A'/>
+    			<property name="sequence" value='1'/>
+    			<property name="maximumSequence" value='99999'/>
+    		</bean>
+    	</property>
+    	<property name="initialMoneyTransferParticipantId">
+    		<bean class="com.prosperitasglobal.sendsolv.model.MoneyTransferParticipantId">
+    			<property name="upperId" value='A'/>
+    			<property name="lowerId" value='A'/>
+    			<property name="sequence" value='1'/>
+    			<property name="maximumSequence" value='99999'/>
+    		</bean>
+    	</property>
+    	<property name="initialOrganizationParticipantId">
+    		<bean class="com.prosperitasglobal.sendsolv.model.OrganizationParticipantId">
+    			<property name="upperId" value='A'/>
+    			<property name="lowerId" value='A'/>
+    			<property name="sequence" value='1'/>
+    			<property name="maximumSequence" value='99999'/>
+    		</bean>
+    	</property>
+       	<property name="initialRecipientParticipantId">
+    		<bean class="com.prosperitasglobal.sendsolv.model.RecipientParticipantId">
+    			<property name="upperId" value='A'/>
+    			<property name="lowerId" value='A'/>
+    			<property name="sequence" value='1'/>
+    			<property name="maximumSequence" value='99999'/>
+    		</bean>
+    	</property>
+    	<property name="initialTransferSettingParticipantId">
+    		<bean class="com.prosperitasglobal.sendsolv.model.TransferSettingParticipantId">
+    			<property name="upperId" value='A'/>
+    			<property name="lowerId" value='A'/>
+    			<property name="sequence" value='1'/>
+    			<property name="maximumSequence" value='99999'/>
+    		</bean>
+    	</property>
+    	<property name="initialSuspiciousActivityParticipantId">
+    		<bean class="com.prosperitasglobal.sendsolv.model.SuspiciousActivityParticipantId">
+    			<property name="upperId" value='A'/>
+    			<property name="lowerId" value='A'/>
+    			<property name="sequence" value='1'/>
+    			<property name="maximumSequence" value='99999'/>
+    		</bean>
+    	</property>
+	</bean>
+
+	<bean id="productPlanDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.ProductPlanDACImpl">
+		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+		<property name="businessProductPlanInquiryValidSortFields" ref="businessProductPlanInquiryValidSortFields"/>
+		<property name="templateProductPlanInquiryValidSortFields" ref="templateProductPlanInquiryValidSortFields"/>
+	</bean>
+
+	<bean id="productPlanTemplateGroupDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.ProductPlanTemplateGroupDACImpl">
+		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+		<property name="productPlanDAC" ref="productPlanDACTarget"/>
+		<property name="productPlanTemplateGroupInquiryValidSortFields" ref="productPlanTemplateGroupInquiryValidSortFields"/>
+	</bean>
+
+	<bean id="moneyTransferBatchDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.MoneyTransferBatchDACImpl">
+		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+		<property name="moneyTransferBatchInquiryValidSortFields" ref="moneyTransferBatchInquiryValidSortFields"/>
+		<property name="moneyTransferDAC" ref="moneyTransferDACTarget"/>
+		<property name="noteDAC" ref="noteDACTarget"/>
+	</bean>
+
+	<bean id="moneyTransferDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.MoneyTransferDACImpl">
+		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+		<property name="moneyTransferInquiryValidSortFields" ref="moneyTransferInquiryValidSortFields"/>
+		<property name="noteDAC" ref="noteDACTarget"/>
+	</bean>
+
+	<bean id="sdnCheckerDACTarget" class="com.prosperitasglobal.sendsolv.sdn.dac.mybatis.SdnCheckerDACImpl">
+		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+	</bean>
+
+	<bean id="callRecordDACTarget" class="com.prosperitasglobal.sendsolv.integration.twilio.dac.mybatis.IvrDACImpl">
+		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+	</bean>
+
+	 <bean id="suspiciousActivityDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.SuspiciousActivityDACImpl">
+		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+		<property name="suspiciousActivityValidSortFields" ref="suspiciousActivityValidSortFields" />
+	</bean>
+
+	<!-- ========================= Valid Sort Field DEFINITIONS================================= -->
+
+	<util:map id="businessProductPlanInquiryValidSortFields">
+		<entry key="name" value="name"/>
+	</util:map>
+
+	<util:map id="memberInquiryValidSortFields">
+		<entry key="firstName" value="first_name"/>
+		<entry key="lastName" value="last_name"/>
+		<entry key="personStatus" value="PGSi_status"/>
+		<entry key="participantId" value="participant_id"/>
+	</util:map>
+
+	<util:map id="moneyTransferInquiryValidSortFields">
+		<entry key="memberLastName" value="p.last_name"/>
+		<entry key="payerName" value="py.payer_name"/>
+		<entry key="status" value="mts.money_transfer_status_code"/>
+	</util:map>
+
+	<util:map id="moneyTransferBatchInquiryValidSortFields">
+		<entry key="transferDate" value="transfer_date"/>
+		<entry key="locationName" value="b.name"/>
+		<entry key="status" value="mtbs.money_transfer_batch_status_code"/>
+	</util:map>
+
+	<util:map id="organizationInquiryValidSortFields">
+		<entry key="name" value="name"/>
+	</util:map>
+
+	<util:map id="payerInquiryValidSortFields">
+		<entry key="name" value="payer_name"/>
+		<entry key="country" value="FK_country_code"/>
+	</util:map>
+
+	<util:map id="productPlanTemplateGroupInquiryValidSortFields">
+		<entry key="name" value="product_plan_template_group_name"/>
+	</util:map>
+
+	<util:map id="recipientInquiryValidSortFields">
+		<entry key="firstName" value="first_name"/>
+		<entry key="lastName" value="last_name"/>
+		<entry key="personStatus" value="PGSi_status"/>
+		<entry key="participantId" value="participant_id"/>
+	</util:map>
+
+	<util:map id="templateProductPlanInquiryValidSortFields">
+		<entry key="name" value="name"/>
+	</util:map>
+
+	<util:map id="suspiciousActivityValidSortFields">
+		<entry key="id" value="suspicious_activity_report_id"/>
+		<entry key="type" value="sar_type_code"/>
+	</util:map>
+
+</beans>

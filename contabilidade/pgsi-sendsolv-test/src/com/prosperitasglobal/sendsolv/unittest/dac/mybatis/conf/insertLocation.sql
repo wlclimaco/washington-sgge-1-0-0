@@ -1,0 +1,1 @@
+INSERT INTO business (business_type,name,EIN_code,FK_number_of_employees,FK_number_of_migrant_workers,number_of_locations,is_payroll_centralized,PGSi_status,risk_level,FK_SIC_id,FK_NAICS_id,FK_country_code,FK_location_id,create_date,create_user,modify_date,modify_user) VALUES (1,'QA Technologies','123ABC',1,65,50,0,1,1,1066,1,'USA',null,1406240548,'pgsi',null,null);

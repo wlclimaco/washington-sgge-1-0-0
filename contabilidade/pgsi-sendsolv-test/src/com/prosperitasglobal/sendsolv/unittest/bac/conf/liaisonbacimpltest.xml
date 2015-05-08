@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mockito="http://www.mockito.org/spring/mockito"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+					    http://www.mockito.org/spring/mockito http://www.mockito.org/spring/mockito.xsd">
+
+	<bean id="QATAppContext" class="com.qat.framework.util.QATAppContext" />
+
+ 	 <bean id="liaisonBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.LiaisonBACImpl">
+ 		<property name="personDAC" ref="personDACTarget"/>
+ 		<property name="participantIdDAC" ref="participantIdDACTarget"/>
+ 		<property name="sdnCheckerBAC" ref="sdnCheckerBACTarget" />
+ 	</bean>
+
+ 	<bean id="personDACTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.prosperitasglobal.sendsolv.dac.IPersonDAC" />
+	</bean>
+
+	<bean id="participantIdDACTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.prosperitasglobal.sendsolv.dac.IParticipantIdDAC" />
+	</bean>
+
+	<bean id="sdnCheckerBACTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.prosperitasglobal.sendsolv.sdn.bac.ISdnCheckerBAC" />
+	</bean>
+
+</beans>

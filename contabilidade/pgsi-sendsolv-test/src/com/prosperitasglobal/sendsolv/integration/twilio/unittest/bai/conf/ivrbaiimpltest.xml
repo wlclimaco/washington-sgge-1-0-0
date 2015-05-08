@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mockito="http://www.mockito.org/spring/mockito"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+					    http://www.mockito.org/spring/mockito http://www.mockito.org/spring/mockito.xsd">
+
+	<bean id="QATAppContext" class="com.qat.framework.util.QATAppContext"/>
+
+	<bean id="ivrBAI" class="com.prosperitasglobal.sendsolv.integration.twilio.bai.impl.IvrBAIImpl">
+ 		<property name="ivrBAC" ref="ivrBACTarget"/>
+	</bean>
+
+	<bean id="ivrBACTarget" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.prosperitasglobal.sendsolv.integration.twilio.bac.IIvrBAC"/>
+	</bean>
+
+	<bean id="exceptionModel" class="com.prosperitasglobal.sendsolv.integration.twilio.bac.impl.ivrmodel.SimpleIvrModel">
+		<property name="exceptionViewName" value="exception.xml" />
+    	<property name="viewName" value="exception.xml" />
+
+   	</bean>
+
+   	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+    	<property name="staticMethod" value="com.prosperitasglobal.sendsolv.integration.twilio.util.IvrCommonRoutines.setExceptionModel"/>
+    	<property name="arguments">
+        	<list>
+            	<ref bean="exceptionModel"/>
+        	</list>
+   		</property>
+	</bean>
+
+	<bean id="mainUrl" class="java.lang.String">
+  		<constructor-arg value="http://secure.prosperitasglobal.com/" />
+	</bean>
+
+	<bean id="controllerPath" class="java.lang.String">
+  		<constructor-arg value="ivrapi/process" />
+	</bean>
+
+	<bean id="resourcePath" class="java.lang.String">
+  		<constructor-arg value="conf/web/classes/ivr-resources/" />
+	</bean>
+
+	<bean id="staticResourcePath" class="java.lang.String">
+  		<constructor-arg value="audio/" />
+	</bean>
+
+	<bean id="supportedLanguagesList" class="java.util.ArrayList">
+	    <constructor-arg>
+	        <list>
+	           	<ref bean="spanishBean"/>
+           		<ref bean="englishBean"/>
+           		<ref bean="portugueseBean"/>
+	        </list>
+	    </constructor-arg>
+	</bean>
+
+	<!-- All supported languages -->
+	<bean id="spanishBean" class="com.prosperitasglobal.sendsolv.integration.twilio.model.SupportedLanguage" >
+		<property name="greeting" value="Para espanol, marque " />
+		<property name="ivrOption" value="1" />
+		<property name="voice" value="woman" />
+		<property name="language" value="es" />
+	</bean>
+	<bean id="englishBean" class="com.prosperitasglobal.sendsolv.integration.twilio.model.SupportedLanguage" >
+		<property name="greeting" value="For English, press " />
+		<property name="ivrOption" value="2" />
+		<property name="voice" value="woman" />
+		<property name="language" value="en" />
+	</bean>
+	<bean id="portugueseBean" class="com.prosperitasglobal.sendsolv.integration.twilio.model.SupportedLanguage" >
+		<property name="greeting" value="Para Portugues, digite " />
+		<property name="ivrOption" value="3" />
+		<property name="voice" value="alice" />
+		<property name="language" value="pt-BR" />
+	</bean>
+
+</beans>

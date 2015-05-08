@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!-- Setup for mybatis Database Layer -->
+  	<bean id="cbof-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    	<property name="configLocation" value="classpath:com/prosperitasglobal/sendsolv/dac/mybatis/map/sendsolv-mybatis-config.xml" />
+    	<property name="dataSource" ref="pgsiDataSource" />
+  	</bean>
+
+	<!-- ========================= DAC DEFINITIONS================================= -->
+
+	<bean id="organizationDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.OrganizationDACImpl">
+		<property name="sqlSessionFactory" ref="cbof-sqlSessionFactory" />
+		<property name="contactDAC" ref="contactDACTarget" />
+		<property name="organizationInquiryValidSortFields" ref="organizationInquiryValidSortFields"/>
+	</bean>
+
+	<bean id="locationDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.LocationDACImpl">
+		<property name="sqlSessionFactory" ref="cbof-sqlSessionFactory" />
+		<property name="contactDAC" ref="contactDACTarget" />
+	</bean>
+
+	<bean id="contactDACTarget" class="com.prosperitasglobal.cbof.dac.mybatis.ContactDACImpl">
+		<property name="sqlSessionFactory" ref="cbof-sqlSessionFactory" />
+	</bean>
+
+	<bean id="documentTypeDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.DocumentTypeDACImpl">
+		<property name="sqlSessionFactory" ref="cbof-sqlSessionFactory" />
+	</bean>
+
+	<bean id="codeValueDACTarget" class="com.prosperitasglobal.cbof.dac.mybatis.CodeValueDACImpl">
+		<property name="sqlSessionFactory" ref="cbof-sqlSessionFactory" />
+	</bean>
+
+	<bean id="countryDACTarget" class="com.prosperitasglobal.cbof.dac.mybatis.CountryDACImpl">
+		<property name="sqlSessionFactory" ref="cbof-sqlSessionFactory" />
+		<property name="countryExclusionCodes" value="NAP,UNK" />
+	</bean>
+
+	<bean id="industryClassificationDACTarget" class="com.prosperitasglobal.cbof.dac.mybatis.IndustryClassificationDACImpl">
+		<property name="sqlSessionFactory" ref="cbof-sqlSessionFactory" />
+	</bean>
+
+	<bean id="noteDACTarget" class="com.prosperitasglobal.cbof.dac.mybatis.NoteDACImpl">
+		<property name="sqlSessionFactory" ref="cbof-sqlSessionFactory" />
+	</bean>
+
+	<bean id="rangeDACTarget" class="com.prosperitasglobal.cbof.dac.mybatis.RangeDACImpl">
+		<property name="sqlSessionFactory" ref="cbof-sqlSessionFactory" />
+	</bean>
+
+	<bean id="personDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.PersonDACImpl">
+		<property name="sqlSessionFactory" ref="cbof-sqlSessionFactory" />
+		<property name="documentTypeDAC" ref="documentTypeDACTarget" />
+		<property name="contactDAC" ref="contactDACTarget" />
+		<property name="noteDAC" ref="noteDACTarget" />
+		<property name="memberInquiryValidSortFields" ref="memberInquiryValidSortFields"/>
+		<property name="recipientInquiryValidSortFields" ref="recipientInquiryValidSortFields"/>
+		<property name="securityQuestionDAC" ref="securityQuestionDACTarget" />
+	</bean>
+
+	<bean id="securityQuestionDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.SecurityQuestionDACImpl">
+		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+	</bean>
+
+	<!-- ========================= Valid Sort Field DEFINITIONS================================= -->
+
+	<util:map id="memberInquiryValidSortFields">
+		<entry key="firstName" value="first_name"/>
+		<entry key="lastName" value="last_name"/>
+		<entry key="personStatus" value="PGSi_status"/>
+		<entry key="participantId" value="participant_id"/>
+	</util:map>
+
+	<util:map id="organizationInquiryValidSortFields">
+		<entry key="name" value="name"/>
+	</util:map>
+
+	<util:map id="recipientInquiryValidSortFields">
+		<entry key="firstName" value="first_name"/>
+		<entry key="lastName" value="last_name"/>
+		<entry key="personStatus" value="PGSi_status"/>
+		<entry key="participantId" value="participant_id"/>
+	</util:map>
+
+</beans>

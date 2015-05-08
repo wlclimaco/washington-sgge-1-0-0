@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Setup for mybatis Database Layer -->
+  	<bean id="cbof-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    	<property name="configLocation" value="classpath:com/prosperitasglobal/sendsolv/dac/mybatis/map/sendsolv-mybatis-config.xml" />
+    	<property name="dataSource" ref="pgsiDataSource" />
+  	</bean>
+
+	<!-- ========================= DAC DEFINITIONS================================= -->
+
+	<bean id="commonBusinessObjectsDACTarget" class="com.prosperitasglobal.cbof.dac.mybatis.CommonBusinessObjectsDACImpl">
+		<property name="sqlSessionFactory" ref="cbof-sqlSessionFactory" />
+	</bean>
+
+	<bean id="organizationDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.OrganizationDACImpl">
+		<property name="sqlSessionFactory" ref="cbof-sqlSessionFactory" />
+		<property name="commonBusinessObjectsDAC" ref="commonBusinessObjectsDACTarget" />
+	</bean>
+
+	<bean id="documentTypeDACTarget" class="com.prosperitasglobal.cbof.dac.mybatis.DocumentTypeDACImpl">
+		<property name="sqlSessionFactory" ref="cbof-sqlSessionFactory" />
+	</bean>
+
+	<bean id="codeValueDACTarget" class="com.prosperitasglobal.cbof.dac.mybatis.CodeValueDACImpl">
+		<property name="sqlSessionFactory" ref="cbof-sqlSessionFactory" />
+	</bean>
+
+	<bean id="noteDACTarget" class="com.prosperitasglobal.cbof.dac.mybatis.NoteDACImpl">
+		<property name="sqlSessionFactory" ref="cbof-sqlSessionFactory" />
+	</bean>
+
+	<bean id="personDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.PersonDACImpl">
+		<property name="sqlSessionFactory" ref="cbof-sqlSessionFactory" />
+		<property name="contactDAC" ref="commonBusinessObjectsDACTarget" />
+		<property name="noteDAC" ref="noteDACTarget" />
+	</bean>
+
+	<bean id="commonRoutineBean" class="com.prosperitasglobal.cbof.unittest.util.CommonTestRoutines">
+		<property name="organizationDAC" ref="organizationDACTarget" />
+		<property name="documentTypeDAC" ref="documentTypeDACTarget" />
+		<property name="codeValueDAC" ref="codeValueDACTarget" />
+		<property name="commonBusinessObjectsDAC" ref="commonBusinessObjectsDACTarget" />
+		<property name="noteDAC" ref="noteDACTarget" />
+		<property name="personDAC" ref="personDACTarget" />
+	</bean>
+</beans>

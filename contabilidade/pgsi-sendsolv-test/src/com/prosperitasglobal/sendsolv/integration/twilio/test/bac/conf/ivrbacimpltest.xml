@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 	xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:mockito="http://www.mockito.org/spring/mockito"
+		xmlns:util="http://www.springframework.org/schema/util"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+					    	http://www.mockito.org/spring/mockito http://www.mockito.org/spring/mockito.xsd
+					    	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+					    	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd" >
+
+	<bean id="QATAppContext" class="com.qat.framework.util.QATAppContext" />
+
+	<!-- ========================= BAC DEFINITIONS ======================== -->
+
+ 	<bean id="ivrBACTarget" class="com.prosperitasglobal.sendsolv.integration.twilio.bac.impl.IvrBACImpl">
+ 		<property name="callRecordDAC" ref="callRecordDACTarget" />
+ 		<property name="controllerList" ref="controllerListTarget" />
+ 	</bean>
+
+	<!-- ========================= CHANGE TO DEPLOY ELSEWHERE ======================== -->
+	<bean id="mainUrl" class="java.lang.String">
+  		<constructor-arg value="http://secure.prosperitasglobal.com/" />
+	</bean>
+
+	<bean id="controllerPath" class="java.lang.String">
+  		<constructor-arg value="ivrapi/process" />
+	</bean>
+
+	<bean id="resourcePath" class="java.lang.String">
+  		<constructor-arg value="conf/web/classes/ivr-resources/" />
+	</bean>
+
+	<bean id="staticResourcePath" class="java.lang.String">
+  		<constructor-arg value="audio/" />
+	</bean>
+
+	<bean id="supportedLanguagesList" class="java.util.ArrayList">
+	    <constructor-arg>
+	        <list>
+	           	<ref bean="spanishBean"/>
+           		<ref bean="englishBean"/>
+           		<ref bean="portugueseBean"/>
+	        </list>
+	    </constructor-arg>
+	</bean>
+
+	<!-- All supported languages -->
+	<bean id="spanishBean" class="com.prosperitasglobal.sendsolv.integration.twilio.model.SupportedLanguage" >
+		<property name="greeting" value="Para espanol, marque " />
+		<property name="ivrOption" value="1" />
+		<property name="voice" value="woman" />
+		<property name="language" value="es" />
+	</bean>
+	<bean id="englishBean" class="com.prosperitasglobal.sendsolv.integration.twilio.model.SupportedLanguage" >
+		<property name="greeting" value="For English, press " />
+		<property name="ivrOption" value="2" />
+		<property name="voice" value="woman" />
+		<property name="language" value="en" />
+	</bean>
+	<bean id="portugueseBean" class="com.prosperitasglobal.sendsolv.integration.twilio.model.SupportedLanguage" >
+		<property name="greeting" value="Para Portugues, digite " />
+		<property name="ivrOption" value="3" />
+		<property name="voice" value="alice" />
+		<property name="language" value="pt-BR" />
+	</bean>
+
+	<bean id="controllerListTarget" class="java.util.HashMap">
+	    <constructor-arg>
+	        <map key-type="java.lang.String" value-type="java.util.HashMap">
+	        	<entry key="greeting">
+           			<map key-type="java.lang.String" value-type="com.prosperitasglobal.sendsolv.integration.twilio.bac.IIvrModel">
+           				<entry key="default">
+           					<ref bean="greetingModel"/>
+           				 </entry>
+           			</map>
+	            </entry>
+	            <entry key="language">
+	            	<map key-type="java.lang.String" value-type="com.prosperitasglobal.sendsolv.integration.twilio.bac.IIvrModel">
+           				<entry key="1">
+           					<ref bean="spanishLanguageModel"/>
+           				</entry>
+           				<entry key="2">
+           					<ref bean="englishLanguageModel"/>
+           				</entry>
+           				<entry key="3">
+           					<ref bean="portugueseLanguageModel"/>
+           				</entry>
+           				<entry key="default">
+           					<ref bean="greetingModel"/>
+           				</entry>
+           			</map>
+	            </entry>
+	            <entry key="phone">
+	            	<map key-type="java.lang.String" value-type="com.prosperitasglobal.sendsolv.integration.twilio.bac.IIvrModel">
+           				<entry key="1">
+           					<ref bean="validatePhoneModel"/>
+           				</entry>
+           				<entry key="2">
+           					<ref bean="enterPhoneModel"/>
+           				</entry>
+           				<entry key="0">
+           					<ref bean="csrModel"/>
+           				</entry>
+           				<entry key="default">
+           					<ref bean="phoneMenuModel"/>
+           				</entry>
+           			</map>
+	            </entry>
+	             <entry key="phone_nf">
+	            	<map key-type="java.lang.String" value-type="com.prosperitasglobal.sendsolv.integration.twilio.bac.IIvrModel">
+           				<entry key="1">
+           					<ref bean="enterPhoneModel"/>
+           				</entry>
+           				<entry key="0">
+           					<ref bean="csrModel"/>
+           				</entry>
+           				<entry key="default">
+           					<ref bean="phoneNfModel"/>
+           				</entry>
+           			</map>
+	            </entry>
+	            <entry key="pin">
+	            	<map key-type="java.lang.String" value-type="com.prosperitasglobal.sendsolv.integration.twilio.bac.IIvrModel">
+           				<entry key="default">
+           					<ref bean="validatePinModel"/>
+           				</entry>
+           			</map>
+	            </entry>
+	            <entry key="reenter_pin">
+	            	<map key-type="java.lang.String" value-type="com.prosperitasglobal.sendsolv.integration.twilio.bac.IIvrModel">
+           				<entry key="1">
+           					<ref bean="enterPhoneModel"/>
+           				</entry>
+           				<entry key="2">
+           					<ref bean="enterPinModel"/>
+           				</entry>
+           				<entry key="0">
+           					<ref bean="csrModel"/>
+           				</entry>
+           			</map>
+           		</entry>
+           		<entry key="main_menu">
+	            	<map key-type="java.lang.String" value-type="com.prosperitasglobal.sendsolv.integration.twilio.bac.IIvrModel">
+           				<entry key="1">
+           					<ref bean="priorTransactionMenuModel"/>
+           				</entry>
+           				<entry key="2">
+           					<ref bean="upcomingTransactionModel"/>
+           				</entry>
+           				<entry key="7">
+           					<ref bean="internationalCallModel"/>
+           				</entry>
+           				<entry key="8">
+           					<ref bean="mainMenuModel"/>
+           				</entry>
+           				<entry key="0">
+           					<ref bean="csrModel"/>
+           				</entry>
+           			</map>
+           		</entry>
+           		<entry key="prior_transaction_menu">
+	            	<map key-type="java.lang.String" value-type="com.prosperitasglobal.sendsolv.integration.twilio.bac.IIvrModel">
+	            		<!-- Dynamic options 1-5 exist here -->
+	            		<entry key="dynamic">
+           					<ref bean="fetchMoneyTransferModel"/>
+           				</entry>
+           				<entry key="6">
+           					<ref bean="fetchMoneyTransferModel"/> <!-- prior period -->
+           				</entry>
+           				<entry key="7">
+           					<ref bean="internationalCallModel"/>
+           				</entry>
+           				<entry key="8">
+           					<ref bean="priorTransactionMenuModel"/>
+           				</entry>
+           				<entry key="9">
+           					<ref bean="mainMenuModel"/>
+           				</entry>
+           				<entry key="0">
+           					<ref bean="csrModel"/>
+           				</entry>
+           			</map>
+           		</entry>
+           		<entry key="no_transaction">
+	            	<map key-type="java.lang.String" value-type="com.prosperitasglobal.sendsolv.integration.twilio.bac.IIvrModel">
+           				<entry key="8">
+           					<ref bean="priorTransactionMenuModel"/>
+           				</entry>
+           				<entry key="0">
+           					<ref bean="csrModel"/>
+           				</entry>
+           			</map>
+           		</entry>
+           		<entry key="read_prior_transaction">
+	            	<map key-type="java.lang.String" value-type="com.prosperitasglobal.sendsolv.integration.twilio.bac.IIvrModel">
+           				<entry key="6">
+           					<ref bean="fetchMoneyTransferModel"/> <!-- next one -->
+           				</entry>
+           				<entry key="7">
+           					<ref bean="disclaimerModel"/>
+           				</entry>
+           				<entry key="8">
+           					<ref bean="fetchMoneyTransferModel"/> <!-- repeat this one -->
+           				</entry>
+           				<entry key="9">
+           					<ref bean="previousMenuModel"/>
+           				</entry>
+           				<entry key="0">
+           					<ref bean="csrModel"/>
+           				</entry>
+           				<entry key="default">
+           					<ref bean="previousMenuModel"/>
+           				</entry>
+           			</map>
+           		</entry>
+           		<entry key="multiple_location">
+	            	<map key-type="java.lang.String" value-type="com.prosperitasglobal.sendsolv.integration.twilio.bac.IIvrModel">
+           				<entry key="default">
+           					<ref bean= "multipleLocationModel"/>
+           				 </entry>
+           			</map>
+	            </entry>
+           		<entry key="validate_phone">
+	            	<map key-type="java.lang.String" value-type="com.prosperitasglobal.sendsolv.integration.twilio.bac.IIvrModel">
+           				<entry key="default">
+           					<ref bean= "validatePhoneModel"/>
+           				 </entry>
+           			</map>
+	            </entry>
+           		<entry key="loop_phone">
+	            	<map key-type="java.lang.String" value-type="com.prosperitasglobal.sendsolv.integration.twilio.bac.IIvrModel">
+           				<entry key="default">
+           					<ref bean= "enterPhoneModel"/>
+           				 </entry>
+           			</map>
+	            </entry>
+	            <entry key="loop_pin">
+	            	<map key-type="java.lang.String" value-type="com.prosperitasglobal.sendsolv.integration.twilio.bac.IIvrModel">
+           				<entry key="default">
+           					<ref bean= "enterPinModel"/>
+           				 </entry>
+           			</map>
+	            </entry>
+	            <entry key="loop_menu">
+	            	<map key-type="java.lang.String" value-type="com.prosperitasglobal.sendsolv.integration.twilio.bac.IIvrModel">
+           				<entry key="default">
+           					<ref bean= "mainMenuModel"/>
+           				 </entry>
+           			</map>
+	            </entry>
+	            <entry key="exception">
+	            	<map key-type="java.lang.String" value-type="com.prosperitasglobal.sendsolv.integration.twilio.bac.IIvrModel">
+           				<entry key="default">
+           					<ref bean= "exceptionModel"/>
+           				 </entry>
+           			</map>
+	            </entry>
+	            <entry key="invalid">
+	            	<map key-type="java.lang.String" value-type="com.prosperitasglobal.sendsolv.integration.twilio.bac.IIvrModel">
+           				<entry key="default">
+           					<ref bean= "invalidModel"/>
+           				 </entry>
+           			</map>
+	            </entry>
+	            <entry key="csr">
+	            	<map key-type="java.lang.String" value-type="com.prosperitasglobal.sendsolv.integration.twilio.bac.IIvrModel">
+           				<entry key="default">
+           					<ref bean= "csrModel"/>
+           				 </entry>
+           			</map>
+	            </entry>
+	            <entry key="intercall">
+	            	<map key-type="java.lang.String" value-type="com.prosperitasglobal.sendsolv.integration.twilio.bac.IIvrModel">
+           				<entry key="default">
+           					<ref bean= "internationalCallModel"/>
+           				 </entry>
+           			</map>
+	            </entry>
+	        </map>
+	    </constructor-arg>
+	</bean>
+
+	<!-- All reusable Models -->
+	<bean id="greetingModel" class="com.prosperitasglobal.sendsolv.integration.twilio.bac.impl.ivrmodel.GreetingIvrModel">
+		<property name="callRecordDAC" ref="callRecordDACTarget" />
+	   	<property name="viewName" value="greeting.xml" />
+		<property name="nextController" value="language" />
+   	</bean>
+
+	<bean id="spanishLanguageModel" class="com.prosperitasglobal.sendsolv.integration.twilio.bac.impl.ivrmodel.LanguageIvrModel">
+		<property name="callRecordDAC" ref="callRecordDACTarget" />
+    	<property name="viewName" value="phone_menu.xml" />
+		<property name="nextController" value="phone" />
+   	</bean>
+
+	<bean id="englishLanguageModel" class="com.prosperitasglobal.sendsolv.integration.twilio.bac.impl.ivrmodel.LanguageIvrModel">
+		<property name="callRecordDAC" ref="callRecordDACTarget" />
+    	<property name="viewName" value="phone_menu.xml" />
+		<property name="nextController" value="phone" />
+   	</bean>
+
+   	<bean id="portugueseLanguageModel" class="com.prosperitasglobal.sendsolv.integration.twilio.bac.impl.ivrmodel.LanguageIvrModel">
+   		<property name="callRecordDAC" ref="callRecordDACTarget" />
+    	<property name="viewName" value="phone_menu.xml" />
+		<property name="nextController" value="phone" />
+   	</bean>
+
+   	<bean id="validatePhoneModel" class="com.prosperitasglobal.sendsolv.integration.twilio.bac.impl.ivrmodel.ValidatePhoneIvrModel">
+   		<property name="callRecordDAC" ref="callRecordDACTarget" />
+    	<property name="viewName" value="enter_pin.xml" />
+		<property name="nextController" value="pin" />
+		<property name="additionalViewName" value="phone_not_found.xml" />
+		<property name="additionalNextController" value="phone_nf" />
+   	</bean>
+
+   	<bean id="validatePinModel" class="com.prosperitasglobal.sendsolv.integration.twilio.bac.impl.ivrmodel.ValidatePinIvrModel">
+   		<property name="callRecordDAC" ref="callRecordDACTarget" />
+    	<property name="viewName" value="main_menu.xml" />
+		<property name="nextController" value="main_menu" />
+		<property name="additionalViewName" value="re_enter_pin.xml" />
+		<property name="additionalNextController" value="reenter_pin" />
+   	</bean>
+
+	<bean id="exceptionModel" class="com.prosperitasglobal.sendsolv.integration.twilio.bac.impl.ivrmodel.SimpleIvrModel">
+		<property name="exceptionViewName" value="exception.xml" />
+    	<property name="viewName" value="exception.xml" />
+    	<property name="callRecordDAC" ref="callRecordDACTarget" />
+   	</bean>
+
+	<bean id="invalidModel" class="com.prosperitasglobal.sendsolv.integration.twilio.bac.impl.ivrmodel.SimpleIvrModel">
+   		<property name="viewName" value="invalid.xml" />
+   		<property name="callRecordDAC" ref="callRecordDACTarget" />
+   	</bean>
+
+	<bean id="priorTransactionMenuModel" class="com.prosperitasglobal.sendsolv.integration.twilio.bac.impl.ivrmodel.PriorTransactionIvrModel">
+		<property name="callRecordDAC" ref="callRecordDACTarget" />
+		<property name="personDAC" ref="personDACTarget" />
+    	<property name="viewName" value="prior_transaction.xml" />
+    	<property name="nextController" value="prior_transaction_menu" />
+    	<property name="additionalViewName" value="no_transaction.xml" />
+    	<property name="additionalNextController" value="no_transaction" />
+    	<property name="additionalViewName2" value="redirect.xml" />
+    	<property name="additionalNextController2" value="multiple_location" />
+    	<property name="exceptionViewName" value="exception.xml" />
+  	</bean>
+
+  	<bean id="fetchMoneyTransferModel" class="com.prosperitasglobal.sendsolv.integration.twilio.bac.impl.ivrmodel.FetchMoneyTransferIvrModel">
+  		<property name="moneyTransferDAC" ref="moneyTransferDACTarget"/>
+  		<property name="callRecordDAC" ref="callRecordDACTarget" />
+    	<property name="viewName" value="read_prior_transaction.xml" />
+    	<property name="nextController" value="read_prior_transaction" />
+    	<property name="additionalViewName" value="consumer_rights_mp3.xml" />
+		<property name="additionalNextController" value="main_menu" />
+		<property name="entryPointMenu" value="prior_transaction_menu" />
+		<property name="entryPointDetail" value="read_prior_transaction" />
+		<property name="audioFileName" value="disclaimer.mp3" />
+   	</bean>
+
+	<bean id="multipleLocationModel" class="com.prosperitasglobal.sendsolv.integration.twilio.bac.impl.ivrmodel.MultipleLocationIvrModel">
+  		<property name="callRecordDAC" ref="callRecordDACTarget" />
+  		<property name="personDAC" ref="personDACTarget" />
+    	<property name="viewName" value="multiple_location.xml" />
+    	<property name="nextController" value="prior_transaction_menu" />
+  	</bean>
+
+  	<bean id="upcomingTransactionModel" class="com.prosperitasglobal.sendsolv.integration.twilio.bac.impl.ivrmodel.SimpleIvrModel">
+  		<property name="callRecordDAC" ref="callRecordDACTarget" />
+    	<property name="viewName" value="csr.xml" />
+  	</bean>
+
+  	<bean id="internationalCallModel" class="com.prosperitasglobal.sendsolv.integration.twilio.bac.impl.ivrmodel.SimpleIvrModel">
+    	<property name="viewName" value="international_call.xml" />
+  	</bean>
+
+  	<bean id="repeatMenuModel" class="com.prosperitasglobal.sendsolv.integration.twilio.bac.impl.ivrmodel.SimpleIvrModel">
+    	<property name="viewName" value="csr.xml" />
+  	</bean>
+
+   	<bean id="csrModel" class="com.prosperitasglobal.sendsolv.integration.twilio.bac.impl.ivrmodel.SimpleIvrModel">
+    	<property name="viewName" value="csr.xml" />
+  	</bean>
+
+  	<bean id="disclaimerModel" class="com.prosperitasglobal.sendsolv.integration.twilio.bac.impl.ivrmodel.DisclaimerIvrModel">
+    	<property name="viewName" value="consumer_rights_mp3.xml" />
+    	<property name="nextController" value="loop_menu" />
+		<property name="audioFileName" value="disclaimer.mp3" />
+  	</bean>
+
+	<bean id="phoneMenuModel" class="com.prosperitasglobal.sendsolv.integration.twilio.bac.impl.ivrmodel.SimpleIvrModel">
+    	<property name="viewName" value="phone_menu.xml" />
+		<property name="nextController" value="phone" />
+   	</bean>
+
+	<bean id="phoneNfModel" class="com.prosperitasglobal.sendsolv.integration.twilio.bac.impl.ivrmodel.SimpleIvrModel">
+    	<property name="viewName" value="phone_not_found.xml" />
+		<property name="nextController" value="phone_nf" />
+   	</bean>
+
+  	<bean id="enterPhoneModel" class="com.prosperitasglobal.sendsolv.integration.twilio.bac.impl.ivrmodel.SimpleIvrModel">
+    	<property name="viewName" value="enter_phone_number.xml" />
+		<property name="nextController" value="validate_phone" />
+   	</bean>
+
+   	<bean id="enterPinModel" class="com.prosperitasglobal.sendsolv.integration.twilio.bac.impl.ivrmodel.SimpleIvrModel">
+    	<property name="viewName" value="enter_pin.xml" />
+		<property name="nextController" value="pin" />
+   	</bean>
+
+   	<bean id="reenterPinModel" class="com.prosperitasglobal.sendsolv.integration.twilio.bac.impl.ivrmodel.SimpleIvrModel">
+    	<property name="viewName" value="re_enter_pin.xml" />
+		<property name="nextController" value="reenter_pin" />
+   	</bean>
+
+   	<bean id="mainMenuModel" class="com.prosperitasglobal.sendsolv.integration.twilio.bac.impl.ivrmodel.SimpleIvrModel">
+    	<property name="viewName" value="main_menu.xml" />
+		<property name="nextController" value="main_menu" />
+   	</bean>
+
+   	<bean id="priorPeriodModel" class="com.prosperitasglobal.sendsolv.integration.twilio.bac.impl.ivrmodel.SimpleIvrModel">
+    	<property name="viewName" value="csr.xml" />
+  	</bean>
+
+	<bean id="previousMenuModel" class="com.prosperitasglobal.sendsolv.integration.twilio.bac.impl.ivrmodel.SimpleIvrModel">
+    	<property name="viewName" value="csr.xml" />
+  	</bean>
+
+	<!--This is to inject the exceptionModel bean into IvrCommonRoutines (it is used in a static method inside, so it needs to be done this way). -->
+  	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+    	<property name="staticMethod" value="com.prosperitasglobal.sendsolv.integration.twilio.util.IvrCommonRoutines.setExceptionModel"/>
+    	<property name="arguments">
+        	<list>
+            	<ref bean="exceptionModel"/>
+        	</list>
+   		</property>
+	</bean>
+	
+</beans>

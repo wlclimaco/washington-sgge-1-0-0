@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mockito="http://www.mockito.org/spring/mockito"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+					    http://www.mockito.org/spring/mockito http://www.mockito.org/spring/mockito.xsd">
+
+	<bean id="QATAppContext" class="com.qat.framework.util.QATAppContext" />
+
+ 	 <bean id="moneyTransferStagingBAC" class="com.prosperitasglobal.sendsolv.bac.impl.MoneyTransferStagingBACImpl">
+		<property name="moneyTransferBatchDAC" ref="moneyTransferBatchDACTarget"/>
+ 		<property name="moneyTransferDAC" ref="moneyTransferDACTarget"/>
+ 		<property name="participantIdDAC" ref="participantIdDACTarget"/>
+ 		<property name="dailyCurrencyRateDAC" ref="dailyCurrencyRateDACTarget"/>
+ 		<property name="noteDAC" ref="noteDACTarget"/>
+ 		<property name="personDAC" ref="personDACTarget"/>
+		<property name="senderAccount">
+ 			<bean class="com.prosperitasglobal.sendsolv.model.Account">
+				<property name="typeValue" value="3"/>
+				<property name="number" value="123"/>
+ 			</bean>
+ 		</property>
+ 		<property name="spreadPercentage">
+ 			<bean class="java.math.BigDecimal">
+ 				<constructor-arg value="8.2367"/>
+ 			</bean>
+		</property>
+ 		<property name="originCountry">
+ 			<bean class="com.prosperitasglobal.cbof.model.Country">
+ 				<constructor-arg value="USA"/>
+ 			</bean>
+ 		</property>
+ 		<property name="originCurrency">
+ 			<bean class="com.prosperitasglobal.cbof.model.Currency">
+ 				<constructor-arg value="USD"/>
+ 			</bean>
+ 		</property>
+ 	</bean>
+
+ 	<bean id="moneyTransferBatchDACTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.prosperitasglobal.sendsolv.dac.IMoneyTransferBatchDAC" />
+	</bean>
+
+	<bean id="moneyTransferDACTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.prosperitasglobal.sendsolv.dac.IMoneyTransferDAC" />
+	</bean>
+
+	<bean id="participantIdDACTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.prosperitasglobal.sendsolv.dac.IParticipantIdDAC" />
+	</bean>
+
+ 	<bean id="dailyCurrencyRateDACTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.prosperitasglobal.sendsolv.dac.IDailyCurrencyRateDAC" />
+	</bean>
+
+ 	<bean id="noteDACTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.prosperitasglobal.cbof.dac.INoteDAC" />
+	</bean>
+
+	<bean id="personDACTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.prosperitasglobal.sendsolv.dac.IPersonDAC" />
+	</bean>
+</beans>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:util="http://www.springframework.org/schema/util"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd ">
+
+	<!-- ========================= Valid Sort Field DEFINITIONS================================= -->
+
+	<util:map id="businessProductPlanInquiryValidSortFields">
+		<entry key="name" value="name"/>
+	</util:map>
+
+	<util:map id="memberInquiryValidSortFields">
+		<entry key="firstName" value="first_name"/>
+		<entry key="lastName" value="last_name"/>
+		<entry key="personStatus" value="PGSi_status"/>
+		<entry key="participantId" value="participant_id"/>
+	</util:map>
+
+	<util:map id="organizationInquiryValidSortFields">
+		<entry key="name" value="name"/>
+	</util:map>
+
+	<util:map id="payerInquiryValidSortFields">
+		<entry key="name" value="payer_name"/>
+		<entry key="country" value="FK_country_code"/>
+	</util:map>
+
+	<util:map id="productPlanTemplateGroupInquiryValidSortFields">
+		<entry key="name" value="product_plan_template_group_name"/>
+	</util:map>
+
+	<util:map id="recipientInquiryValidSortFields">
+		<entry key="firstName" value="first_name"/>
+		<entry key="lastName" value="last_name"/>
+		<entry key="personStatus" value="PGSi_status"/>
+		<entry key="participantId" value="participant_id"/>
+	</util:map>
+
+	<util:map id="templateProductPlanInquiryValidSortFields">
+		<entry key="name" value="name"/>
+	</util:map>
+
+	<util:map id="moneyTransferInquiryValidSortFields">
+		<entry key="memberLastName" value="p.last_name"/>
+		<entry key="payerName" value="py.payer_name"/>
+		<entry key="status" value="mts.money_transfer_status_code"/>
+	</util:map>
+
+	<util:map id="moneyTransferBatchInquiryValidSortFields">
+		<entry key="transferDate" value="transfer_date"/>
+		<entry key="locationName" value="b.name"/>
+		<entry key="status" value="mtbs.money_transfer_batch_status_code"/>
+	</util:map>
+
+	<util:map id="sdnStatusHistoryInquiryValidSortFields">
+		<entry key="name" value="name"/>
+		<entry key="createDateUTC" value="create_date"/>		
+	</util:map>
+
+</beans>

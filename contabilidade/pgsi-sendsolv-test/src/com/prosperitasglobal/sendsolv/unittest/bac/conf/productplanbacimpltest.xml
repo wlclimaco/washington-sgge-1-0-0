@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mockito="http://www.mockito.org/spring/mockito"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+					    http://www.mockito.org/spring/mockito http://www.mockito.org/spring/mockito.xsd">
+
+	<bean id="QATAppContext" class="com.qat.framework.util.QATAppContext" />
+
+ 	<bean id="productPlanBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.ProductPlanBACImpl">
+ 		<property name="productPlanDAC" ref="productPlanDACTarget"/>
+ 	</bean>
+
+ 	<bean id="productPlanDACTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.prosperitasglobal.sendsolv.dac.IProductPlanDAC" />
+	</bean>
+
+</beans>
