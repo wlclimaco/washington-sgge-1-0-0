@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="pgsi-sendsolv-implementation" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<include file="${ivyConfigPath}\..\AntConfig\pgsi-ant-common-targets.xml" optional="false" />
+
+	<target name="buildJavaFromXsd">
+
+		<property name="ivySettingsFile" value="${ivyConfigPath}/${ivySettingsFileName}" />
+
+		<!-- Configure IVY -->
+		<ivy:configure file="${ivySettingsFile}" />
+
+		<!-- Resolve all the dependencies. -->
+		<ivy:resolve file="${projectBaseDir}/build/${ivyFileName}" useCacheOnly="${ivyUseCacheOnly}" />
+
+		<!-- Define the ivy cache location where all the dependent jars reside. -->
+		<ivy:cachepath pathid="ivy.path" />
+
+		<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
+			<classpath>
+				<path refid="ivy.path" />
+			</classpath>
+		</taskdef>
+
+		<xjc schema="../schema/SDN.xsd" binding="../schema/binding.xml" destdir="../src" package="com.prosperitasglobal.sendsolv.sdn.model.generated"/>
+
+	</target>
+
+	<target name="build">
+		<antcall target="buildJavaFromXsd">
+			<param name="moduleName" value="pgsi-sendsolv-sdn" />
+			<param name="publishProjectLocal" value="true" />
+			<param name="ivyUseCacheOnly" value="false"/>
+		</antcall>
+	</target>
+
+
+</project>
