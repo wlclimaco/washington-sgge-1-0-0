@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+	<Gather action="%RESPONSEURL%?action=%ACTION%" numDigits="1">
+		<Say voice="woman" language="en">I see you are calling from %PHONE%</Say>
+		<Say voice="woman" language="en">If this is the primary number associated with your account, press 1.</Say>
+		<Say voice="woman" language="en">To enter a different number, press 2.</Say>
+		<Say voice="woman" language="en">To speak to a Customer Service Representative, press 0.</Say>
+	</Gather>
+	<!-- If customer doesn't input anything, prompt and try again. -->
+	<Say voice="woman" language="en">I'm sorry, I didn't get your response.</Say>
+	<Redirect>%RESPONSEURL%?action=%CURRENTACTION%&amp;reload=true</Redirect>
+</Response>

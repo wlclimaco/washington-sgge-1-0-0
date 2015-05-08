@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:batch="http://www.springframework.org/schema/batch"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- ==================== Environment Level Properties =================== -->
+	<!-- Load environment level properties file for place-holders with support -->
+	<!-- for encryption of property values like database passwords. -->
+	<!-- ==================== Environment Level Properties =================== -->
+	<!-- NOTE the classpath on this next bean starts with batch/conf -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:conf/batch/pgsi-batch-environment-context.properties" />
+		<property name="ignoreResourceNotFound" value="false" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="order" value="#{ T(Integer).MAX_VALUE - 3}" />
+	</bean>
+
+	<!-- ==================== Job specific properties ==================== -->
+	<!-- Provide job specific values for place-holders. -->
+	<!-- ==================== Job specific properties ==================== -->
+	<!-- NOTE the classpath on this next bean starts with batch/conf -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:${job.package}/${job.name}.properties" />
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="order" value="#{ T(Integer).MAX_VALUE - 2}" />
+	</bean>
+
+	<!-- ============== Job override Context place-holder properties ============ -->
+	<!-- Allow context place-holder properties to be overridden. -->
+	<!-- See above for explanation about place-holders. -->
+	<!-- ============== Job override Context place-holder properties ============ -->
+	<!-- NOTE the classpath on this next bean starts with batch/conf -->
+	<bean class="org.springframework.beans.factory.config.PropertyOverrideConfigurer">
+		<property name="location" value="classpath:${job.package}/${job.name}.override-context.properties" />
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="order" value="#{ T(Integer).MAX_VALUE - 1}" />
+	</bean>
+
+	<!-- This configurer will insure there are no unresolved place holder variables in the context. It must -->
+	<!-- be last so all other PropertyPlaceholderConfigurer beans must have an order property less then Java -->
+	<!-- Integer.MAX_VALUE. Use the abstract qatPropertyPlaceholderConfigurer bean if you need to define -->
+	<!-- a property placeholder bean. Example below: -->
+	<!-- <bean parent="qatPropertyPlaceholderConfigurer" > -->
+	<!--     <property name="location" value="classpath:<full path to my properties file>" /> -->
+	<!-- </bean> -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreUnresolvablePlaceholders" value="false" />
+	</bean>
+
+	<!-- Add the Data Access Context -->
+	<import resource="classpath:conf/batch/pgsi-batch-db-all-context.xml" />
+
+	<!-- Add the Spring Batch Job Repository Context -->
+	<import resource="classpath:conf/batch/pgsi-batch-job-repository-context.xml" />
+
+	<!-- ========================= GENERAL DEFINITIONS ========================= -->
+
+	<bean id="QATAppContext" class="com.qat.framework.util.QATAppContext"></bean>
+	<bean id="QATJobListener" class="com.qat.framework.batch.listener.QATJobListener"></bean>
+	<bean id="QATStepListener" class="com.qat.framework.batch.listener.QATStepListener"></bean>
+	<bean id="QATItemCounterListener" class="com.qat.framework.batch.listener.ItemCounterListener"></bean>
+
+	<!-- ========================= Parent Batch Job Definitions ======================== -->
+	<batch:job id="qatParentJob" abstract="true">
+		<batch:listeners>
+			<batch:listener ref="QATJobListener" />
+		</batch:listeners>
+	</batch:job>
+
+	<!-- ========================= Parent Batch Step Definitions ======================== -->
+
+	<batch:step id="qatParentStep" abstract="true">
+		<batch:tasklet transaction-manager="transactionManager">
+			<batch:listeners>
+				<batch:listener ref="QATStepListener" />
+				<batch:listener ref="QATItemCounterListener" />
+			</batch:listeners>
+		</batch:tasklet>
+	</batch:step>
+
+	<batch:step id="qatParentStepNoJta" abstract="true">
+		<batch:tasklet transaction-manager="noTransactionManager">
+			<batch:listeners>
+				<batch:listener ref="QATStepListener" />
+			</batch:listeners>
+		</batch:tasklet>
+	</batch:step>
+
+	<!-- ============ Parent PropertyPlaceholderConfigurer Bean Definitions =========== -->
+
+	<bean id="qatPropertyPlaceholderConfigurer" abstract="true"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<!-- <property name="location" value="classpath:To be specified by inheriting bean." /> -->
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="order" value="10000" />
+	</bean>
+
+</beans>

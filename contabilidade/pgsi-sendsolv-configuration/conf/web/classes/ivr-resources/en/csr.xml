@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+	<Say voice="woman" language="en">You will now be transfered to a customer service representative.</Say>
+    <Dial>402-212-7213</Dial>
+</Response>

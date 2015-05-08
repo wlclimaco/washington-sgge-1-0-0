@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+	<Gather action="%RESPONSEURL%?action=%ACTION%&amp;previous=%CURRENTACTION%" numDigits="1">
+		<Say voice="woman" language="es">Lo siento, el número que introdujo, %PHONE%, no existe en nuestra Base de Datos</Say>
+		<Say voice="woman" language="es">para volver a introducir el número, presione el 1.</Say>
+		<Say voice="woman" language="es">Para hablar con un representante de servicio al cliente, presione el 0.</Say>
+	</Gather>
+	<!-- If customer doesn't input anything, prompt and try again. -->
+	<Say voice="woman" language="es">Lo siento no recibí su respuesta.</Say>
+	<Redirect>%RESPONSEURL%?action=%CURRENTACTION%</Redirect>
+</Response>

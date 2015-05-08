@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+	<Say voice="woman" language="en">You have %NUMBER_OF_TRANSACTIONS% %TRANSACTION_NOUN% completed on %TRANSACTION_DATE%</Say>
+	<Say voice="woman" language="en">After retrieving your transaction information, please hold for an important message regarding your rights under the consumer protection act</Say>
+	<Gather action="%RESPONSEURL%?action=%ACTION%" numDigits="1">
+
+		{<Say voice="woman" language="en"><!--To hear your transaction information for %FIRST_LAST_NAME%, press %INDEX%--></Say>}
+
+		<Say voice="woman" language="en">To hear a prior period's transaction information, Press 6</Say>
+
+		<Say voice="woman" language="en">To repeat this menu, Press 8</Say>
+
+		<Say voice="woman" language="en">To return to the previous menu, Press 9</Say>
+
+		<Say voice="woman" language="en">To speak with a Customer Service Representative, Press 0</Say>
+	</Gather>
+	<!-- If customer doesn't input anything, prompt and try again. -->
+	<Say voice="woman" language="en">I'm sorry, I didn't get your response.</Say>
+	<Redirect>%RESPONSEURL%?action=loop_prior</Redirect>
+</Response>

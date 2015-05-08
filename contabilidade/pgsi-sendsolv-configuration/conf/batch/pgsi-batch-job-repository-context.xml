@@ -1,0 +1,100 @@
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<bean id="jobLauncher" class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
+		<property name="jobRepository" ref="jobRepository" />
+	</bean>
+
+	<!-- =================================================== -->
+	<!-- NOTE the use of Spring bean profiles.               -->
+	<!-- Make sure you set the correct profile at run time.  -->
+	<!-- =================================================== -->
+	<beans profile="job-repository-in-memory">
+		<bean id="jobRepository" class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean">
+			<property name="transactionManager" ref="jobRepositoryTransactionManager" />
+		</bean>
+
+		<bean id="jobRepositoryTransactionManager" class="org.springframework.batch.support.transaction.ResourcelessTransactionManager" />
+
+	</beans>
+
+	<beans profile="job-repository-oracle">
+		<bean id="jobRepository" class="org.springframework.batch.core.repository.support.JobRepositoryFactoryBean">
+			<property name="databaseType" value="oracle" />
+			<property name="dataSource" ref="qatJobRepositoryDataSource" />
+			<property name="transactionManager" ref="jobRepositoryTransactionManager" />
+		</bean>
+
+		<bean id="qatJobRepositoryDataSource" class="oracle.jdbc.pool.OracleDataSource"
+			destroy-method="close">
+			<property name="URL" value="jdbc:oracle:thin:@localhost:1521:XE" />
+			<property name="user" value="qat" />
+			<property name="password" value="qat" />
+			<property name="implicitCachingEnabled" value="true" />  <!-- Enable Statement Caching. -->
+			<property name="connectionCachingEnabled" value="true" /> <!-- Enable connection pooling. -->
+			<property name="connectionCacheProperties">
+				<value>
+					InitialLimit:3
+					MinLimit:5
+					MaxLimit:10
+					MaxStatementsLimit:100
+					ConnectionWaitTimeout:10
+					InactivityTimeout:180
+					AbandonedConnectionTimeout:30
+					ValidateConnection:true
+				</value>
+			</property>
+		</bean>
+
+		<bean id="jobRepositoryTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+			<property name="dataSource" ref="qatJobRepositoryDataSource" />
+		</bean>
+	</beans>
+
+	<beans profile="job-repository-postgres">
+		<bean id="jobRepository" class="org.springframework.batch.core.repository.support.JobRepositoryFactoryBean">
+			<property name="databaseType" value="postgres" />
+			<property name="dataSource" ref="qatJobRepositoryDataSource" />
+			<property name="transactionManager" ref="jobRepositoryTransactionManager" />
+		</bean>
+		<bean id="qatJobRepositoryDataSource" class="org.postgresql.ds.PGPoolingDataSource" destroy-method="close">
+			<property name="serverName" value="localhost" />
+			<property name="databaseName" value="qatdb" />
+			<property name="portNumber" value="5432" />
+			<property name="user" value="qat" />
+			<property name="password" value="qat" />
+			<property name="initialConnections" value="5" />
+			<property name="maxConnections" value="10" />
+		</bean>
+		<bean id="jobRepositoryTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+			<property name="dataSource" ref="qatJobRepositoryDataSource" />
+		</bean>
+	</beans>
+
+	<beans profile="job-repository-sqlserver">
+		<bean id="jobRepository" class="org.springframework.batch.core.repository.support.JobRepositoryFactoryBean">
+			<property name="databaseType" value="sqlserver" />
+			<property name="dataSource" ref="pgsiJobRepositoryDataSource" />
+			<property name="transactionManager" ref="jobRepositoryTransactionManager" />
+		</bean>
+		<bean id="pgsiJobRepositoryDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+			<property name="driverClassName" value="net.sourceforge.jtds.jdbc.Driver" />
+			<!-- Local -->
+			<property name="url" value="jdbc:jtds:sqlserver://localhost:1433/PGSiBatchJobRepository;user=sa;password=qatsa" />
+			<!-- Development -->
+			<!--  <property name="url" value="jdbc:jtds:sqlserver://localhost:1433/PGSiBatchJobRepository;user=pgsi;password=pgsi" /> -->
+			<!-- Test -->
+			<!--  <property name="url" value="jdbc:jtds:sqlserver://localhost:1433/PGSiBatchJobRepositoryTest;user=pgsi;password=pgsi" /> -->
+		</bean>
+		<bean id="jobRepositoryTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+			<property name="dataSource" ref="pgsiJobRepositoryDataSource" />
+		</bean>
+	</beans>
+
+</beans>

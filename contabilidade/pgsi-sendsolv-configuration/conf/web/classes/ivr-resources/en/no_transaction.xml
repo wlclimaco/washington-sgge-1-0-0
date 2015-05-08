@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+	<Gather action="%RESPONSEURL%?action=%ACTION%" numDigits="1">
+
+		<Say voice="woman" language="en">You have no transactions in the system</Say>
+
+		<Say voice="woman" language="en">To return to the previous menu, Press 9</Say>
+
+		<Say voice="woman" language="en">To speak with a Customer Service Representative, Press 0</Say>
+	</Gather>
+	<!-- If customer doesn't input anything, prompt and try again. -->
+	<Say voice="woman" language="en">I'm sorry, I didn't get your response.</Say>
+	<Redirect>%RESPONSEURL%?action=loop_prior</Redirect>
+</Response>

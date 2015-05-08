@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  - Application context definition for the QAT data access layer.
+  -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:jee="http://www.springframework.org/schema/jee"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
+
+	<bean id="databaseIdProvider" class="org.apache.ibatis.mapping.VendorDatabaseIdProvider">
+		<property name="properties" ref="vendorProperties"/>
+	</bean>
+
+	<bean id="vendorProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="properties">
+			<props>
+				<prop key="SQL Server">SqlServer</prop>
+				<prop key="Oracle">Oracle</prop>
+				<prop key="PostgreSQL">PostgreSQL</prop>
+         		<prop key="MySQL">MySql</prop>
+            	<prop key="DB2">Db2</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- ========================= RESOURCE DEFINITIONS ========================= -->
+	<beans profile="tomcat">
+		<jee:jndi-lookup id="pgsiDataSource" jndi-name="BLDWILLCHANGE"/>
+
+		<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+			<property name="dataSource" ref="pgsiDataSource" />
+		</bean>
+	</beans>
+
+</beans>

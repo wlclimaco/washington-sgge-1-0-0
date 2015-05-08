@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mockito="http://www.mockito.org/spring/mockito"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+					    http://www.mockito.org/spring/mockito http://www.mockito.org/spring/mockito.xsd">
+
+	<bean id="QATAppContext" class="com.qat.framework.util.QATAppContext"/>
+
+	<bean id="payerBranchBAI" class="com.prosperitasglobal.sendsolv.payer.bai.impl.PayerBranchBAIImpl">
+ 		<property name="payerBranchBAC" ref="payerBranchBACTarget"/>
+	</bean>
+
+</beans>

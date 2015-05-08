@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context
+	   		http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/mvc
+			http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- Activates various annotations to be detected in bean classes -->
+	<context:annotation-config />
+
+	<!-- Scans the classpath for annotated components that will be auto-registered
+		as Spring beans. For example @Controller and @Service. Make sure to set the
+		correct base-package -->
+	<context:component-scan base-package="com.prosperitasglobal">
+		<context:include-filter type="aspectj"
+			expression="com.prosperitasglobal.*.controller" />
+	</context:component-scan>
+
+	<!-- Configures the annotation-driven Spring MVC Controller programming
+		model. -->
+	<mvc:annotation-driven>
+		<mvc:async-support default-timeout="1800" />
+	</mvc:annotation-driven>
+
+	<!-- Maps directly to JSP pages -->
+	<mvc:view-controller path="/login" view-name="../login" />
+	<mvc:view-controller path="/" view-name="redirect:/login" />
+
+	<!-- Static Content to bypass dispatcher -->
+	<mvc:resources mapping="/images/**" location="/images/" />
+	<mvc:resources mapping="/audio/**" location="/audio/" />
+	<mvc:resources mapping="/commons/**" location="/commons/" />
+	<mvc:resources mapping="/scripts/**" location="/scripts/" />
+	<mvc:resources mapping="/styles/**" location="/styles/" />
+	<mvc:resources mapping="/fonts/**" location="/fonts/" />
+	<mvc:resources mapping="/thirdparty/**" location="/thirdparty/" />
+
+	<mvc:view-controller path="/organization/dialogDeleteOrganization" view-name="/organization/organization_remove"/>
+	<mvc:view-controller path="/location/dialogDeleteLocation"         view-name="/location/location_remove"/>
+	<mvc:view-controller path="/business/businessDialog" 	           view-name="/business/business_dialog_create"/>
+	<mvc:view-controller path="/organization/organization_create"      view-name="/organization/organization_create"/>
+	<mvc:view-controller path="/contact/contact_create"                view-name="/contact/contact_create"/>
+	<mvc:view-controller path="/document/document_create"         	   view-name="/document/document_create"/>
+	<mvc:view-controller path="/risk/risk_create"         			   view-name="/risk/risk_create"/>
+	<mvc:view-controller path="/employment/employment_create"  		   view-name="/employment/employment_create"/>
+	<mvc:view-controller path="/member/pin/regenerate"		  		   view-name="/member/regenerate_pin"/>
+	<mvc:view-controller path="/member/pin/regenerate/success" 		   view-name="/member/regenerate_pin_success"/>
+	<mvc:view-controller path="/note/note_create"                      view-name="/note/note_create"/>
+	<mvc:view-controller path="/document/dialogDelete"                 view-name="/business/business_remove"/>
+	<mvc:view-controller path="/batch/dialogInsertStatus"              view-name="/payments/batch_status"/>
+	<mvc:view-controller path="/util/errorDialog"                      view-name="/util/response_error"/>
+	<mvc:view-controller path="/util/refreshDialog"                    view-name="/util/update_error"/>
+	<mvc:view-controller path="/batch/updateDateTransactionDialog"     view-name="/payments/date_update_dialog"/>
+
+	<!-- Resolves view names to protected .jsp resources within the /WEB-INF
+		directory -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/pages/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!-- Inject project base packageNames to be scanned for enums -->
+	<bean class="com.prosperitasglobal.cbof.util.EnumDefinitionCollector" id="enumCollector">
+		<property name="packageNameArray">
+			<array value-type="java.lang.String">
+				<value>com.prosperitasglobal.sendsolv</value>
+				<value>com.prosperitasglobal.cbof.model</value>
+			</array>
+		</property>
+	</bean>
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>classpath:locale/messages</value>
+				<value>classpath:pgsi-sendsolv-enumerationmessages</value>
+			</list>
+		</property>
+		<property name="defaultEncoding" value="ISO-8859-1" />
+	</bean>
+
+	<!-- Declare the Resolver -->
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="en" />
+	</bean>
+
+	<bean id="supportedLocales" class="java.lang.String">
+    	<constructor-arg type="String" value="en_US"/>
+    </bean>
+
+	<bean id="uiSettings" class="java.lang.String">
+    	<constructor-arg type="String" value="/WEB-INF/classes/pgsi-sendsolv-system-configuration.properties"/>
+    </bean>
+
+	<!-- Beans for settings -->
+	<bean id="timeZonesJson" class="java.lang.String">
+		<constructor-arg type="String"
+			value="/thirdparty/timezone-js/all_cities.json" />
+	</bean>
+
+	<bean id="mapper" class="org.codehaus.jackson.map.ObjectMapper">
+	</bean>
+
+</beans>

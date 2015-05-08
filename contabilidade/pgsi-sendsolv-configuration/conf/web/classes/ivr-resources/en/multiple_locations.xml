@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+	<Say voice="woman" language="en">Multiple locations have been found for this account. </Say>
+	<Say voice="woman" language="en">Please select the location you want to hear transaction information for.</Say>
+	<Gather action="%RESPONSEURL%?action=%ACTION%" numDigits="1">
+
+		{<Say voice="woman" language="en"><!--For %LOCATION_NAME%, press %INDEX%--></Say>}
+
+		<Say voice="woman" language="en">To repeat this menu, Press 8</Say>
+
+		<Say voice="woman" language="en">To return to the main menu, Press 9</Say>
+
+		<Say voice="woman" language="en">To speak with a Customer Service Representative, Press 0</Say>
+	</Gather>
+	<!-- If customer doesn't input anything, prompt and try again. -->
+	<Say voice="woman" language="en">I'm sorry, I didn't get your response.</Say>
+	<Redirect>%RESPONSEURL%?action=loop_prior</Redirect>
+</Response>
