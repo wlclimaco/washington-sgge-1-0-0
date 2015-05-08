@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>PGSi - ACH Details for Transaction #12345678</title>
+<link href="css/fonts.css" rel="stylesheet" />
+<link href="css/actions.css" rel="stylesheet" />
+<link href="css/security.css" rel="stylesheet" />
+<link href="css/navigation.css" rel="stylesheet" />
+<link href="css/jquery-ui.min.css" rel="stylesheet" />
+<link href="css/jquery-ui.structure.min.css" rel="stylesheet" />
+<link href="css/pgsi-common.css" rel="stylesheet" />
+<script src="jquery/jquery-1.11.0.min.js"></script>
+<script src="jquery/jquery-ui-1.11.0.min.js"></script>
+<script src="jquery/jquery.datatables.min.js"></script>
+<script>
+	$(document).ready(function() {
+
+	});
+</script>
+<style>
+h2, .buttons {
+	margin: 10px;
+}
+
+img {
+	margin-top: 5px;
+}
+
+body {
+	background-color: #ffffff;
+	padding: 24px 16px;
+}
+
+.col-all {
+	display: table;
+}
+
+.col, .col-all .col1, .col-all .col2, .col-all .col3 {
+	float: left;
+	display: table;
+	padding: 8px 32px 8px 0px;
+}
+
+.label {
+	float: left;
+	width: 150px;
+}
+
+.title {
+	font-size: 110%;
+}
+
+.internal-id {
+	font-size: 85%;
+}
+
+.value {
+	float: left;
+	font-weight: bold;
+}
+
+.value ul, .label ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.all {
+	font-weight: bold;
+	width: 100%;
+}
+
+.newline {
+	clear: both;
+}
+
+a.parent.first {
+	float: left;
+	clear: both;
+}
+
+.spacer {
+	margin-top: 8px;
+}
+
+.all.normal, .all.secondary {
+	font-weight: normal;
+}
+
+hr {
+	clear: both;
+	width: 100%;
+	margin: 8px 0;
+}
+
+.col-all {
+	display: table;
+}
+
+.col-title {
+	display: table-cell;
+	vertical-align: top;
+	height: 100%;
+}
+
+h3 {
+	margin-top: 0;
+}
+
+.col-all h3 {
+	display: block;
+	float: left;
+	margin-right: 15px;
+}
+
+.double-spacer {
+	margin-top: 20px;
+}
+
+.col-title {
+	width: 150px;
+}
+
+.content a, .content+a:hover, .content a:active {
+	text-decoration: none;
+	color: #2b4e72;
+}
+
+.content .icon-nav:before {
+	background-color: #42b653;
+	color: white;
+}
+
+.content .icon-nav {
+	background-color: #42b653;
+	padding: 2px;
+	margin-right: 3px;
+	height: 14px;
+	position: relative;
+	bottom: -1px;
+	display: inline-block;
+	position: relative;
+}
+
+a.second {
+	margin-left: 8px;
+}
+
+.ui-button .ui-button-text {
+	color: #FFFFFF;
+}
+
+.transfer .col1 .label {
+	width: 200px;
+	padding-right: 8px;
+}
+
+.col3 .label {
+	width: auto;
+	padding-right: 16px;
+}
+
+.internal .label {
+	width: auto;
+	padding-right: 8px;
+}
+
+.internal .value {
+	width: auto;
+	padding-right: 16px;
+}
+
+.internal a {
+	margin-right: 10px;
+	position: relative;
+	bottom: 10px;
+}
+
+.ui-dialog .ui-dialog-content {
+	padding: 0 16px;
+}
+
+hr.top {
+	margin-top: 0;
+}
+
+hr.last {
+	margin-bottom: 0;
+}
+
+.address-col-1 {
+	float: left;
+}
+
+.address-col-2 {
+	float: left;
+}
+
+form label {
+	display: block;
+	float: left;
+	margin-right: 8px;
+	margin-left: 8px;
+	line-height: 24px;
+}
+
+form input[type=text], input[type=password], form input[type=checkbox],
+	form input[type=radio], form .ui-selectmenu-button, form textarea {
+	display: block;
+	float: left;
+	margin-right: 8px;
+}
+
+textarea {
+	background-color: #f8f8f8;
+	border-color: #cccccc;
+	border-style: solid;
+	border-width: 1px;
+	margin-bottom: 10px;
+	padding: 0 10px;
+}
+
+.width-shortest {
+	width: 90px;
+}
+
+input.width-shortest {
+	width: 60px;
+}
+
+.width-short, label.width-short.first {
+	width: 150px;
+}
+
+.width-medium {
+	width: 220px;
+}
+
+.width-long {
+	width: 280px;
+}
+
+.width-longest {
+	width: 400px;
+}
+
+label.first {
+	width: 140px;
+	clear: both;
+}
+
+.first {
+	clear: both;
+}
+
+.address-col-2 .first {
+	width: 120px;
+}
+
+hr {
+	clear: both;
+	width: 100%;
+	float: left;
+	margin: 16px 0 18px 0;
+}
+
+hr.last {
+	margin-bottom: 0;
+}
+
+a.form-link, a.form-link:hover, a.form-link:active {
+	color: #2b4e72;
+	text-decoration: none;
+	float: left;
+}
+
+a.form-link.first {
+	clear: both;
+	margin: 10px 0 8px 100px;
+}
+
+.form-link .icon-nav, .remembered-location .icon-nav {
+	padding: 3px 3px 0 3px;
+	position: relative;
+	bottom: -1px;
+	color: #ffffff;
+	background-color: #42b653;
+	font-size: 12px;
+	margin-right: 3px;
+}
+
+.parent {
+	font-weight: bold;
+	color: #2b4e72;
+}
+
+.divider {
+	bottom: 8px;
+	font-size: 24px;
+	margin: 0 16px 0 12px;
+	position: relative;
+}
+
+.comment {
+	color: #666666;
+	font-style: italic;
+	padding-left: 24px;
+}
+
+.icon-nav.bullet, .icon-nav.bullet:before {
+	background: transparent;
+	color: #2b4e72;
+}
+
+.box {
+	border: 1px solid #cccccc;
+	background-color: #f8f8f8;
+	width: 100%;
+	display: table;
+}
+
+.box .col-all {
+	padding: 10px;
+}
+
+.box h4 {
+	margin: 0 0 8px 0;
+}
+
+.col-all h3 {
+	margin-bottom: 0;
+}
+</style>
+</head>
+<body>
+	<div class="col-all transfer">
+		<div class="col1 newline">
+			<h3 style="margin-top: 0">General Info</h3>
+			<div class="newline label">Confirmation #</div>
+			<div class="value">#1234567890</div>
+			<div class="newline label">Request Sent</div>
+			<div class="value">12/12/2014 2:54am</div>
+			<div class="newline label">Request Status</div>
+			<div class="value">Order Rejected by ACH Provider</div>
+		</div>
+		<div>
+			<div class="col1">
+				<h3>Exception Details</h3>
+				<div class="newline label">Error Type</div>
+				<div class="value">ACH Data Error</div>
+				<div class="newline label">Error Details</div>
+				<div class="value">ACH Provider rejected request</div>
+				<div class="newline label">Error Message</div>
+				<div class="value">[SALE-9024] TRANS NOT ACCEP: INVALID
+					ACCOUNT NUMBER</div>
+
+			</div>
+		</div>
+	</div>
+
+	<hr>
+	<h3>Request Data</h3>
+	<div class="box">
+		<div class="col-all">
+			<div class="col1 first">
+				<h4>Sender</h4>
+				<div class="newline label">Sender First Name</div>
+				<div class="value">Maria</div>
+				<div class="newline label">Sender Middle Name</div>
+				<div class="value"></div>
+				<div class="newline label">Sender Last Name</div>
+				<div class="value">Orlando</div>
+				<div class="newline label">Sender Mother's Maiden Name</div>
+				<div class="value">Garcia</div>
+				<div class="newline label">Sender Address</div>
+				<div class="value ">12345 Main St</div>
+				<div class="newline label">Sender City</div>
+				<div class="value">Omaha</div>
+				<div class="newline label">Sender State/Province</div>
+				<div class="value">NE</div>
+				<div class="newline label">Sender Postal Code</div>
+				<div class="value">68111</div>
+				<div class="newline label">Sender Country</div>
+				<div class="value">USA</div>
+				<div class="newline label">Sender Phone</div>
+				<div class="value">+1 4027776666</div>
+			</div>
+			<div class="col1 ">
+				<h4>Recipient</h4>
+				<div class="newline label">Recipient First Name</div>
+				<div class="value ">Mario</div>
+				<div class="newline label">Recipient Middle Name</div>
+				<div class="value"></div>
+				<div class="newline label">Recipient Last Name</div>
+				<div class="value">Ortega</div>
+				<div class="newline label">Recipient Mother's Maiden Name</div>
+				<div class="value">Fernandez</div>
+				<div class="newline label">Recipient Address</div>
+				<div class="value ">Camino Los Abuelos 12345 Col. Atlatilco</div>
+				<div class="newline label">Recipient City</div>
+				<div class="value">Mexico</div>
+				<div class="newline label">Recipient State/Province</div>
+				<div class="value">D.F.</div>
+				<div class="newline label">Recipient Postal Code</div>
+				<div class="value">68111</div>
+				<div class="newline label">Recipient Country</div>
+				<div class="value">Mexico</div>
+				<div class="newline label">Recipient Phone</div>
+				<div class="value">+1 4027776666</div>
+			</div>
+			<div class="col1">
+				<h4>Transfer Details</h4>
+				<div class="newline label">Total Amount (USD)</div>
+				<div class="value ">250.00</div>
+				<div class="newline label">Fee (USD)</div>
+				<div class="value">5.99</div>
+				<div class="newline label">Transfer Amount (USD)</div>
+				<div class="value">244.01</div>
+				<div class="newline label">Destination Currency</div>
+				<div class="value">MXN</div>
+				<div class="newline label">Effective Exchange Rate</div>
+				<div class="value">12.3111%</div>
+				<div class="newline label">Transfer Amount (Dest. Currency)</div>
+				<div class="value">431.78</div>
+				<div class="newline label">Destination Country</div>
+				<div class="value ">Mexico</div>
+				<div class="newline label">Payer</div>
+				<div class="value">Bank of Mexico</div>
+				<div class="newline label">Transaction Method</div>
+				<div class="value">In Account</div>
+				<div class="newline label">Account Number</div>
+				<div class="value">1234567899</div>
+
+				<div class="newline label">Sender Payment Type Code</div>
+				<div class="value">ACC</div>
+			</div>
+
+			<div class="col1">
+				<h4>PGSi Internal</h4>
+				<div class="newline label">Agent Order Number</div>
+				<div class="value ">???</div>
+				<div class="newline label">Agent Region</div>
+				<div class="value">NEBRASKA</div>
+				<div class="newline label">Agent Branch</div>
+				<div class="value">OMAHA</div>
+				<div class="newline label">Agent State</div>
+				<div class="value">NE</div>
+				<div class="newline label">Agent Country</div>
+				<div class="value">USA</div>
+				<div class="newline label">Agent User Name</div>
+				<div class="value">GPWSPROSPERITAS</div>
+				<div class="newline label">Agent Terminal</div>
+				<div class="value">1</div>
+				<div class="newline label">Agent Date</div>
+				<div class="value ">12/12/2014</div>
+				<div class="newline label">Agent Time</div>
+				<div class="value">8:00 am</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

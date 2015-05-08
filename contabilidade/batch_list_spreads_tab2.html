@@ -1,0 +1,222 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>PGSi Batches</title>
+<link href="css/fonts.css" rel="stylesheet" />
+<link href="css/security.css" rel="stylesheet" />
+<link href="css/navigation.css" rel="stylesheet" />
+<link href="css/jquery-ui.min.css" rel="stylesheet" />
+<link href="css/jquery-ui.structure.min.css" rel="stylesheet" />
+<link href="css/pgsi-common.css" rel="stylesheet" />
+<script src="jquery/jquery-1.11.0.min.js"></script>
+<script src="jquery/jquery-ui-1.11.0.min.js"></script>
+<script src="jquery/jquery.datatables.min.js"></script>
+<script>
+	$(document)
+			.ready(
+					function() {
+
+						//http://datatables.net/reference/option/language
+						$('#data_list')
+								.dataTable(
+										{
+											dom : '<"list_header"ipl><t><"list_footer"ipl>',
+											paging : true,
+											pagingType : "full",
+											iDisplayLength : 25,
+											language : {
+												paginate : {
+													first : "a",
+													last : "b",
+													next : "g",
+													previous : "f"
+												},
+												lengthMenu : "_MENU_ records per page",
+												loadingRecords : "Loading...",
+												processing : "Processing...",
+												zeroRecords : "No matching records found",
+												info : "Showing _START_ to _END_ of _TOTAL_ matching records."
+											},
+											drawCallback : function(settings) {
+												$(".dataTables_length select")
+														.outerWidth(60)
+														.selectmenu();
+												$("#data_list .name a")
+														.parent("td")
+														.hover(
+																function() {
+																	$(this)
+																			.append(
+																					'<a href="batch_view_errors.html" title="Review Batch #[Batch Number]"><span class="icon-nav icon-pencil"></span></a>'
+																							+ '<a href="#" title="Cancel Batch #[Batch Number]"><span class="icon-nav icon-minus-circle"></span></a>');
+																},
+																function() {
+																	$(this)
+																			.find(
+																					'.icon-nav, .icon-security')
+																			.remove();
+																});
+
+												$("#data_list .name a")
+														.click(
+																function(e) {
+																	e
+																			.preventDefault();
+																	$(
+																			"#payer-details")
+																			.attr(
+																					"src",
+																					"batch_payer_spread2.html");
+																	$("tr")
+																			.removeClass(
+																					"selected");
+
+																	$(this)
+																			.closest(
+																					"tr")
+																			.addClass(
+																					"selected");
+																});
+												if ($("#link-fund").length == 0) {
+													$(".list_header")
+															.prepend(
+																	'<a href="#" id="link-fund" class="btn">Approve Spreads for Selected Batches</a>');
+												}
+												if ($("#link-fund2").length == 0) {
+													$(".list_footer")
+															.prepend(
+																	'<a href="#" id="link-fund2" class="btn">Approve Spreads for Selected Batches</a>');
+												}
+											}
+										});
+						$(".filter select").selectmenu();
+						$("input[type=submit],input[type=reset]").button();
+						$('#data_list input[type=checkbox]').change(function() {
+							if (this.checked) {
+								$(this).closest("tr").addClass('selected');
+							} else {
+								$(this).closest("tr").removeClass('selected');
+							}
+						});
+
+						$('.btn').button();
+						$("#link-fund, #link-fund2").click(function(e) {
+							e.preventDefault();
+							top.location.href = "fund_payer_list.html";
+						})
+					});
+</script>
+<style>
+.second_org {
+	padding-top: 8px;
+}
+
+.data #data_list .icon-sort {
+	display: none;
+}
+
+#data_list_wrapper {
+	margin-left: 0;
+	margin-right: 8px;
+}
+
+.filter {
+	width: 100%;
+	background-color: #ffffff;
+	border-left: 2px solid black;
+}
+
+#link-fund, #link-fund2 {
+	float: left;
+	margin-right: 16px;
+	margin-bottom: 8px;
+}
+
+.name {
+	font-weight: bold;
+}
+
+hr {
+	width: 100%;
+}
+
+hr.top {
+	margin-top: 0;
+}
+
+hr.last {
+	margin-bottom: 0;
+}
+
+.est {
+	font-style: italic;
+	color: #999999;
+}
+</style>
+</head>
+<body>
+	<div class="content list">
+		<div class="data">
+			<table id="data_list">
+				<thead>
+					<tr>
+						<!--<th><input type="checkbox"></input></th> -->
+						<th><input type="checkbox"><span class="icon-sort"></span></th>
+						<th>ID<span class="icon-sort"></span></th>
+						<th>Location <span class="icon-sort"></span></th>
+						<th>City<span class="icon-sort"></span></th>
+						<th>State<span class="icon-sort"></span></th>
+						<th>Country<span class="icon-sort"></span></th>
+						<th>Amount (USD)<span class="icon-sort"></span></th>
+						<th class="est">Transfer (est)<span class="icon-sort"></span></th>
+					</tr>
+				</thead>
+				<tbody>
+					<script>
+						for (var i = 0; i < 50; i++) {
+
+							if (i % 20 < 13) {
+								document.write('<tr class="spread fund">');
+								document
+										.write('<td class="check"><input type="checkbox"></td>')
+								document
+										.write('<td class="name appr"><a href="#" class="main" title="Review Batch #[Batch Number]">'
+												+ (123 + i) + '</a></td>');
+								document
+										.write('<td><a href="#">Location '
+												+ i
+												+ '</a> (<a href="#">ABC Corp</a>)</td>');
+								document.write('<td>City</td>');
+								document.write('<td>State</td>');
+								document.write('<td>USA</td>');
+								document.write('<td>15,000.00</td>');
+								document
+										.write('<td class="est">11/06/2014</td>');
+							} else {
+								//skip
+							}
+							document.write('</tr>');
+						}
+					</script>
+
+				</tbody>
+			</table>
+		</div>
+		<div class="filter">
+			<!-- Under the penalty of DEATH - Do NOT user iframes like this in the real product! -->
+			<iframe src="batch_payer_spread2.html" frameBorder="0" scrolling="no"
+				id="payer-details" width="700px" height="900px"></iframe>
+		</div>
+		<div id="dialog-spreads" title="Review Batch Spreads"
+			style="display: none;">
+			<form>
+				<hr class="top">
+				<!-- Under the penalty of DEATH - Do NOT user iframes like this in the real product! -->
+				<iframe src="batch_payer_spread.html" frameBorder="0" scrolling="no"
+					width="900px" height="700px"></iframe>
+				<hr class="last">
+			</form>
+		</div>
+</body>
+</html>

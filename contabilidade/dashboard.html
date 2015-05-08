@@ -1,0 +1,365 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>PGSi Dashboard</title>
+<link href="css/fonts.css" rel="stylesheet" />
+<link href="css/actions.css" rel="stylesheet" />
+<link href="css/security.css" rel="stylesheet" />
+<link href="css/navigation.css" rel="stylesheet" />
+<link href="css/jquery-ui.min.css" rel="stylesheet" />
+<link href="css/jquery-ui.structure.min.css" rel="stylesheet" />
+<link href="css/pgsi-common.css" rel="stylesheet" />
+<script src="jquery/jquery-1.11.0.min.js"></script>
+<script src="jquery/jquery-ui-1.11.0.min.js"></script>
+<script src="jquery/jquery.datatables.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$(".primary-dash .menu").click(function(e) {
+			if (!$(this).hasClass("disabled")) {
+				$(".col").hide();
+				$(".menu").removeClass("menu-active");
+				$("." + $(this).addClass("menu-active").attr("id")).show();
+			} else {
+				alert("Functionality coming soon.")
+			}
+		});
+
+		$("select").selectmenu();
+		$("#search-options-button").attr("placeholder", "Search");
+	});
+</script>
+<style>
+html, body {
+	height: 100%;
+	width: 100%;
+}
+
+.primary-dash {
+	width: 126px;
+	background-color: #2b4e72;
+	display: table-cell;
+	padding: 0;
+	vertical-align: top;
+}
+
+.primary-dash ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	width: 126px;
+}
+
+.primary-dash li {
+	display: block;
+	width: 100%;
+	color: #ffffff;
+	font-weight: bold;
+	padding: 10px 18px;
+}
+
+.primary-dash li.menu {
+	cursor: pointer;
+}
+
+.primary-dash li:hover, .primary-dash .menu-active {
+	background-color: #1b3147;
+}
+
+.primary-dash li.menu.disabled {
+	cursor: default;
+	color: #aaaaaa;
+	background-color: #2b4e72;
+}
+
+.content {
+	min-width: 800px;
+	width: 100%;
+	heigth: 100%;
+	background-color: #2b4e72;
+	display: table-cell;
+	border: none;
+	border-left: 2px solid #cccccc;
+}
+
+.dashboard {
+	width: 100;
+	height: 80%;
+	padding: 10px;
+	display: table;
+}
+
+.col {
+	float: left;
+	margin: 2% 5%;
+	overflow: visible;
+	width: 15%;
+	overflow: visible;
+}
+
+.content ul {
+	background-repeat: no-repeat;
+	background-position: left top;
+	padding: 10px 0 0 0;
+	list-style: none;
+}
+
+ul a {
+	color: white;
+	font-weight: bold;
+	text-decoration: none;
+	line-height: 25px;
+}
+
+ul a .icon-nav, ul a .icon-action, ul a .icon-security {
+	margin-right: 4px;
+	position: relative;
+	bottom: -2px;
+}
+
+.content ul a:hover .icon-nav, .content ul a:hover .icon-nav:before {
+	background-color: transparent;
+}
+
+.primary-dash li.search_box {
+	padding-left: 12px;
+}
+
+#search-input {
+	width: 55px;
+}
+
+#search-submit {
+	padding: 3px 2px 2px 1px;
+	background-color: #eeeeee;
+	color: #cccccc;
+	font-size: 14px;
+	text-decoration: none;
+	cursor: pointer;
+	border: none;
+	font-size: 14px;
+	border: 1px solid #ccc;
+	position: relative;
+	bottom: -2px;
+}
+
+li.search_box {
+	padding-top: 100px;
+}
+
+li.search_box:hover {
+	background-color: transparent;
+}
+
+#search-options-button {
+	position: relative;
+	bottom: -15px;
+}
+
+#search-options-button .ui-selectmenu-text {
+	color: #333333;
+	font-weight: normal;
+}
+
+.developers, .developers h2 {
+	color: #ffffff;
+}
+
+.col.developers {
+	width: 100%;
+}
+
+.alert {
+	color: red;
+	text-transform: uppercase;
+	font-weight: bold;
+	background-color: white;
+}
+</style>
+</head>
+<body>
+	<header>
+		<ul>
+			<li>Welcome&nbsp;&nbsp;<span class="emphasis">John Demo</span></li>
+			<li class="disabled"><a class="account_link" href="#"
+				title="Coming soon - Account"><span class="icon-user icon-nav"></span>Account</a></li>
+			<li class="disabled"><a class="help_link" href="#"
+				title="Coming soon - Help"><span class="icon-question icon-nav"></span>Help</a></li>
+			<li><a class="signout_link" href="login.html" title="Sign out"><span
+					class="icon-unlock icon-nav"></span>Sign Out</a></li>
+		</ul>
+	</header>
+	<div class="dashboard">
+		<nav class="primary-dash">
+			<ul class="main-menu">
+				<li id="customers" class="menu-active menu">Customers</li>
+				<li id="members" class="menu">Members</li>
+				<li id="payments" class="menu">Payments</li>
+				<li id="compliance" class="menu">Compliance</li>
+				<li id="rates" class="menu">Pricing</li>
+				<li id="analytics" class="menu disabled">Analytics</li>
+				<li id="users" class="menu disabled">Users</li>
+				<li id="system" class="menu disabled">System</li>
+				<li id="developers" class="menu">Developers</li>
+			</ul>
+		</nav>
+
+		<div class="content">
+			<div class="col  customers">
+				<a href="organization_list.html" title="Organizations"><img
+					class="dashboard-img" src="images/dashboard-org.png" /></a>
+				<ul>
+					<li><a href="organization_list.html" title="Find Organization"><span
+							class="icon-nav icon-search-find"></span>Find Organization</a></li>
+					<li><a href="organization_add.html"
+						title="Add New Organization"><span class="icon-nav icon-plus"></span>Add
+							New Organization</a></li>
+				</ul>
+			</div>
+			<div class="col customers">
+				<a href="location_list.html" title="Locations"><img
+					class="dashboard-img" src="images/dashboard-loc.png" /></a>
+				<ul>
+					<li><a href="location_list.html" title="Find Location"><span
+							class="icon-nav icon-search-find"></span>Find Location</a></li>
+					<li><a href="location_add.html" title="Add New Location"><span
+							class="icon-nav icon-plus"></span>Add New Locations</a></li>
+				</ul>
+			</div>
+			<div class="col members" style="display: none">
+				<a href="member_list.html" title="Members"><img
+					class="dashboard-img" src="images/dashboard-member.png" /></a>
+				<ul>
+					<li><a href="member_list.html" title="Find Member"><span
+							class="icon-nav icon-search-find"></span>Find Member</a></li>
+					<li><a href="member_add_main.html" title="Add New Member"><span
+							class="icon-nav icon-plus"></span>Add New Member</a></li>
+				</ul>
+			</div>
+
+			<div class="col members" style="display: none">
+				<a href="recipient_list.html" title="Recipients"><img
+					class="dashboard-img" src="images/dashboard-recipient.png" /></a>
+				<ul>
+					<li><a href="recipient_list.html" title="Find Recipient"><span
+							class="icon-nav icon-search-find"></span>Find Recipient</a></li>
+				</ul>
+			</div>
+
+			<div class="col rates" style="display: none">
+				<a href="profile_list.html"><img class="dashboard-img"
+					src="images/dashboard-pricing.png"></img></a>
+				<ul>
+					<li><a href="profile_list.html" title="Find Pricing Profile"><span
+							class="icon-nav icon-search-find"></span>Find Pricing Profile</a></li>
+					<!-- 					<li><a href="profile_add.html" title="Add New Pricing Profile"><span -->
+					<!-- 							class="icon-nav icon-plus"></span>Add New Pricing Profile</a></li> -->
+				</ul>
+			</div>
+
+			<div class="col payments" style="display: none">
+				<a href="batch_list.html"><img class="dashboard-img"
+					src="images/dashboard-batches.png"></img></a>
+				<ul>
+					<li><a href="batch_list.html" title="Batches"><span
+							class="icon-action icon-bank-notes"></span>Batches</a></li>
+				</ul>
+			</div>
+
+			<div class="col payments" style="display: none">
+				<a href="transaction_list.html"><img class="dashboard-img"
+					src="images/dashboard-transactions.png"></img></a>
+				<ul>
+					<li><a href="transaction_list.html" title="Find Transaction"><span
+							class="icon-nav icon-search-find"></span>Find Transaction</a></li>
+<!-- 					<li><a href="transaction_add.html" title="Add New Transaction"><span -->
+<!-- 							class="icon-nav icon-plus"></span>Add New Transaction</a></li> -->
+				</ul>
+			</div>
+			<div class="col payments" style="display: none">
+				<a href="funding_list.html"><img class="dashboard-img"
+					src="images/dashboard-currency.png"></img></a>
+				<ul>
+					<li><a href="funding_list.html"
+						title="Review Upcoming Pay Dates"><span
+							class="icon-action icon-dollar"></span>Payer Funding</a></li>
+				</ul>
+			</div>
+			<div class="col payments" style="display: none">
+				<a href="paycycle_list.html"><img class="dashboard-img"
+					src="images/dashboard-schedule.png"></img></a>
+				<ul>
+					<li><a href="paycycle_list.html"
+						title="Review Upcoming Pay Dates"><span
+							class="icon-action icon-calendar-1"></span>Upcoming Pay Dates</a></li>
+					<!-- 					<li><a href="payment_overview.html" title="Purchase Currency"><span -->
+					<!-- 							class="icon-action icon-globe-world"></span>Purchase Currency</a></li> -->
+				</ul>
+			</div>
+
+			<div class="col compliance" style="display: none">
+				<a href="compliance_overview.html"><img class="dashboard-img"
+					src="images/dashboard-compliance.png"></img></a>
+				<ul>
+					<li><a href="sdn_list.html" title="SDN Matches"><span
+							class="icon-security icon-shield82"></span>SDN Matches</a></li>
+					<li><a href="sar_list.html" title="SAR Reports"><span
+							class="icon-security icon-eye-1"></span>SAR Reports</a></li>
+<!-- 					<li><a href="compliance_analytics_list.html" -->
+<!-- 						title="Compliance Analytics"><span -->
+<!-- 							class="icon-action icon-chart-line"></span>Compliance Analytics</a></li> -->
+				</ul>
+			</div>
+
+
+			<div class="col developers" style="display: none">
+				<span class="alert">Do not implement the Developers section.
+					This is for information only.</span>
+				<h2>Reference Docs</h2>
+				<ul>
+					<li><a href="reference_form.html" target="_blank"><span
+							class="icon-nav icon-caret-right"></span>Reference Form</a></li>
+					<li><a href="reference/SendSolv_Design_Guide.html"
+						target="_blank"><span class="icon-nav icon-caret-right"></span>Style
+							Details (Karie's doc)</a></li>
+					<li><a href="reference\actionFont\icons-reference.html"
+						target="_blank"><span class="icon-nav icon-caret-right"></span>Action
+							Font Reference</a></li>
+					<li><a href="reference\navFont\icons-reference.html"
+						target="_blank"><span class="icon-nav icon-caret-right"></span>Navigation
+							Font Reference</a></li>
+					<li><a href="reference\MemberCards.docx" target="_blank"><span
+							class="icon-nav icon-caret-right"></span>Member Cards (Word)</a></li>
+					<li><a href="reference\RecipientCards.docx" target="_blank"><span
+							class="icon-nav icon-caret-right"></span>Recipient Cards (Word)</a></li>
+					<li><a href="reference\MemberRecipientScreens.docx"
+						target="_blank"><span class="icon-nav icon-caret-right"></span>General
+							info about Member and Recipient Views (Word)</a></li>
+					<li><a
+						href="reference\PayrollCycleWordingforPayPreparation.docx"
+						target="_blank"><span class="icon-nav icon-caret-right"></span>Wording
+							Details for Payroll Cycle Tabs</a></li>
+					<li><a href="reference\StatusStyles.docx" target="_blank"><span
+							class="icon-nav icon-caret-right"></span>Styles, Icons and Labels
+							for showing SDN, Risk, PEP and SAR statuses in views and lists</a></li>
+					<li><a href="reference\TransferSettings.docx" target="_blank"><span
+							class="icon-nav icon-caret-right"></span>Add/Edit Transfer Dialog
+							Flow Behavior</a></li>
+				</ul>
+				<h2>Table Notes</h2>
+				<p>The actual filter criteria for each list filter are still TBD</p>
+				<p>Click the "Apply" button in the Location Tab of the
+					Organization View page to see an example of a list page too short
+					for pagination and an empty list.</p>
+				<h2>Reference Form Notes</h2>
+				<p>Hover over form field with error to see error message.</p>
+			</div>
+		</div>
+	</div>
+	<footer>
+		<div class="left">&copy; 2014 Prosperitas Global Solutions, Inc.
+			All Rights Reserved.</div>
+		<div class="right">Version 1.00.00 Build 00000</div>
+	</footer>
+</body>
+</html>

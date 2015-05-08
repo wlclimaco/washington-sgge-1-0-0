@@ -1,0 +1,1449 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>PGSi - View Pricing Profile</title>
+<link href="css/fonts.css" rel="stylesheet" />
+<link href="css/actions.css" rel="stylesheet" />
+<link href="css/security.css" rel="stylesheet" />
+<link href="css/navigation.css" rel="stylesheet" />
+<link href="css/jquery-ui.min.css" rel="stylesheet" />
+<link href="css/jquery-ui.structure.min.css" rel="stylesheet" />
+<link href="css/pgsi-common.css" rel="stylesheet" />
+
+<script src="jquery/jquery-1.11.0.min.js"></script>
+<script src="jquery/jquery-ui-1.11.0.min.js"></script>
+<script src="jquery/jquery.datatables.min.js"></script>
+<style>
+h2 {
+	margin-left: 20px;
+	margin-bottom: 0px;
+	margin-top: 10px;
+}
+
+.container h3 {
+	float: left;
+	margin-top: 0;
+}
+
+.container {
+	width: 95%;
+	padding: 10px;
+}
+
+.content {
+	min-width: 1000px;
+	position: relative;
+	padding: 26px 16px 16px 16px;
+	display: table;
+}
+
+.label, label {
+	display: block;
+	float: left;
+	margin-right: 8px;
+	line-height: 24px;
+}
+
+.first {
+	clear: both;
+}
+
+form input[type=text], form input[type=checkbox], form .ui-selectmenu-button,
+	form textarea {
+	display: block;
+	float: left;
+	margin-right: 8px;
+}
+
+textarea {
+	background-color: #f8f8f8;
+	border-color: #cccccc;
+	border-style: solid;
+	border-width: 1px;
+	margin-bottom: 10px;
+	padding: 0 10px;
+}
+
+.width-shortest {
+	width: 90px;
+}
+
+input.width-shortest {
+	width: 60px;
+}
+
+.width-short, label.width-short.first {
+	width: 100px;
+}
+
+.width-medium {
+	width: 220px;
+}
+
+.width-long {
+	width: 280px;
+}
+
+.width-longest {
+	width: 400px;
+}
+
+hr {
+	clear: both;
+	width: 100%;
+	float: left;
+	margin: 16px 0 18px 0;
+}
+
+.close-button-form {
+	clear: both;
+}
+
+.buttons-form {
+	float: left;
+	text-align: center;
+	width: 100%;
+}
+
+.lower {
+	position: relative;
+	bottom: -2px;
+}
+
+.pricings {
+	width: 100%;
+	display: table;
+}
+
+.info .form-link {
+	margin-left: 8px;
+}
+
+.pricing {
+	float: left;
+	border: 1px solid #cccccc;
+	margin: 10px 10px 0 0;
+	background-color: #f8f8f8;
+	width: 600px;
+}
+
+.pricing-content {
+	display: table;
+	width: 100%;
+}
+
+.payers {
+	display: table-cell;
+	clear: both;
+	padding: 10px;
+	vertical-align: top;
+	text-align: left;
+}
+
+.payers .header {
+	font-weight: bold;
+}
+
+.fees {
+	display: table-cell;
+	padding: 10px 0px 10px 10px;
+	vertical-align: top;
+	min-width: 300px;
+}
+
+td, th {
+	padding: 2px 4px;
+	border: 1px solid #cccccc;
+	text-align: center;
+}
+
+.cell {
+	background-color: #ffffff;
+}
+
+#add-pricing-dialog td.cell, #edit-pricing-dialog td.cell {
+	padding: 0;
+}
+
+#add-pricing-dialog td.cell input[type=text], #edit-pricing-dialog td.cell input[type=text]
+	{
+	margin: 0;
+	border: none;
+}
+
+#add-pricing-dialog  input[type=checkbox], #add-pricing-dialog .col1 label,
+	#edit-pricing-dialog  input[type=checkbox], #edit-pricing-dialog .col1 label
+	{
+	float: left;
+	font-size: 11px;
+	line-height: 18px;
+}
+
+#add-pricing-dialog th.none, #edit-pricing-dialog th.none {
+	border: none;
+}
+
+#add-pricing-dialog .col1, #edit-pricing-dialog .col1 {
+	float: left;
+	width: 25%;
+}
+
+.fees .none {
+	border-top: none;
+	border-left: none;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+.heading {
+	font-weight: bold;
+}
+
+.pricing-title {
+	float: left;
+	font-weight: bold;
+	font-size: 16px;
+	color: #2b4e72;
+	padding: 5px 8px;
+}
+
+.form-link .icon-nav, .remembered-location .icon-nav {
+	padding: 3px 3px 0 3px;
+	position: relative;
+	bottom: -1px;
+	color: #ffffff;
+	background-color: #42b653;
+	font-size: 12px;
+	margin-right: 3px;
+}
+
+a.form-link, a.form-link:hover, a.form-link:active {
+	color: #2b4e72;
+	text-decoration: none;
+	float: left;
+}
+
+#add_pricing_link {
+	margin-left: 8px;
+}
+
+.pricing .form-link {
+	margin: 6px 0 0 8px;
+}
+
+.parent {
+	color: #2b4e72;
+	font-weight: bold;
+	float: left;
+	font-size: 16px;
+}
+
+.pricing-header {
+	width: 100%;
+	border-bottom: 1px solid #cccccc;
+	display: table;
+}
+
+.payers .default {
+	width: 200px;
+}
+
+.payer-list {
+	float: left;
+	clear: both;
+	overflow: auto;
+	height: 275px;
+	width: 100%;
+	border: 1px solid #cccccc;
+}
+
+.policy-form {
+	margin-left: 150px;
+}
+
+#add-row-link {
+	margin: 8px 0 0 150px;
+}
+
+.check-wrapper.checked {
+	background-color: #aad044;
+	float: left;
+}
+</style>
+<script>
+	$(document).ready(function() {
+		$('nav.primary .sub-menu').hide();
+		$('nav.primary li').hover(function() {
+			var that = this;
+			$(this).addClass("menu-hover").find(".sub-menu").show().position({
+				my : "left top",
+				at : "left bottom",
+				of : that,
+				collision : "fit"
+			}).find("li").hover(function() {
+				$(this).addClass("menu-hover")
+			}, function() {
+				//$(this).removeClass("menu-hover")
+			});
+		}, function() {
+			$(this).removeClass("menu-hover").find(".sub-menu").hide();
+		});
+
+		$(".btn").button();
+		$(".date").datepicker();
+		$("#save-button").click(function(e) {
+			e.preventDefault();
+			top.location.href = "profile_view.html"
+		});
+		$("#add_pricing_link").click(function(e) {
+			e.preventDefault();
+			var close = function() {
+				$("#add-pricing-dialog").dialog('close');
+			}
+			$("#add-pricing-dialog").dialog({
+				modal : true,
+				open : function(event, ui) {
+
+				},
+				buttons : {
+					"Cancel" : close,
+					"Save" : close
+				},
+				width : 970
+			});
+		});
+		$("#edit_pricing1").click(function(e) {
+			e.preventDefault();
+			var close = function() {
+				$("#edit-pricing-dialog").dialog('close');
+			}
+			$("#edit-pricing-dialog").dialog({
+				modal : true,
+				open : function(event, ui) {
+
+				},
+				buttons : {
+					"Cancel" : close,
+					"Save" : close
+				},
+				width : 970
+			});
+		});
+	});
+</script>
+</head>
+<body>
+	<header>
+		<ul>
+			<li>Welcome&nbsp;&nbsp;<span class="emphasis">John Demo</span></li>
+			<li><a class="account_link" href="#" title="Account"><span
+					class="icon-user icon-nav"></span>Account</a></li>
+			<li><a class="help_link" href="#" title="Help"><span
+					class="icon-question icon-nav"></span>Help</a></li>
+			<li><a class="signout_link" href="login.html" title="Sign out"><span
+					class="icon-unlock icon-nav"></span>Sign Out</a></li>
+		</ul>
+	</header>
+	<nav class="primary">
+		<ul class="main-menu">
+			<li class="menu-home"><a href="dashboard.html"
+				class="icon-home icon-nav" title="Home"></a></li>
+			<li><a href="organization_list.html"
+				title="Organizations and Locations" data-title="Customers">Customers</a>
+				<ul class="sub-menu">
+					<li><a href="organization_add.html" title="Add Organization"
+						data-title="Add Organization">Add Organization</a></li>
+					<li><a href="organization_list.html"
+						data-title="Find Organization" title="Find Organization">Find
+							Organization</a></li>
+					<li><a href="location_add.html" title="Add Location"
+						data-title="Add Location">Add Location</a></li>
+					<li><a href="location_list.html" title="Find Location"
+						data-title="Find Location">Find Location</a></li>
+				</ul></li>
+			<li><a href="member_list.html" class=""
+				title="Members and Recipients" data-title="Members">Members</a>
+				<ul class="sub-menu">
+					<li><a href="member_add_main.html" title="Add Member"
+						data-title="Add Member">Add Member</a></li>
+					<li><a href="member_list.html" data-title="Find Member"
+						title="Find Member">Find Member</a></li>
+					<li><a href="recipient_list.html" title="Find Recipient"
+						data-title="Find Recipient">Find Recipient</a></li>
+				</ul></li>
+			<li><a href="payment_overview.html" class=""
+				title="Payments" data-title="Payments">Payments</a>
+				<ul class="sub-menu">
+					<li><a href="batch_list.html" data-title="Batches"
+						title="Batches">Batches</a></li>
+					<li><a href="transaction_list.html"
+						data-title="Find Transaction" title="Find Transaction">Find
+							Transaction</a></li>
+					<!--<li><a href="transaction_add.html" data-title="Batches"-->
+						<!--title="Batches">Add New Transaction</a></li>-->
+					<li><a href="funding_list.html" title="Payer Funding"
+						data-title="Payer Funding">Payer Funding</a></li>
+					<li><a href="paycycle_list.html" title="Upcoming Pay Dates"
+						data-title="Upcoming Pay Dates">Upcoming Pay Dates</a></li>
+					<!--<li><a href="currency_purchase.html" title="Purchase Currency"-->
+					<!--data-title="Purchase Currency">Purchase Currency</a></li>-->
+				</ul></li>
+			<li><a href="compliance_overview.html"
+				class="" title="Compliance Monitoring and Reporting"
+				data-title="Compliance">Compliance</a>
+				<ul class="sub-menu">
+					<li><a href="sdn_list.html" title="SDN Matches"
+						data-title="SDN Matches">SDN Matches</a></li>
+					<li><a href="sar_list.html" data-title="SAR Reports"
+						title="SAR Reports">SAR Reports</a></li>
+					<!-- 					<li><a href="compliance_analytics_list.html" -->
+					<!-- 						title="Compliance -->
+					<!-- 							Analytics" -->
+					<!-- 						data-title="Compliance -->
+					<!-- 							Analytics">Compliance Analytics</a></li> -->
+				</ul></li>
+			<li class="menu-active"><a href="profile_list.html" class=""
+				title="Pricing" data-title="Pricing">Pricing</a>
+				<ul class="sub-menu">
+					<li><a href="profile_list.html" title="Find Pricing Profile">Find
+							Pricing Profile</a></li>
+					<li><a href="profile_add.html" title="Add New Pricing Profile">Add
+							New Pricing Profile</a></li>
+				</ul></li>
+			<li class="disabled"><a href="#" class=""
+				title="Coming soon - Analytics and Reporting" data-title="Analytics">Analytics</a></li>
+			<li class="disabled"><a href="#" class=""
+				title="Coming soon - Users and User Settings" data-title="Users">Users</a></li>
+			<li class="disabled"><a href="#" class=""
+				title="Coming soon - System Settings" data-title="System">System</a></li>
+			<li class="last"><a href="#" class="" id="link-sar"
+				title="Report Suspicious Activity"
+				data-title="Report Suspicious Activity&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"><span
+					class="icon-security icon-eye-1"></span>Report Suspicious Activity</a></li>
+		</ul>
+	</nav>
+	<nav class="secondary">
+		<span><a href="profile_list.html" title="Members">Pricing</a></span><span
+			class="icon-nav icon-angle-right"></span><span>Small Business
+			Profile </span>
+	</nav>
+
+	<h2>Small Business Profile</h2>
+	<div class="container">
+		<div class="content">
+			<div class="info">
+				<h3>Profile Info</h3>
+<!-- 				<a href="#" id="edit_info_link" class="form-link" -->
+<!-- 					title="Edit Business Profile"><span -->
+<!-- 					class="icon-nav icon-pencil"></span>Edit</a> -->
+				<div class="parent first">Small Business</div>
+				<div class="label first">Pricing profile for small businesses
+					with up to 500 Members.</div>
+
+			</div>
+			<hr>
+			<h3>Pricing Policies</h3>
+<!-- 			<a href="#" id="add_pricing_link" class="form-link" -->
+<!-- 				title="Add Pricing Policy"><span class="icon-nav icon-plus"></span>Add -->
+<!-- 				Pricing Policy</a> -->
+			<div class="pricings">
+				<div class="pricing">
+					<div class="pricing-header">
+						<div class="pricing-title">Mexico 1</div>
+<!-- 						<a href="#" class="form-link" id="edit_pricing1" -->
+<!-- 							title="Edit Pricing Policy"><span -->
+<!-- 							class="icon-nav icon-pencil"></span>Edit</a><a href="#" -->
+<!-- 							class="form-link" id="delete_pricing" -->
+<!-- 							title="Delete Pricing Policy"><span -->
+<!-- 							class="icon-nav icon-trash-bin"></span>Delete</a> -->
+					</div>
+					<div class="pricing-content">
+
+						<div class="fees">
+							<table>
+								<thead>
+									<tr>
+										<th class="none">&nbsp;</th>
+										<th class="heading">Bronze</th>
+										<th class="heading">Silver</th>
+										<th class="heading">Gold</th>
+										<th class="heading">Platinum</th>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="heading">Call Allowance (USD)</td>
+										<td class="cell">1.00</td>
+										<td class="cell">2.00</td>
+										<td class="cell">4.00</td>
+										<td class="cell">5.00</td>
+									</tr>
+									<tr>
+										<td class="heading">Transfer Amount</td>
+										<td class="heading" colspan="3">Flat Fee in USD</td>
+									</tr>
+									<tr>
+										<td>USD 100 to &lt; 200</td>
+										<td class="cell">5.99</td>
+										<td class="cell">6.99</td>
+										<td class="cell">8.99</td>
+										<td class="cell">10.99</td>
+									</tr>
+									<tr>
+										<td>USD 200 to &lt; 400</td>
+										<td class="cell">5.99</td>
+										<td class="cell">6.99</td>
+										<td class="cell">8.99</td>
+										<td class="cell">10.99</td>
+									</tr>
+									<tr>
+										<td>USD 400+</td>
+										<td class="cell">5.99</td>
+										<td class="cell">6.99</td>
+										<td class="cell">8.99</td>
+										<td class="cell">10.99</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="payers">
+							<div class="header">Apply to</div>
+							<div class="Payer">MXN-Payer Name Here -Home Delivery</div>
+							<div class="Payer">MXN-Payer-Home Delivery</div>
+							<div class="Payer">MXN-Payer-Home Delivery</div>
+							<div class="Payer">MXN-Payer-Home Delivery</div>
+							<div class="Payer">MXN-Payer-Home Delivery</div>
+							<div class="Payer">MXN-Payer-Home Delivery</div>
+						</div>
+					</div>
+				</div>
+				<div class="pricing">
+					<div class="pricing-header">
+						<div class="pricing-title">Mexico 2</div>
+<!-- 						<a href="#" class="form-link" id="edit_pricing" -->
+<!-- 							title="Edit Pricing Policy"><span -->
+<!-- 							class="icon-nav icon-pencil"></span>Edit</a><a href="#" -->
+<!-- 							class="form-link" id="delete_pricing" -->
+<!-- 							title="Delete Pricing Policy"><span -->
+<!-- 							class="icon-nav icon-trash-bin"></span>Delete</a> -->
+					</div>
+					<div class="pricing-content">
+
+						<div class="fees">
+							<table>
+								<thead>
+									<tr>
+										<th class="none">&nbsp;</th>
+										<th class="heading">Bronze</th>
+										<th class="heading">Silver</th>
+										<th class="heading">Gold</th>
+										<th class="heading">Platinum</th>
+								</thead>
+								<tbody>
+									<tr>
+									<td class="heading">Call Allowance (USD)</td>
+										<td class="cell">1.00</td>
+										<td class="cell">2.00</td>
+										<td class="cell">4.00</td>
+										<td class="cell">5.00</td>
+									</tr>
+									<tr>
+										<td class="heading">Transfer Amount</td>
+										<td class="heading" colspan="3">Flat Fee in USD</td>
+									</tr>
+									<tr>
+										<td>USD 100 to &lt; 200</td>
+										<td class="cell">5.99</td>
+										<td class="cell">6.99</td>
+										<td class="cell">8.99</td>
+										<td class="cell">10.99</td>
+									</tr>
+									<tr>
+										<td>USD 200 to &lt; 300</td>
+										<td class="cell">5.99</td>
+										<td class="cell">6.99</td>
+										<td class="cell">8.99</td>
+										<td class="cell">10.99</td>
+									</tr>
+									<tr>
+										<td>USD 200 to &lt; 300</td>
+										<td class="cell">5.99</td>
+										<td class="cell">6.99</td>
+										<td class="cell">8.99</td>
+										<td class="cell">10.99</td>
+									</tr>
+									<tr>
+										<td>USD 200 to &lt; 300</td>
+										<td class="cell">5.99</td>
+										<td class="cell">6.99</td>
+										<td class="cell">8.99</td>
+										<td class="cell">10.99</td>
+									</tr>
+									<tr>
+										<td>USD 200 to &lt; 300</td>
+										<td class="cell">5.99</td>
+										<td class="cell">6.99</td>
+										<td class="cell">8.99</td>
+										<td class="cell">10.99</td>
+									</tr>
+									<tr>
+										<td>USD 200 to &lt; 300</td>
+										<td class="cell">5.99</td>
+										<td class="cell">6.99</td>
+										<td class="cell">8.99</td>
+										<td class="cell">10.99</td>
+									</tr>
+									<tr>
+										<td>USD 200+</td>
+										<td class="cell">5.99</td>
+										<td class="cell">6.99</td>
+										<td class="cell">8.99</td>
+										<td class="cell">10.99</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="payers">
+							<div class="header">Apply to</div>
+							<div class="Payer">MXN-Payer-Home Delivery</div>
+							<div class="Payer">MXN-Payer-Home Delivery</div>
+						</div>
+					</div>
+				</div>
+				<div class="pricing">
+					<div class="pricing-header">
+						<div class="pricing-title">Default Policy</div>
+<!-- 						<a href="#" class="form-link" id="edit_pricing" -->
+<!-- 							title="Edit Pricing Policy"><span -->
+<!-- 							class="icon-nav icon-pencil"></span>Edit</a><a href="#" -->
+<!-- 							class="form-link" id="delete_pricing" -->
+<!-- 							title="Delete Pricing Policy"><span -->
+<!-- 							class="icon-nav icon-trash-bin"></span>Delete</a> -->
+					</div>
+					<div class="pricing-content">
+
+						<div class="fees">
+							<table>
+								<thead>
+									<tr>
+										<th class="none">&nbsp;</th>
+										<th class="heading">Bronze</th>
+										<th class="heading">Silver</th>
+										<th class="heading">Gold</th>
+										<th class="heading">Platinum</th>
+								</thead>
+								<tbody>
+									<tr>
+									<td class="heading">Call Allowance (USD)</td>
+										<td class="cell">1.00</td>
+										<td class="cell">2.00</td>
+										<td class="cell">4.00</td>
+										<td class="cell">5.00</td>
+									</tr>
+									<tr>
+										<td class="heading">Transfer Amount</td>
+										<td class="heading" colspan="3">Flat Fee in USD</td>
+									</tr>
+									<tr>
+										<td>USD 100 to &lt; 200</td>
+										<td class="cell">5.99</td>
+										<td class="cell">6.99</td>
+										<td class="cell">8.99</td>
+										<td class="cell">10.99</td>
+									</tr>
+									<tr>
+										<td>USD 200 to &lt; 300</td>
+										<td class="cell">5.99</td>
+										<td class="cell">6.99</td>
+										<td class="cell">8.99</td>
+										<td class="cell">10.99</td>
+									</tr>
+									<tr>
+										<td>USD 200 to &lt; 300</td>
+										<td class="cell">5.99</td>
+										<td class="cell">6.99</td>
+										<td class="cell">8.99</td>
+										<td class="cell">10.99</td>
+									</tr>
+									<tr>
+										<td>USD 200 to &lt; 300</td>
+										<td class="cell">5.99</td>
+										<td class="cell">6.99</td>
+										<td class="cell">8.99</td>
+										<td class="cell">10.99</td>
+									</tr>
+									<tr>
+										<td>USD 200 to &lt; 300</td>
+										<td class="cell">5.99</td>
+										<td class="cell">6.99</td>
+										<td class="cell">8.99</td>
+										<td class="cell">10.99</td>
+									</tr>
+									<tr>
+										<td>USD 200 to &lt; 300</td>
+										<td class="cell">5.99</td>
+										<td class="cell">6.99</td>
+										<td class="cell">8.99</td>
+										<td class="cell">10.99</td>
+									</tr>
+									<tr>
+										<td>USD 200+</td>
+										<td class="cell">5.99</td>
+										<td class="cell">6.99</td>
+										<td class="cell">8.99</td>
+										<td class="cell">10.99</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="payers">
+							<div class="header">Default</div>
+							<div class="default">This policy applies to all payers that
+								do not have individual policies assigned.</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div id="add-pricing-dialog" title="Add Pricing Policy"
+		style="display: none">
+		<label class="first " style="width: 150px;">Pricing Policy
+			Name</label><input type="text" class="width-medium">
+		<hr>
+		<table class="policy-form">
+			<thead>
+				<tr>
+					<th class="none" colspan="2">&nbsp;</th>
+					<th class="heading">Bronze</th>
+					<th class="heading">Silver</th>
+					<th class="heading">Gold</th>
+					<th class="heading">Platinum</th>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="heading" colspan="2">Call Allowance (USD)</td>
+					<td class="cell"><input type="text" class="width-short"></td>
+					<td class="cell"><input type="text" class="width-short"></td>
+					<td class="cell"><input type="text" class="width-short"></td>
+					<td class="cell"><input type="text" class="width-short"></td>
+				</tr>
+				<tr>
+					<td class="heading" colspan="2">Transfer Amount (USD)</td>
+					<td class="heading" colspan="4" rowspan="2">Flat Fee in USD</td>
+				</tr>
+				<tr>
+					<td class="heading">From</td>
+					<td class="heading">To less than</td>
+				</tr>
+				<tr>
+					<td class="cell"><input type="text" class="width-short"></td>
+					<td class="cell"><input type="text" class="width-short"></td>
+					<td class="cell"><input type="text" class="width-short"></td>
+					<td class="cell"><input type="text" class="width-short"></td>
+					<td class="cell"><input type="text" class="width-short"></td>
+					<td class="cell"><input type="text" class="width-short"></td>
+				</tr>
+			</tbody>
+		</table>
+		<a href="#" id="add-row-link" class="form-link first" title="Add Row"><span
+			class="icon-nav icon-plus"></span>Add Row</a>
+		<hr>
+		<input type="checkbox" class="first">
+		<div class="label">Make this the default pricing policy</div>
+		<div class="label first">Or select payers</div>
+		<div class="payer-list">
+			<div class="col1 first">
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>AAA -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>AAA -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>BBB -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>BBB -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+			</div>
+			<div class="col1">
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+			</div>
+			<div class="col1">
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+			</div>
+			<div class="col1">
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div id="edit-pricing-dialog" title="Edit Pricing Policy"
+		style="display: none">
+		<label class="first " style="width: 150px;">Pricing Policy
+			Name</label><input type="text" class="width-medium" value="Mexico 1">
+		<hr>
+		<table class="policy-form">
+			<thead>
+				<tr>
+					<th class="none" colspan="2">&nbsp;</th>
+					<th class="heading">Bronze</th>
+					<th class="heading">Silver</th>
+					<th class="heading">Gold</th>
+					<th class="heading">Platinum</th>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="heading" colspan="2">Call Allowance (USD)</td>
+					<td class="cell"><input type="text" class="width-short"
+						value="1.00"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="2.00"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="4.00"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="5.00"></td>
+				</tr>
+				<tr>
+					<td class="heading" colspan="2">Transfer Amount (USD)</td>
+					<td class="heading" colspan="4" rowspan="2">Flat Fee in USD</td>
+				</tr>
+				<tr>
+					<td class="heading">From</td>
+					<td class="heading">To less than</td>
+				</tr>
+				<tr>
+					<td class="cell"><input type="text" class="width-short"
+						value="0"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="100.00"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="5.99"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="6.99"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="8.99"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="10.99"></td>
+				</tr>
+				<tr>
+					<td class="cell"><input type="text" class="width-short"
+						value="100.00"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="200.00"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="6.99"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="7.99"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="9.99"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="11.99"></td>
+				</tr>
+				<tr>
+					<td class="cell"><input type="text" class="width-short"
+						value="200.00"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value=""></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="7.99"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="8.99"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="10.99"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="12.99"></td>
+				</tr>
+			</tbody>
+		</table>
+		<a href="#" id="add-row-link" class="form-link first" title="Add Row"><span
+			class="icon-nav icon-plus"></span>Add Row</a>
+		<hr>
+		<input type="checkbox" class="first">
+		<div class="label">Set as default pricing policy</div>
+		<div class="label first">Or select payers</div>
+		<div class="payer-list">
+			<div class="col1 first">
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>AAA -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>AAA -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>BBB -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper checked">
+					<input type="checkbox" checked class="first"> <label>MXN
+						- Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper checked">
+					<input type="checkbox" checked class="first"> <label>MXN
+						- Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper checked">
+					<input type="checkbox" checked class="first"> <label>MXN
+						- Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+			</div>
+			<div class="col1">
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+			</div>
+			<div class="col1">
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+			</div>
+			<div class="col1">
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+				<div class="check-wrapper">
+					<input type="checkbox" class="first"> <label>MXN -
+						Payer Name Here - Home Delivery</label>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<footer>
+		<div class="left">&copy; 2014 Prosperitas Global Solutions, Inc.
+			All Rights Reserved.</div>
+		<div class="right">Version 1.00.00 Build 00000</div>
+	</footer>
+</body>
+</html>

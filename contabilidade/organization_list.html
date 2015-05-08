@@ -1,0 +1,372 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>PGSi Organizations</title>
+<link href="css/fonts.css" rel="stylesheet" />
+<link href="css/actions.css" rel="stylesheet" />
+<link href="css/security.css" rel="stylesheet" />
+<link href="css/navigation.css" rel="stylesheet" />
+<link href="css/jquery-ui.min.css" rel="stylesheet" />
+<link href="css/jquery-ui.structure.min.css" rel="stylesheet" />
+<link href="css/pgsi-common.css" rel="stylesheet" />
+<script src="jquery/jquery-1.11.0.min.js"></script>
+<script src="jquery/jquery-ui-1.11.0.min.js"></script>
+<script src="jquery/jquery.datatables.min.js"></script>
+<script>
+	function showDeleteDialog(obj) {
+		$(obj).append("<div id='delete_dialog' style='display:none'></div>");
+		$("#delete_dialog").dialog({
+			title : "This styling/content definitely needs more work",
+			modal : true,
+			zIndex : 10000,
+			autoOpen : true,
+			width : 'auto',
+			resizable : false,
+			buttons : {
+				Delete : function() {
+					$(this).dialog("close");
+					$(this).remove();
+				},
+				Cancel : function() {
+					$(this).dialog("close");
+					$(this).remove();
+				}
+			}
+
+		});
+	};
+	$(document)
+			.ready(
+					function() {
+						$('nav.primary .sub-menu').hide();
+						$('nav.primary li').hover(
+								function() {
+									var that = this;
+									$(this).addClass("menu-hover").find(
+											".sub-menu").show().position({
+										my : "left top",
+										at : "left bottom",
+										of : that,
+										collision : "fit"
+									}).find("li").hover(function() {
+										$(this).addClass("menu-hover")
+									}, function() {
+										//$(this).removeClass("menu-hover")
+									});
+								},
+								function() {
+									$(this).removeClass("menu-hover").find(
+											".sub-menu").hide();
+								});
+
+						$('.add_loc_link').click(function() {
+							top.location.href = "organization_add.html";
+						});
+						//http://datatables.net/reference/option/language
+						$('#data_list')
+								.dataTable(
+										{
+											dom : '<"list_header"ipl><t><"list_footer"ipl>',
+											paging : true,
+											pagingType : "full",
+											iDisplayLength : 25,
+											language : {
+												paginate : {
+													first : "a",
+													last : "b",
+													next : "g",
+													previous : "f"
+												},
+												lengthMenu : "_MENU_ records per page",
+												loadingRecords : "Loading...",
+												processing : "Processing...",
+												zeroRecords : "No matching records found",
+												info : "Showing _START_ to _END_ of _TOTAL_ matching records. (SDN/SAR summary goes here.)"
+											},
+											drawCallback : function(settings) {
+												$(".dataTables_length select")
+														.outerWidth(60)
+														.selectmenu();
+												$("#data_list tbody a")
+														.parent("td")
+														.hover(
+																function() {
+																	$(this)
+																			.append(
+																					'<a href="organization_view.html" title="Edit Nebraska Premium Meatpacking Ltd."><span class="icon-nav icon-pencil"></span></a>'
+																							+ '<a href="#" title="Delete Nebraska Premium Meatpacking Ltd." onclick="showDeleteDialog(this); return false;"><span  class="icon-nav icon-trash-bin"></span></a>'
+																							+ '<a href="location_add.html" title="Add New Location"><span class="icon-nav icon-pin-map"></span></a>');
+																},
+																function() {
+																	$(this)
+																			.find(
+																					'.icon-nav')
+																			.remove();
+																});
+											}
+										});
+						$(".filter select").selectmenu();
+						$("input[type=submit],input[type=reset]").button();
+						$('#data_list input[type=checkbox]').change(function() {
+							if (this.checked) {
+								$(this).closest("tr").addClass('selected');
+							} else {
+								$(this).closest("tr").removeClass('selected');
+							}
+						});
+					});
+</script>
+<style>
+.filter {
+	padding: 0;
+}
+
+.filter * {
+	display: none;
+}
+
+#data_list_wrapper {
+	margin-left: 0;
+}
+
+.data #data_list .icon-sort {
+	display: none;
+}
+</style>
+</head>
+<body>
+	<header>
+		<ul>
+			<li>Welcome&nbsp;&nbsp;<span class="emphasis">John Demo</span></li>
+			<li class="disabled"><a class="account_link" href="#"
+				title="Coming soon - Account"><span class="icon-user icon-nav"></span>Account</a></li>
+			<li class="disabled"><a class="help_link" href="#"
+				title="Coming soon - Help"><span class="icon-question icon-nav"></span>Help</a></li>
+			<li><a class="signout_link" href="login.html" title="Sign out"><span
+					class="icon-unlock icon-nav"></span>Sign Out</a></li>
+		</ul>
+	</header>
+	<nav class="primary">
+		<ul class="main-menu">
+			<li class="menu-home"><a href="dashboard.html"
+				class="icon-home icon-nav" title="Home"></a></li>
+			<li class="menu-active"><a href="organization_list.html"
+				title="Organizations and Locations" data-title="Customers">Customers</a>
+				<ul class="sub-menu">
+					<li><a href="organization_add.html" title="Add Organization"
+						data-title="Add Organization">Add Organization</a></li>
+					<li><a href="organization_list.html"
+						data-title="Find Organization" title="Find Organization">Find
+							Organization</a></li>
+					<li><a href="location_add.html" title="Add Location"
+						data-title="Add Location">Add Location</a></li>
+					<li><a href="location_list.html" title="Find Location"
+						data-title="Find Location">Find Location</a></li>
+				</ul></li>
+			<li><a href="member_list.html" class=""
+				title="Members and Recipients" data-title="Members">Members</a>
+				<ul class="sub-menu">
+					<li><a href="member_add_main.html" title="Add Member"
+						data-title="Add Member">Add Member</a></li>
+					<li><a href="member_list.html" data-title="Find Member"
+						title="Find Member">Find Member</a></li>
+					<li><a href="recipient_list.html" title="Find Recipient"
+						data-title="Find Recipient">Find Recipient</a></li>
+				</ul></li>
+			<li><a href="payment_overview.html" class=""
+				title="Payments" data-title="Payments">Payments</a>
+				<ul class="sub-menu">
+				<li><a href="batch_list.html" data-title="Batches"
+						title="Batches">Batches</a></li>
+					<li><a href="transaction_list.html"
+						data-title="Find Transaction" title="Find Transaction">Find
+							Transaction</a></li>
+					<!--<li><a href="transaction_add.html" data-title="Batches"-->
+						<!--title="Batches">Add New Transaction</a></li>-->
+					<li><a href="funding_list.html" title="Payer Funding"
+						data-title="Payer Funding">Payer Funding</a></li>
+					<li><a href="paycycle_list.html" title="Upcoming Pay Dates"
+						data-title="Upcoming Pay Dates">Upcoming Pay Dates</a></li>
+					<!--<li><a href="currency_purchase.html" title="Purchase Currency"-->
+					<!--data-title="Purchase Currency">Purchase Currency</a></li>-->
+				</ul></li>
+			<li><a href="compliance_overview.html"
+				class="" title="Compliance Monitoring and Reporting"
+				data-title="Compliance">Compliance</a>
+				<ul class="sub-menu">
+					<li><a href="sdn_list.html" title="SDN Matches"
+						data-title="SDN Matches">SDN Matches</a></li>
+					<li><a href="sar_list.html" data-title="SAR Reports"
+						title="SAR Reports">SAR Reports</a></li>
+					<!-- 					<li><a href="compliance_analytics_list.html" -->
+					<!-- 						title="Compliance -->
+					<!-- 							Analytics" -->
+					<!-- 						data-title="Compliance -->
+					<!-- 							Analytics">Compliance Analytics</a></li> -->
+				</ul></li>
+			<li><a href="profile_list.html" class="" title="Pricing"
+				data-title="Pricing">Pricing</a>
+				<ul class="sub-menu">
+					<li><a href="profile_list.html" title="Find Pricing Profile">Find
+							Pricing Profile</a></li>
+					<li><a href="profile_add.html" title="Add New Pricing Profile">Add
+							New Pricing Profile</a></li>
+				</ul></li>
+			<li class="disabled"><a href="#" class=""
+				title="Coming soon - Analytics and Reporting" data-title="Analytics">Analytics</a></li>
+			<li class="disabled"><a href="#" class=""
+				title="Coming soon - Users and User Settings" data-title="Users">Users</a></li>
+			<li class="disabled"><a href="#" class=""
+				title="Coming soon - System Settings" data-title="System">System</a></li>
+			<li class="last"><a href="#" class="" id="link-sar"
+				title="Report Suspicious Activity"
+				data-title="Report Suspicious Activity&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"><span
+					class="icon-security icon-eye-1"></span>Report Suspicious Activity</a></li>
+		</ul>
+	</nav>
+	<nav class="secondary">
+		<span><a href="organization_list.html" title="Customers">Customers</a></span><span
+			class="icon-nav icon-angle-right"></span><span>Find
+			Organization</span>
+	</nav>
+	<div>
+		<h2 class="list">Find Organization</h2>
+		<span class="add_loc_link"><span class="icon-nav icon-plus"></span>Add
+			Organization</span>
+	</div>
+
+	<div class="content list">
+		<div class="filter">
+			<form id="filterForm">
+				<h3>Filter Records</h3>
+				<h4>Name</h4>
+				<input type="text" id="name-filter" name="name-filter"
+					placeholder="Part of name"></input>
+				<hr></hr>
+				<h4>Region</h4>
+				<select id="contry-filter" placeholder="Country">
+					<option>United States</option>
+					<option>Mexico</option>
+				</select> <select id="state-filter" placeholder="State/Province/Region">
+					<option>Alabama</option>
+					<option>Nebraska</option>
+				</select> <input type="text" id="city-filter" name="city-filter"
+					placeholder="Part of City"></input>
+				<hr></hr>
+				<h4>PGSi Status</h4>
+				<div class="col">
+					<input type="checkbox" id="pgsi-status-active-filter"></input><label
+						class="checkbox-label" for="pgsi-status-active-filter">Active</label>
+					<input type="checkbox" id="pgsi-status-inactive-filter"></input><label
+						class="checkbox-label" for="pgsi-status-inactive-filter">Inactive</label>
+				</div>
+				<div class="col">
+					<input type="checkbox" id="pgsi-status-setup-filter"></input><label
+						class="checkbox-label" for="pgsi-status-setup-filter">Setup</label><input
+						type="checkbox" id="pgsi-status-unknown-filter"></input><label
+						class="checkbox-label" for="pgsi-status-unknown-filter">Unknown</label>
+				</div>
+				<hr></hr>
+				<h4>SDN Status</h4>
+				<div class="block">
+					<input type="checkbox" id="sdn-status-negative-filter"></input><label
+						class="checkbox-label" for="sdn-status-negative-filter">Negative</label>
+					<input type="checkbox" id="sdn-status-pgsipend-filter"></input><label
+						class="checkbox-label" for="sdn-status-pgsipend-filter">Pending
+						PGSi</label> <input type="checkbox" id="sdn-status-falsepositive-filter"></input><label
+						class="checkbox-label" for="sdn-status-falsepositive-filter">False
+						Positive</label> <input type="checkbox" id="sdn-status-fedpend-filter"></input><label
+						class="checkbox-label" for="sdn-status-fedpend-filter">Pending
+						Federal</label><input type="checkbox" id="sdn-status-positive-filter"></input><label
+						class="checkbox-label" for="sdn-status-positive-filter">Positive</label>
+				</div>
+				<hr></hr>
+				<h4>Risk</h4>
+				<div class="col">
+					<input type="checkbox" id="risk-high-filter"></input><label
+						class="checkbox-label" for="risk-high-filter">High</label> <input
+						type="checkbox" id="risk-medium-filter"></input><label
+						class="checkbox-label" for="risk-medium-filter">Medium</label>
+				</div>
+				<div class="col">
+					<input type="checkbox" id="risk-low-filter"></input><label
+						class="checkbox-label" for="risk-low-filter">Low</label>
+				</div>
+				<div class="block">
+					<input type="reset" value="Clear All" class="button-secondary"></input>
+					<input type="submit" value="Apply" class="button-secondary"></input>
+				</div>
+
+			</form>
+		</div>
+		<div class="data">
+			<table id="data_list">
+				<thead>
+					<tr>
+						<!-- 						<th><input type="checkbox"></input></th> -->
+						<th>Name<span class="icon-sort"></span></th>
+						<th>City<span class="icon-sort"></span></th>
+						<th>State<span class="icon-sort"></span></th>
+						<th>Country<span class="icon-sort"></span></th>
+						<th>Industry<span class="icon-sort"></span></th>
+						<th>SDN Status<span class="icon-sort"></span></th>
+						<th>Primary Phone</th>
+						<th>Members<span class="icon-sort"></span></th>
+						<th>Risk Level<span class="icon-sort"></span></th>
+						<th>Status<span class="icon-sort"></span></th>
+					</tr>
+				</thead>
+				<tbody>
+					<script>
+						var sdnRowClass = ""
+						var sdnStatus = "Negative";
+
+						for (var i = 0; i < 200; i++) {
+							if (i % 10 == 1) {
+								sdnRowClass = "sdn1";
+								sdnStatus = "Positive";
+							} else if (i % 10 == 2) {
+								sdnRowClass = "sdn2";
+								sdnStatus = "Pending PGSi";
+							} else if (i % 10 == 3) {
+								sdnRowClass = "";
+								sdnStatus = "False Positive";
+							} else {
+								sdnRowClass = "";
+								sdnStatus = "Negative";
+							}
+							document.write('<tr class="' + sdnRowClass + '">');
+							//document
+							//.write('<td><input type="checkbox"></input></td>');
+							document
+									.write('<td class="name"><a class="edit_link" href="organization_view.html"');
+							document
+									.write('title="View/Edit Nebraska Premium Meatpacking Ltd.">Nebraska');
+							document.write('Premium Meatpacking Ltd. '
+									+ (i + 1) + '</a></td>');
+							document.write('<td>Omaha</td>');
+							document.write('<td>NE</td>');
+							document.write('<td>USA</td>');
+							document.write('<td>201100</td>');
+							document.write('<td class="sdnstatus">' + sdnStatus
+									+ '</td>');
+							document.write('<td>Primary Phone</td>');
+							document.write('<td>100-499</td>');
+							document.write('<td>Low</td>');
+							document.write('<td>Active</td>');
+							document.write('</tr>');
+						}
+					</script>
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<footer>
+		<div class="left">&copy; 2014 Prosperitas Global Solutions, Inc.
+			All Rights Reserved.</div>
+		<div class="right">Version 1.00.00 Build 00000</div>
+	</footer>
+</body>
+</html>

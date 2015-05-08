@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>PGSi Transactions</title>
+<link href="css/fonts.css" rel="stylesheet" />
+<link href="css/security.css" rel="stylesheet" />
+<link href="css/actions.css" rel="stylesheet" />
+<link href="css/navigation.css" rel="stylesheet" />
+<link href="css/jquery-ui.min.css" rel="stylesheet" />
+<link href="css/jquery-ui.structure.min.css" rel="stylesheet" />
+<link href="css/pgsi-common.css" rel="stylesheet" />
+<script src="jquery/jquery-1.11.0.min.js"></script>
+<script src="jquery/jquery-ui-1.11.0.min.js"></script>
+<script src="jquery/jquery.datatables.min.js"></script>
+<script>
+	function showDeleteDialog(obj) {
+		$(obj).append("<div id='delete_dialog' style='display:none'></div>");
+		$("#delete_dialog").dialog({
+			title : "This styling/content definitely needs more work",
+			modal : true,
+			zIndex : 10000,
+			autoOpen : true,
+			width : 'auto',
+			resizable : false,
+			buttons : {
+				Delete : function() {
+					$(this).dialog("close");
+					$(this).remove();
+				},
+				Cancel : function() {
+					$(this).dialog("close");
+					$(this).remove();
+				}
+			}
+
+		});
+	};
+	$(document).ready(function() {
+		$('nav.primary .sub-menu').hide();
+		$('nav.primary li').hover(function() {
+			var that = this;
+			$(this).addClass("menu-hover").find(".sub-menu").show().position({
+				my : "left top",
+				at : "left bottom",
+				of : that,
+				collision : "fit"
+			}).find("li").hover(function() {
+				$(this).addClass("menu-hover")
+			}, function() {
+				//$(this).removeClass("menu-hover")
+			});
+		}, function() {
+			$(this).removeClass("menu-hover").find(".sub-menu").hide();
+		});
+
+		$('.add_loc_link').click(function() {
+			top.location.href = "member_add_empl.html";
+		});
+		//http://datatables.net/reference/option/language
+		$('#data_list').dataTable({
+			dom : '<"list_header"ipl><t><"list_footer"ipl>',
+			paging : true,
+			pagingType : "full",
+			iDisplayLength : 10,
+			aaSorting : [ [ 2, "desc" ] ],
+			language : {
+				paginate : {
+					first : "a",
+					last : "b",
+					next : "g",
+					previous : "f"
+				},
+				lengthMenu : "_MENU_ records per page",
+				loadingRecords : "Loading...",
+				processing : "Processing...",
+				zeroRecords : "No matching records found",
+				info : "Showing _START_ to _END_ of _TOTAL_ matching records."
+			},
+			drawCallback : function(settings) {
+				$(".dataTables_length select").outerWidth(60).selectmenu();
+			}
+		});
+		$(".filter select").selectmenu();
+		$("input[type=submit],input[type=reset]").button();
+		$('#data_list input[type=checkbox]').change(function() {
+			if (this.checked) {
+				$(this).closest("tr").addClass('selected');
+			} else {
+				$(this).closest("tr").removeClass('selected');
+			}
+		});
+	});
+</script>
+<style>
+#data_list .multiples a {
+	display: block;
+}
+
+.second_org {
+	padding-top: 8px;
+}
+
+.filter {
+	background-color: transparent;
+	border-spacing: 0;
+	display: table-cell;
+	height: 100%;
+	padding-left: 0;
+	vertical-align: top;
+	width: 200px;
+}
+
+.filter {
+	padding: 0;
+}
+
+.filter * {
+	display: none;
+}
+
+.data #data_list .icon-sort {
+	display: none;
+}
+
+.data #data_list .icon-sort.visible {
+	display: inline-block;
+}
+</style>
+</head>
+<body>
+	<div class="content list">
+		<div class="filter"></div>
+		<div class="data">
+			<table id="data_list">
+				<thead>
+					<tr>
+						<th>Transaction&nbsp;ID<span class="icon-sort visible"></span></th>
+						<th>Confirmation&nbsp;#
+							<span class="icon-sort visible"></span></th>
+						<th>Status<span class="icon-sort"></span></th>
+						<th>Payroll Source<span class="icon-sort"></span></th>
+						<th>Batch ID<span class="icon-sort"></span></th>
+						<th>Payer<span class="icon-sort"></span></th>
+					<th>Delivery Method<span class="icon-sort"></span></th>
+						<th>Recipient<span class="icon-sort"></span></th>
+						<th>Sent<span class="icon-sort"></span></th>
+						<th>Total&nbsp;(USD)<span class="icon-sort"></span></th>
+						<th>Fee&nbsp;(USD)<span class="icon-sort"></span></th>
+						<th>Rate&nbsp;(%)<span class="icon-sort"></span></th>
+						<th>Transferred</th>
+					</tr>
+				</thead>
+				<tbody>
+					<script>
+						var note = "";
+						var actions = '<a href="transaction_view_only.html" class="action" title="View Details for Transaction #[9999999]"><span class="icon-nav icon-search-find"></span>';
+						for (var i = 0; i < 200; i++) {
+							if (i % 10 == 1) {
+								status = "Cancelled";
+								note = "[On Hold]";
+							} else if (i % 10 == 2) {
+								status = "Cancelled";
+								note = "[On Hold]";
+							} else if (i % 10 == 3) {
+								status = "Paid";
+								note = "";
+								actions = '<a href="#"  class="action no" title="Cancel"><span class="icon-nav icon-minus-circle"></span></a>';
+							} else if (i % 10 == 4) {
+								status = "Cancelled";
+								note = "[On Hold] ";
+							} else {
+								if (i % 5 < 3) {
+									status = "Not Paid";
+									note = "";
+									actions = '<a href="#" class="action no" title="Cancel"><span class="icon-nav icon-minus-circle"></span>';
+								} else if (i % 5 < 4) {
+									status = "Cancelled";
+									note = "[ACH Cancel]";
+									actions = '';
+								} else {
+									status = "Cancelled";
+									note = "[Seized]";
+								}
+							}
+							document.write('<tr class="">');
+								document
+									.write('<td><a href="transaction_view.html" title="View Transaction #[999999]">TAA-'
+											+ (21345 + i) + '</a></td>');
+							document
+									.write('<td><a href="transaction_view.html" title="View Transaction #[999999]">44441234569</a></td>');
+
+							if (note != "") {
+								document.write('<td class="name">' + status
+										+ '<br>' + note + '</td>');
+							} else {
+								document.write('<td class="name">' + status
+										+ '</td>');
+							}
+							document
+									.write('<td class="multiples"><a href="location_view.html"'+'title="View/Edit Fremont Location.">Fremont Location</a><a href="organization_view.html"'+'title="View/Edit Nebraska Premium Meatpacking Ltd.">Nebraska'
+											+ 'Premium Meatpacking Ltd. '
+											+ '</a></td>');
+							document
+									.write('<td><a href="batch_view_pending.html" title="View Batch #[999999]">'
+											+ (21345 + i) + '</a></td>');
+							document.write('<td>Bank ABD of Mexico</td>');
+							document.write('<td >In Account</td>');
+							document.write('<td >Mario Gonzalez ' + (i + 1)
+									+ ' (RAB-12345)</td>');
+							document.write("<td>05/23/2014</td>");
+							// 								document
+							// 										.write('<td class="pin">44441234569</td>');
+
+							document.write('<td>300</td>');
+							document.write('<td>7.99</td>');
+							document.write('<td class="amt">12.888</td>');
+							document.write('<td class="amt">MXN 3,763.4249</td>');
+							document.write('</tr>');
+
+						}
+					</script>
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<footer>
+		<div class="left">&copy; 2014 Prosperitas Global Solutions, Inc.
+			All Rights Reserved.</div>
+		<div class="right">Version 1.00.00 Build 00000</div>
+	</footer>
+</body>
+</html>
