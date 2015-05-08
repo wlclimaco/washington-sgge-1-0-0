@@ -1,0 +1,628 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>PGSi Reference Form</title>
+<link href="css/fonts.css" rel="stylesheet" />
+<!-- <link href="css/actions.css" rel="stylesheet" /> -->
+<link href="css/navigation.css" rel="stylesheet" />
+<link href="css/jquery-ui.min.css" rel="stylesheet" />
+<link href="css/jquery-ui.structure.min.css" rel="stylesheet" />
+<link href="css/pgsi-common.css" rel="stylesheet" />
+<script src="jquery/jquery-1.11.0.min.js"></script>
+<script src="jquery/jquery-ui-1.11.0.min.js"></script>
+<script src="jquery/jquery.datatables.min.js"></script>
+<script src="jquery/jquery-ui-1.11.0.min.js"></script>
+<script src="jquery/jquery.inputmask.js"></script>
+<script src="jquery/jquery.inputmask.extensions.js"></script>
+<script src="jquery/jquery.inputmask.date.extensions.js"></script>
+<script src="jquery/jquery.inputmask.numeric.extensions.js"></script>
+<script src="jquery/jquery.inputmask.regex.extensions.js"></script>
+<script>
+	var initRequiredSelects = function() {
+
+		$("span.ui-selectmenu-text").each(
+				function(index) {
+					if (!$(this).text().trim()) {
+						$(this).parent("span.ui-selectmenu-button").addClass(
+								"required");
+					} else {
+						$(this).parent("span.ui-selectmenu-button")
+								.removeClass("required");
+					}
+				});
+
+	};
+	$(document)
+			.ready(
+					function() {
+						$(".buttons input").button();
+						$("select").selectmenu({
+							"change" : function(event, ui) {
+								initRequiredSelects();
+							}
+						});
+						$('nav.primary .sub-menu').hide();
+						$('nav.primary li').hover(
+								function() {
+									var that = this;
+									$(this).addClass("menu-hover").find(
+											".sub-menu").show().position({
+										my : "left top",
+										at : "left bottom",
+										of : that,
+										collision : "fit"
+									}).find("li").hover(function() {
+										$(this).addClass("menu-hover")
+									}, function() {
+										//$(this).removeClass("menu-hover")
+									});
+								},
+								function() {
+									$(this).removeClass("menu-hover").find(
+											".sub-menu").hide();
+								});
+						initRequiredSelects();
+						$(".date").datepicker();
+						$(document)
+								.tooltip(
+										{
+											items : "input.error",
+											content : function() {
+												return "<span class='icon-nav icon-exclamation-triangle'></span>"
+														+ $(this).prevAll(
+																"label.error")
+																.text();
+											},
+											position : {
+												my : "center bottom-20",
+												at : "center top",
+												using : function(position,
+														feedback) {
+													$(this).css(position);
+													$("<div>")
+															.addClass("arrow")
+															.addClass(
+																	feedback.vertical)
+															.addClass(
+																	feedback.horizontal)
+															.appendTo(this);
+												}
+											}
+
+										});
+						$(":input").inputmask(undefined, {
+							//reject incomplete input
+							onincomplete : function() {
+								$(this).val("");
+							}
+						});
+
+						$("#country").on(
+								"selectmenuchange",
+								function(event, ui) {
+
+									switch (ui.item.value) {
+									case '1':
+										$("#zip").attr("data-inputmask",
+												"'mask':'99999[-9999]'");
+										break;
+									case '2':
+										$("#zip").attr("data-inputmask",
+												"'mask':'99999[-9999]'");
+										break;
+									case '3':
+										$("#zip").attr("data-inputmask",
+												"'mask':'99999'");
+										break;
+									default:
+									}
+									//Didn't research - is there a way to refresh input mask?
+									$("#zip").inputmask(undefined, {
+										//reject incomplete input
+										onincomplete : function() {
+											$(this).val("");
+										}
+									});
+								});
+						$("#addphone")
+								.click(
+										function(e) {
+											e.preventDefault();
+											$(this)
+													.before(
+															$('<label class="first phone" for="phone-type">Phone Type</label>'
+																	+ '<select id="phoneType3" class="phone-type required phone width-shortest"><option></option><option value="2">Home</option><option value="5">Work</option><option value="8">Cell</option></select>'
+																	+ '<label class="phone" for="phone-country">Number</label>'
+																	+ '<select id="phoneCountry3" class="phone-country width-shortest"><option></option><option>+1 (US)</option></select>&nbsp;'
+																	+ '<input name="phoneNumber" class="phone-number required phone "style="width: 110px" placeholder="*" type="text">'
+																	+ '<label class="phone" for="phone-extension">Extension</label> <input class="phone-extension width-shortest" name="phoneExtension" type="text">'
+																	+ '<input class="phone" name="primary" type="radio"><label class="checkboxlabel phone">Primary</label>'
+																	+ '<a href="#" title="Remove this phone number" class="form-link"><span class="icon-nav icon-remove"></span></a>'));
+											$("#phoneType3, #phoneCountry3")
+													.selectmenu();
+											$("#phoneType3-button").focus();
+											$("span.ui-selectmenu-text")
+													.each(
+															function(index) {
+																if (!$(this)
+																		.text()
+																		.trim()) {
+																	$(this)
+																			.parent(
+																					"span.ui-selectmenu-button")
+																			.addClass(
+																					"required");
+																} else {
+																	$(this)
+																			.parent(
+																					"span.ui-selectmenu-button")
+																			.removeClass(
+																					"required");
+																}
+															});
+										});
+
+						$("#addemail")
+								.click(
+										function(e) {
+											e.preventDefault();
+											$(this)
+													.before(
+															$('<label class="first email" for="email-type">Email Type</label> <select id="emailType2" class="email-type required email width-shortest"><option></option><option value="2">Home</option><option value="5">Work</option></select>'
+																	+ '<input name="email" class="email required width-long" placeholder="*" type="text">'
+																	+ '<input class="email" name="primary-email" type="radio" selected><label class="checkboxlabel email">Primary</label>'
+																	+ '<a href="#" title="Remove this email address" class="form-link"><span class="icon-nav icon-remove"></span></a>'));
+											$("#emailType2").selectmenu();
+											$("#phoneType2-button").focus();
+											$("span.ui-selectmenu-text")
+													.each(
+															function(index) {
+																if (!$(this)
+																		.text()
+																		.trim()) {
+																	$(this)
+																			.parent(
+																					"span.ui-selectmenu-button")
+																			.addClass(
+																					"required");
+																} else {
+																	$(this)
+																			.parent(
+																					"span.ui-selectmenu-button")
+																			.removeClass(
+																					"required");
+																}
+															});
+										});
+
+					});
+</script>
+
+<style>
+.content {
+	min-width: 1000px;
+	width: 80%;
+}
+
+.group1 {
+	overflow: hidden;
+	margin: 5px;
+}
+
+.buttons {
+	overflow: hidden;
+	margin: 5px;
+	border-top: 1px solid #cccccc;
+	text-align: center;
+	padding: 5px;
+}
+
+.col1 {
+	float: left;
+	width: 200px;
+	text-align: left;
+	clear: both;
+	line-height: 24px;
+}
+
+.col2, .ui-selectmenu-button {
+	display: block;
+	float: left;
+	width: 200px;
+	text-align: left;
+	float: left;
+	line-height: 24px;
+}
+
+.col3 {
+	float: left;
+	line-height: 24px;
+}
+
+form a .icon-nav:hover, form a:hover .icon-nav:before {
+	background-color: #AAD044;
+}
+
+form a:hover, form a, form a:active {
+	text-decoration: none;
+}
+
+form input[type=text], form input[type=radio], form .ui-selectmenu-button,
+	form textarea {
+	display: block;
+	float: left;
+	margin-right: 8px;
+}
+
+textarea {
+	background-color: #f8f8f8;
+	border-color: #cccccc;
+	border-style: solid;
+	border-width: 1px;
+	margin-bottom: 10px;
+	padding: 0 10px;
+}
+
+.width-shortest, #phoneCountry-button, #phoneCountry2-button,
+	#phoneType2-button, #phoneType-button {
+	width: 90px;
+}
+
+input.width-shortest {
+	width: 60px;
+}
+
+.width-short, label.width-short.first {
+	width: 150px;
+}
+
+.width-medium {
+	width: 220px;
+}
+
+.width-long {
+	width: 280px;
+}
+
+.width-longest {
+	width: 400px;
+}
+
+label.first {
+	width: 100px;
+	clear: both;
+}
+
+form label.phone, form label.email {
+	display: block;
+	float: left;
+	margin-right: 8px;
+	line-height: 24px;
+}
+
+hr {
+	width: 100%;
+	clear: both;
+}
+
+.content a, .content+a:hover, .content a:active {
+	text-decoration: none;
+	color: #2b4e72;
+}
+
+.content .icon-nav:before {
+	background-color: #42b653;
+	color: white;
+}
+
+.content .icon-nav {
+	background-color: #42b653;
+	bottom: -1px;
+	display: inline-block;
+	height: 14px;
+	margin-right: 3px;
+	padding: 1px;
+	position: relative;
+}
+
+a.form-link, a.form-link:hover, a.form-link:active {
+	color: #333333;
+	text-decoration: none;
+	float: left;
+}
+
+a.form-link.first {
+	margin-left: 110px;
+	clear: both;
+	margin-bottom: 20px;
+}
+
+.lower {
+	position: relative;
+	bottom: -2px;
+}
+
+form input[type="email"] {
+	display: block;
+	float: left;
+	margin-right: 8px;
+	background-color: #f8f8f8;
+	border-color: #cccccc;
+	border-style: solid;
+	border-width: 1px;
+	height: 24px;
+	line-height: 24px;
+	margin-bottom: 10px;
+	padding: 0 10px;
+	box-shadow: none;
+}
+</style>
+</head>
+<body>
+	<header>
+		<ul>
+			<li>Welcome&nbsp;&nbsp;<span class="emphasis">John Demo</span></li>
+			<li><span class="icon-user icon-nav"></span><a
+				class="account_link" href="#" title="Account">Account</a></li>
+			<li><a class="help_link" href="#" title="Help"><span
+					class="icon-question icon-nav"></span>Help</a></li>
+			<li><a class="signout_link" href="login.html" title="Sign out"><span
+					class="icon-unlock icon-nav"></span>Sign Out</a></li>
+		</ul>
+	</header>
+	<nav class="primary">
+		<ul class="main-menu">
+			<li class="menu-home"><a href="dashboard.html"
+				class="icon-home icon-nav" title="Home"></a></li>
+			<li><a href="organization_list.html"
+				title="Organizations and Locations" data-title="Customers">Customers</a>
+				<ul class="sub-menu">
+					<li><a href="organization_add.html" title="Add Organization"
+						data-title="Add Organization">Add Organization</a></li>
+					<li><a href="organization_list.html"
+						data-title="Find Organization" title="Find Organization">Find
+							Organization</a></li>
+					<li><a href="location_add.html" title="Add Location"
+						data-title="Add Location">Add Location</a></li>
+					<li><a href="location_list.html" title="Find Location"
+						data-title="Find Location">Find Location</a></li>
+				</ul></li>
+			<li><a href="member_list.html" class=""
+				title="Members and Recipients" data-title="Members">Members</a></li>
+			<li><a href="payment_overview.html" class="" title="Payments"
+				data-title="Payments">Payments</a>
+				<ul class="sub-menu">
+					<li><a href="batch_list.html" data-title="Batches"
+						title="Batches">Batches</a></li>
+					<li><a href="transaction_list.html" data-title="Find Transaction"
+						title="Find Transaction">Find Transaction</a></li>
+					<!--<li><a href="transaction_add.html" data-title="Batches"-->
+						<!--title="Batches">Add New Transaction</a></li>--><li><a href="funding_list.html" title="Payer Funding"	data-title="Payer Funding">Payer Funding</a></li>
+					<li><a href="paycycle_list.html" title="Upcoming Pay Dates"
+						data-title="Upcoming Pay Dates">Upcoming Pay Dates</a></li>
+					<!--<li><a href="currency_purchase.html" title="Purchase Currency"-->
+					<!--data-title="Purchase Currency">Purchase Currency</a></li>-->
+				</ul></li>
+			<li><a href="compliance_overview.html" class=""
+				title="Compliance Monitoring and Reporting" data-title="Compliance">Compliance</a>
+				<ul class="sub-menu">
+					<li><a href="sdn_list.html" title="SDN Matches"
+						data-title="SDN Matches">SDN Matches</a></li>
+					<li><a href="sar_list.html" data-title="SAR Reports"
+						title="SAR Reports">SAR Reports</a></li>
+					<li><a href="compliance_analytics_list.html"
+						title="Compliance
+							Analytics"
+						data-title="Compliance
+							Analytics">Compliance Analytics</a></li>
+				</ul></li>
+			<li><a href="#" class="" title="Analytics and Reporting"
+				data-title="Analytics">Analytics</a></li>
+			<li><a href="profile_list.html" class="" title="Pricing"
+				data-title="Pricing">Pricing</a>
+				<ul class="sub-menu">
+					<li><a href="profile_list.html" title="Find Pricing Profile">Find
+							Pricing Profile</a></li>
+					<li><a href="profile_add.html" title="Add New Pricing Profile">Add
+							New Pricing Profile</a></li>
+				</ul></li>
+			<li><a href="#" class="" title="Users and User Settings"
+				data-title="Users">Users</a></li>
+			<li><a href="#" class="" title="System Settings"
+				data-title="System">System</a></li>
+		</ul>
+	</nav>
+	<div class="content">
+		<h2>Reference Form</h2>
+		<h3>Section Header</h3>
+		<form>
+			<div class="group1">
+				<!-- Field 1 -->
+				<label for="field1" class="col1">Required Text Field</label><input
+					type="text" id="field1" name="field1" class="required col2"
+					placeholder="*"></input>
+
+				<!-- Field 2 -->
+				<label for="field2" class="col1">Optional Text Field</label><input
+					type="text" id="field2" name="field2" class="col2"></input>
+				<!-- Field 3 -->
+				<label for="field3" class="col1">Required Droplist</label> <select
+					name="field3" id="field3" class=" width-medium">
+					<option selected></option>
+					<option>Slower</option>
+					<option>Slow</option>
+					<option>Medium</option>
+					<option>Fast</option>
+					<option>Faster</option>
+				</select>
+				<!-- Field 4 -->
+				<label for="field4" class="col1">Required Text Field with
+					error</label><label id="field4-error" class="error arrow" for="field4">This
+					field is required.</label><input type="text" id="field3" name="field3"
+					class="required col2 error" placeholder="*"></input>
+				<!-- Field 5 -->
+				<label for="field5" class="col1">Optional Date Field</label><input
+					type="text" id="field5" name="field5" class="col2 date"
+					value="03/12/2014"></input>
+
+
+			</div>
+			<hr>
+			<h3>Input Masks</h3>
+			<p>Fields that required special formatting should use an input
+				masks. These fields should also reject incomplete values. Note that
+				for US and Mexican Postal codes, the last 4 digits are optional.
+				Unfortunately, the mask itself will not communicate that to the user
+				but it won't reject a 5 digit postal code.</p>
+			<p>POSTAL CODES: We decided not to implement country-specific
+				validation for Postal Codes. Instead build a regex input mask to
+				allow for 2-12 alphanumeric chars, hyphen or space. Please let me
+				know if you need help.</p>
+			<p>
+				<ahttps://github.com/RobinHerbots/jquery.inputmask">Example
+					of custom named Regex validator</a>
+			</p>
+			<p>I have NOT been able yet to apply an input mask to
+				input[type=email]; not sure what I'm doing wrong. If you can get it
+				to work, great (need to block browser-specific formatting on error),
+				for example firefox puts a box-shadow around, that would have to be
+				overriden by setting the inputs box-shadow to none. Else just use
+				regular text inputs.</p>
+
+			<div class="group1">
+				<label for="ssn" class="col1">SSN</label><input type="text" id="ssn"
+					name="ssn" class="required col2 " placeholder="*"
+					data-inputmask="'mask': '999-99-9999'"></input>
+				<!--  -->
+				<label for="ein" class="col1">EIN</label><input type="text" id="ein"
+					name="ein" class="required col2 " placeholder="*"
+					data-inputmask="'mask': '99-9999999'"></input>
+				<!-- Field 5 -->
+				<label for="country" class="col1">Pick Country</label>
+				<!--  -->
+				<select class="col2" id="country">
+					<option></option>
+					<option value="1">United States</option>
+					<option value="2">Mexico</option>
+					<option value="3">Brazil</option>
+				</select>
+				<!--  -->
+				<label for="zip" class="col1">Postal Code</label><input type="text"
+					id="zip" name="zip" data-inputmask="'mask': 'AAAAAAAAAAA'"
+					class="col2">
+				<!--  -->
+				<label for="date" class="col1">Date Field</label><input type="text"
+					id="date" name="date" data-inputmask="'alias': 'mm/dd/yyyy'"
+					class="col2 date">
+				<!--  -->
+				<label for="usd" class="col1">Currency (USD)</label><input
+					type="text" id="usd" name="usd"
+					data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': 'USD ', 'placeholder': '0'"
+					class="col2">
+				<hr>
+				<h3>Phone Numbers</h3>
+				<p>This example should work for both add and edit forms.
+					Deleting a row means either deleting an existing number at the
+					backend or discarding the entered data before inserting. Click Add
+					Add Another Phone Number to add the next input row.</p>
+				<p>The Remove button will only CLEAR the first row, if it is the
+					ONLY one. Else it can remove it.</p>
+				<p>The remove row functionality is not implemented in this form
+					but should be working in the real app.</p>
+				<label class="first phone" for="phone-type">Phone Type</label> <select
+					id="phoneType" class="phone-type required phone width-shortest">
+					<option></option>
+					<option value="2" selected>Home</option>
+					<option value="5">Work</option>
+					<option value="8">Cell</option>
+				</select>
+				<!--  -->
+				<label class="phone" for="phone-country">Number</label> <select
+					id="phoneCountry" class="phone-country width-shortest">
+					<option></option>
+					<option selected>+1 (US)</option>
+				</select>&nbsp;
+				<!--  -->
+				<input name="phoneNumber" class="phone-number required phone "
+					style="width: 110px" placeholder="*" type="text" value="4029997777">
+				<!--  -->
+				<label class="phone" for="phone-extension">Extension</label> <input
+					class="phone-extension width-shortest" name="phoneExtension"
+					type="text" value="123">
+				<!--  -->
+
+				<input class="phone lower" name="primary" type="radio" checked><label
+					class="checkboxlabel phone">Primary</label>
+				<!--  -->
+				<a href="#" title="Remove this phone number" class="form-link lower"><span
+					class="icon-nav icon-remove "></span></a>
+				<!--  -->
+				<label class="first phone" for="phone-type">Phone Type</label> <select
+					id="phoneType2" class="phone-type required phone width-shortest">
+					<option></option>
+					<option value="2">Home</option>
+					<option value="5">Work</option>
+					<option value="8">Cell</option>
+				</select>
+				<!--  -->
+				<label class="phone" for="phone-country">Number</label> <select
+					id="phoneCountry2" class="phone-country width-shortest">
+					<option></option>
+					<option>+1 (US)</option>
+				</select>&nbsp;
+				<!--  -->
+				<input name="phoneNumber" class="phone-number required phone "
+					style="width: 110px" placeholder="*" type="text">
+				<!--  -->
+				<label class="phone" for="phone-extension">Extension</label> <input
+					class="phone-extension width-shortest" name="phoneExtension"
+					type="text">
+				<!--  -->
+
+				<input class="phone lower" name="primary" type="radio"><label
+					class="checkboxlabel phone">Primary</label>
+				<!--  -->
+				<a href="#" title="Remove this phone number lower" class="form-link"><span
+					class="icon-nav icon-remove"></span></a>
+				<!--  -->
+				<a href="#" id="addphone" title="Add Another Phone Number"
+					class="form-link first"><span class="icon-nav icon-plus"></span>Add
+					Another Phone Number</a>
+				<hr>
+				<h3>Email Addresses</h3>
+				<p>Behavior identical to Phone section</p>
+				<label class="first email" for="email-type">Email Type</label> <select
+					id="emailType" class="email-type required email width-shortest">
+					<option></option>
+					<option value="2" selected>Home</option>
+					<option value="5">Work</option>
+				</select>
+				<!--  -->
+
+				<input name="email" class="email required width-long"
+					data-inputmask="'alias':'email'" placeholder="*" type="text"
+					value="somebody@somedomain.org"> <input class="email lower"
+					name="primary-email" type="radio" checked><label
+					class="checkboxlabel email">Primary</label>
+				<!--  -->
+				<a href="#" title="Remove this email address"
+					class="form-link lower"><span class="icon-nav icon-remove"></span></a>
+				<!--  -->
+				<a href="#" id="addemail" title="Add Another Email Address"
+					class="form-link first"><span class="icon-nav icon-plus"></span>Add
+					Another Email Address</a>
+			</div>
+			<div class="buttons">
+				<input type="submit" value="Save"></input><input type="reset"
+					value="Cancel"></input>
+			</div>
+		</form>
+	</div>
+	<footer>
+		<div class="left">&copy; 2014 Prosperitas Global Solutions, Inc.
+			All Rights Reserved.</div>
+		<div class="right">Version 1.00.00 Build 00000</div>
+	</footer>
+</body>
+</html>
