@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>PGSi - SAR Report #SAR-12345</title>
+<link href="css/fonts.css" rel="stylesheet" />
+<link href="css/actions.css" rel="stylesheet" />
+<link href="css/security.css" rel="stylesheet" />
+<link href="css/navigation.css" rel="stylesheet" />
+<link href="css/jquery-ui.min.css" rel="stylesheet" />
+<link href="css/jquery-ui.structure.min.css" rel="stylesheet" />
+<link href="css/pgsi-common.css" rel="stylesheet" />
+<script src="jquery/jquery-1.11.0.min.js"></script>
+<script src="jquery/jquery-ui-1.11.0.min.js"></script>
+<script src="jquery/jquery.datatables.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$('nav.primary .sub-menu').hide();
+		$('nav.primary li').hover(function() {
+			var that = this;
+			$(this).addClass("menu-hover").find(".sub-menu").show().position({
+				my : "left top",
+				at : "left bottom",
+				of : that,
+				collision : "fit"
+			}).find("li").hover(function() {
+				$(this).addClass("menu-hover")
+			}, function() {
+				//$(this).removeClass("menu-hover")
+			});
+		}, function() {
+			$(this).removeClass("menu-hover").find(".sub-menu").hide();
+		});
+
+		$(".btn").button();
+		$("select").selectmenu();
+		$(".date").datepicker();
+
+	});
+</script>
+<style>
+h2, .buttons {
+	margin: 10px;
+}
+
+.ui-button {
+	float: left;
+}
+
+img {
+	margin-top: 5px;
+}
+
+.content {
+	min-width: 1140px;
+	padding: 24px 16px;
+}
+
+.card {
+	float: left;
+	width: 250px;
+	padding: 8px;
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	margin-right: 8px;
+	margin-bottom: 8px;
+}
+
+.col-info, .col-risk, .col-status, .col-inactive {
+	display: table-cell;
+	vertical-align: top;
+	padding-right: 20px;
+}
+
+.col-risk {
+	display: table-cell;
+	padding-left: 20px;
+	vertical-align: top;
+}
+
+.col, .col-info .col1, .col-info .col2 {
+	display: table-cell;
+	padding: 8px 24px 8px 8px;
+}
+
+.label {
+	float: left;
+	width: 150px;
+}
+
+.title {
+	font-size: 110%;
+}
+
+.internal-id {
+	font-size: 85%;
+}
+
+.card .label, .hover-card .label {
+	width: auto;
+	padding-right: 8px;
+}
+
+.value {
+	float: left;
+	font-weight: bold;
+}
+
+.value ul, .label ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.all {
+	font-weight: bold;
+	width: 100%;
+}
+
+.newline {
+	clear: both;
+}
+
+.spacer {
+	margin-top: 8px;
+}
+
+.all.normal, .all.secondary {
+	font-weight: normal;
+}
+
+hr {
+	clear: both;
+	width: 100%;
+	margin: 8px 0;
+}
+
+.col-all {
+	display: table;
+	width: 100%;
+}
+
+.col-title {
+	display: table-cell;
+	vertical-align: top;
+	height: 100%;
+}
+
+h3 {
+	margin-top: 0;
+}
+
+.col-info h3, .col-risk h3, .col-secquestion h3 {
+	display: inline-block;
+	margin-right: 15px;
+}
+
+h4 {
+	float: left;
+	clear: both;
+	color: #2b4e72;
+	margin: 0 0 8px 0;
+}
+
+.double-spacer {
+	margin-top: 20px;
+}
+
+.col-title {
+	width: 150px;
+}
+
+.content a, .content+a:hover, .content a:active {
+	text-decoration: none;
+	color: #2b4e72;
+}
+
+.content .icon-nav:before {
+	background-color: #42b653;
+	color: white;
+}
+
+.content .icon-nav {
+	background-color: #42b653;
+	padding: 2px;
+	margin-right: 3px;
+	height: 14px;
+	position: relative;
+	bottom: -1px;
+	display: inline-block;
+	position: relative;
+}
+
+.content .icon-security:before {
+	background-color: #c33538;
+	color: white;
+}
+
+.content .icon-security {
+	background-color: #c33538;
+	padding: 2px;
+	margin-right: 3px;
+	height: 14px;
+	position: relative;
+	bottom: -1px;
+	display: inline-block;
+	position: relative;
+}
+
+a:hover .icon-security, a:hover .icon-security:before, #tabs li:hover .icon-security,
+	#tabs li:hover .icon-security:before {
+	color: #ffffff;
+	background-color: #d24e38;
+}
+
+a.security:hover .icon-security, a.security:hover .icon-security:before
+	{
+	color: #c33538;
+	background-color: transparent
+}
+
+.content .security .icon-security, .content .security .icon-security:before
+	{
+	color: #c33538;
+	background: transparent
+}
+
+.content .security.neutral .icon-security, .content .security.neutral .icon-security:before
+	{
+	color: #2b4e72;
+	background: transparent
+}
+
+a.security:hover .icon-security, a.security:hover .icon-security:before
+	{
+	background-color: transparent;
+}
+
+.noteauthor {
+	float: left;
+	font-weight: bold;
+}
+
+.notedate {
+	float: right;
+}
+
+.notetext {
+	clear: both;
+	display: block;
+	padding-top: 8px;
+}
+
+.card-container {
+	display: table-cell;
+	height: 100%;
+	vertical-align: top;
+}
+
+.hover-card {
+	background-color: white;
+	border: 1px solid #42b653;
+	border-bottom-width: 3px;
+	position: absolute;
+	width: 276px;
+	position: absolute;
+}
+
+#id-hover {
+	top: 390px;
+	left: 170px;
+}
+
+#employment-hover {
+	top: 520px;
+	left: 170px;
+}
+
+#transfer-hover {
+	top: 735px;
+	left: 170px;
+}
+
+.hover-card-header {
+	background-color: #42b653;
+	color: white;
+	text-align: right;
+	padding: 2px 8px 4px 8px;
+}
+
+.hover-card-header a, .hover-card-header a:active, .hover-card-header a:hover
+	{
+	color: white;
+	text-decoration: none;
+	padding: 0 8px 0 0;
+}
+
+.hover-card-header .icon-nav {
+	position: relative;
+	bottom: -2px;
+	padding: 2px 3px 0 3px;
+	line-height: 14px;
+	margin-right: 3px;
+}
+
+a.second {
+	margin-left: 8px;
+}
+
+.ui-button .ui-button-text {
+	color: #FFFFFF;
+}
+
+.internal {
+	padding: 8px 8px 0 8px;
+	display: table-cell;
+}
+
+.internal .label {
+	width: auto;
+	padding-right: 8px;
+}
+
+.internal .value {
+	width: auto;
+	padding-right: 16px;
+}
+
+.internal a {
+	margin-right: 10px;
+}
+
+.internal a.action, .internal a.security {
+	position: relative;
+	bottom: 8px;
+}
+
+.ui-dialog .ui-dialog-content {
+	padding: 0 16px;
+}
+
+hr.top {
+	margin-top: 0;
+}
+
+.address-col-1 {
+	float: left;
+}
+
+.address-col-2 {
+	float: left;
+}
+
+form label {
+	display: block;
+	float: left;
+	margin-right: 8px;
+	margin-left: 8px;
+	line-height: 24px;
+}
+
+form input[type=text], input[type=password], form input[type=checkbox],
+	form input[type=radio], form .ui-selectmenu-button, form textarea {
+	display: block;
+	float: left;
+	margin-right: 8px;
+}
+
+textarea {
+	background-color: #f8f8f8;
+	border-color: #cccccc;
+	border-style: solid;
+	border-width: 1px;
+	margin-bottom: 10px;
+	padding: 0 10px;
+}
+
+.width-shortest {
+	width: 90px;
+}
+
+input.width-shortest {
+	width: 60px;
+}
+
+.width-short, label.width-short.first {
+	width: 150px;
+}
+
+.width-medium {
+	width: 220px;
+}
+
+.width-long {
+	width: 280px;
+}
+
+.width-longest {
+	width: 400px;
+}
+
+label.first {
+	width: 140px;
+	clear: both;
+}
+
+.first {
+	clear: both;
+}
+
+.address-col-2 .first {
+	width: 120px;
+}
+
+hr {
+	clear: both;
+	width: 100%;
+	float: left;
+	margin: 16px 0 18px 0;
+}
+
+hr.last {
+	margin-bottom: 0;
+}
+
+h3 {
+	float: left;
+	margin-right: 16px;
+}
+
+a.form-link, a.form-link:hover, a.form-link:active {
+	color: #2b4e72;
+	text-decoration: none;
+	float: left;
+}
+
+a.form-link.first {
+	clear: both;
+	margin: 10px 0 8px 100px;
+}
+
+.form-link .icon-nav, .remembered-location .icon-nav {
+	padding: 3px 3px 0 3px;
+	position: relative;
+	bottom: -1px;
+	color: #ffffff;
+	background-color: #42b653;
+	font-size: 12px;
+	margin-right: 3px;
+}
+
+#autocomplete-dialog {
+	left: 172px;
+	position: absolute;
+	top: 39px;
+}
+
+.col-secquestion h3, .col-secquestion .ui-button, .col-secquestion a {
+	float: left;
+}
+
+.col-secquestion .label {
+	width: 110px;
+}
+
+#pin {
+	margin-right: 0;
+	width: 36px;
+}
+
+.pin-verify {
+	float: left;
+}
+
+.pin-verify.icon-nav {
+	display: none;
+	position: relative;
+	bottom: -2px;
+	margin-left: 0;
+}
+
+.pin-verify.icon-minus-circle, .pin-verify.icon-minus-circle:before {
+	color: red;
+	background-color: transparent;
+	font-size: 18px;
+}
+
+.pin-verify.icon-check-mark, .pin-verify.icon-check-mark:before {
+	color: #42b653;
+	background-color: transparent;
+	font-size: 18px;
+}
+
+.contact-info {
+	float: left;
+	display: none;
+}
+
+.parent {
+	font-weight: bold;
+	color: #2b4e72;
+}
+
+label.paydate {
+	margin-left: 0;
+	margin-right: 16px;
+}
+
+table.sdn-detail {
+	clear: both;
+	/* 	border-collapse: collapse; */
+	border-spacing: 8px;
+}
+
+.sdn-detail td {
+	/* 	border-top: 1px solid #cccccc; */
+	
+}
+
+table.sdn-detail td, table.sdn-detail th {
+	vertical-align: top;
+	text-align: left;
+}
+
+td.section {
+	font-weight: bold;
+	color: #2b4e72;
+	padding-top: 8px;
+}
+
+td .col {
+	display: inline-block;
+	margin-bottom: 0;
+	margin-right: 16px;
+	padding: 0;
+	vertical-align: top;
+}
+
+td .header {
+	font-weight: bold;
+	color: #2b4e72;
+	margin-right: 8px;
+}
+
+td ul {
+	list-style: none;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0px;
+}
+
+span.match {
+	font-weight: bold;
+	border: 1px solid #c33639;
+	color: #c33639;
+	padding: 0 4px;
+}
+
+table.sdn-detail th {
+	vertical-align: top;
+	text-align: center;
+	padding: 8px 16px;
+	line-height: 24px;
+	font-weight: bold;
+	border: 1px solid #cccccc;
+	background-color: #AAD044;
+	color: #2b4e72;
+}
+
+table.sdn-detail th.section {
+	border: none;
+	background-color: transparent;
+}
+
+table.sdn-detail td.sdn {
+	background-color: #f8f8f8;
+	padding: 8px 16px;
+	border: 1px solid #cccccc;
+}
+
+table.sdn-detail th.sdn {
+	background-color: #AAD044;
+}
+
+table.sdn-detail td.pgsi {
+	vertical-align: top;
+	text-align: left;
+	padding: 8px 16px;
+	border: 1px solid #cccccc;
+}
+
+.card {
+	float: left;
+	width: 250px;
+	padding: 8px;
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	margin-right: 8px;
+	margin-bottom: 8px;
+}
+
+.sdn-summary .label.first {
+	width: 110px;
+}
+
+.divider {
+	bottom: 8px;
+	font-size: 24px;
+	margin: 0 16px 0 12px;
+	position: relative;
+}
+
+.btn.first {
+	margin-left: 155px;
+}
+
+.empty {
+	color: #cccccc;
+	font-weight: bold;
+	padding: 24px 26px 24px 12px;
+}
+
+.no-history {
+	color: #cccccc;
+	font-weight: bold;
+	padding: 80px 64px 40px 200px;
+}
+
+.normal {
+	font-weight: normal;
+}
+
+a.security.medium .icon-security, a.security.medium .icon-security:before
+	{
+	color: #ff9900;
+	font-weight: bold;
+}
+
+.narrow {
+	width: 100px;
+}
+</style>
+</head>
+<body>
+	<header>
+		<ul>
+			<li>Welcome&nbsp;&nbsp;<span class="emphasis">John Demo</span></li>
+			<li class="disabled"><a class="account_link" href="#"
+				title="Coming soon - Account"><span class="icon-user icon-nav"></span>Account</a></li>
+			<li class="disabled"><a class="help_link" href="#"
+				title="Coming soon - Help"><span class="icon-question icon-nav"></span>Help</a></li>
+			<li><a class="signout_link" href="login.html" title="Sign out"><span
+					class="icon-unlock icon-nav"></span>Sign Out</a></li>
+		</ul>
+	</header>
+	<nav class="primary">
+		<ul class="main-menu">
+			<li class="menu-home"><a href="dashboard.html"
+				class="icon-home icon-nav" title="Home"></a></li>
+			<li><a href="organization_list.html"
+				title="Organizations and Locations" data-title="Customers">Customers</a>
+				<ul class="sub-menu">
+					<li><a href="organization_add.html" title="Add Organization"
+						data-title="Add Organization">Add Organization</a></li>
+					<li><a href="organization_list.html"
+						data-title="Find Organization" title="Find Organization">Find
+							Organization</a></li>
+					<li><a href="location_add.html" title="Add Location"
+						data-title="Add Location">Add Location</a></li>
+					<li><a href="location_list.html" title="Find Location"
+						data-title="Find Location">Find Location</a></li>
+				</ul></li>
+			<li><a href="member_list.html" class=""
+				title="Members and Recipients" data-title="Members">Members</a>
+				<ul class="sub-menu">
+					<li><a href="member_add_main.html" title="Add Member"
+						data-title="Add Member">Add Member</a></li>
+					<li><a href="member_list.html" data-title="Find Member"
+						title="Find Member">Find Member</a></li>
+					<li><a href="recipient_list.html" title="Find Recipient"
+						data-title="Find Recipient">Find Recipient</a></li>
+				</ul></li>
+			<li><a href="payment_overview.html" class="" title="Payments"
+				data-title="Payments">Payments</a>
+				<ul class="sub-menu">
+					<li><a href="batch_list.html" data-title="Batches"
+						title="Batches">Batches</a></li>
+					<li><a href="transaction_list.html"
+						data-title="Find Transaction" title="Find Transaction">Find
+							Transaction</a></li>
+					<!--<li><a href="transaction_add.html" data-title="Batches"-->
+						<!--title="Batches">Add New Transaction</a></li>-->
+					<li><a href="funding_list.html" title="Payer Funding"
+						data-title="Payer Funding">Payer Funding</a></li>
+					<li><a href="paycycle_list.html" title="Upcoming Pay Dates"
+						data-title="Upcoming Pay Dates">Upcoming Pay Dates</a></li>
+					<!--<li><a href="currency_purchase.html" title="Purchase Currency"-->
+					<!--data-title="Purchase Currency">Purchase Currency</a></li>-->
+				</ul></li>
+			<li class="menu-active"><a href="compliance_overview.html"
+				class="" title="Compliance Monitoring and Reporting"
+				data-title="Compliance">Compliance</a>
+				<ul class="sub-menu">
+					<li><a href="sdn_list.html" title="SDN Matches"
+						data-title="SDN Matches">SDN Matches</a></li>
+					<li><a href="sar_list.html" data-title="SAR Reports"
+						title="SAR Reports">SAR Reports</a></li>
+					<!-- 					<li><a href="compliance_analytics_list.html" -->
+					<!-- 						title="Compliance -->
+					<!-- 							Analytics" -->
+					<!-- 						data-title="Compliance -->
+					<!-- 							Analytics">Compliance Analytics</a></li> -->
+				</ul></li>
+			<li><a href="profile_list.html" class="" title="Pricing"
+				data-title="Pricing">Pricing</a>
+				<ul class="sub-menu">
+					<li><a href="profile_list.html" title="Find Pricing Profile">Find
+							Pricing Profile</a></li>
+					<li><a href="profile_add.html" title="Add New Pricing Profile">Add
+							New Pricing Profile</a></li>
+				</ul></li>
+			<li class="disabled"><a href="#" class=""
+				title="Coming soon - Analytics and Reporting" data-title="Analytics">Analytics</a></li>
+			<li class="disabled"><a href="#" class=""
+				title="Coming soon - Users and User Settings" data-title="Users">Users</a></li>
+			<li class="disabled"><a href="#" class=""
+				title="Coming soon - System Settings" data-title="System">System</a></li>
+			<li class="last"><a href="#" class="" id="link-sar"
+				title="Report Suspicious Activity"
+				data-title="Report Suspicious Activity&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"><span
+					class="icon-security icon-eye-1"></span>Report Suspicious Activity</a></li>
+		</ul>
+	</nav>
+	<nav class="secondary">
+		<span><a href="compliance_overview.html" title="Compliance">Compliance</a></span><span
+			class="icon-nav icon-angle-right"></span><span><a
+			href="sar_list.html" title="SDN Matches">SAR Reports</a></span><span
+			class="icon-nav icon-angle-right"></span><span>SAR Report
+			#SAR-12435</span>
+	</nav>
+	<h2>Suspicious Activity Report #SAR-12345 (Filed)</h2>
+
+
+	<div class="content">
+		<div class="internal">
+			<div class="newline label">Report ID</div>
+			<div class="value" style="margin-right: 0">#SAR-12345</div>
+			<div class="label" style="margin-right: 24px;">Reported
+				12/12/2014 by Anna CSRUser</div>
+			<div class="label">Filed 12/12/2014 by Amanda ComplianceOfficer
+			</div>
+
+		</div>
+		<hr>
+		<div class="col-info">
+			<h3 style="margin-bottom: 8px;">Report Target</h3>
+			<div class="value first" style="width: auto">
+				<a href="member_view.html">Fremont Location (#LAB-12334)</a>
+			</div>
+			<div class="label first" style="width: auto">
+				<a class="security high" nohref=""> <span
+					class="icon-security icon-torso"></span>2 Individuals
+				</a> <a class="security medium" nohref=""> <span
+					class="icon-security icon-flag"></span> Medium Risk
+				</a>
+			</div>
+			<div class="label first spacer narrow">Type</div>
+			<div class="value spacer ">Location</div>
+			<div class="label first  narrow">Status</div>
+			<div class="value ">Active</div>
+			<div class="label first  narrow">Enrolled since</div>
+			<div class="value ">05/25/2013</div>
+			<div class="label first narrow">Organization</div>
+			<div class="value normal ">
+				<a href='organization_view.html'>Premium Meatpacking of
+					Nebraska, Inc</a>
+			</div>
+
+
+		</div>
+		<div class="col-info">
+			<h3>Contact Information</h3>
+			<div class="newline all normal">12345 Street Name</div>
+			<div class="newline all normal">Apt 45</div>
+			<div class="newline all normal">Omaha, NE 12345 USA</div>
+			<div class="newline all primary spacer">+1 402 888 9999 (cell)</div>
+			<div class="newline all secondary">+1 4028889999 (Work)</div>
+
+			<div class="newline all primary spacer">
+				<a href="mailto:mramirez@abc.meatpacking.com">mramirez@abc.meatpacking.com
+					(home)</a>
+			</div>
+			<div class="newline all secondary">
+				<a href="mailto:mramirez@abc.meatpacking.com">mramirez@abc.meatpacking.com
+					(work)</a>
+			</div>
+		</div>
+		<div class="col-risk">
+			<h3>Risk</h3>
+			<a href="#" title="Edit Risk"><span class="icon-nav icon-pencil"></span>Edit</a>
+			<div class="newline all">Medium Risk</div>
+			<div class="card spacer" id="risk-hover-ref">
+				<div class="noteauthor">Robert Shapiro</div>
+				<div class="notedate">12/12/2012</div>
+				<div class="notetext">Suspicious activity in the past..</div>
+			</div>
+		</div>
+		<div class="col-risk">
+			<h3 class="newline">PEP Overview</h3>
+			<div class="label newline" style="width: auto">
+				<a href="member_view.html" class="newline">Roberta Ramirez
+					Marcos (#MAB-12345)</a>
+			</div>
+			<div class="label newline" style="width: auto">
+				<a href="member_view.html" class="newline">Ana-Maria Mendoza
+					(#cAB-12345)</a>
+			</div>
+		</div>
+		<hr>
+		<div class="col-info newline" style="max-width: 300px;">
+			<h3>Suspicious Activity</h3>
+			<div class="label first narrow">Summary</div>
+			<div class="value normal">Suspected Structuring</div>
+			<div class="label newline narrow">Period</div>
+			<div class="value">03/12/2014-12/12/2014</div>
+			<div class="label newline narrow">Total Amount</div>
+			<div class="value">USD 10,000.00</div>
+		</div>
+		<div class="col-info" style="max-width: 450px;">
+			<div class="label first" style="width: auto; margin-top: 24px;">Suspected
+				structuring. Multiple transfers to same person. Monthly transfer
+				totals almost USD 10,000. Recipient: Rudolpho Ricardo Rendezvous
+				(RAB-12345).</div>
+			<div class="label first spacer" style="width: auto">See
+				transactions
+				#44444443234,#44444443234,#44444443234,#44444443234,#44444443234 and
+				#44444443234.</div>
+		</div>
+		<hr>
+		<h3>SAR History</h3>
+		<div class="col-all sdn-history">
+
+			<!-- Under the penalty of DEATH - Do NOT user iframes like this in the real product! -->
+			<iframe src="sar_history_list_tab.html" frameBorder="0"
+				scrolling="no" width="1020px;" height="100px"></iframe>
+
+		</div>
+		<hr>
+		<h3>Update SAR Status</h3>
+		<form>
+
+			<div class="col-all first">
+				<label class="first">SAR Status</label><select id="field-sdn-status"
+					class="width-medium"><option></option>
+					<option>Filing</option>
+					<option>Filed</option>
+					<option>Closed</option></select><label class="first">Filing Date</label> <input
+					type="text" class="date width-medium"><label class="first">Reason</label>
+				<textarea class="width-longest" id="field-sdn-note"></textarea>
+
+				<input type="reset" id="reset-button" value="Reset"
+					class="btn first spacer"><input class="btn spacer"
+					id="save-button" value="Update SDN Status" type="submit">
+			</div>
+		</form>
+
+	</div>
+	</div>
+	</div>
+
+
+
+	<footer>
+		<div class="left">&copy; 2014 Prosperitas Global Solutions, Inc.
+			All Rights Reserved.</div>
+		<div class="right">Version 1.00.00 Build 00000</div>
+	</footer>
+
+</body>
+</html>

@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>PGSi Members</title>
+<link href="css/fonts.css" rel="stylesheet" />
+<!-- <link href="css/actions.css" rel="stylesheet" /> -->
+<link href="css/navigation.css" rel="stylesheet" />
+<link href="css/jquery-ui.min.css" rel="stylesheet" />
+<link href="css/jquery-ui.structure.min.css" rel="stylesheet" />
+<link href="css/pgsi-common.css" rel="stylesheet" />
+<script src="jquery/jquery-1.11.0.min.js"></script>
+<script src="jquery/jquery-ui-1.11.0.min.js"></script>
+<script src="jquery/jquery.datatables.min.js"></script>
+<script>
+	function showDeleteDialog(obj) {
+		$(obj).append("<div id='delete_dialog' style='display:none'></div>");
+		$("#delete_dialog").dialog({
+			title : "This styling/content definitely needs more work",
+			modal : true,
+			zIndex : 10000,
+			autoOpen : true,
+			width : 'auto',
+			resizable : false,
+			buttons : {
+				Delete : function() {
+					$(this).dialog("close");
+					$(this).remove();
+				},
+				Cancel : function() {
+					$(this).dialog("close");
+					$(this).remove();
+				}
+			}
+
+		});
+	};
+	$(document)
+			.ready(
+					function() {
+
+						//http://datatables.net/reference/option/language
+						$('#data_list')
+								.dataTable(
+										{
+											dom : '<"list_header"ipl><t><"list_footer"ipl>',
+											paging : true,
+											pagingType : "full",
+											iDisplayLength : 25,
+											language : {
+												paginate : {
+													first : "a",
+													last : "b",
+													next : "g",
+													previous : "f"
+												},
+												lengthMenu : "_MENU_ records per page",
+												loadingRecords : "Loading...",
+												processing : "Processing...",
+												zeroRecords : "No matching records found",
+												info : "Showing _START_ to _END_ of _TOTAL_ matching records. (SDN/SAR summary goes here.)"
+											},
+											drawCallback : function(settings) {
+												$(".dataTables_length select")
+														.outerWidth(60)
+														.selectmenu();
+												$("#data_list .name a")
+														.parent("td")
+														.hover(
+																function() {
+																	$(this)
+																			.append(
+																					'<a href="organization_view.html" title="Edit [Member Name]"><span class="icon-nav icon-pencil"></span></a>'
+																							+ '<a href="#" title="Deactivate [Member Name]"><span class="icon-nav icon-minus-circle"></span></a>'
+																							+ '<a href="#" title="Delete [Member Name]" onclick="showDeleteDialog(this); return false;"><span  class="icon-nav icon-trash-bin"></span></a>');
+																},
+																function() {
+																	$(this)
+																			.find(
+																					'.icon-nav')
+																			.remove();
+																});
+											}
+										});
+						$(".filter select").selectmenu();
+						$("input[type=submit],input[type=reset]").button();
+						$('#data_list input[type=checkbox]').change(function() {
+							if (this.checked) {
+								$(this).closest("tr").addClass('selected');
+							} else {
+								$(this).closest("tr").removeClass('selected');
+							}
+						});
+					});
+</script>
+<style>
+#data_list .multiples a {
+	display: block;
+}
+
+.second_org {
+	padding-top: 8px;
+}
+
+.filter {
+	background-color: transparent;
+	border-spacing: 0;
+	display: table-cell;
+	height: 100%;
+	padding-left: 0;
+	vertical-align: top;
+	width: 200px;
+}
+
+.filter {
+	padding: 0;
+}
+
+.filter * {
+	display: none;
+}
+
+#data_list_wrapper {
+	margin-left: 0;
+}
+
+.data #data_list .icon-sort {
+	display: none;
+}
+</style>
+</head>
+<body>
+	<div class="content list">
+		<div class="filter"></div>
+		<div class="data">
+			<table id="data_list">
+				<thead>
+					<tr>
+						<!-- 						<th><input type="checkbox"></input></th> -->
+						<th>ID<span class="icon-sort"></span></th>
+						<th>Name<span class="icon-sort"></span></th>
+						<th>Location</span></th>
+						<th>City<span class="icon-sort"></span></th>
+						<th>State<span class="icon-sort"></span></th>
+						<th>Country<span class="icon-sort"></span></th>
+						<th>SDN Status<span class="icon-sort"></span></th>
+						<th>Primary Phone</th>
+						<th>Recipients</th>
+						<th>Risk Level<span class="icon-sort"></span></th>
+						<th>Status<span class="icon-sort"></span></th>
+					</tr>
+				</thead>
+				<tbody>
+					<script>
+						for (var i = 0; i < 4; i++) {
+							document.write('<tr>');
+							//document
+							//		.write('<td><input type="checkbox"></input></td>');
+							document
+									.write('<td><a class="" href="member_view.html">MAB-'
+											+ (21345 + i) + '</a></td>');
+							document
+									.write('<td class="name"><a class="edit_link" href="member_view.html"');
+							document
+									.write('title="View/Edit Maria Ramirez.">Maria Ramirez '
+											+ (i + 1) + '</a></td>');
+							document
+									.write('<td class="multiples"><a href="organization_view.html"'+'title="View/Edit Nebraska Premium Meatpacking Ltd.">Nebraska'
+											+ 'Premium Meatpacking Ltd. '
+											+ '</a><a href="location_view.html"'+'title="View/Edit Fremont Location.">Fremont Location '
+											+ (i + 1) + '</a>');
+							if (i % 5 == 0) {
+								document
+										.write('<a class="second_org" href="organization_view.html"'+'title="View/Edit Deutsche Wurstwaren GmbH">Deutsche Wurstwaren GmbH '
+												+ '</a><a href="location_view.html"'+'title="View/Edit Omaha Branch">Omaha Branch '
+												+ (i + 1) + '</a>');
+							}
+
+							document.write('</td><td>Omaha</td>');
+							document.write('<td>NE</td>');
+							document.write('<td>USA</td>');
+							document.write('<td>Negative</td>');
+							document.write('<td>1-402-899-9988</td>');
+							document
+									.write('<td class="multiples"><a href="recipient_view.html" title="View/Edit Antonio Garcia">Antonio Garcia (RBC-34521)</a>'
+											+ '<a href="recipient_view.html" title="View/Edit Anna Suarez">Anna Suarez (RBC-34521)</a>');
+							if (i % 5 == 0) {
+								document
+										.write('<a class="second_line" href="recipient_view.html" title="View/Edit Antonio Garcia">Antonio Garcia (RBX-34555)</a>'
+												+ '<a href="recipient_view.html" title="View/Edit Monica Adoba">Monica Adoba (RBC-19657)</a>');
+							}
+
+							document.write('</td><td>Low</td>');
+							document.write('<td>Active</td>');
+							document.write('</tr>');
+						}
+					</script>
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

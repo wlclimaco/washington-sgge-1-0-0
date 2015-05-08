@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>PGSi - Add New Recipient</title>
+<link href="css/fonts.css" rel="stylesheet" />
+<!-- <link href="css/actions.css" rel="stylesheet" /> -->
+<link href="css/navigation.css" rel="stylesheet" />
+<link href="css/jquery-ui.min.css" rel="stylesheet" />
+<link href="css/jquery-ui.structure.min.css" rel="stylesheet" />
+<link href="css/pgsi-common.css" rel="stylesheet" />
+<script src="jquery/jquery-1.11.0.min.js"></script>
+<script src="jquery/jquery-ui-1.11.0.min.js"></script>
+<script src="jquery/jquery.datatables.min.js"></script>
+
+<script>
+	$(document)
+			.ready(
+					function() {
+						$('nav.primary .sub-menu').hide();
+						$('nav.primary li').hover(
+								function() {
+									var that = this;
+									$(this).addClass("menu-hover").find(
+											".sub-menu").show().position({
+										my : "left top",
+										at : "left bottom",
+										of : that,
+										collision : "fit"
+									}).find("li").hover(function() {
+										$(this).addClass("menu-hover")
+									}, function() {
+										//$(this).removeClass("menu-hover")
+									});
+								},
+								function() {
+									$(this).removeClass("menu-hover").find(
+											".sub-menu").hide();
+								});
+						$("select").selectmenu();
+						$("span.ui-selectmenu-text").each(
+								function(index) {
+									if (!$(this).text().trim()) {
+										$(this).parent(
+												"span.ui-selectmenu-button")
+												.addClass("required");
+									} else {
+										$(this).parent(
+												"span.ui-selectmenu-button")
+												.removeClass("required");
+									}
+								});
+						$("input.date").datepicker();
+						$(".match-card").hover(function() {
+							$(".hover-card").show();
+						}, function() {
+							$(".hover-card").hide();
+						}).show();
+						;
+						$("#next-button").click(function(e) {
+							e.preventDefault();
+							top.location.href = "transfer_add.html"
+						});
+						$("#save-button").click(function(e) {
+							e.preventDefault();
+							top.location.href = "member_view.html"
+						});
+						$("#cancel-button").click(function(e) {
+							e.preventDefault();
+							top.location.href = "member_list.html";
+						});
+						$("#prev-button").click(function(e) {
+							e.preventDefault();
+							top.location.href = "member_add_main.html";
+						});
+
+						$("#addphone")
+								.click(
+										function(e) {
+											e.preventDefault();
+											$(this)
+													.before(
+															$('<label class="first" for="phone-type">Phone Type</label> <select '+
+							'id="phoneType2" class="phone-type required phone width-shortest">'
+																	+ '<option></option>'
+																	+ '<option value="2">Home</option>'
+																	+ '<option value="5">Work</option>'
+																	+ '<option value="8">Cell</option>'
+																	+ '</select>'
+																	+ '<label for="phone-country">Number</label> <select '+
+							'id="phoneCountry2" class="phone-country width-shortest">'
+																	+ '<option></option>'
+																	+ '<option>+1 (US)</option>'
+																	+ '</select>&nbsp;'
+																	+ '<input name="phoneNumber2" class="phone-number required phone "'+
+							'style="width: 110px" placeholder="*" type="text">'
+																	+ '<label for="phone-extension">Extension</label> <input '+
+							'class="phone-extension2 width-shortest" name="phoneExtension" '+
+							'type="text">'
+																	+ '<input name="vehicle" value="Car" type="checkbox"><label '+
+							'class="checkboxlabel" >Primary</label>'
+																	+ '<a href="#" title="Remove this phone number" class="form-link"><span '+
+							'class="icon-nav icon-remove"></span>Remove</a>'));
+											$("#phoneType2, #phoneCountry2")
+													.selectmenu();
+											$("#phoneType2-button").focus();
+										});
+					});
+</script>
+<style>
+h2, .buttons {
+	margin: 10px;
+}
+
+.container {
+	width: 95%;
+	padding: 10px;
+}
+
+.content {
+	min-width: 1000px;
+	max-width: 1200px;
+	position: relative;
+}
+
+.section-1 {
+	display: table;
+	width: 100%;
+}
+
+.section-2 {
+	padding: 20px 10px 10px 10px;
+	display: table;
+	width: 100%;
+}
+
+.left-col {
+	display: table-cell;
+	vertical-align: top;
+	padding: 20px 10px 0 10px;
+}
+
+.right-col {
+	display: table-cell;
+	min-width: 300px;
+	background-color: #e3ecf4;
+	width: 25%;
+}
+
+.address-col-1 {
+	float: left;
+	width: 55%;
+}
+
+.address-col-2 {
+	float: left;
+	width: 45%;
+}
+
+form label {
+	display: block;
+	float: left;
+	margin-right: 8px;
+	line-height: 24px;
+}
+
+form input[type=text], form input[type=checkbox], form .ui-selectmenu-button,
+	form textarea {
+	display: block;
+	float: left;
+	margin-right: 8px;
+}
+
+textarea {
+	background-color: #f8f8f8;
+	border-color: #cccccc;
+	border-style: solid;
+	border-width: 1px;
+	margin-bottom: 10px;
+	padding: 0 10px;
+}
+
+.width-shortest {
+	width: 90px;
+}
+
+input.width-shortest {
+	width: 60px;
+}
+
+.width-short, label.width-short.first {
+	width: 150px;
+}
+
+.width-medium {
+	width: 220px;
+}
+
+.width-long {
+	width: 280px;
+}
+
+.width-longest {
+	width: 400px;
+}
+
+label.first {
+	width: 100px;
+	clear: both;
+}
+
+hr {
+	clear: both;
+	width: 99%;
+	float: left;
+	margin: 16px 10px 18px 0;
+}
+
+hr.last {
+	margin-bottom: 0;
+}
+
+a.form-link, a.form-link:hover, a.form-link:active {
+	color: #333333;
+	text-decoration: none;
+	float: left;
+}
+
+.remembered-location a, .remembered-location a:hover,
+	.remembered-location a:active {
+	color: #333333;
+	text-decoration: none;
+}
+
+.remembered-location a.view, .remembered-location a.view:hover,
+	.remembered-location a.view:active {
+	color: #2b4e72;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+a.form-link.first {
+	margin-left: 110px;
+	clear: both;
+	margin-bottom: 20px;
+}
+
+.form-link .icon-nav, .remembered-location .icon-nav {
+	padding: 3px 3px 0 3px;
+	position: relative;
+	bottom: -1px;
+	color: #ffffff;
+	background-color: #42b653;
+	font-size: 12px;
+	margin-right: 3px;
+}
+
+.close-button-form {
+	clear: both;
+}
+
+.attention {
+	float: left;
+	padding: 0 30px;
+	color: #2b4e72;
+}
+
+.attention .icon-nav {
+	float: left;
+	width: 40px;
+	line-height: 40px;
+	font-size: 20px;
+}
+
+.attention .text {
+	float: left;
+	width: 500px;
+}
+
+.right-col h4 {
+	color: #2b4e72;
+	margin: 8px 8px 4px 8px;
+}
+
+.right-col {
+	position: relative;
+}
+
+.match-container {
+	padding: 0 8px 8px 8px;
+	overflow-y: scroll;
+	margin-bottom: 8px;
+	max-height: 1040px;
+}
+
+.match-card .line, .hover-card .line {
+	display: table;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.match-card {
+	border: 1px solid #cccccc;
+	background-color: #f8f8f8;
+	padding: 8px;
+	margin-bottom: 8px;
+}
+
+.match-card .name, .hover-card .name {
+	font-weight: bold;
+	margin-bottom: 8px;
+	display: table-cell;
+	text-align: left;
+}
+
+.match-card .mid, .hover-card .mid {
+	font-weight: bold;
+	font-size: 12px;
+	display: table-cell;
+	text-align: right;
+}
+
+.match-card .born, .hover-card .born {
+	display: table-cell;
+	width: 50%;
+	text-align: left;
+}
+
+.match-card .ssn, .hover-card .ssn {
+	display: table-cell;
+	width: 50%;
+	text-align: left;
+	padding-right: 10px;
+}
+
+.match-card .asterisk {
+	bottom: -3px;
+	font-size: 18px;
+	position: relative;
+}
+
+.match-card ul {
+	list-style: none;
+	padding: 8px 0 0 0;
+	margin: 0;
+}
+
+.match-card li {
+	display: inline;
+	font-weight: bold;
+	padding-right: 8px;
+}
+
+.match-card li .icon-nav {
+	position: relative;
+	bottom: -2px;
+}
+
+.match-card .yes {
+	color: #42b653;
+}
+
+.match-card .no {
+	color: #c33538;
+}
+
+.hover-card {
+	border: 1px solid #42b653;
+	background-color: white;
+	position: absolute;
+	left: -50px;
+	top: 150px;
+	width: 500px;
+}
+
+.hover-card-header {
+	background-color: #42b653;
+	color: white;
+	text-align: right;
+	padding: 2px 8px 4px 8px;
+}
+
+.hover-card-header a, .hover-card-header a:active, .hover-card-header a:hover
+	{
+	color: white;
+	text-decoration: none;
+	padding: 0 8px 0 0;
+}
+
+.hover-card-header .icon-nav {
+	position: relative;
+	bottom: -2px;
+	padding: 2px 3px 0 3px;
+	line-height: 14px;
+	margin-right: 3px;
+}
+
+.hover-card-content {
+	padding: 8px;
+}
+
+.hover-card .col-1, .hover-card .col-2 {
+	display: table-cell;
+	text-align: left;
+}
+
+.hover-card .ssn, .hover-card .born {
+	padding-bottom: 8px;
+}
+
+.buttons-form {
+	float: left;
+	text-align: center;
+	width: 100%;
+}
+
+#id-section {
+	display: none;
+}
+
+#employment-section {
+	display: none;
+}
+
+.remembered-location {
+	position: absolute;
+	top: -50px;
+	right: 0;
+}
+
+.transfer {
+	font-size: 12px;
+}
+</style>
+</head>
+<body>
+	<header>
+		<ul>
+			<li>Welcome&nbsp;&nbsp;<span class="emphasis">John Demo</span></li>
+			<li><a class="account_link" href="#" title="Account"><span
+					class="icon-user icon-nav"></span>Account</a></li>
+			<li><a class="help_link" href="#" title="Help"><span
+					class="icon-minus-circle icon-nav"></span>Help</a></li>
+			<li><a class="signout_link" href="login.html" title="Sign out"><span
+					class="icon-unlock icon-nav"></span>Sign Out</a></li>
+		</ul>
+	</header>
+	<nav class="primary">
+		<ul class="main-menu">
+			<li class="menu-home"><a href="dashboard.html"
+				class="icon-home icon-nav" title="Home"></a></li>
+			<li><a href="organization_list.html"
+				title="Organizations and Locations" data-title="Customers">Customers</a>
+				<ul class="sub-menu">
+					<li><a href="organization_add.html" title="Add Organization"
+						data-title="Add Organization">Add Organization</a></li>
+					<li><a href="organization_list.html"
+						data-title="Find Organization" title="Find Organization">Find
+							Organization</a></li>
+					<li><a href="location_add.html" title="Add Location"
+						data-title="Add Location">Add Location</a></li>
+					<li><a href="location_list.html" title="Find Location"
+						data-title="Find Location">Find Location</a></li>
+				</ul></li>
+			<li class="menu-active"><a href="#" class=""
+				title="Members and Recipients" data-title="Members">Members</a>
+				<ul class="sub-menu">
+					<li><a href="member_add_main.html" title="Add Member"
+						data-title="Add Member">Add Member</a></li>
+					<li><a href="member_list.html" data-title="Find Member"
+						title="Find Member">Find Member</a></li>
+					<li><a href="recipient_list.html" title="Find Recipient"
+						data-title="Find Recipient">Find Recipient</a></li>
+				</ul></li>
+			<li><a href="payment_overview.html" class="" title="Payments" data-title="Payments">Payments</a></li>
+			<li><a href="#" class=""
+				title="Compliance Monitoring and Reporting" data-title="Compliance">Compliance</a></li>
+			<li><a href="#" class="" title="Analytics and Reporting"
+				data-title="Analytics">Analytics</a></li>
+			<li><a href="profile_list.html" class="" title="Pricing"
+				data-title="Pricing">Pricing</a>
+			<ul class="sub-menu">
+					<li><a href="profile_list.html" title="Find Pricing Profile">Find
+							Pricing Profile</a></li>
+					<li><a href="profile_add.html" title="Add New Pricing Profile">Add
+							New Pricing Profile</a></li>
+				</ul></li>
+			<li><a href="#" class="" title="Users and User Settings"
+				data-title="Users">Users</a></li>
+			<li><a href="#" class="" title="System Settings"
+				data-title="System">System</a></li>
+		</ul>
+	</nav>
+	<nav class="secondary">
+		<span><a href="organization_list.html" title="Members">Members</a></span><span
+			class="icon-nav icon-angle-right"></span><span>Add New Member</span>
+	</nav>
+
+	<h2>Add New Recipient</h2>
+	<div class="container">
+		<div class="content">
+			<div class="remembered-location">
+				Adding members for <a href="location_view.html" class="view">Fremont
+					Location</a> <a href="organization_view.html" class="view">
+					(Nebraska PremiumMeatpacking, Ltd)</a><a href="#" title="Remove">&nbsp;&nbsp;<span
+					class="icon-nav icon-remove"></span>
+				</a>
+			</div>
+			<form>
+				<div class="section-1">
+					<div class="left-col">
+						<label class="first">Member</label><label class="parent">Maria
+							Ramirez<a href="member_view.html" title="View Maria Ramirez"><span
+								class="icon-nav icon-search-find"></span>View</a>
+						</label>
+						<hr>
+						<!--  -->
+						<label class="first">First Name</label> <input id="firstname"
+							class="required width-long" placeholder="*" type="text">
+						<!--  -->
+						<label>Middle Name</label> <input id="middlename"
+							class="width-medium" type="text">
+						<!--  -->
+						<label class="first">Last Name</label> <input id="lastname"
+							class="required width-long" placeholder="*" type="text">
+						<!--  -->
+						<label>Suffix</label><select id="suffix" class="width-shortest">
+							<option></option>
+							<option>Jr</option>
+							<option>Sr</option>
+						</select>
+						<!-- TODO allow adding more than one -->
+						<label class="first">Other Names Used</label> <input
+							id="othernames" class="width-longest" type="text">
+						<!--  -->
+						<a href="#" title="Add another name" class="form-link first"><span
+							class="icon-nav icon-plus"></span>Add Another Name</a>
+
+						<hr>
+						<div class="address-col-1">
+
+							<!--  -->
+							<label class="first" for="street-address-line-1">Street
+								Address</label> <input aria-required="true" id="street-address-line-1"
+								name="streetAddressLine1" class="required width-long"
+								placeholder="*" type="text">
+							<!--  -->
+							<label class="first" for="street-address-line-2">&nbsp;</label> <input
+								id="street-address-line-2" name="streetAddressLine2" type="text"
+								class="width-long">
+							<!--  -->
+							<label class="first" for="street-address-line-3">&nbsp;</label> <input
+								class="width-long" id="street-address-line-3"
+								name="streetAddressLine3" type="text">
+							<!--  -->
+							<label class="first" for="street-address-line-4">&nbsp;</label> <input
+								class="width-long" id="street-address-line-4"
+								name="streetAddressLine4" type="text">
+						</div>
+						<!--  -->
+						<div class="address-col-2">
+							<label class="first" for="country-button">Country</label> <select
+								class="required width-medium" name="country" id="country">
+								<option></option>
+								<option value="USA">United States of America</option>
+								<option value="MEX">Mexico</option>
+							</select>
+							<!--  -->
+							<label class="first" for="city">City</label> <input
+								style="width: 233px;" id="city" name="city" class="required"
+								placeholder="*" type="text">
+							<!--  -->
+							<label class="first" for="state-button">State</label> <select
+								aria-required="true" name="state" id="state"
+								class="required width-medium">
+								<option></option>
+							</select>
+							<!--  -->
+							<label class="first" for="zip-postal-code">Zip/Postal
+								Code</label> <input type="text" id="zip-postal-code" class="required"
+								placeholder="*">
+
+						</div>
+						<hr>
+						<label class="first" for="phone-type">Phone Type</label> <select
+							id="phoneType" class="phone-type required phone width-shortest">
+							<option></option>
+							<option value="2">Home</option>
+							<option value="5">Work</option>
+							<option value="8">Cell</option>
+						</select>
+						<!--  -->
+						<label for="phone-country">Number</label> <select
+							name="phoneCountry" class="phone-country width-shortest">
+							<option></option>
+							<option>+1 (US)</option>
+						</select>&nbsp;
+						<!--  -->
+						<input name="phoneNumber" class="phone-number required phone "
+							style="width: 110px" placeholder="*" type="text">
+						<!--  -->
+						<label for="phone-extension">Extension</label> <input
+							class="phone-extension width-shortest" name="phoneExtension"
+							type="text">
+						<!--  -->
+
+						<input name="vehicle" value="Car" type="checkbox"><label
+							class="checkboxlabel">Primary</label>
+						<!--  -->
+						<a href="#" title="Remove this phone number" class="form-link"><span
+							class="icon-nav icon-remove"></span>Remove</a>
+						<!--  -->
+						<a href="#" id="addphone" title="Add Another Phone Number"
+							class="form-link first"><span class="icon-nav icon-plus"></span>Add
+							Another Phone Number</a>
+						<hr>
+						<label class="first width-medium" for="email-type">Email
+							Type</label> <select id="emailtype" class="width-short">
+							<option></option>
+							<option value="2">Personal</option>
+							<option value="5">Work</option>
+						</select>
+						<!--  -->
+						<label for="email">Email</label> <input name="email"
+							class="width-medium" type="text"> <a href="#"
+							title="Add Another Email" class="form-link first"><span
+							class="icon-nav icon-plus"></span>Add Another Email</a>
+						<hr>
+						<label class="first"> Date of Birth</label> <input type="text"
+							id="dob" class="date width-short">
+
+						<hr>
+						<label class="first">Risk</label> <select id="risk"
+							class="width-short">
+							<option></option>
+							<option>Unknown</option>
+							<option>Low</option>
+							<option>Medium</option>
+							<option>High</option>
+						</select>
+						<!--  -->
+						<label for="risknote">Risk Note</label>
+						<textarea id="risknote" class="width-longest"></textarea>
+						<hr>
+						<label class="first" for="note">Other Note</label>
+						<textarea id="note" style="width: 70%"></textarea>
+						<hr class="last">
+					</div>
+					<div class="right-col" id="match-v1" style="display: none">
+						<h4>No matching recipients found.</h4>
+					</div>
+					<div class="right-col" id="match-v2">
+						<h4>3 matching recipients</h4>
+						<div class="match-container">
+							<div class="match-card">
+								<div class="line">
+									<div class="name">Maria Perrera Gonzales</div>
+									<div class="mid">#RAB-92781</div>
+								</div>
+								<div class="line">
+									<div class="born">Born 07/26/1976</div>
+								</div>
+								<div class="address1">Mexico City, Mexico</div>
+								<div class="match">
+									<ul>
+										<li class="yes"><span class="icon-nav icon-minus-circle"></span>Name</li>
+										<li class="yes"><span class="icon-nav icon-minus-circle"></span>City</li>
+									</ul>
+								</div>
+							</div>
+							<div class="match-card">
+								<div class="line">
+									<div class="name">Maria Perrera Gonzales</div>
+									<div class="mid">#RAB-92781</div>
+								</div>
+								<div class="address1">Mexico, D.F., Mexico</div>
+								<div class="match">
+									<ul>
+										<li class="yes"><span class="icon-nav icon-minus-circle"></span>Name</li>
+										<li class="yes"><span class="icon-nav icon-minus-circle"></span>City</li>
+									</ul>
+								</div>
+							</div>
+							<div class="match-card">
+								<div class="line">
+									<div class="name">Maria Perrera Gonzales</div>
+									<div class="mid">#RAB-92781</div>
+								</div>
+								<div class="address1">Tijuana, Mexico</div>
+								<div class="match">
+									<ul>
+										<li class="yes"><span class="icon-nav icon-minus-circle"></span>Name</li>
+										<li class="no"><span class="icon-nav icon-minus-circle"></span>City</li>
+									</ul>
+								</div>
+							</div>
+							<div class="hover-card" style="display: none;">
+								<div class="hover-card-header">
+									<a href="#" title="Select and update this member"><span
+										class="icon-nav icon-minus-circle"></span>Select </a><a href="#"
+										title="View in new window"><span
+										class="icon-nav icon-search-find"></span>Open in new window</a>
+								</div>
+								<div class="hover-card-content">
+									<div class="line">
+										<div class="name">Maria Luisa Perrera Gonzales</div>
+										<div class="mid">#RAB-92781</div>
+									</div>
+									<div class="line">
+										<div class="col-1">
+											<div class="address1">Urión 30</div>
+											<div class="address1">Col. Atlatilco</div>
+											<div class="address1">02860 Mexico, DF, Mexico</div>
+										</div>
+										<div class="col-2">
+											<div class="ssn">+52 55 789 0000</div>
+											<div class="born">Born 07/26/1976</div>
+											<div class="transfer">2 Transfers from Maria Gonzales
+												(#MAB-12345)</div>
+											<div class="transfer">1 Transfer from Enrico Riviera
+												(#MAB-12346)</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="section-2">
+					<div class="buttons-form">
+						<div>
+							<input style="height: 32px;" id="prev-button" value="<< Back"
+								class="btn ui-button ui-widget ui-state-default ui-corner-all"
+								role="button" tabindex="27" type="submit"><input
+								type="button" id="cancel" style="height: 32px;" value="Cancel"
+								class="btn ui-button ui-widget ui-state-default ui-corner-all"
+								role="button" tabindex="26">
+							<!--  -->
+							<input style="height: 32px;" id="save-button" value="Finish"
+								class="btn ui-button ui-widget ui-state-default ui-corner-all"
+								role="button" tabindex="27" type="submit"> <input
+								style="height: 32px;" id="next-button" value="Add Transfer >>"
+								class="btn ui-button ui-widget ui-state-default ui-corner-all"
+								role="button" tabindex="27" type="submit">
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+	<footer>
+		<div class="left">&copy; 2014 Prosperitas Global Solutions, Inc.
+			All Rights Reserved.</div>
+		<div class="right">Version 1.00.00 Build 00000</div>
+	</footer>
+</body>
+</html>

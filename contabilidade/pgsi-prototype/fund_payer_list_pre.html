@@ -1,0 +1,458 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>PGSi Postfunding Payers</title>
+<link href="css/fonts.css" rel="stylesheet" />
+<link href="css/security.css" rel="stylesheet" />
+<link href="css/navigation.css" rel="stylesheet" />
+<link href="css/jquery-ui.min.css" rel="stylesheet" />
+<link href="css/jquery-ui.structure.min.css" rel="stylesheet" />
+<link href="css/pgsi-common.css" rel="stylesheet" />
+<script src="jquery/jquery-1.11.0.min.js"></script>
+<script src="jquery/jquery-ui-1.11.0.min.js"></script>
+<script src="jquery/jquery.datatables.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$('nav.primary .sub-menu').hide();
+		$('nav.primary li').hover(function() {
+			var that = this;
+			$(this).addClass("menu-hover").find(".sub-menu").show().position({
+				my : "left top",
+				at : "left bottom",
+				of : that,
+				collision : "fit"
+			}).find("li").hover(function() {
+				$(this).addClass("menu-hover")
+			}, function() {
+				//$(this).removeClass("menu-hover")
+			});
+		}, function() {
+			$(this).removeClass("menu-hover").find(".sub-menu").hide();
+		});
+
+		$('.add_loc_link').click(function() {
+			top.location.href = "member_add_empl.html";
+		});
+		//http://datatables.net/reference/option/language
+		$('#data_list').dataTable({
+			dom : '<"list_header"ipl><t><"list_footer"ipl>',
+			paging : true,
+			pagingType : "full",
+			iDisplayLength : 25,
+			autoWidth : false,
+			language : {
+				paginate : {
+					first : "a",
+					last : "b",
+					next : "g",
+					previous : "f"
+				},
+				lengthMenu : "_MENU_ records per page",
+				loadingRecords : "Loading...",
+				processing : "Processing...",
+				zeroRecords : "No matching records found",
+				info : "Showing _START_ to _END_ of _TOTAL_ matching records."
+			},
+			drawCallback : function(settings) {
+				$(".dataTables_length select").outerWidth(60).selectmenu();
+
+				// 												if ($("#link-fund").length == 0) {
+				// 													$(".list_header")
+				// 															.prepend(
+				// 																	'<a href="#" id="link-fund" class="btn">Fund Selected Payers</a><a href="#" id="refresh" class="form-link"><span class="icon-nav icon-refresh"></span>Refresh</a>');
+				// 												}
+				// 												if ($("#link-fund2").length == 0) {
+				// 													$(".list_footer")
+				// 															.prepend(
+				// 																	'<a href="#" id="link-fund2" class="btn">Fund Selected Payers</a>');
+				// 												}
+				// 												$("#data_list tbody a")
+				// 														.parent("td")
+				// 														.hover(
+				// 																function() {
+				// 																	$(this)
+				// 																			.append(
+				// 																					'<a href="#" class="action" title="Fund Payer ABC"><span class="icon-nav icon-check-mark"></span>');
+				// 																},
+				// 																function() {
+				// 																	$(this)
+				// 																			.find(
+				// 																					'.icon-nav')
+				// 																			.remove();
+				// 																});
+			}
+		});
+		$(".filter select").selectmenu();
+		$("input[type=submit],input[type=reset]").button();
+		$('#data_list input[type=checkbox]').change(function() {
+			if (this.checked) {
+				$(this).closest("tr").addClass('selected');
+			} else {
+				$(this).closest("tr").removeClass('selected');
+			}
+		});
+
+		$('.btn').button();
+
+	});
+</script>
+<style>
+#data_list .multiples a {
+	display: block;
+}
+
+.second_org {
+	padding-top: 8px;
+}
+
+.data #data_list .icon-sort {
+	/*display: none;*/
+
+}
+
+.data #data_list .icon-sort {
+	display: none;
+}
+
+hr.top {
+	margin-top: 0;
+	width: 100%;
+}
+
+hr.last {
+	margin-bottom: 0;
+	width: 100%;
+}
+
+.summary {
+	float: left;
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	color: #333333;
+	width: 100%;
+	display: table;
+	margin: 0 0 16px 0;
+}
+
+#link-fund, #link-fund2 {
+	float: left;
+	margin-right: 16px;
+	margin-bottom: 8px;
+}
+
+.summary a, .label {
+	float: left;
+	margin-right: 16px;
+	line-height: 26px;
+}
+
+.col {
+	float: left;
+	margin: 8px 0 8px 8px;
+}
+
+.first {
+	clear: both;
+}
+
+h3 {
+	margin-top: 0;
+}
+
+.actions {
+	float: left;
+	margin: 8px;
+	padding: 8px;
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	color: #333333;
+}
+
+.header {
+	display: table-row;
+}
+
+hr {
+	width: 100%;
+}
+
+.cont {
+	margin: 8px;
+	display: table;
+}
+
+a.form-link, a.form-link:hover, a.form-link:active {
+	color: #2b4e72;
+	float: left;
+	line-height: 30px;
+	margin-right: 24px;
+	text-decoration: none;
+}
+
+a.form-link.first {
+	clear: both;
+	margin: 10px 0 8px 100px;
+}
+
+.form-link .icon-nav, .remembered-location .icon-nav {
+	padding: 3px 3px 0 3px;
+	position: relative;
+	bottom: -1px;
+	color: #ffffff;
+	background-color: #42b653;
+	font-size: 12px;
+	margin-right: 3px;
+}
+
+td.curr {
+	text-align: right;
+}
+
+.filter {
+	padding-right: 8px;
+}
+
+#data_list {
+	padding: 8px;
+}
+
+.content.list {
+	width: 95%;
+}
+
+#data_list tr.th1 {
+	border-bottom: none;
+}
+
+#data_list tr.th2 {
+	border-top: none;
+}
+
+th.colspan {
+	border-left: 1px solid #cccccc;
+}
+
+.filter * {
+	display: none;
+}
+
+.filter {
+	padding: 0;
+	margin: 0;
+}
+
+#data_list {
+	width: 100%;
+}
+
+td.payer {
+	font-weight: bold;
+}
+
+#data_list td.curr {
+	text-align: right;
+}
+</style>
+</head>
+<body>
+	<header>
+		<ul>
+			<li>Welcome&nbsp;&nbsp;<span class="emphasis">John Demo</span></li>
+			<li><a class="account_link" href="#" title="Account"><span
+					class="icon-user icon-nav"></span>Account</a></li>
+			<li><a class="help_link" href="#" title="Help"><span
+					class="icon-question icon-nav"></span>Help</a></li>
+			<li><a class="signout_link" href="login.html" title="Sign out"><span
+					class="icon-unlock icon-nav"></span>Sign Out</a></li>
+		</ul>
+	</header>
+	<nav class="primary">
+		<ul class="main-menu">
+			<li class="menu-home"><a href="dashboard.html"
+				class="icon-home icon-nav" title="Home"></a></li>
+			<li><a href="organization_list.html"
+				title="Organizations and Locations" data-title="Customers">Customers</a>
+				<ul class="sub-menu">
+					<li><a href="organization_add.html" title="Add Organization"
+						data-title="Add Organization">Add Organization</a></li>
+					<li><a href="organization_list.html"
+						data-title="Find Organization" title="Find Organization">Find
+							Organization</a></li>
+					<li><a href="location_add.html" title="Add Location"
+						data-title="Add Location">Add Location</a></li>
+					<li><a href="location_list.html" title="Find Location"
+						data-title="Find Location">Find Location</a></li>
+				</ul></li>
+			<li><a href="#" class="" title="Members and Recipients"
+				data-title="Members">Members</a>
+				<ul class="sub-menu">
+					<li><a href="member_add_main.html" title="Add Member"
+						data-title="Add Member">Add Member</a></li>
+					<li><a href="member_list.html" data-title="Find Member"
+						title="Find Member">Find Member</a></li>
+					<li><a href="recipient_list.html" title="Find Recipient"
+						data-title="Find Recipient">Find Recipient</a></li>
+				</ul></li>
+			<li class="menu-active"><a href="payment_overview.html" class=""
+				title="Payments" data-title="Payments">Payments</a>
+				<ul class="sub-menu">
+					<li><a href="batch_list.html" data-title="Batches"
+						title="Batches">Batches</a></li>
+					<li><a href="transaction_list.html"
+						data-title="Find Transaction" title="Find Transaction">Find
+							Transaction</a></li>
+					<!--<li><a href="transaction_add.html" data-title="Batches"-->
+						<!--title="Batches">Add New Transaction</a></li>-->
+					<li><a href="funding_list.html" title="Payer Funding"
+						data-title="Payer Funding">Payer Funding</a></li>
+					<li><a href="paycycle_list.html" title="Upcoming Pay Dates"
+						data-title="Upcoming Pay Dates">Upcoming Pay Dates</a></li>
+					<!--<li><a href="currency_purchase.html" title="Purchase Currency"-->
+					<!--data-title="Purchase Currency">Purchase Currency</a></li>-->
+				</ul></li>
+			<li><a href="compliance_overview.html" class=""
+				title="Compliance Monitoring and Reporting" data-title="Compliance">Compliance</a>
+				<ul class="sub-menu">
+					<li><a href="sdn_list.html" title="SDN Matches"
+						data-title="SDN Matches">SDN Matches</a></li>
+					<li><a href="sar_list.html" data-title="SAR Reports"
+						title="SAR Reports">SAR Reports</a></li>
+					<li><a href="compliance_analytics_list.html"
+						title="Compliance
+							Analytics"
+						data-title="Compliance
+							Analytics">Compliance Analytics</a></li>
+				</ul></li>
+			<li><a href="#" class="" title="Analytics and Reporting"
+				data-title="Analytics">Analytics</a></li>
+			<li><a href="profile_list.html" class="" title="Pricing"
+				data-title="Pricing">Pricing</a>
+				<ul class="sub-menu">
+					<li><a href="profile_list.html" title="Find Pricing Profile">Find
+							Pricing Profile</a></li>
+					<li><a href="profile_add.html" title="Add New Pricing Profile">Add
+							New Pricing Profile</a></li>
+				</ul></li>
+			<li><a href="#" class="" title="Users and User Settings"
+				data-title="Users">Users</a></li>
+			<li><a href="#" class="" title="System Settings"
+				data-title="System">System</a></li>
+		</ul>
+	</nav>
+	<nav class="secondary">
+		<span><a href="payment_overview.html" title="Payments">Payments</a></span><span
+			class="icon-nav icon-angle-right"></span><span><a
+			href="batch_list.html" title="Find Batch">Find Batch</a></span><span
+			class="icon-nav icon-angle-right"></span><span>Fund Batches</span>
+	</nav>
+	<div>
+		<h2 class="list">Prefund Payer Balances and Currency Needs</h2>
+	</div>
+
+	<div class="content list">
+		<div class="body">
+			<div class="filter">
+				<h4>Transfer Date</h4>
+				<input type="text" class="date" placeholder="Transfer date">
+				<hr></hr>
+				<h4>Transfer Period</h4>
+				<input type="text" class="date" placeholder="From date"><input
+					type="text" class="date" placeholder="To date">
+				<hr></hr>
+				<div class="block">
+					<input type="reset" value="Clear All" class="button-secondary"></input>
+					<input type="submit" value="Apply" class="button-secondary"></input>
+				</div>
+			</div>
+			<div class="data">
+				<table id="data_list">
+					<thead>
+						<tr class="th1">
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th class="colspan" colspan="2">12/22/2014 (Today)</th>
+							<th class="colspan" colspan="2">12/23/2014</th>
+							<th class="colspan" colspan="2">12/24/2014</th>
+							<th class="colspan" colspan="2">12/26/2014</th>
+							<th class="colspan" colspan="2">12/27/2014</th>
+
+						</tr>
+						<tr class="th2">
+							<th>Payer</th>
+							<th>Currency</th>
+							<th>Current Balance</th>
+							<th>Balance Effective Rate</th>
+							<th class="colspan">Est. Transaction Total</th>
+							<th class="est">Purchase</th>
+							<th class="colspan est">Est. Transaction Total</th>
+							<th class="est">Purchase</th>
+							<th class="colspan est">Est. Transaction Total</th>
+							<th class="est">Purchase</th>
+							<th class="colspan est">Est. Transaction Total</th>
+							<th class="est">Purchase</th>
+							<th class="colspan est">Est. Transaction Total</th>
+							<th class="est">Purchase</th>
+						</tr>
+					</thead>
+					<tbody>
+						<script>
+							for (var i = 0; i < 27; i++) {
+								var needed = "18,000.00";
+								var purchase = "0.00";
+								var check = true;
+								var action = '<a href="#" class="action" title="Allocated funding for Payer ABC"><span class="icon-nav icon-check-mark-circle-two"></span>';
+								if (i % 10 < 5) {
+									needed = "50,000.00";
+									purchase = "30,000.00";
+									check = false;
+									action = "";
+								}
+								document.write('<tr>');
+
+								document.write('<td class="payer">BANK ABCD'
+										+ (1 + i) + '</td>');
+								// 								document.write('<td>' + action + '</td>');
+								document.write('<td>MXN</td>');
+								document.write('<td class="curr">120.00</td>');
+								document.write('<td class="curr">18.00 %</td>');
+								document
+										.write('<td class="curr">20,000.00</td>');
+								document
+										.write('<td class="curr">20,120.00</td>');
+								document
+										.write('<td class="curr">21,000.00</td>');
+								document
+										.write('<td class="curr">41,120.00</td>');
+								document
+										.write('<td class="curr">22,000.00</td>');
+								document
+										.write('<td class="curr">63,120.00</td>');
+								document
+										.write('<td class="curr">10,000.00</td>');
+								document
+										.write('<td class="curr">73,120.00</td>');
+								document
+										.write('<td class="curr">50,000.00</td>');
+								document
+										.write('<td class="curr">123,120.00</td>');
+
+								document.write('</tr>');
+							}
+						</script>
+
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+	<footer>
+		<div class="left">&copy; 2014 Prosperitas Global Solutions, Inc.
+			All Rights Reserved.</div>
+		<div class="right">Version 1.00.00 Build 00000</div>
+	</footer>
+</body>
+</html>

@@ -1,0 +1,293 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>PGSi Batch #1234567 Spreads</title>
+<link href="css/fonts.css" rel="stylesheet" />
+<link href="css/security.css" rel="stylesheet" />
+<link href="css/navigation.css" rel="stylesheet" />
+<link href="css/jquery-ui.min.css" rel="stylesheet" />
+<link href="css/jquery-ui.structure.min.css" rel="stylesheet" />
+<link href="css/pgsi-common.css" rel="stylesheet" />
+<script src="jquery/jquery-1.11.0.min.js"></script>
+<script src="jquery/jquery-ui-1.11.0.min.js"></script>
+<script src="jquery/jquery.datatables.min.js"></script>
+<script>
+	$(document)
+			.ready(
+					function() {
+
+						//http://datatables.net/reference/option/language
+						$('#data_list, #data_list2')
+								.dataTable(
+										{
+											dom : '<"list_header"ipl><t><"list_footer"ipl>',
+											paging : true,
+											pagingType : "full",
+											lengthMenu : [ [ 10, 15, 20, 50 ],
+													[ 10, 15, 20, 50 ] ],
+											iDisplayLength : 15,
+											language : {
+												paginate : {
+													first : "a",
+													last : "b",
+													next : "g",
+													previous : "f"
+												},
+												lengthMenu : "_MENU_ records per page",
+												loadingRecords : "Loading...",
+												processing : "Processing...",
+												zeroRecords : "No payers found",
+												info : "Showing _START_ to _END_ of _TOTAL_ payers."
+											}
+										});
+
+						$('#data_list input[type=checkbox]').change(function() {
+							if (this.checked) {
+								$(this).closest("tr").addClass('selected');
+							} else {
+								$(this).closest("tr").removeClass('selected');
+							}
+						});
+						$("#summary").dataTable({
+							dom : 't'
+						});
+						$(".btn").button();
+						$("#link-fund")
+								.click(
+										function(e) {
+											e.preventDefault();
+											alert("Refresh the table from the database to reflect latest currency purchase");
+										});
+					});
+</script>
+<style>
+.content.list {
+	padding: 0;
+}
+
+.label.section {
+	margin-bottom: 16px;
+}
+
+#data_list .multiples a {
+	display: block;
+}
+
+.second_org {
+	padding-top: 8px;
+}
+
+.data #data_list .icon-sort {
+	/*display: none;*/
+
+}
+
+#data_list_wrapper {
+	margin-left: 0;
+}
+
+.data #data_list .icon-sort {
+	display: none;
+}
+
+h3 {
+	float: left;
+	clear: both;
+	margin-bottom: 4px;
+}
+
+.summary, .label, .value, .data {
+	float: left;
+}
+
+.label {
+	margin-right: 8px;
+}
+
+.value {
+	font-weight: bold;
+	margin-right: 16px;
+	margin-bottom: 10px;
+}
+
+.first {
+	clear: both;
+}
+
+#summary_wrapper, #data_list2_wrapper {
+	margin-top: 10px;
+	display: table;
+	clear: both;
+	width: 100%;
+}
+
+#summary, #data_list2 {
+	border-bottom: 1px solid #cccccc;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#summary thead tr, #data_list2 thead tr {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	font-weight: bold;
+	background-color: #f8f8f8;
+}
+
+#summary td, #summary th, #data_list2 td, #s#data_list2 th {
+	padding: 5px;
+	text-align: left;
+	vertical-align: top;
+}
+
+#data_list2 .odd.selected {
+	background-color: #e2f4e1;
+}
+
+#data_list2 .odd {
+	background-color: #ffffff;
+}
+
+#data_list2 .even.selected {
+	background-color: #d3eed2;
+}
+
+#data_list2 .even {
+	background-color: #f8f8f8;
+}
+
+.second {
+	margin: 8px 4px 8px 0px;
+	float: left;
+}
+
+body {
+	background-color: #ffffff;
+}
+
+.content.list {
+	border: none;
+	padding-top: 0;
+}
+
+a.form-link, a.form-link:hover, a.form-link:active {
+	color: #2b4e72;
+	text-decoration: none;
+	float: left;
+}
+
+a.form-link.first {
+	clear: both;
+	margin: 10px 0 8px 100px;
+}
+
+.form-link .icon-nav, .remembered-location .icon-nav {
+	padding: 3px 3px 0 3px;
+	position: relative;
+	bottom: -1px;
+	color: #ffffff;
+	background-color: #42b653;
+	font-size: 12px;
+	margin-right: 3px;
+}
+
+h2 {
+	margin-bottom: 0;
+}
+
+td input[type=text] {
+	margin: 0 2px 0 0;
+	width: 80px;
+	text-align: right;
+}
+
+hr {
+	width: 100%;
+	clear: both;
+}
+
+.address-col-1 {
+	float: left;
+	width: 300px;
+	display: table;
+	padding: 8px 8px 16px 8px;
+}
+
+.address-col-2 {
+	float: left;
+	display: table;
+	padding: 8px 8px 16px 8px;
+}
+
+.label, .value {
+	float: left;
+	margin-bottom: 2px;
+}
+
+.spread {
+	float: left;
+	position: relative;
+	bottom: 3px;
+}
+
+#data_list td {
+	padding: 1px 5px;
+	vertical-align: middle;
+}
+
+#data_list .curr {
+	text-align: right;
+}
+</style>
+</head>
+<body>
+	<div class="content list">
+		<div class="label first section">
+			<b>Fremont Location (Nebraska Premium Meatpacking, Inc), Fremont,
+				NE, USA</b>
+		</div>
+		<div class="label payer first">Custom Spread</div>
+		<input type="text" class="spread"
+			style="width: 80px; text-align: right" value="8.2366">
+		<div class="label" style="margin-right: 24px">%</div>
+		<a href="#" class="btn spread">Apply to Selection</a>
+		<!--  -->
+		<a href="#" class="btn spread">Reset Selection</a>
+		<hr>
+		<div class="data first">
+			<table id="data_list">
+				<thead>
+					<tr>
+						<th><input type="checkbox"></th>
+						<th>Payer<span class="icon-sort"></span></th>
+						<th>Currency</th>
+						<th>Effective Rate</th>
+						<th>Spread</th>
+						<th>Customer Rate<span class="icon-sort"></span></th>
+					</tr>
+				</thead>
+				<tbody>
+					<script>
+						for (var i = 0; i < 28; i++) {
+
+							document.write('<tr>')
+							document.write('<td><input type="checkbox"></td>');
+							document
+									.write('<td>Kreissparkasse Aue-Schwarzenberg</td>');
+							document.write('<td>MXN</td>');
+							document.write('<td class="curr">16.5789</td>');
+							document
+									.write('<td><input type="text" value="8.2367">%</td>');
+							document.write('<td class="curr">15.2133</td>');
+							document.write('</tr>');
+						}
+					</script>
+				</tbody>
+			</table>
+		</div>
+
+
+	</div>
+</body>
+</html>
