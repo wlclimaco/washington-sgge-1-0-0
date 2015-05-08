@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+ <bean id="databaseIdProvider" class="org.apache.ibatis.mapping.VendorDatabaseIdProvider">
+	<property name="properties" ref="vendorProperties"/>
+ </bean>
+
+ <bean id="vendorProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+	<property name="properties">
+		<props>
+			<prop key="SQL Server">SqlServer</prop>
+			<prop key="Oracle">Oracle</prop>
+			<prop key="PostgreSQL">PostgreSQL</prop>
+        		<prop key="MySQL">MySql</prop>
+           	<prop key="DB2">Db2</prop>
+		</props>
+	</property>
+ </bean>
+
+ <bean id="QATAppContext" class="com.qat.framework.util.QATAppContext"></bean>
+ <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="pgsiDataSource" />
+ </bean>
+ <bean id="qat-debug-loggingInterceptor" class="com.qat.framework.aop.QATDebugLoggingAOP"></bean>
+ <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames">
+			<list>
+				<value>*DAC*</value>
+			</list>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>qat-debug-loggingInterceptor</value>
+			</list>
+		</property>
+</bean>
+ <beans profile="oracle">
+	  <bean id="pgsiDataSource" class="oracle.jdbc.pool.OracleDataSource" destroy-method="close">
+	    <property name="URL" value="jdbc:oracle:thin:@localhost:1521:XE" />
+	    <property name="user" value="qat" />
+	    <property name="password" value="qat" />
+	    <property name="implicitCachingEnabled" value="true" />
+	    <property name="connectionCachingEnabled" value="true" />
+	    <property name="connectionCacheProperties">
+	      <value>
+	         InitialLimit:3
+	         MinLimit:5
+	         MaxLimit:10
+	         MaxStatementsLimit:100
+	         ConnectionWaitTimeout:10
+	         InactivityTimeout:180
+	         AbandonedConnectionTimeout:30
+	         ValidateConnection:true
+	       </value>
+	    </property>
+	  </bean>
+ </beans>
+
+ <beans profile="postgres">
+	  <bean id="pgsiDataSource" class="org.postgresql.ds.PGPoolingDataSource" destroy-method="close">
+		<property name="serverName" value="localhost" />
+		<property name="databaseName" value="qatdb" />
+		<property name="portNumber" value="5432" />
+		<property name="user" value="qat" />
+		<property name="password" value="qat" />
+		<property name="initialConnections" value="5" />
+		<property name="maxConnections" value="10" />
+	  </bean>
+ </beans>
+
+ <beans profile="sqlserver">
+	<bean id="pgsiDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="net.sourceforge.jtds.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:jtds:sqlserver://localhost:1433/PGSi;user=sa;password=qatsa" />
+	</bean>
+ </beans>
+
+</beans>

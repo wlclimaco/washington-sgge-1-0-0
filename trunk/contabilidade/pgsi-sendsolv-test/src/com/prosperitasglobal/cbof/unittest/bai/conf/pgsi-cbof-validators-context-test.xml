@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+ 	<bean id="ContactListValidator"  class="com.prosperitasglobal.cbof.validation.ContactListValidator" />
+ 	<bean id="EmailListValidator"    class="com.prosperitasglobal.cbof.validation.EmailListValidator" />
+ 	<bean id="PhoneListValidator"    class="com.prosperitasglobal.cbof.validation.PhoneListValidator" />
+ 	<bean id="NoteValidator"         class="com.prosperitasglobal.cbof.validation.NoteValidator" />
+
+ 	 <bean id="AddressListValidator"    class="com.prosperitasglobal.cbof.validation.AddressListValidator" >
+ 		<property name="contactValidLength" ref="contactValidLength"/>
+ 	</bean>
+
+ 	<bean id="organizationValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="ContactListValidator" />
+ 				<ref bean="EmailListValidator" />
+ 				<ref bean="PhoneListValidator" />
+ 				<ref bean="AddressListValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+ 	<bean id="locationValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="ContactListValidator" />
+ 				<ref bean="EmailListValidator" />
+ 				<ref bean="PhoneListValidator" />
+ 				<ref bean="AddressListValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+ 	<bean id="noteValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="NoteValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+ 	<!-- ========================= Valid Length DEFINITIONS================================= -->
+
+	<util:map id="contactValidLength">
+		<entry key="cityName"     value="40"/>
+		<entry key="addressLine1" value="80"/>
+		<entry key="addressLine2" value="80"/>
+		<entry key="addressLine3" value="80"/>
+		<entry key="addressLine4" value="80"/>
+	</util:map>
+
+</beans>

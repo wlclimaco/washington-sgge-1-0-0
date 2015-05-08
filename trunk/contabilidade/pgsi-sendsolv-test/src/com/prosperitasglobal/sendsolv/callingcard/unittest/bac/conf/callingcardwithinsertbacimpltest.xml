@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 	xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:mockito="http://www.mockito.org/spring/mockito"
+		xmlns:util="http://www.springframework.org/schema/util"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+					    	http://www.mockito.org/spring/mockito http://www.mockito.org/spring/mockito.xsd
+					    	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+					    	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd" >
+
+	 <bean id="QATAppContext" class="com.qat.framework.util.QATAppContext" />
+
+ 	 <bean id="callingCardBACTarget" class="com.prosperitasglobal.sendsolv.callingcard.comfi.bac.impl.CallingCardWithInsertPinsBACImpl">
+ 		<property name="callingCardDAC" ref="callingCardDACTarget"/>
+ 		<property name="callingCardType" value="${callingcard.callingcardtype}" />
+		<property name="callingCardUrl" value="${callingcard.url}" />
+		<property name="callingCardResponseType" value="${callingcard.responsetype}" />
+		<property name="callingCardApiEmail" value="${callingcard.apiemail}" />
+		<property name="callingCardApiPwd" value="${callingcard.apipwd}" />
+		<property name="qtyToGenerate" value="2" />
+		<property name="methodsProp">
+			<props>
+           		<prop key="refill">${callingcard.refillmethod}</prop>
+           		<prop key="generate">${callingcard.generatepinmethod}</prop>
+           		<prop key="balance">${callingcard.balancemethod}</prop>
+        	</props>
+		</property>
+ 	</bean>
+
+ 	<bean id="callingCardDACTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.prosperitasglobal.sendsolv.callingcard.dac.ICallingCardDAC" />
+	</bean>
+
+	<!-- Load application settings into singleton Properties object  -->
+ 	<util:properties id="settings" location="classpath:conf/web/classes/pgsi-sendsolv-system-configuration.properties" scope="singleton"/>
+ 	<context:property-placeholder properties-ref="settings" />
+
+</beans>

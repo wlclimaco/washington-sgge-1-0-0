@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mockito="http://www.mockito.org/spring/mockito"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+					    http://www.mockito.org/spring/mockito http://www.mockito.org/spring/mockito.xsd">
+
+	<bean id="QATAppContext" class="com.qat.framework.util.QATAppContext" />
+
+	<bean id="codeValueDACTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.prosperitasglobal.cbof.dac.ICodeValueDAC" />
+	</bean>
+
+	<bean id="countryDACTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.prosperitasglobal.cbof.dac.ICountryDAC" />
+	</bean>
+
+	<bean id="noteDACTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.prosperitasglobal.cbof.dac.INoteDAC" />
+	</bean>
+
+	<bean id="rangeDACTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.prosperitasglobal.cbof.dac.IRangeDAC" />
+	</bean>
+
+	<bean id="industryClassificationDACTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.prosperitasglobal.cbof.dac.IIndustryClassificationDAC" />
+	</bean>
+
+	<bean id="documentTypeDACTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.prosperitasglobal.sendsolv.dac.IDocumentTypeDAC" />
+	</bean>
+
+	<bean id="languageDACTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.prosperitasglobal.cbof.dac.ILanguageDAC" />
+	</bean>
+
+	<bean id="codeValueBAI" class="com.prosperitasglobal.cbof.bai.impl.CodeValueBAIImpl">
+ 		<property name="codeValueDAC" ref="codeValueDACTarget"/>
+ 	</bean>
+
+ 	<bean id="countryBAI" class="com.prosperitasglobal.cbof.bai.impl.CountryBAIImpl">
+ 		<property name="countryDAC" ref="countryDACTarget"/>
+ 	</bean>
+
+ 	<bean id="noteBAI" class="com.prosperitasglobal.cbof.bai.impl.NoteBAIImpl">
+ 		<property name="noteDAC" ref="noteDACTarget"/>
+ 		<property name="noteValidationController" ref="noteValidationController"/>
+ 	</bean>
+
+ 	 <bean id="industryClassificationBAI" class="com.prosperitasglobal.cbof.bai.impl.IndustryClassificationBAIImpl">
+ 		 <property name="industryClassificationDAC" ref="industryClassificationDACTarget"/>
+ 		<property name="codeValueDAC" ref="codeValueDACTarget"/>
+ 	</bean>
+
+	<bean id="rangeBAI" class="com.prosperitasglobal.cbof.bai.impl.RangeBAIImpl">
+ 		<property name="rangeDAC" ref="rangeDACTarget"/>
+ 	</bean>
+
+ 	<bean id="nameSupplementBAI" class="com.prosperitasglobal.cbof.bai.impl.NameSupplementBAIImpl">
+ 		<property name="codeValueDAC" ref="codeValueDACTarget"/>
+ 	</bean>
+
+ 	<bean id="documentTypeBAI" class="com.prosperitasglobal.sendsolv.bai.impl.DocumentTypeBAIImpl">
+ 		<property name="documentTypeDAC" ref="documentTypeDACTarget"/>
+ 	</bean>
+
+ 	 <bean id="languageBAI" class="com.prosperitasglobal.cbof.bai.impl.LanguageBAIImpl">
+ 		<property name="languageDAC" ref="languageDACTarget"/>
+ 	</bean>
+
+</beans>

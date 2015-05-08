@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/pgsi-sendsolv-interface"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/pgsi-sendsolv-implementation"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="con" path="org.apache.ivyde.eclipse.cpcontainer.IVYDE_CONTAINER/?project=pgsi-sendsolv-test&amp;ivyXmlPath=build%5Civy.xml&amp;confs=*"/>
+	<classpathentry kind="lib" path="/pgsi-sendsolv-configuration"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 	xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" >
+
+	<import resource="classpath:conf/web/conf/pgsi-sendsolv-base-context.xml" />
+
+	<!-- Load application settings into singleton Properties object  -->
+	<bean parent="qatPropertyPlaceholderConfigurer" >
+		<property name="location" value="classpath:conf/web/classes/pgsi-sendsolv-system-configuration.properties" />
+	</bean>
+
+	<bean id="sdnCheckerTarget" class="com.prosperitasglobal.sendsolv.sdn.bac.impl.SdnCheckerBACImpl">
+		<property name="filePath" value="${sdn.localfilepath}" />
+		<property name="similarityThreshold" value="${sdn.threshold}" />
+		<property name="sdnFileUrl" value="${sdn.fileurl}" />
+		<property name="unmarshaller" ref="unmarshallerBean" />
+		<property name="marshaller" ref="marshallerBean" />
+	</bean>
+
+	<!-- JAXBContext-->
+	<bean id="jaxbContextBean" class="javax.xml.bind.JAXBContext" factory-method="newInstance">
+		<constructor-arg value="com.prosperitasglobal.sendsolv.sdn.model.generated"/>
+	</bean>
+
+	<!-- JAXB Unmarshaller -->
+	<bean id="unmarshallerBean" factory-bean="jaxbContextBean" factory-method="createUnmarshaller"/>
+
+	<!-- JAXB Marshaller -->
+	<bean id="marshallerBean" factory-bean="jaxbContextBean" factory-method="createMarshaller"/>
+
+</beans>

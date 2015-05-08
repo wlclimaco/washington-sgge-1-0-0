@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mockito="http://www.mockito.org/spring/mockito"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+					    http://www.mockito.org/spring/mockito http://www.mockito.org/spring/mockito.xsd">
+
+	<import resource="classpath:conf/web/conf/pgsi-db-all-context.xml"/>
+	<import resource="classpath:conf/web/conf/pgsi-sendsolv-base-context.xml"/>
+	<import resource="classpath:conf/web/conf/pgsi-sendsolv-dac-context.xml"/>
+	<import resource="classpath:conf/web/conf/pgsi-sendsolv-bac-context.xml"/>
+	<import resource="classpath:conf/web/conf/pgsi-sendsolv-bai-context.xml"/>
+	<import resource="classpath:conf/web/conf/pgsi-sendsolv-validators-context.xml"/>
+	<import resource="classpath:conf/web/conf/pgsi-sendsolv-shared-context.xml"/>
+
+	<beans profile="sqlserver">
+		<bean id="pgsiDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+			<property name="driverClassName" value="net.sourceforge.jtds.jdbc.Driver" />
+			<property name="url" value="jdbc:jtds:sqlserver://localhost:1433/PGSi;user=sa;password=qatsa" />
+		</bean>
+	</beans>
+
+</beans>

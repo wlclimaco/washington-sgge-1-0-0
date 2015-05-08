@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mockito="http://www.mockito.org/spring/mockito"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+					    http://www.mockito.org/spring/mockito http://www.mockito.org/spring/mockito.xsd">
+
+	<bean id="QATAppContext" class="com.qat.framework.util.QATAppContext" />
+
+	<bean id="organizationBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.OrganizationBACImpl">
+		<property name="organizationDAC" ref="organizationDACTarget" />
+		<property name="sdnCheckerBAC" ref="sdnCheckerBACTarget" />
+		<property name="participantIdDAC" ref="participantIdDACTarget"/>
+		<property name="locationBAI" ref="locationBAI"/>
+		<property name="locationBAC" ref="locationBACTarget"/>
+	</bean>
+
+	<bean id="organizationDACTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.prosperitasglobal.sendsolv.dac.IOrganizationDAC" />
+	</bean>
+
+	<bean id="locationBAI" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.prosperitasglobal.sendsolv.bai.ILocationBAI" />
+	</bean>
+
+	<bean id="locationBACTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.prosperitasglobal.sendsolv.bac.ILocationBAC" />
+	</bean>
+
+	<bean id="sdnCheckerBACTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.prosperitasglobal.sendsolv.sdn.bac.ISdnCheckerBAC" />
+	</bean>
+
+	<bean id="participantIdDACTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.prosperitasglobal.sendsolv.dac.IParticipantIdDAC" />
+	</bean>
+
+</beans>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+  	<settings>
+		<setting name="lazyLoadingEnabled" value="false" />
+		<setting name="defaultExecutorType" value="REUSE"/>
+	</settings>
+
+  	<typeAliases>
+		<typeAlias alias="QATModel"   			type="com.qat.framework.model.QATModel" />
+		<typeAlias alias="QATModelOL" 			type="com.qat.framework.model.QATModelOL" />
+		<typeAlias alias="CallRecord" 			type="com.prosperitasglobal.sendsolv.integration.twilio.model.CallRecord" />
+		<typeAlias alias="IvrIdentity" 			type="com.prosperitasglobal.sendsolv.integration.twilio.model.IvrIdentity" />
+		<typeAlias alias="MoneyTransferSummary" type="com.prosperitasglobal.sendsolv.integration.twilio.model.MoneyTransferSummary" />
+		<typeAlias alias="CallRecordContext" 	type="com.prosperitasglobal.sendsolv.integration.twilio.model.CallRecordContext" />
+  	</typeAliases>
+
+	<typeHandlers>
+	</typeHandlers>
+
+ 	<mappers>
+		<mapper resource="com/prosperitasglobal/sendsolv/integration/twilio/dac/mybatis/map/callrecord.xml" />
+		<mapper resource="com/prosperitasglobal/sendsolv/integration/twilio/unittest/dac/mybatis/conf/ivrhelper.xml" />
+ 	</mappers>
+
+</configuration>

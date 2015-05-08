@@ -1,0 +1,1 @@
+DELETE FROM bts_confirmation_number;

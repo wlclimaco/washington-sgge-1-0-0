@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans 	xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Setup for mybatis Database Layer -->
+  	<bean id="ivr-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    	<property name="configLocation" value="classpath:com/prosperitasglobal/sendsolv/integration/twilio/unittest/dac/mybatis/conf/sendsolv-integration-twilio-mybatis-config.xml" />
+    	<property name="dataSource" ref="pgsiDataSource" />
+    	<property name="databaseIdProvider" ref="databaseIdProvider"/>
+  	</bean>
+
+	<!-- ========================= DAC DEFINITIONS================================= -->
+
+	<bean id="callRecordDACTarget" class="com.prosperitasglobal.sendsolv.integration.twilio.dac.mybatis.IvrDACImpl">
+		<property name="sqlSessionFactory" ref="ivr-sqlSessionFactory" />
+	</bean>
+
+	<bean id="ivrUtilTarget" class="com.prosperitasglobal.sendsolv.integration.twilio.unittest.dac.mybatis.IvrSqlUtil">
+		<property name="sqlSessionFactory" ref="ivr-sqlSessionFactory" />
+	</bean>
+
+</beans>

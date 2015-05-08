@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mockito="http://www.mockito.org/spring/mockito"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+					    http://www.mockito.org/spring/mockito http://www.mockito.org/spring/mockito.xsd">
+
+	<bean id="QATAppContext" class="com.qat.framework.util.QATAppContext"/>
+
+ 	 <bean id="sdnChecherBAI" class="com.prosperitasglobal.sendsolv.sdn.bai.impl.SdnCheckerBAIImpl">
+ 		<property name="sdnCheckerBAC" ref="sdnCheckerBACTarget"/>
+ 		<property name="sdnMatchValidationController" ref="sdnMatchValidationController"/>
+ 		<property name="sdnStatusHistoryController" ref="sdnStatusHistoryController"/>
+ 		<property name="sdnHistoryController" ref="sdnHistoryController"/>
+ 	</bean>
+
+	<bean id="sdnCheckerBACTarget" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.prosperitasglobal.sendsolv.sdn.bac.ISdnCheckerBAC"/>
+	</bean>
+
+	<bean id="industryClassificationDACTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.prosperitasglobal.cbof.dac.IIndustryClassificationDAC" />
+	</bean>
+
+	<bean id="organizationDACTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.prosperitasglobal.sendsolv.dac.IOrganizationDAC" />
+	</bean>
+
+	<bean id="locationDACTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.prosperitasglobal.sendsolv.dac.ILocationDAC" />
+	</bean>
+
+	<bean id="countryDACTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.prosperitasglobal.cbof.dac.ICountryDAC" />
+	</bean>
+
+	<bean id="personDACTarget" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.prosperitasglobal.sendsolv.dac.IPersonDAC" />
+	</bean>
+</beans>
+
+
+
+
+
