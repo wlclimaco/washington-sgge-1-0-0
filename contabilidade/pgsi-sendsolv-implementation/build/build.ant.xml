@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="pgsi-sendsolv-implementation" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<include file="${ivyConfigPath}\..\AntConfig\pgsi-ant-common-targets.xml" optional="false" />
+
+	<target name="build">
+		<antcall target="PGSI.mainBuild">
+			<param name="moduleName" value="pgsi-sendsolv-implementation" />
+			<param name="publishProjectLocal" value="true" />
+			<param name="ivyUseCacheOnly" value="true"/>
+		</antcall>
+	</target>
+
+</project>

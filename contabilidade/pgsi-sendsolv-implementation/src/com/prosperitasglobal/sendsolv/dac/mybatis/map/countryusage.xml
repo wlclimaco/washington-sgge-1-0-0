@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CountryUsageMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+
+	<resultMap id="changeControlMapping" type="QATModel">
+  		<result property="createUser" column="create_user"/>
+		<result property="createDateUTC" column="create_date"/>
+		<result property="modifyUser" column="modify_user"/>
+		<result property="modifyDateUTC" column="modify_date"/>
+	</resultMap>
+
+	<resultMap id="changeControlMappingOL" type="QATModelOL" extends="changeControlMapping">
+  		<result property="version" column="versn_lock_num"/>
+	</resultMap>
+
+	<resultMap id="countryUsageResult" type="CountryUsage" extends="changeControlMappingOL">
+		<result property="id" column="person_country_id"/>
+		<result property="personId" column="FK_person_id"/>
+		<result property="usageValue" column="relationship_id"/>
+		<association property="country" column="FK_country_code" select="countryMap.fetchCountryByCode" />
+	</resultMap>
+
+    <!--************************************************************************** -->
+	<!-- SQL fragments allow "parts" of SQL to be re-used in other SQL statements. -->
+	<!--************************************************************************** -->
+
+	<sql id="allCountryUsageColumns">
+		FK_person_id,
+		FK_country_code,
+		relationship_id,
+		versn_lock_num,
+		<include refid="CBOFMap.allChangeControlColumns"/>
+	</sql>
+
+	<sql id="allCountryUsageValues">
+		#{personId},
+		#{country.code},
+		#{usageValue},
+		#{version},
+		<include refid="CBOFMap.changeControlFields"/>
+	</sql>
+
+    <!--**************************************************************************-->
+    <!--**********************SQL Insert Statements.******************************-->
+    <!--**************************************************************************-->
+
+  	<insert id="insertCountryUsage" parameterType="CountryUsage" useGeneratedKeys="true" keyProperty="id">
+  		INSERT INTO person_country (
+			<include refid="allCountryUsageColumns" />
+     	 )
+    	VALUES (<include refid="allCountryUsageValues" /> )
+  	</insert>
+
+    <!--**************************************************************************-->
+    <!--*************************SQL Update Statements.***************************-->
+    <!--**************************************************************************-->
+
+ 	<update id="updateCountryUsage" parameterType="CountryUsage">
+		UPDATE person_country
+ 		<set>
+	 		<if test="personId != null"> FK_person_id=#{personId},</if>
+ 			<if test="usageValue != null"> relationship_id=#{usageValue},</if>
+ 			<if test="country.code != null"> FK_country_code=#{country.code},</if>
+ 			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+   		WHERE
+   			person_country_id = #{id} AND
+  			versn_lock_num = #{version}
+ 	</update>
+
+	<!--**************************************************************************-->
+    <!--***********************SQL Delete Statements.*****************************-->
+    <!--**************************************************************************-->
+
+	<!--  No Delete.  Taken care of with the cascade delete of parent. -->
+
+	<!--**************************************************************************-->
+    <!--*************************SQL Fetch Statements.****************************-->
+    <!--**************************************************************************-->
+
+	<select id="fetchVersionNumber" parameterType="CountryUsage" resultType="int">
+		SELECT versn_lock_num
+		FROM person_country
+		WHERE person_country_id = #{id}
+  	</select>
+
+  	<select id="fetchCountryUsageByPersonId" parameterType="Integer" resultMap="countryUsageResult">
+		SELECT person_country_id,
+		       FK_person_id,
+			   FK_country_code,
+			   relationship_id,
+			   create_date,
+      		   create_user,
+      		   modify_date,
+      		   modify_user,
+      		   versn_lock_num
+		FROM person_country
+		WHERE FK_person_id = #{personId}
+  	</select>
+
+  	<select id="fetchCountryUsageById" parameterType="Integer" resultMap="countryUsageResult">
+		SELECT person_country_id,
+		       FK_person_id,
+			   FK_country_code,
+			   relationship_id,
+			   create_date,
+      		   create_user,
+      		   modify_date,
+      		   modify_user,
+      		   versn_lock_num
+		FROM person_country
+		WHERE person_country_id = #{id}
+  	</select>
+
+</mapper>

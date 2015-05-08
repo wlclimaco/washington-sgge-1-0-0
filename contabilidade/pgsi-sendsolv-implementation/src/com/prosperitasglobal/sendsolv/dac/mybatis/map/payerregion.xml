@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PayerRegionMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+
+	<!--************************************************************************** -->
+	<!-- SQL fragments allow "parts" of SQL to be re-used in other SQL statements. -->
+	<!--************************************************************************** -->
+
+	<!--****************************-->
+	<!--  PayerRegion SQL fragments -->
+	<!--****************************-->
+  	<sql id="allPayerRegionColumns">
+  	     FK_payer_id,
+  	     FK_state_province_region_id,
+  	     <include refid="CBOFMap.allChangeControlColumns"/>
+  	</sql>
+
+	<sql id="allPayerRegionValues">
+		#{payerId},
+		#{stateProvinceRegionId},
+		<include refid="CBOFMap.changeControlFields"/>
+	</sql>
+
+	<!--************************************-->
+	<!--  StateProvinceRegion SQL fragments -->
+	<!--************************************-->
+  	<sql id="allStateProvinceRegionColumnsWithAlias">
+  		spr.state_province_region_id,
+ 		spr.code,
+ 		spr.name,
+ 		spr.FK_country_code,
+ 		pr.create_date,
+  		pr.create_user,
+  		pr.modify_date,
+  		pr.modify_user
+  	</sql>
+
+    <!--**************************************************************************-->
+    <!--**********************SQL Insert Statements.******************************-->
+    <!--**************************************************************************-->
+
+	<insert id="insertPayerRegion" parameterType="PayerRegion" useGeneratedKeys="true" keyColumn="payer_region_id">
+	  	INSERT INTO payer_region (
+			<include refid="PayerRegionMap.allPayerRegionColumns" />
+	      )
+	    VALUES (<include refid="PayerRegionMap.allPayerRegionValues" /> )
+  	</insert>
+
+    <!--**************************************************************************-->
+    <!--*************************SQL Update Statements.***************************-->
+    <!--**************************************************************************-->
+
+	<!--**************************************************************************-->
+    <!--***********************SQL Delete Statements.*****************************-->
+    <!--**************************************************************************-->
+
+  	<delete id="deletePayerRegion" parameterType="PayerRegion">
+  		DELETE FROM payer_region
+  		WHERE
+  			FK_payer_id = #{payerId} AND
+  			FK_state_province_region_id = #{stateProvinceRegionId}
+	</delete>
+
+	<!--**************************************************************************-->
+    <!--*************************SQL Fetch Statements.****************************-->
+    <!--**************************************************************************-->
+
+  	<select id="fetchAllStateProvinceRegion" parameterType="Integer" resultMap="countryMap.stateProvinceRegionResult">
+  		SELECT
+  			<include refid="PayerRegionMap.allStateProvinceRegionColumnsWithAlias"/>
+  		FROM state_province_region spr
+  	 	JOIN payer_region pr ON spr.state_province_region_id=pr.FK_state_province_region_id
+  	 	WHERE pr.FK_payer_id = #{value}
+  	 </select>
+
+</mapper>

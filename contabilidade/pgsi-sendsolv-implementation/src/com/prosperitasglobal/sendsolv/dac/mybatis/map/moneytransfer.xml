@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MoneyTransferMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+
+	<resultMap id="changeControlMapping" type="QATModel">
+  		<result property="createUser"			column="create_user"/>
+		<result property="createDateUTC"		column="create_date"/>
+		<result property="modifyUser"			column="modify_user"/>
+		<result property="modifyDateUTC"		column="modify_date"/>
+	</resultMap>
+
+	<resultMap id="changeControlMappingOL" type="QATModelOL" extends="MoneyTransferMap.changeControlMapping">
+  		<result property="version"				column="versn_lock_num"/>
+	</resultMap>
+
+	<resultMap id="moneyTransferResult" type="MoneyTransfer" extends="MoneyTransferMap.changeControlMappingOL">
+		<result property="id"	                              column="money_transfer_id"/>
+		<result property="key"                                column="money_transfer_key"/>
+		<result property="senderAccount.number"               column="sender_account_number"/>
+		<result property="senderAccount.typeValue"            column="sender_account_type_code"/>
+		<result property="recipientAccount.number"            column="recipient_account_number"/>
+		<result property="recipientAccount.typeValue"         column="recipient_account_type_code"/>
+		<result property="confirmationNumber"                 column="confirmation_number"/>
+		<result property="destinationAmount.amount"           column="destination_amount"/>
+		<result property="discountAmount"                     column="discount_amount"/>
+		<result property="originFlatFee"                      column="flat_fee_amount_origin_currency"/>
+		<result property="originAutomatedClearingHouseFee"    column="ach_fee_amount_origin_currency"/>
+		<result property="originCallCreditAmount"             column="call_credit_amount_origin_currency"/>
+		<result property="foreignExchangeRate"                column="foreign_effective_exchange_rate"/>
+		<result property="foreignExchangeRateCustomer"        column="customer_rate"/>
+		<result property="moneyTransferBatchId"               column="FK_money_transfer_batch_id"/>
+		<result property="originAmount.amount"                column="origin_amount"/>
+		<result property="paymentTypeValue"                   column="payment_type_code"/>
+		<result property="spreadPercentage"                   column="spread_percentage"/>
+		<result property="releaseUser"                        column="release_user" />
+		<association property="destinationAmount.currency"    column="FK_destination_currency_code" select="countryMap.fetchCurrencyByCode"/>
+		<association property="destinationAmount.country"     column="FK_destination_country_code" select="countryMap.fetchCountryByCode"/>
+		<association property="originAmount.currency"         column="FK_origin_currency_code" select="countryMap.fetchCurrencyByCode"/>
+		<association property="originAmount.country"          column="FK_origin_country_code" select="countryMap.fetchCountryByCode"/>
+		<association property="transferSetting"               column="FK_transfer_setting_id" select="TransferSettingMap.fetchTransferSettingById"/>
+		<association property="moneyTransferDetail.member"    column="{id=member_id}" select="PersonMap.fetchMemberById"/>
+		<association property="moneyTransferDetail.recipient" column="{id=recipient_id}" select="PersonMap.fetchRecipientById"/>
+		<collection property="statusList"                     column="money_transfer_id" select="MoneyTransferStatusMap.fetchMoneyTransferStatusByMoneyTransferId"/>
+		<collection property="noteList"                       column="money_transfer_id" select="noteMap.fetchNoteByMoneyTransferId"/>
+	</resultMap>
+
+    <!--************************************************************************** -->
+	<!-- SQL fragments allow "parts" of SQL to be re-used in other SQL statements. -->
+	<!--************************************************************************** -->
+
+	<sql id="allMoneyTransferColumnsExceptKey">
+		money_transfer_key,
+		sender_account_number,
+		sender_account_type_code,
+		recipient_account_number,
+		recipient_account_type_code,
+		confirmation_number,
+		destination_amount,
+		FK_destination_currency_code,
+		FK_destination_country_code,
+		discount_amount,
+		flat_fee_amount_origin_currency,
+		ach_fee_amount_origin_currency,
+		call_credit_amount_origin_currency,
+		foreign_effective_exchange_rate,
+		customer_rate,
+		FK_money_transfer_batch_id,
+		origin_amount,
+		FK_origin_currency_code,
+		FK_origin_country_code,
+		payment_type_code,
+		spread_percentage,
+		FK_transfer_setting_id,
+		release_user,
+		versn_lock_num,
+		<include refid="CBOFMap.allChangeControlColumns"/>
+	</sql>
+
+	<sql id="allMoneyTransferColumns">
+		money_transfer_id,
+		<include refid="MoneyTransferMap.allMoneyTransferColumnsExceptKey"/>
+	</sql>
+
+	<sql id="allMoneyTransferColumnsExceptKeyWithAlias">
+		mt.money_transfer_key,
+		mt.sender_account_number,
+		mt.sender_account_type_code,
+		mt.recipient_account_number,
+		mt.recipient_account_type_code,
+		mt.confirmation_number,
+		mt.destination_amount,
+		mt.FK_destination_currency_code,
+		mt.FK_destination_country_code,
+		mt.discount_amount,
+		mt.flat_fee_amount_origin_currency,
+		mt.ach_fee_amount_origin_currency,
+		mt.call_credit_amount_origin_currency,
+		mt.foreign_effective_exchange_rate,
+		mt.customer_rate,
+		mt.FK_money_transfer_batch_id,
+		mt.origin_amount,
+		mt.FK_origin_currency_code,
+		mt.FK_origin_country_code,
+		mt.payment_type_code,
+		mt.spread_percentage,
+		mt.FK_transfer_setting_id,
+		mt.release_user,
+		mt.versn_lock_num,
+		mt.create_date,
+  		mt.create_user,
+  		mt.modify_date,
+  		mt.modify_user,
+		ts.FK_member_id AS member_id,
+	    ts.FK_recipient_id AS recipient_id
+	</sql>
+
+	<sql id="allMoneyTransferColumnsWithAlias">
+		mt.money_transfer_id,
+		<include refid="MoneyTransferMap.allMoneyTransferColumnsExceptKeyWithAlias"/>
+	</sql>
+
+	<sql id="allMoneyTransferValuesExceptKey">
+		#{key},
+		#{senderAccount.number},
+		#{senderAccount.typeValue},
+		#{recipientAccount.number},
+		#{recipientAccount.typeValue},
+		#{confirmationNumber},
+		#{destinationAmount.amount},
+		#{destinationAmount.currency.code},
+		#{destinationAmount.country.code},
+		#{discountAmount},
+		#{originFlatFee},
+		#{originAutomatedClearingHouseFee},
+		#{originCallCreditAmount},
+		#{foreignExchangeRate},
+		#{foreignExchangeRateCustomer},
+		#{moneyTransferBatchId},
+		#{originAmount.amount},
+		#{originAmount.currency.code},
+		#{originAmount.country.code},
+		#{paymentTypeValue},
+		#{spreadPercentage},
+		#{transferSetting.id},
+		#{releaseUser},
+		#{version},
+		<include refid="CBOFMap.changeControlFields"/>
+	</sql>
+
+	<sql id="allMoneyTransferValues">
+		#{id},
+		<include refid="MoneyTransferMap.allMoneyTransferValuesExceptKey"/>
+	</sql>
+
+	<sql id="selectCurrentStatusId">
+		(SELECT TOP 1 money_transfer_status_id
+     	 FROM money_transfer_status mts
+     	 WHERE FK_money_transfer_id = mt.money_transfer_id
+     	 ORDER BY mts.create_date desc)
+	</sql>
+
+	<sql id="moneyTransferCriterWhereClause">
+		<where>
+		  <if test="criteria != null">
+			  	<if test="criteria.member != null">
+					<if test="criteria.member.id != null">
+						AND ts.FK_member_id = #{criteria.member.id}
+					</if>
+					<if test="criteria.member.participantId != null">
+						AND UPPER(p.participant_id) like '%' + UPPER(#{criteria.member.participantId}) + '%'
+					</if>
+					<if test="criteria.member.firstName != null">
+						AND UPPER(p.first_name) like '%' + UPPER(#{criteria.member.firstName}) + '%'
+					</if>
+					<if test="criteria.member.lastName != null">
+						AND UPPER(p.last_name) like '%' +  UPPER(#{criteria.member.lastName}) + '%'
+					</if>
+					<if test="criteria.member.pinNumber != null">
+						AND p.pin = #{criteria.member.pinNumber}
+					</if>
+				</if>
+				<if test="criteria.payerId != null">
+					AND pptc.FK_payer_id = #{criteria.payerId}
+				</if>
+				<if test="criteria.confirmationNumber != null">
+					AND confirmation_number = #{criteria.confirmationNumber}
+				</if>
+				<if test="criteria.statusList != null and !criteria.statusList.isEmpty()">
+					     AND mts.money_transfer_status_code IN
+					     <foreach item="item" index="index" collection="criteria.statusList"
+						     open="(" separator="," close=")">
+						   	 #{item.value}
+						 </foreach>
+				</if>
+				<if test="criteria.moneyTransferBatchId != null">
+					AND mt.FK_money_transfer_batch_id = #{criteria.moneyTransferBatchId}
+				</if>
+				<if test="criteria.transferSettingId != null">
+					AND mt.FK_transfer_setting_id = #{criteria.transferSettingId}
+				</if>
+				<if test="criteria.createDateUTC != null">
+					AND mt.create_date &lt; #{criteria.createDateUTC}
+				</if>
+				<if test="criteria.transactionId != null">
+					AND UPPER(mt.money_transfer_key) like '%' + UPPER(#{criteria.transactionId}) + '%'
+				</if>
+				<if test="criteria.currencyCode != null">
+					AND mt.FK_destination_currency_code = #{criteria.currencyCode}
+				</if>
+				<if test="criteria.locationName != null">
+					AND UPPER(loc.name) like '%' + UPPER(#{criteria.locationName}) + '%'
+				</if>
+				<if test="criteria.organizationName != null">
+					AND UPPER(org.name) like '%' + UPPER(#{criteria.organizationName}) + '%'
+				</if>
+				<if test="criteria.primaryPhoneNumber">
+					AND UPPER(ph.base_number) like '%' + UPPER(#{criteria.primaryPhoneNumber}) + '%'
+					AND c.priority = 1
+				</if>
+				<if test="criteria.recipientId != null">
+					AND ts.FK_recipient_id = #{criteria.recipientId}
+				</if>
+			</if>
+		</where>
+	</sql>
+
+	<sql id="moneyTransferJoinSQL">
+		LEFT OUTER JOIN money_transfer_status mts ON mts.money_transfer_status_id = <include refid="MoneyTransferMap.selectCurrentStatusId"/>
+     	JOIN transfer_setting ts ON ts.transfer_setting_id = mt.FK_transfer_setting_id
+     	JOIN product_plan_applicability ppa ON ppa.product_plan_applicability_id = ts.FK_product_plan_applicability_id
+     	JOIN payer_payment_type_currency pptc ON pptc.payer_payment_type_currency_id = ppa.FK_payer_payment_type_currency_id
+     	JOIN payer py ON py.payer_id = pptc.FK_payer_id
+     	JOIN person p ON (p.person_id = ts.FK_member_id)
+	</sql>
+
+	<sql id="moneyTransferCriteriaJoinSQL">
+		<include refid="moneyTransferJoinSQL"/>
+		<if test="criteria != null and criteria != ''">
+	     	<if test="(criteria.locationName != null and criteria.locationName != '') or
+		  		 	  (criteria.organizationName != null and criteria.organizationName != '')">
+			  	LEFT JOIN employment_information ei ON (ei.FK_member_id = p.person_id)
+			  	LEFT JOIN business loc ON (loc.business_id = ei.FK_business_id)
+
+			   <if test="criteria.organizationName != null and criteria.organizationName != ''">
+			  		LEFT JOIN business org ON (org.business_id = loc.FK_location_id)
+			   </if>
+			</if>
+			<if test="criteria.primaryPhoneNumber != null and criteria.primaryPhoneNumber != ''">
+				 LEFT JOIN person_contact pc ON (pc.FK_person_id = p.person_id)
+			  	 LEFT JOIN contact c ON (c.contact_id = pc.FK_contact_id)
+			     LEFT JOIN phone ph ON (ph.FK_contact_id = c.contact_id)
+			</if>
+	   </if>
+	</sql>
+
+    <!--**************************************************************************-->
+    <!--**********************SQL Insert Statements.******************************-->
+    <!--**************************************************************************-->
+
+   	<insert id="insertMoneyTransfer" parameterType="MoneyTransfer" useGeneratedKeys="true" keyProperty="id">
+	  	INSERT INTO money_transfer (
+			<include refid="MoneyTransferMap.allMoneyTransferColumnsExceptKey" />
+	      )
+	    VALUES (<include refid="MoneyTransferMap.allMoneyTransferValuesExceptKey" /> )
+  	</insert>
+
+    <!--**************************************************************************-->
+    <!--*************************SQL Update Statements.***************************-->
+    <!--**************************************************************************-->
+
+  	<update id="updateMoneyTransfer" parameterType="MoneyTransfer">
+    	UPDATE money_transfer
+    	<set>
+    		sender_account_number = #{senderAccount.number},
+			sender_account_type_code = #{senderAccount.typeValue},
+			recipient_account_number = #{recipientAccount.number},
+			recipient_account_type_code = #{recipientAccount.typeValue},
+			confirmation_number = #{confirmationNumber},
+			discount_amount = #{discountAmount},
+			flat_fee_amount_origin_currency = #{originFlatFee},
+			ach_fee_amount_origin_currency = #{originAutomatedClearingHouseFee},
+			call_credit_amount_origin_currency = #{originCallCreditAmount},
+			FK_money_transfer_batch_id = #{moneyTransferBatchId},
+			release_user = #{releaseUser},
+			<if test="destinationAmount != null and destinationAmount.amount != null"> destination_amount = #{destinationAmount.amount}, </if>
+			<if test="destinationAmount != null and destinationAmount.currency != null and destinationAmount.currency.code != null"> FK_destination_currency_code = #{destinationAmount.currency.code}, </if>
+			<if test="destinationAmount != null and destinationAmount.country != null and destinationAmount.country.code != null"> FK_destination_country_code = #{destinationAmount.country.code}, </if>
+			<if test="foreignExchangeRate != null"> foreign_effective_exchange_rate = #{foreignExchangeRate}, </if>
+			<if test="foreignExchangeRateCustomer != null"> customer_rate = #{foreignExchangeRateCustomer}, </if>
+			<if test="originAmount != null and originAmount.amount != null"> origin_amount = #{originAmount.amount}, </if>
+			<if test="originAmount != null and originAmount.currency != null and originAmount.currency.code != null"> FK_origin_currency_code = #{originAmount.currency.code}, </if>
+			<if test="originAmount != null and originAmount.country != null and originAmount.country.code != null"> FK_origin_country_code = #{originAmount.country.code}, </if>
+			<if test="paymentTypeValue != null"> payment_type_code = #{paymentTypeValue}, </if>
+			<if test="spreadPercentage != null"> spread_percentage = #{spreadPercentage}, </if>
+			<if test="transferSetting != null and transferSetting.id != null"> FK_transfer_setting_id = #{transferSetting.id}, </if>
+    		<if test="modifyDateUTC != null"> modify_date = #{modifyDateUTC}, </if>
+			<if test="modifyUser != null"> modify_user = #{modifyUser} </if>
+		</set>
+    	WHERE
+     		money_transfer_id = #{id} AND
+     		versn_lock_num = #{version}
+  	</update>
+
+	<!--**************************************************************************-->
+    <!--***********************SQL Delete Statements.*****************************-->
+    <!--**************************************************************************-->
+
+  	<delete id="deleteMoneyTransfer" parameterType="MoneyTransfer">
+  		DELETE FROM money_transfer
+  		WHERE
+  			money_transfer_id = #{id} AND
+  			versn_lock_num = #{version}
+	</delete>
+
+	<!--**************************************************************************-->
+    <!--*************************SQL Fetch Statements.****************************-->
+    <!--**************************************************************************-->
+
+	<select id="fetchMoneyTransferRowCount" parameterType="MoneyTransferInquiryRequest" resultType="Integer">
+     	SELECT COUNT(money_transfer_id) AS RECORD_COUNT
+     	FROM money_transfer mt
+     	<include refid="MoneyTransferMap.moneyTransferCriteriaJoinSQL"/>
+     	<include refid="MoneyTransferMap.moneyTransferCriterWhereClause"/>
+	</select>
+
+	<select id="fetchMoneyTransferVersionNumber" parameterType="MoneyTransfer" resultType="int">
+		SELECT versn_lock_num
+		FROM money_transfer
+		WHERE money_transfer_id = #{id}
+  	</select>
+
+    <select id="fetchMoneyTransferById" parameterType="int" resultMap="moneyTransferResult">
+		SELECT
+			<include refid="MoneyTransferMap.allMoneyTransferColumnsWithAlias"/>
+		FROM money_transfer mt
+		<include refid="MoneyTransferMap.moneyTransferJoinSQL"/>
+		WHERE money_transfer_id = #{id}
+  	</select>
+
+    <select id="fetchMoneyTransferByMoneyTransferBatchId" parameterType="int" resultMap="moneyTransferResult">
+		SELECT
+			<include refid="MoneyTransferMap.allMoneyTransferColumnsWithAlias"/>
+		FROM money_transfer mt
+		<include refid="MoneyTransferMap.moneyTransferJoinSQL"/>
+		WHERE FK_money_transfer_batch_id = #{id}
+		ORDER BY mts.money_transfer_status_code
+  	</select>
+
+  	<select id="fetchMoneyTransferByRequest" parameterType="MoneyTransferInquiryRequest" resultMap="moneyTransferResult">
+	    SELECT * FROM
+	    			(
+	    				SELECT
+	    				       <include refid="MoneyTransferMap.allMoneyTransferColumnsWithAlias"/>,
+	    						ROW_NUMBER() OVER(ORDER BY
+	    						<if test="sortExpression != null and sortExpression != ''">
+	    							${sortExpression}
+	    						</if>
+	    						<if test="sortExpression == null or sortExpression == ''">
+	    							mts.money_transfer_status_code, py.payer_name
+	    						</if>
+	    						) AS RowNumber
+	    				FROM money_transfer mt
+	    				<include refid="MoneyTransferMap.moneyTransferCriteriaJoinSQL"/>
+						<include refid="MoneyTransferMap.moneyTransferCriterWhereClause"/>
+	    			) LIST
+					<choose>
+						<when test="pageSize != null and pageSize > 0">
+						   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+						        LOWER: startRow + 1 and
+						        UPPER: startRow + pageSize -->
+						   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+						</when>
+						<otherwise>
+						 	WHERE RowNumber BETWEEN 1 AND RowNumber
+						 	ORDER BY RowNumber
+						</otherwise>
+					</choose>
+  	</select>
+
+	<select id="fetchMoneyTransferByStatusPagedBatch" parameterType="Integer" resultMap="moneyTransferResult">
+		<if test="_databaseId == 'SqlServer'">
+ 			SELECT * FROM
+				(
+					 SELECT
+  				  		<include refid="MoneyTransferMap.allMoneyTransferColumnsWithAlias"/>,
+						ROW_NUMBER() OVER(ORDER BY mt.FK_money_transfer_batch_id) AS RowNumber
+	    				FROM money_transfer mt
+	    				LEFT OUTER JOIN money_transfer_status mts ON mts.money_transfer_status_id = <include refid="MoneyTransferMap.selectCurrentStatusId"/>
+	    				JOIN money_transfer_batch mtb ON mt.FK_money_transfer_batch_id = mtb.money_transfer_batch_id
+	    				LEFT OUTER JOIN money_transfer_batch_status mtbs ON mtbs.money_transfer_batch_status_id = <include refid="MoneyTransferBatchMap.selectCurrentStatusId"/>
+     					JOIN transfer_setting ts ON ts.transfer_setting_id = mt.FK_transfer_setting_id
+	    				<where>
+		    				<if test="moneyTransferBatchStatusCode != null">
+					 			mtbs.money_transfer_batch_status_code = #{moneyTransferBatchStatusCode} AND
+					 		</if>
+	    					mts.money_transfer_status_code IN
+	    					<foreach item="moneyTransferStatusCode" index="index" collection="moneyTransferStatusCodes"
+					 		    open="(" separator="," close=")">
+					   			#{moneyTransferStatusCode}
+					 		</foreach>
+					 	</where>
+	    		) LIST
+				<choose>
+					<when test="_pagesize != null and _pagesize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{_page}*#{_pagesize})+ 1 AND (#{_page}*#{_pagesize})+#{_pagesize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+		</if>
+	</select>
+
+</mapper>

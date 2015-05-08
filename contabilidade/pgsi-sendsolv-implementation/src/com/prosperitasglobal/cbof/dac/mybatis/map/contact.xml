@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ContactMap">
+	<!--
+		Result maps describe the mapping between the columns returned from a query, and the class properties.
+
+		Note the use of property attributes that end in Value.  These are convenience properties provided
+		by the model object so that usage of TypeHandlers for enums can be avoided here.
+	-->
+	<resultMap id="contactResult" type="Contact" extends="CBOFMap.changeControlMapping">
+		<result property="id" column="contact_id"/>
+		<result property="parentKey" column="con_parentkey" />
+		<result property="parentKeyValue" column="type" />
+		<result property="contactTypeValue" column="con_contact_type" />
+		<result property="priorityValue" column="con_priority" />
+		<result property="verifiedValue" column="con_verified" />
+		<result property="effectiveStartDate" column="con_effective_start_date" />
+		<result property="effectiveEndDate" column="con_effective_end_date" />
+		<result property="version" column="versn_lock_num" />
+
+		<discriminator javaType="java.lang.Integer" column="con_contact_type">
+			<case value="2" resultMap="phoneResult" />
+			<case value="3" resultMap="emailResult" />
+			<case value="4" resultMap="addressResult" />
+			<case value="5" resultMap="phoneResult" />
+			<case value="6" resultMap="emailResult" />
+			<case value="7" resultMap="addressResult" />
+			<case value="8" resultMap="phoneResult" />
+		</discriminator>
+	</resultMap>
+
+	<resultMap id="addressResult" type="Address" extends="ContactMap.contactResult">
+		<result property="addressLine1" column="addr_address_line_1" />
+		<result property="addressLine2" column="addr_address_line_2" />
+		<result property="addressLine3" column="addr_address_line_3" />
+		<result property="addressLine4" column="addr_address_line_4" />
+		<result property="cityName" column="addr_city_name" />
+		<result property="postalCode" column="addr_postal_code" />
+		<result property="stateProvinceRegioName" column="addr_state_province_region_name" />
+
+		<association property="stateProvinceRegion" column="addr_state_province_region_id" javaType="StateProvinceRegion" select="countryMap.fetchStateProvinceRegionById" />
+		<association property="country" column="addr_country" javaType="Country" select="countryMap.fetchCountryByCode" />
+	</resultMap>
+
+	<resultMap id="phoneResult" type="Phone" extends="ContactMap.contactResult">
+		<result property="number" column="ph_base_number" />
+		<result property="extension" column="ph_extension_code" />
+		<association property="country" column="ph_country_code" javaType="Country" select="countryMap.fetchCountryByCode" />
+	</resultMap>
+
+	<resultMap id="emailResult" type="EMail" extends="ContactMap.contactResult">
+		<result property="emailaddress" column="em_email_address" />
+	</resultMap>
+
+	<!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+	<sql id="allContactColumnsWithAlias">
+		con.contact_type as con_contact_type,
+		con.priority as con_priority,
+		con.is_verified as con_verified,
+		con.effective_start_date as con_effective_start_date,
+		con.effective_end_date as con_effective_end_date,
+		con.create_date as con_create_date,
+		con.create_user as con_create_user,
+		con.modify_date as con_modify_date,
+		con.modify_user as con_modify_user
+  	</sql>
+
+	<sql id="allContactColumns">
+		contact_type,
+		priority,
+		is_verified,
+		effective_start_date,
+		effective_end_date,
+		create_date,
+		create_user,
+		modify_date,
+		modify_user
+  	</sql>
+
+	<sql id="allAddressColumnsWithAlias">
+		addr.address_line_1 as addr_address_line_1,
+		addr.address_line_2 as addr_address_line_2,
+		addr.address_line_3 as addr_address_line_3,
+		addr.address_line_4 as addr_address_line_4,
+		addr.city_name as addr_city_name,
+		addr.FK_state_province_region_id as addr_state_province_region_id,
+		addr.postal_code as addr_postal_code,
+		addr.FK_country_code as addr_country,
+		addr.create_date as addr_create_date,
+		addr.create_user as addr_create_user,
+		addr.modify_date as addr_modify_date,
+		addr.modify_user as addr_modify_user
+  	</sql>
+
+	<sql id="allAddressColumns">
+		address_line_1,
+		address_line_2,
+		address_line_3,
+		address_line_4,
+		city_name,
+		FK_state_province_region_id,
+		postal_code,
+		FK_country_code,
+		create_date,
+		create_user,
+		modify_date,
+		modify_user
+  	</sql>
+
+	<sql id="allPhoneColumnsWithAlias">
+		ph.FK_country_code as ph_country_code,
+		ph.base_number as ph_base_number,
+		ph.extension_code as ph_extension_code,
+		ph.create_date as ph_create_date,
+		ph.create_user as ph_create_user,
+		ph.modify_date as ph_modify_date,
+		ph.modify_user as ph_modify_user
+  	</sql>
+
+	<sql id="allPhoneColumns">
+		FK_country_code,
+		base_number,
+		extension_code,
+		create_date,
+		create_user,
+		modify_date,
+		modify_user
+  	</sql>
+
+ 	<sql id="allEmailColumnsWithAlias">
+		em.email_address as em_email_address,
+		em.create_date as em_create_date,
+		em.create_user as em_create_user,
+		em.modify_date as em_modify_date,
+		em.modify_user as em_modify_user
+  	</sql>
+
+	<sql id="allEmailColumns">
+		email_address,
+		create_date,
+		create_user,
+		modify_date,
+		modify_user
+  	</sql>
+
+  	<!--
+		SQL Insert Statements.
+ 	-->
+	<insert id="insertContact" parameterType="Contact" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO Contact (
+		<include refid="allContactColumns" />
+		)
+		VALUES( #{contactTypeValue},
+				#{priorityValue},
+				#{verifiedValue},
+				#{effectiveStartDate},
+				#{effectiveEndDate},
+				#{createDateUTC},
+				#{createUser},
+				#{modifyDateUTC},
+				#{modifyUser}
+		)
+	</insert>
+
+	<insert id="insertAddress" parameterType="Address">
+		INSERT INTO address (
+			FK_contact_id,
+			<include refid="allAddressColumns" />
+		)
+		VALUES( #{id},
+				#{addressLine1},
+				#{addressLine2},
+				#{addressLine3},
+				#{addressLine4},
+				#{cityName},
+				#{stateProvinceRegion.id},
+				#{postalCode},
+				#{country.code},
+				#{createDateUTC},
+				#{createUser},
+				#{modifyDateUTC},
+				#{modifyUser} )
+	</insert>
+
+	<insert id="insertPhone" parameterType="Phone">
+		INSERT INTO phone (FK_contact_id,
+		<include refid="allPhoneColumns" />
+		)
+		VALUES( #{id},
+				#{country.code},
+				#{number},
+				#{extension},
+				#{createDateUTC},
+				#{createUser},
+				#{modifyDateUTC},
+				#{modifyUser} )
+	</insert>
+
+	<insert id="insertEmail" parameterType="EMail">
+		INSERT INTO email (FK_contact_id,
+			<include refid="allEmailColumns" />
+		)
+		VALUES( #{id},
+				#{emailAddress},
+				#{createDateUTC},
+				#{createUser},
+				#{modifyDateUTC},
+				#{modifyUser} )
+	</insert>
+
+	<!--
+		SQL Update statements.
+	-->
+	<update id="updateContact" parameterType="Contact">
+		UPDATE contact
+		<set>
+			<if test="priorityValue != null">priority = #{priorityValue},</if>
+			<if test="verifiedValue != null">is_verified = #{verifiedValue},</if>
+			<if test="contactTypeValue != null">contact_type = #{contactTypeValue},</if>
+			<if test="effectiveStartDate != null">effective_start_date = #{effectiveStartDate},</if>
+			<if test="effectiveEndDate != null">effective_end_date = #{effectiveEndDate}</if>
+		</set>
+		WHERE contact_id = #{id} AND versn_lock_num = #{version}
+	</update>
+
+	<update id="updateAddress" parameterType="Address">
+		UPDATE address
+		<set>
+			<if test="addressLine1 != null">address_line_1 = #{addressLine1},</if>
+			<if test="addressLine2 != null">address_line_2 = #{addressLine2},</if>
+			<if test="addressLine3 != null">address_line_3 = #{addressLine3},</if>
+			<if test="addressLine4 != null">address_line_4 = #{addressLine4},</if>
+			<if test="cityName != null">city_name = #{cityName},</if>
+			<if test="stateProvinceRegion != null and stateProvinceRegion.id != null">FK_state_province_region_id = #{stateProvinceRegion.id},</if>
+			<if test="country != null and country.code != null">FK_country_code = #{country.code},</if>
+			<if test="postalCode != null">postal_code = #{postalCode},</if>
+		</set>
+		WHERE FK_contact_id = #{id} AND versn_lock_num = #{version}
+	</update>
+
+	<update id="updatePhone" parameterType="Phone">
+		UPDATE phone
+		<set>
+			<if test="country.code != null">FK_country_code = #{country.code},</if>
+			<if test="number != null">base_number = #{number},</if>
+			<if test="extension != null">extension_code = #{extension}</if>
+		</set>
+		WHERE FK_contact_id = #{id} AND versn_lock_num = #{version}
+	</update>
+
+	<update id="updateEmail" parameterType="EMail">
+		UPDATE EMail
+		<set>
+			<if test="emailAddress != null">email_address = #{emailAddress}</if>
+		</set>
+		WHERE FK_contact_id = #{id} AND versn_lock_num = #{version}
+	</update>
+
+	<!--
+		SQL Delete statements.
+	-->
+	<delete id="deleteBusinessContact" parameterType="Contact">
+		DELETE FROM business_contact WHERE FK_contact_id = #{id};
+	</delete>
+
+	<delete id="deletePersonContact" parameterType="Contact">
+		DELETE FROM person_contact WHERE FK_contact_id = #{id};
+	</delete>
+
+	<!--
+		SQL Fetch statements.
+	-->
+	<select id="fetchAllContacts" resultMap="contactResult">
+		SELECT
+			contact_id,
+			COALESCE(ph.versn_lock_num,em.versn_lock_num,addr.versn_lock_num) as versn_lock_num,
+			<include refid="allContactColumnsWithAlias" />,
+			<include refid="allAddressColumnsWithAlias" />,
+			<include refid="allPhoneColumnsWithAlias" />,
+			<include refid="allEmailColumnsWithAlias" />
+		FROM contact con
+		LEFT OUTER JOIN address addr ON con_contact_id = addr.FK_contact_id
+		LEFT OUTER JOIN phone ph ON con.contact_id = ph.FK_contact_id
+		LEFT OUTER JOIN email em ON	con.contact_id = em.FK_contact_id
+	</select>
+
+	<select id="fetchContactsByBusinessId" parameterType="Integer" resultMap="contactResult">
+		SELECT
+			bc.FK_business_id as con_parentkey,
+			con.contact_id,
+			COALESCE(ph.versn_lock_num,em.versn_lock_num,addr.versn_lock_num) as versn_lock_num,
+			b.business_type AS type,
+			<include refid="allContactColumnsWithAlias" />,
+			<include refid="allAddressColumnsWithAlias" />,
+			<include refid="allPhoneColumnsWithAlias" />,
+			<include refid="allEmailColumnsWithAlias" />
+		FROM contact con
+		LEFT OUTER JOIN address addr ON con.contact_id = addr.FK_contact_id
+		LEFT OUTER JOIN phone ph ON	con.contact_id = ph.FK_contact_id
+		LEFT OUTER JOIN email em ON	con.contact_id = em.FK_contact_id
+		LEFT JOIN business_contact bc ON con.contact_id = bc.FK_contact_id
+		INNER JOIN business b ON (b.business_id = bc.FK_business_id)
+		WHERE bc.FK_business_id=#{value}
+		ORDER BY con.priority
+	</select>
+
+	<select id="fetchContactsByPersonId" parameterType="Integer" resultMap="contactResult">
+		SELECT
+			pc.FK_person_id as con_parentkey,
+			con.contact_id,
+			COALESCE(ph.versn_lock_num,em.versn_lock_num,addr.versn_lock_num) as versn_lock_num,
+			CASE p.person_type
+				WHEN 1 THEN 4
+				WHEN 2 THEN 3
+				WHEN 3 THEN 5
+	        END	as type,
+			<include refid="allContactColumnsWithAlias" />,
+			<include refid="allAddressColumnsWithAlias" />,
+			<include refid="allPhoneColumnsWithAlias" />,
+			<include refid="allEmailColumnsWithAlias" />
+		  FROM contact con
+		  LEFT OUTER JOIN address addr ON con.contact_id = addr.FK_contact_id
+		  LEFT OUTER JOIN phone ph ON	con.contact_id = ph.FK_contact_id
+		  LEFT OUTER JOIN email em ON	con.contact_id = em.FK_contact_id
+		  LEFT JOIN person_contact pc ON con.contact_id = pc.FK_contact_id
+		  INNER JOIN person p ON (p.person_id = pc.FK_person_id)
+		WHERE pc.FK_person_id=#{value}
+		ORDER BY con.priority
+	</select>
+
+	<select id="fetchContactsById" parameterType="Integer" resultMap="contactResult">
+		SELECT
+			con.contact_id,
+			COALESCE(ph.versn_lock_num,em.versn_lock_num,addr.versn_lock_num) as versn_lock_num,
+			<include refid="allContactColumnsWithAlias" />,
+			<include refid="allAddressColumnsWithAlias" />,
+			<include refid="allPhoneColumnsWithAlias" />,
+			<include refid="allEmailColumnsWithAlias" />
+		FROM contact con
+		LEFT OUTER JOIN address addr ON con.contact_id = addr.FK_contact_id
+		LEFT OUTER JOIN phone ph ON	con.contact_id = ph.FK_contact_id
+		LEFT OUTER JOIN email em ON	con.contact_id = em.FK_contact_id
+		WHERE con.contact_id=#{value}
+	</select>
+
+	<select id="fetchVersionNumberContact" parameterType="Contact" resultType="int">
+		SELECT versn_lock_num FROM contact WHERE contact_id = #{id}
+  	</select>
+  	<select id="fetchVersionNumberEmail" parameterType="Contact" resultType="int">
+		SELECT versn_lock_num FROM email WHERE FK_contact_id = #{id}
+  	</select>
+  	<select id="fetchVersionNumberPhone" parameterType="Contact" resultType="int">
+		SELECT versn_lock_num FROM phone WHERE FK_contact_id = #{id}
+  	</select>
+  	<select id="fetchVersionNumberAddress" parameterType="Contact" resultType="int">
+		SELECT versn_lock_num FROM address WHERE FK_contact_id = #{id}
+  	</select>
+</mapper>

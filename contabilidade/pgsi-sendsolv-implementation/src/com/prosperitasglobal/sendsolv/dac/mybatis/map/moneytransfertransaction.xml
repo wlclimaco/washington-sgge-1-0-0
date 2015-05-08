@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MoneyTransferTransactionMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+
+	<resultMap id="moneyTransferTransactionResult" type="MoneyTransferTransaction">
+		<result property="id"	                                      column="money_transfer_data_id"/>
+		<result property="key"                                        column="money_transfer_data_key"/>
+		<result property="achPayeeCode"                               column="payer_code"/>
+		<result property="destinationAmount.amount"                   column="dest_amount"/>
+		<result property="foreignExchangeRateCustomer"                column="fx_rate"/>
+		<result property="moneyTransferStatusId"                      column="FK_money_transfer_status_id"/>
+		<result property="originAmount.amount"                        column="origin_amount"/>
+		<result property="paymentTypeValue"                           column="payment_type_code"/>
+		<result property="recipient.name.firstName"                   column="recipient_first_name"/>
+		<result property="recipient.name.lastName"                    column="recipient_last_name"/>
+		<result property="recipient.address.address"                  column="recipient_address"/>
+		<result property="recipient.account.typeValue"                column="recipient_account_type_code"/>
+		<result property="recipient.account.number"                   column="recipient_account_number"/>
+		<result property="recipient.phoneNumber"                      column="recipient_phone"/>
+		<result property="sender.name.firstName"                      column="sender_first_name"/>
+		<result property="sender.name.lastName"                       column="sender_last_name"/>
+		<result property="sender.address.address"                     column="sender_address"/>
+		<result property="sender.address.city"                        column="sender_city"/>
+		<result property="sender.address.postalCode"                  column="sender_postal_code"/>
+		<result property="sender.account.typeValue"                   column="sender_account_type_code"/>
+		<result property="sender.account.number"                      column="sender_account_number"/>
+		<result property="sender.phoneNumber"                         column="sender_phone"/>
+		<result property="confirmationNumber"                         column="confirmation_number"/>
+		<result property="releaseUser" 							      column="release_user"/>
+		<result property="originFlatFee"                              column="fee_amount_origin_currency"/>
+		<result property="createUser"			                      column="create_user"/>
+		<result property="createDateUTC"	                          column="create_date"/>
+		<association property="sender.address.country"                column="sender_country_code" select="countryMap.fetchCountryByCode"/>
+		<association property="recipient.address.country"             column="recipient_country_code" select="countryMap.fetchCountryByCode"/>
+		<association property="recipient.address.stateProvinceRegion" column="{countryCode=recipient_country_code, code=recipient_state_province_region_id}" select="countryMap.fetchStateProvinceRegionByCountryCodeAndCode"/>
+		<association property="sender.address.stateProvinceRegion"    column="{countryCode=sender_country_code,code=sender_state_province_region_id}" select="countryMap.fetchStateProvinceRegionByCountryCodeAndCode"/>
+		<association property="destinationAmount.country"             column="dest_country_code" select="countryMap.fetchCountryByCode"/>
+		<association property="destinationAmount.currency"            column="dest_currency" select="countryMap.fetchCurrencyByCode"/>
+		<association property="originAmount.country"                  column="origin_country_code" select="countryMap.fetchCountryByCode"/>
+		<association property="originAmount.currency"                 column="origin_currency" select="countryMap.fetchCurrencyByCode"/>
+	</resultMap>
+
+    <!--************************************************************************** -->
+	<!-- SQL fragments allow "parts" of SQL to be re-used in other SQL statements. -->
+	<!--************************************************************************** -->
+
+	<sql id="allMoneyTransferTransactionColumnsExceptKey">
+		money_transfer_data_key,
+		payer_code,
+		dest_country_code,
+		dest_currency,
+		dest_amount,
+		fx_rate,
+		FK_money_transfer_status_id,
+		origin_country_code,
+		origin_currency,
+		origin_amount,
+		payment_type_code,
+		recipient_first_name,
+		recipient_last_name,
+		recipient_address,
+		recipient_state_province_region_id,
+		recipient_country_code,
+		recipient_account_type_code,
+		recipient_account_number,
+		recipient_phone,
+		sender_first_name,
+		sender_last_name,
+		sender_address,
+		sender_city,
+		sender_state_province_region_id,
+		sender_country_code,
+		sender_postal_code,
+		sender_account_type_code,
+		sender_account_number,
+		sender_phone,
+		confirmation_number,
+		release_user,
+		fee_amount_origin_currency,
+		create_user,
+		create_date
+	</sql>
+
+	<sql id="allMoneyTransferTransactionColumns">
+		money_transfer_data_id,
+		<include refid="MoneyTransferTransactionMap.allMoneyTransferTransactionColumnsExceptKey"/>
+	</sql>
+
+	<sql id="allMoneyTransferTransactionValuesExceptKey">
+		#{key},
+		#{achPayeeCode},
+		#{destinationAmount.country.code},
+		#{destinationAmount.currency.code},
+		#{destinationAmount.amount},
+		#{foreignExchangeRateCustomer},
+		#{moneyTransferStatusId},
+		#{originAmount.country.code},
+		#{originAmount.currency.code},
+		#{originAmount.amount},
+		#{paymentTypeValue},
+		#{recipient.name.firstName},
+		#{recipient.name.lastName},
+		#{recipient.address.address},
+		#{recipient.address.stateProvinceRegion.code},
+		#{recipient.address.country.code},
+		#{recipient.account.typeValue},
+		#{recipient.account.number},
+		#{recipient.phoneNumber},
+		#{sender.name.firstName},
+		#{sender.name.lastName},
+		#{sender.address.address},
+		#{sender.address.city},
+		#{sender.address.stateProvinceRegion.code},
+		#{sender.address.country.code},
+		#{sender.address.postalCode},
+		#{sender.account.typeValue},
+		#{sender.account.number},
+		#{sender.phoneNumber},
+		#{confirmationNumber},
+		#{releaseUser},
+		#{originFlatFee},
+		#{createUser},
+		#{createDateUTC}
+	</sql>
+
+	<sql id="allMoneyTransferTransactionValues">
+		#{id},
+		<include refid="MoneyTransferTransactionMap.allMoneyTransferTransactionValuesExceptKey"/>
+	</sql>
+
+    <!--**************************************************************************-->
+    <!--**********************SQL Insert Statements.******************************-->
+    <!--**************************************************************************-->
+
+   	<insert id="insertMoneyTransferTransaction" parameterType="MoneyTransferTransaction" useGeneratedKeys="true" keyProperty="id">
+	  	INSERT INTO money_transfer_data (
+			<include refid="MoneyTransferTransactionMap.allMoneyTransferTransactionColumnsExceptKey" />
+	      )
+	    VALUES (<include refid="MoneyTransferTransactionMap.allMoneyTransferTransactionValuesExceptKey" /> )
+  	</insert>
+
+    <!--**************************************************************************-->
+    <!--*************************SQL Update Statements.***************************-->
+    <!--**************************************************************************-->
+
+  	<update id="updateMoneyTransferTransaction" parameterType="MoneyTransferTransaction">
+    	UPDATE money_transfer_data
+    	<set>
+    		release_user = #{releaseUser},
+    		fee_amount_origin_currency = #{originFlatFee},
+			<if test="achPayeeCode != null">
+				payer_code = #{achPayeeCode},
+			</if>
+
+			<if test="destinationAmount != null">
+				<if test="destinationAmount.country != null">
+					<if test="destinationAmount.country.code != null">
+						dest_country_code = #{destinationAmount.country.code},
+					</if>
+				</if>
+				<if test="destinationAmount.currency != null">
+					<if test="destinationAmount.currency.code != null">
+						dest_currency = #{destinationAmount.currency.code},
+					</if>
+				</if>
+				<if test="destinationAmount.amount != null">
+					dest_amount = #{destinationAmount.amount},
+				</if>
+			</if>
+
+			<if test="foreignExchangeRateCustomer != null">
+				fx_rate = #{foreignExchangeRateCustomer},
+			</if>
+			<if test="moneyTransferStatusId != null">
+				FK_money_transfer_status_id = #{moneyTransferStatusId},
+			</if>
+
+			<if test="originAmount != null">
+				<if test="originAmount.country != null">
+					<if test="originAmount.country.code != null">
+						origin_country_code = #{originAmount.country.code},
+					</if>
+				</if>
+				<if test="originAmount.currency != null">
+					<if test="originAmount.currency.code != null">
+						origin_currency = #{originAmount.currency.code},
+					</if>
+				</if>
+				<if test="originAmount.amount != null">
+					origin_amount = #{originAmount.amount},
+				</if>
+			</if>
+
+			<if test="paymentTypeValue != null">
+				payment_type_code = #{paymentTypeValue},
+			</if>
+
+			<if test="recipient != null">
+				recipient_phone = #{recipient.phoneNumber},
+				<if test="recipient.name != null">
+					<if test="recipient.name.firstName != null">
+						recipient_first_name = #{recipient.name.firstName},
+					</if>
+					<if test="recipient.name.lastName != null">
+						recipient_last_name = #{recipient.name.lastName},
+					</if>
+				</if>
+				<if test="recipient.address != null">
+					recipient_address = #{recipient.address.address},
+					<if test="recipient.address.stateProvinceRegion != null">
+						recipient_state_province_region_id = #{recipient.address.stateProvinceRegion.code},
+					</if>
+					<if test="recipient.address.stateProvinceRegion == null">
+						recipient_state_province_region_id = NULL,
+					</if>
+					<if test="recipient.address.country != null">
+						<if test="recipient.address.country.code != null">
+							recipient_country_code = #{recipient.address.country.code},
+						</if>
+					</if>
+				</if>
+				<if test="recipient.account != null">
+					recipient_account_type_code = #{recipient.account.typeValue},
+					recipient_account_number = #{recipient.account.number},
+				</if>
+				<if test="recipient.account == null">
+					recipient_account_type_code = NULL,
+					recipient_account_number = NULL,
+				</if>
+			</if>
+
+			<if test="sender != null">
+				sender_phone = #{sender.phoneNumber},
+				<if test="sender.name != null">
+					<if test="sender.name.firstName != null">
+						sender_first_name = #{sender.name.firstName},
+					</if>
+					<if test="sender.name.lastName != null">
+						sender_last_name = #{sender.name.lastName},
+					</if>
+				</if>
+				<if test="sender.address != null">
+					<if test="sender.address.address != null">
+						sender_address = #{sender.address.address},
+					</if>
+					<if test="sender.address.city != null">
+						sender_city = #{sender.address.city},
+					</if>
+					<if test="sender.address.stateProvinceRegion != null">
+						<if test="sender.address.stateProvinceRegion.code != null">
+							sender_state_province_region_id = #{sender.address.stateProvinceRegion.code},
+						</if>
+					</if>
+					<if test="sender.address.country != null">
+						<if test="sender.address.country.code != null">
+							sender_country_code = #{sender.address.country.code},
+						</if>
+					</if>
+					<if test="sender.address.postalCode != null">
+						sender_postal_code = #{sender.address.postalCode},
+					</if>
+				</if>
+				<if test="sender.account != null">
+					sender_account_type_code = #{sender.account.typeValue},
+					sender_account_number = #{sender.account.number},
+				</if>
+				<if test="sender.account == null">
+					sender_account_type_code = NULL,
+					sender_account_number = NULL,
+				</if>
+			</if>
+		</set>
+    	WHERE
+     		money_transfer_data_id = #{id}
+  	</update>
+
+	<!--**************************************************************************-->
+    <!--***********************SQL Delete Statements.*****************************-->
+    <!--**************************************************************************-->
+
+  	<delete id="deleteMoneyTransferTransaction" parameterType="MoneyTransferTransaction">
+  		DELETE FROM money_transfer_data
+  		WHERE
+  			money_transfer_data_id = #{id}
+	</delete>
+
+	<!--**************************************************************************-->
+    <!--*************************SQL Fetch Statements.****************************-->
+    <!--**************************************************************************-->
+
+    <select id="fetchMoneyTransferTransactionById" parameterType="int" resultMap="moneyTransferTransactionResult">
+		SELECT
+			<include refid="MoneyTransferTransactionMap.allMoneyTransferTransactionColumns"/>
+		FROM money_transfer_data
+		WHERE money_transfer_data_id = #{id}
+  	</select>
+
+	<select id="fetchMoneyTransferTransactionByMoneyTransferStatusId" parameterType="int" resultMap="moneyTransferTransactionResult">
+		SELECT
+			<include refid="MoneyTransferTransactionMap.allMoneyTransferTransactionColumns"/>
+		FROM money_transfer_data
+		WHERE FK_money_transfer_status_id = #{id}
+  	</select>
+
+</mapper>

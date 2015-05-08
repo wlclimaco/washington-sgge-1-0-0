@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="securityQuestionMap">
+
+  <!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+
+   	<resultMap id="securityQuestionResult" type="SecurityQuestion">
+		<result property="id" column="security_question_id"/>
+		<result property="securityQuestionKey" column="security_question_key" />
+		<result property="createDateUTC" column="create_date" />
+		<result property="createUser" column="create_user" />
+		<result property="modifyDateUTC" column="modify_date" />
+		<result property="modifyUser" column="modify_user" />
+	</resultMap>
+
+   	<resultMap id="personSecurityAnswerResult" type="PersonSecurityAnswer">
+		<result property="id" column="person_security_answer_id"/>
+		<result property="answerText" column="answer_text" />
+		<result property="parentKey" column="FK_person_id" />
+		<result property="createDateUTC" column="create_date" />
+		<result property="createUser" column="create_user" />
+		<result property="modifyDateUTC" column="modify_date" />
+		<result property="modifyUser" column="modify_user" />
+		<result property="version" column="versn_lock_num" />
+		 <association property="securityQuestion" column="FK_security_question" select="fetchSecurityQuestionById"/>
+	</resultMap>
+
+	<!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  	<sql id="allSecurityQuestionColumns">
+		security_question_id,
+        security_question_key,
+  		<include refid="CBOFMap.allChangeControlColumns"/>
+  	</sql>
+
+    <sql id="allSecurityQuestionValues">
+  		#{id},
+  		#{securityQuestionKey},
+    	<include refid="CBOFMap.changeControlFields"/>
+     </sql>
+
+  	<sql id="allPersonSecurityAnswerColumns">
+		person_security_answer_id,
+        FK_security_question,
+        FK_person_id,
+        answer_text,
+        versn_lock_num,
+		<include refid="CBOFMap.allChangeControlColumns"/>
+	</sql>
+
+    <sql id="allPersonSecurityAnswerValues">
+  		#{id},
+  		#{securityQuestion.id},
+  		#{answerText},
+  		#{parentKey},
+    	<include refid="CBOFMap.changeControlFields"/>
+     </sql>
+
+	<!--
+		SQL Insert Statements.
+	-->
+	<insert id="insertPersonSecurityAnswer" parameterType="PersonSecurityAnswer" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO person_security_answer (FK_security_question,
+        									answer_text,
+        									FK_person_id,
+										    create_date,
+								  	        create_user,
+								  	        modify_date,
+								  	        modify_user )
+							      VALUES (#{securityQuestion.id},
+  										  #{answerText},
+  										  #{parentKey},
+						   		      	  #{createDateUTC},
+										  #{createUser},
+										  #{modifyDateUTC},
+										  #{modifyUser} )
+	</insert>
+
+	<insert id="insertSecurityQuestion" parameterType="SecurityQuestion" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO security_question (security_question_key,
+									   create_date,
+								  	   create_user,
+								  	   modify_date,
+								  	   modify_user )
+					   		 VALUES (#{securityQuestionKey},
+					   		      	 #{createDateUTC},
+									 #{createUser},
+									 #{modifyDateUTC},
+									 #{modifyUser} )
+	</insert>
+
+	<!--
+		SQL Update Statements.
+	-->
+	<update id="updatePersonSecurityAnswer" parameterType="PersonSecurityAnswer">
+		UPDATE person_security_answer
+		<set>
+			<if test="answerText != null">answer_text = #{answerText},</if>
+			<if test="securityQuestion != null and securityQuestion.id != null">FK_security_question = #{securityQuestion.id},</if>
+			modify_date = #{modifyDateUTC},
+			modify_user = #{modifyUser}
+		</set>
+		 WHERE person_security_answer_id = #{id}
+		   AND versn_lock_num = #{version}
+	</update>
+
+	<!--
+		SQL Delete Statements.
+	-->
+	<update id="deletePersonSecurityAnswer" parameterType="PersonSecurityAnswer">
+		DELETE FROM person_security_answer
+		 WHERE person_security_answer_id = #{id}
+		   AND versn_lock_num = #{version}
+	</update>
+
+	<!--
+		SQL Fetch Statements.
+	-->
+    <select id="fetchAllSecurityQuestions" resultMap="securityQuestionResult">
+		SELECT
+			<include refid="allSecurityQuestionColumns" />
+		  FROM security_question
+	     ORDER BY security_question_key
+	</select>
+
+	<select id="fetchSecurityQuestionById" parameterType="Integer" resultMap="securityQuestionResult">
+		SELECT
+			<include refid="allSecurityQuestionColumns" />
+		  FROM security_question
+		 WHERE security_question_id=#{value}
+	</select>
+
+	<select id="fetchPersonSecurityAnswersByPersonId" parameterType="Integer" resultMap="personSecurityAnswerResult">
+		SELECT
+			<include refid="allPersonSecurityAnswerColumns" />
+		  FROM person_security_answer
+		 WHERE FK_person_id=#{value}
+		 ORDER BY answer_text
+	</select>
+
+</mapper>

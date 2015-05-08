@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SuspiciousActivityMap">
+
+ 	<resultMap id="changeControlMapping" type="QATModel">
+  		<result property="createUser" column="create_user"/>
+		<result property="createDateUTC" column="create_date"/>
+	</resultMap>
+
+	<resultMap id="suspiciousActivityResult" type="SuspiciousActivity" extends="changeControlMapping">
+		<result property="id"						 column="suspicious_activity_report_id"/>
+		<result property="businessKey"				 column="suspicious_activity_key"/>
+		<result property="typeValue"				 column="sar_type_code"/>
+		<result property="summary"			         column="summary_text"/>
+		<result property="detail"				     column="detail_text"/>
+		<result property="activityStartDateTimeUTC"  column="activity_start_datetime"/>
+		<result property="activityStopDateTimeUTC"	 column="activity_stop_datetime"/>
+		<result property="statusValue"		         column="sar_status_code"/>
+		<result property="statusDateTime"		     column="status_date_time"/>
+		<result property="statusReason"		         column="status_reason"/>
+		<result property="amountAssociated"		     column="amount_associated"/>
+		<collection property="businessList"          column="suspicious_activity_report_id" select="fetchBusinessBySuspiciousActivityId"/>
+  	</resultMap>
+
+	<resultMap id="suspiciousActivityAllResult" type="SuspiciousActivity" extends="suspiciousActivityResult">
+		<collection property="personList"			 column="suspicious_activity_report_id" select="fetchPersonBySuspiciousActivityId"/>
+  	</resultMap>
+
+	<resultMap id="businessSuspiciousActivityResult" type="SuspiciousActivity" extends="suspiciousActivityResult">
+		<collection property="personList"			 column="{id=business_id, type=business_type}" select="fetchPersonByBusinessId"/>
+  	</resultMap>
+
+    <!--************************************************************************** -->
+	<!-- SQL fragments allow "parts" of SQL to be re-used in other SQL statements. -->
+	<!--************************************************************************** -->
+
+	<sql id="allChangeControlColumns">
+		create_date,
+  		create_user
+  	</sql>
+
+  	<sql id="changeControlFields">
+    	#{createDateUTC},
+		#{createUser}
+    </sql>
+
+	<sql id="allSuspiciousActivityColumnsExceptKey">
+		suspicious_activity_key,
+		sar_type_code,
+		summary_text,
+		detail_text,
+		activity_start_datetime,
+		activity_stop_datetime,
+		sar_status_code,
+		status_date_time,
+		status_reason,
+		amount_associated,
+		<include refid="allChangeControlColumns"/>
+	</sql>
+
+	<sql id="allSuspiciousActivityValuesExceptKey">
+		#{businessKey},
+	  	#{typeValue},
+  		#{summary},
+		#{detail},
+		#{activityStartDateTimeUTC},
+		#{activityStopDateTimeUTC},
+		#{statusValue},
+		#{statusDateTime},
+		#{statusReason},
+		#{amountAssociated},
+		<include refid="changeControlFields"/>
+	</sql>
+
+	<sql id="allSuspiciousActivityColumns">
+		suspicious_activity_report_id,
+		<include refid="SuspiciousActivityMap.allSuspiciousActivityColumnsExceptKey"/>
+  	</sql>
+
+	<sql id="allSuspiciousActivityColumnsWithAlias">
+		sar.suspicious_activity_report_id,
+		sar.suspicious_activity_key,
+		sar.sar_type_code,
+		sar.summary_text,
+		sar.detail_text,
+		sar.activity_start_datetime,
+		sar.activity_stop_datetime,
+		sar.sar_status_code,
+		sar.status_date_time,
+		sar.status_reason,
+		sar.amount_associated,
+		sar.create_date,
+  		sar.create_user
+  	</sql>
+
+	<sql id="allSuspiciousActivityValues">
+	  	#{id},
+		<include refid="SuspiciousActivityMap.allSuspiciousActivityValuesExceptKey"/>
+	</sql>
+
+	<sql id="allPersonSarColumns">
+		FK_suspicious_activity_report_id,
+		FK_person_id,
+		<include refid="allChangeControlColumns"/>
+  	</sql>
+
+	<sql id="allBusinessSarColumns">
+		FK_suspicious_activity_report_id,
+		FK_business_id,
+		<include refid="allChangeControlColumns"/>
+  	</sql>
+
+  	 <sql id="allBusinessValues">
+  		#{id},
+  		#{business.id},
+    	<include refid="changeControlFields"/>
+  	</sql>
+
+  	 <sql id="allPersonValues">
+  		#{id},
+  		#{person.id},
+    	<include refid="changeControlFields"/>
+  	</sql>
+
+  	<sql id="suspiciousActivityCriteria">
+		<if test="criteria != null and criteria != ''">
+			<if test="criteria.id != null and criteria.id != ''">
+		    	AND suspicious_activity_report_id = #{criteria.id}
+		    </if>
+			<if test="criteria.businessKey != null and criteria.businessKey != ''">
+		    	AND suspicious_activity_key = #{criteria.businessKey}
+		    </if>
+			<if test="criteria.beginningRangeDateTime != null and criteria.beginningRangeDateTime != ''">
+		    	AND activity_start_datetime = #{criteria.beginningRangeDateTime}
+		    </if>
+			<if test="criteria.endingRangeDateTime != null and criteria.endingRangeDateTime != ''">
+		    	AND activity_stop_datetime = #{criteria.endingRangeDateTime}
+		    </if>
+		</if>
+	</sql>
+
+
+	<!--**************************************************************************-->
+    <!--**********************SQL Insert Statements.******************************-->
+    <!--**************************************************************************-->
+
+   	<insert id="insertSuspiciousActivity" parameterType="SuspiciousActivity" useGeneratedKeys="true" keyProperty="id">
+	  	INSERT INTO suspicious_activity_report (
+			<include refid="SuspiciousActivityMap.allSuspiciousActivityColumnsExceptKey" />
+	      )
+	    VALUES (<include refid="SuspiciousActivityMap.allSuspiciousActivityValuesExceptKey" /> )
+  	</insert>
+
+  	<insert id="insertSuspiciousActivityAssociations" parameterType="SuspiciousActivity">
+  		<if test="type != null">
+  			 <if test="businessList != null and businessList != ''">
+		    	 <!-- Organization and Location -->
+		    	 <foreach item="business" index="index" collection="businessList">
+				   	 <include refid="associateBusinessWithSar"/>
+				</foreach>
+			</if>
+			<if test="personList != null and personList != ''">
+	    		<!-- Member, Recipient and Liaison -->
+				<foreach item="person" index="index" collection="personList">
+				   	 <include refid="associatePersonWithSar"/>
+				</foreach>
+			</if>
+  	 	</if>
+  	</insert>
+
+    <sql id="associatePersonWithSar" >
+	  	INSERT INTO person_sar (
+			<include refid="allPersonSarColumns" />
+	      )
+	    VALUES (<include refid="allPersonValues" /> );
+  	</sql>
+
+    <sql id="associateBusinessWithSar">
+	  	INSERT INTO business_sar (
+			<include refid="allBusinessSarColumns" />
+	      )
+	    VALUES (<include refid="allBusinessValues" /> );
+   </sql>
+
+	<!--**************************************************************************-->
+    <!--***********************SQL Delete Statements.*****************************-->
+    <!--**************************************************************************-->
+
+	<delete id="deleteSuspiciousActivity" parameterType="SuspiciousActivity">
+  		DELETE FROM suspicious_activity_report
+  		WHERE
+  			suspicious_activity_report_id = #{id}
+	</delete>
+
+	<!--**************************************************************************-->
+    <!--*************************SQL Fetch Statements.****************************-->
+    <!--**************************************************************************-->
+
+    <select id="fetchSuspiciousActivityRowCount" parameterType="SarInquiryRequest" resultType="Integer">
+     	SELECT COUNT(suspicious_activity_report_id) AS RECORD_COUNT
+     	FROM suspicious_activity_report
+		<where>
+			<include refid="SuspiciousActivityMap.suspiciousActivityCriteria"/>
+		</where>
+  	</select>
+
+	<select id="fetchSuspiciousActivityByRequest" parameterType="SarInquiryRequest" resultMap="suspiciousActivityAllResult">
+	    SELECT * FROM
+    			(
+    				SELECT
+    				       <include refid="SuspiciousActivityMap.allSuspiciousActivityColumns"/>,
+    						ROW_NUMBER() OVER(ORDER BY
+    						<if test="sortExpression != null and sortExpression != ''">
+    							${sortExpression}
+    						</if>
+    						<if test="sortExpression == null or sortExpression == ''">
+    							suspicious_activity_report_id
+    						</if>
+    						) AS RowNumber
+    				FROM suspicious_activity_report
+					<where>
+						<include refid="SuspiciousActivityMap.suspiciousActivityCriteria"/>
+					</where>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+	</select>
+
+	<select id="fetchSuspiciousActivityByIdRequest" parameterType="FetchByIdRequest" resultMap="suspiciousActivityAllResult">
+		SELECT
+			<include refid="SuspiciousActivityMap.allSuspiciousActivityColumns"/>
+		   FROM suspicious_activity_report
+		   <where>
+		  		 <choose>
+					<when test="id != null and id != ''">
+						suspicious_activity_report_id = #{id}
+		    		</when>
+		    	    <otherwise>
+		    	    	<if test="stringId != null and stringId != ''">
+		    	       		UPPER(suspicious_activity_key) = UPPER(#{stringId})
+		    	        </if>
+		    	    </otherwise>
+		    	 </choose>
+		  </where>
+	</select>
+
+	<select id="fetchBusinessSuspiciousActivityByIdRequest" parameterType="FetchByIdRequest" resultMap="businessSuspiciousActivityResult">
+		SELECT
+			b.business_id,
+			b.business_type,
+		    <include refid="SuspiciousActivityMap.allSuspiciousActivityColumnsWithAlias"/>
+		  FROM business b
+		  INNER JOIN business_sar bs ON (bs.FK_business_id = b.business_id)
+		  INNER JOIN suspicious_activity_report sar ON (sar.suspicious_activity_report_id = bs.FK_suspicious_activity_report_id)
+		  <where>
+		  		 <choose>
+					<when test="id != null and id != ''">
+						sar.suspicious_activity_report_id = #{id}
+		    		</when>
+		    	    <otherwise>
+		    	    	<if test="stringId != null and stringId != ''">
+		    	       		UPPER(sar.suspicious_activity_key) = UPPER(#{stringId})
+		    	        </if>
+		    	    </otherwise>
+		    	 </choose>
+		  </where>
+	</select>
+
+	<select id="fetchPersonBySuspiciousActivityId" parameterType="Integer" resultMap="PersonMap.personResult">
+		SELECT  p.person_id,
+				p.participant_Id,
+				p.versn_lock_num,
+				<include refid="PersonMap.allPersonColumns"/>
+		  FROM person p
+		  INNER JOIN person_sar ps ON (ps.FK_person_id = p.person_id)
+		  INNER JOIN suspicious_activity_report sar ON (sar.suspicious_activity_report_id = ps.FK_suspicious_activity_report_id)
+	    WHERE sar.suspicious_activity_report_id = #{id}
+	</select>
+
+	<select id="fetchBusinessBySuspiciousActivityId" parameterType="Integer" resultMap="CBOFMap.businessResult">
+		SELECT b.business_id,
+		       b.business_key,
+			   b.name,
+			   b.business_type,
+			   b.PGSi_status,
+			   b.risk_level,
+			   b.risk_level_note_text,
+			   b.versn_lock_num
+		  FROM business b
+		  INNER JOIN business_sar bs ON (bs.FK_business_id = b.business_id)
+		  INNER JOIN suspicious_activity_report sar ON (sar.suspicious_activity_report_id = bs.FK_suspicious_activity_report_id)
+	    WHERE sar.suspicious_activity_report_id = #{id}
+	</select>
+
+	<select id="fetchSuspiciousActivityByBusinessId" parameterType="Integer" resultType="java.lang.Integer">
+		SELECT sar.suspicious_activity_report_id
+		  FROM business b
+		  INNER JOIN business_sar bs ON (bs.FK_business_id = b.business_id)
+		  INNER JOIN suspicious_activity_report sar ON (sar.suspicious_activity_report_id = bs.FK_suspicious_activity_report_id)
+	    WHERE bs.FK_business_id = #{id}
+	</select>
+
+	<select id="fetchSuspiciousActivityByPersonId" parameterType="Integer" resultType="java.lang.Integer">
+		SELECT sar.suspicious_activity_report_id
+		  FROM person p
+		  INNER JOIN person_sar ps ON (ps.FK_person_id = p.person_id)
+		  INNER JOIN suspicious_activity_report sar ON (sar.suspicious_activity_report_id = ps.FK_suspicious_activity_report_id)
+	    WHERE ps.FK_person_id = #{id}
+	</select>
+
+	<select id="fetchPersonByBusinessId" resultMap="PersonMap.personResult">
+			SELECT 	sars.person_id
+					, sars.first_name
+					, sars.last_name
+					, sars.participant_id
+					, sars.PEP_status
+			    FROM (
+					SELECT DISTINCT p.person_id
+								  , p.first_name
+								  , p.last_name
+								  , p.participant_id
+								  , p.PEP_status
+								  , b.business_id
+						FROM business b
+						INNER JOIN business_person bp ON (bp.FK_business_id = b.business_id)
+						INNER JOIN person p ON (p.person_id = bp.FK_person_id)
+					WHERE p.person_type = 1 AND p.PEP_status = 1  -- liaison
+					UNION ALL
+					SELECT DISTINCT p.person_id
+									, p.first_name
+									, p.last_name
+									, p.participant_id
+									, p.PEP_status
+									 , CASE WHEN #{type} = 1 THEN org.business_id
+								         ELSE b.business_id
+								    END AS business_id
+						FROM business b
+						INNER JOIN business org ON (org.business_id = b.FK_location_id)
+						INNER JOIN employment_information ei ON (ei.FK_business_id = b.business_id)
+						INNER JOIN person p ON (p.person_id = ei.FK_member_id)
+					WHERE p.person_type = 2 AND p.PEP_status = 1-- member
+					UNION ALL
+					SELECT DISTINCT p.person_id
+								  , p.first_name
+								  , p.last_name
+								  , p.participant_id
+								  , p.PEP_status
+								  , CASE WHEN #{type} = 1 THEN org.business_id
+								         ELSE b.business_id
+								    END AS business_id
+						FROM business b
+						INNER JOIN business org ON (org.business_id = b.FK_location_id)
+						INNER JOIN employment_information ei ON (ei.FK_business_id = b.business_id)
+						INNER JOIN transfer_setting ts ON (ts.FK_employment_information_id = ei.employment_information_id)
+						INNER JOIN person p ON (p.person_id = ts.FK_recipient_id)
+					WHERE  p.person_type = 3 AND p.PEP_status = 1-- recipient
+				) sars
+	    WHERE sars.business_id = #{id}
+	</select>
+
+</mapper>

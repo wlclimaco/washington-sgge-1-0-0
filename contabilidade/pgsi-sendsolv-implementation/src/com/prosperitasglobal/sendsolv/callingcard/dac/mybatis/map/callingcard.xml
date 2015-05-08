@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CallingCardMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+
+     <resultMap id="changeControlMapping" type="QATModel">
+  		<result property="createUser" column="create_user"/>
+		<result property="createDateUTC" column="create_date"/>
+		<result property="modifyUser" column="modify_user"/>
+		<result property="modifyDateUTC" column="modify_date"/>
+	</resultMap>
+
+    <resultMap id="callingCardInfoResult" type="CallingCardInfo" extends="changeControlMapping">
+    	<result property="callingCardId" column="pin_id"/>
+    	<result property="callingCardNumber" column="pin_number"/>
+    	<result property="lotCode" column="lot_code"/>
+  	</resultMap>
+
+    <!--************************************************************************** -->
+	<!-- SQL fragments allow "parts" of SQL to be re-used in other SQL statements. -->
+	<!--************************************************************************** -->
+
+	<sql id="allCallingCardColumns">
+		pin_id,
+		pin_number,
+		fk_person_id,
+		lot_code,
+		create_date,
+		create_user
+  	</sql>
+
+  	<sql id="allCallingCardValues">
+	  	#{callingCardId},
+	  	#{callingCardNumber},
+	  	#{personId},
+		#{lotCode},
+		#{createDateUTC},
+		#{createUser}
+	</sql>
+
+    <!--**************************************************************************-->
+    <!--**********************SQL Insert Statements.******************************-->
+    <!--**************************************************************************-->
+
+   	<insert id="insertCallingCard" parameterType="CallingCardInfo">
+	  	INSERT INTO calling_card (
+			<include refid="allCallingCardColumns" />
+	      )
+	    VALUES (<include refid="allCallingCardValues" /> )
+  	</insert>
+
+    <!--**************************************************************************-->
+    <!--*************************SQL Update Statements.***************************-->
+    <!--**************************************************************************-->
+
+  	<update id="updateCallingCard" parameterType="CallingCardInfo">
+    	UPDATE calling_card
+    	<set>
+    		fk_person_id = #{personId},
+    		<if test="modifyDateUTC != null"> modify_date = #{modifyDateUTC}, </if>
+			<if test="modifyUser != null"> modify_user = #{modifyUser} </if>
+		</set>
+    	WHERE
+     		pin_id = #{callingCardId}
+  	</update>
+
+	<!--**************************************************************************-->
+    <!--***********************SQL Delete Statements.*****************************-->
+    <!--**************************************************************************-->
+
+  	<!--  NO DELETE STATEMENTS -->
+
+	<!--**************************************************************************-->
+    <!--*************************SQL Fetch Statements.****************************-->
+    <!--**************************************************************************-->
+
+	<select id="fetchPinIdByPersonId" parameterType="Integer" resultType="Integer">
+		SELECT
+			pin_id
+		FROM calling_card
+		WHERE fk_person_id = #{id}
+  	</select>
+
+  	<select id="fetchAvailablePins" resultMap="callingCardInfoResult">
+		SELECT
+			pin_id,
+			pin_number,
+			lot_code,
+			create_date,
+			create_user
+		FROM calling_card
+		WHERE fk_person_id IS NULL
+  	</select>
+
+	<!-- NOTE:  This select statement is using the "WITH (UPDLOCK)" FOR SQL Server, and "FOR UPDATE" for all -->
+	<!--        others.  This should lock the db row until a commit is performed.                            -->
+    <select id="fetchCallingCardForUpdate" resultMap="callingCardInfoResult">
+		SELECT TOP 1
+			pin_id,
+			pin_number,
+			lot_code,
+			create_date,
+			create_user
+		FROM calling_card
+		<if test="_databaseId == 'SqlServer'">
+			WITH (UPDLOCK)
+		</if>
+		WHERE fk_person_id IS NULL
+		<if test="_databaseId != 'SqlServer'">
+			FOR UPDATE
+		</if>
+  	</select>
+
+  	<select id="fetchCallingCardByPersonId" parameterType="Integer" resultMap="callingCardInfoResult">
+		SELECT fk_person_id
+			pin_id,
+			pin_number,
+			lot_code,
+			create_date,
+			create_user
+		FROM calling_card
+		WHERE fk_person_id = #{id}
+  	</select>
+
+</mapper>

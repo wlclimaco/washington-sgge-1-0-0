@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SdnCheckerMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+
+    <resultMap id="sdnStatusHistoryResult" type="SdnStatusHistory" extends="CBOFMap.changeControlMapping">
+		<result property="id" column="sdn_status_history_id"/>
+		<result property="parentKey" column="FK_person_id"/>
+		<result property="sdnStatusValue" column="sdn_status_code" />
+		<result property="parentSdnStatusHistoryId" column="fk_parent_sdn_status_history_id" />
+		<result property="noteText" column="note" />
+
+		<collection property="sdnMatchRecordList" column="sdn_status_history_id" select="fetchSdnMatchRecordByHistoryId"/>
+  	</resultMap>
+
+    <resultMap id="sdnHistoryResult" type="SdnHistory">
+    	<result property="name" column="name" />
+    	<result property="parentKey" column="id" />
+		<result property="sdnStatusValue" column="sdn_status_code" />
+		<result property="businessTypeValue" column="type" />
+		<result property="noteText" column="note" />
+		<result property="date" column="create_date" />
+  	</resultMap>
+
+
+  	<resultMap id="sdnMatchRecordResult" type="SdnMatchRecord" extends="CBOFMap.changeControlMapping">
+		<result property="id" column="sdn_match_record_id"/>
+		<result property="parentKey" column="fk_sdn_status_history_id"/>
+		<result property="xmlRecord" column="xml_record"/>
+
+		<collection property="sdnMatchFieldList" column="sdn_match_record_id" select="fetchSdnMatchFieldyByRecordId"/>
+  	</resultMap>
+
+  	<resultMap id="sdnMatchFieldResult" type="SdnMatchField" extends="CBOFMap.changeControlMapping">
+  		<result property="id" column="sdn_match_field_id"/>
+  		<result property="parentKey" column="FK_sdn_match_record_id"/>
+  		<result property="sdnUid" column="sdn_uid"/>
+  		<result property="sdnFieldValue" column="sdn_field_code"/>
+  		<result property="sdnValue" column="sdn_value"/>
+		<result property="systemValue" column="pgsi_value"/>
+		<result property="matchProximity" column="proximity_value"/>
+  	</resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  	<sql id="allSdnStatusHistoryColumns">
+		 fk_parent_sdn_status_history_id
+        ,sdn_status_code
+        ,note
+        ,create_date
+        ,create_user
+  	</sql>
+
+  	<sql id="allSdnStatusHistoryValues">
+  		#{parentSdnStatusHistoryId},
+  		#{sdnStatusValue},
+    	#{noteText},
+    	#{createDateUTC},
+    	#{createUser}
+  	</sql>
+
+  	<sql id="allPersonSdnStatusHistoryColumnsWithAlias">
+  		 (p.first_name + ' ' + p.last_name) as name
+  		,(p.person_id) as id
+  		,CASE p.person_type
+			WHEN 1 THEN 4
+			WHEN 2 THEN 3
+			WHEN 3 THEN 5
+        END	as type
+        ,sdn.sdn_status_code
+        ,sdn.note
+        ,sdn.create_date
+  	</sql>
+
+  	<sql id="allBusinessSdnStatusHistoryColumnsWithAlias">
+  		 b.name
+  		,(b.business_id) as id
+  		,b.business_type as type
+        ,sdn.sdn_status_code
+        ,sdn.note
+        ,sdn.create_date
+  	</sql>
+
+  	<sql id="PersonSdnStatusHistoryCriteriaJoinSQL">
+  		INNER JOIN person_sdn_history ps ON sdn.sdn_status_history_id = ps.FK_sdn_status_history_id
+  		INNER JOIN person p ON p.person_id = ps.FK_person_id
+  	</sql>
+
+  	<sql id="BusinessSdnStatusHistoryCriteriaJoinSQL">
+  		INNER JOIN business_sdn_history bs ON sdn.sdn_status_history_id = bs.FK_sdn_status_history_id
+  		INNER JOIN business b ON b.business_id = bs.FK_business_id
+  	</sql>
+
+
+
+  	<sql id="allSdnMatchRecordColumns">
+		 fk_sdn_status_history_id
+        ,xml_record
+        ,create_date
+        ,create_user
+  	</sql>
+
+  	<sql id="allSdnMatchRecordValues">
+  		#{parentKey},
+  		#{xmlRecord},
+    	#{createDateUTC},
+    	#{createUser}
+  	</sql>
+
+ 	<sql id="allSdnMatchFieldColumns">
+        FK_sdn_match_record_id
+       ,sdn_field_code
+       ,sdn_uid
+       ,pgsi_value
+       ,sdn_value
+       ,proximity_value
+       ,create_date
+       ,create_user
+  	</sql>
+
+  	<sql id="allSdnMatchFieldValues">
+  		#{parentKey},
+  		#{sdnFieldValue},
+  		#{sdnUid},
+  		#{systemValue},
+  		#{sdnValue},
+  		#{matchProximity},
+    	#{createDateUTC},
+    	#{createUser}
+  	</sql>
+
+	<sql id="allPersonSdnStatusHistoryColumns">
+		FK_sdn_status_history_id,
+		FK_person_id,
+		create_date,
+        create_user
+  	</sql>
+
+  	<sql id="allPersonSdnStatusHistoryValues">
+  		#{id},
+  		#{parentKey},
+    	#{createDateUTC},
+    	#{createUser}
+  	</sql>
+
+	<sql id="allBusinessSdnStatusHistoryColumns">
+		FK_sdn_status_history_id,
+		FK_business_id,
+		create_date,
+        create_user
+  	</sql>
+
+  	<sql id="allBusinessSdnStatusHistoryValues">
+  		#{id},
+  		#{parentKey},
+    	#{createDateUTC},
+    	#{createUser}
+  	</sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertSdnStatusHistory" parameterType="SdnStatusHistory" useGeneratedKeys="true" keyProperty="id">
+	INSERT INTO sdn_status_history
+           (<include refid="allSdnStatusHistoryColumns"/>)
+     VALUES
+           (<include refid="allSdnStatusHistoryValues"/>)
+  </insert>
+
+  <insert id="insertSdnMatchRecord" parameterType="SdnMatchRecord" useGeneratedKeys="true" keyProperty="id">
+	INSERT INTO sdn_match_record
+           (<include refid="allSdnMatchRecordColumns"/>)
+     VALUES
+           (<include refid="allSdnMatchRecordValues"/>)
+  </insert>
+
+ <insert id="insertSdnMatchField" parameterType="SdnMatchField" useGeneratedKeys="true" keyProperty="id">
+	INSERT INTO sdn_match_field
+           (<include refid="allSdnMatchFieldColumns"/>)
+    VALUES
+           (<include refid="allSdnMatchFieldValues"/>)
+ </insert>
+
+ <insert id="associatePersonWithSdnStatusHistory" parameterType="Person">
+	  	INSERT INTO person_sdn_history (
+			<include refid="allPersonSdnStatusHistoryColumns" />
+	      )
+	    VALUES (<include refid="allPersonSdnStatusHistoryValues" /> )
+  </insert>
+
+ <insert id="associateBusinessWithSdnStatusHistory" parameterType="SdnStatusHistory">
+	  	INSERT INTO business_sdn_history (
+			<include refid="allBusinessSdnStatusHistoryColumns" />
+	      )
+	    VALUES (<include refid="allBusinessSdnStatusHistoryValues" /> )
+  </insert>
+
+
+ <update id="updateSdnStatusHistory" parameterType="SdnStatusHistory">
+    UPDATE sdn_status_history
+    	<set>
+    		<if test="sdnStatusValue!=null">sdn_status_code=#{sdnStatusValue},</if>
+	    	<if test="parentSdnStatusHistoryId!= null"> fk_parent_sdn_status_history_id=#{parentSdnStatusHistoryId},</if>
+	    	<if test="noteText!= null">note = #{noteText},</if>
+			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     sdn_status_history_id = #{id}
+  </update>
+
+  <select id="fetchCurrentSdnStatusHistoryByPerson" parameterType="Integer" resultMap="sdnStatusHistoryResult">
+  	SELECT TOP 1
+  		p.FK_person_id,
+  		sdn.sdn_status_history_id,
+  		sdn.fk_parent_sdn_status_history_id,
+  		sdn.sdn_status_code,
+  		sdn.note,
+        sdn.create_date,
+        sdn.create_user
+	FROM  sdn_status_history sdn INNER JOIN
+          person_sdn_history p ON sdn.sdn_status_history_id = p.FK_sdn_status_history_id
+    WHERE  p.FK_person_id = #{id} ORDER BY create_date DESC
+  </select>
+
+   <select id="fetchFullSdnStatusHistoryByPerson" parameterType="Integer" resultMap="sdnStatusHistoryResult">
+	WITH current_status AS
+	(
+		SELECT
+			b.FK_person_id,
+  			sdn.sdn_status_history_id,
+  			sdn.fk_parent_sdn_status_history_id,
+  			sdn.sdn_status_code,
+  			sdn.note,
+        	sdn.create_date,
+        	sdn.create_user
+		FROM  	sdn_status_history sdn INNER JOIN
+          	 	person_sdn_history  b ON sdn.sdn_status_history_id = b.FK_sdn_status_history_id
+    	WHERE  b.FK_person_id = #{id} AND sdn.fk_parent_sdn_status_history_id IS NULL
+    	UNION ALL
+    	SELECT
+    		b1.FK_person_id,
+  			sdn1.sdn_status_history_id,
+  			sdn1.fk_parent_sdn_status_history_id,
+  			sdn1.sdn_status_code,
+  			sdn1.note,
+        	sdn1.create_date,
+        	sdn1.create_user
+		FROM  	sdn_status_history sdn1 INNER JOIN
+          		person_sdn_history b1 ON sdn1.sdn_status_history_id = b1.FK_sdn_status_history_id INNER JOIN
+          		current_status c ON sdn1.fk_parent_sdn_status_history_id = c.sdn_status_history_id
+    	WHERE  b1.FK_person_id = #{id} AND sdn1.fk_parent_sdn_status_history_id IS NOT NULL
+	)
+	SELECT * from current_status ORDER BY sdn_status_history_id DESC
+ </select>
+
+  <select id="fetchCurrentSdnStatusHistoryByBusiness" parameterType="Integer" resultMap="sdnStatusHistoryResult">
+  	SELECT TOP 1
+  		b.FK_business_id,
+  		sdn.sdn_status_history_id,
+  		sdn.fk_parent_sdn_status_history_id,
+  		sdn.sdn_status_code,
+  		sdn.note,
+        sdn.create_date,
+        sdn.create_user
+	FROM  sdn_status_history sdn INNER JOIN
+          business_sdn_history b ON sdn.sdn_status_history_id = b.FK_sdn_status_history_id
+    WHERE  b.FK_business_id = #{id} ORDER BY create_date DESC
+  </select>
+
+  <select id="fetchFullSdnStatusHistoryByBusiness" parameterType="Integer" resultMap="sdnStatusHistoryResult">
+	WITH current_status AS
+	(
+		SELECT
+			b.FK_business_id,
+  			sdn.sdn_status_history_id,
+  			sdn.fk_parent_sdn_status_history_id,
+  			sdn.sdn_status_code,
+  			sdn.note,
+        	sdn.create_date,
+        	sdn.create_user
+		FROM  	sdn_status_history sdn INNER JOIN
+          		business_sdn_history b ON sdn.sdn_status_history_id = b.FK_sdn_status_history_id
+    	WHERE  b.FK_business_id = #{id} AND sdn.fk_parent_sdn_status_history_id IS NULL
+    	UNION ALL
+    	SELECT
+    		b1.FK_business_id,
+  			sdn1.sdn_status_history_id,
+  			sdn1.fk_parent_sdn_status_history_id,
+  			sdn1.sdn_status_code,
+  			sdn1.note,
+        	sdn1.create_date,
+        	sdn1.create_user
+		FROM  	sdn_status_history sdn1 INNER JOIN
+          		business_sdn_history b1 ON sdn1.sdn_status_history_id = b1.FK_sdn_status_history_id INNER JOIN
+          		current_status c ON sdn1.fk_parent_sdn_status_history_id = c.sdn_status_history_id
+    	WHERE  b1.FK_business_id = #{id} AND sdn1.fk_parent_sdn_status_history_id IS NOT NULL
+	)
+	SELECT * from current_status ORDER BY sdn_status_history_id DESC
+ </select>
+
+  <select id="fetchSdnMatchRecordByHistoryId" parameterType="Integer" resultMap="sdnMatchRecordResult">
+	SELECT 	sdn_match_record_id
+      		,fk_sdn_status_history_id
+      		,xml_record
+      		,create_date
+      		,create_user
+  	FROM sdn_match_record WHERE fk_sdn_status_history_id = #{id}
+  </select>
+
+  <select id="fetchSdnMatchFieldyByRecordId" parameterType="Integer" resultMap="sdnMatchFieldResult">
+	SELECT 	 sdn_match_field_id
+      		,sdn_field_code
+      		,FK_sdn_match_record_id
+      		,sdn_uid
+      		,pgsi_value
+      		,sdn_value
+      		,proximity_value
+      		,create_date
+      		,create_user
+      		,modify_date
+      		,modify_user
+  	FROM sdn_match_field WHERE FK_sdn_match_record_id = #{id} ORDER BY proximity_value
+  </select>
+
+  <select id="fetchSdnStatusHistoryRowCount" parameterType="SdnStatusHistoryInquiryRequest" resultType="Integer">
+     	SELECT COUNT(sdn.sdn_status_history_id) AS RECORD_COUNT
+     	FROM sdn_status_history sdn
+     	<if test="criteria.matchType.value == 1">
+			<include refid="PersonSdnStatusHistoryCriteriaJoinSQL"/>
+		</if>
+	    <if test="criteria.matchType.value == 2">
+			<include refid="BusinessSdnStatusHistoryCriteriaJoinSQL"/>
+		</if>
+		WHERE sdn.fk_parent_sdn_status_history_id IS NULL
+  </select>
+
+  <select id="fetchSdnStatusHistoryByRequest" parameterType="SdnStatusHistoryInquiryRequest" resultMap="sdnHistoryResult">
+	    SELECT * FROM
+	    			(
+	    				SELECT
+	    						<if test="criteria.matchType.value == 1">
+									<include refid="allPersonSdnStatusHistoryColumnsWithAlias"/>,
+								</if>
+	    						<if test="criteria.matchType.value == 2">
+									<include refid="allBusinessSdnStatusHistoryColumnsWithAlias"/>,
+								</if>
+	    						ROW_NUMBER() OVER(ORDER BY
+	    						<if test="sortExpression != null and sortExpression != ''">
+	    							<if test="sortExpression == 'name' and criteria.matchType.value == 1">
+	    								p.first_name
+	    							</if>
+	    							<if test="criteria.matchType.value == 2 and sortExpression == 'name'">
+	    								${sortExpression}
+	    							</if>
+	    							<if test="sortExpression != 'name'">
+	    								${sortExpression}
+	    							</if>
+	    						</if>
+	    						<if test="sortExpression == null or sortExpression == ''">
+	    							sdn.create_date
+	    						</if>
+	    						) AS RowNumber
+	    				FROM sdn_status_history sdn
+	    				<if test="criteria.matchType.value == 1">
+							<include refid="PersonSdnStatusHistoryCriteriaJoinSQL"/>
+						</if>
+	    				<if test="criteria.matchType.value == 2">
+							<include refid="BusinessSdnStatusHistoryCriteriaJoinSQL"/>
+						</if>
+						WHERE sdn.fk_parent_sdn_status_history_id IS NULL
+	    			) LIST
+					<choose>
+						<when test="pageSize != null and pageSize > 0">
+						   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+						        LOWER: startRow + 1 and
+						        UPPER: startRow + pageSize -->
+						   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+						</when>
+						<otherwise>
+						 	WHERE RowNumber BETWEEN 1 AND RowNumber
+						 	ORDER BY RowNumber
+						</otherwise>
+					</choose>
+  	</select>
+
+  <select id="fetchVersionNumber" parameterType="SdnStatusHistory" resultType="int">
+	SELECT versn_lock_num FROM sdn_status_history WHERE sdn_status_history_id = #{id}
+  </select>
+</mapper>

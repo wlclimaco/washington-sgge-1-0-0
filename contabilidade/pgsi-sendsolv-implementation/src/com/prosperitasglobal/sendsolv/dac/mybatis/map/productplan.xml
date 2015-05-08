@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProductPlanMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+
+	<resultMap id="changeControlMapping" type="QATModel">
+  		<result property="createUser"			column="create_user"/>
+		<result property="createDateUTC"		column="create_date"/>
+		<result property="modifyUser"			column="modify_user"/>
+		<result property="modifyDateUTC"		column="modify_date"/>
+	</resultMap>
+
+	<resultMap id="changeControlMappingOL" type="QATModelOL" extends="changeControlMapping">
+  		<result property="version"				column="versn_lock_num"/>
+	</resultMap>
+
+	<resultMap id="productPlanResult" type="ProductPlan" extends="changeControlMappingOL">
+		<result property="id"							column="product_plan_id"/>
+		<result property="name"							column="name"/>
+		<result property="planStatusValue"				column="status"/>
+		<result property="effectiveStartDate"			column="effective_start_date"/>
+		<result property="effectiveEndDate"				column="effective_end_date"/>
+		<result property="defaultProductPlanValue"		column="default_product_plan"/>
+		<association property="parentProduct"			column="FK_product_id" select="ProductMap.fetchProductById"/>
+		<collection property="planCategoryList"			column="product_plan_id" select="PlanCategoryMap.fetchPlanCategoryByProductPlanId"/>
+		<collection property="productPlanApplicabilityList" column="product_plan_id" select="ProductPlanApplicabilityMap.fetchProductPlanApplicabilityByProductPlanId"/>
+  	</resultMap>
+
+    <!--************************************************************************** -->
+	<!-- SQL fragments allow "parts" of SQL to be re-used in other SQL statements. -->
+	<!--************************************************************************** -->
+
+	<!--***********************-->
+	<!-- ProductPlan fragments -->
+	<!--***********************-->
+
+	<sql id="allProductPlanColumnsExceptKey">
+		name,
+		product_plan_type,
+		status,
+		effective_start_date,
+		effective_end_date,
+		default_product_plan,
+		FK_product_id,
+		versn_lock_num,
+		<include refid="CBOFMap.allChangeControlColumns"/>
+	</sql>
+
+  	<sql id="allProductPlanValuesExceptKey">
+		#{name},
+	  	#{productPlanTypeValue},
+  		#{planStatusValue},
+		#{effectiveStartDate},
+		#{effectiveEndDate},
+		#{defaultProductPlanValue},
+		#{parentProduct.id},
+		#{version},
+		<include refid="CBOFMap.changeControlFields"/>
+	</sql>
+
+	<sql id="allProductPlanColumns">
+		product_plan_id,
+		<include refid="ProductPlanMap.allProductPlanColumnsExceptKey"/>
+  	</sql>
+
+	<sql id="allProductPlanValues">
+	  	#{id},
+		<include refid="ProductPlanMap.allProductPlanValuesExceptKey"/>
+	</sql>
+
+    <!--**************************************************************************-->
+    <!--**********************SQL Insert Statements.******************************-->
+    <!--**************************************************************************-->
+	<!--  See businessproductplan.xml or templateproductplan.xml for inserts.     -->
+	<!--  The ProductPlan is just an abstract and can't be written/read from the  -->
+	<!--  database.                                                               -->
+
+    <!--**************************************************************************-->
+    <!--*************************SQL Update Statements.***************************-->
+    <!--**************************************************************************-->
+	<!--  See businessproductplan.xml or templateproductplan.xml for updates.     -->
+	<!--  The ProductPlan is just an abstract and can't be written/read from the  -->
+	<!--  database.                                                               -->
+
+	<!--**************************************************************************-->
+    <!--***********************SQL Delete Statements.*****************************-->
+    <!--**************************************************************************-->
+  	<!--  See businessproductplan.xml or templateproductplan.xml for deletes.     -->
+	<!--  The ProductPlan is just an abstract and can't be written/read from the  -->
+	<!--  database.                                                               -->
+
+	<!--**************************************************************************-->
+    <!--*************************SQL Fetch Statements.****************************-->
+    <!--**************************************************************************-->
+  	<!--  See businessproductplan.xml or templateproductplan.xml for deletes.     -->
+	<!--  The ProductPlan is just an abstract and can't be written/read from the  -->
+	<!--  database.                                                               -->
+
+</mapper>
