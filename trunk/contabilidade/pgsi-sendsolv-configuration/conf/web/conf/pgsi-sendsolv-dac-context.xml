@@ -170,6 +170,32 @@
     	</property>
 	</bean>
 
+<!-- ---------------------- -->
+
+	<bean id="empresaDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.EmpresaDACImpl">
+		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+	</bean>
+
+	<bean id="funcionarioDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.FuncionarioDACImpl">
+		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+	</bean>
+
+	<bean id="tabelaDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.TabelaDACImpl">
+		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+	</bean>
+
+	<bean id="telaDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.TelaDACImpl">
+		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+	</bean>
+
+	<bean id="ordemServicoDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.OrdemServicoDACImpl">
+		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+	</bean>
+
+	<bean id="produtoDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.ProdutoDACImpl">
+		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+	</bean>
+<!-- ---------------------- -->
 	<bean id="productPlanDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.ProductPlanDACImpl">
 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
 		<property name="businessProductPlanInquiryValidSortFields" ref="businessProductPlanInquiryValidSortFields"/>

@@ -56,7 +56,32 @@
  		<property name="participantIdDAC" ref="participantIdDACTarget"/>
  		<property name="sdnCheckerBAC" ref="sdnCheckerBACTarget"/>
  	</bean>
+<!-- ------------------------------------------------------------------------------------------------ -->
 
+ 	<bean id="empresaBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.EmpresaBACImpl">
+ 		<property name="empresaDAC" ref="empresaDACTarget"/>
+ 	</bean>
+
+ 	<bean id="funcionarioBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.FuncionarioBACImpl">
+ 		<property name="funcionarioDAC" ref="funcionarioDACTarget"/>
+ 	</bean>
+
+ 	<bean id="tabelaBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.TabelaBACImpl">
+ 		<property name="tabelaDAC" ref="tabelaDACTarget"/>
+ 	</bean>
+
+ 	<bean id="telaBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.TelaBACImpl">
+ 		<property name="telaDAC" ref="telaDACTarget"/>
+ 	</bean>
+
+ 	<bean id="produtoBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.ProdutoBACImpl">
+ 		<property name="produtoDAC" ref="produtoDACTarget"/>
+ 	</bean>
+
+ 	<bean id="ordemServicoBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.OrdemServicoBACImpl">
+ 		<property name="ordemServicoDAC" ref="ordemServicoDACTarget"/>
+ 	</bean>
+<!-- ------------------------------------------------------------------------------------------------ -->
  	<bean id="moneyTransferBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.MoneyTransferBACImpl">
 		<property name="moneyTransferDAC" ref="moneyTransferDACTarget"/>
 		<property name="moneyTransferBatchDAC" ref="moneyTransferBatchDACTarget"/>
