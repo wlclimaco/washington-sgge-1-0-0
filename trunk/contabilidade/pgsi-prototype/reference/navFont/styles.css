@@ -1,0 +1,217 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: "navigation";
+  src:url("fonts/navigation.eot");
+  src:url("fonts/navigation.eot?#iefix") format("embedded-opentype"),
+    url("fonts/navigation.woff") format("woff"),
+    url("fonts/navigation.ttf") format("truetype"),
+    url("fonts/navigation.svg#navigation") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[data-icon]:before {
+  font-family: "navigation" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "navigation" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-angle-double-left:before {
+  content: "a";
+}
+.icon-angle-double-right:before {
+  content: "b";
+}
+.icon-angle-double-down:before {
+  content: "c";
+}
+.icon-angle-double-up:before {
+  content: "d";
+}
+.icon-angle-down:before {
+  content: "e";
+}
+.icon-angle-left:before {
+  content: "f";
+}
+.icon-angle-right:before {
+  content: "g";
+}
+.icon-angle-up:before {
+  content: "h";
+}
+.icon-caret-down:before {
+  content: "i";
+}
+.icon-caret-down-two:before {
+  content: "j";
+}
+.icon-caret-left:before {
+  content: "k";
+}
+.icon-caret-right:before {
+  content: "l";
+}
+.icon-caret-up:before {
+  content: "m";
+}
+.icon-caret-up-down:before {
+  content: "n";
+}
+.icon-caret-up-two:before {
+  content: "o";
+}
+.icon-chevron-down:before {
+  content: "p";
+}
+.icon-chevron-left:before {
+  content: "q";
+}
+.icon-chevron-right:before {
+  content: "r";
+}
+.icon-chevron-up:before {
+  content: "s";
+}
+.icon-home:before {
+  content: "t";
+}
+.icon-unlock:before {
+  content: "u";
+}
+.icon-unlock-2:before {
+  content: "v";
+}
+.icon-user:before {
+  content: "w";
+}
+.icon-question:before {
+  content: "x";
+}
+.icon-search-find:before {
+  content: "y";
+}
+.icon-plus:before {
+  content: "z";
+}
+.icon-ellipsis-2:before {
+  content: "A";
+}
+.icon-ellipsis:before {
+  content: "B";
+}
+.icon-plus-square-1:before {
+  content: "C";
+}
+.icon-lock:before {
+  content: "D";
+}
+.icon-minus:before {
+  content: "E";
+}
+.icon-minus-circle:before {
+  content: "F";
+}
+.icon-minus-square:before {
+  content: "G";
+}
+.icon-minus-line:before {
+  content: "H";
+}
+.icon-paper-clip:before {
+  content: "I";
+}
+.icon-pencil:before {
+  content: "J";
+}
+.icon-plus-square:before {
+  content: "K";
+}
+.icon-plus-circle:before {
+  content: "L";
+}
+.icon-pin-map:before {
+  content: "M";
+}
+.icon-pencil-square:before {
+  content: "N";
+}
+.icon-question-1:before {
+  content: "O";
+}
+.icon-refresh:before {
+  content: "P";
+}
+.icon-remove:before {
+  content: "Q";
+}
+.icon-table:before {
+  content: "R";
+}
+.icon-backward:before {
+  content: "S";
+}
+.icon-exclamation:before {
+  content: "T";
+}
+.icon-exclamation-triangle:before {
+  content: "U";
+}
+.icon-fast-backward:before {
+  content: "V";
+}
+.icon-fast-forward:before {
+  content: "W";
+}
+.icon-forward:before {
+  content: "X";
+}
+.icon-step-backward:before {
+  content: "Y";
+}
+.icon-step-forward:before {
+  content: "Z";
+}
+.icon-trash-bin:before {
+  content: "0";
+}
+.icon-check-mark:before {
+  content: "1";
+}
+.icon-check-mark-2:before {
+  content: "2";
+}
+.icon-check-mark-circle:before {
+  content: "3";
+}
+.icon-check-mark-circle-two:before {
+  content: "4";
+}
+.icon-check-square:before {
+  content: "5";
+}
+.icon-cog-gear:before {
+  content: "6";
+}

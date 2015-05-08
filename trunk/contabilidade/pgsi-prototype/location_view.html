@@ -1,0 +1,1868 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>PGSi - Freemont Location</title>
+<link href="css/fonts.css" rel="stylesheet" />
+<link href="css/actions.css" rel="stylesheet" />
+<link href="css/security.css" rel="stylesheet" />
+<link href="css/navigation.css" rel="stylesheet" />
+<link href="css/jquery-ui.min.css" rel="stylesheet" />
+<link href="css/jquery-ui.structure.min.css" rel="stylesheet" />
+<link href="css/pgsi-common.css" rel="stylesheet" />
+<script src="jquery/jquery-1.11.0.min.js"></script>
+<script src="jquery/jquery-ui-1.11.0.min.js"></script>
+<script src="jquery/jquery.datatables.min.js"></script>
+<style>
+h2, .buttons {
+	margin: 10px;
+}
+
+.label, label {
+	display: block;
+	float: left;
+	margin-right: 8px;
+	line-height: 24px;
+}
+
+.first {
+	clear: both;
+}
+
+.label, input[type=text] {
+	float: left;
+	display: block;
+}
+
+.value {
+	font-weight: bold;
+	float: left;
+}
+
+form input[type=text], form input[type=checkbox], form .ui-selectmenu-button,
+	form textarea {
+	display: block;
+	float: left;
+	margin-right: 8px;
+}
+
+textarea {
+	background-color: #f8f8f8;
+	border-color: #cccccc;
+	border-style: solid;
+	border-width: 1px;
+	margin-bottom: 10px;
+	padding: 0 10px;
+}
+
+.width-shortest {
+	width: 90px;
+}
+
+input.width-shortest {
+	width: 60px;
+}
+
+.width-short, label.width-short.first {
+	width: 100px;
+}
+
+.width-medium {
+	width: 220px;
+}
+
+.width-long {
+	width: 280px;
+}
+
+.width-longest {
+	width: 400px;
+}
+
+hr {
+	clear: both;
+	width: 100%;
+	float: left;
+	margin: 16px 0 18px 0;
+}
+
+hr.last {
+	margin-bottom: 0;
+}
+
+a.form-link, a.form-link:hover, a.form-link:active {
+	color: #2b4e72;
+	text-decoration: none;
+	float: left;
+	margin-left: 8px;
+}
+
+a.form-link.first {
+	clear: both;
+	margin: 10px 0 8px 100px;
+}
+
+.form-link .icon-nav {
+	padding: 3px 3px 0 3px;
+	position: relative;
+	bottom: -1px;
+	color: #ffffff;
+	background-color: #42b653;
+	font-size: 12px;
+	margin-right: 3px;
+}
+
+#payroll .content {
+	display: table;
+	min-width: 1000px;
+	width: 95%;
+	padding: 16px;
+}
+
+.payroll-col1, .payroll-col2 {
+	float: left;
+	display: table;
+	margin-right: 16px;
+}
+
+#payroll h3 {
+	float: left;
+	margin-top: 0;
+}
+
+.label.first {
+	width: 150px;
+}
+
+#pricing .label.first {
+	width: auto;
+}
+
+.label.first.wide {
+	width: 250px;
+}
+
+.date {
+	margin-right: 30px;
+}
+
+.spacer {
+	margin-top: 16px;
+}
+
+form label {
+	display: block;
+	float: left;
+	margin-right: 8px;
+	margin-left: 8px;
+	line-height: 24px;
+}
+
+form input[type=text], form input[type=checkbox], form input[type=radio],
+	form .ui-selectmenu-button, form textarea {
+	display: block;
+	float: left;
+	margin-right: 8px;
+}
+
+#ppd-day, #pd-day, #ppd-day-button, #pd-day-button, .day, form input[type=text].day1,
+	form input[type=text].day2, .day1 {
+	display: none;
+}
+
+.close-button-form {
+	clear: both;
+}
+
+.buttons-form {
+	float: left;
+	text-align: center;
+	width: 100%;
+}
+
+.lower {
+	position: relative;
+	bottom: -2px;
+}
+
+.pricings {
+	width: 100%;
+	display: table;
+}
+
+.info .form-link {
+	margin-left: 8px;
+}
+
+.pricing {
+	float: left;
+	border: 1px solid #cccccc;
+	margin: 10px 10px 0 0;
+	background-color: #f8f8f8;
+	width: 600px;
+}
+
+.pricing-content {
+	display: table;
+	width: 100%;
+}
+
+.payers {
+	display: table-cell;
+	clear: both;
+	padding: 10px;
+	vertical-align: top;
+	text-align: left;
+}
+
+.payers .header {
+	font-weight: bold;
+}
+
+.fees {
+	display: table-cell;
+	padding: 10px 0px 10px 10px;
+	vertical-align: top;
+	min-width: 300px;
+}
+
+td, th {
+	padding: 2px 4px;
+	border: 1px solid #cccccc;
+	text-align: center;
+}
+
+.cell {
+	background-color: #ffffff;
+}
+
+#add-pricing-dialog td.cell, #edit-pricing-dialog td.cell {
+	padding: 0;
+}
+
+#add-pricing-dialog td.cell input[type=text], #edit-pricing-dialog td.cell input[type=text]
+	{
+	margin: 0;
+	border: none;
+}
+
+#add-pricing-dialog  input[type=checkbox], #add-pricing-dialog .col1 label,
+	#edit-pricing-dialog  input[type=checkbox], #edit-pricing-dialog .col1 label
+	{
+	float: left;
+	font-size: 11px;
+	line-height: 18px;
+}
+
+#add-pricing-dialog th.none, #edit-pricing-dialog th.none {
+	border: none;
+}
+
+#add-pricing-dialog .col1, #edit-pricing-dialog .col1 {
+	float: left;
+	width: 25%;
+}
+
+.fees .none {
+	border-top: none;
+	border-left: none;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+.heading {
+	font-weight: bold;
+}
+
+.pricing-title {
+	float: left;
+	font-weight: bold;
+	font-size: 16px;
+	color: #2b4e72;
+	padding: 5px 8px;
+}
+
+.form-link .icon-nav, .remembered-location .icon-nav {
+	padding: 3px 3px 0 3px;
+	position: relative;
+	bottom: -1px;
+	color: #ffffff;
+	background-color: #42b653;
+	font-size: 12px;
+	margin-right: 3px;
+}
+
+a.form-link, a.form-link:hover, a.form-link:active {
+	color: #2b4e72;
+	text-decoration: none;
+	float: left;
+}
+
+#add_pricing_link, #apply_profile_link {
+	margin-left: 8px;
+}
+
+.pricing .form-link {
+	margin: 6px 0 0 8px;
+}
+
+.parent {
+	color: #2b4e72;
+	font-weight: bold;
+	float: left;
+	font-size: 16px;
+}
+
+.pricing-header {
+	width: 100%;
+	border-bottom: 1px solid #cccccc;
+	display: table;
+}
+
+.payers .default {
+	width: 200px;
+}
+
+.payer-list {
+	float: left;
+	clear: both;
+	overflow: auto;
+	height: 275px;
+	width: 100%;
+	border: 1px solid #cccccc;
+}
+
+.policy-form {
+	margin-left: 150px;
+}
+
+#add-row-link {
+	margin: 8px 0 0 150px;
+}
+
+.check-wrapper.checked {
+	background-color: #aad044;
+	float: left;
+}
+
+#pricing {
+	display: table;
+	width: 100%;
+}
+
+.content {
+	display: table;
+	min-width: 1000px;
+	margin: 8px;;
+}
+
+#pricing input[type=text], #pricing  select, #pricing  .ui-selectmenu-button,
+	#pricing  .btn, .ui-dialog-content input[type=text], .ui-dialog-content  select,
+	.ui-dialog-content  .ui-selectmenu-button, .ui-dialog-content  .btn {
+	float: left;
+	margin-right: 8px;
+}
+
+#pricing h3 {
+	float: left;
+	margin-top: 0;
+}
+
+.content.initial {
+	padding: 16px;
+}
+
+.content.final {
+	padding: 16px;
+}
+
+#dialog-apply-profile .info, #pricing .info {
+	background-color: #e3ecf4;
+	padding: 8px 16px;
+	margin: 8px 0 20px 0;
+}
+
+hr.top {
+	margin-top: 0;
+}
+
+hr.last {
+	margin-bottom: 0
+}
+
+#pricing .all {
+	width: 100%;
+	margin-left: 16px;
+	margin-bottom: 8px;
+}
+
+#pricing .future {
+	color: #999999;
+}
+
+.ui-dialog label.first {
+	width: 150px;
+}
+
+.ui-dialog label.first.wide {
+	width: 250px;
+}
+
+#spread h3 {
+	float: left;
+	margin-right: 16px;
+	margin-top: 0;
+}
+
+#spread .content {
+	padding-top: 24px;
+	height: 500px;
+}
+
+#spread table, #dialog-edit-spread table {
+	clear: both;
+}
+
+#spread th, #spread td, #dialog-edit-spread th, #dialog-edit-spread td {
+	border: none;
+	text-align: left;
+}
+
+#spread .country, #dialog-edit-spread .country {
+	padding-right: 16px;
+}
+
+#spread .spread, #dialog-edit-spread .spread {
+	padding-right: 50px;
+}
+
+.categories {
+	display: table;
+	width: 100%;
+}
+</style>
+<script>
+	$(document)
+			.ready(
+					function() {
+						$('nav.primary .sub-menu').hide();
+						$('nav.primary li').hover(
+								function() {
+									var that = this;
+									$(this).addClass("menu-hover").find(
+											".sub-menu").show().position({
+										my : "left top",
+										at : "left bottom",
+										of : that,
+										collision : "fit"
+									}).find("li").hover(function() {
+										$(this).addClass("menu-hover")
+									}, function() {
+										//$(this).removeClass("menu-hover")
+									});
+								},
+								function() {
+									$(this).removeClass("menu-hover").find(
+											".sub-menu").hide();
+								});
+						$('.add_loc_link').click(function() {
+							top.location.href = "location_add.html";
+						});
+						$(".btn").button();
+
+						$("#tabs").tabs();
+						var hideHovers = function() {
+							$("#hoverDocumentImg").hide();
+							$("#hoverNoteImg").hide();
+							$("#hoverRiskNoteImg").hide();
+							$("#hoverContactImg").hide();
+						};
+						$("map area")
+								.on(
+										'click',
+										function(e) {
+											e.preventDefault();
+											hideHovers();
+											switch ($(this).attr('id')) {
+											case "editBus":
+												var close = function() {
+													$("#editBus_dialog")
+															.dialog('close');
+												}
+												$("#editBus_dialog").dialog({
+													modal : true,
+													open : function(event, ui) {
+
+													},
+													buttons : {
+														"Cancel" : close,
+														"Save" : close
+													},
+													width : 970
+												});
+												break;
+											case "editNote":
+												var close = function() {
+													$("#editNote_dialog")
+															.dialog('close');
+												}
+												$("#editNote_dialog").dialog({
+													modal : true,
+													open : function(event, ui) {
+
+													},
+													buttons : {
+														"Cancel" : close,
+														"Save" : close
+													},
+													width : 970
+												});
+												break;
+											case "deleteNote":
+												var close = function() {
+													$("#deleteNote_dialog")
+															.dialog('close');
+												}
+												$("#deleteNote_dialog")
+														.dialog(
+																{
+																	modal : true,
+																	open : function(
+																			event,
+																			ui) {
+
+																	},
+																	buttons : {
+																		"Cancel" : close,
+																		"Save" : close
+																	},
+																	width : 500
+																});
+												break;
+											case "addNote":
+												var close = function() {
+													$("#addNote_dialog")
+															.dialog('close');
+												}
+												$("#addNote_dialog").dialog({
+													modal : true,
+													open : function(event, ui) {
+
+													},
+													buttons : {
+														"Cancel" : close,
+														"Save" : close
+													},
+													width : 681
+												});
+												break;
+											case "editRisk":
+												var close = function() {
+												}
+												$("#editRisk_dialog").dialog({
+													modal : true,
+													open : function(event, ui) {
+
+													},
+													buttons : {
+														"Cancel" : close,
+														"Save" : close
+													},
+													width : 637
+												});
+												break;
+											case "editContact":
+												var close = function() {
+													$("#editContact_dialog")
+															.dialog('close');
+												}
+												$("#editContact_dialog")
+														.dialog(
+																{
+																	modal : true,
+																	open : function(
+																			event,
+																			ui) {
+
+																	},
+																	buttons : {
+																		"Cancel" : close,
+																		"Save" : close
+																	},
+																	width : 970
+																});
+												break;
+											case "addContact":
+												var close = function() {
+													$("#addContact_dialog")
+															.dialog('close');
+												}
+												$("#addContact_dialog")
+														.dialog(
+																{
+																	modal : true,
+																	open : function(
+																			event,
+																			ui) {
+
+																	},
+																	buttons : {
+																		"Cancel" : close,
+																		"Save" : close,
+																		"Save and add another contact" : function() {
+																			alert("This should load a fresh contact form.");
+																		}
+																	},
+																	width : 970
+																});
+												break;
+											case "deleteContact":
+												var close = function() {
+													$("#deleteContact_dialog")
+															.dialog('close');
+												}
+												$("#deleteContact_dialog")
+														.dialog(
+																{
+																	modal : true,
+																	open : function(
+																			event,
+																			ui) {
+
+																	},
+																	buttons : {
+																		"Cancel" : close,
+																		"Save" : close
+																	},
+																	width : 500
+																});
+												break;
+											case "editDocument":
+												var close = function() {
+													$("#editDocument_dialog")
+															.dialog('close');
+												}
+												$("#editDocument_dialog")
+														.dialog(
+																{
+																	modal : true,
+																	open : function(
+																			event,
+																			ui) {
+
+																	},
+																	buttons : {
+																		"Cancel" : close,
+																		"Save" : close
+																	},
+																	width : 850
+																});
+												break;
+
+											case "deleteDocument":
+												var close = function() {
+													$("#deleteDocument_dialog")
+															.dialog('close');
+												}
+												$("#deleteDocument_dialog")
+														.dialog(
+																{
+																	modal : true,
+																	open : function(
+																			event,
+																			ui) {
+
+																	},
+																	buttons : {
+																		"Cancel" : close,
+																		"Save" : close
+																	},
+																	width : 500
+																});
+												break;
+											case "addDocument":
+												var close = function() {
+													$("#addDocument_dialog")
+															.dialog('close');
+												}
+												$("#addDocument_dialog")
+														.dialog(
+																{
+																	modal : true,
+																	open : function(
+																			event,
+																			ui) {
+
+																	},
+																	buttons : {
+																		"Cancel" : close,
+																		"Save" : close,
+																		"Save and add another document" : function() {
+																			alert("This should load a fresh document form.");
+																		}
+																	},
+																	width : 850
+																});
+												break;
+											case "viewOrg":
+												top.location.href = "organization_view.html";
+												break;
+											default:
+												// do nothing;
+											}
+										});
+
+						$("#hoverDocument").hover(function(e) {
+							$("#hoverDocumentImg").show();
+
+						}, function(e) {
+							//$("#hoverDocumentImg").toggle();
+						});
+
+						$("#hoverNote").hover(function(e) {
+							$("#hoverNoteImg").show();
+
+						}, function(e) {
+							//$("#hoverNoteImg").toggle();
+						});
+
+						$("#hoverRiskNote").hover(function(e) {
+							$("#hoverRiskNoteImg").show();
+
+						}, function(e) {
+							//$("#hoverRiskNoteImg").toggle();
+						});
+
+						$("#hoverContact").hover(function(e) {
+							$("#hoverContactImg").show();
+
+						}, function(e) {
+							//$("#hoverContactImg").toggle();
+						});
+
+						$("#busEditImg").hover(function(e) {
+						}, function(e) {
+							hideHovers();
+						});
+
+						$("#apply-profile").click(function(e) {
+							e.preventDefault();
+							$(".content.initial").hide();
+							$(".content.final").show();
+							$("select").selectmenu();
+						});
+						$(".date").datepicker();
+						$("#add_pricing_link").click(function(e) {
+							e.preventDefault();
+							var close = function() {
+								$("#add-pricing-dialog").dialog('close');
+							}
+							$("#add-pricing-dialog").dialog({
+								modal : true,
+								open : function(event, ui) {
+
+								},
+								buttons : {
+									"Cancel" : close,
+									"Save" : close
+								},
+								width : 970
+							});
+						});
+
+						$("#apply_profile_link").click(function(e) {
+							e.preventDefault();
+							var close = function() {
+								$("#dialog-apply-profile").dialog('close');
+							}
+							$("#dialog-apply-profile").dialog({
+								modal : true,
+								open : function(event, ui) {
+									$("select").selectmenu();
+									$(".date").datepicker();
+								},
+								buttons : {
+									"Cancel" : close,
+									"Save" : close
+								},
+								width : 825
+							});
+						});
+						$("#edit_spread_link").click(function(e) {
+							e.preventDefault();
+							var close = function() {
+								$("#dialog-edit-spread").dialog('close');
+							}
+							$("#dialog-edit-spread").dialog({
+								modal : true,
+								open : function(event, ui) {
+
+								},
+								buttons : {
+									"Cancel" : close,
+									"Save" : close
+								},
+								width : 970
+							});
+						});
+						$("#edit_pricing1").click(function(e) {
+							e.preventDefault();
+							var close = function() {
+								$("#edit-pricing-dialog").dialog('close');
+							}
+							$("#edit-pricing-dialog").dialog({
+								modal : true,
+								open : function(event, ui) {
+
+								},
+								buttons : {
+									"Cancel" : close,
+									"Save" : close
+								},
+								width : 970
+							});
+						});
+
+						$("#link-edit-payroll")
+								.click(
+										function(e) {
+											e.preventDefault();
+											var close = function() {
+												$("#dialog-edit-payroll")
+														.dialog('close');
+											}
+											$("#dialog-edit-payroll")
+													.dialog(
+															{
+																modal : true,
+																open : function(
+																		event,
+																		ui) {
+																	$(
+																			"#dialog-edit-payroll select")
+																			.selectmenu();
+																	$(
+																			"#paycycle")
+																			.on(
+																					"selectmenuchange",
+																					function(
+																							event,
+																							ui) {
+																						$(
+																								"#ppd-day-button, #pd-day-button, .day1, .day2, .day")
+																								.hide();
+																						switch (ui.item.value) {
+																						case 'W':
+																						case 'B':
+																							$(
+																									"#ppd-day-button, #pd-day-button, .day")
+																									.show();
+																							break;
+																						case 'S':
+																							$(
+																									".day1, .day2")
+																									.show();
+																							break;
+																						case 'M':
+																							$(
+																									".day1")
+																									.show();
+																							break;
+																						default:
+																						}
+																					});
+																},
+																buttons : {
+																	"Cancel" : close,
+																	"Save" : close
+																},
+																width : 970
+															});
+										});
+						$("#edit_categories_link").click(function(e) {
+							e.preventDefault();
+							var close = function() {
+								$("#dialog-edit-categories").dialog('close');
+							}
+							$("#dialog-edit-categories").dialog({
+								modal : true,
+								open : function(event, ui) {
+
+								},
+								buttons : {
+									"Cancel" : close,
+									"Save" : close
+								},
+								width : 460
+							});
+						});
+					});
+</script>
+</head>
+<body>
+	<header>
+		<ul>
+			<li>Welcome&nbsp;&nbsp;<span class="emphasis">John Demo</span></li>
+			<li class="disabled"><a class="account_link" href="#"
+				title="Coming soon - Account"><span class="icon-user icon-nav"></span>Account</a></li>
+			<li class="disabled"><a class="help_link" href="#"
+				title="Coming soon - Help"><span class="icon-question icon-nav"></span>Help</a></li>
+			<li><a class="signout_link" href="login.html" title="Sign out"><span
+					class="icon-unlock icon-nav"></span>Sign Out</a></li>
+		</ul>
+	</header>
+	<nav class="primary">
+		<ul class="main-menu">
+			<li class="menu-home"><a href="dashboard.html"
+				class="icon-home icon-nav" title="Home"></a></li>
+			<li class="menu-active"><a href="organization_list.html"
+				title="Organizations and Locations" data-title="Customers">Customers</a>
+				<ul class="sub-menu">
+					<li><a href="organization_add.html" title="Add Organization"
+						data-title="Add Organization">Add Organization</a></li>
+					<li><a href="organization_list.html"
+						data-title="Find Organization" title="Find Organization">Find
+							Organization</a></li>
+					<li><a href="location_add.html" title="Add Location"
+						data-title="Add Location">Add Location</a></li>
+					<li><a href="location_list.html" title="Find Location"
+						data-title="Find Location">Find Location</a></li>
+				</ul></li>
+			<li><a href="member_list.html" class="" title="Members and Recipients"
+				data-title="Members">Members</a>
+				<ul class="sub-menu">
+					<li><a href="member_add_main.html" title="Add Member"
+						data-title="Add Member">Add Member</a></li>
+					<li><a href="member_list.html" data-title="Find Member"
+						title="Find Member">Find Member</a></li>
+					<li><a href="recipient_list.html" title="Find Recipient"
+						data-title="Find Recipient">Find Recipient</a></li>
+				</ul></li>
+			<li><a href="payment_overview.html" class="" title="Payments"
+				data-title="Payments">Payments</a>
+				<ul class="sub-menu">
+					<li><a href="batch_list.html" data-title="Batches"
+						title="Batches">Batches</a></li>
+					<li><a href="transaction_list.html"
+						data-title="Find Transaction" title="Find Transaction">Find
+							Transaction</a></li>
+					<!--<li><a href="transaction_add.html" data-title="Batches"-->
+						<!--title="Batches">Add New Transaction</a></li>-->
+					<li><a href="funding_list.html" title="Payer Funding"
+						data-title="Payer Funding">Payer Funding</a></li>
+					<li><a href="paycycle_list.html" title="Upcoming Pay Dates"
+						data-title="Upcoming Pay Dates">Upcoming Pay Dates</a></li>
+					<!--<li><a href="currency_purchase.html" title="Purchase Currency"-->
+					<!--data-title="Purchase Currency">Purchase Currency</a></li>-->
+				</ul></li>
+			<li><a href="compliance_overview.html"
+				class="" title="Compliance Monitoring and Reporting"
+				data-title="Compliance">Compliance</a>
+				<ul class="sub-menu">
+					<li><a href="sdn_list.html" title="SDN Matches"
+						data-title="SDN Matches">SDN Matches</a></li>
+					<li><a href="sar_list.html" data-title="SAR Reports"
+						title="SAR Reports">SAR Reports</a></li>
+					<!-- 					<li><a href="compliance_analytics_list.html" -->
+					<!-- 						title="Compliance -->
+					<!-- 							Analytics" -->
+					<!-- 						data-title="Compliance -->
+					<!-- 							Analytics">Compliance Analytics</a></li> -->
+				</ul></li>
+			<li><a href="profile_list.html" class="" title="Pricing"
+				data-title="Pricing">Pricing</a>
+				<ul class="sub-menu">
+					<li><a href="profile_list.html" title="Find Pricing Profile">Find
+							Pricing Profile</a></li>
+					<li><a href="profile_add.html" title="Add New Pricing Profile">Add
+							New Pricing Profile</a></li>
+				</ul></li>
+			<li class="disabled"><a href="#" class=""
+				title="Coming soon - Analytics and Reporting" data-title="Analytics">Analytics</a></li>
+			<li class="disabled"><a href="#" class=""
+				title="Coming soon - Users and User Settings" data-title="Users">Users</a></li>
+			<li class="disabled"><a href="#" class=""
+				title="Coming soon - System Settings" data-title="System">System</a></li>
+			<li class="last"><a href="#" class="" id="link-sar"
+				title="Report Suspicious Activity"
+				data-title="Report Suspicious Activity&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"><span
+					class="icon-security icon-eye-1"></span>Report Suspicious Activity</a></li>
+		</ul>
+	</nav>
+	<nav class="secondary">
+		<span><a href="organization_list.html" title="Customers">Customers</a></span><span
+			class="icon-nav icon-angle-right"></span><span><a
+			href="organization_view.html"
+			title="View Nebraska Premium Meatpacking, Inc">Nebraska Premium
+				Meatpacking, Ltd</a></span><span class="icon-nav icon-angle-right"></span><span>Fremont
+			location</span>
+	</nav>
+	<h2>Fremont Location of Nebraska Premium Meatpacking, Ltd</h2>
+	<div id="tabs">
+		<ul>
+			<li><a href="#loc_info" title="Location Info"
+				data-title="Organizational Info">Location Info</a></li>
+			<!-- 			<li><a href="#payroll" title="Payroll" data-title="Payroll">Payroll</a></li> -->
+			<li><a href="#pricing" title="Pricing" data-title="Pricing">Pricing</a></li>
+			<!-- 			<li><a href="#spread" title="Exchange Rate Spreads" -->
+			<!-- 				data-title="Exchange Rate Spreads">Exchange Rate Spreads</a></li> -->
+			<li class="add_loc_link"><span class="icon-nav icon-plus"></span>Add
+				Another Location</li>
+		</ul>
+		<div id="loc_info">
+			<div class="content">
+				<img src="temp/location-view.png" usemap="#locview" />
+				<map id="locview" name="locview">
+					<area shape="rect" id="viewOrg" alt=""
+						title="View ABC Meatpacking of Omaha, Inc" coords="299,39,355,67"
+						href="organization_view.html" target="" />
+					<area shape="rect" alt="Edit Business Summary" title=""
+						id="editBus" coords="146,81,197,117" href="" target="" />
+					<area shape="rect" alt="Edit Risk" title="" coords="773,89,821,114"
+						id="editRisk" href="" target="" />
+					<area shape="rect" alt="" title="Add Note" coords="64,271,156,299"
+						href="" id="addNote" target="" />
+					<area shape="rect" alt="Add Contact" title="" id="addContact"
+						coords="86,446,184,476" href="" target="" />
+					<area shape="rect" alt="" title="Add Document"
+						coords="102,678,215,704" href="" id="addDocument" target="" />
+				</map>
+			</div>
+		</div>
+
+		<div id="pricing">
+			<!-- 			<div class="content initial"> -->
+			<!-- 				<h3>Apply Pricing Profile</h3> -->
+			<!-- 				<div class="label first info">No pricing has been set up. -->
+			<!-- 					Select a Pricing Profile to get started.</div> -->
+			<!-- 				<label class="label first">Pricing Profile</label> <select -->
+			<!-- 					class="width-medium"><option></option> -->
+			<!-- 					<option>Small Business Profile 1</option> -->
+			<!-- 					<option>Small Business Profile 2</option> -->
+			<!-- 					<option>Large Business Profile</option> -->
+			<!-- 				</select> <label>Start Date</label> <input type="text" -->
+			<!-- 					class="date width-short"> <input type="button" class="btn" -->
+			<!-- 					id="apply-profile" value="Apply"></input> -->
+			<!-- 			</div> -->
+			<div class="content final">
+				<h3>Pricing Policies</h3>
+				<!-- 				<a href="#" id="apply_profile_link" class="form-link" -->
+				<!-- 					title="Apply a Different Pricing Profile"><span -->
+				<!-- 					class="icon-nav icon-refresh"></span>Apply a Different Pricing -->
+				<!-- 					Profile</a> -->
+				<!-- 				<div class="categories"> -->
+				<!-- 					<div class="label"> -->
+				<!-- 						Include the following Plan Categories: <b>Bronze</b>, <b>Silver</b>, -->
+				<!-- 						<b>Gold</b>, and <b>Platinum</b> -->
+				<!-- 					</div> -->
+				<!-- 					<a href="#" id="edit_categories_link" class="form-link" -->
+				<!-- 						title="Include Plan Categories"><span -->
+				<!-- 						class="icon-nav icon-pencil"></span>Edit</a> -->
+				<!-- 				</div> -->
+				<div class="pricings">
+					<div class="pricing">
+						<div class="pricing-header">
+							<div class="pricing-title">Mexico 1</div>
+							<!-- 							<a href="#" class="form-link" id="edit_pricing1" -->
+							<!-- 								title="Edit Pricing Policy"><span -->
+							<!-- 								class="icon-nav icon-pencil"></span>Edit</a><a href="#" -->
+							<!-- 								class="form-link" id="delete_pricing" -->
+							<!-- 								title="Delete Pricing Policy"><span -->
+							<!-- 								class="icon-nav icon-trash-bin"></span>Delete</a> -->
+						</div>
+						<div class="pricing-content">
+							<div class="fees">
+								<table>
+									<thead>
+										<tr>
+											<th class="none">&nbsp;</th>
+											<th class="heading">Bronze</th>
+											<th class="heading">Silver</th>
+											<th class="heading">Gold</th>
+											<th class="heading">Platinum</th>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="heading">Call Allowance (USD)</td>
+											<td class="cell">1.00</td>
+											<td class="cell">2.00</td>
+											<td class="cell">4.00</td>
+											<td class="cell">5.00</td>
+										</tr>
+										<tr>
+											<td class="heading">Transfer Amount</td>
+											<td class="heading" colspan="3">Flat Fee in USD</td>
+										</tr>
+										<tr>
+											<td>USD 100 to &lt; 200</td>
+											<td class="cell">5.99</td>
+											<td class="cell">6.99</td>
+											<td class="cell">8.99</td>
+											<td class="cell">10.99</td>
+										</tr>
+										<tr>
+											<td>USD 200 to &lt; 400</td>
+											<td class="cell">5.99</td>
+											<td class="cell">6.99</td>
+											<td class="cell">8.99</td>
+											<td class="cell">10.99</td>
+										</tr>
+										<tr>
+											<td>USD 400+</td>
+											<td class="cell">5.99</td>
+											<td class="cell">6.99</td>
+											<td class="cell">8.99</td>
+											<td class="cell">10.99</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="payers">
+								<div class="header">Apply to</div>
+								<div class="Payer">MXN-Payer Name Here -Home Delivery</div>
+								<div class="Payer">MXN-Payer-Home Delivery</div>
+								<div class="Payer">MXN-Payer-Home Delivery</div>
+								<div class="Payer">MXN-Payer-Home Delivery</div>
+								<div class="Payer">MXN-Payer-Home Delivery</div>
+								<div class="Payer">MXN-Payer-Home Delivery</div>
+							</div>
+						</div>
+						<div class="label first all">Effective since 12/12/2012</div>
+					</div>
+					<div class="pricing">
+						<div class="pricing-header">
+							<div class="pricing-title">Mexico 2</div>
+<!-- 							<a href="#" class="form-link" id="edit_pricing" -->
+<!-- 								title="Edit Pricing Policy"><span -->
+<!-- 								class="icon-nav icon-pencil"></span>Edit</a><a href="#" -->
+<!-- 								class="form-link" id="delete_pricing" -->
+<!-- 								title="Delete Pricing Policy"><span -->
+<!-- 								class="icon-nav icon-trash-bin"></span>Delete</a> -->
+						</div>
+						<div class="pricing-content">
+
+							<div class="fees">
+								<table>
+									<thead>
+										<tr>
+											<th class="none">&nbsp;</th>
+											<th class="heading">Bronze</th>
+											<th class="heading">Silver</th>
+											<th class="heading">Gold</th>
+											<th class="heading">Platinum</th>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="heading">Call Allowance (USD)</td>
+											<td class="cell">1.00</td>
+											<td class="cell">2.00</td>
+											<td class="cell">4.00</td>
+											<td class="cell">5.00</td>
+										</tr>
+										<tr>
+											<td class="heading">Transfer Amount</td>
+											<td class="heading" colspan="3">Flat Fee in USD</td>
+										</tr>
+										<tr>
+											<td>USD 100 to &lt; 200</td>
+											<td class="cell">5.99</td>
+											<td class="cell">6.99</td>
+											<td class="cell">8.99</td>
+											<td class="cell">10.99</td>
+										</tr>
+										<tr>
+											<td>USD 200 to &lt; 300</td>
+											<td class="cell">5.99</td>
+											<td class="cell">6.99</td>
+											<td class="cell">8.99</td>
+											<td class="cell">10.99</td>
+										</tr>
+										<tr>
+											<td>USD 200 to &lt; 300</td>
+											<td class="cell">5.99</td>
+											<td class="cell">6.99</td>
+											<td class="cell">8.99</td>
+											<td class="cell">10.99</td>
+										</tr>
+										<tr>
+											<td>USD 200 to &lt; 300</td>
+											<td class="cell">5.99</td>
+											<td class="cell">6.99</td>
+											<td class="cell">8.99</td>
+											<td class="cell">10.99</td>
+										</tr>
+										<tr>
+											<td>USD 200 to &lt; 300</td>
+											<td class="cell">5.99</td>
+											<td class="cell">6.99</td>
+											<td class="cell">8.99</td>
+											<td class="cell">10.99</td>
+										</tr>
+										<tr>
+											<td>USD 200 to &lt; 300</td>
+											<td class="cell">5.99</td>
+											<td class="cell">6.99</td>
+											<td class="cell">8.99</td>
+											<td class="cell">10.99</td>
+										</tr>
+										<tr>
+											<td>USD 200+</td>
+											<td class="cell">5.99</td>
+											<td class="cell">6.99</td>
+											<td class="cell">8.99</td>
+											<td class="cell">10.99</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="payers">
+								<div class="header">Apply to</div>
+								<div class="Payer">MXN-Payer-Home Delivery</div>
+								<div class="Payer">MXN-Payer-Home Delivery</div>
+							</div>
+						</div>
+						<div class="label first all">Effective since 12/12/2012</div>
+					</div>
+					<div class="pricing">
+						<div class="pricing-header">
+							<div class="pricing-title">Default Policy</div>
+<!-- 							<a href="#" class="form-link" id="edit_pricing" -->
+<!-- 								title="Edit Pricing Policy"><span -->
+<!-- 								class="icon-nav icon-pencil"></span>Edit</a><a href="#" -->
+<!-- 								class="form-link" id="delete_pricing" -->
+<!-- 								title="Delete Pricing Policy"><span -->
+<!-- 								class="icon-nav icon-trash-bin"></span>Delete</a> -->
+						</div>
+						<div class="pricing-content">
+
+							<div class="fees">
+								<table>
+									<thead>
+										<tr>
+											<th class="none">&nbsp;</th>
+											<th class="heading">Bronze</th>
+											<th class="heading">Silver</th>
+											<th class="heading">Gold</th>
+											<th class="heading">Platinum</th>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="heading">Call Allowance (USD)</td>
+											<td class="cell">1.00</td>
+											<td class="cell">2.00</td>
+											<td class="cell">4.00</td>
+											<td class="cell">5.00</td>
+										</tr>
+										<tr>
+											<td class="heading">Transfer Amount</td>
+											<td class="heading" colspan="3">Flat Fee in USD</td>
+										</tr>
+										<tr>
+											<td>USD 100 to &lt; 200</td>
+											<td class="cell">5.99</td>
+											<td class="cell">6.99</td>
+											<td class="cell">8.99</td>
+											<td class="cell">10.99</td>
+										</tr>
+										<tr>
+											<td>USD 200 to &lt; 300</td>
+											<td class="cell">5.99</td>
+											<td class="cell">6.99</td>
+											<td class="cell">8.99</td>
+											<td class="cell">10.99</td>
+										</tr>
+										<tr>
+											<td>USD 200 to &lt; 300</td>
+											<td class="cell">5.99</td>
+											<td class="cell">6.99</td>
+											<td class="cell">8.99</td>
+											<td class="cell">10.99</td>
+										</tr>
+										<tr>
+											<td>USD 200 to &lt; 300</td>
+											<td class="cell">5.99</td>
+											<td class="cell">6.99</td>
+											<td class="cell">8.99</td>
+											<td class="cell">10.99</td>
+										</tr>
+										<tr>
+											<td>USD 200 to &lt; 300</td>
+											<td class="cell">5.99</td>
+											<td class="cell">6.99</td>
+											<td class="cell">8.99</td>
+											<td class="cell">10.99</td>
+										</tr>
+										<tr>
+											<td>USD 200 to &lt; 300</td>
+											<td class="cell">5.99</td>
+											<td class="cell">6.99</td>
+											<td class="cell">8.99</td>
+											<td class="cell">10.99</td>
+										</tr>
+										<tr>
+											<td>USD 200+</td>
+											<td class="cell">5.99</td>
+											<td class="cell">6.99</td>
+											<td class="cell">8.99</td>
+											<td class="cell">10.99</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="payers">
+								<div class="header">Default</div>
+								<div class="default">This policy applies to all payers
+									that do not have individual policies assigned.</div>
+							</div>
+						</div>
+						<div class="label first all">Effective since 12/12/2012</div>
+					</div>
+					<div class="pricing">
+						<div class="pricing-header">
+							<div class="pricing-title future">Default Policy</div>
+<!-- 							<a href="#" class="form-link" id="edit_pricing" -->
+<!-- 								title="Edit Pricing Policy"><span -->
+<!-- 								class="icon-nav icon-pencil"></span>Edit</a><a href="#" -->
+<!-- 								class="form-link" id="delete_pricing" -->
+<!-- 								title="Delete Pricing Policy"><span -->
+<!-- 								class="icon-nav icon-trash-bin"></span>Delete</a> -->
+						</div>
+						<div class="pricing-content">
+
+							<div class="fees">
+								<table>
+									<thead>
+										<tr>
+											<th class="none">&nbsp;</th>
+											<th class="heading">Bronze</th>
+											<th class="heading">Silver</th>
+											<th class="heading">Gold</th>
+											<th class="heading">Platinum</th>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="heading">Call Allowance (USD)</td>
+											<td class="cell">1.00</td>
+											<td class="cell">2.00</td>
+											<td class="cell">4.00</td>
+											<td class="cell">5.00</td>
+										</tr>
+										<tr>
+											<td class="heading">Transfer Amount</td>
+											<td class="heading" colspan="3">Flat Fee in USD</td>
+										</tr>
+										<tr>
+											<td>USD 100 to &lt; 200</td>
+											<td class="cell">5.99</td>
+											<td class="cell">6.99</td>
+											<td class="cell">8.99</td>
+											<td class="cell">10.99</td>
+										</tr>
+										<tr>
+											<td>USD 200 to &lt; 300</td>
+											<td class="cell">5.99</td>
+											<td class="cell">6.99</td>
+											<td class="cell">8.99</td>
+											<td class="cell">10.99</td>
+										</tr>
+										<tr>
+											<td>USD 200 to &lt; 300</td>
+											<td class="cell">5.99</td>
+											<td class="cell">6.99</td>
+											<td class="cell">8.99</td>
+											<td class="cell">10.99</td>
+										</tr>
+										<tr>
+											<td>USD 200 to &lt; 300</td>
+											<td class="cell">5.99</td>
+											<td class="cell">6.99</td>
+											<td class="cell">8.99</td>
+											<td class="cell">10.99</td>
+										</tr>
+										<tr>
+											<td>USD 200 to &lt; 300</td>
+											<td class="cell">5.99</td>
+											<td class="cell">6.99</td>
+											<td class="cell">8.99</td>
+											<td class="cell">10.99</td>
+										</tr>
+										<tr>
+											<td>USD 200 to &lt; 300</td>
+											<td class="cell">5.99</td>
+											<td class="cell">6.99</td>
+											<td class="cell">8.99</td>
+											<td class="cell">10.99</td>
+										</tr>
+										<tr>
+											<td>USD 200+</td>
+											<td class="cell">5.99</td>
+											<td class="cell">6.99</td>
+											<td class="cell">8.99</td>
+											<td class="cell">10.99</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="payers">
+								<div class="header">Default</div>
+								<div class="default">This policy applies to all payers
+									that do not have individual policies assigned.</div>
+							</div>
+						</div>
+						<div class="label first all">Will go in effect 12/12/2014</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 		<div id="payroll"> -->
+		<!-- 			<div class="content"> -->
+		<!-- 				<h3>Payroll Cycle</h3> -->
+		<!-- 				<a href="#" title="Edit Payroll Cycle" class="form-link" -->
+		<!-- 					id="link-edit-payroll"><span class="icon-nav icon-pencil"></span>Edit</a> -->
+		<!-- 				<div class="label first wide">Dates are automatically -->
+		<!-- 					generated.</div> -->
+		<!-- 				<div class="label first spacer">Starting Pay Date</div> -->
+		<!-- 				<div class="value spacer">12/12/2011</div> -->
+		<!-- 				<div class="payroll-col1 first spacer"> -->
+		<!-- 					<div class="label first">Payroll Cycle</div> -->
+		<!-- 					<div class="value">Semimonthly</div> -->
+		<!-- 					<div class="label first">Pay Preparation Date</div> -->
+		<!-- 					<div class="value">Every 28th and 14th of the month</div> -->
+		<!-- 					<div class="label first">Pay Date</div> -->
+		<!-- 					<div class="value">Every 1st and 16th of the month</div> -->
+		<!-- 				</div> -->
+		<!-- 				<div class="payroll-col2 spacer"> -->
+		<!-- 					<div class="label first wide">Last day to receive funds</div> -->
+		<!-- 					<div class="value">1 day before Pay Date</div> -->
+		<!-- 					<div class="label first wide">Release batch to ACH Provider</div> -->
+		<!-- 					<div class="value">1 day before Pay Date</div> -->
+		<!-- 				</div> -->
+		<!-- 				<hr> -->
+		<!-- 				<h3>Upcoming Dates</h3> -->
+		<!-- 				<div class="label first">Pay Preparation Day</div> -->
+		<!-- 				<input type="text" class="date width-shortest"><input -->
+		<!-- 					type="text" class="date width-shortest"><input type="text" -->
+		<!-- 					class="date width-shortest"><input type="text" -->
+		<!-- 					class="date width-shortest"><input type="text" -->
+		<!-- 					class="date width-shortest"><input type="text" -->
+		<!-- 					class="date width-shortest"> -->
+		<!-- 				<div class="label first">Pay Day</div> -->
+		<!-- 				<input type="text" class="date width-shortest"><input -->
+		<!-- 					type="text" class="date width-shortest"><input type="text" -->
+		<!-- 					class="date width-shortest"><input type="text" -->
+		<!-- 					class="date width-shortest"><input type="text" -->
+		<!-- 					class="date width-shortest"><input type="text" -->
+		<!-- 					class="date width-shortest"> -->
+		<!-- 				<div class="spacer label first">Pay Preparation Day</div> -->
+		<!-- 				<input type="text" class="spacer date width-shortest"><input -->
+		<!-- 					type="text" class="spacer date width-shortest"><input -->
+		<!-- 					type="text" class="spacer date width-shortest"><input -->
+		<!-- 					type="text" class="spacer date width-shortest"><input -->
+		<!-- 					type="text" class="spacer date width-shortest"><input -->
+		<!-- 					type="text" class="spacer date width-shortest"> -->
+		<!-- 				<div class="label first">Pay Day</div> -->
+		<!-- 				<input type="text" class="date width-shortest"><input -->
+		<!-- 					type="text" class="date width-shortest"><input type="text" -->
+		<!-- 					class="date width-shortest"><input type="text" -->
+		<!-- 					class="date width-shortest"><input type="text" -->
+		<!-- 					class="date width-shortest"><input type="text" -->
+		<!-- 					class="date width-shortest"> -->
+
+		<!-- 			</div> -->
+		<!-- 		</div> -->
+		<!-- 		<div id="spread"> -->
+		<!-- 			<div class="content"> -->
+		<!-- 				<h3>Exchange Rate Spreads</h3> -->
+		<!-- 				<a href="#" id="edit_spread_link" class="form-link" -->
+		<!-- 					title="Edit Exchange Rate Spreads"><span -->
+		<!-- 					class="icon-nav icon-pencil"></span>Edit</a> -->
+		<!-- 				<table class="fx"> -->
+		<!-- 					<thead> -->
+		<!-- 						<tr> -->
+		<!-- 							<th class="country">Currency</th> -->
+		<!-- 							<th class="spread">Spread</th> -->
+		<!-- 							<th class="country">Currency</th> -->
+		<!-- 							<th class="spread">Spread</th> -->
+		<!-- 							<th class="country">Currency</th> -->
+		<!-- 							<th class="spread">Spread</th> -->
+		<!-- 						</tr> -->
+		<!-- 					</thead> -->
+		<!-- 					<tbody> -->
+		<!-- 						<tr> -->
+		<!-- 							<td class="country">MXN - Mexico</td> -->
+		<!-- 							<td class="spread">4.00%</td> -->
+		<!-- 							<td class="country">MXN - Mexico</td> -->
+		<!-- 							<td class="spread">4.00%</td> -->
+		<!-- 							<td class="country">MXN - Mexico</td> -->
+		<!-- 							<td class="spread">4.00%</td> -->
+		<!-- 						</tr> -->
+		<!-- 						<tr> -->
+		<!-- 							<td class="country">MXN - Mexico</td> -->
+		<!-- 							<td class="spread">4.00%</td> -->
+		<!-- 							<td class="country">MXN - Mexico</td> -->
+		<!-- 							<td class="spread">4.00%</td> -->
+		<!-- 							<td class="country">MXN - Mexico</td> -->
+		<!-- 							<td class="spread">4.00%</td> -->
+		<!-- 						</tr> -->
+		<!-- 						<tr> -->
+		<!-- 							<td class="country">MXN - Mexico</td> -->
+		<!-- 							<td class="spread">4.00%</td> -->
+		<!-- 							<td class="country">MXN - Mexico</td> -->
+		<!-- 							<td class="spread">4.00%</td> -->
+		<!-- 							<td class="country">MXN - Mexico</td> -->
+		<!-- 							<td class="spread">4.00%</td> -->
+		<!-- 						</tr> -->
+		<!-- 					</tbody> -->
+		<!-- 				</table> -->
+		<!-- 			</div> -->
+				</div>
+	</div>
+	<div id="editBus_dialog" style="display: none;"
+		title="Edit Business Summary for Fremont Location">
+		<img src="temp/location-edit-bussummary.png"></img>
+	</div>
+	<footer>
+		<div class="left">&copy; 2014 Prosperitas Global Solutions, Inc.
+			All Rights Reserved.</div>
+		<div class="right">Version 1.00.00 Build 00000</div>
+	</footer>
+	<div id="editBus_dialog" style="display: none;"
+		title="Edit Business Summary for Nebraska Meatpacking, Inc">
+		<img src="temp/organization-edit-bussummary.png"></img>
+	</div>
+	<div id="editRisk_dialog" style="display: none;"
+		title="Edit Risk for Nebraska Meatpacking, Inc">
+		<img src="temp/edit-risk.png"></img>
+	</div>
+	<div id="addNote_dialog" style="display: none;"
+		title="Add Note for Nebraska Meatpacking, Inc">
+		<img src="temp/add-note.png"></img>
+	</div>
+	<div id="editNote_dialog" style="display: none;"
+		title="Edit Note for Nebraska Meatpacking, Inc">
+		<img src="temp/edit-note.png"></img>
+	</div>
+	<div id="deleteNote_dialog" style="display: none;"
+		title="Delete Note for Nebraska Meatpacking, Inc">
+		<img src="temp/delete.png"></img>
+	</div>
+	<div id="addContact_dialog" style="display: none;"
+		title="Add Contact for Nebraska Meatpacking, Inc">
+		<img src="temp/add-contact.png"></img>
+	</div>
+	<div id="addDocument_dialog" style="display: none;"
+		title="Add Document for Nebraska Meatpacking, Inc">
+		<img src="temp/edit-document.png"></img>
+	</div>
+	<div id="editContact_dialog" style="display: none;"
+		title="Edit Contact for Nebraska Meatpacking, Inc">
+		<img src="temp/edit-contact.png"></img>
+	</div>
+	<div id="editDocument_dialog" style="display: none;"
+		title="Edit Document for Nebraska Meatpacking, Inc">
+		<img src="temp/edit-document.png"></img>
+	</div>
+	<div id="deleteDocument_dialog" style="display: none;"
+		title="Delete Document for Nebraska Meatpacking, Inc">
+		<img src="temp/delete.png"></img>
+	</div>
+	<div id="deleteContact_dialog" style="display: none;"
+		title="Delete Contact for Nebraska Meatpacking, Inc">
+		<img src="temp/delete.png"></img>
+	</div>
+	<div id="hoverDocumentImg"
+		style="display: none; position: absolute; z-index: 1000; top: 823px; left: 234px;">
+		<img src="temp/hover-document.png" usemap="#hoverDocMap" />
+		<map id="hoverDocMap" name="hoverDocMap">
+			<area shape="rect" alt="Edit Document" title="" coords="98,5,143,22"
+				href="" target="" id="editDocument" />
+			<area shape="rect" alt="Delete Document" title=""
+				coords="148,5,201,23" href="" target="" id="deleteDocument" />
+		</map>
+	</div>
+	<div id="hoverRiskNoteImg"
+		style="display: none; position: absolute; z-index: 1000; top: 278px; left: 724px;">
+		<img src="temp/hover-risknote.png" />
+	</div>
+	<div id="hoverNoteImg"
+		style="display: none; position: absolute; z-index: 1000; top: 448px; left: 18px;">
+		<img src="temp/hover-note.png" usemap="#hoverNoteMap" />
+		<map id="hoverNoteMap" name="hoverNoteMap">
+			<area shape="rect" alt="Edit Note" title="" coords="96,6,148,27"
+				href="" target="" id="editNote" />
+			<area shape="rect" alt="Delete Note" title="" coords="151,9,204,29"
+				href="" target="" id="deleteNote" />
+		</map>
+	</div>
+	<div id="hoverContactImg"
+		style="display: none; position: absolute; z-index: 1000; top: 626px; left: 20px;">
+		<img src="temp/hover-contact.png" usemap="#hoverContactMap" />
+		<map id="hoverContactMap" name="hoverContactMap">
+			<area shape="rect" alt="Edit Contact" title="" coords="94,4,143,24"
+				href="" target="" id="editContact" />
+			<area shape="rect" alt="Delete Contact" title=""
+				coords="145,4,198,25" href="" target="" id="deleteContact" />
+		</map>
+	</div>
+	<div id="dialog-apply-profile" style="display: none;"
+		title="Apply a Different Pricing Profile">
+		<hr class="top">
+		<div class="label first info">
+			By applying a different Pricing Profile you are replacing all
+			existing pricing policies, including all future-priced policies.<br>The
+			change will go in effect at the selected start date.
+		</div>
+		<label class="label first">Pricing Profile</label> <select
+			class="width-medium"><option></option>
+			<option>Small Business Profile 1</option>
+			<option>Small Business Profile 2</option>
+			<option>Large Business Profile</option>
+		</select> <label>Start Date</label> <input type="text" class="date width-short">
+		<hr class="last">
+	</div>
+
+
+	<div id="dialog-edit-payroll" title="Edit Payroll Settings"
+		style="display: none">
+		<form>
+			<hr class="top">
+			<input type="radio" name="generate" class="first" checked><label>Generate
+				Dates automatically.They still can be manually adjusted.</label>
+			<!--
+				 -->
+			<input type="radio" name="generate" class="first"><label>Enter
+				all dates manually</label>
+			<hr>
+			<label class=" first">Starting Pay Date</label> <input type="text"
+				class="date width-shortest">
+			<!--  -->
+
+			<label class=" first">Payroll Cycle</label> <select id="paycycle"
+				class="width-medium"><option selected></option>
+				<option value="W">Weekly</option>
+				<option value="B">Biweekly</option>
+				<option value="S">Semimonthly</option>
+				<option value="M">Monthly</option>
+				<option value="O">Other</option></select>
+			<!--  -->
+			<label class=" first day day1">Pay Preparation Day</label><select
+				id="ppd-day" class="width-short"><option></option>
+				<option>Monday</option>
+				<option>Tuesday</option>
+				<option>Wednesday</option>
+				<option>Thursday</option>
+				<option>Friday</option>
+				<option>Saturday</option>
+				<option>Sunday</option></select> <input type="text"
+				class="day1 width-shortest"></input><input type="text"
+				class="day2 width-shortest"></input><label class="day1">(day
+				of month)</label>
+			<!--  -->
+			<label class=" first day day1">Pay Day</label><select id="pd-day"
+				class="width-short"><option></option>
+				<option>Monday</option>
+				<option>Tuesday</option>
+				<option>Wednesday</option>
+				<option>Thursday</option>
+				<option>Friday</option>
+				<option>Saturday</option>
+				<option>Sunday</option></select> <input type="text"
+				class="day1 width-shortest"></input><input type="text"
+				class="day2 width-shortest"></input><label class="day1">(day
+				of month)</label>
+			<hr>
+			<label class="label first wide">Last day to receive funds</label><input
+				type="text" class="width-shortest"><label class="">day(s)before
+				Pay Date</label>
+			<!--  -->
+			<label class="label first wide">Release Batch to ACH Provider</label><input
+				type="text" class="width-shortest"><label class="">day(s)
+				before Pay Date</label>
+
+			<hr class="last">
+		</form>
+	</div>
+	<div id="edit-pricing-dialog" title="Edit Pricing Policy"
+		style="display: none">
+		<hr class="top">
+		<label class="first ">Pricing Policy Name</label><input type="text"
+			class="width-medium" value="Mexico 1">
+		<!--  -->
+		<label class="">Start Date </label><input type="text"
+			class="width-shortdate">
+		<hr>
+		<table class="policy-form">
+			<thead>
+				<tr>
+					<th class="none" colspan="2">&nbsp;</th>
+					<th class="heading">Bronze</th>
+					<th class="heading">Silver</th>
+					<th class="heading">Gold</th>
+					<th class="heading">Platinum</th>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="heading" colspan="2">Call Allowance (USD)</td>
+					<td class="cell"><input type="text" class="width-short"
+						value="1.00"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="2.00"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="4.00"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="5.00"></td>
+				</tr>
+				<tr>
+					<td class="heading" colspan="2">Transfer Amount in USD</td>
+					<td class="heading" colspan="4" rowspan="2">Flat Fee in USD</td>
+				</tr>
+				<tr>
+					<td class="heading">From</td>
+					<td class="heading">To less than</td>
+				</tr>
+				<tr>
+					<td class="cell"><input type="text" class="width-short"
+						value="0"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="100.00"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="5.99"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="6.99"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="8.99"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="10.99"></td>
+				</tr>
+				<tr>
+					<td class="cell"><input type="text" class="width-short"
+						value="100.00"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="200.00"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="6.99"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="7.99"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="9.99"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="11.99"></td>
+				</tr>
+				<tr>
+					<td class="cell"><input type="text" class="width-short"
+						value="200.00"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value=""></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="7.99"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="8.99"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="10.99"></td>
+					<td class="cell"><input type="text" class="width-short"
+						value="12.99"></td>
+				</tr>
+			</tbody>
+		</table>
+		<a href="#" id="add-row-link" class="form-link first" title="Add Row"><span
+			class="icon-nav icon-plus"></span>Add Row</a>
+		<hr class="last">
+		<div class="payers" style="display: table; float: left;">
+			<div class="header">Apply to</div>
+			<div class="Payer">MXN-Payer Name Here -Home Delivery</div>
+			<div class="Payer">MXN-Payer-Home Delivery</div>
+			<div class="Payer">MXN-Payer-Home Delivery</div>
+			<div class="Payer">MXN-Payer-Home Delivery</div>
+			<div class="Payer">MXN-Payer-Home Delivery</div>
+			<div class="Payer">MXN-Payer-Home Delivery</div>
+		</div>
+		<hr class="last">
+	</div>
+	<div id="dialog-edit-spread" title="Edit Exchange Rate Spreads"
+		style="display: none">
+		<form>
+			<hr class="top">
+			<table class="fx">
+				<thead>
+					<tr>
+						<th class="country">Currency</th>
+						<th class="spread">Spread</th>
+						<th class="country">Currency</th>
+						<th class="spread">Spread</th>
+						<th class="country">Currency</th>
+						<th class="spread">Spread</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="country">MXN - Mexico</td>
+						<td class="spread"><input type="text"
+							class="fx width-shortest"><a href="#"
+							class="reset-fx form-link" title="Reset to default"><span
+								class="icon-nav icon-refresh"></span></a></td>
+						<td class="country">MXN - Mexico</td>
+						<td class="spread"><input type="text"
+							class="fx width-shortest"><a href="#"
+							class="reset-fx form-link" title="Reset to default"><span
+								class="icon-nav icon-refresh"></span></a></td>
+						<td class="country">MXN - Mexico</td>
+						<td class="spread"><input type="text"
+							class="fx width-shortest"><a href="#"
+							class="reset-fx form-link" title="Reset to default"><span
+								class="icon-nav icon-refresh"></span></a></td>
+					</tr>
+					<tr>
+						<td class="country">MXN - Mexico</td>
+						<td class="spread"><input type="text"
+							class="fx width-shortest"><a href="#"
+							class="reset-fx form-link" title="Reset to default"><span
+								class="icon-nav icon-refresh"></span></a></td>
+						<td class="country">MXN - Mexico</td>
+						<td class="spread"><input type="text"
+							class="fx width-shortest"><a href="#"
+							class="reset-fx form-link" title="Reset to default"><span
+								class="icon-nav icon-refresh"></span></a></td>
+						<td class="country">MXN - Mexico</td>
+						<td class="spread"><input type="text"
+							class="fx width-shortest"><a href="#"
+							class="reset-fx form-link" title="Reset to default"><span
+								class="icon-nav icon-refresh"></span></a></td>
+					</tr>
+					<tr>
+						<td class="country">MXN - Mexico</td>
+						<td class="spread"><input type="text"
+							class="fx width-shortest"><a href="#"
+							class="reset-fx form-link" title="Reset to default"><span
+								class="icon-nav icon-refresh"></span></a></td>
+						<td class="country">MXN - Mexico</td>
+						<td class="spread"><input type="text"
+							class="fx width-shortest"><a href="#"
+							class="reset-fx form-link" title="Reset to default"><span
+								class="icon-nav icon-refresh"></span></a></td>
+						<td class="country">MXN - Mexico</td>
+						<td class="spread"><input type="text"
+							class="fx width-shortest"><a href="#"
+							class="reset-fx form-link" title="Reset to default"><span
+								class="icon-nav icon-refresh"></span></a></td>
+					</tr>
+				</tbody>
+			</table>
+			<hr class="last">
+		</form>
+	</div>
+
+	<div id="dialog-edit-categories" title="Include Plan Categories"
+		style="display: none">
+		<form>
+			<hr class="top">
+			<input type="checkbox" checked class="first" checked><label>Bronze</label>
+			<input type="checkbox" checked class="" checked><label>Silver</label><input
+				type="checkbox" checked class="" checked><label>Gold</label>
+			<input type="checkbox" checked class="" checked><label>Platinum</label>
+			<hr class="last">
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>PGSi Locations</title>
+<link href="css/fonts.css" rel="stylesheet" />
+<!-- <link href="css/actions.css" rel="stylesheet" /> -->
+<link href="css/navigation.css" rel="stylesheet" />
+<link href="css/jquery-ui.min.css" rel="stylesheet" />
+<link href="css/jquery-ui.structure.min.css" rel="stylesheet" />
+<link href="css/pgsi-common.css" rel="stylesheet" />
+<script src="jquery/jquery-1.11.0.min.js"></script>
+<script src="jquery/jquery-ui-1.11.0.min.js"></script>
+<script src="jquery/jquery.datatables.min.js"></script>
+<script>
+	function showDeleteDialog(obj) {
+		$(obj).append("<div id='delete_dialog' style='display:none'></div>");
+		$("#delete_dialog").dialog({
+			title : "This styling/content definitely needs more work",
+			modal : true,
+			zIndex : 10000,
+			autoOpen : true,
+			width : 'auto',
+			resizable : false,
+			buttons : {
+				Delete : function() {
+					$(this).dialog("close");
+					$(this).remove();
+				},
+				Cancel : function() {
+					$(this).dialog("close");
+					$(this).remove();
+				}
+			}
+
+		});
+	};
+	$(document)
+			.ready(
+					function() {
+						$('#data_list')
+								.dataTable(
+										{
+											dom : '<"list_header"ipl><t><"list_footer"ipl>',
+											paging : true,
+											pagingType : "full",
+											iDisplayLength : 25,
+											language : {
+												paginate : {
+													first : "a",
+													last : "b",
+													next : "g",
+													previous : "f"
+												},
+												lengthMenu : "_MENU_ records per page",
+												loadingRecords : "Loading...",
+												processing : "Processing...",
+												zeroRecords : "Found no records matching the selected filters.",
+												infoEmpty : "No records found."
+											},
+											drawCallback : function(settings) {
+												$(".dataTables_length select")
+														.outerWidth(60)
+														.selectmenu();
+												$("#data_list .name a")
+														.parent("td")
+														.hover(
+																function() {
+																	$(this)
+																			.append(
+																					'<a href="location_view.html" title="Edit Fremont Location" class="icon-nav icon-pencil"></a><a href="#" class="icon-nav icon-trash-bin" title="Delete Fremont Location" onclick="showDeleteDialog(this); return false;"></a>');
+																},
+																function() {
+																	$(this)
+																			.find(
+																					'.icon-nav')
+																			.remove();
+																});
+											}
+										});
+						$(".filter select").selectmenu();
+						$("input[type=submit],input[type=reset]").button();
+						$('#data_list input[type=checkbox]').change(function() {
+							if (this.checked) {
+								$(this).closest("tr").addClass('selected');
+							} else {
+								$(this).closest("tr").removeClass('selected');
+							}
+						});
+					});
+</script>
+<style>
+#data_list td {
+	height: 200px;
+	padding-bottom: 40px;
+	text-align: center;
+	vertical-align: middle;
+	color: #999999;
+	font-weight: bold;
+}
+
+.list_footer, .dataTables_length, .dataTables_paginate {
+	display: none;
+}
+</style>
+</head>
+<body>
+	<div class="content list">
+		<div class="filter">
+			<form id="filterForm" action="location_list_tab.html">
+				<h3>Filter Records</h3>
+				<h4>Name</h4>
+				<label for="name-filter" class="field-label">Location Name</label> <input
+					type="text" id="name-filter" name="name-filter"
+					placeholder="Part of location name"></input> <label
+					for="org-filter" class="field-label">Organization Name</label> <input
+					type="text" id="org-filter" name="org-filter"
+					placeholder="Part of organization name"></input>
+				<hr>
+				<h4>Region</h4>
+				<select id="contry-filter" placeholder="Country"
+					style="width: 158px">
+					<option>United States</option>
+					<option>Mexico</option>
+				</select> <select id="state-filter" placeholder="State/Province/Region"
+					style="width: 158px">
+					<option>Alabama</option>
+					<option>Nebraska</option>
+				</select> <input type="text" id="city-filter" name="city-filter"
+					placeholder="Part of City"></input>
+				<hr></hr>
+				<h4>PGSi Status</h4>
+				<div class="col">
+					<input type="checkbox" id="pgsi-status-active-filter"></input><label
+						class="checkbox-label" for="pgsi-status-active-filter">Active</label>
+					<input type="checkbox" id="pgsi-status-inactive-filter"></input><label
+						class="checkbox-label" for="pgsi-status-inactive-filter">Inactive</label>
+				</div>
+				<div class="col">
+					<input type="checkbox" id="pgsi-status-setup-filter"></input><label
+						class="checkbox-label" for="pgsi-status-setup-filter">Setup</label><input
+						type="checkbox" id="pgsi-status-unknown-filter"></input><label
+						class="checkbox-label" for="pgsi-status-unknown-filter">Unknown</label>
+				</div>
+				<hr></hr>
+				<h4>SDN Status</h4>
+				<div class="block">
+					<input type="checkbox" id="sdn-status-negative-filter"></input><label
+						class="checkbox-label" for="sdn-status-negative-filter">Negative</label>
+					<input type="checkbox" id="sdn-status-pgsipend-filter"></input><label
+						class="checkbox-label" for="sdn-status-pgsipend-filter">Pending
+						PGSi</label> <input type="checkbox" id="sdn-status-falsepositive-filter"></input><label
+						class="checkbox-label" for="sdn-status-falsepositive-filter">False
+						Positive</label> <input type="checkbox" id="sdn-status-fedpend-filter"></input><label
+						class="checkbox-label" for="sdn-status-fedpend-filter">Pending
+						Federal</label><input type="checkbox" id="sdn-status-positive-filter"></input><label
+						class="checkbox-label" for="sdn-status-positive-filter">Positive</label>
+				</div>
+				<hr></hr>
+				<h4>Risk</h4>
+				<div class="col">
+					<input type="checkbox" id="risk-high-filter"></input><label
+						class="checkbox-label" for="risk-high-filter">High</label> <input
+						type="checkbox" id="risk-medium-filter"></input><label
+						class="checkbox-label" for="risk-medium-filter">Medium</label>
+				</div>
+				<div class="col">
+					<input type="checkbox" id="risk-low-filter"></input><label
+						class="checkbox-label" for="risk-low-filter">Low</label>
+				</div>
+				<div class="block">
+					<input type="reset" value="Clear All" class="button-secondary"></input>
+					<input type="submit" value="Apply" class="button-secondary"></input>
+				</div>
+
+			</form>
+		</div>
+		<div class="data">
+			<table id="data_list">
+				<thead>
+					<tr>
+						<th><input type="checkbox"></input></th>
+						<th>Name<span class="icon-sort"></span></th>
+						<th>City<span class="icon-sort"></span></th>
+						<th>State<span class="icon-sort"></span></th>
+						<th>Country<span class="icon-sort"></span></th>
+						<th>SDN Status<span class="icon-sort"></span></th>
+						<th>Primary Phone</th>
+						<th>Members<span class="icon-sort"></span></th>
+						<th>Risk Level<span class="icon-sort"></span></th>
+						<th>Status<span class="icon-sort"></span></th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

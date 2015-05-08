@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>PGSi - Nebraska Premier Meatpacking, Ltd</title>
+<link href="css/fonts.css" rel="stylesheet" />
+<link href="css/actions.css" rel="stylesheet" />
+<link href="css/security.css" rel="stylesheet" />
+<link href="css/navigation.css" rel="stylesheet" />
+<link href="css/jquery-ui.min.css" rel="stylesheet" />
+<link href="css/jquery-ui.structure.min.css" rel="stylesheet" />
+<link href="css/pgsi-common.css" rel="stylesheet" />
+<script src="jquery/jquery-1.11.0.min.js"></script>
+<script src="jquery/jquery-ui-1.11.0.min.js"></script>
+<script src="jquery/jquery.datatables.min.js"></script>
+<style>
+h2, .buttons {
+	margin: 10px;
+}
+
+img {
+	margin-top: 5px;
+}
+
+.first {
+	clear: both;
+}
+
+.label, input[type=text] {
+	float: left;
+	display: block;
+}
+
+.value {
+	font-weight: bold;
+	float: left;
+}
+
+.width-shortest {
+	width: 90px;
+}
+
+input.width-shortest {
+	width: 70px;
+}
+
+.width-short, label.width-short.first {
+	width: 150px;
+}
+
+.width-medium {
+	width: 220px;
+}
+
+.width-long {
+	width: 280px;
+}
+
+.width-longest {
+	width: 400px;
+}
+
+label.first {
+	width: 140px;
+	clear: both;
+}
+
+.address-col-2 .first {
+	width: 120px;
+}
+
+hr {
+	clear: both;
+	width: 100%;
+	float: left;
+	margin: 16px 0 18px 0;
+}
+
+hr.last {
+	margin-bottom: 0;
+}
+
+a.form-link, a.form-link:hover, a.form-link:active {
+	color: #2b4e72;
+	text-decoration: none;
+	float: left;
+	margin-left: 8px;
+}
+
+a.form-link.first {
+	clear: both;
+	margin: 10px 0 8px 100px;
+}
+
+.form-link .icon-nav {
+	padding: 3px 3px 0 3px;
+	position: relative;
+	bottom: -1px;
+	color: #ffffff;
+	background-color: #42b653;
+	font-size: 12px;
+	margin-right: 3px;
+}
+
+#payroll .content {
+	display: table;
+	min-width: 1000px;
+	width: 95%;
+	padding: 16px;
+}
+
+.payroll-col1, .payroll-col2 {
+	float: left;
+	display: table;
+	margin-right: 16px;
+}
+
+#payroll h3 {
+	float: left;
+	margin-top: 0;
+}
+
+.label.first {
+	width: 150px;
+}
+
+.label.first.wide {
+	width: 250px;
+}
+
+.date {
+	margin-right: 30px;
+}
+
+.spacer {
+	margin-top: 16px;
+}
+
+form label {
+	display: block;
+	float: left;
+	margin-right: 8px;
+	margin-left: 8px;
+	line-height: 24px;
+}
+
+form input[type=text], form input[type=checkbox], form input[type=radio],
+	form .ui-selectmenu-button, form textarea {
+	display: block;
+	float: left;
+	margin-right: 8px;
+}
+
+#ppd-day, #pd-day, #ppd-day-button, #pd-day-button, .day, form input[type=text].day1,
+	form input[type=text].day2, .day1 {
+	display: none;
+}
+
+hr.top {
+	margin-top: 0;
+}
+
+hr.last {
+	margin-bottom: 0;
+}
+</style>
+<script>
+	$(document)
+			.ready(
+					function() {
+						$('nav.primary .sub-menu').hide();
+						$('nav.primary li').hover(
+								function() {
+									var that = this;
+									$(this).addClass("menu-hover").find(
+											".sub-menu").show().position({
+										my : "left top",
+										at : "left bottom",
+										of : that,
+										collision : "fit"
+									}).find("li").hover(function() {
+										$(this).addClass("menu-hover")
+									}, function() {
+										//$(this).removeClass("menu-hover")
+									});
+								},
+								function() {
+									$(this).removeClass("menu-hover").find(
+											".sub-menu").hide();
+								});
+						$('.add_loc_link').click(function() {
+							top.location.href = "location_add.html";
+						});
+
+						$(".btn").button();
+						$("#tabs").tabs();
+						var hideHovers = function() {
+							$("#hoverDocumentImg").hide();
+							$("#hoverNoteImg").hide();
+							$("#hoverRiskNoteImg").hide();
+							$("#hoverContactImg").hide();
+						};
+						$("map area")
+								.on(
+										'click',
+										function(e) {
+											e.preventDefault();
+											hideHovers();
+											switch ($(this).attr('id')) {
+											case "editBus":
+												var close = function() {
+													$("#editBus_dialog")
+															.dialog('close');
+												}
+												$("#editBus_dialog").dialog({
+													modal : true,
+													open : function(event, ui) {
+
+													},
+													buttons : {
+														"Cancel" : close,
+														"Save" : close
+													},
+													width : 970
+												});
+												break;
+											case "editNote":
+												var close = function() {
+													$("#editNote_dialog")
+															.dialog('close');
+												}
+												$("#editNote_dialog").dialog({
+													modal : true,
+													open : function(event, ui) {
+
+													},
+													buttons : {
+														"Cancel" : close,
+														"Save" : close
+													},
+													width : 970
+												});
+												break;
+											case "deleteNote":
+												var close = function() {
+													$("#deleteNote_dialog")
+															.dialog('close');
+												}
+												$("#deleteNote_dialog")
+														.dialog(
+																{
+																	modal : true,
+																	open : function(
+																			event,
+																			ui) {
+
+																	},
+																	buttons : {
+																		"Cancel" : close,
+																		"Save" : close
+																	},
+																	width : 500
+																});
+												break;
+											case "addNote":
+												var close = function() {
+													$("#addNote_dialog")
+															.dialog('close');
+												}
+												$("#addNote_dialog").dialog({
+													modal : true,
+													open : function(event, ui) {
+
+													},
+													buttons : {
+														"Cancel" : close,
+														"Save" : close
+													},
+													width : 681
+												});
+												break;
+											case "editRisk":
+												var close = function() {
+													$("#editRisk_dialog")
+															.dialog('close');
+												}
+												$("#editRisk_dialog").dialog({
+													modal : true,
+													open : function(event, ui) {
+
+													},
+													buttons : {
+														"Cancel" : close,
+														"Save" : close
+													},
+													width : 637
+												});
+												break;
+											case "editContact":
+												var close = function() {
+													$("#editContact_dialog")
+															.dialog('close');
+												}
+												$("#editContact_dialog")
+														.dialog(
+																{
+																	modal : true,
+																	open : function(
+																			event,
+																			ui) {
+
+																	},
+																	buttons : {
+																		"Cancel" : close,
+																		"Save" : close
+																	},
+																	width : 970
+																});
+												break;
+											case "addContact":
+												var close = function() {
+													$("#addContact_dialog")
+															.dialog('close');
+												}
+												$("#addContact_dialog")
+														.dialog(
+																{
+																	modal : true,
+																	open : function(
+																			event,
+																			ui) {
+
+																	},
+																	buttons : {
+																		"Cancel" : close,
+																		"Save" : close,
+																		"Save and add another contact" : function() {
+																			alert("This should load a fresh contact form.");
+																		}
+																	},
+																	width : 970
+																});
+												break;
+											case "deleteContact":
+												var close = function() {
+													$("#deleteContact_dialog")
+															.dialog('close');
+												}
+												$("#deleteContact_dialog")
+														.dialog(
+																{
+																	modal : true,
+																	open : function(
+																			event,
+																			ui) {
+
+																	},
+																	buttons : {
+																		"Cancel" : close,
+																		"Save" : close
+																	},
+																	width : 500
+																});
+												break;
+											case "editDocument":
+												var close = function() {
+													$("#editDocument_dialog")
+															.dialog('close');
+												}
+												$("#editDocument_dialog")
+														.dialog(
+																{
+																	modal : true,
+																	open : function(
+																			event,
+																			ui) {
+
+																	},
+																	buttons : {
+																		"Cancel" : close,
+																		"Save" : close
+																	},
+																	width : 850
+																});
+												break;
+
+											case "deleteDocument":
+												var close = function() {
+													$("#deleteDocument_dialog")
+															.dialog('close');
+												}
+												$("#deleteDocument_dialog")
+														.dialog(
+																{
+																	modal : true,
+																	open : function(
+																			event,
+																			ui) {
+
+																	},
+																	buttons : {
+																		"Cancel" : close,
+																		"Save" : close
+																	},
+																	width : 500
+																});
+												break;
+											case "addDocument":
+												var close = function() {
+													$("#addDocument_dialog")
+															.dialog('close');
+												}
+												$("#addDocument_dialog")
+														.dialog(
+																{
+																	modal : true,
+																	open : function(
+																			event,
+																			ui) {
+
+																	},
+																	buttons : {
+																		"Cancel" : close,
+																		"Save" : close,
+																		"Save and add another document" : function() {
+																			alert("This should load a fresh document form.");
+																		}
+																	},
+																	width : 850
+																});
+												break;
+											default:
+												// do nothing;
+											}
+										});
+
+						$("#hoverDocument").hover(function(e) {
+							$("#hoverDocumentImg").show();
+
+						}, function(e) {
+							//$("#hoverDocumentImg").toggle();
+						});
+
+						$("#hoverNote").hover(function(e) {
+							$("#hoverNoteImg").show();
+
+						}, function(e) {
+							//$("#hoverNoteImg").toggle();
+						});
+
+						$("#hoverRiskNote").hover(function(e) {
+							$("#hoverRiskNoteImg").show();
+
+						}, function(e) {
+							//$("#hoverRiskNoteImg").toggle();
+						});
+
+						$("#hoverContact").hover(function(e) {
+							$("#hoverContactImg").show();
+
+						}, function(e) {
+							//$("#hoverContactImg").toggle();
+						});
+
+						$("#busEditImg").hover(function(e) {
+						}, function(e) {
+							hideHovers();
+						});
+						$(".date").datepicker();
+
+						$("#link-edit-payroll")
+								.click(
+										function(e) {
+											e.preventDefault();
+											var close = function() {
+												$("#dialog-edit-payroll")
+														.dialog('close');
+											}
+											$("#dialog-edit-payroll")
+													.dialog(
+															{
+																modal : true,
+																open : function(
+																		event,
+																		ui) {
+																	$(
+																			"#dialog-edit-payroll select")
+																			.selectmenu();
+																	$(
+																			"#paycycle")
+																			.on(
+																					"selectmenuchange",
+																					function(
+																							event,
+																							ui) {
+																						$(
+																								"#ppd-day-button, #pd-day-button, .day1, .day2, .day")
+																								.hide();
+																						switch (ui.item.value) {
+																						case 'W':
+																						case 'B':
+																							$(
+																									"#ppd-day-button, #pd-day-button, .day")
+																									.show();
+																							break;
+																						case 'S':
+																							$(
+																									".day1, .day2")
+																									.show();
+																							break;
+																						case 'M':
+																							$(
+																									".day1")
+																									.show();
+																							break;
+																						default:
+																						}
+																					});
+																},
+																buttons : {
+																	"Cancel" : close,
+																	"Save" : close
+																},
+																width : 970
+															});
+										});
+					});
+</script>
+</head>
+<body>
+	<header>
+		<ul>
+			<li>Welcome&nbsp;&nbsp;<span class="emphasis">John Demo</span></li>
+			<li class="disabled"><a class="account_link" href="#"
+				title="Coming soon - Account"><span class="icon-user icon-nav"></span>Account</a></li>
+			<li class="disabled"><a class="help_link" href="#"
+				title="Coming soon - Help"><span class="icon-question icon-nav"></span>Help</a></li>
+			<li><a class="signout_link" href="login.html" title="Sign out"><span
+					class="icon-unlock icon-nav"></span>Sign Out</a></li>
+		</ul>
+	</header>
+	<nav class="primary">
+		<ul class="main-menu">
+			<li class="menu-home"><a href="dashboard.html"
+				class="icon-home icon-nav" title="Home"></a></li>
+			<li class="menu-active"><a href="organization_list.html"
+				title="Organizations and Locations" data-title="Customers">Customers</a>
+				<ul class="sub-menu">
+					<li><a href="organization_add.html" title="Add Organization"
+						data-title="Add Organization">Add Organization</a></li>
+					<li><a href="organization_list.html"
+						data-title="Find Organization" title="Find Organization">Find
+							Organization</a></li>
+					<li><a href="location_add.html" title="Add Location"
+						data-title="Add Location">Add Location</a></li>
+					<li><a href="location_list.html" title="Find Location"
+						data-title="Find Location">Find Location</a></li>
+				</ul></li>
+			<li><a href="member_list.html" class=""
+				title="Members and Recipients" data-title="Members">Members</a>
+				<ul class="sub-menu">
+					<li><a href="member_add_main.html" title="Add Member"
+						data-title="Add Member">Add Member</a></li>
+					<li><a href="member_list.html" data-title="Find Member"
+						title="Find Member">Find Member</a></li>
+					<li><a href="recipient_list.html" title="Find Recipient"
+						data-title="Find Recipient">Find Recipient</a></li>
+				</ul></li>
+			<li><a href="payment_overview.html" class=""
+				title="Payments" data-title="Payments">Payments</a>
+				<ul class="sub-menu">
+				<li><a href="batch_list.html" data-title="Batches"
+						title="Batches">Batches</a></li>
+					<li><a href="transaction_list.html"
+						data-title="Find Transaction" title="Find Transaction">Find
+							Transaction</a></li>
+					<!--<li><a href="transaction_add.html" data-title="Batches"-->
+						<!--title="Batches">Add New Transaction</a></li>-->
+					<li><a href="funding_list.html" title="Payer Funding"
+						data-title="Payer Funding">Payer Funding</a></li>
+					<li><a href="paycycle_list.html" title="Upcoming Pay Dates"
+						data-title="Upcoming Pay Dates">Upcoming Pay Dates</a></li>
+					<!--<li><a href="currency_purchase.html" title="Purchase Currency"-->
+					<!--data-title="Purchase Currency">Purchase Currency</a></li>-->
+				</ul></li>
+			<li><a href="compliance_overview.html"
+				class="" title="Compliance Monitoring and Reporting"
+				data-title="Compliance">Compliance</a>
+				<ul class="sub-menu">
+					<li><a href="sdn_list.html" title="SDN Matches"
+						data-title="SDN Matches">SDN Matches</a></li>
+					<li><a href="sar_list.html" data-title="SAR Reports"
+						title="SAR Reports">SAR Reports</a></li>
+					<!-- 					<li><a href="compliance_analytics_list.html" -->
+					<!-- 						title="Compliance -->
+					<!-- 							Analytics" -->
+					<!-- 						data-title="Compliance -->
+					<!-- 							Analytics">Compliance Analytics</a></li> -->
+				</ul></li>
+			<li><a href="profile_list.html" class="" title="Pricing"
+				data-title="Pricing">Pricing</a>
+				<ul class="sub-menu">
+					<li><a href="profile_list.html" title="Find Pricing Profile">Find
+							Pricing Profile</a></li>
+					<li><a href="profile_add.html" title="Add New Pricing Profile">Add
+							New Pricing Profile</a></li>
+				</ul></li>
+			<li class="disabled"><a href="#" class=""
+				title="Coming soon - Analytics and Reporting" data-title="Analytics">Analytics</a></li>
+			<li class="disabled"><a href="#" class=""
+				title="Coming soon - Users and User Settings" data-title="Users">Users</a></li>
+			<li class="disabled"><a href="#" class=""
+				title="Coming soon - System Settings" data-title="System">System</a></li>
+			<li class="last"><a href="#" class="" id="link-sar"
+				title="Report Suspicious Activity"
+				data-title="Report Suspicious Activity&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"><span
+					class="icon-security icon-eye-1"></span>Report Suspicious Activity</a></li>
+		</ul>
+	</nav>
+	<nav class="secondary">
+		<span><a href="organization_list.html" title="Customers">Customers</a></span><span
+			class="icon-nav icon-angle-right"></span><span>Nebraska
+			Premium Meatpacking, Ltd</span>
+	</nav>
+	<h2>Nebraska Premium Meatpacking, Ltd</h2>
+	<div id="tabs">
+		<ul>
+			<li><a href="#org_info" title="Organizational Info"
+				data-title="Organizational Info">Organizational Info</a></li>
+			<li><a href="#locations" title="Locations"
+				data-title="Locations">Locations</a></li>
+			<!-- 			<li><a href="#payroll" title="Payroll" data-title="Payroll">Payroll</a></li> -->
+			<li class="add_loc_link"><span class="icon-nav icon-plus"></span>Add
+				Location</li>
+		</ul>
+
+		<div id="org_info">
+			<div class="content">
+				<img id="busEditImg" src="temp/organization-view.png"
+					usemap="#orgview" />
+				<map id="orgview" name="orgview">
+					<area shape="rect" alt="" title="Edit Business Summary"
+						coords="134,2,182,26" href="#editBusiness" id="editBus" target="" />
+					<area shape="rect" alt="" title="" coords="649,1,709,25"
+						id="editRisk" href="#editRisk" target="" />
+					<area shape="rect" alt="Add Note" title="" coords="50,185,138,218"
+						id="addNote" href="#addNote" target="" />
+					<area shape="rect" alt="" title="" coords="3,228,205,325"
+						id="hoverNote" href="#hoverNote" target="" />
+					<area shape="rect" alt="" title="" coords="78,368,171,392"
+						href="addContact" id="addContact" target="" />
+					<area shape="rect" alt="Add Contact" title=""
+						coords="3,401,205,542" id="hoverContact" href="#hoverContact"
+						target="" />
+					<area shape="rect" alt="Add Document" title=""
+						coords="90,610,205,638" id="addDocument" href="#addDocument"
+						target="" />
+					<area shape="rect" alt="" title="" coords="218,641,425,767"
+						id="hoverDocument" href="#hoverDocument" target="" />
+					<area shape="rect" alt="Edit Risk" title="" coords="755,2,831,31"
+						href="#editRisk" id="editRisk" target="" />
+					<area shape="rect" alt="" title="" coords="712,61,914,160"
+						href="#hoverRiskNote" id="hoverRiskNote" target="" />
+				</map>
+			</div>
+		</div>
+		<div id="locations">
+			<!-- Under the penalty of DEATH - Do NOT user iframes like this in the real product! -->
+			<iframe src="location_list_tab.html" frameBorder="0" scrolling="no"
+				width="100%" height="700px"></iframe>
+		</div>
+		<!-- 		<div id="payroll"> -->
+		<!-- 			<div class="content"> -->
+		<!-- 				<h3>Payroll Cycle</h3> -->
+		<!-- 				<a href="#" title="Edit Payroll Cycle" class="form-link" -->
+		<!-- 					id="link-edit-payroll"><span class="icon-nav icon-pencil"></span>Edit</a> -->
+		<!-- 				<div class="label first wide">Dates are automatically -->
+		<!-- 					generated.</div> -->
+		<!-- 				<div class="label first spacer">Starting Pay Date</div> -->
+		<!-- 				<div class="value spacer">12/12/2011</div> -->
+		<!-- 				<div class="payroll-col1 first spacer"> -->
+		<!-- 					<div class="label first">Payroll Cycle</div> -->
+		<!-- 					<div class="value">Semimonthly</div> -->
+		<!-- 					<div class="label first">Pay Preparation Date</div> -->
+		<!-- 					<div class="value">Every 28th and 14th of the month</div> -->
+		<!-- 					<div class="label first">Pay Date</div> -->
+		<!-- 					<div class="value">Every 1st and 16th of the month</div> -->
+		<!-- 				</div> -->
+		<!-- 				<div class="payroll-col2 spacer"> -->
+		<!-- 					<div class="label first wide">Last day to receive funds</div> -->
+		<!-- 					<div class="value">1 day before Pay Date</div> -->
+		<!-- 					<div class="label first wide">Release Batch to ACH Provider</div> -->
+		<!-- 					<div class="value">1 day before Pay Date</div> -->
+		<!-- 				</div> -->
+		<!-- 				<hr> -->
+		<!-- 				<h3>Upcoming Dates</h3> -->
+		<!-- 				<div class="label first">Pay Preparation Day</div> -->
+		<!-- 				<input type="text" class="date width-shortest"><input -->
+		<!-- 					type="text" class="date width-shortest"><input type="text" -->
+		<!-- 					class="date width-shortest"><input type="text" -->
+		<!-- 					class="date width-shortest"><input type="text" -->
+		<!-- 					class="date width-shortest"><input type="text" -->
+		<!-- 					class="date width-shortest"> -->
+		<!-- 				<div class="label first">Pay Day</div> -->
+		<!-- 				<input type="text" class="date width-shortest"><input -->
+		<!-- 					type="text" class="date width-shortest"><input type="text" -->
+		<!-- 					class="date width-shortest"><input type="text" -->
+		<!-- 					class="date width-shortest"><input type="text" -->
+		<!-- 					class="date width-shortest"><input type="text" -->
+		<!-- 					class="date width-shortest"> -->
+
+		<!-- 			</div> -->
+		<!-- 		</div> -->
+
+	</div>
+
+	<footer>
+		<div class="left">&copy; 2014 Prosperitas Global Solutions, Inc.
+			All Rights Reserved.</div>
+		<div class="right">Version 1.00.00 Build 00000</div>
+	</footer>
+
+	<div id="editBus_dialog" style="display: none;"
+		title="Edit Business Summary for Nebraska Meatpacking, Inc">
+		<img src="temp/organization-edit-bussummary.png"></img>
+	</div>
+
+	<div id="editRisk_dialog" style="display: none;"
+		title="Edit Risk for Nebraska Meatpacking, Inc">
+		<img src="temp/edit-risk.png"></img>
+	</div>
+
+	<div id="addNote_dialog" style="display: none;"
+		title="Add Note for Nebraska Meatpacking, Inc">
+		<img src="temp/add-note.png"></img>
+	</div>
+
+	<div id="editNote_dialog" style="display: none;"
+		title="Edit Note for Nebraska Meatpacking, Inc">
+		<img src="temp/edit-note.png"></img>
+	</div>
+
+	<div id="deleteNote_dialog" style="display: none;"
+		title="Delete Note for Nebraska Meatpacking, Inc">
+		<img src="temp/delete.png"></img>
+	</div>
+
+	<div id="addContact_dialog" style="display: none;"
+		title="Add Contact for Nebraska Meatpacking, Inc">
+		<img src="temp/add-contact.png"></img>
+	</div>
+
+	<div id="addDocument_dialog" style="display: none;"
+		title="Add Document for Nebraska Meatpacking, Inc">
+		<img src="temp/edit-document.png"></img>
+	</div>
+
+	<div id="editContact_dialog" style="display: none;"
+		title="Edit Contact for Nebraska Meatpacking, Inc">
+		<img src="temp/edit-contact.png"></img>
+	</div>
+
+	<div id="editDocument_dialog" style="display: none;"
+		title="Edit Document for Nebraska Meatpacking, Inc">
+		<img src="temp/edit-document.png"></img>
+	</div>
+
+	<div id="deleteDocument_dialog" style="display: none;"
+		title="Delete Document for Nebraska Meatpacking, Inc">
+		<img src="temp/delete.png"></img>
+	</div>
+
+	<div id="deleteContact_dialog" style="display: none;"
+		title="Delete Contact for Nebraska Meatpacking, Inc">
+		<img src="temp/delete.png"></img>
+	</div>
+	<div id="hoverDocumentImg"
+		style="display: none; position: absolute; z-index: 1000; top: 806px; left: 237px;">
+		<img src="temp/hover-document-2.png" usemap="#hoverDocMap" />
+		<map id="hoverDocMap" name="hoverDocMap">
+			<area shape="rect" alt="Edit Document" title="" coords="98,5,143,22"
+				href="" target="" id="editDocument" />
+			<area shape="rect" alt="Delete Document" title=""
+				coords="148,5,201,23" href="" target="" id="deleteDocument" />
+		</map>
+	</div>
+
+	<div id="hoverRiskNoteImg"
+		style="display: none; position: absolute; z-index: 1000; top: 250px; left: 724px;">
+		<img src="temp/hover-risknote.png" />
+	</div>
+
+
+	<div id="hoverNoteImg"
+		style="display: none; position: absolute; z-index: 1000; top: 429px; left: 23px;">
+		<img src="temp/hover-note-2.png" usemap="#hoverNoteMap" />
+		<map id="hoverNoteMap" name="hoverNoteMap">
+			<area shape="rect" alt="Edit Note" title="" coords="96,6,148,27"
+				href="" target="" id="editNote" />
+			<area shape="rect" alt="Delete Note" title="" coords="151,9,204,29"
+				href="" target="" id="deleteNote" />
+		</map>
+	</div>
+
+	<div id="hoverContactImg"
+		style="display: none; position: absolute; z-index: 1000; top: 600px; left: 25px;">
+		<img src="temp/hover-contact-2.png" usemap="#hoverContactMap" />
+		<map id="hoverContactMap" name="hoverContactMap">
+			<area shape="rect" alt="Edit Contact" title="" coords="94,4,143,24"
+				href="" target="" id="editContact" />
+			<area shape="rect" alt="Delete Contact" title=""
+				coords="145,4,198,25" href="" target="" id="deleteContact" />
+		</map>
+	</div>
+	<div id="dialog-edit-payroll" title="Edit Payroll Settings"
+		style="display: none">
+		<form>
+			<hr class="top">
+			<input type="radio" name="generate" class="first" checked><label>Generate
+				Dates automatically.They still can be manually adjusted.</label>
+			<!--
+				 -->
+			<input type="radio" name="generate" class="first"><label>Enter
+				all dates manually</label>
+			<hr>
+			<label class=" first">Starting Pay Date</label> <input type="text"
+				class="date width-shortest">
+			<!--  -->
+
+			<label class=" first">Payroll Cycle</label> <select id="paycycle"
+				class="width-medium"><option selected></option>
+				<option value="W">Weekly</option>
+				<option value="B">Biweekly</option>
+				<option value="S">Semimonthly</option>
+				<option value="M">Monthly</option>
+				<option value="O">Other</option></select>
+			<!--  -->
+			<label class=" first day day1">Pay Preparation Day</label><select
+				id="ppd-day" class="width-short"><option></option>
+				<option>Monday</option>
+				<option>Tuesday</option>
+				<option>Wednesday</option>
+				<option>Thursday</option>
+				<option>Friday</option>
+				<option>Saturday</option>
+				<option>Sunday</option></select> <input type="text"
+				class="day1 width-shortest"></input><input type="text"
+				class="day2 width-shortest"></input><label class="day1">(day
+				of month)</label>
+			<!--  -->
+			<label class=" first day day1">Pay Day</label><select id="pd-day"
+				class="width-short"><option></option>
+				<option>Monday</option>
+				<option>Tuesday</option>
+				<option>Wednesday</option>
+				<option>Thursday</option>
+				<option>Friday</option>
+				<option>Saturday</option>
+				<option>Sunday</option></select> <input type="text"
+				class="day1 width-shortest"></input><input type="text"
+				class="day2 width-shortest"></input><label class="day1">(day
+				of month)</label>
+			<hr>
+			<label class="label first wide">Last day to receive funds</label><input
+				type="text" class="width-shortest"><label class="">day(s)before
+				Pay Date</label> <label class="label first wide">Release Batch to
+				ACH Provider</label><input type="text" class="width-shortest"><label
+				class="">day(s) before Pay Date</label>
+			<!--  -->
+
+			<hr class="last">
+		</form>
+	</div>
+
+</body>
+</html>

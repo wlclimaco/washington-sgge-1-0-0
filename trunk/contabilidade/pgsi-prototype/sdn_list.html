@@ -1,0 +1,451 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>PGSi SDN Alerts</title>
+<link href="css/fonts.css" rel="stylesheet" />
+<link href="css/actions.css" rel="stylesheet" />
+<link href="css/security.css" rel="stylesheet" />
+<link href="css/navigation.css" rel="stylesheet" />
+<link href="css/jquery-ui.min.css" rel="stylesheet" />
+<link href="css/jquery-ui.structure.min.css" rel="stylesheet" />
+<link href="css/pgsi-common.css" rel="stylesheet" />
+<script src="jquery/jquery-1.11.0.min.js"></script>
+<script src="jquery/jquery-ui-1.11.0.min.js"></script>
+<script src="jquery/jquery.datatables.min.js"></script>
+<script>
+	function showDeleteDialog(obj) {
+		$(obj).append("<div id='delete_dialog' style='display:none'></div>");
+		$("#delete_dialog").dialog({
+			title : "This styling/content definitely needs more work",
+			modal : true,
+			zIndex : 10000,
+			autoOpen : true,
+			width : 'auto',
+			resizable : false,
+			buttons : {
+				Delete : function() {
+					$(this).dialog("close");
+					$(this).remove();
+				},
+				Cancel : function() {
+					$(this).dialog("close");
+					$(this).remove();
+				}
+			}
+
+		});
+	};
+	$(document)
+			.ready(
+					function() {
+						$('nav.primary .sub-menu').hide();
+						$('nav.primary li').hover(
+								function() {
+									var that = this;
+									$(this).addClass("menu-hover").find(
+											".sub-menu").show().position({
+										my : "left top",
+										at : "left bottom",
+										of : that,
+										collision : "fit"
+									}).find("li").hover(function() {
+										$(this).addClass("menu-hover")
+									}, function() {
+										//$(this).removeClass("menu-hover")
+									});
+								},
+								function() {
+									$(this).removeClass("menu-hover").find(
+											".sub-menu").hide();
+								});
+
+						//http://datatables.net/reference/option/language
+						$('#data_list')
+								.dataTable(
+										{
+											dom : '<"list_header"ipl><t><"list_footer"ipl>',
+											paging : true,
+											pagingType : "full",
+											iDisplayLength : 25,
+											language : {
+												paginate : {
+													first : "a",
+													last : "b",
+													next : "g",
+													previous : "f"
+												},
+												lengthMenu : "_MENU_ records per page",
+												loadingRecords : "Loading...",
+												processing : "Processing...",
+												zeroRecords : "No matching records found",
+												info : "Showing _START_ to _END_ of _TOTAL_ matching records."
+											},
+											drawCallback : function(settings) {
+												$(".dataTables_length select")
+														.outerWidth(60)
+														.selectmenu();
+												$("#data_list tbody a")
+														.parent("td")
+														.hover(
+																function() {
+																	$(this)
+																			.append(
+																					'<a href="#" title="View SDN Match Details"><span class="icon-security icon-shield82"></span></a>'
+																							+ '<a href="#" title="View Nebraska Premium Meatpacking Ltd."><span class="icon-nav icon-search-find"></span></a>');
+																},
+																function() {
+																	$(this)
+																			.find(
+																					'.icon-nav, .icon-security')
+																			.remove();
+																});
+											}
+										});
+						$(".filter select").selectmenu();
+						$("input[type=submit],input[type=reset]").button();
+						$('#data_list input[type=checkbox]').change(function() {
+							if (this.checked) {
+								$(this).closest("tr").addClass('selected');
+							} else {
+								$(this).closest("tr").removeClass('selected');
+							}
+						});
+
+						var showDialog = function(text, title) {
+							var close = function() {
+								$("#dialog-downloaded").dialog('close');
+							}
+							$("#dialog-downloaded").attr("title", title);
+							$("#dialog-downloaded .label").text(text);
+							$("#dialog-downloaded").dialog({
+								modal : true,
+								open : function(event, ui) {
+								},
+								buttons : {
+									"Close" : close
+								},
+								width : 600
+							});
+						}
+						$("#link-download")
+								.click(
+										function(e) {
+											e.preventDefault();
+											var link = $(this).html();
+											$(this)
+													.html(
+															"<img src='images/wait2.gif'><span class='label'>Updating SDN File...</span>");
+											setTimeout(
+													function() {
+														$("#link-download")
+																.html(link);
+														//$("#link-download").prepend($("<span class='msg'>SDN File updated and system scan started.</span>"));
+														showDialog(
+																"An updated SDN File was dowloaded. A full system scan has been started. Alternative Message (pls use only the one that applies): No updates to the SDN File were found.",
+																"Update SDN File")
+													}, 2000);
+										});
+
+						$("#link-run")
+								.click(
+										function(e) {
+											e.preventDefault();
+											showDialog(
+													"A full system scan has been started.",
+													"Run SDN System Check");
+										});
+					});
+</script>
+<style>
+#data_list .multiples a {
+	display: block;
+}
+
+#data_list tr.sdn2 td {
+	color: #333333;
+}
+
+#data_list tr.sdn2 td a {
+	color: #2b4e72;
+}
+
+.add_loc_link.left {
+	margin-right: -3em;
+}
+
+.sdnstatus {
+	color: #c33639;
+	font-weight: bold;
+}
+
+.filter {
+	padding: 0;
+}
+
+.filter * {
+	display: none;
+}
+
+#data_list_wrapper {
+	margin-left: 0;
+}
+
+.data #data_list .icon-sort {
+	display: none;
+}
+
+#dialog-downloaded hr.top {
+	width: 100%;
+	margin-top: 0;
+}
+
+#dialog-downloaded hr.last {
+	width: 100%;
+	margin-top: 26px;
+	margin-bottom: 0;
+}
+
+.alert {
+	border: 1px solid #c33639;
+	margin: 8px;
+	padding: 8px;
+	display: table;
+	width: 95%;
+	background-color: #F5DEDF;
+}
+
+.alert .icon-nav, .alert .icon-nav:before {
+	color: #c33639;
+	float: left;
+	position: relative;
+	bottom: -1px;
+	display: block;
+}
+
+.alert .label {
+	color: #c33639;
+	float: left;
+	margin-left: 8px;
+	font-weight: bold;
+	width: 90%;
+}
+</style>
+</head>
+<body>
+	<header>
+		<ul>
+			<li>Welcome&nbsp;&nbsp;<span class="emphasis">John Demo</span></li>
+			<li class="disabled"><a class="account_link" href="#"
+				title="Coming soon - Account"><span class="icon-user icon-nav"></span>Account</a></li>
+			<li class="disabled"><a class="help_link" href="#"
+				title="Coming soon - Help"><span class="icon-question icon-nav"></span>Help</a></li>
+			<li><a class="signout_link" href="login.html" title="Sign out"><span
+					class="icon-unlock icon-nav"></span>Sign Out</a></li>
+		</ul>
+	</header>
+	<nav class="primary">
+		<ul class="main-menu">
+			<li class="menu-home"><a href="dashboard.html"
+				class="icon-home icon-nav" title="Home"></a></li>
+			<li><a href="organization_list.html"
+				title="Organizations and Locations" data-title="Customers">Customers</a>
+				<ul class="sub-menu">
+					<li><a href="organization_add.html" title="Add Organization"
+						data-title="Add Organization">Add Organization</a></li>
+					<li><a href="organization_list.html"
+						data-title="Find Organization" title="Find Organization">Find
+							Organization</a></li>
+					<li><a href="location_add.html" title="Add Location"
+						data-title="Add Location">Add Location</a></li>
+					<li><a href="location_list.html" title="Find Location"
+						data-title="Find Location">Find Location</a></li>
+				</ul></li>
+			<li><a href="member_list.html" class=""
+				title="Members and Recipients" data-title="Members">Members</a>
+				<ul class="sub-menu">
+					<li><a href="member_add_main.html" title="Add Member"
+						data-title="Add Member">Add Member</a></li>
+					<li><a href="member_list.html" data-title="Find Member"
+						title="Find Member">Find Member</a></li>
+					<li><a href="recipient_list.html" title="Find Recipient"
+						data-title="Find Recipient">Find Recipient</a></li>
+				</ul></li>
+			<li><a href="payment_overview.html" class="" title="Payments"
+				data-title="Payments">Payments</a>
+				<ul class="sub-menu">
+					<li><a href="batch_list.html" data-title="Batches"
+						title="Batches">Batches</a></li>
+					<li><a href="transaction_list.html"
+						data-title="Find Transaction" title="Find Transaction">Find
+							Transaction</a></li>
+					<!--<li><a href="transaction_add.html" data-title="Batches"-->
+						<!--title="Batches">Add New Transaction</a></li>-->
+					<li><a href="funding_list.html" title="Payer Funding"
+						data-title="Payer Funding">Payer Funding</a></li>
+					<li><a href="paycycle_list.html" title="Upcoming Pay Dates"
+						data-title="Upcoming Pay Dates">Upcoming Pay Dates</a></li>
+					<!--<li><a href="currency_purchase.html" title="Purchase Currency"-->
+					<!--data-title="Purchase Currency">Purchase Currency</a></li>-->
+				</ul></li>
+			<li class="menu-active"><a href="compliance_overview.html"
+				class="" title="Compliance Monitoring and Reporting"
+				data-title="Compliance">Compliance</a>
+				<ul class="sub-menu">
+					<li><a href="sdn_list.html" title="SDN Matches"
+						data-title="SDN Matches">SDN Matches</a></li>
+					<li><a href="sar_list.html" data-title="SAR Reports"
+						title="SAR Reports">SAR Reports</a></li>
+					<!-- 					<li><a href="compliance_analytics_list.html" -->
+					<!-- 						title="Compliance -->
+					<!-- 							Analytics" -->
+					<!-- 						data-title="Compliance -->
+					<!-- 							Analytics">Compliance Analytics</a></li> -->
+				</ul></li>
+			<li><a href="profile_list.html" class="" title="Pricing"
+				data-title="Pricing">Pricing</a>
+				<ul class="sub-menu">
+					<li><a href="profile_list.html" title="Find Pricing Profile">Find
+							Pricing Profile</a></li>
+					<li><a href="profile_add.html" title="Add New Pricing Profile">Add
+							New Pricing Profile</a></li>
+				</ul></li>
+			<li class="disabled"><a href="#" class=""
+				title="Coming soon - Analytics and Reporting" data-title="Analytics">Analytics</a></li>
+			<li class="disabled"><a href="#" class=""
+				title="Coming soon - Users and User Settings" data-title="Users">Users</a></li>
+			<li class="disabled"><a href="#" class=""
+				title="Coming soon - System Settings" data-title="System">System</a></li>
+			<li class="last"><a href="#" class="" id="link-sar"
+				title="Report Suspicious Activity"
+				data-title="Report Suspicious Activity&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"><span
+					class="icon-security icon-eye-1"></span>Report Suspicious Activity</a></li>
+		</ul>
+	</nav>
+	<nav class="secondary">
+		<span><a href="compliance_overview.html" title="Compliance">Compliance</a></span><span
+			class="icon-nav icon-angle-right"></span><span>SDN Matches</span>
+	</nav>
+	<div>
+		<h2 class="list">SDN Matches</h2>
+		<span class="add_loc_link" id="link-run"><span
+			class="icon-nav icon-caret-right"></span>Run SDN System Check</span> <span
+			class="add_loc_link left" id="link-download"><span
+			class="icon-nav icon-refresh"></span>Update SDN File</span>
+	</div>
+
+	<div class="content list">
+		<div class="filter"></div>
+		<div class="data">
+			<table id="data_list">
+				<thead>
+					<tr>
+						<th>Name<span class="icon-sort"></span></th>
+						<th>Type<span class="icon-sort"></span></th>
+						<th>SDN Status<span class="icon-sort"></span></th>
+<!-- 						<th>Match Details<span class="icon-sort"></span></th> -->
+						<th>Date<span class="icon-sort"></span></th>
+						<th>SDN Status Reason<span class="icon-sort"></span></th>
+					</tr>
+				</thead>
+				<tbody>
+					<script>
+						var sdnRowClass = ""
+						var sdnStatus = "Negative";
+						var sdnNote = "Nightly SDN Process"
+
+						for (var i = 0; i < 15; i++) {
+							if (i < 10) {
+								sdnRowClass = "sdn2";
+								sdnStatus = "Pending PGSi";
+								sdnNote = "Flagged by nightly SDN Match Process";
+							} else if (i < 13) {
+								sdnRowClass = "sdn3";
+								sdnStatus = "Pending Federal";
+								sdnNote = "Reviewed other documents and became convinced this is a legitimate match. Reported to authorities 10/12/2014."
+							} else {
+								sdnRowClass = "sdn4";
+								sdnStatus = "Positive";
+								sdnNote = "Flagged by nightly SDN Match Process"
+							}
+							document.write('<tr class="' + sdnRowClass + '">');
+							if (i % 10 == 0) {
+								document
+										.write('<td class="name"><a class="edit_link" href="sdn_business_view.html"');
+								document
+										.write('title="View SDN Report for Nebraska Premium Meatpacking Ltd.">Nebraska');
+								document.write('Premium Meatpacking Ltd. '
+										+ (i + 1) + '</a></td>');
+								document
+										.write('<td class="type">Organization</td>');
+							} else if (i % 10 == 1) {
+								document
+										.write('<td class="name multiples"><a class="edit_link" href="sdn_business_view.html"');
+								document
+										.write('title="View/Edit Fremont Location">Fremont Location '
+												+ (i + 1)
+												+ '</a><a href="sdn_business_view.html" title="View SDN Report for Premium Meatpacking Ltd.">Premium Meatpacking Ltd.</a></td>');
+								document
+										.write('<td class="type">Organization</td>');
+							} else if (i % 10 == 2) {
+								document
+										.write('<td class="name"><a class="edit_link" href="sdn_person_view.html"');
+								document
+										.write('title="View SDN Report for Fremont Location">Janine Contact</a></td>');
+								document
+										.write('<td class="type">Location Contact</td>');
+							} else if (i % 10 < 5) {
+								document
+										.write('<td class="name"><a class="edit_link" href="sdn_person_view.html"');
+								document
+										.write('title="View/Edit Maria Ramirez.">Maria Ramirez '
+												+ (i + 1)
+												+ ' (MAB-'
+												+ (21345 + i) + ')</a></td>');
+								document.write('<td class="type">Member</td>');
+							} else {
+								document
+										.write('<td class="name"><a class="edit_link" href="sdn_person_view.html"');
+								document
+										.write('title="View SDN Report for Mario Gonzales.">Mario Gonzalez '
+												+ (i + 1)
+												+ ' (RAB-'
+												+ (21345 + i) + ')</a></td>');
+								document
+										.write('<td class="type">Recipient</td>');
+							}
+
+							document.write('<td class="sdnstatus">' + sdnStatus
+									+ '</td>');
+
+						//document.write('<td>Name and City</td>');
+							document.write('<td>10/12/2014</td>');
+							document.write('<td>' + sdnNote + '</td>');
+							document.write('</tr>');
+						}
+					</script>
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<footer>
+		<div class="left">&copy; 2014 Prosperitas Global Solutions, Inc.
+			All Rights Reserved.</div>
+		<div class="right">Version 1.00.00 Build 00000</div>
+	</footer>
+
+	<div id="dialog-downloaded" title="Update SDN File"
+		style="display: none">
+		<hr class="top">
+		<div class="alert">
+			<span class="icon-nav icon-exclamation-triangle"></span>
+			<div class="label"></div>
+		</div>
+		<hr class="last">
+	</div>
+
+
+
+</body>
+</html>

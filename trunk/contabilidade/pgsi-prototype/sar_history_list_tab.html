@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>PGSi Locations</title>
+<link href="css/fonts.css" rel="stylesheet" />
+<!-- <link href="css/actions.css" rel="stylesheet" /> -->
+<link href="css/navigation.css" rel="stylesheet" />
+<link href="css/jquery-ui.min.css" rel="stylesheet" />
+<link href="css/jquery-ui.structure.min.css" rel="stylesheet" />
+<link href="css/pgsi-common.css" rel="stylesheet" />
+<script src="jquery/jquery-1.11.0.min.js"></script>
+<script src="jquery/jquery-ui-1.11.0.min.js"></script>
+<script src="jquery/jquery.datatables.min.js"></script>
+<script>
+	function showDeleteDialog(obj) {
+		$(obj).append("<div id='delete_dialog' style='display:none'></div>");
+		$("#delete_dialog").dialog({
+			title : "This styling/content definitely needs more work",
+			modal : true,
+			zIndex : 10000,
+			autoOpen : true,
+			width : 'auto',
+			resizable : false,
+			buttons : {
+				Delete : function() {
+					$(this).dialog("close");
+					$(this).remove();
+				},
+				Cancel : function() {
+					$(this).dialog("close");
+					$(this).remove();
+				}
+			}
+
+		});
+	};
+	$(document)
+			.ready(
+					function() {
+						$('#data_list')
+								.dataTable(
+										{
+											dom : '<"list_header"><t><"list_footer">',
+											paging : true,
+											pagingType : "full",
+											iDisplayLength : 25,
+											language : {
+												paginate : {
+													first : "a",
+													last : "b",
+													next : "g",
+													previous : "f"
+												},
+												lengthMenu : "_MENU_ records per page",
+												loadingRecords : "Loading...",
+												processing : "Processing...",
+												zeroRecords : "No matching records found",
+												info : "Showing _START_ to _END_ of _TOTAL_ matching records. (SDN/SAR summary goes here.)"
+											},
+											drawCallback : function(settings) {
+												$(".dataTables_length select")
+														.outerWidth(60)
+														.selectmenu();
+												$("#data_list .name a")
+														.parent("td")
+														.hover(
+																function() {
+																	$(this)
+																			.append(
+																					'<a href="location_view.html" title="Edit Fremont Location" class="icon-nav icon-pencil"></a><a href="#" class="icon-nav icon-trash-bin" title="Delete Fremont Location" onclick="showDeleteDialog(this); return false;"></a>');
+																},
+																function() {
+																	$(this)
+																			.find(
+																					'.icon-nav')
+																			.remove();
+																});
+											}
+										});
+						$(".filter select").selectmenu();
+						$("input[type=submit],input[type=reset]").button();
+						$('#data_list input[type=checkbox]').change(function() {
+							if (this.checked) {
+								$(this).closest("tr").addClass('selected');
+							} else {
+								$(this).closest("tr").removeClass('selected');
+							}
+						});
+					});
+</script>
+<style>
+.content {
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+
+.content.list {
+	padding: 0;
+}
+
+#data_list_wrapper {
+	margin-left: 0px;
+}
+
+.filter {
+	padding: 0;
+}
+</style>
+</head>
+<body>
+	<div class="content list">
+		<div class="filter"></div>
+		<div class="data">
+			<table id="data_list">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Activity Period</th>
+						<th>Total Amount</th>
+						<th>Summary</th>
+						<th>Reported</th>
+						<th>Reporter</th>
+						<th>Status</th>
+						<th>Reason</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>SAR-12345</td>
+						<td>12/12/2014-12/31/2014</td>
+						<td>USD 12,334.99</td>
+						<td>Suspected Structuring.</td>
+						<td>PGSi User Name</td>
+						<td>02/23/2014</td>
+						<td>Filed</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>SAR-12345</td>
+						<td>12/12/2014-12/31/2014</td>
+						<td>USD 12,334.99</td>
+						<td>Suspected Structuring.</td>
+						<td>PGSi User Name</td>
+						<td>02/23/2014</td>
+						<td>Closed</td>
+						<td>Declination Reason</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

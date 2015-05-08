@@ -1,0 +1,365 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>PGSi - Add New Member</title>
+<link href="css/fonts.css" rel="stylesheet" />
+<link href="css/actions.css" rel="stylesheet" />
+<link href="css/navigation.css" rel="stylesheet" />
+<link href="css/jquery-ui.min.css" rel="stylesheet" />
+<link href="css/jquery-ui.structure.min.css" rel="stylesheet" />
+<link href="css/pgsi-common.css" rel="stylesheet" />
+<script src="jquery/jquery-1.11.0.min.js"></script>
+<script src="jquery/jquery-ui-1.11.0.min.js"></script>
+<script src="jquery/jquery.datatables.min.js"></script>
+
+<script>
+	$(document).ready(
+			function() {
+				$('nav.primary .sub-menu').hide();
+				$('nav.primary li').hover(
+						function() {
+							var that = this;
+							$(this).addClass("menu-hover").find(".sub-menu")
+									.show().position({
+										my : "left top",
+										at : "left bottom",
+										of : that,
+										collision : "fit"
+									}).find("li").hover(function() {
+										$(this).addClass("menu-hover")
+									}, function() {
+										//$(this).removeClass("menu-hover")
+									});
+						},
+						function() {
+							$(this).removeClass("menu-hover").find(".sub-menu")
+									.hide();
+						});
+				$("select").selectmenu();
+				$("span.ui-selectmenu-text").each(
+						function(index) {
+							if (!$(this).text().trim()) {
+								$(this).parent("span.ui-selectmenu-button")
+										.addClass("required");
+							} else {
+								$(this).parent("span.ui-selectmenu-button")
+										.removeClass("required");
+							}
+						});
+				$("input.date").datepicker();
+				$("input[type=submit],input[type=button],input[type=reset]")
+						.button();
+				$(".match-card").hover(function() {
+					$(".hover-card").show();
+				}, function() {
+					$(".hover-card").hide();
+				}).show();
+				;
+
+				$("#id").on("change", function(event, ui) {
+					var val = $(this).val();
+					if (val && val.length > 0) {
+						$(".employment").show();
+					} else {
+						$(".employment").hide();
+					}
+				});
+
+				$(".date").datepicker();
+			});
+</script>
+<style>
+body {
+	background-color: #ffffff;
+}
+
+h2 {
+	margin-left: 20px;
+	margin-bottom: 0px;
+	margin-top: 10px;
+}
+
+.container {
+	width: 95%;
+	padding: 10px;
+}
+
+.content {
+	min-width: 1000px;
+	max-width: 1200px;
+	position: relative;
+	padding: 26px 16px 16px 16px;
+}
+
+.section-1 {
+	display: table;
+	width: 100%;
+}
+
+.left-col {
+	display: table-cell;
+	vertical-align: top;
+	padding: 20px 10px 0 10px;
+}
+
+.right-col {
+	display: table-cell;
+	min-width: 300px;
+	background-color: #e3ecf4;
+	width: 25%;
+}
+
+.address-col-1 {
+	float: left;
+	width: 530px;
+}
+
+.address-col-2 {
+	float: left;
+	width: 45%;
+}
+
+form label {
+	display: block;
+	float: left;
+	margin-right: 8px;
+	margin-left: 8px;
+	line-height: 24px;
+}
+
+form input[type=text], input[type=password], form input[type=checkbox],
+	form input[type=radio], form .ui-selectmenu-button, form textarea {
+	display: block;
+	float: left;
+	margin-right: 8px;
+}
+
+textarea {
+	background-color: #f8f8f8;
+	border-color: #cccccc;
+	border-style: solid;
+	border-width: 1px;
+	margin-bottom: 10px;
+	padding: 0 10px;
+}
+
+.width-shortest {
+	width: 90px;
+}
+
+input.width-shortest {
+	width: 60px;
+}
+
+.width-short, label.width-short.first {
+	width: 150px;
+}
+
+.width-medium {
+	width: 220px;
+}
+
+.width-long {
+	width: 280px;
+}
+
+.width-longest {
+	width: 400px;
+}
+
+label.first {
+	width: 140px;
+	clear: both;
+}
+
+.address-col-2 .first {
+	width: 120px;
+}
+
+hr {
+	clear: both;
+	width: 100%;
+	float: left;
+	margin: 16px 0 18px 0;
+}
+
+hr.last {
+	margin-bottom: 0;
+}
+
+a.form-link, a.form-link:hover, a.form-link:active {
+	color: #2b4e72;
+	text-decoration: none;
+	float: left;
+}
+
+.remembered-location a, .remembered-location a:hover,
+	.remembered-location a:active {
+	color: #333333;
+	text-decoration: none;
+}
+
+.remembered-location a.view, .remembered-location a.view:hover,
+	.remembered-location a.view:active {
+	color: #2b4e72;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+a.form-link.first {
+	clear: both;
+	margin: 10px 0 8px 100px;
+}
+
+.form-link .icon-nav, .remembered-location .icon-nav {
+	padding: 3px 3px 0 3px;
+	position: relative;
+	bottom: -1px;
+	color: #ffffff;
+	background-color: #42b653;
+	font-size: 12px;
+	margin-right: 3px;
+}
+
+.close-button-form {
+	clear: both;
+}
+
+.attention {
+	float: left;
+	padding: 0 30px;
+	color: #2b4e72;
+}
+
+.attention .icon-nav {
+	float: left;
+	width: 40px;
+	line-height: 40px;
+	font-size: 20px;
+}
+
+.attention .text {
+	float: left;
+	width: 500px;
+}
+
+.right-col h4 {
+	color: #2b4e72;
+	margin: 8px 8px 4px 8px;
+}
+
+.right-col {
+	position: relative;
+}
+
+.buttons-form {
+	float: left;
+	text-align: center;
+	width: 100%;
+}
+
+#id-section {
+	display: none;
+}
+
+#employment-section {
+	display: none;
+}
+
+.remembered-location {
+	position: absolute;
+	top: -68px;
+	right: 0;
+	font-size: 12px;
+	display: none;
+}
+
+.remembered-location .icon-nav {
+	display: inline-block;
+	font-size: 12px;
+	line-height: 12px;
+	height: 12px;
+	padding: 1px;
+	height: 12px;
+}
+
+#autocomplete {
+	left: 172px;
+	position: absolute;
+	top: 51px;
+}
+
+/* a.toggle:hover .icon-nav, a.toggle:hover .icon-nav:before { */
+/* 	background-color: transparent; */
+/* 	color: #aad044; */
+/* } */
+
+/* a.toggle .icon-nav, a.toggle .icon-nav:before { */
+/* 	background-color: transparent; */
+/* 	color: #42b653; */
+/* } */
+.account, #account, #account-type2-button {
+	display: none;
+}
+
+.parent {
+	font-weight: bold;
+	color: #2b4e72;
+}
+
+label.indent {
+	margin-left: 36px;
+	width: auto;
+	margin-right: 16px;
+}
+
+input.first {
+	clear: both;
+}
+
+.employment, form input[type="checkbox"].employment {
+	display: none;
+}
+</style>
+</head>
+<body>
+
+	<div class="container">
+		<form>
+			<div class="section-1">
+				<label class="first">Activity Summary</label> <input id="fee"
+					placeholder="*" class=" width-longest" type="text">
+				<hr>
+				<label class="spacer first" placeholder="*">Report Target ID</label><input
+					type="text" class="width-short spacer" id="id"><label
+					class="parent spacer employment">Mario Ramirez</label> <label
+					class="first employment">Payroll Source</label><input type="checkbox"
+					checked name="employment" class="employment"><label
+					class="parent employment">Fremont Location (Premium
+					Meatpacking of Nebraska, Inc) </label>
+				<!--  -->
+				<label class="first employment">&nbsp;</label><input type="checkbox"
+					name="employment" class="employment"><label
+					class="parent employment">Garden Harvest Freemont (Veggies,
+					Inc) </label>
+				<hr>
+				<!--  -->
+				<label class="first">Activity Period</label><label>From</label><input
+					type="text" class="date width-short"><label>to</label><input
+					type="text" class="date width-short">
+				<!--  -->
+				<label class="first">Total Amount (USD)</label> <input id="amount"
+					type="text" class="width-short"> <label class="first"
+					for="note">Activity Detail</label>
+				<textarea id="note" style="width: 70%; height: 200px"
+					placeholder="*"></textarea>
+				<hr class="last">
+
+			</div>
+		</form>
+	</div>
+
+
+</body>
+</html>

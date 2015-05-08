@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>PGSi - Transaction #12345678</title>
+<link href="css/fonts.css" rel="stylesheet" />
+<link href="css/actions.css" rel="stylesheet" />
+<link href="css/security.css" rel="stylesheet" />
+<link href="css/navigation.css" rel="stylesheet" />
+<link href="css/jquery-ui.min.css" rel="stylesheet" />
+<link href="css/jquery-ui.structure.min.css" rel="stylesheet" />
+<link href="css/pgsi-common.css" rel="stylesheet" />
+<script src="jquery/jquery-1.11.0.min.js"></script>
+<script src="jquery/jquery-ui-1.11.0.min.js"></script>
+<script src="jquery/jquery.datatables.min.js"></script>
+<script>
+	$(document)
+			.ready(
+					function() {
+						$('nav.primary .sub-menu').hide();
+						$('nav.primary li').hover(
+								function() {
+									var that = this;
+									$(this).addClass("menu-hover").find(
+											".sub-menu").show().position({
+										my : "left top",
+										at : "left bottom",
+										of : that,
+										collision : "fit"
+									}).find("li").hover(function() {
+										$(this).addClass("menu-hover")
+									}, function() {
+										//$(this).removeClass("menu-hover")
+									});
+								},
+								function() {
+									$(this).removeClass("menu-hover").find(
+											".sub-menu").hide();
+								});
+						$('.add_loc_link').click(function() {
+							top.location.href = "location_add.html";
+						});
+
+						$(".btn").button();
+						$("#tabs").tabs();
+						var hideAllHovers = function() {
+							$(".hover-card").hide();
+						}
+						$("#emp-hover-ref").hover(function() {
+							hideAllHovers();
+							$("#employment-hover").show();
+						}, function() {
+						});
+						$("#transfer-hover-ref").hover(function() {
+							hideAllHovers();
+							$("#transfer-hover").show();
+						}, function() {
+						});
+
+						$("#note-hover-ref").hover(function() {
+							hideAllHovers();
+							$("#note-hover").show();
+						}, function() {
+						});
+						$("#risk-hover-ref").hover(function() {
+							hideAllHovers();
+							$("#risk-hover").show();
+						}, function() {
+						});
+						$("#id-hover-ref").hover(function() {
+							hideAllHovers();
+							$("#id-hover").show();
+						}, function() {
+						});
+						hideAllHovers();
+
+						$(".show-secquestion,.hide-secquestion").click(
+								function(e) {
+									e.preventDefault();
+									$(".secquestion, .show-secquestion")
+											.toggle();
+								});
+
+						$(".show-pin,.hide-pin").click(function(e) {
+							e.preventDefault();
+							$(".pin, .show-pin").toggle();
+							$(".pin-verify").hide();
+						});
+
+						$("#link-edit-memberinfo")
+								.click(
+										function(e) {
+											e.preventDefault();
+											var close = function() {
+												$("#dialog-edit-memberinfo")
+														.dialog('close');
+											}
+											$("#dialog-edit-memberinfo")
+													.dialog(
+															{
+																modal : true,
+																open : function(
+																		event,
+																		ui) {
+																	$(
+																			"#dialog-edit-memberinfo select")
+																			.selectmenu();
+																},
+																buttons : {
+																	"Cancel" : close,
+																	"Save" : close,
+																},
+																width : 970
+															});
+										});
+						$("#link-edit-recipientinfo")
+								.click(
+										function(e) {
+											e.preventDefault();
+											var close = function() {
+												$("#dialog-edit-recipientinfo")
+														.dialog('close');
+											}
+											$("#dialog-edit-recipientinfo")
+													.dialog(
+															{
+																modal : true,
+																open : function(
+																		event,
+																		ui) {
+																	$(
+																			"#dialog-edit-recipientinfo select")
+																			.selectmenu();
+																},
+																buttons : {
+																	"Cancel" : close,
+																	"Save" : close
+																},
+																width : 970
+															});
+										});
+
+						$(".link-ach-details").click(function(e) {
+							e.preventDefault();
+							var close = function() {
+								$("#dialog-ach-details").dialog('close');
+							}
+							$("#dialog-ach-details").dialog({
+								modal : true,
+								open : function(event, ui) {
+								},
+								buttons : {
+									"Close" : close
+								},
+								width : 970
+							});
+						});
+
+						$("#link-pending")
+								.click(
+										function(e) {
+											e.preventDefault();
+											alert("This option is only available before the batch is approved.")
+											var close = function() {
+												$("#dialog-pending").dialog(
+														'close');
+											}
+											$("#dialog-pending").dialog({
+												modal : true,
+												open : function(event, ui) {
+												},
+												buttons : {
+													"Yes" : close,
+													"No" : close
+												},
+												width : 600
+											});
+										});
+
+						$("#link-cancel").click(function(e) {
+							e.preventDefault();
+							var close = function() {
+								$("#dialog-cancel").dialog('close');
+							}
+							$("#dialog-cancel").dialog({
+								modal : true,
+								open : function(event, ui) {
+								},
+								buttons : {
+									"Yes" : close,
+									"No" : close
+								},
+								width : 600
+							});
+						});
+
+						$("#link-edit-transfer")
+								.click(
+										function(e) {
+											e.preventDefault();
+											var close = function() {
+												$("#dialog-edit-transfer")
+														.dialog('close');
+											}
+											$("#dialog-edit-transfer")
+													.dialog(
+															{
+																modal : true,
+																open : function(
+																		event,
+																		ui) {
+																	$(
+																			"#dialog-edit-transfer select")
+																			.selectmenu();
+																	var hideAll = function() {
+																		$(
+																				".account, #account-type2-button")
+																				.hide();
+																	};
+																	$("#method")
+																			.on(
+																					"selectmenuchange",
+																					function(
+																							event,
+																							ui) {
+																						hideAll();
+																						switch (ui.item.value) {
+																						case 'D':
+																							$(
+																									".account, #account-type2-button")
+																									.show();
+																							break;
+																						default:
+																						}
+																					});
+																},
+																buttons : {
+																	"Cancel" : close,
+																	"Update Transaction Only" : close,
+																	"Update Transaction and Transfer Settings" : close
+																},
+																width : 970
+															});
+										});
+
+					});
+</script>
+<style>
+h2, .buttons {
+	margin: 10px;
+}
+
+img {
+	margin-top: 5px;
+}
+
+.content {
+	min-width: 1140px;
+	padding: 24px 16px;
+	display: table;
+}
+
+.col-all {
+	display: table;
+	float: left;
+	margin-right: 40px;
+}
+
+.col-all.last {
+	margin-right: 8px
+}
+
+.col, .col-all .col1, .col-all .col2, .col-all .col3 {
+	float: left;
+	display: table;
+	padding: 8px 32px 8px 0px;
+}
+
+.label {
+	float: left;
+	width: 150px;
+}
+
+.title {
+	font-size: 110%;
+}
+
+.internal-id {
+	font-size: 85%;
+}
+
+.value {
+	float: left;
+	font-weight: bold;
+	max-width: 200px;
+}
+
+.value ul, .label ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.all {
+	font-weight: bold;
+	width: 100%;
+}
+
+.newline {
+	clear: both;
+}
+
+a.parent.first {
+	float: left;
+	clear: both;
+	margin: 8px 0 0 0;
+}
+
+.parent.form-link {
+	margin: 8px 0;
+}
+
+.spacer {
+	margin-top: 8px;
+}
+
+.all.normal, .all.secondary {
+	font-weight: normal;
+}
+
+hr {
+	clear: both;
+	width: 100%;
+	margin: 8px 0;
+}
+
+.col-all {
+	display: table;
+}
+
+.col-title {
+	display: table-cell;
+	vertical-align: top;
+	height: 100%;
+}
+
+h3 {
+	margin-top: 0;
+}
+
+.col-all h3 {
+	display: block;
+	float: left;
+	margin-right: 15px;
+	margin-bottom: 0;
+}
+
+.double-spacer {
+	margin-top: 20px;
+}
+
+.col-title {
+	width: 150px;
+}
+
+.content a, .content+a:hover, .content a:active {
+	text-decoration: none;
+	color: #2b4e72;
+}
+
+.content .icon-nav:before {
+	background-color: #42b653;
+	color: white;
+}
+
+.content .icon-nav {
+	background-color: #42b653;
+	padding: 2px;
+	margin-right: 3px;
+	height: 14px;
+	position: relative;
+	bottom: -1px;
+	display: inline-block;
+	position: relative;
+}
+
+a.second {
+	margin-left: 8px;
+}
+
+.ui-button .ui-button-text {
+	color: #FFFFFF;
+}
+
+.transfer .col1 .label {
+	width: 240px;
+	padding-right: 8px;
+}
+
+.col3 .label {
+	width: auto;
+	padding-right: 16px;
+}
+
+.internal .label {
+	width: auto;
+	padding-right: 8px;
+}
+
+.internal .value {
+	width: auto;
+	padding-right: 16px;
+}
+
+.internal a {
+	margin-right: 10px;
+	position: relative;
+	bottom: 10px;
+}
+
+.ui-dialog .ui-dialog-content {
+	padding: 0 16px;
+}
+
+hr.top {
+	margin-top: 0;
+}
+
+.address-col-1 {
+	float: left;
+}
+
+.address-col-2 {
+	float: left;
+}
+
+form label {
+	display: block;
+	float: left;
+	margin-right: 8px;
+	margin-left: 8px;
+	line-height: 24px;
+}
+
+form input[type=text], input[type=password], form input[type=checkbox],
+	form input[type=radio], form .ui-selectmenu-button, form textarea {
+	display: block;
+	float: left;
+	margin-right: 8px;
+}
+
+textarea {
+	background-color: #f8f8f8;
+	border-color: #cccccc;
+	border-style: solid;
+	border-width: 1px;
+	margin-bottom: 10px;
+	padding: 0 10px;
+}
+
+.width-shortest {
+	width: 90px;
+}
+
+input.width-shortest {
+	width: 60px;
+}
+
+.width-short, label.width-short.first {
+	width: 150px;
+}
+
+.width-medium {
+	width: 220px;
+}
+
+.width-long {
+	width: 280px;
+}
+
+.width-longest {
+	width: 400px;
+}
+
+label.first {
+	width: 140px;
+	clear: both;
+}
+
+.first {
+	clear: both;
+}
+
+.address-col-2 .first {
+	width: 120px;
+}
+
+hr {
+	clear: both;
+	width: 100%;
+	float: left;
+	margin: 16px 0 18px 0;
+}
+
+hr.last {
+	margin-bottom: 0;
+}
+
+a.form-link, a.form-link:hover, a.form-link:active {
+	color: #2b4e72;
+	text-decoration: none;
+	float: left;
+}
+
+a.form-link.first {
+	clear: both;
+	margin: 10px 0 8px 100px;
+}
+
+.form-link .icon-nav, .remembered-location .icon-nav {
+	padding: 3px 3px 0 3px;
+	position: relative;
+	bottom: -1px;
+	color: #ffffff;
+	background-color: #42b653;
+	font-size: 12px;
+	margin-right: 3px;
+}
+
+.parent {
+	font-weight: bold;
+	color: #2b4e72;
+}
+
+.divider {
+	bottom: 8px;
+	font-size: 24px;
+	margin: 0 16px 0 12px;
+	position: relative;
+}
+
+.comment {
+	color: #666666;
+	font-style: italic;
+	padding-left: 24px;
+}
+
+.icon-nav.bullet, .icon-nav.bullet:before {
+	background: transparent;
+	color: #2b4e72;
+}
+
+.alert {
+	border: 1px solid #c33639;
+	margin: 0 8px 16px 8px;
+	padding: 8px;
+	display: block;
+	float: left;
+	clear: both;
+	width: 95%;
+	background-color: #F5DEDF;
+	width: 95%;
+}
+
+.alert .icon-nav, .alert .icon-nav:before {
+	color: #c33639;
+	float: left;
+	position: relative;
+	bottom: -1px;
+	display: block;
+}
+
+.alert .label {
+	color: #c33639;
+	float: left;
+	margin-left: 8px;
+	font-weight: bold;
+	width: 90%;
+}
+
+.contact-info {
+	float: left;
+	display: none;
+}
+
+#data_list {
+	margin-top: 8px;
+}
+
+span.match {
+	font-weight: bold;
+	border: 1px solid #c33639;
+	color: #c33639;
+	padding: 0 4px;
+}
+
+#account-type-button, #account-type2-button {
+	display: none;
+}
+
+.error-detail .alert {
+	margin-left: 0;
+	margin-top: 16px;
+}
+
+.error-detail .alert ul {
+	list-style-type: disc;
+	margin-left: 24px;
+}
+
+.error-detail .alert .icon-nav, .error-detail .alert .icon-nav:before {
+	background-color: transparent;
+}
+
+a.parent.black {
+	color: black;
+}
+</style>
+</head>
+<body>
+	<header>
+		<ul>
+			<li>Welcome&nbsp;&nbsp;<span class="emphasis">John Demo</span></li>
+			<li class="disabled"><a class="account_link" href="#"
+				title="Coming soon - Account"><span class="icon-user icon-nav"></span>Account</a></li>
+			<li class="disabled"><a class="help_link" href="#"
+				title="Coming soon - Help"><span class="icon-question icon-nav"></span>Help</a></li>
+			<li><a class="signout_link" href="login.html" title="Sign out"><span
+					class="icon-unlock icon-nav"></span>Sign Out</a></li>
+		</ul>
+	</header>
+	<nav class="primary">
+		<ul class="main-menu">
+			<li class="menu-home"><a href="dashboard.html"
+				class="icon-home icon-nav" title="Home"></a></li>
+			<li><a href="organization_list.html"
+				title="Organizations and Locations" data-title="Customers">Customers</a>
+				<ul class="sub-menu">
+					<li><a href="organization_add.html" title="Add Organization"
+						data-title="Add Organization">Add Organization</a></li>
+					<li><a href="organization_list.html"
+						data-title="Find Organization" title="Find Organization">Find
+							Organization</a></li>
+					<li><a href="location_add.html" title="Add Location"
+						data-title="Add Location">Add Location</a></li>
+					<li><a href="location_list.html" title="Find Location"
+						data-title="Find Location">Find Location</a></li>
+				</ul></li>
+			<li><a href="member_list.html" class=""
+				title="Members and Recipients" data-title="Members">Members</a>
+				<ul class="sub-menu">
+					<li><a href="member_add_main.html" title="Add Member"
+						data-title="Add Member">Add Member</a></li>
+					<li><a href="member_list.html" data-title="Find Member"
+						title="Find Member">Find Member</a></li>
+					<li><a href="recipient_list.html" title="Find Recipient"
+						data-title="Find Recipient">Find Recipient</a></li>
+				</ul></li>
+			<li class="menu-active"><a href="payment_overview.html" class=""
+				title="Payments" data-title="Payments">Payments</a>
+				<ul class="sub-menu">
+				<li><a href="batch_list.html" data-title="Batches"
+						title="Batches">Batches</a></li>
+					<li><a href="transaction_list.html"
+						data-title="Find Transaction" title="Find Transaction">Find
+							Transaction</a></li>
+					<!--<li><a href="transaction_add.html" data-title="Batches"-->
+						<!--title="Batches">Add New Transaction</a></li>-->
+					<li><a href="funding_list.html" title="Payer Funding"
+						data-title="Payer Funding">Payer Funding</a></li>
+					<li><a href="paycycle_list.html" title="Upcoming Pay Dates"
+						data-title="Upcoming Pay Dates">Upcoming Pay Dates</a></li>
+					<!--<li><a href="currency_purchase.html" title="Purchase Currency"-->
+					<!--data-title="Purchase Currency">Purchase Currency</a></li>-->
+				</ul></li>
+			<li><a href="compliance_overview.html"
+				class="" title="Compliance Monitoring and Reporting"
+				data-title="Compliance">Compliance</a>
+				<ul class="sub-menu">
+					<li><a href="sdn_list.html" title="SDN Matches"
+						data-title="SDN Matches">SDN Matches</a></li>
+					<li><a href="sar_list.html" data-title="SAR Reports"
+						title="SAR Reports">SAR Reports</a></li>
+					<!-- 					<li><a href="compliance_analytics_list.html" -->
+					<!-- 						title="Compliance -->
+					<!-- 							Analytics" -->
+					<!-- 						data-title="Compliance -->
+					<!-- 							Analytics">Compliance Analytics</a></li> -->
+				</ul></li>
+			<li><a href="profile_list.html" class="" title="Pricing"
+				data-title="Pricing">Pricing</a>
+				<ul class="sub-menu">
+					<li><a href="profile_list.html" title="Find Pricing Profile">Find
+							Pricing Profile</a></li>
+					<li><a href="profile_add.html" title="Add New Pricing Profile">Add
+							New Pricing Profile</a></li>
+				</ul></li>
+			<li class="disabled"><a href="#" class=""
+				title="Coming soon - Analytics and Reporting" data-title="Analytics">Analytics</a></li>
+			<li class="disabled"><a href="#" class=""
+				title="Coming soon - Users and User Settings" data-title="Users">Users</a></li>
+			<li class="disabled"><a href="#" class=""
+				title="Coming soon - System Settings" data-title="System">System</a></li>
+			<li class="last"><a href="#" class="" id="link-sar"
+				title="Report Suspicious Activity"
+				data-title="Report Suspicious Activity&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"><span
+					class="icon-security icon-eye-1"></span>Report Suspicious Activity</a></li>
+		</ul>
+	</nav>
+	<nav class="secondary">
+		<span><a href="payment_overview.html" title="Payments">Payments</a></span><span
+			class="icon-nav icon-angle-right bullet"></span><span><a
+			href="batch_list.html" title="Find Batch">Find Batch</a></span><span
+			class="icon-nav icon-angle-right bullet"></span><span><a
+			href="batch_view_approval.html" title="Batch #12345">Batch #12345</a></span><span
+			class="icon-nav icon-angle-right bullet"></span><span>Transaction
+			#12345667</span>
+	</nav>
+	<h2>Transaction #12345667 (Seized)</h2>
+	<div class="content">
+		<div class="internal error-detail">
+			<div class="newline label">Transaction ID</div>
+			<div class="value">#TAB-67890</div>
+			<div class="label">Status</div>
+			<div class="value">Seized</div>
+			<div class="label">Confirmation Number</div>
+			<div class="value">#4444123452</div>
+			<div class="alert"
+				style="clear: none; width: auto; margin-left: 24px; margin-top: -5px;">
+				<span class="icon-nav icon-exclamation-triangle"></span>
+				<div class=" label" style="width: auto">Request was seized by ACH Provider.</div>
+			</div>
+		</div>
+		<hr>
+
+		<div class="col-all newline">
+			<h3>Batch Info</h3>
+			<a href="batch_view_approval.html" class="parent newline form-link">Batch
+				#12345 - ACH Processing</a>
+			<div class="newline label">Location</div>
+			<div class="value" style="max-width: 1000px">Fremont Location,
+				Nebraska Premium Meatpacking Inc.</div>
+			<div class="newline label">Region</div>
+			<div class="value">Omaha, NE, USA</div>
+			<div class="label newline">Created</div>
+			<div class="value">12/12/2014 2:45 am</div>
+			<div class="newline label">Transfer</div>
+			<div class="value">12/15/2014</div>
+		</div>
+
+		<hr>
+		<!-- 		<div class="col-all error-detail"> -->
+		<!-- 			<div class="alert" style="width: 100%;"> -->
+		<!-- 				<span class="icon-nav icon-exclamation-triangle"></span> -->
+		<!-- 				<div class="label" style="width: 90%; font-weight: normal"> -->
+		<!-- 					Changes to Member, Recipient and Transfer Setting information will -->
+		<!-- 					not affect this transaction. Use the <b>Request Order Modification</b> option if you need to change recipient information.</div> -->
+		<!-- 			</div> -->
+		<!-- 		</div> -->
+		<div class="col-all newline">
+
+			<h3>Member</h3>
+			<!-- 			<a href="#" title="Edit Member Information" id="link-edit-memberinfo" -->
+			<!-- 				class="form-link"><span class="icon-nav icon-pencil"></span>Edit</a> -->
+			<a nohref class="parent first black">Maria Orlando Garcia (#MAB-12456)</a>
+			<div class="col1 first">
+				<div class="newline label">First Name</div>
+				<div class="value">Maria</div>
+				<div class="newline label">Middle Name</div>
+				<div class="value"></div>
+				<div class="newline label">Last Name</div>
+				<div class="value">Orlando</div>
+				<div class="newline label">Mother's Maiden Name</div>
+				<div class="value">Garcia</div>
+				<!-- 			</div> -->
+				<!-- 			<div class="col2"> -->
+				<div class="newline label">Address</div>
+				<div class="value ">12345 Main St</div>
+				<div class="newline label">City</div>
+				<div class="value">Omaha</div>
+				<div class="newline label">State/Province</div>
+				<div class="value">NE</div>
+				<div class="newline label">Postal Code</div>
+				<div class="value">68111</div>
+				<div class="newline label">Country</div>
+				<div class="value">USA</div>
+				<!-- 			</div> -->
+				<!-- 			<div class="col3"> -->
+				<div class="newline label">Phone</div>
+				<div class="value">+1 4027776666</div>
+			</div>
+		</div>
+		<!-- 		<hr> -->
+		<div class="col-all">
+			<h3>Recipient</h3>
+			<!--	<a href="#" title="Edit Member Information"
+				id="link-edit-recipientinfo" class="form-link"><span
+				class="icon-nav icon-pencil"></span>Edit</a> -->
+			<a nohref class="parent first black">Mario Ortega Fernandez
+				(#RAB-12456)</a>
+			<div class="col1 newline">
+				<div class="newline label">First Name</div>
+				<div class="value ">Mario</div>
+				<div class="newline label">Middle Name</div>
+				<div class="value"></div>
+				<div class="newline label">Last Name</div>
+				<div class="value">Ortega</div>
+				<div class="newline label">Mother's Maiden Name</div>
+				<div class="value">Fernandez</div>
+				<!-- 			</div> -->
+				<!-- 			<div class="col2 "> -->
+				<div class="newline label">Address</div>
+				<div class="value ">Camino Los Abuelos 12345 Col. Atlatilco</div>
+				<div class="newline label">City</div>
+				<div class="value">Mexico</div>
+				<div class="newline label">State/Province</div>
+				<div class="value">D.F.</div>
+				<div class="newline label">Postal Code</div>
+				<div class="value">68111</div>
+				<div class="newline label">Country</div>
+				<div class="value">Mexico</div>
+				<!-- 			</div> -->
+				<!-- 			<div class="col3"> -->
+				<div class="newline label">Phone</div>
+				<div class="value">+1 4027776666</div>
+			</div>
+		</div>
+		<!-- 		<hr> -->
+		<div class="col-all transfer error-detail">
+			<h3>Transfer</h3>
+			<a nohref class="parent first black">#TAB-124568</a>
+			<div class="col2 newline">
+				<div class="newline label">Total Amount (USD)</div>
+				<div class="value ">250.00</div>
+				<div class="newline label">Fee (USD)</div>
+				<div class="value">5.99</div>
+				<div class="newline label">Transfer Amount (USD)</div>
+				<div class="value">244.01</div>
+				<!-- 			</div> -->
+				<!-- 			<div class="col1 "> -->
+				<div class="newline label">Destination Currency</div>
+				<div class="value">MXN</div>
+				<div class="newline label">Effective Exchange Rate</div>
+				<div class="value">12.3111%</div>
+				<div class="newline label">Transfer Amount (MXN)</div>
+				<div class="value">431.78</div>
+				<!-- 			</div> -->
+				<!-- 			<div class="col2 "> -->
+				<div class="newline label">Destination Country</div>
+				<div class="value ">Mexico</div>
+				<div class="newline label">Payer</div>
+				<div class="value">Bank of Mexico</div>
+				<div class="newline label">Transaction Method</div>
+				<div class="value">In Account</div>
+				<div class="newline label">Account Number</div>
+				<div class="value">1234567899</div>
+
+			</div>
+		</div>
+		<hr>
+		<div class="col-all trans-hist">
+			<div class="col1 newline">
+				<h3>Transaction History</h3>
+				<div class="label newline spacer" style="width: auto">
+					<span class="icon-nav icon-angle-right bullet"></span><b>Exception
+						- PGSi Validation</b> <a href="#" class="link-ach-details"
+						title="View Details"><span class="icon-nav icon-search-find"></span></a>
+					12/12/2014 12:34 am by System
+				</div>
+				<div class="label newline spacer" style="width: auto">
+					<span class="icon-nav icon-angle-right bullet"></span><b>Pending
+						Approval</b> 12/12/2014 8:34 am by PGSi User
+				</div>
+				<div class="label newline spacer" style="width: auto">
+					<span class="icon-nav icon-angle-right bullet"></span><b>Approved</b>
+					12/12/2014 8:34 am by PGSi User<br> <span class="comment">This
+						is an optional approval comment.</span>
+				</div>
+				<div class="label newline spacer" style="width: auto">
+					<span class="icon-nav icon-angle-right bullet"></span><b>Exception
+						Order Request Rejected [Data Error SALE-9024] <a href="#"
+						class="link-ach-details" title="View Details"><span
+							class="icon-nav icon-search-find"></span></a>
+					</b> 12/12/2014 10:34 am
+				</div>
+				<div class="label newline spacer" style="width: auto">
+					<span class="icon-nav icon-angle-right bullet"></span><b>Order
+						Pending - ACH Provider is reviewing order [Pending Reason
+						SALE-9999]<a href="#" class="link-ach-details"
+						title="View Details"><span class="icon-nav icon-search-find"></span></a>
+					</b> 12/12/2014 10:34 am
+				</div>
+				<div class="label newline spacer" style="width: auto">
+					<span class="icon-nav icon-angle-right bullet"></span><b>Seized - ACH Status Update </b> 12/12/2014 10:34 am
+				</div>
+			</div>
+		</div>
+		<br> <br>
+	</div>
+
+
+	<footer>
+		<div class="left">&copy; 2014 Prosperitas Global Solutions, Inc.
+			All Rights Reserved.</div>
+		<div class="right">Version 1.00.00 Build 00000</div>
+	</footer>
+
+	<div id="dialog-ach-details" style="display: none;"
+		title="View Error Details">
+		<hr class="top">
+		<!-- Under the penalty of DEATH - Do NOT user iframes like this in the real product! -->
+		<iframe src="transaction_validation_details.html" frameBorder="0"
+			scrolling="yes" width="100%" height="600px"></iframe>
+		<hr class="last">
+
+	</div>
+	<div id="dialog-edit-memberinfo" style="display: none;"
+		title="Edit Member Information for Transaction #[99999]">
+		<form>
+			<hr class="top">
+
+
+			<label class="first">First Name</label> <input id="firstname"
+				class="required width-long" placeholder="*" type="text">
+			<!--  -->
+			<label>Middle Name</label> <input id="middlename"
+				class="width-medium" type="text">
+			<!--  -->
+			<label class="first">Last Name</label> <input id="lastname"
+				class="required width-long" placeholder="*" type="text"> <label
+				class="">Mother's Maiden Name</label> <input id="mmname"
+				class="required width-long" placeholder="*" type="text">
+
+			<hr>
+			<!--  Address -->
+
+			<div class="address-col-1">
+
+				<!--  -->
+				<label class="first" for="street-address-line-1">Street
+					Address</label> <input aria-required="true" id="street-address-line-1"
+					name="streetAddressLine1" class="required width-long"
+					placeholder="*" type="text">
+				<!--  -->
+				<label class="first" for="street-address-line-2">&nbsp;</label> <input
+					id="street-address-line-2" name="streetAddressLine2" type="text"
+					class="width-long">
+				<!--  -->
+				<label class="first" for="street-address-line-3">&nbsp;</label> <input
+					class="width-long" id="street-address-line-3"
+					name="streetAddressLine3" type="text">
+				<!--  -->
+				<label class="first" for="street-address-line-4">&nbsp;</label> <input
+					class="width-long" id="street-address-line-4"
+					name="streetAddressLine4" type="text">
+			</div>
+			<!--  -->
+			<div class="address-col-2">
+				<label class="first" for="country-button">Country</label> <select
+					class="required width-medium" name="country" id="country">
+					<option></option>
+					<option value="USA">United States of America</option>
+					<option value="MEX">Mexico</option>
+				</select>
+				<!--  -->
+				<label class="first" for="city">City</label> <input
+					style="width: 233px;" id="city" name="city" class="required"
+					placeholder="*" type="text">
+				<!--  -->
+				<label class="first" for="state-button">State/Province</label> <select
+					aria-required="true" name="state" id="state"
+					class="required width-medium">
+					<option></option>
+				</select>
+				<!--  -->
+				<label class="first" for="zip-postal-code">Zip/Postal Code</label> <input
+					type="text" id="zip-postal-code" class="required" placeholder="*">
+
+			</div>
+			<hr>
+			<label class="first" for="phone-type">Phone Type</label> <select
+				id="phoneType" class="phone-type required phone width-shortest">
+				<option></option>
+				<option value="2">Home</option>
+				<option value="5">Work</option>
+				<option value="8">Cell</option>
+			</select>
+			<!--  -->
+			<label for="phone-country">Number</label> <select name="phoneCountry"
+				class="phone-country width-shortest">
+				<option></option>
+				<option>+1 (US)</option>
+			</select>&nbsp;
+			<!--  -->
+			<input name="phoneNumber" class="phone-number required phone "
+				style="width: 110px" placeholder="*" type="text">
+			<!--  -->
+			<label for="phone-extension">Extension</label> <input
+				class="phone-extension width-shortest" name="phoneExtension"
+				type="text">
+			<!--  -->
+
+			<input name="vehicle" value="Car" type="checkbox"><label
+				class="checkboxlabel">Primary</label>
+			<!--  -->
+			<a href="#" title="Remove this phone number" class="form-link lower"><span
+				class="icon-nav icon-remove"></span>Remove</a>
+			<hr>
+			<label class="first" for="note">Note</label>
+			<textarea id="note" style="width: 70%"></textarea>
+			<hr class="last">
+		</form>
+	</div>
+
+	<div id="dialog-edit-recipientinfo" style="display: none;"
+		title="Edit Recipient Information for Transaction #[99999]">
+		<form>
+			<hr class="top">
+			<div class="alert">
+				<span class="icon-nav icon-exclamation-triangle"></span>
+				<div class="label">Changes to the recipient's information will
+					be saved to the recipient record.</div>
+			</div>
+			<label class="first">First Name</label> <input id="firstname"
+				class="required width-long" placeholder="*" type="text">
+			<!--  -->
+			<label>Middle Name</label> <input id="middlename"
+				class="width-medium" type="text">
+			<!--  -->
+			<label class="first">Last Name</label> <input id="lastname"
+				class="required width-long" placeholder="*" type="text"> <label
+				class="">Mother's Maiden Name</label> <input id="mmname"
+				class="required width-long" placeholder="*" type="text">
+
+			<hr>
+			<!--  Address -->
+
+			<div class="address-col-1">
+
+				<!--  -->
+				<label class="first" for="street-address-line-1">Street
+					Address</label> <input aria-required="true" id="street-address-line-1"
+					name="streetAddressLine1" class="required width-long"
+					placeholder="*" type="text">
+				<!--  -->
+				<label class="first" for="street-address-line-2">&nbsp;</label> <input
+					id="street-address-line-2" name="streetAddressLine2" type="text"
+					class="width-long">
+				<!--  -->
+				<label class="first" for="street-address-line-3">&nbsp;</label> <input
+					class="width-long" id="street-address-line-3"
+					name="streetAddressLine3" type="text">
+				<!--  -->
+				<label class="first" for="street-address-line-4">&nbsp;</label> <input
+					class="width-long" id="street-address-line-4"
+					name="streetAddressLine4" type="text">
+			</div>
+			<!--  -->
+			<div class="address-col-2">
+				<label class="first" for="country-button">Country</label> <select
+					class="required width-medium" name="country" id="country">
+					<option></option>
+					<option value="USA">United States of America</option>
+					<option value="MEX">Mexico</option>
+				</select>
+				<!--  -->
+				<label class="first" for="city">City</label> <input
+					style="width: 233px;" id="city" name="city" class="required"
+					placeholder="*" type="text">
+				<!--  -->
+				<label class="first" for="state-button">State/Province</label> <select
+					aria-required="true" name="state" id="state"
+					class="required width-medium">
+					<option></option>
+				</select>
+				<!--  -->
+				<label class="first" for="zip-postal-code">Zip/Postal Code</label> <input
+					type="text" id="zip-postal-code" class="required" placeholder="*">
+
+			</div>
+			<hr>
+			<label class="first" for="phone-type">Phone Type</label> <select
+				id="phoneType" class="phone-type required phone width-shortest">
+				<option></option>
+				<option value="2">Home</option>
+				<option value="5">Work</option>
+				<option value="8">Cell</option>
+			</select>
+			<!--  -->
+			<label for="phone-country">Number</label> <select name="phoneCountry"
+				class="phone-country width-shortest">
+				<option></option>
+				<option>+1 (US)</option>
+			</select>&nbsp;
+			<!--  -->
+			<input name="phoneNumber" class="phone-number required phone "
+				style="width: 110px" placeholder="*" type="text">
+			<!--  -->
+			<label for="phone-extension">Extension</label> <input
+				class="phone-extension width-shortest" name="phoneExtension"
+				type="text">
+			<!--  -->
+
+			<input name="vehicle" value="Car" type="checkbox"><label
+				class="checkboxlabel">Primary</label>
+			<!--  -->
+			<a href="#" title="Remove this phone number" class="form-link lower"><span
+				class="icon-nav icon-remove"></span>Remove</a>
+			<hr>
+			<label class="first" for="note">Note</label>
+			<textarea id="note" style="width: 70%"></textarea>
+			<hr class="last">
+		</form>
+	</div>
+
+
+	<div id="dialog-edit-transfer" style="display: none"
+		title="Edit Transfer Details for Transaction #[9999999]">
+		<form>
+			<hr class="top">
+			<!--  -->
+			<label class="first">Total Amount (USD)</label> <input id="amount"
+				class="required width-short" placeholder="*" type="text">
+			<!--  -->
+			<label class="first">Pricing Plan</label> <select id="type"
+				class="width-short">
+				<option></option>
+				<option>Mexico General</option>
+				<option>Mexico City</option>
+			</select> <label class="">Plan Category</label><select id="pricing"
+				class="width-short">
+				<option></option>
+				<option>Silver</option>
+				<option>Gold</option>
+				<option>Platinum</option>
+			</select>
+			<!--  -->
+			<label class="first">Promotional Fee (USD)</label> <input id="fee"
+				class=" width-shortest" type="text"> <label> Expires
+			</label> <input id="fee-exp" class=" width-short date" type="text">
+			<!--  -->
+			<!--  -->
+			<label class="first">Destination Country</label><select
+				id="destcountry" class="width-medium">
+				<option></option>
+				<option>Mexico</option>
+				<option>Brazil</option>
+			</select>
+			<!--  -->
+			<label>Destination State/Province</label><select id="destcountry"
+				class="width-medium">
+				<option></option>
+				<option>Region 1</option>
+				<option>Region 2</option>
+			</select>
+			<!--  -->
+			<label class="first">Destination Currency</label><select
+				id="currency" class="width-short">
+				<option></option>
+				<option>MXN</option>
+				<option>BRL</option>
+			</select> <label class="first">Transfer Method</label> <select id="method"
+				class="width-medium">
+				<option></option>
+				<option value="HD">Home Delivery</option>
+				<option value="D">Deposit</option>
+				<option value="C">Cash</option>
+				<option value="DC">Directed Cash</option>
+			</select>
+			<!--  -->
+			<label class="">Payer</label> <select id="payer" class="width-medium">
+				<option></option>
+				<option>Payer 1</option>
+				<option>Payer 1</option>
+			</select>
+
+			<!--  -->
+			<hr class="account" style='display: none;'>
+			<label class="first account" style="display: none">Account
+				Number</label><input type="text" class="width-medium account"
+				style="display: none" id="account"></input> <label class="account"
+				style="display: none">Account Type</label> <select
+				id="account-type2" class="width-medium" style="display: none">
+				<option></option>
+				<option>Savings</option>
+				<option>Checking</option>
+				<option>Account Number</option>
+				<option>Cuenta Clabe</option>
+				<option>Card Number</option>
+				<option>Interest Checking</option>
+				<option>Money Market</option>
+				<option>Mobile Phone Number</option>
+			</select>
+			<hr>
+			<label class="first" for="note">Note</label>
+			<textarea id="note" style="width: 70%"></textarea>
+			<hr class="last">
+		</form>
+	</div>
+
+
+	<div id="dialog-pending" title="Return Transaction to Pending"
+		style="display: none">
+		<form>
+			<hr class="top">
+			<div class="alert">
+				<span class="icon-nav icon-exclamation-triangle"></span>
+				<div class="label">
+					Do you want to return this transaction to <b>Pending</b>?
+				</div>
+			</div>
+			<div class="label first" style="width: 70px">Comment</div>
+			<textarea class="" style="width: 450px"></textarea>
+			<hr class="last">
+		</form>
+	</div>
+
+	<div id="dialog-cancel" title="Cancel Transaction"
+		style="display: none">
+		<form>
+			<hr class="top">
+			<div class="alert">
+				<span class="icon-nav icon-exclamation-triangle"></span>
+				<div class="label">Do you want to cancel this transaction?</div>
+			</div>
+			<div class="label first" style="width: 70px">Comment</div>
+			<textarea class="" style="width: 450px" placeholder="*"></textarea>
+			<hr class="last">
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,880 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>PGSi Batch #12345</title>
+<link href="css/fonts.css" rel="stylesheet" />
+<link href="css/actions.css" rel="stylesheet" />
+<link href="css/security.css" rel="stylesheet" />
+<link href="css/navigation.css" rel="stylesheet" />
+<link href="css/jquery-ui.min.css" rel="stylesheet" />
+<link href="css/jquery-ui.structure.min.css" rel="stylesheet" />
+<link href="css/pgsi-common.css" rel="stylesheet" />
+<script src="jquery/jquery-1.11.0.min.js"></script>
+<script src="jquery/jquery-ui-1.11.0.min.js"></script>
+<script src="jquery/jquery.datatables.min.js"></script>
+<script>
+	function showDeleteDialog(obj) {
+		$(obj).append("<div id='delete_dialog' style='display:none'></div>");
+		$("#delete_dialog").dialog({
+			title : "This styling/content definitely needs more work",
+			modal : true,
+			zIndex : 10000,
+			autoOpen : true,
+			width : 'auto',
+			resizable : false,
+			buttons : {
+				Delete : function() {
+					$(this).dialog("close");
+					$(this).remove();
+				},
+				Cancel : function() {
+					$(this).dialog("close");
+					$(this).remove();
+				}
+			}
+
+		});
+	};
+	$(document)
+			.ready(
+					function() {
+						$('nav.primary .sub-menu').hide();
+						$('nav.primary li').hover(
+								function() {
+									var that = this;
+									$(this).addClass("menu-hover").find(
+											".sub-menu").show().position({
+										my : "left top",
+										at : "left bottom",
+										of : that,
+										collision : "fit"
+									}).find("li").hover(function() {
+										$(this).addClass("menu-hover")
+									}, function() {
+										//$(this).removeClass("menu-hover")
+									});
+								},
+								function() {
+									$(this).removeClass("menu-hover").find(
+											".sub-menu").hide();
+								});
+
+						$('.add_loc_link').click(function() {
+							top.location.href = "member_add_empl.html";
+						});
+						//http://datatables.net/reference/option/language
+						$('#data_list')
+								.dataTable(
+										{
+											dom : '<"list_header"ipl><t><"list_footer"ipl>',
+											paging : true,
+											pagingType : "full",
+											iDisplayLength : 25,
+											language : {
+												paginate : {
+													first : "a",
+													last : "b",
+													next : "g",
+													previous : "f"
+												},
+												lengthMenu : "_MENU_ records per page",
+												loadingRecords : "Loading...",
+												processing : "Processing...",
+												zeroRecords : "No matching records found",
+												info : "Showing _START_ to _END_ of _TOTAL_ matching records. (SDN/SAR summary goes here.)"
+											},
+											drawCallback : function(settings) {
+												$(".dataTables_length select")
+														.outerWidth(60)
+														.selectmenu();
+												$(
+														"#data_list .actioncell .yes, #link-approve-tx")
+														.click(
+																function(e) {
+																	e
+																			.preventDefault();
+																	var close = function() {
+																		$(
+																				"#dialog-approve-tx")
+																				.dialog(
+																						'close');
+																	}
+																	$(
+																			"#dialog-approve-tx")
+																			.dialog(
+																					{
+																						modal : true,
+																						open : function(
+																								event,
+																								ui) {
+																						},
+																						buttons : {
+																							"Cancel" : close,
+																							"Save" : close
+																						},
+																						width : 650
+																					});
+
+																});
+												$(
+														"#data_list .actioncell .no, #link-disapprove-tx")
+														.click(
+																function(e) {
+																	e
+																			.preventDefault();
+
+																	var close = function() {
+																		$(
+																				"#dialog-disapprove-tx")
+																				.dialog(
+																						'close');
+																	}
+																	$(
+																			"#dialog-disapprove-tx")
+																			.dialog(
+																					{
+																						modal : true,
+																						open : function(
+																								event,
+																								ui) {
+																						},
+																						buttons : {
+																							"Cancel" : close,
+																							"Save" : close
+																						},
+																						width : 650
+																					});
+																});
+
+											}
+										});
+						$("#link-cancel-batch").click(function(e) {
+							e.preventDefault();
+
+							var close = function() {
+								$("#dialog-cancel-batch").dialog('close');
+							}
+							$("#dialog-cancel-batch").dialog({
+								modal : true,
+								open : function(event, ui) {
+								},
+								buttons : {
+									"Cancel" : close,
+									"Save" : close
+								},
+								width : 650
+							});
+						});
+
+						$("#link-approve-batch").click(function(e) {
+							e.preventDefault();
+
+							var close = function() {
+								$("#dialog-approve-batch").dialog('close');
+							}
+							$("#dialog-approve-batch").dialog({
+								modal : true,
+								open : function(event, ui) {
+								},
+								buttons : {
+									"Cancel" : close,
+									"Save" : close
+								},
+								width : 650
+							});
+						});
+						$(".filter select").selectmenu();
+						$("input[type=submit],input[type=reset]").button();
+						$('#data_list input[type=checkbox]').change(function() {
+							if (this.checked) {
+								$(this).closest("tr").addClass('selected');
+							} else {
+								$(this).closest("tr").removeClass('selected');
+							}
+						});
+						$(".btn").button();
+
+					});
+</script>
+<style>
+#data_list .multiples a {
+	display: block;
+}
+
+.second_org {
+	padding-top: 8px;
+}
+
+.data #data_list .icon-sort {
+	display: none;
+}
+
+table .btn .ui-button-text {
+	color: white;
+	text-decoration: none;
+	padding: 1px 2px;
+}
+
+.sdn1 input[type=checkbox], .sdn2 input[type=checkbox] {
+	display: none;
+}
+
+.est {
+	font-style: italic
+}
+
+.spacer {
+	margin-top: 16px;
+}
+
+.summary {
+	float: left;
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	color: #333333;
+	width: 100%;
+	display: table;
+	margin: 0 0 16px 0;
+}
+
+.summary a, .label, .value, .summary input[type=checkbox], .summary .btn
+	{
+	float: left;
+}
+
+.btn {
+	margin-top: 16px;
+}
+
+.label {
+	margin-right: 8px;
+}
+
+.batch-summary {
+	float: left;
+	margin: 8px;
+	padding: 8px;
+}
+
+.batch-summary .label {
+	width: 115px;
+}
+
+.batch-summary .label.auto {
+	width: auto;
+}
+
+.fund-summary {
+	float: left;
+	margin: 8px;
+	padding: 8px;
+}
+
+.fund-summary .label {
+	width: 145px;
+	margin-right: 0;
+}
+
+.fund-summary .value {
+	width: 70px;
+	text-align: right;
+}
+
+.tx-summary {
+	float: left;
+	margin: 8px;
+	padding: 8px;
+}
+
+.tx-summary h3 {
+	float: left;
+	margin-right: 16px;
+}
+
+.batch-actions {
+	float: left;
+	margin: 8px;
+	padding: 8px;
+}
+
+.first {
+	clear: both;
+}
+
+h3 {
+	margin-top: 0;
+}
+
+.header {
+	display: table-row;
+}
+
+.action .icon-nav {
+	background-color: transparent;
+	color: green;
+}
+
+hr {
+	width: 100%;
+}
+
+hr.top {
+	margin-top: 0;
+}
+
+hr.last {
+	margin-bottom: 0;
+}
+
+.first {
+	clear: both;
+}
+
+.value {
+	font-weight: bold;
+}
+
+.filter h4 {
+	width: 195px;
+}
+
+#data_list td.actioncell a .icon-nav {
+	display: inline-block;
+	font-size: 18px;
+	height: 18px;
+	padding: 2px;
+	width: 18px;
+}
+
+form .label {
+	float: left;
+}
+
+form textarea {
+	display: block;
+	float: left;
+	margin-right: 8px;
+	background-color: #f8f8f8;
+	border-color: #cccccc;
+	border-style: solid;
+	border-width: 1px;
+	margin-bottom: 10px;
+	padding: 0 10px;
+}
+
+.alert {
+	border: 1px solid #c33639;
+	margin: 8px;
+	padding: 8px;
+	display: table;
+	width: 95%;
+	background-color: #F5DEDF;
+}
+
+.alert .icon-nav, .alert .icon-nav:before {
+	color: #c33639;
+	float: left;
+	position: relative;
+	bottom: -1px;
+	display: block;
+}
+
+.alert .label {
+	color: #c33639;
+	float: left;
+	margin-left: 8px;
+	font-weight: bold;
+	width: 90%;
+}
+
+.ui-button.ui-state-disabled {
+	background-color: #f3f3f3;
+	border: 1px solid #cccccc;
+	color: #cccccc;
+}
+
+#data_list tbody a.edit_link {
+	font-weight: normal;
+}
+
+.name {
+	font-weight: bold;
+}
+
+a.form-link, a.form-link:hover, a.form-link:active {
+	color: #2b4e72;
+	float: left;
+	text-decoration: none;
+}
+
+.form-link .icon-nav, .remembered-location .icon-nav {
+	background-color: #42b653;
+	bottom: -1px;
+	color: #ffffff;
+	font-size: 12px;
+	margin-right: 3px;
+	padding: 3px 3px 0;
+	position: relative;
+}
+
+#summary {
+	border-bottom: 1px solid #cccccc;
+	border-collapse: collapse;
+	width: 100%;
+	margin-top: 16px;
+	float: left;
+	clear: both;
+}
+
+#summary thead tr {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	font-weight: bold;
+}
+
+#summary td, #summary th {
+	padding: 5px;
+	text-align: center;
+	vertical-align: top;
+}
+
+#summary td {
+	background-color: #ffffff;
+}
+
+#data_list tr.cancel td, #data_list tr.cancel td a {
+	color: #aaaaaa;
+}
+
+.cancel .amt {
+	font-style: italic;
+}
+
+.label.comment {
+	font-style: italic;
+	width: auto;
+	padding-left: 16px;
+	padding-bottom: 4px;
+}
+
+td.th, th.th {
+border-left: 1px solid #cccccc;
+border-right: 1px solid #cccccc;
+font-weight: bold;
+}
+</style>
+</head>
+<body>
+	<header>
+		<ul>
+			<li>Welcome&nbsp;&nbsp;<span class="emphasis">John Demo</span></li>
+			<li class="disabled"><a class="account_link" href="#"
+				title="Coming soon - Account"><span class="icon-user icon-nav"></span>Account</a></li>
+			<li class="disabled"><a class="help_link" href="#"
+				title="Coming soon - Help"><span class="icon-question icon-nav"></span>Help</a></li>
+			<li><a class="signout_link" href="login.html" title="Sign out"><span
+					class="icon-unlock icon-nav"></span>Sign Out</a></li>
+		</ul>
+	</header>
+	<nav class="primary">
+		<ul class="main-menu">
+			<li class="menu-home"><a href="dashboard.html"
+				class="icon-home icon-nav" title="Home"></a></li>
+			<li><a href="organization_list.html"
+				title="Organizations and Locations" data-title="Customers">Customers</a>
+				<ul class="sub-menu">
+					<li><a href="organization_add.html" title="Add Organization"
+						data-title="Add Organization">Add Organization</a></li>
+					<li><a href="organization_list.html"
+						data-title="Find Organization" title="Find Organization">Find
+							Organization</a></li>
+					<li><a href="location_add.html" title="Add Location"
+						data-title="Add Location">Add Location</a></li>
+					<li><a href="location_list.html" title="Find Location"
+						data-title="Find Location">Find Location</a></li>
+				</ul></li>
+			<li><a href="member_list.html" class="" title="Members and Recipients"
+				data-title="Members">Members</a>
+				<ul class="sub-menu">
+					<li><a href="member_add_main.html" title="Add Member"
+						data-title="Add Member">Add Member</a></li>
+					<li><a href="member_list.html" data-title="Find Member"
+						title="Find Member">Find Member</a></li>
+					<li><a href="recipient_list.html" title="Find Recipient"
+						data-title="Find Recipient">Find Recipient</a></li>
+				</ul></li>
+			<li class="menu-active"><a href="payment_overview.html" class=""
+				title="Payments" data-title="Payments">Payments</a>
+				<ul class="sub-menu">
+					<li><a href="batch_list.html" data-title="Batches"
+						title="Batches">Batches</a></li>
+					<li><a href="transaction_list.html"
+						data-title="Find Transaction" title="Find Transaction">Find
+							Transaction</a></li>
+					<!--<li><a href="transaction_add.html" data-title="Batches"-->
+						<!--title="Batches">Add New Transaction</a></li>-->
+					<li><a href="funding_list.html" title="Payer Funding"
+						data-title="Payer Funding">Payer Funding</a></li>
+					<li><a href="paycycle_list.html" title="Upcoming Pay Dates"
+						data-title="Upcoming Pay Dates">Upcoming Pay Dates</a></li>
+					<!--<li><a href="currency_purchase.html" title="Purchase Currency"-->
+					<!--data-title="Purchase Currency">Purchase Currency</a></li>-->
+				</ul></li>
+			<li><a href="compliance_overview.html"
+				class="" title="Compliance Monitoring and Reporting"
+				data-title="Compliance">Compliance</a>
+				<ul class="sub-menu">
+					<li><a href="sdn_list.html" title="SDN Matches"
+						data-title="SDN Matches">SDN Matches</a></li>
+					<li><a href="sar_list.html" data-title="SAR Reports"
+						title="SAR Reports">SAR Reports</a></li>
+					<!-- 					<li><a href="compliance_analytics_list.html" -->
+					<!-- 						title="Compliance -->
+					<!-- 							Analytics" -->
+					<!-- 						data-title="Compliance -->
+					<!-- 							Analytics">Compliance Analytics</a></li> -->
+				</ul></li>
+			<li><a href="profile_list.html" class="" title="Pricing"
+				data-title="Pricing">Pricing</a>
+				<ul class="sub-menu">
+					<li><a href="profile_list.html" title="Find Pricing Profile">Find
+							Pricing Profile</a></li>
+					<li><a href="profile_add.html" title="Add New Pricing Profile">Add
+							New Pricing Profile</a></li>
+				</ul></li>
+			<li class="disabled"><a href="#" class=""
+				title="Coming soon - Analytics and Reporting" data-title="Analytics">Analytics</a></li>
+			<li class="disabled"><a href="#" class=""
+				title="Coming soon - Users and User Settings" data-title="Users">Users</a></li>
+			<li class="disabled"><a href="#" class=""
+				title="Coming soon - System Settings" data-title="System">System</a></li>
+			<li class="last"><a href="#" class="" id="link-sar"
+				title="Report Suspicious Activity"
+				data-title="Report Suspicious Activity&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"><span
+					class="icon-security icon-eye-1"></span>Report Suspicious Activity</a></li>
+		</ul>
+	</nav>
+	<nav class="secondary">
+		<span><a href="payments_overview.html" title="Payments">Payments</a></span><span
+			class="icon-nav icon-angle-right"></span><span><a
+			href="batch_list.html" title="Find Batch">Find Batch</a></span><span
+			class="icon-nav icon-angle-right"></span><span><a
+			href="batch_view.html" title="Batch #1234567">Batch #1234567</a></span>
+	</nav>
+	<div>
+		<h2 class="list">Batch #1234567 (ACH Transfer Complete with
+			Errors)</h2>
+	</div>
+
+
+	<div class="content list">
+		<div class="header">
+			<div class="summary">
+				<div class="cont">
+					<div class="batch-summary">
+						<h3>Batch Summary</h3>
+						<div class="label first auto">Fremont Location (Nebraska
+							Premium Meatpacking, Inc)</div>
+						<div class="label first auto">Fremont, NE, USA</div>
+						<div class="label first">Batch created</div>
+						<div class="value">11/06/2014 12:23am by PGSi User</div>
+						<div class="label first comment">Reprocessing Resolved SDN
+							Matches</div>
+						<div class="label first">Batch approved</div>
+						<div class="value">11/07/2014 9:23am by PGSi User</div>
+						<div class="label first">Prefunded</div>
+						<div class="value">11/09/2014 by PGSi User</div>
+						<div class="label first">Spreads approved</div>
+						<div class="value">11/07/2014 12:23am by PGSi User</div>
+						<div class="label first">Postfunded</div>
+						<div class="value">11/10/2014 by PGSi User</div>
+
+					</div>
+					<div class="fund-summary">
+						<h3>Funding</h3>
+						<div class="label first">Batch Total (USD)</div>
+						<div class="value">55,000.00</div>
+		
+						<div class="label first">Transfer Total (USD)</div>
+						<div class="value">50,000.00</div>
+						<div class="label first">Prefunds (USD)</div>
+						<div class="value">30,000.00</div>
+						<div class="label first">Postfunds (USD)</div>
+						<div class="value">20,000.00</div>
+					</div>
+
+					<div class="tx-summary">
+						<h3>Transactions</h3>
+						<div class="label first" style="width: 150px">Released to
+							ACH</div>
+						<div class="value">11/06/2014 12:34pm</div>
+						<div class="label first" style="width: 150px">Last Status
+							Update</div>
+						<div class="value">11/06/2014 1:57pm</div>
+						<table id="summary">
+							<thead>
+								<tr>
+									<th class="th">&nbsp;</th>
+									<th>Submitted</th>
+									<th>Not Paid</th>
+									<th>Exception</th>
+									<th>Cancelled</th>
+									<th>Total</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="th">Count</td>
+									<td>70</td>
+									<td>4</td>
+									<td>1</td>
+									<td>10</td>
+									<td>85</td>
+								</tr>
+								<tr>
+									<td class="th">USD</td>
+									<td>10,000.00</td>
+									<td>40,000.00</td>
+									<td>2,500.00</td>
+									<td>500.00</td>
+									<td>53,000.00</td>
+							</tbody>
+						</table>
+					</div>
+
+					<div class="batch-actions">
+						<h3 style="padding-top: 16px;">Batch Actions</h3>
+						<a href="batch_list.html" class="btn">Close</a>
+					</div>
+				</div>
+			</div>
+			<hr>
+
+
+		</div>
+		<div class="body">
+			<div class="filter">
+				<form id="filterForm">
+					<h3>Filter Transactions</h3>
+					<h4>Transaction Status</h4>
+					<div class="block">
+						<input type="checkbox" id="pgsi-status-active-filter"></input><label
+							class="checkbox-label" for="pgsi-status-active-filter">Cancelled</label>
+						<input type="checkbox" id="pgsi-status-inactive-filter"></input><label
+							class="checkbox-label" for="pgsi-status-inactive-filter">On
+							Hold</label> <input type="checkbox" id="pgsi-status-setup-filter"></input><label
+							class="checkbox-label" for="pgsi-status-setup-filter">ACH
+							Pending</label> <input type="checkbox" id="pgsi-status-setup-filter"></input><label
+							class="checkbox-label" for="pgsi-status-setup-filter">ACH
+							Processing</label><input type="checkbox" id="pgsi-status-unknown-filter"></input><label
+							class="checkbox-label" for="pgsi-status-unknown-filter">ACH
+							Successful</label><input type="checkbox" id="pgsi-status-setup-filter"></input><label
+							class="checkbox-label" for="pgsi-status-setup-filter">ACH
+							Error</label><input type="checkbox" id="pgsi-status-unknown-filter"></input><label
+							class="checkbox-label" for="pgsi-status-unknown-filter">ACH
+							Cancel Pending</label><input type="checkbox"
+							id="pgsi-status-setup-filter"></input><label
+							class="checkbox-label" for="pgsi-status-setup-filter">ACH
+							Cancelled</label>
+					</div>
+
+					<div class="block">
+						<input type="reset" value="Clear All" class="button-secondary"></input>
+						<input type="submit" value="Apply" class="button-secondary"></input>
+					</div>
+
+				</form>
+			</div>
+			<div class="data">
+
+				<table id="data_list">
+					<thead>
+						<tr>
+	<th>Transaction &nbsp;ID<span class="icon-sort"></span></th>
+							<th>Confirmation&nbsp;#</th>
+							<th>Actions<span class="icon-sort"></span></th>
+							<th>Status<span class="icon-sort"></span></th>
+							<th>Payroll Source<span class="icon-sort"></span></th>
+							<th>Payer<span class="icon-sort"></span></th>
+							<!-- 						<th>Method<span class="icon-sort"></span></th> -->
+							<th>Member<span class="icon-sort"></span></th>
+							<th>Recipient<span class="icon-sort"></span></th>
+							<th>Sent<span class="icon-sort"></span></th>
+							<th>Total&nbsp;(USD)<span class="icon-sort"></span></th>
+							<th>Fee&nbsp;(USD)<span class="icon-sort"></span></th>
+							<th>Rate&nbsp;(%)<span class="icon-sort"></span></th>
+							<th>Transferred</th>
+							<th>SDN Status<span class="icon-sort"></span></th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<script>
+							var sdnRowClass = ""
+							var sdnStatus = "Neutral";
+							var status = "Pending";
+							var note = "";
+							var actions = '<a href="transaction_view.html" class="action" title="View Details for Transaction #[9999999]"><span class="icon-nav icon-search-find"></span>';
+							var error = "";
+
+							for (var i = 0; i < 200; i++) {
+								error = "";
+								if (i % 10 == 1) {
+									sdnRowClass = "sdn1";
+									sdnStatus = "<a href='sdn_person_view.html' title='View SDN Report for [Person Name]'>Positive</a>";
+									linkMod = "_sdn";
+									status = "Cancelled";
+									note = "[On Hold]";
+									actions = '<a href="transaction_view_only.html" class="action" title="View Details for Transaction #[9999999]"><span class="icon-nav icon-search-find"></span>';
+								} else if (i % 10 == 2) {
+									sdnRowClass = "sdn2";
+									sdnStatus = "<a href='sdn_person_view.html' title='View SDN Report for [Person Name]'>Pending PGSi</a><br><a href='sdn_person_view.html' title='View SDN Report for [Person Name]'>Pending PGSi</a>";
+									linkMod = "_sdn";
+									status = "Cancelled";
+									note = "[On Hold]";
+									actions = '<a href="transaction_view_only.html" class="action" title="View Details for Transaction #[9999999]"><span class="icon-nav icon-search-find"></span>';
+								} else if (i % 10 == 3) {
+									sdnRowClass = "";
+									sdnStatus = "<a href='sdn_person_view.html' title='View SDN Report for [Person Name]'>False Positive</a>";
+									linkMod = "";
+									status = "Paid";
+									note = "";
+									actions = '<a href="#"  class="action no" title="Cancel"><span class="icon-nav icon-minus-circle"></span></a>';
+								} else if (i % 10 == 4) {
+									sdnRowClass = "sdn2";
+									sdnStatus = "<a href='sdn_person_view.html' title='View SDN Report for [Person Name]'>Pending Federal</a>";
+									linkMod = "_sdn";
+									status = "Cancelled";
+									note = "[On Hold] ";
+								} else {
+									sdnRowClass = "";
+									linkMod = "";
+									sdnStatus = "<a href='sdn_person_view_neutral.html' title='View SDN Report for [Person Name]'>Neutral</a>";
+									if (i % 5 == 0) {
+										status = "Rejected";
+										note = "";
+										if (i % 3 == 0) {
+											error = "Data Error";
+											actions = '<a href="transaction_view.html" class="action" title="View/Edit Details for Transaction #[999999]""><span class="icon-nav icon-pencil"></span><a href="#"  class="action no" title="Cancel"><span class="icon-nav icon-minus-circle"></span></a>';
+										} else if (i % 3 == 2) {
+											error = "System Error<br>Ref #123456";
+											actions = '<a href="transaction_view_only.html" class="action" title="View Details for Transaction #[999999]"><span class="icon-nav icon-search-find"></span><a href="#"  class="action no" title="Cancel"><span class="icon-nav icon-minus-circle"></span></a>';
+
+										} else {
+											error = "Call BTS";
+											actions = '<a href="transaction_view_only.html" class="action" title="View Details for Transaction #[999999]""><span class="icon-nav icon-search-find"></span><a href="#"  class="action no" title="Cancel"><span class="icon-nav icon-minus-circle"></span></a>';
+
+										}
+									} else if (i % 5 == 1) {
+										status = "ACH Success";
+										note = "";
+										actions = '<a href="transaction_view_only.html" class="action" title="View Details for Transaction #[9999999]"><span class="icon-nav icon-search-find"></span><a href="#" class="action no" title="Cancel"><span class="icon-nav icon-minus-circle"></span>';
+									} else if (i % 5 == 2) {
+										status = "Processing";
+										note = "[ACH Modification]";
+										actions = '<a href="transaction_view_only.html" class="action" title="View Details for Transaction #[9999999]"><span class="icon-nav icon-search-find"></span>';
+
+									} else if (i % 5 == 3) {
+										sdnRowClass = "cancel";
+										status = "Cancelled";
+										note = "Cannot resolve error, cancelling";
+										error = "[ACH Cancel]";
+										actions = '<a href="transaction_view_only.html" class="action" title="View Details for Transaction #[9999999]"><span class="icon-nav icon-search-find"></span>';
+									} else {
+										status = "ACH Processing";
+										note = "";
+										actions = '<a href="transaction_view_only.html" class="action" title="View Details for Transaction #[9999999]"><span class="icon-nav icon-search-find"></span><a href="#" class="action no" title="Cancel"><span class="icon-nav icon-minus-circle"></span>';
+									}
+								}
+								document
+										.write('<tr class="' + sdnRowClass + '">');
+								// 							document
+								// 									.write("<td class='highlight'><span class='icon-action icon-lightbulb' title='Watcg'></span></td>");
+								document
+										.write('<td><a href="transaction_view.html" title="View Transaction #[999999]">TAA-'
+												+ (21345 + i) + '</a></td>');
+								document
+										.write('<td><a href="transaction_view.html" title="View Transaction #[999999]">'
+												+ (21345 + i) + '</a></td>');
+								document.write("<td class='actioncell'>"
+										+ actions + "</td>");
+								if (note != "") {
+									document.write('<td class="name">' + status
+											+ '<br>' + note + '</td>');
+								} else {
+									document.write('<td class="name">' + status
+											+ '<br>' + error + '</td>');
+								}
+								document
+										.write('<td class="multiples"><a href="location_view.html"'+'title="View/Edit Fremont Location.">Fremont Location</a><a href="organization_view.html"'+'title="View/Edit Nebraska Premium Meatpacking Ltd.">Nebraska'
+												+ ' Premium Meatpacking Ltd. '
+												+ '</a></td>');
+								document.write('<td>Bank ABD of Mexico</td>');
+								//document.write('<td>In Account</td>');
+								document
+										.write('<td><a href="member_view.html" title="View Maria Ramirez Garcia (#MAB-12345)">Maria Ramirez Garcia '
+												+ (i + 1)
+												+ ' (MAB-12345)</a></td>');
+								document
+										.write('<td><a href="recipient_view.html" title="View Mario Gonzales (#RAB-12345)">Mario Gonzalez '
+												+ (i + 1)
+												+ ' (RAB-12345)</a></td>');
+								document.write("<td>05/23/2014</td>");
+								// 							document.write('<td class="pin">44441234569</td>');
+
+								document.write('<td>300.00</td>');
+								document.write('<td>11.99</td>');
+								document.write('<td class="amt">12.888</td>');
+								document
+										.write('<td class="amt">MXN&nbsp;3,763.4249</td>');
+								document.write('<td class="sdnstatus">'
+										+ sdnStatus + '</td>');
+								document.write('</tr>');
+
+							}
+						</script>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<footer>
+		<div class="left">&copy; 2014 Prosperitas Global Solutions, Inc.
+			All Rights Reserved.</div>
+		<div class="right">Version 1.00.00 Build 00000</div>
+	</footer>
+
+	<div id="dialog-approve-tx" title="Review Transactions"
+		style="display: none">
+		<form>
+			<hr class="top">
+			<div class="label first">Transaction Details go here. Actions
+				vary on the status of the transaction</div>
+
+			<hr class="last">
+		</form>
+	</div>
+
+
+
+	<div id="dialog-disapprove-tx" title="Cancel Transactions"
+		style="display: none">
+		<form>
+			<hr class="top">
+			<div class="alert">
+				<span class="icon-nav icon-exclamation-triangle"></span>
+				<div class="label">Do you want to cancel the selected
+					transaction? If the recipient already has received the payment,
+					cancellation may not be possible.</div>
+			</div>
+			<div class="label first">Comment</div>
+			<textarea class="" style="width: 450px" placeholder="*"></textarea>
+			<hr class="last">
+		</form>
+	</div>
+
+
+</body>
+</html>

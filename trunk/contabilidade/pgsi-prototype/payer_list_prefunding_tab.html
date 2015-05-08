@@ -1,0 +1,345 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>PGSi Postfunding</title>
+<link href="css/fonts.css" rel="stylesheet" />
+<link href="css/security.css" rel="stylesheet" />
+<link href="css/navigation.css" rel="stylesheet" />
+<link href="css/actions.css" rel="stylesheet" />
+<link href="css/jquery-ui.min.css" rel="stylesheet" />
+<link href="css/jquery-ui.structure.min.css" rel="stylesheet" />
+<link href="css/pgsi-common.css" rel="stylesheet" />
+<script src="jquery/jquery-1.11.0.min.js"></script>
+<script src="jquery/jquery-ui-1.11.0.min.js"></script>
+<script src="jquery/jquery.datatables.min.js"></script>
+<script>
+	$(document)
+			.ready(
+					function() {
+
+						//http://datatables.net/reference/option/language
+						$('#data_list')
+								.dataTable(
+										{
+											dom : '<"list_header"ipl><t><"list_footer"ipl>',
+											paging : true,
+											pagingType : "full",
+											iDisplayLength : 25,
+											autoWidth : false,
+											language : {
+												paginate : {
+													first : "a",
+													last : "b",
+													next : "g",
+													previous : "f"
+												},
+												lengthMenu : "_MENU_ records per page",
+												loadingRecords : "Loading...",
+												processing : "Processing...",
+												zeroRecords : "No matching records found",
+												info : "Showing _START_ to _END_ of _TOTAL_ matching records."
+											},
+											drawCallback : function(settings) {
+												$(".dataTables_length select")
+														.outerWidth(60)
+														.selectmenu();
+												if ($("#link-fund").length == 0) {
+
+													//	alert("adding link")
+													$(".list_header")
+															.prepend(
+																	'<a href="#" id="link-fund" class="form-link"><span	class="icon-nav icon-refresh"></span>Refresh Payer Balances</a>');
+												}
+												if ($("#link-fund2").length == 0) {
+													$(".list_footer")
+															.prepend(
+																	'<a href="#" id="link-fund" class="form-link"><span	class="icon-nav icon-refresh"></span>Refresh Payer Balances</a>');
+												}
+											}
+										});
+						$(".filter select").selectmenu();
+						$("input[type=submit],input[type=reset]").button();
+						$('#data_list td').click(function(e) {
+							e.preventDefault();
+							var curRow = $(this).closest("tr");
+							var selected = curRow.hasClass("selected");
+							$("tr").removeClass("selected");
+							if (!selected) {
+								curRow.addClass('selected');
+							}
+						});
+						$('.btn').button();
+						$("#link-fund")
+								.click(
+										function(e) {
+											e.preventDefault();
+											alert("Refresh the table from the database to reflect latest currency purchase");
+										});
+					});
+</script>
+<style>
+#data_list .multiples a {
+	display: block;
+}
+
+.second_org {
+	padding-top: 8px;
+}
+
+.data #data_list .icon-sort {
+	/*display: none;*/
+
+}
+
+.data #data_list .icon-sort {
+	display: none;
+}
+
+hr.top {
+	margin-top: 0;
+	width: 100%;
+}
+
+hr.last {
+	margin-bottom: 0;
+	width: 100%;
+}
+
+.summary {
+	float: left;
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	color: #333333;
+	width: 100%;
+	display: table;
+	margin: 0 0 16px 0;
+}
+
+#link-fund, #link-fund2 {
+	float: left;
+	margin-right: 16px;
+	margin-bottom: 8px;
+}
+
+.summary a, .label {
+	float: left;
+	margin-right: 16px;
+	line-height: 26px;
+}
+
+.col {
+	float: left;
+	margin: 8px 0 8px 8px;
+}
+
+.first {
+	clear: both;
+}
+
+h3 {
+	margin-top: 0;
+}
+
+.actions {
+	float: left;
+	margin: 8px;
+	padding: 8px;
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	color: #333333;
+}
+
+.header {
+	display: table-row;
+}
+
+hr {
+	width: 100%;
+}
+
+.cont {
+	margin: 8px;
+	display: table;
+}
+
+a.form-link, a.form-link:hover, a.form-link:active {
+	color: #2b4e72;
+	float: left;
+	line-height: 30px;
+	margin-right: 24px;
+	text-decoration: none;
+}
+
+a.form-link.first {
+	clear: both;
+	margin: 10px 0 8px 100px;
+}
+
+.form-link .icon-nav, .remembered-location .icon-nav {
+	padding: 3px 3px 0 3px;
+	position: relative;
+	bottom: -1px;
+	color: #ffffff;
+	background-color: #42b653;
+	font-size: 12px;
+	margin-right: 3px;
+}
+
+#data_list td.curr {
+	text-align: right;
+}
+
+.filter {
+	padding-right: 8px;
+}
+
+#data_list {
+	padding: 8px;
+}
+
+.content.list {
+	width: 95%;
+}
+
+#data_list tr.th1 {
+	border-bottom: none;
+}
+
+#data_list tr.th2 {
+	border-top: none;
+}
+
+th.colspan {
+	border-left: 1px solid #cccccc;
+}
+
+.filter * {
+	display: none;
+}
+
+.filter {
+	padding: 0;
+	margin: 0;
+}
+
+#data_list {
+	width: 100%;
+}
+
+td.payer {
+	font-weight: bold;
+}
+
+#data_list td.curr {
+	text-align: right;
+}
+</style>
+</head>
+<body>
+	<div class="content list">
+		<div class="body">
+			<div class="filter">
+				<h4>Transfer Date Cutoff</h4>
+				<input type="text" class="date" placeholder="Transfer date">
+				<hr></hr>
+				<h4>Transfer Period</h4>
+				<input type="text" class="date" placeholder="From date"><input
+					type="text" class="date" placeholder="To date">
+				<hr></hr>
+				<div class="block">
+					<input type="reset" value="Clear All" class="button-secondary"></input>
+					<input type="submit" value="Apply" class="button-secondary"></input>
+				</div>
+			</div>
+			<div class="data">
+				<table id="data_list">
+					<thead>
+						<tr class="th1">
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th class="colspan" colspan="2">12/22/2014 (Today)</th>
+							<th class="colspan" colspan="2">12/23/2014</th>
+							<th class="colspan" colspan="2">12/24/2014</th>
+							<th class="colspan" colspan="2">12/26/2014</th>
+							<th class="colspan" colspan="2">12/27/2014</th>
+
+						</tr>
+						<tr class="th2">
+							<th>Payer</th>
+							<th>Currency</th>
+							<th>Balance</th>
+							<th>Effective Rate</th>
+							<th class="colspan">Est. Total</th>
+							<th class="est">Purchase</th>
+							<th class="colspan est">Est. Total</th>
+							<th class="est">Purchase</th>
+							<th class="colspan est">Est. Total</th>
+							<th class="est">Purchase</th>
+							<th class="colspan est">Est. Total</th>
+							<th class="est">Purchase</th>
+							<th class="colspan est">Est. Total</th>
+							<th class="est">Purchase</th>
+						</tr>
+					</thead>
+					<tbody>
+						<script>
+							for (var i = 0; i < 27; i++) {
+								var balance = "120.00";
+								var rate = "18.0510 %";
+								var check = true;
+								var action = '<a href="#" class="action" title="Allocated funding for Payer ABC"><span class="icon-nav icon-check-mark-circle-two"></span>';
+								if (i % 10 < 5) {
+									balance = "0.00";
+									rate = "";
+									check = false;
+									action = "";
+								}
+								document.write('<tr>');
+
+								document.write('<td class="payer">BANK&nbsp;ABCD'
+										+ (1 + i) + '</td>');
+								// 								document.write('<td>' + action + '</td>');
+								document.write('<td>MXN</td>');
+								document.write('<td class="curr">' + balance + '</td>');
+								document.write('<td class="curr">' + rate + '</td>');
+								document
+										.write('<td class="curr">20,000.00</td>');
+								document
+										.write('<td class="curr">20,120.00</td>');
+								document
+										.write('<td class="curr">21,000.00</td>');
+								document
+										.write('<td class="curr">41,120.00</td>');
+								document
+										.write('<td class="curr">22,000.00</td>');
+								document
+										.write('<td class="curr">63,120.00</td>');
+								document
+										.write('<td class="curr">10,000.00</td>');
+								document
+										.write('<td class="curr">73,120.00</td>');
+								document
+										.write('<td class="curr">50,000.00</td>');
+								document
+										.write('<td class="curr">123,120.00</td>');
+
+								document.write('</tr>');
+							}
+						</script>
+
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+	<footer>
+		<div class="left">&copy; 2014 Prosperitas Global Solutions, Inc.
+			All Rights Reserved.</div>
+		<div class="right">Version 1.00.00 Build 00000</div>
+	</footer>
+</body>
+</html>

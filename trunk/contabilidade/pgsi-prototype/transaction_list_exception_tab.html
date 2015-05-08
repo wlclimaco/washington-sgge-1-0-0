@@ -1,0 +1,284 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>PGSi Transactions</title>
+<link href="css/fonts.css" rel="stylesheet" />
+<link href="css/security.css" rel="stylesheet" />
+<link href="css/actions.css" rel="stylesheet" />
+<link href="css/navigation.css" rel="stylesheet" />
+<link href="css/jquery-ui.min.css" rel="stylesheet" />
+<link href="css/jquery-ui.structure.min.css" rel="stylesheet" />
+<link href="css/pgsi-common.css" rel="stylesheet" />
+<script src="jquery/jquery-1.11.0.min.js"></script>
+<script src="jquery/jquery-ui-1.11.0.min.js"></script>
+<script src="jquery/jquery.datatables.min.js"></script>
+<script>
+	$(document).ready(function() {
+		//http://datatables.net/reference/option/language
+		$('#data_list').dataTable({
+			dom : '<"list_header"ipl><t><"list_footer"ipl>',
+			paging : true,
+			pagingType : "full",
+			iDisplayLength : 25,
+			language : {
+				paginate : {
+					first : "a",
+					last : "b",
+					next : "g",
+					previous : "f"
+				},
+				lengthMenu : "_MENU_ records per page",
+				loadingRecords : "Loading...",
+				processing : "Processing...",
+				zeroRecords : "No matching records found",
+				info : "Showing _START_ to _END_ of _TOTAL_ matching records."
+			},
+			drawCallback : function(settings) {
+				$(".dataTables_length select").outerWidth(60).selectmenu();
+				$(".highlight").click(function(e) {
+					e.preventDefault();
+					$(this).find(".icon-lightbulb").toggleClass("highlighted");
+				})
+			}
+		});
+		$(".filter select").selectmenu();
+		$("input[type=submit],input[type=reset]").button();
+		$('#data_list input[type=checkbox]').change(function() {
+			if (this.checked) {
+				$(this).closest("tr").addClass('selected');
+			} else {
+				$(this).closest("tr").removeClass('selected');
+			}
+		});
+	});
+</script>
+<style>
+#data_list .multiples a {
+	display: block;
+}
+
+.second_org {
+	padding-top: 8px;
+}
+
+.width-shortest {
+	width: 90px;
+}
+
+input.width-shortest {
+	width: 60px;
+}
+
+.width-short, label.width-short.first {
+	width: 150px;
+}
+
+.width-medium {
+	width: 220px;
+}
+
+.width-long {
+	width: 280px;
+}
+
+.width-longest {
+	width: 400px;
+}
+
+.data #data_list .icon-sort {
+	display: none;
+}
+
+td.highlight .icon-lightbulb, th .icon-lightbulb {
+	font-size: 18px;
+	color: #cccccc;
+	cursor: pointer;
+}
+
+td.highlight .icon-lightbulb.highlighted {
+	font-size: 18px;
+	/* 	color: #42b653; */
+	color: #2B4E72;
+	cursor: pointer;
+}
+
+#data_list td.actioncell a .icon-nav {
+	display: inline-block;
+	font-size: 16px;
+	height: 16px;
+	padding: 2px;
+	width: 16px;
+}
+
+.filter {
+	padding: 0;
+}
+
+.filter * {
+	display: none;
+}
+
+#data_list_wrapper {
+	margin-left: 0;
+}
+
+.data #data_list .icon-sort {
+	display: none;
+}
+</style>
+</head>
+<body>
+	<div class="content list">
+		<div class="filter">
+			<form id="filterForm">
+				<h3>Filter Records</h3>
+				<h4>Transaction Info</h4>
+				<input type="text" id="id-filter" name="id-filter"
+					placeholder="Transaction ID"></input> <input type="text"
+					id="id-filter" name="id-filter" placeholder="Confirmation Number"></input>
+				<!--  -->
+				<select id="currency" class="width-short">
+					<option></option>
+					<option>MXN</option>
+					<option>BRL</option>
+				</select>
+				<h4>Member Info</h4>
+				<input type="text" id="id-filter" name="id-filter"
+					placeholder="Member ID (MXX-00000)"></input><input type="text"
+					id="name-filter" name="name-filter"
+					placeholder="Primary phone number"></input> <input type="text"
+					id="name-filter" name="name-filter" placeholder="Last name"><input
+					type="text" id="name-filter" name="name-filter"
+					placeholder="First name"></input>
+				<hr></hr>
+				<h4>Employer</h4>
+				<input type="text" id="organization-filter"
+					placeholder="Organization Name"> </input> <input type="text"
+					id="location-filter" placeholder="Location Name"> </input>
+				<hr></hr>
+				<h4>Transaction Status</h4>
+				<div class="col">
+					<input type="checkbox" id="pgsi-status-active-filter"></input><label
+						class="checkbox-label" for="pgsi-status-active-filter">Pending</label>
+					<input type="checkbox" id="pgsi-status-inactive-filter"></input><label
+						class="checkbox-label" for="pgsi-status-inactive-filter">Approved</label><input
+						type="checkbox" id="pgsi-status-setup-filter"></input><label
+						class="checkbox-label" for="pgsi-status-setup-filter">Processing</label><input
+						type="checkbox" id="pgsi-status-setup-filter"></input><label
+						class="checkbox-label" for="pgsi-status-setup-filter">Rejected</label>
+				</div>
+				<div class="col">
+					<input type="checkbox" id="pgsi-status-unknown-filter"></input><label
+						class="checkbox-label" for="pgsi-status-unknown-filter">Not
+						Paid</label><input type="checkbox" id="pgsi-status-unknown-filter"></input><label
+						class="checkbox-label" for="pgsi-status-unknown-filter">Paid</label><input
+						type="checkbox" id="pgsi-status-setup-filter"></input><label
+						class="checkbox-label" for="pgsi-status-setup-filter">Cancelled</label><input
+						type="checkbox" id="pgsi-status-unknown-filter"></input><label
+						class="checkbox-label" for="pgsi-status-unknown-filter">On
+						Hold</label>
+				</div>
+
+				<div class="block">
+					<input type="reset" value="Clear All" class="button-secondary"></input>
+					<input type="submit" value="Apply" class="button-secondary"></input>
+				</div>
+
+			</form>
+		</div>
+		<div class="data">
+			<table id="data_list">
+				<thead>
+					<tr>
+						<th>Transaction&nbsp;ID</th>
+						<th>Confirmation&nbsp;#</th>
+						<th>Actions<span class="icon-sort"></span></th>
+						<th>Status<span class="icon-sort"></span></th>
+						<th>Payroll Source<span class="icon-sort"></span></th>
+						<th>Batch ID<span class="icon-sort"></span></th>
+						<th>Payer<span class="icon-sort"></span></th>
+<!-- 						<th>Method<span class="icon-sort"></span></th> -->
+						<th>Member<span class="icon-sort"></span></th>
+						<th>Recipient<span class="icon-sort"></span></th>
+						<th>Sent<span class="icon-sort"></span></th>
+						<th>Total&nbsp;(USD)<span class="icon-sort"></span></th>
+						<th>Fee&nbsp;(USD)<span class="icon-sort"></span></th>
+						<th>Rate&nbsp;(%)<span class="icon-sort"></span></th>
+						<th>Transferred</th>
+							<th>SDN Status<span class="icon-sort"></span></th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<script>
+							var sdnRowClass = ""
+							var sdnStatus = "Neutral";
+							var status = "Pending";
+						var note = "";
+						var 	actions = '<a href="transaction_view.html" class="action" title="View Details for Transaction #[999999]""><span class="icon-nav icon-pencil"></span><a href="#"  class="action no" title="Cancel"><span class="icon-nav icon-minus-circle"></span></a>';
+									for (var i = 0; i < 200; i++) {
+							if (i % 10 == 1) {
+								status = "Exception";
+								note = "[PGSi Error]";
+							} else if (i % 10 > 2) {
+								status = "Exception";
+								note = "[ACH Error]";
+							} else  {
+								status = "Pending Approval";
+								note = "[Hold Cleared]";
+							}
+
+								document
+										.write('<tr class="' + sdnRowClass + '">');
+// 							document
+// 									.write("<td class='highlight'><span class='icon-action icon-lightbulb' title='Watcg'></span></td>");
+								document
+									.write('<td><a href="transaction_view.html" title="View Transaction #[999999]">TAA-'
+											+ (21345 + i) + '</a></td>');
+							document
+										.write('<td><a href="transaction_view.html" title="View Transaction #[999999]">'
+												+ (21345 + i) + '</a></td>');
+								document.write('<td class="actioncell">'
+										+ actions + '</td>');
+								if (note != "") {
+									document.write('<td class="name">' + status
+											+ '<br>' + note + '</td>');
+								} else {
+									document.write('<td class="name">' + status
+											+ '</td>');
+								}
+							document
+									.write('<td class="multiples"><a href="location_view.html"'+'title="View/Edit Fremont Location.">Fremont Location</a><a href="organization_view.html"'+'title="View/Edit Nebraska Premium Meatpacking Ltd.">Nebraska'
+											+ ' Premium Meatpacking Ltd. '
+											+ '</a></td>');
+							document
+										.write('<td><a href="batch_view_pending.html" title="View Batch #[999999]">'
+												+ (21345 + i) + '</a></td>');
+								document.write('<td>Bank ABD of Mexico</td>');
+								document.write('<td >Maria Ramirez ' + (i + 1)
+										+ ' (MAB-12345)</td>');
+								document.write('<td >Mario Gonzalez ' + (i + 1)
+										+ ' (RAB-12345)</td>');
+								document.write("<td>05/23/2014</td>");
+// 								document
+// 										.write('<td class="pin">44441234569</td>');
+
+								document.write('<td>300</td>');
+								document.write('<td>7.99</td>');
+								document.write('<td class="amt">12.888</td>');
+								document
+										.write('<td class="amt">3,763.4249</td>');
+								document.write('<td class="sdnstatus">'
+										+ sdnStatus + '</td>');
+								document.write('</tr>');
+
+						}
+					</script>
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
