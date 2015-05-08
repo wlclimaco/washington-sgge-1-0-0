@@ -142,4 +142,12 @@
  		<property name="validationController" ref="locationValidationController"/>
  	</bean>
 
+ 	<bean id="tabelaBAI" class="com.prosperitasglobal.sendsolv.bai.impl.TabelaBAIImpl">
+ 		<property name="validationController" ref="locationValidationController"/>
+ 	</bean>
+
+ 	<bean id="telaBAI" class="com.prosperitasglobal.sendsolv.bai.impl.TelaBAIImpl">
+ 		<property name="validationController" ref="locationValidationController"/>
+ 	</bean>
+
 </beans>
