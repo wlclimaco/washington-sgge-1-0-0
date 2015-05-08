@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CurrencyAvailabilityMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+	<resultMap id="changeControlMapping" type="QATModel">
+  		<result property="createUser"			column="create_user"/>
+		<result property="createDateUTC"		column="create_date"/>
+		<result property="modifyUser"			column="modify_user"/>
+		<result property="modifyDateUTC"		column="modify_date"/>
+	</resultMap>
+
+	<resultMap id="changeControlMappingOL" type="QATModelOL" extends="changeControlMapping">
+  		<result property="version"				column="versn_lock_num"/>
+	</resultMap>
+
+	<resultMap id="currencyAvailabilityResult" type="CurrencyAvailability" extends="changeControlMappingOL">
+		<result property="id"	                        column="currency_availability_id"/>
+		<result property="payerId"                      column="FK_payer_id"/>
+  		<result property="currencyCreditCumulative"     column="credit_in_fx"/>
+  		<result property="currencyDebitCumulative"      column="debit_in_fx"/>
+		<result property="effectiveForeignExchangeRate" column="effective_rate_usd_to_fx"/>
+		<association property="currency"                column="FK_currency_code" select="countryMap.fetchCurrencyByCode"/>
+	</resultMap>
+
+    <!--************************************************************************** -->
+	<!-- SQL fragments allow "parts" of SQL to be re-used in other SQL statements. -->
+	<!--************************************************************************** -->
+
+	<sql id="allCurrencyAvailabilityColumnsExceptKey">
+		FK_payer_id,
+		credit_in_fx,
+		debit_in_fx,
+		effective_rate_usd_to_fx,
+		FK_currency_code,
+		versn_lock_num,
+		<include refid="CBOFMap.allChangeControlColumns"/>
+	</sql>
+
+	<sql id="allCurrencyAvailabilityColumns">
+		currency_availability_id,
+		<include refid="CurrencyAvailabilityMap.allCurrencyAvailabilityColumnsExceptKey"/>
+	</sql>
+
+	<sql id="allCurrencyAvailabilityValuesExceptKey">
+		#{payerId},
+		#{currencyCreditCumulative},
+		#{currencyDebitCumulative},
+		#{effectiveForeignExchangeRate},
+		#{currency.code},
+		#{version},
+		<include refid="CBOFMap.changeControlFields"/>
+	</sql>
+
+	<sql id="allCurrencyAvailabilityValues">
+		#{id},
+		<include refid="CurrencyAvailabilityMap.allCurrencyAvailabilityValuesExceptKey"/>
+	</sql>
+
+    <!--**************************************************************************-->
+    <!--**********************SQL Insert Statements.******************************-->
+    <!--**************************************************************************-->
+
+   	<insert id="insertCurrencyAvailability" parameterType="CurrencyAvailability" useGeneratedKeys="true" keyProperty="id">
+	  	INSERT INTO currency_availability (
+			<include refid="CurrencyAvailabilityMap.allCurrencyAvailabilityColumnsExceptKey" />
+			, balance_in_fx
+	      )
+	    VALUES (<include refid="CurrencyAvailabilityMap.allCurrencyAvailabilityValuesExceptKey" /> , 0)
+  	</insert>
+
+    <!--**************************************************************************-->
+    <!--*************************SQL Update Statements.***************************-->
+    <!--**************************************************************************-->
+
+  	<update id="updateCurrencyAvailability" parameterType="CurrencyAvailability">
+    	UPDATE currency_availability
+    	<set>
+    		<if test="payerId != null"> FK_payer_id = #{payerId}, </if>
+    		<if test="currencyCreditCumulative != null"> credit_in_fx = #{currencyCreditCumulative}, </if>
+    		<if test="currencyDebitCumulative != null"> debit_in_fx = #{currencyDebitCumulative}, </if>
+    		<if test="effectiveForeignExchangeRate != null"> effective_rate_usd_to_fx = #{effectiveForeignExchangeRate}, </if>
+    		<if test="currency != null and currency.code != null"> FK_currency_code = #{currency.code}, </if>
+    		<if test="modifyDateUTC != null"> modify_date = #{modifyDateUTC}, </if>
+			<if test="modifyUser != null"> modify_user = #{modifyUser} </if>
+		</set>
+    	WHERE
+     		currency_availability_id = #{id} AND
+     		versn_lock_num = #{version}
+  	</update>
+
+	<!--**************************************************************************-->
+    <!--***********************SQL Delete Statements.*****************************-->
+    <!--**************************************************************************-->
+
+  	<delete id="deleteCurrencyAvailability" parameterType="CurrencyAvailability">
+  		DELETE FROM currency_availability
+  		WHERE
+  			currency_availability_id = #{id} AND
+     		versn_lock_num = #{version}
+	</delete>
+
+	<!--**************************************************************************-->
+    <!--*************************SQL Fetch Statements.****************************-->
+    <!--**************************************************************************-->
+
+	<select id="fetchCurrencyAvailabilityVersionNumber" parameterType="CurrencyAvailability" resultType="int">
+		SELECT versn_lock_num
+		FROM currency_availability
+		WHERE currency_availability_id = #{id}
+  	</select>
+
+    <select id="fetchCurrencyAvailabiltyById" parameterType="int" resultMap="currencyAvailabilityResult">
+		SELECT
+			<include refid="CurrencyAvailabilityMap.allCurrencyAvailabilityColumns" />
+		FROM currency_availability
+		WHERE currency_availability_id = #{id}
+  	</select>
+
+	<select id="fetchCurrencyAvailabilityByPayerId" parameterType="int" resultMap="currencyAvailabilityResult">
+		SELECT
+			<include refid="CurrencyAvailabilityMap.allCurrencyAvailabilityColumns" />
+		FROM currency_availability
+		WHERE FK_payer_id = #{id}
+		ORDER BY FK_currency_code
+  	</select>
+
+</mapper>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CurrencyAllocationMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+
+	<resultMap id="changeControlMapping" type="QATModel">
+  		<result property="createUser"			column="create_user"/>
+		<result property="createDateUTC"		column="create_date"/>
+		<result property="modifyUser"			column="modify_user"/>
+		<result property="modifyDateUTC"		column="modify_date"/>
+	</resultMap>
+
+	<resultMap id="currencyAllocationResult" type="CurrencyAllocation" extends="CurrencyAllocationMap.changeControlMapping">
+		<result property="id"	              column="currency_allocation_id"/>
+		<result property="allocatedAmount"    column="allocated_amount"/>
+		<result property="currencyPurchaseId" column="FK_currency_purchase_id"/>
+		<result property="moneyTransferId"    column="FK_money_transfer_id"/>
+	</resultMap>
+
+    <!--************************************************************************** -->
+	<!-- SQL fragments allow "parts" of SQL to be re-used in other SQL statements. -->
+	<!--************************************************************************** -->
+
+	<sql id="allCurrencyAllocationColumnsExceptKey">
+		allocated_amount,
+		FK_currency_purchase_id,
+		FK_money_transfer_id,
+		<include refid="CBOFMap.allChangeControlColumns"/>
+	</sql>
+
+	<sql id="allCurrencyAllocationColumns">
+		currency_allocation_id,
+		<include refid="CurrencyAllocationMap.allCurrencyAllocationColumnsExceptKey"/>
+	</sql>
+
+	<sql id="allCurrencyAllocationValuesExceptKey">
+		#{allocatedAmount},
+		#{currencyPurchaseId},
+		#{moneyTransferId},
+		<include refid="CBOFMap.changeControlFields"/>
+	</sql>
+
+	<sql id="allCurrencyAllocationValues">
+		#{id},
+		<include refid="CurrencyAllocationMap.allCurrencyAllocationValuesExceptKey"/>
+	</sql>
+
+    <!--**************************************************************************-->
+    <!--**********************SQL Insert Statements.******************************-->
+    <!--**************************************************************************-->
+
+   	<insert id="insertCurrencyAllocation" parameterType="CurrencyAllocation" useGeneratedKeys="true" keyProperty="id">
+	  	INSERT INTO currency_allocation (
+			<include refid="CurrencyAllocationMap.allCurrencyAllocationColumnsExceptKey" />
+	      )
+	    VALUES (<include refid="CurrencyAllocationMap.allCurrencyAllocationValuesExceptKey" /> )
+  	</insert>
+
+    <!--**************************************************************************-->
+    <!--*************************SQL Update Statements.***************************-->
+    <!--**************************************************************************-->
+
+  	<update id="updateCurrencyAllocation" parameterType="CurrencyAllocation">
+    	UPDATE currency_allocation
+    	<set>
+    		allocated_amount = #{allocatedAmount},
+    		<if test="currencyPurchaseId != null"> FK_currency_purchase_id = #{currencyPurchaseId}, </if>
+    		<if test="moneyTransferId != null"> FK_money_transfer_id = #{moneyTransferId}, </if>
+    		<if test="modifyDateUTC != null"> modify_date = #{modifyDateUTC}, </if>
+			<if test="modifyUser != null"> modify_user = #{modifyUser} </if>
+		</set>
+    	WHERE
+     		currency_allocation_id = #{id}
+  	</update>
+
+	<!--**************************************************************************-->
+    <!--***********************SQL Delete Statements.*****************************-->
+    <!--**************************************************************************-->
+
+  	<delete id="deleteCurrencyAllocation" parameterType="CurrencyAllocation">
+  		DELETE FROM currency_allocation
+  		WHERE
+  			currency_allocation_id = #{id}
+	</delete>
+
+	<!--**************************************************************************-->
+    <!--*************************SQL Fetch Statements.****************************-->
+    <!--**************************************************************************-->
+
+    <select id="fetchCurrencyAllocationById" parameterType="CurrencyAllocation" resultMap="currencyAllocationResult">
+		SELECT
+			<include refid="CurrencyAllocationMap.allCurrencyAllocationColumns"/>
+		FROM currency_allocation
+		WHERE currency_allocation_id = #{id}
+  	</select>
+
+	<select id="fetchCurrencyAllocationByMoneyTransferId" parameterType="CurrencyAllocation" resultMap="currencyAllocationResult">
+		SELECT
+			<include refid="CurrencyAllocationMap.allCurrencyAllocationColumns"/>
+		FROM currency_allocation
+		WHERE FK_money_transfer_id = #{moneyTransferId}
+  	</select>
+
+	<select id="fetchCurrencyAllocationByCurrencyPurchaseId" parameterType="CurrencyAllocation" resultMap="currencyAllocationResult">
+		SELECT
+			<include refid="CurrencyAllocationMap.allCurrencyAllocationColumns"/>
+		FROM currency_allocation
+		WHERE FK_currency_purchase_id = #{currencyPurchaseId}
+  	</select>
+
+</mapper>

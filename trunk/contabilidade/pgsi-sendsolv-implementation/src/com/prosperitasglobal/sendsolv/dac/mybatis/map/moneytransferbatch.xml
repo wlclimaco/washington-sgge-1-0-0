@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MoneyTransferBatchMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+
+	<resultMap id="changeControlMapping" type="QATModel">
+  		<result property="createUser"			column="create_user"/>
+		<result property="createDateUTC"		column="create_date"/>
+		<result property="modifyUser"			column="modify_user"/>
+		<result property="modifyDateUTC"		column="modify_date"/>
+	</resultMap>
+
+	<resultMap id="changeControlMappingOL" type="QATModelOL" extends="MoneyTransferBatchMap.changeControlMapping">
+  		<result property="version"				column="versn_lock_num"/>
+	</resultMap>
+
+	<resultMap id="moneyTransferBatchResult" type="MoneyTransferBatch" extends="MoneyTransferBatchMap.changeControlMappingOL">
+		<result property="id"	                      column="money_transfer_batch_id"/>
+		<result property="key"                        column="money_transfer_batch_key"/>
+		<result property="originAmount.amount"        column="origin_amount"/>
+		<result property="transferDate"               column="transfer_date"/>
+		<result property="payrollReceivedDate"        column="funds_received_date"/>
+		<result property="releaseUser"                column="release_user" />
+		<result property="payPreparationDate"         column="pay_preparation_date"/>
+		<association property="originAmount.currency" column="FK_origin_currency_code" select="countryMap.fetchCurrencyByCode"/>
+		<association property="originAmount.country"  column="FK_origin_country_code" select="countryMap.fetchCountryByCode"/>
+		<association property="location"              column="{id=FK_location_id}" select="LocationMap.fetchLocationById"/>
+		<collection property="moneyTransferList"      column="money_transfer_batch_id" select="MoneyTransferMap.fetchMoneyTransferByMoneyTransferBatchId"/>
+		<collection property="noteList"               column="money_transfer_batch_id" select="noteMap.fetchNoteByMoneyTransferBatchId"/>
+		<collection property="statusList"             column="money_transfer_batch_id" select="MoneyTransferBatchStatusMap.fetchMoneyTransferBatchStatusByMoneyTransferBatchId"/>
+	</resultMap>
+
+    <!--************************************************************************** -->
+	<!-- SQL fragments allow "parts" of SQL to be re-used in other SQL statements. -->
+	<!--************************************************************************** -->
+
+	<sql id="allMoneyTransferBatchColumnsExceptKey">
+		money_transfer_batch_key,
+		FK_location_id,
+		origin_amount,
+		FK_origin_currency_code,
+		FK_origin_country_code,
+		transfer_date,
+		funds_received_date,
+		release_user,
+		pay_preparation_date,
+		versn_lock_num,
+		<include refid="CBOFMap.allChangeControlColumns"/>
+	</sql>
+
+	<sql id="allMoneyTransferBatchColumns">
+		money_transfer_batch_id,
+		<include refid="MoneyTransferBatchMap.allMoneyTransferBatchColumnsExceptKey"/>
+	</sql>
+
+	<sql id="allMoneyTransferBatchColumnsExceptKeyWithAlias">
+		mtb.money_transfer_batch_key,
+		mtb.FK_location_id,
+		mtb.origin_amount,
+		mtb.FK_origin_currency_code,
+		mtb.FK_origin_country_code,
+		mtb.transfer_date,
+		mtb.funds_received_date,
+		mtb.release_user,
+		mtb.pay_preparation_date,
+		mtb.versn_lock_num,
+		mtb.create_date,
+  		mtb.create_user,
+  		mtb.modify_date,
+  		mtb.modify_user
+	</sql>
+
+	<sql id="allMoneyTransferBatchColumnsWithAlias">
+		mtb.money_transfer_batch_id,
+		<include refid="MoneyTransferBatchMap.allMoneyTransferBatchColumnsExceptKeyWithAlias"/>
+	</sql>
+
+	<sql id="allMoneyTransferBatchValuesExceptKey">
+		#{key},
+		#{location.id},
+		#{originAmount.amount},
+		#{originAmount.currency.code},
+		#{originAmount.country.code},
+		#{transferDate},
+		#{payrollReceivedDate},
+		#{releaseUser},
+		#{payPreparationDate},
+		#{version},
+		<include refid="CBOFMap.changeControlFields"/>
+	</sql>
+
+	<sql id="allBusinessProductPlanValues">
+		#{id},
+		<include refid="MoneyTransferBatchMap.allMoneyTransferBatchValuesExceptKey"/>
+	</sql>
+
+	<sql id="selectCurrentStatusId">
+		(SELECT TOP 1 money_transfer_batch_status_id
+     	 FROM money_transfer_batch_status mtbs
+     	 WHERE FK_money_transfer_batch_id = mtb.money_transfer_batch_id
+     	 ORDER BY mtbs.create_date desc)
+	</sql>
+
+	<sql id="moneyTransferBatchCriteriaWhereClause">
+		<where>
+			<if test="criteria.locationId != null">
+				mtb.FK_location_id = #{criteria.locationId}
+			</if>
+			<if test="criteria.transferDate != null">
+				AND transfer_date = #{criteria.transferDate}
+			</if>
+			<if test="criteria.statusList != null and !criteria.statusList.isEmpty()">
+			     AND mtbs.money_transfer_batch_status_code IN
+			     <foreach item="item" index="index" collection="criteria.statusList"
+				     open="(" separator="," close=")">
+				   	 #{item.value}
+				 </foreach>
+			</if>
+		</where>
+	</sql>
+
+    <!--**************************************************************************-->
+    <!--**********************SQL Insert Statements.******************************-->
+    <!--**************************************************************************-->
+
+   	<insert id="insertMoneyTransferBatch" parameterType="MoneyTransferBatch" useGeneratedKeys="true" keyProperty="id">
+	  	INSERT INTO money_transfer_batch (
+			<include refid="MoneyTransferBatchMap.allMoneyTransferBatchColumnsExceptKey" />
+	      )
+	    VALUES (<include refid="MoneyTransferBatchMap.allMoneyTransferBatchValuesExceptKey" /> )
+  	</insert>
+
+    <!--**************************************************************************-->
+    <!--*************************SQL Update Statements.***************************-->
+    <!--**************************************************************************-->
+
+  	<update id="updateMoneyTransferBatch" parameterType="MoneyTransferBatch">
+    	UPDATE money_transfer_batch
+    	<set>
+			FK_location_id = #{location.id},
+			release_user = #{releaseUser},
+			<if test="payPreparationDate != null"> pay_preparation_date = #{payPreparationDate}, </if>
+    		<if test="originAmount != null and originAmount.amount != null"> origin_amount = #{originAmount.amount}, </if>
+    		<if test="originAmount != null and originAmount.currency != null and originAmount.currency.code != null"> FK_origin_currency_code = #{originAmount.currency.code}, </if>
+    		<if test="originAmount != null and originAmount.country != null and originAmount.country.code != null"> FK_origin_country_code = #{originAmount.country.code}, </if>
+    		<if test="transferDate != null"> transfer_date = #{transferDate}, </if>
+    		<if test="payrollReceivedDate != null"> funds_received_date = #{payrollReceivedDate}, </if>
+    		<if test="modifyDateUTC != null"> modify_date = #{modifyDateUTC}, </if>
+			<if test="modifyUser != null"> modify_user = #{modifyUser} </if>
+		</set>
+    	WHERE
+     		money_transfer_batch_id = #{id} AND
+     		versn_lock_num = #{version}
+  	</update>
+
+	<!--**************************************************************************-->
+    <!--***********************SQL Delete Statements.*****************************-->
+    <!--**************************************************************************-->
+
+  	<delete id="deleteMoneyTransferBatch" parameterType="MoneyTransferBatch">
+  		DELETE FROM money_transfer_batch
+  		WHERE
+  			money_transfer_batch_id = #{id} AND
+  			versn_lock_num = #{version}
+	</delete>
+
+	<!--**************************************************************************-->
+    <!--*************************SQL Fetch Statements.****************************-->
+    <!--**************************************************************************-->
+
+	<select id="fetchMoneyTransferBatchRowCount" parameterType="MoneyTransferBatchInquiryRequest" resultType="Integer">
+     	SELECT COUNT(mtb.money_transfer_batch_id) AS RECORD_COUNT
+     	FROM money_transfer_batch mtb
+     	JOIN money_transfer_batch_status mtbs ON mtbs.money_transfer_batch_status_id = <include refid="MoneyTransferBatchMap.selectCurrentStatusId"/>
+		JOIN business b ON b.business_id = mtb.FK_location_id
+	  	<include refid="moneyTransferBatchCriteriaWhereClause"/>
+	</select>
+
+	<select id="fetchMoneyTransferBatchVersionNumber" parameterType="int" resultType="int">
+		SELECT versn_lock_num
+		FROM money_transfer_batch
+		WHERE money_transfer_batch_id = #{id}
+  	</select>
+
+    <select id="fetchMoneyTransferBatchById" parameterType="int" resultMap="moneyTransferBatchResult">
+		SELECT
+			<include refid="MoneyTransferBatchMap.allMoneyTransferBatchColumns"/>
+		FROM money_transfer_batch
+		WHERE money_transfer_batch_id = #{id}
+  	</select>
+
+  	<select id="fetchMoneyTransferBatchByRequest" parameterType="MoneyTransferBatchInquiryRequest" resultMap="moneyTransferBatchResult">
+	    SELECT * FROM
+	    			(
+	    				SELECT
+	    				       <include refid="MoneyTransferBatchMap.allMoneyTransferBatchColumnsWithAlias"/>,
+	    						ROW_NUMBER() OVER(ORDER BY
+	    						<if test="sortExpression != null and sortExpression != ''">
+	    							${sortExpression}
+	    						</if>
+	    						<if test="sortExpression == null or sortExpression == ''">
+	    							mtb.transfer_date, mtbs.money_transfer_batch_status_code, b.name
+	    						</if>
+	    						) AS RowNumber
+	    				FROM money_transfer_batch mtb
+	    				JOIN money_transfer_batch_status mtbs ON mtbs.money_transfer_batch_status_id = <include refid="MoneyTransferBatchMap.selectCurrentStatusId"/>
+	    				JOIN business b ON b.business_id = mtb.FK_location_id
+	    				<include refid="moneyTransferBatchCriteriaWhereClause"/>
+	    			) LIST
+					<choose>
+						<when test="pageSize != null and pageSize > 0">
+						   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+						        LOWER: startRow + 1 and
+						        UPPER: startRow + pageSize -->
+						   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+						</when>
+						<otherwise>
+						 	WHERE RowNumber BETWEEN 1 AND RowNumber
+						 	ORDER BY RowNumber
+						</otherwise>
+					</choose>
+  	</select>
+
+	<select id="fetchMoneyTransferBatchByStatusPagedBatch" parameterType="Integer" resultMap="moneyTransferBatchResult">
+		<if test="_databaseId == 'SqlServer'">
+ 			SELECT * FROM
+				(
+					 SELECT
+  				  		<include refid="MoneyTransferBatchMap.allMoneyTransferBatchColumnsWithAlias"/>,
+						ROW_NUMBER() OVER(ORDER BY transfer_date) AS RowNumber
+	    				FROM money_transfer_batch mtb
+	    				JOIN money_transfer_batch_status mtbs ON mtbs.money_transfer_batch_status_id = <include refid="MoneyTransferBatchMap.selectCurrentStatusId"/>
+	    				WHERE
+	    					mtbs.money_transfer_batch_status_code IN
+	    					<foreach item="statusCode" index="index" collection="statusCodes"
+					 		    open="(" separator="," close=")">
+					   			#{statusCode}
+					 		</foreach>
+	    		) LIST
+				<choose>
+					<when test="_pagesize != null and _pagesize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{_page}*#{_pagesize})+ 1 AND (#{_page}*#{_pagesize})+#{_pagesize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+		</if>
+	</select>
+
+</mapper>

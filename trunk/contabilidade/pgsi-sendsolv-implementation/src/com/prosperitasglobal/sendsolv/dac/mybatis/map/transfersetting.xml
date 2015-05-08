@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TransferSettingMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+
+	<resultMap id="changeControlMapping" type="QATModel">
+  		<result property="createUser"			column="create_user"/>
+		<result property="createDateUTC"		column="create_date"/>
+		<result property="modifyUser"			column="modify_user"/>
+		<result property="modifyDateUTC"		column="modify_date"/>
+	</resultMap>
+
+	<resultMap id="changeControlMappingOL" type="QATModelOL" extends="changeControlMapping">
+  		<result property="version"				column="versn_lock_num"/>
+	</resultMap>
+
+	<resultMap id="transferSettingResult" type="TransferSetting" extends="changeControlMappingOL">
+    	<result property="id"					         column="transfer_setting_id"/>
+    	<result property="key"                           column="transfer_setting_key"/>
+    	<result property="memberId"					     column="FK_member_id"/>
+    	<result property="recipientId"				     column="FK_recipient_id"/>
+    	<result property="cyclesToSkip"	                 column="number_of_cycles_to_skip"/>
+    	<result property="effectiveStartDate"		     column="effective_start_date"/>
+    	<result property="effectiveEndDate"		         column="effective_end_date"/>
+    	<result property="numberOfCyclesSkipped"	     column="number_of_cycles_skipped"/>
+    	<result property="statusValue"		             column="pgsi_status"/>
+    	<result property="transferAmount"		         column="transfer_amount"/>
+    	<result property="transferTypeValue"		     column="transfer_type"/>
+    	<result property="account.typeValue"		     column="account_type_code"/>
+    	<result property="account.number"		         column="account_number"/>
+
+    	<collection property="customFeeList" 		     column="transfer_setting_id" select="fetchCustomFeeByTransferSettingId" />
+    	<collection property="employmentInfo" 		     column="FK_employment_information_id" select="EmploymentInfoMap.fetchEmploymentInfoById" />
+    	<collection property="planCategory" 		     column="FK_product_plan_category_id" select="PlanCategoryMap.fetchPlanCategoryById" />
+    	<collection property="productPlanApplicability"  column="FK_product_plan_applicability_id" select="ProductPlanApplicabilityMap.fetchProductPlanApplicabilityById" />
+    	<collection property="noteList"                  column="transfer_setting_id" select="noteMap.fetchNoteByTransferSettingId"/>
+  	</resultMap>
+
+  	<resultMap id="customFeeResult" type="CustomFee" extends="changeControlMappingOL">
+  		<result property="id"					 column="custom_fee_id"/>
+    	<result property="transferSettingId"	 column="FK_transfer_setting_id"/>
+    	<result property="effectiveStartDate"	 column="effective_start_date"/>
+    	<result property="effectiveEndDate"		 column="effective_end_date"/>
+    	<result property="statusValue"			 column="pgsi_status"/>
+    	<result property="value"				 column="custom_fee_amount"/>
+  	</resultMap>
+
+    <!--************************************************************************** -->
+	<!-- SQL fragments allow "parts" of SQL to be re-used in other SQL statements. -->
+	<!--************************************************************************** -->
+
+	<sql id="allChangeControlColumns">
+		create_date,
+  		create_user,
+  		modify_date,
+  		modify_user
+  	</sql>
+
+   	<sql id="allTransferSettingColumnsWithKey">
+  		transfer_setting_id,
+  		versn_lock_num,
+        <include refid="allTransferSettingColumnsExceptKey"/>
+  	</sql>
+
+  	<sql id="allTransferSettingColumnsExceptKey">
+  		transfer_setting_key,
+		FK_member_id,
+	    FK_recipient_id,
+	    number_of_cycles_to_skip,
+	    number_of_cycles_skipped,
+	    effective_start_date,
+	    effective_end_date,
+	    FK_employment_information_id,
+	    FK_product_plan_category_id,
+	    FK_product_plan_applicability_id,
+	    pgsi_status,
+	    transfer_amount,
+	    account_type_code,
+	    account_number,
+	    payment_type_code,
+	    transfer_type,
+		<include refid="allChangeControlColumns"/>
+  	</sql>
+
+	<sql id="allTransferSettingColumnsWithKeyWithAlias">
+  		ts.transfer_setting_id,
+  		ts.versn_lock_num,
+        <include refid="allTransferSettingColumnsExceptKeyWithAlias"/>
+  	</sql>
+
+  	<sql id="allTransferSettingColumnsExceptKeyWithAlias">
+  		ts.transfer_setting_key,
+		ts.FK_member_id,
+	    ts.FK_recipient_id,
+	    ts.number_of_cycles_to_skip,
+	    ts.number_of_cycles_skipped,
+	    ts.effective_start_date,
+	    ts.effective_end_date,
+	    ts.FK_employment_information_id,
+	    ts.FK_product_plan_category_id,
+	    ts.FK_product_plan_applicability_id,
+	    ts.pgsi_status,
+	    ts.transfer_amount,
+	    ts.account_type_code,
+	    ts.account_number,
+	    ts.payment_type_code,
+	    ts.transfer_type,
+		ts.create_date,
+  		ts.create_user,
+  		ts.modify_date,
+  		ts.modify_user
+  	</sql>
+
+  	<sql id="allTransferSettingValuesExceptKey">
+  		#{key},
+		#{memberId},
+	  	#{recipientId},
+  		#{cyclesToSkip},
+  		#{numberOfCyclesSkipped},
+		#{effectiveStartDate},
+		#{effectiveEndDate},
+		#{employmentInfo.id},
+		#{planCategory.id},
+		#{productPlanApplicability.id},
+		#{status.value},
+		#{transferAmount},
+		#{account.type.value},
+		#{account.number},
+		#{productPlanApplicability.paymentType.value},
+		#{transferType.value},
+		<include refid="CBOFMap.changeControlFields"/>
+	</sql>
+
+  	<sql id="allTransferSettingValues">
+	  	#{id},
+		<include refid="TransferSettingMap.allTransferSettingValuesExceptKey"/>
+	</sql>
+
+    <!--**************************************************************************-->
+    <!--**********************SQL Insert Statements.******************************-->
+    <!--**************************************************************************-->
+
+	<insert id="insertTransferSetting" parameterType="TransferSetting" useGeneratedKeys="true" keyProperty="id">
+	  	INSERT INTO transfer_setting (
+			<include refid="TransferSettingMap.allTransferSettingColumnsExceptKey" />
+	      )
+	    VALUES (<include refid="TransferSettingMap.allTransferSettingValuesExceptKey" /> )
+  	</insert>
+
+	<insert id="insertCustomFee" parameterType="CustomFee" useGeneratedKeys="true" keyProperty="id">
+	  	INSERT INTO custom_fee
+	  		   ( FK_transfer_setting_id,
+	  		     custom_fee_amount,
+	  		     pgsi_status,
+	  		     effective_end_date,
+	  		     <include refid="allChangeControlColumns"/>
+	  		   )
+	    VALUES (#{transferSettingId},
+	    		#{value},
+	    		#{statusValue},
+	    		#{effectiveEndDate},
+	   		    <include refid="CBOFMap.changeControlFields"/>
+	   		   )
+  	</insert>
+
+    <!--**************************************************************************-->
+    <!--*************************SQL Update Statements.***************************-->
+    <!--**************************************************************************-->
+
+    <update id="updateTransferSetting" parameterType="TransferSetting">
+    	UPDATE transfer_setting
+    	<set>
+    		<if test="memberId != null"> FK_member_id=#{memberId}, </if>
+    		<if test="recipientId != null"> FK_recipient_id=#{recipientId}, </if>
+    		<if test="cyclesToSkip != null"> number_of_cycles_to_skip=#{cyclesToSkip}, </if>
+    		<if test="numberOfCyclesSkipped != null"> number_of_cycles_skipped=#{numberOfCyclesSkipped}, </if>
+    		<if test="effectiveStartDate != null"> effective_start_date=#{effectiveStartDate}, </if>
+    		<if test="effectiveEndDate != null"> effective_end_date=#{effectiveEndDate}, </if>
+			<if test="employmentInfo != null"> FK_employment_information_id=#{employmentInfo.id}, </if>
+			<if test="planCategory != null"> FK_product_plan_category_id=#{planCategory.id}, </if>
+			<if test="productPlanApplicability != null"> FK_product_plan_applicability_id=#{productPlanApplicability.id}, </if>
+			<if test="status != null"> pgsi_status=#{status.value}, </if>
+			<if test="transferAmount != null"> transfer_amount=#{transferAmount}, </if>
+			<if test="account != null and account.type != null"> account_type_code=#{account.type.value}, </if>
+			<if test="account != null and account.number != null"> account_number=#{account.number}, </if>
+			<if test="transferType != null"> transfer_type=#{transferType.value}, </if>
+			<if test="productPlanApplicability != null and productPlanApplicability.paymentType != null"> payment_type_code=#{productPlanApplicability.paymentType.value}, </if>
+			<if test="modifyDateUTC != null"> modify_date=#{modifyDateUTC}, </if>
+			<if test="modifyUser != null"> modify_user=#{modifyUser} </if>
+		</set>
+    	WHERE
+     		transfer_setting_id = #{id} AND
+  			versn_lock_num = #{version}
+  	</update>
+
+  	<update id="updateCustomFee" parameterType="CustomFee">
+  		UPDATE custom_fee
+  		<set>
+  			<if test="value != null"> custom_fee_amount=#{value}, </if>
+  			<if test="status != null"> pgsi_status=#{status.value}, </if>
+  			<if test="effectiveEndDate != null"> effective_end_date=#{effectiveEndDate}, </if>
+  			<if test="modifyDateUTC != null"> modify_date=#{modifyDateUTC}, </if>
+			<if test="modifyUser != null"> modify_user=#{modifyUser} </if>
+  		</set>
+  		WHERE
+     		custom_fee_id = #{id} AND
+  			versn_lock_num = #{version}
+  	</update>
+
+  	<update id="updateTransferSettingStatus" parameterType="TransferSetting">
+ 		UPDATE transfer_setting
+ 		<set>
+ 			<if test="statusValue != null"> PGSi_status=#{statusValue},</if>
+ 			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+   		WHERE transfer_setting_id = #{id}
+          AND versn_lock_num = #{version}
+ 	</update>
+
+	<!--**************************************************************************-->
+    <!--***********************SQL Delete Statements.*****************************-->
+    <!--**************************************************************************-->
+
+    <delete id="deleteTransferSetting" parameterType="TransferSetting">
+  		DELETE FROM transfer_setting
+  		WHERE
+  			transfer_setting_id = #{id} AND
+  			versn_lock_num = #{version}
+	</delete>
+
+	<delete id="deleteCustomFee" parameterType="CustomFee">
+  		DELETE FROM custom_fee
+  		WHERE
+  			custom_fee_id = #{id} AND
+  			versn_lock_num = #{version}
+	</delete>
+
+	<!--**************************************************************************-->
+    <!--*************************SQL Fetch Statements.****************************-->
+    <!--**************************************************************************-->
+
+    <select id="fetchTransferSettingVersionNumber" parameterType="Integer" resultType="int">
+		SELECT versn_lock_num
+		  FROM transfer_setting
+		WHERE transfer_setting_id = #{value}
+  	</select>
+
+  	<select id="fetchTransferSettingById" parameterType="Integer" resultMap="transferSettingResult">
+		SELECT
+			<include refid="TransferSettingMap.allTransferSettingColumnsWithKey" />
+		  FROM transfer_setting
+		WHERE transfer_setting_id = #{value}
+  	</select>
+
+    <select id="fetchTransferSettingByPersonId" parameterType="Integer" resultMap="transferSettingResult">
+		SELECT <include refid="TransferSettingMap.allTransferSettingColumnsWithKey"/>
+		  FROM transfer_setting
+		 WHERE effective_end_date <![CDATA[ >= ]]> DATEDIFF(s, '19700101', GETUTCDATE()) + '000'
+		   AND (FK_member_id = #{value} OR FK_recipient_id = #{value})
+    </select>
+
+	<select id="fetchCustomFeeByTransferSettingId" parameterType="Integer" resultMap="customFeeResult">
+		SELECT custom_fee_id
+		       ,FK_transfer_setting_id
+			   ,effective_start_date
+			   ,effective_end_date
+			   ,pgsi_status
+			   ,custom_fee_amount
+			   ,versn_lock_num
+		   FROM custom_fee
+		WHERE FK_transfer_setting_id = #{value}
+	</select>
+
+	<select id="fetchTransferSettingByActiveStatusPagedBatch" resultMap="transferSettingResult">
+		<if test="_databaseId == 'SqlServer'">
+ 			SELECT * FROM
+				(
+					 SELECT
+  				  		<include refid="TransferSettingMap.allTransferSettingColumnsWithKeyWithAlias"/>,
+						ROW_NUMBER() OVER(ORDER BY ts.FK_member_id) AS RowNumber
+	    				FROM transfer_setting ts
+	    				JOIN employment_information ei ON ei.employment_information_id = ts.FK_employment_information_id
+	    				JOIN business b ON b.business_id = ei.FK_business_id
+	    				JOIN money_transfer_batch mtb ON mtb.FK_location_id = b.business_id
+	    				JOIN money_transfer_batch_status mtbs ON mtbs.money_transfer_batch_status_id = <include refid="MoneyTransferBatchMap.selectCurrentStatusId"/>
+	    				LEFT OUTER JOIN money_transfer mt ON
+	    					mt.FK_money_transfer_batch_id = mtb.money_transfer_batch_id AND
+	    					mt.FK_transfer_setting_id = ts.transfer_setting_id
+	    				WHERE
+	    					ts.pgsi_status = 1 AND
+	    					ei.pgsi_status = 1 AND
+	    					b.PGSi_status = 1 AND
+	    					mtbs.money_transfer_batch_status_code = 1 AND
+	    					mt.money_transfer_id is null
+	    		) LIST
+				<choose>
+					<when test="_pagesize != null and _pagesize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{_page}*#{_pagesize})+ 1 AND (#{_page}*#{_pagesize})+#{_pagesize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+		</if>
+	</select>
+
+</mapper>

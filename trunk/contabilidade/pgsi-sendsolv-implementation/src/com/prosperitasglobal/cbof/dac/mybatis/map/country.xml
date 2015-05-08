@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="countryMap">
+
+  <!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+
+  	<resultMap id="countryResult" type="Country">
+		<result property="code" column="country_code" />
+		<result property="description" column="country_name" />
+		<result property="phoneCode" column="phone_code" />
+		<collection property="currencyList" column="country_code" select="fetchCurrencyByCountryCode"/>
+  	</resultMap>
+
+  	<resultMap id="stateProvinceRegionResult" type="StateProvinceRegion" extends="CBOFMap.changeControlMapping">
+		<result property="id" column="state_province_region_id" />
+		<result property="code" column="code" />
+		<result property="description" column="name" />
+  	</resultMap>
+
+  	<resultMap id="currencyResult" type="Currency" extends="CBOFMap.changeControlMapping">
+		<result property="code" column="currency_code" />
+		<result property="name" column="currency_name" />
+  	</resultMap>
+
+ 	<!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  	 <sql id="allCountryColumns">
+  		c.country_code,
+  		c.name as country_name,
+  		c.phone_code
+  	</sql>
+
+  	<sql id="allStateProvinceRegionColumns">
+  		state_province_region_id,
+  		code,
+  		name,
+  		<include refid="CBOFMap.allChangeControlColumns"/>
+  	</sql>
+
+    <!--
+		SQL Fetch Statements.
+	-->
+	<select id="fetchAllCountries" resultMap="countryResult">
+  		SELECT <include refid="allCountryColumns" />
+	  		FROM country c
+  		WHERE c.is_active = 1
+  		ORDER BY c.name
+  	</select>
+
+	<select id="fetchAllKnownCountries" parameterType="List" resultMap="countryResult">
+  		SELECT <include refid="allCountryColumns" />
+  			FROM country c
+  		WHERE is_active = 1 AND
+  		      country_code not in
+  		      <foreach item="itemList" index="index"
+  		               collection="list"
+  		               open="(" separator="," close=")" >
+  		               #{itemList}
+  		      </foreach>
+  		ORDER BY c.name
+  	</select>
+
+  	<select id="fetchCountryByCode" parameterType="String" resultMap="countryResult">
+  		SELECT <include refid="allCountryColumns" />
+  			FROM country c
+  		WHERE c.country_code = #{value}
+  	</select>
+
+  	<select id="fetchStateProvinceRegionByCountryCode" parameterType="String" resultMap="stateProvinceRegionResult">
+  		SELECT <include refid="allStateProvinceRegionColumns" />
+  		FROM state_province_region
+  		WHERE FK_country_code = #{value}
+  		ORDER BY name
+  	</select>
+
+  	<select id="fetchStateProvinceRegionByCountryCodeAndCode" resultMap="stateProvinceRegionResult">
+  		SELECT <include refid="allStateProvinceRegionColumns" />
+  		FROM state_province_region
+  		WHERE
+  			FK_country_code = #{countryCode} AND
+  			code = #{code}
+  	</select>
+
+  	<select id="fetchAllStateProvinceRegion" resultMap="stateProvinceRegionResult">
+  		SELECT
+  			<include refid="allStateProvinceRegionColumns" />
+  		FROM state_province_region
+  		ORDER BY code
+  	</select>
+
+  	<select id="fetchStateProvinceRegionById" parameterType="Integer" resultMap="stateProvinceRegionResult">
+  		SELECT <include refid="allStateProvinceRegionColumns" />
+  		FROM state_province_region
+  		WHERE state_province_region_id = #{value}
+  	</select>
+
+  	<select id="fetchCurrencyByCountryCode" parameterType="String" resultMap="currencyResult">
+		SELECT c.currency_code
+			  ,c.currency_name
+		  FROM country_currency cc
+		  JOIN currency c ON cc.FK_currency_code = c.currency_code
+  		WHERE cc.FK_country_code = #{value}
+  	</select>
+
+  	<select id="fetchCurrencyByCode" parameterType="String" resultMap="currencyResult">
+		SELECT currency_code
+			  ,currency_name
+		FROM currency
+  		WHERE currency_code = #{value}
+  	</select>
+
+</mapper>

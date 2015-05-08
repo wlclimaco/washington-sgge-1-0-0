@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProductPlanTemplateGroupMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+
+	<resultMap id="changeControlMapping" type="QATModel">
+  		<result property="createUser"		column="create_user"/>
+		<result property="createDateUTC"	column="create_date"/>
+		<result property="modifyUser"		column="modify_user"/>
+		<result property="modifyDateUTC"	column="modify_date"/>
+	</resultMap>
+
+	<resultMap id="changeControlMappingOL" type="QATModelOL" extends="changeControlMapping">
+  		<result property="version"			column="versn_lock_num"/>
+	</resultMap>
+
+	<resultMap id="productPlanTemplateGroupResult" type="ProductPlanTemplateGroup" extends="changeControlMappingOL">
+    	<result property="id"							column="product_plan_template_group_id"/>
+    	<result property="name"							column="product_plan_template_group_name"/>
+    	<result property="statusValue"					column="status"/>
+    	<collection property="templateProductPlanList" 	column="product_plan_template_group_id" select="TemplateProductPlanMap.fetchTemplateProductPlanByProductPlanTemplateGroupId"/>
+  	</resultMap>
+
+    <!--************************************************************************** -->
+	<!-- SQL fragments allow "parts" of SQL to be re-used in other SQL statements. -->
+	<!--************************************************************************** -->
+	<sql id="allProductPlanTemplateGroupColumnsExceptKey">
+		product_plan_template_group_name,
+		status,
+		versn_lock_num,
+		<include refid="CBOFMap.allChangeControlColumns"/>
+  	</sql>
+
+  	<sql id="allProductPlanTemplateGroupColumns">
+		product_plan_template_group_id,
+		<include refid="ProductPlanTemplateGroupMap.allProductPlanTemplateGroupColumnsExceptKey"/>
+  	</sql>
+
+  	<sql id="allProductPlanTemplateGroupValuesExceptKey">
+		#{name},
+  		#{statusValue},
+		#{version},
+		<include refid="CBOFMap.changeControlFields"/>
+	</sql>
+
+	<sql id="allProductPlanTemplateGroupValues">
+	  	#{id},
+		<include refid="ProductPlanTemplateGroupMap.allProductPlanTemplateGroupValuesExceptKey"/>
+	</sql>
+
+    <!--**************************************************************************-->
+    <!--**********************SQL Insert Statements.******************************-->
+    <!--**************************************************************************-->
+
+   	<insert id="insertProductPlanTemplateGroup" parameterType="ProductPlanTemplateGroup" useGeneratedKeys="true" keyProperty="id">
+	  	INSERT INTO product_plan_template_group (
+			<include refid="ProductPlanTemplateGroupMap.allProductPlanTemplateGroupColumnsExceptKey" />
+	      )
+	    VALUES (<include refid="ProductPlanTemplateGroupMap.allProductPlanTemplateGroupValuesExceptKey" /> )
+  	</insert>
+
+    <!--**************************************************************************-->
+    <!--*************************SQL Update Statements.***************************-->
+    <!--**************************************************************************-->
+
+  	<update id="updateProductPlanTemplateGroup" parameterType="ProductPlanTemplateGroup">
+    	UPDATE product_plan_template_group
+    	<set>
+    		<if test="name != null"> product_plan_template_group_name=#{name}, </if>
+    		<if test="statusValue != null"> status=#{statusValue}, </if>
+    		<if test="modifyDateUTC != null"> modify_date=#{modifyDateUTC}, </if>
+			<if test="modifyUser != null"> modify_user=#{modifyUser} </if>
+		</set>
+    	WHERE
+     		product_plan_template_group_id = #{id} AND
+     		versn_lock_num = #{version}
+  	</update>
+
+	<!--**************************************************************************-->
+    <!--***********************SQL Delete Statements.*****************************-->
+    <!--**************************************************************************-->
+
+  	<delete id="deleteProductPlanTemplateGroup" parameterType="ProductPlanTemplateGroup">
+  		DELETE FROM product_plan_template_group
+  		WHERE
+  			product_plan_template_group_id = #{id} AND
+  			versn_lock_num = #{version}
+	</delete>
+
+	<!--**************************************************************************-->
+    <!--*************************SQL Fetch Statements.****************************-->
+    <!--**************************************************************************-->
+
+	<select id="fetchProductPlanTemplateGroupRowCount" parameterType="ProductPlanTemplateGroupInquiryRequest" resultType="Integer">
+     	SELECT COUNT(product_plan_template_group_id) AS RECORD_COUNT
+     	FROM product_plan_template_group;
+  	</select>
+
+	<select id="fetchProductPlanTemplateGroupVersionNumber" parameterType="ProductPlanTemplateGroup" resultType="int">
+		SELECT versn_lock_num
+		FROM product_plan_template_group
+		WHERE product_plan_template_group_id = #{id}
+  	</select>
+
+    <select id="fetchProductPlanTemplateGroupById" parameterType="ProductPlanTemplateGroup" resultMap="productPlanTemplateGroupResult">
+		SELECT
+			<include refid="ProductPlanTemplateGroupMap.allProductPlanTemplateGroupColumns" />
+		FROM product_plan_template_group
+		WHERE product_plan_template_group_id = #{id}
+  	</select>
+
+	<select id="fetchProductPlanTemplateGroupByRequest" parameterType="ProductPlanTemplateGroupInquiryRequest" resultMap="productPlanTemplateGroupResult">
+	    SELECT * FROM
+	    			(
+	    				SELECT
+	    				       <include refid="ProductPlanTemplateGroupMap.allProductPlanTemplateGroupColumns"/>,
+	    						ROW_NUMBER() OVER(ORDER BY
+	    						<if test="sortExpression != null and sortExpression != ''">
+	    							${sortExpression}
+	    						</if>
+	    						<if test="sortExpression == null or sortExpression == ''">
+	    							product_plan_template_group_name
+	    						</if>
+	    						) AS RowNumber
+	    				FROM product_plan_template_group
+	    			) LIST
+					<choose>
+						<when test="pageSize != null and pageSize > 0">
+						   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+						        LOWER: startRow + 1 and
+						        UPPER: startRow + pageSize -->
+						   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+						</when>
+						<otherwise>
+						 	WHERE RowNumber BETWEEN 1 AND RowNumber
+						 	ORDER BY RowNumber
+						</otherwise>
+					</choose>
+  	</select>
+
+ 	<select id="fetchAllProductPlanTemplateGroupsPagedBatch" resultMap="productPlanTemplateGroupResult">
+
+  		<if test="_databaseId == 'Oracle'">
+			SELECT * FROM (
+			SELECT * FROM (
+			SELECT <include refid="ProductPlanTemplateGroupMap.allProductPlanTemplateGroupColumns" />,
+			ROWNUM ROWNUM_ FROM product_plan_template_group p ORDER BY product_plan_id ASC
+			) WHERE ROWNUM_ <![CDATA[ > ]]>
+			( #{_page} * #{_pagesize} )
+			) WHERE ROWNUM <![CDATA[ <= ]]>
+			#{_pagesize}mo
+    	</if>
+
+	   	 <if test="_databaseId == 'PostgreSQL'">
+			SELECT <include refid="ProductPlanTemplateGroupMap.allProductPlanTemplateGroupColumns" />
+	   		  FROM product_plan_template_group ORDER BY product_plan_id ASC
+			  OFFSET ( #{_page} * #{_pagesize} )
+			  LIMIT #{_pagesize}
+	    </if>
+
+		<if test="_databaseId == 'SqlServer'">
+ 			SELECT * FROM
+				(
+					SELECT
+						<include refid="ProductPlanTemplateGroupMap.allProductPlanTemplateGroupColumns"/>,
+						ROW_NUMBER() OVER(ORDER BY product_plan_template_group_id) AS RowNumber
+	    				FROM product_plan_template_group
+	    		) LIST
+				<choose>
+					<when test="_pagesize != null and _pagesize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{_page}*#{_pagesize})+ 1 AND (#{_page}*#{_pagesize})+#{_pagesize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+		</if>
+  </select>
+
+</mapper>

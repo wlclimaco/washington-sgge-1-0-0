@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CurrencyPurchaseMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+
+	<resultMap id="changeControlMapping" type="QATModel">
+  		<result property="createUser" column="create_user"/>
+		<result property="createDateUTC" column="create_date"/>
+		<result property="modifyUser" column="modify_user"/>
+		<result property="modifyDateUTC" column="modify_date"/>
+	</resultMap>
+
+	<resultMap id="currencyPurchaseResult" type="CurrencyPurchase" extends="changeControlMapping">
+		<result property="id" column="currency_purchase_id"/>
+		<result property="payerId" column="FK_payer_id"/>
+		<result property="amountPurchased" column="amount_purchased_fx" />
+		<result property="purchaseDate" column="purchase_date" />
+		<result property="foreignExchangeRate" column="exchange_rate_origin_to_fx"/>
+		<result property="amountNotAllocated" column="amount_not_allocated"  />
+		<result property="usDollarsSpent" column="us_dollar_spent" />
+		<association property="currency" column="FK_currency_code" javaType="Currency" select="countryMap.fetchCurrencyByCode" />
+  	</resultMap>
+
+	<!--************************************************************************** -->
+	<!-- SQL fragments allow "parts" of SQL to be re-used in other SQL statements. -->
+	<!--************************************************************************** -->
+
+	<!--**********************-->
+	<!--  CurrencyPurchase SQL fragments -->
+	<!--**********************-->
+	<sql id="allCurrencyPurchaseColumnsExceptKey">
+  		FK_currency_code,
+		FK_payer_id,
+		amount_purchased_fx,
+		purchase_date,
+		exchange_rate_origin_to_fx,
+		<include refid="CBOFMap.allChangeControlColumns"/>
+  	</sql>
+
+   	<sql id="allCurrencyPurchaseColumns">
+  		currency_purchase_id,
+  		<include refid="CurrencyPurchaseMap.allCurrencyPurchaseColumnsExceptKey"/>
+  	</sql>
+
+  	<sql id="allCurrencyPurchaseWithAlias">
+		cp.currency_purchase_id,
+		cp.FK_currency_code,
+		cp.FK_payer_id,
+		cp.amount_purchased_fx,
+		cp.purchase_date,
+		cp.exchange_rate_origin_to_fx,
+		cp.create_date,
+  		cp.create_user,
+  		cp.modify_date,
+  		cp.modify_user
+  	</sql>
+
+	<sql id="allCurrencyPurchaseValuesExceptKey">
+		#{currency.code},
+		#{payerId},
+		#{amountPurchased},
+		#{purchaseDate},
+		#{foreignExchangeRate},
+		<include refid="CBOFMap.changeControlFields"/>
+	</sql>
+
+	<sql id="allCurrencyPurchaseValues">
+		#{id},
+		<include refid="CurrencyPurchaseMap.allPayerValuesExceptKey"/>
+	</sql>
+
+    <!--**************************************************************************-->
+    <!--**********************SQL Insert Statements.******************************-->
+    <!--**************************************************************************-->
+
+	<insert id="insertCurrencyPurchase" parameterType="CurrencyPurchase" useGeneratedKeys="true" keyProperty="id">
+	  	INSERT INTO currency_purchase (
+			<include refid="CurrencyPurchaseMap.allCurrencyPurchaseColumnsExceptKey" />
+	      )
+	    VALUES (<include refid="CurrencyPurchaseMap.allCurrencyPurchaseValuesExceptKey" /> )
+  	</insert>
+
+    <!--**************************************************************************-->
+    <!--*************************SQL Update Statements.***************************-->
+    <!--**************************************************************************-->
+
+  	<update id="updateCurrencyPurchase" parameterType="CurrencyPurchase">
+    	UPDATE currency_purchase
+    	<set>
+    		<if test="currency != null"> FK_currency_code = #{currency.code}, </if>
+    		<if test="payerId != null"> FK_payer_id = #{payerId}, </if>
+    		<if test="amountPurchased != null"> amount_purchased_fx = #{amountPurchased}, </if>
+    		<if test="purchaseDate != null"> purchase_date = #{purchaseDate}, </if>
+			<if test="foreignExchangeRate != null"> exchange_rate_origin_to_fx = #{foreignExchangeRate}, </if>
+    		<if test="modifyDateUTC != null"> modify_date=#{modifyDateUTC}, </if>
+			<if test="modifyUser != null"> modify_user=#{modifyUser} </if>
+		</set>
+    	WHERE
+     		currency_purchase_id = #{id}
+  	</update>
+
+	<!--**************************************************************************-->
+    <!--***********************SQL Delete Statements.*****************************-->
+    <!--**************************************************************************-->
+
+  	<delete id="deleteCurrencyPurchase" parameterType="CurrencyPurchase">
+  		DELETE FROM currency_purchase
+  		WHERE currency_purchase_id = #{id}
+	</delete>
+
+	<!--**************************************************************************-->
+    <!--*************************SQL Fetch Statements.****************************-->
+    <!--**************************************************************************-->
+
+
+<!--  	<select id="fetchCurrencyPurchaseById" parameterType="Integer" resultMap="currencyPurchaseResult">
+		SELECT
+			<include refid="CurrencyPurchaseMap.allCurrencyPurchaseColumns" />
+  		FROM currency_purchase
+		WHERE currency_purchase_id = #{id}
+  	</select>   -->
+
+	<!-- ************************************************************************ -->
+	<!-- ******************** Below SQl is calculating the amountNotAllocated**** -->
+	<!-- ******************** and usDollarSpent derived attributes. ************* -->
+	<!-- ************************************************************************ -->
+
+  	<select id="fetchCurrencyPurchaseById" parameterType="Integer" resultMap="currencyPurchaseResult">
+  		SELECT
+			<include refid="CurrencyPurchaseMap.allCurrencyPurchaseColumns" />
+  		FROM currency_purchase
+		WHERE currency_purchase_id = #{id}
+  	</select>
+
+    <select id="fetchCurrencyPurchaseByPayerId" parameterType="int" resultMap="currencyPurchaseResult">
+		SELECT
+			<include refid="CurrencyPurchaseMap.allCurrencyPurchaseColumns" />
+		FROM currency_purchase
+		WHERE FK_payer_id = #{id}
+  	</select>
+
+</mapper>

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProductMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+
+	<resultMap id="changeControlMapping" type="QATModel">
+  		<result property="createUser"			column="create_user"/>
+		<result property="createDateUTC"		column="create_date"/>
+		<result property="modifyUser"			column="modify_user"/>
+		<result property="modifyDateUTC"		column="modify_date"/>
+	</resultMap>
+
+	<resultMap id="changeControlMappingOL" type="QATModelOL" extends="changeControlMapping">
+  		<result property="version"				column="versn_lock_num"/>
+	</resultMap>
+
+	<resultMap id="productResult" type="Product" extends="changeControlMappingOL">
+    	<result property="id"					column="product_id"/>
+    	<result property="name"					column="product_name"/>
+    	<result property="description"			column="product_description"/>
+    	<result property="productStatusValue"	column="status"/>
+    	<result property="effectiveStartDate"	column="effective_start_date"/>
+    	<result property="effectiveEndDate"		column="effective_end_date"/>
+  	</resultMap>
+
+    <!--************************************************************************** -->
+	<!-- SQL fragments allow "parts" of SQL to be re-used in other SQL statements. -->
+	<!--************************************************************************** -->
+	<sql id="allProductColumnsExceptKey">
+		product_name,
+		product_description,
+		status,
+		effective_start_date,
+		effective_end_date,
+		versn_lock_num,
+		<include refid="CBOFMap.allChangeControlColumns"/>
+  	</sql>
+
+  	<sql id="allProductColumns">
+		product_id,
+		<include refid="ProductMap.allProductColumnsExceptKey"/>
+  	</sql>
+
+  	<sql id="allProductValuesExceptKey">
+		#{name},
+	  	#{description},
+  		#{productStatusValue},
+		#{effectiveStartDate},
+		#{effectiveEndDate},
+		#{version},
+		<include refid="CBOFMap.changeControlFields"/>
+	</sql>
+
+	<sql id="allProductValues">
+	  	#{id},
+		<include refid="ProductMap.allProductValuesExceptKey"/>
+	</sql>
+
+    <!--**************************************************************************-->
+    <!--**********************SQL Insert Statements.******************************-->
+    <!--**************************************************************************-->
+
+   	<insert id="insertProduct" parameterType="Product" useGeneratedKeys="true" keyProperty="id">
+	  	INSERT INTO product (
+			<include refid="ProductMap.allProductColumnsExceptKey" />
+	      )
+	    VALUES (<include refid="ProductMap.allProductValuesExceptKey" /> )
+  	</insert>
+
+    <!--**************************************************************************-->
+    <!--*************************SQL Update Statements.***************************-->
+    <!--**************************************************************************-->
+
+  	<update id="updateProduct" parameterType="Product">
+    	UPDATE product
+    	<set>
+    		<if test="name != null"> product_name=#{name}, </if>
+    		<if test="description != null"> product_description=#{description}, </if>
+    		<if test="productStatusValue != null"> status=#{productStatusValue}, </if>
+    		<if test="effectiveStartDate != null"> effective_start_date=#{effectiveStartDate}, </if>
+    		<if test="effectiveEndDate != null"> effective_end_date=#{effectiveEndDate}, </if>
+    		<if test="modifyDateUTC != null"> modify_date=#{modifyDateUTC}, </if>
+			<if test="modifyUser != null"> modify_user=#{modifyUser} </if>
+		</set>
+    	WHERE
+     		product_id = #{id} AND
+  			versn_lock_num = #{version}
+  	</update>
+
+	<!--**************************************************************************-->
+    <!--***********************SQL Delete Statements.*****************************-->
+    <!--**************************************************************************-->
+
+  	<delete id="deleteProduct" parameterType="Product">
+  		DELETE FROM product
+  		WHERE
+  			product_id = #{id} AND
+  			versn_lock_num = #{version}
+	</delete>
+
+	<!--**************************************************************************-->
+    <!--*************************SQL Fetch Statements.****************************-->
+    <!--**************************************************************************-->
+
+	<select id="fetchProductRowCount" parameterType="Product" resultType="Integer">
+     	SELECT COUNT(product_id) AS RECORD_COUNT
+     	FROM product;
+  	</select>
+
+	<select id="fetchProductVersionNumber" parameterType="Product" resultType="int">
+		SELECT versn_lock_num FROM product
+		WHERE product_id = #{id}
+  	</select>
+
+    <select id="fetchProductById" parameterType="Product" resultMap="productResult">
+		SELECT
+			<include refid="ProductMap.allProductColumns" />
+		FROM product
+		WHERE product_id = #{id}
+  	</select>
+
+	<select id="fetchProductByRequest" parameterType="PagedInquiryRequest" resultMap="productResult">
+	    SELECT * FROM
+	    			(
+	    				SELECT
+	    				       <include refid="ProductMap.allProductColumns"/>,
+	    						ROW_NUMBER() OVER(ORDER BY
+	    						<if test="sortExpression != null and sortExpression != ''">
+	    							${sortExpression}
+	    						</if>
+	    						<if test="sortExpression == null or sortExpression == ''">
+	    							product_name
+	    						</if>
+	    						) AS RowNumber
+	    				FROM product
+	    			) LIST
+					<choose>
+						<when test="pageSize != null and pageSize > 0">
+						   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+						        LOWER: startRow + 1 and
+						        UPPER: startRow + pageSize -->
+						   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+						</when>
+						<otherwise>
+						 	WHERE RowNumber BETWEEN 1 AND RowNumber
+						 	ORDER BY RowNumber
+						</otherwise>
+					</choose>
+  	</select>
+
+	<select id="fetchAllProductsPagedBatch" resultMap="productResult">
+
+  		<if test="_databaseId == 'Oracle'">
+			SELECT * FROM (
+			SELECT * FROM (
+			SELECT <include refid="ProductMap.allProductColumns" />,
+			ROWNUM ROWNUM_ FROM product p ORDER BY product_id ASC
+			) WHERE ROWNUM_ <![CDATA[ > ]]>
+			( #{_page} * #{_pagesize} )
+			) WHERE ROWNUM <![CDATA[ <= ]]>
+			#{_pagesize}mo
+    	</if>
+
+	   	 <if test="_databaseId == 'PostgreSQL'">
+			SELECT <include refid="ProductMap.allProductColumns" />
+	   		  FROM product ORDER BY product_id ASC
+			  OFFSET ( #{_page} * #{_pagesize} )
+			  LIMIT #{_pagesize}
+	    </if>
+
+		<if test="_databaseId == 'SqlServer'">
+ 			SELECT * FROM
+				(
+					SELECT
+						<include refid="ProductMap.allProductColumns"/>,
+						ROW_NUMBER() OVER(ORDER BY product_id) AS RowNumber
+	    				FROM product
+	    		) LIST
+				<choose>
+					<when test="_pagesize != null and _pagesize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{_page}*#{_pagesize})+ 1 AND (#{_page}*#{_pagesize})+#{_pagesize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+		</if>
+  </select>
+
+</mapper>

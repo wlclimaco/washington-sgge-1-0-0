@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProductPlanApplicabilityMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+
+	<resultMap id="changeControlMapping" type="QATModel">
+  		<result property="createUser"			column="create_user"/>
+		<result property="createDateUTC"		column="create_date"/>
+		<result property="modifyUser"			column="modify_user"/>
+		<result property="modifyDateUTC"		column="modify_date"/>
+	</resultMap>
+
+	<resultMap id="changeControlMappingOL" type="QATModelOL" extends="changeControlMapping">
+  		<result property="version"				column="versn_lock_num"/>
+	</resultMap>
+
+	<resultMap id="productPlanApplicabilityResult" type="ProductPlanApplicability" extends="changeControlMappingOL">
+    	<result property="id"					 column="product_plan_applicability_id"/>
+    	<result property="productPlanId"		 column="FK_product_plan_id"/>
+    	<association property="currency"         column="FK_payer_payment_type_currency_id" select="PayerPaymentTypeCurrencyMap.fetchCurrency"/>
+    	<association property="paymentTypeValue" column="FK_payer_payment_type_currency_id" select="PayerPaymentTypeCurrencyMap.fetchPaymentTypeId"/>
+    	<association property="payer"			 column="FK_payer_payment_type_currency_id" select="PayerPaymentTypeCurrencyMap.fetchPayerByPayerPaymentTypeCurrencyId" />
+  	</resultMap>
+
+    <!--************************************************************************** -->
+	<!-- SQL fragments allow "parts" of SQL to be re-used in other SQL statements. -->
+	<!--************************************************************************** -->
+
+	<sql id="fetchPayerPaymentTypeCurrencyId">
+		(SELECT payer_payment_type_currency_id
+		 FROM payer_payment_type_currency
+		 WHERE
+		 	FK_payer_id =  #{payer.id} AND
+		 	payment_type_code = #{paymentTypeValue} AND
+		 	FK_currency_code = #{currency.code})
+	</sql>
+
+  	<sql id="allProductPlanApplicablityColumnsExceptKey">
+		FK_payer_payment_type_currency_id,
+		FK_product_plan_id,
+		versn_lock_num,
+		<include refid="CBOFMap.allChangeControlColumns"/>
+  	</sql>
+
+  	<sql id="allProductPlanApplicablityColumns">
+		product_plan_applicability_id,
+		<include refid="ProductPlanApplicabilityMap.allProductPlanApplicablityColumnsExceptKey"/>
+  	</sql>
+
+  	<sql id="allProductPlanApplicabilityValuesExceptKey">
+  		<include refid="ProductPlanApplicabilityMap.fetchPayerPaymentTypeCurrencyId"/>,
+		#{productPlanId},
+		#{version},
+		<include refid="CBOFMap.changeControlFields"/>
+	</sql>
+
+  	<sql id="allProductPlanApplicabilityValues">
+	  	#{id},
+		<include refid="ProductPlanApplicabilityMap.allProductPlanApplicabilityValuesExceptKey"/>
+	</sql>
+
+    <!--**************************************************************************-->
+    <!--**********************SQL Insert Statements.******************************-->
+    <!--**************************************************************************-->
+
+   	<insert id="insertProductPlanApplicability" parameterType="ProductPlanApplicability" useGeneratedKeys="true" keyProperty="id">
+	  	INSERT INTO product_plan_applicability (
+			<include refid="ProductPlanApplicabilityMap.allProductPlanApplicablityColumnsExceptKey"/>
+	      )
+	    VALUES (<include refid="ProductPlanApplicabilityMap.allProductPlanApplicabilityValuesExceptKey" />)
+  	</insert>
+
+    <!--**************************************************************************-->
+    <!--*************************SQL Update Statements.***************************-->
+    <!--**************************************************************************-->
+
+  	<update id="updateProductPlanApplicability" parameterType="ProductPlanApplicability">
+    	UPDATE product_plan_applicability
+    	<set>
+    		 FK_payer_payment_type_currency_id = <include refid="ProductPlanApplicabilityMap.fetchPayerPaymentTypeCurrencyId"/>,
+    		<if test="productPlanId != null"> FK_product_plan_id=#{productPlanId}, </if>
+    		<if test="modifyDateUTC != null"> modify_date=#{modifyDateUTC}, </if>
+			<if test="modifyUser != null"> modify_user=#{modifyUser} </if>
+		</set>
+    	WHERE
+     		product_plan_applicability_id = #{id} AND
+     		versn_lock_num = #{version}
+  	</update>
+
+	<!--**************************************************************************-->
+    <!--***********************SQL Delete Statements.*****************************-->
+    <!--**************************************************************************-->
+
+  	<delete id="deleteProductPlanApplicability" parameterType="ProductPlanApplicability">
+  		DELETE FROM product_plan_applicability
+  		WHERE
+  			product_plan_applicability_id = #{id} AND
+  			versn_lock_num = #{version}
+	</delete>
+
+	<!--**************************************************************************-->
+    <!--*************************SQL Fetch Statements.****************************-->
+    <!--**************************************************************************-->
+
+	<select id="fetchProductPlanApplicabilityVersionNumber" parameterType="ProductPlanApplicability" resultType="int">
+		SELECT versn_lock_num
+		FROM product_plan_applicability
+		WHERE product_plan_applicability_id = #{id}
+  	</select>
+
+    <select id="fetchProductPlanApplicabilityById" parameterType="ProductPlanApplicability" resultMap="productPlanApplicabilityResult">
+		SELECT
+			<include refid="ProductPlanApplicabilityMap.allProductPlanApplicablityColumns" />
+		FROM product_plan_applicability
+		WHERE product_plan_applicability_id = #{id}
+  	</select>
+
+    <select id="fetchProductPlanApplicabilityByProductPlanId" parameterType="ProductPlanApplicability" resultMap="productPlanApplicabilityResult">
+		SELECT
+			<include refid="ProductPlanApplicabilityMap.allProductPlanApplicablityColumns" />
+		FROM product_plan_applicability
+		WHERE FK_product_plan_id = #{productPlanId}
+  	</select>
+
+	<!--  <select id="fetchPaymentTypeId" parameterType="int" resultType="int">
+		SELECT payment_type_code
+		FROM payer_payment_type_currency
+		WHERE
+			payer_payment_type_currency_id =  #{id}
+	</select> -->
+
+	<!--  <select id="fetchCurrency" parameterType="int" resultMap="countryMap.currencyResult">
+		SELECT
+			c.currency_code,
+			c.currency_name
+  		FROM currency c
+  	 	JOIN payer_payment_type_currency pptc ON c.currency_code=pptc.FK_currency_code
+  	 	WHERE pptc.payer_payment_type_currency_id =  #{id}
+	</select>-->
+
+</mapper>

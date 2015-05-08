@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="codeValueMap">
+
+  <!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+
+    <resultMap id="codeValueResult" type="CodeValue" extends="CBOFMap.changeControlMapping">
+		<result property="code" column="code" />
+		<result property="value" column="name" />
+   	</resultMap>
+
+    <!--
+		SQL Fetch Statements.
+	-->
+    <select id="fetchAllIndustryClassificationByType" parameterType="CodeValueRequest" resultMap="codeValueResult">
+ 		SELECT
+ 			<include refid="CBOFMap.allIndustryClassificationColumns" />
+ 		FROM lookup_value
+ 		WHERE type=#{codeValueType.value}
+ 	</select>
+
+ 	<select id="fetchLookupValueById" parameterType="Integer" resultMap="codeValueResult">
+ 			SELECT
+ 			<include refid="CBOFMap.allIndustryClassificationColumns" />
+ 		FROM lookup_value
+ 		WHERE id=#{value}
+ 	</select>
+
+</mapper>

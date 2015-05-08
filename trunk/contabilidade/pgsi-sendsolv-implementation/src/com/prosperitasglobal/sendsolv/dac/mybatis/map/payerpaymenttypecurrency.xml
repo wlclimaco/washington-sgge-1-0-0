@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PayerPaymentTypeCurrencyMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+
+	<resultMap id="changeControlMapping" type="QATModel">
+  		<result property="createUser"			column="create_user"/>
+		<result property="createDateUTC"		column="create_date"/>
+		<result property="modifyUser"			column="modify_user"/>
+		<result property="modifyDateUTC"		column="modify_date"/>
+	</resultMap>
+
+	<resultMap id="paymentTypeResult" type="PaymentType" extends="changeControlMapping">
+  		<result property="typeValue"     column="payment_type_code"/>
+  		<association property="currency" column="FK_currency_code" javaType="Currency" select="countryMap.fetchCurrencyByCode" />
+	</resultMap>
+
+    <!--************************************************************************** -->
+	<!-- SQL fragments allow "parts" of SQL to be re-used in other SQL statements. -->
+	<!--************************************************************************** -->
+
+	<!--*****************************************-->
+	<!--  PayerPaymentTypeCurrency SQL fragments -->
+	<!--*****************************************-->
+
+  	<sql id="allPayerPaymentTypeCurrencyColumns">
+  	     FK_payer_id,
+  	     payment_type_code,
+  	     FK_currency_code,
+  	     <include refid="CBOFMap.allChangeControlColumns"/>
+  	</sql>
+
+	<sql id="allPayerPaymentTypeCurrencyValues">
+		#{payerId},
+		#{paymentTypeCode},
+		#{currencyCode},
+		<include refid="CBOFMap.changeControlFields"/>
+	</sql>
+
+    <!--**************************************************************************-->
+    <!--**********************SQL Insert Statements.******************************-->
+    <!--**************************************************************************-->
+
+	<insert id="insertPayerPaymentTypeCurrency" parameterType="PayerPaymentTypeCurrency" useGeneratedKeys="true" keyColumn="payer_payment_type_currency_id">
+	  	INSERT INTO payer_payment_type_currency (
+			<include refid="PayerPaymentTypeCurrencyMap.allPayerPaymentTypeCurrencyColumns" />
+	      )
+	    VALUES (<include refid="PayerPaymentTypeCurrencyMap.allPayerPaymentTypeCurrencyValues" /> )
+  	</insert>
+
+    <!--**************************************************************************-->
+    <!--*************************SQL Update Statements.***************************-->
+    <!--**************************************************************************-->
+
+	<!--**************************************************************************-->
+    <!--***********************SQL Delete Statements.*****************************-->
+    <!--**************************************************************************-->
+
+  	<delete id="deletePayerPaymentTypeCurrency" parameterType="PayerPaymentTypeCurrency">
+  		DELETE FROM payer_payment_type_currency
+		WHERE
+			FK_payer_id = #{payerId} AND
+			payment_type_code = #{paymentTypeCode} AND
+			FK_currency_code = #{currencyCode}
+	</delete>
+
+	<!--**************************************************************************-->
+    <!--*************************SQL Fetch Statements.****************************-->
+    <!--**************************************************************************-->
+
+	<select id="fetchPaymentTypeByPayerId" parameterType="Integer" resultMap="PayerPaymentTypeCurrencyMap.paymentTypeResult">
+		SELECT
+			<include refid="PayerPaymentTypeCurrencyMap.allPayerPaymentTypeCurrencyColumns"/>
+		FROM payer_payment_type_currency
+		WHERE FK_payer_id = #{value}
+	</select>
+
+    <select id="fetchPayerByPayerPaymentTypeCurrencyId" parameterType="int" resultMap="PayerMap.payerResult">
+		SELECT
+			<include refid="PayerMap.allPayerColumnsWithAlias" />
+		FROM payer_payment_type_currency
+		JOIN payer pa ON payer_id = FK_payer_id
+		WHERE payer_payment_type_currency_id = #{id}
+  	</select>
+
+	<select id="fetchPaymentTypeId" parameterType="int" resultType="int">
+		SELECT payment_type_code
+		FROM payer_payment_type_currency
+		WHERE
+			payer_payment_type_currency_id =  #{id}
+	</select>
+
+	<select id="fetchCurrency" parameterType="int" resultMap="countryMap.currencyResult">
+		SELECT
+			c.currency_code,
+			c.currency_name
+  		FROM currency c
+  	 	JOIN payer_payment_type_currency pptc ON c.currency_code=pptc.FK_currency_code
+  	 	WHERE pptc.payer_payment_type_currency_id =  #{id}
+	</select>
+
+</mapper>

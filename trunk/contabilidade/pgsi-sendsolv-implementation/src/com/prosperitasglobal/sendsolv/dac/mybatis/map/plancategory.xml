@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PlanCategoryMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+
+	<resultMap id="changeControlMapping" type="QATModel">
+  		<result property="createUser"			column="create_user"/>
+		<result property="createDateUTC"		column="create_date"/>
+		<result property="modifyUser"			column="modify_user"/>
+		<result property="modifyDateUTC"		column="modify_date"/>
+	</resultMap>
+
+	<resultMap id="changeControlMappingOL" type="QATModelOL" extends="changeControlMapping">
+  		<result property="version"				column="versn_lock_num"/>
+	</resultMap>
+
+	<resultMap id="planCategoryResult" type="PlanCategory" extends="changeControlMappingOL">
+    	<result property="id"					column="product_plan_category_id"/>
+    	<result property="name"					column="name"/>
+    	<result property="callCreditAllowance"	column="call_credit_allowance"/>
+    	<result property="productPlanId"		column="FK_product_plan_id"/>
+    	<collection property="feeTierList" 		column="product_plan_category_id" select="FeeTierMap.fetchFeeTierByPlanCategoryId" />
+  	</resultMap>
+
+    <!--************************************************************************** -->
+	<!-- SQL fragments allow "parts" of SQL to be re-used in other SQL statements. -->
+	<!--************************************************************************** -->
+  	<sql id="allPlanCategoryColumnsExceptKey">
+		name,
+		call_credit_allowance,
+		FK_product_plan_id,
+		versn_lock_num,
+		<include refid="CBOFMap.allChangeControlColumns"/>
+  	</sql>
+
+  	<sql id="allPlanCategoryColumns">
+		product_plan_category_id,
+		<include refid="PlanCategoryMap.allPlanCategoryColumnsExceptKey"/>
+  	</sql>
+
+  	<sql id="allPlanCategoryValuesExceptKey">
+		#{name},
+	  	#{callCreditAllowance},
+  		#{productPlanId},
+		#{version},
+		<include refid="CBOFMap.changeControlFields"/>
+	</sql>
+
+  	<sql id="allPlanCategoryValues">
+	  	#{id},
+		<include refid="PlanCategoryMap.allPlanCategoryValuesExceptKey"/>
+	</sql>
+
+    <!--**************************************************************************-->
+    <!--**********************SQL Insert Statements.******************************-->
+    <!--**************************************************************************-->
+
+   	<insert id="insertPlanCategory" parameterType="PlanCategory" useGeneratedKeys="true" keyProperty="id">
+	  	INSERT INTO product_plan_category (
+			<include refid="PlanCategoryMap.allPlanCategoryColumnsExceptKey" />
+	      )
+	    VALUES (<include refid="PlanCategoryMap.allPlanCategoryValuesExceptKey" /> )
+  	</insert>
+
+    <!--**************************************************************************-->
+    <!--*************************SQL Update Statements.***************************-->
+    <!--**************************************************************************-->
+
+  	<update id="updatePlanCategory" parameterType="PlanCategory">
+    	UPDATE product_plan_category
+    	<set>
+    		<if test="name != null"> name = #{name}, </if>
+    		<if test="callCreditAllowance != null"> call_credit_allowance = #{callCreditAllowance}, </if>
+    		<if test="productPlanId != null"> FK_product_plan_id = #{productPlanId}, </if>
+    		<if test="modifyDateUTC != null"> modify_date = #{modifyDateUTC}, </if>
+			<if test="modifyUser != null"> modify_user = #{modifyUser} </if>
+		</set>
+    	WHERE
+     		product_plan_category_id = #{id} AND
+  			versn_lock_num = #{version}
+  	</update>
+
+	<!--**************************************************************************-->
+    <!--***********************SQL Delete Statements.*****************************-->
+    <!--**************************************************************************-->
+
+  	<delete id="deletePlanCategory" parameterType="PlanCategory">
+  		DELETE FROM product_plan_category
+  		WHERE
+  			product_plan_category_id = #{id} AND
+  			versn_lock_num = #{version}
+	</delete>
+
+	<!--**************************************************************************-->
+    <!--*************************SQL Fetch Statements.****************************-->
+    <!--**************************************************************************-->
+
+	<select id="fetchPlanCategoryVersionNumber" parameterType="PlanCategory" resultType="int">
+		SELECT versn_lock_num
+		FROM product_plan_category
+		WHERE product_plan_category_id = #{id}
+  	</select>
+
+    <select id="fetchPlanCategoryById" parameterType="PlanCategory" resultMap="planCategoryResult">
+		SELECT
+			<include refid="PlanCategoryMap.allPlanCategoryColumns" />
+		FROM product_plan_category
+		WHERE product_plan_category_id = #{id}
+  	</select>
+
+    <select id="fetchPlanCategoryByProductPlanId" parameterType="PlanCategory" resultMap="planCategoryResult">
+		SELECT
+			<include refid="PlanCategoryMap.allPlanCategoryColumns" />
+		FROM product_plan_category
+		WHERE FK_product_plan_id = #{productPlanId}
+  	</select>
+
+</mapper>

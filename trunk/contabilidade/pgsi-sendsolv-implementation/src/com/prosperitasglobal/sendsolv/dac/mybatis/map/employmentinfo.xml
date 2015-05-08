@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="EmploymentInfoMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+
+	<resultMap id="changeControlMapping" type="QATModel">
+  		<result property="createUser"			column="create_user"/>
+		<result property="createDateUTC"		column="create_date"/>
+		<result property="modifyUser"			column="modify_user"/>
+		<result property="modifyDateUTC"		column="modify_date"/>
+	</resultMap>
+
+	<resultMap id="changeControlMappingOL" type="QATModelOL" extends="changeControlMapping">
+  		<result property="version"				column="versn_lock_num"/>
+	</resultMap>
+
+	<resultMap id="employmentInfoResult" type="EmploymentInfo" extends="changeControlMappingOL">
+    	<result property="id"				         column="employment_information_id"/>
+    	<result property="employeeId"		         column="employee_id"/>
+    	<result property="hireDate"	                 column="hire_date"/>
+    	<result property="enrollDate"	             column="enroll_date"/>
+    	<result property="jobTitle"		             column="job_title"/>
+    	<result property="employmentInfoStatusValue" column="pgsi_status"/>
+    	<result property="payPerPeriod"	             column="pay_per_period"/>
+  		<result property="locationId"	         	 column="location_id"/>
+    	<result property="locationName"	             column="location_name"/>
+  		<result property="organizationId"	         column="organization_id"/>
+    	<result property="organizationName"	         column="organization_name"/>
+  		<result property="memberId"			         column="FK_member_id"/>
+  		<result property="enrollmentTypeValue"       column="enrollment_type_code"/>
+  	</resultMap>
+
+    <!--************************************************************************** -->
+	<!-- SQL fragments allow "parts" of SQL to be re-used in other SQL statements. -->
+	<!--************************************************************************** -->
+  	<sql id="allEmploymentInfoColumnsExceptKey">
+		FK_member_id,
+		employee_id,
+		hire_date,
+		job_title,
+		pgsi_status,
+		pay_per_period,
+		enrollment_type_code,
+		FK_business_id,
+		versn_lock_num,
+		<include refid="CBOFMap.allChangeControlColumns"/>
+  	</sql>
+
+  	<sql id="allEmploymentInfoColumnsWithAlias">
+  		ei.employment_information_id,
+		ei.employee_id,
+		ei.hire_date,
+		ei.job_title,
+		ei.pgsi_status,
+		ei.pay_per_period,
+		ei.enrollment_type_code,
+		ei.enroll_date,
+		ei.FK_member_id,
+		ei.FK_business_id AS location_id,
+		loc.name AS location_name,
+		org.business_id AS organization_id,
+		org.name AS organization_name,
+		ei.versn_lock_num
+  	</sql>
+
+  	<sql id="allEmploymentInfoValuesExceptKey">
+		#{memberId},
+	  	#{employeeId},
+  		#{hireDate},
+		#{jobTitle},
+		#{employmentInfoStatus.value},
+		#{payPerPeriod},
+		#{enrollmentTypeValue},
+		#{locationId},
+		#{version},
+		<include refid="CBOFMap.changeControlFields"/>
+	</sql>
+
+  	<sql id="allEmploymentInfoValues">
+	  	#{id},
+		<include refid="EmploymentInfoMap.allEmploymentInfoValuesExceptKey"/>
+	</sql>
+
+    <!--**************************************************************************-->
+    <!--**********************SQL Insert Statements.******************************-->
+    <!--**************************************************************************-->
+
+   	<insert id="insertEmploymentInfo" parameterType="EmploymentInfo" useGeneratedKeys="true" keyProperty="id">
+	  	INSERT INTO employment_information (
+			<include refid="EmploymentInfoMap.allEmploymentInfoColumnsExceptKey" />
+	      )
+	    VALUES (<include refid="EmploymentInfoMap.allEmploymentInfoValuesExceptKey" /> )
+  	</insert>
+
+    <!--**************************************************************************-->
+    <!--*************************SQL Update Statements.***************************-->
+    <!--**************************************************************************-->
+
+  	<update id="updateEmploymentInfo" parameterType="EmploymentInfo">
+    	UPDATE employment_information
+    	<set>
+    		<if test="employeeId != null"> employee_id=#{employeeId}, </if>
+    		<if test="hireDate != null"> hire_date=#{hireDate}, </if>
+    		<if test="jobTitle != null"> job_title=#{jobTitle}, </if>
+    		<if test="employmentInfoStatus != null"> pgsi_status=#{employmentInfoStatus.value}, </if>
+    		<if test="payPerPeriod != null"> pay_per_period=#{payPerPeriod}, </if>
+    		<if test="locationId != null"> FK_business_id=#{locationId}, </if>
+			<if test="enrollDate != null"> enroll_date=#{enrollDate}, </if>
+			<if test="enrollmentTypeValue">enrollment_type_code = #{enrollmentTypeValue},</if>
+			<if test="modifyDateUTC != null"> modify_date=#{modifyDateUTC}, </if>
+			<if test="modifyUser != null"> modify_user=#{modifyUser} </if>
+		</set>
+    	WHERE
+     		employment_information_id = #{id} AND
+  			versn_lock_num = #{version}
+  	</update>
+
+  	<update id="updateEmploymentInfoStatus" parameterType="EmploymentInfo">
+ 		UPDATE employment_information
+ 		<set>
+ 			<if test="employmentInfoStatusValue != null"> PGSi_status=#{employmentInfoStatusValue},</if>
+ 			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+   		WHERE employment_information_id = #{id}
+   	      AND versn_lock_num = #{version}
+
+ 	</update>
+
+	<!--**************************************************************************-->
+    <!--***********************SQL Delete Statements.*****************************-->
+    <!--**************************************************************************-->
+
+  	<delete id="deleteEmploymentInfo" parameterType="EmploymentInfo">
+  		DELETE FROM employment_information
+  		WHERE
+  			employment_information_id = #{id} AND
+  			versn_lock_num = #{version}
+	</delete>
+
+	<!--**************************************************************************-->
+    <!--*************************SQL Fetch Statements.****************************-->
+    <!--**************************************************************************-->
+
+	<select id="fetchEmploymentInfoVersionNumber" parameterType="Integer" resultType="int">
+		SELECT versn_lock_num
+		  FROM employment_information
+		WHERE employment_information_id = #{value}
+  	</select>
+
+    <select id="fetchEmploymentInfoById" parameterType="Integer" resultMap="employmentInfoResult">
+		SELECT
+			<include refid="EmploymentInfoMap.allEmploymentInfoColumnsWithAlias" />
+		  FROM employment_information ei
+		  LEFT JOIN business loc ON (loc.business_id = ei.FK_business_id)
+		  LEFT JOIN business org ON (org.business_id = loc.FK_location_id)
+		WHERE ei.employment_information_id = #{value}
+  	</select>
+
+	<select id="fetchEmploymentInfoByLocationId" parameterType="Integer" resultMap="employmentInfoResult">
+		SELECT
+			<include refid="EmploymentInfoMap.allEmploymentInfoColumnsWithAlias" />
+		  FROM employment_information ei
+		  LEFT JOIN business loc ON (loc.business_id = ei.FK_business_id)
+		  LEFT JOIN business org ON (org.business_id = loc.FK_location_id)
+		WHERE loc.business_id = #{value}
+  	</select>
+
+    <select id="fetchEmploymentInfoByPersonId" parameterType="Integer" resultMap="employmentInfoResult">
+		SELECT
+			<include refid="EmploymentInfoMap.allEmploymentInfoColumnsWithAlias" />
+		  FROM employment_information ei
+		  LEFT JOIN business loc ON (loc.business_id = ei.FK_business_id)
+		  LEFT JOIN business org ON (org.business_id = loc.FK_location_id)
+		WHERE ei.FK_member_id = #{value}
+  	</select>
+
+    <select id="fetchEmploymentInfoByBusinessAndPersonId" parameterType="EmploymentInfo" resultMap="employmentInfoResult">
+		SELECT employment_information_id
+		       , FK_member_id
+			   , FK_business_id
+		  FROM  employment_information
+		WHERE FK_member_id = #{memberId}
+		  AND FK_business_id = #{locationId}
+  	</select>
+
+</mapper>

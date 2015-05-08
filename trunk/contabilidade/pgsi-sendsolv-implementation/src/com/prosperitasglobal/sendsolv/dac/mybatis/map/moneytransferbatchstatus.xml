@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MoneyTransferBatchStatusMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+
+	<resultMap id="changeControlMapping" type="QATModel">
+  		<result property="createUser"			column="create_user"/>
+		<result property="createDateUTC"		column="create_date"/>
+		<result property="modifyUser"			column="modify_user"/>
+		<result property="modifyDateUTC"		column="modify_date"/>
+	</resultMap>
+
+	<resultMap id="moneyTransferBatchStatusResult" type="MoneyTransferBatchStatus" extends="MoneyTransferBatchMap.changeControlMapping">
+		<result property="id"	                column="money_transfer_batch_status_id"/>
+		<result property="actionDueDate"        column="action_due_date"/>
+		<result property="moneyTransferBatchId" column="FK_money_transfer_batch_id"/>
+		<result property="statusValue"          column="money_transfer_batch_status_code"/>
+	</resultMap>
+
+    <!--************************************************************************** -->
+	<!-- SQL fragments allow "parts" of SQL to be re-used in other SQL statements. -->
+	<!--************************************************************************** -->
+
+	<sql id="allMoneyTransferBatchStatusColumnsExceptKey">
+		action_due_date,
+		FK_money_transfer_batch_id,
+		money_transfer_batch_status_code,
+		<include refid="CBOFMap.allChangeControlColumns"/>
+	</sql>
+
+	<sql id="allMoneyTransferBatchStatusColumns">
+		money_transfer_batch_status_id,
+		<include refid="MoneyTransferBatchStatusMap.allMoneyTransferBatchStatusColumnsExceptKey"/>
+	</sql>
+
+	<sql id="allMoneyTransferBatchStatusValuesExceptKey">
+		#{actionDueDate},
+		#{moneyTransferBatchId},
+		#{statusValue},
+		<include refid="CBOFMap.changeControlFields"/>
+	</sql>
+
+	<sql id="allMoneyTransferBatchStatusValues">
+		#{id},
+		<include refid="MoneyTransferBatchStatusMap.allMoneyTransferBatchStatusValuesExceptKey"/>
+	</sql>
+
+    <!--**************************************************************************-->
+    <!--**********************SQL Insert Statements.******************************-->
+    <!--**************************************************************************-->
+
+   	<insert id="insertMoneyTransferBatchStatus" parameterType="MoneyTransferBatchStatus" useGeneratedKeys="true" keyProperty="id">
+	  	INSERT INTO money_transfer_batch_status (
+			<include refid="MoneyTransferBatchStatusMap.allMoneyTransferBatchStatusColumnsExceptKey" />
+	      )
+	    VALUES (<include refid="MoneyTransferBatchStatusMap.allMoneyTransferBatchStatusValuesExceptKey" /> )
+  	</insert>
+
+    <!--**************************************************************************-->
+    <!--*************************SQL Update Statements.***************************-->
+    <!--**************************************************************************-->
+
+  	<update id="updateMoneyTransferBatchStatus" parameterType="MoneyTransferBatchStatus">
+    	UPDATE money_transfer_batch_status
+    	<set>
+	    	action_due_date = #{actionDueDate},
+	    	money_transfer_batch_status_code = #{statusValue},
+    		<if test="moneyTransferBatchId != null"> FK_money_transfer_batch_id = #{moneyTransferBatchId}, </if>
+    		<if test="modifyDateUTC != null"> modify_date = #{modifyDateUTC}, </if>
+			<if test="modifyUser != null"> modify_user = #{modifyUser} </if>
+		</set>
+    	WHERE
+     		money_transfer_batch_status_id = #{id}
+  	</update>
+
+	<!--**************************************************************************-->
+    <!--***********************SQL Delete Statements.*****************************-->
+    <!--**************************************************************************-->
+
+  	<delete id="deleteMoneyTransferBatchStatus" parameterType="MoneyTransferBatchStatus">
+  		DELETE FROM money_transfer_batch_status
+  		WHERE
+  			money_transfer_batch_status_id = #{id}
+	</delete>
+
+	<!--**************************************************************************-->
+    <!--*************************SQL Fetch Statements.****************************-->
+    <!--**************************************************************************-->
+
+    <select id="fetchMoneyTransferBatchStatusById" parameterType="int" resultMap="moneyTransferBatchStatusResult">
+		SELECT
+			<include refid="MoneyTransferBatchStatusMap.allMoneyTransferBatchStatusColumns"/>
+		FROM money_transfer_batch_status
+		WHERE money_transfer_batch_status_id = #{id}
+  	</select>
+
+	<select id="fetchMoneyTransferBatchStatusByMoneyTransferBatchId" parameterType="int" resultMap="moneyTransferBatchStatusResult">
+		SELECT
+			<include refid="MoneyTransferBatchStatusMap.allMoneyTransferBatchStatusColumns"/>
+		FROM money_transfer_batch_status
+		WHERE FK_money_transfer_batch_id = #{id}
+		ORDER BY modify_date DESC
+  	</select>
+
+</mapper>
