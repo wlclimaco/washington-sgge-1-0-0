@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+	<Say voice="woman" language="en">The confirmation number for your transaction to</Say>
+	<Say voice="woman" language="en">%RECIPIENT%</Say>
+	<Say voice="woman" language="en">is %CONFIRMATION_NUMBER%,</Say>
+	<Say voice="woman" language="en">Your total payroll deductions was $%PAYROLL_DEDUCTION%</Say>
+	<Say voice="woman" language="en">The total transaction fee was $%TRANSACTION_FEE%</Say>
+	<Say voice="woman" language="en">and the net transfer amount of $%NET_TRANSFER%</Say>
+	<Say voice="woman" language="en">at the exchange rate of 1 U S dollar to %EFFECTIVE_RATE% %CURRENCY_NAME%</Say>
+	<Say voice="woman" language="en">resulted in a transfer amount of %DESTINATION_AMOUNT% %CURRENCY_NAME%.</Say>
+	<Say voice="woman" language="en">The status of this transaction is %STATUS%</Say>
+	<Gather action="%RESPONSEURL%?action=%ACTION%&amp;previous=%CURRENTACTION%" numDigits="1">
+		<Say voice="woman" language="en">To hear your next transaction information, Press 6</Say>
+		<Say voice="woman" language="en">To repeat this transaction information, Press 8</Say>
+		<Say voice="woman" language="en">To return to the previous menu, Press 9</Say>
+		<Say voice="woman" language="en">To place an international call, press 7</Say>
+		<Say voice="woman" language="en">To speak with a Customer Service Representative, Press 0</Say>
+	</Gather>
+	<!-- If customer doesn't input anything, prompt and try again. -->
+	<Say voice="woman" language="en">I'm sorry, I didn't get your response.</Say>
+	<Redirect>%RESPONSEURL%?action=%CURRENTACTION%</Redirect>
+</Response>

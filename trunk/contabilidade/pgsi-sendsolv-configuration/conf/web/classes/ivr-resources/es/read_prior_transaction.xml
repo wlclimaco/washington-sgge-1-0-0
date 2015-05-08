@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+	<Say voice="woman" language="es">El número de confirmación de su operación para</Say>
+	<Say voice="woman" language="es">%RECIPIENT%</Say>
+	<Say voice="woman" language="es">es %CONFIRMATION_NUMBER%,</Say>
+	<Say voice="woman" language="es">Su deducción total de nómina fué de $%PAYROLL_DEDUCTION%</Say>
+	<Say voice="woman" language="es">El cargo total por su transaccion fué de $%TRANSACTION_FEE%</Say>
+	<Say voice="woman" language="es">y el monto neto transferido fué de $%NET_TRANSFER%</Say>
+	<Say voice="woman" language="es">al tipo de cambio de %EFFECTIVE_RATE% %CURRENCY_NAME% por un U S dolar</Say>
+	<Say voice="woman" language="es">resultó en una cantidad de transferencia de %DESTINATION_AMOUNT% %CURRENCY_NAME%.</Say>
+	<Say voice="woman" language="es">El estado desta operación es %STATUS%</Say>
+	<Gather action="%RESPONSEURL%?action=%ACTION%&amp;previous=%CURRENTACTION%" numDigits="1">
+		<Say voice="woman" language="es">Para escuchar la información de su siguiente operación, oprima el 6</Say>
+		<Say voice="woman" language="es">Para repetir la información desta operación. oprima el 8</Say>
+		<Say voice="woman" language="es">Para regresar al menu anterior, oprima el 9</Say>
+		<Say voice="woman" language="es">Para hacer una llamada internacional, presione el 7</Say>
+		<Say voice="woman" language="es">Para hablar con un representante de servicio a cliente, presione el 0</Say>
+	</Gather>
+	<!-- If customer doesn't input anything, prompt and try again. -->
+	<Say voice="woman" language="es">Lo siento no recibí su respuesta.</Say>
+	<Redirect>%RESPONSEURL%?action=%CURRENTACTION%</Redirect>
+</Response>

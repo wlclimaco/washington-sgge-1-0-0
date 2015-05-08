@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:sec="http://www.springframework.org/schema/security"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:p="http://www.springframework.org/schema/p"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<sec:global-method-security pre-post-annotations="enabled"> </sec:global-method-security>
+
+	<sec:http security="none" pattern="/images/page-background.png"/>
+	<sec:http security="none" pattern="/images/logo.png"/>
+	<sec:http security="none" pattern="/images/sendsolv.png"/>
+	<sec:http security="none" pattern="/fonts/PTS55F-webfont.eot"/>
+	<sec:http security="none" pattern="/fonts/PTS55F-webfont.woff"/>
+	<sec:http security="none" pattern="/fonts/PTS55F-webfont.ttf"/>
+	<sec:http security="none" pattern="/fonts/PTS55F-webfont.svg"/>
+	<sec:http security="none" pattern="/fonts/navigation.eot"/>
+	<sec:http security="none" pattern="/fonts/navigation.woff"/>
+	<sec:http security="none" pattern="/fonts/navigation.ttf"/>
+	<sec:http security="none" pattern="/fonts/navigation.svg"/>
+	<sec:http security="none" pattern="/login.jsp*"/>
+	<sec:http security="none" pattern="/ivrapi/*"/>
+	<sec:http security="none" pattern="/audio/*/*.mp3"/>
+
+	<sec:http auto-config="true" use-expressions="true">
+		<sec:intercept-url pattern="/**/**"
+			access="hasAnyRole('ROLE_DOMAIN ADMIN','ROLE_ADMIN','ROLE_CSR')" />
+		<sec:form-login login-page="/login.jsp?Please Login."
+			authentication-failure-url="/login.jsp?Login Failed."
+			default-target-url="/"
+			always-use-default-target="true" />
+		<sec:logout invalidate-session="false" logout-success-url="/login.jsp?Successful Logout." />
+		<sec:access-denied-handler error-page="/login.jsp?Access Denied." />
+		<sec:session-management invalid-session-url="/login.jsp?Access Denied.">
+			<sec:concurrency-control max-sessions="5"
+				error-if-maximum-exceeded="true" />
+		</sec:session-management>
+	</sec:http>
+
+	<sec:ldap-server url="ldaps://localhost:636/dc=BLDWILLCHANGE,dc=prosperitasglobal,dc=com" />
+
+	<sec:authentication-manager erase-credentials="false">
+		<sec:ldap-authentication-provider
+			user-dn-pattern="uid={0},ou=Users"
+			group-search-base="ou=Roles"
+			user-context-mapper-ref="userContextMapper" />
+	</sec:authentication-manager>
+
+	<bean id="userContextMapper" class="org.springframework.security.ldap.userdetails.InetOrgPersonContextMapper" />
+</beans>

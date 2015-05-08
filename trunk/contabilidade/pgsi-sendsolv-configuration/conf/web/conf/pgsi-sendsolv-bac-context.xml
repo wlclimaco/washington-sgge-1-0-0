@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 	xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" >
+
+	<!-- ========================= BAC DEFINITIONS ======================== -->
+
+	<bean id="organizationBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.OrganizationBACImpl">
+		<property name="organizationDAC" ref="organizationDACTarget"/>
+		<property name="participantIdDAC" ref="participantIdDACTarget"/>
+		<property name="sdnCheckerBAC" ref="sdnCheckerBACTarget"/>
+		<property name="locationBAC" ref="locationBACTarget"/>
+		<property name="locationBAI" ref="locationBAI"/>
+ 	</bean>
+
+  	<bean id="payerBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.PayerBACImpl">
+ 		<property name="payerDAC" ref="payerDACTarget"/>
+ 	</bean>
+
+	<bean id="locationBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.LocationBACImpl">
+		<property name="locationDAC" ref="locationDACTarget"/>
+		<property name="participantIdDAC" ref="participantIdDACTarget"/>
+		<property name="sdnCheckerBAC" ref="sdnCheckerBACTarget"/>
+		<property name="personDAC" ref="personDACTarget"/>
+		<property name="memberBAC" ref="memberBACTarget"/>
+		<property name="memberBAI" ref="memberBAI"/>
+ 	</bean>
+
+ 	 <bean id="liaisonBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.LiaisonBACImpl">
+ 		<property name="personDAC" ref="personDACTarget"/>
+ 		<property name="participantIdDAC" ref="participantIdDACTarget"/>
+ 		<property name="sdnCheckerBAC" ref="sdnCheckerBACTarget"/>
+ 	</bean>
+
+ 	 <bean id="memberBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.MemberBACImpl">
+ 		<property name="personDAC" ref="personDACTarget"/>
+ 		<property name="participantIdDAC" ref="participantIdDACTarget"/>
+ 		<property name="sdnCheckerBAC" ref="sdnCheckerBACTarget"/>
+ 		<property name="recipientBAC" ref="recipientBACTarget"/>
+ 		<property name="recipientBAI" ref="recipientBAI"/>
+ 		<property name="callingCardBAC" ref="callingCardBACTarget"/>
+ 		<property name="pinNumberLength" value='4'/>
+ 	</bean>
+
+	<bean id="productPlanBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.ProductPlanBACImpl">
+ 		<property name="productPlanDAC" ref="productPlanDACTarget"/>
+ 	</bean>
+
+	<bean id="productPlanTemplateGroupBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.ProductPlanTemplateGroupBACImpl">
+ 		<property name="productPlanDAC" ref="productPlanDACTarget"/>
+ 		<property name="productPlanTemplateGroupDAC" ref="productPlanTemplateGroupDACTarget"/>
+ 	</bean>
+
+ 	<bean id="recipientBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.RecipientBACImpl">
+ 		<property name="personDAC" ref="personDACTarget"/>
+ 		<property name="participantIdDAC" ref="participantIdDACTarget"/>
+ 		<property name="sdnCheckerBAC" ref="sdnCheckerBACTarget"/>
+ 	</bean>
+
+ 	<bean id="moneyTransferBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.MoneyTransferBACImpl">
+		<property name="moneyTransferDAC" ref="moneyTransferDACTarget"/>
+		<property name="moneyTransferBatchDAC" ref="moneyTransferBatchDACTarget"/>
+ 		<property name="dailyCurrencyRateDAC" ref="dailyCurrencyRateDACTarget"/>
+ 		<property name="noteDAC" ref="noteDACTarget"/>
+ 		<property name="personDAC" ref="personDACTarget"/>
+ 		<property name="participantIdDAC" ref="participantIdDACTarget"/>
+ 		<property name="senderAccount">
+ 			<bean class="com.prosperitasglobal.sendsolv.model.Account">
+				<property name="typeValue" value="3"/>
+				<property name="number" value="123"/>
+ 			</bean>
+ 		</property>
+ 		<property name="spreadPercentage">
+ 			<bean class="java.math.BigDecimal">
+ 				<constructor-arg value="8.2367"/>
+ 			</bean>
+		</property>
+ 		<property name="originCountry">
+ 			<bean class="com.prosperitasglobal.cbof.model.Country">
+ 				<constructor-arg value="USA"/>
+ 			</bean>
+ 		</property>
+ 		<property name="originCurrency">
+ 			<bean class="com.prosperitasglobal.cbof.model.Currency">
+ 				<constructor-arg value="USD"/>
+ 			</bean>
+ 		</property>
+	</bean>
+
+ 	<bean id="moneyTransferStagingBACTarget" parent="moneyTransferBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.MoneyTransferStagingBACImpl"/>
+
+	<bean id="currencyPurchaseBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.CurrencyPurchaseBACImpl">
+		<property name="currencyPurchaseDAC" ref="currencyPurchaseDACTarget" />
+	</bean>
+
+ 	<bean id="sdnCheckerBACTarget" class="com.prosperitasglobal.sendsolv.sdn.bac.impl.SdnCheckerBACPersistanceImpl">
+		<property name="similarityThreshold" value="${sdn.threshold}" />
+		<property name="filePath" value="${sdn.localfilepath}" />
+		<property name="sdnFileUrl" value="${sdn.fileurl}" />
+		<property name="unmarshaller" ref="unmarshallerBean" />
+		<property name="marshaller" ref="marshallerBean" />
+		<property name="sdnCheckerDAC" ref="sdnCheckerDACTarget" />
+	</bean>
+
+	<bean id="securityQuestionBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.SecurityQuestionBACImpl">
+		<property name="securityQuestionDAC" ref="securityQuestionDACTarget" />
+	</bean>
+
+	<bean id="suspiciousActivityBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.SuspiciousActivityBACImpl">
+		<property name="suspiciousActivityDAC" ref="suspiciousActivityDACTarget" />
+		<property name="participantIdDAC" ref="participantIdDACTarget"/>
+	</bean>
+
+	<bean id="callingCardBACTarget" class="com.prosperitasglobal.sendsolv.callingcard.comfi.bac.impl.CallingCardBACImpl">
+ 		<property name="callingCardDAC" ref="callingCardDACTarget"/>
+ 		<property name="callingCardType" value="${callingcard.callingcardtype}" />
+		<property name="callingCardUrl" value="${callingcard.url}" />
+		<property name="callingCardResponseType" value="${callingcard.responsetype}" />
+		<property name="callingCardApiEmail" value="${callingcard.apiemail}" />
+		<property name="callingCardApiPwd" value="${callingcard.apipwd}" />
+		<property name="qtyToGenerate" value="${callingcard.qtytogenerate}" />
+		<property name="methodsProp">
+			<props>
+           		<prop key="refill">${callingcard.refillmethod}</prop>
+           		<prop key="generate">${callingcard.generatepinmethod}</prop>
+           		<prop key="balance">${callingcard.balancemethod}</prop>
+        	</props>
+		</property>
+ 	</bean>
+
+	<!-- JAXBContext-->
+	<bean id="jaxbContextBean" class="javax.xml.bind.JAXBContext" factory-method="newInstance">
+		<constructor-arg value="com.prosperitasglobal.sendsolv.sdn.model.generated"/>
+	</bean>
+
+	<!-- JAXB Unmarshaller -->
+	<bean id="unmarshallerBean" factory-bean="jaxbContextBean" factory-method="createUnmarshaller"/>
+
+	<!-- JAXB Marshaller -->
+	<bean id="marshallerBean" factory-bean="jaxbContextBean" factory-method="createMarshaller"/>
+
+	<!-- ========================= ASPECT CONFIGURATION ======================== -->
+	<beans profile="settings">
+		<!-- Load application settings into singleton Properties object  -->
+		<bean parent="qatPropertyPlaceholderConfigurer" >
+			<property name="location" value="classpath:conf/web/classes/pgsi-sendsolv-system-configuration.properties" />
+		</bean>
+	</beans>
+
+	<beans profile="batch">
+		<!-- Load application settings into singleton Properties object  -->
+		<bean parent="qatPropertyPlaceholderConfigurer" >
+			<property name="location" value="classpath:conf/web/classes/pgsi-sendsolv-system-configuration.properties" />
+		</bean>
+	</beans>
+
+	<beans profile="tomcat">
+		<!-- Load application settings into singleton Properties object  -->
+		<bean parent="qatPropertyPlaceholderConfigurer" >
+			<property name="location" value="classpath:pgsi-sendsolv-system-configuration.properties" />
+		</bean>
+	</beans>
+
+</beans>

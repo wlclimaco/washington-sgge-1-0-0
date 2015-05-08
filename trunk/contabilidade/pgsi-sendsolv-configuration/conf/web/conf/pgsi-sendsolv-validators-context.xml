@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<bean id="BusinessValidator" class="com.prosperitasglobal.sendsolv.validation.BusinessValidator" abstract="true" >
+		<property name="industryClassificationDAC" ref="industryClassificationDACTarget"/>
+		<property name="organizationDAC" ref="organizationDACTarget"/>
+		<property name="locationDAC" ref="locationDACTarget"/>
+	</bean>
+
+	<bean id="CountryUsageListValidator" class="com.prosperitasglobal.sendsolv.validation.CountryUsageListValidator">
+		<property name="countryDAC" ref="countryDACTarget"/>
+		<property name="personDAC" ref="personDACTarget"/>
+	</bean>
+
+	<bean id="EmploymentInfoListValidator" class="com.prosperitasglobal.sendsolv.validation.EmploymentInfoListValidator" >
+		<property name="personDAC" ref="personDACTarget"/>
+	</bean>
+
+	<bean id="DocumentListValidator"     class="com.prosperitasglobal.sendsolv.validation.DocumentListValidator">
+		<property name="personDAC"       ref="personDACTarget"/>
+		<property name="organizationDAC" ref="organizationDACTarget"/>
+		<property name="locationDAC"     ref="locationDACTarget"/>
+	</bean>
+
+	<bean id="OrganizationValidator"             class="com.prosperitasglobal.sendsolv.validation.OrganizationValidator" parent="BusinessValidator"/>
+ 	<bean id="LocationValidator"                 class="com.prosperitasglobal.sendsolv.validation.LocationValidator" parent="BusinessValidator" />
+	<bean id="RecipientValidator"                class="com.prosperitasglobal.sendsolv.validation.RecipientValidator" parent="PersonValidator"/>
+ 	<bean id="LiaisonValidator"                  class="com.prosperitasglobal.sendsolv.validation.LiaisonValidator" parent="PersonValidator"/>
+	<bean id="RiskValidator"                     class="com.prosperitasglobal.sendsolv.validation.RiskValidator" />
+ 	<bean id="DocumentValidator"                 class="com.prosperitasglobal.sendsolv.validation.DocumentValidator" />
+ 	<bean id="MoneyTransferBatchValidator"       class="com.prosperitasglobal.sendsolv.validation.MoneyTransferBatchValidator" />
+ 	<bean id="MoneyTransferValidator"            class="com.prosperitasglobal.sendsolv.validation.MoneyTransferValidator" />
+	<bean id="CurrencyPurchaseValidator"         class="com.prosperitasglobal.sendsolv.validation.CurrencyPurchaseValidator" />
+	<bean id="SuspiciousActivityValidator"       class="com.prosperitasglobal.sendsolv.validation.SuspiciousActivityValidator" />
+
+	<bean id="MemberValidator"                   class="com.prosperitasglobal.sendsolv.validation.MemberValidator" parent="PersonValidator">
+		<property name="locationDAC"     ref="locationDACTarget"/>
+	</bean>
+
+	<bean id="MoneyTransferBatchCreateRequestValidator"       class="com.prosperitasglobal.sendsolv.validation.MoneyTransferBatchCreateRequestValidator" >
+		<property name="organizationDAC" ref="organizationDACTarget"/>
+		<property name="locationDAC" ref="locationDACTarget"/>
+	</bean>
+
+	<bean id="MoneyTransferCreateRequestValidator"       class="com.prosperitasglobal.sendsolv.validation.MoneyTransferCreateRequestValidator" >
+		<property name="locationDAC" ref="locationDACTarget"/>
+		<property name="personDAC" ref="personDACTarget"/>
+	</bean>
+
+	<bean id="MoneyTransferAutoApprovalRequestValidator" class="com.prosperitasglobal.sendsolv.validation.MoneyTransferAutoApprovalRequestValidator" />
+
+	<bean id="SdnHistoryValidator"       		 class="com.prosperitasglobal.sendsolv.sdn.validation.SdnHistoryValidator" />
+	<bean id="SdnStatusHistoryValidator"       	 class="com.prosperitasglobal.sendsolv.sdn.validation.SdnStatusHistoryValidator" />
+
+	<bean id="SdnMatchBusinessValidator"         class="com.prosperitasglobal.sendsolv.validation.SdnMatchBusinessValidator">
+		<property name="industryClassificationDAC" ref="industryClassificationDACTarget"/>
+		<property name="organizationDAC" ref="organizationDACTarget"/>
+		<property name="locationDAC" ref="locationDACTarget"/>
+	</bean>
+
+	<bean id="SdnMatchMemberValidator"    		 class="com.prosperitasglobal.sendsolv.validation.SdnMatchMemberValidator">
+		<property name="personDAC" ref="personDACTarget"/>
+	</bean>
+	<bean id="SdnMatchRecipientValidator" 		 class="com.prosperitasglobal.sendsolv.validation.SdnMatchRecipientValidator">
+		<property name="personDAC" ref="personDACTarget"/>
+	</bean>
+	<bean id="SdnMatchLiaisonValidator"   		 class="com.prosperitasglobal.sendsolv.validation.SdnMatchLiaisonValidator" >
+		<property name="personDAC" ref="personDACTarget"/>
+	</bean>
+
+ 	<bean id="TransferSettingListValidator"      class="com.prosperitasglobal.sendsolv.validation.TransferSettingListValidator" >
+		<property name="frequencyCodeEventMaxCycleToSkip" ref="frequencyCodeEventMaxCycleToSkip"/>
+		<property name="locationDAC"                      ref="locationDACTarget"/>
+ 	</bean>
+
+	<bean id="ProductPlanTemplateGroupCreateRequestValidator" class="com.prosperitasglobal.sendsolv.validation.ProductPlanTemplateGroupCreateRequestValidator" />
+
+	<bean id="PagedInquiryRequest" class="com.prosperitasglobal.sendsolv.validation." abstract="true"/>
+ 	<bean id="BusinessProductPlanInquiryRequestValidator" parent="PagedInquiryRequest" class="com.prosperitasglobal.sendsolv.validation.BusinessProductPlanInquiryRequestValidator">
+		<property name="inquiryValidSortFields" ref="businessProductPlanInquiryValidSortFields"/>
+	</bean>
+
+ 	<bean id="MoneyTransferInquiryRequestValidator" parent="PagedInquiryRequest" class="com.prosperitasglobal.sendsolv.validation.MoneyTransferInquiryRequestValidator">
+		<property name="inquiryValidSortFields" ref="moneyTransferInquiryValidSortFields"/>
+	</bean>
+
+ 	<bean id="MoneyTransferBatchInquiryRequestValidator" parent="PagedInquiryRequest" class="com.prosperitasglobal.sendsolv.validation.MoneyTransferBatchInquiryRequestValidator">
+		<property name="inquiryValidSortFields" ref="moneyTransferBatchInquiryValidSortFields"/>
+	</bean>
+
+ 	<bean id="MemberPagedInquiryRequestValidator" parent="PagedInquiryRequest" class="com.prosperitasglobal.sendsolv.validation.MemberPagedInquiryRequestValidator">
+		<property name="inquiryValidSortFields" ref="memberInquiryValidSortFields"/>
+	</bean>
+ 	<bean id="OrganizationPagedInquiryRequestValidator" parent="PagedInquiryRequest" class="com.prosperitasglobal.sendsolv.validation.OrganizationPagedInquiryRequestValidator">
+		<property name="inquiryValidSortFields" ref="organizationInquiryValidSortFields"/>
+	</bean>
+	<bean id="PayerInquiryRequestValidator" parent="PagedInquiryRequest" class="com.prosperitasglobal.sendsolv.validation.PayerInquiryRequestValidator">
+		<property name="inquiryValidSortFields" ref="payerInquiryValidSortFields"/>
+	</bean>
+	<bean id="ProductPlanTemplateGroupInquiryRequestValidator" parent="PagedInquiryRequest" class="com.prosperitasglobal.sendsolv.validation.ProductPlanTemplateGroupInquiryRequestValidator">
+		<property name="inquiryValidSortFields" ref="productPlanTemplateGroupInquiryValidSortFields"/>
+	</bean>
+	<bean id="RecipientPagedInquiryRequestValidator" parent="PagedInquiryRequest" class="com.prosperitasglobal.sendsolv.validation.RecipientPagedInquiryRequestValidator">
+		<property name="inquiryValidSortFields" ref="recipientInquiryValidSortFields"/>
+	</bean>
+	<bean id="TemplateProductPlanInquiryRequestValidator" parent="PagedInquiryRequest" class="com.prosperitasglobal.sendsolv.validation.TemplateProductPlanInquiryRequestValidator">
+		<property name="inquiryValidSortFields" ref="templateProductPlanInquiryValidSortFields"/>
+	</bean>
+
+	<bean id="PersonValidator" class="com.prosperitasglobal.sendsolv.validation.PersonValidator" abstract="true">
+ 		<property name="personDAC" ref="personDACTarget"/>
+ 	</bean>
+
+ 	<bean id="PersonNameListValidator" class="com.prosperitasglobal.sendsolv.validation.PersonNameListValidator" />
+ 	<bean id="NoteListValidator"       class="com.prosperitasglobal.cbof.validation.NoteListValidator" />
+ 	<bean id="NoteValidator"           class="com.prosperitasglobal.cbof.validation.NoteValidator" />
+
+	<bean id="ContactListValidator"    class="com.prosperitasglobal.cbof.validation.ContactListValidator" >
+		<property name="personDAC"       ref="personDACTarget"/>
+		<property name="organizationDAC" ref="organizationDACTarget"/>
+		<property name="locationDAC"     ref="locationDACTarget"/>
+	</bean>
+
+	<bean id="EmailListValidator"      class="com.prosperitasglobal.cbof.validation.EmailListValidator" parent="ContactListValidator"/>
+ 	<bean id="PhoneListValidator"      class="com.prosperitasglobal.cbof.validation.PhoneListValidator" parent="ContactListValidator"/>
+
+	<bean id="AddressListValidator"    class="com.prosperitasglobal.cbof.validation.AddressListValidator" parent="ContactListValidator">
+ 		<property name="contactValidLength" ref="contactValidLength"/>
+ 	</bean>
+
+	<bean id="ProductPlanTemplateGroupValidator" class="com.prosperitasglobal.sendsolv.validation.ProductPlanTemplateGroupValidator" />
+
+	<bean id="ProductPlanValidator"            class="com.prosperitasglobal.sendsolv.validation.ProductPlanValidator"  abstract="true"/>
+	<bean id="BusinessProductPlanValidator"    parent="ProductPlanValidator" class="com.prosperitasglobal.sendsolv.validation.BusinessProductPlanValidator" />
+	<bean id="TemplateProductPlanValidator"    parent="ProductPlanValidator" class="com.prosperitasglobal.sendsolv.validation.TemplateProductPlanValidator" />
+	<bean id="MoneyTransferBatchStatusMaintenanceRequestValidator" class="com.prosperitasglobal.sendsolv.validation.MoneyTransferBatchStatusMaintenanceRequestValidator" />
+	<bean id="MoneyTransferStatusMaintenanceRequestValidator" class="com.prosperitasglobal.sendsolv.validation.MoneyTransferStatusMaintenanceRequestValidator" />
+
+ 	<bean id="organizationValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="OrganizationValidator" />
+ 				<ref bean="ContactListValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+ 	<bean id="locationValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="LocationValidator" />
+ 				<ref bean="ContactListValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+ 	<bean id="currencyPurchaseValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="CurrencyPurchaseValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+ 	<bean id="documentValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="DocumentValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+ 	<bean id="noteValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="NoteValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+ 	<bean id="riskValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="RiskValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+ 	<bean id="liaisonValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="LiaisonValidator" />
+ 				<ref bean="ContactListValidator" />
+ 				<ref bean="NoteListValidator" />
+ 				<ref bean="PersonNameListValidator" />
+ 				<ref bean="DocumentListValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+ 	<bean id="memberValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="MemberValidator" />
+ 				<ref bean="NoteListValidator" />
+ 				<ref bean="PersonNameListValidator" />
+ 				<ref bean="CountryUsageListValidator" />
+ 				<ref bean="DocumentListValidator" />
+ 				<ref bean="ContactListValidator" />
+ 				<ref bean="EmploymentInfoListValidator" />
+ 				<ref bean="TransferSettingListValidator" />
+ 				<ref bean="NoteListValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+ 	<bean id="businessProductPlanValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+  				<ref bean="BusinessProductPlanValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+ 	<bean id="templateProductPlanValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+  				<ref bean="TemplateProductPlanValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+	<bean id="businessProductPlanInquiryRequestValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="BusinessProductPlanInquiryRequestValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+	<bean id="templateProductPlanInquiryRequestValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="TemplateProductPlanInquiryRequestValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+	<bean id="moneyTransferInquiryRequestValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="MoneyTransferInquiryRequestValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+	<bean id="moneyTransferBatchInquiryRequestValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="MoneyTransferBatchInquiryRequestValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+	<bean id="moneyTransferValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="MoneyTransferValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+	<bean id="moneyTransferCreateRequestValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="MoneyTransferCreateRequestValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+	<bean id="moneyTransferAutoApprovalRequestValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="MoneyTransferAutoApprovalRequestValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+	<bean id="moneyTransferBatchCreateRequestValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="MoneyTransferBatchCreateRequestValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+	<bean id="moneyTransferBatchValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="MoneyTransferBatchValidator" />
+ 				<ref bean="TransferSettingListValidator" />
+ 				<ref bean="NoteListValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+	<bean id="moneyTransferBatchStatusMaintenanceRequestValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="MoneyTransferBatchStatusMaintenanceRequestValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+	<bean id="moneyTransferStatusMaintenanceRequestValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="MoneyTransferStatusMaintenanceRequestValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+	<bean id="memberPagedInquiryRequestValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="MemberPagedInquiryRequestValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+	<bean id="organizationPagedInquiryRequestValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="OrganizationPagedInquiryRequestValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+	<bean id="productPlanTemplateGroupInquiryRequestValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="ProductPlanTemplateGroupInquiryRequestValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+	<bean id="productPlanTemplateGroupValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="ProductPlanTemplateGroupValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+ 	<bean id="productPlanTemplateGroupCreateRequestValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="ProductPlanTemplateGroupCreateRequestValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+	<bean id="recipientPagedInquiryRequestValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="RecipientPagedInquiryRequestValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+ 	<bean id="recipientValidationController" class="com.qat.framework.validation.ValidationController">
+	   <property name="validators">
+	    <list>
+	     <ref bean="RecipientValidator" />
+	     <ref bean="ContactListValidator" />
+	     <ref bean="NoteListValidator" />
+	     <ref bean="PersonNameListValidator" />
+	    </list>
+	   </property>
+    </bean>
+
+    <bean id="sdnMatchValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+  				<ref bean="SdnMatchBusinessValidator" />
+  				<ref bean="SdnMatchMemberValidator" />
+  				<ref bean="SdnMatchRecipientValidator" />
+  				<ref bean="SdnMatchLiaisonValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+	<bean id="sdnHistoryController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+  				<ref bean="SdnHistoryValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+	<bean id="sdnStatusHistoryController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+  				<ref bean="SdnStatusHistoryValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+ 	<bean id="payerValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+  				<ref bean="PayerInquiryRequestValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+	<bean id="callingCardValidator"            class="com.prosperitasglobal.sendsolv.callingcard.validation.CallingCardValidator" />
+	<bean id="callingCardValidationController" class="com.qat.framework.validation.ValidationController">
+		<property name="validators">
+ 			<list>
+  				<ref bean="callingCardValidator" />
+ 			</list>
+ 		</property>
+	</bean>
+
+	<bean id="suspiciousActivityValidationController" class="com.qat.framework.validation.ValidationController">
+		<property name="validators">
+ 			<list>
+  				<ref bean="SuspiciousActivityValidator" />
+ 			</list>
+ 		</property>
+	</bean>
+	<!-- ========================= Valid Length DEFINITIONS================================= -->
+
+ 	<util:map id="contactValidLength">
+		<entry key="cityName"     value="40"/>
+		<entry key="addressLine1" value="80"/>
+		<entry key="addressLine2" value="80"/>
+		<entry key="addressLine3" value="80"/>
+		<entry key="addressLine4" value="80"/>
+	</util:map>
+
+</beans>

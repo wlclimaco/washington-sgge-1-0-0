@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+	<Say voice="woman" language="es">La cuenta está asociada a varias Localidades. </Say>
+	<Say voice="woman" language="es">Por favor seleccione la localidad associada a la operación de la cual quiere escuchar la información.</Say>
+	<Gather action="%RESPONSEURL%?action=%ACTION%" numDigits="1">
+
+		{<Say voice="woman" language="es"><!--Para %LOCATION_NAME%, presione %INDEX%--></Say>}
+
+		<Say voice="woman" language="es">Para repetir este menú, presione el 8</Say>
+
+		<Say voice="woman" language="es">Para regresar al menu principal, presione el 9</Say>
+
+		<Say voice="woman" language="es">Para hablar con un representante de servicio a clientes, presione el 0</Say>
+	</Gather>
+	<!-- If customer doesn't input anything, prompt and try again. -->
+	<Say voice="woman" language="es">Lo siento no recibí su respuesta.</Say>
+	<Redirect>%RESPONSEURL%?action=loop_prior</Redirect>
+</Response>

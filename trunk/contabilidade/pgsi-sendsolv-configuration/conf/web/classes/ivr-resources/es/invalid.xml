@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+	<Say voice="woman" language="es">La opción seleccionada no es válida.</Say>
+    <Redirect>%RESPONSEURL%?action=%ACTION%</Redirect>
+</Response>

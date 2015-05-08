@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+	<Say voice="woman" language="es">Existe un problema con su llamada. Lo vamos a transferir con un representante de servicio al cliente.</Say>
+	<Say voice="woman" language="es">Gracias por llamar a Send Solve de P G S I</Say>
+    <Dial>402-212-7213</Dial>
+</Response>

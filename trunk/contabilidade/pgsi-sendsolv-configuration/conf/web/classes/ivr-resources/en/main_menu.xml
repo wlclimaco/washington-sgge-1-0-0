@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+	<Gather action="%RESPONSEURL%?action=%ACTION%&amp;previous=%CURRENTACTION%" numDigits="1">
+		<Say voice="woman" language="en">To hear your prior transaction information, press 1.</Say>
+		<Say voice="woman" language="en">To hear your upcoming transaction information, press 2.</Say>
+		<Say voice="woman" language="en">To make an international call, press 7.</Say>
+		<Say voice="woman" language="en">To repeat this menu, press 8.</Say>
+		<Say voice="woman" language="en">To speak to a Customer Service Representative, press 0.</Say>
+	</Gather>
+	<!-- If customer doesn't input anything, prompt and try again. -->
+	<Say voice="woman" language="en">I'm sorry, I didn't get your response.</Say>
+	<Redirect>%RESPONSEURL%?action=loop_menu</Redirect>
+</Response>

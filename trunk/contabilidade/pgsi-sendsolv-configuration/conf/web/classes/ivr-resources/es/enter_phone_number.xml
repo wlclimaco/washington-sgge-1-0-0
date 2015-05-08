@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+	<Gather action="%RESPONSEURL%?action=%ACTION%&amp;previous=%CURRENTACTION%&amp;subaction=digits" finishOnKey="#" timeout="10">
+		<Say voice="woman" language="es">Por favor introduzca el número telefónico asociado a su cuenta, incluyendo el área de servicio seguido de la tecla numeral</Say>
+	</Gather>
+	<!-- If customer doesn't input anything, prompt and try again. -->
+	<Say voice="woman" language="es">Lo siento no recibí su respuesta.</Say>
+	<Redirect>%RESPONSEURL%?action=loop_phone</Redirect>
+</Response>

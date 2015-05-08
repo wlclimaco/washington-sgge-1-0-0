@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+	<Gather action="%RESPONSEURL%?action=%ACTION%&amp;previous=%CURRENTACTION%" numDigits="1">
+		<Say voice="woman" language="en">Thank you for calling Send Solve by P G S I</Say>
+		%LANGUAGES%
+	</Gather>
+	<!-- If customer doesn't input anything, prompt and try again. -->
+	<Say voice="woman" language="en">I'm sorry, I didn't get your response.</Say>
+	<Redirect>%RESPONSEURL%?action=%CURRENTACTION%&amp;subaction=reload</Redirect>
+</Response>

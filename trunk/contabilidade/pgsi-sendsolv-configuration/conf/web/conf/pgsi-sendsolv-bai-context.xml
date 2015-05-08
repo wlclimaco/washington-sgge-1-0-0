@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- ========================= BAI DEFINITIONS ======================== -->
+	<!-- this bean implements organization bai methods -->
+ 	<bean id="organizationBAI" class="com.prosperitasglobal.sendsolv.bai.impl.OrganizationBAIImpl">
+ 		<property name="organizationBAC" ref="organizationBACTarget"/>
+ 		<property name="validationController" ref="organizationValidationController"/>
+ 		<property name="documentValidationController" ref="documentValidationController"/>
+ 		<property name="riskValidationController" ref="riskValidationController"/>
+ 		<property name="organizationPagedInquiryRequestValidationController" ref="organizationPagedInquiryRequestValidationController"/>
+ 	</bean>
+
+ 	<bean id="locationBAI" class="com.prosperitasglobal.sendsolv.bai.impl.LocationBAIImpl">
+ 		<property name="locationBAC" ref="locationBACTarget"/>
+ 		<property name="validationController" ref="locationValidationController"/>
+ 	</bean>
+
+ 	<bean id="documentTypeBAI" class="com.prosperitasglobal.sendsolv.bai.impl.DocumentTypeBAIImpl">
+ 		<property name="documentTypeDAC" ref="documentTypeDACTarget"/>
+ 	</bean>
+
+ 	<bean id="codeValueBAI" class="com.prosperitasglobal.cbof.bai.impl.CodeValueBAIImpl">
+ 		<property name="codeValueDAC" ref="codeValueDACTarget"/>
+ 	</bean>
+
+ 	<bean id="countryBAI" class="com.prosperitasglobal.cbof.bai.impl.CountryBAIImpl">
+ 		<property name="countryDAC" ref="countryDACTarget"/>
+ 	</bean>
+
+ 	<bean id="industryClassificationBAI" class="com.prosperitasglobal.cbof.bai.impl.IndustryClassificationBAIImpl">
+ 		<property name="industryClassificationDAC" ref="industryClassificationDACTarget"/>
+ 		<property name="codeValueDAC" ref="codeValueDACTarget"/>
+ 	</bean>
+
+ 	<bean id="nameSupplementBAI" class="com.prosperitasglobal.cbof.bai.impl.NameSupplementBAIImpl">
+ 		<property name="codeValueDAC" ref="codeValueDACTarget"/>
+ 	</bean>
+
+ 	<bean id="noteBAI" class="com.prosperitasglobal.cbof.bai.impl.NoteBAIImpl">
+ 		<property name="noteDAC" ref="noteDACTarget"/>
+ 		<property name="noteValidationController" ref="noteValidationController"/>
+ 	</bean>
+
+ 	<bean id="rangeBAI" class="com.prosperitasglobal.cbof.bai.impl.RangeBAIImpl">
+ 		<property name="rangeDAC" ref="rangeDACTarget"/>
+ 	</bean>
+
+ 	 <bean id="liaisonBAI" class="com.prosperitasglobal.sendsolv.bai.impl.LiaisonBAIImpl">
+ 		<property name="liaisonBAC" ref="liaisonBACTarget"/>
+ 		<property name="liaisonValidationController" ref="liaisonValidationController"/>
+ 	</bean>
+
+ 	 <bean id="memberBAI" class="com.prosperitasglobal.sendsolv.bai.impl.MemberBAIImpl">
+ 		<property name="memberBAC" ref="memberBACTarget"/>
+ 		<property name="memberValidationController" ref="memberValidationController"/>
+ 		<property name="documentValidationController" ref="documentValidationController"/>
+ 		<property name="memberPagedInquiryRequestValidationController" ref="memberPagedInquiryRequestValidationController"/>
+ 	</bean>
+
+    <bean id="payerBAI" class="com.prosperitasglobal.sendsolv.bai.impl.PayerBAIImpl">
+ 		<property name="payerBAC" ref="payerBACTarget"/>
+ 		<property name="payerInquiryRequestValidationController" ref="payerValidationController"/>
+ 	</bean>
+
+ 	<bean id="languageBAI" class="com.prosperitasglobal.cbof.bai.impl.LanguageBAIImpl">
+ 		<property name="languageDAC" ref="languageDACTarget"/>
+ 	</bean>
+
+	<bean id="currencyPurchaseBAI" class="com.prosperitasglobal.sendsolv.bai.impl.CurrencyPurchaseBAIImpl">
+ 		<property name="currencyPurchaseBAC" ref="currencyPurchaseBACTarget"/>
+ 		<property name="currencyPurchaseValidationController" ref="currencyPurchaseValidationController" />
+ 	</bean>
+
+ 	<bean id="recipientBAI" class="com.prosperitasglobal.sendsolv.bai.impl.RecipientBAIImpl">
+ 		 <property name="recipientBAC" ref="recipientBACTarget"/>
+		 <property name="recipientValidationController" ref="recipientValidationController"/>
+		 <property name="recipientPagedInquiryRequestValidationController" ref="recipientPagedInquiryRequestValidationController"/>
+	</bean>
+
+	 <bean id="productPlanBAI" class="com.prosperitasglobal.sendsolv.bai.impl.ProductPlanBAIImpl">
+ 		<property name="productPlanBAC" ref="productPlanBACTarget"/>
+ 		<property name="businessProductPlanValidationController" ref="businessProductPlanValidationController"/>
+ 		<property name="templateProductPlanValidationController" ref="templateProductPlanValidationController"/>
+ 		<property name="businessProductPlanInquiryRequestValidationController" ref="businessProductPlanInquiryRequestValidationController"/>
+ 		<property name="templateProductPlanInquiryRequestValidationController" ref="templateProductPlanInquiryRequestValidationController"/>
+ 	</bean>
+
+	 <bean id="moneyTransferBAI" class="com.prosperitasglobal.sendsolv.bai.impl.MoneyTransferBAIImpl">
+		<property name="moneyTransferBAC" ref="moneyTransferStagingBACTarget"/>
+ 		<property name="moneyTransferInquiryRequestValidationController" ref="moneyTransferInquiryRequestValidationController"/>
+		<property name="moneyTransferBatchInquiryRequestValidationController" ref="moneyTransferBatchInquiryRequestValidationController"/>
+		<property name="moneyTransferValidationController" ref="moneyTransferValidationController"/>
+		<property name="moneyTransferBatchValidationController" ref="moneyTransferBatchValidationController"/>
+		<property name="moneyTransferBatchStatusMaintenanceRequestValidationController" ref="moneyTransferBatchStatusMaintenanceRequestValidationController"/>
+		<property name="moneyTransferStatusMaintenanceRequestValidationController" ref="moneyTransferStatusMaintenanceRequestValidationController"/>
+		<property name="moneyTransferBatchCreateRequestValidationController" ref="moneyTransferBatchCreateRequestValidationController"/>
+		<property name="moneyTransferCreateRequestValidationController" ref="moneyTransferCreateRequestValidationController"/>
+		<property name="moneyTransferAutoApprovalRequestValidationController" ref="moneyTransferAutoApprovalRequestValidationController"/>
+ 	</bean>
+
+ 	<bean id="productPlanTemplateGroupBAI" class="com.prosperitasglobal.sendsolv.bai.impl.ProductPlanTemplateGroupBAIImpl">
+ 		<property name="productPlanTemplateGroupBAC" ref="productPlanTemplateGroupBACTarget"/>
+ 		<property name="productPlanTemplateGroupCreateRequestValidationController" ref="productPlanTemplateGroupCreateRequestValidationController"/>
+ 		<property name="productPlanTemplateGroupValidationController" ref="productPlanTemplateGroupValidationController"/>
+ 		<property name="productPlanTemplateGroupInquiryRequestValidationController" ref="productPlanTemplateGroupInquiryRequestValidationController"/>
+ 	</bean>
+
+ 	<bean id="sdnChecherBAI" class="com.prosperitasglobal.sendsolv.sdn.bai.impl.SdnCheckerBAIImpl">
+ 		<property name="sdnCheckerBAC" ref="sdnCheckerBACTarget"/>
+ 		<property name="sdnMatchValidationController" ref="sdnMatchValidationController"/>
+ 		<property name="sdnStatusHistoryController" ref="sdnStatusHistoryController"/>
+ 		<property name="sdnHistoryController" ref="sdnHistoryController"/>
+ 	</bean>
+
+ 	<bean id="securityQuestionBAI" class="com.prosperitasglobal.sendsolv.bai.impl.SecurityQuestionBAIImpl">
+ 		<property name="securityQuestionBAC" ref="securityQuestionBACTarget"/>
+ 	</bean>
+
+	<bean id="ivrBAI" class="com.prosperitasglobal.sendsolv.integration.twilio.bai.impl.IvrBAIImpl">
+ 		<property name="ivrBAC" ref="ivrBACTarget"/>
+ 	</bean>
+
+	<bean id="suspiciousActivityBAI" class="com.prosperitasglobal.sendsolv.bai.impl.SuspiciousActivityBAIImpl">
+ 		<property name="suspiciousActivityBAC" ref="suspiciousActivityBACTarget"/>
+ 		<property name="suspiciousActivityValidationController" ref="suspiciousActivityValidationController"/>
+ 	</bean>
+
+ 	<bean id="callingCardBAI" class="com.prosperitasglobal.sendsolv.callingcard.bai.impl.CallingCardBAIImpl">
+ 		<property name="callingCardBAC" ref="callingCardBACTarget"/>
+		<property name="callingCardValidationController" ref="callingCardValidationController"/>
+	</bean>
+	<bean id="empresaBAI" class="com.prosperitasglobal.sendsolv.bai.impl.EmpresaBAIImpl">
+
+ 		<property name="validationController" ref="locationValidationController"/>
+ 	</bean>
+
+	<bean id="funcionarioBAI" class="com.prosperitasglobal.sendsolv.bai.impl.FuncionarioBAIImpl">
+ 		<property name="validationController" ref="locationValidationController"/>
+ 	</bean>
+
+</beans>
