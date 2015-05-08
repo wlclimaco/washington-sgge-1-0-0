@@ -1,0 +1,59 @@
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:sec="http://www.springframework.org/schema/security" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+
+	<sec:global-method-security
+		pre-post-annotations="enabled">
+	</sec:global-method-security>
+
+	<sec:http security="none" pattern="/images/page-background.png" />
+	<sec:http security="none" pattern="/images/logo.png" />
+	<sec:http security="none" pattern="/images/sendsolv.png" />
+	<sec:http security="none" pattern="/fonts/PTS55F-webfont.eot" />
+	<sec:http security="none" pattern="/fonts/PTS55F-webfont.woff" />
+	<sec:http security="none" pattern="/fonts/PTS55F-webfont.ttf" />
+	<sec:http security="none" pattern="/fonts/PTS55F-webfont.svg" />
+	<sec:http security="none" pattern="/fonts/navigation.eot" />
+	<sec:http security="none" pattern="/fonts/navigation.woff" />
+	<sec:http security="none" pattern="/fonts/navigation.ttf" />
+	<sec:http security="none" pattern="/fonts/navigation.svg" />
+	<sec:http security="none" pattern="/login.jsp*" />
+	<sec:http security="none" pattern="/web/css/*" />
+	<sec:http security="none" pattern="/web/*" />
+	<sec:http security="none" pattern="/web*" />
+<sec:http security="none" pattern="/web/js/jquery-1.6.js" />
+<sec:http security="none" pattern="/web/js/cufon-yui.js"/>
+<sec:http security="none" pattern="/web/js/cufon-replace.js"/>
+<sec:http security="none" pattern="/web/js/Didact_Gothic_400.font.js"/>
+<sec:http security="none" pattern="/web/js/Shanti_400.font.js"/>
+<sec:http security="none" pattern="/web/images/header_bg.png/>
+
+
+	<sec:http auto-config="true" use-expressions="true">
+		<sec:intercept-url pattern="/**/**"
+			access="hasAnyRole('ROLE_DOMAIN_ADMIN')" />
+		<sec:form-login login-page="/login.jsp?Please Login."
+			authentication-failure-url="/login.jsp?Login Failed."
+			default-target-url="/" always-use-default-target="true" />
+		<sec:logout invalidate-session="false"
+			logout-success-url="/login.jsp?Successful Logout." />
+		<sec:access-denied-handler error-page="/login.jsp?Access Denied." />
+		<sec:session-management invalid-session-url="/login.jsp?Access Denied.">
+			<sec:concurrency-control max-sessions="5"
+				error-if-maximum-exceeded="true" />
+		</sec:session-management>
+	</sec:http>
+
+	<!-- Usernames/Passwords are admin/admin -->
+	<sec:authentication-manager
+		erase-credentials="false">
+		<sec:authentication-provider>
+			<sec:user-service>
+				<sec:user name="admin" password="password" authorities="ROLE_DOMAIN_ADMIN" />
+			</sec:user-service>
+		</sec:authentication-provider>
+	</sec:authentication-manager>
+</beans>

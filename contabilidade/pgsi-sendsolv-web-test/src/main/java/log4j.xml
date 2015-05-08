@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration debug="false" threshold="all">
+
+  <!-- param elements correspond to properties in the appender class.
+       Use camel case when specifying them.
+       Put all params first.
+       ISO8601 format is yyyy-MM-DD HH:MM:SS,sss
+  -->
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<param name="target" value="System.out"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="conversionPattern" value="[%-5p][%t][%d{ISO8601}] %l - %m%n"/>
+		</layout>
+	</appender>
+
+	<logger name="org.apache" additivity="false">
+		<level value="error"/>
+		<appender-ref ref="CONSOLE"/>
+	</logger>
+
+	<logger name="org.apache.cxf" additivity="false">
+		<level value="info"/>
+		<appender-ref ref="CONSOLE"/>
+	</logger>
+
+    <logger name="org.springframework" additivity="false">
+        <level value="info" />
+		<appender-ref ref="CONSOLE"/>
+    </logger>
+
+	<!-- level and priority mean the same thing.  Since we have to use level on the loggers
+	     use level instead of priority on root.
+	-->
+	<root>
+		<level value="debug"/>
+		<appender-ref ref="CONSOLE"/>
+	</root>
+
+</log4j:configuration>
