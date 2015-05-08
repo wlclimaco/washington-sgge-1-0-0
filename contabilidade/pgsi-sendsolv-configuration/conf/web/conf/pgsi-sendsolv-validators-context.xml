@@ -40,6 +40,13 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	<bean id="CurrencyPurchaseValidator"         class="com.prosperitasglobal.sendsolv.validation.CurrencyPurchaseValidator" />
 	<bean id="SuspiciousActivityValidator"       class="com.prosperitasglobal.sendsolv.validation.SuspiciousActivityValidator" />
 
+	<bean id="EmpresaValidator"                     class="com.prosperitasglobal.sendsolv.validation.EmpresaValidator" />
+	<bean id="FuncionarioValidator"                     class="com.prosperitasglobal.sendsolv.validation.FuncionarioValidator" />
+	<bean id="TabelaValidator"                     class="com.prosperitasglobal.sendsolv.validation.TabelaValidator" />
+	<bean id="TelaValidator"                     class="com.prosperitasglobal.sendsolv.validation.TelaValidator" />
+	<bean id="OrdemServicoValidator"                     class="com.prosperitasglobal.sendsolv.validation.OrdemServicoValidator" />
+	<bean id="ProdutoValidator"                     class="com.prosperitasglobal.sendsolv.validation.ProdutoValidator" />
+
 	<bean id="MemberValidator"                   class="com.prosperitasglobal.sendsolv.validation.MemberValidator" parent="PersonValidator">
 		<property name="locationDAC"     ref="locationDACTarget"/>
 	</bean>

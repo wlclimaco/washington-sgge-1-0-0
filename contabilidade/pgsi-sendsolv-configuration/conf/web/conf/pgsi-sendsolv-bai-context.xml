@@ -133,21 +133,36 @@
  		<property name="callingCardBAC" ref="callingCardBACTarget"/>
 		<property name="callingCardValidationController" ref="callingCardValidationController"/>
 	</bean>
-	<bean id="empresaBAI" class="com.prosperitasglobal.sendsolv.bai.impl.EmpresaBAIImpl">
 
- 		<property name="validationController" ref="locationValidationController"/>
+	<bean id="empresaBAI" class="com.prosperitasglobal.sendsolv.bai.impl.EmpresaBAIImpl">
+		<property name="empresaBAC" ref="empresaBACTarget"/>
+ 		<property name="validationController" ref="empresaValidationController"/>
  	</bean>
 
 	<bean id="funcionarioBAI" class="com.prosperitasglobal.sendsolv.bai.impl.FuncionarioBAIImpl">
- 		<property name="validationController" ref="locationValidationController"/>
+ 		<property name="funcionarioBAC" ref="funcionarioBACTarget"/>
+ 		<property name="validationController" ref="funcionarioValidationController"/>
  	</bean>
 
  	<bean id="tabelaBAI" class="com.prosperitasglobal.sendsolv.bai.impl.TabelaBAIImpl">
- 		<property name="validationController" ref="locationValidationController"/>
+ 		<property name="tabelaBAC" ref="tabelaBACTarget"/>
+ 		<property name="validationController" ref="tabelaValidationController"/>
  	</bean>
 
  	<bean id="telaBAI" class="com.prosperitasglobal.sendsolv.bai.impl.TelaBAIImpl">
- 		<property name="validationController" ref="locationValidationController"/>
+ 		<property name="telaBAC" ref="telaBACTarget"/>
+ 		<property name="validationController" ref="telaValidationController"/>
  	</bean>
+
+ 	<bean id="ordemServicoBAI" class="com.prosperitasglobal.sendsolv.bai.impl.OrdemServicoBAIImpl">
+ 		<property name="ordemServicoBAC" ref="ordemServicoBACTarget"/>
+ 		<property name="validationController" ref="ordemServicoValidationController"/>
+ 	</bean>
+
+ 	<bean id="produtoBAI" class="com.prosperitasglobal.sendsolv.bai.impl.produtoBAIImpl">
+ 		<property name="produtoBAC" ref="produtoBACTarget"/>
+ 		<property name="validationController" ref="produtoValidationController"/>
+ 	</bean>
+
 
 </beans>
