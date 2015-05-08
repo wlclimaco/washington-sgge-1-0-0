@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="Build pgsi-sendsolv-web" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<include file="${ivyConfigPath}\..\AntConfig\pgsi-ant-common-targets.xml" optional="false" />
+
+	<target name="build">
+
+		<antcall target="PGSI.mainBuildWar">
+			<param name="moduleName" value="pgsi-sendsolv-web" />
+			<param name="configurationProjectName" value="pgsi-sendsolv-configuration" />
+			<param name="coreConfigurationDir" value="../../pgsi-sendsolv-configuration" />
+			<param name="coreConfigurationSubDir" value="web" />
+			<param name="localWebContentDir" value="../WebContent" />
+			<!-- The directory for local dev security if it is set it will use Dev Security,
+			otherwise comment out. This is set for when you want to deploy and test locally.
+			Never check in devSecurityFileDirectory directory or files into pgsi svn
+			Fill in devSecurityContextFileName otherwise it will not work. Look in your devSecurityFileDirectory for name if you
+			do not know it-->
+			<param name="devSecurityFileDirectory" value="../../sslocalsecuritysettings" />
+			<param name="devSecurityContextFileName" value="pgsi-sendsolv-security-context.xml" />
+			<param name="spring.profiles.active" value="tomcat" />
+			<param name="localClassesDir" value="../bin" />
+ 			<param name="logFile" value="pgsi-sendsolv-dev.log" />
+ 			<param name="logDir" value="../logs" />
+			<param name="ivyUseCacheOnly" value="true" />
+			<param name="dsName" value="jdbc/pgsiDS" />
+			<param name="ldapDCName" value="sendsolv-dev" />
+			<param name="deleteFromWarLibList" value="javax.activation*.jar,javax.jms*.jar,javax.mail*.jar,javax.servlet-*.jar" />
+		</antcall>
+
+		<copy file="../dist/pgsi-sendsolv-web-0.1.0.war" tofile="../dist/pgsi-sendsolv-dev.war" overwrite="true" />
+
+	</target>
+
+</project>

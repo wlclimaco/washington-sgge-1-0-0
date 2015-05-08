@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="Build pgsi-sendsolv-web" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<include file="${ivyConfigPath}\..\AntConfig\pgsi-ant-common-targets.xml" optional="false" />
+
+	<target name="build">
+
+		<antcall target="PGSI.mainBuildWar">
+			<param name="moduleName" value="pgsi-sendsolv-web" />
+			<param name="configurationProjectName" value="pgsi-sendsolv-configuration" />
+			<param name="coreConfigurationDir" value="../../pgsi-sendsolv-configuration" />
+			<param name="coreConfigurationSubDir" value="web" />
+			<param name="localWebContentDir" value="../WebContent" />
+			<param name="spring.profiles.active" value="tomcat" />
+			<param name="localClassesDir" value="../bin" />
+			<param name="logFile" value="pgsi-sendsolv-${deployEnv}.log" />
+ 			<param name="logDir" value="../logs" />
+			<param name="ivyUseCacheOnly" value="false" />
+			<param name="dsName" value="jdbc/${deployDSEnv}" />
+			<param name="ldapDCName" value="${deployDCLdapEnv}" />			
+			<param name="deleteFromWarLibList" value="javax.activation*.jar,javax.jms*.jar,javax.mail*.jar,javax.servlet-*.jar" />
+		</antcall>
+		<copy file="../dist/pgsi-sendsolv-web-0.1.0.war" tofile="../dist/pgsi-sendsolv-${deployEnv}.war" overwrite="true" />
+	</target>
+
+</project>
