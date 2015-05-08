@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<import resource="classpath:pgsi-sendsolv-base-context.xml" />
+	<import resource="classpath:pgsi-sendsolv-mvc-config.xml" />
+	<import
+		resource="classpath:com/prosperitasglobal/sendsolv/unittest/conf/pgsi-sendsolv-security-unittest-context.xml" />
+
+	<bean id="supportedLocales" class="java.lang.String">
+    	<constructor-arg type="String" value="en_US"/>
+    </bean>
+
+	<bean id="uiSettings" class="java.lang.String">
+    	<constructor-arg type="String" value="C:\QATEclipseWorkSpace\pgsi-sendsolv-configuration\conf\web\classes\pgsi-sendsolv-system-configuration.properties"/>
+    </bean>
+
+    <bean id="timeZonesJson" class="java.lang.String">
+    	<constructor-arg type="String" value="/thirdparty/timezone-js/all_cities.json"/>
+    </bean>
+
+
+	<bean id="organizationBAI" class="org.mockito.Mockito"
+		factory-method="mock">
+		<constructor-arg value="com.prosperitasglobal.sendsolv.bai.IOrganizationBAI" />
+		<constructor-arg value="org.springframework.web.client.RestTemplate" />
+	</bean>
+
+	<bean id="locationBAI" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.prosperitasglobal.sendsolv.bai.ILocationBAI" />
+		<constructor-arg value="org.springframework.web.client.RestTemplate" />
+	</bean>
+
+
+	<bean id="documentTypeBAI" class="org.mockito.Mockito"
+		factory-method="mock">
+		<constructor-arg value="com.prosperitasglobal.cbof.bai.IDocumentTypeBAI" />
+		<constructor-arg value="org.springframework.web.client.RestTemplate" />
+	</bean>
+
+	<bean id="countryBAI" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.prosperitasglobal.cbof.bai.ICountryBAI" />
+		<constructor-arg value="org.springframework.web.client.RestTemplate" />
+	</bean>
+
+	<bean id="rangeBAI" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.prosperitasglobal.cbof.bai.IRangeBAI" />
+		<constructor-arg value="org.springframework.web.client.RestTemplate" />
+	</bean>
+
+	<bean id="industryClassificationBAI" class="org.mockito.Mockito"
+		factory-method="mock">
+		<constructor-arg
+			value="com.prosperitasglobal.cbof.bai.IIndustryClassificationBAI" />
+		<constructor-arg value="org.springframework.web.client.RestTemplate" />
+	</bean>
+
+	<bean id="noteBAI" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.prosperitasglobal.cbof.bai.INoteBAI" />
+		<constructor-arg value="org.springframework.web.client.RestTemplate" />
+	</bean>
+
+	<bean id="liaisonBAI" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.prosperitasglobal.sendsolv.bai.ILiaisonBAI" />
+		<constructor-arg value="org.springframework.web.client.RestTemplate" />
+	</bean>
+	<bean id="nameSupplementBAI" class="org.mockito.Mockito"
+		factory-method="mock">
+		<constructor-arg value="com.prosperitasglobal.cbof.bai.INameSupplementBAI" />
+		<constructor-arg value="org.springframework.web.client.RestTemplate" />
+	</bean>
+
+	<bean id="languageBAI" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.prosperitasglobal.cbof.bai.ILanguageBAI" />
+		<constructor-arg value="org.springframework.web.client.RestTemplate" />
+	</bean>
+
+	<bean id="memberBAI" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.prosperitasglobal.sendsolv.bai.IMemberBAI" />
+		<constructor-arg value="org.springframework.web.client.RestTemplate" />
+	</bean>
+
+ 	<bean id="ivrBACTarget" class="com.prosperitasglobal.sendsolv.integration.twilio.bac.impl.IvrBACImpl">
+
+ 	</bean>
+
+	<bean id="recipientBAI" class="org.mockito.Mockito"
+		factory-method="mock">
+		<constructor-arg value="com.prosperitasglobal.sendsolv.bai.IRecipientBAI" />
+		<constructor-arg value="org.springframework.web.client.RestTemplate" />
+	</bean>
+
+	<bean id="productPlanBAI" class="org.mockito.Mockito"
+		factory-method="mock">
+		<constructor-arg value="com.prosperitasglobal.sendsolv.bai.IProductPlanBAI" />
+		<constructor-arg value="org.springframework.web.client.RestTemplate" />
+	</bean>
+
+	<bean id="codeValueBAI" class="org.mockito.Mockito"
+		factory-method="mock">
+		<constructor-arg value="com.prosperitasglobal.cbof.bai.ICodeValueBAI" />
+		<constructor-arg value="org.springframework.web.client.RestTemplate" />
+	</bean>
+
+	<bean id="payerBAI" class="org.mockito.Mockito" factory-method="mock">
+ 		<constructor-arg value="com.prosperitasglobal.sendsolv.bai.IPayerBAI" />
+ 		<constructor-arg value="org.springframework.web.client.RestTemplate" />
+ 	</bean>
+
+ 	 <bean id="moneyTransferBAI" class="org.mockito.Mockito" factory-method="mock">
+ 		<constructor-arg value="com.prosperitasglobal.sendsolv.bai.IMoneyTransferBAI" />
+ 	 	<constructor-arg value="org.springframework.web.client.RestTemplate" />
+ 	</bean>
+
+	 <bean id="suspiciousActivityBAI" class="org.mockito.Mockito" factory-method="mock">
+ 		<constructor-arg value="com.prosperitasglobal.sendsolv.bai.ISuspiciousActivityBAI" />
+ 	 	<constructor-arg value="org.springframework.web.client.RestTemplate" />
+ 	</bean>
+
+ 	<bean id="securityQuestionBAI" class="org.mockito.Mockito" factory-method="mock">
+ 		<constructor-arg value="com.prosperitasglobal.sendsolv.bai.ISecurityQuestionBAI" />
+ 	 	<constructor-arg value="org.springframework.web.client.RestTemplate" />
+ 	</bean>
+
+ 	 <bean id="sdnCheckerBAI" class="org.mockito.Mockito" factory-method="mock">
+ 		<constructor-arg value="com.prosperitasglobal.sendsolv.sdn.bai.ISdnCheckerBAI" />
+ 	 	<constructor-arg value="org.springframework.web.client.RestTemplate" />
+ 	</bean>
+
+ 	<bean id="ivrBAI" class="org.mockito.Mockito" factory-method="mock">
+ 		<constructor-arg value="com.prosperitasglobal.sendsolv.integration.twilio.bai.IIvrBAI" />
+ 	 	<constructor-arg value="org.springframework.web.client.RestTemplate" />
+ 	</bean>
+
+		<!-- JAXBContext-->
+	<bean id="jaxbContextBean" class="javax.xml.bind.JAXBContext" factory-method="newInstance">
+		<constructor-arg value="com.prosperitasglobal.sendsolv.sdn.model.generated"/>
+	</bean>
+
+	<!-- JAXB Unmarshaller -->
+	<bean id="unmarshallerBean" factory-bean="jaxbContextBean" factory-method="createUnmarshaller"/>
+
+	<!-- JAXB Marshaller -->
+	<bean id="marshallerBean" factory-bean="jaxbContextBean" factory-method="createMarshaller"/>
+</beans>
