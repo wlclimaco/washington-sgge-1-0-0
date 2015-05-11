@@ -2,8 +2,8 @@ package com.prosperitasglobal.sendsolv.bac;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.model.Empresa;
+import com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.EmpresaMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 
@@ -51,6 +51,6 @@ public interface IEmpresaBAC
 	 * @param request the request
 	 * @return the internal results response< location>
 	 */
-	public InternalResultsResponse<Empresa> fetchEmpresaByRequest(PagedInquiryRequest request);
+	public InternalResultsResponse<Empresa> fetchEmpresaByRequest(EmpresaInquiryRequest request);
 
 }

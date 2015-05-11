@@ -1,5 +1,12 @@
 package com.prosperitasglobal.sendsolv.dac;
 
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.FrequencyBasedEvent;
+import com.prosperitasglobal.sendsolv.model.OrdemServico;
+import com.prosperitasglobal.sendsolv.model.request.OrdemServicoInquiryRequest;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
+
 /**
  * The Interface IOrdemServicoDAC.
  */

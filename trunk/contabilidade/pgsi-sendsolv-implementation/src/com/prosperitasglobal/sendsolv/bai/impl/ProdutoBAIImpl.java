@@ -1,11 +1,29 @@
 package com.prosperitasglobal.sendsolv.bai.impl;
 
 import java.util.List;
-import java.util.logging.Logger;
 
-import javax.xml.ws.Response;
+import org.slf4j.LoggerFactory;
 
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.bac.IProdutoBAC;
+import com.prosperitasglobal.sendsolv.bai.IProdutoBAI;
+import com.prosperitasglobal.sendsolv.model.Produto;
+import com.prosperitasglobal.sendsolv.model.request.ProdutoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ProdutoMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.ProdutoResponse;
+import com.qat.framework.model.Message.MessageLevel;
+import com.qat.framework.model.Message.MessageSeverity;
+import com.qat.framework.model.MessageInfo;
+import com.qat.framework.model.QATModel.PersistanceActionEnum;
+import com.qat.framework.model.UserContext;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResponse.Status;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATInterfaceUtil;
+import com.qat.framework.validation.ValidationContext;
+import com.qat.framework.validation.ValidationContextIndicator;
+import com.qat.framework.validation.ValidationController;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class ProdutoBAIImpl.
@@ -16,7 +34,7 @@ public class ProdutoBAIImpl implements IProdutoBAI
 	private static final String CLASS_NAME = ProdutoBAIImpl.class.getName();
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(ProdutoBAIImpl.class);
+	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(ProdutoBAIImpl.class);
 
 	/** The Constant DEFAULT_EXCEPTION_MSG. */
 	private static final String DEFAULT_EXCEPTION_MSG = "sendsolv.base.defaultexception";
@@ -43,28 +61,11 @@ public class ProdutoBAIImpl implements IProdutoBAI
 	/** The validation controller. */
 	private ValidationController validationController;
 
-	/** The risk validation controller. */
-	private ValidationController riskValidationController;
-
 	/**
 	 * Gets the risk validation controller.
 	 *
 	 * @return the risk validation controller
 	 */
-	public ValidationController getRiskValidationController()
-	{
-		return riskValidationController;
-	}
-
-	/**
-	 * Sets the risk validation controller.
-	 *
-	 * @param riskValidationController the risk validation controller
-	 */
-	public void setRiskValidationController(ValidationController riskValidationController)
-	{
-		this.riskValidationController = riskValidationController;
-	}
 
 	/**
 	 * Get organization validation controller.
@@ -219,7 +220,7 @@ public class ProdutoBAIImpl implements IProdutoBAI
 	 * model.request.PagedInquiryRequest)
 	 */
 	@Override
-	public ProdutoResponse fetchProdutoByOrganization(PagedInquiryRequest request)
+	public ProdutoResponse fetchProdutoByOrganization(ProdutoInquiryRequest request)
 	{
 		ProdutoResponse response = new ProdutoResponse();
 		try
@@ -253,7 +254,7 @@ public class ProdutoBAIImpl implements IProdutoBAI
 	 * .request.PagedInquiryRequest)
 	 */
 	@Override
-	public ProdutoResponse fetchProdutoByRequest(PagedInquiryRequest request)
+	public ProdutoResponse fetchProdutoByRequest(ProdutoInquiryRequest request)
 	{
 		ProdutoResponse response = new ProdutoResponse();
 		try
@@ -279,7 +280,7 @@ public class ProdutoBAIImpl implements IProdutoBAI
 	 * @param request the request
 	 * @param response the response
 	 */
-	private void fetchPaged(PagedInquiryRequest request, ProdutoResponse response)
+	private void fetchPaged(ProdutoInquiryRequest request, ProdutoResponse response)
 	{
 		InternalResultsResponse<Produto> internalResponse = new InternalResultsResponse<Produto>();
 
@@ -322,7 +323,7 @@ public class ProdutoBAIImpl implements IProdutoBAI
 		}
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return (ProdutoResponse)handleReturn(response, internalResponse, context.getMessages(), true);
+		return handleReturn(response, internalResponse, context.getMessages(), true);
 	}
 
 	/**
@@ -334,7 +335,7 @@ public class ProdutoBAIImpl implements IProdutoBAI
 	 * @param copyOver the copy over
 	 * @return the response
 	 */
-	private Response handleReturn(Response response, InternalResponse internalResponse,
+	private ProdutoResponse handleReturn(ProdutoResponse response, InternalResponse internalResponse,
 			List<MessageInfo> messages, boolean copyOver)
 	{
 		// In the case there was an Optimistic Locking error, add the specific message

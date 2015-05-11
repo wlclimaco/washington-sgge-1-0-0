@@ -1,5 +1,6 @@
 package com.prosperitasglobal.sendsolv.model;
 
+import com.qat.framework.model.QATModel;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -405,6 +406,21 @@ public class Field extends QATModel
 	public void setBusca(FieldBusca busca)
 	{
 		this.busca = busca;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "Field [getId()=" + getId() + ", getType()=" + getType() + ", getDescription()=" + getDescription()
+				+ ", getNumero()=" + getNumero() + ", getNome()=" + getNome() + ", getLeft()=" + getLeft()
+				+ ", getTop()=" + getTop() + ", getWidth()=" + getWidth() + ", getHeight()=" + getHeight()
+				+ ", getzIndex()=" + getzIndex() + ", getLabel()=" + getLabel() + ", getText()=" + getText()
+				+ ", getClasse()=" + getClasse() + ", getMask()=" + getMask() + ", getValidation()=" + getValidation()
+				+ ", getSize()=" + getSize() + ", getBusca()=" + getBusca() + ", toString()=" + super.toString() + "]";
 	}
 
 }

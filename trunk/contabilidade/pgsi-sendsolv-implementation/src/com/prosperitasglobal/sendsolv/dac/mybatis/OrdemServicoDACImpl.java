@@ -1,12 +1,22 @@
 package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.Map;
-import java.util.logging.Logger;
+
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
 
 import com.prosperitasglobal.cbof.dac.IContactDAC;
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.IOrdemServicoDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.RiskDACD;
+import com.prosperitasglobal.sendsolv.model.FrequencyBasedEvent;
+import com.prosperitasglobal.sendsolv.model.OrdemServico;
+import com.prosperitasglobal.sendsolv.model.request.OrdemServicoInquiryRequest;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class OrdemServicoDACImpl.
@@ -63,7 +73,7 @@ public class OrdemServicoDACImpl extends SqlSessionDaoSupport implements IOrdemS
 			+ "updateBusinessStatus";
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(OrdemServicoDACImpl.class);
+	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(OrdemServicoDACImpl.class);
 
 	/** The contact dac. */
 	private IContactDAC contactDAC;
@@ -146,31 +156,6 @@ public class OrdemServicoDACImpl extends SqlSessionDaoSupport implements IOrdemS
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IOrdemServicoDAC#insertDocument(com.prosperitasglobal.sendsolv.model.request
-	 * .DocumentMaintenanceRequest)
-	 */
-	@Override
-	public InternalResultsResponse<Document> insertDocument(DocumentMaintenanceRequest request)
-	{
-		Integer insertCount = 0;
-
-		InternalResultsResponse<Document> response = new InternalResultsResponse<Document>();
-		insertCount =
-				QATMyBatisDacHelper.doInsert(getSqlSession(), ORDEMSERVICO_STMT_ASSOC_ORG_TO_DOCUMENT,
-						request.getDocument(), response);
-
-		// Finally, if something was inserted then add the OrdemServico to the result.
-		if (insertCount > 0)
-		{
-			response.addResult(request.getDocument());
-		}
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
 	 * com.prosperitasglobal.sendsolv.dac.IOrdemServicoDAC#updateOrdemServico(com.prosperitasglobal.sendsolv.model
 	 * .OrdemServico)
 	 */
@@ -185,8 +170,7 @@ public class OrdemServicoDACImpl extends SqlSessionDaoSupport implements IOrdemS
 				&& (ordemServico.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
 		{
 			updateCount =
-					QATMyBatisDacHelper.doUpdateOL(getSqlSession(), ORDEMSERVICO_STMT_UPDATE, ordemServico,
-							ORDEMSERVICO_STMT_VERSION, response);
+					QATMyBatisDacHelper.doUpdate(getSqlSession(), ORDEMSERVICO_STMT_UPDATE, ordemServico, response);
 		}
 
 		if (response.isInError())
@@ -208,22 +192,6 @@ public class OrdemServicoDACImpl extends SqlSessionDaoSupport implements IOrdemS
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IOrdemServicoDAC#updateDocument(com.prosperitasglobal.sendsolv.model.request
-	 * .DocumentMaintenanceRequest)
-	 */
-	@Override
-	public InternalResultsResponse<Document> updateDocument(DocumentMaintenanceRequest request)
-	{
-		InternalResultsResponse<Document> response = new InternalResultsResponse<Document>();
-		QATMyBatisDacHelper.doUpdate(getSqlSession(), ORDEMSERVICO_DOCUMENT_STMT_UPDATE, request.getDocument(),
-				response);
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
 	 * com.prosperitasglobal.sendsolv.dac.IOrdemServicoDAC#deleteOrdemServico(com.prosperitasglobal.sendsolv.model
 	 * .OrdemServico)
 	 */
@@ -232,22 +200,6 @@ public class OrdemServicoDACImpl extends SqlSessionDaoSupport implements IOrdemS
 	{
 		InternalResponse response = new InternalResponse();
 		QATMyBatisDacHelper.doRemove(getSqlSession(), ORDEMSERVICO_STMT_DELETE, ordemServico, response);
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IOrdemServicoDAC#deleteDocument(com.prosperitasglobal.sendsolv.model.request
-	 * .DocumentMaintenanceRequest)
-	 */
-	@Override
-	public InternalResponse deleteDocument(DocumentMaintenanceRequest request)
-	{
-		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doRemove(getSqlSession(), ORDEMSERVICO_STMT_DELETE_DOCUMENT, request.getDocument(),
-				response);
 
 		return response;
 	}
@@ -271,7 +223,7 @@ public class OrdemServicoDACImpl extends SqlSessionDaoSupport implements IOrdemS
 	 * .model.request.PagedInquiryRequest)
 	 */
 	@Override
-	public InternalResultsResponse<OrdemServico> fetchOrdemServicoByRequest(PagedInquiryRequest request)
+	public InternalResultsResponse<OrdemServico> fetchOrdemServicoByRequest(OrdemServicoInquiryRequest request)
 	{
 		InternalResultsResponse<OrdemServico> response = new InternalResultsResponse<OrdemServico>();
 
@@ -283,33 +235,6 @@ public class OrdemServicoDACImpl extends SqlSessionDaoSupport implements IOrdemS
 
 		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, ORDEMSERVICO_STMT_FETCH_COUNT,
 				ORDEMSERVICO_STMT_FETCH_ALL_BY_REQUEST, response);
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.dac.IOrdemServicoDAC#updateRisk(com.prosperitasglobal.sendsolv.model.request.
-	 * RiskMaintenanceRequest)
-	 */
-	@Override
-	public InternalResultsResponse<Risk> updateRisk(RiskMaintenanceRequest request)
-	{
-		return RiskDACD.updateRisk(getSqlSession(), request);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IOrdemServicoDAC#applyOrdemServicoStatus(com.prosperitasglobal.sendsolv.model
-	 * .OrdemServico)
-	 */
-	@Override
-	public InternalResponse applyOrdemServicoStatus(OrdemServico ordemServico)
-	{
-		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doUpdate(getSqlSession(), ORDEMSERVICO_STMT_UPDATE_ORDEMSERVICO_STATUS, ordemServico,
-				response);
-
 		return response;
 	}
 
@@ -325,40 +250,54 @@ public class OrdemServicoDACImpl extends SqlSessionDaoSupport implements IOrdemS
 	{
 		Integer count = 0;
 		// First Maintain Contacts
-		if (ValidationUtil.isNullOrEmpty(ordemServico.getContactList()))
-		{
-			return count;
-		}
-		// For Each Contact...
-		for (Contact contact : ordemServico.getContactList())
-		{
-			// Make sure we set the parent key
-			contact.setParentKey(ordemServico.getId());
-
-			if (ValidationUtil.isNull(contact.getModelAction()))
-			{
-				continue;
-			}
-			switch (contact.getModelAction())
-			{
-				case INSERT:
-					count = getContactDAC().insertContact(contact,
-							ORDEMSERVICO_STMT_ASSOC_ORG_TO_CONTACT, response);
-					break;
-				case UPDATE:
-					count = getContactDAC().updateContact(contact, response);
-					break;
-				case DELETE:
-					count = getContactDAC().deleteBusinessContact(contact, response);
-					break;
-				default:
-					if (LOG.isDebugEnabled())
-					{
-						LOG.debug("ModelAction for OrdemServico missing!");
-					}
-					break;
-			}
-		}
+		// if (ValidationUtil.isNullOrEmpty(ordemServico.getContactList()))
+		// {
+		// return count;
+		// }
+		// // For Each Contact...
+		// for (Contact contact : ordemServico.getContactList())
+		// {
+		// // Make sure we set the parent key
+		// contact.setParentKey(ordemServico.getId());
+		//
+		// if (ValidationUtil.isNull(contact.getModelAction()))
+		// {
+		// continue;
+		// }
+		// switch (contact.getModelAction())
+		// {
+		// case INSERT:
+		// count = getContactDAC().insertContact(contact,
+		// ORDEMSERVICO_STMT_ASSOC_ORG_TO_CONTACT, response);
+		// break;
+		// case UPDATE:
+		// count = getContactDAC().updateContact(contact, response);
+		// break;
+		// case DELETE:
+		// count = getContactDAC().deleteBusinessContact(contact, response);
+		// break;
+		// default:
+		// if (LOG.isDebugEnabled())
+		// {
+		// LOG.debug("ModelAction for OrdemServico missing!");
+		// }
+		// break;
+		// }
+		// }
 		return count;
+	}
+
+	@Override
+	public InternalResultsResponse<FrequencyBasedEvent> fetchFrequencyBasedEventById(Integer id)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<OrdemServico> fetchAllOrdemServicos()
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

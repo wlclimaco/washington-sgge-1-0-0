@@ -1,12 +1,22 @@
 package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.Map;
-import java.util.logging.Logger;
+
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
 
 import com.prosperitasglobal.cbof.dac.IContactDAC;
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.IFuncionarioDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.RiskDACD;
+import com.prosperitasglobal.sendsolv.model.FrequencyBasedEvent;
+import com.prosperitasglobal.sendsolv.model.Funcionario;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class FuncionarioDACImpl.
@@ -63,7 +73,7 @@ public class FuncionarioDACImpl extends SqlSessionDaoSupport implements IFuncion
 			+ "updateBusinessStatus";
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(FuncionarioDACImpl.class);
+	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(FuncionarioDACImpl.class);
 
 	/** The contact dac. */
 	private IContactDAC contactDAC;
@@ -146,31 +156,6 @@ public class FuncionarioDACImpl extends SqlSessionDaoSupport implements IFuncion
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IFuncionarioDAC#insertDocument(com.prosperitasglobal.sendsolv.model.request
-	 * .DocumentMaintenanceRequest)
-	 */
-	@Override
-	public InternalResultsResponse<Document> insertDocument(DocumentMaintenanceRequest request)
-	{
-		Integer insertCount = 0;
-
-		InternalResultsResponse<Document> response = new InternalResultsResponse<Document>();
-		insertCount =
-				QATMyBatisDacHelper.doInsert(getSqlSession(), FUNCIONARIO_STMT_ASSOC_ORG_TO_DOCUMENT,
-						request.getDocument(), response);
-
-		// Finally, if something was inserted then add the Funcionario to the result.
-		if (insertCount > 0)
-		{
-			response.addResult(request.getDocument());
-		}
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
 	 * com.prosperitasglobal.sendsolv.dac.IFuncionarioDAC#updateFuncionario(com.prosperitasglobal.sendsolv.model
 	 * .Funcionario)
 	 */
@@ -185,8 +170,7 @@ public class FuncionarioDACImpl extends SqlSessionDaoSupport implements IFuncion
 				&& (funcionario.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
 		{
 			updateCount =
-					QATMyBatisDacHelper.doUpdateOL(getSqlSession(), FUNCIONARIO_STMT_UPDATE, funcionario,
-							FUNCIONARIO_STMT_VERSION, response);
+					QATMyBatisDacHelper.doUpdate(getSqlSession(), FUNCIONARIO_STMT_UPDATE, funcionario, response);
 		}
 
 		if (response.isInError())
@@ -208,22 +192,6 @@ public class FuncionarioDACImpl extends SqlSessionDaoSupport implements IFuncion
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IFuncionarioDAC#updateDocument(com.prosperitasglobal.sendsolv.model.request
-	 * .DocumentMaintenanceRequest)
-	 */
-	@Override
-	public InternalResultsResponse<Document> updateDocument(DocumentMaintenanceRequest request)
-	{
-		InternalResultsResponse<Document> response = new InternalResultsResponse<Document>();
-		QATMyBatisDacHelper.doUpdate(getSqlSession(), FUNCIONARIO_DOCUMENT_STMT_UPDATE, request.getDocument(),
-				response);
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
 	 * com.prosperitasglobal.sendsolv.dac.IFuncionarioDAC#deleteFuncionario(com.prosperitasglobal.sendsolv.model
 	 * .Funcionario)
 	 */
@@ -232,22 +200,6 @@ public class FuncionarioDACImpl extends SqlSessionDaoSupport implements IFuncion
 	{
 		InternalResponse response = new InternalResponse();
 		QATMyBatisDacHelper.doRemove(getSqlSession(), FUNCIONARIO_STMT_DELETE, funcionario, response);
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IFuncionarioDAC#deleteDocument(com.prosperitasglobal.sendsolv.model.request
-	 * .DocumentMaintenanceRequest)
-	 */
-	@Override
-	public InternalResponse deleteDocument(DocumentMaintenanceRequest request)
-	{
-		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doRemove(getSqlSession(), FUNCIONARIO_STMT_DELETE_DOCUMENT, request.getDocument(),
-				response);
 
 		return response;
 	}
@@ -286,33 +238,6 @@ public class FuncionarioDACImpl extends SqlSessionDaoSupport implements IFuncion
 		return response;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.dac.IFuncionarioDAC#updateRisk(com.prosperitasglobal.sendsolv.model.request.
-	 * RiskMaintenanceRequest)
-	 */
-	@Override
-	public InternalResultsResponse<Risk> updateRisk(RiskMaintenanceRequest request)
-	{
-		return RiskDACD.updateRisk(getSqlSession(), request);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IFuncionarioDAC#applyFuncionarioStatus(com.prosperitasglobal.sendsolv.model
-	 * .Funcionario)
-	 */
-	@Override
-	public InternalResponse applyFuncionarioStatus(Funcionario funcionario)
-	{
-		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doUpdate(getSqlSession(), FUNCIONARIO_STMT_UPDATE_FUNCIONARIO_STATUS, funcionario,
-				response);
-
-		return response;
-	}
-
 	/**
 	 * Maintain funcionario associations.
 	 *
@@ -324,41 +249,55 @@ public class FuncionarioDACImpl extends SqlSessionDaoSupport implements IFuncion
 			InternalResultsResponse<Funcionario> response)
 	{
 		Integer count = 0;
-		// First Maintain Contacts
-		if (ValidationUtil.isNullOrEmpty(funcionario.getContactList()))
-		{
-			return count;
-		}
-		// For Each Contact...
-		for (Contact contact : funcionario.getContactList())
-		{
-			// Make sure we set the parent key
-			contact.setParentKey(funcionario.getId());
-
-			if (ValidationUtil.isNull(contact.getModelAction()))
-			{
-				continue;
-			}
-			switch (contact.getModelAction())
-			{
-				case INSERT:
-					count = getContactDAC().insertContact(contact,
-							FUNCIONARIO_STMT_ASSOC_ORG_TO_CONTACT, response);
-					break;
-				case UPDATE:
-					count = getContactDAC().updateContact(contact, response);
-					break;
-				case DELETE:
-					count = getContactDAC().deleteBusinessContact(contact, response);
-					break;
-				default:
-					if (LOG.isDebugEnabled())
-					{
-						LOG.debug("ModelAction for Funcionario missing!");
-					}
-					break;
-			}
-		}
+		// // First Maintain Contacts
+		// if (ValidationUtil.isNullOrEmpty(funcionario.getContactList()))
+		// {
+		// return count;
+		// }
+		// // For Each Contact...
+		// for (Contact contact : funcionario.getContactList())
+		// {
+		// // Make sure we set the parent key
+		// contact.setParentKey(funcionario.getId());
+		//
+		// if (ValidationUtil.isNull(contact.getModelAction()))
+		// {
+		// continue;
+		// }
+		// switch (contact.getModelAction())
+		// {
+		// case INSERT:
+		// count = getContactDAC().insertContact(contact,
+		// FUNCIONARIO_STMT_ASSOC_ORG_TO_CONTACT, response);
+		// break;
+		// case UPDATE:
+		// count = getContactDAC().updateContact(contact, response);
+		// break;
+		// case DELETE:
+		// count = getContactDAC().deleteBusinessContact(contact, response);
+		// break;
+		// default:
+		// if (LOG.isDebugEnabled())
+		// {
+		// LOG.debug("ModelAction for Funcionario missing!");
+		// }
+		// break;
+		// }
+		// }
 		return count;
+	}
+
+	@Override
+	public InternalResultsResponse<FrequencyBasedEvent> fetchFrequencyBasedEventById(Integer id)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Funcionario> fetchAllFuncionarios()
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

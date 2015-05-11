@@ -2,6 +2,9 @@ package com.prosperitasglobal.sendsolv.model;
 
 import java.util.List;
 
+import com.qat.framework.model.QATModel;
+
+// TODO: Auto-generated Javadoc
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -18,6 +21,7 @@ public class Tabela extends QATModel
 	/** The description. */
 	private String description;
 
+	/** The atributos. */
 	private List<Atributos> atributos;
 
 	/**
@@ -68,11 +72,21 @@ public class Tabela extends QATModel
 		this.description = description;
 	}
 
+	/**
+	 * Gets the nome.
+	 *
+	 * @return the nome
+	 */
 	public String getNome()
 	{
 		return nome;
 	}
 
+	/**
+	 * Sets the nome.
+	 *
+	 * @param nome the new nome
+	 */
 	public void setNome(String nome)
 	{
 		this.nome = nome;
@@ -88,9 +102,25 @@ public class Tabela extends QATModel
 		return atributos;
 	}
 
+	/**
+	 * Sets the atributos.
+	 *
+	 * @param atributos the new atributos
+	 */
 	public void setAtributos(List<Atributos> atributos)
 	{
 		this.atributos = atributos;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "Tabela [getId()=" + getId() + ", getDescription()=" + getDescription() + ", getNome()=" + getNome()
+				+ ", getAtributos()=" + getAtributos() + ", toString()=" + super.toString() + "]";
 	}
 
 }

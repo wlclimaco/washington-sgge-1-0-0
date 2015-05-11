@@ -94,4 +94,15 @@ public class TelaCriteria implements Serializable
 		this.tipo = tipo;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "TelaCriteria [getNome()=" + getNome() + ", getEmpresa()=" + getEmpresa() + ", getAba()=" + getAba()
+				+ ", getField()=" + getField() + ", getTipo()=" + getTipo() + ", toString()=" + super.toString() + "]";
+	}
+
 }

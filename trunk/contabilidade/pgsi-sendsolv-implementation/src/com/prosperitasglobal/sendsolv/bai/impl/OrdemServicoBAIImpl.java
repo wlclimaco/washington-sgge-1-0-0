@@ -5,7 +5,28 @@ import java.util.logging.Logger;
 
 import javax.xml.ws.Response;
 
+import org.slf4j.LoggerFactory;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.bac.IOrdemServicoBAC;
+import com.prosperitasglobal.sendsolv.bai.IOrdemServicoBAI;
+import com.prosperitasglobal.sendsolv.model.OrdemServico;
+import com.prosperitasglobal.sendsolv.model.request.OrdemServicoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.OrdemServicoMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.OrdemServicoResponse;
+import com.qat.framework.model.Message.MessageLevel;
+import com.qat.framework.model.Message.MessageSeverity;
+import com.qat.framework.model.MessageInfo;
+import com.qat.framework.model.QATModel.PersistanceActionEnum;
+import com.qat.framework.model.UserContext;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResponse.Status;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATInterfaceUtil;
+import com.qat.framework.validation.ValidationContext;
+import com.qat.framework.validation.ValidationContextIndicator;
+import com.qat.framework.validation.ValidationController;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class OrdemServicoBAIImpl.
@@ -16,7 +37,7 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 	private static final String CLASS_NAME = OrdemServicoBAIImpl.class.getName();
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(OrdemServicoBAIImpl.class);
+	private static final Logger LOG = (java.util.logging.Logger)LoggerFactory.getLogger(OrdemServicoBAIImpl.class);
 
 	/** The Constant DEFAULT_EXCEPTION_MSG. */
 	private static final String DEFAULT_EXCEPTION_MSG = "sendsolv.base.defaultexception";
@@ -42,29 +63,6 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 
 	/** The validation controller. */
 	private ValidationController validationController;
-
-	/** The risk validation controller. */
-	private ValidationController riskValidationController;
-
-	/**
-	 * Gets the risk validation controller.
-	 *
-	 * @return the risk validation controller
-	 */
-	public ValidationController getRiskValidationController()
-	{
-		return riskValidationController;
-	}
-
-	/**
-	 * Sets the risk validation controller.
-	 *
-	 * @param riskValidationController the risk validation controller
-	 */
-	public void setRiskValidationController(ValidationController riskValidationController)
-	{
-		this.riskValidationController = riskValidationController;
-	}
 
 	/**
 	 * Get organization validation controller.
@@ -124,7 +122,8 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 		}
 		catch (Exception ex)
 		{
-			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+			QATInterfaceUtil.handleException((org.slf4j.Logger)LOG, response, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] {CLASS_NAME});
 		}
 
 		return response;
@@ -148,7 +147,8 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 		}
 		catch (Exception ex)
 		{
-			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+			QATInterfaceUtil.handleException((org.slf4j.Logger)LOG, response, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] {CLASS_NAME});
 		}
 
 		return response;
@@ -172,7 +172,8 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 		}
 		catch (Exception ex)
 		{
-			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+			QATInterfaceUtil.handleException((org.slf4j.Logger)LOG, response, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] {CLASS_NAME});
 		}
 
 		return response;
@@ -206,42 +207,8 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 		}
 		catch (Exception ex)
 		{
-			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.bai.IOrdemServicoBAI#fetchOrdemServicoByOrganization(com.prosperitasglobal.sendsolv
-	 * .
-	 * model.request.PagedInquiryRequest)
-	 */
-	@Override
-	public OrdemServicoResponse fetchOrdemServicoByOrganization(PagedInquiryRequest request)
-	{
-		OrdemServicoResponse response = new OrdemServicoResponse();
-		try
-		{
-			InternalResponse internalResponse = new InternalResponse();
-
-			// validate fetchId field
-			if (ValidationUtil.isNull(request.getParentId()))
-			{
-				internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_PARENT_ID_REQUIRED);
-			}
-			else
-			{
-				internalResponse = getOrdemServicoBAC().fetchOrdemServicoByRequest(request);
-			}
-			// Handle the processing for all previous methods regardless of them failing or succeeding.
-			QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
-		}
-		catch (Exception ex)
-		{
-			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+			QATInterfaceUtil.handleException((org.slf4j.Logger)LOG, response, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] {CLASS_NAME});
 		}
 
 		return response;
@@ -254,7 +221,7 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 	 * .request.PagedInquiryRequest)
 	 */
 	@Override
-	public OrdemServicoResponse fetchOrdemServicoByRequest(PagedInquiryRequest request)
+	public OrdemServicoResponse fetchOrdemServicoByRequest(OrdemServicoInquiryRequest request)
 	{
 		OrdemServicoResponse response = new OrdemServicoResponse();
 		try
@@ -263,7 +230,8 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 		}
 		catch (Exception ex)
 		{
-			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+			QATInterfaceUtil.handleException((org.slf4j.Logger)LOG, response, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] {CLASS_NAME});
 		}
 		return response;
 	}
@@ -280,7 +248,7 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 	 * @param request the request
 	 * @param response the response
 	 */
-	private void fetchPaged(PagedInquiryRequest request, OrdemServicoResponse response)
+	private void fetchPaged(OrdemServicoInquiryRequest request, OrdemServicoResponse response)
 	{
 		InternalResultsResponse<OrdemServico> internalResponse = new InternalResultsResponse<OrdemServico>();
 
@@ -323,7 +291,7 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 		}
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return (OrdemServicoResponse)handleReturn(response, internalResponse, context.getMessages(), true);
+		return (OrdemServicoResponse)handleReturn((Response)response, internalResponse, context.getMessages(), true);
 	}
 
 	/**
@@ -346,7 +314,8 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 					MessageLevel.Object));
 		}
 
-		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, messages, copyOver);
+		QATInterfaceUtil.handleOperationStatusAndMessages((com.qat.framework.model.response.Response)response,
+				internalResponse, messages, copyOver);
 		return response;
 	}
 
@@ -371,12 +340,19 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 				return getOrdemServicoBAC().deleteOrdemServico(request);
 
 			default:
-				if (LOG.isDebugEnabled())
+				if (((org.slf4j.Logger)LOG).isDebugEnabled())
 				{
-					LOG.debug("updateType missing!");
+					((org.slf4j.Logger)LOG).debug("updateType missing!");
 				}
 				break;
 		}
+		return null;
+	}
+
+	@Override
+	public OrdemServicoResponse fetchOrdemServicoByOrganization(OrdemServicoInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
 		return null;
 	}
 

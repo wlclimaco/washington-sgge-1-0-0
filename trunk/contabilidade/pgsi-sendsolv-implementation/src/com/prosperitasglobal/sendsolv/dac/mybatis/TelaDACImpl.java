@@ -1,12 +1,21 @@
 package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.Map;
-import java.util.logging.Logger;
+
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
 
 import com.prosperitasglobal.cbof.dac.IContactDAC;
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.ITelaDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.RiskDACD;
+import com.prosperitasglobal.sendsolv.model.Tela;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class TelaDACImpl.
@@ -63,7 +72,7 @@ public class TelaDACImpl extends SqlSessionDaoSupport implements ITelaDAC
 			+ "updateBusinessStatus";
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(TelaDACImpl.class);
+	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(TelaDACImpl.class);
 
 	/** The contact dac. */
 	private IContactDAC contactDAC;
@@ -146,31 +155,6 @@ public class TelaDACImpl extends SqlSessionDaoSupport implements ITelaDAC
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.ITelaDAC#insertDocument(com.prosperitasglobal.sendsolv.model.request
-	 * .DocumentMaintenanceRequest)
-	 */
-	@Override
-	public InternalResultsResponse<Document> insertDocument(DocumentMaintenanceRequest request)
-	{
-		Integer insertCount = 0;
-
-		InternalResultsResponse<Document> response = new InternalResultsResponse<Document>();
-		insertCount =
-				QATMyBatisDacHelper.doInsert(getSqlSession(), TELA_STMT_ASSOC_ORG_TO_DOCUMENT,
-						request.getDocument(), response);
-
-		// Finally, if something was inserted then add the Tela to the result.
-		if (insertCount > 0)
-		{
-			response.addResult(request.getDocument());
-		}
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
 	 * com.prosperitasglobal.sendsolv.dac.ITelaDAC#updateTela(com.prosperitasglobal.sendsolv.model
 	 * .Tela)
 	 */
@@ -185,8 +169,7 @@ public class TelaDACImpl extends SqlSessionDaoSupport implements ITelaDAC
 				&& (tela.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
 		{
 			updateCount =
-					QATMyBatisDacHelper.doUpdateOL(getSqlSession(), TELA_STMT_UPDATE, tela,
-							TELA_STMT_VERSION, response);
+					QATMyBatisDacHelper.doUpdate(getSqlSession(), TELA_STMT_UPDATE, tela, response);
 		}
 
 		if (response.isInError())
@@ -208,22 +191,6 @@ public class TelaDACImpl extends SqlSessionDaoSupport implements ITelaDAC
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.ITelaDAC#updateDocument(com.prosperitasglobal.sendsolv.model.request
-	 * .DocumentMaintenanceRequest)
-	 */
-	@Override
-	public InternalResultsResponse<Document> updateDocument(DocumentMaintenanceRequest request)
-	{
-		InternalResultsResponse<Document> response = new InternalResultsResponse<Document>();
-		QATMyBatisDacHelper.doUpdate(getSqlSession(), TELA_DOCUMENT_STMT_UPDATE, request.getDocument(),
-				response);
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
 	 * com.prosperitasglobal.sendsolv.dac.ITelaDAC#deleteTela(com.prosperitasglobal.sendsolv.model
 	 * .Tela)
 	 */
@@ -232,22 +199,6 @@ public class TelaDACImpl extends SqlSessionDaoSupport implements ITelaDAC
 	{
 		InternalResponse response = new InternalResponse();
 		QATMyBatisDacHelper.doRemove(getSqlSession(), TELA_STMT_DELETE, tela, response);
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.ITelaDAC#deleteDocument(com.prosperitasglobal.sendsolv.model.request
-	 * .DocumentMaintenanceRequest)
-	 */
-	@Override
-	public InternalResponse deleteDocument(DocumentMaintenanceRequest request)
-	{
-		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doRemove(getSqlSession(), TELA_STMT_DELETE_DOCUMENT, request.getDocument(),
-				response);
 
 		return response;
 	}
@@ -286,33 +237,6 @@ public class TelaDACImpl extends SqlSessionDaoSupport implements ITelaDAC
 		return response;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.dac.ITelaDAC#updateRisk(com.prosperitasglobal.sendsolv.model.request.
-	 * RiskMaintenanceRequest)
-	 */
-	@Override
-	public InternalResultsResponse<Risk> updateRisk(RiskMaintenanceRequest request)
-	{
-		return RiskDACD.updateRisk(getSqlSession(), request);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.ITelaDAC#applyTelaStatus(com.prosperitasglobal.sendsolv.model
-	 * .Tela)
-	 */
-	@Override
-	public InternalResponse applyTelaStatus(Tela tela)
-	{
-		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doUpdate(getSqlSession(), TELA_STMT_UPDATE_TELA_STATUS, tela,
-				response);
-
-		return response;
-	}
-
 	/**
 	 * Maintain tela associations.
 	 *
@@ -325,40 +249,40 @@ public class TelaDACImpl extends SqlSessionDaoSupport implements ITelaDAC
 	{
 		Integer count = 0;
 		// First Maintain Contacts
-		if (ValidationUtil.isNullOrEmpty(tela.getContactList()))
-		{
-			return count;
-		}
-		// For Each Contact...
-		for (Contact contact : tela.getContactList())
-		{
-			// Make sure we set the parent key
-			contact.setParentKey(tela.getId());
-
-			if (ValidationUtil.isNull(contact.getModelAction()))
-			{
-				continue;
-			}
-			switch (contact.getModelAction())
-			{
-				case INSERT:
-					count = getContactDAC().insertContact(contact,
-							TELA_STMT_ASSOC_ORG_TO_CONTACT, response);
-					break;
-				case UPDATE:
-					count = getContactDAC().updateContact(contact, response);
-					break;
-				case DELETE:
-					count = getContactDAC().deleteBusinessContact(contact, response);
-					break;
-				default:
-					if (LOG.isDebugEnabled())
-					{
-						LOG.debug("ModelAction for Tela missing!");
-					}
-					break;
-			}
-		}
+		// if (ValidationUtil.isNullOrEmpty(tela.getContactList()))
+		// {
+		// return count;
+		// }
+		// // For Each Contact...
+		// for (Contact contact : tela.getContactList())
+		// {
+		// // Make sure we set the parent key
+		// contact.setParentKey(tela.getId());
+		//
+		// if (ValidationUtil.isNull(contact.getModelAction()))
+		// {
+		// continue;
+		// }
+		// switch (contact.getModelAction())
+		// {
+		// case INSERT:
+		// count = getContactDAC().insertContact(contact,
+		// TELA_STMT_ASSOC_ORG_TO_CONTACT, response);
+		// break;
+		// case UPDATE:
+		// count = getContactDAC().updateContact(contact, response);
+		// break;
+		// case DELETE:
+		// count = getContactDAC().deleteBusinessContact(contact, response);
+		// break;
+		// default:
+		// if (LOG.isDebugEnabled())
+		// {
+		// LOG.debug("ModelAction for Tela missing!");
+		// }
+		// break;
+		// }
+		// }
 		return count;
 	}
 }

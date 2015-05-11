@@ -2,8 +2,8 @@ package com.prosperitasglobal.sendsolv.bac;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.model.Funcionario;
+import com.prosperitasglobal.sendsolv.model.request.FuncionarioInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.FuncionarioMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 
@@ -51,6 +51,6 @@ public interface IFuncionarioBAC
 	 * @param request the request
 	 * @return the internal results response< location>
 	 */
-	public InternalResultsResponse<Funcionario> fetchFuncionarioByRequest(PagedInquiryRequest request);
+	public InternalResultsResponse<Funcionario> fetchFuncionarioByRequest(FuncionarioInquiryRequest request);
 
 }

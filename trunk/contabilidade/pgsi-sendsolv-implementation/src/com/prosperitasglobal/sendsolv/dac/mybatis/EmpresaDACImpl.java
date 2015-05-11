@@ -1,12 +1,20 @@
 package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.Map;
-import java.util.logging.Logger;
 
-import com.prosperitasglobal.cbof.dac.IContactDAC;
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.IEmpresaDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.RiskDACD;
+import com.prosperitasglobal.sendsolv.model.Empresa;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class EmpresaDACImpl.
@@ -63,33 +71,10 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 			+ "updateBusinessStatus";
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(EmpresaDACImpl.class);
-
-	/** The contact dac. */
-	private IContactDAC contactDAC;
+	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(EmpresaDACImpl.class);
 
 	/** The valid sort fields for an empresa inquiry. Will be injected by Spring. */
 	private Map<String, String> empresaInquiryValidSortFields;
-
-	/**
-	 * Gets the contact dac.
-	 *
-	 * @return the contact dac
-	 */
-	public IContactDAC getContactDAC()
-	{
-		return contactDAC;
-	}
-
-	/**
-	 * Sets the contact dac.
-	 *
-	 * @param contactDAC the contact dac
-	 */
-	public void setContactDAC(IContactDAC contactDAC)
-	{
-		this.contactDAC = contactDAC;
-	}
 
 	/**
 	 * Get the valid sort fields for the empresa inquiry. Attribute injected by Spring.
@@ -146,31 +131,6 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IEmpresaDAC#insertDocument(com.prosperitasglobal.sendsolv.model.request
-	 * .DocumentMaintenanceRequest)
-	 */
-	@Override
-	public InternalResultsResponse<Document> insertDocument(DocumentMaintenanceRequest request)
-	{
-		Integer insertCount = 0;
-
-		InternalResultsResponse<Document> response = new InternalResultsResponse<Document>();
-		insertCount =
-				QATMyBatisDacHelper.doInsert(getSqlSession(), EMPRESA_STMT_ASSOC_ORG_TO_DOCUMENT,
-						request.getDocument(), response);
-
-		// Finally, if something was inserted then add the Empresa to the result.
-		if (insertCount > 0)
-		{
-			response.addResult(request.getDocument());
-		}
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
 	 * com.prosperitasglobal.sendsolv.dac.IEmpresaDAC#updateEmpresa(com.prosperitasglobal.sendsolv.model
 	 * .Empresa)
 	 */
@@ -185,8 +145,8 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 				&& (empresa.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
 		{
 			updateCount =
-					QATMyBatisDacHelper.doUpdateOL(getSqlSession(), EMPRESA_STMT_UPDATE, empresa,
-							EMPRESA_STMT_VERSION, response);
+					QATMyBatisDacHelper.doUpdate(getSqlSession(), EMPRESA_STMT_UPDATE, empresa,
+							response);
 		}
 
 		if (response.isInError())
@@ -208,22 +168,6 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IEmpresaDAC#updateDocument(com.prosperitasglobal.sendsolv.model.request
-	 * .DocumentMaintenanceRequest)
-	 */
-	@Override
-	public InternalResultsResponse<Document> updateDocument(DocumentMaintenanceRequest request)
-	{
-		InternalResultsResponse<Document> response = new InternalResultsResponse<Document>();
-		QATMyBatisDacHelper.doUpdate(getSqlSession(), EMPRESA_DOCUMENT_STMT_UPDATE, request.getDocument(),
-				response);
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
 	 * com.prosperitasglobal.sendsolv.dac.IEmpresaDAC#deleteEmpresa(com.prosperitasglobal.sendsolv.model
 	 * .Empresa)
 	 */
@@ -232,22 +176,6 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 	{
 		InternalResponse response = new InternalResponse();
 		QATMyBatisDacHelper.doRemove(getSqlSession(), EMPRESA_STMT_DELETE, empresa, response);
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IEmpresaDAC#deleteDocument(com.prosperitasglobal.sendsolv.model.request
-	 * .DocumentMaintenanceRequest)
-	 */
-	@Override
-	public InternalResponse deleteDocument(DocumentMaintenanceRequest request)
-	{
-		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doRemove(getSqlSession(), EMPRESA_STMT_DELETE_DOCUMENT, request.getDocument(),
-				response);
 
 		return response;
 	}
@@ -286,33 +214,6 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		return response;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.dac.IEmpresaDAC#updateRisk(com.prosperitasglobal.sendsolv.model.request.
-	 * RiskMaintenanceRequest)
-	 */
-	@Override
-	public InternalResultsResponse<Risk> updateRisk(RiskMaintenanceRequest request)
-	{
-		return RiskDACD.updateRisk(getSqlSession(), request);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IEmpresaDAC#applyEmpresaStatus(com.prosperitasglobal.sendsolv.model
-	 * .Empresa)
-	 */
-	@Override
-	public InternalResponse applyEmpresaStatus(Empresa empresa)
-	{
-		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doUpdate(getSqlSession(), EMPRESA_STMT_UPDATE_EMPRESA_STATUS, empresa,
-				response);
-
-		return response;
-	}
-
 	/**
 	 * Maintain empresa associations.
 	 *
@@ -325,40 +226,47 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 	{
 		Integer count = 0;
 		// First Maintain Contacts
-		if (ValidationUtil.isNullOrEmpty(empresa.getContactList()))
-		{
-			return count;
-		}
-		// For Each Contact...
-		for (Contact contact : empresa.getContactList())
-		{
-			// Make sure we set the parent key
-			contact.setParentKey(empresa.getId());
-
-			if (ValidationUtil.isNull(contact.getModelAction()))
-			{
-				continue;
-			}
-			switch (contact.getModelAction())
-			{
-				case INSERT:
-					count = getContactDAC().insertContact(contact,
-							EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-					break;
-				case UPDATE:
-					count = getContactDAC().updateContact(contact, response);
-					break;
-				case DELETE:
-					count = getContactDAC().deleteBusinessContact(contact, response);
-					break;
-				default:
-					if (LOG.isDebugEnabled())
-					{
-						LOG.debug("ModelAction for Empresa missing!");
-					}
-					break;
-			}
-		}
+		// if (ValidationUtil.isNullOrEmpty(empresa.getContactList()))
+		// {
+		// return count;
+		// }
+		// // For Each Contact...
+		// for (Contact contact : empresa.getContactList())
+		// {
+		// // Make sure we set the parent key
+		// contact.setParentKey(empresa.getId());
+		//
+		// if (ValidationUtil.isNull(contact.getModelAction()))
+		// {
+		// continue;
+		// }
+		// switch (contact.getModelAction())
+		// {
+		// case INSERT:
+		// count = getContactDAC().insertContact(contact,
+		// EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
+		// break;
+		// case UPDATE:
+		// count = getContactDAC().updateContact(contact, response);
+		// break;
+		// case DELETE:
+		// count = getContactDAC().deleteBusinessContact(contact, response);
+		// break;
+		// default:
+		// if (LOG.isDebugEnabled())
+		// {
+		// LOG.debug("ModelAction for Empresa missing!");
+		// }
+		// break;
+		// }
+		// }
 		return count;
+	}
+
+	@Override
+	public InternalResultsResponse<Empresa> fetchAllEmpresas()
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

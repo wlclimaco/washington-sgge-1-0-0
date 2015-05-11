@@ -1,12 +1,20 @@
 package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.Map;
-import java.util.logging.Logger;
+
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
 
 import com.prosperitasglobal.cbof.dac.IContactDAC;
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.IProdutoDAC;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.RiskDACD;
+import com.prosperitasglobal.sendsolv.model.Produto;
+import com.prosperitasglobal.sendsolv.model.request.ProdutoInquiryRequest;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class ProdutoDACImpl.
@@ -63,7 +71,7 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 			+ "updateBusinessStatus";
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(ProdutoDACImpl.class);
+	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(ProdutoDACImpl.class);
 
 	/** The contact dac. */
 	private IContactDAC contactDAC;
@@ -146,31 +154,6 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IProdutoDAC#insertDocument(com.prosperitasglobal.sendsolv.model.request
-	 * .DocumentMaintenanceRequest)
-	 */
-	@Override
-	public InternalResultsResponse<Document> insertDocument(DocumentMaintenanceRequest request)
-	{
-		Integer insertCount = 0;
-
-		InternalResultsResponse<Document> response = new InternalResultsResponse<Document>();
-		insertCount =
-				QATMyBatisDacHelper.doInsert(getSqlSession(), PRODUTO_STMT_ASSOC_ORG_TO_DOCUMENT,
-						request.getDocument(), response);
-
-		// Finally, if something was inserted then add the Produto to the result.
-		if (insertCount > 0)
-		{
-			response.addResult(request.getDocument());
-		}
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
 	 * com.prosperitasglobal.sendsolv.dac.IProdutoDAC#updateProduto(com.prosperitasglobal.sendsolv.model
 	 * .Produto)
 	 */
@@ -185,8 +168,7 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 				&& (produto.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
 		{
 			updateCount =
-					QATMyBatisDacHelper.doUpdateOL(getSqlSession(), PRODUTO_STMT_UPDATE, produto,
-							PRODUTO_STMT_VERSION, response);
+					QATMyBatisDacHelper.doUpdate(getSqlSession(), PRODUTO_STMT_UPDATE, produto, response);
 		}
 
 		if (response.isInError())
@@ -208,22 +190,6 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IProdutoDAC#updateDocument(com.prosperitasglobal.sendsolv.model.request
-	 * .DocumentMaintenanceRequest)
-	 */
-	@Override
-	public InternalResultsResponse<Document> updateDocument(DocumentMaintenanceRequest request)
-	{
-		InternalResultsResponse<Document> response = new InternalResultsResponse<Document>();
-		QATMyBatisDacHelper.doUpdate(getSqlSession(), PRODUTO_DOCUMENT_STMT_UPDATE, request.getDocument(),
-				response);
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
 	 * com.prosperitasglobal.sendsolv.dac.IProdutoDAC#deleteProduto(com.prosperitasglobal.sendsolv.model
 	 * .Produto)
 	 */
@@ -232,22 +198,6 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	{
 		InternalResponse response = new InternalResponse();
 		QATMyBatisDacHelper.doRemove(getSqlSession(), PRODUTO_STMT_DELETE, produto, response);
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IProdutoDAC#deleteDocument(com.prosperitasglobal.sendsolv.model.request
-	 * .DocumentMaintenanceRequest)
-	 */
-	@Override
-	public InternalResponse deleteDocument(DocumentMaintenanceRequest request)
-	{
-		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doRemove(getSqlSession(), PRODUTO_STMT_DELETE_DOCUMENT, request.getDocument(),
-				response);
 
 		return response;
 	}
@@ -264,55 +214,6 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 		return response;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IProdutoDAC#fetchProdutoByRequest(com.prosperitasglobal.sendsolv
-	 * .model.request.PagedInquiryRequest)
-	 */
-	@Override
-	public InternalResultsResponse<Produto> fetchProdutoByRequest(PagedInquiryRequest request)
-	{
-		InternalResultsResponse<Produto> response = new InternalResultsResponse<Produto>();
-
-		/*
-		 * Helper method to translation from the user friendly" sort field names to the
-		 * actual database column names.
-		 */
-		QATMyBatisDacHelper.translateSortFields(request, getProdutoInquiryValidSortFields());
-
-		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, PRODUTO_STMT_FETCH_COUNT,
-				PRODUTO_STMT_FETCH_ALL_BY_REQUEST, response);
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.dac.IProdutoDAC#updateRisk(com.prosperitasglobal.sendsolv.model.request.
-	 * RiskMaintenanceRequest)
-	 */
-	@Override
-	public InternalResultsResponse<Risk> updateRisk(RiskMaintenanceRequest request)
-	{
-		return RiskDACD.updateRisk(getSqlSession(), request);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IProdutoDAC#applyProdutoStatus(com.prosperitasglobal.sendsolv.model
-	 * .Produto)
-	 */
-	@Override
-	public InternalResponse applyProdutoStatus(Produto produto)
-	{
-		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doUpdate(getSqlSession(), PRODUTO_STMT_UPDATE_PRODUTO_STATUS, produto,
-				response);
-
-		return response;
-	}
-
 	/**
 	 * Maintain produto associations.
 	 *
@@ -325,40 +226,54 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	{
 		Integer count = 0;
 		// First Maintain Contacts
-		if (ValidationUtil.isNullOrEmpty(produto.getContactList()))
-		{
-			return count;
-		}
-		// For Each Contact...
-		for (Contact contact : produto.getContactList())
-		{
-			// Make sure we set the parent key
-			contact.setParentKey(produto.getId());
-
-			if (ValidationUtil.isNull(contact.getModelAction()))
-			{
-				continue;
-			}
-			switch (contact.getModelAction())
-			{
-				case INSERT:
-					count = getContactDAC().insertContact(contact,
-							PRODUTO_STMT_ASSOC_ORG_TO_CONTACT, response);
-					break;
-				case UPDATE:
-					count = getContactDAC().updateContact(contact, response);
-					break;
-				case DELETE:
-					count = getContactDAC().deleteBusinessContact(contact, response);
-					break;
-				default:
-					if (LOG.isDebugEnabled())
-					{
-						LOG.debug("ModelAction for Produto missing!");
-					}
-					break;
-			}
-		}
+		// if (ValidationUtil.isNullOrEmpty(produto.getContactList()))
+		// {
+		// return count;
+		// }
+		// // For Each Contact...
+		// for (Contact contact : produto.getContactList())
+		// {
+		// // Make sure we set the parent key
+		// contact.setParentKey(produto.getId());
+		//
+		// if (ValidationUtil.isNull(contact.getModelAction()))
+		// {
+		// continue;
+		// }
+		// switch (contact.getModelAction())
+		// {
+		// case INSERT:
+		// count = getContactDAC().insertContact(contact,
+		// PRODUTO_STMT_ASSOC_ORG_TO_CONTACT, response);
+		// break;
+		// case UPDATE:
+		// count = getContactDAC().updateContact(contact, response);
+		// break;
+		// case DELETE:
+		// count = getContactDAC().deleteBusinessContact(contact, response);
+		// break;
+		// default:
+		// if (LOG.isDebugEnabled())
+		// {
+		// LOG.debug("ModelAction for Produto missing!");
+		// }
+		// break;
+		// }
+		// }
 		return count;
+	}
+
+	@Override
+	public InternalResultsResponse<Produto> fetchAllProdutos()
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Produto> fetchProdutoByRequest(ProdutoInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

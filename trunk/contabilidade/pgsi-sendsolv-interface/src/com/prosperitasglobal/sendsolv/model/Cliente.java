@@ -1,6 +1,7 @@
 package com.prosperitasglobal.sendsolv.model;
 
-// TODO: Auto-generated Javadoc
+import com.qat.framework.model.QATModel;
+
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -221,6 +222,19 @@ public class Cliente extends QATModel
 	public void setNome(String nome)
 	{
 		this.nome = nome;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "Cliente [getId()=" + getId() + ", getType()=" + getType() + ", getDescription()=" + getDescription()
+				+ ", getTamanho()=" + getTamanho() + ", isObrigatorio()=" + isObrigatorio() + ", isChavePrimaria()="
+				+ isChavePrimaria() + ", isChaveSecundaria()=" + isChaveSecundaria() + ", getTabelaSecundaria()="
+				+ getTabelaSecundaria() + ", getNome()=" + getNome() + ", toString()=" + super.toString() + "]";
 	}
 
 }

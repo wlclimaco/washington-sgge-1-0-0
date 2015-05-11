@@ -1,8 +1,8 @@
 package com.prosperitasglobal.sendsolv.bai;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.EmpresaMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
 
 // TODO: Auto-generated Javadoc
@@ -54,14 +54,6 @@ public interface IEmpresaBAI
 	 * @param request the request
 	 * @return the location response
 	 */
-	public EmpresaResponse fetchEmpresaByRequest(PagedInquiryRequest request);
-
-	/**
-	 * Fetch location by organization.
-	 *
-	 * @param request the request
-	 * @return the location response
-	 */
-	public EmpresaResponse fetchEmpresaByOrganization(PagedInquiryRequest request);
+	public EmpresaResponse fetchEmpresaByRequest(EmpresaInquiryRequest request);
 
 }

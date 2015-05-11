@@ -9,8 +9,8 @@ import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.bac.IFuncionarioBAC;
 import com.prosperitasglobal.sendsolv.bai.IFuncionarioBAI;
 import com.prosperitasglobal.sendsolv.model.Funcionario;
+import com.prosperitasglobal.sendsolv.model.request.FuncionarioInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.FuncionarioMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.response.FuncionarioResponse;
 import com.qat.framework.model.Message.MessageLevel;
 import com.qat.framework.model.Message.MessageSeverity;
@@ -43,11 +43,7 @@ public class FuncionarioBAIImpl implements IFuncionarioBAI
 
 	/** The Constant PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_ID_REQUIRED. */
 	private static final String PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_ID_REQUIRED =
-			"sendsolv.base.locationvalidator.id.required";
-
-	/** The Constant PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_PARENT_ID_REQUIRED. */
-	private static final String PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_PARENT_ID_REQUIRED =
-			"sendsolv.base.locationvalidator.parentorganization.required";
+			"sendsolv.base.empresavalidator.id.required";
 
 	/** The Constant PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED. */
 	private static final String PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED =
@@ -58,33 +54,10 @@ public class FuncionarioBAIImpl implements IFuncionarioBAI
 			"sendsolv.base.optimistic.locking.error";
 
 	/** The organization bac. */
-	private IFuncionarioBAC locationBAC; // injected by Spring through setter
+	private IFuncionarioBAC empresaBAC; // injected by Spring through setter
 
 	/** The validation controller. */
 	private ValidationController validationController;
-
-	/** The risk validation controller. */
-	private ValidationController riskValidationController;
-
-	/**
-	 * Gets the risk validation controller.
-	 *
-	 * @return the risk validation controller
-	 */
-	public ValidationController getRiskValidationController()
-	{
-		return riskValidationController;
-	}
-
-	/**
-	 * Sets the risk validation controller.
-	 *
-	 * @param riskValidationController the risk validation controller
-	 */
-	public void setRiskValidationController(ValidationController riskValidationController)
-	{
-		this.riskValidationController = riskValidationController;
-	}
 
 	/**
 	 * Get organization validation controller.
@@ -109,21 +82,21 @@ public class FuncionarioBAIImpl implements IFuncionarioBAI
 	/**
 	 * Spring Sets the organization bac.
 	 *
-	 * @param locationBAC the new location bac
+	 * @param empresaBAC the new empresa bac
 	 */
-	public void setFuncionarioBAC(IFuncionarioBAC locationBAC)
+	public void setFuncionarioBAC(IFuncionarioBAC empresaBAC)
 	{
-		this.locationBAC = locationBAC;
+		this.empresaBAC = empresaBAC;
 	}
 
 	/**
-	 * Gets the location bac.
+	 * Gets the empresa bac.
 	 *
-	 * @return the location bac
+	 * @return the empresa bac
 	 */
 	public IFuncionarioBAC getFuncionarioBAC()
 	{
-		return locationBAC;
+		return empresaBAC;
 	}
 
 	/*
@@ -239,7 +212,7 @@ public class FuncionarioBAIImpl implements IFuncionarioBAI
 	 * .request.PagedInquiryRequest)
 	 */
 	@Override
-	public FuncionarioResponse fetchFuncionarioByRequest(PagedInquiryRequest request)
+	public FuncionarioResponse fetchFuncionarioByRequest(FuncionarioInquiryRequest request)
 	{
 		FuncionarioResponse response = new FuncionarioResponse();
 		try
@@ -265,7 +238,7 @@ public class FuncionarioBAIImpl implements IFuncionarioBAI
 	 * @param request the request
 	 * @param response the response
 	 */
-	private void fetchPaged(PagedInquiryRequest request, FuncionarioResponse response)
+	private void fetchPaged(FuncionarioInquiryRequest request, FuncionarioResponse response)
 	{
 		InternalResultsResponse<Funcionario> internalResponse = new InternalResultsResponse<Funcionario>();
 

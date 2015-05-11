@@ -1,12 +1,12 @@
 package com.prosperitasglobal.sendsolv.bac;
 
-/**
- * The Interface IOrdemServicoBAC.
- *
- * @author aporto
- * @version 1.0
- * @created 11-Sep-2014 10:16:00 AM
- */
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.OrdemServico;
+import com.prosperitasglobal.sendsolv.model.request.OrdemServicoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.OrdemServicoMaintenanceRequest;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
+
 public interface IOrdemServicoBAC
 {
 

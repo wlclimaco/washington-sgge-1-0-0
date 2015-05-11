@@ -1,8 +1,8 @@
 package com.prosperitasglobal.sendsolv.bai;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.request.FuncionarioInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.FuncionarioMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.response.FuncionarioResponse;
 
 // TODO: Auto-generated Javadoc
@@ -54,6 +54,6 @@ public interface IFuncionarioBAI
 	 * @param request the request
 	 * @return the location response
 	 */
-	public FuncionarioResponse fetchFuncionarioByRequest(PagedInquiryRequest request);
+	public FuncionarioResponse fetchFuncionarioByRequest(FuncionarioInquiryRequest request);
 
 }
