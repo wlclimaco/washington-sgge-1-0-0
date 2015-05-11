@@ -1,5 +1,11 @@
 package com.prosperitasglobal.sendsolv.bac;
 
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.Tela;
+import com.prosperitasglobal.sendsolv.model.request.TelaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.TelaMaintenanceRequest;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
  * The Interface ITelaBAC.
@@ -45,6 +51,6 @@ public interface ITelaBAC
 	 * @param request the request
 	 * @return the internal results response< location>
 	 */
-	public InternalResultsResponse<Tela> fetchTelaByRequest(PagedInquiryRequest request);
+	public InternalResultsResponse<Tela> fetchTelaByRequest(TelaInquiryRequest request);
 
 }

@@ -94,4 +94,16 @@ public class OrdemServicoCriteria implements Serializable
 		this.status = status;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "OrdemServicoCriteria [getNome()=" + getNome() + ", getEmpresa()=" + getEmpresa() + ", getType()="
+				+ getType() + ", getAssunto()=" + getAssunto() + ", getStatus()=" + getStatus() + ", toString()="
+				+ super.toString() + "]";
+	}
+
 }

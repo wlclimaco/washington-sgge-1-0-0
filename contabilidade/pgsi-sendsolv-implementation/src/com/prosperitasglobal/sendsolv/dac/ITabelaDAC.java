@@ -1,5 +1,11 @@
 package com.prosperitasglobal.sendsolv.dac;
 
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.Tabela;
+import com.prosperitasglobal.sendsolv.model.request.TabelaInquiryRequest;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
+
 /**
  * The Interface ITabelaDAC.
  */

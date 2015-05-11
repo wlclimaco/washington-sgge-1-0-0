@@ -1,12 +1,21 @@
 package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.Map;
-import java.util.logging.Logger;
+
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
 
 import com.prosperitasglobal.cbof.dac.IContactDAC;
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.ITabelaDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.RiskDACD;
+import com.prosperitasglobal.sendsolv.model.Tabela;
+import com.prosperitasglobal.sendsolv.model.request.TabelaInquiryRequest;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class TabelaDACImpl.
@@ -63,7 +72,7 @@ public class TabelaDACImpl extends SqlSessionDaoSupport implements ITabelaDAC
 			+ "updateBusinessStatus";
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(TabelaDACImpl.class);
+	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(TabelaDACImpl.class);
 
 	/** The contact dac. */
 	private IContactDAC contactDAC;
@@ -146,31 +155,6 @@ public class TabelaDACImpl extends SqlSessionDaoSupport implements ITabelaDAC
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.ITabelaDAC#insertDocument(com.prosperitasglobal.sendsolv.model.request
-	 * .DocumentMaintenanceRequest)
-	 */
-	@Override
-	public InternalResultsResponse<Document> insertDocument(DocumentMaintenanceRequest request)
-	{
-		Integer insertCount = 0;
-
-		InternalResultsResponse<Document> response = new InternalResultsResponse<Document>();
-		insertCount =
-				QATMyBatisDacHelper.doInsert(getSqlSession(), TABELA_STMT_ASSOC_ORG_TO_DOCUMENT,
-						request.getDocument(), response);
-
-		// Finally, if something was inserted then add the Tabela to the result.
-		if (insertCount > 0)
-		{
-			response.addResult(request.getDocument());
-		}
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
 	 * com.prosperitasglobal.sendsolv.dac.ITabelaDAC#updateTabela(com.prosperitasglobal.sendsolv.model
 	 * .Tabela)
 	 */
@@ -185,8 +169,7 @@ public class TabelaDACImpl extends SqlSessionDaoSupport implements ITabelaDAC
 				&& (tabela.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
 		{
 			updateCount =
-					QATMyBatisDacHelper.doUpdateOL(getSqlSession(), TABELA_STMT_UPDATE, tabela,
-							TABELA_STMT_VERSION, response);
+					QATMyBatisDacHelper.doUpdate(getSqlSession(), TABELA_STMT_UPDATE, tabela, response);
 		}
 
 		if (response.isInError())
@@ -208,22 +191,6 @@ public class TabelaDACImpl extends SqlSessionDaoSupport implements ITabelaDAC
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.ITabelaDAC#updateDocument(com.prosperitasglobal.sendsolv.model.request
-	 * .DocumentMaintenanceRequest)
-	 */
-	@Override
-	public InternalResultsResponse<Document> updateDocument(DocumentMaintenanceRequest request)
-	{
-		InternalResultsResponse<Document> response = new InternalResultsResponse<Document>();
-		QATMyBatisDacHelper.doUpdate(getSqlSession(), TABELA_DOCUMENT_STMT_UPDATE, request.getDocument(),
-				response);
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
 	 * com.prosperitasglobal.sendsolv.dac.ITabelaDAC#deleteTabela(com.prosperitasglobal.sendsolv.model
 	 * .Tabela)
 	 */
@@ -232,22 +199,6 @@ public class TabelaDACImpl extends SqlSessionDaoSupport implements ITabelaDAC
 	{
 		InternalResponse response = new InternalResponse();
 		QATMyBatisDacHelper.doRemove(getSqlSession(), TABELA_STMT_DELETE, tabela, response);
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.ITabelaDAC#deleteDocument(com.prosperitasglobal.sendsolv.model.request
-	 * .DocumentMaintenanceRequest)
-	 */
-	@Override
-	public InternalResponse deleteDocument(DocumentMaintenanceRequest request)
-	{
-		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doRemove(getSqlSession(), TABELA_STMT_DELETE_DOCUMENT, request.getDocument(),
-				response);
 
 		return response;
 	}
@@ -271,7 +222,7 @@ public class TabelaDACImpl extends SqlSessionDaoSupport implements ITabelaDAC
 	 * .model.request.PagedInquiryRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Tabela> fetchTabelaByRequest(PagedInquiryRequest request)
+	public InternalResultsResponse<Tabela> fetchTabelaByRequest(TabelaInquiryRequest request)
 	{
 		InternalResultsResponse<Tabela> response = new InternalResultsResponse<Tabela>();
 
@@ -283,33 +234,6 @@ public class TabelaDACImpl extends SqlSessionDaoSupport implements ITabelaDAC
 
 		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, TABELA_STMT_FETCH_COUNT,
 				TABELA_STMT_FETCH_ALL_BY_REQUEST, response);
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.dac.ITabelaDAC#updateRisk(com.prosperitasglobal.sendsolv.model.request.
-	 * RiskMaintenanceRequest)
-	 */
-	@Override
-	public InternalResultsResponse<Risk> updateRisk(RiskMaintenanceRequest request)
-	{
-		return RiskDACD.updateRisk(getSqlSession(), request);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.ITabelaDAC#applyTabelaStatus(com.prosperitasglobal.sendsolv.model
-	 * .Tabela)
-	 */
-	@Override
-	public InternalResponse applyTabelaStatus(Tabela tabela)
-	{
-		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doUpdate(getSqlSession(), TABELA_STMT_UPDATE_TABELA_STATUS, tabela,
-				response);
-
 		return response;
 	}
 
@@ -325,40 +249,47 @@ public class TabelaDACImpl extends SqlSessionDaoSupport implements ITabelaDAC
 	{
 		Integer count = 0;
 		// First Maintain Contacts
-		if (ValidationUtil.isNullOrEmpty(tabela.getContactList()))
-		{
-			return count;
-		}
-		// For Each Contact...
-		for (Contact contact : tabela.getContactList())
-		{
-			// Make sure we set the parent key
-			contact.setParentKey(tabela.getId());
-
-			if (ValidationUtil.isNull(contact.getModelAction()))
-			{
-				continue;
-			}
-			switch (contact.getModelAction())
-			{
-				case INSERT:
-					count = getContactDAC().insertContact(contact,
-							TABELA_STMT_ASSOC_ORG_TO_CONTACT, response);
-					break;
-				case UPDATE:
-					count = getContactDAC().updateContact(contact, response);
-					break;
-				case DELETE:
-					count = getContactDAC().deleteBusinessContact(contact, response);
-					break;
-				default:
-					if (LOG.isDebugEnabled())
-					{
-						LOG.debug("ModelAction for Tabela missing!");
-					}
-					break;
-			}
-		}
+		// if (ValidationUtil.isNullOrEmpty(tabela.getContactList()))
+		// {
+		// return count;
+		// }
+		// // For Each Contact...
+		// for (Contact contact : tabela.getContactList())
+		// {
+		// // Make sure we set the parent key
+		// contact.setParentKey(tabela.getId());
+		//
+		// if (ValidationUtil.isNull(contact.getModelAction()))
+		// {
+		// continue;
+		// }
+		// switch (contact.getModelAction())
+		// {
+		// case INSERT:
+		// count = getContactDAC().insertContact(contact,
+		// TABELA_STMT_ASSOC_ORG_TO_CONTACT, response);
+		// break;
+		// case UPDATE:
+		// count = getContactDAC().updateContact(contact, response);
+		// break;
+		// case DELETE:
+		// count = getContactDAC().deleteBusinessContact(contact, response);
+		// break;
+		// default:
+		// if (LOG.isDebugEnabled())
+		// {
+		// LOG.debug("ModelAction for Tabela missing!");
+		// }
+		// break;
+		// }
+		// }
 		return count;
+	}
+
+	@Override
+	public InternalResultsResponse<Tabela> fetchAllTabelas()
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

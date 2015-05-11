@@ -94,4 +94,16 @@ public class TabelaCriteria implements Serializable
 		this.description = description;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "TabelaCriteria [getNome()=" + getNome() + ", getStatus()=" + getStatus() + ", getType()=" + getType()
+				+ ", getId()=" + getId() + ", getDescription()=" + getDescription() + ", toString()="
+				+ super.toString() + "]";
+	}
+
 }

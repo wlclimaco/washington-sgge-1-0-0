@@ -1,5 +1,9 @@
 package com.prosperitasglobal.sendsolv.model;
 
+import java.util.List;
+
+import com.qat.framework.model.QATModel;
+
 // TODO: Auto-generated Javadoc
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -26,11 +30,8 @@ public class OrdemServico extends QATModel
 	/** The numero. */
 	private String assunto;
 
-	/** The cep. */
-	private String texto;
-
 	/** The tipo endereco. */
-	private String status;
+	private List<OrdemServicoItens> ordemStatusList;
 
 	/**
 	 * Default constructor.
@@ -160,44 +161,16 @@ public class OrdemServico extends QATModel
 		this.assunto = assunto;
 	}
 
-	/**
-	 * Gets the texto.
-	 *
-	 * @return the texto
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
 	 */
-	public String getTexto()
+	@Override
+	public String toString()
 	{
-		return texto;
-	}
-
-	/**
-	 * Sets the texto.
-	 *
-	 * @param texto the new texto
-	 */
-	public void setTexto(String texto)
-	{
-		this.texto = texto;
-	}
-
-	/**
-	 * Gets the status.
-	 *
-	 * @return the status
-	 */
-	public String getStatus()
-	{
-		return status;
-	}
-
-	/**
-	 * Sets the status.
-	 *
-	 * @param status the new status
-	 */
-	public void setStatus(String status)
-	{
-		this.status = status;
+		return "OrdemServico [getId()=" + getId() + ", getCdEmpresa()=" + getCdEmpresa() + ", getNome()=" + getNome()
+				+ ", getData()=" + getData() + ", getType()=" + getType() + ", getAssunto()=" + getAssunto()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }

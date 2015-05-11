@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.prosperitasglobal.sendsolv.model.Tabela;
+import com.qat.framework.model.response.InquiryResponse;
 
 /**
  * The Class LocationResponse.
@@ -60,7 +61,7 @@ public class TabelaResponse extends InquiryResponse
 	@Override
 	public String toString()
 	{
-		return "LocationResponse [getLocationList()=" + getTabelaList() + ", getResultsSetInfo()="
+		return "TabelaResponse [getTabelaList()=" + getTabelaList() + ", getResultsSetInfo()="
 				+ getResultsSetInfo() + ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()="
 				+ getMessageList() + ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()="
 				+ isOperationSuccess() + "]";

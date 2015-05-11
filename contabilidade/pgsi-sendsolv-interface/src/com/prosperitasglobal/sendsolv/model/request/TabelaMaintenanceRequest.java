@@ -1,15 +1,8 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
 import com.prosperitasglobal.sendsolv.model.Tabela;
+import com.qat.framework.model.request.MaintenanceRequest;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class LocationMaintenanceRequest.
- *
- * @author abarros
- * @version 1.0
- * @created 22-Jul-2014 10:26:49 AM
- */
 public class TabelaMaintenanceRequest extends MaintenanceRequest
 {
 

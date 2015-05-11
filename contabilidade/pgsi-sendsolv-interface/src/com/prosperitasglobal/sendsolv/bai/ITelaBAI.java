@@ -1,7 +1,7 @@
 package com.prosperitasglobal.sendsolv.bai;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.TelaInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.TelaMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.response.TelaResponse;
 
@@ -54,6 +54,6 @@ public interface ITelaBAI
 	 * @param request the request
 	 * @return the location response
 	 */
-	public TelaResponse fetchTelaByRequest(PagedInquiryRequest request);
+	public TelaResponse fetchTelaByRequest(TelaInquiryRequest request);
 
 }

@@ -1,14 +1,8 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
 import com.prosperitasglobal.sendsolv.model.Produto;
+import com.qat.framework.model.request.MaintenanceRequest;
 
-/**
- * The Class ProdutoMaintenanceRequest.
- *
- * @author abarros
- * @version 1.0
- * @created 22-Jul-2014 2:15:09 PM
- */
 public class ProdutoMaintenanceRequest extends MaintenanceRequest
 {
 

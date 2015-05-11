@@ -1,7 +1,7 @@
 package com.prosperitasglobal.sendsolv.bai;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.TabelaInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.TabelaMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.response.TabelaResponse;
 
@@ -54,6 +54,6 @@ public interface ITabelaBAI
 	 * @param request the request
 	 * @return the location response
 	 */
-	public TabelaResponse fetchTabelaByRequest(PagedInquiryRequest request);
+	public TabelaResponse fetchTabelaByRequest(TabelaInquiryRequest request);
 
 }

@@ -9,8 +9,8 @@ import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.bac.IEmpresaBAC;
 import com.prosperitasglobal.sendsolv.bai.IEmpresaBAI;
 import com.prosperitasglobal.sendsolv.model.Empresa;
+import com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.EmpresaMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
 import com.qat.framework.model.Message.MessageLevel;
 import com.qat.framework.model.Message.MessageSeverity;
@@ -43,11 +43,7 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 
 	/** The Constant PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_ID_REQUIRED. */
 	private static final String PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_ID_REQUIRED =
-			"sendsolv.base.locationvalidator.id.required";
-
-	/** The Constant PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_PARENT_ID_REQUIRED. */
-	private static final String PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_PARENT_ID_REQUIRED =
-			"sendsolv.base.locationvalidator.parentorganization.required";
+			"sendsolv.base.empresavalidator.id.required";
 
 	/** The Constant PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED. */
 	private static final String PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED =
@@ -57,37 +53,14 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 	private static final String PROSPERITASGLOBAL_BASE_OL_ERROR =
 			"sendsolv.base.optimistic.locking.error";
 
-	/** The organization bac. */
-	private IEmpresaBAC locationBAC; // injected by Spring through setter
+	/** The empresa bac. */
+	private IEmpresaBAC empresaBAC; // injected by Spring through setter
 
 	/** The validation controller. */
 	private ValidationController validationController;
 
-	/** The risk validation controller. */
-	private ValidationController riskValidationController;
-
 	/**
-	 * Gets the risk validation controller.
-	 *
-	 * @return the risk validation controller
-	 */
-	public ValidationController getRiskValidationController()
-	{
-		return riskValidationController;
-	}
-
-	/**
-	 * Sets the risk validation controller.
-	 *
-	 * @param riskValidationController the risk validation controller
-	 */
-	public void setRiskValidationController(ValidationController riskValidationController)
-	{
-		this.riskValidationController = riskValidationController;
-	}
-
-	/**
-	 * Get organization validation controller.
+	 * Get empresa validation controller.
 	 *
 	 * @return the validation controller
 	 */
@@ -97,33 +70,33 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 	}
 
 	/**
-	 * Spring sets the organization validation controller.
+	 * Spring sets the empresa validation controller.
 	 *
-	 * @param organizationValidationController the new validation controller
+	 * @param empresaValidationController the new validation controller
 	 */
-	public void setValidationController(ValidationController organizationValidationController)
+	public void setValidationController(ValidationController empresaValidationController)
 	{
-		validationController = organizationValidationController;
+		validationController = empresaValidationController;
 	}
 
 	/**
-	 * Spring Sets the organization bac.
+	 * Spring Sets the empresa bac.
 	 *
-	 * @param locationBAC the new location bac
+	 * @param empresaBAC the new empresa bac
 	 */
-	public void setEmpresaBAC(IEmpresaBAC locationBAC)
+	public void setEmpresaBAC(IEmpresaBAC empresaBAC)
 	{
-		this.locationBAC = locationBAC;
+		this.empresaBAC = empresaBAC;
 	}
 
 	/**
-	 * Gets the location bac.
+	 * Gets the empresa bac.
 	 *
-	 * @return the location bac
+	 * @return the empresa bac
 	 */
 	public IEmpresaBAC getEmpresaBAC()
 	{
-		return locationBAC;
+		return empresaBAC;
 	}
 
 	/*
@@ -235,45 +208,11 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.bai.IEmpresaBAI#fetchEmpresaByOrganization(com.prosperitasglobal.sendsolv.
-	 * model.request.PagedInquiryRequest)
-	 */
-	@Override
-	public EmpresaResponse fetchEmpresaByOrganization(PagedInquiryRequest request)
-	{
-		EmpresaResponse response = new EmpresaResponse();
-		try
-		{
-			InternalResponse internalResponse = new InternalResponse();
-
-			// validate fetchId field
-			if (ValidationUtil.isNull(request.getParentId()))
-			{
-				internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_PARENT_ID_REQUIRED);
-			}
-			else
-			{
-				internalResponse = getEmpresaBAC().fetchEmpresaByRequest(request);
-			}
-			// Handle the processing for all previous methods regardless of them failing or succeeding.
-			QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
-		}
-		catch (Exception ex)
-		{
-			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
 	 * com.prosperitasglobal.sendsolv.bai.IEmpresaBAI#fetchEmpresaByRequest(com.prosperitasglobal.sendsolv.model
 	 * .request.PagedInquiryRequest)
 	 */
 	@Override
-	public EmpresaResponse fetchEmpresaByRequest(PagedInquiryRequest request)
+	public EmpresaResponse fetchEmpresaByRequest(EmpresaInquiryRequest request)
 	{
 		EmpresaResponse response = new EmpresaResponse();
 		try
@@ -299,7 +238,7 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 	 * @param request the request
 	 * @param response the response
 	 */
-	private void fetchPaged(PagedInquiryRequest request, EmpresaResponse response)
+	private void fetchPaged(EmpresaInquiryRequest request, EmpresaResponse response)
 	{
 		InternalResultsResponse<Empresa> internalResponse = new InternalResultsResponse<Empresa>();
 
@@ -322,7 +261,7 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 	 * @param indicator the indicator
 	 * @param persistType the persist type
 	 * @param request the request
-	 * @return the organization response
+	 * @return the empresa response
 	 */
 	private EmpresaResponse process(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
 			EmpresaMaintenanceRequest request)

@@ -1,11 +1,29 @@
 package com.prosperitasglobal.sendsolv.bai.impl;
 
 import java.util.List;
-import java.util.logging.Logger;
 
-import javax.xml.ws.Response;
+import org.slf4j.LoggerFactory;
 
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.bac.ITabelaBAC;
+import com.prosperitasglobal.sendsolv.bai.ITabelaBAI;
+import com.prosperitasglobal.sendsolv.model.Tabela;
+import com.prosperitasglobal.sendsolv.model.request.TabelaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.TabelaMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.TabelaResponse;
+import com.qat.framework.model.Message.MessageLevel;
+import com.qat.framework.model.Message.MessageSeverity;
+import com.qat.framework.model.MessageInfo;
+import com.qat.framework.model.QATModel.PersistanceActionEnum;
+import com.qat.framework.model.UserContext;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResponse.Status;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATInterfaceUtil;
+import com.qat.framework.validation.ValidationContext;
+import com.qat.framework.validation.ValidationContextIndicator;
+import com.qat.framework.validation.ValidationController;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class TabelaBAIImpl.
@@ -16,7 +34,7 @@ public class TabelaBAIImpl implements ITabelaBAI
 	private static final String CLASS_NAME = TabelaBAIImpl.class.getName();
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(TabelaBAIImpl.class);
+	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(TabelaBAIImpl.class);
 
 	/** The Constant DEFAULT_EXCEPTION_MSG. */
 	private static final String DEFAULT_EXCEPTION_MSG = "sendsolv.base.defaultexception";
@@ -42,29 +60,6 @@ public class TabelaBAIImpl implements ITabelaBAI
 
 	/** The validation controller. */
 	private ValidationController validationController;
-
-	/** The risk validation controller. */
-	private ValidationController riskValidationController;
-
-	/**
-	 * Gets the risk validation controller.
-	 *
-	 * @return the risk validation controller
-	 */
-	public ValidationController getRiskValidationController()
-	{
-		return riskValidationController;
-	}
-
-	/**
-	 * Sets the risk validation controller.
-	 *
-	 * @param riskValidationController the risk validation controller
-	 */
-	public void setRiskValidationController(ValidationController riskValidationController)
-	{
-		this.riskValidationController = riskValidationController;
-	}
 
 	/**
 	 * Get organization validation controller.
@@ -215,45 +210,11 @@ public class TabelaBAIImpl implements ITabelaBAI
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.bai.ITabelaBAI#fetchTabelaByOrganization(com.prosperitasglobal.sendsolv.
-	 * model.request.PagedInquiryRequest)
-	 */
-	@Override
-	public TabelaResponse fetchTabelaByOrganization(PagedInquiryRequest request)
-	{
-		TabelaResponse response = new TabelaResponse();
-		try
-		{
-			InternalResponse internalResponse = new InternalResponse();
-
-			// validate fetchId field
-			if (ValidationUtil.isNull(request.getParentId()))
-			{
-				internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_PARENT_ID_REQUIRED);
-			}
-			else
-			{
-				internalResponse = getTabelaBAC().fetchTabelaByRequest(request);
-			}
-			// Handle the processing for all previous methods regardless of them failing or succeeding.
-			QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
-		}
-		catch (Exception ex)
-		{
-			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
 	 * com.prosperitasglobal.sendsolv.bai.ITabelaBAI#fetchTabelaByRequest(com.prosperitasglobal.sendsolv.model
 	 * .request.PagedInquiryRequest)
 	 */
 	@Override
-	public TabelaResponse fetchTabelaByRequest(PagedInquiryRequest request)
+	public TabelaResponse fetchTabelaByRequest(TabelaInquiryRequest request)
 	{
 		TabelaResponse response = new TabelaResponse();
 		try
@@ -279,7 +240,7 @@ public class TabelaBAIImpl implements ITabelaBAI
 	 * @param request the request
 	 * @param response the response
 	 */
-	private void fetchPaged(PagedInquiryRequest request, TabelaResponse response)
+	private void fetchPaged(TabelaInquiryRequest request, TabelaResponse response)
 	{
 		InternalResultsResponse<Tabela> internalResponse = new InternalResultsResponse<Tabela>();
 
@@ -322,7 +283,7 @@ public class TabelaBAIImpl implements ITabelaBAI
 		}
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return (TabelaResponse)handleReturn(response, internalResponse, context.getMessages(), true);
+		return handleReturn(response, internalResponse, context.getMessages(), true);
 	}
 
 	/**
@@ -334,7 +295,7 @@ public class TabelaBAIImpl implements ITabelaBAI
 	 * @param copyOver the copy over
 	 * @return the response
 	 */
-	private Response handleReturn(Response response, InternalResponse internalResponse,
+	private TabelaResponse handleReturn(TabelaResponse response, InternalResponse internalResponse,
 			List<MessageInfo> messages, boolean copyOver)
 	{
 		// In the case there was an Optimistic Locking error, add the specific message

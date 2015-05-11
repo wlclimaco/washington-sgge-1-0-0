@@ -1,5 +1,9 @@
 package com.prosperitasglobal.sendsolv.model;
 
+import java.util.List;
+
+import com.qat.framework.model.QATModel;
+
 // TODO: Auto-generated Javadoc
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -175,6 +179,18 @@ public class Tela extends QATModel
 	public void setTabs(List<Tabs> tabs)
 	{
 		this.tabs = tabs;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "Tela [getId()=" + getId() + ", getType()=" + getType() + ", getDescription()=" + getDescription()
+				+ ", getHelp()=" + getHelp() + ", getData()=" + getData() + ", getDesenvolvida()=" + getDesenvolvida()
+				+ ", getTabs()=" + getTabs() + ", toString()=" + super.toString() + "]";
 	}
 
 }

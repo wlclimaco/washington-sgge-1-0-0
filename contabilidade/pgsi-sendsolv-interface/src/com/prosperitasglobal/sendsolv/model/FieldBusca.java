@@ -1,5 +1,6 @@
 package com.prosperitasglobal.sendsolv.model;
 
+import com.qat.framework.model.QATModel;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -51,6 +52,17 @@ public class FieldBusca extends QATModel
 	public void setTabela(Tabela tabela)
 	{
 		this.tabela = tabela;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "FieldBusca [getId()=" + getId() + ", getTabela()=" + getTabela() + ", toString()=" + super.toString()
+				+ "]";
 	}
 
 }

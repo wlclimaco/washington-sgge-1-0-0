@@ -1,19 +1,13 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
 import com.prosperitasglobal.sendsolv.model.OrdemServico;
+import com.qat.framework.model.request.MaintenanceRequest;
 
-/**
- * The Class OrdemServicoMaintenanceRequest.
- *
- * @author abarros
- * @version 1.0
- * @created 22-Jul-2014 2:15:09 PM
- */
 public class OrdemServicoMaintenanceRequest extends MaintenanceRequest
 {
 
 	/** Attributes. */
-	private OrdemServico member;
+	private OrdemServico ordemServico;
 
 	/**
 	 * The Constructor.
@@ -24,23 +18,23 @@ public class OrdemServicoMaintenanceRequest extends MaintenanceRequest
 	}
 
 	/**
-	 * Gets the member.
+	 * Gets the ordemServico.
 	 *
-	 * @return the member
+	 * @return the ordemServico
 	 */
 	public OrdemServico getOrdemServico()
 	{
-		return member;
+		return ordemServico;
 	}
 
 	/**
-	 * Sets the member.
+	 * Sets the ordemServico.
 	 *
-	 * @param member the member
+	 * @param ordemServico the ordemServico
 	 */
-	public void setOrdemServico(OrdemServico member)
+	public void setOrdemServico(OrdemServico ordemServico)
 	{
-		this.member = member;
+		this.ordemServico = ordemServico;
 	}
 
 	/*
