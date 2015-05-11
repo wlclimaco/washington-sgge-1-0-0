@@ -7,7 +7,7 @@ import com.qat.framework.model.QATModel;
  * setting.
  */
 @SuppressWarnings("serial")
-public class Cliente extends QATModel
+public class Pessoa extends QATModel
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
@@ -39,7 +39,7 @@ public class Cliente extends QATModel
 	/**
 	 * Default constructor.
 	 */
-	public Cliente()
+	public Pessoa()
 	{
 		super();
 	}
