@@ -1,5 +1,10 @@
 package com.prosperitasglobal.sendsolv.dac;
 
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.Telefone;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
  * The Interface ITelefoneDAC.
@@ -52,6 +57,6 @@ public interface ITelefoneDAC
 	 * @param request the request
 	 * @return the internal results response< telefone>
 	 */
-	public InternalResultsResponse<Telefone> fetchTelefoneByRequest(TelefoneInquiryRequest request);
+	public InternalResultsResponse<Telefone> fetchTelefoneByRequest(PagedInquiryRequest request);
 
 }

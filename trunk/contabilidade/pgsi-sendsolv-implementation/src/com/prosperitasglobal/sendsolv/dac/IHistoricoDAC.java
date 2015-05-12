@@ -1,8 +1,13 @@
 package com.prosperitasglobal.sendsolv.dac;
 
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.Historico;
+import com.prosperitasglobal.sendsolv.model.request.HistoricoInquiryRequest;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
- * The Interface ITelefoneDAC.
+ * The Interface IHistoricoDAC.
  */
 public interface IHistoricoDAC
 {
@@ -13,7 +18,7 @@ public interface IHistoricoDAC
 	 * @param telefone the telefone
 	 * @return the internal results response< telefone>
 	 */
-	public InternalResultsResponse<Telefone> updateTelefone(Telefone telefone);
+	public InternalResultsResponse<Historico> updateHistorico(Historico telefone);
 
 	/**
 	 * Insert telefone.
@@ -21,7 +26,7 @@ public interface IHistoricoDAC
 	 * @param telefone the telefone
 	 * @return the internal results response< telefone>
 	 */
-	public InternalResultsResponse<Telefone> insertTelefone(Telefone telefone);
+	public InternalResultsResponse<Historico> insertHistorico(Historico telefone);
 
 	/**
 	 * Delete telefone.
@@ -29,7 +34,7 @@ public interface IHistoricoDAC
 	 * @param telefone the telefone
 	 * @return the internal response
 	 */
-	public InternalResponse deleteTelefone(Telefone telefone);
+	public InternalResponse deleteHistorico(Historico telefone);
 
 	/**
 	 * Fetch telefone by id.
@@ -37,14 +42,14 @@ public interface IHistoricoDAC
 	 * @param request the request
 	 * @return the internal results response
 	 */
-	public InternalResultsResponse<Telefone> fetchTelefoneById(FetchByIdRequest request);
+	public InternalResultsResponse<Historico> fetchHistoricoById(FetchByIdRequest request);
 
 	/**
 	 * Fetch all telefones.
 	 *
 	 * @return the internal results response< telefone>
 	 */
-	public InternalResultsResponse<Telefone> fetchAllTelefones();
+	public InternalResultsResponse<Historico> fetchAllHistoricos();
 
 	/**
 	 * Fetch telefone by request.
@@ -52,6 +57,6 @@ public interface IHistoricoDAC
 	 * @param request the request
 	 * @return the internal results response< telefone>
 	 */
-	public InternalResultsResponse<Telefone> fetchTelefoneByRequest(TelefoneInquiryRequest request);
+	public InternalResultsResponse<Historico> fetchHistoricoByRequest(HistoricoInquiryRequest request);
 
 }

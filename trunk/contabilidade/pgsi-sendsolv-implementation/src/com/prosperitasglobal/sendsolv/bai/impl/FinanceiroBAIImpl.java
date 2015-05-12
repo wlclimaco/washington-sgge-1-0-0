@@ -1,11 +1,29 @@
 package com.prosperitasglobal.sendsolv.bai.impl;
 
 import java.util.List;
-import java.util.logging.Logger;
 
-import javax.xml.ws.Response;
+import org.slf4j.LoggerFactory;
 
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.bac.IFinanceiroBAC;
+import com.prosperitasglobal.sendsolv.bai.IFinanceiroBAI;
+import com.prosperitasglobal.sendsolv.model.Financeiro;
+import com.prosperitasglobal.sendsolv.model.request.FinanceiroInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.FinanceiroMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.FinanceiroResponse;
+import com.qat.framework.model.Message.MessageLevel;
+import com.qat.framework.model.Message.MessageSeverity;
+import com.qat.framework.model.MessageInfo;
+import com.qat.framework.model.QATModel.PersistanceActionEnum;
+import com.qat.framework.model.UserContext;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResponse.Status;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATInterfaceUtil;
+import com.qat.framework.validation.ValidationContext;
+import com.qat.framework.validation.ValidationContextIndicator;
+import com.qat.framework.validation.ValidationController;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class FinanceiroBAIImpl.
@@ -16,7 +34,7 @@ public class FinanceiroBAIImpl implements IFinanceiroBAI
 	private static final String CLASS_NAME = FinanceiroBAIImpl.class.getName();
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(FinanceiroBAIImpl.class);
+	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(FinanceiroBAIImpl.class);
 
 	/** The Constant DEFAULT_EXCEPTION_MSG. */
 	private static final String DEFAULT_EXCEPTION_MSG = "sendsolv.base.defaultexception";
@@ -261,7 +279,7 @@ public class FinanceiroBAIImpl implements IFinanceiroBAI
 		}
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return (FinanceiroResponse)handleReturn(response, internalResponse, context.getMessages(), true);
+		return handleReturn(response, internalResponse, context.getMessages(), true);
 	}
 
 	/**
@@ -273,7 +291,7 @@ public class FinanceiroBAIImpl implements IFinanceiroBAI
 	 * @param copyOver the copy over
 	 * @return the response
 	 */
-	private Response handleReturn(Response response, InternalResponse internalResponse,
+	private FinanceiroResponse handleReturn(FinanceiroResponse response, InternalResponse internalResponse,
 			List<MessageInfo> messages, boolean copyOver)
 	{
 		// In the case there was an Optimistic Locking error, add the specific message

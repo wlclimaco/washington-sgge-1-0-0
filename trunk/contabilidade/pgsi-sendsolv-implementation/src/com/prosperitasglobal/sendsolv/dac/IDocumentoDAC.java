@@ -1,5 +1,10 @@
 package com.prosperitasglobal.sendsolv.dac;
 
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.Documento;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
  * The Interface IDocumentoDAC.
@@ -52,6 +57,6 @@ public interface IDocumentoDAC
 	 * @param request the request
 	 * @return the internal results response< documento>
 	 */
-	public InternalResultsResponse<Documento> fetchDocumentoByRequest(DocumentoInquiryRequest request);
+	public InternalResultsResponse<Documento> fetchDocumentoByRequest(PagedInquiryRequest request);
 
 }

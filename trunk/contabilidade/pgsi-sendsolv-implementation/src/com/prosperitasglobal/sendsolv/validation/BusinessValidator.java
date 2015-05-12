@@ -207,7 +207,7 @@ public class BusinessValidator extends ChangeControlValidator implements IValida
 	 * @param validationContext the validation context
 	 * @param business the business
 	 */
-	protected void performValidation(ValidationContext validationContext, Business business)
+	protected void performValidation(ValidationContext validationContext, E business)
 	{
 		validateBusinessType(validationContext.getMessages(), business);
 

@@ -1,13 +1,12 @@
 package com.prosperitasglobal.sendsolv.model;
 
 
-// TODO: Auto-generated Javadoc
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
  */
 @SuppressWarnings("serial")
-public class Atributos extends ModelCosmeDamiao
+public class Historico extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
@@ -39,7 +38,7 @@ public class Atributos extends ModelCosmeDamiao
 	/**
 	 * Default constructor.
 	 */
-	public Atributos()
+	public Historico()
 	{
 		super();
 	}
@@ -231,7 +230,7 @@ public class Atributos extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Atributos [getId()=" + getId() + ", getType()=" + getType() + ", getDescription()=" + getDescription()
+		return "Cliente [getId()=" + getId() + ", getType()=" + getType() + ", getDescription()=" + getDescription()
 				+ ", getTamanho()=" + getTamanho() + ", isObrigatorio()=" + isObrigatorio() + ", isChavePrimaria()="
 				+ isChavePrimaria() + ", isChaveSecundaria()=" + isChaveSecundaria() + ", getTabelaSecundaria()="
 				+ getTabelaSecundaria() + ", getNome()=" + getNome() + ", toString()=" + super.toString() + "]";

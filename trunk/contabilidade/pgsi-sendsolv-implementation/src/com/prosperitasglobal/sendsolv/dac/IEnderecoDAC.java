@@ -1,5 +1,10 @@
 package com.prosperitasglobal.sendsolv.dac;
 
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.Endereco;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
  * The Interface IEnderecoDAC.
@@ -52,6 +57,6 @@ public interface IEnderecoDAC
 	 * @param request the request
 	 * @return the internal results response< endereco>
 	 */
-	public InternalResultsResponse<Endereco> fetchEnderecoByRequest(EnderecoInquiryRequest request);
+	public InternalResultsResponse<Endereco> fetchEnderecoByRequest(PagedInquiryRequest request);
 
 }

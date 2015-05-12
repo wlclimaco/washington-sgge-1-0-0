@@ -4,13 +4,12 @@ import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
 import com.prosperitasglobal.cbof.model.Country;
 import com.prosperitasglobal.cbof.model.FilingStatusEnum;
 import com.prosperitasglobal.cbof.model.StateProvinceRegion;
-import com.qat.framework.model.QATModel;
 
 /**
  * The Class Document represents a generic formal business or personal document, such as driver's license or bylaws.
  */
 @SuppressWarnings("serial")
-public class Eventos extends QATModel
+public class Eventos extends ModelCosmeDamiao
 {
 
 	/** Attributes. */
@@ -207,6 +206,7 @@ public class Eventos extends QATModel
 	 *
 	 * @return the parent key
 	 */
+	@Override
 	public Integer getParentKey()
 	{
 		return parentKey;
@@ -217,6 +217,7 @@ public class Eventos extends QATModel
 	 *
 	 * @param parentKey the parent key
 	 */
+	@Override
 	public void setParentKey(Integer parentKey)
 	{
 		this.parentKey = parentKey;

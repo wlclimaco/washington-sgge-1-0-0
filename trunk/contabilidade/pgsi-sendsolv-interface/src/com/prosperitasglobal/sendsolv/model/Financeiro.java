@@ -1,13 +1,12 @@
 package com.prosperitasglobal.sendsolv.model;
 
-import com.qat.framework.model.QATModel;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
  */
 @SuppressWarnings("serial")
-public class Financeiro extends QATModel
+public class Financeiro extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;

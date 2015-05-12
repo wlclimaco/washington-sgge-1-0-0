@@ -2,8 +2,30 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.Map;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.dac.ICnaeDAC;
+import com.prosperitasglobal.sendsolv.dac.IEmailDAC;
 import com.prosperitasglobal.sendsolv.dac.IEmpresaDAC;
+import com.prosperitasglobal.sendsolv.dac.IEnderecoDAC;
+import com.prosperitasglobal.sendsolv.dac.IEventoDAC;
+import com.prosperitasglobal.sendsolv.dac.ISociosDAC;
+import com.prosperitasglobal.sendsolv.dac.ITelefoneDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
+import com.prosperitasglobal.sendsolv.model.Cnae;
+import com.prosperitasglobal.sendsolv.model.Documento;
+import com.prosperitasglobal.sendsolv.model.Email;
+import com.prosperitasglobal.sendsolv.model.Empresa;
+import com.prosperitasglobal.sendsolv.model.Endereco;
+import com.prosperitasglobal.sendsolv.model.Telefone;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class EmpresaDACImpl.
@@ -64,6 +86,114 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 
 	/** The valid sort fields for an empresa inquiry. Will be injected by Spring. */
 	private Map<String, String> empresaInquiryValidSortFields;
+
+	private IEnderecoDAC enderecoDAC;
+
+	private IEmailDAC emailDAC;
+
+	private ITelefoneDAC telefoneDAC;
+
+	private ICnaeDAC cnaeDAC;
+
+	private ISociosDAC socioDAC;
+
+	private IEventoDAC eventosDAC;
+
+	/**
+	 * @return the enderecoDAC
+	 */
+	public IEnderecoDAC getEnderecoDAC()
+	{
+		return enderecoDAC;
+	}
+
+	/**
+	 * @param enderecoDAC the enderecoDAC to set
+	 */
+	public void setEnderecoDAC(IEnderecoDAC enderecoDAC)
+	{
+		this.enderecoDAC = enderecoDAC;
+	}
+
+	/**
+	 * @return the emailDAC
+	 */
+	public IEmailDAC getEmailDAC()
+	{
+		return emailDAC;
+	}
+
+	/**
+	 * @param emailDAC the emailDAC to set
+	 */
+	public void setEmailDAC(IEmailDAC emailDAC)
+	{
+		this.emailDAC = emailDAC;
+	}
+
+	/**
+	 * @return the telefoneDAC
+	 */
+	public ITelefoneDAC getTelefoneDAC()
+	{
+		return telefoneDAC;
+	}
+
+	/**
+	 * @param telefoneDAC the telefoneDAC to set
+	 */
+	public void setTelefoneDAC(ITelefoneDAC telefoneDAC)
+	{
+		this.telefoneDAC = telefoneDAC;
+	}
+
+	/**
+	 * @return the cnaeDAC
+	 */
+	public ICnaeDAC getCnaeDAC()
+	{
+		return cnaeDAC;
+	}
+
+	/**
+	 * @param cnaeDAC the cnaeDAC to set
+	 */
+	public void setCnaeDAC(ICnaeDAC cnaeDAC)
+	{
+		this.cnaeDAC = cnaeDAC;
+	}
+
+	/**
+	 * @return the socioDAC
+	 */
+	public ISociosDAC getSocioDAC()
+	{
+		return socioDAC;
+	}
+
+	/**
+	 * @param socioDAC the socioDAC to set
+	 */
+	public void setSocioDAC(ISociosDAC socioDAC)
+	{
+		this.socioDAC = socioDAC;
+	}
+
+	/**
+	 * @return the eventosDAC
+	 */
+	public IEventoDAC getEventosDAC()
+	{
+		return eventosDAC;
+	}
+
+	/**
+	 * @param eventosDAC the eventosDAC to set
+	 */
+	public void setEventosDAC(IEventoDAC eventosDAC)
+	{
+		this.eventosDAC = eventosDAC;
+	}
 
 	/**
 	 * Get the valid sort fields for the empresa inquiry. Attribute injected by Spring.
@@ -235,31 +365,31 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		for (Endereco endereco : empresa.getEnderecos())
 		{
 			// Make sure we set the parent key
-			contact.setParentKey(empresa.getId());
+			endereco.setParentKey(empresa.getId());
 
-			if (ValidationUtil.isNull(contact.getModelAction()))
+			if (ValidationUtil.isNull(endereco.getModelAction()))
 			{
 				continue;
 			}
-			switch (contact.getModelAction())
-			{
-				case INSERT:
-					count = getEnderecoDAC().insertEndereco(endereco,
-							EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-					break;
-				case UPDATE:
-					count = getEnderecoDAC().updateEndereco(endereco, response);
-					break;
-				case DELETE:
-					count = getEnderecoDAC().deleteEndereco(endereco, response);
-					break;
-				default:
-					if (LOG.isDebugEnabled())
-					{
-						LOG.debug("ModelAction for Empresa missing!");
-					}
-					break;
-			}
+			// switch (endereco.getModelAction())
+			// {
+			// case INSERT:
+			// count = getEnderecoDAC().insertEndereco(endereco) Endereco(endereco,
+			// EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
+			// break;
+			// case UPDATE:
+			// count = getEnderecoDAC().updateEndereco(endereco, response);
+			// break;
+			// case DELETE:
+			// count = getEnderecoDAC().deleteEndereco(endereco, response);
+			// break;
+			// default:
+			// if (LOG.isDebugEnabled())
+			// {
+			// LOG.debug("ModelAction for Empresa missing!");
+			// }
+			// break;
+			// }
 		}
 		return count;
 	}
@@ -277,31 +407,31 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		for (Cnae cnae : empresa.getCnaes())
 		{
 			// Make sure we set the parent key
-			contact.setParentKey(empresa.getId());
+			cnae.setParentKey(empresa.getId());
 
-			if (ValidationUtil.isNull(empresa.getModelAction()))
+			if (ValidationUtil.isNull(cnae.getModelAction()))
 			{
 				continue;
 			}
-			switch (empresa.getModelAction())
-			{
-				case INSERT:
-					count = getCnaeDAC().insertCnae(cnae,
-							EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-					break;
-				case UPDATE:
-					count = getCnaeDAC().updateCnae(cnae, response);
-					break;
-				case DELETE:
-					count = getCnaeDAC().deleteCnae(cnae, response);
-					break;
-				default:
-					if (LOG.isDebugEnabled())
-					{
-						LOG.debug("ModelAction for Empresa missing!");
-					}
-					break;
-			}
+			// switch (cnae.getModelAction())
+			// {
+			// case INSERT:
+			// count = getCnaeDAC().insertCnae(cnae,
+			// EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
+			// break;
+			// case UPDATE:
+			// count = getCnaeDAC().updateCnae(cnae, response);
+			// break;
+			// case DELETE:
+			// count = getCnaeDAC().deleteCnae(cnae, response);
+			// break;
+			// default:
+			// if (LOG.isDebugEnabled())
+			// {
+			// LOG.debug("ModelAction for Empresa missing!");
+			// }
+			// break;
+			// }
 		}
 		return count;
 	}
@@ -319,31 +449,31 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		for (Telefone telefone : empresa.getTelefones())
 		{
 			// Make sure we set the parent key
-			contact.setParentKey(empresa.getId());
-
-			if (ValidationUtil.isNull(empresa.getModelAction()))
-			{
-				continue;
-			}
-			switch (empresa.getModelAction())
-			{
-				case INSERT:
-					count = getTelefoneDAC().insertTelefone(telefone,
-							EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-					break;
-				case UPDATE:
-					count = getTelefoneDAC().updateTelefone(telefone, response);
-					break;
-				case DELETE:
-					count = getTelefoneDAC().deleteTelefone(telefone, response);
-					break;
-				default:
-					if (LOG.isDebugEnabled())
-					{
-						LOG.debug("ModelAction for Empresa missing!");
-					}
-					break;
-			}
+			// contact.setParentKey(empresa.getId());
+			//
+			// if (ValidationUtil.isNull(empresa.getModelAction()))
+			// {
+			// continue;
+			// }
+			// switch (empresa.getModelAction())
+			// {
+			// case INSERT:
+			// count = getTelefoneDAC().insertTelefone(telefone,
+			// EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
+			// break;
+			// case UPDATE:
+			// count = getTelefoneDAC().updateTelefone(telefone, response);
+			// break;
+			// case DELETE:
+			// count = getTelefoneDAC().deleteTelefone(telefone, response);
+			// break;
+			// default:
+			// if (LOG.isDebugEnabled())
+			// {
+			// LOG.debug("ModelAction for Empresa missing!");
+			// }
+			// break;
+			// }
 		}
 		return count;
 	}
@@ -361,31 +491,31 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		for (Email email : empresa.getEmails())
 		{
 			// Make sure we set the parent key
-			contact.setParentKey(empresa.getId());
+			email.setParentKey(empresa.getId());
 
 			if (ValidationUtil.isNull(empresa.getModelAction()))
 			{
 				continue;
 			}
-			switch (email.getModelAction())
-			{
-				case INSERT:
-					count = getEmailDAC().insertEmail(email,
-							EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-					break;
-				case UPDATE:
-					count = getEmailDAC().updateEmail(email, response);
-					break;
-				case DELETE:
-					count = getEmailDAC().deleteEmail(email, response);
-					break;
-				default:
-					if (LOG.isDebugEnabled())
-					{
-						LOG.debug("ModelAction for Empresa missing!");
-					}
-					break;
-			}
+			// switch (email.getModelAction())
+			// {
+			// case INSERT:
+			// count = getEmailDAC().insertEmail(email,
+			// EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
+			// break;
+			// case UPDATE:
+			// count = getEmailDAC().updateEmail(email, response);
+			// break;
+			// case DELETE:
+			// count = getEmailDAC().deleteEmail(email, response);
+			// break;
+			// default:
+			// if (LOG.isDebugEnabled())
+			// {
+			// LOG.debug("ModelAction for Empresa missing!");
+			// }
+			// break;
+			// }
 		}
 		return count;
 	}
@@ -403,31 +533,31 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		for (Documento documentos : empresa.getDocumentos())
 		{
 			// Make sure we set the parent key
-			contact.setParentKey(empresa.getId());
+			documentos.setParentKey(empresa.getId());
 
-			if (ValidationUtil.isNull(contact.getModelAction()))
+			if (ValidationUtil.isNull(documentos.getModelAction()))
 			{
 				continue;
 			}
-			switch (documentos.getDocumentos())
-			{
-				case INSERT:
-					count = getDocumentoDAC().insertDocumento(documentos,
-							EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-					break;
-				case UPDATE:
-					count = getDocumentoDAC().updateDocumento(documentos, response);
-					break;
-				case DELETE:
-					count = getDocumentoDAC().deleteDocumento(documentos, response);
-					break;
-				default:
-					if (LOG.isDebugEnabled())
-					{
-						LOG.debug("ModelAction for Empresa missing!");
-					}
-					break;
-			}
+			// switch (documentos.getDocumentos())
+			// {
+			// case INSERT:
+			// count = getDocumentoDAC().insertDocumento(documentos,
+			// EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
+			// break;
+			// case UPDATE:
+			// count = getDocumentoDAC().updateDocumento(documentos, response);
+			// break;
+			// case DELETE:
+			// count = getDocumentoDAC().deleteDocumento(documentos, response);
+			// break;
+			// default:
+			// if (LOG.isDebugEnabled())
+			// {
+			// LOG.debug("ModelAction for Empresa missing!");
+			// }
+			// break;
+			// }
 		}
 		return count;
 	}

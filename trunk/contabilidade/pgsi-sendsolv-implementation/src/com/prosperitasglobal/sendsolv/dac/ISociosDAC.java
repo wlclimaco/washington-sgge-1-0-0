@@ -1,15 +1,15 @@
 package com.prosperitasglobal.sendsolv.dac;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.Email;
+import com.prosperitasglobal.sendsolv.model.Socio;
 import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
- * The Interface IEmailDAC.
+ * The Interface ISocioDAC.
  */
-public interface IEmailDAC
+public interface ISociosDAC
 {
 
 	/**
@@ -18,7 +18,7 @@ public interface IEmailDAC
 	 * @param cnae the cnae
 	 * @return the internal results response< cnae>
 	 */
-	public InternalResultsResponse<Email> updateEmail(Email cnae);
+	public InternalResultsResponse<Socio> updateSocio(Socio cnae);
 
 	/**
 	 * Insert cnae.
@@ -26,7 +26,7 @@ public interface IEmailDAC
 	 * @param cnae the cnae
 	 * @return the internal results response< cnae>
 	 */
-	public InternalResultsResponse<Email> insertEmail(Email cnae);
+	public InternalResultsResponse<Socio> insertSocio(Socio cnae);
 
 	/**
 	 * Delete cnae.
@@ -34,7 +34,7 @@ public interface IEmailDAC
 	 * @param cnae the cnae
 	 * @return the internal response
 	 */
-	public InternalResponse deleteEmail(Email cnae);
+	public InternalResponse deleteSocio(Socio cnae);
 
 	/**
 	 * Fetch cnae by id.
@@ -42,14 +42,14 @@ public interface IEmailDAC
 	 * @param request the request
 	 * @return the internal results response
 	 */
-	public InternalResultsResponse<Email> fetchEmailById(FetchByIdRequest request);
+	public InternalResultsResponse<Socio> fetchSocioById(FetchByIdRequest request);
 
 	/**
 	 * Fetch all cnaes.
 	 *
 	 * @return the internal results response< cnae>
 	 */
-	public InternalResultsResponse<Email> fetchAllEmails();
+	public InternalResultsResponse<Socio> fetchAllSocios();
 
 	/**
 	 * Fetch cnae by request.
@@ -57,6 +57,6 @@ public interface IEmailDAC
 	 * @param request the request
 	 * @return the internal results response< cnae>
 	 */
-	public InternalResultsResponse<Email> fetchEmailByRequest(PagedInquiryRequest request);
+	public InternalResultsResponse<Socio> fetchSocioByRequest(PagedInquiryRequest request);
 
 }

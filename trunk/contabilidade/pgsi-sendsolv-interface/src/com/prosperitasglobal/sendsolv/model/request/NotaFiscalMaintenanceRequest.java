@@ -1,13 +1,13 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
-import com.prosperitasglobal.sendsolv.model.Produto;
+import com.prosperitasglobal.sendsolv.model.NotaFiscal;
 import com.qat.framework.model.request.MaintenanceRequest;
 
 public class NotaFiscalMaintenanceRequest extends MaintenanceRequest
 {
 
 	/** Attributes. */
-	private Produto produto;
+	private NotaFiscal notaFiscal;
 
 	/**
 	 * The Constructor.
@@ -18,23 +18,19 @@ public class NotaFiscalMaintenanceRequest extends MaintenanceRequest
 	}
 
 	/**
-	 * Gets the produto.
-	 *
-	 * @return the produto
+	 * @return the notaFiscal
 	 */
-	public Produto getProduto()
+	public NotaFiscal getNotaFiscal()
 	{
-		return produto;
+		return notaFiscal;
 	}
 
 	/**
-	 * Sets the produto.
-	 *
-	 * @param produto the produto
+	 * @param notaFiscal the notaFiscal to set
 	 */
-	public void setProduto(Produto produto)
+	public void setNotaFiscal(NotaFiscal notaFiscal)
 	{
-		this.produto = produto;
+		this.notaFiscal = notaFiscal;
 	}
 
 	/*
@@ -44,7 +40,7 @@ public class NotaFiscalMaintenanceRequest extends MaintenanceRequest
 	@Override
 	public String toString()
 	{
-		return "ProdutoMaintenanceRequest [getProduto()=" + getProduto() + ", getUserContext()="
+		return "ProdutoMaintenanceRequest [getNotaFiscal()=" + getNotaFiscal() + ", getUserContext()="
 				+ getUserContext() + "]";
 	}
 }

@@ -1,5 +1,10 @@
 package com.prosperitasglobal.sendsolv.dac;
 
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.Cnae;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
  * The Interface ICnaeDAC.
@@ -52,6 +57,6 @@ public interface ICnaeDAC
 	 * @param request the request
 	 * @return the internal results response< cnae>
 	 */
-	public InternalResultsResponse<Cnae> fetchCnaeByRequest(CnaeInquiryRequest request);
+	public InternalResultsResponse<Cnae> fetchCnaeByRequest(PagedInquiryRequest request);
 
 }
