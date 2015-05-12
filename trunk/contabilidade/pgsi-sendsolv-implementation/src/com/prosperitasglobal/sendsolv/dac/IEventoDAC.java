@@ -1,9 +1,8 @@
 package com.prosperitasglobal.sendsolv.dac;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
 import com.prosperitasglobal.sendsolv.model.Eventos;
 import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
-import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
@@ -12,51 +11,53 @@ import com.qat.framework.model.response.InternalResultsResponse;
 public interface IEventoDAC
 {
 
-	/**
-	 * Update telefone.
-	 *
-	 * @param telefone the telefone
-	 * @return the internal results response< telefone>
-	 */
-	public InternalResultsResponse<Eventos> updateEventos(Eventos telefone);
+	public Integer updateEvento(Eventos Evento, InternalResultsResponse<?> response);
 
 	/**
-	 * Insert telefone.
+	 * Insert Evento.
 	 *
-	 * @param telefone the telefone
-	 * @return the internal results response< telefone>
+	 * @param Evento the Evento
+	 * @param statementName the statement name
+	 * @param response the response
+	 * @return the integer
 	 */
-	public InternalResultsResponse<Eventos> insertEventos(Eventos telefone);
+	public Integer insertEvento(Eventos Evento, String statementName, InternalResultsResponse<?> response);
 
 	/**
-	 * Delete telefone.
+	 * Delete business Evento.
 	 *
-	 * @param telefone the telefone
-	 * @return the internal response
+	 * @param Evento the Evento
+	 * @param response the response
+	 * @return the integer
 	 */
-	public InternalResponse deleteEventos(Eventos telefone);
+	public Integer deleteBusinessEvento(Eventos Evento, InternalResultsResponse<?> response);
 
 	/**
-	 * Fetch telefone by id.
+	 * Delete person Evento.
 	 *
-	 * @param request the request
-	 * @return the internal results response
+	 * @param Evento the Evento
+	 * @param response the response
+	 * @return the integer
 	 */
-	public InternalResultsResponse<Eventos> fetchEventosById(FetchByIdRequest request);
+	public Integer deletePersonEvento(Eventos Evento, InternalResultsResponse<?> response);
 
 	/**
-	 * Fetch all telefones.
+	 * Fetch Evento by parent.
 	 *
-	 * @return the internal results response< telefone>
+	 * @param parentId the parent id
+	 * @param parentType the parent type
+	 * @return the internal results response< Evento>
 	 */
-	public InternalResultsResponse<Eventos> fetchAllEventoss();
+	public InternalResultsResponse<Eventos> fetchEventoByParent(Integer parentId, BusinessTypeEnum parentType);
 
 	/**
-	 * Fetch telefone by request.
+	 * Fetch Evento by id.
 	 *
-	 * @param request the request
-	 * @return the internal results response< telefone>
+	 * @param id the id
+	 * @return the internal results response< Evento>
 	 */
-	public InternalResultsResponse<Eventos> fetchEventosByRequest(PagedInquiryRequest request);
+	public InternalResultsResponse<Eventos> fetchEventoById(Integer id);
+
+	public InternalResultsResponse<Eventos> fetchEventoByRequest(PagedInquiryRequest request);
 
 }

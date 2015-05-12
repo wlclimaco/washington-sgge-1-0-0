@@ -1,8 +1,13 @@
+package com.prosperitasglobal.sendsolv.dac;
+
 import java.util.List;
 
-import com.prosperitasglobal.cbof.dac.BusinessTypeEnum;
-import com.prosperitasglobal.cbof.dac.Endereco;
+import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
+import com.prosperitasglobal.sendsolv.model.Endereco;
+import com.qat.framework.model.response.InternalResultsResponse;
 
+public interface IEnderecoDAC
+{
 	/**
 	 * Update endereco.
 	 *
@@ -66,5 +71,7 @@ import com.prosperitasglobal.cbof.dac.Endereco;
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer maintainEnderecoAssociations(List<Endereco> enderecoList, Integer parentId, String associateStatement,
+	public Integer maintainEnderecoAssociations(List<Endereco> enderecoList, Integer parentId,
+			String associateStatement,
 			InternalResultsResponse<?> response);
+}
