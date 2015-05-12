@@ -1,273 +1,287 @@
-package com.prosperitasglobal.sendsolv.dac.mybatis;
+package com.prosperitasglobal.cbof.dac.mybatis;
 
-import java.util.Map;
+import java.util.List;
+import java.util.logging.Logger;
 
-import org.mybatis.spring.support.SqlSessionDaoSupport;
-import org.slf4j.LoggerFactory;
-
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.IEnderecoDAC;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
-import com.prosperitasglobal.sendsolv.model.Endereco;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
-import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResponse;
-import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.util.QATMyBatisDacHelper;
-import com.qat.framework.validation.ValidationUtil;
 
 /**
- * The Class EnderecoDACImpl.
+ * The Class CommonBusinessObjectsDACImpl.
  */
 public class EnderecoDACImpl extends SqlSessionDaoSupport implements IEnderecoDAC
 {
+	/** The Constant CONTACT_NAMESPACE. */
+	private static final String CONTACT_NAMESPACE = "EnderecoMap.";
 
-	/** The Constant EMPRESA_NAMESPACE. */
-	private static final String EMPRESA_NAMESPACE = "EnderecoMap.";
+	/** The Constant CONTACT_STMT_UPDATE. */
+	private static final String CONTACT_STMT_UPDATE = CONTACT_NAMESPACE + "updateEndereco";
 
-	/** The Constant CBOF_NAMESPACE. */
-	private static final String CBOF_NAMESPACE = "CBOFMap.";
+	/** The Constant CONTACT_STMT_UPDATE_PHONE. */
+	private static final String CONTACT_STMT_UPDATE_PHONE = CONTACT_NAMESPACE + "updatePhone";
 
-	/** The Constant EMPRESA_STMT_FETCH_COUNT. */
-	private static final String EMPRESA_STMT_FETCH_COUNT = EMPRESA_NAMESPACE + "fetchEnderecoRowCount";
+	/** The Constant CONTACT_STMT_UPDATE_EMAIL. */
+	private static final String CONTACT_STMT_UPDATE_EMAIL = CONTACT_NAMESPACE + "updateEmail";
 
-	/** The Constant EMPRESA_STMT_FETCH_ALL_BY_REQUEST. */
-	private static final String EMPRESA_STMT_FETCH_ALL_BY_REQUEST = EMPRESA_NAMESPACE
-			+ "fetchAllEnderecosByRequest";
+	/** The Constant CONTACT_STMT_UPDATE_ADDRESS. */
+	private static final String CONTACT_STMT_UPDATE_ADDRESS = CONTACT_NAMESPACE + "updateAddress";
 
-	/** The Constant EMPRESA_STMT_FETCH_BY_ID. */
-	private static final String EMPRESA_STMT_FETCH_BY_ID = EMPRESA_NAMESPACE + "fetchEnderecoById";
+	/** The Constant CONTACT_STMT_DELETE_BUSINESS_CONTACT. */
+	private static final String CONTACT_STMT_DELETE_BUSINESS_CONTACT = CONTACT_NAMESPACE + "deleteBusinessEndereco";
 
-	/** The Constant EMPRESA_STMT_INSERT. */
-	private static final String EMPRESA_STMT_INSERT = EMPRESA_NAMESPACE + "insertEndereco";
+	/** The Constant CONTACT_STMT_DELETE_PERSON_CONTACT. */
+	private static final String CONTACT_STMT_DELETE_PERSON_CONTACT = CONTACT_NAMESPACE + "deletePersonEndereco";
 
-	/** The Constant EMPRESA_STMT_ASSOC_ORG_TO_CONTACT. */
-	private static final String EMPRESA_STMT_ASSOC_ORG_TO_CONTACT = EMPRESA_NAMESPACE
-			+ "associateEnderecoWithContact";
+	/** The Constant CONTACT_STMT_INSERT. */
+	private static final String CONTACT_STMT_INSERT = CONTACT_NAMESPACE + "insertEndereco";
 
-	/** The Constant EMPRESA_STMT_UPDATE. */
-	private static final String EMPRESA_STMT_UPDATE = EMPRESA_NAMESPACE + "updateEndereco";
+	/** The Constant CONTACT_STMT_INSERT_PHONE. */
+	private static final String CONTACT_STMT_INSERT_PHONE = CONTACT_NAMESPACE + "insertPhone";
 
-	/** The Constant EMPRESA_STMT_DELETE. */
-	private static final String EMPRESA_STMT_DELETE = EMPRESA_NAMESPACE + "deleteEnderecoById";
+	/** The Constant CONTACT_STMT_INSERT_EMAIL. */
+	private static final String CONTACT_STMT_INSERT_EMAIL = CONTACT_NAMESPACE + "insertEmail";
 
-	/** The Constant EMPRESA_DOCUMENT_STMT_UPDATE. */
-	private static final String EMPRESA_DOCUMENT_STMT_UPDATE = EMPRESA_NAMESPACE
-			+ "updateEnderecoDocument";
+	/** The Constant CONTACT_STMT_INSERT_ADDRESS. */
+	private static final String CONTACT_STMT_INSERT_ADDRESS = CONTACT_NAMESPACE + "insertAddress";
 
-	/** The Constant EMPRESA_STMT_ASSOC_ORG_TO_DOCUMENT. */
-	private static final String EMPRESA_STMT_ASSOC_ORG_TO_DOCUMENT = EMPRESA_NAMESPACE
-			+ "associateEnderecoWithDocument";
+	/** The Constant CONTACT_STMT_FETCH_BY_BUSINESS_ID. */
+	private static final String CONTACT_STMT_FETCH_BY_BUSINESS_ID = CONTACT_NAMESPACE + "fetchEnderecosByBusinessId";
 
-	/** The Constant EMPRESA_STMT_DELETE_DOCUMENT. */
-	private static final String EMPRESA_STMT_DELETE_DOCUMENT = EMPRESA_NAMESPACE
-			+ "deleteEnderecoDocument";
+	/** The Constant CONTACT_STMT_FETCH_BY_PERSON_ID. */
+	private static final String CONTACT_STMT_FETCH_BY_PERSON_ID = CONTACT_NAMESPACE + "fetchEnderecosByPersonId";
 
-	/** The Constant STMT_VERSION. */
-	private static final String EMPRESA_STMT_VERSION = EMPRESA_NAMESPACE + "fetchVersionNumber";
+	/** The Constant CONTACT_STMT_FETCH_BY_ID. */
+	private static final String CONTACT_STMT_FETCH_BY_ID = CONTACT_NAMESPACE + "fetchEnderecosById";
 
-	/** The Constant EMPRESA_STMT_UPDATE_EMPRESA_STATUS. */
-	private static final String EMPRESA_STMT_UPDATE_EMPRESA_STATUS = CBOF_NAMESPACE
-			+ "updateBusinessStatus";
+	/** The Constant CONTACT_STMT_FETCH_EMAIL_VERSION. */
+	private static final String CONTACT_STMT_FETCH_EMAIL_VERSION = CONTACT_NAMESPACE + "fetchVersionNumberEmail";
+
+	/** The Constant CONTACT_STMT_FETCH_PHONE_VERSION. */
+	private static final String CONTACT_STMT_FETCH_PHONE_VERSION = CONTACT_NAMESPACE + "fetchVersionNumberPhone";
+
+	/** The Constant CONTACT_STMT_FETCH_ADDRESS_VERSION. */
+	private static final String CONTACT_STMT_FETCH_ADDRESS_VERSION = CONTACT_NAMESPACE + "fetchVersionNumberAddress";
 
 	/** The Constant LOG. */
-	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(EnderecoDACImpl.class);
-
-	/** The valid sort fields for an endereco inquiry. Will be injected by Spring. */
-	private Map<String, String> enderecoInquiryValidSortFields;
-
-	/**
-	 * Get the valid sort fields for the endereco inquiry. Attribute injected by Spring.
-	 *
-	 * @return The valid sort fields for the endereco inquiry.
-	 */
-	public Map<String, String> getEnderecoInquiryValidSortFields()
-	{
-		return enderecoInquiryValidSortFields;
-	}
-
-	/**
-	 * Set the valid sort fields for the endereco inquiry. Attribute injected by Spring.
-	 *
-	 * @param enderecoInquiryValidSortFields The valid sort fields for the endereco inquiry to set.
-	 */
-	public void setEnderecoInquiryValidSortFields(Map<String, String> enderecoInquiryValidSortFields)
-	{
-		this.enderecoInquiryValidSortFields = enderecoInquiryValidSortFields;
-	}
+	private static final Logger LOG = LoggerFactory.getLogger(EnderecoDACImpl.class);
 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IEnderecoDAC#insertEndereco(com.prosperitasglobal.sendsolv.model
-	 * .Endereco)
+	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#insertEndereco(com.prosperitasglobal.cbof.model.Endereco,
+	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public InternalResultsResponse<Endereco> insertEndereco(Endereco endereco)
+	public Integer insertEndereco(Endereco endereco, String statementName, InternalResultsResponse<?> response)
 	{
 		Integer insertCount = 0;
-		InternalResultsResponse<Endereco> response = new InternalResultsResponse<Endereco>();
+		// First insert the root endereco data
+		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT, endereco, response);
 
-		// First insert the root
-		// Is successful the unique-id will be populated back into the object.
-		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), EMPRESA_STMT_INSERT, endereco, response);
+		// Associate with parent using statement name passed as parameter
+		insertCount +=
+				QATMyBatisDacHelper
+						.doInsert(getSqlSession(), statementName, endereco, response);
 
-		if (response.isInError())
+		// Next insert the sub-type
+		switch (endereco.getEnderecoType())
 		{
-			return response;
+			case OTHER:
+			case PHONE_WORK:
+			case MOBILE:
+				insertCount +=
+						QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT_PHONE, endereco, response);
+				break;
+			case EMAIL_PERSONAL:
+			case EMAIL_WORK:
+				insertCount +=
+						QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT_EMAIL, endereco, response);
+				break;
+			case POSTAL_HOME:
+			case POSTAL_WORK:
+				insertCount +=
+						QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT_ADDRESS, endereco, response);
+				break;
+			default:
+				break;
 		}
-		// Next traverse the object graph and "maintain" the associations
-		insertCount += maintainEnderecoAssociations(endereco, response);
 
-		// Finally, if something was inserted then add the Endereco to the result.
-		if (insertCount > 0)
-		{
-			response.addResult(endereco);
-		}
-
-		return response;
+		return insertCount;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IEnderecoDAC#updateEndereco(com.prosperitasglobal.sendsolv.model
-	 * .Endereco)
+	 * com.prosperitasglobal.cbof.dac.IEnderecoDAC#deleteBusinessEndereco(com.prosperitasglobal.cbof.model.Endereco,
+	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public InternalResultsResponse<Endereco> updateEndereco(Endereco endereco)
+	public Integer deleteBusinessEndereco(Endereco endereco, InternalResultsResponse<?> response)
+	{
+		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, endereco, response);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.cbof.dac.IEnderecoDAC#deletePersonEndereco(com.prosperitasglobal.cbof.model.Endereco,
+	 * com.qat.framework.model.response.InternalResultsResponse)
+	 */
+	@Override
+	public Integer deletePersonEndereco(Endereco endereco, InternalResultsResponse<?> response)
+	{
+		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_PERSON_CONTACT, endereco, response);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#updateEndereco(com.prosperitasglobal.cbof.model.Endereco,
+	 * com.qat.framework.model.response.InternalResultsResponse)
+	 */
+	@Override
+	public Integer updateEndereco(Endereco endereco, InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
-		InternalResultsResponse<Endereco> response = new InternalResultsResponse<Endereco>();
 
 		// First update the root if necessary.
 		if (!ValidationUtil.isNull(endereco.getModelAction())
 				&& (endereco.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
 		{
-			updateCount =
-					QATMyBatisDacHelper.doUpdate(getSqlSession(), EMPRESA_STMT_UPDATE, endereco,
-							response);
+			updateCount = QATMyBatisDacHelper.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE, endereco, response);
+
+			if (updateCount == 1)
+			{
+				endereco.setModelAction(QATModel.PersistanceActionEnum.NONE);
+			}
 		}
 
-		if (response.isInError())
+		// Next update the sub-type
+		switch (endereco.getEnderecoType())
 		{
-			return response;
+			case OTHER:
+			case PHONE_WORK:
+			case MOBILE:
+				updateCount +=
+						QATMyBatisDacHelper.doUpdateOL(getSqlSession(), CONTACT_STMT_UPDATE_PHONE, endereco,
+								CONTACT_STMT_FETCH_PHONE_VERSION, response);
+				break;
+			case EMAIL_PERSONAL:
+			case EMAIL_WORK:
+				updateCount +=
+						QATMyBatisDacHelper.doUpdateOL(getSqlSession(), CONTACT_STMT_UPDATE_EMAIL, endereco,
+								CONTACT_STMT_FETCH_EMAIL_VERSION, response);
+				break;
+			case POSTAL_HOME:
+			case POSTAL_WORK:
+				updateCount +=
+						QATMyBatisDacHelper.doUpdateOL(getSqlSession(), CONTACT_STMT_UPDATE_ADDRESS, endereco,
+								CONTACT_STMT_FETCH_ADDRESS_VERSION, response);
+				break;
+			default:
+				break;
 		}
-		// Next traverse the object graph and "maintain" the associations
-		updateCount += maintainEnderecoAssociations(endereco, response);
 
-		// Finally, if something was updated then add the Person to the result.
-		if (updateCount > 0)
-		{
-			response.addResult(endereco);
-		}
-
-		return response;
+		return updateCount;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IEnderecoDAC#deleteEndereco(com.prosperitasglobal.sendsolv.model
-	 * .Endereco)
+	 * @see com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#fetchEnderecoByParent(java.lang.Integer,
+	 * com.prosperitasglobal.sendsolv.model.BusinessTypeEnum)
 	 */
 	@Override
-	public InternalResponse deleteEndereco(Endereco endereco)
-	{
-		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doRemove(getSqlSession(), EMPRESA_STMT_DELETE, endereco, response);
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.dac.IEnderecoDAC#fetchEnderecoById(FetchByIdRequest)
-	 */
-	@Override
-	public InternalResultsResponse<Endereco> fetchEnderecoById(FetchByIdRequest request)
-	{
-		InternalResultsResponse<Endereco> response = new InternalResultsResponse<Endereco>();
-		QATMyBatisDacHelper.doQueryForList(getSqlSession(), EMPRESA_STMT_FETCH_BY_ID, request, response);
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IEnderecoDAC#fetchEnderecoByRequest(com.prosperitasglobal.sendsolv
-	 * .model.request.PagedInquiryRequest)
-	 */
-	@Override
-	public InternalResultsResponse<Endereco> fetchEnderecoByRequest(PagedInquiryRequest request)
+	public InternalResultsResponse<Endereco> fetchEnderecoByParent(Integer parentId, BusinessTypeEnum parentType)
 	{
 		InternalResultsResponse<Endereco> response = new InternalResultsResponse<Endereco>();
 
-		/*
-		 * Helper method to translation from the user friendly" sort field names to the
-		 * actual database column names.
-		 */
-		QATMyBatisDacHelper.translateSortFields(request, getEnderecoInquiryValidSortFields());
+		switch (parentType)
+		{
+			case ORGANIZATION:
+				QATMyBatisDacHelper.doQueryForList(getSqlSession(), CONTACT_STMT_FETCH_BY_BUSINESS_ID, parentId,
+						response);
+				break;
 
-		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, EMPRESA_STMT_FETCH_COUNT,
-				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
+			case LOCATION:
+				QATMyBatisDacHelper.doQueryForList(getSqlSession(), CONTACT_STMT_FETCH_BY_BUSINESS_ID, parentId,
+						response);
+				break;
+
+			case MEMBER:
+				QATMyBatisDacHelper.doQueryForList(getSqlSession(), CONTACT_STMT_FETCH_BY_PERSON_ID, parentId,
+						response);
+				break;
+			case UNKNOWN:
+				break;
+			default:
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("parentType for Endereco missing!");
+				}
+				break;
+
+		}
+
 		return response;
 	}
 
-	/**
-	 * Maintain endereco associations.
-	 *
-	 * @param endereco the endereco
-	 * @param response the response
-	 * @return the integer
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#fetchEnderecoById(java.lang.Integer)
 	 */
-	private Integer maintainEnderecoAssociations(Endereco endereco,
-			InternalResultsResponse<Endereco> response)
+	@Override
+	public InternalResultsResponse<Endereco> fetchEnderecoById(Integer id)
+	{
+		InternalResultsResponse<Endereco> response = new InternalResultsResponse<Endereco>();
+
+		QATMyBatisDacHelper.doQueryForList(getSqlSession(), CONTACT_STMT_FETCH_BY_ID, id, response);
+
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.cbof.dac.IEnderecoDAC#maintainEnderecoAssociations(java.util.List, java.lang.Integer,
+	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
+	 */
+	@Override
+	public Integer maintainEnderecoAssociations(List<Endereco> enderecoList, Integer parentId,
+			String associateStatement,
+			InternalResultsResponse<?> response)
 	{
 		Integer count = 0;
-		// First Maintain Contacts
-		// if (ValidationUtil.isNullOrEmpty(endereco.getContactList()))
-		// {
-		// return count;
-		// }
-		// // For Each Contact...
-		// for (Contact contact : endereco.getContactList())
-		// {
-		// // Make sure we set the parent key
-		// contact.setParentKey(endereco.getId());
-		//
-		// if (ValidationUtil.isNull(contact.getModelAction()))
-		// {
-		// continue;
-		// }
-		// switch (contact.getModelAction())
-		// {
-		// case INSERT:
-		// count = getContactDAC().insertContact(contact,
-		// EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-		// break;
-		// case UPDATE:
-		// count = getContactDAC().updateContact(contact, response);
-		// break;
-		// case DELETE:
-		// count = getContactDAC().deleteBusinessContact(contact, response);
-		// break;
-		// default:
-		// if (LOG.isDebugEnabled())
-		// {
-		// LOG.debug("ModelAction for Endereco missing!");
-		// }
-		// break;
-		// }
-		// }
+		// First Maintain Enderecos
+		if (ValidationUtil.isNullOrEmpty(enderecoList))
+		{
+			return count;
+		}
+		// For Each Endereco...
+		for (Endereco endereco : enderecoList)
+		{
+			// Make sure we set the parent key
+			endereco.setParentKey(parentId);
+
+			if (ValidationUtil.isNull(endereco.getModelAction()))
+			{
+				continue;
+			}
+			switch (endereco.getModelAction())
+			{
+				case INSERT:
+					count += insertEndereco(endereco, associateStatement, response);
+					break;
+				case UPDATE:
+					count += updateEndereco(endereco, response);
+					break;
+				case DELETE:
+					count += deletePersonEndereco(endereco, response);
+					break;
+				default:
+					if (LOG.isDebugEnabled())
+					{
+						LOG.debug("ModelAction for Organization missing!");
+					}
+					break;
+			}
+		}
 		return count;
 	}
-
-	@Override
-	public InternalResultsResponse<Endereco> fetchAllEnderecos()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

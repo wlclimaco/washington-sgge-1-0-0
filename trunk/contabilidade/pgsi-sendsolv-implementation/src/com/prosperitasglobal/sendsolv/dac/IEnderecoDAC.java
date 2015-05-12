@@ -1,62 +1,70 @@
-package com.prosperitasglobal.sendsolv.dac;
+import java.util.List;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.Endereco;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
-import com.qat.framework.model.response.InternalResponse;
-import com.qat.framework.model.response.InternalResultsResponse;
-
-/**
- * The Interface IEnderecoDAC.
- */
-public interface IEnderecoDAC
-{
+import com.prosperitasglobal.cbof.dac.BusinessTypeEnum;
+import com.prosperitasglobal.cbof.dac.Endereco;
 
 	/**
 	 * Update endereco.
 	 *
 	 * @param endereco the endereco
-	 * @return the internal results response< endereco>
+	 * @param response the response
+	 * @return the integer
 	 */
-	public InternalResultsResponse<Endereco> updateEndereco(Endereco endereco);
+	public Integer updateEndereco(Endereco endereco, InternalResultsResponse<?> response);
 
 	/**
 	 * Insert endereco.
 	 *
 	 * @param endereco the endereco
-	 * @return the internal results response< endereco>
+	 * @param statementName the statement name
+	 * @param response the response
+	 * @return the integer
 	 */
-	public InternalResultsResponse<Endereco> insertEndereco(Endereco endereco);
+	public Integer insertEndereco(Endereco endereco, String statementName, InternalResultsResponse<?> response);
 
 	/**
-	 * Delete endereco.
+	 * Delete business endereco.
 	 *
 	 * @param endereco the endereco
-	 * @return the internal response
+	 * @param response the response
+	 * @return the integer
 	 */
-	public InternalResponse deleteEndereco(Endereco endereco);
+	public Integer deleteBusinessEndereco(Endereco endereco, InternalResultsResponse<?> response);
+
+	/**
+	 * Delete person endereco.
+	 *
+	 * @param endereco the endereco
+	 * @param response the response
+	 * @return the integer
+	 */
+	public Integer deletePersonEndereco(Endereco endereco, InternalResultsResponse<?> response);
+
+	/**
+	 * Fetch endereco by parent.
+	 *
+	 * @param parentId the parent id
+	 * @param parentType the parent type
+	 * @return the internal results response< endereco>
+	 */
+	public InternalResultsResponse<Endereco> fetchEnderecoByParent(Integer parentId, BusinessTypeEnum parentType);
 
 	/**
 	 * Fetch endereco by id.
 	 *
-	 * @param request the request
-	 * @return the internal results response
-	 */
-	public InternalResultsResponse<Endereco> fetchEnderecoById(FetchByIdRequest request);
-
-	/**
-	 * Fetch all enderecos.
-	 *
+	 * @param id the id
 	 * @return the internal results response< endereco>
 	 */
-	public InternalResultsResponse<Endereco> fetchAllEnderecos();
+	public InternalResultsResponse<Endereco> fetchEnderecoById(Integer id);
 
 	/**
-	 * Fetch endereco by request.
+	 * Maintain endereco associations.
 	 *
-	 * @param request the request
-	 * @return the internal results response< endereco>
+	 * @param enderecoList the endereco list
+	 * @param parentId the parent id
+	 * @param associateStatement the associate statement
+	 * @param response the response
+	 * @return the integer
 	 */
-	public InternalResultsResponse<Endereco> fetchEnderecoByRequest(PagedInquiryRequest request);
-
-}
+	public Integer maintainEnderecoAssociations(List<Endereco> enderecoList, Integer parentId, String associateStatement,
+			InternalResultsResponse<?> response);
