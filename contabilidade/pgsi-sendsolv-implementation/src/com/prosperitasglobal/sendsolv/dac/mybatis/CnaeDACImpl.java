@@ -1,272 +1,285 @@
-package com.prosperitasglobal.sendsolv.dac.mybatis;
+package com.prosperitasglobal.cbof.dac.mybatis;
 
-import java.util.Map;
+import java.util.List;
+import java.util.logging.Logger;
 
-import org.mybatis.spring.support.SqlSessionDaoSupport;
-import org.slf4j.LoggerFactory;
-
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.ICnaeDAC;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
-import com.prosperitasglobal.sendsolv.model.Cnae;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
-import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResponse;
-import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.util.QATMyBatisDacHelper;
-import com.qat.framework.validation.ValidationUtil;
 
 /**
- * The Class CnaeDACImpl.
+ * The Class CommonBusinessObjectsDACImpl.
  */
 public class CnaeDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 {
+	/** The Constant CONTACT_NAMESPACE. */
+	private static final String CONTACT_NAMESPACE = "CnaeMap.";
 
-	/** The Constant EMPRESA_NAMESPACE. */
-	private static final String EMPRESA_NAMESPACE = "CnaeMap.";
+	/** The Constant CONTACT_STMT_UPDATE. */
+	private static final String CONTACT_STMT_UPDATE = CONTACT_NAMESPACE + "updateCnae";
 
-	/** The Constant CBOF_NAMESPACE. */
-	private static final String CBOF_NAMESPACE = "CBOFMap.";
+	/** The Constant CONTACT_STMT_UPDATE_PHONE. */
+	private static final String CONTACT_STMT_UPDATE_PHONE = CONTACT_NAMESPACE + "updatePhone";
 
-	/** The Constant EMPRESA_STMT_FETCH_COUNT. */
-	private static final String EMPRESA_STMT_FETCH_COUNT = EMPRESA_NAMESPACE + "fetchCnaeRowCount";
+	/** The Constant CONTACT_STMT_UPDATE_EMAIL. */
+	private static final String CONTACT_STMT_UPDATE_EMAIL = CONTACT_NAMESPACE + "updateEmail";
 
-	/** The Constant EMPRESA_STMT_FETCH_ALL_BY_REQUEST. */
-	private static final String EMPRESA_STMT_FETCH_ALL_BY_REQUEST = EMPRESA_NAMESPACE
-			+ "fetchAllCnaesByRequest";
+	/** The Constant CONTACT_STMT_UPDATE_ADDRESS. */
+	private static final String CONTACT_STMT_UPDATE_ADDRESS = CONTACT_NAMESPACE + "updateAddress";
 
-	/** The Constant EMPRESA_STMT_FETCH_BY_ID. */
-	private static final String EMPRESA_STMT_FETCH_BY_ID = EMPRESA_NAMESPACE + "fetchCnaeById";
+	/** The Constant CONTACT_STMT_DELETE_BUSINESS_CONTACT. */
+	private static final String CONTACT_STMT_DELETE_BUSINESS_CONTACT = CONTACT_NAMESPACE + "deleteBusinessCnae";
 
-	/** The Constant EMPRESA_STMT_INSERT. */
-	private static final String EMPRESA_STMT_INSERT = EMPRESA_NAMESPACE + "insertCnae";
+	/** The Constant CONTACT_STMT_DELETE_PERSON_CONTACT. */
+	private static final String CONTACT_STMT_DELETE_PERSON_CONTACT = CONTACT_NAMESPACE + "deletePersonCnae";
 
-	/** The Constant EMPRESA_STMT_ASSOC_ORG_TO_CONTACT. */
-	private static final String EMPRESA_STMT_ASSOC_ORG_TO_CONTACT = EMPRESA_NAMESPACE
-			+ "associateCnaeWithContact";
+	/** The Constant CONTACT_STMT_INSERT. */
+	private static final String CONTACT_STMT_INSERT = CONTACT_NAMESPACE + "insertCnae";
 
-	/** The Constant EMPRESA_STMT_UPDATE. */
-	private static final String EMPRESA_STMT_UPDATE = EMPRESA_NAMESPACE + "updateCnae";
+	/** The Constant CONTACT_STMT_INSERT_PHONE. */
+	private static final String CONTACT_STMT_INSERT_PHONE = CONTACT_NAMESPACE + "insertPhone";
 
-	/** The Constant EMPRESA_STMT_DELETE. */
-	private static final String EMPRESA_STMT_DELETE = EMPRESA_NAMESPACE + "deleteCnaeById";
+	/** The Constant CONTACT_STMT_INSERT_EMAIL. */
+	private static final String CONTACT_STMT_INSERT_EMAIL = CONTACT_NAMESPACE + "insertEmail";
 
-	/** The Constant EMPRESA_DOCUMENT_STMT_UPDATE. */
-	private static final String EMPRESA_DOCUMENT_STMT_UPDATE = EMPRESA_NAMESPACE
-			+ "updateCnaeDocument";
+	/** The Constant CONTACT_STMT_INSERT_ADDRESS. */
+	private static final String CONTACT_STMT_INSERT_ADDRESS = CONTACT_NAMESPACE + "insertAddress";
 
-	/** The Constant EMPRESA_STMT_ASSOC_ORG_TO_DOCUMENT. */
-	private static final String EMPRESA_STMT_ASSOC_ORG_TO_DOCUMENT = EMPRESA_NAMESPACE
-			+ "associateCnaeWithDocument";
+	/** The Constant CONTACT_STMT_FETCH_BY_BUSINESS_ID. */
+	private static final String CONTACT_STMT_FETCH_BY_BUSINESS_ID = CONTACT_NAMESPACE + "fetchCnaesByBusinessId";
 
-	/** The Constant EMPRESA_STMT_DELETE_DOCUMENT. */
-	private static final String EMPRESA_STMT_DELETE_DOCUMENT = EMPRESA_NAMESPACE
-			+ "deleteCnaeDocument";
+	/** The Constant CONTACT_STMT_FETCH_BY_PERSON_ID. */
+	private static final String CONTACT_STMT_FETCH_BY_PERSON_ID = CONTACT_NAMESPACE + "fetchCnaesByPersonId";
 
-	/** The Constant STMT_VERSION. */
-	private static final String EMPRESA_STMT_VERSION = EMPRESA_NAMESPACE + "fetchVersionNumber";
+	/** The Constant CONTACT_STMT_FETCH_BY_ID. */
+	private static final String CONTACT_STMT_FETCH_BY_ID = CONTACT_NAMESPACE + "fetchCnaesById";
 
-	/** The Constant EMPRESA_STMT_UPDATE_EMPRESA_STATUS. */
-	private static final String EMPRESA_STMT_UPDATE_EMPRESA_STATUS = CBOF_NAMESPACE
-			+ "updateBusinessStatus";
+	/** The Constant CONTACT_STMT_FETCH_EMAIL_VERSION. */
+	private static final String CONTACT_STMT_FETCH_EMAIL_VERSION = CONTACT_NAMESPACE + "fetchVersionNumberEmail";
+
+	/** The Constant CONTACT_STMT_FETCH_PHONE_VERSION. */
+	private static final String CONTACT_STMT_FETCH_PHONE_VERSION = CONTACT_NAMESPACE + "fetchVersionNumberPhone";
+
+	/** The Constant CONTACT_STMT_FETCH_ADDRESS_VERSION. */
+	private static final String CONTACT_STMT_FETCH_ADDRESS_VERSION = CONTACT_NAMESPACE + "fetchVersionNumberAddress";
 
 	/** The Constant LOG. */
-	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(CnaeDACImpl.class);
-
-	/** The valid sort fields for an cnae inquiry. Will be injected by Spring. */
-	private Map<String, String> cnaeInquiryValidSortFields;
-
-	/**
-	 * Get the valid sort fields for the cnae inquiry. Attribute injected by Spring.
-	 *
-	 * @return The valid sort fields for the cnae inquiry.
-	 */
-	public Map<String, String> getCnaeInquiryValidSortFields()
-	{
-		return cnaeInquiryValidSortFields;
-	}
-
-	/**
-	 * Set the valid sort fields for the cnae inquiry. Attribute injected by Spring.
-	 *
-	 * @param cnaeInquiryValidSortFields The valid sort fields for the cnae inquiry to set.
-	 */
-	public void setCnaeInquiryValidSortFields(Map<String, String> cnaeInquiryValidSortFields)
-	{
-		this.cnaeInquiryValidSortFields = cnaeInquiryValidSortFields;
-	}
+	private static final Logger LOG = LoggerFactory.getLogger(CnaeDACImpl.class);
 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.ICnaeDAC#insertCnae(com.prosperitasglobal.sendsolv.model
-	 * .Cnae)
+	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#insertCnae(com.prosperitasglobal.cbof.model.Cnae,
+	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public InternalResultsResponse<Cnae> insertCnae(Cnae cnae)
+	public Integer insertCnae(Cnae cnae, String statementName, InternalResultsResponse<?> response)
 	{
 		Integer insertCount = 0;
-		InternalResultsResponse<Cnae> response = new InternalResultsResponse<Cnae>();
+		// First insert the root cnae data
+		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT, cnae, response);
 
-		// First insert the root
-		// Is successful the unique-id will be populated back into the object.
-		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), EMPRESA_STMT_INSERT, cnae, response);
+		// Associate with parent using statement name passed as parameter
+		insertCount +=
+				QATMyBatisDacHelper
+						.doInsert(getSqlSession(), statementName, cnae, response);
 
-		if (response.isInError())
+		// Next insert the sub-type
+		switch (cnae.getCnaeType())
 		{
-			return response;
+			case OTHER:
+			case PHONE_WORK:
+			case MOBILE:
+				insertCount +=
+						QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT_PHONE, cnae, response);
+				break;
+			case EMAIL_PERSONAL:
+			case EMAIL_WORK:
+				insertCount +=
+						QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT_EMAIL, cnae, response);
+				break;
+			case POSTAL_HOME:
+			case POSTAL_WORK:
+				insertCount +=
+						QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT_ADDRESS, cnae, response);
+				break;
+			default:
+				break;
 		}
-		// Next traverse the object graph and "maintain" the associations
-		insertCount += maintainCnaeAssociations(cnae, response);
 
-		// Finally, if something was inserted then add the Cnae to the result.
-		if (insertCount > 0)
-		{
-			response.addResult(cnae);
-		}
+		return insertCount;
+	}
 
-		return response;
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.cbof.dac.ICnaeDAC#deleteBusinessCnae(com.prosperitasglobal.cbof.model.Cnae,
+	 * com.qat.framework.model.response.InternalResultsResponse)
+	 */
+	@Override
+	public Integer deleteBusinessCnae(Cnae cnae, InternalResultsResponse<?> response)
+	{
+		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, cnae, response);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.cbof.dac.ICnaeDAC#deletePersonCnae(com.prosperitasglobal.cbof.model.Cnae,
+	 * com.qat.framework.model.response.InternalResultsResponse)
+	 */
+	@Override
+	public Integer deletePersonCnae(Cnae cnae, InternalResultsResponse<?> response)
+	{
+		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_PERSON_CONTACT, cnae, response);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.ICnaeDAC#updateCnae(com.prosperitasglobal.sendsolv.model
-	 * .Cnae)
+	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#updateCnae(com.prosperitasglobal.cbof.model.Cnae,
+	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public InternalResultsResponse<Cnae> updateCnae(Cnae cnae)
+	public Integer updateCnae(Cnae cnae, InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
-		InternalResultsResponse<Cnae> response = new InternalResultsResponse<Cnae>();
 
 		// First update the root if necessary.
 		if (!ValidationUtil.isNull(cnae.getModelAction())
 				&& (cnae.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
 		{
-			updateCount =
-					QATMyBatisDacHelper.doUpdate(getSqlSession(), EMPRESA_STMT_UPDATE, cnae,
-							response);
+			updateCount = QATMyBatisDacHelper.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE, cnae, response);
+
+			if (updateCount == 1)
+			{
+				cnae.setModelAction(QATModel.PersistanceActionEnum.NONE);
+			}
 		}
 
-		if (response.isInError())
+		// Next update the sub-type
+		switch (cnae.getCnaeType())
 		{
-			return response;
+			case OTHER:
+			case PHONE_WORK:
+			case MOBILE:
+				updateCount +=
+						QATMyBatisDacHelper.doUpdateOL(getSqlSession(), CONTACT_STMT_UPDATE_PHONE, cnae,
+								CONTACT_STMT_FETCH_PHONE_VERSION, response);
+				break;
+			case EMAIL_PERSONAL:
+			case EMAIL_WORK:
+				updateCount +=
+						QATMyBatisDacHelper.doUpdateOL(getSqlSession(), CONTACT_STMT_UPDATE_EMAIL, cnae,
+								CONTACT_STMT_FETCH_EMAIL_VERSION, response);
+				break;
+			case POSTAL_HOME:
+			case POSTAL_WORK:
+				updateCount +=
+						QATMyBatisDacHelper.doUpdateOL(getSqlSession(), CONTACT_STMT_UPDATE_ADDRESS, cnae,
+								CONTACT_STMT_FETCH_ADDRESS_VERSION, response);
+				break;
+			default:
+				break;
 		}
-		// Next traverse the object graph and "maintain" the associations
-		updateCount += maintainCnaeAssociations(cnae, response);
 
-		// Finally, if something was updated then add the Person to the result.
-		if (updateCount > 0)
-		{
-			response.addResult(cnae);
-		}
-
-		return response;
+		return updateCount;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.ICnaeDAC#deleteCnae(com.prosperitasglobal.sendsolv.model
-	 * .Cnae)
+	 * @see com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#fetchCnaeByParent(java.lang.Integer,
+	 * com.prosperitasglobal.sendsolv.model.BusinessTypeEnum)
 	 */
 	@Override
-	public InternalResponse deleteCnae(Cnae cnae)
-	{
-		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doRemove(getSqlSession(), EMPRESA_STMT_DELETE, cnae, response);
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.dac.ICnaeDAC#fetchCnaeById(FetchByIdRequest)
-	 */
-	@Override
-	public InternalResultsResponse<Cnae> fetchCnaeById(FetchByIdRequest request)
-	{
-		InternalResultsResponse<Cnae> response = new InternalResultsResponse<Cnae>();
-		QATMyBatisDacHelper.doQueryForList(getSqlSession(), EMPRESA_STMT_FETCH_BY_ID, request, response);
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.ICnaeDAC#fetchCnaeByRequest(com.prosperitasglobal.sendsolv
-	 * .model.request.PagedInquiryRequest)
-	 */
-	@Override
-	public InternalResultsResponse<Cnae> fetchCnaeByRequest(PagedInquiryRequest request)
+	public InternalResultsResponse<Cnae> fetchCnaeByParent(Integer parentId, BusinessTypeEnum parentType)
 	{
 		InternalResultsResponse<Cnae> response = new InternalResultsResponse<Cnae>();
 
-		/*
-		 * Helper method to translation from the user friendly" sort field names to the
-		 * actual database column names.
-		 */
-		QATMyBatisDacHelper.translateSortFields(request, getCnaeInquiryValidSortFields());
+		switch (parentType)
+		{
+			case ORGANIZATION:
+				QATMyBatisDacHelper.doQueryForList(getSqlSession(), CONTACT_STMT_FETCH_BY_BUSINESS_ID, parentId,
+						response);
+				break;
 
-		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, EMPRESA_STMT_FETCH_COUNT,
-				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
+			case LOCATION:
+				QATMyBatisDacHelper.doQueryForList(getSqlSession(), CONTACT_STMT_FETCH_BY_BUSINESS_ID, parentId,
+						response);
+				break;
+
+			case MEMBER:
+				QATMyBatisDacHelper.doQueryForList(getSqlSession(), CONTACT_STMT_FETCH_BY_PERSON_ID, parentId,
+						response);
+				break;
+			case UNKNOWN:
+				break;
+			default:
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("parentType for Cnae missing!");
+				}
+				break;
+
+		}
+
 		return response;
 	}
 
-	/**
-	 * Maintain cnae associations.
-	 *
-	 * @param cnae the cnae
-	 * @param response the response
-	 * @return the integer
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#fetchCnaeById(java.lang.Integer)
 	 */
-	private Integer maintainCnaeAssociations(Cnae cnae,
-			InternalResultsResponse<Cnae> response)
+	@Override
+	public InternalResultsResponse<Cnae> fetchCnaeById(Integer id)
+	{
+		InternalResultsResponse<Cnae> response = new InternalResultsResponse<Cnae>();
+
+		QATMyBatisDacHelper.doQueryForList(getSqlSession(), CONTACT_STMT_FETCH_BY_ID, id, response);
+
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.cbof.dac.ICnaeDAC#maintainCnaeAssociations(java.util.List, java.lang.Integer,
+	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
+	 */
+	@Override
+	public Integer maintainCnaeAssociations(List<Cnae> cnaeList, Integer parentId, String associateStatement,
+			InternalResultsResponse<?> response)
 	{
 		Integer count = 0;
-		// First Maintain Contacts
-		// if (ValidationUtil.isNullOrEmpty(cnae.getContactList()))
-		// {
-		// return count;
-		// }
-		// // For Each Contact...
-		// for (Contact contact : cnae.getContactList())
-		// {
-		// // Make sure we set the parent key
-		// contact.setParentKey(cnae.getId());
-		//
-		// if (ValidationUtil.isNull(contact.getModelAction()))
-		// {
-		// continue;
-		// }
-		// switch (contact.getModelAction())
-		// {
-		// case INSERT:
-		// count = getContactDAC().insertContact(contact,
-		// EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-		// break;
-		// case UPDATE:
-		// count = getContactDAC().updateContact(contact, response);
-		// break;
-		// case DELETE:
-		// count = getContactDAC().deleteBusinessContact(contact, response);
-		// break;
-		// default:
-		// if (LOG.isDebugEnabled())
-		// {
-		// LOG.debug("ModelAction for Cnae missing!");
-		// }
-		// break;
-		// }
-		// }
-		return count;
-	}
+		// First Maintain Cnaes
+		if (ValidationUtil.isNullOrEmpty(cnaeList))
+		{
+			return count;
+		}
+		// For Each Cnae...
+		for (Cnae cnae : cnaeList)
+		{
+			// Make sure we set the parent key
+			cnae.setParentKey(parentId);
 
-	@Override
-	public InternalResultsResponse<Cnae> fetchAllCnaes()
-	{
-		// TODO Auto-generated method stub
-		return null;
+			if (ValidationUtil.isNull(cnae.getModelAction()))
+			{
+				continue;
+			}
+			switch (cnae.getModelAction())
+			{
+				case INSERT:
+					count += insertCnae(cnae, associateStatement, response);
+					break;
+				case UPDATE:
+					count += updateCnae(cnae, response);
+					break;
+				case DELETE:
+					count += deletePersonCnae(cnae, response);
+					break;
+				default:
+					if (LOG.isDebugEnabled())
+					{
+						LOG.debug("ModelAction for Organization missing!");
+					}
+					break;
+			}
+		}
+		return count;
 	}
 }
