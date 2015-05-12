@@ -1,13 +1,13 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
-import com.prosperitasglobal.sendsolv.model.Produto;
+import com.prosperitasglobal.sendsolv.model.Pessoa;
 import com.qat.framework.model.request.MaintenanceRequest;
 
 public class PessoaMaintenanceRequest extends MaintenanceRequest
 {
 
 	/** Attributes. */
-	private Produto produto;
+	private Pessoa pessoa;
 
 	/**
 	 * The Constructor.
@@ -18,23 +18,19 @@ public class PessoaMaintenanceRequest extends MaintenanceRequest
 	}
 
 	/**
-	 * Gets the produto.
-	 *
-	 * @return the produto
+	 * @return the pessoa
 	 */
-	public Produto getProduto()
+	public Pessoa getPessoa()
 	{
-		return produto;
+		return pessoa;
 	}
 
 	/**
-	 * Sets the produto.
-	 *
-	 * @param produto the produto
+	 * @param pessoa the pessoa to set
 	 */
-	public void setProduto(Produto produto)
+	public void setPessoa(Pessoa pessoa)
 	{
-		this.produto = produto;
+		this.pessoa = pessoa;
 	}
 
 	/*
@@ -44,7 +40,7 @@ public class PessoaMaintenanceRequest extends MaintenanceRequest
 	@Override
 	public String toString()
 	{
-		return "ProdutoMaintenanceRequest [getProduto()=" + getProduto() + ", getUserContext()="
+		return "ProdutoMaintenanceRequest [getPessoa()=" + getPessoa() + ", getUserContext()="
 				+ getUserContext() + "]";
 	}
 }

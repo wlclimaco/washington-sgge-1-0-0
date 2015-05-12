@@ -1,11 +1,31 @@
 package com.prosperitasglobal.sendsolv.bai.impl;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.xml.ws.Response;
 
+import org.slf4j.LoggerFactory;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.bac.IPessoaBAC;
+import com.prosperitasglobal.sendsolv.bai.IPessoaBAI;
+import com.prosperitasglobal.sendsolv.model.Pessoa;
+import com.prosperitasglobal.sendsolv.model.request.PessoaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.PessoaMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.PessoaResponse;
+import com.qat.framework.model.Message.MessageLevel;
+import com.qat.framework.model.Message.MessageSeverity;
+import com.qat.framework.model.MessageInfo;
+import com.qat.framework.model.QATModel.PersistanceActionEnum;
+import com.qat.framework.model.UserContext;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResponse.Status;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATInterfaceUtil;
+import com.qat.framework.validation.ValidationContext;
+import com.qat.framework.validation.ValidationContextIndicator;
+import com.qat.framework.validation.ValidationController;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class PessoaBAIImpl.
@@ -16,7 +36,7 @@ public class PessoaBAIImpl implements IPessoaBAI
 	private static final String CLASS_NAME = PessoaBAIImpl.class.getName();
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(PessoaBAIImpl.class);
+	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(PessoaBAIImpl.class);
 
 	/** The Constant DEFAULT_EXCEPTION_MSG. */
 	private static final String DEFAULT_EXCEPTION_MSG = "sendsolv.base.defaultexception";
@@ -261,7 +281,7 @@ public class PessoaBAIImpl implements IPessoaBAI
 		}
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return (PessoaResponse)handleReturn(response, internalResponse, context.getMessages(), true);
+		return (PessoaResponse)handleReturn((Response)response, internalResponse, context.getMessages(), true);
 	}
 
 	/**
@@ -284,7 +304,8 @@ public class PessoaBAIImpl implements IPessoaBAI
 					MessageLevel.Object));
 		}
 
-		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, messages, copyOver);
+		QATInterfaceUtil.handleOperationStatusAndMessages((com.qat.framework.model.response.Response)response,
+				internalResponse, messages, copyOver);
 		return response;
 	}
 

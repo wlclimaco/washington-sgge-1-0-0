@@ -1,8 +1,13 @@
 package com.prosperitasglobal.sendsolv.dac;
 
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.Pessoa;
+import com.prosperitasglobal.sendsolv.model.request.PessoaInquiryRequest;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
- * The Interface ICnaeDAC.
+ * The Interface IPessoaDAC.
  */
 public interface IPessoaDAC
 {
@@ -13,7 +18,7 @@ public interface IPessoaDAC
 	 * @param cnae the cnae
 	 * @return the internal results response< cnae>
 	 */
-	public InternalResultsResponse<Cnae> updateCnae(Cnae cnae);
+	public InternalResultsResponse<Pessoa> updatePessoa(Pessoa cnae);
 
 	/**
 	 * Insert cnae.
@@ -21,7 +26,7 @@ public interface IPessoaDAC
 	 * @param cnae the cnae
 	 * @return the internal results response< cnae>
 	 */
-	public InternalResultsResponse<Cnae> insertCnae(Cnae cnae);
+	public InternalResultsResponse<Pessoa> insertPessoa(Pessoa cnae);
 
 	/**
 	 * Delete cnae.
@@ -29,7 +34,7 @@ public interface IPessoaDAC
 	 * @param cnae the cnae
 	 * @return the internal response
 	 */
-	public InternalResponse deleteCnae(Cnae cnae);
+	public InternalResponse deletePessoa(Pessoa cnae);
 
 	/**
 	 * Fetch cnae by id.
@@ -37,14 +42,14 @@ public interface IPessoaDAC
 	 * @param request the request
 	 * @return the internal results response
 	 */
-	public InternalResultsResponse<Cnae> fetchCnaeById(FetchByIdRequest request);
+	public InternalResultsResponse<Pessoa> fetchPessoaById(FetchByIdRequest request);
 
 	/**
 	 * Fetch all cnaes.
 	 *
 	 * @return the internal results response< cnae>
 	 */
-	public InternalResultsResponse<Cnae> fetchAllCnaes();
+	public InternalResultsResponse<Pessoa> fetchAllPessoas();
 
 	/**
 	 * Fetch cnae by request.
@@ -52,6 +57,6 @@ public interface IPessoaDAC
 	 * @param request the request
 	 * @return the internal results response< cnae>
 	 */
-	public InternalResultsResponse<Cnae> fetchCnaeByRequest(CnaeInquiryRequest request);
+	public InternalResultsResponse<Pessoa> fetchPessoaByRequest(PessoaInquiryRequest request);
 
 }

@@ -1,6 +1,5 @@
 package com.prosperitasglobal.sendsolv.model;
 
-import com.qat.framework.model.QATModel;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -8,7 +7,7 @@ import com.qat.framework.model.QATModel;
  * setting.
  */
 @SuppressWarnings("serial")
-public class NFe extends QATModel
+public class NFe extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;

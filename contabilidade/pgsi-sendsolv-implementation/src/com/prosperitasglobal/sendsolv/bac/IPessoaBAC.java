@@ -1,5 +1,11 @@
 package com.prosperitasglobal.sendsolv.bac;
 
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.Pessoa;
+import com.prosperitasglobal.sendsolv.model.request.PessoaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.PessoaMaintenanceRequest;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
  * The Interface IPessoaBAC.

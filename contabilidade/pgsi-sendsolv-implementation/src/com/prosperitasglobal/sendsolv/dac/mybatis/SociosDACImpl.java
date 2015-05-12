@@ -19,7 +19,7 @@ import com.qat.framework.validation.ValidationUtil;
 /**
  * The Class CnaeDACImpl.
  */
-public class NotaFiscalDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
+public class SociosDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 {
 
 	/** The Constant EMPRESA_NAMESPACE. */
@@ -71,7 +71,7 @@ public class NotaFiscalDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 			+ "updateBusinessStatus";
 
 	/** The Constant LOG. */
-	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(NotaFiscalDACImpl.class);
+	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(SociosDACImpl.class);
 
 	/** The valid sort fields for an cnae inquiry. Will be injected by Spring. */
 	private Map<String, String> cnaeInquiryValidSortFields;

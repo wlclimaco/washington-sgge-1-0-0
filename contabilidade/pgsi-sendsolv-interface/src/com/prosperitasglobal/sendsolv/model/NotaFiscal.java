@@ -6,7 +6,7 @@ package com.prosperitasglobal.sendsolv.model;
  * setting.
  */
 @SuppressWarnings("serial")
-public class UniMed extends ModelCosmeDamiao
+public class NotaFiscal extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
@@ -35,7 +35,7 @@ public class UniMed extends ModelCosmeDamiao
 	/**
 	 * Default constructor.
 	 */
-	public UniMed()
+	public NotaFiscal()
 	{
 		super();
 	}

@@ -2,6 +2,19 @@ package com.prosperitasglobal.sendsolv.validation;
 
 import java.util.List;
 
+import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.Empresa;
+import com.prosperitasglobal.sendsolv.model.Organization;
+import com.prosperitasglobal.sendsolv.model.StatusEnum;
+import com.qat.framework.model.Message;
+import com.qat.framework.model.MessageInfo;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.validation.ValidationContext;
+import com.qat.framework.validation.ValidationContextIndicator;
+import com.qat.framework.validation.ValidationUtil;
+
 /**
  * EmpresaValidator is the class that handles all validation for the organization. It is supposed to be used in tandem
  * with the BusinessValidator, so
@@ -97,7 +110,7 @@ public class EmpresaValidator extends BusinessValidator
 							Message.MessageSeverity.Error,
 							Message.MessageLevel.Field,
 							new Object[] {String.valueOf(BusinessTypeEnum.LOCATION).toLowerCase(),
-									empresa.getStatus()}));
+							empresa.getStatus()}));
 		}
 
 		if (!ValidationUtil.isNull(applyStatusResponse))

@@ -1,13 +1,13 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
-import com.prosperitasglobal.sendsolv.model.Produto;
+import com.prosperitasglobal.sendsolv.model.Financeiro;
 import com.qat.framework.model.request.MaintenanceRequest;
 
 public class FinanceiroMaintenanceRequest extends MaintenanceRequest
 {
 
 	/** Attributes. */
-	private Produto produto;
+	private Financeiro financeiro;
 
 	/**
 	 * The Constructor.
@@ -18,23 +18,19 @@ public class FinanceiroMaintenanceRequest extends MaintenanceRequest
 	}
 
 	/**
-	 * Gets the produto.
-	 *
-	 * @return the produto
+	 * @return the financeiro
 	 */
-	public Produto getProduto()
+	public Financeiro getFinanceiro()
 	{
-		return produto;
+		return financeiro;
 	}
 
 	/**
-	 * Sets the produto.
-	 *
-	 * @param produto the produto
+	 * @param financeiro the financeiro to set
 	 */
-	public void setProduto(Produto produto)
+	public void setFinanceiro(Financeiro financeiro)
 	{
-		this.produto = produto;
+		this.financeiro = financeiro;
 	}
 
 	/*
@@ -44,7 +40,7 @@ public class FinanceiroMaintenanceRequest extends MaintenanceRequest
 	@Override
 	public String toString()
 	{
-		return "ProdutoMaintenanceRequest [getProduto()=" + getProduto() + ", getUserContext()="
+		return "ProdutoMaintenanceRequest [getFinanceiro()=" + getFinanceiro() + ", getUserContext()="
 				+ getUserContext() + "]";
 	}
 }

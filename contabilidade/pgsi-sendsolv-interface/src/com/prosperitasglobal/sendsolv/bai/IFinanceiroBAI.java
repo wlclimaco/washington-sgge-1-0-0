@@ -1,21 +1,21 @@
 package com.prosperitasglobal.sendsolv.bai;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.request.PessoaInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.PessoaMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.response.PessoaResponse;
+import com.prosperitasglobal.sendsolv.model.request.FinanceiroInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.FinanceiroMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.FinanceiroResponse;
 
 public interface IFinanceiroBAI
 {
 
-	public PessoaResponse insertPessoa(PessoaMaintenanceRequest request);
+	public FinanceiroResponse insertFinanceiro(FinanceiroMaintenanceRequest request);
 
-	public PessoaResponse updatePessoa(PessoaMaintenanceRequest request);
+	public FinanceiroResponse updateFinanceiro(FinanceiroMaintenanceRequest request);
 
-	public PessoaResponse deletePessoa(PessoaMaintenanceRequest request);
+	public FinanceiroResponse deleteFinanceiro(FinanceiroMaintenanceRequest request);
 
-	public PessoaResponse fetchPessoaById(FetchByIdRequest request);
+	public FinanceiroResponse fetchFinanceiroById(FetchByIdRequest request);
 
-	public PessoaResponse fetchPessoaByRequest(PessoaInquiryRequest request);
+	public FinanceiroResponse fetchFinanceiroByRequest(FinanceiroInquiryRequest request);
 
 }
