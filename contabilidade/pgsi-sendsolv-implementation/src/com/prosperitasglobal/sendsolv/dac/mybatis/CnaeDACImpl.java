@@ -1,9 +1,16 @@
-package com.prosperitasglobal.cbof.dac.mybatis;
+package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.List;
-import java.util.logging.Logger;
+
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
 
 import com.prosperitasglobal.sendsolv.dac.ICnaeDAC;
+import com.prosperitasglobal.sendsolv.model.Cnae;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class CommonBusinessObjectsDACImpl.
@@ -62,7 +69,7 @@ public class CnaeDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 	private static final String CONTACT_STMT_FETCH_ADDRESS_VERSION = CONTACT_NAMESPACE + "fetchVersionNumberAddress";
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(CnaeDACImpl.class);
+	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(CnaeDACImpl.class);
 
 	/*
 	 * (non-Javadoc)
@@ -76,34 +83,6 @@ public class CnaeDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 		Integer insertCount = 0;
 		// First insert the root cnae data
 		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT, cnae, response);
-
-		// Associate with parent using statement name passed as parameter
-		insertCount +=
-				QATMyBatisDacHelper
-						.doInsert(getSqlSession(), statementName, cnae, response);
-
-		// Next insert the sub-type
-		switch (cnae.getCnaeType())
-		{
-			case OTHER:
-			case PHONE_WORK:
-			case MOBILE:
-				insertCount +=
-						QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT_PHONE, cnae, response);
-				break;
-			case EMAIL_PERSONAL:
-			case EMAIL_WORK:
-				insertCount +=
-						QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT_EMAIL, cnae, response);
-				break;
-			case POSTAL_HOME:
-			case POSTAL_WORK:
-				insertCount +=
-						QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT_ADDRESS, cnae, response);
-				break;
-			default:
-				break;
-		}
 
 		return insertCount;
 	}
@@ -153,87 +132,10 @@ public class CnaeDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 			}
 		}
 
-		// Next update the sub-type
-		switch (cnae.getCnaeType())
-		{
-			case OTHER:
-			case PHONE_WORK:
-			case MOBILE:
-				updateCount +=
-						QATMyBatisDacHelper.doUpdateOL(getSqlSession(), CONTACT_STMT_UPDATE_PHONE, cnae,
-								CONTACT_STMT_FETCH_PHONE_VERSION, response);
-				break;
-			case EMAIL_PERSONAL:
-			case EMAIL_WORK:
-				updateCount +=
-						QATMyBatisDacHelper.doUpdateOL(getSqlSession(), CONTACT_STMT_UPDATE_EMAIL, cnae,
-								CONTACT_STMT_FETCH_EMAIL_VERSION, response);
-				break;
-			case POSTAL_HOME:
-			case POSTAL_WORK:
-				updateCount +=
-						QATMyBatisDacHelper.doUpdateOL(getSqlSession(), CONTACT_STMT_UPDATE_ADDRESS, cnae,
-								CONTACT_STMT_FETCH_ADDRESS_VERSION, response);
-				break;
-			default:
-				break;
-		}
+		updateCount +=
+				QATMyBatisDacHelper.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE_PHONE, cnae, response);
 
 		return updateCount;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#fetchCnaeByParent(java.lang.Integer,
-	 * com.prosperitasglobal.sendsolv.model.BusinessTypeEnum)
-	 */
-	@Override
-	public InternalResultsResponse<Cnae> fetchCnaeByParent(Integer parentId, BusinessTypeEnum parentType)
-	{
-		InternalResultsResponse<Cnae> response = new InternalResultsResponse<Cnae>();
-
-		switch (parentType)
-		{
-			case ORGANIZATION:
-				QATMyBatisDacHelper.doQueryForList(getSqlSession(), CONTACT_STMT_FETCH_BY_BUSINESS_ID, parentId,
-						response);
-				break;
-
-			case LOCATION:
-				QATMyBatisDacHelper.doQueryForList(getSqlSession(), CONTACT_STMT_FETCH_BY_BUSINESS_ID, parentId,
-						response);
-				break;
-
-			case MEMBER:
-				QATMyBatisDacHelper.doQueryForList(getSqlSession(), CONTACT_STMT_FETCH_BY_PERSON_ID, parentId,
-						response);
-				break;
-			case UNKNOWN:
-				break;
-			default:
-				if (LOG.isDebugEnabled())
-				{
-					LOG.debug("parentType for Cnae missing!");
-				}
-				break;
-
-		}
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#fetchCnaeById(java.lang.Integer)
-	 */
-	@Override
-	public InternalResultsResponse<Cnae> fetchCnaeById(Integer id)
-	{
-		InternalResultsResponse<Cnae> response = new InternalResultsResponse<Cnae>();
-
-		QATMyBatisDacHelper.doQueryForList(getSqlSession(), CONTACT_STMT_FETCH_BY_ID, id, response);
-
-		return response;
 	}
 
 	/*
@@ -281,5 +183,19 @@ public class CnaeDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 			}
 		}
 		return count;
+	}
+
+	@Override
+	public InternalResultsResponse<Cnae> fetchCnaeByParent(Integer parentId)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Cnae> fetchCnaeById(Integer id)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

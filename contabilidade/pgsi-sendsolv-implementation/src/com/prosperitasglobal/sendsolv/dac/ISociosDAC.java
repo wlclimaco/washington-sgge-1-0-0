@@ -1,9 +1,8 @@
 package com.prosperitasglobal.sendsolv.dac;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
 import com.prosperitasglobal.sendsolv.model.Socio;
 import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
-import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
@@ -12,51 +11,53 @@ import com.qat.framework.model.response.InternalResultsResponse;
 public interface ISociosDAC
 {
 
-	/**
-	 * Update cnae.
-	 *
-	 * @param cnae the cnae
-	 * @return the internal results response< cnae>
-	 */
-	public InternalResultsResponse<Socio> updateSocio(Socio cnae);
+	public Integer updateSocio(Socio Socio, InternalResultsResponse<?> response);
 
 	/**
-	 * Insert cnae.
+	 * Insert Socio.
 	 *
-	 * @param cnae the cnae
-	 * @return the internal results response< cnae>
+	 * @param Socio the Socio
+	 * @param statementName the statement name
+	 * @param response the response
+	 * @return the integer
 	 */
-	public InternalResultsResponse<Socio> insertSocio(Socio cnae);
+	public Integer insertSocio(Socio Socio, String statementName, InternalResultsResponse<?> response);
 
 	/**
-	 * Delete cnae.
+	 * Delete business Socio.
 	 *
-	 * @param cnae the cnae
-	 * @return the internal response
+	 * @param Socio the Socio
+	 * @param response the response
+	 * @return the integer
 	 */
-	public InternalResponse deleteSocio(Socio cnae);
+	public Integer deleteBusinessSocio(Socio Socio, InternalResultsResponse<?> response);
 
 	/**
-	 * Fetch cnae by id.
+	 * Delete person Socio.
 	 *
-	 * @param request the request
-	 * @return the internal results response
+	 * @param Socio the Socio
+	 * @param response the response
+	 * @return the integer
 	 */
-	public InternalResultsResponse<Socio> fetchSocioById(FetchByIdRequest request);
+	public Integer deletePersonSocio(Socio Socio, InternalResultsResponse<?> response);
 
 	/**
-	 * Fetch all cnaes.
+	 * Fetch Socio by parent.
 	 *
-	 * @return the internal results response< cnae>
+	 * @param parentId the parent id
+	 * @param parentType the parent type
+	 * @return the internal results response< Socio>
 	 */
-	public InternalResultsResponse<Socio> fetchAllSocios();
+	public InternalResultsResponse<Socio> fetchSocioByParent(Integer parentId, BusinessTypeEnum parentType);
 
 	/**
-	 * Fetch cnae by request.
+	 * Fetch Socio by id.
 	 *
-	 * @param request the request
-	 * @return the internal results response< cnae>
+	 * @param id the id
+	 * @return the internal results response< Socio>
 	 */
+	public InternalResultsResponse<Socio> fetchSocioById(Integer id);
+
 	public InternalResultsResponse<Socio> fetchSocioByRequest(PagedInquiryRequest request);
 
 }

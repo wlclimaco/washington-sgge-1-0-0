@@ -1,9 +1,8 @@
 package com.prosperitasglobal.sendsolv.dac;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
 import com.prosperitasglobal.sendsolv.model.Email;
 import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
-import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
@@ -12,51 +11,52 @@ import com.qat.framework.model.response.InternalResultsResponse;
 public interface IEmailDAC
 {
 
-	/**
-	 * Update cnae.
-	 *
-	 * @param cnae the cnae
-	 * @return the internal results response< cnae>
-	 */
-	public InternalResultsResponse<Email> updateEmail(Email cnae);
+	public Integer updateEmail(Email email, InternalResultsResponse<?> response);
 
 	/**
-	 * Insert cnae.
+	 * Insert Email.
 	 *
-	 * @param cnae the cnae
-	 * @return the internal results response< cnae>
+	 * @param Email the Email
+	 * @param statementName the statement name
+	 * @param response the response
+	 * @return the integer
 	 */
-	public InternalResultsResponse<Email> insertEmail(Email cnae);
+	public Integer insertEmail(Email email, String statementName, InternalResultsResponse<?> response);
 
 	/**
-	 * Delete cnae.
+	 * Delete business Email.
 	 *
-	 * @param cnae the cnae
-	 * @return the internal response
+	 * @param Email the Email
+	 * @param response the response
+	 * @return the integer
 	 */
-	public InternalResponse deleteEmail(Email cnae);
+	public Integer deleteBusinessEmail(Email email, InternalResultsResponse<?> response);
 
 	/**
-	 * Fetch cnae by id.
+	 * Delete person Email.
 	 *
-	 * @param request the request
-	 * @return the internal results response
+	 * @param Email the Email
+	 * @param response the response
+	 * @return the integer
 	 */
-	public InternalResultsResponse<Email> fetchEmailById(FetchByIdRequest request);
+	public Integer deletePersonEmail(Email email, InternalResultsResponse<?> response);
 
 	/**
-	 * Fetch all cnaes.
+	 * Fetch Email by parent.
 	 *
-	 * @return the internal results response< cnae>
+	 * @param parentId the parent id
+	 * @param parentType the parent type
+	 * @return the internal results response< Email>
 	 */
-	public InternalResultsResponse<Email> fetchAllEmails();
+	public InternalResultsResponse<Email> fetchEmailByParent(Integer parentId, BusinessTypeEnum parentType);
 
 	/**
-	 * Fetch cnae by request.
+	 * Fetch Email by id.
 	 *
-	 * @param request the request
-	 * @return the internal results response< cnae>
+	 * @param id the id
+	 * @return the internal results response< Email>
 	 */
+	public InternalResultsResponse<Email> fetchEmailById(Integer id);
+
 	public InternalResultsResponse<Email> fetchEmailByRequest(PagedInquiryRequest request);
-
 }
