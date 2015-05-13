@@ -56,7 +56,7 @@
  		<property name="participantIdDAC" ref="participantIdDACTarget"/>
  		<property name="sdnCheckerBAC" ref="sdnCheckerBACTarget"/>
  	</bean>
-<!-- ------------------------------------------------------------------------------------------------ -->
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
  	<bean id="empresaBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.EmpresaBACImpl">
  		<property name="empresaDAC" ref="empresaDACTarget"/>
@@ -81,7 +81,7 @@
  	<bean id="ordemServicoBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.OrdemServicoBACImpl">
  		<property name="ordemServicoDAC" ref="ordemServicoDACTarget"/>
  	</bean>
-<!-- ------------------------------------------------------------------------------------------------ -->
+<!-- ============================================================================== -->
  	<bean id="moneyTransferBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.MoneyTransferBACImpl">
 		<property name="moneyTransferDAC" ref="moneyTransferDACTarget"/>
 		<property name="moneyTransferBatchDAC" ref="moneyTransferBatchDACTarget"/>

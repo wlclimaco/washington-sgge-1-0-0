@@ -17,14 +17,8 @@ import com.prosperitasglobal.sendsolv.model.request.EmpresaMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
 
-/**
- * The EmpresaAPIController Class.
- *
- * @author Flavio Tosta, Washington Costa
- *
- */
 @Controller
-@RequestMapping("/api/empresa")
+@RequestMapping("/api/ordemServico")
 public class OrdemServicoAPIController extends OrdemServicoBaseController
 {
 
@@ -81,21 +75,6 @@ public class OrdemServicoAPIController extends OrdemServicoBaseController
 	{
 
 		return fetchEmpresaById(fetchByIdRequest);
-
-	}
-
-	/**
-	 * Fetch all Empresas.
-	 *
-	 * @param pagedInquiryRequest the paged inquiry request
-	 * @return the response
-	 */
-	@RequestMapping(value = FETCH_ORGANIZATION_BYLOCATION, method = RequestMethod.POST)
-	@ResponseBody
-	public EmpresaResponse fetchOrganizationBylocation(@RequestBody PagedInquiryRequest pagedInquiryRequest)
-	{
-
-		return fetchEmpresaByOrganization(pagedInquiryRequest);
 
 	}
 

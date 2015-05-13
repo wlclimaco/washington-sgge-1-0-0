@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.cxf.Bus;
+
 import com.prosperitasglobal.cbof.dac.IIndustryClassificationDAC;
 import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
 import com.prosperitasglobal.cbof.model.CodeValue;
@@ -207,7 +209,7 @@ public class BusinessValidator extends ChangeControlValidator implements IValida
 	 * @param validationContext the validation context
 	 * @param business the business
 	 */
-	protected void performValidation(ValidationContext validationContext, E business)
+	protected void performValidation(ValidationContext validationContext, Business business)
 	{
 		validateBusinessType(validationContext.getMessages(), business);
 

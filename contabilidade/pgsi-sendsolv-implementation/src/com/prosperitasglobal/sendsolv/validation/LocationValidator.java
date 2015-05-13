@@ -58,7 +58,7 @@ public class LocationValidator extends BusinessValidator
 			return;
 		}
 
-		performValidation(validationContext, location);
+		// performValidation(validationContext, location);
 
 		if (!validationContext.isStopProcessing()
 				&& !ValidationContextIndicator.FETCH_BY_ID.equals(validationContext.getValidationContextIndicator()))
@@ -110,7 +110,7 @@ public class LocationValidator extends BusinessValidator
 							Message.MessageSeverity.Error,
 							Message.MessageLevel.Field,
 							new Object[] {String.valueOf(BusinessTypeEnum.LOCATION).toLowerCase(),
-									location.getStatus()}));
+							location.getStatus()}));
 		}
 
 		if (!ValidationUtil.isNull(applyStatusResponse))

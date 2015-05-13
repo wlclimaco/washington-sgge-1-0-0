@@ -6,10 +6,10 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.dac.ICnaeDAC;
+import com.prosperitasglobal.sendsolv.dac.IPessoaDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
-import com.prosperitasglobal.sendsolv.model.Cnae;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.Pessoa;
+import com.prosperitasglobal.sendsolv.model.request.PessoaInquiryRequest;
 import com.qat.framework.model.QATModel;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
@@ -17,51 +17,51 @@ import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
 
 /**
- * The Class CnaeDACImpl.
+ * The Class PessoaDACImpl.
  */
-public class PessoaDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
+public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 {
 
 	/** The Constant EMPRESA_NAMESPACE. */
-	private static final String EMPRESA_NAMESPACE = "CnaeMap.";
+	private static final String EMPRESA_NAMESPACE = "PessoaMap.";
 
 	/** The Constant CBOF_NAMESPACE. */
 	private static final String CBOF_NAMESPACE = "CBOFMap.";
 
 	/** The Constant EMPRESA_STMT_FETCH_COUNT. */
-	private static final String EMPRESA_STMT_FETCH_COUNT = EMPRESA_NAMESPACE + "fetchCnaeRowCount";
+	private static final String EMPRESA_STMT_FETCH_COUNT = EMPRESA_NAMESPACE + "fetchPessoaRowCount";
 
 	/** The Constant EMPRESA_STMT_FETCH_ALL_BY_REQUEST. */
 	private static final String EMPRESA_STMT_FETCH_ALL_BY_REQUEST = EMPRESA_NAMESPACE
-			+ "fetchAllCnaesByRequest";
+			+ "fetchAllPessoasByRequest";
 
 	/** The Constant EMPRESA_STMT_FETCH_BY_ID. */
-	private static final String EMPRESA_STMT_FETCH_BY_ID = EMPRESA_NAMESPACE + "fetchCnaeById";
+	private static final String EMPRESA_STMT_FETCH_BY_ID = EMPRESA_NAMESPACE + "fetchPessoaById";
 
 	/** The Constant EMPRESA_STMT_INSERT. */
-	private static final String EMPRESA_STMT_INSERT = EMPRESA_NAMESPACE + "insertCnae";
+	private static final String EMPRESA_STMT_INSERT = EMPRESA_NAMESPACE + "insertPessoa";
 
 	/** The Constant EMPRESA_STMT_ASSOC_ORG_TO_CONTACT. */
 	private static final String EMPRESA_STMT_ASSOC_ORG_TO_CONTACT = EMPRESA_NAMESPACE
-			+ "associateCnaeWithContact";
+			+ "associatePessoaWithContact";
 
 	/** The Constant EMPRESA_STMT_UPDATE. */
-	private static final String EMPRESA_STMT_UPDATE = EMPRESA_NAMESPACE + "updateCnae";
+	private static final String EMPRESA_STMT_UPDATE = EMPRESA_NAMESPACE + "updatePessoa";
 
 	/** The Constant EMPRESA_STMT_DELETE. */
-	private static final String EMPRESA_STMT_DELETE = EMPRESA_NAMESPACE + "deleteCnaeById";
+	private static final String EMPRESA_STMT_DELETE = EMPRESA_NAMESPACE + "deletePessoaById";
 
 	/** The Constant EMPRESA_DOCUMENT_STMT_UPDATE. */
 	private static final String EMPRESA_DOCUMENT_STMT_UPDATE = EMPRESA_NAMESPACE
-			+ "updateCnaeDocument";
+			+ "updatePessoaDocument";
 
 	/** The Constant EMPRESA_STMT_ASSOC_ORG_TO_DOCUMENT. */
 	private static final String EMPRESA_STMT_ASSOC_ORG_TO_DOCUMENT = EMPRESA_NAMESPACE
-			+ "associateCnaeWithDocument";
+			+ "associatePessoaWithDocument";
 
 	/** The Constant EMPRESA_STMT_DELETE_DOCUMENT. */
 	private static final String EMPRESA_STMT_DELETE_DOCUMENT = EMPRESA_NAMESPACE
-			+ "deleteCnaeDocument";
+			+ "deletePessoaDocument";
 
 	/** The Constant STMT_VERSION. */
 	private static final String EMPRESA_STMT_VERSION = EMPRESA_NAMESPACE + "fetchVersionNumber";
@@ -81,7 +81,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 	 *
 	 * @return The valid sort fields for the cnae inquiry.
 	 */
-	public Map<String, String> getCnaeInquiryValidSortFields()
+	public Map<String, String> getPessoaInquiryValidSortFields()
 	{
 		return cnaeInquiryValidSortFields;
 	}
@@ -91,7 +91,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 	 *
 	 * @param cnaeInquiryValidSortFields The valid sort fields for the cnae inquiry to set.
 	 */
-	public void setCnaeInquiryValidSortFields(Map<String, String> cnaeInquiryValidSortFields)
+	public void setPessoaInquiryValidSortFields(Map<String, String> cnaeInquiryValidSortFields)
 	{
 		this.cnaeInquiryValidSortFields = cnaeInquiryValidSortFields;
 	}
@@ -99,14 +99,14 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.ICnaeDAC#insertCnae(com.prosperitasglobal.sendsolv.model
-	 * .Cnae)
+	 * com.prosperitasglobal.sendsolv.dac.IPessoaDAC#insertPessoa(com.prosperitasglobal.sendsolv.model
+	 * .Pessoa)
 	 */
 	@Override
-	public InternalResultsResponse<Cnae> insertCnae(Cnae cnae)
+	public InternalResultsResponse<Pessoa> insertPessoa(Pessoa cnae)
 	{
 		Integer insertCount = 0;
-		InternalResultsResponse<Cnae> response = new InternalResultsResponse<Cnae>();
+		InternalResultsResponse<Pessoa> response = new InternalResultsResponse<Pessoa>();
 
 		// First insert the root
 		// Is successful the unique-id will be populated back into the object.
@@ -117,9 +117,9 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 			return response;
 		}
 		// Next traverse the object graph and "maintain" the associations
-		insertCount += maintainCnaeAssociations(cnae, response);
+		insertCount += maintainPessoaAssociations(cnae, response);
 
-		// Finally, if something was inserted then add the Cnae to the result.
+		// Finally, if something was inserted then add the Pessoa to the result.
 		if (insertCount > 0)
 		{
 			response.addResult(cnae);
@@ -131,14 +131,14 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.ICnaeDAC#updateCnae(com.prosperitasglobal.sendsolv.model
-	 * .Cnae)
+	 * com.prosperitasglobal.sendsolv.dac.IPessoaDAC#updatePessoa(com.prosperitasglobal.sendsolv.model
+	 * .Pessoa)
 	 */
 	@Override
-	public InternalResultsResponse<Cnae> updateCnae(Cnae cnae)
+	public InternalResultsResponse<Pessoa> updatePessoa(Pessoa cnae)
 	{
 		Integer updateCount = 0;
-		InternalResultsResponse<Cnae> response = new InternalResultsResponse<Cnae>();
+		InternalResultsResponse<Pessoa> response = new InternalResultsResponse<Pessoa>();
 
 		// First update the root if necessary.
 		if (!ValidationUtil.isNull(cnae.getModelAction())
@@ -154,7 +154,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 			return response;
 		}
 		// Next traverse the object graph and "maintain" the associations
-		updateCount += maintainCnaeAssociations(cnae, response);
+		updateCount += maintainPessoaAssociations(cnae, response);
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
@@ -168,11 +168,11 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.ICnaeDAC#deleteCnae(com.prosperitasglobal.sendsolv.model
-	 * .Cnae)
+	 * com.prosperitasglobal.sendsolv.dac.IPessoaDAC#deletePessoa(com.prosperitasglobal.sendsolv.model
+	 * .Pessoa)
 	 */
 	@Override
-	public InternalResponse deleteCnae(Cnae cnae)
+	public InternalResponse deletePessoa(Pessoa cnae)
 	{
 		InternalResponse response = new InternalResponse();
 		QATMyBatisDacHelper.doRemove(getSqlSession(), EMPRESA_STMT_DELETE, cnae, response);
@@ -182,12 +182,12 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.dac.ICnaeDAC#fetchCnaeById(FetchByIdRequest)
+	 * @see com.prosperitasglobal.sendsolv.dac.IPessoaDAC#fetchPessoaById(FetchByIdRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Cnae> fetchCnaeById(FetchByIdRequest request)
+	public InternalResultsResponse<Pessoa> fetchPessoaById(FetchByIdRequest request)
 	{
-		InternalResultsResponse<Cnae> response = new InternalResultsResponse<Cnae>();
+		InternalResultsResponse<Pessoa> response = new InternalResultsResponse<Pessoa>();
 		QATMyBatisDacHelper.doQueryForList(getSqlSession(), EMPRESA_STMT_FETCH_BY_ID, request, response);
 		return response;
 	}
@@ -195,19 +195,19 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.ICnaeDAC#fetchCnaeByRequest(com.prosperitasglobal.sendsolv
+	 * com.prosperitasglobal.sendsolv.dac.IPessoaDAC#fetchPessoaByRequest(com.prosperitasglobal.sendsolv
 	 * .model.request.PagedInquiryRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Cnae> fetchCnaeByRequest(PagedInquiryRequest request)
+	public InternalResultsResponse<Pessoa> fetchPessoaByRequest(PessoaInquiryRequest request)
 	{
-		InternalResultsResponse<Cnae> response = new InternalResultsResponse<Cnae>();
+		InternalResultsResponse<Pessoa> response = new InternalResultsResponse<Pessoa>();
 
 		/*
 		 * Helper method to translation from the user friendly" sort field names to the
 		 * actual database column names.
 		 */
-		QATMyBatisDacHelper.translateSortFields(request, getCnaeInquiryValidSortFields());
+		QATMyBatisDacHelper.translateSortFields(request, getPessoaInquiryValidSortFields());
 
 		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, EMPRESA_STMT_FETCH_COUNT,
 				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
@@ -221,8 +221,8 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	private Integer maintainCnaeAssociations(Cnae cnae,
-			InternalResultsResponse<Cnae> response)
+	private Integer maintainPessoaAssociations(Pessoa cnae,
+			InternalResultsResponse<Pessoa> response)
 	{
 		Integer count = 0;
 		// First Maintain Contacts
@@ -255,7 +255,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 		// default:
 		// if (LOG.isDebugEnabled())
 		// {
-		// LOG.debug("ModelAction for Cnae missing!");
+		// LOG.debug("ModelAction for Pessoa missing!");
 		// }
 		// break;
 		// }
@@ -264,7 +264,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 	}
 
 	@Override
-	public InternalResultsResponse<Cnae> fetchAllCnaes()
+	public InternalResultsResponse<Pessoa> fetchAllPessoas()
 	{
 		// TODO Auto-generated method stub
 		return null;

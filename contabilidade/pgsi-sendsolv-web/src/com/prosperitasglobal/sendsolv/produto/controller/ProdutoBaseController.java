@@ -1,12 +1,19 @@
 package com.prosperitasglobal.sendsolv.produto.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Logger;
-
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
+import com.prosperitasglobal.sendsolv.bai.IProdutoBAI;
+import com.prosperitasglobal.sendsolv.model.request.ProdutoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.response.MemberResponse;
+import com.prosperitasglobal.sendsolv.model.response.ProdutoResponse;
+import com.qat.framework.validation.ValidationUtil;
 
 public class ProdutoBaseController extends UtilControllerD
 {
@@ -15,7 +22,7 @@ public class ProdutoBaseController extends UtilControllerD
 	public static final String RESPONSE = "response";
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(ProdutoBaseController.class);
+	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(ProdutoBaseController.class);
 
 	/** The Constant CONTROLLER_EXCEPTION_MSG. */
 	private static final String CONTROLLER_EXCEPTION_MSG = "ProdutoBaseController";
@@ -24,38 +31,38 @@ public class ProdutoBaseController extends UtilControllerD
 	private static final String ENROLLED_MEMBERS = "enrolled_members";
 
 	/** The Produto BAI. */
-	private IProdutoBAI locationBAI;
+	private IProdutoBAI produtoBAI;
 
 	/**
-	 * Gets the location bai.
+	 * Gets the produto bai.
 	 *
-	 * @return the location bai
+	 * @return the produto bai
 	 */
 	public IProdutoBAI getProdutoBAI()
 	{
-		return locationBAI;
+		return produtoBAI;
 	}
 
 	/**
-	 * Sets the location bai.
+	 * Sets the produto bai.
 	 *
-	 * @param locationBAI the location bai
+	 * @param produtoBAI the produto bai
 	 */
 	@Resource
-	public void setProdutoBAI(IProdutoBAI locationBAI)
+	public void setProdutoBAI(IProdutoBAI produtoBAI)
 	{
-		this.locationBAI = locationBAI;
+		this.produtoBAI = produtoBAI;
 	}
 
 	/**
 	 * Produto edit mav.
 	 *
-	 * @param locationId the location id
+	 * @param produtoId the produto id
 	 * @param returnViewName the return view name
 	 * @param isSelect the is select
 	 * @return the model and view
 	 */
-	protected ModelAndView locationEditMAV(Integer locationId, String returnViewName, Boolean isSelect,
+	protected ModelAndView produtoEditMAV(Integer produtoId, String returnViewName, Boolean isSelect,
 			HttpServletRequest request)
 	{
 		ModelAndView modelAndView = new ModelAndView(returnViewName);
@@ -67,11 +74,11 @@ public class ProdutoBaseController extends UtilControllerD
 			{
 				modelAndView = listSelectBusiness(modelAndView, request);
 			}
-			if (!ValidationUtil.isNullOrZero(locationId))
+			if (!ValidationUtil.isNullOrZero(produtoId))
 			{
 
 				modelAndView.addObject(RESPONSE,
-						getMapper().writeValueAsString(fetchProdutoById(new FetchByIdRequest(locationId))));
+						getMapper().writeValueAsString(fetchProdutoById(new FetchByIdRequest(produtoId))));
 
 				return modelAndView;
 			}
@@ -92,12 +99,12 @@ public class ProdutoBaseController extends UtilControllerD
 	/**
 	 * Fetch enrolled members.
 	 *
-	 * @param locationId the location id
+	 * @param produtoId the produto id
 	 * @return the integer
 	 */
-	private Integer fetchEnrolledMembers(Integer locationId, HttpServletRequest request)
+	private Integer fetchEnrolledMembers(Integer produtoId, HttpServletRequest request)
 	{
-		MemberResponse memberResponse = fetchMembersEnrolledMember(locationId, BusinessTypeEnum.LOCATION, request);
+		MemberResponse memberResponse = fetchMembersEnrolledMember(produtoId, BusinessTypeEnum.LOCATION, request);
 
 		if (memberResponse.getMemberList() != null)
 		{
@@ -108,20 +115,19 @@ public class ProdutoBaseController extends UtilControllerD
 	}
 
 	/**
-	 * Fetch location by request.
+	 * Fetch produto by request.
 	 *
 	 * @param pagedInquiryRequest the paged inquiry request
-	 * @return the location response
+	 * @return the produto response
 	 */
-	public ProdutoResponse fetchProdutoByRequest(PagedInquiryRequest pagedInquiryRequest)
+	public ProdutoResponse fetchProdutoByRequest(ProdutoInquiryRequest pagedInquiryRequest)
 	{
 
-		ProdutoResponse locationResponse = new ProdutoResponse();
+		ProdutoResponse produtoResponse = new ProdutoResponse();
 		try
 		{
 
-			locationResponse = Mock();
-			// getProdutoBAI().fetchProdutoByRequest(pagedInquiryRequest);
+			produtoResponse = getProdutoBAI().fetchProdutoByRequest(pagedInquiryRequest);
 
 		}
 		catch (Exception e)
@@ -132,24 +138,23 @@ public class ProdutoBaseController extends UtilControllerD
 			}
 		}
 
-		return locationResponse;
+		return produtoResponse;
 	}
 
 	/**
-	 * Fetch location by id.
+	 * Fetch produto by id.
 	 *
 	 * @param fetchByIdRequest the fetch by id request
-	 * @return the location response
+	 * @return the produto response
 	 */
 	public ProdutoResponse fetchProdutoById(FetchByIdRequest fetchByIdRequest)
 	{
 
-		ProdutoResponse locationResponse = new ProdutoResponse();
+		ProdutoResponse produtoResponse = new ProdutoResponse();
 		try
 		{
 
-			locationResponse = MockById();
-			// getProdutoBAI().fetchProdutoById(fetchByIdRequest);
+			produtoResponse = getProdutoBAI().fetchProdutoById(fetchByIdRequest);
 
 		}
 		catch (Exception e)
@@ -160,166 +165,6 @@ public class ProdutoBaseController extends UtilControllerD
 			}
 		}
 
-		return locationResponse;
-	}
-
-	/**
-	 * Fetch location by organization.
-	 *
-	 * @param pagedInquiryRequest the paged inquiry request
-	 * @return the location response
-	 */
-	public ProdutoResponse fetchProdutoByOrganization(PagedInquiryRequest pagedInquiryRequest)
-	{
-
-		ProdutoResponse locationResponse = new ProdutoResponse();
-		try
-		{
-
-			locationResponse =
-					getProdutoBAI().fetchProdutoByOrganization(pagedInquiryRequest);
-
-		}
-		catch (Exception e)
-		{
-			if (LOG.isErrorEnabled())
-			{
-				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
-			}
-		}
-
-		return locationResponse;
-	}
-
-	public ProdutoResponse Mock()
-	{
-		ProdutoResponse produtoResponse = new ProdutoResponse();
-
-		List<Produto> produtos = new ArrayList<Produto>();
-		for (Integer i = 0; i < 100; i++)
-		{
-			Produto produto = new Produto();
-			produto.setId(i);
-			produto.setNome("nome_" + i);
-			Socio socio = new Socio();
-			socio.setId(1);
-			socio.setNome("Washington");
-			produto.setSocios(new ArrayList<Socio>());
-			produto.getSocios().add(socio);
-			Endereco endereco = new Endereco();
-			produto.setEnderecos(new ArrayList<Endereco>());
-			endereco.setBairro("bairro");
-			endereco.setCep("cep");
-			endereco.setCidade("cidade");
-			endereco.setEstado("estado");
-			endereco.setId(1);
-			endereco.setLogradouro("logradouro");
-			endereco.setNumero("1000");
-			produto.getEnderecos().add(endereco);
-			produto.setEmails(new ArrayList<Email>());
-			Email email = new Email();
-			email.setId(1);
-			email.setEmail("wlclimaco@gmail.com");
-			produto.getEmails().add(email);
-			produto.setCnaes(new ArrayList<Cnae>());
-			Cnae cnae = new Cnae();
-			cnae.setId(1);
-			cnae.setDescription("1-(4-BETA-HIDROXIETILSULFOFENIL)-3-METIL-5-PIRAZOLONA; FABRICAÇÃO DE");
-			cnae.setNumber("2029-1/00");
-			produto.getCnaes().add(cnae);
-			cnae = new Cnae();
-			cnae.setId(2);
-			cnae.setDescription("1-(4-SULFOFENIL)-3-METIL-5-PIRAZOLONA (ÁCIDO PIRAZÓLICO); FABRICAÇÃO DE");
-			cnae.setNumber("2029-2/00");
-			produto.getCnaes().add(cnae);
-			produto.setDocumentos(new ArrayList<Documento>());
-			Documento documento = new Documento();
-			documento.setId(1);
-			documento.setType("CNPJ");
-			documento.setNumero("000000000001111/000-9");
-			produto.getDocumentos().add(documento);
-			documento = new Documento();
-			documento.setId(2);
-			documento.setType("IM");
-			documento.setNumero("00000001");
-			produto.getDocumentos().add(documento);
-			produto.setTelefones(new ArrayList<Telefone>());
-			Telefone telefone = new Telefone();
-			telefone.setId(1);
-			telefone.setDdd("34");
-			telefone.setNumero("91782776");
-			produto.getTelefones().add(telefone);
-			produto.setRegime("Simples Nacional");
-			produtos.add(produto);
-
-		}
-		produtoResponse.setProdutoList(produtos);
-		return produtoResponse;
-	}
-
-	public ProdutoResponse MockById()
-	{
-		ProdutoResponse produtoResponse = new ProdutoResponse();
-
-		List<Produto> produtos = new ArrayList<Produto>();
-
-		Produto produto = new Produto();
-		produto.setId(1);
-		produto.setNome("nome_" + 1);
-		Socio socio = new Socio();
-		socio.setId(1);
-		socio.setNome("Washington");
-		produto.setSocios(new ArrayList<Socio>());
-		produto.getSocios().add(socio);
-		Endereco endereco = new Endereco();
-		produto.setEnderecos(new ArrayList<Endereco>());
-		endereco.setBairro("bairro");
-		endereco.setCep("cep");
-		endereco.setCidade("cidade");
-		endereco.setEstado("estado");
-		endereco.setId(1);
-		endereco.setLogradouro("logradouro");
-		endereco.setNumero("1000");
-		produto.getEnderecos().add(endereco);
-		produto.setEmails(new ArrayList<Email>());
-		Email email = new Email();
-		email.setId(1);
-		email.setEmail("wlclimaco@gmail.com");
-		email.setDescription("NF-e");
-		produto.getEmails().add(email);
-		produto.setCnaes(new ArrayList<Cnae>());
-		Cnae cnae = new Cnae();
-		cnae.setId(1);
-		cnae.setDescription("1-(4-BETA-HIDROXIETILSULFOFENIL)-3-METIL-5-PIRAZOLONA; FABRICAÇÃO DE");
-		cnae.setNumber("2029-1/00");
-		produto.getCnaes().add(cnae);
-		cnae = new Cnae();
-		cnae.setId(2);
-		cnae.setDescription("1-(4-SULFOFENIL)-3-METIL-5-PIRAZOLONA (ÁCIDO PIRAZÓLICO); FABRICAÇÃO DE");
-		cnae.setNumber("2029-2/00");
-		produto.getCnaes().add(cnae);
-		produto.setDocumentos(new ArrayList<Documento>());
-		Documento documento = new Documento();
-		documento.setId(1);
-		documento.setType("CNPJ");
-		documento.setNumero("000000000001111/000-9");
-		produto.getDocumentos().add(documento);
-		documento = new Documento();
-		documento.setId(2);
-		documento.setType("IM");
-		documento.setNumero("00000001");
-		produto.getDocumentos().add(documento);
-		produto.setTelefones(new ArrayList<Telefone>());
-		Telefone telefone = new Telefone();
-		telefone.setId(1);
-		telefone.setDdd("34");
-		telefone.setNumero("91782776");
-		telefone.setType("Residencial");
-		produto.getTelefones().add(telefone);
-		produto.setRegime("Simples Nacional");
-		produtos.add(produto);
-
-		produtoResponse.setProdutoList(produtos);
 		return produtoResponse;
 	}
 }

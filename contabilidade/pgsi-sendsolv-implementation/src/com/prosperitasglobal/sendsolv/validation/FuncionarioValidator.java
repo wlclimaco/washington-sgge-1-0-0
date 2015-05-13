@@ -2,6 +2,16 @@ package com.prosperitasglobal.sendsolv.validation;
 
 import java.util.List;
 
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.Funcionario;
+import com.qat.framework.model.Message;
+import com.qat.framework.model.MessageInfo;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.validation.IValidator;
+import com.qat.framework.validation.ValidationContext;
+import com.qat.framework.validation.ValidationContextIndicator;
+import com.qat.framework.validation.ValidationUtil;
+
 /**
  * FuncionarioValidator is the class that handles all validation for the organization. It is supposed to be used in
  * tandem
@@ -11,7 +21,7 @@ import java.util.List;
  * ValidationUtil tool of the QAT framework to perform these checks. If any one of these fields is null or nullOrEmpty
  * an error message is set informing the user that the field is required.
  */
-public class FuncionarioValidator extends BusinessValidator
+public class FuncionarioValidator extends ChangeControlValidator implements IValidator
 {
 
 	/** The Constant PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_PARENTID_REQUIRED. */
@@ -46,7 +56,7 @@ public class FuncionarioValidator extends BusinessValidator
 			return;
 		}
 
-		performValidation(validationContext, funcionario);
+		// performValidation(validationContext, funcionario);
 
 		if (!validationContext.isStopProcessing()
 				&& !ValidationContextIndicator.FETCH_BY_ID.equals(validationContext.getValidationContextIndicator()))
@@ -64,7 +74,7 @@ public class FuncionarioValidator extends BusinessValidator
 	 */
 	private void validateAdditionalFields(List<MessageInfo> list, Funcionario funcionario)
 	{
-		validateParentOrganizationId(list, funcionario);
+		// validateParentOrganizationId(list, funcionario);
 		if (ValidationUtil.isNullOrEmpty(list))
 		{
 			return;
@@ -83,23 +93,23 @@ public class FuncionarioValidator extends BusinessValidator
 		InternalResponse applyStatusResponse = new InternalResponse();
 		FetchByIdRequest request = new FetchByIdRequest();
 
-		request.setId(funcionario.getParentOrganizationId());
-		InternalResultsResponse<Organization> response = getOrganizationDAC().fetchOrganizationById(request);
-
-		if (response.isInError())
-		{
-			applyStatusResponse.merge(response);
-		}
-
-		if (StatusEnum.SETUP.equals(response.getFirstResult().getStatus()))
-		{
-			list.add(
-					new MessageInfo(CBOF_BASE_APPLYSTATUS_STATUS_DENIED,
-							Message.MessageSeverity.Error,
-							Message.MessageLevel.Field,
-							new Object[] {String.valueOf(BusinessTypeEnum.LOCATION).toLowerCase(),
-									funcionario.getStatus()}));
-		}
+		// request.setId(funcionario.getParentOrganizationId());
+		// InternalResultsResponse<Organization> response = getOrganizationDAC().fetchOrganizationById(request);
+		//
+		// if (response.isInError())
+		// {
+		// applyStatusResponse.merge(response);
+		// }
+		//
+		// if (StatusEnum.SETUP.equals(response.getFirstResult().getStatus()))
+		// {
+		// list.add(
+		// new MessageInfo(CBOF_BASE_APPLYSTATUS_STATUS_DENIED,
+		// Message.MessageSeverity.Error,
+		// Message.MessageLevel.Field,
+		// new Object[] {String.valueOf(BusinessTypeEnum.LOCATION).toLowerCase(),
+		// funcionario.getStatus()}));
+		// }
 
 		if (!ValidationUtil.isNull(applyStatusResponse))
 		{

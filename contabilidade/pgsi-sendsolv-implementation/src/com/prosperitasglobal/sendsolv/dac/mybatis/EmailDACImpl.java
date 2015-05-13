@@ -3,8 +3,10 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
+import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
 import com.prosperitasglobal.sendsolv.dac.IEmailDAC;
 import com.prosperitasglobal.sendsolv.model.Email;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.qat.framework.model.QATModel;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
@@ -138,6 +140,20 @@ public class EmailDACImpl extends SqlSessionDaoSupport implements IEmailDAC
 
 	@Override
 	public InternalResultsResponse<Email> fetchEmailById(Integer id)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Email> fetchEmailByParent(Integer parentId, BusinessTypeEnum parentType)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Email> fetchEmailByRequest(PagedInquiryRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;

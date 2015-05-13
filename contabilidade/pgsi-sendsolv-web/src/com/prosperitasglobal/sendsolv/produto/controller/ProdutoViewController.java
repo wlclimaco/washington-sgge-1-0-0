@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.prosperitasglobal.sendsolv.filter.FilterFactory;
 import com.prosperitasglobal.sendsolv.filter.model.response.FiltersResponse;
 import com.prosperitasglobal.sendsolv.model.OrganizationOrderByEnum;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ProdutoInquiryRequest;
 import com.qat.framework.model.SortExpression;
 import com.qat.framework.model.SortExpression.Direction;
 
@@ -26,7 +26,7 @@ import com.qat.framework.model.SortExpression.Direction;
  */
 
 @Controller
-@RequestMapping("/empresa")
+@RequestMapping("/produto")
 public class ProdutoViewController extends ProdutoBaseController
 {
 	/** The URL mapping constants. */
@@ -48,24 +48,24 @@ public class ProdutoViewController extends ProdutoBaseController
 	private static final String EDIT_VIEW = "/editView";
 
 	/** The Constant FETCH_ORGANIZATION_BYEMPRESA. */
-	private static final String FETCH_ORGANIZATION_BYEMPRESA = "fetchOrganizationBylocation";
+	private static final String FETCH_ORGANIZATION_BYEMPRESA = "fetchOrganizationByproduto";
 
 	/** The view mapping constants . */
-	private static final String VIEW_EMPRESA_MAIN = "/empresa/empresa_main";
+	private static final String VIEW_EMPRESA_MAIN = "/produto/produto_main";
 
 	/** The Constant VIEW_EMPRESA_ADD. */
-	private static final String VIEW_EMPRESA_ADD = "/empresa/empresa_create";
+	private static final String VIEW_EMPRESA_ADD = "/produto/produto_create";
 
 	/** The Constant VIEW_EMPRESA_VIEW. */
-	private static final String VIEW_EMPRESA_VIEW = "/empresa/empresa_view";
+	private static final String VIEW_EMPRESA_VIEW = "/produto/produto_view";
 
-	private static final String VIEW_EMPRESA_TABS = "/empresa/empresa_tabs";
+	private static final String VIEW_EMPRESA_TABS = "/produto/produto_tabs";
 
 	/** The Constant VIEW_EMPRESA_DIALOG_ADD. */
-	private static final String VIEW_EMPRESA_DIALOG_ADD = "/empresa/empresa_dialog_create";
+	private static final String VIEW_EMPRESA_DIALOG_ADD = "/produto/produto_dialog_create";
 
 	/** The Constant ORGANIZATION_BY_EMPRESA_MAIN. */
-	private static final String ORGANIZATION_BY_EMPRESA_MAIN = "/organization/organizationBylocation_main";
+	private static final String ORGANIZATION_BY_EMPRESA_MAIN = "/organization/organizationByproduto_main";
 
 	/** The PagedInquiryRequest Constants. */
 	private static final int START_PAGE_NUMBER = 0;
@@ -74,7 +74,7 @@ public class ProdutoViewController extends ProdutoBaseController
 	private static final int INITIAL_PAGE_SIZE = 25;
 
 	/** The Constant EMPRESA_ID. */
-	private static final String EMPRESA_ID = "locationId";
+	private static final String EMPRESA_ID = "produtoId";
 
 	/** The Constant LOG. */
 	private static final Logger LOG = LoggerFactory.getLogger(ProdutoViewController.class);
@@ -122,7 +122,7 @@ public class ProdutoViewController extends ProdutoBaseController
 			return modelAndView;
 		}
 
-		PagedInquiryRequest pagedInquiryRequest = new PagedInquiryRequest();
+		ProdutoInquiryRequest pagedInquiryRequest = new ProdutoInquiryRequest();
 		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
 		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
 		pagedInquiryRequest.setPreQueryCount(true);
@@ -133,7 +133,7 @@ public class ProdutoViewController extends ProdutoBaseController
 		{
 
 			modelAndView.addObject(RESPONSE, getMapper()
-					.writeValueAsString(fetchEmpresaByRequest(pagedInquiryRequest)));
+					.writeValueAsString(fetchProdutoByRequest(pagedInquiryRequest)));
 
 			FiltersResponse filtersResponse = new FiltersResponse();
 			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);
@@ -156,51 +156,51 @@ public class ProdutoViewController extends ProdutoBaseController
 	/**
 	 * Load add/edit view.
 	 *
-	 * @param locationId the location id
+	 * @param produtoId the produto id
 	 * @return the model and view
 	 */
 	@RequestMapping(value = {FETCH_ADD, FETCH_EDIT}, method = RequestMethod.GET)
-	public ModelAndView loadUpdate(@RequestParam(value = EMPRESA_ID, required = false) Integer locationId,
+	public ModelAndView loadUpdate(@RequestParam(value = EMPRESA_ID, required = false) Integer produtoId,
 			HttpServletRequest request)
 	{
 
-		return locationEditMAV(locationId, VIEW_EMPRESA_ADD, true, request);
+		return produtoEditMAV(produtoId, VIEW_EMPRESA_ADD, true, request);
 	}
 
 	@RequestMapping(value = {FETCH_VIEW_TABS}, method = RequestMethod.GET)
-	public ModelAndView loadTabs(@RequestParam(value = EMPRESA_ID, required = true) Integer locationId,
+	public ModelAndView loadTabs(@RequestParam(value = EMPRESA_ID, required = true) Integer produtoId,
 			HttpServletRequest request)
 	{
 		return new ModelAndView(VIEW_EMPRESA_TABS);
 	}
 
 	/**
-	 * Load location view.
+	 * Load produto view.
 	 *
-	 * @param locationId the location id
+	 * @param produtoId the produto id
 	 * @param request the request
 	 * @return the model and view
 	 */
 	@RequestMapping(value = {FETCH_VIEW}, method = RequestMethod.GET)
-	public ModelAndView loadView(@RequestParam(value = EMPRESA_ID, required = true) Integer locationId,
+	public ModelAndView loadView(@RequestParam(value = EMPRESA_ID, required = true) Integer produtoId,
 			HttpServletRequest request)
 	{
-		return locationEditMAV(locationId, VIEW_EMPRESA_VIEW, true, request);
+		return produtoEditMAV(produtoId, VIEW_EMPRESA_VIEW, true, request);
 	}
 
 	/**
 	 * Load view update.
 	 *
-	 * @param locationId the location id
+	 * @param produtoId the produto id
 	 * @param request the request
 	 * @return the model and view
 	 */
 	@RequestMapping(value = {EDIT_VIEW}, method = RequestMethod.GET)
-	public ModelAndView loadViewUpdate(@RequestParam(value = EMPRESA_ID, required = false) Integer locationId,
+	public ModelAndView loadViewUpdate(@RequestParam(value = EMPRESA_ID, required = false) Integer produtoId,
 			HttpServletRequest request)
 	{
 
-		return locationEditMAV(locationId, VIEW_EMPRESA_DIALOG_ADD, true, request);
+		return produtoEditMAV(produtoId, VIEW_EMPRESA_DIALOG_ADD, true, request);
 	}
 
 }

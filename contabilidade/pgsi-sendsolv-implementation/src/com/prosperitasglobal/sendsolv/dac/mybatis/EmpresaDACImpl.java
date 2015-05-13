@@ -2,13 +2,30 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.Map;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.ICnaeDAC;
 import com.prosperitasglobal.sendsolv.dac.IEmailDAC;
 import com.prosperitasglobal.sendsolv.dac.IEmpresaDAC;
+import com.prosperitasglobal.sendsolv.dac.IEnderecoDAC;
 import com.prosperitasglobal.sendsolv.dac.IEventoDAC;
 import com.prosperitasglobal.sendsolv.dac.ISociosDAC;
 import com.prosperitasglobal.sendsolv.dac.ITelefoneDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
+import com.prosperitasglobal.sendsolv.model.Cnae;
+import com.prosperitasglobal.sendsolv.model.Documento;
+import com.prosperitasglobal.sendsolv.model.Email;
+import com.prosperitasglobal.sendsolv.model.Empresa;
+import com.prosperitasglobal.sendsolv.model.Endereco;
+import com.prosperitasglobal.sendsolv.model.Telefone;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class EmpresaDACImpl.
@@ -364,7 +381,7 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 					count = getEnderecoDAC().updateEndereco(endereco, response);
 					break;
 				case DELETE:
-					count = getEnderecoDAC().deleteEndereco(endereco, response);
+					count = 1; // getEnderecoDAC().deleteEndereco(endereco, response);
 					break;
 				default:
 					if (LOG.isDebugEnabled())

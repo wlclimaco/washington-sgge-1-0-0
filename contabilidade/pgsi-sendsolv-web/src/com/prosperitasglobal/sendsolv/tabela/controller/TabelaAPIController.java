@@ -3,7 +3,18 @@ package com.prosperitasglobal.sendsolv.tabela.controller;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
+
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.request.TabelaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.TabelaMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.TabelaResponse;
 
 /**
  * The TabelaAPIController Class.
@@ -37,7 +48,7 @@ public class TabelaAPIController extends TabelaBaseController
 	/** The Constant APPLY. */
 	private static final String APPLY = "/applyStatus";
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(TabelaAPIController.class);
+	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(TabelaAPIController.class);
 
 	/** The Constant CONTROLLER_EXCEPTION_MSG. */
 	private static final String CONTROLLER_EXCEPTION_MSG = "TabelaAPIController";
@@ -50,7 +61,7 @@ public class TabelaAPIController extends TabelaBaseController
 	 */
 	@RequestMapping(value = FETCH_ALL, method = RequestMethod.POST)
 	@ResponseBody
-	public TabelaResponse fetchAll(@RequestBody PagedInquiryRequest pagedInquiryRequest)
+	public TabelaResponse fetchAll(@RequestBody TabelaInquiryRequest pagedInquiryRequest)
 	{
 
 		return fetchTabelaByRequest(pagedInquiryRequest);
@@ -69,21 +80,6 @@ public class TabelaAPIController extends TabelaBaseController
 	{
 
 		return fetchTabelaById(fetchByIdRequest);
-
-	}
-
-	/**
-	 * Fetch all Tabelas.
-	 *
-	 * @param pagedInquiryRequest the paged inquiry request
-	 * @return the response
-	 */
-	@RequestMapping(value = FETCH_ORGANIZATION_BYLOCATION, method = RequestMethod.POST)
-	@ResponseBody
-	public TabelaResponse fetchOrganizationBylocation(@RequestBody PagedInquiryRequest pagedInquiryRequest)
-	{
-
-		return fetchTabelaByOrganization(pagedInquiryRequest);
 
 	}
 

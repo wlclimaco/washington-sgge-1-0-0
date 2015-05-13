@@ -1,9 +1,17 @@
-package com.prosperitasglobal.cbof.dac.mybatis;
+package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.List;
-import java.util.logging.Logger;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
+import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
 import com.prosperitasglobal.sendsolv.dac.IEnderecoDAC;
+import com.prosperitasglobal.sendsolv.model.Endereco;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class CommonBusinessObjectsDACImpl.
@@ -62,7 +70,7 @@ public class EnderecoDACImpl extends SqlSessionDaoSupport implements IEnderecoDA
 	private static final String CONTACT_STMT_FETCH_ADDRESS_VERSION = CONTACT_NAMESPACE + "fetchVersionNumberAddress";
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(EnderecoDACImpl.class);
+	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(EnderecoDACImpl.class);
 
 	/*
 	 * (non-Javadoc)
@@ -80,30 +88,7 @@ public class EnderecoDACImpl extends SqlSessionDaoSupport implements IEnderecoDA
 		// Associate with parent using statement name passed as parameter
 		insertCount +=
 				QATMyBatisDacHelper
-						.doInsert(getSqlSession(), statementName, endereco, response);
-
-		// Next insert the sub-type
-		switch (endereco.getEnderecoType())
-		{
-			case OTHER:
-			case PHONE_WORK:
-			case MOBILE:
-				insertCount +=
-						QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT_PHONE, endereco, response);
-				break;
-			case EMAIL_PERSONAL:
-			case EMAIL_WORK:
-				insertCount +=
-						QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT_EMAIL, endereco, response);
-				break;
-			case POSTAL_HOME:
-			case POSTAL_WORK:
-				insertCount +=
-						QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT_ADDRESS, endereco, response);
-				break;
-			default:
-				break;
-		}
+				.doInsert(getSqlSession(), statementName, endereco, response);
 
 		return insertCount;
 	}
@@ -152,32 +137,6 @@ public class EnderecoDACImpl extends SqlSessionDaoSupport implements IEnderecoDA
 			{
 				endereco.setModelAction(QATModel.PersistanceActionEnum.NONE);
 			}
-		}
-
-		// Next update the sub-type
-		switch (endereco.getEnderecoType())
-		{
-			case OTHER:
-			case PHONE_WORK:
-			case MOBILE:
-				updateCount +=
-						QATMyBatisDacHelper.doUpdateOL(getSqlSession(), CONTACT_STMT_UPDATE_PHONE, endereco,
-								CONTACT_STMT_FETCH_PHONE_VERSION, response);
-				break;
-			case EMAIL_PERSONAL:
-			case EMAIL_WORK:
-				updateCount +=
-						QATMyBatisDacHelper.doUpdateOL(getSqlSession(), CONTACT_STMT_UPDATE_EMAIL, endereco,
-								CONTACT_STMT_FETCH_EMAIL_VERSION, response);
-				break;
-			case POSTAL_HOME:
-			case POSTAL_WORK:
-				updateCount +=
-						QATMyBatisDacHelper.doUpdateOL(getSqlSession(), CONTACT_STMT_UPDATE_ADDRESS, endereco,
-								CONTACT_STMT_FETCH_ADDRESS_VERSION, response);
-				break;
-			default:
-				break;
 		}
 
 		return updateCount;
