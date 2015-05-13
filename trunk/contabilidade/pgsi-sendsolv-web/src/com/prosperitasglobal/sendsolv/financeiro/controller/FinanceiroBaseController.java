@@ -1,10 +1,20 @@
 package com.prosperitasglobal.sendsolv.financeiro.controller;
 
-import java.util.logging.Logger;
-
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
+import com.prosperitasglobal.sendsolv.bai.IFinanceiroBAI;
+import com.prosperitasglobal.sendsolv.bai.IMemberBAI;
+import com.prosperitasglobal.sendsolv.model.request.FinanceiroInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.response.FinanceiroResponse;
+import com.prosperitasglobal.sendsolv.model.response.MemberResponse;
+import com.qat.framework.validation.ValidationUtil;
 
 public class FinanceiroBaseController extends UtilControllerD
 {
@@ -13,7 +23,7 @@ public class FinanceiroBaseController extends UtilControllerD
 	public static final String RESPONSE = "response";
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(FinanceiroBaseController.class);
+	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(FinanceiroBaseController.class);
 
 	/** The Constant CONTROLLER_EXCEPTION_MSG. */
 	private static final String CONTROLLER_EXCEPTION_MSG = "FinanceiroBaseController";
@@ -22,7 +32,7 @@ public class FinanceiroBaseController extends UtilControllerD
 	private static final String ENROLLED_MEMBERS = "enrolled_members";
 
 	/** The Financeiro BAI. */
-	private IFinanceiroBAI locationBAI;
+	private IFinanceiroBAI financeiroBAI;
 
 	/** The Member BAI. */
 	private IMemberBAI memberBAI;
@@ -51,35 +61,35 @@ public class FinanceiroBaseController extends UtilControllerD
 	}
 
 	/**
-	 * Gets the location bai.
+	 * Gets the financeiro bai.
 	 *
-	 * @return the location bai
+	 * @return the financeiro bai
 	 */
 	public IFinanceiroBAI getFinanceiroBAI()
 	{
-		return locationBAI;
+		return financeiroBAI;
 	}
 
 	/**
-	 * Sets the location bai.
+	 * Sets the financeiro bai.
 	 *
-	 * @param locationBAI the location bai
+	 * @param financeiroBAI the financeiro bai
 	 */
 	@Resource
-	public void setFinanceiroBAI(IFinanceiroBAI locationBAI)
+	public void setFinanceiroBAI(IFinanceiroBAI financeiroBAI)
 	{
-		this.locationBAI = locationBAI;
+		this.financeiroBAI = financeiroBAI;
 	}
 
 	/**
 	 * Financeiro edit mav.
 	 *
-	 * @param locationId the location id
+	 * @param financeiroId the financeiro id
 	 * @param returnViewName the return view name
 	 * @param isSelect the is select
 	 * @return the model and view
 	 */
-	protected ModelAndView locationEditMAV(Integer locationId, String returnViewName, Boolean isSelect,
+	protected ModelAndView financeiroEditMAV(Integer financeiroId, String returnViewName, Boolean isSelect,
 			HttpServletRequest request)
 	{
 		ModelAndView modelAndView = new ModelAndView(returnViewName);
@@ -91,11 +101,11 @@ public class FinanceiroBaseController extends UtilControllerD
 			{
 				modelAndView = listSelectBusiness(modelAndView, request);
 			}
-			if (!ValidationUtil.isNullOrZero(locationId))
+			if (!ValidationUtil.isNullOrZero(financeiroId))
 			{
 
 				modelAndView.addObject(RESPONSE,
-						getMapper().writeValueAsString(fetchFinanceiroById(new FetchByIdRequest(locationId))));
+						getMapper().writeValueAsString(fetchFinanceiroById(new FetchByIdRequest(financeiroId))));
 
 				return modelAndView;
 			}
@@ -116,12 +126,12 @@ public class FinanceiroBaseController extends UtilControllerD
 	/**
 	 * Fetch enrolled members.
 	 *
-	 * @param locationId the location id
+	 * @param financeiroId the financeiro id
 	 * @return the integer
 	 */
-	private Integer fetchEnrolledMembers(Integer locationId, HttpServletRequest request)
+	private Integer fetchEnrolledMembers(Integer financeiroId, HttpServletRequest request)
 	{
-		MemberResponse memberResponse = fetchMembersEnrolledMember(locationId, BusinessTypeEnum.LOCATION, request);
+		MemberResponse memberResponse = fetchMembersEnrolledMember(financeiroId, BusinessTypeEnum.LOCATION, request);
 
 		if (memberResponse.getMemberList() != null)
 		{
@@ -132,20 +142,19 @@ public class FinanceiroBaseController extends UtilControllerD
 	}
 
 	/**
-	 * Fetch location by request.
+	 * Fetch financeiro by request.
 	 *
 	 * @param pagedInquiryRequest the paged inquiry request
-	 * @return the location response
+	 * @return the financeiro response
 	 */
-	public FinanceiroResponse fetchFinanceiroByRequest(PagedInquiryRequest pagedInquiryRequest)
+	public FinanceiroResponse fetchFinanceiroByRequest(FinanceiroInquiryRequest pagedInquiryRequest)
 	{
 
-		FinanceiroResponse locationResponse = new FinanceiroResponse();
+		FinanceiroResponse financeiroResponse = new FinanceiroResponse();
 		try
 		{
 
-			locationResponse = Mock();
-			// getFinanceiroBAI().fetchFinanceiroByRequest(pagedInquiryRequest);
+			financeiroResponse = getFinanceiroBAI().fetchFinanceiroByRequest(pagedInquiryRequest);
 
 		}
 		catch (Exception e)
@@ -156,24 +165,23 @@ public class FinanceiroBaseController extends UtilControllerD
 			}
 		}
 
-		return locationResponse;
+		return financeiroResponse;
 	}
 
 	/**
-	 * Fetch location by id.
+	 * Fetch financeiro by id.
 	 *
 	 * @param fetchByIdRequest the fetch by id request
-	 * @return the location response
+	 * @return the financeiro response
 	 */
 	public FinanceiroResponse fetchFinanceiroById(FetchByIdRequest fetchByIdRequest)
 	{
 
-		FinanceiroResponse locationResponse = new FinanceiroResponse();
+		FinanceiroResponse financeiroResponse = new FinanceiroResponse();
 		try
 		{
 
-			locationResponse = MockById();
-			// getFinanceiroBAI().fetchFinanceiroById(fetchByIdRequest);
+			financeiroResponse = getFinanceiroBAI().fetchFinanceiroById(fetchByIdRequest);
 
 		}
 		catch (Exception e)
@@ -184,35 +192,7 @@ public class FinanceiroBaseController extends UtilControllerD
 			}
 		}
 
-		return locationResponse;
-	}
-
-	/**
-	 * Fetch location by organization.
-	 *
-	 * @param pagedInquiryRequest the paged inquiry request
-	 * @return the location response
-	 */
-	public FinanceiroResponse fetchFinanceiroByOrganization(PagedInquiryRequest pagedInquiryRequest)
-	{
-
-		FinanceiroResponse locationResponse = new FinanceiroResponse();
-		try
-		{
-
-			locationResponse =
-					getFinanceiroBAI().fetchFinanceiroByOrganization(pagedInquiryRequest);
-
-		}
-		catch (Exception e)
-		{
-			if (LOG.isErrorEnabled())
-			{
-				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
-			}
-		}
-
-		return locationResponse;
+		return financeiroResponse;
 	}
 
 }

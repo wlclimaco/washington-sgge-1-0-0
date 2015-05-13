@@ -13,16 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.request.EmpresaMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
+import com.prosperitasglobal.sendsolv.model.request.FinanceiroInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.FinanceiroMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.FinanceiroResponse;
 
-/**
- * The EmpresaAPIController Class.
- *
- * @author Flavio Tosta, Washington Costa
- *
- */
 @Controller
 @RequestMapping("/api/empresa")
 public class FinanceiroAPIController extends FinanceiroBaseController
@@ -52,20 +46,20 @@ public class FinanceiroAPIController extends FinanceiroBaseController
 	private static final Logger LOG = LoggerFactory.getLogger(FinanceiroAPIController.class);
 
 	/** The Constant CONTROLLER_EXCEPTION_MSG. */
-	private static final String CONTROLLER_EXCEPTION_MSG = "EmpresaAPIController";
+	private static final String CONTROLLER_EXCEPTION_MSG = "FinanceiroAPIController";
 
 	/**
-	 * Fetch all Empresas.
+	 * Fetch all Financeiros.
 	 *
 	 * @param pagedInquiryRequest the paged inquiry request
 	 * @return the response
 	 */
 	@RequestMapping(value = FETCH_ALL, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse fetchAll(@RequestBody PagedInquiryRequest pagedInquiryRequest)
+	public FinanceiroResponse fetchAll(@RequestBody FinanceiroInquiryRequest pagedInquiryRequest)
 	{
 
-		return fetchEmpresaByRequest(pagedInquiryRequest);
+		return fetchFinanceiroByRequest(pagedInquiryRequest);
 
 	}
 
@@ -77,25 +71,10 @@ public class FinanceiroAPIController extends FinanceiroBaseController
 	 */
 	@RequestMapping(value = FETCH, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse fetch(@RequestBody FetchByIdRequest fetchByIdRequest)
+	public FinanceiroResponse fetch(@RequestBody FetchByIdRequest fetchByIdRequest)
 	{
 
-		return fetchEmpresaById(fetchByIdRequest);
-
-	}
-
-	/**
-	 * Fetch all Empresas.
-	 *
-	 * @param pagedInquiryRequest the paged inquiry request
-	 * @return the response
-	 */
-	@RequestMapping(value = FETCH_ORGANIZATION_BYLOCATION, method = RequestMethod.POST)
-	@ResponseBody
-	public EmpresaResponse fetchOrganizationBylocation(@RequestBody PagedInquiryRequest pagedInquiryRequest)
-	{
-
-		return fetchEmpresaByOrganization(pagedInquiryRequest);
+		return fetchFinanceiroById(fetchByIdRequest);
 
 	}
 
@@ -107,13 +86,13 @@ public class FinanceiroAPIController extends FinanceiroBaseController
 	 */
 	@RequestMapping(value = EDIT_LOCATION, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse edit(@RequestBody EmpresaMaintenanceRequest locationRequest)
+	public FinanceiroResponse edit(@RequestBody FinanceiroMaintenanceRequest locationRequest)
 	{
-		EmpresaResponse locationResponse = new EmpresaResponse();
+		FinanceiroResponse locationResponse = new FinanceiroResponse();
 		try
 		{
 
-			locationResponse = getEmpresaBAI().updateEmpresa(locationRequest);
+			locationResponse = getFinanceiroBAI().updateFinanceiro(locationRequest);
 
 		}
 		catch (Exception e)
@@ -133,13 +112,13 @@ public class FinanceiroAPIController extends FinanceiroBaseController
 	 */
 	@RequestMapping(value = DELETE_LOCATION, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse delete(@RequestBody EmpresaMaintenanceRequest locationRequest)
+	public FinanceiroResponse delete(@RequestBody FinanceiroMaintenanceRequest locationRequest)
 	{
-		EmpresaResponse locationResponse = new EmpresaResponse();
+		FinanceiroResponse locationResponse = new FinanceiroResponse();
 		try
 		{
 
-			locationResponse = getEmpresaBAI().deleteEmpresa(locationRequest);
+			locationResponse = getFinanceiroBAI().deleteFinanceiro(locationRequest);
 
 		}
 		catch (Exception e)
@@ -160,15 +139,15 @@ public class FinanceiroAPIController extends FinanceiroBaseController
 	 */
 	@RequestMapping(value = INSERT_LOCATION, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse insert(@RequestBody EmpresaMaintenanceRequest locationRequest)
+	public FinanceiroResponse insert(@RequestBody FinanceiroMaintenanceRequest locationRequest)
 	{
-		EmpresaResponse locationResponse = new EmpresaResponse();
+		FinanceiroResponse locationResponse = new FinanceiroResponse();
 
 		try
 		{
 
-			locationRequest.getEmpresa().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
-			locationResponse = getEmpresaBAI().insertEmpresa(locationRequest);
+			locationRequest.getFinanceiro().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
+			locationResponse = getFinanceiroBAI().insertFinanceiro(locationRequest);
 		}
 		catch (Exception e)
 		{

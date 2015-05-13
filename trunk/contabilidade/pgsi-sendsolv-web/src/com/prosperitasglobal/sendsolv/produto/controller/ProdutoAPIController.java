@@ -13,18 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.request.EmpresaMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
+import com.prosperitasglobal.sendsolv.model.request.ProdutoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ProdutoMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.ProdutoResponse;
 
-/**
- * The EmpresaAPIController Class.
- *
- * @author Flavio Tosta, Washington Costa
- *
- */
 @Controller
-@RequestMapping("/api/empresa")
+@RequestMapping("/api/produto")
 public class ProdutoAPIController extends ProdutoBaseController
 {
 
@@ -52,20 +46,20 @@ public class ProdutoAPIController extends ProdutoBaseController
 	private static final Logger LOG = LoggerFactory.getLogger(ProdutoAPIController.class);
 
 	/** The Constant CONTROLLER_EXCEPTION_MSG. */
-	private static final String CONTROLLER_EXCEPTION_MSG = "EmpresaAPIController";
+	private static final String CONTROLLER_EXCEPTION_MSG = "ProdutoAPIController";
 
 	/**
-	 * Fetch all Empresas.
+	 * Fetch all Produtos.
 	 *
 	 * @param pagedInquiryRequest the paged inquiry request
 	 * @return the response
 	 */
 	@RequestMapping(value = FETCH_ALL, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse fetchAll(@RequestBody PagedInquiryRequest pagedInquiryRequest)
+	public ProdutoResponse fetchAll(@RequestBody ProdutoInquiryRequest pagedInquiryRequest)
 	{
 
-		return fetchEmpresaByRequest(pagedInquiryRequest);
+		return fetchProdutoByRequest(pagedInquiryRequest);
 
 	}
 
@@ -77,25 +71,10 @@ public class ProdutoAPIController extends ProdutoBaseController
 	 */
 	@RequestMapping(value = FETCH, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse fetch(@RequestBody FetchByIdRequest fetchByIdRequest)
+	public ProdutoResponse fetch(@RequestBody FetchByIdRequest fetchByIdRequest)
 	{
 
-		return fetchEmpresaById(fetchByIdRequest);
-
-	}
-
-	/**
-	 * Fetch all Empresas.
-	 *
-	 * @param pagedInquiryRequest the paged inquiry request
-	 * @return the response
-	 */
-	@RequestMapping(value = FETCH_ORGANIZATION_BYLOCATION, method = RequestMethod.POST)
-	@ResponseBody
-	public EmpresaResponse fetchOrganizationBylocation(@RequestBody PagedInquiryRequest pagedInquiryRequest)
-	{
-
-		return fetchEmpresaByOrganization(pagedInquiryRequest);
+		return fetchProdutoById(fetchByIdRequest);
 
 	}
 
@@ -107,13 +86,13 @@ public class ProdutoAPIController extends ProdutoBaseController
 	 */
 	@RequestMapping(value = EDIT_LOCATION, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse edit(@RequestBody EmpresaMaintenanceRequest locationRequest)
+	public ProdutoResponse edit(@RequestBody ProdutoMaintenanceRequest locationRequest)
 	{
-		EmpresaResponse locationResponse = new EmpresaResponse();
+		ProdutoResponse locationResponse = new ProdutoResponse();
 		try
 		{
 
-			locationResponse = getEmpresaBAI().updateEmpresa(locationRequest);
+			locationResponse = getProdutoBAI().updateProduto(locationRequest);
 
 		}
 		catch (Exception e)
@@ -133,13 +112,13 @@ public class ProdutoAPIController extends ProdutoBaseController
 	 */
 	@RequestMapping(value = DELETE_LOCATION, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse delete(@RequestBody EmpresaMaintenanceRequest locationRequest)
+	public ProdutoResponse delete(@RequestBody ProdutoMaintenanceRequest locationRequest)
 	{
-		EmpresaResponse locationResponse = new EmpresaResponse();
+		ProdutoResponse locationResponse = new ProdutoResponse();
 		try
 		{
 
-			locationResponse = getEmpresaBAI().deleteEmpresa(locationRequest);
+			locationResponse = getProdutoBAI().deleteProduto(locationRequest);
 
 		}
 		catch (Exception e)
@@ -160,15 +139,15 @@ public class ProdutoAPIController extends ProdutoBaseController
 	 */
 	@RequestMapping(value = INSERT_LOCATION, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse insert(@RequestBody EmpresaMaintenanceRequest locationRequest)
+	public ProdutoResponse insert(@RequestBody ProdutoMaintenanceRequest locationRequest)
 	{
-		EmpresaResponse locationResponse = new EmpresaResponse();
+		ProdutoResponse locationResponse = new ProdutoResponse();
 
 		try
 		{
 
-			locationRequest.getEmpresa().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
-			locationResponse = getEmpresaBAI().insertEmpresa(locationRequest);
+			locationRequest.getProduto().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
+			locationResponse = getProdutoBAI().insertProduto(locationRequest);
 		}
 		catch (Exception e)
 		{

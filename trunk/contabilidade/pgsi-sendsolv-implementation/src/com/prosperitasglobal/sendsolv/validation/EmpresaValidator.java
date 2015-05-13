@@ -2,15 +2,12 @@ package com.prosperitasglobal.sendsolv.validation;
 
 import java.util.List;
 
-import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.model.Empresa;
-import com.prosperitasglobal.sendsolv.model.Organization;
-import com.prosperitasglobal.sendsolv.model.StatusEnum;
 import com.qat.framework.model.Message;
 import com.qat.framework.model.MessageInfo;
 import com.qat.framework.model.response.InternalResponse;
-import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.validation.IValidator;
 import com.qat.framework.validation.ValidationContext;
 import com.qat.framework.validation.ValidationContextIndicator;
 import com.qat.framework.validation.ValidationUtil;
@@ -23,7 +20,7 @@ import com.qat.framework.validation.ValidationUtil;
  * ValidationUtil tool of the QAT framework to perform these checks. If any one of these fields is null or nullOrEmpty
  * an error message is set informing the user that the field is required.
  */
-public class EmpresaValidator extends BusinessValidator
+public class EmpresaValidator extends ChangeControlValidator implements IValidator
 {
 
 	/** The Constant PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_PARENTID_REQUIRED. */
@@ -58,7 +55,7 @@ public class EmpresaValidator extends BusinessValidator
 			return;
 		}
 
-		performValidation(validationContext, empresa);
+		// performValidation(validationContext, empresa);
 
 		if (!validationContext.isStopProcessing()
 				&& !ValidationContextIndicator.FETCH_BY_ID.equals(validationContext.getValidationContextIndicator()))
@@ -76,7 +73,7 @@ public class EmpresaValidator extends BusinessValidator
 	 */
 	private void validateAdditionalFields(List<MessageInfo> list, Empresa empresa)
 	{
-		validateParentOrganizationId(list, empresa);
+		// validateParentOrganizationId(list, empresa);
 		if (ValidationUtil.isNullOrEmpty(list))
 		{
 			return;
@@ -95,23 +92,23 @@ public class EmpresaValidator extends BusinessValidator
 		InternalResponse applyStatusResponse = new InternalResponse();
 		FetchByIdRequest request = new FetchByIdRequest();
 
-		request.setId(empresa.getParentOrganizationId());
-		InternalResultsResponse<Organization> response = getOrganizationDAC().fetchOrganizationById(request);
+		// request.setId(empresa.getParentOrganizationId());
+		// InternalResultsResponse<Organization> response = getOrganizationDAC().fetchOrganizationById(request);
 
-		if (response.isInError())
-		{
-			applyStatusResponse.merge(response);
-		}
+		// if (response.isInError())
+		// {
+		// applyStatusResponse.merge(response);
+		// }
 
-		if (StatusEnum.SETUP.equals(response.getFirstResult().getStatus()))
-		{
-			list.add(
-					new MessageInfo(CBOF_BASE_APPLYSTATUS_STATUS_DENIED,
-							Message.MessageSeverity.Error,
-							Message.MessageLevel.Field,
-							new Object[] {String.valueOf(BusinessTypeEnum.LOCATION).toLowerCase(),
-							empresa.getStatus()}));
-		}
+		// if (StatusEnum.SETUP.equals(response.getFirstResult().getStatus()))
+		// {
+		// list.add(
+		// new MessageInfo(CBOF_BASE_APPLYSTATUS_STATUS_DENIED,
+		// Message.MessageSeverity.Error,
+		// Message.MessageLevel.Field,
+		// new Object[] {String.valueOf(BusinessTypeEnum.LOCATION).toLowerCase(),
+		// empresa.getStatus()}));
+		// }
 
 		if (!ValidationUtil.isNull(applyStatusResponse))
 		{

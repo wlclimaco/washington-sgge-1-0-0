@@ -85,21 +85,6 @@ public class PessoaAPIController extends PessoaBaseController
 	}
 
 	/**
-	 * Fetch all Empresas.
-	 *
-	 * @param pagedInquiryRequest the paged inquiry request
-	 * @return the response
-	 */
-	@RequestMapping(value = FETCH_ORGANIZATION_BYLOCATION, method = RequestMethod.POST)
-	@ResponseBody
-	public EmpresaResponse fetchOrganizationBylocation(@RequestBody PagedInquiryRequest pagedInquiryRequest)
-	{
-
-		return fetchEmpresaByOrganization(pagedInquiryRequest);
-
-	}
-
-	/**
 	 * Edit one location.
 	 *
 	 * @param locationRequest the location request

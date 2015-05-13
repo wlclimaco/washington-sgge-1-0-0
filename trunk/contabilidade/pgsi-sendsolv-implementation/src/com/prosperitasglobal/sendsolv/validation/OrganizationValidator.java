@@ -64,7 +64,7 @@ public class OrganizationValidator extends BusinessValidator
 			return;
 		}
 
-		performValidation(validationContext, organization);
+		// performValidation(validationContext, organization);
 
 		if (!validationContext.isStopProcessing()
 				&& !ValidationContextIndicator.FETCH_BY_ID.equals(validationContext.getValidationContextIndicator()))

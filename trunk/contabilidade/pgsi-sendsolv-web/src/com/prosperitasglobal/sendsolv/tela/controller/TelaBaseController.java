@@ -1,21 +1,21 @@
 package com.prosperitasglobal.sendsolv.tela.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Logger;
-
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
+import com.prosperitasglobal.sendsolv.bai.IMemberBAI;
+import com.prosperitasglobal.sendsolv.bai.ITelaBAI;
+import com.prosperitasglobal.sendsolv.model.request.TelaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.response.MemberResponse;
+import com.prosperitasglobal.sendsolv.model.response.TelaResponse;
+import com.qat.framework.validation.ValidationUtil;
 
-/**
- * The Class TelaBaseController.
- */
-
-/**
- * @author Flavio Tosta.
- *
- */
 public class TelaBaseController extends UtilControllerD
 {
 
@@ -23,7 +23,7 @@ public class TelaBaseController extends UtilControllerD
 	public static final String RESPONSE = "response";
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(TelaBaseController.class);
+	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(TelaBaseController.class);
 
 	/** The Constant CONTROLLER_EXCEPTION_MSG. */
 	private static final String CONTROLLER_EXCEPTION_MSG = "TelaBaseController";
@@ -147,15 +147,14 @@ public class TelaBaseController extends UtilControllerD
 	 * @param pagedInquiryRequest the paged inquiry request
 	 * @return the location response
 	 */
-	public TelaResponse fetchTelaByRequest(PagedInquiryRequest pagedInquiryRequest)
+	public TelaResponse fetchTelaByRequest(TelaInquiryRequest pagedInquiryRequest)
 	{
 
 		TelaResponse locationResponse = new TelaResponse();
 		try
 		{
 
-			locationResponse = Mock();
-			// getTelaBAI().fetchTelaByRequest(pagedInquiryRequest);
+			locationResponse = getTelaBAI().fetchTelaByRequest(pagedInquiryRequest);
 
 		}
 		catch (Exception e)
@@ -182,8 +181,7 @@ public class TelaBaseController extends UtilControllerD
 		try
 		{
 
-			locationResponse = MockById();
-			// getTelaBAI().fetchTelaById(fetchByIdRequest);
+			locationResponse = getTelaBAI().fetchTelaById(fetchByIdRequest);
 
 		}
 		catch (Exception e)
@@ -197,163 +195,4 @@ public class TelaBaseController extends UtilControllerD
 		return locationResponse;
 	}
 
-	/**
-	 * Fetch location by organization.
-	 *
-	 * @param pagedInquiryRequest the paged inquiry request
-	 * @return the location response
-	 */
-	public TelaResponse fetchTelaByOrganization(PagedInquiryRequest pagedInquiryRequest)
-	{
-
-		TelaResponse locationResponse = new TelaResponse();
-		try
-		{
-
-			locationResponse =
-					getTelaBAI().fetchTelaByOrganization(pagedInquiryRequest);
-
-		}
-		catch (Exception e)
-		{
-			if (LOG.isErrorEnabled())
-			{
-				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
-			}
-		}
-
-		return locationResponse;
-	}
-
-	public TelaResponse Mock()
-	{
-		TelaResponse telaResponse = new TelaResponse();
-
-		List<Tela> telas = new ArrayList<Tela>();
-		for (Integer i = 0; i < 100; i++)
-		{
-			Tela tela = new Tela();
-			tela.setId(i);
-			tela.setNome("nome_" + i);
-			Socio socio = new Socio();
-			socio.setId(1);
-			socio.setNome("Washington");
-			tela.setSocios(new ArrayList<Socio>());
-			tela.getSocios().add(socio);
-			Endereco endereco = new Endereco();
-			tela.setEnderecos(new ArrayList<Endereco>());
-			endereco.setBairro("bairro");
-			endereco.setCep("cep");
-			endereco.setCidade("cidade");
-			endereco.setEstado("estado");
-			endereco.setId(1);
-			endereco.setLogradouro("logradouro");
-			endereco.setNumero("1000");
-			tela.getEnderecos().add(endereco);
-			tela.setEmails(new ArrayList<Email>());
-			Email email = new Email();
-			email.setId(1);
-			email.setEmail("wlclimaco@gmail.com");
-			tela.getEmails().add(email);
-			tela.setCnaes(new ArrayList<Cnae>());
-			Cnae cnae = new Cnae();
-			cnae.setId(1);
-			cnae.setDescription("1-(4-BETA-HIDROXIETILSULFOFENIL)-3-METIL-5-PIRAZOLONA; FABRICAÇÃO DE");
-			cnae.setNumber("2029-1/00");
-			tela.getCnaes().add(cnae);
-			cnae = new Cnae();
-			cnae.setId(2);
-			cnae.setDescription("1-(4-SULFOFENIL)-3-METIL-5-PIRAZOLONA (ÁCIDO PIRAZÓLICO); FABRICAÇÃO DE");
-			cnae.setNumber("2029-2/00");
-			tela.getCnaes().add(cnae);
-			tela.setDocumentos(new ArrayList<Documento>());
-			Documento documento = new Documento();
-			documento.setId(1);
-			documento.setType("CNPJ");
-			documento.setNumero("000000000001111/000-9");
-			tela.getDocumentos().add(documento);
-			documento = new Documento();
-			documento.setId(2);
-			documento.setType("IM");
-			documento.setNumero("00000001");
-			tela.getDocumentos().add(documento);
-			tela.setTelefones(new ArrayList<Telefone>());
-			Telefone telefone = new Telefone();
-			telefone.setId(1);
-			telefone.setDdd("34");
-			telefone.setNumero("91782776");
-			tela.getTelefones().add(telefone);
-			tela.setRegime("Simples Nacional");
-			telas.add(tela);
-
-		}
-		telaResponse.setTelaList(telas);
-		return telaResponse;
-	}
-
-	public TelaResponse MockById()
-	{
-		TelaResponse telaResponse = new TelaResponse();
-
-		List<Tela> telas = new ArrayList<Tela>();
-
-		Tela tela = new Tela();
-		tela.setId(1);
-		tela.setNome("nome_" + 1);
-		Socio socio = new Socio();
-		socio.setId(1);
-		socio.setNome("Washington");
-		tela.setSocios(new ArrayList<Socio>());
-		tela.getSocios().add(socio);
-		Endereco endereco = new Endereco();
-		tela.setEnderecos(new ArrayList<Endereco>());
-		endereco.setBairro("bairro");
-		endereco.setCep("cep");
-		endereco.setCidade("cidade");
-		endereco.setEstado("estado");
-		endereco.setId(1);
-		endereco.setLogradouro("logradouro");
-		endereco.setNumero("1000");
-		tela.getEnderecos().add(endereco);
-		tela.setEmails(new ArrayList<Email>());
-		Email email = new Email();
-		email.setId(1);
-		email.setEmail("wlclimaco@gmail.com");
-		email.setDescription("NF-e");
-		tela.getEmails().add(email);
-		tela.setCnaes(new ArrayList<Cnae>());
-		Cnae cnae = new Cnae();
-		cnae.setId(1);
-		cnae.setDescription("1-(4-BETA-HIDROXIETILSULFOFENIL)-3-METIL-5-PIRAZOLONA; FABRICAÇÃO DE");
-		cnae.setNumber("2029-1/00");
-		tela.getCnaes().add(cnae);
-		cnae = new Cnae();
-		cnae.setId(2);
-		cnae.setDescription("1-(4-SULFOFENIL)-3-METIL-5-PIRAZOLONA (ÁCIDO PIRAZÓLICO); FABRICAÇÃO DE");
-		cnae.setNumber("2029-2/00");
-		tela.getCnaes().add(cnae);
-		tela.setDocumentos(new ArrayList<Documento>());
-		Documento documento = new Documento();
-		documento.setId(1);
-		documento.setType("CNPJ");
-		documento.setNumero("000000000001111/000-9");
-		tela.getDocumentos().add(documento);
-		documento = new Documento();
-		documento.setId(2);
-		documento.setType("IM");
-		documento.setNumero("00000001");
-		tela.getDocumentos().add(documento);
-		tela.setTelefones(new ArrayList<Telefone>());
-		Telefone telefone = new Telefone();
-		telefone.setId(1);
-		telefone.setDdd("34");
-		telefone.setNumero("91782776");
-		telefone.setType("Residencial");
-		tela.getTelefones().add(telefone);
-		tela.setRegime("Simples Nacional");
-		telas.add(tela);
-
-		telaResponse.setTelaList(telas);
-		return telaResponse;
-	}
 }

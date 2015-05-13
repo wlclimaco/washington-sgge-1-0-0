@@ -170,8 +170,6 @@
     	</property>
 	</bean>
 
-<!-- ---------------------- -->
-
 	<bean id="empresaDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.EmpresaDACImpl">
 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
 	</bean>
@@ -195,7 +193,7 @@
 	<bean id="produtoDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.ProdutoDACImpl">
 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
 	</bean>
-<!-- ---------------------- -->
+
 	<bean id="productPlanDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.ProductPlanDACImpl">
 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
 		<property name="businessProductPlanInquiryValidSortFields" ref="businessProductPlanInquiryValidSortFields"/>

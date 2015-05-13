@@ -1,11 +1,21 @@
 package com.prosperitasglobal.sendsolv.tela.controller;
 
-import java.util.logging.Logger;
-
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.prosperitasglobal.sendsolv.filter.FilterFactory;
 import com.prosperitasglobal.sendsolv.filter.model.response.FiltersResponse;
+import com.prosperitasglobal.sendsolv.model.OrganizationOrderByEnum;
+import com.prosperitasglobal.sendsolv.model.request.TelaInquiryRequest;
+import com.qat.framework.model.SortExpression;
+import com.qat.framework.model.SortExpression.Direction;
 
 /**
  * The LocationViewController Class.
@@ -66,7 +76,7 @@ public class TelaViewController extends TelaBaseController
 	private static final String EMPRESA_ID = "locationId";
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(TelaViewController.class);
+	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(TelaViewController.class);
 
 	/** The Constant CONTROLLER_EXCEPTION_MSG. */
 	private static final String CONTROLLER_EXCEPTION_MSG = "LocationViewController";
@@ -111,7 +121,7 @@ public class TelaViewController extends TelaBaseController
 			return modelAndView;
 		}
 
-		PagedInquiryRequest pagedInquiryRequest = new PagedInquiryRequest();
+		TelaInquiryRequest pagedInquiryRequest = new TelaInquiryRequest();
 		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
 		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
 		pagedInquiryRequest.setPreQueryCount(true);

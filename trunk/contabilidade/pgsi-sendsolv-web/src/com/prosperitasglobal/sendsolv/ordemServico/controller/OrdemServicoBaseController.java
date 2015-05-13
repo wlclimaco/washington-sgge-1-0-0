@@ -216,34 +216,6 @@ public class OrdemServicoBaseController extends UtilControllerD
 		return locationResponse;
 	}
 
-	/**
-	 * Fetch location by organization.
-	 *
-	 * @param pagedInquiryRequest the paged inquiry request
-	 * @return the location response
-	 */
-	public EmpresaResponse fetchEmpresaByOrganization(PagedInquiryRequest pagedInquiryRequest)
-	{
-
-		EmpresaResponse locationResponse = new EmpresaResponse();
-		try
-		{
-
-			locationResponse =
-					getEmpresaBAI().fetchEmpresaByOrganization(pagedInquiryRequest);
-
-		}
-		catch (Exception e)
-		{
-			if (LOG.isErrorEnabled())
-			{
-				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
-			}
-		}
-
-		return locationResponse;
-	}
-
 	public EmpresaResponse Mock()
 	{
 		EmpresaResponse empresaResponse = new EmpresaResponse();

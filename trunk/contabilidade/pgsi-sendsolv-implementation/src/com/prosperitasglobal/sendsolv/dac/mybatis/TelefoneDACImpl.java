@@ -1,17 +1,13 @@
 package com.prosperitasglobal.sendsolv.dac.mybatis;
 
-import java.util.Map;
-
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
 import com.prosperitasglobal.sendsolv.dac.ITelefoneDAC;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
 import com.prosperitasglobal.sendsolv.model.Telefone;
 import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
@@ -21,250 +17,144 @@ import com.qat.framework.validation.ValidationUtil;
  */
 public class TelefoneDACImpl extends SqlSessionDaoSupport implements ITelefoneDAC
 {
+	/** The Constant CONTACT_NAMESPACE. */
+	private static final String CONTACT_NAMESPACE = "TelefoneMap.";
 
-	/** The Constant EMPRESA_NAMESPACE. */
-	private static final String EMPRESA_NAMESPACE = "TelefoneMap.";
+	/** The Constant CONTACT_STMT_UPDATE. */
+	private static final String CONTACT_STMT_UPDATE = CONTACT_NAMESPACE + "updateTelefone";
 
-	/** The Constant CBOF_NAMESPACE. */
-	private static final String CBOF_NAMESPACE = "CBOFMap.";
+	/** The Constant CONTACT_STMT_UPDATE_PHONE. */
+	private static final String CONTACT_STMT_UPDATE_PHONE = CONTACT_NAMESPACE + "updatePhone";
 
-	/** The Constant EMPRESA_STMT_FETCH_COUNT. */
-	private static final String EMPRESA_STMT_FETCH_COUNT = EMPRESA_NAMESPACE + "fetchTelefoneRowCount";
+	/** The Constant CONTACT_STMT_UPDATE_EMAIL. */
+	private static final String CONTACT_STMT_UPDATE_EMAIL = CONTACT_NAMESPACE + "updateTelefone";
 
-	/** The Constant EMPRESA_STMT_FETCH_ALL_BY_REQUEST. */
-	private static final String EMPRESA_STMT_FETCH_ALL_BY_REQUEST = EMPRESA_NAMESPACE
-			+ "fetchAllTelefonesByRequest";
+	/** The Constant CONTACT_STMT_UPDATE_ADDRESS. */
+	private static final String CONTACT_STMT_UPDATE_ADDRESS = CONTACT_NAMESPACE + "updateAddress";
 
-	/** The Constant EMPRESA_STMT_FETCH_BY_ID. */
-	private static final String EMPRESA_STMT_FETCH_BY_ID = EMPRESA_NAMESPACE + "fetchTelefoneById";
+	/** The Constant CONTACT_STMT_DELETE_BUSINESS_CONTACT. */
+	private static final String CONTACT_STMT_DELETE_BUSINESS_CONTACT = CONTACT_NAMESPACE + "deleteBusinessTelefone";
 
-	/** The Constant EMPRESA_STMT_INSERT. */
-	private static final String EMPRESA_STMT_INSERT = EMPRESA_NAMESPACE + "insertTelefone";
+	/** The Constant CONTACT_STMT_DELETE_PERSON_CONTACT. */
+	private static final String CONTACT_STMT_DELETE_PERSON_CONTACT = CONTACT_NAMESPACE + "deletePersonTelefone";
 
-	/** The Constant EMPRESA_STMT_ASSOC_ORG_TO_CONTACT. */
-	private static final String EMPRESA_STMT_ASSOC_ORG_TO_CONTACT = EMPRESA_NAMESPACE
-			+ "associateTelefoneWithContact";
+	/** The Constant CONTACT_STMT_INSERT. */
+	private static final String CONTACT_STMT_INSERT = CONTACT_NAMESPACE + "insertTelefone";
 
-	/** The Constant EMPRESA_STMT_UPDATE. */
-	private static final String EMPRESA_STMT_UPDATE = EMPRESA_NAMESPACE + "updateTelefone";
+	/** The Constant CONTACT_STMT_INSERT_PHONE. */
+	private static final String CONTACT_STMT_INSERT_PHONE = CONTACT_NAMESPACE + "insertPhone";
 
-	/** The Constant EMPRESA_STMT_DELETE. */
-	private static final String EMPRESA_STMT_DELETE = EMPRESA_NAMESPACE + "deleteTelefoneById";
+	/** The Constant CONTACT_STMT_INSERT_EMAIL. */
+	private static final String CONTACT_STMT_INSERT_EMAIL = CONTACT_NAMESPACE + "insertTelefone";
 
-	/** The Constant EMPRESA_DOCUMENT_STMT_UPDATE. */
-	private static final String EMPRESA_DOCUMENT_STMT_UPDATE = EMPRESA_NAMESPACE
-			+ "updateTelefoneDocument";
+	/** The Constant CONTACT_STMT_INSERT_ADDRESS. */
+	private static final String CONTACT_STMT_INSERT_ADDRESS = CONTACT_NAMESPACE + "insertAddress";
 
-	/** The Constant EMPRESA_STMT_ASSOC_ORG_TO_DOCUMENT. */
-	private static final String EMPRESA_STMT_ASSOC_ORG_TO_DOCUMENT = EMPRESA_NAMESPACE
-			+ "associateTelefoneWithDocument";
+	/** The Constant CONTACT_STMT_FETCH_BY_BUSINESS_ID. */
+	private static final String CONTACT_STMT_FETCH_BY_BUSINESS_ID = CONTACT_NAMESPACE + "fetchTelefonesByBusinessId";
 
-	/** The Constant EMPRESA_STMT_DELETE_DOCUMENT. */
-	private static final String EMPRESA_STMT_DELETE_DOCUMENT = EMPRESA_NAMESPACE
-			+ "deleteTelefoneDocument";
+	/** The Constant CONTACT_STMT_FETCH_BY_PERSON_ID. */
+	private static final String CONTACT_STMT_FETCH_BY_PERSON_ID = CONTACT_NAMESPACE + "fetchTelefonesByPersonId";
 
-	/** The Constant STMT_VERSION. */
-	private static final String EMPRESA_STMT_VERSION = EMPRESA_NAMESPACE + "fetchVersionNumber";
+	/** The Constant CONTACT_STMT_FETCH_BY_ID. */
+	private static final String CONTACT_STMT_FETCH_BY_ID = CONTACT_NAMESPACE + "fetchTelefonesById";
 
-	/** The Constant EMPRESA_STMT_UPDATE_EMPRESA_STATUS. */
-	private static final String EMPRESA_STMT_UPDATE_EMPRESA_STATUS = CBOF_NAMESPACE
-			+ "updateBusinessStatus";
+	/** The Constant CONTACT_STMT_FETCH_EMAIL_VERSION. */
+	private static final String CONTACT_STMT_FETCH_EMAIL_VERSION = CONTACT_NAMESPACE + "fetchVersionNumberTelefone";
+
+	/** The Constant CONTACT_STMT_FETCH_PHONE_VERSION. */
+	private static final String CONTACT_STMT_FETCH_PHONE_VERSION = CONTACT_NAMESPACE + "fetchVersionNumberPhone";
+
+	/** The Constant CONTACT_STMT_FETCH_ADDRESS_VERSION. */
+	private static final String CONTACT_STMT_FETCH_ADDRESS_VERSION = CONTACT_NAMESPACE + "fetchVersionNumberAddress";
 
 	/** The Constant LOG. */
 	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(TelefoneDACImpl.class);
 
-	/** The valid sort fields for an telefone inquiry. Will be injected by Spring. */
-	private Map<String, String> telefoneInquiryValidSortFields;
-
-	/**
-	 * Get the valid sort fields for the telefone inquiry. Attribute injected by Spring.
-	 *
-	 * @return The valid sort fields for the telefone inquiry.
-	 */
-	public Map<String, String> getTelefoneInquiryValidSortFields()
-	{
-		return telefoneInquiryValidSortFields;
-	}
-
-	/**
-	 * Set the valid sort fields for the telefone inquiry. Attribute injected by Spring.
-	 *
-	 * @param telefoneInquiryValidSortFields The valid sort fields for the telefone inquiry to set.
-	 */
-	public void setTelefoneInquiryValidSortFields(Map<String, String> telefoneInquiryValidSortFields)
-	{
-		this.telefoneInquiryValidSortFields = telefoneInquiryValidSortFields;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.ITelefoneDAC#insertTelefone(com.prosperitasglobal.sendsolv.model
-	 * .Telefone)
+	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#insertTelefone(com.prosperitasglobal.cbof.model.Telefone,
+	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public InternalResultsResponse<Telefone> insertTelefone(Telefone telefone)
+	public Integer insertTelefone(Telefone cnae, String statementName, InternalResultsResponse<?> response)
 	{
 		Integer insertCount = 0;
-		InternalResultsResponse<Telefone> response = new InternalResultsResponse<Telefone>();
+		// First insert the root cnae data
+		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT, cnae, response);
 
-		// First insert the root
-		// Is successful the unique-id will be populated back into the object.
-		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), EMPRESA_STMT_INSERT, telefone, response);
-
-		if (response.isInError())
-		{
-			return response;
-		}
-		// Next traverse the object graph and "maintain" the associations
-		insertCount += maintainTelefoneAssociations(telefone, response);
-
-		// Finally, if something was inserted then add the Telefone to the result.
-		if (insertCount > 0)
-		{
-			response.addResult(telefone);
-		}
-
-		return response;
+		return insertCount;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.ITelefoneDAC#updateTelefone(com.prosperitasglobal.sendsolv.model
-	 * .Telefone)
+	 * com.prosperitasglobal.cbof.dac.ITelefoneDAC#deleteBusinessTelefone(com.prosperitasglobal.cbof.model.Telefone,
+	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public InternalResultsResponse<Telefone> updateTelefone(Telefone telefone)
+	public Integer deleteBusinessTelefone(Telefone cnae, InternalResultsResponse<?> response)
+	{
+		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, cnae, response);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.cbof.dac.ITelefoneDAC#deletePersonTelefone(com.prosperitasglobal.cbof.model.Telefone,
+	 * com.qat.framework.model.response.InternalResultsResponse)
+	 */
+	@Override
+	public Integer deletePersonTelefone(Telefone cnae, InternalResultsResponse<?> response)
+	{
+		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_PERSON_CONTACT, cnae, response);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#updateTelefone(com.prosperitasglobal.cbof.model.Telefone,
+	 * com.qat.framework.model.response.InternalResultsResponse)
+	 */
+	@Override
+	public Integer updateTelefone(Telefone cnae, InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
-		InternalResultsResponse<Telefone> response = new InternalResultsResponse<Telefone>();
 
 		// First update the root if necessary.
-		if (!ValidationUtil.isNull(telefone.getModelAction())
-				&& (telefone.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
+		if (!ValidationUtil.isNull(cnae.getModelAction())
+				&& (cnae.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
 		{
-			updateCount =
-					QATMyBatisDacHelper.doUpdate(getSqlSession(), EMPRESA_STMT_UPDATE, telefone,
-							response);
+			updateCount = QATMyBatisDacHelper.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE, cnae, response);
+
+			if (updateCount == 1)
+			{
+				cnae.setModelAction(QATModel.PersistanceActionEnum.NONE);
+			}
 		}
 
-		if (response.isInError())
-		{
-			return response;
-		}
-		// Next traverse the object graph and "maintain" the associations
-		updateCount += maintainTelefoneAssociations(telefone, response);
+		updateCount +=
+				QATMyBatisDacHelper.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE_PHONE, cnae, response);
 
-		// Finally, if something was updated then add the Person to the result.
-		if (updateCount > 0)
-		{
-			response.addResult(telefone);
-		}
-
-		return response;
+		return updateCount;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.ITelefoneDAC#deleteTelefone(com.prosperitasglobal.sendsolv.model
-	 * .Telefone)
-	 */
 	@Override
-	public InternalResponse deleteTelefone(Telefone telefone)
+	public InternalResultsResponse<Telefone> fetchTelefoneById(Integer id)
 	{
-		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doRemove(getSqlSession(), EMPRESA_STMT_DELETE, telefone, response);
-
-		return response;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.dac.ITelefoneDAC#fetchTelefoneById(FetchByIdRequest)
-	 */
 	@Override
-	public InternalResultsResponse<Telefone> fetchTelefoneById(FetchByIdRequest request)
+	public InternalResultsResponse<Telefone> fetchTelefoneByParent(Integer parentId, BusinessTypeEnum parentType)
 	{
-		InternalResultsResponse<Telefone> response = new InternalResultsResponse<Telefone>();
-		QATMyBatisDacHelper.doQueryForList(getSqlSession(), EMPRESA_STMT_FETCH_BY_ID, request, response);
-		return response;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.ITelefoneDAC#fetchTelefoneByRequest(com.prosperitasglobal.sendsolv
-	 * .model.request.PagedInquiryRequest)
-	 */
 	@Override
 	public InternalResultsResponse<Telefone> fetchTelefoneByRequest(PagedInquiryRequest request)
-	{
-		InternalResultsResponse<Telefone> response = new InternalResultsResponse<Telefone>();
-
-		/*
-		 * Helper method to translation from the user friendly" sort field names to the
-		 * actual database column names.
-		 */
-		QATMyBatisDacHelper.translateSortFields(request, getTelefoneInquiryValidSortFields());
-
-		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, EMPRESA_STMT_FETCH_COUNT,
-				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
-		return response;
-	}
-
-	/**
-	 * Maintain telefone associations.
-	 *
-	 * @param telefone the telefone
-	 * @param response the response
-	 * @return the integer
-	 */
-	private Integer maintainTelefoneAssociations(Telefone telefone,
-			InternalResultsResponse<Telefone> response)
-	{
-		Integer count = 0;
-		// First Maintain Contacts
-		// if (ValidationUtil.isNullOrEmpty(telefone.getContactList()))
-		// {
-		// return count;
-		// }
-		// // For Each Contact...
-		// for (Contact contact : telefone.getContactList())
-		// {
-		// // Make sure we set the parent key
-		// contact.setParentKey(telefone.getId());
-		//
-		// if (ValidationUtil.isNull(contact.getModelAction()))
-		// {
-		// continue;
-		// }
-		// switch (contact.getModelAction())
-		// {
-		// case INSERT:
-		// count = getContactDAC().insertContact(contact,
-		// EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-		// break;
-		// case UPDATE:
-		// count = getContactDAC().updateContact(contact, response);
-		// break;
-		// case DELETE:
-		// count = getContactDAC().deleteBusinessContact(contact, response);
-		// break;
-		// default:
-		// if (LOG.isDebugEnabled())
-		// {
-		// LOG.debug("ModelAction for Telefone missing!");
-		// }
-		// break;
-		// }
-		// }
-		return count;
-	}
-
-	@Override
-	public InternalResultsResponse<Telefone> fetchAllTelefones()
 	{
 		// TODO Auto-generated method stub
 		return null;

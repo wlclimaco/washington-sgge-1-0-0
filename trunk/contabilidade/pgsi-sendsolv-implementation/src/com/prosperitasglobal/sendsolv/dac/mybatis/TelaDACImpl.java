@@ -285,4 +285,11 @@ public class TelaDACImpl extends SqlSessionDaoSupport implements ITelaDAC
 		// }
 		return count;
 	}
+
+	@Override
+	public InternalResultsResponse<Tela> fetchAllTelas()
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

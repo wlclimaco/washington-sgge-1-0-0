@@ -27,14 +27,6 @@ import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
 import com.prosperitasglobal.sendsolv.model.response.MemberResponse;
 import com.qat.framework.validation.ValidationUtil;
 
-/**
- * The Class EmpresaBaseController.
- */
-
-/**
- * @author Flavio Tosta.
- *
- */
 public class PessoaBaseController extends UtilControllerD
 {
 
@@ -203,34 +195,6 @@ public class PessoaBaseController extends UtilControllerD
 
 			locationResponse = MockById();
 			// getEmpresaBAI().fetchEmpresaById(fetchByIdRequest);
-
-		}
-		catch (Exception e)
-		{
-			if (LOG.isErrorEnabled())
-			{
-				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
-			}
-		}
-
-		return locationResponse;
-	}
-
-	/**
-	 * Fetch location by organization.
-	 *
-	 * @param pagedInquiryRequest the paged inquiry request
-	 * @return the location response
-	 */
-	public EmpresaResponse fetchEmpresaByOrganization(PagedInquiryRequest pagedInquiryRequest)
-	{
-
-		EmpresaResponse locationResponse = new EmpresaResponse();
-		try
-		{
-
-			locationResponse =
-					getEmpresaBAI().fetchEmpresaByOrganization(pagedInquiryRequest);
 
 		}
 		catch (Exception e)

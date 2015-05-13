@@ -54,6 +54,6 @@ public class SdnMatchBusinessValidator extends BusinessValidator
 
 		validationContext.putValidationContextIndicator(ValidationContextIndicator.UPDATE);
 
-		performValidation(validationContext, request.getPersonOrBusiness());
+		// performValidation(validationContext, request.getPersonOrBusiness());
 	}
 }
