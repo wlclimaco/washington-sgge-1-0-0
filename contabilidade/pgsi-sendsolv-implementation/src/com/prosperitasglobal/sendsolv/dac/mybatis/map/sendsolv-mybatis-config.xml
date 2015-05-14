@@ -113,18 +113,41 @@
 		<typeAlias alias="SdnStatusHistoryInquiryRequest"              	 type="com.prosperitasglobal.sendsolv.sdn.model.request.SdnStatusHistoryInquiryRequest"/>
 
 
-<typeAlias alias="Empresa"              				 		 type="com.prosperitasglobal.sendsolv.model.Empresa"/>
-<typeAlias alias="Funcionario"              				 		 type="com.prosperitasglobal.sendsolv.model.Funcionario"/>
-<typeAlias alias="Endereco"              				 		 type="com.prosperitasglobal.sendsolv.model.Endereco"/>
-<typeAlias alias="Telefone"              				 		 type="com.prosperitasglobal.sendsolv.model.Telefone"/>
-<typeAlias alias="Email"              				 		 type="com.prosperitasglobal.sendsolv.model.Email"/>
-<typeAlias alias="Socio"              				 		 type="com.prosperitasglobal.sendsolv.model.Socio"/>
-<typeAlias alias="Cnae"              				 		 type="com.prosperitasglobal.sendsolv.model.Cnae"/>
-<typeAlias alias="Tela"              				 		 type="com.prosperitasglobal.sendsolv.model.Tela"/>
-<typeAlias alias="Tabela"              				 		 type="com.prosperitasglobal.sendsolv.model.Tabela"/>
-<typeAlias alias="NotaFiscal"              				 		 type="com.prosperitasglobal.sendsolv.model.NotaFiscal"/>
-<typeAlias alias="Financeiro"              				 		 type="com.prosperitasglobal.sendsolv.model.Financeiro"/>
-<typeAlias alias="Pessoa"              				 		 type="com.prosperitasglobal.sendsolv.model.Pessoa"/>
+		<typeAlias alias="Arquivo"              				 		 type="com.prosperitasglobal.sendsolv.model.Arquivo"/>
+		<typeAlias alias="Atributos"              				 		 type="com.prosperitasglobal.sendsolv.model.Atributos"/>
+		<typeAlias alias="Banco"              				 		     type="com.prosperitasglobal.sendsolv.model.Banco"/>
+		<typeAlias alias="Beneficios"              				 		 type="com.prosperitasglobal.sendsolv.model.Beneficios"/>
+		<typeAlias alias="Cfop"              				 		     type="com.prosperitasglobal.sendsolv.model.Cfop"/>
+		<typeAlias alias="Cnae"              				 		     type="com.prosperitasglobal.sendsolv.model.Cnae"/>
+		<typeAlias alias="ContaReceber"              				 	 type="com.prosperitasglobal.sendsolv.model.ContaReceber"/>
+		<typeAlias alias="ContaPagar"              				 	     type="com.prosperitasglobal.sendsolv.model.ContaPagar"/>
+		<typeAlias alias="Convenio"              				 	     type="com.prosperitasglobal.sendsolv.model.Convenio"/>
+		<typeAlias alias="Documento"              				 	     type="com.prosperitasglobal.sendsolv.model.Documento"/>
+		<typeAlias alias="Email"              				 		     type="com.prosperitasglobal.sendsolv.model.Email"/>
+		<typeAlias alias="Empresa"              				 		 type="com.prosperitasglobal.sendsolv.model.Empresa"/>
+		<typeAlias alias="Endereco"              				 		 type="com.prosperitasglobal.sendsolv.model.Endereco"/>
+		<typeAlias alias="Eventos"              				 		 type="com.prosperitasglobal.sendsolv.model.Eventos"/>
+		<typeAlias alias="Field"              				 		 	 type="com.prosperitasglobal.sendsolv.model.Field"/>
+		<typeAlias alias="FieldBusca"              				 		 type="com.prosperitasglobal.sendsolv.model.FieldBusca"/>
+		<typeAlias alias="Financeiro"              				 	     type="com.prosperitasglobal.sendsolv.model.Financeiro"/>
+		<typeAlias alias="Funcionario"              				 	 type="com.prosperitasglobal.sendsolv.model.Funcionario"/>
+		<typeAlias alias="Grupo"              				 	         type="com.prosperitasglobal.sendsolv.model.Grupo"/>
+		<typeAlias alias="Historico"              				 	     type="com.prosperitasglobal.sendsolv.model.Historico"/>
+		<typeAlias alias="HorarioFunc"              				     type="com.prosperitasglobal.sendsolv.model.HorarioFunc"/>
+		<typeAlias alias="NotaFiscal"              				 	     type="com.prosperitasglobal.sendsolv.model.NotaFiscal"/>
+		<typeAlias alias="Orcamento"              				 	     type="com.prosperitasglobal.sendsolv.model.Orcamento"/>
+		<typeAlias alias="OrcamentoItens"              				 	 type="com.prosperitasglobal.sendsolv.model.OrcamentoItens"/>
+		<typeAlias alias="Pessoa"              				 	         type="com.prosperitasglobal.sendsolv.model.Pessoa"/>
+		<typeAlias alias="Produto"              				 	     type="com.prosperitasglobal.sendsolv.model.Produto"/>
+		<typeAlias alias="Salario"              				 	     type="com.prosperitasglobal.sendsolv.model.Salario"/>
+		<typeAlias alias="Socio"              				 		     type="com.prosperitasglobal.sendsolv.model.Socio"/>
+		<typeAlias alias="SubGrupo"              				 	     type="com.prosperitasglobal.sendsolv.model.SubGrupo"/>
+		<typeAlias alias="Tabela"              				 		 	 type="com.prosperitasglobal.sendsolv.model.Tabela"/>
+		<typeAlias alias="Tabs"              				 		 	 type="com.prosperitasglobal.sendsolv.model.Tabs"/>
+		<typeAlias alias="Tela"              				 		     type="com.prosperitasglobal.sendsolv.model.Tela"/>
+		<typeAlias alias="Telefone"              				 		 type="com.prosperitasglobal.sendsolv.model.Telefone"/>
+		<typeAlias alias="UniMed"              				 		     type="com.prosperitasglobal.sendsolv.model.UniMed"/>
+
 
 
 

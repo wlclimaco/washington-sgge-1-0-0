@@ -2,16 +2,7 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.List;
 
-import org.mybatis.spring.support.SqlSessionDaoSupport;
-import org.slf4j.LoggerFactory;
-
-import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
 import com.prosperitasglobal.sendsolv.dac.IEnderecoDAC;
-import com.prosperitasglobal.sendsolv.model.Endereco;
-import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.util.QATMyBatisDacHelper;
-import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class CommonBusinessObjectsDACImpl.
@@ -88,7 +79,7 @@ public class EnderecoDACImpl extends SqlSessionDaoSupport implements IEnderecoDA
 		// Associate with parent using statement name passed as parameter
 		insertCount +=
 				QATMyBatisDacHelper
-				.doInsert(getSqlSession(), statementName, endereco, response);
+						.doInsert(getSqlSession(), statementName, endereco, response);
 
 		return insertCount;
 	}
@@ -151,33 +142,6 @@ public class EnderecoDACImpl extends SqlSessionDaoSupport implements IEnderecoDA
 	public InternalResultsResponse<Endereco> fetchEnderecoByParent(Integer parentId, BusinessTypeEnum parentType)
 	{
 		InternalResultsResponse<Endereco> response = new InternalResultsResponse<Endereco>();
-
-		switch (parentType)
-		{
-			case ORGANIZATION:
-				QATMyBatisDacHelper.doQueryForList(getSqlSession(), CONTACT_STMT_FETCH_BY_BUSINESS_ID, parentId,
-						response);
-				break;
-
-			case LOCATION:
-				QATMyBatisDacHelper.doQueryForList(getSqlSession(), CONTACT_STMT_FETCH_BY_BUSINESS_ID, parentId,
-						response);
-				break;
-
-			case MEMBER:
-				QATMyBatisDacHelper.doQueryForList(getSqlSession(), CONTACT_STMT_FETCH_BY_PERSON_ID, parentId,
-						response);
-				break;
-			case UNKNOWN:
-				break;
-			default:
-				if (LOG.isDebugEnabled())
-				{
-					LOG.debug("parentType for Endereco missing!");
-				}
-				break;
-
-		}
 
 		return response;
 	}
