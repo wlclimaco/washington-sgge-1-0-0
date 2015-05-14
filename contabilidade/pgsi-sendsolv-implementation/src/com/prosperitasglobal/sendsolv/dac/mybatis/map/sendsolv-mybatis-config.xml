@@ -213,12 +213,37 @@
 		<mapper resource="com/prosperitasglobal/sendsolv/sdn/dac/mybatis/map/sdnchecker.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/integration/twilio/dac/mybatis/map/callrecord.xml" />
 
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/empresa.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/funcionario.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/ordemServico.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/produto.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/tabela.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/tela.xml" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/arquivo" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/banco" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/beneficio" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/empresa" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/financeiro" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/funcionario" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/historico" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/notafiscal" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/orcamento" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/ordemServico" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/pessoa" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/produto" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/tabela" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/tela" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/atributos" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/cfop" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/cnae" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/contasPagar" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/contasReceber" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/convenio" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/documento" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/email" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/evento" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/field" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/grupoSubGrupo" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/orcamentoItens" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/salario" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/socio" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/tabs" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/telefone" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/uniMed" />
  	</mappers>
 
 </configuration>
