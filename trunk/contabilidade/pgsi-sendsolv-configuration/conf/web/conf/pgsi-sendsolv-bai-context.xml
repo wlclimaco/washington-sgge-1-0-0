@@ -134,35 +134,78 @@
 		<property name="callingCardValidationController" ref="callingCardValidationController"/>
 	</bean>
 
-	<bean id="empresaBAI" class="com.prosperitasglobal.sendsolv.bai.impl.EmpresaBAIImpl">
-		<property name="empresaBAC" ref="empresaBACTarget"/>
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+	<bean id="arquivoBAI" class="com.prosperitasglobal.sendsolv.bai.impl.ArquivoBAIImpl">
+ 		<property name="arquivoBAC" ref="arquivoBACTarget"/>
  		<property name="validationController" ref="empresaValidationController"/>
  	</bean>
 
-	<bean id="funcionarioBAI" class="com.prosperitasglobal.sendsolv.bai.impl.FuncionarioBAIImpl">
+ 	<bean id="bancoBAI" class="com.prosperitasglobal.sendsolv.bai.impl.BancoBAIImpl">
+ 		<property name="bancoBAC" ref="bancoBACTarget"/>
+ 		<property name="validationController" ref="empresaValidationController"/>
+ 	</bean>
+
+ 	<bean id="beneficiosBAI" class="com.prosperitasglobal.sendsolv.bai.impl.BeneficiosBAIImpl">
+ 		<property name="beneficiosBAC" ref="beneficiosBACTarget"/>
+ 		<property name="validationController" ref="empresaValidationController"/>
+ 	</bean>
+
+ 	<bean id="empresaBAI" class="com.prosperitasglobal.sendsolv.bai.impl.EmpresaBAIImpl">
+ 		<property name="empresaBAC" ref="empresaBACTarget"/>
+		<property name="validationController" ref="empresaValidationController"/>
+ 	</bean>
+
+ 	<bean id="financeiroBAI" class="com.prosperitasglobal.sendsolv.bai.impl.FinanceiroBAIImpl">
+ 		<property name="financeiroBAC" ref="financeiroBACTarget"/>
+ 		<property name="validationController" ref="empresaValidationController"/>
+ 	</bean>
+
+ 	<bean id="funcionarioBAI" class="com.prosperitasglobal.sendsolv.bai.impl.FuncionarioBAIImpl">
  		<property name="funcionarioBAC" ref="funcionarioBACTarget"/>
- 		<property name="validationController" ref="funcionarioValidationController"/>
+ 		<property name="validationController" ref="empresaValidationController"/>
+ 	</bean>
+
+ 	<bean id="historicoBAI" class="com.prosperitasglobal.sendsolv.bai.impl.HistoricoBAIImpl">
+ 		<property name="historicoBAC" ref="historicoBACTarget"/>
+ 		<property name="validationController" ref="empresaValidationController"/>
+ 	</bean>
+
+ 	<bean id="notaFiscalBAI" class="com.prosperitasglobal.sendsolv.bai.impl.NotaFiscalBAIImpl">
+ 		<property name="notaFiscalBAC" ref="notaFiscalBACTarget"/>
+ 		<property name="validationController" ref="empresaValidationController"/>
+ 	</bean>
+
+ 	<bean id="orcamentoBAI" class="com.prosperitasglobal.sendsolv.bai.impl.OrcamentoBAIImpl">
+ 		<property name="orcamentoBAC" ref="orcamentoBACTarget"/>
+ 		<property name="validationController" ref="empresaValidationController"/>
+ 	</bean>
+
+ 	<bean id="ordemServicoBAI" class="com.prosperitasglobal.sendsolv.bai.impl.OrdemServico">
+ 		<property name="ordemServicoBAC" ref="ordemServicoBACTarget"/>
+ 		<property name="validationController" ref="empresaValidationController"/>
+ 	</bean>
+ 	<bean id="pessoaBAI" class="com.prosperitasglobal.sendsolv.bai.impl.PessoaBAIImpl">
+ 		<property name="pessoaBAC" ref="pessoaBACTarget"/>
+ 		<property name="validationController" ref="empresaValidationController"/>
+ 	</bean>
+
+ 	<bean id="produtoBAI" class="com.prosperitasglobal.sendsolv.bai.impl.ProdutoBAIImpl">
+ 		<property name="produtoBAC" ref="produtoBACTarget"/>
+ 		<property name="validationController" ref="empresaValidationController"/>
  	</bean>
 
  	<bean id="tabelaBAI" class="com.prosperitasglobal.sendsolv.bai.impl.TabelaBAIImpl">
  		<property name="tabelaBAC" ref="tabelaBACTarget"/>
- 		<property name="validationController" ref="tabelaValidationController"/>
+ 		<property name="validationController" ref="empresaValidationController"/>
  	</bean>
 
  	<bean id="telaBAI" class="com.prosperitasglobal.sendsolv.bai.impl.TelaBAIImpl">
  		<property name="telaBAC" ref="telaBACTarget"/>
- 		<property name="validationController" ref="telaValidationController"/>
+ 		<property name="validationController" ref="empresaValidationController"/>
  	</bean>
 
- 	<bean id="ordemServicoBAI" class="com.prosperitasglobal.sendsolv.bai.impl.OrdemServicoBAIImpl">
- 		<property name="ordemServicoBAC" ref="ordemServicoBACTarget"/>
- 		<property name="validationController" ref="ordemServicoValidationController"/>
- 	</bean>
-
- 	<bean id="produtoBAI" class="com.prosperitasglobal.sendsolv.bai.impl.produtoBAIImpl">
- 		<property name="produtoBAC" ref="produtoBACTarget"/>
- 		<property name="validationController" ref="produtoValidationController"/>
- 	</bean>
+<!-- ============================================================================== -->
 
 
 </beans>

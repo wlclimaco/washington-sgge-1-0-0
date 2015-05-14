@@ -2,11 +2,8 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.Map;
 
-import org.mybatis.spring.support.SqlSessionDaoSupport;
-import org.slf4j.LoggerFactory;
-
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.ICnaeDAC;
+import com.prosperitasglobal.sendsolv.dac.IDocumentoDAC;
 import com.prosperitasglobal.sendsolv.dac.IEmailDAC;
 import com.prosperitasglobal.sendsolv.dac.IEmpresaDAC;
 import com.prosperitasglobal.sendsolv.dac.IEnderecoDAC;
@@ -14,18 +11,6 @@ import com.prosperitasglobal.sendsolv.dac.IEventoDAC;
 import com.prosperitasglobal.sendsolv.dac.ISociosDAC;
 import com.prosperitasglobal.sendsolv.dac.ITelefoneDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
-import com.prosperitasglobal.sendsolv.model.Cnae;
-import com.prosperitasglobal.sendsolv.model.Documento;
-import com.prosperitasglobal.sendsolv.model.Email;
-import com.prosperitasglobal.sendsolv.model.Empresa;
-import com.prosperitasglobal.sendsolv.model.Endereco;
-import com.prosperitasglobal.sendsolv.model.Telefone;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
-import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResponse;
-import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.util.QATMyBatisDacHelper;
-import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class EmpresaDACImpl.
@@ -98,6 +83,18 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 	private ISociosDAC socioDAC;
 
 	private IEventoDAC eventosDAC;
+
+	private IDocumentoDAC documentoDAC;
+
+	public IDocumentoDAC getDocumentoDAC()
+	{
+		return documentoDAC;
+	}
+
+	public void setDocumentoDAC(IDocumentoDAC documentoDAC)
+	{
+		this.documentoDAC = documentoDAC;
+	}
 
 	/**
 	 * @return the enderecoDAC
@@ -244,6 +241,10 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 
 		insertCount += maintainEmpresaAssociationsTelefone(empresa, response);
 
+		insertCount += maintainEmpresaAssociationsDocs(empresa, response);
+
+		insertCount += maintainEmpresaAssociationsSocios(empresa, response);
+
 		// Finally, if something was inserted then add the Empresa to the result.
 		if (insertCount > 0)
 		{
@@ -279,13 +280,17 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 			return response;
 		}
 		// Next traverse the object graph and "maintain" the associations
-		updateCount += maintainEmpresaAssociations(empresa, response);
+		insertCount += maintainEmpresaAssociations(empresa, response);
 
-		updateCount += maintainEmpresaAssociationsCnae(empresa, response);
+		insertCount += maintainEmpresaAssociationsCnae(empresa, response);
 
-		updateCount += maintainEmpresaAssociationsEmail(empresa, response);
+		insertCount += maintainEmpresaAssociationsEmail(empresa, response);
 
-		updateCount += maintainEmpresaAssociationsTelefone(empresa, response);
+		insertCount += maintainEmpresaAssociationsTelefone(empresa, response);
+
+		insertCount += maintainEmpresaAssociationsDocs(empresa, response);
+
+		insertCount += maintainEmpresaAssociationsSocios(empresa, response);
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
@@ -381,7 +386,7 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 					count = getEnderecoDAC().updateEndereco(endereco, response);
 					break;
 				case DELETE:
-					count = 1; // getEnderecoDAC().deleteEndereco(endereco, response);
+					count = getEnderecoDAC().deleteEndereco(endereco, response);
 					break;
 				default:
 					if (LOG.isDebugEnabled())
@@ -413,25 +418,25 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 			{
 				continue;
 			}
-			// switch (cnae.getModelAction())
-			// {
-			// case INSERT:
-			// count = getCnaeDAC().insertCnae(cnae,
-			// EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-			// break;
-			// case UPDATE:
-			// count = getCnaeDAC().updateCnae(cnae, response);
-			// break;
-			// case DELETE:
-			// count = getCnaeDAC().deleteCnae(cnae, response);
-			// break;
-			// default:
-			// if (LOG.isDebugEnabled())
-			// {
-			// LOG.debug("ModelAction for Empresa missing!");
-			// }
-			// break;
-			// }
+			switch (cnae.getModelAction())
+			{
+				case INSERT:
+					count = getCnaeDAC().insertCnae(cnae,
+							EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
+					break;
+				case UPDATE:
+					count = getCnaeDAC().updateCnae(cnae, response);
+					break;
+				case DELETE:
+					count = getCnaeDAC().deleteCnae(cnae, response);
+					break;
+				default:
+					if (LOG.isDebugEnabled())
+					{
+						LOG.debug("ModelAction for Empresa missing!");
+					}
+					break;
+			}
 		}
 		return count;
 	}
@@ -449,31 +454,31 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		for (Telefone telefone : empresa.getTelefones())
 		{
 			// Make sure we set the parent key
-			// contact.setParentKey(empresa.getId());
-			//
-			// if (ValidationUtil.isNull(empresa.getModelAction()))
-			// {
-			// continue;
-			// }
-			// switch (empresa.getModelAction())
-			// {
-			// case INSERT:
-			// count = getTelefoneDAC().insertTelefone(telefone,
-			// EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-			// break;
-			// case UPDATE:
-			// count = getTelefoneDAC().updateTelefone(telefone, response);
-			// break;
-			// case DELETE:
-			// count = getTelefoneDAC().deleteTelefone(telefone, response);
-			// break;
-			// default:
-			// if (LOG.isDebugEnabled())
-			// {
-			// LOG.debug("ModelAction for Empresa missing!");
-			// }
-			// break;
-			// }
+			contact.setParentKey(empresa.getId());
+
+			if (ValidationUtil.isNull(empresa.getModelAction()))
+			{
+				continue;
+			}
+			switch (empresa.getModelAction())
+			{
+				case INSERT:
+					count = getTelefoneDAC().insertTelefone(telefone,
+							EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
+					break;
+				case UPDATE:
+					count = getTelefoneDAC().updateTelefone(telefone, response);
+					break;
+				case DELETE:
+					count = getTelefoneDAC().deleteTelefone(telefone, response);
+					break;
+				default:
+					if (LOG.isDebugEnabled())
+					{
+						LOG.debug("ModelAction for Empresa missing!");
+					}
+					break;
+			}
 		}
 		return count;
 	}
@@ -497,25 +502,25 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 			{
 				continue;
 			}
-			// switch (email.getModelAction())
-			// {
-			// case INSERT:
-			// count = getEmailDAC().insertEmail(email,
-			// EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-			// break;
-			// case UPDATE:
-			// count = getEmailDAC().updateEmail(email, response);
-			// break;
-			// case DELETE:
-			// count = getEmailDAC().deleteEmail(email, response);
-			// break;
-			// default:
-			// if (LOG.isDebugEnabled())
-			// {
-			// LOG.debug("ModelAction for Empresa missing!");
-			// }
-			// break;
-			// }
+			switch (email.getModelAction())
+			{
+				case INSERT:
+					count = getEmailDAC().insertEmail(email,
+							EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
+					break;
+				case UPDATE:
+					count = getEmailDAC().updateEmail(email, response);
+					break;
+				case DELETE:
+					count = getEmailDAC().deleteEmail(email, response);
+					break;
+				default:
+					if (LOG.isDebugEnabled())
+					{
+						LOG.debug("ModelAction for Empresa missing!");
+					}
+					break;
+			}
 		}
 		return count;
 	}
@@ -539,25 +544,67 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 			{
 				continue;
 			}
-			// switch (documentos.getDocumentos())
-			// {
-			// case INSERT:
-			// count = getDocumentoDAC().insertDocumento(documentos,
-			// EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-			// break;
-			// case UPDATE:
-			// count = getDocumentoDAC().updateDocumento(documentos, response);
-			// break;
-			// case DELETE:
-			// count = getDocumentoDAC().deleteDocumento(documentos, response);
-			// break;
-			// default:
-			// if (LOG.isDebugEnabled())
-			// {
-			// LOG.debug("ModelAction for Empresa missing!");
-			// }
-			// break;
-			// }
+			switch (documentos.getDocumentos())
+			{
+				case INSERT:
+					count = getDocumentoDAC().insertDocumento(documentos,
+							EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
+					break;
+				case UPDATE:
+					count = getDocumentoDAC().updateDocumento(documentos, response);
+					break;
+				case DELETE:
+					count = getDocumentoDAC().deleteDocumento(documentos, response);
+					break;
+				default:
+					if (LOG.isDebugEnabled())
+					{
+						LOG.debug("ModelAction for Empresa missing!");
+					}
+					break;
+			}
+		}
+		return count;
+	}
+
+	private Integer maintainEmpresaAssociationsSocios(Empresa empresa,
+			InternalResultsResponse<Empresa> response)
+	{
+		Integer count = 0;
+		// First Maintain Empresa
+		if (ValidationUtil.isNullOrEmpty(empresa.getDocumentos()))
+		{
+			return count;
+		}
+		// For Each Contact...
+		for (Socio socios : empresa.getSocios())
+		{
+			// Make sure we set the parent key
+			documentos.setParentKey(empresa.getId());
+
+			if (ValidationUtil.isNull(documentos.getModelAction()))
+			{
+				continue;
+			}
+			switch (documentos.getDocumentos())
+			{
+				case INSERT:
+					count = getDocumentoDAC().insertDocumento(documentos,
+							EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
+					break;
+				case UPDATE:
+					count = getDocumentoDAC().updateDocumento(documentos, response);
+					break;
+				case DELETE:
+					count = getDocumentoDAC().deleteDocumento(documentos, response);
+					break;
+				default:
+					if (LOG.isDebugEnabled())
+					{
+						LOG.debug("ModelAction for Empresa missing!");
+					}
+					break;
+			}
 		}
 		return count;
 	}
