@@ -2,6 +2,10 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.Map;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.ICnaeDAC;
 import com.prosperitasglobal.sendsolv.dac.IEmailDAC;
 import com.prosperitasglobal.sendsolv.dac.IEnderecoDAC;
@@ -10,6 +14,13 @@ import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.ISociosDAC;
 import com.prosperitasglobal.sendsolv.dac.ITelefoneDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
+import com.prosperitasglobal.sendsolv.model.Historico;
+import com.prosperitasglobal.sendsolv.model.request.HistoricoInquiryRequest;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class HistoricoDACImpl.
@@ -222,12 +233,6 @@ public class HistoricoDACImpl extends SqlSessionDaoSupport implements IHistorico
 		// Next traverse the object graph and "maintain" the associations
 		insertCount += maintainHistoricoAssociations(historico, response);
 
-		insertCount += maintainHistoricoAssociationsCnae(historico, response);
-
-		insertCount += maintainHistoricoAssociationsEmail(historico, response);
-
-		insertCount += maintainHistoricoAssociationsTelefone(historico, response);
-
 		// Finally, if something was inserted then add the Historico to the result.
 		if (insertCount > 0)
 		{
@@ -264,12 +269,6 @@ public class HistoricoDACImpl extends SqlSessionDaoSupport implements IHistorico
 		}
 		// Next traverse the object graph and "maintain" the associations
 		updateCount += maintainHistoricoAssociations(historico, response);
-
-		updateCount += maintainHistoricoAssociationsCnae(historico, response);
-
-		updateCount += maintainHistoricoAssociationsEmail(historico, response);
-
-		updateCount += maintainHistoricoAssociationsTelefone(historico, response);
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
@@ -314,7 +313,7 @@ public class HistoricoDACImpl extends SqlSessionDaoSupport implements IHistorico
 	 * .model.request.PagedInquiryRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Historico> fetchHistoricoByRequest(PagedInquiryRequest request)
+	public InternalResultsResponse<Historico> fetchHistoricoByRequest(HistoricoInquiryRequest request)
 	{
 		InternalResultsResponse<Historico> response = new InternalResultsResponse<Historico>();
 
@@ -340,209 +339,7 @@ public class HistoricoDACImpl extends SqlSessionDaoSupport implements IHistorico
 			InternalResultsResponse<Historico> response)
 	{
 		Integer count = 0;
-		// First Maintain Historico
-		if (ValidationUtil.isNullOrEmpty(historico.getEnderecos()))
-		{
-			return count;
-		}
-		// For Each Contact...
-		for (Endereco endereco : historico.getEnderecos())
-		{
-			// Make sure we set the parent key
-			endereco.setParentKey(historico.getId());
 
-			if (ValidationUtil.isNull(endereco.getModelAction()))
-			{
-				continue;
-			}
-			switch (endereco.getModelAction())
-			{
-				case INSERT:
-					count = getEnderecoDAC().insertEndereco(endereco,
-							EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-					break;
-				case UPDATE:
-					count = getEnderecoDAC().updateEndereco(endereco, response);
-					break;
-				case DELETE:
-					count = 1; // getEnderecoDAC().deleteEndereco(endereco, response);
-					break;
-				default:
-					if (LOG.isDebugEnabled())
-					{
-						LOG.debug("ModelAction for Historico missing!");
-					}
-					break;
-			}
-		}
-		return count;
-	}
-
-	private Integer maintainHistoricoAssociationsCnae(Historico historico,
-			InternalResultsResponse<Historico> response)
-	{
-		Integer count = 0;
-		// First Maintain Historico
-		if (ValidationUtil.isNullOrEmpty(historico.getCnaes()))
-		{
-			return count;
-		}
-		// For Each Contact...
-		for (Cnae cnae : historico.getCnaes())
-		{
-			// Make sure we set the parent key
-			cnae.setParentKey(historico.getId());
-
-			if (ValidationUtil.isNull(cnae.getModelAction()))
-			{
-				continue;
-			}
-			// switch (cnae.getModelAction())
-			// {
-			// case INSERT:
-			// count = getCnaeDAC().insertCnae(cnae,
-			// EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-			// break;
-			// case UPDATE:
-			// count = getCnaeDAC().updateCnae(cnae, response);
-			// break;
-			// case DELETE:
-			// count = getCnaeDAC().deleteCnae(cnae, response);
-			// break;
-			// default:
-			// if (LOG.isDebugEnabled())
-			// {
-			// LOG.debug("ModelAction for Historico missing!");
-			// }
-			// break;
-			// }
-		}
-		return count;
-	}
-
-	private Integer maintainHistoricoAssociationsTelefone(Historico historico,
-			InternalResultsResponse<Historico> response)
-	{
-		Integer count = 0;
-		// First Maintain Historico
-		if (ValidationUtil.isNullOrEmpty(historico.getCnaes()))
-		{
-			return count;
-		}
-		// For Each Contact...
-		for (Telefone telefone : historico.getTelefones())
-		{
-			// Make sure we set the parent key
-			// contact.setParentKey(historico.getId());
-			//
-			// if (ValidationUtil.isNull(historico.getModelAction()))
-			// {
-			// continue;
-			// }
-			// switch (historico.getModelAction())
-			// {
-			// case INSERT:
-			// count = getTelefoneDAC().insertTelefone(telefone,
-			// EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-			// break;
-			// case UPDATE:
-			// count = getTelefoneDAC().updateTelefone(telefone, response);
-			// break;
-			// case DELETE:
-			// count = getTelefoneDAC().deleteTelefone(telefone, response);
-			// break;
-			// default:
-			// if (LOG.isDebugEnabled())
-			// {
-			// LOG.debug("ModelAction for Historico missing!");
-			// }
-			// break;
-			// }
-		}
-		return count;
-	}
-
-	private Integer maintainHistoricoAssociationsEmail(Historico historico,
-			InternalResultsResponse<Historico> response)
-	{
-		Integer count = 0;
-		// First Maintain Historico
-		if (ValidationUtil.isNullOrEmpty(historico.getEmails()))
-		{
-			return count;
-		}
-		// For Each Contact...
-		for (Email email : historico.getEmails())
-		{
-			// Make sure we set the parent key
-			email.setParentKey(historico.getId());
-
-			if (ValidationUtil.isNull(historico.getModelAction()))
-			{
-				continue;
-			}
-			// switch (email.getModelAction())
-			// {
-			// case INSERT:
-			// count = getEmailDAC().insertEmail(email,
-			// EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-			// break;
-			// case UPDATE:
-			// count = getEmailDAC().updateEmail(email, response);
-			// break;
-			// case DELETE:
-			// count = getEmailDAC().deleteEmail(email, response);
-			// break;
-			// default:
-			// if (LOG.isDebugEnabled())
-			// {
-			// LOG.debug("ModelAction for Historico missing!");
-			// }
-			// break;
-			// }
-		}
-		return count;
-	}
-
-	private Integer maintainHistoricoAssociationsDocs(Historico historico,
-			InternalResultsResponse<Historico> response)
-	{
-		Integer count = 0;
-		// First Maintain Historico
-		if (ValidationUtil.isNullOrEmpty(historico.getDocumentos()))
-		{
-			return count;
-		}
-		// For Each Contact...
-		for (Documento documentos : historico.getDocumentos())
-		{
-			// Make sure we set the parent key
-			documentos.setParentKey(historico.getId());
-
-			if (ValidationUtil.isNull(documentos.getModelAction()))
-			{
-				continue;
-			}
-			// switch (documentos.getDocumentos())
-			// {
-			// case INSERT:
-			// count = getDocumentoDAC().insertDocumento(documentos,
-			// EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-			// break;
-			// case UPDATE:
-			// count = getDocumentoDAC().updateDocumento(documentos, response);
-			// break;
-			// case DELETE:
-			// count = getDocumentoDAC().deleteDocumento(documentos, response);
-			// break;
-			// default:
-			// if (LOG.isDebugEnabled())
-			// {
-			// LOG.debug("ModelAction for Historico missing!");
-			// }
-			// break;
-			// }
-		}
 		return count;
 	}
 

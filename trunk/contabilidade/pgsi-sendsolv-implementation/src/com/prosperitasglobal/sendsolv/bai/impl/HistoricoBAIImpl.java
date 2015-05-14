@@ -1,9 +1,29 @@
 package com.prosperitasglobal.sendsolv.bai.impl;
 
 import java.util.List;
-import java.util.logging.Logger;
 
-import javax.xml.ws.Response;
+import org.slf4j.LoggerFactory;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.bac.IHistoricoBAC;
+import com.prosperitasglobal.sendsolv.bai.IHistoricoBAI;
+import com.prosperitasglobal.sendsolv.model.Historico;
+import com.prosperitasglobal.sendsolv.model.request.HistoricoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.HistoricoMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.HistoricoResponse;
+import com.qat.framework.model.Message.MessageLevel;
+import com.qat.framework.model.Message.MessageSeverity;
+import com.qat.framework.model.MessageInfo;
+import com.qat.framework.model.QATModel.PersistanceActionEnum;
+import com.qat.framework.model.UserContext;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResponse.Status;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATInterfaceUtil;
+import com.qat.framework.validation.ValidationContext;
+import com.qat.framework.validation.ValidationContextIndicator;
+import com.qat.framework.validation.ValidationController;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class HistoricoBAIImpl.
@@ -14,7 +34,7 @@ public class HistoricoBAIImpl implements IHistoricoBAI
 	private static final String CLASS_NAME = HistoricoBAIImpl.class.getName();
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(HistoricoBAIImpl.class);
+	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(HistoricoBAIImpl.class);
 
 	/** The Constant DEFAULT_EXCEPTION_MSG. */
 	private static final String DEFAULT_EXCEPTION_MSG = "sendsolv.base.defaultexception";
@@ -259,7 +279,7 @@ public class HistoricoBAIImpl implements IHistoricoBAI
 		}
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return (HistoricoResponse)handleReturn(response, internalResponse, context.getMessages(), true);
+		return handleReturn(response, internalResponse, context.getMessages(), true);
 	}
 
 	/**
@@ -271,7 +291,7 @@ public class HistoricoBAIImpl implements IHistoricoBAI
 	 * @param copyOver the copy over
 	 * @return the response
 	 */
-	private Response handleReturn(Response response, InternalResponse internalResponse,
+	private HistoricoResponse handleReturn(HistoricoResponse response, InternalResponse internalResponse,
 			List<MessageInfo> messages, boolean copyOver)
 	{
 		// In the case there was an Optimistic Locking error, add the specific message
@@ -282,7 +302,8 @@ public class HistoricoBAIImpl implements IHistoricoBAI
 					MessageLevel.Object));
 		}
 
-		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, messages, copyOver);
+		QATInterfaceUtil.handleOperationStatusAndMessages(response,
+				internalResponse, messages, copyOver);
 		return response;
 	}
 

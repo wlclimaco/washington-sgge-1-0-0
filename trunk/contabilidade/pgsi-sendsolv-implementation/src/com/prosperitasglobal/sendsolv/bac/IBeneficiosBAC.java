@@ -1,5 +1,12 @@
 package com.prosperitasglobal.sendsolv.bac;
 
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.Beneficios;
+import com.prosperitasglobal.sendsolv.model.request.BeneficiosMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
+
 /**
  * The Interface IBeneficiosBAC.
  */

@@ -1,6 +1,7 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
 import com.prosperitasglobal.sendsolv.model.Beneficios;
+import com.qat.framework.model.request.MaintenanceRequest;
 
 public class BeneficiosMaintenanceRequest extends MaintenanceRequest
 {

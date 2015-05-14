@@ -1,13 +1,13 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
-import com.prosperitasglobal.sendsolv.model.Produto;
+import com.prosperitasglobal.sendsolv.model.Historico;
 import com.qat.framework.model.request.MaintenanceRequest;
 
 public class HistoricoMaintenanceRequest extends MaintenanceRequest
 {
 
 	/** Attributes. */
-	private Produto produto;
+	private Historico historico;
 
 	/**
 	 * The Constructor.
@@ -18,23 +18,23 @@ public class HistoricoMaintenanceRequest extends MaintenanceRequest
 	}
 
 	/**
-	 * Gets the produto.
+	 * Gets the historico.
 	 *
-	 * @return the produto
+	 * @return the historico
 	 */
-	public Produto getProduto()
+	public Historico getHistorico()
 	{
-		return produto;
+		return historico;
 	}
 
 	/**
-	 * Sets the produto.
+	 * Sets the historico.
 	 *
-	 * @param produto the produto
+	 * @param historico the historico
 	 */
-	public void setProduto(Produto produto)
+	public void setHistorico(Historico historico)
 	{
-		this.produto = produto;
+		this.historico = historico;
 	}
 
 	/*
@@ -44,7 +44,7 @@ public class HistoricoMaintenanceRequest extends MaintenanceRequest
 	@Override
 	public String toString()
 	{
-		return "ProdutoMaintenanceRequest [getProduto()=" + getProduto() + ", getUserContext()="
+		return "HistoricoMaintenanceRequest [getHistorico()=" + getHistorico() + ", getUserContext()="
 				+ getUserContext() + "]";
 	}
 }

@@ -2,6 +2,10 @@ package com.prosperitasglobal.sendsolv.dac;
 
 import java.util.List;
 
+import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
+import com.prosperitasglobal.sendsolv.model.ContasPagar;
+import com.qat.framework.model.response.InternalResultsResponse;
+
 public interface IContasPagarDAC
 {
 	/**

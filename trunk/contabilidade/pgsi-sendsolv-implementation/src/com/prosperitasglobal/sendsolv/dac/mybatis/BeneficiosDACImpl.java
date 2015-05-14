@@ -2,6 +2,10 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.Map;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.IBeneficiosDAC;
 import com.prosperitasglobal.sendsolv.dac.ICnaeDAC;
 import com.prosperitasglobal.sendsolv.dac.IEmailDAC;
@@ -10,6 +14,13 @@ import com.prosperitasglobal.sendsolv.dac.IEventoDAC;
 import com.prosperitasglobal.sendsolv.dac.ISociosDAC;
 import com.prosperitasglobal.sendsolv.dac.ITelefoneDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
+import com.prosperitasglobal.sendsolv.model.Beneficios;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class BeneficiosDACImpl.
@@ -222,12 +233,6 @@ public class BeneficiosDACImpl extends SqlSessionDaoSupport implements IBenefici
 		// Next traverse the object graph and "maintain" the associations
 		insertCount += maintainBeneficiosAssociations(beneficios, response);
 
-		insertCount += maintainBeneficiosAssociationsCnae(beneficios, response);
-
-		insertCount += maintainBeneficiosAssociationsEmail(beneficios, response);
-
-		insertCount += maintainBeneficiosAssociationsTelefone(beneficios, response);
-
 		// Finally, if something was inserted then add the Beneficios to the result.
 		if (insertCount > 0)
 		{
@@ -264,12 +269,6 @@ public class BeneficiosDACImpl extends SqlSessionDaoSupport implements IBenefici
 		}
 		// Next traverse the object graph and "maintain" the associations
 		updateCount += maintainBeneficiosAssociations(beneficios, response);
-
-		updateCount += maintainBeneficiosAssociationsCnae(beneficios, response);
-
-		updateCount += maintainBeneficiosAssociationsEmail(beneficios, response);
-
-		updateCount += maintainBeneficiosAssociationsTelefone(beneficios, response);
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
@@ -340,167 +339,7 @@ public class BeneficiosDACImpl extends SqlSessionDaoSupport implements IBenefici
 			InternalResultsResponse<Beneficios> response)
 	{
 		Integer count = 0;
-		// First Maintain Beneficios
-		if (ValidationUtil.isNullOrEmpty(beneficios.getEnderecos()))
-		{
-			return count;
-		}
-		// For Each Contact...
-		for (Endereco endereco : beneficios.getEnderecos())
-		{
-			// Make sure we set the parent key
-			endereco.setParentKey(beneficios.getId());
 
-			if (ValidationUtil.isNull(endereco.getModelAction()))
-			{
-				continue;
-			}
-			switch (endereco.getModelAction())
-			{
-				case INSERT:
-					count = getEnderecoDAC().insertEndereco(endereco,
-							EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-					break;
-				case UPDATE:
-					count = getEnderecoDAC().updateEndereco(endereco, response);
-					break;
-				case DELETE:
-					count = 1; // getEnderecoDAC().deleteEndereco(endereco, response);
-					break;
-				default:
-					if (LOG.isDebugEnabled())
-					{
-						LOG.debug("ModelAction for Beneficios missing!");
-					}
-					break;
-			}
-		}
-		return count;
-	}
-
-	private Integer maintainBeneficiosAssociationsCnae(Beneficios beneficios,
-			InternalResultsResponse<Beneficios> response)
-	{
-		Integer count = 0;
-		// First Maintain Beneficios
-		if (ValidationUtil.isNullOrEmpty(beneficios.getCnaes()))
-		{
-			return count;
-		}
-		// For Each Contact...
-		for (Cnae cnae : beneficios.getCnaes())
-		{
-			// Make sure we set the parent key
-			cnae.setParentKey(beneficios.getId());
-
-			if (ValidationUtil.isNull(cnae.getModelAction()))
-			{
-				continue;
-			}
-			// switch (cnae.getModelAction())
-			// {
-			// case INSERT:
-			// count = getCnaeDAC().insertCnae(cnae,
-			// EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-			// break;
-			// case UPDATE:
-			// count = getCnaeDAC().updateCnae(cnae, response);
-			// break;
-			// case DELETE:
-			// count = getCnaeDAC().deleteCnae(cnae, response);
-			// break;
-			// default:
-			// if (LOG.isDebugEnabled())
-			// {
-			// LOG.debug("ModelAction for Beneficios missing!");
-			// }
-			// break;
-			// }
-		}
-		return count;
-	}
-
-	private Integer maintainBeneficiosAssociationsTelefone(Beneficios beneficios,
-			InternalResultsResponse<Beneficios> response)
-	{
-		Integer count = 0;
-		// First Maintain Beneficios
-		if (ValidationUtil.isNullOrEmpty(beneficios.getCnaes()))
-		{
-			return count;
-		}
-		// For Each Contact...
-		for (Telefone telefone : beneficios.getTelefones())
-		{
-			// Make sure we set the parent key
-			// contact.setParentKey(beneficios.getId());
-			//
-			// if (ValidationUtil.isNull(beneficios.getModelAction()))
-			// {
-			// continue;
-			// }
-			// switch (beneficios.getModelAction())
-			// {
-			// case INSERT:
-			// count = getTelefoneDAC().insertTelefone(telefone,
-			// EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-			// break;
-			// case UPDATE:
-			// count = getTelefoneDAC().updateTelefone(telefone, response);
-			// break;
-			// case DELETE:
-			// count = getTelefoneDAC().deleteTelefone(telefone, response);
-			// break;
-			// default:
-			// if (LOG.isDebugEnabled())
-			// {
-			// LOG.debug("ModelAction for Beneficios missing!");
-			// }
-			// break;
-			// }
-		}
-		return count;
-	}
-
-	private Integer maintainBeneficiosAssociationsEmail(Beneficios beneficios,
-			InternalResultsResponse<Beneficios> response)
-	{
-		Integer count = 0;
-		// First Maintain Beneficios
-		if (ValidationUtil.isNullOrEmpty(beneficios.getEmails()))
-		{
-			return count;
-		}
-		// For Each Contact...
-		for (Email email : beneficios.getEmails())
-		{
-			// Make sure we set the parent key
-			email.setParentKey(beneficios.getId());
-
-			if (ValidationUtil.isNull(beneficios.getModelAction()))
-			{
-				continue;
-			}
-			// switch (email.getModelAction())
-			// {
-			// case INSERT:
-			// count = getEmailDAC().insertEmail(email,
-			// EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-			// break;
-			// case UPDATE:
-			// count = getEmailDAC().updateEmail(email, response);
-			// break;
-			// case DELETE:
-			// count = getEmailDAC().deleteEmail(email, response);
-			// break;
-			// default:
-			// if (LOG.isDebugEnabled())
-			// {
-			// LOG.debug("ModelAction for Beneficios missing!");
-			// }
-			// break;
-			// }
-		}
 		return count;
 	}
 
@@ -508,41 +347,7 @@ public class BeneficiosDACImpl extends SqlSessionDaoSupport implements IBenefici
 			InternalResultsResponse<Beneficios> response)
 	{
 		Integer count = 0;
-		// First Maintain Beneficios
-		if (ValidationUtil.isNullOrEmpty(beneficios.getDocumentos()))
-		{
-			return count;
-		}
-		// For Each Contact...
-		for (Documento documentos : beneficios.getDocumentos())
-		{
-			// Make sure we set the parent key
-			documentos.setParentKey(beneficios.getId());
 
-			if (ValidationUtil.isNull(documentos.getModelAction()))
-			{
-				continue;
-			}
-			// switch (documentos.getDocumentos())
-			// {
-			// case INSERT:
-			// count = getDocumentoDAC().insertDocumento(documentos,
-			// EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-			// break;
-			// case UPDATE:
-			// count = getDocumentoDAC().updateDocumento(documentos, response);
-			// break;
-			// case DELETE:
-			// count = getDocumentoDAC().deleteDocumento(documentos, response);
-			// break;
-			// default:
-			// if (LOG.isDebugEnabled())
-			// {
-			// LOG.debug("ModelAction for Beneficios missing!");
-			// }
-			// break;
-			// }
-		}
 		return count;
 	}
 

@@ -2,6 +2,10 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.Map;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.ICnaeDAC;
 import com.prosperitasglobal.sendsolv.dac.IEmailDAC;
 import com.prosperitasglobal.sendsolv.dac.IEnderecoDAC;
@@ -10,6 +14,13 @@ import com.prosperitasglobal.sendsolv.dac.IOrcamentoDAC;
 import com.prosperitasglobal.sendsolv.dac.ISociosDAC;
 import com.prosperitasglobal.sendsolv.dac.ITelefoneDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
+import com.prosperitasglobal.sendsolv.model.Orcamento;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class OrcamentoDACImpl.
@@ -222,12 +233,6 @@ public class OrcamentoDACImpl extends SqlSessionDaoSupport implements IOrcamento
 		// Next traverse the object graph and "maintain" the associations
 		insertCount += maintainOrcamentoAssociations(orcamento, response);
 
-		insertCount += maintainOrcamentoAssociationsCnae(orcamento, response);
-
-		insertCount += maintainOrcamentoAssociationsEmail(orcamento, response);
-
-		insertCount += maintainOrcamentoAssociationsTelefone(orcamento, response);
-
 		// Finally, if something was inserted then add the Orcamento to the result.
 		if (insertCount > 0)
 		{
@@ -264,12 +269,6 @@ public class OrcamentoDACImpl extends SqlSessionDaoSupport implements IOrcamento
 		}
 		// Next traverse the object graph and "maintain" the associations
 		updateCount += maintainOrcamentoAssociations(orcamento, response);
-
-		updateCount += maintainOrcamentoAssociationsCnae(orcamento, response);
-
-		updateCount += maintainOrcamentoAssociationsEmail(orcamento, response);
-
-		updateCount += maintainOrcamentoAssociationsTelefone(orcamento, response);
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
@@ -341,208 +340,7 @@ public class OrcamentoDACImpl extends SqlSessionDaoSupport implements IOrcamento
 	{
 		Integer count = 0;
 		// First Maintain Orcamento
-		if (ValidationUtil.isNullOrEmpty(orcamento.getEnderecos()))
-		{
-			return count;
-		}
-		// For Each Contact...
-		for (Endereco endereco : orcamento.getEnderecos())
-		{
-			// Make sure we set the parent key
-			endereco.setParentKey(orcamento.getId());
 
-			if (ValidationUtil.isNull(endereco.getModelAction()))
-			{
-				continue;
-			}
-			switch (endereco.getModelAction())
-			{
-				case INSERT:
-					count = getEnderecoDAC().insertEndereco(endereco,
-							EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-					break;
-				case UPDATE:
-					count = getEnderecoDAC().updateEndereco(endereco, response);
-					break;
-				case DELETE:
-					count = 1; // getEnderecoDAC().deleteEndereco(endereco, response);
-					break;
-				default:
-					if (LOG.isDebugEnabled())
-					{
-						LOG.debug("ModelAction for Orcamento missing!");
-					}
-					break;
-			}
-		}
-		return count;
-	}
-
-	private Integer maintainOrcamentoAssociationsCnae(Orcamento orcamento,
-			InternalResultsResponse<Orcamento> response)
-	{
-		Integer count = 0;
-		// First Maintain Orcamento
-		if (ValidationUtil.isNullOrEmpty(orcamento.getCnaes()))
-		{
-			return count;
-		}
-		// For Each Contact...
-		for (Cnae cnae : orcamento.getCnaes())
-		{
-			// Make sure we set the parent key
-			cnae.setParentKey(orcamento.getId());
-
-			if (ValidationUtil.isNull(cnae.getModelAction()))
-			{
-				continue;
-			}
-			// switch (cnae.getModelAction())
-			// {
-			// case INSERT:
-			// count = getCnaeDAC().insertCnae(cnae,
-			// EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-			// break;
-			// case UPDATE:
-			// count = getCnaeDAC().updateCnae(cnae, response);
-			// break;
-			// case DELETE:
-			// count = getCnaeDAC().deleteCnae(cnae, response);
-			// break;
-			// default:
-			// if (LOG.isDebugEnabled())
-			// {
-			// LOG.debug("ModelAction for Orcamento missing!");
-			// }
-			// break;
-			// }
-		}
-		return count;
-	}
-
-	private Integer maintainOrcamentoAssociationsTelefone(Orcamento orcamento,
-			InternalResultsResponse<Orcamento> response)
-	{
-		Integer count = 0;
-		// First Maintain Orcamento
-		if (ValidationUtil.isNullOrEmpty(orcamento.getCnaes()))
-		{
-			return count;
-		}
-		// For Each Contact...
-		for (Telefone telefone : orcamento.getTelefones())
-		{
-			// Make sure we set the parent key
-			// contact.setParentKey(orcamento.getId());
-			//
-			// if (ValidationUtil.isNull(orcamento.getModelAction()))
-			// {
-			// continue;
-			// }
-			// switch (orcamento.getModelAction())
-			// {
-			// case INSERT:
-			// count = getTelefoneDAC().insertTelefone(telefone,
-			// EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-			// break;
-			// case UPDATE:
-			// count = getTelefoneDAC().updateTelefone(telefone, response);
-			// break;
-			// case DELETE:
-			// count = getTelefoneDAC().deleteTelefone(telefone, response);
-			// break;
-			// default:
-			// if (LOG.isDebugEnabled())
-			// {
-			// LOG.debug("ModelAction for Orcamento missing!");
-			// }
-			// break;
-			// }
-		}
-		return count;
-	}
-
-	private Integer maintainOrcamentoAssociationsEmail(Orcamento orcamento,
-			InternalResultsResponse<Orcamento> response)
-	{
-		Integer count = 0;
-		// First Maintain Orcamento
-		if (ValidationUtil.isNullOrEmpty(orcamento.getEmails()))
-		{
-			return count;
-		}
-		// For Each Contact...
-		for (Email email : orcamento.getEmails())
-		{
-			// Make sure we set the parent key
-			email.setParentKey(orcamento.getId());
-
-			if (ValidationUtil.isNull(orcamento.getModelAction()))
-			{
-				continue;
-			}
-			// switch (email.getModelAction())
-			// {
-			// case INSERT:
-			// count = getEmailDAC().insertEmail(email,
-			// EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-			// break;
-			// case UPDATE:
-			// count = getEmailDAC().updateEmail(email, response);
-			// break;
-			// case DELETE:
-			// count = getEmailDAC().deleteEmail(email, response);
-			// break;
-			// default:
-			// if (LOG.isDebugEnabled())
-			// {
-			// LOG.debug("ModelAction for Orcamento missing!");
-			// }
-			// break;
-			// }
-		}
-		return count;
-	}
-
-	private Integer maintainOrcamentoAssociationsDocs(Orcamento orcamento,
-			InternalResultsResponse<Orcamento> response)
-	{
-		Integer count = 0;
-		// First Maintain Orcamento
-		if (ValidationUtil.isNullOrEmpty(orcamento.getDocumentos()))
-		{
-			return count;
-		}
-		// For Each Contact...
-		for (Documento documentos : orcamento.getDocumentos())
-		{
-			// Make sure we set the parent key
-			documentos.setParentKey(orcamento.getId());
-
-			if (ValidationUtil.isNull(documentos.getModelAction()))
-			{
-				continue;
-			}
-			// switch (documentos.getDocumentos())
-			// {
-			// case INSERT:
-			// count = getDocumentoDAC().insertDocumento(documentos,
-			// EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-			// break;
-			// case UPDATE:
-			// count = getDocumentoDAC().updateDocumento(documentos, response);
-			// break;
-			// case DELETE:
-			// count = getDocumentoDAC().deleteDocumento(documentos, response);
-			// break;
-			// default:
-			// if (LOG.isDebugEnabled())
-			// {
-			// LOG.debug("ModelAction for Orcamento missing!");
-			// }
-			// break;
-			// }
-		}
 		return count;
 	}
 

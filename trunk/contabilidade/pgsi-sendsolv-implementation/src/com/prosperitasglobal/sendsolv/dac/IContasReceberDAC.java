@@ -2,6 +2,10 @@ package com.prosperitasglobal.sendsolv.dac;
 
 import java.util.List;
 
+import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
+import com.prosperitasglobal.sendsolv.model.ContaReceber;
+import com.qat.framework.model.response.InternalResultsResponse;
+
 public interface IContasReceberDAC
 {
 	/**
@@ -11,7 +15,7 @@ public interface IContasReceberDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer updateContasReceber(ContasReceber contasReceber, InternalResultsResponse<?> response);
+	public Integer updateContasReceber(ContaReceber contasReceber, InternalResultsResponse<?> response);
 
 	/**
 	 * Insert contasReceber.
@@ -21,7 +25,7 @@ public interface IContasReceberDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer insertContasReceber(ContasReceber contasReceber, String statementName,
+	public Integer insertContasReceber(ContaReceber contasReceber, String statementName,
 			InternalResultsResponse<?> response);
 
 	/**
@@ -31,7 +35,7 @@ public interface IContasReceberDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer deleteBusinessContasReceber(ContasReceber contasReceber, InternalResultsResponse<?> response);
+	public Integer deleteBusinessContasReceber(ContaReceber contasReceber, InternalResultsResponse<?> response);
 
 	/**
 	 * Delete person contasReceber.
@@ -40,7 +44,7 @@ public interface IContasReceberDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer deletePersonContasReceber(ContasReceber contasReceber, InternalResultsResponse<?> response);
+	public Integer deletePersonContasReceber(ContaReceber contasReceber, InternalResultsResponse<?> response);
 
 	/**
 	 * Fetch contasReceber by parent.
@@ -49,7 +53,7 @@ public interface IContasReceberDAC
 	 * @param parentType the parent type
 	 * @return the internal results response< contasReceber>
 	 */
-	public InternalResultsResponse<ContasReceber> fetchContasReceberByParent(Integer parentId,
+	public InternalResultsResponse<ContaReceber> fetchContasReceberByParent(Integer parentId,
 			BusinessTypeEnum parentType);
 
 	/**
@@ -58,7 +62,7 @@ public interface IContasReceberDAC
 	 * @param id the id
 	 * @return the internal results response< contasReceber>
 	 */
-	public InternalResultsResponse<ContasReceber> fetchContasReceberById(Integer id);
+	public InternalResultsResponse<ContaReceber> fetchContasReceberById(Integer id);
 
 	/**
 	 * Maintain contasReceber associations.
@@ -69,7 +73,7 @@ public interface IContasReceberDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer maintainContasReceberAssociations(List<ContasReceber> contasReceberList, Integer parentId,
+	public Integer maintainContasReceberAssociations(List<ContaReceber> contasReceberList, Integer parentId,
 			String associateStatement,
 			InternalResultsResponse<?> response);
 }

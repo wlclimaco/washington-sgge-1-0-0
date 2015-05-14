@@ -2,7 +2,16 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.List;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
+import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
 import com.prosperitasglobal.sendsolv.dac.IContasReceberDAC;
+import com.prosperitasglobal.sendsolv.model.ContaReceber;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class CommonBusinessObjectsDACImpl.
@@ -73,7 +82,7 @@ public class ContasReceberDACImpl extends SqlSessionDaoSupport implements IConta
 	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer insertContasReceber(ContasReceber contasReceber, String statementName,
+	public Integer insertContasReceber(ContaReceber contasReceber, String statementName,
 			InternalResultsResponse<?> response)
 	{
 		Integer insertCount = 0;
@@ -96,7 +105,7 @@ public class ContasReceberDACImpl extends SqlSessionDaoSupport implements IConta
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer deleteBusinessContasReceber(ContasReceber contasReceber, InternalResultsResponse<?> response)
+	public Integer deleteBusinessContasReceber(ContaReceber contasReceber, InternalResultsResponse<?> response)
 	{
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, contasReceber,
 				response);
@@ -109,7 +118,7 @@ public class ContasReceberDACImpl extends SqlSessionDaoSupport implements IConta
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer deletePersonContasReceber(ContasReceber contasReceber, InternalResultsResponse<?> response)
+	public Integer deletePersonContasReceber(ContaReceber contasReceber, InternalResultsResponse<?> response)
 	{
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_PERSON_CONTACT, contasReceber,
 				response);
@@ -123,7 +132,7 @@ public class ContasReceberDACImpl extends SqlSessionDaoSupport implements IConta
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer updateContasReceber(ContasReceber contasReceber, InternalResultsResponse<?> response)
+	public Integer updateContasReceber(ContaReceber contasReceber, InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
 
@@ -148,10 +157,10 @@ public class ContasReceberDACImpl extends SqlSessionDaoSupport implements IConta
 	 * com.prosperitasglobal.sendsolv.model.BusinessTypeEnum)
 	 */
 	@Override
-	public InternalResultsResponse<ContasReceber> fetchContasReceberByParent(Integer parentId,
+	public InternalResultsResponse<ContaReceber> fetchContasReceberByParent(Integer parentId,
 			BusinessTypeEnum parentType)
 	{
-		InternalResultsResponse<ContasReceber> response = new InternalResultsResponse<ContasReceber>();
+		InternalResultsResponse<ContaReceber> response = new InternalResultsResponse<ContaReceber>();
 
 		return response;
 	}
@@ -161,9 +170,9 @@ public class ContasReceberDACImpl extends SqlSessionDaoSupport implements IConta
 	 * @see com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#fetchContasReceberById(java.lang.Integer)
 	 */
 	@Override
-	public InternalResultsResponse<ContasReceber> fetchContasReceberById(Integer id)
+	public InternalResultsResponse<ContaReceber> fetchContasReceberById(Integer id)
 	{
-		InternalResultsResponse<ContasReceber> response = new InternalResultsResponse<ContasReceber>();
+		InternalResultsResponse<ContaReceber> response = new InternalResultsResponse<ContaReceber>();
 
 		QATMyBatisDacHelper.doQueryForList(getSqlSession(), CONTACT_STMT_FETCH_BY_ID, id, response);
 
@@ -177,7 +186,7 @@ public class ContasReceberDACImpl extends SqlSessionDaoSupport implements IConta
 	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer maintainContasReceberAssociations(List<ContasReceber> contasReceberList, Integer parentId,
+	public Integer maintainContasReceberAssociations(List<ContaReceber> contasReceberList, Integer parentId,
 			String associateStatement,
 			InternalResultsResponse<?> response)
 	{
@@ -187,35 +196,7 @@ public class ContasReceberDACImpl extends SqlSessionDaoSupport implements IConta
 		{
 			return count;
 		}
-		// For Each ContasReceber...
-		for (ContasReceber contasReceber : contasReceberList)
-		{
-			// Make sure we set the parent key
-			contasReceber.setParentKey(parentId);
 
-			if (ValidationUtil.isNull(contasReceber.getModelAction()))
-			{
-				continue;
-			}
-			switch (contasReceber.getModelAction())
-			{
-				case INSERT:
-					count += insertContasReceber(contasReceber, associateStatement, response);
-					break;
-				case UPDATE:
-					count += updateContasReceber(contasReceber, response);
-					break;
-				case DELETE:
-					count += deletePersonContasReceber(contasReceber, response);
-					break;
-				default:
-					if (LOG.isDebugEnabled())
-					{
-						LOG.debug("ModelAction for Organization missing!");
-					}
-					break;
-			}
-		}
 		return count;
 	}
 }

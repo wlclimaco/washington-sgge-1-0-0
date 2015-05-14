@@ -2,6 +2,11 @@ package com.prosperitasglobal.sendsolv.dac;
 
 import java.util.List;
 
+import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
+import com.prosperitasglobal.sendsolv.model.Grupo;
+import com.prosperitasglobal.sendsolv.model.SubGrupo;
+import com.qat.framework.model.response.InternalResultsResponse;
+
 public interface IGrupoSubGrupoDAC
 {
 	/**

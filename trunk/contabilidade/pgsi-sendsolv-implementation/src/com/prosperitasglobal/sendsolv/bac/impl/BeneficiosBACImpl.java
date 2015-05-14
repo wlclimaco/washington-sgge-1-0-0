@@ -1,6 +1,13 @@
 package com.prosperitasglobal.sendsolv.bac.impl;
 
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.bac.IBeneficiosBAC;
+import com.prosperitasglobal.sendsolv.dac.IBeneficiosDAC;
+import com.prosperitasglobal.sendsolv.model.Beneficios;
+import com.prosperitasglobal.sendsolv.model.request.BeneficiosMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
  * The Class BeneficiosBACImpl.
@@ -86,7 +93,7 @@ public class BeneficiosBACImpl implements IBeneficiosBAC
 	 * .BeneficiosInquiryRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Beneficios> fetchBeneficiosByRequest(BeneficiosInquiryRequest request)
+	public InternalResultsResponse<Beneficios> fetchBeneficiosByRequest(PagedInquiryRequest request)
 	{
 		return getBeneficiosDAC().fetchBeneficiosByRequest(request);
 	}
