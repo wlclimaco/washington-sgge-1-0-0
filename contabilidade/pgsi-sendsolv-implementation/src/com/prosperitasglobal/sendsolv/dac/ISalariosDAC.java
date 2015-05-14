@@ -2,6 +2,10 @@ package com.prosperitasglobal.sendsolv.dac;
 
 import java.util.List;
 
+import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
+import com.prosperitasglobal.sendsolv.model.Salario;
+import com.qat.framework.model.response.InternalResultsResponse;
+
 public interface ISalariosDAC
 {
 	/**
@@ -11,7 +15,7 @@ public interface ISalariosDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer updateSalarios(Salarios salarios, InternalResultsResponse<?> response);
+	public Integer updateSalario(Salario salarios, InternalResultsResponse<?> response);
 
 	/**
 	 * Insert salarios.
@@ -21,7 +25,7 @@ public interface ISalariosDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer insertSalarios(Salarios salarios, String statementName, InternalResultsResponse<?> response);
+	public Integer insertSalario(Salario salarios, String statementName, InternalResultsResponse<?> response);
 
 	/**
 	 * Delete business salarios.
@@ -30,7 +34,7 @@ public interface ISalariosDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer deleteBusinessSalarios(Salarios salarios, InternalResultsResponse<?> response);
+	public Integer deleteBusinessSalario(Salario salarios, InternalResultsResponse<?> response);
 
 	/**
 	 * Delete person salarios.
@@ -39,7 +43,7 @@ public interface ISalariosDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer deletePersonSalarios(Salarios salarios, InternalResultsResponse<?> response);
+	public Integer deletePersonSalario(Salario salarios, InternalResultsResponse<?> response);
 
 	/**
 	 * Fetch salarios by parent.
@@ -48,7 +52,7 @@ public interface ISalariosDAC
 	 * @param parentType the parent type
 	 * @return the internal results response< salarios>
 	 */
-	public InternalResultsResponse<Salarios> fetchSalariosByParent(Integer parentId, BusinessTypeEnum parentType);
+	public InternalResultsResponse<Salario> fetchSalarioByParent(Integer parentId, BusinessTypeEnum parentType);
 
 	/**
 	 * Fetch salarios by id.
@@ -56,7 +60,7 @@ public interface ISalariosDAC
 	 * @param id the id
 	 * @return the internal results response< salarios>
 	 */
-	public InternalResultsResponse<Salarios> fetchSalariosById(Integer id);
+	public InternalResultsResponse<Salario> fetchSalarioById(Integer id);
 
 	/**
 	 * Maintain salarios associations.
@@ -67,7 +71,7 @@ public interface ISalariosDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer maintainSalariosAssociations(List<Salarios> salariosList, Integer parentId,
+	public Integer maintainSalarioAssociations(List<Salario> salariosList, Integer parentId,
 			String associateStatement,
 			InternalResultsResponse<?> response);
 }

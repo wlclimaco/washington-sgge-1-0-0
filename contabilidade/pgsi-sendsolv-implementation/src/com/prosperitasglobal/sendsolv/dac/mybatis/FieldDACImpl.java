@@ -2,7 +2,16 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.List;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
+import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
 import com.prosperitasglobal.sendsolv.dac.IFieldDAC;
+import com.prosperitasglobal.sendsolv.model.Field;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class CommonBusinessObjectsDACImpl.
@@ -79,7 +88,7 @@ public class FieldDACImpl extends SqlSessionDaoSupport implements IFieldDAC
 		// Associate with parent using statement name passed as parameter
 		insertCount +=
 				QATMyBatisDacHelper
-						.doInsert(getSqlSession(), statementName, field, response);
+				.doInsert(getSqlSession(), statementName, field, response);
 
 		return insertCount;
 	}
@@ -180,30 +189,30 @@ public class FieldDACImpl extends SqlSessionDaoSupport implements IFieldDAC
 		for (Field field : fieldList)
 		{
 			// Make sure we set the parent key
-			field.setParentKey(parentId);
-
-			if (ValidationUtil.isNull(field.getModelAction()))
-			{
-				continue;
-			}
-			switch (field.getModelAction())
-			{
-				case INSERT:
-					count += insertField(field, associateStatement, response);
-					break;
-				case UPDATE:
-					count += updateField(field, response);
-					break;
-				case DELETE:
-					count += deletePersonField(field, response);
-					break;
-				default:
-					if (LOG.isDebugEnabled())
-					{
-						LOG.debug("ModelAction for Organization missing!");
-					}
-					break;
-			}
+			// field.setParentKey(parentId);
+			//
+			// if (ValidationUtil.isNull(field.getModelAction()))
+			// {
+			// continue;
+			// }
+			// switch (field.getModelAction())
+			// {
+			// case INSERT:
+			// count += insertField(field, associateStatement, response);
+			// break;
+			// case UPDATE:
+			// count += updateField(field, response);
+			// break;
+			// case DELETE:
+			// count += deletePersonField(field, response);
+			// break;
+			// default:
+			// if (LOG.isDebugEnabled())
+			// {
+			// LOG.debug("ModelAction for Organization missing!");
+			// }
+			// break;
+			// }
 		}
 		return count;
 	}

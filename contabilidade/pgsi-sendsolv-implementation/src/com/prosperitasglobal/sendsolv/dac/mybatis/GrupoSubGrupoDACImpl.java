@@ -2,10 +2,22 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.List;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
+import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
+import com.prosperitasglobal.sendsolv.dac.IGrupoSubGrupoDAC;
+import com.prosperitasglobal.sendsolv.model.Grupo;
+import com.prosperitasglobal.sendsolv.model.SubGrupo;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
+
 /**
  * The Class CommonBusinessObjectsDACImpl.
  */
-public class GrupoSubGrupoDACImpl extends SqlSessionDaoSupport implements IGrupoDAC
+public class GrupoSubGrupoDACImpl extends SqlSessionDaoSupport implements IGrupoSubGrupoDAC
 {
 	/** The Constant CONTACT_NAMESPACE. */
 	private static final String CONTACT_NAMESPACE = "GrupoMap.";
@@ -204,5 +216,55 @@ public class GrupoSubGrupoDACImpl extends SqlSessionDaoSupport implements IGrupo
 			}
 		}
 		return count;
+	}
+
+	@Override
+	public Integer updateSubGrupo(SubGrupo subGrupo, InternalResultsResponse<?> response)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer insertSubGrupo(SubGrupo grupo, String statementName, InternalResultsResponse<?> response)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer deleteBusinessSubGrupo(SubGrupo grupo, InternalResultsResponse<?> response)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer deletePersonSubGrupo(SubGrupo grupo, InternalResultsResponse<?> response)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<SubGrupo> fetchSubGrupoByParent(Integer parentId, BusinessTypeEnum parentType)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<SubGrupo> fetchSubGrupoById(Integer id)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer maintainSubGrupoAssociations(List<SubGrupo> grupoList, Integer parentId, String associateStatement,
+			InternalResultsResponse<?> response)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

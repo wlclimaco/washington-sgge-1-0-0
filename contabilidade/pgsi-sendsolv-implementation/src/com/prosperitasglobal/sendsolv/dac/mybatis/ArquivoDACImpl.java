@@ -2,6 +2,10 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.Map;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.IArquivoDAC;
 import com.prosperitasglobal.sendsolv.dac.ICnaeDAC;
 import com.prosperitasglobal.sendsolv.dac.IEmailDAC;
@@ -10,6 +14,13 @@ import com.prosperitasglobal.sendsolv.dac.IEventoDAC;
 import com.prosperitasglobal.sendsolv.dac.ISociosDAC;
 import com.prosperitasglobal.sendsolv.dac.ITelefoneDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
+import com.prosperitasglobal.sendsolv.model.Arquivo;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class ArquivoDACImpl.
@@ -222,12 +233,6 @@ public class ArquivoDACImpl extends SqlSessionDaoSupport implements IArquivoDAC
 		// Next traverse the object graph and "maintain" the associations
 		insertCount += maintainArquivoAssociations(arquivo, response);
 
-		insertCount += maintainArquivoAssociationsCnae(arquivo, response);
-
-		insertCount += maintainArquivoAssociationsEmail(arquivo, response);
-
-		insertCount += maintainArquivoAssociationsTelefone(arquivo, response);
-
 		// Finally, if something was inserted then add the Arquivo to the result.
 		if (insertCount > 0)
 		{
@@ -264,12 +269,6 @@ public class ArquivoDACImpl extends SqlSessionDaoSupport implements IArquivoDAC
 		}
 		// Next traverse the object graph and "maintain" the associations
 		updateCount += maintainArquivoAssociations(arquivo, response);
-
-		updateCount += maintainArquivoAssociationsCnae(arquivo, response);
-
-		updateCount += maintainArquivoAssociationsEmail(arquivo, response);
-
-		updateCount += maintainArquivoAssociationsTelefone(arquivo, response);
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
@@ -340,209 +339,7 @@ public class ArquivoDACImpl extends SqlSessionDaoSupport implements IArquivoDAC
 			InternalResultsResponse<Arquivo> response)
 	{
 		Integer count = 0;
-		// First Maintain Arquivo
-		if (ValidationUtil.isNullOrEmpty(arquivo.getEnderecos()))
-		{
-			return count;
-		}
-		// For Each Contact...
-		for (Endereco endereco : arquivo.getEnderecos())
-		{
-			// Make sure we set the parent key
-			endereco.setParentKey(arquivo.getId());
 
-			if (ValidationUtil.isNull(endereco.getModelAction()))
-			{
-				continue;
-			}
-			switch (endereco.getModelAction())
-			{
-				case INSERT:
-					count = getEnderecoDAC().insertEndereco(endereco,
-							EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-					break;
-				case UPDATE:
-					count = getEnderecoDAC().updateEndereco(endereco, response);
-					break;
-				case DELETE:
-					count = 1; // getEnderecoDAC().deleteEndereco(endereco, response);
-					break;
-				default:
-					if (LOG.isDebugEnabled())
-					{
-						LOG.debug("ModelAction for Arquivo missing!");
-					}
-					break;
-			}
-		}
-		return count;
-	}
-
-	private Integer maintainArquivoAssociationsCnae(Arquivo arquivo,
-			InternalResultsResponse<Arquivo> response)
-	{
-		Integer count = 0;
-		// First Maintain Arquivo
-		if (ValidationUtil.isNullOrEmpty(arquivo.getCnaes()))
-		{
-			return count;
-		}
-		// For Each Contact...
-		for (Cnae cnae : arquivo.getCnaes())
-		{
-			// Make sure we set the parent key
-			cnae.setParentKey(arquivo.getId());
-
-			if (ValidationUtil.isNull(cnae.getModelAction()))
-			{
-				continue;
-			}
-			// switch (cnae.getModelAction())
-			// {
-			// case INSERT:
-			// count = getCnaeDAC().insertCnae(cnae,
-			// EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-			// break;
-			// case UPDATE:
-			// count = getCnaeDAC().updateCnae(cnae, response);
-			// break;
-			// case DELETE:
-			// count = getCnaeDAC().deleteCnae(cnae, response);
-			// break;
-			// default:
-			// if (LOG.isDebugEnabled())
-			// {
-			// LOG.debug("ModelAction for Arquivo missing!");
-			// }
-			// break;
-			// }
-		}
-		return count;
-	}
-
-	private Integer maintainArquivoAssociationsTelefone(Arquivo arquivo,
-			InternalResultsResponse<Arquivo> response)
-	{
-		Integer count = 0;
-		// First Maintain Arquivo
-		if (ValidationUtil.isNullOrEmpty(arquivo.getCnaes()))
-		{
-			return count;
-		}
-		// For Each Contact...
-		for (Telefone telefone : arquivo.getTelefones())
-		{
-			// Make sure we set the parent key
-			// contact.setParentKey(arquivo.getId());
-			//
-			// if (ValidationUtil.isNull(arquivo.getModelAction()))
-			// {
-			// continue;
-			// }
-			// switch (arquivo.getModelAction())
-			// {
-			// case INSERT:
-			// count = getTelefoneDAC().insertTelefone(telefone,
-			// EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-			// break;
-			// case UPDATE:
-			// count = getTelefoneDAC().updateTelefone(telefone, response);
-			// break;
-			// case DELETE:
-			// count = getTelefoneDAC().deleteTelefone(telefone, response);
-			// break;
-			// default:
-			// if (LOG.isDebugEnabled())
-			// {
-			// LOG.debug("ModelAction for Arquivo missing!");
-			// }
-			// break;
-			// }
-		}
-		return count;
-	}
-
-	private Integer maintainArquivoAssociationsEmail(Arquivo arquivo,
-			InternalResultsResponse<Arquivo> response)
-	{
-		Integer count = 0;
-		// First Maintain Arquivo
-		if (ValidationUtil.isNullOrEmpty(arquivo.getEmails()))
-		{
-			return count;
-		}
-		// For Each Contact...
-		for (Email email : arquivo.getEmails())
-		{
-			// Make sure we set the parent key
-			email.setParentKey(arquivo.getId());
-
-			if (ValidationUtil.isNull(arquivo.getModelAction()))
-			{
-				continue;
-			}
-			// switch (email.getModelAction())
-			// {
-			// case INSERT:
-			// count = getEmailDAC().insertEmail(email,
-			// EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-			// break;
-			// case UPDATE:
-			// count = getEmailDAC().updateEmail(email, response);
-			// break;
-			// case DELETE:
-			// count = getEmailDAC().deleteEmail(email, response);
-			// break;
-			// default:
-			// if (LOG.isDebugEnabled())
-			// {
-			// LOG.debug("ModelAction for Arquivo missing!");
-			// }
-			// break;
-			// }
-		}
-		return count;
-	}
-
-	private Integer maintainArquivoAssociationsDocs(Arquivo arquivo,
-			InternalResultsResponse<Arquivo> response)
-	{
-		Integer count = 0;
-		// First Maintain Arquivo
-		if (ValidationUtil.isNullOrEmpty(arquivo.getDocumentos()))
-		{
-			return count;
-		}
-		// For Each Contact...
-		for (Documento documentos : arquivo.getDocumentos())
-		{
-			// Make sure we set the parent key
-			documentos.setParentKey(arquivo.getId());
-
-			if (ValidationUtil.isNull(documentos.getModelAction()))
-			{
-				continue;
-			}
-			// switch (documentos.getDocumentos())
-			// {
-			// case INSERT:
-			// count = getDocumentoDAC().insertDocumento(documentos,
-			// EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-			// break;
-			// case UPDATE:
-			// count = getDocumentoDAC().updateDocumento(documentos, response);
-			// break;
-			// case DELETE:
-			// count = getDocumentoDAC().deleteDocumento(documentos, response);
-			// break;
-			// default:
-			// if (LOG.isDebugEnabled())
-			// {
-			// LOG.debug("ModelAction for Arquivo missing!");
-			// }
-			// break;
-			// }
-		}
 		return count;
 	}
 

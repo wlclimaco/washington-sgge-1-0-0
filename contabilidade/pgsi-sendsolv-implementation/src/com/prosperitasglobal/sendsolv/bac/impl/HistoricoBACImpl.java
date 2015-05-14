@@ -1,7 +1,13 @@
 package com.prosperitasglobal.sendsolv.bac.impl;
 
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.bac.IHistoricoBAC;
 import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
+import com.prosperitasglobal.sendsolv.model.Historico;
+import com.prosperitasglobal.sendsolv.model.request.HistoricoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.HistoricoMaintenanceRequest;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
  * The Class HistoricoBACImpl.

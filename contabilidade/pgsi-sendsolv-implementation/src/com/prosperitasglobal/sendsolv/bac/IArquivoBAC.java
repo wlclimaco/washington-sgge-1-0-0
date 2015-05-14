@@ -1,5 +1,12 @@
 package com.prosperitasglobal.sendsolv.bac;
 
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.Arquivo;
+import com.prosperitasglobal.sendsolv.model.request.ArquivoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ArquivoMaintenanceRequest;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Interface IArquivoBAC.

@@ -4,14 +4,8 @@ import java.util.Collection;
 import java.util.List;
 
 import com.prosperitasglobal.sendsolv.model.Beneficios;
+import com.qat.framework.model.response.InquiryResponse;
 
-/**
- * The Class LocationResponse.
- *
- * @author abarros
- * @version 1.0
- * @created 22-Jul-2014 10:26:05 AM
- */
 public class BeneficiosResponse extends InquiryResponse
 {
 

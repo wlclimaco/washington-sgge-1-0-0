@@ -1,9 +1,29 @@
 package com.prosperitasglobal.sendsolv.bai.impl;
 
 import java.util.List;
-import java.util.logging.Logger;
 
-import javax.xml.ws.Response;
+import org.slf4j.LoggerFactory;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.bac.IArquivoBAC;
+import com.prosperitasglobal.sendsolv.bai.IArquivoBAI;
+import com.prosperitasglobal.sendsolv.model.Arquivo;
+import com.prosperitasglobal.sendsolv.model.request.ArquivoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ArquivoMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.ArquivoResponse;
+import com.qat.framework.model.Message.MessageLevel;
+import com.qat.framework.model.Message.MessageSeverity;
+import com.qat.framework.model.MessageInfo;
+import com.qat.framework.model.QATModel.PersistanceActionEnum;
+import com.qat.framework.model.UserContext;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResponse.Status;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATInterfaceUtil;
+import com.qat.framework.validation.ValidationContext;
+import com.qat.framework.validation.ValidationContextIndicator;
+import com.qat.framework.validation.ValidationController;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class ArquivoBAIImpl.
@@ -14,7 +34,7 @@ public class ArquivoBAIImpl implements IArquivoBAI
 	private static final String CLASS_NAME = ArquivoBAIImpl.class.getName();
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(ArquivoBAIImpl.class);
+	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(ArquivoBAIImpl.class);
 
 	/** The Constant DEFAULT_EXCEPTION_MSG. */
 	private static final String DEFAULT_EXCEPTION_MSG = "sendsolv.base.defaultexception";
@@ -259,7 +279,7 @@ public class ArquivoBAIImpl implements IArquivoBAI
 		}
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return (ArquivoResponse)handleReturn(response, internalResponse, context.getMessages(), true);
+		return handleReturn(response, internalResponse, context.getMessages(), true);
 	}
 
 	/**
@@ -271,7 +291,7 @@ public class ArquivoBAIImpl implements IArquivoBAI
 	 * @param copyOver the copy over
 	 * @return the response
 	 */
-	private Response handleReturn(Response response, InternalResponse internalResponse,
+	private ArquivoResponse handleReturn(ArquivoResponse response, InternalResponse internalResponse,
 			List<MessageInfo> messages, boolean copyOver)
 	{
 		// In the case there was an Optimistic Locking error, add the specific message

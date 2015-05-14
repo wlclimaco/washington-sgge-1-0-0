@@ -1,20 +1,40 @@
 package com.prosperitasglobal.sendsolv.bai.impl;
 
 import java.util.List;
-import java.util.logging.Logger;
 
-import javax.xml.ws.Response;
+import org.slf4j.LoggerFactory;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.bac.IBeneficiosBAC;
+import com.prosperitasglobal.sendsolv.bai.IBeneficiosBAI;
+import com.prosperitasglobal.sendsolv.model.Beneficios;
+import com.prosperitasglobal.sendsolv.model.request.BeneficiosMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.response.BeneficiosResponse;
+import com.qat.framework.model.Message.MessageLevel;
+import com.qat.framework.model.Message.MessageSeverity;
+import com.qat.framework.model.MessageInfo;
+import com.qat.framework.model.QATModel.PersistanceActionEnum;
+import com.qat.framework.model.UserContext;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResponse.Status;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATInterfaceUtil;
+import com.qat.framework.validation.ValidationContext;
+import com.qat.framework.validation.ValidationContextIndicator;
+import com.qat.framework.validation.ValidationController;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
- * The Class BancoBAIImpl.
+ * The Class BeneficiosBAIImpl.
  */
-public class BeneficiosBAIImpl implements IBancoBAI
+public class BeneficiosBAIImpl implements IBeneficiosBAI
 {
 	/** The Constant CLASS_NAME. */
 	private static final String CLASS_NAME = BeneficiosBAIImpl.class.getName();
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(BeneficiosBAIImpl.class);
+	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(BeneficiosBAIImpl.class);
 
 	/** The Constant DEFAULT_EXCEPTION_MSG. */
 	private static final String DEFAULT_EXCEPTION_MSG = "sendsolv.base.defaultexception";
@@ -32,7 +52,7 @@ public class BeneficiosBAIImpl implements IBancoBAI
 			"sendsolv.base.optimistic.locking.error";
 
 	/** The banco bac. */
-	private IBancoBAC bancoBAC; // injected by Spring through setter
+	private IBeneficiosBAC bancoBAC; // injected by Spring through setter
 
 	/** The validation controller. */
 	private ValidationController validationController;
@@ -62,7 +82,7 @@ public class BeneficiosBAIImpl implements IBancoBAI
 	 *
 	 * @param bancoBAC the new banco bac
 	 */
-	public void setBancoBAC(IBancoBAC bancoBAC)
+	public void setBeneficiosBAC(IBeneficiosBAC bancoBAC)
 	{
 		this.bancoBAC = bancoBAC;
 	}
@@ -72,7 +92,7 @@ public class BeneficiosBAIImpl implements IBancoBAI
 	 *
 	 * @return the banco bac
 	 */
-	public IBancoBAC getBancoBAC()
+	public IBeneficiosBAC getBeneficiosBAC()
 	{
 		return bancoBAC;
 	}
@@ -86,9 +106,9 @@ public class BeneficiosBAIImpl implements IBancoBAI
 	 * Wrapped in a try-catch to ensure we never return an exception from this operation.
 	 */
 	@Override
-	public BancoResponse insertBanco(BancoMaintenanceRequest request)
+	public BeneficiosResponse insertBeneficios(BeneficiosMaintenanceRequest request)
 	{
-		BancoResponse response = new BancoResponse();
+		BeneficiosResponse response = new BeneficiosResponse();
 		try
 		{
 			response = process(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
@@ -110,9 +130,9 @@ public class BeneficiosBAIImpl implements IBancoBAI
 	 * Wrapped in a try-catch to ensure we never return an exception from this operation.
 	 */
 	@Override
-	public BancoResponse updateBanco(BancoMaintenanceRequest request)
+	public BeneficiosResponse updateBeneficios(BeneficiosMaintenanceRequest request)
 	{
-		BancoResponse response = new BancoResponse();
+		BeneficiosResponse response = new BeneficiosResponse();
 		try
 		{
 			response = process(ValidationContextIndicator.UPDATE, PersistanceActionEnum.UPDATE, request);
@@ -134,9 +154,9 @@ public class BeneficiosBAIImpl implements IBancoBAI
 	 * Wrapped in a try-catch to ensure we never return an exception from this operation.
 	 */
 	@Override
-	public BancoResponse deleteBanco(BancoMaintenanceRequest request)
+	public BeneficiosResponse deleteBeneficios(BeneficiosMaintenanceRequest request)
 	{
-		BancoResponse response = new BancoResponse();
+		BeneficiosResponse response = new BeneficiosResponse();
 		try
 		{
 			response = process(ValidationContextIndicator.DELETE, PersistanceActionEnum.DELETE, request);
@@ -157,9 +177,9 @@ public class BeneficiosBAIImpl implements IBancoBAI
 	 * .CountyRequest)
 	 */
 	@Override
-	public BancoResponse fetchBancoById(FetchByIdRequest request)
+	public BeneficiosResponse fetchBeneficiosById(FetchByIdRequest request)
 	{
-		BancoResponse response = new BancoResponse();
+		BeneficiosResponse response = new BeneficiosResponse();
 		try
 		{
 			InternalResponse internalResponse = new InternalResponse();
@@ -170,7 +190,7 @@ public class BeneficiosBAIImpl implements IBancoBAI
 			}
 			else
 			{
-				internalResponse = getBancoBAC().fetchBancoById(request);
+				internalResponse = getBeneficiosBAC().fetchBeneficiosById(request);
 			}
 			// Handle the processing for all previous methods regardless of them failing or succeeding.
 			QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
@@ -186,13 +206,13 @@ public class BeneficiosBAIImpl implements IBancoBAI
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.bai.IBancoBAI#fetchBancoByRequest(com.prosperitasglobal.sendsolv.model
+	 * com.prosperitasglobal.sendsolv.bai.IBeneficiosBAI#fetchBeneficiosByRequest(com.prosperitasglobal.sendsolv.model
 	 * .request.PagedInquiryRequest)
 	 */
 	@Override
-	public BancoResponse fetchBancoByRequest(BancoInquiryRequest request)
+	public BeneficiosResponse fetchBeneficiosByRequest(PagedInquiryRequest request)
 	{
-		BancoResponse response = new BancoResponse();
+		BeneficiosResponse response = new BeneficiosResponse();
 		try
 		{
 			fetchPaged(request, response);
@@ -206,7 +226,7 @@ public class BeneficiosBAIImpl implements IBancoBAI
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.bai.IBancoBAI#updateRisk(com.prosperitasglobal.sendsolv.model.request.
+	 * @see com.prosperitasglobal.sendsolv.bai.IBeneficiosBAI#updateRisk(com.prosperitasglobal.sendsolv.model.request.
 	 * RiskMaintenanceRequest)
 	 */
 
@@ -216,9 +236,9 @@ public class BeneficiosBAIImpl implements IBancoBAI
 	 * @param request the request
 	 * @param response the response
 	 */
-	private void fetchPaged(BancoInquiryRequest request, BancoResponse response)
+	private void fetchPaged(PagedInquiryRequest request, BeneficiosResponse response)
 	{
-		InternalResultsResponse<Banco> internalResponse = new InternalResultsResponse<Banco>();
+		InternalResultsResponse<Beneficios> internalResponse = new InternalResultsResponse<Beneficios>();
 
 		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
 		{
@@ -226,7 +246,7 @@ public class BeneficiosBAIImpl implements IBancoBAI
 		}
 		else
 		{
-			internalResponse = getBancoBAC().fetchBancoByRequest(request);
+			internalResponse = getBeneficiosBAC().fetchBeneficiosByRequest(request);
 		}
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
@@ -241,15 +261,15 @@ public class BeneficiosBAIImpl implements IBancoBAI
 	 * @param request the request
 	 * @return the banco response
 	 */
-	private BancoResponse process(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
-			BancoMaintenanceRequest request)
+	private BeneficiosResponse process(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
+			BeneficiosMaintenanceRequest request)
 	{
-		BancoResponse response = new BancoResponse();
+		BeneficiosResponse response = new BeneficiosResponse();
 		InternalResponse internalResponse = null;
 
 		// Validate. Notice that BusinessValidator will in turn use additional validators depending on the type
 		ValidationContext context =
-				new ValidationContext(Banco.class.getSimpleName(), request.getBanco(), indicator);
+				new ValidationContext(Beneficios.class.getSimpleName(), request.getBeneficios(), indicator);
 		context.putObjectToBeValidated(UserContext.class.getSimpleName(), request.getUserContext());
 
 		if (getValidationController().validate(context))
@@ -259,7 +279,7 @@ public class BeneficiosBAIImpl implements IBancoBAI
 		}
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return (BancoResponse)handleReturn(response, internalResponse, context.getMessages(), true);
+		return handleReturn(response, internalResponse, context.getMessages(), true);
 	}
 
 	/**
@@ -271,7 +291,7 @@ public class BeneficiosBAIImpl implements IBancoBAI
 	 * @param copyOver the copy over
 	 * @return the response
 	 */
-	private Response handleReturn(Response response, InternalResponse internalResponse,
+	private BeneficiosResponse handleReturn(BeneficiosResponse response, InternalResponse internalResponse,
 			List<MessageInfo> messages, boolean copyOver)
 	{
 		// In the case there was an Optimistic Locking error, add the specific message
@@ -293,18 +313,18 @@ public class BeneficiosBAIImpl implements IBancoBAI
 	 * @param updateType the update type
 	 * @return the internal response
 	 */
-	private InternalResponse doPersistance(BancoMaintenanceRequest request, PersistanceActionEnum updateType)
+	private InternalResponse doPersistance(BeneficiosMaintenanceRequest request, PersistanceActionEnum updateType)
 	{
 		switch (updateType)
 		{
 			case INSERT:
-				return getBancoBAC().insertBanco(request);
+				return getBeneficiosBAC().insertBeneficios(request);
 
 			case UPDATE:
-				return getBancoBAC().updateBanco(request);
+				return getBeneficiosBAC().updateBeneficios(request);
 
 			case DELETE:
-				return getBancoBAC().deleteBanco(request);
+				return getBeneficiosBAC().deleteBeneficios(request);
 
 			default:
 				if (LOG.isDebugEnabled())

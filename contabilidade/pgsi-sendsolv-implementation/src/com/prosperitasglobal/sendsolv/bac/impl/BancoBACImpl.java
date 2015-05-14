@@ -1,6 +1,13 @@
 package com.prosperitasglobal.sendsolv.bac.impl;
 
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.bac.IBancoBAC;
+import com.prosperitasglobal.sendsolv.dac.IBancoDAC;
+import com.prosperitasglobal.sendsolv.model.Banco;
+import com.prosperitasglobal.sendsolv.model.request.BancoMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
  * The Class BancoBACImpl.
@@ -85,7 +92,7 @@ public class BancoBACImpl implements IBancoBAC
 	 * .BancoInquiryRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Banco> fetchBancoByRequest(BancoInquiryRequest request)
+	public InternalResultsResponse<Banco> fetchBancoByRequest(PagedInquiryRequest request)
 	{
 		return getBancoDAC().fetchBancoByRequest(request);
 	}

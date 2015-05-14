@@ -1,5 +1,10 @@
 package com.prosperitasglobal.sendsolv.dac;
 
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.Banco;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
  * The Interface IBancoDAC.
