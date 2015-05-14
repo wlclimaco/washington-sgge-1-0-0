@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="EmpresaMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+
+  <resultMap id="empresaResult" type="Empresa" extends="CBOFMap.businessResult">
+    <result property="parentOrganizationId" column="FK_empresa_id" />
+    <result property="parentOrganizationName" column="org_name" />
+   	<result property="batchApprovalDayLimit" column="money_transfer_offset_days"/>
+	<result property="fundsTransferDayLimit" column="funds_transfer_offset_days"/>
+
+	<collection property="frequencyBasedEventList" column="business_id" select="FrequencyEventMap.fetchFrequencyByEmpresaId"/>
+	<collection property="businessProductPlanList" column="business_id" select="BusinessProductPlanMap.fetchBusinessProductPlanByEmpresaId"/>
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allEmpresaColumns">
+		 b.name
+		,b.business_key
+      	,b.business_type
+      	,b.EIN_code
+      	,b.PGSi_status
+      	,b.risk_level
+      	,b.risk_level_note_text
+      	,b.FK_number_of_employees
+      	,b.FK_number_of_migrant_workers
+      	,b.FK_SIC_id
+      	,b.FK_NAICS_id
+      	,b.FK_country_code
+      	,b.FK_empresa_id
+      	,b.money_transfer_offset_days
+      	,b.funds_transfer_offset_days
+      	,b.create_date
+      	,b.create_user
+      	,b.modify_date
+      	,b.modify_user
+  </sql>
+
+  <sql id="allEmpresaValues">
+  		#{name},
+  		#{key},
+    	#{businessTypeValue},
+    	#{employerIdentificationNumber},
+    	#{statusValue},
+    	#{risk.riskLevelValue},
+    	#{risk.riskLevelNote},
+    	#{numberOfEmployees.id},
+    	#{numberOfMigrantWorkers.id},
+    	#{standardIndustrialClassificationCode.id},
+    	#{northAmericanIndustryClassificationSystemCode.id},
+    	#{country.code},
+    	#{parentOrganizationId},
+    	#{batchApprovalDayLimit},
+    	#{fundsTransferDayLimit},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <sql id="allEmpresaContactColumns">
+		FK_contact_id,
+		FK_business_id,
+		<include refid="CBOFMap.allChangeControlColumns"/>
+  </sql>
+
+  <sql id="allEmpresaContactValues">
+  		#{id},
+  		#{parentKey},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertEmpresa" parameterType="Empresa" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO business (
+		<include refid="allEmpresaColumns" />
+      )
+    VALUES (<include refid="allEmpresaValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateEmpresa" parameterType="Empresa">
+    UPDATE business
+    	<set>
+    		money_transfer_offset_days = #{batchApprovalDayLimit},
+      		funds_transfer_offset_days = #{fundsTransferDayLimit},
+    		<if test="name!= null">name = #{name},</if>
+	    	<if test="businessTypeValue!= null"> business_type=#{businessTypeValue},</if>
+	    	<if test="employerIdentificationNumber!= null"> EIN_code=#{employerIdentificationNumber},</if>
+	    	<if test="statusValue!= null"> PGSi_status=#{statusValue},</if>
+	    	<if test="numberOfEmployees.id!= null"> FK_number_of_employees=#{numberOfEmployees.id},</if>
+	    	<if test="numberOfMigrantWorkers.id!= null"> FK_number_of_migrant_workers=#{numberOfMigrantWorkers.id},</if>
+	    	<if test="standardIndustrialClassificationCode.id!= null"> FK_SIC_id=#{standardIndustrialClassificationCode.id},</if>
+	    	<if test="northAmericanIndustryClassificationSystemCode.id!= null"> FK_NAICS_id=#{northAmericanIndustryClassificationSystemCode.id},</if>
+	    	<if test="parentOrganizationId != null"> FK_empresa_id= #{parentOrganizationId},</if>
+	    	<if test="country.code!= null"> FK_country_code=#{country.code},</if>
+			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     business_id = #{id} AND versn_lock_num = #{version}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteEmpresaById" parameterType="Integer">
+    	DELETE FROM business WHERE business_id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchEmpresaRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+     SELECT COUNT(business_id) AS RECORD_COUNT
+        FROM business
+     WHERE business_type = 2
+     <if test="parentId != null">
+		  AND FK_empresa_id = #{parentId}
+	 </if>
+  </select>
+
+  <select id="fetchAllEmpresas" resultMap="empresaResult">
+    SELECT
+	<include refid="allEmpresaColumns" />
+    FROM business ORDER BY name ASC
+  </select>
+
+  <select id="fetchEmpresaById" parameterType="FetchByIdRequest" resultMap="empresaResult">
+    			   SELECT
+  				  		b.business_id,
+  				  		b.versn_lock_num,
+						<include refid="allEmpresaColumns" />,
+						<include refid="countryMap.allCountryColumns" />,
+    					<include refid="CBOFMap.allNAICSColumns" />,
+    					<include refid="CBOFMap.allSICColumns" />,
+    					<include refid="CBOFMap.numberOfEmployeesColumns" />,
+    					<include refid="CBOFMap.numberOfMigrantWorkersColumns" />,
+    					org.name as org_name
+ 				   FROM business b
+ 				   JOIN country c ON b.FK_country_code=c.country_code
+    				LEFT JOIN lookup_value d ON (b.FK_NAICS_id = d.id)
+					LEFT JOIN lookup_value e ON (b.FK_SIC_id = e.id)
+					JOIN [range] ne  ON b.FK_number_of_employees = ne.id
+					LEFT JOIN [range] nm  ON b.FK_number_of_migrant_workers = nm.id
+					LEFT JOIN business org ON org.business_id = b.FK_empresa_id
+					<where>
+				  		 <choose>
+							<when test="id != null and id != ''">
+								b.business_id = #{id}
+				    		</when>
+				    	    <otherwise>
+				    	    	<if test="stringId != null and stringId != ''">
+				    	       		UPPER(b.business_key) = UPPER(#{stringId})
+				    	        </if>
+				    	    </otherwise>
+				    	 </choose>
+				  </where>
+  </select>
+
+  <select id="fetchAllEmpresasByRequest" parameterType="PagedInquiryRequest" resultMap="empresaResult">
+    SELECT * FROM
+    			(
+    				SELECT 	b.business_id,
+    				        b.versn_lock_num,
+    						<include refid="allEmpresaColumns" />,
+    						<include refid="countryMap.allCountryColumns" />,
+    						<include refid="CBOFMap.allNAICSColumns" />,
+    						<include refid="CBOFMap.allSICColumns" />,
+    						<include refid="CBOFMap.numberOfEmployeesColumns" />,
+    						<include refid="CBOFMap.numberOfMigrantWorkersColumns" />,
+    						org.name as org_name,
+    						ROW_NUMBER() OVER(ORDER BY b.name) AS RowNumber
+    				FROM business b
+    				JOIN country c ON b.FK_country_code=c.country_code
+    				LEFT JOIN lookup_value d ON (b.FK_NAICS_id = d.id)
+					LEFT JOIN lookup_value e ON (b.FK_SIC_id = e.id)
+					JOIN [range] ne  ON b.FK_number_of_employees = ne.id
+					LEFT JOIN [range] nm  ON b.FK_number_of_migrant_workers = nm.id
+					LEFT JOIN business org ON org.business_id = b.FK_empresa_id
+					WHERE b.business_type = 2
+					<if test="parentId != null">
+						AND b.FK_empresa_id = #{parentId}
+					</if>
+					 <if test="statusList != null and !statusList.isEmpty()">
+					     AND b.PGSI_status IN
+					     <foreach item="item" index="index" collection="statusList"
+						     open="(" separator="," close=")">
+						   	 #{item.value}
+						 </foreach>
+					 </if>
+					 <if test="inquiryCriteria != null and inquiryCriteria.hasProductPlan">
+					 	AND EXISTS(SELECT 1 FROM product_plan pp WHERE pp.FK_business_id = b.business_id)
+					 </if>
+					 <include refid="CBOFMap.inquiryCriteria"/>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+  <select id="fetchVersionNumber" parameterType="Empresa" resultType="int">
+	SELECT versn_lock_num FROM business WHERE business_id = #{id}
+  </select>
+
+
+</mapper>
