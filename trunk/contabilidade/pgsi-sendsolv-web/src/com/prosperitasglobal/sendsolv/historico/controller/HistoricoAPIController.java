@@ -24,7 +24,7 @@ import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
  *
  */
 @Controller
-@RequestMapping("/api/empresa")
+@RequestMapping("/api/historico")
 public class HistoricoAPIController extends HistoricoBaseController
 {
 

@@ -6,8 +6,8 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
 import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
-import com.prosperitasglobal.sendsolv.dac.IConvenioDAC;
-import com.prosperitasglobal.sendsolv.model.Convenio;
+import com.prosperitasglobal.sendsolv.dac.IDocumentoDAC;
+import com.prosperitasglobal.sendsolv.model.Documento;
 import com.qat.framework.model.QATModel;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
@@ -16,13 +16,13 @@ import com.qat.framework.validation.ValidationUtil;
 /**
  * The Class CommonBusinessObjectsDACImpl.
  */
-public class DocumentoDACImpl extends SqlSessionDaoSupport implements IConvenioDAC
+public class DocumentoDACImpl extends SqlSessionDaoSupport implements IDocumentoDAC
 {
 	/** The Constant CONTACT_NAMESPACE. */
-	private static final String CONTACT_NAMESPACE = "ConvenioMap.";
+	private static final String CONTACT_NAMESPACE = "DocumentoMap.";
 
 	/** The Constant CONTACT_STMT_UPDATE. */
-	private static final String CONTACT_STMT_UPDATE = CONTACT_NAMESPACE + "updateConvenio";
+	private static final String CONTACT_STMT_UPDATE = CONTACT_NAMESPACE + "updateDocumento";
 
 	/** The Constant CONTACT_STMT_UPDATE_PHONE. */
 	private static final String CONTACT_STMT_UPDATE_PHONE = CONTACT_NAMESPACE + "updatePhone";
@@ -34,13 +34,13 @@ public class DocumentoDACImpl extends SqlSessionDaoSupport implements IConvenioD
 	private static final String CONTACT_STMT_UPDATE_ADDRESS = CONTACT_NAMESPACE + "updateAddress";
 
 	/** The Constant CONTACT_STMT_DELETE_BUSINESS_CONTACT. */
-	private static final String CONTACT_STMT_DELETE_BUSINESS_CONTACT = CONTACT_NAMESPACE + "deleteBusinessConvenio";
+	private static final String CONTACT_STMT_DELETE_BUSINESS_CONTACT = CONTACT_NAMESPACE + "deleteBusinessDocumento";
 
 	/** The Constant CONTACT_STMT_DELETE_PERSON_CONTACT. */
-	private static final String CONTACT_STMT_DELETE_PERSON_CONTACT = CONTACT_NAMESPACE + "deletePersonConvenio";
+	private static final String CONTACT_STMT_DELETE_PERSON_CONTACT = CONTACT_NAMESPACE + "deletePersonDocumento";
 
 	/** The Constant CONTACT_STMT_INSERT. */
-	private static final String CONTACT_STMT_INSERT = CONTACT_NAMESPACE + "insertConvenio";
+	private static final String CONTACT_STMT_INSERT = CONTACT_NAMESPACE + "insertDocumento";
 
 	/** The Constant CONTACT_STMT_INSERT_PHONE. */
 	private static final String CONTACT_STMT_INSERT_PHONE = CONTACT_NAMESPACE + "insertPhone";
@@ -52,13 +52,13 @@ public class DocumentoDACImpl extends SqlSessionDaoSupport implements IConvenioD
 	private static final String CONTACT_STMT_INSERT_ADDRESS = CONTACT_NAMESPACE + "insertAddress";
 
 	/** The Constant CONTACT_STMT_FETCH_BY_BUSINESS_ID. */
-	private static final String CONTACT_STMT_FETCH_BY_BUSINESS_ID = CONTACT_NAMESPACE + "fetchConveniosByBusinessId";
+	private static final String CONTACT_STMT_FETCH_BY_BUSINESS_ID = CONTACT_NAMESPACE + "fetchDocumentosByBusinessId";
 
 	/** The Constant CONTACT_STMT_FETCH_BY_PERSON_ID. */
-	private static final String CONTACT_STMT_FETCH_BY_PERSON_ID = CONTACT_NAMESPACE + "fetchConveniosByPersonId";
+	private static final String CONTACT_STMT_FETCH_BY_PERSON_ID = CONTACT_NAMESPACE + "fetchDocumentosByPersonId";
 
 	/** The Constant CONTACT_STMT_FETCH_BY_ID. */
-	private static final String CONTACT_STMT_FETCH_BY_ID = CONTACT_NAMESPACE + "fetchConveniosById";
+	private static final String CONTACT_STMT_FETCH_BY_ID = CONTACT_NAMESPACE + "fetchDocumentosById";
 
 	/** The Constant CONTACT_STMT_FETCH_EMAIL_VERSION. */
 	private static final String CONTACT_STMT_FETCH_EMAIL_VERSION = CONTACT_NAMESPACE + "fetchVersionNumberEmail";
@@ -75,20 +75,21 @@ public class DocumentoDACImpl extends SqlSessionDaoSupport implements IConvenioD
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#insertConvenio(com.prosperitasglobal.cbof.model.Convenio,
+	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#insertDocumento(com.prosperitasglobal.cbof.model.Documento
+	 * ,
 	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer insertConvenio(Convenio convenio, String statementName, InternalResultsResponse<?> response)
+	public Integer insertDocumento(Documento documento, String statementName, InternalResultsResponse<?> response)
 	{
 		Integer insertCount = 0;
-		// First insert the root convenio data
-		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT, convenio, response);
+		// First insert the root documento data
+		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT, documento, response);
 
 		// Associate with parent using statement name passed as parameter
 		insertCount +=
 				QATMyBatisDacHelper
-				.doInsert(getSqlSession(), statementName, convenio, response);
+						.doInsert(getSqlSession(), statementName, documento, response);
 
 		return insertCount;
 	}
@@ -96,46 +97,48 @@ public class DocumentoDACImpl extends SqlSessionDaoSupport implements IConvenioD
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.cbof.dac.IConvenioDAC#deleteBusinessConvenio(com.prosperitasglobal.cbof.model.Convenio,
+	 * com.prosperitasglobal.cbof.dac.IDocumentoDAC#deleteBusinessDocumento(com.prosperitasglobal.cbof.model.Documento,
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer deleteBusinessConvenio(Convenio convenio, InternalResultsResponse<?> response)
+	public Integer deleteBusinessDocumento(Documento documento, InternalResultsResponse<?> response)
 	{
-		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, convenio, response);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.cbof.dac.IConvenioDAC#deletePersonConvenio(com.prosperitasglobal.cbof.model.Convenio,
-	 * com.qat.framework.model.response.InternalResultsResponse)
-	 */
-	@Override
-	public Integer deletePersonConvenio(Convenio convenio, InternalResultsResponse<?> response)
-	{
-		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_PERSON_CONTACT, convenio, response);
+		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, documento, response);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#updateConvenio(com.prosperitasglobal.cbof.model.Convenio,
+	 * com.prosperitasglobal.cbof.dac.IDocumentoDAC#deletePersonDocumento(com.prosperitasglobal.cbof.model.Documento,
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer updateConvenio(Convenio convenio, InternalResultsResponse<?> response)
+	public Integer deletePersonDocumento(Documento documento, InternalResultsResponse<?> response)
+	{
+		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_PERSON_CONTACT, documento, response);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#updateDocumento(com.prosperitasglobal.cbof.model.Documento
+	 * ,
+	 * com.qat.framework.model.response.InternalResultsResponse)
+	 */
+	@Override
+	public Integer updateDocumento(Documento documento, InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
 
 		// First update the root if necessary.
-		if (!ValidationUtil.isNull(convenio.getModelAction())
-				&& (convenio.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
+		if (!ValidationUtil.isNull(documento.getModelAction())
+				&& (documento.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
 		{
-			updateCount = QATMyBatisDacHelper.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE, convenio, response);
+			updateCount = QATMyBatisDacHelper.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE, documento, response);
 
 			if (updateCount == 1)
 			{
-				convenio.setModelAction(QATModel.PersistanceActionEnum.NONE);
+				documento.setModelAction(QATModel.PersistanceActionEnum.NONE);
 			}
 		}
 
@@ -144,25 +147,25 @@ public class DocumentoDACImpl extends SqlSessionDaoSupport implements IConvenioD
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#fetchConvenioByParent(java.lang.Integer,
+	 * @see com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#fetchDocumentoByParent(java.lang.Integer,
 	 * com.prosperitasglobal.sendsolv.model.BusinessTypeEnum)
 	 */
 	@Override
-	public InternalResultsResponse<Convenio> fetchConvenioByParent(Integer parentId, BusinessTypeEnum parentType)
+	public InternalResultsResponse<Documento> fetchDocumentoByParent(Integer parentId, BusinessTypeEnum parentType)
 	{
-		InternalResultsResponse<Convenio> response = new InternalResultsResponse<Convenio>();
+		InternalResultsResponse<Documento> response = new InternalResultsResponse<Documento>();
 
 		return response;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#fetchConvenioById(java.lang.Integer)
+	 * @see com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#fetchDocumentoById(java.lang.Integer)
 	 */
 	@Override
-	public InternalResultsResponse<Convenio> fetchConvenioById(Integer id)
+	public InternalResultsResponse<Documento> fetchDocumentoById(Integer id)
 	{
-		InternalResultsResponse<Convenio> response = new InternalResultsResponse<Convenio>();
+		InternalResultsResponse<Documento> response = new InternalResultsResponse<Documento>();
 
 		QATMyBatisDacHelper.doQueryForList(getSqlSession(), CONTACT_STMT_FETCH_BY_ID, id, response);
 
@@ -171,40 +174,41 @@ public class DocumentoDACImpl extends SqlSessionDaoSupport implements IConvenioD
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.cbof.dac.IConvenioDAC#maintainConvenioAssociations(java.util.List, java.lang.Integer,
+	 * @see com.prosperitasglobal.cbof.dac.IDocumentoDAC#maintainDocumentoAssociations(java.util.List,
+	 * java.lang.Integer,
 	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer maintainConvenioAssociations(List<Convenio> convenioList, Integer parentId,
+	public Integer maintainDocumentoAssociations(List<Documento> documentoList, Integer parentId,
 			String associateStatement,
 			InternalResultsResponse<?> response)
 	{
 		Integer count = 0;
-		// First Maintain Convenios
-		if (ValidationUtil.isNullOrEmpty(convenioList))
+		// First Maintain Documentos
+		if (ValidationUtil.isNullOrEmpty(documentoList))
 		{
 			return count;
 		}
-		// For Each Convenio...
-		for (Convenio convenio : convenioList)
+		// For Each Documento...
+		for (Documento documento : documentoList)
 		{
 			// Make sure we set the parent key
-			convenio.setParentKey(parentId);
+			documento.setParentKey(parentId);
 
-			if (ValidationUtil.isNull(convenio.getModelAction()))
+			if (ValidationUtil.isNull(documento.getModelAction()))
 			{
 				continue;
 			}
-			switch (convenio.getModelAction())
+			switch (documento.getModelAction())
 			{
 				case INSERT:
-					count += insertConvenio(convenio, associateStatement, response);
+					count += insertDocumento(documento, associateStatement, response);
 					break;
 				case UPDATE:
-					count += updateConvenio(convenio, response);
+					count += updateDocumento(documento, response);
 					break;
 				case DELETE:
-					count += deletePersonConvenio(convenio, response);
+					count += deletePersonDocumento(documento, response);
 					break;
 				default:
 					if (LOG.isDebugEnabled())

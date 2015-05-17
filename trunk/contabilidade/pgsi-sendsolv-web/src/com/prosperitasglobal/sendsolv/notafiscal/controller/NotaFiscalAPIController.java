@@ -24,7 +24,7 @@ import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
  *
  */
 @Controller
-@RequestMapping("/api/empresa")
+@RequestMapping("/api/notafiscal")
 public class NotaFiscalAPIController extends NotaFiscalBaseController
 {
 

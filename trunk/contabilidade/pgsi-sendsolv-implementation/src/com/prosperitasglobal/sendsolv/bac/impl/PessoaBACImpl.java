@@ -1,63 +1,63 @@
 package com.prosperitasglobal.sendsolv.bac.impl;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.bac.IEmpresaBAC;
-import com.prosperitasglobal.sendsolv.dac.IEmpresaDAC;
-import com.prosperitasglobal.sendsolv.model.Empresa;
-import com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.EmpresaMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.bac.IPessoaBAC;
+import com.prosperitasglobal.sendsolv.dac.IPessoaDAC;
+import com.prosperitasglobal.sendsolv.model.Pessoa;
+import com.prosperitasglobal.sendsolv.model.request.PessoaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.PessoaMaintenanceRequest;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
- * The Class EmpresaBACImpl.
+ * The Class PessoaBACImpl.
  */
-public class PessoaBACImpl implements IEmpresaBAC
+public class PessoaBACImpl implements IPessoaBAC
 {
 
 	/** The person dac. */
-	private IEmpresaDAC empresaDAC;
+	private IPessoaDAC PessoaDAC;
 
 	/**
-	 * @return the empresaDAC
+	 * @return the PessoaDAC
 	 */
-	public IEmpresaDAC getEmpresaDAC()
+	public IPessoaDAC getPessoaDAC()
 	{
-		return empresaDAC;
+		return PessoaDAC;
 	}
 
 	/**
-	 * @param empresaDAC the empresaDAC to set
+	 * @param PessoaDAC the PessoaDAC to set
 	 */
-	public void setEmpresaDAC(IEmpresaDAC empresaDAC)
+	public void setPessoaDAC(IPessoaDAC PessoaDAC)
 	{
-		this.empresaDAC = empresaDAC;
+		this.PessoaDAC = PessoaDAC;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.bac.IEmpresaBAC#insertEmpresa(EmpresaRequest)
+	 * @see com.prosperitasglobal.sendsolv.bac.IPessoaBAC#insertPessoa(PessoaRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Empresa> insertEmpresa(EmpresaMaintenanceRequest request)
+	public InternalResultsResponse<Pessoa> insertPessoa(PessoaMaintenanceRequest request)
 	{
-		InternalResultsResponse<Empresa> response = new InternalResultsResponse<Empresa>();
+		InternalResultsResponse<Pessoa> response = new InternalResultsResponse<Pessoa>();
 
-		response = getEmpresaDAC().insertEmpresa(request.getEmpresa());
+		response = getPessoaDAC().insertPessoa(request.getPessoa());
 
 		return response;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.bac.IEmpresaBAC#updateEmpresa(EmpresaRequest)
+	 * @see com.prosperitasglobal.sendsolv.bac.IPessoaBAC#updatePessoa(PessoaRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Empresa> updateEmpresa(EmpresaMaintenanceRequest request)
+	public InternalResultsResponse<Pessoa> updatePessoa(PessoaMaintenanceRequest request)
 	{
-		InternalResultsResponse<Empresa> response = new InternalResultsResponse<Empresa>();
+		InternalResultsResponse<Pessoa> response = new InternalResultsResponse<Pessoa>();
 
-		response = getEmpresaDAC().updateEmpresa(request.getEmpresa());
+		response = getPessoaDAC().updatePessoa(request.getPessoa());
 
 		return response;
 	}
@@ -65,35 +65,35 @@ public class PessoaBACImpl implements IEmpresaBAC
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.bac.IEmpresaBAC#deleteEmpresa
-	 * (com.prosperitasglobal.sendsolv.model.request.EmpresaRequest
+	 * com.prosperitasglobal.sendsolv.bac.IPessoaBAC#deletePessoa
+	 * (com.prosperitasglobal.sendsolv.model.request.PessoaRequest
 	 * )
 	 */
 	@Override
-	public InternalResponse deleteEmpresa(EmpresaMaintenanceRequest request)
+	public InternalResponse deletePessoa(PessoaMaintenanceRequest request)
 	{
-		return getEmpresaDAC().deleteEmpresa(request.getEmpresa());
+		return getPessoaDAC().deletePessoa(request.getPessoa());
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.bac.IEmpresaBAC#fetchEmpresaById(FetchByIdRequest)
+	 * @see com.prosperitasglobal.sendsolv.bac.IPessoaBAC#fetchPessoaById(FetchByIdRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Empresa> fetchEmpresaById(FetchByIdRequest request)
+	public InternalResultsResponse<Pessoa> fetchPessoaById(FetchByIdRequest request)
 	{
-		return getEmpresaDAC().fetchEmpresaById(request);
+		return getPessoaDAC().fetchPessoaById(request);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.bac.IEmpresaBAC#fetchEmpresaByRequest(com.prosperitasglobal.sendsolv.model.request
-	 * .EmpresaInquiryRequest)
+	 * com.prosperitasglobal.sendsolv.bac.IPessoaBAC#fetchPessoaByRequest(com.prosperitasglobal.sendsolv.model.request
+	 * .PessoaInquiryRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Empresa> fetchEmpresaByRequest(EmpresaInquiryRequest request)
+	public InternalResultsResponse<Pessoa> fetchPessoaByRequest(PessoaInquiryRequest request)
 	{
-		return getEmpresaDAC().fetchEmpresaByRequest(request);
+		return getPessoaDAC().fetchPessoaByRequest(request);
 	}
 }

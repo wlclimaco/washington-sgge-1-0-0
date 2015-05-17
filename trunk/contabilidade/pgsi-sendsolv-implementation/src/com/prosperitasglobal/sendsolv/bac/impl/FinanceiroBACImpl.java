@@ -1,63 +1,63 @@
 package com.prosperitasglobal.sendsolv.bac.impl;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.bac.IEmpresaBAC;
-import com.prosperitasglobal.sendsolv.dac.IEmpresaDAC;
-import com.prosperitasglobal.sendsolv.model.Empresa;
-import com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.EmpresaMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.bac.IFinanceiroBAC;
+import com.prosperitasglobal.sendsolv.dac.IFinanceiroDAC;
+import com.prosperitasglobal.sendsolv.model.Financeiro;
+import com.prosperitasglobal.sendsolv.model.request.FinanceiroInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.FinanceiroMaintenanceRequest;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
- * The Class EmpresaBACImpl.
+ * The Class FinanceiroBACImpl.
  */
-public class FinanceiroBACImpl implements IEmpresaBAC
+public class FinanceiroBACImpl implements IFinanceiroBAC
 {
 
 	/** The person dac. */
-	private IEmpresaDAC empresaDAC;
+	private IFinanceiroDAC FinanceiroDAC;
 
 	/**
-	 * @return the empresaDAC
+	 * @return the FinanceiroDAC
 	 */
-	public IEmpresaDAC getEmpresaDAC()
+	public IFinanceiroDAC getFinanceiroDAC()
 	{
-		return empresaDAC;
+		return FinanceiroDAC;
 	}
 
 	/**
-	 * @param empresaDAC the empresaDAC to set
+	 * @param FinanceiroDAC the FinanceiroDAC to set
 	 */
-	public void setEmpresaDAC(IEmpresaDAC empresaDAC)
+	public void setFinanceiroDAC(IFinanceiroDAC FinanceiroDAC)
 	{
-		this.empresaDAC = empresaDAC;
+		this.FinanceiroDAC = FinanceiroDAC;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.bac.IEmpresaBAC#insertEmpresa(EmpresaRequest)
+	 * @see com.prosperitasglobal.sendsolv.bac.IFinanceiroBAC#insertFinanceiro(FinanceiroRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Empresa> insertEmpresa(EmpresaMaintenanceRequest request)
+	public InternalResultsResponse<Financeiro> insertFinanceiro(FinanceiroMaintenanceRequest request)
 	{
-		InternalResultsResponse<Empresa> response = new InternalResultsResponse<Empresa>();
+		InternalResultsResponse<Financeiro> response = new InternalResultsResponse<Financeiro>();
 
-		response = getEmpresaDAC().insertEmpresa(request.getEmpresa());
+		response = getFinanceiroDAC().insertFinanceiro(request.getFinanceiro());
 
 		return response;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.bac.IEmpresaBAC#updateEmpresa(EmpresaRequest)
+	 * @see com.prosperitasglobal.sendsolv.bac.IFinanceiroBAC#updateFinanceiro(FinanceiroRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Empresa> updateEmpresa(EmpresaMaintenanceRequest request)
+	public InternalResultsResponse<Financeiro> updateFinanceiro(FinanceiroMaintenanceRequest request)
 	{
-		InternalResultsResponse<Empresa> response = new InternalResultsResponse<Empresa>();
+		InternalResultsResponse<Financeiro> response = new InternalResultsResponse<Financeiro>();
 
-		response = getEmpresaDAC().updateEmpresa(request.getEmpresa());
+		response = getFinanceiroDAC().updateFinanceiro(request.getFinanceiro());
 
 		return response;
 	}
@@ -65,35 +65,36 @@ public class FinanceiroBACImpl implements IEmpresaBAC
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.bac.IEmpresaBAC#deleteEmpresa
-	 * (com.prosperitasglobal.sendsolv.model.request.EmpresaRequest
+	 * com.prosperitasglobal.sendsolv.bac.IFinanceiroBAC#deleteFinanceiro
+	 * (com.prosperitasglobal.sendsolv.model.request.FinanceiroRequest
 	 * )
 	 */
 	@Override
-	public InternalResponse deleteEmpresa(EmpresaMaintenanceRequest request)
+	public InternalResponse deleteFinanceiro(FinanceiroMaintenanceRequest request)
 	{
-		return getEmpresaDAC().deleteEmpresa(request.getEmpresa());
+		return getFinanceiroDAC().deleteFinanceiro(request.getFinanceiro());
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.bac.IEmpresaBAC#fetchEmpresaById(FetchByIdRequest)
+	 * @see com.prosperitasglobal.sendsolv.bac.IFinanceiroBAC#fetchFinanceiroById(FetchByIdRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Empresa> fetchEmpresaById(FetchByIdRequest request)
+	public InternalResultsResponse<Financeiro> fetchFinanceiroById(FetchByIdRequest request)
 	{
-		return getEmpresaDAC().fetchEmpresaById(request);
+		return getFinanceiroDAC().fetchFinanceiroById(request);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.bac.IEmpresaBAC#fetchEmpresaByRequest(com.prosperitasglobal.sendsolv.model.request
-	 * .EmpresaInquiryRequest)
+	 * com.prosperitasglobal.sendsolv.bac.IFinanceiroBAC#fetchFinanceiroByRequest(com.prosperitasglobal.sendsolv.model.
+	 * request
+	 * .FinanceiroInquiryRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Empresa> fetchEmpresaByRequest(EmpresaInquiryRequest request)
+	public InternalResultsResponse<Financeiro> fetchFinanceiroByRequest(FinanceiroInquiryRequest request)
 	{
-		return getEmpresaDAC().fetchEmpresaByRequest(request);
+		return getFinanceiroDAC().fetchFinanceiroByRequest(request);
 	}
 }

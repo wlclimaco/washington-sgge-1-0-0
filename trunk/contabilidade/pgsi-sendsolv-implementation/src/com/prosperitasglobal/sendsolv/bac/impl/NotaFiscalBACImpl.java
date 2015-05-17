@@ -1,63 +1,63 @@
 package com.prosperitasglobal.sendsolv.bac.impl;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.bac.IEmpresaBAC;
-import com.prosperitasglobal.sendsolv.dac.IEmpresaDAC;
-import com.prosperitasglobal.sendsolv.model.Empresa;
-import com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.EmpresaMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.bac.INotaFiscalBAC;
+import com.prosperitasglobal.sendsolv.dac.INotaFiscalDAC;
+import com.prosperitasglobal.sendsolv.model.NotaFiscal;
+import com.prosperitasglobal.sendsolv.model.request.NotaFiscalInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.NotaFiscalMaintenanceRequest;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
- * The Class EmpresaBACImpl.
+ * The Class NotaFiscalBACImpl.
  */
-public class NotaFiscalBACImpl implements IEmpresaBAC
+public class NotaFiscalBACImpl implements INotaFiscalBAC
 {
 
 	/** The person dac. */
-	private IEmpresaDAC empresaDAC;
+	private INotaFiscalDAC NotaFiscalDAC;
 
 	/**
-	 * @return the empresaDAC
+	 * @return the NotaFiscalDAC
 	 */
-	public IEmpresaDAC getEmpresaDAC()
+	public INotaFiscalDAC getNotaFiscalDAC()
 	{
-		return empresaDAC;
+		return NotaFiscalDAC;
 	}
 
 	/**
-	 * @param empresaDAC the empresaDAC to set
+	 * @param NotaFiscalDAC the NotaFiscalDAC to set
 	 */
-	public void setEmpresaDAC(IEmpresaDAC empresaDAC)
+	public void setNotaFiscalDAC(INotaFiscalDAC NotaFiscalDAC)
 	{
-		this.empresaDAC = empresaDAC;
+		this.NotaFiscalDAC = NotaFiscalDAC;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.bac.IEmpresaBAC#insertEmpresa(EmpresaRequest)
+	 * @see com.prosperitasglobal.sendsolv.bac.INotaFiscalBAC#insertNotaFiscal(NotaFiscalRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Empresa> insertEmpresa(EmpresaMaintenanceRequest request)
+	public InternalResultsResponse<NotaFiscal> insertNotaFiscal(NotaFiscalMaintenanceRequest request)
 	{
-		InternalResultsResponse<Empresa> response = new InternalResultsResponse<Empresa>();
+		InternalResultsResponse<NotaFiscal> response = new InternalResultsResponse<NotaFiscal>();
 
-		response = getEmpresaDAC().insertEmpresa(request.getEmpresa());
+		response = getNotaFiscalDAC().insertNotaFiscal(request.getNotaFiscal());
 
 		return response;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.bac.IEmpresaBAC#updateEmpresa(EmpresaRequest)
+	 * @see com.prosperitasglobal.sendsolv.bac.INotaFiscalBAC#updateNotaFiscal(NotaFiscalRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Empresa> updateEmpresa(EmpresaMaintenanceRequest request)
+	public InternalResultsResponse<NotaFiscal> updateNotaFiscal(NotaFiscalMaintenanceRequest request)
 	{
-		InternalResultsResponse<Empresa> response = new InternalResultsResponse<Empresa>();
+		InternalResultsResponse<NotaFiscal> response = new InternalResultsResponse<NotaFiscal>();
 
-		response = getEmpresaDAC().updateEmpresa(request.getEmpresa());
+		response = getNotaFiscalDAC().updateNotaFiscal(request.getNotaFiscal());
 
 		return response;
 	}
@@ -65,35 +65,36 @@ public class NotaFiscalBACImpl implements IEmpresaBAC
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.bac.IEmpresaBAC#deleteEmpresa
-	 * (com.prosperitasglobal.sendsolv.model.request.EmpresaRequest
+	 * com.prosperitasglobal.sendsolv.bac.INotaFiscalBAC#deleteNotaFiscal
+	 * (com.prosperitasglobal.sendsolv.model.request.NotaFiscalRequest
 	 * )
 	 */
 	@Override
-	public InternalResponse deleteEmpresa(EmpresaMaintenanceRequest request)
+	public InternalResponse deleteNotaFiscal(NotaFiscalMaintenanceRequest request)
 	{
-		return getEmpresaDAC().deleteEmpresa(request.getEmpresa());
+		return getNotaFiscalDAC().deleteNotaFiscal(request.getNotaFiscal());
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.bac.IEmpresaBAC#fetchEmpresaById(FetchByIdRequest)
+	 * @see com.prosperitasglobal.sendsolv.bac.INotaFiscalBAC#fetchNotaFiscalById(FetchByIdRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Empresa> fetchEmpresaById(FetchByIdRequest request)
+	public InternalResultsResponse<NotaFiscal> fetchNotaFiscalById(FetchByIdRequest request)
 	{
-		return getEmpresaDAC().fetchEmpresaById(request);
+		return getNotaFiscalDAC().fetchNotaFiscalById(request);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.bac.IEmpresaBAC#fetchEmpresaByRequest(com.prosperitasglobal.sendsolv.model.request
-	 * .EmpresaInquiryRequest)
+	 * com.prosperitasglobal.sendsolv.bac.INotaFiscalBAC#fetchNotaFiscalByRequest(com.prosperitasglobal.sendsolv.model.
+	 * request
+	 * .NotaFiscalInquiryRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Empresa> fetchEmpresaByRequest(EmpresaInquiryRequest request)
+	public InternalResultsResponse<NotaFiscal> fetchNotaFiscalByRequest(NotaFiscalInquiryRequest request)
 	{
-		return getEmpresaDAC().fetchEmpresaByRequest(request);
+		return getNotaFiscalDAC().fetchNotaFiscalByRequest(request);
 	}
 }

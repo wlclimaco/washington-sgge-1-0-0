@@ -26,7 +26,7 @@ import com.qat.framework.model.SortExpression.Direction;
  */
 
 @Controller
-@RequestMapping("/empresa")
+@RequestMapping("/notafiscal")
 public class NotaFiscalViewController extends NotaFiscalBaseController
 {
 	/** The URL mapping constants. */

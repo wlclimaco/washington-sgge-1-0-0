@@ -1,62 +1,76 @@
 package com.prosperitasglobal.sendsolv.dac;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import java.util.List;
+
+import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
 import com.prosperitasglobal.sendsolv.model.Documento;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
-import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 
-/**
- * The Interface IDocumentoDAC.
- */
 public interface IDocumentoDAC
 {
-
 	/**
 	 * Update documento.
 	 *
 	 * @param documento the documento
-	 * @return the internal results response< documento>
+	 * @param response the response
+	 * @return the integer
 	 */
-	public InternalResultsResponse<Documento> updateDocumento(Documento documento);
+	public Integer updateDocumento(Documento documento, InternalResultsResponse<?> response);
 
 	/**
 	 * Insert documento.
 	 *
 	 * @param documento the documento
-	 * @return the internal results response< documento>
+	 * @param statementName the statement name
+	 * @param response the response
+	 * @return the integer
 	 */
-	public InternalResultsResponse<Documento> insertDocumento(Documento documento);
+	public Integer insertDocumento(Documento documento, String statementName, InternalResultsResponse<?> response);
 
 	/**
-	 * Delete documento.
+	 * Delete business documento.
 	 *
 	 * @param documento the documento
-	 * @return the internal response
+	 * @param response the response
+	 * @return the integer
 	 */
-	public InternalResponse deleteDocumento(Documento documento);
+	public Integer deleteBusinessDocumento(Documento documento, InternalResultsResponse<?> response);
+
+	/**
+	 * Delete person documento.
+	 *
+	 * @param documento the documento
+	 * @param response the response
+	 * @return the integer
+	 */
+	public Integer deletePersonDocumento(Documento documento, InternalResultsResponse<?> response);
+
+	/**
+	 * Fetch documento by parent.
+	 *
+	 * @param parentId the parent id
+	 * @param parentType the parent type
+	 * @return the internal results response< documento>
+	 */
+	public InternalResultsResponse<Documento> fetchDocumentoByParent(Integer parentId, BusinessTypeEnum parentType);
 
 	/**
 	 * Fetch documento by id.
 	 *
-	 * @param request the request
-	 * @return the internal results response
-	 */
-	public InternalResultsResponse<Documento> fetchDocumentoById(FetchByIdRequest request);
-
-	/**
-	 * Fetch all documentos.
-	 *
+	 * @param id the id
 	 * @return the internal results response< documento>
 	 */
-	public InternalResultsResponse<Documento> fetchAllDocumentos();
+	public InternalResultsResponse<Documento> fetchDocumentoById(Integer id);
 
 	/**
-	 * Fetch documento by request.
+	 * Maintain documento associations.
 	 *
-	 * @param request the request
-	 * @return the internal results response< documento>
+	 * @param parentId the parent id
+	 * @param associateStatement the associate statement
+	 * @param response the response
+	 * @return the integer
 	 */
-	public InternalResultsResponse<Documento> fetchDocumentoByRequest(PagedInquiryRequest request);
-
+	public Integer maintainDocumentoAssociations(List<Documento> documentoList, Integer parentId,
+			String associateStatement,
+			InternalResultsResponse<?> response);
 }

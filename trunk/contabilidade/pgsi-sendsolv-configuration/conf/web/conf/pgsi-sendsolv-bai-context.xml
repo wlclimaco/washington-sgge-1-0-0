@@ -181,7 +181,7 @@
  		<property name="validationController" ref="empresaValidationController"/>
  	</bean>
 
- 	<bean id="ordemServicoBAI" class="com.prosperitasglobal.sendsolv.bai.impl.OrdemServico">
+ 	<bean id="ordemServicoBAI" class="com.prosperitasglobal.sendsolv.bai.impl.OrdemServicoBAIImpl">
  		<property name="ordemServicoBAC" ref="ordemServicoBACTarget"/>
  		<property name="validationController" ref="empresaValidationController"/>
  	</bean>

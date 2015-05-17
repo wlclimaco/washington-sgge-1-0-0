@@ -26,7 +26,7 @@ import com.qat.framework.model.SortExpression.Direction;
  */
 
 @Controller
-@RequestMapping("/empresa")
+@RequestMapping("/historico")
 public class HistoricoViewController extends HistoricoBaseController
 {
 	/** The URL mapping constants. */
