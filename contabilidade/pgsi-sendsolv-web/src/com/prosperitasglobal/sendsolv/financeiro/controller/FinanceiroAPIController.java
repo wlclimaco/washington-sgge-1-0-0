@@ -18,7 +18,7 @@ import com.prosperitasglobal.sendsolv.model.request.FinanceiroMaintenanceRequest
 import com.prosperitasglobal.sendsolv.model.response.FinanceiroResponse;
 
 @Controller
-@RequestMapping("/api/empresa")
+@RequestMapping("/api/financeiro")
 public class FinanceiroAPIController extends FinanceiroBaseController
 {
 

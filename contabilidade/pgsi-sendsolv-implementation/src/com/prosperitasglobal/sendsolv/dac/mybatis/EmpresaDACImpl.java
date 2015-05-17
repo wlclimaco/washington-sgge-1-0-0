@@ -2,6 +2,10 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.Map;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.ICnaeDAC;
 import com.prosperitasglobal.sendsolv.dac.IDocumentoDAC;
 import com.prosperitasglobal.sendsolv.dac.IEmailDAC;
@@ -11,6 +15,19 @@ import com.prosperitasglobal.sendsolv.dac.IEventoDAC;
 import com.prosperitasglobal.sendsolv.dac.ISociosDAC;
 import com.prosperitasglobal.sendsolv.dac.ITelefoneDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
+import com.prosperitasglobal.sendsolv.model.Cnae;
+import com.prosperitasglobal.sendsolv.model.Documento;
+import com.prosperitasglobal.sendsolv.model.Email;
+import com.prosperitasglobal.sendsolv.model.Empresa;
+import com.prosperitasglobal.sendsolv.model.Endereco;
+import com.prosperitasglobal.sendsolv.model.Socio;
+import com.prosperitasglobal.sendsolv.model.Telefone;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class EmpresaDACImpl.
@@ -280,17 +297,17 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 			return response;
 		}
 		// Next traverse the object graph and "maintain" the associations
-		insertCount += maintainEmpresaAssociations(empresa, response);
+		updateCount += maintainEmpresaAssociations(empresa, response);
 
-		insertCount += maintainEmpresaAssociationsCnae(empresa, response);
+		updateCount += maintainEmpresaAssociationsCnae(empresa, response);
 
-		insertCount += maintainEmpresaAssociationsEmail(empresa, response);
+		updateCount += maintainEmpresaAssociationsEmail(empresa, response);
 
-		insertCount += maintainEmpresaAssociationsTelefone(empresa, response);
+		updateCount += maintainEmpresaAssociationsTelefone(empresa, response);
 
-		insertCount += maintainEmpresaAssociationsDocs(empresa, response);
+		updateCount += maintainEmpresaAssociationsDocs(empresa, response);
 
-		insertCount += maintainEmpresaAssociationsSocios(empresa, response);
+		updateCount += maintainEmpresaAssociationsSocios(empresa, response);
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
@@ -386,7 +403,7 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 					count = getEnderecoDAC().updateEndereco(endereco, response);
 					break;
 				case DELETE:
-					count = getEnderecoDAC().deleteEndereco(endereco, response);
+					count = getEnderecoDAC().deletePersonEndereco(endereco, response);
 					break;
 				default:
 					if (LOG.isDebugEnabled())
@@ -428,7 +445,7 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 					count = getCnaeDAC().updateCnae(cnae, response);
 					break;
 				case DELETE:
-					count = getCnaeDAC().deleteCnae(cnae, response);
+					count = getCnaeDAC().deletePersonCnae(cnae, response);
 					break;
 				default:
 					if (LOG.isDebugEnabled())
@@ -454,7 +471,7 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		for (Telefone telefone : empresa.getTelefones())
 		{
 			// Make sure we set the parent key
-			contact.setParentKey(empresa.getId());
+			telefone.setParentKey(empresa.getId());
 
 			if (ValidationUtil.isNull(empresa.getModelAction()))
 			{
@@ -470,7 +487,7 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 					count = getTelefoneDAC().updateTelefone(telefone, response);
 					break;
 				case DELETE:
-					count = getTelefoneDAC().deleteTelefone(telefone, response);
+					count = getTelefoneDAC().deletePersonTelefone(telefone, response);
 					break;
 				default:
 					if (LOG.isDebugEnabled())
@@ -512,7 +529,7 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 					count = getEmailDAC().updateEmail(email, response);
 					break;
 				case DELETE:
-					count = getEmailDAC().deleteEmail(email, response);
+					count = getEmailDAC().deletePersonEmail(email, response);
 					break;
 				default:
 					if (LOG.isDebugEnabled())
@@ -544,7 +561,7 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 			{
 				continue;
 			}
-			switch (documentos.getDocumentos())
+			switch (documentos.getModelAction())
 			{
 				case INSERT:
 					count = getDocumentoDAC().insertDocumento(documentos,
@@ -554,7 +571,7 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 					count = getDocumentoDAC().updateDocumento(documentos, response);
 					break;
 				case DELETE:
-					count = getDocumentoDAC().deleteDocumento(documentos, response);
+					count = getDocumentoDAC().deletePersonDocumento(documentos, response);
 					break;
 				default:
 					if (LOG.isDebugEnabled())
@@ -580,23 +597,23 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		for (Socio socios : empresa.getSocios())
 		{
 			// Make sure we set the parent key
-			documentos.setParentKey(empresa.getId());
+			socios.setParentKey(empresa.getId());
 
-			if (ValidationUtil.isNull(documentos.getModelAction()))
+			if (ValidationUtil.isNull(socios.getModelAction()))
 			{
 				continue;
 			}
-			switch (documentos.getDocumentos())
+			switch (socios.getModelAction())
 			{
 				case INSERT:
-					count = getDocumentoDAC().insertDocumento(documentos,
+					count = getSocioDAC().insertSocio(socios,
 							EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
 					break;
 				case UPDATE:
-					count = getDocumentoDAC().updateDocumento(documentos, response);
+					count = getSocioDAC().updateSocio(socios, response);
 					break;
 				case DELETE:
-					count = getDocumentoDAC().deleteDocumento(documentos, response);
+					count = getSocioDAC().deletePersonSocio(socios, response);
 					break;
 				default:
 					if (LOG.isDebugEnabled())

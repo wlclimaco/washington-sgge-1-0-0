@@ -4,7 +4,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="EmpresaMap">
+<mapper namespace="TabsMap">
 
 	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
 	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
@@ -14,20 +14,20 @@
        necessary if the columns (or aliases) match to the properties
        exactly. -->
 
-  <resultMap id="empresaResult" type="Empresa" extends="CBOFMap.businessResult">
+  <resultMap id="empresaResult" type="Tabs" extends="CBOFMap.businessResult">
     <result property="parentOrganizationId" column="FK_empresa_id" />
     <result property="parentOrganizationName" column="org_name" />
    	<result property="batchApprovalDayLimit" column="money_transfer_offset_days"/>
 	<result property="fundsTransferDayLimit" column="funds_transfer_offset_days"/>
 
-	<collection property="frequencyBasedEventList" column="business_id" select="FrequencyEventMap.fetchFrequencyByEmpresaId"/>
-	<collection property="businessProductPlanList" column="business_id" select="BusinessProductPlanMap.fetchBusinessProductPlanByEmpresaId"/>
+	<collection property="frequencyBasedEventList" column="business_id" select="FrequencyEventMap.fetchFrequencyByTabsId"/>
+	<collection property="businessProductPlanList" column="business_id" select="BusinessProductPlanMap.fetchBusinessProductPlanByTabsId"/>
   </resultMap>
 
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
-  <sql id="allEmpresaColumns">
+  <sql id="allTabsColumns">
 		 b.name
 		,b.business_key
       	,b.business_type
@@ -49,7 +49,7 @@
       	,b.modify_user
   </sql>
 
-  <sql id="allEmpresaValues">
+  <sql id="allTabsValues">
   		#{name},
   		#{key},
     	#{businessTypeValue},
@@ -68,13 +68,13 @@
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
-  <sql id="allEmpresaContactColumns">
+  <sql id="allTabsContactColumns">
 		FK_contact_id,
 		FK_business_id,
 		<include refid="CBOFMap.allChangeControlColumns"/>
   </sql>
 
-  <sql id="allEmpresaContactValues">
+  <sql id="allTabsContactValues">
   		#{id},
   		#{parentKey},
     	<include refid="CBOFMap.changeControlFields"/>
@@ -83,11 +83,11 @@
   <!--
 		SQL Insert Statements.
  	-->
-  <insert id="insertEmpresa" parameterType="Empresa" useGeneratedKeys="true" keyProperty="id">
+  <insert id="insertTabs" parameterType="Tabs" useGeneratedKeys="true" keyProperty="id">
   	INSERT INTO business (
-		<include refid="allEmpresaColumns" />
+		<include refid="allTabsColumns" />
       )
-    VALUES (<include refid="allEmpresaValues" /> )
+    VALUES (<include refid="allTabsValues" /> )
   </insert>
 
 
@@ -95,7 +95,7 @@
 		SQL Update Statements.
  	-->
 
-  <update id="updateEmpresa" parameterType="Empresa">
+  <update id="updateTabs" parameterType="Tabs">
     UPDATE business
     	<set>
     		money_transfer_offset_days = #{batchApprovalDayLimit},
@@ -120,14 +120,14 @@
    <!--
 		SQL Delete Statements.
    -->
-  <delete id="deleteEmpresaById" parameterType="Integer">
+  <delete id="deleteTabsById" parameterType="Integer">
     	DELETE FROM business WHERE business_id = #{id}
   </delete>
 
 	<!--
 		SQL Fetch Statements.
  	-->
-  <select id="fetchEmpresaRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+  <select id="fetchTabsRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
      SELECT COUNT(business_id) AS RECORD_COUNT
         FROM business
      WHERE business_type = 2
@@ -136,17 +136,17 @@
 	 </if>
   </select>
 
-  <select id="fetchAllEmpresas" resultMap="empresaResult">
+  <select id="fetchAllTabss" resultMap="empresaResult">
     SELECT
-	<include refid="allEmpresaColumns" />
+	<include refid="allTabsColumns" />
     FROM business ORDER BY name ASC
   </select>
 
-  <select id="fetchEmpresaById" parameterType="FetchByIdRequest" resultMap="empresaResult">
+  <select id="fetchTabsById" parameterType="FetchByIdRequest" resultMap="empresaResult">
     			   SELECT
   				  		b.business_id,
   				  		b.versn_lock_num,
-						<include refid="allEmpresaColumns" />,
+						<include refid="allTabsColumns" />,
 						<include refid="countryMap.allCountryColumns" />,
     					<include refid="CBOFMap.allNAICSColumns" />,
     					<include refid="CBOFMap.allSICColumns" />,
@@ -174,12 +174,12 @@
 				  </where>
   </select>
 
-  <select id="fetchAllEmpresasByRequest" parameterType="PagedInquiryRequest" resultMap="empresaResult">
+  <select id="fetchAllTabssByRequest" parameterType="PagedInquiryRequest" resultMap="empresaResult">
     SELECT * FROM
     			(
     				SELECT 	b.business_id,
     				        b.versn_lock_num,
-    						<include refid="allEmpresaColumns" />,
+    						<include refid="allTabsColumns" />,
     						<include refid="countryMap.allCountryColumns" />,
     						<include refid="CBOFMap.allNAICSColumns" />,
     						<include refid="CBOFMap.allSICColumns" />,
@@ -224,7 +224,7 @@
 				</choose>
   </select>
 
-  <select id="fetchVersionNumber" parameterType="Empresa" resultType="int">
+  <select id="fetchVersionNumber" parameterType="Tabs" resultType="int">
 	SELECT versn_lock_num FROM business WHERE business_id = #{id}
   </select>
 

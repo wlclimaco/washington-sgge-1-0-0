@@ -26,7 +26,7 @@ import com.qat.framework.model.SortExpression.Direction;
  */
 
 @Controller
-@RequestMapping("/empresa")
+@RequestMapping("/financeiro")
 public class FinanceiroViewController extends FinanceiroBaseController
 {
 	/** The URL mapping constants. */

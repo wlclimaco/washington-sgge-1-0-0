@@ -72,12 +72,6 @@
 
  	<bean id="empresaBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.EmpresaBACImpl">
  		<property name="empresaDAC" ref="empresaDACTarget"/>
- 		<property name="enderecoDAC" ref="enderecoDACTarget"/>
- 		<property name="telefoneDAC" ref="telefoneDACTarget"/>
- 		<property name="emailDAC" ref="emailDACTarget"/>
- 		<property name="socioDAC" ref="socioDACTarget"/>
- 		<property name="cnaeDAC" ref="cnaeDACTarget"/>
- 		<property name="documentoDAC" ref="documentoDACTarget"/>
  	</bean>
 
  	<bean id="financeiroBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.FinanceiroBACImpl">
@@ -100,7 +94,7 @@
  		<property name="orcamentoDAC" ref="orcamentoDACTarget"/>
  	</bean>
 
- 	<bean id="ordemServicoBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.OrdemServico">
+ 	<bean id="ordemServicoBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.OrdemServicoBACImpl">
  		<property name="ordemServicoDAC" ref="ordemServicoDACTarget"/>
  	</bean>
  	<bean id="pessoaBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.PessoaBACImpl">

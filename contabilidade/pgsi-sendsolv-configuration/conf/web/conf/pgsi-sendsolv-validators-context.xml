@@ -444,6 +444,14 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  			</list>
  		</property>
 	</bean>
+
+	<bean id="empresaValidationController" class="com.qat.framework.validation.ValidationController">
+	   <property name="validators">
+	    <list>
+	     <ref bean="EmpresaValidator" />
+	    </list>
+	   </property>
+    </bean>
 	<!-- ========================= Valid Length DEFINITIONS================================= -->
 
  	<util:map id="contactValidLength">

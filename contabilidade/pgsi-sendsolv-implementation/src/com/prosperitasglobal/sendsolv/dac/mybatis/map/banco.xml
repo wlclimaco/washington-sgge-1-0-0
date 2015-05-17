@@ -4,7 +4,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="EmpresaMap">
+<mapper namespace="BancoMap">
 
 	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
 	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
@@ -14,20 +14,20 @@
        necessary if the columns (or aliases) match to the properties
        exactly. -->
 
-  <resultMap id="empresaResult" type="Empresa" extends="CBOFMap.businessResult">
-    <result property="parentOrganizationId" column="FK_empresa_id" />
+  <resultMap id="bancoResult" type="Banco" extends="CBOFMap.businessResult">
+    <result property="parentOrganizationId" column="FK_banco_id" />
     <result property="parentOrganizationName" column="org_name" />
    	<result property="batchApprovalDayLimit" column="money_transfer_offset_days"/>
 	<result property="fundsTransferDayLimit" column="funds_transfer_offset_days"/>
 
-	<collection property="frequencyBasedEventList" column="business_id" select="FrequencyEventMap.fetchFrequencyByEmpresaId"/>
-	<collection property="businessProductPlanList" column="business_id" select="BusinessProductPlanMap.fetchBusinessProductPlanByEmpresaId"/>
+	<collection property="frequencyBasedEventList" column="business_id" select="FrequencyEventMap.fetchFrequencyByBancoId"/>
+	<collection property="businessProductPlanList" column="business_id" select="BusinessProductPlanMap.fetchBusinessProductPlanByBancoId"/>
   </resultMap>
 
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
-  <sql id="allEmpresaColumns">
+  <sql id="allBancoColumns">
 		 b.name
 		,b.business_key
       	,b.business_type
@@ -40,7 +40,7 @@
       	,b.FK_SIC_id
       	,b.FK_NAICS_id
       	,b.FK_country_code
-      	,b.FK_empresa_id
+      	,b.FK_banco_id
       	,b.money_transfer_offset_days
       	,b.funds_transfer_offset_days
       	,b.create_date
@@ -49,7 +49,7 @@
       	,b.modify_user
   </sql>
 
-  <sql id="allEmpresaValues">
+  <sql id="allBancoValues">
   		#{name},
   		#{key},
     	#{businessTypeValue},
@@ -68,13 +68,13 @@
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
-  <sql id="allEmpresaContactColumns">
+  <sql id="allBancoContactColumns">
 		FK_contact_id,
 		FK_business_id,
 		<include refid="CBOFMap.allChangeControlColumns"/>
   </sql>
 
-  <sql id="allEmpresaContactValues">
+  <sql id="allBancoContactValues">
   		#{id},
   		#{parentKey},
     	<include refid="CBOFMap.changeControlFields"/>
@@ -83,11 +83,11 @@
   <!--
 		SQL Insert Statements.
  	-->
-  <insert id="insertEmpresa" parameterType="Empresa" useGeneratedKeys="true" keyProperty="id">
+  <insert id="insertBanco" parameterType="Banco" useGeneratedKeys="true" keyProperty="id">
   	INSERT INTO business (
-		<include refid="allEmpresaColumns" />
+		<include refid="allBancoColumns" />
       )
-    VALUES (<include refid="allEmpresaValues" /> )
+    VALUES (<include refid="allBancoValues" /> )
   </insert>
 
 
@@ -95,7 +95,7 @@
 		SQL Update Statements.
  	-->
 
-  <update id="updateEmpresa" parameterType="Empresa">
+  <update id="updateBanco" parameterType="Banco">
     UPDATE business
     	<set>
     		money_transfer_offset_days = #{batchApprovalDayLimit},
@@ -108,7 +108,7 @@
 	    	<if test="numberOfMigrantWorkers.id!= null"> FK_number_of_migrant_workers=#{numberOfMigrantWorkers.id},</if>
 	    	<if test="standardIndustrialClassificationCode.id!= null"> FK_SIC_id=#{standardIndustrialClassificationCode.id},</if>
 	    	<if test="northAmericanIndustryClassificationSystemCode.id!= null"> FK_NAICS_id=#{northAmericanIndustryClassificationSystemCode.id},</if>
-	    	<if test="parentOrganizationId != null"> FK_empresa_id= #{parentOrganizationId},</if>
+	    	<if test="parentOrganizationId != null"> FK_banco_id= #{parentOrganizationId},</if>
 	    	<if test="country.code!= null"> FK_country_code=#{country.code},</if>
 			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
@@ -120,33 +120,33 @@
    <!--
 		SQL Delete Statements.
    -->
-  <delete id="deleteEmpresaById" parameterType="Integer">
+  <delete id="deleteBancoById" parameterType="Integer">
     	DELETE FROM business WHERE business_id = #{id}
   </delete>
 
 	<!--
 		SQL Fetch Statements.
  	-->
-  <select id="fetchEmpresaRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+  <select id="fetchBancoRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
      SELECT COUNT(business_id) AS RECORD_COUNT
         FROM business
      WHERE business_type = 2
      <if test="parentId != null">
-		  AND FK_empresa_id = #{parentId}
+		  AND FK_banco_id = #{parentId}
 	 </if>
   </select>
 
-  <select id="fetchAllEmpresas" resultMap="empresaResult">
+  <select id="fetchAllBancos" resultMap="bancoResult">
     SELECT
-	<include refid="allEmpresaColumns" />
+	<include refid="allBancoColumns" />
     FROM business ORDER BY name ASC
   </select>
 
-  <select id="fetchEmpresaById" parameterType="FetchByIdRequest" resultMap="empresaResult">
+  <select id="fetchBancoById" parameterType="FetchByIdRequest" resultMap="bancoResult">
     			   SELECT
   				  		b.business_id,
   				  		b.versn_lock_num,
-						<include refid="allEmpresaColumns" />,
+						<include refid="allBancoColumns" />,
 						<include refid="countryMap.allCountryColumns" />,
     					<include refid="CBOFMap.allNAICSColumns" />,
     					<include refid="CBOFMap.allSICColumns" />,
@@ -159,7 +159,7 @@
 					LEFT JOIN lookup_value e ON (b.FK_SIC_id = e.id)
 					JOIN [range] ne  ON b.FK_number_of_employees = ne.id
 					LEFT JOIN [range] nm  ON b.FK_number_of_migrant_workers = nm.id
-					LEFT JOIN business org ON org.business_id = b.FK_empresa_id
+					LEFT JOIN business org ON org.business_id = b.FK_banco_id
 					<where>
 				  		 <choose>
 							<when test="id != null and id != ''">
@@ -174,12 +174,12 @@
 				  </where>
   </select>
 
-  <select id="fetchAllEmpresasByRequest" parameterType="PagedInquiryRequest" resultMap="empresaResult">
+  <select id="fetchAllBancosByRequest" parameterType="PagedInquiryRequest" resultMap="bancoResult">
     SELECT * FROM
     			(
     				SELECT 	b.business_id,
     				        b.versn_lock_num,
-    						<include refid="allEmpresaColumns" />,
+    						<include refid="allBancoColumns" />,
     						<include refid="countryMap.allCountryColumns" />,
     						<include refid="CBOFMap.allNAICSColumns" />,
     						<include refid="CBOFMap.allSICColumns" />,
@@ -193,10 +193,10 @@
 					LEFT JOIN lookup_value e ON (b.FK_SIC_id = e.id)
 					JOIN [range] ne  ON b.FK_number_of_employees = ne.id
 					LEFT JOIN [range] nm  ON b.FK_number_of_migrant_workers = nm.id
-					LEFT JOIN business org ON org.business_id = b.FK_empresa_id
+					LEFT JOIN business org ON org.business_id = b.FK_banco_id
 					WHERE b.business_type = 2
 					<if test="parentId != null">
-						AND b.FK_empresa_id = #{parentId}
+						AND b.FK_banco_id = #{parentId}
 					</if>
 					 <if test="statusList != null and !statusList.isEmpty()">
 					     AND b.PGSI_status IN
@@ -224,7 +224,7 @@
 				</choose>
   </select>
 
-  <select id="fetchVersionNumber" parameterType="Empresa" resultType="int">
+  <select id="fetchVersionNumber" parameterType="Banco" resultType="int">
 	SELECT versn_lock_num FROM business WHERE business_id = #{id}
   </select>
 

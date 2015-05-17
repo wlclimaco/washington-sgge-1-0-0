@@ -26,7 +26,7 @@ import com.qat.framework.model.SortExpression.Direction;
  */
 
 @Controller
-@RequestMapping("/empresa")
+@RequestMapping("/arquivo")
 public class ArquivoViewController extends ArquivoBaseController
 {
 	/** The URL mapping constants. */

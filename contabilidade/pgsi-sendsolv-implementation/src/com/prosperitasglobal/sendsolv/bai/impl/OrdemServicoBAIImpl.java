@@ -1,7 +1,6 @@
 package com.prosperitasglobal.sendsolv.bai.impl;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.xml.ws.Response;
 
@@ -37,7 +36,7 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 	private static final String CLASS_NAME = OrdemServicoBAIImpl.class.getName();
 
 	/** The Constant LOG. */
-	private static final Logger LOG = (java.util.logging.Logger)LoggerFactory.getLogger(OrdemServicoBAIImpl.class);
+	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(OrdemServicoBAIImpl.class);
 
 	/** The Constant DEFAULT_EXCEPTION_MSG. */
 	private static final String DEFAULT_EXCEPTION_MSG = "sendsolv.base.defaultexception";
@@ -122,7 +121,7 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 		}
 		catch (Exception ex)
 		{
-			QATInterfaceUtil.handleException((org.slf4j.Logger)LOG, response, ex, DEFAULT_EXCEPTION_MSG,
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG,
 					new Object[] {CLASS_NAME});
 		}
 
@@ -147,7 +146,7 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 		}
 		catch (Exception ex)
 		{
-			QATInterfaceUtil.handleException((org.slf4j.Logger)LOG, response, ex, DEFAULT_EXCEPTION_MSG,
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG,
 					new Object[] {CLASS_NAME});
 		}
 
@@ -172,7 +171,7 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 		}
 		catch (Exception ex)
 		{
-			QATInterfaceUtil.handleException((org.slf4j.Logger)LOG, response, ex, DEFAULT_EXCEPTION_MSG,
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG,
 					new Object[] {CLASS_NAME});
 		}
 
@@ -207,7 +206,7 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 		}
 		catch (Exception ex)
 		{
-			QATInterfaceUtil.handleException((org.slf4j.Logger)LOG, response, ex, DEFAULT_EXCEPTION_MSG,
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG,
 					new Object[] {CLASS_NAME});
 		}
 
@@ -230,7 +229,7 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 		}
 		catch (Exception ex)
 		{
-			QATInterfaceUtil.handleException((org.slf4j.Logger)LOG, response, ex, DEFAULT_EXCEPTION_MSG,
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG,
 					new Object[] {CLASS_NAME});
 		}
 		return response;
@@ -340,9 +339,9 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 				return getOrdemServicoBAC().deleteOrdemServico(request);
 
 			default:
-				if (((org.slf4j.Logger)LOG).isDebugEnabled())
+				if (LOG.isDebugEnabled())
 				{
-					((org.slf4j.Logger)LOG).debug("updateType missing!");
+					LOG.debug("updateType missing!");
 				}
 				break;
 		}
