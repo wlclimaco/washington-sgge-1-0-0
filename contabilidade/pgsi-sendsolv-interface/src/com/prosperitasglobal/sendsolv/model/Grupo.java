@@ -1,6 +1,5 @@
 package com.prosperitasglobal.sendsolv.model;
 
-
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -12,25 +11,25 @@ public class Grupo extends ModelCosmeDamiao
 	private Integer id;
 
 	/** The type of an account. */
-	private String logradouro;
+	private String type;
 
 	/** The description. */
-	private String cidade;
+	private String tabela;
 
 	/** The estado. */
-	private String estado;
+	private String acao;
 
 	/** The bairro. */
-	private String bairro;
+	private String registro;
 
 	/** The numero. */
-	private String numero;
+	private Integer data;
 
 	/** The cep. */
-	private String cep;
+	private String usuario;
 
 	/** The tipo endereco. */
-	private String tipoEndereco;
+	private Integer empresa;
 
 	/**
 	 * Default constructor.
@@ -53,7 +52,7 @@ public class Grupo extends ModelCosmeDamiao
 	/**
 	 * Sets the id.
 	 *
-	 * @param id the id to set
+	 * @param id the new id
 	 */
 	public void setId(Integer id)
 	{
@@ -61,156 +60,156 @@ public class Grupo extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the logradouro.
+	 * Gets the type.
 	 *
-	 * @return the logradouro
+	 * @return the type
 	 */
-	public String getLogradouro()
+	public String getType()
 	{
-		return logradouro;
+		return type;
 	}
 
 	/**
-	 * Sets the logradouro.
+	 * Sets the type.
 	 *
-	 * @param logradouro the logradouro to set
+	 * @param type the new type
 	 */
-	public void setLogradouro(String logradouro)
+	public void setType(String type)
 	{
-		this.logradouro = logradouro;
+		this.type = type;
 	}
 
 	/**
-	 * Gets the cidade.
+	 * Gets the tabela.
 	 *
-	 * @return the cidade
+	 * @return the tabela
 	 */
-	public String getCidade()
+	public String getTabela()
 	{
-		return cidade;
+		return tabela;
 	}
 
 	/**
-	 * Sets the cidade.
+	 * Sets the tabela.
 	 *
-	 * @param cidade the cidade to set
+	 * @param tabela the new tabela
 	 */
-	public void setCidade(String cidade)
+	public void setTabela(String tabela)
 	{
-		this.cidade = cidade;
+		this.tabela = tabela;
 	}
 
 	/**
-	 * Gets the estado.
+	 * Gets the acao.
 	 *
-	 * @return the estado
+	 * @return the acao
 	 */
-	public String getEstado()
+	public String getAcao()
 	{
-		return estado;
+		return acao;
 	}
 
 	/**
-	 * Sets the estado.
+	 * Sets the acao.
 	 *
-	 * @param estado the estado to set
+	 * @param acao the new acao
 	 */
-	public void setEstado(String estado)
+	public void setAcao(String acao)
 	{
-		this.estado = estado;
+		this.acao = acao;
 	}
 
 	/**
-	 * Gets the bairro.
+	 * Gets the registro.
 	 *
-	 * @return the bairro
+	 * @return the registro
 	 */
-	public String getBairro()
+	public String getRegistro()
 	{
-		return bairro;
+		return registro;
 	}
 
 	/**
-	 * Sets the bairro.
+	 * Sets the registro.
 	 *
-	 * @param bairro the bairro to set
+	 * @param registro the new registro
 	 */
-	public void setBairro(String bairro)
+	public void setRegistro(String registro)
 	{
-		this.bairro = bairro;
+		this.registro = registro;
 	}
 
 	/**
-	 * Gets the numero.
+	 * Gets the data.
 	 *
-	 * @return the numero
+	 * @return the data
 	 */
-	public String getNumero()
+	public Integer getData()
 	{
-		return numero;
+		return data;
 	}
 
 	/**
-	 * Sets the numero.
+	 * Sets the data.
 	 *
-	 * @param numero the numero to set
+	 * @param data the new data
 	 */
-	public void setNumero(String numero)
+	public void setData(Integer data)
 	{
-		this.numero = numero;
+		this.data = data;
 	}
 
 	/**
-	 * Gets the cep.
+	 * Gets the usuario.
 	 *
-	 * @return the cep
+	 * @return the usuario
 	 */
-	public String getCep()
+	public String getUsuario()
 	{
-		return cep;
+		return usuario;
 	}
 
 	/**
-	 * Sets the cep.
+	 * Sets the usuario.
 	 *
-	 * @param cep the cep to set
+	 * @param usuario the new usuario
 	 */
-	public void setCep(String cep)
+	public void setUsuario(String usuario)
 	{
-		this.cep = cep;
+		this.usuario = usuario;
 	}
 
 	/**
-	 * Gets the tipo endereco.
+	 * Gets the empresa.
 	 *
-	 * @return the tipoEndereco
+	 * @return the empresa
 	 */
-	public String getTipoEndereco()
+	public Integer getEmpresa()
 	{
-		return tipoEndereco;
+		return empresa;
 	}
 
 	/**
-	 * Sets the tipo endereco.
+	 * Sets the empresa.
 	 *
-	 * @param tipoEndereco the tipoEndereco to set
+	 * @param empresa the new empresa
 	 */
-	public void setTipoEndereco(String tipoEndereco)
+	public void setEmpresa(Integer empresa)
 	{
-		this.tipoEndereco = tipoEndereco;
+		this.empresa = empresa;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	 * @see com.prosperitasglobal.sendsolv.model.ModelCosmeDamiao#toString()
 	 */
 	@Override
 	public String toString()
 	{
-		return "Endereco [getId()=" + getId() + ", getLogradouro()=" + getLogradouro() + ", getCidade()=" + getCidade()
-				+ ", getEstado()=" + getEstado() + ", getBairro()=" + getBairro() + ", getNumero()=" + getNumero()
-				+ ", getCep()=" + getCep() + ", getTipoEndereco()=" + getTipoEndereco() + ", toString()="
-				+ super.toString() + "]";
+		return "Grupo [getId()=" + getId() + ", getType()=" + getType() + ", getTabela()=" + getTabela()
+				+ ", getAcao()=" + getAcao() + ", getRegistro()=" + getRegistro() + ", getData()=" + getData()
+				+ ", getUsuario()=" + getUsuario() + ", getEmpresa()=" + getEmpresa() + ", getParentKey()="
+				+ getParentKey() + ", toString()=" + super.toString() + "]";
 	}
 
 }

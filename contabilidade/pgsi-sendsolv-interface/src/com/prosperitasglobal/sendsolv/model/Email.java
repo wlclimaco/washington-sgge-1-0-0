@@ -1,6 +1,5 @@
 package com.prosperitasglobal.sendsolv.model;
 
-
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -10,6 +9,8 @@ public class Email extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
+
+	private Integer type;
 
 	/** The type of an account. */
 	private String email;
@@ -81,15 +82,22 @@ public class Email extends ModelCosmeDamiao
 		this.description = description;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	public Integer getType()
+	{
+		return type;
+	}
+
+	public void setType(Integer type)
+	{
+		this.type = type;
+	}
+
 	@Override
 	public String toString()
 	{
 		return "Email [getId()=" + getId() + ", getEmail()=" + getEmail() + ", getDescription()=" + getDescription()
-				+ ", toString()=" + super.toString() + "]";
+				+ ", getType()=" + getType() + ", getParentKey()=" + getParentKey() + ", toString()="
+				+ super.toString() + "]";
 	}
 
 }

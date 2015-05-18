@@ -1,6 +1,5 @@
 package com.prosperitasglobal.sendsolv.model;
 
-
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -28,9 +27,6 @@ public class Endereco extends ModelCosmeDamiao
 
 	/** The cep. */
 	private String cep;
-
-	/** The tipo endereco. */
-	private String tipoEndereco;
 
 	/**
 	 * Default constructor.
