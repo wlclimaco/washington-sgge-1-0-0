@@ -1,5 +1,7 @@
 package com.prosperitasglobal.sendsolv.model;
 
+import com.qat.framework.model.QATModel;
+
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -69,7 +71,8 @@ public class ModelCosmeDamiao extends QATModel
 	@Override
 	public String toString()
 	{
-		return "ModelCosmeDamiao [getParentKey()=" + getParentKey() + ", getModelAction()=" + getModelAction()
+		return "ModelCosmeDamiao [getParentKey()=" + getParentKey() + ", getType()=" + getType() + ", getAcaoType()="
+				+ getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum() + ", getModelAction()=" + getModelAction()
 				+ ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC()
 				+ ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC()
 				+ ", toString()=" + super.toString() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
