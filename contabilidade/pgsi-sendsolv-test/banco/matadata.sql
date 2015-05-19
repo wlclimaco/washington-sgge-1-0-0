@@ -2,11 +2,11 @@ CREATE TABLE [dbo].[regime](
 	[id]           [int] NOT NULL,
 	[nome]         [varchar](100) NULL,
 	[descricao]    [varchar](200) NULL,
-	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())), 
+	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
-    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())), 
+    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
-CONSTRAINT [pk_regime_id] PRIMARY KEY CLUSTERED 
+CONSTRAINT [pk_regime_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -35,7 +35,7 @@ CREATE TABLE [dbo].[empresa] (
     [create_user]  [varchar](50) NULL,
     [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
-CONSTRAINT [pk_socio_id] PRIMARY KEY CLUSTERED 
+CONSTRAINT [pk_socio_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -56,9 +56,9 @@ INSERT INTO [dbo].[empresa]
 
 GO
 /** ---------------------------------------------------------------*/
-CREATE TABLE [dbo].[documento]( 
+CREATE TABLE [dbo].[documento](
 	[id]           [int] NOT NULL,
-	[tabela]	 [int](10) NULL,
+	[tabela]	 [int] NULL,
 	[parentId]	 [int] NULL,
 	[type]         [int] NULL,
 	[description]  [varchar](200) NULL,
@@ -69,7 +69,7 @@ CREATE TABLE [dbo].[documento](
     [create_user]  [varchar](50) NULL,
     [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
-CONSTRAINT [pk_documento_id] PRIMARY KEY CLUSTERED 
+CONSTRAINT [pk_documento_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -106,14 +106,14 @@ CREATE TABLE [dbo].[email](
 	[tabela]	   [int] NULL,
 	[parentId]	   [int] NULL,
 	[type]         [int] NULL,
-	[email]        [varchar](100)  NULL,  
+	[email]        [varchar](100)  NULL,
 	[description]  [varchar](200) NULL,
 	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
 
-CONSTRAINT [pk_email_id] PRIMARY KEY CLUSTERED 
+CONSTRAINT [pk_email_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -142,20 +142,20 @@ GO
 /** ---------------------------------------------------------------*/
 CREATE TABLE [dbo].[endereco](
 	[id]           [int] NOT NULL,
-	[tabela]		 [int]  NULL,  
-	[parentId]	 [int]  NULL,  
-	[type]         [int]  NULL,  
-	[logradouro]	 [varchar](200)  NULL,  
-	[cidade]		 [varchar](100)  NULL,  
-	[estado]		 [varchar](2)  NULL,  
-	[bairro]		 [varchar](50)  NULL,  
-	[numero]       [varchar](10)  NULL,  
-	[cep]			 [varchar](15)  NULL,  
-	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())), 
-    [create_user]  [varchar](50)  NULL,  
+	[tabela]		 [int]  NULL,
+	[parentId]	 [int]  NULL,
+	[type]         [int]  NULL,
+	[logradouro]	 [varchar](200)  NULL,
+	[cidade]		 [varchar](100)  NULL,
+	[estado]		 [varchar](2)  NULL,
+	[bairro]		 [varchar](50)  NULL,
+	[numero]       [varchar](10)  NULL,
+	[cep]			 [varchar](15)  NULL,
+	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50)  NULL,
     [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
-    [modify_user]  [varchar](50)  NULL,  
-CONSTRAINT [pk_endereco_id] PRIMARY KEY CLUSTERED 
+    [modify_user]  [varchar](50)  NULL,
+CONSTRAINT [pk_endereco_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -195,11 +195,11 @@ CREATE TABLE [dbo].[telefone] (
 	[tabela]	   [int] NULL,
 	[ddd] 		   [varchar](5) NULL,
 	[telefone]     [varchar](15) NULL,
-	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())), 
+	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
-    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())), 
+    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
-CONSTRAINT [pk_telefone_id] PRIMARY KEY CLUSTERED 
+CONSTRAINT [pk_telefone_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -215,12 +215,12 @@ CREATE TABLE [dbo].[socio](
 	[nome]         [varchar](200) NULL,
 	[cota]         [varchar](10) NULL,
 	[porcentagem]  [varchar](10) NULL,
-	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())), 
+	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
-    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())), 
+    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
-	
-CONSTRAINT [pk_socio_id] PRIMARY KEY CLUSTERED 
+
+CONSTRAINT [pk_socios_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -233,20 +233,63 @@ CREATE TABLE [dbo].[historico] (
 	[type]         [int] NULL,
 	[acao]         [int] NULL,
 	[registro]     [varchar](200) NULL,
-	[data]         [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),  
+	[data]         [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[usuario]      [varchar](20) NULL,
 	[empresa]      [int] NULL,
 	[status]       [int] NULL,
-	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())), 
+	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
-    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())), 
+    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
-CONSTRAINT [pk_historico_id] PRIMARY KEY CLUSTERED 
+CONSTRAINT [pk_historico_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 /** ---------------------------------------------------------------*/
+CREATE TABLE [dbo].[CNAE] (
+    [CODIGO]     [VARCHAR](6) NOT NULL,
+    [CNAE]       [VARCHAR](10) NULL,
+    [DESCRICAO]  [VARCHAR](100) NULL,
+    [ABREVIADO]  [VARCHAR](50) NULL,
+CONSTRAINT [pk_cnae_id] PRIMARY KEY CLUSTERED
+(
+	[CODIGO] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 
 
 
+CREATE TABLE [dbo].[CSOSN] (
+    [CODIGO]     [VARCHAR](3) NOT NULL,
+    [DESCRICAO]  [VARCHAR](200) NULL,
+CONSTRAINT [pk_csosn_id] PRIMARY KEY CLUSTERED
+(
+	[CODIGO] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+CREATE TABLE [dbo].[NCM] (
+    [NCM]        [VARCHAR](10) NOT NULL,
+    [DESCRICAO]  [VARCHAR](100) NULL,
+    [UNIDADE]    [VARCHAR](2) NULL,
+CONSTRAINT [pk_ncm_id] PRIMARY KEY CLUSTERED
+(
+	[NCM] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+CREATE TABLE [dbo].[CIDADE](
+    [CODIGO]     [VARCHAR](6) NOT NULL,
+    [CIDADE]     [VARCHAR](40) NULL,
+    [UF]         [VARCHAR](2) NULL,
+    [CEP]        [VARCHAR](10) NULL,
+    [IBGE]       [VARCHAR](10) NULL,
+    [ESTADO]     [VARCHAR](10) NULL,
+    [MUNICIPIO]  [VARCHAR](10) NULL,
+CONSTRAINT [pk_cidade_id] PRIMARY KEY CLUSTERED
+(
+	[CODIGO] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]

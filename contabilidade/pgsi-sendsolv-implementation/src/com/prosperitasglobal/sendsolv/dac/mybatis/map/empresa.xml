@@ -15,11 +15,10 @@
        exactly. -->
 
   <resultMap id="empresaResult" type="Empresa" extends="CBOFMap.businessResult">
-    <result property="parentOrganizationId" column="FK_empresa_id" />
-    <result property="parentOrganizationName" column="org_name" />
-   	<result property="batchApprovalDayLimit" column="money_transfer_offset_days"/>
-	<result property="fundsTransferDayLimit" column="funds_transfer_offset_days"/>
-
+    <result property="id" column="id" />
+    <result property="nome" column="nome" />
+   	<collection property="regime" column="regime" select="cadastrosMap.fetchRegimeByEmpresaId"/>
+	<collection property="enderecos" column="id" select="enderecoMap.fetchEnderecoByEmpresaId"/>
 	<collection property="frequencyBasedEventList" column="business_id" select="FrequencyEventMap.fetchFrequencyByEmpresaId"/>
 	<collection property="businessProductPlanList" column="business_id" select="BusinessProductPlanMap.fetchBusinessProductPlanByEmpresaId"/>
   </resultMap>
