@@ -2,7 +2,7 @@ package com.prosperitasglobal.sendsolv.model.request;
 
 import com.prosperitasglobal.sendsolv.model.FrequencyBasedEventCalendar;
 import com.prosperitasglobal.sendsolv.model.Location;
-import com.qat.framework.model.request.Request;
+import com.prosperitasglobal.sendsolv.model.MoneyTransferBatch;
 
 /**
  * This request is used when {@link com.prosperitasglobal.sendsolv.model.MoneyTransferBatch}es are to be created from

@@ -1,40 +1,11 @@
 package com.prosperitasglobal.sendsolv.empresa.controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.logging.Logger;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
-import com.prosperitasglobal.sendsolv.bai.IEmpresaBAI;
-import com.prosperitasglobal.sendsolv.bai.IMemberBAI;
-import com.prosperitasglobal.sendsolv.model.Cnae;
-import com.prosperitasglobal.sendsolv.model.Documento;
-import com.prosperitasglobal.sendsolv.model.Email;
-import com.prosperitasglobal.sendsolv.model.Empresa;
-import com.prosperitasglobal.sendsolv.model.Endereco;
-import com.prosperitasglobal.sendsolv.model.Socio;
-import com.prosperitasglobal.sendsolv.model.Telefone;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
-import com.prosperitasglobal.sendsolv.model.response.MemberResponse;
-import com.qat.framework.validation.ValidationUtil;
 
-/**
- * The Class EmpresaBaseController.
- */
-
-/**
- * @author Flavio Tosta.
- *
- */
 public class EmpresaBaseController extends UtilControllerD
 {
 
@@ -51,64 +22,38 @@ public class EmpresaBaseController extends UtilControllerD
 	private static final String ENROLLED_MEMBERS = "enrolled_members";
 
 	/** The Empresa BAI. */
-	private IEmpresaBAI locationBAI;
-
-	/** The Member BAI. */
-	private IMemberBAI memberBAI;
+	private IEmpresaBAI empresaBAI
 
 	/**
-	 * Gets the member BAI.
+	 * Gets the empresa bai.
 	 *
-	 * @return the member BAI
-	 */
-	@Override
-	public IMemberBAI getMemberBAI()
-	{
-		return memberBAI;
-	}
-
-	/**
-	 * Sets the member bai.
-	 *
-	 * @param memberBAI the member bai
-	 */
-	@Override
-	@Resource
-	public void setMemberBAI(IMemberBAI memberBAI)
-	{
-		this.memberBAI = memberBAI;
-	}
-
-	/**
-	 * Gets the location bai.
-	 *
-	 * @return the location bai
+	 * @return the empresa bai
 	 */
 	public IEmpresaBAI getEmpresaBAI()
 	{
-		return locationBAI;
+		return empresaBAI;
 	}
 
 	/**
-	 * Sets the location bai.
+	 * Sets the empresa bai.
 	 *
-	 * @param locationBAI the location bai
+	 * @param empresaBAI the empresa bai
 	 */
 	@Resource
-	public void setEmpresaBAI(IEmpresaBAI locationBAI)
+	public void setEmpresaBAI(IEmpresaBAI empresaBAI)
 	{
-		this.locationBAI = locationBAI;
+		this.empresaBAI = empresaBAI;
 	}
 
 	/**
 	 * Empresa edit mav.
 	 *
-	 * @param locationId the location id
+	 * @param empresaId the empresa id
 	 * @param returnViewName the return view name
 	 * @param isSelect the is select
 	 * @return the model and view
 	 */
-	protected ModelAndView locationEditMAV(Integer locationId, String returnViewName, Boolean isSelect,
+	protected ModelAndView empresaEditMAV(Integer empresaId, String returnViewName, Boolean isSelect,
 			HttpServletRequest request)
 	{
 		ModelAndView modelAndView = new ModelAndView(returnViewName);
@@ -120,11 +65,11 @@ public class EmpresaBaseController extends UtilControllerD
 			{
 				modelAndView = listSelectBusiness(modelAndView, request);
 			}
-			if (!ValidationUtil.isNullOrZero(locationId))
+			if (!ValidationUtil.isNullOrZero(empresaId))
 			{
 
 				modelAndView.addObject(RESPONSE,
-						getMapper().writeValueAsString(fetchEmpresaById(new FetchByIdRequest(locationId))));
+						getMapper().writeValueAsString(fetchEmpresaById(new FetchByIdRequest(empresaId))));
 
 				return modelAndView;
 			}
@@ -145,12 +90,12 @@ public class EmpresaBaseController extends UtilControllerD
 	/**
 	 * Fetch enrolled members.
 	 *
-	 * @param locationId the location id
+	 * @param empresaId the empresa id
 	 * @return the integer
 	 */
-	private Integer fetchEnrolledMembers(Integer locationId, HttpServletRequest request)
+	private Integer fetchEnrolledMembers(Integer empresaId, HttpServletRequest request)
 	{
-		MemberResponse memberResponse = fetchMembersEnrolledMember(locationId, BusinessTypeEnum.LOCATION, request);
+		MemberResponse memberResponse = fetchMembersEnrolledMember(empresaId, BusinessTypeEnum.LOCATION, request);
 
 		if (memberResponse.getMemberList() != null)
 		{
@@ -161,20 +106,19 @@ public class EmpresaBaseController extends UtilControllerD
 	}
 
 	/**
-	 * Fetch location by request.
+	 * Fetch empresa by request.
 	 *
 	 * @param pagedInquiryRequest the paged inquiry request
-	 * @return the location response
+	 * @return the empresa response
 	 */
 	public EmpresaResponse fetchEmpresaByRequest(PagedInquiryRequest pagedInquiryRequest)
 	{
 
-		EmpresaResponse locationResponse = new EmpresaResponse();
+		EmpresaResponse empresaResponse = new EmpresaResponse();
 		try
 		{
 
-			locationResponse = Mock();
-			// getEmpresaBAI().fetchEmpresaByRequest(pagedInquiryRequest);
+			empresaResponse = getEmpresaBAI().fetchEmpresaByRequest(pagedInquiryRequest);
 
 		}
 		catch (Exception e)
@@ -185,24 +129,23 @@ public class EmpresaBaseController extends UtilControllerD
 			}
 		}
 
-		return locationResponse;
+		return empresaResponse;
 	}
 
 	/**
-	 * Fetch location by id.
+	 * Fetch empresa by id.
 	 *
 	 * @param fetchByIdRequest the fetch by id request
-	 * @return the location response
+	 * @return the empresa response
 	 */
 	public EmpresaResponse fetchEmpresaById(FetchByIdRequest fetchByIdRequest)
 	{
 
-		EmpresaResponse locationResponse = new EmpresaResponse();
+		EmpresaResponse empresaResponse = new EmpresaResponse();
 		try
 		{
 
-			locationResponse = MockById();
-			// getEmpresaBAI().fetchEmpresaById(fetchByIdRequest);
+			empresaResponse = getEmpresaBAI().fetchEmpresaById(fetchByIdRequest);
 
 		}
 		catch (Exception e)
@@ -213,138 +156,7 @@ public class EmpresaBaseController extends UtilControllerD
 			}
 		}
 
-		return locationResponse;
-	}
-
-	public EmpresaResponse Mock()
-	{
-		EmpresaResponse empresaResponse = new EmpresaResponse();
-
-		List<Empresa> empresas = new ArrayList<Empresa>();
-		for (Integer i = 0; i < 100; i++)
-		{
-			Empresa empresa = new Empresa();
-			empresa.setId(i);
-			empresa.setNome("nome_" + i);
-			Socio socio = new Socio();
-			socio.setId(1);
-			socio.setNome("Washington");
-			empresa.setSocios(new ArrayList<Socio>());
-			empresa.getSocios().add(socio);
-			Endereco endereco = new Endereco();
-			empresa.setEnderecos(new ArrayList<Endereco>());
-			endereco.setBairro("bairro");
-			endereco.setCep("cep");
-			endereco.setCidade("cidade");
-			endereco.setEstado("estado");
-			endereco.setId(1);
-			endereco.setLogradouro("logradouro");
-			endereco.setNumero("1000");
-			empresa.getEnderecos().add(endereco);
-			empresa.setEmails(new ArrayList<Email>());
-			Email email = new Email();
-			email.setId(1);
-			email.setEmail("wlclimaco@gmail.com");
-			empresa.getEmails().add(email);
-			empresa.setCnaes(new ArrayList<Cnae>());
-			Cnae cnae = new Cnae();
-			cnae.setId(1);
-			cnae.setDescription("1-(4-BETA-HIDROXIETILSULFOFENIL)-3-METIL-5-PIRAZOLONA; FABRICAÇÃO DE");
-			cnae.setNumber("2029-1/00");
-			empresa.getCnaes().add(cnae);
-			cnae = new Cnae();
-			cnae.setId(2);
-			cnae.setDescription("1-(4-SULFOFENIL)-3-METIL-5-PIRAZOLONA (ÁCIDO PIRAZÓLICO); FABRICAÇÃO DE");
-			cnae.setNumber("2029-2/00");
-			empresa.getCnaes().add(cnae);
-			empresa.setDocumentos(new ArrayList<Documento>());
-			Documento documento = new Documento();
-			documento.setId(1);
-			documento.setType("CNPJ");
-			documento.setNumero("000000000001111/000-9");
-			empresa.getDocumentos().add(documento);
-			documento = new Documento();
-			documento.setId(2);
-			documento.setType("IM");
-			documento.setNumero("00000001");
-			empresa.getDocumentos().add(documento);
-			empresa.setTelefones(new ArrayList<Telefone>());
-			Telefone telefone = new Telefone();
-			telefone.setId(1);
-			telefone.setDdd("34");
-			telefone.setNumero("91782776");
-			empresa.getTelefones().add(telefone);
-			empresa.setRegime("Simples Nacional");
-			empresas.add(empresa);
-
-		}
-		empresaResponse.setEmpresaList(empresas);
 		return empresaResponse;
 	}
 
-	public EmpresaResponse MockById()
-	{
-		EmpresaResponse empresaResponse = new EmpresaResponse();
-
-		List<Empresa> empresas = new ArrayList<Empresa>();
-
-		Empresa empresa = new Empresa();
-		empresa.setId(1);
-		empresa.setNome("nome_" + 1);
-		Socio socio = new Socio();
-		socio.setId(1);
-		socio.setNome("Washington");
-		empresa.setSocios(new ArrayList<Socio>());
-		empresa.getSocios().add(socio);
-		Endereco endereco = new Endereco();
-		empresa.setEnderecos(new ArrayList<Endereco>());
-		endereco.setBairro("bairro");
-		endereco.setCep("cep");
-		endereco.setCidade("cidade");
-		endereco.setEstado("estado");
-		endereco.setId(1);
-		endereco.setLogradouro("logradouro");
-		endereco.setNumero("1000");
-		empresa.getEnderecos().add(endereco);
-		empresa.setEmails(new ArrayList<Email>());
-		Email email = new Email();
-		email.setId(1);
-		email.setEmail("wlclimaco@gmail.com");
-		email.setDescription("NF-e");
-		empresa.getEmails().add(email);
-		empresa.setCnaes(new ArrayList<Cnae>());
-		Cnae cnae = new Cnae();
-		cnae.setId(1);
-		cnae.setDescription("1-(4-BETA-HIDROXIETILSULFOFENIL)-3-METIL-5-PIRAZOLONA; FABRICAÇÃO DE");
-		cnae.setNumber("2029-1/00");
-		empresa.getCnaes().add(cnae);
-		cnae = new Cnae();
-		cnae.setId(2);
-		cnae.setDescription("1-(4-SULFOFENIL)-3-METIL-5-PIRAZOLONA (ÁCIDO PIRAZÓLICO); FABRICAÇÃO DE");
-		cnae.setNumber("2029-2/00");
-		empresa.getCnaes().add(cnae);
-		empresa.setDocumentos(new ArrayList<Documento>());
-		Documento documento = new Documento();
-		documento.setId(1);
-		documento.setType("CNPJ");
-		documento.setNumero("000000000001111/000-9");
-		empresa.getDocumentos().add(documento);
-		documento = new Documento();
-		documento.setId(2);
-		documento.setType("IM");
-		documento.setNumero("00000001");
-		empresa.getDocumentos().add(documento);
-		empresa.setTelefones(new ArrayList<Telefone>());
-		Telefone telefone = new Telefone();
-		telefone.setId(1);
-		telefone.setDdd("34");
-		telefone.setNumero("91782776");
-		telefone.setType("Residencial");
-		empresa.getTelefones().add(telefone);
-		empresa.setRegime("Simples Nacional");
-		empresas.add(empresa);
-
-		empresaResponse.setEmpresaList(empresas);
-		return empresaResponse;
-	}
 }

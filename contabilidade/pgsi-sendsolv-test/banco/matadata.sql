@@ -252,6 +252,11 @@ CREATE TABLE [dbo].[CNAE] (
     [CNAE]       [VARCHAR](10) NULL,
     [DESCRICAO]  [VARCHAR](100) NULL,
     [ABREVIADO]  [VARCHAR](50) NULL,
+    [status]       [int] NULL,
+	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
 CONSTRAINT [pk_cnae_id] PRIMARY KEY CLUSTERED
 (
 	[CODIGO] ASC
@@ -263,6 +268,11 @@ CONSTRAINT [pk_cnae_id] PRIMARY KEY CLUSTERED
 CREATE TABLE [dbo].[CSOSN] (
     [CODIGO]     [VARCHAR](3) NOT NULL,
     [DESCRICAO]  [VARCHAR](200) NULL,
+    [status]       [int] NULL,
+	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
 CONSTRAINT [pk_csosn_id] PRIMARY KEY CLUSTERED
 (
 	[CODIGO] ASC
@@ -273,6 +283,11 @@ CREATE TABLE [dbo].[NCM] (
     [NCM]        [VARCHAR](10) NOT NULL,
     [DESCRICAO]  [VARCHAR](100) NULL,
     [UNIDADE]    [VARCHAR](2) NULL,
+    [status]       [int] NULL,
+	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
 CONSTRAINT [pk_ncm_id] PRIMARY KEY CLUSTERED
 (
 	[NCM] ASC
@@ -288,7 +303,27 @@ CREATE TABLE [dbo].[CIDADE](
     [IBGE]       [VARCHAR](10) NULL,
     [ESTADO]     [VARCHAR](10) NULL,
     [MUNICIPIO]  [VARCHAR](10) NULL,
+    [status]       [int] NULL,
+	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
 CONSTRAINT [pk_cidade_id] PRIMARY KEY CLUSTERED
+(
+	[CODIGO] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+CREATE TABLE [dbo].[cnaePorRelacionamento](
+    [id]         [int] NOT NULL,
+    [idCnae]     [int] NOT NULL,
+    [idParentId] [int] NOT NULL,
+    [tabela]     [int] NOT NULL,
+	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_cnaeRelacionamento_id] PRIMARY KEY CLUSTERED
 (
 	[CODIGO] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]

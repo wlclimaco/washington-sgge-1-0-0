@@ -1,7 +1,6 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
 import com.prosperitasglobal.sendsolv.model.CurrencyPurchase;
-import com.qat.framework.model.request.MaintenanceRequest;
 
 /**
  * Class for the maintenance of currency purchase objects.

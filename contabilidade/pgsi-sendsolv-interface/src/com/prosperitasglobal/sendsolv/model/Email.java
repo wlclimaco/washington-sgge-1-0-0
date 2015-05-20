@@ -10,8 +10,6 @@ public class Email extends ModelCosmeDamiao
 	/** The SendSolv id for the account. */
 	private Integer id;
 
-	private Integer type;
-
 	/** The type of an account. */
 	private String email;
 
@@ -82,21 +80,11 @@ public class Email extends ModelCosmeDamiao
 		this.description = description;
 	}
 
-	public Integer getType()
-	{
-		return type;
-	}
-
-	public void setType(Integer type)
-	{
-		this.type = type;
-	}
-
 	@Override
 	public String toString()
 	{
 		return "Email [getId()=" + getId() + ", getEmail()=" + getEmail() + ", getDescription()=" + getDescription()
-				+ ", getType()=" + getType() + ", getParentKey()=" + getParentKey() + ", toString()="
+				+ ", getType()=" + getType() + ", getParentId()=" + getParentId() + ", toString()="
 				+ super.toString() + "]";
 	}
 

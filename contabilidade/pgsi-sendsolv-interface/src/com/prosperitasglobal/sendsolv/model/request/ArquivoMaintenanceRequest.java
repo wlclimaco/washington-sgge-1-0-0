@@ -1,7 +1,6 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
 import com.prosperitasglobal.sendsolv.model.Arquivo;
-import com.qat.framework.model.request.MaintenanceRequest;
 
 public class ArquivoMaintenanceRequest extends MaintenanceRequest
 {

@@ -6,10 +6,10 @@
 <script type="text/javascript">
 	pgsi.pages.empresa.dialogSettings = {
 
-		insert : function (iId, sName) {
+		insert : function (iId, sName,sModelAction) {
 
 			return {
-				title : $.pgsi.locale.get("commons.dialog.delete.title"),
+				title : $.pgsi.locale.get("commons.dialog.insert.title"),
 				width : 800,
 				height: 600,
 
@@ -20,42 +20,19 @@
 					var oButtons = {};
 
 					// Confirm Button
-					oButtons[$.pgsi.locale.get("commons.dialog.remove")] = function () {
+					oButtons[$.pgsi.locale.get("commons.dialog.insert")] = function () {
 
-						var aIds;
-
-						var fnCallBack = function(oResponse) {
-
-							if (oResponse.operationSuccess == true) {
-
-								// Validations for change pagination when delete one or more groups of last page.
-								var iStart;
-								var oSettings = pgsi.pages.location.locationTable.fnSettings();
-
-									// If exist just one group at last page and this group is deleted, the pagination back to previous page.
-									if (((oSettings._iRecordsDisplay - 1) % $('.dataTables_length').find('select').val() === 0))
-									{
-										iStart = (oSettings._iRecordsDisplay - 1) - oSettings._iDisplayLength;
-									}
-
-								$.pgsi.table.reloadTable({
-									table 		: pgsi.pages.location.locationTable,
-									iStart 		: iStart
-								});
-							}else{
-								pgsi.pages.sendsolv.fnDialogMessageError("",{},oResponse,null,$.pgsi.locale.get("commons.dialog.error.title","Location"),true);
-							}
+						var sUrl = "";
+						if(sModelAction == "insert")
+						{
+							sUrl = "api/empresa/insert"
 						}
+						else
+						{
+							sUrl = "api/empresa/update"
+						}
+						pgsi.pages.empresa.form.ajaxCall(sUrl,sModelAction);
 
-						var oRequest = new LocationMaintenanceRequest({location : {id : iId }});
-
-						$.pgsi.ajax.post({
-							 sUrl 		: 'api/location/delete',
-							 oRequest 	: oRequest,
-							 fnCallback : fnCallBack
-						});
-
-						$(this).dialog('close');
 					};
 
 					// Cancel Button

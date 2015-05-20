@@ -3,7 +3,6 @@ package com.prosperitasglobal.sendsolv.model.request;
 import java.util.List;
 
 import com.prosperitasglobal.sendsolv.model.MoneyTransferStatus;
-import com.qat.framework.model.request.MaintenanceRequest;
 
 /**
  * The Class MoneyTransferStatusMaintenanceRequest
