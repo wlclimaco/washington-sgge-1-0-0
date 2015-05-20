@@ -114,5 +114,11 @@
     FROM socio ORDER BY nome ASC
   </select>
 
+    <select id="fetchSocioByEmpresaId"  parameterType="Integer" resultMap="socioResult">
+    SELECT
+	<include refid="allSocioColumns" />
+    FROM socio where tabela = 1 parentId = #{id} ORDER BY id ASC
+  </select>
+
 
 </mapper>

@@ -1,8 +1,8 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
+import com.prosperitasglobal.sendsolv.model.MoneyTransfer;
 import com.prosperitasglobal.sendsolv.model.MoneyTransferBatch;
 import com.prosperitasglobal.sendsolv.model.TransferSetting;
-import com.qat.framework.model.request.Request;
 
 /**
  * This request is used when {@link com.prosperitasglobal.sendsolv.model.MoneyTransfer}s are to be created from

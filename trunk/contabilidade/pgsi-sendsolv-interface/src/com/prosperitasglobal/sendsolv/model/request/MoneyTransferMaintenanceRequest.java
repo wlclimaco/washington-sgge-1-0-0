@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.prosperitasglobal.sendsolv.model.MoneyTransfer;
-import com.qat.framework.model.request.MaintenanceRequest;
-import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class MoneyTransferMaintenanceRequest.

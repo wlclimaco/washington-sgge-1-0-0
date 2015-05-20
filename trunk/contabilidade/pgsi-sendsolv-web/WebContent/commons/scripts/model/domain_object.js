@@ -418,3 +418,128 @@ var SuspiciousActivity = function(oParam) {
 
 	}
 };
+
+var ModelCosmeDamiao = function(oParam){
+
+	if (oParam) {
+		this.parentId    = oParam.parentId;
+		this.type        = oParam.type;
+		this.acaoType    = oParam.acaoType;
+		this.tabelaEnum  = oParam.tabelaEnum;
+		this.statusList  = [ oParam.statusList ];
+	}
+};
+
+TransferParticipant.prototype = new Person();
+
+var Regime = function(oParam) {
+
+	ModelCosmeDamiao.call(this, oParam);
+
+	if (oParam) {
+		this.id 			= oParam.id;
+		this.nome 		    = oParam.nome;
+		this.descricao      = oParam.descricao;
+	}
+};
+Regime.prototype = new ModelCosmeDamiao();
+
+var Endereco = function(oParam) {
+
+	ModelCosmeDamiao.call(this, oParam);
+
+	if (oParam) {
+		this.id				= oParam.id;
+		this.logradouro		= oParam.logradouro;
+		this.cidade			= oParam.cidade;
+		this.estado			= oParam.estado;
+		this.bairro			= oParam.bairro;
+		this.numero			= oParam.numero;
+		this.cep			= oParam.cep;
+		this.modelAction 	= oParam.modelAction;
+
+	}
+};
+Endereco.prototype = new ModelCosmeDamiao();
+
+var Telefone = function(oParam) {
+
+	ModelCosmeDamiao.call(this, oParam);
+
+	if (oParam) {
+		this.id				= oParam.id;
+		this.ddd			= oParam.ddd;
+		this.numero			= oParam.numero;
+		this.modelAction 	= oParam.modelAction;
+
+	}
+};
+Telefone.prototype = new ModelCosmeDamiao();
+
+var Email = function(oParam) {
+
+	ModelCosmeDamiao.call(this, oParam);
+
+	if (oParam) {
+		this.id				= oParam.id;
+		this.email			= oParam.email;
+		this.description	= oParam.description;
+		this.modelAction 	= oParam.modelAction;
+
+	}
+};
+Email.prototype = new ModelCosmeDamiao();
+
+
+var Cnae = function(oParam) {
+
+	ModelCosmeDamiao.call(this, oParam);
+
+	if (oParam) {
+		this.id				= oParam.id;
+		this.codigo			= oParam.codigo;
+		this.cnae			= oParam.cnae;
+		this.descricao		= oParam.descricao;
+		this.abreviado		= oParam.abreviado;
+		this.modelAction 	= oParam.modelAction;
+
+	}
+};
+Cnae.prototype = new ModelCosmeDamiao();
+
+
+var Socio = function(oParam) {
+
+	ModelCosmeDamiao.call(this, oParam);
+
+	if (oParam) {
+		this.id				= oParam.id;
+		this.nome			= oParam.nome;
+		this.cota			= oParam.cota;
+		this.porcentagem	= oParam.porcentagem;
+		this.modelAction 	= oParam.modelAction;
+
+	}
+};
+Socio.prototype = new ModelCosmeDamiao();
+
+
+var Empresa = function(oParam) {
+
+	ModelCosmeDamiao.call(this, oParam);
+
+	if (oParam) {
+		this.id				= oParam.id;
+		this.nome			= oParam.nome;
+		this.regime			= oParam.regime;
+		this.enderecos		= oParam.enderecos;
+		this.documentos		= oParam.documentos;
+		this.emails			= oParam.emails;
+		this.Telefones		= oParam.Telefones;
+		this.socios			= oParam.socios;
+		this.cnaes			= oParam.cnaes;
+		this.modelAction 	= oParam.modelAction;
+
+	}
+};
+Endereco.prototype = new ModelCosmeDamiao();

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <div id="wb_Form1" style="position:absolute;left:0px;top:0px;width:782px;height:365px;z-index:42;">
-   <form name="Form1" method="post" action="mailto:yourname@yourdomain.com" enctype="text/plain" id="Form1">
+   <form name="Form1" method="post" action="" enctype="text/plain" id="Form1">
       <div id="wb_Text1" style="position:absolute;left:30px;top:26px;width:55px;height:16px;z-index:0;text-align:left;">
          <span style="color:#000000;font-family:Arial;font-size:13px;">Codigo :</span>
       </div>
@@ -29,20 +29,21 @@
 	 <div id="wb_Form2" style="position:absolute;left:0px;top:80px;width:782px;height:365px;z-index:42;">
 	  <jsp:include page="../email/email_main.jsp" flush="true" />
 	  <div id="wb_Form3" style="position:absolute;left:0px;top:0px;">
-      <input type="text" id="Editbox3" style="position:absolute;left:99px;top:88px;width:286px;height:19px;line-height:19px;z-index:8;" name="logradouro" value="">
+	  <input type="text" id="enderecoId" class="hide">
+      <input type="text" id="logradouro" style="position:absolute;left:99px;top:88px;width:286px;height:19px;line-height:19px;z-index:8;" name="logradouro" value="">
       <div id="wb_Text5" style="position:absolute;left:11px;top:93px;width:88px;height:16px;z-index:9;text-align:left;">
          <span style="color:#000000;font-family:Arial;font-size:13px;">Logradouro :</span>
       </div>
       <div id="wb_Text6" style="position:absolute;left:399px;top:93px;width:58px;height:16px;z-index:10;text-align:left;">
          <span style="color:#000000;font-family:Arial;font-size:13px;">Cidade :</span>
       </div>
-      <input type="text" id="Editbox4" style="position:absolute;left:453px;top:88px;width:173px;height:19px;line-height:19px;z-index:11;" name="cidade" value="">
+      <input type="text" id="cidade" style="position:absolute;left:453px;top:88px;width:173px;height:19px;line-height:19px;z-index:11;" name="cidade" value="">
       <div id="wb_Text7" style="position:absolute;left:637px;top:93px;width:58px;height:16px;z-index:12;text-align:left;">
          <span style="color:#000000;font-family:Arial;font-size:13px;">Estado :</span>
       </div>
-      <select name="estado" size="1" id="Combobox1" style="position:absolute;left:695px;top:88px;width:68px;height:21px;z-index:13;">
+      <select name="estado" size="1" id="estado" style="position:absolute;left:695px;top:88px;width:68px;height:21px;z-index:13;">
       </select>
-      <input type="text" id="Editbox5" style="position:absolute;left:99px;top:116px;width:103px;height:19px;line-height:19px;z-index:14;" name="cep" value="">
+      <input type="text" id="cep" style="position:absolute;left:99px;top:116px;width:103px;height:19px;line-height:19px;z-index:14;" name="cep" value="">
       <div id="wb_Text8" style="position:absolute;left:45px;top:121px;width:40px;height:16px;z-index:15;text-align:left;">
          <span style="color:#000000;font-family:Arial;font-size:13px;">CEP :</span>
       </div>
@@ -58,7 +59,7 @@
 			<div id="wb_Text19" style="position:absolute;text-align:left; left:10px;width:180px;height:200px;">
 				 <span style="color:#000000;font-family:Arial;font-size:13px;">Regime Tributario :</span>
 			  </div>
-			  <select name="regime" size="1" id="Combobox2" style="position:absolute;z-index:39;left:125px;width:235px;height:22px;">
+			  <select name="regime" size="1" id="regime" style="position:absolute;z-index:39;left:125px;width:235px;height:22px;">
 			</select>
 		</div>
       <div id="wb_Text12"  style="position:absolute;left:45px;top:192px;width:40px;height:16px;z-index:23;text-align:left;">

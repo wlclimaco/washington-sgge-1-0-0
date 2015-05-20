@@ -1,7 +1,6 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
 import com.prosperitasglobal.sendsolv.model.Liaison;
-import com.qat.framework.model.request.Request;
 
 /**
  * The Class LiaisonMaintenanceRequest.

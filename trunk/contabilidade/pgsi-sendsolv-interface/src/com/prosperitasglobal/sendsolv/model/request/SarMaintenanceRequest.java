@@ -1,7 +1,6 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
 import com.prosperitasglobal.sendsolv.model.SuspiciousActivity;
-import com.qat.framework.model.request.Request;
 
 public class SarMaintenanceRequest extends Request
 {

@@ -1,7 +1,6 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
 import com.prosperitasglobal.sendsolv.model.Produto;
-import com.qat.framework.model.request.MaintenanceRequest;
 
 public class ProdutoMaintenanceRequest extends MaintenanceRequest
 {
