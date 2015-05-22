@@ -138,8 +138,8 @@ public class Cnae extends ModelCosmeDamiao
 	public String toString()
 	{
 		return "Cnae [getId()=" + getId() + ", getCodigo()=" + getCodigo() + ", getCnae()=" + getCnae()
-				+ ", getDescricao()=" + getDescricao() + ", getAbreviado()=" + getAbreviado() + ", getParentKey()="
-				+ getParentKey() + ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType()
+				+ ", getDescricao()=" + getDescricao() + ", getAbreviado()=" + getAbreviado() + ", getType()="
+				+ getType() + ", getAcaoType()=" + getAcaoType()
 				+ ", getTabelaEnum()=" + getTabelaEnum() + ", toString()=" + super.toString() + "]";
 	}
 

@@ -76,8 +76,8 @@ public class Historico extends ModelCosmeDamiao
 	public String toString()
 	{
 		return "Historico [getId()=" + getId() + ", getRegistro()=" + getRegistro() + ", getData()=" + getData()
-				+ ", getUsuario()=" + getUsuario() + ", getEmpresa()=" + getEmpresa() + ", getParentKey()="
-				+ getParentKey() + ", toString()=" + super.toString() + "]";
+				+ ", getUsuario()=" + getUsuario() + ", getEmpresa()=" + getEmpresa() + ", getParentId()="
+				+ getParentId() + ", toString()=" + super.toString() + "]";
 	}
 
 }

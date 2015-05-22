@@ -1,5 +1,9 @@
 package com.prosperitasglobal.sendsolv.model;
 
+import java.util.List;
+
+import com.qat.framework.model.QATModel;
+
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -81,13 +85,12 @@ public class ModelCosmeDamiao extends QATModel
 	@Override
 	public String toString()
 	{
-		return "ModelCosmeDamiao [getStatusList()=" + getStatusList() + ",getParentId()=" + getParentId()
-				+ ", getType()=" + getType() + ", getAcaoType()="
-				+ getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum() + ", getModelAction()=" + getModelAction()
-				+ ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC()
-				+ ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC()
-				+ ", toString()=" + super.toString() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ "]";
+		return "ModelCosmeDamiao [getParentId()=" + getParentId() + ", getType()=" + getType() + ", getAcaoType()="
+				+ getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()=" + getStatusList()
+				+ ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
+				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
+				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", toString()=" + super.toString() + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + "]";
 	}
 
 }

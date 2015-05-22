@@ -60,26 +60,6 @@ public class Grupo extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the type.
-	 *
-	 * @return the type
-	 */
-	public String getType()
-	{
-		return type;
-	}
-
-	/**
-	 * Sets the type.
-	 *
-	 * @param type the new type
-	 */
-	public void setType(String type)
-	{
-		this.type = type;
-	}
-
-	/**
 	 * Gets the tabela.
 	 *
 	 * @return the tabela
@@ -208,8 +188,8 @@ public class Grupo extends ModelCosmeDamiao
 	{
 		return "Grupo [getId()=" + getId() + ", getType()=" + getType() + ", getTabela()=" + getTabela()
 				+ ", getAcao()=" + getAcao() + ", getRegistro()=" + getRegistro() + ", getData()=" + getData()
-				+ ", getUsuario()=" + getUsuario() + ", getEmpresa()=" + getEmpresa() + ", getParentKey()="
-				+ getParentKey() + ", toString()=" + super.toString() + "]";
+				+ ", getUsuario()=" + getUsuario() + ", getEmpresa()=" + getEmpresa() + ", getParentId()="
+				+ getParentId() + ", toString()=" + super.toString() + "]";
 	}
 
 }

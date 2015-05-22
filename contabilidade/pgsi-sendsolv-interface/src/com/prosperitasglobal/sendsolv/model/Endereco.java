@@ -176,26 +176,6 @@ public class Endereco extends ModelCosmeDamiao
 		this.cep = cep;
 	}
 
-	/**
-	 * Gets the tipo endereco.
-	 *
-	 * @return the tipoEndereco
-	 */
-	public String getTipoEndereco()
-	{
-		return tipoEndereco;
-	}
-
-	/**
-	 * Sets the tipo endereco.
-	 *
-	 * @param tipoEndereco the tipoEndereco to set
-	 */
-	public void setTipoEndereco(String tipoEndereco)
-	{
-		this.tipoEndereco = tipoEndereco;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
