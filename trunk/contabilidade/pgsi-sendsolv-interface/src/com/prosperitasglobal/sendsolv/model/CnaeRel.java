@@ -1,6 +1,5 @@
 package com.prosperitasglobal.sendsolv.model;
 
-
 /**
  * The Class Document represents a generic formal business or personal document, such as driver's license or bylaws.
  */
@@ -42,11 +41,13 @@ public class CnaeRel extends ModelCosmeDamiao
 		this.id = id;
 	}
 
+	@Override
 	public Integer getParentId()
 	{
 		return parentId;
 	}
 
+	@Override
 	public void setParentId(Integer parentId)
 	{
 		this.parentId = parentId;
@@ -55,8 +56,8 @@ public class CnaeRel extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "CnaeRel [getId()=" + getId() + ", getParentId()=" + getParentId() + ", getParentKey()="
-				+ getParentKey() + ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType()
+		return "CnaeRel [getId()=" + getId() + ", getParentId()=" + getParentId() + ", getType()=" + getType()
+				+ ", getAcaoType()=" + getAcaoType()
 				+ ", getTabelaEnum()=" + getTabelaEnum() + ", toString()=" + super.toString() + "]";
 	}
 

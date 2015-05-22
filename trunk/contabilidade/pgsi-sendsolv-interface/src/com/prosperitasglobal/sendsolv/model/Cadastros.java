@@ -15,9 +15,6 @@ public class Cadastros extends ModelCosmeDamiao
 	/** Attributes. */
 	private Integer id;
 
-	/** The parent key. */
-	private Integer parentKey;
-
 	/** The parent key type. */
 	private BusinessTypeEnum parentKeyType;
 
@@ -202,28 +199,6 @@ public class Cadastros extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the parent key.
-	 *
-	 * @return the parent key
-	 */
-	@Override
-	public Integer getParentKey()
-	{
-		return parentKey;
-	}
-
-	/**
-	 * Sets the parent key.
-	 *
-	 * @param parentKey the parent key
-	 */
-	@Override
-	public void setParentKey(Integer parentKey)
-	{
-		this.parentKey = parentKey;
-	}
-
-	/**
 	 * Gets the parent key type.
 	 *
 	 * @return the parent key type
@@ -358,7 +333,7 @@ public class Cadastros extends ModelCosmeDamiao
 		return "Document [getId()=" + getId() + ", getDocumentType()=" + getDocumentType() + ", getKeywordText()="
 				+ getKeywordText() + ", getIsActionRequired()=" + getIsActionRequired() + ", getFilingStatus()="
 				+ getFilingStatus() + ", getFilingStatusValue()=" + getFilingStatusValue() + ", getNoteText()="
-				+ getNoteText() + ", getParentKey()=" + getParentKey() + ", getParentKeyType()=" + getParentKeyType()
+				+ getNoteText() + ", getParentKeyType()=" + getParentKeyType()
 				+ ", getParentKeyValue()=" + getParentKeyValue() + ", getExpirationDate()=" + getExpirationDate()
 				+ ", getIssueCountry()=" + getIssueCountry() + ", getValue()=" + getValue()
 				+ ", getIssueStateProvinceRegion()=" + getIssueStateProvinceRegion() + ", toString()="

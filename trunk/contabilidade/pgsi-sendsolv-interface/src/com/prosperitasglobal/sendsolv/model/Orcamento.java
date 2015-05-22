@@ -15,9 +15,6 @@ public class Orcamento extends ModelCosmeDamiao
 	/** Attributes. */
 	private Integer id;
 
-	/** The parent key. */
-	private Integer parentKey;
-
 	/** The parent key type. */
 	private BusinessTypeEnum parentKeyType;
 

@@ -1,6 +1,5 @@
 package com.prosperitasglobal.sendsolv.model;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -11,9 +10,6 @@ public class Atributos extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
-
-	/** The type of an account. */
-	private String type;
 
 	/** The description. */
 	private String description;
@@ -62,26 +58,6 @@ public class Atributos extends ModelCosmeDamiao
 	public void setId(Integer id)
 	{
 		this.id = id;
-	}
-
-	/**
-	 * Gets the type.
-	 *
-	 * @return the type
-	 */
-	public String getType()
-	{
-		return type;
-	}
-
-	/**
-	 * Sets the type.
-	 *
-	 * @param type the type to set
-	 */
-	public void setType(String type)
-	{
-		this.type = type;
 	}
 
 	/**
