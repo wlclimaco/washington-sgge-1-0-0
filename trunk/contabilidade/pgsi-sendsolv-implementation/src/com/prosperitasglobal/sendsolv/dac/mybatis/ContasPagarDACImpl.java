@@ -89,7 +89,7 @@ public class ContasPagarDACImpl extends SqlSessionDaoSupport implements IContasP
 		// Associate with parent using statement name passed as parameter
 		insertCount +=
 				QATMyBatisDacHelper
-				.doInsert(getSqlSession(), statementName, contasPagar, response);
+						.doInsert(getSqlSession(), statementName, contasPagar, response);
 
 		return insertCount;
 	}
@@ -196,7 +196,7 @@ public class ContasPagarDACImpl extends SqlSessionDaoSupport implements IContasP
 		for (ContasPagar contasPagar : contasPagarList)
 		{
 			// Make sure we set the parent key
-			contasPagar.setParentKey(parentId);
+			contasPagar.setParentId(parentId);
 
 			if (ValidationUtil.isNull(contasPagar.getModelAction()))
 			{

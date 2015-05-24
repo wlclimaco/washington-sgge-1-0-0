@@ -1,6 +1,5 @@
 package com.prosperitasglobal.sendsolv.model;
 
-
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -61,26 +60,6 @@ public class Pessoa extends ModelCosmeDamiao
 	public void setId(Integer id)
 	{
 		this.id = id;
-	}
-
-	/**
-	 * Gets the type.
-	 *
-	 * @return the type
-	 */
-	public String getType()
-	{
-		return type;
-	}
-
-	/**
-	 * Sets the type.
-	 *
-	 * @param type the type to set
-	 */
-	public void setType(String type)
-	{
-		this.type = type;
 	}
 
 	/**

@@ -1,5 +1,7 @@
 package com.prosperitasglobal.sendsolv.model;
 
+import com.qat.framework.model.QATModelOL;
+
 /**
  * The Class Document represents a generic formal business or personal document, such as driver's license or bylaws.
  */
@@ -74,6 +76,21 @@ public class Status extends QATModelOL
 	public void setNote(String note)
 	{
 		this.note = note;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "Status [getId()=" + getId() + ", getDataStatus()=" + getDataStatus() + ", getStatus()=" + getStatus()
+				+ ", getNote()=" + getNote() + ", getVersion()=" + getVersion() + ", getModelAction()="
+				+ getModelAction() + ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()="
+				+ getCreateDateUTC() + ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()="
+				+ getModifyDateUTC() + ", toString()=" + super.toString() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + "]";
 	}
 
 }

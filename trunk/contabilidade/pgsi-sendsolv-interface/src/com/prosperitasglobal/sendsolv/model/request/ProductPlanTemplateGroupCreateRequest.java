@@ -4,6 +4,7 @@ import com.prosperitasglobal.sendsolv.model.BusinessProductPlan;
 import com.prosperitasglobal.sendsolv.model.ProductPlanTemplateGroup;
 import com.prosperitasglobal.sendsolv.model.ProductPlanTemplateGroupLocation;
 import com.prosperitasglobal.sendsolv.model.TemplateProductPlan;
+import com.qat.framework.model.request.Request;
 
 /**
  * This request is used when {@link BusinessProductPlan}'s are to be created from {@link TemplateProductPlan}'s. Specify

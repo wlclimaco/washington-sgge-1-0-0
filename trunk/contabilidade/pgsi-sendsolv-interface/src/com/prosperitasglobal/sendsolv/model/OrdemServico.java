@@ -120,26 +120,6 @@ public class OrdemServico extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the type.
-	 *
-	 * @return the type
-	 */
-	public String getType()
-	{
-		return type;
-	}
-
-	/**
-	 * Sets the type.
-	 *
-	 * @param type the new type
-	 */
-	public void setType(String type)
-	{
-		this.type = type;
-	}
-
-	/**
 	 * Gets the assunto.
 	 *
 	 * @return the assunto

@@ -5,7 +5,6 @@ import java.util.List;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
-import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
 import com.prosperitasglobal.sendsolv.dac.IEnderecoDAC;
 import com.prosperitasglobal.sendsolv.model.Endereco;
 import com.qat.framework.model.QATModel;
@@ -88,7 +87,7 @@ public class EnderecoDACImpl extends SqlSessionDaoSupport implements IEnderecoDA
 		// Associate with parent using statement name passed as parameter
 		insertCount +=
 				QATMyBatisDacHelper
-				.doInsert(getSqlSession(), statementName, endereco, response);
+						.doInsert(getSqlSession(), statementName, endereco, response);
 
 		return insertCount;
 	}
@@ -100,20 +99,9 @@ public class EnderecoDACImpl extends SqlSessionDaoSupport implements IEnderecoDA
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer deleteBusinessEndereco(Endereco endereco, InternalResultsResponse<?> response)
+	public Integer deleteEndereco(Endereco endereco, InternalResultsResponse<?> response)
 	{
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, endereco, response);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.cbof.dac.IEnderecoDAC#deletePersonEndereco(com.prosperitasglobal.cbof.model.Endereco,
-	 * com.qat.framework.model.response.InternalResultsResponse)
-	 */
-	@Override
-	public Integer deletePersonEndereco(Endereco endereco, InternalResultsResponse<?> response)
-	{
-		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_PERSON_CONTACT, endereco, response);
 	}
 
 	/*
@@ -144,33 +132,6 @@ public class EnderecoDACImpl extends SqlSessionDaoSupport implements IEnderecoDA
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#fetchEnderecoByParent(java.lang.Integer,
-	 * com.prosperitasglobal.sendsolv.model.BusinessTypeEnum)
-	 */
-	@Override
-	public InternalResultsResponse<Endereco> fetchEnderecoByParent(Integer parentId, BusinessTypeEnum parentType)
-	{
-		InternalResultsResponse<Endereco> response = new InternalResultsResponse<Endereco>();
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#fetchEnderecoById(java.lang.Integer)
-	 */
-	@Override
-	public InternalResultsResponse<Endereco> fetchEnderecoById(Integer id)
-	{
-		InternalResultsResponse<Endereco> response = new InternalResultsResponse<Endereco>();
-
-		QATMyBatisDacHelper.doQueryForList(getSqlSession(), CONTACT_STMT_FETCH_BY_ID, id, response);
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
 	 * @see com.prosperitasglobal.cbof.dac.IEnderecoDAC#maintainEnderecoAssociations(java.util.List, java.lang.Integer,
 	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
 	 */
@@ -189,7 +150,7 @@ public class EnderecoDACImpl extends SqlSessionDaoSupport implements IEnderecoDA
 		for (Endereco endereco : enderecoList)
 		{
 			// Make sure we set the parent key
-			endereco.setParentKey(parentId);
+			endereco.setParentId(parentId);
 
 			if (ValidationUtil.isNull(endereco.getModelAction()))
 			{
@@ -204,7 +165,7 @@ public class EnderecoDACImpl extends SqlSessionDaoSupport implements IEnderecoDA
 					count += updateEndereco(endereco, response);
 					break;
 				case DELETE:
-					count += deletePersonEndereco(endereco, response);
+					count += deleteEndereco(endereco, response);
 					break;
 				default:
 					if (LOG.isDebugEnabled())

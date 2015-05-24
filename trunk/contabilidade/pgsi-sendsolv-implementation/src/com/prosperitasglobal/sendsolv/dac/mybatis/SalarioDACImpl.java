@@ -88,7 +88,7 @@ public class SalarioDACImpl extends SqlSessionDaoSupport implements ISalariosDAC
 		// Associate with parent using statement name passed as parameter
 		insertCount +=
 				QATMyBatisDacHelper
-				.doInsert(getSqlSession(), statementName, salario, response);
+						.doInsert(getSqlSession(), statementName, salario, response);
 
 		return insertCount;
 	}
@@ -189,7 +189,7 @@ public class SalarioDACImpl extends SqlSessionDaoSupport implements ISalariosDAC
 		for (Salario salario : salarioList)
 		{
 			// Make sure we set the parent key
-			salario.setParentKey(parentId);
+			salario.setParentId(parentId);
 
 			if (ValidationUtil.isNull(salario.getModelAction()))
 			{

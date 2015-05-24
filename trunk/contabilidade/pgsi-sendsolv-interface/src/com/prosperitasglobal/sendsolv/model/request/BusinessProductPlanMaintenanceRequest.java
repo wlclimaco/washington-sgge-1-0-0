@@ -1,6 +1,7 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
 import com.prosperitasglobal.sendsolv.model.BusinessProductPlan;
+import com.qat.framework.model.request.MaintenanceRequest;
 
 /**
  * The Class BusinessProductPlanRequest.

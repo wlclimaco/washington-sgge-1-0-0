@@ -88,7 +88,7 @@ public class UniMedDACImpl extends SqlSessionDaoSupport implements IUniMedDAC
 		// Associate with parent using statement name passed as parameter
 		insertCount +=
 				QATMyBatisDacHelper
-				.doInsert(getSqlSession(), statementName, uniMed, response);
+						.doInsert(getSqlSession(), statementName, uniMed, response);
 
 		return insertCount;
 	}
@@ -189,7 +189,7 @@ public class UniMedDACImpl extends SqlSessionDaoSupport implements IUniMedDAC
 		for (UniMed uniMed : uniMedList)
 		{
 			// Make sure we set the parent key
-			uniMed.setParentKey(parentId);
+			uniMed.setParentId(parentId);
 
 			if (ValidationUtil.isNull(uniMed.getModelAction()))
 			{

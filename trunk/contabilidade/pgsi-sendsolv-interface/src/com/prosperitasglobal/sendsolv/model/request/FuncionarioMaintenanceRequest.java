@@ -1,6 +1,7 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
 import com.prosperitasglobal.sendsolv.model.Funcionario;
+import com.qat.framework.model.request.MaintenanceRequest;
 
 // TODO: Auto-generated Javadoc
 /**

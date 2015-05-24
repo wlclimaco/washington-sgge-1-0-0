@@ -1,6 +1,29 @@
 package com.prosperitasglobal.sendsolv.bac.impl;
 
 import com.prosperitasglobal.sendsolv.bac.ICadastroBAC;
+import com.prosperitasglobal.sendsolv.model.Cfop;
+import com.prosperitasglobal.sendsolv.model.Cidade;
+import com.prosperitasglobal.sendsolv.model.Cnae;
+import com.prosperitasglobal.sendsolv.model.Csosn;
+import com.prosperitasglobal.sendsolv.model.Estado;
+import com.prosperitasglobal.sendsolv.model.Regime;
+import com.prosperitasglobal.sendsolv.model.UniMed;
+import com.prosperitasglobal.sendsolv.model.request.CfopInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CfopMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.CidadeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CidadeMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.CnaeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CnaeMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.CsosnInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CsosnMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.EstadoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.EstadoMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.RegimeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.RegimeMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.UniMedInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.UniMedMaintenanceRequest;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
  * The Class CadastroBACImpl.
@@ -8,296 +31,200 @@ import com.prosperitasglobal.sendsolv.bac.ICadastroBAC;
 public class CadastroBACImpl implements ICadastroBAC
 {
 
-	/** The person dac. */
-	private ICadastroDAC CadastroDAC;
-
-	/**
-	 * @return the CadastroDAC
-	 */
-	public ICadastroDAC getCadastroDAC()
-	{
-		return CadastroDAC;
-	}
-
-	/**
-	 * @param CadastroDAC the CadastroDAC to set
-	 */
-	public void setCadastroDAC(ICadastroDAC CadastroDAC)
-	{
-		this.CadastroDAC = CadastroDAC;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.bac.ICadastroBAC#insertCadastro(CadastroRequest)
-	 */
 	@Override
-	public InternalResultsResponse<Cadastro> insertCadastro(CadastroMaintenanceRequest request)
-	{
-		InternalResultsResponse<Cadastro> response = new InternalResultsResponse<Cadastro>();
-
-		response = getCadastroDAC().insertCadastro(request.getCadastro());
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.bac.ICadastroBAC#updateCadastro(CadastroRequest)
-	 */
-	@Override
-	public InternalResultsResponse<Cadastro> updateCadastro(CadastroMaintenanceRequest request)
-	{
-		InternalResultsResponse<Cadastro> response = new InternalResultsResponse<Cadastro>();
-
-		response = getCadastroDAC().updateCadastro(request.getCadastro());
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.bac.ICadastroBAC#deleteCadastro
-	 * (com.prosperitasglobal.sendsolv.model.request.CadastroRequest
-	 * )
-	 */
-	@Override
-	public InternalResponse deleteCadastro(CadastroMaintenanceRequest request)
-	{
-		return getCadastroDAC().deleteCadastro(request.getCadastro());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.bac.ICadastroBAC#fetchCadastroById(FetchByIdRequest)
-	 */
-	@Override
-	public InternalResultsResponse<Cadastro> fetchCadastroById(FetchByIdRequest request)
-	{
-		return getCadastroDAC().fetchCadastroById(request);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.bac.ICadastroBAC#fetchCadastroByRequest(com.prosperitasglobal.sendsolv.model.request
-	 * .CadastroInquiryRequest)
-	 */
-	@Override
-	public InternalResultsResponse<Cadastro> fetchCadastroByRequest(PagedInquiryRequest request)
-	{
-		return getCadastroDAC().fetchCadastroByRequest(request);
-	}
-
-	@Override
-	public com.prosperitasglobal.sendsolv.bac.InternalResultsResponse<Cidade> insertCidade(
-			CidadeMaintenanceRequest request)
+	public InternalResultsResponse<Cidade> insertCidade(CidadeMaintenanceRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public com.prosperitasglobal.sendsolv.bac.InternalResultsResponse<Cidade> updateCidade(
-			CidadeMaintenanceRequest request)
+	public InternalResultsResponse<Cidade> updateCidade(CidadeMaintenanceRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public com.prosperitasglobal.sendsolv.bac.InternalResponse deleteCidade(CidadeMaintenanceRequest request)
+	public InternalResponse deleteCidade(CidadeMaintenanceRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public com.prosperitasglobal.sendsolv.bac.InternalResultsResponse<Cidade> fetchCidadeByRequest(
-			CidadeInquiryRequest request)
+	public InternalResultsResponse<Cidade> fetchCidadeByRequest(CidadeInquiryRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public com.prosperitasglobal.sendsolv.bac.InternalResultsResponse<Estado> insertEstado(
-			EstadoMaintenanceRequest request)
+	public InternalResultsResponse<Estado> insertEstado(EstadoMaintenanceRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public com.prosperitasglobal.sendsolv.bac.InternalResultsResponse<Estado> updateEstado(
-			EstadoMaintenanceRequest request)
+	public InternalResultsResponse<Estado> updateEstado(EstadoMaintenanceRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public com.prosperitasglobal.sendsolv.bac.InternalResponse deleteEstado(EstadoMaintenanceRequest request)
+	public InternalResponse deleteEstado(EstadoMaintenanceRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public com.prosperitasglobal.sendsolv.bac.InternalResultsResponse<Estado> fetchEstadoByRequest(
-			EstadoInquiryRequest request)
+	public InternalResultsResponse<Estado> fetchEstadoByRequest(EstadoInquiryRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public com.prosperitasglobal.sendsolv.bac.InternalResultsResponse<Cnae> insertCnae(CnaeMaintenanceRequest request)
+	public InternalResultsResponse<Cnae> insertCnae(CnaeMaintenanceRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public com.prosperitasglobal.sendsolv.bac.InternalResultsResponse<Cnae> updateCnae(CnaeMaintenanceRequest request)
+	public InternalResultsResponse<Cnae> updateCnae(CnaeMaintenanceRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public com.prosperitasglobal.sendsolv.bac.InternalResponse deleteCnae(CnaeMaintenanceRequest request)
+	public InternalResponse deleteCnae(CnaeMaintenanceRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public com.prosperitasglobal.sendsolv.bac.InternalResultsResponse<Cnae> fetchCnaeByRequest(
-			CnaeInquiryRequest request)
+	public InternalResultsResponse<Cnae> fetchCnaeByRequest(CnaeInquiryRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public com.prosperitasglobal.sendsolv.bac.InternalResultsResponse<Regime> insertRegime(
-			RegimeMaintenanceRequest request)
+	public InternalResultsResponse<Regime> insertRegime(RegimeMaintenanceRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public com.prosperitasglobal.sendsolv.bac.InternalResultsResponse<Regime> updateRegime(
-			RegimeMaintenanceRequest request)
+	public InternalResultsResponse<Regime> updateRegime(RegimeMaintenanceRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public com.prosperitasglobal.sendsolv.bac.InternalResponse deleteRegime(RegimeMaintenanceRequest request)
+	public InternalResponse deleteRegime(RegimeMaintenanceRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public com.prosperitasglobal.sendsolv.bac.InternalResultsResponse<Regime> fetchRegimeByRequest(
-			RegimeInquiryRequest request)
+	public InternalResultsResponse<Regime> fetchRegimeByRequest(RegimeInquiryRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public com.prosperitasglobal.sendsolv.bac.InternalResultsResponse<Csosn> insertCsosn(CsosnMaintenanceRequest request)
+	public InternalResultsResponse<Csosn> insertCsosn(CsosnMaintenanceRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public com.prosperitasglobal.sendsolv.bac.InternalResultsResponse<Csosn> updateCsosn(CsosnMaintenanceRequest request)
+	public InternalResultsResponse<Csosn> updateCsosn(CsosnMaintenanceRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public com.prosperitasglobal.sendsolv.bac.InternalResponse deleteCsosn(CsosnMaintenanceRequest request)
+	public InternalResponse deleteCsosn(CsosnMaintenanceRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public com.prosperitasglobal.sendsolv.bac.InternalResultsResponse<Csosn> fetchCsosnByRequest(
-			CsosnInquiryRequest request)
+	public InternalResultsResponse<Csosn> fetchCsosnByRequest(CsosnInquiryRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public com.prosperitasglobal.sendsolv.bac.InternalResultsResponse<UniMed> insertCsosn(
-			UniMedMaintenanceRequest request)
+	public InternalResultsResponse<UniMed> insertCsosn(UniMedMaintenanceRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public com.prosperitasglobal.sendsolv.bac.InternalResultsResponse<UniMed> updateCsosn(
-			UniMedMaintenanceRequest request)
+	public InternalResultsResponse<UniMed> updateCsosn(UniMedMaintenanceRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public com.prosperitasglobal.sendsolv.bac.InternalResponse deleteCsosn(UniMedMaintenanceRequest request)
+	public InternalResponse deleteCsosn(UniMedMaintenanceRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public com.prosperitasglobal.sendsolv.bac.InternalResultsResponse<UniMed> fetchCsosnByRequest(
-			UniMedInquiryRequest request)
+	public InternalResultsResponse<UniMed> fetchCsosnByRequest(UniMedInquiryRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public com.prosperitasglobal.sendsolv.bac.InternalResultsResponse<Cfop> insertCfop(CfopMaintenanceRequest request)
+	public InternalResultsResponse<Cfop> insertCfop(CfopMaintenanceRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public com.prosperitasglobal.sendsolv.bac.InternalResultsResponse<Cfop> updateCfop(CfopMaintenanceRequest request)
+	public InternalResultsResponse<Cfop> updateCfop(CfopMaintenanceRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public com.prosperitasglobal.sendsolv.bac.InternalResultsResponse<Cfop> deleteCfop(CfopMaintenanceRequest request)
+	public InternalResultsResponse<Cfop> deleteCfop(CfopMaintenanceRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public com.prosperitasglobal.sendsolv.bac.InternalResultsResponse<Cfop> fetchCfopByRequest(
-			CfopInquiryRequest request)
+	public InternalResultsResponse<Cfop> fetchCfopByRequest(CfopInquiryRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }

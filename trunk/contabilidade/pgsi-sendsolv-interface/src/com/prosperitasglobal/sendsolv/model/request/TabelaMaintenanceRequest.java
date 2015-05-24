@@ -1,6 +1,7 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
 import com.prosperitasglobal.sendsolv.model.Tabela;
+import com.qat.framework.model.request.MaintenanceRequest;
 
 public class TabelaMaintenanceRequest extends MaintenanceRequest
 {

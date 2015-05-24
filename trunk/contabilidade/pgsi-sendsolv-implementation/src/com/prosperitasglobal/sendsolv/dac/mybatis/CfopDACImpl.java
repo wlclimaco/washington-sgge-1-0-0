@@ -88,7 +88,7 @@ public class CfopDACImpl extends SqlSessionDaoSupport implements ICfopDAC
 		// Associate with parent using statement name passed as parameter
 		insertCount +=
 				QATMyBatisDacHelper
-				.doInsert(getSqlSession(), statementName, cfop, response);
+						.doInsert(getSqlSession(), statementName, cfop, response);
 
 		return insertCount;
 	}
@@ -189,7 +189,7 @@ public class CfopDACImpl extends SqlSessionDaoSupport implements ICfopDAC
 		for (Cfop cfop : cfopList)
 		{
 			// Make sure we set the parent key
-			cfop.setParentKey(parentId);
+			cfop.setParentId(parentId);
 
 			if (ValidationUtil.isNull(cfop.getModelAction()))
 			{

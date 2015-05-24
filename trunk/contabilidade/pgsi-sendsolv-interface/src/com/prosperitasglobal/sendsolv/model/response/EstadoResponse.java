@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.prosperitasglobal.sendsolv.model.Estado;
+import com.qat.framework.model.response.InquiryResponse;
 
 public class EstadoResponse extends InquiryResponse
 {

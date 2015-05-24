@@ -148,8 +148,11 @@
 		<typeAlias alias="Tela"              				 		     type="com.prosperitasglobal.sendsolv.model.Tela"/>
 		<typeAlias alias="Telefone"              				 		 type="com.prosperitasglobal.sendsolv.model.Telefone"/>
 		<typeAlias alias="UniMed"              				 		     type="com.prosperitasglobal.sendsolv.model.UniMed"/>
+		<typeAlias alias="Regime"              				 		     type="com.prosperitasglobal.sendsolv.model.Regime"/>
+		<typeAlias alias="CnaeRel"              				 		     type="com.prosperitasglobal.sendsolv.model.CnaeRel"/>
 
-
+<typeAlias alias="EmpresaInquiryRequest"              				 		     type="com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest"/>
+<typeAlias alias="CnaeInquiryRequest"              				 		     type="com.prosperitasglobal.sendsolv.model.request.CnaeInquiryRequest"/>
 
 
 

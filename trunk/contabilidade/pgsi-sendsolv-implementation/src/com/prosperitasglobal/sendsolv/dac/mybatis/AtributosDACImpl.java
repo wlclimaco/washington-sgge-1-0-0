@@ -89,7 +89,7 @@ public class AtributosDACImpl extends SqlSessionDaoSupport implements IAtributos
 		// Associate with parent using statement name passed as parameter
 		insertCount +=
 				QATMyBatisDacHelper
-				.doInsert(getSqlSession(), statementName, atributos, response);
+						.doInsert(getSqlSession(), statementName, atributos, response);
 
 		return insertCount;
 	}
@@ -193,7 +193,7 @@ public class AtributosDACImpl extends SqlSessionDaoSupport implements IAtributos
 		for (Atributos atributos : atributosList)
 		{
 			// Make sure we set the parent key
-			atributos.setParentKey(parentId);
+			atributos.setParentId(parentId);
 
 			if (ValidationUtil.isNull(atributos.getModelAction()))
 			{

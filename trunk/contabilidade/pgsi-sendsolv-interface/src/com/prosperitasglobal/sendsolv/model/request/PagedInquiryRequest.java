@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlElement;
 
 import com.prosperitasglobal.sendsolv.model.StatusEnum;
 import com.prosperitasglobal.sendsolv.model.criteria.InquiryCriteria;
+import com.qat.framework.model.request.InquiryRequest;
 
 /**
  * The Class PagedInquiryRequest.
