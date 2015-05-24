@@ -1,6 +1,5 @@
 package com.prosperitasglobal.sendsolv.empresa.controller;
 
-import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -13,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.EmpresaMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
 
 /**
@@ -62,7 +61,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 	 */
 	@RequestMapping(value = FETCH_ALL, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse fetchAll(@RequestBody PagedInquiryRequest pagedInquiryRequest)
+	public EmpresaResponse fetchAll(@RequestBody EmpresaInquiryRequest pagedInquiryRequest)
 	{
 
 		return fetchEmpresaByRequest(pagedInquiryRequest);
@@ -92,21 +91,10 @@ public class EmpresaAPIController extends EmpresaBaseController
 	 */
 	@RequestMapping(value = EDIT_LOCATION, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse edit(@RequestBody EmpresaMaintenanceRequest locationRequest)
+	public EmpresaResponse editEmpresa(@RequestBody EmpresaMaintenanceRequest locationRequest)
 	{
-		EmpresaResponse locationResponse = new EmpresaResponse();
-		try
-		{
 
-			locationResponse = getEmpresaBAI().updateEmpresa(locationRequest);
-
-		}
-		catch (Exception e)
-		{
-			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
-			locationResponse = null;
-		}
-		return locationResponse;
+		return edit(locationRequest);
 
 	}
 
@@ -118,22 +106,10 @@ public class EmpresaAPIController extends EmpresaBaseController
 	 */
 	@RequestMapping(value = DELETE_LOCATION, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse delete(@RequestBody EmpresaMaintenanceRequest locationRequest)
+	public EmpresaResponse deleteEmpresa(@RequestBody EmpresaMaintenanceRequest locationRequest)
 	{
-		EmpresaResponse locationResponse = new EmpresaResponse();
-		try
-		{
 
-			locationResponse = getEmpresaBAI().deleteEmpresa(locationRequest);
-
-		}
-		catch (Exception e)
-		{
-			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
-			locationResponse = null;
-		}
-
-		return locationResponse;
+		return delete(locationRequest);
 
 	}
 
@@ -145,23 +121,10 @@ public class EmpresaAPIController extends EmpresaBaseController
 	 */
 	@RequestMapping(value = INSERT_LOCATION, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse insert(@RequestBody EmpresaMaintenanceRequest locationRequest)
+	public EmpresaResponse insertEmpresa(@RequestBody EmpresaMaintenanceRequest locationRequest)
 	{
-		EmpresaResponse locationResponse = new EmpresaResponse();
 
-		try
-		{
-
-			locationRequest.getEmpresa().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
-			locationResponse = getEmpresaBAI().insertEmpresa(locationRequest);
-		}
-		catch (Exception e)
-		{
-			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
-			locationResponse = null;
-		}
-
-		return locationResponse;
+		return insert(locationRequest);
 
 	}
 

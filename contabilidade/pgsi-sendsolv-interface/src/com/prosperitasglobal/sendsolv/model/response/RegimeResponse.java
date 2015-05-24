@@ -3,6 +3,9 @@ package com.prosperitasglobal.sendsolv.model.response;
 import java.util.Collection;
 import java.util.List;
 
+import com.prosperitasglobal.sendsolv.model.Regime;
+import com.qat.framework.model.response.InquiryResponse;
+
 public class RegimeResponse extends InquiryResponse
 {
 

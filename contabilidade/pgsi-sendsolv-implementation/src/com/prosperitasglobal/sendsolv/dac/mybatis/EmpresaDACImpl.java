@@ -360,7 +360,7 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		 * Helper method to translation from the user friendly" sort field names to the
 		 * actual database column names.
 		 */
-		QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
+		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
 
 		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, EMPRESA_STMT_FETCH_COUNT,
 				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
@@ -387,7 +387,7 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		for (Endereco endereco : empresa.getEnderecos())
 		{
 			// Make sure we set the parent key
-			endereco.setParentKey(empresa.getId());
+			endereco.setParentId(empresa.getId());
 
 			if (ValidationUtil.isNull(endereco.getModelAction()))
 			{
@@ -403,7 +403,7 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 					count = getEnderecoDAC().updateEndereco(endereco, response);
 					break;
 				case DELETE:
-					count = getEnderecoDAC().deletePersonEndereco(endereco, response);
+					count = getEnderecoDAC().deleteEndereco(endereco, response);
 					break;
 				default:
 					if (LOG.isDebugEnabled())
@@ -429,7 +429,7 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		for (Cnae cnae : empresa.getCnaes())
 		{
 			// Make sure we set the parent key
-			cnae.setParentKey(empresa.getId());
+			cnae.setParentId(empresa.getId());
 
 			if (ValidationUtil.isNull(cnae.getModelAction()))
 			{
@@ -471,7 +471,7 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		for (Telefone telefone : empresa.getTelefones())
 		{
 			// Make sure we set the parent key
-			telefone.setParentKey(empresa.getId());
+			telefone.setParentId(empresa.getId());
 
 			if (ValidationUtil.isNull(empresa.getModelAction()))
 			{
@@ -513,7 +513,7 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		for (Email email : empresa.getEmails())
 		{
 			// Make sure we set the parent key
-			email.setParentKey(empresa.getId());
+			email.setParentId(empresa.getId());
 
 			if (ValidationUtil.isNull(empresa.getModelAction()))
 			{
@@ -529,7 +529,7 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 					count = getEmailDAC().updateEmail(email, response);
 					break;
 				case DELETE:
-					count = getEmailDAC().deletePersonEmail(email, response);
+					count = getEmailDAC().deleteEmail(email, response);
 					break;
 				default:
 					if (LOG.isDebugEnabled())
@@ -555,7 +555,7 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		for (Documento documentos : empresa.getDocumentos())
 		{
 			// Make sure we set the parent key
-			documentos.setParentKey(empresa.getId());
+			documentos.setParentId(empresa.getId());
 
 			if (ValidationUtil.isNull(documentos.getModelAction()))
 			{
@@ -597,7 +597,7 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		for (Socio socios : empresa.getSocios())
 		{
 			// Make sure we set the parent key
-			socios.setParentKey(empresa.getId());
+			socios.setParentId(empresa.getId());
 
 			if (ValidationUtil.isNull(socios.getModelAction()))
 			{

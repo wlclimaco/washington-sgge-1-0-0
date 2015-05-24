@@ -199,28 +199,6 @@ public class Orcamento extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the parent key.
-	 *
-	 * @return the parent key
-	 */
-	@Override
-	public Integer getParentKey()
-	{
-		return parentKey;
-	}
-
-	/**
-	 * Sets the parent key.
-	 *
-	 * @param parentKey the parent key
-	 */
-	@Override
-	public void setParentKey(Integer parentKey)
-	{
-		this.parentKey = parentKey;
-	}
-
-	/**
 	 * Gets the parent key type.
 	 *
 	 * @return the parent key type
@@ -355,7 +333,7 @@ public class Orcamento extends ModelCosmeDamiao
 		return "Document [getId()=" + getId() + ", getDocumentType()=" + getDocumentType() + ", getKeywordText()="
 				+ getKeywordText() + ", getIsActionRequired()=" + getIsActionRequired() + ", getFilingStatus()="
 				+ getFilingStatus() + ", getFilingStatusValue()=" + getFilingStatusValue() + ", getNoteText()="
-				+ getNoteText() + ", getParentKey()=" + getParentKey() + ", getParentKeyType()=" + getParentKeyType()
+				+ getNoteText() + ", getParentId()=" + getParentId() + ", getParentKeyType()=" + getParentKeyType()
 				+ ", getParentKeyValue()=" + getParentKeyValue() + ", getExpirationDate()=" + getExpirationDate()
 				+ ", getIssueCountry()=" + getIssueCountry() + ", getValue()=" + getValue()
 				+ ", getIssueStateProvinceRegion()=" + getIssueStateProvinceRegion() + ", toString()="

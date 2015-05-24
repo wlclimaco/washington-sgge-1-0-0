@@ -157,7 +157,7 @@ public class CnaeDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 		for (Cnae cnae : cnaeList)
 		{
 			// Make sure we set the parent key
-			cnae.setParentKey(parentId);
+			cnae.setParentId(parentId);
 
 			if (ValidationUtil.isNull(cnae.getModelAction()))
 			{

@@ -88,7 +88,7 @@ public class ConvenioDACImpl extends SqlSessionDaoSupport implements IConvenioDA
 		// Associate with parent using statement name passed as parameter
 		insertCount +=
 				QATMyBatisDacHelper
-				.doInsert(getSqlSession(), statementName, convenio, response);
+						.doInsert(getSqlSession(), statementName, convenio, response);
 
 		return insertCount;
 	}
@@ -189,7 +189,7 @@ public class ConvenioDACImpl extends SqlSessionDaoSupport implements IConvenioDA
 		for (Convenio convenio : convenioList)
 		{
 			// Make sure we set the parent key
-			convenio.setParentKey(parentId);
+			convenio.setParentId(parentId);
 
 			if (ValidationUtil.isNull(convenio.getModelAction()))
 			{

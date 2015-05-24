@@ -1,8 +1,6 @@
 package com.prosperitasglobal.sendsolv.dac;
 
-import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
 import com.prosperitasglobal.sendsolv.model.Email;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
@@ -31,5 +29,4 @@ public interface IEmailDAC
 	 * @return the integer
 	 */
 	public Integer deleteEmail(Email email, InternalResultsResponse<?> response);
-
-
+}

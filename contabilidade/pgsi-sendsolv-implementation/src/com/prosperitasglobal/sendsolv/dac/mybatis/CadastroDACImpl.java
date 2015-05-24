@@ -2,6 +2,9 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.Map;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
 import com.prosperitasglobal.sendsolv.dac.ICadastroDAC;
 import com.prosperitasglobal.sendsolv.dac.ICnaeDAC;
 import com.prosperitasglobal.sendsolv.dac.IEmailDAC;
@@ -9,7 +12,21 @@ import com.prosperitasglobal.sendsolv.dac.IEnderecoDAC;
 import com.prosperitasglobal.sendsolv.dac.IEventoDAC;
 import com.prosperitasglobal.sendsolv.dac.ISociosDAC;
 import com.prosperitasglobal.sendsolv.dac.ITelefoneDAC;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
+import com.prosperitasglobal.sendsolv.model.Cfop;
+import com.prosperitasglobal.sendsolv.model.Cidade;
+import com.prosperitasglobal.sendsolv.model.Cnae;
+import com.prosperitasglobal.sendsolv.model.Csosn;
+import com.prosperitasglobal.sendsolv.model.Estado;
+import com.prosperitasglobal.sendsolv.model.Regime;
+import com.prosperitasglobal.sendsolv.model.UniMed;
+import com.prosperitasglobal.sendsolv.model.request.CidadeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CnaeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CsosnInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.EstadoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.RegimeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.UniMedInquiryRequest;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
  * The Class BancoDACImpl.
@@ -197,146 +214,6 @@ public class CadastroDACImpl extends SqlSessionDaoSupport implements ICadastroDA
 	public void setBancoInquiryValidSortFields(Map<String, String> bancoInquiryValidSortFields)
 	{
 		this.bancoInquiryValidSortFields = bancoInquiryValidSortFields;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IBancoDAC#insertBanco(com.prosperitasglobal.sendsolv.model
-	 * .Banco)
-	 */
-	@Override
-	public InternalResultsResponse<Banco> insertBanco(Banco banco)
-	{
-		Integer insertCount = 0;
-		InternalResultsResponse<Banco> response = new InternalResultsResponse<Banco>();
-
-		// First insert the root
-		// Is successful the unique-id will be populated back into the object.
-		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), EMPRESA_STMT_INSERT, banco, response);
-
-		if (response.isInError())
-		{
-			return response;
-		}
-		// Next traverse the object graph and "maintain" the associations
-		insertCount += maintainBancoAssociations(banco, response);
-
-		// Finally, if something was inserted then add the Banco to the result.
-		if (insertCount > 0)
-		{
-			response.addResult(banco);
-		}
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IBancoDAC#updateBanco(com.prosperitasglobal.sendsolv.model
-	 * .Banco)
-	 */
-	@Override
-	public InternalResultsResponse<Banco> updateBanco(Banco banco)
-	{
-		Integer updateCount = 0;
-		InternalResultsResponse<Banco> response = new InternalResultsResponse<Banco>();
-
-		// First update the root if necessary.
-		if (!ValidationUtil.isNull(banco.getModelAction())
-				&& (banco.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
-		{
-			updateCount =
-					QATMyBatisDacHelper.doUpdate(getSqlSession(), EMPRESA_STMT_UPDATE, banco,
-							response);
-		}
-
-		if (response.isInError())
-		{
-			return response;
-		}
-		// Next traverse the object graph and "maintain" the associations
-		updateCount += maintainBancoAssociations(banco, response);
-
-		// Finally, if something was updated then add the Person to the result.
-		if (updateCount > 0)
-		{
-			response.addResult(banco);
-		}
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IBancoDAC#deleteBanco(com.prosperitasglobal.sendsolv.model
-	 * .Banco)
-	 */
-	@Override
-	public InternalResponse deleteBanco(Banco banco)
-	{
-		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doRemove(getSqlSession(), EMPRESA_STMT_DELETE, banco, response);
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.dac.IBancoDAC#fetchBancoById(FetchByIdRequest)
-	 */
-	@Override
-	public InternalResultsResponse<Banco> fetchBancoById(FetchByIdRequest request)
-	{
-		InternalResultsResponse<Banco> response = new InternalResultsResponse<Banco>();
-		QATMyBatisDacHelper.doQueryForList(getSqlSession(), EMPRESA_STMT_FETCH_BY_ID, request, response);
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IBancoDAC#fetchBancoByRequest(com.prosperitasglobal.sendsolv
-	 * .model.request.PagedInquiryRequest)
-	 */
-	@Override
-	public InternalResultsResponse<Banco> fetchBancoByRequest(PagedInquiryRequest request)
-	{
-		InternalResultsResponse<Banco> response = new InternalResultsResponse<Banco>();
-
-		/*
-		 * Helper method to translation from the user friendly" sort field names to the
-		 * actual database column names.
-		 */
-		QATMyBatisDacHelper.translateSortFields(request, getBancoInquiryValidSortFields());
-
-		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, EMPRESA_STMT_FETCH_COUNT,
-				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
-		return response;
-	}
-
-	/**
-	 * Maintain banco associations.
-	 *
-	 * @param banco the banco
-	 * @param response the response
-	 * @return the integer
-	 */
-	private Integer maintainBancoAssociations(Banco banco,
-			InternalResultsResponse<Banco> response)
-	{
-		Integer count = 0;
-
-		return count;
-	}
-
-	@Override
-	public InternalResultsResponse<Banco> fetchAllBancos()
-	{
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

@@ -89,7 +89,7 @@ public class DocumentoDACImpl extends SqlSessionDaoSupport implements IDocumento
 		// Associate with parent using statement name passed as parameter
 		insertCount +=
 				QATMyBatisDacHelper
-						.doInsert(getSqlSession(), statementName, documento, response);
+				.doInsert(getSqlSession(), statementName, documento, response);
 
 		return insertCount;
 	}
@@ -193,7 +193,7 @@ public class DocumentoDACImpl extends SqlSessionDaoSupport implements IDocumento
 		for (Documento documento : documentoList)
 		{
 			// Make sure we set the parent key
-			documento.setParentKey(parentId);
+			documento.setParentId(parentId);
 
 			if (ValidationUtil.isNull(documento.getModelAction()))
 			{

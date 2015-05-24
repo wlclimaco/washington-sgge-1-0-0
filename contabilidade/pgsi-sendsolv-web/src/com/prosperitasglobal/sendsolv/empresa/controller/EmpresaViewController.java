@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.prosperitasglobal.sendsolv.filter.FilterFactory;
 import com.prosperitasglobal.sendsolv.filter.model.response.FiltersResponse;
 import com.prosperitasglobal.sendsolv.model.OrganizationOrderByEnum;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest;
 import com.qat.framework.model.SortExpression;
 import com.qat.framework.model.SortExpression.Direction;
 
@@ -122,7 +122,7 @@ public class EmpresaViewController extends EmpresaBaseController
 			return modelAndView;
 		}
 
-		PagedInquiryRequest pagedInquiryRequest = new PagedInquiryRequest();
+		EmpresaInquiryRequest pagedInquiryRequest = new EmpresaInquiryRequest();
 		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
 		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
 		pagedInquiryRequest.setPreQueryCount(true);
@@ -164,7 +164,7 @@ public class EmpresaViewController extends EmpresaBaseController
 			HttpServletRequest request)
 	{
 
-		return locationEditMAV(locationId, VIEW_EMPRESA_ADD, true, request);
+		return empresaEditMAV(locationId, VIEW_EMPRESA_ADD, true, request);
 	}
 
 	@RequestMapping(value = {FETCH_VIEW_TABS}, method = RequestMethod.GET)
@@ -185,7 +185,7 @@ public class EmpresaViewController extends EmpresaBaseController
 	public ModelAndView loadView(@RequestParam(value = EMPRESA_ID, required = true) Integer locationId,
 			HttpServletRequest request)
 	{
-		return locationEditMAV(locationId, VIEW_EMPRESA_VIEW, true, request);
+		return empresaEditMAV(locationId, VIEW_EMPRESA_VIEW, true, request);
 	}
 
 	/**
@@ -200,7 +200,7 @@ public class EmpresaViewController extends EmpresaBaseController
 			HttpServletRequest request)
 	{
 
-		return locationEditMAV(locationId, VIEW_EMPRESA_DIALOG_ADD, true, request);
+		return empresaEditMAV(locationId, VIEW_EMPRESA_DIALOG_ADD, true, request);
 	}
 
 }

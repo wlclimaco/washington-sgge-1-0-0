@@ -92,7 +92,7 @@ public class OrcamentoItensDACImpl extends SqlSessionDaoSupport implements IOrca
 		// Associate with parent using statement name passed as parameter
 		insertCount +=
 				QATMyBatisDacHelper
-				.doInsert(getSqlSession(), statementName, orcamentoItens, response);
+						.doInsert(getSqlSession(), statementName, orcamentoItens, response);
 
 		return insertCount;
 	}
@@ -160,11 +160,11 @@ public class OrcamentoItensDACImpl extends SqlSessionDaoSupport implements IOrca
 	@Override
 	public InternalResultsResponse<OrcamentoItens> fetchOrcamentoItensByParent(Integer parentId,
 			BusinessTypeEnum parentType)
-			{
+	{
 		InternalResultsResponse<OrcamentoItens> response = new InternalResultsResponse<OrcamentoItens>();
 
 		return response;
-			}
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -201,7 +201,7 @@ public class OrcamentoItensDACImpl extends SqlSessionDaoSupport implements IOrca
 		for (OrcamentoItens orcamentoItens : orcamentoItensList)
 		{
 			// Make sure we set the parent key
-			orcamentoItens.setParentKey(parentId);
+			orcamentoItens.setParentId(parentId);
 
 			if (ValidationUtil.isNull(orcamentoItens.getModelAction()))
 			{

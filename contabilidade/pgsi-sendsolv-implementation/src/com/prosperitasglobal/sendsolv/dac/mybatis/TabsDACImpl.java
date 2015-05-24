@@ -88,7 +88,7 @@ public class TabsDACImpl extends SqlSessionDaoSupport implements ITabsDAC
 		// Associate with parent using statement name passed as parameter
 		insertCount +=
 				QATMyBatisDacHelper
-				.doInsert(getSqlSession(), statementName, tabs, response);
+						.doInsert(getSqlSession(), statementName, tabs, response);
 
 		return insertCount;
 	}
@@ -189,7 +189,7 @@ public class TabsDACImpl extends SqlSessionDaoSupport implements ITabsDAC
 		for (Tabs tabs : tabsList)
 		{
 			// Make sure we set the parent key
-			tabs.setParentKey(parentId);
+			tabs.setParentId(parentId);
 
 			if (ValidationUtil.isNull(tabs.getModelAction()))
 			{

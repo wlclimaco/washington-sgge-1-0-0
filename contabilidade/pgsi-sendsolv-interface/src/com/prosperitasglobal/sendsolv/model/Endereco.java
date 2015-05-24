@@ -185,7 +185,7 @@ public class Endereco extends ModelCosmeDamiao
 	{
 		return "Endereco [getId()=" + getId() + ", getLogradouro()=" + getLogradouro() + ", getCidade()=" + getCidade()
 				+ ", getEstado()=" + getEstado() + ", getBairro()=" + getBairro() + ", getNumero()=" + getNumero()
-				+ ", getCep()=" + getCep() + ", getTipoEndereco()=" + getTipoEndereco() + ", toString()="
+				+ ", getCep()=" + getCep() + ", toString()="
 				+ super.toString() + "]";
 	}
 

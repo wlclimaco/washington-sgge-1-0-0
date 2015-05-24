@@ -58,7 +58,7 @@ public class Regime extends ModelCosmeDamiao
 	public String toString()
 	{
 		return "Regime [getId()=" + getId() + ", getNome()=" + getNome() + ", getDescricao()=" + getDescricao()
-				+ ", getParentKey()=" + getParentKey() + ", getType()=" + getType() + ", getAcaoType()="
+				+ ", getParentId()=" + getParentId() + ", getType()=" + getType() + ", getAcaoType()="
 				+ getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum() + ", toString()=" + super.toString() + "]";
 	}
 

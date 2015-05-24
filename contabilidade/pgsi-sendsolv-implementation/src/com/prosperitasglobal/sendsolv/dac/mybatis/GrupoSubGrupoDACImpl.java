@@ -89,7 +89,7 @@ public class GrupoSubGrupoDACImpl extends SqlSessionDaoSupport implements IGrupo
 		// Associate with parent using statement name passed as parameter
 		insertCount +=
 				QATMyBatisDacHelper
-						.doInsert(getSqlSession(), statementName, grupo, response);
+				.doInsert(getSqlSession(), statementName, grupo, response);
 
 		return insertCount;
 	}
@@ -190,7 +190,7 @@ public class GrupoSubGrupoDACImpl extends SqlSessionDaoSupport implements IGrupo
 		for (Grupo grupo : grupoList)
 		{
 			// Make sure we set the parent key
-			grupo.setParentKey(parentId);
+			grupo.setParentId(parentId);
 
 			if (ValidationUtil.isNull(grupo.getModelAction()))
 			{

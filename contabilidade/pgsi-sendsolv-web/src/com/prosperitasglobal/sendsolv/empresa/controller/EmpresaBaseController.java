@@ -1,10 +1,22 @@
 package com.prosperitasglobal.sendsolv.empresa.controller;
 
-import java.util.logging.Logger;
+import java.util.Calendar;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
+import com.prosperitasglobal.sendsolv.bai.IEmpresaBAI;
+import com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.EmpresaMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
+import com.prosperitasglobal.sendsolv.model.response.MemberResponse;
+import com.qat.framework.validation.ValidationUtil;
 
 public class EmpresaBaseController extends UtilControllerD
 {
@@ -13,7 +25,7 @@ public class EmpresaBaseController extends UtilControllerD
 	public static final String RESPONSE = "response";
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(EmpresaBaseController.class);
+	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(EmpresaBaseController.class);
 
 	/** The Constant CONTROLLER_EXCEPTION_MSG. */
 	private static final String CONTROLLER_EXCEPTION_MSG = "EmpresaBaseController";
@@ -22,7 +34,7 @@ public class EmpresaBaseController extends UtilControllerD
 	private static final String ENROLLED_MEMBERS = "enrolled_members";
 
 	/** The Empresa BAI. */
-	private IEmpresaBAI empresaBAI
+	private IEmpresaBAI empresaBAI;
 
 	/**
 	 * Gets the empresa bai.
@@ -111,7 +123,7 @@ public class EmpresaBaseController extends UtilControllerD
 	 * @param pagedInquiryRequest the paged inquiry request
 	 * @return the empresa response
 	 */
-	public EmpresaResponse fetchEmpresaByRequest(PagedInquiryRequest pagedInquiryRequest)
+	public EmpresaResponse fetchEmpresaByRequest(EmpresaInquiryRequest pagedInquiryRequest)
 	{
 
 		EmpresaResponse empresaResponse = new EmpresaResponse();
@@ -157,6 +169,63 @@ public class EmpresaBaseController extends UtilControllerD
 		}
 
 		return empresaResponse;
+	}
+
+	public EmpresaResponse insert(EmpresaMaintenanceRequest locationRequest)
+	{
+		EmpresaResponse locationResponse = new EmpresaResponse();
+
+		try
+		{
+
+			locationRequest.getEmpresa().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
+			locationResponse = getEmpresaBAI().insertEmpresa(locationRequest);
+		}
+		catch (Exception e)
+		{
+			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			locationResponse = null;
+		}
+
+		return locationResponse;
+
+	}
+
+	public EmpresaResponse delete(EmpresaMaintenanceRequest locationRequest)
+	{
+		EmpresaResponse locationResponse = new EmpresaResponse();
+		try
+		{
+
+			locationResponse = getEmpresaBAI().deleteEmpresa(locationRequest);
+
+		}
+		catch (Exception e)
+		{
+			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			locationResponse = null;
+		}
+
+		return locationResponse;
+
+	}
+
+	public EmpresaResponse edit(EmpresaMaintenanceRequest locationRequest)
+	{
+		EmpresaResponse locationResponse = new EmpresaResponse();
+		try
+		{
+
+			locationResponse = getEmpresaBAI().updateEmpresa(locationRequest);
+
+		}
+		catch (Exception e)
+		{
+			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			locationResponse = null;
+		}
+		return locationResponse;
+
 	}
 
 }

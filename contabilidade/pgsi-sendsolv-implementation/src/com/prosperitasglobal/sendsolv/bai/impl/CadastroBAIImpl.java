@@ -1,8 +1,32 @@
 package com.prosperitasglobal.sendsolv.bai.impl;
 
-import java.util.List;
+import org.slf4j.LoggerFactory;
 
 import com.prosperitasglobal.sendsolv.bac.ICadastroBAC;
+import com.prosperitasglobal.sendsolv.model.Cfop;
+import com.prosperitasglobal.sendsolv.model.Cidade;
+import com.prosperitasglobal.sendsolv.model.Cnae;
+import com.prosperitasglobal.sendsolv.model.Csosn;
+import com.prosperitasglobal.sendsolv.model.Estado;
+import com.prosperitasglobal.sendsolv.model.Regime;
+import com.prosperitasglobal.sendsolv.model.UniMed;
+import com.prosperitasglobal.sendsolv.model.request.CfopInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CfopMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.CidadeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CidadeMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.CnaeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CnaeMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.CsosnInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CsosnMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.EstadoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.EstadoMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.RegimeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.RegimeMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.UniMedInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.UniMedMaintenanceRequest;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.validation.ValidationController;
 
 /**
  * The Class CadastroBAIImpl.
@@ -74,245 +98,6 @@ public class CadastroBAIImpl implements ICadastroBAC
 	public ICadastroBAC getCadastroBAC()
 	{
 		return CadastroBAC;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.bai.ILocaationBAI#insertLocaation(com.prosperitasglobal.sendsolv.model
-	 * .request.LocaationRequest)
-	 * Leveraging the common process method to perform the "real" work.
-	 * Wrapped in a try-catch to ensure we never return an exception from this operation.
-	 */
-	@Override
-	public CadastroResponse insertCadastro(CadastroMaintenanceRequest request)
-	{
-		CadastroResponse response = new CadastroResponse();
-		try
-		{
-			response = process(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
-		}
-		catch (Exception ex)
-		{
-			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.bai.ILocaationBAI#updateLocaation(com.prosperitasglobal.sendsolv.model
-	 * .request.LocaationRequest)
-	 * Leveraging the common process method to perform the "real" work.
-	 * Wrapped in a try-catch to ensure we never return an exception from this operation.
-	 */
-	@Override
-	public CadastroResponse updateCadastro(CadastroMaintenanceRequest request)
-	{
-		CadastroResponse response = new CadastroResponse();
-		try
-		{
-			response = process(ValidationContextIndicator.UPDATE, PersistanceActionEnum.UPDATE, request);
-		}
-		catch (Exception ex)
-		{
-			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.bai.ILocaationBAI#deleteLocaation(com.prosperitasglobal.sendsolv.model
-	 * .request.LocaationRequest)
-	 * Leveraging the common process method to perform the "real" work.
-	 * Wrapped in a try-catch to ensure we never return an exception from this operation.
-	 */
-	@Override
-	public CadastroResponse deleteCadastro(CadastroMaintenanceRequest request)
-	{
-		CadastroResponse response = new CadastroResponse();
-		try
-		{
-			response = process(ValidationContextIndicator.DELETE, PersistanceActionEnum.DELETE, request);
-		}
-		catch (Exception ex)
-		{
-			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.bai.ILocaationBAI#fetchLocaationById(com.prosperitasglobal.sendsolv.model.
-	 * request
-	 * .CountyRequest)
-	 */
-	@Override
-	public CadastroResponse fetchCadastroById(FetchByIdRequest request)
-	{
-		CadastroResponse response = new CadastroResponse();
-		try
-		{
-			InternalResponse internalResponse = new InternalResponse();
-			// validate fetchId field
-			if (ValidationUtil.isNull(request.getId()) && ValidationUtil.isNullOrEmpty(request.getStringId()))
-			{
-				internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_ID_REQUIRED);
-			}
-			else
-			{
-				internalResponse = getCadastroBAC().fetchCadastroById(request);
-			}
-			// Handle the processing for all previous methods regardless of them failing or succeeding.
-			QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
-		}
-		catch (Exception ex)
-		{
-			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.bai.ICadastroBAI#fetchCadastroByRequest(com.prosperitasglobal.sendsolv.model
-	 * .request.PagedInquiryRequest)
-	 */
-	@Override
-	public CadastroResponse fetchCadastroByRequest(PagedInquiryRequest request)
-	{
-		CadastroResponse response = new CadastroResponse();
-		try
-		{
-			fetchPaged(request, response);
-		}
-		catch (Exception ex)
-		{
-			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.bai.ICadastroBAI#updateRisk(com.prosperitasglobal.sendsolv.model.request.
-	 * RiskMaintenanceRequest)
-	 */
-
-	/**
-	 * Fetch paged.
-	 *
-	 * @param request the request
-	 * @param response the response
-	 */
-	private void fetchPaged(PagedInquiryRequest request, CadastroResponse response)
-	{
-		InternalResultsResponse<Cadastro> internalResponse = new InternalResultsResponse<Cadastro>();
-
-		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
-		{
-			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
-		}
-		else
-		{
-			internalResponse = getCadastroBAC().fetchCadastroByRequest(request);
-		}
-
-		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
-	}
-
-	/**
-	 * Process.
-	 *
-	 * @param indicator the indicator
-	 * @param persistType the persist type
-	 * @param request the request
-	 * @return the Cadastro response
-	 */
-	private CadastroResponse process(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
-			CadastroMaintenanceRequest request)
-	{
-		CadastroResponse response = new CadastroResponse();
-		InternalResponse internalResponse = null;
-
-		// Validate. Notice that BusinessValidator will in turn use additional validators depending on the type
-		ValidationContext context =
-				new ValidationContext(Cadastro.class.getSimpleName(), request.getCadastro(), indicator);
-		context.putObjectToBeValidated(UserContext.class.getSimpleName(), request.getUserContext());
-
-		if (getValidationController().validate(context))
-		{
-			// Persist
-			internalResponse = doPersistance(request, persistType);
-		}
-
-		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return handleReturn(response, internalResponse, context.getMessages(), true);
-	}
-
-	/**
-	 * Handle return.
-	 *
-	 * @param response the response
-	 * @param internalResponse the internal response
-	 * @param messages the messages
-	 * @param copyOver the copy over
-	 * @return the response
-	 */
-	private CadastroResponse handleReturn(CadastroResponse response, InternalResponse internalResponse,
-			List<MessageInfo> messages, boolean copyOver)
-	{
-		// In the case there was an Optimistic Locking error, add the specific message
-		if (!ValidationUtil.isNull(internalResponse) && !ValidationUtil.isNull(internalResponse.getStatus())
-				&& Status.OptimisticLockingError.equals(internalResponse.getStatus()))
-		{
-			messages.add(new MessageInfo(PROSPERITASGLOBAL_BASE_OL_ERROR, MessageSeverity.Error,
-					MessageLevel.Object));
-		}
-
-		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, messages, copyOver);
-		return response;
-	}
-
-	/**
-	 * Do persistance.
-	 *
-	 * @param request the request
-	 * @param updateType the update type
-	 * @return the internal response
-	 */
-	private InternalResponse doPersistance(CadastroMaintenanceRequest request, PersistanceActionEnum updateType)
-	{
-		switch (updateType)
-		{
-			case INSERT:
-				return getCadastroBAC().insertCadastro(request);
-
-			case UPDATE:
-				return getCadastroBAC().updateCadastro(request);
-
-			case DELETE:
-				return getCadastroBAC().deleteCadastro(request);
-
-			default:
-				if (LOG.isDebugEnabled())
-				{
-					LOG.debug("updateType missing!");
-				}
-				break;
-		}
-		return null;
 	}
 
 	@Override

@@ -3,10 +3,8 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
-import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
 import com.prosperitasglobal.sendsolv.dac.IEmailDAC;
 import com.prosperitasglobal.sendsolv.model.Email;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.qat.framework.model.QATModel;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
@@ -93,7 +91,7 @@ public class EmailDACImpl extends SqlSessionDaoSupport implements IEmailDAC
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer deleteBusinessEmail(Email cnae, InternalResultsResponse<?> response)
+	public Integer deleteEmail(Email cnae, InternalResultsResponse<?> response)
 	{
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, cnae, response);
 	}
@@ -103,11 +101,6 @@ public class EmailDACImpl extends SqlSessionDaoSupport implements IEmailDAC
 	 * @see com.prosperitasglobal.cbof.dac.IEmailDAC#deletePersonEmail(com.prosperitasglobal.cbof.model.Email,
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
-	@Override
-	public Integer deletePersonEmail(Email cnae, InternalResultsResponse<?> response)
-	{
-		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_PERSON_CONTACT, cnae, response);
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -136,27 +129,6 @@ public class EmailDACImpl extends SqlSessionDaoSupport implements IEmailDAC
 				QATMyBatisDacHelper.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE_PHONE, cnae, response);
 
 		return updateCount;
-	}
-
-	@Override
-	public InternalResultsResponse<Email> fetchEmailById(Integer id)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public InternalResultsResponse<Email> fetchEmailByParent(Integer parentId, BusinessTypeEnum parentType)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public InternalResultsResponse<Email> fetchEmailByRequest(PagedInquiryRequest request)
-	{
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

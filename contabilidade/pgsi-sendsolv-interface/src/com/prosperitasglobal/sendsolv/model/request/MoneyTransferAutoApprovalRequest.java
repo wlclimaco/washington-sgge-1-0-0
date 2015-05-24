@@ -1,5 +1,6 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
+import com.qat.framework.model.request.Request;
 
 public class MoneyTransferAutoApprovalRequest extends Request
 {

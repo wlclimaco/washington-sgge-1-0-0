@@ -1,6 +1,7 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
 import com.prosperitasglobal.sendsolv.model.Estado;
+import com.qat.framework.model.request.MaintenanceRequest;
 
 public class EstadoMaintenanceRequest extends MaintenanceRequest
 {
