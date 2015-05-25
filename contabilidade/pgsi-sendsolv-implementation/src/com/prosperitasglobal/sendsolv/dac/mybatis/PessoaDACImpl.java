@@ -1,5 +1,7 @@
 package com.prosperitasglobal.sendsolv.dac.mybatis;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
@@ -7,7 +9,9 @@ import org.slf4j.LoggerFactory;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.IPessoaDAC;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.EnderecoDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.StatusDACD;
 import com.prosperitasglobal.sendsolv.model.Pessoa;
 import com.prosperitasglobal.sendsolv.model.request.PessoaInquiryRequest;
 import com.qat.framework.model.QATModel;
@@ -73,79 +77,98 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 	/** The Constant LOG. */
 	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(PessoaDACImpl.class);
 
-	/** The valid sort fields for an cnae inquiry. Will be injected by Spring. */
-	private Map<String, String> cnaeInquiryValidSortFields;
+	/** The valid sort fields for an pessoa inquiry. Will be injected by Spring. */
+	private Map<String, String> pessoaInquiryValidSortFields;
 
 	/**
-	 * Get the valid sort fields for the cnae inquiry. Attribute injected by Spring.
+	 * Get the valid sort fields for the pessoa inquiry. Attribute injected by Spring.
 	 *
-	 * @return The valid sort fields for the cnae inquiry.
+	 * @return The valid sort fields for the pessoa inquiry.
 	 */
 	public Map<String, String> getPessoaInquiryValidSortFields()
 	{
-		return cnaeInquiryValidSortFields;
+		return pessoaInquiryValidSortFields;
 	}
 
 	/**
-	 * Set the valid sort fields for the cnae inquiry. Attribute injected by Spring.
+	 * Set the valid sort fields for the pessoa inquiry. Attribute injected by Spring.
 	 *
-	 * @param cnaeInquiryValidSortFields The valid sort fields for the cnae inquiry to set.
+	 * @param pessoaInquiryValidSortFields The valid sort fields for the pessoa inquiry to set.
 	 */
-	public void setPessoaInquiryValidSortFields(Map<String, String> cnaeInquiryValidSortFields)
+	public void setPessoaInquiryValidSortFields(Map<String, String> pessoaInquiryValidSortFields)
 	{
-		this.cnaeInquiryValidSortFields = cnaeInquiryValidSortFields;
+		this.pessoaInquiryValidSortFields = pessoaInquiryValidSortFields;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IPessoaDAC#insertPessoa(com.prosperitasglobal.sendsolv.model
-	 * .Pessoa)
-	 */
 	@Override
-	public InternalResultsResponse<Pessoa> insertPessoa(Pessoa cnae)
+	public InternalResultsResponse<Cliente> insertCliente(Cliente pessoa)
 	{
 		Integer insertCount = 0;
-		InternalResultsResponse<Pessoa> response = new InternalResultsResponse<Pessoa>();
+		InternalResultsResponse<Cliente> response = new InternalResultsResponse<Cliente>();
 
 		// First insert the root
 		// Is successful the unique-id will be populated back into the object.
-		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), EMPRESA_STMT_INSERT, cnae, response);
+		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), EMPRESA_STMT_INSERT, pessoa, response);
 
 		if (response.isInError())
 		{
 			return response;
 		}
 		// Next traverse the object graph and "maintain" the associations
-		insertCount += maintainPessoaAssociations(cnae, response);
+		insertCount +=
+				EnderecoDACD.maintainEnderecoAssociations(pessoa.getEnderecos, response, insertCount, null, null,
+						null);
 
-		// Finally, if something was inserted then add the Pessoa to the result.
+		insertCount +=
+				EnderecoDACD.maintainCnaeAssociations(pessoa.getCnaes, response, insertCount, null, null,
+						null);
+
+		insertCount +=
+				EnderecoDACD.maintainEmailAssociations(pessoa.getEmails, response, insertCount, null, null,
+						null);
+
+		insertCount +=
+				EnderecoDACD.maintainTelefoneAssociations(pessoa.getTelefones, response, insertCount, null, null,
+						null);
+
+		insertCount +=
+				EnderecoDACD.maintainDocumentoAssociations(pessoa.getDocumentos, response, insertCount, null, null,
+						null);
+
+
+		insertCount +=
+				EnderecoDACD.maintainHistoricoAssociations(pessoa.getEStatus, response, insertCount, null, null,
+						null);
+
 		if (insertCount > 0)
 		{
-			response.addResult(cnae);
+			Status status = new Status();
+			status.setStatus(StatusEnum.ACTIVE);
+			List<Status> statusList = new new ArrayList<Status>();
+			count = StatusDACD.maintainStatusAssociations(statusList, response, count, type, enderecoList, tabelaEnum);
+		}
+
+		// Finally, if something was inserted then add the Cliente to the result.
+		if (insertCount > 0)
+		{
+			response.addResult(pessoa);
 		}
 
 		return response;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IPessoaDAC#updatePessoa(com.prosperitasglobal.sendsolv.model
-	 * .Pessoa)
-	 */
 	@Override
-	public InternalResultsResponse<Pessoa> updatePessoa(Pessoa cnae)
+	public InternalResultsResponse<Cliente> updateCliente(Cliente pessoa)
 	{
 		Integer updateCount = 0;
-		InternalResultsResponse<Pessoa> response = new InternalResultsResponse<Pessoa>();
+		InternalResultsResponse<Cliente> response = new InternalResultsResponse<Cliente>();
 
 		// First update the root if necessary.
-		if (!ValidationUtil.isNull(cnae.getModelAction())
-				&& (cnae.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
+		if (!ValidationUtil.isNull(pessoa.getModelAction())
+				&& (pessoa.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
 		{
 			updateCount =
-					QATMyBatisDacHelper.doUpdate(getSqlSession(), EMPRESA_STMT_UPDATE, cnae,
+					QATMyBatisDacHelper.doUpdate(getSqlSession(), EMPRESA_STMT_UPDATE, pessoa,
 							response);
 		}
 
@@ -154,119 +177,448 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 			return response;
 		}
 		// Next traverse the object graph and "maintain" the associations
-		updateCount += maintainPessoaAssociations(cnae, response);
+		updateCount +=
+				EnderecoDACD.maintainEnderecoAssociations(pessoa.getEnderecos, response, pessoa.getId(), null, null,
+						null);
+
+		updateCount +=
+				EnderecoDACD.maintainCnaeAssociations(pessoa.getCnaes, response, pessoa.getId(), null, null,
+						null);
+
+		updateCount +=
+				EnderecoDACD.maintainEmailAssociations(pessoa.getEmails, response, pessoa.getId(), null, null,
+						null);
+
+		updateCount +=
+				EnderecoDACD.maintainTelefoneAssociations(pessoa.getTelefones, response, pessoa.getId(), null, null,
+						null);
+
+		updateCount +=
+				EnderecoDACD.maintainDocumentoAssociations(pessoa.getDocumentos, response, pessoa.getId(), null, null,
+						null);
+
+
+		updateCount +=
+				EnderecoDACD.maintainHistoricoAssociations(pessoa.getEStatus, response, pessoa.getId(), null, null,
+						null);
+
+		if (updateCount > 0)
+		{
+			Status status = new Status();
+			status.setStatus(StatusEnum.ACTIVE);
+			List<Status> statusList = new new ArrayList<Status>();
+			count = StatusDACD.maintainStatusAssociations(statusList, response, count, type, enderecoList, tabelaEnum);
+		}
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
 		{
-			response.addResult(cnae);
+			response.addResult(pessoa);
 		}
 
 		return response;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IPessoaDAC#deletePessoa(com.prosperitasglobal.sendsolv.model
-	 * .Pessoa)
-	 */
 	@Override
-	public InternalResponse deletePessoa(Pessoa cnae)
+	public InternalResponse deleteCliente(Cliente pessoa)
 	{
+		Integer updateCount = 0;
 		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doRemove(getSqlSession(), EMPRESA_STMT_DELETE, cnae, response);
+		QATMyBatisDacHelper.doRemove(getSqlSession(), EMPRESA_STMT_DELETE, pessoa, response);
+		updateCount +=
+				EnderecoDACD.maintainHistoricoAssociations(pessoa.getEStatus, response, insertCount, null, null,
+						null);
 
+		if (updateCount > 0)
+		{
+			Status status = new Status();
+			status.setStatus(StatusEnum.ACTIVE);
+			List<Status> statusList = new new ArrayList<Status>();
+			count = StatusDACD.maintainStatusAssociations(statusList, response, count, type, enderecoList, tabelaEnum);
+		}
+
+		// Finally, if something was updated then add the Person to the result.
+		if (updateCount > 0)
+		{
+			response.addResult(pessoa);
+		}
 		return response;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.dac.IPessoaDAC#fetchPessoaById(FetchByIdRequest)
+	 * @see com.prosperitasglobal.sendsolv.dac.IClienteDAC#fetchClienteById(FetchByIdRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Pessoa> fetchPessoaById(FetchByIdRequest request)
+	public InternalResultsResponse<Cliente> fetchClienteById(FetchByIdRequest request)
 	{
-		InternalResultsResponse<Pessoa> response = new InternalResultsResponse<Pessoa>();
+		InternalResultsResponse<Cliente> response = new InternalResultsResponse<Cliente>();
 		QATMyBatisDacHelper.doQueryForList(getSqlSession(), EMPRESA_STMT_FETCH_BY_ID, request, response);
 		return response;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IPessoaDAC#fetchPessoaByRequest(com.prosperitasglobal.sendsolv
-	 * .model.request.PagedInquiryRequest)
-	 */
 	@Override
-	public InternalResultsResponse<Pessoa> fetchPessoaByRequest(PessoaInquiryRequest request)
+	public InternalResultsResponse<Cliente> fetchClienteByRequest(ClienteInquiryRequest request)
 	{
-		InternalResultsResponse<Pessoa> response = new InternalResultsResponse<Pessoa>();
+		InternalResultsResponse<Cliente> response = new InternalResultsResponse<Cliente>();
 
 		/*
 		 * Helper method to translation from the user friendly" sort field names to the
 		 * actual database column names.
 		 */
-		QATMyBatisDacHelper.translateSortFields(request, getPessoaInquiryValidSortFields());
+		QATMyBatisDacHelper.translateSortFields(request, getClienteInquiryValidSortFields());
 
 		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, EMPRESA_STMT_FETCH_COUNT,
 				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
 		return response;
 	}
 
-	/**
-	 * Maintain cnae associations.
-	 *
-	 * @param cnae the cnae
-	 * @param response the response
-	 * @return the integer
-	 */
-	private Integer maintainPessoaAssociations(Pessoa cnae,
-			InternalResultsResponse<Pessoa> response)
+	// ========================Fornecedor=======================
+	@Override
+	public InternalResultsResponse<Fornecedor> insertFornecedor(Fornecedor pessoa)
 	{
-		Integer count = 0;
-		// First Maintain Contacts
-		// if (ValidationUtil.isNullOrEmpty(cnae.getContactList()))
-		// {
-		// return count;
-		// }
-		// // For Each Contact...
-		// for (Contact contact : cnae.getContactList())
-		// {
-		// // Make sure we set the parent key
-		// contact.setParentKey(cnae.getId());
-		//
-		// if (ValidationUtil.isNull(contact.getModelAction()))
-		// {
-		// continue;
-		// }
-		// switch (contact.getModelAction())
-		// {
-		// case INSERT:
-		// count = getContactDAC().insertContact(contact,
-		// EMPRESA_STMT_ASSOC_ORG_TO_CONTACT, response);
-		// break;
-		// case UPDATE:
-		// count = getContactDAC().updateContact(contact, response);
-		// break;
-		// case DELETE:
-		// count = getContactDAC().deleteBusinessContact(contact, response);
-		// break;
-		// default:
-		// if (LOG.isDebugEnabled())
-		// {
-		// LOG.debug("ModelAction for Pessoa missing!");
-		// }
-		// break;
-		// }
-		// }
-		return count;
+		Integer insertCount = 0;
+		InternalResultsResponse<Fornecedor> response = new InternalResultsResponse<Fornecedor>();
+
+		// First insert the root
+		// Is successful the unique-id will be populated back into the object.
+		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), EMPRESA_STMT_INSERT, pessoa, response);
+
+		if (response.isInError())
+		{
+			return response;
+		}
+		// Next traverse the object graph and "maintain" the associations
+		insertCount +=
+				EnderecoDACD.maintainEnderecoAssociations(pessoa.getEnderecos, response, insertCount, null, null,
+						null);
+
+		insertCount +=
+				EnderecoDACD.maintainCnaeAssociations(pessoa.getCnaes, response, insertCount, null, null,
+						null);
+
+		insertCount +=
+				EnderecoDACD.maintainEmailAssociations(pessoa.getEmails, response, insertCount, null, null,
+						null);
+
+		insertCount +=
+				EnderecoDACD.maintainTelefoneAssociations(pessoa.getTelefones, response, insertCount, null, null,
+						null);
+
+		insertCount +=
+				EnderecoDACD.maintainDocumentoAssociations(pessoa.getDocumentos, response, insertCount, null, null,
+						null);
+
+
+		insertCount +=
+				EnderecoDACD.maintainHistoricoAssociations(pessoa.getEStatus, response, insertCount, null, null,
+						null);
+
+		if (insertCount > 0)
+		{
+			Status status = new Status();
+			status.setStatus(StatusEnum.ACTIVE);
+			List<Status> statusList = new new ArrayList<Status>();
+			count = StatusDACD.maintainStatusAssociations(statusList, response, count, type, enderecoList, tabelaEnum);
+		}
+
+		// Finally, if something was inserted then add the Fornecedor to the result.
+		if (insertCount > 0)
+		{
+			response.addResult(pessoa);
+		}
+
+		return response;
 	}
 
 	@Override
-	public InternalResultsResponse<Pessoa> fetchAllPessoas()
+	public InternalResultsResponse<Fornecedor> updateFornecedor(Fornecedor pessoa)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Integer updateCount = 0;
+		InternalResultsResponse<Fornecedor> response = new InternalResultsResponse<Fornecedor>();
+
+		// First update the root if necessary.
+		if (!ValidationUtil.isNull(pessoa.getModelAction())
+				&& (pessoa.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
+		{
+			updateCount =
+					QATMyBatisDacHelper.doUpdate(getSqlSession(), EMPRESA_STMT_UPDATE, pessoa,
+							response);
+		}
+
+		if (response.isInError())
+		{
+			return response;
+		}
+		// Next traverse the object graph and "maintain" the associations
+		updateCount +=
+				EnderecoDACD.maintainEnderecoAssociations(pessoa.getEnderecos, response, pessoa.getId(), null, null,
+						null);
+
+		updateCount +=
+				EnderecoDACD.maintainCnaeAssociations(pessoa.getCnaes, response, pessoa.getId(), null, null,
+						null);
+
+		updateCount +=
+				EnderecoDACD.maintainEmailAssociations(pessoa.getEmails, response, pessoa.getId(), null, null,
+						null);
+
+		updateCount +=
+				EnderecoDACD.maintainTelefoneAssociations(pessoa.getTelefones, response, pessoa.getId(), null, null,
+						null);
+
+		updateCount +=
+				EnderecoDACD.maintainDocumentoAssociations(pessoa.getDocumentos, response, pessoa.getId(), null, null,
+						null);
+
+
+		updateCount +=
+				EnderecoDACD.maintainHistoricoAssociations(pessoa.getEStatus, response, pessoa.getId(), null, null,
+						null);
+
+		if (updateCount > 0)
+		{
+			Status status = new Status();
+			status.setStatus(StatusEnum.ACTIVE);
+			List<Status> statusList = new new ArrayList<Status>();
+			count = StatusDACD.maintainStatusAssociations(statusList, response, count, type, enderecoList, tabelaEnum);
+		}
+
+		// Finally, if something was updated then add the Person to the result.
+		if (updateCount > 0)
+		{
+			response.addResult(pessoa);
+		}
+
+		return response;
+	}
+
+	@Override
+	public InternalResponse deleteFornecedor(Fornecedor pessoa)
+	{
+		Integer updateCount = 0;
+		InternalResponse response = new InternalResponse();
+		QATMyBatisDacHelper.doRemove(getSqlSession(), EMPRESA_STMT_DELETE, pessoa, response);
+		updateCount +=
+				EnderecoDACD.maintainHistoricoAssociations(pessoa.getEStatus, response, insertCount, null, null,
+						null);
+
+		if (updateCount > 0)
+		{
+			Status status = new Status();
+			status.setStatus(StatusEnum.ACTIVE);
+			List<Status> statusList = new new ArrayList<Status>();
+			count = StatusDACD.maintainStatusAssociations(statusList, response, count, type, enderecoList, tabelaEnum);
+		}
+
+		// Finally, if something was updated then add the Person to the result.
+		if (updateCount > 0)
+		{
+			response.addResult(pessoa);
+		}
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.sendsolv.dac.IFornecedorDAC#fetchFornecedorById(FetchByIdRequest)
+	 */
+	@Override
+	public InternalResultsResponse<Fornecedor> fetchFornecedorById(FetchByIdRequest request)
+	{
+		InternalResultsResponse<Fornecedor> response = new InternalResultsResponse<Fornecedor>();
+		QATMyBatisDacHelper.doQueryForList(getSqlSession(), EMPRESA_STMT_FETCH_BY_ID, request, response);
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Fornecedor> fetchFornecedorByRequest(FornecedorInquiryRequest request)
+	{
+		InternalResultsResponse<Fornecedor> response = new InternalResultsResponse<Fornecedor>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		QATMyBatisDacHelper.translateSortFields(request, getFornecedorInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, EMPRESA_STMT_FETCH_COUNT,
+				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
+		return response;
+	}
+
+	// ==============================Transportador
+
+	@Override
+	public InternalResultsResponse<Transportador> insertTransportador(Transportador pessoa)
+	{
+		Integer insertCount = 0;
+		InternalResultsResponse<Transportador> response = new InternalResultsResponse<Transportador>();
+
+		// First insert the root
+		// Is successful the unique-id will be populated back into the object.
+		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), EMPRESA_STMT_INSERT, pessoa, response);
+
+		if (response.isInError())
+		{
+			return response;
+		}
+		// Next traverse the object graph and "maintain" the associations
+		insertCount +=
+				EnderecoDACD.maintainEnderecoAssociations(pessoa.getEnderecos, response, insertCount, null, null,
+						null);
+
+		insertCount +=
+				EnderecoDACD.maintainCnaeAssociations(pessoa.getCnaes, response, insertCount, null, null,
+						null);
+
+		insertCount +=
+				EnderecoDACD.maintainEmailAssociations(pessoa.getEmails, response, insertCount, null, null,
+						null);
+
+		insertCount +=
+				EnderecoDACD.maintainTelefoneAssociations(pessoa.getTelefones, response, insertCount, null, null,
+						null);
+
+		insertCount +=
+				EnderecoDACD.maintainDocumentoAssociations(pessoa.getDocumentos, response, insertCount, null, null,
+						null);
+
+
+		insertCount +=
+				EnderecoDACD.maintainHistoricoAssociations(pessoa.getEStatus, response, insertCount, null, null,
+						null);
+
+		if (insertCount > 0)
+		{
+			Status status = new Status();
+			status.setStatus(StatusEnum.ACTIVE);
+			List<Status> statusList = new new ArrayList<Status>();
+			count = StatusDACD.maintainStatusAssociations(statusList, response, count, type, enderecoList, tabelaEnum);
+		}
+
+		// Finally, if something was inserted then add the Transportador to the result.
+		if (insertCount > 0)
+		{
+			response.addResult(pessoa);
+		}
+
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Transportador> updateTransportador(Transportador pessoa)
+	{
+		Integer updateCount = 0;
+		InternalResultsResponse<Transportador> response = new InternalResultsResponse<Transportador>();
+
+		// First update the root if necessary.
+		if (!ValidationUtil.isNull(pessoa.getModelAction())
+				&& (pessoa.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
+		{
+			updateCount =
+					QATMyBatisDacHelper.doUpdate(getSqlSession(), EMPRESA_STMT_UPDATE, pessoa,
+							response);
+		}
+
+		if (response.isInError())
+		{
+			return response;
+		}
+		// Next traverse the object graph and "maintain" the associations
+		updateCount +=
+				EnderecoDACD.maintainEnderecoAssociations(pessoa.getEnderecos, response, pessoa.getId(), null, null,
+						null);
+
+		updateCount +=
+				EnderecoDACD.maintainCnaeAssociations(pessoa.getCnaes, response, pessoa.getId(), null, null,
+						null);
+
+		updateCount +=
+				EnderecoDACD.maintainEmailAssociations(pessoa.getEmails, response, pessoa.getId(), null, null,
+						null);
+
+		updateCount +=
+				EnderecoDACD.maintainTelefoneAssociations(pessoa.getTelefones, response, pessoa.getId(), null, null,
+						null);
+
+		updateCount +=
+				EnderecoDACD.maintainDocumentoAssociations(pessoa.getDocumentos, response, pessoa.getId(), null, null,
+						null);
+
+
+		updateCount +=
+				EnderecoDACD.maintainHistoricoAssociations(pessoa.getEStatus, response, pessoa.getId(), null, null,
+						null);
+
+		if (updateCount > 0)
+		{
+			Status status = new Status();
+			status.setStatus(StatusEnum.ACTIVE);
+			List<Status> statusList = new new ArrayList<Status>();
+			count = StatusDACD.maintainStatusAssociations(statusList, response, count, type, enderecoList, tabelaEnum);
+		}
+
+		// Finally, if something was updated then add the Person to the result.
+		if (updateCount > 0)
+		{
+			response.addResult(pessoa);
+		}
+
+		return response;
+	}
+
+	@Override
+	public InternalResponse deleteTransportador(Transportador pessoa)
+	{
+		Integer updateCount = 0;
+		InternalResponse response = new InternalResponse();
+		QATMyBatisDacHelper.doRemove(getSqlSession(), EMPRESA_STMT_DELETE, pessoa, response);
+		updateCount +=
+				EnderecoDACD.maintainHistoricoAssociations(pessoa.getEStatus, response, insertCount, null, null,
+						null);
+
+		if (updateCount > 0)
+		{
+			Status status = new Status();
+			status.setStatus(StatusEnum.ACTIVE);
+			List<Status> statusList = new new ArrayList<Status>();
+			count = StatusDACD.maintainStatusAssociations(statusList, response, count, type, enderecoList, tabelaEnum);
+		}
+
+		// Finally, if something was updated then add the Person to the result.
+		if (updateCount > 0)
+		{
+			response.addResult(pessoa);
+		}
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.sendsolv.dac.ITransportadorDAC#fetchTransportadorById(FetchByIdRequest)
+	 */
+	@Override
+	public InternalResultsResponse<Transportador> fetchTransportadorById(FetchByIdRequest request)
+	{
+		InternalResultsResponse<Transportador> response = new InternalResultsResponse<Transportador>();
+		QATMyBatisDacHelper.doQueryForList(getSqlSession(), EMPRESA_STMT_FETCH_BY_ID, request, response);
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Transportador> fetchTransportadorByRequest(TransportadorInquiryRequest request)
+	{
+		InternalResultsResponse<Transportador> response = new InternalResultsResponse<Transportador>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		QATMyBatisDacHelper.translateSortFields(request, getTransportadorInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, EMPRESA_STMT_FETCH_COUNT,
+				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
+		return response;
 	}
 }

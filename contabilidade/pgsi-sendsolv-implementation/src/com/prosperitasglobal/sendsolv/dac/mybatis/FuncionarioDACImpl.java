@@ -1,5 +1,7 @@
 package com.prosperitasglobal.sendsolv.dac.mybatis;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
@@ -8,7 +10,9 @@ import org.slf4j.LoggerFactory;
 import com.prosperitasglobal.cbof.dac.IContactDAC;
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.IFuncionarioDAC;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.EnderecoDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.StatusDACD;
 import com.prosperitasglobal.sendsolv.model.FrequencyBasedEvent;
 import com.prosperitasglobal.sendsolv.model.Funcionario;
 import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
@@ -142,7 +146,38 @@ public class FuncionarioDACImpl extends SqlSessionDaoSupport implements IFuncion
 			return response;
 		}
 		// Next traverse the object graph and "maintain" the associations
-		insertCount += maintainFuncionarioAssociations(funcionario, response);
+		insertCount +=
+				EnderecoDACD.maintainEnderecoAssociations(funcionario.getEnderecos, response, insertCount, null, null,
+						null);
+
+		insertCount +=
+				EnderecoDACD.maintainSalarioAssociations(funcionario.getCnaes, response, insertCount, null, null,
+						null);
+
+		insertCount +=
+				EnderecoDACD.maintainEmailAssociations(funcionario.getEmails, response, insertCount, null, null,
+						null);
+
+		insertCount +=
+				EnderecoDACD.maintainTelefoneAssociations(funcionario.getTelefones, response, insertCount, null, null,
+						null);
+
+		insertCount +=
+				EnderecoDACD.maintainDocumentoAssociations(funcionario.getDocumentos, response, insertCount, null, null,
+						null);
+
+		insertCount +=
+				EnderecoDACD.maintainHistoricoAssociations(funcionario.getEStatus, response, insertCount, null, null,
+						null);
+
+		if (insertCount > 0)
+		{
+			Status status = new Status();
+			status.setStatus(StatusEnum.ACTIVE);
+			List<Status> statusList = new new ArrayList<Status>();
+			count = StatusDACD.maintainStatusAssociations(statusList, response, count, type, enderecoList, tabelaEnum);
+		}
+
 
 		// Finally, if something was inserted then add the Funcionario to the result.
 		if (insertCount > 0)
@@ -178,7 +213,37 @@ public class FuncionarioDACImpl extends SqlSessionDaoSupport implements IFuncion
 			return response;
 		}
 		// Next traverse the object graph and "maintain" the associations
-		updateCount += maintainFuncionarioAssociations(funcionario, response);
+		updateCount +=
+				EnderecoDACD.maintainEnderecoAssociations(funcionario.getEnderecos, response, funcionario.getId(), null, null,
+						null);
+
+		updateCount +=
+				EnderecoDACD.maintainSalarioAssociations(funcionario.getCnaes, response, funcionario.getId(), null, null,
+						null);
+
+		updateCount +=
+				EnderecoDACD.maintainEmailAssociations(funcionario.getEmails, response, funcionario.getId(), null, null,
+						null);
+
+		updateCount +=
+				EnderecoDACD.maintainTelefoneAssociations(funcionario.getTelefones, response, funcionario.getId(), null, null,
+						null);
+
+		updateCount +=
+				EnderecoDACD.maintainDocumentoAssociations(funcionario.getDocumentos, response, funcionario.getId(), null, null,
+						null);
+
+		updateCount +=
+				EnderecoDACD.maintainHistoricoAssociations(funcionario.getEStatus, response, funcionario.getId(), null, null,
+						null);
+
+		if (updateCount > 0)
+		{
+			Status status = new Status();
+			status.setStatus(StatusEnum.ACTIVE);
+			List<Status> statusList = new new ArrayList<Status>();
+			count = StatusDACD.maintainStatusAssociations(statusList, response, count, type, enderecoList, tabelaEnum);
+		}
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
@@ -200,6 +265,16 @@ public class FuncionarioDACImpl extends SqlSessionDaoSupport implements IFuncion
 	{
 		InternalResponse response = new InternalResponse();
 		QATMyBatisDacHelper.doRemove(getSqlSession(), FUNCIONARIO_STMT_DELETE, funcionario, response);
+
+		EnderecoDACD.maintainHistoricoAssociations(funcionario.getEStatus, response, funcionario.getId(), null, null,
+						null);
+
+
+			Status status = new Status();
+			status.setStatus(StatusEnum.ACTIVE);
+			List<Status> statusList = new new ArrayList<Status>();
+			count = StatusDACD.maintainStatusAssociations(statusList, response, count, type, enderecoList, tabelaEnum);
+
 
 		return response;
 	}

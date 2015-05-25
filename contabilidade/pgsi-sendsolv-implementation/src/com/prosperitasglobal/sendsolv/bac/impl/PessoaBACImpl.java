@@ -1,13 +1,7 @@
 package com.prosperitasglobal.sendsolv.bac.impl;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.bac.IPessoaBAC;
 import com.prosperitasglobal.sendsolv.dac.IPessoaDAC;
-import com.prosperitasglobal.sendsolv.model.Pessoa;
-import com.prosperitasglobal.sendsolv.model.request.PessoaInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.PessoaMaintenanceRequest;
-import com.qat.framework.model.response.InternalResponse;
-import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
  * The Class PessoaBACImpl.
@@ -34,66 +28,120 @@ public class PessoaBACImpl implements IPessoaBAC
 		this.PessoaDAC = PessoaDAC;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.bac.IPessoaBAC#insertPessoa(PessoaRequest)
-	 */
 	@Override
-	public InternalResultsResponse<Pessoa> insertPessoa(PessoaMaintenanceRequest request)
+	public InternalResultsResponse<Cliente> insertCliente(ClienteMaintenanceRequest request)
 	{
-		InternalResultsResponse<Pessoa> response = new InternalResultsResponse<Pessoa>();
+		InternalResultsResponse<Cliente> response = new InternalResultsResponse<Cliente>();
 
-		response = getPessoaDAC().insertPessoa(request.getPessoa());
+		response = getPessoaDAC().insertCliente(request.getCliente());
 
 		return response;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.bac.IPessoaBAC#updatePessoa(PessoaRequest)
-	 */
 	@Override
-	public InternalResultsResponse<Pessoa> updatePessoa(PessoaMaintenanceRequest request)
+	public InternalResultsResponse<Cliente> updateCliente(ClienteMaintenanceRequest request)
 	{
-		InternalResultsResponse<Pessoa> response = new InternalResultsResponse<Pessoa>();
+		InternalResultsResponse<Cliente> response = new InternalResultsResponse<Cliente>();
 
-		response = getPessoaDAC().updatePessoa(request.getPessoa());
+		response = getPessoaDAC().updateCliente(request.getCliente());
 
 		return response;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.bac.IPessoaBAC#deletePessoa
-	 * (com.prosperitasglobal.sendsolv.model.request.PessoaRequest
-	 * )
-	 */
 	@Override
-	public InternalResponse deletePessoa(PessoaMaintenanceRequest request)
+	public InternalResponse deleteCliente(ClienteMaintenanceRequest request)
 	{
-		return getPessoaDAC().deletePessoa(request.getPessoa());
+		return getPessoaDAC().deleteCliente(request.getCliente());
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.bac.IPessoaBAC#fetchPessoaById(FetchByIdRequest)
-	 */
 	@Override
-	public InternalResultsResponse<Pessoa> fetchPessoaById(FetchByIdRequest request)
+	public InternalResultsResponse<Cliente> fetchClienteById(FetchByIdRequest request)
 	{
-		return getPessoaDAC().fetchPessoaById(request);
+		return getPessoaDAC().fetchClienteById(request);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.bac.IPessoaBAC#fetchPessoaByRequest(com.prosperitasglobal.sendsolv.model.request
-	 * .PessoaInquiryRequest)
-	 */
+	@Override
+	public InternalResultsResponse<Cliente> fetchClienteByRequest(ClienteInquiryRequest request)
+	{
+		return getPessoaDAC().fetchClienteByRequest(request);
+	}
+
+	// =================================
+
+	@Override
+	public InternalResultsResponse<Fornecedor> insertFornecedor(FornecedorMaintenanceRequest request)
+	{
+		InternalResultsResponse<Fornecedor> response = new InternalResultsResponse<Fornecedor>();
+
+		response = getPessoaDAC().insertFornecedor(request.getFornecedor());
+
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Fornecedor> updateFornecedor(FornecedorMaintenanceRequest request)
+	{
+		InternalResultsResponse<Fornecedor> response = new InternalResultsResponse<Fornecedor>();
+
+		response = getPessoaDAC().updateFornecedor(request.getFornecedor());
+
+		return response;
+	}
+
+	@Override
+	public InternalResponse deleteFornecedor(FornecedorMaintenanceRequest request)
+	{
+		return getPessoaDAC().deleteFornecedor(request.getFornecedor());
+	}
+
+	@Override
+	public InternalResultsResponse<Fornecedor> fetchFornecedorById(FetchByIdRequest request)
+	{
+		return getPessoaDAC().fetchFornecedorById(request);
+	}
+
 	@Override
 	public InternalResultsResponse<Pessoa> fetchPessoaByRequest(PessoaInquiryRequest request)
 	{
-		return getPessoaDAC().fetchPessoaByRequest(request);
+		return getFornecedorDAC().fetchPessoaByRequest(request);
+	}
+
+	// ========================================
+	@Override
+	public InternalResultsResponse<Transportador> insertTransportador(TransportadorMaintenanceRequest request)
+	{
+		InternalResultsResponse<Transportador> response = new InternalResultsResponse<Transportador>();
+
+		response = getPessoaDAC().insertTransportador(request.getTransportador());
+
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Transportador> updateTransportador(TransportadorMaintenanceRequest request)
+	{
+		InternalResultsResponse<Transportador> response = new InternalResultsResponse<Transportador>();
+
+		response = getPessoaDAC().updateTransportador(request.getTransportador());
+
+		return response;
+	}
+
+	@Override
+	public InternalResponse deleteTransportador(TransportadorMaintenanceRequest request)
+	{
+		return getPessoaDAC().deleteTransportador(request.getTransportador());
+	}
+
+	@Override
+	public InternalResultsResponse<Transportador> fetchTransportadorById(FetchByIdRequest request)
+	{
+		return getPessoaDAC().fetchTransportadorById(request);
+	}
+
+	@Override
+	public InternalResultsResponse<Transportador> fetchTransportadorByRequest(TransportadorInquiryRequest request)
+	{
+		return getPessoaDAC().fetchTransportadorByRequest(request);
 	}
 }

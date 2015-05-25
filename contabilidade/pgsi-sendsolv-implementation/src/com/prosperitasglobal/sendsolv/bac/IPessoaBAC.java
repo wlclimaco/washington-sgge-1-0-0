@@ -1,56 +1,43 @@
 package com.prosperitasglobal.sendsolv.bac;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.Pessoa;
-import com.prosperitasglobal.sendsolv.model.request.PessoaInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.PessoaMaintenanceRequest;
-import com.qat.framework.model.response.InternalResponse;
-import com.qat.framework.model.response.InternalResultsResponse;
-
 /**
  * The Interface IPessoaBAC.
  */
 public interface IPessoaBAC
 {
 
-	/**
-	 * Insert location.
-	 *
-	 * @param request the request
-	 * @return the internal results response< location>
-	 */
-	public InternalResultsResponse<Pessoa> insertPessoa(PessoaMaintenanceRequest request);
+	public InternalResultsResponse<Cliente> insertCliente(ClienteMaintenanceRequest request);
 
-	/**
-	 * Update location.
-	 *
-	 * @param request the request
-	 * @return the internal results response< location>
-	 */
-	public InternalResultsResponse<Pessoa> updatePessoa(PessoaMaintenanceRequest request);
+	public InternalResultsResponse<Cliente> updateCliente(ClienteMaintenanceRequest request);
 
-	/**
-	 * Delete location.
-	 *
-	 * @param request the request
-	 * @return the internal response
-	 */
-	public InternalResponse deletePessoa(PessoaMaintenanceRequest request);
+	public InternalResponse deleteCliente(ClienteMaintenanceRequest request);
 
-	/**
-	 * Fetch location by id.
-	 *
-	 * @param request the request
-	 * @return the internal results response< location>
-	 */
-	public InternalResultsResponse<Pessoa> fetchPessoaById(FetchByIdRequest request);
+	public InternalResultsResponse<Cliente> fetchClienteById(FetchByIdRequest request);
 
-	/**
-	 * Fetch location by request.
-	 *
-	 * @param request the request
-	 * @return the internal results response< location>
-	 */
-	public InternalResultsResponse<Pessoa> fetchPessoaByRequest(PessoaInquiryRequest request);
+	public InternalResultsResponse<Cliente> fetchClienteByRequest(ClienteInquiryRequest request);
+
+	// =============================
+
+	public InternalResultsResponse<Fornecedor> insertFornecedor(FornecedorMaintenanceRequest request);
+
+	public InternalResultsResponse<Fornecedor> updateFornecedor(FornecedorMaintenanceRequest request);
+
+	public InternalResponse deleteFornecedor(FornecedorMaintenanceRequest request);
+
+	public InternalResultsResponse<Fornecedor> fetchFornecedorById(FetchByIdRequest request);
+
+	public InternalResultsResponse<Fornecedor> fetchFornecedorByRequest(FornecedorInquiryRequest request);
+
+	// ====================
+
+	public InternalResultsResponse<Transportador> insertTransportador(TransportadorMaintenanceRequest request);
+
+	public InternalResultsResponse<Transportador> updateTransportador(TransportadorMaintenanceRequest request);
+
+	public InternalResponse deleteTransportador(TransportadorMaintenanceRequest request);
+
+	public InternalResultsResponse<Transportador> fetchTransportadorById(FetchByIdRequest request);
+
+	public InternalResultsResponse<Transportador> fetchTransportadorByRequest(TransportadorInquiryRequest request);
 
 }

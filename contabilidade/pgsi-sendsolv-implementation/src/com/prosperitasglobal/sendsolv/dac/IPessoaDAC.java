@@ -1,10 +1,5 @@
 package com.prosperitasglobal.sendsolv.dac;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.Pessoa;
-import com.prosperitasglobal.sendsolv.model.request.PessoaInquiryRequest;
-import com.qat.framework.model.response.InternalResponse;
-import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
  * The Interface IPessoaDAC.
@@ -12,51 +7,36 @@ import com.qat.framework.model.response.InternalResultsResponse;
 public interface IPessoaDAC
 {
 
-	/**
-	 * Update cnae.
-	 *
-	 * @param cnae the cnae
-	 * @return the internal results response< cnae>
-	 */
-	public InternalResultsResponse<Pessoa> updatePessoa(Pessoa cnae);
+	public InternalResultsResponse<Cliente> updateCliente(Cliente cnae);
 
-	/**
-	 * Insert cnae.
-	 *
-	 * @param cnae the cnae
-	 * @return the internal results response< cnae>
-	 */
-	public InternalResultsResponse<Pessoa> insertPessoa(Pessoa cnae);
+	public InternalResultsResponse<Cliente> insertCliente(Cliente cnae);
 
-	/**
-	 * Delete cnae.
-	 *
-	 * @param cnae the cnae
-	 * @return the internal response
-	 */
-	public InternalResponse deletePessoa(Pessoa cnae);
+	public InternalResponse deleteCliente(Cliente cnae);
 
-	/**
-	 * Fetch cnae by id.
-	 *
-	 * @param request the request
-	 * @return the internal results response
-	 */
-	public InternalResultsResponse<Pessoa> fetchPessoaById(FetchByIdRequest request);
+	public InternalResultsResponse<Cliente> fetchClienteById(FetchByIdRequest request);
 
-	/**
-	 * Fetch all cnaes.
-	 *
-	 * @return the internal results response< cnae>
-	 */
-	public InternalResultsResponse<Pessoa> fetchAllPessoas();
+	public InternalResultsResponse<Cliente> fetchClienteByRequest(ClienteInquiryRequest request);
 
-	/**
-	 * Fetch cnae by request.
-	 *
-	 * @param request the request
-	 * @return the internal results response< cnae>
-	 */
-	public InternalResultsResponse<Pessoa> fetchPessoaByRequest(PessoaInquiryRequest request);
+	// ================================
+	public InternalResultsResponse<Fornecedor> updateFornecedor(Fornecedor cnae);
+
+	public InternalResultsResponse<Fornecedor> insertFornecedor(Fornecedor cnae);
+
+	public InternalResponse deleteFornecedor(Fornecedor cnae);
+
+	public InternalResultsResponse<Fornecedor> fetchFornecedorById(FetchByIdRequest request);
+
+	public InternalResultsResponse<Fornecedor> fetchFornecedorByRequest(FornecedorInquiryRequest request);
+
+	// =====================
+	public InternalResultsResponse<Transportador> updateTransportador(Transportador cnae);
+
+	public InternalResultsResponse<Transportador> insertTransportador(Transportador cnae);
+
+	public InternalResponse deleteTransportador(Transportador cnae);
+
+	public InternalResultsResponse<Transportador> fetchTransportadorById(FetchByIdRequest request);
+
+	public InternalResultsResponse<Transportador> fetchTransportadorByRequest(TransportadorInquiryRequest request);
 
 }

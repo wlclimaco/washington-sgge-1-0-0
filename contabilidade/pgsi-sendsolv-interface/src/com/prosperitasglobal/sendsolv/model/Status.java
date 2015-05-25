@@ -1,6 +1,5 @@
 package com.prosperitasglobal.sendsolv.model;
 
-import com.qat.framework.model.QATModelOL;
 
 /**
  * The Class Document represents a generic formal business or personal document, such as driver's license or bylaws.
@@ -17,6 +16,12 @@ public class Status extends QATModelOL
 
 	/** The parent key type. */
 	private StatusEnum status;
+
+	private TypeEnum type;
+
+	private AcaoEnum acaoType;
+
+	private TabelaEnum tabelaEnum;
 
 	private String note;
 

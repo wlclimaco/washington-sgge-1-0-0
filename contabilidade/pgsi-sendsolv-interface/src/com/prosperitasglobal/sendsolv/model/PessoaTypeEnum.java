@@ -1,27 +1,29 @@
 package com.prosperitasglobal.sendsolv.model;
 
+import com.qat.framework.model.II18nEnum;
+import com.qat.framework.model.IIntegerEnum;
 
 /**
- * The Enum RiskLevelEnum.
+ * The Enum PayrollTypeEnum details the different options a payroll can have inside of SendSolv
  *
  * @author abarros
  * @version 1.0
  * @created 21-Jul-2014 10:00:07 AM
  */
-public enum AcaoEnum implements IIntegerEnum, II18nEnum
+public enum PessoaTypeEnum implements IIntegerEnum, II18nEnum
 {
 
-	/** The high. */
-	INSERT(0, "sendsolv.base.model.risklevelenum.high"),
+	/** The centralized. */
+	CENTRALIZED(1, "com.prosperitasglobal.sendsolv.model.payrolltype.centralized"),
 
-	/** The low. */
-	UPDATE(1, "sendsolv.base.model.risklevelenum.low"),
+	/** The not centralized. */
+	NOT_CENTRALIZED(2, "com.prosperitasglobal.sendsolv.model.payrolltype.not_centralized"),
 
-	/** The medium. */
-	DELETE(2, "sendsolv.base.model.risklevelenum.medium"),
+	/** The mixed. */
+	MIXED(3, "com.prosperitasglobal.sendsolv.model.payrolltype.mixed"),
 
 	/** The unknown. */
-	FETCH(3, "sendsolv.base.model.risklevelenum.unknown");
+	UNKNOWN(4, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
 
 	/** The code. */
 	private Integer code;
@@ -35,7 +37,7 @@ public enum AcaoEnum implements IIntegerEnum, II18nEnum
 	 * @param value the value
 	 * @param labelKeyParam the label key param
 	 */
-	private AcaoEnum(Integer value, String labelKeyParam)
+	private PessoaTypeEnum(Integer value, String labelKeyParam)
 	{
 		code = value;
 		labelKey = labelKeyParam;
@@ -58,9 +60,9 @@ public enum AcaoEnum implements IIntegerEnum, II18nEnum
 	 * @param value the value
 	 * @return the process status enum
 	 */
-	public static AcaoEnum enumForValue(Integer value)
+	public static PessoaTypeEnum enumForValue(Integer value)
 	{
-		for (AcaoEnum e : values())
+		for (PessoaTypeEnum e : values())
 		{
 			if (e.getValue().equals(value))
 			{
@@ -81,7 +83,7 @@ public enum AcaoEnum implements IIntegerEnum, II18nEnum
 		String comma = "";
 		StringBuilder enumValue = new StringBuilder();
 
-		for (AcaoEnum i : AcaoEnum.class.getEnumConstants())
+		for (PessoaTypeEnum i : PessoaTypeEnum.class.getEnumConstants())
 		{
 			enumValue.append(comma).append(i.getValue());
 			comma = ", ";

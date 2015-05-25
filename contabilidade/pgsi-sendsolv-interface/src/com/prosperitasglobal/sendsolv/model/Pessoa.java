@@ -1,5 +1,9 @@
 package com.prosperitasglobal.sendsolv.model;
 
+import java.util.List;
+
+import com.prosperitasglobal.cbof.model.Note;
+
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -10,29 +14,41 @@ public class Pessoa extends ModelCosmeDamiao
 	/** The SendSolv id for the account. */
 	private Integer id;
 
-	/** The type of an account. */
-	private String type;
-
-	/** The description. */
-	private String description;
-
-	/** The numero. */
-	private String tamanho;
-
-	/** The nome. */
-	private boolean obrigatorio;
-
-	/** The left. */
-	private boolean chavePrimaria;
-
-	/** The top. */
-	private boolean chaveSecundaria;
-
-	/** The width. */
-	private Tabela tabelaSecundaria;
-
-	/** The height. */
 	private String nome;
+
+	private String nomePai;
+
+	private String nomeMae;
+
+	private String nomeConjugue;
+
+	private Integer estadoCivil;
+
+	private Integer datanasc;
+
+	private String foto;
+
+	/** The type of an account. */
+	private PessoaTypeEnum type;
+
+	/** The sexo. */
+	private Integer sexo;
+
+	/** The enderecos. */
+	private List<Endereco> enderecos;
+
+	/** The documentos. */
+	private List<Documento> documentos;
+
+	/** The emails. */
+	private List<Email> emails;
+
+	/** The Telefones. */
+	private List<Telefone> Telefones;
+
+	private List<Note> notes;
+
+	private List<Banco> bancos;
 
 	/**
 	 * Default constructor.

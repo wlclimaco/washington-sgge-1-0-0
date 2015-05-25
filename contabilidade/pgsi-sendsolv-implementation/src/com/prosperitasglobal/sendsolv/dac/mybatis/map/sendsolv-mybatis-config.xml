@@ -140,6 +140,7 @@
 		<typeAlias alias="Pessoa"              				 	         type="com.prosperitasglobal.sendsolv.model.Pessoa"/>
 		<typeAlias alias="OrdemServico"              				 	 type="com.prosperitasglobal.sendsolv.model.OrdemServico"/>
 		<typeAlias alias="Produto"              				 	     type="com.prosperitasglobal.sendsolv.model.Produto"/>
+		<typeAlias alias="Status"              				 	     	 type="com.prosperitasglobal.sendsolv.model.Status"/>
 		<typeAlias alias="Salario"              				 	     type="com.prosperitasglobal.sendsolv.model.Salario"/>
 		<typeAlias alias="Socio"              				 		     type="com.prosperitasglobal.sendsolv.model.Socio"/>
 		<typeAlias alias="GrupoSubGrupo"              				     type="com.prosperitasglobal.sendsolv.model.SubGrupo"/>
@@ -149,10 +150,10 @@
 		<typeAlias alias="Telefone"              				 		 type="com.prosperitasglobal.sendsolv.model.Telefone"/>
 		<typeAlias alias="UniMed"              				 		     type="com.prosperitasglobal.sendsolv.model.UniMed"/>
 		<typeAlias alias="Regime"              				 		     type="com.prosperitasglobal.sendsolv.model.Regime"/>
-		<typeAlias alias="CnaeRel"              				 		     type="com.prosperitasglobal.sendsolv.model.CnaeRel"/>
+		<typeAlias alias="CnaeRel"              				 		 type="com.prosperitasglobal.sendsolv.model.CnaeRel"/>
 
-<typeAlias alias="EmpresaInquiryRequest"              				 		     type="com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest"/>
-<typeAlias alias="CnaeInquiryRequest"              				 		     type="com.prosperitasglobal.sendsolv.model.request.CnaeInquiryRequest"/>
+		<typeAlias alias="EmpresaInquiryRequest"              			type="com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest"/>
+		<typeAlias alias="CnaeInquiryRequest"              				type="com.prosperitasglobal.sendsolv.model.request.CnaeInquiryRequest"/>
 
 
 
@@ -245,6 +246,7 @@
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/orcamentoItens.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/salarios.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/socios.xml" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/status.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/tabs.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/telefone.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/uniMed.xml" />
