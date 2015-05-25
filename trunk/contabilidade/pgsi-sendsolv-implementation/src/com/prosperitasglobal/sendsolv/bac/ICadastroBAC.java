@@ -1,28 +1,5 @@
 package com.prosperitasglobal.sendsolv.bac;
 
-import com.prosperitasglobal.sendsolv.model.Cfop;
-import com.prosperitasglobal.sendsolv.model.Cidade;
-import com.prosperitasglobal.sendsolv.model.Cnae;
-import com.prosperitasglobal.sendsolv.model.Csosn;
-import com.prosperitasglobal.sendsolv.model.Estado;
-import com.prosperitasglobal.sendsolv.model.Regime;
-import com.prosperitasglobal.sendsolv.model.UniMed;
-import com.prosperitasglobal.sendsolv.model.request.CfopInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.CfopMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.CidadeInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.CidadeMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.CnaeInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.CnaeMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.CsosnInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.CsosnMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.EstadoInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.EstadoMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.RegimeInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.RegimeMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.UniMedInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.UniMedMaintenanceRequest;
-import com.qat.framework.model.response.InternalResponse;
-import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
  * The Interface IBancoBAC.
@@ -76,13 +53,13 @@ public interface ICadastroBAC
 	public InternalResultsResponse<Csosn> fetchCsosnByRequest(CsosnInquiryRequest request);
 
 	// =======================================================
-	public InternalResultsResponse<UniMed> insertCsosn(UniMedMaintenanceRequest request);
+	public InternalResultsResponse<UniMed> insertUniMed(UniMedMaintenanceRequest request);
 
-	public InternalResultsResponse<UniMed> updateCsosn(UniMedMaintenanceRequest request);
+	public InternalResultsResponse<UniMed> updateUniMed(UniMedMaintenanceRequest request);
 
-	public InternalResponse deleteCsosn(UniMedMaintenanceRequest request);
+	public InternalResponse deleteUniMed(UniMedMaintenanceRequest request);
 
-	public InternalResultsResponse<UniMed> fetchCsosnByRequest(UniMedInquiryRequest request);
+	public InternalResultsResponse<UniMed> fetchUniMedByRequest(UniMedInquiryRequest request);
 
 	// =======================================================
 

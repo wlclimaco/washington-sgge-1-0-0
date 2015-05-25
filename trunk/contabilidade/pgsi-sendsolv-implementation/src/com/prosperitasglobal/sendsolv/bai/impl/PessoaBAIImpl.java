@@ -4,28 +4,9 @@ import java.util.List;
 
 import javax.xml.ws.Response;
 
-import org.slf4j.LoggerFactory;
+import org.relaxng.datatype.ValidationContext;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.bac.IPessoaBAC;
-import com.prosperitasglobal.sendsolv.bai.IPessoaBAI;
-import com.prosperitasglobal.sendsolv.model.Pessoa;
-import com.prosperitasglobal.sendsolv.model.request.PessoaInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.PessoaMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.response.PessoaResponse;
-import com.qat.framework.model.Message.MessageLevel;
-import com.qat.framework.model.Message.MessageSeverity;
-import com.qat.framework.model.MessageInfo;
-import com.qat.framework.model.QATModel.PersistanceActionEnum;
-import com.qat.framework.model.UserContext;
-import com.qat.framework.model.response.InternalResponse;
-import com.qat.framework.model.response.InternalResponse.Status;
-import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.util.QATInterfaceUtil;
-import com.qat.framework.validation.ValidationContext;
-import com.qat.framework.validation.ValidationContextIndicator;
-import com.qat.framework.validation.ValidationController;
-import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class PessoaBAIImpl.
@@ -99,21 +80,13 @@ public class PessoaBAIImpl implements IPessoaBAI
 		return empresaBAC;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.bai.ILocaationBAI#insertLocaation(com.prosperitasglobal.sendsolv.model
-	 * .request.LocaationRequest)
-	 * Leveraging the common process method to perform the "real" work.
-	 * Wrapped in a try-catch to ensure we never return an exception from this operation.
-	 */
 	@Override
-	public PessoaResponse insertPessoa(PessoaMaintenanceRequest request)
+	public ClienteResponse insertCliente(ClienteMaintenanceRequest request)
 	{
-		PessoaResponse response = new PessoaResponse();
+		ClienteResponse response = new ClienteResponse();
 		try
 		{
-			response = process(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
+			response = processCliente(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
 		}
 		catch (Exception ex)
 		{
@@ -123,21 +96,13 @@ public class PessoaBAIImpl implements IPessoaBAI
 		return response;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.bai.ILocaationBAI#updateLocaation(com.prosperitasglobal.sendsolv.model
-	 * .request.LocaationRequest)
-	 * Leveraging the common process method to perform the "real" work.
-	 * Wrapped in a try-catch to ensure we never return an exception from this operation.
-	 */
 	@Override
-	public PessoaResponse updatePessoa(PessoaMaintenanceRequest request)
+	Cliente ClienteResponse updateCliente(ClienteMaintenanceRequest request)
 	{
-		PessoaResponse response = new PessoaResponse();
+		ClienteResponse response = new ClienteResponse();
 		try
 		{
-			response = process(ValidationContextIndicator.UPDATE, PersistanceActionEnum.UPDATE, request);
+			response = processCliente(ValidationContextIndicator.UPDATE, PersistanceActionEnum.UPDATE, request);
 		}
 		catch (Exception ex)
 		{
@@ -147,21 +112,13 @@ public class PessoaBAIImpl implements IPessoaBAI
 		return response;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.bai.ILocaationBAI#deleteLocaation(com.prosperitasglobal.sendsolv.model
-	 * .request.LocaationRequest)
-	 * Leveraging the common process method to perform the "real" work.
-	 * Wrapped in a try-catch to ensure we never return an exception from this operation.
-	 */
 	@Override
-	public PessoaResponse deletePessoa(PessoaMaintenanceRequest request)
+	public ClienteResponse deleteCliente(ClienteMaintenanceRequest request)
 	{
-		PessoaResponse response = new PessoaResponse();
+		ClienteResponse response = new ClienteResponse();
 		try
 		{
-			response = process(ValidationContextIndicator.DELETE, PersistanceActionEnum.DELETE, request);
+			response = processCliente(ValidationContextIndicator.DELETE, PersistanceActionEnum.DELETE, request);
 		}
 		catch (Exception ex)
 		{
@@ -171,17 +128,10 @@ public class PessoaBAIImpl implements IPessoaBAI
 		return response;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.bai.ILocaationBAI#fetchLocaationById(com.prosperitasglobal.sendsolv.model.
-	 * request
-	 * .CountyRequest)
-	 */
 	@Override
-	public PessoaResponse fetchPessoaById(FetchByIdRequest request)
+	public ClienteResponse fetchClienteById(FetchByIdRequest request)
 	{
-		PessoaResponse response = new PessoaResponse();
+		ClienteResponse response = new ClienteResponse();
 		try
 		{
 			InternalResponse internalResponse = new InternalResponse();
@@ -192,7 +142,7 @@ public class PessoaBAIImpl implements IPessoaBAI
 			}
 			else
 			{
-				internalResponse = getPessoaBAC().fetchPessoaById(request);
+				internalResponse = getPessoaBAC().fetchClienteById(request);
 			}
 			// Handle the processing for all previous methods regardless of them failing or succeeding.
 			QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
@@ -205,19 +155,13 @@ public class PessoaBAIImpl implements IPessoaBAI
 		return response;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.bai.IPessoaBAI#fetchPessoaByRequest(com.prosperitasglobal.sendsolv.model
-	 * .request.PagedInquiryRequest)
-	 */
 	@Override
-	public PessoaResponse fetchPessoaByRequest(PessoaInquiryRequest request)
+	public ClienteResponse fetchClienteByRequest(ClienteInquiryRequest request)
 	{
-		PessoaResponse response = new PessoaResponse();
+		ClienteResponse response = new ClienteResponse();
 		try
 		{
-			fetchPaged(request, response);
+			fetchCliente(request, response);
 		}
 		catch (Exception ex)
 		{
@@ -226,21 +170,9 @@ public class PessoaBAIImpl implements IPessoaBAI
 		return response;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.bai.IPessoaBAI#updateRisk(com.prosperitasglobal.sendsolv.model.request.
-	 * RiskMaintenanceRequest)
-	 */
-
-	/**
-	 * Fetch paged.
-	 *
-	 * @param request the request
-	 * @param response the response
-	 */
-	private void fetchPaged(PessoaInquiryRequest request, PessoaResponse response)
+	private void fetchCliente(ClienteInquiryRequest request, ClienteResponse response)
 	{
-		InternalResultsResponse<Pessoa> internalResponse = new InternalResultsResponse<Pessoa>();
+		InternalResultsResponse<Cliente> internalResponse = new InternalResultsResponse<Cliente>();
 
 		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
 		{
@@ -248,7 +180,7 @@ public class PessoaBAIImpl implements IPessoaBAI
 		}
 		else
 		{
-			internalResponse = getPessoaBAC().fetchPessoaByRequest(request);
+			internalResponse = getPessoaBAC().fetchClienteByRequest(request);
 		}
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
@@ -263,25 +195,25 @@ public class PessoaBAIImpl implements IPessoaBAI
 	 * @param request the request
 	 * @return the empresa response
 	 */
-	private PessoaResponse process(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
-			PessoaMaintenanceRequest request)
+	private ClienteResponse processCliente(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
+			ClienteMaintenanceRequest request)
 	{
-		PessoaResponse response = new PessoaResponse();
+		ClienteResponse response = new ClienteResponse();
 		InternalResponse internalResponse = null;
 
 		// Validate. Notice that BusinessValidator will in turn use additional validators depending on the type
 		ValidationContext context =
-				new ValidationContext(Pessoa.class.getSimpleName(), request.getPessoa(), indicator);
+				new ValidationContext(Cliente.class.getSimpleName(), request.getCliente(), indicator);
 		context.putObjectToBeValidated(UserContext.class.getSimpleName(), request.getUserContext());
 
 		if (getValidationController().validate(context))
 		{
 			// Persist
-			internalResponse = doPersistance(request, persistType);
+			internalResponse = doPersistanceCliente(request, persistType);
 		}
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return (PessoaResponse)handleReturn((Response)response, internalResponse, context.getMessages(), true);
+		return (ClienteResponse)handleReturn((Response)response, internalResponse, context.getMessages(), true);
 	}
 
 	/**
@@ -316,18 +248,18 @@ public class PessoaBAIImpl implements IPessoaBAI
 	 * @param updateType the update type
 	 * @return the internal response
 	 */
-	private InternalResponse doPersistance(PessoaMaintenanceRequest request, PersistanceActionEnum updateType)
+	private InternalResponse doPersistanceCliente(ClienteMaintenanceRequest request, PersistanceActionEnum updateType)
 	{
 		switch (updateType)
 		{
 			case INSERT:
-				return getPessoaBAC().insertPessoa(request);
+				return getPessoaBAC().insertCliente(request);
 
 			case UPDATE:
-				return getPessoaBAC().updatePessoa(request);
+				return getPessoaBAC().updateCliente(request);
 
 			case DELETE:
-				return getPessoaBAC().deletePessoa(request);
+				return getPessoaBAC().deleteCliente(request);
 
 			default:
 				if (LOG.isDebugEnabled())
@@ -339,4 +271,387 @@ public class PessoaBAIImpl implements IPessoaBAI
 		return null;
 	}
 
+	// =========================== Fornercedor====================
+	@Override
+	public FornecedorResponse insertFornecedor(FornecedorMaintenanceRequest request)
+	{
+		FornecedorResponse response = new FornecedorResponse();
+		try
+		{
+			response = processFornecedor(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public FornecedorResponse updateFornecedor(FornecedorMaintenanceRequest request)
+	{
+		FornecedorResponse response = new FornecedorResponse();
+		try
+		{
+			response = processFornecedor(ValidationContextIndicator.UPDATE, PersistanceActionEnum.UPDATE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public FornecedorResponse deleteFornecedor(FornecedorMaintenanceRequest request)
+	{
+		FornecedorResponse response = new FornecedorResponse();
+		try
+		{
+			response = processFornecedor(ValidationContextIndicator.DELETE, PersistanceActionEnum.DELETE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public FornecedorResponse fetchFornecedorById(FetchByIdRequest request)
+	{
+		FornecedorResponse response = new FornecedorResponse();
+		try
+		{
+			InternalResponse internalResponse = new InternalResponse();
+			// validate fetchId field
+			if (ValidationUtil.isNull(request.getId()) && ValidationUtil.isNullOrEmpty(request.getStringId()))
+			{
+				internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_ID_REQUIRED);
+			}
+			else
+			{
+				internalResponse = getPessoaBAC().fetchFornecedorById(request);
+			}
+			// Handle the processing for all previous methods regardless of them failing or succeeding.
+			QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public FornecedorResponse fetchFornecedorByRequest(FornecedorInquiryRequest request)
+	{
+		FornecedorResponse response = new FornecedorResponse();
+		try
+		{
+			fetchFornecedor(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	private void fetchFornecedor(FornecedorInquiryRequest request, FornecedorResponse response)
+	{
+		InternalResultsResponse<Fornecedor> internalResponse = new InternalResultsResponse<Fornecedor>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getPessoaBAC().fetchFornecedorByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	/**
+	 * Process.
+	 *
+	 * @param indicator the indicator
+	 * @param persistType the persist type
+	 * @param request the request
+	 * @return the empresa response
+	 */
+	private FornecedorResponse processFornecedor(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
+			FornecedorMaintenanceRequest request)
+	{
+		FornecedorResponse response = new FornecedorResponse();
+		InternalResponse internalResponse = null;
+
+		// Validate. Notice that BusinessValidator will in turn use additional validators depending on the type
+		ValidationContext context =
+				new ValidationContext(Fornecedor.class.getSimpleName(), request.getFornecedor(), indicator);
+		context.putObjectToBeValidated(UserContext.class.getSimpleName(), request.getUserContext());
+
+		if (getValidationController().validate(context))
+		{
+			// Persist
+			internalResponse = doPersistanceFornecedor(request, persistType);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		return (FornecedorResponse)handleReturn((Response)response, internalResponse, context.getMessages(), true);
+	}
+
+	/**
+	 * Handle return.
+	 *
+	 * @param response the response
+	 * @param internalResponse the internal response
+	 * @param messages the messages
+	 * @param copyOver the copy over
+	 * @return the response
+	 */
+	private Response handleReturn(Response response, InternalResponse internalResponse,
+			List<MessageInfo> messages, boolean copyOver)
+	{
+		// In the case there was an Optimistic Locking error, add the specific message
+		if (!ValidationUtil.isNull(internalResponse) && !ValidationUtil.isNull(internalResponse.getStatus())
+				&& Status.OptimisticLockingError.equals(internalResponse.getStatus()))
+		{
+			messages.add(new MessageInfo(PROSPERITASGLOBAL_BASE_OL_ERROR, MessageSeverity.Error,
+					MessageLevel.Object));
+		}
+
+		QATInterfaceUtil.handleOperationStatusAndMessages((com.qat.framework.model.response.Response)response,
+				internalResponse, messages, copyOver);
+		return response;
+	}
+
+	/**
+	 * Do persistance.
+	 *
+	 * @param request the request
+	 * @param updateType the update type
+	 * @return the internal response
+	 */
+	private InternalResponse doPersistanceFornecedor(FornecedorMaintenanceRequest request, PersistanceActionEnum updateType)
+	{
+		switch (updateType)
+		{
+			case INSERT:
+				return getPessoaBAC().insertFornecedor(request);
+
+			case UPDATE:
+				return getPessoaBAC().updateFornecedor(request);
+
+			case DELETE:
+				return getPessoaBAC().deleteFornecedor(request);
+
+			default:
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("updateType missing!");
+				}
+				break;
+		}
+		return null;
+	}
+
+	// =================================Transportador==========================
+	@Override
+	public TransportadorResponse insertTransportador(TransportadorMaintenanceRequest request)
+	{
+		TransportadorResponse response = new TransportadorResponse();
+		try
+		{
+			response = processTransportador(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public TransportadorResponse updateTransportador(TransportadorMaintenanceRequest request)
+	{
+		TransportadorResponse response = new TransportadorResponse();
+		try
+		{
+			response = processTransportador(ValidationContextIndicator.UPDATE, PersistanceActionEnum.UPDATE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public TransportadorResponse deleteTransportador(TransportadorMaintenanceRequest request)
+	{
+		TransportadorResponse response = new TransportadorResponse();
+		try
+		{
+			response = processTransportador(ValidationContextIndicator.DELETE, PersistanceActionEnum.DELETE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public TransportadorResponse fetchTransportadorById(FetchByIdRequest request)
+	{
+		TransportadorResponse response = new TransportadorResponse();
+		try
+		{
+			InternalResponse internalResponse = new InternalResponse();
+			// validate fetchId field
+			if (ValidationUtil.isNull(request.getId()) && ValidationUtil.isNullOrEmpty(request.getStringId()))
+			{
+				internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_ID_REQUIRED);
+			}
+			else
+			{
+				internalResponse = getTransportadorBAC().fetchTransportadorById(request);
+			}
+			// Handle the processing for all previous methods regardless of them failing or succeeding.
+			QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public TransportadorResponse fetchTransportadorByRequest(TransportadorInquiryRequest request)
+	{
+		TransportadorResponse response = new TransportadorResponse();
+		try
+		{
+			fetchTransportador(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	private void fetchTransportador(TransportadorInquiryRequest request, TransportadorResponse response)
+	{
+		InternalResultsResponse<Transportador> internalResponse = new InternalResultsResponse<Transportador>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getPessoaBAC().fetchTransportadorByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	/**
+	 * Process.
+	 *
+	 * @param indicator the indicator
+	 * @param persistType the persist type
+	 * @param request the request
+	 * @return the empresa response
+	 */
+	private TransportadorResponse processTransportador(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
+			TransportadorMaintenanceRequest request)
+	{
+		TransportadorResponse response = new TransportadorResponse();
+		InternalResponse internalResponse = null;
+
+		// Validate. Notice that BusinessValidator will in turn use additional validators depending on the type
+		ValidationContext context =
+				new ValidationContext(Transportador.class.getSimpleName(), request.getTransportador(), indicator);
+		context.putObjectToBeValidated(UserContext.class.getSimpleName(), request.getUserContext());
+
+		if (getValidationController().validate(context))
+		{
+			// Persist
+			internalResponse = doPersistanceTransportador(request, persistType);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		return (TransportadorResponse)handleReturn((Response)response, internalResponse, context.getMessages(), true);
+	}
+
+	/**
+	 * Handle return.
+	 *
+	 * @param response the response
+	 * @param internalResponse the internal response
+	 * @param messages the messages
+	 * @param copyOver the copy over
+	 * @return the response
+	 */
+	private Response handleReturn(Response response, InternalResponse internalResponse,
+			List<MessageInfo> messages, boolean copyOver)
+	{
+		// In the case there was an Optimistic Locking error, add the specific message
+		if (!ValidationUtil.isNull(internalResponse) && !ValidationUtil.isNull(internalResponse.getStatus())
+				&& Status.OptimisticLockingError.equals(internalResponse.getStatus()))
+		{
+			messages.add(new MessageInfo(PROSPERITASGLOBAL_BASE_OL_ERROR, MessageSeverity.Error,
+					MessageLevel.Object));
+		}
+
+		QATInterfaceUtil.handleOperationStatusAndMessages((com.qat.framework.model.response.Response)response,
+				internalResponse, messages, copyOver);
+		return response;
+	}
+
+	/**
+	 * Do persistance.
+	 *
+	 * @param request the request
+	 * @param updateType the update type
+	 * @return the internal response
+	 */
+	private InternalResponse doPersistanceTransportador(TransportadorMaintenanceRequest request, PersistanceActionEnum updateType)
+	{
+		switch (updateType)
+		{
+			case INSERT:
+				return getPessoaBAC().insertTransportador(request);
+
+			case UPDATE:
+				return getPessoaBAC().updateTransportador(request);
+
+			case DELETE:
+				return getPessoaBAC().deleteTransportador(request);
+
+			default:
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("updateType missing!");
+				}
+				break;
+		}
+		return null;
+	}
 }

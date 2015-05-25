@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="StatusMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. [id]           [int] NOT NULL,
+	[nome]         [varchar](100) NULL,
+	[regime]       [int] NULL,
+	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,-->
+
+  <resultMap id="statusResult" type="Status">
+    <result property="id" column="id" />
+    <result property="nome" column="nome" />
+    <association property="regime"    column="regime" javaType="Regime" select="CadastrosMap.fetchRegimeByStatusId"  />
+   	<collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByStatus"/>
+	<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByStatusId"/>
+	<collection property="emails" column="id" select="EmailMap.fetchAllEmailsByStatus"/>
+	<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByStatus"/>
+	<collection property="socios" column="id" select="SocioMap.fetchSocioByStatusId"/>
+	<collection property="cnaes" column="id" select="CnaeMap.fetchAllCnaesByStatus"/>
+
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allStatusColumns">
+		 b.nome
+		,b.regime
+      	,b.create_date
+      	,b.create_user
+      	,b.modify_date
+      	,b.modify_user
+  </sql>
+
+  <sql id="allStatusValues">
+  		#{nome},
+  		#{regime},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertStatus" parameterType="Status" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO status (
+		<include refid="allStatusColumns" />
+      )
+    VALUES (<include refid="allStatusValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateStatus" parameterType="Status">
+    UPDATE status
+    	<set>
+    		<if test="nome!= null">nome = #{nome},</if>
+	    	<if test="regime!= null"> regime=#{regime},</if>
+			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteStatusById" parameterType="Integer">
+    	DELETE FROM status WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchStatusRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM status
+
+  </select>
+
+  <select id="fetchAllStatuss" resultMap="statusResult">
+    SELECT
+	<include refid="allStatusColumns" />
+    FROM status ORDER BY nome ASC
+  </select>
+
+  <select id="fetchStatusById" parameterType="FetchByIdRequest" resultMap="statusResult">
+    			   SELECT
+						<include refid="allStatusColumns" />
+ 				   FROM status b
+
+					<where>
+				  		 <choose>
+							<when test="id != null and id != ''">
+								b.business_id = #{id}
+				    		</when>
+				    	 </choose>
+				  </where>
+  </select>
+
+  <select id="fetchAllStatussByRequest" parameterType="StatusInquiryRequest" resultMap="statusResult">
+    SELECT * FROM
+    			(
+
+    						<include refid="allStatusColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.nome) AS RowNumber
+    				FROM status b
+						where a = a
+					<if test="parentId != null">
+						AND b.id = #{id}
+					</if>
+					 <if test="statusList != null and !statusList.isEmpty()">
+					     AND b.PGSI_status IN
+					     <foreach item="item" index="index" collection="statusList"
+						     open="(" separator="," close=")">
+						   	 #{item.value}
+						 </foreach>
+					 </if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+
+</mapper>

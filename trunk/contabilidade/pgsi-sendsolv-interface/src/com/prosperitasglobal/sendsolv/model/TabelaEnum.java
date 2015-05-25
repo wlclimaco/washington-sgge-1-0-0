@@ -1,8 +1,6 @@
 package com.prosperitasglobal.sendsolv.model;
 
-import com.qat.framework.model.II18nEnum;
-import com.qat.framework.model.IIntegerEnum;
-
+// TODO: Auto-generated Javadoc
 /**
  * The Enum RiskLevelEnum.
  *
@@ -13,17 +11,81 @@ import com.qat.framework.model.IIntegerEnum;
 public enum TabelaEnum implements IIntegerEnum, II18nEnum
 {
 
-	/** The high. */
-	HIGH(0, "sendsolv.base.model.risklevelenum.high"),
+	/**
+	 * The high.
+	 *
+	 * REGIME
+	 * EMPRESA
+	 * DOCUMENTO
+	 * EMAIL
+	 * ENDERECO
+	 * TELEFONE
+	 * SOCIO
+	 * HISTORICO
+	 * CNAE
+	 * CSOSN
+	 * NCM
+	 * CIDADE
+	 * CNAEPORRELACIONAMENTO
+	 * ESTADO
+	 * UNIMED
+	 * CFOP
+	 * FUNCIONARIO
+	 * SALARIO
+	 */
+
+	REGIME(0, "sendsolv.base.model.risklevelenum.high"),
 
 	/** The low. */
-	LOW(1, "sendsolv.base.model.risklevelenum.low"),
+	EMPRESA(1, "sendsolv.base.model.risklevelenum.low"),
 
 	/** The medium. */
-	MEDIUM(2, "sendsolv.base.model.risklevelenum.medium"),
+	DOCUMENTO(2, "sendsolv.base.model.risklevelenum.medium"),
 
 	/** The unknown. */
-	UNKNOWN(3, "sendsolv.base.model.risklevelenum.unknown");
+	EMAIL(3, "sendsolv.base.model.risklevelenum.unknown"),
+
+	/** The endereco. */
+	ENDERECO(0, "sendsolv.base.model.risklevelenum.high"),
+
+	/** The low. */
+	TELEFONE(1, "sendsolv.base.model.risklevelenum.low"),
+
+	/** The medium. */
+	SOCIO(2, "sendsolv.base.model.risklevelenum.medium"),
+
+	/** The unknown. */
+	HISTORICO(3, "sendsolv.base.model.risklevelenum.unknown"),
+
+	/** The cnae. */
+	CNAE(0, "sendsolv.base.model.risklevelenum.high"),
+
+	/** The low. */
+	CSOSN(1, "sendsolv.base.model.risklevelenum.low"),
+
+	/** The medium. */
+	NCM(2, "sendsolv.base.model.risklevelenum.medium"),
+
+	/** The unknown. */
+	CIDADE(3, "sendsolv.base.model.risklevelenum.unknown"),
+
+	/** The cnaeporrelacionamento. */
+	CNAEPORRELACIONAMENTO(0, "sendsolv.base.model.risklevelenum.high"),
+
+	/** The estado. */
+	ESTADO(3, "sendsolv.base.model.risklevelenum.unknown"),
+
+	/** The unimed. */
+	UNIMED(0, "sendsolv.base.model.risklevelenum.high"),
+
+	/** The low. */
+	CFOP(1, "sendsolv.base.model.risklevelenum.low"),
+
+	/** The medium. */
+	FUNCIONARIO(2, "sendsolv.base.model.risklevelenum.medium"),
+
+	/** The unknown. */
+	SALARIO(3, "sendsolv.base.model.risklevelenum.unknown");
 
 	/** The code. */
 	private Integer code;
@@ -95,6 +157,11 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 	/*
 	 * (non-Javadoc)
 	 * @see com.sensus.common.model.II18nEnum#getLabelKey()
+	 */
+	/**
+	 * Gets the label key.
+	 *
+	 * @return the label key
 	 */
 	@Override
 	public String getLabelKey()

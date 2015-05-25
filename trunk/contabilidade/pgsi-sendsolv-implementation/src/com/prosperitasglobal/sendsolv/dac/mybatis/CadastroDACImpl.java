@@ -2,9 +2,6 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.Map;
 
-import org.mybatis.spring.support.SqlSessionDaoSupport;
-import org.slf4j.LoggerFactory;
-
 import com.prosperitasglobal.sendsolv.dac.ICadastroDAC;
 import com.prosperitasglobal.sendsolv.dac.ICnaeDAC;
 import com.prosperitasglobal.sendsolv.dac.IEmailDAC;
@@ -12,21 +9,7 @@ import com.prosperitasglobal.sendsolv.dac.IEnderecoDAC;
 import com.prosperitasglobal.sendsolv.dac.IEventoDAC;
 import com.prosperitasglobal.sendsolv.dac.ISociosDAC;
 import com.prosperitasglobal.sendsolv.dac.ITelefoneDAC;
-import com.prosperitasglobal.sendsolv.model.Cfop;
-import com.prosperitasglobal.sendsolv.model.Cidade;
-import com.prosperitasglobal.sendsolv.model.Cnae;
-import com.prosperitasglobal.sendsolv.model.Csosn;
-import com.prosperitasglobal.sendsolv.model.Estado;
-import com.prosperitasglobal.sendsolv.model.Regime;
-import com.prosperitasglobal.sendsolv.model.UniMed;
-import com.prosperitasglobal.sendsolv.model.request.CidadeInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.CnaeInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.CsosnInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.EstadoInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.RegimeInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.UniMedInquiryRequest;
-import com.qat.framework.model.response.InternalResponse;
-import com.qat.framework.model.response.InternalResultsResponse;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
 
 /**
  * The Class BancoDACImpl.
@@ -217,24 +200,65 @@ public class CadastroDACImpl extends SqlSessionDaoSupport implements ICadastroDA
 	}
 
 	@Override
-	public InternalResultsResponse<Cidade> insertCidade(Cidade request)
+	public InternalResultsResponse<Cidade> insertCidade(Cidade cidade)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Integer insertCount = 0;
+		InternalResultsResponse<Cidade> response = new InternalResultsResponse<Cidade>();
+
+		// First insert the root
+		// Is successful the unique-id will be populated back into the object.
+		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), "insertCidade", cidade, response);
+
+		if (response.isInError())
+		{
+			return response;
+		}
+
+		// Finally, if something was inserted then add the Empresa to the result.
+		if (insertCount > 0)
+		{
+			response.addResult(cidade);
+		}
+
+		return response;
 	}
 
 	@Override
 	public InternalResultsResponse<Cidade> updateCidade(Cidade request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Integer updateCount = 0;
+		InternalResultsResponse<Cidade> response = new InternalResultsResponse<Cidade>();
+
+		// First update the root if necessary.
+		if (!ValidationUtil.isNull(request.getModelAction())
+				&& (request.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
+		{
+			updateCount =
+					QATMyBatisDacHelper.doUpdate(getSqlSession(), "updateCidade", request,
+							response);
+		}
+
+		if (response.isInError())
+		{
+			return response;
+		}
+
+		// Finally, if something was updated then add the Person to the result.
+		if (updateCount > 0)
+		{
+			response.addResult(request);
+		}
+
+		return response;
 	}
 
 	@Override
 	public InternalResponse deleteCidade(Cidade request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		InternalResponse response = new InternalResponse();
+		QATMyBatisDacHelper.doRemove(getSqlSession(), "deleteCidade", request, response);
+
+		return response;
 	}
 
 	@Override
@@ -247,168 +271,468 @@ public class CadastroDACImpl extends SqlSessionDaoSupport implements ICadastroDA
 	@Override
 	public InternalResultsResponse<Estado> insertEstado(Estado request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Integer insertCount = 0;
+		InternalResultsResponse<Estado> response = new InternalResultsResponse<Estado>();
+
+		// First insert the root
+		// Is successful the unique-id will be populated back into the object.
+		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), "insertEstado", request, response);
+
+		if (response.isInError())
+		{
+			return response;
+		}
+
+		// Finally, if something was inserted then add the Empresa to the result.
+		if (insertCount > 0)
+		{
+			response.addResult(request);
+		}
+
+		return response;
 	}
 
 	@Override
 	public InternalResultsResponse<Estado> updateEstado(Estado request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Integer updateCount = 0;
+		InternalResultsResponse<Estado> response = new InternalResultsResponse<Estado>();
+
+		// First update the root if necessary.
+		if (!ValidationUtil.isNull(request.getModelAction())
+				&& (request.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
+		{
+			updateCount =
+					QATMyBatisDacHelper.doUpdate(getSqlSession(), "updateEstado", request,
+							response);
+		}
+
+		if (response.isInError())
+		{
+			return response;
+		}
+
+		// Finally, if something was updated then add the Person to the result.
+		if (updateCount > 0)
+		{
+			response.addResult(request);
+		}
+
+		return response;
 	}
 
 	@Override
 	public InternalResponse deleteEstado(Estado request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		InternalResponse response = new InternalResponse();
+		QATMyBatisDacHelper.doRemove(getSqlSession(), "deleteEstado", request, response);
+
+		return response;
 	}
 
 	@Override
 	public InternalResultsResponse<Estado> fetchEstadoByRequest(EstadoInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		InternalResultsResponse<Estado> response = new InternalResultsResponse<Estado>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, EMPRESA_STMT_FETCH_COUNT,
+				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
+		return response;
 	}
 
 	@Override
 	public InternalResultsResponse<Cnae> insertCnae(Cnae request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Integer insertCount = 0;
+		InternalResultsResponse<Cnae> response = new InternalResultsResponse<Cnae>();
+
+		// First insert the root
+		// Is successful the unique-id will be populated back into the object.
+		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), EMPRESA_STMT_INSERT, request, response);
+
+		if (response.isInError())
+		{
+			return response;
+		}
+
+		// Finally, if something was inserted then add the Empresa to the result.
+		if (insertCount > 0)
+		{
+			response.addResult(request);
+		}
+
+		return response;
 	}
 
 	@Override
 	public InternalResultsResponse<Cnae> updateCnae(Cnae request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Integer updateCount = 0;
+		InternalResultsResponse<Cnae> response = new InternalResultsResponse<Cnae>();
+
+		// First update the root if necessary.
+		if (!ValidationUtil.isNull(request.getModelAction())
+				&& (request.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
+		{
+			updateCount =
+					QATMyBatisDacHelper.doUpdate(getSqlSession(), "updateCidade", request,
+							response);
+		}
+
+		if (response.isInError())
+		{
+			return response;
+		}
+
+		// Finally, if something was updated then add the Person to the result.
+		if (updateCount > 0)
+		{
+			response.addResult(request);
+		}
+
+		return response;
 	}
 
 	@Override
 	public InternalResponse deleteCnae(Cnae request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		InternalResponse response = new InternalResponse();
+		QATMyBatisDacHelper.doRemove(getSqlSession(), "deleteCnae", request, response);
+
+		return response;
 	}
 
 	@Override
 	public InternalResultsResponse<Cnae> fetchCnaeByRequest(CnaeInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		InternalResultsResponse<Cnae> response = new InternalResultsResponse<Cnae>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, EMPRESA_STMT_FETCH_COUNT,
+				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
+		return response;
 	}
 
 	@Override
 	public InternalResultsResponse<Regime> insertRegime(Regime request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Integer insertCount = 0;
+		InternalResultsResponse<Regime> response = new InternalResultsResponse<Regime>();
+
+		// First insert the root
+		// Is successful the unique-id will be populated back into the object.
+		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), EMPRESA_STMT_INSERT, empresa, response);
+
+		if (response.isInError())
+		{
+			return response;
+		}
+
+		// Finally, if something was inserted then add the Empresa to the result.
+		if (insertCount > 0)
+		{
+			response.addResult(request);
+		}
+
+		return response;
 	}
 
 	@Override
 	public InternalResultsResponse<Regime> updateRegime(Regime request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Integer updateCount = 0;
+		InternalResultsResponse<Regime> response = new InternalResultsResponse<Regime>();
+
+		// First update the root if necessary.
+		if (!ValidationUtil.isNull(request.getModelAction())
+				&& (request.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
+		{
+			updateCount =
+					QATMyBatisDacHelper.doUpdate(getSqlSession(), "updateCidade", request,
+							response);
+		}
+
+		if (response.isInError())
+		{
+			return response;
+		}
+
+		// Finally, if something was updated then add the Person to the result.
+		if (updateCount > 0)
+		{
+			response.addResult(request);
+		}
+
+		return response;
 	}
 
 	@Override
 	public InternalResponse deleteRegime(Regime request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		InternalResponse response = new InternalResponse();
+		QATMyBatisDacHelper.doRemove(getSqlSession(), "deleteRegime", request, response);
+
+		return response;
 	}
 
 	@Override
 	public InternalResultsResponse<Regime> fetchRegimeByRequest(RegimeInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		InternalResultsResponse<Regime> response = new InternalResultsResponse<Regime>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, EMPRESA_STMT_FETCH_COUNT,
+				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
+		return response;
 	}
 
 	@Override
 	public InternalResultsResponse<Csosn> insertCsosn(Csosn request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Integer insertCount = 0;
+		InternalResultsResponse<Csosn> response = new InternalResultsResponse<Csosn>();
+
+		// First insert the root
+		// Is successful the unique-id will be populated back into the object.
+		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), EMPRESA_STMT_INSERT, request, response);
+
+		if (response.isInError())
+		{
+			return response;
+		}
+
+		// Finally, if something was inserted then add the Empresa to the result.
+		if (insertCount > 0)
+		{
+			response.addResult(request);
+		}
+
+		return response;
 	}
 
 	@Override
 	public InternalResultsResponse<Csosn> updateCsosn(Csosn request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Integer updateCount = 0;
+		InternalResultsResponse<Csosn> response = new InternalResultsResponse<Csosn>();
+
+		// First update the root if necessary.
+		if (!ValidationUtil.isNull(request.getModelAction())
+				&& (request.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
+		{
+			updateCount =
+					QATMyBatisDacHelper.doUpdate(getSqlSession(), "updateCidade", request,
+							response);
+		}
+
+		if (response.isInError())
+		{
+			return response;
+		}
+
+		// Finally, if something was updated then add the Person to the result.
+		if (updateCount > 0)
+		{
+			response.addResult(request);
+		}
+
+		return response;
 	}
 
 	@Override
 	public InternalResponse deleteCsosn(Csosn request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		InternalResponse response = new InternalResponse();
+		QATMyBatisDacHelper.doRemove(getSqlSession(), "deleteCsosn", request, response);
+
+		return response;
 	}
 
 	@Override
 	public InternalResultsResponse<Csosn> fetchCsosnByRequest(CsosnInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		InternalResultsResponse<Csosn> response = new InternalResultsResponse<Csosn>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, EMPRESA_STMT_FETCH_COUNT,
+				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
+		return response;
 	}
 
 	@Override
-	public InternalResultsResponse<UniMed> insertCsosn(UniMed request)
+	public InternalResultsResponse<UniMed> insertUniMed(UniMed request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Integer insertCount = 0;
+		InternalResultsResponse<UniMed> response = new InternalResultsResponse<UniMed>();
+
+		// First insert the root
+		// Is successful the unique-id will be populated back into the object.
+		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), EMPRESA_STMT_INSERT, request, response);
+
+		if (response.isInError())
+		{
+			return response;
+		}
+
+		// Finally, if something was inserted then add the Empresa to the result.
+		if (insertCount > 0)
+		{
+			response.addResult(request);
+		}
+
+		return response;
 	}
 
 	@Override
-	public InternalResultsResponse<UniMed> updateCsosn(UniMed request)
+	public InternalResultsResponse<UniMed> updateUniMed(UniMed request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Integer updateCount = 0;
+		InternalResultsResponse<UniMed> response = new InternalResultsResponse<UniMed>();
+
+		// First update the root if necessary.
+		if (!ValidationUtil.isNull(request.getModelAction())
+				&& (request.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
+		{
+			updateCount =
+					QATMyBatisDacHelper.doUpdate(getSqlSession(), "updateCidade", request,
+							response);
+		}
+
+		if (response.isInError())
+		{
+			return response;
+		}
+
+		// Finally, if something was updated then add the Person to the result.
+		if (updateCount > 0)
+		{
+			response.addResult(request);
+		}
+
+		return response;
 	}
 
 	@Override
-	public InternalResponse deleteCsosn(UniMed request)
+	public InternalResponse deleteUniMed(UniMed request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		InternalResponse response = new InternalResponse();
+		QATMyBatisDacHelper.doRemove(getSqlSession(), "deleteUniMed", request, response);
+
+		return response;
 	}
 
 	@Override
-	public InternalResultsResponse<UniMed> fetchCsosnByRequest(UniMedInquiryRequest request)
+	public InternalResultsResponse<UniMed> fetchUniMedByRequest(UniMedInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		InternalResultsResponse<UniMed> response = new InternalResultsResponse<UniMed>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, EMPRESA_STMT_FETCH_COUNT,
+				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
+		return response;
 	}
 
 	@Override
 	public InternalResultsResponse<Cfop> insertCfop(Cfop request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Integer insertCount = 0;
+		InternalResultsResponse<Cfop> response = new InternalResultsResponse<Cfop>();
+
+		// First insert the root
+		// Is successful the unique-id will be populated back into the object.
+		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), EMPRESA_STMT_INSERT, request, response);
+
+		if (response.isInError())
+		{
+			return response;
+		}
+
+		// Finally, if something was inserted then add the Empresa to the result.
+		if (insertCount > 0)
+		{
+			response.addResult(request);
+		}
+
+		return response;
 	}
 
 	@Override
 	public InternalResultsResponse<Cfop> updateCfop(Cfop request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Integer updateCount = 0;
+		InternalResultsResponse<Cfop> response = new InternalResultsResponse<Cfop>();
+
+		// First update the root if necessary.
+		if (!ValidationUtil.isNull(request.getModelAction())
+				&& (request.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
+		{
+			updateCount =
+					QATMyBatisDacHelper.doUpdate(getSqlSession(), "updateCfop", request,
+							response);
+		}
+
+		if (response.isInError())
+		{
+			return response;
+		}
+
+		// Finally, if something was updated then add the Person to the result.
+		if (updateCount > 0)
+		{
+			response.addResult(request);
+		}
+
+		return response;
 	}
 
 	@Override
 	public InternalResultsResponse<Cfop> deleteCfop(Cfop request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		InternalResponse response = new InternalResponse();
+		QATMyBatisDacHelper.doRemove(getSqlSession(), "deleteCfop", request, response);
+
+		return response;
 	}
 
 	@Override
 	public InternalResultsResponse<Cfop> fetchCfopByRequest(Cfop request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		InternalResultsResponse<Cfop> response = new InternalResultsResponse<Cfop>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, EMPRESA_STMT_FETCH_COUNT,
+				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
+		return response;
 	}
 }

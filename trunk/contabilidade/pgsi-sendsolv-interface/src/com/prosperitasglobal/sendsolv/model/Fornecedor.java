@@ -7,32 +7,17 @@ import java.util.List;
  * setting.
  */
 @SuppressWarnings("serial")
-public class Funcionario extends Pessoa
+public class Fornecedor extends Pessoa
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
 
 	private Integer cdEmpr;
 
-	/** The matricula. */
-	private String matricula;
-
-	/** The data adm. */
-	private Integer dataAdm;
-
-	/** The salarios. */
-	private List<Salario> salarios;
-
-	/** The horarios. */
-	private List<HorarioFunc> horarios;
-
-	/** The beneficios. */
-	private List<Beneficios> beneficios;
-
 	/**
 	 * Default constructor.
 	 */
-	public Funcionario()
+	public Fornecedor()
 	{
 		super();
 	}
