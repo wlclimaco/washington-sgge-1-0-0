@@ -90,7 +90,7 @@ public interface ICadastroBAC
 
 	public InternalResultsResponse<Cfop> updateCfop(CfopMaintenanceRequest request);
 
-	public InternalResultsResponse<Cfop> deleteCfop(CfopMaintenanceRequest request);
+	public InternalResponse deleteCfop(CfopMaintenanceRequest request);
 
 	public InternalResultsResponse<Cfop> fetchCfopByRequest(CfopInquiryRequest request);
 

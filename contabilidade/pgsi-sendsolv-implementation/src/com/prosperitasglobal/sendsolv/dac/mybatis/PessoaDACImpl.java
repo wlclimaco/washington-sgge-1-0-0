@@ -8,14 +8,27 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.dac.ICnaeDAC;
+import com.prosperitasglobal.sendsolv.dac.IDocumentoDAC;
+import com.prosperitasglobal.sendsolv.dac.IEmailDAC;
+import com.prosperitasglobal.sendsolv.dac.IEnderecoDAC;
+import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.IPessoaDAC;
+import com.prosperitasglobal.sendsolv.dac.ISociosDAC;
+import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
+import com.prosperitasglobal.sendsolv.dac.ITelefoneDAC;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.DocumentosDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.EmailDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.EnderecoDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.StatusDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.TelefoneDACD;
+import com.prosperitasglobal.sendsolv.model.AcaoEnum;
 import com.prosperitasglobal.sendsolv.model.Cliente;
 import com.prosperitasglobal.sendsolv.model.Fornecedor;
 import com.prosperitasglobal.sendsolv.model.Status;
 import com.prosperitasglobal.sendsolv.model.StatusEnum;
+import com.prosperitasglobal.sendsolv.model.TabelaEnum;
 import com.prosperitasglobal.sendsolv.model.Transportador;
 import com.prosperitasglobal.sendsolv.model.request.ClienteInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.FornecedorInquiryRequest;
@@ -86,6 +99,143 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 	/** The valid sort fields for an pessoa inquiry. Will be injected by Spring. */
 	private Map<String, String> pessoaInquiryValidSortFields;
 
+	IEnderecoDAC enderecoDAC;
+	ITelefoneDAC telefoneDAC;
+	IEmailDAC emailDAC;
+	ISociosDAC socioDAC;
+	ICnaeDAC cnaeDAC;
+	IDocumentoDAC documentoDAC;
+	IHistoricoDAC historicoDAC;
+	IStatusDAC statusDAC;
+
+	/**
+	 * @return the enderecoDAC
+	 */
+	public IEnderecoDAC getEnderecoDAC()
+	{
+		return enderecoDAC;
+	}
+
+	/**
+	 * @param enderecoDAC the enderecoDAC to set
+	 */
+	public void setEnderecoDAC(IEnderecoDAC enderecoDAC)
+	{
+		this.enderecoDAC = enderecoDAC;
+	}
+
+	/**
+	 * @return the telefoneDAC
+	 */
+	public ITelefoneDAC getTelefoneDAC()
+	{
+		return telefoneDAC;
+	}
+
+	/**
+	 * @param telefoneDAC the telefoneDAC to set
+	 */
+	public void setTelefoneDAC(ITelefoneDAC telefoneDAC)
+	{
+		this.telefoneDAC = telefoneDAC;
+	}
+
+	/**
+	 * @return the emailDAC
+	 */
+	public IEmailDAC getEmailDAC()
+	{
+		return emailDAC;
+	}
+
+	/**
+	 * @param emailDAC the emailDAC to set
+	 */
+	public void setEmailDAC(IEmailDAC emailDAC)
+	{
+		this.emailDAC = emailDAC;
+	}
+
+	/**
+	 * @return the socioDAC
+	 */
+	public ISociosDAC getSocioDAC()
+	{
+		return socioDAC;
+	}
+
+	/**
+	 * @param socioDAC the socioDAC to set
+	 */
+	public void setSocioDAC(ISociosDAC socioDAC)
+	{
+		this.socioDAC = socioDAC;
+	}
+
+	/**
+	 * @return the cnaeDAC
+	 */
+	public ICnaeDAC getCnaeDAC()
+	{
+		return cnaeDAC;
+	}
+
+	/**
+	 * @param cnaeDAC the cnaeDAC to set
+	 */
+	public void setCnaeDAC(ICnaeDAC cnaeDAC)
+	{
+		this.cnaeDAC = cnaeDAC;
+	}
+
+	/**
+	 * @return the documentoDAC
+	 */
+	public IDocumentoDAC getDocumentoDAC()
+	{
+		return documentoDAC;
+	}
+
+	/**
+	 * @param documentoDAC the documentoDAC to set
+	 */
+	public void setDocumentoDAC(IDocumentoDAC documentoDAC)
+	{
+		this.documentoDAC = documentoDAC;
+	}
+
+	/**
+	 * @return the historicoDAC
+	 */
+	public IHistoricoDAC getHistoricoDAC()
+	{
+		return historicoDAC;
+	}
+
+	/**
+	 * @param historicoDAC the historicoDAC to set
+	 */
+	public void setHistoricoDAC(IHistoricoDAC historicoDAC)
+	{
+		this.historicoDAC = historicoDAC;
+	}
+
+	/**
+	 * @return the statusDAC
+	 */
+	public IStatusDAC getStatusDAC()
+	{
+		return statusDAC;
+	}
+
+	/**
+	 * @param statusDAC the statusDAC to set
+	 */
+	public void setStatusDAC(IStatusDAC statusDAC)
+	{
+		this.statusDAC = statusDAC;
+	}
+
 	/**
 	 * Get the valid sort fields for the pessoa inquiry. Attribute injected by Spring.
 	 *
@@ -122,36 +272,36 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		}
 		// Next traverse the object graph and "maintain" the associations
 		insertCount +=
-				EnderecoDACD.maintainEnderecoAssociations(pessoa.getEnderecos, response, insertCount, null, null,
-						null);
+				EnderecoDACD.maintainEnderecoAssociations(pessoa.getEnderecos(), response, insertCount, null, null,
+						null, getEnderecoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
 
 		insertCount +=
-				EnderecoDACD.maintainCnaeAssociations(pessoa.getCnaes, response, insertCount, null, null,
-						null);
+				EmailDACD.maintainEmailAssociations(pessoa.getEmails(), response, insertCount, null, null,
+						null, getEmailDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
 
 		insertCount +=
-				EnderecoDACD.maintainEmailAssociations(pessoa.getEmails, response, insertCount, null, null,
-						null);
+				TelefoneDACD.maintainTelefoneAssociations(pessoa.getTelefones(), response, insertCount, null, null,
+						null, getTelefoneDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
 
 		insertCount +=
-				EnderecoDACD.maintainTelefoneAssociations(pessoa.getTelefones, response, insertCount, null, null,
-						null);
-
-		insertCount +=
-				EnderecoDACD.maintainDocumentoAssociations(pessoa.getDocumentos, response, insertCount, null, null,
-						null);
-
-
-		insertCount +=
-				EnderecoDACD.maintainHistoricoAssociations(pessoa.getEStatus, response, insertCount, null, null,
-						null);
+				DocumentosDACD.maintainDocumentoAssociations(pessoa.getDocumentos(), response, insertCount, null,
+						null,
+						null, getDocumentoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
 
 		if (insertCount > 0)
 		{
 			Status status = new Status();
 			status.setStatus(StatusEnum.ACTIVE);
-			List<Status> statusList = new new ArrayList<Status>();
-			count = StatusDACD.maintainStatusAssociations(statusList, response, count, type, enderecoList, tabelaEnum);
+			List<Status> statusList = new ArrayList<Status>();
+			insertCount =
+					StatusDACD.maintainStatusAssociations(statusList, response, pessoa.getId(), null, AcaoEnum.INSERT,
+							pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.EMPRESA, getStatusDAC(),
+							getHistoricoDAC());
+
 		}
 
 		// Finally, if something was inserted then add the Cliente to the result.
@@ -184,36 +334,34 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		}
 		// Next traverse the object graph and "maintain" the associations
 		updateCount +=
-				EnderecoDACD.maintainEnderecoAssociations(pessoa.getEnderecos, response, pessoa.getId(), null, null,
-						null);
+				EnderecoDACD.maintainEnderecoAssociations(pessoa.getEnderecos(), response, pessoa.getId(), null, null,
+						null, getEnderecoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
 
 		updateCount +=
-				EnderecoDACD.maintainCnaeAssociations(pessoa.getCnaes, response, pessoa.getId(), null, null,
-						null);
+				EmailDACD.maintainEmailAssociations(pessoa.getEmails(), response, pessoa.getId(), null, null,
+						null, getEmailDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
 
 		updateCount +=
-				EnderecoDACD.maintainEmailAssociations(pessoa.getEmails, response, pessoa.getId(), null, null,
-						null);
+				TelefoneDACD.maintainTelefoneAssociations(pessoa.getTelefones(), response, pessoa.getId(), null, null,
+						null, getTelefoneDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
 
 		updateCount +=
-				EnderecoDACD.maintainTelefoneAssociations(pessoa.getTelefones, response, pessoa.getId(), null, null,
-						null);
-
-		updateCount +=
-				EnderecoDACD.maintainDocumentoAssociations(pessoa.getDocumentos, response, pessoa.getId(), null, null,
-						null);
-
-
-		updateCount +=
-				EnderecoDACD.maintainHistoricoAssociations(pessoa.getEStatus, response, pessoa.getId(), null, null,
-						null);
+				DocumentosDACD.maintainDocumentoAssociations(pessoa.getDocumentos(), response, pessoa.getId(), null,
+						null,
+						null, getDocumentoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
 
 		if (updateCount > 0)
 		{
-			Status status = new Status();
-			status.setStatus(StatusEnum.ACTIVE);
-			List<Status> statusList = new new ArrayList<Status>();
-			count = StatusDACD.maintainStatusAssociations(statusList, response, count, type, enderecoList, tabelaEnum);
+			updateCount =
+					StatusDACD.maintainStatusAssociations(pessoa.getStatusList(), response, pessoa.getId(), null,
+							AcaoEnum.UPDATE,
+							pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.CLIENTE, getStatusDAC(),
+							getHistoricoDAC());
+
 		}
 
 		// Finally, if something was updated then add the Person to the result.
@@ -230,23 +378,24 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 	{
 		Integer updateCount = 0;
 		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doRemove(getSqlSession(), EMPRESA_STMT_DELETE, pessoa, response);
-		updateCount +=
-				EnderecoDACD.maintainHistoricoAssociations(pessoa.getEStatus, response, insertCount, null, null,
-						null);
+		// QATMyBatisDacHelper.doRemove(getSqlSession(), EMPRESA_STMT_DELETE, pessoa, response);
+		// updateCount +=
+		// EnderecoDACD.maintainHistoricoAssociations(pessoa.getEStatus, response, insertCount, null, null,
+		// null);
 
-		if (updateCount > 0)
-		{
-			Status status = new Status();
-			status.setStatus(StatusEnum.ACTIVE);
-			List<Status> statusList = new new ArrayList<Status>();
-			count = StatusDACD.maintainStatusAssociations(statusList, response, count, type, enderecoList, tabelaEnum);
-		}
-
+		Status status = new Status();
+		status.setStatus(StatusEnum.INACTIVE);
+		List<Status> statusList = new ArrayList<Status>();
+		updateCount =
+				StatusDACD
+				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
+						null, AcaoEnum.DELETE,
+						pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.CLIENTE, getStatusDAC(),
+						getHistoricoDAC());
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
 		{
-			response.addResult(pessoa);
+			((InternalResultsResponse<Cliente>)response).addResult(pessoa);
 		}
 		return response;
 	}
@@ -272,7 +421,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		 * Helper method to translation from the user friendly" sort field names to the
 		 * actual database column names.
 		 */
-		QATMyBatisDacHelper.translateSortFields(request, getClienteInquiryValidSortFields());
+		// QATMyBatisDacHelper.translateSortFields(request, getClienteInquiryValidSortFields());
 
 		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, EMPRESA_STMT_FETCH_COUNT,
 				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
@@ -294,40 +443,38 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		{
 			return response;
 		}
-		// Next traverse the object graph and "maintain" the associations
 		insertCount +=
-				EnderecoDACD.maintainEnderecoAssociations(pessoa.getEnderecos, response, insertCount, null, null,
-						null);
+				EnderecoDACD.maintainEnderecoAssociations(pessoa.getEnderecos(), response, insertCount, null, null,
+						null, getEnderecoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
 
 		insertCount +=
-				EnderecoDACD.maintainCnaeAssociations(pessoa.getCnaes, response, insertCount, null, null,
-						null);
+				EmailDACD.maintainEmailAssociations(pessoa.getEmails(), response, insertCount, null, null,
+						null, getEmailDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
 
 		insertCount +=
-				EnderecoDACD.maintainEmailAssociations(pessoa.getEmails, response, insertCount, null, null,
-						null);
+				TelefoneDACD.maintainTelefoneAssociations(pessoa.getTelefones(), response, insertCount, null, null,
+						null, getTelefoneDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
 
 		insertCount +=
-				EnderecoDACD.maintainTelefoneAssociations(pessoa.getTelefones, response, insertCount, null, null,
-						null);
-
-		insertCount +=
-				EnderecoDACD.maintainDocumentoAssociations(pessoa.getDocumentos, response, insertCount, null, null,
-						null);
-
-
-		insertCount +=
-				EnderecoDACD.maintainHistoricoAssociations(pessoa.getEStatus, response, insertCount, null, null,
-						null);
+				DocumentosDACD.maintainDocumentoAssociations(pessoa.getDocumentos(), response, insertCount, null,
+						null,
+						null, getDocumentoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
 
 		if (insertCount > 0)
 		{
 			Status status = new Status();
 			status.setStatus(StatusEnum.ACTIVE);
-			List<Status> statusList = new new ArrayList<Status>();
-			count = StatusDACD.maintainStatusAssociations(statusList, response, count, type, enderecoList, tabelaEnum);
-		}
+			List<Status> statusList = new ArrayList<Status>();
+			insertCount =
+					StatusDACD.maintainStatusAssociations(statusList, response, pessoa.getId(), null, AcaoEnum.INSERT,
+							pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.FORNECEDOR, getStatusDAC(),
+							getHistoricoDAC());
 
+		}
 		// Finally, if something was inserted then add the Fornecedor to the result.
 		if (insertCount > 0)
 		{
@@ -358,36 +505,35 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		}
 		// Next traverse the object graph and "maintain" the associations
 		updateCount +=
-				EnderecoDACD.maintainEnderecoAssociations(pessoa.getEnderecos, response, pessoa.getId(), null, null,
-						null);
+				EnderecoDACD.maintainEnderecoAssociations(pessoa.getEnderecos(), response, pessoa.getId(), null, null,
+						null, getEnderecoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
 
 		updateCount +=
-				EnderecoDACD.maintainCnaeAssociations(pessoa.getCnaes, response, pessoa.getId(), null, null,
-						null);
+				EmailDACD.maintainEmailAssociations(pessoa.getEmails(), response, pessoa.getId(), null, null,
+						null, getEmailDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
 
 		updateCount +=
-				EnderecoDACD.maintainEmailAssociations(pessoa.getEmails, response, pessoa.getId(), null, null,
-						null);
+				TelefoneDACD.maintainTelefoneAssociations(pessoa.getTelefones(), response, pessoa.getId(), null, null,
+						null, getTelefoneDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
 
 		updateCount +=
-				EnderecoDACD.maintainTelefoneAssociations(pessoa.getTelefones, response, pessoa.getId(), null, null,
-						null);
-
-		updateCount +=
-				EnderecoDACD.maintainDocumentoAssociations(pessoa.getDocumentos, response, pessoa.getId(), null, null,
-						null);
-
-
-		updateCount +=
-				EnderecoDACD.maintainHistoricoAssociations(pessoa.getEStatus, response, pessoa.getId(), null, null,
-						null);
+				DocumentosDACD.maintainDocumentoAssociations(pessoa.getDocumentos(), response, pessoa.getId(), null,
+						null,
+						null, getDocumentoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
 
 		if (updateCount > 0)
 		{
-			Status status = new Status();
-			status.setStatus(StatusEnum.ACTIVE);
-			List<Status> statusList = new new ArrayList<Status>();
-			count = StatusDACD.maintainStatusAssociations(statusList, response, count, type, enderecoList, tabelaEnum);
+
+			updateCount =
+					StatusDACD.maintainStatusAssociations(pessoa.getStatusList(), response, pessoa.getId(), null,
+							AcaoEnum.INSERT,
+							pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.FORNECEDOR, getStatusDAC(),
+							getHistoricoDAC());
+
 		}
 
 		// Finally, if something was updated then add the Person to the result.
@@ -404,23 +550,21 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 	{
 		Integer updateCount = 0;
 		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doRemove(getSqlSession(), EMPRESA_STMT_DELETE, pessoa, response);
-		updateCount +=
-				EnderecoDACD.maintainHistoricoAssociations(pessoa.getEStatus, response, insertCount, null, null,
-						null);
 
-		if (updateCount > 0)
-		{
-			Status status = new Status();
-			status.setStatus(StatusEnum.ACTIVE);
-			List<Status> statusList = new new ArrayList<Status>();
-			count = StatusDACD.maintainStatusAssociations(statusList, response, count, type, enderecoList, tabelaEnum);
-		}
+		Status status = new Status();
+		status.setStatus(StatusEnum.INACTIVE);
+		List<Status> statusList = new ArrayList<Status>();
+		updateCount =
+				StatusDACD
+				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
+						null, AcaoEnum.DELETE,
+						pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.FORNECEDOR, getStatusDAC(),
+						getHistoricoDAC());
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
 		{
-			response.addResult(pessoa);
+			response.isInError();
 		}
 		return response;
 	}
@@ -446,7 +590,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		 * Helper method to translation from the user friendly" sort field names to the
 		 * actual database column names.
 		 */
-		QATMyBatisDacHelper.translateSortFields(request, getFornecedorInquiryValidSortFields());
+		// QATMyBatisDacHelper.translateSortFields(request, getFornecedorInquiryValidSortFields());
 
 		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, EMPRESA_STMT_FETCH_COUNT,
 				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
@@ -471,36 +615,36 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		}
 		// Next traverse the object graph and "maintain" the associations
 		insertCount +=
-				EnderecoDACD.maintainEnderecoAssociations(pessoa.getEnderecos, response, insertCount, null, null,
-						null);
+				EnderecoDACD.maintainEnderecoAssociations(pessoa.getEnderecos(), response, insertCount, null, null,
+						null, getEnderecoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
 
 		insertCount +=
-				EnderecoDACD.maintainCnaeAssociations(pessoa.getCnaes, response, insertCount, null, null,
-						null);
+				EmailDACD.maintainEmailAssociations(pessoa.getEmails(), response, insertCount, null, null,
+						null, getEmailDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
 
 		insertCount +=
-				EnderecoDACD.maintainEmailAssociations(pessoa.getEmails, response, insertCount, null, null,
-						null);
+				TelefoneDACD.maintainTelefoneAssociations(pessoa.getTelefones(), response, insertCount, null, null,
+						null, getTelefoneDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
 
 		insertCount +=
-				EnderecoDACD.maintainTelefoneAssociations(pessoa.getTelefones, response, insertCount, null, null,
-						null);
-
-		insertCount +=
-				EnderecoDACD.maintainDocumentoAssociations(pessoa.getDocumentos, response, insertCount, null, null,
-						null);
-
-
-		insertCount +=
-				EnderecoDACD.maintainHistoricoAssociations(pessoa.getEStatus, response, insertCount, null, null,
-						null);
+				DocumentosDACD.maintainDocumentoAssociations(pessoa.getDocumentos(), response, insertCount, null,
+						null,
+						null, getDocumentoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
 
 		if (insertCount > 0)
 		{
 			Status status = new Status();
 			status.setStatus(StatusEnum.ACTIVE);
-			List<Status> statusList = new new ArrayList<Status>();
-			count = StatusDACD.maintainStatusAssociations(statusList, response, count, type, enderecoList, tabelaEnum);
+			List<Status> statusList = new ArrayList<Status>();
+			insertCount =
+					StatusDACD.maintainStatusAssociations(statusList, response, pessoa.getId(), null, AcaoEnum.INSERT,
+							pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.TRANSPORTADOR, getStatusDAC(),
+							getHistoricoDAC());
+
 		}
 
 		// Finally, if something was inserted then add the Transportador to the result.
@@ -533,38 +677,37 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		}
 		// Next traverse the object graph and "maintain" the associations
 		updateCount +=
-				EnderecoDACD.maintainEnderecoAssociations(pessoa.getEnderecos, response, pessoa.getId(), null, null,
-						null);
+				EnderecoDACD.maintainEnderecoAssociations(pessoa.getEnderecos(), response, pessoa.getId(), null, null,
+						null, getEnderecoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
 
 		updateCount +=
-				EnderecoDACD.maintainCnaeAssociations(pessoa.getCnaes, response, pessoa.getId(), null, null,
-						null);
+				EmailDACD.maintainEmailAssociations(pessoa.getEmails(), response, pessoa.getId(), null, null,
+						null, getEmailDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
 
 		updateCount +=
-				EnderecoDACD.maintainEmailAssociations(pessoa.getEmails, response, pessoa.getId(), null, null,
-						null);
+				TelefoneDACD.maintainTelefoneAssociations(pessoa.getTelefones(), response, pessoa.getId(), null, null,
+						null, getTelefoneDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
 
 		updateCount +=
-				EnderecoDACD.maintainTelefoneAssociations(pessoa.getTelefones, response, pessoa.getId(), null, null,
-						null);
-
-		updateCount +=
-				EnderecoDACD.maintainDocumentoAssociations(pessoa.getDocumentos, response, pessoa.getId(), null, null,
-						null);
-
-
-		updateCount +=
-				EnderecoDACD.maintainHistoricoAssociations(pessoa.getEStatus, response, pessoa.getId(), null, null,
-						null);
+				DocumentosDACD.maintainDocumentoAssociations(pessoa.getDocumentos(), response, pessoa.getId(), null,
+						null,
+						null, getDocumentoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
 
 		if (updateCount > 0)
 		{
 			Status status = new Status();
 			status.setStatus(StatusEnum.ACTIVE);
-			List<Status> statusList = new new ArrayList<Status>();
-			count = StatusDACD.maintainStatusAssociations(statusList, response, count, type, enderecoList, tabelaEnum);
-		}
+			List<Status> statusList = new ArrayList<Status>();
+			updateCount =
+					StatusDACD.maintainStatusAssociations(statusList, response, pessoa.getId(), null, AcaoEnum.INSERT,
+							pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.EMPRESA, getStatusDAC(),
+							getHistoricoDAC());
 
+		}
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
 		{
@@ -579,24 +722,15 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 	{
 		Integer updateCount = 0;
 		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doRemove(getSqlSession(), EMPRESA_STMT_DELETE, pessoa, response);
-		updateCount +=
-				EnderecoDACD.maintainHistoricoAssociations(pessoa.getEStatus, response, insertCount, null, null,
-						null);
-
-		if (updateCount > 0)
-		{
-			Status status = new Status();
-			status.setStatus(StatusEnum.ACTIVE);
-			List<Status> statusList = new new ArrayList<Status>();
-			count = StatusDACD.maintainStatusAssociations(statusList, response, count, type, enderecoList, tabelaEnum);
-		}
-
-		// Finally, if something was updated then add the Person to the result.
-		if (updateCount > 0)
-		{
-			response.addResult(pessoa);
-		}
+		Status status = new Status();
+		status.setStatus(StatusEnum.INACTIVE);
+		List<Status> statusList = new ArrayList<Status>();
+		updateCount =
+				StatusDACD
+				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
+						null, AcaoEnum.DELETE,
+						pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.TRANSPORTADOR, getStatusDAC(),
+						getHistoricoDAC());
 		return response;
 	}
 

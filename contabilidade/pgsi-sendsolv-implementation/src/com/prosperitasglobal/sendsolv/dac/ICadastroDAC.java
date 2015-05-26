@@ -84,7 +84,7 @@ public interface ICadastroDAC
 
 	public InternalResultsResponse<Cfop> updateCfop(Cfop request);
 
-	public InternalResultsResponse<Cfop> deleteCfop(Cfop request);
+	public InternalResponse deleteCfop(Cfop request);
 
 	public InternalResultsResponse<Cfop> fetchCfopByRequest(CfopInquiryRequest request);
 

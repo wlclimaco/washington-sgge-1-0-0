@@ -43,7 +43,7 @@ public class HistoricoBACImpl implements IHistoricoBAC
 	{
 		InternalResultsResponse<Historico> response = new InternalResultsResponse<Historico>();
 
-		response = getHistoricoDAC().insertHistorico(request.getHistorico());
+		getHistoricoDAC().insertHistorico(request.getHistorico(), "", response);
 
 		return response;
 	}
@@ -57,7 +57,7 @@ public class HistoricoBACImpl implements IHistoricoBAC
 	{
 		InternalResultsResponse<Historico> response = new InternalResultsResponse<Historico>();
 
-		response = getHistoricoDAC().updateHistorico(request.getHistorico());
+		getHistoricoDAC().updateHistorico(request.getHistorico(), response);
 
 		return response;
 	}
@@ -72,7 +72,8 @@ public class HistoricoBACImpl implements IHistoricoBAC
 	@Override
 	public InternalResponse deleteHistorico(HistoricoMaintenanceRequest request)
 	{
-		return getHistoricoDAC().deleteHistorico(request.getHistorico());
+
+		return null;
 	}
 
 	/*

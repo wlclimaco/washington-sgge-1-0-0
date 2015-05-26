@@ -1,6 +1,6 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
-import com.prosperitasglobal.sendsolv.model.criteria.ArquivoCriteria;
+import com.prosperitasglobal.sendsolv.model.Cfop;
 
 /**
  * The Class ProdutoInquiryRequest.
@@ -9,18 +9,18 @@ public class CfopInquiryRequest extends PagedInquiryRequest
 {
 
 	/** The criteria. */
-	private ArquivoCriteria criteria;
+	private Cfop criteria;
 
 	/**
 	 * Gets the criteria.
 	 *
 	 * @return the criteria
 	 */
-	public ArquivoCriteria getCriteria()
+	public Cfop getCriteria()
 	{
 		if (criteria == null)
 		{
-			criteria = new ArquivoCriteria();
+			criteria = new Cfop();
 		}
 		return criteria;
 	}
@@ -30,7 +30,7 @@ public class CfopInquiryRequest extends PagedInquiryRequest
 	 *
 	 * @param criteria the criteria
 	 */
-	public void setCriteria(ArquivoCriteria criteria)
+	public void setCriteria(Cfop criteria)
 	{
 		this.criteria = criteria;
 	}

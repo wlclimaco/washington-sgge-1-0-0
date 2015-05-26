@@ -15,6 +15,8 @@ public class Status extends QATModelOL
 	/** The parent key. */
 	private Integer dataStatus;
 
+	private Integer parentId;
+
 	/** The parent key type. */
 	private StatusEnum status;
 
@@ -146,6 +148,22 @@ public class Status extends QATModelOL
 		this.note = note;
 	}
 
+	/**
+	 * @return the parentId
+	 */
+	public Integer getParentId()
+	{
+		return parentId;
+	}
+
+	/**
+	 * @param parentId the parentId to set
+	 */
+	public void setParentId(Integer parentId)
+	{
+		this.parentId = parentId;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -155,8 +173,8 @@ public class Status extends QATModelOL
 	{
 		return "Status [getId()=" + getId() + ", getDataStatus()=" + getDataStatus() + ", getStatus()=" + getStatus()
 				+ ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()="
-				+ getTabelaEnum() + ", getNote()=" + getNote() + ", getVersion()=" + getVersion()
-				+ ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
+				+ getTabelaEnum() + ", getNote()=" + getNote() + ", getParentId()=" + getParentId() + ", getVersion()="
+				+ getVersion() + ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
 				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
 				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", toString()=" + super.toString() + ", getClass()="
 				+ getClass() + ", hashCode()=" + hashCode() + "]";

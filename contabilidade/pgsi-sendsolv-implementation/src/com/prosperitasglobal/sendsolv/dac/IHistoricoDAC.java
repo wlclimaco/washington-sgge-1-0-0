@@ -3,7 +3,6 @@ package com.prosperitasglobal.sendsolv.dac;
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.model.Historico;
 import com.prosperitasglobal.sendsolv.model.request.HistoricoInquiryRequest;
-import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
@@ -13,49 +12,46 @@ public interface IHistoricoDAC
 {
 
 	/**
-	 * Update telefone.
+	 * Update historico.
 	 *
-	 * @param telefone the telefone
-	 * @return the internal results response< telefone>
+	 * @param historico the historico
+	 * @param response the response
+	 * @return the integer
 	 */
-	public InternalResultsResponse<Historico> updateHistorico(Historico telefone);
+	public Integer updateHistorico(Historico historico, InternalResultsResponse<?> response);
 
 	/**
-	 * Insert telefone.
+	 * Insert historico.
 	 *
-	 * @param telefone the telefone
-	 * @return the internal results response< telefone>
+	 * @param historico the historico
+	 * @param statementName the statement name
+	 * @param response the response
+	 * @return the integer
 	 */
-	public InternalResultsResponse<Historico> insertHistorico(Historico telefone);
+	public Integer insertHistorico(Historico historico, String statementName, InternalResultsResponse<?> response);
 
 	/**
-	 * Delete telefone.
+	 * Delete business historico.
 	 *
-	 * @param telefone the telefone
-	 * @return the internal response
+	 * @param historico the historico
+	 * @param response the response
+	 * @return the integer
 	 */
-	public InternalResponse deleteHistorico(Historico telefone);
+	public Integer deleteHistorico(Historico historico, InternalResultsResponse<?> response);
 
 	/**
-	 * Fetch telefone by id.
+	 * Fetch historico by id.
 	 *
-	 * @param request the request
-	 * @return the internal results response
+	 * @param id the id
+	 * @return the internal results response< historico>
 	 */
 	public InternalResultsResponse<Historico> fetchHistoricoById(FetchByIdRequest request);
 
 	/**
-	 * Fetch all telefones.
-	 *
-	 * @return the internal results response< telefone>
-	 */
-	public InternalResultsResponse<Historico> fetchAllHistoricos();
-
-	/**
-	 * Fetch telefone by request.
+	 * Fetch empresa by request.
 	 *
 	 * @param request the request
-	 * @return the internal results response< telefone>
+	 * @return the internal results response< empresa>
 	 */
 	public InternalResultsResponse<Historico> fetchHistoricoByRequest(HistoricoInquiryRequest request);
 

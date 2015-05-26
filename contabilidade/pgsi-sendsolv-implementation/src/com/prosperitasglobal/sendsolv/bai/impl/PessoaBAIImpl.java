@@ -5,9 +5,37 @@ import java.util.List;
 import javax.xml.ws.Response;
 
 import org.relaxng.datatype.ValidationContext;
+import org.slf4j.LoggerFactory;
 
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.bac.IPessoaBAC;
+import com.prosperitasglobal.sendsolv.bai.IPessoaBAI;
+import com.prosperitasglobal.sendsolv.model.Cliente;
+import com.prosperitasglobal.sendsolv.model.Fornecedor;
+import com.prosperitasglobal.sendsolv.model.Status;
+import com.prosperitasglobal.sendsolv.model.Transportador;
+import com.prosperitasglobal.sendsolv.model.request.ClienteInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ClienteMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.FornecedorInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.FornecedorMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.TransportadorInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.TransportadorMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.ClienteResponse;
+import com.prosperitasglobal.sendsolv.model.response.FornecedorResponse;
+import com.prosperitasglobal.sendsolv.model.response.TransportadorResponse;
+import com.qat.framework.model.Message.MessageLevel;
+import com.qat.framework.model.Message.MessageSeverity;
+import com.qat.framework.model.MessageInfo;
+import com.qat.framework.model.QATModel.PersistanceActionEnum;
+import com.qat.framework.model.UserContext;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATInterfaceUtil;
+import com.qat.framework.validation.ValidationContextIndicator;
+import com.qat.framework.validation.ValidationController;
+import com.qat.framework.validation.ValidationUtil;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class PessoaBAIImpl.
  */
@@ -80,6 +108,12 @@ public class PessoaBAIImpl implements IPessoaBAI
 		return empresaBAC;
 	}
 
+	/**
+	 * Insert cliente.
+	 *
+	 * @param request the request
+	 * @return the cliente response
+	 */
 	@Override
 	public ClienteResponse insertCliente(ClienteMaintenanceRequest request)
 	{
@@ -96,8 +130,9 @@ public class PessoaBAIImpl implements IPessoaBAI
 		return response;
 	}
 
+	/** The Cliente response. */
 	@Override
-	Cliente ClienteResponse updateCliente(ClienteMaintenanceRequest request)
+	public ClienteResponse updateCliente(ClienteMaintenanceRequest request)
 	{
 		ClienteResponse response = new ClienteResponse();
 		try
@@ -112,6 +147,12 @@ public class PessoaBAIImpl implements IPessoaBAI
 		return response;
 	}
 
+	/**
+	 * Delete cliente.
+	 *
+	 * @param request the request
+	 * @return the cliente response
+	 */
 	@Override
 	public ClienteResponse deleteCliente(ClienteMaintenanceRequest request)
 	{
@@ -128,6 +169,12 @@ public class PessoaBAIImpl implements IPessoaBAI
 		return response;
 	}
 
+	/**
+	 * Fetch cliente by id.
+	 *
+	 * @param request the request
+	 * @return the cliente response
+	 */
 	@Override
 	public ClienteResponse fetchClienteById(FetchByIdRequest request)
 	{
@@ -155,6 +202,12 @@ public class PessoaBAIImpl implements IPessoaBAI
 		return response;
 	}
 
+	/**
+	 * Fetch cliente by request.
+	 *
+	 * @param request the request
+	 * @return the cliente response
+	 */
 	@Override
 	public ClienteResponse fetchClienteByRequest(ClienteInquiryRequest request)
 	{
@@ -170,6 +223,12 @@ public class PessoaBAIImpl implements IPessoaBAI
 		return response;
 	}
 
+	/**
+	 * Fetch cliente.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
 	private void fetchCliente(ClienteInquiryRequest request, ClienteResponse response)
 	{
 		InternalResultsResponse<Cliente> internalResponse = new InternalResultsResponse<Cliente>();
@@ -272,6 +331,12 @@ public class PessoaBAIImpl implements IPessoaBAI
 	}
 
 	// =========================== Fornercedor====================
+	/**
+	 * Insert fornecedor.
+	 *
+	 * @param request the request
+	 * @return the fornecedor response
+	 */
 	@Override
 	public FornecedorResponse insertFornecedor(FornecedorMaintenanceRequest request)
 	{
@@ -288,6 +353,12 @@ public class PessoaBAIImpl implements IPessoaBAI
 		return response;
 	}
 
+	/**
+	 * Update fornecedor.
+	 *
+	 * @param request the request
+	 * @return the fornecedor response
+	 */
 	@Override
 	public FornecedorResponse updateFornecedor(FornecedorMaintenanceRequest request)
 	{
@@ -304,6 +375,12 @@ public class PessoaBAIImpl implements IPessoaBAI
 		return response;
 	}
 
+	/**
+	 * Delete fornecedor.
+	 *
+	 * @param request the request
+	 * @return the fornecedor response
+	 */
 	@Override
 	public FornecedorResponse deleteFornecedor(FornecedorMaintenanceRequest request)
 	{
@@ -320,6 +397,12 @@ public class PessoaBAIImpl implements IPessoaBAI
 		return response;
 	}
 
+	/**
+	 * Fetch fornecedor by id.
+	 *
+	 * @param request the request
+	 * @return the fornecedor response
+	 */
 	@Override
 	public FornecedorResponse fetchFornecedorById(FetchByIdRequest request)
 	{
@@ -347,6 +430,12 @@ public class PessoaBAIImpl implements IPessoaBAI
 		return response;
 	}
 
+	/**
+	 * Fetch fornecedor by request.
+	 *
+	 * @param request the request
+	 * @return the fornecedor response
+	 */
 	@Override
 	public FornecedorResponse fetchFornecedorByRequest(FornecedorInquiryRequest request)
 	{
@@ -362,6 +451,12 @@ public class PessoaBAIImpl implements IPessoaBAI
 		return response;
 	}
 
+	/**
+	 * Fetch fornecedor.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
 	private void fetchFornecedor(FornecedorInquiryRequest request, FornecedorResponse response)
 	{
 		InternalResultsResponse<Fornecedor> internalResponse = new InternalResultsResponse<Fornecedor>();
@@ -387,7 +482,8 @@ public class PessoaBAIImpl implements IPessoaBAI
 	 * @param request the request
 	 * @return the empresa response
 	 */
-	private FornecedorResponse processFornecedor(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
+	private FornecedorResponse processFornecedor(ValidationContextIndicator indicator,
+			PersistanceActionEnum persistType,
 			FornecedorMaintenanceRequest request)
 	{
 		FornecedorResponse response = new FornecedorResponse();
@@ -440,7 +536,8 @@ public class PessoaBAIImpl implements IPessoaBAI
 	 * @param updateType the update type
 	 * @return the internal response
 	 */
-	private InternalResponse doPersistanceFornecedor(FornecedorMaintenanceRequest request, PersistanceActionEnum updateType)
+	private InternalResponse doPersistanceFornecedor(FornecedorMaintenanceRequest request,
+			PersistanceActionEnum updateType)
 	{
 		switch (updateType)
 		{
@@ -464,6 +561,12 @@ public class PessoaBAIImpl implements IPessoaBAI
 	}
 
 	// =================================Transportador==========================
+	/**
+	 * Insert transportador.
+	 *
+	 * @param request the request
+	 * @return the transportador response
+	 */
 	@Override
 	public TransportadorResponse insertTransportador(TransportadorMaintenanceRequest request)
 	{
@@ -480,6 +583,12 @@ public class PessoaBAIImpl implements IPessoaBAI
 		return response;
 	}
 
+	/**
+	 * Update transportador.
+	 *
+	 * @param request the request
+	 * @return the transportador response
+	 */
 	@Override
 	public TransportadorResponse updateTransportador(TransportadorMaintenanceRequest request)
 	{
@@ -496,6 +605,12 @@ public class PessoaBAIImpl implements IPessoaBAI
 		return response;
 	}
 
+	/**
+	 * Delete transportador.
+	 *
+	 * @param request the request
+	 * @return the transportador response
+	 */
 	@Override
 	public TransportadorResponse deleteTransportador(TransportadorMaintenanceRequest request)
 	{
@@ -512,6 +627,12 @@ public class PessoaBAIImpl implements IPessoaBAI
 		return response;
 	}
 
+	/**
+	 * Fetch transportador by id.
+	 *
+	 * @param request the request
+	 * @return the transportador response
+	 */
 	@Override
 	public TransportadorResponse fetchTransportadorById(FetchByIdRequest request)
 	{
@@ -539,6 +660,12 @@ public class PessoaBAIImpl implements IPessoaBAI
 		return response;
 	}
 
+	/**
+	 * Fetch transportador by request.
+	 *
+	 * @param request the request
+	 * @return the transportador response
+	 */
 	@Override
 	public TransportadorResponse fetchTransportadorByRequest(TransportadorInquiryRequest request)
 	{
@@ -554,6 +681,12 @@ public class PessoaBAIImpl implements IPessoaBAI
 		return response;
 	}
 
+	/**
+	 * Fetch transportador.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
 	private void fetchTransportador(TransportadorInquiryRequest request, TransportadorResponse response)
 	{
 		InternalResultsResponse<Transportador> internalResponse = new InternalResultsResponse<Transportador>();
@@ -579,7 +712,8 @@ public class PessoaBAIImpl implements IPessoaBAI
 	 * @param request the request
 	 * @return the empresa response
 	 */
-	private TransportadorResponse processTransportador(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
+	private TransportadorResponse processTransportador(ValidationContextIndicator indicator,
+			PersistanceActionEnum persistType,
 			TransportadorMaintenanceRequest request)
 	{
 		TransportadorResponse response = new TransportadorResponse();
@@ -632,7 +766,8 @@ public class PessoaBAIImpl implements IPessoaBAI
 	 * @param updateType the update type
 	 * @return the internal response
 	 */
-	private InternalResponse doPersistanceTransportador(TransportadorMaintenanceRequest request, PersistanceActionEnum updateType)
+	private InternalResponse doPersistanceTransportador(TransportadorMaintenanceRequest request,
+			PersistanceActionEnum updateType)
 	{
 		switch (updateType)
 		{

@@ -87,6 +87,14 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 	/** The medium. */
 	FUNCIONARIO(2, "sendsolv.base.model.risklevelenum.medium"),
 
+	CLIENTE(0, "sendsolv.base.model.risklevelenum.high"),
+
+	/** The low. */
+	FORNECEDOR(1, "sendsolv.base.model.risklevelenum.low"),
+
+	/** The medium. */
+	TRANSPORTADOR(2, "sendsolv.base.model.risklevelenum.medium"),
+
 	/** The unknown. */
 	SALARIO(3, "sendsolv.base.model.risklevelenum.unknown");
 
