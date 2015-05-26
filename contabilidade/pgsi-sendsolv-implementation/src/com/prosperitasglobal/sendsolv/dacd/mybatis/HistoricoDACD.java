@@ -1,7 +1,9 @@
 package com.prosperitasglobal.sendsolv.dacd.mybatis;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
+import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
 
 /**
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
@@ -23,9 +25,9 @@ public final class HistoricoDACD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static void maintainHistoricoAssociations(List<Status> statusList,
+	public static Integer maintainHistoricoAssociations(List<Status> statusList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum)
+			TabelaEnum tabelaEnum, IHistoricoDAC historicoDAC, IStatusDAC statusDAC)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
@@ -46,30 +48,22 @@ public final class HistoricoDACD extends SqlSessionDaoSupport
 			switch (historico.getModelAction())
 			{
 				case INSERT:
-					count = getHistoricoDAC().insertHistorico(historico,
+					count = historicoDAC.insertHistorico(historico,
 							"insertHistorico", response);
+
 					break;
 				case UPDATE:
-					count = getHistoricoDAC().updateHistorico(historico, response);
+					count = historicoDAC.updateHistorico(historico, response);
+
 					break;
 				case DELETE:
-					count = getHistoricoDAC().deleteHistorico(historico, response);
+					count = historicoDAC.deleteHistorico(historico, response);
+
 					break;
-				default:
-					if (LOG.isDebugEnabled())
-					{
-						LOG.debug("ModelAction for Historico missing!");
-					}
-					break;
+
 			}
 		}
-		if (count > 0)
-		{
-			Status status = new Status();
-			status.setStatus(StatusEnum.ACTIVE);
-			List<Status> statusList = new new ArrayList<Status>();
-			count = StatusDACD.maintainStatusAssociations(statusList, response, count, type, historicoList, tabelaEnum);
-		}
+
 		return count;
 	}
 }

@@ -1,7 +1,10 @@
 package com.prosperitasglobal.sendsolv.dacd.mybatis;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
+import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
+import com.prosperitasglobal.sendsolv.dac.ITelefoneDAC;
 
 /**
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
@@ -23,9 +26,9 @@ public final class TelefoneDACD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static void maintainTelefoneAssociations(List<Telefone> telefoneList,
+	public static Integer maintainTelefoneAssociations(List<Telefone> telefoneList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum)
+			TabelaEnum tabelaEnum, ITelefoneDAC telefoneDAC, IStatusDAC statusDAC,IHistoricoDAC historicoDAC,Integer empId,String UserId)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
@@ -46,29 +49,32 @@ public final class TelefoneDACD extends SqlSessionDaoSupport
 			switch (telefone.getModelAction())
 			{
 				case INSERT:
-					count = getTelefoneDAC().insertTelefone(telefone,
+					count = telefoneDAC.insertTelefone(telefone,
 							"insertTelefone", response);
-					break;
-				case UPDATE:
-					count = getTelefoneDAC().updateTelefone(telefone, response);
-					break;
-				case DELETE:
-					count = getTelefoneDAC().deleteTelefone(telefone, response);
-					break;
-				default:
-					if (LOG.isDebugEnabled())
+					if (count > 0)
 					{
-						LOG.debug("ModelAction for Telefone missing!");
+						Status status = new Status();
+						status.setStatus(StatusEnum.ACTIVE);
+						List<Status> statusList = new new ArrayList<Status>();
+						count = StatusDACD.maintainStatusAssociations(statusList, response, count, null, AcaoEnum.INSERT , UserId, empId, TabelaEnum.TELEFONE, statusDAC, historicoDAC);
 					}
 					break;
+				case UPDATE:
+					count = telefoneDAC.updateTelefone(telefone, response);
+					if (count > 0)
+					{
+						count = StatusDACD.maintainStatusAssociations(telefone.getStatus(), response, telefone.getId(), null, AcaoEnum.UPDATE , UserId, empId, TabelaEnum.TELEFONE, statusDAC, historicoDAC);
+					}
+					break;
+				case DELETE:
+
+						Status status = new Status();
+						status.setStatus(StatusEnum.INACTIVE);
+						List<Status> statusList = new new ArrayList<Status>();
+						count = StatusDACD.maintainStatusAssociations(statusList, response, count, null, AcaoEnum.DELETE , UserId, empId, TabelaEnum.TELEFONE, statusDAC, historicoDAC);
+
+					break;
 			}
-		}
-		if (count > 0)
-		{
-			Status status = new Status();
-			status.setStatus(StatusEnum.ACTIVE);
-			List<Status> statusList = new new ArrayList<Status>();
-			count = StatusDACD.maintainStatusAssociations(statusList, response, count, type, telefoneList, tabelaEnum);
 		}
 
 		return count;

@@ -3,6 +3,10 @@ package com.prosperitasglobal.sendsolv.dacd.mybatis;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.prosperitasglobal.sendsolv.dac.IEmailDAC;
+import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
+import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
+
 /**
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
  * passed into the methods. Nothing injected.
@@ -23,9 +27,9 @@ public final class EmailDACD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static void maintainEmailAssociations(List<Email> emailList,
+	public static Integer maintainEmailAssociations(List<Email> emailList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum)
+			TabelaEnum tabelaEnum,IEmailDAC emailDAC,IStatusDAC statusDAC,IHistoricoDAC historicoDAC,Integer empId,String UserId)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
@@ -46,30 +50,37 @@ public final class EmailDACD extends SqlSessionDaoSupport
 			switch (email.getModelAction())
 			{
 				case INSERT:
-					count = getEmailDAC().insertEmail(email,
+					count = emailDAC.insertEmail(email,
 							"insertEmail", response);
+					if (count > 0)
+					{
+						Status status = new Status();
+						status.setStatus(StatusEnum.ACTIVE);
+						List<Status> statusList = new new ArrayList<Status>();
+						count = StatusDACD.maintainStatusAssociations(statusList, response, count, null, AcaoEnum.INSERT , UserId, empId, TabelaEnum.EMAIL, statusDAC, historicoDAC);
+					}
 					break;
 				case UPDATE:
-					count = getEmailDAC().updateEmail(email, response);
+					count = emailDAC.updateEmail(email, response);
+					if (count > 0)
+					{
+						Status status = new Status();
+						status.setStatus(StatusEnum.ACTIVE);
+						List<Status> statusList = new new ArrayList<Status>();
+						count = StatusDACD.maintainStatusAssociations(email.getStatus(), response, email.getId(), null, AcaoEnum.UPDATE , UserId, empId, TabelaEnum.EMAIL, statusDAC, historicoDAC);
+					}
 					break;
 				case DELETE:
-					count = getEmailDAC().deleteEmail(email, response);
-					break;
-				default:
-					if (LOG.isDebugEnabled())
-					{
-						LOG.debug("ModelAction for Email missing!");
-					}
+
+						Status status = new Status();
+						status.setStatus(StatusEnum.INACTIVE);
+						List<Status> statusList = new new ArrayList<Status>();
+						count = StatusDACD.maintainStatusAssociations(statusList, response, email.getId(), null, AcaoEnum.DELETE , UserId, empId, TabelaEnum.EMAIL, statusDAC, historicoDAC);
+
 					break;
 			}
 		}
-		if (count > 0)
-		{
-			Status status = new Status();
-			status.setStatus(StatusEnum.ACTIVE);
-			List<Status> statusList = new new ArrayList<Status>();
-			count = StatusDACD.maintainStatusAssociations(statusList, response, count, type, emailList, tabelaEnum);
-		}
+
 
 		return count;
 	}

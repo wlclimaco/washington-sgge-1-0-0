@@ -3,6 +3,11 @@ package com.prosperitasglobal.sendsolv.dacd.mybatis;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.prosperitasglobal.sendsolv.dac.IEmailDAC;
+import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
+import com.prosperitasglobal.sendsolv.dac.ISociosDAC;
+import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
+
 /**
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
  * passed into the methods. Nothing injected.
@@ -23,9 +28,9 @@ public final class SociosDACD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static void maintainSocioAssociations(List<Socio> socioList,
+	public static Integer maintainSocioAssociations(List<Socio> socioList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum)
+			TabelaEnum tabelaEnum,ISociosDAC socioDAC,IStatusDAC statusDAC,IHistoricoDAC historicoDAC,Integer empId,String UserId)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
@@ -46,31 +51,33 @@ public final class SociosDACD extends SqlSessionDaoSupport
 			switch (socio.getModelAction())
 			{
 				case INSERT:
-					count = getSocioDAC().insertSocio(socio,
+					count = socioDAC.insertSocio(socio,
 							"insertSocio", response);
+					if (count > 0)
+					{
+						Status status = new Status();
+						status.setStatus(StatusEnum.ACTIVE);
+						List<Status> statusList = new new ArrayList<Status>();
+						count = StatusDACD.maintainStatusAssociations(statusList, response, count, null, AcaoEnum.INSERT , UserId, empId, TabelaEnum.SOCIO, statusDAC, historicoDAC);
+					}
 					break;
 				case UPDATE:
-					count = getSocioDAC().updateSocio(socio, response);
+					count = socioDAC.updateSocio(socio, response);
+					if (count > 0)
+					{
+						count = StatusDACD.maintainStatusAssociations(socio.getStatus(), response, socio.getId(), null, AcaoEnum.UPDATE , UserId, empId, TabelaEnum.SOCIO, statusDAC, historicoDAC);
+					}
 					break;
 				case DELETE:
-					count = getSocioDAC().deleteSocio(socio, response);
-					break;
-				default:
-					if (LOG.isDebugEnabled())
-					{
-						LOG.debug("ModelAction for Socio missing!");
-					}
+
+						Status status = new Status();
+						status.setStatus(StatusEnum.ACTIVE);
+						List<Status> statusList = new new ArrayList<Status>();
+						count = StatusDACD.maintainStatusAssociations(statusList, response, socio.getId(), null, AcaoEnum.DELETE , UserId, empId, TabelaEnum.SOCIO, statusDAC, historicoDAC);
+
 					break;
 			}
 		}
-		if (count > 0)
-		{
-			Status status = new Status();
-			status.setStatus(StatusEnum.ACTIVE);
-			List<Status> statusList = new new ArrayList<Status>();
-			count = StatusDACD.maintainStatusAssociations(statusList, response, count, type, socioList, tabelaEnum);
-		}
-
 		return count;
 	}
 }

@@ -2,8 +2,6 @@ package com.prosperitasglobal.sendsolv.model;
 
 import java.util.List;
 
-import com.qat.framework.model.QATModel;
-
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -19,6 +17,8 @@ public class ModelCosmeDamiao extends QATModel
 	private AcaoEnum acaoType;
 
 	private TabelaEnum tabelaEnum;
+
+	private Integer emprId;
 
 	private List<Status> statusList;
 
