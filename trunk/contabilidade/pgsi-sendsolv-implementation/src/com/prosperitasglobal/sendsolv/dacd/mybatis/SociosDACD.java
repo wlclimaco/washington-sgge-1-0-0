@@ -3,10 +3,19 @@ package com.prosperitasglobal.sendsolv.dacd.mybatis;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.prosperitasglobal.sendsolv.dac.IEmailDAC;
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+
 import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.ISociosDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
+import com.prosperitasglobal.sendsolv.model.AcaoEnum;
+import com.prosperitasglobal.sendsolv.model.Socio;
+import com.prosperitasglobal.sendsolv.model.Status;
+import com.prosperitasglobal.sendsolv.model.StatusEnum;
+import com.prosperitasglobal.sendsolv.model.TabelaEnum;
+import com.prosperitasglobal.sendsolv.model.TypeEnum;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
@@ -30,7 +39,8 @@ public final class SociosDACD extends SqlSessionDaoSupport
 	@SuppressWarnings("unchecked")
 	public static Integer maintainSocioAssociations(List<Socio> socioList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum,ISociosDAC socioDAC,IStatusDAC statusDAC,IHistoricoDAC historicoDAC,Integer empId,String UserId)
+			TabelaEnum tabelaEnum, ISociosDAC socioDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
+			Integer empId, String UserId)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
@@ -57,23 +67,31 @@ public final class SociosDACD extends SqlSessionDaoSupport
 					{
 						Status status = new Status();
 						status.setStatus(StatusEnum.ACTIVE);
-						List<Status> statusList = new new ArrayList<Status>();
-						count = StatusDACD.maintainStatusAssociations(statusList, response, count, null, AcaoEnum.INSERT , UserId, empId, TabelaEnum.SOCIO, statusDAC, historicoDAC);
+						List<Status> statusList = new ArrayList<Status>();
+						count =
+								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
+										AcaoEnum.INSERT, UserId, empId, TabelaEnum.SOCIO, statusDAC, historicoDAC);
 					}
 					break;
 				case UPDATE:
 					count = socioDAC.updateSocio(socio, response);
 					if (count > 0)
 					{
-						count = StatusDACD.maintainStatusAssociations(socio.getStatus(), response, socio.getId(), null, AcaoEnum.UPDATE , UserId, empId, TabelaEnum.SOCIO, statusDAC, historicoDAC);
+						count =
+								StatusDACD
+										.maintainStatusAssociations(socio.getStatusList(), response, socio.getId(),
+												null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.SOCIO, statusDAC,
+												historicoDAC);
 					}
 					break;
 				case DELETE:
 
-						Status status = new Status();
-						status.setStatus(StatusEnum.ACTIVE);
-						List<Status> statusList = new new ArrayList<Status>();
-						count = StatusDACD.maintainStatusAssociations(statusList, response, socio.getId(), null, AcaoEnum.DELETE , UserId, empId, TabelaEnum.SOCIO, statusDAC, historicoDAC);
+					Status status = new Status();
+					status.setStatus(StatusEnum.ACTIVE);
+					List<Status> statusList = new ArrayList<Status>();
+					count =
+							StatusDACD.maintainStatusAssociations(statusList, response, socio.getId(), null,
+									AcaoEnum.DELETE, UserId, empId, TabelaEnum.SOCIO, statusDAC, historicoDAC);
 
 					break;
 			}

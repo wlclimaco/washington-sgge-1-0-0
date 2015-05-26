@@ -3,9 +3,19 @@ package com.prosperitasglobal.sendsolv.dacd.mybatis;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+
 import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.ISalariosDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
+import com.prosperitasglobal.sendsolv.model.AcaoEnum;
+import com.prosperitasglobal.sendsolv.model.Salario;
+import com.prosperitasglobal.sendsolv.model.Status;
+import com.prosperitasglobal.sendsolv.model.StatusEnum;
+import com.prosperitasglobal.sendsolv.model.TabelaEnum;
+import com.prosperitasglobal.sendsolv.model.TypeEnum;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
@@ -57,22 +67,29 @@ public final class SalarioDACD extends SqlSessionDaoSupport
 					{
 						Status status = new Status();
 						status.setStatus(StatusEnum.ACTIVE);
-						List<Status> statusList = new new ArrayList<Status>();
-						count = StatusDACD.maintainStatusAssociations(statusList, response, count, null, AcaoEnum.INSERT, UserId, empId, TabelaEnum.SALARIO, statusDAC, historicoDAC);
+						List<Status> statusList = new ArrayList<Status>();
+						count =
+								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
+										AcaoEnum.INSERT, UserId, empId, TabelaEnum.SALARIO, statusDAC, historicoDAC);
 					}
 					break;
 				case UPDATE:
 					count = salarioDAC.updateSalario(salario, response);
 					if (count > 0)
 					{
-						count = StatusDACD.maintainStatusAssociations(salario.getStatus(), response, salario.getId(), null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.SALARIO, statusDAC, historicoDAC);
+						count =
+								StatusDACD.maintainStatusAssociations(salario.getStatusList(), response,
+										salario.getId(), null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.SALARIO,
+										statusDAC, historicoDAC);
 					}
 					break;
 				case DELETE:
 					Status status = new Status();
 					status.setStatus(StatusEnum.INACTIVE);
-					List<Status> statusList = new new ArrayList<Status>();
-					count = StatusDACD.maintainStatusAssociations(salario.getStatus(), response, salario.getId(), null, AcaoEnum.DELETE, UserId, empId, TabelaEnum.SALARIO, statusDAC, historicoDAC);
+					List<Status> statusList = new ArrayList<Status>();
+					count =
+							StatusDACD.maintainStatusAssociations(statusList, response, salario.getId(), null,
+									AcaoEnum.DELETE, UserId, empId, TabelaEnum.SALARIO, statusDAC, historicoDAC);
 					break;
 
 			}

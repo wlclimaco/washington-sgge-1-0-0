@@ -2,19 +2,16 @@ package com.prosperitasglobal.sendsolv.bai.impl;
 
 import java.util.List;
 
-import javax.xml.ws.Response;
-
 import org.slf4j.LoggerFactory;
 
 import com.prosperitasglobal.sendsolv.bac.ICadastroBAC;
+import com.prosperitasglobal.sendsolv.bai.ICadastrosBAI;
 import com.prosperitasglobal.sendsolv.model.Cfop;
 import com.prosperitasglobal.sendsolv.model.Cidade;
 import com.prosperitasglobal.sendsolv.model.Cnae;
 import com.prosperitasglobal.sendsolv.model.Csosn;
-import com.prosperitasglobal.sendsolv.model.Empresa;
 import com.prosperitasglobal.sendsolv.model.Estado;
 import com.prosperitasglobal.sendsolv.model.Regime;
-import com.prosperitasglobal.sendsolv.model.Status;
 import com.prosperitasglobal.sendsolv.model.UniMed;
 import com.prosperitasglobal.sendsolv.model.request.CfopInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.CfopMaintenanceRequest;
@@ -37,8 +34,6 @@ import com.prosperitasglobal.sendsolv.model.response.CsosnResponse;
 import com.prosperitasglobal.sendsolv.model.response.EstadoResponse;
 import com.prosperitasglobal.sendsolv.model.response.RegimeResponse;
 import com.prosperitasglobal.sendsolv.model.response.UniMedResponse;
-import com.qat.framework.model.Message.MessageLevel;
-import com.qat.framework.model.Message.MessageSeverity;
 import com.qat.framework.model.MessageInfo;
 import com.qat.framework.model.QATModel.PersistanceActionEnum;
 import com.qat.framework.model.UserContext;
@@ -53,7 +48,7 @@ import com.qat.framework.validation.ValidationUtil;
 /**
  * The Class CadastroBAIImpl.
  */
-public class CadastroBAIImpl implements ICadastroBAC
+public class CadastroBAIImpl implements ICadastrosBAI
 {
 	/** The Constant CLASS_NAME. */
 	private static final String CLASS_NAME = CadastroBAIImpl.class.getName();
@@ -123,7 +118,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	}
 
 	@Override
-	public InternalResultsResponse<Cidade> insertCidade(CidadeMaintenanceRequest request)
+	public CidadeResponse insertCidade(CidadeMaintenanceRequest request)
 	{
 		CidadeResponse response = new CidadeResponse();
 		try
@@ -139,7 +134,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	}
 
 	@Override
-	public InternalResultsResponse<Cidade> updateCidade(CidadeMaintenanceRequest request)
+	public CidadeResponse updateCidade(CidadeMaintenanceRequest request)
 	{
 		CidadeResponse response = new CidadeResponse();
 		try
@@ -155,7 +150,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	}
 
 	@Override
-	public InternalResponse deleteCidade(CidadeMaintenanceRequest request)
+	public CidadeResponse deleteCidade(CidadeMaintenanceRequest request)
 	{
 		CidadeResponse response = new CidadeResponse();
 		try
@@ -171,7 +166,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	}
 
 	@Override
-	public InternalResultsResponse<Cidade> fetchCidadeByRequest(CidadeInquiryRequest request)
+	public CidadeResponse fetchCidadeByRequest(CidadeInquiryRequest request)
 	{
 		CidadeResponse response = new CidadeResponse();
 		try
@@ -186,7 +181,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	}
 
 	@Override
-	public InternalResultsResponse<Estado> insertEstado(EstadoMaintenanceRequest request)
+	public EstadoResponse insertEstado(EstadoMaintenanceRequest request)
 	{
 		EstadoResponse response = new EstadoResponse();
 		try
@@ -202,7 +197,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	}
 
 	@Override
-	public InternalResultsResponse<Estado> updateEstado(EstadoMaintenanceRequest request)
+	public EstadoResponse updateEstado(EstadoMaintenanceRequest request)
 	{
 		EstadoResponse response = new EstadoResponse();
 		try
@@ -218,7 +213,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	}
 
 	@Override
-	public InternalResponse deleteEstado(EstadoMaintenanceRequest request)
+	public EstadoResponse deleteEstado(EstadoMaintenanceRequest request)
 	{
 		EstadoResponse response = new EstadoResponse();
 		try
@@ -234,7 +229,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	}
 
 	@Override
-	public InternalResultsResponse<Estado> fetchEstadoByRequest(EstadoInquiryRequest request)
+	public EstadoResponse fetchEstadoByRequest(EstadoInquiryRequest request)
 	{
 		EstadoResponse response = new EstadoResponse();
 		try
@@ -249,12 +244,12 @@ public class CadastroBAIImpl implements ICadastroBAC
 	}
 
 	@Override
-	public InternalResultsResponse<Cnae> insertCnae(CnaeMaintenanceRequest request)
+	public CnaeResponse insertCnae(CnaeMaintenanceRequest request)
 	{
-		CidadeResponse response = new CidadeResponse();
+		CnaeResponse response = new CnaeResponse();
 		try
 		{
-			response = processCidade(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
+			response = processCnae(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
 		}
 		catch (Exception ex)
 		{
@@ -265,7 +260,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	}
 
 	@Override
-	public InternalResultsResponse<Cnae> updateCnae(CnaeMaintenanceRequest request)
+	public CnaeResponse updateCnae(CnaeMaintenanceRequest request)
 	{
 		CnaeResponse response = new CnaeResponse();
 		try
@@ -281,7 +276,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	}
 
 	@Override
-	public InternalResponse deleteCnae(CnaeMaintenanceRequest request)
+	public CnaeResponse deleteCnae(CnaeMaintenanceRequest request)
 	{
 		CnaeResponse response = new CnaeResponse();
 		try
@@ -297,7 +292,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	}
 
 	@Override
-	public InternalResultsResponse<Cnae> fetchCnaeByRequest(CnaeInquiryRequest request)
+	public CnaeResponse fetchCnaeByRequest(CnaeInquiryRequest request)
 	{
 		CnaeResponse response = new CnaeResponse();
 		try
@@ -312,7 +307,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	}
 
 	@Override
-	public InternalResultsResponse<Regime> insertRegime(RegimeMaintenanceRequest request)
+	public RegimeResponse insertRegime(RegimeMaintenanceRequest request)
 	{
 		RegimeResponse response = new RegimeResponse();
 		try
@@ -328,7 +323,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	}
 
 	@Override
-	public InternalResultsResponse<Regime> updateRegime(RegimeMaintenanceRequest request)
+	public RegimeResponse updateRegime(RegimeMaintenanceRequest request)
 	{
 		RegimeResponse response = new RegimeResponse();
 		try
@@ -344,7 +339,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	}
 
 	@Override
-	public InternalResponse deleteRegime(RegimeMaintenanceRequest request)
+	public RegimeResponse deleteRegime(RegimeMaintenanceRequest request)
 	{
 		RegimeResponse response = new RegimeResponse();
 		try
@@ -360,7 +355,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	}
 
 	@Override
-	public InternalResultsResponse<Regime> fetchRegimeByRequest(RegimeInquiryRequest request)
+	public RegimeResponse fetchRegimeByRequest(RegimeInquiryRequest request)
 	{
 		RegimeResponse response = new RegimeResponse();
 		try
@@ -375,7 +370,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	}
 
 	@Override
-	public InternalResultsResponse<Csosn> insertCsosn(CsosnMaintenanceRequest request)
+	public CsosnResponse insertCsosn(CsosnMaintenanceRequest request)
 	{
 		CsosnResponse response = new CsosnResponse();
 		try
@@ -391,7 +386,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	}
 
 	@Override
-	public InternalResultsResponse<Csosn> updateCsosn(CsosnMaintenanceRequest request)
+	public CsosnResponse updateCsosn(CsosnMaintenanceRequest request)
 	{
 		CsosnResponse response = new CsosnResponse();
 		try
@@ -407,7 +402,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	}
 
 	@Override
-	public InternalResponse deleteCsosn(CsosnMaintenanceRequest request)
+	public CsosnResponse deleteCsosn(CsosnMaintenanceRequest request)
 	{
 		CsosnResponse response = new CsosnResponse();
 		try
@@ -423,12 +418,12 @@ public class CadastroBAIImpl implements ICadastroBAC
 	}
 
 	@Override
-	public InternalResultsResponse<Csosn> fetchCsosnByRequest(CsosnInquiryRequest request)
+	public CsosnResponse fetchCsosnByRequest(CsosnInquiryRequest request)
 	{
 		CsosnResponse response = new CsosnResponse();
 		try
 		{
-			fetchPaged(request, response);
+			fetchCsosn(request, response);
 		}
 		catch (Exception ex)
 		{
@@ -438,7 +433,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	}
 
 	@Override
-	public InternalResultsResponse<UniMed> insertCsosn(UniMedMaintenanceRequest request)
+	public UniMedResponse insertCsosn(UniMedMaintenanceRequest request)
 	{
 		UniMedResponse response = new UniMedResponse();
 		try
@@ -454,7 +449,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	}
 
 	@Override
-	public InternalResultsResponse<UniMed> updateCsosn(UniMedMaintenanceRequest request)
+	public UniMedResponse updateCsosn(UniMedMaintenanceRequest request)
 	{
 		UniMedResponse response = new UniMedResponse();
 		try
@@ -470,7 +465,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	}
 
 	@Override
-	public InternalResponse deleteCsosn(UniMedMaintenanceRequest request)
+	public UniMedResponse deleteCsosn(UniMedMaintenanceRequest request)
 	{
 		UniMedResponse response = new UniMedResponse();
 		try
@@ -486,7 +481,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	}
 
 	@Override
-	public InternalResultsResponse<UniMed> fetchCsosnByRequest(UniMedInquiryRequest request)
+	public UniMedResponse fetchCsosnByRequest(UniMedInquiryRequest request)
 	{
 		UniMedResponse response = new UniMedResponse();
 		try
@@ -501,7 +496,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	}
 
 	@Override
-	public InternalResultsResponse<Cfop> insertCfop(CfopMaintenanceRequest request)
+	public CfopResponse insertCfop(CfopMaintenanceRequest request)
 	{
 		CfopResponse response = new CfopResponse();
 		try
@@ -517,12 +512,12 @@ public class CadastroBAIImpl implements ICadastroBAC
 	}
 
 	@Override
-	public InternalResultsResponse<Cfop> updateCfop(CfopMaintenanceRequest request)
+	public CfopResponse updateCfop(CfopMaintenanceRequest request)
 	{
 		CfopResponse response = new CfopResponse();
 		try
 		{
-			response = processCfop(ValidationContextIndicator.UPDATE, PersistanceActionEnum.UPDADE, request);
+			response = processCfop(ValidationContextIndicator.UPDATE, PersistanceActionEnum.UPDATE, request);
 		}
 		catch (Exception ex)
 		{
@@ -533,7 +528,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	}
 
 	@Override
-	public InternalResultsResponse<Cfop> deleteCfop(CfopMaintenanceRequest request)
+	public CfopResponse deleteCfop(CfopMaintenanceRequest request)
 	{
 		CfopResponse response = new CfopResponse();
 		try
@@ -549,7 +544,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	}
 
 	@Override
-	public InternalResultsResponse<Cfop> fetchCfopByRequest(CfopInquiryRequest request)
+	public CfopResponse fetchCfopByRequest(CfopInquiryRequest request)
 	{
 		CfopResponse response = new CfopResponse();
 		try
@@ -572,16 +567,57 @@ public class CadastroBAIImpl implements ICadastroBAC
 	 * @param copyOver the copy over
 	 * @return the response
 	 */
-	private Response handleReturn(Response response, InternalResponse internalResponse,
+	private CidadeResponse handleReturnCidade(CidadeResponse response, InternalResponse internalResponse,
 			List<MessageInfo> messages, boolean copyOver)
 	{
-		// In the case there was an Optimistic Locking error, add the specific message
-		if (!ValidationUtil.isNull(internalResponse) && !ValidationUtil.isNull(internalResponse.getStatus())
-				&& Status.OptimisticLockingError.equals(internalResponse.getStatus()))
-		{
-			messages.add(new MessageInfo(PROSPERITASGLOBAL_BASE_OL_ERROR, MessageSeverity.Error,
-					MessageLevel.Object));
-		}
+
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, messages, copyOver);
+		return response;
+	}
+
+	private EstadoResponse handleReturnEstado(EstadoResponse response, InternalResponse internalResponse,
+			List<MessageInfo> messages, boolean copyOver)
+	{
+
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, messages, copyOver);
+		return response;
+	}
+
+	private CnaeResponse handleReturnCnae(CnaeResponse response, InternalResponse internalResponse,
+			List<MessageInfo> messages, boolean copyOver)
+	{
+
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, messages, copyOver);
+		return response;
+	}
+
+	private RegimeResponse handleReturnRegime(RegimeResponse response, InternalResponse internalResponse,
+			List<MessageInfo> messages, boolean copyOver)
+	{
+
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, messages, copyOver);
+		return response;
+	}
+
+	private CsosnResponse handleReturnCsosn(CsosnResponse response, InternalResponse internalResponse,
+			List<MessageInfo> messages, boolean copyOver)
+	{
+
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, messages, copyOver);
+		return response;
+	}
+
+	private UniMedResponse handleReturnUniMed(UniMedResponse response, InternalResponse internalResponse,
+			List<MessageInfo> messages, boolean copyOver)
+	{
+
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, messages, copyOver);
+		return response;
+	}
+
+	private CfopResponse handleReturnCfop(CfopResponse response, InternalResponse internalResponse,
+			List<MessageInfo> messages, boolean copyOver)
+	{
 
 		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, messages, copyOver);
 		return response;
@@ -605,7 +641,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 		}
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return (CidadeResponse)handleReturn((Response)response, internalResponse, context.getMessages(), true);
+		return handleReturnCidade(response, internalResponse, context.getMessages(), true);
 	}
 
 	/**
@@ -657,7 +693,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 		}
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return (EstadoResponse)handleReturn(response, internalResponse, context.getMessages(), true);
+		return handleReturnEstado(response, internalResponse, context.getMessages(), true);
 	}
 
 	/**
@@ -709,7 +745,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 		}
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return (CnaeResponse)handleReturn(response, internalResponse, context.getMessages(), true);
+		return handleReturnCnae(response, internalResponse, context.getMessages(), true);
 	}
 
 	/**
@@ -761,7 +797,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 		}
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return (RegimeResponse)handleReturn(response, internalResponse, context.getMessages(), true);
+		return handleReturnRegime(response, internalResponse, context.getMessages(), true);
 	}
 
 	/**
@@ -813,7 +849,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 		}
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return (CsosnResponse)handleReturn(response, internalResponse, context.getMessages(), true);
+		return handleReturnCsosn(response, internalResponse, context.getMessages(), true);
 	}
 
 	/**
@@ -865,7 +901,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 		}
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return (UniMedResponse)handleReturn(response, internalResponse, context.getMessages(), true);
+		return handleReturnUniMed(response, internalResponse, context.getMessages(), true);
 	}
 
 	/**
@@ -917,7 +953,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 		}
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return (CfopResponse)handleReturn(response, internalResponse, context.getMessages(), true);
+		return handleReturnCfop(response, internalResponse, context.getMessages(), true);
 	}
 
 	/**
@@ -953,7 +989,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	// ******************************************
 	private void fetchCidade(CidadeInquiryRequest request, CidadeResponse response)
 	{
-		InternalResultsResponse<Empresa> internalResponse = new InternalResultsResponse<Empresa>();
+		InternalResultsResponse<Cidade> internalResponse = new InternalResultsResponse<Cidade>();
 
 		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
 		{
@@ -971,7 +1007,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	// ******************************************
 	private void fetchEstado(EstadoInquiryRequest request, EstadoResponse response)
 	{
-		InternalResultsResponse<Empresa> internalResponse = new InternalResultsResponse<Empresa>();
+		InternalResultsResponse<Estado> internalResponse = new InternalResultsResponse<Estado>();
 
 		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
 		{
@@ -989,7 +1025,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	// ******************************************
 	private void fetchCnae(CnaeInquiryRequest request, CnaeResponse response)
 	{
-		InternalResultsResponse<Empresa> internalResponse = new InternalResultsResponse<Empresa>();
+		InternalResultsResponse<Cnae> internalResponse = new InternalResultsResponse<Cnae>();
 
 		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
 		{
@@ -1007,7 +1043,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	// ******************************************
 	private void fetchRegime(RegimeInquiryRequest request, RegimeResponse response)
 	{
-		InternalResultsResponse<Empresa> internalResponse = new InternalResultsResponse<Empresa>();
+		InternalResultsResponse<Regime> internalResponse = new InternalResultsResponse<Regime>();
 
 		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
 		{
@@ -1025,7 +1061,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	// ******************************************
 	private void fetchCsosn(CsosnInquiryRequest request, CsosnResponse response)
 	{
-		InternalResultsResponse<Empresa> internalResponse = new InternalResultsResponse<Empresa>();
+		InternalResultsResponse<Csosn> internalResponse = new InternalResultsResponse<Csosn>();
 
 		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
 		{
@@ -1043,7 +1079,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	// ******************************************
 	private void fetchUniMed(UniMedInquiryRequest request, UniMedResponse response)
 	{
-		InternalResultsResponse<Empresa> internalResponse = new InternalResultsResponse<Empresa>();
+		InternalResultsResponse<UniMed> internalResponse = new InternalResultsResponse<UniMed>();
 
 		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
 		{
@@ -1061,7 +1097,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 	// ******************************************
 	private void fetchCfop(CfopInquiryRequest request, CfopResponse response)
 	{
-		InternalResultsResponse<Empresa> internalResponse = new InternalResultsResponse<Empresa>();
+		InternalResultsResponse<Cfop> internalResponse = new InternalResultsResponse<Cfop>();
 
 		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
 		{

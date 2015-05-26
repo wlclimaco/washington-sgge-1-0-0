@@ -1,5 +1,14 @@
 package com.prosperitasglobal.sendsolv.dacd.mybatis;
 
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+
+import com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.response.InternalResponse.Status;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+
 /**
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
  * passed into the methods. Nothing injected.
@@ -67,6 +76,7 @@ public final class PagedResultsDACD extends SqlSessionDaoSupport
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public static void fetchObjectsByRequestEmpresa(SqlSession sqlSession, EmpresaInquiryRequest request,
 			String countStatement,
 			String fetchPagedStatement, InternalResultsResponse<?> response)

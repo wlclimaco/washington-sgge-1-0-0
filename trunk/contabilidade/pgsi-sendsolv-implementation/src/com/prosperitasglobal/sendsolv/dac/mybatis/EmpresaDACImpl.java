@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.ICnaeDAC;
 import com.prosperitasglobal.sendsolv.dac.IDocumentoDAC;
 import com.prosperitasglobal.sendsolv.dac.IEmailDAC;
@@ -17,11 +21,21 @@ import com.prosperitasglobal.sendsolv.dacd.mybatis.CnaeDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.DocumentosDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.EmailDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.EnderecoDACD;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.HistoricoDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.SociosDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.StatusDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.TelefoneDACD;
+import com.prosperitasglobal.sendsolv.model.AcaoEnum;
+import com.prosperitasglobal.sendsolv.model.Empresa;
+import com.prosperitasglobal.sendsolv.model.Status;
+import com.prosperitasglobal.sendsolv.model.StatusEnum;
+import com.prosperitasglobal.sendsolv.model.TabelaEnum;
+import com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class EmpresaDACImpl.
@@ -215,35 +229,43 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 
 		insertCount +=
 				EnderecoDACD.maintainEnderecoAssociations(empresa.getEnderecos(), response, insertCount, null, null,
-						null,getEnderecoDAC(),getStatusDAC(),getHistoricoDAC(),empresa.getId(),empresa.getUserId());
+						null, getEnderecoDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+						empresa.getCreateUser());
 
 		insertCount +=
-				CnaeDACD.maintainCnaeAssociations(empresa.getCnaes, response, insertCount, null, null,
-						null,getCnaeDAC(),getStatusDAC(),getHistoricoDAC(),empresa.getId(),empresa.getUserId());
+				CnaeDACD.maintainCnaeAssociations(empresa.getCnaes(), response, insertCount, null, null,
+						null, getCnaeDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(), empresa.getCreateUser());
 
 		insertCount +=
-				EmailDACD.maintainEmailAssociations(empresa.getEmails, response, insertCount, null, null,
-						null,getEmailDAC(),getStatusDAC(),getHistoricoDAC(),empresa.getId(),empresa.getUserId());
+				EmailDACD.maintainEmailAssociations(empresa.getEmails(), response, insertCount, null, null,
+						null, getEmailDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+						empresa.getCreateUser());
 
 		insertCount +=
-				TelefoneDACD.maintainTelefoneAssociations(empresa.getTelefones, response, insertCount, null, null,
-						null,getTelefoneDAC(),getStatusDAC(),getHistoricoDAC(),empresa.getId(),empresa.getUserId());
+				TelefoneDACD.maintainTelefoneAssociations(empresa.getTelefones(), response, insertCount, null, null,
+						null, getTelefoneDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+						empresa.getCreateUser());
 
 		insertCount +=
-				DocumentosDACD.maintainDocumentoAssociations(empresa.getDocumentos, response, insertCount, null, null,
-						null,getDocumentoDAC(),getStatusDAC(),getHistoricoDAC(),empresa.getId(),empresa.getUserId());
+				DocumentosDACD.maintainDocumentoAssociations(empresa.getDocumentos(), response, insertCount, null,
+						null,
+						null, getDocumentoDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+						empresa.getCreateUser());
 
 		insertCount +=
-				SociosDACD.maintainSocioAssociations(empresa.getSocios, response, insertCount, null, null,
-						null,getSocioDAC(),getStatusDAC(),getHistoricoDAC(),empresa.getId(),empresa.getUserId());
-
+				SociosDACD.maintainSocioAssociations(empresa.getSocios(), response, insertCount, null, null,
+						null, getSocioDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+						empresa.getCreateUser());
 
 		if (insertCount > 0)
 		{
 			Status status = new Status();
 			status.setStatus(StatusEnum.ACTIVE);
-			List<Status> statusList = new new ArrayList<Status>();
-			count = StatusDACD.maintainStatusAssociations(statusList, response, empresa.getId(), null, AcaoType.INSERT, empresa.getUserId(), empresa.getId(), TabelaEnum.EMPRESA, getStatusDAC(), getHistoricoDAC());
+			List<Status> statusList = new ArrayList<Status>();
+			insertCount =
+					StatusDACD.maintainStatusAssociations(statusList, response, empresa.getId(), null, AcaoEnum.INSERT,
+							empresa.getCreateUser(), empresa.getId(), TabelaEnum.EMPRESA, getStatusDAC(),
+							getHistoricoDAC());
 
 		}
 
@@ -284,35 +306,40 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		// Next traverse the object graph and "maintain" the associations
 		updateCount +=
 				EnderecoDACD.maintainEnderecoAssociations(empresa.getEnderecos(), response, updateCount, null, null,
-						null,getEnderecoDAC(),getStatusDAC(),getHistoricoDAC(),empresa.getId(),empresa.getUserId());
+						null, getEnderecoDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+						empresa.getModifyUser());
 
 		updateCount +=
-				CnaeDACD.maintainCnaeAssociations(empresa.getCnaes, response, updateCount, null, null,
-						null,getCnaeDAC(),getStatusDAC(),getHistoricoDAC(),empresa.getId(),empresa.getUserId());
+				CnaeDACD.maintainCnaeAssociations(empresa.getCnaes(), response, updateCount, null, null,
+						null, getCnaeDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(), empresa.getModifyUser());
 
 		updateCount +=
-				EmailDACD.maintainEmailAssociations(empresa.getEmails, response, updateCount, null, null,
-						null,getEmailDAC(),getStatusDAC(),getHistoricoDAC(),empresa.getId(),empresa.getUserId());
+				EmailDACD.maintainEmailAssociations(empresa.getEmails(), response, updateCount, null, null,
+						null, getEmailDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+						empresa.getModifyUser());
 
 		updateCount +=
-				TelefoneDACD.maintainTelefoneAssociations(empresa.getTelefones, response, updateCount, null, null,
-						null,getTelefoneDAC(),getStatusDAC(),getHistoricoDAC(),empresa.getId(),empresa.getUserId());
+				TelefoneDACD.maintainTelefoneAssociations(empresa.getTelefones(), response, updateCount, null, null,
+						null, getTelefoneDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+						empresa.getModifyUser());
 
 		updateCount +=
-				DocumentosDACD.maintainDocumentoAssociations(empresa.getDocumentos, response, updateCount, null, null,
-						null,getDocumentoDAC(),getStatusDAC(),getHistoricoDAC(),empresa.getId(),empresa.getUserId());
+				DocumentosDACD.maintainDocumentoAssociations(empresa.getDocumentos(), response, updateCount, null,
+						null,
+						null, getDocumentoDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+						empresa.getModifyUser());
 
 		updateCount +=
-				SociosDACD.maintainSocioAssociations(empresa.getSocios, response, updateCount, null, null,
-						null,getSocioDAC(),getStatusDAC(),getHistoricoDAC(),empresa.getId(),empresa.getUserId());
-
+				SociosDACD.maintainSocioAssociations(empresa.getSocios(), response, updateCount, null, null,
+						null, getSocioDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+						empresa.getModifyUser());
 
 		if (updateCount > 0)
 		{
-			Status status = new Status();
-			status.setStatus(StatusEnum.ACTIVE);
-			List<Status> statusList = new new ArrayList<Status>();
-			count = StatusDACD.maintainStatusAssociations(empresa.getStatus(), response, empresa.getId(), null, AcaoType.INSERT, empresa.getUserId(), empresa.getId(), TabelaEnum.EMPRESA, getStatusDAC(), getHistoricoDAC());
+			updateCount =
+					StatusDACD.maintainStatusAssociations(empresa.getStatusList(), response, empresa.getId(), null,
+							AcaoEnum.INSERT, empresa.getModifyUser(), empresa.getId(), TabelaEnum.EMPRESA,
+							getStatusDAC(), getHistoricoDAC());
 
 		}
 
@@ -336,23 +363,25 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 	{
 		InternalResponse response = new InternalResponse();
 		QATMyBatisDacHelper.doRemove(getSqlSession(), EMPRESA_STMT_DELETE, empresa, response);
+		Integer updateCount;
+		// updateCount +=
+		// EnderecoDACD.maintainHistoricoAssociations(empresa.getEStatus, response, insertCount, null, null,
+		// null);
 
-	//	updateCount +=
-	//			EnderecoDACD.maintainHistoricoAssociations(empresa.getEStatus, response, insertCount, null, null,
-	//					null);
-
-
-			Status status = new Status();
-			status.setStatus(StatusEnum.INACTIVE);
-			List<Status> statusList = new new ArrayList<Status>();
-			count = StatusDACD.maintainStatusAssociations(statusList, response, empresa.getId(), null, AcaoType.DELETE, empresa.getUserId(), empresa.getId(), TabelaEnum.EMPRESA, getStatusDAC(), getHistoricoDAC());
-
-
+		Status status = new Status();
+		status.setStatus(StatusEnum.INACTIVE);
+		List<Status> statusList = new ArrayList<Status>();
+		updateCount =
+				StatusDACD
+						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, empresa.getId(),
+								null, AcaoEnum.DELETE,
+								empresa.getCreateUser(), empresa.getId(), TabelaEnum.EMPRESA, getStatusDAC(),
+								getHistoricoDAC());
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
 		{
-			response.addResult(empresa);
+			((InternalResultsResponse<Empresa>)response).addResult(empresa);
 		}
 
 		return response;
@@ -377,7 +406,7 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 	 * .model.request.PagedInquiryRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Empresa> fetchEmpresaByRequest(PagedInquiryRequest request)
+	public InternalResultsResponse<Empresa> fetchEmpresaByRequest(EmpresaInquiryRequest request)
 	{
 		InternalResultsResponse<Empresa> response = new InternalResultsResponse<Empresa>();
 

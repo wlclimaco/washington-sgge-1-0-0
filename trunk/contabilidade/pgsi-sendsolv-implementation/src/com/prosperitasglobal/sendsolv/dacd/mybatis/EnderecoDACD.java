@@ -24,27 +24,6 @@ import com.qat.framework.validation.ValidationUtil;
 public final class EnderecoDACD extends SqlSessionDaoSupport
 {
 
-	/** The Constant ZERO. */
-	private static final Integer ZERO = 0;
-
-	private IEnderecoDAC enderecoDAC;
-
-	/**
-	 * @return the enderecoDAC
-	 */
-	public IEnderecoDAC getEnderecoDAC()
-	{
-		return enderecoDAC;
-	}
-
-	/**
-	 * @param enderecoDAC the enderecoDAC to set
-	 */
-	public setEnderecoDAC(IEnderecoDAC enderecoDAC)
-	{
-		this.enderecoDAC = enderecoDAC;
-	}
-
 	/**
 	 * Fetch objects by request.
 	 *
@@ -57,7 +36,8 @@ public final class EnderecoDACD extends SqlSessionDaoSupport
 	@SuppressWarnings("unchecked")
 	public static Integer maintainEnderecoAssociations(List<Endereco> enderecoList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum,IEnderecoDAC enderecoDAC,IStatusDAC statusDAC,IHistoricoDAC historicoDAC,Integer empId,String UserId)
+			TabelaEnum tabelaEnum, IEnderecoDAC enderecoDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
+			Integer empId, String UserId)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
@@ -84,30 +64,36 @@ public final class EnderecoDACD extends SqlSessionDaoSupport
 					{
 						Status status = new Status();
 						status.setStatus(StatusEnum.ACTIVE);
-						List<Status> statusList = new new ArrayList<Status>();
-						count = StatusDACD.maintainStatusAssociations(statusList, response, count, null, AcaoEnum.INSERT, UserId, empId, TabelaEnum.ENDERECO, statusDAC, historicoDAC);
+						List<Status> statusList = new ArrayList<Status>();
+						count =
+								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
+										AcaoEnum.INSERT, UserId, empId, TabelaEnum.ENDERECO, statusDAC, historicoDAC);
 					}
 					break;
 				case UPDATE:
 					count = enderecoDAC.updateEndereco(endereco, response);
 					if (count > 0)
 					{
-						count = StatusDACD.maintainStatusAssociations(endereco.getStatus(), response, endereco.getId(), null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.ENDERECO, statusDAC, historicoDAC);
+						count =
+								StatusDACD.maintainStatusAssociations(endereco.getStatusList(), response,
+										endereco.getId(), null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.ENDERECO,
+										statusDAC, historicoDAC);
 					}
 					break;
 				case DELETE:
 
-						Status status = new Status();
-						status.setStatus(StatusEnum.INACTIVE);
-						List<Status> statusList = new new ArrayList<Status>();
-						count = StatusDACD.maintainStatusAssociations(endereco.getStatus(), response, endereco.getId(), null, AcaoEnum.DELETE, UserId, empId, TabelaEnum.ENDERECO, statusDAC, historicoDAC);
+					Status status = new Status();
+					status.setStatus(StatusEnum.INACTIVE);
+					List<Status> statusList = new ArrayList<Status>();
+					count =
+							StatusDACD.maintainStatusAssociations(statusList, response, endereco.getId(), null,
+									AcaoEnum.DELETE, UserId, empId, TabelaEnum.ENDERECO, statusDAC, historicoDAC);
 
 					break;
 				default:
 
 			}
 		}
-
 
 		return count;
 	}

@@ -262,7 +262,7 @@ public class CadastroBACImpl implements ICadastroBAC
 	}
 
 	@Override
-	public InternalResultsResponse<Cfop> deleteCfop(CfopMaintenanceRequest request)
+	public InternalResponse deleteCfop(CfopMaintenanceRequest request)
 	{
 		return getCadastroDAC().deleteCfop(request.getCfop());
 	}
