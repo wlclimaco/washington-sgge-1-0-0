@@ -1,13 +1,8 @@
 package com.prosperitasglobal.sendsolv.model;
 
+import com.qat.framework.model.II18nEnum;
+import com.qat.framework.model.IIntegerEnum;
 
-/**
- * The Enum RiskLevelEnum.
- *
- * @author abarros
- * @version 1.0
- * @created 21-Jul-2014 10:00:07 AM
- */
 public enum AcaoEnum implements IIntegerEnum, II18nEnum
 {
 

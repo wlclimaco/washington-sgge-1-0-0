@@ -1,7 +1,5 @@
 package com.prosperitasglobal.sendsolv.model;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The Class Organization represents a main {@link Business} that is signed up to use PGSi services. It owns one or more
@@ -31,138 +29,67 @@ public class Profissao extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the number of locations.
-	 *
-	 * @return the number of locations
+	 * @return the id
 	 */
-	public Integer getNumberOfLocations()
+	public Integer getId()
 	{
-		return numberOfLocations;
+		return id;
 	}
 
 	/**
-	 * Sets the number of locations.
-	 *
-	 * @param numberOfLocations the number of locations
+	 * @param id the id to set
 	 */
-	public void setNumberOfLocations(Integer numberOfLocations)
+	public void setId(Integer id)
 	{
-		this.numberOfLocations = numberOfLocations;
+		this.id = id;
 	}
 
 	/**
-	 * Gets the is payroll centralized.
-	 *
-	 * @return the checks if is payroll centralized
+	 * @return the profissao
 	 */
-	public PayrollTypeEnum getIsPayrollCentralized()
+	public String getProfissao()
 	{
-		return isPayrollCentralized;
+		return profissao;
 	}
 
 	/**
-	 * Sets the is payroll centralized.
-	 *
-	 * @param isPayrollCentralized the checks if is payroll centralized
+	 * @param profissao the profissao to set
 	 */
-	public void setIsPayrollCentralized(PayrollTypeEnum isPayrollCentralized)
+	public void setProfissao(String profissao)
 	{
-		this.isPayrollCentralized = isPayrollCentralized;
+		this.profissao = profissao;
 	}
 
 	/**
-	 * Gets the is payroll centralized value.
-	 *
-	 * @return the checks if is payroll centralized value
+	 * @return the renda
 	 */
-	public Integer getIsPayrollCentralizedValue()
+	public Double getRenda()
 	{
-		if (isPayrollCentralized == null)
-		{
-			return null;
-		}
-
-		return isPayrollCentralized.getValue();
+		return renda;
 	}
 
 	/**
-	 * Sets the is payroll centralized value.
-	 *
-	 * @param isPayrollCentralized the checks if is payroll centralized value
+	 * @param renda the renda to set
 	 */
-	public void setIsPayrollCentralizedValue(Integer isPayrollCentralized)
+	public void setRenda(Double renda)
 	{
-		this.isPayrollCentralized = PayrollTypeEnum.enumForValue(isPayrollCentralized);
+		this.renda = renda;
 	}
 
 	/**
-	 * Gets the dba name.
-	 *
-	 * @return the dba name
+	 * @return the dataAdmissao
 	 */
-	public String getDbaName()
+	public Integer getDataAdmissao()
 	{
-		return dbaName;
+		return dataAdmissao;
 	}
 
 	/**
-	 * Sets the dba name.
-	 *
-	 * @param dbaName the dba name
+	 * @param dataAdmissao the dataAdmissao to set
 	 */
-	public void setDbaName(String dbaName)
+	public void setDataAdmissao(Integer dataAdmissao)
 	{
-		this.dbaName = dbaName;
-	}
-
-	/**
-	 * Gets the document list.
-	 *
-	 * @return the document list
-	 */
-	public List<Document> getDocumentList()
-	{
-		if (ValidationUtil.isNull(documentList))
-		{
-			setDocumentList(new ArrayList<Document>());
-		}
-
-		return documentList;
-	}
-
-	/**
-	 * Sets the document list.
-	 *
-	 * @param documentList the document list
-	 */
-	public void setDocumentList(List<Document> documentList)
-	{
-		this.documentList = documentList;
-	}
-
-	/**
-	 * Gets the location list.
-	 *
-	 * @return the location list
-	 */
-	public List<Location> getLocationList()
-	{
-		if (ValidationUtil.isNull(locationList))
-		{
-			setLocationList(new ArrayList<Location>());
-		}
-
-		return locationList;
-	}
-
-	/**
-	 * Sets the location list.
-	 *
-	 * @param locationList the location list
-	 */
-	public void setLocationList(List<Location> locationList)
-	{
-		this.locationList = locationList;
+		this.dataAdmissao = dataAdmissao;
 	}
 
 	/*
@@ -172,10 +99,13 @@ public class Profissao extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Organization [getNumberOfLocations()=" + getNumberOfLocations() + ", getIsPayrollCentralized()="
-				+ getIsPayrollCentralized() + ", getIsPayrollCentralizedValue()=" + getIsPayrollCentralizedValue()
-				+ ", getDbaName()=" + getDbaName() + ", getDocumentList()=" + getDocumentList()
-				+ ", getLocationList()=" + getLocationList() + ", toString()=" + super.toString() + "]";
+		return "Profissao [getId()=" + getId() + ", getProfissao()=" + getProfissao() + ", getRenda()=" + getRenda()
+				+ ", getDataAdmissao()=" + getDataAdmissao() + ", getParentId()=" + getParentId() + ", getType()="
+				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
+				+ ", getStatusList()=" + getStatusList() + ", toString()=" + super.toString() + ", getModelAction()="
+				+ getModelAction() + ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()="
+				+ getCreateDateUTC() + ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()="
+				+ getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
 	}
 
 }

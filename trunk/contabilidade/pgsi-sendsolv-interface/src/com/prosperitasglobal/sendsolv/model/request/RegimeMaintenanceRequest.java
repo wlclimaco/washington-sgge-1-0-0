@@ -1,13 +1,13 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
-import com.prosperitasglobal.sendsolv.model.Arquivo;
+import com.prosperitasglobal.sendsolv.model.Regime;
 import com.qat.framework.model.request.MaintenanceRequest;
 
 public class RegimeMaintenanceRequest extends MaintenanceRequest
 {
 
 	/** Attributes */
-	private Arquivo arquivo;
+	private Regime regime;
 
 	/**
 	 * The Constructor.
@@ -18,19 +18,19 @@ public class RegimeMaintenanceRequest extends MaintenanceRequest
 	}
 
 	/**
-	 * @return the arquivo
+	 * @return the regime
 	 */
-	public Arquivo getArquivo()
+	public Regime getRegime()
 	{
-		return arquivo;
+		return regime;
 	}
 
 	/**
-	 * @param arquivo the arquivo to set
+	 * @param regime the regime to set
 	 */
-	public void setArquivo(Arquivo arquivo)
+	public void setRegime(Regime regime)
 	{
-		this.arquivo = arquivo;
+		this.regime = regime;
 	}
 
 	/*
@@ -40,7 +40,7 @@ public class RegimeMaintenanceRequest extends MaintenanceRequest
 	@Override
 	public String toString()
 	{
-		return "ArquivoMaintenanceRequest [getArquivo()=" + getArquivo() + ", getUserContext()=" + getUserContext()
+		return "RegimeMaintenanceRequest [getRegime()=" + getRegime() + ", getUserContext()=" + getUserContext()
 				+ "]";
 	}
 

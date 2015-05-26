@@ -1,6 +1,7 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
 import com.prosperitasglobal.sendsolv.model.Cliente;
+import com.qat.framework.model.request.MaintenanceRequest;
 
 public class ClienteMaintenanceRequest extends MaintenanceRequest
 {

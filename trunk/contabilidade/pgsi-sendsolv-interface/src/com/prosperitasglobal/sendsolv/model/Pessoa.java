@@ -79,128 +79,6 @@ public class Pessoa extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the description.
-	 *
-	 * @return the description
-	 */
-	public String getDescription()
-	{
-		return description;
-	}
-
-	/**
-	 * Sets the description.
-	 *
-	 * @param description the description to set
-	 */
-	public void setDescription(String description)
-	{
-		this.description = description;
-	}
-
-	/**
-	 * Gets the tamanho.
-	 *
-	 * @return the tamanho
-	 */
-	public String getTamanho()
-	{
-		return tamanho;
-	}
-
-	/**
-	 * Sets the tamanho.
-	 *
-	 * @param tamanho the new tamanho
-	 */
-	public void setTamanho(String tamanho)
-	{
-		this.tamanho = tamanho;
-	}
-
-	/**
-	 * Checks if is obrigatorio.
-	 *
-	 * @return true, if is obrigatorio
-	 */
-	public boolean isObrigatorio()
-	{
-		return obrigatorio;
-	}
-
-	/**
-	 * Sets the obrigatorio.
-	 *
-	 * @param obrigatorio the new obrigatorio
-	 */
-	public void setObrigatorio(boolean obrigatorio)
-	{
-		this.obrigatorio = obrigatorio;
-	}
-
-	/**
-	 * Checks if is chave primaria.
-	 *
-	 * @return true, if is chave primaria
-	 */
-	public boolean isChavePrimaria()
-	{
-		return chavePrimaria;
-	}
-
-	/**
-	 * Sets the chave primaria.
-	 *
-	 * @param chavePrimaria the new chave primaria
-	 */
-	public void setChavePrimaria(boolean chavePrimaria)
-	{
-		this.chavePrimaria = chavePrimaria;
-	}
-
-	/**
-	 * Checks if is chave secundaria.
-	 *
-	 * @return true, if is chave secundaria
-	 */
-	public boolean isChaveSecundaria()
-	{
-		return chaveSecundaria;
-	}
-
-	/**
-	 * Sets the chave secundaria.
-	 *
-	 * @param chaveSecundaria the new chave secundaria
-	 */
-	public void setChaveSecundaria(boolean chaveSecundaria)
-	{
-		this.chaveSecundaria = chaveSecundaria;
-	}
-
-	/**
-	 * Gets the tabela secundaria.
-	 *
-	 * @return the tabela secundaria
-	 */
-	public Tabela getTabelaSecundaria()
-	{
-		return tabelaSecundaria;
-	}
-
-	/**
-	 * Sets the tabela secundaria.
-	 *
-	 * @param tabelaSecundaria the new tabela secundaria
-	 */
-	public void setTabelaSecundaria(Tabela tabelaSecundaria)
-	{
-		this.tabelaSecundaria = tabelaSecundaria;
-	}
-
-	/**
-	 * Gets the nome.
-	 *
 	 * @return the nome
 	 */
 	public String getNome()
@@ -209,13 +87,227 @@ public class Pessoa extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Sets the nome.
-	 *
-	 * @param nome the new nome
+	 * @param nome the nome to set
 	 */
 	public void setNome(String nome)
 	{
 		this.nome = nome;
+	}
+
+	/**
+	 * @return the nomePai
+	 */
+	public String getNomePai()
+	{
+		return nomePai;
+	}
+
+	/**
+	 * @param nomePai the nomePai to set
+	 */
+	public void setNomePai(String nomePai)
+	{
+		this.nomePai = nomePai;
+	}
+
+	/**
+	 * @return the nomeMae
+	 */
+	public String getNomeMae()
+	{
+		return nomeMae;
+	}
+
+	/**
+	 * @param nomeMae the nomeMae to set
+	 */
+	public void setNomeMae(String nomeMae)
+	{
+		this.nomeMae = nomeMae;
+	}
+
+	/**
+	 * @return the nomeConjugue
+	 */
+	public String getNomeConjugue()
+	{
+		return nomeConjugue;
+	}
+
+	/**
+	 * @param nomeConjugue the nomeConjugue to set
+	 */
+	public void setNomeConjugue(String nomeConjugue)
+	{
+		this.nomeConjugue = nomeConjugue;
+	}
+
+	/**
+	 * @return the estadoCivil
+	 */
+	public Integer getEstadoCivil()
+	{
+		return estadoCivil;
+	}
+
+	/**
+	 * @param estadoCivil the estadoCivil to set
+	 */
+	public void setEstadoCivil(Integer estadoCivil)
+	{
+		this.estadoCivil = estadoCivil;
+	}
+
+	/**
+	 * @return the datanasc
+	 */
+	public Integer getDatanasc()
+	{
+		return datanasc;
+	}
+
+	/**
+	 * @param datanasc the datanasc to set
+	 */
+	public void setDatanasc(Integer datanasc)
+	{
+		this.datanasc = datanasc;
+	}
+
+	/**
+	 * @return the foto
+	 */
+	public String getFoto()
+	{
+		return foto;
+	}
+
+	/**
+	 * @param foto the foto to set
+	 */
+	public void setFoto(String foto)
+	{
+		this.foto = foto;
+	}
+
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(PessoaTypeEnum type)
+	{
+		this.type = type;
+	}
+
+	/**
+	 * @return the sexo
+	 */
+	public Integer getSexo()
+	{
+		return sexo;
+	}
+
+	/**
+	 * @param sexo the sexo to set
+	 */
+	public void setSexo(Integer sexo)
+	{
+		this.sexo = sexo;
+	}
+
+	/**
+	 * @return the enderecos
+	 */
+	public List<Endereco> getEnderecos()
+	{
+		return enderecos;
+	}
+
+	/**
+	 * @param enderecos the enderecos to set
+	 */
+	public void setEnderecos(List<Endereco> enderecos)
+	{
+		this.enderecos = enderecos;
+	}
+
+	/**
+	 * @return the documentos
+	 */
+	public List<Documento> getDocumentos()
+	{
+		return documentos;
+	}
+
+	/**
+	 * @param documentos the documentos to set
+	 */
+	public void setDocumentos(List<Documento> documentos)
+	{
+		this.documentos = documentos;
+	}
+
+	/**
+	 * @return the emails
+	 */
+	public List<Email> getEmails()
+	{
+		return emails;
+	}
+
+	/**
+	 * @param emails the emails to set
+	 */
+	public void setEmails(List<Email> emails)
+	{
+		this.emails = emails;
+	}
+
+	/**
+	 * @return the telefones
+	 */
+	public List<Telefone> getTelefones()
+	{
+		return Telefones;
+	}
+
+	/**
+	 * @param telefones the telefones to set
+	 */
+	public void setTelefones(List<Telefone> telefones)
+	{
+		Telefones = telefones;
+	}
+
+	/**
+	 * @return the notes
+	 */
+	public List<Note> getNotes()
+	{
+		return notes;
+	}
+
+	/**
+	 * @param notes the notes to set
+	 */
+	public void setNotes(List<Note> notes)
+	{
+		this.notes = notes;
+	}
+
+	/**
+	 * @return the bancos
+	 */
+	public List<Banco> getBancos()
+	{
+		return bancos;
+	}
+
+	/**
+	 * @param bancos the bancos to set
+	 */
+	public void setBancos(List<Banco> bancos)
+	{
+		this.bancos = bancos;
 	}
 
 	/*
@@ -225,10 +317,17 @@ public class Pessoa extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Cliente [getId()=" + getId() + ", getType()=" + getType() + ", getDescription()=" + getDescription()
-				+ ", getTamanho()=" + getTamanho() + ", isObrigatorio()=" + isObrigatorio() + ", isChavePrimaria()="
-				+ isChavePrimaria() + ", isChaveSecundaria()=" + isChaveSecundaria() + ", getTabelaSecundaria()="
-				+ getTabelaSecundaria() + ", getNome()=" + getNome() + ", toString()=" + super.toString() + "]";
+		return "Pessoa [getId()=" + getId() + ", getNome()=" + getNome() + ", getNomePai()=" + getNomePai()
+				+ ", getNomeMae()=" + getNomeMae() + ", getNomeConjugue()=" + getNomeConjugue() + ", getEstadoCivil()="
+				+ getEstadoCivil() + ", getDatanasc()=" + getDatanasc() + ", getFoto()=" + getFoto() + ", getType()="
+				+ getType() + ", getSexo()=" + getSexo() + ", getEnderecos()=" + getEnderecos() + ", getDocumentos()="
+				+ getDocumentos() + ", getEmails()=" + getEmails() + ", getTelefones()=" + getTelefones()
+				+ ", getNotes()=" + getNotes() + ", getBancos()=" + getBancos() + ", getParentId()=" + getParentId()
+				+ ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()="
+				+ getStatusList() + ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction()
+				+ ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC()
+				+ ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
 	}
 
 }

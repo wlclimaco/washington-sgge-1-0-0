@@ -1,13 +1,13 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
-import com.prosperitasglobal.sendsolv.model.Arquivo;
+import com.prosperitasglobal.sendsolv.model.Cidade;
 import com.qat.framework.model.request.MaintenanceRequest;
 
 public class CidadeMaintenanceRequest extends MaintenanceRequest
 {
 
 	/** Attributes */
-	private Arquivo arquivo;
+	private Cidade cidade;
 
 	/**
 	 * The Constructor.
@@ -18,19 +18,19 @@ public class CidadeMaintenanceRequest extends MaintenanceRequest
 	}
 
 	/**
-	 * @return the arquivo
+	 * @return the cidade
 	 */
-	public Arquivo getArquivo()
+	public Cidade getCidade()
 	{
-		return arquivo;
+		return cidade;
 	}
 
 	/**
-	 * @param arquivo the arquivo to set
+	 * @param cidade the cidade to set
 	 */
-	public void setArquivo(Arquivo arquivo)
+	public void setCidade(Cidade cidade)
 	{
-		this.arquivo = arquivo;
+		this.cidade = cidade;
 	}
 
 	/*
@@ -40,7 +40,7 @@ public class CidadeMaintenanceRequest extends MaintenanceRequest
 	@Override
 	public String toString()
 	{
-		return "ArquivoMaintenanceRequest [getArquivo()=" + getArquivo() + ", getUserContext()=" + getUserContext()
+		return "CidadeMaintenanceRequest [getCidade()=" + getCidade() + ", getUserContext()=" + getUserContext()
 				+ "]";
 	}
 

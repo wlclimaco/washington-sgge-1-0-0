@@ -1,5 +1,14 @@
 package com.prosperitasglobal.sendsolv.dacd.mybatis;
 
+import java.util.List;
+
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+
+import com.prosperitasglobal.sendsolv.model.AcaoEnum;
+import com.prosperitasglobal.sendsolv.model.Status;
+import com.prosperitasglobal.sendsolv.model.TabelaEnum;
+import com.prosperitasglobal.sendsolv.model.TypeEnum;
+import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
@@ -19,11 +28,12 @@ public final class StatusDACD extends SqlSessionDaoSupport
 	 * @param countStatement the count statement
 	 * @param fetchPagedStatement the fetch paged statement
 	 * @param response the response
+	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public static void maintainStatusAssociations(List<Status> statusList,
+	public static Integer maintainStatusAssociations(List<Status> statusList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum)
+			TabelaEnum tabelaEnum,)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
