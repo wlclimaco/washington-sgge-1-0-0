@@ -4,23 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.mybatis.spring.support.SqlSessionDaoSupport;
-import org.slf4j.LoggerFactory;
-
-import com.prosperitasglobal.cbof.dac.IContactDAC;
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.dac.IDocumentoDAC;
+import com.prosperitasglobal.sendsolv.dac.IEmailDAC;
+import com.prosperitasglobal.sendsolv.dac.IEnderecoDAC;
 import com.prosperitasglobal.sendsolv.dac.IFuncionarioDAC;
+import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
+import com.prosperitasglobal.sendsolv.dac.ISalariosDAC;
+import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
+import com.prosperitasglobal.sendsolv.dac.ITelefoneDAC;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.DocumentosDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.EmailDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.EnderecoDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.SalarioDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.StatusDACD;
-import com.prosperitasglobal.sendsolv.model.FrequencyBasedEvent;
-import com.prosperitasglobal.sendsolv.model.Funcionario;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
-import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResponse;
-import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.util.QATMyBatisDacHelper;
-import com.qat.framework.validation.ValidationUtil;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.TelefoneDACD;
 
 /**
  * The Class FuncionarioDACImpl.
@@ -79,30 +77,85 @@ public class FuncionarioDACImpl extends SqlSessionDaoSupport implements IFuncion
 	/** The Constant LOG. */
 	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(FuncionarioDACImpl.class);
 
-	/** The contact dac. */
-	private IContactDAC contactDAC;
-
 	/** The valid sort fields for an funcionario inquiry. Will be injected by Spring. */
 	private Map<String, String> funcionarioInquiryValidSortFields;
 
-	/**
-	 * Gets the contact dac.
-	 *
-	 * @return the contact dac
-	 */
-	public IContactDAC getContactDAC()
+	IEnderecoDAC enderecoDAC;
+	ITelefoneDAC telefoneDAC;
+	IEmailDAC emailDAC;
+	ISalariosDAC salarioDAC;
+	IDocumentoDAC documentoDAC;
+	IHistoricoDAC historicoDAC;
+	IStatusDAC statusDAC;
+
+	public IEnderecoDAC getEnderecoDAC()
 	{
-		return contactDAC;
+		return enderecoDAC;
 	}
 
-	/**
-	 * Sets the contact dac.
-	 *
-	 * @param contactDAC the contact dac
-	 */
-	public void setContactDAC(IContactDAC contactDAC)
+	public void setEnderecoDAC(IEnderecoDAC enderecoDAC)
 	{
-		this.contactDAC = contactDAC;
+		this.enderecoDAC = enderecoDAC;
+	}
+
+	public ITelefoneDAC getTelefoneDAC()
+	{
+		return telefoneDAC;
+	}
+
+	public void setTelefoneDAC(ITelefoneDAC telefoneDAC)
+	{
+		this.telefoneDAC = telefoneDAC;
+	}
+
+	public IEmailDAC getEmailDAC()
+	{
+		return emailDAC;
+	}
+
+	public void setEmailDAC(IEmailDAC emailDAC)
+	{
+		this.emailDAC = emailDAC;
+	}
+
+	public ISalariosDAC getSalarioDAC()
+	{
+		return salarioDAC;
+	}
+
+	public void setSalarioDAC(ISalariosDAC salarioDAC)
+	{
+		this.salarioDAC = salarioDAC;
+	}
+
+	public IDocumentoDAC getDocumentoDAC()
+	{
+		return documentoDAC;
+	}
+
+	public void setDocumentoDAC(IDocumentoDAC documentoDAC)
+	{
+		this.documentoDAC = documentoDAC;
+	}
+
+	public IHistoricoDAC getHistoricoDAC()
+	{
+		return historicoDAC;
+	}
+
+	public void setHistoricoDAC(IHistoricoDAC historicoDAC)
+	{
+		this.historicoDAC = historicoDAC;
+	}
+
+	public IStatusDAC getStatusDAC()
+	{
+		return statusDAC;
+	}
+
+	public void setStatusDAC(IStatusDAC statusDAC)
+	{
+		this.statusDAC = statusDAC;
 	}
 
 	/**
@@ -146,36 +199,36 @@ public class FuncionarioDACImpl extends SqlSessionDaoSupport implements IFuncion
 			return response;
 		}
 		// Next traverse the object graph and "maintain" the associations
-		insertCount +=
-				EnderecoDACD.maintainEnderecoAssociations(funcionario.getEnderecos, response, insertCount, null, null,
-						null);
 
 		insertCount +=
-				EnderecoDACD.maintainSalarioAssociations(funcionario.getCnaes, response, insertCount, null, null,
-						null);
+				SalarioDACD.maintainSalarioAssociations(funcionario.getCnaes, response, insertCount, null, null,
+						null,getSalarioDAC(),getStatusDAC(),getHistoricoDAC(),funcionario.emprId(),funcionario.getUserId());
 
 		insertCount +=
-				EnderecoDACD.maintainEmailAssociations(funcionario.getEmails, response, insertCount, null, null,
-						null);
+				EnderecoDACD.maintainEnderecoAssociations(funcionario.getEnderecos(), response, insertCount, null, null,
+						null,getEnderecoDAC(),getStatusDAC(),getHistoricoDAC(),funcionario.emprId(),funcionario.getUserId());
 
 		insertCount +=
-				EnderecoDACD.maintainTelefoneAssociations(funcionario.getTelefones, response, insertCount, null, null,
-						null);
+				EmailDACD.maintainEmailAssociations(funcionario.getEmails, response, insertCount, null, null,
+						null,getEmailDAC(),getStatusDAC(),getHistoricoDAC(),funcionario.emprId(),funcionario.getUserId());
 
 		insertCount +=
-				EnderecoDACD.maintainDocumentoAssociations(funcionario.getDocumentos, response, insertCount, null, null,
-						null);
+				TelefoneDACD.maintainTelefoneAssociations(funcionario.getTelefones, response, insertCount, null, null,
+						null,getTelefoneDAC(),getStatusDAC(),getHistoricoDAC(),funcionario.emprId(),funcionario.getUserId());
 
 		insertCount +=
-				EnderecoDACD.maintainHistoricoAssociations(funcionario.getEStatus, response, insertCount, null, null,
-						null);
+				DocumentosDACD.maintainDocumentoAssociations(funcionario.getDocumentos, response, insertCount, null, null,
+						null,getDocumentoDAC(),getStatusDAC(),getHistoricoDAC(),funcionario.emprId(),funcionario.getUserId());
+
+
 
 		if (insertCount > 0)
 		{
 			Status status = new Status();
 			status.setStatus(StatusEnum.ACTIVE);
 			List<Status> statusList = new new ArrayList<Status>();
-			count = StatusDACD.maintainStatusAssociations(statusList, response, count, type, enderecoList, tabelaEnum);
+			count = StatusDACD.maintainStatusAssociations(statusList, response, funcionario.getId(), null, AcaoType.INSERT, funcionario.getUserId(), funcionario.emprId(), TabelaEnum.FUNCIONARIO, getStatusDAC(), getHistoricoDAC());
+
 		}
 
 
@@ -214,35 +267,34 @@ public class FuncionarioDACImpl extends SqlSessionDaoSupport implements IFuncion
 		}
 		// Next traverse the object graph and "maintain" the associations
 		updateCount +=
-				EnderecoDACD.maintainEnderecoAssociations(funcionario.getEnderecos, response, funcionario.getId(), null, null,
-						null);
+				SalarioDACD.maintainSalarioAssociations(funcionario.getCnaes, response, updateCount, null, null,
+						null,getSalarioDAC(),getStatusDAC(),getHistoricoDAC(),funcionario.emprId(),funcionario.getUserId());
 
 		updateCount +=
-				EnderecoDACD.maintainSalarioAssociations(funcionario.getCnaes, response, funcionario.getId(), null, null,
-						null);
+				EnderecoDACD.maintainEnderecoAssociations(funcionario.getEnderecos(), response, updateCount, null, null,
+						null,getEnderecoDAC(),getStatusDAC(),getHistoricoDAC(),funcionario.emprId(),funcionario.getUserId());
 
 		updateCount +=
-				EnderecoDACD.maintainEmailAssociations(funcionario.getEmails, response, funcionario.getId(), null, null,
-						null);
+				EmailDACD.maintainEmailAssociations(funcionario.getEmails, response, updateCount, null, null,
+						null,getEmailDAC(),getStatusDAC(),getHistoricoDAC(),funcionario.emprId(),funcionario.getUserId());
 
 		updateCount +=
-				EnderecoDACD.maintainTelefoneAssociations(funcionario.getTelefones, response, funcionario.getId(), null, null,
-						null);
+				TelefoneDACD.maintainTelefoneAssociations(funcionario.getTelefones, response, updateCount, null, null,
+						null,getTelefoneDAC(),getStatusDAC(),getHistoricoDAC(),funcionario.emprId(),funcionario.getUserId());
 
 		updateCount +=
-				EnderecoDACD.maintainDocumentoAssociations(funcionario.getDocumentos, response, funcionario.getId(), null, null,
-						null);
+				DocumentosDACD.maintainDocumentoAssociations(funcionario.getDocumentos, response, updateCount, null, null,
+						null,getDocumentoDAC(),getStatusDAC(),getHistoricoDAC(),funcionario.emprId(),funcionario.getUserId());
 
-		updateCount +=
-				EnderecoDACD.maintainHistoricoAssociations(funcionario.getEStatus, response, funcionario.getId(), null, null,
-						null);
+
 
 		if (updateCount > 0)
 		{
 			Status status = new Status();
 			status.setStatus(StatusEnum.ACTIVE);
 			List<Status> statusList = new new ArrayList<Status>();
-			count = StatusDACD.maintainStatusAssociations(statusList, response, count, type, enderecoList, tabelaEnum);
+			count = StatusDACD.maintainStatusAssociations(funcionario.getStatus(), response, funcionario.getId(), null, AcaoType.UPDATE, funcionario.getUserId(), funcionario.emprId(), TabelaEnum.FUNCIONARIO, getStatusDAC(), getHistoricoDAC());
+
 		}
 
 		// Finally, if something was updated then add the Person to the result.
@@ -264,16 +316,14 @@ public class FuncionarioDACImpl extends SqlSessionDaoSupport implements IFuncion
 	public InternalResponse deleteFuncionario(Funcionario funcionario)
 	{
 		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doRemove(getSqlSession(), FUNCIONARIO_STMT_DELETE, funcionario, response);
+		//QATMyBatisDacHelper.doRemove(getSqlSession(), FUNCIONARIO_STMT_DELETE, funcionario, response);
 
-		EnderecoDACD.maintainHistoricoAssociations(funcionario.getEStatus, response, funcionario.getId(), null, null,
-						null);
+		Status status = new Status();
+		status.setStatus(StatusEnum.INACTIVE);
+		List<Status> statusList = new new ArrayList<Status>();
 
+		StatusDACD.maintainStatusAssociations(statusList, response, funcionario.getId(), null, AcaoType.DELETE, funcionario.getUserId(), funcionario.emprId(), TabelaEnum.FUNCIONARIO, getStatusDAC(), getHistoricoDAC());
 
-			Status status = new Status();
-			status.setStatus(StatusEnum.ACTIVE);
-			List<Status> statusList = new new ArrayList<Status>();
-			count = StatusDACD.maintainStatusAssociations(statusList, response, count, type, enderecoList, tabelaEnum);
 
 
 		return response;
@@ -311,68 +361,5 @@ public class FuncionarioDACImpl extends SqlSessionDaoSupport implements IFuncion
 		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, FUNCIONARIO_STMT_FETCH_COUNT,
 				FUNCIONARIO_STMT_FETCH_ALL_BY_REQUEST, response);
 		return response;
-	}
-
-	/**
-	 * Maintain funcionario associations.
-	 *
-	 * @param funcionario the funcionario
-	 * @param response the response
-	 * @return the integer
-	 */
-	private Integer maintainFuncionarioAssociations(Funcionario funcionario,
-			InternalResultsResponse<Funcionario> response)
-	{
-		Integer count = 0;
-		// // First Maintain Contacts
-		// if (ValidationUtil.isNullOrEmpty(funcionario.getContactList()))
-		// {
-		// return count;
-		// }
-		// // For Each Contact...
-		// for (Contact contact : funcionario.getContactList())
-		// {
-		// // Make sure we set the parent key
-		// contact.setParentKey(funcionario.getId());
-		//
-		// if (ValidationUtil.isNull(contact.getModelAction()))
-		// {
-		// continue;
-		// }
-		// switch (contact.getModelAction())
-		// {
-		// case INSERT:
-		// count = getContactDAC().insertContact(contact,
-		// FUNCIONARIO_STMT_ASSOC_ORG_TO_CONTACT, response);
-		// break;
-		// case UPDATE:
-		// count = getContactDAC().updateContact(contact, response);
-		// break;
-		// case DELETE:
-		// count = getContactDAC().deleteBusinessContact(contact, response);
-		// break;
-		// default:
-		// if (LOG.isDebugEnabled())
-		// {
-		// LOG.debug("ModelAction for Funcionario missing!");
-		// }
-		// break;
-		// }
-		// }
-		return count;
-	}
-
-	@Override
-	public InternalResultsResponse<FrequencyBasedEvent> fetchFrequencyBasedEventById(Integer id)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public InternalResultsResponse<Funcionario> fetchAllFuncionarios()
-	{
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

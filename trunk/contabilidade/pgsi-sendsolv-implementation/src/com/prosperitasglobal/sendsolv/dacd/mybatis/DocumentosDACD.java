@@ -3,6 +3,11 @@ package com.prosperitasglobal.sendsolv.dacd.mybatis;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.prosperitasglobal.sendsolv.dac.IDocumentoDAC;
+import com.prosperitasglobal.sendsolv.dac.IEmailDAC;
+import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
+import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
+
 /**
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
  * passed into the methods. Nothing injected.
@@ -23,10 +28,9 @@ public final class DocumentosDACD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	@SuppressWarnings("unchecked")
-	public static void maintainDocumentoAssociations(List<Documento> documentoList,
+	public static Integer maintainDocumentoAssociations(List<Documento> documentoList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum)
+			TabelaEnum tabelaEnum,IDocumentoDAC documentoDAC,IStatusDAC statusDAC,IHistoricoDAC historicoDAC,Integer empId,String UserId)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
@@ -47,30 +51,34 @@ public final class DocumentosDACD extends SqlSessionDaoSupport
 			switch (documento.getModelAction())
 			{
 				case INSERT:
-					count = getDocumentoDAC().insertDocumento(documento,
+					count = documentoDAC.insertDocumento(documento,
 							"insertDocumento", response);
+					if (count > 0)
+					{
+						Status status = new Status();
+						status.setStatus(StatusEnum.ACTIVE);
+						List<Status> statusList = new new ArrayList<Status>();
+						count = StatusDACD.maintainStatusAssociations(statusList, response, count, null, AcaoEnum.INSERT , UserId, empId, TabelaEnum.DOCUMENTO, statusDAC, historicoDAC);
+					}
 					break;
 				case UPDATE:
-					count = getDocumentoDAC().updateDocumento(documento, response);
+					count = documentoDAC.updateDocumento(documento, response);
+					if (count > 0)
+					{
+						count = StatusDACD.maintainStatusAssociations(documento.getStatus(), response, documento.getId(), null, AcaoEnum.UPDATE , UserId, empId, TabelaEnum.DOCUMENTO, statusDAC, historicoDAC);
+					}
 					break;
 				case DELETE:
-					count = getDocumentoDAC().deleteDocumento(documento, response);
-					break;
-				default:
-					if (LOG.isDebugEnabled())
-					{
-						LOG.debug("ModelAction for Documento missing!");
-					}
+
+						Status status = new Status();
+						status.setStatus(StatusEnum.INACTIVE);
+						List<Status> statusList = new new ArrayList<Status>();
+						count = StatusDACD.maintainStatusAssociations(statusList, response, documento.getId(), null, AcaoEnum.DELETE , UserId, empId, TabelaEnum.DOCUMENTO, statusDAC, historicoDAC);
+
 					break;
 			}
 		}
-		if (count > 0)
-		{
-			Status status = new Status();
-			status.setStatus(StatusEnum.ACTIVE);
-			List<Status> statusList = new new ArrayList<Status>();
-			count = StatusDACD.maintainStatusAssociations(statusList, response, count, type, documentoList, tabelaEnum);
-		}
+
 
 		return count;
 	}

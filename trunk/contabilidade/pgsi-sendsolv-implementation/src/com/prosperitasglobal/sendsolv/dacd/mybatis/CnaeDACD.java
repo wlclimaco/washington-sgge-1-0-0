@@ -3,6 +3,8 @@ package com.prosperitasglobal.sendsolv.dacd.mybatis;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
+
 /**
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
  * passed into the methods. Nothing injected.
@@ -23,9 +25,9 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static void maintainCnaeAssociations(List<Cnae> cnaeList,
+	public static Integer maintainCnaeAssociations(List<Cnae> cnaeList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum)
+			TabelaEnum tabelaEnum,ICnaeDAC cnaeDAC,IStatusDAC statusDAC,IHistoricoDAC historicoDAC,Integer empId,String UserId)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
@@ -46,30 +48,34 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 			switch (cnae.getModelAction())
 			{
 				case INSERT:
-					count = getCnaeDAC().insertCnae(cnae,
+					count = cnaeDAC.insertCnae(cnae,
 							"insertCnae", response);
+					if (count > 0)
+					{
+						Status status = new Status();
+						status.setStatus(StatusEnum.ACTIVE);
+						List<Status> statusList = new new ArrayList<Status>();
+						count = StatusDACD.maintainStatusAssociations(statusList, response, count, null, AcaoEnum.INSERT , UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC);
+					}
 					break;
 				case UPDATE:
-					count = getCnaeDAC().updateCnae(cnae, response);
+					count = cnaeDAC.updateCnae(cnae, response);
+					if (count > 0)
+					{
+						count = StatusDACD.maintainStatusAssociations(cnae.getStatus(), response, cnae.getId(), null, AcaoEnum.UPDATE , UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC);
+					}
 					break;
 				case DELETE:
-					count = getCnaeDAC().deleteCnae(cnae, response);
-					break;
-				default:
-					if (LOG.isDebugEnabled())
-					{
-						LOG.debug("ModelAction for Cnae missing!");
-					}
+
+						Status status = new Status();
+						status.setStatus(StatusEnum.INACTIVE);
+						List<Status> statusList = new new ArrayList<Status>();
+						count = StatusDACD.maintainStatusAssociations(statusList, response, cnae.getId(), null, AcaoEnum.DELETE , UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC);
+
 					break;
 			}
 		}
-		if (count > 0)
-		{
-			Status status = new Status();
-			status.setStatus(StatusEnum.ACTIVE);
-			List<Status> statusList = new new ArrayList<Status>();
-			count = StatusDACD.maintainStatusAssociations(statusList, response, count, type, cnaeList, tabelaEnum);
-		}
+
 
 		return count;
 	}
