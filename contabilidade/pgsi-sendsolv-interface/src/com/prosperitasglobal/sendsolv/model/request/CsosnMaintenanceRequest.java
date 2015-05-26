@@ -1,13 +1,13 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
-import com.prosperitasglobal.sendsolv.model.Arquivo;
+import com.prosperitasglobal.sendsolv.model.Csosn;
 import com.qat.framework.model.request.MaintenanceRequest;
 
 public class CsosnMaintenanceRequest extends MaintenanceRequest
 {
 
 	/** Attributes */
-	private Arquivo arquivo;
+	private Csosn csosn;
 
 	/**
 	 * The Constructor.
@@ -18,19 +18,19 @@ public class CsosnMaintenanceRequest extends MaintenanceRequest
 	}
 
 	/**
-	 * @return the arquivo
+	 * @return the csosn
 	 */
-	public Arquivo getArquivo()
+	public Csosn getCsosn()
 	{
-		return arquivo;
+		return csosn;
 	}
 
 	/**
-	 * @param arquivo the arquivo to set
+	 * @param csosn the csosn to set
 	 */
-	public void setArquivo(Arquivo arquivo)
+	public void setCsosn(Csosn csosn)
 	{
-		this.arquivo = arquivo;
+		this.csosn = csosn;
 	}
 
 	/*
@@ -40,7 +40,7 @@ public class CsosnMaintenanceRequest extends MaintenanceRequest
 	@Override
 	public String toString()
 	{
-		return "ArquivoMaintenanceRequest [getArquivo()=" + getArquivo() + ", getUserContext()=" + getUserContext()
+		return "CsosnMaintenanceRequest [getCsosn()=" + getCsosn() + ", getUserContext()=" + getUserContext()
 				+ "]";
 	}
 

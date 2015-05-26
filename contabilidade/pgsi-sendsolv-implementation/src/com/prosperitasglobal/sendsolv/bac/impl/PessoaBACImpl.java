@@ -1,7 +1,19 @@
 package com.prosperitasglobal.sendsolv.bac.impl;
 
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.bac.IPessoaBAC;
 import com.prosperitasglobal.sendsolv.dac.IPessoaDAC;
+import com.prosperitasglobal.sendsolv.model.Cliente;
+import com.prosperitasglobal.sendsolv.model.Fornecedor;
+import com.prosperitasglobal.sendsolv.model.Transportador;
+import com.prosperitasglobal.sendsolv.model.request.ClienteInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ClienteMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.FornecedorInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.FornecedorMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.TransportadorInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.TransportadorMaintenanceRequest;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
  * The Class PessoaBACImpl.
@@ -101,9 +113,9 @@ public class PessoaBACImpl implements IPessoaBAC
 	}
 
 	@Override
-	public InternalResultsResponse<Pessoa> fetchPessoaByRequest(PessoaInquiryRequest request)
+	public InternalResultsResponse<Fornecedor> fetchFornecedorByRequest(FornecedorInquiryRequest request)
 	{
-		return getFornecedorDAC().fetchPessoaByRequest(request);
+		return getPessoaDAC().fetchFornecedorByRequest(request);
 	}
 
 	// ========================================

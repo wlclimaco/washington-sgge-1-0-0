@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.prosperitasglobal.sendsolv.model.Fornecedor;
+import com.qat.framework.model.response.InquiryResponse;
 
 public class FornecedorResponse extends InquiryResponse
 {
@@ -53,7 +54,7 @@ public class FornecedorResponse extends InquiryResponse
 	@Override
 	public String toString()
 	{
-		return "LocationResponse [getLocationList()=" + getFornecedorList() + ", getResultsSetInfo()="
+		return "FornecedorResponse [getFornecedorList()=" + getFornecedorList() + ", getResultsSetInfo()="
 				+ getResultsSetInfo() + ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()="
 				+ getMessageList() + ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()="
 				+ isOperationSuccess() + "]";

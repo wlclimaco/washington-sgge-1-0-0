@@ -1,13 +1,13 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
-import com.prosperitasglobal.sendsolv.model.Arquivo;
+import com.prosperitasglobal.sendsolv.model.Cfop;
 import com.qat.framework.model.request.MaintenanceRequest;
 
 public class CfopMaintenanceRequest extends MaintenanceRequest
 {
 
 	/** Attributes */
-	private Arquivo arquivo;
+	private Cfop cfop;
 
 	/**
 	 * The Constructor.
@@ -18,19 +18,19 @@ public class CfopMaintenanceRequest extends MaintenanceRequest
 	}
 
 	/**
-	 * @return the arquivo
+	 * @return the cfop
 	 */
-	public Arquivo getArquivo()
+	public Cfop getCfop()
 	{
-		return arquivo;
+		return cfop;
 	}
 
 	/**
-	 * @param arquivo the arquivo to set
+	 * @param cfop the cfop to set
 	 */
-	public void setArquivo(Arquivo arquivo)
+	public void setCfop(Cfop cfop)
 	{
-		this.arquivo = arquivo;
+		this.cfop = cfop;
 	}
 
 	/*
@@ -40,7 +40,7 @@ public class CfopMaintenanceRequest extends MaintenanceRequest
 	@Override
 	public String toString()
 	{
-		return "ArquivoMaintenanceRequest [getArquivo()=" + getArquivo() + ", getUserContext()=" + getUserContext()
+		return "CfopMaintenanceRequest [getCfop()=" + getCfop() + ", getUserContext()=" + getUserContext()
 				+ "]";
 	}
 

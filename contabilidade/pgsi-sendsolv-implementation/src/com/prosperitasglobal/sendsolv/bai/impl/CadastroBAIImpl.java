@@ -4,7 +4,51 @@ import java.util.List;
 
 import javax.xml.ws.Response;
 
+import org.slf4j.LoggerFactory;
+
 import com.prosperitasglobal.sendsolv.bac.ICadastroBAC;
+import com.prosperitasglobal.sendsolv.model.Cfop;
+import com.prosperitasglobal.sendsolv.model.Cidade;
+import com.prosperitasglobal.sendsolv.model.Cnae;
+import com.prosperitasglobal.sendsolv.model.Csosn;
+import com.prosperitasglobal.sendsolv.model.Empresa;
+import com.prosperitasglobal.sendsolv.model.Estado;
+import com.prosperitasglobal.sendsolv.model.Regime;
+import com.prosperitasglobal.sendsolv.model.Status;
+import com.prosperitasglobal.sendsolv.model.UniMed;
+import com.prosperitasglobal.sendsolv.model.request.CfopInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CfopMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.CidadeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CidadeMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.CnaeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CnaeMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.CsosnInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CsosnMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.EstadoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.EstadoMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.RegimeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.RegimeMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.UniMedInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.UniMedMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.CfopResponse;
+import com.prosperitasglobal.sendsolv.model.response.CidadeResponse;
+import com.prosperitasglobal.sendsolv.model.response.CnaeResponse;
+import com.prosperitasglobal.sendsolv.model.response.CsosnResponse;
+import com.prosperitasglobal.sendsolv.model.response.EstadoResponse;
+import com.prosperitasglobal.sendsolv.model.response.RegimeResponse;
+import com.prosperitasglobal.sendsolv.model.response.UniMedResponse;
+import com.qat.framework.model.Message.MessageLevel;
+import com.qat.framework.model.Message.MessageSeverity;
+import com.qat.framework.model.MessageInfo;
+import com.qat.framework.model.QATModel.PersistanceActionEnum;
+import com.qat.framework.model.UserContext;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATInterfaceUtil;
+import com.qat.framework.validation.ValidationContext;
+import com.qat.framework.validation.ValidationContextIndicator;
+import com.qat.framework.validation.ValidationController;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class CadastroBAIImpl.
@@ -100,7 +144,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 		CidadeResponse response = new CidadeResponse();
 		try
 		{
-			response = processCidade(ValidationContextIndicator.UPDATE, PersistanceActionEnum.UDATE, request);
+			response = processCidade(ValidationContextIndicator.UPDATE, PersistanceActionEnum.UPDATE, request);
 		}
 		catch (Exception ex)
 		{
@@ -561,7 +605,7 @@ public class CadastroBAIImpl implements ICadastroBAC
 		}
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return (CidadeResponse)handleReturn(response, internalResponse, context.getMessages(), true);
+		return (CidadeResponse)handleReturn((Response)response, internalResponse, context.getMessages(), true);
 	}
 
 	/**

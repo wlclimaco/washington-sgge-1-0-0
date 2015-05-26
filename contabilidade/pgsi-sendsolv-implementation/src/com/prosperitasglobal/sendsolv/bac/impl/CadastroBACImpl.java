@@ -1,19 +1,60 @@
 package com.prosperitasglobal.sendsolv.bac.impl;
 
 import com.prosperitasglobal.sendsolv.bac.ICadastroBAC;
+import com.prosperitasglobal.sendsolv.dac.ICadastroDAC;
+import com.prosperitasglobal.sendsolv.model.Cfop;
+import com.prosperitasglobal.sendsolv.model.Cidade;
+import com.prosperitasglobal.sendsolv.model.Cnae;
+import com.prosperitasglobal.sendsolv.model.Csosn;
+import com.prosperitasglobal.sendsolv.model.Estado;
+import com.prosperitasglobal.sendsolv.model.Regime;
+import com.prosperitasglobal.sendsolv.model.UniMed;
+import com.prosperitasglobal.sendsolv.model.request.CfopInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CfopMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.CidadeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CidadeMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.CnaeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CnaeMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.CsosnInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CsosnMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.EstadoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.EstadoMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.RegimeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.RegimeMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.UniMedInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.UniMedMaintenanceRequest;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
  * The Class CadastroBACImpl.
  */
 public class CadastroBACImpl implements ICadastroBAC
 {
+	ICadastroDAC cadastroDAC;
+
+	/**
+	 * @return the cadastroDAC
+	 */
+	public ICadastroDAC getCadastroDAC()
+	{
+		return cadastroDAC;
+	}
+
+	/**
+	 * @param cadastroDAC the cadastroDAC to set
+	 */
+	public void setCadastroDAC(ICadastroDAC cadastroDAC)
+	{
+		this.cadastroDAC = cadastroDAC;
+	}
 
 	@Override
 	public InternalResultsResponse<Cidade> insertCidade(CidadeMaintenanceRequest request)
 	{
 		InternalResultsResponse<Cidade> response = new InternalResultsResponse<Cidade>();
 
-		response = getCadastroDAC().insertCidade(request.getCadastro());
+		response = getCadastroDAC().insertCidade(request.getCidade());
 
 		return response;
 	}
@@ -213,9 +254,9 @@ public class CadastroBACImpl implements ICadastroBAC
 	@Override
 	public InternalResultsResponse<Cfop> updateCfop(CfopMaintenanceRequest request)
 	{
-		InternalResultsResponse<Cadastro> response = new InternalResultsResponse<Cadastro>();
+		InternalResultsResponse<Cfop> response = new InternalResultsResponse<Cfop>();
 
-		response = getCadastroDAC().updateCadastro(request.getCadastro());
+		response = getCadastroDAC().updateCfop(request.getCfop());
 
 		return response;
 	}

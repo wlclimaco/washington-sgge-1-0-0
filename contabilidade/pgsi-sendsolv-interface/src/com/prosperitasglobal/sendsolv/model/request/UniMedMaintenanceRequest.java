@@ -1,13 +1,13 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
-import com.prosperitasglobal.sendsolv.model.Arquivo;
+import com.prosperitasglobal.sendsolv.model.UniMed;
 import com.qat.framework.model.request.MaintenanceRequest;
 
 public class UniMedMaintenanceRequest extends MaintenanceRequest
 {
 
 	/** Attributes */
-	private Arquivo arquivo;
+	private UniMed uniMed;
 
 	/**
 	 * The Constructor.
@@ -18,19 +18,19 @@ public class UniMedMaintenanceRequest extends MaintenanceRequest
 	}
 
 	/**
-	 * @return the arquivo
+	 * @return the uniMed
 	 */
-	public Arquivo getArquivo()
+	public UniMed getUniMed()
 	{
-		return arquivo;
+		return uniMed;
 	}
 
 	/**
-	 * @param arquivo the arquivo to set
+	 * @param uniMed the uniMed to set
 	 */
-	public void setArquivo(Arquivo arquivo)
+	public void setUniMed(UniMed uniMed)
 	{
-		this.arquivo = arquivo;
+		this.uniMed = uniMed;
 	}
 
 	/*
@@ -40,7 +40,7 @@ public class UniMedMaintenanceRequest extends MaintenanceRequest
 	@Override
 	public String toString()
 	{
-		return "ArquivoMaintenanceRequest [getArquivo()=" + getArquivo() + ", getUserContext()=" + getUserContext()
+		return "UniMedMaintenanceRequest [getUniMed()=" + getUniMed() + ", getUserContext()=" + getUserContext()
 				+ "]";
 	}
 

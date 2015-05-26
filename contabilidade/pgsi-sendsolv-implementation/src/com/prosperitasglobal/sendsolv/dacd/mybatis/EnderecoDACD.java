@@ -3,6 +3,18 @@ package com.prosperitasglobal.sendsolv.dacd.mybatis;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+
+import com.prosperitasglobal.sendsolv.dac.IEnderecoDAC;
+import com.prosperitasglobal.sendsolv.model.AcaoEnum;
+import com.prosperitasglobal.sendsolv.model.Endereco;
+import com.prosperitasglobal.sendsolv.model.Status;
+import com.prosperitasglobal.sendsolv.model.StatusEnum;
+import com.prosperitasglobal.sendsolv.model.TabelaEnum;
+import com.prosperitasglobal.sendsolv.model.TypeEnum;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.validation.ValidationUtil;
+
 /**
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
  * passed into the methods. Nothing injected.
@@ -12,6 +24,24 @@ public final class EnderecoDACD extends SqlSessionDaoSupport
 
 	/** The Constant ZERO. */
 	private static final Integer ZERO = 0;
+
+	private IEnderecoDAC enderecoDAC;
+
+	/**
+	 * @return the enderecoDAC
+	 */
+	public IEnderecoDAC getEnderecoDAC()
+	{
+		return enderecoDAC;
+	}
+
+	/**
+	 * @param enderecoDAC the enderecoDAC to set
+	 */
+	public setEnderecoDAC(IEnderecoDAC enderecoDAC)
+	{
+		this.enderecoDAC = enderecoDAC;
+	}
 
 	/**
 	 * Fetch objects by request.
@@ -23,10 +53,9 @@ public final class EnderecoDACD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	@SuppressWarnings("unchecked")
-	public static void maintainEnderecoAssociations(List<Endereco> enderecoList,
+	public static Integer maintainEnderecoAssociations(List<Endereco> enderecoList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum)
+			TabelaEnum tabelaEnum,IEnderecoDAC enderecoDAC)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
@@ -47,21 +76,17 @@ public final class EnderecoDACD extends SqlSessionDaoSupport
 			switch (endereco.getModelAction())
 			{
 				case INSERT:
-					count = getEnderecoDAC().insertEndereco(endereco,
+					count = enderecoDAC.insertEndereco(endereco,
 							"insertEndereco", response);
 					break;
 				case UPDATE:
-					count = getEnderecoDAC().updateEndereco(endereco, response);
+					count = enderecoDAC.updateEndereco(endereco, response);
 					break;
 				case DELETE:
-					count = getEnderecoDAC().deleteEndereco(endereco, response);
+					count = enderecoDAC.deleteEndereco(endereco, response);
 					break;
 				default:
-					if (LOG.isDebugEnabled())
-					{
-						LOG.debug("ModelAction for Endereco missing!");
-					}
-					break;
+
 			}
 		}
 		if (count > 0)

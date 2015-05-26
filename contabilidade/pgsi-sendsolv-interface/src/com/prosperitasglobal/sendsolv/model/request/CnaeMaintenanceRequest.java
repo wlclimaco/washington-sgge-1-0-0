@@ -1,13 +1,13 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
-import com.prosperitasglobal.sendsolv.model.Arquivo;
+import com.prosperitasglobal.sendsolv.model.Cnae;
 import com.qat.framework.model.request.MaintenanceRequest;
 
 public class CnaeMaintenanceRequest extends MaintenanceRequest
 {
 
 	/** Attributes */
-	private Arquivo arquivo;
+	private Cnae cnae;
 
 	/**
 	 * The Constructor.
@@ -18,19 +18,19 @@ public class CnaeMaintenanceRequest extends MaintenanceRequest
 	}
 
 	/**
-	 * @return the arquivo
+	 * @return the cnae
 	 */
-	public Arquivo getArquivo()
+	public Cnae getCnae()
 	{
-		return arquivo;
+		return cnae;
 	}
 
 	/**
-	 * @param arquivo the arquivo to set
+	 * @param cnae the cnae to set
 	 */
-	public void setArquivo(Arquivo arquivo)
+	public void setCnae(Cnae cnae)
 	{
-		this.arquivo = arquivo;
+		this.cnae = cnae;
 	}
 
 	/*
@@ -40,7 +40,7 @@ public class CnaeMaintenanceRequest extends MaintenanceRequest
 	@Override
 	public String toString()
 	{
-		return "ArquivoMaintenanceRequest [getArquivo()=" + getArquivo() + ", getUserContext()=" + getUserContext()
+		return "CnaeMaintenanceRequest [getCnae()=" + getCnae() + ", getUserContext()=" + getUserContext()
 				+ "]";
 	}
 

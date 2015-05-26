@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.prosperitasglobal.sendsolv.model.Cliente;
+import com.qat.framework.model.response.InquiryResponse;
 
 public class ClienteResponse extends InquiryResponse
 {
@@ -53,7 +54,7 @@ public class ClienteResponse extends InquiryResponse
 	@Override
 	public String toString()
 	{
-		return "LocationResponse [getLocationList()=" + getClienteList() + ", getResultsSetInfo()="
+		return "ClienteResponse [getClienteList()=" + getClienteList() + ", getResultsSetInfo()="
 				+ getResultsSetInfo() + ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()="
 				+ getMessageList() + ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()="
 				+ isOperationSuccess() + "]";
