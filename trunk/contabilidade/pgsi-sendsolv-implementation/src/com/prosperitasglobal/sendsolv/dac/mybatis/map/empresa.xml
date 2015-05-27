@@ -115,13 +115,11 @@
   </select>
 
   <select id="fetchAllEmpresasByRequest" parameterType="EmpresaInquiryRequest" resultMap="empresaResult">
-    SELECT * FROM
-    			(
-
+     SELECT * FROM ( SELECT
     						<include refid="allEmpresaColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.nome) AS RowNumber
     				FROM empresa b
-						where a = a
+						where 1 = 1
 					<if test="parentId != null">
 						AND b.id = #{id}
 					</if>

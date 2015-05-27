@@ -2,9 +2,6 @@ package com.prosperitasglobal.sendsolv.bai.impl;
 
 import java.util.List;
 
-import javax.xml.ws.Response;
-
-import org.relaxng.datatype.ValidationContext;
 import org.slf4j.LoggerFactory;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
@@ -12,7 +9,6 @@ import com.prosperitasglobal.sendsolv.bac.IPessoaBAC;
 import com.prosperitasglobal.sendsolv.bai.IPessoaBAI;
 import com.prosperitasglobal.sendsolv.model.Cliente;
 import com.prosperitasglobal.sendsolv.model.Fornecedor;
-import com.prosperitasglobal.sendsolv.model.Status;
 import com.prosperitasglobal.sendsolv.model.Transportador;
 import com.prosperitasglobal.sendsolv.model.request.ClienteInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ClienteMaintenanceRequest;
@@ -23,11 +19,8 @@ import com.prosperitasglobal.sendsolv.model.request.TransportadorMaintenanceRequ
 import com.prosperitasglobal.sendsolv.model.response.ClienteResponse;
 import com.prosperitasglobal.sendsolv.model.response.FornecedorResponse;
 import com.prosperitasglobal.sendsolv.model.response.TransportadorResponse;
-import com.qat.framework.model.Message.MessageLevel;
-import com.qat.framework.model.Message.MessageSeverity;
 import com.qat.framework.model.MessageInfo;
 import com.qat.framework.model.QATModel.PersistanceActionEnum;
-import com.qat.framework.model.UserContext;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATInterfaceUtil;
@@ -260,19 +253,11 @@ public class PessoaBAIImpl implements IPessoaBAI
 		ClienteResponse response = new ClienteResponse();
 		InternalResponse internalResponse = null;
 
-		// Validate. Notice that BusinessValidator will in turn use additional validators depending on the type
-		ValidationContext context =
-				new ValidationContext(Cliente.class.getSimpleName(), request.getCliente(), indicator);
-		context.putObjectToBeValidated(UserContext.class.getSimpleName(), request.getUserContext());
-
-		if (getValidationController().validate(context))
-		{
-			// Persist
-			internalResponse = doPersistanceCliente(request, persistType);
-		}
+		// Persist
+		internalResponse = doPersistanceCliente(request, persistType);
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return (ClienteResponse)handleReturn((Response)response, internalResponse, context.getMessages(), true);
+		return handleReturnCliente(response, internalResponse, null, true);
 	}
 
 	/**
@@ -284,18 +269,11 @@ public class PessoaBAIImpl implements IPessoaBAI
 	 * @param copyOver the copy over
 	 * @return the response
 	 */
-	private Response handleReturn(Response response, InternalResponse internalResponse,
+	private ClienteResponse handleReturnCliente(ClienteResponse response, InternalResponse internalResponse,
 			List<MessageInfo> messages, boolean copyOver)
 	{
-		// In the case there was an Optimistic Locking error, add the specific message
-		if (!ValidationUtil.isNull(internalResponse) && !ValidationUtil.isNull(internalResponse.getStatus())
-				&& Status.OptimisticLockingError.equals(internalResponse.getStatus()))
-		{
-			messages.add(new MessageInfo(PROSPERITASGLOBAL_BASE_OL_ERROR, MessageSeverity.Error,
-					MessageLevel.Object));
-		}
 
-		QATInterfaceUtil.handleOperationStatusAndMessages((com.qat.framework.model.response.Response)response,
+		QATInterfaceUtil.handleOperationStatusAndMessages(response,
 				internalResponse, messages, copyOver);
 		return response;
 	}
@@ -489,19 +467,11 @@ public class PessoaBAIImpl implements IPessoaBAI
 		FornecedorResponse response = new FornecedorResponse();
 		InternalResponse internalResponse = null;
 
-		// Validate. Notice that BusinessValidator will in turn use additional validators depending on the type
-		ValidationContext context =
-				new ValidationContext(Fornecedor.class.getSimpleName(), request.getFornecedor(), indicator);
-		context.putObjectToBeValidated(UserContext.class.getSimpleName(), request.getUserContext());
-
-		if (getValidationController().validate(context))
-		{
-			// Persist
-			internalResponse = doPersistanceFornecedor(request, persistType);
-		}
+		// Persist
+		internalResponse = doPersistanceFornecedor(request, persistType);
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return (FornecedorResponse)handleReturn((Response)response, internalResponse, context.getMessages(), true);
+		return handleReturnFornecedor(response, internalResponse, null, true);
 	}
 
 	/**
@@ -513,18 +483,11 @@ public class PessoaBAIImpl implements IPessoaBAI
 	 * @param copyOver the copy over
 	 * @return the response
 	 */
-	private Response handleReturn(Response response, InternalResponse internalResponse,
+	private FornecedorResponse handleReturnFornecedor(FornecedorResponse response, InternalResponse internalResponse,
 			List<MessageInfo> messages, boolean copyOver)
 	{
-		// In the case there was an Optimistic Locking error, add the specific message
-		if (!ValidationUtil.isNull(internalResponse) && !ValidationUtil.isNull(internalResponse.getStatus())
-				&& Status.OptimisticLockingError.equals(internalResponse.getStatus()))
-		{
-			messages.add(new MessageInfo(PROSPERITASGLOBAL_BASE_OL_ERROR, MessageSeverity.Error,
-					MessageLevel.Object));
-		}
 
-		QATInterfaceUtil.handleOperationStatusAndMessages((com.qat.framework.model.response.Response)response,
+		QATInterfaceUtil.handleOperationStatusAndMessages(response,
 				internalResponse, messages, copyOver);
 		return response;
 	}
@@ -647,7 +610,7 @@ public class PessoaBAIImpl implements IPessoaBAI
 			}
 			else
 			{
-				internalResponse = getTransportadorBAC().fetchTransportadorById(request);
+				internalResponse = getPessoaBAC().fetchTransportadorById(request);
 			}
 			// Handle the processing for all previous methods regardless of them failing or succeeding.
 			QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
@@ -719,19 +682,11 @@ public class PessoaBAIImpl implements IPessoaBAI
 		TransportadorResponse response = new TransportadorResponse();
 		InternalResponse internalResponse = null;
 
-		// Validate. Notice that BusinessValidator will in turn use additional validators depending on the type
-		ValidationContext context =
-				new ValidationContext(Transportador.class.getSimpleName(), request.getTransportador(), indicator);
-		context.putObjectToBeValidated(UserContext.class.getSimpleName(), request.getUserContext());
-
-		if (getValidationController().validate(context))
-		{
-			// Persist
-			internalResponse = doPersistanceTransportador(request, persistType);
-		}
+		// Persist
+		internalResponse = doPersistanceTransportador(request, persistType);
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return (TransportadorResponse)handleReturn((Response)response, internalResponse, context.getMessages(), true);
+		return handleReturn(response, internalResponse, null, true);
 	}
 
 	/**
@@ -743,18 +698,11 @@ public class PessoaBAIImpl implements IPessoaBAI
 	 * @param copyOver the copy over
 	 * @return the response
 	 */
-	private Response handleReturn(Response response, InternalResponse internalResponse,
+	private TransportadorResponse handleReturn(TransportadorResponse response, InternalResponse internalResponse,
 			List<MessageInfo> messages, boolean copyOver)
 	{
-		// In the case there was an Optimistic Locking error, add the specific message
-		if (!ValidationUtil.isNull(internalResponse) && !ValidationUtil.isNull(internalResponse.getStatus())
-				&& Status.OptimisticLockingError.equals(internalResponse.getStatus()))
-		{
-			messages.add(new MessageInfo(PROSPERITASGLOBAL_BASE_OL_ERROR, MessageSeverity.Error,
-					MessageLevel.Object));
-		}
 
-		QATInterfaceUtil.handleOperationStatusAndMessages((com.qat.framework.model.response.Response)response,
+		QATInterfaceUtil.handleOperationStatusAndMessages(response,
 				internalResponse, messages, copyOver);
 		return response;
 	}

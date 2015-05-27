@@ -154,6 +154,7 @@
 
 		<typeAlias alias="EmpresaInquiryRequest"              			type="com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest"/>
 		<typeAlias alias="CnaeInquiryRequest"              				type="com.prosperitasglobal.sendsolv.model.request.CnaeInquiryRequest"/>
+		<typeAlias alias="StatusInquiryRequest"              				type="com.prosperitasglobal.sendsolv.model.request.StatusInquiryRequest"/>
 
 
 
