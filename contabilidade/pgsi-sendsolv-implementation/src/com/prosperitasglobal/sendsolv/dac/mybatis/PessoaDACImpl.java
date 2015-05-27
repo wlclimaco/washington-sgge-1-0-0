@@ -388,10 +388,10 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
-						null, AcaoEnum.DELETE,
-						pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.CLIENTE, getStatusDAC(),
-						getHistoricoDAC());
+						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
+								null, AcaoEnum.DELETE,
+								pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.CLIENTE, getStatusDAC(),
+								getHistoricoDAC());
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
 		{
@@ -556,10 +556,10 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
-						null, AcaoEnum.DELETE,
-						pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.FORNECEDOR, getStatusDAC(),
-						getHistoricoDAC());
+						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
+								null, AcaoEnum.DELETE,
+								pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.FORNECEDOR, getStatusDAC(),
+								getHistoricoDAC());
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
@@ -727,10 +727,10 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
-						null, AcaoEnum.DELETE,
-						pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.TRANSPORTADOR, getStatusDAC(),
-						getHistoricoDAC());
+						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
+								null, AcaoEnum.DELETE,
+								pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.TRANSPORTADOR, getStatusDAC(),
+								getHistoricoDAC());
 		return response;
 	}
 
@@ -755,7 +755,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		 * Helper method to translation from the user friendly" sort field names to the
 		 * actual database column names.
 		 */
-		QATMyBatisDacHelper.translateSortFields(request, getTransportadorInquiryValidSortFields());
+		// QATMyBatisDacHelper.translateSortFields(request, getTransportadorInquiryValidSortFields());
 
 		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, EMPRESA_STMT_FETCH_COUNT,
 				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
