@@ -14,7 +14,7 @@
        necessary if the columns (or aliases) match to the properties
        exactly. -->
 
-  <resultMap id="empresaResult" type="GrupoSubGrupo" extends="CBOFMap.businessResult">
+  <resultMap id="empresaResult" type="GrupoSubGrupo" >
     <result property="parentOrganizationId" column="FK_empresa_id" />
     <result property="parentOrganizationName" column="org_name" />
    	<result property="batchApprovalDayLimit" column="money_transfer_offset_days"/>
@@ -143,85 +143,11 @@
   </select>
 
   <select id="fetchGrupoSubGrupoById" parameterType="FetchByIdRequest" resultMap="empresaResult">
-    			   SELECT
-  				  		b.business_id,
-  				  		b.versn_lock_num,
-						<include refid="allGrupoSubGrupoColumns" />,
-						<include refid="countryMap.allCountryColumns" />,
-    					<include refid="CBOFMap.allNAICSColumns" />,
-    					<include refid="CBOFMap.allSICColumns" />,
-    					<include refid="CBOFMap.numberOfEmployeesColumns" />,
-    					<include refid="CBOFMap.numberOfMigrantWorkersColumns" />,
-    					org.name as org_name
- 				   FROM business b
- 				   JOIN country c ON b.FK_country_code=c.country_code
-    				LEFT JOIN lookup_value d ON (b.FK_NAICS_id = d.id)
-					LEFT JOIN lookup_value e ON (b.FK_SIC_id = e.id)
-					JOIN [range] ne  ON b.FK_number_of_employees = ne.id
-					LEFT JOIN [range] nm  ON b.FK_number_of_migrant_workers = nm.id
-					LEFT JOIN business org ON org.business_id = b.FK_empresa_id
-					<where>
-				  		 <choose>
-							<when test="id != null and id != ''">
-								b.business_id = #{id}
-				    		</when>
-				    	    <otherwise>
-				    	    	<if test="stringId != null and stringId != ''">
-				    	       		UPPER(b.business_key) = UPPER(#{stringId})
-				    	        </if>
-				    	    </otherwise>
-				    	 </choose>
-				  </where>
+
   </select>
 
   <select id="fetchAllGrupoSubGruposByRequest" parameterType="PagedInquiryRequest" resultMap="empresaResult">
-    SELECT * FROM
-    			(
-    				SELECT 	b.business_id,
-    				        b.versn_lock_num,
-    						<include refid="allGrupoSubGrupoColumns" />,
-    						<include refid="countryMap.allCountryColumns" />,
-    						<include refid="CBOFMap.allNAICSColumns" />,
-    						<include refid="CBOFMap.allSICColumns" />,
-    						<include refid="CBOFMap.numberOfEmployeesColumns" />,
-    						<include refid="CBOFMap.numberOfMigrantWorkersColumns" />,
-    						org.name as org_name,
-    						ROW_NUMBER() OVER(ORDER BY b.name) AS RowNumber
-    				FROM business b
-    				JOIN country c ON b.FK_country_code=c.country_code
-    				LEFT JOIN lookup_value d ON (b.FK_NAICS_id = d.id)
-					LEFT JOIN lookup_value e ON (b.FK_SIC_id = e.id)
-					JOIN [range] ne  ON b.FK_number_of_employees = ne.id
-					LEFT JOIN [range] nm  ON b.FK_number_of_migrant_workers = nm.id
-					LEFT JOIN business org ON org.business_id = b.FK_empresa_id
-					WHERE b.business_type = 2
-					<if test="parentId != null">
-						AND b.FK_empresa_id = #{parentId}
-					</if>
-					 <if test="statusList != null and !statusList.isEmpty()">
-					     AND b.PGSI_status IN
-					     <foreach item="item" index="index" collection="statusList"
-						     open="(" separator="," close=")">
-						   	 #{item.value}
-						 </foreach>
-					 </if>
-					 <if test="inquiryCriteria != null and inquiryCriteria.hasProductPlan">
-					 	AND EXISTS(SELECT 1 FROM product_plan pp WHERE pp.FK_business_id = b.business_id)
-					 </if>
-					 <include refid="CBOFMap.inquiryCriteria"/>
-    			) LIST
-				<choose>
-					<when test="pageSize != null and pageSize > 0">
-					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
-					        LOWER: startRow + 1 and
-					        UPPER: startRow + pageSize -->
-					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
-					</when>
-					<otherwise>
-					 	WHERE RowNumber BETWEEN 1 AND RowNumber
-					 	ORDER BY RowNumber
-					</otherwise>
-				</choose>
+
   </select>
 
   <select id="fetchVersionNumber" parameterType="GrupoSubGrupo" resultType="int">

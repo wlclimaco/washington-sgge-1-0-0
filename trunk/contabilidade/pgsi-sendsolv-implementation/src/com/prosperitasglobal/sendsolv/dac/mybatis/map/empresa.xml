@@ -23,14 +23,14 @@
   <resultMap id="empresaResult" type="Empresa">
     <result property="id" column="id" />
     <result property="nome" column="nome" />
-    <association property="regime"    column="regime" javaType="Regime" select="CadastrosMap.fetchRegimeByEmpresaId"  />
+    <association property="regime"    column="regime" javaType="Regime" select="RegimeMap.fetchRegimeByEmpresa"  />
    	<collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
 	<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByEmpresaId"/>
 	<collection property="emails" column="id" select="EmailMap.fetchAllEmailsByEmpresa"/>
 	<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByEmpresa"/>
 	<collection property="socios" column="id" select="SocioMap.fetchSocioByEmpresaId"/>
 	<collection property="cnaes" column="id" select="CnaeMap.fetchAllCnaesByEmpresa"/>
-
+	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEmpresa"/>
   </resultMap>
 
   <!--
@@ -115,7 +115,7 @@
   </select>
 
   <select id="fetchAllEmpresasByRequest" parameterType="EmpresaInquiryRequest" resultMap="empresaResult">
-     SELECT * FROM ( SELECT
+     SELECT * FROM ( SELECT id,
     						<include refid="allEmpresaColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.nome) AS RowNumber
     				FROM empresa b

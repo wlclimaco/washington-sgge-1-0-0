@@ -20,8 +20,6 @@ public class Status extends QATModelOL
 	/** The parent key type. */
 	private StatusEnum status;
 
-	private TypeEnum type;
-
 	private AcaoEnum acaoType;
 
 	private TabelaEnum tabelaEnum;
@@ -82,22 +80,6 @@ public class Status extends QATModelOL
 	public void setStatus(StatusEnum status)
 	{
 		this.status = status;
-	}
-
-	/**
-	 * @return the type
-	 */
-	public TypeEnum getType()
-	{
-		return type;
-	}
-
-	/**
-	 * @param type the type to set
-	 */
-	public void setType(TypeEnum type)
-	{
-		this.type = type;
 	}
 
 	/**
@@ -172,7 +154,7 @@ public class Status extends QATModelOL
 	public String toString()
 	{
 		return "Status [getId()=" + getId() + ", getDataStatus()=" + getDataStatus() + ", getStatus()=" + getStatus()
-				+ ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()="
+				+ ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()="
 				+ getTabelaEnum() + ", getNote()=" + getNote() + ", getParentId()=" + getParentId() + ", getVersion()="
 				+ getVersion() + ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
 				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
