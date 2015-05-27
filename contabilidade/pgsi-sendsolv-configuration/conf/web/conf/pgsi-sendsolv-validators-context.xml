@@ -7,7 +7,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
 			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
-
+<!--
 	<bean id="BusinessValidator" class="com.prosperitasglobal.sendsolv.validation.BusinessValidator" abstract="true" >
 		<property name="industryClassificationDAC" ref="industryClassificationDACTarget"/>
 		<property name="organizationDAC" ref="organizationDACTarget"/>
@@ -39,14 +39,142 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  	<bean id="MoneyTransferValidator"            class="com.prosperitasglobal.sendsolv.validation.MoneyTransferValidator" />
 	<bean id="CurrencyPurchaseValidator"         class="com.prosperitasglobal.sendsolv.validation.CurrencyPurchaseValidator" />
 	<bean id="SuspiciousActivityValidator"       class="com.prosperitasglobal.sendsolv.validation.SuspiciousActivityValidator" />
+-->
+	<bean id="ArquivoValidator"                   class="com.prosperitasglobal.sendsolv.validation.ArquivoValidator" />
+	<bean id="BancoValidator"                     class="com.prosperitasglobal.sendsolv.validation.BancoValidator" />
+	<bean id="BeneficiosValidator"                class="com.prosperitasglobal.sendsolv.validation.BeneficiosValidator" />
+	<bean id="CadastroValidator"                  class="com.prosperitasglobal.sendsolv.validation.CadastroValidator" />
+	<bean id="EmpresaValidator"                   class="com.prosperitasglobal.sendsolv.validation.EmpresaValidator" />
+	<bean id="FinanceiroValidator"                class="com.prosperitasglobal.sendsolv.validation.FinanceiroValidator" />
+	<bean id="FuncionarioValidator"               class="com.prosperitasglobal.sendsolv.validation.FuncionarioValidator" />
+	<bean id="HistoricoValidator"				  class="com.prosperitasglobal.sendsolv.validation.HistoricoValidator" />
+	<bean id="NotaFiscalValidator"                class="com.prosperitasglobal.sendsolv.validation.TabelaValidator" />
+	<bean id="OrcamentoValidator"                 class="com.prosperitasglobal.sendsolv.validation.NotaFiscalValidator" />
+	<bean id="OrdemServicoValidator"              class="com.prosperitasglobal.sendsolv.validation.OrdemServicoValidator" />
+	<bean id="PessoaValidator"                    class="com.prosperitasglobal.sendsolv.validation.PessoaValidator" />
+	<bean id="ProdutoValidator"                   class="com.prosperitasglobal.sendsolv.validation.ProdutoValidator" />
+	<bean id="TabelaValidator"                    class="com.prosperitasglobal.sendsolv.validation.TabelaValidator" />
+	<bean id="TelaValidator"                      class="com.prosperitasglobal.sendsolv.validation.TelaValidator" />
 
-	<bean id="EmpresaValidator"                     class="com.prosperitasglobal.sendsolv.validation.EmpresaValidator" />
-	<bean id="FuncionarioValidator"                     class="com.prosperitasglobal.sendsolv.validation.FuncionarioValidator" />
-	<bean id="TabelaValidator"                     class="com.prosperitasglobal.sendsolv.validation.TabelaValidator" />
-	<bean id="TelaValidator"                     class="com.prosperitasglobal.sendsolv.validation.TelaValidator" />
-	<bean id="OrdemServicoValidator"                     class="com.prosperitasglobal.sendsolv.validation.OrdemServicoValidator" />
-	<bean id="ProdutoValidator"                     class="com.prosperitasglobal.sendsolv.validation.ProdutoValidator" />
 
+	<bean id="arquivoValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="ArquivoValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+ 	<bean id="bancoValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="BancoValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+ 	<bean id="beneficiosValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="BeneficiosValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+ 	<bean id="cadastroValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="CadastroValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+ 	<bean id="empresaValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="EmpresaValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+ 	<bean id="financeiroValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="FinanceiroValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+ 	<bean id="funcionarioValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="FuncionarioValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+ 	<bean id="historicoValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="HistoricoValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+ 	<bean id="notaFiscalValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="NotaFiscalValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+ 	<bean id="orcamentoValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="OrcamentoValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+ 	<bean id="ordemServicoValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="OrdemServicoValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+ 	<bean id="pessoaValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="PessoaValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+ 	<bean id="produtoValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="ProdutoValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+ 	<bean id="tabelaValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="TabelaValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+ 	<bean id="telaValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="TelaValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+<!--
 	<bean id="MemberValidator"                   class="com.prosperitasglobal.sendsolv.validation.MemberValidator" parent="PersonValidator">
 		<property name="locationDAC"     ref="locationDACTarget"/>
 	</bean>
@@ -452,8 +580,9 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	    </list>
 	   </property>
     </bean>
+-->
 	<!-- ========================= Valid Length DEFINITIONS================================= -->
-
+<!--
  	<util:map id="contactValidLength">
 		<entry key="cityName"     value="40"/>
 		<entry key="addressLine1" value="80"/>
@@ -461,5 +590,5 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		<entry key="addressLine3" value="80"/>
 		<entry key="addressLine4" value="80"/>
 	</util:map>
-
+-->
 </beans>

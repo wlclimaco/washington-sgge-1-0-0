@@ -14,105 +14,7 @@
 
 		<typeAlias alias="QATModel"  									 type="com.qat.framework.model.QATModel" />
 		<typeAlias alias="QATModelOL"									 type="com.qat.framework.model.QATModelOL" />
-		<typeAlias alias="CallingCardInfo" 			  					 type="com.prosperitasglobal.sendsolv.callingcard.model.CallingCardInfo" />
-		<typeAlias alias="Person" 	 			      					 type="com.prosperitasglobal.sendsolv.model.Person" />
-		<typeAlias alias="Recipient"       			  					 type="com.prosperitasglobal.sendsolv.model.Recipient" />
-		<typeAlias alias="PersonName"     			 					 type="com.prosperitasglobal.sendsolv.model.PersonName" />
-		<typeAlias alias="Liaison"         			  					 type="com.prosperitasglobal.sendsolv.model.Liaison" />
-		<typeAlias alias="Member"         			  					 type="com.prosperitasglobal.sendsolv.model.Member" />
-		<typeAlias alias="EmploymentInfo" 			  					 type="com.prosperitasglobal.sendsolv.model.EmploymentInfo" />
-		<typeAlias alias="TransferSetting"			  					 type="com.prosperitasglobal.sendsolv.model.TransferSetting" />
-		<typeAlias alias="CustomFee"       			  					 type="com.prosperitasglobal.sendsolv.model.CustomFee" />
-		<typeAlias alias="Risk"            			  					 type="com.prosperitasglobal.sendsolv.model.Risk" />
-		<typeAlias alias="Note"                       					 type="com.prosperitasglobal.cbof.model.Note" />
-  		<typeAlias alias="Contact"                    					 type="com.prosperitasglobal.cbof.model.Contact" />
-		<typeAlias alias="Address"                    					 type="com.prosperitasglobal.cbof.model.Address" />
-		<typeAlias alias="Phone"                      					 type="com.prosperitasglobal.cbof.model.Phone" />
-		<typeAlias alias="EMaisl"                      					 type="com.prosperitasglobal.cbof.model.Email" />
-		<typeAlias alias="Language"                   					 type="com.prosperitasglobal.cbof.model.Language" />
-		<typeAlias alias="Currency"                   					 type="com.prosperitasglobal.cbof.model.Currency" />
-		<typeAlias alias="Location"                   					 type="com.prosperitasglobal.sendsolv.model.Location" />
-		<typeAlias alias="FrequencyBasedEvent"        					 type="com.prosperitasglobal.sendsolv.model.FrequencyBasedEvent" />
-		<typeAlias alias="FrequencyEvent"             					 type="com.prosperitasglobal.sendsolv.model.FrequencyEventWeekly" />
-		<typeAlias alias="FrequencyBasedEventCalendar"					 type="com.prosperitasglobal.sendsolv.model.FrequencyBasedEventCalendar" />
-		<typeAlias alias="FrequencyEventBiWeekly"     					 type="com.prosperitasglobal.sendsolv.model.FrequencyEventBiWeekly" />
-		<typeAlias alias="FrequencyEventMonthly"      					 type="com.prosperitasglobal.sendsolv.model.FrequencyEventMonthly" />
-		<typeAlias alias="FrequencyEventOneDay"       					 type="com.prosperitasglobal.sendsolv.model.FrequencyEventOneDay" />
-		<typeAlias alias="FrequencyEventSemiMonthly"  					 type="com.prosperitasglobal.sendsolv.model.FrequencyEventSemiMonthly" />
-		<typeAlias alias="FrequencyEventWeekly"        					 type="com.prosperitasglobal.sendsolv.model.FrequencyEventWeekly" />
-        <typeAlias alias="CurrencyPurchase"           					 type="com.prosperitasglobal.sendsolv.model.CurrencyPurchase" />
-		<typeAlias alias="DailyCurrencyRate"               				 type="com.prosperitasglobal.sendsolv.model.DailyCurrencyRate" />
-		<typeAlias alias="DailyCurrencyRateDetail"        				 type="com.prosperitasglobal.sendsolv.model.DailyCurrencyRateDetail" />
-		<typeAlias alias="DailyCurrencyRateInquiryRequest" 				 type="com.prosperitasglobal.sendsolv.model.request.DailyCurrencyRateInquiryRequest"/>
-		<typeAlias alias="StateProvinceRegion"							 type="com.prosperitasglobal.cbof.model.StateProvinceRegion" />
-		<typeAlias alias="DocumentTypeRequest"							 type="com.prosperitasglobal.sendsolv.model.request.DocumentTypeRequest" />
-		<typeAlias alias="DocumentType"       							 type="com.prosperitasglobal.sendsolv.model.DocumentType" />
-		<typeAlias alias="Document"            							 type="com.prosperitasglobal.sendsolv.model.Document" />
- 		<typeAlias alias="Organization"									 type="com.prosperitasglobal.sendsolv.model.Organization"/>
- 		<typeAlias alias="Payer"                           				 type="com.prosperitasglobal.sendsolv.model.Payer"/>
- 		<typeAlias alias="PaymentType"                      			 type="com.prosperitasglobal.sendsolv.model.PaymentType"/>
- 		<typeAlias alias="PayerPaymentTypeCurrency"         			 type="com.prosperitasglobal.sendsolv.model.PayerPaymentTypeCurrency"/>
- 		<typeAlias alias="PayerRegion"                      			 type="com.prosperitasglobal.sendsolv.model.PayerRegion"/>
- 		<typeAlias alias="PayerInquiryRequest"              			 type="com.prosperitasglobal.sendsolv.model.request.PayerInquiryRequest"/>
- 		<typeAlias alias="PaymentTypeEnum"                  			 type="com.prosperitasglobal.sendsolv.model.PaymentTypeEnum" />
- 		<typeAlias alias="MyBatisPaymentTypeEnumTypeHandler"			 type="com.prosperitasglobal.sendsolv.dac.mybatis.MyBatisPaymentTypeEnumTypeHandler" />
- 		<typeAlias alias="MyBatisCurrentSDNStatusEnumTypeHandler"		 type="com.prosperitasglobal.sendsolv.sdn.dac.mybatis.MyBatisCurrentSDNStatusEnumTypeHandler" />
- 		<typeAlias alias="FrequencyCodeEnum"                             type="com.prosperitasglobal.sendsolv.model.FrequencyCodeEnum" />
- 		<typeAlias alias="MyBatisFrequencyCodeEnumTypeHandler"           type="com.prosperitasglobal.sendsolv.dac.mybatis.MyBatisFrequencyCodeEnumTypeHandler" />
- 		<typeAlias alias="MyBatisFrequencyBasedEventTypeEnumTypeHandler" type="com.prosperitasglobal.sendsolv.dac.mybatis.MyBatisFrequencyBasedEventTypeEnumTypeHandler" />
- 		<typeAlias alias="Country"        								 type="com.prosperitasglobal.cbof.model.Country"/>
-  		<typeAlias alias="CountryResponse"								 type="com.prosperitasglobal.cbof.model.response.CountryResponse"/>
-  		<typeAlias alias="CodeValue"       								 type="com.prosperitasglobal.cbof.model.CodeValue"/>
-  		<typeAlias alias="CodeValueRequest"								 type="com.prosperitasglobal.cbof.model.request.CodeValueRequest"/>
-  		<typeAlias alias="Range"       									 type="com.prosperitasglobal.cbof.model.Range"/>
-		<typeAlias alias="RangeRequest"									 type="com.prosperitasglobal.cbof.model.request.RangeRequest"/>
 		<typeAlias alias="PagedInquiryRequest"     						 type="com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest"/>
-		<typeAlias alias="MemberInquiryRequest"    						 type="com.prosperitasglobal.sendsolv.model.request.MemberInquiryRequest"/>
-		<typeAlias alias="RecipientInquiryRequest" 						 type="com.prosperitasglobal.sendsolv.model.request.RecipientInquiryRequest"/>
-		<typeAlias alias="BtsConfirmationNumber"						 type="com.prosperitasglobal.sendsolv.model.BtsConfirmationNumber"/>
-        <typeAlias alias="ParticipantId"                  				 type="com.prosperitasglobal.sendsolv.model.ParticipantId"/>
-        <typeAlias alias="ContactParticipantId"           				 type="com.prosperitasglobal.sendsolv.model.ContactParticipantId"/>
-        <typeAlias alias="LocationParticipantId"          				 type="com.prosperitasglobal.sendsolv.model.LocationParticipantId"/>
-		<typeAlias alias="MemberParticipantId"            				 type="com.prosperitasglobal.sendsolv.model.MemberParticipantId"/>
-        <typeAlias alias="MoneyTransferBatchParticipantId"				 type="com.prosperitasglobal.sendsolv.model.MoneyTransferBatchParticipantId"/>
-        <typeAlias alias="MoneyTransferParticipantId"     				 type="com.prosperitasglobal.sendsolv.model.MoneyTransferParticipantId"/>
-        <typeAlias alias="OrganizationParticipantId"      				 type="com.prosperitasglobal.sendsolv.model.OrganizationParticipantId"/>
-		<typeAlias alias="RecipientParticipantId"         				 type="com.prosperitasglobal.sendsolv.model.RecipientParticipantId"/>
-		<typeAlias alias="TransferSettingParticipantId"   				 type="com.prosperitasglobal.sendsolv.model.TransferSettingParticipantId"/>
-		<typeAlias alias="SuspiciousActivityParticipantId"   			 type="com.prosperitasglobal.sendsolv.model.SuspiciousActivityParticipantId"/>
-		<typeAlias alias="CountryUsage"									 type="com.prosperitasglobal.sendsolv.model.CountryUsage"/>
-		<typeAlias alias="Business"                              		 type="com.prosperitasglobal.sendsolv.model.Business"/>
-		<typeAlias alias="BusinessProductPlan"                   		 type="com.prosperitasglobal.sendsolv.model.BusinessProductPlan"/>
-		<typeAlias alias="BusinessProductPlanInquiryRequest"     		 type="com.prosperitasglobal.sendsolv.model.request.BusinessProductPlanInquiryRequest"/>
-		<typeAlias alias="FeeTier"                               		 type="com.prosperitasglobal.sendsolv.model.FeeTier"/>
-		<typeAlias alias="Payer"                                 		 type="com.prosperitasglobal.sendsolv.model.Payer"/>
-		<typeAlias alias="PlanCategory"                         		 type="com.prosperitasglobal.sendsolv.model.PlanCategory"/>
-		<typeAlias alias="Product"                               		 type="com.prosperitasglobal.sendsolv.model.Product"/>
-		<typeAlias alias="ProductPlan"                           		 type="com.prosperitasglobal.sendsolv.model.ProductPlan"/>
-		<typeAlias alias="ProductPlanApplicability"              		 type="com.prosperitasglobal.sendsolv.model.ProductPlanApplicability"/>
-		<typeAlias alias="ProductPlanTemplateGroup"              		 type="com.prosperitasglobal.sendsolv.model.ProductPlanTemplateGroup"/>
-		<typeAlias alias="ProductPlanTemplateGroupInquiryRequest"		 type="com.prosperitasglobal.sendsolv.model.request.ProductPlanTemplateGroupInquiryRequest"/>
-		<typeAlias alias="TemplateProductPlan"                   		 type="com.prosperitasglobal.sendsolv.model.TemplateProductPlan"/>
-		<typeAlias alias="TemplateProductPlanInquiryRequest"     		 type="com.prosperitasglobal.sendsolv.model.request.TemplateProductPlanInquiryRequest"/>
-		<typeAlias alias="CurrencyAvailability"            				 type="com.prosperitasglobal.sendsolv.model.CurrencyAvailability"/>
-		<typeAlias alias="MoneyTransfer"                   				 type="com.prosperitasglobal.sendsolv.model.MoneyTransfer"/>
-		<typeAlias alias="MoneyTransferBatch"              				 type="com.prosperitasglobal.sendsolv.model.MoneyTransferBatch"/>
-		<typeAlias alias="MoneyTransferBatchInquiryRequest"				 type="com.prosperitasglobal.sendsolv.model.request.MoneyTransferBatchInquiryRequest"/>
-		<typeAlias alias="MoneyTransferBatchStatus"        				 type="com.prosperitasglobal.sendsolv.model.MoneyTransferBatchStatus"/>
-		<typeAlias alias="MoneyTransferInquiryRequest"     				 type="com.prosperitasglobal.sendsolv.model.request.MoneyTransferInquiryRequest"/>
-		<typeAlias alias="MoneyTransferStatus"             				 type="com.prosperitasglobal.sendsolv.model.MoneyTransferStatus"/>
-		<typeAlias alias="MoneyTransferTransaction"        				 type="com.prosperitasglobal.sendsolv.model.MoneyTransferTransaction"/>
-		<typeAlias alias="SecurityQuestion"              		 		 type="com.prosperitasglobal.sendsolv.model.SecurityQuestion"/>
-		<typeAlias alias="PersonSecurityAnswer"              		 	 type="com.prosperitasglobal.sendsolv.model.PersonSecurityAnswer"/>
-		<typeAlias alias="SuspiciousActivity" 	                         type="com.prosperitasglobal.sendsolv.model.SuspiciousActivity" />
-		<typeAlias alias="SarInquiryRequest" 	                         type="com.prosperitasglobal.sendsolv.model.request.SarInquiryRequest" />
-		<typeAlias alias="SdnMatchField"             					 type="com.prosperitasglobal.sendsolv.sdn.model.SdnMatchField"/>
-		<typeAlias alias="SdnMatchRecord"             					 type="com.prosperitasglobal.sendsolv.sdn.model.SdnMatchRecord"/>
-		<typeAlias alias="SdnStatusHistory"              				 type="com.prosperitasglobal.sendsolv.sdn.model.SdnStatusHistory"/>
-		<typeAlias alias="SdnHistory"              				 		 type="com.prosperitasglobal.sendsolv.sdn.model.SdnHistory"/>
-		<typeAlias alias="SdnStatusHistoryInquiryRequest"              	 type="com.prosperitasglobal.sendsolv.sdn.model.request.SdnStatusHistoryInquiryRequest"/>
-
-
 		<typeAlias alias="Arquivo"              				 		 type="com.prosperitasglobal.sendsolv.model.Arquivo"/>
 		<typeAlias alias="Atributos"              				 		 type="com.prosperitasglobal.sendsolv.model.Atributos"/>
 		<typeAlias alias="Banco"              				 		     type="com.prosperitasglobal.sendsolv.model.Banco"/>
@@ -151,73 +53,14 @@
 		<typeAlias alias="UniMed"              				 		     type="com.prosperitasglobal.sendsolv.model.UniMed"/>
 		<typeAlias alias="Regime"              				 		     type="com.prosperitasglobal.sendsolv.model.Regime"/>
 		<typeAlias alias="CnaeRel"              				 		 type="com.prosperitasglobal.sendsolv.model.CnaeRel"/>
-
 		<typeAlias alias="EmpresaInquiryRequest"              			type="com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest"/>
 		<typeAlias alias="CnaeInquiryRequest"              				type="com.prosperitasglobal.sendsolv.model.request.CnaeInquiryRequest"/>
 		<typeAlias alias="StatusInquiryRequest"              				type="com.prosperitasglobal.sendsolv.model.request.StatusInquiryRequest"/>
-
-
-
 		<typeAlias alias="FetchByIdRequest"              	             type="com.prosperitasglobal.cbof.model.request.FetchByIdRequest"/>
-
-		<typeAlias alias="CallRecord" 			type="com.prosperitasglobal.sendsolv.integration.twilio.model.CallRecord" />
-		<typeAlias alias="IvrIdentity" 			type="com.prosperitasglobal.sendsolv.integration.twilio.model.IvrIdentity" />
-		<typeAlias alias="MoneyTransferSummary" type="com.prosperitasglobal.sendsolv.integration.twilio.model.MoneyTransferSummary" />
-		<typeAlias alias="CallRecordContext" 	type="com.prosperitasglobal.sendsolv.integration.twilio.model.CallRecordContext" />
   	</typeAliases>
 
-	<typeHandlers>
-	 	 <typeHandler handler="MyBatisPaymentTypeEnumTypeHandler"             javaType="com.prosperitasglobal.sendsolv.model.PaymentTypeEnum"/>
-	 	 <typeHandler handler="MyBatisFrequencyCodeEnumTypeHandler"           javaType="com.prosperitasglobal.sendsolv.model.FrequencyCodeEnum"/>
-	 	 <typeHandler handler="MyBatisFrequencyBasedEventTypeEnumTypeHandler" javaType="com.prosperitasglobal.sendsolv.model.FrequencyBasedEventTypeEnum" />
-	 	 <typeHandler handler="MyBatisCurrentSDNStatusEnumTypeHandler"        javaType="com.prosperitasglobal.sendsolv.sdn.model.SDNStatusEnum" />
-	</typeHandlers>
 
  	<mappers>
-	 	<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/countryusage.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/organization.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/person.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/payer.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/location.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/btsconfirmationnumber.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/participantid.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/documenttype.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/businessproductplan.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/feetier.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/payer.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/payerpaymenttypecurrency.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/payerregion.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/plancategory.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/product.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/productplan.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/productplanapplicability.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/productplantemplategroup.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/templateproductplan.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/employmentinfo.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/transfersetting.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/dailycurrencyrate.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/dailycurrencyratedetail.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/currencyavailability.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/moneytransfer.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/moneytransferbatch.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/moneytransferbatchstatus.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/moneytransferstatus.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/moneytransfertransaction.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/frequencyevent.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/currencypurchase.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/securityquestion.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/suspiciousactivity.xml" />
-		<mapper resource="com/prosperitasglobal/cbof/dac/mybatis/map/cbof.xml" />
-		<mapper resource="com/prosperitasglobal/cbof/dac/mybatis/map/contact.xml" />
-		<mapper resource="com/prosperitasglobal/cbof/dac/mybatis/map/codevalue.xml" />
-		<mapper resource="com/prosperitasglobal/cbof/dac/mybatis/map/country.xml" />
-		<mapper resource="com/prosperitasglobal/cbof/dac/mybatis/map/industryclassification.xml" />
-		<mapper resource="com/prosperitasglobal/cbof/dac/mybatis/map/note.xml" />
-		<mapper resource="com/prosperitasglobal/cbof/dac/mybatis/map/range.xml" />
-		<mapper resource="com/prosperitasglobal/cbof/dac/mybatis/map/language.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/callingcard/dac/mybatis/map/callingcard.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/sdn/dac/mybatis/map/sdnchecker.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/integration/twilio/dac/mybatis/map/callrecord.xml" />
 
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/arquivo.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/banco.xml" />

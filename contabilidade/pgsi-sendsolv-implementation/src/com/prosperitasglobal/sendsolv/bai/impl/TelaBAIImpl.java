@@ -45,7 +45,7 @@ public class TelaBAIImpl implements ITelaBAI
 
 	/** The Constant PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_PARENT_ID_REQUIRED. */
 	private static final String PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_PARENT_ID_REQUIRED =
-			"sendsolv.base.locationvalidator.parentorganization.required";
+			"sendsolv.base.locationvalidator.parenttela.required";
 
 	/** The Constant PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED. */
 	private static final String PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED =
@@ -55,14 +55,14 @@ public class TelaBAIImpl implements ITelaBAI
 	private static final String PROSPERITASGLOBAL_BASE_OL_ERROR =
 			"sendsolv.base.optimistic.locking.error";
 
-	/** The organization bac. */
+	/** The tela bac. */
 	private ITelaBAC locationBAC; // injected by Spring through setter
 
 	/** The validation controller. */
 	private ValidationController validationController;
 
 	/**
-	 * Get organization validation controller.
+	 * Get tela validation controller.
 	 *
 	 * @return the validation controller
 	 */
@@ -72,17 +72,17 @@ public class TelaBAIImpl implements ITelaBAI
 	}
 
 	/**
-	 * Spring sets the organization validation controller.
+	 * Spring sets the tela validation controller.
 	 *
-	 * @param organizationValidationController the new validation controller
+	 * @param telaValidationController the new validation controller
 	 */
-	public void setValidationController(ValidationController organizationValidationController)
+	public void setValidationController(ValidationController telaValidationController)
 	{
-		validationController = organizationValidationController;
+		validationController = telaValidationController;
 	}
 
 	/**
-	 * Spring Sets the organization bac.
+	 * Spring Sets the tela bac.
 	 *
 	 * @param locationBAC the new location bac
 	 */
@@ -263,7 +263,7 @@ public class TelaBAIImpl implements ITelaBAI
 	 * @param indicator the indicator
 	 * @param persistType the persist type
 	 * @param request the request
-	 * @return the organization response
+	 * @return the tela response
 	 */
 	private TelaResponse process(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
 			TelaMaintenanceRequest request)

@@ -1,8 +1,6 @@
 package com.prosperitasglobal.sendsolv.arquivo.controller;
 
 import java.util.Calendar;
-import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.request.EmpresaMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.ArquivoMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
+import com.prosperitasglobal.sendsolv.model.response.ArquivoResponse;
 
 /**
- * The EmpresaAPIController Class.
+ * The ArquivoAPIController Class.
  *
  * @author Flavio Tosta, Washington Costa
  *
@@ -31,7 +29,7 @@ public class ArquivoAPIController extends ArquivoBaseController
 	/** The Constant FETCH_SIC_NAICS. */
 	private static final String FETCH_SIC_NAICS = "fetchSicNaics";
 	/** The Constant FETCH_ORGANIZATION_BYLOCATION. */
-	private static final String FETCH_ORGANIZATION_BYLOCATION = "fetchOrganizationBylocation";
+	private static final String FETCH_ORGANIZATION_BYLOCATION = "fetchOrganizationByarquivo";
 	/** The URL mapping constants. */
 	private static final String DELETE_LOCATION = "/delete";
 
@@ -52,20 +50,20 @@ public class ArquivoAPIController extends ArquivoBaseController
 	private static final Logger LOG = LoggerFactory.getLogger(ArquivoAPIController.class);
 
 	/** The Constant CONTROLLER_EXCEPTION_MSG. */
-	private static final String CONTROLLER_EXCEPTION_MSG = "EmpresaAPIController";
+	private static final String CONTROLLER_EXCEPTION_MSG = "ArquivoAPIController";
 
 	/**
-	 * Fetch all Empresas.
+	 * Fetch all Arquivos.
 	 *
 	 * @param pagedInquiryRequest the paged inquiry request
 	 * @return the response
 	 */
 	@RequestMapping(value = FETCH_ALL, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse fetchAll(@RequestBody PagedInquiryRequest pagedInquiryRequest)
+	public ArquivoResponse fetchAll(@RequestBody PagedInquiryRequest pagedInquiryRequest)
 	{
 
-		return fetchEmpresaByRequest(pagedInquiryRequest);
+		return fetchArquivoByRequest(pagedInquiryRequest);
 
 	}
 
@@ -73,108 +71,95 @@ public class ArquivoAPIController extends ArquivoBaseController
 	 * Fetch.
 	 *
 	 * @param fetchByIdRequest the fetch by id request
-	 * @return the location response
+	 * @return the arquivo response
 	 */
 	@RequestMapping(value = FETCH, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse fetch(@RequestBody FetchByIdRequest fetchByIdRequest)
+	public ArquivoResponse fetch(@RequestBody FetchByIdRequest fetchByIdRequest)
 	{
 
-		return fetchEmpresaById(fetchByIdRequest);
+		return fetchArquivoById(fetchByIdRequest);
 
 	}
 
 	/**
-	 * Edit one location.
+	 * Edit one arquivo.
 	 *
-	 * @param locationRequest the location request
+	 * @param arquivoRequest the arquivo request
 	 * @return the response
 	 */
 	@RequestMapping(value = EDIT_LOCATION, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse edit(@RequestBody EmpresaMaintenanceRequest locationRequest)
+	public ArquivoResponse edit(@RequestBody ArquivoMaintenanceRequest arquivoRequest)
 	{
-		EmpresaResponse locationResponse = new EmpresaResponse();
+		ArquivoResponse arquivoResponse = new ArquivoResponse();
 		try
 		{
 
-			locationResponse = getEmpresaBAI().updateEmpresa(locationRequest);
+			arquivoResponse = getArquivoBAI().updateArquivo(arquivoRequest);
 
 		}
 		catch (Exception e)
 		{
 			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
-			locationResponse = null;
+			arquivoResponse = null;
 		}
-		return locationResponse;
+		return arquivoResponse;
 
 	}
 
 	/**
-	 * Delete one location.
+	 * Delete one arquivo.
 	 *
-	 * @param locationRequest the location request
+	 * @param arquivoRequest the arquivo request
 	 * @return the response
 	 */
 	@RequestMapping(value = DELETE_LOCATION, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse delete(@RequestBody EmpresaMaintenanceRequest locationRequest)
+	public ArquivoResponse delete(@RequestBody ArquivoMaintenanceRequest arquivoRequest)
 	{
-		EmpresaResponse locationResponse = new EmpresaResponse();
+		ArquivoResponse arquivoResponse = new ArquivoResponse();
 		try
 		{
 
-			locationResponse = getEmpresaBAI().deleteEmpresa(locationRequest);
+			arquivoResponse = getArquivoBAI().deleteArquivo(arquivoRequest);
 
 		}
 		catch (Exception e)
 		{
 			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
-			locationResponse = null;
+			arquivoResponse = null;
 		}
 
-		return locationResponse;
+		return arquivoResponse;
 
 	}
 
 	/**
-	 * Insert one location.
+	 * Insert one arquivo.
 	 *
-	 * @param locationRequest the location request
+	 * @param arquivoRequest the arquivo request
 	 * @return the response
 	 */
 	@RequestMapping(value = INSERT_LOCATION, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse insert(@RequestBody EmpresaMaintenanceRequest locationRequest)
+	public ArquivoResponse insert(@RequestBody ArquivoMaintenanceRequest arquivoRequest)
 	{
-		EmpresaResponse locationResponse = new EmpresaResponse();
+		ArquivoResponse arquivoResponse = new ArquivoResponse();
 
 		try
 		{
 
-			locationRequest.getEmpresa().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
-			locationResponse = getEmpresaBAI().insertEmpresa(locationRequest);
+			arquivoRequest.getArquivo().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
+			// arquivoResponse = getArquivoBAI().insertArquivo(arquivoRequest);
 		}
 		catch (Exception e)
 		{
 			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
-			locationResponse = null;
+			arquivoResponse = null;
 		}
 
-		return locationResponse;
+		return arquivoResponse;
 
-	}
-
-	/**
-	 * Fetch sic naics.
-	 *
-	 * @param codeValueEnum the code value enum
-	 * @return the map< integer, string>
-	 */
-	@RequestMapping(value = FETCH_SIC_NAICS, method = RequestMethod.POST)
-	@ResponseBody
-	public List<Map<String, String>> fetchSicNaics(@RequestBody Integer codeValueEnum, String userId)
-	{
-		return listSicNaics(codeValueEnum, userId);
 	}
 }

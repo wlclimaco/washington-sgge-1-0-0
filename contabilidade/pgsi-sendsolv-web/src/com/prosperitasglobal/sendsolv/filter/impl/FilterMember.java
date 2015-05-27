@@ -1,12 +1,8 @@
 package com.prosperitasglobal.sendsolv.filter.impl;
 
-import javax.annotation.Resource;
-
 import org.springframework.stereotype.Component;
 
-import com.prosperitasglobal.sendsolv.bai.IMemberBAI;
 import com.prosperitasglobal.sendsolv.filter.model.response.FiltersResponse;
-import com.prosperitasglobal.sendsolv.model.request.MemberInquiryRequest;
 import com.qat.framework.model.UserContext;
 
 /**
@@ -15,57 +11,71 @@ import com.qat.framework.model.UserContext;
 @Component
 public class FilterMember extends AbstractFilterBase
 {
-	/** The Constant TAGS. */
-	private static final String MEMBERS = "MEMBER";
 
-	/** The member bai. */
-	private IMemberBAI memberBAI;
-
-	/**
-	 * Gets the member bai.
-	 *
-	 * @return the memberBAI
-	 */
-	public IMemberBAI getMemberBAI()
-	{
-		return memberBAI;
-	}
-
-	/**
-	 * Sets the member bai.
-	 *
-	 * @param memberBAI the memberBAI to set
-	 */
-	@Resource
-	public void setMemberBAI(IMemberBAI memberBAI)
-	{
-		this.memberBAI = memberBAI;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.filter.model.IFilter#isAssignableFrom(java.lang.String)
-	 */
 	@Override
 	public boolean isAssignableFrom(String filter)
 	{
-		return MEMBERS.equals(filter);
+		// TODO Auto-generated method stub
+		return false;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.filter.model.IFilter#createFilter(com.qat.framework.model.UserContext,
-	 * com.prosperitasglobal.sendsolv.filter.model.response.FiltersResponse, java.lang.Object[])
-	 */
 	@Override
 	public void createFilter(UserContext userContext, FiltersResponse filtersResponse, Object... addInformations)
 	{
+		// TODO Auto-generated method stub
 
-		MemberInquiryRequest pagedInquiryRequest = new MemberInquiryRequest();
-
-		pagedInquiryRequest.setPageSize(0);
-
-		filtersResponse.addFilter(MEMBERS.toLowerCase(), null);
 	}
+	// /** The Constant TAGS. */
+	// private static final String MEMBERS = "MEMBER";
+	//
+	// /** The member bai. */
+	// private IMemberBAI memberBAI;
+	//
+	// /**
+	// * Gets the member bai.
+	// *
+	// * @return the memberBAI
+	// */
+	// public IMemberBAI getMemberBAI()
+	// {
+	// return memberBAI;
+	// }
+	//
+	// /**
+	// * Sets the member bai.
+	// *
+	// * @param memberBAI the memberBAI to set
+	// */
+	// @Resource
+	// public void setMemberBAI(IMemberBAI memberBAI)
+	// {
+	// this.memberBAI = memberBAI;
+	// }
+	//
+	// /*
+	// * (non-Javadoc)
+	// * @see com.prosperitasglobal.sendsolv.filter.model.IFilter#isAssignableFrom(java.lang.String)
+	// */
+	// @Override
+	// public boolean isAssignableFrom(String filter)
+	// {
+	// return MEMBERS.equals(filter);
+	// }
+	//
+	// /*
+	// * (non-Javadoc)
+	// * @see com.prosperitasglobal.sendsolv.filter.model.IFilter#createFilter(com.qat.framework.model.UserContext,
+	// * com.prosperitasglobal.sendsolv.filter.model.response.FiltersResponse, java.lang.Object[])
+	// */
+	// @Override
+	// public void createFilter(UserContext userContext, FiltersResponse filtersResponse, Object... addInformations)
+	// {
+	//
+	// MemberInquiryRequest pagedInquiryRequest = new MemberInquiryRequest();
+	//
+	// pagedInquiryRequest.setPageSize(0);
+	//
+	// filtersResponse.addFilter(MEMBERS.toLowerCase(), null);
+	// }
 
 }

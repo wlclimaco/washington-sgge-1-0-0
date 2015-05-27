@@ -6,13 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
-import com.prosperitasglobal.sendsolv.bai.IMemberBAI;
 import com.prosperitasglobal.sendsolv.bai.ITelaBAI;
 import com.prosperitasglobal.sendsolv.model.request.TelaInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.response.MemberResponse;
 import com.prosperitasglobal.sendsolv.model.response.TelaResponse;
 import com.qat.framework.validation.ValidationUtil;
 
@@ -33,32 +30,6 @@ public class TelaBaseController extends UtilControllerD
 
 	/** The Tela BAI. */
 	private ITelaBAI locationBAI;
-
-	/** The Member BAI. */
-	private IMemberBAI memberBAI;
-
-	/**
-	 * Gets the member BAI.
-	 *
-	 * @return the member BAI
-	 */
-	@Override
-	public IMemberBAI getMemberBAI()
-	{
-		return memberBAI;
-	}
-
-	/**
-	 * Sets the member bai.
-	 *
-	 * @param memberBAI the member bai
-	 */
-	@Override
-	@Resource
-	public void setMemberBAI(IMemberBAI memberBAI)
-	{
-		this.memberBAI = memberBAI;
-	}
 
 	/**
 	 * Gets the location bai.
@@ -121,24 +92,6 @@ public class TelaBaseController extends UtilControllerD
 		}
 
 		return modelAndView;
-	}
-
-	/**
-	 * Fetch enrolled members.
-	 *
-	 * @param locationId the location id
-	 * @return the integer
-	 */
-	private Integer fetchEnrolledMembers(Integer locationId, HttpServletRequest request)
-	{
-		MemberResponse memberResponse = fetchMembersEnrolledMember(locationId, BusinessTypeEnum.LOCATION, request);
-
-		if (memberResponse.getMemberList() != null)
-		{
-			return memberResponse.getMemberList().size();
-		}
-
-		return 0;
 	}
 
 	/**

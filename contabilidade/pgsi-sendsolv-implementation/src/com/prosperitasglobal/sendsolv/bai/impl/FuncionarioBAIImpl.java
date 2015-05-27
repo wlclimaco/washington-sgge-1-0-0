@@ -53,14 +53,14 @@ public class FuncionarioBAIImpl implements IFuncionarioBAI
 	private static final String PROSPERITASGLOBAL_BASE_OL_ERROR =
 			"sendsolv.base.optimistic.locking.error";
 
-	/** The organization bac. */
+	/** The funcionario bac. */
 	private IFuncionarioBAC empresaBAC; // injected by Spring through setter
 
 	/** The validation controller. */
 	private ValidationController validationController;
 
 	/**
-	 * Get organization validation controller.
+	 * Get funcionario validation controller.
 	 *
 	 * @return the validation controller
 	 */
@@ -70,17 +70,17 @@ public class FuncionarioBAIImpl implements IFuncionarioBAI
 	}
 
 	/**
-	 * Spring sets the organization validation controller.
+	 * Spring sets the funcionario validation controller.
 	 *
-	 * @param organizationValidationController the new validation controller
+	 * @param funcionarioValidationController the new validation controller
 	 */
-	public void setValidationController(ValidationController organizationValidationController)
+	public void setValidationController(ValidationController funcionarioValidationController)
 	{
-		validationController = organizationValidationController;
+		validationController = funcionarioValidationController;
 	}
 
 	/**
-	 * Spring Sets the organization bac.
+	 * Spring Sets the funcionario bac.
 	 *
 	 * @param empresaBAC the new empresa bac
 	 */
@@ -261,7 +261,7 @@ public class FuncionarioBAIImpl implements IFuncionarioBAI
 	 * @param indicator the indicator
 	 * @param persistType the persist type
 	 * @param request the request
-	 * @return the organization response
+	 * @return the funcionario response
 	 */
 	private FuncionarioResponse process(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
 			FuncionarioMaintenanceRequest request)

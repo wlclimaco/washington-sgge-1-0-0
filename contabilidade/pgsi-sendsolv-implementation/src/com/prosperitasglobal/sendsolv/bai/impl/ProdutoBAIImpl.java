@@ -45,7 +45,7 @@ public class ProdutoBAIImpl implements IProdutoBAI
 
 	/** The Constant PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_PARENT_ID_REQUIRED. */
 	private static final String PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_PARENT_ID_REQUIRED =
-			"sendsolv.base.produtovalidator.parentorganization.required";
+			"sendsolv.base.produtovalidator.parentproduto.required";
 
 	/** The Constant PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED. */
 	private static final String PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED =
@@ -55,7 +55,7 @@ public class ProdutoBAIImpl implements IProdutoBAI
 	private static final String PROSPERITASGLOBAL_BASE_OL_ERROR =
 			"sendsolv.base.optimistic.locking.error";
 
-	/** The organization bac. */
+	/** The produto bac. */
 	private IProdutoBAC produtoBAC; // injected by Spring through setter
 
 	/** The validation controller. */
@@ -68,7 +68,7 @@ public class ProdutoBAIImpl implements IProdutoBAI
 	 */
 
 	/**
-	 * Get organization validation controller.
+	 * Get produto validation controller.
 	 *
 	 * @return the validation controller
 	 */
@@ -78,17 +78,17 @@ public class ProdutoBAIImpl implements IProdutoBAI
 	}
 
 	/**
-	 * Spring sets the organization validation controller.
+	 * Spring sets the produto validation controller.
 	 *
-	 * @param organizationValidationController the new validation controller
+	 * @param produtoValidationController the new validation controller
 	 */
-	public void setValidationController(ValidationController organizationValidationController)
+	public void setValidationController(ValidationController produtoValidationController)
 	{
-		validationController = organizationValidationController;
+		validationController = produtoValidationController;
 	}
 
 	/**
-	 * Spring Sets the organization bac.
+	 * Spring Sets the produto bac.
 	 *
 	 * @param produtoBAC the new produto bac
 	 */
@@ -303,7 +303,7 @@ public class ProdutoBAIImpl implements IProdutoBAI
 	 * @param indicator the indicator
 	 * @param persistType the persist type
 	 * @param request the request
-	 * @return the organization response
+	 * @return the produto response
 	 */
 	private ProdutoResponse process(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
 			ProdutoMaintenanceRequest request)
