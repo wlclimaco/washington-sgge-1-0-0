@@ -1,3 +1,4 @@
+DROP TABLE [dbo].[regime];
 CREATE TABLE [dbo].[regime](
 	[id]           [int] NOT NULL,
 	[nome]         [varchar](100) NULL,
@@ -26,7 +27,7 @@ INSERT INTO [dbo].[regime]
 		   (3,'Lucro Presumido','Lucro Presumido',10000000,'rod',1000000,'rod')
 GO
 /** ---------------------------------------------------------------*/
-
+DROP TABLE [dbo].[empresa];
 CREATE TABLE [dbo].[empresa] (
 	[id]           [int] NOT NULL,
 	[nome]         [varchar](100) NULL,
@@ -56,6 +57,7 @@ INSERT INTO [dbo].[empresa]
 
 GO
 /** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[documento];
 CREATE TABLE [dbo].[documento](
 	[id]           [int] NOT NULL,
 	[tabela]	 [int] NULL,
@@ -100,7 +102,7 @@ INSERT INTO [dbo].[documento]
 GO
 
 /** ---------------------------------------------------------------*/
-
+DROP TABLE [dbo].[email];
 CREATE TABLE [dbo].[email](
 	[id]           [int] NOT NULL,
 	[tabela]	   [int] NULL,
@@ -140,6 +142,7 @@ INSERT INTO [dbo].[email]
 GO
 
 /** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[endereco];
 CREATE TABLE [dbo].[endereco](
 	[id]           [int] NOT NULL,
 	[tabela]		 [int]  NULL,
@@ -187,7 +190,6 @@ GO
 /** ---------------------------------------------------------------*/
 
 
-
 CREATE TABLE [dbo].[telefone] (
 	[id]           [int] not NULL,
 	[type]         [int] NULL,
@@ -209,6 +211,7 @@ CONSTRAINT [pk_telefone_id] PRIMARY KEY CLUSTERED
 
 
 /** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[socio];
 CREATE TABLE [dbo].[socio](
 	[id]           [int] NOT NULL,
 	[parentId]	   [int] NULL,
@@ -226,6 +229,7 @@ CONSTRAINT [pk_socios_id] PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 /** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[historico];
 CREATE TABLE [dbo].[historico] (
 	[id]           [int] NOT NULL,
 	[parentId]	   [int] NOT NULL,
@@ -294,6 +298,8 @@ CONSTRAINT [pk_ncm_id] PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
+/** --------------------------------------------------------------- */
+DROP TABLE  [dbo].[CIDADE];
 
 CREATE TABLE [dbo].[CIDADE](
     [CODIGO]     [VARCHAR](6) NOT NULL,
@@ -313,6 +319,8 @@ CONSTRAINT [pk_cidade_id] PRIMARY KEY CLUSTERED
 	[CODIGO] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+/** --------------------------------------------------------------- */
+DROP TABLE  [dbo].[cnaePorRelacionamento];
 
 CREATE TABLE [dbo].[cnaePorRelacionamento](
     [id]         [int] NOT NULL,
@@ -325,6 +333,52 @@ CREATE TABLE [dbo].[cnaePorRelacionamento](
     [modify_user]  [varchar](50) NULL,
 CONSTRAINT [pk_cnaeRelacionamento_id] PRIMARY KEY CLUSTERED
 (
-	[CODIGO] ASC
+	[ID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+/** --------------------------------------------------------------- */
+DROP TABLE  [dbo].[status];
+
+CREATE TABLE [dbo].[status](
+    [id]           [int] NOT NULL,
+    [dataStatus]   [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [parentId]     [int] NOT NULL,
+    [status] 	   [int] NOT NULL,
+    [acaoType]     [int] NOT NULL,
+    [tabelaEnum]   [int] NOT NULL,
+    [note]    	   [varchar](50) NULL,
+	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_status_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+INSERT INTO [dbo].[status]
+           ([id]
+           ,[dataStatus]
+           ,[parentId]
+           ,[status]
+           ,[acaoType]
+           ,[tabelaEnum]
+           ,[note]
+           ,[create_date]
+           ,[create_user]
+           ,[modify_date]
+           ,[modify_user])
+     VALUES
+           (1,1000000000,1,1,1,'Rua Maria Conceicao silva',1000000000,'rod',10000002,'rod'),
+		   (2,1000000000,2,2,1,'Rua Maria Conceicao silva',1000000000,'rod',10000002,'rod'),
+		   (3,1000000000,3,3,1,'Rua Maria Conceicao silva',1000000000,'rod',10000002,'rod'),
+		   (4,1000000000,1,1,2,'Rua Maria Conceicao silva',1000000000,'rod',10000002,'rod'),
+		   (5,1000000000,2,2,2,'Rua Maria Conceicao silva',1000000000,'rod',10000002,'rod'),
+		   (6,1000000000,3,3,2,'Rua Maria Conceicao silva',1000000000,'rod',10000002,'rod'),
+		   (7,1000000000,1,3,3,'Rua Maria Conceicao silva',1000000000,'rod',10000002,'rod'),
+		   (8,1000000000,2,2,3,'Rua Maria Conceicao silva',1000000000,'rod',10000002,'rod'),
+		   (9,1000000000,3,1,3,'Rua Maria Conceicao silva',1000000000,'rod',10000002,'rod'),
+		   (10,1000000000,1,1,4,'Rua Maria Conceicao silva',1000000000,'rod',10000002,'rod')
+GO
+/** ---------------------------------------------------------------*/
