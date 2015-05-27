@@ -6,7 +6,7 @@
 
 <mapper namespace="OrganizationMap">
 
-  <resultMap id="organizationResult" type="Organization" extends="CBOFMap.businessResult">
+  <resultMap id="organizationResult" type="Organization" >
     <result property="dbaName" column="dba_name"/>
     <result property="numberOfLocations" column="number_of_locations"/>
     <result property="isPayrollCentralizedValue" column="is_payroll_centralized"/>
@@ -200,106 +200,15 @@
   </select>
 
   <select id="fetchOrganizationById" parameterType="FetchByIdRequest" resultMap="organizationResult">
-		    SELECT
-		    	b.business_id,
-		    	b.versn_lock_num,
-				<include refid="allOrganizationColumns" />,
-				<include refid="countryMap.allCountryColumns" />,
-		    	<include refid="CBOFMap.allNAICSColumns" />,
-		    	<include refid="CBOFMap.allSICColumns" />,
-		    	<include refid="CBOFMap.numberOfEmployeesColumns" />,
-		    	<include refid="CBOFMap.numberOfMigrantWorkersColumns" />
-		    FROM business b
-		    JOIN country c ON b.FK_country_code=c.country_code
-		    LEFT JOIN lookup_value d ON (b.FK_NAICS_id = d.id)
-			LEFT JOIN lookup_value e ON (b.FK_SIC_id = e.id)
-			JOIN [range] ne  ON b.FK_number_of_employees = ne.id
-			LEFT JOIN [range] nm  ON b.FK_number_of_migrant_workers = nm.id
-		    <where>
-		  		 <choose>
-					<when test="id != null and id != ''">
-						b.business_id = #{id}
-		    		</when>
-		    	    <otherwise>
-		    	    	<if test="stringId != null and stringId != ''">
-		    	       		UPPER(b.business_key) = UPPER(#{stringId})
-		    	        </if>
-		    	    </otherwise>
-		    	 </choose>
-		  </where>
+
   </select>
 
   <select id="fetchAllOrganizationsByRequest" parameterType="PagedInquiryRequest" resultMap="organizationResult">
-    SELECT  *
-	   FROM (
-			    SELECT *
-			           ,ROW_NUMBER() OVER(ORDER BY
-			           <if test="sortExpression != null and sortExpression != ''">
-			           		${sortExpression}
-			            </if>
-			            <if test="sortExpression == null or sortExpression == ''">
-							name
-   						</if>
-			            ) AS RowNumber
-			       FROM
-	    			(
-	    				SELECT 	b.business_id,
-   	    				        b.versn_lock_num,
-	    						<include refid="allOrganizationColumns" />,
-	    						<include refid="countryMap.allCountryColumns" />,
-	    						<include refid="CBOFMap.allNAICSColumns" />,
-	    						<include refid="CBOFMap.allSICColumns" />,
-	    						<include refid="CBOFMap.numberOfEmployeesColumns" />,
-	    						<include refid="CBOFMap.numberOfMigrantWorkersColumns" />
-	    				FROM business b
-	    				JOIN country c ON b.FK_country_code=c.country_code
-	    				LEFT JOIN lookup_value d ON (b.FK_NAICS_id = d.id)
-						LEFT JOIN lookup_value e ON (b.FK_SIC_id = e.id)
-						JOIN [range] ne  ON b.FK_number_of_employees = ne.id
-						LEFT JOIN [range] nm  ON b.FK_number_of_migrant_workers = nm.id
-						WHERE business_type = 1
-						  <if test="statusList != null and !statusList.isEmpty()">
-						     AND b.PGSI_status IN
-						     <foreach item="item" index="index" collection="statusList"
-							     open="(" separator="," close=")">
-							   	 #{item.value}
-							 </foreach>
-						  </if>
-					   <include refid="CBOFMap.inquiryCriteria"/>
-	    			) LIST
-		    )ORG_PAGE
-			<choose>
-				<when test="pageSize != null and pageSize > 0">
-				   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
-				        LOWER: startRow + 1 and
-				        UPPER: startRow + pageSize -->
-				   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
-				</when>
-				<otherwise>
-				 	WHERE RowNumber BETWEEN 1 AND RowNumber
-				 	ORDER BY RowNumber
-				</otherwise>
-			</choose>
+
   </select>
 
   <select id="fetchDocumentsByBusinessId" parameterType="Integer" resultMap="documentResult">
-		SELECT
-			bd.business_document_id,
-			bd.FK_document_type_id as document_type_id,
-			bd.FK_business_id,
-			bd.action_required as action_required,
-			bd.filing_status as filing_status,
-			bd.note_text as note_text,
-			bd.keyword_text,
-			bd.create_date,
-      		bd.create_user,
-      		bd.modify_date,
-      		bd.modify_user,
-      		dt.name as name,
-      		dt.description as description
-		FROM business_document bd
-		LEFT JOIN document_type dt ON dt.document_type_id = bd.FK_document_type_id
-		WHERE bd.FK_business_id=#{value}
+
   </select>
 
   <select id="fetchVersionNumber" parameterType="Organization" resultType="int">
@@ -311,41 +220,7 @@
   </select>
 
 	<select id="fetchAllOrganizationsByPagedBatch" resultMap="organizationResult">
-		<if test="_databaseId == 'SqlServer'">
-			SELECT * FROM
-			(
-				SELECT
-					b.business_id,
-			    	b.versn_lock_num,
-					<include refid="allOrganizationColumns" />,
-					<include refid="countryMap.allCountryColumns" />,
-    				<include refid="CBOFMap.allNAICSColumns" />,
-    				<include refid="CBOFMap.allSICColumns" />,
-    				<include refid="CBOFMap.numberOfEmployeesColumns" />,
-    				<include refid="CBOFMap.numberOfMigrantWorkersColumns" />,
-					ROW_NUMBER() OVER(ORDER BY b.business_id) AS RowNumber
-				FROM business b
-    			JOIN country c ON b.FK_country_code=c.country_code
-    			LEFT JOIN lookup_value d ON (b.FK_NAICS_id = d.id)
-				LEFT JOIN lookup_value e ON (b.FK_SIC_id = e.id)
-				JOIN [range] ne  ON b.FK_number_of_employees = ne.id
-				LEFT JOIN [range] nm  ON b.FK_number_of_migrant_workers = nm.id
-				WHERE business_type = 1
-			)
-			LIST
-			<choose>
-				<when test="_pagesize != null and _pagesize > 0">
-				<!-- #{startPage}*#{pageSize} = startRow, so limits are:
-					 LOWER: startRow + 1 and
-					 UPPER: startRow + pageSize -->
-					WHERE RowNumber BETWEEN (#{_page}*#{_pagesize})+ 1 AND (#{_page}*#{_pagesize})+#{_pagesize}
-				</when>
-				<otherwise>
-					WHERE RowNumber BETWEEN 1 AND RowNumber
-					ORDER BY RowNumber
-				</otherwise>
-			</choose>
-		</if>
+
 	</select>
 
 </mapper>

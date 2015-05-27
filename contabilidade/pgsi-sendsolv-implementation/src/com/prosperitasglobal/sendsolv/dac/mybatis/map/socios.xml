@@ -26,7 +26,7 @@
 
        -->
 
-  <resultMap id="socioResult" type="Socio" extends="CBOFMap.businessResult">
+  <resultMap id="socioResult" type="Socio" >
     <result property="id" column="id" />
     <result property="parentId" column="parentId" />
    	<result property="nome" column="nome"/>

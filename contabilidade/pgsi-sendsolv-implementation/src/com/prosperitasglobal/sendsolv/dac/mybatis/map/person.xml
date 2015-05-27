@@ -758,25 +758,7 @@
 	</select>
 
 	<select id="fetchDocumentByPersonId" parameterType="Integer" resultMap="documentResult">
-		SELECT  pd.person_document_id,
-				p.person_id as parent_key,
-				p.person_type as parent_key_type,
-				<include refid="countryMap.allCountryColumns" />,
-				<include refid="documentTypeMap.allDocumentTypeColumnsWithAlias" />,
-				spr.state_province_region_id,
-				pd.expiration_date,
-				pd.note_text as note_text,
-				pd.value,
-				pd.create_date,
-				pd.create_user,
-				pd.modify_date,
-				pd.modify_user
-			FROM person p
-			INNER JOIN person_document pd ON (p.person_id  = pd.FK_person_id)
-			LEFT JOIN document_type dt ON (dt.document_type_id = pd.FK_document_type_id)
-			LEFT JOIN country c ON (c.country_code = pd.FK_country_code)
-			LEFT JOIN state_province_region spr ON (spr.state_province_region_id = pd.FK_state_province_region_id)
-			WHERE p.person_id= #{value}
+
   </select>
 
   	<select id="fetchVersionNumber" parameterType="Person" resultType="int">

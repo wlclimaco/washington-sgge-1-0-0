@@ -4,7 +4,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="TelefoneMap">
+<mapper namespace="RegimeMap">
 
 	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
 	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
@@ -14,13 +14,10 @@
        necessary if the columns (or aliases) match to the properties
        exactly. -->
 
-  <resultMap id="telefoneResult" type="Telefone">
+  <resultMap id="regimeResult" type="Regime">
     <result property="id" column="id" />
-    <result property="type" column="type" />
-    <result property="parentId" column="parentId" />
-   	<result property="tabela" column="tabela"/>
-	<result property="ddd" column="ddd"/>
-	<result property="telefone" column="telefone" />
+    <result property="nome" column="nome" />
+    <result property="descricao" column="descricao" />
     <result property="create_date" column="create_date" />
    	<result property="create_user" column="create_user"/>
 	<result property="modify_date" column="modify_date"/>
@@ -31,26 +28,19 @@
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
-  <sql id="allTelefoneColumns">
+  <sql id="allRegimeColumns">
 		 b.id
-		,b.type
-		,b.parentId
-		,b.tabela
-		,b.ddd
-		,b.telefone
+		,b.nome
+		,b.descricao
       	,b.create_date
       	,b.create_user
       	,b.modify_date
       	,b.modify_user
   </sql>
 
-  <sql id="allTelefoneValues">
-  		#{id},
-    	#{typeValue},
-    	#{parentId},
-    	#{tabela},
-    	#{ddd},
-    	#{telefone},
+  <sql id="allRegimeValues">
+  		#{nome},
+    	#{descricao},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
@@ -58,11 +48,11 @@
   <!--
 		SQL Insert Statements.
  	-->
-  <insert id="insertTelefone" parameterType="Telefone" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO telefone (
-		<include refid="allTelefoneColumns" />
+  <insert id="insertRegime" parameterType="Regime" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO regime (
+		<include refid="allRegimeColumns" />
       )
-    VALUES (<include refid="allTelefoneValues" /> )
+    VALUES (<include refid="allRegimeValues" /> )
   </insert>
 
 
@@ -70,12 +60,11 @@
 		SQL Update Statements.
  	-->
 
-  <update id="updateTelefone" parameterType="Telefone">
-    UPDATE telefone
+  <update id="updateRegime" parameterType="Regime">
+    UPDATE regime
     	<set>
-    		<if test="ddd!= null">ddd = #{ddd},</if>
-	    	<if test="typeValue!= null"> type=#{typeValue},</if>
-	    	<if test="telefone!= null"> telefone=#{telefone},</if>
+    		<if test="nome!= null">nome = #{nome},</if>
+	    	<if test="descricao!= null"> descricao=#{descricao},</if>
 			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
@@ -86,20 +75,20 @@
    <!--
 		SQL Delete Statements.
    -->
-  <delete id="deleteTelefoneById" parameterType="Integer">
-    	DELETE FROM telefone WHERE id = #{id}
+  <delete id="deleteRegimeById" parameterType="Integer">
+    	DELETE FROM regime WHERE id = #{id}
   </delete>
 
 	<!--
 		SQL Fetch Statements.
  	-->
-  <select id="fetchTelefoneByEmpresa" parameterType="Integer" resultMap="telefoneResult">
-     SELECT * FROM telefone
+  <select id="fetchRegimeByEmpresa" parameterType="Integer" resultMap="regimeResult">
+     SELECT * FROM regime
      WHERE tabela = 1 and parentId = #{id}
   </select>
 
-  <select id="fetchTelefoneByFuncionario" parameterType="Integer" resultMap="telefoneResult">
-     SELECT * FROM telefone
+  <select id="fetchRegimeByFuncionario" parameterType="Integer" resultMap="regimeResult">
+     SELECT * FROM regime
      WHERE tabela = 2 and parentId = #{id}
   </select>
 

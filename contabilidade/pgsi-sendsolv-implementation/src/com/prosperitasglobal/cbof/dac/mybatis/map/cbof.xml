@@ -18,54 +18,6 @@
 		<result property="modifyDateUTC" column="modify_date"/>
 	</resultMap>
 
-	<!-- Use this maps when joining with the Business table -->
-   	<resultMap id="codeValueResultSIC" type="CodeValue">
-   		<id property="id" column="SICId" />
-		<result property="code" column="SICcode" />
-		<result property="value" column="SICname" />
-   	</resultMap>
-
-   	<resultMap id="codeValueResultNAICS" type="CodeValue">
-   		<id property="id" column="NAICSId" />
-		<result property="code" column="NAICScode" />
-		<result property="value" column="NAICSname" />
-   	</resultMap>
-
-	<!-- Use this maps when joining with the business table -->
-	<resultMap id="rangeResultNumberOfEmployees" type="Range" extends="changeControlMapping">
-		<result property="id" column="number_of_employees_range_id" />
-		<result property="name" column="number_of_employees_range_name" />
-   	</resultMap>
-
-   	<resultMap id="rangeResultNumberOfMigrantWorkers" type="Range" extends="changeControlMapping">
-		<result property="id" column="number_of_migrant_workers_range_id" />
-		<result property="name" column="number_of_migrant_workers_range_name" />
-   	</resultMap>
-
-   	<resultMap id="businessResult" type="Business" extends="changeControlMapping">
-	    <result property="id" column="business_id"/>
-		<result property="key" column="business_key"/>
-	    <result property="name" column="name"/>
-		<result property="businessTypeValue" column="business_type" />
-		<result property="employerIdentificationNumber" column="EIN_Code"/>
-	    <result property="statusValue" column="PGSi_status" />
-		 <result property="risk.riskLevelValue" column="risk_level" />
-	    <result property="risk.riskLevelNote" column="risk_level_note_text" />
-	    <result property="version" column="versn_lock_num" />
-		<result property="sdnStatus" column="business_id" jdbcType="INTEGER" typeHandler="com.prosperitasglobal.sendsolv.sdn.dac.mybatis.MyBatisCurrentSDNStatusEnumTypeHandler" />
-
-		<association property="country" column="FK_country_code" javaType="Country" resultMap="countryMap.countryResult" />
-	    <association property="numberOfEmployees" column="FK_number_of_employees" javaType="Range" select="rangeMap.fetchRangeById"  />
-	    <association property="numberOfMigrantWorkers" column="FK_number_of_migrant_workers" javaType="Range" select="rangeMap.fetchRangeById"  />
-	    <association property="standardIndustrialClassificationCode" column="FK_SIC_id" javaType="CodeValue" resultMap="CBOFMap.codeValueResultSIC" />
-	    <association property="northAmericanIndustryClassificationSystemCode" column="FK_NAICS_id"  javaType="CodeValue" resultMap="CBOFMap.codeValueResultNAICS" />
-
-		<collection property="contactList" column="business_id" select="ContactMap.fetchContactsByBusinessId"/>
-		<collection property="noteList" column="business_id" select="noteMap.fetchNoteByBusinessId"/>
-		<collection property="suspiciousActivityIdList" column="business_id" select="SuspiciousActivityMap.fetchSuspiciousActivityByBusinessId"/>
-
-  	</resultMap>
-
 	<!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
@@ -83,48 +35,9 @@
 		#{modifyUser}
      </sql>
 
-	<sql id="allIndustryClassificationColumns">
-		id,
-  		code,
-  		name,
-  		<include refid="CBOFMap.allChangeControlColumns"/>
-  	</sql>
 
-     <sql id="allPersonNoteColumns">
-		FK_note_id,
-		FK_person_id,
-		<include refid="CBOFMap.allChangeControlColumns"/>
-  	</sql>
 
-  	<sql id="allPersonNoteValues">
-  		#{id},
-  		#{parentKey},
-    	<include refid="CBOFMap.changeControlFields"/>
-  	</sql>
 
-     <!-- Use these column names when joining with the business table. NAICS = d, SIC = e -->
-  	<sql id="allNAICSColumns">
-  		 d.id as NAICSId
-  		,d.code as NAICScode
-  		,d.name as NAICSname
-  	</sql>
-
-  	<sql id="allSICColumns">
-  		 e.id as SICId
-  		,e.code as SICcode
-  		,e.name as SICname
-  	</sql>
-
-	<!-- Use these column names when joining with the business table.  ne=number of employees, nm=number of migrant workers-->
-	<sql id="numberOfEmployeesColumns">
-  		ne.id as number_of_employees_range_id,
-  		ne.name as number_of_employees_range_name
-  	</sql>
-
-  	<sql id="numberOfMigrantWorkersColumns">
-  		nm.id as number_of_migrant_workers_range_id,
-  		nm.name as number_of_migrant_workers_range_name
-  	</sql>
 
     <!--
 	   Criteria Statements.
@@ -137,17 +50,6 @@
   	</if>
   </sql>
 
-  	<!--
-		SQL Update Statements.
- 	-->
-  <update id="updateBusinessStatus" parameterType="Business">
-		UPDATE business
- 		<set>
- 			<if test="statusValue != null"> PGSi_status=#{statusValue},</if>
- 			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
-			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
-		</set>
-   		WHERE business_id = #{id}
- 	</update>
+
 
 </mapper>

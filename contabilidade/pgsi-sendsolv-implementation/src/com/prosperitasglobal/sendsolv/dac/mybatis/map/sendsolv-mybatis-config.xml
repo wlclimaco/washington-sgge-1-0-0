@@ -61,7 +61,7 @@
 
 
  	<mappers>
-
+		<mapper resource="com/prosperitasglobal/cbof/dac/mybatis/map/cbof.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/arquivo.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/banco.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/beneficios.xml" />
