@@ -7,11 +7,9 @@ import java.util.TreeMap;
 
 import com.prosperitasglobal.cbof.bai.ICodeValueBAI;
 import com.prosperitasglobal.cbof.bai.ICountryBAI;
-import com.prosperitasglobal.cbof.bai.IDocumentTypeBAI;
 import com.prosperitasglobal.cbof.bai.ILanguageBAI;
 import com.prosperitasglobal.cbof.bai.INameSupplementBAI;
 import com.prosperitasglobal.cbof.bai.IRangeBAI;
-import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
 import com.prosperitasglobal.cbof.model.CodeValue;
 import com.prosperitasglobal.cbof.model.CodeValueEnum;
 import com.prosperitasglobal.cbof.model.Country;
@@ -28,33 +26,10 @@ import com.prosperitasglobal.cbof.model.response.CountryResponse;
 import com.prosperitasglobal.cbof.model.response.LanguageResponse;
 import com.prosperitasglobal.cbof.model.response.RangeResponse;
 import com.prosperitasglobal.cbof.model.response.StateProvinceRegionResponse;
-import com.prosperitasglobal.sendsolv.bai.IPayerBAI;
-import com.prosperitasglobal.sendsolv.bai.IProductPlanBAI;
-import com.prosperitasglobal.sendsolv.bai.ISecurityQuestionBAI;
-import com.prosperitasglobal.sendsolv.model.BusinessProductPlan;
-import com.prosperitasglobal.sendsolv.model.DocumentType;
-import com.prosperitasglobal.sendsolv.model.Payer;
-import com.prosperitasglobal.sendsolv.model.SecurityQuestion;
-import com.prosperitasglobal.sendsolv.model.criteria.BusinessProductPlanCriteria;
-import com.prosperitasglobal.sendsolv.model.criteria.PayerCriteria;
-import com.prosperitasglobal.sendsolv.model.request.BusinessProductPlanInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.DocumentTypeRequest;
 import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.PayerInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.response.BusinessProductPlanResponse;
-import com.prosperitasglobal.sendsolv.model.response.DocumentTypeResponse;
-import com.prosperitasglobal.sendsolv.model.response.PayerResponse;
-import com.prosperitasglobal.sendsolv.model.response.SecurityQuestionResponse;
-import com.qat.framework.model.SortExpression;
-import com.qat.framework.model.SortExpression.Direction;
 import com.qat.framework.model.UserContext;
 import com.qat.framework.validation.ValidationUtil;
 
-/**
- * The Class ListD.
- *
- * @author Flavio Tosta, Washington Costa
- */
 public final class ListD
 {
 
@@ -222,37 +197,37 @@ public final class ListD
 
 			}
 
-	/**
-	 * Fetch s document type by code.
-	 *
-	 * @param documentTypeBAI the document type bai
-	 * @param userContext the user context
-	 * @param businessTypeEnum the business type enum
-	 * @return the map< string, string>
-	 */
-	public static List<Map<String, String>> fetchSDocumentTypeByCode(
-			IDocumentTypeBAI documentTypeBAI,
-			UserContext userContext, Integer businessTypeEnum)
-			{
-
-		DocumentTypeResponse documentTypeResponse =
-				documentTypeBAI.fetchDocumentTypeByRequest(new DocumentTypeRequest(BusinessTypeEnum
-						.enumForValue(businessTypeEnum)));
-
-		Map<String, String> mapObject;
-		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
-
-		for (DocumentType documents : documentTypeResponse.getDocumentTypeList())
-		{
-			mapObject = new TreeMap<String, String>();
-			mapObject.put("key", documents.getId().toString());
-			mapObject.put("value", documents.getName());
-			list.add(mapObject);
-		}
-
-		return list;
-
-			}
+	// /**
+	// * Fetch s document type by code.
+	// *
+	// * @param documentTypeBAI the document type bai
+	// * @param userContext the user context
+	// * @param businessTypeEnum the business type enum
+	// * @return the map< string, string>
+	// */
+	// public static List<Map<String, String>> fetchSDocumentTypeByCode(
+	// IDocumentTypeBAI documentTypeBAI,
+	// UserContext userContext, Integer businessTypeEnum)
+	// {
+	//
+	// DocumentTypeResponse documentTypeResponse =
+	// documentTypeBAI.fetchDocumentTypeByRequest(new DocumentTypeRequest(BusinessTypeEnum
+	// .enumForValue(businessTypeEnum)));
+	//
+	// Map<String, String> mapObject;
+	// List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+	//
+	// for (DocumentType documents : documentTypeResponse.getDocumentTypeList())
+	// {
+	// mapObject = new TreeMap<String, String>();
+	// mapObject.put("key", documents.getId().toString());
+	// mapObject.put("value", documents.getName());
+	// list.add(mapObject);
+	// }
+	//
+	// return list;
+	//
+	// }
 
 	/**
 	 * Fetch s document type by code ssn.
@@ -262,32 +237,32 @@ public final class ListD
 	 * @param businessTypeEnum the business type enum
 	 * @return the map< string, string>
 	 */
-	public static List<Map<String, String>> fetchSDocumentTypeByCodeSSN(
-			IDocumentTypeBAI documentTypeBAI,
-			UserContext userContext, Integer businessTypeEnum)
-			{
-
-		DocumentTypeResponse documentTypeResponse =
-				documentTypeBAI.fetchDocumentTypeByRequest(new DocumentTypeRequest(BusinessTypeEnum
-						.enumForValue(businessTypeEnum)));
-
-		Map<String, String> mapObject;
-		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
-
-		for (DocumentType documents : documentTypeResponse.getDocumentTypeList())
-		{
-			if (documents.getName().trim().equalsIgnoreCase(SOCIAL_SECURITY_NUMBER))
-			{
-				mapObject = new TreeMap<String, String>();
-				mapObject.put("key", documents.getId().toString());
-				mapObject.put("value", documents.getName());
-				list.add(mapObject);
-			}
-		}
-
-		return list;
-
-			}
+	// public static List<Map<String, String>> fetchSDocumentTypeByCodeSSN(
+	// IDocumentTypeBAI documentTypeBAI,
+	// UserContext userContext, Integer businessTypeEnum)
+	// {
+	//
+	// DocumentTypeResponse documentTypeResponse =
+	// documentTypeBAI.fetchDocumentTypeByRequest(new DocumentTypeRequest(BusinessTypeEnum
+	// .enumForValue(businessTypeEnum)));
+	//
+	// Map<String, String> mapObject;
+	// List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+	//
+	// for (DocumentType documents : documentTypeResponse.getDocumentTypeList())
+	// {
+	// if (documents.getName().trim().equalsIgnoreCase(SOCIAL_SECURITY_NUMBER))
+	// {
+	// mapObject = new TreeMap<String, String>();
+	// mapObject.put("key", documents.getId().toString());
+	// mapObject.put("value", documents.getName());
+	// list.add(mapObject);
+	// }
+	// }
+	//
+	// return list;
+	//
+	// }
 
 	/**
 	 * Fetch language by code.
@@ -412,43 +387,43 @@ public final class ListD
 	 * @param userContext the user context
 	 * @return the map< integer, string>
 	 */
-	public static List<Map<String, String>> fetchProductPlan(
-			IProductPlanBAI productPlanBAI,
-			UserContext userContext, Integer businessId)
-	{
-		BusinessProductPlanInquiryRequest productPlanInquiryRequest = new BusinessProductPlanInquiryRequest();
-
-		productPlanInquiryRequest.setStartPage(0);
-		productPlanInquiryRequest.setPageSize(999);
-		productPlanInquiryRequest.setPreQueryCount(true);
-		productPlanInquiryRequest.addSortExpressions(new SortExpression("name",
-				Direction.Ascending));
-
-		BusinessProductPlanCriteria criteria = new BusinessProductPlanCriteria();
-		criteria.setLocationId(businessId);
-
-		productPlanInquiryRequest.setCriteria(criteria);
-
-		productPlanInquiryRequest.setUserContext(userContext);
-
-		BusinessProductPlanResponse productPlanResponse =
-				productPlanBAI.fetchBusinessProductPlanByRequest(productPlanInquiryRequest);
-
-		Map<String, String> mapObject;
-		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
-
-		for (BusinessProductPlan productPlan : productPlanResponse.getBusinessProductPlanList())
-		{
-
-			mapObject = new TreeMap<String, String>();
-			mapObject.put("key", productPlan.getId().toString());
-			mapObject.put("value", productPlan.getName());
-			list.add(mapObject);
-		}
-
-		return list;
-
-	}
+	// public static List<Map<String, String>> fetchProductPlan(
+	// IProductPlanBAI productPlanBAI,
+	// UserContext userContext, Integer businessId)
+	// {
+	// BusinessProductPlanInquiryRequest productPlanInquiryRequest = new BusinessProductPlanInquiryRequest();
+	//
+	// productPlanInquiryRequest.setStartPage(0);
+	// productPlanInquiryRequest.setPageSize(999);
+	// productPlanInquiryRequest.setPreQueryCount(true);
+	// productPlanInquiryRequest.addSortExpressions(new SortExpression("name",
+	// Direction.Ascending));
+	//
+	// BusinessProductPlanCriteria criteria = new BusinessProductPlanCriteria();
+	// criteria.setLocationId(businessId);
+	//
+	// productPlanInquiryRequest.setCriteria(criteria);
+	//
+	// productPlanInquiryRequest.setUserContext(userContext);
+	//
+	// BusinessProductPlanResponse productPlanResponse =
+	// productPlanBAI.fetchBusinessProductPlanByRequest(productPlanInquiryRequest);
+	//
+	// Map<String, String> mapObject;
+	// List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+	//
+	// for (BusinessProductPlan productPlan : productPlanResponse.getBusinessProductPlanList())
+	// {
+	//
+	// mapObject = new TreeMap<String, String>();
+	// mapObject.put("key", productPlan.getId().toString());
+	// mapObject.put("value", productPlan.getName());
+	// list.add(mapObject);
+	// }
+	//
+	// return list;
+	//
+	// }
 
 	/**
 	 * Fetch all countries bai.
@@ -492,37 +467,37 @@ public final class ListD
 	 * @param criteria the criteria
 	 * @return the map< integer, string>
 	 */
-	public static List<Map<String, String>> fetchPayer(
-			IPayerBAI payer,
-			UserContext userContext, PayerCriteria criteria)
-			{
-		PayerInquiryRequest payerInquiryRequest = new PayerInquiryRequest();
-
-		payerInquiryRequest.setStartPage(0);
-		payerInquiryRequest.setPageSize(999);
-		payerInquiryRequest.setPreQueryCount(true);
-		payerInquiryRequest.addSortExpressions(new SortExpression("name",
-				Direction.Ascending));
-		payerInquiryRequest.setUserContext(userContext);
-
-		payerInquiryRequest.setCriteria(criteria);
-
-		PayerResponse payerResponse = payer.fetchPayerByRequest(payerInquiryRequest);
-
-		Map<String, String> mapObject;
-		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
-
-		for (Payer payers : payerResponse.getPayerList())
-		{
-			mapObject = new TreeMap<String, String>();
-			mapObject.put("key", payers.getId().toString());
-			mapObject.put("value", payers.getName());
-			list.add(mapObject);
-		}
-
-		return list;
-
-			}
+	// public static List<Map<String, String>> fetchPayer(
+	// IPayerBAI payer,
+	// UserContext userContext, PayerCriteria criteria)
+	// {
+	// PayerInquiryRequest payerInquiryRequest = new PayerInquiryRequest();
+	//
+	// payerInquiryRequest.setStartPage(0);
+	// payerInquiryRequest.setPageSize(999);
+	// payerInquiryRequest.setPreQueryCount(true);
+	// payerInquiryRequest.addSortExpressions(new SortExpression("name",
+	// Direction.Ascending));
+	// payerInquiryRequest.setUserContext(userContext);
+	//
+	// payerInquiryRequest.setCriteria(criteria);
+	//
+	// PayerResponse payerResponse = payer.fetchPayerByRequest(payerInquiryRequest);
+	//
+	// Map<String, String> mapObject;
+	// List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+	//
+	// for (Payer payers : payerResponse.getPayerList())
+	// {
+	// mapObject = new TreeMap<String, String>();
+	// mapObject.put("key", payers.getId().toString());
+	// mapObject.put("value", payers.getName());
+	// list.add(mapObject);
+	// }
+	//
+	// return list;
+	//
+	// }
 
 	/**
 	 * Fetch all the security questions.
@@ -531,27 +506,27 @@ public final class ListD
 	 * @return
 	 * @throws Exception
 	 */
-	public static List<Map<String, String>> fetchAllSecurityQuestionBAI(ISecurityQuestionBAI securityQuestionBAI)
-			throws Exception
-	{
-		SecurityQuestionResponse response = securityQuestionBAI.fetchAllSecurityQuestions();
-
-		Map<String, String> mapObject;
-		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
-
-		if (!ValidationUtil.isNullOrEmpty(response.getSecurityQuestionList()))
-		{
-			for (SecurityQuestion securityQuestion : response.getSecurityQuestionList())
-			{
-				mapObject = new TreeMap<String, String>();
-				mapObject.put("key", securityQuestion.getId().toString());
-				mapObject.put("value", securityQuestion.getSecurityQuestionKey());
-
-				list.add(mapObject);
-			}
-		}
-
-		return list;
-	}
+	// public static List<Map<String, String>> fetchAllSecurityQuestionBAI(ISecurityQuestionBAI securityQuestionBAI)
+	// throws Exception
+	// {
+	// SecurityQuestionResponse response = securityQuestionBAI.fetchAllSecurityQuestions();
+	//
+	// Map<String, String> mapObject;
+	// List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+	//
+	// if (!ValidationUtil.isNullOrEmpty(response.getSecurityQuestionList()))
+	// {
+	// for (SecurityQuestion securityQuestion : response.getSecurityQuestionList())
+	// {
+	// mapObject = new TreeMap<String, String>();
+	// mapObject.put("key", securityQuestion.getId().toString());
+	// mapObject.put("value", securityQuestion.getSecurityQuestionKey());
+	//
+	// list.add(mapObject);
+	// }
+	// }
+	//
+	// return list;
+	// }
 
 }

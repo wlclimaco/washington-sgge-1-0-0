@@ -13,17 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.prosperitasglobal.sendsolv.filter.FilterFactory;
 import com.prosperitasglobal.sendsolv.filter.model.response.FiltersResponse;
-import com.prosperitasglobal.sendsolv.model.OrganizationOrderByEnum;
 import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.qat.framework.model.SortExpression;
 import com.qat.framework.model.SortExpression.Direction;
-
-/**
- * The LocationViewController Class.
- *
- * @author Flavio Tosta, Washington Costa
- *
- */
 
 @Controller
 @RequestMapping("/arquivo")
@@ -48,7 +40,7 @@ public class ArquivoViewController extends ArquivoBaseController
 	private static final String EDIT_VIEW = "/editView";
 
 	/** The Constant FETCH_ORGANIZATION_BYEMPRESA. */
-	private static final String FETCH_ORGANIZATION_BYEMPRESA = "fetchOrganizationBylocation";
+	private static final String FETCH_ORGANIZATION_BYEMPRESA = "fetchOrganizationByarquivo";
 
 	/** The view mapping constants . */
 	private static final String VIEW_EMPRESA_MAIN = "/empresa/empresa_main";
@@ -65,7 +57,7 @@ public class ArquivoViewController extends ArquivoBaseController
 	private static final String VIEW_EMPRESA_DIALOG_ADD = "/empresa/empresa_dialog_create";
 
 	/** The Constant ORGANIZATION_BY_EMPRESA_MAIN. */
-	private static final String ORGANIZATION_BY_EMPRESA_MAIN = "/organization/organizationBylocation_main";
+	private static final String ORGANIZATION_BY_EMPRESA_MAIN = "/organization/organizationByarquivo_main";
 
 	/** The PagedInquiryRequest Constants. */
 	private static final int START_PAGE_NUMBER = 0;
@@ -74,7 +66,7 @@ public class ArquivoViewController extends ArquivoBaseController
 	private static final int INITIAL_PAGE_SIZE = 25;
 
 	/** The Constant EMPRESA_ID. */
-	private static final String EMPRESA_ID = "locationId";
+	private static final String EMPRESA_ID = "arquivoId";
 
 	/** The Constant LOG. */
 	private static final Logger LOG = LoggerFactory.getLogger(ArquivoViewController.class);
@@ -126,14 +118,14 @@ public class ArquivoViewController extends ArquivoBaseController
 		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
 		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
 		pagedInquiryRequest.setPreQueryCount(true);
-		pagedInquiryRequest.addSortExpressions(new SortExpression(OrganizationOrderByEnum.NAME_COLUMN.getValue(),
+		pagedInquiryRequest.addSortExpressions(new SortExpression("ID",
 				Direction.Ascending));
 
 		try
 		{
 
 			modelAndView.addObject(RESPONSE, getMapper()
-					.writeValueAsString(fetchEmpresaByRequest(pagedInquiryRequest)));
+					.writeValueAsString(fetchArquivoByRequest(pagedInquiryRequest)));
 
 			FiltersResponse filtersResponse = new FiltersResponse();
 			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);
@@ -156,51 +148,51 @@ public class ArquivoViewController extends ArquivoBaseController
 	/**
 	 * Load add/edit view.
 	 *
-	 * @param locationId the location id
+	 * @param arquivoId the arquivo id
 	 * @return the model and view
 	 */
 	@RequestMapping(value = {FETCH_ADD, FETCH_EDIT}, method = RequestMethod.GET)
-	public ModelAndView loadUpdate(@RequestParam(value = EMPRESA_ID, required = false) Integer locationId,
+	public ModelAndView loadUpdate(@RequestParam(value = EMPRESA_ID, required = false) Integer arquivoId,
 			HttpServletRequest request)
 	{
 
-		return locationEditMAV(locationId, VIEW_EMPRESA_ADD, true, request);
+		return arquivoEditMAV(arquivoId, VIEW_EMPRESA_ADD, true, request);
 	}
 
 	@RequestMapping(value = {FETCH_VIEW_TABS}, method = RequestMethod.GET)
-	public ModelAndView loadTabs(@RequestParam(value = EMPRESA_ID, required = true) Integer locationId,
+	public ModelAndView loadTabs(@RequestParam(value = EMPRESA_ID, required = true) Integer arquivoId,
 			HttpServletRequest request)
 	{
 		return new ModelAndView(VIEW_EMPRESA_TABS);
 	}
 
 	/**
-	 * Load location view.
+	 * Load arquivo view.
 	 *
-	 * @param locationId the location id
+	 * @param arquivoId the arquivo id
 	 * @param request the request
 	 * @return the model and view
 	 */
 	@RequestMapping(value = {FETCH_VIEW}, method = RequestMethod.GET)
-	public ModelAndView loadView(@RequestParam(value = EMPRESA_ID, required = true) Integer locationId,
+	public ModelAndView loadView(@RequestParam(value = EMPRESA_ID, required = true) Integer arquivoId,
 			HttpServletRequest request)
 	{
-		return locationEditMAV(locationId, VIEW_EMPRESA_VIEW, true, request);
+		return arquivoEditMAV(arquivoId, VIEW_EMPRESA_VIEW, true, request);
 	}
 
 	/**
 	 * Load view update.
 	 *
-	 * @param locationId the location id
+	 * @param arquivoId the arquivo id
 	 * @param request the request
 	 * @return the model and view
 	 */
 	@RequestMapping(value = {EDIT_VIEW}, method = RequestMethod.GET)
-	public ModelAndView loadViewUpdate(@RequestParam(value = EMPRESA_ID, required = false) Integer locationId,
+	public ModelAndView loadViewUpdate(@RequestParam(value = EMPRESA_ID, required = false) Integer arquivoId,
 			HttpServletRequest request)
 	{
 
-		return locationEditMAV(locationId, VIEW_EMPRESA_DIALOG_ADD, true, request);
+		return arquivoEditMAV(arquivoId, VIEW_EMPRESA_DIALOG_ADD, true, request);
 	}
 
 }

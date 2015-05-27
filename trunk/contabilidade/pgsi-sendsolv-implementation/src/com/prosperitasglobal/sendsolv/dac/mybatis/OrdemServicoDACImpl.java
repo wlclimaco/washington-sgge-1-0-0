@@ -5,11 +5,9 @@ import java.util.Map;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
-import com.prosperitasglobal.cbof.dac.IContactDAC;
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.IOrdemServicoDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
-import com.prosperitasglobal.sendsolv.model.FrequencyBasedEvent;
 import com.prosperitasglobal.sendsolv.model.OrdemServico;
 import com.prosperitasglobal.sendsolv.model.request.OrdemServicoInquiryRequest;
 import com.qat.framework.model.QATModel;
@@ -45,7 +43,7 @@ public class OrdemServicoDACImpl extends SqlSessionDaoSupport implements IOrdemS
 
 	/** The Constant ORDEMSERVICO_STMT_ASSOC_ORG_TO_CONTACT. */
 	private static final String ORDEMSERVICO_STMT_ASSOC_ORG_TO_CONTACT = ORDEMSERVICO_NAMESPACE
-			+ "associateOrdemServicoWithContact";
+			+ "associateOrdemServicoWithOrdemServico";
 
 	/** The Constant ORDEMSERVICO_STMT_UPDATE. */
 	private static final String ORDEMSERVICO_STMT_UPDATE = ORDEMSERVICO_NAMESPACE + "updateOrdemServico";
@@ -75,30 +73,30 @@ public class OrdemServicoDACImpl extends SqlSessionDaoSupport implements IOrdemS
 	/** The Constant LOG. */
 	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(OrdemServicoDACImpl.class);
 
-	/** The contact dac. */
-	private IContactDAC contactDAC;
+	/** The ordemServico dac. */
+	private IOrdemServicoDAC ordemServicoDAC;
 
 	/** The valid sort fields for an ordemServico inquiry. Will be injected by Spring. */
 	private Map<String, String> ordemServicoInquiryValidSortFields;
 
 	/**
-	 * Gets the contact dac.
+	 * Gets the ordemServico dac.
 	 *
-	 * @return the contact dac
+	 * @return the ordemServico dac
 	 */
-	public IContactDAC getContactDAC()
+	public IOrdemServicoDAC getOrdemServicoDAC()
 	{
-		return contactDAC;
+		return ordemServicoDAC;
 	}
 
 	/**
-	 * Sets the contact dac.
+	 * Sets the ordemServico dac.
 	 *
-	 * @param contactDAC the contact dac
+	 * @param ordemServicoDAC the ordemServico dac
 	 */
-	public void setContactDAC(IContactDAC contactDAC)
+	public void setOrdemServicoDAC(IOrdemServicoDAC ordemServicoDAC)
 	{
-		this.contactDAC = contactDAC;
+		this.ordemServicoDAC = ordemServicoDAC;
 	}
 
 	/**
@@ -249,32 +247,32 @@ public class OrdemServicoDACImpl extends SqlSessionDaoSupport implements IOrdemS
 			InternalResultsResponse<OrdemServico> response)
 	{
 		Integer count = 0;
-		// First Maintain Contacts
-		// if (ValidationUtil.isNullOrEmpty(ordemServico.getContactList()))
+		// First Maintain OrdemServicos
+		// if (ValidationUtil.isNullOrEmpty(ordemServico.getOrdemServicoList()))
 		// {
 		// return count;
 		// }
-		// // For Each Contact...
-		// for (Contact contact : ordemServico.getContactList())
+		// // For Each OrdemServico...
+		// for (OrdemServico ordemServico : ordemServico.getOrdemServicoList())
 		// {
 		// // Make sure we set the parent key
-		// contact.setParentKey(ordemServico.getId());
+		// ordemServico.setParentKey(ordemServico.getId());
 		//
-		// if (ValidationUtil.isNull(contact.getModelAction()))
+		// if (ValidationUtil.isNull(ordemServico.getModelAction()))
 		// {
 		// continue;
 		// }
-		// switch (contact.getModelAction())
+		// switch (ordemServico.getModelAction())
 		// {
 		// case INSERT:
-		// count = getContactDAC().insertContact(contact,
+		// count = getOrdemServicoDAC().insertOrdemServico(ordemServico,
 		// ORDEMSERVICO_STMT_ASSOC_ORG_TO_CONTACT, response);
 		// break;
 		// case UPDATE:
-		// count = getContactDAC().updateContact(contact, response);
+		// count = getOrdemServicoDAC().updateOrdemServico(ordemServico, response);
 		// break;
 		// case DELETE:
-		// count = getContactDAC().deleteBusinessContact(contact, response);
+		// count = getOrdemServicoDAC().deleteBusinessOrdemServico(ordemServico, response);
 		// break;
 		// default:
 		// if (LOG.isDebugEnabled())
@@ -285,13 +283,6 @@ public class OrdemServicoDACImpl extends SqlSessionDaoSupport implements IOrdemS
 		// }
 		// }
 		return count;
-	}
-
-	@Override
-	public InternalResultsResponse<FrequencyBasedEvent> fetchFrequencyBasedEventById(Integer id)
-	{
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

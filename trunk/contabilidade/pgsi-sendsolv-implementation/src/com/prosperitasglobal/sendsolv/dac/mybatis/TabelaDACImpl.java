@@ -5,7 +5,6 @@ import java.util.Map;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
-import com.prosperitasglobal.cbof.dac.IContactDAC;
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.ITabelaDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
@@ -44,7 +43,7 @@ public class TabelaDACImpl extends SqlSessionDaoSupport implements ITabelaDAC
 
 	/** The Constant TABELA_STMT_ASSOC_ORG_TO_CONTACT. */
 	private static final String TABELA_STMT_ASSOC_ORG_TO_CONTACT = TABELA_NAMESPACE
-			+ "associateTabelaWithContact";
+			+ "associateTabelaWithTabela";
 
 	/** The Constant TABELA_STMT_UPDATE. */
 	private static final String TABELA_STMT_UPDATE = TABELA_NAMESPACE + "updateTabela";
@@ -74,30 +73,30 @@ public class TabelaDACImpl extends SqlSessionDaoSupport implements ITabelaDAC
 	/** The Constant LOG. */
 	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(TabelaDACImpl.class);
 
-	/** The contact dac. */
-	private IContactDAC contactDAC;
+	/** The tabela dac. */
+	private ITabelaDAC tabelaDAC;
 
 	/** The valid sort fields for an tabela inquiry. Will be injected by Spring. */
 	private Map<String, String> tabelaInquiryValidSortFields;
 
 	/**
-	 * Gets the contact dac.
+	 * Gets the tabela dac.
 	 *
-	 * @return the contact dac
+	 * @return the tabela dac
 	 */
-	public IContactDAC getContactDAC()
+	public ITabelaDAC getTabelaDAC()
 	{
-		return contactDAC;
+		return tabelaDAC;
 	}
 
 	/**
-	 * Sets the contact dac.
+	 * Sets the tabela dac.
 	 *
-	 * @param contactDAC the contact dac
+	 * @param tabelaDAC the tabela dac
 	 */
-	public void setContactDAC(IContactDAC contactDAC)
+	public void setTabelaDAC(ITabelaDAC tabelaDAC)
 	{
-		this.contactDAC = contactDAC;
+		this.tabelaDAC = tabelaDAC;
 	}
 
 	/**
@@ -248,32 +247,32 @@ public class TabelaDACImpl extends SqlSessionDaoSupport implements ITabelaDAC
 			InternalResultsResponse<Tabela> response)
 	{
 		Integer count = 0;
-		// First Maintain Contacts
-		// if (ValidationUtil.isNullOrEmpty(tabela.getContactList()))
+		// First Maintain Tabelas
+		// if (ValidationUtil.isNullOrEmpty(tabela.getTabelaList()))
 		// {
 		// return count;
 		// }
-		// // For Each Contact...
-		// for (Contact contact : tabela.getContactList())
+		// // For Each Tabela...
+		// for (Tabela tabela : tabela.getTabelaList())
 		// {
 		// // Make sure we set the parent key
-		// contact.setParentKey(tabela.getId());
+		// tabela.setParentKey(tabela.getId());
 		//
-		// if (ValidationUtil.isNull(contact.getModelAction()))
+		// if (ValidationUtil.isNull(tabela.getModelAction()))
 		// {
 		// continue;
 		// }
-		// switch (contact.getModelAction())
+		// switch (tabela.getModelAction())
 		// {
 		// case INSERT:
-		// count = getContactDAC().insertContact(contact,
+		// count = getTabelaDAC().insertTabela(tabela,
 		// TABELA_STMT_ASSOC_ORG_TO_CONTACT, response);
 		// break;
 		// case UPDATE:
-		// count = getContactDAC().updateContact(contact, response);
+		// count = getTabelaDAC().updateTabela(tabela, response);
 		// break;
 		// case DELETE:
-		// count = getContactDAC().deleteBusinessContact(contact, response);
+		// count = getTabelaDAC().deleteBusinessTabela(tabela, response);
 		// break;
 		// default:
 		// if (LOG.isDebugEnabled())

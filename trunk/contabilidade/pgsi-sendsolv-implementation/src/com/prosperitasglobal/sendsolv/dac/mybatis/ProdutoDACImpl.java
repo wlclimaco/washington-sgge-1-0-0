@@ -5,7 +5,6 @@ import java.util.Map;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
-import com.prosperitasglobal.cbof.dac.IContactDAC;
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.IProdutoDAC;
 import com.prosperitasglobal.sendsolv.model.Produto;
@@ -43,7 +42,7 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 
 	/** The Constant PRODUTO_STMT_ASSOC_ORG_TO_CONTACT. */
 	private static final String PRODUTO_STMT_ASSOC_ORG_TO_CONTACT = PRODUTO_NAMESPACE
-			+ "associateProdutoWithContact";
+			+ "associateProdutoWithProduto";
 
 	/** The Constant PRODUTO_STMT_UPDATE. */
 	private static final String PRODUTO_STMT_UPDATE = PRODUTO_NAMESPACE + "updateProduto";
@@ -73,30 +72,30 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	/** The Constant LOG. */
 	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(ProdutoDACImpl.class);
 
-	/** The contact dac. */
-	private IContactDAC contactDAC;
+	/** The produto dac. */
+	private IProdutoDAC produtoDAC;
 
 	/** The valid sort fields for an produto inquiry. Will be injected by Spring. */
 	private Map<String, String> produtoInquiryValidSortFields;
 
 	/**
-	 * Gets the contact dac.
+	 * Gets the produto dac.
 	 *
-	 * @return the contact dac
+	 * @return the produto dac
 	 */
-	public IContactDAC getContactDAC()
+	public IProdutoDAC getProdutoDAC()
 	{
-		return contactDAC;
+		return produtoDAC;
 	}
 
 	/**
-	 * Sets the contact dac.
+	 * Sets the produto dac.
 	 *
-	 * @param contactDAC the contact dac
+	 * @param produtoDAC the produto dac
 	 */
-	public void setContactDAC(IContactDAC contactDAC)
+	public void setProdutoDAC(IProdutoDAC produtoDAC)
 	{
-		this.contactDAC = contactDAC;
+		this.produtoDAC = produtoDAC;
 	}
 
 	/**
@@ -225,32 +224,32 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 			InternalResultsResponse<Produto> response)
 	{
 		Integer count = 0;
-		// First Maintain Contacts
-		// if (ValidationUtil.isNullOrEmpty(produto.getContactList()))
+		// First Maintain Produtos
+		// if (ValidationUtil.isNullOrEmpty(produto.getProdutoList()))
 		// {
 		// return count;
 		// }
-		// // For Each Contact...
-		// for (Contact contact : produto.getContactList())
+		// // For Each Produto...
+		// for (Produto produto : produto.getProdutoList())
 		// {
 		// // Make sure we set the parent key
-		// contact.setParentKey(produto.getId());
+		// produto.setParentKey(produto.getId());
 		//
-		// if (ValidationUtil.isNull(contact.getModelAction()))
+		// if (ValidationUtil.isNull(produto.getModelAction()))
 		// {
 		// continue;
 		// }
-		// switch (contact.getModelAction())
+		// switch (produto.getModelAction())
 		// {
 		// case INSERT:
-		// count = getContactDAC().insertContact(contact,
+		// count = getProdutoDAC().insertProduto(produto,
 		// PRODUTO_STMT_ASSOC_ORG_TO_CONTACT, response);
 		// break;
 		// case UPDATE:
-		// count = getContactDAC().updateContact(contact, response);
+		// count = getProdutoDAC().updateProduto(produto, response);
 		// break;
 		// case DELETE:
-		// count = getContactDAC().deleteBusinessContact(contact, response);
+		// count = getProdutoDAC().deleteBusinessProduto(produto, response);
 		// break;
 		// default:
 		// if (LOG.isDebugEnabled())

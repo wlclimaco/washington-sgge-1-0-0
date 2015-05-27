@@ -8,14 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
 import com.prosperitasglobal.sendsolv.bai.IEmpresaBAI;
 import com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.EmpresaMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
-import com.prosperitasglobal.sendsolv.model.response.MemberResponse;
 import com.qat.framework.validation.ValidationUtil;
 
 public class EmpresaBaseController extends UtilControllerD
@@ -75,7 +73,7 @@ public class EmpresaBaseController extends UtilControllerD
 
 			if (isSelect)
 			{
-				modelAndView = listSelectBusiness(modelAndView, request);
+				// modelAndView = listSelectBusiness(modelAndView, request);
 			}
 			if (!ValidationUtil.isNullOrZero(empresaId))
 			{
@@ -97,24 +95,6 @@ public class EmpresaBaseController extends UtilControllerD
 		}
 
 		return modelAndView;
-	}
-
-	/**
-	 * Fetch enrolled members.
-	 *
-	 * @param empresaId the empresa id
-	 * @return the integer
-	 */
-	private Integer fetchEnrolledMembers(Integer empresaId, HttpServletRequest request)
-	{
-		MemberResponse memberResponse = fetchMembersEnrolledMember(empresaId, BusinessTypeEnum.LOCATION, request);
-
-		if (memberResponse.getMemberList() != null)
-		{
-			return memberResponse.getMemberList().size();
-		}
-
-		return 0;
 	}
 
 	/**

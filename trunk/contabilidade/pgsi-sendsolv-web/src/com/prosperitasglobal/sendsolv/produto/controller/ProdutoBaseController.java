@@ -6,12 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
 import com.prosperitasglobal.sendsolv.bai.IProdutoBAI;
 import com.prosperitasglobal.sendsolv.model.request.ProdutoInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.response.MemberResponse;
 import com.prosperitasglobal.sendsolv.model.response.ProdutoResponse;
 import com.qat.framework.validation.ValidationUtil;
 
@@ -72,7 +70,7 @@ public class ProdutoBaseController extends UtilControllerD
 
 			if (isSelect)
 			{
-				modelAndView = listSelectBusiness(modelAndView, request);
+				// modelAndView = listSelectBusiness(modelAndView, request);
 			}
 			if (!ValidationUtil.isNullOrZero(produtoId))
 			{
@@ -94,24 +92,6 @@ public class ProdutoBaseController extends UtilControllerD
 		}
 
 		return modelAndView;
-	}
-
-	/**
-	 * Fetch enrolled members.
-	 *
-	 * @param produtoId the produto id
-	 * @return the integer
-	 */
-	private Integer fetchEnrolledMembers(Integer produtoId, HttpServletRequest request)
-	{
-		MemberResponse memberResponse = fetchMembersEnrolledMember(produtoId, BusinessTypeEnum.LOCATION, request);
-
-		if (memberResponse.getMemberList() != null)
-		{
-			return memberResponse.getMemberList().size();
-		}
-
-		return 0;
 	}
 
 	/**

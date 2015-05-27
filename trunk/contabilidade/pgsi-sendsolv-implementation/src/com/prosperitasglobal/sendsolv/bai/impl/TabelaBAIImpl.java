@@ -45,7 +45,7 @@ public class TabelaBAIImpl implements ITabelaBAI
 
 	/** The Constant PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_PARENT_ID_REQUIRED. */
 	private static final String PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_PARENT_ID_REQUIRED =
-			"sendsolv.base.locationvalidator.parentorganization.required";
+			"sendsolv.base.locationvalidator.parenttabela.required";
 
 	/** The Constant PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED. */
 	private static final String PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED =
@@ -55,14 +55,14 @@ public class TabelaBAIImpl implements ITabelaBAI
 	private static final String PROSPERITASGLOBAL_BASE_OL_ERROR =
 			"sendsolv.base.optimistic.locking.error";
 
-	/** The organization bac. */
+	/** The tabela bac. */
 	private ITabelaBAC locationBAC; // injected by Spring through setter
 
 	/** The validation controller. */
 	private ValidationController validationController;
 
 	/**
-	 * Get organization validation controller.
+	 * Get tabela validation controller.
 	 *
 	 * @return the validation controller
 	 */
@@ -72,17 +72,17 @@ public class TabelaBAIImpl implements ITabelaBAI
 	}
 
 	/**
-	 * Spring sets the organization validation controller.
+	 * Spring sets the tabela validation controller.
 	 *
-	 * @param organizationValidationController the new validation controller
+	 * @param tabelaValidationController the new validation controller
 	 */
-	public void setValidationController(ValidationController organizationValidationController)
+	public void setValidationController(ValidationController tabelaValidationController)
 	{
-		validationController = organizationValidationController;
+		validationController = tabelaValidationController;
 	}
 
 	/**
-	 * Spring Sets the organization bac.
+	 * Spring Sets the tabela bac.
 	 *
 	 * @param locationBAC the new location bac
 	 */
@@ -263,7 +263,7 @@ public class TabelaBAIImpl implements ITabelaBAI
 	 * @param indicator the indicator
 	 * @param persistType the persist type
 	 * @param request the request
-	 * @return the organization response
+	 * @return the tabela response
 	 */
 	private TabelaResponse process(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
 			TabelaMaintenanceRequest request)

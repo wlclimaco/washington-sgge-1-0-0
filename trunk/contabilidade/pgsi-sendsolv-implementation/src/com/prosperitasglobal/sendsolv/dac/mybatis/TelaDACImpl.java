@@ -5,7 +5,6 @@ import java.util.Map;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
-import com.prosperitasglobal.cbof.dac.IContactDAC;
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.ITelaDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
@@ -44,7 +43,7 @@ public class TelaDACImpl extends SqlSessionDaoSupport implements ITelaDAC
 
 	/** The Constant TELA_STMT_ASSOC_ORG_TO_CONTACT. */
 	private static final String TELA_STMT_ASSOC_ORG_TO_CONTACT = TELA_NAMESPACE
-			+ "associateTelaWithContact";
+			+ "associateTelaWithTela";
 
 	/** The Constant TELA_STMT_UPDATE. */
 	private static final String TELA_STMT_UPDATE = TELA_NAMESPACE + "updateTela";
@@ -75,7 +74,7 @@ public class TelaDACImpl extends SqlSessionDaoSupport implements ITelaDAC
 	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(TelaDACImpl.class);
 
 	/** The contact dac. */
-	private IContactDAC contactDAC;
+	private ITelaDAC contactDAC;
 
 	/** The valid sort fields for an tela inquiry. Will be injected by Spring. */
 	private Map<String, String> telaInquiryValidSortFields;
@@ -85,7 +84,7 @@ public class TelaDACImpl extends SqlSessionDaoSupport implements ITelaDAC
 	 *
 	 * @return the contact dac
 	 */
-	public IContactDAC getContactDAC()
+	public ITelaDAC getTelaDAC()
 	{
 		return contactDAC;
 	}
@@ -95,7 +94,7 @@ public class TelaDACImpl extends SqlSessionDaoSupport implements ITelaDAC
 	 *
 	 * @param contactDAC the contact dac
 	 */
-	public void setContactDAC(IContactDAC contactDAC)
+	public void setTelaDAC(ITelaDAC contactDAC)
 	{
 		this.contactDAC = contactDAC;
 	}
@@ -248,13 +247,13 @@ public class TelaDACImpl extends SqlSessionDaoSupport implements ITelaDAC
 			InternalResultsResponse<Tela> response)
 	{
 		Integer count = 0;
-		// First Maintain Contacts
-		// if (ValidationUtil.isNullOrEmpty(tela.getContactList()))
+		// First Maintain Telas
+		// if (ValidationUtil.isNullOrEmpty(tela.getTelaList()))
 		// {
 		// return count;
 		// }
-		// // For Each Contact...
-		// for (Contact contact : tela.getContactList())
+		// // For Each Tela...
+		// for (Tela contact : tela.getTelaList())
 		// {
 		// // Make sure we set the parent key
 		// contact.setParentKey(tela.getId());
@@ -266,14 +265,14 @@ public class TelaDACImpl extends SqlSessionDaoSupport implements ITelaDAC
 		// switch (contact.getModelAction())
 		// {
 		// case INSERT:
-		// count = getContactDAC().insertContact(contact,
+		// count = getTelaDAC().insertTela(contact,
 		// TELA_STMT_ASSOC_ORG_TO_CONTACT, response);
 		// break;
 		// case UPDATE:
-		// count = getContactDAC().updateContact(contact, response);
+		// count = getTelaDAC().updateTela(contact, response);
 		// break;
 		// case DELETE:
-		// count = getContactDAC().deleteBusinessContact(contact, response);
+		// count = getTelaDAC().deleteBusinessTela(contact, response);
 		// break;
 		// default:
 		// if (LOG.isDebugEnabled())

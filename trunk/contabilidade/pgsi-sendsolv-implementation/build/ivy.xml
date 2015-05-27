@@ -16,7 +16,6 @@
 		<dependency org="oracle" name="jaxb-impl" rev="2.2.11"/>
 		<dependency org="oracle" name="jaxb-jxc" rev="2.2.11"/>
 		<dependency org="oracle" name="jaxb-xjc" rev="2.2.11"/>
-		<dependency org="twilio" name="twilio-java-sdk" rev="latest.release" />
 	</dependencies>
 
 </ivy-module>

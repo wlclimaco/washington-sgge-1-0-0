@@ -15,7 +15,7 @@
 	   	<property name="databaseIdProvider" ref="databaseIdProvider"/>
 	</bean>
 
-	<!-- ========================= DAC DEFINITIONS================================= -->
+	<!-- ========================= DAC DEFINITIONS=================================
 	<bean id="contactDACTarget" class="com.prosperitasglobal.cbof.dac.mybatis.ContactDACImpl">
 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
 	</bean>
@@ -170,11 +170,13 @@
     	</property>
 	</bean>
 
+
+-->
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
 	<bean id="empresaDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.EmpresaDACImpl">
 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
 	</bean>
-
-<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
 	<bean id="arquivoDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.ArquivoDACImpl">
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
@@ -299,7 +301,7 @@
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
 
-<!-- ============================================================================== -->
+<!-- ==============================================================================
 
 	<bean id="productPlanDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.ProductPlanDACImpl">
 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
@@ -348,8 +350,8 @@
 	<bean id="callingCardDACTarget" class="com.prosperitasglobal.sendsolv.callingcard.dac.mybatis.CallingCardDACImpl">
 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
 	</bean>
-
-	<!-- ========================= Valid Sort Field DEFINITIONS================================= -->
+-->
+	<!-- ========================= Valid Sort Field DEFINITIONS=================================
 
 	<util:map id="businessProductPlanInquiryValidSortFields">
 		<entry key="name" value="name"/>
@@ -410,5 +412,5 @@
 		<entry key="id" value="suspicious_activity_report_id"/>
 		<entry key="type" value="sar_type_code"/>
 	</util:map>
-
+-->
 </beans>

@@ -1,7 +1,6 @@
 package com.prosperitasglobal.sendsolv.dac;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.FrequencyBasedEvent;
 import com.prosperitasglobal.sendsolv.model.OrdemServico;
 import com.prosperitasglobal.sendsolv.model.request.OrdemServicoInquiryRequest;
 import com.qat.framework.model.response.InternalResponse;
@@ -36,15 +35,6 @@ public interface IOrdemServicoDAC
 	 * @return the internal response
 	 */
 	public InternalResponse deleteOrdemServico(OrdemServico ordemServico);
-
-	/**
-	 * Fetch frequency based event by id.
-	 *
-	 * @param id the id
-	 * @return The {@link InternalResultsResponse} containing the {@link java.util.List} of {@link FrequencyBasedEvent}
-	 *         collection.
-	 */
-	public InternalResultsResponse<FrequencyBasedEvent> fetchFrequencyBasedEventById(Integer id);
 
 	/**
 	 * Fetch ordemServico by id.

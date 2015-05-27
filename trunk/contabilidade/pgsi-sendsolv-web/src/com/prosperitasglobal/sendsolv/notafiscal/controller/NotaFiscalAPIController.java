@@ -1,8 +1,6 @@
 package com.prosperitasglobal.sendsolv.notafiscal.controller;
 
 import java.util.Calendar;
-import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -165,16 +163,4 @@ public class NotaFiscalAPIController extends NotaFiscalBaseController
 
 	}
 
-	/**
-	 * Fetch sic naics.
-	 *
-	 * @param codeValueEnum the code value enum
-	 * @return the map< integer, string>
-	 */
-	@RequestMapping(value = FETCH_SIC_NAICS, method = RequestMethod.POST)
-	@ResponseBody
-	public List<Map<String, String>> fetchSicNaics(@RequestBody Integer codeValueEnum, String userId)
-	{
-		return listSicNaics(codeValueEnum, userId);
-	}
 }

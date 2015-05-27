@@ -13,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.prosperitasglobal.sendsolv.filter.FilterFactory;
 import com.prosperitasglobal.sendsolv.filter.model.response.FiltersResponse;
-import com.prosperitasglobal.sendsolv.model.OrganizationOrderByEnum;
 import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.qat.framework.model.SortExpression;
 import com.qat.framework.model.SortExpression.Direction;
@@ -126,7 +125,7 @@ public class NotaFiscalViewController extends NotaFiscalBaseController
 		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
 		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
 		pagedInquiryRequest.setPreQueryCount(true);
-		pagedInquiryRequest.addSortExpressions(new SortExpression(OrganizationOrderByEnum.NAME_COLUMN.getValue(),
+		pagedInquiryRequest.addSortExpressions(new SortExpression("ID",
 				Direction.Ascending));
 
 		try

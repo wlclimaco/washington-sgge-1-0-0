@@ -47,7 +47,7 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 
 	/** The Constant PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_PARENT_ID_REQUIRED. */
 	private static final String PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_PARENT_ID_REQUIRED =
-			"sendsolv.base.ordemServicovalidator.parentorganization.required";
+			"sendsolv.base.ordemServicovalidator.parentordemServico.required";
 
 	/** The Constant PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED. */
 	private static final String PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED =
@@ -57,14 +57,14 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 	private static final String PROSPERITASGLOBAL_BASE_OL_ERROR =
 			"sendsolv.base.optimistic.locking.error";
 
-	/** The organization bac. */
+	/** The ordemServico bac. */
 	private IOrdemServicoBAC ordemServicoBAC; // injected by Spring through setter
 
 	/** The validation controller. */
 	private ValidationController validationController;
 
 	/**
-	 * Get organization validation controller.
+	 * Get ordemServico validation controller.
 	 *
 	 * @return the validation controller
 	 */
@@ -74,17 +74,17 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 	}
 
 	/**
-	 * Spring sets the organization validation controller.
+	 * Spring sets the ordemServico validation controller.
 	 *
-	 * @param organizationValidationController the new validation controller
+	 * @param ordemServicoValidationController the new validation controller
 	 */
-	public void setValidationController(ValidationController organizationValidationController)
+	public void setValidationController(ValidationController ordemServicoValidationController)
 	{
-		validationController = organizationValidationController;
+		validationController = ordemServicoValidationController;
 	}
 
 	/**
-	 * Spring Sets the organization bac.
+	 * Spring Sets the ordemServico bac.
 	 *
 	 * @param ordemServicoBAC the new ordemServico bac
 	 */
@@ -270,7 +270,7 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 	 * @param indicator the indicator
 	 * @param persistType the persist type
 	 * @param request the request
-	 * @return the organization response
+	 * @return the ordemServico response
 	 */
 	private OrdemServicoResponse process(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
 			OrdemServicoMaintenanceRequest request)

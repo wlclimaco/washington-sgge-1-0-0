@@ -3,7 +3,7 @@
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" >
 
-	<!-- ========================= BAC DEFINITIONS ======================== -->
+	<!-- ========================= BAC DEFINITIONS ========================
 
 	<bean id="organizationBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.OrganizationBACImpl">
 		<property name="organizationDAC" ref="organizationDACTarget"/>
@@ -56,6 +56,8 @@
  		<property name="participantIdDAC" ref="participantIdDACTarget"/>
  		<property name="sdnCheckerBAC" ref="sdnCheckerBACTarget"/>
  	</bean>
+
+ 	-->
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
 	<bean id="arquivoBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.ArquivoBACImpl">
@@ -113,7 +115,7 @@
  		<property name="telaDAC" ref="telaDACTarget"/>
  	</bean>
 
-<!-- ============================================================================== -->
+<!-- ==============================================================================
  	<bean id="moneyTransferBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.MoneyTransferBACImpl">
 		<property name="moneyTransferDAC" ref="moneyTransferDACTarget"/>
 		<property name="moneyTransferBatchDAC" ref="moneyTransferBatchDACTarget"/>
@@ -184,18 +186,18 @@
         	</props>
 		</property>
  	</bean>
-
-	<!-- JAXBContext-->
+-->
+	<!-- JAXBContext
 	<bean id="jaxbContextBean" class="javax.xml.bind.JAXBContext" factory-method="newInstance">
 		<constructor-arg value="com.prosperitasglobal.sendsolv.sdn.model.generated"/>
 	</bean>
 
-	<!-- JAXB Unmarshaller -->
+
 	<bean id="unmarshallerBean" factory-bean="jaxbContextBean" factory-method="createUnmarshaller"/>
 
-	<!-- JAXB Marshaller -->
-	<bean id="marshallerBean" factory-bean="jaxbContextBean" factory-method="createMarshaller"/>
 
+	<bean id="marshallerBean" factory-bean="jaxbContextBean" factory-method="createMarshaller"/>
+-->
 	<!-- ========================= ASPECT CONFIGURATION ======================== -->
 	<beans profile="settings">
 		<!-- Load application settings into singleton Properties object  -->

@@ -10,15 +10,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
 import com.prosperitasglobal.sendsolv.bai.IFuncionarioBAI;
-import com.prosperitasglobal.sendsolv.bai.IMemberBAI;
 import com.prosperitasglobal.sendsolv.model.Funcionario;
 import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.response.FuncionarioResponse;
-import com.prosperitasglobal.sendsolv.model.response.MemberResponse;
 import com.qat.framework.validation.ValidationUtil;
 
 /**
@@ -46,32 +43,6 @@ public class FuncionarioBaseController extends UtilControllerD
 
 	/** The Funcionario BAI. */
 	private IFuncionarioBAI locationBAI;
-
-	/** The Member BAI. */
-	private IMemberBAI memberBAI;
-
-	/**
-	 * Gets the member BAI.
-	 *
-	 * @return the member BAI
-	 */
-	@Override
-	public IMemberBAI getMemberBAI()
-	{
-		return memberBAI;
-	}
-
-	/**
-	 * Sets the member bai.
-	 *
-	 * @param memberBAI the member bai
-	 */
-	@Override
-	@Resource
-	public void setMemberBAI(IMemberBAI memberBAI)
-	{
-		this.memberBAI = memberBAI;
-	}
 
 	/**
 	 * Gets the location bai.
@@ -112,7 +83,7 @@ public class FuncionarioBaseController extends UtilControllerD
 
 			if (isSelect)
 			{
-				modelAndView = listSelectBusiness(modelAndView, request);
+				// modelAndView = listSelectBusiness(modelAndView, request);
 			}
 			if (!ValidationUtil.isNullOrZero(locationId))
 			{
@@ -134,24 +105,6 @@ public class FuncionarioBaseController extends UtilControllerD
 		}
 
 		return modelAndView;
-	}
-
-	/**
-	 * Fetch enrolled members.
-	 *
-	 * @param locationId the location id
-	 * @return the integer
-	 */
-	private Integer fetchEnrolledMembers(Integer locationId, HttpServletRequest request)
-	{
-		MemberResponse memberResponse = fetchMembersEnrolledMember(locationId, BusinessTypeEnum.LOCATION, request);
-
-		if (memberResponse.getMemberList() != null)
-		{
-			return memberResponse.getMemberList().size();
-		}
-
-		return 0;
 	}
 
 	/**
