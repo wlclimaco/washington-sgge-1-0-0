@@ -15,7 +15,7 @@ public class Empresa extends ModelCosmeDamiao
 	/** The type of an account. */
 	private String nome;
 
-	private String regime;
+	private Regime regime;
 
 	private List<Endereco> enderecos;
 
@@ -168,7 +168,7 @@ public class Empresa extends ModelCosmeDamiao
 	/**
 	 * @return the regime
 	 */
-	public String getRegime()
+	public Regime getRegime()
 	{
 		return regime;
 	}
@@ -176,7 +176,7 @@ public class Empresa extends ModelCosmeDamiao
 	/**
 	 * @param regime the regime to set
 	 */
-	public void setRegime(String regime)
+	public void setRegime(Regime regime)
 	{
 		this.regime = regime;
 	}
