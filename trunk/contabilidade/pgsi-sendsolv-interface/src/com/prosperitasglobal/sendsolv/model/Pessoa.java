@@ -2,6 +2,7 @@ package com.prosperitasglobal.sendsolv.model;
 
 import java.util.List;
 
+import com.prosperitasglobal.cbof.model.FormaPg;
 import com.prosperitasglobal.cbof.model.Note;
 
 /**
@@ -49,6 +50,8 @@ public class Pessoa extends ModelCosmeDamiao
 	private List<Note> notes;
 
 	private List<Banco> bancos;
+
+	private List<FormaPg> formaPagamentoList;
 
 	/**
 	 * Default constructor.

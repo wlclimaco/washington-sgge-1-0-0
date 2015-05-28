@@ -2,8 +2,6 @@ package com.prosperitasglobal.sendsolv.model;
 
 import java.util.List;
 
-import com.qat.framework.model.QATModel;
-
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -22,7 +20,51 @@ public class ModelCosmeDamiao extends QATModel
 
 	private Integer emprId;
 
+	private String site;
+
 	private List<Status> statusList;
+
+	public Integer getTabelaEnumValue()
+	{
+		if (tabelaEnum != null)
+		{
+			return tabelaEnum.getValue();
+		}
+		return null;
+	}
+
+	public void setTabelaEnumValue(Integer acaoTypeValue)
+	{
+		tabelaEnum = TabelaEnum.enumForValue(acaoTypeValue);
+	}
+
+	public Integer getTypeValue()
+	{
+		if (type != null)
+		{
+			return type.getValue();
+		}
+		return null;
+	}
+
+	public void setAcaoEnumValue(Integer acaoTypeValue)
+	{
+		acaoType = AcaoEnum.enumForValue(acaoTypeValue);
+	}
+
+	public Integer getAcaoEnumValue()
+	{
+		if (acaoType != null)
+		{
+			return acaoType.getValue();
+		}
+		return null;
+	}
+
+	public void setTypeValue(Integer priorityValue)
+	{
+		type = TypeEnum.enumForValue(priorityValue);
+	}
 
 	/**
 	 * @return the parentKey
@@ -80,22 +122,6 @@ public class ModelCosmeDamiao extends QATModel
 		this.statusList = statusList;
 	}
 
-	/**
-	 * @return the emprId
-	 */
-	public Integer getEmprId()
-	{
-		return emprId;
-	}
-
-	/**
-	 * @param emprId the emprId to set
-	 */
-	public void setEmprId(Integer emprId)
-	{
-		this.emprId = emprId;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -105,10 +131,10 @@ public class ModelCosmeDamiao extends QATModel
 	{
 		return "ModelCosmeDamiao [getParentId()=" + getParentId() + ", getType()=" + getType() + ", getAcaoType()="
 				+ getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()=" + getStatusList()
-				+ ", getEmprId()=" + getEmprId() + ", getModelAction()=" + getModelAction() + ", getCreateUser()="
-				+ getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()="
-				+ getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC() + ", toString()=" + super.toString()
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
+				+ ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
+				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
+				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", toString()=" + super.toString() + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + "]";
 	}
 
 }
