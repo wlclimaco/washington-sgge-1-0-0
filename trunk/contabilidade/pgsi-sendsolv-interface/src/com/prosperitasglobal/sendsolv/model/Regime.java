@@ -21,7 +21,7 @@ public class Regime extends ModelCosmeDamiao
 	 */
 	public Regime()
 	{
-		super();
+
 	}
 
 	public Integer getId()
@@ -54,12 +54,20 @@ public class Regime extends ModelCosmeDamiao
 		this.descricao = descricao;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString()
 	{
 		return "Regime [getId()=" + getId() + ", getNome()=" + getNome() + ", getDescricao()=" + getDescricao()
-				+ ", getParentId()=" + getParentId() + ", getType()=" + getType() + ", getAcaoType()="
-				+ getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum() + ", toString()=" + super.toString() + "]";
+				+ ", getParentId()=" + getParentId() + ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType()
+				+ ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()="
+				+ getEmprId() + ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction()
+				+ ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC()
+				+ ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
 	}
 
 }

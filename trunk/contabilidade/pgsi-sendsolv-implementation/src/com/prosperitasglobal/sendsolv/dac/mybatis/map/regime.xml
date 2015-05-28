@@ -84,12 +84,12 @@
  	-->
   <select id="fetchRegimeByEmpresa" parameterType="Integer" resultMap="regimeResult">
      SELECT * FROM regime
-     WHERE tabela = 1 and parentId = #{id}
+     WHERE id = #{id}
   </select>
 
   <select id="fetchRegimeByFuncionario" parameterType="Integer" resultMap="regimeResult">
      SELECT * FROM regime
-     WHERE tabela = 2 and parentId = #{id}
+     WHERE id = #{id}
   </select>
 
 
