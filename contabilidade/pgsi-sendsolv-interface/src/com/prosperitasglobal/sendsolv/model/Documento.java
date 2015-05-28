@@ -18,7 +18,7 @@ public class Documento extends ModelCosmeDamiao
 	private String numero;
 
 	/** The data. */
-	private Integer data;
+	private Long data;
 
 	/** The estado. */
 	private String estado;
@@ -96,7 +96,7 @@ public class Documento extends ModelCosmeDamiao
 	 *
 	 * @return the data
 	 */
-	public Integer getData()
+	public Long getData()
 	{
 		return data;
 	}
@@ -106,7 +106,7 @@ public class Documento extends ModelCosmeDamiao
 	 *
 	 * @param data the data to set
 	 */
-	public void setData(Integer data)
+	public void setData(Long data)
 	{
 		this.data = data;
 	}

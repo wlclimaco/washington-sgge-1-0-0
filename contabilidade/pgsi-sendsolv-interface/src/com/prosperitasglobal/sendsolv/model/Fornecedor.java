@@ -40,22 +40,6 @@ public class Fornecedor extends Pessoa
 		this.id = id;
 	}
 
-	/**
-	 * @return the cdEmpr
-	 */
-	public Integer getCdEmpr()
-	{
-		return cdEmpr;
-	}
-
-	/**
-	 * @param cdEmpr the cdEmpr to set
-	 */
-	public void setCdEmpr(Integer cdEmpr)
-	{
-		this.cdEmpr = cdEmpr;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -63,7 +47,7 @@ public class Fornecedor extends Pessoa
 	@Override
 	public String toString()
 	{
-		return "Fornecedor [getId()=" + getId() + ", getCdEmpr()=" + getCdEmpr() + ", getNome()=" + getNome()
+		return "Fornecedor [getId()=" + ", getNome()=" + getNome()
 				+ ", getNomePai()=" + getNomePai() + ", getNomeMae()=" + getNomeMae() + ", getNomeConjugue()="
 				+ getNomeConjugue() + ", getEstadoCivil()=" + getEstadoCivil() + ", getDatanasc()=" + getDatanasc()
 				+ ", getFoto()=" + getFoto() + ", getSexo()=" + getSexo() + ", getEnderecos()=" + getEnderecos()

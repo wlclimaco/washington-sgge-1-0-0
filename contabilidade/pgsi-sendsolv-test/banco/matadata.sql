@@ -3,9 +3,9 @@ CREATE TABLE [dbo].[regime](
 	[id]           [int] NOT NULL,
 	[nome]         [varchar](100) NULL,
 	[descricao]    [varchar](200) NULL,
-	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
-    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
 CONSTRAINT [pk_regime_id] PRIMARY KEY CLUSTERED
 (
@@ -22,9 +22,9 @@ INSERT INTO [dbo].[regime]
            ,[modify_date]
            ,[modify_user])
      VALUES
-           (1,'Simples Nacional','Simples Nacional',1432783357778,'rod',10000000,'rod'),
-		   (2,'Lucro Real','Lucro Real',10000000,'rod',1000000,'rod'),
-		   (3,'Lucro Presumido','Lucro Presumido',10000000,'rod',1000000,'rod')
+           (1,'Simples Nacional','Simples Nacional',1432783357778,'rod',14327833577780,'rod'),
+		   (2,'Lucro Real','Lucro Real',14327833577780,'rod',1000000,'rod'),
+		   (3,'Lucro Presumido','Lucro Presumido',14327833577780,'rod',1000000,'rod')
 GO
 /** ---------------------------------------------------------------*/
 DROP TABLE [dbo].[empresa];
@@ -32,9 +32,9 @@ CREATE TABLE [dbo].[empresa] (
 	[id]           [int] NOT NULL,
 	[nome]         [varchar](100) NULL,
 	[regime]       [int] NULL,
-	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
-    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
 CONSTRAINT [pk_socio_id] PRIMARY KEY CLUSTERED
 (
@@ -65,11 +65,11 @@ CREATE TABLE [dbo].[documento](
 	[type]         [int] NULL,
 	[description]  [varchar](200) NULL,
 	[numero]       [varchar](50) NULL,
-	[data]         [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[data]         [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[estado]       [varchar](2) NULL,
-	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
-    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
 CONSTRAINT [pk_documento_id] PRIMARY KEY CLUSTERED
 (
@@ -93,12 +93,12 @@ INSERT INTO [dbo].[documento]
            ,[modify_date]
            ,[modify_user])
      VALUES
-           (1,1,1,1,'CNPJ','2001',1111111111,'MG',10000000,'rod',111111111,'rod'),
-		   (2,1,2,1,'CPF','2001',1111111111,'MG',10000000,'rod',111111111,'rod'),
-		   (3,1,3,1,'IM','2001',1111111111,'MG',10000000,'rod',111111111,'rod'),
-		   (4,1,1,1,'IE','2001',1111111111,'MG',10000000,'rod',111111111,'rod'),
-		   (5,1,2,1,'RG','2001',1111111111,'MG',10000000,'rod',111111111,'rod'),
-		   (6,1,3,1,'CGC','2001',1111111111,'MG',10000000,'rod',111111111,'rod')
+           (1,1,1,1,'CNPJ','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
+		   (2,1,2,1,'CPF','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
+		   (3,1,3,1,'IM','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
+		   (4,1,1,1,'IE','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
+		   (5,1,2,1,'RG','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
+		   (6,1,3,1,'CGC','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod')
 GO
 
 /** ---------------------------------------------------------------*/
@@ -110,9 +110,9 @@ CREATE TABLE [dbo].[email](
 	[type]         [int] NULL,
 	[email]        [varchar](100)  NULL,
 	[description]  [varchar](200) NULL,
-	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
-    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
 
 CONSTRAINT [pk_email_id] PRIMARY KEY CLUSTERED
@@ -154,9 +154,9 @@ CREATE TABLE [dbo].[endereco](
 	[bairro]		 [varchar](50)  NULL,
 	[numero]       [varchar](10)  NULL,
 	[cep]			 [varchar](15)  NULL,
-	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50)  NULL,
-    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50)  NULL,
 CONSTRAINT [pk_endereco_id] PRIMARY KEY CLUSTERED
 (
@@ -197,9 +197,9 @@ CREATE TABLE [dbo].[telefone] (
 	[tabela]	   [int] NULL,
 	[ddd] 		   [varchar](5) NULL,
 	[telefone]     [varchar](15) NULL,
-	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
-    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
 CONSTRAINT [pk_telefone_id] PRIMARY KEY CLUSTERED
 (
@@ -218,9 +218,9 @@ CREATE TABLE [dbo].[socio](
 	[nome]         [varchar](200) NULL,
 	[cota]         [varchar](10) NULL,
 	[porcentagem]  [varchar](10) NULL,
-	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
-    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
 
 CONSTRAINT [pk_socios_id] PRIMARY KEY CLUSTERED
@@ -237,13 +237,13 @@ CREATE TABLE [dbo].[historico] (
 	[type]         [int] NULL,
 	[acao]         [int] NULL,
 	[registro]     [varchar](200) NULL,
-	[data]         [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[data]         [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[usuario]      [varchar](20) NULL,
 	[empresa]      [int] NULL,
 	[status]       [int] NULL,
-	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
-    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
 CONSTRAINT [pk_historico_id] PRIMARY KEY CLUSTERED
 (
@@ -257,9 +257,9 @@ CREATE TABLE [dbo].[CNAE] (
     [DESCRICAO]  [VARCHAR](100) NULL,
     [ABREVIADO]  [VARCHAR](50) NULL,
     [status]       [int] NULL,
-	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
-    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
 CONSTRAINT [pk_cnae_id] PRIMARY KEY CLUSTERED
 (
@@ -273,9 +273,9 @@ CREATE TABLE [dbo].[CSOSN] (
     [CODIGO]     [VARCHAR](3) NOT NULL,
     [DESCRICAO]  [VARCHAR](200) NULL,
     [status]       [int] NULL,
-	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
-    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
 CONSTRAINT [pk_csosn_id] PRIMARY KEY CLUSTERED
 (
@@ -288,9 +288,9 @@ CREATE TABLE [dbo].[NCM] (
     [DESCRICAO]  [VARCHAR](100) NULL,
     [UNIDADE]    [VARCHAR](2) NULL,
     [status]       [int] NULL,
-	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
-    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
 CONSTRAINT [pk_ncm_id] PRIMARY KEY CLUSTERED
 (
@@ -310,9 +310,9 @@ CREATE TABLE [dbo].[CIDADE](
     [ESTADO]     [VARCHAR](10) NULL,
     [MUNICIPIO]  [VARCHAR](10) NULL,
     [status]       [int] NULL,
-	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
-    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
 CONSTRAINT [pk_cidade_id] PRIMARY KEY CLUSTERED
 (
@@ -327,9 +327,9 @@ CREATE TABLE [dbo].[cnaePorRelacionamento](
     [idCnae]     [int] NOT NULL,
     [idParentId] [int] NOT NULL,
     [tabela]     [int] NOT NULL,
-	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
-    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
 CONSTRAINT [pk_cnaeRelacionamento_id] PRIMARY KEY CLUSTERED
 (
@@ -341,15 +341,15 @@ DROP TABLE  [dbo].[status];
 
 CREATE TABLE [dbo].[status](
     [id]           [int] NOT NULL,
-    [dataStatus]   [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [dataStatus]   [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [parentId]     [int] NOT NULL,
     [status] 	   [int] NOT NULL,
     [acaoType]     [int] NOT NULL,
     [tabelaEnum]   [int] NOT NULL,
     [note]    	   [varchar](50) NULL,
-	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
-    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
 CONSTRAINT [pk_status_id] PRIMARY KEY CLUSTERED
 (

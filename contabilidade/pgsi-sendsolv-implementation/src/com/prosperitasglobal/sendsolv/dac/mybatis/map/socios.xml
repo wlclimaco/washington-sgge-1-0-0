@@ -32,10 +32,10 @@
    	<result property="nome" column="nome"/>
 	<result property="cota" column="cota"/>
 	<result property="porcentagem" column="porcentagem" />
-    <result property="create_date" column="create_date" />
-   	<result property="create_user" column="create_user"/>
-	<result property="modify_date" column="modify_date"/>
-	<result property="modify_user" column="modify_user"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
   </resultMap>
 
   <!--

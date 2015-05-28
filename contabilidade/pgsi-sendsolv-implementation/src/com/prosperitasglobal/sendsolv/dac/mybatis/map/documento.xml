@@ -18,15 +18,15 @@
     <result property="id" column="id" />
     <result property="tabelaEnumValue" column="tabela" />
    	<result property="parentId" column="parentId"/>
-	<result property="type" column="type"/>
+	<result property="typeValue" column="type"/>
 	<result property="description" column="description" />
     <result property="numero" column="numero" />
    	<result property="data" column="data"/>
 	<result property="estado" column="estado"/>
-	<result property="create_date" column="create_date"/>
-	<result property="create_user" column="create_user" />
-    <result property="modify_date" column="modify_date" />
-   	<result property="modify_user" column="modify_user"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
   </resultMap>
 
   <!--
@@ -52,7 +52,6 @@
   		#{tabelaEnumValue},
     	#{parentId},
     	#{typeValue},
-    	#{statusValue},
     	#{description},
     	#{numero},
     	#{data},
@@ -79,7 +78,7 @@
     UPDATE documento
     	<set>
     		<if test="numero!= null">numero = #{numero},</if>
-	    	<if test="typeValue!= null"> type=#{typeValue},</if>
+	    	<if test="typeEnumValue!= null"> type=#{typeEnumValue},</if>
 	    	<if test="data!= null"> data=#{data},</if>
 	    	<if test="estado!= null"> estado=#{estado},</if>
 			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>

@@ -37,6 +37,10 @@
     <result property="acaoTypeValue" column="acaoType" />
     <result property="tabelaEnumValue" column="tabelaEnum" />
     <result property="note" column="note" />
+    <result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
   </resultMap>
 
   <!--
