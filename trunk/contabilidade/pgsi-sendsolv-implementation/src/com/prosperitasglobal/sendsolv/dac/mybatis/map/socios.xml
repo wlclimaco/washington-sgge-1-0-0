@@ -117,7 +117,7 @@
     <select id="fetchSocioByEmpresaId"  parameterType="Integer" resultMap="socioResult">
     SELECT
 	<include refid="allSocioColumns" />
-    FROM socio b where b.tabela = 1 b.parentId = #{id} ORDER BY id ASC
+    FROM socio b where b.parentId = #{id}
   </select>
 
 
