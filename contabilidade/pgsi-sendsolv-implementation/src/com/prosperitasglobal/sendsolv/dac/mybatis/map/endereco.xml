@@ -65,7 +65,7 @@
 		SQL Insert Statements.
  	-->
   <insert id="insertEndereco" parameterType="Endereco" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO endereco (
+  	INSERT INTO endereco b(
 		<include refid="allEnderecoColumns" />
       )
     VALUES (<include refid="allEnderecoValues" /> )
@@ -114,15 +114,15 @@
   <select id="fetchAllEnderecos" resultMap="enderecoResult">
     SELECT
 	<include refid="allEnderecoColumns" />
-    FROM endereco ORDER BY logradouro ASC
+    FROM endereco b ORDER BY logradouro ASC
   </select>
 
  <select id="fetchEnderecoByEmpresaId" parameterType="Integer" resultMap="enderecoResult">
-		select * from endereco where table = 1 and parentId = #{id}
+		select * from endereco where tabela = 1 and parentId = #{id}
   </select>
 
  <select id="fetchEnderecoByFucionarioId" parameterType="Integer" resultMap="enderecoResult">
-		select * from endereco where table = 2 and parentId = #{id}
+		select * from endereco where tabela = 2 and parentId = #{id}
   </select>
 
 

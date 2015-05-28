@@ -16,7 +16,7 @@
 
   <resultMap id="documentoResult" type="Documento">
     <result property="id" column="id" />
-    <result property="tabela" column="tabela" />
+    <result property="tabelaEnumValue" column="tabela" />
    	<result property="parentId" column="parentId"/>
 	<result property="type" column="type"/>
 	<result property="description" column="description" />
@@ -49,7 +49,7 @@
 
   <sql id="allDocumentoValues">
   		#{id},
-  		#{tabela},
+  		#{tabelaEnumValue},
     	#{parentId},
     	#{typeValue},
     	#{statusValue},
@@ -102,8 +102,8 @@
   <select id="fetchDocumentoByEmpresa" parameterType="Integer" resultMap="documentoResult">
      SELECT
      <include refid="allDocumentoColumns" />
-        FROM documento
-     WHERE tabela = 1 and parentId = #{id}
+        FROM documento b
+     WHERE b.tabela = 1 and b.parentId = #{id}
 
   </select>
 
