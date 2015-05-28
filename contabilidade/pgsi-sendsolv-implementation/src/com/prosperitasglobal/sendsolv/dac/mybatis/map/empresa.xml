@@ -47,7 +47,7 @@
 
   <sql id="allEmpresaValues">
   		#{nome},
-  		#{regime},
+  		#{regime.id},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
@@ -70,7 +70,7 @@
     UPDATE empresa
     	<set>
     		<if test="nome!= null">nome = #{nome},</if>
-	    	<if test="regime!= null"> regime=#{regime},</if>
+	    	<if test="regime.id!= null"> regime=#{regime.id},</if>
 			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>

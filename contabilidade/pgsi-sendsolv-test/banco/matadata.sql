@@ -22,7 +22,7 @@ INSERT INTO [dbo].[regime]
            ,[modify_date]
            ,[modify_user])
      VALUES
-           (1,'Simples Nacional','Simples Nacional',100000000,'rod',10000000,'rod'),
+           (1,'Simples Nacional','Simples Nacional',1432783357778,'rod',10000000,'rod'),
 		   (2,'Lucro Real','Lucro Real',10000000,'rod',1000000,'rod'),
 		   (3,'Lucro Presumido','Lucro Presumido',10000000,'rod',1000000,'rod')
 GO
@@ -133,12 +133,12 @@ INSERT INTO [dbo].[email]
            ,[modify_date]
            ,[modify_user])
      VALUES
-           (1,1,1,1,'wwww.tessr@gmail.com','email',1000000000,'rod',100000000,'rod'),
-		   (2,1,2,1,'wwww.tessr@gmail.com','email',1000000000,'rod',100000000,'rod'),
-		   (3,1,3,1,'wwww.tessr@gmail.com','email',1000000000,'rod',100000000,'rod'),
-		   (4,1,1,1,'wwww.tessr@gmail.com','email',1000000000,'rod',100000000,'rod'),
-		   (5,1,2,1,'wwww.tessr@gmail.com','email',1000000000,'rod',100000000,'rod'),
-		   (6,1,3,1,'wwww.tessr@gmail.com','email',1000000000,'rod',100000000,'rod')
+           (1,1,1,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (2,1,2,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (3,1,3,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (4,1,1,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (5,1,2,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (6,1,3,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod')
 GO
 
 /** ---------------------------------------------------------------*/
@@ -180,12 +180,12 @@ INSERT INTO [dbo].[endereco]
            ,[modify_date]
            ,[modify_user])
      VALUES
-           (1,1,1,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',1000000000,'rod',10000002,'rod'),
-		   (2,1,2,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',1000000000,'rod',10000002,'rod'),
-		   (3,1,3,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',1000000000,'rod',10000002,'rod'),
-		   (4,1,1,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',1000000000,'rod',10000002,'rod'),
-		   (5,1,2,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',1000000000,'rod',10000002,'rod'),
-		   (6,1,3,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',1000000000,'rod',10000002,'rod')
+           (1,1,1,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (2,1,2,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (3,1,3,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (4,1,1,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (5,1,2,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (6,1,3,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod')
 GO
 /** ---------------------------------------------------------------*/
 
@@ -370,15 +370,15 @@ INSERT INTO [dbo].[status]
            ,[modify_date]
            ,[modify_user])
      VALUES
-           (1,1000000000,1,1,1,'Rua Maria Conceicao silva',1000000000,'rod',10000002,'rod'),
-		   (2,1000000000,2,2,1,'Rua Maria Conceicao silva',1000000000,'rod',10000002,'rod'),
-		   (3,1000000000,3,3,1,'Rua Maria Conceicao silva',1000000000,'rod',10000002,'rod'),
-		   (4,1000000000,1,1,2,'Rua Maria Conceicao silva',1000000000,'rod',10000002,'rod'),
-		   (5,1000000000,2,2,2,'Rua Maria Conceicao silva',1000000000,'rod',10000002,'rod'),
-		   (6,1000000000,3,3,2,'Rua Maria Conceicao silva',1000000000,'rod',10000002,'rod'),
-		   (7,1000000000,1,3,3,'Rua Maria Conceicao silva',1000000000,'rod',10000002,'rod'),
-		   (8,1000000000,2,2,3,'Rua Maria Conceicao silva',1000000000,'rod',10000002,'rod'),
-		   (9,1000000000,3,1,3,'Rua Maria Conceicao silva',1000000000,'rod',10000002,'rod'),
-		   (10,1000000000,1,1,4,'Rua Maria Conceicao silva',1000000000,'rod',10000002,'rod')
+           (1,14327833577780,1,1,1,'Rua Maria Conceicao silva',14327833577780,'rod',10000002,'rod'),
+		   (2,14327833577780,2,2,1,'Rua Maria Conceicao silva',14327833577780,'rod',10000002,'rod'),
+		   (3,14327833577780,3,3,1,'Rua Maria Conceicao silva',14327833577780,'rod',10000002,'rod'),
+		   (4,14327833577780,1,1,2,'Rua Maria Conceicao silva',14327833577780,'rod',10000002,'rod'),
+		   (5,14327833577780,2,2,2,'Rua Maria Conceicao silva',14327833577780,'rod',10000002,'rod'),
+		   (6,14327833577780,3,3,2,'Rua Maria Conceicao silva',14327833577780,'rod',10000002,'rod'),
+		   (7,14327833577780,1,3,3,'Rua Maria Conceicao silva',14327833577780,'rod',10000002,'rod'),
+		   (8,14327833577780,2,2,3,'Rua Maria Conceicao silva',14327833577780,'rod',10000002,'rod'),
+		   (9,14327833577780,3,1,3,'Rua Maria Conceicao silva',14327833577780,'rod',10000002,'rod'),
+		   (10,14327833577780,1,1,4,'Rua Maria Conceicao silva',14327833577780,'rod',10000002,'rod')
 GO
 /** ---------------------------------------------------------------*/

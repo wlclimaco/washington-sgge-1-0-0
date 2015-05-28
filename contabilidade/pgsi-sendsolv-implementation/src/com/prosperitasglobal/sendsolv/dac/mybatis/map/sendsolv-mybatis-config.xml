@@ -88,6 +88,7 @@
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/field.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/grupoSubGrupo.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/orcamentoItens.xml" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/regime.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/salarios.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/socios.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/status.xml" />
