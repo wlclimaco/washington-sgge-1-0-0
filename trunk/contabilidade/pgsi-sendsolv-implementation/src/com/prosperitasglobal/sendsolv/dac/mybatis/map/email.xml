@@ -16,22 +16,22 @@
 
   <resultMap id="emailResult" type="Email">
     <result property="id" column="id" />
-    <result property="tabela" column="tabela" />
+    <result property="tabelaEnumValue" column="tabela" />
    	<result property="parentId" column="parentId"/>
-	<result property="type" column="type"/>
+	<result property="typeValue" column="type"/>
 	<result property="email" column="email" />
     <result property="description" column="description" />
-   	<result property="create_date" column="create_date"/>
-	<result property="create_user" column="create_user"/>
-   	<result property="modify_date" column="modify_date"/>
-	<result property="modify_user" column="modify_user"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
   </resultMap>
 
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allEmailColumns">
-		 id
+		 b.id
 		,b.tabela
 		,b.parentId
 		,b.type
@@ -45,9 +45,9 @@
 
   <sql id="allEmailValues">
   		 #{id},
-		 #{tabela},
+		 #{tabelaEnumValue},
 		 #{parentId},
-		 #{type},
+		 #{typeValue},
 		 #{email},
 		 #{description},
     	<include refid="CBOFMap.changeControlFields"/>
@@ -108,13 +108,13 @@
  <select id="fetchAllEmailsByEmpresa" parameterType="Integer" resultMap="emailResult">
 	 SELECT
 	<include refid="allEmailColumns" />
-    FROM business where tabela = 1 and parentId= #{id} ORDER BY name ASC
+    FROM email b where tabela = 1 and parentId= #{id} ORDER BY id ASC
  </select>
 
  <select id="fetchAllEmailsByFuncionario" parameterType="Integer" resultMap="emailResult">
 	 SELECT
 	<include refid="allEmailColumns" />
-    FROM business where tabela = 2 and parentId= #{id} ORDER BY name ASC
+    FROM business where tabela = 2 and parentId= #{id} ORDER BY id ASC
  </select>
 
 </mapper>

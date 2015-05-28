@@ -16,15 +16,19 @@
 
   <resultMap id="enderecoResult" type="Endereco">
     <result property="id" column="id" />
-    <result property="tabela" column="tabela" />
+    <result property="tabelaEnumValue" column="tabela" />
    	<result property="parentId" column="parentId"/>
-	<result property="type" column="type"/>
+	<result property="typeValue" column="type"/>
 	<result property="logradouro" column="logradouro"/>
 	<result property="cidade" column="cidade"/>
 	<result property="estado" column="estado"/>
 	<result property="bairro" column="bairro"/>
 	<result property="numero" column="numero"/>
 	<result property="cep" column="cep"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
   </resultMap>
 
   <!--
@@ -49,9 +53,9 @@
 
   <sql id="allEnderecoValues">
   		 #{id}
-		,#{tabela}
+		,#{tabelaEnumValue}
 		,#{parentId}
-		,#{type}
+		,#{typeValue}
 		,#{logradouro}
 		,#{cidade}
 		,#{estado}
@@ -118,11 +122,11 @@
   </select>
 
  <select id="fetchEnderecoByEmpresaId" parameterType="Integer" resultMap="enderecoResult">
-		select * from endereco where tabela = 1 and parentId = #{id}
+		select  <include refid="allEnderecoColumns" /> from endereco b where tabela = 1 and parentId = #{id}
   </select>
 
  <select id="fetchEnderecoByFucionarioId" parameterType="Integer" resultMap="enderecoResult">
-		select * from endereco where tabela = 2 and parentId = #{id}
+		select * from endereco b where tabela = 2 and parentId = #{id}
   </select>
 
 

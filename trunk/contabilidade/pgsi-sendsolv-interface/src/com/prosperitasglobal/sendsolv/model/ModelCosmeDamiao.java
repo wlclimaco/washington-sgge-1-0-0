@@ -2,6 +2,8 @@ package com.prosperitasglobal.sendsolv.model;
 
 import java.util.List;
 
+import com.qat.framework.model.QATModel;
+
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -122,6 +124,38 @@ public class ModelCosmeDamiao extends QATModel
 		this.statusList = statusList;
 	}
 
+	/**
+	 * @return the emprId
+	 */
+	public Integer getEmprId()
+	{
+		return emprId;
+	}
+
+	/**
+	 * @param emprId the emprId to set
+	 */
+	public void setEmprId(Integer emprId)
+	{
+		this.emprId = emprId;
+	}
+
+	/**
+	 * @return the site
+	 */
+	public String getSite()
+	{
+		return site;
+	}
+
+	/**
+	 * @param site the site to set
+	 */
+	public void setSite(String site)
+	{
+		this.site = site;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -129,8 +163,10 @@ public class ModelCosmeDamiao extends QATModel
 	@Override
 	public String toString()
 	{
-		return "ModelCosmeDamiao [getParentId()=" + getParentId() + ", getType()=" + getType() + ", getAcaoType()="
-				+ getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()=" + getStatusList()
+		return "ModelCosmeDamiao [getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
+				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
+				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
+				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
 				+ ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
 				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
 				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", toString()=" + super.toString() + ", getClass()="

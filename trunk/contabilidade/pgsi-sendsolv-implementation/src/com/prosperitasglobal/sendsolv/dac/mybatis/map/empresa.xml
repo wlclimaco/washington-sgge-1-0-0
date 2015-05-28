@@ -23,6 +23,10 @@
   <resultMap id="empresaResult" type="Empresa">
     <result property="id" column="id" />
     <result property="nome" column="nome" />
+    <result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
     <association property="regime"    column="regime" select="RegimeMap.fetchRegimeByEmpresa"  />
    	<collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
 	<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByEmpresaId"/>
