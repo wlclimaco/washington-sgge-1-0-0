@@ -108,7 +108,7 @@
   </delete>
 
     <select id="fetchAllCnaesByEmpresa" parameterType="Integer" resultMap="cnaeResult">
-    	SELECT c.*
+    	SELECT F.*
 
 		  FROM cnaePorRelacionamento AS C
 
