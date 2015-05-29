@@ -301,6 +301,19 @@
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
 
+
+ 	<bean id="tenantDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.TenantDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
+ 	<bean id="settingsDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.SettingsDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
+ 	<bean id="userDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.UserDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
 <!-- ==============================================================================
 
 	<bean id="productPlanDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.ProductPlanDACImpl">
