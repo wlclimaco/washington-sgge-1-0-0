@@ -56,6 +56,10 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	<bean id="TabelaValidator"                    class="com.prosperitasglobal.sendsolv.validation.TabelaValidator" />
 	<bean id="TelaValidator"                      class="com.prosperitasglobal.sendsolv.validation.TelaValidator" />
 
+	<bean id="UserValidator"                   class="com.prosperitasglobal.sendsolv.validation.UserValidator" />
+	<bean id="SettingsValidator"                    class="com.prosperitasglobal.sendsolv.validation.SettingValidator" />
+	<bean id="TenantValidator"                      class="com.prosperitasglobal.sendsolv.validation.TenantRequestValidator" />
+
 
 	<bean id="arquivoValidationController" class="com.qat.framework.validation.ValidationController">
  		<property name="validators">
@@ -170,6 +174,30 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  		<property name="validators">
  			<list>
  				<ref bean="TelaValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+ 	<bean id="userValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="UserValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+ 	<bean id="settingsValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="SettingsValidator" />
+ 			</list>
+ 		</property>
+ 	</bean>
+
+ 	<bean id="tenantValidationController" class="com.qat.framework.validation.ValidationController">
+ 		<property name="validators">
+ 			<list>
+ 				<ref bean="TenantValidator" />
  			</list>
  		</property>
  	</bean>

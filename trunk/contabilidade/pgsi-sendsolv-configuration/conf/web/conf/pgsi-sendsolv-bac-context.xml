@@ -115,6 +115,18 @@
  		<property name="telaDAC" ref="telaDACTarget"/>
  	</bean>
 
+ 	<bean id="tenantBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.TenantBACImpl">
+ 		<property name="tenantDAC" ref="tenantDACTarget"/>
+ 	</bean>
+
+ 	<bean id="settingsBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.SettingsBACImpl">
+ 		<property name="settingsDAC" ref="settingsDACTarget"/>
+ 	</bean>
+
+ 	<bean id="userBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.UserBACImpl">
+ 		<property name="userDAC" ref="userDACTarget"/>
+ 	</bean>
+
 <!-- ==============================================================================
  	<bean id="moneyTransferBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.MoneyTransferBACImpl">
 		<property name="moneyTransferDAC" ref="moneyTransferDACTarget"/>

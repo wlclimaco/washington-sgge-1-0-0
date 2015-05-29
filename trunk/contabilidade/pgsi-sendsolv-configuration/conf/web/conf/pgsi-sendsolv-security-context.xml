@@ -49,4 +49,85 @@
 	</sec:authentication-manager>
 
 	<bean id="userContextMapper" class="org.springframework.security.ldap.userdetails.InetOrgPersonContextMapper" />
+
+	<!-- 	<security:http Auto-config="false" Use-expressions="true" -->
+<!-- 		Access-denied-page="/login.jsp?Session Timed Out." Entry-point-ref="loginUrlAuthenticationEntryPoint"> -->
+<!-- 		<security:custom-filter Position="FORM_LOGIN_FILTER" Ref="customUsernamePasswordAuthenticationFilter" /> -->
+<!-- 		<security:custom-filter Position="CONCURRENT_SESSION_FILTER" Ref="concurrencyFilter" /> -->
+<!-- 		<security:intercept-url Pattern="/process/**" Access="isAuthenticated()" /> -->
+<!-- 		<security:intercept-url Pattern="/**/**" Access="hasAnyRole('ROLE_DOMAIN ADMIN','ROLE_ADMIN','ROLE_CSR')" /> -->
+<!-- 		<security:logout Invalidate-session="true" Logout-success-url="/login.jsp?Successful Logout." /> -->
+<!-- 	</security:http> -->
+
+<!--    <bean Id="concurrencyFilter" Class="org.springframework.security.web.session.ConcurrentSessionFilter"> -->
+<!--      <property Name="sessionRegistry" Ref="sessionRegistry" /> -->
+<!--      <property Name="expiredUrl" Value="/timeout.jsp" /> -->
+<!--    </bean> -->
+
+<!-- <!-- Custom Authentication Manager. In Order To Authenticate Username/password And Tenant --> -->
+<!-- 	<bean Id="customAuthenticationManager" Class="com.sensus.lc.security.CustomAuthenticationManager"> -->
+<!--     	<property Name="settingsBCF" Ref="settingsBCF" /> -->
+<!-- 		<property Name="userBCF" Ref="userBCF" /> -->
+<!-- 		<property Name="webSeviceUserName" Ref="webserviceUserNameTarget" /> -->
+<!-- 		<property Name="webSevicePassword" Ref="webserviceUserPwdTarget" /> -->
+<!-- 		<property Name="superUserName" Ref="superUserNameTarget" /> -->
+<!-- 		<property Name="app" Value="slc" /> -->
+<!-- 	</bean> -->
+
+<!--  	<bean Id="customUsernamePasswordAuthenticationFilter" -->
+<!-- 		Class="com.sensus.lc.security.CustomUsernamePasswordAuthenticationFilter"> -->
+<!-- 		<property Name="authenticationManager" Ref="customAuthenticationManager" /> -->
+<!-- 		<property Name="authenticationFailureHandler" Ref="failureHandler" /> -->
+<!-- 		<property Name="sessionAuthenticationStrategy" Ref="sessionAuthenticationStrategy" /> -->
+<!-- 		<property Name="authenticationSuccessHandler" Ref="successHandler" /> -->
+<!-- 	</bean> -->
+
+<!--     <bean Id="sessionRegistry" Class="org.springframework.security.core.session.SessionRegistryImpl" /> -->
+
+<!-- 	<bean Id="sessionAuthenticationStrategy" Class="org.springframework.security.web.authentication.session.ConcurrentSessionControlStrategy"> -->
+<!--                 <constructor-arg Name="sessionRegistry" Ref="sessionRegistry" /> -->
+<!--                 <property Name="maximumSessions" Value="5" /> -->
+<!--                 <property Name="exceptionIfMaximumExceeded" Value="true"/> -->
+<!--     </bean> -->
+
+
+<!-- 	<bean Id="successHandler" -->
+<!-- 		Class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler"> -->
+<!-- 		<property Name="defaultTargetUrl" Value="/main" /> -->
+<!-- 		<property Name="alwaysUseDefaultTargetUrl" Value="true" /> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean Id="failureHandler" -->
+<!-- 		Class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"> -->
+<!-- 		<property Name="defaultFailureUrl" Value="/login.jsp?error=true" /> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean Id="loginUrlAuthenticationEntryPoint" -->
+<!-- 		Class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint"> -->
+<!-- 		<property Name="loginFormUrl" Value="/login.jsp?Please Login." /> -->
+<!-- 	</bean> -->
+
+<!-- 	<!-- Web Service Security - Callback For Interceptor --> -->
+<!-- 	<bean Id="validationCallback" -->
+<!-- 		Class="org.springframework.ws.soap.security.wss4j.callback.SpringPlainTextPasswordValidationCallbackHandler"> -->
+<!-- 		<property Name="authenticationManager" Ref="customAuthenticationManager" /> -->
+<!-- 	</bean> -->
+
+<!-- 	<!-- Interceptor --> -->
+<!-- 	<bean Id="securityInterceptor" -->
+<!-- 		Class="org.springframework.ws.soap.security.wss4j.Wss4jSecurityInterceptor"> -->
+<!-- 		<property Name="validationActions" Value="UsernameToken" /> -->
+<!-- 		<property Name="validationCallbackHandler" Ref="validationCallback" /> -->
+<!-- 	</bean> -->
+
+
+<!-- 	<!-- WS Client Authentication --> -->
+<!-- 	<bean Id="mlc.interceptor.authentication" -->
+<!-- 		Class="org.springframework.ws.soap.security.wss4j.Wss4jSecurityInterceptor"> -->
+<!-- 		<property Name="securementActions" Value="UsernameToken" /> -->
+<!-- 		<property Name="securementPasswordType" Value="PasswordText" /> -->
+<!-- 		<property Name="securementCallbackHandler" Ref="mlc.wss4j.securementCallback" /> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean Id="mlc.wss4j.securementCallback" Class="com.sensus.lc.security.LCNotClientSecurementCallback" /> -->
 </beans>
