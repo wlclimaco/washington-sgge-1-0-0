@@ -189,7 +189,7 @@ INSERT INTO [dbo].[endereco]
 GO
 /** ---------------------------------------------------------------*/
 
-
+DROP TABLE [dbo].[telefone];
 CREATE TABLE [dbo].[telefone] (
 	[id]           [int] not NULL,
 	[type]         [int] NULL,
@@ -205,7 +205,25 @@ CONSTRAINT [pk_telefone_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
+) ON [PRIMARY];
+
+INSERT INTO [dbo].[telefone]
+           ([id]
+           ,[type]
+           ,[parentId]
+           ,[tabela]
+           ,[ddd]
+           ,[telefone]
+           ,[create_date]
+           ,[create_user]
+           ,[modify_date]
+           ,[modify_user])
+     VALUES
+           (1,1,1,1,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (2,1,1,2,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (3,1,1,3,'034','91782776',1432783357778,'system',1432783357778,'system')
+GO
+
 
 
 
