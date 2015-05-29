@@ -56,7 +56,7 @@ public class UserBAIImpl implements IUserBAI
 	 *
 	 * @return the user bcl
 	 */
-	public IUserBAC getUserBCL()
+	public IUserBAC getUserBAC()
 	{
 		return userBAC;
 	}
@@ -66,7 +66,7 @@ public class UserBAIImpl implements IUserBAI
 	 *
 	 * @param userBAC the new user bcl
 	 */
-	public void setUserBCL(IUserBAC userBAC)
+	public void setUserBAC(IUserBAC userBAC)
 	{
 		this.userBAC = userBAC;
 	}
@@ -146,7 +146,7 @@ public class UserBAIImpl implements IUserBAI
 			ValidationContext context = new ValidationContext();
 			context.putObjectToBeValidated(INQUIRY_USER_REQUEST_NAME, inquiryUserRequest);
 
-			internalResponse = getUserBCL().fetchAllUsers(inquiryUserRequest);
+			internalResponse = getUserBAC().fetchAllUsers(inquiryUserRequest);
 
 			handleOperationStatusAndMessagesUser(response, internalResponse, context.getMessages(), true);
 		}
@@ -187,7 +187,7 @@ public class UserBAIImpl implements IUserBAI
 			context.putObjectToBeValidated(USER_REQUEST_NAME, userRequest);
 			context.putObjectToBeValidated(USER_NAME, userRequest.getUser());
 
-			internalResponse = getUserBCL().insertUser(userRequest);
+			internalResponse = getUserBAC().insertUser(userRequest);
 			response.setUser(internalResponse.getFirstResult());
 
 			handleOperationStatusAndMessages(response, internalResponse, context.getMessages(), true);
@@ -215,7 +215,7 @@ public class UserBAIImpl implements IUserBAI
 			ValidationContext context = new ValidationContext();
 			context.putObjectToBeValidated(USER_REQUEST_NAME, userRequest);
 
-			internalResponse = getUserBCL().deleteUser(userRequest);
+			internalResponse = getUserBAC().deleteUser(userRequest);
 
 			handleOperationStatusAndMessagesUser(response, internalResponse, context.getMessages(), true);
 		}
@@ -251,7 +251,7 @@ public class UserBAIImpl implements IUserBAI
 			context.putObjectToBeValidated(USER_REQUEST_NAME, userRequest);
 			context.putObjectToBeValidated(USER_NAME, userRequest.getUser());
 
-			internalResponse = getUserBCL().updateUser(userRequest);
+			internalResponse = getUserBAC().updateUser(userRequest);
 
 			handleOperationStatusAndMessagesUser(response, internalResponse, context.getMessages(), true);
 		}
@@ -290,7 +290,7 @@ public class UserBAIImpl implements IUserBAI
 			context.putObjectToBeValidated(USER_REQUEST_NAME, userRequest);
 
 			userRequest.getUser().setPassword(userRequest.getNewPassword());
-			internalResponse = getUserBCL().updateUser(userRequest);
+			internalResponse = getUserBAC().updateUser(userRequest);
 
 			handleOperationStatusAndMessagesUser(response, internalResponse, context.getMessages(), true);
 		}
@@ -319,7 +319,7 @@ public class UserBAIImpl implements IUserBAI
 			context.putObjectToBeValidated(USER_REQUEST_NAME, userRequest);
 			context.putObjectToBeValidated(USER_NAME, userRequest.getUser());
 
-			internalResponse = getUserBCL().fetchUserById(userRequest);
+			internalResponse = getUserBAC().fetchUserById(userRequest);
 			response.setUser(internalResponse.getFirstResult());
 
 			handleOperationStatusAndMessages(response, internalResponse, context.getMessages(), true);
@@ -349,7 +349,7 @@ public class UserBAIImpl implements IUserBAI
 			context.putObjectToBeValidated(USER_REQUEST_NAME, userRequest);
 			context.putObjectToBeValidated(USER_NAME, userRequest.getUser());
 
-			internalResponse = getUserBCL().fetchUserByName(userRequest);
+			internalResponse = getUserBAC().fetchUserByName(userRequest);
 			response.setUser(internalResponse.getFirstResult());
 
 			handleOperationStatusAndMessages(response, internalResponse, context.getMessages(), true);
