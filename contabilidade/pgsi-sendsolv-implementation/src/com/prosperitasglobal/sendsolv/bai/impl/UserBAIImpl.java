@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.prosperitasglobal.sendsolv.bac.IUserBAC;
-import com.prosperitasglobal.sendsolv.user.bai.IUserBAI;
+import com.prosperitasglobal.sendsolv.bai.IUserBAI;
 import com.prosperitasglobal.sendsolv.user.model.User;
 import com.prosperitasglobal.sendsolv.user.model.request.InquiryUserRequest;
 import com.prosperitasglobal.sendsolv.user.model.request.UserRequest;

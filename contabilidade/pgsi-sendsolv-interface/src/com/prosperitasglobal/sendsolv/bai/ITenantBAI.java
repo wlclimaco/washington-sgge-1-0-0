@@ -1,4 +1,4 @@
-package com.prosperitasglobal.sendsolv.tenant.bai;
+package com.prosperitasglobal.sendsolv.bai;
 
 import com.prosperitasglobal.sendsolv.tenant.model.request.TenantRequest;
 import com.prosperitasglobal.sendsolv.tenant.model.response.ApiControlResponse;

@@ -6,8 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.prosperitasglobal.sendsolv.bac.ISettingsBAC;
+import com.prosperitasglobal.sendsolv.bai.ISettingsBAI;
 import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
-import com.prosperitasglobal.sendsolv.settings.bai.ISettingsBAI;
 import com.prosperitasglobal.sendsolv.settings.model.Setting;
 import com.prosperitasglobal.sendsolv.settings.model.request.SettingsRequest;
 import com.prosperitasglobal.sendsolv.settings.model.response.SettingsResponse;

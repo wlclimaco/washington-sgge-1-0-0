@@ -1,4 +1,4 @@
-package com.prosperitasglobal.sendsolv.settings.bai;
+package com.prosperitasglobal.sendsolv.bai;
 
 import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.prosperitasglobal.sendsolv.settings.model.request.SettingsRequest;
