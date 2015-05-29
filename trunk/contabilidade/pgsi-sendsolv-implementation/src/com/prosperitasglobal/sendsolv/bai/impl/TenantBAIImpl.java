@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.prosperitasglobal.sendsolv.bac.ITenantBAC;
-import com.prosperitasglobal.sendsolv.tenant.bai.ITenantBAI;
+import com.prosperitasglobal.sendsolv.bai.ITenantBAI;
 import com.prosperitasglobal.sendsolv.tenant.model.Tenant;
 import com.prosperitasglobal.sendsolv.tenant.model.request.TenantRequest;
 import com.prosperitasglobal.sendsolv.tenant.model.response.ApiControlResponse;

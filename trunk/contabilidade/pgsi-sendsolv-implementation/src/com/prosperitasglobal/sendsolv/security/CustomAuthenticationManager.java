@@ -12,10 +12,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
 
+import com.prosperitasglobal.sendsolv.bai.ISettingsBAI;
+import com.prosperitasglobal.sendsolv.bai.IUserBAI;
 import com.prosperitasglobal.sendsolv.security.util.LCSecurityHandler;
-import com.prosperitasglobal.sendsolv.settings.bai.ISettingsBAI;
 import com.prosperitasglobal.sendsolv.tenant.model.request.TenantRequest;
-import com.prosperitasglobal.sendsolv.user.bai.IUserBAI;
 import com.prosperitasglobal.sendsolv.user.model.User;
 import com.prosperitasglobal.sendsolv.user.model.request.UserRequest;
 import com.qat.framework.model.Authority;
@@ -275,10 +275,10 @@ public class CustomAuthenticationManager implements AuthenticationManager
 		}
 		else if (!LCSecurityHandler.validePassword(user.getPassword(), String.valueOf(auth.getCredentials()),
 				auth.getName()))
-			/*
-			 * else if (!user.getPassword().equals(
-			 * (LCSecurityHandler.encryptPassword(((String)auth.getCredentials()).toString(), auth.getName()))))
-			 */
+		/*
+		 * else if (!user.getPassword().equals(
+		 * (LCSecurityHandler.encryptPassword(((String)auth.getCredentials()).toString(), auth.getName()))))
+		 */
 		{
 			throw new BadCredentialsException("Bad Password for this tenant!");
 		}

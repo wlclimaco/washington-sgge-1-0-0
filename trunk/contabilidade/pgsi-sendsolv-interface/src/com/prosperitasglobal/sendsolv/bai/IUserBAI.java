@@ -1,4 +1,4 @@
-package com.prosperitasglobal.sendsolv.user.bai;
+package com.prosperitasglobal.sendsolv.bai;
 
 import com.prosperitasglobal.sendsolv.user.model.request.InquiryUserRequest;
 import com.prosperitasglobal.sendsolv.user.model.request.UserRequest;

@@ -1,6 +1,7 @@
 package com.prosperitasglobal.sendsolv.bac.impl;
 
 import com.prosperitasglobal.sendsolv.bac.ISettingsBAC;
+import com.prosperitasglobal.sendsolv.bai.IUserBAI;
 import com.prosperitasglobal.sendsolv.dac.ISettingsDAC;
 import com.prosperitasglobal.sendsolv.dac.ITenantDAC;
 import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
@@ -8,7 +9,6 @@ import com.prosperitasglobal.sendsolv.settings.model.Setting;
 import com.prosperitasglobal.sendsolv.settings.model.request.SettingsRequest;
 import com.prosperitasglobal.sendsolv.tenant.model.Tenant;
 import com.prosperitasglobal.sendsolv.tenant.model.request.TenantRequest;
-import com.prosperitasglobal.sendsolv.user.bai.IUserBAI;
 import com.prosperitasglobal.sendsolv.user.model.request.UserRequest;
 import com.prosperitasglobal.sendsolv.user.model.response.UserResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
