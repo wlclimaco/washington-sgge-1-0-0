@@ -108,10 +108,14 @@
   </delete>
 
     <select id="fetchAllCnaesByEmpresa" parameterType="Integer" resultMap="cnaeResult">
-    	SELECT
-			<include refid="allCnaeColumns" />
-		    FROM cnae c
-		    left join cnaePorRelacionamento r on r.tabela = 1 , c.id = r.idCnae, r.idParentId = #{id}
+    	SELECT c.*
+
+		  FROM cnaePorRelacionamento AS C
+
+		  INNER JOIN cnae AS F
+
+		    ON F.CODIGO like C.IDCNAE
+		where  c.idParentId = #{id} and c.tabela = 1
     </select>
 
     <select id="fetchAllCnaesByPerson" parameterType="Integer" resultMap="cnaeResult">

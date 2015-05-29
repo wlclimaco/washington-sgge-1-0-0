@@ -13,7 +13,7 @@ public class Status extends QATModelOL
 	private Integer id;
 
 	/** The parent key. */
-	private Integer dataStatus;
+	private Long dataStatus;
 
 	private Integer parentId;
 
@@ -32,6 +32,48 @@ public class Status extends QATModelOL
 	public Status()
 	{
 
+	}
+
+	public Integer getTabelaEnumValue()
+	{
+		if (tabelaEnum != null)
+		{
+			return tabelaEnum.getValue();
+		}
+		return null;
+	}
+
+	public void setTabelaEnumValue(Integer acaoTypeValue)
+	{
+		tabelaEnum = TabelaEnum.enumForValue(acaoTypeValue);
+	}
+
+	public Integer getStatusValue()
+	{
+		if (status != null)
+		{
+			return status.getValue();
+		}
+		return null;
+	}
+
+	public void setAcaoEnumValue(Integer acaoTypeValue)
+	{
+		acaoType = AcaoEnum.enumForValue(acaoTypeValue);
+	}
+
+	public Integer getAcaoEnumValue()
+	{
+		if (acaoType != null)
+		{
+			return acaoType.getValue();
+		}
+		return null;
+	}
+
+	public void setStatusValue(Integer priorityValue)
+	{
+		status = StatusEnum.enumForValue(priorityValue);
 	}
 
 	/**
@@ -53,7 +95,7 @@ public class Status extends QATModelOL
 	/**
 	 * @return the dataStatus
 	 */
-	public Integer getDataStatus()
+	public Long getDataStatus()
 	{
 		return dataStatus;
 	}
@@ -61,7 +103,7 @@ public class Status extends QATModelOL
 	/**
 	 * @param dataStatus the dataStatus to set
 	 */
-	public void setDataStatus(Integer dataStatus)
+	public void setDataStatus(Long dataStatus)
 	{
 		this.dataStatus = dataStatus;
 	}
@@ -153,13 +195,15 @@ public class Status extends QATModelOL
 	@Override
 	public String toString()
 	{
-		return "Status [getId()=" + getId() + ", getDataStatus()=" + getDataStatus() + ", getStatus()=" + getStatus()
-				+ ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()="
-				+ getTabelaEnum() + ", getNote()=" + getNote() + ", getParentId()=" + getParentId() + ", getVersion()="
-				+ getVersion() + ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
-				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
-				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", toString()=" + super.toString() + ", getClass()="
-				+ getClass() + ", hashCode()=" + hashCode() + "]";
+		return "Status [getTabelaEnumValue()=" + getTabelaEnumValue() + ", getStatusValue()=" + getStatusValue()
+				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getId()=" + getId() + ", getDataStatus()="
+				+ getDataStatus() + ", getStatus()=" + getStatus() + ", getAcaoType()=" + getAcaoType()
+				+ ", getTabelaEnum()=" + getTabelaEnum() + ", getNote()=" + getNote() + ", getParentId()="
+				+ getParentId() + ", getVersion()=" + getVersion() + ", getModelAction()=" + getModelAction()
+				+ ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC()
+				+ ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC()
+				+ ", toString()=" + super.toString() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ "]";
 	}
 
 }

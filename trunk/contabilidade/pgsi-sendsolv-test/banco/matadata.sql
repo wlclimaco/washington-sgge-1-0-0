@@ -321,10 +321,9 @@ CONSTRAINT [pk_cidade_id] PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 /** --------------------------------------------------------------- */
 DROP TABLE  [dbo].[cnaePorRelacionamento];
-
 CREATE TABLE [dbo].[cnaePorRelacionamento](
     [id]         [int] NOT NULL,
-    [idCnae]     [int] NOT NULL,
+    [idCnae]     [varchar](50) not NULL,
     [idParentId] [int] NOT NULL,
     [tabela]     [int] NOT NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -336,6 +335,28 @@ CONSTRAINT [pk_cnaeRelacionamento_id] PRIMARY KEY CLUSTERED
 	[ID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+
+INSERT INTO [dbo].[cnaePorRelacionamento]
+           ([id]
+           ,[idCnae]
+           ,[idParentId]
+           ,[tabela]
+           ,[create_date]
+           ,[create_user]
+           ,[modify_date]
+           ,[modify_user])
+     VALUES
+           (1,'000001',1,1,14327833577780,'system' ,14327833577780,'system'),
+		   (2,'000002',1,1,14327833577780,'system' ,14327833577780,'system'),
+		   (3,'000003',1,1,14327833577780,'system' ,14327833577780,'system'),
+		   (4,'000004',2,1,14327833577780,'system' ,14327833577780,'system'),
+		   (5,'000005',2,1,14327833577780,'system' ,14327833577780,'system'),
+		   (6,'000006',3,1,14327833577780,'system' ,14327833577780,'system'),
+		   (7,'000008',3,1,14327833577780,'system' ,14327833577780,'system'),
+		   (8,'000007',3,1,14327833577780,'system' ,14327833577780,'system'),
+		   (9,'000009',2,1,14327833577780,'system' ,14327833577780,'system'),
+		   (10,'000011',1,1,14327833577780,'system' ,14327833577780,'system')
+GO
 /** --------------------------------------------------------------- */
 DROP TABLE  [dbo].[status];
 
@@ -370,15 +391,16 @@ INSERT INTO [dbo].[status]
            ,[modify_date]
            ,[modify_user])
      VALUES
-           (1,14327833577780,1,1,1,'Rua Maria Conceicao silva',14327833577780,'rod',10000002,'rod'),
-		   (2,14327833577780,2,2,1,'Rua Maria Conceicao silva',14327833577780,'rod',10000002,'rod'),
-		   (3,14327833577780,3,3,1,'Rua Maria Conceicao silva',14327833577780,'rod',10000002,'rod'),
-		   (4,14327833577780,1,1,2,'Rua Maria Conceicao silva',14327833577780,'rod',10000002,'rod'),
-		   (5,14327833577780,2,2,2,'Rua Maria Conceicao silva',14327833577780,'rod',10000002,'rod'),
-		   (6,14327833577780,3,3,2,'Rua Maria Conceicao silva',14327833577780,'rod',10000002,'rod'),
-		   (7,14327833577780,1,3,3,'Rua Maria Conceicao silva',14327833577780,'rod',10000002,'rod'),
-		   (8,14327833577780,2,2,3,'Rua Maria Conceicao silva',14327833577780,'rod',10000002,'rod'),
-		   (9,14327833577780,3,1,3,'Rua Maria Conceicao silva',14327833577780,'rod',10000002,'rod'),
-		   (10,14327833577780,1,1,4,'Rua Maria Conceicao silva',14327833577780,'rod',10000002,'rod')
+           (1,14327833577780,1,1,1,1,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (2,14327833577780,2,2,1,2,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (3,14327833577780,3,3,1,1,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (4,14327833577780,1,1,2,1,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (5,14327833577780,2,2,2,2,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (6,14327833577780,3,3,2,3,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (7,14327833577780,1,3,3,3,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (8,14327833577780,2,2,3,1,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (9,14327833577780,3,1,3,6,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (10,14327833577780,1,1,4,7,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod')
 GO
+
 /** ---------------------------------------------------------------*/
