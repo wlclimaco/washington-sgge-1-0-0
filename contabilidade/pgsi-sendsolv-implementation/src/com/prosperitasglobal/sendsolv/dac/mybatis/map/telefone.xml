@@ -16,9 +16,9 @@
 
   <resultMap id="telefoneResult" type="Telefone">
     <result property="id" column="id" />
-    <result property="type" column="type" />
+    <result property="typeValue" column="type" />
     <result property="parentId" column="parentId" />
-   	<result property="tabela" column="tabela"/>
+   	<result property="tabelaEnumValue" column="tabela"/>
 	<result property="ddd" column="ddd"/>
 	<result property="telefone" column="telefone" />
     <result property="create_date" column="create_date" />
@@ -48,7 +48,7 @@
   		#{id},
     	#{typeValue},
     	#{parentId},
-    	#{tabela},
+    	#{tabelaEnumValue},
     	#{ddd},
     	#{telefone},
     	<include refid="CBOFMap.changeControlFields"/>
