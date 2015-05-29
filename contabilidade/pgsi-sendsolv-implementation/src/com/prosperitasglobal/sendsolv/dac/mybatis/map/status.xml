@@ -34,7 +34,7 @@
     <result property="dataStatus" column="dataStatus" />
     <result property="parentId" column="parentId" />
     <result property="statusValue" column="status" />
-    <result property="acaoTypeValue" column="acaoType" />
+    <result property="acaoEnumValue" column="acaoType" />
     <result property="tabelaEnumValue" column="tabelaEnum" />
     <result property="note" column="note" />
     <result property="createUser" column="create_user"/>
@@ -49,9 +49,9 @@
   <sql id="allStatusColumns">
 		 b.dataStatus
 		,b.parentId
-		 b.status
+		,b.status
 		,b.acaoType
-		 b.tabelaEnum
+		,b.tabelaEnum
 		,b.note
       	,b.create_date
       	,b.create_user
@@ -63,7 +63,7 @@
   		#{dataStatus},
   		#{parentId},
   		#{statusValue},
-  		#{acaoTypeValue},
+  		#{acaoEnumValue},
   		#{tabelaEnumValue},
   		#{note},
     	<include refid="CBOFMap.changeControlFields"/>
@@ -115,7 +115,7 @@
 
 	    SELECT
 		<include refid="allStatusColumns" />
-	    FROM status where tabelaEnum = 1 and parentId = #{id}
+	    FROM status b where b.tabelaEnum = 1 and b.parentId = #{id}
 
 	    ORDER BY id ASC
   </select>
