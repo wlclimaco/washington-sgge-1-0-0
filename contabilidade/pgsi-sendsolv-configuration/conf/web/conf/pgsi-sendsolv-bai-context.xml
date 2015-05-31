@@ -208,17 +208,14 @@
 
  	<bean id="userBAI" class="com.prosperitasglobal.sendsolv.bai.impl.UserBAIImpl">
  		<property name="userBAC" ref="userBACTarget"/>
- 		<property name="validationController" ref="userValidationController"/>
  	</bean>
 
  	<bean id="settingsBAI" class="com.prosperitasglobal.sendsolv.bai.impl.SettingsBAIImpl">
  		<property name="settingsBAC" ref="settingsBACTarget"/>
- 		<property name="validationController" ref="settingsValidationController"/>
  	</bean>
 
  	<bean id="tenantBAI" class="com.prosperitasglobal.sendsolv.bai.impl.TenantBAIImpl">
  		<property name="tenantBAC" ref="tenantBACTarget"/>
- 		<property name="validationController" ref="telaValidationController"/>
  	</bean>
 
 <!-- ============================================================================== -->

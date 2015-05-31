@@ -16,7 +16,6 @@ import com.qat.framework.model.MessageInfo;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationContext;
-import com.qat.framework.validation.ValidationController;
 
 /**
  * The Class UserBCFImpl.
@@ -43,12 +42,6 @@ public class UserBAIImpl implements IUserBAI
 
 	/** The super user name. */
 	private String superUserName;
-
-	/** The validation controller. */
-	private ValidationController userValidationController;
-
-	/** The user request validation controller. */
-	private ValidationController userRequestValidationController;
 
 	/**
 	 * /**
@@ -89,46 +82,6 @@ public class UserBAIImpl implements IUserBAI
 	public void setSuperUserName(String superUserName)
 	{
 		this.superUserName = superUserName;
-	}
-
-	/**
-	 * Gets the user validation controller.
-	 *
-	 * @return the user validation controller
-	 */
-	public ValidationController getUserValidationController()
-	{
-		return userValidationController;
-	}
-
-	/**
-	 * Sets the user validation controller.
-	 *
-	 * @param userValidationController the new user validation controller
-	 */
-	public void setUserValidationController(ValidationController userValidationController)
-	{
-		this.userValidationController = userValidationController;
-	}
-
-	/**
-	 * Gets the user request validation controller.
-	 *
-	 * @return the user request validation controller
-	 */
-	public ValidationController getUserRequestValidationController()
-	{
-		return userRequestValidationController;
-	}
-
-	/**
-	 * Sets the user request validation controller.
-	 *
-	 * @param userRequestValidationController the new user request validation controller
-	 */
-	public void setUserRequestValidationController(ValidationController userRequestValidationController)
-	{
-		this.userRequestValidationController = userRequestValidationController;
 	}
 
 	/*

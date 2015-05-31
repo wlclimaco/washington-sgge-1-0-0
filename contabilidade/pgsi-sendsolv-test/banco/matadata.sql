@@ -221,7 +221,12 @@ INSERT INTO [dbo].[telefone]
      VALUES
            (1,1,1,1,'034','91782776',1432783357778,'system',1432783357778,'system'),
 		   (2,1,1,2,'034','91782776',1432783357778,'system',1432783357778,'system'),
-		   (3,1,1,3,'034','91782776',1432783357778,'system',1432783357778,'system')
+		   (3,1,1,3,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (4,1,1,1,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (5,1,2,1,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (6,1,2,1,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (7,1,3,1,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (8,1,3,1,'034','91782776',1432783357778,'system',1432783357778,'system')
 GO
 
 
@@ -422,3 +427,486 @@ INSERT INTO [dbo].[status]
 GO
 
 /** ---------------------------------------------------------------*/
+
+/** ---------------------------------------------------------------*/
+
+DROP TABLE [dbo].[funcionario];
+CREATE TABLE [dbo].[funcionario](
+	[id]           [int] NOT NULL,
+	[cdEmpr]       [int] NULL,
+	[matricula]    [varchar](20) NULL,
+	[nome]         [varchar](200) NULL,
+	[sexo]         [int] NULL,
+	[dataAdm]      [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_funcionario_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY];
+INSERT INTO [dbo].[funcionario]
+           ([id],[cdEmpr],[matricula] ,[nome],[dataAdm],[create_date],[create_user],[modify_date],[modify_user])
+     VALUES
+           (1,1,'8460','8460' ,14327833577780,14327833577780 ,'system' ,14327833577780,'system'),
+		   (2,1,'8460','8460',14327833577780,14327833577780 ,'system' ,14327833577780,'system'),
+		   (3,1,'8460','8460',14327833577780,14327833577780 ,'system' ,14327833577780,'system'),
+		   (4,1,'8460','8460',14327833577780,14327833577780 ,'system' ,14327833577780,'system'),
+		   (5,1,'8460','8460',14327833577780,14327833577780 ,'system' ,14327833577780,'system'),
+		   (6,2,'8460','8460',14327833577780,14327833577780 ,'system' ,14327833577780,'system'),
+		   (7,2,'8460','8460',14327833577780,14327833577780 ,'system' ,14327833577780,'system'),
+		   (8,2,'8460','8460',14327833577780,14327833577780 ,'system' ,14327833577780,'system'),
+		   (9,2,'8460','8460',14327833577780,14327833577780 ,'system' ,14327833577780,'system'),
+		   (10,2,'8460','8460',14327833577780,14327833577780 ,'system' ,14327833577780,'system'),
+		   (11,3,'8460','8460',14327833577780,14327833577780 ,'system' ,14327833577780,'system'),
+		   (12,3,'8460','8460',14327833577780,14327833577780 ,'system' ,14327833577780,'system'),
+		   (13,3,'8460','8460',14327833577780,14327833577780 ,'system' ,14327833577780,'system'),
+		   (14,3,'8460','8460',14327833577780,14327833577780 ,'system' ,14327833577780,'system'),
+		   (15,3,'8460','8460',14327833577780,14327833577780 ,'system' ,14327833577780,'system')
+
+GO
+
+INSERT INTO [dbo].[documento]
+           ([id],[tabela],[parentId],[type],[description],[numero],[data] ,[estado],[create_date] ,[create_user],[modify_date],[modify_user])
+     VALUES
+           (7,16,1,1,'CNPJ','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
+		   (8,16,2,1,'CPF','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
+		   (9,16,3,1,'IM','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
+		   (10,16,4,1,'IE','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
+		   (11,16,5,1,'RG','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
+		   (12,16,6,1,'CGC','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
+		   (13,16,7,1,'CNPJ','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
+		   (14,16,8,1,'CPF','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
+		   (15,16,9,1,'IM','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
+		   (16,16,10,1,'IE','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
+		   (17,16,11,1,'RG','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
+		   (18,16,12,1,'CGC','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
+		   (19,16,13,1,'CNPJ','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
+		   (20,16,14,1,'CPF','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
+		   (21,16,15,1,'IM','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
+		   (22,16,1,1,'IE','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
+		   (23,16,2,1,'RG','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
+		   (24,16,3,1,'CGC','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod')
+GO
+
+INSERT INTO [dbo].[email]
+           ([id],[tabela],[parentId],[type],[email],[description],[create_date],[create_user] ,[modify_date],[modify_user])
+     VALUES
+           (7,16,1,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (8,16,2,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (9,16,3,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (10,16,4,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (11,16,5,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (12,16,6,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (13,16,7,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (14,16,8,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (15,16,9,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (16,16,10,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (17,16,11,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (18,16,12,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (19,16,13,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (20,16,14,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (21,16,15,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (22,16,1,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (23,16,1,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (24,16,3,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod')
+GO
+
+INSERT INTO [dbo].[endereco]
+           ([id],[tabela],[parentId],[type],[logradouro],[cidade],[estado],[bairro],[numero],[cep],[create_date] ,[create_user],[modify_date],[modify_user])
+     VALUES
+           (7,16,1,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (8,16,2,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (9,16,3,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (10,16,4,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (11,16,5,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (12,16,6,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (13,16,7,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (14,16,8,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (15,16,9,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (16,16,10,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (17,16,11,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (18,16,12,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (19,16,13,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (20,16,14,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (21,16,15,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (22,16,1,2,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod')
+GO
+
+INSERT INTO [dbo].[telefone]
+           ([id],[type] ,[parentId],[tabela],[ddd],[telefone],[create_date],[create_user],[modify_date],[modify_user])
+     VALUES
+           (9,1,1,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (10,1,2,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (11,1,3,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (12,1,4,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (13,1,5,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (14,1,6,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (15,1,7,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (16,1,8,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (17,1,9,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (18,1,10,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (19,1,11,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (20,1,12,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (21,1,13,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (22,1,14,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (23,1,15,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (24,2,1,16,'034','91782776',1432783357778,'system',1432783357778,'system')
+GO
+
+/** ---------------------------------------------------------------*/
+
+DROP TABLE [dbo].[horarios];
+CREATE TABLE [dbo].[horarios](
+	[id]           [int] NOT NULL,
+	[parentId]     [int] NULL,
+	[data]         [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[horarioEntr]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[horarioSair]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[tipo]     	   [varchar](50) NULL,
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_horario_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+USE [PGSi]
+GO
+
+INSERT INTO [dbo].[horarios]
+           ([id],[parentId],[data],[horarioEntr],[horarioSair],[create_date],[tipo],[create_user],[modify_date],[modify_user])
+     VALUES
+           (1,1,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
+		   (2,2,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
+		   (3,3,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
+		   (4,4,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
+		   (5,5,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
+		   (6,6,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
+		   (7,7,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
+		   (8,8,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
+		   (9,9,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
+		   (10,10,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
+		   (11,11,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
+		   (12,12,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
+		   (13,13,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
+		   (14,14,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
+		   (15,15,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
+		   (16,1,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
+		   (17,2,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
+		   (18,3,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
+		   (19,4,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
+		   (20,5,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
+		   (21,6,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
+		   (22,7,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
+		   (23,8,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
+		   (24,9,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
+		   (25,10,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
+		   (26,11,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
+		   (27,12,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
+		   (28,13,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
+		   (29,14,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
+		   (30,15,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system')
+
+GO
+
+
+
+/** ---------------------------------------------------------------*/
+
+DROP TABLE [dbo].[Salario];
+CREATE TABLE [dbo].[Salario](
+	[id]           [int] NOT NULL,
+	[parentId]     [int] NULL,
+	[valor]        [real] NULL,
+	[data]         [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_salario_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+INSERT INTO [dbo].[Salario]
+           ([id],[parentId],[valor],[data],[create_date],[create_user],[modify_user],[modify_date])
+     VALUES
+           (1,1,720.99,1432783357778,1432783357778,'sistem' ,'System',1432783357778),
+		   (2,2,720.99,1432783357778,1432783357778,'sistem' ,'System',1432783357778),
+		   (3,3,720.99,1432783357778,1432783357778,'sistem' ,'System',1432783357778),
+		   (4,4,720.99,1432783357778,1432783357778,'sistem' ,'System',1432783357778),
+		   (5,5,720.99,1432783357778,1432783357778,'sistem' ,'System',1432783357778),
+		   (6,6,720.99,1432783357778,1432783357778,'sistem' ,'System',1432783357778),
+		   (7,7,720.99,1432783357778,1432783357778,'sistem' ,'System',1432783357778),
+		   (8,8,720.99,1432783357778,1432783357778,'sistem' ,'System',1432783357778),
+		   (9,9,720.99,1432783357778,1432783357778,'sistem' ,'System',1432783357778),
+		   (10,10,720.99,1432783357778,1432783357778,'sistem' ,'System',1432783357778),
+		   (11,11,720.99,1432783357778,1432783357778,'sistem' ,'System',1432783357778),
+		   (12,12,720.99,1432783357778,1432783357778,'sistem' ,'System',1432783357778),
+		   (13,13,720.99,1432783357778,1432783357778,'sistem' ,'System',1432783357778),
+		   (14,14,720.99,1432783357778,1432783357778,'sistem' ,'System',1432783357778),
+		   (15,15,720.99,1432783357778,1432783357778,'sistem' ,'System',1432783357778),
+		   (16,1,720.99,1432783357778,1432783357778,'sistem' ,'System',1432783357778),
+		   (17,2,720.99,1432783357778,1432783357778,'sistem' ,'System',1432783357778),
+		   (18,3,720.99,1432783357778,1432783357778,'sistem' ,'System',1432783357778),
+		   (19,4,720.99,1432783357778,1432783357778,'sistem' ,'System',1432783357778),
+		   (20,5,720.99,1432783357778,1432783357778,'sistem' ,'System',1432783357778)
+GO
+/** ---------------------------------------------------------------*/
+
+DROP TABLE [dbo].[Beneficio];
+CREATE TABLE [dbo].[Beneficio](
+	[id]           [int] NOT NULL,
+	[nome]         [varchar](50) NULL,
+    [codigo]       [varchar](50) NULL,
+    [descricao]    [varchar](50) NULL,
+	[valor]        [real] NULL,
+	[porcentagem]  [real] NULL,
+	[tipo]		   [varchar](10) NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_beneficio_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+INSERT INTO [dbo].[Beneficio]
+           ([id],[nome],[codigo],[descricao],[valor],[porcentagem],[tipo],[create_date],[create_user],[modify_date],[modify_user])
+     VALUES
+            (1,'Vale Transporte','000001','vale transporte',0,3.5,'desc',1432783357778,'System',1432783357778,'System'),
+			(2,'UNIMED','000002','Plano de saude',0,3.5,'desc',1432783357778,'System',1432783357778,'System')
+
+GO
+
+
+DROP TABLE [dbo].[BeneficioFunc];
+CREATE TABLE [dbo].[BeneficioFunc](
+	[id]           [int] NOT NULL,
+	[idFunc]       [int] NOT NULL,
+	[idBenef]       [int] NOT NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_beneficioBene_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+INSERT INTO [dbo].[BeneficioFunc]
+           ([id],[idFunc],[idBenef],[create_date],[create_user],[modify_date],[modify_user])
+     VALUES
+           (1,1,1,1432783357778,'System',1432783357778,'System'),
+		   (2,2,1,1432783357778,'System',1432783357778,'System'),
+		   (3,3,1,1432783357778,'System',1432783357778,'System'),
+		   (4,4,1,1432783357778,'System',1432783357778,'System'),
+		   (5,5,1,1432783357778,'System',1432783357778,'System'),
+		   (6,6,1,1432783357778,'System',1432783357778,'System'),
+		   (7,7,1,1432783357778,'System',1432783357778,'System'),
+		   (8,8,1,1432783357778,'System',1432783357778,'System'),
+		   (9,9,1,1432783357778,'System',1432783357778,'System'),
+		   (10,10,1,1432783357778,'System',1432783357778,'System'),
+		   (11,11,1,1432783357778,'System',1432783357778,'System'),
+		   (12,12,1,1432783357778,'System',1432783357778,'System'),
+		   (13,13,1,1432783357778,'System',1432783357778,'System'),
+		   (14,14,1,1432783357778,'System',1432783357778,'System'),
+		   (15,15,1,1432783357778,'System',1432783357778,'System'),
+		   (16,1,2,1432783357778,'System',1432783357778,'System'),
+		   (17,2,2,1432783357778,'System',1432783357778,'System'),
+		   (18,3,2,1432783357778,'System',1432783357778,'System'),
+		   (19,4,2,1432783357778,'System',1432783357778,'System'),
+		   (20,5,2,1432783357778,'System',1432783357778,'System'),
+		   (21,6,2,1432783357778,'System',1432783357778,'System'),
+		   (22,7,2,1432783357778,'System',1432783357778,'System'),
+		   (23,8,2,1432783357778,'System',1432783357778,'System'),
+		   (24,9,2,1432783357778,'System',1432783357778,'System'),
+		   (25,10,2,1432783357778,'System',1432783357778,'System'),
+		   (26,11,2,1432783357778,'System',1432783357778,'System'),
+		   (27,12,2,1432783357778,'System',1432783357778,'System'),
+		   (28,13,2,1432783357778,'System',1432783357778,'System'),
+		   (29,14,2,1432783357778,'System',1432783357778,'System'),
+		   (30,15,2,1432783357778,'System',1432783357778,'System')
+GO
+
+CREATE TABLE [dbo].[BeneficioMesApp](
+	[id]           [int] NOT NULL,
+	[data]         [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[idFuncBenef] [int] NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_eventoFuncEventApp_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+INSERT INTO [dbo].[BeneficioMesApp]
+           ([id],[data],[idFuncBenef],[create_date],[create_user],[modify_date],[modify_user])
+     VALUES
+           (1,1432783357778,1,1432783357778,'System',1432783357778,'System'),
+		   (2,1432783357778,2,1432783357778,'System',1432783357778,'System'),
+		   (3,1432783357778,3,1432783357778,'System',1432783357778,'System'),
+		   (4,1432783357778,4,1432783357778,'System',1432783357778,'System'),
+		   (5,1432783357778,5,1432783357778,'System',1432783357778,'System'),
+		   (6,1432783357778,6,1432783357778,'System',1432783357778,'System'),
+		   (7,1432783357778,7,1432783357778,'System',1432783357778,'System'),
+		   (8,1432783357778,8,1432783357778,'System',1432783357778,'System'),
+		   (9,1432783357778,9,1432783357778,'System',1432783357778,'System'),
+		   (10,1432783357778,10,1432783357778,'System',1432783357778,'System'),
+		   (11,1432783357778,11,1432783357778,'System',1432783357778,'System'),
+		   (12,1432783357778,12,1432783357778,'System',1432783357778,'System'),
+		   (13,1432783357778,13,1432783357778,'System',1432783357778,'System'),
+		   (14,1432783357778,14,1432783357778,'System',1432783357778,'System'),
+		   (15,1432783357778,15,1432783357778,'System',1432783357778,'System'),
+		   (16,1432783357778,16,1432783357778,'System',1432783357778,'System'),
+		   (17,1432783357778,17,1432783357778,'System',1432783357778,'System')
+GO
+/** ---------------------------------------------------------------*/
+
+DROP TABLE [dbo].[Evento];
+CREATE TABLE [dbo].[Evento](
+	[id]           [int] NOT NULL,
+	[data]         [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[descricao]    [varchar](50) NULL,
+	[tipo]         [varchar](50) NULL,
+    [codigo]       [varchar](50) NULL,
+    [noteText]     [varchar](200) NULL,
+	[valor]        [real] NULL,
+	[porcentagem]  [real] NULL,
+	[isMensal]     [bit] NULL,
+	[isSistema]    [bit] NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_evento_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+INSERT INTO [dbo].[Evento]
+           ([id],[data],[descricao],[tipo],[codigo],[noteText],[valor],[porcentagem],[isMensal],[isSistema],[create_date],[create_user],[modify_date],[modify_user])
+     VALUES
+           (1,1432783357778,'FGTS','desconto','00001','hhhhhhhhh',0,8,1,1,1432783357778,'System',1432783357778 ,'system'),
+		   (2,1432783357778,'IR','desconto','00001','hhhhhhhhh',0,8,1,1,1432783357778,'System',1432783357778 ,'system'),
+		   (3,1432783357778,'SINDICATO','desconto','00001','hhhhhhhhh',0,8,1,1,1432783357778,'System',1432783357778 ,'system'),
+		   (4,1432783357778,'INSS','desconto','00001','hhhhhhhhh',0,8,1,1,1432783357778,'System',1432783357778 ,'system')
+GO;
+
+
+DROP TABLE [dbo].[EventoFunc];
+CREATE TABLE [dbo].[EventoFunc](
+	[id]           [int] NOT NULL,
+	[data]         [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[idFunc]	   [int] NULL,
+	[idEvent]	   [int] NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_eventoFunc_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+INSERT INTO [dbo].[EventoFunc]
+           ([id],[data],[idFunc],[create_date],[create_user],[modify_date],[modify_user],[idEvent])
+     VALUES
+           (1,1432783357778,1,1432783357778,'System',1432783357778,'System',1),
+		   (2,1432783357778,2,1432783357778,'System',1432783357778,'System',1),
+		   (3,1432783357778,3,1432783357778,'System',1432783357778,'System',1),
+		   (4,1432783357778,4,1432783357778,'System',1432783357778,'System',1),
+		   (5,1432783357778,5,1432783357778,'System',1432783357778,'System',1),
+		   (6,1432783357778,6,1432783357778,'System',1432783357778,'System',1),
+		   (7,1432783357778,7,1432783357778,'System',1432783357778,'System',1),
+		   (8,1432783357778,8,1432783357778,'System',1432783357778,'System',1),
+		   (9,1432783357778,9,1432783357778,'System',1432783357778,'System',1),
+		   (10,1432783357778,10,1432783357778,'System',1432783357778,'System',1),
+		   (11,1432783357778,11,1432783357778,'System',1432783357778,'System',1),
+		   (12,1432783357778,12,1432783357778,'System',1432783357778,'System',1),
+		   (13,1432783357778,13,1432783357778,'System',1432783357778,'System',1),
+		   (14,1432783357778,14,1432783357778,'System',1432783357778,'System',1),
+		   (15,1432783357778,15,1432783357778,'System',1432783357778,'System',1),
+		   (16,1432783357778,1,1432783357778,'System',1432783357778,'System',2),
+		   (17,1432783357778,2,1432783357778,'System',1432783357778,'System',2),
+		   (18,1432783357778,3,1432783357778,'System',1432783357778,'System',2),
+		   (19,1432783357778,4,1432783357778,'System',1432783357778,'System',2),
+		   (20,1432783357778,5,1432783357778,'System',1432783357778,'System',2),
+		   (21,1432783357778,6,1432783357778,'System',1432783357778,'System',2),
+		   (22,1432783357778,7,1432783357778,'System',1432783357778,'System',2),
+		   (23,1432783357778,8,1432783357778,'System',1432783357778,'System',2),
+		   (24,1432783357778,9,1432783357778,'System',1432783357778,'System',2),
+		   (25,1432783357778,10,1432783357778,'System',1432783357778,'System',2),
+		   (26,1432783357778,11,1432783357778,'System',1432783357778,'System',2),
+		   (27,1432783357778,12,1432783357778,'System',1432783357778,'System',2),
+		   (28,1432783357778,13,1432783357778,'System',1432783357778,'System',2),
+		   (29,1432783357778,14,1432783357778,'System',1432783357778,'System',2),
+		   (30,1432783357778,15,1432783357778,'System',1432783357778,'System',2),
+		   (31,1432783357778,1,1432783357778,'System',1432783357778,'System',3),
+		   (32,1432783357778,2,1432783357778,'System',1432783357778,'System',3),
+		   (33,1432783357778,3,1432783357778,'System',1432783357778,'System',3),
+		   (34,1432783357778,4,1432783357778,'System',1432783357778,'System',3),
+		   (35,1432783357778,5,1432783357778,'System',1432783357778,'System',3),
+		   (36,1432783357778,6,1432783357778,'System',1432783357778,'System',3),
+		   (37,1432783357778,7,1432783357778,'System',1432783357778,'System',3),
+		   (38,1432783357778,8,1432783357778,'System',1432783357778,'System',3),
+		   (39,1432783357778,9,1432783357778,'System',1432783357778,'System',3),
+		   (40,1432783357778,10,1432783357778,'System',1432783357778,'System',3),
+		   (41,1432783357778,11,1432783357778,'System',1432783357778,'System',3),
+		   (42,1432783357778,12,1432783357778,'System',1432783357778,'System',3),
+		   (43,1432783357778,13,1432783357778,'System',1432783357778,'System',3),
+		   (44,1432783357778,14,1432783357778,'System',1432783357778,'System',3),
+		   (45,1432783357778,15,1432783357778,'System',1432783357778,'System',3)
+
+GO
+
+
+
+DROP TABLE [dbo].[EventoMesApp];
+CREATE TABLE [dbo].[EventoMesApp](
+	[id]           [int] NOT NULL,
+	[data]         [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[idFuncEnvent] [int] NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_eventoFuncEventApp_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+INSERT INTO [dbo].[EventoMesApp]
+           ([id],[data],[idFuncEnvent],[create_date],[create_user],[modify_date],[modify_user])
+     VALUES
+           (1,1432783357778,1,1432783357778,'System',1432783357778,'System'),
+		   (2,1432783357778,2,1432783357778,'System',1432783357778,'System'),
+		   (3,1432783357778,3,1432783357778,'System',1432783357778,'System'),
+		   (4,1432783357778,4,1432783357778,'System',1432783357778,'System'),
+		   (5,1432783357778,5,1432783357778,'System',1432783357778,'System'),
+		   (6,1432783357778,6,1432783357778,'System',1432783357778,'System'),
+		   (7,1432783357778,7,1432783357778,'System',1432783357778,'System'),
+		   (8,1432783357778,8,1432783357778,'System',1432783357778,'System'),
+		   (9,1432783357778,9,1432783357778,'System',1432783357778,'System'),
+		   (10,1432783357778,10,1432783357778,'System',1432783357778,'System'),
+		   (11,1432783357778,11,1432783357778,'System',1432783357778,'System'),
+		   (12,1432783357778,12,1432783357778,'System',1432783357778,'System'),
+		   (13,1432783357778,13,1432783357778,'System',1432783357778,'System'),
+		   (14,1432783357778,14,1432783357778,'System',1432783357778,'System'),
+		   (15,1432783357778,15,1432783357778,'System',1432783357778,'System'),
+		   (16,1432783357778,16,1432783357778,'System',1432783357778,'System'),
+		   (17,1432783357778,17,1432783357778,'System',1432783357778,'System')
+GO

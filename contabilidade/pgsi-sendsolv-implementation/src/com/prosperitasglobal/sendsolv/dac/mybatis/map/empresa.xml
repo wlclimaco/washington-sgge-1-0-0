@@ -106,22 +106,15 @@
 
   <select id="fetchEmpresaById" parameterType="FetchByIdRequest" resultMap="empresaResult">
     			   SELECT
-						<include refid="allEmpresaColumns" />
+					b.id,	<include refid="allEmpresaColumns" />
  				   FROM empresa b
-
-					<where>
-				  		 <choose>
-							<when test="id != null and id != ''">
-								b.business_id = #{id}
-				    		</when>
-				    	 </choose>
-				  </where>
+					where b.id = #{id}
   </select>
 
   <select id="fetchAllEmpresasByRequest" parameterType="EmpresaInquiryRequest" resultMap="empresaResult">
      SELECT * FROM ( SELECT b.id,
     						<include refid="allEmpresaColumns" />,
-    						ROW_NUMBER() OVER(ORDER BY b.nome) AS RowNumber
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM empresa b
 						where 1 = 1
 					<if test="parentId != null">

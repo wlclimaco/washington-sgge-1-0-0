@@ -18,7 +18,7 @@ public class Funcionario extends Pessoa
 	private String matricula;
 
 	/** The data adm. */
-	private Integer dataAdm;
+	private Long dataAdm;
 
 	/** The salarios. */
 	private List<Salario> salarios;
@@ -28,6 +28,8 @@ public class Funcionario extends Pessoa
 
 	/** The beneficios. */
 	private List<Beneficios> beneficios;
+
+	private List<Eventos> eventosList;
 
 	/**
 	 * Default constructor.
@@ -92,22 +94,6 @@ public class Funcionario extends Pessoa
 	}
 
 	/**
-	 * @return the dataAdm
-	 */
-	public Integer getDataAdm()
-	{
-		return dataAdm;
-	}
-
-	/**
-	 * @param dataAdm the dataAdm to set
-	 */
-	public void setDataAdm(Integer dataAdm)
-	{
-		this.dataAdm = dataAdm;
-	}
-
-	/**
 	 * @return the salarios
 	 */
 	public List<Salario> getSalarios()
@@ -153,6 +139,38 @@ public class Funcionario extends Pessoa
 	public void setBeneficios(List<Beneficios> beneficios)
 	{
 		this.beneficios = beneficios;
+	}
+
+	/**
+	 * @return the dataAdm
+	 */
+	public Long getDataAdm()
+	{
+		return dataAdm;
+	}
+
+	/**
+	 * @param dataAdm the dataAdm to set
+	 */
+	public void setDataAdm(Long dataAdm)
+	{
+		this.dataAdm = dataAdm;
+	}
+
+	/**
+	 * @return the eventosList
+	 */
+	public List<Eventos> getEventosList()
+	{
+		return eventosList;
+	}
+
+	/**
+	 * @param eventosList the eventosList to set
+	 */
+	public void setEventosList(List<Eventos> eventosList)
+	{
+		this.eventosList = eventosList;
 	}
 
 	/*

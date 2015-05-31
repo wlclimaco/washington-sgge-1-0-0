@@ -28,7 +28,7 @@ import com.prosperitasglobal.sendsolv.model.Funcionario;
 import com.prosperitasglobal.sendsolv.model.Status;
 import com.prosperitasglobal.sendsolv.model.StatusEnum;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.FuncionarioInquiryRequest;
 import com.qat.framework.model.QATModel;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
@@ -379,7 +379,7 @@ public class FuncionarioDACImpl extends SqlSessionDaoSupport implements IFuncion
 	 * .model.request.PagedInquiryRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Funcionario> fetchFuncionarioByRequest(PagedInquiryRequest request)
+	public InternalResultsResponse<Funcionario> fetchFuncionarioByRequest(FuncionarioInquiryRequest request)
 	{
 		InternalResultsResponse<Funcionario> response = new InternalResultsResponse<Funcionario>();
 
@@ -387,7 +387,7 @@ public class FuncionarioDACImpl extends SqlSessionDaoSupport implements IFuncion
 		 * Helper method to translation from the user friendly" sort field names to the
 		 * actual database column names.
 		 */
-		QATMyBatisDacHelper.translateSortFields(request, getFuncionarioInquiryValidSortFields());
+		// QATMyBatisDacHelper.translateSortFields(request, getFuncionarioInquiryValidSortFields());
 
 		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, FUNCIONARIO_STMT_FETCH_COUNT,
 				FUNCIONARIO_STMT_FETCH_ALL_BY_REQUEST, response);

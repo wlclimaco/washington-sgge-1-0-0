@@ -106,6 +106,14 @@
 
   </select>
 
+   <select id="fetchDocumentoByFuncionario" parameterType="Integer" resultMap="documentoResult">
+     SELECT
+     <include refid="allDocumentoColumns" />
+        FROM documento b
+     WHERE b.tabela = 16 and b.parentId = #{id}
+
+  </select>
+
   <select id="fetchAllDocumentos" resultMap="documentoResult">
     SELECT
 	<include refid="allDocumentoColumns" />

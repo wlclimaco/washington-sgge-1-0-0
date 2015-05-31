@@ -49,54 +49,54 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 	EMAIL(3, "sendsolv.base.model.risklevelenum.unknown"),
 
 	/** The endereco. */
-	ENDERECO(0, "sendsolv.base.model.risklevelenum.high"),
+	ENDERECO(4, "sendsolv.base.model.risklevelenum.high"),
 
 	/** The low. */
-	TELEFONE(1, "sendsolv.base.model.risklevelenum.low"),
+	TELEFONE(5, "sendsolv.base.model.risklevelenum.low"),
 
 	/** The medium. */
-	SOCIO(2, "sendsolv.base.model.risklevelenum.medium"),
+	SOCIO(6, "sendsolv.base.model.risklevelenum.medium"),
 
 	/** The unknown. */
-	HISTORICO(3, "sendsolv.base.model.risklevelenum.unknown"),
+	HISTORICO(7, "sendsolv.base.model.risklevelenum.unknown"),
 
 	/** The cnae. */
-	CNAE(0, "sendsolv.base.model.risklevelenum.high"),
+	CNAE(8, "sendsolv.base.model.risklevelenum.high"),
 
 	/** The low. */
-	CSOSN(1, "sendsolv.base.model.risklevelenum.low"),
+	CSOSN(9, "sendsolv.base.model.risklevelenum.low"),
 
 	/** The medium. */
-	NCM(2, "sendsolv.base.model.risklevelenum.medium"),
+	NCM(10, "sendsolv.base.model.risklevelenum.medium"),
 
 	/** The unknown. */
-	CIDADE(3, "sendsolv.base.model.risklevelenum.unknown"),
+	CIDADE(11, "sendsolv.base.model.risklevelenum.unknown"),
 
 	/** The cnaeporrelacionamento. */
-	CNAEPORRELACIONAMENTO(0, "sendsolv.base.model.risklevelenum.high"),
+	CNAEPORRELACIONAMENTO(12, "sendsolv.base.model.risklevelenum.high"),
 
 	/** The estado. */
-	ESTADO(3, "sendsolv.base.model.risklevelenum.unknown"),
+	ESTADO(13, "sendsolv.base.model.risklevelenum.unknown"),
 
 	/** The unimed. */
-	UNIMED(0, "sendsolv.base.model.risklevelenum.high"),
+	UNIMED(14, "sendsolv.base.model.risklevelenum.high"),
 
 	/** The low. */
-	CFOP(1, "sendsolv.base.model.risklevelenum.low"),
+	CFOP(15, "sendsolv.base.model.risklevelenum.low"),
 
 	/** The medium. */
-	FUNCIONARIO(2, "sendsolv.base.model.risklevelenum.medium"),
+	FUNCIONARIO(16, "sendsolv.base.model.risklevelenum.medium"),
 
-	CLIENTE(0, "sendsolv.base.model.risklevelenum.high"),
+	CLIENTE(17, "sendsolv.base.model.risklevelenum.high"),
 
 	/** The low. */
-	FORNECEDOR(1, "sendsolv.base.model.risklevelenum.low"),
+	FORNECEDOR(18, "sendsolv.base.model.risklevelenum.low"),
 
 	/** The medium. */
-	TRANSPORTADOR(2, "sendsolv.base.model.risklevelenum.medium"),
+	TRANSPORTADOR(19, "sendsolv.base.model.risklevelenum.medium"),
 
 	/** The unknown. */
-	SALARIO(3, "sendsolv.base.model.risklevelenum.unknown");
+	SALARIO(20, "sendsolv.base.model.risklevelenum.unknown");
 
 	/** The code. */
 	private Integer code;

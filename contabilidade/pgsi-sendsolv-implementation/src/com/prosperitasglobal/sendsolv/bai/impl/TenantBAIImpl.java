@@ -26,32 +26,32 @@ public class TenantBAIImpl implements ITenantBAI
 	private static final String DEFAULT_TENANT_BCF_EXCEPTION_MSG = "sensus.mlc.tenantbcfimpl.defaultexception";
 
 	/** The Constant DEFAULT_TENANT_BCL_EXCEPTION_MSG. */
-	private static final String DEFAULT_TENANT_BCL_EXCEPTION_MSG = "sensus.mlc.tenantbclimpl.defaultexception";
+	private static final String DEFAULT_TENANT_BCL_EXCEPTION_MSG = "sensus.mlc.TenantBACimpl.defaultexception";
 
 	/** The Constant LOG. */
 	private static final Logger LOG = LoggerFactory.getLogger(TenantBAIImpl.class);
 
 	/** The tenant bcl. */
-	private ITenantBAC tenantBCL;
+	private ITenantBAC TenantBAC;
 
 	/**
 	 * Gets the tenant bcl.
 	 *
 	 * @return the tenant bcl
 	 */
-	public ITenantBAC getTenantBCL()
+	public ITenantBAC getTenantBAC()
 	{
-		return tenantBCL;
+		return TenantBAC;
 	}
 
 	/**
 	 * Sets the tenant bcl.
 	 *
-	 * @param tenantBCL the new tenant bcl
+	 * @param TenantBAC the new tenant bcl
 	 */
-	public void setTenantBCL(ITenantBAC tenantBCL)
+	public void setTenantBAC(ITenantBAC TenantBAC)
 	{
-		this.tenantBCL = tenantBCL;
+		this.TenantBAC = TenantBAC;
 	}
 
 	/*
@@ -66,7 +66,7 @@ public class TenantBAIImpl implements ITenantBAI
 
 		try
 		{
-			internalResponse = getTenantBCL().fetchAllTenant();
+			internalResponse = getTenantBAC().fetchAllTenant();
 			response.setTenants(internalResponse.getResultsList());
 
 			handleOperationStatusAndMessages(response, internalResponse, DEFAULT_TENANT_BCL_EXCEPTION_MSG);
@@ -104,7 +104,7 @@ public class TenantBAIImpl implements ITenantBAI
 				return response;
 			}
 
-			InternalResultsResponse<Boolean> internalResponse = getTenantBCL().verifyAPIAccess(tenantRequest);
+			InternalResultsResponse<Boolean> internalResponse = getTenantBAC().verifyAPIAccess(tenantRequest);
 
 			if (!ValidationUtil.isNull(internalResponse))
 			{
@@ -122,7 +122,7 @@ public class TenantBAIImpl implements ITenantBAI
 	}
 
 	private void handleOperationStatusAndMessages(TenantResponse response,
-			InternalResultsResponse<Tenant> internalResponse, String defaultTenantBclExceptionMsg)
+			InternalResultsResponse<Tenant> internalResponse, String defaultTenantBACExceptionMsg)
 	{
 		// TODO Auto-generated method stub
 
