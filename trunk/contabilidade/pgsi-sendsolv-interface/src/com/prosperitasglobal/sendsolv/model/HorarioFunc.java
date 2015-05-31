@@ -1,6 +1,5 @@
 package com.prosperitasglobal.sendsolv.model;
 
-
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -12,13 +11,13 @@ public class HorarioFunc extends ModelCosmeDamiao
 	private Integer id;
 
 	/** The type of an account. */
-	private Integer data;
+	private Long data;
 
 	/** The description. */
-	private String horarioEntr;
+	private Long horarioEntr;
 
 	/** The horario sair. */
-	private String horarioSair;
+	private Long horarioSair;
 
 	/** The tipo. */
 	private String tipo;
@@ -40,7 +39,7 @@ public class HorarioFunc extends ModelCosmeDamiao
 	 * @param horarioSair the horario sair
 	 * @param tipo the tipo
 	 */
-	public HorarioFunc(Integer id, Integer data, String horarioEntr, String horarioSair, String tipo)
+	public HorarioFunc(Integer id, Long data, Long horarioEntr, Long horarioSair, String tipo)
 	{
 		super();
 		this.id = id;
@@ -75,7 +74,7 @@ public class HorarioFunc extends ModelCosmeDamiao
 	 *
 	 * @return the data
 	 */
-	public Integer getData()
+	public Long getData()
 	{
 		return data;
 	}
@@ -85,47 +84,39 @@ public class HorarioFunc extends ModelCosmeDamiao
 	 *
 	 * @param data the data to set
 	 */
-	public void setData(Integer data)
+	public void setData(Long data)
 	{
 		this.data = data;
 	}
 
 	/**
-	 * Gets the horario entr.
-	 *
 	 * @return the horarioEntr
 	 */
-	public String getHorarioEntr()
+	public Long getHorarioEntr()
 	{
 		return horarioEntr;
 	}
 
 	/**
-	 * Sets the horario entr.
-	 *
 	 * @param horarioEntr the horarioEntr to set
 	 */
-	public void setHorarioEntr(String horarioEntr)
+	public void setHorarioEntr(Long horarioEntr)
 	{
 		this.horarioEntr = horarioEntr;
 	}
 
 	/**
-	 * Gets the horario sair.
-	 *
 	 * @return the horarioSair
 	 */
-	public String getHorarioSair()
+	public Long getHorarioSair()
 	{
 		return horarioSair;
 	}
 
 	/**
-	 * Sets the horario sair.
-	 *
 	 * @param horarioSair the horarioSair to set
 	 */
-	public void setHorarioSair(String horarioSair)
+	public void setHorarioSair(Long horarioSair)
 	{
 		this.horarioSair = horarioSair;
 	}

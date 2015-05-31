@@ -125,8 +125,8 @@
 		select  <include refid="allEnderecoColumns" /> from endereco b where tabela = 1 and parentId = #{id}
   </select>
 
- <select id="fetchEnderecoByFucionarioId" parameterType="Integer" resultMap="enderecoResult">
-		select * from endereco b where tabela = 2 and parentId = #{id}
+ <select id="fetchEnderecoByFuncionarioId" parameterType="Integer" resultMap="enderecoResult">
+		select * from endereco b where tabela = 16 and parentId = #{id}
   </select>
 
 

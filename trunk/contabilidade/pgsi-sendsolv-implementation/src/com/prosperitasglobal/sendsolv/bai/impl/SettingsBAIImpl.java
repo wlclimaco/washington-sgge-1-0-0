@@ -17,7 +17,6 @@ import com.prosperitasglobal.sendsolv.tenant.model.response.TenantResponse;
 import com.qat.framework.model.MessageInfo;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationContext;
-import com.qat.framework.validation.ValidationController;
 
 /**
  * The Class SettingsBCFimpl.
@@ -39,83 +38,14 @@ public class SettingsBAIImpl implements ISettingsBAI
 	/** The settings bcl. */
 	private ISettingsBAC settingsBAC; // injected by Spring through setter
 
-	/** The setting list validation controler. */
-	private ValidationController settingListValidationController;
-
-	/** The tenant request validator controller. */
-	private ValidationController tenantRequestValidationController;
-
-	/** The column filter validation controller. */
-	private ValidationController columnFilterValidationController;
-
-	/**
-	 * Gets the setting list validation controller.
-	 *
-	 * @return the setting list validation controller
-	 */
-	public ValidationController getSettingListValidationController()
-	{
-		return settingListValidationController;
-	}
-
-	/**
-	 * Sets the setting list validation controller.
-	 *
-	 * @param settingListValidationController the new setting list validation controller
-	 */
-	public void setSettingListValidationController(ValidationController settingListValidationController)
-	{
-		this.settingListValidationController = settingListValidationController;
-	}
-
-	/**
-	 * Gets the tenant request validation controller.
-	 *
-	 * @return the tenant request validation controller
-	 */
-	public ValidationController getTenantRequestValidationController()
-	{
-		return tenantRequestValidationController;
-	}
-
-	/**
-	 * Sets the tenant request validation controller.
-	 *
-	 * @param tenantRequestValidationController the new tenant request validation controller
-	 */
-	public void setTenantRequestValidationController(ValidationController tenantRequestValidationController)
-	{
-		this.tenantRequestValidationController = tenantRequestValidationController;
-	}
-
-	/**
-	 * Gets the column filter validation controller.
-	 *
-	 * @return the column filter validation controller
-	 */
-	public ValidationController getColumnFilterValidationController()
-	{
-		return columnFilterValidationController;
-	}
-
-	/**
-	 * Sets the column filter validation controller.
-	 *
-	 * @param columnFilterValidationController the new column filter validation controller
-	 */
-	public void setColumnFilterValidationController(ValidationController columnFilterValidationController)
-	{
-		this.columnFilterValidationController = columnFilterValidationController;
-	}
-
 	/**
 	 * Sets the settings bcl.
 	 *
-	 * @param settingsBCL the new settings bcl
+	 * @param SettingsBAC the new settings bcl
 	 */
-	public void setSettingsBCL(ISettingsBAC settingsBCL)
+	public void setSettingsBAC(ISettingsBAC SettingsBAC)
 	{
-		settingsBAC = settingsBCL;
+		settingsBAC = SettingsBAC;
 	}
 
 	/**
@@ -123,7 +53,7 @@ public class SettingsBAIImpl implements ISettingsBAI
 	 *
 	 * @return the settings bcl
 	 */
-	public ISettingsBAC getSettingsBCL()
+	public ISettingsBAC getSettingsBAC()
 	{
 		return settingsBAC;
 	}
@@ -143,7 +73,7 @@ public class SettingsBAIImpl implements ISettingsBAI
 		{
 			ValidationContext context = new ValidationContext();
 
-			internalResponse = getSettingsBCL().upsertSettings(settingsRequest);
+			internalResponse = getSettingsBAC().upsertSettings(settingsRequest);
 			response.setSettings(internalResponse.getResultsList());
 
 			handleOperationStatusAndMessages(response, internalResponse, context.getMessages(), true);
@@ -169,7 +99,7 @@ public class SettingsBAIImpl implements ISettingsBAI
 		try
 		{
 			ValidationContext context = new ValidationContext();
-			internalResponse = getSettingsBCL().upsertSystemSettings(settingsRequest);
+			internalResponse = getSettingsBAC().upsertSystemSettings(settingsRequest);
 
 			handleOperationStatusAndMessages(response, internalResponse, context.getMessages(), true);
 		}
@@ -197,7 +127,7 @@ public class SettingsBAIImpl implements ISettingsBAI
 		{
 			ValidationContext context = new ValidationContext();
 
-			internalResponse = getSettingsBCL().fetchUserSettings(lightingControlRequest);
+			internalResponse = getSettingsBAC().fetchUserSettings(lightingControlRequest);
 			response.setSettings(internalResponse.getResultsList());
 
 			handleOperationStatusAndMessages(response, internalResponse, context.getMessages(), true);
@@ -225,7 +155,7 @@ public class SettingsBAIImpl implements ISettingsBAI
 		{
 			ValidationContext context = new ValidationContext();
 
-			internalResponse = getSettingsBCL().fetchSystemSettings(lightingControlRequest);
+			internalResponse = getSettingsBAC().fetchSystemSettings(lightingControlRequest);
 			response.setSettings(internalResponse.getResultsList());
 
 			handleOperationStatusAndMessages(response, internalResponse, context.getMessages(), true);
@@ -252,7 +182,7 @@ public class SettingsBAIImpl implements ISettingsBAI
 		{
 			ValidationContext context = new ValidationContext();
 
-			internalResponse = getSettingsBCL().fetchTenantByServerName(tenantRequest);
+			internalResponse = getSettingsBAC().fetchTenantByServerName(tenantRequest);
 			response.setTenant(internalResponse.getFirstResult());
 
 			handleOperationStatusAndMessagesTenant(response, internalResponse, context.getMessages(), true);

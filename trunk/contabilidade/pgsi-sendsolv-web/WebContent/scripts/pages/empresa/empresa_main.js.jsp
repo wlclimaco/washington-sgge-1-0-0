@@ -37,7 +37,7 @@ pgsi.pages.empresa = {
 			return val;
 		}
 
-		return '<a title="View"' + full.nome + ' href="#/organization/view?tab=info&organizationId=' + full.id + '">' + full.nome + '</a>';
+		return '<a title="View/Edit ' + full.nome + '" href="#/empresa/view?tab=info&locationId=' + full.id + '" class="edit_link">' + full.nome + '</a>';
 
 	},
 	fnCnae: function (val, type, full)
@@ -48,7 +48,7 @@ pgsi.pages.empresa = {
 		}
 		var sCnae ="";
 		for(var i=0;i<full.cnaes.length;i++){
-			sCnae = sCnae + full.cnaes[i].number +"<br>" ;
+			sCnae = sCnae + full.cnaes[i].cnae  +" - <sup>"+full.cnaes[i].descricao+"</sup><br>" ;
 		}
 		return sCnae;
 
@@ -83,7 +83,7 @@ pgsi.pages.empresa = {
 			return val;
 		}
 
-		return full.regime;
+		return full.regime.nome;
 
 	},
 
@@ -97,11 +97,25 @@ pgsi.pages.empresa = {
 		return full.enderecos[0].logradouro + " "+full.enderecos[0].numero + " "+full.enderecos[0].bairro + " "+full.enderecos[0].cidade;
 
 	},
+	fnDocumento: function (val, type, full)
+	{
+		if (type !== "display")
+		{
+			return val;
+		}
+		var sDocumentos ="";
+		for(var i=0;i<full.documentos.length;i++){
+			sDocumentos = sDocumentos +  full.documentos[0].description+ " - "+full.documentos[0].numero + "<br>";
+		}
+
+		return sDocumentos;
+	},
 
 	locationTable: {
 
 	}
 }
 </script>
+
 
 </sec:authorize>

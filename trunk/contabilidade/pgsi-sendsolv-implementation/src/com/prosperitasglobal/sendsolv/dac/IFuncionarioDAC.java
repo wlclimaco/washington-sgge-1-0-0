@@ -2,7 +2,7 @@ package com.prosperitasglobal.sendsolv.dac;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.model.Funcionario;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.FuncionarioInquiryRequest;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 
@@ -50,6 +50,6 @@ public interface IFuncionarioDAC
 	 * @param request the request
 	 * @return the internal results response< funcionario>
 	 */
-	public InternalResultsResponse<Funcionario> fetchFuncionarioByRequest(PagedInquiryRequest request);
+	public InternalResultsResponse<Funcionario> fetchFuncionarioByRequest(FuncionarioInquiryRequest request);
 
 }

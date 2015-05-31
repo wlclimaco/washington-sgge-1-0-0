@@ -1,5 +1,6 @@
 package com.prosperitasglobal.sendsolv.model;
 
+import java.util.List;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -12,7 +13,7 @@ public class Beneficios extends ModelCosmeDamiao
 	private Integer id;
 
 	/** The type of an account. */
-	private Integer data;
+	private List<BeneficioMesApp> dataList;
 
 	/** The description. */
 	private String nome;
@@ -58,26 +59,6 @@ public class Beneficios extends ModelCosmeDamiao
 	public void setId(Integer id)
 	{
 		this.id = id;
-	}
-
-	/**
-	 * Gets the data.
-	 *
-	 * @return the data
-	 */
-	public Integer getData()
-	{
-		return data;
-	}
-
-	/**
-	 * Sets the data.
-	 *
-	 * @param data the data to set
-	 */
-	public void setData(Integer data)
-	{
-		this.data = data;
 	}
 
 	/**
@@ -200,6 +181,22 @@ public class Beneficios extends ModelCosmeDamiao
 		this.tipo = tipo;
 	}
 
+	/**
+	 * @return the dataList
+	 */
+	public List<BeneficioMesApp> getDataList()
+	{
+		return dataList;
+	}
+
+	/**
+	 * @param dataList the dataList to set
+	 */
+	public void setDataList(List<BeneficioMesApp> dataList)
+	{
+		this.dataList = dataList;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -207,10 +204,17 @@ public class Beneficios extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Beneficios [getId()=" + getId() + ", getData()=" + getData() + ", getNome()=" + getNome()
-				+ ", getCodigo()=" + getCodigo() + ", getDescricao()=" + getDescricao() + ", getValor()=" + getValor()
-				+ ", getPorcentagem()=" + getPorcentagem() + ", getTipo()=" + getTipo() + ", toString()="
-				+ super.toString() + "]";
+		return "Beneficios [getId()=" + getId() + ", getNome()=" + getNome() + ", getCodigo()=" + getCodigo()
+				+ ", getDescricao()=" + getDescricao() + ", getValor()=" + getValor() + ", getPorcentagem()="
+				+ getPorcentagem() + ", getTipo()=" + getTipo() + ", getDataList()=" + getDataList()
+				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
+				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
+				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
+				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
+				+ ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()="
+				+ getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()="
+				+ getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + "]";
 	}
 
 }

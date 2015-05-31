@@ -95,6 +95,13 @@ $(document).ready(function()
 			sDefaultContent : "",
 			bSortable 		: false
 		},
+		{
+			headerData 		: "Documentos",
+			order			: "phone_column",
+			mRender 		: pgsi.pages.empresa.fnDocumento,
+			sDefaultContent : "",
+			bSortable 		: false
+		},
 		],
 
 		<c:choose>

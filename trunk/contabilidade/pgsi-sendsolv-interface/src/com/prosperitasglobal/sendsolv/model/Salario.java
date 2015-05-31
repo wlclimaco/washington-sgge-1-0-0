@@ -1,6 +1,5 @@
 package com.prosperitasglobal.sendsolv.model;
 
-
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -12,7 +11,7 @@ public class Salario extends ModelCosmeDamiao
 	private Integer id;
 
 	/** The type of an account. */
-	private Integer data;
+	private Long data;
 
 	/** The description. */
 	private double valor;
@@ -25,7 +24,7 @@ public class Salario extends ModelCosmeDamiao
 		super();
 	}
 
-	public Salario(Integer id, Integer data, double valor)
+	public Salario(Integer id, Long data, double valor)
 	{
 		super();
 		this.id = id;
@@ -56,7 +55,7 @@ public class Salario extends ModelCosmeDamiao
 	/**
 	 * @return the data
 	 */
-	public Integer getData()
+	public Long getData()
 	{
 		return data;
 	}
@@ -64,7 +63,7 @@ public class Salario extends ModelCosmeDamiao
 	/**
 	 * @param data the data to set
 	 */
-	public void setData(Integer data)
+	public void setData(Long data)
 	{
 		this.data = data;
 	}

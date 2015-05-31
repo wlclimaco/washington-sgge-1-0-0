@@ -1,8 +1,5 @@
 package com.prosperitasglobal.sendsolv.funcionario.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,8 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
 import com.prosperitasglobal.sendsolv.bai.IFuncionarioBAI;
-import com.prosperitasglobal.sendsolv.model.Funcionario;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.FuncionarioInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.response.FuncionarioResponse;
 import com.qat.framework.validation.ValidationUtil;
 
@@ -113,15 +109,14 @@ public class FuncionarioBaseController extends UtilControllerD
 	 * @param pagedInquiryRequest the paged inquiry request
 	 * @return the location response
 	 */
-	public FuncionarioResponse fetchFuncionarioByRequest(PagedInquiryRequest pagedInquiryRequest)
+	public FuncionarioResponse fetchFuncionarioByRequest(FuncionarioInquiryRequest pagedInquiryRequest)
 	{
 
 		FuncionarioResponse locationResponse = new FuncionarioResponse();
 		try
 		{
 
-			locationResponse = Mock();
-			// getFuncionarioBAI().fetchFuncionarioByRequest(pagedInquiryRequest);
+			locationResponse = getFuncionarioBAI().fetchFuncionarioByRequest(pagedInquiryRequest);
 
 		}
 		catch (Exception e)
@@ -148,8 +143,7 @@ public class FuncionarioBaseController extends UtilControllerD
 		try
 		{
 
-			locationResponse = MockById();
-			// getFuncionarioBAI().fetchFuncionarioById(fetchByIdRequest);
+			locationResponse = getFuncionarioBAI().fetchFuncionarioById(fetchByIdRequest);
 
 		}
 		catch (Exception e)
@@ -163,135 +157,4 @@ public class FuncionarioBaseController extends UtilControllerD
 		return locationResponse;
 	}
 
-	public FuncionarioResponse Mock()
-	{
-		FuncionarioResponse empresaResponse = new FuncionarioResponse();
-
-		List<Funcionario> funcionarioList = new ArrayList<Funcionario>();
-		for (Integer i = 0; i < 100; i++)
-		{
-			Funcionario funcionario = new Funcionario();
-			funcionario.setId(i);
-			funcionario.setNome("nome_" + i);
-			// Socio socio = new Socio();
-			// socio.setId(1);
-			// socio.setNome("Washington");
-			// empresa.setSocios(new ArrayList<Socio>());
-			// empresa.getSocios().add(socio);
-			// Endereco endereco = new Endereco();
-			// empresa.setEnderecos(new ArrayList<Endereco>());
-			// endereco.setBairro("bairro");
-			// endereco.setCep("cep");
-			// endereco.setCidade("cidade");
-			// endereco.setEstado("estado");
-			// endereco.setId(1);
-			// endereco.setLogradouro("logradouro");
-			// endereco.setNumero("1000");
-			// empresa.getEnderecos().add(endereco);
-			// empresa.setEmails(new ArrayList<Email>());
-			// Email email = new Email();
-			// email.setId(1);
-			// email.setEmail("wlclimaco@gmail.com");
-			// empresa.getEmails().add(email);
-			// empresa.setCnaes(new ArrayList<Cnae>());
-			// Cnae cnae = new Cnae();
-			// cnae.setId(1);
-			// cnae.setDescription("1-(4-BETA-HIDROXIETILSULFOFENIL)-3-METIL-5-PIRAZOLONA; FABRICAÇÃO DE");
-			// cnae.setNumber("2029-1/00");
-			// empresa.getCnaes().add(cnae);
-			// cnae = new Cnae();
-			// cnae.setId(2);
-			// cnae.setDescription("1-(4-SULFOFENIL)-3-METIL-5-PIRAZOLONA (ÁCIDO PIRAZÓLICO); FABRICAÇÃO DE");
-			// cnae.setNumber("2029-2/00");
-			// empresa.getCnaes().add(cnae);
-			// empresa.setDocumentos(new ArrayList<Documento>());
-			// Documento documento = new Documento();
-			// documento.setId(1);
-			// documento.setType("CNPJ");
-			// documento.setNumero("000000000001111/000-9");
-			// empresa.getDocumentos().add(documento);
-			// documento = new Documento();
-			// documento.setId(2);
-			// documento.setType("IM");
-			// documento.setNumero("00000001");
-			// empresa.getDocumentos().add(documento);
-			// empresa.setTelefones(new ArrayList<Telefone>());
-			// Telefone telefone = new Telefone();
-			// telefone.setId(1);
-			// telefone.setDdd("34");
-			// telefone.setNumero("91782776");
-			// empresa.getTelefones().add(telefone);
-			// empresa.setRegime("Simples Nacional");
-			// empresas.add(empresa);
-
-		}
-		empresaResponse.setFuncionarioList(funcionarioList);
-		return empresaResponse;
-	}
-
-	public FuncionarioResponse MockById()
-	{
-		FuncionarioResponse empresaResponse = new FuncionarioResponse();
-
-		List<Funcionario> empresas = new ArrayList<Funcionario>();
-
-		Funcionario empresa = new Funcionario();
-		empresa.setId(1);
-		empresa.setNome("nome_" + 1);
-		// Socio socio = new Socio();
-		// socio.setId(1);
-		// socio.setNome("Washington");
-		// empresa.setSocios(new ArrayList<Socio>());
-		// empresa.getSocios().add(socio);
-		// Endereco endereco = new Endereco();
-		// empresa.setEnderecos(new ArrayList<Endereco>());
-		// endereco.setBairro("bairro");
-		// endereco.setCep("cep");
-		// endereco.setCidade("cidade");
-		// endereco.setEstado("estado");
-		// endereco.setId(1);
-		// endereco.setLogradouro("logradouro");
-		// endereco.setNumero("1000");
-		// empresa.getEnderecos().add(endereco);
-		// empresa.setEmails(new ArrayList<Email>());
-		// Email email = new Email();
-		// email.setId(1);
-		// email.setEmail("wlclimaco@gmail.com");
-		// email.setDescription("NF-e");
-		// empresa.getEmails().add(email);
-		// empresa.setCnaes(new ArrayList<Cnae>());
-		// Cnae cnae = new Cnae();
-		// cnae.setId(1);
-		// cnae.setDescription("1-(4-BETA-HIDROXIETILSULFOFENIL)-3-METIL-5-PIRAZOLONA; FABRICAÇÃO DE");
-		// cnae.setNumber("2029-1/00");
-		// empresa.getCnaes().add(cnae);
-		// cnae = new Cnae();
-		// cnae.setId(2);
-		// cnae.setDescription("1-(4-SULFOFENIL)-3-METIL-5-PIRAZOLONA (ÁCIDO PIRAZÓLICO); FABRICAÇÃO DE");
-		// cnae.setNumber("2029-2/00");
-		// empresa.getCnaes().add(cnae);
-		// empresa.setDocumentos(new ArrayList<Documento>());
-		// Documento documento = new Documento();
-		// documento.setId(1);
-		// documento.setType("CNPJ");
-		// documento.setNumero("000000000001111/000-9");
-		// empresa.getDocumentos().add(documento);
-		// documento = new Documento();
-		// documento.setId(2);
-		// documento.setType("IM");
-		// documento.setNumero("00000001");
-		// empresa.getDocumentos().add(documento);
-		// empresa.setTelefones(new ArrayList<Telefone>());
-		// Telefone telefone = new Telefone();
-		// telefone.setId(1);
-		// telefone.setDdd("34");
-		// telefone.setNumero("91782776");
-		// telefone.setType("Residencial");
-		// empresa.getTelefones().add(telefone);
-		// empresa.setRegime("Simples Nacional");
-		empresas.add(empresa);
-
-		empresaResponse.setFuncionarioList(empresas);
-		return empresaResponse;
-	}
 }

@@ -120,6 +120,15 @@
 	    ORDER BY id ASC
   </select>
 
+     <select id="fetchAllStatusByFuncionario" parameterType="Integer" resultMap="statusResult">
+
+	    SELECT
+		<include refid="allStatusColumns" />
+	    FROM status b where b.tabelaEnum = 16 and b.parentId = #{id}
+
+	    ORDER BY id ASC
+  </select>
+
   <select id="fetchAllStatuss" resultMap="statusResult">
     SELECT
 	<include refid="allStatusColumns" />

@@ -12,7 +12,7 @@ $(document).ready(function()
 
 	//Attach Links to tabs
 	$("#infoTab").attr('href', "empresa/view/info?locationId=" + iLocationId);
-	$('#pricingTab').attr('href',"pricing/profile_view?locationId=" + iLocationId);
+	$('#pricingTab').attr('href',"funcionario/?locationId=" + iLocationId);
 
 	var sTab = $.address.parameter("tab");
 	var iActiveTab;

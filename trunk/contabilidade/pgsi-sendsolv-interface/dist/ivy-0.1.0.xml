@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ivy-module version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
 
-	<info organisation="gperes" module="pgsi-sendsolv-interface" revision="0.1.0" status="release" publication="20150528235741"/>
+	<info organisation="gperes" module="pgsi-sendsolv-interface" revision="0.1.0" status="release" publication="20150531172249"/>
 
 	<publications>
 		<artifact name="pgsi-sendsolv-interface" type="jar" ext="jar"/>

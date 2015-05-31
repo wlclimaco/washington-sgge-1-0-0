@@ -1,9 +1,6 @@
 package com.prosperitasglobal.sendsolv.model;
 
-import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
-import com.prosperitasglobal.cbof.model.Country;
-import com.prosperitasglobal.cbof.model.FilingStatusEnum;
-import com.prosperitasglobal.cbof.model.StateProvinceRegion;
+import java.util.List;
 
 /**
  * The Class Document represents a generic formal business or personal document, such as driver's license or bylaws.
@@ -16,34 +13,28 @@ public class Eventos extends ModelCosmeDamiao
 	private Integer id;
 
 	/** The parent key type. */
-	private BusinessTypeEnum parentKeyType;
+	private List<EventoMesApp> dataList;
+
+	private String descricao;
+
+	private String codigo;
 
 	/** The document type. */
-	private DocumentType documentType;
+	private String Tipo;
 
 	/** The keyword text. */
-	private String keywordText;
+	private Double valor;
 
 	/** The filing status. */
-	private FilingStatusEnum filingStatus;
+	private Double porcentagem;
 
 	/** The is action required. */
-	private Boolean isActionRequired;
+	private Boolean isMensal;
+
+	private Boolean isSistema;
 
 	/** The note text. */
 	private String noteText;
-
-	/** The issue country. */
-	private Country issueCountry;
-
-	/** The expiration date. */
-	private Long expirationDate;
-
-	/** The value. */
-	private String value;
-
-	/** The issue state province region. */
-	private StateProvinceRegion issueStateProvinceRegion;
 
 	/**
 	 * The Constructor.
@@ -54,8 +45,6 @@ public class Eventos extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the id.
-	 *
 	 * @return the id
 	 */
 	public Integer getId()
@@ -64,9 +53,7 @@ public class Eventos extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Sets the id.
-	 *
-	 * @param id the id
+	 * @param id the id to set
 	 */
 	public void setId(Integer id)
 	{
@@ -74,114 +61,135 @@ public class Eventos extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the document type.
-	 *
-	 * @return the document type
+	 * @return the dataList
 	 */
-	public DocumentType getDocumentType()
+	public List<EventoMesApp> getDataList()
 	{
-		return documentType;
+		return dataList;
 	}
 
 	/**
-	 * Sets the document type.
-	 *
-	 * @param documentType the document type
+	 * @param dataList the dataList to set
 	 */
-	public void setDocumentType(DocumentType documentType)
+	public void setDataList(List<EventoMesApp> dataList)
 	{
-		this.documentType = documentType;
+		this.dataList = dataList;
 	}
 
 	/**
-	 * Gets the keyword text.
-	 *
-	 * @return the keyword text
+	 * @return the codigo
 	 */
-	public String getKeywordText()
+	public String getCodigo()
 	{
-		return keywordText;
+		return codigo;
 	}
 
 	/**
-	 * Sets the keyword text.
-	 *
-	 * @param keywordText the keyword text
+	 * @param codigo the codigo to set
 	 */
-	public void setKeywordText(String keywordText)
+	public void setCodigo(String codigo)
 	{
-		this.keywordText = keywordText;
+		this.codigo = codigo;
 	}
 
 	/**
-	 * Gets the is filed.
-	 *
-	 * @return the checks if is filed
+	 * @return the descricao
 	 */
-	public Boolean getIsActionRequired()
+	public String getDescricao()
 	{
-		return isActionRequired;
+		return descricao;
 	}
 
 	/**
-	 * Sets the is filed.
-	 *
-	 * @param isActionRequired the checks if is action required
+	 * @param descricao the descricao to set
 	 */
-	public void setIsActionRequired(Boolean isActionRequired)
+	public void setDescricao(String descricao)
 	{
-		this.isActionRequired = isActionRequired;
+		this.descricao = descricao;
 	}
 
 	/**
-	 * Gets the status.
-	 *
-	 * @return the status
+	 * @return the tipo
 	 */
-	public FilingStatusEnum getFilingStatus()
+	public String getTipo()
 	{
-		return filingStatus;
+		return Tipo;
 	}
 
 	/**
-	 * Sets the status.
-	 *
-	 * @param status the status
+	 * @param tipo the tipo to set
 	 */
-	public void setFilingStatus(FilingStatusEnum status)
+	public void setTipo(String tipo)
 	{
-		filingStatus = status;
+		Tipo = tipo;
 	}
 
 	/**
-	 * Gets the status value.
-	 *
-	 * @return the status value
+	 * @return the valor
 	 */
-	public Integer getFilingStatusValue()
+	public Double getValor()
 	{
-		if (filingStatus == null)
-		{
-			return null;
-		}
-
-		return filingStatus.getValue();
+		return valor;
 	}
 
 	/**
-	 * Sets the status value.
-	 *
-	 * @param statusValue the status value
+	 * @param valor the valor to set
 	 */
-	public void setFilingStatusValue(Integer statusValue)
+	public void setValor(Double valor)
 	{
-		filingStatus = FilingStatusEnum.enumForValue(statusValue);
+		this.valor = valor;
 	}
 
 	/**
-	 * Gets the note text.
-	 *
-	 * @return the note text
+	 * @return the porcentagem
+	 */
+	public Double getPorcentagem()
+	{
+		return porcentagem;
+	}
+
+	/**
+	 * @param porcentagem the porcentagem to set
+	 */
+	public void setPorcentagem(Double porcentagem)
+	{
+		this.porcentagem = porcentagem;
+	}
+
+	/**
+	 * @return the isMensal
+	 */
+	public Boolean getIsMensal()
+	{
+		return isMensal;
+	}
+
+	/**
+	 * @param isMensal the isMensal to set
+	 */
+	public void setIsMensal(Boolean isMensal)
+	{
+		this.isMensal = isMensal;
+	}
+
+	/**
+	 * @return the isSistema
+	 */
+	public Boolean getIsSistema()
+	{
+		return isSistema;
+	}
+
+	/**
+	 * @param isSistema the isSistema to set
+	 */
+	public void setIsSistema(Boolean isSistema)
+	{
+		this.isSistema = isSistema;
+	}
+
+	/**
+	 * @return the noteText
 	 */
 	public String getNoteText()
 	{
@@ -189,138 +197,11 @@ public class Eventos extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Sets the note text.
-	 *
-	 * @param noteText the note text
+	 * @param noteText the noteText to set
 	 */
 	public void setNoteText(String noteText)
 	{
 		this.noteText = noteText;
-	}
-
-	/**
-	 * Gets the parent key type.
-	 *
-	 * @return the parent key type
-	 */
-	public BusinessTypeEnum getParentKeyType()
-	{
-		return parentKeyType;
-	}
-
-	/**
-	 * Sets the parent key type.
-	 *
-	 * @param parentKeyType the parent key type
-	 */
-	public void setParentKeyType(BusinessTypeEnum parentKeyType)
-	{
-		this.parentKeyType = parentKeyType;
-	}
-
-	/**
-	 * Gets the parent key value.
-	 *
-	 * @return the parent key value
-	 */
-	public Integer getParentKeyValue()
-	{
-		if (parentKeyType == null)
-		{
-			return null;
-		}
-
-		return parentKeyType.getValue();
-	}
-
-	/**
-	 * Sets the parent key value.
-	 *
-	 * @param parentKeyValue the parent key value
-	 */
-	public void setParentKeyValue(Integer parentKeyValue)
-	{
-		parentKeyType = BusinessTypeEnum.enumForValue(parentKeyValue);
-	}
-
-	/**
-	 * Gets the expiration date. If this date has a time portion, it will be removed. This attribute is only a date.
-	 *
-	 * @return the expiration date
-	 */
-	public Long getExpirationDate()
-	{
-		return expirationDate;
-	}
-
-	/**
-	 * Sets the expiration date.
-	 *
-	 * @param expirationDate the expiration date
-	 */
-	public void setExpirationDate(Long expirationDate)
-	{
-		this.expirationDate = expirationDate;
-	}
-
-	/**
-	 * Gets the issue country.
-	 *
-	 * @return the issue country
-	 */
-	public Country getIssueCountry()
-	{
-		return issueCountry;
-	}
-
-	/**
-	 * Sets the issue country.
-	 *
-	 * @param issueCountry the issue country
-	 */
-	public void setIssueCountry(Country issueCountry)
-	{
-		this.issueCountry = issueCountry;
-	}
-
-	/**
-	 * Gets the value.
-	 *
-	 * @return the value
-	 */
-	public String getValue()
-	{
-		return value;
-	}
-
-	/**
-	 * Sets the value.
-	 *
-	 * @param value the value
-	 */
-	public void setValue(String value)
-	{
-		this.value = value;
-	}
-
-	/**
-	 * Gets the issue state province region.
-	 *
-	 * @return the issue state province region
-	 */
-	public StateProvinceRegion getIssueStateProvinceRegion()
-	{
-		return issueStateProvinceRegion;
-	}
-
-	/**
-	 * Sets the issue state province region.
-	 *
-	 * @param issueStateProvinceRegion the issue state province region
-	 */
-	public void setIssueStateProvinceRegion(StateProvinceRegion issueStateProvinceRegion)
-	{
-		this.issueStateProvinceRegion = issueStateProvinceRegion;
 	}
 
 	/*
@@ -330,14 +211,18 @@ public class Eventos extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Document [getId()=" + getId() + ", getDocumentType()=" + getDocumentType() + ", getKeywordText()="
-				+ getKeywordText() + ", getIsActionRequired()=" + getIsActionRequired() + ", getFilingStatus()="
-				+ getFilingStatus() + ", getFilingStatusValue()=" + getFilingStatusValue() + ", getNoteText()="
-				+ getNoteText() + ", getParentKeyType()=" + getParentKeyType()
-				+ ", getParentKeyValue()=" + getParentKeyValue() + ", getExpirationDate()=" + getExpirationDate()
-				+ ", getIssueCountry()=" + getIssueCountry() + ", getValue()=" + getValue()
-				+ ", getIssueStateProvinceRegion()=" + getIssueStateProvinceRegion() + ", toString()="
-				+ super.toString() + "]";
+		return "Eventos [getId()=" + getId() + ", getDataList()=" + getDataList() + ", getCodigo()=" + getCodigo()
+				+ ", getDescricao()=" + getDescricao() + ", getTipo()=" + getTipo() + ", getValor()=" + getValor()
+				+ ", getPorcentagem()=" + getPorcentagem() + ", getIsMensal()=" + getIsMensal() + ", getIsSistema()="
+				+ getIsSistema() + ", getNoteText()=" + getNoteText() + ", getTabelaEnumValue()="
+				+ getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()="
+				+ getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()=" + getType()
+				+ ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()="
+				+ getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite() + ", toString()="
+				+ super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
+				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
+				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + "]";
 	}
 
 }

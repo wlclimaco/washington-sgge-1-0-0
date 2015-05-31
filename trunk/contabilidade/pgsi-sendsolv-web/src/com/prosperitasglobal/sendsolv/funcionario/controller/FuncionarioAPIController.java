@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.request.FuncionarioInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.FuncionarioMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.response.FuncionarioResponse;
 
 /**
@@ -60,7 +60,7 @@ public class FuncionarioAPIController extends FuncionarioBaseController
 	 */
 	@RequestMapping(value = FETCH_ALL, method = RequestMethod.POST)
 	@ResponseBody
-	public FuncionarioResponse fetchAll(@RequestBody PagedInquiryRequest pagedInquiryRequest)
+	public FuncionarioResponse fetchAll(@RequestBody FuncionarioInquiryRequest pagedInquiryRequest)
 	{
 
 		return fetchFuncionarioByRequest(pagedInquiryRequest);

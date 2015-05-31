@@ -57,10 +57,12 @@
 		<typeAlias alias="UniMed"              				 		     type="com.prosperitasglobal.sendsolv.model.UniMed"/>
 		<typeAlias alias="Regime"              				 		     type="com.prosperitasglobal.sendsolv.model.Regime"/>
 		<typeAlias alias="CnaeRel"              				 		 type="com.prosperitasglobal.sendsolv.model.CnaeRel"/>
+		<typeAlias alias="BeneficioMesApp"              				 type="com.prosperitasglobal.sendsolv.model.BeneficioMesApp"/>
 		<typeAlias alias="EmpresaInquiryRequest"              			type="com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest"/>
 		<typeAlias alias="CnaeInquiryRequest"              				type="com.prosperitasglobal.sendsolv.model.request.CnaeInquiryRequest"/>
 		<typeAlias alias="StatusInquiryRequest"              				type="com.prosperitasglobal.sendsolv.model.request.StatusInquiryRequest"/>
 		<typeAlias alias="FetchByIdRequest"              	             type="com.prosperitasglobal.cbof.model.request.FetchByIdRequest"/>
+		<typeAlias alias="FuncionarioInquiryRequest"              				type="com.prosperitasglobal.sendsolv.model.request.FuncionarioInquiryRequest"/>
   	</typeAliases>
 
 
