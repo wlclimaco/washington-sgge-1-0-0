@@ -15,35 +15,9 @@ public class Banco extends ModelCosmeDamiao
 	/** Attributes. */
 	private Integer id;
 
-	/** The parent key type. */
-	private BusinessTypeEnum parentKeyType;
+	private String nome;
 
-	/** The document type. */
-	private DocumentType documentType;
-
-	/** The keyword text. */
-	private String keywordText;
-
-	/** The filing status. */
-	private FilingStatusEnum filingStatus;
-
-	/** The is action required. */
-	private Boolean isActionRequired;
-
-	/** The note text. */
-	private String noteText;
-
-	/** The issue country. */
-	private Country issueCountry;
-
-	/** The expiration date. */
-	private Long expirationDate;
-
-	/** The value. */
-	private String value;
-
-	/** The issue state province region. */
-	private StateProvinceRegion issueStateProvinceRegion;
+	private List<Agencia> agenciaList;
 
 	/**
 	 * The Constructor.
