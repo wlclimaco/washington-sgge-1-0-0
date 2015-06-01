@@ -1,32 +1,30 @@
 package com.prosperitasglobal.sendsolv.model;
 
-import java.util.List;
+import com.prosperitasglobal.cbof.model.Note;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
  */
 @SuppressWarnings("serial")
-public class Cliente extends Pessoa
+public class Contato extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
 
-	private Integer cdEmpr;
+	/** The type of an account. */
+	private List<Note> noteList;
 
-	/** The horarios. */
-	private List<Profissao> profissao;
+	private ContatoTypeEnum motivo;
 
-	private List<Convenio> convenioList;
+	private Long DataContato;
 
-	private List<CondPag> condPagList;
-
-	private List<Contato> contatoList;
+	private String nomeContato;
 
 	/**
 	 * Default constructor.
 	 */
-	public Cliente()
+	public Contato()
 	{
 		super();
 	}
@@ -36,7 +34,6 @@ public class Cliente extends Pessoa
 	 *
 	 * @return the id
 	 */
-	@Override
 	public Integer getId()
 	{
 		return id;
@@ -45,9 +42,8 @@ public class Cliente extends Pessoa
 	/**
 	 * Sets the id.
 	 *
-	 * @param id the id to set
+	 * @param id the new id
 	 */
-	@Override
 	public void setId(Integer id)
 	{
 		this.id = id;

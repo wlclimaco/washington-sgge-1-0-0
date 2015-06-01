@@ -1,7 +1,5 @@
 package com.prosperitasglobal.sendsolv.model;
 
-import com.qat.framework.model.II18nEnum;
-import com.qat.framework.model.IIntegerEnum;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -95,8 +93,12 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 	/** The medium. */
 	TRANSPORTADOR(19, "sendsolv.base.model.risklevelenum.medium"),
 
+	CONDPAG(20, "sendsolv.base.model.risklevelenum.medium"),
+
+	CONVENIO(21, "sendsolv.base.model.risklevelenum.medium"),
+
 	/** The unknown. */
-	SALARIO(20, "sendsolv.base.model.risklevelenum.unknown");
+	SALARIO(22, "sendsolv.base.model.risklevelenum.unknown");
 
 	/** The code. */
 	private Integer code;

@@ -3,6 +3,7 @@ package com.prosperitasglobal.sendsolv.model;
 import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
 import com.prosperitasglobal.cbof.model.Country;
 import com.prosperitasglobal.cbof.model.FilingStatusEnum;
+import com.prosperitasglobal.cbof.model.Note;
 import com.prosperitasglobal.cbof.model.StateProvinceRegion;
 
 /**
@@ -15,35 +16,21 @@ public class Convenio extends ModelCosmeDamiao
 	/** Attributes. */
 	private Integer id;
 
-	/** The parent key type. */
-	private BusinessTypeEnum parentKeyType;
+	private String nome;
 
-	/** The document type. */
-	private DocumentType documentType;
+	private Long dataini;
 
-	/** The keyword text. */
-	private String keywordText;
+	private Long dataFin;
 
-	/** The filing status. */
-	private FilingStatusEnum filingStatus;
+	private Double porcentagem;
 
-	/** The is action required. */
-	private Boolean isActionRequired;
+	private Double valor;
 
-	/** The note text. */
-	private String noteText;
+	private List<Note> notes;
 
-	/** The issue country. */
-	private Country issueCountry;
+	private List<CondPag> listCondPag;
 
-	/** The expiration date. */
-	private Long expirationDate;
-
-	/** The value. */
-	private String value;
-
-	/** The issue state province region. */
-	private StateProvinceRegion issueStateProvinceRegion;
+	private List<TipoPag> listTipoPag;
 
 	/**
 	 * The Constructor.
