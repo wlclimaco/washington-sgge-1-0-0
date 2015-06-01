@@ -13,6 +13,8 @@ public class BeneficioMesApp extends ModelCosmeDamiao
 	/** The parent key type. */
 	private Long data;
 
+	private Integer idFuncBenef;
+
 	/**
 	 * The Constructor.
 	 */
@@ -53,6 +55,22 @@ public class BeneficioMesApp extends ModelCosmeDamiao
 		this.data = data;
 	}
 
+	/**
+	 * @return the idFuncBenef
+	 */
+	public Integer getIdFuncBenef()
+	{
+		return idFuncBenef;
+	}
+
+	/**
+	 * @param idFuncBenef the idFuncBenef to set
+	 */
+	public void setIdFuncBenef(Integer idFuncBenef)
+	{
+		this.idFuncBenef = idFuncBenef;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -60,15 +78,15 @@ public class BeneficioMesApp extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "EventoMesApp [getId()=" + getId() + ", getData()=" + getData() + ", getTabelaEnumValue()="
-				+ getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()="
-				+ getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()=" + getType()
-				+ ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()="
-				+ getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite() + ", toString()="
-				+ super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
-				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
-				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
-				+ hashCode() + "]";
+		return "BeneficioMesApp [getId()=" + getId() + ", getData()=" + getData() + ", getIdFuncBenef()="
+				+ getIdFuncBenef() + ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()="
+				+ getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId()
+				+ ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()="
+				+ getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId()
+				+ ", getSite()=" + getSite() + ", toString()=" + super.toString() + ", getModelAction()="
+				+ getModelAction() + ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()="
+				+ getCreateDateUTC() + ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()="
+				+ getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
 	}
 
 }

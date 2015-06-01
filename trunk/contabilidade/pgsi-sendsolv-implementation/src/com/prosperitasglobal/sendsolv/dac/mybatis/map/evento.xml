@@ -120,7 +120,7 @@
 
 		  FROM BeneficioMesApp AS C
 
-		  INNER JOIN eventoFunc AS F ON F.id like c.id
+		  INNER JOIN eventoFunc AS F ON F.id = c.id
 		where  f.idFunc = #{id}
   </select>
 
@@ -129,7 +129,7 @@
 
 		  FROM evento AS C
 
-		  INNER JOIN eventoFunc AS F ON c.id like f.idBenef
+		  INNER JOIN eventoFunc AS F ON c.id = f.idEvent
 		where  f.idFunc =  #{id}
   </select>
 

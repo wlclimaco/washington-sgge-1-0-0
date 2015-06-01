@@ -27,7 +27,6 @@ public class HorarioFunc extends ModelCosmeDamiao
 	 */
 	public HorarioFunc()
 	{
-		super();
 	}
 
 	/**
@@ -150,7 +149,14 @@ public class HorarioFunc extends ModelCosmeDamiao
 	{
 		return "HorarioFunc [getId()=" + getId() + ", getData()=" + getData() + ", getHorarioEntr()="
 				+ getHorarioEntr() + ", getHorarioSair()=" + getHorarioSair() + ", getTipo()=" + getTipo()
-				+ ", toString()=" + super.toString() + "]";
+				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
+				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
+				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
+				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
+				+ ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()="
+				+ getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()="
+				+ getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + "]";
 	}
 
 }
