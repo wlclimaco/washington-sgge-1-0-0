@@ -51,7 +51,7 @@
 	<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByFuncionario"/>
 	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByFuncionario"/>
 	<collection property="salarios" column="id" select="SalarioMap.fetchSalarioById"/>
-	<collection property="HorarioFunc" column="id" select="HoraFuncMap.fetchHoraFuncById"/>
+	<collection property="horarios" column="id" select="HoraFuncMap.fetchHoraFuncById"/>
 	<collection property="beneficios" column="id" select="BeneficiosMap.fetchFuncByBeneficios"/>
 	<collection property="eventosList" column="id" select="EventoMap.fetchFuncByEvento"/>
   </resultMap>

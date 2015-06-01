@@ -94,6 +94,7 @@
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/evento.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/field.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/grupoSubGrupo.xml" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/horaFunc.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/orcamentoItens.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/regime.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/salarios.xml" />

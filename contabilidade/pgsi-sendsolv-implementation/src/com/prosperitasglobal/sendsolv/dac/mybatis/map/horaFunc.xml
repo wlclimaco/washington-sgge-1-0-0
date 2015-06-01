@@ -22,7 +22,7 @@
 	[create_date] [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[tipo] [varchar](50) NULL, -->
 
-  <resultMap id="horaFuncResult" type="HoraFunc" >
+  <resultMap id="horaFuncResult" type="HorarioFunc" >
     <result property="id" column="id" />
     <result property="parentId" column="parentId" />
     <result property="data" column="data"/>
@@ -63,7 +63,7 @@
   <!--
 		SQL Insert Statements.
  	-->
-  <insert id="insertHoraFunc" parameterType="HoraFunc" useGeneratedKeys="true" keyProperty="id">
+  <insert id="insertHoraFunc" parameterType="HorarioFunc" useGeneratedKeys="true" keyProperty="id">
   	INSERT INTO horarios (
 		<include refid="allHoraFuncColumns" />
       )
@@ -79,7 +79,7 @@
   		#{tipo},
  	-->
 
-  <update id="updateHoraFunc" parameterType="HoraFunc">
+  <update id="updateHoraFunc" parameterType="HorarioFunc">
     UPDATE horarios
     	<set>
     		<if test="data!= null">data = #{data},</if>
