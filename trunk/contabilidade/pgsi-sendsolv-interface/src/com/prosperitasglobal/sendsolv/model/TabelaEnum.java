@@ -1,6 +1,5 @@
 package com.prosperitasglobal.sendsolv.model;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The Enum RiskLevelEnum.
@@ -98,7 +97,9 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 	CONVENIO(21, "sendsolv.base.model.risklevelenum.medium"),
 
 	/** The unknown. */
-	SALARIO(22, "sendsolv.base.model.risklevelenum.unknown");
+	SALARIO(22, "sendsolv.base.model.risklevelenum.unknown"),
+
+	PESSOA(23, "sendsolv.base.model.risklevelenum.medium");
 
 	/** The code. */
 	private Integer code;

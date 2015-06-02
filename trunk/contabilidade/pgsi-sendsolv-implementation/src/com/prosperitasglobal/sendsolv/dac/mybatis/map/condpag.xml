@@ -4,7 +4,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="EmpresaMap">
+<mapper namespace="CondPagMap">
 
 	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
 	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
@@ -13,56 +13,76 @@
        from a query, and the class properties.  A result map isn't
        necessary if the columns (or aliases) match to the properties
        exactly. [id]           [int] NOT NULL,
-	[nome]         [varchar](100) NULL,
-	[regime]       [int] NULL,
-	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
-    [create_user]  [varchar](50) NULL,
-    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
-    [modify_user]  [varchar](50) NULL,-->
+		private Integer id;
 
-  <resultMap id="empresaResult" type="Empresa">
+	/** The type of an account. */
+	private String nome;
+
+	/** The description. */
+	private double valorIni;
+
+	private double valorFin;
+
+	/** The estado. */
+	private Integer parcelas;
+
+	/** The bairro. */
+	private List<TipoPag> listTipoPag;-->
+
+  <resultMap id="condPagResult" type="CondPag">
     <result property="id" column="id" />
     <result property="nome" column="nome" />
+    <result property="valorIni" column="valorIni" />
+    <result property="valorFin" column="valorFin" />
+    <result property="parcelas" column="parcelas" />
     <result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-    <association property="regime"    column="regime" select="RegimeMap.fetchRegimeByEmpresa"  />
-   	<collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-	<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByEmpresaId"/>
-	<collection property="emails" column="id" select="EmailMap.fetchAllEmailsByEmpresa"/>
-	<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByEmpresa"/>
-	<collection property="socios" column="id" select="SocioMap.fetchSocioByEmpresaId"/>
-	<collection property="cnaes" column="id" select="CnaeMap.fetchAllCnaesByEmpresa"/>
-	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEmpresa"/>
+   	<collection property="listTipoPag" column="id" select="fetchTipoPagByCondPagId"/>
+	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByCondPag"/>
+  </resultMap>
+
+  <resultMap id="tipoPagResult" type="TipoPag">
+    <result property="id" column="id" />
+    <result property="descricao" column="descricao" />
+    <result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByCondPag"/>
   </resultMap>
 
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
-  <sql id="allEmpresaColumns">
+  <sql id="allCondPagColumns">
 		 b.nome
-		,b.regime
+		,b.valorIni
+		 b.valorFin
+		,b.parcelas
       	,b.create_date
       	,b.create_user
       	,b.modify_date
       	,b.modify_user
   </sql>
 
-  <sql id="allEmpresaValues">
+  <sql id="allCondPagValues">
   		#{nome},
-  		#{regime.id},
+  		#{valorIni},
+  		#{valorFin},
+  		#{parcelas},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
   <!--
 		SQL Insert Statements.
  	-->
-  <insert id="insertEmpresa" parameterType="Empresa" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO empresa (
-		<include refid="allEmpresaColumns" />
+  <insert id="insertCondPag" parameterType="CondPag" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO condPag (
+		<include refid="allCondPagColumns" />
       )
-    VALUES (<include refid="allEmpresaValues" /> )
+    VALUES (<include refid="allCondPagValues" /> )
   </insert>
 
 
@@ -70,11 +90,13 @@
 		SQL Update Statements.
  	-->
 
-  <update id="updateEmpresa" parameterType="Empresa">
-    UPDATE empresa
+  <update id="updateCondPag" parameterType="CondPag">
+    UPDATE condPag
     	<set>
     		<if test="nome!= null">nome = #{nome},</if>
-	    	<if test="regime.id!= null"> regime=#{regime.id},</if>
+	    	<if test="valorIni!= null"> valorIni=#{valorIni},</if>
+	    	<if test="valorFin!= null">valorFin = #{valorFin},</if>
+	    	<if test="parcelas!= null"> parcelas=#{parcelas},</if>
 			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
@@ -85,37 +107,156 @@
    <!--
 		SQL Delete Statements.
    -->
-  <delete id="deleteEmpresaById" parameterType="Integer">
-    	DELETE FROM empresa WHERE id = #{id}
+  <delete id="deleteCondPagById" parameterType="Integer">
+    	DELETE FROM condPag WHERE id = #{id}
   </delete>
 
 	<!--
 		SQL Fetch Statements.
  	-->
-  <select id="fetchEmpresaRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+  <select id="fetchCondPagRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
-        FROM empresa
+        FROM condPag
 
   </select>
 
-  <select id="fetchAllEmpresas" resultMap="empresaResult">
+  <select id="fetchAllCondPags" resultMap="condPagResult">
     SELECT
-	<include refid="allEmpresaColumns" />
-    FROM empresa ORDER BY nome ASC
+	<include refid="allCondPagColumns" />
+    FROM condPag ORDER BY nome ASC
   </select>
 
-  <select id="fetchEmpresaById" parameterType="FetchByIdRequest" resultMap="empresaResult">
+  <select id="fetchCondPagById" parameterType="FetchByIdRequest" resultMap="condPagResult">
     			   SELECT
-					b.id,	<include refid="allEmpresaColumns" />
- 				   FROM empresa b
+					b.id,	<include refid="allCondPagColumns" />
+ 				   FROM condPag b
 					where b.id = #{id}
   </select>
 
-  <select id="fetchAllEmpresasByRequest" parameterType="EmpresaInquiryRequest" resultMap="empresaResult">
+  <select id="fetchCondPagByConvenioId" parameterType="FetchByIdRequest" resultMap="condPagResult">
+    			   SELECT
+					b.id,	<include refid="allCondPagColumns" />
+ 				   FROM condPag b
+					where b.parentId = #{id}
+  </select>
+
+  <select id="fetchAllCondPagsByRequest" parameterType="CondPagInquiryRequest" resultMap="condPagResult">
      SELECT * FROM ( SELECT b.id,
-    						<include refid="allEmpresaColumns" />,
+    						<include refid="allCondPagColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
-    				FROM empresa b
+    				FROM condPag b
+						where 1 = 1
+					<if test="parentId != null">
+						AND b.id = #{id}
+					</if>
+					 <if test="statusList != null and !statusList.isEmpty()">
+					     AND b.PGSI_status IN
+					     <foreach item="item" index="index" collection="statusList"
+						     open="(" separator="," close=")">
+						   	 #{item.value}
+						 </foreach>
+					 </if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+
+
+
+   <!--
+		=====================Tipo Pagamento=========================
+	-->
+  <sql id="allTipoPagColumns">
+		 b.descricao
+      	,b.create_date
+      	,b.create_user
+      	,b.modify_date
+      	,b.modify_user
+  </sql>
+
+  <sql id="allTipoPagValues">
+  		#{descricao},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertTipoPag" parameterType="TipoPag" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO tipoPag (
+		<include refid="allTipoPagColumns" />
+      )
+    VALUES (<include refid="allTipoPagValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateTipoPag" parameterType="TipoPag">
+    UPDATE tipoPag
+    	<set>
+    		<if test="descricao!= null">descricao = #{descricao},</if>
+			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteTipoPagById" parameterType="Integer">
+    	DELETE FROM tipoPag WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchTipoPagRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM tipoPag
+
+  </select>
+
+  <select id="fetchAllTipoPags" resultMap="tipoPagResult">
+    SELECT
+	<include refid="allTipoPagColumns" />
+    FROM tipoPag ORDER BY nome ASC
+  </select>
+
+  <select id="fetchTipoPagById" parameterType="FetchByIdRequest" resultMap="tipoPagResult">
+    			   SELECT
+					b.id,	<include refid="allTipoPagColumns" />
+ 				   FROM tipoPag b
+					where b.id = #{id}
+  </select>
+
+  <select id="fetchTipoPagByCondPagId" parameterType="Integer" resultMap="tipoPagResult">
+    			   SELECT
+					b.id,	<include refid="allTipoPagColumns" />
+ 				   FROM tipoPag b
+					where b.parentId = #{id}
+  </select>
+
+  <select id="fetchAllTipoPagsByRequest" parameterType="TipoPagInquiryRequest" resultMap="tipoPagResult">
+     SELECT * FROM ( SELECT b.id,
+    						<include refid="allTipoPagColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
+    				FROM tipoPag b
 						where 1 = 1
 					<if test="parentId != null">
 						AND b.id = #{id}
