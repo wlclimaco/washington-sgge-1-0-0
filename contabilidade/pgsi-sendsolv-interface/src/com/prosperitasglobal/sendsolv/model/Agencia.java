@@ -21,6 +21,8 @@ public class Agencia extends ModelCosmeDamiao
 
 	private String responsavelConta;
 
+	private String numeroConta;
+
 	/**
 	 * Gets the usuario.
 	 *

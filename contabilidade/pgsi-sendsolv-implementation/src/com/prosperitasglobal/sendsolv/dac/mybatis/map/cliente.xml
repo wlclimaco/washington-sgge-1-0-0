@@ -40,16 +40,15 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-	<collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByFuncionario"/>
-	<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByFuncionarioId"/>
-	<collection property="emails" column="id" select="EmailMap.fetchAllEmailsByFuncionario"/>
-	<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByFuncionario"/>
-	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByFuncionario"/>
+	<collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByPessoaId"/>
+	<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByPessoaId"/>
+	<collection property="emails" column="id" select="EmailMap.fetchAllEmailsByPessoaId"/>
+	<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByPessoaId"/>
+	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByPessoaId"/>
 	<collection property="profissao" column="id" select="ProfissaoMap.fetchProfissaoById"/>
 	<collection property="convenioList" column="id" select="ConvenioMap.fetchConvenioByPerson"/>
-	<collection property="condPagList" column="id" select="BeneficiosMap.fetchFuncByBeneficios"/>
-	<collection property="bancos" column="id" select="HoraFuncMap.fetchHoraFuncById"/>
-	<collection property="contatoList" column="id" select="HoraFuncMap.fetchHoraFuncById"/>
+	<collection property="bancos" column="id" select="BancoMap.fetchHoraFuncById"/>
+	<collection property="contatoList" column="id" select="ContatoMap.fetchContatoByPessoa"/>
 	<collection property="notes" column="id" select="BeneficiosMap.fetchFuncByBeneficios"/>
   </resultMap>
 

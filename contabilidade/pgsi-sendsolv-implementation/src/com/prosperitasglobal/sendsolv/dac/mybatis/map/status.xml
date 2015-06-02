@@ -117,7 +117,7 @@
 		<include refid="allStatusColumns" />
 	    FROM status b where b.tabelaEnum = 1 and b.parentId = #{id}
 
-	    ORDER BY id ASC
+	    ORDER BY dataStatus ASC
   </select>
 
      <select id="fetchAllStatusByFuncionario" parameterType="Integer" resultMap="statusResult">
@@ -126,7 +126,17 @@
 		<include refid="allStatusColumns" />
 	    FROM status b where b.tabelaEnum = 16 and b.parentId = #{id}
 
-	    ORDER BY id ASC
+	    ORDER BY dataStatus ASC
+  </select>
+
+
+  <select id="fetchAllStatusByPessoaId" parameterType="Integer" resultMap="statusResult">
+
+	    SELECT
+		<include refid="allStatusColumns" />
+	    FROM status b where b.tabelaEnum = 23 and b.parentId = #{id}
+
+	    ORDER BY dataStatus ASC
   </select>
 
   <select id="fetchAllStatuss" resultMap="statusResult">

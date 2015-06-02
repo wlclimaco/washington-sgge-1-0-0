@@ -39,8 +39,7 @@
 	<result property="porcentagem" column="porcentagem"/>
 	<result property="valor" column="valor"/>
 	<collection property="notes" column="business_id" select="FrequencyEventMap.fetchFrequencyByConvenioId"/>
-	<collection property="listCondPag" column="business_id" select="BusinessProductPlanMap.fetchBusinessProductPlanByConvenioId"/>
-	<collection property="listTipoPag" column="business_id" select="BusinessProductPlanMap.fetchBusinessProductPlanByConvenioId"/>
+	<collection property="listCondPag" column="id" select="CondPagMap.fetchCondPagByConvenioId"/>
   </resultMap>
 
   <!--

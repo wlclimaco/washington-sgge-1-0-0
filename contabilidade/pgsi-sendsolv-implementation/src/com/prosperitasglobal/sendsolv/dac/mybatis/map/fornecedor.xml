@@ -4,7 +4,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="EmpresaMap">
+<mapper namespace="FornecedorMap">
 
 	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
 	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
@@ -13,34 +13,49 @@
        from a query, and the class properties.  A result map isn't
        necessary if the columns (or aliases) match to the properties
        exactly. [id]           [int] NOT NULL,
-	[nome]         [varchar](100) NULL,
-	[regime]       [int] NULL,
-	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
-    [create_user]  [varchar](50) NULL,
-    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
-    [modify_user]  [varchar](50) NULL,-->
+	[id]           [int] NOT NULL,
+	[nome]         [varchar](200) NULL,
+	[sexo] 		   [int] NULL,
+	[type]         [int] NOT NULL,
+	[dataNasc]     [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[nomePai] 	   [varchar](200) NULL,
+	[nomeMae]      [varchar](200) NULL,
+	[nomeConjugue] [varchar](200) NULL,
+	[estadoCivil]  [int] NULL,
+	[nomePai] 	   [varchar](200) NULL,-->
 
-  <resultMap id="empresaResult" type="Empresa">
-    <result property="id" column="id" />
-    <result property="nome" column="nome" />
-    <result property="createUser" column="create_user"/>
+  <resultMap id="clienteResult" type="Cliente">
+   <result property="id" column="id" />
+    <result property="cdEmpr" column="cdEmpr" />
+   	<result property="nome" column="nome"/>
+	<result property="type" column="type"/>
+	<result property="sexo" column="sexo"/>
+	<result property="dataNasc" column="dataNasc"/>
+	<result property="nomePai" column="nomePai"/>
+	<result property="nomeMae" column="nomeMae"/>
+	<result property="nomeConjugue" column="nomeConjugue"/>
+	<result property="estadoCivil" column="estadoCivil"/>
+	<result property="nomePai" column="nomePai"/>
+	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-    <association property="regime"    column="regime" select="RegimeMap.fetchRegimeByEmpresa"  />
-   	<collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-	<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByEmpresaId"/>
-	<collection property="emails" column="id" select="EmailMap.fetchAllEmailsByEmpresa"/>
-	<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByEmpresa"/>
-	<collection property="socios" column="id" select="SocioMap.fetchSocioByEmpresaId"/>
-	<collection property="cnaes" column="id" select="CnaeMap.fetchAllCnaesByEmpresa"/>
-	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEmpresa"/>
+	<collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByPessoaId"/>
+	<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByPessoaId"/>
+	<collection property="emails" column="id" select="EmailMap.fetchAllEmailsByPessoaId"/>
+	<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByPessoaId"/>
+	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByPessoaId"/>
+	<collection property="profissao" column="id" select="ProfissaoMap.fetchProfissaoById"/>
+	<collection property="convenioList" column="id" select="ConvenioMap.fetchConvenioByPerson"/>
+	<collection property="bancos" column="id" select="BancoMap.fetchHoraFuncById"/>
+	<collection property="contatoList" column="id" select="ContatoMap.fetchContatoByPessoa"/>
+	<collection property="notes" column="id" select="BeneficiosMap.fetchFuncByBeneficios"/>
   </resultMap>
 
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
-  <sql id="allEmpresaColumns">
+  <sql id="allClienteColumns">
 		 b.nome
 		,b.regime
       	,b.create_date
@@ -49,7 +64,7 @@
       	,b.modify_user
   </sql>
 
-  <sql id="allEmpresaValues">
+  <sql id="allClienteValues">
   		#{nome},
   		#{regime.id},
     	<include refid="CBOFMap.changeControlFields"/>
@@ -58,11 +73,11 @@
   <!--
 		SQL Insert Statements.
  	-->
-  <insert id="insertEmpresa" parameterType="Empresa" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO empresa (
-		<include refid="allEmpresaColumns" />
+  <insert id="insertCliente" parameterType="Cliente" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO cliente (
+		<include refid="allClienteColumns" />
       )
-    VALUES (<include refid="allEmpresaValues" /> )
+    VALUES (<include refid="allClienteValues" /> )
   </insert>
 
 
@@ -70,8 +85,8 @@
 		SQL Update Statements.
  	-->
 
-  <update id="updateEmpresa" parameterType="Empresa">
-    UPDATE empresa
+  <update id="updateCliente" parameterType="Cliente">
+    UPDATE cliente
     	<set>
     		<if test="nome!= null">nome = #{nome},</if>
 	    	<if test="regime.id!= null"> regime=#{regime.id},</if>
@@ -85,37 +100,37 @@
    <!--
 		SQL Delete Statements.
    -->
-  <delete id="deleteEmpresaById" parameterType="Integer">
-    	DELETE FROM empresa WHERE id = #{id}
+  <delete id="deleteClienteById" parameterType="Integer">
+    	DELETE FROM cliente WHERE id = #{id}
   </delete>
 
 	<!--
 		SQL Fetch Statements.
  	-->
-  <select id="fetchEmpresaRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+  <select id="fetchClienteRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
-        FROM empresa
+        FROM cliente
 
   </select>
 
-  <select id="fetchAllEmpresas" resultMap="empresaResult">
+  <select id="fetchAllClientes" resultMap="clienteResult">
     SELECT
-	<include refid="allEmpresaColumns" />
-    FROM empresa ORDER BY nome ASC
+	<include refid="allClienteColumns" />
+    FROM cliente ORDER BY nome ASC
   </select>
 
-  <select id="fetchEmpresaById" parameterType="FetchByIdRequest" resultMap="empresaResult">
+  <select id="fetchClienteById" parameterType="FetchByIdRequest" resultMap="clienteResult">
     			   SELECT
-					b.id,	<include refid="allEmpresaColumns" />
- 				   FROM empresa b
+					b.id,	<include refid="allClienteColumns" />
+ 				   FROM cliente b
 					where b.id = #{id}
   </select>
 
-  <select id="fetchAllEmpresasByRequest" parameterType="EmpresaInquiryRequest" resultMap="empresaResult">
+  <select id="fetchAllClientesByRequest" parameterType="ClienteInquiryRequest" resultMap="clienteResult">
      SELECT * FROM ( SELECT b.id,
-    						<include refid="allEmpresaColumns" />,
+    						<include refid="allClienteColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
-    				FROM empresa b
+    				FROM cliente b
 						where 1 = 1
 					<if test="parentId != null">
 						AND b.id = #{id}
