@@ -27,48 +27,28 @@
 		</li>
 		</li>
 		<li>
-			<a href="#" id="pricingTab" data-tab="pricing" title='Funcionarios' data-title='Funcionarios'>
+			<a href="#" id="funcionarioTab" data-tab="funcionario" title='Funcionarios' data-title='Funcionarios'>
 				Funcionarios
 			</a>
 		</li>
 		<li>
-			<a href="#" id="pricingTab" data-tab="pricing" title='Produtos' data-title='Produtos'>
+			<a href="#" id="produtoTab" data-tab="produto" title='Produtos' data-title='Produtos'>
 				Produtos
 			</a>
 		</li>
 		<li>
-			<a href="#" id="pricingTab" data-tab="pricing" title='Documentos' data-title='Documentos'>
+			<a href="#" id="documentoTab" data-tab="documento" title='Documentos' data-title='Documentos'>
 				Documentos
 			</a>
 		</li>
 		<li>
-			<a href="#" id="pricingTab" data-tab="pricing" title='XMLs' data-title='XMLs'>
+			<a href="#" id="xmlTab" data-tab="xml" title='XMLs' data-title='XMLs'>
 				XMLs
-			</a>
-		</li>
-		<li>
-			<a href="#" id="pricingTab" data-tab="pricing" title='Despesas' data-title='Despesas'>
-				Despesas
-			</a>
-		</li>
-		<li>
-			<a href="#" id="pricingTab" data-tab="pricing" title='Ordem Servicos' data-title='Ordem Servicos'>
-				Ordem Servicos
 			</a>
 		</li>
 		<li>
 			<a href="#" id="pricingTab" data-tab="pricing" title='Historico' data-title='Historico'>
 				Historico
-			</a>
-		</li>
-		<li>
-			<a href="#" id="pricingTab" data-tab="pricing" title='Configuracao' data-title='Configuracao'>
-				Configuracao
-			</a>
-		</li>
-		<li>
-			<a href="#" id="pricingTab" data-tab="pricing" title='Importacoes' data-title='Importacoes'>
-				Importacoes
 			</a>
 		</li>
 		<li class="add_loc_link" title="<s:message code="commons.pages.addanotherlocation" text="default text" />">
