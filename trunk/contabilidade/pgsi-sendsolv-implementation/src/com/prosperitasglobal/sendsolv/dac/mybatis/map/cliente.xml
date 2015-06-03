@@ -35,7 +35,6 @@
 	<result property="nomeMae" column="nomeMae"/>
 	<result property="nomeConjugue" column="nomeConjugue"/>
 	<result property="estadoCivil" column="estadoCivil"/>
-	<result property="nomePai" column="nomePai"/>
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
@@ -56,8 +55,16 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allClienteColumns">
-		 b.nome
+		 b.cdEmpr
+		,b.nome
 		,b.regime
+		,b.type
+		,b.sexo
+		,b.dataNasc
+		,b.nomePai
+		,b.nomeMae
+		,b.nomeConjugue
+		,b.estadoCivil
       	,b.create_date
       	,b.create_user
       	,b.modify_date
@@ -65,8 +72,16 @@
   </sql>
 
   <sql id="allClienteValues">
+  		#{cdEmpr},
   		#{nome},
-  		#{regime.id},
+  		#{regime},
+  		#{typeValue},
+  		#{sexo},
+  		#{dataNasc},
+  		#{nomePai},
+  		#{nomeMae},
+  		#{nomeConjugue},
+  		#{estadoCivil},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
@@ -74,7 +89,7 @@
 		SQL Insert Statements.
  	-->
   <insert id="insertCliente" parameterType="Cliente" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO cliente (
+  	INSERT INTO pessoa (
 		<include refid="allClienteColumns" />
       )
     VALUES (<include refid="allClienteValues" /> )
@@ -86,7 +101,7 @@
  	-->
 
   <update id="updateCliente" parameterType="Cliente">
-    UPDATE cliente
+    UPDATE pessoa
     	<set>
     		<if test="nome!= null">nome = #{nome},</if>
 	    	<if test="regime.id!= null"> regime=#{regime.id},</if>
@@ -101,7 +116,7 @@
 		SQL Delete Statements.
    -->
   <delete id="deleteClienteById" parameterType="Integer">
-    	DELETE FROM cliente WHERE id = #{id}
+    	DELETE FROM pessoa WHERE id = #{id}
   </delete>
 
 	<!--
@@ -109,20 +124,20 @@
  	-->
   <select id="fetchClienteRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
-        FROM cliente
+        FROM pessoa
 
   </select>
 
   <select id="fetchAllClientes" resultMap="clienteResult">
     SELECT
 	<include refid="allClienteColumns" />
-    FROM cliente ORDER BY nome ASC
+    FROM pessoa ORDER BY nome ASC
   </select>
 
   <select id="fetchClienteById" parameterType="FetchByIdRequest" resultMap="clienteResult">
     			   SELECT
 					b.id,	<include refid="allClienteColumns" />
- 				   FROM cliente b
+ 				   FROM pessoa b
 					where b.id = #{id}
   </select>
 
@@ -130,7 +145,7 @@
      SELECT * FROM ( SELECT b.id,
     						<include refid="allClienteColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
-    				FROM cliente b
+    				FROM pessoa b
 						where 1 = 1
 					<if test="parentId != null">
 						AND b.id = #{id}
