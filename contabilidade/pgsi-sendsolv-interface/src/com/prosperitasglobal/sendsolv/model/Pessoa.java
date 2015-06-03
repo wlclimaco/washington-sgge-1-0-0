@@ -15,6 +15,8 @@ public class Pessoa extends ModelCosmeDamiao
 	/** The SendSolv id for the account. */
 	private Integer id;
 
+	private Integer cdEmpr;
+
 	private String nome;
 
 	private String nomePai;
@@ -52,6 +54,10 @@ public class Pessoa extends ModelCosmeDamiao
 	private List<Banco> bancos;
 
 	private List<FormaPg> formaPagamentoList;
+
+	private List<CondPag> condPagList;
+
+	private List<Contato> contatoList;
 
 	/**
 	 * Default constructor.

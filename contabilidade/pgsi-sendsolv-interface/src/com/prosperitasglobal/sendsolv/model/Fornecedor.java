@@ -10,6 +10,10 @@ public class Fornecedor extends Pessoa
 	/** The SendSolv id for the account. */
 	private Integer id;
 
+	private List<Cfop> listCfops;
+
+	private List<Produto> listProdutos;
+
 	/**
 	 * Default constructor.
 	 */

@@ -12,19 +12,9 @@
   	<!-- Result maps describe the mapping between the columns returned
        from a query, and the class properties.  A result map isn't
        necessary if the columns (or aliases) match to the properties
-       exactly. [id]           [int] NOT NULL,
-	[id]           [int] NOT NULL,
-	[nome]         [varchar](200) NULL,
-	[sexo] 		   [int] NULL,
-	[type]         [int] NOT NULL,
-	[dataNasc]     [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
-	[nomePai] 	   [varchar](200) NULL,
-	[nomeMae]      [varchar](200) NULL,
-	[nomeConjugue] [varchar](200) NULL,
-	[estadoCivil]  [int] NULL,
-	[nomePai] 	   [varchar](200) NULL,-->
+	-->
 
-  <resultMap id="clienteResult" type="Cliente">
+  <resultMap id="fornecedorResult" type="Fornecedor">
    <result property="id" column="id" />
     <result property="cdEmpr" column="cdEmpr" />
    	<result property="nome" column="nome"/>
@@ -45,7 +35,8 @@
 	<collection property="emails" column="id" select="EmailMap.fetchAllEmailsByPessoaId"/>
 	<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByPessoaId"/>
 	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByPessoaId"/>
-	<collection property="profissao" column="id" select="ProfissaoMap.fetchProfissaoById"/>
+	<collection property="listCfop" column="id" select="ProfissaoMap.fetchProfissaoById"/>
+	<collection property="formaPagamentoList" column="id" select="ProfissaoMap.fetchProfissaoById"/>
 	<collection property="convenioList" column="id" select="ConvenioMap.fetchConvenioByPerson"/>
 	<collection property="bancos" column="id" select="BancoMap.fetchHoraFuncById"/>
 	<collection property="contatoList" column="id" select="ContatoMap.fetchContatoByPessoa"/>
@@ -55,29 +46,45 @@
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
-  <sql id="allClienteColumns">
-		 b.nome
+  <sql id="allFornecedorColumns">
+		 b.cdEmpr
+		,b.nome
 		,b.regime
+		,b.type
+		,b.sexo
+		,b.dataNasc
+		,b.nomePai
+		,b.nomeMae
+		,b.nomeConjugue
+		,b.estadoCivil
       	,b.create_date
       	,b.create_user
       	,b.modify_date
       	,b.modify_user
   </sql>
 
-  <sql id="allClienteValues">
+  <sql id="allFornecedorValues">
+  		#{cdEmpr},
   		#{nome},
-  		#{regime.id},
+  		#{regime},
+  		#{typeValue},
+  		#{sexo},
+  		#{dataNasc},
+  		#{nomePai},
+  		#{nomeMae},
+  		#{nomeConjugue},
+  		#{estadoCivil},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
   <!--
 		SQL Insert Statements.
  	-->
-  <insert id="insertCliente" parameterType="Cliente" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO cliente (
-		<include refid="allClienteColumns" />
+  <insert id="insertFornecedor" parameterType="Fornecedor" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO pessoa (
+		<include refid="allFornecedorColumns" />
       )
-    VALUES (<include refid="allClienteValues" /> )
+    VALUES (<include refid="allFornecedorValues" /> )
   </insert>
 
 
@@ -85,8 +92,8 @@
 		SQL Update Statements.
  	-->
 
-  <update id="updateCliente" parameterType="Cliente">
-    UPDATE cliente
+  <update id="updateFornecedor" parameterType="Fornecedor">
+    UPDATE pessoa
     	<set>
     		<if test="nome!= null">nome = #{nome},</if>
 	    	<if test="regime.id!= null"> regime=#{regime.id},</if>
@@ -100,37 +107,37 @@
    <!--
 		SQL Delete Statements.
    -->
-  <delete id="deleteClienteById" parameterType="Integer">
-    	DELETE FROM cliente WHERE id = #{id}
+  <delete id="deleteFornecedorById" parameterType="Integer">
+    	DELETE FROM pessoa WHERE id = #{id}
   </delete>
 
 	<!--
 		SQL Fetch Statements.
  	-->
-  <select id="fetchClienteRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+  <select id="fetchFornecedorRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
-        FROM cliente
+        FROM pessoa
 
   </select>
 
-  <select id="fetchAllClientes" resultMap="clienteResult">
+  <select id="fetchAllFornecedors" resultMap="fornecedorResult">
     SELECT
-	<include refid="allClienteColumns" />
-    FROM cliente ORDER BY nome ASC
+	<include refid="allFornecedorColumns" />
+    FROM pessoa ORDER BY nome ASC
   </select>
 
-  <select id="fetchClienteById" parameterType="FetchByIdRequest" resultMap="clienteResult">
+  <select id="fetchFornecedorById" parameterType="FetchByIdRequest" resultMap="fornecedorResult">
     			   SELECT
-					b.id,	<include refid="allClienteColumns" />
- 				   FROM cliente b
+					b.id,	<include refid="allFornecedorColumns" />
+ 				   FROM pessoa b
 					where b.id = #{id}
   </select>
 
-  <select id="fetchAllClientesByRequest" parameterType="ClienteInquiryRequest" resultMap="clienteResult">
+  <select id="fetchAllFornecedorsByRequest" parameterType="FornecedorInquiryRequest" resultMap="fornecedorResult">
      SELECT * FROM ( SELECT b.id,
-    						<include refid="allClienteColumns" />,
+    						<include refid="allFornecedorColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
-    				FROM cliente b
+    				FROM pessoa b
 						where 1 = 1
 					<if test="parentId != null">
 						AND b.id = #{id}
@@ -156,6 +163,5 @@
 					</otherwise>
 				</choose>
   </select>
-
 
 </mapper>

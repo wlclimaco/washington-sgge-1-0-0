@@ -12,16 +12,10 @@ public class Cliente extends Pessoa
 	/** The SendSolv id for the account. */
 	private Integer id;
 
-	private Integer cdEmpr;
-
 	/** The horarios. */
 	private List<Profissao> profissao;
 
 	private List<Convenio> convenioList;
-
-	private List<CondPag> condPagList;
-
-	private List<Contato> contatoList;
 
 	/**
 	 * Default constructor.
