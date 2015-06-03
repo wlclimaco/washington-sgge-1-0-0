@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.mybatis.spring.support.SqlSessionDaoSupport;
-import org.slf4j.LoggerFactory;
-
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.ICnaeDAC;
 import com.prosperitasglobal.sendsolv.dac.IDocumentoDAC;
 import com.prosperitasglobal.sendsolv.dac.IEmailDAC;
@@ -23,21 +19,6 @@ import com.prosperitasglobal.sendsolv.dacd.mybatis.EnderecoDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.StatusDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.TelefoneDACD;
-import com.prosperitasglobal.sendsolv.model.AcaoEnum;
-import com.prosperitasglobal.sendsolv.model.Cliente;
-import com.prosperitasglobal.sendsolv.model.Fornecedor;
-import com.prosperitasglobal.sendsolv.model.Status;
-import com.prosperitasglobal.sendsolv.model.StatusEnum;
-import com.prosperitasglobal.sendsolv.model.TabelaEnum;
-import com.prosperitasglobal.sendsolv.model.Transportador;
-import com.prosperitasglobal.sendsolv.model.request.ClienteInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.FornecedorInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.TransportadorInquiryRequest;
-import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResponse;
-import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.util.QATMyBatisDacHelper;
-import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class PessoaDACImpl.
@@ -264,7 +245,8 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 
 		// First insert the root
 		// Is successful the unique-id will be populated back into the object.
-		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), EMPRESA_STMT_INSERT, pessoa, response);
+		insertCount =
+				QATMyBatisDacHelper.doInsert(getSqlSession(), "ClienteMap.insertCliente", pessoa, response);
 
 		if (response.isInError())
 		{
@@ -423,8 +405,8 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		 */
 		// QATMyBatisDacHelper.translateSortFields(request, getClienteInquiryValidSortFields());
 
-		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, EMPRESA_STMT_FETCH_COUNT,
-				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "ClienteMap.fetchClienteRowCount",
+				"ClienteMap.fetchAllClienteByRequest", response);
 		return response;
 	}
 
@@ -592,8 +574,10 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		 */
 		// QATMyBatisDacHelper.translateSortFields(request, getFornecedorInquiryValidSortFields());
 
-		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, EMPRESA_STMT_FETCH_COUNT,
-				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "FornecedorMap.fetchFornecedorRowCount",
+				"FornecedorMap.fetchAllFornecedorByRequest", response);
+		return response;
+
 		return response;
 	}
 
@@ -757,8 +741,10 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		 */
 		// QATMyBatisDacHelper.translateSortFields(request, getTransportadorInquiryValidSortFields());
 
-		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, EMPRESA_STMT_FETCH_COUNT,
-				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "TransportadorMap.fetchTransportadorRowCount",
+				"TransportadorMap.fetchTransportadorRowCount", response);
+
 		return response;
 	}
+
 }

@@ -41,6 +41,7 @@
 	<collection property="bancos" column="id" select="BancoMap.fetchHoraFuncById"/>
 	<collection property="contatoList" column="id" select="ContatoMap.fetchContatoByPessoa"/>
 	<collection property="notes" column="id" select="BeneficiosMap.fetchFuncByBeneficios"/>
+	<collection property="produtoList" column="id" select="ProdutoMap.fetchFuncByBeneficios"/>
   </resultMap>
 
   <!--

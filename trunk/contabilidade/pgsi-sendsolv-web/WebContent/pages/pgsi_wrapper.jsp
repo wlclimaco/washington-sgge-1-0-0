@@ -21,92 +21,147 @@
 			</li>
 
 			<li  data-url="organization location">
-				<a href="organization" class="alist" title='<s:message code="commons.title.customers" text="default text" />' data-title='<s:message code="commons.title.customers" text="default text" />'><s:message code="commons.title.customers" text="default text" /></a>
+				<a href="cliente" class="alist" title='Cliente' data-title='Cliente>'>Clientes</a>
 
 				<ul class="sub-menu">
 					<li>
-						<a href="organization/add" class="alist" title='<s:message code="commons.pages.organizationadd" text="default text" />' data-title='<s:message code="commons.pages.organizationadd" text="default text" />'>
-							<span><s:message code="commons.pages.organizationadd" text="default text" /></span>
+						<a href="cliente/add" class="alist" title='Adicionar Cliente' data-title='Adicionar Cliente'>
+							<span>Adicionar Cliente</span>
 						</a>
 					</li>
 					<li>
-						<a href="organization" class="alist" data-title='<s:message code="commons.pages.organizationSearch" text="default text" />' title='<s:message code="commons.pages.organizationSearch" text="default text" />'>
-							<span><s:message code="commons.pages.organizationSearch" text="default text" /></span>
+						<a href="clientes" class="alist" data-title='Clientes' title='Clientes'>
+							<span>Clientes</span>
 						</a>
 					</li>
 					<li>
-						<a href="location/add" class="alist" title='<s:message code="commons.pages.addlocation" text="default text" />' data-title='<s:message code="commons.pages.addlocation" text="default text" />'>
-							<span><s:message code="commons.pages.addlocation" text="default text" /></span>
+						<a href="fornecedor/add" class="alist" title='Adicionar Fornecedor' data-title='Adicionar Fornecedor'>
+							<span>Adicionar Fornecedor</span>
 						</a>
 					</li>
 					<li>
-						<a href="location" class="alist" title='<s:message code="commons.pages.locationSearch" text="default text" />' data-title='<s:message code="commons.pages.locationSearch" text="default text" />'>
-							<span><s:message code="commons.pages.locationSearch" text="default text" /></span>
+						<a href="fornecedor" class="alist" title='Fornecedor' data-title='Fornecedor'>
+							<span>Fornecedor</span>
+						</a>
+					</li>
+					<li>
+						<a href="transportador/add" class="alist" title='Adicionar Transportador' data-title='Adicionar Transportador'>
+							<span>Adicionar Transportador</span>
+						</a>
+					</li>
+					<li>
+						<a href="transportador" class="alist" title='Transportador' data-title='Transportador'>
+							<span>Transportador</span>
+						</a>
+					</li>
+					<li>
+						<a href="cliente/condPag" class="alist" title='Condição de Pagamento' data-title='Condição de Pagamento'>
+							<span>Condição de Pagamento</span>
+						</a>
+					</li>
+					<li>
+						<a href="cliente/convenio" class="alist" title='Convenios' data-title='Convenios'>
+							<span>Convenios</span>
+						</a>
+					</li>
+					<li>
+						<a href="cliente/FormPag" class="alist" title='Forma de Pagamento' data-title='Forma de Pagamento'>
+							<span>Forma de Pagamento</span>
 						</a>
 					</li>
 				</ul>
 			</li>
 			<li data-url="member recipient">
-				<a href="member" class="alist" title='<s:message code="commons.title.members" text="default text" />' data-title='<s:message code="commons.title.members" text="default text" />'>
-					<s:message code="commons.title.members" text="default text" />
+				<a href="Funcionario" class="alist" title='Funcionarios' data-title='Funcionarios'>
+					Funcionarios
 				</a>
 				<ul class="sub-menu">
 					<li>
-						<a href="member/add" class="alist" title='<s:message code="commons.pages.memberaddnew" text="default text" />' data-title='<s:message code="commons.pages.memberaddnew" text="default text" />'>
-							<span><s:message code="commons.pages.memberaddnew" text="default text" /></span>
+						<a href="funcionario/add" class="alist" title='Adicionar Funcionario' data-title='Adicionar Funcionario'>
+							<span>Adicionar Funcionario</span>
 						</a>
 					</li>
 					<li>
-						<a href="member" class="alist" data-title='<s:message code="commons.pages.memberfind" text="default text" />' title='<s:message code="commons.pages.memberfind" text="default text" />'>
-							<span><s:message code="commons.pages.memberfind" text="default text" /></span>
+						<a href="funcionario" class="alist" data-title='Funcionarios' title='Funcionarios'>
+							<span>Funcionarios</span>
 						</a>
 					</li>
 					<li>
-						<a href="recipient" class="alist" data-title='<s:message code="commons.pages.recipientSearch" text="default text" />' title='<s:message code="commons.pages.recipientSearch" text="default text" />'>
-							<span><s:message code="commons.pages.recipientSearch" text="default text" /></span>
+						<a href="evento" class="alist" data-title='Eventos' title='Eventos'>
+							<span>Eventos</span>
+						</a>
+					</li>
+					<li>
+						<a href="horaFunc" class="alist" data-title='Horario Funcionarios' title='Horario Funcionarios'>
+							<span>Horario Funcionarios</span>
+						</a>
+					</li>
+					<li>
+						<a href="funcionario/descBenef" class="alist" data-title='Descontos e Beneficios' title='Descontos e Beneficios'>
+							<span>Descontos e Beneficios</span>
 						</a>
 					</li>
 				</ul>
 			</li>
 
-			<sec:authorize access="hasAnyRole('ROLE_DOMAIN ADMIN', 'ROLE_ADMIN')">
 				<li data-url="transaction payment">
-					<a href="payment/batches" class="payments alist"  title='<s:message code="commons.title.payments" text="default text" />' data-title='<s:message code="commons.title.payments" text="default text" />'>
-						<s:message code="commons.title.payments" text="default text" /></a>
+					<a href="produto" class="payments alist"  title='Produtos' data-title='Produtos'>
+						Produtos
+					</a>
 					<ul class="sub-menu">
 						<li>
-							<a href="payment/batches" class="alist" title='<s:message code="pages.payments.menu.batches" text="default text" />' data-title='<s:message code="pages.payments.menu.batches" text="default text" />'>
-								<span><s:message code="pages.payments.menu.batches" text="default text" /></span>
+							<a href="produto" class="alist" title='Produtos' data-title='Produtos'>
+								<span>Produtos</span>
 							</a>
 						</li>
 						<li>
-							<a href="transaction" class="transaction alist" data-title='<s:message code="pages.payments.menu.find.transaction" text="default text" />' title='<s:message code="pages.payments.menu.find.transaction" text="default text" />'>
-								<span><s:message code="pages.payments.menu.find.transaction" text="default text" /></span>
+							<a href="produto/add" class="alist" title='Adicionar Produtos' data-title='Adicionar Produtos'>
+								<span>Adicionar Produtos</span>
 							</a>
 						</li>
 						<li>
-							<a href="payment/upcoming_pay_dates" class="alist" data-title='<s:message code="pages.payments.menu.upcoming.pay.dates" text="default text" />' title='<s:message code="pages.payments.menu.upcoming.pay.dates" text="default text" />'>
-								<span><s:message code="pages.payments.menu.upcoming.pay.dates" text="default text" /></span>
+							<a href="produto/grupo" class="alist" title='Grupo' data-title='Grupo'>
+								<span>Grupo</span>
+							</a>
+						</li>
+						<li>
+							<a href="produto/subGrupo" class="alist" title='Sub-Grupo' data-title='Sub-Grupo'>
+								<span>Sub-Grupo</span>
+							</a>
+						</li>
+						<li>
+							<a href="produto/cfop" class="transaction alist" data-title='CFOP' title='CFOP'>
+								<span>CFOP</span>
+							</a>
+						</li>
+						<li>
+							<a href="produto/cnae" class="alist" data-title='CNAE' title='CNAE'>
+								<span>CNAE</span>
+							</a>
+						</li>
+						<li>
+							<a href="produto/unimed" class="alist" data-title='Unidade de Medida' title='Unidade de Medida'>
+								<span>Unidade de Medida</span>
 							</a>
 						</li>
 					</ul>
 				</li>
-			</sec:authorize>
+
 
 			<sec:authorize access="hasAnyRole('ROLE_DOMAIN ADMIN', 'ROLE_ADMIN')">
 			<li data-url="compliance reports sdn sar">
-				<a href="javascript:;" class="compliance" title='<s:message code="commons.title.compliance" text="default text" />' data-title='<s:message code="commons.title.compliance" text="default text" />'>
-					<s:message code="commons.title.compliance" text="default text" />
+				<a href="javascript:;" class="compliance" title='Nota Fiscal' data-title='Nota Fiscal'>
+					Nota Fiscal
 				</a>
 				<ul class="sub-menu">
 						<li>
-							<a href="sdn" class="alist" title='<s:message code="pages.sdn.dashboard.match.SDN" text="default text" />' data-title='<s:message code="pages.sdn.dashboard.match.SDN" text="default text" />'>
-								<span><s:message code="pages.sdn.dashboard.match.SDN" text="default text" /></span>
+							<a href="notafiscal/entrada" class="alist" title='Nota Fiscal Entrada' data-title='Nota Fiscal Entrada'>
+								<span>Nota Fiscal Entrada</span>
 							</a>
 						</li>
 						<li>
-							<a href="sar" class="transaction alist" data-title='<s:message code="pages.sdn.dashboard.SAR.Reports" text="default text" />' title='<s:message code="pages.sdn.dashboard.SAR.Reports" text="default text" />'>
-								<span><s:message code="pages.sdn.dashboard.suspisciousActivity" text="Suspicious Activity" /></span>
+							<a href="notafiscal/saida" class="transaction alist" data-title='Nota Fiscal Saida' title='Nota Fiscal Saida'>
+								<span>Nota Fiscal Saida</span>
 							</a>
 						</li>
 						<li>
