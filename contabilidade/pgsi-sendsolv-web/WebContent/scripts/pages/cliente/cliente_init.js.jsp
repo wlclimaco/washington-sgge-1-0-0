@@ -4,7 +4,7 @@
 <sec:authorize access="hasAnyRole('ROLE_DOMAIN ADMIN', 'ROLE_ADMIN', 'ROLE_CSR')">
 <script type="text/javascript">
 /**
- * @namespace pgsi.pages.funcionario
+ * @namespace pgsi.pages.cliente
  * @description The init namespace for the Location Page.
  */
 
@@ -23,21 +23,21 @@ $(document).ready(function()
 	</c:choose>
 
 	$.pgsi.listener.wait({
-		eventName 	: "funcionarioList",
+		eventName 	: "clienteList",
 		arguments 	: ["table"],
 		fnCallback 	: $.pgsi.progressBar.stopGlobal
 	});
 
 	/** * jQuery dataTable setup ** */
-	pgsi.pages.funcionario.funcionarioTable = $('#data_list').dataTable($.pgsi.table.setTable(
+	pgsi.pages.cliente.clienteTable = $('#data_list').dataTable($.pgsi.table.setTable(
 	{
 		id 			: "#data_list",
-		sAjaxSource : "api/funcionario/fetchall",
+		sAjaxSource : "api/cliente/fetchall",
 		bPreLoad	: true,
 
 		ajax :
 		{
-			sObj		: "funcionarioList",
+			sObj		: "clienteList",
 			oRequest	: PagedInquiryRequest,
 			fnRequest 	: function(){}
 		},
@@ -47,7 +47,7 @@ $(document).ready(function()
 		{
 			headerData 		: "CNPJ",
 			order			: "name",
-			mRender         : pgsi.pages.funcionario.fnCreateEmpresaNameLink,
+			mRender         : pgsi.pages.cliente.fnCreateEmpresaNameLink,
 			sDefaultContent : "",
 			bSortable 		: false,
 			sClass          : "name-col"
@@ -55,14 +55,14 @@ $(document).ready(function()
 		{
 			headerData 		: "Nome Empresa",
 			order			: "organization_column",
-			mRender 		: pgsi.pages.funcionario.fnCreateNomeLink,
+			mRender 		: pgsi.pages.cliente.fnCreateNomeLink,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
 			headerData 		: "Cnae",
 			order			: "city_column",
-			mRender 		: pgsi.pages.funcionario.fnCnae,
+			mRender 		: pgsi.pages.cliente.fnCnae,
 			mData	 		: "null",
 			sDefaultContent : "",
 			bSortable 		: false
@@ -70,35 +70,35 @@ $(document).ready(function()
 		{
 			headerData 		: "Email",
 			order			: "state_column",
-			mRender 		: pgsi.pages.funcionario.fnEmail,
+			mRender 		: pgsi.pages.cliente.fnEmail,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
 			headerData 		: "Telefone",
 			order			: "country_column",
-			mRender 		: pgsi.pages.funcionario.fnTelefone,
+			mRender 		: pgsi.pages.cliente.fnTelefone,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
 			headerData 		: "Regime",
 			order			: "sdn_status_column",
-			mRender 		: pgsi.pages.funcionario.fnRegime,
+			mRender 		: pgsi.pages.cliente.fnRegime,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
 			headerData 		: "Endereco",
 			order			: "phone_column",
-			mRender 		: pgsi.pages.funcionario.fnEndereco,
+			mRender 		: pgsi.pages.cliente.fnEndereco,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
 			headerData 		: "Documentos",
 			order			: "phone_column",
-			mRender 		: pgsi.pages.funcionario.fnDocumento,
+			mRender 		: pgsi.pages.cliente.fnDocumento,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
@@ -142,10 +142,10 @@ $(document).ready(function()
 
 			</sec:authorize>
 
-			oActionSummary = $('<div><div><a href="funcionario/view?tab=info&funcionarioId=' + aData.id + '" title="View '+aData.name+'" id="update" class="icon-nav icon-pencil alist icon-small-button"></a>'
+			oActionSummary = $('<div><div><a href="cliente/view?tab=info&clienteId=' + aData.id + '" title="View '+aData.name+'" id="update" class="icon-nav icon-pencil alist icon-small-button"></a>'
 				+ sButtonStatus
 				+ sButtonDelete
-				+pgsi.util.page.fnInsertButtonSDNSAR(aData,"funcionario")+"</div></div>");
+				+pgsi.util.page.fnInsertButtonSDNSAR(aData,"cliente")+"</div></div>");
 
 			oActionSummary.find('a.deleteDialog, a.active, a.deactivate ,a.sarDialog').click(function (e) {
 				e.preventDefault();
@@ -160,7 +160,7 @@ $(document).ready(function()
 
 						// Validations for change pagination when delete one or more groups of last page.
 						var iStart;
-						var oSettings = pgsi.pages.funcionario.funcionarioTable.fnSettings();
+						var oSettings = pgsi.pages.cliente.clienteTable.fnSettings();
 
 							// If exist just one group at last page and this group is deleted, the pagination back to previous page.
 							if (((oSettings._iRecordsDisplay - 1) % $('.dataTables_length').find('select').val() === 0)) {
@@ -168,7 +168,7 @@ $(document).ready(function()
 							}
 
 						$.pgsi.table.reloadTable({
-							table 		: pgsi.pages.funcionario.funcionarioTable,
+							table 		: pgsi.pages.cliente.clienteTable,
 							iStart 		: iStart
 						});
 					}else{
@@ -180,30 +180,30 @@ $(document).ready(function()
 				if($(this).hasClass('deleteDialog'))
 				{
 					// Launch Delete Dialog
-					var oRequest = new LocationMaintenanceRequest({funcionario : {id : aData.id, name: aData.name }});
+					var oRequest = new LocationMaintenanceRequest({cliente : {id : aData.id, name: aData.name }});
 
 					pgsi.util.actiondialog.launchActionDialog(
 						"deleteDialog",
 						 pgsi.pages.business.dialogSettings.deleteDialog(
-						 	"api/funcionario/delete",
+						 	"api/cliente/delete",
 						 	 oRequest,
-						 	 $.pgsi.locale.get("pages.funcionario.dialog.title", oRequest.funcionario.name),
+						 	 $.pgsi.locale.get("pages.cliente.dialog.title", oRequest.cliente.name),
 						 	 fnCallBack,
-						 	 $.pgsi.locale.get("commons.pages.erroView", $.pgsi.locale.get("commons.pages.funcionario"))
+						 	 $.pgsi.locale.get("commons.pages.erroView", $.pgsi.locale.get("commons.pages.cliente"))
 						 ));
 
 				}else if($(this).hasClass('active')){
 
-					pgsi.util.page.fnUpdateStatus('api/funcionario/fetch',parseInt(aData.id,10),'funcionario',1,fnCallBack,"Activate Location for "+ aData.name, "<span>"+$.pgsi.locale.get("pages.person.dialog.status.question",$.pgsi.locale.get("pages.view.activate"),"Location")+"<br>" +$.pgsi.locale.get("pages.person.dialog.status.information",$.pgsi.locale.get("pages.view.activate"))+"<span>",true);
+					pgsi.util.page.fnUpdateStatus('api/cliente/fetch',parseInt(aData.id,10),'cliente',1,fnCallBack,"Activate Location for "+ aData.name, "<span>"+$.pgsi.locale.get("pages.person.dialog.status.question",$.pgsi.locale.get("pages.view.activate"),"Location")+"<br>" +$.pgsi.locale.get("pages.person.dialog.status.information",$.pgsi.locale.get("pages.view.activate"))+"<span>",true);
 				}else if($(this).hasClass('deactivate')){
-					pgsi.util.page.fnUpdateStatus('api/funcionario/fetch',parseInt(aData.id,10),'funcionario',2,fnCallBack,"Deactivate Location for "+ aData.name, "<span>"+$.pgsi.locale.get("pages.person.dialog.status.question",$.pgsi.locale.get("pages.view.deactivate"),"Location")+"<br>" +$.pgsi.locale.get("pages.person.dialog.status.information",$.pgsi.locale.get("pages.view.deactivate"))+"<span>",true);
+					pgsi.util.page.fnUpdateStatus('api/cliente/fetch',parseInt(aData.id,10),'cliente',2,fnCallBack,"Deactivate Location for "+ aData.name, "<span>"+$.pgsi.locale.get("pages.person.dialog.status.question",$.pgsi.locale.get("pages.view.deactivate"),"Location")+"<br>" +$.pgsi.locale.get("pages.person.dialog.status.information",$.pgsi.locale.get("pages.view.deactivate"))+"<span>",true);
 				}else if($(this).hasClass('sarDialog')){
 					pgsi.util.actiondialog.launchActionDialog(
 							"dialogSARDetail",
 							 pgsi.pages.sar.dialogSettings.dialogSARDetail(
 								 $.pgsi.locale.get("commons.title.table.SAR"),
 								 aData.id,
-								 "funcionario",
+								 "cliente",
 								 aData.name,
 								 aData.key
 							 ));
@@ -236,7 +236,7 @@ $(document).ready(function()
 			});
 
 			$.pgsi.listener.notify({
-				eventName 	: "funcionarioList",
+				eventName 	: "clienteList",
 				arguments 	: ["table"]
 			});
 		}
@@ -255,7 +255,7 @@ $(document).ready(function()
 				element			: ".filter",
 				tagsDiv			: ".filter-results-container div.first",
 				title			: $.pgsi.locale.get("commons.pages.filterTitle"),
-				table 			:  pgsi.pages.funcionario.funcionarioTable,
+				table 			:  pgsi.pages.cliente.clienteTable,
 				filters 		: oResponse
 			});
 		});
@@ -265,8 +265,8 @@ $(document).ready(function()
 	$("#clear-all").on("click", function(e)
 	{
 		$.address.parameter("organization","");
-		$.address.parameter("funcionario","");
-		pgsi.util.page.fnReloadTable(pgsi.pages.funcionario.funcionarioTable);
+		$.address.parameter("cliente","");
+		pgsi.util.page.fnReloadTable(pgsi.pages.cliente.clienteTable);
 	});
 
 });

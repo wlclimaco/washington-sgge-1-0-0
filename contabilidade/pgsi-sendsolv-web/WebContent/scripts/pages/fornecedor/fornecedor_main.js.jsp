@@ -5,17 +5,17 @@
 
 <script type="text/javascript">
 /**
- * @namespace pgsi.pages.funcionario
+ * @namespace pgsi.pages.fornecedor
  * @fileoverview The main namespace for the Location List Page.
  */
-pgsi.pages.funcionario = {
+pgsi.pages.fornecedor = {
 
 	/**
 	* Set of functions used by the datatables plugin to customize field values
 	*/
 
 	// Returns link for edit view
-	fnCreateFuncionarioNameLink : function (val, type, full)
+	fnCreateFornecedorNameLink : function (val, type, full)
 	{console.log(full)
 	var sCnpj="";
 		if (type !== "display")
@@ -27,7 +27,7 @@ pgsi.pages.funcionario = {
 				sCnpj = full.documentos[i].numero;
 			}
 		}
-			return '<a title="View/Edit ' + sCnpj + '" href="#/funcionario/view?tab=info&funcionarioId=' + full.id + '" class="edit_link">' + sCnpj + '</a>';
+			return '<a title="View/Edit ' + sCnpj + '" href="#/fornecedor/view?tab=info&fornecedorId=' + full.id + '" class="edit_link">' + sCnpj + '</a>';
 	},
 
 	fnCreateNomeLink : function (val, type, full)
@@ -37,7 +37,7 @@ pgsi.pages.funcionario = {
 			return val;
 		}
 
-		return '<a title="View/Edit ' + full.nome + '" href="#/funcionario/view?tab=info&funcionarioId=' + full.id + '" class="edit_link">' + full.nome + '</a>';
+		return '<a title="View/Edit ' + full.nome + '" href="#/fornecedor/view?tab=info&fornecedorId=' + full.id + '" class="edit_link">' + full.nome + '</a>';
 
 	},
 	fnCnae: function (val, type, full)
@@ -111,7 +111,7 @@ pgsi.pages.funcionario = {
 		return sDocumentos;
 	},
 
-	funcionarioTable: {
+	fornecedorTable: {
 
 	}
 }
