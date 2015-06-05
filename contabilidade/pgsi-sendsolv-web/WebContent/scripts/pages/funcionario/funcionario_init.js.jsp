@@ -45,25 +45,17 @@ $(document).ready(function()
 		aoColumns :
 		[
 		{
-			headerData 		: "CNPJ",
+			headerData 		: "Nome Funcionario",
 			order			: "name",
-			mRender         : pgsi.pages.funcionario.fnCreateEmpresaNameLink,
+			mRender         : pgsi.pages.funcionario.fnCreateFuncionarioNameLink,
 			sDefaultContent : "",
 			bSortable 		: false,
 			sClass          : "name-col"
 		},
 		{
-			headerData 		: "Nome Empresa",
+			headerData 		: "CPF",
 			order			: "organization_column",
-			mRender 		: pgsi.pages.funcionario.fnCreateNomeLink,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Cnae",
-			order			: "city_column",
-			mRender 		: pgsi.pages.funcionario.fnCnae,
-			mData	 		: "null",
+			mRender 		: pgsi.pages.funcionario.fnCreateCPFLink,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
@@ -82,13 +74,6 @@ $(document).ready(function()
 			bSortable 		: false
 		},
 		{
-			headerData 		: "Regime",
-			order			: "sdn_status_column",
-			mRender 		: pgsi.pages.funcionario.fnRegime,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
 			headerData 		: "Endereco",
 			order			: "phone_column",
 			mRender 		: pgsi.pages.funcionario.fnEndereco,
@@ -99,6 +84,13 @@ $(document).ready(function()
 			headerData 		: "Documentos",
 			order			: "phone_column",
 			mRender 		: pgsi.pages.funcionario.fnDocumento,
+			sDefaultContent : "",
+			bSortable 		: false
+		},
+		{
+			headerData 		: "Beneficios",
+			order			: "phone_column",
+			mRender 		: pgsi.pages.funcionario.fnBeneficios,
 			sDefaultContent : "",
 			bSortable 		: false
 		},

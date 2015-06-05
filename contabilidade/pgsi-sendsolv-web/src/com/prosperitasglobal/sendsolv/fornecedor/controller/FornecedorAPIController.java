@@ -1,23 +1,25 @@
 package com.prosperitasglobal.sendsolv.fornecedor.controller;
 
 import java.util.Calendar;
-import java.util.logging.Logger;
 
-/**
- * The FornecedorAPIController Class.
- *
- * @author Flavio Tosta, Washington Costa
- *
- */
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.request.FornecedorInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.FornecedorMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.FornecedorResponse;
+
 @Controller
 @RequestMapping("/api/fornecedor")
 public class FornecedorAPIController extends FornecedorBaseController
 {
 
-	/** The Constant FETCH_SIC_NAICS. */
-	private static final String FETCH_SIC_NAICS = "fetchSicNaics";
-	/** The Constant FETCH_ORGANIZATION_BYFORNECEDOR. */
-	private static final String FETCH_ORGANIZATION_BYFORNECEDOR = "fetchOrganizationByfornecedor";
 	/** The URL mapping constants. */
 	private static final String DELETE_FORNECEDOR = "/delete";
 
@@ -32,8 +34,7 @@ public class FornecedorAPIController extends FornecedorBaseController
 
 	/** The Constant FETCH. */
 	private static final String FETCH = "/fetch";
-	/** The Constant APPLY. */
-	private static final String APPLY = "/applyStatus";
+
 	/** The Constant LOG. */
 	private static final Logger LOG = LoggerFactory.getLogger(FornecedorAPIController.class);
 
@@ -84,7 +85,7 @@ public class FornecedorAPIController extends FornecedorBaseController
 		try
 		{
 
-			fornecedorResponse = getFornecedorBAI().updateFornecedor(fornecedorRequest);
+			fornecedorResponse = getPessoaBAI().updateFornecedor(fornecedorRequest);
 
 		}
 		catch (Exception e)
@@ -110,7 +111,7 @@ public class FornecedorAPIController extends FornecedorBaseController
 		try
 		{
 
-			fornecedorResponse = getFornecedorBAI().deleteFornecedor(fornecedorRequest);
+			fornecedorResponse = getPessoaBAI().deleteFornecedor(fornecedorRequest);
 
 		}
 		catch (Exception e)
@@ -139,7 +140,7 @@ public class FornecedorAPIController extends FornecedorBaseController
 		{
 
 			fornecedorRequest.getFornecedor().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
-			fornecedorResponse = getFornecedorBAI().insertFornecedor(fornecedorRequest);
+			fornecedorResponse = getPessoaBAI().insertFornecedor(fornecedorRequest);
 		}
 		catch (Exception e)
 		{

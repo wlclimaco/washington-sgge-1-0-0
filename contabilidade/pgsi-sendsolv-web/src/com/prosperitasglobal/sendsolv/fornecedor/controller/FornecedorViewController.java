@@ -1,11 +1,21 @@
 package com.prosperitasglobal.sendsolv.fornecedor.controller;
 
-import java.util.logging.Logger;
-
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.prosperitasglobal.sendsolv.filter.FilterFactory;
 import com.prosperitasglobal.sendsolv.filter.model.response.FiltersResponse;
+import com.prosperitasglobal.sendsolv.model.request.FornecedorInquiryRequest;
+import com.qat.framework.model.SortExpression;
+import com.qat.framework.model.SortExpression.Direction;
 
 @Controller
 @RequestMapping("/fornecedor")
@@ -29,9 +39,6 @@ public class FornecedorViewController extends FornecedorBaseController
 	/** The Constant EDIT_VIEW. */
 	private static final String EDIT_VIEW = "/editView";
 
-	/** The Constant FETCH_ORGANIZATION_BYFORNECEDOR. */
-	private static final String FETCH_ORGANIZATION_BYFORNECEDOR = "fetchOrganizationByfornecedor";
-
 	/** The view mapping constants . */
 	private static final String VIEW_FORNECEDOR_MAIN = "/fornecedor/fornecedor_main";
 
@@ -45,9 +52,6 @@ public class FornecedorViewController extends FornecedorBaseController
 
 	/** The Constant VIEW_FORNECEDOR_DIALOG_ADD. */
 	private static final String VIEW_FORNECEDOR_DIALOG_ADD = "/fornecedor/fornecedor_dialog_create";
-
-	/** The Constant ORGANIZATION_BY_FORNECEDOR_MAIN. */
-	private static final String ORGANIZATION_BY_FORNECEDOR_MAIN = "/organization/organizationByfornecedor_main";
 
 	/** The PagedInquiryRequest Constants. */
 	private static final int START_PAGE_NUMBER = 0;
@@ -115,7 +119,7 @@ public class FornecedorViewController extends FornecedorBaseController
 		{
 
 			modelAndView.addObject(RESPONSE, getMapper()
-					.writeValueAsString(fetchEmpresaByRequest(pagedInquiryRequest)));
+					.writeValueAsString(fetchFornecedorByRequest(pagedInquiryRequest)));
 
 			FiltersResponse filtersResponse = new FiltersResponse();
 			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);

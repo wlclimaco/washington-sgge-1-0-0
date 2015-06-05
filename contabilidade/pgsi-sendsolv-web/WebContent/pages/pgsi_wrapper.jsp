@@ -30,7 +30,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="clientes" class="alist" data-title='Clientes' title='Clientes'>
+						<a href="cliente" class="alist" data-title='Clientes' title='Clientes'>
 							<span>Clientes</span>
 						</a>
 					</li>

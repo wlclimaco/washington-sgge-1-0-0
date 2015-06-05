@@ -1,11 +1,21 @@
 package com.prosperitasglobal.sendsolv.transportador.controller;
 
-import java.util.logging.Logger;
-
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.prosperitasglobal.sendsolv.filter.FilterFactory;
 import com.prosperitasglobal.sendsolv.filter.model.response.FiltersResponse;
+import com.prosperitasglobal.sendsolv.model.request.TransportadorInquiryRequest;
+import com.qat.framework.model.SortExpression;
+import com.qat.framework.model.SortExpression.Direction;
 
 @Controller
 @RequestMapping("/transportador")
@@ -29,9 +39,6 @@ public class TransportadorViewController extends TransportadorBaseController
 	/** The Constant EDIT_VIEW. */
 	private static final String EDIT_VIEW = "/editView";
 
-	/** The Constant FETCH_ORGANIZATION_BYTRANSPORTADOR. */
-	private static final String FETCH_ORGANIZATION_BYTRANSPORTADOR = "fetchOrganizationBytransportador";
-
 	/** The view mapping constants . */
 	private static final String VIEW_TRANSPORTADOR_MAIN = "/transportador/transportador_main";
 
@@ -45,9 +52,6 @@ public class TransportadorViewController extends TransportadorBaseController
 
 	/** The Constant VIEW_TRANSPORTADOR_DIALOG_ADD. */
 	private static final String VIEW_TRANSPORTADOR_DIALOG_ADD = "/transportador/transportador_dialog_create";
-
-	/** The Constant ORGANIZATION_BY_TRANSPORTADOR_MAIN. */
-	private static final String ORGANIZATION_BY_TRANSPORTADOR_MAIN = "/organization/organizationBytransportador_main";
 
 	/** The PagedInquiryRequest Constants. */
 	private static final int START_PAGE_NUMBER = 0;
@@ -115,7 +119,7 @@ public class TransportadorViewController extends TransportadorBaseController
 		{
 
 			modelAndView.addObject(RESPONSE, getMapper()
-					.writeValueAsString(fetchEmpresaByRequest(pagedInquiryRequest)));
+					.writeValueAsString(fetchTransportadorByRequest(pagedInquiryRequest)));
 
 			FiltersResponse filtersResponse = new FiltersResponse();
 			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);

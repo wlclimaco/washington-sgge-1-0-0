@@ -1,7 +1,15 @@
 package com.prosperitasglobal.sendsolv.cliente.controller;
 
-import java.util.Calendar;
-import java.util.logging.Logger;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.request.ClienteInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ClienteMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.ClienteResponse;
 
 /**
  * The ClienteAPIController Class.
@@ -14,10 +22,6 @@ import java.util.logging.Logger;
 public class ClienteAPIController extends ClienteBaseController
 {
 
-	/** The Constant FETCH_SIC_NAICS. */
-	private static final String FETCH_SIC_NAICS = "fetchSicNaics";
-	/** The Constant FETCH_ORGANIZATION_BYCLIENTE. */
-	private static final String FETCH_ORGANIZATION_BYCLIENTE = "fetchOrganizationBycliente";
 	/** The URL mapping constants. */
 	private static final String DELETE_CLIENTE = "/delete";
 
@@ -32,13 +36,8 @@ public class ClienteAPIController extends ClienteBaseController
 
 	/** The Constant FETCH. */
 	private static final String FETCH = "/fetch";
-	/** The Constant APPLY. */
-	private static final String APPLY = "/applyStatus";
-	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(ClienteAPIController.class);
 
-	/** The Constant CONTROLLER_EXCEPTION_MSG. */
-	private static final String CONTROLLER_EXCEPTION_MSG = "ClienteAPIController";
+	/** The Constant APPLY. */
 
 	/**
 	 * Fetch all Clientes.
@@ -48,7 +47,7 @@ public class ClienteAPIController extends ClienteBaseController
 	 */
 	@RequestMapping(value = FETCH_ALL, method = RequestMethod.POST)
 	@ResponseBody
-	public ClienteResponse fetchAll(@RequestBody PagedInquiryRequest pagedInquiryRequest)
+	public ClienteResponse fetchAll(@RequestBody ClienteInquiryRequest pagedInquiryRequest)
 	{
 
 		return fetchClienteByRequest(pagedInquiryRequest);
@@ -78,21 +77,10 @@ public class ClienteAPIController extends ClienteBaseController
 	 */
 	@RequestMapping(value = EDIT_CLIENTE, method = RequestMethod.POST)
 	@ResponseBody
-	public ClienteResponse edit(@RequestBody ClienteMaintenanceRequest clienteRequest)
+	public ClienteResponse editCliente(@RequestBody ClienteMaintenanceRequest clienteRequest)
 	{
-		ClienteResponse clienteResponse = new ClienteResponse();
-		try
-		{
 
-			clienteResponse = getClienteBAI().updateCliente(clienteRequest);
-
-		}
-		catch (Exception e)
-		{
-			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
-			clienteResponse = null;
-		}
-		return clienteResponse;
+		return edit(clienteRequest);
 
 	}
 
@@ -104,22 +92,10 @@ public class ClienteAPIController extends ClienteBaseController
 	 */
 	@RequestMapping(value = DELETE_CLIENTE, method = RequestMethod.POST)
 	@ResponseBody
-	public ClienteResponse delete(@RequestBody ClienteMaintenanceRequest clienteRequest)
+	public ClienteResponse deleteCliente(@RequestBody ClienteMaintenanceRequest clienteRequest)
 	{
-		ClienteResponse clienteResponse = new ClienteResponse();
-		try
-		{
 
-			clienteResponse = getClienteBAI().deleteCliente(clienteRequest);
-
-		}
-		catch (Exception e)
-		{
-			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
-			clienteResponse = null;
-		}
-
-		return clienteResponse;
+		return delete(clienteRequest);
 
 	}
 
@@ -131,23 +107,10 @@ public class ClienteAPIController extends ClienteBaseController
 	 */
 	@RequestMapping(value = INSERT_CLIENTE, method = RequestMethod.POST)
 	@ResponseBody
-	public ClienteResponse insert(@RequestBody ClienteMaintenanceRequest clienteRequest)
+	public ClienteResponse insertCliente(@RequestBody ClienteMaintenanceRequest clienteRequest)
 	{
-		ClienteResponse clienteResponse = new ClienteResponse();
 
-		try
-		{
-
-			clienteRequest.getCliente().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
-			clienteResponse = getClienteBAI().insertCliente(clienteRequest);
-		}
-		catch (Exception e)
-		{
-			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
-			clienteResponse = null;
-		}
-
-		return clienteResponse;
+		return insert(clienteRequest);
 
 	}
 

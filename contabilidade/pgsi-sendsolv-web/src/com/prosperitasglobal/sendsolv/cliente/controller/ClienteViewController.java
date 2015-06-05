@@ -1,11 +1,21 @@
 package com.prosperitasglobal.sendsolv.cliente.controller;
 
-import java.util.logging.Logger;
-
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.prosperitasglobal.sendsolv.filter.FilterFactory;
 import com.prosperitasglobal.sendsolv.filter.model.response.FiltersResponse;
+import com.prosperitasglobal.sendsolv.model.request.ClienteInquiryRequest;
+import com.qat.framework.model.SortExpression;
+import com.qat.framework.model.SortExpression.Direction;
 
 @Controller
 @RequestMapping("/cliente")
@@ -115,7 +125,7 @@ public class ClienteViewController extends ClienteBaseController
 		{
 
 			modelAndView.addObject(RESPONSE, getMapper()
-					.writeValueAsString(fetchEmpresaByRequest(pagedInquiryRequest)));
+					.writeValueAsString(fetchClienteByRequest(pagedInquiryRequest)));
 
 			FiltersResponse filtersResponse = new FiltersResponse();
 			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);
