@@ -1,7 +1,19 @@
 package com.prosperitasglobal.sendsolv.transportador.controller;
 
 import java.util.Calendar;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.request.TransportadorInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.TransportadorMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.TransportadorResponse;
 
 /**
  * The TransportadorAPIController Class.
@@ -14,10 +26,6 @@ import java.util.logging.Logger;
 public class TransportadorAPIController extends TransportadorBaseController
 {
 
-	/** The Constant FETCH_SIC_NAICS. */
-	private static final String FETCH_SIC_NAICS = "fetchSicNaics";
-	/** The Constant FETCH_ORGANIZATION_BYTRANSPORTADOR. */
-	private static final String FETCH_ORGANIZATION_BYTRANSPORTADOR = "fetchOrganizationBytransportador";
 	/** The URL mapping constants. */
 	private static final String DELETE_TRANSPORTADOR = "/delete";
 
@@ -32,8 +40,6 @@ public class TransportadorAPIController extends TransportadorBaseController
 
 	/** The Constant FETCH. */
 	private static final String FETCH = "/fetch";
-	/** The Constant APPLY. */
-	private static final String APPLY = "/applyStatus";
 	/** The Constant LOG. */
 	private static final Logger LOG = LoggerFactory.getLogger(TransportadorAPIController.class);
 
@@ -48,7 +54,7 @@ public class TransportadorAPIController extends TransportadorBaseController
 	 */
 	@RequestMapping(value = FETCH_ALL, method = RequestMethod.POST)
 	@ResponseBody
-	public TransportadorResponse fetchAll(@RequestBody PagedInquiryRequest pagedInquiryRequest)
+	public TransportadorResponse fetchAll(@RequestBody TransportadorInquiryRequest pagedInquiryRequest)
 	{
 
 		return fetchTransportadorByRequest(pagedInquiryRequest);
@@ -84,7 +90,7 @@ public class TransportadorAPIController extends TransportadorBaseController
 		try
 		{
 
-			transportadorResponse = getTransportadorBAI().updateTransportador(transportadorRequest);
+			transportadorResponse = getPessoaBAI().updateTransportador(transportadorRequest);
 
 		}
 		catch (Exception e)
@@ -110,7 +116,7 @@ public class TransportadorAPIController extends TransportadorBaseController
 		try
 		{
 
-			transportadorResponse = getTransportadorBAI().deleteTransportador(transportadorRequest);
+			transportadorResponse = getPessoaBAI().deleteTransportador(transportadorRequest);
 
 		}
 		catch (Exception e)
@@ -139,7 +145,7 @@ public class TransportadorAPIController extends TransportadorBaseController
 		{
 
 			transportadorRequest.getTransportador().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
-			transportadorResponse = getTransportadorBAI().insertTransportador(transportadorRequest);
+			transportadorResponse = getPessoaBAI().insertTransportador(transportadorRequest);
 		}
 		catch (Exception e)
 		{

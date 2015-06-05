@@ -17,38 +17,40 @@ pgsi.pages.funcionario = {
 	// Returns link for edit view
 	fnCreateFuncionarioNameLink : function (val, type, full)
 	{console.log(full)
-	var sCnpj="";
+
 		if (type !== "display")
 		{
 			return val;
 		}
+			return '<a title="View/Edit ' + full.nome + '" href="#/funcionario/view?tab=info&funcionarioId=' + full.id + '" class="edit_link">' + full.nome + '</a>';
+	},
+
+	fnCreateCPFLink : function (val, type, full)
+	{
+		var sCnpj="";
+		if (type !== "display")
+		{
+			return val;
+		}
+
 		for(var i=0;i<full.documentos.length;i++){
-			if(full.documentos[i].type == "CNPJ"){
+			if(full.documentos[i].descricao == "CPF"){
 				sCnpj = full.documentos[i].numero;
 			}
 		}
-			return '<a title="View/Edit ' + sCnpj + '" href="#/funcionario/view?tab=info&funcionarioId=' + full.id + '" class="edit_link">' + sCnpj + '</a>';
-	},
 
-	fnCreateNomeLink : function (val, type, full)
-	{
-		if (type !== "display")
-		{
-			return val;
-		}
-
-		return '<a title="View/Edit ' + full.nome + '" href="#/funcionario/view?tab=info&funcionarioId=' + full.id + '" class="edit_link">' + full.nome + '</a>';
+		return '<a title="View/Edit ' + sCnpj + '" href="#/funcionario/view?tab=info&funcionarioId=' + full.id + '" class="edit_link">' + sCnpj + '</a>';
 
 	},
-	fnCnae: function (val, type, full)
+	fnBeneficios: function (val, type, full)
 	{
 		if (type !== "display")
 		{
 			return val;
 		}
 		var sCnae ="";
-		for(var i=0;i<full.cnaes.length;i++){
-			sCnae = sCnae + full.cnaes[i].cnae  +" - <sup>"+full.cnaes[i].descricao+"</sup><br>" ;
+		for(var i=0;i<full.beneficios.length;i++){
+			sCnae = sCnae + full.beneficios[i].codigo  +" - <sup>"+full.beneficios[i].descricao+"</sup><br>" ;
 		}
 		return sCnae;
 

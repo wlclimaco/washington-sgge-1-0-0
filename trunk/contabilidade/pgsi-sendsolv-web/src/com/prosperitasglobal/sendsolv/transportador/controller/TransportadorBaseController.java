@@ -1,10 +1,18 @@
 package com.prosperitasglobal.sendsolv.transportador.controller;
 
-import java.util.logging.Logger;
-
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
+import com.prosperitasglobal.sendsolv.bai.IPessoaBAI;
+import com.prosperitasglobal.sendsolv.model.request.TransportadorInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.response.TransportadorResponse;
+import com.qat.framework.validation.ValidationUtil;
 
 public class TransportadorBaseController extends UtilControllerD
 {
@@ -17,9 +25,6 @@ public class TransportadorBaseController extends UtilControllerD
 
 	/** The Constant CONTROLLER_EXCEPTION_MSG. */
 	private static final String CONTROLLER_EXCEPTION_MSG = "PessoaBaseController";
-
-	/** The Constant ENROLLED_MEMBERS. */
-	private static final String ENROLLED_MEMBERS = "enrolled_members";
 
 	/** The Pessoa BAI. */
 	private IPessoaBAI pessoaBAI;
@@ -100,7 +105,7 @@ public class TransportadorBaseController extends UtilControllerD
 		try
 		{
 
-			transportadorResponse = getTransportadorBAI().fetchTransportadorByRequest(pagedInquiryRequest);
+			transportadorResponse = getPessoaBAI().fetchTransportadorByRequest(pagedInquiryRequest);
 
 		}
 		catch (Exception e)
@@ -127,7 +132,7 @@ public class TransportadorBaseController extends UtilControllerD
 		try
 		{
 
-			transportadorResponse = getTransportadorBAI().fetchTransportadorById(fetchByIdRequest);
+			transportadorResponse = getPessoaBAI().fetchTransportadorById(fetchByIdRequest);
 
 		}
 		catch (Exception e)

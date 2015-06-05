@@ -1,10 +1,18 @@
 package com.prosperitasglobal.sendsolv.fornecedor.controller;
 
-import java.util.logging.Logger;
-
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
+import com.prosperitasglobal.sendsolv.bai.IPessoaBAI;
+import com.prosperitasglobal.sendsolv.model.request.FornecedorInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.response.FornecedorResponse;
+import com.qat.framework.validation.ValidationUtil;
 
 public class FornecedorBaseController extends UtilControllerD
 {
@@ -97,7 +105,7 @@ public class FornecedorBaseController extends UtilControllerD
 		try
 		{
 
-			fornecedorResponse = getFornecedorBAI().fetchFornecedorByRequest(pagedInquiryRequest);
+			fornecedorResponse = getPessoaBAI().fetchFornecedorByRequest(pagedInquiryRequest);
 
 		}
 		catch (Exception e)
@@ -124,7 +132,7 @@ public class FornecedorBaseController extends UtilControllerD
 		try
 		{
 
-			fornecedorResponse = getFornecedorBAI().fetchFornecedorById(fetchByIdRequest);
+			fornecedorResponse = getPessoaBAI().fetchFornecedorById(fetchByIdRequest);
 
 		}
 		catch (Exception e)

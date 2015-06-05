@@ -1,10 +1,21 @@
 package com.prosperitasglobal.sendsolv.cliente.controller;
 
-import java.util.logging.Logger;
+import java.util.Calendar;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
+import com.prosperitasglobal.sendsolv.bai.IPessoaBAI;
+import com.prosperitasglobal.sendsolv.model.request.ClienteInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ClienteMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.ClienteResponse;
+import com.qat.framework.validation.ValidationUtil;
 
 public class ClienteBaseController extends UtilControllerD
 {
@@ -100,7 +111,7 @@ public class ClienteBaseController extends UtilControllerD
 		try
 		{
 
-			clienteResponse = getClienteBAI().fetchClienteByRequest(pagedInquiryRequest);
+			clienteResponse = getPessoaBAI().fetchClienteByRequest(pagedInquiryRequest);
 
 		}
 		catch (Exception e)
@@ -127,7 +138,7 @@ public class ClienteBaseController extends UtilControllerD
 		try
 		{
 
-			clienteResponse = getClienteBAI().fetchClienteById(fetchByIdRequest);
+			clienteResponse = getPessoaBAI().fetchClienteById(fetchByIdRequest);
 
 		}
 		catch (Exception e)
@@ -139,5 +150,62 @@ public class ClienteBaseController extends UtilControllerD
 		}
 
 		return clienteResponse;
+	}
+
+	public ClienteResponse edit(ClienteMaintenanceRequest clienteRequest)
+	{
+		ClienteResponse clienteResponse = new ClienteResponse();
+		try
+		{
+
+			clienteResponse = getPessoaBAI().updateCliente(clienteRequest);
+
+		}
+		catch (Exception e)
+		{
+			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			clienteResponse = null;
+		}
+		return clienteResponse;
+
+	}
+
+	public ClienteResponse delete(ClienteMaintenanceRequest clienteRequest)
+	{
+		ClienteResponse clienteResponse = new ClienteResponse();
+		try
+		{
+
+			clienteResponse = getPessoaBAI().deleteCliente(clienteRequest);
+
+		}
+		catch (Exception e)
+		{
+			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			clienteResponse = null;
+		}
+
+		return clienteResponse;
+
+	}
+
+	public ClienteResponse insert(ClienteMaintenanceRequest clienteRequest)
+	{
+		ClienteResponse clienteResponse = new ClienteResponse();
+
+		try
+		{
+
+			clienteRequest.getCliente().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
+			clienteResponse = getPessoaBAI().insertCliente(clienteRequest);
+		}
+		catch (Exception e)
+		{
+			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			clienteResponse = null;
+		}
+
+		return clienteResponse;
+
 	}
 }
