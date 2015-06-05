@@ -1,5 +1,7 @@
 package com.prosperitasglobal.sendsolv.model;
 
+import java.util.List;
+
 import com.prosperitasglobal.cbof.model.Note;
 
 /**
@@ -47,6 +49,89 @@ public class ContatoItens extends ModelCosmeDamiao
 	public void setId(Integer id)
 	{
 		this.id = id;
+	}
+
+	/**
+	 * @return the noteList
+	 */
+	public List<Note> getNoteList()
+	{
+		return noteList;
+	}
+
+	/**
+	 * @param noteList the noteList to set
+	 */
+	public void setNoteList(List<Note> noteList)
+	{
+		this.noteList = noteList;
+	}
+
+	/**
+	 * @return the motivo
+	 */
+	public ContatoTypeEnum getMotivo()
+	{
+		return motivo;
+	}
+
+	/**
+	 * @param motivo the motivo to set
+	 */
+	public void setMotivo(ContatoTypeEnum motivo)
+	{
+		this.motivo = motivo;
+	}
+
+	/**
+	 * @return the dataContato
+	 */
+	public Long getDataContato()
+	{
+		return DataContato;
+	}
+
+	/**
+	 * @param dataContato the dataContato to set
+	 */
+	public void setDataContato(Long dataContato)
+	{
+		DataContato = dataContato;
+	}
+
+	/**
+	 * @return the nomeContato
+	 */
+	public String getNomeContato()
+	{
+		return nomeContato;
+	}
+
+	/**
+	 * @param nomeContato the nomeContato to set
+	 */
+	public void setNomeContato(String nomeContato)
+	{
+		this.nomeContato = nomeContato;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "ContatoItens [getId()=" + getId() + ", getNoteList()=" + getNoteList() + ", getMotivo()=" + getMotivo()
+				+ ", getDataContato()=" + getDataContato() + ", getNomeContato()=" + getNomeContato()
+				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
+				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
+				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
+				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
+				+ ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()="
+				+ getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()="
+				+ getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + "]";
 	}
 
 }

@@ -17,57 +17,91 @@ public class BancoCC extends ModelCosmeDamiao
 
 	private double saldo;
 
-	/**
-	 * Gets the usuario.
-	 *
-	 * @return the usuario
-	 */
-	public String getUsuario()
+	public BancoCC()
 	{
-		return usuario;
+
 	}
 
 	/**
-	 * Sets the usuario.
-	 *
-	 * @param usuario the new usuario
+	 * @return the id
 	 */
-	public void setUsuario(String usuario)
+	public Integer getId()
 	{
-		this.usuario = usuario;
+		return id;
 	}
 
 	/**
-	 * Gets the empresa.
-	 *
-	 * @return the empresa
+	 * @param id the id to set
 	 */
-	public Integer getEmpresa()
+	public void setId(Integer id)
 	{
-		return empresa;
+		this.id = id;
 	}
 
 	/**
-	 * Sets the empresa.
-	 *
-	 * @param empresa the new empresa
+	 * @return the banco
 	 */
-	public void setEmpresa(Integer empresa)
+	public Banco getBanco()
 	{
-		this.empresa = empresa;
+		return banco;
+	}
+
+	/**
+	 * @param banco the banco to set
+	 */
+	public void setBanco(Banco banco)
+	{
+		this.banco = banco;
+	}
+
+	/**
+	 * @return the numeroConta
+	 */
+	public String getNumeroConta()
+	{
+		return numeroConta;
+	}
+
+	/**
+	 * @param numeroConta the numeroConta to set
+	 */
+	public void setNumeroConta(String numeroConta)
+	{
+		this.numeroConta = numeroConta;
+	}
+
+	/**
+	 * @return the saldo
+	 */
+	public double getSaldo()
+	{
+		return saldo;
+	}
+
+	/**
+	 * @param saldo the saldo to set
+	 */
+	public void setSaldo(double saldo)
+	{
+		this.saldo = saldo;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.model.ModelCosmeDamiao#toString()
+	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString()
 	{
-		return "Grupo [getId()=" + getId() + ", getType()=" + getType() + ", getTabela()=" + getTabela()
-				+ ", getAcao()=" + getAcao() + ", getRegistro()=" + getRegistro() + ", getData()=" + getData()
-				+ ", getUsuario()=" + getUsuario() + ", getEmpresa()=" + getEmpresa() + ", getParentId()="
-				+ getParentId() + ", toString()=" + super.toString() + "]";
+		return "BancoCC [getId()=" + getId() + ", getBanco()=" + getBanco() + ", getNumeroConta()=" + getNumeroConta()
+				+ ", getSaldo()=" + getSaldo() + ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()="
+				+ getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId()
+				+ ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()="
+				+ getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId()
+				+ ", getSite()=" + getSite() + ", toString()=" + super.toString() + ", getModelAction()="
+				+ getModelAction() + ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()="
+				+ getCreateDateUTC() + ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()="
+				+ getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
 	}
 
 }

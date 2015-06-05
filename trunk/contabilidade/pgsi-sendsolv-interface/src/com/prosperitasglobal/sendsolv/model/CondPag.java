@@ -1,5 +1,7 @@
 package com.prosperitasglobal.sendsolv.model;
 
+import java.util.List;
+
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -24,57 +26,124 @@ public class CondPag extends ModelCosmeDamiao
 	/** The bairro. */
 	private List<TipoPag> listTipoPag;
 
-	/**
-	 * Gets the usuario.
-	 *
-	 * @return the usuario
-	 */
-	public String getUsuario()
+	public CondPag()
 	{
-		return usuario;
+
 	}
 
 	/**
-	 * Sets the usuario.
-	 *
-	 * @param usuario the new usuario
+	 * @return the id
 	 */
-	public void setUsuario(String usuario)
+	public Integer getId()
 	{
-		this.usuario = usuario;
+		return id;
 	}
 
 	/**
-	 * Gets the empresa.
-	 *
-	 * @return the empresa
+	 * @param id the id to set
 	 */
-	public Integer getEmpresa()
+	public void setId(Integer id)
 	{
-		return empresa;
+		this.id = id;
 	}
 
 	/**
-	 * Sets the empresa.
-	 *
-	 * @param empresa the new empresa
+	 * @return the nome
 	 */
-	public void setEmpresa(Integer empresa)
+	public String getNome()
 	{
-		this.empresa = empresa;
+		return nome;
+	}
+
+	/**
+	 * @param nome the nome to set
+	 */
+	public void setNome(String nome)
+	{
+		this.nome = nome;
+	}
+
+	/**
+	 * @return the valorIni
+	 */
+	public double getValorIni()
+	{
+		return valorIni;
+	}
+
+	/**
+	 * @param valorIni the valorIni to set
+	 */
+	public void setValorIni(double valorIni)
+	{
+		this.valorIni = valorIni;
+	}
+
+	/**
+	 * @return the valorFin
+	 */
+	public double getValorFin()
+	{
+		return valorFin;
+	}
+
+	/**
+	 * @param valorFin the valorFin to set
+	 */
+	public void setValorFin(double valorFin)
+	{
+		this.valorFin = valorFin;
+	}
+
+	/**
+	 * @return the parcelas
+	 */
+	public Integer getParcelas()
+	{
+		return parcelas;
+	}
+
+	/**
+	 * @param parcelas the parcelas to set
+	 */
+	public void setParcelas(Integer parcelas)
+	{
+		this.parcelas = parcelas;
+	}
+
+	/**
+	 * @return the listTipoPag
+	 */
+	public List<TipoPag> getListTipoPag()
+	{
+		return listTipoPag;
+	}
+
+	/**
+	 * @param listTipoPag the listTipoPag to set
+	 */
+	public void setListTipoPag(List<TipoPag> listTipoPag)
+	{
+		this.listTipoPag = listTipoPag;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.model.ModelCosmeDamiao#toString()
+	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString()
 	{
-		return "Grupo [getId()=" + getId() + ", getType()=" + getType() + ", getTabela()=" + getTabela()
-				+ ", getAcao()=" + getAcao() + ", getRegistro()=" + getRegistro() + ", getData()=" + getData()
-				+ ", getUsuario()=" + getUsuario() + ", getEmpresa()=" + getEmpresa() + ", getParentId()="
-				+ getParentId() + ", toString()=" + super.toString() + "]";
+		return "CondPag [getId()=" + getId() + ", getNome()=" + getNome() + ", getValorIni()=" + getValorIni()
+				+ ", getValorFin()=" + getValorFin() + ", getParcelas()=" + getParcelas() + ", getListTipoPag()="
+				+ getListTipoPag() + ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()="
+				+ getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId()
+				+ ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()="
+				+ getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId()
+				+ ", getSite()=" + getSite() + ", toString()=" + super.toString() + ", getModelAction()="
+				+ getModelAction() + ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()="
+				+ getCreateDateUTC() + ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()="
+				+ getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
 	}
 
 }

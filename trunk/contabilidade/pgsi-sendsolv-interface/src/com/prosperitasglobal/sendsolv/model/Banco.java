@@ -1,9 +1,6 @@
 package com.prosperitasglobal.sendsolv.model;
 
-import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
-import com.prosperitasglobal.cbof.model.Country;
-import com.prosperitasglobal.cbof.model.FilingStatusEnum;
-import com.prosperitasglobal.cbof.model.StateProvinceRegion;
+import java.util.List;
 
 /**
  * The Class Document represents a generic formal business or personal document, such as driver's license or bylaws.
@@ -48,253 +45,35 @@ public class Banco extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the document type.
-	 *
-	 * @return the document type
+	 * @return the nome
 	 */
-	public DocumentType getDocumentType()
+	public String getNome()
 	{
-		return documentType;
+		return nome;
 	}
 
 	/**
-	 * Sets the document type.
-	 *
-	 * @param documentType the document type
+	 * @param nome the nome to set
 	 */
-	public void setDocumentType(DocumentType documentType)
+	public void setNome(String nome)
 	{
-		this.documentType = documentType;
+		this.nome = nome;
 	}
 
 	/**
-	 * Gets the keyword text.
-	 *
-	 * @return the keyword text
+	 * @return the agenciaList
 	 */
-	public String getKeywordText()
+	public List<Agencia> getAgenciaList()
 	{
-		return keywordText;
+		return agenciaList;
 	}
 
 	/**
-	 * Sets the keyword text.
-	 *
-	 * @param keywordText the keyword text
+	 * @param agenciaList the agenciaList to set
 	 */
-	public void setKeywordText(String keywordText)
+	public void setAgenciaList(List<Agencia> agenciaList)
 	{
-		this.keywordText = keywordText;
-	}
-
-	/**
-	 * Gets the is filed.
-	 *
-	 * @return the checks if is filed
-	 */
-	public Boolean getIsActionRequired()
-	{
-		return isActionRequired;
-	}
-
-	/**
-	 * Sets the is filed.
-	 *
-	 * @param isActionRequired the checks if is action required
-	 */
-	public void setIsActionRequired(Boolean isActionRequired)
-	{
-		this.isActionRequired = isActionRequired;
-	}
-
-	/**
-	 * Gets the status.
-	 *
-	 * @return the status
-	 */
-	public FilingStatusEnum getFilingStatus()
-	{
-		return filingStatus;
-	}
-
-	/**
-	 * Sets the status.
-	 *
-	 * @param status the status
-	 */
-	public void setFilingStatus(FilingStatusEnum status)
-	{
-		filingStatus = status;
-	}
-
-	/**
-	 * Gets the status value.
-	 *
-	 * @return the status value
-	 */
-	public Integer getFilingStatusValue()
-	{
-		if (filingStatus == null)
-		{
-			return null;
-		}
-
-		return filingStatus.getValue();
-	}
-
-	/**
-	 * Sets the status value.
-	 *
-	 * @param statusValue the status value
-	 */
-	public void setFilingStatusValue(Integer statusValue)
-	{
-		filingStatus = FilingStatusEnum.enumForValue(statusValue);
-	}
-
-	/**
-	 * Gets the note text.
-	 *
-	 * @return the note text
-	 */
-	public String getNoteText()
-	{
-		return noteText;
-	}
-
-	/**
-	 * Sets the note text.
-	 *
-	 * @param noteText the note text
-	 */
-	public void setNoteText(String noteText)
-	{
-		this.noteText = noteText;
-	}
-
-	/**
-	 * Gets the parent key type.
-	 *
-	 * @return the parent key type
-	 */
-	public BusinessTypeEnum getParentKeyType()
-	{
-		return parentKeyType;
-	}
-
-	/**
-	 * Sets the parent key type.
-	 *
-	 * @param parentKeyType the parent key type
-	 */
-	public void setParentKeyType(BusinessTypeEnum parentKeyType)
-	{
-		this.parentKeyType = parentKeyType;
-	}
-
-	/**
-	 * Gets the parent key value.
-	 *
-	 * @return the parent key value
-	 */
-	public Integer getParentKeyValue()
-	{
-		if (parentKeyType == null)
-		{
-			return null;
-		}
-
-		return parentKeyType.getValue();
-	}
-
-	/**
-	 * Sets the parent key value.
-	 *
-	 * @param parentKeyValue the parent key value
-	 */
-	public void setParentKeyValue(Integer parentKeyValue)
-	{
-		parentKeyType = BusinessTypeEnum.enumForValue(parentKeyValue);
-	}
-
-	/**
-	 * Gets the expiration date. If this date has a time portion, it will be removed. This attribute is only a date.
-	 *
-	 * @return the expiration date
-	 */
-	public Long getExpirationDate()
-	{
-		return expirationDate;
-	}
-
-	/**
-	 * Sets the expiration date.
-	 *
-	 * @param expirationDate the expiration date
-	 */
-	public void setExpirationDate(Long expirationDate)
-	{
-		this.expirationDate = expirationDate;
-	}
-
-	/**
-	 * Gets the issue country.
-	 *
-	 * @return the issue country
-	 */
-	public Country getIssueCountry()
-	{
-		return issueCountry;
-	}
-
-	/**
-	 * Sets the issue country.
-	 *
-	 * @param issueCountry the issue country
-	 */
-	public void setIssueCountry(Country issueCountry)
-	{
-		this.issueCountry = issueCountry;
-	}
-
-	/**
-	 * Gets the value.
-	 *
-	 * @return the value
-	 */
-	public String getValue()
-	{
-		return value;
-	}
-
-	/**
-	 * Sets the value.
-	 *
-	 * @param value the value
-	 */
-	public void setValue(String value)
-	{
-		this.value = value;
-	}
-
-	/**
-	 * Gets the issue state province region.
-	 *
-	 * @return the issue state province region
-	 */
-	public StateProvinceRegion getIssueStateProvinceRegion()
-	{
-		return issueStateProvinceRegion;
-	}
-
-	/**
-	 * Sets the issue state province region.
-	 *
-	 * @param issueStateProvinceRegion the issue state province region
-	 */
-	public void setIssueStateProvinceRegion(StateProvinceRegion issueStateProvinceRegion)
-	{
-		this.issueStateProvinceRegion = issueStateProvinceRegion;
+		this.agenciaList = agenciaList;
 	}
 
 	/*
@@ -304,14 +83,15 @@ public class Banco extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Document [getId()=" + getId() + ", getDocumentType()=" + getDocumentType() + ", getKeywordText()="
-				+ getKeywordText() + ", getIsActionRequired()=" + getIsActionRequired() + ", getFilingStatus()="
-				+ getFilingStatus() + ", getFilingStatusValue()=" + getFilingStatusValue() + ", getNoteText()="
-				+ getNoteText() + ", getParentKeyType()=" + getParentKeyType()
-				+ ", getParentKeyValue()=" + getParentKeyValue() + ", getExpirationDate()=" + getExpirationDate()
-				+ ", getIssueCountry()=" + getIssueCountry() + ", getValue()=" + getValue()
-				+ ", getIssueStateProvinceRegion()=" + getIssueStateProvinceRegion() + ", toString()="
-				+ super.toString() + "]";
+		return "Banco [getId()=" + getId() + ", getNome()=" + getNome() + ", getAgenciaList()=" + getAgenciaList()
+				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
+				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
+				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
+				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
+				+ ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()="
+				+ getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()="
+				+ getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + "]";
 	}
 
 }

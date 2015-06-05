@@ -1,10 +1,8 @@
 package com.prosperitasglobal.sendsolv.model;
 
-import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
-import com.prosperitasglobal.cbof.model.Country;
-import com.prosperitasglobal.cbof.model.FilingStatusEnum;
+import java.util.List;
+
 import com.prosperitasglobal.cbof.model.Note;
-import com.prosperitasglobal.cbof.model.StateProvinceRegion;
 
 /**
  * The Class Document represents a generic formal business or personal document, such as driver's license or bylaws.
@@ -61,253 +59,131 @@ public class Convenio extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the document type.
-	 *
-	 * @return the document type
+	 * @return the nome
 	 */
-	public DocumentType getDocumentType()
+	public String getNome()
 	{
-		return documentType;
+		return nome;
 	}
 
 	/**
-	 * Sets the document type.
-	 *
-	 * @param documentType the document type
+	 * @param nome the nome to set
 	 */
-	public void setDocumentType(DocumentType documentType)
+	public void setNome(String nome)
 	{
-		this.documentType = documentType;
+		this.nome = nome;
 	}
 
 	/**
-	 * Gets the keyword text.
-	 *
-	 * @return the keyword text
+	 * @return the dataini
 	 */
-	public String getKeywordText()
+	public Long getDataini()
 	{
-		return keywordText;
+		return dataini;
 	}
 
 	/**
-	 * Sets the keyword text.
-	 *
-	 * @param keywordText the keyword text
+	 * @param dataini the dataini to set
 	 */
-	public void setKeywordText(String keywordText)
+	public void setDataini(Long dataini)
 	{
-		this.keywordText = keywordText;
+		this.dataini = dataini;
 	}
 
 	/**
-	 * Gets the is filed.
-	 *
-	 * @return the checks if is filed
+	 * @return the dataFin
 	 */
-	public Boolean getIsActionRequired()
+	public Long getDataFin()
 	{
-		return isActionRequired;
+		return dataFin;
 	}
 
 	/**
-	 * Sets the is filed.
-	 *
-	 * @param isActionRequired the checks if is action required
+	 * @param dataFin the dataFin to set
 	 */
-	public void setIsActionRequired(Boolean isActionRequired)
+	public void setDataFin(Long dataFin)
 	{
-		this.isActionRequired = isActionRequired;
+		this.dataFin = dataFin;
 	}
 
 	/**
-	 * Gets the status.
-	 *
-	 * @return the status
+	 * @return the porcentagem
 	 */
-	public FilingStatusEnum getFilingStatus()
+	public Double getPorcentagem()
 	{
-		return filingStatus;
+		return porcentagem;
 	}
 
 	/**
-	 * Sets the status.
-	 *
-	 * @param status the status
+	 * @param porcentagem the porcentagem to set
 	 */
-	public void setFilingStatus(FilingStatusEnum status)
+	public void setPorcentagem(Double porcentagem)
 	{
-		filingStatus = status;
+		this.porcentagem = porcentagem;
 	}
 
 	/**
-	 * Gets the status value.
-	 *
-	 * @return the status value
+	 * @return the valor
 	 */
-	public Integer getFilingStatusValue()
+	public Double getValor()
 	{
-		if (filingStatus == null)
-		{
-			return null;
-		}
-
-		return filingStatus.getValue();
+		return valor;
 	}
 
 	/**
-	 * Sets the status value.
-	 *
-	 * @param statusValue the status value
+	 * @param valor the valor to set
 	 */
-	public void setFilingStatusValue(Integer statusValue)
+	public void setValor(Double valor)
 	{
-		filingStatus = FilingStatusEnum.enumForValue(statusValue);
+		this.valor = valor;
 	}
 
 	/**
-	 * Gets the note text.
-	 *
-	 * @return the note text
+	 * @return the notes
 	 */
-	public String getNoteText()
+	public List<Note> getNotes()
 	{
-		return noteText;
+		return notes;
 	}
 
 	/**
-	 * Sets the note text.
-	 *
-	 * @param noteText the note text
+	 * @param notes the notes to set
 	 */
-	public void setNoteText(String noteText)
+	public void setNotes(List<Note> notes)
 	{
-		this.noteText = noteText;
+		this.notes = notes;
 	}
 
 	/**
-	 * Gets the parent key type.
-	 *
-	 * @return the parent key type
+	 * @return the listCondPag
 	 */
-	public BusinessTypeEnum getParentKeyType()
+	public List<CondPag> getListCondPag()
 	{
-		return parentKeyType;
+		return listCondPag;
 	}
 
 	/**
-	 * Sets the parent key type.
-	 *
-	 * @param parentKeyType the parent key type
+	 * @param listCondPag the listCondPag to set
 	 */
-	public void setParentKeyType(BusinessTypeEnum parentKeyType)
+	public void setListCondPag(List<CondPag> listCondPag)
 	{
-		this.parentKeyType = parentKeyType;
+		this.listCondPag = listCondPag;
 	}
 
 	/**
-	 * Gets the parent key value.
-	 *
-	 * @return the parent key value
+	 * @return the listTipoPag
 	 */
-	public Integer getParentKeyValue()
+	public List<TipoPag> getListTipoPag()
 	{
-		if (parentKeyType == null)
-		{
-			return null;
-		}
-
-		return parentKeyType.getValue();
+		return listTipoPag;
 	}
 
 	/**
-	 * Sets the parent key value.
-	 *
-	 * @param parentKeyValue the parent key value
+	 * @param listTipoPag the listTipoPag to set
 	 */
-	public void setParentKeyValue(Integer parentKeyValue)
+	public void setListTipoPag(List<TipoPag> listTipoPag)
 	{
-		parentKeyType = BusinessTypeEnum.enumForValue(parentKeyValue);
-	}
-
-	/**
-	 * Gets the expiration date. If this date has a time portion, it will be removed. This attribute is only a date.
-	 *
-	 * @return the expiration date
-	 */
-	public Long getExpirationDate()
-	{
-		return expirationDate;
-	}
-
-	/**
-	 * Sets the expiration date.
-	 *
-	 * @param expirationDate the expiration date
-	 */
-	public void setExpirationDate(Long expirationDate)
-	{
-		this.expirationDate = expirationDate;
-	}
-
-	/**
-	 * Gets the issue country.
-	 *
-	 * @return the issue country
-	 */
-	public Country getIssueCountry()
-	{
-		return issueCountry;
-	}
-
-	/**
-	 * Sets the issue country.
-	 *
-	 * @param issueCountry the issue country
-	 */
-	public void setIssueCountry(Country issueCountry)
-	{
-		this.issueCountry = issueCountry;
-	}
-
-	/**
-	 * Gets the value.
-	 *
-	 * @return the value
-	 */
-	public String getValue()
-	{
-		return value;
-	}
-
-	/**
-	 * Sets the value.
-	 *
-	 * @param value the value
-	 */
-	public void setValue(String value)
-	{
-		this.value = value;
-	}
-
-	/**
-	 * Gets the issue state province region.
-	 *
-	 * @return the issue state province region
-	 */
-	public StateProvinceRegion getIssueStateProvinceRegion()
-	{
-		return issueStateProvinceRegion;
-	}
-
-	/**
-	 * Sets the issue state province region.
-	 *
-	 * @param issueStateProvinceRegion the issue state province region
-	 */
-	public void setIssueStateProvinceRegion(StateProvinceRegion issueStateProvinceRegion)
-	{
-		this.issueStateProvinceRegion = issueStateProvinceRegion;
+		this.listTipoPag = listTipoPag;
 	}
 
 	/*
@@ -317,14 +193,17 @@ public class Convenio extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Document [getId()=" + getId() + ", getDocumentType()=" + getDocumentType() + ", getKeywordText()="
-				+ getKeywordText() + ", getIsActionRequired()=" + getIsActionRequired() + ", getFilingStatus()="
-				+ getFilingStatus() + ", getFilingStatusValue()=" + getFilingStatusValue() + ", getNoteText()="
-				+ getNoteText() + ", getParentId()=" + getParentId() + ", getParentKeyType()=" + getParentKeyType()
-				+ ", getParentKeyValue()=" + getParentKeyValue() + ", getExpirationDate()=" + getExpirationDate()
-				+ ", getIssueCountry()=" + getIssueCountry() + ", getValue()=" + getValue()
-				+ ", getIssueStateProvinceRegion()=" + getIssueStateProvinceRegion() + ", toString()="
-				+ super.toString() + "]";
+		return "Convenio [getId()=" + getId() + ", getNome()=" + getNome() + ", getDataini()=" + getDataini()
+				+ ", getDataFin()=" + getDataFin() + ", getPorcentagem()=" + getPorcentagem() + ", getValor()="
+				+ getValor() + ", getNotes()=" + getNotes() + ", getListCondPag()=" + getListCondPag()
+				+ ", getListTipoPag()=" + getListTipoPag() + ", getTabelaEnumValue()=" + getTabelaEnumValue()
+				+ ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue()
+				+ ", getParentId()=" + getParentId() + ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType()
+				+ ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()="
+				+ getEmprId() + ", getSite()=" + getSite() + ", toString()=" + super.toString() + ", getModelAction()="
+				+ getModelAction() + ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()="
+				+ getCreateDateUTC() + ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()="
+				+ getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
 	}
 
 }

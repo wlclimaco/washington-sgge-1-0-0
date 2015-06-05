@@ -28,9 +28,9 @@
    <result property="id" column="id" />
     <result property="cdEmpr" column="cdEmpr" />
    	<result property="nome" column="nome"/>
-	<result property="type" column="type"/>
+	<result property="pessoaTypeEnumValue" column="type"/>
 	<result property="sexo" column="sexo"/>
-	<result property="dataNasc" column="dataNasc"/>
+	<result property="datanasc" column="datanasc"/>
 	<result property="nomePai" column="nomePai"/>
 	<result property="nomeMae" column="nomeMae"/>
 	<result property="nomeConjugue" column="nomeConjugue"/>
@@ -57,7 +57,6 @@
   <sql id="allClienteColumns">
 		 b.cdEmpr
 		,b.nome
-		,b.regime
 		,b.type
 		,b.sexo
 		,b.dataNasc
@@ -74,8 +73,7 @@
   <sql id="allClienteValues">
   		#{cdEmpr},
   		#{nome},
-  		#{regime},
-  		#{typeValue},
+  		#{pessoaTypeEnumValue},
   		#{sexo},
   		#{dataNasc},
   		#{nomePai},
@@ -124,7 +122,7 @@
  	-->
   <select id="fetchClienteRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
-        FROM pessoa
+        FROM pessoa where type = 1
 
   </select>
 
@@ -146,7 +144,7 @@
     						<include refid="allClienteColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM pessoa b
-						where 1 = 1
+						where type = 1
 					<if test="parentId != null">
 						AND b.id = #{id}
 					</if>
