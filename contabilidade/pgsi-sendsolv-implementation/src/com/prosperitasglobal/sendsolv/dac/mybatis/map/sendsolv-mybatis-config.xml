@@ -13,29 +13,40 @@
   	<typeAliases>
 
 		<typeAlias alias="QATModel"  									 type="com.qat.framework.model.QATModel" />
-				<typeAlias alias="QATModelOL"									 type="com.qat.framework.model.QATModelOL" />
+				<typeAlias alias="QATModelOL"							 type="com.qat.framework.model.QATModelOL" />
 		<typeAlias alias="AcaoEnum"									 	 type="com.prosperitasglobal.sendsolv.model.AcaoEnum" />
 		<typeAlias alias="TabelaEnum"									 type="com.prosperitasglobal.sendsolv.model.TabelaEnum" />
 		<typeAlias alias="TypeEnum"									 	 type="com.prosperitasglobal.sendsolv.model.TypeEnum" />
+		<typeAlias alias="PessoaTypeEnum"							 	 type="com.prosperitasglobal.sendsolv.model.PessoaTypeEnum" />
 
 		<typeAlias alias="PagedInquiryRequest"     						 type="com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest"/>
 		<typeAlias alias="Arquivo"              				 		 type="com.prosperitasglobal.sendsolv.model.Arquivo"/>
+		<typeAlias alias="Agencia"              				 		 type="com.prosperitasglobal.sendsolv.model.Agencia"/>
 		<typeAlias alias="Atributos"              				 		 type="com.prosperitasglobal.sendsolv.model.Atributos"/>
 		<typeAlias alias="Banco"              				 		     type="com.prosperitasglobal.sendsolv.model.Banco"/>
+		<typeAlias alias="BancoCC"              				 	     type="com.prosperitasglobal.sendsolv.model.BancoCC"/>
 		<typeAlias alias="Beneficios"              				 		 type="com.prosperitasglobal.sendsolv.model.Beneficios"/>
 		<typeAlias alias="Cfop"              				 		     type="com.prosperitasglobal.sendsolv.model.Cfop"/>
 		<typeAlias alias="Cnae"              				 		     type="com.prosperitasglobal.sendsolv.model.Cnae"/>
+		<typeAlias alias="Cidade"              				 		     type="com.prosperitasglobal.sendsolv.model.Cidade"/>
+		<typeAlias alias="Cliente"              				 		 type="com.prosperitasglobal.sendsolv.model.Cliente"/>
+		<typeAlias alias="CondPag"              				 		 type="com.prosperitasglobal.sendsolv.model.CondPag"/>
+		<typeAlias alias="Contato"              				 		 type="com.prosperitasglobal.sendsolv.model.Contato"/>
+		<typeAlias alias="ContatoItens"              				 	 type="com.prosperitasglobal.sendsolv.model.ContatoItens"/>
 		<typeAlias alias="ContasReceber"              				 	 type="com.prosperitasglobal.sendsolv.model.ContaReceber"/>
 		<typeAlias alias="ContasPagar"              				 	 type="com.prosperitasglobal.sendsolv.model.ContasPagar"/>
 		<typeAlias alias="Convenio"              				 	     type="com.prosperitasglobal.sendsolv.model.Convenio"/>
+		<typeAlias alias="Csosn"              				 	         type="com.prosperitasglobal.sendsolv.model.Csosn"/>
 		<typeAlias alias="Documento"              				 	     type="com.prosperitasglobal.sendsolv.model.Documento"/>
 		<typeAlias alias="Email"              				 		     type="com.prosperitasglobal.sendsolv.model.Email"/>
 		<typeAlias alias="Empresa"              				 		 type="com.prosperitasglobal.sendsolv.model.Empresa"/>
 		<typeAlias alias="Endereco"              				 		 type="com.prosperitasglobal.sendsolv.model.Endereco"/>
+		<typeAlias alias="Estato"              				 		     type="com.prosperitasglobal.sendsolv.model.Estado"/>
 		<typeAlias alias="Eventos"              				 		 type="com.prosperitasglobal.sendsolv.model.Eventos"/>
 		<typeAlias alias="Field"              				 		 	 type="com.prosperitasglobal.sendsolv.model.Field"/>
 		<typeAlias alias="FieldBusca"              				 		 type="com.prosperitasglobal.sendsolv.model.FieldBusca"/>
 		<typeAlias alias="Financeiro"              				 	     type="com.prosperitasglobal.sendsolv.model.Financeiro"/>
+		<typeAlias alias="Fornecedor"              				 	     type="com.prosperitasglobal.sendsolv.model.Fornecedor"/>
 		<typeAlias alias="Funcionario"              				 	 type="com.prosperitasglobal.sendsolv.model.Funcionario"/>
 		<typeAlias alias="Grupo"              				 	         type="com.prosperitasglobal.sendsolv.model.Grupo"/>
 		<typeAlias alias="Historico"              				 	     type="com.prosperitasglobal.sendsolv.model.Historico"/>
@@ -45,7 +56,9 @@
 		<typeAlias alias="OrcamentoItens"              				 	 type="com.prosperitasglobal.sendsolv.model.OrcamentoItens"/>
 		<typeAlias alias="Pessoa"              				 	         type="com.prosperitasglobal.sendsolv.model.Pessoa"/>
 		<typeAlias alias="OrdemServico"              				 	 type="com.prosperitasglobal.sendsolv.model.OrdemServico"/>
+		<typeAlias alias="OrdemServicoItens"              			 	 type="com.prosperitasglobal.sendsolv.model.OrdemServicoItens"/>
 		<typeAlias alias="Produto"              				 	     type="com.prosperitasglobal.sendsolv.model.Produto"/>
+		<typeAlias alias="Profissao"              				 	     type="com.prosperitasglobal.sendsolv.model.Profissao"/>
 		<typeAlias alias="Status"              				 	     	 type="com.prosperitasglobal.sendsolv.model.Status"/>
 		<typeAlias alias="Salario"              				 	     type="com.prosperitasglobal.sendsolv.model.Salario"/>
 		<typeAlias alias="Socio"              				 		     type="com.prosperitasglobal.sendsolv.model.Socio"/>
@@ -54,15 +67,20 @@
 		<typeAlias alias="Tabs"              				 		 	 type="com.prosperitasglobal.sendsolv.model.Tabs"/>
 		<typeAlias alias="Tela"              				 		     type="com.prosperitasglobal.sendsolv.model.Tela"/>
 		<typeAlias alias="Telefone"              				 		 type="com.prosperitasglobal.sendsolv.model.Telefone"/>
+		<typeAlias alias="TipoPag"              				 		 type="com.prosperitasglobal.sendsolv.model.TipoPag"/>
+		<typeAlias alias="Transportador"              				 	 type="com.prosperitasglobal.sendsolv.model.Transportador"/>
 		<typeAlias alias="UniMed"              				 		     type="com.prosperitasglobal.sendsolv.model.UniMed"/>
 		<typeAlias alias="Regime"              				 		     type="com.prosperitasglobal.sendsolv.model.Regime"/>
 		<typeAlias alias="CnaeRel"              				 		 type="com.prosperitasglobal.sendsolv.model.CnaeRel"/>
 		<typeAlias alias="BeneficioMesApp"              				 type="com.prosperitasglobal.sendsolv.model.BeneficioMesApp"/>
-		<typeAlias alias="EmpresaInquiryRequest"              			type="com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest"/>
-		<typeAlias alias="CnaeInquiryRequest"              				type="com.prosperitasglobal.sendsolv.model.request.CnaeInquiryRequest"/>
-		<typeAlias alias="StatusInquiryRequest"              				type="com.prosperitasglobal.sendsolv.model.request.StatusInquiryRequest"/>
+		<typeAlias alias="EmpresaInquiryRequest"              			 type="com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest"/>
+		<typeAlias alias="CnaeInquiryRequest"              				 type="com.prosperitasglobal.sendsolv.model.request.CnaeInquiryRequest"/>
+		<typeAlias alias="StatusInquiryRequest"              			 type="com.prosperitasglobal.sendsolv.model.request.StatusInquiryRequest"/>
 		<typeAlias alias="FetchByIdRequest"              	             type="com.prosperitasglobal.cbof.model.request.FetchByIdRequest"/>
-		<typeAlias alias="FuncionarioInquiryRequest"              				type="com.prosperitasglobal.sendsolv.model.request.FuncionarioInquiryRequest"/>
+		<typeAlias alias="FuncionarioInquiryRequest"              		 type="com.prosperitasglobal.sendsolv.model.request.FuncionarioInquiryRequest"/>
+		<typeAlias alias="ClienteInquiryRequest"              		 	 type="com.prosperitasglobal.sendsolv.model.request.ClienteInquiryRequest"/>
+		<typeAlias alias="FornecedorInquiryRequest"              		 type="com.prosperitasglobal.sendsolv.model.request.FornecedorInquiryRequest"/>
+		<typeAlias alias="TransportadorInquiryRequest"              	 type="com.prosperitasglobal.sendsolv.model.request.TransportadorInquiryRequest"/>
   	</typeAliases>
 
 
@@ -78,14 +96,17 @@
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/historico.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/notafiscal.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/orcamento.xml" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/orcamentoItens.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/ordemServico.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/pessoa.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/produto.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/tabela.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/tela.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/atributos.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/cfop.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/cnae.xml" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/cliente.xml" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/fornecedor.xml" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/transportador.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/contasPagar.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/contasReceber.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/convenio.xml" />
@@ -95,7 +116,7 @@
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/field.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/grupoSubGrupo.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/horaFunc.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/orcamentoItens.xml" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/profissao.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/regime.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/salarios.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/socios.xml" />

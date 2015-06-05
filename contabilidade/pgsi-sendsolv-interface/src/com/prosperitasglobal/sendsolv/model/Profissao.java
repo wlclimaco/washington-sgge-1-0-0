@@ -1,6 +1,5 @@
 package com.prosperitasglobal.sendsolv.model;
 
-
 /**
  * The Class Organization represents a main {@link Business} that is signed up to use PGSi services. It owns one or more
  * {@link Location}
@@ -18,7 +17,7 @@ public class Profissao extends ModelCosmeDamiao
 	private Double renda;
 
 	/** The list of documents this organization contains. */
-	private Integer dataAdmissao;
+	private Long dataAdmissao;
 
 	/**
 	 * The Constructor.
@@ -79,7 +78,7 @@ public class Profissao extends ModelCosmeDamiao
 	/**
 	 * @return the dataAdmissao
 	 */
-	public Integer getDataAdmissao()
+	public Long getDataAdmissao()
 	{
 		return dataAdmissao;
 	}
@@ -87,7 +86,7 @@ public class Profissao extends ModelCosmeDamiao
 	/**
 	 * @param dataAdmissao the dataAdmissao to set
 	 */
-	public void setDataAdmissao(Integer dataAdmissao)
+	public void setDataAdmissao(Long dataAdmissao)
 	{
 		this.dataAdmissao = dataAdmissao;
 	}

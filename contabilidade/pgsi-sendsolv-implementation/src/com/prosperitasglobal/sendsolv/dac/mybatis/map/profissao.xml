@@ -112,7 +112,7 @@
 					where b.id = #{id}
   </select>
 
-  <select id="fetchAllProfissaosByRequest" parameterType="ProfissaoInquiryRequest" resultMap="profissaoResult">
+  <select id="fetchAllProfissaosByRequest" parameterType="PagedInquiryRequest" resultMap="profissaoResult">
      SELECT * FROM ( SELECT b.id,
     						<include refid="allProfissaoColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber

@@ -27,12 +27,12 @@ public class Pessoa extends ModelCosmeDamiao
 
 	private Integer estadoCivil;
 
-	private Integer datanasc;
+	private Long datanasc;
 
 	private String foto;
 
 	/** The type of an account. */
-	private PessoaTypeEnum type;
+	private PessoaTypeEnum pessoaTypeEnum;
 
 	/** The sexo. */
 	private Integer sexo;
@@ -65,6 +65,20 @@ public class Pessoa extends ModelCosmeDamiao
 	public Pessoa()
 	{
 		super();
+	}
+
+	public Integer getPessoaTypeEnumValue()
+	{
+		if (pessoaTypeEnum != null)
+		{
+			return pessoaTypeEnum.getValue();
+		}
+		return null;
+	}
+
+	public void setPessoaTypeEnumValue(Integer acaoTypeValue)
+	{
+		pessoaTypeEnum = PessoaTypeEnum.enumForValue(acaoTypeValue);
 	}
 
 	/**
@@ -170,7 +184,7 @@ public class Pessoa extends ModelCosmeDamiao
 	/**
 	 * @return the datanasc
 	 */
-	public Integer getDatanasc()
+	public Long getDatanasc()
 	{
 		return datanasc;
 	}
@@ -178,7 +192,7 @@ public class Pessoa extends ModelCosmeDamiao
 	/**
 	 * @param datanasc the datanasc to set
 	 */
-	public void setDatanasc(Integer datanasc)
+	public void setDatanasc(Long datanasc)
 	{
 		this.datanasc = datanasc;
 	}
@@ -200,11 +214,83 @@ public class Pessoa extends ModelCosmeDamiao
 	}
 
 	/**
-	 * @param type the type to set
+	 * @return the cdEmpr
 	 */
-	public void setType(PessoaTypeEnum type)
+	public Integer getCdEmpr()
 	{
-		this.type = type;
+		return cdEmpr;
+	}
+
+	/**
+	 * @param cdEmpr the cdEmpr to set
+	 */
+	public void setCdEmpr(Integer cdEmpr)
+	{
+		this.cdEmpr = cdEmpr;
+	}
+
+	/**
+	 * @return the pessoaTypeEnum
+	 */
+	public PessoaTypeEnum getPessoaTypeEnum()
+	{
+		return pessoaTypeEnum;
+	}
+
+	/**
+	 * @param pessoaTypeEnum the pessoaTypeEnum to set
+	 */
+	public void setPessoaTypeEnum(PessoaTypeEnum pessoaTypeEnum)
+	{
+		this.pessoaTypeEnum = pessoaTypeEnum;
+	}
+
+	/**
+	 * @return the formaPagamentoList
+	 */
+	public List<FormaPg> getFormaPagamentoList()
+	{
+		return formaPagamentoList;
+	}
+
+	/**
+	 * @param formaPagamentoList the formaPagamentoList to set
+	 */
+	public void setFormaPagamentoList(List<FormaPg> formaPagamentoList)
+	{
+		this.formaPagamentoList = formaPagamentoList;
+	}
+
+	/**
+	 * @return the condPagList
+	 */
+	public List<CondPag> getCondPagList()
+	{
+		return condPagList;
+	}
+
+	/**
+	 * @param condPagList the condPagList to set
+	 */
+	public void setCondPagList(List<CondPag> condPagList)
+	{
+		this.condPagList = condPagList;
+	}
+
+	/**
+	 * @return the contatoList
+	 */
+	public List<Contato> getContatoList()
+	{
+		return contatoList;
+	}
+
+	/**
+	 * @param contatoList the contatoList to set
+	 */
+	public void setContatoList(List<Contato> contatoList)
+	{
+		this.contatoList = contatoList;
 	}
 
 	/**
@@ -326,17 +412,23 @@ public class Pessoa extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Pessoa [getId()=" + getId() + ", getNome()=" + getNome() + ", getNomePai()=" + getNomePai()
-				+ ", getNomeMae()=" + getNomeMae() + ", getNomeConjugue()=" + getNomeConjugue() + ", getEstadoCivil()="
-				+ getEstadoCivil() + ", getDatanasc()=" + getDatanasc() + ", getFoto()=" + getFoto() + ", getType()="
-				+ getType() + ", getSexo()=" + getSexo() + ", getEnderecos()=" + getEnderecos() + ", getDocumentos()="
-				+ getDocumentos() + ", getEmails()=" + getEmails() + ", getTelefones()=" + getTelefones()
-				+ ", getNotes()=" + getNotes() + ", getBancos()=" + getBancos() + ", getParentId()=" + getParentId()
-				+ ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()="
-				+ getStatusList() + ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction()
-				+ ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC()
-				+ ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC()
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
+		return "Pessoa [getPessoaTypeEnumValue()=" + getPessoaTypeEnumValue() + ", getId()=" + getId() + ", getNome()="
+				+ getNome() + ", getNomePai()=" + getNomePai() + ", getNomeMae()=" + getNomeMae()
+				+ ", getNomeConjugue()=" + getNomeConjugue() + ", getEstadoCivil()=" + getEstadoCivil()
+				+ ", getDatanasc()=" + getDatanasc() + ", getFoto()=" + getFoto() + ", getCdEmpr()=" + getCdEmpr()
+				+ ", getPessoaTypeEnum()=" + getPessoaTypeEnum() + ", getFormaPagamentoList()="
+				+ getFormaPagamentoList() + ", getCondPagList()=" + getCondPagList() + ", getContatoList()="
+				+ getContatoList() + ", getSexo()=" + getSexo() + ", getEnderecos()=" + getEnderecos()
+				+ ", getDocumentos()=" + getDocumentos() + ", getEmails()=" + getEmails() + ", getTelefones()="
+				+ getTelefones() + ", getNotes()=" + getNotes() + ", getBancos()=" + getBancos()
+				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
+				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
+				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
+				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
+				+ ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()="
+				+ getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()="
+				+ getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + "]";
 	}
 
 }
