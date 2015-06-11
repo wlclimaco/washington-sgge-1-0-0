@@ -57,6 +57,8 @@
 		<typeAlias alias="Pessoa"              				 	         type="com.prosperitasglobal.sendsolv.model.Pessoa"/>
 		<typeAlias alias="OrdemServico"              				 	 type="com.prosperitasglobal.sendsolv.model.OrdemServico"/>
 		<typeAlias alias="OrdemServicoItens"              			 	 type="com.prosperitasglobal.sendsolv.model.OrdemServicoItens"/>
+		<typeAlias alias="OrdemServicoTypes"              			 	 type="com.prosperitasglobal.sendsolv.model.OrdemServicoTypes"/>
+		<typeAlias alias="OrdemServicoStatus"              			 	 type="com.prosperitasglobal.sendsolv.model.OrdemServicoStatus"/>
 		<typeAlias alias="Produto"              				 	     type="com.prosperitasglobal.sendsolv.model.Produto"/>
 		<typeAlias alias="Profissao"              				 	     type="com.prosperitasglobal.sendsolv.model.Profissao"/>
 		<typeAlias alias="Status"              				 	     	 type="com.prosperitasglobal.sendsolv.model.Status"/>
@@ -98,6 +100,7 @@
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/orcamento.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/orcamentoItens.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/ordemServico.xml" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/ordemServicoItens.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/produto.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/tabela.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/tela.xml" />
