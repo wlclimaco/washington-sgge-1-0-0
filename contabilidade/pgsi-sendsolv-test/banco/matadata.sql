@@ -1,3 +1,23 @@
+DROP TABLE  [dbo].[status];
+
+CREATE TABLE [dbo].[status](
+    [id]           [int] NOT NULL,
+    [dataStatus]   [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [parentId]     [int] NOT NULL,
+    [status] 	   [int] NOT NULL,
+    [acaoType]     [int] NOT NULL,
+    [tabelaEnum]   [int] NOT NULL,
+    [note]    	   [varchar](50) NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_status_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
 DROP TABLE [dbo].[regime];
 CREATE TABLE [dbo].[regime](
 	[id]           [int] NOT NULL,
@@ -25,6 +45,25 @@ INSERT INTO [dbo].[regime]
            (1,'Simples Nacional','Simples Nacional',1432783357778,'rod',14327833577780,'rod'),
 		   (2,'Lucro Real','Lucro Real',14327833577780,'rod',1000000,'rod'),
 		   (3,'Lucro Presumido','Lucro Presumido',14327833577780,'rod',1000000,'rod')
+
+INSERT INTO [dbo].[status]
+           ([id]
+           ,[dataStatus]
+           ,[parentId]
+           ,[status]
+           ,[acaoType]
+           ,[tabelaEnum]
+           ,[note]
+           ,[create_date]
+           ,[create_user]
+           ,[modify_date]
+           ,[modify_user])
+     VALUES
+           (1,14327833577780,1,1,1,0,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (2,14327833577780,2,2,1,0,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (3,14327833577780,3,3,1,0,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod')
+
+
 GO
 /** ---------------------------------------------------------------*/
 DROP TABLE [dbo].[empresa];
@@ -54,6 +93,13 @@ INSERT INTO [dbo].[empresa]
            (1,'Telhas Tecplan',1,1000000,'rod',1000000,'rod'),
 		   (2,'boteckin do damiao',2,1000000,'rod',1000000,'rod'),
 		   (3,'silvio casa de ração',3,1000000,'rod',1000000,'rod')
+
+
+	INSERT INTO [dbo].[status] ([id],[dataStatus],[parentId],[status],[acaoType],[tabelaEnum],[note],[create_date],[create_user],[modify_date],[modify_user]) VALUES
+
+           (4,14327833577780,1,1,1,1,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (5,14327833577780,2,2,1,1,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (6,14327833577780,3,3,1,1,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod')
 
 GO
 /** ---------------------------------------------------------------*/
@@ -99,6 +145,15 @@ INSERT INTO [dbo].[documento]
 		   (4,1,1,1,'IE','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
 		   (5,1,2,1,'RG','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
 		   (6,1,3,1,'CGC','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod')
+
+INSERT INTO [dbo].[status] ([id],[dataStatus],[parentId],[status],[acaoType],[tabelaEnum],[note],[create_date],[create_user],[modify_date],[modify_user]) VALUES
+
+           (7,14327833577780,1,1,1,2,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (8,14327833577780,2,1,1,2,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (9,14327833577780,3,1,1,2,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (10,14327833577780,4,1,1,2,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (11,14327833577780,5,1,1,2,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (12,14327833577780,6,1,1,2,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod')
 GO
 
 /** ---------------------------------------------------------------*/
@@ -139,6 +194,15 @@ INSERT INTO [dbo].[email]
 		   (4,1,1,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
 		   (5,1,2,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
 		   (6,1,3,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod')
+
+		   INSERT INTO [dbo].[status] ([id],[dataStatus],[parentId],[status],[acaoType],[tabelaEnum],[note],[create_date],[create_user],[modify_date],[modify_user]) VALUES
+
+           (13,14327833577780,1,1,1,3,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (14,14327833577780,2,1,1,3,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (15,14327833577780,3,1,1,3,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (16,14327833577780,4,1,1,3,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (17,14327833577780,5,1,1,3,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (18,14327833577780,6,1,1,3,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod')
 GO
 
 /** ---------------------------------------------------------------*/
@@ -186,6 +250,15 @@ INSERT INTO [dbo].[endereco]
 		   (4,1,1,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
 		   (5,1,2,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
 		   (6,1,3,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod')
+
+INSERT INTO [dbo].[status] ([id],[dataStatus],[parentId],[status],[acaoType],[tabelaEnum],[note],[create_date],[create_user],[modify_date],[modify_user]) VALUES
+
+           (19,14327833577780,1,1,1,4,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (20,14327833577780,2,1,1,4,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (21,14327833577780,3,1,1,4,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (22,14327833577780,4,1,1,4,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (23,14327833577780,5,1,1,4,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (24,14327833577780,6,1,1,4,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod')
 GO
 /** ---------------------------------------------------------------*/
 
@@ -227,6 +300,17 @@ INSERT INTO [dbo].[telefone]
 		   (6,1,2,1,'034','91782776',1432783357778,'system',1432783357778,'system'),
 		   (7,1,3,1,'034','91782776',1432783357778,'system',1432783357778,'system'),
 		   (8,1,3,1,'034','91782776',1432783357778,'system',1432783357778,'system')
+
+		   INSERT INTO [dbo].[status] ([id],[dataStatus],[parentId],[status],[acaoType],[tabelaEnum],[note],[create_date],[create_user],[modify_date],[modify_user]) VALUES
+
+           (25,14327833577780,1,1,1,5,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (26,14327833577780,2,1,1,5,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (27,14327833577780,3,1,1,5,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (28,14327833577780,4,1,1,5,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (29,14327833577780,5,1,1,5,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (30,14327833577780,6,1,1,5,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (31,14327833577780,7,1,1,5,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (32,14327833577780,8,1,1,5,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod')
 GO
 
 
@@ -239,8 +323,8 @@ CREATE TABLE [dbo].[socio](
 	[id]           [int] NOT NULL,
 	[parentId]	   [int] NULL,
 	[nome]         [varchar](200) NULL,
-	[cota]         [varchar](10) NULL,
-	[porcentagem]  [varchar](10) NULL,
+	[cota]         real NULL,
+	[porcentagem]  real NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -251,6 +335,27 @@ CONSTRAINT [pk_socios_id] PRIMARY KEY CLUSTERED
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+
+INSERT INTO [dbo].[socio] ([id],[parentId],[nome],[cota],[porcentagem],[create_date],[create_user],[modify_date],[modify_user]) VALUES
+	 (1,1,'ze das coves',1,50,14327833577780,'rod',14327833577780,'rod'),
+	 (2,1,'ze das coves',1,50,14327833577780,'rod',14327833577780,'rod'),
+	 (3,2,'ze das coves',1,50,14327833577780,'rod',14327833577780,'rod'),
+	 (4,2,'ze das coves',1,50,14327833577780,'rod',14327833577780,'rod'),
+	 (5,3,'ze das coves',1,50,14327833577780,'rod',14327833577780,'rod'),
+	 (6,3,'ze das coves',1,50,14327833577780,'rod',14327833577780,'rod')
+
+
+
+		   INSERT INTO [dbo].[status] ([id],[dataStatus],[parentId],[status],[acaoType],[tabelaEnum],[note],[create_date],[create_user],[modify_date],[modify_user]) VALUES
+
+           (33,14327833577780,1,1,1,6,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (34,14327833577780,2,1,1,6,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (35,14327833577780,3,1,1,6,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (36,14327833577780,4,1,1,6,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (37,14327833577780,5,1,1,6,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (38,14327833577780,6,1,1,6,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (39,14327833577100,1,2,1,6,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (40,14327833577100,2,2,1,6,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod')
 /** ---------------------------------------------------------------*/
 DROP TABLE [dbo].[historico];
 CREATE TABLE [dbo].[historico] (
@@ -273,6 +378,8 @@ CONSTRAINT [pk_historico_id] PRIMARY KEY CLUSTERED
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+
+
 /** ---------------------------------------------------------------*/
 CREATE TABLE [dbo].[CNAE] (
     [CODIGO]     [VARCHAR](6) NOT NULL,
@@ -381,50 +488,6 @@ INSERT INTO [dbo].[cnaePorRelacionamento]
 		   (10,'000011',1,1,14327833577780,'system' ,14327833577780,'system')
 GO
 /** --------------------------------------------------------------- */
-DROP TABLE  [dbo].[status];
-
-CREATE TABLE [dbo].[status](
-    [id]           [int] NOT NULL,
-    [dataStatus]   [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
-    [parentId]     [int] NOT NULL,
-    [status] 	   [int] NOT NULL,
-    [acaoType]     [int] NOT NULL,
-    [tabelaEnum]   [int] NOT NULL,
-    [note]    	   [varchar](50) NULL,
-	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
-    [create_user]  [varchar](50) NULL,
-    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
-    [modify_user]  [varchar](50) NULL,
-CONSTRAINT [pk_status_id] PRIMARY KEY CLUSTERED
-(
-	[id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-
-INSERT INTO [dbo].[status]
-           ([id]
-           ,[dataStatus]
-           ,[parentId]
-           ,[status]
-           ,[acaoType]
-           ,[tabelaEnum]
-           ,[note]
-           ,[create_date]
-           ,[create_user]
-           ,[modify_date]
-           ,[modify_user])
-     VALUES
-           (1,14327833577780,1,1,1,1,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
-		   (2,14327833577780,2,2,1,2,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
-		   (3,14327833577780,3,3,1,1,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
-		   (4,14327833577780,1,1,2,1,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
-		   (5,14327833577780,2,2,2,2,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
-		   (6,14327833577780,3,3,2,3,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
-		   (7,14327833577780,1,3,3,3,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
-		   (8,14327833577780,2,2,3,1,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
-		   (9,14327833577780,3,1,3,6,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
-		   (10,14327833577780,1,1,4,7,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod')
-GO
 
 /** ---------------------------------------------------------------*/
 
@@ -465,6 +528,26 @@ INSERT INTO [dbo].[funcionario]
 		   (13,3,'8460','8460',14327833577780,14327833577780 ,'system' ,14327833577780,'system'),
 		   (14,3,'8460','8460',14327833577780,14327833577780 ,'system' ,14327833577780,'system'),
 		   (15,3,'8460','8460',14327833577780,14327833577780 ,'system' ,14327833577780,'system')
+
+
+INSERT INTO [dbo].[status] ([id],[dataStatus],[parentId],[status],[acaoType],[tabelaEnum],[note],[create_date],[create_user],[modify_date],[modify_user]) VALUES
+
+           (41,14327833577780,1,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (42,14327833577780,2,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (43,14327833577780,3,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (44,14327833577780,4,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (45,14327833577780,5,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (46,14327833577780,6,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (47,14327833577100,1,2,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (48,14327833577100,2,2,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (49,14327833577780,1,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (50,14327833577780,2,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (51,14327833577780,3,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (52,14327833577780,4,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (53,14327833577780,5,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (54,14327833577780,6,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (55,14327833577100,1,2,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (56,14327833577100,2,2,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod')
 
 GO
 
@@ -1004,6 +1087,75 @@ INSERT INTO [dbo].[Pessoa]
 		   (61,'washington',3,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
 		   (62,'washington',3,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
 		   (63,'washington',3,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System')
+
+
+		INSERT INTO [dbo].[status] ([id],[dataStatus],[parentId],[status],[acaoType],[tabelaEnum],[note],[create_date],[create_user],[modify_date],[modify_user]) VALUES
+
+           (57,14327833577780,1,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (58,14327833577780,2,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (59,14327833577780,3,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (60,14327833577780,4,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (61,14327833577780,5,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (62,14327833577780,6,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (63,14327833577100,7,2,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (64,14327833577100,8,2,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (65,14327833577780,9,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (66,14327833577780,10,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (67,14327833577780,11,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (68,14327833577780,12,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (69,14327833577780,13,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (70,14327833577780,14,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (71,14327833577100,15,2,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (72,14327833577100,16,2,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (73,14327833577780,17,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (74,14327833577780,18,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (75,14327833577780,19,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (76,14327833577780,20,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (77,14327833577780,21,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (78,14327833577780,22,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (79,14327833577100,23,2,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (80,14327833577100,24,2,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (81,14327833577780,25,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (82,14327833577780,26,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (83,14327833577780,27,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (84,14327833577780,28,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (85,14327833577780,29,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (86,14327833577780,30,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (87,14327833577100,31,2,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (88,14327833577100,32,2,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (89,14327833577780,33,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (90,14327833577780,34,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (91,14327833577780,35,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (92,14327833577780,36,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (93,14327833577780,37,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (94,14327833577780,38,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (95,14327833577100,39,2,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (96,14327833577100,40,2,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (97,14327833577780,41,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (98,14327833577780,42,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (99,14327833577780,43,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (100,14327833577780,44,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (101,14327833577780,45,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (102,14327833577780,46,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (103,14327833577100,47,2,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (104,14327833577100,48,2,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (105,14327833577100,49,2,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (106,14327833577100,50,2,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (107,14327833577780,51,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (108,14327833577780,52,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (109,14327833577780,53,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (110,14327833577780,54,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (111,14327833577780,55,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (112,14327833577780,56,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (113,14327833577100,57,2,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (114,14327833577100,58,2,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (115,14327833577100,59,2,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (116,14327833577100,60,2,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (117,14327833577100,61,2,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (118,14327833577780,62,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (119,14327833577780,63,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (120,14327833577780,64,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod')
+
 GO
 
 /** ---------------------------------------------------------------*/
@@ -1441,3 +1593,247 @@ INSERT INTO [dbo].[contatoItens]
            (21,21,'3',1432783357778,'System',1432783357778,'System')
 
 /** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[ordemServico];
+CREATE TABLE [dbo].[ordemServico](
+	[id]           [int] NOT NULL,
+	[emprId]       [int] NOT NULL,
+	[userId]       [varchar](50) NULL,
+	[nome]         [varchar](100) NULL,
+	[data]    	   [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[typeId]       [int] NOT NULL,
+	[assunto]      [varchar](100) NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_regime_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+INSERT INTO [dbo].[ordemServico]
+           ([id]
+           ,[emprId]
+           ,[userId]
+           ,[nome]
+           ,[data]
+           ,[typeId]
+           ,[assunto]
+           ,[create_date]
+           ,[create_user]
+           ,[modify_date]
+           ,[modify_user])
+     VALUES
+           (1,1,'user','Simples Nacional',1432783357778,1,'erro 00001',1432783357778,'rod',14327833577780,'rod'),
+		   (2,2,'user','Simples Nacional',1432783357778,1,'erro 00001',1432783357778,'rod',14327833577780,'rod'),
+		   (3,3,'user','Simples Nacional',1432783357778,1,'erro 00001',1432783357778,'rod',14327833577780,'rod'),
+		   (4,1,'user','Simples Nacional',1432783357778,1,'erro 00001',1432783357778,'rod',14327833577780,'rod')
+
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[ordemServicoItens];
+CREATE TABLE [dbo].[ordemServicoItens](
+	[id]             [int] NOT NULL,
+	[idOrdemServico] [int] NOT NULL,
+	[status]       	 [int] NOT NULL,
+	[data]    	     [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[texto]          [varchar](255) NULL,
+	[create_date]    [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]    [varchar](50) NULL,
+    [modify_date]    [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]    [varchar](50) NULL,
+CONSTRAINT [pk_regime_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+INSERT INTO [dbo].[ordemServicoItens]
+           ([id]
+           ,[idOrdemServico]
+           ,[status]
+           ,[data]
+           ,[texto]
+           ,[create_date]
+           ,[create_user]
+           ,[modify_date]
+           ,[modify_user])
+     VALUES
+            (1,1,1,1432783357778,'erro 00001',1432783357778,'rod',14327833577780,'rod'),
+			(2,2,1,1432783357778,'erro 00001',1432783357778,'rod',14327833577780,'rod'),
+			(3,3,1,1432783357778,'erro 00001',1432783357778,'rod',14327833577780,'rod'),
+			(4,4,1,1432783357778,'erro 00001',1432783357778,'rod',14327833577780,'rod'),
+			(5,1,2,1432783357778,'erro 00001',1432783357778,'rod',14327833577780,'rod'),
+			(6,2,2,1432783357778,'erro 00001',1432783357778,'rod',14327833577780,'rod'),
+			(7,3,2,1432783357778,'erro 00001',1432783357778,'rod',14327833577780,'rod'),
+			(8,4,2,1432783357778,'erro 00001',1432783357778,'rod',14327833577780,'rod'),
+			(9,1,3,1432783357778,'erro 00001',1432783357778,'rod',14327833577780,'rod'),
+			(10,2,3,1432783357778,'erro 00001',1432783357778,'rod',14327833577780,'rod')
+
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[ordemServicoTypes];
+CREATE TABLE [dbo].[ordemServicoTypes](
+	[id]           [int] NOT NULL,
+	[type]         [varchar](100) NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_regime_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+INSERT INTO [dbo].[ordemServicoTypes]
+           ([id]
+           ,[type]
+           ,[create_date]
+           ,[create_user]
+           ,[modify_date]
+           ,[modify_user])
+     VALUES
+           (1,'Financeiro',1432783357778,'rod',14327833577780,'rod'),
+		   (2,'Fiscal',1432783357778,'rod',14327833577780,'rod'),
+		   (3,'Comercial',1432783357778,'rod',14327833577780,'rod'),
+		   (4,'Sistema',1432783357778,'rod',14327833577780,'rod')
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[ordemServicoStatus];
+CREATE TABLE [dbo].[ordemServicoStatus](
+	[id]           [int] NOT NULL,
+	[status]       [varchar](100) NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_regime_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+INSERT INTO [dbo].[ordemServicoTypes]
+           ([id]
+           ,[status]
+           ,[create_date]
+           ,[create_user]
+           ,[modify_date]
+           ,[modify_user])
+     VALUES
+           (1,'Finalizado',1432783357778,'rod',14327833577780,'rod'),
+		   (2,'Aguardando Mais informacoes',1432783357778,'rod',14327833577780,'rod'),
+		   (3,'Aberto',1432783357778,'rod',14327833577780,'rod'),
+		   (4,'Analizando',1432783357778,'rod',14327833577780,'rod'),
+		   (4,'Executando',1432783357778,'rod',14327833577780,'rod')
+
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[tabela];
+CREATE TABLE [dbo].[tabela](
+	[id]           [int] NOT NULL,
+	[nome]         [varchar](50) NOT NULL,
+	[descricao]    [varchar](250) NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_regime_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+INSERT INTO [dbo].[tabela]
+           ([id]
+           ,[nome]
+           ,[descricao]
+           ,[create_date]
+           ,[create_user]
+           ,[modify_date]
+           ,[modify_user])
+     VALUES
+   	(1,'REGIME','Test',1432783357778,'system',14327833577780,'system'),
+	(2,'EMPRESA','Test',1432783357778,'system',14327833577780,'system'),
+	(3,'DOCUMENTO','Test',1432783357778,'system',14327833577780,'system'),
+	(4,'EMAIL','Test',1432783357778,'system',14327833577780,'system'),
+	(5,'ENDERECO','Test',1432783357778,'system',14327833577780,'system'),
+	(6,'TELEFONE','Test',1432783357778,'system',14327833577780,'system'),
+	(7,'SOCIO','Test',1432783357778,'system',14327833577780,'system'),
+	(8,'HISTORICO','Test',1432783357778,'system',14327833577780,'system'),
+	(9,'CNAE','Test',1432783357778,'system',14327833577780,'system'),
+	(10,'CSOSN','Test',1432783357778,'system',14327833577780,'system'),
+	(11,'NCM','Test',1432783357778,'system',14327833577780,'system'),
+	(12,'CIDADE','Test',1432783357778,'system',14327833577780,'system'),
+	(13,'CNAEPORRELACIONAMENTO','Test',1432783357778,'system',14327833577780,'system'),
+	(14,'ESTADO','Test',1432783357778,'system',14327833577780,'system'),
+	(15,'UNIMED','Test',1432783357778,'system',14327833577780,'system'),
+	(16,'CFOP','Test',1432783357778,'system',14327833577780,'system'),
+	(17,'FUNCIONARIO','Test',1432783357778,'system',14327833577780,'system'),
+	(18,'CLIENTE','Test',1432783357778,'system',14327833577780,'system'),
+	(19,'FORNECEDOR','Test',1432783357778,'system',14327833577780,'system'),
+	(20,'TRANSPORTADOR','Test',1432783357778,'system',14327833577780,'system'),
+	(21,'CONDPAG','Test',1432783357778,'system',14327833577780,'system'),
+	(22,'CONVENIO','Test',1432783357778,'system',14327833577780,'system'),
+	(23,'SALARIO','Test',1432783357778,'system',14327833577780,'system'),
+	(24,'PESSOA','Test',1432783357778,'system',14327833577780,'system'),
+    (25,'PROFISSAO','Test',1432783357778,'system',14327833577780,'system'),
+	(26,'CONVENIOPESSOA','Test',1432783357778,'system',14327833577780,'system'),
+	(27,'CONDPAGPESSOA','Test',1432783357778,'system',14327833577780,'system'),
+	(28,'TIPOPAG','Test',1432783357778,'system',14327833577780,'system'),
+	(29,'TIPOPAGREG','Test',1432783357778,'system',14327833577780,'system'),
+	(30,'BANCO','Test',1432783357778,'system',14327833577780,'system'),
+	(31,'AGENCIA','Test',1432783357778,'system',14327833577780,'system'),
+	(32,'BANCOPESOA','Test',1432783357778,'system',14327833577780,'system'),
+	(33,'CONTATO','Test',1432783357778,'system',14327833577780,'system'),
+	(34,'CONTATOITENS','Test',1432783357778,'system',14327833577780,'system'),
+	(35,'ORDEMSERVICO','Test',1432783357778,'system',14327833577780,'system'),
+	(36,'ORDEMSERVICOITENS','Test',1432783357778,'system',14327833577780,'system'),
+	(37,'ORDEMSERVICOTYPES','Test',1432783357778,'system',14327833577780,'system'),
+	(38,'ORDEMSERVICOSTATUS','Test',1432783357778,'system',14327833577780,'system'),
+	(39,'TABELA','Test',1432783357778,'system',14327833577780,'system'),
+	(40,'ATRIBUTOS','Test',1432783357778,'system',14327833577780,'system')
+
+/** ---------------------------------------------------------------*/
+
+	DROP TABLE [dbo].[atributos];
+CREATE TABLE [dbo].[atributos](
+	[id]           [int] NOT NULL,
+	[nome]         [varchar](50) NOT NULL,
+	[descricao]    [varchar](250) NULL,
+	[tamanho]      [int] NOT NULL,
+	[obrigatorio]  [int] NOT NULL,
+	[chavePrimaria]  [int] NOT NULL,
+	[chaveSecundaria]  [int] NOT NULL,
+	[tabelaSecundaria]  [int] NOT NULL,
+	[type]  [int] NOT NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_atributos_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+INSERT INTO [dbo].[atributos]
+           ([id]
+           ,[idTabela]
+           ,[nome]
+           ,[descricao]
+           ,[type]
+           ,[tamanho]
+           ,[obrigatorio]
+           ,[chavePrimaria]
+           ,[chaveSecundaria]
+           ,[tabelaSecundaria]
+           ,[create_date]
+           ,[create_user]
+           ,[modify_date]
+           ,[modify_user])
+     VALUES
+   	(1,1,'REGIME','Test',1,null,0,0,0,null,1432783357778,'system',14327833577780,'system'),
+   	(1,1,'REGIME','Test',3,60,0,0,0,null,1432783357778,'system',14327833577780,'system'),
+
+/** 1 inteiro*/
+/** 2 bigint*/
+/** 3 varchar*/
