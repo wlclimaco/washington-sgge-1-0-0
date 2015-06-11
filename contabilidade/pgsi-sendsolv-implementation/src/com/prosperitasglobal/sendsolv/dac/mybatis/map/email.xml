@@ -25,6 +25,7 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
+	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEmail"/>
   </resultMap>
 
   <!--

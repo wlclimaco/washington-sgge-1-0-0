@@ -120,6 +120,52 @@
 	    ORDER BY dataStatus ASC
   </select>
 
+  <select id="fetchAllStatusByDocumento" parameterType="Integer" resultMap="statusResult">
+
+	    SELECT
+		<include refid="allStatusColumns" />
+	    FROM status b where b.tabelaEnum = 2 and b.parentId = #{id}
+
+	    ORDER BY dataStatus ASC
+  </select>
+
+  <select id="fetchAllStatusByEmail" parameterType="Integer" resultMap="statusResult">
+
+	    SELECT
+		<include refid="allStatusColumns" />
+	    FROM status b where b.tabelaEnum = 3 and b.parentId = #{id}
+
+	    ORDER BY dataStatus ASC
+  </select>
+
+
+  <select id="fetchAllStatusByEndereco" parameterType="Integer" resultMap="statusResult">
+
+	    SELECT
+		<include refid="allStatusColumns" />
+	    FROM status b where b.tabelaEnum = 4 and b.parentId = #{id}
+
+	    ORDER BY dataStatus ASC
+  </select>
+
+  <select id="fetchAllStatusByTelefone" parameterType="Integer" resultMap="statusResult">
+
+	    SELECT
+		<include refid="allStatusColumns" />
+	    FROM status b where b.tabelaEnum = 5 and b.parentId = #{id}
+
+	    ORDER BY dataStatus ASC
+  </select>
+
+  <select id="fetchAllStatusBySocio" parameterType="Integer" resultMap="statusResult">
+
+	    SELECT
+		<include refid="allStatusColumns" />
+	    FROM status b where b.tabelaEnum = 6 and b.parentId = #{id}
+
+	    ORDER BY dataStatus ASC
+  </select>
+
      <select id="fetchAllStatusByFuncionario" parameterType="Integer" resultMap="statusResult">
 
 	    SELECT
@@ -139,7 +185,7 @@
 	    ORDER BY dataStatus ASC
   </select>
 
-  <select id="fetchAllStatuss" resultMap="statusResult">
+  <select id="fetchAllStatus" resultMap="statusResult">
     SELECT
 	<include refid="allStatusColumns" />
     FROM status ORDER BY nome ASC
