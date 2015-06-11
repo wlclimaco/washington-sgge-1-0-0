@@ -13,9 +13,6 @@ public class OrdemServico extends ModelCosmeDamiao
 	/** The SendSolv id for the account. */
 	private Integer id;
 
-	/** The type of an account. */
-	private Integer cdEmpresa;
-
 	/** The description. */
 	private String nome;
 
@@ -23,7 +20,7 @@ public class OrdemServico extends ModelCosmeDamiao
 	private Integer data;
 
 	/** The bairro. */
-	private String type;
+	private OrdemServicotypes typeId;
 
 	/** The numero. */
 	private String assunto;

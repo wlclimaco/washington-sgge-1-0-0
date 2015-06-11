@@ -1,8 +1,5 @@
 package com.prosperitasglobal.sendsolv.model;
 
-import com.qat.framework.model.II18nEnum;
-import com.qat.framework.model.IIntegerEnum;
-
 // TODO: Auto-generated Javadoc
 /**
  * The Enum RiskLevelEnum.
@@ -102,7 +99,39 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 	/** The unknown. */
 	SALARIO(22, "sendsolv.base.model.risklevelenum.unknown"),
 
-	PESSOA(23, "sendsolv.base.model.risklevelenum.medium");
+	PESSOA(23, "sendsolv.base.model.risklevelenum.medium"),
+
+	PROFISSAO(24, "sendsolv.base.model.risklevelenum.medium"),
+
+	CONVENIOPESSOA(25, "sendsolv.base.model.risklevelenum.medium"),
+
+	CONDPAGPESSOA(26, "sendsolv.base.model.risklevelenum.medium"),
+
+	TIPOPAG(27, "sendsolv.base.model.risklevelenum.medium"),
+
+	TIPOPAGREG(28, "sendsolv.base.model.risklevelenum.medium"),
+
+	BANCO(29, "sendsolv.base.model.risklevelenum.medium"),
+
+	AGENCIA(30, "sendsolv.base.model.risklevelenum.medium"),
+
+	BANCOPESOA(31, "sendsolv.base.model.risklevelenum.medium"),
+
+	CONTATO(32, "sendsolv.base.model.risklevelenum.medium"),
+
+	CONTATOITENS(33, "sendsolv.base.model.risklevelenum.medium"),
+
+	ORDEMSERVICO(34, "sendsolv.base.model.risklevelenum.medium"),
+
+	ORDEMSERVICOITENS(35, "sendsolv.base.model.risklevelenum.medium"),
+
+	ORDEMSERVICOTYPES(36, "sendsolv.base.model.risklevelenum.medium"),
+
+	ORDEMSERVICOSTATUS(37, "sendsolv.base.model.risklevelenum.medium"),
+
+	TABELA(38, "sendsolv.base.model.risklevelenum.medium"),
+
+	ATRIBUTOS(39, "sendsolv.base.model.risklevelenum.medium");
 
 	/** The code. */
 	private Integer code;
