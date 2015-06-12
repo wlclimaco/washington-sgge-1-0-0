@@ -1,41 +1,72 @@
 package com.prosperitasglobal.sendsolv.model;
 
-import com.qat.framework.model.QATModel;
-
-// TODO: Auto-generated Javadoc
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
  */
 @SuppressWarnings("serial")
-public class Produto extends QATModel
+public class Produto extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
 
 	/** The type of an account. */
-	private String type;
+	private String codigo;
 
 	/** The description. */
-	private String description;
+	private String cdBarras;
 
 	/** The numero. */
-	private String tamanho;
+	private Classificacao classificacao;
 
 	/** The nome. */
-	private boolean obrigatorio;
+	private Long dataCreate;
 
 	/** The left. */
-	private boolean chavePrimaria;
+	private String produto;
+
+	private String aplicacao;
+
+	private String localizacao;
+
+	private Long dataValidade;
+
+	private String comissao;
+
+	private String fracao;
 
 	/** The top. */
-	private boolean chaveSecundaria;
+	private UniMed uniMed;
 
 	/** The width. */
-	private Tabela tabelaSecundaria;
+	private Grupo grupo;
 
 	/** The height. */
-	private String nome;
+	private SubGrupo subGrupo;
+
+	private Marca marca;
+
+	private Double porcao;
+
+	private Double pesoBruto;
+
+	private Double pesoLiquido;
+
+	private Tributacao tributacao;
+
+	private List<Estoque> estoqueList;
+
+	private List<TabPreco> precoList;
+
+	private List<Custo> custoList;
+
+	private List<Porcao> porcaoList;
+
+	private List<Rentabilidade> rentabilidadeList;
+
+	private List<Cfop> cfopList;
+
+	private List<Fornecedor> fornecedorList;
 
 	/**
 	 * Default constructor.
@@ -70,6 +101,7 @@ public class Produto extends QATModel
 	 *
 	 * @return the type
 	 */
+	@Override
 	public String getType()
 	{
 		return type;

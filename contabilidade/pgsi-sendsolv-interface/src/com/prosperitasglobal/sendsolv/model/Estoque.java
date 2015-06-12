@@ -5,24 +5,23 @@ package com.prosperitasglobal.sendsolv.model;
  * setting.
  */
 @SuppressWarnings("serial")
-public class Grupo extends ModelCosmeDamiao
+public class Estoque extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
 
 	/** The type of an account. */
-	private String grupo;
+	private EstoqueTypeEnum estoqueTypeEnum;
 
 	/** The description. */
-	private String descricao;
+	private Long ultimoMov;
 
-	/** The estado. */
-	private SubGrupo subGrupo;
+	private Double quant;
 
 	/**
 	 * Default constructor.
 	 */
-	public Grupo()
+	public Estoque()
 	{
 		super();
 	}
