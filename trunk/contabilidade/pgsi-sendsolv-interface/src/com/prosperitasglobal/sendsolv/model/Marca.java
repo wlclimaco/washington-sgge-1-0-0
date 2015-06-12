@@ -5,24 +5,30 @@ package com.prosperitasglobal.sendsolv.model;
  * setting.
  */
 @SuppressWarnings("serial")
-public class Grupo extends ModelCosmeDamiao
+public class Marca extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
 
 	/** The type of an account. */
-	private String grupo;
+	private String marca;
 
 	/** The description. */
-	private String descricao;
+	private String fabricante;
 
 	/** The estado. */
-	private SubGrupo subGrupo;
+	private List<Email> emailList;
+
+	/** The bairro. */
+	private List<Endereco> enderecoList;
+
+	/** The numero. */
+	private List<Telefone> telefoneList;
 
 	/**
 	 * Default constructor.
 	 */
-	public Grupo()
+	public Marca()
 	{
 		super();
 	}

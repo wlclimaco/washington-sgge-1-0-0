@@ -1834,6 +1834,465 @@ INSERT INTO [dbo].[atributos]
    	(1,1,'REGIME','Test',1,null,0,0,0,null,1432783357778,'system',14327833577780,'system'),
    	(1,1,'REGIME','Test',3,60,0,0,0,null,1432783357778,'system',14327833577780,'system'),
 
-/** 1 inteiro*/
-/** 2 bigint*/
-/** 3 varchar*/
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[unimed];
+CREATE TABLE [dbo].[unimed](
+	[id]           [int] NOT NULL,
+	[unimed]       [varchar](100) NOT NULL,
+	[sigla]        [varchar](5) NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_unimed_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+/** ---------------------------------------------------------------*/
+
+DROP TABLE [dbo].[unimedProd];
+CREATE TABLE [dbo].[unimedProd](
+	[id]           [int] NOT NULL,
+	[unimedId]     [int] NOT NULL,
+	[prodId]       [int] NOT NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_unimedProd_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+/** ---------------------------------------------------------------*/
+
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[grupo];
+CREATE TABLE [dbo].[grupo](
+	[id]           [int] NOT NULL,
+	[grupo]        [varchar](100) NOT NULL,
+	[descricao]    [varchar](250) NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_grupo_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+/** ---------------------------------------------------------------*/
+
+DROP TABLE [dbo].[grupoProd];
+CREATE TABLE [dbo].[grupoProd](
+	[id]           [int] NOT NULL,
+	[grupoId]     [int] NOT NULL,
+	[prodId]       [int] NOT NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_grupoProd_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[subgrupo];
+CREATE TABLE [dbo].[subgrupo](
+	[id]           [int] NOT NULL,
+	[subgrupo]     [varchar](100) NOT NULL,
+	[descricao]    [varchar](250) NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_subgrupo_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+/** ---------------------------------------------------------------*/
+
+DROP TABLE [dbo].[subgrupoGrupo];
+CREATE TABLE [dbo].[subgrupoGrupo](
+	[id]           [int] NOT NULL,
+	[grupoId]      [int] NOT NULL,
+	[subGrupoId]   [int] NOT NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_subgrupoGrupo_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[marca];
+CREATE TABLE [dbo].[marca](
+	[id]           [int] NOT NULL,
+	[marca]        [varchar](100) NOT NULL,
+	[fabricante]   [varchar](100) NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_marca_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+/** ---------------------------------------------------------------*/
+
+DROP TABLE [dbo].[marcaProd];
+CREATE TABLE [dbo].[marcaProd](
+	[id]           [int] NOT NULL,
+	[marcaId]      [int] NOT NULL,
+	[prodId]       [int] NOT NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_marca_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[cst];
+CREATE TABLE [dbo].[marcaProd](
+	[id]           [int] NOT NULL,
+	[nome]         [varchar](150) NULL,
+	[descricao]    [varchar](150) NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_cst_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[csosnProd];
+CREATE TABLE [dbo].[csosnProd](
+	[id]           [int] NOT NULL,
+	[csosnId]      [int] NOT NULL,
+	[prodId]       [int] NOT NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_marca_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[incidencia];
+CREATE TABLE [dbo].[incidencia](
+	[id]           [int] NOT NULL,
+	[codigo]       [varchar](50) NULL,
+	[texto]        [varchar](150) NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_marca_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[incidenciaProd];
+CREATE TABLE [dbo].[incidenciaProd](
+	[id]           [int] NOT NULL,
+	[incidenciaId] [int] NOT NULL,
+	[prodId]       [int] NOT NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_incidenciaProd_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+/** ---------------------------------------------------------------*/
+
+DROP TABLE [dbo].[tributacao];
+CREATE TABLE [dbo].[tributacao](
+	[id]           [int] NOT NULL,
+	[prodId]       [int] NOT NULL,
+	[cstId]        [int] NOT NULL,
+	[icms]   	   [real] NULL,
+	[st]   		   [int] NULL,
+	[mva]   	   [real] NULL,
+	[csosnId]      [int] NULL,
+	[ipi]          [real] NULL,
+	[iat]   	   [int] NULL,
+	[ippt]   	   [int] NULL,
+	[pisconfins]   [int] NULL,
+	[incidenciaId] [int] NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_tributacao_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[classificacao];
+CREATE TABLE [dbo].[classificacao](
+	[id]           [int] NOT NULL,
+	[nome]         [varchar](50) NULL,
+	[descricao]    [varchar](150) NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_classificacao_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[classificacaoProd];
+CREATE TABLE [dbo].[classificacaoProd](
+	[id]           [int] NOT NULL,
+	[classificacaoId] [int] NOT NULL,
+	[prodId]       [int] NOT NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_classificacaoProd_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[estoque];
+CREATE TABLE [dbo].[estoque](
+	[id]              [int] NOT NULL,
+	[idprod]          [int] NOT NULL,
+	[estoqueTypeEnum] [int] NOT NULL,
+	[ultimoMov]       [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[quant]           [real] NOT NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_estoque_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[preco];
+CREATE TABLE [dbo].[preco](
+	[id]              [int] NOT NULL,
+	[idprod]          [int] NOT NULL,
+	[precoTypeEnum]   [int] NOT NULL,
+	[dataMarcacao]    [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[valor]           [real] NOT NULL,
+	[dataProInicial]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[dataProFinal]    [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_estoque_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[custo];
+CREATE TABLE [dbo].[custo](
+	[id]              [int] NOT NULL,
+	[idprod]          [int] NOT NULL,
+	[valor]           [real] NOT NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_custo_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[custoItens];
+CREATE TABLE [dbo].[custoItens](
+	[id]               [int] NOT NULL,
+	[idcusto]          [int] NOT NULL,
+	[custo]   		   [varchar](50) NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_custoItens_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[porcao];
+CREATE TABLE [dbo].[porcao](
+	[id]              [int] NOT NULL,
+	[idprod]          [int] NOT NULL,
+	[valor]           [real] NOT NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_custo_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[porcaoItens];
+CREATE TABLE [dbo].[porcaoItens](
+	[id]               [int] NOT NULL,
+	[idcusto]          [int] NOT NULL,
+	[nome]   		   [varchar](150) NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_custoItens_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[rentabilidade];
+CREATE TABLE [dbo].[rentabilidade](
+	[id]                    [int] NOT NULL,
+	[idprod]                [int] NOT NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_custo_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[rentabilidadeProdutos];
+CREATE TABLE [dbo].[porcaoItens](
+	[id]                    [int] NOT NULL,
+	[idrentabilidade]       [int] NOT NULL,
+	[idprod]                [int] NOT NULL,
+	[valor]                 [real] NOT NULL,
+	[rentabilidadeTypeEnum] [int] NOT NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_custoItens_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+/** ---------------------------------------------------------------*/
+
+DROP TABLE [dbo].[cfop];
+CREATE TABLE [dbo].[cfop](
+	[id]              [int] NOT NULL,
+	[cfop]          [varchar](50) NULL,
+	[natureza]      [varchar](50) NULL,
+	[simplificado]  [varchar](50) NULL,
+	[cfopTypeEnum]  [int] NOT NULL,
+	[icms]          [real]  NULL,
+	[icmsReduzido]  [real]  NULL,
+	[margemAgregadaST] [real]  NULL,
+	[cstPrincipal]    [real]  NULL,
+	[classFiscal]     [real]  NULL,
+	[observacao]      [varchar](250) NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_custo_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[CfopProd];
+CREATE TABLE [dbo].[CfopProd](
+	[id]               [int] NOT NULL,
+	[idCfop]          [int] NOT NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_custoItens_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+/** ---------------------------------------------------------------*/
+
+DROP TABLE [dbo].[ForneProd];
+CREATE TABLE [dbo].[ForneProd](
+	[id]           [int] NOT NULL,
+	[idForn]       [int] NOT NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_custoItens_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[produto];
+CREATE TABLE [dbo].[produto](
+	[id]           [int] NOT NULL,
+	[codigo]       [varchar](50) NOT NULL,
+	[cdBarras]     [varchar](50) NULL,
+	[dataCreate]   [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[produto]  	   [varchar](250) NOT NULL,
+	[aplicacao]    [varchar](250) NULL,
+	[localizacao]  [varchar](200) NULL,
+	[dataValidade] [bigint] NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[comissao]     [real]  NULL,
+	[fracao]       [real]  NULL,
+	[porcao]  	   [real]  NULL,
+	[pesoBruto]    [real]  NULL,
+	[pesoLiquido]  [real]  NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_produto_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]

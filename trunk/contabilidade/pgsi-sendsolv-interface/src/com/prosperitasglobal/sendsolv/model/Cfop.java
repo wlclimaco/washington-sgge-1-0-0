@@ -1,6 +1,5 @@
 package com.prosperitasglobal.sendsolv.model;
 
-
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -8,29 +7,28 @@ package com.prosperitasglobal.sendsolv.model;
 @SuppressWarnings("serial")
 public class Cfop extends ModelCosmeDamiao
 {
-	/** The SendSolv id for the account. */
 	private Integer id;
 
-	/** The type of an account. */
-	private String logradouro;
+	private String cfop;
 
-	/** The description. */
-	private String cidade;
+	private String natureza;
 
-	/** The estado. */
-	private String estado;
+	private String simplificado;
 
-	/** The bairro. */
-	private String bairro;
+	private CfopTypeEnum cfopTypeEnum;
 
-	/** The numero. */
-	private String numero;
+	private Double icms;
+
+	private Double icmsReduzido;
+
+	private Double margemAgregadaST;
+
+	private Double cstPrincipal;
+
+	private Double classFiscal;
 
 	/** The cep. */
-	private String cep;
-
-	/** The tipo endereco. */
-	private String tipoEndereco;
+	private String observacao;
 
 	/**
 	 * Default constructor.

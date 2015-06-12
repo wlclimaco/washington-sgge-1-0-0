@@ -5,24 +5,28 @@ package com.prosperitasglobal.sendsolv.model;
  * setting.
  */
 @SuppressWarnings("serial")
-public class Grupo extends ModelCosmeDamiao
+public class TabPreco extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
 
 	/** The type of an account. */
-	private String grupo;
+	private Long dataMarcacao;
 
 	/** The description. */
-	private String descricao;
+	private PrecoTypeEnum precoTypeEnum;
 
 	/** The estado. */
-	private SubGrupo subGrupo;
+	private Double valor;
+
+	private Long dataProInicial;
+
+	private Long dataProFinal;
 
 	/**
 	 * Default constructor.
 	 */
-	public Grupo()
+	public TabPreco()
 	{
 		super();
 	}

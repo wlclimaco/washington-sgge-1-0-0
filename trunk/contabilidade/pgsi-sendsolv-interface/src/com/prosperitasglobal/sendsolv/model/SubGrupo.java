@@ -1,6 +1,5 @@
 package com.prosperitasglobal.sendsolv.model;
 
-
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -12,25 +11,10 @@ public class SubGrupo extends ModelCosmeDamiao
 	private Integer id;
 
 	/** The type of an account. */
-	private String logradouro;
+	private String subGrupo;
 
 	/** The description. */
-	private String cidade;
-
-	/** The estado. */
-	private String estado;
-
-	/** The bairro. */
-	private String bairro;
-
-	/** The numero. */
-	private String numero;
-
-	/** The cep. */
-	private String cep;
-
-	/** The tipo endereco. */
-	private String tipoEndereco;
+	private String descricao;
 
 	/**
 	 * Default constructor.
