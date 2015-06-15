@@ -1873,6 +1873,7 @@ CONSTRAINT [pk_unimedProd_id] PRIMARY KEY CLUSTERED
 DROP TABLE [dbo].[grupo];
 CREATE TABLE [dbo].[grupo](
 	[id]           [int] NOT NULL,
+	[subGrupoId]   [int] NOT NULL,
 	[grupo]        [varchar](100) NOT NULL,
 	[descricao]    [varchar](250) NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1974,6 +1975,7 @@ CREATE TABLE [dbo].[marcaProd](
 	[id]           [int] NOT NULL,
 	[nome]         [varchar](150) NULL,
 	[descricao]    [varchar](150) NULL,
+	[valor]        [varchar](15) NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),

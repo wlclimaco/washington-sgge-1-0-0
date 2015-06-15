@@ -31,6 +31,20 @@ public class TabPreco extends ModelCosmeDamiao
 		super();
 	}
 
+	public Integer getPrecoTypeEnumValue()
+	{
+		if (precoTypeEnum != null)
+		{
+			return precoTypeEnum.getValue();
+		}
+		return null;
+	}
+
+	public void setPrecoTypeEnumValue(Integer acaoTypeValue)
+	{
+		precoTypeEnum = PrecoTypeEnum.enumForValue(acaoTypeValue);
+	}
+
 	/**
 	 * Gets the id.
 	 *
