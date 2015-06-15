@@ -13,6 +13,8 @@ public class Incidencia extends ModelCosmeDamiao
 	/** The type of an account. */
 	private String codigo;
 
+	private String texto;
+
 	/**
 	 * Default constructor.
 	 */

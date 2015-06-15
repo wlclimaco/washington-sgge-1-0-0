@@ -5,7 +5,7 @@ package com.prosperitasglobal.sendsolv.model;
  * setting.
  */
 @SuppressWarnings("serial")
-public class CST extends ModelCosmeDamiao
+public class Cst extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
@@ -13,10 +13,14 @@ public class CST extends ModelCosmeDamiao
 	/** The type of an account. */
 	private String codigo;
 
+	private String valor;
+
+	private String descricao;
+
 	/**
 	 * Default constructor.
 	 */
-	public CST()
+	public Cst()
 	{
 		super();
 	}

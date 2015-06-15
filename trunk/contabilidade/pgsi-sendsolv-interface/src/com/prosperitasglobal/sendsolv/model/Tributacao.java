@@ -11,7 +11,7 @@ public class Tributacao extends ModelCosmeDamiao
 	private Integer id;
 
 	/** The type of an account. */
-	private CST cst;
+	private Cst cst;
 
 	/** The description. */
 	private Double icms;

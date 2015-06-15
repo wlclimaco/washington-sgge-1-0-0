@@ -26,6 +26,20 @@ public class Estoque extends ModelCosmeDamiao
 		super();
 	}
 
+	public Integer getEstoqueTypeEnumValue()
+	{
+		if (estoqueTypeEnum != null)
+		{
+			return estoqueTypeEnum.getValue();
+		}
+		return null;
+	}
+
+	public void setEstoqueTypeEnumValue(Integer acaoTypeValue)
+	{
+		estoqueTypeEnum = EstoqueTypeEnum.enumForValue(acaoTypeValue);
+	}
+
 	/**
 	 * Gets the id.
 	 *
