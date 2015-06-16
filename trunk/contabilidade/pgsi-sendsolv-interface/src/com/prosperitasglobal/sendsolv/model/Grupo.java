@@ -48,136 +48,69 @@ public class Grupo extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the tabela.
-	 *
-	 * @return the tabela
+	 * @return the grupo
 	 */
-	public String getTabela()
+	public String getGrupo()
 	{
-		return tabela;
+		return grupo;
 	}
 
 	/**
-	 * Sets the tabela.
-	 *
-	 * @param tabela the new tabela
+	 * @param grupo the grupo to set
 	 */
-	public void setTabela(String tabela)
+	public void setGrupo(String grupo)
 	{
-		this.tabela = tabela;
+		this.grupo = grupo;
 	}
 
 	/**
-	 * Gets the acao.
-	 *
-	 * @return the acao
+	 * @return the descricao
 	 */
-	public String getAcao()
+	public String getDescricao()
 	{
-		return acao;
+		return descricao;
 	}
 
 	/**
-	 * Sets the acao.
-	 *
-	 * @param acao the new acao
+	 * @param descricao the descricao to set
 	 */
-	public void setAcao(String acao)
+	public void setDescricao(String descricao)
 	{
-		this.acao = acao;
+		this.descricao = descricao;
 	}
 
 	/**
-	 * Gets the registro.
-	 *
-	 * @return the registro
+	 * @return the subGrupo
 	 */
-	public String getRegistro()
+	public SubGrupo getSubGrupo()
 	{
-		return registro;
+		return subGrupo;
 	}
 
 	/**
-	 * Sets the registro.
-	 *
-	 * @param registro the new registro
+	 * @param subGrupo the subGrupo to set
 	 */
-	public void setRegistro(String registro)
+	public void setSubGrupo(SubGrupo subGrupo)
 	{
-		this.registro = registro;
-	}
-
-	/**
-	 * Gets the data.
-	 *
-	 * @return the data
-	 */
-	public Integer getData()
-	{
-		return data;
-	}
-
-	/**
-	 * Sets the data.
-	 *
-	 * @param data the new data
-	 */
-	public void setData(Integer data)
-	{
-		this.data = data;
-	}
-
-	/**
-	 * Gets the usuario.
-	 *
-	 * @return the usuario
-	 */
-	public String getUsuario()
-	{
-		return usuario;
-	}
-
-	/**
-	 * Sets the usuario.
-	 *
-	 * @param usuario the new usuario
-	 */
-	public void setUsuario(String usuario)
-	{
-		this.usuario = usuario;
-	}
-
-	/**
-	 * Gets the empresa.
-	 *
-	 * @return the empresa
-	 */
-	public Integer getEmpresa()
-	{
-		return empresa;
-	}
-
-	/**
-	 * Sets the empresa.
-	 *
-	 * @param empresa the new empresa
-	 */
-	public void setEmpresa(Integer empresa)
-	{
-		this.empresa = empresa;
+		this.subGrupo = subGrupo;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.model.ModelCosmeDamiao#toString()
+	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString()
 	{
-		return "Grupo [getId()=" + getId() + ", getType()=" + getType() + ", getTabela()=" + getTabela()
-				+ ", getAcao()=" + getAcao() + ", getRegistro()=" + getRegistro() + ", getData()=" + getData()
-				+ ", getUsuario()=" + getUsuario() + ", getEmpresa()=" + getEmpresa() + ", getParentId()="
-				+ getParentId() + ", toString()=" + super.toString() + "]";
+		return "Grupo [getId()=" + getId() + ", getGrupo()=" + getGrupo() + ", getDescricao()=" + getDescricao()
+				+ ", getSubGrupo()=" + getSubGrupo() + ", getTabelaEnumValue()=" + getTabelaEnumValue()
+				+ ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue()
+				+ ", getParentId()=" + getParentId() + ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType()
+				+ ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()="
+				+ getEmprId() + ", getSite()=" + getSite() + ", toString()=" + super.toString() + ", getModelAction()="
+				+ getModelAction() + ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()="
+				+ getCreateDateUTC() + ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()="
+				+ getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
 	}
 
 }

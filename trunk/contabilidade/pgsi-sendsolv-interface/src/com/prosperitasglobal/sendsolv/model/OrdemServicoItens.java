@@ -56,7 +56,7 @@ public class OrdemServicoItens extends ModelCosmeDamiao
 	 *
 	 * @return the data
 	 */
-	public Integer getData()
+	public Long getData()
 	{
 		return data;
 	}
@@ -66,29 +66,9 @@ public class OrdemServicoItens extends ModelCosmeDamiao
 	 *
 	 * @param data the new data
 	 */
-	public void setData(Integer data)
+	public void setData(Long data)
 	{
 		this.data = data;
-	}
-
-	/**
-	 * Gets the assunto.
-	 *
-	 * @return the assunto
-	 */
-	public String getAssunto()
-	{
-		return assunto;
-	}
-
-	/**
-	 * Sets the assunto.
-	 *
-	 * @param assunto the new assunto
-	 */
-	public void setAssunto(String assunto)
-	{
-		this.assunto = assunto;
 	}
 
 	/**
@@ -141,6 +121,25 @@ public class OrdemServicoItens extends ModelCosmeDamiao
 	public void setStatus(OrdemServicoStatus status)
 	{
 		this.status = status;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "OrdemServicoItens [getId()=" + getId() + ", getData()=" + getData() + ", getTexto()=" + getTexto()
+				+ ", getIdOrdemServico()=" + getIdOrdemServico() + ", getStatus()=" + getStatus()
+				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
+				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
+				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
+				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
+				+ ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()="
+				+ getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()="
+				+ getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + "]";
 	}
 
 }

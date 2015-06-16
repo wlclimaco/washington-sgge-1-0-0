@@ -21,7 +21,7 @@
 	[texto]          [varchar](255) NULL,
 -->
 
-  <resultMap id="OrdemServicoStatusResult" type="OrdemServicoStatus" >
+  <resultMap id="ordemServicoStatusResult" type="OrdemServicoStatus" >
     <result property="id" column="id" />
     <result property="status" column="status" />
     <result property="createUser" column="create_user"/>

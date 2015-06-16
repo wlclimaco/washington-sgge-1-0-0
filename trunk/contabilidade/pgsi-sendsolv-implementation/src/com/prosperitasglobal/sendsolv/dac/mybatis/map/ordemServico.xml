@@ -15,9 +15,9 @@
        exactly. private Integer id;
 -->
 
-  <resultMap id="OrdemServicoTypeResult" type="OrdemServicoTypes" >
+  <resultMap id="ordemServicoTypeResult" type="OrdemServicoTypes" >
     <result property="id" column="id" />
-    <result property="type" column="type" />
+    <result property="typeServico" column="type" />
     <result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>

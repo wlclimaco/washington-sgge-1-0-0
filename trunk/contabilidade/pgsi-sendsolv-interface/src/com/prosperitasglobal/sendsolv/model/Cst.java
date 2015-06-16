@@ -46,136 +46,51 @@ public class Cst extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the tabela.
-	 *
-	 * @return the tabela
+	 * @return the codigo
 	 */
-	public String getTabela()
+	public String getCodigo()
 	{
-		return tabela;
+		return codigo;
 	}
 
 	/**
-	 * Sets the tabela.
-	 *
-	 * @param tabela the new tabela
+	 * @param codigo the codigo to set
 	 */
-	public void setTabela(String tabela)
+	public void setCodigo(String codigo)
 	{
-		this.tabela = tabela;
+		this.codigo = codigo;
 	}
 
 	/**
-	 * Gets the acao.
-	 *
-	 * @return the acao
+	 * @return the valor
 	 */
-	public String getAcao()
+	public String getValor()
 	{
-		return acao;
+		return valor;
 	}
 
 	/**
-	 * Sets the acao.
-	 *
-	 * @param acao the new acao
+	 * @param valor the valor to set
 	 */
-	public void setAcao(String acao)
+	public void setValor(String valor)
 	{
-		this.acao = acao;
+		this.valor = valor;
 	}
 
 	/**
-	 * Gets the registro.
-	 *
-	 * @return the registro
+	 * @return the descricao
 	 */
-	public String getRegistro()
+	public String getDescricao()
 	{
-		return registro;
+		return descricao;
 	}
 
 	/**
-	 * Sets the registro.
-	 *
-	 * @param registro the new registro
+	 * @param descricao the descricao to set
 	 */
-	public void setRegistro(String registro)
+	public void setDescricao(String descricao)
 	{
-		this.registro = registro;
-	}
-
-	/**
-	 * Gets the data.
-	 *
-	 * @return the data
-	 */
-	public Integer getData()
-	{
-		return data;
-	}
-
-	/**
-	 * Sets the data.
-	 *
-	 * @param data the new data
-	 */
-	public void setData(Integer data)
-	{
-		this.data = data;
-	}
-
-	/**
-	 * Gets the usuario.
-	 *
-	 * @return the usuario
-	 */
-	public String getUsuario()
-	{
-		return usuario;
-	}
-
-	/**
-	 * Sets the usuario.
-	 *
-	 * @param usuario the new usuario
-	 */
-	public void setUsuario(String usuario)
-	{
-		this.usuario = usuario;
-	}
-
-	/**
-	 * Gets the empresa.
-	 *
-	 * @return the empresa
-	 */
-	public Integer getEmpresa()
-	{
-		return empresa;
-	}
-
-	/**
-	 * Sets the empresa.
-	 *
-	 * @param empresa the new empresa
-	 */
-	public void setEmpresa(Integer empresa)
-	{
-		this.empresa = empresa;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.model.ModelCosmeDamiao#toString()
-	 */
-	@Override
-	public String toString()
-	{
-		return "Grupo [getId()=" + getId() + ", getType()=" + getType() + ", getTabela()=" + getTabela()
-				+ ", getAcao()=" + getAcao() + ", getRegistro()=" + getRegistro() + ", getData()=" + getData()
-				+ ", getUsuario()=" + getUsuario() + ", getEmpresa()=" + getEmpresa() + ", getParentId()="
-				+ getParentId() + ", toString()=" + super.toString() + "]";
+		this.descricao = descricao;
 	}
 
 }

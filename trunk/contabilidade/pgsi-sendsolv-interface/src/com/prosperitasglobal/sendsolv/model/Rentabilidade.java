@@ -1,5 +1,7 @@
 package com.prosperitasglobal.sendsolv.model;
 
+import java.util.List;
+
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -44,136 +46,53 @@ public class Rentabilidade extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the tabela.
-	 *
-	 * @return the tabela
+	 * @return the idproduto
 	 */
-	public String getTabela()
+	public Integer getIdproduto()
 	{
-		return tabela;
+		return idproduto;
 	}
 
 	/**
-	 * Sets the tabela.
-	 *
-	 * @param tabela the new tabela
+	 * @param idproduto the idproduto to set
 	 */
-	public void setTabela(String tabela)
+	public void setIdproduto(Integer idproduto)
 	{
-		this.tabela = tabela;
+		this.idproduto = idproduto;
 	}
 
 	/**
-	 * Gets the acao.
-	 *
-	 * @return the acao
+	 * @return the rentabilidadeList
 	 */
-	public String getAcao()
+	public List<RentabilidadeItens> getRentabilidadeList()
 	{
-		return acao;
+		return rentabilidadeList;
 	}
 
 	/**
-	 * Sets the acao.
-	 *
-	 * @param acao the new acao
+	 * @param rentabilidadeList the rentabilidadeList to set
 	 */
-	public void setAcao(String acao)
+	public void setRentabilidadeList(List<RentabilidadeItens> rentabilidadeList)
 	{
-		this.acao = acao;
-	}
-
-	/**
-	 * Gets the registro.
-	 *
-	 * @return the registro
-	 */
-	public String getRegistro()
-	{
-		return registro;
-	}
-
-	/**
-	 * Sets the registro.
-	 *
-	 * @param registro the new registro
-	 */
-	public void setRegistro(String registro)
-	{
-		this.registro = registro;
-	}
-
-	/**
-	 * Gets the data.
-	 *
-	 * @return the data
-	 */
-	public Integer getData()
-	{
-		return data;
-	}
-
-	/**
-	 * Sets the data.
-	 *
-	 * @param data the new data
-	 */
-	public void setData(Integer data)
-	{
-		this.data = data;
-	}
-
-	/**
-	 * Gets the usuario.
-	 *
-	 * @return the usuario
-	 */
-	public String getUsuario()
-	{
-		return usuario;
-	}
-
-	/**
-	 * Sets the usuario.
-	 *
-	 * @param usuario the new usuario
-	 */
-	public void setUsuario(String usuario)
-	{
-		this.usuario = usuario;
-	}
-
-	/**
-	 * Gets the empresa.
-	 *
-	 * @return the empresa
-	 */
-	public Integer getEmpresa()
-	{
-		return empresa;
-	}
-
-	/**
-	 * Sets the empresa.
-	 *
-	 * @param empresa the new empresa
-	 */
-	public void setEmpresa(Integer empresa)
-	{
-		this.empresa = empresa;
+		this.rentabilidadeList = rentabilidadeList;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.model.ModelCosmeDamiao#toString()
+	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString()
 	{
-		return "Grupo [getId()=" + getId() + ", getType()=" + getType() + ", getTabela()=" + getTabela()
-				+ ", getAcao()=" + getAcao() + ", getRegistro()=" + getRegistro() + ", getData()=" + getData()
-				+ ", getUsuario()=" + getUsuario() + ", getEmpresa()=" + getEmpresa() + ", getParentId()="
-				+ getParentId() + ", toString()=" + super.toString() + "]";
+		return "Rentabilidade [getId()=" + getId() + ", getIdproduto()=" + getIdproduto() + ", getRentabilidadeList()="
+				+ getRentabilidadeList() + ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()="
+				+ getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId()
+				+ ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()="
+				+ getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId()
+				+ ", getSite()=" + getSite() + ", toString()=" + super.toString() + ", getModelAction()="
+				+ getModelAction() + ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()="
+				+ getCreateDateUTC() + ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()="
+				+ getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
 	}
 
 }

@@ -62,136 +62,183 @@ public class Tributacao extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the tabela.
-	 *
-	 * @return the tabela
+	 * @return the cst
 	 */
-	public String getTabela()
+	public Cst getCst()
 	{
-		return tabela;
+		return cst;
 	}
 
 	/**
-	 * Sets the tabela.
-	 *
-	 * @param tabela the new tabela
+	 * @param cst the cst to set
 	 */
-	public void setTabela(String tabela)
+	public void setCst(Cst cst)
 	{
-		this.tabela = tabela;
+		this.cst = cst;
 	}
 
 	/**
-	 * Gets the acao.
-	 *
-	 * @return the acao
+	 * @return the icms
 	 */
-	public String getAcao()
+	public Double getIcms()
 	{
-		return acao;
+		return icms;
 	}
 
 	/**
-	 * Sets the acao.
-	 *
-	 * @param acao the new acao
+	 * @param icms the icms to set
 	 */
-	public void setAcao(String acao)
+	public void setIcms(Double icms)
 	{
-		this.acao = acao;
+		this.icms = icms;
 	}
 
 	/**
-	 * Gets the registro.
-	 *
-	 * @return the registro
+	 * @return the st
 	 */
-	public String getRegistro()
+	public Integer getSt()
 	{
-		return registro;
+		return st;
 	}
 
 	/**
-	 * Sets the registro.
-	 *
-	 * @param registro the new registro
+	 * @param st the st to set
 	 */
-	public void setRegistro(String registro)
+	public void setSt(Integer st)
 	{
-		this.registro = registro;
+		this.st = st;
 	}
 
 	/**
-	 * Gets the data.
-	 *
-	 * @return the data
+	 * @return the mva
 	 */
-	public Integer getData()
+	public Double getMva()
 	{
-		return data;
+		return mva;
 	}
 
 	/**
-	 * Sets the data.
-	 *
-	 * @param data the new data
+	 * @param mva the mva to set
 	 */
-	public void setData(Integer data)
+	public void setMva(Double mva)
 	{
-		this.data = data;
+		this.mva = mva;
 	}
 
 	/**
-	 * Gets the usuario.
-	 *
-	 * @return the usuario
+	 * @return the csosn
 	 */
-	public String getUsuario()
+	public Csosn getCsosn()
 	{
-		return usuario;
+		return csosn;
 	}
 
 	/**
-	 * Sets the usuario.
-	 *
-	 * @param usuario the new usuario
+	 * @param csosn the csosn to set
 	 */
-	public void setUsuario(String usuario)
+	public void setCsosn(Csosn csosn)
 	{
-		this.usuario = usuario;
+		this.csosn = csosn;
 	}
 
 	/**
-	 * Gets the empresa.
-	 *
-	 * @return the empresa
+	 * @return the ipi
 	 */
-	public Integer getEmpresa()
+	public Double getIpi()
 	{
-		return empresa;
+		return ipi;
 	}
 
 	/**
-	 * Sets the empresa.
-	 *
-	 * @param empresa the new empresa
+	 * @param ipi the ipi to set
 	 */
-	public void setEmpresa(Integer empresa)
+	public void setIpi(Double ipi)
 	{
-		this.empresa = empresa;
+		this.ipi = ipi;
+	}
+
+	/**
+	 * @return the iat
+	 */
+	public Integer getIat()
+	{
+		return iat;
+	}
+
+	/**
+	 * @param iat the iat to set
+	 */
+	public void setIat(Integer iat)
+	{
+		this.iat = iat;
+	}
+
+	/**
+	 * @return the ippt
+	 */
+	public Integer getIppt()
+	{
+		return ippt;
+	}
+
+	/**
+	 * @param ippt the ippt to set
+	 */
+	public void setIppt(Integer ippt)
+	{
+		this.ippt = ippt;
+	}
+
+	/**
+	 * @return the pisconfins
+	 */
+	public Integer getPisconfins()
+	{
+		return pisconfins;
+	}
+
+	/**
+	 * @param pisconfins the pisconfins to set
+	 */
+	public void setPisconfins(Integer pisconfins)
+	{
+		this.pisconfins = pisconfins;
+	}
+
+	/**
+	 * @return the incidencia
+	 */
+	public Incidencia getIncidencia()
+	{
+		return incidencia;
+	}
+
+	/**
+	 * @param incidencia the incidencia to set
+	 */
+	public void setIncidencia(Incidencia incidencia)
+	{
+		this.incidencia = incidencia;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.model.ModelCosmeDamiao#toString()
+	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString()
 	{
-		return "Grupo [getId()=" + getId() + ", getType()=" + getType() + ", getTabela()=" + getTabela()
-				+ ", getAcao()=" + getAcao() + ", getRegistro()=" + getRegistro() + ", getData()=" + getData()
-				+ ", getUsuario()=" + getUsuario() + ", getEmpresa()=" + getEmpresa() + ", getParentId()="
-				+ getParentId() + ", toString()=" + super.toString() + "]";
+		return "Tributacao [getId()=" + getId() + ", getCst()=" + getCst() + ", getIcms()=" + getIcms() + ", getSt()="
+				+ getSt() + ", getMva()=" + getMva() + ", getCsosn()=" + getCsosn() + ", getIpi()=" + getIpi()
+				+ ", getIat()=" + getIat() + ", getIppt()=" + getIppt() + ", getPisconfins()=" + getPisconfins()
+				+ ", getIncidencia()=" + getIncidencia() + ", getTabelaEnumValue()=" + getTabelaEnumValue()
+				+ ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue()
+				+ ", getParentId()=" + getParentId() + ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType()
+				+ ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()="
+				+ getEmprId() + ", getSite()=" + getSite() + ", toString()=" + super.toString() + ", getModelAction()="
+				+ getModelAction() + ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()="
+				+ getCreateDateUTC() + ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()="
+				+ getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
 	}
 
 }
