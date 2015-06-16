@@ -13,6 +13,12 @@ public class PorcaoItem extends ModelCosmeDamiao
 	/** The type of an account. */
 	private String nome;
 
+	private Double porcao;
+
+	private Double vd;
+
+	private UniMed unimed;
+
 	/**
 	 * Default constructor.
 	 */
@@ -42,136 +48,86 @@ public class PorcaoItem extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the tabela.
-	 *
-	 * @return the tabela
+	 * @return the nome
 	 */
-	public String getTabela()
+	public String getNome()
 	{
-		return tabela;
+		return nome;
 	}
 
 	/**
-	 * Sets the tabela.
-	 *
-	 * @param tabela the new tabela
+	 * @param nome the nome to set
 	 */
-	public void setTabela(String tabela)
+	public void setNome(String nome)
 	{
-		this.tabela = tabela;
+		this.nome = nome;
 	}
 
 	/**
-	 * Gets the acao.
-	 *
-	 * @return the acao
+	 * @return the porcao
 	 */
-	public String getAcao()
+	public Double getPorcao()
 	{
-		return acao;
+		return porcao;
 	}
 
 	/**
-	 * Sets the acao.
-	 *
-	 * @param acao the new acao
+	 * @param porcao the porcao to set
 	 */
-	public void setAcao(String acao)
+	public void setPorcao(Double porcao)
 	{
-		this.acao = acao;
+		this.porcao = porcao;
 	}
 
 	/**
-	 * Gets the registro.
-	 *
-	 * @return the registro
+	 * @return the vd
 	 */
-	public String getRegistro()
+	public Double getVd()
 	{
-		return registro;
+		return vd;
 	}
 
 	/**
-	 * Sets the registro.
-	 *
-	 * @param registro the new registro
+	 * @param vd the vd to set
 	 */
-	public void setRegistro(String registro)
+	public void setVd(Double vd)
 	{
-		this.registro = registro;
+		this.vd = vd;
 	}
 
 	/**
-	 * Gets the data.
-	 *
-	 * @return the data
+	 * @return the unimed
 	 */
-	public Integer getData()
+	public UniMed getUnimed()
 	{
-		return data;
+		return unimed;
 	}
 
 	/**
-	 * Sets the data.
-	 *
-	 * @param data the new data
+	 * @param unimed the unimed to set
 	 */
-	public void setData(Integer data)
+	public void setUnimed(UniMed unimed)
 	{
-		this.data = data;
-	}
-
-	/**
-	 * Gets the usuario.
-	 *
-	 * @return the usuario
-	 */
-	public String getUsuario()
-	{
-		return usuario;
-	}
-
-	/**
-	 * Sets the usuario.
-	 *
-	 * @param usuario the new usuario
-	 */
-	public void setUsuario(String usuario)
-	{
-		this.usuario = usuario;
-	}
-
-	/**
-	 * Gets the empresa.
-	 *
-	 * @return the empresa
-	 */
-	public Integer getEmpresa()
-	{
-		return empresa;
-	}
-
-	/**
-	 * Sets the empresa.
-	 *
-	 * @param empresa the new empresa
-	 */
-	public void setEmpresa(Integer empresa)
-	{
-		this.empresa = empresa;
+		this.unimed = unimed;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.model.ModelCosmeDamiao#toString()
+	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString()
 	{
-		return "Grupo [getId()=" + getId() + ", getType()=" + getType() + ", getTabela()=" + getTabela()
-				+ ", getAcao()=" + getAcao() + ", getRegistro()=" + getRegistro() + ", getData()=" + getData()
-				+ ", getUsuario()=" + getUsuario() + ", getEmpresa()=" + getEmpresa() + ", getParentId()="
-				+ getParentId() + ", toString()=" + super.toString() + "]";
+		return "PorcaoItem [getId()=" + getId() + ", getNome()=" + getNome() + ", getPorcao()=" + getPorcao()
+				+ ", getVd()=" + getVd() + ", getUnimed()=" + getUnimed() + ", getTabelaEnumValue()="
+				+ getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()="
+				+ getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()=" + getType()
+				+ ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()="
+				+ getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite() + ", toString()="
+				+ super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
+				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
+				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + "]";
 	}
 
 }

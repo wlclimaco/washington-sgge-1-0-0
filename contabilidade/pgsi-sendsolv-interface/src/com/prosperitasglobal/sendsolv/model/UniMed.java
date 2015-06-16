@@ -45,143 +45,35 @@ public class UniMed extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the logradouro.
-	 *
-	 * @return the logradouro
+	 * @return the unimed
 	 */
-	public String getLogradouro()
+	public String getUnimed()
 	{
-		return logradouro;
+		return unimed;
 	}
 
 	/**
-	 * Sets the logradouro.
-	 *
-	 * @param logradouro the logradouro to set
+	 * @param unimed the unimed to set
 	 */
-	public void setLogradouro(String logradouro)
+	public void setUnimed(String unimed)
 	{
-		this.logradouro = logradouro;
+		this.unimed = unimed;
 	}
 
 	/**
-	 * Gets the cidade.
-	 *
-	 * @return the cidade
+	 * @return the sigla
 	 */
-	public String getCidade()
+	public String getSigla()
 	{
-		return cidade;
+		return sigla;
 	}
 
 	/**
-	 * Sets the cidade.
-	 *
-	 * @param cidade the cidade to set
+	 * @param sigla the sigla to set
 	 */
-	public void setCidade(String cidade)
+	public void setSigla(String sigla)
 	{
-		this.cidade = cidade;
-	}
-
-	/**
-	 * Gets the estado.
-	 *
-	 * @return the estado
-	 */
-	public String getEstado()
-	{
-		return estado;
-	}
-
-	/**
-	 * Sets the estado.
-	 *
-	 * @param estado the estado to set
-	 */
-	public void setEstado(String estado)
-	{
-		this.estado = estado;
-	}
-
-	/**
-	 * Gets the bairro.
-	 *
-	 * @return the bairro
-	 */
-	public String getBairro()
-	{
-		return bairro;
-	}
-
-	/**
-	 * Sets the bairro.
-	 *
-	 * @param bairro the bairro to set
-	 */
-	public void setBairro(String bairro)
-	{
-		this.bairro = bairro;
-	}
-
-	/**
-	 * Gets the numero.
-	 *
-	 * @return the numero
-	 */
-	public String getNumero()
-	{
-		return numero;
-	}
-
-	/**
-	 * Sets the numero.
-	 *
-	 * @param numero the numero to set
-	 */
-	public void setNumero(String numero)
-	{
-		this.numero = numero;
-	}
-
-	/**
-	 * Gets the cep.
-	 *
-	 * @return the cep
-	 */
-	public String getCep()
-	{
-		return cep;
-	}
-
-	/**
-	 * Sets the cep.
-	 *
-	 * @param cep the cep to set
-	 */
-	public void setCep(String cep)
-	{
-		this.cep = cep;
-	}
-
-	/**
-	 * Gets the tipo endereco.
-	 *
-	 * @return the tipoEndereco
-	 */
-	public String getTipoEndereco()
-	{
-		return tipoEndereco;
-	}
-
-	/**
-	 * Sets the tipo endereco.
-	 *
-	 * @param tipoEndereco the tipoEndereco to set
-	 */
-	public void setTipoEndereco(String tipoEndereco)
-	{
-		this.tipoEndereco = tipoEndereco;
+		this.sigla = sigla;
 	}
 
 	/*
@@ -191,10 +83,15 @@ public class UniMed extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Endereco [getId()=" + getId() + ", getLogradouro()=" + getLogradouro() + ", getCidade()=" + getCidade()
-				+ ", getEstado()=" + getEstado() + ", getBairro()=" + getBairro() + ", getNumero()=" + getNumero()
-				+ ", getCep()=" + getCep() + ", getTipoEndereco()=" + getTipoEndereco() + ", toString()="
-				+ super.toString() + "]";
+		return "UniMed [getId()=" + getId() + ", getUnimed()=" + getUnimed() + ", getSigla()=" + getSigla()
+				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
+				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
+				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
+				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
+				+ ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()="
+				+ getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()="
+				+ getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + "]";
 	}
 
 }

@@ -12,7 +12,7 @@ public class OrdemServicoTypes extends ModelCosmeDamiao
 	private Integer id;
 
 	/** The type of an account. */
-	private Integer type;
+	private Integer typeServico;
 
 	/**
 	 * Default constructor.
@@ -40,6 +40,40 @@ public class OrdemServicoTypes extends ModelCosmeDamiao
 	public void setId(Integer id)
 	{
 		this.id = id;
+	}
+
+	/**
+	 * @return the typeServico
+	 */
+	public Integer getTypeServico()
+	{
+		return typeServico;
+	}
+
+	/**
+	 * @param typeServico the typeServico to set
+	 */
+	public void setTypeServico(Integer typeServico)
+	{
+		this.typeServico = typeServico;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "OrdemServicoTypes [getId()=" + getId() + ", getTypeServico()=" + getTypeServico()
+				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
+				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
+				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
+				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
+				+ ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()="
+				+ getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()="
+				+ getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + "]";
 	}
 
 }

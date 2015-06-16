@@ -20,7 +20,7 @@ public class OrdemServico extends ModelCosmeDamiao
 	private Integer data;
 
 	/** The bairro. */
-	private OrdemServicotypes typeId;
+	private OrdemServicoTypes typeId;
 
 	/** The numero. */
 	private String assunto;
@@ -57,28 +57,6 @@ public class OrdemServico extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the cd empresa.
-	 *
-	 * @return the cd empresa
-	 */
-	public Integer getCdEmpresa()
-	{
-		return cdEmpresa;
-	}
-
-	/**
-	 * Sets the cd empresa.
-	 *
-	 * @param cdEmpresa the new cd empresa
-	 */
-	public void setCdEmpresa(Integer cdEmpresa)
-	{
-		this.cdEmpresa = cdEmpresa;
-	}
-
-	/**
-	 * Gets the nome.
-	 *
 	 * @return the nome
 	 */
 	public String getNome()
@@ -87,9 +65,7 @@ public class OrdemServico extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Sets the nome.
-	 *
-	 * @param nome the new nome
+	 * @param nome the nome to set
 	 */
 	public void setNome(String nome)
 	{
@@ -97,8 +73,6 @@ public class OrdemServico extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the data.
-	 *
 	 * @return the data
 	 */
 	public Integer getData()
@@ -107,9 +81,7 @@ public class OrdemServico extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Sets the data.
-	 *
-	 * @param data the new data
+	 * @param data the data to set
 	 */
 	public void setData(Integer data)
 	{
@@ -117,8 +89,22 @@ public class OrdemServico extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the assunto.
-	 *
+	 * @return the typeId
+	 */
+	public OrdemServicoTypes getTypeId()
+	{
+		return typeId;
+	}
+
+	/**
+	 * @param typeId the typeId to set
+	 */
+	public void setTypeId(OrdemServicoTypes typeId)
+	{
+		this.typeId = typeId;
+	}
+
+	/**
 	 * @return the assunto
 	 */
 	public String getAssunto()
@@ -127,13 +113,27 @@ public class OrdemServico extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Sets the assunto.
-	 *
-	 * @param assunto the new assunto
+	 * @param assunto the assunto to set
 	 */
 	public void setAssunto(String assunto)
 	{
 		this.assunto = assunto;
+	}
+
+	/**
+	 * @return the ordemStatusList
+	 */
+	public List<OrdemServicoItens> getOrdemStatusList()
+	{
+		return ordemStatusList;
+	}
+
+	/**
+	 * @param ordemStatusList the ordemStatusList to set
+	 */
+	public void setOrdemStatusList(List<OrdemServicoItens> ordemStatusList)
+	{
+		this.ordemStatusList = ordemStatusList;
 	}
 
 	/*
@@ -143,9 +143,16 @@ public class OrdemServico extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "OrdemServico [getId()=" + getId() + ", getCdEmpresa()=" + getCdEmpresa() + ", getNome()=" + getNome()
-				+ ", getData()=" + getData() + ", getType()=" + getType() + ", getAssunto()=" + getAssunto()
-				+ ", toString()=" + super.toString() + "]";
+		return "OrdemServico [getId()=" + getId() + ", getNome()=" + getNome() + ", getData()=" + getData()
+				+ ", getTypeId()=" + getTypeId() + ", getAssunto()=" + getAssunto() + ", getOrdemStatusList()="
+				+ getOrdemStatusList() + ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()="
+				+ getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId()
+				+ ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()="
+				+ getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId()
+				+ ", getSite()=" + getSite() + ", toString()=" + super.toString() + ", getModelAction()="
+				+ getModelAction() + ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()="
+				+ getCreateDateUTC() + ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()="
+				+ getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
 	}
 
 }

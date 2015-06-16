@@ -61,136 +61,69 @@ public class Estoque extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the tabela.
-	 *
-	 * @return the tabela
+	 * @return the estoqueTypeEnum
 	 */
-	public String getTabela()
+	public EstoqueTypeEnum getEstoqueTypeEnum()
 	{
-		return tabela;
+		return estoqueTypeEnum;
 	}
 
 	/**
-	 * Sets the tabela.
-	 *
-	 * @param tabela the new tabela
+	 * @param estoqueTypeEnum the estoqueTypeEnum to set
 	 */
-	public void setTabela(String tabela)
+	public void setEstoqueTypeEnum(EstoqueTypeEnum estoqueTypeEnum)
 	{
-		this.tabela = tabela;
+		this.estoqueTypeEnum = estoqueTypeEnum;
 	}
 
 	/**
-	 * Gets the acao.
-	 *
-	 * @return the acao
+	 * @return the ultimoMov
 	 */
-	public String getAcao()
+	public Long getUltimoMov()
 	{
-		return acao;
+		return ultimoMov;
 	}
 
 	/**
-	 * Sets the acao.
-	 *
-	 * @param acao the new acao
+	 * @param ultimoMov the ultimoMov to set
 	 */
-	public void setAcao(String acao)
+	public void setUltimoMov(Long ultimoMov)
 	{
-		this.acao = acao;
+		this.ultimoMov = ultimoMov;
 	}
 
 	/**
-	 * Gets the registro.
-	 *
-	 * @return the registro
+	 * @return the quant
 	 */
-	public String getRegistro()
+	public Double getQuant()
 	{
-		return registro;
+		return quant;
 	}
 
 	/**
-	 * Sets the registro.
-	 *
-	 * @param registro the new registro
+	 * @param quant the quant to set
 	 */
-	public void setRegistro(String registro)
+	public void setQuant(Double quant)
 	{
-		this.registro = registro;
-	}
-
-	/**
-	 * Gets the data.
-	 *
-	 * @return the data
-	 */
-	public Integer getData()
-	{
-		return data;
-	}
-
-	/**
-	 * Sets the data.
-	 *
-	 * @param data the new data
-	 */
-	public void setData(Integer data)
-	{
-		this.data = data;
-	}
-
-	/**
-	 * Gets the usuario.
-	 *
-	 * @return the usuario
-	 */
-	public String getUsuario()
-	{
-		return usuario;
-	}
-
-	/**
-	 * Sets the usuario.
-	 *
-	 * @param usuario the new usuario
-	 */
-	public void setUsuario(String usuario)
-	{
-		this.usuario = usuario;
-	}
-
-	/**
-	 * Gets the empresa.
-	 *
-	 * @return the empresa
-	 */
-	public Integer getEmpresa()
-	{
-		return empresa;
-	}
-
-	/**
-	 * Sets the empresa.
-	 *
-	 * @param empresa the new empresa
-	 */
-	public void setEmpresa(Integer empresa)
-	{
-		this.empresa = empresa;
+		this.quant = quant;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.model.ModelCosmeDamiao#toString()
+	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString()
 	{
-		return "Grupo [getId()=" + getId() + ", getType()=" + getType() + ", getTabela()=" + getTabela()
-				+ ", getAcao()=" + getAcao() + ", getRegistro()=" + getRegistro() + ", getData()=" + getData()
-				+ ", getUsuario()=" + getUsuario() + ", getEmpresa()=" + getEmpresa() + ", getParentId()="
-				+ getParentId() + ", toString()=" + super.toString() + "]";
+		return "Estoque [getId()=" + getId() + ", getEstoqueTypeEnum()=" + getEstoqueTypeEnum() + ", getUltimoMov()="
+				+ getUltimoMov() + ", getQuant()=" + getQuant() + ", getTabelaEnumValue()=" + getTabelaEnumValue()
+				+ ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue()
+				+ ", getParentId()=" + getParentId() + ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType()
+				+ ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()="
+				+ getEmprId() + ", getSite()=" + getSite() + ", toString()=" + super.toString() + ", getModelAction()="
+				+ getModelAction() + ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()="
+				+ getCreateDateUTC() + ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()="
+				+ getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
 	}
 
 }

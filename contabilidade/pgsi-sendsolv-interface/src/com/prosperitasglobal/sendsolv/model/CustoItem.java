@@ -11,7 +11,9 @@ public class CustoItem extends ModelCosmeDamiao
 	private Integer id;
 
 	/** The type of an account. */
-	private String Custo;
+	private String custo;
+
+	private Integer custoDesp;
 
 	/**
 	 * Default constructor.
@@ -42,136 +44,53 @@ public class CustoItem extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the tabela.
-	 *
-	 * @return the tabela
+	 * @return the custo
 	 */
-	public String getTabela()
+	public String getCusto()
 	{
-		return tabela;
+		return custo;
 	}
 
 	/**
-	 * Sets the tabela.
-	 *
-	 * @param tabela the new tabela
+	 * @param custo the custo to set
 	 */
-	public void setTabela(String tabela)
+	public void setCusto(String custo)
 	{
-		this.tabela = tabela;
+		this.custo = custo;
 	}
 
 	/**
-	 * Gets the acao.
-	 *
-	 * @return the acao
+	 * @return the custoDesp
 	 */
-	public String getAcao()
+	public Integer getCustoDesp()
 	{
-		return acao;
+		return custoDesp;
 	}
 
 	/**
-	 * Sets the acao.
-	 *
-	 * @param acao the new acao
+	 * @param custoDesp the custoDesp to set
 	 */
-	public void setAcao(String acao)
+	public void setCustoDesp(Integer custoDesp)
 	{
-		this.acao = acao;
-	}
-
-	/**
-	 * Gets the registro.
-	 *
-	 * @return the registro
-	 */
-	public String getRegistro()
-	{
-		return registro;
-	}
-
-	/**
-	 * Sets the registro.
-	 *
-	 * @param registro the new registro
-	 */
-	public void setRegistro(String registro)
-	{
-		this.registro = registro;
-	}
-
-	/**
-	 * Gets the data.
-	 *
-	 * @return the data
-	 */
-	public Integer getData()
-	{
-		return data;
-	}
-
-	/**
-	 * Sets the data.
-	 *
-	 * @param data the new data
-	 */
-	public void setData(Integer data)
-	{
-		this.data = data;
-	}
-
-	/**
-	 * Gets the usuario.
-	 *
-	 * @return the usuario
-	 */
-	public String getUsuario()
-	{
-		return usuario;
-	}
-
-	/**
-	 * Sets the usuario.
-	 *
-	 * @param usuario the new usuario
-	 */
-	public void setUsuario(String usuario)
-	{
-		this.usuario = usuario;
-	}
-
-	/**
-	 * Gets the empresa.
-	 *
-	 * @return the empresa
-	 */
-	public Integer getEmpresa()
-	{
-		return empresa;
-	}
-
-	/**
-	 * Sets the empresa.
-	 *
-	 * @param empresa the new empresa
-	 */
-	public void setEmpresa(Integer empresa)
-	{
-		this.empresa = empresa;
+		this.custoDesp = custoDesp;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.model.ModelCosmeDamiao#toString()
+	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString()
 	{
-		return "Grupo [getId()=" + getId() + ", getType()=" + getType() + ", getTabela()=" + getTabela()
-				+ ", getAcao()=" + getAcao() + ", getRegistro()=" + getRegistro() + ", getData()=" + getData()
-				+ ", getUsuario()=" + getUsuario() + ", getEmpresa()=" + getEmpresa() + ", getParentId()="
-				+ getParentId() + ", toString()=" + super.toString() + "]";
+		return "CustoItem [getId()=" + getId() + ", getCusto()=" + getCusto() + ", getCustoDesp()=" + getCustoDesp()
+				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
+				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
+				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
+				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
+				+ ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()="
+				+ getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()="
+				+ getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + "]";
 	}
 
 }

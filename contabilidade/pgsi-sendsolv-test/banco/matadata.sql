@@ -820,7 +820,7 @@ INSERT INTO [dbo].[BeneficioFunc]
 		   (29,14,2,1432783357778,'System',1432783357778,'System'),
 		   (30,15,2,1432783357778,'System',1432783357778,'System')
 GO
-
+DROP TABLE [dbo].[BeneficioMesApp];
 CREATE TABLE [dbo].[BeneficioMesApp](
 	[id]           [int] NOT NULL,
 	[data]         [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -967,7 +967,7 @@ CREATE TABLE [dbo].[EventoMesApp](
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
-CONSTRAINT [pk_eventoFuncEventApp_id] PRIMARY KEY CLUSTERED
+CONSTRAINT [pk_ventoMesApp_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -993,7 +993,7 @@ INSERT INTO [dbo].[EventoMesApp]
 		   (14,1432783357778,14,1432783357778,'System',1432783357778,'System'),
 		   (15,1432783357778,15,1432783357778,'System',1432783357778,'System'),
 		   (16,1432783357778,16,1432783357778,'System',1432783357778,'System'),
-		   (17,1432783357778,17,1432783357778,'System',1432783357778,'System')
+		   (17,1432783357778,17,1432783357778,'System',1432783357778,'System');
 GO
 
 /** ---------------------------------------------------------------*/
@@ -1606,7 +1606,7 @@ CREATE TABLE [dbo].[ordemServico](
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
-CONSTRAINT [pk_regime_id] PRIMARY KEY CLUSTERED
+CONSTRAINT [pk_ordemServico_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -1642,7 +1642,7 @@ CREATE TABLE [dbo].[ordemServicoItens](
     [create_user]    [varchar](50) NULL,
     [modify_date]    [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]    [varchar](50) NULL,
-CONSTRAINT [pk_regime_id] PRIMARY KEY CLUSTERED
+CONSTRAINT [pk_ordemServicoItens_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -1679,7 +1679,7 @@ CREATE TABLE [dbo].[ordemServicoTypes](
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
-CONSTRAINT [pk_regime_id] PRIMARY KEY CLUSTERED
+CONSTRAINT [pk_ordemServicoTypes_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -1706,13 +1706,13 @@ CREATE TABLE [dbo].[ordemServicoStatus](
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
-CONSTRAINT [pk_regime_id] PRIMARY KEY CLUSTERED
+CONSTRAINT [pk_ordemServicoStatus_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
-INSERT INTO [dbo].[ordemServicoTypes]
+INSERT INTO [dbo].[ordemServicoStatus]
            ([id]
            ,[status]
            ,[create_date]
@@ -1724,7 +1724,7 @@ INSERT INTO [dbo].[ordemServicoTypes]
 		   (2,'Aguardando Mais informacoes',1432783357778,'rod',14327833577780,'rod'),
 		   (3,'Aberto',1432783357778,'rod',14327833577780,'rod'),
 		   (4,'Analizando',1432783357778,'rod',14327833577780,'rod'),
-		   (4,'Executando',1432783357778,'rod',14327833577780,'rod')
+		   (5,'Executando',1432783357778,'rod',14327833577780,'rod')
 
 /** ---------------------------------------------------------------*/
 DROP TABLE [dbo].[tabela];
@@ -1736,7 +1736,7 @@ CREATE TABLE [dbo].[tabela](
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
-CONSTRAINT [pk_regime_id] PRIMARY KEY CLUSTERED
+CONSTRAINT [pk_TABELA_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -1794,7 +1794,7 @@ INSERT INTO [dbo].[tabela]
 
 /** ---------------------------------------------------------------*/
 
-	DROP TABLE [dbo].[atributos];
+DROP TABLE [dbo].[atributos];
 CREATE TABLE [dbo].[atributos](
 	[id]           [int] NOT NULL,
 	[nome]         [varchar](50) NOT NULL,
@@ -1815,24 +1815,7 @@ CONSTRAINT [pk_atributos_id] PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
-INSERT INTO [dbo].[atributos]
-           ([id]
-           ,[idTabela]
-           ,[nome]
-           ,[descricao]
-           ,[type]
-           ,[tamanho]
-           ,[obrigatorio]
-           ,[chavePrimaria]
-           ,[chaveSecundaria]
-           ,[tabelaSecundaria]
-           ,[create_date]
-           ,[create_user]
-           ,[modify_date]
-           ,[modify_user])
-     VALUES
-   	(1,1,'REGIME','Test',1,null,0,0,0,null,1432783357778,'system',14327833577780,'system'),
-   	(1,1,'REGIME','Test',3,60,0,0,0,null,1432783357778,'system',14327833577780,'system'),
+
 
 /** ---------------------------------------------------------------*/
 DROP TABLE [dbo].[unimed];
@@ -1849,6 +1832,15 @@ CONSTRAINT [pk_unimed_id] PRIMARY KEY CLUSTERED
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+
+INSERT INTO [dbo].[unimed]
+           ([id],[unimed],[sigla],[create_user],[create_date],[modify_date],[modify_user])
+     VALUES
+           (1,'Caixa','CX','System',1432783357778,1432783357778,'System'),
+           (2,'Litro','LT','System',1432783357778,1432783357778,'System'),
+           (3,'Unidade','UN','System',1432783357778,1432783357778,'System'),
+           (4,'Duzia','DZ','System',1432783357778,1432783357778,'System');
+
 
 /** ---------------------------------------------------------------*/
 
@@ -1867,6 +1859,20 @@ CONSTRAINT [pk_unimedProd_id] PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
+
+INSERT INTO [dbo].[unimedProd]
+           ([id],[unimedId],[prodId],[create_user],[create_date],[modify_date],[modify_user])
+     VALUES
+           (1,1,1,'System',1432783357778,1432783357778,'System'),
+           (2,2,2,'System',1432783357778,1432783357778,'System'),
+           (3,3,3,'System',1432783357778,1432783357778,'System'),
+           (4,4,4,'System',1432783357778,1432783357778,'System'),
+           (5,1,5,'System',1432783357778,1432783357778,'System'),
+           (6,2,6,'System',1432783357778,1432783357778,'System'),
+           (7,3,7,'System',1432783357778,1432783357778,'System'),
+           (8,4,8,'System',1432783357778,1432783357778,'System'),
+           (9,1,9,'System',1432783357778,1432783357778,'System'),
+           (10,2,10,'System',1432783357778,1432783357778,'System');
 /** ---------------------------------------------------------------*/
 
 /** ---------------------------------------------------------------*/
@@ -1886,6 +1892,14 @@ CONSTRAINT [pk_grupo_id] PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
+INSERT INTO [dbo].[grupo]
+           ([id],[grupo],[descricao],[create_user],[create_date],[modify_date],[modify_user])
+     VALUES
+           (1,'Grupo001','CX','System',1432783357778,1432783357778,'System'),
+           (2,'Grupo002','LT','System',1432783357778,1432783357778,'System'),
+           (3,'Grupo003','UN','System',1432783357778,1432783357778,'System'),
+           (4,'Grupo004','DZ','System',1432783357778,1432783357778,'System');
+
 /** ---------------------------------------------------------------*/
 
 DROP TABLE [dbo].[grupoProd];
@@ -1903,6 +1917,19 @@ CONSTRAINT [pk_grupoProd_id] PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
+INSERT INTO [dbo].[grupoProd]
+           ([id],[grupoId],[prodId],[create_user],[create_date],[modify_date],[modify_user])
+     VALUES
+           (1,1,1,'System',1432783357778,1432783357778,'System'),
+           (2,2,2,'System',1432783357778,1432783357778,'System'),
+           (3,3,3,'System',1432783357778,1432783357778,'System'),
+           (4,4,4,'System',1432783357778,1432783357778,'System'),
+           (5,1,5,'System',1432783357778,1432783357778,'System'),
+           (6,2,6,'System',1432783357778,1432783357778,'System'),
+           (7,3,7,'System',1432783357778,1432783357778,'System'),
+           (8,4,8,'System',1432783357778,1432783357778,'System'),
+           (9,1,9,'System',1432783357778,1432783357778,'System'),
+           (10,2,10,'System',1432783357778,1432783357778,'System');
 /** ---------------------------------------------------------------*/
 DROP TABLE [dbo].[subgrupo];
 CREATE TABLE [dbo].[subgrupo](
@@ -1919,6 +1946,13 @@ CONSTRAINT [pk_subgrupo_id] PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
+INSERT INTO [dbo].[subgrupo]
+           ([id],[subgrupo],[descricao],[create_user],[create_date],[modify_date],[modify_user])
+     VALUES
+           (1,'SubGrupo001','CX','System',1432783357778,1432783357778,'System'),
+           (2,'SubGrupo002','LT','System',1432783357778,1432783357778,'System'),
+           (3,'SubGrupo003','UN','System',1432783357778,1432783357778,'System'),
+           (4,'SubGrupo004','DZ','System',1432783357778,1432783357778,'System');
 /** ---------------------------------------------------------------*/
 
 DROP TABLE [dbo].[subgrupoGrupo];
@@ -1936,6 +1970,20 @@ CONSTRAINT [pk_subgrupoGrupo_id] PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
+INSERT INTO [dbo].[subgrupoGrupo]
+           ([id],[grupoId],[subGrupoId],[create_user],[create_date],[modify_date],[modify_user])
+     VALUES
+           (1,1,1,'System',1432783357778,1432783357778,'System'),
+           (2,2,2,'System',1432783357778,1432783357778,'System'),
+           (3,3,3,'System',1432783357778,1432783357778,'System'),
+           (4,4,4,'System',1432783357778,1432783357778,'System'),
+           (5,1,4,'System',1432783357778,1432783357778,'System'),
+           (6,2,3,'System',1432783357778,1432783357778,'System'),
+           (7,3,2,'System',1432783357778,1432783357778,'System'),
+           (8,4,1,'System',1432783357778,1432783357778,'System'),
+           (9,1,4,'System',1432783357778,1432783357778,'System'),
+           (10,2,3,'System',1432783357778,1432783357778,'System');
+
 /** ---------------------------------------------------------------*/
 DROP TABLE [dbo].[marca];
 CREATE TABLE [dbo].[marca](
@@ -1952,6 +2000,14 @@ CONSTRAINT [pk_marca_id] PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
+INSERT INTO [dbo].[marca]
+           ([id],[marca],[fabricante],[create_user],[create_date],[modify_date],[modify_user])
+     VALUES
+           (1,'Marca0001','Marca0001','System',1432783357778,1432783357778,'System'),
+           (2,'Marca0002','Marca0002','System',1432783357778,1432783357778,'System'),
+           (3,'Marca0003','Marca0003','System',1432783357778,1432783357778,'System'),
+           (4,'Marca0004','Marca0004','System',1432783357778,1432783357778,'System');
+
 /** ---------------------------------------------------------------*/
 
 DROP TABLE [dbo].[marcaProd];
@@ -1963,19 +2019,32 @@ CREATE TABLE [dbo].[marcaProd](
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
-CONSTRAINT [pk_marca_id] PRIMARY KEY CLUSTERED
+CONSTRAINT [pk_marcaProd_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
+INSERT INTO [dbo].[marcaProd]
+           ([id],[marcaId],[prodId],[create_user],[create_date],[modify_date],[modify_user])
+     VALUES
+           (1,1,1,'System',1432783357778,1432783357778,'System'),
+           (2,2,2,'System',1432783357778,1432783357778,'System'),
+           (3,3,3,'System',1432783357778,1432783357778,'System'),
+           (4,4,4,'System',1432783357778,1432783357778,'System'),
+           (5,1,5,'System',1432783357778,1432783357778,'System'),
+           (6,2,6,'System',1432783357778,1432783357778,'System'),
+           (7,3,7,'System',1432783357778,1432783357778,'System'),
+           (8,4,8,'System',1432783357778,1432783357778,'System'),
+           (9,1,9,'System',1432783357778,1432783357778,'System'),
+           (10,2,10,'System',1432783357778,1432783357778,'System');
+
 /** ---------------------------------------------------------------*/
 DROP TABLE [dbo].[cst];
-CREATE TABLE [dbo].[marcaProd](
+CREATE TABLE [dbo].[cst](
 	[id]           [int] NOT NULL,
 	[nome]         [varchar](150) NULL,
 	[descricao]    [varchar](150) NULL,
-	[valor]        [varchar](15) NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1986,11 +2055,18 @@ CONSTRAINT [pk_cst_id] PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
-/** ---------------------------------------------------------------*/
-DROP TABLE [dbo].[csosnProd];
-CREATE TABLE [dbo].[csosnProd](
+INSERT INTO [dbo].[cst]
+           ([id],[nome],[descricao],[create_user],[create_date],[modify_date],[modify_user])
+     VALUES
+           (1,'T','Marca0001','System',1432783357778,1432783357778,'System'),
+           (2,'I','Marca0002','System',1432783357778,1432783357778,'System'),
+           (3,'N','Marca0003','System',1432783357778,1432783357778,'System'),
+           (4,'F','Marca0004','System',1432783357778,1432783357778,'System');
+/** ---------------------------------------------------------------
+DROP TABLE [dbo].[cstProd];
+CREATE TABLE [dbo].[cstProd](
 	[id]           [int] NOT NULL,
-	[csosnId]      [int] NOT NULL,
+	[cstId]      [int] NOT NULL,
 	[prodId]       [int] NOT NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
@@ -2002,6 +2078,49 @@ CONSTRAINT [pk_marca_id] PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
+INSERT INTO [dbo].[cstProd]
+           ([id],[cstId],[prodId],[create_user],[create_date],[modify_date],[modify_user])
+     VALUES
+           (1,1,1,'System',1432783357778,1432783357778,'System'),
+           (2,2,2,'System',1432783357778,1432783357778,'System'),
+           (3,3,3,'System',1432783357778,1432783357778,'System'),
+           (4,4,4,'System',1432783357778,1432783357778,'System'),
+           (5,1,5,'System',1432783357778,1432783357778,'System'),
+           (6,2,6,'System',1432783357778,1432783357778,'System'),
+           (7,3,7,'System',1432783357778,1432783357778,'System'),
+           (8,4,8,'System',1432783357778,1432783357778,'System'),
+           (9,1,9,'System',1432783357778,1432783357778,'System'),
+           (10,2,10,'System',1432783357778,1432783357778,'System');
+*/
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[csosnProd];
+CREATE TABLE [dbo].[csosnProd](
+	[id]           [int] NOT NULL,
+	[csosnId]      [int] NOT NULL,
+	[prodId]       [int] NOT NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_csosnProd_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+INSERT INTO [dbo].[csosnProd]
+           ([id],[csosnId],[prodId],[create_user],[create_date],[modify_date],[modify_user])
+     VALUES
+           (1,1,1,'System',1432783357778,1432783357778,'System'),
+           (2,2,2,'System',1432783357778,1432783357778,'System'),
+           (3,3,3,'System',1432783357778,1432783357778,'System'),
+           (4,4,4,'System',1432783357778,1432783357778,'System'),
+           (5,1,5,'System',1432783357778,1432783357778,'System'),
+           (6,2,6,'System',1432783357778,1432783357778,'System'),
+           (7,3,7,'System',1432783357778,1432783357778,'System'),
+           (8,4,8,'System',1432783357778,1432783357778,'System'),
+           (9,1,9,'System',1432783357778,1432783357778,'System'),
+           (10,2,10,'System',1432783357778,1432783357778,'System');
 /** ---------------------------------------------------------------*/
 DROP TABLE [dbo].[incidencia];
 CREATE TABLE [dbo].[incidencia](
@@ -2012,13 +2131,21 @@ CREATE TABLE [dbo].[incidencia](
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
-CONSTRAINT [pk_marca_id] PRIMARY KEY CLUSTERED
+CONSTRAINT [pk_incidencia_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
-/** ---------------------------------------------------------------*/
+INSERT INTO [dbo].[incidencia]
+           ([id],[codigo],[texto],[create_user],[create_date],[modify_date],[modify_user])
+     VALUES
+           (1,'00','Nenhuma','System',1432783357778,1432783357778,'System'),
+           (2,'01','Monofasica','System',1432783357778,1432783357778,'System'),
+           (3,'02','Subst Tributaria','System',1432783357778,1432783357778,'System'),
+           (4,'03','Aliguota 0','System',1432783357778,1432783357778,'System'),
+           (5,'04','Suspensão','System',1432783357778,1432783357778,'System');
+/** ---------------------------------------------------------------
 DROP TABLE [dbo].[incidenciaProd];
 CREATE TABLE [dbo].[incidenciaProd](
 	[id]           [int] NOT NULL,
@@ -2034,6 +2161,19 @@ CONSTRAINT [pk_incidenciaProd_id] PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
+INSERT INTO [dbo].[incidenciaProd]
+           ([id],[incidenciaId],[prodId],[create_user],[create_date],[modify_date],[modify_user])
+     VALUES
+           (1,1,1,'System',1432783357778,1432783357778,'System'),
+           (2,2,2,'System',1432783357778,1432783357778,'System'),
+           (3,3,3,'System',1432783357778,1432783357778,'System'),
+           (4,4,4,'System',1432783357778,1432783357778,'System'),
+           (5,5,5,'System',1432783357778,1432783357778,'System'),
+           (6,6,6,'System',1432783357778,1432783357778,'System'),
+           (7,4,7,'System',1432783357778,1432783357778,'System'),
+           (8,4,8,'System',1432783357778,1432783357778,'System'),
+           (9,1,9,'System',1432783357778,1432783357778,'System'),
+           (10,2,10,'System',1432783357778,1432783357778,'System');*/
 /** ---------------------------------------------------------------*/
 
 DROP TABLE [dbo].[tributacao];
@@ -2060,11 +2200,24 @@ CONSTRAINT [pk_tributacao_id] PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
+INSERT INTO [dbo].[tributacao]
+           ([id],[cstId],[prodId],[icms],[st],[mva],[csosnId],[ipi],[iat],[ippt],[pisconfins],[incidenciaId],[create_user],[create_date],[modify_date],[modify_user])
+     VALUES
+           (1,1,1,18,0,0,1,0,0,0,0,1,'System',1432783357778,1432783357778,'System'),
+           (2,2,2,18,0,0,2,0,0,0,0,2,'System',1432783357778,1432783357778,'System'),
+           (3,3,3,18,0,0,3,0,0,0,0,3,'System',1432783357778,1432783357778,'System'),
+           (4,4,4,18,0,0,4,0,0,0,0,4,'System',1432783357778,1432783357778,'System'),
+           (5,1,5,18,0,0,1,0,0,0,0,1,'System',1432783357778,1432783357778,'System'),
+           (6,2,6,18,0,0,2,0,0,0,0,2,'System',1432783357778,1432783357778,'System'),
+           (7,3,7,18,0,0,3,0,0,0,0,3,'System',1432783357778,1432783357778,'System'),
+           (8,4,8,18,0,0,4,0,0,0,0,4,'System',1432783357778,1432783357778,'System'),
+           (9,1,9,18,0,0,1,0,0,0,0,1,'System',1432783357778,1432783357778,'System'),
+           (10,2,10,18,0,0,2,0,0,0,0,2,'System',1432783357778,1432783357778,'System');
 /** ---------------------------------------------------------------*/
 DROP TABLE [dbo].[classificacao];
 CREATE TABLE [dbo].[classificacao](
 	[id]           [int] NOT NULL,
-	[nome]         [varchar](50) NULL,
+	[codigo]       [varchar](50) NULL,
 	[descricao]    [varchar](150) NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
@@ -2076,6 +2229,17 @@ CONSTRAINT [pk_classificacao_id] PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
+INSERT INTO [dbo].[classificacao]
+           ([id],[codigo],[descricao],[create_user],[create_date],[modify_date],[modify_user])
+     VALUES
+           (1,'00','Mercadoria para Revenda','System',1432783357778,1432783357778,'System'),
+           (2,'01','Materia Prima','System',1432783357778,1432783357778,'System'),
+           (3,'02','Embalagem','System',1432783357778,1432783357778,'System'),
+           (4,'03','Produto em Processo','System',1432783357778,1432783357778,'System'),
+           (5,'04','Produto Acabado','System',1432783357778,1432783357778,'System'),
+           (6,'05','SubProduto','System',1432783357778,1432783357778,'System'),
+           (7,'06','Produto Intermediario','System',1432783357778,1432783357778,'System'),
+           (8,'07','Material de Uso e Consumo','System',1432783357778,1432783357778,'System');
 /** ---------------------------------------------------------------*/
 DROP TABLE [dbo].[classificacaoProd];
 CREATE TABLE [dbo].[classificacaoProd](
@@ -2091,11 +2255,25 @@ CONSTRAINT [pk_classificacaoProd_id] PRIMARY KEY CLUSTERED
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+
+INSERT INTO [dbo].[classificacaoProd]
+           ([id],[classificacaoId],[prodId],[create_user],[create_date],[modify_date],[modify_user])
+     VALUES
+           (1,1,1,'System',1432783357778,1432783357778,'System'),
+           (2,2,2,'System',1432783357778,1432783357778,'System'),
+           (3,3,3,'System',1432783357778,1432783357778,'System'),
+           (4,4,4,'System',1432783357778,1432783357778,'System'),
+           (5,1,5,'System',1432783357778,1432783357778,'System'),
+           (6,2,6,'System',1432783357778,1432783357778,'System'),
+           (7,3,7,'System',1432783357778,1432783357778,'System'),
+           (8,4,8,'System',1432783357778,1432783357778,'System'),
+           (9,1,9,'System',1432783357778,1432783357778,'System'),
+           (10,2,10,'System',1432783357778,1432783357778,'System');
 /** ---------------------------------------------------------------*/
 DROP TABLE [dbo].[estoque];
 CREATE TABLE [dbo].[estoque](
 	[id]              [int] NOT NULL,
-	[idprod]          [int] NOT NULL,
+	[prodId]          [int] NOT NULL,
 	[estoqueTypeEnum] [int] NOT NULL,
 	[ultimoMov]       [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[quant]           [real] NOT NULL,
@@ -2109,11 +2287,34 @@ CONSTRAINT [pk_estoque_id] PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
+INSERT INTO [dbo].[estoque]
+           ([id],[estoqueTypeEnum],[prodId],[ultimoMov],[quant] ,[create_user],[create_date],[modify_date],[modify_user])
+     VALUES
+           (1,1,1,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (2,1,2,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (3,1,3,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (4,1,4,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (5,1,5,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (6,1,6,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (7,1,7,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (8,1,8,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (9,1,9,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (10,1,10,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (11,4,1,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (12,4,2,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (13,4,3,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (14,4,4,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (15,4,5,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (16,4,6,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (17,4,7,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (18,4,8,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (19,4,9,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (20,4,10,1432783357778,10,'System',1432783357778,1432783357778,'System');
 /** ---------------------------------------------------------------*/
 DROP TABLE [dbo].[preco];
 CREATE TABLE [dbo].[preco](
 	[id]              [int] NOT NULL,
-	[idprod]          [int] NOT NULL,
+	[prodId]          [int] NOT NULL,
 	[precoTypeEnum]   [int] NOT NULL,
 	[dataMarcacao]    [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[valor]           [real] NOT NULL,
@@ -2123,33 +2324,41 @@ CREATE TABLE [dbo].[preco](
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
-CONSTRAINT [pk_estoque_id] PRIMARY KEY CLUSTERED
+CONSTRAINT [pk_preco_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
-/** ---------------------------------------------------------------*/
-DROP TABLE [dbo].[custo];
-CREATE TABLE [dbo].[custo](
-	[id]              [int] NOT NULL,
-	[idprod]          [int] NOT NULL,
-	[valor]           [real] NOT NULL,
-	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
-    [create_user]  [varchar](50) NULL,
-    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
-    [modify_user]  [varchar](50) NULL,
-CONSTRAINT [pk_custo_id] PRIMARY KEY CLUSTERED
-(
-	[id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
+INSERT INTO [dbo].[preco]
+           ([id],[precoTypeEnum],[prodId],[dataMarcacao],[valor] ,[create_user],[create_date],[modify_date],[modify_user])
+     VALUES
+           (1,1,1,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (2,1,2,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (3,1,3,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (4,1,4,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (5,1,5,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (6,1,6,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (7,1,7,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (8,1,8,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (9,1,9,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (10,1,10,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (11,4,1,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (12,4,2,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (13,4,3,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (14,4,4,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (15,4,5,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (16,4,6,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (17,4,7,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (18,4,8,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (19,4,9,1432783357778,10,'System',1432783357778,1432783357778,'System'),
+           (20,4,10,1432783357778,10,'System',1432783357778,1432783357778,'System');
 /** ---------------------------------------------------------------*/
 DROP TABLE [dbo].[custoItens];
 CREATE TABLE [dbo].[custoItens](
 	[id]               [int] NOT NULL,
-	[idcusto]          [int] NOT NULL,
 	[custo]   		   [varchar](50) NULL,
+	[custoDesp]        [int] NOT NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -2159,11 +2368,30 @@ CONSTRAINT [pk_custoItens_id] PRIMARY KEY CLUSTERED
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+
+INSERT INTO [dbo].[custoItens]
+           ([id],[custo],[custoDesp],[create_user],[create_date],[modify_date],[modify_user])
+     VALUES
+           (1,'Valor Nota Fiscal',2,'System',1432783357778,1432783357778,'System'),
+           (2,'ICMS',1,'System',1432783357778,1432783357778,'System'),
+           (3,'DESCONTO',1,'System',1432783357778,1432783357778,'System'),
+           (4,'FRETE',0,'System',1432783357778,1432783357778,'System'),
+           (5,'SEGURO',0,'System',1432783357778,1432783357778,'System'),
+           (6,'OUTRAS DESPESAS',0,'System',1432783357778,1432783357778,'System'),
+           (7,'IPI',0,'System',1432783357778,1432783357778,'System'),
+           (8,'ICMS SAIDA',0,'System',1432783357778,1432783357778,'System'),
+           (9,'PIS',0,'System',1432783357778,1432783357778,'System'),
+           (10,'CONFINS',0,'System',1432783357778,1432783357778,'System'),
+           (11,'CONTRIBUICAO SOCIAL',0,'System',1432783357778,1432783357778,'System'),
+           (12,'CUSTO OPERACIONAL',0,'System',1432783357778,1432783357778,'System'),
+           (13,'COMISSAO',0,'System',1432783357778,1432783357778,'System');
+
 /** ---------------------------------------------------------------*/
-DROP TABLE [dbo].[porcao];
-CREATE TABLE [dbo].[porcao](
+DROP TABLE [dbo].[custo];
+CREATE TABLE [dbo].[custo](
 	[id]              [int] NOT NULL,
-	[idprod]          [int] NOT NULL,
+	[prodId]          [int] NOT NULL,
+	[idcustoItens]    [int] NOT NULL,
 	[valor]           [real] NOT NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
@@ -2174,21 +2402,113 @@ CONSTRAINT [pk_custo_id] PRIMARY KEY CLUSTERED
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+
+INSERT INTO [dbo].[custo]
+           ([id],[idcustoItens],[prodId],[valor] ,[create_user],[create_date],[modify_date],[modify_user])
+     VALUES
+           (1,1,1,10,'System',1432783357778,1432783357778,'System'),
+           (2,2,2,10,'System',1432783357778,1432783357778,'System'),
+           (3,3,3,10,'System',1432783357778,1432783357778,'System'),
+           (4,4,4,10,'System',1432783357778,1432783357778,'System'),
+           (5,5,5,10,'System',1432783357778,1432783357778,'System'),
+           (6,6,6,10,'System',1432783357778,1432783357778,'System'),
+           (7,7,7,10,'System',1432783357778,1432783357778,'System'),
+           (8,8,8,10,'System',1432783357778,1432783357778,'System'),
+           (9,9,9,10,'System',1432783357778,1432783357778,'System'),
+           (10,10,10,10,'System',1432783357778,1432783357778,'System'),
+           (11,11,1,10,'System',1432783357778,1432783357778,'System'),
+           (12,12,2,10,'System',1432783357778,1432783357778,'System'),
+           (13,13,3,10,'System',1432783357778,1432783357778,'System'),
+           (14,1,4,10,'System',1432783357778,1432783357778,'System'),
+           (15,2,5,10,'System',1432783357778,1432783357778,'System'),
+           (16,3,6,10,'System',1432783357778,1432783357778,'System'),
+           (17,4,7,10,'System',1432783357778,1432783357778,'System'),
+           (18,5,8,10,'System',1432783357778,1432783357778,'System'),
+           (19,6,9,10,'System',1432783357778,1432783357778,'System'),
+           (20,7,10,10,'System',1432783357778,1432783357778,'System');
+
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[porcao];
+CREATE TABLE [dbo].[porcao](
+	[id]              [int] NOT NULL,
+	[prodId]          [int] NOT NULL,
+	[valor]           [real] NOT NULL,
+	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_porcao_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+INSERT INTO [dbo].[porcao]
+           ([id],[valor],[prodId],[create_user],[create_date],[modify_date],[modify_user])
+     VALUES
+           (1,10,1,'System',1432783357778,1432783357778,'System'),
+           (2,20,2,'System',1432783357778,1432783357778,'System'),
+           (3,30,3,'System',1432783357778,1432783357778,'System'),
+           (4,40,4,'System',1432783357778,1432783357778,'System'),
+           (5,50,5,'System',1432783357778,1432783357778,'System'),
+           (6,60,6,'System',1432783357778,1432783357778,'System'),
+           (7,70,7,'System',1432783357778,1432783357778,'System'),
+           (8,80,8,'System',1432783357778,1432783357778,'System'),
+           (9,90,9,'System',1432783357778,1432783357778,'System'),
+           (10,100,10,'System',1432783357778,1432783357778,'System'),
+           (11,110,1,'System',1432783357778,1432783357778,'System'),
+           (12,120,2,'System',1432783357778,1432783357778,'System'),
+           (13,130,3,'System',1432783357778,1432783357778,'System'),
+           (14,10,4,'System',1432783357778,1432783357778,'System'),
+           (15,20,5,'System',1432783357778,1432783357778,'System'),
+           (16,300,6,'System',1432783357778,1432783357778,'System'),
+           (17,40,7,'System',1432783357778,1432783357778,'System'),
+           (18,50,8,'System',1432783357778,1432783357778,'System'),
+           (19,60,9,'System',1432783357778,1432783357778,'System'),
+           (20,70,10,'System',1432783357778,1432783357778,'System');
+
 /** ---------------------------------------------------------------*/
 DROP TABLE [dbo].[porcaoItens];
 CREATE TABLE [dbo].[porcaoItens](
 	[id]               [int] NOT NULL,
 	[idcusto]          [int] NOT NULL,
+	[unimed]           [int] NOT NULL,
+	[porcao]   		   [real] NULL,
+	[vd]   		       [real] NULL,
 	[nome]   		   [varchar](150) NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
-CONSTRAINT [pk_custoItens_id] PRIMARY KEY CLUSTERED
+CONSTRAINT [pk_porcaoItens_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+
+INSERT INTO [dbo].[porcaoItens]
+           ([id],[porcao],[idcusto],[nome],[vd],[unimed],[create_user],[create_date],[modify_date],[modify_user])
+     VALUES
+           (1,10,1,'Valor Calorico',2.6,1,'System',1432783357778,1432783357778,'System'),
+           (2,20,2,'CARBOIDRATOS',2.6,1,'System',1432783357778,1432783357778,'System'),
+           (3,30,3,'PROTEINAS',2.6,1,'System',1432783357778,1432783357778,'System'),
+           (4,40,4,'GORDURAS TOTAIS',2.6,1,'System',1432783357778,1432783357778,'System'),
+           (5,50,5,'GORDURAS SATURADAS',2.6,1,'System',1432783357778,1432783357778,'System'),
+           (6,60,6,'COLESTERAL',2.6,1,'System',1432783357778,1432783357778,'System'),
+           (7,70,7,'FIBRA ALIMENTAR',2.6,1,'System',1432783357778,1432783357778,'System'),
+           (8,80,8,'CALCIO',2.6,1,'System',1432783357778,1432783357778,'System'),
+           (9,90,9,'FERRO',2.6,1,'System',1432783357778,1432783357778,'System'),
+           (10,100,10,'SODIO',2.6,1,'System',1432783357778,1432783357778,'System'),
+           (11,110,1,'SODIO',2.6,1,'System',1432783357778,1432783357778,'System'),
+           (12,120,2,'FERRO',2.6,1,'System',1432783357778,1432783357778,'System'),
+           (13,130,3,'CALCIO',2.6,1,'System',1432783357778,1432783357778,'System'),
+           (14,10,4,'FIBRA ALIMENTAR',2.6,1,'System',1432783357778,1432783357778,'System'),
+           (15,20,5,'COLESTERAL',2.6,1,'System',1432783357778,1432783357778,'System'),
+           (16,300,6,'GORDURAS SATURADAS',2.6,1,'System',1432783357778,1432783357778,'System'),
+           (17,40,7,'GORDURAS TOTAIS',2.6,1,'System',1432783357778,1432783357778,'System'),
+           (18,50,8,'Valor Calorico',2.6,1,'System',1432783357778,1432783357778,'System'),
+           (19,60,9,'Valor Calorico',2.6,1,'System',1432783357778,1432783357778,'System'),
+           (20,70,10,'Valor Calorico',2.6,1,'System',1432783357778,1432783357778,'System');
 /** ---------------------------------------------------------------*/
 DROP TABLE [dbo].[rentabilidade];
 CREATE TABLE [dbo].[rentabilidade](
@@ -2198,14 +2518,22 @@ CREATE TABLE [dbo].[rentabilidade](
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
-CONSTRAINT [pk_custo_id] PRIMARY KEY CLUSTERED
+CONSTRAINT [pk_rentabilidade_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+
+INSERT INTO [dbo].[rentabilidade]
+           ([id],[idprod],[create_user],[create_date],[modify_date],[modify_user])
+     VALUES
+           (1,1,'System',1432783357778,1432783357778,'System'),
+           (2,2,'System',1432783357778,1432783357778,'System'),
+           (3,3,'System',1432783357778,1432783357778,'System'),
+           (4,4,'System',1432783357778,1432783357778,'System');
 /** ---------------------------------------------------------------*/
 DROP TABLE [dbo].[rentabilidadeProdutos];
-CREATE TABLE [dbo].[porcaoItens](
+CREATE TABLE [dbo].[rentabilidadeProdutos](
 	[id]                    [int] NOT NULL,
 	[idrentabilidade]       [int] NOT NULL,
 	[idprod]                [int] NOT NULL,
@@ -2215,11 +2543,20 @@ CREATE TABLE [dbo].[porcaoItens](
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
-CONSTRAINT [pk_custoItens_id] PRIMARY KEY CLUSTERED
+CONSTRAINT [pk_rentabilidadeProdutos_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+
+INSERT INTO [dbo].[rentabilidadeProdutos]
+           ([id],[idrentabilidade],[idprod],[valor],[rentabilidadeTypeEnum],[create_user],[create_date],[modify_date],[modify_user])
+     VALUES
+           (1,1,5,10,1,'System',1432783357778,1432783357778,'System'),
+           (2,2,6,15,2,'System',1432783357778,1432783357778,'System'),
+           (3,3,7,20,1,'System',1432783357778,1432783357778,'System'),
+           (4,4,8,25,2,'System',1432783357778,1432783357778,'System');
+
 /** ---------------------------------------------------------------*/
 
 DROP TABLE [dbo].[cfop];
@@ -2239,40 +2576,88 @@ CREATE TABLE [dbo].[cfop](
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
-CONSTRAINT [pk_custo_id] PRIMARY KEY CLUSTERED
+CONSTRAINT [pk_cfop_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+
+INSERT INTO [dbo].[cfop]
+           ([id],[cfop],[natureza],[simplificado],[cfopTypeEnum],[icms],[icmsReduzido],[margemAgregadaST],[cstPrincipal],[classFiscal],[observacao],[create_user],[create_date],[modify_date],[modify_user])
+     VALUES
+           (1,'1','5','10',1,18,2,0,0,1,'OBSERVACAO','System',1432783357778,1432783357778,'System'),
+           (2,'1','5','10',1,18,2,0,0,1,'OBSERVACAO','System',1432783357778,1432783357778,'System'),
+           (3,'1','5','10',1,18,2,0,0,1,'OBSERVACAO','System',1432783357778,1432783357778,'System'),
+           (4,'1','5','10',1,18,2,0,0,1,'OBSERVACAO','System',1432783357778,1432783357778,'System');
 /** ---------------------------------------------------------------*/
 DROP TABLE [dbo].[CfopProd];
 CREATE TABLE [dbo].[CfopProd](
 	[id]               [int] NOT NULL,
 	[idCfop]          [int] NOT NULL,
+	[prodId]		  [int] NOT NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
-CONSTRAINT [pk_custoItens_id] PRIMARY KEY CLUSTERED
+CONSTRAINT [pk_CfopProd_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+
+INSERT INTO [dbo].[CfopProd]
+           ([id],[idCfop],[prodId],[create_user],[create_date],[modify_date],[modify_user])
+     VALUES
+           (1,1,1,'System',1432783357778,1432783357778,'System'),
+           (2,2,2,'System',1432783357778,1432783357778,'System'),
+           (3,3,3,'System',1432783357778,1432783357778,'System'),
+           (4,4,4,'System',1432783357778,1432783357778,'System'),
+           (5,1,5,'System',1432783357778,1432783357778,'System'),
+           (6,2,6,'System',1432783357778,1432783357778,'System'),
+           (7,3,7,'System',1432783357778,1432783357778,'System'),
+           (8,4,8,'System',1432783357778,1432783357778,'System'),
+           (9,1,9,'System',1432783357778,1432783357778,'System'),
+           (10,2,10,'System',1432783357778,1432783357778,'System'),
+           (11,3,1,'System',1432783357778,1432783357778,'System'),
+           (12,4,2,'System',1432783357778,1432783357778,'System'),
+           (13,1,3,'System',1432783357778,1432783357778,'System'),
+           (14,2,4,'System',1432783357778,1432783357778,'System'),
+           (15,3,5,'System',1432783357778,1432783357778,'System'),
+           (16,4,6,'System',1432783357778,1432783357778,'System'),
+           (17,1,7,'System',1432783357778,1432783357778,'System'),
+           (18,2,8,'System',1432783357778,1432783357778,'System'),
+           (19,3,9,'System',1432783357778,1432783357778,'System'),
+           (20,4,10,'System',1432783357778,1432783357778,'System');
 /** ---------------------------------------------------------------*/
 
 DROP TABLE [dbo].[ForneProd];
 CREATE TABLE [dbo].[ForneProd](
 	[id]           [int] NOT NULL,
 	[idForn]       [int] NOT NULL,
+	[prodId]	   [int] NOT NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
-CONSTRAINT [pk_custoItens_id] PRIMARY KEY CLUSTERED
+CONSTRAINT [pk_ForneProd_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+
+INSERT INTO [dbo].[ForneProd]
+           ([id],[idForn],[prodId],[create_user],[create_date],[modify_date],[modify_user])
+     VALUES
+           (1,1,1,'System',1432783357778,1432783357778,'System'),
+           (2,2,2,'System',1432783357778,1432783357778,'System'),
+           (3,3,3,'System',1432783357778,1432783357778,'System'),
+           (4,4,4,'System',1432783357778,1432783357778,'System'),
+           (5,1,5,'System',1432783357778,1432783357778,'System'),
+           (6,2,6,'System',1432783357778,1432783357778,'System'),
+           (7,3,7,'System',1432783357778,1432783357778,'System'),
+           (8,4,8,'System',1432783357778,1432783357778,'System'),
+           (9,1,9,'System',1432783357778,1432783357778,'System'),
+           (10,2,10,'System',1432783357778,1432783357778,'System');
 /** ---------------------------------------------------------------*/
 DROP TABLE [dbo].[produto];
 CREATE TABLE [dbo].[produto](
@@ -2298,3 +2683,41 @@ CONSTRAINT [pk_produto_id] PRIMARY KEY CLUSTERED
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+
+USE [PGSi]
+GO
+
+INSERT INTO [dbo].[produto]
+           ([id]
+           ,[codigo]
+           ,[cdBarras]
+           ,[dataCreate]
+           ,[produto]
+           ,[aplicacao]
+           ,[localizacao]
+           ,[dataValidade]
+           ,[comissao]
+           ,[fracao]
+           ,[porcao]
+           ,[pesoBruto]
+           ,[pesoLiquido]
+           ,[create_date]
+           ,[create_user]
+           ,[modify_date]
+           ,[modify_user])
+     VALUES
+           (1,'00001','00000101010',1432783357778,'BALA','<aplicacao, varchar(250),>','<localizacao, varchar(200),>',1432783357778,10,50,50,1.5,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (2,'00002','00000101010',1432783357778,'BALA','<aplicacao, varchar(250),>','<localizacao, varchar(200),>',1432783357778,10,50,50,1.5,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (3,'00003','00000101010',1432783357778,'BALA','<aplicacao, varchar(250),>','<localizacao, varchar(200),>',1432783357778,10,50,50,1.5,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (4,'00004','00000101010',1432783357778,'BALA','<aplicacao, varchar(250),>','<localizacao, varchar(200),>',1432783357778,10,50,50,1.5,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (5,'00005','00000101010',1432783357778,'BALA','<aplicacao, varchar(250),>','<localizacao, varchar(200),>',1432783357778,10,50,50,1.5,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (6,'00006','00000101010',1432783357778,'BALA','<aplicacao, varchar(250),>','<localizacao, varchar(200),>',1432783357778,10,50,50,1.5,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (7,'00007','00000101010',1432783357778,'BALA','<aplicacao, varchar(250),>','<localizacao, varchar(200),>',1432783357778,10,50,50,1.5,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (8,'00008','00000101010',1432783357778,'BALA','<aplicacao, varchar(250),>','<localizacao, varchar(200),>',1432783357778,10,50,50,1.5,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (9,'00009','00000101010',1432783357778,'BALA','<aplicacao, varchar(250),>','<localizacao, varchar(200),>',1432783357778,10,50,50,1.5,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (10,'000010','00000101010',1432783357778,'BALA','<aplicacao, varchar(250),>','<localizacao, varchar(200),>',1432783357778,10,50,50,1.5,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM');
+
+
+GO
+
+

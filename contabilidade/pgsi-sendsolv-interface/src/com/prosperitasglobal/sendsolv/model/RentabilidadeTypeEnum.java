@@ -1,5 +1,8 @@
 package com.prosperitasglobal.sendsolv.model;
 
+import com.qat.framework.model.II18nEnum;
+import com.qat.framework.model.IIntegerEnum;
+
 /**
  * The Enum PayrollTypeEnum details the different options a payroll can have inside of SendSolv
  *
@@ -14,7 +17,7 @@ public enum RentabilidadeTypeEnum implements IIntegerEnum, II18nEnum
 	PERDA(1, "com.prosperitasglobal.sendsolv.model.payrolltype.centralized"),
 
 	/** The not centralized. */
-	PRODUTO(2, "com.prosperitasglobal.sendsolv.model.payrolltype.not_centralized"),
+	PRODUTO(2, "com.prosperitasglobal.sendsolv.model.payrolltype.not_centralized");
 
 	/** The code. */
 	private Integer code;

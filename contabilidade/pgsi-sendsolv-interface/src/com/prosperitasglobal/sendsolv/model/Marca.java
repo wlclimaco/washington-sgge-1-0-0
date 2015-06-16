@@ -1,5 +1,7 @@
 package com.prosperitasglobal.sendsolv.model;
 
+import java.util.List;
+
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -54,136 +56,102 @@ public class Marca extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the tabela.
-	 *
-	 * @return the tabela
+	 * @return the marca
 	 */
-	public String getTabela()
+	public String getMarca()
 	{
-		return tabela;
+		return marca;
 	}
 
 	/**
-	 * Sets the tabela.
-	 *
-	 * @param tabela the new tabela
+	 * @param marca the marca to set
 	 */
-	public void setTabela(String tabela)
+	public void setMarca(String marca)
 	{
-		this.tabela = tabela;
+		this.marca = marca;
 	}
 
 	/**
-	 * Gets the acao.
-	 *
-	 * @return the acao
+	 * @return the fabricante
 	 */
-	public String getAcao()
+	public String getFabricante()
 	{
-		return acao;
+		return fabricante;
 	}
 
 	/**
-	 * Sets the acao.
-	 *
-	 * @param acao the new acao
+	 * @param fabricante the fabricante to set
 	 */
-	public void setAcao(String acao)
+	public void setFabricante(String fabricante)
 	{
-		this.acao = acao;
+		this.fabricante = fabricante;
 	}
 
 	/**
-	 * Gets the registro.
-	 *
-	 * @return the registro
+	 * @return the emailList
 	 */
-	public String getRegistro()
+	public List<Email> getEmailList()
 	{
-		return registro;
+		return emailList;
 	}
 
 	/**
-	 * Sets the registro.
-	 *
-	 * @param registro the new registro
+	 * @param emailList the emailList to set
 	 */
-	public void setRegistro(String registro)
+	public void setEmailList(List<Email> emailList)
 	{
-		this.registro = registro;
+		this.emailList = emailList;
 	}
 
 	/**
-	 * Gets the data.
-	 *
-	 * @return the data
+	 * @return the enderecoList
 	 */
-	public Integer getData()
+	public List<Endereco> getEnderecoList()
 	{
-		return data;
+		return enderecoList;
 	}
 
 	/**
-	 * Sets the data.
-	 *
-	 * @param data the new data
+	 * @param enderecoList the enderecoList to set
 	 */
-	public void setData(Integer data)
+	public void setEnderecoList(List<Endereco> enderecoList)
 	{
-		this.data = data;
+		this.enderecoList = enderecoList;
 	}
 
 	/**
-	 * Gets the usuario.
-	 *
-	 * @return the usuario
+	 * @return the telefoneList
 	 */
-	public String getUsuario()
+	public List<Telefone> getTelefoneList()
 	{
-		return usuario;
+		return telefoneList;
 	}
 
 	/**
-	 * Sets the usuario.
-	 *
-	 * @param usuario the new usuario
+	 * @param telefoneList the telefoneList to set
 	 */
-	public void setUsuario(String usuario)
+	public void setTelefoneList(List<Telefone> telefoneList)
 	{
-		this.usuario = usuario;
-	}
-
-	/**
-	 * Gets the empresa.
-	 *
-	 * @return the empresa
-	 */
-	public Integer getEmpresa()
-	{
-		return empresa;
-	}
-
-	/**
-	 * Sets the empresa.
-	 *
-	 * @param empresa the new empresa
-	 */
-	public void setEmpresa(Integer empresa)
-	{
-		this.empresa = empresa;
+		this.telefoneList = telefoneList;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.model.ModelCosmeDamiao#toString()
+	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString()
 	{
-		return "Grupo [getId()=" + getId() + ", getType()=" + getType() + ", getTabela()=" + getTabela()
-				+ ", getAcao()=" + getAcao() + ", getRegistro()=" + getRegistro() + ", getData()=" + getData()
-				+ ", getUsuario()=" + getUsuario() + ", getEmpresa()=" + getEmpresa() + ", getParentId()="
-				+ getParentId() + ", toString()=" + super.toString() + "]";
+		return "Marca [getId()=" + getId() + ", getMarca()=" + getMarca() + ", getFabricante()=" + getFabricante()
+				+ ", getEmailList()=" + getEmailList() + ", getEnderecoList()=" + getEnderecoList()
+				+ ", getTelefoneList()=" + getTelefoneList() + ", getTabelaEnumValue()=" + getTabelaEnumValue()
+				+ ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue()
+				+ ", getParentId()=" + getParentId() + ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType()
+				+ ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()="
+				+ getEmprId() + ", getSite()=" + getSite() + ", toString()=" + super.toString() + ", getModelAction()="
+				+ getModelAction() + ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()="
+				+ getCreateDateUTC() + ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()="
+				+ getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
 	}
 
 }

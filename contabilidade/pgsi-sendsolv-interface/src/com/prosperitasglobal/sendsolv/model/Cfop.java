@@ -59,143 +59,163 @@ public class Cfop extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the logradouro.
-	 *
-	 * @return the logradouro
+	 * @return the cfop
 	 */
-	public String getLogradouro()
+	public String getCfop()
 	{
-		return logradouro;
+		return cfop;
 	}
 
 	/**
-	 * Sets the logradouro.
-	 *
-	 * @param logradouro the logradouro to set
+	 * @param cfop the cfop to set
 	 */
-	public void setLogradouro(String logradouro)
+	public void setCfop(String cfop)
 	{
-		this.logradouro = logradouro;
+		this.cfop = cfop;
 	}
 
 	/**
-	 * Gets the cidade.
-	 *
-	 * @return the cidade
+	 * @return the natureza
 	 */
-	public String getCidade()
+	public String getNatureza()
 	{
-		return cidade;
+		return natureza;
 	}
 
 	/**
-	 * Sets the cidade.
-	 *
-	 * @param cidade the cidade to set
+	 * @param natureza the natureza to set
 	 */
-	public void setCidade(String cidade)
+	public void setNatureza(String natureza)
 	{
-		this.cidade = cidade;
+		this.natureza = natureza;
 	}
 
 	/**
-	 * Gets the estado.
-	 *
-	 * @return the estado
+	 * @return the simplificado
 	 */
-	public String getEstado()
+	public String getSimplificado()
 	{
-		return estado;
+		return simplificado;
 	}
 
 	/**
-	 * Sets the estado.
-	 *
-	 * @param estado the estado to set
+	 * @param simplificado the simplificado to set
 	 */
-	public void setEstado(String estado)
+	public void setSimplificado(String simplificado)
 	{
-		this.estado = estado;
+		this.simplificado = simplificado;
 	}
 
 	/**
-	 * Gets the bairro.
-	 *
-	 * @return the bairro
+	 * @return the cfopTypeEnum
 	 */
-	public String getBairro()
+	public CfopTypeEnum getCfopTypeEnum()
 	{
-		return bairro;
+		return cfopTypeEnum;
 	}
 
 	/**
-	 * Sets the bairro.
-	 *
-	 * @param bairro the bairro to set
+	 * @param cfopTypeEnum the cfopTypeEnum to set
 	 */
-	public void setBairro(String bairro)
+	public void setCfopTypeEnum(CfopTypeEnum cfopTypeEnum)
 	{
-		this.bairro = bairro;
+		this.cfopTypeEnum = cfopTypeEnum;
 	}
 
 	/**
-	 * Gets the numero.
-	 *
-	 * @return the numero
+	 * @return the icms
 	 */
-	public String getNumero()
+	public Double getIcms()
 	{
-		return numero;
+		return icms;
 	}
 
 	/**
-	 * Sets the numero.
-	 *
-	 * @param numero the numero to set
+	 * @param icms the icms to set
 	 */
-	public void setNumero(String numero)
+	public void setIcms(Double icms)
 	{
-		this.numero = numero;
+		this.icms = icms;
 	}
 
 	/**
-	 * Gets the cep.
-	 *
-	 * @return the cep
+	 * @return the icmsReduzido
 	 */
-	public String getCep()
+	public Double getIcmsReduzido()
 	{
-		return cep;
+		return icmsReduzido;
 	}
 
 	/**
-	 * Sets the cep.
-	 *
-	 * @param cep the cep to set
+	 * @param icmsReduzido the icmsReduzido to set
 	 */
-	public void setCep(String cep)
+	public void setIcmsReduzido(Double icmsReduzido)
 	{
-		this.cep = cep;
+		this.icmsReduzido = icmsReduzido;
 	}
 
 	/**
-	 * Gets the tipo endereco.
-	 *
-	 * @return the tipoEndereco
+	 * @return the margemAgregadaST
 	 */
-	public String getTipoEndereco()
+	public Double getMargemAgregadaST()
 	{
-		return tipoEndereco;
+		return margemAgregadaST;
 	}
 
 	/**
-	 * Sets the tipo endereco.
-	 *
-	 * @param tipoEndereco the tipoEndereco to set
+	 * @param margemAgregadaST the margemAgregadaST to set
 	 */
-	public void setTipoEndereco(String tipoEndereco)
+	public void setMargemAgregadaST(Double margemAgregadaST)
 	{
-		this.tipoEndereco = tipoEndereco;
+		this.margemAgregadaST = margemAgregadaST;
+	}
+
+	/**
+	 * @return the cstPrincipal
+	 */
+	public Double getCstPrincipal()
+	{
+		return cstPrincipal;
+	}
+
+	/**
+	 * @param cstPrincipal the cstPrincipal to set
+	 */
+	public void setCstPrincipal(Double cstPrincipal)
+	{
+		this.cstPrincipal = cstPrincipal;
+	}
+
+	/**
+	 * @return the classFiscal
+	 */
+	public Double getClassFiscal()
+	{
+		return classFiscal;
+	}
+
+	/**
+	 * @param classFiscal the classFiscal to set
+	 */
+	public void setClassFiscal(Double classFiscal)
+	{
+		this.classFiscal = classFiscal;
+	}
+
+	/**
+	 * @return the observacao
+	 */
+	public String getObservacao()
+	{
+		return observacao;
+	}
+
+	/**
+	 * @param observacao the observacao to set
+	 */
+	public void setObservacao(String observacao)
+	{
+		this.observacao = observacao;
 	}
 
 	/*
@@ -205,10 +225,19 @@ public class Cfop extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Endereco [getId()=" + getId() + ", getLogradouro()=" + getLogradouro() + ", getCidade()=" + getCidade()
-				+ ", getEstado()=" + getEstado() + ", getBairro()=" + getBairro() + ", getNumero()=" + getNumero()
-				+ ", getCep()=" + getCep() + ", getTipoEndereco()=" + getTipoEndereco() + ", toString()="
-				+ super.toString() + "]";
+		return "Cfop [getId()=" + getId() + ", getCfop()=" + getCfop() + ", getNatureza()=" + getNatureza()
+				+ ", getSimplificado()=" + getSimplificado() + ", getCfopTypeEnum()=" + getCfopTypeEnum()
+				+ ", getIcms()=" + getIcms() + ", getIcmsReduzido()=" + getIcmsReduzido() + ", getMargemAgregadaST()="
+				+ getMargemAgregadaST() + ", getCstPrincipal()=" + getCstPrincipal() + ", getClassFiscal()="
+				+ getClassFiscal() + ", getObservacao()=" + getObservacao() + ", getTabelaEnumValue()="
+				+ getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()="
+				+ getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()=" + getType()
+				+ ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()="
+				+ getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite() + ", toString()="
+				+ super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
+				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
+				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + "]";
 	}
 
 }

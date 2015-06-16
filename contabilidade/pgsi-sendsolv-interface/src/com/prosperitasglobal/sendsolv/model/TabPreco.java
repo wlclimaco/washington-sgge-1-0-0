@@ -66,136 +66,102 @@ public class TabPreco extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the tabela.
-	 *
-	 * @return the tabela
+	 * @return the dataMarcacao
 	 */
-	public String getTabela()
+	public Long getDataMarcacao()
 	{
-		return tabela;
+		return dataMarcacao;
 	}
 
 	/**
-	 * Sets the tabela.
-	 *
-	 * @param tabela the new tabela
+	 * @param dataMarcacao the dataMarcacao to set
 	 */
-	public void setTabela(String tabela)
+	public void setDataMarcacao(Long dataMarcacao)
 	{
-		this.tabela = tabela;
+		this.dataMarcacao = dataMarcacao;
 	}
 
 	/**
-	 * Gets the acao.
-	 *
-	 * @return the acao
+	 * @return the precoTypeEnum
 	 */
-	public String getAcao()
+	public PrecoTypeEnum getPrecoTypeEnum()
 	{
-		return acao;
+		return precoTypeEnum;
 	}
 
 	/**
-	 * Sets the acao.
-	 *
-	 * @param acao the new acao
+	 * @param precoTypeEnum the precoTypeEnum to set
 	 */
-	public void setAcao(String acao)
+	public void setPrecoTypeEnum(PrecoTypeEnum precoTypeEnum)
 	{
-		this.acao = acao;
+		this.precoTypeEnum = precoTypeEnum;
 	}
 
 	/**
-	 * Gets the registro.
-	 *
-	 * @return the registro
+	 * @return the valor
 	 */
-	public String getRegistro()
+	public Double getValor()
 	{
-		return registro;
+		return valor;
 	}
 
 	/**
-	 * Sets the registro.
-	 *
-	 * @param registro the new registro
+	 * @param valor the valor to set
 	 */
-	public void setRegistro(String registro)
+	public void setValor(Double valor)
 	{
-		this.registro = registro;
+		this.valor = valor;
 	}
 
 	/**
-	 * Gets the data.
-	 *
-	 * @return the data
+	 * @return the dataProInicial
 	 */
-	public Integer getData()
+	public Long getDataProInicial()
 	{
-		return data;
+		return dataProInicial;
 	}
 
 	/**
-	 * Sets the data.
-	 *
-	 * @param data the new data
+	 * @param dataProInicial the dataProInicial to set
 	 */
-	public void setData(Integer data)
+	public void setDataProInicial(Long dataProInicial)
 	{
-		this.data = data;
+		this.dataProInicial = dataProInicial;
 	}
 
 	/**
-	 * Gets the usuario.
-	 *
-	 * @return the usuario
+	 * @return the dataProFinal
 	 */
-	public String getUsuario()
+	public Long getDataProFinal()
 	{
-		return usuario;
+		return dataProFinal;
 	}
 
 	/**
-	 * Sets the usuario.
-	 *
-	 * @param usuario the new usuario
+	 * @param dataProFinal the dataProFinal to set
 	 */
-	public void setUsuario(String usuario)
+	public void setDataProFinal(Long dataProFinal)
 	{
-		this.usuario = usuario;
-	}
-
-	/**
-	 * Gets the empresa.
-	 *
-	 * @return the empresa
-	 */
-	public Integer getEmpresa()
-	{
-		return empresa;
-	}
-
-	/**
-	 * Sets the empresa.
-	 *
-	 * @param empresa the new empresa
-	 */
-	public void setEmpresa(Integer empresa)
-	{
-		this.empresa = empresa;
+		this.dataProFinal = dataProFinal;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.model.ModelCosmeDamiao#toString()
+	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString()
 	{
-		return "Grupo [getId()=" + getId() + ", getType()=" + getType() + ", getTabela()=" + getTabela()
-				+ ", getAcao()=" + getAcao() + ", getRegistro()=" + getRegistro() + ", getData()=" + getData()
-				+ ", getUsuario()=" + getUsuario() + ", getEmpresa()=" + getEmpresa() + ", getParentId()="
-				+ getParentId() + ", toString()=" + super.toString() + "]";
+		return "TabPreco [getId()=" + getId() + ", getDataMarcacao()=" + getDataMarcacao() + ", getPrecoTypeEnum()="
+				+ getPrecoTypeEnum() + ", getValor()=" + getValor() + ", getDataProInicial()=" + getDataProInicial()
+				+ ", getDataProFinal()=" + getDataProFinal() + ", getTabelaEnumValue()=" + getTabelaEnumValue()
+				+ ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue()
+				+ ", getParentId()=" + getParentId() + ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType()
+				+ ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()="
+				+ getEmprId() + ", getSite()=" + getSite() + ", toString()=" + super.toString() + ", getModelAction()="
+				+ getModelAction() + ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()="
+				+ getCreateDateUTC() + ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()="
+				+ getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
 	}
 
 }

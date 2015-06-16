@@ -1,5 +1,7 @@
 package com.prosperitasglobal.sendsolv.model;
 
+import java.util.List;
+
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -48,136 +50,87 @@ public class RentabilidadeItens extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the tabela.
-	 *
-	 * @return the tabela
+	 * @return the idRentabilidade
 	 */
-	public String getTabela()
+	public Integer getIdRentabilidade()
 	{
-		return tabela;
+		return idRentabilidade;
 	}
 
 	/**
-	 * Sets the tabela.
-	 *
-	 * @param tabela the new tabela
+	 * @param idRentabilidade the idRentabilidade to set
 	 */
-	public void setTabela(String tabela)
+	public void setIdRentabilidade(Integer idRentabilidade)
 	{
-		this.tabela = tabela;
+		this.idRentabilidade = idRentabilidade;
 	}
 
 	/**
-	 * Gets the acao.
-	 *
-	 * @return the acao
+	 * @return the produtoList
 	 */
-	public String getAcao()
+	public List<Produto> getProdutoList()
 	{
-		return acao;
+		return produtoList;
 	}
 
 	/**
-	 * Sets the acao.
-	 *
-	 * @param acao the new acao
+	 * @param produtoList the produtoList to set
 	 */
-	public void setAcao(String acao)
+	public void setProdutoList(List<Produto> produtoList)
 	{
-		this.acao = acao;
+		this.produtoList = produtoList;
 	}
 
 	/**
-	 * Gets the registro.
-	 *
-	 * @return the registro
+	 * @return the valor
 	 */
-	public String getRegistro()
+	public Double getValor()
 	{
-		return registro;
+		return valor;
 	}
 
 	/**
-	 * Sets the registro.
-	 *
-	 * @param registro the new registro
+	 * @param valor the valor to set
 	 */
-	public void setRegistro(String registro)
+	public void setValor(Double valor)
 	{
-		this.registro = registro;
+		this.valor = valor;
 	}
 
 	/**
-	 * Gets the data.
-	 *
-	 * @return the data
+	 * @return the rentabilidadeTypeEnum
 	 */
-	public Integer getData()
+	public RentabilidadeTypeEnum getRentabilidadeTypeEnum()
 	{
-		return data;
+		return rentabilidadeTypeEnum;
 	}
 
 	/**
-	 * Sets the data.
-	 *
-	 * @param data the new data
+	 * @param rentabilidadeTypeEnum the rentabilidadeTypeEnum to set
 	 */
-	public void setData(Integer data)
+	public void setRentabilidadeTypeEnum(RentabilidadeTypeEnum rentabilidadeTypeEnum)
 	{
-		this.data = data;
-	}
-
-	/**
-	 * Gets the usuario.
-	 *
-	 * @return the usuario
-	 */
-	public String getUsuario()
-	{
-		return usuario;
-	}
-
-	/**
-	 * Sets the usuario.
-	 *
-	 * @param usuario the new usuario
-	 */
-	public void setUsuario(String usuario)
-	{
-		this.usuario = usuario;
-	}
-
-	/**
-	 * Gets the empresa.
-	 *
-	 * @return the empresa
-	 */
-	public Integer getEmpresa()
-	{
-		return empresa;
-	}
-
-	/**
-	 * Sets the empresa.
-	 *
-	 * @param empresa the new empresa
-	 */
-	public void setEmpresa(Integer empresa)
-	{
-		this.empresa = empresa;
+		this.rentabilidadeTypeEnum = rentabilidadeTypeEnum;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.model.ModelCosmeDamiao#toString()
+	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString()
 	{
-		return "Grupo [getId()=" + getId() + ", getType()=" + getType() + ", getTabela()=" + getTabela()
-				+ ", getAcao()=" + getAcao() + ", getRegistro()=" + getRegistro() + ", getData()=" + getData()
-				+ ", getUsuario()=" + getUsuario() + ", getEmpresa()=" + getEmpresa() + ", getParentId()="
-				+ getParentId() + ", toString()=" + super.toString() + "]";
+		return "RentabilidadeItens [getId()=" + getId() + ", getIdRentabilidade()=" + getIdRentabilidade()
+				+ ", getProdutoList()=" + getProdutoList() + ", getValor()=" + getValor()
+				+ ", getRentabilidadeTypeEnum()=" + getRentabilidadeTypeEnum() + ", getTabelaEnumValue()="
+				+ getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()="
+				+ getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()=" + getType()
+				+ ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()="
+				+ getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite() + ", toString()="
+				+ super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
+				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
+				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + "]";
 	}
 
 }
