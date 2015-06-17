@@ -15,7 +15,7 @@ public class RentabilidadeItens extends ModelCosmeDamiao
 	private Integer idRentabilidade;
 
 	/** The type of an account. */
-	private List<Produto> produtoList;
+	private Produto produto;
 
 	private Double valor;
 

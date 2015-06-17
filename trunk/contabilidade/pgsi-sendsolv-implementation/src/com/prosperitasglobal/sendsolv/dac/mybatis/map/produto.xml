@@ -9,40 +9,96 @@
 	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
 	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
 
-  	<!-- Result maps describe the mapping between the columns returned
-       from a query, and the class properties.  A result map isn't
-       necessary if the columns (or aliases) match to the properties
-       exactly. -->
+  	<!--
+/** The SendSolv id for the account. */
+	private Integer id;
+	private String codigo;
+	private String cdBarras;
+	private Classificacao classificacao;
+	private Long dataCreate;
+	private String produto;
+	private String aplicacao;
+	private String localizacao;
+	private Long dataValidade;
+	private String comissao;
+	private String fracao;
+	private UniMed uniMed;
+	private Grupo grupo;
+	private SubGrupo subGrupo;
+	private Marca marca;
+	private Double porcao;
+	private Double pesoBruto;
+	private Double pesoLiquido;
+	private String modoUso;
+	private Tributacao tributacao;
+	private List<Estoque> estoqueList;
+	private List<TabPreco> precoList;
+	private List<Custo> custoList;
+	private List<Porcao> porcaoList;
+	private List<Rentabilidade> rentabilidadeList;
+	private List<Cfop> cfopList;
+	private List<Fornecedor> fornecedorList;
+       -->
 
-  <resultMap id="empresaResult" type="Produto" >
-    <result property="parentOrganizationId" column="FK_empresa_id" />
-    <result property="parentOrganizationName" column="org_name" />
-   	<result property="batchApprovalDayLimit" column="money_transfer_offset_days"/>
-	<result property="fundsTransferDayLimit" column="funds_transfer_offset_days"/>
+  <resultMap id="produtoResult" type="Produto" >
+  	<result property="id" column="id" />
+	<result property="codigo" column="codigo" />
+	<result property="cdBarras" column="cdBarras" />
+	<result property="dataCreate" column="dataCreate" />
+	<result property="produto" column="produto" />
+	<result property="aplicacao" column="aplicacao" />
+	<result property="localizacao" column="localizacao" />
+	<result property="dataValidade" column="dataValidade" />
+	<result property="comissao" column="comissao" />
+	<result property="fracao" column="fracao" />
+	<result property="porcao" column="porcao" />
+	<result property="pesoBruto" column="pesoBruto" />
+	<result property="pesoLiquido" column="pesoLiquido" />
+	<result property="modoUso" column="modoUso" />
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+	<association property="classificacao"    column="classificacao" select="RegimeMap.fetchRegimeByEmpresa"  />
+	<association property="uniMed"    column="uniMed" select="RegimeMap.fetchRegimeByEmpresa"  />
+	<association property="grupo"    column="grupo" select="RegimeMap.fetchRegimeByEmpresa"  />
+	<association property="subGrupo"    column="subGrupo" select="RegimeMap.fetchRegimeByEmpresa"  />
+	<association property="marca"    column="marca" select="RegimeMap.fetchRegimeByEmpresa"  />
+	<association property="tributacao"    column="tributacao" select="RegimeMap.fetchRegimeByEmpresa"  />
+	<collection property="estoqueList" column="id" select="ProdutoItemMap.fetchProdutoItemByProduto"/>
+	<collection property="precoList" column="id" select="ProdutoItemMap.fetchProdutoItemByProduto"/>
+	<collection property="custoList" column="id" select="ProdutoItemMap.fetchProdutoItemByProduto"/>
+	<collection property="porcaoList" column="id" select="ProdutoItemMap.fetchProdutoItemByProduto"/>
+	<collection property="rentabilidadeList" column="id" select="ProdutoItemMap.fetchProdutoItemByProduto"/>
+	<collection property="cfopList" column="id" select="ProdutoItemMap.fetchProdutoItemByProduto"/>
+	<collection property="fornecedorList" column="id" select="ProdutoItemMap.fetchProdutoItemByProduto"/>
+	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEmpresa"/>
 
-	<collection property="frequencyBasedEventList" column="business_id" select="FrequencyEventMap.fetchFrequencyByProdutoId"/>
-	<collection property="businessProductPlanList" column="business_id" select="BusinessProductPlanMap.fetchBusinessProductPlanByProdutoId"/>
   </resultMap>
 
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allProdutoColumns">
-		 b.name
-		,b.business_key
-      	,b.business_type
-      	,b.EIN_code
-      	,b.PGSi_status
-      	,b.risk_level
-      	,b.risk_level_note_text
-      	,b.FK_number_of_employees
-      	,b.FK_number_of_migrant_workers
-      	,b.FK_SIC_id
-      	,b.FK_NAICS_id
-      	,b.FK_country_code
-      	,b.FK_empresa_id
-      	,b.money_transfer_offset_days
-      	,b.funds_transfer_offset_days
+		,b.codigo"
+		,b.cdBarras"
+		,b.dataCreate"
+		,b.produto"
+		,b.aplicacao"
+		,b.localizacao"
+		,b.dataValidade"
+		,b.comissao"
+		,b.fracao"
+		,b.porcao"
+		,b.pesoBruto"
+		,b.pesoLiquido"
+		,b.modoUso"
+		,b.classificacao"
+		,b.uniMed"
+		,b.grupo"
+		,b.subGrupo"
+		,b.marca"
+		,b.tributacao"
       	,b.create_date
       	,b.create_user
       	,b.modify_date
@@ -50,33 +106,25 @@
   </sql>
 
   <sql id="allProdutoValues">
-  		#{name},
-  		#{key},
-    	#{businessTypeValue},
-    	#{employerIdentificationNumber},
-    	#{statusValue},
-    	#{risk.riskLevelValue},
-    	#{risk.riskLevelNote},
-    	#{numberOfEmployees.id},
-    	#{numberOfMigrantWorkers.id},
-    	#{standardIndustrialClassificationCode.id},
-    	#{northAmericanIndustryClassificationSystemCode.id},
-    	#{country.code},
-    	#{parentOrganizationId},
-    	#{batchApprovalDayLimit},
-    	#{fundsTransferDayLimit},
-    	<include refid="CBOFMap.changeControlFields"/>
-  </sql>
-
-  <sql id="allProdutoContactColumns">
-		FK_contact_id,
-		FK_business_id,
-		<include refid="CBOFMap.allChangeControlColumns"/>
-  </sql>
-
-  <sql id="allProdutoContactValues">
-  		#{id},
-  		#{parentKey},
+  		#{codigo},
+		#{cdBarras},
+		#{dataCreate},
+		#{produto},
+		#{aplicacao},
+		#{localizacao},
+		#{dataValidade},
+		#{comissao},
+		#{fracao},
+		#{porcao},
+		#{pesoBruto},
+		#{pesoLiquido},
+		#{modoUso},
+		#{classificacao},
+		#{uniMed},
+		#{grupo},
+		#{subGrupo},
+		#{marca},
+		#{tributacao},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
@@ -84,7 +132,7 @@
 		SQL Insert Statements.
  	-->
   <insert id="insertProduto" parameterType="Produto" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO business (
+  	INSERT INTO produto (
 		<include refid="allProdutoColumns" />
       )
     VALUES (<include refid="allProdutoValues" /> )
@@ -96,62 +144,85 @@
  	-->
 
   <update id="updateProduto" parameterType="Produto">
-    UPDATE business
+    UPDATE produto
     	<set>
-    		money_transfer_offset_days = #{batchApprovalDayLimit},
-      		funds_transfer_offset_days = #{fundsTransferDayLimit},
-    		<if test="name!= null">name = #{name},</if>
-	    	<if test="businessTypeValue!= null"> business_type=#{businessTypeValue},</if>
-	    	<if test="employerIdentificationNumber!= null"> EIN_code=#{employerIdentificationNumber},</if>
-	    	<if test="statusValue!= null"> PGSi_status=#{statusValue},</if>
-	    	<if test="numberOfEmployees.id!= null"> FK_number_of_employees=#{numberOfEmployees.id},</if>
-	    	<if test="numberOfMigrantWorkers.id!= null"> FK_number_of_migrant_workers=#{numberOfMigrantWorkers.id},</if>
-	    	<if test="standardIndustrialClassificationCode.id!= null"> FK_SIC_id=#{standardIndustrialClassificationCode.id},</if>
-	    	<if test="northAmericanIndustryClassificationSystemCode.id!= null"> FK_NAICS_id=#{northAmericanIndustryClassificationSystemCode.id},</if>
-	    	<if test="parentOrganizationId != null"> FK_empresa_id= #{parentOrganizationId},</if>
-	    	<if test="country.code!= null"> FK_country_code=#{country.code},</if>
+	    	<if test="codigo!= null">codigo = #{codigo},</if>
+			<if test="cdBarras!= null">cdBarras = #{cdBarras},</if>
+			<if test="dataCreate!= null">dataCreate = #{dataCreate},</if>
+			<if test="produto!= null">produto = #{produto},</if>
+			<if test="aplicacao!= null">aplicacao = #{aplicacao},</if>
+			<if test="localizacao!= null">localizacao = #{localizacao},</if>
+			<if test="dataValidade!= null">dataValidade = #{dataValidade},</if>
+			<if test="comissao!= null">comissao = #{comissao},</if>
+			<if test="fracao!= null">fracao = #{fracao},</if>
+			<if test="porcao!= null">porcao = #{porcao},</if>
+			<if test="pesoBruto!= null">pesoBruto = #{pesoBruto},</if>
+			<if test="pesoLiquido!= null">pesoLiquido = #{pesoLiquido},</if>
+			<if test="modoUso!= null">modoUso = #{modoUso},</if>
+			<if test="classificacao.id!= null">classificacao = #{classificacao.id},</if>
+			<if test="uniMed.id!= null">uniMed = #{uniMed.id},</if>
+			<if test="grupo.id!= null">grupo = #{grupo.id},</if>
+			<if test="subGrupo.id!= null">subGrupo = #{subGrupo.id},</if>
+			<if test="marca.id!= null">marca = #{marca.id},</if>
+			<if test="tributacao.id!= null">tributacao = #{tributacao.id},</if>
 			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
     WHERE
-     business_id = #{id} AND versn_lock_num = #{version}
+     id = #{id}
   </update>
 
    <!--
 		SQL Delete Statements.
    -->
   <delete id="deleteProdutoById" parameterType="Integer">
-    	DELETE FROM business WHERE business_id = #{id}
+    	DELETE FROM produto WHERE id = #{id}
   </delete>
 
 	<!--
 		SQL Fetch Statements.
  	-->
   <select id="fetchProdutoRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
-     SELECT COUNT(business_id) AS RECORD_COUNT
-        FROM business
-     WHERE business_type = 2
-     <if test="parentId != null">
-		  AND FK_empresa_id = #{parentId}
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM produto
+     WHERE 1 = 1
+     <if test="id != null">
+		  AND id = #{id}
 	 </if>
   </select>
 
-  <select id="fetchAllProdutos" resultMap="empresaResult">
+  <select id="fetchAllProdutos" resultMap="produtoResult">
     SELECT
 	<include refid="allProdutoColumns" />
-    FROM business ORDER BY name ASC
+    FROM produto ORDER BY id ASC
   </select>
 
-  <select id="fetchProdutoById" parameterType="FetchByIdRequest" resultMap="empresaResult">
-
+  <select id="fetchProdutoById" parameterType="FetchByIdRequest" resultMap="produtoResult">
+	SELECT b.id,
+	<include refid="allProdutoColumns" />
+    FROM produto b
+    where id = #{id}
+    ORDER BY id ASC
   </select>
 
-  <select id="fetchAllProdutosByRequest" parameterType="PagedInquiryRequest" resultMap="empresaResult">
-
+  <select id="fetchAllProdutosByRequest" parameterType="PagedInquiryRequest" resultMap="produtoResult">
+	 SELECT b.id,<include refid="allProdutoColumns" />
+        FROM produto b
+     WHERE 1 = 1
+     <if test="id != null">
+		  AND b.id = #{id}
+	 </if>
   </select>
 
-  <select id="fetchVersionNumber" parameterType="Produto" resultType="int">
-	SELECT versn_lock_num FROM business WHERE business_id = #{id}
+  <select id="fetchProdutoByProduto" parameterType="Integer" resultMap="produtoResult">
+	  	SELECT F.*
+
+		  FROM produtoProd AS C
+
+		  INNER JOIN produto AS F
+
+		    ON F.id like C.Produtoid
+		where  c.prodId = #{id}
   </select>
 
 

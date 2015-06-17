@@ -1,14 +1,15 @@
 $(document).ready(function()
 {
-	$.sc.filter = (function()
+	$.pgsi.filter = (function()
 	{
 		var _oConfig =
 		{
 			common 		:
 			{
 				mapListId 			: "map-list",
-				mapResultsContainer	: "filter-results-container-map",
-				resultsContainer	: "active-filters-list >",
+				resultsContainer 	: "filter-results-container",
+				mapListId 			: "map-list",
+				resultsContainer 	: "filter-results-container",
 				filterInputSearch 	: "filter-input.search",
 				filterInput			: "filter-input",
 				inputClear			: "input-clear",
@@ -19,7 +20,7 @@ $(document).ready(function()
 				collapse 			: "collapse",
 				blind 				: "blind",
 				allChecked 			: "all-checked",
-				allNotChecked 		: "all-not-checked",
+				allNotChecked 		: "all-not-checked .filter",
 				notInChecked 		: "not-in-checked",
 				hideMap 			: "hide-map",
 				filterInput 		: "filter-input",
@@ -34,24 +35,21 @@ $(document).ready(function()
 				formError 			: "formError",
 				formErrorContent 	: "formErrorContent",
 				customAction 		: "custom-filter-action",
-				goButton 			: "go-button",
-				bActionPerformed	: false
+				goButton 			: "go-button"
 			},
 			messages  	:
 			{
 				defaultSearchNameLabel 	: "commons.pages.search",
 				viewing 				: "commons.pages.viewing",
-				back 					: "process.page.filter.back",
 				mapShape 				: "map.tag.shape",
 				mapDrawing 				: "map.tag.drawing",
 				rangeTo 				: "commons.filter.range.to",
 				filterCustomize 		: "filter.customize",
-				filterMore 				: "filter.more"
+				filterMore 				: "light.filter.more"
 			},
 			project 	:
 			{
 				sViewFromParam 			: "view_from",
-				sTotalDaysParam			: "total_days",
 				allValue 				: "ALL",
 				notInValue 				: "-1",
 				customizationType 		: "filters"
@@ -75,16 +73,15 @@ $(document).ready(function()
 			filters				: {},
 			createReload		: false,
 			table				: null,
-			defaultContainer	: true,
 			hasSideSlide 		: true,
 			isOpenSlide 		: true,
 			hasCustomize		: false,
 			title 				: "",
 			openFirstFilters	: 3,
-			firstOptions		: 6,
-			maxCharacters		: 19,
+			firstOptions		: 17,
+			maxCharacters		: 17,
 			tagsDiv				: "." + _oConfig.common.resultsContainer + " div.first",
-			tagsMapDiv			: "#" + _oConfig.common.mapListId + " ." + _oConfig.common.mapResultsContainer,
+			tagsMapDiv			: "#" + _oConfig.common.mapListId + " ." + _oConfig.common.resultsContainer,
 			createTitle			: function ()
 			{
 				return "<h4>" + this.title + "</h4>";
@@ -98,13 +95,16 @@ $(document).ready(function()
 		 */
 		var _loadFilters = function (options)
 		{
+
 			var parameterNames  = $.address.parameterNames();
+			var length 			= parameterNames.length;
 			var parameters 		= options._parameters;
 			var $filterDiv 		= $(options.element);
+			var i 				= 0;
 			var filter;
 			var parameter;
 
-			for (var i = 0, length = parameterNames.length; i < length; i = i + 1)
+			for (; i < length; i = i + 1)
 			{
 				parameter = parameterNames[i];
 				filter 	  = parameters[parameter];
@@ -114,7 +114,7 @@ $(document).ready(function()
 					switch (filter.type)
 					{
 						case _options.filterTypes[0] : // Options
-							_loadOptionFilter($filterDiv.find("#" + filter.id), parameter, options);
+							_loadOptionFilter($filterDiv.find("#" + filter.id), parameter);
 							break;
 
 						case _options.filterTypes[1] : // Text
@@ -126,16 +126,15 @@ $(document).ready(function()
 							break;
 					}
 				}
-				else if ( pgsi.util.filter.noFiltersTags && pgsi.util.filter.noFiltersTags[parameter] )
+				else if (pgsi.util.filter.noFiltersTags && pgsi.util.filter.noFiltersTags[parameter])
 				{
-					_addTag(
-					{
+					_addTag({
 						typeId 		: parameter,
-						typeLabel 	: $.sc.locale.get((pgsi.util.filter.noFiltersTags[parameter].label ? pgsi.util.filter.noFiltersTags[parameter].label : parameter)),
+						typeLabel 	: $.pgsi.locale.get((pgsi.util.filter.noFiltersTags[parameter].label ? pgsi.util.filter.noFiltersTags[parameter].label : parameter)),
 						label 		: $.address.parameter(parameter),
 						value 		: parameter,
 						title 		: parameter,
-						options		: options
+						options		: _options
 					});
 				}
 			}
@@ -160,39 +159,29 @@ $(document).ready(function()
 			var $option;
 			var typeLabel;
 
-			if ( $toggle.hasClass("off") )
+			if ($toggle.hasClass("off"))
 			{
 				$toggle.click();
 			}
 
 			$input.each(function(i, e)
 			{
-				if (value.indexOf("|") !== -1)
-				{
-					$(this).val(value.split("|")[1]);
-				}
-				else
-				{
-					$(this).val(value);
-				}
-
-				$(this).removeClass(_oConfig.common.inputClear);
+				$(this).val(value.split("|")[i]).removeClass(_oConfig.common.inputClear);
 			});
 
-			if ( $filter.find("select#"+parameter).length )
+			if ($filter.find("select#"+parameter).length)
 			{
 				$select 	= $filter.find("select#"+parameter);
-				label 		= value.indexOf("|") !== -1 ? value.split("|")[1] : value;
-				value 		= value.indexOf("|") !== -1 ? value.split("|")[0] : value;
+				label 		= value.split("|")[0];
+				value 		= value.indexOf("|") !== -1 ? value.split("|")[1] : value;
 				$option 	= $select.find("option[value='" + value + "']");
-				typeLabel 	= _oConfig.common.filterQuery == parameter ? $option.text() : parameter;
+				typeLabel 	= parameter;
 
 				$select.val(value);
 			}
 			else
 			{
 				label = value;
-
 				if ($input.siblings("label").length)
 				{
 					if (parameter == _oConfig.project.sViewFromParam)
@@ -204,7 +193,7 @@ $(document).ready(function()
 						typeLabel = $input.siblings("label").text();
 					}
 				}
-				else if ( $filter.find("." + _oConfig.common.toggle).text() )
+				else if ($filter.find("." + _oConfig.common.toggle).text())
 				{
 					typeLabel = $filter.find("." + _oConfig.common.toggle).text();
 				}
@@ -216,8 +205,7 @@ $(document).ready(function()
 
 			typeId = typeId + " " + filter.name;
 
-			_addTag(
-			{
+			_addTag({
 				typeId 		: typeId,
 				typeLabel 	: typeLabel,
 				label 		: label,
@@ -228,12 +216,12 @@ $(document).ready(function()
 			});
 		};
 
-		var _loadOptionFilter = function ($filter, parameter, options)
+		var _loadOptionFilter = function ($filter, parameter)
 		{
-			var values 			= decodeURI($.address.parameter(parameter));
-			var typeId 			= $filter.attr("id");
-			var $toggle 		= $filter.find("." + _oConfig.common.toggle);
-			var typeLabel 		= $toggle.text();
+			var values 		= decodeURI($.address.parameter(parameter));
+			var typeId 		= $filter.attr("id");
+			var $toggle 	= $filter.find("." + _oConfig.common.toggle);
+			var typeLabel 	= $toggle.text();
 			var maxCharacters;
 			var $input;
 			var $li;
@@ -241,10 +229,11 @@ $(document).ready(function()
 			var value;
 			var title;
 			var label;
+			var i;
 
 			if (values)
 			{
-				if ( $toggle.hasClass(_oConfig.common.off) )
+				if ($toggle.hasClass(_oConfig.common.off))
 				{
 					$toggle.click();
 				}
@@ -254,48 +243,42 @@ $(document).ready(function()
 				values.pop();
 				length 			= values.length;
 
-				$filter.find("." + _oConfig.common.allChecked + " input[value='" + _oConfig.project.allValue + "']").prop("checked", false);
-
 				if (length > 0)
 				{
-					for (var i = 0; i < length; i = i + 1)
+					$filter.find("." + _oConfig.common.allChecked + " input[value='" + _oConfig.project.allValue + "']").prop("checked", false);
+
+					for (i = 0; i < length; i = i + 1)
 					{
 						value 	= values[i];
 						$input 	= $filter.find("input:checkbox[value='" +  value + "'], select option[value='" +  value + "']");
 						$li 	= null;
 
-						// If the filter input doesn't exists, then the filter must be removed from URL
-						if ( !$input.length )
+						if ($input.length)
 						{
-							_removeParameter(typeId, value, typeId, options);
-							continue;
-						}
+							if ($input.is(":checkbox"))
+							{
+								title = $input.parents("li").attr("title");
+								label = $input.siblings("span").text();
+								$input.prop("checked", true);
+							}
+							else
+							{
+								title = $.pgsi.locale.get($input.text());
+								label = $.pgsi.locale.get(title.length > maxCharacters ? title.substr(0, maxCharacters) + "..." : title);
+								$input.remove();
+								$li = _addOption($filter, $input.val(), $.pgsi.locale.get(title), $.pgsi.locale.get(label), true);
+							}
 
-						if ( $input.is(":checkbox") )
-						{
-							title = $input.parents("li").attr("title");
-							label = $input.siblings("span:last").text();
-							$input.prop("checked", true);
+							_addTag({
+								typeId 		: typeId,
+								typeLabel 	: typeLabel,
+								label 		: label,
+								value 		: $input.val(),
+								title 		: title,
+								oInput 		: $li ? $li.find("input") : $input,
+								options		: _options
+							});
 						}
-						else
-						{
-							title = $input.text();
-							label = title.length > maxCharacters ? title.substr(0, maxCharacters) + "..." : title;
-							var data = $input.data();
-							$input.remove();
-							$li = _addOption($filter, $input.val(), title, label, true, data);
-						}
-
-						_addTag(
-						{
-							typeId 		: typeId,
-							typeLabel 	: typeLabel,
-							label 		: label,
-							value 		: $input.val(),
-							title 		: title,
-							oInput 		: $li ? $li.find("input") : $input,
-							options		: options
-						});
 					}
 				}
 			}
@@ -303,70 +286,75 @@ $(document).ready(function()
 
 		var _reload = function (options)
 		{
-			_oConfig.common.bActionPerformed = true;
 
-			if ( $.sc.map.mapExists() && ($("#" + _oConfig.common.mapListId).length && !$("#" + _oConfig.common.mapListId).hasClass(_oConfig.common.hideMap)) )
+			if (options.reloadTableFunction)
 			{
-				$.sc.map.mapFromFilter();
+				options.reloadTableFunction();
 			}
 			else
 			{
-				if (options.reloadTableFunction)
-				{
-					options.reloadTableFunction();
-				}
-				else
-				{
-					$.sc.table.reloadTable({
-						table 		: options.table,
-						iStart 		: 0
-					});
-				}
+				$.pgsi.table.reloadTable({
+					table 		: options.table,
+					iStart 		: 0
+				});
 			}
+
 		};
 
 		var _addParameter = function(filterId, value, options)
 		{
 			var flt = options.filters[filterId];
 
-			if ( flt.type == _options.filterTypes[0] )
-			{
-				$.sc.pageLoader.setParameter(flt.urlParameter,
-					(($.sc.replaceAll(_oConfig.project.notInValue + "\\|", "", decodeURI($.address.parameter(flt.urlParameter) || "")) || "") + (value ? (value + "|") : "")));
-			}
-			else
-			{
-				$.sc.pageLoader.setParameter(flt.urlParameter, value);
+			if (!$.pgsi.isNullOrUndefined($.address.parameter(flt.urlParameter))) {
+				var sExist = $.address.parameter(flt.urlParameter).split('|')
+				if($.inArray(value, sExist) === -1){
+					if (flt.type == _options.filterTypes[0])
+					{
+						$.pgsi.pageLoader.setParameter(flt.urlParameter,
+							(($.pgsi.replaceAll(_oConfig.project.notInValue + "\\|", "", decodeURI($.address.parameter(flt.urlParameter) || "")) || "") + (value ? (value + "|") : "")));
+					}
+					else
+					{
+						$.pgsi.pageLoader.setParameter(flt.urlParameter, value);
+					}
+				}
+			}else{
+				if (flt.type == _options.filterTypes[0])
+					{
+						$.pgsi.pageLoader.setParameter(flt.urlParameter,
+							(($.pgsi.replaceAll(_oConfig.project.notInValue + "\\|", "", decodeURI($.address.parameter(flt.urlParameter) || "")) || "") + (value ? (value + "|") : "")));
+					}
+					else
+					{
+						$.pgsi.pageLoader.setParameter(flt.urlParameter, value);
+				}
 			}
 		};
 
 		var _removeParameter = function (filterId, value, field, options)
 		{
+
 			var flt = options.filters[filterId];
 			var actualValue;
 			var indexOf;
 
-			if ( value && flt && flt.type == _options.filterTypes[0] )
+			if (value && flt && flt.type == _options.filterTypes[0])
 			{
 				actualValue = decodeURI($.address.parameter(flt.urlParameter)).split("|");
-				indexOf 	= $.inArray("" + value, actualValue);
+				indexOf = $.inArray("" + value, actualValue);
 
 				if (indexOf != -1)
 				{
 					actualValue.splice(indexOf, 1);
 					actualValue.pop();
 
-					$.sc.pageLoader.setParameter(flt.urlParameter,
+					$.pgsi.pageLoader.setParameter(flt.urlParameter,
 						actualValue.length > 0 ? decodeURI(actualValue.join("|") + "|") : null);
 				}
 			}
-			else if ( flt && flt.inputs && flt.inputs[field] )
-			{
-				$.sc.pageLoader.setParameter(flt.inputs[field].urlParameter || field, null);
-			}
 			else
 			{
-				$.sc.pageLoader.setParameter(flt.urlParameter || field, null);
+				$.pgsi.pageLoader.setParameter(flt.urlParameter, null);
 			}
 		};
 
@@ -389,54 +377,47 @@ $(document).ready(function()
 			var sValue;
 
 			//	Set default Options
-			oParam.options = $.extend(true, {}, _options, oParam.options || {});
+			oParam.options = $.extend({}, _options, oParam.options || {});
 
 			// Replace is used to lock down application from XSS
-			if ( pgsi.util.page.fnCheckXSS(oParam.value) )
+			if (pgsi.util.page.fnCheckXSS(oParam.value))
 			{
-				var sInvalidTag = $.sc.locale.get("pgsi.filter.validation.invalidTag");
+				var sInvalidTag = $.pgsi.locale.get("pgsi.filter.validation.invalidTag");
 
 				oParam.value = sInvalidTag;
 				oParam.label = sInvalidTag;
 				oParam.title = sInvalidTag;
-
-				$.sc.progressBar.stop();
+				$.pgsi.progressBar.stop();
 			}
 
-			if ( oParam.typeId == _options.filterTypes[5] )
+			if (oParam.typeId == _options.filterTypes[5])
 			{
-				$tagsDiv	= $(oParam.options.tagsMapDiv);
-				$tag 		= _createMapTag();
+				$tagsDiv = $(oParam.options.tagsMapDiv);
+
+				$tag = _createMapTag();
 
 				$tagsDiv.find("ul").append($tag);
 
 				$tag.data("value", oParam.value);
-				$tag.data("aIds", oParam.aDeviceIds);
 			}
 			else
 			{
+
 				$tagsDiv = $(oParam.options.tagsDiv);
 
-				if ( $tagsDiv.find("." + _oConfig.common.filterContainer + " li." + oParam.typeId.split(" ").join(".")).size() )
+				if (oParam.oInput && oParam.oInput.parents("div." + _oConfig.common.filterInput + "." + _oConfig.common.search).length)
 				{
 					$tag = $tagsDiv.find("." + _oConfig.common.filterContainer + " li." + oParam.typeId.split(" ").join("."));
 				}
 				else
 				{
-					$tag = $tagsDiv.find("." + _oConfig.common.filterContainer + " li." + oParam.typeId.split(" ").join(".") + '[name="' + oParam.value + '"]');
+					$tag = $tagsDiv.find("." + _oConfig.common.filterContainer + " li." + oParam.typeId.split(" ").join(".") + "[name='" + oParam.value + "']");
 				}
 
-				if (oParam.typeLabel == _oConfig.project.sViewFromParam)
+				if (oParam.typeLabel == _oConfig.project.sViewFromParam )
 				{
 					sValue 				= _getViewFromLabel($(oParam.oInput[0]));
-					oParam.typeLabel	= $.sc.locale.get(_oConfig.messages.viewing);
-					oParam.title 		= sValue;
-					oParam.label 		= sValue;
-				}
-				else if (oParam.typeLabel == _oConfig.project.sTotalDaysParam)
-				{
-					sValue 				= $(oParam.oInput[0]).val();
-					oParam.typeLabel 	= $(oParam.oInput[0]).siblings("label").text();
+					oParam.typeLabel 	= $.pgsi.locale.get(_oConfig.messages.viewing);
 					oParam.title 		= sValue;
 					oParam.label 		= sValue;
 				}
@@ -450,22 +431,22 @@ $(document).ready(function()
 				}
 
 				// if tag exist
-				if ( $tag.length && !oParam.oInput.is(":checkbox") )
+				if ($tag.length)
 				{
 					$tag.find("span.title").attr("title", oParam.title).text(sValue);
-					$tag.find("span.remove").text(oParam.typeLabel);
 				}
-				else if ( oParam.typeLabel !== $.sc.locale.get(_oConfig.messages.back) )
+				else
 				{
 					// Show 'Reset Filter' tag
-					if ( $tagsDiv.hasClass("hide") && $tagsDiv.find("." + _oConfig.common.filterContainer + " li").length > 0 )
+					if ($tagsDiv.hasClass("hide") && $tagsDiv.find("." + _oConfig.common.filterContainer + " li").length > 0)
 					{
 						$tagsDiv.removeClass("hide");
 					}
 
 					$tag = $("<li id='" + oParam.typeId  + "' class='" + oParam.typeId + "' name='" + oParam.value + "'><span class='type " +
-							(oParam.oInput && oParam.oInput.is(":disabled") ? "" : "remove") + "'>" + oParam.typeLabel
-							+ "</span><span class='title' title=\"" + oParam.title + "\">" + oParam.label +	"</span></li>");
+						(oParam.oInput && oParam.oInput.is(":disabled") ? "" : "remove") + "'>" +
+						oParam.typeLabel + "</span><span class='title' title='" + oParam.title + "'>" + oParam.label +
+						"</span></li>");
 
 					if (oParam.oInput)
 					{
@@ -508,30 +489,11 @@ $(document).ready(function()
 			}
 		};
 
-		var _removeAllTags = function (type, options, clearActive, aKeepFilters)
+		var _removeAllTags = function (type, options)
 		{
-			// Use default div if not in options
-			options.tagsDiv = options.tagsDiv || _options.tagsDiv;
+			var $tagsDiv = $(options.tagsDiv);
 
-			var $tagsDiv	= $(options.tagsDiv);
-			var $tags 		= $tagsDiv.find("." + _oConfig.common.filterContainer + " li" + (type ? ("." + type) : ":not(li:last)"));
-
-			if (clearActive)
-			{
-				for (var i = 0, l = $tags.length; i < l; i++)
-				{
-					var filterId = $tags[i].id.split(" ");
-
-					if($.sc.isValidArray(aKeepFilters) && aKeepFilters.indexOf(filterId[0]) !== -1)
-					{
-						continue;
-					}
-
-					_removeParameter(filterId[0], null, filterId[1], options);
-				}
-			}
-
-			$tags.remove();
+			$tagsDiv.find("." + _oConfig.common.filterContainer + " li" + (type ? ("." + type) : ":not(li:last)")).remove();
 
 			// Hide 'Reset Filter'
 			if ($tagsDiv.find("." + _oConfig.common.filterContainer + " li").length == 1)
@@ -545,17 +507,22 @@ $(document).ready(function()
 			$checkbox.prop("checked", !$checkbox.is(':checked'));
 
 			_selectFilterEvent($checkbox, $(options.element), bReload, options);
+			//aqui
+		// Reload table
+		/*	if (bReload)
+			{
+				_reload(options);
+			}*/
 		};
 
 		var _addOptionTag = function ($checkbox, options)
 		{
 			var $filter = $checkbox.parents("div." + _oConfig.common.filterInput);
 
-			_addTag(
-			{
+			_addTag({
 				typeId 		: $filter.attr("id"),
 				typeLabel 	: $filter.find("." + _oConfig.common.toggle).text(),
-				label 		: $checkbox.siblings("span:last").text(),
+				label 		: $checkbox.siblings("span").text(),
 				value 		: $checkbox.val(),
 				title 		: $checkbox.parents("li").attr("title"),
 				oInput 		: $checkbox,
@@ -581,57 +548,36 @@ $(document).ready(function()
 				$option = $filter.find("select option:selected");
 				value 	= $input.val();
 
-				if ($filter.find("select#" + _oConfig.common.filterQuery).length)
-				{
-					typeLabel = $option.text();
-				}
-				else if(!$input.siblings("label").length)
-				{
-					typeLabel = options.defaultSearchName;
-				}
-
 				if (value)
 				{
-					_addTag(
-					{
+					_addTag({
 						typeId 		: id + " " + $input.attr("name"),
-						typeLabel 	: typeLabel,
+						typeLabel 	: $option.text(),
 						label 		: value,
 						value 		: value,
 						title 		: value,
 						oInput 		: $input,
 						options		: options
 					});
-
 					isAdded = true;
 				}
 			}
 			else if ($filter.find("#" + _oConfig.common.filterViewFrom).length)
 			{
-				$inputs = $filter.find("input");
-				length 	= $inputs.length;
+				$input 	= $filter.find("input:eq(0)");
+				value 	= $input.val();
 
-				for (i = 0; i < length; i = i + 1)
+				if (value)
 				{
-					$input 		= $($inputs[i]);
-					value 		= $input.val();
-					typeLabel 	= $input.attr("id");
-
-					if (value)
-					{
-						_addTag(
-						{
-							typeId 		: id + " " + $input.attr("name"),
-							typeLabel 	: typeLabel,
-							label 		: value,
-							value 		: value,
-							title 		: value,
-							oInput 		: $input,
-							options		: options
-						});
-
-						isAdded = true;
-					}
+					_addTag({
+						typeId 		: id + " " + $input.attr("name"),
+						typeLabel 	: $input.attr("id"),
+						value 		: value,
+						title 		: value,
+						oInput 		: $input,
+						options		: options
+					});
+					isAdded = true;
 				}
 			}
 			else if ($filter.find(_options.filterTypes[2]).length)
@@ -642,8 +588,7 @@ $(document).ready(function()
 					value 		= $input.val();
 					typeLabel 	= $(this).attr("name");
 
-					_addTag(
-					{
+					_addTag({
 						typeId 		: id + " " + $input.attr("id"),
 						typeLabel 	: typeLabel,
 						label 		: value,
@@ -668,40 +613,31 @@ $(document).ready(function()
 
 					if (value)
 					{
-						_addTag(
-						{
+						_addTag({
 							typeId 		: id + " " + $input.attr("name"),
-							typeLabel 	: $input.siblings("label").length ? $input.siblings("label").text() : $filter.find("." + _oConfig.common.toggle).text(),
+							typeLabel 	: $input.siblings("label").text(),
 							label 		: value,
 							value 		: value,
 							title 		: value,
 							oInput 		: $input,
 							options		: options
 						});
-
 						isAdded = true;
-					}
-					else
-					{
-						var tag = $(options.tagsDiv).find("." + _oConfig.common.filterContainer + " li." + id + "." + $input.attr("name"));
-
-						_removeTag(id + "." + $input.attr("name"), value, tag, options);
 					}
 				}
 			}
 			else
 			{
 				var label;
-
 				$inputs = $filter.find("." + _oConfig.common.rangeSlider);
-				length 	= $inputs.length;
+				length = $inputs.length;
 
 				for (i = 0; i < length; i = i + 1)
 				{
 					$input = $($inputs[i]);
 					var sMin = $input.closest("div").siblings("p").find("span:eq(0)").text();
 					var sMax = $input.closest("div").siblings("p").find("span:eq(1)").text();
-					value = sMin + " " + $.sc.locale.get(_oConfig.messages.rangeTo) + " " + sMax;
+					value = sMin + " " + $.pgsi.locale.get(_oConfig.messages.rangeTo) + " " + sMax;
 
 					if (value)
 					{
@@ -718,8 +654,7 @@ $(document).ready(function()
 							label = options.defaultSearchName;
 						}
 
-						_addTag(
-						{
+						_addTag({
 							typeId 		: id + " " + $input.attr("name"),
 							typeLabel 	: label,
 							label 		: value,
@@ -728,7 +663,6 @@ $(document).ready(function()
 							oInput 		: $input,
 							options		: options
 						});
-
 						isAdded = true;
 					}
 				}
@@ -745,21 +679,6 @@ $(document).ready(function()
 		 /**
 		  *
 		  */
-		var _createMapTag = function ()
-		{
-			var value 		= parseFloat($.sc.map.getVectorArea()).toFixed(2);
-			var label 		= $.sc.locale.get(_oConfig.messages.mapShape, [$.sc.map.getVectorIndex(), value, "<sup>2</sup>"]);
-			var typeLabel 	= $.sc.locale.get(_oConfig.messages.mapDrawing);
-
-			$(".filter-results-container-map").removeClass("hide");
-
-			return $("<li class='" + _options.filterTypes[5] + "'><span class='type remove'>" +
-				typeLabel + "</span>" +
-				"<span class='title'><span class='shape-icon' style='background:" +
-				$.sc.map.getVectorColor() + "; opacity:0.6'></span>" +
-				label + "</span></li>");
-		};
-
 		var _createFilterTitle = function(title, isOpen)
 		{
 			return "<label class='toggle filter-title " + (isOpen ? "on" : "off") + "'>" + title + "</label>";
@@ -780,13 +699,18 @@ $(document).ready(function()
 			return "<button class='" + _oConfig.common.goButton + "'>" + label + "</button>";
 		};
 
+		var _createButtonCheckbox = function()
+		{
+			return '<div class="block"> <input id="clear-all" class="button-secondary ui-button ui-widget ui-state-default ui-corner-all" type="reset" value="Clear All" role="button"><input id="apply-filter" class="button-secondary ui-button ui-widget ui-state-default ui-corner-all" type="submit" value="Apply" role="button"></div>'
+		};
+
 		var _createTextField = function(name, clazz, style, maxsize, value, hint)
 		{
 			return "<input id='" + name + "' name='" + name + "' "
 				+ (clazz 	? (" class='" 		+ clazz 	+ "'") : "")
 				+ (style 	? (" style='" 		+ style 	+ "'") : "")
 				+ (maxsize 	? (" maxlength='" 	+ maxsize 	+ "'") : "")
-				+ (hint 	? (" placeholder='"	+ hint 		+ "'") : "")
+				+ (hint 	? (" placeholder='"	+ $.pgsi.locale.get(hint) + "'") : "")
 				+ (value 	? (" value='"		+ value 	+ "'") : "")
 				+ " type='text'/>";
 		};
@@ -796,7 +720,7 @@ $(document).ready(function()
 			var length 		= options.length;
 			var $select 	= ["<select " + (length < 2 ? "style='display:none;'" : "") + "name='" + name + "' class='" + clazz + "' id='" + name + "'>"];
 			var i 			= 0;
-			var get 		= $.sc.locale.get;
+			var get 		= $.pgsi.locale.get;
 			var opt;
 			var sValue;
 			var sLabel;
@@ -820,7 +744,7 @@ $(document).ready(function()
 			var sIdRangeMin = options.label + "-range-min";
 			var sIdRangeMax = options.label + "-range-max";
 
-			$range.push("<p><span class'range-min' id='"+ sIdRangeMin +"'>"+ (options.values ? options.values[0] : options.minsize) + "</span>  " + $.sc.locale.get(_oConfig.messages.rangeTo) + " ");
+			$range.push("<p><span class'range-min' id='"+ sIdRangeMin +"'>"+ (options.values ? options.values[0] : options.minsize) + "</span>  " + $.pgsi.locale.get(_oConfig.messages.rangeTo) + " ");
 			$range.push("<span class'range-max' id='"+ sIdRangeMax +"'>"+ (options.values ? options.values[1] : options.maxsize) + "</span></p>");
 			$range.push("<div name='" + name + "' id='" + name + "' class='" + _oConfig.common.rangeSlider+ "' data-begin='" + options.minsize + "' data-end='" + options.maxsize + "'></div>");
 
@@ -837,9 +761,9 @@ $(document).ready(function()
 			sHtml += "<ul class='" + _oConfig.common.allNotChecked + "'>";
 
 				//	All
-				sHtml += "<li class='checkbox " + _oConfig.common.allChecked + (flt.allClass ? " " + flt.allClass : "") + "'>";
+				sHtml += "<li class='checkbox " + _oConfig.common.allChecked + "'>";
 					sHtml += "<label><input type='checkbox' " + (isChecked ? "checked='checked'" : "") + " value='" + _oConfig.project.allValue + "'/> ";
-					sHtml += "<strong>" + $.sc.locale.get(flt.allLabel) + "</strong></label>";
+					sHtml += "<strong>" + $.pgsi.locale.get(flt.allLabel) + "</strong></label>";
 				sHtml += "</li>";
 
 				//	Not In
@@ -847,7 +771,7 @@ $(document).ready(function()
 				{
 					sHtml += "<li class='checkbox " + _oConfig.common.notInChecked + "'>";
 						sHtml += "<label><input type='checkbox' value='" + _oConfig.project.notInValue + "'/> ";
-						sHtml += "<span>" + $.sc.locale.get(flt.notInFilter.label) + "</span></label>";
+						sHtml += "<span>" + $.pgsi.locale.get(flt.notInFilter.label) + "</span></label>";
 					sHtml += "</li>";
 				}
 
@@ -876,33 +800,14 @@ $(document).ready(function()
 			return "<div id='customFilter' class='" + _oConfig.common.filterInput + " advanced ui-widget'>"
 				+ "<a class='button ui-button ui-widget ui-state-default ui-corner-all "
 				+ "ui-button-text-only' id='custom-filter-action' href='' role='button' aria-disabled='false'>"
-				+ "<span class='ui-button-text'>" + $.sc.locale.get(_oConfig.messages.filterCustomize) + "</span></a></div>";
+				+ "<span class='ui-button-text'>" + $.pgsi.locale.get(_oConfig.messages.filterCustomize) + "</span></a></div>";
 		};
 
 
 		//	Add DatePicker functionality
 		var _startDatePicker = function (options)
 		{
-			var currentTime = new Date();
-			var systemTime 	= $.sc.date.createTimeZoneJS();
-			var iDifTime	= systemTime.getDate() - currentTime.getDate();
-
-			var sDifTime;
-
-			if (iDifTime <= 1 && iDifTime >= -1)
-			{
-				sDifTime = ( (iDifTime == -1) ? (iDifTime) : ("+" + iDifTime) ) + "D";
-			}
-			else if (iDifTime > 1)
-			{
-				sDifTime = "-1D";
-			}
-			else if (iDifTime < -1)
-			{
-				sDifTime = "+1D";
-			}
-
-			$(options.element).find(".date-filter").datepicker({dateFormat: pgsi.settings.user.dateFormat, maxDate: sDifTime});
+			$(options.element).find(".date-filter").datepicker({dateFormat: pgsi.settings.user.dateFormat, maxDate: "+0D"});
 		};
 
 		//	Add Range Slider functionality
@@ -955,7 +860,7 @@ $(document).ready(function()
 				var $option;
 				var title;
 				var value = $this.val();
-				var sHint = $.sc.locale.get(_oConfig.messages.filterMore);
+				var sHint = $.pgsi.locale.get(_oConfig.messages.filterMore);
 
 				if (value && value.indexOf(sHint) == -1 && event.originalEvent)
 				{
@@ -969,12 +874,11 @@ $(document).ready(function()
 					{
 						title = $option.text();
 						value = $option.val();
-						var data = $option.data();
 						$option.remove();
 
 						// add selected option
 						fnAddOption($filter, value, title,
-							(title.length > maxCharacters ? title.substr(0, maxCharacters) + '...' : title), false, data);
+							(title.length > maxCharacters ? title.substr(0, maxCharacters) + '...' : title), false);
 
 						$option = $filter.find("input[value='" + value + "']");
 
@@ -993,29 +897,16 @@ $(document).ready(function()
 			{
 				var $this = $(this);
 				var iSelectSize = $this.siblings(_options.filterTypes[2]).find("option").length;
-				$this.val(iSelectSize + " " + $.sc.locale.get(_oConfig.messages.filterMore));
+				$this.val(iSelectSize + " " + $.pgsi.locale.get(_oConfig.messages.filterMore));
 			}).trigger("focusout");
 		};
 
-		var _addOption = function ($filter, value, title, label, isChecked, extraData)
+		var _addOption = function ($filter, value, title, label, isChecked)
 		{
 			var $select;
-			var $option
-
-			// TODO - review impl and char limit and symbol
-			if ( !$.sc.isNullOrUndefined(extraData) && !$.sc.isNullOrUndefined(extraData.symboltitlevalid) )
-			{
-				$option = $("<li class='checkbox' title=\"" + title + "\">"
-						+ "<input class='checkbox' " + (isChecked ? "checked='checked'" : "") + " type='checkbox' value='" + value + "'/> "
-						+ "<span class='label label-default " + extraData.symbolclass + "'>" + extraData.symboltitlevalid + "</span> "
-						+ '<span class="title_filter_checkbox">' + (label.length > 15 ? (label.substr(0, 15) + '...') : label) + "</span></li>");
-			}
-			else
-			{
-				$option = $("<li class='checkbox' title=\"" + title + "\">"
-						+ "<label><input class='checkbox' " + (isChecked ? "checked='checked'" : "")
-						+ " type='checkbox' value='" + value + "'/> <span>" + label + "</span></label></li>");
-			}
+			var $option = $("<li class='checkbox' title=\"" + title + "\">"
+				+ "<label><input class='checkbox' " + (isChecked ? "checked='checked'" : "")
+				+ " type='checkbox' value='" + value + "'/> <span>" + $.pgsi.locale.get(label) + "</span></label></li>");
 
 			// add selected option
 			$filter.find(".ui-listcombobox").append($option);
@@ -1041,14 +932,14 @@ $(document).ready(function()
 			{
 				var id = $(this).closest("." + _oConfig.common.filterInput).attr("id");
 				iSelectSize = filters[id].dataList.length - firstOptions;
-				$(this).val(iSelectSize + " " + $.sc.locale.get(_oConfig.messages.filterMore));
+				$(this).val(iSelectSize + " " + $.pgsi.locale.get(_oConfig.messages.filterMore));
 			});
 		};
 
 		var _createSearchFilters = function(flt, isOpen, options)
 		{
 			var inputs 	= flt.inputs;
-			var _get 	= $.sc.locale.get;
+			var _get 	= $.pgsi.locale.get;
 			var $filter = [];
 			var input;
 
@@ -1129,8 +1020,7 @@ $(document).ready(function()
 			var iFirstOptions 	= options.firstOptions;
 			var propertyTitle 	= flt.propertyTitle;
 			var propertyValue 	= flt.propertyValue;
-			var oSymbol		 	= flt.symbol;
-			var dataList		= flt.dataList ? flt.dataList[flt.listObj] ? flt.dataList[flt.listObj] : flt.dataList  : [];
+			var dataList 		= flt.dataList || [];
 			var length 			= dataList.length;
 			var maxCharacters 	= options.maxCharacters;
 			var i 				= 0;
@@ -1140,44 +1030,27 @@ $(document).ready(function()
 			var data;
 
 			// Filter Title
-			$filter.push(_createFilterTitle($.sc.locale.get(flt.title), isOpen));
+			$filter.push(_createFilterTitle($.pgsi.locale.get(flt.title), isOpen));
 
 			$filter.push("<div class='collapse checkBoxUl' " + (isOpen ? "" : "style='display:none;'") + ">");
 
 			// All Checked
-			$filter.push(_createAllAndNotInCheckbox(flt, true));
+		//	$filter.push(_createAllAndNotInCheckbox(flt, true));
 
 			// First filters
-			$filter.push("<ul class='ui-listcombobox'>");
+			$filter.push("<ul class='ui-listcombobox filter'>");
 			for (; i < iFirstOptions && i < length; i = i + 1)
 			{
 				data = dataList[i];
 				title = data[propertyTitle] || "";
 				value = data[propertyValue];
+				title = $.pgsi.locale.get(title)
 
-				// TODO - review impl and char limit and symbol
-				if ( !$.sc.isNullOrUndefined(oSymbol) )
-				{
-					var symbolTitle 		= data[oSymbol.propertyTitle];
-					var symbolClass 		= oSymbol.sClass ? oSymbol.sClass + symbolTitle.toString().toLowerCase() : "";
-					var symbolTitleValid 	= typeof symbolTitle === 'string' ? symbolTitle.substr(0, 2) : symbolTitle;
-
-					$filter.push('<li class="checkbox" title="' + title + '">'
-							+ '<input type="checkbox" class="checkbox" value="' + value + '"/> '
-							+ '<span class="label label-default ' + symbolClass + '">'+ symbolTitleValid +'</span> '
-							+ '<span class="title_filter_checkbox">'
-							+ (title.length > 15 ? (title.substr(0, 15) + '...') : title) + '</span>'
-							+ '</span></li>');
-				}
-				else
-				{
-					$filter.push("<li class='checkbox' title=\"" + title + "\">"
-							+ "<label><input type='checkbox' class='checkbox' value='" + value + "'/> <span>"
-							+ (title.length > maxCharacters ? (title.substr(0, maxCharacters) + "...") : title)
-							+ "</span></label></li>");
-				}
+				$filter.push("<li class='checkbox' title='" + title + "'>"
+					+ "<label><input type='checkbox' class='checkbox' value='" + value + "'/> <span>"
+					+ (title.length > maxCharacters ? (title.substr(0, maxCharacters) + "...") : title)
+					+ "</span></label></li>");
 			}
-
 			$filter.push("</ul>");
 
 			// Select element
@@ -1190,36 +1063,19 @@ $(document).ready(function()
 					title = data[propertyTitle] || "";
 					value = data[propertyValue];
 
-					if ( !$.sc.isNullOrUndefined(flt.listObj) )
-					{
-						value = data[propertyValue];
-					}
-
-					if ( !$.sc.isNullOrUndefined(oSymbol) )
-					{
-						var symbolTitle 		= data[oSymbol.propertyTitle];
-						var symbolClass 		= oSymbol.sClass ? oSymbol.sClass + symbolTitle.toString().toLowerCase() : "";
-						var symbolTitleValid 	= typeof symbolTitle === 'string' ? symbolTitle.substr(0, 2) : symbolTitle;
-
-						$select.push('<option class="set_id_value" value="' + value
-										+ '" data-symbolclass="' + symbolClass
-										+ '" data-symboltitlevalid="' + symbolTitleValid + '"> '
-										+ title + ' </option>');
-					}
-					else
-					{
-						$select.push('<option value="' + value + '">' + title + '</option>');
-					}
-
+					$select.push("<option value='" + value + "'>" + title + "</option>");
 				}
 				$select.push("</select>");
 				$filter.push($select.join(''));
 			}
 
+
+
 			$filter.push("</div>");
 
 			return $filter.join("");
 		};
+
 
 
 		/**
@@ -1230,7 +1086,7 @@ $(document).ready(function()
 		 //	Events for search filters
 		var _searchFilterEvent = function ($filter, $filterDiv, filter, event, options)
 		{
-			var $form 		 = $filterDiv.find("form");
+			var $form 		 = $filterDiv.find("form");;
 			var $fields 	 = $filter.find("input, select, ." + _oConfig.common.rangeSlider);
 			var length 		 = $fields.length;
 			var oFilterValue = {};
@@ -1258,7 +1114,7 @@ $(document).ready(function()
 				$field = $($fields[i]);
 
 				//	input and select
-				if ( !$.sc.isNullOrUndefined($field.val()) )
+				if ($field.val())
 				{
 					val  = $field.val();
 					name = $field.attr("name");
@@ -1268,7 +1124,7 @@ $(document).ready(function()
 						oFilterValue[name] = [];
 					}
 
-					oFilterValue[name].unshift(val);
+					oFilterValue[name].push(val);
 				//	Range slider
 				}
 				else
@@ -1279,7 +1135,7 @@ $(document).ready(function()
 					val  = sMin + "|" + sMax;
 					name = $field.attr("name");
 
-					if ( !$.sc.isNullOrUndefined(oFilterValue[name]) )
+					if (!oFilterValue[name])
 					{
 						oFilterValue[name] = [val];
 					}
@@ -1292,15 +1148,15 @@ $(document).ready(function()
 				sFilterValue = filterValue.join("|");
 
 				// Add parameters
-				$.sc.pageLoader.setParameter(i, decodeURI(sFilterValue));
+				$.pgsi.pageLoader.setParameter(i, decodeURI(sFilterValue));
 			}
 
 			// Add tag
-			if (_addSearchTag($filter, options))
-			{
+			//if (_addSearchTag($filter, options))
+			//{
 				// Reload table
-				_reload(options);
-			}
+			//	_reload(options);
+			//}
 		};
 
 		 var _delegateSearchFilterEvents = function(options)
@@ -1324,6 +1180,12 @@ $(document).ready(function()
 				fnSearchFilterEvent($filter, $filterDiv, filter, e, options);
 			});
 
+			$("#apply-filter").on("click", function(e)
+			{
+				e.preventDefault();
+				_reload(options);
+			});
+
 			$searchContainer.on("keypress", "input", function(e)
 			{
 				var $filter;
@@ -1336,6 +1198,17 @@ $(document).ready(function()
 
 					fnSearchFilterEvent($filter, $filterDiv, filter, e, options);
 				}
+			});
+
+			$searchContainer.on("focusout", "input", function(e)
+			{
+				var $filter;
+				var filter;
+				$filter = $(this).parents("div." + _oConfig.common.filterInputSearch);
+				filter 	= filters[$filter.attr("id")];
+
+				fnSearchFilterEvent($filter, $filterDiv, filter, e, options);
+
 			});
 		};
 
@@ -1364,6 +1237,7 @@ $(document).ready(function()
 
 		var _selectFilterEvent = function($checkbox, $filter, bReload, options)
 		{
+
 			var $parent = $checkbox.parents("div." + _oConfig.common.filterInput);
 			var id 		= $parent.attr("id");
 			var value 	= $checkbox.val();
@@ -1381,12 +1255,6 @@ $(document).ready(function()
 
 				// Remove all parameter
 				_removeParameter(id, null, id, options);
-
-				// Reload table
-				if (bReload)
-				{
-					_reload(options);
-				}
 
 				// Return true when checked
 				return $checkbox.is(":checked");
@@ -1424,12 +1292,6 @@ $(document).ready(function()
 					// Check the ALL option
 					$parent.find("." + _oConfig.common.allChecked).find("input").prop("checked", true);
 
-				}
-
-				// Reload table
-				if (bReload)
-				{
-					_reload(options);
 				}
 
 				// Return true when checked
@@ -1470,12 +1332,6 @@ $(document).ready(function()
 					$parent.find("." + _oConfig.common.allChecked).find("input").prop("checked", true);
 				}
 			}
-
-			// Reload table
-			if (bReload)
-			{
-				_reload(options);
-			}
 		};
 
 //		Events for tag remove (drop filter)
@@ -1503,8 +1359,8 @@ $(document).ready(function()
 					$tags = $parent.parent().find("li:not(li:last)");
 				}
 
-				length 			= $tags.length;
-				disabledCount 	= 0;
+				length = $tags.length;
+				disabledCount = 0;
 
 				for (i = 0; i < length; i = i + 1)
 				{
@@ -1527,11 +1383,6 @@ $(document).ready(function()
 					{
 						// Remove filter of search type
 						$input.val("");
-					}
-					else if ($input.is(_options.filterTypes[2]))
-					{
-						// Remove filter of select type
-						$input.val(_oConfig.project.allValue);
 					}
 
 					// Remove parameter and tag
@@ -1562,12 +1413,6 @@ $(document).ready(function()
 				if (bReload && length > disabledCount)
 				{
 					_reload(options);
-				}
-
-				// hide the polygon filters tags div
-				if( $('#polygon-filters .drawing').length == 0 )
-				{
-					$(".filter-results-container-map").addClass("hide");
 				}
 			}
 			else
@@ -1624,9 +1469,6 @@ $(document).ready(function()
 						_removeTag($parent.attr("class").split(" ")[0], $parent.attr("name"), $parent, options);
 						_removeParameter($parent.attr("class").split(" ")[0], null, $input.attr("name"), options);
 
-						// Remove filter of search type
-						$input.val(_oConfig.project.allValue);
-
 						// Could call the table reload
 						if (bReload)
 						{
@@ -1655,22 +1497,15 @@ $(document).ready(function()
 					// Clear Selected checkbox
 					for (var i = 0; i < aIds.length; i++)
 					{
-						$.sc.table.checkbox(options.table).selected(aIds[i], true);
+						$.pgsi.table.checkbox(options.table).unselected(aIds[i]);
 						options.table.find(":checkbox[value=" + aIds[i] + "]").prop("checked", false);
 					}
 
-					$.sc.table.checkbox(options.table).setTotalResult();
+					$.pgsi.table.checkbox(options.table).setTotalResult();
 
 					// Remove Polygon
-					$.sc.map.destroyVectorFeatureById(sValue);
-
+					$.pgsi.map.destroyVectorFeatureById(sValue);
 					$parent.remove();
-
-					// hide the polygon filters tags div
-					if( $('#polygon-filters .drawing').length == 0 )
-					{
-						$(".filter-results-container-map").addClass("hide");
-					}
 				}
 			}
 		};
@@ -1679,10 +1514,11 @@ $(document).ready(function()
 		var _delegateTagEvents = function (options)
 		{
 			var $filter 		 = $(options.element);
+			var fnRemoveTagEvent = _removeTagEvent;
 			var fnRemove 		 = function (e)
 			{
 				e.preventDefault();
-				_removeTagEvent($(this), $filter, true, null, options);
+				fnRemoveTagEvent($(this), $filter, true, null, options);
 
 				// IE8 javascript throws exceptions
 				e.stopPropagation();
@@ -1725,18 +1561,8 @@ $(document).ready(function()
 			var $arrowToggle	 = $("." + _oConfig.common.sideSlideToggle, $filters);
 			var iMarginLeft		 = $tableContainer.css("margin-left");
 
-			var fnAnimationStart = function ()
-			{
-				options.table.data("fixedHeader").fnSetWidth("100%");
-			};
-
-			var fnAnimationComplete = function ()
-			{
-				options.table.data("fixedHeader").fnUpdate(true);
-			};
-
 			// Whether filter is hide and navigate between tabs, keep the filter hide
-			if ($tableContainer.css("margin-left") == "0px")
+			if ($tableContainer.css("margin-left") == "-5px")
 			{
 				$filterContainer.css("margin-left", -170);
 				$arrowToggle.find("span").toggle();
@@ -1750,15 +1576,13 @@ $(document).ready(function()
 				{
 					// Animate to hide filters
 					$filterContainer.animate({marginLeft : -170}, "slow");
-					//fnAnimationStart and fnAnimationComplete are being used to fix the fixedHeader resizes
-					$tableContainer.animate({marginLeft : 0},{start : fnAnimationStart, complete : fnAnimationComplete, duration: "slow"});
+					$tableContainer.animate({marginLeft : -5}, "slow");
 				}
 				else
 				{
 					// Animate to show filters
 					$filterContainer.animate({marginLeft : 0}, "slow");
-					//fnAnimationStart and fnAnimationComplete are being used to fix the fixedHeader resizes
-					$tableContainer.animate({marginLeft : iMarginLeft}, {start : fnAnimationStart, complete : fnAnimationComplete, duration: "slow"});
+					$tableContainer.animate({marginLeft : iMarginLeft}, "slow");
 				}
 
 				// Toggle the arrow
@@ -1780,15 +1604,12 @@ $(document).ready(function()
 		//	Events for customize filter
 		var _customizeFiltersEvent = function (options)
 		{
-			var fnCallback = function(e)
+			var fnCallback 			= function(e)
 			{
 				e.preventDefault();
-				$("#customize-filter").wCustomize("Filters", null, options._objFiltersCustomize, "smartpointlist", null);
-
-				// TODO - future commons customize
-				/*$.sc.customization.open({
+				$.pgsi.customization.open({
 					sType : _oConfig.project.customizationType
-				});*/
+				});
 			};
 
 			$(options.element).off(	"click", "#" + _oConfig.common.customAction, fnCallback);
@@ -1822,7 +1643,7 @@ $(document).ready(function()
 		var _create = function(options)
 		{
 			//	Merge objects, default with options passed
-			options = $.extend(true, {}, _options, options);
+			options = $.extend({}, _options, options);
 
 			var $filter 		= [];
 			var count 			= 0;
@@ -1833,7 +1654,16 @@ $(document).ready(function()
 			var isOpen;
 			var type;
 
-			options.defaultSearchName = $.sc.locale.get(_oConfig.messages.defaultSearchNameLabel);
+			options.defaultSearchName = $.pgsi.locale.get(_oConfig.messages.defaultSearchNameLabel);
+
+			$filter.push("<div class='yui-b'><form class='" + _oConfig.common.viewsVert + "'>");
+			$filter.push(options.createTitle());
+
+			// Side slide
+			if (options.hasSideSlide)
+			{
+				$filter.push(_createSideSlide(options));
+			}
 
 			$filter.push("<div class='filter-vert rounded'>");
 
@@ -1878,7 +1708,7 @@ $(document).ready(function()
 					if (i.indexOf(_options.filterTypes[4]) === -1)
 					{
 						options._objFiltersCustomize.push({
-							name : $.sc.locale.get(filter.title),
+							name : $.pgsi.locale.get(filter.title),
 							session : i,
 							type : type
 						});
@@ -1890,36 +1720,20 @@ $(document).ready(function()
 				}
 			}
 
+
+			// Apply to tall / Clear buttons
+			$filter.push(_createButtonCheckbox());
+
 			// Whether has customize button
 			if (options.hasCustomize)
 			{
 				$filter.push(_createCustomizeButton());
 			}
 
-			$filter.push("</div>");
+			$filter.push("</div></form></div>");
 
-			if (options.defaultContainer)
-			{
-				$filter.splice(0, 0, "<div class='yui-b'><form class='" + _oConfig.common.viewsVert + "'>");
-				$filter.splice(1, 0, options.createTitle());
-
-				// Side slide
-				if (options.hasSideSlide)
-				{
-					$filter.splice(2, 0, _createSideSlide(options));
-				}
-
-				$filter.push("</form></div>");
-
-				// Set Filters on DOM
-				$(options.element).html($filter.join(""));
-			}
-			else
-			{
-				// Set Filters on DOM
-				$(options.element).append($filter.join(""))
-					.prepend(options.createTitle());
-			}
+			// Set Filters on DOM
+			$(options.element).html($filter.join("")).css("margin-left", "5px");
 
 			// Hide 'Reset Filter'
 			if ($tagsDiv.find("." + _oConfig.common.filterContainer + " li").length == 1)
@@ -1931,7 +1745,7 @@ $(document).ready(function()
 			_delegateSearchFilterEvents(options);
 			_optionFilterEvent(options);
 			_delegateTagEvents(options);
-			_toggleEvent(options);
+			//_toggleEvent(options);
 			_slideEvent(options);
 			_validationRemoveEvent(options);
 			_customizeFiltersEvent(options);
@@ -1957,114 +1771,26 @@ $(document).ready(function()
 			}
 
 			$(options.element).data(_options.filterTypes[0], options);
-
-			if ( !$.sc.isNullOrUndefined(options.fnCreateCallback) )
-			{
-				options.fnCreateCallback.call();
-			}
 		};
 
-		var _destroy = function(options, clearActive, aKeepFilters)
+		var _rebuild = function(options)
 		{
-			// options can be either an object or an selector
-			if ("string" === typeof options)
-			{
-				options	= $(options).data(_options.filterTypes[0]);
-			}
-
-			if ( $.sc.isNullOrUndefined(options) )
-			{
-				return;
-			}
-
-			var oFilter				= $(options.element);
-			var oFilterContainer	= oFilter.parent();
+			var oFilter 		 = $(options.element);
+			var oFilterContainer = oFilter.parent();
 
 			oFilter.remove();
-			oFilterContainer.append("<div id='" + options.element.replace("#","") + "'></div>");
-
-			_removeAllTags(null, options, clearActive, aKeepFilters);
-
-			var $TagsDiv 			= $(options.tagsDiv);
-			var $TagsMapDiv 		= $(options.tagsMapDiv);
-
-			// clone the filter container without the events
-			var $TagsDivClone 		= $TagsDiv.find(".filter-container").clone();
-			var $TagsMapDivClone 	= $TagsMapDiv.find(".filter-container").clone();
-
-			// Clear the container
-			$TagsDiv.empty();
-			$TagsMapDiv.empty();
-
-			// Refill the container with the same elements without the events
-			$TagsDiv.append($TagsDivClone);
-			$TagsMapDiv.append($TagsMapDivClone);
-		};
-
-		var _rebuild = function(options, clearActive, aKeepFilters)
-		{
-			_destroy(options, clearActive, aKeepFilters);
+			oFilterContainer.append("<div id='"+options.element.replace("#","")+"'></div>");
 			_create(options);
-		};
-
-		var _actionPerformed = function(bReset)
-		{
-			if(!$.sc.isNullOrUndefined(bReset))
-			{
-				_oConfig.common.bActionPerformed = false;
-			}
-
-			return _oConfig.common.bActionPerformed;
-		};
-
-		var _setFilterOptions = function ($checkboxs, bCheckbox, sElement)
-		{
-			var $filterDiv 	= $(sElement);
-			var iCheckbox 	= $checkboxs.length;
-			var i 			= 0;
-
-			var $filter;
-			var $checkbox;
-
-			for (; i < iCheckbox; i = i + 1)
-			{
-				$checkbox = $($checkboxs[i]);
-
-				$checkbox.prop("checked", bCheckbox);
-
-				$filter = $checkbox.parents("div.filter-input");
-
-				if ( bCheckbox )
-				{
-					_addParameter( $filter.attr("id"), $checkbox.val(), $filterDiv.data(_options.filterTypes[0]) );
-					_addOptionTag( $checkbox, $filterDiv.data(_options.filterTypes[0]) );
-				}
-				else
-				{
-					_removeTag( $filter.attr("id"), $checkbox.val(), null, $filterDiv.data(_options.filterTypes[0]) );
-					_removeParameter( $filter.attr("id"), $checkbox.val(), $checkbox.val(), $filterDiv.data(_options.filterTypes[0]) );
-				}
-			}
-		};
-
-		var _getParamMultipleValues = function(param, value)
-		{
-			return decodeURI($.address.parameter(param)).split("|").indexOf(value.toUpperCase());
 		};
 
 		/**
 		 *	Return Public Methods and objects
 		 */
-		return (
-		{
-			addTag 					: _addTag,
-			create					: _create,
-			destroy					: _destroy,
-			setGeneralConfig		: _setGeneralConfig,
-			rebuild 				: _rebuild,
-			actionPerformed			: _actionPerformed,
-			setFilterOptions		: _setFilterOptions,
-			getParamMultipleValues	: _getParamMultipleValues
+		return ({
+			create			 : _create,
+			setGeneralConfig : _setGeneralConfig,
+			rebuild 		 : _rebuild,
+			addTag 			 : _addTag
 		});
 	})();
 });

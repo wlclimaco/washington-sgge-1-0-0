@@ -4,34 +4,38 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="CustoMap">
+<mapper namespace="PorcaoMap">
 
 	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
 	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
 
-  	<!-- [id]              [int] NOT NULL,
-	[prodId]          [int] NOT NULL,
-	[idcustoItens]    [int] NOT NULL,
-	[valor]           [real] NOT NULL,
+  	<!-- private Integer id;
+
+	private Integer idproduto;
+
+	/** The type of an account. */
+	private PorcaoItem porcaoItens;
+
+	private Double valor;
        -->
 
-  <resultMap id="custoResult" type="Custo" >
+  <resultMap id="porcaoResult" type="Porcao" >
     <result property="id" column="id" />
-    <result property="prodId" column="prodId" />
+    <result property="idproduto" column="prodId" />
    	<result property="valor" column="valor"/>
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-    <association property="idcustoItens"    column="idcustoItens" select="CustoItemMap.fetchCustoItemByCusto"  />
+    <collection property="porcaoItens" column="id" select="PorcaoItemMap.fetchPorcaoItemByPorcao"/>
   </resultMap>
 
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
-  <sql id="allCustoColumns">
+  <sql id="allPorcaoColumns">
 		,b.prodId
-		,b.idcustoItens
+		,b.idporcaoItens
 		,b.valor
       	,b.create_date
       	,b.create_user
@@ -39,9 +43,9 @@
       	,b.modify_user
   </sql>
 
-  <sql id="allCustoValues">
+  <sql id="allPorcaoValues">
   		#{prodId},
-  		#{idcustoItens},
+  		#{idporcaoItens},
   		#{valor},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
@@ -49,11 +53,11 @@
   <!--
 		SQL Insert Statements.
  	-->
-  <insert id="insertCusto" parameterType="Custo" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO custo (
-		<include refid="allCustoColumns" />
+  <insert id="insertPorcao" parameterType="Porcao" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO porcao (
+		<include refid="allPorcaoColumns" />
       )
-    VALUES (<include refid="allCustoValues" /> )
+    VALUES (<include refid="allPorcaoValues" /> )
   </insert>
 
 
@@ -61,11 +65,11 @@
 		SQL Update Statements.
  	-->
 
-  <update id="updateCusto" parameterType="Custo">
-    UPDATE custo
+  <update id="updatePorcao" parameterType="Porcao">
+    UPDATE porcao
     	<set>
     		<if test="prodId!= null">prodId = #{prodId},</if>
-	    	<if test="idcustoItens!= null">idcustoItens=#{idcustoItens},</if>
+	    	<if test="idporcaoItens!= null">idporcaoItens=#{idporcaoItens},</if>
 	    	<if test="valor!= null"> valor=#{valor},</if>
 			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
@@ -77,53 +81,53 @@
    <!--
 		SQL Delete Statements.
    -->
-  <delete id="deleteCustoById" parameterType="Integer">
-    	DELETE FROM custo WHERE id = #{id}
+  <delete id="deletePorcaoById" parameterType="Integer">
+    	DELETE FROM porcao WHERE id = #{id}
   </delete>
 
 	<!--
 		SQL Fetch Statements.
  	-->
-  <select id="fetchCustoRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+  <select id="fetchPorcaoRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
-        FROM custo
+        FROM porcao
      WHERE 1 = 1
      <if test="id != null">
 		  AND id = #{id}
 	 </if>
   </select>
 
-  <select id="fetchAllCustos" resultMap="custoResult">
+  <select id="fetchAllPorcaos" resultMap="porcaoResult">
     SELECT
-	<include refid="allCustoColumns" />
-    FROM custo ORDER BY id ASC
+	<include refid="allPorcaoColumns" />
+    FROM porcao ORDER BY id ASC
   </select>
 
-  <select id="fetchCustoById" parameterType="FetchByIdRequest" resultMap="custoResult">
+  <select id="fetchPorcaoById" parameterType="FetchByIdRequest" resultMap="porcaoResult">
 	SELECT b.id,
-	<include refid="allCustoColumns" />
-    FROM custo b
+	<include refid="allPorcaoColumns" />
+    FROM porcao b
     where id = #{id}
     ORDER BY id ASC
   </select>
 
-  <select id="fetchAllCustosByRequest" parameterType="PagedInquiryRequest" resultMap="custoResult">
-	 SELECT b.id,<include refid="allCustoColumns" />
-        FROM custo b
+  <select id="fetchAllPorcaosByRequest" parameterType="PagedInquiryRequest" resultMap="porcaoResult">
+	 SELECT b.id,<include refid="allPorcaoColumns" />
+        FROM porcao b
      WHERE 1 = 1
      <if test="id != null">
 		  AND b.id = #{id}
 	 </if>
   </select>
 
-  <select id="fetchCustoByProduto" parameterType="Integer" resultMap="custoResult">
+  <select id="fetchPorcaoByProduto" parameterType="Integer" resultMap="porcaoResult">
 	  	SELECT F.*
 
-		  FROM custoProd AS C
+		  FROM porcaoProd AS C
 
-		  INNER JOIN custo AS F
+		  INNER JOIN porcao AS F
 
-		    ON F.id like C.Custoid
+		    ON F.id like C.Porcaoid
 		where  c.prodId = #{id}
   </select>
 
