@@ -12,37 +12,50 @@
   	<!-- Result maps describe the mapping between the columns returned
        from a query, and the class properties.  A result map isn't
        necessary if the columns (or aliases) match to the properties
-       exactly. -->
+       exactly. private Integer id;
+	private String cfop;
+	private String natureza;
+	private String simplificado;
+	private CfopTypeEnum cfopTypeEnum;
+	private Double icms;
+	private Double icmsReduzido;
+	private Double margemAgregadaST;
+	private Double cstPrincipal;
+	private Double classFiscal;
+	private String observacao;-->
 
-  <resultMap id="empresaResult" type="Cfop" >
-    <result property="parentOrganizationId" column="FK_empresa_id" />
-    <result property="parentOrganizationName" column="org_name" />
-   	<result property="batchApprovalDayLimit" column="money_transfer_offset_days"/>
-	<result property="fundsTransferDayLimit" column="funds_transfer_offset_days"/>
-
-	<collection property="frequencyBasedEventList" column="business_id" select="FrequencyEventMap.fetchFrequencyByCfopId"/>
-	<collection property="businessProductPlanList" column="business_id" select="BusinessProductPlanMap.fetchBusinessProductPlanByCfopId"/>
+  <resultMap id="cfopResult" type="Cfop" >
+    <result property="id" column="id" />
+    <result property="cfop" column="cfop" />
+   	<result property="natureza" column="natureza"/>
+	<result property="simplificado" column="simplificado"/>
+	<result property="cfopTypeEnumValue" column="cfopTypeEnum" />
+    <result property="icms" column="icms" />
+   	<result property="icmsReduzido" column="icmsReduzido"/>
+	<result property="margemAgregadaST" column="margemAgregadaST"/>
+    <result property="cstPrincipal" column="cstPrincipal" />
+   	<result property="classFiscal" column="classFiscal"/>
+	<result property="observacao" column="observacao"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
   </resultMap>
 
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allCfopColumns">
-		 b.name
-		,b.business_key
-      	,b.business_type
-      	,b.EIN_code
-      	,b.PGSi_status
-      	,b.risk_level
-      	,b.risk_level_note_text
-      	,b.FK_number_of_employees
-      	,b.FK_number_of_migrant_workers
-      	,b.FK_SIC_id
-      	,b.FK_NAICS_id
-      	,b.FK_country_code
-      	,b.FK_empresa_id
-      	,b.money_transfer_offset_days
-      	,b.funds_transfer_offset_days
+		 b.cfop
+		,b.natureza
+      	,b.simplificado
+      	,b.cfopTypeEnum
+      	,b.icms
+      	,b.icmsReduzido
+      	,b.margemAgregadaST
+      	,b.cstPrincipal
+      	,b.classFiscal
+      	,b.observacao
       	,b.create_date
       	,b.create_user
       	,b.modify_date
@@ -50,33 +63,16 @@
   </sql>
 
   <sql id="allCfopValues">
-  		#{name},
-  		#{key},
-    	#{businessTypeValue},
-    	#{employerIdentificationNumber},
-    	#{statusValue},
-    	#{risk.riskLevelValue},
-    	#{risk.riskLevelNote},
-    	#{numberOfEmployees.id},
-    	#{numberOfMigrantWorkers.id},
-    	#{standardIndustrialClassificationCode.id},
-    	#{northAmericanIndustryClassificationSystemCode.id},
-    	#{country.code},
-    	#{parentOrganizationId},
-    	#{batchApprovalDayLimit},
-    	#{fundsTransferDayLimit},
-    	<include refid="CBOFMap.changeControlFields"/>
-  </sql>
-
-  <sql id="allCfopContactColumns">
-		FK_contact_id,
-		FK_business_id,
-		<include refid="CBOFMap.allChangeControlColumns"/>
-  </sql>
-
-  <sql id="allCfopContactValues">
-  		#{id},
-  		#{parentKey},
+  		#{cfop},
+  		#{natureza},
+    	#{simplificado},
+    	#{cfopTypeEnumValue},
+    	#{icms},
+    	#{icmsReduzido},
+    	#{margemAgregadaST},
+    	#{cstPrincipal},
+    	#{classFiscal},
+    	#{observacao},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
@@ -84,7 +80,7 @@
 		SQL Insert Statements.
  	-->
   <insert id="insertCfop" parameterType="Cfop" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO business (
+  	INSERT INTO cfop (
 		<include refid="allCfopColumns" />
       )
     VALUES (<include refid="allCfopValues" /> )
@@ -96,62 +92,67 @@
  	-->
 
   <update id="updateCfop" parameterType="Cfop">
-    UPDATE business
+    UPDATE cfop
     	<set>
-    		money_transfer_offset_days = #{batchApprovalDayLimit},
-      		funds_transfer_offset_days = #{fundsTransferDayLimit},
-    		<if test="name!= null">name = #{name},</if>
-	    	<if test="businessTypeValue!= null"> business_type=#{businessTypeValue},</if>
-	    	<if test="employerIdentificationNumber!= null"> EIN_code=#{employerIdentificationNumber},</if>
-	    	<if test="statusValue!= null"> PGSi_status=#{statusValue},</if>
-	    	<if test="numberOfEmployees.id!= null"> FK_number_of_employees=#{numberOfEmployees.id},</if>
-	    	<if test="numberOfMigrantWorkers.id!= null"> FK_number_of_migrant_workers=#{numberOfMigrantWorkers.id},</if>
-	    	<if test="standardIndustrialClassificationCode.id!= null"> FK_SIC_id=#{standardIndustrialClassificationCode.id},</if>
-	    	<if test="northAmericanIndustryClassificationSystemCode.id!= null"> FK_NAICS_id=#{northAmericanIndustryClassificationSystemCode.id},</if>
-	    	<if test="parentOrganizationId != null"> FK_empresa_id= #{parentOrganizationId},</if>
-	    	<if test="country.code!= null"> FK_country_code=#{country.code},</if>
+    		<if test="cfop!= null">cfop = #{cfop},</if>
+	    	<if test="natureza!= null"> natureza=#{natureza},</if>
+	    	<if test="simplificado!= null"> simplificado=#{simplificado},</if>
+	    	<if test="cfopTypeEnumValue!= null"> cfopTypeEnum=#{cfopTypeEnumValue},</if>
+	    	<if test="icms!= null"> icms=#{icms},</if>
+	    	<if test="icmsReduzido!= null"> icmsReduzido=#{icmsReduzido},</if>
+	    	<if test="margemAgregadaST!= null"> margemAgregadaST=#{margemAgregadaST},</if>
+	    	<if test="cstPrincipal!= null"> cstPrincipal=#{cstPrincipal},</if>
+	    	<if test="classFiscal != null"> classFiscal= #{classFiscal},</if>
+	    	<if test="observacao!= null"> observacao=#{observacao},</if>
 			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
     WHERE
-     business_id = #{id} AND versn_lock_num = #{version}
+     cfop_id = #{id}
   </update>
 
    <!--
 		SQL Delete Statements.
    -->
   <delete id="deleteCfopById" parameterType="Integer">
-    	DELETE FROM business WHERE business_id = #{id}
+    	DELETE FROM cfop WHERE cfop_id = #{id}
   </delete>
 
 	<!--
 		SQL Fetch Statements.
  	-->
   <select id="fetchCfopRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
-     SELECT COUNT(business_id) AS RECORD_COUNT
-        FROM business
-     WHERE business_type = 2
+     SELECT COUNT(cfop_id) AS RECORD_COUNT
+        FROM cfop
+     WHERE 2 = 2
      <if test="parentId != null">
-		  AND FK_empresa_id = #{parentId}
+		  AND FK_cfop_id = #{parentId}
 	 </if>
   </select>
 
-  <select id="fetchAllCfops" resultMap="empresaResult">
+  <select id="fetchAllCfops" resultMap="cfopResult">
     SELECT
 	<include refid="allCfopColumns" />
-    FROM business ORDER BY name ASC
+    FROM cfop ORDER BY name ASC
   </select>
 
-  <select id="fetchCfopById" parameterType="FetchByIdRequest" resultMap="empresaResult">
-
-  </select>
-
-  <select id="fetchAllCfopsByRequest" parameterType="PagedInquiryRequest" resultMap="empresaResult">
+  <select id="fetchCfopById" parameterType="FetchByIdRequest" resultMap="cfopResult">
 
   </select>
 
-  <select id="fetchVersionNumber" parameterType="Cfop" resultType="int">
-	SELECT versn_lock_num FROM business WHERE business_id = #{id}
+  <select id="fetchAllCfopsByRequest" parameterType="PagedInquiryRequest" resultMap="cfopResult">
+
+  </select>
+
+  <select id="fetchCfopByProduto" parameterType="Integer" resultMap="cfopResult">
+	  	SELECT F.*
+
+		  FROM porcaoProd AS C
+
+		  INNER JOIN porcao AS F
+
+		    ON F.id like C.Porcaoid
+		where  c.prodId = #{id}
   </select>
 
 

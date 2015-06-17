@@ -54,6 +54,8 @@ public class Produto extends ModelCosmeDamiao
 
 	private Double pesoLiquido;
 
+	private String modoUso;
+
 	private Tributacao tributacao;
 
 	private List<Estoque> estoqueList;

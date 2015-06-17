@@ -2471,7 +2471,7 @@ INSERT INTO [dbo].[porcao]
 DROP TABLE [dbo].[porcaoItens];
 CREATE TABLE [dbo].[porcaoItens](
 	[id]               [int] NOT NULL,
-	[idcusto]          [int] NOT NULL,
+	[idporcao]         [int] NOT NULL,
 	[unimed]           [int] NOT NULL,
 	[porcao]   		   [real] NULL,
 	[vd]   		       [real] NULL,
@@ -2666,6 +2666,7 @@ CREATE TABLE [dbo].[produto](
 	[cdBarras]     [varchar](50) NULL,
 	[dataCreate]   [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[produto]  	   [varchar](250) NOT NULL,
+	[modoUso]  	   [varchar](250) NOT NULL,
 	[aplicacao]    [varchar](250) NULL,
 	[localizacao]  [varchar](200) NULL,
 	[dataValidade] [bigint] NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
