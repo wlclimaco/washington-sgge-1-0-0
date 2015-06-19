@@ -5,54 +5,49 @@ import com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.EmpresaMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface IEmpresaBAI.
- *
- * @author abarros
- * @version 1.0
- * @created 22-Jul-2014 10:24:55 AM
  */
 public interface IEmpresaBAI
 {
 
 	/**
-	 * Insert location.
+	 * Insert empresa.
 	 *
 	 * @param request the request
-	 * @return the location response
+	 * @return the empresa response
 	 */
 	public EmpresaResponse insertEmpresa(EmpresaMaintenanceRequest request);
 
 	/**
-	 * Update location.
+	 * Update empresa.
 	 *
 	 * @param request the request
-	 * @return the location response
+	 * @return the empresa response
 	 */
 	public EmpresaResponse updateEmpresa(EmpresaMaintenanceRequest request);
 
 	/**
-	 * Delete location.
+	 * Delete empresa.
 	 *
 	 * @param request the request
-	 * @return the location response
+	 * @return the empresa response
 	 */
 	public EmpresaResponse deleteEmpresa(EmpresaMaintenanceRequest request);
 
 	/**
-	 * Fetch location by id.
+	 * Fetch empresa by id.
 	 *
 	 * @param request the request
-	 * @return the location response
+	 * @return the empresa response
 	 */
 	public EmpresaResponse fetchEmpresaById(FetchByIdRequest request);
 
 	/**
-	 * Fetch location by request.
+	 * Fetch empresa by request.
 	 *
 	 * @param request the request
-	 * @return the location response
+	 * @return the empresa response
 	 */
 	public EmpresaResponse fetchEmpresaByRequest(EmpresaInquiryRequest request);
 

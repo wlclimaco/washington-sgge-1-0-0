@@ -10,7 +10,7 @@ import com.prosperitasglobal.sendsolv.dac.IArquivoDAC;
 import com.prosperitasglobal.sendsolv.dac.ICnaeDAC;
 import com.prosperitasglobal.sendsolv.dac.IEmailDAC;
 import com.prosperitasglobal.sendsolv.dac.IEnderecoDAC;
-import com.prosperitasglobal.sendsolv.dac.IEventoDAC;
+import com.prosperitasglobal.sendsolv.dac.IEventosDAC;
 import com.prosperitasglobal.sendsolv.dac.ISociosDAC;
 import com.prosperitasglobal.sendsolv.dac.ITelefoneDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
@@ -92,7 +92,7 @@ public class ArquivoDACImpl extends SqlSessionDaoSupport implements IArquivoDAC
 
 	private ISociosDAC socioDAC;
 
-	private IEventoDAC eventosDAC;
+	private IEventosDAC eventosDAC;
 
 	/**
 	 * @return the enderecoDAC
@@ -177,7 +177,7 @@ public class ArquivoDACImpl extends SqlSessionDaoSupport implements IArquivoDAC
 	/**
 	 * @return the eventosDAC
 	 */
-	public IEventoDAC getEventosDAC()
+	public IEventosDAC getEventosDAC()
 	{
 		return eventosDAC;
 	}
@@ -185,7 +185,7 @@ public class ArquivoDACImpl extends SqlSessionDaoSupport implements IArquivoDAC
 	/**
 	 * @param eventosDAC the eventosDAC to set
 	 */
-	public void setEventosDAC(IEventoDAC eventosDAC)
+	public void setEventosDAC(IEventosDAC eventosDAC)
 	{
 		this.eventosDAC = eventosDAC;
 	}

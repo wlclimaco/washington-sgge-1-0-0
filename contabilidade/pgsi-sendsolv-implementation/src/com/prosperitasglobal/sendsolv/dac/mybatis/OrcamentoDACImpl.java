@@ -9,7 +9,7 @@ import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.ICnaeDAC;
 import com.prosperitasglobal.sendsolv.dac.IEmailDAC;
 import com.prosperitasglobal.sendsolv.dac.IEnderecoDAC;
-import com.prosperitasglobal.sendsolv.dac.IEventoDAC;
+import com.prosperitasglobal.sendsolv.dac.IEventosDAC;
 import com.prosperitasglobal.sendsolv.dac.IOrcamentoDAC;
 import com.prosperitasglobal.sendsolv.dac.ISociosDAC;
 import com.prosperitasglobal.sendsolv.dac.ITelefoneDAC;
@@ -92,7 +92,7 @@ public class OrcamentoDACImpl extends SqlSessionDaoSupport implements IOrcamento
 
 	private ISociosDAC socioDAC;
 
-	private IEventoDAC eventosDAC;
+	private IEventosDAC eventosDAC;
 
 	/**
 	 * @return the enderecoDAC
@@ -177,7 +177,7 @@ public class OrcamentoDACImpl extends SqlSessionDaoSupport implements IOrcamento
 	/**
 	 * @return the eventosDAC
 	 */
-	public IEventoDAC getEventosDAC()
+	public IEventosDAC getEventosDAC()
 	{
 		return eventosDAC;
 	}
@@ -185,7 +185,7 @@ public class OrcamentoDACImpl extends SqlSessionDaoSupport implements IOrcamento
 	/**
 	 * @param eventosDAC the eventosDAC to set
 	 */
-	public void setEventosDAC(IEventoDAC eventosDAC)
+	public void setEventosDAC(IEventosDAC eventosDAC)
 	{
 		this.eventosDAC = eventosDAC;
 	}

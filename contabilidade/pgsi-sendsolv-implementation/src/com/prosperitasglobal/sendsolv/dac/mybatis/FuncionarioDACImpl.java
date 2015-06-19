@@ -4,36 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.mybatis.spring.support.SqlSessionDaoSupport;
-import org.slf4j.LoggerFactory;
-
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.dac.IBeneficiosDAC;
 import com.prosperitasglobal.sendsolv.dac.IDocumentoDAC;
 import com.prosperitasglobal.sendsolv.dac.IEmailDAC;
 import com.prosperitasglobal.sendsolv.dac.IEnderecoDAC;
+import com.prosperitasglobal.sendsolv.dac.IEventosDAC;
 import com.prosperitasglobal.sendsolv.dac.IFuncionarioDAC;
 import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.ISalariosDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
 import com.prosperitasglobal.sendsolv.dac.ITelefoneDAC;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.BeneficiosDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.DocumentosDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.EmailDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.EnderecoDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.EventosDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.SalarioDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.StatusDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.TelefoneDACD;
-import com.prosperitasglobal.sendsolv.model.AcaoEnum;
-import com.prosperitasglobal.sendsolv.model.Funcionario;
-import com.prosperitasglobal.sendsolv.model.Status;
-import com.prosperitasglobal.sendsolv.model.StatusEnum;
-import com.prosperitasglobal.sendsolv.model.TabelaEnum;
-import com.prosperitasglobal.sendsolv.model.request.FuncionarioInquiryRequest;
-import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResponse;
-import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.util.QATMyBatisDacHelper;
-import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class FuncionarioDACImpl.
@@ -102,6 +91,8 @@ public class FuncionarioDACImpl extends SqlSessionDaoSupport implements IFuncion
 	IDocumentoDAC documentoDAC;
 	IHistoricoDAC historicoDAC;
 	IStatusDAC statusDAC;
+	IBeneficiosDAC beneficiosDAC;
+	IEventosDAC eventosDAC;
 
 	public IEnderecoDAC getEnderecoDAC()
 	{
@@ -173,6 +164,26 @@ public class FuncionarioDACImpl extends SqlSessionDaoSupport implements IFuncion
 		this.statusDAC = statusDAC;
 	}
 
+	public IBeneficiosDAC getBeneficiosDAC()
+	{
+		return beneficiosDAC;
+	}
+
+	public void setBeneficiosDAC(IBeneficiosDAC beneficiosDAC)
+	{
+		this.beneficiosDAC = beneficiosDAC;
+	}
+
+	public IEventosDAC getEventosDAC()
+	{
+		return eventosDAC;
+	}
+
+	public void setEventosDAC(IEventosDAC eventosDAC)
+	{
+		this.eventosDAC = eventosDAC;
+	}
+
 	/**
 	 * Get the valid sort fields for the funcionario inquiry. Attribute injected by Spring.
 	 *
@@ -241,6 +252,17 @@ public class FuncionarioDACImpl extends SqlSessionDaoSupport implements IFuncion
 				DocumentosDACD.maintainDocumentoAssociations(funcionario.getDocumentos(), response, insertCount, null,
 						null,
 						null, getDocumentoDAC(), getStatusDAC(), getHistoricoDAC(), funcionario.getEmprId(),
+						funcionario.getCreateUser());
+		insertCount +=
+				BeneficiosDACD.maintainDocumentoAssociations(funcionario.getBeneficios(), response, insertCount, null,
+						null,
+						null, getBeneficiosDAC(), getStatusDAC(), getHistoricoDAC(), funcionario.getEmprId(),
+						funcionario.getCreateUser());
+
+		insertCount +=
+				EventosDACD.maintainEventosAssociations(funcionario.getEventos(), response, insertCount, null,
+						null,
+						null, getEventosDAC(), getStatusDAC(), getHistoricoDAC(), funcionario.getEmprId(),
 						funcionario.getCreateUser());
 
 		if (insertCount > 0)
@@ -316,6 +338,17 @@ public class FuncionarioDACImpl extends SqlSessionDaoSupport implements IFuncion
 				DocumentosDACD.maintainDocumentoAssociations(funcionario.getDocumentos(), response, updateCount, null,
 						null,
 						null, getDocumentoDAC(), getStatusDAC(), getHistoricoDAC(), funcionario.getEmprId(),
+						funcionario.getCreateUser());
+		updateCount +=
+				BeneficiosDACD.maintainDocumentoAssociations(funcionario.getBeneficios(), response, updateCount, null,
+						null,
+						null, getBeneficiosDAC(), getStatusDAC(), getHistoricoDAC(), funcionario.getEmprId(),
+						funcionario.getCreateUser());
+
+		updateCount +=
+				EventosDACD.maintainEventosAssociations(funcionario.getEventos(), response, updateCount, null,
+						null,
+						null, getEventosDAC(), getStatusDAC(), getHistoricoDAC(), funcionario.getEmprId(),
 						funcionario.getCreateUser());
 
 		if (updateCount > 0)

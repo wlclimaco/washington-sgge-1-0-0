@@ -2,30 +2,11 @@ package com.prosperitasglobal.sendsolv.bai.impl;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.xml.ws.Response;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import org.relaxng.datatype.ValidationContext;
+
 import com.prosperitasglobal.sendsolv.bac.IFuncionarioBAC;
-import com.prosperitasglobal.sendsolv.bai.IFuncionarioBAI;
-import com.prosperitasglobal.sendsolv.model.Funcionario;
-import com.prosperitasglobal.sendsolv.model.request.FuncionarioInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.FuncionarioMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.response.FuncionarioResponse;
-import com.qat.framework.model.Message.MessageLevel;
-import com.qat.framework.model.Message.MessageSeverity;
-import com.qat.framework.model.MessageInfo;
-import com.qat.framework.model.QATModel.PersistanceActionEnum;
-import com.qat.framework.model.UserContext;
-import com.qat.framework.model.response.InternalResponse;
-import com.qat.framework.model.response.InternalResponse.Status;
-import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.model.response.Response;
-import com.qat.framework.util.QATInterfaceUtil;
-import com.qat.framework.validation.ValidationContext;
-import com.qat.framework.validation.ValidationContextIndicator;
-import com.qat.framework.validation.ValidationController;
-import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class FuncionarioBAIImpl.

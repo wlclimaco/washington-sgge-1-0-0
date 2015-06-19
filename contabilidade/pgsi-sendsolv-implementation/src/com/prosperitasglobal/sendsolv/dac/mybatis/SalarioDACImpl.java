@@ -1,17 +1,7 @@
 package com.prosperitasglobal.sendsolv.dac.mybatis;
 
-import java.util.List;
-
-import org.mybatis.spring.support.SqlSessionDaoSupport;
-import org.slf4j.LoggerFactory;
-
-import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
 import com.prosperitasglobal.sendsolv.dac.ISalariosDAC;
-import com.prosperitasglobal.sendsolv.model.Salario;
-import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.util.QATMyBatisDacHelper;
-import com.qat.framework.validation.ValidationUtil;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
 
 /**
  * The Class CommonBusinessObjectsDACImpl.
@@ -100,20 +90,9 @@ public class SalarioDACImpl extends SqlSessionDaoSupport implements ISalariosDAC
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer deleteBusinessSalario(Salario salario, InternalResultsResponse<?> response)
+	public Integer deleteSalario(Salario salario, InternalResultsResponse<?> response)
 	{
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, salario, response);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.cbof.dac.ISalarioDAC#deletePersonSalario(com.prosperitasglobal.cbof.model.Salario,
-	 * com.qat.framework.model.response.InternalResultsResponse)
-	 */
-	@Override
-	public Integer deletePersonSalario(Salario salario, InternalResultsResponse<?> response)
-	{
-		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_PERSON_CONTACT, salario, response);
 	}
 
 	/*
@@ -144,76 +123,23 @@ public class SalarioDACImpl extends SqlSessionDaoSupport implements ISalariosDAC
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#fetchSalarioByParent(java.lang.Integer,
-	 * com.prosperitasglobal.sendsolv.model.BusinessTypeEnum)
+	 * @see
+	 * com.prosperitasglobal.sendsolv.dac.IBeneficiosDAC#fetchBeneficiosByRequest(com.prosperitasglobal.sendsolv
+	 * .model.request.PagedInquiryRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Salario> fetchSalarioByParent(Integer parentId, BusinessTypeEnum parentType)
+	public InternalResultsResponse<Salario> fetchSalariosByRequest(PagedInquiryRequest request)
 	{
 		InternalResultsResponse<Salario> response = new InternalResultsResponse<Salario>();
 
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		QATMyBatisDacHelper.translateSortFields(request, getBeneficiosInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, EMPRESA_STMT_FETCH_COUNT,
+				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
 		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#fetchSalarioById(java.lang.Integer)
-	 */
-	@Override
-	public InternalResultsResponse<Salario> fetchSalarioById(Integer id)
-	{
-		InternalResultsResponse<Salario> response = new InternalResultsResponse<Salario>();
-
-		QATMyBatisDacHelper.doQueryForList(getSqlSession(), CONTACT_STMT_FETCH_BY_ID, id, response);
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.cbof.dac.ISalarioDAC#maintainSalarioAssociations(java.util.List, java.lang.Integer,
-	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
-	 */
-	@Override
-	public Integer maintainSalarioAssociations(List<Salario> salarioList, Integer parentId,
-			String associateStatement,
-			InternalResultsResponse<?> response)
-	{
-		Integer count = 0;
-		// First Maintain Salarios
-		if (ValidationUtil.isNullOrEmpty(salarioList))
-		{
-			return count;
-		}
-		// For Each Salario...
-		for (Salario salario : salarioList)
-		{
-			// Make sure we set the parent key
-			salario.setParentId(parentId);
-
-			if (ValidationUtil.isNull(salario.getModelAction()))
-			{
-				continue;
-			}
-			switch (salario.getModelAction())
-			{
-				case INSERT:
-					count += insertSalario(salario, associateStatement, response);
-					break;
-				case UPDATE:
-					count += updateSalario(salario, response);
-					break;
-				case DELETE:
-					count += deletePersonSalario(salario, response);
-					break;
-				default:
-					if (LOG.isDebugEnabled())
-					{
-						LOG.debug("ModelAction for Organization missing!");
-					}
-					break;
-			}
-		}
-		return count;
 	}
 }

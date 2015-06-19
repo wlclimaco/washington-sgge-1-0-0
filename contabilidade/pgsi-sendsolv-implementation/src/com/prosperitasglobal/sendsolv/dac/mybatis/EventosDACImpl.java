@@ -4,7 +4,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
 import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
-import com.prosperitasglobal.sendsolv.dac.IEventoDAC;
+import com.prosperitasglobal.sendsolv.dac.IEventosDAC;
 import com.prosperitasglobal.sendsolv.model.Eventos;
 import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.qat.framework.model.QATModel;
@@ -15,7 +15,7 @@ import com.qat.framework.validation.ValidationUtil;
 /**
  * The Class CnaeDACImpl.
  */
-public class EventoDACImpl extends SqlSessionDaoSupport implements IEventoDAC
+public class EventosDACImpl extends SqlSessionDaoSupport implements IEventosDAC
 {
 	/** The Constant CONTACT_NAMESPACE. */
 	private static final String CONTACT_NAMESPACE = "EventoMap.";
@@ -69,7 +69,7 @@ public class EventoDACImpl extends SqlSessionDaoSupport implements IEventoDAC
 	private static final String CONTACT_STMT_FETCH_ADDRESS_VERSION = CONTACT_NAMESPACE + "fetchVersionNumberAddress";
 
 	/** The Constant LOG. */
-	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(EventoDACImpl.class);
+	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(EventosDACImpl.class);
 
 	/*
 	 * (non-Javadoc)
