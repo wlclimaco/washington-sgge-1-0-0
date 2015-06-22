@@ -1,19 +1,15 @@
 package com.prosperitasglobal.sendsolv.dac.mybatis;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
-import org.mybatis.spring.support.SqlSessionDaoSupport;
-import org.slf4j.LoggerFactory;
-
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.dac.ICfopDAC;
+import com.prosperitasglobal.sendsolv.dac.IPessoaDAC;
 import com.prosperitasglobal.sendsolv.dac.IProdutoDAC;
-import com.prosperitasglobal.sendsolv.model.Produto;
-import com.prosperitasglobal.sendsolv.model.request.ProdutoInquiryRequest;
-import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResponse;
-import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.util.QATMyBatisDacHelper;
-import com.qat.framework.validation.ValidationUtil;
+import com.prosperitasglobal.sendsolv.dac.IUniMedDAC;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.NotesDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.StatusDACD;
 
 /**
  * The Class ProdutoDACImpl.
@@ -74,6 +70,32 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 
 	/** The produto dac. */
 	private IProdutoDAC produtoDAC;
+
+	private IClassificacaoDAC classificacaoDAC;
+
+	private IUniMedDAC uniMedDAC;
+
+	private IGrupoDAC grupoDAC;
+
+	private ISubGrupoDAC subGrupoDAC;
+
+	private IMarcaDAC marcaDAC;
+
+	private ITributacaoDAC tributacaoDAC;
+
+	private IEstoqueDAC estoqueDAC;
+
+	private ITabPrecoDAC tabPrecoDAC;
+
+	private ICustoDAC custoDAC;
+
+	private IPorcaoDAC porcaoDAC;
+
+	private IRentabilidadeDAC rentabilidadeDAC;
+
+	private ICfopDAC cfopDAC;
+
+	private IPessoaDAC fornecedorDAC;
 
 	/** The valid sort fields for an produto inquiry. Will be injected by Spring. */
 	private Map<String, String> produtoInquiryValidSortFields;
@@ -139,7 +161,59 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 			return response;
 		}
 		// Next traverse the object graph and "maintain" the associations
-		insertCount += maintainProdutoAssociations(produto, response);
+		insertCount +=
+				NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
+						null,
+						null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		insertCount +=
+				NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
+						null,
+						null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		insertCount +=
+				NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
+						null,
+						null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		insertCount +=
+				NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
+						null,
+						null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		insertCount +=
+				NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
+						null,
+						null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		insertCount +=
+				NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
+						null,
+						null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		insertCount +=
+				NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
+						null,
+						null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		if (insertCount > 0)
+		{
+			Status status = new Status();
+			status.setStatus(StatusEnum.ACTIVE);
+			List<Status> statusList = new ArrayList<Status>();
+			insertCount =
+					StatusDACD.maintainStatusAssociations(statusList, response, pessoa.getId(), null, AcaoEnum.INSERT,
+							pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.EMPRESA, getStatusDAC(),
+							getHistoricoDAC());
+
+		}
 
 		// Finally, if something was inserted then add the Produto to the result.
 		if (insertCount > 0)
