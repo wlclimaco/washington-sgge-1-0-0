@@ -4,40 +4,35 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.mybatis.spring.support.SqlSessionDaoSupport;
-import org.slf4j.LoggerFactory;
-
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.cbof.dac.INoteDAC;
+import com.prosperitasglobal.sendsolv.dac.IBancoDAC;
+import com.prosperitasglobal.sendsolv.dac.ICfopDAC;
 import com.prosperitasglobal.sendsolv.dac.ICnaeDAC;
+import com.prosperitasglobal.sendsolv.dac.IContatoDAC;
+import com.prosperitasglobal.sendsolv.dac.IConvenioDAC;
 import com.prosperitasglobal.sendsolv.dac.IDocumentoDAC;
 import com.prosperitasglobal.sendsolv.dac.IEmailDAC;
 import com.prosperitasglobal.sendsolv.dac.IEnderecoDAC;
+import com.prosperitasglobal.sendsolv.dac.IFormaPagamentoDAC;
 import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.IPessoaDAC;
+import com.prosperitasglobal.sendsolv.dac.IProfissaoDAC;
 import com.prosperitasglobal.sendsolv.dac.ISociosDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
 import com.prosperitasglobal.sendsolv.dac.ITelefoneDAC;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.BancoDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.CfopDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.ContatoDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.ConvenioDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.DocumentosDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.EmailDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.EnderecoDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.FormaPagamentoDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.NotesDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.ProfissaoDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.StatusDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.TelefoneDACD;
-import com.prosperitasglobal.sendsolv.model.AcaoEnum;
-import com.prosperitasglobal.sendsolv.model.Cliente;
-import com.prosperitasglobal.sendsolv.model.Fornecedor;
-import com.prosperitasglobal.sendsolv.model.Status;
-import com.prosperitasglobal.sendsolv.model.StatusEnum;
-import com.prosperitasglobal.sendsolv.model.TabelaEnum;
-import com.prosperitasglobal.sendsolv.model.Transportador;
-import com.prosperitasglobal.sendsolv.model.request.ClienteInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.FornecedorInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.TransportadorInquiryRequest;
-import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResponse;
-import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.util.QATMyBatisDacHelper;
-import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class PessoaDACImpl.
@@ -107,6 +102,34 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 	IDocumentoDAC documentoDAC;
 	IHistoricoDAC historicoDAC;
 	IStatusDAC statusDAC;
+
+	IProfissaoDAC profisaoDAC;
+	IConvenioDAC convenioDAC;
+	IBancoDAC bancosDAC;
+	IContatoDAC contatoDAC;
+	INoteDAC noteDAC;
+	ICfopDAC cfopDAC;
+	IFormaPagamentoDAC formaPagamentoDAC;
+
+	public ICfopDAC getCfopDAC()
+	{
+		return cfopDAC;
+	}
+
+	public void setCfopDAC(ICfopDAC cfopDAC)
+	{
+		this.cfopDAC = cfopDAC;
+	}
+
+	public IFormaPagamentoDAC getFormaPagamentoDAC()
+	{
+		return formaPagamentoDAC;
+	}
+
+	public void setFormaPagamentoDAC(IFormaPagamentoDAC formaPagamentoDAC)
+	{
+		this.formaPagamentoDAC = formaPagamentoDAC;
+	}
 
 	/**
 	 * @return the enderecoDAC
@@ -246,6 +269,56 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		return pessoaInquiryValidSortFields;
 	}
 
+	public IProfissaoDAC getProfisaoDAC()
+	{
+		return profisaoDAC;
+	}
+
+	public void setProfisaoDAC(IProfissaoDAC profisaoDAC)
+	{
+		this.profisaoDAC = profisaoDAC;
+	}
+
+	public IConvenioDAC getConvenioDAC()
+	{
+		return convenioDAC;
+	}
+
+	public void setConvenioDAC(IConvenioDAC convenioDAC)
+	{
+		this.convenioDAC = convenioDAC;
+	}
+
+	public IBancoDAC getBancosDAC()
+	{
+		return bancosDAC;
+	}
+
+	public void setBancosDAC(IBancoDAC bancosDAC)
+	{
+		this.bancosDAC = bancosDAC;
+	}
+
+	public IContatoDAC getContatoDAC()
+	{
+		return contatoDAC;
+	}
+
+	public void setContatoDAC(IContatoDAC contatoDAC)
+	{
+		this.contatoDAC = contatoDAC;
+	}
+
+	public INoteDAC getNoteDAC()
+	{
+		return noteDAC;
+	}
+
+	public void setNoteDAC(INoteDAC noteDAC)
+	{
+		this.noteDAC = noteDAC;
+	}
+
 	/**
 	 * Set the valid sort fields for the pessoa inquiry. Attribute injected by Spring.
 	 *
@@ -291,6 +364,36 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 				DocumentosDACD.maintainDocumentoAssociations(pessoa.getDocumentos(), response, insertCount, null,
 						null,
 						null, getDocumentoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		insertCount +=
+				ProfissaoDACD.maintainProfissaoAssociations(pessoa.getProfissao(), response, insertCount, null,
+						null,
+						null, getProfisaoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		insertCount +=
+				ConvenioDACD.maintainConvenioAssociations(pessoa.getConvenioList(), response, insertCount, null,
+						null,
+						null, getConvenioDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		insertCount +=
+				BancoDACD.maintainBancoAssociations(pessoa.getBancos(), response, insertCount, null,
+						null,
+						null, getBancosDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		insertCount +=
+				ContatoDACD.maintainContatoAssociations(pessoa.getContatoList(), response, insertCount, null,
+						null,
+						null, getContatoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		insertCount +=
+				NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
+						null,
+						null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
 						pessoa.getCreateUser());
 
 		if (insertCount > 0)
@@ -353,6 +456,35 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 				DocumentosDACD.maintainDocumentoAssociations(pessoa.getDocumentos(), response, pessoa.getId(), null,
 						null,
 						null, getDocumentoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+		updateCount +=
+				ProfissaoDACD.maintainProfissaoAssociations(pessoa.getProfissao(), response, pessoa.getId(), null,
+						null,
+						null, getProfisaoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		updateCount +=
+				ConvenioDACD.maintainConvenioAssociations(pessoa.getConvenioList(), response, pessoa.getId(), null,
+						null,
+						null, getConvenioDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		updateCount +=
+				BancoDACD.maintainBancoAssociations(pessoa.getBancos(), response, pessoa.getId(), null,
+						null,
+						null, getBancosDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		updateCount +=
+				ContatoDACD.maintainContatoAssociations(pessoa.getContatoList(), response, pessoa.getId(), null,
+						null,
+						null, getContatoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		updateCount +=
+				NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, pessoa.getId(), null,
+						null,
+						null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
 						pessoa.getCreateUser());
 
 		if (updateCount > 0)
@@ -465,6 +597,43 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 						null, getDocumentoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
 						pessoa.getCreateUser());
 
+		insertCount +=
+				BancoDACD.maintainBancoAssociations(pessoa.getBancos(), response, insertCount, null,
+						null,
+						null, getBancosDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		insertCount +=
+				ContatoDACD.maintainContatoAssociations(pessoa.getContatoList(), response, insertCount, null,
+						null,
+						null, getContatoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		insertCount +=
+				NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
+						null,
+						null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		insertCount +=
+				ConvenioDACD.maintainConvenioAssociations(pessoa.getConvenioList(), response, pessoa.getId(), null,
+						null,
+						null, getConvenioDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		insertCount +=
+				FormaPagamentoDACD.maintainFormaPgAssociations(pessoa.getFormaPagamentoList(), response, insertCount,
+						null,
+						null,
+						null, getFormaPagamentoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		insertCount +=
+				CfopDACD.maintainCfopAssociations(pessoa.getListCfops(), response, pessoa.getId(), null,
+						null,
+						null, getCfopDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
 		if (insertCount > 0)
 		{
 			Status status = new Status();
@@ -505,6 +674,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 			return response;
 		}
 		// Next traverse the object graph and "maintain" the associations
+
 		updateCount +=
 				EnderecoDACD.maintainEnderecoAssociations(pessoa.getEnderecos(), response, pessoa.getId(), null, null,
 						null, getEnderecoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
@@ -524,6 +694,44 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 				DocumentosDACD.maintainDocumentoAssociations(pessoa.getDocumentos(), response, pessoa.getId(), null,
 						null,
 						null, getDocumentoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		updateCount +=
+				BancoDACD.maintainBancoAssociations(pessoa.getBancos(), response, pessoa.getId(), null,
+						null,
+						null, getBancosDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		updateCount +=
+				ContatoDACD.maintainContatoAssociations(pessoa.getContatoList(), response, pessoa.getId(), null,
+						null,
+						null, getContatoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		updateCount +=
+				NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, pessoa.getId(), null,
+						null,
+						null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		updateCount +=
+				ConvenioDACD.maintainConvenioAssociations(pessoa.getConvenioList(), response, pessoa.getId(), null,
+						null,
+						null, getConvenioDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		updateCount +=
+				FormaPagamentoDACD.maintainFormaPgAssociations(pessoa.getFormaPagamentoList(), response,
+						pessoa.getId(),
+						null,
+						null,
+						null, getFormaPagamentoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		updateCount +=
+				CfopDACD.maintainCfopAssociations(pessoa.getListCfops(), response, pessoa.getId(), null,
+						null,
+						null, getCfopDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
 						pessoa.getCreateUser());
 
 		if (updateCount > 0)
@@ -636,6 +844,43 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 						null, getDocumentoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
 						pessoa.getCreateUser());
 
+		insertCount +=
+				BancoDACD.maintainBancoAssociations(pessoa.getBancos(), response, insertCount, null,
+						null,
+						null, getBancosDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		insertCount +=
+				ContatoDACD.maintainContatoAssociations(pessoa.getContatoList(), response, insertCount, null,
+						null,
+						null, getContatoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		insertCount +=
+				NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
+						null,
+						null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		insertCount +=
+				ConvenioDACD.maintainConvenioAssociations(pessoa.getConvenioList(), response, pessoa.getId(), null,
+						null,
+						null, getConvenioDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		insertCount +=
+				FormaPagamentoDACD.maintainFormaPgAssociations(pessoa.getFormaPagamentoList(), response, insertCount,
+						null,
+						null,
+						null, getFormaPagamentoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		insertCount +=
+				CfopDACD.maintainCfopAssociations(pessoa.getListCfops(), response, pessoa.getId(), null,
+						null,
+						null, getCfopDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
 		if (insertCount > 0)
 		{
 			Status status = new Status();
@@ -696,6 +941,44 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 				DocumentosDACD.maintainDocumentoAssociations(pessoa.getDocumentos(), response, pessoa.getId(), null,
 						null,
 						null, getDocumentoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		updateCount +=
+				BancoDACD.maintainBancoAssociations(pessoa.getBancos(), response, pessoa.getId(), null,
+						null,
+						null, getBancosDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		updateCount +=
+				ContatoDACD.maintainContatoAssociations(pessoa.getContatoList(), response, pessoa.getId(), null,
+						null,
+						null, getContatoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		updateCount +=
+				NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, pessoa.getId(), null,
+						null,
+						null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		updateCount +=
+				ConvenioDACD.maintainConvenioAssociations(pessoa.getConvenioList(), response, pessoa.getId(), null,
+						null,
+						null, getConvenioDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		updateCount +=
+				FormaPagamentoDACD.maintainFormaPgAssociations(pessoa.getFormaPagamentoList(), response,
+						pessoa.getId(),
+						null,
+						null,
+						null, getFormaPagamentoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser());
+
+		updateCount +=
+				CfopDACD.maintainCfopAssociations(pessoa.getListCfops(), response, pessoa.getId(), null,
+						null,
+						null, getCfopDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
 						pessoa.getCreateUser());
 
 		if (updateCount > 0)
