@@ -2,7 +2,15 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.List;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
 import com.prosperitasglobal.sendsolv.dac.IClassificacaoDAC;
+import com.prosperitasglobal.sendsolv.model.Classificacao;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class CommonBusinessObjectsDACImpl.
@@ -87,34 +95,6 @@ public class ClassificacaoDACImpl extends SqlSessionDaoSupport implements IClass
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.cbof.dac.IClassificacaoDAC#deleteBusinessClassificacao(com.prosperitasglobal.cbof.model.
-	 * Classificacao,
-	 * com.qat.framework.model.response.InternalResultsResponse)
-	 */
-	@Override
-	public Integer deleteBusinessClassificacao(Classificacao classificacao, InternalResultsResponse<?> response)
-	{
-		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, classificacao,
-				response);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.cbof.dac.IClassificacaoDAC#deletePersonClassificacao(com.prosperitasglobal.cbof.model.
-	 * Classificacao,
-	 * com.qat.framework.model.response.InternalResultsResponse)
-	 */
-	@Override
-	public Integer deletePersonClassificacao(Classificacao classificacao, InternalResultsResponse<?> response)
-	{
-		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_PERSON_CONTACT, classificacao,
-				response);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
 	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#updateClassificacao(com.prosperitasglobal.cbof.model.
 	 * Classificacao
 	 * ,
@@ -149,7 +129,6 @@ public class ClassificacaoDACImpl extends SqlSessionDaoSupport implements IClass
 	 * java.lang.Integer,
 	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
 	 */
-	@Override
 	public Integer maintainClassificacaoAssociations(List<Classificacao> classificacaoList, Integer parentId,
 			String associateStatement,
 			InternalResultsResponse<?> response)
@@ -179,7 +158,7 @@ public class ClassificacaoDACImpl extends SqlSessionDaoSupport implements IClass
 					count += updateClassificacao(classificacao, response);
 					break;
 				case DELETE:
-					count += deletePersonClassificacao(classificacao, response);
+					count += deleteClassificacao(classificacao, response);
 					break;
 				default:
 					if (LOG.isDebugEnabled())
@@ -193,16 +172,9 @@ public class ClassificacaoDACImpl extends SqlSessionDaoSupport implements IClass
 	}
 
 	@Override
-	public InternalResultsResponse<Classificacao> fetchClassificacaoByParent(Integer parentId)
+	public Integer deleteClassificacao(Classificacao classificacao, InternalResultsResponse<?> response)
 	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public InternalResultsResponse<Classificacao> fetchClassificacaoById(Integer id)
-	{
-		// TODO Auto-generated method stub
-		return null;
+		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, classificacao,
+				response);
 	}
 }

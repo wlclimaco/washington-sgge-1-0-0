@@ -1,5 +1,7 @@
 package com.prosperitasglobal.sendsolv.dac;
 
+import com.prosperitasglobal.sendsolv.model.Salario;
+import com.qat.framework.model.response.InternalResultsResponse;
 
 public interface ISalariosDAC
 {

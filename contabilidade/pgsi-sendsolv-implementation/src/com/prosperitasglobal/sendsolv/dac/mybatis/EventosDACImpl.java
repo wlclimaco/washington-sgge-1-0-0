@@ -1,9 +1,10 @@
 package com.prosperitasglobal.sendsolv.dac.mybatis;
 
+import java.util.List;
+
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
-import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
 import com.prosperitasglobal.sendsolv.dac.IEventosDAC;
 import com.prosperitasglobal.sendsolv.model.Eventos;
 import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
@@ -23,50 +24,11 @@ public class EventosDACImpl extends SqlSessionDaoSupport implements IEventosDAC
 	/** The Constant CONTACT_STMT_UPDATE. */
 	private static final String CONTACT_STMT_UPDATE = CONTACT_NAMESPACE + "updateEvento";
 
-	/** The Constant CONTACT_STMT_UPDATE_PHONE. */
-	private static final String CONTACT_STMT_UPDATE_PHONE = CONTACT_NAMESPACE + "updatePhone";
-
-	/** The Constant CONTACT_STMT_UPDATE_EMAIL. */
-	private static final String CONTACT_STMT_UPDATE_EMAIL = CONTACT_NAMESPACE + "updateEmail";
-
-	/** The Constant CONTACT_STMT_UPDATE_ADDRESS. */
-	private static final String CONTACT_STMT_UPDATE_ADDRESS = CONTACT_NAMESPACE + "updateAddress";
-
 	/** The Constant CONTACT_STMT_DELETE_BUSINESS_CONTACT. */
 	private static final String CONTACT_STMT_DELETE_BUSINESS_CONTACT = CONTACT_NAMESPACE + "deleteBusinessEvento";
 
-	/** The Constant CONTACT_STMT_DELETE_PERSON_CONTACT. */
-	private static final String CONTACT_STMT_DELETE_PERSON_CONTACT = CONTACT_NAMESPACE + "deletePersonEvento";
-
 	/** The Constant CONTACT_STMT_INSERT. */
 	private static final String CONTACT_STMT_INSERT = CONTACT_NAMESPACE + "insertEvento";
-
-	/** The Constant CONTACT_STMT_INSERT_PHONE. */
-	private static final String CONTACT_STMT_INSERT_PHONE = CONTACT_NAMESPACE + "insertPhone";
-
-	/** The Constant CONTACT_STMT_INSERT_EMAIL. */
-	private static final String CONTACT_STMT_INSERT_EMAIL = CONTACT_NAMESPACE + "insertEmail";
-
-	/** The Constant CONTACT_STMT_INSERT_ADDRESS. */
-	private static final String CONTACT_STMT_INSERT_ADDRESS = CONTACT_NAMESPACE + "insertAddress";
-
-	/** The Constant CONTACT_STMT_FETCH_BY_BUSINESS_ID. */
-	private static final String CONTACT_STMT_FETCH_BY_BUSINESS_ID = CONTACT_NAMESPACE + "fetchEventosByBusinessId";
-
-	/** The Constant CONTACT_STMT_FETCH_BY_PERSON_ID. */
-	private static final String CONTACT_STMT_FETCH_BY_PERSON_ID = CONTACT_NAMESPACE + "fetchEventosByPersonId";
-
-	/** The Constant CONTACT_STMT_FETCH_BY_ID. */
-	private static final String CONTACT_STMT_FETCH_BY_ID = CONTACT_NAMESPACE + "fetchEventosById";
-
-	/** The Constant CONTACT_STMT_FETCH_EMAIL_VERSION. */
-	private static final String CONTACT_STMT_FETCH_EMAIL_VERSION = CONTACT_NAMESPACE + "fetchVersionNumberEmail";
-
-	/** The Constant CONTACT_STMT_FETCH_PHONE_VERSION. */
-	private static final String CONTACT_STMT_FETCH_PHONE_VERSION = CONTACT_NAMESPACE + "fetchVersionNumberPhone";
-
-	/** The Constant CONTACT_STMT_FETCH_ADDRESS_VERSION. */
-	private static final String CONTACT_STMT_FETCH_ADDRESS_VERSION = CONTACT_NAMESPACE + "fetchVersionNumberAddress";
 
 	/** The Constant LOG. */
 	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(EventosDACImpl.class);
@@ -87,32 +49,9 @@ public class EventosDACImpl extends SqlSessionDaoSupport implements IEventosDAC
 		// Associate with parent using statement name passed as parameter
 		insertCount +=
 				QATMyBatisDacHelper
-						.doInsert(getSqlSession(), statementName, endereco, response);
+				.doInsert(getSqlSession(), statementName, endereco, response);
 
 		return insertCount;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.cbof.dac.IEventoDAC#deleteBusinessEvento(com.prosperitasglobal.cbof.model.Evento,
-	 * com.qat.framework.model.response.InternalResultsResponse)
-	 */
-	@Override
-	public Integer deleteBusinessEvento(Eventos endereco, InternalResultsResponse<?> response)
-	{
-		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, endereco, response);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.cbof.dac.IEventoDAC#deletePersonEvento(com.prosperitasglobal.cbof.model.Evento,
-	 * com.qat.framework.model.response.InternalResultsResponse)
-	 */
-	@Override
-	public Integer deletePersonEvento(Eventos endereco, InternalResultsResponse<?> response)
-	{
-		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_PERSON_CONTACT, endereco, response);
 	}
 
 	/*
@@ -141,65 +80,59 @@ public class EventosDACImpl extends SqlSessionDaoSupport implements IEventosDAC
 		return updateCount;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#fetchEventoByParent(java.lang.Integer,
-	 * com.prosperitasglobal.sendsolv.model.BusinessTypeEnum)
-	 */
 	@Override
-	public InternalResultsResponse<Eventos> fetchEventoByParent(Integer parentId, BusinessTypeEnum parentType)
+	public Integer deleteEvento(Eventos evento, InternalResultsResponse<?> response)
 	{
-		InternalResultsResponse<Eventos> response = new InternalResultsResponse<Eventos>();
-
-		switch (parentType)
-		{
-			case ORGANIZATION:
-				QATMyBatisDacHelper.doQueryForList(getSqlSession(), CONTACT_STMT_FETCH_BY_BUSINESS_ID, parentId,
-						response);
-				break;
-
-			case LOCATION:
-				QATMyBatisDacHelper.doQueryForList(getSqlSession(), CONTACT_STMT_FETCH_BY_BUSINESS_ID, parentId,
-						response);
-				break;
-
-			case MEMBER:
-				QATMyBatisDacHelper.doQueryForList(getSqlSession(), CONTACT_STMT_FETCH_BY_PERSON_ID, parentId,
-						response);
-				break;
-			case UNKNOWN:
-				break;
-			default:
-				if (LOG.isDebugEnabled())
-				{
-					LOG.debug("parentType for Evento missing!");
-				}
-				break;
-
-		}
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#fetchEventoById(java.lang.Integer)
-	 */
-	@Override
-	public InternalResultsResponse<Eventos> fetchEventoById(Integer id)
-	{
-		InternalResultsResponse<Eventos> response = new InternalResultsResponse<Eventos>();
-
-		QATMyBatisDacHelper.doQueryForList(getSqlSession(), CONTACT_STMT_FETCH_BY_ID, id, response);
-
-		return response;
+		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, evento, response);
 	}
 
 	@Override
-	public InternalResultsResponse<Eventos> fetchEventoByRequest(PagedInquiryRequest request)
+	public InternalResultsResponse<Eventos> fetchEventosByRequest(PagedInquiryRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public Integer maintainEstoqueAssociations(List<Eventos> estoqueList, Integer parentId,
+			String associateStatement,
+			InternalResultsResponse<?> response)
+	{
+		Integer count = 0;
+		// First Maintain Estoques
+		if (ValidationUtil.isNullOrEmpty(estoqueList))
+		{
+			return count;
+		}
+		// For Each Estoque...
+		for (Eventos estoque : estoqueList)
+		{
+			// Make sure we set the parent key
+			estoque.setParentId(parentId);
+
+			if (ValidationUtil.isNull(estoque.getModelAction()))
+			{
+				continue;
+			}
+			switch (estoque.getModelAction())
+			{
+				case INSERT:
+					count += insertEvento(estoque, associateStatement, response);
+					break;
+				case UPDATE:
+					count += updateEvento(estoque, response);
+					break;
+				case DELETE:
+					count += deleteEvento(estoque, response);
+					break;
+				default:
+					if (LOG.isDebugEnabled())
+					{
+						LOG.debug("ModelAction for Organization missing!");
+					}
+					break;
+			}
+		}
+		return count;
 	}
 
 }

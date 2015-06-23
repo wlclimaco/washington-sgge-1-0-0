@@ -2,7 +2,15 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.List;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
 import com.prosperitasglobal.sendsolv.dac.IPorcaoDAC;
+import com.prosperitasglobal.sendsolv.model.Porcao;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class CommonBusinessObjectsDACImpl.
@@ -87,21 +95,9 @@ public class PorcaoDACImpl extends SqlSessionDaoSupport implements IPorcaoDAC
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer deleteBusinessPorcao(Porcao porcao, InternalResultsResponse<?> response)
+	public Integer deletePorcao(Porcao porcao, InternalResultsResponse<?> response)
 	{
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, porcao, response);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.cbof.dac.IPorcaoDAC#deletePersonPorcao(com.prosperitasglobal.cbof.model.Porcao,
-	 * com.qat.framework.model.response.InternalResultsResponse)
-	 */
-	@Override
-	public Integer deletePersonPorcao(Porcao porcao, InternalResultsResponse<?> response)
-	{
-		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_PERSON_CONTACT, porcao, response);
 	}
 
 	/*
@@ -192,6 +188,13 @@ public class PorcaoDACImpl extends SqlSessionDaoSupport implements IPorcaoDAC
 
 	@Override
 	public InternalResultsResponse<Porcao> fetchPorcaoById(Integer id)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer deletePorcao(Porcao porcao, InternalResultsResponse<?> response)
 	{
 		// TODO Auto-generated method stub
 		return null;

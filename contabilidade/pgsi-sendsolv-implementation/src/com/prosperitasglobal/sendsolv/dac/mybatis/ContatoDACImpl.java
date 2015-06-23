@@ -2,7 +2,15 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.List;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
 import com.prosperitasglobal.sendsolv.dac.IContatoDAC;
+import com.prosperitasglobal.sendsolv.model.Contato;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class CommonBusinessObjectsDACImpl.
@@ -18,47 +26,11 @@ public class ContatoDACImpl extends SqlSessionDaoSupport implements IContatoDAC
 	/** The Constant CONTACT_STMT_UPDATE_PHONE. */
 	private static final String CONTACT_STMT_UPDATE_PHONE = CONTACT_NAMESPACE + "updatePhone";
 
-	/** The Constant CONTACT_STMT_UPDATE_EMAIL. */
-	private static final String CONTACT_STMT_UPDATE_EMAIL = CONTACT_NAMESPACE + "updateEmail";
-
-	/** The Constant CONTACT_STMT_UPDATE_ADDRESS. */
-	private static final String CONTACT_STMT_UPDATE_ADDRESS = CONTACT_NAMESPACE + "updateAddress";
-
 	/** The Constant CONTACT_STMT_DELETE_BUSINESS_CONTACT. */
 	private static final String CONTACT_STMT_DELETE_BUSINESS_CONTACT = CONTACT_NAMESPACE + "deleteBusinessContato";
 
-	/** The Constant CONTACT_STMT_DELETE_PERSON_CONTACT. */
-	private static final String CONTACT_STMT_DELETE_PERSON_CONTACT = CONTACT_NAMESPACE + "deletePersonContato";
-
 	/** The Constant CONTACT_STMT_INSERT. */
 	private static final String CONTACT_STMT_INSERT = CONTACT_NAMESPACE + "insertContato";
-
-	/** The Constant CONTACT_STMT_INSERT_PHONE. */
-	private static final String CONTACT_STMT_INSERT_PHONE = CONTACT_NAMESPACE + "insertPhone";
-
-	/** The Constant CONTACT_STMT_INSERT_EMAIL. */
-	private static final String CONTACT_STMT_INSERT_EMAIL = CONTACT_NAMESPACE + "insertEmail";
-
-	/** The Constant CONTACT_STMT_INSERT_ADDRESS. */
-	private static final String CONTACT_STMT_INSERT_ADDRESS = CONTACT_NAMESPACE + "insertAddress";
-
-	/** The Constant CONTACT_STMT_FETCH_BY_BUSINESS_ID. */
-	private static final String CONTACT_STMT_FETCH_BY_BUSINESS_ID = CONTACT_NAMESPACE + "fetchContatosByBusinessId";
-
-	/** The Constant CONTACT_STMT_FETCH_BY_PERSON_ID. */
-	private static final String CONTACT_STMT_FETCH_BY_PERSON_ID = CONTACT_NAMESPACE + "fetchContatosByPersonId";
-
-	/** The Constant CONTACT_STMT_FETCH_BY_ID. */
-	private static final String CONTACT_STMT_FETCH_BY_ID = CONTACT_NAMESPACE + "fetchContatosById";
-
-	/** The Constant CONTACT_STMT_FETCH_EMAIL_VERSION. */
-	private static final String CONTACT_STMT_FETCH_EMAIL_VERSION = CONTACT_NAMESPACE + "fetchVersionNumberEmail";
-
-	/** The Constant CONTACT_STMT_FETCH_PHONE_VERSION. */
-	private static final String CONTACT_STMT_FETCH_PHONE_VERSION = CONTACT_NAMESPACE + "fetchVersionNumberPhone";
-
-	/** The Constant CONTACT_STMT_FETCH_ADDRESS_VERSION. */
-	private static final String CONTACT_STMT_FETCH_ADDRESS_VERSION = CONTACT_NAMESPACE + "fetchVersionNumberAddress";
 
 	/** The Constant LOG. */
 	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(ContatoDACImpl.class);
@@ -78,30 +50,6 @@ public class ContatoDACImpl extends SqlSessionDaoSupport implements IContatoDAC
 		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT, contato, response);
 
 		return insertCount;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.cbof.dac.IContatoDAC#deleteBusinessContato(com.prosperitasglobal.cbof.model.Contato,
-	 * com.qat.framework.model.response.InternalResultsResponse)
-	 */
-	@Override
-	public Integer deleteBusinessContato(Contato contato, InternalResultsResponse<?> response)
-	{
-		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, contato, response);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.cbof.dac.IContatoDAC#deletePersonContato(com.prosperitasglobal.cbof.model.Contato,
-	 * com.qat.framework.model.response.InternalResultsResponse)
-	 */
-	@Override
-	public Integer deletePersonContato(Contato contato, InternalResultsResponse<?> response)
-	{
-		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_PERSON_CONTACT, contato, response);
 	}
 
 	/*
@@ -134,13 +82,6 @@ public class ContatoDACImpl extends SqlSessionDaoSupport implements IContatoDAC
 		return updateCount;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.cbof.dac.IContatoDAC#maintainContatoAssociations(java.util.List,
-	 * java.lang.Integer,
-	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
-	 */
-	@Override
 	public Integer maintainContatoAssociations(List<Contato> contatoList, Integer parentId,
 			String associateStatement,
 			InternalResultsResponse<?> response)
@@ -170,7 +111,7 @@ public class ContatoDACImpl extends SqlSessionDaoSupport implements IContatoDAC
 					count += updateContato(contato, response);
 					break;
 				case DELETE:
-					count += deletePersonContato(contato, response);
+					count += deleteContato(contato, response);
 					break;
 				default:
 					if (LOG.isDebugEnabled())
@@ -184,16 +125,15 @@ public class ContatoDACImpl extends SqlSessionDaoSupport implements IContatoDAC
 	}
 
 	@Override
-	public InternalResultsResponse<Contato> fetchContatoByParent(Integer parentId)
+	public InternalResultsResponse<Contato> fetchContatoById(Integer id)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public InternalResultsResponse<Contato> fetchContatoById(Integer id)
+	public Integer deleteContato(Contato contato, InternalResultsResponse<?> response)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, contato, response);
 	}
 }

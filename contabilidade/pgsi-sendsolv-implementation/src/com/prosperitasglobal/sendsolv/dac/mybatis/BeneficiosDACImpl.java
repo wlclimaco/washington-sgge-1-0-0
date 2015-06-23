@@ -2,8 +2,18 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.Map;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
 import com.prosperitasglobal.sendsolv.dac.IBeneficiosDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
+import com.prosperitasglobal.sendsolv.model.Beneficios;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class BeneficiosDACImpl.
@@ -105,8 +115,6 @@ public class BeneficiosDACImpl extends SqlSessionDaoSupport implements IBenefici
 		{
 			return response;
 		}
-		// Next traverse the object graph and "maintain" the associations
-		insertCount += maintainBeneficiosAssociations(beneficios, response);
 
 		// Finally, if something was inserted then add the Beneficios to the result.
 		if (insertCount > 0)
@@ -142,8 +150,6 @@ public class BeneficiosDACImpl extends SqlSessionDaoSupport implements IBenefici
 		{
 			return response;
 		}
-		// Next traverse the object graph and "maintain" the associations
-		updateCount += maintainBeneficiosAssociations(beneficios, response);
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)

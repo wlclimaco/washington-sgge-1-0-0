@@ -1,5 +1,8 @@
 package com.prosperitasglobal.sendsolv.dac;
 
+import com.prosperitasglobal.sendsolv.model.HorarioFunc;
+import com.qat.framework.model.response.InternalResultsResponse;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Interface ISocioDAC.
