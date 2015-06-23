@@ -1,5 +1,8 @@
 package com.prosperitasglobal.sendsolv.dac;
 
+import com.prosperitasglobal.sendsolv.model.Estoque;
+import com.qat.framework.model.response.InternalResultsResponse;
+
 /**
  * The Interface IEstoqueDAC.
  */

@@ -1,6 +1,5 @@
 package com.prosperitasglobal.sendsolv.model;
 
-import java.util.List;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -58,27 +57,27 @@ public class RentabilidadeItens extends ModelCosmeDamiao
 	}
 
 	/**
+	 * @return the produto
+	 */
+	public Produto getProduto()
+	{
+		return produto;
+	}
+
+	/**
+	 * @param produto the produto to set
+	 */
+	public void setProduto(Produto produto)
+	{
+		this.produto = produto;
+	}
+
+	/**
 	 * @param idRentabilidade the idRentabilidade to set
 	 */
 	public void setIdRentabilidade(Integer idRentabilidade)
 	{
 		this.idRentabilidade = idRentabilidade;
-	}
-
-	/**
-	 * @return the produtoList
-	 */
-	public List<Produto> getProdutoList()
-	{
-		return produtoList;
-	}
-
-	/**
-	 * @param produtoList the produtoList to set
-	 */
-	public void setProdutoList(List<Produto> produtoList)
-	{
-		this.produtoList = produtoList;
 	}
 
 	/**
@@ -121,16 +120,15 @@ public class RentabilidadeItens extends ModelCosmeDamiao
 	public String toString()
 	{
 		return "RentabilidadeItens [getId()=" + getId() + ", getIdRentabilidade()=" + getIdRentabilidade()
-				+ ", getProdutoList()=" + getProdutoList() + ", getValor()=" + getValor()
-				+ ", getRentabilidadeTypeEnum()=" + getRentabilidadeTypeEnum() + ", getTabelaEnumValue()="
-				+ getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()="
-				+ getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()=" + getType()
-				+ ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()="
-				+ getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite() + ", toString()="
-				+ super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
-				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
-				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
-				+ hashCode() + "]";
+				+ ", getProduto()=" + getProduto() + ", getValor()=" + getValor() + ", getRentabilidadeTypeEnum()="
+				+ getRentabilidadeTypeEnum() + ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()="
+				+ getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId()
+				+ ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()="
+				+ getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId()
+				+ ", getSite()=" + getSite() + ", toString()=" + super.toString() + ", getModelAction()="
+				+ getModelAction() + ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()="
+				+ getCreateDateUTC() + ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()="
+				+ getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
 	}
 
 }

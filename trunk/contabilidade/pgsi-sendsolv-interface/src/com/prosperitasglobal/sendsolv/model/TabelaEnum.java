@@ -134,7 +134,9 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 
 	TABELA(38, "sendsolv.base.model.risklevelenum.medium"),
 
-	ATRIBUTOS(39, "sendsolv.base.model.risklevelenum.medium");
+	ATRIBUTOS(39, "sendsolv.base.model.risklevelenum.medium"),
+
+	EVENTOS(40, "sendsolv.base.model.risklevelenum.medium");
 
 	/** The code. */
 	private Integer code;

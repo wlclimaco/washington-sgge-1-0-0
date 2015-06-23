@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.IBeneficiosDAC;
 import com.prosperitasglobal.sendsolv.dac.IDocumentoDAC;
 import com.prosperitasglobal.sendsolv.dac.IEmailDAC;
@@ -23,6 +27,17 @@ import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.SalarioDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.StatusDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.TelefoneDACD;
+import com.prosperitasglobal.sendsolv.model.AcaoEnum;
+import com.prosperitasglobal.sendsolv.model.Funcionario;
+import com.prosperitasglobal.sendsolv.model.Status;
+import com.prosperitasglobal.sendsolv.model.StatusEnum;
+import com.prosperitasglobal.sendsolv.model.TabelaEnum;
+import com.prosperitasglobal.sendsolv.model.request.FuncionarioInquiryRequest;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class FuncionarioDACImpl.
@@ -254,13 +269,13 @@ public class FuncionarioDACImpl extends SqlSessionDaoSupport implements IFuncion
 						null, getDocumentoDAC(), getStatusDAC(), getHistoricoDAC(), funcionario.getEmprId(),
 						funcionario.getCreateUser());
 		insertCount +=
-				BeneficiosDACD.maintainDocumentoAssociations(funcionario.getBeneficios(), response, insertCount, null,
+				BeneficiosDACD.maintainBeneficiosAssociations(funcionario.getBeneficios(), response, insertCount, null,
 						null,
 						null, getBeneficiosDAC(), getStatusDAC(), getHistoricoDAC(), funcionario.getEmprId(),
 						funcionario.getCreateUser());
 
 		insertCount +=
-				EventosDACD.maintainEventosAssociations(funcionario.getEventos(), response, insertCount, null,
+				EventosDACD.maintainEventosAssociations(funcionario.getEventosList(), response, insertCount, null,
 						null,
 						null, getEventosDAC(), getStatusDAC(), getHistoricoDAC(), funcionario.getEmprId(),
 						funcionario.getCreateUser());

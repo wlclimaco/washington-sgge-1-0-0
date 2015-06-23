@@ -2,7 +2,15 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.List;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
 import com.prosperitasglobal.sendsolv.dac.IEstoqueDAC;
+import com.prosperitasglobal.sendsolv.model.Estoque;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class CommonBusinessObjectsDACImpl.
@@ -83,30 +91,6 @@ public class EstoqueDACImpl extends SqlSessionDaoSupport implements IEstoqueDAC
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.cbof.dac.IEstoqueDAC#deleteBusinessEstoque(com.prosperitasglobal.cbof.model.Estoque,
-	 * com.qat.framework.model.response.InternalResultsResponse)
-	 */
-	@Override
-	public Integer deleteBusinessEstoque(Estoque estoque, InternalResultsResponse<?> response)
-	{
-		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, estoque, response);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.cbof.dac.IEstoqueDAC#deletePersonEstoque(com.prosperitasglobal.cbof.model.Estoque,
-	 * com.qat.framework.model.response.InternalResultsResponse)
-	 */
-	@Override
-	public Integer deletePersonEstoque(Estoque estoque, InternalResultsResponse<?> response)
-	{
-		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_PERSON_CONTACT, estoque, response);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
 	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#updateEstoque(com.prosperitasglobal.cbof.model.Estoque
 	 * ,
 	 * com.qat.framework.model.response.InternalResultsResponse)
@@ -134,13 +118,6 @@ public class EstoqueDACImpl extends SqlSessionDaoSupport implements IEstoqueDAC
 		return updateCount;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.cbof.dac.IEstoqueDAC#maintainEstoqueAssociations(java.util.List,
-	 * java.lang.Integer,
-	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
-	 */
-	@Override
 	public Integer maintainEstoqueAssociations(List<Estoque> estoqueList, Integer parentId,
 			String associateStatement,
 			InternalResultsResponse<?> response)
@@ -170,7 +147,7 @@ public class EstoqueDACImpl extends SqlSessionDaoSupport implements IEstoqueDAC
 					count += updateEstoque(estoque, response);
 					break;
 				case DELETE:
-					count += deletePersonEstoque(estoque, response);
+					count += deleteEstoque(estoque, response);
 					break;
 				default:
 					if (LOG.isDebugEnabled())
@@ -184,16 +161,15 @@ public class EstoqueDACImpl extends SqlSessionDaoSupport implements IEstoqueDAC
 	}
 
 	@Override
-	public InternalResultsResponse<Estoque> fetchEstoqueByParent(Integer parentId)
+	public InternalResultsResponse<Estoque> fetchEstoqueById(Integer id)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public InternalResultsResponse<Estoque> fetchEstoqueById(Integer id)
+	public Integer deleteEstoque(Estoque estoque, InternalResultsResponse<?> response)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, estoque, response);
 	}
 }
