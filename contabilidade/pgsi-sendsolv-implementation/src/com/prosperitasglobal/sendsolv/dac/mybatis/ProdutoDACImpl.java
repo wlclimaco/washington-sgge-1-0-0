@@ -1,15 +1,32 @@
 package com.prosperitasglobal.sendsolv.dac.mybatis;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.ICfopDAC;
+import com.prosperitasglobal.sendsolv.dac.IClassificacaoDAC;
+import com.prosperitasglobal.sendsolv.dac.ICustoDAC;
+import com.prosperitasglobal.sendsolv.dac.IEstoqueDAC;
+import com.prosperitasglobal.sendsolv.dac.IGrupoDAC;
+import com.prosperitasglobal.sendsolv.dac.IMarcaDAC;
 import com.prosperitasglobal.sendsolv.dac.IPessoaDAC;
+import com.prosperitasglobal.sendsolv.dac.IPorcaoDAC;
 import com.prosperitasglobal.sendsolv.dac.IProdutoDAC;
+import com.prosperitasglobal.sendsolv.dac.IRentabilidadeDAC;
+import com.prosperitasglobal.sendsolv.dac.ISubGrupoDAC;
+import com.prosperitasglobal.sendsolv.dac.ITabPrecoDAC;
+import com.prosperitasglobal.sendsolv.dac.ITributacaoDAC;
 import com.prosperitasglobal.sendsolv.dac.IUniMedDAC;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.NotesDACD;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.StatusDACD;
+import com.prosperitasglobal.sendsolv.model.Produto;
+import com.prosperitasglobal.sendsolv.model.request.ProdutoInquiryRequest;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class ProdutoDACImpl.
@@ -161,59 +178,59 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 			return response;
 		}
 		// Next traverse the object graph and "maintain" the associations
-		insertCount +=
-				NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
-						null,
-						null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+		// insertCount +=
+		// NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
+		// null,
+		// null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+		// pessoa.getCreateUser());
+		//
+		// insertCount +=
+		// NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
+		// null,
+		// null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+		// pessoa.getCreateUser());
+		//
+		// insertCount +=
+		// NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
+		// null,
+		// null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+		// pessoa.getCreateUser());
+		//
+		// insertCount +=
+		// NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
+		// null,
+		// null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+		// pessoa.getCreateUser());
+		//
+		// insertCount +=
+		// NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
+		// null,
+		// null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+		// pessoa.getCreateUser());
+		//
+		// insertCount +=
+		// NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
+		// null,
+		// null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+		// pessoa.getCreateUser());
+		//
+		// insertCount +=
+		// NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
+		// null,
+		// null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+		// pessoa.getCreateUser());
 
-		insertCount +=
-				NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
-						null,
-						null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
-
-		insertCount +=
-				NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
-						null,
-						null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
-
-		insertCount +=
-				NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
-						null,
-						null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
-
-		insertCount +=
-				NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
-						null,
-						null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
-
-		insertCount +=
-				NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
-						null,
-						null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
-
-		insertCount +=
-				NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
-						null,
-						null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
-
-		if (insertCount > 0)
-		{
-			Status status = new Status();
-			status.setStatus(StatusEnum.ACTIVE);
-			List<Status> statusList = new ArrayList<Status>();
-			insertCount =
-					StatusDACD.maintainStatusAssociations(statusList, response, pessoa.getId(), null, AcaoEnum.INSERT,
-							pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.EMPRESA, getStatusDAC(),
-							getHistoricoDAC());
-
-		}
+		// if (insertCount > 0)
+		// {
+		// Status status = new Status();
+		// status.setStatus(StatusEnum.ACTIVE);
+		// List<Status> statusList = new ArrayList<Status>();
+		// insertCount =
+		// StatusDACD.maintainStatusAssociations(statusList, response, pessoa.getId(), null, AcaoEnum.INSERT,
+		// pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.EMPRESA, getStatusDAC(),
+		// getHistoricoDAC());
+		//
+		// }
 
 		// Finally, if something was inserted then add the Produto to the result.
 		if (insertCount > 0)

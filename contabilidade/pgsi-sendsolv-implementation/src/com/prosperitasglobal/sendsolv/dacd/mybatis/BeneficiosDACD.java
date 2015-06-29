@@ -62,8 +62,7 @@ public final class BeneficiosDACD extends SqlSessionDaoSupport
 			switch (cnae.getModelAction())
 			{
 				case INSERT:
-					count = cnaeDAC.insertBeneficios(cnae,
-							"insertBeneficios", response);
+					count = cnaeDAC.insertBeneficios(cnae);
 					if (count > 0)
 					{
 						Status status = new Status();
@@ -75,7 +74,7 @@ public final class BeneficiosDACD extends SqlSessionDaoSupport
 					}
 					break;
 				case UPDATE:
-					count = cnaeDAC.updateBeneficios(cnae, response);
+					count = cnaeDAC.updateBeneficios(cnae);
 					if (count > 0)
 					{
 						count =

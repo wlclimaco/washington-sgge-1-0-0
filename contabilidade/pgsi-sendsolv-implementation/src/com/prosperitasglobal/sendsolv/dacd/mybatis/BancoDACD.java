@@ -61,8 +61,7 @@ public final class BancoDACD extends SqlSessionDaoSupport
 			switch (banco.getModelAction())
 			{
 				case INSERT:
-					count = bancoDAC.insertBanco(banco,
-							"insertBanco", response);
+					count = bancoDAC.insertBanco(banco);
 					if (count > 0)
 					{
 						Status status = new Status();
@@ -74,7 +73,7 @@ public final class BancoDACD extends SqlSessionDaoSupport
 					}
 					break;
 				case UPDATE:
-					count = bancoDAC.updateBanco(banco, response);
+					count = bancoDAC.updateBanco(banco);
 					if (count > 0)
 					{
 						count =

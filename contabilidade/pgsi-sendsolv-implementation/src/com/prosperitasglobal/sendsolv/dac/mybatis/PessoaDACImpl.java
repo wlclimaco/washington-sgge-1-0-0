@@ -540,10 +540,10 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
-								null, AcaoEnum.DELETE,
-								pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.CLIENTE, getStatusDAC(),
-								getHistoricoDAC());
+				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
+						null, AcaoEnum.DELETE,
+						pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.CLIENTE, getStatusDAC(),
+						getHistoricoDAC());
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
 		{
@@ -632,12 +632,6 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 				NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
 						null,
 						null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
-
-		insertCount +=
-				ConvenioDACD.maintainConvenioAssociations(pessoa.getConvenioList(), response, pessoa.getId(), null,
-						null,
-						null, getConvenioDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
 						pessoa.getCreateUser());
 
 		insertCount +=
@@ -734,12 +728,6 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 						pessoa.getCreateUser());
 
 		updateCount +=
-				ConvenioDACD.maintainConvenioAssociations(pessoa.getConvenioList(), response, pessoa.getId(), null,
-						null,
-						null, getConvenioDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
-
-		updateCount +=
 				FormaPagamentoDACD.maintainFormaPgAssociations(pessoa.getFormaPagamentoList(), response,
 						pessoa.getId(),
 						null,
@@ -784,10 +772,10 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
-								null, AcaoEnum.DELETE,
-								pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.FORNECEDOR, getStatusDAC(),
-								getHistoricoDAC());
+				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
+						null, AcaoEnum.DELETE,
+						pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.FORNECEDOR, getStatusDAC(),
+						getHistoricoDAC());
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
@@ -882,22 +870,10 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 						pessoa.getCreateUser());
 
 		insertCount +=
-				ConvenioDACD.maintainConvenioAssociations(pessoa.getConvenioList(), response, pessoa.getId(), null,
-						null,
-						null, getConvenioDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
-
-		insertCount +=
 				FormaPagamentoDACD.maintainFormaPgAssociations(pessoa.getFormaPagamentoList(), response, insertCount,
 						null,
 						null,
 						null, getFormaPagamentoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
-
-		insertCount +=
-				CfopDACD.maintainCfopAssociations(pessoa.getListCfops(), response, pessoa.getId(), null,
-						null,
-						null, getCfopDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
 						pessoa.getCreateUser());
 
 		if (insertCount > 0)
@@ -981,23 +957,11 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 						pessoa.getCreateUser());
 
 		updateCount +=
-				ConvenioDACD.maintainConvenioAssociations(pessoa.getConvenioList(), response, pessoa.getId(), null,
-						null,
-						null, getConvenioDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
-
-		updateCount +=
 				FormaPagamentoDACD.maintainFormaPgAssociations(pessoa.getFormaPagamentoList(), response,
 						pessoa.getId(),
 						null,
 						null,
 						null, getFormaPagamentoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
-
-		updateCount +=
-				CfopDACD.maintainCfopAssociations(pessoa.getListCfops(), response, pessoa.getId(), null,
-						null,
-						null, getCfopDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
 						pessoa.getCreateUser());
 
 		if (updateCount > 0)
@@ -1030,10 +994,10 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
-								null, AcaoEnum.DELETE,
-								pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.TRANSPORTADOR, getStatusDAC(),
-								getHistoricoDAC());
+				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
+						null, AcaoEnum.DELETE,
+						pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.TRANSPORTADOR, getStatusDAC(),
+						getHistoricoDAC());
 		return response;
 	}
 

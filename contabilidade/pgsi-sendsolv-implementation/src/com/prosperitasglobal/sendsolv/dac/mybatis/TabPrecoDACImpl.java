@@ -2,7 +2,15 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.List;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
 import com.prosperitasglobal.sendsolv.dac.ITabPrecoDAC;
+import com.prosperitasglobal.sendsolv.model.TabPreco;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class CommonBusinessObjectsDACImpl.
@@ -87,21 +95,9 @@ public class TabPrecoDACImpl extends SqlSessionDaoSupport implements ITabPrecoDA
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer deleteBusinessTabPreco(TabPreco tabPreco, InternalResultsResponse<?> response)
+	public Integer deleteTabPreco(TabPreco tabPreco, InternalResultsResponse<?> response)
 	{
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, tabPreco, response);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.cbof.dac.ITabPrecoDAC#deletePersonTabPreco(com.prosperitasglobal.cbof.model.TabPreco,
-	 * com.qat.framework.model.response.InternalResultsResponse)
-	 */
-	@Override
-	public Integer deletePersonTabPreco(TabPreco tabPreco, InternalResultsResponse<?> response)
-	{
-		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_PERSON_CONTACT, tabPreco, response);
 	}
 
 	/*
@@ -140,7 +136,6 @@ public class TabPrecoDACImpl extends SqlSessionDaoSupport implements ITabPrecoDA
 	 * java.lang.Integer,
 	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
 	 */
-	@Override
 	public Integer maintainTabPrecoAssociations(List<TabPreco> tabPrecoList, Integer parentId,
 			String associateStatement,
 			InternalResultsResponse<?> response)
@@ -170,7 +165,7 @@ public class TabPrecoDACImpl extends SqlSessionDaoSupport implements ITabPrecoDA
 					count += updateTabPreco(tabPreco, response);
 					break;
 				case DELETE:
-					count += deletePersonTabPreco(tabPreco, response);
+					count += deleteTabPreco(tabPreco, response);
 					break;
 				default:
 					if (LOG.isDebugEnabled())
@@ -181,13 +176,6 @@ public class TabPrecoDACImpl extends SqlSessionDaoSupport implements ITabPrecoDA
 			}
 		}
 		return count;
-	}
-
-	@Override
-	public InternalResultsResponse<TabPreco> fetchTabPrecoByParent(Integer parentId)
-	{
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

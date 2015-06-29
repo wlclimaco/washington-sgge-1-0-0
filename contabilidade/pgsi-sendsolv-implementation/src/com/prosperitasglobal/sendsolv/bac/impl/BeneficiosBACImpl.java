@@ -82,7 +82,7 @@ public class BeneficiosBACImpl implements IBeneficiosBAC
 	@Override
 	public InternalResultsResponse<Beneficios> fetchBeneficiosById(FetchByIdRequest request)
 	{
-		return getBeneficiosDAC().fetchBeneficiosById(request);
+		return null;
 	}
 
 	/*

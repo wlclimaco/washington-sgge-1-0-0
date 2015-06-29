@@ -2,7 +2,15 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.List;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
 import com.prosperitasglobal.sendsolv.dac.ISubGrupoDAC;
+import com.prosperitasglobal.sendsolv.model.SubGrupo;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class CommonBusinessObjectsDACImpl.
@@ -87,21 +95,9 @@ public class SubGrupoDACImpl extends SqlSessionDaoSupport implements ISubGrupoDA
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer deleteBusinessSubGrupo(SubGrupo subGrupo, InternalResultsResponse<?> response)
+	public Integer deleteSubGrupo(SubGrupo subGrupo, InternalResultsResponse<?> response)
 	{
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, subGrupo, response);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.cbof.dac.ISubGrupoDAC#deletePersonSubGrupo(com.prosperitasglobal.cbof.model.SubGrupo,
-	 * com.qat.framework.model.response.InternalResultsResponse)
-	 */
-	@Override
-	public Integer deletePersonSubGrupo(SubGrupo subGrupo, InternalResultsResponse<?> response)
-	{
-		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_PERSON_CONTACT, subGrupo, response);
 	}
 
 	/*
@@ -140,7 +136,6 @@ public class SubGrupoDACImpl extends SqlSessionDaoSupport implements ISubGrupoDA
 	 * java.lang.Integer,
 	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
 	 */
-	@Override
 	public Integer maintainSubGrupoAssociations(List<SubGrupo> subGrupoList, Integer parentId,
 			String associateStatement,
 			InternalResultsResponse<?> response)
@@ -170,7 +165,7 @@ public class SubGrupoDACImpl extends SqlSessionDaoSupport implements ISubGrupoDA
 					count += updateSubGrupo(subGrupo, response);
 					break;
 				case DELETE:
-					count += deletePersonSubGrupo(subGrupo, response);
+					count += deleteSubGrupo(subGrupo, response);
 					break;
 				default:
 					if (LOG.isDebugEnabled())
@@ -181,13 +176,6 @@ public class SubGrupoDACImpl extends SqlSessionDaoSupport implements ISubGrupoDA
 			}
 		}
 		return count;
-	}
-
-	@Override
-	public InternalResultsResponse<SubGrupo> fetchSubGrupoByParent(Integer parentId)
-	{
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

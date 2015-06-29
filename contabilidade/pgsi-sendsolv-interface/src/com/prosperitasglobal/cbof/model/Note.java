@@ -1,6 +1,8 @@
 package com.prosperitasglobal.cbof.model;
 
-import com.qat.framework.model.QATModel;
+import org.springframework.security.ldap.userdetails.Person;
+
+import com.prosperitasglobal.sendsolv.model.ModelCosmeDamiao;
 
 /**
  * The Class Note models any comment that could be attached to entities in the system, for instance {@link Person} or
@@ -11,7 +13,7 @@ import com.qat.framework.model.QATModel;
  * @created 21-Jul-2014 9:59:59 AM
  */
 @SuppressWarnings("serial")
-public class Note extends QATModel
+public class Note extends ModelCosmeDamiao
 {
 
 	/** The id. */

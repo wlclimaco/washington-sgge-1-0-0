@@ -1,6 +1,6 @@
 package com.prosperitasglobal.sendsolv.dac;
 
-import com.prosperitasglobal.sendsolv.dacd.mybatis.Rentabilidade;
+import com.prosperitasglobal.sendsolv.model.Rentabilidade;
 import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
