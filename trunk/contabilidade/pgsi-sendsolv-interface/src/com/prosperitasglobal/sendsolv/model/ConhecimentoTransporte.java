@@ -1,84 +1,46 @@
 package com.prosperitasglobal.sendsolv.model;
 
-import com.prosperitasglobal.cbof.model.FormaPg;
-import com.prosperitasglobal.cbof.model.Note;
-
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
  */
 @SuppressWarnings("serial")
-public class NotaFiscal extends ModelCosmeDamiao
+public class ConhecimentoTransporte extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
 
-	/** The type of an account. */
-	private NotaTypeEnum notaType;
-
-	/** The description. */
-	private String serie;
-
-	/** The estado. */
-	private String ordem;
-
-	/** The bairro. */
-	private String numero;
-
-	/** The numero. */
-	private String tipo;
-
-	private Double nfValor;
+	private Integer IdNota;
 
 	private Transportador transportador;
 
-	private ConhecimentoTransporte conhecimentoTransporte;
-
-	private Empresa empresa;
-
-	private List<Tributos> tributosList;
-
-	/** The cep. */
-	private List<FormaPg> formaPagList;
-
 	/** The tipo endereco. */
-	private List<NotaFiscalItens> notaFiscalItens;
+	private String remetente;
 
-	private List<Note> noteList;
+	private Double vrTotalMercadorias;
 
-	private List<ContasPagar> contaspagarList;
+	private Integer apCreIcms;
 
-	private List<ContasReceber> contasReceberList;
+	private Integer fretePorConta;
 
-	private List<ItensEspeciais> itensEspeciais;
+	private String placa;
 
-	private String xml;
+	private Estado estado;
 
-	private Long dataEmissao;
-	private Long dataSaida;
-	private Long dataEntrada;
-	private Integer modelo;
-	private Cfop cfop;
-	private Integer bxEstoque;
-	private Integer descItens;
-	private Integer pcCusto;
+	private Marca marca;
 
-	List<ServicoItens> servicosItensList;
+	private String especie;
 
-	private List<NFStatus> nfStatusList;
+	private Double volume;
 
-	private Fornecedor fornecedor;
+	private Double pesoLiquido;
 
-	private List<PedidoCompra> pedidoCompra;
-
-	private Cliente cliente;
-
-	private List<Orcamento> orcamentoList;
+	private Double pesoBruto;
 
 	/**
 	 * Default constructor.
 	 */
-	public NotaFiscal()
+	public ConhecimentoTransporte()
 	{
 		super();
 	}

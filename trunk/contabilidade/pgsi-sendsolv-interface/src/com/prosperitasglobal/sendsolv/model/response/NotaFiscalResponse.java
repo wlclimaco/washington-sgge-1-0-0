@@ -3,21 +3,13 @@ package com.prosperitasglobal.sendsolv.model.response;
 import java.util.Collection;
 import java.util.List;
 
-import com.prosperitasglobal.sendsolv.model.Empresa;
-import com.qat.framework.model.response.InquiryResponse;
+import com.prosperitasglobal.sendsolv.model.NotaFiscal;
 
-/**
- * The Class LocationResponse.
- *
- * @author abarros
- * @version 1.0
- * @created 22-Jul-2014 10:26:05 AM
- */
 public class NotaFiscalResponse extends InquiryResponse
 {
 
 	/** Attributes */
-	private List<Empresa> empresaList;
+	private List<NotaFiscal> notaFiscalList;
 
 	/**
 	 * The Constructor.
@@ -28,19 +20,19 @@ public class NotaFiscalResponse extends InquiryResponse
 	}
 
 	/**
-	 * @return the empresaList
+	 * @return the notaFiscalList
 	 */
-	public List<Empresa> getEmpresaList()
+	public List<NotaFiscal> getNotaFiscalList()
 	{
-		return empresaList;
+		return notaFiscalList;
 	}
 
 	/**
-	 * @param empresaList the empresaList to set
+	 * @param notaFiscalList the notaFiscalList to set
 	 */
-	public void setEmpresaList(List<Empresa> empresaList)
+	public void setNotaFiscalList(List<NotaFiscal> notaFiscalList)
 	{
-		this.empresaList = empresaList;
+		this.notaFiscalList = notaFiscalList;
 	}
 
 	/*
@@ -51,7 +43,7 @@ public class NotaFiscalResponse extends InquiryResponse
 	@Override
 	public void addResults(Collection coll)
 	{
-		setEmpresaList((List<Empresa>)coll);
+		setNotaFiscalList((List<NotaFiscal>)coll);
 	}
 
 	/*
@@ -61,7 +53,7 @@ public class NotaFiscalResponse extends InquiryResponse
 	@Override
 	public String toString()
 	{
-		return "LocationResponse [getLocationList()=" + getEmpresaList() + ", getResultsSetInfo()="
+		return "LocationResponse [getLocationList()=" + getNotaFiscalList() + ", getResultsSetInfo()="
 				+ getResultsSetInfo() + ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()="
 				+ getMessageList() + ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()="
 				+ isOperationSuccess() + "]";

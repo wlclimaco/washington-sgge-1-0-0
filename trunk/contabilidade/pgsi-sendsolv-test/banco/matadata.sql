@@ -2720,5 +2720,400 @@ INSERT INTO [dbo].[produto]
 
 
 GO
+/** ---------------------------------------------------------------*/
+
+DROP TABLE [dbo].[conhecimentoTransporte];
+CREATE TABLE [dbo].[conhecimentoTransporte](
+	[id]           			[int] NOT NULL,
+	[IdNota]       			[int] NOT NULL,
+	[transportador]			[int] NOT NULL,
+	[remetente]    			[varchar](250) NOT NULL,
+	[vrTotalMercadorias] 	[real]  NULL,
+	[apCreIcms]    			[int] NOT NULL,
+	[fretePorConta] 		[int] NOT NULL,
+	[placa]  				[varchar](200) NULL,
+	[estado] 				[int] NOT NULL,
+	[marca]  				[int] NOT NULL,
+	[especie]  	  			[real]  NULL,
+	[pesoBruto]    		    [real]  NULL,
+	[pesoLiquido]  			[real]  NULL,
+	[volume]  				[real]  NULL,
+	[create_date]  			[bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  			[varchar](50) NULL,
+    [modify_date]  			[bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  			[varchar](50) NULL,
+CONSTRAINT [pk_conhecimentoTransporte_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+USE [PGSi]
+GO
+
+INSERT INTO [dbo].[conhecimentoTransporte]
+           ([id]
+           ,[IdNota]
+           ,[transportador]
+           ,[remetente]
+           ,[vrTotalMercadorias]
+           ,[apCreIcms]
+           ,[fretePorConta]
+           ,[placa]
+           ,[estado]
+           ,[marca]
+           ,[especie]
+           ,[pesoBruto]
+           ,[pesoLiquido]
+           ,[volume]
+           ,[create_date]
+           ,[create_user]
+           ,[modify_date]
+           ,[modify_user])
+     VALUES
+           (1,1,1,'BALA',10.25,1,1,'10,50,50,1.5,1',1,1,'especie',1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (2,1,1,'BALA',10.25,1,1,'10,50,50,1.5,1',1,1,'especie',1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (3,1,1,'BALA',10.25,1,1,'10,50,50,1.5,1',1,1,'especie',1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (4,1,1,'BALA',10.25,1,1,'10,50,50,1.5,1',1,1,'especie',1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (5,1,1,'BALA',10.25,1,1,'10,50,50,1.5,1',1,1,'especie',1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (6,1,1,'BALA',10.25,1,1,'10,50,50,1.5,1',1,1,'especie',1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (7,1,1,'BALA',10.25,1,1,'10,50,50,1.5,1',1,1,'especie',1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (8,1,1,'BALA',10.25,1,1,'10,50,50,1.5,1',1,1,'especie',1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (9,1,1,'BALA',10.25,1,1,'10,50,50,1.5,1',1,1,'especie',1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (10,1,1,'BALA',10.25,1,1,'10,50,50,1.5,1',1,1,'especie',1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM')
 
 
+GO
+
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[notaFiscalItens];
+CREATE TABLE [dbo].[notaFiscalItens](
+	[id]            [int] NOT NULL,
+	[IdNota]       	[int] NOT NULL,
+	[qnt]			[real] NOT NULL,
+	[vrUnitario]    [real] NOT NULL,
+	[vrDesconto] 	[real]  NULL,
+	[produto]    	[int] NOT NULL,
+	[cfop] 			[int] NOT NULL,
+	[classificacao] [int] NOT NULL,
+	[create_date]  			[bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  			[varchar](50) NULL,
+    [modify_date]  			[bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  			[varchar](50) NULL,
+CONSTRAINT [pk_notaFiscalItens_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+USE [PGSi]
+GO
+
+INSERT INTO [dbo].[notaFiscalItens]
+           ([id]
+           ,[IdNota]
+           ,[qnt]
+           ,[vrUnitario]
+           ,[vrDesconto]
+           ,[produto]
+           ,[cfop]
+           ,[classificacao]
+           ,[create_date]
+           ,[create_user]
+           ,[modify_date]
+           ,[modify_user])
+     VALUES
+           (1,1,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (2,1,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (3,2,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (4,2,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (5,3,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (6,3,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (7,4,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (8,4,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (9,5,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (10,5,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (11,6,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (12,6,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (13,7,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (14,7,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (15,8,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (16,8,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (17,9,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (18,9,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (19,10,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (20,10,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM')
+
+
+GO
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[contasPagarReceber];
+CREATE TABLE [dbo].[contasPagarReceber](
+	[id]            [int] NOT NULL,
+	[idFornecedor] 	[int] NOT NULL,
+	[parentId] 	[int] NOT NULL,
+	[emprId]		[int] NOT NULL,
+	[contaTypeEnum] [int] NOT NULL,
+	[numeroParc] 	[int]  NULL,
+	[parcela]    	[int] NOT NULL,
+	[valorOriginal]	[real] NOT NULL,
+	[dataVencimento] [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[dataGeracao]    [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[dataPagamento]  [bigint] NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[juros]			 [real] NOT NULL,
+	[taxa]           [real] NOT NULL,
+	[valorTotal] 	 [real]  NULL,
+	[baixaUser]		 [int]  NULL,
+	[baixaDateUTC]	 [bigint] NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[create_date]  			[bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  			[varchar](50) NULL,
+    [modify_date]  			[bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  			[varchar](50) NULL,
+CONSTRAINT [pk_contasPagar_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+USE [PGSi]
+GO
+
+INSERT INTO [dbo].[contasPagarReceber]
+           ([id]
+           ,[idFornecedor]
+           ,[emprId]
+           ,[contaTypeEnum]
+           ,[numeroParc]
+           ,[parcela]
+           ,[valorOriginal]
+           ,[dataVencimento]
+           ,[dataGeracao]
+           ,[dataPagamento]
+           ,[juros]
+           ,[taxa]
+           ,[valorTotal]
+           ,[create_date]
+           ,[create_user]
+           ,[modify_date]
+           ,[modify_user]
+           ,[parentId])
+     VALUES
+           (1,1,1,2,2,1,100.99,1432783357778,1432783357778,null,0,0,100.99,1432783357778,'SYSTEM',1432783357778,'SYSTEM',1),
+           (2,1,1,2,2,1,100.99,1432783357778,1432783357778,null,0,0,100.99,1432783357778,'SYSTEM',1432783357778,'SYSTEM',1),
+           (3,1,1,2,2,1,100.99,1432783357778,1432783357778,null,0,0,100.99,1432783357778,'SYSTEM',1432783357778,'SYSTEM',2),
+           (4,1,1,2,2,1,100.99,1432783357778,1432783357778,null,0,0,100.99,1432783357778,'SYSTEM',1432783357778,'SYSTEM',2),
+           (5,1,1,2,2,1,100.99,1432783357778,1432783357778,null,0,0,100.99,1432783357778,'SYSTEM',1432783357778,'SYSTEM',3),
+           (6,1,1,2,2,1,100.99,1432783357778,1432783357778,null,0,0,100.99,1432783357778,'SYSTEM',1432783357778,'SYSTEM',4),
+           (7,1,1,2,2,1,100.99,1432783357778,1432783357778,null,0,0,100.99,1432783357778,'SYSTEM',1432783357778,'SYSTEM',5),
+           (8,1,1,2,2,1,100.99,1432783357778,1432783357778,null,0,0,100.99,1432783357778,'SYSTEM',1432783357778,'SYSTEM',5),
+           (9,1,1,2,2,1,100.99,1432783357778,1432783357778,null,0,0,100.99,1432783357778,'SYSTEM',1432783357778,'SYSTEM',6),
+           (10,1,1,1,2,1,100.99,1432783357778,1432783357778,null,0,0,100.99,1432783357778,'SYSTEM',1432783357778,'SYSTEM',6),
+           (11,1,1,1,2,1,100.99,1432783357778,1432783357778,null,0,0,100.99,1432783357778,'SYSTEM',1432783357778,'SYSTEM',7),
+           (12,1,1,1,2,1,100.99,1432783357778,1432783357778,null,0,0,100.99,1432783357778,'SYSTEM',1432783357778,'SYSTEM',7),
+           (13,1,1,1,2,1,100.99,1432783357778,1432783357778,null,0,0,100.99,1432783357778,'SYSTEM',1432783357778,'SYSTEM',8),
+           (14,1,1,1,2,1,100.99,1432783357778,1432783357778,null,0,0,100.99,1432783357778,'SYSTEM',1432783357778,'SYSTEM',8),
+           (15,1,1,1,2,1,100.99,1432783357778,1432783357778,null,0,0,100.99,1432783357778,'SYSTEM',1432783357778,'SYSTEM',9),
+           (16,1,1,1,2,1,100.99,1432783357778,1432783357778,null,0,0,100.99,1432783357778,'SYSTEM',1432783357778,'SYSTEM',9),
+           (17,1,1,1,2,1,100.99,1432783357778,1432783357778,null,0,0,100.99,1432783357778,'SYSTEM',1432783357778,'SYSTEM',4),
+           (18,1,1,1,2,1,100.99,1432783357778,1432783357778,null,0,0,100.99,1432783357778,'SYSTEM',1432783357778,'SYSTEM',3),
+           (19,1,1,1,2,1,100.99,1432783357778,1432783357778,null,0,0,100.99,1432783357778,'SYSTEM',1432783357778,'SYSTEM',10),
+           (20,1,1,1,2,1,100.99,1432783357778,1432783357778,null,0,0,100.99,1432783357778,'SYSTEM',1432783357778,'SYSTEM',10)
+
+
+GO
+
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[itensEspeciais];
+CREATE TABLE [dbo].[itensEspeciais](
+	[id]            [int] NOT NULL,
+	[item] 		    [int] NOT NULL,
+	[IdNota]		[int] NOT NULL,
+	[nome]          [varchar](50) NULL,
+	[valor] 	    [real]  NULL,
+	[baseCalculo]  	[real]  NULL,
+	[aliguotaICMS]	[real]  NULL,
+	[valorICMS]     [real]  NULL,
+	[create_date]  	[bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  	[varchar](50) NULL,
+    [modify_date]  	[bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  	[varchar](50) NULL,
+CONSTRAINT [pk_itensEspeciais_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+USE [PGSi]
+GO
+
+INSERT INTO [dbo].[itensEspeciais]
+           ([id]
+			,[item]
+			,[IdNota]
+			,[nome]
+			,[valor]
+			,[baseCalculo]
+			,[aliguotaICMS]
+			,[valorICMS]
+			,[create_date]
+		    ,[create_user]
+		    ,[modify_date]
+		    ,[modify_user]
+     VALUES
+           (1,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (2,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (3,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (4,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (5,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (6,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (7,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (8,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (9,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (10,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (11,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (12,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (13,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (14,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (15,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (16,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (17,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (18,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (19,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (20,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM')
+
+
+GO
+
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[nFStatus];
+CREATE TABLE [dbo].[nFStatus](
+	[id]            [int] NOT NULL,
+	[IdNota]		[int] NOT NULL,
+	[status]        [int] NOT NULL,
+	[dataMudanca]  	[bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[create_date]  	[bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  	[varchar](50) NULL,
+    [modify_date]  	[bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  	[varchar](50) NULL,
+CONSTRAINT [pk_nFStatus_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+USE [PGSi]
+GO
+
+INSERT INTO [dbo].[nFStatus]
+           ([id]
+			,[IdNota]
+			,[status]
+			,[dataMudanca]
+			,[create_date]
+		    ,[create_user]
+		    ,[modify_date]
+		    ,[modify_user]
+     VALUES
+           (1,1,1,1432783357778,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (2,1,2,1432783357778,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (3,2,1,1432783357778,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (4,2,2,1432783357778,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (5,3,1,1432783357778,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (6,3,2,1432783357778,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (7,4,1,1432783357778,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (8,4,2,1432783357778,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (9,5,1,1432783357778,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (10,5,2,1432783357778,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (11,6,1,1432783357778,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (12,6,2,1432783357778,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (13,7,1,1432783357778,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (14,7,2,1432783357778,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (15,8,1,1432783357778,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (16,8,2,1432783357778,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (17,9,1,1432783357778,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (18,9,2,1432783357778,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (19,10,1,1432783357778,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (20,10,2,1432783357778,1432783357778,'SYSTEM',1432783357778,'SYSTEM')
+
+
+GO
+
+
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[notaFiscal];
+CREATE TABLE [dbo].[notaFiscal](
+	[id]             [int] NOT NULL,
+	[notaType]		 [int] NOT NULL,
+	[serie]		     [varchar](50) NULL,
+	[ordem]          [varchar](50) NULL,
+	[numero]  	     [int] NOT NULL,
+	[tipo]  	     [varchar](50) NULL,
+    [nfValor]  	     [real] NOT NULL,
+    [dataEmissao]  	 [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [dataSaida]      [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[dataEntrada]	 [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[modelo]         [varchar](50) NULL,
+	[bxEstoque]  	 [int] NULL,
+	[descItens]  	 [int] NULL,
+    [pcCusto]  	     [int] NULL,
+    [pedidoCompraId] [int] NULL,
+    [orcamentoId]  	 [int] NULL,
+    [cfop]           [int] NOT NULL,
+	[transportador]  [int] NULL,
+	[conhecimentoTransporte]  [int] NULL,
+    [empresa]  	[int] NULL,
+    [fornecedor] [int] NULL,
+    [cliente]  	[int] NULL,
+	[create_date]  	[bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  	[varchar](50) NULL,
+    [modify_date]  	[bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  	[varchar](50) NULL,
+CONSTRAINT [pk_notaFiscal_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+USE [PGSi]
+GO
+
+INSERT INTO [dbo].[nFStatus]
+       ([id],
+[notaType],
+[serie],
+[ordem],
+[numero],
+[tipo],
+[nfValor],
+[dataEmissao],
+[dataSaida],
+[dataEntrada],
+[modelo],
+[bxEstoque],
+[descItens],
+[pcCusto],
+[pedidoCompraId],
+[orcamentoId],
+[cfop],
+[transportador],
+[conhecimentoTransporte],
+[empresa],
+[fornecedor],
+[cliente]
+		,[create_date]
+	    ,[create_user]
+	    ,[modify_date]
+	    ,[modify_user]
+     VALUES
+           (1,1,'1','O',1024,'NF',100.85,1432783357778,1432783357778,1432783357778,'55'1,1,1,0,0,1,1,1,1,2,3,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (2,1,'1','O',1024,'NF',100.85,1432783357778,1432783357778,1432783357778,'55'1,1,1,0,0,1,1,1,1,2,3,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (3,1,'1','O',1024,'NF',100.85,1432783357778,1432783357778,1432783357778,'55'1,1,1,0,0,1,1,1,1,2,3,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (4,1,'1','O',1024,'NF',100.85,1432783357778,1432783357778,1432783357778,'55'1,1,1,0,0,1,1,1,1,2,3,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (5,1,'1','O',1024,'NF',100.85,1432783357778,1432783357778,1432783357778,'55'1,1,1,0,0,1,1,1,1,2,3,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (6,2,'1','O',1024,'NF',100.85,1432783357778,1432783357778,1432783357778,'55'1,1,1,0,0,1,1,1,1,2,3,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (7,2,'1','O',1024,'NF',100.85,1432783357778,1432783357778,1432783357778,'55'1,1,1,0,0,1,1,1,1,2,3,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (8,2,'1','O',1024,'NF',100.85,1432783357778,1432783357778,1432783357778,'55'1,1,1,0,0,1,1,1,1,2,3,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (9,2,'1','O',1024,'NF',100.85,1432783357778,1432783357778,1432783357778,'55'1,1,1,0,0,1,1,1,1,2,3,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (10,2,'1','O',1024,'NF',100.85,1432783357778,1432783357778,1432783357778,'55'1,1,1,0,0,1,1,1,1,2,3,1432783357778,'SYSTEM',1432783357778,'SYSTEM')
+
+GO

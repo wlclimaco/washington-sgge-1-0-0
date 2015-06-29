@@ -134,6 +134,13 @@
 					where b.id = #{id}
   </select>
 
+    <select id="fetchFornecedorByNota" parameterType="Integer" resultMap="fornecedorResult">
+    			   SELECT
+					b.id,	<include refid="allFornecedorColumns" />
+ 				   FROM pessoa b
+					where b.id = #{id}
+  </select>
+
   <select id="fetchAllFornecedorsByRequest" parameterType="FornecedorInquiryRequest" resultMap="fornecedorResult">
      SELECT * FROM ( SELECT b.id,
     						<include refid="allFornecedorColumns" />,

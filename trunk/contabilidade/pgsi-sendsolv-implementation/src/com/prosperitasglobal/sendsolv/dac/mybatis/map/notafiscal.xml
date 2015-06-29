@@ -14,35 +14,71 @@
        necessary if the columns (or aliases) match to the properties
        exactly. -->
 
-  <resultMap id="empresaResult" type="NotaFiscal" >
-    <result property="parentOrganizationId" column="FK_empresa_id" />
-    <result property="parentOrganizationName" column="org_name" />
-   	<result property="batchApprovalDayLimit" column="money_transfer_offset_days"/>
-	<result property="fundsTransferDayLimit" column="funds_transfer_offset_days"/>
+  <resultMap id="notaFiscalResult" type="NotaFiscal" >
+		<result property="id" column="id" />
+		<result property="notaType" column="notaType" />
+		<result property="serie" column="serie" />
+		<result property="ordem" column="ordem" />
+		<result property="numero" column="numero" />
+		<result property="tipo" column="tipo" />
+		<result property="nfValor" column="nfValor" />
+		<result property="xml" column="xml" />
+		<result property="dataEmissao" column="dataEmissao" />
+		<result property="dataSaida" column="dataSaida" />
+		<result property="dataEntrada" column="dataEntrada" />
+		<result property="modelo" column="modelo" />
+		<result property="bxEstoque" column="bxEstoque" />
+		<result property="descItens" column="descItens" />
+		<result property="pcCusto" column="pcCusto" />
+		<result property="pedidoCompraId" column="pedidoCompraId" />
+		<result property="orcamentoId" column="orcamentoId" />
+		<result property="createUser" column="create_user"/>
+		<result property="createDateUTC" column="create_date"/>
+		<result property="modifyUser" column="modify_user"/>
+		<result property="modifyDateUTC" column="modify_date"/>
+		<association property="cfop"    column="cfop" select="CfopMap.fetchCfopById"  />
+		<association property="transportador"    column="transportador" select="TransportadorMap.fetchTransportadorByNota"  />
+		<association property="conhecimentoTransporte"    column="conhecimentoTransporte" select="ConhecimentoTransporteMap.fetchAllConhecimentoTransportesByNotaFiscalId"  />
+		<association property="empresa"    column="empresa" select="EmpresaMap.fetchEmpresaByNota"  />
+		<association property="fornecedor"    column="fornecedor" select="FornecedorMap.fetchFornecedorByNota"  />
+		<association property="cliente"    column="cliente" select="ClienteMap.fetchClienteByNota"  />
+		<collection property="tributosList" column="id" select="TributosMap.fetchTributosByNota"/>
+		<collection property="formaPagList" column="id" select="FormaPgMap.fetchAllFormaPgByNota"/>
+		<collection property="notaFiscalItens" column="id" select="NotaFiscalItensMap.fetchAllNotaFiscalItensByNota"/>
+		<collection property="noteList" column="id" select="FrequencyEventMap.fetchFrequencyByNotaFiscalId"/>
+		<collection property="contaspagarList" column="id" select="ContasPagarMap.fetchContasPagarByNota"/>
+		<collection property="contasReceberList" column="id" select="ContasPagarMap.fetchContasPagarByNota"/>
+		<collection property="itensEspeciais" column="id" select="ItensEspeciaisMap.fetchItensEspeciaisByNota"/>
+		<collection property="nfStatusList" column="id" select="NFStatusMap.fetchAllNFStatussByNota"/>
 
-	<collection property="frequencyBasedEventList" column="business_id" select="FrequencyEventMap.fetchFrequencyByNotaFiscalId"/>
-	<collection property="businessProductPlanList" column="business_id" select="BusinessProductPlanMap.fetchBusinessProductPlanByNotaFiscalId"/>
   </resultMap>
 
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allNotaFiscalColumns">
-		 b.name
-		,b.business_key
-      	,b.business_type
-      	,b.EIN_code
-      	,b.PGSi_status
-      	,b.risk_level
-      	,b.risk_level_note_text
-      	,b.FK_number_of_employees
-      	,b.FK_number_of_migrant_workers
-      	,b.FK_SIC_id
-      	,b.FK_NAICS_id
-      	,b.FK_country_code
-      	,b.FK_empresa_id
-      	,b.money_transfer_offset_days
-      	,b.funds_transfer_offset_days
+		 b.notaType
+		,b.serie
+		,b.ordem
+		,b.numero
+		,b.tipo
+		,b.nfValor
+		,b.xml
+		,b.dataEmissao
+		,b.dataSaida
+		,b.dataEntrada
+		,b.modelo
+		,b.bxEstoque
+		,b.descItens
+		,b.pcCusto
+		,b.pedidoCompraId
+		,b.orcamentoId
+		,b.cfop
+		,b.transportador
+		,b.conhecimentoTransporte
+		,b.empresa
+		,b.fornecedor
+		,b.cliente
       	,b.create_date
       	,b.create_user
       	,b.modify_date
@@ -50,33 +86,28 @@
   </sql>
 
   <sql id="allNotaFiscalValues">
-  		#{name},
-  		#{key},
-    	#{businessTypeValue},
-    	#{employerIdentificationNumber},
-    	#{statusValue},
-    	#{risk.riskLevelValue},
-    	#{risk.riskLevelNote},
-    	#{numberOfEmployees.id},
-    	#{numberOfMigrantWorkers.id},
-    	#{standardIndustrialClassificationCode.id},
-    	#{northAmericanIndustryClassificationSystemCode.id},
-    	#{country.code},
-    	#{parentOrganizationId},
-    	#{batchApprovalDayLimit},
-    	#{fundsTransferDayLimit},
-    	<include refid="CBOFMap.changeControlFields"/>
-  </sql>
-
-  <sql id="allNotaFiscalContactColumns">
-		FK_contact_id,
-		FK_business_id,
-		<include refid="CBOFMap.allChangeControlColumns"/>
-  </sql>
-
-  <sql id="allNotaFiscalContactValues">
-  		#{id},
-  		#{parentKey},
+  		#{notaType},
+		#{serie},
+		#{ordem},
+		#{numero},
+		#{tipo},
+		#{nfValor},
+		#{xml},
+		#{dataEmissao},
+		#{dataSaida},
+		#{dataEntrada},
+		#{modelo},
+		#{bxEstoque},
+		#{descItens},
+		#{pcCusto},
+		#{pedidoCompraId},
+		#{orcamentoId},
+		#{cfop},
+		#{transportador},
+		#{conhecimentoTransporte},
+		#{empresa},
+		#{fornecedor},
+		#{cliente},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
@@ -84,7 +115,7 @@
 		SQL Insert Statements.
  	-->
   <insert id="insertNotaFiscal" parameterType="NotaFiscal" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO business (
+  	INSERT INTO notaFiscal (
 		<include refid="allNotaFiscalColumns" />
       )
     VALUES (<include refid="allNotaFiscalValues" /> )
@@ -96,63 +127,71 @@
  	-->
 
   <update id="updateNotaFiscal" parameterType="NotaFiscal">
-    UPDATE business
+    UPDATE notaFiscal
     	<set>
-    		money_transfer_offset_days = #{batchApprovalDayLimit},
-      		funds_transfer_offset_days = #{fundsTransferDayLimit},
-    		<if test="name!= null">name = #{name},</if>
-	    	<if test="businessTypeValue!= null"> business_type=#{businessTypeValue},</if>
-	    	<if test="employerIdentificationNumber!= null"> EIN_code=#{employerIdentificationNumber},</if>
-	    	<if test="statusValue!= null"> PGSi_status=#{statusValue},</if>
-	    	<if test="numberOfEmployees.id!= null"> FK_number_of_employees=#{numberOfEmployees.id},</if>
-	    	<if test="numberOfMigrantWorkers.id!= null"> FK_number_of_migrant_workers=#{numberOfMigrantWorkers.id},</if>
-	    	<if test="standardIndustrialClassificationCode.id!= null"> FK_SIC_id=#{standardIndustrialClassificationCode.id},</if>
-	    	<if test="northAmericanIndustryClassificationSystemCode.id!= null"> FK_NAICS_id=#{northAmericanIndustryClassificationSystemCode.id},</if>
-	    	<if test="parentOrganizationId != null"> FK_empresa_id= #{parentOrganizationId},</if>
-	    	<if test="country.code!= null"> FK_country_code=#{country.code},</if>
+    		<if test="name != null"> name=#{name},</if>
+	  		<if test="notaType!= null"> notaType!==#{notaType!=},</if>
+			<if test="serie != null"> serie=#{serie},</if>
+			<if test="ordem != null"> ordem=#{ordem},</if>
+			<if test="numero != null"> numero=#{numero},</if>
+			<if test="tipo != null"> tipo=#{tipo},</if>
+			<if test="nfValor != null"> nfValor=#{nfValor},</if>
+			<if test="xml != null"> xml=#{xml},</if>
+			<if test="dataEmissao != null"> dataEmissao=#{dataEmissao},</if>
+			<if test="dataSaida != null"> dataSaida=#{dataSaida},</if>
+			<if test="dataEntrada != null"> dataEntrada=#{dataEntrada},</if>
+			<if test="modelo != null"> modelo=#{modelo},</if>
+			<if test="bxEstoque != null"> bxEstoque=#{bxEstoque},</if>
+			<if test="descItens != null"> descItens=#{descItens},</if>
+			<if test="pcCusto != null"> pcCusto=#{pcCusto},</if>
+			<if test="pedidoCompraId != null"> pedidoCompraId=#{pedidoCompraId},</if>
+			<if test="orcamentoId != null"> orcamentoId=#{orcamentoId},</if>
+			<if test="cfop != null"> cfop=#{cfop},</if>
+			<if test="transportador != null"> transportador=#{transportador},</if>
+			<if test="conhecimentoTransporte != null"> conhecimentoTransporte=#{conhecimentoTransporte},</if>
+			<if test="empresa != null"> empresa=#{empresa},</if>
+			<if test="fornecedor != null"> fornecedor=#{fornecedor},</if>
+			<if test="cliente != null"> cliente=#{cliente},</if>
 			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
     WHERE
-     business_id = #{id} AND versn_lock_num = #{version}
+     id = #{id}
   </update>
 
    <!--
 		SQL Delete Statements.
    -->
   <delete id="deleteNotaFiscalById" parameterType="Integer">
-    	DELETE FROM business WHERE business_id = #{id}
+    	DELETE FROM notaFiscal WHERE notaFiscal_id = #{id}
   </delete>
 
 	<!--
 		SQL Fetch Statements.
  	-->
   <select id="fetchNotaFiscalRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
-     SELECT COUNT(business_id) AS RECORD_COUNT
-        FROM business
-     WHERE business_type = 2
-     <if test="parentId != null">
-		  AND FK_empresa_id = #{parentId}
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM notaFiscal
+     WHERE 2 = 2
+     <if test="empresa != null">
+		  AND empresa = #{empresa}
 	 </if>
   </select>
 
-  <select id="fetchAllNotaFiscals" resultMap="empresaResult">
+  <select id="fetchAllNotaFiscals" resultMap="notaFiscalResult">
     SELECT
 	<include refid="allNotaFiscalColumns" />
-    FROM business ORDER BY name ASC
+    FROM notaFiscal ORDER BY id ASC
   </select>
 
-  <select id="fetchNotaFiscalById" parameterType="FetchByIdRequest" resultMap="empresaResult">
-
-  </select>
-
-  <select id="fetchAllNotaFiscalsByRequest" parameterType="PagedInquiryRequest" resultMap="empresaResult">
+  <select id="fetchNotaFiscalById" parameterType="FetchByIdRequest" resultMap="notaFiscalResult">
 
   </select>
 
-  <select id="fetchVersionNumber" parameterType="NotaFiscal" resultType="int">
-	SELECT versn_lock_num FROM business WHERE business_id = #{id}
+  <select id="fetchAllNotaFiscalsByRequest" parameterType="PagedInquiryRequest" resultMap="notaFiscalResult">
+
   </select>
+
 
 
 </mapper>

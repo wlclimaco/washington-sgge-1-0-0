@@ -15,38 +15,38 @@ public class ContasPagar extends ModelCosmeDamiao
 	/** Attributes. */
 	private Integer id;
 
+	private Integer idFornecedor;
+
 	/** The parent key. */
-	private Integer parentKey;
+	private Integer docId;
 
 	/** The parent key type. */
-	private BusinessTypeEnum parentKeyType;
+	private ContaTypeEnum contaTypeEnum;
 
 	/** The document type. */
-	private DocumentType documentType;
+	private Integer numeroParc;
 
 	/** The keyword text. */
-	private String keywordText;
+	private Integer parcela;
 
 	/** The filing status. */
-	private FilingStatusEnum filingStatus;
+	private Double valorOriginal;
 
 	/** The is action required. */
-	private Boolean isActionRequired;
+	private Long dataVencimento;
+
+	private Long dataGeracao;
+
+	private Long dataPagamento;
 
 	/** The note text. */
-	private String noteText;
+	private Double juros;
 
 	/** The issue country. */
-	private Country issueCountry;
+	private Double taxa;
 
 	/** The expiration date. */
-	private Long expirationDate;
-
-	/** The value. */
-	private String value;
-
-	/** The issue state province region. */
-	private StateProvinceRegion issueStateProvinceRegion;
+	private Double valorTotal;
 
 	/**
 	 * The Constructor.

@@ -131,6 +131,13 @@
 					where b.id = #{id}
   </select>
 
+   <select id="fetchTransportadorByNota" parameterType="Integer" resultMap="transportadorResult">
+    			   SELECT
+					b.id,	<include refid="allTransportadorColumns" />
+ 				   FROM pessoa b
+					where b.id = #{id}
+  </select>
+
   <select id="fetchAllTransportadorsByRequest" parameterType="TransportadorInquiryRequest" resultMap="transportadorResult">
      SELECT * FROM ( SELECT b.id,
     						<include refid="allTransportadorColumns" />,

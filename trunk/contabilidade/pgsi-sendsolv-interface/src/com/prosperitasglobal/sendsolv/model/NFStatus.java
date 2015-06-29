@@ -1,19 +1,34 @@
-package com.prosperitasglobal.cbof.model;
+package com.prosperitasglobal.sendsolv.model;
 
-import com.prosperitasglobal.sendsolv.model.ModelCosmeDamiao;
+import java.util.List;
 
 /**
- * The Class Email.
+ * The Class Document represents a generic formal business or personal document, such as driver's license or bylaws.
  */
 @SuppressWarnings("serial")
-public class FormaPg extends ModelCosmeDamiao
+public class NFStatus extends ModelCosmeDamiao
 {
+
+	/** Attributes. */
 	private Integer id;
-	private String descricao;
-	private Integer diasPg;
-	private Integer entrada;
+
+	private Integer idNota;
+
+	private StatusNF status;
+
+	private Long dataMudanca;
 
 	/**
+	 * The Constructor.
+	 */
+	public NFStatus()
+	{
+
+	}
+
+	/**
+	 * Gets the id.
+	 *
 	 * @return the id
 	 */
 	public Integer getId()
@@ -22,7 +37,9 @@ public class FormaPg extends ModelCosmeDamiao
 	}
 
 	/**
-	 * @param id the id to set
+	 * Sets the id.
+	 *
+	 * @param id the id
 	 */
 	public void setId(Integer id)
 	{
@@ -30,35 +47,35 @@ public class FormaPg extends ModelCosmeDamiao
 	}
 
 	/**
-	 * @return the descricao
+	 * @return the nome
 	 */
-	public String getDescricao()
+	public String getNome()
 	{
-		return descricao;
+		return nome;
 	}
 
 	/**
-	 * @param descricao the descricao to set
+	 * @param nome the nome to set
 	 */
-	public void setDescricao(String descricao)
+	public void setNome(String nome)
 	{
-		this.descricao = descricao;
+		this.nome = nome;
 	}
 
 	/**
-	 * @return the diasPg
+	 * @return the agenciaList
 	 */
-	public Integer getDiasPg()
+	public List<Agencia> getAgenciaList()
 	{
-		return diasPg;
+		return agenciaList;
 	}
 
 	/**
-	 * @param diasPg the diasPg to set
+	 * @param agenciaList the agenciaList to set
 	 */
-	public void setDiasPg(Integer diasPg)
+	public void setAgenciaList(List<Agencia> agenciaList)
 	{
-		this.diasPg = diasPg;
+		this.agenciaList = agenciaList;
 	}
 
 	/*
@@ -68,7 +85,7 @@ public class FormaPg extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "FormaPg [getId()=" + getId() + ", getDescricao()=" + getDescricao() + ", getDiasPg()=" + getDiasPg()
+		return "Banco [getId()=" + getId() + ", getNome()=" + getNome() + ", getAgenciaList()=" + getAgenciaList()
 				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
 				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
 				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()

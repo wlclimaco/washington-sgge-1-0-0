@@ -1,11 +1,8 @@
 package com.prosperitasglobal.sendsolv.dac.mybatis;
 
+import java.util.ArrayList;
 import java.util.Map;
 
-import org.mybatis.spring.support.SqlSessionDaoSupport;
-import org.slf4j.LoggerFactory;
-
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.ICfopDAC;
 import com.prosperitasglobal.sendsolv.dac.IClassificacaoDAC;
 import com.prosperitasglobal.sendsolv.dac.ICustoDAC;
@@ -20,13 +17,19 @@ import com.prosperitasglobal.sendsolv.dac.ISubGrupoDAC;
 import com.prosperitasglobal.sendsolv.dac.ITabPrecoDAC;
 import com.prosperitasglobal.sendsolv.dac.ITributacaoDAC;
 import com.prosperitasglobal.sendsolv.dac.IUniMedDAC;
-import com.prosperitasglobal.sendsolv.model.Produto;
-import com.prosperitasglobal.sendsolv.model.request.ProdutoInquiryRequest;
-import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResponse;
-import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.util.QATMyBatisDacHelper;
-import com.qat.framework.validation.ValidationUtil;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.CfopDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.ClassificacaoDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.CustoDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.EstoqueDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.FornecedorDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.GrupoDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.MarcaDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.PorcaoDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.PrecoDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.StatusDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.SubGrupoDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.TributacaoDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.UniMedDACD;
 
 /**
  * The Class ProdutoDACImpl.
@@ -178,59 +181,96 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 			return response;
 		}
 		// Next traverse the object graph and "maintain" the associations
-		// insertCount +=
-		// NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
-		// null,
-		// null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-		// pessoa.getCreateUser());
-		//
-		// insertCount +=
-		// NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
-		// null,
-		// null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-		// pessoa.getCreateUser());
-		//
-		// insertCount +=
-		// NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
-		// null,
-		// null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-		// pessoa.getCreateUser());
-		//
-		// insertCount +=
-		// NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
-		// null,
-		// null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-		// pessoa.getCreateUser());
-		//
-		// insertCount +=
-		// NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
-		// null,
-		// null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-		// pessoa.getCreateUser());
-		//
-		// insertCount +=
-		// NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
-		// null,
-		// null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-		// pessoa.getCreateUser());
-		//
-		// insertCount +=
-		// NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
-		// null,
-		// null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-		// pessoa.getCreateUser());
+		insertCount +=
+				ClassificacaoDACD.maintainClassificacaoAssociations(produto.getClassificacao(), response, insertCount,
+						null,
+						null,
+						null, getClassificacaoDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
+						produto.getCreateUser());
 
-		// if (insertCount > 0)
-		// {
-		// Status status = new Status();
-		// status.setStatus(StatusEnum.ACTIVE);
-		// List<Status> statusList = new ArrayList<Status>();
-		// insertCount =
-		// StatusDACD.maintainStatusAssociations(statusList, response, pessoa.getId(), null, AcaoEnum.INSERT,
-		// pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.EMPRESA, getStatusDAC(),
-		// getHistoricoDAC());
-		//
-		// }
+		insertCount +=
+				UniMedDACD.maintainUniMedAssociations(produto.getUniMed(), response, insertCount, null,
+						null,
+						null, getUniMedDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
+						produto.getCreateUser());
+
+		insertCount +=
+				GrupoDACD.maintainGrupoAssociations(produto.getGrupo(), response, insertCount, null,
+						null,
+						null, getGrupoDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
+						produto.getCreateUser());
+
+		insertCount +=
+				SubGrupoDACD.maintainSubGrupoAssociations(produto.getSubGrupo(), response, insertCount, null,
+						null,
+						null, getSubGrupoDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
+						produto.getCreateUser());
+
+		insertCount +=
+				MarcaDACD.maintainMarcaAssociations(produto.getMarca(), response, insertCount, null,
+						null,
+						null, getMarcaDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
+						produto.getCreateUser());
+
+		insertCount +=
+				TributacaoDACD.maintainTributacaoAssociations(produto.getTributacao(), response, insertCount, null,
+						null,
+						null, getTributacaoDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
+						produto.getCreateUser());
+
+		insertCount +=
+				EstoqueDACD.maintainEstoqueAssociations(produto.getEstoqueList(), response, insertCount, null,
+						null,
+						null, getEstoqueDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
+						produto.getCreateUser());
+
+		insertCount +=
+				PrecoDACD.maintainTabPrecoAssociations(produto.getTabPrecoList(), response, insertCount, null,
+						null,
+						null, getPrecoDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
+						produto.getCreateUser());
+		insertCount +=
+				CustoDACD.maintainCustoAssociations(produto.getCustoList(), response, insertCount, null,
+						null,
+						null, getCustoDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
+						produto.getCreateUser());
+		insertCount +=
+				PorcaoDACD.maintainEstoqueAssociations(produto.getPorcaoList(), response, insertCount, null,
+						null,
+						null, getPorcaoDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
+						produto.getCreateUser());
+		insertCount +=
+				RentabilidadeDACD.maintainRentabilidadeAssociations(produto.getRentabilidadeList(), response,
+						insertCount, null,
+						null,
+						null, getRentabilidadeDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
+						produto.getCreateUser());
+
+		insertCount +=
+				CfopDACD.maintainCfopAssociations(produto.getCfopList(), response,
+						insertCount, null,
+						null,
+						null, getCfopDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
+						produto.getCreateUser());
+
+		insertCount +=
+				FornecedorDACD.maintainFornecedorAssociations(produto.getFornecedorList(), response,
+						insertCount, null,
+						null,
+						null, getFornecedorDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
+						produto.getCreateUser());
+
+		if (insertCount > 0)
+		{
+			Status status = new Status();
+			status.setStatus(StatusEnum.ACTIVE);
+			List<Status> statusList = new ArrayList<Status>();
+			insertCount =
+					StatusDACD.maintainStatusAssociations(statusList, response, produto.getId(), null, AcaoEnum.INSERT,
+							pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.EMPRESA, getStatusDAC(),
+							getHistoricoDAC());
+
+		}
 
 		// Finally, if something was inserted then add the Produto to the result.
 		if (insertCount > 0)

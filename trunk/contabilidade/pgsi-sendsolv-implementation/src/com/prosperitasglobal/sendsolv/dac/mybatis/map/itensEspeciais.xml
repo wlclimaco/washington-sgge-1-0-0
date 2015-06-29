@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ItensEspeciaisMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. 	private Integer id;
+	private Integer IdNota;
+	private String nome;
+	private Double valor;
+	private Double baseCalculo;
+	private Double aliguotaICMS;
+	private Double valorICMS;
+ -->
+
+  <resultMap id="itensEspeciaisResult" type="ItensEspeciais">
+    <result property="id" column="id" />
+    <result property="item" column="item" />
+    <result property="IdNota" column="IdNota" />
+   	<result property="nome" column="nome"/>
+	<result property="valor" column="valor"/>
+	<result property="baseCalculo" column="baseCalculo"/>
+	<result property="aliguotaICMS" column="aliguotaICMS"/>
+	<result property="valorICMS" column="valorICMS"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allItensEspeciaisColumns">
+		 b.IdNota
+		,b.nome
+		,b.item
+      	,b.valor
+      	,b.baseCalculo
+      	,b.aliguotaICMS
+      	,b.valorICMS
+      	,b.create_date
+      	,b.create_user
+      	,b.modify_date
+      	,b.modify_user
+  </sql>
+
+  <sql id="allItensEspeciaisValues">
+    	#{IdNota},
+		#{nome},
+		#{item},
+      	#{valor},
+      	#{baseCalculo},
+      	#{aliguotaICMS},
+      	#{valorICMS},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertItensEspeciais" parameterType="ItensEspeciais" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO itensEspeciais (
+		<include refid="allItensEspeciaisColumns" />
+      )
+    VALUES (<include refid="allItensEspeciaisValues" /> )
+  </insert>
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateItensEspeciais" parameterType="ItensEspeciais">
+    UPDATE itensEspeciais
+    	<set>
+    		<if test="nome!= null">nome = #{nome},</if>
+    		<if test="item!= null">item = #{item},</if>
+	    	<if test="valor!= null"> valor=#{valor},</if>
+	    	<if test="baseCalculo!= null"> baseCalculo=#{baseCalculo},</if>
+	    	<if test="aliguotaICMS!= null"> aliguotaICMS=#{aliguotaICMS},</if>
+	    	<if test="valorICMS!= null"> valorICMS=#{valorICMS},</if>
+			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+    id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteItensEspeciaisById" parameterType="Integer">
+    	DELETE FROM itensEspeciais WHERE id = #{id}
+  </delete>
+
+    <select id="fetchAllItensEspeciaissByEmpresa" parameterType="Integer" resultMap="itensEspeciaisResult">
+    	SELECT F.*
+
+		  FROM itensEspeciaisPorRelacionamento AS C
+
+		  INNER JOIN itensEspeciais AS F
+
+		    ON F.CODIGO like C.IDCNAE
+		where  c.idParentId = #{id} and c.tabela = 1
+    </select>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchItensEspeciaisRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM itensEspeciais
+
+  </select>
+
+  <select id="fetchAllItensEspeciaiss" resultMap="itensEspeciaisResult">
+    SELECT
+	<include refid="allItensEspeciaisColumns" />
+    FROM itensEspeciais ORDER BY id ASC
+  </select>
+
+  <select id="fetchItensEspeciaisById" parameterType="FetchByIdRequest" resultMap="itensEspeciaisResult">
+    			   SELECT
+						<include refid="allItensEspeciaisColumns" />,
+ 				   FROM itensEspeciais b
+					<where>
+				  		 <choose>
+							<when test="id != null and id != ''">
+								b.id = #{id}
+				    		</when>
+				    	 </choose>
+				  </where>
+  </select>
+
+  <select id="fetchItensEspeciaisByNota" parameterType="Integer" resultMap="itensEspeciaisResult">
+    			   SELECT b.id,
+						<include refid="allItensEspeciaisColumns" />,
+ 				   FROM itensEspeciais b where b.id = #{id}
+  </select>
+
+  <select id="fetchAllItensEspeciaisByRequest" parameterType="ItensEspeciaisInquiryRequest" resultMap="itensEspeciaisResult">
+    SELECT * FROM
+    			(
+    				SELECT
+    						<include refid="allItensEspeciaisColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.codigo) AS RowNumber
+    				FROM itensEspeciais b
+					WHERE 2 = 2
+					<if test="codigo != null">
+						AND b.codigo = #{codigo}
+					</if>
+					 <if test="itensEspeciaisList != null and !itensEspeciaisList.isEmpty()">
+					     AND b.itensEspeciais IN
+					     <foreach item="item" index="index" collection="itensEspeciaisList"
+						     open="(" separator="," close=")">
+						   	 #{item.value}
+						 </foreach>
+					 </if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+
+</mapper>

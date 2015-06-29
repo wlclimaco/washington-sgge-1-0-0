@@ -4,28 +4,9 @@ import java.util.List;
 
 import javax.xml.ws.Response;
 
-import org.slf4j.LoggerFactory;
+import org.relaxng.datatype.ValidationContext;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.bac.INotaFiscalBAC;
-import com.prosperitasglobal.sendsolv.bai.INotaFiscalBAI;
-import com.prosperitasglobal.sendsolv.model.NotaFiscal;
-import com.prosperitasglobal.sendsolv.model.request.NotaFiscalInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.NotaFiscalMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.response.NotaFiscalResponse;
-import com.qat.framework.model.Message.MessageLevel;
-import com.qat.framework.model.Message.MessageSeverity;
-import com.qat.framework.model.MessageInfo;
-import com.qat.framework.model.QATModel.PersistanceActionEnum;
-import com.qat.framework.model.UserContext;
-import com.qat.framework.model.response.InternalResponse;
-import com.qat.framework.model.response.InternalResponse.Status;
-import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.util.QATInterfaceUtil;
-import com.qat.framework.validation.ValidationContext;
-import com.qat.framework.validation.ValidationContextIndicator;
-import com.qat.framework.validation.ValidationController;
-import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class NotaFiscalBAIImpl.
