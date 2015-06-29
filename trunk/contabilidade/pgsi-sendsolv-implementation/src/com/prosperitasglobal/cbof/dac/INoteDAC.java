@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
 import com.prosperitasglobal.cbof.model.Note;
-import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
@@ -35,7 +34,7 @@ public interface INoteDAC
 	 * @param note the note
 	 * @return the internal results response< note>
 	 */
-	public InternalResultsResponse<Note> insertNote(Note note);
+	public Integer insertNote(Note note);
 
 	/**
 	 * Delete note.
@@ -43,7 +42,7 @@ public interface INoteDAC
 	 * @param note the note
 	 * @return the internal response
 	 */
-	public InternalResponse deleteNote(Note note);
+	public Integer deleteNote(Note note);
 
 	/**
 	 * Update note.
@@ -51,7 +50,7 @@ public interface INoteDAC
 	 * @param note the note
 	 * @return the internal results response< note>
 	 */
-	public InternalResultsResponse<Note> updateNote(Note note);
+	public Integer updateNote(Note note);
 
 	/**
 	 * Maintain note associations.

@@ -3,9 +3,19 @@ package com.prosperitasglobal.sendsolv.dacd.mybatis;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+
 import com.prosperitasglobal.cbof.dac.INoteDAC;
+import com.prosperitasglobal.cbof.model.Note;
 import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
+import com.prosperitasglobal.sendsolv.model.AcaoEnum;
+import com.prosperitasglobal.sendsolv.model.Status;
+import com.prosperitasglobal.sendsolv.model.StatusEnum;
+import com.prosperitasglobal.sendsolv.model.TabelaEnum;
+import com.prosperitasglobal.sendsolv.model.TypeEnum;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
@@ -47,8 +57,7 @@ public final class NotesDACD extends SqlSessionDaoSupport
 			switch (note.getModelAction())
 			{
 				case INSERT:
-					count = noteDAC.insertNote(note,
-							"insertNote", response);
+					count = noteDAC.insertNote(note);
 					if (count > 0)
 					{
 						Status status = new Status();
@@ -60,7 +69,7 @@ public final class NotesDACD extends SqlSessionDaoSupport
 					}
 					break;
 				case UPDATE:
-					count = noteDAC.updateNote(note, response);
+					count = noteDAC.updateNote(note);
 					if (count > 0)
 					{
 						count =

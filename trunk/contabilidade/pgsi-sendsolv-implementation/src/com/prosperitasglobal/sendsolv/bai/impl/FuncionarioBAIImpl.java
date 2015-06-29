@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.xml.ws.Response;
 
-import org.relaxng.datatype.ValidationContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,7 +11,6 @@ import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.bac.IFuncionarioBAC;
 import com.prosperitasglobal.sendsolv.bai.IFuncionarioBAI;
 import com.prosperitasglobal.sendsolv.model.Funcionario;
-import com.prosperitasglobal.sendsolv.model.Status;
 import com.prosperitasglobal.sendsolv.model.request.FuncionarioInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.FuncionarioMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.response.FuncionarioResponse;
@@ -20,7 +18,6 @@ import com.qat.framework.model.Message.MessageLevel;
 import com.qat.framework.model.Message.MessageSeverity;
 import com.qat.framework.model.MessageInfo;
 import com.qat.framework.model.QATModel.PersistanceActionEnum;
-import com.qat.framework.model.UserContext;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATInterfaceUtil;
@@ -271,18 +268,18 @@ public class FuncionarioBAIImpl implements IFuncionarioBAI
 		InternalResponse internalResponse = null;
 
 		// Validate. Notice that BusinessValidator will in turn use additional validators depending on the type
-		ValidationContext context =
-				new ValidationContext(Funcionario.class.getSimpleName(), request.getFuncionario(), indicator);
-		context.putObjectToBeValidated(UserContext.class.getSimpleName(), request.getUserContext());
-
-		if (getValidationController().validate(context))
-		{
-			// Persist
-			internalResponse = doPersistance(request, persistType);
-		}
+		// ValidationContext context =
+		// new ValidationContext(Funcionario.class.getSimpleName(), request.getFuncionario(), indicator);
+		// ((Object)context).putObjectToBeValidated(UserContext.class.getSimpleName(), request.getUserContext());
+		//
+		// if (getValidationController().validate(context))
+		// {
+		// // Persist
+		// internalResponse = doPersistance(request, persistType);
+		// }
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return (FuncionarioResponse)handleReturn(response, internalResponse, context.getMessages(), true);
+		return (FuncionarioResponse)handleReturn((Response)response, internalResponse, null, true);
 	}
 
 	/**
@@ -297,15 +294,11 @@ public class FuncionarioBAIImpl implements IFuncionarioBAI
 	private Response handleReturn(Response response, InternalResponse internalResponse,
 			List<MessageInfo> messages, boolean copyOver)
 	{
-		// In the case there was an Optimistic Locking error, add the specific message
-		if (!ValidationUtil.isNull(internalResponse) && !ValidationUtil.isNull(internalResponse.getStatus())
-				&& Status.OptimisticLockingError.equals(internalResponse.getStatus()))
-		{
-			messages.add(new MessageInfo(PROSPERITASGLOBAL_BASE_OL_ERROR, MessageSeverity.Error,
-					MessageLevel.Object));
-		}
+		messages.add(new MessageInfo(PROSPERITASGLOBAL_BASE_OL_ERROR, MessageSeverity.Error,
+				MessageLevel.Object));
 
-		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, messages, copyOver);
+		QATInterfaceUtil.handleOperationStatusAndMessages((com.qat.framework.model.response.Response)response,
+				internalResponse, messages, copyOver);
 		return response;
 	}
 

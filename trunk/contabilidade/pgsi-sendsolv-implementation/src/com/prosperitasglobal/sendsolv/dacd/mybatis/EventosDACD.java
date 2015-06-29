@@ -71,7 +71,7 @@ public final class EventosDACD extends SqlSessionDaoSupport
 						List<Status> statusList = new ArrayList<Status>();
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.EVENTO, statusDAC, historicoDAC);
+										AcaoEnum.INSERT, UserId, empId, TabelaEnum.EVENTOS, statusDAC, historicoDAC);
 					}
 					break;
 				case UPDATE:
@@ -80,7 +80,7 @@ public final class EventosDACD extends SqlSessionDaoSupport
 					{
 						count =
 								StatusDACD.maintainStatusAssociations(cnae.getStatusList(), response, cnae.getId(),
-										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.EVENTO, statusDAC,
+										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.EVENTOS, statusDAC,
 										historicoDAC);
 					}
 					break;
@@ -91,7 +91,7 @@ public final class EventosDACD extends SqlSessionDaoSupport
 					List<Status> statusList = new ArrayList<Status>();
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, cnae.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.EVENTO, statusDAC, historicoDAC);
+									AcaoEnum.DELETE, UserId, empId, TabelaEnum.EVENTOS, statusDAC, historicoDAC);
 
 					break;
 			}

@@ -1,7 +1,14 @@
 package com.prosperitasglobal.sendsolv.dac.mybatis;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
 import com.prosperitasglobal.sendsolv.dac.ISalariosDAC;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
+import com.prosperitasglobal.sendsolv.model.Salario;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class CommonBusinessObjectsDACImpl.
@@ -78,7 +85,7 @@ public class SalarioDACImpl extends SqlSessionDaoSupport implements ISalariosDAC
 		// Associate with parent using statement name passed as parameter
 		insertCount +=
 				QATMyBatisDacHelper
-						.doInsert(getSqlSession(), statementName, salario, response);
+				.doInsert(getSqlSession(), statementName, salario, response);
 
 		return insertCount;
 	}
@@ -127,19 +134,5 @@ public class SalarioDACImpl extends SqlSessionDaoSupport implements ISalariosDAC
 	 * com.prosperitasglobal.sendsolv.dac.IBeneficiosDAC#fetchBeneficiosByRequest(com.prosperitasglobal.sendsolv
 	 * .model.request.PagedInquiryRequest)
 	 */
-	@Override
-	public InternalResultsResponse<Salario> fetchSalariosByRequest(PagedInquiryRequest request)
-	{
-		InternalResultsResponse<Salario> response = new InternalResultsResponse<Salario>();
 
-		/*
-		 * Helper method to translation from the user friendly" sort field names to the
-		 * actual database column names.
-		 */
-		QATMyBatisDacHelper.translateSortFields(request, getBeneficiosInquiryValidSortFields());
-
-		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, EMPRESA_STMT_FETCH_COUNT,
-				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
-		return response;
-	}
 }

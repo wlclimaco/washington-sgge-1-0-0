@@ -2,7 +2,15 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.List;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
 import com.prosperitasglobal.sendsolv.dac.ITributacaoDAC;
+import com.prosperitasglobal.sendsolv.model.Tributacao;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class CommonBusinessObjectsDACImpl.
@@ -88,22 +96,10 @@ public class TributacaoDACImpl extends SqlSessionDaoSupport implements ITributac
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer deleteBusinessTributacao(Tributacao tributacao, InternalResultsResponse<?> response)
+	public Integer deleteTributacao(Tributacao tributacao, InternalResultsResponse<?> response)
 	{
 		return QATMyBatisDacHelper
 				.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, tributacao, response);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.cbof.dac.ITributacaoDAC#deletePersonTributacao(com.prosperitasglobal.cbof.model.Tributacao,
-	 * com.qat.framework.model.response.InternalResultsResponse)
-	 */
-	@Override
-	public Integer deletePersonTributacao(Tributacao tributacao, InternalResultsResponse<?> response)
-	{
-		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_PERSON_CONTACT, tributacao, response);
 	}
 
 	/*
@@ -142,7 +138,6 @@ public class TributacaoDACImpl extends SqlSessionDaoSupport implements ITributac
 	 * java.lang.Integer,
 	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
 	 */
-	@Override
 	public Integer maintainTributacaoAssociations(List<Tributacao> tributacaoList, Integer parentId,
 			String associateStatement,
 			InternalResultsResponse<?> response)
@@ -172,7 +167,7 @@ public class TributacaoDACImpl extends SqlSessionDaoSupport implements ITributac
 					count += updateTributacao(tributacao, response);
 					break;
 				case DELETE:
-					count += deletePersonTributacao(tributacao, response);
+					count += deleteTributacao(tributacao, response);
 					break;
 				default:
 					if (LOG.isDebugEnabled())
@@ -183,13 +178,6 @@ public class TributacaoDACImpl extends SqlSessionDaoSupport implements ITributac
 			}
 		}
 		return count;
-	}
-
-	@Override
-	public InternalResultsResponse<Tributacao> fetchTributacaoByParent(Integer parentId)
-	{
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

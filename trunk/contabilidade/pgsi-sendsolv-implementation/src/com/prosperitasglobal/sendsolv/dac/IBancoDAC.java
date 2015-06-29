@@ -3,7 +3,6 @@ package com.prosperitasglobal.sendsolv.dac;
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.model.Banco;
 import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
-import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
@@ -18,7 +17,7 @@ public interface IBancoDAC
 	 * @param banco the banco
 	 * @return the internal results response< banco>
 	 */
-	public InternalResultsResponse<Banco> updateBanco(Banco banco);
+	public Integer updateBanco(Banco banco);
 
 	/**
 	 * Insert banco.
@@ -26,7 +25,7 @@ public interface IBancoDAC
 	 * @param banco the banco
 	 * @return the internal results response< banco>
 	 */
-	public InternalResultsResponse<Banco> insertBanco(Banco banco);
+	public Integer insertBanco(Banco banco);
 
 	/**
 	 * Delete banco.
@@ -34,7 +33,7 @@ public interface IBancoDAC
 	 * @param banco the banco
 	 * @return the internal response
 	 */
-	public InternalResponse deleteBanco(Banco banco);
+	public Integer deleteBanco(Banco banco);
 
 	/**
 	 * Fetch banco by id.

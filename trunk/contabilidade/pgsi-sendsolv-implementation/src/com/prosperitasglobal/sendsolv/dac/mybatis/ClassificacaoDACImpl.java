@@ -177,4 +177,11 @@ public class ClassificacaoDACImpl extends SqlSessionDaoSupport implements IClass
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, classificacao,
 				response);
 	}
+
+	@Override
+	public InternalResultsResponse<Classificacao> fetchClassificacaoById(Integer id)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
