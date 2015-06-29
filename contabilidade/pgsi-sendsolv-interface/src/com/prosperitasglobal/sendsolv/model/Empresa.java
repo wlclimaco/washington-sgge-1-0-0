@@ -17,6 +17,8 @@ public class Empresa extends ModelCosmeDamiao
 
 	private Regime regime;
 
+	private Configuracao configuracao;
+
 	private List<Endereco> enderecos;
 
 	private List<Documento> documentos;

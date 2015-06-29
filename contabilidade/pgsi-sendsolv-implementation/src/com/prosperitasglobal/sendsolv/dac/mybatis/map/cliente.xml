@@ -139,6 +139,13 @@
 					where b.id = #{id}
   </select>
 
+   <select id="fetchClienteByNota" parameterType="Integer" resultMap="clienteResult">
+    			   SELECT
+					b.id,	<include refid="allClienteColumns" />
+ 				   FROM pessoa b
+					where b.id = #{id}
+  </select>
+
   <select id="fetchAllClientesByRequest" parameterType="ClienteInquiryRequest" resultMap="clienteResult">
      SELECT * FROM ( SELECT b.id,
     						<include refid="allClienteColumns" />,

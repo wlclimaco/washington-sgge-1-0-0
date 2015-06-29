@@ -1,26 +1,26 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
-import com.prosperitasglobal.sendsolv.model.criteria.ProdutoCriteria;
+import com.prosperitasglobal.sendsolv.model.criteria.NotaFiscalCriteria;
 
 /**
- * The Class ProdutoInquiryRequest.
+ * The Class NotaFiscalInquiryRequest.
  */
 public class NotaFiscalInquiryRequest extends PagedInquiryRequest
 {
 
 	/** The criteria. */
-	private ProdutoCriteria criteria;
+	private NotaFiscalCriteria criteria;
 
 	/**
 	 * Gets the criteria.
 	 *
 	 * @return the criteria
 	 */
-	public ProdutoCriteria getCriteria()
+	public NotaFiscalCriteria getCriteria()
 	{
 		if (criteria == null)
 		{
-			criteria = new ProdutoCriteria();
+			criteria = new NotaFiscalCriteria();
 		}
 		return criteria;
 	}
@@ -30,7 +30,7 @@ public class NotaFiscalInquiryRequest extends PagedInquiryRequest
 	 *
 	 * @param criteria the criteria
 	 */
-	public void setCriteria(ProdutoCriteria criteria)
+	public void setCriteria(NotaFiscalCriteria criteria)
 	{
 		this.criteria = criteria;
 	}
@@ -42,7 +42,7 @@ public class NotaFiscalInquiryRequest extends PagedInquiryRequest
 	@Override
 	public String toString()
 	{
-		return "ProdutoInquiryRequest [getCriteria()=" + getCriteria() + ", toString()=" + super.toString() + "]";
+		return "NotaFiscalInquiryRequest [getCriteria()=" + getCriteria() + ", toString()=" + super.toString() + "]";
 	}
 
 }

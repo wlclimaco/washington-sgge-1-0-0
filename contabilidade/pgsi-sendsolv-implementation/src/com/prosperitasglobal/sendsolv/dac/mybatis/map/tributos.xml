@@ -16,7 +16,7 @@
 
   <resultMap id="tributosResult" type="Tributos" >
     <result property="id" column="id" />
-    <result property="prodId" column="prodId" />
+    <result property="parentId" column="parentId" />
     <result property="cstId" column="cstId" />
     <result property="icms" column="icms" />
     <result property="st" column="st" />
@@ -36,7 +36,7 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allTributosColumns">
-		 b.prodId
+		 b.parentId
 		,b.cstId
 		,b.icms
 		,b.st
@@ -53,7 +53,7 @@
   </sql>
 
   <sql id="allTributosValues">
-  		 #{prodId}
+  		 #{parentId}
 		,#{cstId}
 		,#{icms}
 		,#{st}
@@ -123,6 +123,14 @@
 	<include refid="allTributosColumns" />
     FROM tributos b
     where id = #{id}
+    ORDER BY id ASC
+  </select>
+
+   <select id="fetchTributosByNota" parameterType="Integer" resultMap="tributosResult">
+	SELECT b.id,
+	<include refid="allTributosColumns" />
+    FROM tributos b
+    where id = #{parentId}
     ORDER BY id ASC
   </select>
 

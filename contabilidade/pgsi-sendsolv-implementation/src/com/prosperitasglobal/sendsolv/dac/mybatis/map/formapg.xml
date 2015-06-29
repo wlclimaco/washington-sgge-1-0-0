@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="FormaPgMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. 		private Integer id;
+	private String descricao;
+	private Integer diasPg;
+	private Integer entrada;
+-->
+
+  <resultMap id="formaPgResult" type="FormaPg">
+    <result property="id" column="id" />
+    <result property="descricao" column="descricao" />
+	<result property="diasPg" column="diasPg"/>
+	<result property="entrada" column="entrada"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+	<association property="status"    column="status" select="RegimeMap.fetchRegimeByEmpresa"  />
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allFormaPgColumns">
+		,b.descricao
+		,b.diasPg
+		,b.entrada
+      	,b.create_date
+      	,b.create_user
+      	,b.modify_date
+      	,b.modify_user
+  </sql>
+
+  <sql id="allFormaPgValues">
+  		 #{descricao},
+		 #{diasPg},
+		 #{entrada},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertFormaPg" parameterType="FormaPg" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO formaPg (
+		<include refid="allFormaPgColumns" />
+      )
+    VALUES (<include refid="allFormaPgValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateFormaPg" parameterType="FormaPg">
+    UPDATE formaPg
+    	<set>
+    		<if test="descricao!= null">descricao = #{descricao},</if>
+	    	<if test="diasPg!= null"> diasPg=#{diasPg},</if>
+	    	<if test="entrada!= null"> entrada=#{entrada},</if>
+			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteFormaPgById" parameterType="Integer">
+    	DELETE FROM formaPg WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchFormaPgRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM formaPg
+     WHERE 2 = 2
+     <if test="parentId != null">
+		  AND FK_formaPg_id = #{parentId}
+	 </if>
+  </select>
+
+  <select id="fetchAllFormaPgs" resultMap="formaPgResult">
+    SELECT
+	<include refid="allFormaPgColumns" />
+    FROM formaPg ORDER BY name ASC
+  </select>
+
+    <select id="fetchAllFormaPgByNota" resultMap="formaPgResult">
+    SELECT
+	<include refid="allFormaPgColumns" />
+    FROM formaPg where id=#{id}  ORDER BY descricao ASC
+  </select>
+
+
+</mapper>

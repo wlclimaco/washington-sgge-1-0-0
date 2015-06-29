@@ -136,8 +136,10 @@
     FROM cfop ORDER BY name ASC
   </select>
 
-  <select id="fetchCfopById" parameterType="FetchByIdRequest" resultMap="cfopResult">
-
+  <select id="fetchCfopById" parameterType="Integer" resultMap="cfopResult">
+		SELECT *
+        FROM cfop
+     WHERE id=#{id}
   </select>
 
   <select id="fetchAllCfopsByRequest" parameterType="PagedInquiryRequest" resultMap="cfopResult">

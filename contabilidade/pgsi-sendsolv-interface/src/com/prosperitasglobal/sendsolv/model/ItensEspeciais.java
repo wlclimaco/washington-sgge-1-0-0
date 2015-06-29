@@ -1,84 +1,34 @@
 package com.prosperitasglobal.sendsolv.model;
 
-import com.prosperitasglobal.cbof.model.FormaPg;
-import com.prosperitasglobal.cbof.model.Note;
-
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
  */
 @SuppressWarnings("serial")
-public class NotaFiscal extends ModelCosmeDamiao
+public class ItensEspeciais extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
 
-	/** The type of an account. */
-	private NotaTypeEnum notaType;
-
-	/** The description. */
-	private String serie;
-
-	/** The estado. */
-	private String ordem;
-
-	/** The bairro. */
-	private String numero;
-
-	/** The numero. */
-	private String tipo;
-
-	private Double nfValor;
-
-	private Transportador transportador;
-
-	private ConhecimentoTransporte conhecimentoTransporte;
-
-	private Empresa empresa;
-
-	private List<Tributos> tributosList;
-
-	/** The cep. */
-	private List<FormaPg> formaPagList;
+	private Integer IdNota;
 
 	/** The tipo endereco. */
-	private List<NotaFiscalItens> notaFiscalItens;
+	private String nome;
 
-	private List<Note> noteList;
+	private Integer item;
 
-	private List<ContasPagar> contaspagarList;
+	private Double valor;
 
-	private List<ContasReceber> contasReceberList;
+	private Double baseCalculo;
 
-	private List<ItensEspeciais> itensEspeciais;
+	private Double aliguotaICMS;
 
-	private String xml;
-
-	private Long dataEmissao;
-	private Long dataSaida;
-	private Long dataEntrada;
-	private Integer modelo;
-	private Cfop cfop;
-	private Integer bxEstoque;
-	private Integer descItens;
-	private Integer pcCusto;
-
-	List<ServicoItens> servicosItensList;
-
-	private List<NFStatus> nfStatusList;
-
-	private Fornecedor fornecedor;
-
-	private List<PedidoCompra> pedidoCompra;
-
-	private Cliente cliente;
-
-	private List<Orcamento> orcamentoList;
+	private Double valorICMS;
 
 	/**
 	 * Default constructor.
 	 */
-	public NotaFiscal()
+	public ItensEspeciais()
 	{
 		super();
 	}

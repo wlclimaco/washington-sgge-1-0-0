@@ -111,6 +111,13 @@
 					where b.id = #{id}
   </select>
 
+    <select id="fetchEmpresaByNota" parameterType="Integer" resultMap="empresaResult">
+    			   SELECT
+					b.id,	<include refid="allEmpresaColumns" />
+ 				   FROM empresa b
+					where b.id = #{id}
+  </select>
+
   <select id="fetchAllEmpresasByRequest" parameterType="EmpresaInquiryRequest" resultMap="empresaResult">
      SELECT * FROM ( SELECT b.id,
     						<include refid="allEmpresaColumns" />,
