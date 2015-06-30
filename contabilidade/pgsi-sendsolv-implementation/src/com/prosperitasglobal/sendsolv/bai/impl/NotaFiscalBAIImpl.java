@@ -4,9 +4,26 @@ import java.util.List;
 
 import javax.xml.ws.Response;
 
-import org.relaxng.datatype.ValidationContext;
+import org.slf4j.LoggerFactory;
 
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.bac.INotaFiscalBAC;
+import com.prosperitasglobal.sendsolv.bai.INotaFiscalBAI;
+import com.prosperitasglobal.sendsolv.model.NotaFiscal;
+import com.prosperitasglobal.sendsolv.model.request.NotaFiscalInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.NotaFiscalMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.NotaFiscalResponse;
+import com.qat.framework.model.Message.MessageLevel;
+import com.qat.framework.model.Message.MessageSeverity;
+import com.qat.framework.model.MessageInfo;
+import com.qat.framework.model.QATModel.PersistanceActionEnum;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResponse.Status;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATInterfaceUtil;
+import com.qat.framework.validation.ValidationContextIndicator;
+import com.qat.framework.validation.ValidationController;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class NotaFiscalBAIImpl.
@@ -250,19 +267,11 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 		NotaFiscalResponse response = new NotaFiscalResponse();
 		InternalResponse internalResponse = null;
 
-		// Validate. Notice that BusinessValidator will in turn use additional validators depending on the type
-		ValidationContext context =
-				new ValidationContext(NotaFiscal.class.getSimpleName(), request.getNotaFiscal(), indicator);
-		context.putObjectToBeValidated(UserContext.class.getSimpleName(), request.getUserContext());
-
-		if (getValidationController().validate(context))
-		{
-			// Persist
-			internalResponse = doPersistance(request, persistType);
-		}
+		// Persist
+		internalResponse = doPersistance(request, persistType);
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return (NotaFiscalResponse)handleReturn((Response)response, internalResponse, context.getMessages(), true);
+		return (NotaFiscalResponse)handleReturn((Response)response, internalResponse, null, true);
 	}
 
 	/**

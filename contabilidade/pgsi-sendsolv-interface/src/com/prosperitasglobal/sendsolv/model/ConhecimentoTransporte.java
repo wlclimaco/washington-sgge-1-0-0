@@ -46,8 +46,6 @@ public class ConhecimentoTransporte extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the id.
-	 *
 	 * @return the id
 	 */
 	public Integer getId()
@@ -56,8 +54,6 @@ public class ConhecimentoTransporte extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Sets the id.
-	 *
 	 * @param id the id to set
 	 */
 	public void setId(Integer id)
@@ -66,143 +62,211 @@ public class ConhecimentoTransporte extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the logradouro.
-	 *
-	 * @return the logradouro
+	 * @return the idNota
 	 */
-	public String getLogradouro()
+	public Integer getIdNota()
 	{
-		return logradouro;
+		return IdNota;
 	}
 
 	/**
-	 * Sets the logradouro.
-	 *
-	 * @param logradouro the logradouro to set
+	 * @param idNota the idNota to set
 	 */
-	public void setLogradouro(String logradouro)
+	public void setIdNota(Integer idNota)
 	{
-		this.logradouro = logradouro;
+		IdNota = idNota;
 	}
 
 	/**
-	 * Gets the cidade.
-	 *
-	 * @return the cidade
+	 * @return the transportador
 	 */
-	public String getCidade()
+	public Transportador getTransportador()
 	{
-		return cidade;
+		return transportador;
 	}
 
 	/**
-	 * Sets the cidade.
-	 *
-	 * @param cidade the cidade to set
+	 * @param transportador the transportador to set
 	 */
-	public void setCidade(String cidade)
+	public void setTransportador(Transportador transportador)
 	{
-		this.cidade = cidade;
+		this.transportador = transportador;
 	}
 
 	/**
-	 * Gets the estado.
-	 *
+	 * @return the remetente
+	 */
+	public String getRemetente()
+	{
+		return remetente;
+	}
+
+	/**
+	 * @param remetente the remetente to set
+	 */
+	public void setRemetente(String remetente)
+	{
+		this.remetente = remetente;
+	}
+
+	/**
+	 * @return the vrTotalMercadorias
+	 */
+	public Double getVrTotalMercadorias()
+	{
+		return vrTotalMercadorias;
+	}
+
+	/**
+	 * @param vrTotalMercadorias the vrTotalMercadorias to set
+	 */
+	public void setVrTotalMercadorias(Double vrTotalMercadorias)
+	{
+		this.vrTotalMercadorias = vrTotalMercadorias;
+	}
+
+	/**
+	 * @return the apCreIcms
+	 */
+	public Integer getApCreIcms()
+	{
+		return apCreIcms;
+	}
+
+	/**
+	 * @param apCreIcms the apCreIcms to set
+	 */
+	public void setApCreIcms(Integer apCreIcms)
+	{
+		this.apCreIcms = apCreIcms;
+	}
+
+	/**
+	 * @return the fretePorConta
+	 */
+	public Integer getFretePorConta()
+	{
+		return fretePorConta;
+	}
+
+	/**
+	 * @param fretePorConta the fretePorConta to set
+	 */
+	public void setFretePorConta(Integer fretePorConta)
+	{
+		this.fretePorConta = fretePorConta;
+	}
+
+	/**
+	 * @return the placa
+	 */
+	public String getPlaca()
+	{
+		return placa;
+	}
+
+	/**
+	 * @param placa the placa to set
+	 */
+	public void setPlaca(String placa)
+	{
+		this.placa = placa;
+	}
+
+	/**
 	 * @return the estado
 	 */
-	public String getEstado()
+	public Estado getEstado()
 	{
 		return estado;
 	}
 
 	/**
-	 * Sets the estado.
-	 *
 	 * @param estado the estado to set
 	 */
-	public void setEstado(String estado)
+	public void setEstado(Estado estado)
 	{
 		this.estado = estado;
 	}
 
 	/**
-	 * Gets the bairro.
-	 *
-	 * @return the bairro
+	 * @return the marca
 	 */
-	public String getBairro()
+	public Marca getMarca()
 	{
-		return bairro;
+		return marca;
 	}
 
 	/**
-	 * Sets the bairro.
-	 *
-	 * @param bairro the bairro to set
+	 * @param marca the marca to set
 	 */
-	public void setBairro(String bairro)
+	public void setMarca(Marca marca)
 	{
-		this.bairro = bairro;
+		this.marca = marca;
 	}
 
 	/**
-	 * Gets the numero.
-	 *
-	 * @return the numero
+	 * @return the especie
 	 */
-	public String getNumero()
+	public String getEspecie()
 	{
-		return numero;
+		return especie;
 	}
 
 	/**
-	 * Sets the numero.
-	 *
-	 * @param numero the numero to set
+	 * @param especie the especie to set
 	 */
-	public void setNumero(String numero)
+	public void setEspecie(String especie)
 	{
-		this.numero = numero;
+		this.especie = especie;
 	}
 
 	/**
-	 * Gets the cep.
-	 *
-	 * @return the cep
+	 * @return the volume
 	 */
-	public String getCep()
+	public Double getVolume()
 	{
-		return cep;
+		return volume;
 	}
 
 	/**
-	 * Sets the cep.
-	 *
-	 * @param cep the cep to set
+	 * @param volume the volume to set
 	 */
-	public void setCep(String cep)
+	public void setVolume(Double volume)
 	{
-		this.cep = cep;
+		this.volume = volume;
 	}
 
 	/**
-	 * Gets the tipo endereco.
-	 *
-	 * @return the tipoEndereco
+	 * @return the pesoLiquido
 	 */
-	public String getTipoEndereco()
+	public Double getPesoLiquido()
 	{
-		return tipoEndereco;
+		return pesoLiquido;
 	}
 
 	/**
-	 * Sets the tipo endereco.
-	 *
-	 * @param tipoEndereco the tipoEndereco to set
+	 * @param pesoLiquido the pesoLiquido to set
 	 */
-	public void setTipoEndereco(String tipoEndereco)
+	public void setPesoLiquido(Double pesoLiquido)
 	{
-		this.tipoEndereco = tipoEndereco;
+		this.pesoLiquido = pesoLiquido;
+	}
+
+	/**
+	 * @return the pesoBruto
+	 */
+	public Double getPesoBruto()
+	{
+		return pesoBruto;
+	}
+
+	/**
+	 * @param pesoBruto the pesoBruto to set
+	 */
+	public void setPesoBruto(Double pesoBruto)
+	{
+		this.pesoBruto = pesoBruto;
 	}
 
 	/*
@@ -212,10 +276,20 @@ public class ConhecimentoTransporte extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Endereco [getId()=" + getId() + ", getLogradouro()=" + getLogradouro() + ", getCidade()=" + getCidade()
-				+ ", getEstado()=" + getEstado() + ", getBairro()=" + getBairro() + ", getNumero()=" + getNumero()
-				+ ", getCep()=" + getCep() + ", getTipoEndereco()=" + getTipoEndereco() + ", toString()="
-				+ super.toString() + "]";
+		return "ConhecimentoTransporte [getId()=" + getId() + ", getIdNota()=" + getIdNota() + ", getTransportador()="
+				+ getTransportador() + ", getRemetente()=" + getRemetente() + ", getVrTotalMercadorias()="
+				+ getVrTotalMercadorias() + ", getApCreIcms()=" + getApCreIcms() + ", getFretePorConta()="
+				+ getFretePorConta() + ", getPlaca()=" + getPlaca() + ", getEstado()=" + getEstado() + ", getMarca()="
+				+ getMarca() + ", getEspecie()=" + getEspecie() + ", getVolume()=" + getVolume()
+				+ ", getPesoLiquido()=" + getPesoLiquido() + ", getPesoBruto()=" + getPesoBruto()
+				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
+				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
+				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
+				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
+				+ ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()="
+				+ getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()="
+				+ getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + "]";
 	}
 
 }

@@ -5,11 +5,11 @@ import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
-import com.prosperitasglobal.sendsolv.dac.ICfopDAC;
+import com.prosperitasglobal.sendsolv.dac.IClassificacaoDAC;
 import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
 import com.prosperitasglobal.sendsolv.model.AcaoEnum;
-import com.prosperitasglobal.sendsolv.model.Cfop;
+import com.prosperitasglobal.sendsolv.model.Classificacao;
 import com.prosperitasglobal.sendsolv.model.Status;
 import com.prosperitasglobal.sendsolv.model.StatusEnum;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
@@ -37,64 +37,63 @@ public final class ClassificacaoDACD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainCfopAssociations(List<Cfop> cfopList,
+	public static Integer maintainClassificacaoAssociations(Classificacao classificacao,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, ICfopDAC cfopDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC, Integer empId,
+			TabelaEnum tabelaEnum, IClassificacaoDAC classificacaoDAC, IStatusDAC statusDAC,
+			IHistoricoDAC historicoDAC, Integer empId,
 			String UserId)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
-		if (ValidationUtil.isNullOrEmpty(cfopList))
+		if (ValidationUtil.isNull(classificacao))
 		{
 			return count;
 		}
 		// For Each Contact...
-		for (Cfop cfop : cfopList)
+		// Make sure we set the parent key
+		classificacao.setParentId(parentId);
+
+		if (ValidationUtil.isNull(classificacao.getModelAction()))
 		{
-			// Make sure we set the parent key
-			cfop.setParentId(parentId);
-
-			if (ValidationUtil.isNull(cfop.getModelAction()))
-			{
-				continue;
-			}
-			switch (cfop.getModelAction())
-			{
-				case INSERT:
-					count = cfopDAC.insertCfop(cfop,
-							"insertCfop", response);
-					if (count > 0)
-					{
-						Status status = new Status();
-						status.setStatus(StatusEnum.ACTIVE);
-						List<Status> statusList = new ArrayList<Status>();
-						count =
-								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC);
-					}
-					break;
-				case UPDATE:
-					count = cfopDAC.updateCfop(cfop, response);
-					if (count > 0)
-					{
-						count =
-								StatusDACD
-								.maintainStatusAssociations(cfop.getStatusList(), response, cfop.getId(),
-										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
-										historicoDAC);
-					}
-					break;
-				case DELETE:
-
+			return null;
+		}
+		switch (classificacao.getModelAction())
+		{
+			case INSERT:
+				count = classificacaoDAC.insertClassificacao(classificacao,
+						"insertClassificacao", response);
+				if (count > 0)
+				{
 					Status status = new Status();
-					status.setStatus(StatusEnum.INACTIVE);
+					status.setStatus(StatusEnum.ACTIVE);
 					List<Status> statusList = new ArrayList<Status>();
 					count =
-							StatusDACD.maintainStatusAssociations(statusList, response, cfop.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC);
+							StatusDACD.maintainStatusAssociations(statusList, response, count, null,
+									AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC);
+				}
+				break;
+			case UPDATE:
+				count = classificacaoDAC.updateClassificacao(classificacao, response);
+				if (count > 0)
+				{
+					count =
+							StatusDACD
+							.maintainStatusAssociations(classificacao.getStatusList(), response,
+									classificacao.getId(),
+									null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
+									historicoDAC);
+				}
+				break;
+			case DELETE:
 
-					break;
-			}
+				Status status = new Status();
+				status.setStatus(StatusEnum.INACTIVE);
+				List<Status> statusList = new ArrayList<Status>();
+				count =
+						StatusDACD.maintainStatusAssociations(statusList, response, classificacao.getId(), null,
+								AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC);
+
+				break;
 		}
 
 		return count;

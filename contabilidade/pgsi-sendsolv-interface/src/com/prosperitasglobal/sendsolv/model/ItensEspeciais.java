@@ -54,143 +54,115 @@ public class ItensEspeciais extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the logradouro.
-	 *
-	 * @return the logradouro
+	 * @return the idNota
 	 */
-	public String getLogradouro()
+	public Integer getIdNota()
 	{
-		return logradouro;
+		return IdNota;
 	}
 
 	/**
-	 * Sets the logradouro.
-	 *
-	 * @param logradouro the logradouro to set
+	 * @param idNota the idNota to set
 	 */
-	public void setLogradouro(String logradouro)
+	public void setIdNota(Integer idNota)
 	{
-		this.logradouro = logradouro;
+		IdNota = idNota;
 	}
 
 	/**
-	 * Gets the cidade.
-	 *
-	 * @return the cidade
+	 * @return the nome
 	 */
-	public String getCidade()
+	public String getNome()
 	{
-		return cidade;
+		return nome;
 	}
 
 	/**
-	 * Sets the cidade.
-	 *
-	 * @param cidade the cidade to set
+	 * @param nome the nome to set
 	 */
-	public void setCidade(String cidade)
+	public void setNome(String nome)
 	{
-		this.cidade = cidade;
+		this.nome = nome;
 	}
 
 	/**
-	 * Gets the estado.
-	 *
-	 * @return the estado
+	 * @return the item
 	 */
-	public String getEstado()
+	public Integer getItem()
 	{
-		return estado;
+		return item;
 	}
 
 	/**
-	 * Sets the estado.
-	 *
-	 * @param estado the estado to set
+	 * @param item the item to set
 	 */
-	public void setEstado(String estado)
+	public void setItem(Integer item)
 	{
-		this.estado = estado;
+		this.item = item;
 	}
 
 	/**
-	 * Gets the bairro.
-	 *
-	 * @return the bairro
+	 * @return the valor
 	 */
-	public String getBairro()
+	public Double getValor()
 	{
-		return bairro;
+		return valor;
 	}
 
 	/**
-	 * Sets the bairro.
-	 *
-	 * @param bairro the bairro to set
+	 * @param valor the valor to set
 	 */
-	public void setBairro(String bairro)
+	public void setValor(Double valor)
 	{
-		this.bairro = bairro;
+		this.valor = valor;
 	}
 
 	/**
-	 * Gets the numero.
-	 *
-	 * @return the numero
+	 * @return the baseCalculo
 	 */
-	public String getNumero()
+	public Double getBaseCalculo()
 	{
-		return numero;
+		return baseCalculo;
 	}
 
 	/**
-	 * Sets the numero.
-	 *
-	 * @param numero the numero to set
+	 * @param baseCalculo the baseCalculo to set
 	 */
-	public void setNumero(String numero)
+	public void setBaseCalculo(Double baseCalculo)
 	{
-		this.numero = numero;
+		this.baseCalculo = baseCalculo;
 	}
 
 	/**
-	 * Gets the cep.
-	 *
-	 * @return the cep
+	 * @return the aliguotaICMS
 	 */
-	public String getCep()
+	public Double getAliguotaICMS()
 	{
-		return cep;
+		return aliguotaICMS;
 	}
 
 	/**
-	 * Sets the cep.
-	 *
-	 * @param cep the cep to set
+	 * @param aliguotaICMS the aliguotaICMS to set
 	 */
-	public void setCep(String cep)
+	public void setAliguotaICMS(Double aliguotaICMS)
 	{
-		this.cep = cep;
+		this.aliguotaICMS = aliguotaICMS;
 	}
 
 	/**
-	 * Gets the tipo endereco.
-	 *
-	 * @return the tipoEndereco
+	 * @return the valorICMS
 	 */
-	public String getTipoEndereco()
+	public Double getValorICMS()
 	{
-		return tipoEndereco;
+		return valorICMS;
 	}
 
 	/**
-	 * Sets the tipo endereco.
-	 *
-	 * @param tipoEndereco the tipoEndereco to set
+	 * @param valorICMS the valorICMS to set
 	 */
-	public void setTipoEndereco(String tipoEndereco)
+	public void setValorICMS(Double valorICMS)
 	{
-		this.tipoEndereco = tipoEndereco;
+		this.valorICMS = valorICMS;
 	}
 
 	/*
@@ -200,10 +172,17 @@ public class ItensEspeciais extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Endereco [getId()=" + getId() + ", getLogradouro()=" + getLogradouro() + ", getCidade()=" + getCidade()
-				+ ", getEstado()=" + getEstado() + ", getBairro()=" + getBairro() + ", getNumero()=" + getNumero()
-				+ ", getCep()=" + getCep() + ", getTipoEndereco()=" + getTipoEndereco() + ", toString()="
-				+ super.toString() + "]";
+		return "ItensEspeciais [getId()=" + getId() + ", getIdNota()=" + getIdNota() + ", getNome()=" + getNome()
+				+ ", getItem()=" + getItem() + ", getValor()=" + getValor() + ", getBaseCalculo()=" + getBaseCalculo()
+				+ ", getAliguotaICMS()=" + getAliguotaICMS() + ", getValorICMS()=" + getValorICMS()
+				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
+				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
+				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
+				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
+				+ ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()="
+				+ getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()="
+				+ getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + "]";
 	}
 
 }

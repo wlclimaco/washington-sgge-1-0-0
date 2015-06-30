@@ -102,7 +102,7 @@ public class BeneficiosDACImpl extends SqlSessionDaoSupport implements IBenefici
 	 * .Beneficios)
 	 */
 	@Override
-	public InternalResultsResponse<Beneficios> insertBeneficios(Beneficios beneficios)
+	public Integer insertBeneficios(Beneficios beneficios)
 	{
 		Integer insertCount = 0;
 		InternalResultsResponse<Beneficios> response = new InternalResultsResponse<Beneficios>();
@@ -113,7 +113,7 @@ public class BeneficiosDACImpl extends SqlSessionDaoSupport implements IBenefici
 
 		if (response.isInError())
 		{
-			return response;
+			return null;
 		}
 
 		// Finally, if something was inserted then add the Beneficios to the result.
@@ -122,7 +122,7 @@ public class BeneficiosDACImpl extends SqlSessionDaoSupport implements IBenefici
 			response.addResult(beneficios);
 		}
 
-		return response;
+		return insertCount;
 	}
 
 	/*
@@ -132,7 +132,7 @@ public class BeneficiosDACImpl extends SqlSessionDaoSupport implements IBenefici
 	 * .Beneficios)
 	 */
 	@Override
-	public InternalResultsResponse<Beneficios> updateBeneficios(Beneficios beneficios)
+	public Integer updateBeneficios(Beneficios beneficios)
 	{
 		Integer updateCount = 0;
 		InternalResultsResponse<Beneficios> response = new InternalResultsResponse<Beneficios>();
@@ -148,7 +148,7 @@ public class BeneficiosDACImpl extends SqlSessionDaoSupport implements IBenefici
 
 		if (response.isInError())
 		{
-			return response;
+			return null;
 		}
 
 		// Finally, if something was updated then add the Person to the result.
@@ -157,7 +157,7 @@ public class BeneficiosDACImpl extends SqlSessionDaoSupport implements IBenefici
 			response.addResult(beneficios);
 		}
 
-		return response;
+		return updateCount;
 	}
 
 	/*
@@ -167,12 +167,18 @@ public class BeneficiosDACImpl extends SqlSessionDaoSupport implements IBenefici
 	 * .Beneficios)
 	 */
 	@Override
-	public InternalResponse deleteBeneficios(Beneficios beneficios)
+	public Integer deleteBeneficios(Beneficios beneficios)
 	{
 		InternalResponse response = new InternalResponse();
 		QATMyBatisDacHelper.doRemove(getSqlSession(), EMPRESA_STMT_DELETE, beneficios, response);
-
-		return response;
+		if (response.isInError())
+		{
+			return null;
+		}
+		else
+		{
+			return 1;
+		}
 	}
 
 	/*

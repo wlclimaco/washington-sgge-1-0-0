@@ -1,6 +1,6 @@
 package com.prosperitasglobal.sendsolv.model;
 
-import java.util.List;
+import java.sql.Blob;
 
 /**
  * The Class Document represents a generic formal business or personal document, such as driver's license or bylaws.
@@ -17,6 +17,8 @@ public class NFStatus extends ModelCosmeDamiao
 	private StatusNF status;
 
 	private Long dataMudanca;
+
+	private Blob xmlRetorno;
 
 	/**
 	 * The Constructor.
@@ -47,35 +49,67 @@ public class NFStatus extends ModelCosmeDamiao
 	}
 
 	/**
-	 * @return the nome
+	 * @return the idNota
 	 */
-	public String getNome()
+	public Integer getIdNota()
 	{
-		return nome;
+		return idNota;
 	}
 
 	/**
-	 * @param nome the nome to set
+	 * @param idNota the idNota to set
 	 */
-	public void setNome(String nome)
+	public void setIdNota(Integer idNota)
 	{
-		this.nome = nome;
+		this.idNota = idNota;
 	}
 
 	/**
-	 * @return the agenciaList
+	 * @return the status
 	 */
-	public List<Agencia> getAgenciaList()
+	public StatusNF getStatus()
 	{
-		return agenciaList;
+		return status;
 	}
 
 	/**
-	 * @param agenciaList the agenciaList to set
+	 * @param status the status to set
 	 */
-	public void setAgenciaList(List<Agencia> agenciaList)
+	public void setStatus(StatusNF status)
 	{
-		this.agenciaList = agenciaList;
+		this.status = status;
+	}
+
+	/**
+	 * @return the dataMudanca
+	 */
+	public Long getDataMudanca()
+	{
+		return dataMudanca;
+	}
+
+	/**
+	 * @param dataMudanca the dataMudanca to set
+	 */
+	public void setDataMudanca(Long dataMudanca)
+	{
+		this.dataMudanca = dataMudanca;
+	}
+
+	/**
+	 * @return the xmlRetorno
+	 */
+	public Blob getXmlRetorno()
+	{
+		return xmlRetorno;
+	}
+
+	/**
+	 * @param xmlRetorno the xmlRetorno to set
+	 */
+	public void setXmlRetorno(Blob xmlRetorno)
+	{
+		this.xmlRetorno = xmlRetorno;
 	}
 
 	/*
@@ -85,7 +119,8 @@ public class NFStatus extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Banco [getId()=" + getId() + ", getNome()=" + getNome() + ", getAgenciaList()=" + getAgenciaList()
+		return "NFStatus [getId()=" + getId() + ", getIdNota()=" + getIdNota() + ", getStatus()=" + getStatus()
+				+ ", getDataMudanca()=" + getDataMudanca() + ", getXmlRetorno()=" + getXmlRetorno()
 				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
 				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
 				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()

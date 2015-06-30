@@ -37,7 +37,7 @@ public final class SubGrupoDACD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainSubGrupoAssociations(List<SubGrupo> subGrupoList,
+	public static Integer maintainSubGrupoAssociations(SubGrupo subGrupo,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, ISubGrupoDAC subGrupoDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
 			Integer empId,
@@ -45,58 +45,51 @@ public final class SubGrupoDACD extends SqlSessionDaoSupport
 	{
 		Integer count = 0;
 		// First Maintain Empresa
-		if (ValidationUtil.isNullOrEmpty(subGrupoList))
+		if (ValidationUtil.isNull(subGrupo))
 		{
 			return count;
 		}
-		// For Each Contact...
-		for (SubGrupo subGrupo : subGrupoList)
+
+		// Make sure we set the parent key
+		subGrupo.setParentId(parentId);
+
+		switch (subGrupo.getModelAction())
 		{
-			// Make sure we set the parent key
-			subGrupo.setParentId(parentId);
-
-			if (ValidationUtil.isNull(subGrupo.getModelAction()))
-			{
-				continue;
-			}
-			switch (subGrupo.getModelAction())
-			{
-				case INSERT:
-					count = subGrupoDAC.insertSubGrupo(subGrupo,
-							"insertSubGrupo", response);
-					if (count > 0)
-					{
-						Status status = new Status();
-						status.setStatus(StatusEnum.ACTIVE);
-						List<Status> statusList = new ArrayList<Status>();
-						count =
-								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC);
-					}
-					break;
-				case UPDATE:
-					count = subGrupoDAC.updateSubGrupo(subGrupo, response);
-					if (count > 0)
-					{
-						count =
-								StatusDACD
-								.maintainStatusAssociations(subGrupo.getStatusList(), response,
-										subGrupo.getId(),
-										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
-										historicoDAC);
-					}
-					break;
-				case DELETE:
-
+			case INSERT:
+				count = subGrupoDAC.insertSubGrupo(subGrupo,
+						"insertSubGrupo", response);
+				if (count > 0)
+				{
 					Status status = new Status();
-					status.setStatus(StatusEnum.INACTIVE);
+					status.setStatus(StatusEnum.ACTIVE);
 					List<Status> statusList = new ArrayList<Status>();
 					count =
-							StatusDACD.maintainStatusAssociations(statusList, response, subGrupo.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC);
+							StatusDACD.maintainStatusAssociations(statusList, response, count, null,
+									AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC);
+				}
+				break;
+			case UPDATE:
+				count = subGrupoDAC.updateSubGrupo(subGrupo, response);
+				if (count > 0)
+				{
+					count =
+							StatusDACD
+							.maintainStatusAssociations(subGrupo.getStatusList(), response,
+									subGrupo.getId(),
+									null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
+									historicoDAC);
+				}
+				break;
+			case DELETE:
 
-					break;
-			}
+				Status status = new Status();
+				status.setStatus(StatusEnum.INACTIVE);
+				List<Status> statusList = new ArrayList<Status>();
+				count =
+						StatusDACD.maintainStatusAssociations(statusList, response, subGrupo.getId(), null,
+								AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC);
+
+				break;
 		}
 
 		return count;
