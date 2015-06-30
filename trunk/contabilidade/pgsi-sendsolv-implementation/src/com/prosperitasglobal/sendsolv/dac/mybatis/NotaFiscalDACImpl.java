@@ -2,19 +2,19 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.Map;
 
-import org.mybatis.spring.support.SqlSessionDaoSupport;
-import org.slf4j.LoggerFactory;
-
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.cbof.dac.INoteDAC;
+import com.prosperitasglobal.sendsolv.dac.ICfopDAC;
+import com.prosperitasglobal.sendsolv.dac.IContasPagarDAC;
+import com.prosperitasglobal.sendsolv.dac.IContasReceberDAC;
+import com.prosperitasglobal.sendsolv.dac.IFormaPagamentoDAC;
+import com.prosperitasglobal.sendsolv.dac.IItensEspeciaisDAC;
+import com.prosperitasglobal.sendsolv.dac.INfStatusDAC;
 import com.prosperitasglobal.sendsolv.dac.INotaFiscalDAC;
+import com.prosperitasglobal.sendsolv.dac.INotaFiscalItensDAC;
+import com.prosperitasglobal.sendsolv.dac.IOrcamentoDAC;
+import com.prosperitasglobal.sendsolv.dac.IPedidoCompraDAC;
+import com.prosperitasglobal.sendsolv.dac.IServicoItensDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
-import com.prosperitasglobal.sendsolv.model.NotaFiscal;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
-import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResponse;
-import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.util.QATMyBatisDacHelper;
-import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class NotaFiscalDACImpl.
@@ -75,6 +75,22 @@ public class NotaFiscalDACImpl extends SqlSessionDaoSupport implements INotaFisc
 
 	/** The valid sort fields for an cnae inquiry. Will be injected by Spring. */
 	private Map<String, String> cnaeInquiryValidSortFields;
+
+	private ITransporteDac transportadorDac;
+	private IConhecimentoTransporteDac conhecimentoTransporteDac;
+	private ITributacaoDac tributacaoDac;
+	private IFormaPagamentoDAC formapgDAC;
+	private INotaFiscalItensDAC notaItensDAC;
+	private INoteDAC noteDAC;
+	private IContasPagarDAC contasPagarDAC;
+	private IContasReceberDAC contasReceberDAC;
+	private IItensEspeciaisDAC itensEspeciaisDAC;
+	private ICfopDAC cfopDAC;
+	private IServicoItensDAC servicoItensDAC;
+	private INfStatusDAC nfStatusDAC;
+	private IFornecedorDAC fornecedorDAC;
+	private IPedidoCompraDAC pedidoCompraDAC;
+	private IOrcamentoDAC orcamentoDAC;
 
 	/**
 	 * Get the valid sort fields for the cnae inquiry. Attribute injected by Spring.
