@@ -1,6 +1,5 @@
 package com.prosperitasglobal.sendsolv.model;
 
-import java.util.List;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -44,83 +43,19 @@ public class ServicoItens extends ModelCosmeDamiao
 	}
 
 	/**
-	 * @return the marca
+	 * @return the value
 	 */
-	public String getMarca()
+	public String getValue()
 	{
-		return marca;
+		return value;
 	}
 
 	/**
-	 * @param marca the marca to set
+	 * @param value the value to set
 	 */
-	public void setMarca(String marca)
+	public void setValue(String value)
 	{
-		this.marca = marca;
-	}
-
-	/**
-	 * @return the fabricante
-	 */
-	public String getFabricante()
-	{
-		return fabricante;
-	}
-
-	/**
-	 * @param fabricante the fabricante to set
-	 */
-	public void setFabricante(String fabricante)
-	{
-		this.fabricante = fabricante;
-	}
-
-	/**
-	 * @return the emailList
-	 */
-	public List<Email> getEmailList()
-	{
-		return emailList;
-	}
-
-	/**
-	 * @param emailList the emailList to set
-	 */
-	public void setEmailList(List<Email> emailList)
-	{
-		this.emailList = emailList;
-	}
-
-	/**
-	 * @return the enderecoList
-	 */
-	public List<Endereco> getEnderecoList()
-	{
-		return enderecoList;
-	}
-
-	/**
-	 * @param enderecoList the enderecoList to set
-	 */
-	public void setEnderecoList(List<Endereco> enderecoList)
-	{
-		this.enderecoList = enderecoList;
-	}
-
-	/**
-	 * @return the telefoneList
-	 */
-	public List<Telefone> getTelefoneList()
-	{
-		return telefoneList;
-	}
-
-	/**
-	 * @param telefoneList the telefoneList to set
-	 */
-	public void setTelefoneList(List<Telefone> telefoneList)
-	{
-		this.telefoneList = telefoneList;
+		this.value = value;
 	}
 
 	/*
@@ -130,16 +65,8 @@ public class ServicoItens extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Marca [getId()=" + getId() + ", getMarca()=" + getMarca() + ", getFabricante()=" + getFabricante()
-				+ ", getEmailList()=" + getEmailList() + ", getEnderecoList()=" + getEnderecoList()
-				+ ", getTelefoneList()=" + getTelefoneList() + ", getTabelaEnumValue()=" + getTabelaEnumValue()
-				+ ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue()
-				+ ", getParentId()=" + getParentId() + ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType()
-				+ ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()="
-				+ getEmprId() + ", getSite()=" + getSite() + ", toString()=" + super.toString() + ", getModelAction()="
-				+ getModelAction() + ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()="
-				+ getCreateDateUTC() + ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()="
-				+ getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
+		return "ServicoItens [getId()=" + getId() + ", getValue()=" + getValue() + ", toString()=" + super.toString()
+				+ "]";
 	}
 
 }

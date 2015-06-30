@@ -1,13 +1,8 @@
 package com.prosperitasglobal.sendsolv.model;
 
+import com.qat.framework.model.II18nEnum;
+import com.qat.framework.model.IIntegerEnum;
 
-/**
- * The Enum PayrollTypeEnum details the different options a payroll can have inside of SendSolv
- *
- * @author abarros
- * @version 1.0
- * @created 21-Jul-2014 10:00:07 AM
- */
 public enum NotaTypeEnum implements IIntegerEnum, II18nEnum
 {
 

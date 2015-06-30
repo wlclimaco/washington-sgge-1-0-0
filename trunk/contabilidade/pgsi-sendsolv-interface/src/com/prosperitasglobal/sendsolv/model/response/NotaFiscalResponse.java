@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.prosperitasglobal.sendsolv.model.NotaFiscal;
+import com.qat.framework.model.response.InquiryResponse;
 
 public class NotaFiscalResponse extends InquiryResponse
 {

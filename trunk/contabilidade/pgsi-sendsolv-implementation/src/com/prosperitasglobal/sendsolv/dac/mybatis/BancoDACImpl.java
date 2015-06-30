@@ -217,7 +217,7 @@ public class BancoDACImpl extends SqlSessionDaoSupport implements IBancoDAC
 	 * .Banco)
 	 */
 	@Override
-	public InternalResultsResponse<Banco> insertBanco(Banco banco)
+	public Integer insertBanco(Banco banco)
 	{
 		Integer insertCount = 0;
 		InternalResultsResponse<Banco> response = new InternalResultsResponse<Banco>();
@@ -228,7 +228,7 @@ public class BancoDACImpl extends SqlSessionDaoSupport implements IBancoDAC
 
 		if (response.isInError())
 		{
-			return response;
+			return null;
 		}
 		// Next traverse the object graph and "maintain" the associations
 		insertCount += maintainBancoAssociations(banco, response);
@@ -239,7 +239,7 @@ public class BancoDACImpl extends SqlSessionDaoSupport implements IBancoDAC
 			response.addResult(banco);
 		}
 
-		return response;
+		return insertCount;
 	}
 
 	/*
@@ -249,7 +249,7 @@ public class BancoDACImpl extends SqlSessionDaoSupport implements IBancoDAC
 	 * .Banco)
 	 */
 	@Override
-	public InternalResultsResponse<Banco> updateBanco(Banco banco)
+	public Integer updateBanco(Banco banco)
 	{
 		Integer updateCount = 0;
 		InternalResultsResponse<Banco> response = new InternalResultsResponse<Banco>();
@@ -265,7 +265,7 @@ public class BancoDACImpl extends SqlSessionDaoSupport implements IBancoDAC
 
 		if (response.isInError())
 		{
-			return response;
+			return null;
 		}
 		// Next traverse the object graph and "maintain" the associations
 		updateCount += maintainBancoAssociations(banco, response);
@@ -276,7 +276,7 @@ public class BancoDACImpl extends SqlSessionDaoSupport implements IBancoDAC
 			response.addResult(banco);
 		}
 
-		return response;
+		return updateCount;
 	}
 
 	/*
@@ -286,12 +286,18 @@ public class BancoDACImpl extends SqlSessionDaoSupport implements IBancoDAC
 	 * .Banco)
 	 */
 	@Override
-	public InternalResponse deleteBanco(Banco banco)
+	public Integer deleteBanco(Banco banco)
 	{
 		InternalResponse response = new InternalResponse();
 		QATMyBatisDacHelper.doRemove(getSqlSession(), EMPRESA_STMT_DELETE, banco, response);
-
-		return response;
+		if (response.isInError())
+		{
+			return null;
+		}
+		else
+		{
+			return 1;
+		}
 	}
 
 	/*

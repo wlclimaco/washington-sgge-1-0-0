@@ -1,5 +1,7 @@
 package com.prosperitasglobal.sendsolv.model;
 
+import java.util.List;
+
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -27,7 +29,7 @@ public class NotaFiscalItens extends ModelCosmeDamiao
 
 	private Classificacao classificacao;
 
-	private List<Tributos> tributosList;
+	private List<Tributacao> tributosList;
 
 	/**
 	 * Default constructor.
@@ -38,8 +40,6 @@ public class NotaFiscalItens extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the id.
-	 *
 	 * @return the id
 	 */
 	public Integer getId()
@@ -48,8 +48,6 @@ public class NotaFiscalItens extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Sets the id.
-	 *
 	 * @param id the id to set
 	 */
 	public void setId(Integer id)
@@ -58,143 +56,147 @@ public class NotaFiscalItens extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the logradouro.
-	 *
-	 * @return the logradouro
+	 * @return the idNota
 	 */
-	public String getLogradouro()
+	public Integer getIdNota()
 	{
-		return logradouro;
+		return IdNota;
 	}
 
 	/**
-	 * Sets the logradouro.
-	 *
-	 * @param logradouro the logradouro to set
+	 * @param idNota the idNota to set
 	 */
-	public void setLogradouro(String logradouro)
+	public void setIdNota(Integer idNota)
 	{
-		this.logradouro = logradouro;
+		IdNota = idNota;
 	}
 
 	/**
-	 * Gets the cidade.
-	 *
-	 * @return the cidade
+	 * @return the produto
 	 */
-	public String getCidade()
+	public Produto getProduto()
 	{
-		return cidade;
+		return produto;
 	}
 
 	/**
-	 * Sets the cidade.
-	 *
-	 * @param cidade the cidade to set
+	 * @param produto the produto to set
 	 */
-	public void setCidade(String cidade)
+	public void setProduto(Produto produto)
 	{
-		this.cidade = cidade;
+		this.produto = produto;
 	}
 
 	/**
-	 * Gets the estado.
-	 *
-	 * @return the estado
+	 * @return the qnt
 	 */
-	public String getEstado()
+	public Double getQnt()
 	{
-		return estado;
+		return qnt;
 	}
 
 	/**
-	 * Sets the estado.
-	 *
-	 * @param estado the estado to set
+	 * @param qnt the qnt to set
 	 */
-	public void setEstado(String estado)
+	public void setQnt(Double qnt)
 	{
-		this.estado = estado;
+		this.qnt = qnt;
 	}
 
 	/**
-	 * Gets the bairro.
-	 *
-	 * @return the bairro
+	 * @return the vrUnitario
 	 */
-	public String getBairro()
+	public Double getVrUnitario()
 	{
-		return bairro;
+		return vrUnitario;
 	}
 
 	/**
-	 * Sets the bairro.
-	 *
-	 * @param bairro the bairro to set
+	 * @param vrUnitario the vrUnitario to set
 	 */
-	public void setBairro(String bairro)
+	public void setVrUnitario(Double vrUnitario)
 	{
-		this.bairro = bairro;
+		this.vrUnitario = vrUnitario;
 	}
 
 	/**
-	 * Gets the numero.
-	 *
-	 * @return the numero
+	 * @return the vrDesconto
 	 */
-	public String getNumero()
+	public Double getVrDesconto()
 	{
-		return numero;
+		return vrDesconto;
 	}
 
 	/**
-	 * Sets the numero.
-	 *
-	 * @param numero the numero to set
+	 * @param vrDesconto the vrDesconto to set
 	 */
-	public void setNumero(String numero)
+	public void setVrDesconto(Double vrDesconto)
 	{
-		this.numero = numero;
+		this.vrDesconto = vrDesconto;
 	}
 
 	/**
-	 * Gets the cep.
-	 *
-	 * @return the cep
+	 * @return the cfop
 	 */
-	public String getCep()
+	public Cfop getCfop()
 	{
-		return cep;
+		return cfop;
 	}
 
 	/**
-	 * Sets the cep.
-	 *
-	 * @param cep the cep to set
+	 * @param cfop the cfop to set
 	 */
-	public void setCep(String cep)
+	public void setCfop(Cfop cfop)
 	{
-		this.cep = cep;
+		this.cfop = cfop;
 	}
 
 	/**
-	 * Gets the tipo endereco.
-	 *
-	 * @return the tipoEndereco
+	 * @return the crt
 	 */
-	public String getTipoEndereco()
+	public Cst getCrt()
 	{
-		return tipoEndereco;
+		return crt;
 	}
 
 	/**
-	 * Sets the tipo endereco.
-	 *
-	 * @param tipoEndereco the tipoEndereco to set
+	 * @param crt the crt to set
 	 */
-	public void setTipoEndereco(String tipoEndereco)
+	public void setCrt(Cst crt)
 	{
-		this.tipoEndereco = tipoEndereco;
+		this.crt = crt;
+	}
+
+	/**
+	 * @return the classificacao
+	 */
+	public Classificacao getClassificacao()
+	{
+		return classificacao;
+	}
+
+	/**
+	 * @param classificacao the classificacao to set
+	 */
+	public void setClassificacao(Classificacao classificacao)
+	{
+		this.classificacao = classificacao;
+	}
+
+	/**
+	 * @return the tributosList
+	 */
+	public List<Tributacao> getTributosList()
+	{
+		return tributosList;
+	}
+
+	/**
+	 * @param tributosList the tributosList to set
+	 */
+	public void setTributosList(List<Tributacao> tributosList)
+	{
+		this.tributosList = tributosList;
 	}
 
 	/*
@@ -204,10 +206,18 @@ public class NotaFiscalItens extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Endereco [getId()=" + getId() + ", getLogradouro()=" + getLogradouro() + ", getCidade()=" + getCidade()
-				+ ", getEstado()=" + getEstado() + ", getBairro()=" + getBairro() + ", getNumero()=" + getNumero()
-				+ ", getCep()=" + getCep() + ", getTipoEndereco()=" + getTipoEndereco() + ", toString()="
-				+ super.toString() + "]";
+		return "NotaFiscalItens [getId()=" + getId() + ", getIdNota()=" + getIdNota() + ", getProduto()="
+				+ getProduto() + ", getQnt()=" + getQnt() + ", getVrUnitario()=" + getVrUnitario()
+				+ ", getVrDesconto()=" + getVrDesconto() + ", getCfop()=" + getCfop() + ", getCrt()=" + getCrt()
+				+ ", getClassificacao()=" + getClassificacao() + ", getTributosList()=" + getTributosList()
+				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
+				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
+				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
+				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
+				+ ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()="
+				+ getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()="
+				+ getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + "]";
 	}
 
 }

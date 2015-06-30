@@ -5,15 +5,15 @@ import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
-import com.prosperitasglobal.sendsolv.dac.ICfopDAC;
 import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
+import com.prosperitasglobal.sendsolv.dac.IUniMedDAC;
 import com.prosperitasglobal.sendsolv.model.AcaoEnum;
-import com.prosperitasglobal.sendsolv.model.Cfop;
 import com.prosperitasglobal.sendsolv.model.Status;
 import com.prosperitasglobal.sendsolv.model.StatusEnum;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
 import com.prosperitasglobal.sendsolv.model.TypeEnum;
+import com.prosperitasglobal.sendsolv.model.UniMed;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
 
@@ -37,64 +37,62 @@ public final class UniMedDACD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainCfopAssociations(List<Cfop> cfopList,
+	public static Integer maintainUniMedAssociations(UniMed uniMed,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, ICfopDAC cfopDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC, Integer empId,
+			TabelaEnum tabelaEnum, IUniMedDAC uniMedDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
+			Integer empId,
 			String UserId)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
-		if (ValidationUtil.isNullOrEmpty(cfopList))
+		if (ValidationUtil.isNull(uniMed))
 		{
 			return count;
 		}
-		// For Each Contact...
-		for (Cfop cfop : cfopList)
+
+		// Make sure we set the parent key
+		uniMed.setParentId(parentId);
+
+		if (ValidationUtil.isNull(uniMed.getModelAction()))
 		{
-			// Make sure we set the parent key
-			cfop.setParentId(parentId);
-
-			if (ValidationUtil.isNull(cfop.getModelAction()))
-			{
-				continue;
-			}
-			switch (cfop.getModelAction())
-			{
-				case INSERT:
-					count = cfopDAC.insertCfop(cfop,
-							"insertCfop", response);
-					if (count > 0)
-					{
-						Status status = new Status();
-						status.setStatus(StatusEnum.ACTIVE);
-						List<Status> statusList = new ArrayList<Status>();
-						count =
-								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC);
-					}
-					break;
-				case UPDATE:
-					count = cfopDAC.updateCfop(cfop, response);
-					if (count > 0)
-					{
-						count =
-								StatusDACD
-								.maintainStatusAssociations(cfop.getStatusList(), response, cfop.getId(),
-										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
-										historicoDAC);
-					}
-					break;
-				case DELETE:
-
+			return 0;
+		}
+		switch (uniMed.getModelAction())
+		{
+			case INSERT:
+				count = uniMedDAC.insertUniMed(uniMed,
+						"insertUniMed", response);
+				if (count > 0)
+				{
 					Status status = new Status();
-					status.setStatus(StatusEnum.INACTIVE);
+					status.setStatus(StatusEnum.ACTIVE);
 					List<Status> statusList = new ArrayList<Status>();
 					count =
-							StatusDACD.maintainStatusAssociations(statusList, response, cfop.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC);
+							StatusDACD.maintainStatusAssociations(statusList, response, count, null,
+									AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC);
+				}
+				break;
+			case UPDATE:
+				count = uniMedDAC.updateUniMed(uniMed, response);
+				if (count > 0)
+				{
+					count =
+							StatusDACD
+							.maintainStatusAssociations(uniMed.getStatusList(), response, uniMed.getId(),
+									null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
+									historicoDAC);
+				}
+				break;
+			case DELETE:
 
-					break;
-			}
+				Status status = new Status();
+				status.setStatus(StatusEnum.INACTIVE);
+				List<Status> statusList = new ArrayList<Status>();
+				count =
+						StatusDACD.maintainStatusAssociations(statusList, response, uniMed.getId(), null,
+								AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC);
+
+				break;
 		}
 
 		return count;
