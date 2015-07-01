@@ -2,13 +2,22 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.List;
 
-import com.prosperitasglobal.sendsolv.dac.ITransporteDAC;
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
+import com.prosperitasglobal.sendsolv.dac.ITransportadorDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
+import com.prosperitasglobal.sendsolv.model.Transportador;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class CommonBusinessObjectsDACImpl.
  */
-public class TransporteDACImpl extends SqlSessionDaoSupport implements ITransporteDAC
+public class TransporteDACImpl extends SqlSessionDaoSupport implements ITransportadorDAC
 {
 
 	/** The Constant LOG. */
@@ -22,12 +31,12 @@ public class TransporteDACImpl extends SqlSessionDaoSupport implements ITranspor
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#insertTransporte(com.prosperitasglobal.cbof.
-	 * model.Transporte,
+	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#insertTransportador(com.prosperitasglobal.cbof.
+	 * model.Transportador,
 	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer insertTransporte(Transporte transporte, String statementName,
+	public Integer insertTransportador(Transportador transporte, String statementName,
 			InternalResultsResponse<?> response)
 	{
 		Integer insertCount = 0;
@@ -46,12 +55,12 @@ public class TransporteDACImpl extends SqlSessionDaoSupport implements ITranspor
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.cbof.dac.ITransporteDAC#deleteBusinessTransporte(com.prosperitasglobal
-	 * .cbof.model.Transporte,
+	 * com.prosperitasglobal.cbof.dac.ITransportadorDAC#deleteBusinessTransportador(com.prosperitasglobal
+	 * .cbof.model.Transportador,
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer deleteTransporte(Transporte transporte,
+	public Integer deleteTransportador(Transportador transporte,
 			InternalResultsResponse<?> response)
 	{
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT,
@@ -61,12 +70,12 @@ public class TransporteDACImpl extends SqlSessionDaoSupport implements ITranspor
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#updateTransporte(com.prosperitasglobal.cbof.
-	 * model.Transporte,
+	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#updateTransportador(com.prosperitasglobal.cbof.
+	 * model.Transportador,
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer updateTransporte(Transporte transporte,
+	public Integer updateTransportador(Transportador transporte,
 			InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
@@ -91,15 +100,15 @@ public class TransporteDACImpl extends SqlSessionDaoSupport implements ITranspor
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#fetchTransporteByParent(java.lang.Integer,
+	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#fetchTransportadorByParent(java.lang.Integer,
 	 * com.prosperitasglobal.sendsolv.model.BusinessTypeEnum)
 	 */
 	@Override
-	public InternalResultsResponse<Transporte> fetchTransporteByRequest(
+	public InternalResultsResponse<Transportador> fetchTransportadorByRequest(
 			PagedInquiryRequest request)
 	{
-		InternalResultsResponse<Transporte> response =
-				new InternalResultsResponse<Transporte>();
+		InternalResultsResponse<Transportador> response =
+				new InternalResultsResponse<Transportador>();
 
 		/*
 		 * Helper method to translation from the user friendly" sort field names to the
@@ -107,7 +116,7 @@ public class TransporteDACImpl extends SqlSessionDaoSupport implements ITranspor
 		 */
 		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
 
-		PagedResultsDACD.fetchObjectsByRequestTransporte(getSqlSession(), request,
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request,
 				EMPRESA_STMT_FETCH_COUNT,
 				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
 		return response;
@@ -115,40 +124,24 @@ public class TransporteDACImpl extends SqlSessionDaoSupport implements ITranspor
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#fetchTransporteById(java.lang.Integer)
-	 */
-	@Override
-	public InternalResultsResponse<Transporte> fetchTransporteById(Integer id)
-	{
-		InternalResultsResponse<Transporte> response =
-				new InternalResultsResponse<Transporte>();
-
-		QATMyBatisDacHelper.doQueryForList(getSqlSession(), CONTACT_STMT_FETCH_BY_ID, id, response);
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.cbof.dac.ITransporteDAC#maintainTransporteAssociations(java.util
+	 * com.prosperitasglobal.cbof.dac.ITransportadorDAC#maintainTransportadorAssociations(java.util
 	 * .List, java.lang.Integer,
 	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
 	 */
-	@Override
-	public Integer maintainTransporteAssociations(List<Transporte> transporteList,
+	public Integer maintainTransportadorAssociations(List<Transportador> transporteList,
 			Integer parentId,
 			String associateStatement,
 			InternalResultsResponse<?> response)
 	{
 		Integer count = 0;
-		// First Maintain Transportes
+		// First Maintain Transportadors
 		if (ValidationUtil.isNullOrEmpty(transporteList))
 		{
 			return count;
 		}
-		// For Each Transporte...
-		for (Transporte transporte : transporteList)
+		// For Each Transportador...
+		for (Transportador transporte : transporteList)
 		{
 			// Make sure we set the parent key
 			transporte.setParentId(parentId);
@@ -160,13 +153,13 @@ public class TransporteDACImpl extends SqlSessionDaoSupport implements ITranspor
 			switch (transporte.getModelAction())
 			{
 				case INSERT:
-					count += insertTransporte(transporte, associateStatement, response);
+					count += insertTransportador(transporte, associateStatement, response);
 					break;
 				case UPDATE:
-					count += updateTransporte(transporte, response);
+					count += updateTransportador(transporte, response);
 					break;
 				case DELETE:
-					count += deleteTransporte(transporte, response);
+					count += deleteTransportador(transporte, response);
 					break;
 				default:
 					if (LOG.isDebugEnabled())

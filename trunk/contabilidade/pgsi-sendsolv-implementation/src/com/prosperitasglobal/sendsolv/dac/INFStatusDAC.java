@@ -1,9 +1,13 @@
 package com.prosperitasglobal.sendsolv.dac;
 
+import com.prosperitasglobal.sendsolv.model.NFStatus;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.response.InternalResultsResponse;
+
 /**
- * The Interface INfStatusDAC.
+ * The Interface INFStatusDAC.
  */
-public interface INfStatusDAC
+public interface INFStatusDAC
 {
 
 	/**
@@ -13,7 +17,7 @@ public interface INfStatusDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer updateNfStatus(NfStatus nfStatus, InternalResultsResponse<?> response);
+	public Integer updateNFStatus(NFStatus nfStatus, InternalResultsResponse<?> response);
 
 	/**
 	 * Insert nf status.
@@ -23,7 +27,7 @@ public interface INfStatusDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer insertNfStatus(NfStatus nfStatus, String statementName, InternalResultsResponse<?> response);
+	public Integer insertNFStatus(NFStatus nfStatus, String statementName, InternalResultsResponse<?> response);
 
 	/**
 	 * Delete nf status.
@@ -32,7 +36,7 @@ public interface INfStatusDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer deleteNfStatus(NfStatus nfStatus, InternalResultsResponse<?> response);
+	public Integer deleteNFStatus(NFStatus nfStatus, InternalResultsResponse<?> response);
 
 	/**
 	 * Fetch nf status by request.
@@ -40,6 +44,6 @@ public interface INfStatusDAC
 	 * @param request the request
 	 * @return the internal results response
 	 */
-	public InternalResultsResponse<NfStatus> fetchNfStatusByRequest(PagedInquiryRequest request);
+	public InternalResultsResponse<NFStatus> fetchNFStatusByRequest(PagedInquiryRequest request);
 
 }

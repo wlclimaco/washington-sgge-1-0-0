@@ -2,7 +2,6 @@ package com.prosperitasglobal.sendsolv.model;
 
 import java.util.List;
 
-import com.prosperitasglobal.cbof.model.FormaPg;
 import com.prosperitasglobal.cbof.model.Note;
 
 /**

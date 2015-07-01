@@ -2,8 +2,17 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.List;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
 import com.prosperitasglobal.sendsolv.dac.IServicoItensDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
+import com.prosperitasglobal.sendsolv.model.ServicoItens;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class CommonBusinessObjectsDACImpl.
@@ -107,24 +116,9 @@ public class ServicoItensDACImpl extends SqlSessionDaoSupport implements IServic
 		 */
 		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
 
-		PagedResultsDACD.fetchObjectsByRequestServicoItens(getSqlSession(), request,
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request,
 				EMPRESA_STMT_FETCH_COUNT,
 				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#fetchServicoItensById(java.lang.Integer)
-	 */
-	@Override
-	public InternalResultsResponse<ServicoItens> fetchServicoItensById(Integer id)
-	{
-		InternalResultsResponse<ServicoItens> response =
-				new InternalResultsResponse<ServicoItens>();
-
-		QATMyBatisDacHelper.doQueryForList(getSqlSession(), CONTACT_STMT_FETCH_BY_ID, id, response);
-
 		return response;
 	}
 
@@ -135,7 +129,7 @@ public class ServicoItensDACImpl extends SqlSessionDaoSupport implements IServic
 	 * .List, java.lang.Integer,
 	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
 	 */
-	@Override
+
 	public Integer maintainServicoItensAssociations(List<ServicoItens> servicoItensList,
 			Integer parentId,
 			String associateStatement,

@@ -1,5 +1,9 @@
 package com.prosperitasglobal.sendsolv.dac;
 
+import com.prosperitasglobal.sendsolv.model.ConhecimentoTransporte;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.response.InternalResultsResponse;
+
 /**
  * The Interface IConhecimentoTransporteDAC.
  */
@@ -13,27 +17,29 @@ public interface IConhecimentoTransporteDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer updateEvento(ConhecimentoTransporte conhecimentoTransporte, InternalResultsResponse<?> response);
+	public Integer updateConhecimentoTransporte(ConhecimentoTransporte conhecimentoTransporte,
+			InternalResultsResponse<?> response);
 
 	/**
-	 * Insert Evento.
+	 * Insert ConhecimentoTransporte.
 	 *
 	 * @param conhecimentoTransporte the conhecimento transporte
 	 * @param statementName the statement name
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer insertEvento(ConhecimentoTransporte conhecimentoTransporte, String statementName,
+	public Integer insertConhecimentoTransporte(ConhecimentoTransporte conhecimentoTransporte, String statementName,
 			InternalResultsResponse<?> response);
 
 	/**
-	 * Delete business Evento.
+	 * Delete business ConhecimentoTransporte.
 	 *
 	 * @param conhecimentoTransporte the conhecimento transporte
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer deleteEvento(ConhecimentoTransporte conhecimentoTransporte, InternalResultsResponse<?> response);
+	public Integer deleteConhecimentoTransporte(ConhecimentoTransporte conhecimentoTransporte,
+			InternalResultsResponse<?> response);
 
 	/**
 	 * Fetch conhecimento transporte by request.
@@ -43,5 +49,7 @@ public interface IConhecimentoTransporteDAC
 	 */
 	public InternalResultsResponse<ConhecimentoTransporte> fetchConhecimentoTransporteByRequest(
 			PagedInquiryRequest request);
+
+	InternalResultsResponse<ConhecimentoTransporte> fetchConhecimentoTransporteById(Integer id);
 
 }

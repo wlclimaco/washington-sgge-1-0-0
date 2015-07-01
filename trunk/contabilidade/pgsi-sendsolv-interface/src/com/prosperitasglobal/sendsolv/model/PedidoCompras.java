@@ -8,7 +8,7 @@ import java.util.List;
  * setting.
  */
 @SuppressWarnings("serial")
-public class PedidoCompra extends ModelCosmeDamiao
+public class PedidoCompras extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
@@ -34,7 +34,7 @@ public class PedidoCompra extends ModelCosmeDamiao
 	/**
 	 * Default constructor.
 	 */
-	public PedidoCompra()
+	public PedidoCompras()
 	{
 		super();
 	}

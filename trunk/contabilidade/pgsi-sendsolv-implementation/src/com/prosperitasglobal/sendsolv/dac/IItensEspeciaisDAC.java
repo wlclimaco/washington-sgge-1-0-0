@@ -1,7 +1,11 @@
 package com.prosperitasglobal.sendsolv.dac;
 
+import com.prosperitasglobal.sendsolv.model.ItensEspeciais;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.response.InternalResultsResponse;
+
 /**
- * The Interface IEventosDAC.
+ * The Interface IItensEspeciaissDAC.
  */
 public interface IItensEspeciaisDAC
 {
@@ -13,26 +17,27 @@ public interface IItensEspeciaisDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer updateEvento(ItensEspeciais itensEspeciais, InternalResultsResponse<?> response);
+	public Integer updateItensEspeciais(ItensEspeciais itensEspeciais, InternalResultsResponse<?> response);
 
 	/**
-	 * Insert Evento.
+	 * Insert ItensEspeciais.
 	 *
 	 * @param itensEspeciais the itens especiais
 	 * @param statementName the statement name
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer insertEvento(ItensEspeciais itensEspeciais, String statementName, InternalResultsResponse<?> response);
+	public Integer insertItensEspeciais(ItensEspeciais itensEspeciais, String statementName,
+			InternalResultsResponse<?> response);
 
 	/**
-	 * Delete business Evento.
+	 * Delete business ItensEspeciais.
 	 *
 	 * @param itensEspeciais the itens especiais
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer deleteEvento(ItensEspeciais itensEspeciais, InternalResultsResponse<?> response);
+	public Integer deleteItensEspeciais(ItensEspeciais itensEspeciais, InternalResultsResponse<?> response);
 
 	/**
 	 * Fetch eventos by request.
@@ -40,6 +45,6 @@ public interface IItensEspeciaisDAC
 	 * @param request the request
 	 * @return the internal results response
 	 */
-	public InternalResultsResponse<ItensEspeciais> fetchEventosByRequest(PagedInquiryRequest request);
+	public InternalResultsResponse<ItensEspeciais> fetchItensEspeciaisByRequest(PagedInquiryRequest request);
 
 }

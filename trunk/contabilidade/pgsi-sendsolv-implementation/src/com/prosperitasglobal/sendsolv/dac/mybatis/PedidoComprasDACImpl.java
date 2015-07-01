@@ -2,12 +2,22 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.List;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
+import com.prosperitasglobal.sendsolv.dac.IPedidoCompraDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
+import com.prosperitasglobal.sendsolv.model.PedidoCompras;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class CommonBusinessObjectsDACImpl.
  */
-public class PedidoComprasDACImpl extends SqlSessionDaoSupport implements IPedidoComprasDAC
+public class PedidoComprasDACImpl extends SqlSessionDaoSupport implements IPedidoCompraDAC
 {
 
 	/** The Constant LOG. */
@@ -106,24 +116,9 @@ public class PedidoComprasDACImpl extends SqlSessionDaoSupport implements IPedid
 		 */
 		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
 
-		PagedResultsDACD.fetchObjectsByRequestPedidoCompras(getSqlSession(), request,
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request,
 				EMPRESA_STMT_FETCH_COUNT,
 				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#fetchPedidoComprasById(java.lang.Integer)
-	 */
-	@Override
-	public InternalResultsResponse<PedidoCompras> fetchPedidoComprasById(Integer id)
-	{
-		InternalResultsResponse<PedidoCompras> response =
-				new InternalResultsResponse<PedidoCompras>();
-
-		QATMyBatisDacHelper.doQueryForList(getSqlSession(), CONTACT_STMT_FETCH_BY_ID, id, response);
-
 		return response;
 	}
 
@@ -134,7 +129,6 @@ public class PedidoComprasDACImpl extends SqlSessionDaoSupport implements IPedid
 	 * .List, java.lang.Integer,
 	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
 	 */
-	@Override
 	public Integer maintainPedidoComprasAssociations(List<PedidoCompras> pedidoComprasList,
 			Integer parentId,
 			String associateStatement,

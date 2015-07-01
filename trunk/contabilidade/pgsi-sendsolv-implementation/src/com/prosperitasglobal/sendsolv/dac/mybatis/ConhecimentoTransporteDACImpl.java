@@ -2,8 +2,17 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.List;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
 import com.prosperitasglobal.sendsolv.dac.IConhecimentoTransporteDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
+import com.prosperitasglobal.sendsolv.model.ConhecimentoTransporte;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class CommonBusinessObjectsDACImpl.
@@ -18,6 +27,7 @@ public class ConhecimentoTransporteDACImpl extends SqlSessionDaoSupport implemen
 	private static final String CONTACT_STMT_UPDATE = null;
 	private static final String EMPRESA_STMT_FETCH_COUNT = null;
 	private static final String EMPRESA_STMT_FETCH_ALL_BY_REQUEST = null;
+	private static final String CONTACT_STMT_FETCH_BY_ID = null;
 
 	/*
 	 * (non-Javadoc)
@@ -38,7 +48,7 @@ public class ConhecimentoTransporteDACImpl extends SqlSessionDaoSupport implemen
 		// Associate with parent using statement name passed as parameter
 		insertCount +=
 				QATMyBatisDacHelper
-						.doInsert(getSqlSession(), statementName, conhecimentoTransporte, response);
+				.doInsert(getSqlSession(), statementName, conhecimentoTransporte, response);
 
 		return insertCount;
 	}
@@ -77,7 +87,7 @@ public class ConhecimentoTransporteDACImpl extends SqlSessionDaoSupport implemen
 		{
 			updateCount =
 					QATMyBatisDacHelper
-							.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE, conhecimentoTransporte, response);
+					.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE, conhecimentoTransporte, response);
 
 			if (updateCount == 1)
 			{
@@ -97,7 +107,7 @@ public class ConhecimentoTransporteDACImpl extends SqlSessionDaoSupport implemen
 	@Override
 	public InternalResultsResponse<ConhecimentoTransporte> fetchConhecimentoTransporteByRequest(
 			PagedInquiryRequest request)
-	{
+			{
 		InternalResultsResponse<ConhecimentoTransporte> response =
 				new InternalResultsResponse<ConhecimentoTransporte>();
 
@@ -107,11 +117,11 @@ public class ConhecimentoTransporteDACImpl extends SqlSessionDaoSupport implemen
 		 */
 		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
 
-		PagedResultsDACD.fetchObjectsByRequestConhecimentoTransporte(getSqlSession(), request,
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request,
 				EMPRESA_STMT_FETCH_COUNT,
 				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
 		return response;
-	}
+			}
 
 	/*
 	 * (non-Javadoc)
@@ -135,7 +145,7 @@ public class ConhecimentoTransporteDACImpl extends SqlSessionDaoSupport implemen
 	 * .List, java.lang.Integer,
 	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
 	 */
-	@Override
+
 	public Integer maintainConhecimentoTransporteAssociations(List<ConhecimentoTransporte> conhecimentoTransporteList,
 			Integer parentId,
 			String associateStatement,

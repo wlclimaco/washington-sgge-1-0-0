@@ -1,7 +1,11 @@
 package com.prosperitasglobal.sendsolv.dac;
 
+import com.prosperitasglobal.sendsolv.model.PedidoCompras;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.response.InternalResultsResponse;
+
 /**
- * The Interface IPedidoCompraDAC.
+ * The Interface IPedidoComprasDAC.
  */
 public interface IPedidoCompraDAC
 {
@@ -13,7 +17,7 @@ public interface IPedidoCompraDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer updatePedidoCompra(PedidoCompra pedidoCompra, InternalResultsResponse<?> response);
+	public Integer updatePedidoCompras(PedidoCompras pedidoCompra, InternalResultsResponse<?> response);
 
 	/**
 	 * Insert pedido compra.
@@ -23,7 +27,7 @@ public interface IPedidoCompraDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer insertPedidoCompra(PedidoCompra pedidoCompra, String statementName,
+	public Integer insertPedidoCompras(PedidoCompras pedidoCompra, String statementName,
 			InternalResultsResponse<?> response);
 
 	/**
@@ -33,7 +37,7 @@ public interface IPedidoCompraDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer deletePedidoCompra(PedidoCompra pedidoCompra, InternalResultsResponse<?> response);
+	public Integer deletePedidoCompras(PedidoCompras pedidoCompra, InternalResultsResponse<?> response);
 
 	/**
 	 * Fetch pedido compra by request.
@@ -41,6 +45,6 @@ public interface IPedidoCompraDAC
 	 * @param request the request
 	 * @return the internal results response
 	 */
-	public InternalResultsResponse<PedidoCompra> fetchPedidoCompraByRequest(PagedInquiryRequest request);
+	public InternalResultsResponse<PedidoCompras> fetchPedidoComprasByRequest(PagedInquiryRequest request);
 
 }

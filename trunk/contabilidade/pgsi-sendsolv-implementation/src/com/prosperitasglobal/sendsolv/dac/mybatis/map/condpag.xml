@@ -140,7 +140,7 @@
 					where b.parentId = #{id}
   </select>
 
-  <select id="fetchAllCondPagsByRequest" parameterType="CondPagInquiryRequest" resultMap="condPagResult">
+  <select id="fetchAllCondPagsByRequest" parameterType="PagedInquiryRequest" resultMap="condPagResult">
      SELECT * FROM ( SELECT b.id,
     						<include refid="allCondPagColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber

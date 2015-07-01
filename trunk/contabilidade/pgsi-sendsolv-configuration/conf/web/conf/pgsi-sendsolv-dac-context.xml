@@ -174,10 +174,6 @@
 -->
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
-	<bean id="empresaDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.EmpresaDACImpl">
-		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
-	</bean>
-
 	<bean id="arquivoDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.ArquivoDACImpl">
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
@@ -194,11 +190,23 @@
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
 
+ 	<bean id="cadastroDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.CadastroDACImpl">
+		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+	</bean>
+
  	<bean id="cfopDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.CfopDACImpl">
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
 
+ 	<bean id="classificacaoDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.ClassificacaoDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
  	<bean id="cnaeDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.CnaeDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
+	<bean id="conhecimentoTransporteDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.ConhecimentoTransporteDACImpl">
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
 
@@ -210,7 +218,15 @@
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
 
+ 	<bean id="contatoDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.ContatoDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
  	<bean id="convenioDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.ConvenioDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
+ 	<bean id="custoDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.CustoDACImpl">
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
 
@@ -222,11 +238,19 @@
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
 
+ 	<bean id="empresaDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.EmpresaDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
  	<bean id="enderecoDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.EnderecoDACImpl">
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
 
- 	<bean id="eventoDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.EventoDACImpl">
+ 	<bean id="estoqueDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.EstoqueDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
+ 	<bean id="eventoDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.EventosDACImpl">
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
 
@@ -238,7 +262,19 @@
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
 
+ 	<bean id="formaPgDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.FormaPgDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
+ 	<bean id="fornecedorDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.FornecedorDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
  	<bean id="funcionarioDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.FuncionarioDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
+ 	<bean id="grupoDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.GrupoDACImpl">
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
 
@@ -250,7 +286,23 @@
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
 
+ 	<bean id="itensEspeciaisDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.ItensEspeciaisDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
+ 	<bean id="marcaDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.MarcaDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
+ 	<bean id="nfStatusDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.NFStatusDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
  	<bean id="notaFiscalDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.NotaFiscalDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
+ 	<bean id="notaFiscalItensDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.NotaFiscalItensDACImpl">
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
 
@@ -265,7 +317,20 @@
  	<bean id="ordemServicoDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.OrdemServicoDACImpl">
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
+
+ 	<bean id="pedidoComprasDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.PedidoComprasDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
+ 	<bean id="pedidoComprasItensDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.PedidoComprasItensDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
  	<bean id="pessoaDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.PessoaDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
+ 	<bean id="porcaoDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.PorcaoDACImpl">
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
 
@@ -273,7 +338,23 @@
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
 
+ 	<bean id="profissaoDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.ProfissaDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
+ 	<bean id="rentabilidadeDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.RentabilidadeDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
 	<bean id="salarioDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.SalarioDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
+ 	<bean id="servicoItensDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.ServicoItensDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
+ 	<bean id="settingsDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.SettingsDACImpl">
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
 
@@ -281,7 +362,7 @@
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
 
- 	<bean id="tabsDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.TabsDACImpl">
+ 	<bean id="subGrupoDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.SubGrupoDACImpl">
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
 
@@ -289,24 +370,35 @@
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
 
+ 	<bean id="tabPrecoDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.TabPrecoDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
+ 	<bean id="tabsDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.TabsDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
+	<bean id="telaDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.TelaDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
  	<bean id="telefoneDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.TelefoneDACImpl">
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
 
- 	<bean id="telaDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.TelaDACImpl">
+	<bean id="tenantDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.TenantDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
+	<bean id="transporteDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.TransporteDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
+ 	<bean id="tributacaoDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.TributacaoDACImpl">
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
 
  	<bean id="uniMedDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.UniMedDACImpl">
- 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
- 	</bean>
-
-
- 	<bean id="tenantDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.TenantDACImpl">
- 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
- 	</bean>
-
- 	<bean id="settingsDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.SettingsDACImpl">
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
 

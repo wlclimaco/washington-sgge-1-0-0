@@ -2,8 +2,17 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.List;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
 import com.prosperitasglobal.sendsolv.dac.INotaFiscalItensDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
+import com.prosperitasglobal.sendsolv.model.NotaFiscalItens;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class CommonBusinessObjectsDACImpl.
@@ -38,7 +47,7 @@ public class NotaFiscalItensDACImpl extends SqlSessionDaoSupport implements INot
 		// Associate with parent using statement name passed as parameter
 		insertCount +=
 				QATMyBatisDacHelper
-						.doInsert(getSqlSession(), statementName, notaFiscalItens, response);
+				.doInsert(getSqlSession(), statementName, notaFiscalItens, response);
 
 		return insertCount;
 	}
@@ -77,7 +86,7 @@ public class NotaFiscalItensDACImpl extends SqlSessionDaoSupport implements INot
 		{
 			updateCount =
 					QATMyBatisDacHelper
-							.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE, notaFiscalItens, response);
+					.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE, notaFiscalItens, response);
 
 			if (updateCount == 1)
 			{
@@ -97,7 +106,7 @@ public class NotaFiscalItensDACImpl extends SqlSessionDaoSupport implements INot
 	@Override
 	public InternalResultsResponse<NotaFiscalItens> fetchNotaFiscalItensByRequest(
 			PagedInquiryRequest request)
-	{
+			{
 		InternalResultsResponse<NotaFiscalItens> response =
 				new InternalResultsResponse<NotaFiscalItens>();
 
@@ -107,26 +116,11 @@ public class NotaFiscalItensDACImpl extends SqlSessionDaoSupport implements INot
 		 */
 		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
 
-		PagedResultsDACD.fetchObjectsByRequestNotaFiscalItens(getSqlSession(), request,
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request,
 				EMPRESA_STMT_FETCH_COUNT,
 				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
 		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#fetchNotaFiscalItensById(java.lang.Integer)
-	 */
-	@Override
-	public InternalResultsResponse<NotaFiscalItens> fetchNotaFiscalItensById(Integer id)
-	{
-		InternalResultsResponse<NotaFiscalItens> response =
-				new InternalResultsResponse<NotaFiscalItens>();
-
-		QATMyBatisDacHelper.doQueryForList(getSqlSession(), CONTACT_STMT_FETCH_BY_ID, id, response);
-
-		return response;
-	}
+			}
 
 	/*
 	 * (non-Javadoc)
@@ -135,7 +129,6 @@ public class NotaFiscalItensDACImpl extends SqlSessionDaoSupport implements INot
 	 * .List, java.lang.Integer,
 	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
 	 */
-	@Override
 	public Integer maintainNotaFiscalItensAssociations(List<NotaFiscalItens> notaFiscalItensList,
 			Integer parentId,
 			String associateStatement,

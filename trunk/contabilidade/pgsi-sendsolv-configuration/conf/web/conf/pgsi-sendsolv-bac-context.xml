@@ -68,10 +68,6 @@
  		<property name="bancoDAC" ref="bancoDACTarget"/>
  	</bean>
 
- 	<bean id="beneficiosBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.BeneficiosBACImpl">
- 		<property name="beneficiosDAC" ref="beneficiosDACTarget"/>
- 	</bean>
-
  	<bean id="empresaBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.EmpresaBACImpl">
  		<property name="empresaDAC" ref="empresaDACTarget"/>
  	</bean>
