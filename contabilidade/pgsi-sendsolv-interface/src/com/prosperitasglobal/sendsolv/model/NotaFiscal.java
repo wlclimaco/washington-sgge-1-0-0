@@ -2,7 +2,6 @@ package com.prosperitasglobal.sendsolv.model;
 
 import java.util.List;
 
-import com.prosperitasglobal.cbof.model.FormaPg;
 import com.prosperitasglobal.cbof.model.Note;
 
 /**
@@ -97,7 +96,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 	private Fornecedor fornecedor;
 
 	/** The pedido compra. */
-	private List<PedidoCompra> pedidoCompra;
+	private List<PedidoCompras> pedidoCompra;
 
 	/** The cliente. */
 	private Cliente cliente;
@@ -678,7 +677,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 	 *
 	 * @return the pedidoCompra
 	 */
-	public List<PedidoCompra> getPedidoCompra()
+	public List<PedidoCompras> getPedidoCompra()
 	{
 		return pedidoCompra;
 	}
@@ -688,7 +687,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 	 *
 	 * @param pedidoCompra the pedidoCompra to set
 	 */
-	public void setPedidoCompra(List<PedidoCompra> pedidoCompra)
+	public void setPedidoCompra(List<PedidoCompras> pedidoCompra)
 	{
 		this.pedidoCompra = pedidoCompra;
 	}

@@ -1,6 +1,6 @@
 package com.prosperitasglobal.sendsolv.dac;
 
-import com.prosperitasglobal.cbof.model.FormaPg;
+import com.prosperitasglobal.sendsolv.model.FormaPg;
 import com.qat.framework.model.response.InternalResultsResponse;
 
 /**

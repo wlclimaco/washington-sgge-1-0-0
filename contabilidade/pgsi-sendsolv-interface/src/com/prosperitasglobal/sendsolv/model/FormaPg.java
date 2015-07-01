@@ -1,19 +1,28 @@
-package com.prosperitasglobal.cbof.model;
+package com.prosperitasglobal.sendsolv.model;
 
-import com.prosperitasglobal.sendsolv.model.ModelCosmeDamiao;
 
 /**
- * The Class Email.
+ * The Class FormaPg.
  */
 @SuppressWarnings("serial")
 public class FormaPg extends ModelCosmeDamiao
 {
+
+	/** The id. */
 	private Integer id;
+
+	/** The descricao. */
 	private String descricao;
+
+	/** The dias pg. */
 	private Integer diasPg;
+
+	/** The entrada. */
 	private Integer entrada;
 
 	/**
+	 * Gets the id.
+	 *
 	 * @return the id
 	 */
 	public Integer getId()
@@ -22,6 +31,8 @@ public class FormaPg extends ModelCosmeDamiao
 	}
 
 	/**
+	 * Sets the id.
+	 *
 	 * @param id the id to set
 	 */
 	public void setId(Integer id)
@@ -30,6 +41,8 @@ public class FormaPg extends ModelCosmeDamiao
 	}
 
 	/**
+	 * Gets the descricao.
+	 *
 	 * @return the descricao
 	 */
 	public String getDescricao()
@@ -38,6 +51,8 @@ public class FormaPg extends ModelCosmeDamiao
 	}
 
 	/**
+	 * Sets the descricao.
+	 *
 	 * @param descricao the descricao to set
 	 */
 	public void setDescricao(String descricao)
@@ -46,6 +61,8 @@ public class FormaPg extends ModelCosmeDamiao
 	}
 
 	/**
+	 * Gets the dias pg.
+	 *
 	 * @return the diasPg
 	 */
 	public Integer getDiasPg()
@@ -54,6 +71,8 @@ public class FormaPg extends ModelCosmeDamiao
 	}
 
 	/**
+	 * Sets the dias pg.
+	 *
 	 * @param diasPg the diasPg to set
 	 */
 	public void setDiasPg(Integer diasPg)

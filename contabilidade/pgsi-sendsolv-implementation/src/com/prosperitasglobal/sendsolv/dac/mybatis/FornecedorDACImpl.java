@@ -5,9 +5,9 @@ import java.util.List;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
-import com.prosperitasglobal.sendsolv.dac.INFStatusDAC;
+import com.prosperitasglobal.sendsolv.dac.IFornecedorDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
-import com.prosperitasglobal.sendsolv.model.NFStatus;
+import com.prosperitasglobal.sendsolv.model.Fornecedor;
 import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.qat.framework.model.QATModel;
 import com.qat.framework.model.response.InternalResultsResponse;
@@ -17,11 +17,11 @@ import com.qat.framework.validation.ValidationUtil;
 /**
  * The Class CommonBusinessObjectsDACImpl.
  */
-public class NFStatusDACImpl extends SqlSessionDaoSupport implements INFStatusDAC
+public class FornecedorDACImpl extends SqlSessionDaoSupport implements IFornecedorDAC
 {
 
 	/** The Constant LOG. */
-	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(NFStatusDACImpl.class);
+	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(FornecedorDACImpl.class);
 	private static final String CONTACT_STMT_INSERT = null;
 	private static final String CONTACT_STMT_DELETE_BUSINESS_CONTACT = null;
 	private static final String CONTACT_STMT_UPDATE = null;
@@ -31,23 +31,23 @@ public class NFStatusDACImpl extends SqlSessionDaoSupport implements INFStatusDA
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#insertNFStatus(com.prosperitasglobal.cbof.
-	 * model.NFStatus,
+	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#insertFornecedor(com.prosperitasglobal.cbof.
+	 * model.Fornecedor,
 	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer insertNFStatus(NFStatus nFStatus, String statementName,
+	public Integer insertFornecedor(Fornecedor conhecimentoTransporte, String statementName,
 			InternalResultsResponse<?> response)
 	{
 		Integer insertCount = 0;
-		// First insert the root nFStatus data
+		// First insert the root conhecimentoTransporte data
 		insertCount =
-				QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT, nFStatus, response);
+				QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT, conhecimentoTransporte, response);
 
 		// Associate with parent using statement name passed as parameter
 		insertCount +=
 				QATMyBatisDacHelper
-						.doInsert(getSqlSession(), statementName, nFStatus, response);
+						.doInsert(getSqlSession(), statementName, conhecimentoTransporte, response);
 
 		return insertCount;
 	}
@@ -55,42 +55,42 @@ public class NFStatusDACImpl extends SqlSessionDaoSupport implements INFStatusDA
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.cbof.dac.INFStatusDAC#deleteBusinessNFStatus(com.prosperitasglobal
-	 * .cbof.model.NFStatus,
+	 * com.prosperitasglobal.cbof.dac.IFornecedorDAC#deleteBusinessFornecedor(com.prosperitasglobal
+	 * .cbof.model.Fornecedor,
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer deleteNFStatus(NFStatus nFStatus,
+	public Integer deleteFornecedor(Fornecedor conhecimentoTransporte,
 			InternalResultsResponse<?> response)
 	{
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT,
-				nFStatus, response);
+				conhecimentoTransporte, response);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#updateNFStatus(com.prosperitasglobal.cbof.
-	 * model.NFStatus,
+	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#updateFornecedor(com.prosperitasglobal.cbof.
+	 * model.Fornecedor,
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer updateNFStatus(NFStatus nFStatus,
+	public Integer updateFornecedor(Fornecedor conhecimentoTransporte,
 			InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
 
 		// First update the root if necessary.
-		if (!ValidationUtil.isNull(nFStatus.getModelAction())
-				&& (nFStatus.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
+		if (!ValidationUtil.isNull(conhecimentoTransporte.getModelAction())
+				&& (conhecimentoTransporte.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
 		{
 			updateCount =
 					QATMyBatisDacHelper
-							.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE, nFStatus, response);
+							.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE, conhecimentoTransporte, response);
 
 			if (updateCount == 1)
 			{
-				nFStatus.setModelAction(QATModel.PersistanceActionEnum.NONE);
+				conhecimentoTransporte.setModelAction(QATModel.PersistanceActionEnum.NONE);
 			}
 		}
 
@@ -100,15 +100,15 @@ public class NFStatusDACImpl extends SqlSessionDaoSupport implements INFStatusDA
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#fetchNFStatusByParent(java.lang.Integer,
+	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#fetchFornecedorByParent(java.lang.Integer,
 	 * com.prosperitasglobal.sendsolv.model.BusinessTypeEnum)
 	 */
 	@Override
-	public InternalResultsResponse<NFStatus> fetchNFStatusByRequest(
+	public InternalResultsResponse<Fornecedor> fetchFornecedorByRequest(
 			PagedInquiryRequest request)
 	{
-		InternalResultsResponse<NFStatus> response =
-				new InternalResultsResponse<NFStatus>();
+		InternalResultsResponse<Fornecedor> response =
+				new InternalResultsResponse<Fornecedor>();
 
 		/*
 		 * Helper method to translation from the user friendly" sort field names to the
@@ -125,41 +125,42 @@ public class NFStatusDACImpl extends SqlSessionDaoSupport implements INFStatusDA
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.cbof.dac.INFStatusDAC#maintainNFStatusAssociations(java.util
+	 * com.prosperitasglobal.cbof.dac.IFornecedorDAC#maintainFornecedorAssociations(java.util
 	 * .List, java.lang.Integer,
 	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
 	 */
-	public Integer maintainNFStatusAssociations(List<NFStatus> nFStatusList,
+
+	public Integer maintainFornecedorAssociations(List<Fornecedor> conhecimentoTransporteList,
 			Integer parentId,
 			String associateStatement,
 			InternalResultsResponse<?> response)
 	{
 		Integer count = 0;
-		// First Maintain NFStatuss
-		if (ValidationUtil.isNullOrEmpty(nFStatusList))
+		// First Maintain Fornecedors
+		if (ValidationUtil.isNullOrEmpty(conhecimentoTransporteList))
 		{
 			return count;
 		}
-		// For Each NFStatus...
-		for (NFStatus nFStatus : nFStatusList)
+		// For Each Fornecedor...
+		for (Fornecedor conhecimentoTransporte : conhecimentoTransporteList)
 		{
 			// Make sure we set the parent key
-			nFStatus.setParentId(parentId);
+			conhecimentoTransporte.setParentId(parentId);
 
-			if (ValidationUtil.isNull(nFStatus.getModelAction()))
+			if (ValidationUtil.isNull(conhecimentoTransporte.getModelAction()))
 			{
 				continue;
 			}
-			switch (nFStatus.getModelAction())
+			switch (conhecimentoTransporte.getModelAction())
 			{
 				case INSERT:
-					count += insertNFStatus(nFStatus, associateStatement, response);
+					count += insertFornecedor(conhecimentoTransporte, associateStatement, response);
 					break;
 				case UPDATE:
-					count += updateNFStatus(nFStatus, response);
+					count += updateFornecedor(conhecimentoTransporte, response);
 					break;
 				case DELETE:
-					count += deleteNFStatus(nFStatus, response);
+					count += deleteFornecedor(conhecimentoTransporte, response);
 					break;
 				default:
 					if (LOG.isDebugEnabled())

@@ -5,8 +5,8 @@ import java.util.List;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
-import com.prosperitasglobal.cbof.model.FormaPg;
 import com.prosperitasglobal.sendsolv.dac.IFormaPagamentoDAC;
+import com.prosperitasglobal.sendsolv.model.FormaPg;
 import com.qat.framework.model.QATModel;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
