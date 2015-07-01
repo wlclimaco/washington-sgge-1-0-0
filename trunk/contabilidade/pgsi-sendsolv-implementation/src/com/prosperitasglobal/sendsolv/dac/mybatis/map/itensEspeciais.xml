@@ -146,7 +146,7 @@
  				   FROM itensEspeciais b where b.id = #{id}
   </select>
 
-  <select id="fetchAllItensEspeciaisByRequest" parameterType="ItensEspeciaisInquiryRequest" resultMap="itensEspeciaisResult">
+  <select id="fetchAllItensEspeciaisByRequest" parameterType="PagedInquiryRequest" resultMap="itensEspeciaisResult">
     SELECT * FROM
     			(
     				SELECT

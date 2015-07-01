@@ -138,7 +138,7 @@
 					where b.id = #{id}
   </select>
 
-  <select id="fetchAllTransportadorsByRequest" parameterType="TransportadorInquiryRequest" resultMap="transportadorResult">
+  <select id="fetchAllTransportadorsByRequest" parameterType="PagedInquiryRequest" resultMap="transportadorResult">
      SELECT * FROM ( SELECT b.id,
     						<include refid="allTransportadorColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber

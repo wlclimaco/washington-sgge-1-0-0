@@ -141,7 +141,7 @@
 					where b.id = #{id}
   </select>
 
-  <select id="fetchAllFornecedorsByRequest" parameterType="FornecedorInquiryRequest" resultMap="fornecedorResult">
+  <select id="fetchAllFornecedorsByRequest" parameterType="PagedInquiryRequest" resultMap="fornecedorResult">
      SELECT * FROM ( SELECT b.id,
     						<include refid="allFornecedorColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber

@@ -153,7 +153,7 @@
 				  </where>
   </select>
 
-  <select id="fetchAllCnaesByRequest" parameterType="CnaeInquiryRequest" resultMap="cnaeResult">
+  <select id="fetchAllCnaesByRequest" parameterType="PagedInquiryRequest" resultMap="cnaeResult">
     SELECT * FROM
     			(
     				SELECT
