@@ -205,7 +205,7 @@
 				  </where>
   </select>
 
-  <select id="fetchAllStatussByRequest" parameterType="StatusInquiryRequest" resultMap="statusResult">
+  <select id="fetchAllStatussByRequest" parameterType="PagedInquiryRequest" resultMap="statusResult">
     SELECT * FROM
     			(
 
