@@ -1,6 +1,5 @@
 package com.prosperitasglobal.sendsolv.model;
 
-
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -14,18 +13,18 @@ public class Cidade extends ModelCosmeDamiao
 	/** The type of an account. */
 	private String nome;
 
-	/** The description. */
-	private String cota;
-
-	/** The description. */
-	private String porcentagem;
-
 	/**
 	 * Default constructor.
 	 */
 	public Cidade()
 	{
 		super();
+	}
+
+	public Cidade(Integer id)
+	{
+		super();
+		this.id = id;
 	}
 
 	/**

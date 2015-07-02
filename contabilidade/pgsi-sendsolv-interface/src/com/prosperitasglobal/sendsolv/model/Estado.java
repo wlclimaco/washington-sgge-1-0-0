@@ -24,6 +24,12 @@ public class Estado extends ModelCosmeDamiao
 		super();
 	}
 
+	public Estado(Integer id)
+	{
+		super();
+		this.id = id;
+	}
+
 	/**
 	 * Gets the id.
 	 *

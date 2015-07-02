@@ -14,10 +14,10 @@ public class Endereco extends ModelCosmeDamiao
 	private String logradouro;
 
 	/** The description. */
-	private String cidade;
+	private Cidade cidade;
 
 	/** The estado. */
-	private String estado;
+	private Estado estado;
 
 	/** The bairro. */
 	private String bairro;

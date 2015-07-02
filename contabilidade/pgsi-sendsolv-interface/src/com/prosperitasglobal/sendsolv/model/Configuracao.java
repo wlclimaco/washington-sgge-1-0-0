@@ -35,6 +35,12 @@ public class Configuracao extends ModelCosmeDamiao
 		super();
 	}
 
+	public Configuracao(Integer id)
+	{
+		super();
+		this.id = id;
+	}
+
 	/**
 	 * Gets the id.
 	 *

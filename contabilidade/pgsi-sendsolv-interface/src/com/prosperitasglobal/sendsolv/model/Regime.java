@@ -24,6 +24,12 @@ public class Regime extends ModelCosmeDamiao
 
 	}
 
+	public Regime(Integer id)
+	{
+		super();
+		this.id = id;
+	}
+
 	public Integer getId()
 	{
 		return id;
