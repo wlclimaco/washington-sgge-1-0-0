@@ -654,7 +654,7 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 			Status status = new Status();
 			status.setStatus(StatusEnum.ACTIVE);
 			List<Status> statusList = new ArrayList<Status>();
-			insertCount =
+			updateCount =
 					StatusDACD.maintainStatusAssociations(statusList, response, produto.getId(), null, AcaoEnum.INSERT,
 							produto.getCreateUser(), produto.getEmprId(), TabelaEnum.EMPRESA, getStatusDAC(),
 							getHistoricoDAC());

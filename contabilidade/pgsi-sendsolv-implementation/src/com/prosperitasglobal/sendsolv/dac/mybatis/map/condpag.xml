@@ -252,7 +252,7 @@
 					where b.parentId = #{id}
   </select>
 
-  <select id="fetchAllTipoPagsByRequest" parameterType="TipoPagInquiryRequest" resultMap="tipoPagResult">
+  <select id="fetchAllTipoPagsByRequest" parameterType="PagedInquiryRequest" resultMap="tipoPagResult">
      SELECT * FROM ( SELECT b.id,
     						<include refid="allTipoPagColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
