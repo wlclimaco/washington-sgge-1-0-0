@@ -71,7 +71,7 @@
 		 #{volume},
 		 #{pesoLiquido},
 		 #{pesoBruto},
-		 #{transportador},
+		 #{transportador.id},
 		 #{marca},
 		 #{estado},
     	<include refid="CBOFMap.changeControlFields"/>
@@ -104,7 +104,7 @@
 	    	<if test="volume != null"> volume=#{volume},</if>
 	    	<if test="pesoLiquido != null">pesoLiquido = #{pesoLiquido},</if>
 	    	<if test="pesoBruto != null"> pesoBruto=#{pesoBruto},</if>
-	    	<if test="transportador != null"> transportador=#{transportador},</if>
+	    	<if test="transportador.id != null"> transportador=#{transportador.id},</if>
 	    	<if test="marca != null">marca = #{marca},</if>
 	    	<if test="estado != null"> estado=#{estado},</if>
 			<if test="modifyDateUTC != null"> modify_date=#{modifyDateUTC},</if>
