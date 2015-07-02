@@ -20,8 +20,6 @@
    	<result property="parentId" column="parentId"/>
 	<result property="typeValue" column="type"/>
 	<result property="logradouro" column="logradouro"/>
-	<result property="cidade" column="cidade"/>
-	<result property="estado" column="estado"/>
 	<result property="bairro" column="bairro"/>
 	<result property="numero" column="numero"/>
 	<result property="cep" column="cep"/>
@@ -30,6 +28,8 @@
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
 	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEndereco"/>
+	<association property="cidade"    column="cidade" select="CidadeMap.fetchById"  />
+	<association property="estado"    column="estado" select="EstadoMap.fetchById"  />
   </resultMap>
 
   <!--
@@ -58,8 +58,8 @@
 		,#{parentId}
 		,#{typeValue}
 		,#{logradouro}
-		,#{cidade}
-		,#{estado}
+		,#{cidade.id}
+		,#{estado.id}
 		,#{bairro}
 		,#{numero}
 		,#{cep}
@@ -85,8 +85,8 @@
     UPDATE endereco
     	<set>
     		<if test="logradouro!= null">logradouro = #{logradouro},</if>
-	    	<if test="cidade!= null"> cidade = #{cidade},</if>
-	    	<if test="estado!= null"> estado=#{estado},</if>
+	    	<if test="cidade.id!= null"> cidade = #{cidade.id},</if>
+	    	<if test="estado.id!= null"> estado=#{estado.id},</if>
 	    	<if test="bairro!= null"> bairro=#{bairro},</if>
 	    	<if test="numero!= null"> numero=#{numero},</if>
 	    	<if test="cep!= null"> cep=#{cep},</if>

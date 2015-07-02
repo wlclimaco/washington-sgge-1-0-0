@@ -24,6 +24,7 @@
 		<typeAlias alias="Arquivo"              					 type="com.prosperitasglobal.sendsolv.model.Arquivo"/>
 		<typeAlias alias="Banco"              				 		 type="com.prosperitasglobal.sendsolv.model.Banco"/>
 		<typeAlias alias="Beneficios"              				 	 type="com.prosperitasglobal.sendsolv.model.Beneficios"/>
+		<typeAlias alias="Cidade"              				 		 type="com.prosperitasglobal.sendsolv.model.Cidade"/>
 		<typeAlias alias="Cfop"              				 		 type="com.prosperitasglobal.sendsolv.model.Cfop"/>
 		<typeAlias alias="Classificacao"              				 type="com.prosperitasglobal.sendsolv.model.Classificacao"/>
 		<typeAlias alias="Cliente"              				 	 type="com.prosperitasglobal.sendsolv.model.Cliente"/>
@@ -41,6 +42,7 @@
 		<typeAlias alias="Email"              				 		 type="com.prosperitasglobal.sendsolv.model.Email"/>
 		<typeAlias alias="Empresa"              				 	 type="com.prosperitasglobal.sendsolv.model.Empresa"/>
 		<typeAlias alias="Endereco"              				 	 type="com.prosperitasglobal.sendsolv.model.Endereco"/>
+		<typeAlias alias="Estado"              				 	     type="com.prosperitasglobal.sendsolv.model.Estado"/>
 		<typeAlias alias="Estoque"              				 	 type="com.prosperitasglobal.sendsolv.model.Estoque"/>
 		<typeAlias alias="Eventos"              				 	 type="com.prosperitasglobal.sendsolv.model.Eventos"/>
 		<typeAlias alias="Field"              				 		 type="com.prosperitasglobal.sendsolv.model.Field"/>
@@ -65,6 +67,7 @@
 		<typeAlias alias="Porcao"              				 		 type="com.prosperitasglobal.sendsolv.model.Porcao"/>
 		<typeAlias alias="PorcaoItem"              		 		     type="com.prosperitasglobal.sendsolv.model.PorcaoItem"/>
 		<typeAlias alias="TabPreco"              				 	 type="com.prosperitasglobal.sendsolv.model.TabPreco"/>
+		<typeAlias alias="Process"              				 	 type="com.prosperitasglobal.sendsolv.model.Process"/>
 		<typeAlias alias="Produto"              			 		 type="com.prosperitasglobal.sendsolv.model.Produto"/>
 		<typeAlias alias="Profissao"              			 		 type="com.prosperitasglobal.sendsolv.model.Profissao"/>
 		<typeAlias alias="Regime"              				 		 type="com.prosperitasglobal.sendsolv.model.Regime"/>
@@ -100,6 +103,7 @@
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/arquivo.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/banco.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/beneficios.xml" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/cidade.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/cfop.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/classificacao.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/cliente.xml" />
@@ -117,6 +121,7 @@
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/email.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/empresa.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/endereco.xml" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/estado.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/estoque.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/evento.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/field.xml" />
@@ -141,6 +146,7 @@
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/porcao.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/porcaoItens.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/preco.xml" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/process.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/produto.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/profissao.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/regime.xml" />

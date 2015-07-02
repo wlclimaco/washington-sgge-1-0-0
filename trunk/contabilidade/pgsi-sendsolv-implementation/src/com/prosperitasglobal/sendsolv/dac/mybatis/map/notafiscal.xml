@@ -102,12 +102,12 @@
 		#{pcCusto},
 		#{pedidoCompraId},
 		#{orcamentoId},
-		#{cfop},
-		#{transportador},
-		#{conhecimentoTransporte},
-		#{empresa},
-		#{fornecedor},
-		#{cliente},
+		#{cfop.id},
+		#{transportador.id},
+		#{conhecimentoTransporte.id},
+		#{empresa.id},
+		#{fornecedor.id},
+		#{cliente.id},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
@@ -146,12 +146,12 @@
 			<if test="pcCusto != null"> pcCusto=#{pcCusto},</if>
 			<if test="pedidoCompraId != null"> pedidoCompraId=#{pedidoCompraId},</if>
 			<if test="orcamentoId != null"> orcamentoId=#{orcamentoId},</if>
-			<if test="cfop != null"> cfop=#{cfop},</if>
-			<if test="transportador != null"> transportador=#{transportador},</if>
-			<if test="conhecimentoTransporte != null"> conhecimentoTransporte=#{conhecimentoTransporte},</if>
-			<if test="empresa != null"> empresa=#{empresa},</if>
-			<if test="fornecedor != null"> fornecedor=#{fornecedor},</if>
-			<if test="cliente != null"> cliente=#{cliente},</if>
+			<if test="cfop.id != null"> cfop=#{cfop.id},</if>
+			<if test="transportador.id != null"> transportador=#{transportador.id},</if>
+			<if test="conhecimentoTransporte.id != null"> conhecimentoTransporte=#{conhecimentoTransporte.id},</if>
+			<if test="empresa.id != null"> empresa=#{empresa.id},</if>
+			<if test="fornecedor.id != null"> fornecedor=#{fornecedor.id},</if>
+			<if test="cliente.id != null"> cliente=#{cliente.id},</if>
 			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
@@ -174,7 +174,7 @@
         FROM notaFiscal
      WHERE 2 = 2
      <if test="empresa != null">
-		  AND empresa = #{empresa}
+		  AND empresa = #{empresa.id}
 	 </if>
   </select>
 

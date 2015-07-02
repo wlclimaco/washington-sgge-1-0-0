@@ -16,6 +16,8 @@ public class Telefone extends ModelCosmeDamiao
 	/** The description. */
 	private String numero;
 
+	private String descricao;
+
 	/**
 	 * Default constructor.
 	 */

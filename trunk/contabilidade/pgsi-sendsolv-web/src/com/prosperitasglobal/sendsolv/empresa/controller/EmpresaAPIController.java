@@ -1,24 +1,8 @@
 package com.prosperitasglobal.sendsolv.empresa.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import java.util.ArrayList;
+import java.util.logging.Logger;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.EmpresaMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
-
-/**
- * The EmpresaAPIController Class.
- *
- * @author Flavio Tosta, Washington Costa
- *
- */
 @Controller
 @RequestMapping("/api/empresa")
 public class EmpresaAPIController extends EmpresaBaseController
@@ -26,19 +10,19 @@ public class EmpresaAPIController extends EmpresaBaseController
 
 	/** The Constant FETCH_SIC_NAICS. */
 	private static final String FETCH_SIC_NAICS = "fetchSicNaics";
-	/** The Constant FETCH_ORGANIZATION_BYLOCATION. */
-	private static final String FETCH_ORGANIZATION_BYLOCATION = "fetchOrganizationBylocation";
+	/** The Constant FETCH_ORGANIZATION_BYEMPRESA. */
+	private static final String FETCH_ORGANIZATION_BYEMPRESA = "fetchOrganizationByempresa";
 	/** The URL mapping constants. */
-	private static final String DELETE_LOCATION = "/delete";
+	private static final String DELETE_EMPRESA = "/delete";
 
-	/** The Constant EDIT_LOCATION. */
-	private static final String EDIT_LOCATION = "/edit";
+	/** The Constant EDIT_EMPRESA. */
+	private static final String EDIT_EMPRESA = "/edit";
 
 	/** The Constant FETCH_ALL. */
 	private static final String FETCH_ALL = "/fetchall";
 
-	/** The Constant INSERT_LOCATION. */
-	private static final String INSERT_LOCATION = "/add";
+	/** The Constant INSERT_EMPRESA. */
+	private static final String INSERT_EMPRESA = "/add";
 
 	/** The Constant FETCH. */
 	private static final String FETCH = "/fetch";
@@ -69,7 +53,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 	 * Fetch.
 	 *
 	 * @param fetchByIdRequest the fetch by id request
-	 * @return the location response
+	 * @return the empresa response
 	 */
 	@RequestMapping(value = FETCH, method = RequestMethod.POST)
 	@ResponseBody
@@ -81,47 +65,212 @@ public class EmpresaAPIController extends EmpresaBaseController
 	}
 
 	/**
-	 * Edit one location.
+	 * Edit one empresa.
 	 *
-	 * @param locationRequest the location request
+	 * @param empresaRequest the empresa request
 	 * @return the response
 	 */
-	@RequestMapping(value = EDIT_LOCATION, method = RequestMethod.POST)
+	@RequestMapping(value = EDIT_EMPRESA, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse editEmpresa(@RequestBody EmpresaMaintenanceRequest locationRequest)
+	public EmpresaResponse editEmpresa(@RequestBody EmpresaMaintenanceRequest empresaRequest)
 	{
-
-		return edit(locationRequest);
+		empresaRequest.setEmpresa(insertMockEmpresa(ModelAction.INSERT));
+		return edit(empresaRequest);
 
 	}
 
 	/**
-	 * Delete one location.
+	 * Delete one empresa.
 	 *
-	 * @param locationRequest the location request
+	 * @param empresaRequest the empresa request
 	 * @return the response
 	 */
-	@RequestMapping(value = DELETE_LOCATION, method = RequestMethod.POST)
+	@RequestMapping(value = DELETE_EMPRESA, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse deleteEmpresa(@RequestBody EmpresaMaintenanceRequest locationRequest)
+	public EmpresaResponse deleteEmpresa(@RequestBody EmpresaMaintenanceRequest empresaRequest)
 	{
-
-		return delete(locationRequest);
+		empresaRequest.setEmpresa(insertMockEmpresa(ModelAction.INSERT));
+		return delete(empresaRequest);
 
 	}
 
 	/**
-	 * Insert one location.
+	 * Insert one empresa.
 	 *
-	 * @param locationRequest the location request
+	 * @param empresaRequest the empresa request
 	 * @return the response
 	 */
-	@RequestMapping(value = INSERT_LOCATION, method = RequestMethod.POST)
+	@RequestMapping(value = INSERT_EMPRESA, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse insertEmpresa(@RequestBody EmpresaMaintenanceRequest locationRequest)
+	public EmpresaResponse insertEmpresa(@RequestBody EmpresaMaintenanceRequest empresaRequest)
+	{
+		empresaRequest.setEmpresa(insertMockEmpresa(ModelAction.INSERT));
+		return insert(empresaRequest);
+
+	}
+
+	public List<Endereco> insertEndereco(ModelAction modelAction)
+	{
+		List<Endereco> enderecoList = new ArrayList<Endereco>();
+		Endereco endereco = new Endereco();
+
+		endereco.setModelAction(modelAction);
+		endereco.setId(1);
+		endereco.setLogradouro("R: Maria Conceição silva");
+		endereco.setCidade(new Cidade(1));
+		endereco.setEstado(new Estado(1));
+		endereco.setBairro("Mangueiras");
+		endereco.setNumero("686");
+		endereco.setCep("38082-243");
+
+		return enderecoList;
+	}
+
+	public List<Email> insertEmail(ModelAction modelAction)
 	{
 
-		return insert(locationRequest);
+		List<Email> emailList = new ArrayList<Email>();
+		Email email = new Email();
+		email.setId(1);
+		email.setEmail("wlclimaco@gmail.com");
+		email.setDescription("Casa");
+		email.setModelAction(modelAction);
+		emailList.add(email);
+
+		email = new Email();
+		email.setId(2);
+		email.setEmail("wlclimaco@yahoo.com.br");
+		email.setDescription("Trabalho");
+		email.setModelAction(modelAction);
+		emailList.add(email);
+
+		email = new Email();
+		email.setId(3);
+		email.setEmail("wlclimaco@hotmail.com");
+		email.setDescription("Casa Joaquina");
+		email.setModelAction(modelAction);
+		emailList.add(email);
+
+		return emailList;
+	}
+
+	public List<Cnae> insertCnae(ModelAction modelAction)
+	{
+		List<Cnae> cnaeList = new ArrayList<Cnae>();
+		Cnae cnae = new Cnae();
+		cnae.setModelAction("NONE");
+		cnae.setId(1);
+		cnaeList.add(cnae);
+
+		cnae = new Cnae();
+		cnae.setModelAction("NONE");
+		cnae.setId(2);
+		cnaeList.add(cnae);
+
+		cnae = new Cnae();
+		cnae.setModelAction("NONE");
+		cnae.setId(3);
+		cnaeList.add(cnae);
+
+		return cnaeList;
+	}
+
+	public List<Telefone> insertTelefone(ModelAction modelAction)
+	{
+		List<Telefone> telefoneList = new ArrayList<Telefone>();
+		Telefone telefone = new Telefone();
+		telefone.setModelAction(modelAction);
+		telefone.setId(1);
+		telefone.setDdd("34");
+		telefone.setTelefone("91782776");
+		telefone.setDescricao("Casa");
+		telefoneList.add(telefone);
+
+		telefone = new Telefone();
+		telefone.setModelAction(modelAction);
+		telefone.setId(1);
+		telefone.setDdd("34");
+		telefone.setTelefone("91782776");
+		telefone.setDescricao("Trabalho");
+		telefoneList.add(telefone);
+
+		telefone = new Telefone();
+		telefone.setModelAction(modelAction);
+		telefone.setId(1);
+		telefone.setDdd("34");
+		telefone.setTelefone("91782776");
+		telefone.setDescricao("Celular");
+		telefoneList.add(telefone);
+
+		return telefoneList;
+	}
+
+	public List<Documento> insertDocumento(ModelAction modelAction)
+	{
+		List<Documento> documentoList = new ArrayList<Documento>();
+		Documento documento = new Documento();
+		documento.setModelAction(modelAction);
+		documento.setId(1);
+		documento.setDescription("CNPJ");
+		documento.setNumero("111111111000001");
+		documentoList.add(documento);
+
+		documento = new Documento();
+		documento.setModelAction(modelAction);
+		documento.setId(1);
+		documento.setDescription("IM");
+		documento.setNumero("111111111000001");
+		documentoList.add(documento);
+
+		documento = new Documento();
+		documento.setModelAction(modelAction);
+		documento.setId(1);
+		documento.setDescription("IE");
+		documento.setNumero("111111111000001");
+		documentoList.add(documento);
+
+		return documentoList;
+	}
+
+	public List<Socio> insertDocumento(ModelAction modelAction)
+	{
+		List<Socio> socioList = new ArrayList<Socio>();
+		Socio socio = new Socio();
+		socio.setModelAction(modelAction;
+		socio.setId(1);
+		socio.setNome("Washington Luis");
+		socio.setCota("1");
+		socio.setPorcentagem("50");
+		socioList.add(socio);
+
+		socio = new Socio();
+		socio.setModelAction(modelAction);
+		socio.setId(1);
+		socio.setNome("Washington Climaco");
+		socio.setCota("1");
+		socio.setPorcentagem("50");
+		socioList.add(socio);
+
+		return socioList;
+	}
+
+	public Empresa insertMockEmpresa(ModelAction modelAction)
+	{
+		Empresa empresa = new Empresa();
+
+		empresa.setId(1);
+		empresa.setModelAction(modelAction);
+		empresa.setNome("Cosme e damiao Contabiliadade");
+		empresa.setRegime(new Regime(1));
+		empresa.setConfiguracao(new Configuracao(1));
+		empresa.setEnderecos(insertEndereco(modelAction));
+		empresa.setDocumentos(insertDocumento(modelAction));
+		empresa.setEmails(insertEmail(modelAction));
+		empresa.setTelefones(insertTelefone(modelAction));
+		empresa.setSocios(insertSocio(modelAction));
+		empresa.setCnaes(insertCnae(modelAction));
+
+		return empresa;
 
 	}
 }
