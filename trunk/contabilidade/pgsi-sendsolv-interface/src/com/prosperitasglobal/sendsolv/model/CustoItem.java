@@ -7,6 +7,7 @@ package com.prosperitasglobal.sendsolv.model;
 @SuppressWarnings("serial")
 public class CustoItem extends ModelCosmeDamiao
 {
+
 	/** The SendSolv id for the account. */
 	private Integer id;
 
@@ -14,6 +15,12 @@ public class CustoItem extends ModelCosmeDamiao
 	private String custo;
 
 	private Integer custoDesp;
+
+	public CustoItem(Integer id)
+	{
+		super();
+		this.id = id;
+	}
 
 	/**
 	 * Default constructor.

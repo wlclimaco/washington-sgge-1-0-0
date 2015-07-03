@@ -27,6 +27,12 @@ public class Grupo extends ModelCosmeDamiao
 		super();
 	}
 
+	public Grupo(Integer id)
+	{
+		super();
+		this.id = id;
+	}
+
 	/**
 	 * Gets the id.
 	 *

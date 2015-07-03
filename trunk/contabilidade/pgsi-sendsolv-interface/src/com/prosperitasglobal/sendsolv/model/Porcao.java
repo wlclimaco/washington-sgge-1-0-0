@@ -13,7 +13,7 @@ public class Porcao extends ModelCosmeDamiao
 	private Integer idproduto;
 
 	/** The type of an account. */
-	private PorcaoItem porcaoItens;
+	private LIst<PorcaoItem> porcaoItens;
 
 	private Double valor;
 

@@ -23,6 +23,12 @@ public class Incidencia extends ModelCosmeDamiao
 		super();
 	}
 
+	public Incidencia(Integer id)
+	{
+		super();
+		this.id = id;
+	}
+
 	/**
 	 * Gets the id.
 	 *

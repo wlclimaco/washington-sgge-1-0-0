@@ -24,6 +24,12 @@ public class Fornecedor extends Pessoa
 		super();
 	}
 
+	public Fornecedor(Integer id)
+	{
+		super();
+		this.id = id;
+	}
+
 	/**
 	 * @return the id
 	 */

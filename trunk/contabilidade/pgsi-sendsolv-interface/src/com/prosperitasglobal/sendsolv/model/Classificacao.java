@@ -24,6 +24,12 @@ public class Classificacao extends ModelCosmeDamiao
 		super();
 	}
 
+	public Classificacao(Integer id)
+	{
+		super();
+		this.id = id;
+	}
+
 	/**
 	 * @return the id
 	 */

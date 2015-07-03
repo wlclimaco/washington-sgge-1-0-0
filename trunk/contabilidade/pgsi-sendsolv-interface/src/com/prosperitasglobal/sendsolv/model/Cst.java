@@ -25,6 +25,12 @@ public class Cst extends ModelCosmeDamiao
 		super();
 	}
 
+	public Cst(Integer id)
+	{
+		super();
+		this.id = id;
+	}
+
 	/**
 	 * Gets the id.
 	 *
