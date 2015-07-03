@@ -7,12 +7,30 @@ public class Csosn extends ModelCosmeDamiao
 	/** The id. */
 	private Integer id;
 
+	private Integer prodId;
+
+	public Csosn(Integer id)
+	{
+		super();
+		this.id = id;
+	}
+
 	/**
 	 * @return the id
 	 */
 	public Integer getId()
 	{
 		return id;
+	}
+
+	public Integer getProdId()
+	{
+		return prodId;
+	}
+
+	public void setProdId(Integer prodId)
+	{
+		this.prodId = prodId;
 	}
 
 	/**

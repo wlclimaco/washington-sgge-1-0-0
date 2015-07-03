@@ -24,6 +24,12 @@ public class SubGrupo extends ModelCosmeDamiao
 		super();
 	}
 
+	public SubGrupo(Integer id)
+	{
+		super();
+		this.id = id;
+	}
+
 	/**
 	 * Gets the id.
 	 *

@@ -35,6 +35,12 @@ public class Marca extends ModelCosmeDamiao
 		super();
 	}
 
+	public Marca(Integer id)
+	{
+		super();
+		this.id = id;
+	}
+
 	/**
 	 * Gets the id.
 	 *

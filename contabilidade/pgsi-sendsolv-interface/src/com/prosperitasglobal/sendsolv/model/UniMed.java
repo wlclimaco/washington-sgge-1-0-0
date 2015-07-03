@@ -24,6 +24,12 @@ public class UniMed extends ModelCosmeDamiao
 		super();
 	}
 
+	public UniMed(Integer id)
+	{
+		super();
+		this.id = id;
+	}
+
 	/**
 	 * Gets the id.
 	 *

@@ -18,9 +18,6 @@ public class Produto extends ModelCosmeDamiao
 	/** The description. */
 	private String cdBarras;
 
-	/** The numero. */
-	private Classificacao classificacao;
-
 	/** The nome. */
 	private Long dataCreate;
 
@@ -37,6 +34,9 @@ public class Produto extends ModelCosmeDamiao
 
 	private String fracao;
 
+	/** The numero. */
+	private Classificacao classificacao;
+
 	/** The top. */
 	private UniMed uniMed;
 
@@ -47,8 +47,6 @@ public class Produto extends ModelCosmeDamiao
 	private SubGrupo subGrupo;
 
 	private Marca marca;
-
-	private Double porcao;
 
 	private Double pesoBruto;
 
@@ -78,6 +76,12 @@ public class Produto extends ModelCosmeDamiao
 	public Produto()
 	{
 		super();
+	}
+
+	public Produto(Integer id)
+	{
+		super();
+		this.id = id;
 	}
 
 	/**
