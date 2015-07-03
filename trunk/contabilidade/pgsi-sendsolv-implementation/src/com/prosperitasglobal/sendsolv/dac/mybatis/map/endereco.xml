@@ -27,9 +27,9 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEndereco"/>
 	<association property="cidade"    column="cidade" select="CidadeMap.fetchById"  />
 	<association property="estado"    column="estado" select="EstadoMap.fetchById"  />
+	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEndereco"/>
   </resultMap>
 
   <!--

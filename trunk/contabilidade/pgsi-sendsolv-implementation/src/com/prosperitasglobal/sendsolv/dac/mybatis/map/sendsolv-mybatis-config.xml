@@ -21,6 +21,9 @@
 
 		<typeAlias alias="PagedInquiryRequest"     						 type="com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest"/>
 
+
+
+
 		<typeAlias alias="Arquivo"              					 type="com.prosperitasglobal.sendsolv.model.Arquivo"/>
 		<typeAlias alias="Banco"              				 		 type="com.prosperitasglobal.sendsolv.model.Banco"/>
 		<typeAlias alias="Beneficios"              				 	 type="com.prosperitasglobal.sendsolv.model.Beneficios"/>
@@ -118,16 +121,22 @@
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/cst.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/custo.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/custoItens.xml" />
+
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/documento.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/email.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/empresa.xml" />
+
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/endereco.xml" />
+
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/estado.xml" />
+
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/estoque.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/evento.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/field.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/financeiro.xml" />
+
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/formapg.xml" />
+
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/fornecedor.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/funcionario.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/grupo.xml" />
@@ -138,7 +147,7 @@
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/marca.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/nfStatus.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/notafiscal.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/notafiscalItens.xml" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/notaFiscalItens.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/orcamento.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/orcamentoItens.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/ordemServico.xml" />
