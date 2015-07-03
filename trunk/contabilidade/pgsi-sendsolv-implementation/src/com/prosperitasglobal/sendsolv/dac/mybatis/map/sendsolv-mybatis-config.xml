@@ -34,6 +34,7 @@
 		<typeAlias alias="ContasPagar"              				 type="com.prosperitasglobal.sendsolv.model.ContasPagar"/>
 		<typeAlias alias="ContasReceber"              				 type="com.prosperitasglobal.sendsolv.model.ContasReceber"/>
 		<typeAlias alias="Contato"              				 	 type="com.prosperitasglobal.sendsolv.model.Contato"/>
+		<typeAlias alias="ContatoItens"              			 	 type="com.prosperitasglobal.sendsolv.model.ContatoItens"/>
 		<typeAlias alias="Convenio"              				 	 type="com.prosperitasglobal.sendsolv.model.Convenio"/>
 		<typeAlias alias="Cst"              				 		 type="com.prosperitasglobal.sendsolv.model.Cst"/>
 		<typeAlias alias="Custo"              				 		 type="com.prosperitasglobal.sendsolv.model.Custo"/>

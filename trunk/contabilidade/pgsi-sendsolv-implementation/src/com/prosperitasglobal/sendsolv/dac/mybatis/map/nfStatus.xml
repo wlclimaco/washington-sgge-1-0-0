@@ -48,7 +48,7 @@
   <sql id="allNFStatusValues">
   		 #{id},
 		 #{idNota},
-		 #{status},
+		 #{status.id},
 		 #{dataMudanca},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
@@ -71,7 +71,7 @@
   <update id="updateNFStatus" parameterType="NFStatus">
     UPDATE nFStatus
     	<set>
-    		<if test="status!= null">status = #{status},</if>
+    		<if test="status.id!= null">status = #{status.id},</if>
 	    	<if test="dataMudanca!= null"> dataMudanca=#{dataMudanca},</if>
 			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>

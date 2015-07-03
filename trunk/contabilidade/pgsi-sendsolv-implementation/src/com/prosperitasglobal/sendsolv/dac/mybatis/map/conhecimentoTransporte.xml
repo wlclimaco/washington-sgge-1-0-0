@@ -72,8 +72,8 @@
 		 #{pesoLiquido},
 		 #{pesoBruto},
 		 #{transportador.id},
-		 #{marca},
-		 #{estado},
+		 #{marca.id},
+		 #{estado.id},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
@@ -105,8 +105,8 @@
 	    	<if test="pesoLiquido != null">pesoLiquido = #{pesoLiquido},</if>
 	    	<if test="pesoBruto != null"> pesoBruto=#{pesoBruto},</if>
 	    	<if test="transportador.id != null"> transportador=#{transportador.id},</if>
-	    	<if test="marca != null">marca = #{marca},</if>
-	    	<if test="estado != null"> estado=#{estado},</if>
+	    	<if test="marca.id != null">marca = #{marca.id},</if>
+	    	<if test="estado.id != null"> estado=#{estado.id},</if>
 			<if test="modifyDateUTC != null"> modify_date=#{modifyDateUTC},</if>
 			<if test="modifyUser != null"> modify_user=#{modifyUser}</if>
 		</set>

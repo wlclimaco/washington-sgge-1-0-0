@@ -27,7 +27,6 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-	<association property="status"    column="status" select="RegimeMap.fetchRegimeByEmpresa"  />
   </resultMap>
 
   <!--
