@@ -115,16 +115,16 @@
 		#{dataValidade},
 		#{comissao},
 		#{fracao},
-		#{porcao},
+		#{porcao.id},
 		#{pesoBruto},
 		#{pesoLiquido},
 		#{modoUso},
-		#{classificacao},
-		#{uniMed},
-		#{grupo},
-		#{subGrupo},
-		#{marca},
-		#{tributacao},
+		#{classificacao.id},
+		#{uniMed.id},
+		#{grupo.id},
+		#{subGrupo.id},
+		#{marca.id},
+		#{tributacao.id},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
