@@ -20,9 +20,13 @@ public class ModelCosmeDamiao extends QATModel
 
 	private TabelaEnum tabelaEnum;
 
+	private Integer processId;
+
 	private Integer emprId;
 
 	private String site;
+
+	private String userId;
 
 	private List<Status> statusList;
 
@@ -156,6 +160,38 @@ public class ModelCosmeDamiao extends QATModel
 		this.site = site;
 	}
 
+	/**
+	 * @return the processId
+	 */
+	public Integer getProcessId()
+	{
+		return processId;
+	}
+
+	/**
+	 * @return the userId
+	 */
+	public String getUserId()
+	{
+		return userId;
+	}
+
+	/**
+	 * @param userId the userId to set
+	 */
+	public void setUserId(String userId)
+	{
+		this.userId = userId;
+	}
+
+	/**
+	 * @param processId the processId to set
+	 */
+	public void setProcessId(Integer processId)
+	{
+		this.processId = processId;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -167,10 +203,11 @@ public class ModelCosmeDamiao extends QATModel
 				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
 				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
 				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
-				+ ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
-				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
-				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", toString()=" + super.toString() + ", getClass()="
-				+ getClass() + ", hashCode()=" + hashCode() + "]";
+				+ ", getProcessId()=" + getProcessId() + ", getUserId()=" + getUserId() + ", getModelAction()="
+				+ getModelAction() + ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()="
+				+ getCreateDateUTC() + ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()="
+				+ getModifyDateUTC() + ", toString()=" + super.toString() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + "]";
 	}
 
 }

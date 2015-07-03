@@ -2,6 +2,9 @@ package com.prosperitasglobal.sendsolv.dac;
 
 import java.util.List;
 
+import com.prosperitasglobal.sendsolv.model.Cidade;
+import com.qat.framework.model.response.InternalResultsResponse;
+
 /**
  * The Interface ICidadeDAC.
  */

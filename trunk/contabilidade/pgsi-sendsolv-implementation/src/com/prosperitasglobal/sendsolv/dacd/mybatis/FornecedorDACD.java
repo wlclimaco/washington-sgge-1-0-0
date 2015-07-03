@@ -37,7 +37,7 @@ public final class FornecedorDACD extends SqlSessionDaoSupport
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, IPessoaDAC fornecedorDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
 			Integer empId,
-			String UserId)
+			String UserId, Integer processId)
 	{
 		Integer count = 0;
 		// // First Maintain Empresa

@@ -2,7 +2,15 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.List;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
 import com.prosperitasglobal.sendsolv.dac.IEstadoDAC;
+import com.prosperitasglobal.sendsolv.model.Estado;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class CommonBusinessObjectsDACImpl.
@@ -81,22 +89,11 @@ public class EstadoDACImpl extends SqlSessionDaoSupport implements IEstadoDAC
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.cbof.dac.IEstadoDAC#deleteBusinessEstado(com.prosperitasglobal.cbof.model.Estado,
-	 * com.qat.framework.model.response.InternalResultsResponse)
-	 */
-	@Override
-	public Integer deleteBusinessEstado(Estado estado, InternalResultsResponse<?> response)
-	{
-		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, estado, response);
-	}
-
-	/*
-	 * (non-Javadoc)
 	 * @see com.prosperitasglobal.cbof.dac.IEstadoDAC#deletePersonEstado(com.prosperitasglobal.cbof.model.Estado,
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer deletePersonEstado(Estado estado, InternalResultsResponse<?> response)
+	public Integer deleteEstado(Estado estado, InternalResultsResponse<?> response)
 	{
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_PERSON_CONTACT, estado, response);
 	}
@@ -135,7 +132,6 @@ public class EstadoDACImpl extends SqlSessionDaoSupport implements IEstadoDAC
 	 * @see com.prosperitasglobal.cbof.dac.IEstadoDAC#maintainEstadoAssociations(java.util.List, java.lang.Integer,
 	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
 	 */
-	@Override
 	public Integer maintainEstadoAssociations(List<Estado> estadoList, Integer parentId, String associateStatement,
 			InternalResultsResponse<?> response)
 	{
@@ -164,7 +160,7 @@ public class EstadoDACImpl extends SqlSessionDaoSupport implements IEstadoDAC
 					count += updateEstado(estado, response);
 					break;
 				case DELETE:
-					count += deletePersonEstado(estado, response);
+					count += deleteEstado(estado, response);
 					break;
 				default:
 					if (LOG.isDebugEnabled())
@@ -175,6 +171,13 @@ public class EstadoDACImpl extends SqlSessionDaoSupport implements IEstadoDAC
 			}
 		}
 		return count;
+	}
+
+	@Override
+	public InternalResultsResponse<Estado> fetchEstadoById(Integer id)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

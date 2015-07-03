@@ -2,7 +2,15 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.List;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
 import com.prosperitasglobal.sendsolv.dac.ICidadeDAC;
+import com.prosperitasglobal.sendsolv.model.Cidade;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class CommonBusinessObjectsDACImpl.
@@ -96,7 +104,7 @@ public class CidadeDACImpl extends SqlSessionDaoSupport implements ICidadeDAC
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer deletePersonCidade(Cidade cidade, InternalResultsResponse<?> response)
+	public Integer deleteCidade(Cidade cidade, InternalResultsResponse<?> response)
 	{
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_PERSON_CONTACT, cidade, response);
 	}

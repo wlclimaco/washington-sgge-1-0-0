@@ -42,51 +42,37 @@ public class Process extends ModelCosmeDamiao
 	}
 
 	/**
-	 * @return the codigo
+	 * @return the tabela
 	 */
-	public String getCodigo()
+	public TabelaEnum getTabela()
 	{
-		return codigo;
+		return tabela;
 	}
 
 	/**
-	 * @param codigo the codigo to set
+	 * @param tabela the tabela to set
 	 */
-	public void setCodigo(String codigo)
+	public void setTabela(TabelaEnum tabela)
 	{
-		this.codigo = codigo;
+		this.tabela = tabela;
 	}
 
-	/**
-	 * @return the valor
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
 	 */
-	public String getValor()
+	@Override
+	public String toString()
 	{
-		return valor;
-	}
-
-	/**
-	 * @param valor the valor to set
-	 */
-	public void setValor(String valor)
-	{
-		this.valor = valor;
-	}
-
-	/**
-	 * @return the descricao
-	 */
-	public String getDescricao()
-	{
-		return descricao;
-	}
-
-	/**
-	 * @param descricao the descricao to set
-	 */
-	public void setDescricao(String descricao)
-	{
-		this.descricao = descricao;
+		return "Process [getId()=" + getId() + ", getTabela()=" + getTabela() + ", getTabelaEnumValue()="
+				+ getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()="
+				+ getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()=" + getType()
+				+ ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()="
+				+ getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite() + ", toString()="
+				+ super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
+				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
+				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + "]";
 	}
 
 }

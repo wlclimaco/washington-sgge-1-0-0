@@ -39,6 +39,7 @@ import com.prosperitasglobal.sendsolv.dacd.mybatis.SubGrupoDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.TributacaoDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.UniMedDACD;
 import com.prosperitasglobal.sendsolv.model.AcaoEnum;
+import com.prosperitasglobal.sendsolv.model.Process;
 import com.prosperitasglobal.sendsolv.model.Produto;
 import com.prosperitasglobal.sendsolv.model.Status;
 import com.prosperitasglobal.sendsolv.model.StatusEnum;
@@ -434,6 +435,18 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 		Integer insertCount = 0;
 		InternalResultsResponse<Produto> response = new InternalResultsResponse<Produto>();
 
+		Process process = new Process();
+		process.setEmprId(produto.getEmprId());
+		process.setTabela(TabelaEnum.CLIENTE);
+		process.setUserId(produto.getUserId());
+		process.setAcaoType(AcaoEnum.UPDATE);
+
+		Integer processId = 0;
+
+		processId = (Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), "ProcessMap.insertProcess", process);
+
+		produto.setProcessId(processId);
+
 		// First insert the root
 		// Is successful the unique-id will be populated back into the object.
 		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), PRODUTO_STMT_INSERT, produto, response);
@@ -448,79 +461,79 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 						null,
 						null,
 						null, getClassificacaoDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
-						produto.getCreateUser());
+						produto.getCreateUser(), processId);
 
 		insertCount +=
 				UniMedDACD.maintainUniMedAssociations(produto.getUniMed(), response, insertCount, null,
 						null,
 						null, getUniMedDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
-						produto.getCreateUser());
+						produto.getCreateUser(), processId);
 
 		insertCount +=
 				GrupoDACD.maintainGrupoAssociations(produto.getGrupo(), response, insertCount, null,
 						null,
 						null, getGrupoDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
-						produto.getCreateUser());
+						produto.getCreateUser(), processId);
 
 		insertCount +=
 				SubGrupoDACD.maintainSubGrupoAssociations(produto.getSubGrupo(), response, insertCount, null,
 						null,
 						null, getSubGrupoDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
-						produto.getCreateUser());
+						produto.getCreateUser(), processId);
 
 		insertCount +=
 				MarcaDACD.maintainMarcaAssociations(produto.getMarca(), response, insertCount, null,
 						null,
 						null, getMarcaDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
-						produto.getCreateUser());
+						produto.getCreateUser(), processId);
 
 		insertCount +=
 				TributacaoDACD.maintainTributacaoAssociations(produto.getTributacao(), response, insertCount, null,
 						null,
 						null, getTributacaoDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
-						produto.getCreateUser());
+						produto.getCreateUser(), processId);
 
 		insertCount +=
 				EstoqueDACD.maintainEstoqueAssociations(produto.getEstoqueList(), response, insertCount, null,
 						null,
 						null, getEstoqueDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
-						produto.getCreateUser());
+						produto.getCreateUser(), processId);
 
 		insertCount +=
 				PrecoDACD.maintainTabPrecoAssociations(produto.getPrecoList(), response, insertCount, null,
 						null,
 						null, getTabPrecoDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
-						produto.getCreateUser());
+						produto.getCreateUser(), processId);
 		insertCount +=
 				CustoDACD.maintainCustoAssociations(produto.getCustoList(), response, insertCount, null,
 						null,
 						null, getCustoDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
-						produto.getCreateUser());
+						produto.getCreateUser(), processId);
 		insertCount +=
 				PorcaoDACD.maintainPorcaoAssociations(produto.getPorcaoList(), response, insertCount, null,
 						null,
 						null, getPorcaoDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
-						produto.getCreateUser());
+						produto.getCreateUser(), processId);
 		insertCount +=
 				RentabilidadeDACD.maintainRentabilidadeAssociations(produto.getRentabilidadeList(), response,
 						insertCount, null,
 						null,
 						null, getRentabilidadeDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
-						produto.getCreateUser());
+						produto.getCreateUser(), processId);
 
 		insertCount +=
 				CfopDACD.maintainCfopAssociations(produto.getCfopList(), response,
 						insertCount, null,
 						null,
 						null, getCfopDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
-						produto.getCreateUser());
+						produto.getCreateUser(), processId);
 
 		insertCount +=
 				FornecedorDACD.maintainFornecedorAssociations(produto.getFornecedorList(), response,
 						insertCount, null,
 						null,
 						null, getFornecedorDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
-						produto.getCreateUser());
+						produto.getCreateUser(), processId);
 
 		if (insertCount > 0)
 		{
@@ -530,7 +543,7 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 			insertCount =
 					StatusDACD.maintainStatusAssociations(statusList, response, produto.getId(), null, AcaoEnum.INSERT,
 							produto.getCreateUser(), produto.getEmprId(), TabelaEnum.EMPRESA, getStatusDAC(),
-							getHistoricoDAC());
+							getHistoricoDAC(), processId);
 
 		}
 
@@ -555,6 +568,18 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 		Integer updateCount = 0;
 		InternalResultsResponse<Produto> response = new InternalResultsResponse<Produto>();
 
+		Process process = new Process();
+		process.setEmprId(produto.getEmprId());
+		process.setTabela(TabelaEnum.CLIENTE);
+		process.setUserId(produto.getUserId());
+		process.setAcaoType(AcaoEnum.UPDATE);
+
+		Integer processId = 0;
+
+		processId = (Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), "ProcessMap.insertProcess", process);
+
+		produto.setProcessId(processId);
+
 		// First update the root if necessary.
 		if (!ValidationUtil.isNull(produto.getModelAction())
 				&& (produto.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
@@ -574,80 +599,80 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 						null,
 						null,
 						null, getClassificacaoDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
-						produto.getCreateUser());
+						produto.getCreateUser(), processId);
 
 		updateCount +=
 				UniMedDACD.maintainUniMedAssociations(produto.getUniMed(), response, produto.getId(), null,
 						null,
 						null, getUniMedDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
-						produto.getCreateUser());
+						produto.getCreateUser(), processId);
 
 		updateCount +=
 				GrupoDACD.maintainGrupoAssociations(produto.getGrupo(), response, produto.getId(), null,
 						null,
 						null, getGrupoDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
-						produto.getCreateUser());
+						produto.getCreateUser(), processId);
 
 		updateCount +=
 				SubGrupoDACD.maintainSubGrupoAssociations(produto.getSubGrupo(), response, produto.getId(), null,
 						null,
 						null, getSubGrupoDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
-						produto.getCreateUser());
+						produto.getCreateUser(), processId);
 
 		updateCount +=
 				MarcaDACD.maintainMarcaAssociations(produto.getMarca(), response, produto.getId(), null,
 						null,
 						null, getMarcaDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
-						produto.getCreateUser());
+						produto.getCreateUser(), processId);
 
 		updateCount +=
 				TributacaoDACD.maintainTributacaoAssociations(produto.getTributacao(), response, produto.getId(),
 						null,
 						null,
 						null, getTributacaoDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
-						produto.getCreateUser());
+						produto.getCreateUser(), processId);
 
 		updateCount +=
 				EstoqueDACD.maintainEstoqueAssociations(produto.getEstoqueList(), response, produto.getId(), null,
 						null,
 						null, getEstoqueDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
-						produto.getCreateUser());
+						produto.getCreateUser(), processId);
 
 		updateCount +=
 				PrecoDACD.maintainTabPrecoAssociations(produto.getPrecoList(), response, produto.getId(), null,
 						null,
 						null, getTabPrecoDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
-						produto.getCreateUser());
+						produto.getCreateUser(), processId);
 		updateCount +=
 				CustoDACD.maintainCustoAssociations(produto.getCustoList(), response, produto.getId(), null,
 						null,
 						null, getCustoDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
-						produto.getCreateUser());
+						produto.getCreateUser(), processId);
 		updateCount +=
 				PorcaoDACD.maintainPorcaoAssociations(produto.getPorcaoList(), response, produto.getId(), null,
 						null,
 						null, getPorcaoDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
-						produto.getCreateUser());
+						produto.getCreateUser(), processId);
 		updateCount +=
 				RentabilidadeDACD.maintainRentabilidadeAssociations(produto.getRentabilidadeList(), response,
 						produto.getId(), null,
 						null,
 						null, getRentabilidadeDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
-						produto.getCreateUser());
+						produto.getCreateUser(), processId);
 
 		updateCount +=
 				CfopDACD.maintainCfopAssociations(produto.getCfopList(), response,
 						produto.getId(), null,
 						null,
 						null, getCfopDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
-						produto.getCreateUser());
+						produto.getCreateUser(), processId);
 
 		updateCount +=
 				FornecedorDACD.maintainFornecedorAssociations(produto.getFornecedorList(), response,
 						produto.getId(), null,
 						null,
 						null, getFornecedorDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
-						produto.getCreateUser());
+						produto.getCreateUser(), processId);
 
 		if (updateCount > 0)
 		{
@@ -657,7 +682,7 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 			updateCount =
 					StatusDACD.maintainStatusAssociations(statusList, response, produto.getId(), null, AcaoEnum.INSERT,
 							produto.getCreateUser(), produto.getEmprId(), TabelaEnum.EMPRESA, getStatusDAC(),
-							getHistoricoDAC());
+							getHistoricoDAC(), processId);
 
 		}
 

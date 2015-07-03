@@ -41,7 +41,7 @@ public final class UniMedDACD extends SqlSessionDaoSupport
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, IUniMedDAC uniMedDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
 			Integer empId,
-			String UserId)
+			String UserId, Integer processId)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
@@ -69,7 +69,8 @@ public final class UniMedDACD extends SqlSessionDaoSupport
 					List<Status> statusList = new ArrayList<Status>();
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, count, null,
-									AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC);
+									AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
+									processId);
 				}
 				break;
 			case UPDATE:
@@ -80,7 +81,7 @@ public final class UniMedDACD extends SqlSessionDaoSupport
 							StatusDACD
 							.maintainStatusAssociations(uniMed.getStatusList(), response, uniMed.getId(),
 									null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
-									historicoDAC);
+									historicoDAC, processId);
 				}
 				break;
 			case DELETE:
@@ -90,7 +91,7 @@ public final class UniMedDACD extends SqlSessionDaoSupport
 				List<Status> statusList = new ArrayList<Status>();
 				count =
 						StatusDACD.maintainStatusAssociations(statusList, response, uniMed.getId(), null,
-								AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC);
+								AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC, processId);
 
 				break;
 		}

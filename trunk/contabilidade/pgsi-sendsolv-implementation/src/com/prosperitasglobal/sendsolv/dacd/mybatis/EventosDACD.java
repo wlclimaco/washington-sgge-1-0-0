@@ -41,7 +41,7 @@ public final class EventosDACD extends SqlSessionDaoSupport
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, IEventosDAC cnaeDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
 			Integer empId,
-			String UserId)
+			String UserId, Integer processId)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
@@ -71,7 +71,8 @@ public final class EventosDACD extends SqlSessionDaoSupport
 						List<Status> statusList = new ArrayList<Status>();
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.EVENTOS, statusDAC, historicoDAC);
+										AcaoEnum.INSERT, UserId, empId, TabelaEnum.EVENTOS, statusDAC, historicoDAC,
+										processId);
 					}
 					break;
 				case UPDATE:
@@ -81,7 +82,7 @@ public final class EventosDACD extends SqlSessionDaoSupport
 						count =
 								StatusDACD.maintainStatusAssociations(cnae.getStatusList(), response, cnae.getId(),
 										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.EVENTOS, statusDAC,
-										historicoDAC);
+										historicoDAC, processId);
 					}
 					break;
 				case DELETE:
@@ -91,7 +92,8 @@ public final class EventosDACD extends SqlSessionDaoSupport
 					List<Status> statusList = new ArrayList<Status>();
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, cnae.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.EVENTOS, statusDAC, historicoDAC);
+									AcaoEnum.DELETE, UserId, empId, TabelaEnum.EVENTOS, statusDAC, historicoDAC,
+									processId);
 
 					break;
 			}

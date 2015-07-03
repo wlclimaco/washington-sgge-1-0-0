@@ -40,6 +40,7 @@ import com.prosperitasglobal.sendsolv.dacd.mybatis.TelefoneDACD;
 import com.prosperitasglobal.sendsolv.model.AcaoEnum;
 import com.prosperitasglobal.sendsolv.model.Cliente;
 import com.prosperitasglobal.sendsolv.model.Fornecedor;
+import com.prosperitasglobal.sendsolv.model.Process;
 import com.prosperitasglobal.sendsolv.model.Status;
 import com.prosperitasglobal.sendsolv.model.StatusEnum;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
@@ -354,6 +355,18 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		Integer insertCount = 0;
 		InternalResultsResponse<Cliente> response = new InternalResultsResponse<Cliente>();
 
+		Process process = new Process();
+		process.setEmprId(pessoa.getEmprId());
+		process.setTabela(TabelaEnum.EMPRESA);
+		process.setUserId(pessoa.getUserId());
+		process.setAcaoType(AcaoEnum.INSERT);
+
+		Integer processId = 0;
+
+		processId = (Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), "ProcessMap.insertProcess", process);
+
+		pessoa.setProcessId(processId);
+
 		// First insert the root
 		// Is successful the unique-id will be populated back into the object.
 		insertCount =
@@ -367,53 +380,53 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		insertCount +=
 				EnderecoDACD.maintainEnderecoAssociations(pessoa.getEnderecos(), response, insertCount, null, null,
 						null, getEnderecoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		insertCount +=
 				EmailDACD.maintainEmailAssociations(pessoa.getEmails(), response, insertCount, null, null,
 						null, getEmailDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		insertCount +=
 				TelefoneDACD.maintainTelefoneAssociations(pessoa.getTelefones(), response, insertCount, null, null,
 						null, getTelefoneDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		insertCount +=
 				DocumentosDACD.maintainDocumentoAssociations(pessoa.getDocumentos(), response, insertCount, null,
 						null,
 						null, getDocumentoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		insertCount +=
 				ProfissaoDACD.maintainProfissaoAssociations(pessoa.getProfissao(), response, insertCount, null,
 						null,
 						null, getProfisaoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		insertCount +=
 				ConvenioDACD.maintainConvenioAssociations(pessoa.getConvenioList(), response, insertCount, null,
 						null,
 						null, getConvenioDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		insertCount +=
 				BancoDACD.maintainBancoAssociations(pessoa.getBancos(), response, insertCount, null,
 						null,
 						null, getBancosDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		insertCount +=
 				ContatoDACD.maintainContatoAssociations(pessoa.getContatoList(), response, insertCount, null,
 						null,
 						null, getContatoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		insertCount +=
 				NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
 						null,
 						null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		if (insertCount > 0)
 		{
@@ -423,7 +436,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 			insertCount =
 					StatusDACD.maintainStatusAssociations(statusList, response, pessoa.getId(), null, AcaoEnum.INSERT,
 							pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.EMPRESA, getStatusDAC(),
-							getHistoricoDAC());
+							getHistoricoDAC(), processId);
 
 		}
 
@@ -442,6 +455,18 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		Integer updateCount = 0;
 		InternalResultsResponse<Cliente> response = new InternalResultsResponse<Cliente>();
 
+		Process process = new Process();
+		process.setEmprId(pessoa.getEmprId());
+		process.setTabela(TabelaEnum.CLIENTE);
+		process.setUserId(pessoa.getUserId());
+		process.setAcaoType(AcaoEnum.UPDATE);
+
+		Integer processId = 0;
+
+		processId = (Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), "ProcessMap.insertProcess", process);
+
+		pessoa.setProcessId(processId);
+
 		// First update the root if necessary.
 		if (!ValidationUtil.isNull(pessoa.getModelAction())
 				&& (pessoa.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
@@ -459,52 +484,52 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		updateCount +=
 				EnderecoDACD.maintainEnderecoAssociations(pessoa.getEnderecos(), response, pessoa.getId(), null, null,
 						null, getEnderecoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		updateCount +=
 				EmailDACD.maintainEmailAssociations(pessoa.getEmails(), response, pessoa.getId(), null, null,
 						null, getEmailDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		updateCount +=
 				TelefoneDACD.maintainTelefoneAssociations(pessoa.getTelefones(), response, pessoa.getId(), null, null,
 						null, getTelefoneDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		updateCount +=
 				DocumentosDACD.maintainDocumentoAssociations(pessoa.getDocumentos(), response, pessoa.getId(), null,
 						null,
 						null, getDocumentoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 		updateCount +=
 				ProfissaoDACD.maintainProfissaoAssociations(pessoa.getProfissao(), response, pessoa.getId(), null,
 						null,
 						null, getProfisaoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		updateCount +=
 				ConvenioDACD.maintainConvenioAssociations(pessoa.getConvenioList(), response, pessoa.getId(), null,
 						null,
 						null, getConvenioDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		updateCount +=
 				BancoDACD.maintainBancoAssociations(pessoa.getBancos(), response, pessoa.getId(), null,
 						null,
 						null, getBancosDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		updateCount +=
 				ContatoDACD.maintainContatoAssociations(pessoa.getContatoList(), response, pessoa.getId(), null,
 						null,
 						null, getContatoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		updateCount +=
 				NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, pessoa.getId(), null,
 						null,
 						null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		if (updateCount > 0)
 		{
@@ -512,7 +537,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 					StatusDACD.maintainStatusAssociations(pessoa.getStatusList(), response, pessoa.getId(), null,
 							AcaoEnum.UPDATE,
 							pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.CLIENTE, getStatusDAC(),
-							getHistoricoDAC());
+							getHistoricoDAC(), processId);
 
 		}
 
@@ -530,10 +555,18 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 	{
 		Integer updateCount = 0;
 		InternalResponse response = new InternalResponse();
-		// QATMyBatisDacHelper.doRemove(getSqlSession(), EMPRESA_STMT_DELETE, pessoa, response);
-		// updateCount +=
-		// EnderecoDACD.maintainHistoricoAssociations(pessoa.getEStatus, response, insertCount, null, null,
-		// null);
+
+		Process process = new Process();
+		process.setEmprId(pessoa.getEmprId());
+		process.setTabela(TabelaEnum.CLIENTE);
+		process.setUserId(pessoa.getUserId());
+		process.setAcaoType(AcaoEnum.UPDATE);
+
+		Integer processId = 0;
+
+		processId = (Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), "ProcessMap.insertProcess", process);
+
+		pessoa.setProcessId(processId);
 
 		Status status = new Status();
 		status.setStatus(StatusEnum.INACTIVE);
@@ -543,7 +576,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
 						null, AcaoEnum.DELETE,
 						pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.CLIENTE, getStatusDAC(),
-						getHistoricoDAC());
+						getHistoricoDAC(), processId);
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
 		{
@@ -587,6 +620,18 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		Integer insertCount = 0;
 		InternalResultsResponse<Fornecedor> response = new InternalResultsResponse<Fornecedor>();
 
+		Process process = new Process();
+		process.setEmprId(pessoa.getEmprId());
+		process.setTabela(TabelaEnum.FORNECEDOR);
+		process.setUserId(pessoa.getUserId());
+		process.setAcaoType(AcaoEnum.UPDATE);
+
+		Integer processId = 0;
+
+		processId = (Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), "ProcessMap.insertProcess", process);
+
+		pessoa.setProcessId(processId);
+
 		// First insert the root
 		// Is successful the unique-id will be populated back into the object.
 		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), EMPRESA_STMT_INSERT, pessoa, response);
@@ -598,54 +643,54 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		insertCount +=
 				EnderecoDACD.maintainEnderecoAssociations(pessoa.getEnderecos(), response, insertCount, null, null,
 						null, getEnderecoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		insertCount +=
 				EmailDACD.maintainEmailAssociations(pessoa.getEmails(), response, insertCount, null, null,
 						null, getEmailDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		insertCount +=
 				TelefoneDACD.maintainTelefoneAssociations(pessoa.getTelefones(), response, insertCount, null, null,
 						null, getTelefoneDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		insertCount +=
 				DocumentosDACD.maintainDocumentoAssociations(pessoa.getDocumentos(), response, insertCount, null,
 						null,
 						null, getDocumentoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		insertCount +=
 				BancoDACD.maintainBancoAssociations(pessoa.getBancos(), response, insertCount, null,
 						null,
 						null, getBancosDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		insertCount +=
 				ContatoDACD.maintainContatoAssociations(pessoa.getContatoList(), response, insertCount, null,
 						null,
 						null, getContatoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		insertCount +=
 				NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
 						null,
 						null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		insertCount +=
 				FormaPagamentoDACD.maintainFormaPgAssociations(pessoa.getFormaPagamentoList(), response, insertCount,
 						null,
 						null,
 						null, getFormaPagamentoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		insertCount +=
 				CfopDACD.maintainCfopAssociations(pessoa.getListCfops(), response, pessoa.getId(), null,
 						null,
 						null, getCfopDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		if (insertCount > 0)
 		{
@@ -655,7 +700,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 			insertCount =
 					StatusDACD.maintainStatusAssociations(statusList, response, pessoa.getId(), null, AcaoEnum.INSERT,
 							pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.FORNECEDOR, getStatusDAC(),
-							getHistoricoDAC());
+							getHistoricoDAC(), processId);
 
 		}
 		// Finally, if something was inserted then add the Fornecedor to the result.
@@ -672,6 +717,18 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 	{
 		Integer updateCount = 0;
 		InternalResultsResponse<Fornecedor> response = new InternalResultsResponse<Fornecedor>();
+
+		Process process = new Process();
+		process.setEmprId(pessoa.getEmprId());
+		process.setTabela(TabelaEnum.FORNECEDOR);
+		process.setUserId(pessoa.getUserId());
+		process.setAcaoType(AcaoEnum.UPDATE);
+
+		Integer processId = 0;
+
+		processId = (Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), "ProcessMap.insertProcess", process);
+
+		pessoa.setProcessId(processId);
 
 		// First update the root if necessary.
 		if (!ValidationUtil.isNull(pessoa.getModelAction())
@@ -691,41 +748,41 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		updateCount +=
 				EnderecoDACD.maintainEnderecoAssociations(pessoa.getEnderecos(), response, pessoa.getId(), null, null,
 						null, getEnderecoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		updateCount +=
 				EmailDACD.maintainEmailAssociations(pessoa.getEmails(), response, pessoa.getId(), null, null,
 						null, getEmailDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		updateCount +=
 				TelefoneDACD.maintainTelefoneAssociations(pessoa.getTelefones(), response, pessoa.getId(), null, null,
 						null, getTelefoneDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		updateCount +=
 				DocumentosDACD.maintainDocumentoAssociations(pessoa.getDocumentos(), response, pessoa.getId(), null,
 						null,
 						null, getDocumentoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		updateCount +=
 				BancoDACD.maintainBancoAssociations(pessoa.getBancos(), response, pessoa.getId(), null,
 						null,
 						null, getBancosDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		updateCount +=
 				ContatoDACD.maintainContatoAssociations(pessoa.getContatoList(), response, pessoa.getId(), null,
 						null,
 						null, getContatoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		updateCount +=
 				NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, pessoa.getId(), null,
 						null,
 						null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		updateCount +=
 				FormaPagamentoDACD.maintainFormaPgAssociations(pessoa.getFormaPagamentoList(), response,
@@ -733,13 +790,13 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 						null,
 						null,
 						null, getFormaPagamentoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		updateCount +=
 				CfopDACD.maintainCfopAssociations(pessoa.getListCfops(), response, pessoa.getId(), null,
 						null,
 						null, getCfopDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		if (updateCount > 0)
 		{
@@ -748,7 +805,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 					StatusDACD.maintainStatusAssociations(pessoa.getStatusList(), response, pessoa.getId(), null,
 							AcaoEnum.INSERT,
 							pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.FORNECEDOR, getStatusDAC(),
-							getHistoricoDAC());
+							getHistoricoDAC(), processId);
 
 		}
 
@@ -767,6 +824,18 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		Integer updateCount = 0;
 		InternalResponse response = new InternalResponse();
 
+		Process process = new Process();
+		process.setEmprId(pessoa.getEmprId());
+		process.setTabela(TabelaEnum.FORNECEDOR);
+		process.setUserId(pessoa.getUserId());
+		process.setAcaoType(AcaoEnum.DELETE);
+
+		Integer processId = 0;
+
+		processId = (Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), "ProcessMap.insertProcess", process);
+
+		pessoa.setProcessId(processId);
+
 		Status status = new Status();
 		status.setStatus(StatusEnum.INACTIVE);
 		List<Status> statusList = new ArrayList<Status>();
@@ -775,7 +844,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
 						null, AcaoEnum.DELETE,
 						pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.FORNECEDOR, getStatusDAC(),
-						getHistoricoDAC());
+						getHistoricoDAC(), processId);
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
@@ -821,6 +890,18 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		Integer insertCount = 0;
 		InternalResultsResponse<Transportador> response = new InternalResultsResponse<Transportador>();
 
+		Process process = new Process();
+		process.setEmprId(pessoa.getEmprId());
+		process.setTabela(TabelaEnum.TRANSPORTADOR);
+		process.setUserId(pessoa.getUserId());
+		process.setAcaoType(AcaoEnum.UPDATE);
+
+		Integer processId = 0;
+
+		processId = (Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), "ProcessMap.insertProcess", process);
+
+		pessoa.setProcessId(processId);
+
 		// First insert the root
 		// Is successful the unique-id will be populated back into the object.
 		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), EMPRESA_STMT_INSERT, pessoa, response);
@@ -833,48 +914,48 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		insertCount +=
 				EnderecoDACD.maintainEnderecoAssociations(pessoa.getEnderecos(), response, insertCount, null, null,
 						null, getEnderecoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		insertCount +=
 				EmailDACD.maintainEmailAssociations(pessoa.getEmails(), response, insertCount, null, null,
 						null, getEmailDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		insertCount +=
 				TelefoneDACD.maintainTelefoneAssociations(pessoa.getTelefones(), response, insertCount, null, null,
 						null, getTelefoneDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		insertCount +=
 				DocumentosDACD.maintainDocumentoAssociations(pessoa.getDocumentos(), response, insertCount, null,
 						null,
 						null, getDocumentoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		insertCount +=
 				BancoDACD.maintainBancoAssociations(pessoa.getBancos(), response, insertCount, null,
 						null,
 						null, getBancosDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		insertCount +=
 				ContatoDACD.maintainContatoAssociations(pessoa.getContatoList(), response, insertCount, null,
 						null,
 						null, getContatoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		insertCount +=
 				NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, insertCount, null,
 						null,
 						null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		insertCount +=
 				FormaPagamentoDACD.maintainFormaPgAssociations(pessoa.getFormaPagamentoList(), response, insertCount,
 						null,
 						null,
 						null, getFormaPagamentoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		if (insertCount > 0)
 		{
@@ -884,7 +965,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 			insertCount =
 					StatusDACD.maintainStatusAssociations(statusList, response, pessoa.getId(), null, AcaoEnum.INSERT,
 							pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.TRANSPORTADOR, getStatusDAC(),
-							getHistoricoDAC());
+							getHistoricoDAC(), processId);
 
 		}
 
@@ -903,6 +984,18 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		Integer updateCount = 0;
 		InternalResultsResponse<Transportador> response = new InternalResultsResponse<Transportador>();
 
+		Process process = new Process();
+		process.setEmprId(pessoa.getEmprId());
+		process.setTabela(TabelaEnum.CLIENTE);
+		process.setUserId(pessoa.getUserId());
+		process.setAcaoType(AcaoEnum.UPDATE);
+
+		Integer processId = 0;
+
+		processId = (Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), "ProcessMap.insertProcess", process);
+
+		pessoa.setProcessId(processId);
+
 		// First update the root if necessary.
 		if (!ValidationUtil.isNull(pessoa.getModelAction())
 				&& (pessoa.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
@@ -920,41 +1013,41 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		updateCount +=
 				EnderecoDACD.maintainEnderecoAssociations(pessoa.getEnderecos(), response, pessoa.getId(), null, null,
 						null, getEnderecoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		updateCount +=
 				EmailDACD.maintainEmailAssociations(pessoa.getEmails(), response, pessoa.getId(), null, null,
 						null, getEmailDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		updateCount +=
 				TelefoneDACD.maintainTelefoneAssociations(pessoa.getTelefones(), response, pessoa.getId(), null, null,
 						null, getTelefoneDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		updateCount +=
 				DocumentosDACD.maintainDocumentoAssociations(pessoa.getDocumentos(), response, pessoa.getId(), null,
 						null,
 						null, getDocumentoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		updateCount +=
 				BancoDACD.maintainBancoAssociations(pessoa.getBancos(), response, pessoa.getId(), null,
 						null,
 						null, getBancosDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		updateCount +=
 				ContatoDACD.maintainContatoAssociations(pessoa.getContatoList(), response, pessoa.getId(), null,
 						null,
 						null, getContatoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		updateCount +=
 				NotesDACD.maintainNoteAssociations(pessoa.getNotes(), response, pessoa.getId(), null,
 						null,
 						null, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		updateCount +=
 				FormaPagamentoDACD.maintainFormaPgAssociations(pessoa.getFormaPagamentoList(), response,
@@ -962,7 +1055,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 						null,
 						null,
 						null, getFormaPagamentoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser());
+						pessoa.getCreateUser(), processId);
 
 		if (updateCount > 0)
 		{
@@ -972,7 +1065,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 			updateCount =
 					StatusDACD.maintainStatusAssociations(statusList, response, pessoa.getId(), null, AcaoEnum.INSERT,
 							pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.EMPRESA, getStatusDAC(),
-							getHistoricoDAC());
+							getHistoricoDAC(), processId);
 
 		}
 		// Finally, if something was updated then add the Person to the result.
@@ -989,6 +1082,19 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 	{
 		Integer updateCount = 0;
 		InternalResponse response = new InternalResponse();
+
+		Process process = new Process();
+		process.setEmprId(pessoa.getEmprId());
+		process.setTabela(TabelaEnum.CLIENTE);
+		process.setUserId(pessoa.getUserId());
+		process.setAcaoType(AcaoEnum.UPDATE);
+
+		Integer processId = 0;
+
+		processId = (Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), "ProcessMap.insertProcess", process);
+
+		pessoa.setProcessId(processId);
+
 		Status status = new Status();
 		status.setStatus(StatusEnum.INACTIVE);
 		List<Status> statusList = new ArrayList<Status>();
@@ -997,7 +1103,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
 						null, AcaoEnum.DELETE,
 						pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.TRANSPORTADOR, getStatusDAC(),
-						getHistoricoDAC());
+						getHistoricoDAC(), processId);
 		return response;
 	}
 

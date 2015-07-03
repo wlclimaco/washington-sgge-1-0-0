@@ -1,5 +1,7 @@
 package com.prosperitasglobal.sendsolv.model;
 
+import java.util.List;
+
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -13,7 +15,7 @@ public class Porcao extends ModelCosmeDamiao
 	private Integer idproduto;
 
 	/** The type of an account. */
-	private LIst<PorcaoItem> porcaoItens;
+	private List<PorcaoItem> porcaoItens;
 
 	private Double valor;
 
@@ -64,7 +66,7 @@ public class Porcao extends ModelCosmeDamiao
 	/**
 	 * @return the porcaoItens
 	 */
-	public PorcaoItem getPorcaoItens()
+	public List<PorcaoItem> getPorcaoItens()
 	{
 		return porcaoItens;
 	}
@@ -72,7 +74,7 @@ public class Porcao extends ModelCosmeDamiao
 	/**
 	 * @param porcaoItens the porcaoItens to set
 	 */
-	public void setPorcaoItens(PorcaoItem porcaoItens)
+	public void setPorcaoItens(List<PorcaoItem> porcaoItens)
 	{
 		this.porcaoItens = porcaoItens;
 	}
