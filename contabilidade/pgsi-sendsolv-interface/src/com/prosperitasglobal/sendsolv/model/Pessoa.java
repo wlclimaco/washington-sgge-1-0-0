@@ -14,8 +14,6 @@ public class Pessoa extends ModelCosmeDamiao
 	/** The SendSolv id for the account. */
 	private Integer id;
 
-	private Integer cdEmpr;
-
 	private String nome;
 
 	private String nomePai;
@@ -213,22 +211,6 @@ public class Pessoa extends ModelCosmeDamiao
 	}
 
 	/**
-	 * @return the cdEmpr
-	 */
-	public Integer getCdEmpr()
-	{
-		return cdEmpr;
-	}
-
-	/**
-	 * @param cdEmpr the cdEmpr to set
-	 */
-	public void setCdEmpr(Integer cdEmpr)
-	{
-		this.cdEmpr = cdEmpr;
-	}
-
-	/**
 	 * @return the pessoaTypeEnum
 	 */
 	public PessoaTypeEnum getPessoaTypeEnum()
@@ -414,7 +396,7 @@ public class Pessoa extends ModelCosmeDamiao
 		return "Pessoa [getPessoaTypeEnumValue()=" + getPessoaTypeEnumValue() + ", getId()=" + getId() + ", getNome()="
 				+ getNome() + ", getNomePai()=" + getNomePai() + ", getNomeMae()=" + getNomeMae()
 				+ ", getNomeConjugue()=" + getNomeConjugue() + ", getEstadoCivil()=" + getEstadoCivil()
-				+ ", getDatanasc()=" + getDatanasc() + ", getFoto()=" + getFoto() + ", getCdEmpr()=" + getCdEmpr()
+				+ ", getDatanasc()=" + getDatanasc() + ", getFoto()=" + getFoto()
 				+ ", getPessoaTypeEnum()=" + getPessoaTypeEnum() + ", getFormaPagamentoList()="
 				+ getFormaPagamentoList() + ", getCondPagList()=" + getCondPagList() + ", getContatoList()="
 				+ getContatoList() + ", getSexo()=" + getSexo() + ", getEnderecos()=" + getEnderecos()

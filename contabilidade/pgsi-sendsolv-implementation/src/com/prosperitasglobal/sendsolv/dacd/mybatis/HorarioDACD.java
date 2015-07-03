@@ -40,7 +40,7 @@ public final class HorarioDACD extends SqlSessionDaoSupport
 	public static Integer maintainCnaeAssociations(List<Cnae> cnaeList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, ICnaeDAC cnaeDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC, Integer empId,
-			String UserId)
+			String UserId, Integer processId)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
@@ -70,7 +70,8 @@ public final class HorarioDACD extends SqlSessionDaoSupport
 						List<Status> statusList = new ArrayList<Status>();
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC);
+										AcaoEnum.INSERT, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
+										processId);
 					}
 					break;
 				case UPDATE:
@@ -79,7 +80,8 @@ public final class HorarioDACD extends SqlSessionDaoSupport
 					{
 						count =
 								StatusDACD.maintainStatusAssociations(cnae.getStatusList(), response, cnae.getId(),
-										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC);
+										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
+										processId);
 					}
 					break;
 				case DELETE:
@@ -88,8 +90,10 @@ public final class HorarioDACD extends SqlSessionDaoSupport
 					status.setStatus(StatusEnum.INACTIVE);
 					List<Status> statusList = new ArrayList<Status>();
 					count =
-							StatusDACD.maintainStatusAssociations(statusList, response, cnae.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC);
+							StatusDACD
+									.maintainStatusAssociations(statusList, response, cnae.getId(), null,
+											AcaoEnum.DELETE, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
+											processId);
 
 					break;
 			}

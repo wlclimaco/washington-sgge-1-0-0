@@ -41,7 +41,7 @@ public final class PorcaoDACD extends SqlSessionDaoSupport
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, IPorcaoDAC porcaoDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
 			Integer empId,
-			String UserId)
+			String UserId, Integer processId)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
@@ -71,7 +71,8 @@ public final class PorcaoDACD extends SqlSessionDaoSupport
 						List<Status> statusList = new ArrayList<Status>();
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC);
+										AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
+										processId);
 					}
 					break;
 				case UPDATE:
@@ -80,9 +81,9 @@ public final class PorcaoDACD extends SqlSessionDaoSupport
 					{
 						count =
 								StatusDACD
-								.maintainStatusAssociations(porcao.getStatusList(), response, porcao.getId(),
-										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
-										historicoDAC);
+										.maintainStatusAssociations(porcao.getStatusList(), response, porcao.getId(),
+												null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
+												historicoDAC, processId);
 					}
 					break;
 				case DELETE:
@@ -92,7 +93,8 @@ public final class PorcaoDACD extends SqlSessionDaoSupport
 					List<Status> statusList = new ArrayList<Status>();
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, porcao.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC);
+									AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
+									processId);
 
 					break;
 			}

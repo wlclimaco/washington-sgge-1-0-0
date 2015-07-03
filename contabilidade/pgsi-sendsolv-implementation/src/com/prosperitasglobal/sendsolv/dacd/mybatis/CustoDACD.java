@@ -40,7 +40,7 @@ public final class CustoDACD extends SqlSessionDaoSupport
 	public static Integer maintainCustoAssociations(List<Custo> custoList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, ICustoDAC custoDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC, Integer empId,
-			String UserId)
+			String UserId, Integer processId)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
@@ -70,7 +70,8 @@ public final class CustoDACD extends SqlSessionDaoSupport
 						List<Status> statusList = new ArrayList<Status>();
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.CUSTO, statusDAC, historicoDAC);
+										AcaoEnum.INSERT, UserId, empId, TabelaEnum.CUSTO, statusDAC, historicoDAC,
+										processId);
 					}
 					break;
 				case UPDATE:
@@ -81,7 +82,7 @@ public final class CustoDACD extends SqlSessionDaoSupport
 								StatusDACD
 								.maintainStatusAssociations(custo.getStatusList(), response, custo.getId(),
 										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.CUSTO, statusDAC,
-										historicoDAC);
+										historicoDAC, processId);
 					}
 					break;
 				case DELETE:
@@ -91,7 +92,8 @@ public final class CustoDACD extends SqlSessionDaoSupport
 					List<Status> statusList = new ArrayList<Status>();
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, custo.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.CUSTO, statusDAC, historicoDAC);
+									AcaoEnum.DELETE, UserId, empId, TabelaEnum.CUSTO, statusDAC, historicoDAC,
+									processId);
 
 					break;
 			}

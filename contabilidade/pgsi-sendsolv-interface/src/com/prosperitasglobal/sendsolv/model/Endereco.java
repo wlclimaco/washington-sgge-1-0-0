@@ -81,7 +81,7 @@ public class Endereco extends ModelCosmeDamiao
 	 *
 	 * @return the cidade
 	 */
-	public String getCidade()
+	public Cidade getCidade()
 	{
 		return cidade;
 	}
@@ -91,7 +91,7 @@ public class Endereco extends ModelCosmeDamiao
 	 *
 	 * @param cidade the cidade to set
 	 */
-	public void setCidade(String cidade)
+	public void setCidade(Cidade cidade)
 	{
 		this.cidade = cidade;
 	}
@@ -101,7 +101,7 @@ public class Endereco extends ModelCosmeDamiao
 	 *
 	 * @return the estado
 	 */
-	public String getEstado()
+	public Estado getEstado()
 	{
 		return estado;
 	}
@@ -111,7 +111,7 @@ public class Endereco extends ModelCosmeDamiao
 	 *
 	 * @param estado the estado to set
 	 */
-	public void setEstado(String estado)
+	public void setEstado(Estado estado)
 	{
 		this.estado = estado;
 	}

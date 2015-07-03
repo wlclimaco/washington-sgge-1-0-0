@@ -329,22 +329,6 @@ public class Produto extends ModelCosmeDamiao
 	}
 
 	/**
-	 * @return the porcao
-	 */
-	public Double getPorcao()
-	{
-		return porcao;
-	}
-
-	/**
-	 * @param porcao the porcao to set
-	 */
-	public void setPorcao(Double porcao)
-	{
-		this.porcao = porcao;
-	}
-
-	/**
 	 * @return the pesoBruto
 	 */
 	public Double getPesoBruto()
@@ -516,7 +500,7 @@ public class Produto extends ModelCosmeDamiao
 				+ ", getProduto()=" + getProduto() + ", getAplicacao()=" + getAplicacao() + ", getLocalizacao()="
 				+ getLocalizacao() + ", getDataValidade()=" + getDataValidade() + ", getComissao()=" + getComissao()
 				+ ", getFracao()=" + getFracao() + ", getUniMed()=" + getUniMed() + ", getGrupo()=" + getGrupo()
-				+ ", getSubGrupo()=" + getSubGrupo() + ", getMarca()=" + getMarca() + ", getPorcao()=" + getPorcao()
+				+ ", getSubGrupo()=" + getSubGrupo() + ", getMarca()=" + getMarca()
 				+ ", getPesoBruto()=" + getPesoBruto() + ", getPesoLiquido()=" + getPesoLiquido()
 				+ ", getTributacao()=" + getTributacao() + ", getEstoqueList()=" + getEstoqueList()
 				+ ", getPrecoList()=" + getPrecoList() + ", getCustoList()=" + getCustoList() + ", getPorcaoList()="

@@ -40,7 +40,7 @@ public final class CfopDACD extends SqlSessionDaoSupport
 	public static Integer maintainCfopAssociations(List<Cfop> cfopList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, ICfopDAC cfopDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC, Integer empId,
-			String UserId)
+			String UserId, Integer processId)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
@@ -70,7 +70,8 @@ public final class CfopDACD extends SqlSessionDaoSupport
 						List<Status> statusList = new ArrayList<Status>();
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC);
+										AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
+										processId);
 					}
 					break;
 				case UPDATE:
@@ -81,7 +82,7 @@ public final class CfopDACD extends SqlSessionDaoSupport
 								StatusDACD
 								.maintainStatusAssociations(cfop.getStatusList(), response, cfop.getId(),
 										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
-										historicoDAC);
+										historicoDAC, processId);
 					}
 					break;
 				case DELETE:
@@ -91,7 +92,8 @@ public final class CfopDACD extends SqlSessionDaoSupport
 					List<Status> statusList = new ArrayList<Status>();
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, cfop.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC);
+									AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
+									processId);
 
 					break;
 			}

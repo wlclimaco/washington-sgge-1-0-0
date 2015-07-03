@@ -67,46 +67,6 @@ public class Cidade extends ModelCosmeDamiao
 		this.nome = nome;
 	}
 
-	/**
-	 * Gets the cota.
-	 *
-	 * @return the cota
-	 */
-	public String getCota()
-	{
-		return cota;
-	}
-
-	/**
-	 * Sets the cota.
-	 *
-	 * @param cota the cota to set
-	 */
-	public void setCota(String cota)
-	{
-		this.cota = cota;
-	}
-
-	/**
-	 * Gets the porcentagem.
-	 *
-	 * @return the porcentagem
-	 */
-	public String getPorcentagem()
-	{
-		return porcentagem;
-	}
-
-	/**
-	 * Sets the porcentagem.
-	 *
-	 * @param porcentagem the porcentagem to set
-	 */
-	public void setPorcentagem(String porcentagem)
-	{
-		this.porcentagem = porcentagem;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -114,8 +74,15 @@ public class Cidade extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Socio [getId()=" + getId() + ", getNome()=" + getNome() + ", getCota()=" + getCota()
-				+ ", getPorcentagem()=" + getPorcentagem() + ", toString()=" + super.toString() + "]";
+		return "Cidade [getId()=" + getId() + ", getNome()=" + getNome() + ", getTabelaEnumValue()="
+				+ getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()="
+				+ getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()=" + getType()
+				+ ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()="
+				+ getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite() + ", toString()="
+				+ super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
+				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
+				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + "]";
 	}
 
 }

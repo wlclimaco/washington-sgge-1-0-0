@@ -3,9 +3,19 @@ package com.prosperitasglobal.sendsolv.dacd.mybatis;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+
 import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.ISociosDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
+import com.prosperitasglobal.sendsolv.model.AcaoEnum;
+import com.prosperitasglobal.sendsolv.model.Socio;
+import com.prosperitasglobal.sendsolv.model.Status;
+import com.prosperitasglobal.sendsolv.model.StatusEnum;
+import com.prosperitasglobal.sendsolv.model.TabelaEnum;
+import com.prosperitasglobal.sendsolv.model.TypeEnum;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
@@ -60,7 +70,8 @@ public final class SociosDACD extends SqlSessionDaoSupport
 						List<Status> statusList = new ArrayList<Status>();
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.SOCIO, statusDAC, historicoDAC);
+										AcaoEnum.INSERT, UserId, empId, TabelaEnum.SOCIO, statusDAC, historicoDAC,
+										processId);
 					}
 					break;
 				case UPDATE:
@@ -69,9 +80,9 @@ public final class SociosDACD extends SqlSessionDaoSupport
 					{
 						count =
 								StatusDACD
-										.maintainStatusAssociations(socio.getStatusList(), response, socio.getId(),
-												null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.SOCIO, statusDAC,
-												historicoDAC);
+								.maintainStatusAssociations(socio.getStatusList(), response, socio.getId(),
+										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.SOCIO, statusDAC,
+										historicoDAC, processId);
 					}
 					break;
 				case DELETE:
@@ -81,7 +92,8 @@ public final class SociosDACD extends SqlSessionDaoSupport
 					List<Status> statusList = new ArrayList<Status>();
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, socio.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.SOCIO, statusDAC, historicoDAC);
+									AcaoEnum.DELETE, UserId, empId, TabelaEnum.SOCIO, statusDAC, historicoDAC,
+									processId);
 
 					break;
 			}

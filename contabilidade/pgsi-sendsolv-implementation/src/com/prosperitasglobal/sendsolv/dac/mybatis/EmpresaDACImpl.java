@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.ICnaeDAC;
 import com.prosperitasglobal.sendsolv.dac.IDocumentoDAC;
 import com.prosperitasglobal.sendsolv.dac.IEmailDAC;
@@ -21,6 +25,18 @@ import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.SociosDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.StatusDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.TelefoneDACD;
+import com.prosperitasglobal.sendsolv.model.AcaoEnum;
+import com.prosperitasglobal.sendsolv.model.Empresa;
+import com.prosperitasglobal.sendsolv.model.Process;
+import com.prosperitasglobal.sendsolv.model.Status;
+import com.prosperitasglobal.sendsolv.model.StatusEnum;
+import com.prosperitasglobal.sendsolv.model.TabelaEnum;
+import com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class EmpresaDACImpl.
@@ -30,9 +46,6 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 
 	/** The Constant EMPRESA_NAMESPACE. */
 	private static final String EMPRESA_NAMESPACE = "EmpresaMap.";
-
-	/** The Constant CBOF_NAMESPACE. */
-	private static final String CBOF_NAMESPACE = "CBOFMap.";
 
 	/** The Constant EMPRESA_STMT_FETCH_COUNT. */
 	private static final String EMPRESA_STMT_FETCH_COUNT = EMPRESA_NAMESPACE + "fetchEmpresaRowCount";
@@ -47,42 +60,34 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 	/** The Constant EMPRESA_STMT_INSERT. */
 	private static final String EMPRESA_STMT_INSERT = EMPRESA_NAMESPACE + "insertEmpresa";
 
-	/** The Constant EMPRESA_STMT_ASSOC_ORG_TO_CONTACT. */
-	private static final String EMPRESA_STMT_ASSOC_ORG_TO_CONTACT = EMPRESA_NAMESPACE
-			+ "associateEmpresaWithContact";
-
 	/** The Constant EMPRESA_STMT_UPDATE. */
 	private static final String EMPRESA_STMT_UPDATE = EMPRESA_NAMESPACE + "updateEmpresa";
 
 	/** The Constant EMPRESA_STMT_DELETE. */
 	private static final String EMPRESA_STMT_DELETE = EMPRESA_NAMESPACE + "deleteEmpresaById";
 
-	/** The Constant EMPRESA_DOCUMENT_STMT_UPDATE. */
-	private static final String EMPRESA_DOCUMENT_STMT_UPDATE = EMPRESA_NAMESPACE
-			+ "updateEmpresaDocument";
-
-	/** The Constant EMPRESA_STMT_ASSOC_ORG_TO_DOCUMENT. */
-	private static final String EMPRESA_STMT_ASSOC_ORG_TO_DOCUMENT = EMPRESA_NAMESPACE
-			+ "associateEmpresaWithDocument";
-
-	/** The Constant EMPRESA_STMT_DELETE_DOCUMENT. */
-	private static final String EMPRESA_STMT_DELETE_DOCUMENT = EMPRESA_NAMESPACE
-			+ "deleteEmpresaDocument";
-
-	/** The Constant STMT_VERSION. */
-	private static final String EMPRESA_STMT_VERSION = EMPRESA_NAMESPACE + "fetchVersionNumber";
-
-	/** The Constant EMPRESA_STMT_UPDATE_EMPRESA_STATUS. */
-	private static final String EMPRESA_STMT_UPDATE_EMPRESA_STATUS = CBOF_NAMESPACE
-			+ "updateBusinessStatus";
-
+	/** The endereco dac. */
 	IEnderecoDAC enderecoDAC;
+
+	/** The telefone dac. */
 	ITelefoneDAC telefoneDAC;
+
+	/** The email dac. */
 	IEmailDAC emailDAC;
+
+	/** The socio dac. */
 	ISociosDAC socioDAC;
+
+	/** The cnae dac. */
 	ICnaeDAC cnaeDAC;
+
+	/** The documento dac. */
 	IDocumentoDAC documentoDAC;
+
+	/** The historico dac. */
 	IHistoricoDAC historicoDAC;
+
+	/** The status dac. */
 	IStatusDAC statusDAC;
 
 	/** The Constant LOG. */
@@ -117,86 +122,170 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 	 * com.prosperitasglobal.sendsolv.dac.IEmpresaDAC#insertEmpresa(com.prosperitasglobal.sendsolv.model
 	 * .Empresa)
 	 */
+	/**
+	 * Gets the endereco dac.
+	 *
+	 * @return the endereco dac
+	 */
 	public IEnderecoDAC getEnderecoDAC()
 	{
 		return enderecoDAC;
 	}
 
+	/**
+	 * Sets the endereco dac.
+	 *
+	 * @param enderecoDAC the new endereco dac
+	 */
 	public void setEnderecoDAC(IEnderecoDAC enderecoDAC)
 	{
 		this.enderecoDAC = enderecoDAC;
 	}
 
+	/**
+	 * Gets the telefone dac.
+	 *
+	 * @return the telefone dac
+	 */
 	public ITelefoneDAC getTelefoneDAC()
 	{
 		return telefoneDAC;
 	}
 
+	/**
+	 * Sets the telefone dac.
+	 *
+	 * @param telefoneDAC the new telefone dac
+	 */
 	public void setTelefoneDAC(ITelefoneDAC telefoneDAC)
 	{
 		this.telefoneDAC = telefoneDAC;
 	}
 
+	/**
+	 * Gets the email dac.
+	 *
+	 * @return the email dac
+	 */
 	public IEmailDAC getEmailDAC()
 	{
 		return emailDAC;
 	}
 
+	/**
+	 * Sets the email dac.
+	 *
+	 * @param emailDAC the new email dac
+	 */
 	public void setEmailDAC(IEmailDAC emailDAC)
 	{
 		this.emailDAC = emailDAC;
 	}
 
+	/**
+	 * Gets the socio dac.
+	 *
+	 * @return the socio dac
+	 */
 	public ISociosDAC getSocioDAC()
 	{
 		return socioDAC;
 	}
 
+	/**
+	 * Sets the socio dac.
+	 *
+	 * @param socioDAC the new socio dac
+	 */
 	public void setSocioDAC(ISociosDAC socioDAC)
 	{
 		this.socioDAC = socioDAC;
 	}
 
+	/**
+	 * Gets the cnae dac.
+	 *
+	 * @return the cnae dac
+	 */
 	public ICnaeDAC getCnaeDAC()
 	{
 		return cnaeDAC;
 	}
 
+	/**
+	 * Sets the cnae dac.
+	 *
+	 * @param cnaeDAC the new cnae dac
+	 */
 	public void setCnaeDAC(ICnaeDAC cnaeDAC)
 	{
 		this.cnaeDAC = cnaeDAC;
 	}
 
+	/**
+	 * Gets the documento dac.
+	 *
+	 * @return the documento dac
+	 */
 	public IDocumentoDAC getDocumentoDAC()
 	{
 		return documentoDAC;
 	}
 
+	/**
+	 * Sets the documento dac.
+	 *
+	 * @param documentoDAC the new documento dac
+	 */
 	public void setDocumentoDAC(IDocumentoDAC documentoDAC)
 	{
 		this.documentoDAC = documentoDAC;
 	}
 
+	/**
+	 * Gets the historico dac.
+	 *
+	 * @return the historico dac
+	 */
 	public IHistoricoDAC getHistoricoDAC()
 	{
 		return historicoDAC;
 	}
 
+	/**
+	 * Sets the historico dac.
+	 *
+	 * @param historicoDAC the new historico dac
+	 */
 	public void setHistoricoDAC(IHistoricoDAC historicoDAC)
 	{
 		this.historicoDAC = historicoDAC;
 	}
 
+	/**
+	 * Gets the status dac.
+	 *
+	 * @return the status dac
+	 */
 	public IStatusDAC getStatusDAC()
 	{
 		return statusDAC;
 	}
 
+	/**
+	 * Sets the status dac.
+	 *
+	 * @param statusDAC the new status dac
+	 */
 	public void setStatusDAC(IStatusDAC statusDAC)
 	{
 		this.statusDAC = statusDAC;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.sendsolv.dac.IEmpresaDAC#insertEmpresa(com.prosperitasglobal.sendsolv.model.Empresa)
+	 */
 	@Override
 	public InternalResultsResponse<Empresa> insertEmpresa(Empresa empresa)
 	{
@@ -204,14 +293,14 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		InternalResultsResponse<Empresa> response = new InternalResultsResponse<Empresa>();
 
 		Process process = new Process();
-		process.setEmpId(empresa.getEmpId());
-		process.setTabela(TabelaTypeEnum.EMPRESA);
+		process.setEmprId(0);
+		process.setTabela(TabelaEnum.EMPRESA);
 		process.setUserId(empresa.getUserId());
 		process.setAcaoType(AcaoEnum.INSERT);
 
 		Integer processId = 0;
 
-		processId = (Integer)doQueryForObject(getSqlSession(), "ProcessMap.insertProcess", process);
+		processId = (Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), "ProcessMap.insertProcess", process);
 
 		empresa.setProcessId(processId);
 
@@ -289,14 +378,14 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		InternalResultsResponse<Empresa> response = new InternalResultsResponse<Empresa>();
 
 		Process process = new Process();
-		process.setEmpId(empresa.getEmpId());
-		process.setTabela(TabelaTypeEnum.EMPRESA);
+		process.setEmprId(empresa.getId());
+		process.setTabela(TabelaEnum.EMPRESA);
 		process.setUserId(empresa.getUserId());
-		process.setAcaoType(AcaoEnum.INSERT);
+		process.setAcaoType(AcaoEnum.UPDATE);
 
 		Integer processId = 0;
 
-		processId = (Integer)doQueryForObject(getSqlSession(), "ProcessMap.insertProcess", process);
+		processId = (Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), "ProcessMap.insertProcess", process);
 
 		empresa.setProcessId(processId);
 
@@ -373,21 +462,31 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 	public InternalResponse deleteEmpresa(Empresa empresa)
 	{
 		InternalResponse response = new InternalResponse();
+
+		Process process = new Process();
+		process.setEmprId(empresa.getId());
+		process.setTabela(TabelaEnum.EMPRESA);
+		process.setUserId(empresa.getUserId());
+		process.setAcaoType(AcaoEnum.UPDATE);
+
+		Integer processId = 0;
+
+		processId = (Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), "ProcessMap.insertProcess", process);
+
+		empresa.setProcessId(processId);
+
 		QATMyBatisDacHelper.doRemove(getSqlSession(), EMPRESA_STMT_DELETE, empresa, response);
 		Integer updateCount;
-		// updateCount +=
-		// EnderecoDACD.maintainHistoricoAssociations(empresa.getEStatus, response, insertCount, null, null,
-		// null);
 
 		Status status = new Status();
 		status.setStatus(StatusEnum.INACTIVE);
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, empresa.getId(),
-								null, AcaoEnum.DELETE,
-								empresa.getCreateUser(), empresa.getId(), TabelaEnum.EMPRESA, getStatusDAC(),
-								getHistoricoDAC());
+				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, empresa.getId(),
+						null, AcaoEnum.DELETE,
+						empresa.getCreateUser(), empresa.getId(), TabelaEnum.EMPRESA, getStatusDAC(),
+						getHistoricoDAC(), processId);
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)

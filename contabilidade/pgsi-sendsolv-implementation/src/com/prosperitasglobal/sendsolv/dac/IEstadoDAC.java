@@ -1,5 +1,8 @@
 package com.prosperitasglobal.sendsolv.dac;
 
+import com.prosperitasglobal.sendsolv.model.Estado;
+import com.qat.framework.model.response.InternalResultsResponse;
+
 /**
  * The Interface IEstadoDAC.
  */
