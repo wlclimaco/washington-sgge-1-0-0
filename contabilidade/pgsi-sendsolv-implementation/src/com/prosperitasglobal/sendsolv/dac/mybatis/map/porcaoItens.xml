@@ -51,7 +51,7 @@
   		#{nome},
   		#{porcao},
   		#{vd},
-  		#{unimed},
+  		#{unimed.id},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 

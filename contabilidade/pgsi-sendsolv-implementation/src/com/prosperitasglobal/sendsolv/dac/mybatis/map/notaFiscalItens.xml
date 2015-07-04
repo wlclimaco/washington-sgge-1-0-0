@@ -58,7 +58,6 @@
 		,b.qnt
 		,b.vrUnitario
 		,b.vrDesconto
-		,b.produto
 		,b.cfop
 		,b.classificacao
       	,b.create_date
@@ -73,9 +72,8 @@
 		 #{qnt},
 		 #{vrUnitario},
 		 #{vrDesconto},
-		 #{produto},
-		 #{cfop},
-		 #{classificacao},
+		 #{cfop.id},
+		 #{classificacao.id},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
@@ -100,9 +98,8 @@
     		<if test="qnt!= null">qnt = #{qnt},</if>
 	    	<if test="vrUnitario!= null"> vrUnitario=#{vrUnitario},</if>
 	    	<if test="vrDesconto!= null"> vrDesconto=#{vrDesconto},</if>
-	    	<if test="produto!= null"> produto=#{produto},</if>
-	    	<if test="cfop!= null"> cfop=#{cfop},</if>
-	    	<if test="classificacao!= null"> classificacao=#{classificacao},</if>
+	    	<if test="cfop.id!= null"> cfop=#{cfop.id},</if>
+	    	<if test="classificacao.id!= null"> classificacao=#{classificacao.id},</if>
 			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>

@@ -4,7 +4,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="EmailMap">
+<mapper namespace="PedidoComprasMap">
 
 	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
 	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
@@ -14,29 +14,29 @@
        necessary if the columns (or aliases) match to the properties
        exactly. -->
 
-  <resultMap id="emailResult" type="Email">
+  <resultMap id="pedidoComprasResult" type="PedidoCompras">
     <result property="id" column="id" />
     <result property="tabelaEnumValue" column="tabela" />
    	<result property="parentId" column="parentId"/>
 	<result property="typeValue" column="type"/>
-	<result property="email" column="email" />
+	<result property="pedidoCompras" column="pedidoCompras" />
     <result property="description" column="description" />
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEmail"/>
+	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByPedidoCompras"/>
   </resultMap>
 
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
-  <sql id="allEmailColumns">
+  <sql id="allPedidoComprasColumns">
 		 b.id
 		,b.tabela
 		,b.parentId
 		,b.type
-		,b.email
+		,b.pedidoCompras
 		,b.description
       	,b.create_date
       	,b.create_user
@@ -44,12 +44,12 @@
       	,b.modify_user
   </sql>
 
-  <sql id="allEmailValues">
+  <sql id="allPedidoComprasValues">
   		 #{id},
 		 #{tabelaEnumValue},
 		 #{parentId},
 		 #{typeValue},
-		 #{email},
+		 #{pedidoCompras},
 		 #{description},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
@@ -57,11 +57,11 @@
   <!--
 		SQL Insert Statements.
  	-->
-  <insert id="insertEmail" parameterType="Email" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO email (
-		<include refid="allEmailColumns" />
+  <insert id="insertPedidoCompras" parameterType="PedidoCompras" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO pedidoCompras (
+		<include refid="allPedidoComprasColumns" />
       )
-    VALUES (<include refid="allEmailValues" /> )
+    VALUES (<include refid="allPedidoComprasValues" /> )
   </insert>
 
 
@@ -69,10 +69,10 @@
 		SQL Update Statements.
  	-->
 
-  <update id="updateEmail" parameterType="Email">
-    UPDATE email
+  <update id="updatePedidoCompras" parameterType="PedidoCompras">
+    UPDATE pedidoCompras
     	<set>
-    		<if test="email!= null">email = #{email},</if>
+    		<if test="pedidoCompras!= null">pedidoCompras = #{pedidoCompras},</if>
 	    	<if test="description!= null"> description=#{description},</if>
 			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
@@ -84,44 +84,44 @@
    <!--
 		SQL Delete Statements.
    -->
-  <delete id="deleteEmailById" parameterType="Integer">
-    	DELETE FROM email WHERE id = #{id}
+  <delete id="deletePedidoComprasById" parameterType="Integer">
+    	DELETE FROM pedidoCompras WHERE id = #{id}
   </delete>
 
 	<!--
 		SQL Fetch Statements.
  	-->
-  <select id="fetchEmailRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+  <select id="fetchPedidoComprasRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
      SELECT COUNT(business_id) AS RECORD_COUNT
         FROM business
      WHERE business_type = 2
      <if test="parentId != null">
-		  AND FK_email_id = #{parentId}
+		  AND FK_pedidoCompras_id = #{parentId}
 	 </if>
   </select>
 
-  <select id="fetchAllEmails" resultMap="emailResult">
+  <select id="fetchAllPedidoComprass" resultMap="pedidoComprasResult">
     SELECT
-	<include refid="allEmailColumns" />
+	<include refid="allPedidoComprasColumns" />
     FROM business ORDER BY name ASC
   </select>
 
- <select id="fetchAllEmailsByEmpresa" parameterType="Integer" resultMap="emailResult">
+ <select id="fetchAllPedidoComprassByEmpresa" parameterType="Integer" resultMap="pedidoComprasResult">
 	 SELECT
-	<include refid="allEmailColumns" />
-    FROM email b where b.tabela = 1 and b.parentId= #{id} ORDER BY b.id ASC
+	<include refid="allPedidoComprasColumns" />
+    FROM pedidoCompras b where b.tabela = 1 and b.parentId= #{id} ORDER BY b.id ASC
  </select>
 
- <select id="fetchAllEmailsByFuncionario" parameterType="Integer" resultMap="emailResult">
+ <select id="fetchAllPedidoComprassByFuncionario" parameterType="Integer" resultMap="pedidoComprasResult">
 	 SELECT
-	<include refid="allEmailColumns" />
-    FROM email b where b.tabela = 16 and b.parentId= #{id} ORDER BY b.id ASC
+	<include refid="allPedidoComprasColumns" />
+    FROM pedidoCompras b where b.tabela = 16 and b.parentId= #{id} ORDER BY b.id ASC
  </select>
 
- <select id="fetchAllEmailsByPessoaId" parameterType="Integer" resultMap="emailResult">
+ <select id="fetchAllPedidoComprassByPessoaId" parameterType="Integer" resultMap="pedidoComprasResult">
 	 SELECT
-	<include refid="allEmailColumns" />
-    FROM email b where b.tabela = 23 and b.parentId= #{id} ORDER BY b.id ASC
+	<include refid="allPedidoComprasColumns" />
+    FROM pedidoCompras b where b.tabela = 23 and b.parentId= #{id} ORDER BY b.id ASC
  </select>
 
 </mapper>

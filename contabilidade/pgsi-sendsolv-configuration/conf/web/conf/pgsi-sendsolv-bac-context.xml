@@ -64,10 +64,6 @@
  		<property name="arquivoDAC" ref="arquivoDACTarget"/>
  	</bean>
 
- 	<bean id="bancoBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.BancoBACImpl">
- 		<property name="bancoDAC" ref="bancoDACTarget"/>
- 	</bean>
-
  	<bean id="empresaBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.EmpresaBACImpl">
  		<property name="empresaDAC" ref="empresaDACTarget"/>
  	</bean>

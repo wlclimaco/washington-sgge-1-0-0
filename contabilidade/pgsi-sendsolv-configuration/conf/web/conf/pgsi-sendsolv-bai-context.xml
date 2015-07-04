@@ -141,21 +141,6 @@
  		<property name="validationController" ref="arquivoValidationController"/>
  	</bean>
 
- 	<bean id="bancoBAI" class="com.prosperitasglobal.sendsolv.bai.impl.BancoBAIImpl">
- 		<property name="bancoBAC" ref="bancoBACTarget"/>
- 		<property name="validationController" ref="bancoValidationController"/>
- 	</bean>
-
- 	<bean id="beneficiosBAI" class="com.prosperitasglobal.sendsolv.bai.impl.BeneficiosBAIImpl">
- 		<property name="beneficiosBAC" ref="beneficiosBACTarget"/>
- 		<property name="validationController" ref="beneficiosValidationController"/>
- 	</bean>
-
- 	<bean id="cadastroBAI" class="com.prosperitasglobal.sendsolv.bai.impl.CadastroBAIImpl">
- 		<property name="cadastroBAC" ref="cadastroBACTarget"/>
- 		<property name="validationController" ref="cadastroValidationController"/>
- 	</bean>
-
  	<bean id="empresaBAI" class="com.prosperitasglobal.sendsolv.bai.impl.EmpresaBAIImpl">
  		<property name="empresaBAC" ref="empresaBACTarget"/>
 		<property name="validationController" ref="empresaValidationController"/>

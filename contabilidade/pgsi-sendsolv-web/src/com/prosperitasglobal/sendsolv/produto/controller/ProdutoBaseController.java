@@ -4,20 +4,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
-import com.prosperitasglobal.sendsolv.empresa.controller.Socio;
+import com.prosperitasglobal.sendsolv.bai.IProdutoBAI;
+import com.prosperitasglobal.sendsolv.model.Cfop;
+import com.prosperitasglobal.sendsolv.model.Classificacao;
 import com.prosperitasglobal.sendsolv.model.Csosn;
 import com.prosperitasglobal.sendsolv.model.Cst;
+import com.prosperitasglobal.sendsolv.model.Custo;
 import com.prosperitasglobal.sendsolv.model.CustoItem;
+import com.prosperitasglobal.sendsolv.model.Estoque;
 import com.prosperitasglobal.sendsolv.model.EstoqueTypeEnum;
+import com.prosperitasglobal.sendsolv.model.Fornecedor;
+import com.prosperitasglobal.sendsolv.model.Grupo;
 import com.prosperitasglobal.sendsolv.model.Incidencia;
-import com.prosperitasglobal.sendsolv.model.LIst;
+import com.prosperitasglobal.sendsolv.model.Marca;
+import com.prosperitasglobal.sendsolv.model.Porcao;
 import com.prosperitasglobal.sendsolv.model.PorcaoItem;
 import com.prosperitasglobal.sendsolv.model.PrecoTypeEnum;
 import com.prosperitasglobal.sendsolv.model.Produto;
+import com.prosperitasglobal.sendsolv.model.Rentabilidade;
+import com.prosperitasglobal.sendsolv.model.RentabilidadeItens;
 import com.prosperitasglobal.sendsolv.model.RentabilidadeTypeEnum;
+import com.prosperitasglobal.sendsolv.model.SubGrupo;
+import com.prosperitasglobal.sendsolv.model.TabPreco;
+import com.prosperitasglobal.sendsolv.model.Tributacao;
 import com.prosperitasglobal.sendsolv.model.UniMed;
+import com.prosperitasglobal.sendsolv.model.request.ProdutoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.response.ProdutoResponse;
+import com.qat.framework.model.QATModel.PersistanceActionEnum;
+import com.qat.framework.validation.ValidationUtil;
 
 public class ProdutoBaseController extends UtilControllerD
 {
@@ -154,13 +175,13 @@ public class ProdutoBaseController extends UtilControllerD
 		return produtoResponse;
 	}
 
-	public Produto mockProduto(ModelAction model)
+	public Produto mockProduto(PersistanceActionEnum model)
 	{
 		Produto produto = new Produto();
 
 		produto.setId(1);
 		produto.setCodigo("0001");
-		produto.setCdbarra("0001010101110101");
+		produto.setCdBarras("0001010101110101");
 		produto.setDataCreate(new Long("14327833577780"));
 		produto.setProduto("Produto 0001");
 		produto.setAplicacao("Descricao");
@@ -170,20 +191,19 @@ public class ProdutoBaseController extends UtilControllerD
 		produto.setFracao("10");
 		produto.setPesoBruto(new Double(1.5));
 		produto.setPesoLiquido(new Double(1.2));
-		produto.setModoUso("modo de uso");
 		produto.setClassificacao(new Classificacao(1));
 		produto.setUniMed(new UniMed(1));
 		produto.setGrupo(new Grupo(1));
 		produto.setSubGrupo(new SubGrupo(1));
 		produto.setMarca(new Marca(1));
 		produto.setTributacao(mockTributacao(model));
-		produto.setEstoque(mockEstoque(model));
+		produto.setEstoqueList(mockEstoque(model));
 		produto.setPrecoList(mockPreco(model));
 		produto.setCustoList(mockCusto(model));
 		produto.setPorcaoList(mockPorcao(model));
-		produto.setRentabilidadeList();
+		produto.setRentabilidadeList(mockRentabilidade(model));
 		produto.setCfopList(new ArrayList<Cfop>());
-		produto.getCfopList().add(new Cfop(1));
+		produto.getCfopList().add(new Cfop());
 		produto.setFornecedorList(new ArrayList<Fornecedor>());
 		produto.getFornecedorList().add(new Fornecedor(1));
 
@@ -191,11 +211,11 @@ public class ProdutoBaseController extends UtilControllerD
 
 	}
 
-	public Tributacao mockTributacao(ModelAction model)
+	public Tributacao mockTributacao(PersistanceActionEnum model)
 	{
 		Tributacao tributacao = new Tributacao();
 
-		tributacao.setId;
+		tributacao.setId(1);
 		tributacao.setCst(new Cst(1));
 		tributacao.setIcms(new Double(10.60));
 		tributacao.setSt(10);
@@ -203,121 +223,121 @@ public class ProdutoBaseController extends UtilControllerD
 		tributacao.setCsosn(new Csosn(1));
 		tributacao.setIpi(50.99);
 		tributacao.setIat(1);
-		tributacao.setTributacao.setpisconfins(1);
+		// tributacao.setTributacao.setpisconfins(1);
 		tributacao.setIncidencia(new Incidencia());
 		return tributacao;
 	}
 
-	public List<Estoque> mockEstoque(ModelAction model)
+	public List<Estoque> mockEstoque(PersistanceActionEnum model)
 	{
 		List<Estoque> estoqueList = new ArrayList<Estoque>();
 
 		Estoque estoque = new Estoque();
 		estoque.setId(1);
 		estoque.setEstoqueTypeEnum(EstoqueTypeEnum.MINIMO);
-		estoque.setUltimoMov(new Long(14327833577780));
+		estoque.setUltimoMov(new Long("14327833577780"));
 		estoque.setQuant(new Double(10));
 		estoqueList.add(estoque);
 
 		estoque = new Estoque();
 		estoque.setId(1);
 		estoque.setEstoqueTypeEnum(EstoqueTypeEnum.MAXIMO);
-		estoque.setUltimoMov(new Long(14327833577780));
+		estoque.setUltimoMov(new Long("14327833577780"));
 		estoque.setQuant(new Double(100));
 		estoqueList.add(estoque);
 
 		estoque = new Estoque();
 		estoque.setId(1);
 		estoque.setEstoqueTypeEnum(EstoqueTypeEnum.INICIAL);
-		estoque.setUltimoMov(new Long(14327833577780));
+		estoque.setUltimoMov(new Long("14327833577780"));
 		estoque.setQuant(new Double(1));
 		estoqueList.add(estoque);
 
 		estoque = new Estoque();
 		estoque.setId(1);
 		estoque.setEstoqueTypeEnum(EstoqueTypeEnum.ATUAL);
-		estoque.setUltimoMov(new Long(14327833577780));
+		estoque.setUltimoMov(new Long("14327833577780"));
 		estoque.setQuant(new Double(16));
 		estoqueList.add(estoque);
 
 		return estoqueList;
 	}
 
-	public List<TabPreco> mockPreco(ModelAction model)
+	public List<TabPreco> mockPreco(PersistanceActionEnum model)
 	{
 		List<TabPreco> precoList = new ArrayList<TabPreco>();
 
 		TabPreco preco = new TabPreco();
 		preco.setId(1);
-		preco.setdataMarcacao(new Long("14327833577780"));
+		preco.setDataMarcacao(new Long("14327833577780"));
 		preco.setPrecoTypeEnum(PrecoTypeEnum.CUSTO);
-		preco.setvalor(new Double(10.90));
-		preco.setdataProInicial(new Long("14327833577780"));
-		preco.setdataProFinal(new Long("14327833577780"));
+		preco.setValor(new Double(10.90));
+		preco.setDataProInicial(new Long("14327833577780"));
+		preco.setDataProFinal(new Long("14327833577780"));
 		precoList.add(preco);
 
 		preco = new TabPreco();
 		preco.setId(1);
-		preco.setdataMarcacao(new Long("14327833577780"));
+		preco.setDataMarcacao(new Long("14327833577780"));
 		preco.setPrecoTypeEnum(PrecoTypeEnum.VENDA);
-		preco.setvalor(new Double(19.90));
-		preco.setdataProInicial(new Long("14327833577780"));
-		preco.setdataProFinal(new Long("14327833577780"));
+		preco.setValor(new Double(10.90));
+		preco.setDataProInicial(new Long("14327833577780"));
+		preco.setDataProFinal(new Long("14327833577780"));
 		precoList.add(preco);
 
 		preco = new TabPreco();
 		preco.setId(1);
-		preco.setdataMarcacao(new Long("14327833577780"));
+		preco.setDataMarcacao(new Long("14327833577780"));
 		preco.setPrecoTypeEnum(PrecoTypeEnum.COMPRA);
-		preco.setvalor(new Double(9.90));
-		preco.setdataProInicial(new Long("14327833577780"));
-		preco.setdataProFinal(new Long("14327833577780"));
+		preco.setValor(new Double(10.90));
+		preco.setDataProInicial(new Long("14327833577780"));
+		preco.setDataProFinal(new Long("14327833577780"));
 		precoList.add(preco);
 
 		preco = new TabPreco();
 		preco.setId(1);
-		preco.setdataMarcacao(new Long("14327833577780"));
+		preco.setDataMarcacao(new Long("14327833577780"));
 		preco.setPrecoTypeEnum(PrecoTypeEnum.PROMOCAO);
-		preco.setvalor(new Double(15.99));
-		preco.setdataProInicial(new Long("14327833577780"));
-		preco.setdataProFinal(new Long("14327833577780"));
+		preco.setValor(new Double(10.90));
+		preco.setDataProInicial(new Long("14327833577780"));
+		preco.setDataProFinal(new Long("14327833577780"));
 		precoList.add(preco);
 
 		return precoList;
 	}
 
-	public List<Custo> mockCusto(ModelAction model)
+	public List<Custo> mockCusto(PersistanceActionEnum model)
 	{
 		List<Custo> custoList = new ArrayList<Custo>();
 
 		Custo custo = new Custo();
 		custo.setId(1);
 		custo.setCusto(new CustoItem(1));
-		custo.setValor(10);
+		custo.setValor((double)10);
 		custoList.add(custo);
 
 		custo = new Custo();
 		custo.setId(2);
 		custo.setCusto(new CustoItem(2));
-		custo.setValor(20);
+		custo.setValor((double)20);
 		custoList.add(custo);
 
 		custo = new Custo();
 		custo.setId(3);
 		custo.setCusto(new CustoItem(3));
-		custo.setValor(30);
+		custo.setValor((double)30);
 		custoList.add(custo);
 
 		custo = new Custo();
 		custo.setId(4);
 		custo.setCusto(new CustoItem(4));
-		custo.setValor(40);
+		custo.setValor((double)40);
 		custoList.add(custo);
 
-		return precoList;
+		return custoList;
 	}
 
-	public List<Porcao> mockPorcao(ModelAction model)
+	public List<Porcao> mockPorcao(PersistanceActionEnum model)
 	{
 		List<Porcao> porcaoList = new ArrayList<Porcao>();
 		List<PorcaoItem> porcaoItemList = new ArrayList<PorcaoItem>();
@@ -350,41 +370,41 @@ public class ProdutoBaseController extends UtilControllerD
 		porcao.setId(1);
 		porcao.setPorcaoItens(porcaoItemList);
 		porcao.setValor(new Double(100));
-		porcaoList.add(custo);
+		porcaoList.add(porcao);
 
 		return porcaoList;
 	}
 
-	public List<Rentabilidade> mockRentabilidade(ModelAction model)
+	public List<Rentabilidade> mockRentabilidade(PersistanceActionEnum model)
 	{
 		List<Rentabilidade> rentabilidadeList = new ArrayList<Rentabilidade>();
-		List<RentabilidadeItem> rentabilidadeItemList = new ArrayList<RentabilidadeItem>();
+		List<RentabilidadeItens> rentabilidadeItensList = new ArrayList<RentabilidadeItens>();
 
-		RentabilidadeItem item = new RentabilidadeItem();
+		RentabilidadeItens item = new RentabilidadeItens();
 		item.setId(1);
 		item.setProduto(new Produto(1));
 		item.setValor(new Double(10));
 		item.setRentabilidadeTypeEnum(RentabilidadeTypeEnum.PRODUTO);
-		rentabilidadeItemList.add(item);
+		rentabilidadeItensList.add(item);
 
-		item = new RentabilidadeItem();
+		item = new RentabilidadeItens();
 		item.setId(2);
 		item.setProduto(new Produto(2));
 		item.setValor(new Double(5));
 		item.setRentabilidadeTypeEnum(RentabilidadeTypeEnum.PRODUTO);
-		rentabilidadeItemList.add(item);
+		rentabilidadeItensList.add(item);
 
-		item = new RentabilidadeItem();
+		item = new RentabilidadeItens();
 		item.setId(3);
 		item.setProduto(new Produto(3));
 		item.setValor(new Double(1));
 		item.setRentabilidadeTypeEnum(RentabilidadeTypeEnum.PERDA);
-		rentabilidadeItemList.add(item);
+		rentabilidadeItensList.add(item);
 
 		Rentabilidade rentabilidade = new Rentabilidade();
-		porcao.setId(1);
-		porcao.setRentabilidadeList(porcaoItemList);
-		rentabilidadeList.add(custo);
+		rentabilidade.setId(1);
+		rentabilidade.setRentabilidadeList(rentabilidadeItensList);
+		rentabilidadeList.add(rentabilidade);
 
 		return rentabilidadeList;
 	}

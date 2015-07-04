@@ -90,7 +90,7 @@ public class Cliente extends Pessoa
 				+ getConvenioList() + ", getPessoaTypeEnumValue()=" + getPessoaTypeEnumValue() + ", getNome()="
 				+ getNome() + ", getNomePai()=" + getNomePai() + ", getNomeMae()=" + getNomeMae()
 				+ ", getNomeConjugue()=" + getNomeConjugue() + ", getEstadoCivil()=" + getEstadoCivil()
-				+ ", getDatanasc()=" + getDatanasc() + ", getFoto()=" + getFoto() + ", getCdEmpr()=" + getCdEmpr()
+				+ ", getDatanasc()=" + getDatanasc() + ", getFoto()=" + getFoto()
 				+ ", getPessoaTypeEnum()=" + getPessoaTypeEnum() + ", getFormaPagamentoList()="
 				+ getFormaPagamentoList() + ", getCondPagList()=" + getCondPagList() + ", getContatoList()="
 				+ getContatoList() + ", getSexo()=" + getSexo() + ", getEnderecos()=" + getEnderecos()

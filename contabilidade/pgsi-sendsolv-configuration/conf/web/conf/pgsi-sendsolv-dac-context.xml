@@ -322,10 +322,6 @@
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
 
- 	<bean id="pedidoComprasItensDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.PedidoComprasItensDACImpl">
- 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
- 	</bean>
-
  	<bean id="pessoaDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.PessoaDACImpl">
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
@@ -338,7 +334,7 @@
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
 
- 	<bean id="profissaoDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.ProfissaDACImpl">
+ 	<bean id="profissaoDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.ProfissaoDACImpl">
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
 
