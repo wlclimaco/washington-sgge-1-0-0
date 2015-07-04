@@ -14,7 +14,7 @@
        necessary if the columns (or aliases) match to the properties
        exactly. -->
 
-  <resultMap id="tributosResult" type="Tributos" >
+  <resultMap id="tributosResult" type="Tributacao" >
     <result property="id" column="id" />
     <result property="parentId" column="parentId" />
     <result property="cstId" column="cstId" />
@@ -25,17 +25,17 @@
     <result property="ipi" column="ipi" />
     <result property="iat" column="iat" />
     <result property="ippt" column="ippt" />
-    <result property="incidencia" column="incidencia" />
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
+	<association property="incidencia"    column="incidencia" select="IncidenciaMap.fetchById"  />
   </resultMap>
 
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
-  <sql id="allTributosColumns">
+  <sql id="allTributacaoColumns">
 		 b.parentId
 		,b.cstId
 		,b.icms
@@ -52,7 +52,7 @@
       	,b.modify_user
   </sql>
 
-  <sql id="allTributosValues">
+  <sql id="allTributacaoValues">
   		 #{parentId}
 		,#{cstId}
 		,#{icms}
@@ -62,18 +62,18 @@
 		,#{ipi}
 		,#{iat}
 		,#{ippt}
-		,#{incidencia}
+		,#{incidencia.id}
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
   <!--
 		SQL Insert Statements.
  	-->
-  <insert id="insertTributos" parameterType="Tributos" useGeneratedKeys="true" keyProperty="id">
+  <insert id="insertTributacao" parameterType="Tributacao" useGeneratedKeys="true" keyProperty="id">
   	INSERT INTO tributos (
-		<include refid="allTributosColumns" />
+		<include refid="allTributacaoColumns" />
       )
-    VALUES (<include refid="allTributosValues" /> )
+    VALUES (<include refid="allTributacaoValues" /> )
   </insert>
 
 
@@ -81,7 +81,7 @@
 		SQL Update Statements.
  	-->
 
-  <update id="updateTributos" parameterType="Tributos">
+  <update id="updateTributacao" parameterType="Tributacao">
     UPDATE tributos
     	<set>
     		<if test="codigo!= null">codigo = #{codigo},</if>
@@ -96,14 +96,14 @@
    <!--
 		SQL Delete Statements.
    -->
-  <delete id="deleteTributosById" parameterType="Integer">
+  <delete id="deleteTributacaoById" parameterType="Integer">
     	DELETE FROM tributos WHERE id = #{id}
   </delete>
 
 	<!--
 		SQL Fetch Statements.
  	-->
-  <select id="fetchTributosRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+  <select id="fetchTributacaoRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
         FROM tributos
      WHERE 1 = 1
@@ -112,30 +112,30 @@
 	 </if>
   </select>
 
-  <select id="fetchAllTributoss" resultMap="tributosResult">
+  <select id="fetchAllTributacaos" resultMap="tributosResult">
     SELECT
-	<include refid="allTributosColumns" />
+	<include refid="allTributacaoColumns" />
     FROM tributos ORDER BY id ASC
   </select>
 
-  <select id="fetchTributosById" parameterType="FetchByIdRequest" resultMap="tributosResult">
+  <select id="fetchTributacaoById" parameterType="FetchByIdRequest" resultMap="tributosResult">
 	SELECT b.id,
-	<include refid="allTributosColumns" />
+	<include refid="allTributacaoColumns" />
     FROM tributos b
     where id = #{id}
     ORDER BY id ASC
   </select>
 
-   <select id="fetchTributosByNota" parameterType="Integer" resultMap="tributosResult">
+   <select id="fetchTributacaoByNota" parameterType="Integer" resultMap="tributosResult">
 	SELECT b.id,
-	<include refid="allTributosColumns" />
+	<include refid="allTributacaoColumns" />
     FROM tributos b
     where id = #{parentId}
     ORDER BY id ASC
   </select>
 
-  <select id="fetchAllTributossByRequest" parameterType="PagedInquiryRequest" resultMap="tributosResult">
-	 SELECT b.id,<include refid="allTributosColumns" />
+  <select id="fetchAllTributacaosByRequest" parameterType="PagedInquiryRequest" resultMap="tributosResult">
+	 SELECT b.id,<include refid="allTributacaoColumns" />
         FROM tributos b
      WHERE 1 = 1
      <if test="id != null">
@@ -143,7 +143,7 @@
 	 </if>
   </select>
 
-  <select id="fetchTributosByProduto" parameterType="Integer" resultMap="tributosResult">
+  <select id="fetchTributacaoByProduto" parameterType="Integer" resultMap="tributosResult">
 	  	SELECT F.*
 
 		  FROM tributosProd AS C

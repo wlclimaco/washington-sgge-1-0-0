@@ -60,7 +60,7 @@
   		#{userId},
   		#{nome},
     	#{data},
-    	#{typeId.id},
+    	#{typeServico.id},
     	#{assunto},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
@@ -88,7 +88,7 @@
 	    	<if test="userId!= null"> userId=#{userId},</if>
 	    	<if test="nome!= null"> nome=#{nome},</if>
 	    	<if test="data!= null"> data=#{data},</if>
-	    	<if test="typeId!= null"> typeId=#{typeId},</if>
+	    	<if test="typeServico.id!= null"> typeId=#{typeServico.id},</if>
 			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>

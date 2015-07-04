@@ -1,7 +1,29 @@
 package com.prosperitasglobal.sendsolv.empresa.controller;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.Cidade;
+import com.prosperitasglobal.sendsolv.model.Cnae;
+import com.prosperitasglobal.sendsolv.model.Documento;
+import com.prosperitasglobal.sendsolv.model.Email;
+import com.prosperitasglobal.sendsolv.model.Empresa;
+import com.prosperitasglobal.sendsolv.model.Endereco;
+import com.prosperitasglobal.sendsolv.model.Estado;
+import com.prosperitasglobal.sendsolv.model.Regime;
+import com.prosperitasglobal.sendsolv.model.Socio;
+import com.prosperitasglobal.sendsolv.model.Telefone;
+import com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.EmpresaMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
+import com.qat.framework.model.QATModel.PersistanceActionEnum;
 
 @Controller
 @RequestMapping("/api/empresa")
@@ -28,8 +50,6 @@ public class EmpresaAPIController extends EmpresaBaseController
 	private static final String FETCH = "/fetch";
 	/** The Constant APPLY. */
 	private static final String APPLY = "/applyStatus";
-	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(EmpresaAPIController.class);
 
 	/** The Constant CONTROLLER_EXCEPTION_MSG. */
 	private static final String CONTROLLER_EXCEPTION_MSG = "EmpresaAPIController";
@@ -74,7 +94,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 	@ResponseBody
 	public EmpresaResponse editEmpresa(@RequestBody EmpresaMaintenanceRequest empresaRequest)
 	{
-		empresaRequest.setEmpresa(insertMockEmpresa(ModelAction.INSERT));
+		empresaRequest.setEmpresa(insertMockEmpresa(PersistanceActionEnum.INSERT));
 		return edit(empresaRequest);
 
 	}
@@ -89,7 +109,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 	@ResponseBody
 	public EmpresaResponse deleteEmpresa(@RequestBody EmpresaMaintenanceRequest empresaRequest)
 	{
-		empresaRequest.setEmpresa(insertMockEmpresa(ModelAction.INSERT));
+		empresaRequest.setEmpresa(insertMockEmpresa(PersistanceActionEnum.INSERT));
 		return delete(empresaRequest);
 
 	}
@@ -104,12 +124,12 @@ public class EmpresaAPIController extends EmpresaBaseController
 	@ResponseBody
 	public EmpresaResponse insertEmpresa(@RequestBody EmpresaMaintenanceRequest empresaRequest)
 	{
-		empresaRequest.setEmpresa(insertMockEmpresa(ModelAction.INSERT));
+		empresaRequest.setEmpresa(insertMockEmpresa(PersistanceActionEnum.INSERT));
 		return insert(empresaRequest);
 
 	}
 
-	public List<Endereco> insertEndereco(ModelAction modelAction)
+	public List<Endereco> insertEndereco(PersistanceActionEnum modelAction)
 	{
 		List<Endereco> enderecoList = new ArrayList<Endereco>();
 		Endereco endereco = new Endereco();
@@ -126,7 +146,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 		return enderecoList;
 	}
 
-	public List<Email> insertEmail(ModelAction modelAction)
+	public List<Email> insertEmail(PersistanceActionEnum modelAction)
 	{
 
 		List<Email> emailList = new ArrayList<Email>();
@@ -154,58 +174,58 @@ public class EmpresaAPIController extends EmpresaBaseController
 		return emailList;
 	}
 
-	public List<Cnae> insertCnae(ModelAction modelAction)
+	public List<Cnae> insertCnae(PersistanceActionEnum modelAction)
 	{
 		List<Cnae> cnaeList = new ArrayList<Cnae>();
 		Cnae cnae = new Cnae();
-		cnae.setModelAction("NONE");
+		// cnae.setModelAction("NONE");
 		cnae.setId(1);
 		cnaeList.add(cnae);
 
 		cnae = new Cnae();
-		cnae.setModelAction("NONE");
+		// cnae.setModelAction("NONE");
 		cnae.setId(2);
 		cnaeList.add(cnae);
 
 		cnae = new Cnae();
-		cnae.setModelAction("NONE");
+		// cnae.setModelAction("NONE");
 		cnae.setId(3);
 		cnaeList.add(cnae);
 
 		return cnaeList;
 	}
 
-	public List<Telefone> insertTelefone(ModelAction modelAction)
+	public List<Telefone> insertTelefone(PersistanceActionEnum modelAction)
 	{
 		List<Telefone> telefoneList = new ArrayList<Telefone>();
 		Telefone telefone = new Telefone();
 		telefone.setModelAction(modelAction);
 		telefone.setId(1);
 		telefone.setDdd("34");
-		telefone.setTelefone("91782776");
-		telefone.setDescricao("Casa");
+		// telefone.setTelefone("91782776");
+		// telefone.setDescricao("Casa");
 		telefoneList.add(telefone);
 
 		telefone = new Telefone();
 		telefone.setModelAction(modelAction);
 		telefone.setId(1);
 		telefone.setDdd("34");
-		telefone.setTelefone("91782776");
-		telefone.setDescricao("Trabalho");
+		// telefone.setTelefone("91782776");
+		// telefone.setDescricao("Trabalho");
 		telefoneList.add(telefone);
 
 		telefone = new Telefone();
 		telefone.setModelAction(modelAction);
 		telefone.setId(1);
 		telefone.setDdd("34");
-		telefone.setTelefone("91782776");
-		telefone.setDescricao("Celular");
+		// telefone.setTelefone("91782776");
+		// telefone.setDescricao("Celular");
 		telefoneList.add(telefone);
 
 		return telefoneList;
 	}
 
-	public List<Documento> insertDocumento(ModelAction modelAction)
+	public List<Documento> insertDocumento(PersistanceActionEnum modelAction)
 	{
 		List<Documento> documentoList = new ArrayList<Documento>();
 		Documento documento = new Documento();
@@ -232,11 +252,11 @@ public class EmpresaAPIController extends EmpresaBaseController
 		return documentoList;
 	}
 
-	public List<Socio> insertDocumento(ModelAction modelAction)
+	public List<Socio> insertSocio(PersistanceActionEnum modelAction)
 	{
 		List<Socio> socioList = new ArrayList<Socio>();
 		Socio socio = new Socio();
-		socio.setModelAction(modelAction;
+		socio.setModelAction(PersistanceActionEnum.INSERT);
 		socio.setId(1);
 		socio.setNome("Washington Luis");
 		socio.setCota("1");
@@ -254,7 +274,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 		return socioList;
 	}
 
-	public Empresa insertMockEmpresa(ModelAction modelAction)
+	public Empresa insertMockEmpresa(PersistanceActionEnum modelAction)
 	{
 		Empresa empresa = new Empresa();
 
@@ -262,7 +282,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 		empresa.setModelAction(modelAction);
 		empresa.setNome("Cosme e damiao Contabiliadade");
 		empresa.setRegime(new Regime(1));
-		empresa.setConfiguracao(new Configuracao(1));
+		// empresa.setConfiguracao(new Configuracao(1));
 		empresa.setEnderecos(insertEndereco(modelAction));
 		empresa.setDocumentos(insertDocumento(modelAction));
 		empresa.setEmails(insertEmail(modelAction));

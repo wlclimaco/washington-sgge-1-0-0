@@ -65,6 +65,8 @@
 		<typeAlias alias="NotaFiscalItens"              	 		 type="com.prosperitasglobal.sendsolv.model.NotaFiscalItens"/>
 		<typeAlias alias="Orcamento"              					 type="com.prosperitasglobal.sendsolv.model.Orcamento"/>
 		<typeAlias alias="OrcamentoItens"              		 		 type="com.prosperitasglobal.sendsolv.model.OrcamentoItens"/>
+		<typeAlias alias="OrdemServicoTypes"              		 	 type="com.prosperitasglobal.sendsolv.model.OrdemServicoTypes"/>
+		<typeAlias alias="OrdemServicoStatus"              		 	 type="com.prosperitasglobal.sendsolv.model.OrdemServicoStatus"/>
 		<typeAlias alias="OrdemServico"              		 		 type="com.prosperitasglobal.sendsolv.model.OrdemServico"/>
 		<typeAlias alias="OrdemServicoItens"              	 		 type="com.prosperitasglobal.sendsolv.model.OrdemServicoItens"/>
 		<typeAlias alias="PedidoCompras"              		 		 type="com.prosperitasglobal.sendsolv.model.PedidoCompras"/>
@@ -162,7 +164,7 @@
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/regime.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/rentabilidade.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/rentabilidadeItens.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/salario.xml" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/salarios.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/socios.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/status.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/subgrupo.xml" />
