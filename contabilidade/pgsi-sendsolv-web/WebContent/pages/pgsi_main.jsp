@@ -6,6 +6,10 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title></title>
+	<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css" />
+	<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css.map" />
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
+
 	<link rel="stylesheet" href="styles/preload.css" />
 	<link rel="stylesheet" href="styles/actions.css" />
 	<link rel="stylesheet" href="styles/fonts.css" />
@@ -67,8 +71,11 @@ head.load("thirdparty/jquery/jquery-1.11.1.min.js",
 				    "commons/scripts/pgsi_commons_filter_1.0.js",
 					"scripts/util/page.js",
 				    "thirdparty/jquery/custom/jquery.combobox.js",
-				    "thirdparty/jquery/custom/jquery.checkbox.js",
+				    "bootstrap/js/bootstrap.js",
+				    "bootstrap/js/bootstrap.min.js",
 				    "scripts/util/checkbox.js",
+				    "scripts/util/combobox.js",
+				    "scripts/util/combobox.js",
 				    "scripts/util/combobox.js",
 				    "scripts/util/filter_util.js",
 				    "scripts/pages/pgsi_main.js");
