@@ -21,7 +21,7 @@ public class Documento extends ModelCosmeDamiao
 	private Long data;
 
 	/** The estado. */
-	private String estado;
+	private Estado estado;
 
 	/**
 	 * Default constructor.
@@ -116,7 +116,7 @@ public class Documento extends ModelCosmeDamiao
 	 *
 	 * @return the estado
 	 */
-	public String getEstado()
+	public Estado getEstado()
 	{
 		return estado;
 	}
@@ -126,7 +126,7 @@ public class Documento extends ModelCosmeDamiao
 	 *
 	 * @param estado the estado to set
 	 */
-	public void setEstado(String estado)
+	public void setEstado(Estado estado)
 	{
 		this.estado = estado;
 	}

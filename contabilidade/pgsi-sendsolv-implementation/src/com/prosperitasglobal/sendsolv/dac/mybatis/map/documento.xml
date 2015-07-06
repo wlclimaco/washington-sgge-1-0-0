@@ -22,11 +22,11 @@
 	<result property="description" column="description" />
     <result property="numero" column="numero" />
    	<result property="data" column="data"/>
-	<result property="estado" column="estado"/>
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
+	<association property="estado"    column="estado" select="EstadoMap.fetchEstadoById"  />
 	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByDocumento"/>
   </resultMap>
 
