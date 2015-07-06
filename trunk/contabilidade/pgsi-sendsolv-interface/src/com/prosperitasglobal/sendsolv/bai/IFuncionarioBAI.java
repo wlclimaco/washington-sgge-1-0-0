@@ -1,9 +1,15 @@
 package com.prosperitasglobal.sendsolv.bai;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.request.BeneficiosInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.EventoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.FuncionarioInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.FuncionarioMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.HoraFuncInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.response.BeneficiosResponse;
+import com.prosperitasglobal.sendsolv.model.response.EventoResponse;
 import com.prosperitasglobal.sendsolv.model.response.FuncionarioResponse;
+import com.prosperitasglobal.sendsolv.model.response.HoraFuncResponse;
 
 /**
  * The Interface IFuncionarioBAI.
@@ -50,5 +56,29 @@ public interface IFuncionarioBAI
 	 * @return the funcionario response
 	 */
 	public FuncionarioResponse fetchFuncionarioByRequest(FuncionarioInquiryRequest request);
+
+	/**
+	 * Fetch beneficios by request.
+	 *
+	 * @param request the request
+	 * @return the beneficios response
+	 */
+	public BeneficiosResponse fetchBeneficiosByRequest(BeneficiosInquiryRequest request);
+
+	/**
+	 * Fetch hora func by request.
+	 *
+	 * @param request the request
+	 * @return the hora func response
+	 */
+	public HoraFuncResponse fetchHoraFuncByRequest(HoraFuncInquiryRequest request);
+
+	/**
+	 * Fetch evento by request.
+	 *
+	 * @param request the request
+	 * @return the evento response
+	 */
+	public EventoResponse fetchEventoByRequest(EventoInquiryRequest request);
 
 }

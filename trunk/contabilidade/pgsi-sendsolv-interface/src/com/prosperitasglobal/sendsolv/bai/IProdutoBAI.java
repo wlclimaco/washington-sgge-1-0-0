@@ -1,9 +1,21 @@
 package com.prosperitasglobal.sendsolv.bai;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.request.CfopInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.GrupoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.MarcaInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ProdutoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ProdutoMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.SubGrupoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.TributacaoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.UniMedInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.response.CfopResponse;
+import com.prosperitasglobal.sendsolv.model.response.GrupoResponse;
+import com.prosperitasglobal.sendsolv.model.response.MarcaResponse;
 import com.prosperitasglobal.sendsolv.model.response.ProdutoResponse;
+import com.prosperitasglobal.sendsolv.model.response.SubGrupoResponse;
+import com.prosperitasglobal.sendsolv.model.response.TributacaoResponse;
+import com.prosperitasglobal.sendsolv.model.response.UniMedResponse;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -57,11 +69,51 @@ public interface IProdutoBAI
 	public ProdutoResponse fetchProdutoByRequest(ProdutoInquiryRequest request);
 
 	/**
-	 * Fetch location by organization.
+	 * Fetch uni med by request.
 	 *
 	 * @param request the request
-	 * @return the location response
+	 * @return the uni med response
 	 */
-	public ProdutoResponse fetchProdutoByOrganization(ProdutoInquiryRequest request);
+	public UniMedResponse fetchUniMedByRequest(UniMedInquiryRequest request);
+
+	/**
+	 * Fetch grupo by request.
+	 *
+	 * @param request the request
+	 * @return the grupo response
+	 */
+	public GrupoResponse fetchGrupoByRequest(GrupoInquiryRequest request);
+
+	/**
+	 * Fetch sub grupo by request.
+	 *
+	 * @param request the request
+	 * @return the sub grupo response
+	 */
+	public SubGrupoResponse fetchSubGrupoByRequest(SubGrupoInquiryRequest request);
+
+	/**
+	 * Fetch marca by request.
+	 *
+	 * @param request the request
+	 * @return the marca response
+	 */
+	public MarcaResponse fetchMarcaByRequest(MarcaInquiryRequest request);
+
+	/**
+	 * Fetch tributacao by request.
+	 *
+	 * @param request the request
+	 * @return the tributacao response
+	 */
+	public TributacaoResponse fetchTributacaoByRequest(TributacaoInquiryRequest request);
+
+	/**
+	 * Fetch cfop by request.
+	 *
+	 * @param request the request
+	 * @return the cfop response
+	 */
+	public CfopResponse fetchCfopByRequest(CfopInquiryRequest request);
 
 }

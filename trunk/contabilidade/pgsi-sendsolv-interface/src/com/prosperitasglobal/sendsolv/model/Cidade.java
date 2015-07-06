@@ -13,6 +13,10 @@ public class Cidade extends ModelCosmeDamiao
 	/** The type of an account. */
 	private String nome;
 
+	private String cdIBGE;
+
+	private Estado estado;
+
 	/**
 	 * Default constructor.
 	 */
