@@ -9,9 +9,13 @@ import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.bac.IEmpresaBAC;
 import com.prosperitasglobal.sendsolv.bai.IEmpresaBAI;
 import com.prosperitasglobal.sendsolv.model.Empresa;
+import com.prosperitasglobal.sendsolv.model.request.CnaeInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.EmpresaMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.RegimeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.response.CnaeResponse;
 import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
+import com.prosperitasglobal.sendsolv.model.response.RegimeResponse;
 import com.qat.framework.model.Message.MessageLevel;
 import com.qat.framework.model.Message.MessageSeverity;
 import com.qat.framework.model.MessageInfo;
@@ -335,6 +339,20 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 				}
 				break;
 		}
+		return null;
+	}
+
+	@Override
+	public CnaeResponse fetchCnaeByRequest(CnaeInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public RegimeResponse fetchRegimeByRequest(RegimeInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
 		return null;
 	}
 

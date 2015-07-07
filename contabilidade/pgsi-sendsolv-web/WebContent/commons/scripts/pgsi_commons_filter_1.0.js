@@ -1,6 +1,6 @@
 $(document).ready(function()
 {
-	$.sc.filter = (function()
+	$.pgsi.filter = (function()
 	{
 		var _oConfig =
 		{
@@ -131,7 +131,7 @@ $(document).ready(function()
 					_addTag(
 					{
 						typeId 		: parameter,
-						typeLabel 	: $.sc.locale.get((pgsi.util.filter.noFiltersTags[parameter].label ? pgsi.util.filter.noFiltersTags[parameter].label : parameter)),
+						typeLabel 	: $.pgsi.locale.get((pgsi.util.filter.noFiltersTags[parameter].label ? pgsi.util.filter.noFiltersTags[parameter].label : parameter)),
 						label 		: $.address.parameter(parameter),
 						value 		: parameter,
 						title 		: parameter,
@@ -305,9 +305,9 @@ $(document).ready(function()
 		{
 			_oConfig.common.bActionPerformed = true;
 
-			if ( $.sc.map.mapExists() && ($("#" + _oConfig.common.mapListId).length && !$("#" + _oConfig.common.mapListId).hasClass(_oConfig.common.hideMap)) )
+			if ( $.pgsi.map.mapExists() && ($("#" + _oConfig.common.mapListId).length && !$("#" + _oConfig.common.mapListId).hasClass(_oConfig.common.hideMap)) )
 			{
-				$.sc.map.mapFromFilter();
+				$.pgsi.map.mapFromFilter();
 			}
 			else
 			{
@@ -317,7 +317,7 @@ $(document).ready(function()
 				}
 				else
 				{
-					$.sc.table.reloadTable({
+					$.pgsi.table.reloadTable({
 						table 		: options.table,
 						iStart 		: 0
 					});
@@ -331,12 +331,12 @@ $(document).ready(function()
 
 			if ( flt.type == _options.filterTypes[0] )
 			{
-				$.sc.pageLoader.setParameter(flt.urlParameter,
-					(($.sc.replaceAll(_oConfig.project.notInValue + "\\|", "", decodeURI($.address.parameter(flt.urlParameter) || "")) || "") + (value ? (value + "|") : "")));
+				$.pgsi.pageLoader.setParameter(flt.urlParameter,
+					(($.pgsi.replaceAll(_oConfig.project.notInValue + "\\|", "", decodeURI($.address.parameter(flt.urlParameter) || "")) || "") + (value ? (value + "|") : "")));
 			}
 			else
 			{
-				$.sc.pageLoader.setParameter(flt.urlParameter, value);
+				$.pgsi.pageLoader.setParameter(flt.urlParameter, value);
 			}
 		};
 
@@ -356,17 +356,17 @@ $(document).ready(function()
 					actualValue.splice(indexOf, 1);
 					actualValue.pop();
 
-					$.sc.pageLoader.setParameter(flt.urlParameter,
+					$.pgsi.pageLoader.setParameter(flt.urlParameter,
 						actualValue.length > 0 ? decodeURI(actualValue.join("|") + "|") : null);
 				}
 			}
 			else if ( flt && flt.inputs && flt.inputs[field] )
 			{
-				$.sc.pageLoader.setParameter(flt.inputs[field].urlParameter || field, null);
+				$.pgsi.pageLoader.setParameter(flt.inputs[field].urlParameter || field, null);
 			}
 			else
 			{
-				$.sc.pageLoader.setParameter(flt.urlParameter || field, null);
+				$.pgsi.pageLoader.setParameter(flt.urlParameter || field, null);
 			}
 		};
 
@@ -394,13 +394,13 @@ $(document).ready(function()
 			// Replace is used to lock down application from XSS
 			if ( pgsi.util.page.fnCheckXSS(oParam.value) )
 			{
-				var sInvalidTag = $.sc.locale.get("pgsi.filter.validation.invalidTag");
+				var sInvalidTag = $.pgsi.locale.get("pgsi.filter.validation.invalidTag");
 
 				oParam.value = sInvalidTag;
 				oParam.label = sInvalidTag;
 				oParam.title = sInvalidTag;
 
-				$.sc.progressBar.stop();
+				$.pgsi.progressBar.stop();
 			}
 
 			if ( oParam.typeId == _options.filterTypes[5] )
@@ -429,7 +429,7 @@ $(document).ready(function()
 				if (oParam.typeLabel == _oConfig.project.sViewFromParam)
 				{
 					sValue 				= _getViewFromLabel($(oParam.oInput[0]));
-					oParam.typeLabel	= $.sc.locale.get(_oConfig.messages.viewing);
+					oParam.typeLabel	= $.pgsi.locale.get(_oConfig.messages.viewing);
 					oParam.title 		= sValue;
 					oParam.label 		= sValue;
 				}
@@ -455,7 +455,7 @@ $(document).ready(function()
 					$tag.find("span.title").attr("title", oParam.title).text(sValue);
 					$tag.find("span.remove").text(oParam.typeLabel);
 				}
-				else if ( oParam.typeLabel !== $.sc.locale.get(_oConfig.messages.back) )
+				else if ( oParam.typeLabel !== $.pgsi.locale.get(_oConfig.messages.back) )
 				{
 					// Show 'Reset Filter' tag
 					if ( $tagsDiv.hasClass("hide") && $tagsDiv.find("." + _oConfig.common.filterContainer + " li").length > 0 )
@@ -522,7 +522,7 @@ $(document).ready(function()
 				{
 					var filterId = $tags[i].id.split(" ");
 
-					if($.sc.isValidArray(aKeepFilters) && aKeepFilters.indexOf(filterId[0]) !== -1)
+					if($.pgsi.isValidArray(aKeepFilters) && aKeepFilters.indexOf(filterId[0]) !== -1)
 					{
 						continue;
 					}
@@ -701,7 +701,7 @@ $(document).ready(function()
 					$input = $($inputs[i]);
 					var sMin = $input.closest("div").siblings("p").find("span:eq(0)").text();
 					var sMax = $input.closest("div").siblings("p").find("span:eq(1)").text();
-					value = sMin + " " + $.sc.locale.get(_oConfig.messages.rangeTo) + " " + sMax;
+					value = sMin + " " + $.pgsi.locale.get(_oConfig.messages.rangeTo) + " " + sMax;
 
 					if (value)
 					{
@@ -747,16 +747,16 @@ $(document).ready(function()
 		  */
 		var _createMapTag = function ()
 		{
-			var value 		= parseFloat($.sc.map.getVectorArea()).toFixed(2);
-			var label 		= $.sc.locale.get(_oConfig.messages.mapShape, [$.sc.map.getVectorIndex(), value, "<sup>2</sup>"]);
-			var typeLabel 	= $.sc.locale.get(_oConfig.messages.mapDrawing);
+			var value 		= parseFloat($.pgsi.map.getVectorArea()).toFixed(2);
+			var label 		= $.pgsi.locale.get(_oConfig.messages.mapShape, [$.pgsi.map.getVectorIndex(), value, "<sup>2</sup>"]);
+			var typeLabel 	= $.pgsi.locale.get(_oConfig.messages.mapDrawing);
 
 			$(".filter-results-container-map").removeClass("hide");
 
 			return $("<li class='" + _options.filterTypes[5] + "'><span class='type remove'>" +
 				typeLabel + "</span>" +
 				"<span class='title'><span class='shape-icon' style='background:" +
-				$.sc.map.getVectorColor() + "; opacity:0.6'></span>" +
+				$.pgsi.map.getVectorColor() + "; opacity:0.6'></span>" +
 				label + "</span></li>");
 		};
 
@@ -796,7 +796,7 @@ $(document).ready(function()
 			var length 		= options.length;
 			var $select 	= ["<select " + (length < 2 ? "style='display:none;'" : "") + "name='" + name + "' class='" + clazz + "' id='" + name + "'>"];
 			var i 			= 0;
-			var get 		= $.sc.locale.get;
+			var get 		= $.pgsi.locale.get;
 			var opt;
 			var sValue;
 			var sLabel;
@@ -820,7 +820,7 @@ $(document).ready(function()
 			var sIdRangeMin = options.label + "-range-min";
 			var sIdRangeMax = options.label + "-range-max";
 
-			$range.push("<p><span class'range-min' id='"+ sIdRangeMin +"'>"+ (options.values ? options.values[0] : options.minsize) + "</span>  " + $.sc.locale.get(_oConfig.messages.rangeTo) + " ");
+			$range.push("<p><span class'range-min' id='"+ sIdRangeMin +"'>"+ (options.values ? options.values[0] : options.minsize) + "</span>  " + $.pgsi.locale.get(_oConfig.messages.rangeTo) + " ");
 			$range.push("<span class'range-max' id='"+ sIdRangeMax +"'>"+ (options.values ? options.values[1] : options.maxsize) + "</span></p>");
 			$range.push("<div name='" + name + "' id='" + name + "' class='" + _oConfig.common.rangeSlider+ "' data-begin='" + options.minsize + "' data-end='" + options.maxsize + "'></div>");
 
@@ -839,7 +839,7 @@ $(document).ready(function()
 				//	All
 				sHtml += "<li class='checkbox " + _oConfig.common.allChecked + (flt.allClass ? " " + flt.allClass : "") + "'>";
 					sHtml += "<label><input type='checkbox' " + (isChecked ? "checked='checked'" : "") + " value='" + _oConfig.project.allValue + "'/> ";
-					sHtml += "<strong>" + $.sc.locale.get(flt.allLabel) + "</strong></label>";
+					sHtml += "<strong>" + $.pgsi.locale.get(flt.allLabel) + "</strong></label>";
 				sHtml += "</li>";
 
 				//	Not In
@@ -847,7 +847,7 @@ $(document).ready(function()
 				{
 					sHtml += "<li class='checkbox " + _oConfig.common.notInChecked + "'>";
 						sHtml += "<label><input type='checkbox' value='" + _oConfig.project.notInValue + "'/> ";
-						sHtml += "<span>" + $.sc.locale.get(flt.notInFilter.label) + "</span></label>";
+						sHtml += "<span>" + $.pgsi.locale.get(flt.notInFilter.label) + "</span></label>";
 					sHtml += "</li>";
 				}
 
@@ -876,33 +876,33 @@ $(document).ready(function()
 			return "<div id='customFilter' class='" + _oConfig.common.filterInput + " advanced ui-widget'>"
 				+ "<a class='button ui-button ui-widget ui-state-default ui-corner-all "
 				+ "ui-button-text-only' id='custom-filter-action' href='' role='button' aria-disabled='false'>"
-				+ "<span class='ui-button-text'>" + $.sc.locale.get(_oConfig.messages.filterCustomize) + "</span></a></div>";
+				+ "<span class='ui-button-text'>" + $.pgsi.locale.get(_oConfig.messages.filterCustomize) + "</span></a></div>";
 		};
 
 
 		//	Add DatePicker functionality
 		var _startDatePicker = function (options)
 		{
-			var currentTime = new Date();
-			var systemTime 	= $.sc.date.createTimeZoneJS();
-			var iDifTime	= systemTime.getDate() - currentTime.getDate();
-
-			var sDifTime;
-
-			if (iDifTime <= 1 && iDifTime >= -1)
-			{
-				sDifTime = ( (iDifTime == -1) ? (iDifTime) : ("+" + iDifTime) ) + "D";
-			}
-			else if (iDifTime > 1)
-			{
-				sDifTime = "-1D";
-			}
-			else if (iDifTime < -1)
-			{
-				sDifTime = "+1D";
-			}
-
-			$(options.element).find(".date-filter").datepicker({dateFormat: pgsi.settings.user.dateFormat, maxDate: sDifTime});
+//			var currentTime = new Date();
+//			var systemTime 	= $.pgsi.date.createTimeZoneJS();
+//			var iDifTime	= systemTime.getDate() - currentTime.getDate();
+//
+//			var sDifTime;
+//
+//			if (iDifTime <= 1 && iDifTime >= -1)
+//			{
+//				sDifTime = ( (iDifTime == -1) ? (iDifTime) : ("+" + iDifTime) ) + "D";
+//			}
+//			else if (iDifTime > 1)
+//			{
+//				sDifTime = "-1D";
+//			}
+//			else if (iDifTime < -1)
+//			{
+//				sDifTime = "+1D";
+//			}
+//
+//			$(options.element).find(".date-filter").datepicker({dateFormat: pgsi.settings.user.dateFormat, maxDate: sDifTime});
 		};
 
 		//	Add Range Slider functionality
@@ -955,7 +955,7 @@ $(document).ready(function()
 				var $option;
 				var title;
 				var value = $this.val();
-				var sHint = $.sc.locale.get(_oConfig.messages.filterMore);
+				var sHint = $.pgsi.locale.get(_oConfig.messages.filterMore);
 
 				if (value && value.indexOf(sHint) == -1 && event.originalEvent)
 				{
@@ -993,7 +993,7 @@ $(document).ready(function()
 			{
 				var $this = $(this);
 				var iSelectSize = $this.siblings(_options.filterTypes[2]).find("option").length;
-				$this.val(iSelectSize + " " + $.sc.locale.get(_oConfig.messages.filterMore));
+				$this.val(iSelectSize + " " + $.pgsi.locale.get(_oConfig.messages.filterMore));
 			}).trigger("focusout");
 		};
 
@@ -1003,7 +1003,7 @@ $(document).ready(function()
 			var $option
 
 			// TODO - review impl and char limit and symbol
-			if ( !$.sc.isNullOrUndefined(extraData) && !$.sc.isNullOrUndefined(extraData.symboltitlevalid) )
+			if ( !$.pgsi.isNullOrUndefined(extraData) && !$.pgsi.isNullOrUndefined(extraData.symboltitlevalid) )
 			{
 				$option = $("<li class='checkbox' title=\"" + title + "\">"
 						+ "<input class='checkbox' " + (isChecked ? "checked='checked'" : "") + " type='checkbox' value='" + value + "'/> "
@@ -1041,14 +1041,14 @@ $(document).ready(function()
 			{
 				var id = $(this).closest("." + _oConfig.common.filterInput).attr("id");
 				iSelectSize = filters[id].dataList.length - firstOptions;
-				$(this).val(iSelectSize + " " + $.sc.locale.get(_oConfig.messages.filterMore));
+				$(this).val(iSelectSize + " " + $.pgsi.locale.get(_oConfig.messages.filterMore));
 			});
 		};
 
 		var _createSearchFilters = function(flt, isOpen, options)
 		{
 			var inputs 	= flt.inputs;
-			var _get 	= $.sc.locale.get;
+			var _get 	= $.pgsi.locale.get;
 			var $filter = [];
 			var input;
 
@@ -1140,7 +1140,7 @@ $(document).ready(function()
 			var data;
 
 			// Filter Title
-			$filter.push(_createFilterTitle($.sc.locale.get(flt.title), isOpen));
+			$filter.push(_createFilterTitle($.pgsi.locale.get(flt.title), isOpen));
 
 			$filter.push("<div class='collapse checkBoxUl' " + (isOpen ? "" : "style='display:none;'") + ">");
 
@@ -1156,7 +1156,7 @@ $(document).ready(function()
 				value = data[propertyValue];
 
 				// TODO - review impl and char limit and symbol
-				if ( !$.sc.isNullOrUndefined(oSymbol) )
+				if ( !$.pgsi.isNullOrUndefined(oSymbol) )
 				{
 					var symbolTitle 		= data[oSymbol.propertyTitle];
 					var symbolClass 		= oSymbol.sClass ? oSymbol.sClass + symbolTitle.toString().toLowerCase() : "";
@@ -1190,12 +1190,12 @@ $(document).ready(function()
 					title = data[propertyTitle] || "";
 					value = data[propertyValue];
 
-					if ( !$.sc.isNullOrUndefined(flt.listObj) )
+					if ( !$.pgsi.isNullOrUndefined(flt.listObj) )
 					{
 						value = data[propertyValue];
 					}
 
-					if ( !$.sc.isNullOrUndefined(oSymbol) )
+					if ( !$.pgsi.isNullOrUndefined(oSymbol) )
 					{
 						var symbolTitle 		= data[oSymbol.propertyTitle];
 						var symbolClass 		= oSymbol.sClass ? oSymbol.sClass + symbolTitle.toString().toLowerCase() : "";
@@ -1258,7 +1258,7 @@ $(document).ready(function()
 				$field = $($fields[i]);
 
 				//	input and select
-				if ( !$.sc.isNullOrUndefined($field.val()) )
+				if ( !$.pgsi.isNullOrUndefined($field.val()) )
 				{
 					val  = $field.val();
 					name = $field.attr("name");
@@ -1279,7 +1279,7 @@ $(document).ready(function()
 					val  = sMin + "|" + sMax;
 					name = $field.attr("name");
 
-					if ( !$.sc.isNullOrUndefined(oFilterValue[name]) )
+					if ( !$.pgsi.isNullOrUndefined(oFilterValue[name]) )
 					{
 						oFilterValue[name] = [val];
 					}
@@ -1292,7 +1292,7 @@ $(document).ready(function()
 				sFilterValue = filterValue.join("|");
 
 				// Add parameters
-				$.sc.pageLoader.setParameter(i, decodeURI(sFilterValue));
+				$.pgsi.pageLoader.setParameter(i, decodeURI(sFilterValue));
 			}
 
 			// Add tag
@@ -1655,14 +1655,14 @@ $(document).ready(function()
 					// Clear Selected checkbox
 					for (var i = 0; i < aIds.length; i++)
 					{
-						$.sc.table.checkbox(options.table).selected(aIds[i], true);
+						$.pgsi.table.checkbox(options.table).selected(aIds[i], true);
 						options.table.find(":checkbox[value=" + aIds[i] + "]").prop("checked", false);
 					}
 
-					$.sc.table.checkbox(options.table).setTotalResult();
+					$.pgsi.table.checkbox(options.table).setTotalResult();
 
 					// Remove Polygon
-					$.sc.map.destroyVectorFeatureById(sValue);
+					$.pgsi.map.destroyVectorFeatureById(sValue);
 
 					$parent.remove();
 
@@ -1786,7 +1786,7 @@ $(document).ready(function()
 				$("#customize-filter").wCustomize("Filters", null, options._objFiltersCustomize, "smartpointlist", null);
 
 				// TODO - future commons customize
-				/*$.sc.customization.open({
+				/*$.pgsi.customization.open({
 					sType : _oConfig.project.customizationType
 				});*/
 			};
@@ -1833,7 +1833,7 @@ $(document).ready(function()
 			var isOpen;
 			var type;
 
-			options.defaultSearchName = $.sc.locale.get(_oConfig.messages.defaultSearchNameLabel);
+			options.defaultSearchName = $.pgsi.locale.get(_oConfig.messages.defaultSearchNameLabel);
 
 			$filter.push("<div class='filter-vert rounded'>");
 
@@ -1878,7 +1878,7 @@ $(document).ready(function()
 					if (i.indexOf(_options.filterTypes[4]) === -1)
 					{
 						options._objFiltersCustomize.push({
-							name : $.sc.locale.get(filter.title),
+							name : $.pgsi.locale.get(filter.title),
 							session : i,
 							type : type
 						});
@@ -1958,7 +1958,7 @@ $(document).ready(function()
 
 			$(options.element).data(_options.filterTypes[0], options);
 
-			if ( !$.sc.isNullOrUndefined(options.fnCreateCallback) )
+			if ( !$.pgsi.isNullOrUndefined(options.fnCreateCallback) )
 			{
 				options.fnCreateCallback.call();
 			}
@@ -1972,7 +1972,7 @@ $(document).ready(function()
 				options	= $(options).data(_options.filterTypes[0]);
 			}
 
-			if ( $.sc.isNullOrUndefined(options) )
+			if ( $.pgsi.isNullOrUndefined(options) )
 			{
 				return;
 			}
@@ -2009,7 +2009,7 @@ $(document).ready(function()
 
 		var _actionPerformed = function(bReset)
 		{
-			if(!$.sc.isNullOrUndefined(bReset))
+			if(!$.pgsi.isNullOrUndefined(bReset))
 			{
 				_oConfig.common.bActionPerformed = false;
 			}

@@ -110,7 +110,7 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 	 */
 	var _fnCallBackInit = function ()
 	{
-		if ( !$.sc.isNullOrUndefined(fnCallBackSummary) && $.isFunction(fnCallBackSummary))
+		if ( !$.pgsi.isNullOrUndefined(fnCallBackSummary) && $.isFunction(fnCallBackSummary))
 		{
 			return fnCallBackSummary();
 		}
@@ -123,7 +123,7 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 	{
 		var aTabs = _oAction.aTabs;
 
-		if ( !$.sc.isNullOrUndefined(aTabs) )
+		if ( !$.pgsi.isNullOrUndefined(aTabs) )
 		{
 			for ( var i = 0, count = aTabs.length; i < count; i++)
 			{
@@ -202,8 +202,8 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 			iTotalFailed		= oProcessSummary.failedSmartpoints || 0;
 			iPercentageSuccess	= _fnGetPercentage(iTotalProcessItems, iTotalSuccess);
 			iPercentageFailed	= _fnGetPercentage(iTotalProcessItems, iTotalFailed);
-			sDescSuccessDevices	= iTotalSuccess + " " + $.sc.locale.get("commons.pages.smartPoints");
-			sDescFailedDevices 	= iTotalFailed 	+ " " + $.sc.locale.get("commons.pages.smartPoints");
+			sDescSuccessDevices	= iTotalSuccess + " " + $.pgsi.locale.get("commons.pages.smartPoints");
+			sDescFailedDevices 	= iTotalFailed 	+ " " + $.pgsi.locale.get("commons.pages.smartPoints");
 
 			// Create list of fails
 			_fnCreateListFails(oFailedDevicesGroup, oProcessSummary, null);
@@ -250,8 +250,8 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 		var oStatus;
 		var iTotal;
 
-		if ( !$.sc.isNullOrUndefined(oProcessSummary)
-				&& !$.sc.isNullOrUndefined(oProcessSummary.processItemStatusCountList)
+		if ( !$.pgsi.isNullOrUndefined(oProcessSummary)
+				&& !$.pgsi.isNullOrUndefined(oProcessSummary.processItemStatusCountList)
 				&& oProcessSummary.processItemStatusCountList.length )
 		{
 			oProcessStatus = oProcessSummary.processItemStatusCountList;
@@ -266,13 +266,13 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 				{
 					if (sStatus == "FAILED" && bRetry)
 					{
-						aLi.push("<li class='fail'>" + ($.sc.locale.get("summary.text.processStatusMessage." + (iTotal > 1 ? "plural." : "single.") + sStatus, "" + iTotal)) +
+						aLi.push("<li class='fail'>" + ($.pgsi.locale.get("summary.text.processStatusMessage." + (iTotal > 1 ? "plural." : "single.") + sStatus, "" + iTotal)) +
 								" <a href='#' id='retry-failed' class='button small ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only' role='button' aria-disabled='false'>" +
-								" <span class='ui-button-text'>" + $.sc.locale.get("summary.text.retryConnect") + "</span></a></li>");
+								" <span class='ui-button-text'>" + $.pgsi.locale.get("summary.text.retryConnect") + "</span></a></li>");
 						continue;
 					}
 
-					aLi.push("<li class='fail'>" + ($.sc.locale.get("summary.text.processStatusMessage." + (iTotal > 1 ? "plural." : "single.") + sStatus, "" + iTotal))	+ "</li>");
+					aLi.push("<li class='fail'>" + ($.pgsi.locale.get("summary.text.processStatusMessage." + (iTotal > 1 ? "plural." : "single.") + sStatus, "" + iTotal))	+ "</li>");
 				}
 			}
 		}
@@ -341,19 +341,19 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 				// Make Table config
 				// Initialize table
 
-				$.sc.table.init(_contentTabs.commonsTable.fnChildConfig(oResponse, sTableId));
+				$.pgsi.table.init(_contentTabs.commonsTable.fnChildConfig(oResponse, sTableId));
 			},
 
 			fnChildTableButton : function (oResponse, cell, bOpened)
 			{
 				var $Html 		= "";
 
-				if ( !$.sc.isNullOrUndefined(oResponse) && !$.sc.isNullOrUndefined(oResponse.device) )
+				if ( !$.pgsi.isNullOrUndefined(oResponse) && !$.pgsi.isNullOrUndefined(oResponse.device) )
 				{
 					var flexNetId 	= oResponse.device.communicationDevice.flexNetId;
 					var sTableId 	= "#child-" + flexNetId; // replace especial chars
 
-					if ($.sc.isNullOrUndefined(bOpened) || bOpened == false)
+					if ($.pgsi.isNullOrUndefined(bOpened) || bOpened == false)
 					{
 						$Html = $("<span class='action-link ui-icon ui-icon-plus'></span>");
 					}
@@ -415,14 +415,14 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 
 				var oDevice = full.device;
 
-				if ( !$.sc.isNullOrUndefined(oDevice) && !$.sc.isNullOrUndefined(oDevice.macAddress) )
+				if ( !$.pgsi.isNullOrUndefined(oDevice) && !$.pgsi.isNullOrUndefined(oDevice.macAddress) )
 				{
 					return oDevice.macAddress;
 				}
 
-				if ( !$.sc.isNullOrUndefined(oDevice)
-						&& !$.sc.isNullOrUndefined(oDevice.communicationDeviceAsRadio)
-						&& !$.sc.isNullOrUndefined(oDevice.communicationDeviceAsRadio.flexNetIdString) )
+				if ( !$.pgsi.isNullOrUndefined(oDevice)
+						&& !$.pgsi.isNullOrUndefined(oDevice.communicationDeviceAsRadio)
+						&& !$.pgsi.isNullOrUndefined(oDevice.communicationDeviceAsRadio.flexNetIdString) )
 				{
 					return oDevice.communicationDeviceAsRadio.flexNetIdString;
 				}
@@ -437,9 +437,9 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 					return val;
 				}
 
-				if ( !$.sc.isNullOrUndefined(full.device)
-						&& !$.sc.isNullOrUndefined(full.device.configuration)
-						&& !$.sc.isNullOrUndefined(full.device.configuration.premiseId) )
+				if ( !$.pgsi.isNullOrUndefined(full.device)
+						&& !$.pgsi.isNullOrUndefined(full.device.configuration)
+						&& !$.pgsi.isNullOrUndefined(full.device.configuration.premiseId) )
 				{
 					return full.device.configuration.premiseId;
 				}
@@ -454,10 +454,10 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 					return val;
 				}
 
-				if ( !$.sc.isNullOrUndefined(full.device)
-						&& !$.sc.isNullOrUndefined(full.device.communicationDevice)
-						&& !$.sc.isNullOrUndefined(full.device.communicationDevice.location)
-						&& !$.sc.isNullOrUndefined(full.device.communicationDevice.location.address) )
+				if ( !$.pgsi.isNullOrUndefined(full.device)
+						&& !$.pgsi.isNullOrUndefined(full.device.communicationDevice)
+						&& !$.pgsi.isNullOrUndefined(full.device.communicationDevice.location)
+						&& !$.pgsi.isNullOrUndefined(full.device.communicationDevice.location.address) )
 				{
 					return full.device.communicationDevice.location.address;
 				}
@@ -472,7 +472,7 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 					return val;
 				}
 
-				return $.sc.enums.internationalizeByLabel("com.pgsi.dm.common.process.model.ProcessItemStatusEnum", val, "");
+				return $.pgsi.enums.internationalizeByLabel("com.pgsi.dm.common.process.model.ProcessItemStatusEnum", val, "");
 			},
 
 			fnCreateButton : function (cell, cellData, rowData, rowIndex, colIndex)
@@ -520,27 +520,27 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 			fnProcessDescription : function (oProcess)
 			{
 				var sProcessDescription = "";
-				var aPropertyLink 		= !$.sc.isNullOrUndefined(oProcess.propertyLink) ? oProcess.propertyLink.split("|") : [];
+				var aPropertyLink 		= !$.pgsi.isNullOrUndefined(oProcess.propertyLink) ? oProcess.propertyLink.split("|") : [];
 				var sProcessStatus		= oProcess.processStatusEnum;
 				var iDevices			= oProcess.totalSmartpoints;
 				var oAction 			= oProcess.action;
 				var sActionTypeEnum		= oAction.actionType.actionTypeEnum;
 				var sActionCategoryEnum = oAction.actionType.actionCategoryEnum;
 				var sCompletedInfo	 	= "";
-				var sSentFrom			= oProcess.onDemand ? $.sc.locale.get("pgsi.dm.action.on_demand").toLowerCase() : null;
-				var sActionType			= $.sc.enums.internationalizeByLabel("com.pgsi.dm.common.action.model.ActionTypeEnum", sActionTypeEnum).toLowerCase();
-				var sActionCategory 	= $.sc.locale.get(oAction.actionType.actionCategoryEnumNameValue).toLowerCase();
+				var sSentFrom			= oProcess.onDemand ? $.pgsi.locale.get("pgsi.dm.action.on_demand").toLowerCase() : null;
+				var sActionType			= $.pgsi.enums.internationalizeByLabel("com.pgsi.dm.common.action.model.ActionTypeEnum", sActionTypeEnum).toLowerCase();
+				var sActionCategory 	= $.pgsi.locale.get(oAction.actionType.actionCategoryEnumNameValue).toLowerCase();
 				var sDevice 			= "";
 				var sTower				= null;
 
 				if (sProcessStatus == "COMPLETED")
 				{
-					sCompletedInfo = ($.sc.locale.get("longRunning.table.header.completedIn") + " " +
+					sCompletedInfo = ($.pgsi.locale.get("longRunning.table.header.completedIn") + " " +
 										pgsi.util.process.fnCreateCompletedInColumn(sProcessStatus, oProcess.estimatedSecondsToComplete,	oProcess.startTime,	oProcess.endTime)).toLowerCase();
 				}
 				else if (sProcessStatus == "COMMAND_SENT")
 				{
-					sCompletedInfo = $.sc.locale.get("longRunning.table.header.wasSent").toLowerCase();
+					sCompletedInfo = $.pgsi.locale.get("longRunning.table.header.wasSent").toLowerCase();
 				}
 
 				switch (sActionCategoryEnum)
@@ -558,33 +558,33 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 
 						if ( iDevices <= 1 )
 						{
-							return $.sc.locale.get("pgsi.dm.summary.action.description.common.one.device", sSentFrom, sActionType, sActionCategory, sTower || sDevice, sCompletedInfo);
+							return $.pgsi.locale.get("pgsi.dm.summary.action.description.common.one.device", sSentFrom, sActionType, sActionCategory, sTower || sDevice, sCompletedInfo);
 						}
 
-						return $.sc.locale.get("pgsi.dm.summary.action.description.common.several.devices", sSentFrom, sActionType, sActionCategory, iDevices, sCompletedInfo);
+						return $.pgsi.locale.get("pgsi.dm.summary.action.description.common.several.devices", sSentFrom, sActionType, sActionCategory, iDevices, sCompletedInfo);
 
 					// RNI ACTIONS
 					default:
 
 						sDevice = aPropertyLink[2] || aPropertyLink[1];
 
-						if ( !$.sc.isNullOrUndefined(oProcess.rniEventId) )
+						if ( !$.pgsi.isNullOrUndefined(oProcess.rniEventId) )
 						{
-							$("#rni-event-id em").text($.sc.locale.get("commons.pages.rni.event.id", oProcess.rniEventId)).show();
+							$("#rni-event-id em").text($.pgsi.locale.get("commons.pages.rni.event.id", oProcess.rniEventId)).show();
 						}
 
 						// SCHEDULED ACTIONS
-						if ( $.sc.isNullOrUndefined(sSentFrom) )
+						if ( $.pgsi.isNullOrUndefined(sSentFrom) )
 						{
-							sSentFrom = $.sc.locale.get("filter.status.scheduled.label").toLowerCase();
+							sSentFrom = $.pgsi.locale.get("filter.status.scheduled.label").toLowerCase();
 						}
 
 						if ( iDevices <= 1 )
 						{
-							return $.sc.locale.get("pgsi.dm.summary.action.rni.description.one.device", sSentFrom, sActionType, sDevice, sCompletedInfo);
+							return $.pgsi.locale.get("pgsi.dm.summary.action.rni.description.one.device", sSentFrom, sActionType, sDevice, sCompletedInfo);
 						}
 
-						return $.sc.locale.get("pgsi.dm.summary.action.rni.description.several.devices", sSentFrom, sActionType, iDevices, sCompletedInfo);
+						return $.pgsi.locale.get("pgsi.dm.summary.action.rni.description.several.devices", sSentFrom, sActionType, iDevices, sCompletedInfo);
 				}
 
 				return sProcessDescription;
@@ -614,32 +614,32 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 				{
 					return [
 					 	{
-					 		headerData		: $.sc.locale.get("summary.text.headerTable.device_id"),
+					 		headerData		: $.pgsi.locale.get("summary.text.headerTable.device_id"),
 					 		mData			: "device.deviceId",
 					 		sDefaultContent : ""
 					 	},
 					 	{
-					 		headerData		: $.sc.locale.get("commons.pages.flexnet_id"),
+					 		headerData		: $.pgsi.locale.get("commons.pages.flexnet_id"),
 					 		mRender 		: _contentTabs.commonCellProcessors.fnNetworkAddress,
 					 		sDefaultContent : ""
 					 	},
 					 	{
-					 		headerData		: $.sc.locale.get("summary.text.headerTable.Premise_ID"),
+					 		headerData		: $.pgsi.locale.get("summary.text.headerTable.Premise_ID"),
 					 		mRender 		: _contentTabs.commonCellProcessors.fnPremiseId,
 					 		sDefaultContent : ""
 					 	},
 					 	{
-					 		headerData		: $.sc.locale.get("summary.text.headerTable.Address"),
+					 		headerData		: $.pgsi.locale.get("summary.text.headerTable.Address"),
 					 		mRender 		: _contentTabs.commonCellProcessors.fnAddress,
 					 		sDefaultContent : ""
 					 	},
 					 	{
-					 		headerData	: $.sc.locale.get("summary.text.headerTable.Status"),
+					 		headerData	: $.pgsi.locale.get("summary.text.headerTable.Status"),
 					 		mData		: "processItemStatusEnum",
 					 		mRender 	: _contentTabs.commonCellProcessors.fnState
 					 	},
 					 	{
-					 		headerData	: $.sc.locale.get("summary.text.headerTable.Error"),
+					 		headerData	: $.pgsi.locale.get("summary.text.headerTable.Error"),
 					 		mData		: "message",
 					 		mRender 	: pgsi.util.process.fnCreateMessageColumn
 					 	}
@@ -695,9 +695,9 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 				_fnFillSuccessAndFails(oResponse);
 
 				// TABLE
-				if ( !$.sc.isNullOrUndefined(oResponse.processes)
-						&& !$.sc.isNullOrUndefined(oResponse.processes[0])
-						&& !$.sc.isNullOrUndefined(oResponse.processes[0].processItems)
+				if ( !$.pgsi.isNullOrUndefined(oResponse.processes)
+						&& !$.pgsi.isNullOrUndefined(oResponse.processes[0])
+						&& !$.pgsi.isNullOrUndefined(oResponse.processes[0].processItems)
 						&& oResponse.processes[0].processItems.length > 0)
 				{
 					$("#communication-summary .selected-points", _this).show();
@@ -709,7 +709,7 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 					{
 						_contentTabs.communication.table.id = "#process-" + sId + " #tableCommunicationSummary";
 					}
-					$.sc.table.init(_contentTabs.communication.table.oConfig);
+					$.pgsi.table.init(_contentTabs.communication.table.oConfig);
 				}
 
 				_fnCallBackInit();
@@ -717,7 +717,7 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 
 			ajaxCall 	: function ()
 			{
-				$.sc.ajax.post(
+				$.pgsi.ajax.post(
 				{
 					sUrl 		: this.url,
 					oRequest	: new InquiryProcessRequest(this.fnRequest(5)),
@@ -795,9 +795,9 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 							return val;
 						}
 
-						if ( !$.sc.isNullOrUndefined(full.channel)
-								&& !$.sc.isNullOrUndefined(full.channel.readValue)
-								&& !$.sc.isNullOrUndefined(full.channel.readUnit) )
+						if ( !$.pgsi.isNullOrUndefined(full.channel)
+								&& !$.pgsi.isNullOrUndefined(full.channel.readValue)
+								&& !$.pgsi.isNullOrUndefined(full.channel.readUnit) )
 						{
 							return full.channel.readValue + " " + full.channel.readUnit;
 						}
@@ -812,9 +812,9 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 							return val;
 						}
 
-						if ( !$.sc.isNullOrUndefined(full.readingDate) )
+						if ( !$.pgsi.isNullOrUndefined(full.readingDate) )
 						{
-							return $.sc.date.format(full.readingDate, pgsi.settings.user.dateFormat.replace("yyyy", "yy") + " h:i z", true);
+							return $.pgsi.date.format(full.readingDate, pgsi.settings.user.dateFormat.replace("yyyy", "yy") + " h:i z", true);
 						}
 
 						return "";
@@ -829,17 +829,17 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 					    	sDefaultContent : ""
 					    },
 						{
-					    	headerData		: $.sc.locale.get("summary.text.headerTable.device_id"),
+					    	headerData		: $.pgsi.locale.get("summary.text.headerTable.device_id"),
 							mData			: "device.deviceId",
 							sDefaultContent : ""
 						},
 						{
-							headerData		: $.sc.locale.get("commons.pages.flexnet_id"),
+							headerData		: $.pgsi.locale.get("commons.pages.flexnet_id"),
 							mRender 		: _contentTabs.commonCellProcessors.fnNetworkAddress,
 							sDefaultContent : ""
 						},
 						{
-							headerData		: $.sc.locale.get("summary.text.headerTable.Premise_ID"),
+							headerData		: $.pgsi.locale.get("summary.text.headerTable.Premise_ID"),
 							mRender 		: _contentTabs.commonCellProcessors.fnPremiseId,
 							sDefaultContent : ""
 						}
@@ -901,16 +901,16 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 				{
 					return [
 				        {
-				        	headerData		: $.sc.locale.get("commons.pages.channelId"),
+				        	headerData		: $.pgsi.locale.get("commons.pages.channelId"),
 				        	mData			: "channel.channelId"
 				        },
 				        {
-				        	headerData		: $.sc.locale.get("commons.pages.readValue"),
+				        	headerData		: $.pgsi.locale.get("commons.pages.readValue"),
 				        	mRender 		: this.oCellProcessors.fnReadValue,
 				        	sDefaultContent : ""
 				        },
 				        {
-				        	headerData		: $.sc.locale.get("commons.pages.readTime"),
+				        	headerData		: $.pgsi.locale.get("commons.pages.readTime"),
 				        	mData 			: "readingDate",
 				        	mRender 		: this.oCellProcessors.fnReadTime
 				        }
@@ -921,9 +921,9 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 			callBack	: function (oResponse)
 			{
 				// TABLE
-				if ( !$.sc.isNullOrUndefined(oResponse.processes)
-						&& !$.sc.isNullOrUndefined(oResponse.processes[0])
-						&& !$.sc.isNullOrUndefined(oResponse.processes[0].processItems)
+				if ( !$.pgsi.isNullOrUndefined(oResponse.processes)
+						&& !$.pgsi.isNullOrUndefined(oResponse.processes[0])
+						&& !$.pgsi.isNullOrUndefined(oResponse.processes[0].processItems)
 						&& oResponse.processes[0].processItems.length > 0)
 				{
 					$("#demand-read-sumary .selected-points, #demand-read-sumary #list-fail").show();
@@ -931,7 +931,7 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 					$("#demand-read-sumary #total-results").text(oResponse.processes[0].processSummary.totalSmartpoints);
 
 					_contentTabs.demandRead.table.oResponse = oResponse;
-					$.sc.table.init(_contentTabs.demandRead.table.oConfig);
+					$.pgsi.table.init(_contentTabs.demandRead.table.oConfig);
 				}
 
 				_fnCallBackInit();
@@ -939,7 +939,7 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 
 			ajaxCall 	: function ()
 			{
-				$.sc.ajax.post(
+				$.pgsi.ajax.post(
 				{
 					sUrl 		: this.url,
 					oRequest	: new InquiryProcessRequest(this.fnRequest(5)),
@@ -1009,7 +1009,7 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 				{
 					fnHeader : function (sTitle)
 					{
-						var sDefaultContent = $.sc.enums.internationalizeByLabel("com.pgsi.dm.common.action.model.OTAConfigurationItemKeyEnum", sTitle.toUpperCase());
+						var sDefaultContent = $.pgsi.enums.internationalizeByLabel("com.pgsi.dm.common.action.model.OTAConfigurationItemKeyEnum", sTitle.toUpperCase());
 
 						return $("<th>" + sDefaultContent + "</th>");
 					}
@@ -1017,7 +1017,7 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 
 				fnGetStringMessage : function (sValue, sPropertyValue)
 				{
-					var sDefaultContent = $.sc.locale.get(sValue.toLowerCase());
+					var sDefaultContent = $.pgsi.locale.get(sValue.toLowerCase());
 
 					return sDefaultContent.indexOf("[") > -1 ? sPropertyValue : sDefaultContent;
 				},
@@ -1027,17 +1027,17 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 					var aColumns =
 					[
 					    {
-					 		headerData 		: $.sc.locale.get("summary.text.headerTable.device_id"),
+					 		headerData 		: $.pgsi.locale.get("summary.text.headerTable.device_id"),
 					 		mData			: "device.deviceId",
 					 		sDefaultContent : ""
 					 	},
 					 	{
-					 		headerData 		: $.sc.locale.get("commons.pages.flexnet_id"),
+					 		headerData 		: $.pgsi.locale.get("commons.pages.flexnet_id"),
 					 		mRender 		: _contentTabs.commonCellProcessors.fnNetworkAddress,
 					 		sDefaultContent : ""
 					 	},
 					 	{
-					 		headerData 		: $.sc.locale.get("summary.text.headerTable.Premise_ID"),
+					 		headerData 		: $.pgsi.locale.get("summary.text.headerTable.Premise_ID"),
 					 		mRender 		: _contentTabs.commonCellProcessors.fnPremiseId,
 					 		sDefaultContent : ""
 					 	}
@@ -1118,25 +1118,25 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 			callBack	: function (oResponse)
 			{
 				// TABLE
-				if ( !$.sc.isNullOrUndefined(oResponse.processes)
-						&& !$.sc.isNullOrUndefined(oResponse.processes[0])
-						&& !$.sc.isNullOrUndefined(oResponse.processes[0].processItems)
+				if ( !$.pgsi.isNullOrUndefined(oResponse.processes)
+						&& !$.pgsi.isNullOrUndefined(oResponse.processes[0])
+						&& !$.pgsi.isNullOrUndefined(oResponse.processes[0].processItems)
 						&& oResponse.processes[0].processItems.length > 0)
 				{
 					$("#radio-configuration-sumary .selected-points, #radio-configuration-sumary #list-fail").show();
 
 					$("#radio-configuration-sumary #total-results").text(oResponse.processes[0].processSummary.totalSmartpoints);
 
-					if ( !$.sc.isNullOrUndefined(oResponse.processes[0].action)
-							&& !$.sc.isNullOrUndefined(oResponse.processes[0].action.actionType)
-							&& !$.sc.isNullOrUndefined(oResponse.processes[0].action.actionType.actionTypeEnumNameValue) )
+					if ( !$.pgsi.isNullOrUndefined(oResponse.processes[0].action)
+							&& !$.pgsi.isNullOrUndefined(oResponse.processes[0].action.actionType)
+							&& !$.pgsi.isNullOrUndefined(oResponse.processes[0].action.actionType.actionTypeEnumNameValue) )
 					{
-						var sTitle = $.sc.locale.get("smartpointdetail.dialog.radioConfiguration") + " - " + $.sc.locale.get(oResponse.processes[0].action.actionType.actionTypeEnumNameValue.toLowerCase());
+						var sTitle = $.pgsi.locale.get("smartpointdetail.dialog.radioConfiguration") + " - " + $.pgsi.locale.get(oResponse.processes[0].action.actionType.actionTypeEnumNameValue.toLowerCase());
 						$("#radioConfigurationSummary").find("a").empty();
 						$("#radioConfigurationSummary").find("a").html(sTitle);
 					}
 					_contentTabs.radioConfigurationSummary.table.oResponse = oResponse;
-					$.sc.table.init(_contentTabs.radioConfigurationSummary.table.oConfig);
+					$.pgsi.table.init(_contentTabs.radioConfigurationSummary.table.oConfig);
 				}
 
 				_fnCallBackInit();
@@ -1144,7 +1144,7 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 
 			ajaxCall 	: function ()
 			{
-				$.sc.ajax.post(
+				$.pgsi.ajax.post(
 				{
 					sUrl 		: this.url,
 					oRequest	: new InquiryProcessRequest(this.fnRequest(5)),
@@ -1210,7 +1210,7 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 			fnFillInformations : function (oResponse)
 			{
 				var $Infotable 		= $("#informationTableImportHan", _this);
-				var	sDevices 		= " " + $.sc.locale.get("commons.pages.smartPoints");
+				var	sDevices 		= " " + $.pgsi.locale.get("commons.pages.smartPoints");
 				var oProcess 		= oResponse.processes[0];
 				var oProcessSummary = oProcess.processSummary;
 				var iTotal 			= oProcessSummary.totalSmartpoints;
@@ -1240,32 +1240,32 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 				{
 					return [
 					 	{
-					 		headerData		: $.sc.locale.get("summary.text.headerTable.device_id"),
+					 		headerData		: $.pgsi.locale.get("summary.text.headerTable.device_id"),
 					 		mData			: "device.deviceId",
 					 		sDefaultContent : ""
 					 	},
 					 	{
-					 		headerData		: $.sc.locale.get("commons.pages.flexnet_id"),
+					 		headerData		: $.pgsi.locale.get("commons.pages.flexnet_id"),
 					 		mRender 		: _contentTabs.commonCellProcessors.fnNetworkAddress,
 					 		sDefaultContent : ""
 					 	},
 					 	{
-					 		headerData		: $.sc.locale.get("summary.text.headerTable.Premise_ID"),
+					 		headerData		: $.pgsi.locale.get("summary.text.headerTable.Premise_ID"),
 					 		mRender 		: _contentTabs.commonCellProcessors.fnPremiseId,
 					 		sDefaultContent : ""
 					 	},
 					 	{
-					 		headerData		: $.sc.locale.get("summary.text.headerTable.Address"),
+					 		headerData		: $.pgsi.locale.get("summary.text.headerTable.Address"),
 					 		mRender 		: _contentTabs.commonCellProcessors.fnAddress,
 					 		sDefaultContent : ""
 					 	},
 					 	{
-					 		headerData	: $.sc.locale.get("summary.text.headerTable.Status"),
+					 		headerData	: $.pgsi.locale.get("summary.text.headerTable.Status"),
 					 		mData		: "processItemStatusEnum",
 					 		mRender 	: _contentTabs.commonCellProcessors.fnState
 					 	},
 					 	{
-					 		headerData	: $.sc.locale.get("summary.text.headerTable.Error"),
+					 		headerData	: $.pgsi.locale.get("summary.text.headerTable.Error"),
 					 		mData		: "message",
 					 		mRender 	: pgsi.util.process.fnCreateMessageColumn
 					 	}
@@ -1318,15 +1318,15 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 				_contentTabs.importHanDevices.fnFillInformations(oResponse);
 
 				// TABLE
-				if ( !$.sc.isNullOrUndefined(oResponse.processes)
-						&& !$.sc.isNullOrUndefined(oResponse.processes[0])
-						&& !$.sc.isNullOrUndefined(oResponse.processes[0].processItems)
+				if ( !$.pgsi.isNullOrUndefined(oResponse.processes)
+						&& !$.pgsi.isNullOrUndefined(oResponse.processes[0])
+						&& !$.pgsi.isNullOrUndefined(oResponse.processes[0].processItems)
 						&& oResponse.processes[0].processItems.length > 0)
 				{
 					$("#import-han-device-summary .selected-points, #import-han-device-summary #list-fail").show();
 
 					_contentTabs.importHanDevices.table.oResponse = oResponse;
-					$.sc.table.init(_contentTabs.importHanDevices.table.oConfig);
+					$.pgsi.table.init(_contentTabs.importHanDevices.table.oConfig);
 				}
 
 				_fnCallBackInit();
@@ -1334,7 +1334,7 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 
 			ajaxCall : function ()
 			{
-				$.sc.ajax.post(
+				$.pgsi.ajax.post(
 				{
 					sUrl 		: this.url,
 					oRequest	: new InquiryProcessRequest(this.fnRequest(5)),
@@ -1362,14 +1362,14 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 						deviceCategoryEnum 	: sDeviceCategory,
 						onDemand			: true,
 						isMonitored			: true,
-						actionTime 			: $.sc.date.epochTime.currentUTC()
+						actionTime 			: $.pgsi.date.epochTime.currentUTC()
 					};
 
-					$.sc.ajax.post(
+					$.pgsi.ajax.post(
 					{
 						sUrl 			: "api/deviceop/apply",
 						oRequest		: oRetryRequest,
-						sSuccessMessage : $.sc.locale.get("summary.text.retrySuccess"),
+						sSuccessMessage : $.pgsi.locale.get("summary.text.retrySuccess"),
 						fnCallback 		: function (oResponse)
 						{
 							_contentTabs.importHanDevices.ajaxCall();
@@ -1410,7 +1410,7 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 			getDemandResponseRequest : new Action({
 				isMonitored			: true,
 				onDemand			: true,
-				actionTime			: $.sc.date.epochTime.currentUTC(),
+				actionTime			: $.pgsi.date.epochTime.currentUTC(),
 				deviceCategoryEnum 	: sDeviceCategory
 			}),
 
@@ -1464,7 +1464,7 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 							return val;
 						}
 
-						return val == "Started" ? $.sc.locale.get("commons.pages.yes") : $.sc.locale.get("commons.pages.no");
+						return val == "Started" ? $.pgsi.locale.get("commons.pages.yes") : $.pgsi.locale.get("commons.pages.no");
 					},
 					fnFullParticipation : function (val, type, full)
 					{
@@ -1473,7 +1473,7 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 							return val;
 						}
 
-						return val == "FullParticipation" ? $.sc.locale.get("commons.pages.yes") : $.sc.locale.get("commons.pages.no");
+						return val == "FullParticipation" ? $.pgsi.locale.get("commons.pages.yes") : $.pgsi.locale.get("commons.pages.no");
 					},
 					fnPartialParticipation : function (val, type, full)
 					{
@@ -1482,7 +1482,7 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 							return val;
 						}
 
-						return val == "PartialParticipation" ? $.sc.locale.get("commons.pages.yes") : $.sc.locale.get("commons.pages.no");
+						return val == "PartialParticipation" ? $.pgsi.locale.get("commons.pages.yes") : $.pgsi.locale.get("commons.pages.no");
 					},
 					fnOptOut : function (val, type, full)
 					{
@@ -1491,7 +1491,7 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 							return val;
 						}
 
-						return val == "OptOut" ? $.sc.locale.get("commons.pages.yes") : $.sc.locale.get("commons.pages.no");
+						return val == "OptOut" ? $.pgsi.locale.get("commons.pages.yes") : $.pgsi.locale.get("commons.pages.no");
 					},
 					fnOperatorOptOut : function (val, type, full)
 					{
@@ -1500,7 +1500,7 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 							return val;
 						}
 
-						return val == "Operator_OptOut" ? $.sc.locale.get("commons.pages.yes") : $.sc.locale.get("commons.pages.no");
+						return val == "Operator_OptOut" ? $.pgsi.locale.get("commons.pages.yes") : $.pgsi.locale.get("commons.pages.no");
 					},
 
 					fnNetworkStatus : function (val, type, full)
@@ -1513,7 +1513,7 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 						sRemoteConnectStatus = pgsi.util.page.fnGetRemoteDisconnectState(full.device.remoteConnectStatusEnum);
 						sRemoteConnectReason = pgsi.util.page.fnGetRemoteDisconnectReason(full.device.remoteConnectReasonEnum);
 
-						if ( sRemoteConnectReason == $.sc.locale.get("commons.pages.doubleHyphen") )
+						if ( sRemoteConnectReason == $.pgsi.locale.get("commons.pages.doubleHyphen") )
 						{
 							return sRemoteConnectStatus;
 						}
@@ -1526,56 +1526,56 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 				{
 					return [
 						{
-							headerData		: $.sc.locale.get("summary.text.headerTable.device_id"),
+							headerData		: $.pgsi.locale.get("summary.text.headerTable.device_id"),
 							mData			: "device.deviceId",
 							sDefaultContent : ""
 						},
 						{
-							headerData		: $.sc.locale.get("commons.pages.flexnet_id"),
+							headerData		: $.pgsi.locale.get("commons.pages.flexnet_id"),
 							mRender 		: _contentTabs.commonCellProcessors.fnNetworkAddress,
 							sDefaultContent : ""
 						},
 						{
-							headerData		: $.sc.locale.get("summary.text.headerTable.ParentDeviceID"),
+							headerData		: $.pgsi.locale.get("summary.text.headerTable.ParentDeviceID"),
 							mRender 		: this.oCellProcessors.fnParent,
 							sDefaultContent : ""
 						},
 						{
-							headerData		: $.sc.locale.get("summary.text.headerTable.Premise_ID"),
+							headerData		: $.pgsi.locale.get("summary.text.headerTable.Premise_ID"),
 							mRender 		: _contentTabs.commonCellProcessors.fnPremiseId,
 							sDefaultContent : ""
 						},
 						{
-							headerData		: $.sc.locale.get("summary.text.headerTable.NetworkStatus"),
+							headerData		: $.pgsi.locale.get("summary.text.headerTable.NetworkStatus"),
 							mRender 		: this.oCellProcessors.fnNetworkStatus,
 							sDefaultContent : ""
 						},
 						{
-							headerData		: $.sc.locale.get("summary.text.headerTable.started"),
+							headerData		: $.pgsi.locale.get("summary.text.headerTable.started"),
 							mData			: "participation",
 							mRender 		: this.oCellProcessors.fnStarted,
 							sDefaultContent : ""
 						},
 						{
-							headerData		: $.sc.locale.get("summary.text.headerTable.FullParticipation"),
+							headerData		: $.pgsi.locale.get("summary.text.headerTable.FullParticipation"),
 							mData			: "participation",
 							mRender 		: this.oCellProcessors.fnFullParticipation,
 							sDefaultContent : ""
 						},
 						{
-							headerData		: $.sc.locale.get("summary.text.headerTable.PartialParticipation"),
+							headerData		: $.pgsi.locale.get("summary.text.headerTable.PartialParticipation"),
 							mData			: "participation",
 							mRender 		: this.oCellProcessors.fnPartialParticipation,
 							sDefaultContent : ""
 						},
 						{
-							headerData		: $.sc.locale.get("summary.text.headerTable.OptOut"),
+							headerData		: $.pgsi.locale.get("summary.text.headerTable.OptOut"),
 							mData			: "participation",
 							mRender 		: this.oCellProcessors.fnOptOut,
 							sDefaultContent : ""
 						},
 						{
-							headerData		: $.sc.locale.get("summary.text.headerTable.OperatorOptOut"),
+							headerData		: $.pgsi.locale.get("summary.text.headerTable.OperatorOptOut"),
 							mData			: "participation",
 							mRender 		: this.oCellProcessors.fnOperatorOptOut,
 							sDefaultContent : ""
@@ -1663,7 +1663,7 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 				var	oProcess 				= oResponse.processes[0];
 				var	aProcessItems 			= oProcess.processItems || [];
 				var oAction					= oProcess.action;
-				var	aStartTime 				= $.sc.date.format(oProcess.startTime, pgsi.settings.user.dateFormat.replace("yyyy", "yy") + " h:i A", true).split(" ");
+				var	aStartTime 				= $.pgsi.date.format(oProcess.startTime, pgsi.settings.user.dateFormat.replace("yyyy", "yy") + " h:i A", true).split(" ");
 				var	oDemandResponseDuration = oAction.duration;
 				var	iReceived 				= aProcessItems.length;
 				var oParticipations			= _contentTabs.demandResponse.fnGetParticipation(aProcessItems);
@@ -1683,13 +1683,13 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 				// Duration
 				if (oDemandResponseDuration)
 				{
-					_fnCreateInformation($oInfoTable.find("td:eq(1)"), (oDemandResponseDuration || ""), $.sc.locale.get("commons.pages.Minutes"));
+					_fnCreateInformation($oInfoTable.find("td:eq(1)"), (oDemandResponseDuration || ""), $.pgsi.locale.get("commons.pages.Minutes"));
 				}
 
 				// Participation
 				_fnCreateInformation($oInfoTable.find("td:eq(2)"),
 						_fnGetPercentage(iReceived, iFullParticipation) + "%",
-						iFullParticipation + " " + $.sc.locale.get("commons.pages.of") + " " + iReceived);
+						iFullParticipation + " " + $.pgsi.locale.get("commons.pages.of") + " " + iReceived);
 
 				// Received
 				_fnCreateInformation($oInfoTable.find("td:eq(3)"), iReceived - iOperatorOptOut, "");
@@ -1711,7 +1711,7 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 
 				if (oProcess.processStatusEnum == "COMMAND_SENT" || oProcess.processStatusEnum == "STARTED")
 				{
-					oActionCancel = $("<a class='button' href='#'>" + $.sc.locale.get("commons.pages.cancel") + "</a>", $oInfoTable).button().click(function(e)
+					oActionCancel = $("<a class='button' href='#'>" + $.pgsi.locale.get("commons.pages.cancel") + "</a>", $oInfoTable).button().click(function(e)
 					{
 						e.preventDefault();
 
@@ -1722,7 +1722,7 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 							sTableId = "device-history-table";
 						}
 
-						$.sc.launchActionDialog("cancel", pgsi.util.process.actions.cancelDialog(oProcess, sTableId, true));
+						$.pgsi.launchActionDialog("cancel", pgsi.util.process.actions.cancelDialog(oProcess, sTableId, true));
 					});
 
 					// Cancel-event
@@ -1743,16 +1743,16 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 				_contentTabs.demandResponse.createDemandResponseDetails(oProcess.properties, oAction);
 
 				// TABLE
-				if ( !$.sc.isNullOrUndefined(oResponse.processes)
-						&& !$.sc.isNullOrUndefined(oResponse.processes[0])
-						&& !$.sc.isNullOrUndefined(oResponse.processes[0].processItems)
+				if ( !$.pgsi.isNullOrUndefined(oResponse.processes)
+						&& !$.pgsi.isNullOrUndefined(oResponse.processes[0])
+						&& !$.pgsi.isNullOrUndefined(oResponse.processes[0].processItems)
 						&& oResponse.processes[0].processItems.length > 0)
 				{
 					$("#demand-response-sumary .selected-points").show();
 					$("#demand-response-sumary #total-results").text(oResponse.processes[0].processItems.length);
 
 					_contentTabs.demandResponse.table.oResponse = oResponse;
-					$.sc.table.init(_contentTabs.demandResponse.table.oConfig);
+					$.pgsi.table.init(_contentTabs.demandResponse.table.oConfig);
 				}
 
 				var iProcessItens = aProcessItems.length;
@@ -1771,12 +1771,12 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 			createDemandResponseDetails : function (properties, action)
 			{
 				var aDetails;
-				var	sEnrollmentCode 	= !$.sc.isNullOrUndefined(action.enrollmentCode) 	? action.enrollmentCode 		: "-";
-				var	sCriticalityLevel 	= !$.sc.isNullOrUndefined(action.criticalityLevel) 	? action.criticalityLevel 		: "-";
-				var	sDutyCycleRate 		= !$.sc.isNullOrUndefined(action.dutyCycleRate) 	? action.dutyCycleRate + "%" 	: "-";
-				var	sLoadAdjustment 	= !$.sc.isNullOrUndefined(action.loadAdjustment) 	? action.loadAdjustment + "%" 	: "-";
-				var sRandomizeStart		= !$.sc.isNullOrUndefined(action.randomizeStart) 	? action.randomizeStart 		: "-";
-				var sRandomizeEnd		= !$.sc.isNullOrUndefined(action.randomizeEnd) 		? action.randomizeEnd 			: "-";
+				var	sEnrollmentCode 	= !$.pgsi.isNullOrUndefined(action.enrollmentCode) 	? action.enrollmentCode 		: "-";
+				var	sCriticalityLevel 	= !$.pgsi.isNullOrUndefined(action.criticalityLevel) 	? action.criticalityLevel 		: "-";
+				var	sDutyCycleRate 		= !$.pgsi.isNullOrUndefined(action.dutyCycleRate) 	? action.dutyCycleRate + "%" 	: "-";
+				var	sLoadAdjustment 	= !$.pgsi.isNullOrUndefined(action.loadAdjustment) 	? action.loadAdjustment + "%" 	: "-";
+				var sRandomizeStart		= !$.pgsi.isNullOrUndefined(action.randomizeStart) 	? action.randomizeStart 		: "-";
+				var sRandomizeEnd		= !$.pgsi.isNullOrUndefined(action.randomizeEnd) 		? action.randomizeEnd 			: "-";
 				var	aOffset 			= [];
 				var	sOffset 			= "-";
 				var	sHeating			= "";
@@ -1797,28 +1797,28 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 						sTemperatureFormat = "F" + sTemperatureFormat;
 					}
 
-					if ( !$.sc.isNullOrUndefined(action.heating) )
+					if ( !$.pgsi.isNullOrUndefined(action.heating) )
 					{
 						sHeating = action.heating;
 
-						if ( sTemperatureType.toLowerCase() == $.sc.locale.get("systemsettings.page.temperature.fahrenheit").toLowerCase() )
+						if ( sTemperatureType.toLowerCase() == $.pgsi.locale.get("systemsettings.page.temperature.fahrenheit").toLowerCase() )
 						{
 							sHeating = $.temperature.convertTemperature(action.heating, "sf");
 						}
 
-						aOffset.push($.sc.locale.get("systemintelligence.dialogDemandResponse.heating") + " " + sHeating + " " + $.sc.locale.get("systemintelligence.dialogDemandResponse.degrees") + " " + sTemperatureFormat);
+						aOffset.push($.pgsi.locale.get("systemintelligence.dialogDemandResponse.heating") + " " + sHeating + " " + $.pgsi.locale.get("systemintelligence.dialogDemandResponse.degrees") + " " + sTemperatureFormat);
 					}
 
-					if ( !$.sc.isNullOrUndefined(action.cooling) )
+					if ( !$.pgsi.isNullOrUndefined(action.cooling) )
 					{
 						sCooling = action.cooling;
 
-						if ( sTemperatureType.toLowerCase() == $.sc.locale.get("systemsettings.page.temperature.fahrenheit").toLowerCase() )
+						if ( sTemperatureType.toLowerCase() == $.pgsi.locale.get("systemsettings.page.temperature.fahrenheit").toLowerCase() )
 						{
 							sCooling = $.temperature.convertTemperature(action.cooling, "sf");
 						}
 
-						aOffset.push($.sc.locale.get("systemintelligence.dialogDemandResponse.cooling") + " " + sCooling + " " + $.sc.locale.get("systemintelligence.dialogDemandResponse.degrees") + " " + sTemperatureFormat);
+						aOffset.push($.pgsi.locale.get("systemintelligence.dialogDemandResponse.cooling") + " " + sCooling + " " + $.pgsi.locale.get("systemintelligence.dialogDemandResponse.degrees") + " " + sTemperatureFormat);
 					}
 
 					if (aOffset.length)
@@ -1834,7 +1834,7 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 
 					for (var i = 0; i < nDeviceClassesLength; i++)
 					{
-						aDeviceClasses.push($.sc.locale.get("systemintelligence.scheduledCreateEvent." + action.deviceClasses[i]));
+						aDeviceClasses.push($.pgsi.locale.get("systemintelligence.scheduledCreateEvent." + action.deviceClasses[i]));
 					}
 
 					if (aDeviceClasses.length)
@@ -1846,7 +1846,7 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 				// Randomize
 				if (sRandomizeStart == true)
 				{
-					sRandomize = $.sc.locale.get("systemintelligence.page.event.hanStart") + " ";
+					sRandomize = $.pgsi.locale.get("systemintelligence.page.event.hanStart") + " ";
 				}
 
 				if (sRandomizeEnd == true)
@@ -1860,7 +1860,7 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 						sRandomize = "";
 					}
 
-					sRandomize = sRandomize + $.sc.locale.get("systemintelligence.page.event.hanEnd");
+					sRandomize = sRandomize + $.pgsi.locale.get("systemintelligence.page.event.hanEnd");
 				}
 
 				// Add Data on DOM
@@ -1874,7 +1874,7 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 
 			ajaxCall 	: function ()
 			{
-				$.sc.ajax.post(
+				$.pgsi.ajax.post(
 				{
 					sUrl 		: this.url,
 					oRequest	: new InquiryProcessRequest(this.fnRequest(5)),
@@ -1936,11 +1936,11 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 						oRequest.selectionPaginationIds.push(oDevice.communicationDeviceAsRadio.flexNetId);
 					}
 
-					$.sc.ajax.post(
+					$.pgsi.ajax.post(
 					{
 						sUrl			: _contentTabs.demandResponse.getDemandResponseUrl,
 						oRequest		: oRequest,
-						sSuccessMessage : $.sc.locale.get("commons.pages.getDemandResponseEventStatusSucess")
+						sSuccessMessage : $.pgsi.locale.get("commons.pages.getDemandResponseEventStatusSucess")
 					});
 				});
 			}
@@ -2026,7 +2026,7 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 							return val;
 						}
 
-						return $.sc.enums.internationalizeByLabel("com.pgsi.dm.elec.device.model.DeviceClassEnum", val);
+						return $.pgsi.enums.internationalizeByLabel("com.pgsi.dm.elec.device.model.DeviceClassEnum", val);
 					},
 
 					fnRandomization : function (val, type, full)
@@ -2036,7 +2036,7 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 							return val;
 						}
 
-						if ( !$.sc.isNullOrUndefined(val) )
+						if ( !$.pgsi.isNullOrUndefined(val) )
 						{
 							return val + "min";
 						}
@@ -2051,9 +2051,9 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 							return val;
 						}
 
-						if ( !$.sc.isNullOrUndefined(val) )
+						if ( !$.pgsi.isNullOrUndefined(val) )
 						{
-							return $.sc.date.msToHumanReadable(val * 60000).toLowerCase();
+							return $.pgsi.date.msToHumanReadable(val * 60000).toLowerCase();
 						}
 
 						return "--";
@@ -2068,17 +2068,17 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 					    	sDefaultContent : ""
 					    },
 						{
-					    	headerData		: $.sc.locale.get("summary.text.headerTable.device_id"),
+					    	headerData		: $.pgsi.locale.get("summary.text.headerTable.device_id"),
 							mData			: "device.deviceId",
 							sDefaultContent : ""
 						},
 						{
-							headerData		: $.sc.locale.get("commons.pages.flexnet_id"),
+							headerData		: $.pgsi.locale.get("commons.pages.flexnet_id"),
 							mRender 		: _contentTabs.commonCellProcessors.fnNetworkAddress,
 							sDefaultContent : ""
 						},
 						{
-							headerData		: $.sc.locale.get("summary.text.headerTable.Premise_ID"),
+							headerData		: $.pgsi.locale.get("summary.text.headerTable.Premise_ID"),
 							mRender 		: _contentTabs.commonCellProcessors.fnPremiseId,
 							sDefaultContent : ""
 						}
@@ -2140,9 +2140,9 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 			callBack	: function (oResponse)
 			{
 				// TABLE
-				if ( !$.sc.isNullOrUndefined(oResponse.processes)
-						&& !$.sc.isNullOrUndefined(oResponse.processes[0])
-						&& !$.sc.isNullOrUndefined(oResponse.processes[0].processItems)
+				if ( !$.pgsi.isNullOrUndefined(oResponse.processes)
+						&& !$.pgsi.isNullOrUndefined(oResponse.processes[0])
+						&& !$.pgsi.isNullOrUndefined(oResponse.processes[0].processItems)
 						&& oResponse.processes[0].processItems.length > 0)
 				{
 					$("#relay-configuration-summary .selected-points, relay-configuration-summary #list-fail").show();
@@ -2150,7 +2150,7 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 					$("#relay-configuration-summary #total-results").text(oResponse.processes[0].processSummary.totalSmartpoints);
 
 					_contentTabs.relayConfiguration.table.oResponse = oResponse;
-					$.sc.table.init(_contentTabs.relayConfiguration.table.oConfig);
+					$.pgsi.table.init(_contentTabs.relayConfiguration.table.oConfig);
 				}
 
 				_fnCallBackInit();
@@ -2158,7 +2158,7 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 
 			ajaxCall 	: function ()
 			{
-				$.sc.ajax.post(
+				$.pgsi.ajax.post(
 				{
 					sUrl 		: this.url,
 					oRequest	: new InquiryProcessRequest(this.fnRequest(5)),
@@ -2195,7 +2195,7 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 	 */
 	var _loadTab = function (event, ui)
 	{
-		$.sc.progressBar.start();
+		$.pgsi.progressBar.start();
 
 		var tab = $("#summary-tabs ul li.ui-state-active").attr("id");
 
@@ -2211,16 +2211,16 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 	var fnFetchProcessData = function ()
 	{
 		// Set the general object when the dialog have only communication tab
-		if ( $.sc.isNullOrUndefined(_oAction) )
+		if ( $.pgsi.isNullOrUndefined(_oAction) )
 		{
 			// If the action is related Radio Configuration
-			if ( !$.sc.isNullOrUndefined(sActionEnum)
+			if ( !$.pgsi.isNullOrUndefined(sActionEnum)
 					&& $.inArray(sActionEnum, _aRadioConfiguration) != -1)
 			{
 				_oAction = _oActions.RADIO_CONFIGURATION;
 			}
 			// If the action is related Get Data From Device
-			else if ( !$.sc.isNullOrUndefined(sActionEnum)
+			else if ( !$.pgsi.isNullOrUndefined(sActionEnum)
 						&& $.inArray(sActionEnum, _aGetDataFromDevice) != -1)
 			{
 				_oAction = _oActions.GET_DATA_FROM_DEVICE;
@@ -2233,9 +2233,9 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 
 		if (bWithoutTabs)
 		{
-			$.sc.progressBar.start();
+			$.pgsi.progressBar.start();
 
-			$.sc.ajax.get(
+			$.pgsi.ajax.get(
 			{
 				sUrl		: "summary/communication?" + new Date().getTime(),
 				bCache		: false,
@@ -2292,13 +2292,13 @@ $.fn.summary = function (sId, sActionEnum, bWithoutTabs, iActionId, iRniEventId,
 	var _init = function()
 	{
 		// Verify if the HTML is stored
-		if ( !$.sc.isNullOrUndefined(_summaryHtml) )
+		if ( !$.pgsi.isNullOrUndefined(_summaryHtml) )
 		{
 			fnFetchProcessData();
 			return;
 		}
 
-		$.sc.ajax.get(
+		$.pgsi.ajax.get(
 		{
 			sUrl		 : "summary",
 			bBlockScreen : true,

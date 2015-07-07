@@ -8,9 +8,21 @@ import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.bac.IProdutoBAC;
 import com.prosperitasglobal.sendsolv.bai.IProdutoBAI;
 import com.prosperitasglobal.sendsolv.model.Produto;
+import com.prosperitasglobal.sendsolv.model.request.CfopInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.GrupoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.MarcaInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ProdutoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ProdutoMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.SubGrupoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.TributacaoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.UniMedInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.response.CfopResponse;
+import com.prosperitasglobal.sendsolv.model.response.GrupoResponse;
+import com.prosperitasglobal.sendsolv.model.response.MarcaResponse;
 import com.prosperitasglobal.sendsolv.model.response.ProdutoResponse;
+import com.prosperitasglobal.sendsolv.model.response.SubGrupoResponse;
+import com.prosperitasglobal.sendsolv.model.response.TributacaoResponse;
+import com.prosperitasglobal.sendsolv.model.response.UniMedResponse;
 import com.qat.framework.model.Message.MessageLevel;
 import com.qat.framework.model.Message.MessageSeverity;
 import com.qat.framework.model.MessageInfo;
@@ -216,40 +228,6 @@ public class ProdutoBAIImpl implements IProdutoBAI
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.bai.IProdutoBAI#fetchProdutoByOrganization(com.prosperitasglobal.sendsolv.
-	 * model.request.PagedInquiryRequest)
-	 */
-	@Override
-	public ProdutoResponse fetchProdutoByOrganization(ProdutoInquiryRequest request)
-	{
-		ProdutoResponse response = new ProdutoResponse();
-		try
-		{
-			InternalResponse internalResponse = new InternalResponse();
-
-			// validate fetchId field
-			if (ValidationUtil.isNull(request.getParentId()))
-			{
-				internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_PARENT_ID_REQUIRED);
-			}
-			else
-			{
-				internalResponse = getProdutoBAC().fetchProdutoByRequest(request);
-			}
-			// Handle the processing for all previous methods regardless of them failing or succeeding.
-			QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
-		}
-		catch (Exception ex)
-		{
-			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
 	 * com.prosperitasglobal.sendsolv.bai.IProdutoBAI#fetchProdutoByRequest(com.prosperitasglobal.sendsolv.model
 	 * .request.PagedInquiryRequest)
 	 */
@@ -377,6 +355,48 @@ public class ProdutoBAIImpl implements IProdutoBAI
 				}
 				break;
 		}
+		return null;
+	}
+
+	@Override
+	public UniMedResponse fetchUniMedByRequest(UniMedInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public GrupoResponse fetchGrupoByRequest(GrupoInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public SubGrupoResponse fetchSubGrupoByRequest(SubGrupoInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public MarcaResponse fetchMarcaByRequest(MarcaInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TributacaoResponse fetchTributacaoByRequest(TributacaoInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CfopResponse fetchCfopByRequest(CfopInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
 		return null;
 	}
 

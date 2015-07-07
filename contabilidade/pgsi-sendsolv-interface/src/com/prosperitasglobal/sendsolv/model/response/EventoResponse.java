@@ -4,12 +4,13 @@ import java.util.Collection;
 import java.util.List;
 
 import com.prosperitasglobal.sendsolv.model.Eventos;
+import com.qat.framework.model.response.InquiryResponse;
 
 public class EventoResponse extends InquiryResponse
 {
 
 	/** Attributes */
-	private List<Eventos> arquivoList;
+	private List<Eventos> eventosList;
 
 	/**
 	 * The Constructor.
@@ -20,19 +21,19 @@ public class EventoResponse extends InquiryResponse
 	}
 
 	/**
-	 * @return the arquivoList
+	 * @return the eventosList
 	 */
-	public List<Eventos> getArquivoList()
+	public List<Eventos> getEventosList()
 	{
-		return arquivoList;
+		return eventosList;
 	}
 
 	/**
-	 * @param arquivoList the arquivoList to set
+	 * @param eventosList the eventosList to set
 	 */
-	public void setArquivoList(List<Eventos> arquivoList)
+	public void setEventosList(List<Eventos> eventosList)
 	{
-		this.arquivoList = arquivoList;
+		this.eventosList = eventosList;
 	}
 
 	/*
