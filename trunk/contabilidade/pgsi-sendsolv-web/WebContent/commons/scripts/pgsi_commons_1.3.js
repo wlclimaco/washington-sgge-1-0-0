@@ -11,7 +11,7 @@
  */
 (function ($)
 {
-	$.sc = (function ()
+	$.pgsi = (function ()
 	{
 		/**
 		 * Default configuration for common functionality. These can be changed
@@ -365,7 +365,7 @@
 			{
 				var oDialog = (dialogSelector instanceof jQuery) ? dialogSelector : $(dialogSelector);
 
-				if (!$.sc.isNullOrUndefined(oDialog.dialog("instance")))
+				if (!$.pgsi.isNullOrUndefined(oDialog.dialog("instance")))
 				{
 					oDialog.dialog('close');
 				}
@@ -915,7 +915,7 @@
 					);
 				}
 
-				$.sc.closeActionDialog("#monitor-dialog");
+				$.pgsi.closeActionDialog("#monitor-dialog");
 				_oMonitorDefaults.oMonitorDeferred.resolve();
 			};
 
@@ -1009,7 +1009,7 @@
 			var _setMonitorAjax = function(oMonitorDefaults)
 			{
 
-				oMonitorDefaults = $.sc.extend(_oMonitorDefaults, oMonitorDefaults);
+				oMonitorDefaults = $.pgsi.extend(_oMonitorDefaults, oMonitorDefaults);
 
 				switch (parseInt(pgsi.settings.user.monitorRequest, 10))
 				{
@@ -1365,7 +1365,7 @@
 
 			var _convertDateInSecToMiliSec = function (oDate)
 			{
-				if ( !$.sc.isNullOrUndefined(oDate)
+				if ( !$.pgsi.isNullOrUndefined(oDate)
 						&& oDate.toString().length === 10 )
 				{
 					return oDate * 1000;
@@ -1771,7 +1771,7 @@
 				// Return default message if it's less than a second
 				if (!bReturnObject && milliseconds <= 0)
 				{
-					return "0 " + $.sc.locale.get("commons.time.seconds");
+					return "0 " + $.pgsi.locale.get("commons.time.seconds");
 				}
 
 				oTime.seconds 	= Math.floor(milliseconds % 60);
@@ -1790,23 +1790,23 @@
 				var sTimeMessage = "";
 
 				//set hours
-				sTimeMessage  = oTime.hours == 1 ? oTime.hours + " " + $.sc.locale.get("commons.time.hour") + " " : "";
-				sTimeMessage += oTime.hours > 1 ? oTime.hours + " " + $.sc.locale.get("commons.time.hours") + " " : "";
+				sTimeMessage  = oTime.hours == 1 ? oTime.hours + " " + $.pgsi.locale.get("commons.time.hour") + " " : "";
+				sTimeMessage += oTime.hours > 1 ? oTime.hours + " " + $.pgsi.locale.get("commons.time.hours") + " " : "";
 
 				//set minutes
-				sTimeMessage += oTime.minutes == 1 ? oTime.minutes + " " + $.sc.locale.get("commons.time.minute") + " " : "";
-				sTimeMessage += oTime.minutes >  1 || oTime.days > 0 || (oTime.hours > 0 && oTime.minutes == 0) ? oTime.minutes + " " + $.sc.locale.get("commons.time.minutes") + " " : "";
+				sTimeMessage += oTime.minutes == 1 ? oTime.minutes + " " + $.pgsi.locale.get("commons.time.minute") + " " : "";
+				sTimeMessage += oTime.minutes >  1 || oTime.days > 0 || (oTime.hours > 0 && oTime.minutes == 0) ? oTime.minutes + " " + $.pgsi.locale.get("commons.time.minutes") + " " : "";
 
 				if(oTime.days > 0)
 				{
 					// set days
-					sTimeMessage = oTime.days + " " + (oTime.days == 1 ? $.sc.locale.get("commons.time.day") + " "  :  $.sc.locale.get("commons.time.days") + " ") + sTimeMessage;
+					sTimeMessage = oTime.days + " " + (oTime.days == 1 ? $.pgsi.locale.get("commons.time.day") + " "  :  $.pgsi.locale.get("commons.time.days") + " ") + sTimeMessage;
 				}
 				else
 				{
 					// set seconds
-					sTimeMessage  += oTime.seconds == 1 ? oTime.seconds + " " + $.sc.locale.get("commons.time.second") + " " : "";
-					sTimeMessage  += oTime.seconds > 1 || oTime.seconds == 0 ? oTime.seconds + " " + $.sc.locale.get("commons.time.seconds") + " " : "";
+					sTimeMessage  += oTime.seconds == 1 ? oTime.seconds + " " + $.pgsi.locale.get("commons.time.second") + " " : "";
+					sTimeMessage  += oTime.seconds > 1 || oTime.seconds == 0 ? oTime.seconds + " " + $.pgsi.locale.get("commons.time.seconds") + " " : "";
 				}
 
 				return sTimeMessage
@@ -1823,13 +1823,13 @@
 			var _convertGMT = function (timeZoneId)
 			{
 
-				if ($.sc.isNullOrUndefined(timeZoneId))
+				if ($.pgsi.isNullOrUndefined(timeZoneId))
 				{
 					return timeZoneId;
 				}
 
 				// Validate for wrong GMT Time Zone ID
-				if($.sc.isNullOrUndefined(timezoneJS.timezone.zones[timeZoneId])
+				if($.pgsi.isNullOrUndefined(timezoneJS.timezone.zones[timeZoneId])
 						&& timeZoneId.match(/^GMT[+-][1-9][0-4]?$/g))
 				{
 					// Convert GMT-13 to GMT+0
@@ -2286,7 +2286,7 @@
 				};
 
 				// To avoid extend null instead the correct div's id
-				if ($.sc.isNullOrUndefined(oMessage.target))
+				if ($.pgsi.isNullOrUndefined(oMessage.target))
 				{
 
 					oMessage.target = undefined;

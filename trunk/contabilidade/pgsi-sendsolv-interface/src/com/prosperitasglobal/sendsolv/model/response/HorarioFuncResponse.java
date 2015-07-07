@@ -3,34 +3,37 @@ package com.prosperitasglobal.sendsolv.model.response;
 import java.util.Collection;
 import java.util.List;
 
-public class HoraFuncResponse extends InquiryResponse
+import com.prosperitasglobal.sendsolv.model.HorarioFunc;
+import com.qat.framework.model.response.InquiryResponse;
+
+public class HorarioFuncResponse extends InquiryResponse
 {
 
 	/** Attributes */
-	private List<HoraFunc> arquivoList;
+	private List<HorarioFunc> horarioFuncList;
 
 	/**
 	 * The Constructor.
 	 */
-	public HoraFuncResponse()
+	public HorarioFuncResponse()
 	{
 
 	}
 
 	/**
-	 * @return the arquivoList
+	 * @return the horarioFuncList
 	 */
-	public List<HoraFunc> getArquivoList()
+	public List<HorarioFunc> getHorarioFuncList()
 	{
-		return arquivoList;
+		return horarioFuncList;
 	}
 
 	/**
-	 * @param arquivoList the arquivoList to set
+	 * @param horarioFuncList the horarioFuncList to set
 	 */
-	public void setArquivoList(List<HoraFunc> arquivoList)
+	public void setHorarioFuncList(List<HorarioFunc> horarioFuncList)
 	{
-		this.arquivoList = arquivoList;
+		this.horarioFuncList = horarioFuncList;
 	}
 
 	/*
@@ -41,7 +44,7 @@ public class HoraFuncResponse extends InquiryResponse
 	@Override
 	public void addResults(Collection coll)
 	{
-		setArquivoList((List<HoraFunc>)coll);
+		setHorarioFuncList((List<HorarioFunc>)coll);
 	}
 
 	/*
@@ -51,7 +54,7 @@ public class HoraFuncResponse extends InquiryResponse
 	@Override
 	public String toString()
 	{
-		return "LocationResponse [getLocationList()=" + getArquivoList() + ", getResultsSetInfo()="
+		return "LocationResponse [getLocationList()=" + getHorarioFuncList() + ", getResultsSetInfo()="
 				+ getResultsSetInfo() + ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()="
 				+ getMessageList() + ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()="
 				+ isOperationSuccess() + "]";

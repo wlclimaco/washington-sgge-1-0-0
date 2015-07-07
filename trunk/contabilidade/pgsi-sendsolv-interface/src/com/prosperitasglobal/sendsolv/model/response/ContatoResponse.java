@@ -4,12 +4,13 @@ import java.util.Collection;
 import java.util.List;
 
 import com.prosperitasglobal.sendsolv.model.Contato;
+import com.qat.framework.model.response.InquiryResponse;
 
 public class ContatoResponse extends InquiryResponse
 {
 
 	/** Attributes */
-	private List<Contato> arquivoList;
+	private List<Contato> contatoList;
 
 	/**
 	 * The Constructor.
@@ -20,19 +21,19 @@ public class ContatoResponse extends InquiryResponse
 	}
 
 	/**
-	 * @return the arquivoList
+	 * @return the contatoList
 	 */
-	public List<Contato> getArquivoList()
+	public List<Contato> getContatoList()
 	{
-		return arquivoList;
+		return contatoList;
 	}
 
 	/**
-	 * @param arquivoList the arquivoList to set
+	 * @param contatoList the contatoList to set
 	 */
-	public void setArquivoList(List<Contato> arquivoList)
+	public void setContatoList(List<Contato> contatoList)
 	{
-		this.arquivoList = arquivoList;
+		this.contatoList = contatoList;
 	}
 
 	/*

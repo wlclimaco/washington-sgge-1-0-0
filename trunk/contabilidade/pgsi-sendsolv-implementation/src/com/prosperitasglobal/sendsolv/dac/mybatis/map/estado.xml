@@ -22,7 +22,6 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEstado"/>
   </resultMap>
 
   <!--
@@ -95,8 +94,8 @@
     FROM business ORDER BY name ASC
   </select>
 
- <select id="fetchAllEstadosById" parameterType="Integer" resultMap="estadoResult">
-	 SELECT b.id,
+ <select id="fetchEstadoById" parameterType="Integer" resultMap="estadoResult">
+	 SELECT b.id
 	<include refid="allEstadoColumns" />
     FROM estado b where b.id= #{id} ORDER BY b.id ASC
  </select>

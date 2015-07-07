@@ -4,12 +4,13 @@ import java.util.Collection;
 import java.util.List;
 
 import com.prosperitasglobal.sendsolv.model.Convenio;
+import com.qat.framework.model.response.InquiryResponse;
 
 public class ConvenioResponse extends InquiryResponse
 {
 
 	/** Attributes */
-	private List<Convenio> arquivoList;
+	private List<Convenio> convenioList;
 
 	/**
 	 * The Constructor.
@@ -20,19 +21,19 @@ public class ConvenioResponse extends InquiryResponse
 	}
 
 	/**
-	 * @return the arquivoList
+	 * @return the convenioList
 	 */
-	public List<Convenio> getArquivoList()
+	public List<Convenio> getConvenioList()
 	{
-		return arquivoList;
+		return convenioList;
 	}
 
 	/**
-	 * @param arquivoList the arquivoList to set
+	 * @param convenioList the convenioList to set
 	 */
-	public void setArquivoList(List<Convenio> arquivoList)
+	public void setConvenioList(List<Convenio> convenioList)
 	{
-		this.arquivoList = arquivoList;
+		this.convenioList = convenioList;
 	}
 
 	/*

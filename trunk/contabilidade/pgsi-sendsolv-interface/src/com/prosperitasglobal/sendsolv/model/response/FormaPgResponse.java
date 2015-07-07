@@ -4,12 +4,13 @@ import java.util.Collection;
 import java.util.List;
 
 import com.prosperitasglobal.sendsolv.model.FormaPg;
+import com.qat.framework.model.response.InquiryResponse;
 
 public class FormaPgResponse extends InquiryResponse
 {
 
 	/** Attributes */
-	private List<FormaPg> arquivoList;
+	private List<FormaPg> formaPgList;
 
 	/**
 	 * The Constructor.
@@ -20,19 +21,19 @@ public class FormaPgResponse extends InquiryResponse
 	}
 
 	/**
-	 * @return the arquivoList
+	 * @return the formaPgList
 	 */
-	public List<FormaPg> getArquivoList()
+	public List<FormaPg> getFormaPgList()
 	{
-		return arquivoList;
+		return formaPgList;
 	}
 
 	/**
-	 * @param arquivoList the arquivoList to set
+	 * @param formaPgList the formaPgList to set
 	 */
-	public void setArquivoList(List<FormaPg> arquivoList)
+	public void setFormaPgList(List<FormaPg> formaPgList)
 	{
-		this.arquivoList = arquivoList;
+		this.formaPgList = formaPgList;
 	}
 
 	/*

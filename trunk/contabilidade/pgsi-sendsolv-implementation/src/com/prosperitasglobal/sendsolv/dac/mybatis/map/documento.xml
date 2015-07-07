@@ -56,7 +56,7 @@
     	#{description},
     	#{numero},
     	#{data},
-    	#{estado},
+    	#{estado.id},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
@@ -81,7 +81,7 @@
     		<if test="numero!= null">numero = #{numero},</if>
 	    	<if test="typeEnumValue!= null"> type=#{typeEnumValue},</if>
 	    	<if test="data!= null"> data=#{data},</if>
-	    	<if test="estado!= null"> estado=#{estado},</if>
+	    	<if test="estado.id!= null"> estado=#{estado.id},</if>
 			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>

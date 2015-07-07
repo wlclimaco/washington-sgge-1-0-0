@@ -115,7 +115,7 @@ CREATE TABLE [dbo].[documento](
 	[description]  [varchar](200) NULL,
 	[numero]       [varchar](50) NULL,
 	[data]         [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
-	[estado]       [varchar](2) NULL,
+	[estado]       [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -142,12 +142,12 @@ INSERT INTO [dbo].[documento]
            ,[modify_date]
            ,[modify_user])
      VALUES
-           (1,1,1,1,'CNPJ','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
-		   (2,1,2,1,'CPF','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
-		   (3,1,3,1,'IM','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
-		   (4,1,1,1,'IE','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
-		   (5,1,2,1,'RG','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
-		   (6,1,3,1,'CGC','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod')
+           (1,1,1,1,'CNPJ','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (2,1,2,1,'CPF','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (3,1,3,1,'IM','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (4,1,1,1,'IE','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (5,1,2,1,'RG','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (6,1,3,1,'CGC','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod')
 
 INSERT INTO [dbo].[status] ([id],[dataStatus],[parentId],[status],[acaoType],[tabelaEnum],[note],[create_date],[create_user],[modify_date],[modify_user]) VALUES
 
@@ -249,12 +249,12 @@ INSERT INTO [dbo].[endereco]
            ,[modify_date]
            ,[modify_user])
      VALUES
-           (1,1,1,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (2,1,2,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (3,1,3,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (4,1,1,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (5,1,2,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (6,1,3,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod')
+           (1,1,1,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (2,1,2,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (3,1,3,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (4,1,1,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (5,1,2,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (6,1,3,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod')
 
 INSERT INTO [dbo].[status] ([id],[dataStatus],[parentId],[status],[acaoType],[tabelaEnum],[note],[create_date],[create_user],[modify_date],[modify_user]) VALUES
 
@@ -564,24 +564,24 @@ GO
 INSERT INTO [dbo].[documento]
            ([id],[tabela],[parentId],[type],[description],[numero],[data] ,[estado],[create_date] ,[create_user],[modify_date],[modify_user])
      VALUES
-           (7,16,1,1,'CNPJ','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
-		   (8,16,2,1,'CPF','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
-		   (9,16,3,1,'IM','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
-		   (10,16,4,1,'IE','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
-		   (11,16,5,1,'RG','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
-		   (12,16,6,1,'CGC','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
-		   (13,16,7,1,'CNPJ','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
-		   (14,16,8,1,'CPF','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
-		   (15,16,9,1,'IM','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
-		   (16,16,10,1,'IE','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
-		   (17,16,11,1,'RG','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
-		   (18,16,12,1,'CGC','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
-		   (19,16,13,1,'CNPJ','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
-		   (20,16,14,1,'CPF','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
-		   (21,16,15,1,'IM','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
-		   (22,16,1,1,'IE','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
-		   (23,16,2,1,'RG','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod'),
-		   (24,16,3,1,'CGC','2001',14327833577780,'MG',14327833577780,'rod',14327833577780,'rod')
+           (7,16,1,1,'CNPJ','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (8,16,2,1,'CPF','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (9,16,3,1,'IM','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (10,16,4,1,'IE','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (11,16,5,1,'RG','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (12,16,6,1,'CGC','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (13,16,7,1,'CNPJ','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (14,16,8,1,'CPF','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (15,16,9,1,'IM','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (16,16,10,1,'IE','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (17,16,11,1,'RG','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (18,16,12,1,'CGC','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (19,16,13,1,'CNPJ','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (20,16,14,1,'CPF','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (21,16,15,1,'IM','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (22,16,1,1,'IE','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (23,16,2,1,'RG','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (24,16,3,1,'CGC','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod')
 GO
 
 INSERT INTO [dbo].[email]
@@ -610,22 +610,22 @@ GO
 INSERT INTO [dbo].[endereco]
            ([id],[tabela],[parentId],[type],[logradouro],[cidade],[estado],[bairro],[numero],[cep],[create_date] ,[create_user],[modify_date],[modify_user])
      VALUES
-           (7,16,1,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (8,16,2,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (9,16,3,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (10,16,4,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (11,16,5,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (12,16,6,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (13,16,7,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (14,16,8,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (15,16,9,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (16,16,10,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (17,16,11,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (18,16,12,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (19,16,13,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (20,16,14,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (21,16,15,1,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (22,16,1,2,'Rua Maria Conceicao silva','Uberaba','MG','centro','686','380802-243',14327833577780,'rod',10000002,'rod')
+           (7,16,1,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (8,16,2,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (9,16,3,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (10,16,4,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (11,16,5,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (12,16,6,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (13,16,7,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (14,16,8,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (15,16,9,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (16,16,10,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (17,16,11,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (18,16,12,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (19,16,13,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (20,16,14,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (21,16,15,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (22,16,1,2,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod')
 GO
 
 INSERT INTO [dbo].[telefone]
@@ -3225,3 +3225,41 @@ BEGIN
 END
 
 -----------------------------------------------------------------------------
+
+
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[estado];
+CREATE TABLE [dbo].[estado](
+	[id]            [int] NOT NULL,
+	[nome]		 [varchar](50) NULL,
+	[abreviacao]  [varchar](50) NULL,
+	[create_date]  	[bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  	[varchar](50) NULL,
+    [modify_date]  	[bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  	[varchar](50) NULL,
+CONSTRAINT [pk_nFStatus_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+USE [PGSi]
+GO
+
+INSERT INTO [dbo].[estado]
+           ([id]
+			,[nome]
+			,[abreviacao]
+			,[create_date]
+		    ,[create_user]
+		    ,[modify_date]
+		    ,[modify_user])
+     VALUES
+           (1,'MINAS GERAIS','MG',1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (2,'RIO DE JANEIRO','RJ',1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (3,'SÃO PAULO','MG',1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (4,'BAHIA','BA',1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (5,'ESPIRITO SANTO','ES',1432783357778,'SYSTEM',1432783357778,'SYSTEM')
+
+
+GO

@@ -7,21 +7,21 @@
 
 	var fnElectricFilters = function ()
 	{
-		return sensus.util.filter.getDeviceFiltersByType();
+		return pgsi.util.filter.getDeviceFiltersByType();
 	};
 
 	var fnGetDefaultFilters = function (sDeviceCategory)
 	{
 
-		var serviceType = sensus.settings.serviceType;
-		var services 	= sensus.constants.services;
+		var serviceType = pgsi.settings.serviceType;
+		var services 	= pgsi.constants.services;
 
 		switch (serviceType)
 		{
 			case services.water.name:
 			case services.gas.name:
 
-				return sensus.util.filter.getDeviceFiltersByType();
+				return pgsi.util.filter.getDeviceFiltersByType();
 
 			case services.electric.name:
 
@@ -33,7 +33,7 @@
 	{
 		switch (sDeviceCategoryEnum)
 		{
-			case sensus.constants.services.electric.meter.name :
+			case pgsi.constants.services.electric.meter.name :
 
 				return [
 					"DEVICE_ID",
@@ -60,7 +60,7 @@
 					"RMA"
 				];
 
-			case sensus.constants.services.electric.light.name :
+			case pgsi.constants.services.electric.light.name :
 
 				return [
 			        "DEVICE_TYPE",
@@ -83,7 +83,7 @@
 			        "MODEL_NUMBER"
 			        ];
 
-			case sensus.constants.services.electric.lcm.name :
+			case pgsi.constants.services.electric.lcm.name :
 
 				return [
 			        "DEVICE_ID",
@@ -105,7 +105,7 @@
 			        "ALARM"
 		        ];
 
-			case sensus.constants.services.electric.ihd.name :
+			case pgsi.constants.services.electric.ihd.name :
 
 				return [
 			        "DEVICE_ID",
@@ -123,7 +123,7 @@
 			        "MAP_IT"
 				];
 
-			case sensus.constants.services.electric.thermostat.name :
+			case pgsi.constants.services.electric.thermostat.name :
 
 				return [
 			        "DEVICE_ID",
@@ -141,7 +141,7 @@
 			        "MAP_IT"
 		        ];
 
-			case sensus.constants.services.electric.tower.name :
+			case pgsi.constants.services.electric.tower.name :
 
 				return [
 				    "DEVICE_ID",
@@ -162,7 +162,7 @@
 
 	var fnGetAllWaterGasColumns = function (sDeviceCategoryEnum)
 	{
-		var cServices = sensus.constants.services;
+		var cServices = pgsi.constants.services;
 
 		switch (sDeviceCategoryEnum)
 		{
@@ -346,14 +346,14 @@
 
 	var fnAllColumns = function (sDeviceCategoryEnum)
 	{
-		switch (sensus.settings.serviceType)
+		switch (pgsi.settings.serviceType)
 		{
-			case sensus.constants.services.water.name:
-			case sensus.constants.services.gas.name:
+			case pgsi.constants.services.water.name:
+			case pgsi.constants.services.gas.name:
 
 				return fnGetAllWaterGasColumns(sDeviceCategoryEnum);
 
-			case sensus.constants.services.electric.name:
+			case pgsi.constants.services.electric.name:
 
 				return fnGetAllElectricColumns(sDeviceCategoryEnum);
 		}
@@ -361,8 +361,8 @@
 
 	var fnConvertPropertyListToString = function (e)
 	{
-		if ( $.sc.isValidArray(e.customizations)
-				&& $.sc.isValidArray(e.customizations[0].properties) )
+		if ( $.pgsi.isValidArray(e.customizations)
+				&& $.pgsi.isValidArray(e.customizations[0].properties) )
 		{
 			var aStringList 		= [];
 			var aProperties 		= e.customizations[0].properties
@@ -381,14 +381,14 @@
 
 	var getDefaultObj = function (e)
 	{
-		var sDeviceCategoryEnum = $.address.parameter(sensus.constants.requests.deviceCategory);
+		var sDeviceCategoryEnum = $.address.parameter(pgsi.constants.requests.deviceCategory);
 
-		if ( !$.sc.isNullOrUndefined(sDeviceCategoryEnum) )
+		if ( !$.pgsi.isNullOrUndefined(sDeviceCategoryEnum) )
 		{
 			sDeviceCategoryEnum = sDeviceCategoryEnum.replace("|", '');
 
 			var allFilter 			= fnGetDefaultFilters(sDeviceCategoryEnum);
-			var getDefaultFilter 	= sensus.util.device.getDefaultFilters(sDeviceCategoryEnum);
+			var getDefaultFilter 	= pgsi.util.device.getDefaultFilters(sDeviceCategoryEnum);
 			var allColumns 			= fnAllColumns(sDeviceCategoryEnum)
 			var aProperties 		= null;
 		}
@@ -399,21 +399,21 @@
 			var allColumns 			= null;
 			var aProperties 		= null;
 
-			switch ( $.sc.pageLoader.currentPage() )
+			switch ( $.pgsi.pageLoader.currentPage() )
 			{
-				case sensus.constants.requests.alert:
+				case pgsi.constants.requests.alert:
 
-					allColumns 	= sensus.pages.alert.column.getAllColumns[sensus.settings.serviceType];
+					allColumns 	= pgsi.pages.alert.column.getAllColumns[pgsi.settings.serviceType];
 					break;
 
 				case "report/tab/lifecycle_meter":
 
-					allColumns 	= sensus.pages.lifecyclemeter.column.getAllColumns[sensus.settings.serviceType];
+					allColumns 	= pgsi.pages.lifecyclemeter.column.getAllColumns[pgsi.settings.serviceType];
 					break;
 
 				case "report/tab/troubled_meter" :
 
-					allColumns 	= sensus.pages.troubledmeter.column.getAllColumns[sensus.settings.serviceType];
+					allColumns 	= pgsi.pages.troubledmeter.column.getAllColumns[pgsi.settings.serviceType];
 					break;
 			}
 
@@ -457,22 +457,22 @@
 		//Page with device category parameter
 		if (bDeviceCategory)
 		{
-			return sensus.settings.serviceType
-						+ "_" + $.sc.pageLoader.currentPage()
+			return pgsi.settings.serviceType
+						+ "_" + $.pgsi.pageLoader.currentPage()
 						.toUpperCase()
 						.split("/")
 						.join("_")
-						.replace(sensus.settings.serviceType, "")
+						.replace(pgsi.settings.serviceType, "")
 						+ "_" +
-						$.sc.replaceAll("\\|", "", $.address.parameter(sensus.constants.requests.deviceCategory));
+						$.pgsi.replaceAll("\\|", "", $.address.parameter(pgsi.constants.requests.deviceCategory));
 		}
-		return sensus.settings.serviceType
+		return pgsi.settings.serviceType
 									+ "_" +
-									$.sc.pageLoader.currentPage().
+									$.pgsi.pageLoader.currentPage().
 									toUpperCase().
 									split("/").
 									join("_").
-									replace(sensus.settings.serviceType, "");
+									replace(pgsi.settings.serviceType, "");
 	};
 
 	/**
@@ -497,7 +497,7 @@
 				var defaultObj 	= getDefaultObj(oResponseCall);
 				var	aColumn 	= [];
 
-				if ( $.sc.isValidArray(oResponseCall.customizations) && $.sc.isValidArray(oResponseCall.customizations[0].properties) )
+				if ( $.pgsi.isValidArray(oResponseCall.customizations) && $.pgsi.isValidArray(oResponseCall.customizations[0].properties) )
 				{
 					defaultObj.listColumn = fnConvertPropertyListToString(oResponseCall)
 				}
@@ -505,7 +505,7 @@
 				// Use extend to remove object reference.
 				oResponse = $.extend(true, {}, defaultObj);
 
-				if ( $.sc.isValidArray(oResponseCall.customizations)
+				if ( $.pgsi.isValidArray(oResponseCall.customizations)
 						&& oResponseCall.customizations.length > 0)
 				{
 					oResponse.id = oResponseCall.customizations[0].id;
@@ -516,7 +516,7 @@
 				}
 			}
 
-			var sDeviceCategory = sensus.util.filter.paramRequest.getParameter(sensus.constants.requests.deviceCategory);
+			var sDeviceCategory = pgsi.util.filter.paramRequest.getParameter(pgsi.constants.requests.deviceCategory);
 			var sUrl 			= null;
 
 			if (sDeviceCategory)
@@ -560,9 +560,9 @@
 				sUrl = 'api/search/fetchFilter';
 			}
 
-			if ( $.sc.isNullOrUndefined(oColumnFilter) )
+			if ( $.pgsi.isNullOrUndefined(oColumnFilter) )
 			{
-				$.sc.ajax.post(
+				$.pgsi.ajax.post(
 				{
 
 					sUrl				: sUrl,
@@ -577,7 +577,7 @@
 				fnCallback(oColumnFilter);
 			}
 
-			var sessionData = sensus.util.session.read(sType);
+			var sessionData = pgsi.util.session.read(sType);
 
 			/**
 			 * Check if there are customization in the session
@@ -653,19 +653,19 @@
 
 			if ( sType === "Filters" )
 			{
-				sText = $.sc.locale.get("widgets.filter.filterSet");
+				sText = $.pgsi.locale.get("widgets.filter.filterSet");
 			}
 			else if ( sType === "Columns" )
 			{
-				sText = $.sc.locale.get("widgets.filter.view");
+				sText = $.pgsi.locale.get("widgets.filter.view");
 			}
 
-			$('<div id="custom-filters" class="action-dialog"><div id="droppable-area"><h2>' + $.sc.locale.get('widgets.customize.currently.' +  sType) +
+			$('<div id="custom-filters" class="action-dialog"><div id="droppable-area"><h2>' + $.pgsi.locale.get('widgets.customize.currently.' +  sType) +
 				'</h2><fieldset><ul id="checkbox-list-active" class="checkbox-list-active sortable connected-sortable" style="float:left;"></ul>' +
-					'<ul style="float:left"><li id="last-active" class="error hide">' + $.sc.locale.get('widgets.customize.error') +
-						'</li></ul></fieldset><fieldset class="clear"><legend>' + $.sc.locale.get('widgets.customize.additional.' + sType) +
+					'<ul style="float:left"><li id="last-active" class="error hide">' + $.pgsi.locale.get('widgets.customize.error') +
+						'</li></ul></fieldset><fieldset class="clear"><legend>' + $.pgsi.locale.get('widgets.customize.additional.' + sType) +
 							'</legend><ul id="checkbox-list" class="checkbox-list sortable connected-sortable"></ul></fieldset></div>' +
-								'<div class="highlight"><small><input id="set-default" type="checkbox"> ' + $.sc.locale.get('widgets.customize.checkbox') +
+								'<div class="highlight"><small><input id="set-default" type="checkbox"> ' + $.pgsi.locale.get('widgets.customize.checkbox') +
 									'&nbsp;' + sText + '</small></div></div>').appendTo('#load');
 		}
 
@@ -673,7 +673,7 @@
 		$actionCustomFilters = $("#custom-filters").dialog(
 		{
 			autoOpen	: false,
-			title		: $.sc.locale.get("filter.customize." + sType),
+			title		: $.pgsi.locale.get("filter.customize." + sType),
 			width		: 940,
 			modal		: true,
 
@@ -682,7 +682,7 @@
                     text: "help",
                     icon: "ui-icon-help",
                     click: function() {
-                    	sensus.pages.dm.fnHelperCall(true, "customize");
+                    	pgsi.pages.dm.fnHelperCall(true, "customize");
                     }
                 }
             ],
@@ -691,9 +691,9 @@
 			{
 				var buttons = {};
 
-				buttons[$.sc.locale.get("filter.customize.set." + sType)] = function()
+				buttons[$.pgsi.locale.get("filter.customize.set." + sType)] = function()
 				{
-					$.sc.progressBar.startGlobal();
+					$.pgsi.progressBar.startGlobal();
 
 					var bSetDefault	 	= $('#set-default').is(":checked");
 					var sMessagindId 	= "messaging-main";
@@ -711,7 +711,7 @@
 					{
 						oAjaxData[sAjaxData] = aActive;
 
-						sensus.util.session.remove(sAjaxData);
+						pgsi.util.session.remove(sAjaxData);
 
 						var oTypeCustomize =
 						{
@@ -726,11 +726,11 @@
 								page 			: sPage,
 								type 			: sAjaxData.toLowerCase(),
 								filters			: oAjaxData[sAjaxData],
-								deviceCategory	: sensus.util.filter.paramRequest.getParameter(sensus.constants.requests.deviceCategory),
+								deviceCategory	: pgsi.util.filter.paramRequest.getParameter(pgsi.constants.requests.deviceCategory),
 								customSearchId	: dData.id,
 								areaTypeEnum    : function ()
 								{
-									if ( $.sc.isNullOrUndefined(sensus.util.filter.paramRequest.getParameter(sensus.constants.requests.deviceCategory)) )
+									if ( $.pgsi.isNullOrUndefined(pgsi.util.filter.paramRequest.getParameter(pgsi.constants.requests.deviceCategory)) )
 									{
 										return getAreaType(false);
 									}
@@ -747,31 +747,31 @@
 							{
 								if ( sAjaxData == 'Filters' )
 								{
-									$.sc.listener.wait(
+									$.pgsi.listener.wait(
 									{
 										eventName  	: "deviceList",
 										arguments  	: ["filter"],
-										fnCallback  : $.sc.progressBar.stopGlobal
+										fnCallback  : $.pgsi.progressBar.stopGlobal
 									});
 
-									sSuccessMessage = $.sc.locale.get("filter.message.update.filters");
+									sSuccessMessage = $.pgsi.locale.get("filter.message.update.filters");
 
-									sensus.util.filter.init(null,
-									sensus.util.filter.filterArrayToObject(aActive),
+									pgsi.util.filter.init(null,
+									pgsi.util.filter.filterArrayToObject(aActive),
 
 									function (oResponse)
 									{
-										$.sc.filter.rebuild(
+										$.pgsi.filter.rebuild(
 										{
 											hasCustomize	: true,
 											element			: "#w-filters",
 											tagsDiv			: ".active-filters-list div.first",
-											title			: $.sc.locale.get("filter.device.label"),
-											table 			: sensus.pages.device.deviceTable,
+											title			: $.pgsi.locale.get("filter.device.label"),
+											table 			: pgsi.pages.device.deviceTable,
 											filters 		: oResponse
 										}, true);
 
-										$.sc.listener.notify(
+										$.pgsi.listener.notify(
 										{
 										   	eventName  : "deviceList",
 										   	arguments  : ["filter"]
@@ -782,60 +782,60 @@
 								else if ( sAjaxData == 'Columns' )
 								{
 
-									switch ( $.sc.pageLoader.currentPage() )
+									switch ( $.pgsi.pageLoader.currentPage() )
 									{
-										case sensus.constants.requests.alert:
+										case pgsi.constants.requests.alert:
 
-											$.sc.listener.wait(
+											$.pgsi.listener.wait(
 											{
 												eventName  	: "alertList",
 												arguments  	: ["table"],
-												fnCallback  : $.address.parameter("view") ? sensus.util.device.initMap : $.sc.progressBar.stopGlobal
+												fnCallback  : $.address.parameter("view") ? pgsi.util.device.initMap : $.pgsi.progressBar.stopGlobal
 											});
 
-											sensus.pages.alert.table.oPreloadResponse = "refresh";
-											sensus.pages.alert.column.oResponseColumn = null;
-											sensus.pages.alert.table.init();
+											pgsi.pages.alert.table.oPreloadResponse = "refresh";
+											pgsi.pages.alert.column.oResponseColumn = null;
+											pgsi.pages.alert.table.init();
 											break;
 
 										case "report/tab/lifecycle_meter" :
 
-											$.sc.listener.wait(
+											$.pgsi.listener.wait(
 											{
 												eventName  	: "lifecycleMeterList",
 												arguments  	: ["table"],
-												fnCallback  : $.sc.progressBar.stopGlobal
+												fnCallback  : $.pgsi.progressBar.stopGlobal
 											});
 
-											sensus.pages.lifecyclemeter.table.oResponse = "refresh";
-											sensus.pages.lifecyclemeter.column.oResponseColumn = null;
-											sensus.pages.lifecyclemeter.table.init();
+											pgsi.pages.lifecyclemeter.table.oResponse = "refresh";
+											pgsi.pages.lifecyclemeter.column.oResponseColumn = null;
+											pgsi.pages.lifecyclemeter.table.init();
 											break;
 
 										case "report/tab/troubled_meter" :
 
-											$.sc.listener.wait(
+											$.pgsi.listener.wait(
 											{
 												eventName  	: "troubledMeterList",
 												arguments  	: ["table"],
-												fnCallback  : $.sc.progressBar.stopGlobal
+												fnCallback  : $.pgsi.progressBar.stopGlobal
 											});
 
-											sensus.pages.troubledmeter.table.oResponse = "refresh";
-											sensus.pages.troubledmeter.column.oResponse = null;
-											sensus.pages.troubledmeter.table.init();
+											pgsi.pages.troubledmeter.table.oResponse = "refresh";
+											pgsi.pages.troubledmeter.column.oResponse = null;
+											pgsi.pages.troubledmeter.table.init();
 											break;
 
 										default:
-											$.sc.listener.wait(
+											$.pgsi.listener.wait(
 											{
 												eventName  	: "deviceList",
 												arguments  	: ["table"],
-												fnCallback  : $.sc.progressBar.stopGlobal
+												fnCallback  : $.pgsi.progressBar.stopGlobal
 											});
 
 											/** rebuild columns **/
-											sensus.util.device.initTable("refresh", sensus.pages.device.getTableConfig(), null, null);
+											pgsi.util.device.initTable("refresh", pgsi.pages.device.getTableConfig(), null, null);
 											break;
 									}
 								}
@@ -844,15 +844,15 @@
 							}
 							else
 							{
-								$.sc.message.show(
+								$.pgsi.message.show(
 								{
-									message: $.sc.locale.get('widgets.customize.errorRequest'),
+									message: $.pgsi.locale.get('widgets.customize.errorRequest'),
 									type: "error"
 								});
 							}
 						};
 
-						$.sc.ajax.post(
+						$.pgsi.ajax.post(
 						{
 							sUrl: "api/search/updateColumnFilter",
 							oRequest: oRequest,
@@ -863,31 +863,31 @@
 					{
 						if ( sAjaxData == 'Filters' )
 						{
-							$.sc.listener.wait(
+							$.pgsi.listener.wait(
 							{
 								eventName  	: "deviceList",
 								arguments  	: ["filter"],
-								fnCallback  : $.sc.progressBar.stopGlobal
+								fnCallback  : $.pgsi.progressBar.stopGlobal
 							});
 
-							sSuccessMessage = $.sc.locale.get("filter.message.update.filters");
+							sSuccessMessage = $.pgsi.locale.get("filter.message.update.filters");
 
 							/** * Send array of filters to back-end to create session */
-							sensus.util.session.create(
+							pgsi.util.session.create(
 							{
 								key : sAjaxData,
 								value : aActive
 							});
 
-							sensus.util.filter.init(
+							pgsi.util.filter.init(
 								null,
-								sensus.util.filter.filterArrayToObject(aActive),
+								pgsi.util.filter.filterArrayToObject(aActive),
 								function (oResponse)
 								{
 									/** Add the search filter when is the saved search page */
-									if ( $.address.parameter(sensus.constants.requests.saved) )
+									if ( $.address.parameter(pgsi.constants.requests.saved) )
 									{
-										var filterUtil 	= sensus.util.filter;
+										var filterUtil 	= pgsi.util.filter;
 										var filter 		= {search : filterUtil.filters.search};
 										var opts 		= filterUtil.options;
 
@@ -895,17 +895,17 @@
 										oResponse = $.extend({}, filter, oResponse);
 									}
 
-									$.sc.filter.rebuild(
+									$.pgsi.filter.rebuild(
 									{
 										hasCustomize	: true,
 										element			: "#w-filters",
 										tagsDiv			: ".active-filters-list div.first",
-										title			: $.sc.locale.get("filter.device.label"),
-										table 			: sensus.pages.device.deviceTable,
+										title			: $.pgsi.locale.get("filter.device.label"),
+										table 			: pgsi.pages.device.deviceTable,
 										filters 		: oResponse
 									}, true);
 
-									$.sc.listener.notify(
+									$.pgsi.listener.notify(
 									{
 									   	eventName  : "deviceList",
 									   	arguments  : ["filter"]
@@ -916,63 +916,63 @@
 						else if ( sAjaxData == 'Columns' )
 						{
 							/** * Send array of columns to back-end to create session */
-							sensus.util.session.create(
+							pgsi.util.session.create(
 							{
 								key 	: sAjaxData,
 								value 	: aActive
 							});
 
 							/** rebuild columns **/
-							switch ( $.sc.pageLoader.currentPage() )
+							switch ( $.pgsi.pageLoader.currentPage() )
 							{
-								case sensus.constants.requests.alert:
+								case pgsi.constants.requests.alert:
 
-									$.sc.listener.wait(
+									$.pgsi.listener.wait(
 									{
 										eventName  	: "alertList",
 										arguments  	: ["table"],
-										fnCallback  : $.address.parameter("view") ? sensus.util.device.initMap : $.sc.progressBar.stopGlobal
+										fnCallback  : $.address.parameter("view") ? pgsi.util.device.initMap : $.pgsi.progressBar.stopGlobal
 									});
 
-									sensus.pages.alert.table.oPreloadResponse = "refresh";
-									sensus.pages.alert.table.init();
+									pgsi.pages.alert.table.oPreloadResponse = "refresh";
+									pgsi.pages.alert.table.init();
 									break;
 
 								case "report/tab/lifecycle_meter" :
 
-									$.sc.listener.wait(
+									$.pgsi.listener.wait(
 									{
 										eventName  	: "lifecycleMeterList",
 										arguments  	: ["table"],
-										fnCallback  : $.sc.progressBar.stopGlobal
+										fnCallback  : $.pgsi.progressBar.stopGlobal
 									});
 
-									sensus.pages.lifecyclemeter.table.oResponse = "refresh";
-									sensus.pages.lifecyclemeter.table.init();
+									pgsi.pages.lifecyclemeter.table.oResponse = "refresh";
+									pgsi.pages.lifecyclemeter.table.init();
 									break;
 
 								case "report/tab/troubled_meter" :
 
-									$.sc.listener.wait(
+									$.pgsi.listener.wait(
 									{
 										eventName  	: "troubledMeterList",
 										arguments  	: ["table"],
-										fnCallback  : $.sc.progressBar.stopGlobal
+										fnCallback  : $.pgsi.progressBar.stopGlobal
 									});
 
-									sensus.pages.troubledmeter.table.oResponse = "refresh";
-									sensus.pages.troubledmeter.table.init();
+									pgsi.pages.troubledmeter.table.oResponse = "refresh";
+									pgsi.pages.troubledmeter.table.init();
 									break;
 
 								default:
-									$.sc.listener.wait(
+									$.pgsi.listener.wait(
 									{
 										eventName  	: "deviceList",
 										arguments  	: ["table"],
-										fnCallback  : $.sc.progressBar.stopGlobal
+										fnCallback  : $.pgsi.progressBar.stopGlobal
 									});
 
-									sensus.util.device.initTable("refresh", sensus.pages.device.getTableConfig(), {Columns: aActive}, null);
+									pgsi.util.device.initTable("refresh", pgsi.pages.device.getTableConfig(), {Columns: aActive}, null);
 									break;
 							}
 						}
@@ -987,7 +987,7 @@
 					$(this).empty();
 				},
 
-				buttons[$.sc.locale.get("commons.pages.cancel")] = function()
+				buttons[$.pgsi.locale.get("commons.pages.cancel")] = function()
 				{
 					$(this).empty();
 					$(this).dialog('close');
@@ -1027,11 +1027,11 @@
 					{
 						if ( aAll.hasOwnProperty(o) )
 						{
-							sValue = $.sc.locale.get("commons.pages." + aAll[o].toLowerCase());
+							sValue = $.pgsi.locale.get("commons.pages." + aAll[o].toLowerCase());
 
-							if ( aAll[o] == sensus.constants.requests.flexnetFirmware )
+							if ( aAll[o] == pgsi.constants.requests.flexnetFirmware )
 							{
-								sValue = $.sc.locale.get("firmware.firmwareFlexnet");
+								sValue = $.pgsi.locale.get("firmware.firmwareFlexnet");
 							}
 
 							aAllNames.push(sValue);
@@ -1041,9 +1041,9 @@
 				/** COLUMNS **/
 				else if ( sType == 'Columns' )
 				{
-					var serviceType		= sensus.settings.serviceType;
-					var services 		= sensus.constants.services;
-					var sDeviceCategory = sensus.util.filter.paramRequest.getParameter(sensus.constants.requests.deviceCategory);
+					var serviceType		= pgsi.settings.serviceType;
+					var services 		= pgsi.constants.services;
+					var sDeviceCategory = pgsi.util.filter.paramRequest.getParameter(pgsi.constants.requests.deviceCategory);
 
 					sAjaxData 			= 'Columns';
 					aCurrFilters 		= objFilters.aColumnsIds;
@@ -1059,8 +1059,8 @@
 							case services.water.name:
 							case services.gas.name:
 
-								if ( sDeviceCategory == sensus.constants.services.gas.meter.name
-									|| sDeviceCategory == sensus.constants.services.water.meter.name )
+								if ( sDeviceCategory == pgsi.constants.services.gas.meter.name
+									|| sDeviceCategory == pgsi.constants.services.water.meter.name )
 								{
 									if ( aCurrFilters[p] == "METER_TYPE" )
 									{
@@ -1108,8 +1108,8 @@
 								case services.water.name:
 								case services.gas.name:
 
-									if ( sDeviceCategory == sensus.constants.services.gas.meter.name
-											|| sDeviceCategory == sensus.constants.services.water.meter.name )
+									if ( sDeviceCategory == pgsi.constants.services.gas.meter.name
+											|| sDeviceCategory == pgsi.constants.services.water.meter.name )
 									{
 
 										if ( dData.additionalColumns[p] == "METER_TYPE" )
@@ -1170,7 +1170,7 @@
 							{
 								var noSortable = "";
 
-								if (aCurrFilters[l] == sensus.constants.requests.lifecycleState)
+								if (aCurrFilters[l] == pgsi.constants.requests.lifecycleState)
 								{
 									noSortable = " no-sortable";
 								}
@@ -1205,7 +1205,7 @@
 								}
 
 								$('<li id="' + aCurrFilters[l] + '" class="ui-state-default' + noSortable + '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'
-										+ $.sc.locale.get('widgets.customize.additional.Column.' + aCurrFiltersNames[l]) + '</li>').appendTo('#checkbox-list-active');
+										+ $.pgsi.locale.get('widgets.customize.additional.Column.' + aCurrFiltersNames[l]) + '</li>').appendTo('#checkbox-list-active');
 
 								// Remove from array the columns already selected
 								var iPos = $.inArray(aCurrFilters[l], aAll);
@@ -1233,7 +1233,7 @@
 						else if ( sType == "Columns" )
 						{
 							$('<li id="' + aAll[l] + '" class="ui-state-highlight"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'
-									+ $.sc.locale.get('widgets.customize.additional.Column.' + aAllNames[l])
+									+ $.pgsi.locale.get('widgets.customize.additional.Column.' + aAllNames[l])
 									+ '</li>').appendTo('#checkbox-list');
 						}
 					}

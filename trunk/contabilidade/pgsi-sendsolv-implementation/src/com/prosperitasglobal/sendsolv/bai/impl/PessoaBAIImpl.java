@@ -10,14 +10,24 @@ import com.prosperitasglobal.sendsolv.bai.IPessoaBAI;
 import com.prosperitasglobal.sendsolv.model.Cliente;
 import com.prosperitasglobal.sendsolv.model.Fornecedor;
 import com.prosperitasglobal.sendsolv.model.Transportador;
+import com.prosperitasglobal.sendsolv.model.request.BancoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ClienteInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ClienteMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.ContatoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ConvenioInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.FormaPgInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.FornecedorInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.FornecedorMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.ProfissaoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.TransportadorInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.TransportadorMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.BancoResponse;
 import com.prosperitasglobal.sendsolv.model.response.ClienteResponse;
+import com.prosperitasglobal.sendsolv.model.response.ContatoResponse;
+import com.prosperitasglobal.sendsolv.model.response.ConvenioResponse;
+import com.prosperitasglobal.sendsolv.model.response.FormaPgResponse;
 import com.prosperitasglobal.sendsolv.model.response.FornecedorResponse;
+import com.prosperitasglobal.sendsolv.model.response.ProfissaoResponse;
 import com.prosperitasglobal.sendsolv.model.response.TransportadorResponse;
 import com.qat.framework.model.MessageInfo;
 import com.qat.framework.model.QATModel.PersistanceActionEnum;
@@ -735,6 +745,41 @@ public class PessoaBAIImpl implements IPessoaBAI
 				}
 				break;
 		}
+		return null;
+	}
+
+	@Override
+	public ProfissaoResponse fetchProfissaoByRequest(ProfissaoInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ConvenioResponse fetchConvenioByRequest(ConvenioInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ContatoResponse fetchContatoByRequest(ContatoInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public BancoResponse fetchBancoByRequest(BancoInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public FormaPgResponse fetchFormaPgByRequest(FormaPgInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
 		return null;
 	}
 }

@@ -11,9 +11,15 @@ import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.bac.IFuncionarioBAC;
 import com.prosperitasglobal.sendsolv.bai.IFuncionarioBAI;
 import com.prosperitasglobal.sendsolv.model.Funcionario;
+import com.prosperitasglobal.sendsolv.model.request.BeneficiosInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.EventoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.FuncionarioInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.FuncionarioMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.HoraFuncInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.response.BeneficiosResponse;
+import com.prosperitasglobal.sendsolv.model.response.EventoResponse;
 import com.prosperitasglobal.sendsolv.model.response.FuncionarioResponse;
+import com.prosperitasglobal.sendsolv.model.response.HorarioFuncResponse;
 import com.qat.framework.model.Message.MessageLevel;
 import com.qat.framework.model.Message.MessageSeverity;
 import com.qat.framework.model.MessageInfo;
@@ -329,6 +335,27 @@ public class FuncionarioBAIImpl implements IFuncionarioBAI
 				}
 				break;
 		}
+		return null;
+	}
+
+	@Override
+	public BeneficiosResponse fetchBeneficiosByRequest(BeneficiosInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public HorarioFuncResponse fetchHoraFuncByRequest(HoraFuncInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public EventoResponse fetchEventoByRequest(EventoInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
 		return null;
 	}
 

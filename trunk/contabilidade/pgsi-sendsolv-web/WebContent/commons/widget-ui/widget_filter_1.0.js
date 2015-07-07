@@ -48,7 +48,7 @@ $.widget("sc.filters",
 
 		this._parameters 			= {};
 		this._objFiltersCustomize 	= [];
-		this.defaultSearchNameLabel = $.sc.locale.get(this.options.defaultSearchNameLabel);
+		this.defaultSearchNameLabel = $.pgsi.locale.get(this.options.defaultSearchNameLabel);
 
 		$filter.push('<div class="yui-b"><form class="views-vert">');
 		$filter.push(this.options.createTitle());
@@ -66,7 +66,7 @@ $.widget("sc.filters",
 		{
 			filter = filters[i];
 
-			if( $.sc.isNullOrUndefined(deviceCategory) )
+			if( $.pgsi.isNullOrUndefined(deviceCategory) )
 			{
 				filter.id = i;
 
@@ -96,7 +96,7 @@ $.widget("sc.filters",
 				{
 					this._objFiltersCustomize.push(
 					{
-						name 	: $.sc.locale.get(filter.title),
+						name 	: $.pgsi.locale.get(filter.title),
 						session : i,
 						type 	: type
 					});
@@ -135,7 +135,7 @@ $.widget("sc.filters",
 				{
 					this._objFiltersCustomize.push(
 					{
-						name 	: $.sc.locale.get(filter.title),
+						name 	: $.pgsi.locale.get(filter.title),
 						session : i,
 						type 	: type
 					});
@@ -174,7 +174,7 @@ $.widget("sc.filters",
 					{
 						this._objFiltersCustomize.push(
 						{
-							name 	: $.sc.locale.get(filter.title),
+							name 	: $.pgsi.locale.get(filter.title),
 							session : i,
 							type 	: type
 						});
@@ -240,7 +240,7 @@ $.widget("sc.filters",
 
 			iSelectSize = iLength - firstOptions;
 
-			$(this).val(iSelectSize + ' ' + $.sc.locale.get('filter.more'));
+			$(this).val(iSelectSize + ' ' + $.pgsi.locale.get('filter.more'));
 		});
 	},
 
@@ -261,7 +261,7 @@ $.widget("sc.filters",
 		return '<div id="customFilter" class="filter-input advanced ui-widget">'
 			+ '<a class="button ui-button ui-widget ui-state-default ui-corner-all '
 			+ 'ui-button-text-only" id="custom-filter-action" href="" role="button" aria-disabled="false">'
-			+ '<span class="ui-button-text">' + $.sc.locale.get('filter.customize') + '</span></a></div>';
+			+ '<span class="ui-button-text">' + $.pgsi.locale.get('filter.customize') + '</span></a></div>';
 	},
 
 	_createSideSlide : function()
@@ -277,7 +277,7 @@ $.widget("sc.filters",
 	_createSearchFilters : function(flt, isOpen)
 	{
 		var inputs 	= flt.inputs;
-		var _get 	= $.sc.locale.get;
+		var _get 	= $.pgsi.locale.get;
 		var $filter = [];
 
 		var input;
@@ -387,7 +387,7 @@ $.widget("sc.filters",
 		var length 	= options.length;
 		var $select = ['<select ' + (length < 2 ? 'style="display:none;"' : '') + 'name="' + name + '">'];
 		var i 		= 0;
-		var get 	= $.sc.locale.get;
+		var get 	= $.pgsi.locale.get;
 
 		var opt;
 
@@ -428,7 +428,7 @@ $.widget("sc.filters",
 		var data;
 
 		// Filter Title
-		$filter.push(this._createFilterTitle($.sc.locale.get(flt.title), isOpen));
+		$filter.push(this._createFilterTitle($.pgsi.locale.get(flt.title), isOpen));
 
 		$filter.push('<div class="collapse checkBoxUl" ' + (isOpen ? "" : 'style="display:none;"') + '>');
 
@@ -468,7 +468,7 @@ $.widget("sc.filters",
 			title 	= data[propertyTitle] || "";
 			value 	= data[propertyValue];
 
-			if ( !$.sc.isNullOrUndefined(oSymbol) )
+			if ( !$.pgsi.isNullOrUndefined(oSymbol) )
 			{
 				var symbolTitle 		= data[oSymbol.propertyTitle];
 				var symbolClass 		= oSymbol.sClass ? oSymbol.sClass + symbolTitle.toString().toLowerCase() : "";
@@ -503,12 +503,12 @@ $.widget("sc.filters",
 				title 	= data[propertyTitle] || "";
 				value 	= data[propertyValue];
 
-				if ( !$.sc.isNullOrUndefined(flt.listObj) )
+				if ( !$.pgsi.isNullOrUndefined(flt.listObj) )
 				{
 					value = data[propertyValue];
 				}
 
-				if ( !$.sc.isNullOrUndefined(oSymbol) )
+				if ( !$.pgsi.isNullOrUndefined(oSymbol) )
 				{
 					var symbolTitle 		= data[oSymbol.propertyTitle];
 					var symbolClass 		= oSymbol.sClass ? oSymbol.sClass + symbolTitle.toLowerCase() : "";
@@ -537,7 +537,7 @@ $.widget("sc.filters",
 	{
 		return '<ul class="all-checked"><li class="checkbox">'
 				+ '<label><input type="checkbox" ' + (isChecked ? 'checked="checked"' : '') + ' value="ALL"/> '
-				+ '<strong>' + $.sc.locale.get(flt.allLabel) + '</strong></label></li></ul>';
+				+ '<strong>' + $.pgsi.locale.get(flt.allLabel) + '</strong></label></li></ul>';
 	},
 
 	_optionFilterEvent : function()
@@ -604,7 +604,7 @@ $.widget("sc.filters",
 			sFilterValue 	= filterValue.join("|");
 
 			// Add parameters
-			$.sc.pageLoader.setParameter(i, encodeURI(sFilterValue));
+			$.pgsi.pageLoader.setParameter(i, encodeURI(sFilterValue));
 		}
 
 		// Add tag
@@ -975,7 +975,7 @@ $.widget("sc.filters",
 				$("#device-table").data("checkbox").setTotalResult();
 
 				// Remove Polygon
-				$.sc.map.destroyVectorFeatureById(sValue);
+				$.pgsi.map.destroyVectorFeatureById(sValue);
 			}
 		}
 	},
@@ -1071,7 +1071,7 @@ $.widget("sc.filters",
 			var $this 	= $(this);
 			var $filter = $this.parents("div.filter-input");
 			var value 	= $this.val();
-			var sHint 	= $.sc.locale.get('filter.more');
+			var sHint 	= $.pgsi.locale.get('filter.more');
 
 			var $option;
 			var title;
@@ -1118,7 +1118,7 @@ $.widget("sc.filters",
 			var $this 		= $(this);
 			var iSelectSize = $this.siblings("select").find("option").length;
 
-			$this.val(iSelectSize + ' ' + $.sc.locale.get('filter.more'));
+			$this.val(iSelectSize + ' ' + $.pgsi.locale.get('filter.more'));
 		});
 	},
 
@@ -1130,7 +1130,7 @@ $.widget("sc.filters",
 		var $select;
 		var $option;
 
-		if ( !$.sc.isNullOrUndefined(oSymbol) )
+		if ( !$.pgsi.isNullOrUndefined(oSymbol) )
 		{
 			var symbolTitle = data[oSymbol.propertyTitle];
 			var symbolClass = oSymbol.sClass ? oSymbol.sClass + symbolTitle.toLowerCase() : "";
@@ -1167,11 +1167,11 @@ $.widget("sc.filters",
 	{
 		this.options.bActionPerformed = true;
 
-		if ( $.sc.map.mapExists()
+		if ( $.pgsi.map.mapExists()
 				&& ($('#map-list').length
 				&& !$('#map-list').hasClass('hide-map')) )
 		{
-			$.sc.map.mapFromFilter();
+			$.pgsi.map.mapFromFilter();
 		}
 		else
 		{
@@ -1192,12 +1192,12 @@ $.widget("sc.filters",
 
 		if ( flt.type == "options" )
 		{
-			$.sc.pageLoader.setParameter(flt.urlParameter,
+			$.pgsi.pageLoader.setParameter(flt.urlParameter,
 					encodeURI(decodeURI($.address.parameter(flt.urlParameter) || "") + (value ? (value + "|") : "")));
 		}
 		else
 		{
-			$.sc.pageLoader.setParameter(flt.urlParameter, encodeURI(value));
+			$.pgsi.pageLoader.setParameter(flt.urlParameter, encodeURI(value));
 		}
 	},
 
@@ -1220,18 +1220,18 @@ $.widget("sc.filters",
 					actualValue.splice(indexOf, 1);
 					actualValue.pop();
 
-					$.sc.pageLoader.setParameter(flt.urlParameter,
+					$.pgsi.pageLoader.setParameter(flt.urlParameter,
 						actualValue.length > 0 ? encodeURI(actualValue.join("|") + "|") : null);
 				}
 			}
 			else if ( flt.inputs && flt.inputs[field] )
 			{
-				$.sc.pageLoader.setParameter(flt.inputs[field].urlParameter || field, null);
+				$.pgsi.pageLoader.setParameter(flt.inputs[field].urlParameter || field, null);
 
 			}
 			else
 			{
-				$.sc.pageLoader.setParameter(flt.urlParameter, null);
+				$.pgsi.pageLoader.setParameter(flt.urlParameter, null);
 			}
 		}
 	},
@@ -1308,14 +1308,14 @@ $.widget("sc.filters",
 
 	_createMapTag : function()
 	{
-		var value 		= parseFloat($.sc.map.getVectorArea()).toFixed(2);
-		var label 		= $.sc.locale.get("map.tag.shape", [$.sc.map.getVectorIndex(), value, "<sup>2</sup>"]);
-		var typeLabel 	= $.sc.locale.get("map.tag.drawing");
+		var value 		= parseFloat($.pgsi.map.getVectorArea()).toFixed(2);
+		var label 		= $.pgsi.locale.get("map.tag.shape", [$.pgsi.map.getVectorIndex(), value, "<sup>2</sup>"]);
+		var typeLabel 	= $.pgsi.locale.get("map.tag.drawing");
 
 		return $("<li class='drawing'><span class='type remove'>" +
 					typeLabel + "</span>" +
 						"<span class='title'><span class='shape-icon' style='background:" +
-							$.sc.map.getVectorColor() + "; opacity:0.6'></span>" +
+							$.pgsi.map.getVectorColor() + "; opacity:0.6'></span>" +
 								label + "</span></li>");
 	},
 
@@ -1486,7 +1486,7 @@ $.widget("sc.filters",
 							$li = this.addOption($filter, $input.val(), title, label, true);
 						}
 
-						if ( !$.sc.isNullOrUndefined(deviceCategory) )
+						if ( !$.pgsi.isNullOrUndefined(deviceCategory) )
 						{
 							if ( (deviceCategory.toLowerCase() == 'han_device|')
 									|| (deviceCategory.toLowerCase() == 'lcm|' ) )
@@ -1565,11 +1565,11 @@ $.widget("sc.filters",
 				// Replace is used to lock down application from XSS
 				if ( pgsi.util.page.fnCheckXSS(value) )
 				{
-					var sInvalidTag = $.sc.locale.get("pgsi.filter.validation.invalidTag");
+					var sInvalidTag = $.pgsi.locale.get("pgsi.filter.validation.invalidTag");
 
-					$.sc.message.show(
+					$.pgsi.message.show(
 					{
-						message: $.sc.locale.get("pgsi.filter.validation.error"),
+						message: $.pgsi.locale.get("pgsi.filter.validation.error"),
 						type: "error",
 						target: this.options.sMessageId
 					});
@@ -1711,7 +1711,7 @@ $.widget("sc.filters",
 
 	actionPerformed : function(bReset)
 	{
-		if( !$.sc.isNullOrUndefined(bReset) )
+		if( !$.pgsi.isNullOrUndefined(bReset) )
 		{
 			this.options.bActionPerformed = false;
 		}

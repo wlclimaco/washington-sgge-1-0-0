@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.prosperitasglobal.sendsolv.model.Profissao;
+import com.qat.framework.model.response.InquiryResponse;
 
 public class ProfissaoResponse extends InquiryResponse
 {
@@ -22,7 +23,7 @@ public class ProfissaoResponse extends InquiryResponse
 	/**
 	 * @return the arquivoList
 	 */
-	public List<Profissao> getArquivoList()
+	public List<Profissao> getProfissaoList()
 	{
 		return arquivoList;
 	}
@@ -30,7 +31,7 @@ public class ProfissaoResponse extends InquiryResponse
 	/**
 	 * @param arquivoList the arquivoList to set
 	 */
-	public void setArquivoList(List<Profissao> arquivoList)
+	public void setProfissaoList(List<Profissao> arquivoList)
 	{
 		this.arquivoList = arquivoList;
 	}

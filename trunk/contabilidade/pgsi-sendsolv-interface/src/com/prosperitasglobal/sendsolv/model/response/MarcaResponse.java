@@ -4,12 +4,13 @@ import java.util.Collection;
 import java.util.List;
 
 import com.prosperitasglobal.sendsolv.model.Marca;
+import com.qat.framework.model.response.InquiryResponse;
 
 public class MarcaResponse extends InquiryResponse
 {
 
 	/** Attributes */
-	private List<Marca> arquivoList;
+	private List<Marca> marcaList;
 
 	/**
 	 * The Constructor.
@@ -20,19 +21,19 @@ public class MarcaResponse extends InquiryResponse
 	}
 
 	/**
-	 * @return the arquivoList
+	 * @return the marcaList
 	 */
 	public List<Marca> getMarcaList()
 	{
-		return arquivoList;
+		return marcaList;
 	}
 
 	/**
-	 * @param arquivoList the arquivoList to set
+	 * @param marcaList the marcaList to set
 	 */
-	public void setMarcaList(List<Marca> arquivoList)
+	public void setMarcaList(List<Marca> marcaList)
 	{
-		this.arquivoList = arquivoList;
+		this.marcaList = marcaList;
 	}
 
 	/*

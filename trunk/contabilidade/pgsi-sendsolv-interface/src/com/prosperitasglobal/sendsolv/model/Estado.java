@@ -14,7 +14,7 @@ public class Estado extends ModelCosmeDamiao
 	private String nome;
 
 	/** The abreviado. */
-	private String abreviado;
+	private String abreviacao;
 
 	/**
 	 * Default constructor.
@@ -41,23 +41,35 @@ public class Estado extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the abreviado.
-	 *
-	 * @return the abreviado
+	 * @return the nome
 	 */
-	public String getAbreviado()
+	public String getNome()
 	{
-		return abreviado;
+		return nome;
 	}
 
 	/**
-	 * Sets the abreviado.
-	 *
-	 * @param abreviado the new abreviado
+	 * @param nome the nome to set
 	 */
-	public void setAbreviado(String abreviado)
+	public void setNome(String nome)
 	{
-		this.abreviado = abreviado;
+		this.nome = nome;
+	}
+
+	/**
+	 * @return the abreviacao
+	 */
+	public String getAbreviacao()
+	{
+		return abreviacao;
+	}
+
+	/**
+	 * @param abreviacao the abreviacao to set
+	 */
+	public void setAbreviacao(String abreviacao)
+	{
+		this.abreviacao = abreviacao;
 	}
 
 	/**
@@ -72,15 +84,21 @@ public class Estado extends ModelCosmeDamiao
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.model.ModelCosmeDamiao#toString()
+	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString()
 	{
-		return "Cnae [getId()=" + getId() + ", getCodigo()=" + ", getAbreviado()=" + getAbreviado()
-				+ ", getParentId()="
-				+ getParentId() + ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType()
-				+ ", getTabelaEnum()=" + getTabelaEnum() + ", toString()=" + super.toString() + "]";
+		return "Estado [getId()=" + getId() + ", getNome()=" + getNome() + ", getAbreviacao()=" + getAbreviacao()
+				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
+				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
+				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
+				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
+				+ ", getProcessId()=" + getProcessId() + ", getUserId()=" + getUserId() + ", toString()="
+				+ super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
+				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
+				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + "]";
 	}
 
 }

@@ -9,7 +9,7 @@ import com.prosperitasglobal.sendsolv.model.request.HoraFuncInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.response.BeneficiosResponse;
 import com.prosperitasglobal.sendsolv.model.response.EventoResponse;
 import com.prosperitasglobal.sendsolv.model.response.FuncionarioResponse;
-import com.prosperitasglobal.sendsolv.model.response.HoraFuncResponse;
+import com.prosperitasglobal.sendsolv.model.response.HorarioFuncResponse;
 
 /**
  * The Interface IFuncionarioBAI.
@@ -71,7 +71,7 @@ public interface IFuncionarioBAI
 	 * @param request the request
 	 * @return the hora func response
 	 */
-	public HoraFuncResponse fetchHoraFuncByRequest(HoraFuncInquiryRequest request);
+	public HorarioFuncResponse fetchHoraFuncByRequest(HoraFuncInquiryRequest request);
 
 	/**
 	 * Fetch evento by request.

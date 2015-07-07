@@ -32,7 +32,7 @@ $.widget("custom.highchart", {
 
 	            tooltip: {
 	         		headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-	         		pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b> ' + $.sc.locale.get("dashboard.highchart.column.total.text") + '<br/>'
+	         		pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b> ' + $.pgsi.locale.get("dashboard.highchart.column.total.text") + '<br/>'
 	         	},
 
 	        	series 		: null,

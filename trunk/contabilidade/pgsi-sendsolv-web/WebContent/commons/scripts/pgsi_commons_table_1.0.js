@@ -1,6 +1,6 @@
 $(document).ready(function()
 {
-		$.sc.table = (function()
+		$.pgsi.table = (function()
 		{
 			/*************
 			 * PRIVATE *
@@ -94,18 +94,18 @@ $(document).ready(function()
 				bHideProgressBar : false,
 				oLanguage 		 :
 				{
-					sLengthMenu 	: $.sc.locale.get(_oConfig.messages.recordsPerPage),
-					sZeroRecords 	: $.sc.locale.get(_oConfig.messages.recordsNone),
-					sInfo 			: $.sc.locale.get(_oConfig.messages.recordsInfo),
-					sInfoEmpty 		: $.sc.locale.get(_oConfig.messages.recordsInfoEmpty),
-					sInfoFiltered 	: $.sc.locale.get(_oConfig.messages.recordsFilter),
-					sProcessing 	: $.sc.locale.get(_oConfig.messages.processing),
+					sLengthMenu 	: $.pgsi.locale.get(_oConfig.messages.recordsPerPage),
+					sZeroRecords 	: $.pgsi.locale.get(_oConfig.messages.recordsNone),
+					sInfo 			: $.pgsi.locale.get(_oConfig.messages.recordsInfo),
+					sInfoEmpty 		: $.pgsi.locale.get(_oConfig.messages.recordsInfoEmpty),
+					sInfoFiltered 	: $.pgsi.locale.get(_oConfig.messages.recordsFilter),
+					sProcessing 	: $.pgsi.locale.get(_oConfig.messages.processing),
 					oPaginate 		:
 					{
 						sFirst 	  : "",
 						sLast  	  : "",
-						sNext  	  : $.sc.locale.get(_oConfig.messages.next) + " &gt;&gt;",
-						sPrevious : "&lt;&lt; " + $.sc.locale.get(_oConfig.messages.prev)
+						sNext  	  : $.pgsi.locale.get(_oConfig.messages.next) + " &gt;&gt;",
+						sPrevious : "&lt;&lt; " + $.pgsi.locale.get(_oConfig.messages.prev)
 					}
 				}
 			};
@@ -126,7 +126,7 @@ $(document).ready(function()
 					$(this).parent().siblings(_oConfig.common.sBlankslate).removeClass("hide");
 				}
 
-				if (!$.sc.isNullOrUndefined(fnCallback))
+				if (!$.pgsi.isNullOrUndefined(fnCallback))
 				{
 					fnCallback.call($(this), nRow, aaData, iStart, iEnd, aiDisplay);
 				}
@@ -135,7 +135,7 @@ $(document).ready(function()
 			var _fnShowViewPortFixedHeader = function ($viewport, $table)
 			{
 				//Fix for fixedHeader issue
-				if ( $.sc.isNullOrUndefined($table.data("fixedHeader")) )
+				if ( $.pgsi.isNullOrUndefined($table.data("fixedHeader")) )
 				{
 					$viewport.removeClass("hide");
 					return;
@@ -161,7 +161,7 @@ $(document).ready(function()
 					_destroyFixedHeader($(this));
 				});
 
-				if (!$.sc.isNullOrUndefined(fnCallback))
+				if (!$.pgsi.isNullOrUndefined(fnCallback))
 				{
 					fnCallback.call($(this), oSettings, aaData, config);
 				}
@@ -207,13 +207,13 @@ $(document).ready(function()
 
 				var Checkbox = $(this).data("checkbox");
 
-				if (!$.sc.isNullOrUndefined(Checkbox))
+				if (!$.pgsi.isNullOrUndefined(Checkbox))
 				{
 					Checkbox.allRowsCount(iTotal);
 				}
 
-				var sMatches 	= config.sMatches 	? config.sMatches 	: $.sc.locale.get(_oConfig.messages.resultMatches);
-				var sMatch 		= config.sMatch 	? config.sMatch 	: $.sc.locale.get(_oConfig.messages.resultMatch);
+				var sMatches 	= config.sMatches 	? config.sMatches 	: $.pgsi.locale.get(_oConfig.messages.resultMatches);
+				var sMatch 		= config.sMatch 	? config.sMatch 	: $.pgsi.locale.get(_oConfig.messages.resultMatch);
 				var $Matches 	= $("#"+ (config.sTotalLabel ? config.sTotalLabel : _oConfig.common.totalRecordsLabel));
 				var $Total 		= $("#"+ (config.sTotalResults ? config.sTotalResults : _oConfig.common.totalRecordsId));
 
@@ -232,7 +232,7 @@ $(document).ready(function()
 				}
 				$Total.text(iTotal);
 
-				if (!$.sc.isNullOrUndefined(fnCallback))
+				if (!$.pgsi.isNullOrUndefined(fnCallback))
 				{
 					fnCallback.call($(this), oSettings, iStart, iEnd, iMax, iTotal, sPre);
 				}
@@ -244,7 +244,7 @@ $(document).ready(function()
 			{
 				var Checkbox = $(this).data("checkbox");
 
-				if (!$.sc.isNullOrUndefined(Checkbox))
+				if (!$.pgsi.isNullOrUndefined(Checkbox))
 				{
 					var input = $('td:eq(0)', nRow).find("input");
 
@@ -288,7 +288,7 @@ $(document).ready(function()
 					$(nRow).data("rowGrouping", config.oCheckBoxMethods.fnReduce(config.sRowGrouping, aData));
 				}
 
-				if (!$.sc.isNullOrUndefined(fnCallback))
+				if (!$.pgsi.isNullOrUndefined(fnCallback))
 				{
 					fnCallback.call($(this), nRow, aData, iDisplayIndex);
 				}
@@ -377,13 +377,13 @@ $(document).ready(function()
 			var _fnCreateDatePagination = function(config, oSettings, sType)
 			{
 				var $Table 				= $(config.id);
-				var _formatMask			= sensus.settings.user.dateFormat;
+				var _formatMask			= pgsi.settings.user.dateFormat;
 				var dToday 				= new Date();
 				var sToSearchValue 		= _oConfig.project.sToDateUrl;
 				var sFromSearchValue 	= _oConfig.project.sFromDateUrl;
 				var $Ul 				= $("<ul><li id='li-pagination'><ol id='"+ _oConfig.common.datePaginationId +"'></ol></li></ul>");
 				var ol 					= "#"+ _oConfig.common.datePaginationId;
-				var sCurrentDate 		= $.address.parameter(sToSearchValue) ? $.address.parameter(sToSearchValue) : $.sc.date.format(new Date(), _formatMask, false);
+				var sCurrentDate 		= $.address.parameter(sToSearchValue) ? $.address.parameter(sToSearchValue) : $.pgsi.date.format(new Date(), _formatMask, false);
 				var dCurrentDate 		= new Date(sCurrentDate);
 				var dCurrentDateStart 	= new Date(sCurrentDate);
 				var dLast 				= new Date(dToday);
@@ -414,7 +414,7 @@ $(document).ready(function()
 					if (title)
 					{
 						$LI.addClass("valid-pagination");
-						$a 	= $('<a id="'+ $.sc.date.format(ed, $.sc.replaceAll("/", "-", _formatMask), {iTZMinutes: 0}) +'"class="button-pagination url" href="#">'+ title +'</a>');
+						$a 	= $('<a id="'+ $.pgsi.date.format(ed, $.pgsi.replaceAll("/", "-", _formatMask), {iTZMinutes: 0}) +'"class="button-pagination url" href="#">'+ title +'</a>');
 						$a.data(sToSearchValue, ed);
 						$a.data(sFromSearchValue, sd);
 					}
@@ -444,7 +444,7 @@ $(document).ready(function()
 						dNext.setFullYear(dNext.getFullYear()+1);
 						dNextStart.setFullYear(dNext.getFullYear()+1);
 
-						sCurrentDateStart = $.address.parameter(sFromSearchValue) ? $.address.parameter(sFromSearchValue) : $.sc.date.format(dCurrentDateStart, _formatMask, false);
+						sCurrentDateStart = $.address.parameter(sFromSearchValue) ? $.address.parameter(sFromSearchValue) : $.pgsi.date.format(dCurrentDateStart, _formatMask, false);
 						dNextDate.setFullYear(dNextDate.getFullYear() + 1);
 						//	Set Penult End date
 						dPenult.setFullYear(dPenult.getFullYear() - 1);
@@ -481,7 +481,7 @@ $(document).ready(function()
 						dNextStart.addMonths(1);
 						dNextStart.setDate(1);
 
-						sCurrentDateStart = $.address.parameter(sFromSearchValue) ? $.address.parameter(sFromSearchValue) : $.sc.date.format(dCurrentDateStart, _formatMask, false);
+						sCurrentDateStart = $.address.parameter(sFromSearchValue) ? $.address.parameter(sFromSearchValue) : $.pgsi.date.format(dCurrentDateStart, _formatMask, false);
 						dNextDate.addMonths(1);
 						dPenult.addMonths(-1);
 						dPenult.setDate(dPenult.getDaysInMonth());
@@ -525,11 +525,11 @@ $(document).ready(function()
 						sBefore = $.datepicker.formatDate("d. M", dBefore);
 						break;
 				}
-				if(sCurrentDate !== $.sc.date.format(new Date(), _formatMask))
+				if(sCurrentDate !== $.pgsi.date.format(new Date(), _formatMask))
 				{
 					var sNext = '<a href="#" class="next button ui-button url ui-widget ui-state-default ui-corner-all ui-button-text-only">';
 					sNext += '<span class="ui-button-text">';
-					sNext += '<span class="ui-button-text">'+ $.sc.locale.get("table.page.next") +'</span></span></a>';
+					sNext += '<span class="ui-button-text">'+ $.pgsi.locale.get("table.page.next") +'</span></span></a>';
 					var $Next 		= $(sNext);
 
 					$Next.data(sToSearchValue, dNextDate);
@@ -537,15 +537,15 @@ $(document).ready(function()
 				};
 
 				//	Check if should to show last button before next
-				if (sCurrentDate === $.sc.date.format(dPenult, _formatMask))
+				if (sCurrentDate === $.pgsi.date.format(dPenult, _formatMask))
 				{
 					$Ul.find(ol).prepend(fnCreatePaginationLi(sLast, dLast, dLastStart));
 				}
-				else if ($.sc.date.format(dCurrentDate, _formatMask) === $.sc.date.format(dPenult, _formatMask))
+				else if ($.pgsi.date.format(dCurrentDate, _formatMask) === $.pgsi.date.format(dPenult, _formatMask))
 				{
 					$Ul.find(ol).prepend(fnCreatePaginationLi(sLast, dLast, dLastStart));
 				}
-				else if ($.sc.date.format(dCurrentDate, _formatMask) === $.sc.date.format(dAntePenult, _formatMask))
+				else if ($.pgsi.date.format(dCurrentDate, _formatMask) === $.pgsi.date.format(dAntePenult, _formatMask))
 				{
 					$Ul.find(ol).prepend(fnCreatePaginationLi(sLast, dLast, dLastStart));
 					$Ul.find(ol).prepend(fnCreatePaginationLi(sPenult, dPenult, dPenultStart));
@@ -613,7 +613,7 @@ $(document).ready(function()
 				{
 					var sBack = '<a href="#" class="back button ui-button url ui-widget ui-state-default ui-corner-all ui-button-text-only">';
 					sBack += '<span class="ui-button-text">';
-					sBack += '<span class="ui-button-text">'+ $.sc.locale.get(_oConfig.messages.paginationBack) +'</span></span></a>';
+					sBack += '<span class="ui-button-text">'+ $.pgsi.locale.get(_oConfig.messages.paginationBack) +'</span></span></a>';
 
 					var $Back 			= $(sBack);
 					var backdate 		= new Date(dCurrentDate);
@@ -651,11 +651,11 @@ $(document).ready(function()
 							};
 
 							//	Add Date range To URL
-							$.sc.pageLoader.setParameter(sFromSearchValue, $.sc.date.format(dFromSearchValue, _formatMask, false));
-							$.sc.pageLoader.setParameter(sToSearchValue, $.sc.date.format(dToSearchValue, _formatMask, false));
+							$.pgsi.pageLoader.setParameter(sFromSearchValue, $.pgsi.date.format(dFromSearchValue, _formatMask, false));
+							$.pgsi.pageLoader.setParameter(sToSearchValue, $.pgsi.date.format(dToSearchValue, _formatMask, false));
 
 							//	Call BE to make a refresh
-							$.sc.ajax.post({
+							$.pgsi.ajax.post({
 								sUrl 	 	: config.sAjaxSource,
 								oRequest 	: config.ajax.fnRequest(),
 								bAsync		: _oConfig.ajax.bAsync,
@@ -670,7 +670,7 @@ $(document).ready(function()
 					var sHtml = '';
 					sHtml += '<tr class="subHeaderPagination row-header"><td colspan="9">';
 					sHtml += '<h4><a class="back button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="" role="button" aria-disabled="false">';
-					sHtml += '<span class="ui-button-text">' + $.sc.locale.get(_oConfig.messages.paginationBackArrow) + sBefore +'</span></a>';
+					sHtml += '<span class="ui-button-text">' + $.pgsi.locale.get(_oConfig.messages.paginationBackArrow) + sBefore +'</span></a>';
 					sHtml += ' <strong>'+ sActual +'</strong></h4></td></tr>';
 
 					var $line =$(sHtml);
@@ -726,8 +726,8 @@ $(document).ready(function()
 					}
 				});
 
-				$.sc.pageLoader.setParameter(sFromSearchValue, sCurrentDateStart);
-				$.sc.pageLoader.setParameter(sToSearchValue, sCurrentDate);
+				$.pgsi.pageLoader.setParameter(sFromSearchValue, sCurrentDateStart);
+				$.pgsi.pageLoader.setParameter(sToSearchValue, sCurrentDate);
 
 				//	Add class active to
 				$(ol+" li").removeClass("active");
@@ -735,7 +735,7 @@ $(document).ready(function()
 				$(".numbers").html("");
 				$(config.id+" ."+ _oConfig.common.sTableFooter).removeAttr("style");
 
-				$(ol+" li a[id='"+ $.sc.replaceAll("/", "-", sCurrentDate) +"']").closest("li").addClass("active");
+				$(ol+" li a[id='"+ $.pgsi.replaceAll("/", "-", sCurrentDate) +"']").closest("li").addClass("active");
 			};
 
 			var _fnDrawCallback = function(oSettings, fnCallback, config)
@@ -822,12 +822,12 @@ $(document).ready(function()
 					});
 				}
 
-				if (!$.sc.isNullOrUndefined(fnCallback))
+				if (!$.pgsi.isNullOrUndefined(fnCallback))
 				{
 					fnCallback.call($(this), oSettings);
 				}
 
-				if (!$.sc.isNullOrUndefined(config.oSettings) && config.oSettings.bFooterVisible === false)
+				if (!$.pgsi.isNullOrUndefined(config.oSettings) && config.oSettings.bFooterVisible === false)
 				{
 					$table.parent().find("."+ _oConfig.common.sTableFooter).remove();
 					$table.parent().find("." + _oConfig.common.tableFooterStamp).remove();
@@ -836,57 +836,57 @@ $(document).ready(function()
 
 			var _fnAjaxCallback = function(config, fnCallback, oResponse)
 			{
-				if ($.sc.isValidPreLoad(config.aaData, true))
-				{
-					// Refresh date
-					var oRefreshUtc = $.sc.date.createTimeZoneJS();
-
-					//Add Last Refresh
-					if (oRefreshUtc != undefined)
-					{
-						var sDate = $.sc.date.format( oRefreshUtc, sensus.settings.user.dateFormat + ' h:i:s A', true);
-						$(config.id).siblings("." + _oConfig.common.tableFooterStamp).text($.sc.locale.get('table.refreshed', sDate)).wrapInner("<em/>");
-					}
-
-					if (config.aaData.resultsSetInfo)
-					{
-						config.iTotalDisplayRecords = config.aaData.resultsSetInfo.totalRowsAvailable;
-					}
-					else
-					{
-						config.iTotalDisplayRecords = 2;
-					}
-
-					// Valid Response Object
-					var oValidResponse = $.sc.isValidResponse(config.aaData);
-
-					// Validate oResponse
-					if (!oValidResponse.bIsValid)
-					{
-						// Show Error Message
-						$.sc.message.show({message: oValidResponse.sErrorMessage});
-
-					}
-					else
-					{
-						// TODO - review impl
-						if ( !$.sc.isNullOrUndefined(config.ajax.responseInterceptor)
-								&& $.isFunction(config.ajax.responseInterceptor) )
-						{
-							config.aaData = config.ajax.responseInterceptor(config.aaData);
-						}
-					}
-
-					// If there is response. it was made an ajax call. So its not necessary to set the response list
-					if (!oResponse)
-					{
-						config.aaData = config.aaData[config.ajax.sObj];
-					}
-
-					fnCallback(config);
-
-					config.bPreLoad = false;
-				}
+			//	if ($.pgsi.isValidPreLoad(config.aaData, true))
+			//	{
+//					// Refresh date
+//					var oRefreshUtc = $.pgsi.date.createTimeZoneJS();
+//
+//					//Add Last Refresh
+//					if (oRefreshUtc != undefined)
+//					{
+//						var sDate = $.pgsi.date.format( oRefreshUtc, pgsi.settings.user.dateFormat + ' h:i:s A', true);
+//						$(config.id).siblings("." + _oConfig.common.tableFooterStamp).text($.pgsi.locale.get('table.refreshed', sDate)).wrapInner("<em/>");
+//					}
+//
+//					if (config.aaData.resultsSetInfo)
+//					{
+//						config.iTotalDisplayRecords = config.aaData.resultsSetInfo.totalRowsAvailable;
+//					}
+//					else
+//					{
+//						config.iTotalDisplayRecords = 2;
+//					}
+//
+//					// Valid Response Object
+//					var oValidResponse = $.pgsi.isValidResponse(config.aaData);
+//
+//					// Validate oResponse
+//					if (!oValidResponse.bIsValid)
+//					{
+//						// Show Error Message
+//						$.pgsi.message.show({message: oValidResponse.sErrorMessage});
+//
+//					}
+//					else
+//					{
+//						// TODO - review impl
+//						if ( !$.pgsi.isNullOrUndefined(config.ajax.responseInterceptor)
+//								&& $.isFunction(config.ajax.responseInterceptor) )
+//						{
+//							config.aaData = config.ajax.responseInterceptor(config.aaData);
+//						}
+//					}
+//
+//					// If there is response. it was made an ajax call. So its not necessary to set the response list
+//					if (!oResponse)
+//					{
+//						config.aaData = config.aaData[config.ajax.sObj];
+//					}
+//
+//					fnCallback(config);
+//
+//					config.bPreLoad = false;
+//				}
 			};
 
 			var _fnAjax = function(config, aoData, fnTableCallBack)
@@ -898,9 +898,9 @@ $(document).ready(function()
 				iPageSize		= isNaN(iPageSize) ? config.iDisplayLength : iPageSize;
 
 
-				if ( $.sc.isNullOrUndefined(oRequest.sortExpressions) )
+				if ( $.pgsi.isNullOrUndefined(oRequest.sortExpressions) )
 				{
-					oRequest.sortExpressions = sensus.util.page.getSortExpression($(config.id).dataTable(), config);
+					oRequest.sortExpressions = pgsi.util.page.getSortExpression($(config.id).dataTable(), config);
 				}
 
 				// Whether startRow is undefined
@@ -942,7 +942,7 @@ $(document).ready(function()
 					config.bAutoRefreshReload = false;
 				}
 
-				$.sc.ajax.post({
+				$.pgsi.ajax.post({
 					sUrl 		: config.sAjaxSource,
 					oRequest 	: oRequest,
 					bAsync	 	: _oConfig.ajax.bAsync,
@@ -955,7 +955,7 @@ $(document).ready(function()
 			var _fnGetCheckboxElem = function (data, type, full, config)
 			{
 				var sValue;
-				if (!$.sc.isNullOrUndefined(config.sCheckbox))
+				if (!$.pgsi.isNullOrUndefined(config.sCheckbox))
 				{
 					sValue = config.sCheckbox;
 				}
@@ -1051,7 +1051,7 @@ $(document).ready(function()
 						if (config.fnAllInterceptor)
 						{
 							var iNewValue = config.fnAllInterceptor(iValue, config);
-							iValue = !$.sc.isNullOrUndefined(iNewValue) ? iNewValue : iValue;
+							iValue = !$.pgsi.isNullOrUndefined(iNewValue) ? iNewValue : iValue;
 						}
 					}
 
@@ -1093,7 +1093,7 @@ $(document).ready(function()
 				this.selected = function (obj, bRemove)
 				{
 					// Get Selected when no parameter specified
-					if ($.sc.isNullOrUndefined(obj))
+					if ($.pgsi.isNullOrUndefined(obj))
 					{
 						return _aSelected;
 					}
@@ -1124,7 +1124,7 @@ $(document).ready(function()
 				this.unselected = function (obj, bRemove)
 				{
 					// Get Unselected when no parameter specified
-					if ($.sc.isNullOrUndefined(obj))
+					if ($.pgsi.isNullOrUndefined(obj))
 					{
 						return _aUnselected;
 					}
@@ -1154,7 +1154,7 @@ $(document).ready(function()
 
 				this.allRows = function (bValue)
 				{
-					if ($.sc.isNullOrUndefined(bValue))
+					if ($.pgsi.isNullOrUndefined(bValue))
 					{
 						return _isAllRows;
 					}
@@ -1164,7 +1164,7 @@ $(document).ready(function()
 
 				this.allRowsCount = function (iValue)
 				{
-					if ($.sc.isNullOrUndefined(iValue))
+					if ($.pgsi.isNullOrUndefined(iValue))
 					{
 						return _iAllRowsCount;
 					}
@@ -1294,7 +1294,7 @@ $(document).ready(function()
 					});
 				}
 
-				if (!$.sc.isValidArray(config.checkBoxControllType))
+				if (!$.pgsi.isValidArray(config.checkBoxControllType))
 				{
 					$(sCheckboxControlId).menuPlug({
 						content: $("#" + _oConfig.common.selectButtonId).next().html(), // grab content from this page
@@ -1496,17 +1496,17 @@ $(document).ready(function()
 										+ "<ul>"
 											+ "<li>"
 												+ "<a href='' class='asc'>"
-													+ "<span class='icon-small icn-sort-asc'> </span> " + $.sc.locale.get("table.SortAscending")
+													+ "<span class='icon-small icn-sort-asc'> </span> " + $.pgsi.locale.get("table.SortAscending")
 										 		+ "</a>"
 											+ "</li>"
 											+ "<li>"
 												+ "<a href='' class='desc'>"
-													+ "<span class='icon-small icn-sort-desc'></span> " + $.sc.locale.get("table.SortDescending")
+													+ "<span class='icon-small icn-sort-desc'></span> " + $.pgsi.locale.get("table.SortDescending")
 												+ "</a>"
 											+ "</li>"
 											+ "<li>"
 												+ "<a href='' class='custom-column-action'>"
-													+ "<span class='icon-small icn-col-select'></span> " + $.sc.locale.get("table.Columns")
+													+ "<span class='icon-small icn-col-select'></span> " + $.pgsi.locale.get("table.Columns")
 												+ "</a>"
 											+ "</li>"
 										+ "</ul>"
@@ -1559,7 +1559,7 @@ $(document).ready(function()
 					$("#customize-filter").wCustomize("Columns",function() {}, config.aColumnsIds, "smartpointlist");
 
 					// TODO - future commons customize
-					/*$.sc.customization.open({
+					/*$.pgsi.customization.open({
 						sType 		: "columns"
 					});*/
 				});
@@ -1575,11 +1575,11 @@ $(document).ready(function()
 
 				if (config.bParamsOnUrl)
 				{
-					$.sc.pageLoader.setParameter("iDisplayStart", 0);
-					$.sc.pageLoader.setParameter("length", sPageSize);
+					$.pgsi.pageLoader.setParameter("iDisplayStart", 0);
+					$.pgsi.pageLoader.setParameter("length", sPageSize);
 				}
 
-				if (!sensus.settings || !sensus.settings.user || !sensus.settings.user[_oConfig.project.pageSizeDialogProperty])
+				if (!pgsi.settings || !pgsi.settings.user || !pgsi.settings.user[_oConfig.project.pageSizeDialogProperty])
 				{
 					return;
 				}
@@ -1589,13 +1589,13 @@ $(document).ready(function()
 					// Whether this dialog requires a light list.
 					requiresSmartpoints : true,
 					width               : 540,
-					title               : $.sc.locale.get(_oConfig.messages.pageSizeDialogTitle),
+					title               : $.pgsi.locale.get(_oConfig.messages.pageSizeDialogTitle),
 					isMonitored			: true,
 					buttons 			:
 					[
 						{
 							id 		: _oConfig.common.pageSizeSubmitButtonId,
-							text 	: $.sc.locale.get(_oConfig.messages.pageSizeSubmitButton),
+							text 	: $.pgsi.locale.get(_oConfig.messages.pageSizeSubmitButton),
 							click 	: function()
 							{
 								var bPageSizeShowDialog = !$("#"+ _oConfig.common.pageSizeCheckBox).is(":checked");
@@ -1604,17 +1604,17 @@ $(document).ready(function()
 								oProperty[_oConfig.project.pageSizeProperty] 			= sPageSize;
 								oProperty[_oConfig.project.pageSizeShowDialogProperty] 	= bPageSizeShowDialog;
 
-								$.sc.savePropertyProfile(oProperty);
+								$.pgsi.savePropertyProfile(oProperty);
 							}
 						},
 
 						{
 							id : _oConfig.common.pageSizeKeepButtonId,
-							text : $.sc.locale.get(_oConfig.messages.pageSizeCancelButton),
+							text : $.pgsi.locale.get(_oConfig.messages.pageSizeCancelButton),
 							click : function()
 							{
-								$.sc.closeActionDialog("#"+ _oConfig.common.sActionId);
-								$.sc.progressBar.stop();
+								$.pgsi.closeActionDialog("#"+ _oConfig.common.sActionId);
+								$.pgsi.progressBar.stop();
 							}
 						},
 					],
@@ -1634,11 +1634,11 @@ $(document).ready(function()
 						actionDialog.dialog( "open" );
 						actionDialog.dialog( "option", "position", "center" );
 
-						$.sc.progressBar.stop();
+						$.pgsi.progressBar.stop();
 					}
 				};
 
-				$.sc.launchActionDialog(null, oPageSizeDialog);
+				$.pgsi.launchActionDialog(null, oPageSizeDialog);
 			};
 
 			/**********
@@ -1656,12 +1656,12 @@ $(document).ready(function()
 				{
 					if (oParam.bHideProgressBar !== true)
 					{
-						$.sc.progressBar.start();
+						$.pgsi.progressBar.start();
 					}
 
 					var iDisplayStart = oParam.iStart;
 
-					if ( $.sc.isNullOrUndefined(iDisplayStart) )
+					if ( $.pgsi.isNullOrUndefined(iDisplayStart) )
 					{
 						if (oParam.iSelected)
 						{
@@ -1686,13 +1686,13 @@ $(document).ready(function()
 
 					var checkbox = oParam.table.data("checkbox");
 
-					if ( ($.sc.isNullOrUndefined(oParam.bCleanSelect) || oParam.bCleanSelect == true) && !$.sc.isNullOrUndefined(checkbox) )
+					if ( ($.pgsi.isNullOrUndefined(oParam.bCleanSelect) || oParam.bCleanSelect == true) && !$.pgsi.isNullOrUndefined(checkbox) )
 					{
 						oParam.table.data("checkbox").clearSelected();
 						oParam.table.find('input:checkbox').prop('checked', false);
 
 						//Fix for fixedHeader issue
-						if ( !$.sc.isNullOrUndefined(oParam.table.data("fixedHeader")) )
+						if ( !$.pgsi.isNullOrUndefined(oParam.table.data("fixedHeader")) )
 						{
 							$(".FixedHeader_Header").find('input:checkbox').prop('checked', false);
 						}
@@ -1704,8 +1704,8 @@ $(document).ready(function()
 
 					oParam.table.fnSettings()._iDisplayStart = (iDisplayStart >= 0) ? iDisplayStart : 0;
 
-					$.sc.pageLoader.setParameter("iDisplayStart", oParam.table.fnSettings()._iDisplayStart);
-					$.sc.pageLoader.setParameter("length", oParam.table.fnSettings()._iDisplayLength);
+					$.pgsi.pageLoader.setParameter("iDisplayStart", oParam.table.fnSettings()._iDisplayStart);
+					$.pgsi.pageLoader.setParameter("length", oParam.table.fnSettings()._iDisplayLength);
 
 					$(_oConfig.common.sLengthContainer).find('select option[value='+ oParam.table.fnSettings()._iDisplayLength +']').prop("selected", true);
 
@@ -1785,7 +1785,7 @@ $(document).ready(function()
 					}
 
 					//	Set as default Sorting
-					if ( !$.sc.isNullOrUndefined(options.oSettings)
+					if ( !$.pgsi.isNullOrUndefined(options.oSettings)
 							&& i == options.oSettings.iDefaultCol
 							&& oColumn.bEffectSortable )
 					{
@@ -1817,7 +1817,7 @@ $(document).ready(function()
 				if (options.sCheckbox || options.sDialogCheckbox)
 				{
 					var sInput = "";
-					if ($.sc.isValidArray(options.checkBoxControllType))
+					if ($.pgsi.isValidArray(options.checkBoxControllType))
 					{
 						sInput = "<input type='checkbox' id='" + _oConfig.common.selectPageId + "' class='checkObj' name='" + _oConfig.common.selectPageId + "'/>";
 					}
@@ -1904,7 +1904,7 @@ $(document).ready(function()
 
 
 				//Set Length
-				if ( !$.sc.isNullOrUndefined(config.oSettings) && !$.sc.isNullOrUndefined(config.oSettings.aLengthMenu) )
+				if ( !$.pgsi.isNullOrUndefined(config.oSettings) && !$.pgsi.isNullOrUndefined(config.oSettings.aLengthMenu) )
 				{
 					config.aLengthMenu = config.oSettings.aLengthMenu;
 				}
@@ -1912,9 +1912,9 @@ $(document).ready(function()
 				// Set Displat Length
 				if (!config.bIsDialog)
 				{
-					if (sensus.settings.user.pageSize != undefined)
+					if (pgsi.settings.user.pageSize != undefined)
 					{
-						config.iDisplayLength = $.address.parameter("length") ? parseInt($.address.parameter("length"), 10) : parseInt(sensus.settings.user.pageSize, 10);
+						config.iDisplayLength = $.address.parameter("length") ? parseInt($.address.parameter("length"), 10) : parseInt(pgsi.settings.user.pageSize, 10);
 					}
 					else
 					{
@@ -1929,7 +1929,7 @@ $(document).ready(function()
 				}
 
 				// Set Initial Sort
-				if (!$.sc.isNullOrUndefined(config.oSettings) && config.oSettings.iDefaultCol != null)
+				if (!$.pgsi.isNullOrUndefined(config.oSettings) && config.oSettings.iDefaultCol != null)
 				{
 					config.aaSorting = [[ config.oSettings.iDefaultCol, (config.oSettings.sDefaultSort || "asc") ]];
 				}
@@ -1966,13 +1966,13 @@ $(document).ready(function()
 				        var $table			= $(oSettings.nTable);
 				        var config			= $table.data("config");
 
-						if ( sValue != 1 && !$.sc.isNullOrUndefined(config.$autoRefresh) )
+						if ( sValue != 1 && !$.pgsi.isNullOrUndefined(config.$autoRefresh) )
 						{
 							_clearInterval(config, $table);
 
 							// Delete Storage
 							_fnStorageInterval(config, null, true);
-						} else if ( sValue == 1 && !$.sc.isNullOrUndefined(config.$autoRefresh) && _fnStorageInterval(config) == -1 )
+						} else if ( sValue == 1 && !$.pgsi.isNullOrUndefined(config.$autoRefresh) && _fnStorageInterval(config) == -1 )
 						{
 							_createInterval(config, $table.dataTable());
 						}
@@ -1992,13 +1992,13 @@ $(document).ready(function()
 
 				        sPage = sPage ? sPage : 0;
 
-				        if ($.sc.isNullOrUndefined(config.bParamsOnUrl) || config.bParamsOnUrl == true)
+				        if ($.pgsi.isNullOrUndefined(config.bParamsOnUrl) || config.bParamsOnUrl == true)
 				        {
 				        	$.address.parameter("iDisplayStart", currentPage);
 						}
 
 				        //Fix for fixedHeader issue
-						if ( !$.sc.isNullOrUndefined($table.data("fixedHeader")) )
+						if ( !$.pgsi.isNullOrUndefined($table.data("fixedHeader")) )
 						{
 							$(".FixedHeader_Header").find('input:checkbox').prop('checked', false);
 						}
@@ -2233,7 +2233,7 @@ $(document).ready(function()
 
 			var _rebuild = function(oTable)
 			{
-				$.sc.progressBar.start();
+				$.pgsi.progressBar.start();
 				$.address.parameter("length", oTable.next().find(_oConfig.common.sLengthContainer).find('select').val());
 
 				var oConfig = oTable.data("config");
@@ -2248,21 +2248,21 @@ $(document).ready(function()
 			var _fnStorageInterval = function (config, value, bDelete)
 			{
 
-				var oPropertiesResponse = $.sc.storage.get(sensus.pages.dm.sUserStorageKey);
+				var oPropertiesResponse = $.pgsi.storage.get(pgsi.pages.dm.sUserStorageKey);
 
-				if ($.sc.isNullOrUndefined(oPropertiesResponse["autoRefresh"]))
+				if ($.pgsi.isNullOrUndefined(oPropertiesResponse["autoRefresh"]))
 				{
 					oPropertiesResponse["autoRefresh"] = {};
 				}
 
 				// Getter
-				if ($.sc.isNullOrUndefined(value) && !bDelete)
+				if ($.pgsi.isNullOrUndefined(value) && !bDelete)
 				{
 					return oPropertiesResponse.autoRefresh[config.id + "-auto-refresh"];
 				}
 
 				// Set value as disabled on local storage
-				if ($.sc.isNullOrUndefined(value))
+				if ($.pgsi.isNullOrUndefined(value))
 				{
 					value = -1;
 				}
@@ -2270,7 +2270,7 @@ $(document).ready(function()
 
 				// Setter
 				oPropertiesResponse.autoRefresh[config.id + "-auto-refresh"] = value;
-				$.sc.storage.set(sensus.pages.dm.sUserStorageKey, oPropertiesResponse);
+				$.pgsi.storage.set(pgsi.pages.dm.sUserStorageKey, oPropertiesResponse);
 				return;
 
 			}
@@ -2283,7 +2283,7 @@ $(document).ready(function()
 					config.bAutoRefreshReload = true;
 					_reloadTable({table : $table, iStart : 0, bHideProgressBar : true})
 				}
-				_fnStorageInterval(config, setInterval(fnInterval, sensus.settings.time.autoRefreshTime));
+				_fnStorageInterval(config, setInterval(fnInterval, pgsi.settings.time.autoRefreshTime));
 			};
 
 			var _restartInterval = function(config, $table)
@@ -2301,8 +2301,8 @@ $(document).ready(function()
 			{
 				_startInterval(config, $table);
 				config.$autoRefresh.find("#refresh-page .ui-icon").removeClass("ui-icon").addClass("loading");
-				config.$autoRefresh.find(".enable-auto-refresh").addClass("active").find("a").text($.sc.locale.get('table.autorefresh.enabled'));
-				config.$autoRefresh.find(".disable-auto-refresh").removeClass("active").find("a").text($.sc.locale.get('table.autorefresh.disable'));
+				config.$autoRefresh.find(".enable-auto-refresh").addClass("active").find("a").text($.pgsi.locale.get('table.autorefresh.enabled'));
+				config.$autoRefresh.find(".disable-auto-refresh").removeClass("active").find("a").text($.pgsi.locale.get('table.autorefresh.disable'));
 			};
 
 			// Clear interval
@@ -2312,11 +2312,11 @@ $(document).ready(function()
 				{
 					clearInterval(_fnStorageInterval(config));
 				}
-				if (!$.sc.isNullOrUndefined($table))
+				if (!$.pgsi.isNullOrUndefined($table))
 				{
 					config.$autoRefresh.find("#refresh-page .loading").removeClass("loading").addClass("ui-icon");
-					config.$autoRefresh.find(".enable-auto-refresh").removeClass("active").find("a").text($.sc.locale.get('table.autorefresh.enable'));
-					config.$autoRefresh.find(".disable-auto-refresh").addClass("active").find("a").text($.sc.locale.get('table.autorefresh.disabled'));
+					config.$autoRefresh.find(".enable-auto-refresh").removeClass("active").find("a").text($.pgsi.locale.get('table.autorefresh.enable'));
+					config.$autoRefresh.find(".disable-auto-refresh").addClass("active").find("a").text($.pgsi.locale.get('table.autorefresh.disabled'));
 				}
 			}
 
@@ -2324,7 +2324,7 @@ $(document).ready(function()
 			{
 				var oButton = $('<div id="refresh-page" class="left"><span class="ui-icon"></span></div>');
 				var oSelect = $('<div class="select-refresh left"></div>');
-				var oBox = $("<ul class='hide'><li class='enable-auto-refresh'><a href='#' class='auto-refresh-event'>" + $.sc.locale.get('table.autorefresh.enable') + "</a></li><li class='disable-auto-refresh'><a href='#' class='auto-refresh-event'>" + $.sc.locale.get('table.autorefresh.disable') + "</a></li></ul>")
+				var oBox = $("<ul class='hide'><li class='enable-auto-refresh'><a href='#' class='auto-refresh-event'>" + $.pgsi.locale.get('table.autorefresh.enable') + "</a></li><li class='disable-auto-refresh'><a href='#' class='auto-refresh-event'>" + $.pgsi.locale.get('table.autorefresh.disable') + "</a></li></ul>")
 
 				oButton.click(function (e) {
 					e.preventDefault();
@@ -2418,11 +2418,11 @@ $(document).ready(function()
 				try
 				{
 					var fixedHeaderData = oThis.data("fixedHeader");
-					if (!$.sc.isNullOrUndefined(fixedHeaderData))
+					if (!$.pgsi.isNullOrUndefined(fixedHeaderData))
 					{
 						var aoCache = fixedHeaderData.fnGetSettings().aoCache;
 
-						if($.sc.isValidArray(aoCache))
+						if($.pgsi.isValidArray(aoCache))
 						{
 							for (var i = 0, l = aoCache.length; i < l; i++)
 							{
@@ -2441,7 +2441,7 @@ $(document).ready(function()
 			var _init = function (config)
 			{
 
-				if( $.sc.isNullOrUndefined(config) || $.sc.isNullOrUndefined(config.id) )
+				if( $.pgsi.isNullOrUndefined(config) || $.pgsi.isNullOrUndefined(config.id) )
 				{
 					return false
 				}
@@ -2455,7 +2455,7 @@ $(document).ready(function()
 				});
 
 				// Auto Refresh
-				if( !$.sc.isNullOrUndefined(config.$autoRefresh) )
+				if( !$.pgsi.isNullOrUndefined(config.$autoRefresh) )
 				{
 					_setAutoRefresh(config, $table);
 					$table.on("remove", function()
