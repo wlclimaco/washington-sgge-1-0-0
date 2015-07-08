@@ -19,7 +19,9 @@
   <resultMap id="cidadeResult" type="Cidade">
     <result property="id" column="id" />
     <result property="nome" column="nome" />
-   	<result property="cdIBGE" column="cdibge"/>
+   	<result property="cdIBGE" column="cdIBGE"/>
+   	<result property="cep" column="cep" />
+   	<result property="municipio" column="municipio"/>
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
@@ -35,6 +37,8 @@
 		 b.nome
       	,b.cdIBGE
       	,b.estado
+      	,b.municipio
+      	,b.cep
       	,b.create_date
       	,b.create_user
       	,b.modify_date
@@ -45,6 +49,8 @@
   		#{nome},
   		#{cdIBGE},
     	#{estado.id},
+    	#{municipio}
+    	#{cep}
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
@@ -65,8 +71,8 @@
   <update id="updateCidade" parameterType="Cidade">
     UPDATE cidade
     	<set>
-    		<if test="nome!= null">nome = #{nome},</if>
-	    	<if test="cdIBGE!= null"> cdIBGE=#{cdIBGE},</if>
+    		<if test="nome!= null">cidade = #{nome},</if>
+	    	<if test="cdIBGE!= null"> IBGE=#{cdIBGE},</if>
 	    	<if test="estado.id!= null"> estado=#{estado.id},</if>
 			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
@@ -98,16 +104,9 @@
   </select>
 
   <select id="fetchCidadeById" parameterType="Integer" resultMap="cidadeResult">
-    			   SELECT
-						<include refid="allCidadeColumns" />,
- 				   FROM cidade b
-					<where>
-				  		 <choose>
-							<when test="id != null and id != ''">
-								b.id = #{id}
-				    		</when>
-				    	 </choose>
-				  </where>
+    			   SELECT b.id,
+						<include refid="allCidadeColumns" />
+					FROM cidade b where b.id= #{id} ORDER BY b.id ASC
   </select>
 
   <select id="fetchAllCidadesByRequest" parameterType="PagedInquiryRequest" resultMap="cidadeResult">

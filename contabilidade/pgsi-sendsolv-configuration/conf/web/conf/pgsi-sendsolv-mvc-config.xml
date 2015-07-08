@@ -37,7 +37,9 @@
 	<mvc:resources mapping="/scripts/**" location="/scripts/" />
 	<mvc:resources mapping="/styles/**" location="/styles/" />
 	<mvc:resources mapping="/fonts/**" location="/fonts/" />
+	<mvc:resources mapping="/bootstrap/**" location="/bootstrap/" />
 	<mvc:resources mapping="/thirdparty/**" location="/thirdparty/" />
+	<mvc:resources mapping="/web/**" location="/web/" />
 
 	<mvc:view-controller path="/organization/dialogDeleteOrganization" view-name="/organization/organization_remove"/>
 	<mvc:view-controller path="/location/dialogDeleteLocation"         view-name="/location/location_remove"/>

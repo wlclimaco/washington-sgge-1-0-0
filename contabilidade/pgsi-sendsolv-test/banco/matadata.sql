@@ -23,7 +23,7 @@ CREATE TABLE [dbo].[regime](
 	[id]           [int] NOT NULL,
 	[nome]         [varchar](100) NULL,
 	[descricao]    [varchar](200) NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -72,7 +72,7 @@ CREATE TABLE [dbo].[empresa] (
 	[id]           [int] NOT NULL,
 	[nome]         [varchar](100) NULL,
 	[regime]       [int] NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -111,7 +111,7 @@ CREATE TABLE [dbo].[documento](
 	[tabela]	 [int] NULL,
 	[parentId]	 [int] NULL,
 	[type]         [int] NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[description]  [varchar](200) NULL,
 	[numero]       [varchar](50) NULL,
 	[data]         [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -166,7 +166,7 @@ CREATE TABLE [dbo].[email](
 	[tabela]	   [int] NULL,
 	[parentId]	   [int] NULL,
 	[type]         [int] NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[email]        [varchar](100)  NULL,
 	[description]  [varchar](200) NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -216,10 +216,10 @@ CREATE TABLE [dbo].[endereco](
 	[tabela]		 [int]  NULL,
 	[parentId]	 [int]  NULL,
 	[type]         [int]  NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[logradouro]	 [varchar](200)  NULL,
-	[cidade]		 [varchar](100)  NULL,
-	[estado]		 [varchar](2)  NULL,
+	[cidade]		 [int] NULL,
+	[estado]		 [int] NULL,
 	[bairro]		 [varchar](50)  NULL,
 	[numero]       [varchar](10)  NULL,
 	[cep]			 [varchar](15)  NULL,
@@ -249,12 +249,12 @@ INSERT INTO [dbo].[endereco]
            ,[modify_date]
            ,[modify_user])
      VALUES
-           (1,1,1,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (2,1,2,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (3,1,3,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (4,1,1,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (5,1,2,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (6,1,3,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod')
+           (1,1,1,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (2,1,2,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (3,1,3,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (4,1,1,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (5,1,2,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (6,1,3,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod')
 
 INSERT INTO [dbo].[status] ([id],[dataStatus],[parentId],[status],[acaoType],[tabelaEnum],[note],[create_date],[create_user],[modify_date],[modify_user]) VALUES
 
@@ -273,7 +273,7 @@ CREATE TABLE [dbo].[telefone] (
 	[type]         [int] NULL,
 	[parentId]	   [int] NULL,
 	[tabela]	   [int] NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[ddd] 		   [varchar](5) NULL,
 	[telefone]     [varchar](15) NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -331,7 +331,7 @@ CREATE TABLE [dbo].[socio](
 	[nome]         [varchar](200) NULL,
 	[cota]         real NULL,
 	[porcentagem]  real NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -436,17 +436,14 @@ CONSTRAINT [pk_ncm_id] PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 /** --------------------------------------------------------------- */
-DROP TABLE  [dbo].[CIDADE];
-
 CREATE TABLE [dbo].[CIDADE](
-    [CODIGO]     [VARCHAR](6) NOT NULL,
-    [CIDADE]     [VARCHAR](40) NULL,
-    [UF]         [VARCHAR](2) NULL,
+    [ID]         [int] NOT NULL,
+    [NOME]       [VARCHAR](40) NULL,
+    [ESTADO]     [int] NULL,
     [CEP]        [VARCHAR](10) NULL,
-    [IBGE]       [VARCHAR](10) NULL,
-    [ESTADO]     [VARCHAR](10) NULL,
-    [MUNICIPIO]  [VARCHAR](10) NULL,
-    [processId]    [int] NOT NULL,
+    [cdIBGE]     [VARCHAR](10) NULL,
+    [MUNICIPIO]  [VARCHAR](40) NULL,
+    [processId]    [int] NULL,
     [status]       [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
@@ -454,9 +451,27 @@ CREATE TABLE [dbo].[CIDADE](
     [modify_user]  [varchar](50) NULL,
 CONSTRAINT [pk_cidade_id] PRIMARY KEY CLUSTERED
 (
-	[CODIGO] ASC
+	[ID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+
+
+INSERT INTO [dbo].[CIDADE]
+           ([ID]
+           ,[nome]
+           ,[cdIBGE]
+           ,[ESTADO]
+           ,[MUNICIPIO]
+           ,[processId]
+           ,[status]
+           ,[create_date]
+           ,[create_user]
+           ,[modify_date]
+           ,[modify_user])
+     VALUES
+           (1,'UBERABA' ,'385454',1,'UBERABA',0,0,14327833577780,'system' ,14327833577780,'system')
+GO
+
 /** --------------------------------------------------------------- */
 DROP TABLE  [dbo].[cnaePorRelacionamento];
 CREATE TABLE [dbo].[cnaePorRelacionamento](
@@ -464,7 +479,7 @@ CREATE TABLE [dbo].[cnaePorRelacionamento](
     [idCnae]     [varchar](50) not NULL,
     [idParentId] [int] NOT NULL,
     [tabela]     [int] NOT NULL,
-    [processId]    [int] NOT NULL,
+    [processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -509,7 +524,7 @@ CREATE TABLE [dbo].[funcionario](
 	[matricula]    [varchar](20) NULL,
 	[nome]         [varchar](200) NULL,
 	[sexo]         [int] NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[dataAdm]      [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
@@ -610,22 +625,22 @@ GO
 INSERT INTO [dbo].[endereco]
            ([id],[tabela],[parentId],[type],[logradouro],[cidade],[estado],[bairro],[numero],[cep],[create_date] ,[create_user],[modify_date],[modify_user])
      VALUES
-           (7,16,1,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (8,16,2,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (9,16,3,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (10,16,4,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (11,16,5,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (12,16,6,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (13,16,7,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (14,16,8,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (15,16,9,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (16,16,10,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (17,16,11,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (18,16,12,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (19,16,13,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (20,16,14,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (21,16,15,1,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (22,16,1,2,'Rua Maria Conceicao silva','Uberaba',1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod')
+           (7,16,1,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (8,16,2,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (9,16,3,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (10,16,4,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (11,16,5,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (12,16,6,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (13,16,7,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (14,16,8,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (15,16,9,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (16,16,10,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (17,16,11,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (18,16,12,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (19,16,13,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (20,16,14,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (21,16,15,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (22,16,1,2,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod')
 GO
 
 INSERT INTO [dbo].[telefone]
@@ -660,7 +675,7 @@ CREATE TABLE [dbo].[horarios](
 	[horarioSair]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[tipo]     	   [varchar](50) NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
@@ -717,7 +732,7 @@ CREATE TABLE [dbo].[Salario](
 	[id]           [int] NOT NULL,
 	[parentId]     [int] NULL,
 	[valor]        [real] NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[data]         [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
@@ -763,7 +778,7 @@ CREATE TABLE [dbo].[Beneficio](
     [descricao]    [varchar](50) NULL,
 	[valor]        [real] NULL,
 	[porcentagem]  [real] NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[tipo]		   [varchar](10) NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
@@ -789,7 +804,7 @@ CREATE TABLE [dbo].[BeneficioFunc](
 	[id]           [int] NOT NULL,
 	[idFunc]       [int] NOT NULL,
 	[idBenef]       [int] NOT NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -839,7 +854,7 @@ CREATE TABLE [dbo].[BeneficioMesApp](
 	[id]           [int] NOT NULL,
 	[data]         [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[idFuncBenef] [int] NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -884,7 +899,7 @@ CREATE TABLE [dbo].[Evento](
 	[porcentagem]  [real] NULL,
 	[isMensal]     [bit] NULL,
 	[isSistema]    [bit] NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -911,7 +926,7 @@ CREATE TABLE [dbo].[EventoFunc](
 	[data]         [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[idFunc]	   [int] NULL,
 	[idEvent]	   [int] NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -980,7 +995,7 @@ CREATE TABLE [dbo].[EventoMesApp](
 	[id]           [int] NOT NULL,
 	[data]         [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[idFuncEnvent] [int] NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1028,7 +1043,7 @@ CREATE TABLE [dbo].[Pessoa](
 	[nomeMae]      [varchar](200) NULL,
 	[nomeConjugue] [varchar](200) NULL,
 	[estadoCivil]  [int] NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1186,7 +1201,7 @@ CREATE TABLE [dbo].[Profissao](
 	[profissao] 	 [varchar](100) NULL,
 	[renda] 		 [real] NULL,
 	[dataAdmissao]   [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1233,7 +1248,7 @@ CREATE TABLE [dbo].[Convenio](
 	[dataFin]   	 [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[porcentagem] 	 [real] NULL,
 	[valor] 		 [real] NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1260,7 +1275,7 @@ CREATE TABLE [dbo].[ConvenioPessoa](
 	[id]          	 [int] NOT NULL,
 	[parentId] 	 	 [int] NOT NULL,
 	[convId]   	 [int] NOT NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1307,7 +1322,7 @@ CREATE TABLE [dbo].[CondPag](
 	[dataFin]   	 [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[porcentagem] 	 [real] NULL,
 	[valor] 		 [real] NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1333,7 +1348,7 @@ CREATE TABLE [dbo].[CondPagPessoa](
 	[id]          	 [int] NOT NULL,
 	[parentId] 	 	 [int] NOT NULL,
 	[condPagId]   	 [int] NOT NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1376,7 +1391,7 @@ DROP TABLE [dbo].[TipoPag];
 CREATE TABLE [dbo].[TipoPag](
 	[id]          	 [int] NOT NULL,
 	[descricao] 	 [varchar](100) NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1401,7 +1416,7 @@ CREATE TABLE [dbo].[TipoPagReg](
 	[parentId]          	 [int] NOT NULL,
 	[tipoPagId]          	 [int] NOT NULL,
 	[tabela]          	     [int] NOT NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1445,7 +1460,7 @@ CREATE TABLE [dbo].[banco](
 	[id]          	         [int] NOT NULL,
 	[nome]          	 	 [varchar](50) NULL,
 	[logo]          	 	 [varchar](50) NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1471,7 +1486,7 @@ CREATE TABLE [dbo].[agencia](
 	[nome]          	 	 [varchar](50) NULL,
 	[parentId]          	 [int] NOT NULL,
 	[numero]          	 	 [varchar](50) NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1498,7 +1513,7 @@ CREATE TABLE [dbo].[BancoPesoa](
 	[bancoId]          	 	 [int] NOT NULL,
 	[numCont]          	     [varchar](50) NULL,
 	[saldo]          	     [real] NOT NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1542,7 +1557,7 @@ CREATE TABLE [dbo].[contato](
 	[id]           [int] NOT NULL,
 	[parentId]     [int] NOT NULL,
 	[motivo]       [int] NOT NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[contato_date] [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
@@ -1587,7 +1602,7 @@ CREATE TABLE [dbo].[contatoItens](
 	[id]           [int] NOT NULL,
 	[parentId]     [int] NOT NULL,
 	[texto]        [varchar](250) NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1633,7 +1648,7 @@ CREATE TABLE [dbo].[ordemServico](
 	[data]    	   [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[typeId]       [int] NOT NULL,
 	[assunto]      [varchar](100) NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1670,7 +1685,7 @@ CREATE TABLE [dbo].[ordemServicoItens](
 	[status]       	 [int] NOT NULL,
 	[data]    	     [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[texto]          [varchar](255) NULL,
-	[processId]      [int] NOT NULL,
+	[processId]      [int]  NULL,
 	[create_date]    [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]    [varchar](50) NULL,
     [modify_date]    [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1708,7 +1723,7 @@ DROP TABLE [dbo].[ordemServicoTypes];
 CREATE TABLE [dbo].[ordemServicoTypes](
 	[id]           [int] NOT NULL,
 	[type]         [varchar](100) NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1736,7 +1751,7 @@ DROP TABLE [dbo].[ordemServicoStatus];
 CREATE TABLE [dbo].[ordemServicoStatus](
 	[id]           [int] NOT NULL,
 	[status]       [varchar](100) NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1858,7 +1873,7 @@ CREATE TABLE [dbo].[unimed](
 	[id]           [int] NOT NULL,
 	[unimed]       [varchar](100) NOT NULL,
 	[sigla]        [varchar](5) NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1885,7 +1900,7 @@ CREATE TABLE [dbo].[unimedProd](
 	[id]           [int] NOT NULL,
 	[unimedId]     [int] NOT NULL,
 	[prodId]       [int] NOT NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1919,7 +1934,7 @@ CREATE TABLE [dbo].[grupo](
 	[subGrupoId]   [int] NOT NULL,
 	[grupo]        [varchar](100) NOT NULL,
 	[descricao]    [varchar](250) NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1945,7 +1960,7 @@ CREATE TABLE [dbo].[grupoProd](
 	[id]           [int] NOT NULL,
 	[grupoId]     [int] NOT NULL,
 	[prodId]       [int] NOT NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1975,7 +1990,7 @@ CREATE TABLE [dbo].[subgrupo](
 	[id]           [int] NOT NULL,
 	[subgrupo]     [varchar](100) NOT NULL,
 	[descricao]    [varchar](250) NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -2000,7 +2015,7 @@ CREATE TABLE [dbo].[subgrupoGrupo](
 	[id]           [int] NOT NULL,
 	[grupoId]      [int] NOT NULL,
 	[subGrupoId]   [int] NOT NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -2031,7 +2046,7 @@ CREATE TABLE [dbo].[marca](
 	[id]           [int] NOT NULL,
 	[marca]        [varchar](100) NOT NULL,
 	[fabricante]   [varchar](100) NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -2057,7 +2072,7 @@ CREATE TABLE [dbo].[marcaProd](
 	[id]           [int] NOT NULL,
 	[marcaId]      [int] NOT NULL,
 	[prodId]       [int] NOT NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -2088,7 +2103,7 @@ CREATE TABLE [dbo].[cst](
 	[id]           [int] NOT NULL,
 	[nome]         [varchar](150) NULL,
 	[descricao]    [varchar](150) NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -2142,7 +2157,7 @@ CREATE TABLE [dbo].[csosnProd](
 	[id]           [int] NOT NULL,
 	[csosnId]      [int] NOT NULL,
 	[prodId]       [int] NOT NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -2172,7 +2187,7 @@ CREATE TABLE [dbo].[incidencia](
 	[id]           [int] NOT NULL,
 	[codigo]       [varchar](50) NULL,
 	[texto]        [varchar](150) NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -2227,7 +2242,7 @@ CREATE TABLE [dbo].[tributacao](
 	[id]           [int] NOT NULL,
 	[prodId]       [int] NOT NULL,
 	[cstId]        [int] NOT NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[icms]   	   [real] NULL,
 	[st]   		   [int] NULL,
 	[mva]   	   [real] NULL,
@@ -2266,7 +2281,7 @@ CREATE TABLE [dbo].[classificacao](
 	[id]           [int] NOT NULL,
 	[codigo]       [varchar](50) NULL,
 	[descricao]    [varchar](150) NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -2294,7 +2309,7 @@ CREATE TABLE [dbo].[classificacaoProd](
 	[id]           [int] NOT NULL,
 	[classificacaoId] [int] NOT NULL,
 	[prodId]       [int] NOT NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -2324,7 +2339,7 @@ CREATE TABLE [dbo].[estoque](
 	[id]              [int] NOT NULL,
 	[prodId]          [int] NOT NULL,
 	[estoqueTypeEnum] [int] NOT NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[ultimoMov]       [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[quant]           [real] NOT NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -2370,7 +2385,7 @@ CREATE TABLE [dbo].[preco](
 	[valor]           [real] NOT NULL,
 	[dataProInicial]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[dataProFinal]    [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -2410,7 +2425,7 @@ CREATE TABLE [dbo].[custoItens](
 	[id]               [int] NOT NULL,
 	[custo]   		   [varchar](50) NULL,
 	[custoDesp]        [int] NOT NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -2445,7 +2460,7 @@ CREATE TABLE [dbo].[custo](
 	[prodId]          [int] NOT NULL,
 	[idcustoItens]    [int] NOT NULL,
 	[valor]           [real] NOT NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -2486,7 +2501,7 @@ CREATE TABLE [dbo].[porcao](
 	[id]              [int] NOT NULL,
 	[prodId]          [int] NOT NULL,
 	[valor]           [real] NOT NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -2530,7 +2545,7 @@ CREATE TABLE [dbo].[porcaoItens](
 	[porcao]   		   [real] NULL,
 	[vd]   		       [real] NULL,
 	[nome]   		   [varchar](150) NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -2542,7 +2557,7 @@ CONSTRAINT [pk_porcaoItens_id] PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 INSERT INTO [dbo].[porcaoItens]
-           ([id],[porcao],[idcusto],[nome],[vd],[unimed],[create_user],[create_date],[modify_date],[modify_user])
+           ([id],[porcao],[idporcao],[nome],[vd],[unimed],[create_user],[create_date],[modify_date],[modify_user])
      VALUES
            (1,10,1,'Valor Calorico',2.6,1,'System',1432783357778,1432783357778,'System'),
            (2,20,2,'CARBOIDRATOS',2.6,1,'System',1432783357778,1432783357778,'System'),
@@ -2569,7 +2584,7 @@ DROP TABLE [dbo].[rentabilidade];
 CREATE TABLE [dbo].[rentabilidade](
 	[id]                    [int] NOT NULL,
 	[idprod]                [int] NOT NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -2595,7 +2610,7 @@ CREATE TABLE [dbo].[rentabilidadeProdutos](
 	[idprod]                [int] NOT NULL,
 	[valor]                 [real] NOT NULL,
 	[rentabilidadeTypeEnum] [int] NOT NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -2629,7 +2644,7 @@ CREATE TABLE [dbo].[cfop](
 	[cstPrincipal]    [real]  NULL,
 	[classFiscal]     [real]  NULL,
 	[observacao]      [varchar](250) NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -2653,7 +2668,7 @@ CREATE TABLE [dbo].[CfopProd](
 	[id]               [int] NOT NULL,
 	[idCfop]          [int] NOT NULL,
 	[prodId]		  [int] NOT NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -2694,7 +2709,7 @@ CREATE TABLE [dbo].[ForneProd](
 	[id]           [int] NOT NULL,
 	[idForn]       [int] NOT NULL,
 	[prodId]	   [int] NOT NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -2726,7 +2741,7 @@ CREATE TABLE [dbo].[produto](
 	[cdBarras]     [varchar](50) NULL,
 	[dataCreate]   [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[produto]  	   [varchar](250) NOT NULL,
-	[modoUso]  	   [varchar](250) NOT NULL,
+	[modoUso]  	   [varchar](250) NULL,
 	[aplicacao]    [varchar](250) NULL,
 	[localizacao]  [varchar](200) NULL,
 	[dataValidade] [bigint] NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -2735,7 +2750,7 @@ CREATE TABLE [dbo].[produto](
 	[porcao]  	   [real]  NULL,
 	[pesoBruto]    [real]  NULL,
 	[pesoLiquido]  [real]  NULL,
-	[processId]    [int] NOT NULL,
+	[processId]    [int] NULL,
 	[create_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -2858,7 +2873,7 @@ CREATE TABLE [dbo].[notaFiscalItens](
 	[produto]    	[int] NOT NULL,
 	[cfop] 			[int] NOT NULL,
 	[classificacao] [int] NOT NULL,
-	[processId]     [int] NOT NULL,
+	[processId]     [int]  NULL,
 	[create_date]  			[bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  			[varchar](50) NULL,
     [modify_date]  			[bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -2886,26 +2901,26 @@ INSERT INTO [dbo].[notaFiscalItens]
            ,[modify_date]
            ,[modify_user])
      VALUES
-           (1,1,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (2,1,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (3,2,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (4,2,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (5,3,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (6,3,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (7,4,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (8,4,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (9,5,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (10,5,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (11,6,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (12,6,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (13,7,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (14,7,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (15,8,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (16,8,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (17,9,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (18,9,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (19,10,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (20,10,1,2.5,0.35.25,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM')
+           (1,1,1,2.5,0.3525,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (2,1,1,2.5,0.3525,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (3,2,1,2.5,0.3525,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (4,2,1,2.5,0.3525,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (5,3,1,2.5,0.3525,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (6,3,1,2.5,0.3525,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (7,4,1,2.5,0.3525,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (8,4,1,2.5,0.3525,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (9,5,1,2.5,0.3525,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (10,5,1,2.5,0.3525,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (11,6,1,2.5,0.3525,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (12,6,1,2.5,0.3525,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (13,7,1,2.5,0.3525,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (14,7,1,2.5,0.3525,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (15,8,1,2.5,0.3525,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (16,8,1,2.5,0.3525,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (17,9,1,2.5,0.3525,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (18,9,1,2.5,0.3525,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (19,10,1,2.5,0.3525,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (20,10,1,2.5,0.3525,1,1,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM')
 
 
 GO
@@ -2928,7 +2943,7 @@ CREATE TABLE [dbo].[contasPagarReceber](
 	[valorTotal] 	 [real]  NULL,
 	[baixaUser]		 [int]  NULL,
 	[baixaDateUTC]	 [bigint] NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
-	[processId]      [int] NOT NULL,
+	[processId]      [int] NULL,
 	[create_date]  			[bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  			[varchar](50) NULL,
     [modify_date]  			[bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -2997,7 +3012,7 @@ CREATE TABLE [dbo].[itensEspeciais](
 	[baseCalculo]  	[real]  NULL,
 	[aliguotaICMS]	[real]  NULL,
 	[valorICMS]     [real]  NULL,
-	[processId]     [int] NOT NULL,
+	[processId]     [int]  NULL,
 	[create_date]  	[bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  	[varchar](50) NULL,
     [modify_date]  	[bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -3023,28 +3038,28 @@ INSERT INTO [dbo].[itensEspeciais]
 			,[create_date]
 		    ,[create_user]
 		    ,[modify_date]
-		    ,[modify_user]
+		    ,[modify_user])
      VALUES
-           (1,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (2,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (3,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (4,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (5,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (6,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (7,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (8,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (9,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (10,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (11,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (12,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (13,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (14,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (15,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (16,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (17,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (18,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (19,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (20,1,1,2,2,1,1432783357778,'SYSTEM',1432783357778,'SYSTEM')
+           (1,1,1,'2',2,1,0.10,1.55,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (2,1,1,'2',2,1,0.10,1.55,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (3,1,1,'2',2,1,0.10,1.55,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (4,1,1,'2',2,1,0.10,1.55,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (5,1,1,'2',2,1,0.10,1.55,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (6,1,1,'2',2,1,0.10,1.55,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (7,1,1,'2',2,1,0.10,1.55,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (8,1,1,'2',2,1,0.10,1.55,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (9,1,1,'2',2,1,0.10,1.55,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (10,1,1,'2',2,1,0.10,1.55,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (11,1,1,'2',2,1,0.10,1.55,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (12,1,1,'2',2,1,0.10,1.55,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (13,1,1,'2',2,1,0.10,1.55,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (14,1,1,'2',2,1,0.10,1.55,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (15,1,1,'2',2,1,0.10,1.55,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (16,1,1,'2',2,1,0.10,1.55,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (17,1,1,'2',2,1,0.10,1.55,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (18,1,1,'2',2,1,0.10,1.55,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (19,1,1,'2',2,1,0.10,1.55,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (20,1,1,'2',2,1,0.10,1.55,1432783357778,'SYSTEM',1432783357778,'SYSTEM')
 
 
 GO
@@ -3056,7 +3071,7 @@ CREATE TABLE [dbo].[nFStatus](
 	[IdNota]		[int] NOT NULL,
 	[status]        [int] NOT NULL,
 	[dataMudanca]  	[bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
-	[processId]     [int] NOT NULL,
+	[processId]     [int]  NULL,
 	[create_date]  	[bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  	[varchar](50) NULL,
     [modify_date]  	[bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -3078,7 +3093,7 @@ INSERT INTO [dbo].[nFStatus]
 			,[create_date]
 		    ,[create_user]
 		    ,[modify_date]
-		    ,[modify_user]
+		    ,[modify_user])
      VALUES
            (1,1,1,1432783357778,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
            (2,1,2,1432783357778,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
@@ -3130,7 +3145,7 @@ CREATE TABLE [dbo].[notaFiscal](
     [empresa]  	    [int] NULL,
     [fornecedor]    [int] NULL,
     [cliente]  	    [int] NULL,
-    [processId]     [int] NOT NULL,
+    [processId]     [int]  NULL,
 	[create_date]   [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  	[varchar](50) NULL,
     [modify_date]  	[bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -3144,44 +3159,44 @@ CONSTRAINT [pk_notaFiscal_id] PRIMARY KEY CLUSTERED
 USE [PGSi]
 GO
 
-INSERT INTO [dbo].[nFStatus]
-       ([id],
-[notaType],
-[serie],
-[ordem],
-[numero],
-[tipo],
-[nfValor],
-[dataEmissao],
-[dataSaida],
-[dataEntrada],
-[modelo],
-[bxEstoque],
-[descItens],
-[pcCusto],
-[pedidoCompraId],
-[orcamentoId],
-[cfop],
-[transportador],
-[conhecimentoTransporte],
-[empresa],
-[fornecedor],
-[cliente]
+INSERT INTO [dbo].[notaFiscal]
+        (    [id],
+			[notaType],
+			[serie],
+			[ordem],
+			[numero],
+			[tipo],
+			[nfValor],
+			[dataEmissao],
+			[dataSaida],
+			[dataEntrada],
+			[modelo],
+			[bxEstoque],
+			[descItens],
+			[pcCusto],
+			[pedidoCompraId],
+			[orcamentoId],
+			[cfop],
+			[transportador],
+			[conhecimentoTransporte],
+			[empresa],
+			[fornecedor],
+			[cliente]
 		,[create_date]
 	    ,[create_user]
 	    ,[modify_date]
-	    ,[modify_user]
+	    ,[modify_user])
      VALUES
-           (1,1,'1','O',1024,'NF',100.85,1432783357778,1432783357778,1432783357778,'55'1,1,1,0,0,1,1,1,1,2,3,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (2,1,'1','O',1024,'NF',100.85,1432783357778,1432783357778,1432783357778,'55'1,1,1,0,0,1,1,1,1,2,3,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (3,1,'1','O',1024,'NF',100.85,1432783357778,1432783357778,1432783357778,'55'1,1,1,0,0,1,1,1,1,2,3,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (4,1,'1','O',1024,'NF',100.85,1432783357778,1432783357778,1432783357778,'55'1,1,1,0,0,1,1,1,1,2,3,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (5,1,'1','O',1024,'NF',100.85,1432783357778,1432783357778,1432783357778,'55'1,1,1,0,0,1,1,1,1,2,3,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (6,2,'1','O',1024,'NF',100.85,1432783357778,1432783357778,1432783357778,'55'1,1,1,0,0,1,1,1,1,2,3,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (7,2,'1','O',1024,'NF',100.85,1432783357778,1432783357778,1432783357778,'55'1,1,1,0,0,1,1,1,1,2,3,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (8,2,'1','O',1024,'NF',100.85,1432783357778,1432783357778,1432783357778,'55'1,1,1,0,0,1,1,1,1,2,3,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (9,2,'1','O',1024,'NF',100.85,1432783357778,1432783357778,1432783357778,'55'1,1,1,0,0,1,1,1,1,2,3,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
-           (10,2,'1','O',1024,'NF',100.85,1432783357778,1432783357778,1432783357778,'55'1,1,1,0,0,1,1,1,1,2,3,1432783357778,'SYSTEM',1432783357778,'SYSTEM')
+           (1,1,'1','O',1024,'NF',100.85,1432783357778,1432783357778,1432783357778,'55',1,1,1,0,0,1,1,1,1,2,3,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (2,1,'1','O',1024,'NF',100.85,1432783357778,1432783357778,1432783357778,'55',1,1,1,0,0,1,1,1,1,2,3,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (3,1,'1','O',1024,'NF',100.85,1432783357778,1432783357778,1432783357778,'55',1,1,1,0,0,1,1,1,1,2,3,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (4,1,'1','O',1024,'NF',100.85,1432783357778,1432783357778,1432783357778,'55',1,1,1,0,0,1,1,1,1,2,3,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (5,1,'1','O',1024,'NF',100.85,1432783357778,1432783357778,1432783357778,'55',1,1,1,0,0,1,1,1,1,2,3,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (6,2,'1','O',1024,'NF',100.85,1432783357778,1432783357778,1432783357778,'55',1,1,1,0,0,1,1,1,1,2,3,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (7,2,'1','O',1024,'NF',100.85,1432783357778,1432783357778,1432783357778,'55',1,1,1,0,0,1,1,1,1,2,3,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (8,2,'1','O',1024,'NF',100.85,1432783357778,1432783357778,1432783357778,'55',1,1,1,0,0,1,1,1,1,2,3,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (9,2,'1','O',1024,'NF',100.85,1432783357778,1432783357778,1432783357778,'55',1,1,1,0,0,1,1,1,1,2,3,1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
+           (10,2,'1','O',1024,'NF',100.85,1432783357778,1432783357778,1432783357778,'55',1,1,1,0,0,1,1,1,1,2,3,1432783357778,'SYSTEM',1432783357778,'SYSTEM')
 
 GO
 
@@ -3237,14 +3252,12 @@ CREATE TABLE [dbo].[estado](
     [create_user]  	[varchar](50) NULL,
     [modify_date]  	[bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  	[varchar](50) NULL,
-CONSTRAINT [pk_nFStatus_id] PRIMARY KEY CLUSTERED
+CONSTRAINT [pk_estado_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
-USE [PGSi]
-GO
 
 INSERT INTO [dbo].[estado]
            ([id]
