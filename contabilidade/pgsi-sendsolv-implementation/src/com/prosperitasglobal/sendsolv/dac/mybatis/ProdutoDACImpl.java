@@ -437,7 +437,7 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 
 		Process process = new Process();
 		process.setEmprId(produto.getEmprId());
-		process.setTabela(TabelaEnum.CLIENTE);
+		process.setTabelaEnum(TabelaEnum.CLIENTE);
 		process.setUserId(produto.getUserId());
 		process.setAcaoType(AcaoEnum.UPDATE);
 
@@ -570,7 +570,7 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 
 		Process process = new Process();
 		process.setEmprId(produto.getEmprId());
-		process.setTabela(TabelaEnum.CLIENTE);
+		process.setTabelaEnum(TabelaEnum.CLIENTE);
 		process.setUserId(produto.getUserId());
 		process.setAcaoType(AcaoEnum.UPDATE);
 

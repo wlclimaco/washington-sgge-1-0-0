@@ -3224,6 +3224,7 @@ DROP PROCEDURE [dbo].[fetchProcessId];
 CREATE PROCEDURE [dbo].[fetchProcessId]
 	@ptabela int,
 	@pempId int,
+	@pacao int,
 	@puser varchar(50)
 
 AS
@@ -3231,9 +3232,9 @@ AS
 declare @p_time_of_request int = 0
 BEGIN
 
-	SELECT @p_time_of_request = dbo.fn_now()
+	@p_time_of_request = 1432783357778
 
-	INSERT  INTO [dbo].[process1] ([tabela],[empId],[data],[create_date],[create_user])VALUES(@ptabela, @pempId,@p_time_of_request,@p_time_of_request,@puser)
+	INSERT  INTO [dbo].[process1] ([tabela],[empId],[acaoEnum],[create_date],[create_user])VALUES(@ptabela, @pempId,@pacao,@p_time_of_request,@puser)
 	select @p_time_of_request = max(id) from [dbo].[process1]
 
   RETURN @p_time_of_request

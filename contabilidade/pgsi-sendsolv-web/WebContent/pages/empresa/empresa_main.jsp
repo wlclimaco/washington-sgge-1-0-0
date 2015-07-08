@@ -16,7 +16,7 @@
 
 <h2 class="list"><s:message code="commons.pages.organizationfind" text="default text" /></h2>
 
-<a href="organization/add" class="add-business alist" title='<s:message code="commons.pages.organizationadd" text="default text" />'>
+<a href="/api/empresa/add" class="add-business alist" title='<s:message code="commons.pages.organizationadd" text="default text" />'>
 	<span class="icon-nav icon-plus icon-small-button"></span>
 	<s:message code="commons.pages.organizationadd" text="default text" />
 </a>

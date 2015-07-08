@@ -234,7 +234,7 @@ public class FuncionarioDACImpl extends SqlSessionDaoSupport implements IFuncion
 
 		Process process = new Process();
 		process.setEmprId(0);
-		process.setTabela(TabelaEnum.FUNCIONARIO);
+		process.setTabelaEnum(TabelaEnum.FUNCIONARIO);
 		process.setUserId(funcionario.getUserId());
 		process.setAcaoType(AcaoEnum.INSERT);
 
@@ -330,7 +330,7 @@ public class FuncionarioDACImpl extends SqlSessionDaoSupport implements IFuncion
 
 		Process process = new Process();
 		process.setEmprId(funcionario.getEmprId());
-		process.setTabela(TabelaEnum.FUNCIONARIO);
+		process.setTabelaEnum(TabelaEnum.FUNCIONARIO);
 		process.setUserId(funcionario.getUserId());
 		process.setAcaoType(AcaoEnum.INSERT);
 
@@ -423,7 +423,7 @@ public class FuncionarioDACImpl extends SqlSessionDaoSupport implements IFuncion
 
 		Process process = new Process();
 		process.setEmprId(funcionario.getEmprId());
-		process.setTabela(TabelaEnum.FUNCIONARIO);
+		process.setTabelaEnum(TabelaEnum.FUNCIONARIO);
 		process.setUserId(funcionario.getUserId());
 		process.setAcaoType(AcaoEnum.DELETE);
 

@@ -12,14 +12,19 @@
   	<!-- Result maps describe the mapping between the columns returned
        from a query, and the class properties.  A result map isn't
        necessary if the columns (or aliases) match to the properties
-       exactly. id codigo, process, descricao, abreviado -->
+       exactly. id codigo, process, descricao, abreviado
+       [id]             [int] identity(1,1) NOT NULL,
+	[tabelaEnum]	 [int] NOT NULL,
+	[acaoEnum]		 [int] NOT NULL,
+	[empId] 		 [int] NOT NULL,
+    [data]  	     [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),-->
 
   <resultMap id="processResult" type="Process">
     <result property="id" column="id" />
-    <result property="codigo" column="codigo" />
-   	<result property="process" column="process"/>
-	<result property="descricao" column="descricao"/>
-	<result property="abreviado" column="abreviado"/>
+    <result property="tabelaEnumValue" column="tabelaEnum" />
+    <result property="acaoEnumValue" column="acaoEnum" />
+    <result property="emprId" column="empId" />
+    <result property="data" column="data" />
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
@@ -30,10 +35,10 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allProcessColumns">
-		 b.codigo
-		,b.process
-      	,b.descricao
-      	,b.abreviado
+		 b.tabelaEnum
+		,b.acaoEnum
+      	,b.empId
+      	,b.data
       	,b.create_date
       	,b.create_user
       	,b.modify_date
@@ -41,39 +46,31 @@
   </sql>
 
   <sql id="allProcessValues">
-  		#{codigo},
-  		#{process},
-    	#{descricao},
-    	#{abreviado},
+  		#{tabelaEnumValue},
+  		#{acaoEnumValue},
+    	#{emprId},
+    	#{data},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
-  <sql id="allProcessColumnsRel">
-		 b.idProcess
-		,b.idParentId
-      	,b.tabela
-      	,b.create_date
-      	,b.create_user
-      	,b.modify_date
-      	,b.modify_user
-  </sql>
-
-  <sql id="allProcessValuesRel">
-  		#{idProcess},
-  		#{idParentId},
-    	#{tabela},
-    	<include refid="CBOFMap.changeControlFields"/>
-  </sql>
 
   <!--
 		SQL Insert Statements.
  	-->
-  <select id="insertProcess" parameterType="Process" resultType="Integer" statementType="CALLABLE">
-       { call fetchProcessId(#{process.tabela,jdbcType=INTEGER},
-                             #{process.emprId,jdbcType=INTEGER},
-                             #{process.userId,jdbcType=VARCHAR}
+  <select id="insertProcessP" parameterType="Process" resultType="Integer" statementType="CALLABLE">
+       { call fetchProcessId(#{tabelaEnumValue,jdbcType=INTEGER},
+                             #{emprId,jdbcType=INTEGER},
+                             #{acaoEnumValue,jdbcType=INTEGER},
+                             #{userId,jdbcType=VARCHAR}
        ) }
     </select >
+
+   <insert id="insertProcess" parameterType="Process" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO process (
+		<include refid="allProcessColumns" />
+      )
+    VALUES (<include refid="allProcessValues" /> )
+  </insert>
 
 
 	<!--
