@@ -1,6 +1,7 @@
 package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -294,15 +295,21 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 
 		Process process = new Process();
 		process.setEmprId(0);
-		process.setTabela(TabelaEnum.EMPRESA);
+		process.setTabelaEnum(TabelaEnum.EMPRESA);
 		process.setUserId(empresa.getUserId());
 		process.setAcaoType(AcaoEnum.INSERT);
+		Date a = new Date();
+		process.setData(a.getTime());
 
 		Integer processId = 0;
 
 		processId = (Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), "ProcessMap.insertProcess", process);
 
-		empresa.setProcessId(processId);
+		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), "ProcessMap.insertProcess", process, response);
+
+		empresa.setProcessId(process.getId());
+
+		empresa.setModifyDateUTC(a.getTime());
 
 		// First insert the root
 		// Is successful the unique-id will be populated back into the object.
@@ -379,7 +386,7 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 
 		Process process = new Process();
 		process.setEmprId(empresa.getId());
-		process.setTabela(TabelaEnum.EMPRESA);
+		process.setTabelaEnum(TabelaEnum.EMPRESA);
 		process.setUserId(empresa.getUserId());
 		process.setAcaoType(AcaoEnum.UPDATE);
 
@@ -465,7 +472,7 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 
 		Process process = new Process();
 		process.setEmprId(empresa.getId());
-		process.setTabela(TabelaEnum.EMPRESA);
+		process.setTabelaEnum(TabelaEnum.EMPRESA);
 		process.setUserId(empresa.getUserId());
 		process.setAcaoType(AcaoEnum.UPDATE);
 

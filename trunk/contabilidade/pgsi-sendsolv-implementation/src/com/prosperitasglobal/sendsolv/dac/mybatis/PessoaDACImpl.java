@@ -357,7 +357,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 
 		Process process = new Process();
 		process.setEmprId(pessoa.getEmprId());
-		process.setTabela(TabelaEnum.EMPRESA);
+		process.setTabelaEnum(TabelaEnum.EMPRESA);
 		process.setUserId(pessoa.getUserId());
 		process.setAcaoType(AcaoEnum.INSERT);
 
@@ -457,7 +457,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 
 		Process process = new Process();
 		process.setEmprId(pessoa.getEmprId());
-		process.setTabela(TabelaEnum.CLIENTE);
+		process.setTabelaEnum(TabelaEnum.CLIENTE);
 		process.setUserId(pessoa.getUserId());
 		process.setAcaoType(AcaoEnum.UPDATE);
 
@@ -558,7 +558,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 
 		Process process = new Process();
 		process.setEmprId(pessoa.getEmprId());
-		process.setTabela(TabelaEnum.CLIENTE);
+		process.setTabelaEnum(TabelaEnum.CLIENTE);
 		process.setUserId(pessoa.getUserId());
 		process.setAcaoType(AcaoEnum.UPDATE);
 
@@ -573,10 +573,10 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
-						null, AcaoEnum.DELETE,
-						pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.CLIENTE, getStatusDAC(),
-						getHistoricoDAC(), processId);
+						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
+								null, AcaoEnum.DELETE,
+								pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.CLIENTE, getStatusDAC(),
+								getHistoricoDAC(), processId);
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
 		{
@@ -622,7 +622,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 
 		Process process = new Process();
 		process.setEmprId(pessoa.getEmprId());
-		process.setTabela(TabelaEnum.FORNECEDOR);
+		process.setTabelaEnum(TabelaEnum.FORNECEDOR);
 		process.setUserId(pessoa.getUserId());
 		process.setAcaoType(AcaoEnum.UPDATE);
 
@@ -720,7 +720,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 
 		Process process = new Process();
 		process.setEmprId(pessoa.getEmprId());
-		process.setTabela(TabelaEnum.FORNECEDOR);
+		process.setTabelaEnum(TabelaEnum.FORNECEDOR);
 		process.setUserId(pessoa.getUserId());
 		process.setAcaoType(AcaoEnum.UPDATE);
 
@@ -826,7 +826,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 
 		Process process = new Process();
 		process.setEmprId(pessoa.getEmprId());
-		process.setTabela(TabelaEnum.FORNECEDOR);
+		process.setTabelaEnum(TabelaEnum.FORNECEDOR);
 		process.setUserId(pessoa.getUserId());
 		process.setAcaoType(AcaoEnum.DELETE);
 
@@ -841,10 +841,10 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
-						null, AcaoEnum.DELETE,
-						pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.FORNECEDOR, getStatusDAC(),
-						getHistoricoDAC(), processId);
+						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
+								null, AcaoEnum.DELETE,
+								pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.FORNECEDOR, getStatusDAC(),
+								getHistoricoDAC(), processId);
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
@@ -892,7 +892,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 
 		Process process = new Process();
 		process.setEmprId(pessoa.getEmprId());
-		process.setTabela(TabelaEnum.TRANSPORTADOR);
+		process.setTabelaEnum(TabelaEnum.TRANSPORTADOR);
 		process.setUserId(pessoa.getUserId());
 		process.setAcaoType(AcaoEnum.UPDATE);
 
@@ -986,7 +986,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 
 		Process process = new Process();
 		process.setEmprId(pessoa.getEmprId());
-		process.setTabela(TabelaEnum.CLIENTE);
+		process.setTabelaEnum(TabelaEnum.CLIENTE);
 		process.setUserId(pessoa.getUserId());
 		process.setAcaoType(AcaoEnum.UPDATE);
 
@@ -1085,7 +1085,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 
 		Process process = new Process();
 		process.setEmprId(pessoa.getEmprId());
-		process.setTabela(TabelaEnum.CLIENTE);
+		process.setTabelaEnum(TabelaEnum.CLIENTE);
 		process.setUserId(pessoa.getUserId());
 		process.setAcaoType(AcaoEnum.UPDATE);
 
@@ -1100,10 +1100,10 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
-						null, AcaoEnum.DELETE,
-						pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.TRANSPORTADOR, getStatusDAC(),
-						getHistoricoDAC(), processId);
+						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
+								null, AcaoEnum.DELETE,
+								pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.TRANSPORTADOR, getStatusDAC(),
+								getHistoricoDAC(), processId);
 		return response;
 	}
 

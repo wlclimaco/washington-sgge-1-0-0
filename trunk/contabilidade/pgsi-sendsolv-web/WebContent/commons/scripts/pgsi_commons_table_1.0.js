@@ -16,7 +16,8 @@ $(document).ready(function()
 				},
 				common 		:
 				{
-					sTableFooter 			: "table-footer",
+					sTableHeader			: "list_header",
+					sTableFooter 			: "list_footer",
 					sBlankslate 			: ".blankslate",
 					sLengthContainer 		: ".dataTables_length",
 					pageSizeSubmitButtonId 	: "changeDefault",
@@ -46,7 +47,9 @@ $(document).ready(function()
 				{
 					aPaginationTypes: ["ellipses", "daily", "monthly", "yearly"],
 					aPaginationSize : [25, 50, 100],
-					asStripeClasses : [ "", "alt" ]
+					asStripeClasses : [ "", "alt" ],
+
+
 				},
 				messages  	:
 				{
@@ -64,7 +67,10 @@ $(document).ready(function()
 					resultMatches 		: "table.result.matches",
 					resultMatch 		: "table.result.match",
 					paginationBack 		: "table.page.back",
-					paginationBackArrow : "table.page.back_arrow"
+					paginationBackArrow : "table.page.back_arrow",
+
+
+
 				},
 				project 	:
 				{
@@ -81,18 +87,14 @@ $(document).ready(function()
 			var _iCurrentPagination = 0;
 			var _oDefaultConfig 	=
 			{
-				sPaginationType  : _oConfig.settings.aPaginationTypes[0],
-				sDom 			 : "tr<'yui-gb " + _oConfig.common.sTableFooter + "'<'yui-u paging first'p><'yui-u numbers'il>><'" + _oConfig.common.tableFooterStamp +"'>",
-				bAutoWidth 		 : false,
-				bFixedHeader	 : true,
-				bServerSide 	 : true,
-				bIsDialog 		 : false,
-				bParamsOnUrl 	 : true,
-				iDisplayLength 	 : 25,
-				aLengthMenu 	 : _oConfig.settings.aPaginationSize,
-				asStripeClasses  : _oConfig.settings.asStripeClasses,
-				bHideProgressBar : false,
-				oLanguage 		 :
+				sPaginationType : _oConfig.settings.aPaginationTypes[0],
+				sDom 			: "<'" + _oConfig.common.sTableHeader + "'ipl><t><'" + _oConfig.common.sTableFooter + "'ipl>",
+				bAutoWidth 		: false,
+				bServerSide 	: true,
+				iDisplayLength 	: 10,
+				aLengthMenu 	: _oConfig.settings.aPaginationSize,
+				asStripeClasses : _oConfig.settings.asStripeClasses,
+				oLanguage 		:
 				{
 					sLengthMenu 	: $.pgsi.locale.get(_oConfig.messages.recordsPerPage),
 					sZeroRecords 	: $.pgsi.locale.get(_oConfig.messages.recordsNone),
@@ -102,10 +104,10 @@ $(document).ready(function()
 					sProcessing 	: $.pgsi.locale.get(_oConfig.messages.processing),
 					oPaginate 		:
 					{
-						sFirst 	  : "",
-						sLast  	  : "",
-						sNext  	  : $.pgsi.locale.get(_oConfig.messages.next) + " &gt;&gt;",
-						sPrevious : "&lt;&lt; " + $.pgsi.locale.get(_oConfig.messages.prev)
+						sFirst 	  : "a",
+						sLast  	  : "b",
+						sNext  	  : "g",
+						sPrevious : "f"
 					}
 				}
 			};
@@ -115,89 +117,96 @@ $(document).ready(function()
 			{
 				if (aaData.length > 0)
 				{
-					$(this).parent().siblings(_oConfig.common.sBlankslate).addClass("hide");
-					$(this).removeClass("hide");
-					$(this).siblings().not(".stamp").css('visibility', 'visible');
+					$(this).parent().siblings(_oConfig.common.sBlankslate).hide();
+					$(this).show();
+					$(this).siblings("."+ _oConfig.common.sTableFooter).show();
+
 				}
 				else
 				{
-					$(this).addClass("hide");
-					$(this).siblings().not(".stamp").css('visibility', 'hidden');
-					$(this).parent().siblings(_oConfig.common.sBlankslate).removeClass("hide");
+					$(this).hide();
+					$("."+ _oConfig.common.sTableFooter).hide();
+					$(this).parent().siblings(_oConfig.common.sBlankslate).show();
 				}
 
 				if (!$.pgsi.isNullOrUndefined(fnCallback))
 				{
 					fnCallback.call($(this), nRow, aaData, iStart, iEnd, aiDisplay);
 				}
-			};
 
-			var _fnShowViewPortFixedHeader = function ($viewport, $table)
-			{
-				//Fix for fixedHeader issue
-				if ( $.pgsi.isNullOrUndefined($table.data("fixedHeader")) )
+				var $pageSizeSelect = $(this).next("."+ _oConfig.common.sTableFooter).find(_oConfig.common.sLengthContainer + " select");
+
+				$pageSizeSelect.on("change", function()
 				{
-					$viewport.removeClass("hide");
-					return;
-				}
+					if (pgsi.settings.user[_oConfig.project.pageSizeDialogProperty])
+					{
+						var sPageSize		= $(this).val();
+						var oPageSizeDialog =
+						{
+							// Whether this dialog requires a light list.
+							requiresSmartpoints : true,
+							width               : 540,
+							title               : $.pgsi.locale.get(_oConfig.messages.pageSizeDialogTitle),
+							isMonitored			: true,
+							buttons 			:
+							[
+								{
+									id 		: _oConfig.common.pageSizeSubmitButtonId,
+									text 	: $.pgsi.locale.get(_oConfig.messages.pageSizeSubmitButton),
+									click 	: function()
+									{
+										var bPageSizeShowDialog = !$("#"+ _oConfig.common.pageSizeCheckBox).is(":checked");
+										var oProperty 			= {};
 
-				$viewport.removeClass("hide");
-				$table.data("fixedHeader").fnUpdate(true);
-			};
+										oProperty[_oConfig.project.pageSizeProperty] 			= sPageSize;
+										oProperty[_oConfig.project.pageSizeShowDialogProperty] 	= bPageSizeShowDialog;
 
-			var _fnInitComplete = function(oSettings, aaData, config, fnCallback)
-			{
-				var $table = this;
+										$.pgsi.savePropertyProfile(oProperty);
+									}
+								},
 
-				if(config.bFixedHeader && !config.bIsDialog)
-				{
-					// Start fixed header
-					$table.data("fixedHeader", new $.fn.dataTable.FixedHeader( $table, { "zTop": "20" } ));
-				}
+								{
+									id : _oConfig.common.pageSizeKeepButtonId,
+									text : $.pgsi.locale.get(_oConfig.messages.pageSizeCancelButton),
+									click : function()
+									{
+										$.pgsi.closeActionDialog("#"+ _oConfig.common.sActionId);
+										$.pgsi.progressBar.stop();
+									}
+								},
+							],
+							action : function(actionDialog)
+							{
+								actionDialog.dialog( "open" );
+								actionDialog.dialog( "option", "position", "center" );
 
-				$table.on("remove", function()
-				{
-					// Destroy FixedHeader
-					_destroyFixedHeader($(this));
+								var oActionDialog = actionDialog;
+
+								oActionDialog.empty().load(_oConfig.project.pageSizeUrl, function()
+								{
+									var $dialogValuePageSize = $(_oConfig.common.sPageSizeValueId);
+
+									oActionDialog.removeClass("waiting");
+
+									$dialogValuePageSize.text(sPageSize);
+								});
+								$.pgsi.progressBar.stop();
+							}
+						};
+
+						$.pgsi.launchActionDialog(null, oPageSizeDialog);
+					}
 				});
 
-				if (!$.pgsi.isNullOrUndefined(fnCallback))
-				{
-					fnCallback.call($(this), oSettings, aaData, config);
-				}
-
+				$.pgsi.progressBar.stop();
 			};
 
 			var _fnInfoCallback  = function( oSettings, iStart, iEnd, iMax, iTotal, sPre, fnCallback, config )
 			{
-				var $tableFooter 	= $("." + _oConfig.common.sTableFooter, oSettings.nTableWrapper);
-				var	$next 			= $("." + _oConfig.common.sNext, $tableFooter);
-				var	$previous 		= $("." + _oConfig.common.sPrev, $tableFooter);
-				var tableLength 	= $(config.id).siblings().find("select option:selected").val();
+				var $tableFooter 	= $("." + _oConfig.common.sTableFooter);
+				var	tableLength 	= oSettings._iDisplayLength ? oSettings._iDisplayLength : pgsi.settings.user.pageSize;
 				var	totalPagination = Math.ceil(iTotal / tableLength);
 				var	current 		= Math.ceil(iEnd / tableLength);
-
-				//Set corner border to next and previous buttons
-				$next.addClass("ui-corner-all");
-				$previous.addClass("ui-corner-all");
-
-				//Check if current paginations is 1 to hide previous buttons
-				if (iStart === 1)
-				{
-					$previous.hide();
-				}
-				else
-				{
-					$previous.show();
-				}
-
-				//Check if is the last pagination is the current item to hide next buttons
-				if (current === totalPagination)
-				{
-					$next.hide();
-				} else {
-					$next.show();
-				}
 
 				//Set current pagination
 				_iCurrentPagination = current;
@@ -214,7 +223,7 @@ $(document).ready(function()
 
 				var sMatches 	= config.sMatches 	? config.sMatches 	: $.pgsi.locale.get(_oConfig.messages.resultMatches);
 				var sMatch 		= config.sMatch 	? config.sMatch 	: $.pgsi.locale.get(_oConfig.messages.resultMatch);
-				var $Matches 	= $("#"+ (config.sTotalLabel ? config.sTotalLabel : _oConfig.common.totalRecordsLabel));
+				var $Matches 	= $("#"+ _oConfig.common.totalRecordsLabel);
 				var $Total 		= $("#"+ (config.sTotalResults ? config.sTotalResults : _oConfig.common.totalRecordsId));
 
 				if (!$.isNumeric(iTotal))
@@ -298,16 +307,14 @@ $(document).ready(function()
 
 			var _fnFullNumberPagination = function(iCurrent, iTotalPagination, $paginationLast, $paginationFirst)
 			{
-				var iPaginatePosition 		= parseInt($(".current").text());
+				var iPaginatePosition 		= parseInt($(".paginate_active").text());
 				var oMiddlePaginateButton	= $("<a class='paginate_button'>...</a>");
-
 				var fnSetEndPaging			= function()
 				{
 					$paginationLast.text(iTotalPagination);
 					$paginationLast.prev().text(iTotalPagination - 1);
 					$("<a class='paginate_button'>...</a>").insertBefore($paginationLast.prev());
 				};
-
 				var fnSetStartPaging		= function()
 				{
 					$paginationFirst.text("1");
@@ -759,6 +766,7 @@ $(document).ready(function()
 				var	$previous 			= $("." + _oConfig.common.sPrev, $tableFooter);
 				var	iCurrent 			= _iCurrentPagination;
 				var	iTotalPagination 	= _iTotalPagination;
+				//var iTotalPagination 	= oSettings._iDisplayLength;
 				var	$paginationContainer= $previous.next();
 				var	$paginationLast 	= $("a:last", $paginationContainer);
 				var	$paginationFirst 	= $("a:first", $paginationContainer);
@@ -827,7 +835,7 @@ $(document).ready(function()
 					fnCallback.call($(this), oSettings);
 				}
 
-				if (!$.pgsi.isNullOrUndefined(config.oSettings) && config.oSettings.bFooterVisible === false)
+				if (config.oSettings.bFooterVisible === false)
 				{
 					$table.parent().find("."+ _oConfig.common.sTableFooter).remove();
 					$table.parent().find("." + _oConfig.common.tableFooterStamp).remove();
@@ -836,96 +844,70 @@ $(document).ready(function()
 
 			var _fnAjaxCallback = function(config, fnCallback, oResponse)
 			{
-			//	if ($.pgsi.isValidPreLoad(config.aaData, true))
-			//	{
-//					// Refresh date
-//					var oRefreshUtc = $.pgsi.date.createTimeZoneJS();
-//
-//					//Add Last Refresh
-//					if (oRefreshUtc != undefined)
-//					{
-//						var sDate = $.pgsi.date.format( oRefreshUtc, pgsi.settings.user.dateFormat + ' h:i:s A', true);
-//						$(config.id).siblings("." + _oConfig.common.tableFooterStamp).text($.pgsi.locale.get('table.refreshed', sDate)).wrapInner("<em/>");
-//					}
-//
-//					if (config.aaData.resultsSetInfo)
-//					{
-//						config.iTotalDisplayRecords = config.aaData.resultsSetInfo.totalRowsAvailable;
-//					}
-//					else
-//					{
-//						config.iTotalDisplayRecords = 2;
-//					}
-//
-//					// Valid Response Object
-//					var oValidResponse = $.pgsi.isValidResponse(config.aaData);
-//
-//					// Validate oResponse
-//					if (!oValidResponse.bIsValid)
-//					{
-//						// Show Error Message
-//						$.pgsi.message.show({message: oValidResponse.sErrorMessage});
-//
-//					}
-//					else
-//					{
-//						// TODO - review impl
-//						if ( !$.pgsi.isNullOrUndefined(config.ajax.responseInterceptor)
-//								&& $.isFunction(config.ajax.responseInterceptor) )
-//						{
-//							config.aaData = config.ajax.responseInterceptor(config.aaData);
-//						}
-//					}
-//
-//					// If there is response. it was made an ajax call. So its not necessary to set the response list
-//					if (!oResponse)
-//					{
-//						config.aaData = config.aaData[config.ajax.sObj];
-//					}
-//
-//					fnCallback(config);
-//
-//					config.bPreLoad = false;
-//				}
+
+				if ($.pgsi.isValidPreLoad(config.aaData, true))
+				{
+					if (config.aaData.resultsSetInfo)
+					{
+						config.iTotalDisplayRecords = config.aaData.resultsSetInfo.totalRowsAvailable;
+					}
+					else
+					{
+						config.iTotalDisplayRecords = 2;
+					}
+
+					// Valid Response Object
+					var oValidResponse = $.pgsi.isValidResponse(config.aaData);
+
+					// Validate oResponse
+					if (!oValidResponse.bIsValid)
+					{
+						// Show Error Message
+						$.pgsi.message.show({message: oValidResponse.sErrorMessage});
+					}
+
+					// If there is response. it was made an ajax call. So its not necessary to set the response list
+					if (!oResponse)
+					{
+						config.aaData = config.aaData[config.ajax.sObj];
+					}
+
+					fnCallback(config);
+
+					config.bPreLoad = false;
+				}
 			};
 
 			var _fnAjax = function(config, aoData, fnTableCallBack)
 			{
 				var oRequest 	= new config.ajax.oRequest(config.ajax.fnRequest());
-				var iStartRow   = ($.grep(aoData, function(e) { return e.name == 'iDisplayStart'	; }))[0].value;
-				iStartRow		= isNaN(iStartRow) ? config.iDisplayStart : iStartRow;
 				var iPageSize   = ($.grep(aoData, function(e) { return e.name == 'iDisplayLength'	; }))[0].value;
-				iPageSize		= isNaN(iPageSize) ? config.iDisplayLength : iPageSize;
-
-
-				if ( $.pgsi.isNullOrUndefined(oRequest.sortExpressions) )
-				{
-					oRequest.sortExpressions = pgsi.util.page.getSortExpression($(config.id).dataTable(), config);
-				}
-
+				iPageSize = isNaN(iPageSize) ? config.iDisplayLength : iPageSize;
+				var iStartRow   = ($.grep(aoData, function(e) { return e.name == 'iDisplayStart'	; }))[0].value;
+				iStartRow = ((isNaN(iStartRow) ? config.iDisplayStart : iStartRow)/iPageSize);
+				var sSortDir 	= ($.grep(aoData, function(e) { return e.name == 'sSortDir_0'		; }))[0].value || config.oSettings.sDefaultSort || "asc";
+				var sSortCol 	= ($.grep(aoData, function(e) { return e.name == 'iSortingCols'		; }))[0].value || config.oSettings.iDefaultCol  || 1;
+				oRequest.sortExpressions = pgsi.util.page.getSortExpression($(config.id), [[(sSortCol), (sSortDir)]], config);
+				oRequest.preQueryCount = true;
 				// Whether startRow is undefined
 				// Don't check if startRow is null, there are cases when startRow has to be null
 				if (oRequest.startRow === undefined)
 				{
-					oRequest.startRow = iStartRow;
+					oRequest.startPage = iStartRow;
 				}
 
-				if (config.bParamsOnUrl != false)
+				// Whether pageSize is undefined
+				// Don't check if pageSize is null, there are cases when pageSize has to be null
+				if (oRequest.pageSize === undefined)
 				{
-					// Whether pageSize is undefined
-					// Don't check if pageSize is null, there are cases when pageSize has to be null
-					oRequest.pageSize = $.address.parameter("length") ? $.address.parameter("length") : iPageSize;
-				}
-				else
-				{
-					oRequest.pageSize = iPageSize ? iPageSize : undefined;
+					oRequest.pageSize = iPageSize;
 				}
 
 				// Whether endRow is undefined
 				// Don't check if endRow is null, there are cases when endRow has to be null
 				if (oRequest.endRow === undefined)
 				{
-					oRequest.endRow	= 0;
+				//	oRequest.endRow	= 0;
 				}
 
 				var fnCallback = function(json)
@@ -935,21 +917,13 @@ $(document).ready(function()
 					_fnAjaxCallback(config, fnTableCallBack, json);
 				};
 
-				var bHideProgressBar = config.bHideProgressBar;
-				if (config.bAutoRefreshReload === true)
-				{
-					bHideProgressBar = true;
-					config.bAutoRefreshReload = false;
-				}
 
 				$.pgsi.ajax.post({
 					sUrl 		: config.sAjaxSource,
 					oRequest 	: oRequest,
 					bAsync	 	: _oConfig.ajax.bAsync,
-					fnCallback 	: fnCallback,
-					bHideProgressBar : bHideProgressBar
+					fnCallback 	: fnCallback
 				});
-
 			};
 
 			var _fnGetCheckboxElem = function (data, type, full, config)
@@ -1058,13 +1032,7 @@ $(document).ready(function()
 					return iValue;
 				};
 
-				this.setTotalResult = function()
-				{
-					if (_table.data() && _table.data().config && _table.data().config.sCheckedCountId)
-					{
-						_$count.find(_table.data().config.sCheckedCountId).text($().numberFormat(this.getTotalSelected()));
-					}
-				};
+
 
 				this.setAllRows = function(iAllRows)
 				{
@@ -1080,6 +1048,10 @@ $(document).ready(function()
 					{
 					    _aSelected.push(id);
 					}
+				};
+				this.setTotalResult = function()
+				{
+					_$count.find(_table.data().config.sCheckedCountId).text($().numberFormat(this.getTotalSelected()));
 				};
 
 				this.removeSelected = function (id)
@@ -1200,7 +1172,7 @@ $(document).ready(function()
 					_aSelected   	= [];
 					_aUnselected 	= [];
 					_isAllRows 		= false;
-					this.setTotalResult();
+					//this.setTotalResult();
 				};
 			};
 
@@ -1218,6 +1190,8 @@ $(document).ready(function()
 				// Select Single Checkbox
 				$table.on("change", "tbody .checkObj", function(e)
 				{
+
+
 					if (config.fnCheckboxClickInterceptor)
 					{
 						config.fnCheckboxClickInterceptor($(this), oVal);
@@ -1230,10 +1204,12 @@ $(document).ready(function()
 					{
 						Checkbox.unselected(oVal);
 						$checkPage.prop('checked', false);
+						$(this).closest("tr").removeClass('selected');
 					}
 					else
 					{
 						Checkbox.selected(oVal);
+						$(this).closest("tr").addClass('selected');
 						$count.removeClass("ui-state-error");
 
 						if ($tbody.find(":checked").length >= ($tbody.find('input:checkbox').length))
@@ -1241,20 +1217,12 @@ $(document).ready(function()
 							$count.addClass("ui-state-highlight");
 							$checkPage.prop('checked', true);
 						}
+
 					}
 
 					$(this).toggleClass('row_selected');
 
-					Checkbox.setTotalResult();
-
-					if ($tbody.find(":checked").length === 0)
-					{
-						$count.removeClass("ui-state-highlight");
-					}
-					else
-					{
-						$count.removeClass("ui-state-error").addClass("ui-state-highlight");
-					}
+					//Checkbox.setTotalResult();
 				});
 
 				if ($checkPage.length)
@@ -1283,14 +1251,7 @@ $(document).ready(function()
 
 						Checkbox.setTotalResult();
 
-						if ($table.find("tbody :checked").length === 0)
-						{
-							$count.removeClass("ui-state-highlight");
-						}
-						else
-						{
-							$count.removeClass("ui-state-error").addClass("ui-state-highlight");
-						}
+						$count.removeClass("ui-state-error").addClass("ui-state-highlight");
 					});
 				}
 
@@ -1310,15 +1271,7 @@ $(document).ready(function()
 								$(sCheckboxControlId + " input:checkbox").prop("disabled", false);
 
 								Checkbox.clearSelected();
-
-								if (_oDefaultConfig.bFixedHeader)
-								{
-									$table.parent().find(".dataTable input:checkbox").prop("checked", true);
-								}
-								else
-								{
-									$table.find("input:checkbox").prop("checked", true);
-								}
+								$table.find('input:checkbox').prop('checked', true);
 
 								//Enable allRows selection for server command to be sent
 								Checkbox.allRows(true);
@@ -1336,20 +1289,10 @@ $(document).ready(function()
 								Checkbox.clearSelected();
 
 								// Check All page checkbox
-								if (_oDefaultConfig.bFixedHeader)
+								$table.find('tbody input:checkbox').each(function (i, e)
 								{
-									$table.parent().find(".dataTable input:checkbox").each(function (i, e)
-									{
-										$(e).prop("checked", true);
-									});
-								}
-								else
-								{
-									$table.find("tbody input:checkbox").each(function (i, e)
-									{
-										$(e).prop("checked", true);
-									});
-								}
+									$(e).prop("checked", true);
+								});
 
 								Checkbox.restart();
 								$count.removeClass("ui-state-error").addClass("ui-state-highlight");
@@ -1360,15 +1303,7 @@ $(document).ready(function()
 								$(sCheckboxControlId + " input:checkbox").prop("checked", false);
 								$(sCheckboxControlId + " input:checkbox").prop("disabled", false);
 
-								if (_oDefaultConfig.bFixedHeader)
-								{
-									$table.parent().find(".dataTable input:checkbox").prop("checked", false);
-								}
-								else
-								{
-									$table.find("input:checkbox").prop("checked", false);
-								}
-
+								$table.find('input:checkbox').prop('checked', false);
 								$count.removeClass("ui-state-highlight");
 								Checkbox.clearSelected();
 							}
@@ -1382,64 +1317,27 @@ $(document).ready(function()
 					$(config.checkBoxControllType[0]).on("click", function (e)
 					{
 						e.preventDefault();
-
-						if (_oDefaultConfig.bFixedHeader)
-						{
-							$table.parent().find(".dataTable input:checkbox").prop("checked", false);
-						}
-						else
-						{
-							$table.find("input:checkbox").prop("checked", false);
-						}
-
+						$table.find('input:checkbox').prop('checked', false);
 						Checkbox.clearSelected();
 
 						// Check All page checkbox
-						if (_oDefaultConfig.bFixedHeader)
+						$table.find('tbody input:checkbox').each(function (i, e)
 						{
-							$table.parent().find(".dataTable input:checkbox").each(function (i, e)
-							{
-								$(e).prop("checked", true);
-								$(e).trigger("change");
-							});
-						}
-						else
-						{
-							$table.find("tbody input:checkbox").each(function (i, e)
-							{
-								$(e).prop("checked", true);
-								$(e).trigger("change");
-							});
-						}
+							$(e).prop("checked", true);
+							$(e).trigger("change");
+						});
 
 						Checkbox.setTotalResult();
+						$count.removeClass("ui-state-error").addClass("ui-state-highlight");
 
-						if ($table.find("tbody :checked").length !== 0)
-						{
-							$count.removeClass("ui-state-error").addClass("ui-state-highlight");
-						}
 					});
 
 					// Clear Select
 					$(config.checkBoxControllType[1]).on("click", function (e)
 					{
 						e.preventDefault();
-
-						if (_oDefaultConfig.bFixedHeader)
-						{
-							$table.parent().find(".dataTable input:checkbox").prop("checked", false);
-						}
-						else
-						{
-							$table.find("input:checkbox").prop("checked", false);
-						}
-
+						$table.find('input:checkbox').prop('checked', false);
 						Checkbox.clearSelected();
-
-						if ($table.find("tbody :checked").length === 0)
-						{
-							$count.removeClass("ui-state-highlight");
-						}
 					});
 
 
@@ -1450,24 +1348,14 @@ $(document).ready(function()
 
 						Checkbox.clearSelected();
 
-						if (_oDefaultConfig.bFixedHeader)
-						{
-							$table.parent().find(".dataTable input:checkbox").prop("checked", true);
-						}
-						else
-						{
-							$table.find("input:checkbox").prop("checked", true);
-						}
+						$table.find('input:checkbox').prop('checked', true);
 
 						//Enable allRows selection for server command to be sent
 						Checkbox.allRows(true);
 
 						Checkbox.setTotalResult();
 
-						if ($table.find("tbody :checked").length !== 0)
-						{
-							$actions.find(_oConfig.common.checkboxMessage).removeClass("ui-state-error").addClass("ui-state-highlight");
-						}
+						$actions.find(_oConfig.common.checkboxMessage).removeClass("ui-state-error").addClass("ui-state-highlight");
 					});
 				}
 
@@ -1492,25 +1380,7 @@ $(document).ready(function()
 
 			var addEffectSort = function(oTh, config, iVisibleCol)
 			{
-				var	oSortOptions = $("<div class='ui-dialog sort-options' style='display: none'>"
-										+ "<ul>"
-											+ "<li>"
-												+ "<a href='' class='asc'>"
-													+ "<span class='icon-small icn-sort-asc'> </span> " + $.pgsi.locale.get("table.SortAscending")
-										 		+ "</a>"
-											+ "</li>"
-											+ "<li>"
-												+ "<a href='' class='desc'>"
-													+ "<span class='icon-small icn-sort-desc'></span> " + $.pgsi.locale.get("table.SortDescending")
-												+ "</a>"
-											+ "</li>"
-											+ "<li>"
-												+ "<a href='' class='custom-column-action'>"
-													+ "<span class='icon-small icn-col-select'></span> " + $.pgsi.locale.get("table.Columns")
-												+ "</a>"
-											+ "</li>"
-										+ "</ul>"
-									+"</div>");
+				var	oSortOptions = $('<div class="ui-dialog sort-options" style="display: none"><ul><li><a href="" class="asc"><span class="icon-small icn-sort-asc"></span> '+$.pgsi.locale.get('table.SortAscending')+'</a></li><li><a href="" class="desc"><span class="icon-small icn-sort-desc"></span> '+$.pgsi.locale.get('table.SortDescending')+'</a></li><li><a href="" class="custom-column-action"><span class="icon-small icn-col-select"></span> '+$.pgsi.locale.get('table.Columns')+'</a></li></ul></div>');
 
 				oTh.hover(function ()
 				{
@@ -1525,13 +1395,12 @@ $(document).ready(function()
 					oTh.removeClass("sorting_disabled").append(oSortOptions);
 				}
 
-				var oTable	= $(config.id);
-
 				$(oSortOptions).find('.asc').click(function(e)
 				{
 					e.preventDefault();
 
-					var oTh = oTable.find("th:eq("+ iVisibleCol +")");
+					var oTable = $(this).closest("table");
+					var oTh 	= oTable.find("th:not('.checkbox'):eq("+ iVisibleCol +")");
 					_fnSort({
 						iVisibleCol : iVisibleCol,
 						th 			: oTh,
@@ -1544,7 +1413,8 @@ $(document).ready(function()
 				{
 					e.preventDefault();
 
-					var oTh = oTable.find("th:eq("+ iVisibleCol +")");
+					var oTable 	= $(this).closest("table");
+					var oTh 	= oTable.find("th:not('.checkbox'):eq("+ iVisibleCol +")");
 					_fnSort({
 						iVisibleCol : iVisibleCol,
 						th 			: oTh,
@@ -1556,89 +1426,13 @@ $(document).ready(function()
 				$(oSortOptions).find('.custom-column-action').click(function(e)
 				{
 					e.preventDefault();
-					$("#customize-filter").wCustomize("Columns",function() {}, config.aColumnsIds, "smartpointlist");
 
-					// TODO - future commons customize
-					/*$.pgsi.customization.open({
+					$.pgsi.customization.open({
 						sType 		: "columns"
-					});*/
+					});
 				});
 
 				return oTh;
-			};
-
-			// PageLengthChangeEvent
-			var _fnPageLengthChangeEvent = function(sPageSize, oSettings, config)
-			{
-				// Reset display start for every pageSize change
-				oSettings._iDisplayStart = 0;
-
-				if (config.bParamsOnUrl)
-				{
-					$.pgsi.pageLoader.setParameter("iDisplayStart", 0);
-					$.pgsi.pageLoader.setParameter("length", sPageSize);
-				}
-
-				if (!pgsi.settings || !pgsi.settings.user || !pgsi.settings.user[_oConfig.project.pageSizeDialogProperty])
-				{
-					return;
-				}
-
-				var oPageSizeDialog =
-				{
-					// Whether this dialog requires a light list.
-					requiresSmartpoints : true,
-					width               : 540,
-					title               : $.pgsi.locale.get(_oConfig.messages.pageSizeDialogTitle),
-					isMonitored			: true,
-					buttons 			:
-					[
-						{
-							id 		: _oConfig.common.pageSizeSubmitButtonId,
-							text 	: $.pgsi.locale.get(_oConfig.messages.pageSizeSubmitButton),
-							click 	: function()
-							{
-								var bPageSizeShowDialog = !$("#"+ _oConfig.common.pageSizeCheckBox).is(":checked");
-								var oProperty 			= {};
-
-								oProperty[_oConfig.project.pageSizeProperty] 			= sPageSize;
-								oProperty[_oConfig.project.pageSizeShowDialogProperty] 	= bPageSizeShowDialog;
-
-								$.pgsi.savePropertyProfile(oProperty);
-							}
-						},
-
-						{
-							id : _oConfig.common.pageSizeKeepButtonId,
-							text : $.pgsi.locale.get(_oConfig.messages.pageSizeCancelButton),
-							click : function()
-							{
-								$.pgsi.closeActionDialog("#"+ _oConfig.common.sActionId);
-								$.pgsi.progressBar.stop();
-							}
-						},
-					],
-					action : function(actionDialog)
-					{
-						var oActionDialog = actionDialog;
-
-						oActionDialog.empty().load(_oConfig.project.pageSizeUrl, function()
-						{
-							var $dialogValuePageSize = $(_oConfig.common.sPageSizeValueId);
-
-							oActionDialog.removeClass("waiting");
-
-							$dialogValuePageSize.text(sPageSize);
-						});
-
-						actionDialog.dialog( "open" );
-						actionDialog.dialog( "option", "position", "center" );
-
-						$.pgsi.progressBar.stop();
-					}
-				};
-
-				$.pgsi.launchActionDialog(null, oPageSizeDialog);
 			};
 
 			/**********
@@ -1654,14 +1448,11 @@ $(document).ready(function()
 			{
 				if (oParam.table)
 				{
-					if (oParam.bHideProgressBar !== true)
-					{
-						$.pgsi.progressBar.start();
-					}
+					$.pgsi.progressBar.start();
 
 					var iDisplayStart = oParam.iStart;
 
-					if ( $.pgsi.isNullOrUndefined(iDisplayStart) )
+					if ($.pgsi.isNullOrUndefined(iDisplayStart))
 					{
 						if (oParam.iSelected)
 						{
@@ -1669,7 +1460,7 @@ $(document).ready(function()
 							var iCurrent 			= oParam.table.fnSettings()._iCurrentPage;
 							var iNewTotalDisplay 	= oParam.table.fnSettings()._iRecordsDisplay - oParam.iSelected;
 
-							if ( iNewTotalDisplay <= ((iCurrent - 1) * ilength) )
+							if (iNewTotalDisplay <= ((iCurrent - 1) * ilength))
 							{
 								iDisplayStart 	= 	(iCurrent - 2) * ilength;
 							}
@@ -1686,30 +1477,23 @@ $(document).ready(function()
 
 					var checkbox = oParam.table.data("checkbox");
 
-					if ( ($.pgsi.isNullOrUndefined(oParam.bCleanSelect) || oParam.bCleanSelect == true) && !$.pgsi.isNullOrUndefined(checkbox) )
+					if (($.pgsi.isNullOrUndefined(oParam.bCleanSelect) || oParam.bCleanSelect == true) && !$.pgsi.isNullOrUndefined(checkbox))
 					{
 						oParam.table.data("checkbox").clearSelected();
 						oParam.table.find('input:checkbox').prop('checked', false);
-
-						//Fix for fixedHeader issue
-						if ( !$.pgsi.isNullOrUndefined(oParam.table.data("fixedHeader")) )
-						{
-							$(".FixedHeader_Header").find('input:checkbox').prop('checked', false);
-						}
-
 						$("#" + _oConfig.common.selectButtonId + " input").prop('checked', false).prop('disabled', false);
 					}
 
 					$(".status-viewport-loading").removeClass("hide");
 
-					oParam.table.fnSettings()._iDisplayStart = (iDisplayStart >= 0) ? iDisplayStart : 0;
+					oParam.table.fnSettings()._iDisplayLength = parseInt($( "#data_list_length select" ).val(), 10);
+					oParam.table.fnSettings()._iDisplayStart = parseInt((iDisplayStart >= 0) ? iDisplayStart : 0);
 
-					$.pgsi.pageLoader.setParameter("iDisplayStart", oParam.table.fnSettings()._iDisplayStart);
-					$.pgsi.pageLoader.setParameter("length", oParam.table.fnSettings()._iDisplayLength);
+					$.pgsi.pageLoader.setParameter("iDisplayStart", parseInt(oParam.table.fnSettings()._iDisplayStart));
 
-					$(_oConfig.common.sLengthContainer).find('select option[value='+ oParam.table.fnSettings()._iDisplayLength +']').prop("selected", true);
+					$(_oConfig.common.sLengthContainer).find('select option[value='+ parseInt(oParam.table.fnSettings()._iDisplayLength) +']').prop("selected", true);
 
-					oParam.table.api().draw(false);
+					oParam.table.fnStandingRedraw();
 				}
 			};
 
@@ -1729,13 +1513,14 @@ $(document).ready(function()
 			var _createTableHeaders = function(options)
 			{
 				var aSupHeaders 	= [];
-				var aCollumns 		= options.aoColumns || options.aoColumnDefs;
+				var aCollumns 		= options.aoColumns;
 				var oTable 			= $(options.id);
 				var $thead 			= $("<thead/>");
 				var $tr 			= $("<tr/>");
 				var $tbody 			= $("<tbody/>");
+				var iColumnsLength 	= options.aoColumns.length;
 				var aRowSpan = ($.grep(aCollumns, function(e) {
-					if(e) { return e.supHeader; }
+					return e.supHeader;
 				}));
 				var iRowSpan = aRowSpan.length ? 2 : 1;
 
@@ -1768,9 +1553,9 @@ $(document).ready(function()
 					{
 						$th = oColumn.headerData(oColumn.order, oColumn.headerData);
 					}
-					else if (oColumn.bSortable !== false && options.bSort !== false)
+					else if (oColumn.bSortable)
 					{
-						$th = $('<th class="sorting"><span id="' + oColumn.order + '"><a class="'+ oColumn.order +'">' + oColumn.headerData + '</a></span></th>');
+						$th = $('<th class="sorting">' + oColumn.headerData + '<span class="icon-sort" id="' + oColumn.order + '"><a class="'+ oColumn.order +'"></a></span></th>');
 					}
 					else
 					{
@@ -1785,9 +1570,7 @@ $(document).ready(function()
 					}
 
 					//	Set as default Sorting
-					if ( !$.pgsi.isNullOrUndefined(options.oSettings)
-							&& i == options.oSettings.iDefaultCol
-							&& oColumn.bEffectSortable )
+					if (i == options.oSettings.iDefaultCol && oColumn.bEffectSortable)
 					{
 						$th.addClass("sorting_" + (options.oSettings.sDefaultSort || "asc"));
 					}
@@ -1811,7 +1594,11 @@ $(document).ready(function()
 					return $th;
 				};
 
-				var iColumn = 0;
+				//	Create Superior Headers
+				for (var iColumn = 0; iColumn < iColumnsLength; iColumn ++)
+				{
+					$tr.append(fnCreateTh(aCollumns[iColumn], iColumn));
+				}
 
 				// Set Checkbox
 				if (options.sCheckbox || options.sDialogCheckbox)
@@ -1823,17 +1610,9 @@ $(document).ready(function()
 					}
 
 					// Add Column Set Up
-					aCollumns.splice(0, 0, {mData : options.sCheckbox, sClass : "checkbox", mRender : function (data, type, full) {return options.oCheckBoxMethods.fnGetCheckboxElem(data, type, full, options);}, sDefaultContent : "", bSortable : false});
-					iColumn ++;
-
+					options.aoColumns.splice(0, 0, {mData : options.sCheckbox, sClass : "checkbox", mRender : function (data, type, full) {return options.oCheckBoxMethods.fnGetCheckboxElem(data, type, full, options);}, sDefaultContent : "", bSortable : false});
 					// Add Header Column
 					$tr.prepend('<th rowspan="' + (options.sDialogCheckbox ? 2 : 1) + '" class="checkbox">'+ sInput +'</th>');
-				}
-
-				// Create Superior Headers
-				for (var iColumnsLength = aCollumns.length; iColumn < iColumnsLength; iColumn ++)
-				{
-					$tr.append(fnCreateTh(aCollumns[iColumn], iColumn));
 				}
 
 				$thead.append($tr);
@@ -1865,10 +1644,7 @@ $(document).ready(function()
 				// Add Features
 				_createTableHeaders(config);
 
-				if (config.bParamsOnUrl)
-				{
-					var iDisplayStart  = $.address.parameter("iDisplayStart");
-				}
+				var iDisplayStart  = $.address.parameter("iDisplayStart");
 
 				if (!config.sPaginationType)
 				{
@@ -1886,11 +1662,6 @@ $(document).ready(function()
 					return _fnInfoCallback.call($(this), oSettings, iStart, iEnd, iMax, iTotal, sPre, config.infoCallback, config);
 				};
 
-				config.fnInitComplete = function(oSettings, aaData)
-				{
-					_fnInitComplete.call($(this), oSettings, aaData, config, config.initComplete);
-				};
-
 				config.fnRowCallback = function (nRow, aData, iDisplayIndex)
 				{
 					_fnRowCallback.call($(this), nRow, aData, iDisplayIndex, config.rowCallback, config);
@@ -1901,25 +1672,20 @@ $(document).ready(function()
 					_fnDrawCallback.call($(this), oSettings, config.drawCallback, config);
 				};
 
-
-
 				//Set Length
-				if ( !$.pgsi.isNullOrUndefined(config.oSettings) && !$.pgsi.isNullOrUndefined(config.oSettings.aLengthMenu) )
+				if (config.oSettings.aLengthMenu)
 				{
 					config.aLengthMenu = config.oSettings.aLengthMenu;
 				}
 
-				// Set Displat Length
-				if (!config.bIsDialog)
+				// Set Display Length
+				if (pgsi.settings.user.pageSize != undefined)
 				{
-					if (pgsi.settings.user.pageSize != undefined)
-					{
-						config.iDisplayLength = $.address.parameter("length") ? parseInt($.address.parameter("length"), 10) : parseInt(pgsi.settings.user.pageSize, 10);
-					}
-					else
-					{
-						config.iDisplayLength = 25;
-					}
+					config.iDisplayLength = parseInt(pgsi.settings.user.pageSize, 10);
+				}
+				else
+				{
+					config.iDisplayLength = 25;
 				}
 
 				// Set Display Start
@@ -1929,15 +1695,13 @@ $(document).ready(function()
 				}
 
 				// Set Initial Sort
-				if (!$.pgsi.isNullOrUndefined(config.oSettings) && config.oSettings.iDefaultCol != null)
+				if (config.oSettings.iDefaultCol != null)
 				{
 					config.aaSorting = [[ config.oSettings.iDefaultCol, (config.oSettings.sDefaultSort || "asc") ]];
 				}
 
 				//Set Default Pagination
 				jQuery.fn.dataTableExt.oPagination.iFullNumbersShowPages = 12;
-
-	//***************************************************************************
 
 				jQuery.fn.dataTableExt.oPagination[_oConfig.settings.aPaginationTypes[0]] =
 				{
@@ -1951,7 +1715,7 @@ $(document).ready(function()
 				        var sValue			= $element.text();
 
 			        	//	If button disabled do nothing
-				        if ($(this).is('[disabled]') || sValue === "..." || $(this).hasClass("current"))
+				        if ($(this).is('[disabled]') || sValue === "..." || $(this).hasClass("paginate_active"))
 				        {
 				            return false;
 				        }
@@ -1963,19 +1727,6 @@ $(document).ready(function()
 				        var sPaginationType = $(this).attr("class").replace(/(paginate_button|ui-corner-all)/g, "").trim();
 				        var iDisplayStart 	= $.address.parameter("iDisplayStart") ? parseInt($.address.parameter("iDisplayStart")) : 0;
 				        var currentPage;
-				        var $table			= $(oSettings.nTable);
-				        var config			= $table.data("config");
-
-						if ( sValue != 1 && !$.pgsi.isNullOrUndefined(config.$autoRefresh) )
-						{
-							_clearInterval(config, $table);
-
-							// Delete Storage
-							_fnStorageInterval(config, null, true);
-						} else if ( sValue == 1 && !$.pgsi.isNullOrUndefined(config.$autoRefresh) && _fnStorageInterval(config) == -1 )
-						{
-							_createInterval(config, $table.dataTable());
-						}
 
 				        if ($(this).hasClass(oClasses.sPagePrevious))
 				        {
@@ -1985,28 +1736,21 @@ $(document).ready(function()
 				        {
 				        	currentPage = iDisplayStart + oSettings._iDisplayLength;
 				        }
-				        else
+				        else if ($(this).hasClass(oClasses.sPageFirst))
 				        {
-				        	currentPage = sPage * oSettings._iDisplayLength;
+				        	currentPage = 0;
+				        }
+
+				        else if ($(this).hasClass(oClasses.sPageLast)) {
+				        	currentPage = oSettings._iDisplayLength * (oSettings._iLastPage - 1);
 				        }
 
 				        sPage = sPage ? sPage : 0;
+						$.address.parameter("iDisplayStart", currentPage);
 
-				        if ($.pgsi.isNullOrUndefined(config.bParamsOnUrl) || config.bParamsOnUrl == true)
-				        {
-				        	$.address.parameter("iDisplayStart", currentPage);
-						}
-
-				        //Fix for fixedHeader issue
-						if ( !$.pgsi.isNullOrUndefined($table.data("fixedHeader")) )
-						{
-							$(".FixedHeader_Header").find('input:checkbox').prop('checked', false);
-						}
-
-						//	Check if it's a number. If not get the name printed
+				 		//	Check if it's a number. If not get the name printed
 				 		sPage = $(this).hasClass("paginate_number") ? sPage : sPaginationType;
-
-				        oSettings.oApi._fnPageChange(oSettings, sPage);
+				 		oSettings.oApi._fnPageChange(oSettings, sPage);
 				        fnCallbackDraw(oSettings);
 
 				        return true;
@@ -2014,18 +1758,7 @@ $(document).ready(function()
 				    // fnInit is called once for each instance of pager
 				    'fnInit': function(oSettings, nPager, fnCallbackDraw)
 				    {
-				        var oClasses 		= $.extend
-				    	(
-				    			oSettings.oClasses,
-				    			{
-				    				"sPageButtonStaticDisabled"	: "paginate_button paginate_button_disabled",
-				    				"sPageFirst"				: "first",
-				    				"sPagePrevious"				: "previous",
-				    				"sPageNext"					: "next",
-				    				"sPageLast"					: "last"
-				    			}
-				    	);
-
+				        var oClasses 		= oSettings.oClasses;
 				        var oLang 			= oSettings.oLanguage.oPaginate;
 				        var that 			= this;
 				        var iShowPages 		= oSettings.oInit.iShowPages || this.oDefaults.iShowPages;
@@ -2042,8 +1775,8 @@ $(document).ready(function()
 				        });
 
 				        //	Add event click for numbers buttons
-				        oNumbers.off("click", "."+oClasses.sPageButton, { 'fnCallbackDraw': fnCallbackDraw, 'oSettings': oSettings }, that.fnClickHandler);
-				        oNumbers.on("click", "."+oClasses.sPageButton, { 'fnCallbackDraw': fnCallbackDraw, 'oSettings': oSettings }, that.fnClickHandler);
+				        oNumbers.off("click", "."+oClasses.sPageButton, { 'fnCallbackDraw': fnCallbackDraw, 'oSettings': oSettings, 'sPage': i - 1 }, that.fnClickHandler);
+				        oNumbers.on("click", "."+oClasses.sPageButton, { 'fnCallbackDraw': fnCallbackDraw, 'oSettings': oSettings, 'sPage': i - 1 }, that.fnClickHandler);
 
 				        //	Add event click for Others button such as "Prev, Next, First, Last"
 				        oFirst.click({ 'fnCallbackDraw': fnCallbackDraw, 'oSettings': oSettings, 'sPage': 'first' }, that.fnClickHandler);
@@ -2067,40 +1800,38 @@ $(document).ready(function()
 				        {
 				            $('.' + oClasses.sPageButton + '.' + oClasses.sPageFirst, tableWrapper).attr('disabled', true);
 				            $('.' + oClasses.sPagePrevious, tableWrapper).attr('disabled', true);
+
+				            $('.' + oClasses.sPageButton + '.' + oClasses.sPageFirst, tableWrapper).addClass('disabled');
+				            $('.' + oClasses.sPagePrevious, tableWrapper).addClass('disabled');
 				        }
 				        else
 				        {
 				            $('.' + oClasses.sPageFirst, tableWrapper).removeAttr('disabled');
 				            $('.' + oClasses.sPagePrevious, tableWrapper).removeAttr('disabled');
+
+				        	$('.' + oClasses.sPageFirst, tableWrapper).removeClass('disabled');
+				            $('.' + oClasses.sPagePrevious, tableWrapper).removeClass('disabled');
 				        }
 
 				        if (oSettings._iTotalPages === 0 || oSettings._iCurrentPage === oSettings._iTotalPages)
 				        {
 				            $('.' + oClasses.sPageNext, tableWrapper).attr('disabled', true);
 				            $('.' + oClasses.sPageLast, tableWrapper).attr('disabled', true);
+
+				             $('.' + oClasses.sPageNext, tableWrapper).addClass('disabled');
+				            $('.' + oClasses.sPageLast, tableWrapper).addClass('disabled');
 				        }
 				        else
 				        {
 				            $('.' + oClasses.sPageNext, tableWrapper).removeAttr('disabled');
 				            $('.' + oClasses.sPageLast, tableWrapper).removeAttr('disabled');
-				        }
 
-				        var i, oNumber, oNumbers = $('.paginate_number', tableWrapper);
-
-				        // Erase   HERE
-				        oNumbers.html('');
-
-				        //oSettings._iFirstPage
-				        for (i = oSettings._iFirstPage; i <= oSettings._iLastPage; i++)
-				        {
-				        	oNumber = $('<a class="' + oClasses.sPageButton + ' paginate_number' + '">' + oSettings.fnFormatNumber(i) + '</a>');
-
-				            // Draw
-				            oNumbers.append(oNumber);
+							$('.' + oClasses.sPageNext, tableWrapper).removeClass('disabled');
+				            $('.' + oClasses.sPageLast, tableWrapper).removeClass('disabled');
 				        }
 
 				        // Add class active for current page;
-				        var oPages = $(".paginate_button", tableWrapper);
+				        var oPages = $(".paginate_button");
 
 				        oPages.removeClass(oClasses.sPageButtonActive);
 				        oPages.filter(function (){
@@ -2193,7 +1924,6 @@ $(document).ready(function()
 				jQuery.fn.dataTableExt.oPagination[_oConfig.settings.aPaginationTypes[1]] = oPaginationCreator;
 				jQuery.fn.dataTableExt.oPagination[_oConfig.settings.aPaginationTypes[2]] = oPaginationCreator;
 				jQuery.fn.dataTableExt.oPagination[_oConfig.settings.aPaginationTypes[3]] = oPaginationCreator;
-	//****************************************************************************
 
 				// Clear refresh value from aaData
 				if (config.aaData == "refresh")
@@ -2220,10 +1950,8 @@ $(document).ready(function()
 					}
 				};
 
-				config = $.extend({}, _oDefaultConfig, config);
 				$(config.id).data("config", config);
-
-				return config;
+				return $.extend({}, _oDefaultConfig, config);
 			};
 
 			var _fnCheckBoxMethods = function(oTable)
@@ -2244,241 +1972,11 @@ $(document).ready(function()
 				oTable.dataTable(_setTable(oConfig));
 			};
 
-			// Manipulate auto refresh state on local storage
-			var _fnStorageInterval = function (config, value, bDelete)
-			{
-
-				var oPropertiesResponse = $.pgsi.storage.get(pgsi.pages.dm.sUserStorageKey);
-
-				if ($.pgsi.isNullOrUndefined(oPropertiesResponse["autoRefresh"]))
-				{
-					oPropertiesResponse["autoRefresh"] = {};
-				}
-
-				// Getter
-				if ($.pgsi.isNullOrUndefined(value) && !bDelete)
-				{
-					return oPropertiesResponse.autoRefresh[config.id + "-auto-refresh"];
-				}
-
-				// Set value as disabled on local storage
-				if ($.pgsi.isNullOrUndefined(value))
-				{
-					value = -1;
-				}
-
-
-				// Setter
-				oPropertiesResponse.autoRefresh[config.id + "-auto-refresh"] = value;
-				$.pgsi.storage.set(pgsi.pages.dm.sUserStorageKey, oPropertiesResponse);
-				return;
-
-			}
-
-			// Start Interval saving into Local Storage
-			var _startInterval = function(config, $table)
-			{
-				var fnInterval = function ()
-				{
-					config.bAutoRefreshReload = true;
-					_reloadTable({table : $table, iStart : 0, bHideProgressBar : true})
-				}
-				_fnStorageInterval(config, setInterval(fnInterval, pgsi.settings.time.autoRefreshTime));
-			};
-
-			var _restartInterval = function(config, $table)
-			{
-				// Check if there is already a auto refresh assigned to current page
-				if (_fnStorageInterval(config) != -1)
-				{
-					clearInterval(_fnStorageInterval(config));
-					_createInterval(config, $table);
-				}
-			};
-
-			// Create Interval
-			var _createInterval = function(config, $table)
-			{
-				_startInterval(config, $table);
-				config.$autoRefresh.find("#refresh-page .ui-icon").removeClass("ui-icon").addClass("loading");
-				config.$autoRefresh.find(".enable-auto-refresh").addClass("active").find("a").text($.pgsi.locale.get('table.autorefresh.enabled'));
-				config.$autoRefresh.find(".disable-auto-refresh").removeClass("active").find("a").text($.pgsi.locale.get('table.autorefresh.disable'));
-			};
-
-			// Clear interval
-			var _clearInterval = function(config, $table)
-			{
-				if (_fnStorageInterval(config) != -1)
-				{
-					clearInterval(_fnStorageInterval(config));
-				}
-				if (!$.pgsi.isNullOrUndefined($table))
-				{
-					config.$autoRefresh.find("#refresh-page .loading").removeClass("loading").addClass("ui-icon");
-					config.$autoRefresh.find(".enable-auto-refresh").removeClass("active").find("a").text($.pgsi.locale.get('table.autorefresh.enable'));
-					config.$autoRefresh.find(".disable-auto-refresh").addClass("active").find("a").text($.pgsi.locale.get('table.autorefresh.disabled'));
-				}
-			}
-
-			var _buildAutoRefreshElem = function (config, $table)
-			{
-				var oButton = $('<div id="refresh-page" class="left"><span class="ui-icon"></span></div>');
-				var oSelect = $('<div class="select-refresh left"></div>');
-				var oBox = $("<ul class='hide'><li class='enable-auto-refresh'><a href='#' class='auto-refresh-event'>" + $.pgsi.locale.get('table.autorefresh.enable') + "</a></li><li class='disable-auto-refresh'><a href='#' class='auto-refresh-event'>" + $.pgsi.locale.get('table.autorefresh.disable') + "</a></li></ul>")
-
-				oButton.click(function (e) {
-					e.preventDefault();
-					_reloadTable({table : $table, iStart : 0});
-				});
-
-				oSelect.click(function (e) {
-					if ( oBox.is(":hidden") )
-					{
-						oBox.slideDown( 300 );
-						return;
-					}
-
-					oBox.hide();
-				});
-
-				oBox.find(".auto-refresh-event").click(function(e) {
-
-					e.preventDefault();
-
-					if ($(this).parent().hasClass("active"))
-					{
-						return;
-					}
-
-					// Check if there is already a auto refresh assigned to current page
-					if (_fnStorageInterval(config) != -1)
-					{
-						_clearInterval(config, $table);
-
-						// Delete Storage
-						_fnStorageInterval(config, null, true);
-
-						return;
-					}
-
-					// Disable AutoRefresh
-					_createInterval(config, $table);
-
-				});
-
-				config.$autoRefresh.empty();
-				oSelect.append(oBox);
-				config.$autoRefresh.append(oButton);
-				config.$autoRefresh.append(oSelect);
-
-				// Hide select when click outside
-				$(document).mouseup(function (e)
-				{
-				    var container = oSelect;
-
-				    if (!container.is(e.target) // if the target of the click isn't the container...
-				        && container.has(e.target).length === 0) // ... nor a descendant of the container
-				    {
-				    	oBox.hide();
-				    }
-				});
-
-				$table.on("remove", function(e) {
-					config.$autoRefresh.empty();
-				});
-			}
-
-			// Add Auto refresh feature
-			var _setAutoRefresh = function(config, $table)
-			{
-
-				// Build Autro Refresh Elements
-				_buildAutoRefreshElem(config, $table);
-
-				/*
-				 * TEMP - This code clean local Storage because state is no longer kept.
-				 * In case state store is required again just activate this condidition.
-				 */
-				// Check if there is already a auto refresh assigned to current page
-//				if (_fnStorageInterval(config) == -1)
-//				{
-//					_clearInterval(config, $table);
-//				} else
-//				{
-//					_createInterval(config, $table);
-//				}
-
-				_createInterval(config, $table);
-
-			};
-
-			var _destroyFixedHeader = function(oThis)
-			{
-				// FIXME - Code throws exception on IE 11
-				try
-				{
-					var fixedHeaderData = oThis.data("fixedHeader");
-					if (!$.pgsi.isNullOrUndefined(fixedHeaderData))
-					{
-						var aoCache = fixedHeaderData.fnGetSettings().aoCache;
-
-						if($.pgsi.isValidArray(aoCache))
-						{
-							for (var i = 0, l = aoCache.length; i < l; i++)
-							{
-								aoCache[i].nWrapper.remove();
-							}
-						}
-						// Unbind events
-						$(window).off(".FixedHeader"); // event namespace, custom fixedHeader
-					}
-				} catch (e)
-				{
-
-				}
-			}
-
-			var _init = function (config)
-			{
-
-				if( $.pgsi.isNullOrUndefined(config) || $.pgsi.isNullOrUndefined(config.id) )
-				{
-					return false
-				}
-
-				config = _setTable(config);
-
-				var $table = $(config.id).dataTable(config).
-				on( 'length.dt', function ( e, settings, len )
-				{
-					_fnPageLengthChangeEvent(len, settings, config);
-				});
-
-				// Auto Refresh
-				if( !$.pgsi.isNullOrUndefined(config.$autoRefresh) )
-				{
-					_setAutoRefresh(config, $table);
-					$table.on("remove", function()
-					{
-						// Stop Interval when leaving page
-						_clearInterval(config);
-					});
-
-				}
-
-				return $table;
-			};
-
 			return ({
-				init					: _init,
-				setTable 				: _setTable,
-				reloadTable 			: _reloadTable,
-				checkbox				: _fnCheckBoxMethods,
-				rebuild 	 			: _rebuild,
-				clearInterval 			: _clearInterval,
-				restartInterval 		: _restartInterval,
-				showViewPortFixedHeader : _fnShowViewPortFixedHeader,
-				destroyFixedHeader		: _destroyFixedHeader
+				setTable 	: _setTable,
+				reloadTable : _reloadTable,
+				checkbox 	: _fnCheckBoxMethods,
+				rebuild 	: _rebuild
 			});
 
 		})(jQuery);

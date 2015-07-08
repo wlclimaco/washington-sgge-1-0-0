@@ -280,6 +280,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 
 		empresa.setId(1);
 		empresa.setModelAction(modelAction);
+		empresa.setEmprId(1);
 		empresa.setNome("Cosme e damiao Contabiliadade");
 		empresa.setRegime(new Regime(1));
 		// empresa.setConfiguracao(new Configuracao(1));
@@ -290,6 +291,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 		empresa.setSocios(insertSocio(modelAction));
 		empresa.setCnaes(insertCnae(modelAction));
 
+		empresa.setUserId("WASHINGTON");
 		return empresa;
 
 	}

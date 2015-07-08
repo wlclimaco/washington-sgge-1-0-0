@@ -10,8 +10,7 @@ public class Process extends ModelCosmeDamiao
 	/** The SendSolv id for the account. */
 	private Integer id;
 
-	/** The type of an account. */
-	private TabelaEnum tabela;
+	private Long data;
 
 	/**
 	 * Default constructor.
@@ -42,19 +41,19 @@ public class Process extends ModelCosmeDamiao
 	}
 
 	/**
-	 * @return the tabela
+	 * @return the data
 	 */
-	public TabelaEnum getTabela()
+	public Long getData()
 	{
-		return tabela;
+		return data;
 	}
 
 	/**
-	 * @param tabela the tabela to set
+	 * @param data the data to set
 	 */
-	public void setTabela(TabelaEnum tabela)
+	public void setData(Long data)
 	{
-		this.tabela = tabela;
+		this.data = data;
 	}
 
 	/*
@@ -64,12 +63,13 @@ public class Process extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Process [getId()=" + getId() + ", getTabela()=" + getTabela() + ", getTabelaEnumValue()="
+		return "Process [getId()=" + getId() + ", getData()=" + getData() + ", getTabelaEnumValue()="
 				+ getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()="
 				+ getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()=" + getType()
 				+ ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()="
-				+ getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite() + ", toString()="
-				+ super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
+				+ getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite() + ", getProcessId()="
+				+ getProcessId() + ", getUserId()=" + getUserId() + ", toString()=" + super.toString()
+				+ ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
 				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
 				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
 				+ hashCode() + "]";
