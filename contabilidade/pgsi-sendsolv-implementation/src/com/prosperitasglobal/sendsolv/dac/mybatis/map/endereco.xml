@@ -23,6 +23,7 @@
 	<result property="bairro" column="bairro"/>
 	<result property="numero" column="numero"/>
 	<result property="cep" column="cep"/>
+	<result property="processId" column="processId"/>
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
@@ -46,6 +47,7 @@
 		,b.bairro
 		,b.numero
 		,b.cep
+		,b.processId
       	,b.create_date
       	,b.create_user
       	,b.modify_date
@@ -63,6 +65,7 @@
 		,#{bairro}
 		,#{numero}
 		,#{cep}
+		,#{processId}
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 

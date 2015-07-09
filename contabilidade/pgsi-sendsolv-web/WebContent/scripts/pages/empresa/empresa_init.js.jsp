@@ -268,6 +268,17 @@ $(document).ready(function()
 		$.address.parameter("location","");
 		pgsi.util.page.fnReloadTable(pgsi.pages.location.locationTable);
 	});
+	$(".add-business").on("click", function(e)
+	{
+		e.preventDefault();
+		$.pgsi.ajax.post({
+			sUrl 		: "api/empresa/add",
+			oRequest 	: {},
+			fnCallback  : function(oResponse) {
+				console.log('dd')
+			}
+		});
+	});
 
 });
 </script>

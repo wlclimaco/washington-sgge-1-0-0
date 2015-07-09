@@ -303,9 +303,9 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 
 		Integer processId = 0;
 
-		processId = (Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), "ProcessMap.insertProcess", process);
-
 		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), "ProcessMap.insertProcess", process, response);
+
+		processId = process.getId();
 
 		empresa.setProcessId(process.getId());
 
@@ -321,33 +321,35 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		}
 
 		insertCount +=
-				EnderecoDACD.maintainEnderecoAssociations(empresa.getEnderecos(), response, insertCount, null, null,
+				EnderecoDACD.maintainEnderecoAssociations(empresa.getEnderecos(), response, empresa.getId(), null,
+						null,
 						null, getEnderecoDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
 						empresa.getCreateUser(), processId);
 
 		insertCount +=
-				CnaeDACD.maintainCnaeAssociations(empresa.getCnaes(), response, insertCount, null, null,
+				CnaeDACD.maintainCnaeAssociations(empresa.getCnaes(), response, empresa.getId(), null, null,
 						null, getCnaeDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
 						empresa.getCreateUser(), processId);
 
 		insertCount +=
-				EmailDACD.maintainEmailAssociations(empresa.getEmails(), response, insertCount, null, null,
+				EmailDACD.maintainEmailAssociations(empresa.getEmails(), response, empresa.getId(), null, null,
 						null, getEmailDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
 						empresa.getCreateUser(), processId);
 
 		insertCount +=
-				TelefoneDACD.maintainTelefoneAssociations(empresa.getTelefones(), response, insertCount, null, null,
+				TelefoneDACD.maintainTelefoneAssociations(empresa.getTelefones(), response, empresa.getId(), null,
+						null,
 						null, getTelefoneDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
 						empresa.getCreateUser(), processId);
 
 		insertCount +=
-				DocumentosDACD.maintainDocumentoAssociations(empresa.getDocumentos(), response, insertCount, null,
+				DocumentosDACD.maintainDocumentoAssociations(empresa.getDocumentos(), response, empresa.getId(), null,
 						null,
 						null, getDocumentoDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
 						empresa.getCreateUser(), processId);
 
 		insertCount +=
-				SociosDACD.maintainSocioAssociations(empresa.getSocios(), response, insertCount, null, null,
+				SociosDACD.maintainSocioAssociations(empresa.getSocios(), response, empresa.getId(), null, null,
 						null, getSocioDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
 						empresa.getCreateUser(), processId);
 
