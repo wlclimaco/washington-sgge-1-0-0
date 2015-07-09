@@ -37,8 +37,7 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allEnderecoColumns">
-  		 b.id
-		,b.tabela
+		 b.tabela
 		,b.parentId
 		,b.type
 		,b.logradouro
@@ -55,8 +54,7 @@
   </sql>
 
   <sql id="allEnderecoValues">
-  		 #{id}
-		,#{tabelaEnumValue}
+  		 #{tabelaEnumValue}
 		,#{parentId}
 		,#{typeValue}
 		,#{logradouro}
