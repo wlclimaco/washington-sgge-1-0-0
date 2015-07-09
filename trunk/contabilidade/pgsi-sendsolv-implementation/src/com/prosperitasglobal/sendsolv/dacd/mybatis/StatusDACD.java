@@ -1,21 +1,9 @@
 package com.prosperitasglobal.sendsolv.dacd.mybatis;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
-import com.prosperitasglobal.sendsolv.model.AcaoEnum;
-import com.prosperitasglobal.sendsolv.model.Historico;
-import com.prosperitasglobal.sendsolv.model.Status;
-import com.prosperitasglobal.sendsolv.model.StatusEnum;
-import com.prosperitasglobal.sendsolv.model.TabelaEnum;
-import com.prosperitasglobal.sendsolv.model.TypeEnum;
-import com.qat.framework.model.QATModel.PersistanceActionEnum;
-import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.validation.ValidationUtil;
 
 /**
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
@@ -42,7 +30,8 @@ public final class StatusDACD extends SqlSessionDaoSupport
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			String usuario,
 			Integer empresa,
-			TabelaEnum tabelaEnum, IStatusDAC statusDAC, IHistoricoDAC historicoDAC, Integer processId)
+			TabelaEnum tabelaEnum, IStatusDAC statusDAC, IHistoricoDAC historicoDAC, Integer processId,
+			Integer historicoId)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
@@ -50,19 +39,6 @@ public final class StatusDACD extends SqlSessionDaoSupport
 		{
 			return count;
 		}
-		Historico historico = new Historico();
-
-		historico.setParentId(parentId);
-		historico.setRegistro("");
-		historico.setAcaoType(acaoType);
-		historico.setTabelaEnum(tabelaEnum);
-		historico.setStatusList(new ArrayList<Status>());
-		historico.setUsuario(usuario);
-		historico.setEmpresa(empresa);
-		historico.setProcessId(processId);
-		Status statuss = new Status();
-		statuss.setStatus(StatusEnum.ACTIVE);
-		historico.getStatusList().add(statuss);
 
 		// For Each Contact...
 		for (Status status : statusList)
@@ -71,6 +47,8 @@ public final class StatusDACD extends SqlSessionDaoSupport
 			status.setParentId(parentId);
 
 			status.setModelAction(PersistanceActionEnum.INSERT);
+
+			HistoricoItens historicoItens = new HistoricoItens();
 
 			if (ValidationUtil.isNull(status.getModelAction()))
 			{
@@ -83,22 +61,42 @@ public final class StatusDACD extends SqlSessionDaoSupport
 							"insertStatus", response);
 					if (count > 0)
 					{
-						historicoDAC.insertHistorico(historico, "insertHistorico", response);
+						historicoItens = new HistoricoItens();
+						historicoItens.setIdHist(historicoId);
+						historicoItens.setProcessId(processId);
+						historicoItens.setTabelaEnum(tabelaEnum);
+						historicoItens.setAcaoType(status.getModelAction());
+						historicoDAC.insertHistoricoItens(historicoItens, "insertHistorico", response);
 					}
 					break;
 				case UPDATE:
 					count = statusDAC.updateStatus(status, response);
 					if (count > 0)
 					{
-						historicoDAC.insertHistorico(historico, "insertHistorico", response);
+						historicoItens = new HistoricoItens();
+						historicoItens.setIdHist(historicoId);
+						historicoItens.setProcessId(processId);
+						historicoItens.setTabelaEnum(tabelaEnum);
+						historicoItens.setAcaoType(status.getModelAction());
+						historicoDAC.insertHistoricoItens(historicoItens, "insertHistorico", response);
 					}
 					break;
 				case DELETE:
-					historicoDAC.insertHistorico(historico,
-							"insertHistorico", response);
+					historicoItens = new HistoricoItens();
+					historicoItens.setIdHist(historicoId);
+					historicoItens.setProcessId(processId);
+					historicoItens.setTabelaEnum(tabelaEnum);
+					historicoItens.setAcaoType(status.getModelAction());
+					historicoDAC.insertHistoricoItens(historicoItens, "insertHistorico", response);
 
 					break;
 			}
+
+		}
+
+		if (response.isInError())
+		{
+			return 0;
 		}
 		return count;
 	}

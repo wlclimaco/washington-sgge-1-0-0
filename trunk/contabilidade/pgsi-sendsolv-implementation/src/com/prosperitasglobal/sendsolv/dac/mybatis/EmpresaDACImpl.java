@@ -5,10 +5,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.mybatis.spring.support.SqlSessionDaoSupport;
-import org.slf4j.LoggerFactory;
-
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.ICnaeDAC;
 import com.prosperitasglobal.sendsolv.dac.IDocumentoDAC;
 import com.prosperitasglobal.sendsolv.dac.IEmailDAC;
@@ -26,18 +22,6 @@ import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.SociosDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.StatusDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.TelefoneDACD;
-import com.prosperitasglobal.sendsolv.model.AcaoEnum;
-import com.prosperitasglobal.sendsolv.model.Empresa;
-import com.prosperitasglobal.sendsolv.model.Process;
-import com.prosperitasglobal.sendsolv.model.Status;
-import com.prosperitasglobal.sendsolv.model.StatusEnum;
-import com.prosperitasglobal.sendsolv.model.TabelaEnum;
-import com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest;
-import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResponse;
-import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.util.QATMyBatisDacHelper;
-import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class EmpresaDACImpl.
@@ -302,18 +286,42 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		process.setData(a.getTime());
 
 		Integer processId = 0;
+		Integer historicoId = 0;
 
 		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), "ProcessMap.insertProcess", process, response);
 
 		processId = process.getId();
 
 		empresa.setProcessId(process.getId());
-
 		empresa.setModifyDateUTC(a.getTime());
 
 		// First insert the root
 		// Is successful the unique-id will be populated back into the object.
 		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), EMPRESA_STMT_INSERT, empresa, response);
+
+		Historico historico = new Historico();
+		historico.setEmprId(empresa.getId());
+		historico.setUserId(empresa.getUserId());
+		historico.setProcessId(processId);
+		a = new Date();
+		process.setData(a.getTime());
+
+		insertCount =
+				QATMyBatisDacHelper.doInsert(getSqlSession(), "HistoricoMap.insertHistorico", historico, response);
+
+		historicoId = historico.getId();
+
+		HistoricoItens historicoItens = new HistoricoItens();
+		historicoItens.setIdHist(historicoId);
+		historicoItens.setProcessId(processId);
+		historicoItens.setTabelaEnum(TabelaEnum.EMPRESA);
+		historicoItens.setAcaoType(AcaoEnum.INSERT);
+
+		insertCount =
+				QATMyBatisDacHelper.doInsert(getSqlSession(), "HistoricoMap.insertHistoricoItens", historicoItens,
+						response);
+
+		historicoId = historico.getId();
 
 		if (response.isInError())
 		{
@@ -324,34 +332,34 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 				EnderecoDACD.maintainEnderecoAssociations(empresa.getEnderecos(), response, empresa.getId(), null,
 						null,
 						null, getEnderecoDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
-						empresa.getCreateUser(), processId);
+						empresa.getCreateUser(), processId, historicoId);
 
 		insertCount +=
 				CnaeDACD.maintainCnaeAssociations(empresa.getCnaes(), response, empresa.getId(), null, null,
-						null, getCnaeDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
-						empresa.getCreateUser(), processId);
+						TabelaEnum.EMPRESA, getCnaeDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+						empresa.getCreateUser(), processId, historicoId);
 
 		insertCount +=
 				EmailDACD.maintainEmailAssociations(empresa.getEmails(), response, empresa.getId(), null, null,
 						null, getEmailDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
-						empresa.getCreateUser(), processId);
+						empresa.getCreateUser(), processId, historicoId);
 
 		insertCount +=
 				TelefoneDACD.maintainTelefoneAssociations(empresa.getTelefones(), response, empresa.getId(), null,
 						null,
 						null, getTelefoneDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
-						empresa.getCreateUser(), processId);
+						empresa.getCreateUser(), processId, historicoId);
 
 		insertCount +=
 				DocumentosDACD.maintainDocumentoAssociations(empresa.getDocumentos(), response, empresa.getId(), null,
 						null,
 						null, getDocumentoDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
-						empresa.getCreateUser(), processId);
+						empresa.getCreateUser(), processId, historicoId);
 
 		insertCount +=
 				SociosDACD.maintainSocioAssociations(empresa.getSocios(), response, empresa.getId(), null, null,
 						null, getSocioDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
-						empresa.getCreateUser(), processId);
+						empresa.getCreateUser(), processId, historicoId);
 
 		if (insertCount > 0)
 		{
@@ -492,10 +500,10 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, empresa.getId(),
-						null, AcaoEnum.DELETE,
-						empresa.getCreateUser(), empresa.getId(), TabelaEnum.EMPRESA, getStatusDAC(),
-						getHistoricoDAC(), processId);
+						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, empresa.getId(),
+								null, AcaoEnum.DELETE,
+								empresa.getCreateUser(), empresa.getId(), TabelaEnum.EMPRESA, getStatusDAC(),
+								getHistoricoDAC(), processId);
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)

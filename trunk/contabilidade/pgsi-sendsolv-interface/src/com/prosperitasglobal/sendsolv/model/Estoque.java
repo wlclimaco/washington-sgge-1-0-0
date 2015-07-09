@@ -13,6 +13,8 @@ public class Estoque extends ModelCosmeDamiao
 	/** The type of an account. */
 	private EstoqueTypeEnum estoqueTypeEnum;
 
+	private Integer entidadeId;
+
 	/** The description. */
 	private Long ultimoMov;
 

@@ -1,16 +1,6 @@
 package com.prosperitasglobal.sendsolv.dac.mybatis;
 
-import org.mybatis.spring.support.SqlSessionDaoSupport;
-import org.slf4j.LoggerFactory;
-
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
-import com.prosperitasglobal.sendsolv.model.Historico;
-import com.prosperitasglobal.sendsolv.model.request.HistoricoInquiryRequest;
-import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.util.QATMyBatisDacHelper;
-import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class HistoricoDACImpl.
@@ -43,6 +33,18 @@ public class HistoricoDACImpl extends SqlSessionDaoSupport implements IHistorico
 		insertCount +=
 				QATMyBatisDacHelper
 						.doInsert(getSqlSession(), statementName, historico, response);
+
+		return insertCount;
+	}
+
+	@Override
+	public Integer insertHistoricoItens(HistoricoItens historico, String statementName,
+			InternalResultsResponse<?> response)
+	{
+		Integer insertCount = 0;
+		// First insert the root historico data
+		insertCount =
+				QATMyBatisDacHelper.doInsert(getSqlSession(), "HistoricoMap.insertHistoricoItens", historico, response);
 
 		return insertCount;
 	}

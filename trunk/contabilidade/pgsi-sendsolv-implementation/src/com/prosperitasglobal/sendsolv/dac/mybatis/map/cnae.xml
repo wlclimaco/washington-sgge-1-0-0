@@ -52,6 +52,7 @@
 		 b.idCnae
 		,b.idParentId
       	,b.tabela
+      	,b.processId
       	,b.create_date
       	,b.create_user
       	,b.modify_date
@@ -61,7 +62,8 @@
   <sql id="allCnaeValuesRel">
   		#{idCnae},
   		#{idParentId},
-    	#{tabela},
+    	#{tabelaEnumValue},
+    	#{processId},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 

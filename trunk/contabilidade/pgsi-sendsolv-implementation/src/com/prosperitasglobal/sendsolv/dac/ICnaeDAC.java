@@ -2,9 +2,6 @@ package com.prosperitasglobal.sendsolv.dac;
 
 import java.util.List;
 
-import com.prosperitasglobal.sendsolv.model.Cnae;
-import com.qat.framework.model.response.InternalResultsResponse;
-
 /**
  * The Interface ICnaeDAC.
  */
@@ -29,6 +26,8 @@ public interface ICnaeDAC
 	 * @return the integer
 	 */
 	public Integer insertCnae(Cnae cnae, String statementName, InternalResultsResponse<?> response);
+
+	public Integer insertParentId(CnaeRel cnae, String statementName, InternalResultsResponse<?> response);
 
 	/**
 	 * Delete business cnae.

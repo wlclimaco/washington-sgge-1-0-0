@@ -5,15 +5,16 @@ package com.prosperitasglobal.sendsolv.model;
  * setting.
  */
 @SuppressWarnings("serial")
-public class Historico extends ModelCosmeDamiao
+public class HistoricoItens extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
 
-	/** The numero. */
-	private Long data;
+	/** The bairro. */
+	private Integer idHist;
 
-	private List<HistoricoItens> historicoItensList;
+	/** The numero. */
+	private Integer processId;
 
 	public Integer getId()
 	{
