@@ -96,6 +96,14 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 											processId);
 
 					break;
+			// case NONE:
+			// count =
+			// StatusDACD
+			// .maintainStatusAssociations(statusList, response, cnae.getId(), null,
+			// AcaoEnum.DELETE, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
+			// processId);
+			//
+			// break;
 			}
 		}
 

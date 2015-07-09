@@ -32,8 +32,7 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allEmailColumns">
-		 b.id
-		,b.tabela
+		 b.tabela
 		,b.parentId
 		,b.type
 		,b.email
@@ -45,7 +44,6 @@
   </sql>
 
   <sql id="allEmailValues">
-  		 #{id},
 		 #{tabelaEnumValue},
 		 #{parentId},
 		 #{typeValue},

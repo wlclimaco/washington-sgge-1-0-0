@@ -1,8 +1,5 @@
 package com.prosperitasglobal.sendsolv.dac;
 
-import java.util.List;
-
-import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
 import com.prosperitasglobal.sendsolv.model.Status;
 import com.qat.framework.model.response.InternalResultsResponse;
 
@@ -34,25 +31,7 @@ public interface IStatusDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer deleteBusinessStatus(Status status, InternalResultsResponse<?> response);
-
-	/**
-	 * Delete person status.
-	 *
-	 * @param status the status
-	 * @param response the response
-	 * @return the integer
-	 */
-	public Integer deletePersonStatus(Status status, InternalResultsResponse<?> response);
-
-	/**
-	 * Fetch status by parent.
-	 *
-	 * @param parentId the parent id
-	 * @param parentType the parent type
-	 * @return the internal results response< status>
-	 */
-	public InternalResultsResponse<Status> fetchStatusByParent(Integer parentId, BusinessTypeEnum parentType);
+	public Integer deleteStatus(Status status, InternalResultsResponse<?> response);
 
 	/**
 	 * Fetch status by id.
@@ -62,16 +41,4 @@ public interface IStatusDAC
 	 */
 	public InternalResultsResponse<Status> fetchStatusById(Integer id);
 
-	/**
-	 * Maintain status associations.
-	 *
-	 * @param statusList the status list
-	 * @param parentId the parent id
-	 * @param associateStatement the associate statement
-	 * @param response the response
-	 * @return the integer
-	 */
-	public Integer maintainStatusAssociations(List<Status> statusList, Integer parentId,
-			String associateStatement,
-			InternalResultsResponse<?> response);
 }

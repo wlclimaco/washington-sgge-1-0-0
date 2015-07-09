@@ -13,6 +13,7 @@ import com.prosperitasglobal.sendsolv.model.Status;
 import com.prosperitasglobal.sendsolv.model.StatusEnum;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
 import com.prosperitasglobal.sendsolv.model.TypeEnum;
+import com.qat.framework.model.QATModel.PersistanceActionEnum;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
 
@@ -68,6 +69,8 @@ public final class StatusDACD extends SqlSessionDaoSupport
 		{
 			// Make sure we set the parent key
 			status.setParentId(parentId);
+
+			status.setModelAction(PersistanceActionEnum.INSERT);
 
 			if (ValidationUtil.isNull(status.getModelAction()))
 			{

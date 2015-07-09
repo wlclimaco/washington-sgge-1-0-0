@@ -34,8 +34,7 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allDocumentoColumns">
-		 b.id
-		,b.tabela
+		 b.tabela
 		,b.parentId
 		,b.type
 		,b.description
@@ -49,7 +48,6 @@
   </sql>
 
   <sql id="allDocumentoValues">
-  		#{id},
   		#{tabelaEnumValue},
     	#{parentId},
     	#{typeValue},

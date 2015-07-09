@@ -43,8 +43,7 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allSocioColumns">
-		 b.id
-		,b.parentId
+		 b.parentId
 		,b.nome
 		,b.cota
 		,b.porcentagem
@@ -55,7 +54,6 @@
   </sql>
 
   <sql id="allSocioValues">
-  		#{id},
   		#{parentId},
     	#{nome},
     	#{cota},

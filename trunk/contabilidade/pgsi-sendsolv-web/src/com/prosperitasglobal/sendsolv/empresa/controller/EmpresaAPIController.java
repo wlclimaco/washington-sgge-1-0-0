@@ -142,7 +142,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 		endereco.setBairro("Mangueiras");
 		endereco.setNumero("686");
 		endereco.setCep("38082-243");
-
+		enderecoList.add(endereco);
 		return enderecoList;
 	}
 
@@ -178,7 +178,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 	{
 		List<Cnae> cnaeList = new ArrayList<Cnae>();
 		Cnae cnae = new Cnae();
-		// cnae.setModelAction("NONE");
+		cnae.setModelAction(PersistanceActionEnum.NONE);
 		cnae.setId(1);
 		cnaeList.add(cnae);
 
