@@ -3,19 +3,9 @@ package com.prosperitasglobal.sendsolv.dacd.mybatis;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.mybatis.spring.support.SqlSessionDaoSupport;
-
 import com.prosperitasglobal.sendsolv.dac.IDocumentoDAC;
 import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
-import com.prosperitasglobal.sendsolv.model.AcaoEnum;
-import com.prosperitasglobal.sendsolv.model.Documento;
-import com.prosperitasglobal.sendsolv.model.Status;
-import com.prosperitasglobal.sendsolv.model.StatusEnum;
-import com.prosperitasglobal.sendsolv.model.TabelaEnum;
-import com.prosperitasglobal.sendsolv.model.TypeEnum;
-import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.validation.ValidationUtil;
 
 /**
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
@@ -36,7 +26,7 @@ public final class DocumentosDACD extends SqlSessionDaoSupport
 	public static Integer maintainDocumentoAssociations(List<Documento> documentoList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, IDocumentoDAC documentoDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
-			Integer empId, String UserId, Integer processId)
+			Integer empId, String UserId, Integer processId, Integer historicoId)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
@@ -67,7 +57,7 @@ public final class DocumentosDACD extends SqlSessionDaoSupport
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
 										AcaoEnum.INSERT, UserId, empId, TabelaEnum.DOCUMENTO, statusDAC, historicoDAC,
-										processId);
+										processId, historicoId);
 					}
 					break;
 				case UPDATE:
@@ -77,7 +67,7 @@ public final class DocumentosDACD extends SqlSessionDaoSupport
 						count =
 								StatusDACD.maintainStatusAssociations(documento.getStatusList(), response,
 										documento.getId(), null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.DOCUMENTO,
-										statusDAC, historicoDAC, processId);
+										statusDAC, historicoDAC, processId, historicoId);
 					}
 					break;
 				case DELETE:
@@ -88,7 +78,7 @@ public final class DocumentosDACD extends SqlSessionDaoSupport
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, documento.getId(), null,
 									AcaoEnum.DELETE, UserId, empId, TabelaEnum.DOCUMENTO, statusDAC, historicoDAC,
-									processId);
+									processId, historicoId);
 
 					break;
 			}

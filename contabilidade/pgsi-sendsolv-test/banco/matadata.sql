@@ -71,6 +71,8 @@ CREATE TABLE [dbo].[empresa] (
 	[nome]         [varchar](100) NULL,
 	[regime]       [int] NULL,
 	[processId]    [int] NULL,
+	[entidadeId]   [int] NULL,
+	[entidadeEnum] [int] NULL,
 	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -84,14 +86,25 @@ CONSTRAINT [pk_socio_id] PRIMARY KEY CLUSTERED
 INSERT INTO [dbo].[empresa]
            ([nome]
            ,[regime]
+           ,[processId]
+	       ,[entidadeId]
+		   ,[entidadeEnum]
            ,[create_date]
            ,[create_user]
            ,[modify_date]
            ,[modify_user])
      VALUES
-           ('Telhas Tecplan',1,1000000,'rod',1000000,'rod'),
-		   ('boteckin do damiao',2,1000000,'rod',1000000,'rod'),
-		   ('silvio casa de ração',3,1000000,'rod',1000000,'rod')
+           ('Telhas Tecplan',1,1,null,1,1000000,'rod',1000000,'rod'),
+		   ('boteckin do damiao',2,1,null,1,1000000,'rod',1000000,'rod'),
+		   ('silvio casa de ração',3,1,null,1,1000000,'rod',1000000,'rod'),
+
+		   ('Telhas Tecplan',1,1,1,2,1000000,'rod',1000000,'rod'),
+		   ('boteckin do damiao',2,1,2,2,1000000,'rod',1000000,'rod'),
+		   ('silvio casa de ração',3,1,3,2,1000000,'rod',1000000,'rod'),
+
+		   ('Telhas Tecplan',1,1,4,3,1000000,'rod',1000000,'rod'),
+		   ('boteckin do damiao',2,1,5,3,1000000,'rod',1000000,'rod'),
+		   ('silvio casa de ração',3,1,6,3,1000000,'rod',1000000,'rod')
 
 
 	INSERT INTO [dbo].[status] ([dataStatus],[parentId],[status],[acaoType],[tabelaEnum],[note],[create_date],[create_user],[modify_date],[modify_user]) VALUES
@@ -3193,6 +3206,26 @@ CREATE TABLE [dbo].[process](
     [modify_date]  	[bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  	[varchar](50) NULL,
 CONSTRAINT [pk_process_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+-----------------------------------------------------------------------------
+DROP TABLE [dbo].[historicoItens];
+CREATE TABLE [dbo].[historicoItens](
+	[id]             [int] identity(1,1) NOT NULL,
+	[idHist]	     [int] NOT NULL,
+	[processId]		 [int] NOT NULL,
+	[type] 		     [int] NOT NULL,
+	[tabela] 		 [int] NOT NULL,
+    [data]  	     [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[create_date]  	 [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  	 [varchar](50) NULL,
+    [modify_date]  	 [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]    [varchar](50) NULL,
+CONSTRAINT [pk_historicoItens_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]

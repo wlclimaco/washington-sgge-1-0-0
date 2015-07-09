@@ -1,10 +1,5 @@
 package com.prosperitasglobal.sendsolv.dac;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.Historico;
-import com.prosperitasglobal.sendsolv.model.request.HistoricoInquiryRequest;
-import com.qat.framework.model.response.InternalResultsResponse;
-
 /**
  * The Interface IHistoricoDAC.
  */
@@ -29,6 +24,9 @@ public interface IHistoricoDAC
 	 * @return the integer
 	 */
 	public Integer insertHistorico(Historico historico, String statementName, InternalResultsResponse<?> response);
+
+	public Integer insertHistoricoItens(HistoricoItens historico, String statementName,
+			InternalResultsResponse<?> response);
 
 	/**
 	 * Delete business historico.

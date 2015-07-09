@@ -23,7 +23,9 @@
   <resultMap id="empresaResult" type="Empresa">
     <result property="id" column="id" />
     <result property="nome" column="nome" />
-     <result property="processId" column="processId" />
+    <result property="processId" column="processId" />
+    <result property="entidadeId" column="entidadeId" />
+	<result property="entidadeEnumValue" column="entidadeEnum" />
     <result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
@@ -35,6 +37,8 @@
 	<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByEmpresa"/>
 	<collection property="socios" column="id" select="SocioMap.fetchSocioByEmpresaId"/>
 	<collection property="cnaes" column="id" select="CnaeMap.fetchAllCnaesByEmpresa"/>
+	<collection property="filialList" column="id" select="fetchAllFilialByEmpresa"/>
+	<collection property="depositoList" column="id" select="fetchAllDepositoByEmpresa"/>
 	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEmpresa"/>
   </resultMap>
 
@@ -45,6 +49,8 @@
 		 b.nome
 		,b.regime
 		,b.processId
+		,b.entidadeId
+		,b.entidadeEnum
       	,b.create_date
       	,b.create_user
       	,b.modify_date
@@ -55,6 +61,8 @@
   		#{nome},
   		#{regime.id},
   		#{processId},
+  		#{entidadeId},
+  		#{entidadeEnumValue},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
@@ -78,6 +86,8 @@
     	<set>
     		<if test="nome!= null">nome = #{nome},</if>
 	    	<if test="regime.id!= null"> regime=#{regime.id},</if>
+	    	<if test="entidadeId!= null">entidadeId = #{entidadeId},</if>
+	    	<if test="entidadeEnumValue!= null"> entidadeEnum=#{entidadeEnumValue},</if>
 			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
@@ -98,6 +108,7 @@
   <select id="fetchEmpresaRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
         FROM empresa
+        where b.entidadeEnum = 1
 
   </select>
 
@@ -126,7 +137,7 @@
     						<include refid="allEmpresaColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM empresa b
-						where 1 = 1
+						where b.entidadeEnum = 1
 					<if test="parentId != null">
 						AND b.id = #{id}
 					</if>
@@ -150,6 +161,21 @@
 					 	ORDER BY RowNumber
 					</otherwise>
 				</choose>
+  </select>
+
+
+  <select id="fetchAllFilialByEmpresa" parameterType="Integer" resultMap="empresaResult">
+    			   SELECT
+					b.id,	<include refid="allEmpresaColumns" />
+ 				   FROM empresa b
+					where b.entidadeEnum = 2 and b.entidadeId = #{id}
+  </select>
+
+  <select id="fetchAllDepositoByEmpresa" parameterType="Integer" resultMap="empresaResult">
+   			  SELECT
+					b.id,	<include refid="allEmpresaColumns" />
+ 				   FROM empresa b
+					where b.entidadeEnum = 3 and b.entidadeId = #{id}
   </select>
 
 

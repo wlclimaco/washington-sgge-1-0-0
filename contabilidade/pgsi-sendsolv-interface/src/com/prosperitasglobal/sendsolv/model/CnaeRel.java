@@ -10,9 +10,6 @@ public class CnaeRel extends ModelCosmeDamiao
 	/** Attributes. */
 	private Integer id;
 
-	/** The parent key. */
-	private Integer parentId;
-
 	/**
 	 * The Constructor.
 	 */
@@ -39,18 +36,6 @@ public class CnaeRel extends ModelCosmeDamiao
 	public void setId(Integer id)
 	{
 		this.id = id;
-	}
-
-	@Override
-	public Integer getParentId()
-	{
-		return parentId;
-	}
-
-	@Override
-	public void setParentId(Integer parentId)
-	{
-		this.parentId = parentId;
 	}
 
 	@Override

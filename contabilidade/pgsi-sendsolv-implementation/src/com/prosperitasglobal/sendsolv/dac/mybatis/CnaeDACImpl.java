@@ -2,15 +2,7 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.List;
 
-import org.mybatis.spring.support.SqlSessionDaoSupport;
-import org.slf4j.LoggerFactory;
-
 import com.prosperitasglobal.sendsolv.dac.ICnaeDAC;
-import com.prosperitasglobal.sendsolv.model.Cnae;
-import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.util.QATMyBatisDacHelper;
-import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class CommonBusinessObjectsDACImpl.
@@ -194,6 +186,33 @@ public class CnaeDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 
 	@Override
 	public InternalResultsResponse<Cnae> fetchCnaeById(Integer id)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer insertParentId(com.prosperitasglobal.sendsolv.dac.Cnae cnae, String statementName,
+			com.prosperitasglobal.sendsolv.dac.InternalResultsResponse<?> response)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public com.prosperitasglobal.sendsolv.dac.InternalResultsResponse<com.prosperitasglobal.sendsolv.dac.Cnae> fetchCnaeByParent(
+			Integer parentId)
+	{
+		Integer insertCount = 0;
+		// First insert the root cnae data
+		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), "CnaeMap.insertCnaeRelacionamento", cnae, response);
+
+		return insertCount;
+	}
+
+	@Override
+	public com.prosperitasglobal.sendsolv.dac.InternalResultsResponse<com.prosperitasglobal.sendsolv.dac.Cnae> fetchCnaeById(
+			Integer id)
 	{
 		// TODO Auto-generated method stub
 		return null;
