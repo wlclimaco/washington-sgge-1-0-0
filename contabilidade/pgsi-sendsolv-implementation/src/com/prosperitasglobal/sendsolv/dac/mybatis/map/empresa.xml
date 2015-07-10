@@ -42,6 +42,46 @@
 	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEmpresa"/>
   </resultMap>
 
+   <resultMap id="filialResult" type="Empresa">
+    <result property="id" column="id" />
+    <result property="nome" column="nome" />
+    <result property="processId" column="processId" />
+    <result property="entidadeId" column="entidadeId" />
+	<result property="entidadeEnumValue" column="entidadeEnum" />
+    <result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+    <association property="regime"    column="regime" select="RegimeMap.fetchRegimeByEmpresa"  />
+   	<collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+	<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByEmpresaId"/>
+	<collection property="emails" column="id" select="EmailMap.fetchAllEmailsByEmpresa"/>
+	<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByEmpresa"/>
+	<collection property="socios" column="id" select="SocioMap.fetchSocioByEmpresaId"/>
+	<collection property="cnaes" column="id" select="CnaeMap.fetchAllCnaesByEmpresa"/>
+	<collection property="depositoList" column="id" select="fetchAllDepositoByEmpresa"/>
+	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEmpresa"/>
+  </resultMap>
+
+   <resultMap id="depositoResult" type="Empresa">
+    <result property="id" column="id" />
+    <result property="nome" column="nome" />
+    <result property="processId" column="processId" />
+    <result property="entidadeId" column="entidadeId" />
+	<result property="entidadeEnumValue" column="entidadeEnum" />
+    <result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+    <association property="regime"    column="regime" select="RegimeMap.fetchRegimeByEmpresa"  />
+   	<collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+	<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByEmpresaId"/>
+	<collection property="emails" column="id" select="EmailMap.fetchAllEmailsByEmpresa"/>
+	<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByEmpresa"/>
+	<collection property="socios" column="id" select="SocioMap.fetchSocioByEmpresaId"/>
+	<collection property="cnaes" column="id" select="CnaeMap.fetchAllCnaesByEmpresa"/>
+  </resultMap>
+
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
@@ -105,10 +145,10 @@
 	<!--
 		SQL Fetch Statements.
  	-->
-  <select id="fetchEmpresaRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+  <select id="fetchEmpresaRowCount" parameterType="EmpresaInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
         FROM empresa
-        where entidadeEnum = 1
+        where entidadeEnum = criteria.entidadeEnumValue
 
   </select>
 
@@ -137,7 +177,7 @@
     						<include refid="allEmpresaColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM empresa b
-						where b.entidadeEnum = 1
+						where b.entidadeEnum = criteria.entidadeEnumValue
 					<if test="parentId != null">
 						AND b.id = #{id}
 					</if>
@@ -164,14 +204,14 @@
   </select>
 
 
-  <select id="fetchAllFilialByEmpresa" parameterType="Integer" resultMap="empresaResult">
+  <select id="fetchAllFilialByEmpresa" parameterType="Integer" resultMap="filialResult">
     			   SELECT
 					b.id,	<include refid="allEmpresaColumns" />
  				   FROM empresa b
 					where b.entidadeEnum = 2 and b.entidadeId = #{id}
   </select>
 
-  <select id="fetchAllDepositoByEmpresa" parameterType="Integer" resultMap="empresaResult">
+  <select id="fetchAllDepositoByEmpresa" parameterType="Integer" resultMap="depositoResult">
    			  SELECT
 					b.id,	<include refid="allEmpresaColumns" />
  				   FROM empresa b

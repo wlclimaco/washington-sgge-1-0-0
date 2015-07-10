@@ -6,7 +6,20 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title></title>
-	<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="styles/preload.css" />
+<link rel="stylesheet" href="styles/pgsi-common.css" />
+<link href="styles/bootstrap.min.css" rel="stylesheet">
+<link href="styles/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"rel="stylesheet">
+<link href="styles/font-awesome.css" rel="stylesheet">
+<link href="styles/style.css" rel="stylesheet">
+<link rel="stylesheet" href="styles/jquery-ui.min.css" />
+<link rel="stylesheet" href="thirdparty/jquery/styles/jquery.dataTables.custom.css">
+
+<!--	<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css" />
 	<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css.map" />
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
 
@@ -16,7 +29,7 @@
 	<link rel="stylesheet" href="styles/jquery-ui.min.css" />
 	<link rel="stylesheet" href="styles/navigation.css" />
 	<link rel="stylesheet" href="styles/pgsi-common.css" />
-	<link rel="stylesheet" href="thirdparty/jquery/styles/jquery.dataTables.custom.css">
+	<link rel="stylesheet" href="thirdparty/jquery/styles/jquery.dataTables.custom.css"> -->
 </head>
 <body>
 <div id="preload">
@@ -80,6 +93,9 @@ head.load("thirdparty/jquery/jquery-1.11.1.min.js",
 				    "scripts/util/checkbox.js",
 				    "scripts/util/combobox.js",
 				    "scripts/util/filter_util.js",
+					"scripts/excanvas.min.js",
+					"scripts/chart.min.js",
+					"scripts/base.js",
 				    "scripts/pages/pgsi_main.js");
 </script>
 

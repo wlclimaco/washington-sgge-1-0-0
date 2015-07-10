@@ -2,6 +2,8 @@ package com.prosperitasglobal.sendsolv.model.criteria;
 
 import java.io.Serializable;
 
+import com.prosperitasglobal.sendsolv.model.EntidadeTypeEnum;
+
 /**
  * The Class MemberCriteria.
  */
@@ -20,6 +22,8 @@ public class EmpresaCriteria implements Serializable
 
 	/** The location name. */
 	private String cidade;
+
+	private EntidadeTypeEnum entidadeEnum;
 
 	/** The organization name. */
 	private String status;
@@ -131,6 +135,22 @@ public class EmpresaCriteria implements Serializable
 		this.regime = regime;
 	}
 
+	/**
+	 * @return the entidadeEnum
+	 */
+	public EntidadeTypeEnum getEntidadeEnum()
+	{
+		return entidadeEnum;
+	}
+
+	/**
+	 * @param entidadeEnum the entidadeEnum to set
+	 */
+	public void setEntidadeEnum(EntidadeTypeEnum entidadeEnum)
+	{
+		this.entidadeEnum = entidadeEnum;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -140,7 +160,8 @@ public class EmpresaCriteria implements Serializable
 	{
 		return "EmpresaCriteria [getNome()=" + getNome() + ", getEmpresa()=" + getEmpresa() + ", getCidade()="
 				+ getCidade() + ", getStatus()=" + getStatus() + ", getId()=" + getId() + ", getRegime()="
-				+ getRegime() + ", toString()=" + super.toString() + "]";
+				+ getRegime() + ", getEntidadeEnum()=" + getEntidadeEnum() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
 
 }

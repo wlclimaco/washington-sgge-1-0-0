@@ -13,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.prosperitasglobal.sendsolv.filter.FilterFactory;
 import com.prosperitasglobal.sendsolv.filter.model.response.FiltersResponse;
+import com.prosperitasglobal.sendsolv.model.EntidadeTypeEnum;
+import com.prosperitasglobal.sendsolv.model.criteria.EmpresaCriteria;
 import com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest;
 import com.qat.framework.model.SortExpression;
 import com.qat.framework.model.SortExpression.Direction;
@@ -51,6 +53,10 @@ public class EmpresaViewController extends EmpresaBaseController
 
 	/** The view mapping constants . */
 	private static final String VIEW_EMPRESA_MAIN = "/empresa/empresa_main";
+
+	private static final String VIEW_FILIAL_MAIN = "/filial/filial_main";
+
+	private static final String VIEW_DEPOSITO_MAIN = "/deposito/deposito_main";
 
 	/** The Constant VIEW_EMPRESA_ADD. */
 	private static final String VIEW_EMPRESA_ADD = "/empresa/empresa_create";
@@ -122,6 +128,100 @@ public class EmpresaViewController extends EmpresaBaseController
 		}
 
 		EmpresaInquiryRequest pagedInquiryRequest = new EmpresaInquiryRequest();
+		EmpresaCriteria criteria = new EmpresaCriteria();
+		criteria.setEntidadeEnum(EntidadeTypeEnum.EMPRESA);
+		pagedInquiryRequest.setCriteria(criteria);
+		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
+		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
+		pagedInquiryRequest.setPreQueryCount(true);
+		pagedInquiryRequest.addSortExpressions(new SortExpression("ID",
+				Direction.Ascending));
+
+		try
+		{
+
+			modelAndView.addObject(RESPONSE, getMapper()
+					.writeValueAsString(fetchEmpresaByRequest(pagedInquiryRequest)));
+
+			FiltersResponse filtersResponse = new FiltersResponse();
+			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);
+
+			modelAndView.addObject(FILTERS, getMapper().writeValueAsString(filtersResponse));
+		}
+
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+				modelAndView.addObject(RESPONSE, null);
+			}
+		}
+
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "filial", method = RequestMethod.GET)
+	public ModelAndView loadFilial(HttpServletRequest request)
+	{
+		ModelAndView modelAndView = new ModelAndView(VIEW_FILIAL_MAIN);
+
+		// Check whether has initial load or not
+		if (!isInitialLoad(request, modelAndView))
+		{
+			return modelAndView;
+		}
+
+		EmpresaInquiryRequest pagedInquiryRequest = new EmpresaInquiryRequest();
+		EmpresaCriteria criteria = new EmpresaCriteria();
+		criteria.setEntidadeEnum(EntidadeTypeEnum.FILIAL);
+		pagedInquiryRequest.setCriteria(criteria);
+		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
+		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
+		pagedInquiryRequest.setPreQueryCount(true);
+		pagedInquiryRequest.addSortExpressions(new SortExpression("ID",
+				Direction.Ascending));
+
+		try
+		{
+
+			modelAndView.addObject(RESPONSE, getMapper()
+					.writeValueAsString(fetchEmpresaByRequest(pagedInquiryRequest)));
+
+			FiltersResponse filtersResponse = new FiltersResponse();
+			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);
+
+			modelAndView.addObject(FILTERS, getMapper().writeValueAsString(filtersResponse));
+		}
+
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+				modelAndView.addObject(RESPONSE, null);
+			}
+		}
+
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "deposito", method = RequestMethod.GET)
+	public ModelAndView loadDeposito(HttpServletRequest request)
+	{
+		ModelAndView modelAndView = new ModelAndView(VIEW_DEPOSITO_MAIN);
+
+		// Check whether has initial load or not
+		if (!isInitialLoad(request, modelAndView))
+		{
+			return modelAndView;
+		}
+
+		EmpresaInquiryRequest pagedInquiryRequest = new EmpresaInquiryRequest();
+
+		EmpresaCriteria criteria = new EmpresaCriteria();
+		criteria.setEntidadeEnum(EntidadeTypeEnum.DEPOSITO);
+		pagedInquiryRequest.setCriteria(criteria);
 		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
 		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
 		pagedInquiryRequest.setPreQueryCount(true);
