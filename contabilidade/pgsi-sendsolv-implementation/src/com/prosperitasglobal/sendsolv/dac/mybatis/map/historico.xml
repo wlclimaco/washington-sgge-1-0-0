@@ -40,7 +40,7 @@
     <result property="id" column="id" />
     <result property="idHist" column="idHist" />
     <result property="processId" column="processId" />
-    <result property="acaoType" column="type" />
+    <result property="acaoEnumValue" column="type" />
    	<result property="tabelaEnumValue" column="tabela"/>
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
@@ -82,7 +82,7 @@
   <sql id="allHistoricoItensValues">
   		#{idHist},
 		#{processId},
-      	#{acaoTypeValue},
+      	#{acaoEnumValue},
       	#{tabelaEnumValue},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
