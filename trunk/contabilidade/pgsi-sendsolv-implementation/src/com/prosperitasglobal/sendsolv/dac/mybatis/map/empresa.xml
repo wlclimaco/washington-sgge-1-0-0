@@ -108,7 +108,7 @@
   <select id="fetchEmpresaRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
         FROM empresa
-        where b.entidadeEnum = 1
+        where entidadeEnum = 1
 
   </select>
 
