@@ -123,7 +123,7 @@ var pieData = [
 		];
 				var myPolarArea = new Chart(document.getElementById("line-chart").getContext("2d")).PolarArea(chartData);
 
-
+$.pgsi.progressBar.stopGlobal();
 </script>
 
 </sec:authorize>
