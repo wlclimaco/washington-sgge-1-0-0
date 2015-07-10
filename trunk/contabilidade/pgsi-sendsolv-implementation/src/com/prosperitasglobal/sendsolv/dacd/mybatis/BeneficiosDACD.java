@@ -41,7 +41,7 @@ public final class BeneficiosDACD extends SqlSessionDaoSupport
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, IBeneficiosDAC cnaeDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
 			Integer empId,
-			String UserId, Integer processId)
+			String UserId, Integer processId, Integer historiId)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
@@ -71,7 +71,7 @@ public final class BeneficiosDACD extends SqlSessionDaoSupport
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
 										AcaoEnum.INSERT, UserId, empId, TabelaEnum.BENEFICIOS, statusDAC, historicoDAC,
-										processId);
+										processId, historiId);
 					}
 					break;
 				case UPDATE:
@@ -81,7 +81,7 @@ public final class BeneficiosDACD extends SqlSessionDaoSupport
 						count =
 								StatusDACD.maintainStatusAssociations(cnae.getStatusList(), response, cnae.getId(),
 										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BENEFICIOS, statusDAC,
-										historicoDAC, processId);
+										historicoDAC, processId, historiId);
 					}
 					break;
 				case DELETE:
@@ -92,7 +92,7 @@ public final class BeneficiosDACD extends SqlSessionDaoSupport
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, cnae.getId(), null,
 									AcaoEnum.DELETE, UserId, empId, TabelaEnum.BENEFICIOS, statusDAC, historicoDAC,
-									processId);
+									processId, historiId);
 
 					break;
 			}

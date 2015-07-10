@@ -70,7 +70,7 @@ public final class BancoDACD extends SqlSessionDaoSupport
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
 										AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
-										processId);
+										processId, null);
 					}
 					break;
 				case UPDATE:
@@ -79,9 +79,9 @@ public final class BancoDACD extends SqlSessionDaoSupport
 					{
 						count =
 								StatusDACD
-								.maintainStatusAssociations(banco.getStatusList(), response, banco.getId(),
-										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
-										historicoDAC, processId);
+										.maintainStatusAssociations(banco.getStatusList(), response, banco.getId(),
+												null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
+												historicoDAC, processId, null);
 					}
 					break;
 				case DELETE:
@@ -92,7 +92,7 @@ public final class BancoDACD extends SqlSessionDaoSupport
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, banco.getId(), null,
 									AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
-									processId);
+									processId, null);
 
 					break;
 			}

@@ -2,8 +2,18 @@ package com.prosperitasglobal.sendsolv.dacd.mybatis;
 
 import java.util.List;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+
 import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
+import com.prosperitasglobal.sendsolv.model.AcaoEnum;
+import com.prosperitasglobal.sendsolv.model.HistoricoItens;
+import com.prosperitasglobal.sendsolv.model.Status;
+import com.prosperitasglobal.sendsolv.model.TabelaEnum;
+import com.prosperitasglobal.sendsolv.model.TypeEnum;
+import com.qat.framework.model.QATModel.PersistanceActionEnum;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
@@ -65,7 +75,7 @@ public final class StatusDACD extends SqlSessionDaoSupport
 						historicoItens.setIdHist(historicoId);
 						historicoItens.setProcessId(processId);
 						historicoItens.setTabelaEnum(tabelaEnum);
-						historicoItens.setAcaoType(status.getModelAction());
+						historicoItens.setAcaoType(AcaoEnum.INSERT);
 						historicoDAC.insertHistoricoItens(historicoItens, "insertHistorico", response);
 					}
 					break;
@@ -77,7 +87,7 @@ public final class StatusDACD extends SqlSessionDaoSupport
 						historicoItens.setIdHist(historicoId);
 						historicoItens.setProcessId(processId);
 						historicoItens.setTabelaEnum(tabelaEnum);
-						historicoItens.setAcaoType(status.getModelAction());
+						historicoItens.setAcaoType(AcaoEnum.UPDATE);
 						historicoDAC.insertHistoricoItens(historicoItens, "insertHistorico", response);
 					}
 					break;
@@ -86,7 +96,7 @@ public final class StatusDACD extends SqlSessionDaoSupport
 					historicoItens.setIdHist(historicoId);
 					historicoItens.setProcessId(processId);
 					historicoItens.setTabelaEnum(tabelaEnum);
-					historicoItens.setAcaoType(status.getModelAction());
+					historicoItens.setAcaoType(AcaoEnum.DELETE);
 					historicoDAC.insertHistoricoItens(historicoItens, "insertHistorico", response);
 
 					break;

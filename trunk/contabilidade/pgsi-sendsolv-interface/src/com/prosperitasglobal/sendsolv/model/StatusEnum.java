@@ -20,7 +20,7 @@ public enum StatusEnum implements IIntegerEnum, II18nEnum
 	INACTIVE(2, "com.prosperitasglobal.sendsolv.model.statusenum.inactive"),
 
 	/** The setup. */
-	SETUP(3, "com.prosperitasglobal.sendsolv.model.statusenum.setup");
+	APPLY(3, "com.prosperitasglobal.sendsolv.model.statusenum.setup");
 
 	/** The code. */
 	private Integer code;

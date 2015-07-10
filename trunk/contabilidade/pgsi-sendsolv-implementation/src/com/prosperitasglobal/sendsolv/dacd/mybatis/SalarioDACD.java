@@ -40,7 +40,7 @@ public final class SalarioDACD extends SqlSessionDaoSupport
 	public static Integer maintainSalarioAssociations(List<Salario> salarioList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, ISalariosDAC salarioDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
-			Integer empId, String UserId, Integer processId)
+			Integer empId, String UserId, Integer processId, Integer historiaId)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
@@ -71,7 +71,7 @@ public final class SalarioDACD extends SqlSessionDaoSupport
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
 										AcaoEnum.INSERT, UserId, empId, TabelaEnum.SALARIO, statusDAC, historicoDAC,
-										processId);
+										processId, historiaId);
 					}
 					break;
 				case UPDATE:
@@ -81,7 +81,7 @@ public final class SalarioDACD extends SqlSessionDaoSupport
 						count =
 								StatusDACD.maintainStatusAssociations(salario.getStatusList(), response,
 										salario.getId(), null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.SALARIO,
-										statusDAC, historicoDAC, processId);
+										statusDAC, historicoDAC, processId, historiaId);
 					}
 					break;
 				case DELETE:
@@ -91,7 +91,7 @@ public final class SalarioDACD extends SqlSessionDaoSupport
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, salario.getId(), null,
 									AcaoEnum.DELETE, UserId, empId, TabelaEnum.SALARIO, statusDAC, historicoDAC,
-									processId);
+									processId, historiaId);
 					break;
 
 			}

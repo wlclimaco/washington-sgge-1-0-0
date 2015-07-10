@@ -71,7 +71,7 @@ public final class PedidoComprasDACD extends SqlSessionDaoSupport
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
 										AcaoEnum.INSERT, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
-										processId);
+										processId, null);
 					}
 					break;
 				case UPDATE:
@@ -81,7 +81,7 @@ public final class PedidoComprasDACD extends SqlSessionDaoSupport
 						count =
 								StatusDACD.maintainStatusAssociations(cnae.getStatusList(), response, cnae.getId(),
 										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
-										processId);
+										processId, null);
 					}
 					break;
 				case DELETE:
@@ -91,9 +91,9 @@ public final class PedidoComprasDACD extends SqlSessionDaoSupport
 					List<Status> statusList = new ArrayList<Status>();
 					count =
 							StatusDACD
-									.maintainStatusAssociations(statusList, response, cnae.getId(), null,
-											AcaoEnum.DELETE, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
-											processId);
+							.maintainStatusAssociations(statusList, response, cnae.getId(), null,
+									AcaoEnum.DELETE, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
+									processId, null);
 
 					break;
 			}

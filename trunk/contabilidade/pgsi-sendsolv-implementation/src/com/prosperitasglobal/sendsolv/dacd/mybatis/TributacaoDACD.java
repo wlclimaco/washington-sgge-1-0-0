@@ -65,7 +65,7 @@ public final class TributacaoDACD extends SqlSessionDaoSupport
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, count, null,
 									AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
-									processId);
+									processId, null);
 				}
 				break;
 			case UPDATE:
@@ -74,10 +74,10 @@ public final class TributacaoDACD extends SqlSessionDaoSupport
 				{
 					count =
 							StatusDACD
-							.maintainStatusAssociations(tributacao.getStatusList(), response,
-									tributacao.getId(),
-									null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
-									historicoDAC, processId);
+									.maintainStatusAssociations(tributacao.getStatusList(), response,
+											tributacao.getId(),
+											null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
+											historicoDAC, processId, null);
 				}
 				break;
 			case DELETE:
@@ -87,7 +87,8 @@ public final class TributacaoDACD extends SqlSessionDaoSupport
 				List<Status> statusList = new ArrayList<Status>();
 				count =
 						StatusDACD.maintainStatusAssociations(statusList, response, tributacao.getId(), null,
-								AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC, processId);
+								AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC, processId,
+								null);
 
 				break;
 		}

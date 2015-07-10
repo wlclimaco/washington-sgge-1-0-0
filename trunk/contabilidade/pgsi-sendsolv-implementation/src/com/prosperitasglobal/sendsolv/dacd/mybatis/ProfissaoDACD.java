@@ -72,7 +72,7 @@ public final class ProfissaoDACD extends SqlSessionDaoSupport
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
 										AcaoEnum.INSERT, UserId, empId, TabelaEnum.PROFISSAO, statusDAC, historicoDAC,
-										processId);
+										processId, null);
 					}
 					break;
 				case UPDATE:
@@ -83,7 +83,7 @@ public final class ProfissaoDACD extends SqlSessionDaoSupport
 								StatusDACD.maintainStatusAssociations(profissao.getStatusList(), response,
 										profissao.getId(),
 										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.PROFISSAO, statusDAC,
-										historicoDAC, processId);
+										historicoDAC, processId, null);
 					}
 					break;
 				case DELETE:
@@ -94,7 +94,7 @@ public final class ProfissaoDACD extends SqlSessionDaoSupport
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, profissao.getId(), null,
 									AcaoEnum.DELETE, UserId, empId, TabelaEnum.PROFISSAO, statusDAC, historicoDAC,
-									processId);
+									processId, null);
 
 					break;
 			}

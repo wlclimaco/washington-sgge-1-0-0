@@ -72,7 +72,7 @@ public final class FormaPagamentoDACD extends SqlSessionDaoSupport
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
 										AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
-										processId);
+										processId, null);
 					}
 					break;
 				case UPDATE:
@@ -81,9 +81,9 @@ public final class FormaPagamentoDACD extends SqlSessionDaoSupport
 					{
 						count =
 								StatusDACD
-								.maintainStatusAssociations(formaPg.getStatusList(), response, formaPg.getId(),
-										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
-										historicoDAC, processId);
+										.maintainStatusAssociations(formaPg.getStatusList(), response, formaPg.getId(),
+												null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
+												historicoDAC, processId, null);
 					}
 					break;
 				case DELETE:
@@ -94,7 +94,7 @@ public final class FormaPagamentoDACD extends SqlSessionDaoSupport
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, formaPg.getParentId(), null,
 									AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
-									processId);
+									processId, null);
 
 					break;
 			}

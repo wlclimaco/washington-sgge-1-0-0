@@ -1,5 +1,7 @@
 package com.prosperitasglobal.sendsolv.model;
 
+import com.qat.framework.model.II18nEnum;
+import com.qat.framework.model.IIntegerEnum;
 
 /**
  * The Enum PayrollTypeEnum details the different options a payroll can have inside of SendSolv

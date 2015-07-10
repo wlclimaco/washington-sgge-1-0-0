@@ -72,7 +72,7 @@ public final class PrecoDACD extends SqlSessionDaoSupport
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
 										AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
-										processId);
+										processId, null);
 					}
 					break;
 				case UPDATE:
@@ -81,10 +81,10 @@ public final class PrecoDACD extends SqlSessionDaoSupport
 					{
 						count =
 								StatusDACD
-								.maintainStatusAssociations(tabPreco.getStatusList(), response,
-										tabPreco.getId(),
-										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
-										historicoDAC, processId);
+										.maintainStatusAssociations(tabPreco.getStatusList(), response,
+												tabPreco.getId(),
+												null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
+												historicoDAC, processId, null);
 					}
 					break;
 				case DELETE:
@@ -95,7 +95,7 @@ public final class PrecoDACD extends SqlSessionDaoSupport
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, tabPreco.getId(), null,
 									AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
-									processId);
+									processId, null);
 
 					break;
 			}
