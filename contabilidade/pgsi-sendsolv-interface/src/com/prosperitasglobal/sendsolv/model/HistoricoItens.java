@@ -26,52 +26,57 @@ public class HistoricoItens extends ModelCosmeDamiao
 		this.id = id;
 	}
 
-	public String getRegistro()
+	/**
+	 * @return the idHist
+	 */
+	public Integer getIdHist()
 	{
-		return registro;
+		return idHist;
 	}
 
-	public void setRegistro(String registro)
+	/**
+	 * @param idHist the idHist to set
+	 */
+	public void setIdHist(Integer idHist)
 	{
-		this.registro = registro;
+		this.idHist = idHist;
 	}
 
-	public Integer getData()
+	/**
+	 * @return the processId
+	 */
+	@Override
+	public Integer getProcessId()
 	{
-		return data;
+		return processId;
 	}
 
-	public void setData(Integer data)
+	/**
+	 * @param processId the processId to set
+	 */
+	@Override
+	public void setProcessId(Integer processId)
 	{
-		this.data = data;
+		this.processId = processId;
 	}
 
-	public String getUsuario()
-	{
-		return usuario;
-	}
-
-	public void setUsuario(String usuario)
-	{
-		this.usuario = usuario;
-	}
-
-	public Integer getEmpresa()
-	{
-		return empresa;
-	}
-
-	public void setEmpresa(Integer empresa)
-	{
-		this.empresa = empresa;
-	}
-
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString()
 	{
-		return "Historico [getId()=" + getId() + ", getRegistro()=" + getRegistro() + ", getData()=" + getData()
-				+ ", getUsuario()=" + getUsuario() + ", getEmpresa()=" + getEmpresa() + ", getParentId()="
-				+ getParentId() + ", toString()=" + super.toString() + "]";
+		return "HistoricoItens [getId()=" + getId() + ", getIdHist()=" + getIdHist() + ", getProcessId()="
+				+ getProcessId() + ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()="
+				+ getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId()
+				+ ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()="
+				+ getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId()
+				+ ", getSite()=" + getSite() + ", getUserId()=" + getUserId() + ", toString()=" + super.toString()
+				+ ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
+				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
+				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + "]";
 	}
 
 }

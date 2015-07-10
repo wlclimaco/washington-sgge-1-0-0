@@ -72,7 +72,7 @@ public final class ItensEspeciaisDACD extends SqlSessionDaoSupport
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
 										AcaoEnum.INSERT, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
-										processId);
+										processId, null);
 					}
 					break;
 				case UPDATE:
@@ -83,7 +83,7 @@ public final class ItensEspeciaisDACD extends SqlSessionDaoSupport
 								StatusDACD.maintainStatusAssociations(itensEspeciais.getStatusList(), response,
 										itensEspeciais.getId(),
 										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
-										processId);
+										processId, null);
 					}
 					break;
 				case DELETE:
@@ -93,9 +93,9 @@ public final class ItensEspeciaisDACD extends SqlSessionDaoSupport
 					List<Status> statusList = new ArrayList<Status>();
 					count =
 							StatusDACD
-									.maintainStatusAssociations(statusList, response, itensEspeciais.getId(), null,
-											AcaoEnum.DELETE, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
-											processId);
+							.maintainStatusAssociations(statusList, response, itensEspeciais.getId(), null,
+									AcaoEnum.DELETE, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
+									processId, null);
 
 					break;
 			}

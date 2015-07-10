@@ -18,7 +18,7 @@
 		<typeAlias alias="TabelaEnum"									 type="com.prosperitasglobal.sendsolv.model.TabelaEnum" />
 		<typeAlias alias="TypeEnum"									 	 type="com.prosperitasglobal.sendsolv.model.TypeEnum" />
 		<typeAlias alias="PessoaTypeEnum"							 	 type="com.prosperitasglobal.sendsolv.model.PessoaTypeEnum" />
-
+	    <typeAlias alias="EntidadeTypeEnum"							 	 type="com.prosperitasglobal.sendsolv.model.EntidadeTypeEnum" />
 		<typeAlias alias="PagedInquiryRequest"     						 type="com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest"/>
 
 
@@ -56,6 +56,7 @@
 		<typeAlias alias="Funcionario"              				 type="com.prosperitasglobal.sendsolv.model.Funcionario"/>
 		<typeAlias alias="Grupo"              				 		 type="com.prosperitasglobal.sendsolv.model.Grupo"/>
 		<typeAlias alias="Historico"              				 	 type="com.prosperitasglobal.sendsolv.model.Historico"/>
+		<typeAlias alias="HistoricoItens"              			 	 type="com.prosperitasglobal.sendsolv.model.HistoricoItens"/>
 		<typeAlias alias="HorarioFunc"              			 	 type="com.prosperitasglobal.sendsolv.model.HorarioFunc"/>
 		<typeAlias alias="Incidencia"              				 	 type="com.prosperitasglobal.sendsolv.model.Incidencia"/>
 		<typeAlias alias="ItensEspeciais"              				 type="com.prosperitasglobal.sendsolv.model.ItensEspeciais"/>

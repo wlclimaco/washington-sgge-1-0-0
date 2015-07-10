@@ -543,7 +543,7 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 			insertCount =
 					StatusDACD.maintainStatusAssociations(statusList, response, produto.getId(), null, AcaoEnum.INSERT,
 							produto.getCreateUser(), produto.getEmprId(), TabelaEnum.EMPRESA, getStatusDAC(),
-							getHistoricoDAC(), processId);
+							getHistoricoDAC(), processId, null);
 
 		}
 
@@ -682,7 +682,7 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 			updateCount =
 					StatusDACD.maintainStatusAssociations(statusList, response, produto.getId(), null, AcaoEnum.INSERT,
 							produto.getCreateUser(), produto.getEmprId(), TabelaEnum.EMPRESA, getStatusDAC(),
-							getHistoricoDAC(), processId);
+							getHistoricoDAC(), processId, null);
 
 		}
 

@@ -71,7 +71,7 @@ public final class CustoDACD extends SqlSessionDaoSupport
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
 										AcaoEnum.INSERT, UserId, empId, TabelaEnum.CUSTO, statusDAC, historicoDAC,
-										processId);
+										processId, null);
 					}
 					break;
 				case UPDATE:
@@ -80,9 +80,9 @@ public final class CustoDACD extends SqlSessionDaoSupport
 					{
 						count =
 								StatusDACD
-								.maintainStatusAssociations(custo.getStatusList(), response, custo.getId(),
-										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.CUSTO, statusDAC,
-										historicoDAC, processId);
+										.maintainStatusAssociations(custo.getStatusList(), response, custo.getId(),
+												null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.CUSTO, statusDAC,
+												historicoDAC, processId, null);
 					}
 					break;
 				case DELETE:
@@ -93,7 +93,7 @@ public final class CustoDACD extends SqlSessionDaoSupport
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, custo.getId(), null,
 									AcaoEnum.DELETE, UserId, empId, TabelaEnum.CUSTO, statusDAC, historicoDAC,
-									processId);
+									processId, null);
 
 					break;
 			}

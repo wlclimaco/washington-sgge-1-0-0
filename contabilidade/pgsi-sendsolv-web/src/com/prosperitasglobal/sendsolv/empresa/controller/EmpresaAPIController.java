@@ -16,6 +16,7 @@ import com.prosperitasglobal.sendsolv.model.Documento;
 import com.prosperitasglobal.sendsolv.model.Email;
 import com.prosperitasglobal.sendsolv.model.Empresa;
 import com.prosperitasglobal.sendsolv.model.Endereco;
+import com.prosperitasglobal.sendsolv.model.EntidadeTypeEnum;
 import com.prosperitasglobal.sendsolv.model.Estado;
 import com.prosperitasglobal.sendsolv.model.Regime;
 import com.prosperitasglobal.sendsolv.model.Socio;
@@ -283,6 +284,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 		empresa.setEmprId(1);
 		empresa.setNome("Cosme e damiao Contabiliadade");
 		empresa.setRegime(new Regime(1));
+		empresa.setEntidadeEnum(EntidadeTypeEnum.EMPRESA);
 		// empresa.setConfiguracao(new Configuracao(1));
 		empresa.setEnderecos(insertEndereco(modelAction));
 		empresa.setDocumentos(insertDocumento(modelAction));

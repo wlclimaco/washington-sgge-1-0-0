@@ -2,6 +2,10 @@ package com.prosperitasglobal.sendsolv.dac;
 
 import java.util.List;
 
+import com.prosperitasglobal.sendsolv.model.Cnae;
+import com.prosperitasglobal.sendsolv.model.CnaeRel;
+import com.qat.framework.model.response.InternalResultsResponse;
+
 /**
  * The Interface ICnaeDAC.
  */
