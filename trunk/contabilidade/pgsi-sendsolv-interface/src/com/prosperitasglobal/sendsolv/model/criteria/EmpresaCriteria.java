@@ -2,8 +2,6 @@ package com.prosperitasglobal.sendsolv.model.criteria;
 
 import java.io.Serializable;
 
-import com.prosperitasglobal.sendsolv.model.EntidadeTypeEnum;
-
 /**
  * The Class MemberCriteria.
  */
@@ -23,7 +21,7 @@ public class EmpresaCriteria implements Serializable
 	/** The location name. */
 	private String cidade;
 
-	private EntidadeTypeEnum entidadeEnum;
+	private Integer entidadeEnum;
 
 	/** The organization name. */
 	private String status;
@@ -138,7 +136,7 @@ public class EmpresaCriteria implements Serializable
 	/**
 	 * @return the entidadeEnum
 	 */
-	public EntidadeTypeEnum getEntidadeEnum()
+	public Integer getEntidadeEnum()
 	{
 		return entidadeEnum;
 	}
@@ -146,7 +144,7 @@ public class EmpresaCriteria implements Serializable
 	/**
 	 * @param entidadeEnum the entidadeEnum to set
 	 */
-	public void setEntidadeEnum(EntidadeTypeEnum entidadeEnum)
+	public void setEntidadeEnum(Integer entidadeEnum)
 	{
 		this.entidadeEnum = entidadeEnum;
 	}
@@ -158,10 +156,11 @@ public class EmpresaCriteria implements Serializable
 	@Override
 	public String toString()
 	{
-		return "EmpresaCriteria [getNome()=" + getNome() + ", getEmpresa()=" + getEmpresa() + ", getCidade()="
-				+ getCidade() + ", getStatus()=" + getStatus() + ", getId()=" + getId() + ", getRegime()="
-				+ getRegime() + ", getEntidadeEnum()=" + getEntidadeEnum() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+		return "EmpresaCriteria [getNome()=" + getNome()
+				+ ", getEmpresa()=" + getEmpresa() + ", getCidade()=" + getCidade() + ", getStatus()=" + getStatus()
+				+ ", getId()=" + getId() + ", getRegime()=" + getRegime() + ", getEntidadeEnum()=" + getEntidadeEnum()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
 	}
 
 }

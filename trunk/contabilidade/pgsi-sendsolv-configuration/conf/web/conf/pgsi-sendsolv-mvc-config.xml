@@ -58,6 +58,17 @@
 	<mvc:view-controller path="/util/refreshDialog"                    view-name="/util/update_error"/>
 	<mvc:view-controller path="/batch/updateDateTransactionDialog"     view-name="/payments/date_update_dialog"/>
 
+	<mvc:view-controller path="/sistema/chats"       view-name="/bootstrap/chats"/>
+	<mvc:view-controller path="/sistema/error"       view-name="/bootstrap/error"/>
+	<mvc:view-controller path="/sistema/faq"         view-name="/bootstrap/faq"/>
+	<mvc:view-controller path="/sistema/guidely"     view-name="/bootstrap/guidely"/>
+	<mvc:view-controller path="/sistema/icons"       view-name="/bootstrap/icons"/>
+	<mvc:view-controller path="/sistema/login"       view-name="/bootstrap/login"/>
+	<mvc:view-controller path="/sistema/pricing"     view-name="/bootstrap/pricing"/>
+	<mvc:view-controller path="/sistema/reports"     view-name="/bootstrap/reports"/>
+	<mvc:view-controller path="/sistema/shortcodes"  view-name="/bootstrap/shortcodes"/>
+	<mvc:view-controller path="/sistema/signup"      view-name="/bootstrap/signup"/>
+
 	<!-- Resolves view names to protected .jsp resources within the /WEB-INF
 		directory -->
 	<bean
