@@ -148,7 +148,7 @@
   <select id="fetchEmpresaRowCount" parameterType="EmpresaInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
         FROM empresa
-        where entidadeEnum = criteria.entidadeEnum
+        where entidadeEnum = entidadeEnum
 
   </select>
 
@@ -177,7 +177,7 @@
     						<include refid="allEmpresaColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM empresa b
-						where b.entidadeEnum = criteria.entidadeEnum
+						where b.entidadeEnum = entidadeEnum
 					<if test="parentId != null">
 						AND b.id = #{id}
 					</if>

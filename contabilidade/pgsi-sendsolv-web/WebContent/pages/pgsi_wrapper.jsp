@@ -44,8 +44,8 @@
          <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Cadastros</span> <b class="caret"></b></a>
 		 <ul class="dropdown-menu">
             <li><a href="empresa" class="alist" data-title='Empresa'>Empresa</a></li>
-            <li><a href="empresa/filial" class="alist" data-title='Empresa'>Filial</a></li>
-            <li><a href="empresa/deposito" class="alist" data-title='Empresa'>Deposito</a></li>
+            <li><a href="empresa/filial" class="alist" data-title='Filial'>Filial</a></li>
+            <li><a href="empresa/deposito" class="alist" data-title='Deposito'>Deposito</a></li>
 			<li><a href="pricing.html">Documentos</a></li>
 			<li><a href="pessoa/cliente" class="alist" data-title='Empresa'>Cliente</a></li>
             <li><a href="pessoa/fornecedor" class="alist" data-title='Empresa'>Fornecedor</a></li>
@@ -109,6 +109,7 @@
 			<li><a href="sistema/guidely">Guidely</a></li>
           </ul>
         </li>
+		</ul>
     </div>
     <!-- /container -->
   </div>
