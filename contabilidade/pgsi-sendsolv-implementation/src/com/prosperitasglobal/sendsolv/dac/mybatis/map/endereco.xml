@@ -54,16 +54,16 @@
   </sql>
 
   <sql id="allEnderecoValues">
-  		 #{tabelaEnumValue}
-		,#{parentId}
-		,#{typeValue}
-		,#{logradouro}
-		,#{cidade.id}
-		,#{estado.id}
-		,#{bairro}
-		,#{numero}
-		,#{cep}
-		,#{processId}
+  		#{tabelaEnumValue},
+		#{parentId},
+		#{typeValue},
+		#{logradouro},
+		#{cidade.id},
+		#{estado.id},
+		#{bairro},
+		#{numero},
+		#{cep},
+		#{processId},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
