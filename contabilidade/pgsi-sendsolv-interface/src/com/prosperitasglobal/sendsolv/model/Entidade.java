@@ -17,6 +17,8 @@ public class Entidade extends ModelCosmeDamiao
 
 	private Regime regime;
 
+	private Integer entidadeId;
+
 	private EntidadeTypeEnum entidadeEnum;
 
 	private Configuracao configuracao;
@@ -43,6 +45,20 @@ public class Entidade extends ModelCosmeDamiao
 	public Entidade()
 	{
 		super();
+	}
+
+	public Integer getEntidadeEnumValue()
+	{
+		if (entidadeEnum != null)
+		{
+			return entidadeEnum.getValue();
+		}
+		return null;
+	}
+
+	public void setEntidadeEnumValue(Integer acaoTypeValue)
+	{
+		entidadeEnum = EntidadeTypeEnum.enumForValue(acaoTypeValue);
 	}
 
 	/**
@@ -253,6 +269,22 @@ public class Entidade extends ModelCosmeDamiao
 		this.depositoList = depositoList;
 	}
 
+	/**
+	 * @return the entidadeId
+	 */
+	public Integer getEntidadeId()
+	{
+		return entidadeId;
+	}
+
+	/**
+	 * @param entidadeId the entidadeId to set
+	 */
+	public void setEntidadeId(Integer entidadeId)
+	{
+		this.entidadeId = entidadeId;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -260,11 +292,12 @@ public class Entidade extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Entidade [getId()=" + getId() + ", getNome()=" + getNome() + ", getEnderecos()=" + getEnderecos()
-				+ ", getDocumentos()=" + getDocumentos() + ", getEmails()=" + getEmails() + ", getTelefones()="
-				+ getTelefones() + ", getSocios()=" + getSocios() + ", getCnaes()=" + getCnaes() + ", getRegime()="
-				+ getRegime() + ", getEntidadeEnum()=" + getEntidadeEnum() + ", getConfiguracao()=" + getConfiguracao()
-				+ ", getFilialList()=" + getFilialList() + ", getDepositoList()=" + getDepositoList()
+		return "Entidade [getEntidadeEnumValue()=" + getEntidadeEnumValue() + ", getId()=" + getId() + ", getNome()="
+				+ getNome() + ", getEnderecos()=" + getEnderecos() + ", getDocumentos()=" + getDocumentos()
+				+ ", getEmails()=" + getEmails() + ", getTelefones()=" + getTelefones() + ", getSocios()="
+				+ getSocios() + ", getCnaes()=" + getCnaes() + ", getRegime()=" + getRegime() + ", getEntidadeEnum()="
+				+ getEntidadeEnum() + ", getConfiguracao()=" + getConfiguracao() + ", getFilialList()="
+				+ getFilialList() + ", getDepositoList()=" + getDepositoList() + ", getEntidadeId()=" + getEntidadeId()
 				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
 				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
 				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
