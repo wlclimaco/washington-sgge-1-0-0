@@ -26,7 +26,7 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-	<collection property="agenciaList" column="id" select="AgenciaMap.fetchFrequencyByBancoId"/>
+	<collection property="agenciaList" column="id" select="AgenciaMap.fetchAgenciaByBanco"/>
 	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByPessoaId"/>
   </resultMap>
 
@@ -113,10 +113,10 @@
 	    FROM banco b ORDER BY b.id ASC
   </select>
 
-  <select id="fetchBancoByPessoa" parameterType="Banco" resultType="int">
+  <select id="fetchBancoByPessoa" parameterType="Integer" resultType="bancoResult">
 	SELECT b.id
 		<include refid="allBancoColumns" />
-		FROM banco b ORDER BY b.id ASC
+		FROM banco b where id = #{id} ORDER BY b.id ASC
   </select>
 
 

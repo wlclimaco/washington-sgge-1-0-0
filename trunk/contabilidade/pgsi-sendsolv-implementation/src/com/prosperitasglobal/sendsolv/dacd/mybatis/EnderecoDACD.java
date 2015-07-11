@@ -65,6 +65,7 @@ public final class EnderecoDACD extends SqlSessionDaoSupport
 						Status status = new Status();
 						status.setStatus(StatusEnum.ACTIVE);
 						List<Status> statusList = new ArrayList<Status>();
+						statusList.add(status);
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
 										AcaoEnum.INSERT, UserId, empId, TabelaEnum.ENDERECO, statusDAC, historicoDAC,
@@ -75,8 +76,12 @@ public final class EnderecoDACD extends SqlSessionDaoSupport
 					count = enderecoDAC.updateEndereco(endereco, response);
 					if (count > 0)
 					{
+						Status status = new Status();
+						status.setStatus(StatusEnum.ACTIVE);
+						List<Status> statusList = new ArrayList<Status>();
+						statusList.add(status);
 						count =
-								StatusDACD.maintainStatusAssociations(endereco.getStatusList(), response,
+								StatusDACD.maintainStatusAssociations(statusList, response,
 										endereco.getId(), null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.ENDERECO,
 										statusDAC, historicoDAC, processId, historicoId);
 					}
@@ -86,6 +91,7 @@ public final class EnderecoDACD extends SqlSessionDaoSupport
 					Status status = new Status();
 					status.setStatus(StatusEnum.INACTIVE);
 					List<Status> statusList = new ArrayList<Status>();
+					statusList.add(status);
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, endereco.getId(), null,
 									AcaoEnum.DELETE, UserId, empId, TabelaEnum.ENDERECO, statusDAC, historicoDAC,

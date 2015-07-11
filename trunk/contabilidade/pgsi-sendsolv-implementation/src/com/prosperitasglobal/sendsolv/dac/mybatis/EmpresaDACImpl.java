@@ -332,6 +332,7 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		HistoricoItens historicoItens = new HistoricoItens();
 		historicoItens.setIdHist(historicoId);
 		historicoItens.setProcessId(processId);
+		historicoItens.setParentId(empresa.getId());
 		historicoItens.setTabelaEnum(TabelaEnum.EMPRESA);
 		historicoItens.setAcaoType(AcaoEnum.INSERT);
 
@@ -518,10 +519,10 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, empresa.getId(),
-								null, AcaoEnum.DELETE,
-								empresa.getCreateUser(), empresa.getId(), TabelaEnum.EMPRESA, getStatusDAC(),
-								getHistoricoDAC(), processId, null);
+				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, empresa.getId(),
+						null, AcaoEnum.DELETE,
+						empresa.getCreateUser(), empresa.getId(), TabelaEnum.EMPRESA, getStatusDAC(),
+						getHistoricoDAC(), processId, null);
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)

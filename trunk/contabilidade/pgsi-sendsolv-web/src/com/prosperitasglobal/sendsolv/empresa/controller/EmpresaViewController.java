@@ -13,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.prosperitasglobal.sendsolv.filter.FilterFactory;
 import com.prosperitasglobal.sendsolv.filter.model.response.FiltersResponse;
-import com.prosperitasglobal.sendsolv.model.EntidadeTypeEnum;
 import com.prosperitasglobal.sendsolv.model.criteria.EmpresaCriteria;
 import com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest;
 import com.qat.framework.model.SortExpression;
@@ -129,7 +128,7 @@ public class EmpresaViewController extends EmpresaBaseController
 
 		EmpresaInquiryRequest pagedInquiryRequest = new EmpresaInquiryRequest();
 		EmpresaCriteria criteria = new EmpresaCriteria();
-		criteria.setEntidadeEnum(EntidadeTypeEnum.EMPRESA);
+		criteria.setEntidadeEnum(1);
 		pagedInquiryRequest.setCriteria(criteria);
 		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
 		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
@@ -174,7 +173,7 @@ public class EmpresaViewController extends EmpresaBaseController
 
 		EmpresaInquiryRequest pagedInquiryRequest = new EmpresaInquiryRequest();
 		EmpresaCriteria criteria = new EmpresaCriteria();
-		criteria.setEntidadeEnum(EntidadeTypeEnum.FILIAL);
+		criteria.setEntidadeEnum(2);
 		pagedInquiryRequest.setCriteria(criteria);
 		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
 		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
@@ -220,7 +219,7 @@ public class EmpresaViewController extends EmpresaBaseController
 		EmpresaInquiryRequest pagedInquiryRequest = new EmpresaInquiryRequest();
 
 		EmpresaCriteria criteria = new EmpresaCriteria();
-		criteria.setEntidadeEnum(EntidadeTypeEnum.DEPOSITO);
+		criteria.setEntidadeEnum(3);
 		pagedInquiryRequest.setCriteria(criteria);
 		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
 		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);

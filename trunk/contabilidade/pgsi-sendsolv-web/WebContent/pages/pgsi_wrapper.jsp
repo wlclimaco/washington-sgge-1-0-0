@@ -47,9 +47,9 @@
             <li><a href="empresa/filial" class="alist" data-title='Filial'>Filial</a></li>
             <li><a href="empresa/deposito" class="alist" data-title='Deposito'>Deposito</a></li>
 			<li><a href="pricing.html">Documentos</a></li>
-			<li><a href="pessoa/cliente" class="alist" data-title='Empresa'>Cliente</a></li>
-            <li><a href="pessoa/fornecedor" class="alist" data-title='Empresa'>Fornecedor</a></li>
-            <li><a href="pessoa/transportador" class="alist" data-title='Empresa'>Transportador</a></li>
+			<li><a href="cliente" class="alist" data-title='Empresa'>Cliente</a></li>
+            <li><a href="fornecedor" class="alist" data-title='Empresa'>Fornecedor</a></li>
+            <li><a href="transportador" class="alist" data-title='Empresa'>Transportador</a></li>
           </ul>
         </li>
 		<li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Departamento Pessoal</span> <b class="caret"></b></a>

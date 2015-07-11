@@ -71,7 +71,7 @@
 		SQL Insert Statements.
  	-->
   <insert id="insertEndereco" parameterType="Endereco" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO endereco b(
+  	INSERT INTO endereco (
 		<include refid="allEnderecoColumns" />
       )
     VALUES (<include refid="allEnderecoValues" /> )

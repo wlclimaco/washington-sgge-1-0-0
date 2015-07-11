@@ -1195,7 +1195,7 @@ GO
 
 DROP TABLE [dbo].[Profissao];
 CREATE TABLE [dbo].[Profissao](
-	[id]          	 [int] NOT NULL,
+	[id]          	 [int] identity(1,1) NOT NULL,
 	[parentId]     	 [int] NOT NULL,
 	[profissao] 	 [varchar](100) NULL,
 	[renda] 		 [real] NULL,
@@ -1241,7 +1241,7 @@ GO
 
 DROP TABLE [dbo].[Convenio];
 CREATE TABLE [dbo].[Convenio](
-	[id]          	 [int] NOT NULL,
+	[id]          	 [int] identity(1,1) NOT NULL,
 	[nome] 	 		 [varchar](100) NULL,
 	[dataini]   	 [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[dataFin]   	 [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1271,7 +1271,7 @@ INSERT INTO [dbo].[Convenio]
 
 DROP TABLE [dbo].[ConvenioPessoa];
 CREATE TABLE [dbo].[ConvenioPessoa](
-	[id]          	 [int] NOT NULL,
+	[id]          	 [int] identity(1,1) NOT NULL,
 	[parentId] 	 	 [int] NOT NULL,
 	[convId]   	 [int] NOT NULL,
 	[processId]    [int] NULL,
@@ -1307,15 +1307,15 @@ INSERT INTO [dbo].[ConvenioPessoa]
            (16,1,1432783357778,'System',1432783357778,'System'),
            (17,1,1432783357778,'System',1432783357778,'System'),
            (18,2,1432783357778,'System',1432783357778,'System'),
-           (3,1432783357778,'System',1432783357778,'System'),
-           (4,1432783357778,'System',1432783357778,'System'),
+           (19,3,1432783357778,'System',1432783357778,'System'),
+           (20,4,1432783357778,'System',1432783357778,'System'),
            (21,5,1432783357778,'System',1432783357778,'System')
 
 /** ---------------------------------------------------------------*/
 
 DROP TABLE [dbo].[CondPag];
 CREATE TABLE [dbo].[CondPag](
-	[id]          	 [int] NOT NULL,
+	[id]          	 [int] identity(1,1) NOT NULL,
 	[nome] 	 		 [varchar](100) NULL,
 	[dataini]   	 [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[dataFin]   	 [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1344,7 +1344,7 @@ INSERT INTO [dbo].[CondPag]
 
 DROP TABLE [dbo].[CondPagPessoa];
 CREATE TABLE [dbo].[CondPagPessoa](
-	[id]          	 [int] NOT NULL,
+	[id]          	 [int] identity(1,1) NOT NULL,
 	[parentId] 	 	 [int] NOT NULL,
 	[condPagId]   	 [int] NOT NULL,
 	[processId]    [int] NULL,
@@ -1379,8 +1379,8 @@ INSERT INTO [dbo].[CondPagPessoa]
            (16,1,1432783357778,'System',1432783357778,'System'),
            (17,2,1432783357778,'System',1432783357778,'System'),
            (18,2,1432783357778,'System',1432783357778,'System'),
-           (3,1432783357778,'System',1432783357778,'System'),
-           (1,1432783357778,'System',1432783357778,'System'),
+           (19,3,1432783357778,'System',1432783357778,'System'),
+           (20,1,1432783357778,'System',1432783357778,'System'),
            (21,2,1432783357778,'System',1432783357778,'System')
 
 /** ---------------------------------------------------------------*/
@@ -1388,7 +1388,7 @@ INSERT INTO [dbo].[CondPagPessoa]
 
 DROP TABLE [dbo].[TipoPag];
 CREATE TABLE [dbo].[TipoPag](
-	[id]          	 [int] NOT NULL,
+	[id]          	[int] identity(1,1) NOT NULL,
 	[descricao] 	 [varchar](100) NULL,
 	[processId]    [int] NULL,
 	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1411,7 +1411,7 @@ INSERT INTO [dbo].[TipoPag]
 
 DROP TABLE [dbo].[TipoPagReg];
 CREATE TABLE [dbo].[TipoPagReg](
-	[id]          	         [int] NOT NULL,
+	[id]          	         [int] identity(1,1) NOT NULL,
 	[parentId]          	 [int] NOT NULL,
 	[tipoPagId]          	 [int] NOT NULL,
 	[tabela]          	     [int] NOT NULL,
@@ -1435,28 +1435,28 @@ INSERT INTO [dbo].[TipoPagReg]
            (4,4,21,'System',1432783357778,1432783357778,'System'),
            (5,5,21,'System',1432783357778,1432783357778,'System'),
            (6,1,21,'System',1432783357778,1432783357778,'System'),
-           (7,1,'System',1432783357778,1432783357778,'System'),
-           (8,2,'System',1432783357778,1432783357778,'System'),
-           (9,3,'System',1432783357778,1432783357778,'System'),
-           (10,1,'System',1432783357778,1432783357778,'System'),
+           (7,1,21,'System',1432783357778,1432783357778,'System'),
+           (8,2,21,'System',1432783357778,1432783357778,'System'),
+           (9,3,21,'System',1432783357778,1432783357778,'System'),
+           (10,1,21,'System',1432783357778,1432783357778,'System'),
            (11,1,21,'System',1432783357778,1432783357778,'System'),
            (12,2,21,'System',1432783357778,1432783357778,'System'),
            (13,3,21,'System',1432783357778,1432783357778,'System'),
            (14,4,21,'System',1432783357778,1432783357778,'System'),
            (15,5,21,'System',1432783357778,1432783357778,'System'),
            (16,1,21,'System',1432783357778,1432783357778,'System'),
-           (17,1,'System',1432783357778,1432783357778,'System'),
-           (18,2,'System',1432783357778,1432783357778,'System'),
-           (1,'System',1432783357778,1432783357778,'System'),
-           (2,'System',1432783357778,1432783357778,'System'),
-           (21,3,'System',1432783357778,1432783357778,'System')
+           (17,1,21,'System',1432783357778,1432783357778,'System'),
+           (18,2,21,'System',1432783357778,1432783357778,'System'),
+           (19,1,21,'System',1432783357778,1432783357778,'System'),
+           (20,2,21,'System',1432783357778,1432783357778,'System'),
+           (21,3,21,'System',1432783357778,1432783357778,'System')
 
 
 /** ---------------------------------------------------------------*/
 
 DROP TABLE [dbo].[banco];
 CREATE TABLE [dbo].[banco](
-	[id]          	         [int] NOT NULL,
+	[id]          	         [int] identity(1,1) NOT NULL,
 	[nome]          	 	 [varchar](50) NULL,
 	[logo]          	 	 [varchar](50) NULL,
 	[processId]    [int] NULL,
@@ -1481,7 +1481,7 @@ INSERT INTO [dbo].[banco]
 /** ---------------------------------------------------------------*/
 DROP TABLE [dbo].[agencia];
 CREATE TABLE [dbo].[agencia](
-	[id]          	         [int] NOT NULL,
+	[id]          	         [int] identity(1,1) NOT NULL,
 	[nome]          	 	 [varchar](50) NULL,
 	[parentId]          	 [int] NOT NULL,
 	[numero]          	 	 [varchar](50) NULL,
@@ -1507,7 +1507,7 @@ INSERT INTO [dbo].[agencia]
 /** ---------------------------------------------------------------*/
 DROP TABLE [dbo].[BancoPesoa];
 CREATE TABLE [dbo].[BancoPesoa](
-	[id]          	         [int] NOT NULL,
+	[id]          	         [int] identity(1,1) NOT NULL,
 	[parentId]          	 [int] NOT NULL,
 	[bancoId]          	 	 [int] NOT NULL,
 	[numCont]          	     [varchar](50) NULL,
@@ -1545,8 +1545,8 @@ INSERT INTO [dbo].[BancoPesoa]
            (16,1,'026.987.8-8',0.99,'System',1432783357778,1432783357778,'System'),
            (17,3,'026.987.8-8',0.99,'System',1432783357778,1432783357778,'System'),
            (18,2,'026.987.8-8',0.99,'System',1432783357778,1432783357778,'System'),
-           (1,'026.987.8-8',0.99,'System',1432783357778,1432783357778,'System'),
-           (2,'026.987.8-8',0.99,'System',1432783357778,1432783357778,'System'),
+           (20,1,'026.987.8-8',0.99,'System',1432783357778,1432783357778,'System'),
+           (22,2,'026.987.8-8',0.99,'System',1432783357778,1432783357778,'System'),
            (21,3,'026.987.8-8',0.99,'System',1432783357778,1432783357778,'System')
 
 /** ---------------------------------------------------------------*/
@@ -3214,6 +3214,7 @@ CREATE TABLE [dbo].[historicoItens](
 	[processId]		 [int] NOT NULL,
 	[type] 		     [int] NOT NULL,
 	[tabela] 		 [int] NOT NULL,
+	[parentId] 		 [int] NOT NULL,
     [data]  	     [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[create_date]  	 [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  	 [varchar](50) NULL,
