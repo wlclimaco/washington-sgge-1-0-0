@@ -64,6 +64,7 @@ public final class DocumentosDACD extends SqlSessionDaoSupport
 						Status status = new Status();
 						status.setStatus(StatusEnum.ACTIVE);
 						List<Status> statusList = new ArrayList<Status>();
+						statusList.add(status);
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
 										AcaoEnum.INSERT, UserId, empId, TabelaEnum.DOCUMENTO, statusDAC, historicoDAC,
@@ -85,6 +86,7 @@ public final class DocumentosDACD extends SqlSessionDaoSupport
 					Status status = new Status();
 					status.setStatus(StatusEnum.INACTIVE);
 					List<Status> statusList = new ArrayList<Status>();
+					statusList.add(status);
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, documento.getId(), null,
 									AcaoEnum.DELETE, UserId, empId, TabelaEnum.DOCUMENTO, statusDAC, historicoDAC,

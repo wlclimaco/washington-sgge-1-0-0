@@ -68,6 +68,7 @@ public final class TelefoneDACD extends SqlSessionDaoSupport
 						Status status = new Status();
 						status.setStatus(StatusEnum.ACTIVE);
 						List<Status> statusList = new ArrayList<Status>();
+						statusList.add(status);
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
 										AcaoEnum.INSERT, UserId, empId, TabelaEnum.TELEFONE, statusDAC, historicoDAC,
@@ -89,6 +90,7 @@ public final class TelefoneDACD extends SqlSessionDaoSupport
 					Status status = new Status();
 					status.setStatus(StatusEnum.INACTIVE);
 					List<Status> statusList = new ArrayList<Status>();
+					statusList.add(status);
 					count =
 							StatusDACD
 							.maintainStatusAssociations(statusList, response, count, null, AcaoEnum.DELETE,

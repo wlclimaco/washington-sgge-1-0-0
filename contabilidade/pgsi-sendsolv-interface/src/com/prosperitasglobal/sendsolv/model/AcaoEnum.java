@@ -16,7 +16,9 @@ public enum AcaoEnum implements IIntegerEnum, II18nEnum
 	DELETE(2, "sendsolv.base.model.risklevelenum.medium"),
 
 	/** The unknown. */
-	FETCH(3, "sendsolv.base.model.risklevelenum.unknown");
+	FETCH(3, "sendsolv.base.model.risklevelenum.unknown"),
+
+	APPLY(4, "sendsolv.base.model.risklevelenum.unknown");
 
 	/** The code. */
 	private Integer code;

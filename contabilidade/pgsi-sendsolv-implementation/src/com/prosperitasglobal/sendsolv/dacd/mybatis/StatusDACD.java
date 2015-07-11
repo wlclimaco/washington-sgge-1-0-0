@@ -55,7 +55,8 @@ public final class StatusDACD extends SqlSessionDaoSupport
 		{
 			// Make sure we set the parent key
 			status.setParentId(parentId);
-
+			status.setTabelaEnum(tabelaEnum);
+			status.setAcaoType(acaoType);
 			status.setModelAction(PersistanceActionEnum.INSERT);
 
 			HistoricoItens historicoItens = new HistoricoItens();
@@ -75,6 +76,7 @@ public final class StatusDACD extends SqlSessionDaoSupport
 						historicoItens.setIdHist(historicoId);
 						historicoItens.setProcessId(processId);
 						historicoItens.setTabelaEnum(tabelaEnum);
+						historicoItens.setParentId(parentId);
 						historicoItens.setAcaoType(AcaoEnum.INSERT);
 						historicoDAC.insertHistoricoItens(historicoItens, "insertHistorico", response);
 					}

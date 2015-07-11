@@ -25,6 +25,7 @@
 
 
 		<typeAlias alias="Arquivo"              					 type="com.prosperitasglobal.sendsolv.model.Arquivo"/>
+		<typeAlias alias="Agencia"              					 type="com.prosperitasglobal.sendsolv.model.Agencia"/>
 		<typeAlias alias="Banco"              				 		 type="com.prosperitasglobal.sendsolv.model.Banco"/>
 		<typeAlias alias="Beneficios"              				 	 type="com.prosperitasglobal.sendsolv.model.Beneficios"/>
 		<typeAlias alias="Cidade"              				 		 type="com.prosperitasglobal.sendsolv.model.Cidade"/>
@@ -107,6 +108,7 @@
 
  	<mappers>
 		<mapper resource="com/prosperitasglobal/cbof/dac/mybatis/map/cbof.xml" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/agencia.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/arquivo.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/banco.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/beneficios.xml" />

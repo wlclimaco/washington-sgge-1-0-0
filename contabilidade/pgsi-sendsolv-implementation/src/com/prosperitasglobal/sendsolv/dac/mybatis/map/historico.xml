@@ -42,6 +42,7 @@
     <result property="processId" column="processId" />
     <result property="acaoEnumValue" column="type" />
    	<result property="tabelaEnumValue" column="tabela"/>
+   	<result property="parentId" column="parentId"/>
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
@@ -73,6 +74,7 @@
 		,b.processId
       	,b.type
       	,b.tabela
+      	,b.parentId
       	,b.create_date
       	,b.create_user
       	,b.modify_date
@@ -84,6 +86,7 @@
 		#{processId},
       	#{acaoEnumValue},
       	#{tabelaEnumValue},
+      	#{parentId},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 

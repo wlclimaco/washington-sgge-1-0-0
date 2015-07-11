@@ -69,6 +69,7 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 						Status status = new Status();
 						status.setStatus(StatusEnum.ACTIVE);
 						List<Status> statusList = new ArrayList<Status>();
+						statusList.add(status);
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
 										AcaoEnum.INSERT, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
@@ -79,6 +80,7 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 					count = cnaeDAC.updateCnae(cnae, response);
 					if (count > 0)
 					{
+
 						count =
 								StatusDACD.maintainStatusAssociations(cnae.getStatusList(), response, cnae.getId(),
 										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
@@ -90,11 +92,12 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 					Status status = new Status();
 					status.setStatus(StatusEnum.INACTIVE);
 					List<Status> statusList = new ArrayList<Status>();
+					statusList.add(status);
 					count =
 							StatusDACD
-							.maintainStatusAssociations(statusList, response, cnae.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
-									processId, historicoId);
+									.maintainStatusAssociations(statusList, response, cnae.getId(), null,
+											AcaoEnum.DELETE, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
+											processId, historicoId);
 
 					break;
 				case NONE:
@@ -102,7 +105,7 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 					status = new Status();
 					status.setStatus(StatusEnum.APPLY);
 					statusList = new ArrayList<Status>();
-
+					statusList.add(status);
 					CnaeRel cnaeRel = new CnaeRel();
 					cnaeRel.setParentId(parentId);
 					cnaeRel.setTabelaEnum(tabelaEnum);
@@ -112,7 +115,7 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 					cnaeDAC.insertParentId(cnaeRel, "insertCnaeRel", response);
 
 					count = StatusDACD.maintainStatusAssociations(statusList, response, cnae.getId(), null,
-							AcaoEnum.DELETE, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
+							AcaoEnum.APPLY, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
 							processId, historicoId);
 
 					break;

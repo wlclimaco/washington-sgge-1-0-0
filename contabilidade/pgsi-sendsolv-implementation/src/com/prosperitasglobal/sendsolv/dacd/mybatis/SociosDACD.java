@@ -68,6 +68,7 @@ public final class SociosDACD extends SqlSessionDaoSupport
 						Status status = new Status();
 						status.setStatus(StatusEnum.ACTIVE);
 						List<Status> statusList = new ArrayList<Status>();
+						statusList.add(status);
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
 										AcaoEnum.INSERT, UserId, empId, TabelaEnum.SOCIO, statusDAC, historicoDAC,
@@ -80,9 +81,9 @@ public final class SociosDACD extends SqlSessionDaoSupport
 					{
 						count =
 								StatusDACD
-								.maintainStatusAssociations(socio.getStatusList(), response, socio.getId(),
-										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.SOCIO, statusDAC,
-										historicoDAC, processId, historicoId);
+										.maintainStatusAssociations(socio.getStatusList(), response, socio.getId(),
+												null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.SOCIO, statusDAC,
+												historicoDAC, processId, historicoId);
 					}
 					break;
 				case DELETE:
@@ -90,6 +91,7 @@ public final class SociosDACD extends SqlSessionDaoSupport
 					Status status = new Status();
 					status.setStatus(StatusEnum.ACTIVE);
 					List<Status> statusList = new ArrayList<Status>();
+					statusList.add(status);
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, socio.getId(), null,
 									AcaoEnum.DELETE, UserId, empId, TabelaEnum.SOCIO, statusDAC, historicoDAC,
