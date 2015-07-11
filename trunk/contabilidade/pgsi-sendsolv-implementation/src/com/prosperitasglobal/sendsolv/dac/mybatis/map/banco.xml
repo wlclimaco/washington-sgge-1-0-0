@@ -113,7 +113,7 @@
 	    FROM banco b ORDER BY b.id ASC
   </select>
 
-  <select id="fetchBancoByPessoa" parameterType="Integer" resultType="bancoResult">
+  <select id="fetchBancoByPessoa" parameterType="Integer" resultMap="bancoResult">
 	SELECT b.id
 		<include refid="allBancoColumns" />
 		FROM banco b where id = #{id} ORDER BY b.id ASC

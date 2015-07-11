@@ -119,26 +119,26 @@
   <select id="fetchAllConvenios" resultMap="convenioResult">
     SELECT
 	<include refid="allConvenioColumns" />
-    FROM convenio ORDER BY name ASC
+    FROM convenio ORDER BY id ASC
   </select>
 
   <select id="fetchConvenioById" parameterType="FetchByIdRequest" resultMap="convenioResult">
 	 SELECT
 	<include refid="allConvenioColumns" />
-    FROM convenio ORDER BY name ASC
+    FROM convenio ORDER BY id ASC
   </select>
 
   <select id="fetchAllConveniosByRequest" parameterType="PagedInquiryRequest" resultMap="convenioResult">
 	 SELECT
 	<include refid="allConvenioColumns" />
-    FROM convenio ORDER BY name ASC
+    FROM convenio ORDER BY id ASC
   </select>
 
 
 <select id="fetchConvenioByPerson" parameterType="Integer" resultMap="convenioResult">
 	 SELECT b.id,
 	<include refid="allConvenioColumns" />
-    FROM convenio b where parentId= #{id} ORDER BY name ASC
+    FROM convenio b where id = #{id} ORDER BY id ASC
   </select>
 
 
