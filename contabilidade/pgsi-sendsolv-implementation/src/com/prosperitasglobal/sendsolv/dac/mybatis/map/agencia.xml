@@ -134,9 +134,9 @@
   </select>
 
   <select id="fetchAgenciaByBanco" parameterType="Integer" resultMap="agenciaResult">
-	SELECT b.id
+	SELECT b.id,
 		<include refid="allAgenciaColumns" />
-		FROM agencia b where id = #{id} ORDER BY b.id ASC
+		FROM agencia b where b.id = #{id} ORDER BY b.id ASC
   </select>
 
 

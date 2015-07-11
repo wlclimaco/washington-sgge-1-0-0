@@ -34,11 +34,11 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allBancoColumns">
-		 b.name
-      	,b.create_date
-      	,b.create_user
-      	,b.modify_date
-      	,b.modify_user
+		b.nome,
+      	b.create_date,
+      	b.create_user,
+      	b.modify_date,
+      	b.modify_user
   </sql>
 
   <sql id="allBancoValues">
@@ -114,9 +114,9 @@
   </select>
 
   <select id="fetchBancoByPessoa" parameterType="Integer" resultMap="bancoResult">
-	SELECT b.id
+	SELECT b.id,
 		<include refid="allBancoColumns" />
-		FROM banco b where id = #{id} ORDER BY b.id ASC
+		FROM banco b where b.id = #{id} ORDER BY b.id ASC
   </select>
 
 

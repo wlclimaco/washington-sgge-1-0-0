@@ -40,7 +40,6 @@
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
    	<collection property="listTipoPag" column="id" select="fetchTipoPagByCondPagId"/>
-	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByCondPag"/>
   </resultMap>
 
   <resultMap id="tipoPagResult" type="TipoPag">
@@ -50,7 +49,6 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByCondPag"/>
   </resultMap>
 
   <!--
@@ -135,9 +133,9 @@
 
   <select id="fetchCondPagByConvenioId" parameterType="FetchByIdRequest" resultMap="condPagResult">
     			   SELECT
-					b.id,	<include refid="allCondPagColumns" />
+					*
  				   FROM condPag b
-					where b.parentId = #{id}
+					where b.id = #{id}
   </select>
 
   <select id="fetchAllCondPagsByRequest" parameterType="PagedInquiryRequest" resultMap="condPagResult">
@@ -247,9 +245,9 @@
 
   <select id="fetchTipoPagByCondPagId" parameterType="Integer" resultMap="tipoPagResult">
     			   SELECT
-					b.id,	<include refid="allTipoPagColumns" />
+					*
  				   FROM tipoPag b
-					where b.parentId = #{id}
+					where b.id = #{id}
   </select>
 
   <select id="fetchAllTipoPagsByRequest" parameterType="PagedInquiryRequest" resultMap="tipoPagResult">
