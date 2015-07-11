@@ -1080,46 +1080,46 @@ INSERT INTO [dbo].[Pessoa]
 		   ('washington',3,1,1,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
 		   ('washington',1,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
 		   ('washington',1,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (24,'washington',1,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (25,'washington',1,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (26,'washington',1,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (27,'washington',1,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (28,'washington',1,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (29,'washington',2,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (30,'washington',2,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (31,'washington',2,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (32,'washington',2,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (33,'washington',2,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (34,'washington',2,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (35,'washington',2,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (36,'washington',3,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (37,'washington',3,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (38,'washington',3,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (39,'washington',3,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (40,'washington',3,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (41,'washington',3,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (42,'washington',3,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (43,'washington',1,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (44,'washington',1,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (45,'washington',1,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (46,'washington',1,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (47,'washington',1,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (48,'washington',1,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (49,'washington',1,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (50,'washington',2,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (51,'washington',2,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (52,'washington',2,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (53,'washington',2,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (54,'washington',2,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (55,'washington',2,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (56,'washington',2,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (57,'washington',3,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (58,'washington',3,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (59,'washington',3,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (60,'washington',3,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (61,'washington',3,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (62,'washington',3,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
-		   (63,'washington',3,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System')
+		   ('washington',1,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',1,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',1,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',1,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',1,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',1,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',1,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',1,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',1,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',1,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',1,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',1,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System')
 
 
 		INSERT INTO [dbo].[status] ([dataStatus],[parentId],[status],[acaoType],[tabelaEnum],[note],[create_date],[create_user],[modify_date],[modify_user]) VALUES
@@ -1142,8 +1142,8 @@ INSERT INTO [dbo].[Pessoa]
 		   (72,14327833577100,16,2,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
 		   (73,14327833577780,17,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
 		   (74,14327833577780,18,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
-		   (75,14327833577780,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
-		   (76,14327833577780,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (75,14327833577780,19,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (76,14327833577780,20,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
 		   (77,14327833577780,21,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
 		   (78,14327833577780,22,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
 		   (79,14327833577100,23,2,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
@@ -1186,8 +1186,8 @@ INSERT INTO [dbo].[Pessoa]
 		   (116,14327833577100,60,2,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
 		   (117,14327833577100,61,2,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
 		   (118,14327833577780,62,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
-		   (114327833577780,63,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
-		   (114327833577780,64,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod')
+		   (119,14327833577780,63,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (120,14327833577780,64,1,1,23,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod')
 
 GO
 
@@ -1232,8 +1232,8 @@ INSERT INTO [dbo].[Profissao]
 		   (16,'Analista de Sistemas',720.00,1432783357778,1432783357778,'System',1432783357778,'System'),
 		   (17,'Analista de Sistemas',720.00,1432783357778,1432783357778,'System',1432783357778,'System'),
 		   (18,'Analista de Sistemas',720.00,1432783357778,1432783357778,'System',1432783357778,'System'),
-		   ('Analista de Sistemas',720.00,1432783357778,1432783357778,'System',1432783357778,'System'),
-		   ('Analista de Sistemas',720.00,1432783357778,1432783357778,'System',1432783357778,'System'),
+		   (19,'Analista de Sistemas',720.00,1432783357778,1432783357778,'System',1432783357778,'System'),
+		   (20,'Analista de Sistemas',720.00,1432783357778,1432783357778,'System',1432783357778,'System'),
 		   (21,'Analista de Sistemas',720.00,1432783357778,1432783357778,'System',1432783357778,'System')
 GO
 
@@ -1589,8 +1589,8 @@ INSERT INTO [dbo].[contato]
            (16,1,1432783357778,1432783357778,'System',1432783357778,'System'),
            (17,3,1432783357778,1432783357778,'System',1432783357778,'System'),
            (18,2,1432783357778,1432783357778,'System',1432783357778,'System'),
-           (1,1432783357778,1432783357778,'System',1432783357778,'System'),
-           (2,1432783357778,1432783357778,'System',1432783357778,'System'),
+           (19,1,1432783357778,1432783357778,'System',1432783357778,'System'),
+           (20,2,1432783357778,1432783357778,'System',1432783357778,'System'),
            (21,3,1432783357778,1432783357778,'System',1432783357778,'System')
 
 /** ---------------------------------------------------------------*/
@@ -1633,8 +1633,8 @@ INSERT INTO [dbo].[contatoItens]
            (16,'1',1432783357778,'System',1432783357778,'System'),
            (17,'3',1432783357778,'System',1432783357778,'System'),
            (18,'2',1432783357778,'System',1432783357778,'System'),
-           ('1',1432783357778,'System',1432783357778,'System'),
-           ('2',1432783357778,'System',1432783357778,'System'),
+           (19,'1',1432783357778,'System',1432783357778,'System'),
+           (20,'2',1432783357778,'System',1432783357778,'System'),
            (21,'3',1432783357778,'System',1432783357778,'System')
 
 /** ---------------------------------------------------------------*/
@@ -1738,10 +1738,10 @@ INSERT INTO [dbo].[ordemServicoTypes]
            ,[modify_date]
            ,[modify_user])
      VALUES
-           ('Financeiro',1432783357778,'rod',14327833577780,'rod'),
-		   ('Fiscal',1432783357778,'rod',14327833577780,'rod'),
-		   ('Comercial',1432783357778,'rod',14327833577780,'rod'),
-		   ('Sistema',1432783357778,'rod',14327833577780,'rod')
+           (1,'Financeiro',1432783357778,'rod',14327833577780,'rod'),
+		   (1,'Fiscal',1432783357778,'rod',14327833577780,'rod'),
+		   (1,'Comercial',1432783357778,'rod',14327833577780,'rod'),
+		   (1,'Sistema',1432783357778,'rod',14327833577780,'rod')
 /** ---------------------------------------------------------------*/
 DROP TABLE [dbo].[ordemServicoStatus];
 CREATE TABLE [dbo].[ordemServicoStatus](
