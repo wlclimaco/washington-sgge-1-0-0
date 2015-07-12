@@ -91,7 +91,7 @@
   </select>
 
   <select id="fetchAllContatos" resultMap="contatoResult">
-    SELECT b.id
+    SELECT b.id,
 	<include refid="allContatoColumns" />
     FROM contato b ORDER BY b.id ASC
   </select>
@@ -113,7 +113,7 @@
   </select>
 
   <select id="fetchContatoByPessoa" parameterType="Contato" resultType="int">
-	SELECT b.id
+	SELECT b.id,
 		<include refid="allContatoColumns" />
 		FROM contato b ORDER BY b.id ASC
   </select>
@@ -219,7 +219,7 @@
   </select>
 
   <select id="fetchContatoItensByContatos" parameterType="Integer" resultMap="contatoItensResult">
-	SELECT
+	SELECT b.id,
 		<include refid="allContatoItensColumns" />
         FROM contatoItens b
      WHERE 1=1

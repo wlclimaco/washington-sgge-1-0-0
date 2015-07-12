@@ -1484,7 +1484,9 @@ CREATE TABLE [dbo].[agencia](
 	[id]          	         [int] identity(1,1) NOT NULL,
 	[nome]          	 	 [varchar](50) NULL,
 	[parentId]          	 [int] NOT NULL,
-	[numero]          	 	 [varchar](50) NULL,
+	[numeroConta]          	 	 [varchar](50) NULL,
+	[gerente]          	 	 [varchar](50) NULL,
+	[responsavelConta]          	 	 [varchar](50) NULL,
 	[processId]    [int] NULL,
 	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
@@ -3282,5 +3284,52 @@ INSERT INTO [dbo].[estado]
            ('BAHIA','BA',1432783357778,'SYSTEM',1432783357778,'SYSTEM'),
            ('ESPIRITO SANTO','ES',1432783357778,'SYSTEM',1432783357778,'SYSTEM')
 
+DROP TABLE [dbo].[contato];
+CREATE TABLE [dbo].[contato](
+	[id]          	         [int] identity(1,1) NOT NULL,
+	[dataContato]         	 [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[processId]    [int] NULL,
+	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_Contato_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 
-GO
+
+INSERT INTO [dbo].[contato]
+           ([dataContato],[processId],[create_date],[create_user],[modify_date],[modify_user])
+     VALUES
+           (1432783357778,1,1432783357778,'System',1432783357778,'System'),
+           (1432783357778,2,1432783357778,'System',1432783357778,'System'),
+           (1432783357778,3,1432783357778,'System',1432783357778,'System')
+
+
+DROP TABLE [dbo].[contatoItens];
+CREATE TABLE [dbo].[contatoItens](
+	[id]          	     [int] identity(1,1) NOT NULL,
+	[parentId]         	 [int] NULL,
+	[motivo]         	 [varchar](250) NULL,
+	[dataContato]      	 [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[nomeContato]        [varchar](50) NULL,
+	[processId]    [int] NULL,
+	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_contatoiTENS_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+INSERT INTO [dbo].[contatoItens]
+           ([parentId],[motivo],[dataContato],[nomeContato],[processId],[create_date],[create_user],[modify_date],[modify_user])
+     VALUES
+           (1,'Motivo A',1432783357778,'Jurema',1,1432783357778,'System',1432783357778,'System'),
+           (2,'Motivo B',1432783357778,'Jurema',2,1432783357778,'System',1432783357778,'System'),
+           (3,'Motivo C',1432783357778,'Jurema',3,1432783357778,'System',1432783357778,'System')
