@@ -16,6 +16,12 @@ public class Banco extends ModelCosmeDamiao
 
 	private List<Agencia> agenciaList;
 
+	public Banco(Integer id)
+	{
+		super();
+		this.id = id;
+	}
+
 	/**
 	 * The Constructor.
 	 */

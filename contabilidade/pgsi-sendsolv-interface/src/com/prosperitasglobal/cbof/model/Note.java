@@ -1,7 +1,5 @@
 package com.prosperitasglobal.cbof.model;
 
-import org.springframework.security.ldap.userdetails.Person;
-
 import com.prosperitasglobal.sendsolv.model.ModelCosmeDamiao;
 
 /**
@@ -21,15 +19,6 @@ public class Note extends ModelCosmeDamiao
 
 	/** The note. */
 	private String noteText;
-
-	/** The sequence number. */
-	private Integer sequenceNumber;
-
-	/** The parent id. */
-	private Integer parentKey = -1;
-
-	/** The parent type. */
-	private BusinessTypeEnum parentKeyType = BusinessTypeEnum.UNKNOWN;
 
 	/**
 	 * The Constructor.
