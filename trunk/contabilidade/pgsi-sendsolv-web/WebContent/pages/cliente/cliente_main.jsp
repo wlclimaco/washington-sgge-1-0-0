@@ -30,7 +30,7 @@
 	</div>
 </div>
 
-<jsp:include page="../../scripts/pages/cliente/cliente_main.js.jsp" flush="true" />
-<jsp:include page="../../scripts/pages/cliente/cliente_actions.js.jsp" flush="true" />
+<jsp:include page="../../scripts/pages/cliente/pessoa_main.js.jsp" flush="true" />
+<jsp:include page="../../scripts/pages/cliente/pessoa_actions.js.jsp" flush="true" />
 <jsp:include page="../../scripts/pages/cliente/cliente_init.js.jsp" flush="true" />
 

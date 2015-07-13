@@ -5,19 +5,19 @@
 
 <script type="text/javascript">
 /**
- * @namespace pgsi.pages.location
+ * @namespace pgsi.pages.pessoa
  * @fileoverview The main namespace for the Location List Page.
  */
-pgsi.pages.empresa = {
+pgsi.pages.pessoa = {
 
 	/**
 	* Set of functions used by the datatables plugin to customize field values
 	*/
 
 	// Returns link for edit view
-	fnCreateEmpresaNameLink : function (val, type, full)
-	{console.log(full)
-	var sCnpj="";
+	fnCreateClienteNameLink : function (val, type, full)
+
+		var sCnpj="";
 		if (type !== "display")
 		{
 			return val;
@@ -28,7 +28,7 @@ pgsi.pages.empresa = {
 					sCnpj = full.documentos[i].numero;
 				}
 			}
-			return '<a title="View/Edit ' + sCnpj + '" href="#/empresa/view?tab=info&locationId=' + full.id + '" class="edit_link">' + sCnpj + '</a>';
+			return '<a title="View/Edit ' + sCnpj + '" href="#/pessoa/view?tab=info&pessoaId=' + full.id + '" class="edit_link">' + sCnpj + '</a>';
 		}else{
 			return '';
 		}
@@ -41,24 +41,26 @@ pgsi.pages.empresa = {
 			return val;
 		}
 
-		return '<a title="View/Edit ' + full.nome + '" href="#/empresa/view?tab=info&locationId=' + full.id + '" class="edit_link">' + full.nome + '</a>';
+		return '<a title="View/Edit ' + full.nome + '" href="#/pessoa/view?tab=info&pessoaId=' + full.id + '" class="edit_link">' + full.nome + '</a>';
 
 	},
-	fnCnae: function (val, type, full)
+	fnProfissao: function (val, type, full)
 	{
 		if (type !== "display")
 		{
 			return val;
 		}
-		if (!$.pgsi.isNullOrUndefined(full.cnaes)) {
-			var sCnae ="";
-			for(var i=0;i<full.cnaes.length;i++){
-				sCnae = sCnae + full.cnaes[i].cnae  +" - <sup>"+full.cnaes[i].descricao+"</sup><br>" ;
+		var sProfissao ="";
+		if (!$.pgsi.isNullOrUndefined(full.profissao)) {
+			for(var i=0;i<full.profissao.length;i++){
+				sCnae = sCnae + full.profissao[i].profissao  +" - <sup>"+full.profissao[i].renda+"</sup><br>" ;
+				if(i === (full.profissao.length - 1)){
+					sCnae = sCnae + full.profissao[i].profissao  +" - <sup>"+full.profissao[i].renda+" - Atual</sup><br>" ;
+				}
 			}
-			return sCnae;
-		}else{
-			return '';
 		}
+
+		return sCnae;
 
 	},
 
@@ -94,18 +96,21 @@ pgsi.pages.empresa = {
 		return sCnae;
 	},
 
-	fnRegime: function (val, type, full)
+	fnConvenio: function (val, type, full)
 	{
 		if (type !== "display")
 		{
 			return val;
 		}
-		if (!$.pgsi.isNullOrUndefined(full.regime)) {
-			return full.regime.nome;
+
+		var sCnae ="";
+		if (!$.pgsi.isNullOrUndefined(full.convenioList)) {
+			for(var i=0;i<full.convenioList.length;i++){
+				sCnae = sCnae +'<a title="View/Edit ' + full.convenioList[i].nome + '" href="#/convenio/view?tab=info&convenioId=' + full.convenioList[i].id + '" class="edit_link">' + full.convenioList[i].nome + '</a><br>';
+			}
 		}
-		else{
-			return ''
-		}
+		return sCnae;
+
 	},
 
 	fnEndereco: function (val, type, full)
@@ -137,7 +142,7 @@ pgsi.pages.empresa = {
 		return sDocumentos;
 	},
 
-	locationTable: {
+	pessoaTable: {
 
 	}
 }

@@ -12,7 +12,7 @@
 </c:choose>
 
 if (!$.pgsi.isNullOrUndefined(oPreLoadResponse)) {
-	pgsi.pages.cliente.view.fnFillCliente(oPreLoadResponse);
+	pgsi.pages.pessoa.view.fnFillCliente(oPreLoadResponse);
 }
 
 //Attach event to add location link
@@ -37,7 +37,7 @@ $('#edit-business').click(function(e)
 
 	pgsi.util.actiondialog.launchActionDialog (
 		"insert",
-		pgsi.pages.cliente.dialogSettings.insert(
+		pgsi.pages.pessoa.dialogSettings.insert(
 			$('#business-id').val(),
 			$('#company-name-field').text(),
 			nBusinessType)

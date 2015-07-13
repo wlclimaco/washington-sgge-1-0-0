@@ -1,7 +1,5 @@
 package com.prosperitasglobal.sendsolv.model;
 
-import com.qat.framework.model.II18nEnum;
-import com.qat.framework.model.IIntegerEnum;
 
 /**
  * The Enum PayrollTypeEnum details the different options a payroll can have inside of SendSolv
@@ -14,16 +12,18 @@ public enum ContatoTypeEnum implements IIntegerEnum, II18nEnum
 {
 
 	/** The centralized. */
-	CENTRALIZED(1, "com.prosperitasglobal.sendsolv.model.payrolltype.centralized"),
+	COBRANCA(1, "com.prosperitasglobal.sendsolv.model.payrolltype.centralized"),
 
 	/** The not centralized. */
-	NOT_CENTRALIZED(2, "com.prosperitasglobal.sendsolv.model.payrolltype.not_centralized"),
+	VENDAS(2, "com.prosperitasglobal.sendsolv.model.payrolltype.not_centralized"),
 
 	/** The mixed. */
-	MIXED(3, "com.prosperitasglobal.sendsolv.model.payrolltype.mixed"),
+	INFORMATIVO(3, "com.prosperitasglobal.sendsolv.model.payrolltype.mixed"),
+
+	PROMOCOES(4, "com.prosperitasglobal.sendsolv.model.payrolltype.mixed"),
 
 	/** The unknown. */
-	UNKNOWN(4, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
+	OUTROS(5, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
 
 	/** The code. */
 	private Integer code;

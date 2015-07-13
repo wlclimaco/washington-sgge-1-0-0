@@ -6,7 +6,7 @@
 <script type="text/javascript">
 
 
-pgsi.pages.cliente.view = {
+pgsi.pages.pessoa.view = {
 
 	fillCnae : function(oCnaeList) {
 
@@ -70,7 +70,7 @@ pgsi.pages.cliente.view = {
 
 	fnFillCliente : function(oResponse) {
 
-		var oCliente = oResponse.clienteList[0];
+		var oCliente = oResponse.pessoaList[0];
 
 console.log(oCliente)
 
@@ -101,7 +101,7 @@ console.log(oCliente)
 				}
 				$('#phone-container').append(sEmail);
 
-				pgsi.pages.cliente.view.fillCnae(oCliente.cnaes)
+				pgsi.pages.pessoa.view.fillCnae(oCliente.cnaes)
 
 		// Sets the page title
 	//	$.pgsi.pageLoader.title(oLocation.name, true);
