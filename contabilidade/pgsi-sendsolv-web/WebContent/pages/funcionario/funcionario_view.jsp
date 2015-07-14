@@ -5,7 +5,8 @@
 <%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags'%>
 
 
-<jsp:include page="../business/business_view.jsp" flush="true" />
+<jsp:include page="../pessoa/pessoa_view.jsp" flush="true" />
 
+<jsp:include page="../../scripts/pages/funcionario/pessoa_view_main.js.jsp" flush="true" />
 <jsp:include page="../../scripts/pages/funcionario/funcionario_view_main.js.jsp" flush="true" />
 <jsp:include page="../../scripts/pages/funcionario/funcionario_view_init.js.jsp" flush="true" />

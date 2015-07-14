@@ -23,6 +23,14 @@ public class BeneficioMesApp extends ModelCosmeDamiao
 
 	}
 
+	public BeneficioMesApp(Integer id, Long data, Integer idFuncBenef)
+	{
+		super();
+		this.id = id;
+		this.data = data;
+		this.idFuncBenef = idFuncBenef;
+	}
+
 	/**
 	 * @return the id
 	 */

@@ -1,6 +1,5 @@
 package com.prosperitasglobal.sendsolv.model;
 
-
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -8,10 +7,6 @@ package com.prosperitasglobal.sendsolv.model;
 @SuppressWarnings("serial")
 public class Transportador extends Pessoa
 {
-	/** The SendSolv id for the account. */
-	private Integer id;
-
-	private Integer cdEmpr;
 
 	/**
 	 * Default constructor.
@@ -19,44 +14,6 @@ public class Transportador extends Pessoa
 	public Transportador()
 	{
 		super();
-	}
-
-	/**
-	 * Gets the id.
-	 *
-	 * @return the id
-	 */
-	@Override
-	public Integer getId()
-	{
-		return id;
-	}
-
-	/**
-	 * Sets the id.
-	 *
-	 * @param id the id to set
-	 */
-	@Override
-	public void setId(Integer id)
-	{
-		this.id = id;
-	}
-
-	/**
-	 * @return the cdEmpr
-	 */
-	public Integer getCdEmpr()
-	{
-		return cdEmpr;
-	}
-
-	/**
-	 * @param cdEmpr the cdEmpr to set
-	 */
-	public void setCdEmpr(Integer cdEmpr)
-	{
-		this.cdEmpr = cdEmpr;
 	}
 
 	/*

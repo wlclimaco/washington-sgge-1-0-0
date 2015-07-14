@@ -25,7 +25,7 @@
 	[nomePai] 	   [varchar](200) NULL,-->
 
   <resultMap id="clienteResult" type="Cliente">
-   <result property="id" column="id" />
+    <result property="id" column="id" />
     <result property="emprId" column="cdEmpr" />
    	<result property="nome" column="nome"/>
 	<result property="pessoaTypeEnumValue" column="type"/>

@@ -406,6 +406,7 @@ public class ClienteBaseController extends UtilControllerD
 		cliente.setNomePai("Damiao Jose Pai");
 		cliente.setNomeMae("Sonia Mae");
 		cliente.setNomeConjugue("Vinicios Felisberto");
+		cliente.setModelAction(modelAction);
 		cliente.setEstadoCivil(1);
 		a = new Date();
 		cliente.setDatanasc(a.getTime() - 100000000);
