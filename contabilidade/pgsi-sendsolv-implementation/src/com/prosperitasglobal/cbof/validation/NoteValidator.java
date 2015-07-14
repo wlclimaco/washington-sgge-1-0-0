@@ -103,32 +103,6 @@ public class NoteValidator extends ChangeControlValidator implements IValidator
 	private void validateAll(List<MessageInfo> list, Note note)
 	{
 		validateNoteText(list, note);
-		validateParentKey(list, note);
-		validateParentKeyType(list, note);
-	}
-
-	/**
-	 * Checks if the NumberOfLocations is null, if true then sets a NumberOfLocations required message.
-	 *
-	 * @param list the list
-	 * @param note the note
-	 */
-	private void validateParentKeyType(List<MessageInfo> list, Note note)
-	{
-		ValidationUtil.isNull(note.getParentKeyType(),
-				PROSPERITASGLOBAL_BASE_NOTEVALIDATOR_PARENTKEYTYPE_REQUIRED, list);
-	}
-
-	/**
-	 * Checks if the DbaName is null, if true then sets a DbaName required message.
-	 *
-	 * @param list the list
-	 * @param note the note
-	 */
-	private void validateParentKey(List<MessageInfo> list, Note note)
-	{
-		ValidationUtil.isNullOrZero(note.getParentKey(),
-				PROSPERITASGLOBAL_BASE_NOTEVALIDATOR_PARENTKEY_REQUIRED, list);
 	}
 
 	/**

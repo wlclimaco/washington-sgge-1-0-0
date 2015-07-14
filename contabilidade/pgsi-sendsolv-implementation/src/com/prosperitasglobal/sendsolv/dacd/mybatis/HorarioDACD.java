@@ -5,11 +5,11 @@ import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
-import com.prosperitasglobal.sendsolv.dac.ICnaeDAC;
 import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
+import com.prosperitasglobal.sendsolv.dac.IHoraFuncDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
 import com.prosperitasglobal.sendsolv.model.AcaoEnum;
-import com.prosperitasglobal.sendsolv.model.Cnae;
+import com.prosperitasglobal.sendsolv.model.HorarioFunc;
 import com.prosperitasglobal.sendsolv.model.Status;
 import com.prosperitasglobal.sendsolv.model.StatusEnum;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
@@ -37,32 +37,33 @@ public final class HorarioDACD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainCnaeAssociations(List<Cnae> cnaeList,
+	public static Integer maintainHorarioFuncAssociations(List<HorarioFunc> HorarioFuncList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, ICnaeDAC cnaeDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC, Integer empId,
-			String UserId, Integer processId)
+			TabelaEnum tabelaEnum, IHoraFuncDAC HorarioFuncDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
+			Integer empId,
+			String UserId, Integer processId, Integer historicoId)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
-		if (ValidationUtil.isNullOrEmpty(cnaeList))
+		if (ValidationUtil.isNullOrEmpty(HorarioFuncList))
 		{
 			return count;
 		}
 		// For Each Contact...
-		for (Cnae cnae : cnaeList)
+		for (HorarioFunc HorarioFunc : HorarioFuncList)
 		{
 			// Make sure we set the parent key
-			cnae.setParentId(parentId);
+			HorarioFunc.setParentId(parentId);
 
-			if (ValidationUtil.isNull(cnae.getModelAction()))
+			if (ValidationUtil.isNull(HorarioFunc.getModelAction()))
 			{
 				continue;
 			}
-			switch (cnae.getModelAction())
+			switch (HorarioFunc.getModelAction())
 			{
 				case INSERT:
-					count = cnaeDAC.insertCnae(cnae,
-							"insertCnae", response);
+					count = HorarioFuncDAC.insertHorarioFunc(HorarioFunc,
+							"insertHorarioFunc", response);
 					if (count > 0)
 					{
 						Status status = new Status();
@@ -70,18 +71,21 @@ public final class HorarioDACD extends SqlSessionDaoSupport
 						List<Status> statusList = new ArrayList<Status>();
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
-										processId, null);
+										AcaoEnum.INSERT, UserId, empId, TabelaEnum.HORAFUNC, statusDAC,
+										historicoDAC,
+										processId, historicoId);
 					}
 					break;
 				case UPDATE:
-					count = cnaeDAC.updateCnae(cnae, response);
+					count = HorarioFuncDAC.updateHorarioFunc(HorarioFunc, response);
 					if (count > 0)
 					{
 						count =
-								StatusDACD.maintainStatusAssociations(cnae.getStatusList(), response, cnae.getId(),
-										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
-										processId, null);
+								StatusDACD.maintainStatusAssociations(HorarioFunc.getStatusList(), response,
+										HorarioFunc.getId(),
+										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.HORAFUNC, statusDAC,
+										historicoDAC,
+										processId, historicoId);
 					}
 					break;
 				case DELETE:
@@ -91,9 +95,10 @@ public final class HorarioDACD extends SqlSessionDaoSupport
 					List<Status> statusList = new ArrayList<Status>();
 					count =
 							StatusDACD
-							.maintainStatusAssociations(statusList, response, cnae.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
-									processId, null);
+							.maintainStatusAssociations(statusList, response, HorarioFunc.getId(), null,
+									AcaoEnum.DELETE, UserId, empId, TabelaEnum.HORAFUNC, statusDAC,
+									historicoDAC,
+									processId, historicoId);
 
 					break;
 			}

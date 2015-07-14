@@ -4,11 +4,38 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.prosperitasglobal.cbof.model.Note;
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
+import com.prosperitasglobal.sendsolv.bai.IPessoaBAI;
+import com.prosperitasglobal.sendsolv.model.Banco;
+import com.prosperitasglobal.sendsolv.model.Cidade;
+import com.prosperitasglobal.sendsolv.model.Cliente;
+import com.prosperitasglobal.sendsolv.model.Contato;
+import com.prosperitasglobal.sendsolv.model.ContatoItens;
+import com.prosperitasglobal.sendsolv.model.ContatoTypeEnum;
+import com.prosperitasglobal.sendsolv.model.Convenio;
+import com.prosperitasglobal.sendsolv.model.Documento;
+import com.prosperitasglobal.sendsolv.model.Email;
+import com.prosperitasglobal.sendsolv.model.Endereco;
+import com.prosperitasglobal.sendsolv.model.Estado;
+import com.prosperitasglobal.sendsolv.model.PessoaTypeEnum;
+import com.prosperitasglobal.sendsolv.model.Profissao;
+import com.prosperitasglobal.sendsolv.model.TabelaEnum;
+import com.prosperitasglobal.sendsolv.model.Telefone;
+import com.prosperitasglobal.sendsolv.model.request.ClienteInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ClienteMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.ClienteResponse;
+import com.qat.framework.model.QATModel.PersistanceActionEnum;
+import com.qat.framework.validation.ValidationUtil;
 
 public class ClienteBaseController extends UtilControllerD
 {
@@ -17,7 +44,7 @@ public class ClienteBaseController extends UtilControllerD
 	public static final String RESPONSE = "response";
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(ClienteBaseController.class);
+	private static final Logger LOG = (Logger)LoggerFactory.getLogger(ClienteBaseController.class);
 
 	/** The Constant CONTROLLER_EXCEPTION_MSG. */
 	private static final String CONTROLLER_EXCEPTION_MSG = "PessoaBaseController";
@@ -81,7 +108,7 @@ public class ClienteBaseController extends UtilControllerD
 		}
 		catch (Exception e)
 		{
-			if (LOG.isErrorEnabled())
+			if (((org.slf4j.Logger)LOG).isErrorEnabled())
 			{
 				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
 				modelAndView.addObject(RESPONSE, null);
@@ -109,7 +136,7 @@ public class ClienteBaseController extends UtilControllerD
 		}
 		catch (Exception e)
 		{
-			if (LOG.isErrorEnabled())
+			if (((org.slf4j.Logger)LOG).isErrorEnabled())
 			{
 				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
 			}
@@ -136,7 +163,7 @@ public class ClienteBaseController extends UtilControllerD
 		}
 		catch (Exception e)
 		{
-			if (LOG.isErrorEnabled())
+			if (LOG.isInfoEnabled())
 			{
 				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
 			}
@@ -189,7 +216,7 @@ public class ClienteBaseController extends UtilControllerD
 		try
 		{
 
-			clienteRequest.setCliente(insertCliente(PersistanceActionEnum.INSERT));
+			clienteRequest.setCliente(insertMockCliente(PersistanceActionEnum.INSERT));
 			clienteRequest.getCliente().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
 			clienteResponse = getPessoaBAI().insertCliente(clienteRequest);
 		}
@@ -294,7 +321,7 @@ public class ClienteBaseController extends UtilControllerD
 		telefone.setModelAction(modelAction);
 		telefone.setId(1);
 		telefone.setDdd("34");
-		telefone.setTelefone("91782776");
+		telefone.setNumero("91782776");
 		telefone.setDescricao("Casa");
 		telefoneList.add(telefone);
 
@@ -302,7 +329,7 @@ public class ClienteBaseController extends UtilControllerD
 		telefone.setModelAction(modelAction);
 		telefone.setId(1);
 		telefone.setDdd("34");
-		telefone.setTelefone("91782776");
+		telefone.setNumero("91782776");
 		telefone.setDescricao("Trabalho");
 		telefoneList.add(telefone);
 
@@ -310,7 +337,7 @@ public class ClienteBaseController extends UtilControllerD
 		telefone.setModelAction(modelAction);
 		telefone.setId(1);
 		telefone.setDdd("34");
-		telefone.setTelefone("91782776");
+		telefone.setNumero("91782776");
 		telefone.setDescricao("Celular");
 		telefoneList.add(telefone);
 
@@ -351,22 +378,22 @@ public class ClienteBaseController extends UtilControllerD
 		note.setModelAction(modelAction);
 		note.setId(1);
 		note.setNoteText("Texto Texto Texto Texto Texto Texto Texto Texto Texto ");
-		note.setTabelaEnum(TabelaEnum.Cliente);
+		note.setTabelaEnum(TabelaEnum.CLIENTE);
 		noteList.add(note);
 
-		note = new Documento();
+		note = new Note();
 		note.setModelAction(modelAction);
 		note.setId(2);
 		note.setNoteText("Texto Texto Texto Texto Texto Texto Texto Texto Texto ");
-		note.setTabelaEnum(TabelaEnum.Cliente);
+		note.setTabelaEnum(TabelaEnum.CLIENTE);
 		noteList.add(note);
 		noteList.add(note);
 
-		note = new Documento();
+		note = new Note();
 		note.setModelAction(modelAction);
 		note.setId(3);
 		note.setNoteText("Texto Texto Texto Texto Texto Texto Texto Texto Texto ");
-		note.setTabelaEnum(TabelaEnum.Cliente);
+		note.setTabelaEnum(TabelaEnum.CLIENTE);
 		noteList.add(note);
 		noteList.add(note);
 
@@ -378,10 +405,10 @@ public class ClienteBaseController extends UtilControllerD
 		List<Contato> contatoList = new ArrayList<Contato>();
 
 		ContatoItens contatoItens = new ContatoItens();
-		contatoItens.setId();
-		contatoItens.setNoteList();
+		contatoItens.setId(1);
+		contatoItens.setNoteList(insertNote(modelAction));
 		contatoItens.setMotivo(ContatoTypeEnum.COBRANCA);
-		a = new Date();
+		Date a = new Date();
 		contatoItens.setDataContato(a.getTime());
 		contatoItens.setNomeContato("Maria de lourdes");
 
@@ -397,7 +424,7 @@ public class ClienteBaseController extends UtilControllerD
 		return contatoList;
 	}
 
-	public Empresa insertMockCliente(PersistanceActionEnum modelAction)
+	public Cliente insertMockCliente(PersistanceActionEnum modelAction)
 	{
 		Cliente cliente = new Cliente();
 
@@ -408,9 +435,9 @@ public class ClienteBaseController extends UtilControllerD
 		cliente.setNomeConjugue("Vinicios Felisberto");
 		cliente.setModelAction(modelAction);
 		cliente.setEstadoCivil(1);
-		a = new Date();
+		Date a = new Date();
 		cliente.setDatanasc(a.getTime() - 100000000);
-		cliente.setPessoaTypeEnum(PessoaTypeEnum.Cliente);
+		cliente.setPessoaTypeEnum(PessoaTypeEnum.CLIENTE);
 		cliente.setSexo(1);
 		cliente.setEnderecos(insertEndereco(modelAction));
 		cliente.setDocumentos(insertDocumento(modelAction));
@@ -419,8 +446,8 @@ public class ClienteBaseController extends UtilControllerD
 		cliente.setNotes(insertNote(modelAction));
 		cliente.setBancos(new ArrayList<Banco>());
 		cliente.getBancos().add(new Banco(1));
-		cliente.setcontatoList(insertContato(modelAction));
-		cliente.setprofissao(insertProfissao(modelAction));
+		cliente.setContatoList(insertContato(modelAction));
+		cliente.setProfissao(insertProfissao(modelAction));
 		cliente.setConvenioList(new ArrayList<Convenio>());
 		cliente.getConvenioList().add(new Convenio(1));
 

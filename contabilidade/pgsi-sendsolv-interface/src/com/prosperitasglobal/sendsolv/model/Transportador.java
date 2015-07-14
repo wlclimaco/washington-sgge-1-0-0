@@ -23,7 +23,7 @@ public class Transportador extends Pessoa
 	@Override
 	public String toString()
 	{
-		return "Transportador [getId()=" + getId() + ", getCdEmpr()=" + getCdEmpr() + ", getNome()=" + getNome()
+		return "Transportador [getId()=" + getId() + ", getNome()=" + getNome()
 				+ ", getNomePai()=" + getNomePai() + ", getNomeMae()=" + getNomeMae() + ", getNomeConjugue()="
 				+ getNomeConjugue() + ", getEstadoCivil()=" + getEstadoCivil() + ", getDatanasc()=" + getDatanasc()
 				+ ", getFoto()=" + getFoto() + ", getSexo()=" + getSexo() + ", getEnderecos()=" + getEnderecos()

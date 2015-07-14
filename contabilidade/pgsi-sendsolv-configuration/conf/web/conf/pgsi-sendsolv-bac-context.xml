@@ -73,7 +73,7 @@
  	</bean>
 
  	<bean id="funcionarioBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.FuncionarioBACImpl">
- 		<property name="funcionarioDAC" ref="funcionarioDACTarget"/>
+ 		<property name="pessoaDAC" ref="pessoaDACTarget"/>
  	</bean>
 
  	<bean id="historicoBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.HistoricoBACImpl">

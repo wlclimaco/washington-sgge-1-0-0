@@ -1,5 +1,7 @@
 package com.prosperitasglobal.cbof.model;
 
+import org.springframework.security.ldap.userdetails.Person;
+
 import com.prosperitasglobal.sendsolv.model.ModelCosmeDamiao;
 
 /**
@@ -28,29 +30,14 @@ public class Note extends ModelCosmeDamiao
 
 	}
 
-	/**
-	 * Gets the note text.
-	 *
-	 * @return the note text
-	 */
-	public String getNoteText()
+	public Note(Integer id, String noteText)
 	{
-		return noteText;
-	}
-
-	/**
-	 * Sets the note text.
-	 *
-	 * @param noteText the note text
-	 */
-	public void setNoteText(String noteText)
-	{
+		super();
+		this.id = id;
 		this.noteText = noteText;
 	}
 
 	/**
-	 * Gets the id.
-	 *
 	 * @return the id
 	 */
 	public Integer getId()
@@ -59,9 +46,7 @@ public class Note extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Sets the id.
-	 *
-	 * @param id the id
+	 * @param id the id to set
 	 */
 	public void setId(Integer id)
 	{
@@ -69,89 +54,19 @@ public class Note extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the parent key.
-	 *
-	 * @return the parent key
+	 * @return the noteText
 	 */
-	public Integer getParentKey()
+	public String getNoteText()
 	{
-		return parentKey;
+		return noteText;
 	}
 
 	/**
-	 * Sets the parent key.
-	 *
-	 * @param parentKey the parent key
+	 * @param noteText the noteText to set
 	 */
-	public void setParentKey(Integer parentKey)
+	public void setNoteText(String noteText)
 	{
-		this.parentKey = parentKey;
-	}
-
-	/**
-	 * ParentKeyType get/set and support for Enum.
-	 *
-	 * @return the parent key type
-	 */
-	public BusinessTypeEnum getParentKeyType()
-	{
-		return parentKeyType;
-	}
-
-	/**
-	 * Sets the parent key type.
-	 *
-	 * @param parentKeyType the parent key type
-	 */
-	public void setParentKeyType(BusinessTypeEnum parentKeyType)
-	{
-		this.parentKeyType = parentKeyType;
-	}
-
-	/**
-	 * Sets the parent key value.
-	 *
-	 * @param parentKeyValue the parent key value
-	 */
-	public void setParentKeyValue(Integer parentKeyValue)
-	{
-		parentKeyType = BusinessTypeEnum.enumForValue(parentKeyValue);
-	}
-
-	/**
-	 * Gets the parent key value.
-	 *
-	 * @param parentKeyValue the parent key value
-	 * @return the parent key value
-	 */
-	public Integer getParentKeyValue(Integer parentKeyValue)
-	{
-		if (parentKeyType == null)
-		{
-			return null;
-		}
-
-		return parentKeyType.getValue();
-	}
-
-	/**
-	 * Gets the sequence number.
-	 *
-	 * @return the sequence number
-	 */
-	public Integer getSequenceNumber()
-	{
-		return sequenceNumber;
-	}
-
-	/**
-	 * Sets the sequence number.
-	 *
-	 * @param sequenceNumber the sequence number
-	 */
-	public void setSequenceNumber(Integer sequenceNumber)
-	{
-		this.sequenceNumber = sequenceNumber;
+		this.noteText = noteText;
 	}
 
 	/*
@@ -161,8 +76,16 @@ public class Note extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Note [getNoteText()=" + getNoteText() + ", getId()=" + getId() + ", getParentKey()=" + getParentKey()
-				+ ", getParentKeyType()=" + getParentKeyType() + ", getSequenceNumber()=" + getSequenceNumber()
-				+ ", toString()=" + super.toString() + "]";
+		return "Note [getId()=" + getId() + ", getNoteText()=" + getNoteText() + ", getTabelaEnumValue()="
+				+ getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()="
+				+ getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()=" + getType()
+				+ ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()="
+				+ getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite() + ", getProcessId()="
+				+ getProcessId() + ", getUserId()=" + getUserId() + ", toString()=" + super.toString()
+				+ ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
+				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
+				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + "]";
 	}
+
 }

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PessoaMap">
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allPessoaColumns">
+		 b.cdEmpr
+		,b.nome
+		,b.type
+		,b.sexo
+		,b.dataNasc
+		,b.nomePai
+		,b.nomeMae
+		,b.nomeConjugue
+		,b.estadoCivil
+      	,b.create_date
+      	,b.create_user
+      	,b.modify_date
+      	,b.modify_user
+  </sql>
+
+  <sql id="allPessoaValues">
+  		#{emprId},
+  		#{nome},
+  		#{pessoaTypeEnumValue},
+  		#{sexo},
+  		#{dataNasc},
+  		#{nomePai},
+  		#{nomeMae},
+  		#{nomeConjugue},
+  		#{estadoCivil},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertPessoa" parameterType="Pessoa" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO pessoa (
+		<include refid="allPessoaColumns" />
+      )
+    VALUES (<include refid="allPessoaValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updatePessoa" parameterType="Pessoa">
+    UPDATE pessoa
+    	<set>
+    		<if test="emprId!= null">emprId = #{emprId},</if>
+	  		<if test="nome!= null">nome = #{nome},</if>
+	  		<if test="pessoaTypeEnumValue!= null">type = #{pessoaTypeEnumValue},</if>
+	  		<if test="sexo!= null">sexo = #{sexo},</if>
+	  		<if test="dataNasc!= null">dataNasc = #{dataNasc},</if>
+	  		<if test="nomePai!= null">nomePai = #{nomePai},</if>
+	  		<if test="nomeMae!= null">nomeMae = #{nomeMae},</if>
+	  		<if test="nomeConjugue!= null">nomeConjugue = #{nomeConjugue},</if>
+	  		<if test="estadoCivil!= null">estadoCivil = #{estadoCivil},</if>
+			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deletePessoaById" parameterType="Integer">
+    	DELETE FROM pessoa WHERE id = #{id}
+  </delete>
+
+
+</mapper>

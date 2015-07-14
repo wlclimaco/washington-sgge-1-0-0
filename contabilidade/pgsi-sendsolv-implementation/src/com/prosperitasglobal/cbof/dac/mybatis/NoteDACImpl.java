@@ -121,27 +121,27 @@ public class NoteDACImpl extends SqlSessionDaoSupport implements INoteDAC
 	{
 		InternalResultsResponse<Note> response = new InternalResultsResponse<Note>();
 
-		switch (note.getParentKeyType())
-		{
-			case ORGANIZATION:
-			case LOCATION:
-				insertNote(note, BUSINESS_STMT_ASSOC_NOTE, response, true);
-				break;
-			case MEMBER:
-			case RECIPIENT:
-			case LIAISON:
-				insertNote(note, PERSON_STMT_ASSOC_NOTE, response, true);
-				break;
-			case MONEY_TRANSFER:
-				insertNote(note, MONEY_TRANSFER_STMT_ASSOC_NOTE, response, true);
-				break;
-			case MONEY_TRANSFER_BATCH:
-				insertNote(note, MONEY_TRANSFER_BATCH_STMT_ASSOC_NOTE, response, true);
-				break;
-			default:
-				insertNote(note, null, response, true);
-				break;
-		}
+		// switch (note.getParentKeyType())
+		// {
+		// case ORGANIZATION:
+		// case LOCATION:
+		// insertNote(note, BUSINESS_STMT_ASSOC_NOTE, response, true);
+		// break;
+		// case MEMBER:
+		// case RECIPIENT:
+		// case LIAISON:
+		// insertNote(note, PERSON_STMT_ASSOC_NOTE, response, true);
+		// break;
+		// case MONEY_TRANSFER:
+		// insertNote(note, MONEY_TRANSFER_STMT_ASSOC_NOTE, response, true);
+		// break;
+		// case MONEY_TRANSFER_BATCH:
+		// insertNote(note, MONEY_TRANSFER_BATCH_STMT_ASSOC_NOTE, response, true);
+		// break;
+		// default:
+		// insertNote(note, null, response, true);
+		// break;
+		// }
 
 		return response;
 	}
@@ -161,28 +161,28 @@ public class NoteDACImpl extends SqlSessionDaoSupport implements INoteDAC
 		// First insert the note data
 		Integer insertCount = 0;
 
-		switch (note.getParentKeyType())
-		{
-			case ORGANIZATION:
-			case LOCATION:
-			case MEMBER:
-			case LIAISON:
-			case RECIPIENT:
-				insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), NOTE_STMT_INSERT, note, response);
-				break;
-			case MONEY_TRANSFER:
-				insertCount =
-						QATMyBatisDacHelper.doInsert(getSqlSession(), NOTE_STMT_INSERT_MONEY_TRANSFER, note, response);
-				break;
-			case MONEY_TRANSFER_BATCH:
-				insertCount =
-						QATMyBatisDacHelper.doInsert(getSqlSession(), NOTE_STMT_INSERT_MONEY_TRANSFER_BATCH, note,
-								response);
-				break;
-			default:
-				insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), NOTE_STMT_INSERT, note, response);
-				break;
-		}
+		// switch (note.getParentKeyType())
+		// {
+		// case ORGANIZATION:
+		// case LOCATION:
+		// case MEMBER:
+		// case LIAISON:
+		// case RECIPIENT:
+		// insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), NOTE_STMT_INSERT, note, response);
+		// break;
+		// case MONEY_TRANSFER:
+		// insertCount =
+		// QATMyBatisDacHelper.doInsert(getSqlSession(), NOTE_STMT_INSERT_MONEY_TRANSFER, note, response);
+		// break;
+		// case MONEY_TRANSFER_BATCH:
+		// insertCount =
+		// QATMyBatisDacHelper.doInsert(getSqlSession(), NOTE_STMT_INSERT_MONEY_TRANSFER_BATCH, note,
+		// response);
+		// break;
+		// default:
+		// insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), NOTE_STMT_INSERT, note, response);
+		// break;
+		// }
 
 		if (!response.isInError())
 		{
@@ -270,7 +270,7 @@ public class NoteDACImpl extends SqlSessionDaoSupport implements INoteDAC
 		for (Note note : noteList)
 		{
 			// Make sure we set the parent key
-			note.setParentKey(parentId);
+			note.setParentId(parentId);
 
 			if (ValidationUtil.isNull(note.getModelAction()))
 			{

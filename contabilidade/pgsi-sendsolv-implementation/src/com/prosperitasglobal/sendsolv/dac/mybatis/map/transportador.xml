@@ -74,41 +74,6 @@
   		#{estadoCivil},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
-
-  <!--
-		SQL Insert Statements.
- 	-->
-  <insert id="insertTransportador" parameterType="Transportador" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO pessoa (
-		<include refid="allTransportadorColumns" />
-      )
-    VALUES (<include refid="allTransportadorValues" /> )
-  </insert>
-
-
-	<!--
-		SQL Update Statements.
- 	-->
-
-  <update id="updateTransportador" parameterType="Transportador">
-    UPDATE pessoa
-    	<set>
-    		<if test="nome!= null">nome = #{nome},</if>
-	    	<if test="regime.id!= null"> regime=#{regime.id},</if>
-			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
-			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
-		</set>
-    WHERE
-     id = #{id}
-  </update>
-
-   <!--
-		SQL Delete Statements.
-   -->
-  <delete id="deleteTransportadorById" parameterType="Integer">
-    	DELETE FROM pessoa WHERE id = #{id}
-  </delete>
-
 	<!--
 		SQL Fetch Statements.
  	-->

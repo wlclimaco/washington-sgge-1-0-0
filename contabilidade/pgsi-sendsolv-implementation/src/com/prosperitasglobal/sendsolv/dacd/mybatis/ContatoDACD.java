@@ -36,7 +36,7 @@ public final class ContatoDACD extends SqlSessionDaoSupport
 	public static Integer maintainContatoAssociations(List<Contato> contatoList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, IContatoDAC contatoDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
-			Integer empId, String UserId, Integer processId)
+			Integer empId, String UserId, Integer processId, Integer historicoId)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
@@ -67,7 +67,7 @@ public final class ContatoDACD extends SqlSessionDaoSupport
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
 										AcaoEnum.INSERT, UserId, empId, TabelaEnum.CONTATO, statusDAC, historicoDAC,
-										processId, null);
+										processId, historicoId);
 					}
 					break;
 				case UPDATE:
@@ -77,7 +77,7 @@ public final class ContatoDACD extends SqlSessionDaoSupport
 						count =
 								StatusDACD.maintainStatusAssociations(contato.getStatusList(), response,
 										contato.getId(), null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.CONTATO,
-										statusDAC, historicoDAC, processId, null);
+										statusDAC, historicoDAC, processId, historicoId);
 					}
 					break;
 				case DELETE:
@@ -88,7 +88,7 @@ public final class ContatoDACD extends SqlSessionDaoSupport
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, contato.getId(), null,
 									AcaoEnum.DELETE, UserId, empId, TabelaEnum.CONTATO, statusDAC, historicoDAC,
-									processId, null);
+									processId, historicoId);
 
 					break;
 			}

@@ -33,7 +33,7 @@ public final class NotesDACD extends SqlSessionDaoSupport
 	public static Integer maintainNoteAssociations(List<Note> noteList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, INoteDAC noteDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
-			Integer empId, String UserId, Integer processId)
+			Integer empId, String UserId, Integer processId, Integer historicoId)
 	{
 		Integer count = 0;
 		// First Maintain Empresa

@@ -3,9 +3,11 @@ package com.prosperitasglobal.sendsolv.dac;
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.model.Cliente;
 import com.prosperitasglobal.sendsolv.model.Fornecedor;
+import com.prosperitasglobal.sendsolv.model.Funcionario;
 import com.prosperitasglobal.sendsolv.model.Transportador;
 import com.prosperitasglobal.sendsolv.model.request.ClienteInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.FornecedorInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.FuncionarioInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.TransportadorInquiryRequest;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
@@ -47,5 +49,16 @@ public interface IPessoaDAC
 	public InternalResultsResponse<Transportador> fetchTransportadorById(FetchByIdRequest request);
 
 	public InternalResultsResponse<Transportador> fetchTransportadorByRequest(TransportadorInquiryRequest request);
+
+	// =====================
+	public InternalResultsResponse<Funcionario> updateFuncionario(Funcionario funcionario);
+
+	public InternalResultsResponse<Funcionario> insertFuncionario(Funcionario funcionario);
+
+	public InternalResponse deleteFuncionario(Funcionario funcionario);
+
+	public InternalResultsResponse<Funcionario> fetchFuncionarioById(FetchByIdRequest request);
+
+	public InternalResultsResponse<Funcionario> fetchFuncionarioByRequest(FuncionarioInquiryRequest request);
 
 }

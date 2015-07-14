@@ -1,12 +1,38 @@
 package com.prosperitasglobal.sendsolv.transportador.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.prosperitasglobal.cbof.model.Note;
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
+import com.prosperitasglobal.sendsolv.bai.IPessoaBAI;
+import com.prosperitasglobal.sendsolv.model.Banco;
+import com.prosperitasglobal.sendsolv.model.Cidade;
+import com.prosperitasglobal.sendsolv.model.Contato;
+import com.prosperitasglobal.sendsolv.model.ContatoItens;
+import com.prosperitasglobal.sendsolv.model.ContatoTypeEnum;
+import com.prosperitasglobal.sendsolv.model.Documento;
+import com.prosperitasglobal.sendsolv.model.Email;
+import com.prosperitasglobal.sendsolv.model.Endereco;
+import com.prosperitasglobal.sendsolv.model.Estado;
+import com.prosperitasglobal.sendsolv.model.PessoaTypeEnum;
+import com.prosperitasglobal.sendsolv.model.Profissao;
+import com.prosperitasglobal.sendsolv.model.TabelaEnum;
+import com.prosperitasglobal.sendsolv.model.Telefone;
+import com.prosperitasglobal.sendsolv.model.Transportador;
+import com.prosperitasglobal.sendsolv.model.request.TransportadorInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.response.TransportadorResponse;
+import com.qat.framework.model.QATModel.PersistanceActionEnum;
+import com.qat.framework.validation.ValidationUtil;
 
 public class TransportadorBaseController extends UtilControllerD
 {
@@ -231,7 +257,7 @@ public class TransportadorBaseController extends UtilControllerD
 		telefone.setModelAction(modelAction);
 		telefone.setId(1);
 		telefone.setDdd("34");
-		telefone.setTelefone("91782776");
+		telefone.setNumero("91782776");
 		telefone.setDescricao("Casa");
 		telefoneList.add(telefone);
 
@@ -239,7 +265,7 @@ public class TransportadorBaseController extends UtilControllerD
 		telefone.setModelAction(modelAction);
 		telefone.setId(1);
 		telefone.setDdd("34");
-		telefone.setTelefone("91782776");
+		telefone.setNumero("91782776");
 		telefone.setDescricao("Trabalho");
 		telefoneList.add(telefone);
 
@@ -247,7 +273,7 @@ public class TransportadorBaseController extends UtilControllerD
 		telefone.setModelAction(modelAction);
 		telefone.setId(1);
 		telefone.setDdd("34");
-		telefone.setTelefone("91782776");
+		telefone.setNumero("91782776");
 		telefone.setDescricao("Celular");
 		telefoneList.add(telefone);
 
@@ -288,22 +314,22 @@ public class TransportadorBaseController extends UtilControllerD
 		note.setModelAction(modelAction);
 		note.setId(1);
 		note.setNoteText("Texto Texto Texto Texto Texto Texto Texto Texto Texto ");
-		note.setTabelaEnum(TabelaEnum.Cliente);
+		note.setTabelaEnum(TabelaEnum.TRANSPORTADOR);
 		noteList.add(note);
 
-		note = new Documento();
+		note = new Note();
 		note.setModelAction(modelAction);
 		note.setId(2);
 		note.setNoteText("Texto Texto Texto Texto Texto Texto Texto Texto Texto ");
-		note.setTabelaEnum(TabelaEnum.Cliente);
+		note.setTabelaEnum(TabelaEnum.TRANSPORTADOR);
 		noteList.add(note);
 		noteList.add(note);
 
-		note = new Documento();
+		note = new Note();
 		note.setModelAction(modelAction);
 		note.setId(3);
 		note.setNoteText("Texto Texto Texto Texto Texto Texto Texto Texto Texto ");
-		note.setTabelaEnum(TabelaEnum.Cliente);
+		note.setTabelaEnum(TabelaEnum.TRANSPORTADOR);
 		noteList.add(note);
 		noteList.add(note);
 
@@ -315,10 +341,10 @@ public class TransportadorBaseController extends UtilControllerD
 		List<Contato> contatoList = new ArrayList<Contato>();
 
 		ContatoItens contatoItens = new ContatoItens();
-		contatoItens.setId();
-		contatoItens.setNoteList();
+		contatoItens.setId(1);
+		contatoItens.setNoteList(insertNote(modelAction));
 		contatoItens.setMotivo(ContatoTypeEnum.COBRANCA);
-		a = new Date();
+		Date a = new Date();
 		contatoItens.setDataContato(a.getTime());
 		contatoItens.setNomeContato("Maria de lourdes");
 
@@ -345,9 +371,9 @@ public class TransportadorBaseController extends UtilControllerD
 		transportador.setNomeConjugue("Vinicios Felisberto");
 		transportador.setModelAction(modelAction);
 		transportador.setEstadoCivil(1);
-		a = new Date();
+		Date a = new Date();
 		transportador.setDatanasc(a.getTime() - 100000000);
-		transportador.setPessoaTypeEnum(PessoaTypeEnum.Cliente);
+		transportador.setPessoaTypeEnum(PessoaTypeEnum.TRANSPORTADOR);
 		transportador.setSexo(1);
 		transportador.setEnderecos(insertEndereco(modelAction));
 		transportador.setDocumentos(insertDocumento(modelAction));
@@ -356,13 +382,7 @@ public class TransportadorBaseController extends UtilControllerD
 		transportador.setNotes(insertNote(modelAction));
 		transportador.setBancos(new ArrayList<Banco>());
 		transportador.getBancos().add(new Banco(1));
-		transportador.setcontatoList(insertContato(modelAction));
-		transportador.setListCfops(new ArrayList<Cfop>());
-		transportador.getListCfops().add(new Cfop(1, PersistanceActionEnum.NONE));
-		transportador.getListProdutos(new ArrayList<Produto>());
-		transportador.getListProdutos().add(new Produto(1));
-		transportador.getListProdutos().add(new Produto(2));
-		transportador.getListProdutos().add(new Produto(3));
+		transportador.setContatoList(insertContato(modelAction));
 		return transportador;
 
 	}

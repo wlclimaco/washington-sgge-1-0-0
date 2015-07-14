@@ -27,6 +27,22 @@ public class Telefone extends ModelCosmeDamiao
 	}
 
 	/**
+	 * @return the descricao
+	 */
+	public String getDescricao()
+	{
+		return descricao;
+	}
+
+	/**
+	 * @param descricao the descricao to set
+	 */
+	public void setDescricao(String descricao)
+	{
+		this.descricao = descricao;
+	}
+
+	/**
 	 * Gets the id.
 	 *
 	 * @return the id
@@ -85,15 +101,16 @@ public class Telefone extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Telefone [getId()=" + getId() + ", getDdd()=" + getDdd() + ", getNumero()=" + getNumero()
-				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
-				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
-				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
-				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
-				+ ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()="
-				+ getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()="
-				+ getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + "]";
+		return "Telefone [getDescricao()=" + getDescricao() + ", getId()=" + getId() + ", getDdd()=" + getDdd()
+				+ ", getNumero()=" + getNumero() + ", getTabelaEnumValue()=" + getTabelaEnumValue()
+				+ ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue()
+				+ ", getParentId()=" + getParentId() + ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType()
+				+ ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()="
+				+ getEmprId() + ", getSite()=" + getSite() + ", getProcessId()=" + getProcessId() + ", getUserId()="
+				+ getUserId() + ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction()
+				+ ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC()
+				+ ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
 	}
 
 }
