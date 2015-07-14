@@ -1,12 +1,40 @@
 package com.prosperitasglobal.sendsolv.fornecedor.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.prosperitasglobal.cbof.model.Note;
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
+import com.prosperitasglobal.sendsolv.bai.IPessoaBAI;
+import com.prosperitasglobal.sendsolv.model.Banco;
+import com.prosperitasglobal.sendsolv.model.Cfop;
+import com.prosperitasglobal.sendsolv.model.Cidade;
+import com.prosperitasglobal.sendsolv.model.Contato;
+import com.prosperitasglobal.sendsolv.model.ContatoItens;
+import com.prosperitasglobal.sendsolv.model.ContatoTypeEnum;
+import com.prosperitasglobal.sendsolv.model.Documento;
+import com.prosperitasglobal.sendsolv.model.Email;
+import com.prosperitasglobal.sendsolv.model.Endereco;
+import com.prosperitasglobal.sendsolv.model.Estado;
+import com.prosperitasglobal.sendsolv.model.Fornecedor;
+import com.prosperitasglobal.sendsolv.model.PessoaTypeEnum;
+import com.prosperitasglobal.sendsolv.model.Produto;
+import com.prosperitasglobal.sendsolv.model.Profissao;
+import com.prosperitasglobal.sendsolv.model.TabelaEnum;
+import com.prosperitasglobal.sendsolv.model.Telefone;
+import com.prosperitasglobal.sendsolv.model.request.FornecedorInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.response.FornecedorResponse;
+import com.qat.framework.model.QATModel.PersistanceActionEnum;
+import com.qat.framework.validation.ValidationUtil;
 
 public class FornecedorBaseController extends UtilControllerD
 {
@@ -231,7 +259,7 @@ public class FornecedorBaseController extends UtilControllerD
 		telefone.setModelAction(modelAction);
 		telefone.setId(1);
 		telefone.setDdd("34");
-		telefone.setTelefone("91782776");
+		telefone.setNumero("91782776");
 		telefone.setDescricao("Casa");
 		telefoneList.add(telefone);
 
@@ -239,7 +267,7 @@ public class FornecedorBaseController extends UtilControllerD
 		telefone.setModelAction(modelAction);
 		telefone.setId(1);
 		telefone.setDdd("34");
-		telefone.setTelefone("91782776");
+		telefone.setNumero("91782776");
 		telefone.setDescricao("Trabalho");
 		telefoneList.add(telefone);
 
@@ -247,7 +275,7 @@ public class FornecedorBaseController extends UtilControllerD
 		telefone.setModelAction(modelAction);
 		telefone.setId(1);
 		telefone.setDdd("34");
-		telefone.setTelefone("91782776");
+		telefone.setNumero("91782776");
 		telefone.setDescricao("Celular");
 		telefoneList.add(telefone);
 
@@ -288,22 +316,22 @@ public class FornecedorBaseController extends UtilControllerD
 		note.setModelAction(modelAction);
 		note.setId(1);
 		note.setNoteText("Texto Texto Texto Texto Texto Texto Texto Texto Texto ");
-		note.setTabelaEnum(TabelaEnum.Cliente);
+		note.setTabelaEnum(TabelaEnum.FORNECEDOR);
 		noteList.add(note);
 
-		note = new Documento();
+		note = new Note();
 		note.setModelAction(modelAction);
 		note.setId(2);
 		note.setNoteText("Texto Texto Texto Texto Texto Texto Texto Texto Texto ");
-		note.setTabelaEnum(TabelaEnum.Cliente);
+		note.setTabelaEnum(TabelaEnum.FORNECEDOR);
 		noteList.add(note);
 		noteList.add(note);
 
-		note = new Documento();
+		note = new Note();
 		note.setModelAction(modelAction);
 		note.setId(3);
 		note.setNoteText("Texto Texto Texto Texto Texto Texto Texto Texto Texto ");
-		note.setTabelaEnum(TabelaEnum.Cliente);
+		note.setTabelaEnum(TabelaEnum.FORNECEDOR);
 		noteList.add(note);
 		noteList.add(note);
 
@@ -315,10 +343,10 @@ public class FornecedorBaseController extends UtilControllerD
 		List<Contato> contatoList = new ArrayList<Contato>();
 
 		ContatoItens contatoItens = new ContatoItens();
-		contatoItens.setId();
-		contatoItens.setNoteList();
+		contatoItens.setId(1);
+		contatoItens.setNoteList(insertNote(modelAction));
 		contatoItens.setMotivo(ContatoTypeEnum.COBRANCA);
-		a = new Date();
+		Date a = new Date();
 		contatoItens.setDataContato(a.getTime());
 		contatoItens.setNomeContato("Maria de lourdes");
 
@@ -334,7 +362,7 @@ public class FornecedorBaseController extends UtilControllerD
 		return contatoList;
 	}
 
-	public Fornecedor insertMockTransportador(PersistanceActionEnum modelAction)
+	public Fornecedor insertMockFornecedor(PersistanceActionEnum modelAction)
 	{
 		Fornecedor fornecedor = new Fornecedor();
 
@@ -345,9 +373,9 @@ public class FornecedorBaseController extends UtilControllerD
 		fornecedor.setNomeConjugue("Vinicios Felisberto");
 		fornecedor.setModelAction(modelAction);
 		fornecedor.setEstadoCivil(1);
-		a = new Date();
+		Date a = new Date();
 		fornecedor.setDatanasc(a.getTime() - 100000000);
-		fornecedor.setPessoaTypeEnum(PessoaTypeEnum.Cliente);
+		fornecedor.setPessoaTypeEnum(PessoaTypeEnum.FORNECEDOR);
 		fornecedor.setSexo(1);
 		fornecedor.setEnderecos(insertEndereco(modelAction));
 		fornecedor.setDocumentos(insertDocumento(modelAction));
@@ -356,10 +384,10 @@ public class FornecedorBaseController extends UtilControllerD
 		fornecedor.setNotes(insertNote(modelAction));
 		fornecedor.setBancos(new ArrayList<Banco>());
 		fornecedor.getBancos().add(new Banco(1));
-		fornecedor.setcontatoList(insertContato(modelAction));
+		fornecedor.setContatoList(insertContato(modelAction));
 		fornecedor.setListCfops(new ArrayList<Cfop>());
 		fornecedor.getListCfops().add(new Cfop(1, PersistanceActionEnum.NONE));
-		fornecedor.getListProdutos(new ArrayList<Produto>());
+		fornecedor.setListProdutos(new ArrayList<Produto>());
 		fornecedor.getListProdutos().add(new Produto(1));
 		fornecedor.getListProdutos().add(new Produto(2));
 		fornecedor.getListProdutos().add(new Produto(3));

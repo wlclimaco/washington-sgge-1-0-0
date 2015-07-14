@@ -2,7 +2,7 @@ package com.prosperitasglobal.sendsolv.bac.impl;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.bac.IFuncionarioBAC;
-import com.prosperitasglobal.sendsolv.dac.IFuncionarioDAC;
+import com.prosperitasglobal.sendsolv.dac.IPessoaDAC;
 import com.prosperitasglobal.sendsolv.model.Funcionario;
 import com.prosperitasglobal.sendsolv.model.request.FuncionarioInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.FuncionarioMaintenanceRequest;
@@ -16,12 +16,12 @@ public class FuncionarioBACImpl implements IFuncionarioBAC
 {
 
 	/** The person dac. */
-	private IFuncionarioDAC funcionarioDAC;
+	private IPessoaDAC funcionarioDAC;
 
 	/**
 	 * @return the funcionarioDAC
 	 */
-	public IFuncionarioDAC getFuncionarioDAC()
+	public IPessoaDAC getFuncionarioDAC()
 	{
 		return funcionarioDAC;
 	}
@@ -29,7 +29,7 @@ public class FuncionarioBACImpl implements IFuncionarioBAC
 	/**
 	 * @param funcionarioDAC the funcionarioDAC to set
 	 */
-	public void setFuncionarioDAC(IFuncionarioDAC funcionarioDAC)
+	public void setFuncionarioDAC(IPessoaDAC funcionarioDAC)
 	{
 		this.funcionarioDAC = funcionarioDAC;
 	}

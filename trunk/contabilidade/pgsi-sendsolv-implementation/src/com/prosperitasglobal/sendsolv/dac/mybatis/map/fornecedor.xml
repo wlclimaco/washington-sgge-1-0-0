@@ -78,40 +78,6 @@
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
-  <!--
-		SQL Insert Statements.
- 	-->
-  <insert id="insertFornecedor" parameterType="Fornecedor" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO pessoa (
-		<include refid="allFornecedorColumns" />
-      )
-    VALUES (<include refid="allFornecedorValues" /> )
-  </insert>
-
-
-	<!--
-		SQL Update Statements.
- 	-->
-
-  <update id="updateFornecedor" parameterType="Fornecedor">
-    UPDATE pessoa
-    	<set>
-    		<if test="nome!= null">nome = #{nome},</if>
-	    	<if test="regime.id!= null"> regime=#{regime.id},</if>
-			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
-			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
-		</set>
-    WHERE
-     id = #{id}
-  </update>
-
-   <!--
-		SQL Delete Statements.
-   -->
-  <delete id="deleteFornecedorById" parameterType="Integer">
-    	DELETE FROM pessoa WHERE id = #{id}
-  </delete>
-
 	<!--
 		SQL Fetch Statements.
  	-->

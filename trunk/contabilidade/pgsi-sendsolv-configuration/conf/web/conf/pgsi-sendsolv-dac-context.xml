@@ -333,6 +333,25 @@
 
  	<bean id="pessoaDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.PessoaDACImpl">
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 		<property name="enderecoDAC" ref="enderecoDACTarget" />
+ 		<property name="telefoneDAC" ref="telefoneDACTarget" />
+ 		<property name="emailDAC" ref="emailDACTarget" />
+ 		<property name="socioDAC" ref="socioDACTarget" />
+ 		<property name="cnaeDAC" ref="cnaeDACTarget" />
+ 		<property name="documentoDAC" ref="documentoDACTarget" />
+ 		<property name="historicoDAC" ref="historicoDACTarget" />
+ 		<property name="statusDAC" ref="statusDACTarget" />
+		<property name="profisaoDAC" ref="profisaoDACTarget" />
+		<property name="convenioDAC" ref="convenioDACTarget" />
+		<property name="bancosDAC" ref="bancosDACTarget" />
+		<property name="contatoDAC" ref="contatoDACTarget" />
+		<property name="noteDAC" ref="noteDACTarget" />
+		<property name="cfopDAC" ref="cfopDACTarget" />
+		<property name="formaPagamentoDAC" ref="formaPagamentoDACTarget" />
+		<property name="salarioDAC" ref="salarioDACTarget" />
+		<property name="beneficiosDAC" ref="beneficiosDACTarget" />
+		<property name="eventosDAC" ref="eventosDACTarget" />
+		<property name="horaFuncDAC" ref="horaFuncDACTarget" />
  	</bean>
 
  	<bean id="porcaoDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.PorcaoDACImpl">
