@@ -13,43 +13,32 @@
        from a query, and the class properties.  A result map isn't
        necessary if the columns (or aliases) match to the properties
        exactly.
-       private Integer id;
-
-	private Integer cdEmpr;
-
-	/** The matricula. */
-	private String matricula;
-
-	/** The data adm. */
-	private Long dataAdm;
-
-	/** The salarios. */
-	private List<Salario> salarios;
-
-	/** The horarios. */
-	private List<HorarioFunc> horarios;
-
-	/** The beneficios. */
-	private List<Beneficios> beneficios;
-
-	private List<Eventos> eventosList;
        -->
 
   <resultMap id="funcionarioResult" type="Funcionario" >
     <result property="id" column="id" />
-    <result property="cdEmpr" column="cdEmpr" />
    	<result property="matricula" column="matricula"/>
+   	<result property="dataAdm" column="dataAdm"/>
+    <result property="emprId" column="cdEmpr" />
    	<result property="nome" column="nome"/>
+	<result property="pessoaTypeEnumValue" column="type"/>
 	<result property="sexo" column="sexo"/>
+	<result property="datanasc" column="datanasc"/>
+	<result property="nomePai" column="nomePai"/>
+	<result property="nomeMae" column="nomeMae"/>
+	<result property="nomeConjugue" column="nomeConjugue"/>
+	<result property="estadoCivil" column="estadoCivil"/>
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-	<collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByFuncionario"/>
-	<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByFuncionarioId"/>
-	<collection property="emails" column="id" select="EmailMap.fetchAllEmailsByFuncionario"/>
-	<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByFuncionario"/>
-	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByFuncionario"/>
+	<collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByPessoaId"/>
+	<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByPessoaId"/>
+	<collection property="emails" column="id" select="EmailMap.fetchAllEmailsByPessoaId"/>
+	<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByPessoaId"/>
+	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByPessoaId"/>
+	<collection property="convenioList" column="id" select="ConvenioMap.fetchConvenioByPerson"/>
+	<collection property="bancos" column="id" select="BancoMap.fetchBancoByPessoa"/>
 	<collection property="salarios" column="id" select="SalarioMap.fetchSalarioById"/>
 	<collection property="horarios" column="id" select="HoraFuncMap.fetchHoraFuncById"/>
 	<collection property="beneficios" column="id" select="BeneficiosMap.fetchFuncByBeneficios"/>
@@ -60,11 +49,17 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allFuncionarioColumns">
-		 b.cdEmpr
-		,b.matricula
+	     b.matricula
       	,b.dataAdm
-      	,b.nome
-      	,b.sexo
+      	 b.cdEmpr
+		,b.nome
+		,b.type
+		,b.sexo
+		,b.dataNasc
+		,b.nomePai
+		,b.nomeMae
+		,b.nomeConjugue
+		,b.estadoCivil
       	,b.create_date
       	,b.create_user
       	,b.modify_date
@@ -72,11 +67,17 @@
   </sql>
 
   <sql id="allFuncionarioValues">
-  		#{cdEmpr},
   		#{matricula},
-    	#{dataAdm},
+  		#{dataAdm},
+    	#{cdEmpr},
     	#{nome},
+    	#{pessoaTypeEnumValue},
     	#{sexo},
+    	#{dataNasc},
+  		#{nomePai},
+    	#{nomeMae},
+    	#{nomeConjugue},
+    	#{estadoCivil},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 

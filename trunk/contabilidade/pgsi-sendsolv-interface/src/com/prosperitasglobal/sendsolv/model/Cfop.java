@@ -1,5 +1,6 @@
 package com.prosperitasglobal.sendsolv.model;
 
+
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -36,6 +37,13 @@ public class Cfop extends ModelCosmeDamiao
 	public Cfop()
 	{
 		super();
+	}
+
+	public Cfop(Integer id, PersistanceActionEnum modelAction)
+	{
+		super();
+		this.id = id;
+		this.modelAction(modelAction);
 	}
 
 	/**

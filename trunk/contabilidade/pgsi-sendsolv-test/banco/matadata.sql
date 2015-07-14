@@ -516,212 +516,6 @@ GO
 
 /** ---------------------------------------------------------------*/
 
-DROP TABLE [dbo].[funcionario];
-CREATE TABLE [dbo].[funcionario](
-	[id]             [int] identity(1,1) NOT NULL,
-	[cdEmpr]       [int] NULL,
-	[matricula]    [varchar](20) NULL,
-	[nome]         [varchar](200) NULL,
-	[sexo]         [int] NULL,
-	[processId]    [int] NULL,
-	[dataAdm]      [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
-	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
-    [create_user]  [varchar](50) NULL,
-    [modify_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
-    [modify_user]  [varchar](50) NULL,
-CONSTRAINT [pk_funcionario_id] PRIMARY KEY CLUSTERED
-(
-	[id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY];
-INSERT INTO [dbo].[funcionario]
-           ([cdEmpr],[matricula] ,[nome],[dataAdm],[create_date],[create_user],[modify_date],[modify_user])
-     VALUES
-           (1,'8460','8460' ,14327833577780,14327833577780 ,'system' ,14327833577780,'system'),
-		   (1,'8460','8460',14327833577780,14327833577780 ,'system' ,14327833577780,'system'),
-		   (1,'8460','8460',14327833577780,14327833577780 ,'system' ,14327833577780,'system'),
-		   (1,'8460','8460',14327833577780,14327833577780 ,'system' ,14327833577780,'system'),
-		   (1,'8460','8460',14327833577780,14327833577780 ,'system' ,14327833577780,'system'),
-		   (2,'8460','8460',14327833577780,14327833577780 ,'system' ,14327833577780,'system'),
-		   (2,'8460','8460',14327833577780,14327833577780 ,'system' ,14327833577780,'system'),
-		   (2,'8460','8460',14327833577780,14327833577780 ,'system' ,14327833577780,'system'),
-		   (2,'8460','8460',14327833577780,14327833577780 ,'system' ,14327833577780,'system'),
-		   (2,'8460','8460',14327833577780,14327833577780 ,'system' ,14327833577780,'system'),
-		   (3,'8460','8460',14327833577780,14327833577780 ,'system' ,14327833577780,'system'),
-		   (3,'8460','8460',14327833577780,14327833577780 ,'system' ,14327833577780,'system'),
-		   (3,'8460','8460',14327833577780,14327833577780 ,'system' ,14327833577780,'system'),
-		   (3,'8460','8460',14327833577780,14327833577780 ,'system' ,14327833577780,'system'),
-		   (3,'8460','8460',14327833577780,14327833577780 ,'system' ,14327833577780,'system')
-
-
-INSERT INTO [dbo].[status] ([dataStatus],[parentId],[status],[acaoType],[tabelaEnum],[note],[create_date],[create_user],[modify_date],[modify_user]) VALUES
-
-           (14327833577780,1,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
-		   (14327833577780,2,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
-		   (14327833577780,3,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
-		   (14327833577780,4,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
-		   (14327833577780,5,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
-		   (14327833577780,6,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
-		   (14327833577100,1,2,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
-		   (14327833577100,2,2,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
-		   (14327833577780,1,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
-		   (14327833577780,2,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
-		   (14327833577780,3,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
-		   (14327833577780,4,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
-		   (14327833577780,5,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
-		   (14327833577780,6,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
-		   (14327833577100,1,2,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
-		   (14327833577100,2,2,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod')
-
-GO
-
-INSERT INTO [dbo].[documento]
-           ([tabela],[parentId],[type],[description],[numero],[data] ,[estado],[create_date] ,[create_user],[modify_date],[modify_user])
-     VALUES
-           (16,1,1,'CNPJ','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
-		   (16,2,1,'CPF','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
-		   (16,3,1,'IM','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
-		   (16,4,1,'IE','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
-		   (16,5,1,'RG','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
-		   (16,6,1,'CGC','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
-		   (16,7,1,'CNPJ','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
-		   (16,8,1,'CPF','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
-		   (16,9,1,'IM','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
-		   (16,10,1,'IE','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
-		   (16,11,1,'RG','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
-		   (16,12,1,'CGC','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
-		   (16,13,1,'CNPJ','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
-		   (16,14,1,'CPF','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
-		   (16,15,1,'IM','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
-		   (16,1,1,'IE','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
-		   (16,2,1,'RG','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
-		   (16,3,1,'CGC','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod')
-GO
-
-INSERT INTO [dbo].[email]
-           ([tabela],[parentId],[type],[email],[description],[create_date],[create_user] ,[modify_date],[modify_user])
-     VALUES
-           (16,1,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
-		   (16,2,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
-		   (16,3,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
-		   (16,4,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
-		   (16,5,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
-		   (16,6,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
-		   (16,7,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
-		   (16,8,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
-		   (16,9,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
-		   (16,10,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
-		   (16,11,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
-		   (16,12,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
-		   (16,13,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
-		   (16,14,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
-		   (16,15,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
-		   (16,1,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
-		   (16,1,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
-		   (16,3,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod')
-GO
-
-INSERT INTO [dbo].[endereco]
-           ([tabela],[parentId],[type],[logradouro],[cidade],[estado],[bairro],[numero],[cep],[create_date] ,[create_user],[modify_date],[modify_user])
-     VALUES
-           (16,1,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (16,2,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (16,3,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (16,4,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (16,5,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (16,6,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (16,7,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (16,8,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (16,9,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (16,10,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (16,11,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (16,12,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (16,13,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (16,14,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (16,15,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
-		   (16,1,2,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod')
-GO
-
-INSERT INTO [dbo].[telefone]
-           ([type] ,[parentId],[tabela],[ddd],[telefone],[create_date],[create_user],[modify_date],[modify_user])
-     VALUES
-           (1,1,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
-		   (1,2,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
-		   (1,3,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
-		   (1,4,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
-		   (1,5,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
-		   (1,6,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
-		   (1,7,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
-		   (1,8,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
-		   (1,9,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
-		   (1,10,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
-		   (1,11,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
-		   (1,12,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
-		   (1,13,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
-		   (1,14,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
-		   (1,15,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
-		   (2,1,16,'034','91782776',1432783357778,'system',1432783357778,'system')
-GO
-
-/** ---------------------------------------------------------------*/
-
-DROP TABLE [dbo].[horarios];
-CREATE TABLE [dbo].[horarios](
-	[id]             [int] identity(1,1) NOT NULL,
-	[parentId]     [int] NULL,
-	[data]         [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
-	[horarioEntr]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
-	[horarioSair]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
-	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
-	[tipo]     	   [varchar](50) NULL,
-	[processId]    [int] NULL,
-    [create_user]  [varchar](50) NULL,
-    [modify_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
-    [modify_user]  [varchar](50) NULL,
-CONSTRAINT [pk_horario_id] PRIMARY KEY CLUSTERED
-(
-	[id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-USE [PGSi]
-GO
-
-INSERT INTO [dbo].[horarios]
-           ([parentId],[data],[horarioEntr],[horarioSair],[create_date],[tipo],[create_user],[modify_date],[modify_user])
-     VALUES
-           (1,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
-		   (2,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
-		   (3,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
-		   (4,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
-		   (5,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
-		   (6,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
-		   (7,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
-		   (8,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
-		   (9,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
-		   (10,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
-		   (11,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
-		   (12,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
-		   (13,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
-		   (14,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
-		   (15,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
-		   (1,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
-		   (2,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
-		   (3,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
-		   (4,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
-		   (5,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
-		   (6,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
-		   (7,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
-		   (8,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
-		   (9,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
-		   (10,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
-		   (11,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
-		   (12,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
-		   (13,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
-		   (14,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
-		   (15,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system')
-
-GO
-
 
 
 /** ---------------------------------------------------------------*/
@@ -1038,11 +832,13 @@ CREATE TABLE [dbo].[Pessoa](
 	[sexo] 		   [int] NULL,
 	[type]         [int] NOT NULL,
 	[dataNasc]     [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[dataAdmin]     [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[nomePai] 	   [varchar](200) NULL,
 	[nomeMae]      [varchar](200) NULL,
 	[nomeConjugue] [varchar](200) NULL,
 	[estadoCivil]  [int] NULL,
 	[processId]    [int] NULL,
+	[matricula]	   [varchar](50) NULL,
 	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1052,6 +848,244 @@ CONSTRAINT [pk_eventoPessoa_id] PRIMARY KEY CLUSTERED
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+
+INSERT INTO [dbo].[Pessoa]
+           ([nome],[cdEmpr],[sexo],[type],[dataNasc],[nomePai],[nomeMae],[nomeConjugue],[estadoCivil],[create_date],[modify_date],[modify_user],[create_user])
+     VALUES
+           ('washington',1,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',1,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',1,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',1,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',1,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',1,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',1,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',1,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',1,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',1,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',1,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',1,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',1,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',1,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,4,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,2,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',1,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',1,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',1,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',1,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',1,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',1,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',1,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',2,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System'),
+		   ('washington',3,1,3,143278335777,'cosme','debora','graciane barbosa',1,1432783357778,1432783357778,'System','System')
+
+
+INSERT INTO [dbo].[status] ([dataStatus],[parentId],[status],[acaoType],[tabelaEnum],[note],[create_date],[create_user],[modify_date],[modify_user]) VALUES
+
+           (14327833577780,1,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (14327833577780,2,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (14327833577780,3,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (14327833577780,4,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (14327833577780,5,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (14327833577780,6,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (14327833577100,1,2,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (14327833577100,2,2,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (14327833577780,1,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (14327833577780,2,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (14327833577780,3,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (14327833577780,4,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (14327833577780,5,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (14327833577780,6,1,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (14327833577100,1,2,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod'),
+		   (14327833577100,2,2,1,16,'Rua Maria Conceicao silva',14327833577780,'rod',14327833577780,'rod')
+
+GO
+
+INSERT INTO [dbo].[documento]
+           ([tabela],[parentId],[type],[description],[numero],[data] ,[estado],[create_date] ,[create_user],[modify_date],[modify_user])
+     VALUES
+           (16,1,1,'CNPJ','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (16,2,1,'CPF','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (16,3,1,'IM','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (16,4,1,'IE','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (16,5,1,'RG','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (16,6,1,'CGC','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (16,7,1,'CNPJ','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (16,8,1,'CPF','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (16,9,1,'IM','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (16,10,1,'IE','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (16,11,1,'RG','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (16,12,1,'CGC','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (16,13,1,'CNPJ','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (16,14,1,'CPF','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (16,15,1,'IM','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (16,1,1,'IE','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (16,2,1,'RG','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod'),
+		   (16,3,1,'CGC','2001',14327833577780,1,14327833577780,'rod',14327833577780,'rod')
+GO
+
+INSERT INTO [dbo].[email]
+           ([tabela],[parentId],[type],[email],[description],[create_date],[create_user] ,[modify_date],[modify_user])
+     VALUES
+           (16,1,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (16,2,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (16,3,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (16,4,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (16,5,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (16,6,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (16,7,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (16,8,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (16,9,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (16,10,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (16,11,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (16,12,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (16,13,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (16,14,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (16,15,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (16,1,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (16,1,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod'),
+		   (16,3,1,'wwww.tessr@gmail.com','email',14327833577780,'rod',1432783357778,'rod')
+GO
+
+INSERT INTO [dbo].[endereco]
+           ([tabela],[parentId],[type],[logradouro],[cidade],[estado],[bairro],[numero],[cep],[create_date] ,[create_user],[modify_date],[modify_user])
+     VALUES
+           (16,1,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (16,2,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (16,3,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (16,4,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (16,5,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (16,6,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (16,7,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (16,8,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (16,9,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (16,10,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (16,11,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (16,12,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (16,13,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (16,14,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (16,15,1,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod'),
+		   (16,1,2,'Rua Maria Conceicao silva',1,1,'centro','686','380802-243',14327833577780,'rod',10000002,'rod')
+GO
+
+INSERT INTO [dbo].[telefone]
+           ([type] ,[parentId],[tabela],[ddd],[telefone],[create_date],[create_user],[modify_date],[modify_user])
+     VALUES
+           (1,1,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (1,2,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (1,3,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (1,4,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (1,5,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (1,6,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (1,7,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (1,8,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (1,9,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (1,10,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (1,11,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (1,12,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (1,13,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (1,14,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (1,15,16,'034','91782776',1432783357778,'system',1432783357778,'system'),
+		   (2,1,16,'034','91782776',1432783357778,'system',1432783357778,'system')
+GO
+
+/** ---------------------------------------------------------------*/
+
+DROP TABLE [dbo].[horarios];
+CREATE TABLE [dbo].[horarios](
+	[id]             [int] identity(1,1) NOT NULL,
+	[parentId]     [int] NULL,
+	[data]         [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[horarioEntr]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[horarioSair]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[tipo]     	   [varchar](50) NULL,
+	[processId]    [int] NULL,
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_horario_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+USE [PGSi]
+GO
+
+INSERT INTO [dbo].[horarios]
+           ([parentId],[data],[horarioEntr],[horarioSair],[create_date],[tipo],[create_user],[modify_date],[modify_user])
+     VALUES
+           (1,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
+		   (2,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
+		   (3,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
+		   (4,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
+		   (5,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
+		   (6,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
+		   (7,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
+		   (8,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
+		   (9,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
+		   (10,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
+		   (11,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
+		   (12,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
+		   (13,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
+		   (14,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
+		   (15,1432783357778,1432783357778,1432783357778,1432783357778,'Entrada','system',1432783357778,'system'),
+		   (1,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
+		   (2,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
+		   (3,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
+		   (4,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
+		   (5,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
+		   (6,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
+		   (7,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
+		   (8,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
+		   (9,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
+		   (10,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
+		   (11,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
+		   (12,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
+		   (13,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
+		   (14,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system'),
+		   (15,1432783357778,1432783357778,1432783357778,1432783357778,'Saida','system',1432783357778,'system')
+
+GO
+
+
 
 
 INSERT INTO [dbo].[Pessoa]
