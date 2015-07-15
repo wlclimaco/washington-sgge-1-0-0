@@ -426,6 +426,7 @@ public class ClienteBaseController extends UtilControllerD
 		Cliente cliente = new Cliente();
 
 		cliente.setId(1);
+		cliente.setEmprId(1);
 		cliente.setNome("Damiao jose junior");
 		cliente.setNomePai("Damiao Jose Pai");
 		cliente.setNomeMae("Sonia Mae");

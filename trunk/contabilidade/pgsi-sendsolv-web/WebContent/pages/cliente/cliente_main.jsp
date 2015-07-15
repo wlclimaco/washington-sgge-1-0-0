@@ -16,7 +16,7 @@
 
 <h2 class="list"><s:message code="commons.pages.clientefind" text="default text" /></h2>
 
-<a href="cliente/add" class="add-business alist" title='<s:message code="commons.pages.clienteadd" text="default text" />'>
+<a href="cliente/add" id="insertPessoa" class="add-business alist" title='<s:message code="commons.pages.clienteadd" text="default text" />'>
 	<span class="icon-nav icon-plus icon-small-button"></span>
 	<s:message code="commons.pages.clienteadd" text="default text" />
 </a>

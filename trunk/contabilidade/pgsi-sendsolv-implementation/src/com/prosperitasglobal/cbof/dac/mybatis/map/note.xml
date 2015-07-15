@@ -86,10 +86,10 @@
 
 	 <select id="fetchNoteByPessoa" parameterType="Integer" resultMap="noteResult">
 		SELECT
-			id,
+			b.id,
 			<include refid="allNoteColumns" />
-		FROM note1
-		WHERE parentId = #{id} and tabela = 23
+		FROM note1 b
+		WHERE b.parentId = #{id} and b.tabela = 23
 	</select>
 
 

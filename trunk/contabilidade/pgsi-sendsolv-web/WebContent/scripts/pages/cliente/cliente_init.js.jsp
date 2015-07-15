@@ -268,6 +268,20 @@ $(document).ready(function()
 		$.address.parameter("pessoa","");
 		pgsi.util.page.fnReloadTable(pgsi.pages.pessoa.clienteTable);
 	});
+
+
+	$("#insertPessoa").on("click", function(e)
+	{
+		e.preventDefault();
+		$.pgsi.ajax.post({
+			sUrl 		: "api/cliente/add",
+			oRequest 	: {},
+			fnCallback  : function(oResponse) {
+				console.log(oResponse)
+				$.pgsi.progressBar.stop();
+			}
+		});
+	});
 	$.pgsi.progressBar.stopGlobal();
 });
 </script>

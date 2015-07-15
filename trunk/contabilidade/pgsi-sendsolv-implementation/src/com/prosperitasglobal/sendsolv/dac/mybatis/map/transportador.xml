@@ -79,7 +79,7 @@
  	-->
   <select id="fetchTransportadorRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
-        FROM pessoa
+        FROM pessoa where type = 3
 
   </select>
 
@@ -108,7 +108,7 @@
     						<include refid="allTransportadorColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM pessoa b
-						where type = 3
+						where b.type = 3
 					<if test="parentId != null">
 						AND b.id = #{id}
 					</if>
