@@ -54,6 +54,7 @@ public final class ProfissaoDACD extends SqlSessionDaoSupport
 		{
 			// Make sure we set the parent key
 			profissao.setParentId(parentId);
+			profissao.setProcessId(processId);
 
 			if (ValidationUtil.isNull(profissao.getModelAction()))
 			{

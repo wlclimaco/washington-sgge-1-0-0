@@ -1,7 +1,5 @@
 package com.prosperitasglobal.sendsolv.fornecedor.controller;
 
-import java.util.Calendar;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -132,23 +130,10 @@ public class FornecedorAPIController extends FornecedorBaseController
 	 */
 	@RequestMapping(value = INSERT_FORNECEDOR, method = RequestMethod.POST)
 	@ResponseBody
-	public FornecedorResponse insert(@RequestBody FornecedorMaintenanceRequest fornecedorRequest)
+	public FornecedorResponse insertView(@RequestBody FornecedorMaintenanceRequest fornecedorRequest)
 	{
-		FornecedorResponse fornecedorResponse = new FornecedorResponse();
 
-		try
-		{
-
-			fornecedorRequest.getFornecedor().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
-			fornecedorResponse = getPessoaBAI().insertFornecedor(fornecedorRequest);
-		}
-		catch (Exception e)
-		{
-			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
-			fornecedorResponse = null;
-		}
-
-		return fornecedorResponse;
+		return insert(fornecedorRequest);
 
 	}
 
