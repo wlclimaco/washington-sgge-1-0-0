@@ -103,18 +103,33 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 	IDocumentoDAC documentoDAC;
 	IHistoricoDAC historicoDAC;
 	IStatusDAC statusDAC;
-
-	IProfissaoDAC profisaoDAC;
 	IConvenioDAC convenioDAC;
-	IBancoDAC bancosDAC;
+	IBancoDAC bancoDAC;
 	IContatoDAC contatoDAC;
 	INoteDAC noteDAC;
 	ICfopDAC cfopDAC;
-	IFormaPagamentoDAC formaPagamentoDAC;
+	IFormaPagamentoDAC formaPgDAC;
 	ISalariosDAC salarioDAC;
 	IBeneficiosDAC beneficiosDAC;
 	IEventosDAC eventosDAC;
 	IHoraFuncDAC horaFuncDAC;
+	IProfissaoDAC profissaoDAC;
+
+	/**
+	 * @return the profissaoDAC
+	 */
+	public IProfissaoDAC getProfissaoDAC()
+	{
+		return profissaoDAC;
+	}
+
+	/**
+	 * @param profissaoDAC the profissaoDAC to set
+	 */
+	public void setProfissaoDAC(IProfissaoDAC profissaoDAC)
+	{
+		this.profissaoDAC = profissaoDAC;
+	}
 
 	/**
 	 * @return the horaFuncDAC
@@ -190,14 +205,20 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		this.cfopDAC = cfopDAC;
 	}
 
-	public IFormaPagamentoDAC getFormaPagamentoDAC()
+	/**
+	 * @return the formaPgDAC
+	 */
+	public IFormaPagamentoDAC getFormaPgDAC()
 	{
-		return formaPagamentoDAC;
+		return formaPgDAC;
 	}
 
-	public void setFormaPagamentoDAC(IFormaPagamentoDAC formaPagamentoDAC)
+	/**
+	 * @param formaPgDAC the formaPgDAC to set
+	 */
+	public void setFormaPgDAC(IFormaPagamentoDAC formaPgDAC)
 	{
-		this.formaPagamentoDAC = formaPagamentoDAC;
+		this.formaPgDAC = formaPgDAC;
 	}
 
 	/**
@@ -338,16 +359,6 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		return pessoaInquiryValidSortFields;
 	}
 
-	public IProfissaoDAC getProfisaoDAC()
-	{
-		return profisaoDAC;
-	}
-
-	public void setProfisaoDAC(IProfissaoDAC profisaoDAC)
-	{
-		this.profisaoDAC = profisaoDAC;
-	}
-
 	public IConvenioDAC getConvenioDAC()
 	{
 		return convenioDAC;
@@ -358,14 +369,20 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		this.convenioDAC = convenioDAC;
 	}
 
-	public IBancoDAC getBancosDAC()
+	/**
+	 * @return the bancoDAC
+	 */
+	public IBancoDAC getBancoDAC()
 	{
-		return bancosDAC;
+		return bancoDAC;
 	}
 
-	public void setBancosDAC(IBancoDAC bancosDAC)
+	/**
+	 * @param bancoDAC the bancoDAC to set
+	 */
+	public void setBancoDAC(IBancoDAC bancoDAC)
 	{
-		this.bancosDAC = bancosDAC;
+		this.bancoDAC = bancoDAC;
 	}
 
 	public IContatoDAC getContatoDAC()
@@ -457,7 +474,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		insertCount +=
 				ProfissaoDACD.maintainProfissaoAssociations(pessoa.getProfissao(), response, insertCount, null,
 						null,
-						null, getProfisaoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						null, getProfissaoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
 						pessoa.getCreateUser(), processId, historicoId);
 
 		insertCount +=
@@ -553,7 +570,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		updateCount +=
 				ProfissaoDACD.maintainProfissaoAssociations(pessoa.getProfissao(), response, pessoa.getId(), null,
 						null,
-						null, getProfisaoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						null, getProfissaoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
 						pessoa.getCreateUser(), processId, historicoId);
 
 		updateCount +=
@@ -709,7 +726,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 				FormaPagamentoDACD.maintainFormaPgAssociations(pessoa.getFormaPagamentoList(), response, insertCount,
 						null,
 						null,
-						null, getFormaPagamentoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						null, getFormaPgDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
 						pessoa.getCreateUser(), processId);
 
 		insertCount +=
@@ -809,7 +826,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 						pessoa.getId(),
 						null,
 						null,
-						null, getFormaPagamentoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						null, getFormaPgDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
 						pessoa.getCreateUser(), processId);
 
 		updateCount +=
@@ -898,7 +915,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		// QATMyBatisDacHelper.translateSortFields(request, getFornecedorInquiryValidSortFields());
 
 		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "FornecedorMap.fetchFornecedorRowCount",
-				"FornecedorMap.fetchAllFornecedorByRequest", response);
+				"FornecedorMap.fetchAllFornecedorsByRequest", response);
 		return response;
 	}
 
@@ -1052,7 +1069,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 						pessoa.getId(),
 						null,
 						null,
-						null, getFormaPagamentoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						null, getFormaPgDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
 						pessoa.getCreateUser(), processId);
 
 		if (updateCount > 0)
@@ -1168,7 +1185,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		insertCount +=
 				BancoDACD.maintainBancoAssociations(pessoa.getBancos(), response, insertCount, null,
 						null,
-						null, getBancosDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						null, getBancoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
 						pessoa.getCreateUser(), processId, historicoId);
 
 		insertCount +=

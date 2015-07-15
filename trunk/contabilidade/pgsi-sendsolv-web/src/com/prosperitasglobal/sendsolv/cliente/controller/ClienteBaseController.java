@@ -8,7 +8,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,6 +16,7 @@ import com.prosperitasglobal.cbof.model.Note;
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
 import com.prosperitasglobal.sendsolv.bai.IPessoaBAI;
+import com.prosperitasglobal.sendsolv.fornecedor.controller.FornecedorBaseController;
 import com.prosperitasglobal.sendsolv.model.Banco;
 import com.prosperitasglobal.sendsolv.model.Cidade;
 import com.prosperitasglobal.sendsolv.model.Cliente;
@@ -44,7 +45,7 @@ public class ClienteBaseController extends UtilControllerD
 	public static final String RESPONSE = "response";
 
 	/** The Constant LOG. */
-	private static final Logger LOG = (Logger)LoggerFactory.getLogger(ClienteBaseController.class);
+	private static final Logger LOG = LoggerFactory.getLogger(FornecedorBaseController.class);
 
 	/** The Constant CONTROLLER_EXCEPTION_MSG. */
 	private static final String CONTROLLER_EXCEPTION_MSG = "PessoaBaseController";
@@ -108,7 +109,7 @@ public class ClienteBaseController extends UtilControllerD
 		}
 		catch (Exception e)
 		{
-			if (((org.slf4j.Logger)LOG).isErrorEnabled())
+			if (LOG.isErrorEnabled())
 			{
 				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
 				modelAndView.addObject(RESPONSE, null);
@@ -136,7 +137,7 @@ public class ClienteBaseController extends UtilControllerD
 		}
 		catch (Exception e)
 		{
-			if (((org.slf4j.Logger)LOG).isErrorEnabled())
+			if (LOG.isErrorEnabled())
 			{
 				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
 			}

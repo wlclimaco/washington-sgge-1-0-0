@@ -3,11 +3,41 @@ package com.prosperitasglobal.sendsolv.funcionario.controller;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.prosperitasglobal.cbof.model.Note;
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
+import com.prosperitasglobal.sendsolv.bai.IFuncionarioBAI;
+import com.prosperitasglobal.sendsolv.model.Banco;
+import com.prosperitasglobal.sendsolv.model.BeneficioMesApp;
+import com.prosperitasglobal.sendsolv.model.Beneficios;
+import com.prosperitasglobal.sendsolv.model.Cidade;
+import com.prosperitasglobal.sendsolv.model.Contato;
+import com.prosperitasglobal.sendsolv.model.ContatoItens;
+import com.prosperitasglobal.sendsolv.model.ContatoTypeEnum;
+import com.prosperitasglobal.sendsolv.model.Documento;
+import com.prosperitasglobal.sendsolv.model.Email;
+import com.prosperitasglobal.sendsolv.model.Endereco;
+import com.prosperitasglobal.sendsolv.model.Estado;
+import com.prosperitasglobal.sendsolv.model.Eventos;
+import com.prosperitasglobal.sendsolv.model.Funcionario;
+import com.prosperitasglobal.sendsolv.model.HorarioFunc;
+import com.prosperitasglobal.sendsolv.model.PessoaTypeEnum;
+import com.prosperitasglobal.sendsolv.model.Profissao;
+import com.prosperitasglobal.sendsolv.model.Salario;
+import com.prosperitasglobal.sendsolv.model.TabelaEnum;
+import com.prosperitasglobal.sendsolv.model.Telefone;
+import com.prosperitasglobal.sendsolv.model.request.FuncionarioInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.response.FuncionarioResponse;
+import com.qat.framework.model.QATModel.PersistanceActionEnum;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class FuncionarioBaseController.
@@ -243,7 +273,7 @@ public class FuncionarioBaseController extends UtilControllerD
 		telefone.setModelAction(modelAction);
 		telefone.setId(1);
 		telefone.setDdd("34");
-		telefone.setTelefone("91782776");
+		telefone.setNumero("91782776");
 		telefone.setDescricao("Casa");
 		telefoneList.add(telefone);
 
@@ -251,7 +281,7 @@ public class FuncionarioBaseController extends UtilControllerD
 		telefone.setModelAction(modelAction);
 		telefone.setId(1);
 		telefone.setDdd("34");
-		telefone.setTelefone("91782776");
+		telefone.setNumero("91782776");
 		telefone.setDescricao("Trabalho");
 		telefoneList.add(telefone);
 
@@ -259,7 +289,7 @@ public class FuncionarioBaseController extends UtilControllerD
 		telefone.setModelAction(modelAction);
 		telefone.setId(1);
 		telefone.setDdd("34");
-		telefone.setTelefone("91782776");
+		telefone.setNumero("91782776");
 		telefone.setDescricao("Celular");
 		telefoneList.add(telefone);
 
@@ -300,22 +330,22 @@ public class FuncionarioBaseController extends UtilControllerD
 		note.setModelAction(modelAction);
 		note.setId(1);
 		note.setNoteText("Texto Texto Texto Texto Texto Texto Texto Texto Texto ");
-		note.setTabelaEnum(TabelaEnum.Cliente);
+		note.setTabelaEnum(TabelaEnum.FUNCIONARIO);
 		noteList.add(note);
 
-		note = new Documento();
+		note = new Note();
 		note.setModelAction(modelAction);
 		note.setId(2);
 		note.setNoteText("Texto Texto Texto Texto Texto Texto Texto Texto Texto ");
-		note.setTabelaEnum(TabelaEnum.Cliente);
+		note.setTabelaEnum(TabelaEnum.FUNCIONARIO);
 		noteList.add(note);
 		noteList.add(note);
 
-		note = new Documento();
+		note = new Note();
 		note.setModelAction(modelAction);
 		note.setId(3);
 		note.setNoteText("Texto Texto Texto Texto Texto Texto Texto Texto Texto ");
-		note.setTabelaEnum(TabelaEnum.Cliente);
+		note.setTabelaEnum(TabelaEnum.FUNCIONARIO);
 		noteList.add(note);
 		noteList.add(note);
 
@@ -327,10 +357,10 @@ public class FuncionarioBaseController extends UtilControllerD
 		List<Contato> contatoList = new ArrayList<Contato>();
 
 		ContatoItens contatoItens = new ContatoItens();
-		contatoItens.setId();
-		contatoItens.setNoteList();
+		contatoItens.setId(21);
+		contatoItens.setNoteList(insertNote(modelAction));
 		contatoItens.setMotivo(ContatoTypeEnum.COBRANCA);
-		a = new Date();
+		Date a = new Date();
 		contatoItens.setDataContato(a.getTime());
 		contatoItens.setNomeContato("Maria de lourdes");
 
@@ -349,15 +379,15 @@ public class FuncionarioBaseController extends UtilControllerD
 	public List<Salario> insertSalario(PersistanceActionEnum modelAction)
 	{
 		List<Salario> salarioList = new ArrayList<Salario>();
-		a = new Date();
+		Date a = new Date();
 		Salario salario = new Salario(1, a.getTime(), new Double(1000.99));
-		salarioList.add(contato);
+		salarioList.add(salario);
 		salario = new Salario(1, a.getTime(), new Double(1000.99));
-		salarioList.add(contato);
+		salarioList.add(salario);
 		salario = new Salario(1, a.getTime(), new Double(1000.99));
-		salarioList.add(contato);
+		salarioList.add(salario);
 		salario = new Salario(1, a.getTime(), new Double(1000.99));
-		salarioList.add(contato);
+		salarioList.add(salario);
 
 		return salarioList;
 	}
@@ -369,13 +399,14 @@ public class FuncionarioBaseController extends UtilControllerD
 		{
 			HorarioFunc horaFunc = new HorarioFunc();
 			horaFunc.setId(i);
-			a = new Date();
+			Date a = new Date();
 			horaFunc.setData(a.getTime() - (i * 1000000));
 			horaFunc.setHorarioEntr(a.getTime() - (i * 100000));
 			horaFunc.setHorarioSair(a.getTime() - (i * 10000));
 			horaFunc.setTipo("Entrada");
+			horaFunc.setModelAction(modelAction);
 			horarioFuncList.add(horaFunc);
-			horarioFuncList.setModelAction(modelAction);
+
 		}
 		return horarioFuncList;
 	}
@@ -383,11 +414,11 @@ public class FuncionarioBaseController extends UtilControllerD
 	public List<Beneficios> insertBeneficios(PersistanceActionEnum modelAction)
 	{
 		List<Beneficios> beneficioList = new ArrayList<Beneficios>();
-		a = new Date();
+		Date a = new Date();
 		Beneficios beneficio = new Beneficios();
 
 		beneficio.setId(1);
-		beneficio.setDataList(new ArrayList<>(BeneficioMesApp));
+		beneficio.setDataList(new ArrayList<BeneficioMesApp>());
 		beneficio.getDataList().add(new BeneficioMesApp());
 		beneficio.setNome("Vale Transporte");
 		beneficio.setCodigo("00001");
@@ -409,12 +440,10 @@ public class FuncionarioBaseController extends UtilControllerD
 	public List<Eventos> insertEventos(PersistanceActionEnum modelAction)
 	{
 		List<Eventos> eventosList = new ArrayList<Eventos>();
-		a = new Date();
+		Date a = new Date();
 		Eventos evento = new Eventos();
 		evento.setId(1);
-		evento.setDataList(new ArrayList<>(BeneficioMesApp));
-		evento.getDataList().add(new BeneficioMesApp());
-		evento.setNome("INSS");
+
 		evento.setCodigo("00002");
 		evento.setDescricao("INSS");
 		evento.setValor(new Double(0));
@@ -430,7 +459,7 @@ public class FuncionarioBaseController extends UtilControllerD
 		evento.setId(1);
 		eventosList.add(evento);
 
-		return beneficioList;
+		return eventosList;
 	}
 
 	public Funcionario insertMockCliente(PersistanceActionEnum modelAction)
@@ -446,7 +475,7 @@ public class FuncionarioBaseController extends UtilControllerD
 		funcionario.setMatricula("8426");
 		funcionario.setEstadoCivil(1);
 		funcionario.setPessoaTypeEnum(PessoaTypeEnum.FUNCIONARIO);
-		a = new Date();
+		Date a = new Date();
 		funcionario.setDatanasc(a.getTime() - 100000000);
 		funcionario.setDataAdm(a.getTime() - 200000000);
 		funcionario.setPessoaTypeEnum(PessoaTypeEnum.FUNCIONARIO);
@@ -458,8 +487,6 @@ public class FuncionarioBaseController extends UtilControllerD
 		funcionario.setNotes(insertNote(modelAction));
 		funcionario.setBancos(new ArrayList<Banco>());
 		funcionario.getBancos().add(new Banco(1));
-		funcionario.setConvenioList(new ArrayList<Convenio>());
-		funcionario.getConvenioList().add(new Convenio(1));
 		funcionario.setSalarios(insertSalario(modelAction));
 		funcionario.setHorarios(insertHorarioFunc(modelAction));
 		funcionario.setBeneficios(insertBeneficios(modelAction));
