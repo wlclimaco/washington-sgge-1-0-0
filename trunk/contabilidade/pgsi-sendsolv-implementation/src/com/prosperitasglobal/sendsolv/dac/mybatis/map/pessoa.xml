@@ -14,7 +14,7 @@
 		,b.nome
 		,b.type
 		,b.sexo
-		,b.dataNasc
+		,b.datanasc
 		,b.nomePai
 		,b.nomeMae
 		,b.nomeConjugue
@@ -30,7 +30,7 @@
   		#{nome},
   		#{pessoaTypeEnumValue},
   		#{sexo},
-  		#{dataNasc},
+  		#{datanasc},
   		#{nomePai},
   		#{nomeMae},
   		#{nomeConjugue},

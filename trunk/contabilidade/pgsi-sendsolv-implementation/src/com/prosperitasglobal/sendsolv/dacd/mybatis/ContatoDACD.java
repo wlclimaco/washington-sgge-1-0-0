@@ -49,6 +49,7 @@ public final class ContatoDACD extends SqlSessionDaoSupport
 		{
 			// Make sure we set the parent key
 			contato.setParentId(parentId);
+			contato.setProcessId(processId);
 
 			if (ValidationUtil.isNull(contato.getModelAction()))
 			{

@@ -403,8 +403,9 @@ public class ClienteBaseController extends UtilControllerD
 
 		ContatoItens contatoItens = new ContatoItens();
 		contatoItens.setId(1);
+
 		contatoItens.setNoteList(insertNote(modelAction));
-		contatoItens.setMotivo(ContatoTypeEnum.COBRANCA);
+
 		Date a = new Date();
 		contatoItens.setDataContato(a.getTime());
 		contatoItens.setNomeContato("Maria de lourdes");
@@ -413,6 +414,7 @@ public class ClienteBaseController extends UtilControllerD
 		contato.setModelAction(modelAction);
 		contato.setId(1);
 		a = new Date();
+		contato.setMotivo(ContatoTypeEnum.COBRANCA);
 		contato.setDataContato(a.getTime());
 		contato.setContatoItensList(new ArrayList<ContatoItens>());
 		contato.getContatoItensList().add(contatoItens);

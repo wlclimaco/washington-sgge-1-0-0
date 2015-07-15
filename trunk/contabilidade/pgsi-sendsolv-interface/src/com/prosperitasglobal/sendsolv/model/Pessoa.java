@@ -396,20 +396,20 @@ public class Pessoa extends ModelCosmeDamiao
 		return "Pessoa [getPessoaTypeEnumValue()=" + getPessoaTypeEnumValue() + ", getId()=" + getId() + ", getNome()="
 				+ getNome() + ", getNomePai()=" + getNomePai() + ", getNomeMae()=" + getNomeMae()
 				+ ", getNomeConjugue()=" + getNomeConjugue() + ", getEstadoCivil()=" + getEstadoCivil()
-				+ ", getDatanasc()=" + getDatanasc() + ", getFoto()=" + getFoto()
-				+ ", getPessoaTypeEnum()=" + getPessoaTypeEnum() + ", getFormaPagamentoList()="
-				+ getFormaPagamentoList() + ", getCondPagList()=" + getCondPagList() + ", getContatoList()="
-				+ getContatoList() + ", getSexo()=" + getSexo() + ", getEnderecos()=" + getEnderecos()
-				+ ", getDocumentos()=" + getDocumentos() + ", getEmails()=" + getEmails() + ", getTelefones()="
-				+ getTelefones() + ", getNotes()=" + getNotes() + ", getBancos()=" + getBancos()
-				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
+				+ ", getDatanasc()=" + getDatanasc() + ", getFoto()=" + getFoto() + ", getPessoaTypeEnum()="
+				+ getPessoaTypeEnum() + ", getFormaPagamentoList()=" + getFormaPagamentoList() + ", getCondPagList()="
+				+ getCondPagList() + ", getContatoList()=" + getContatoList() + ", getSexo()=" + getSexo()
+				+ ", getEnderecos()=" + getEnderecos() + ", getDocumentos()=" + getDocumentos() + ", getEmails()="
+				+ getEmails() + ", getTelefones()=" + getTelefones() + ", getNotes()=" + getNotes() + ", getBancos()="
+				+ getBancos() + ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
 				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
 				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
 				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
-				+ ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()="
-				+ getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()="
-				+ getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + "]";
+				+ ", getProcessId()=" + getProcessId() + ", getUserId()=" + getUserId() + ", toString()="
+				+ super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
+				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
+				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + "]";
 	}
 
 }

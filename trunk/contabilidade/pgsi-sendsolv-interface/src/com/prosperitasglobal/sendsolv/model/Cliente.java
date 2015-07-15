@@ -90,20 +90,20 @@ public class Cliente extends Pessoa
 				+ getConvenioList() + ", getPessoaTypeEnumValue()=" + getPessoaTypeEnumValue() + ", getNome()="
 				+ getNome() + ", getNomePai()=" + getNomePai() + ", getNomeMae()=" + getNomeMae()
 				+ ", getNomeConjugue()=" + getNomeConjugue() + ", getEstadoCivil()=" + getEstadoCivil()
-				+ ", getDatanasc()=" + getDatanasc() + ", getFoto()=" + getFoto()
-				+ ", getPessoaTypeEnum()=" + getPessoaTypeEnum() + ", getFormaPagamentoList()="
-				+ getFormaPagamentoList() + ", getCondPagList()=" + getCondPagList() + ", getContatoList()="
-				+ getContatoList() + ", getSexo()=" + getSexo() + ", getEnderecos()=" + getEnderecos()
-				+ ", getDocumentos()=" + getDocumentos() + ", getEmails()=" + getEmails() + ", getTelefones()="
-				+ getTelefones() + ", getNotes()=" + getNotes() + ", getBancos()=" + getBancos() + ", toString()="
-				+ super.toString() + ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()="
-				+ getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId()
-				+ ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()="
-				+ getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId()
-				+ ", getSite()=" + getSite() + ", getModelAction()=" + getModelAction() + ", getCreateUser()="
-				+ getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()="
-				+ getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + "]";
+				+ ", getDatanasc()=" + getDatanasc() + ", getFoto()=" + getFoto() + ", getPessoaTypeEnum()="
+				+ getPessoaTypeEnum() + ", getFormaPagamentoList()=" + getFormaPagamentoList() + ", getCondPagList()="
+				+ getCondPagList() + ", getContatoList()=" + getContatoList() + ", getSexo()=" + getSexo()
+				+ ", getEnderecos()=" + getEnderecos() + ", getDocumentos()=" + getDocumentos() + ", getEmails()="
+				+ getEmails() + ", getTelefones()=" + getTelefones() + ", getNotes()=" + getNotes() + ", getBancos()="
+				+ getBancos() + ", toString()=" + super.toString() + ", getTabelaEnumValue()=" + getTabelaEnumValue()
+				+ ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue()
+				+ ", getParentId()=" + getParentId() + ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType()
+				+ ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()="
+				+ getEmprId() + ", getSite()=" + getSite() + ", getProcessId()=" + getProcessId() + ", getUserId()="
+				+ getUserId() + ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
+				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
+				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + "]";
 	}
 
 }

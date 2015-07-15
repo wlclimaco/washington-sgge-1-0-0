@@ -17,8 +17,6 @@ public class ContatoItens extends ModelCosmeDamiao
 	/** The type of an account. */
 	private List<Note> noteList;
 
-	private ContatoTypeEnum motivo;
-
 	private Long DataContato;
 
 	private String nomeContato;
@@ -68,22 +66,6 @@ public class ContatoItens extends ModelCosmeDamiao
 	}
 
 	/**
-	 * @return the motivo
-	 */
-	public ContatoTypeEnum getMotivo()
-	{
-		return motivo;
-	}
-
-	/**
-	 * @param motivo the motivo to set
-	 */
-	public void setMotivo(ContatoTypeEnum motivo)
-	{
-		this.motivo = motivo;
-	}
-
-	/**
 	 * @return the dataContato
 	 */
 	public Long getDataContato()
@@ -122,16 +104,17 @@ public class ContatoItens extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "ContatoItens [getId()=" + getId() + ", getNoteList()=" + getNoteList() + ", getMotivo()=" + getMotivo()
-				+ ", getDataContato()=" + getDataContato() + ", getNomeContato()=" + getNomeContato()
-				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
-				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
-				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
-				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
-				+ ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()="
-				+ getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()="
-				+ getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + "]";
+		return "ContatoItens [getId()=" + getId() + ", getNoteList()=" + getNoteList() + ", getDataContato()="
+				+ getDataContato() + ", getNomeContato()=" + getNomeContato() + ", getTabelaEnumValue()="
+				+ getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()="
+				+ getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()=" + getType()
+				+ ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()="
+				+ getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite() + ", getProcessId()="
+				+ getProcessId() + ", getUserId()=" + getUserId() + ", toString()=" + super.toString()
+				+ ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
+				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
+				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + "]";
 	}
 
 }

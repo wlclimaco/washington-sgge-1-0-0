@@ -345,7 +345,7 @@ public class FornecedorBaseController extends UtilControllerD
 		ContatoItens contatoItens = new ContatoItens();
 		contatoItens.setId(1);
 		contatoItens.setNoteList(insertNote(modelAction));
-		contatoItens.setMotivo(ContatoTypeEnum.COBRANCA);
+
 		Date a = new Date();
 		contatoItens.setDataContato(a.getTime());
 		contatoItens.setNomeContato("Maria de lourdes");
@@ -355,6 +355,7 @@ public class FornecedorBaseController extends UtilControllerD
 		contato.setId(1);
 		a = new Date();
 		contato.setDataContato(a.getTime());
+		contato.setMotivo(ContatoTypeEnum.COBRANCA);
 		contato.setContatoItensList(new ArrayList<ContatoItens>());
 		contato.getContatoItensList().add(contatoItens);
 		contatoList.add(contato);
