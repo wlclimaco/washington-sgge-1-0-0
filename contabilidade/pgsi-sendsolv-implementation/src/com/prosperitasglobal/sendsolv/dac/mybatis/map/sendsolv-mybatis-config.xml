@@ -13,8 +13,9 @@
   	<typeAliases>
 
 		<typeAlias alias="QATModel"  									 type="com.qat.framework.model.QATModel" />
-				<typeAlias alias="QATModelOL"							 type="com.qat.framework.model.QATModelOL" />
+		<typeAlias alias="QATModelOL"							         type="com.qat.framework.model.QATModelOL" />
 		<typeAlias alias="AcaoEnum"									 	 type="com.prosperitasglobal.sendsolv.model.AcaoEnum" />
+		<typeAlias alias="CfopTypeEnum"									 type="com.prosperitasglobal.sendsolv.model.CfopTypeEnum" />
 		<typeAlias alias="TabelaEnum"									 type="com.prosperitasglobal.sendsolv.model.TabelaEnum" />
 		<typeAlias alias="TypeEnum"									 	 type="com.prosperitasglobal.sendsolv.model.TypeEnum" />
 		<typeAlias alias="PessoaTypeEnum"							 	 type="com.prosperitasglobal.sendsolv.model.PessoaTypeEnum" />

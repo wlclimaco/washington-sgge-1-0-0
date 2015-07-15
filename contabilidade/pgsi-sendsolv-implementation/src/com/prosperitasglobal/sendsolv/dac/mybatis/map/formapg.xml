@@ -33,7 +33,7 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allFormaPgColumns">
-		,b.descricao
+		 b.descricao
 		,b.diasPg
 		,b.entrada
       	,b.create_date
@@ -99,13 +99,19 @@
   <select id="fetchAllFormaPgs" resultMap="formaPgResult">
     SELECT
 	<include refid="allFormaPgColumns" />
-    FROM formaPg ORDER BY name ASC
+    FROM formaPg b ORDER BY name ASC
   </select>
 
     <select id="fetchAllFormaPgByNota" resultMap="formaPgResult">
     SELECT
 	<include refid="allFormaPgColumns" />
-    FROM formaPg where id=#{id}  ORDER BY descricao ASC
+    FROM formaPg b where b.id=#{id}  ORDER BY b.id ASC
+  </select>
+
+      <select id="fetchAllFormaPgByPessoa" parameterType="Integer" resultMap="formaPgResult">
+    SELECT b.id,
+	<include refid="allFormaPgColumns" />
+    FROM formaPg b where b.id= #{id}  ORDER BY b.id ASC
   </select>
 
 
