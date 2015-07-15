@@ -65,6 +65,7 @@
 		<typeAlias alias="Marca"              				 		 type="com.prosperitasglobal.sendsolv.model.Marca"/>
 		<typeAlias alias="NFStatus"              					 type="com.prosperitasglobal.sendsolv.model.NFStatus"/>
 		<typeAlias alias="NotaFiscal"              					 type="com.prosperitasglobal.sendsolv.model.NotaFiscal"/>
+		<typeAlias alias="Note"              					     type="com.prosperitasglobal.cbof.model.Note"/>
 		<typeAlias alias="NotaFiscalItens"              	 		 type="com.prosperitasglobal.sendsolv.model.NotaFiscalItens"/>
 		<typeAlias alias="Orcamento"              					 type="com.prosperitasglobal.sendsolv.model.Orcamento"/>
 		<typeAlias alias="OrcamentoItens"              		 		 type="com.prosperitasglobal.sendsolv.model.OrcamentoItens"/>
@@ -153,6 +154,7 @@
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/marca.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/nfStatus.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/notafiscal.xml" />
+		<mapper resource="com/prosperitasglobal/cbof/dac/mybatis/map/note.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/notaFiscalItens.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/orcamento.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/orcamentoItens.xml" />

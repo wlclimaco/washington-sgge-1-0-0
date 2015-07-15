@@ -45,24 +45,24 @@ $(document).ready(function()
 		aoColumns :
 		[
 		{
-			headerData 		: "CNPJ",
+			headerData 		: "CPF/CNPJ",
 			order			: "name",
-			mRender         : pgsi.pages.fornecedor.fnCreateEmpresaNameLink,
+			mRender         : pgsi.pages.pessoa.fnCreateClienteNameLink,
 			sDefaultContent : "",
 			bSortable 		: false,
 			sClass          : "name-col"
 		},
 		{
-			headerData 		: "Nome Empresa",
+			headerData 		: "Nome",
 			order			: "organization_column",
-			mRender 		: pgsi.pages.fornecedor.fnCreateNomeLink,
+			mRender 		: pgsi.pages.pessoa.fnCreateNomeLink,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
-			headerData 		: "Cnae",
+			headerData 		: "Profissao",
 			order			: "city_column",
-			mRender 		: pgsi.pages.fornecedor.fnCnae,
+			mRender 		: pgsi.pages.pessoa.fnProfissao,
 			mData	 		: "null",
 			sDefaultContent : "",
 			bSortable 		: false
@@ -70,35 +70,35 @@ $(document).ready(function()
 		{
 			headerData 		: "Email",
 			order			: "state_column",
-			mRender 		: pgsi.pages.fornecedor.fnEmail,
+			mRender 		: pgsi.pages.pessoa.fnEmail,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
 			headerData 		: "Telefone",
 			order			: "country_column",
-			mRender 		: pgsi.pages.fornecedor.fnTelefone,
+			mRender 		: pgsi.pages.pessoa.fnTelefone,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
-			headerData 		: "Regime",
+			headerData 		: "Convenio",
 			order			: "sdn_status_column",
-			mRender 		: pgsi.pages.fornecedor.fnRegime,
+			mRender 		: pgsi.pages.pessoa.fnConvenio,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
 			headerData 		: "Endereco",
 			order			: "phone_column",
-			mRender 		: pgsi.pages.fornecedor.fnEndereco,
+			mRender 		: pgsi.pages.pessoa.fnEndereco,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
 			headerData 		: "Documentos",
 			order			: "phone_column",
-			mRender 		: pgsi.pages.fornecedor.fnDocumento,
+			mRender 		: pgsi.pages.pessoa.fnDocumento,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
