@@ -450,7 +450,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 
 		pessoa = (Cliente)pessoaa;
 		Historico historico = new Historico();
-		historico.setEmprId(pessoa.getId());
+		historico.setEmprId(pessoa.getEmprId());
 		historico.setUserId(pessoa.getUserId());
 		historico.setProcessId(processId);
 		a = new Date();
@@ -692,6 +692,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), "ProcessMap.insertProcess", process, response);
 
 		processId = process.getId();
+		a = new Date();
 
 		pessoa.setProcessId(process.getId());
 		pessoa.setModifyDateUTC(a.getTime());
@@ -736,13 +737,13 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 				FormaPagamentoDACD.maintainFormaPgAssociations(pessoa.getFormaPagamentoList(), response, insertCount,
 						null,
 						null,
-						null, getFormaPgDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						TabelaEnum.PESSOA, getFormaPgDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
 						pessoa.getCreateUser(), processId);
 
 		insertCount +=
 				CfopDACD.maintainCfopAssociations(pessoa.getListCfops(), response, pessoa.getId(), null,
 						null,
-						null, getCfopDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						TabelaEnum.PESSOA, getCfopDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
 						pessoa.getCreateUser(), processId);
 
 		if (insertCount > 0)

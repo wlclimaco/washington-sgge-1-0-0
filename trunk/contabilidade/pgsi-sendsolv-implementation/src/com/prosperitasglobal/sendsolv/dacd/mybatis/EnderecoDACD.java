@@ -51,6 +51,7 @@ public final class EnderecoDACD extends SqlSessionDaoSupport
 			// Make sure we set the parent key
 			endereco.setParentId(parentId);
 			endereco.setTabelaEnum(tabelaEnum);
+			endereco.setProcessId(processId);
 
 			if (ValidationUtil.isNull(endereco.getModelAction()))
 			{

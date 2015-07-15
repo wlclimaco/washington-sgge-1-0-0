@@ -1,6 +1,7 @@
 package com.prosperitasglobal.sendsolv.fornecedor.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -32,6 +33,7 @@ import com.prosperitasglobal.sendsolv.model.Profissao;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
 import com.prosperitasglobal.sendsolv.model.Telefone;
 import com.prosperitasglobal.sendsolv.model.request.FornecedorInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.FornecedorMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.response.FornecedorResponse;
 import com.qat.framework.model.QATModel.PersistanceActionEnum;
 import com.qat.framework.validation.ValidationUtil;
@@ -166,6 +168,27 @@ public class FornecedorBaseController extends UtilControllerD
 		}
 
 		return fornecedorResponse;
+	}
+
+	public FornecedorResponse insert(FornecedorMaintenanceRequest clienteRequest)
+	{
+		FornecedorResponse clienteResponse = new FornecedorResponse();
+
+		try
+		{
+
+			clienteRequest.setFornecedor(insertMockFornecedor(PersistanceActionEnum.INSERT));
+			clienteRequest.getFornecedor().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
+			clienteResponse = getPessoaBAI().insertFornecedor(clienteRequest);
+		}
+		catch (Exception e)
+		{
+			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			clienteResponse = null;
+		}
+
+		return clienteResponse;
+
 	}
 
 	public List<Endereco> insertEndereco(PersistanceActionEnum modelAction)
@@ -368,6 +391,7 @@ public class FornecedorBaseController extends UtilControllerD
 		Fornecedor fornecedor = new Fornecedor();
 
 		fornecedor.setId(1);
+		fornecedor.setEmprId(1);
 		fornecedor.setNome("Damiao jose junior");
 		fornecedor.setNomePai("Damiao Jose Pai");
 		fornecedor.setNomeMae("Sonia Mae");

@@ -49,6 +49,8 @@ public final class DocumentosDACD extends SqlSessionDaoSupport
 		{
 			// Make sure we set the parent key
 			documento.setParentId(parentId);
+			documento.setTabelaEnum(tabelaEnum);
+			documento.setProcessId(processId);
 
 			if (ValidationUtil.isNull(documento.getModelAction()))
 			{
