@@ -268,7 +268,7 @@ $(document).ready(function()
 		$.address.parameter("pessoa","");
 		pgsi.util.page.fnReloadTable(pgsi.pages.pessoa.clienteTable);
 	});
-
+	$.pgsi.progressBar.stopGlobal();
 });
 </script>
 </sec:authorize>
