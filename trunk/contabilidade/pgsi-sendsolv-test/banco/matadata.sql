@@ -654,7 +654,7 @@ DROP TABLE [dbo].[contato];
 CREATE TABLE [dbo].[contato](
 	[id]             [int] identity(1,1) NOT NULL,
 	[parentId]     [int] NOT NULL,
-	[motivo]       [int] NOT NULL,
+	[motivo]       [int] NULL,
 	[processId]    [int] NULL,
 	[dataContato] [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
