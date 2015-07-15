@@ -14,6 +14,38 @@ public class Contato extends ModelCosmeDamiao
 
 	private Long dataContato;
 
+	private ContatoTypeEnum motivo;
+
+	public Integer getMotivoValue()
+	{
+		if (motivo != null)
+		{
+			return motivo.getValue();
+		}
+		return null;
+	}
+
+	public void setMotivoValue(Integer acaoTypeValue)
+	{
+		motivo = ContatoTypeEnum.enumForValue(acaoTypeValue);
+	}
+
+	/**
+	 * @return the motivo
+	 */
+	public ContatoTypeEnum getMotivo()
+	{
+		return motivo;
+	}
+
+	/**
+	 * @param motivo the motivo to set
+	 */
+	public void setMotivo(ContatoTypeEnum motivo)
+	{
+		this.motivo = motivo;
+	}
+
 	private List<ContatoItens> contatoItensList;
 
 	/**
@@ -83,15 +115,17 @@ public class Contato extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Contato [getId()=" + getId() + ", getDataContato()=" + getDataContato() + ", getContatoItensList()="
+		return "Contato [getMotivoValue()=" + getMotivoValue() + ", getMotivo()=" + getMotivo() + ", getId()="
+				+ getId() + ", getDataContato()=" + getDataContato() + ", getContatoItensList()="
 				+ getContatoItensList() + ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()="
 				+ getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId()
 				+ ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()="
 				+ getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId()
-				+ ", getSite()=" + getSite() + ", toString()=" + super.toString() + ", getModelAction()="
-				+ getModelAction() + ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()="
-				+ getCreateDateUTC() + ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()="
-				+ getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
+				+ ", getSite()=" + getSite() + ", getProcessId()=" + getProcessId() + ", getUserId()=" + getUserId()
+				+ ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()="
+				+ getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()="
+				+ getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + "]";
 	}
 
 }

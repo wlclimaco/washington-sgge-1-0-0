@@ -53,6 +53,7 @@ public final class TelefoneDACD extends SqlSessionDaoSupport
 		{
 			// Make sure we set the parent key
 			telefone.setParentId(parentId);
+			telefone.setTabelaEnum(tabelaEnum);
 
 			if (ValidationUtil.isNull(telefone.getModelAction()))
 			{
@@ -93,9 +94,9 @@ public final class TelefoneDACD extends SqlSessionDaoSupport
 					statusList.add(status);
 					count =
 							StatusDACD
-							.maintainStatusAssociations(statusList, response, count, null, AcaoEnum.DELETE,
-									UserId, empId, TabelaEnum.TELEFONE, statusDAC, historicoDAC, processId,
-									historicoId);
+									.maintainStatusAssociations(statusList, response, count, null, AcaoEnum.DELETE,
+											UserId, empId, TabelaEnum.TELEFONE, statusDAC, historicoDAC, processId,
+											historicoId);
 
 					break;
 			}

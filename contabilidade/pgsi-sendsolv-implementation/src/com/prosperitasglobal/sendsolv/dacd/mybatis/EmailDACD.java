@@ -53,6 +53,7 @@ public final class EmailDACD extends SqlSessionDaoSupport
 		{
 			// Make sure we set the parent key
 			email.setParentId(parentId);
+			email.setTabelaEnum(tabelaEnum);
 
 			if (ValidationUtil.isNull(email.getModelAction()))
 			{
