@@ -16,7 +16,6 @@ import com.prosperitasglobal.cbof.model.Note;
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
 import com.prosperitasglobal.sendsolv.bai.IPessoaBAI;
-import com.prosperitasglobal.sendsolv.fornecedor.controller.FornecedorBaseController;
 import com.prosperitasglobal.sendsolv.model.Banco;
 import com.prosperitasglobal.sendsolv.model.Cidade;
 import com.prosperitasglobal.sendsolv.model.Cliente;
@@ -45,13 +44,10 @@ public class ClienteBaseController extends UtilControllerD
 	public static final String RESPONSE = "response";
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(FornecedorBaseController.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ClienteBaseController.class);
 
 	/** The Constant CONTROLLER_EXCEPTION_MSG. */
-	private static final String CONTROLLER_EXCEPTION_MSG = "PessoaBaseController";
-
-	/** The Constant ENROLLED_MEMBERS. */
-	private static final String ENROLLED_MEMBERS = "enrolled_members";
+	private static final String CONTROLLER_EXCEPTION_MSG = "ClienteBaseController";
 
 	/** The Pessoa BAI. */
 	private IPessoaBAI pessoaBAI;

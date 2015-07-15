@@ -12,10 +12,10 @@
        exactly. -->
 
    	<resultMap id="noteResult" type="Note">
-		<result property="id" column="note_id"/>
-		<result property="parentKey" column="note_parentkey" />
-		<result property="sequenceNumber" column="sequence_number" />
+		<result property="id" column="id"/>
+		<result property="parentId" column="parentId" />
 		<result property="noteText" column="note_text" />
+		<result property="tabelaEnumValue" column="tabela" />
 		<result property="createDateUTC" column="create_date" />
 		<result property="createUser" column="create_user" />
 		<result property="modifyDateUTC" column="modify_date" />
@@ -26,156 +26,38 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   	<sql id="allNoteColumns">
-  		sequence_number,
-  		note_text,
+  		 b.parentId
+  		,b.note_text
+  		,b.tabela
+  		,b.create_date
+      	,b.create_user
+      	,b.modify_date
+      	,b.modify_user
   		<include refid="CBOFMap.allChangeControlColumns"/>
   	</sql>
 
-  	<sql id="allBusinessNoteColumns">
-		FK_note_id,
-		FK_business_id,
+  	<sql id="allNoteValue">
+		parentId,
+		noteText,
+		tabelaEnumValue,
 		<include refid="CBOFMap.allChangeControlColumns"/>
 	</sql>
 
-    <sql id="allBusinessNoteValues">
-  		#{id},
-  		#{parentKey},
-    	<include refid="CBOFMap.changeControlFields"/>
-     </sql>
-
-  	<sql id="allMoneyTransferNoteColumns">
-		FK_note_id,
-		FK_money_transfer_id,
-		<include refid="CBOFMap.allChangeControlColumns"/>
-	</sql>
-
-    <sql id="allMoneyTransferNoteValues">
-  		#{id},
-  		#{parentKey},
-    	<include refid="CBOFMap.changeControlFields"/>
-     </sql>
-
-     <sql id="allMoneyTransferBatchNoteColumns">
-		FK_note_id,
-		FK_money_transfer_batch_id,
-		<include refid="CBOFMap.allChangeControlColumns"/>
-	</sql>
-
-    <sql id="allMoneyTransferBatchNoteValues">
-  		#{id},
-  		#{parentKey},
-    	<include refid="CBOFMap.changeControlFields"/>
-     </sql>
-
-  	<sql id="allTransferSettingNoteColumns">
-		FK_note_id,
-		FK_transfer_setting_id,
-		<include refid="CBOFMap.allChangeControlColumns"/>
-	</sql>
-
-    <sql id="allTransferSettingNoteValues">
-  		#{id},
-  		#{parentKey},
-    	<include refid="CBOFMap.changeControlFields"/>
-     </sql>
-
-  	 <sql id="fetchNextSequenceForBusinessNote">
-		(select COALESCE((select max(sequence_number) from note n JOIN business_note bn ON n.note_id=bn.FK_note_id and bn.FK_business_id = #{parentKey}),0)+1)
-	 </sql>
-
-  	 <sql id="fetchNextSequenceForMoneyTransfer">
-		(select COALESCE((select max(sequence_number) from note n JOIN money_transfer_note mtn ON n.note_id=mtn.FK_note_id and mtn.FK_money_transfer_id = #{parentKey}),0)+1)
-	 </sql>
-
-  	 <sql id="fetchNextSequenceForMoneyTransferBatch">
-		(select COALESCE((select max(sequence_number) from note n JOIN money_transfer_batch_note mtbn ON n.note_id=mtbn.FK_note_id and mtbn.FK_money_transfer_batch_id = #{parentKey}),0)+1)
-	 </sql>
-
-	<!--
-		SQL Insert Statements.
-	-->
-    <insert id="associateBusinessWithNote" parameterType="Note">
-	    INSERT INTO business_note (
-		  <include refid="allBusinessNoteColumns" />
-	     )
-	    VALUES (<include refid="allBusinessNoteValues" /> )
-	</insert>
-
-	<insert id="associatePersonWithNote" parameterType="Note">
-	  	INSERT INTO person_note (
-			<include refid="CBOFMap.allPersonNoteColumns" />
-	      )
-	    VALUES (<include refid="CBOFMap.allPersonNoteValues" /> )
-  	</insert>
-
-	<insert id="associateMoneyTransferWithNote" parameterType="Note">
-	  	INSERT INTO money_transfer_note (
-			<include refid="allMoneyTransferNoteColumns" />
-	      )
-	    VALUES (<include refid="allMoneyTransferNoteValues" /> )
-  	</insert>
-
-	<insert id="associateMoneyTransferBatchWithNote" parameterType="Note">
-	  	INSERT INTO money_transfer_batch_note (
-			<include refid="allMoneyTransferBatchNoteColumns" />
-	      )
-	    VALUES (<include refid="allMoneyTransferBatchNoteValues" /> )
-  	</insert>
-
-	<insert id="associateTransferSettingWithNote" parameterType="Note">
-	  	INSERT INTO transfer_setting_note (
-			<include refid="allTransferSettingNoteColumns" />
-	      )
-	    VALUES (<include refid="allTransferSettingNoteValues" /> )
-  	</insert>
 
 	<insert id="insertNote" parameterType="Note" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO Note (
-		<include refid="allNoteColumns" />
-		)
-		VALUES( <include refid="fetchNextSequenceForBusinessNote"/>,
-				#{noteText},
-				#{createDateUTC},
-				#{createUser},
-				#{modifyDateUTC},
-				#{modifyUser}
-		)
+		INSERT INTO Note1 (<include refid="allNoteColumns" />)
+		VALUES( <include refid="allNoteValue"/>)
 	</insert>
 
-	<insert id="insertMoneyTransferNote" parameterType="Note" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO Note (
-		<include refid="allNoteColumns" />
-		)
-		VALUES( <include refid="fetchNextSequenceForMoneyTransfer"/>,
-				#{noteText},
-				#{createDateUTC},
-				#{createUser},
-				#{modifyDateUTC},
-				#{modifyUser}
-		)
-	</insert>
 
-	<insert id="insertMoneyTransferBatchNote" parameterType="Note" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO Note (
-		<include refid="allNoteColumns" />
-		)
-		VALUES( <include refid="fetchNextSequenceForMoneyTransferBatch"/>,
-				#{noteText},
-				#{createDateUTC},
-				#{createUser},
-				#{modifyDateUTC},
-				#{modifyUser}
-		)
-	</insert>
 
 
 	<!--
 		SQL Update Statements.
 	-->
 	<update id="updateNote" parameterType="Note">
-		UPDATE Note
+		UPDATE Note1
 		<set>
-			<if test="sequenceNumber != null">sequence_number = #{sequenceNumber},</if>
 			<if test="noteText != null">note_text = #{noteText},</if>
 			modify_date = #{modifyDateUTC},
 			modify_user = #{modifyUser}
@@ -187,7 +69,7 @@
 		SQL Delete Statements.
 	-->
 	<update id="deleteNote" parameterType="Note">
-		DELETE FROM Note
+		DELETE FROM Note1
 		WHERE note_id = #{id}
 	</update>
 
@@ -202,21 +84,15 @@
 		WHERE note_id = #{value}
 	</select>
 
-	<select id="fetchNoteByBusinessId" parameterType="Integer" resultMap="noteResult">
+	 <select id="fetchNoteByPessoa" parameterType="Integer" resultMap="noteResult">
 		SELECT
-			bn.FK_business_id as note_parentkey,
-			n.note_id,
-			n.sequence_number,
-  			n.note_text,
-  			n.create_date,
-  			n.create_user,
-  			n.modify_date,
-  			n.modify_user
-		FROM note n
-		LEFT JOIN business_note bn ON n.note_id = bn.FK_note_id
-		WHERE bn.FK_business_id=#{value}
-		ORDER BY n.sequence_number
+			id,
+			<include refid="allNoteColumns" />
+		FROM note1
+		WHERE parentId = #{id} and tabela = 23
 	</select>
+
+
 
 	<select id="fetchNoteByPersonId" parameterType="Integer" resultMap="noteResult">
 		SELECT

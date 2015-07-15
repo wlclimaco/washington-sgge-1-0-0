@@ -50,6 +50,7 @@
 			<li><a href="cliente" class="alist" data-title='Empresa'>Cliente</a></li>
             <li><a href="fornecedor" class="alist" data-title='Empresa'>Fornecedor</a></li>
             <li><a href="transportador" class="alist" data-title='Empresa'>Transportador</a></li>
+             <li><a href="cliente/Cidade" class="alist" data-title='Cidade'>Cidade</a></li>
           </ul>
         </li>
 		<li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Departamento Pessoal</span> <b class="caret"></b></a>

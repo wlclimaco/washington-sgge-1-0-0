@@ -109,7 +109,7 @@
     			   SELECT
 					b.id,	<include refid="allProfissaoColumns" />
  				   FROM profissao b
-					where b.id = #{id}
+					where b.id = #{id} order by dataAdmissao ASC
   </select>
 
   <select id="fetchAllProfissaosByRequest" parameterType="PagedInquiryRequest" resultMap="profissaoResult">

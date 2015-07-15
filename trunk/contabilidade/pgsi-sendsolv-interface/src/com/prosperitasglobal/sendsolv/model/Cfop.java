@@ -45,6 +45,20 @@ public class Cfop extends ModelCosmeDamiao
 		setModelAction(modelAction);
 	}
 
+	public Integer getCfopTypeEnumValue()
+	{
+		if (cfopTypeEnum != null)
+		{
+			return cfopTypeEnum.getValue();
+		}
+		return null;
+	}
+
+	public void setCfopTypeEnumValue(Integer acaoTypeValue)
+	{
+		cfopTypeEnum = CfopTypeEnum.enumForValue(acaoTypeValue);
+	}
+
 	/**
 	 * Gets the id.
 	 *
@@ -232,15 +246,16 @@ public class Cfop extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Cfop [getId()=" + getId() + ", getCfop()=" + getCfop() + ", getNatureza()=" + getNatureza()
-				+ ", getSimplificado()=" + getSimplificado() + ", getCfopTypeEnum()=" + getCfopTypeEnum()
-				+ ", getIcms()=" + getIcms() + ", getIcmsReduzido()=" + getIcmsReduzido() + ", getMargemAgregadaST()="
-				+ getMargemAgregadaST() + ", getCstPrincipal()=" + getCstPrincipal() + ", getClassFiscal()="
-				+ getClassFiscal() + ", getObservacao()=" + getObservacao() + ", getTabelaEnumValue()="
-				+ getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()="
-				+ getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()=" + getType()
-				+ ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()="
-				+ getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite() + ", toString()="
+		return "Cfop [getCfopTypeEnumValue()=" + getCfopTypeEnumValue() + ", getId()=" + getId() + ", getCfop()="
+				+ getCfop() + ", getNatureza()=" + getNatureza() + ", getSimplificado()=" + getSimplificado()
+				+ ", getCfopTypeEnum()=" + getCfopTypeEnum() + ", getIcms()=" + getIcms() + ", getIcmsReduzido()="
+				+ getIcmsReduzido() + ", getMargemAgregadaST()=" + getMargemAgregadaST() + ", getCstPrincipal()="
+				+ getCstPrincipal() + ", getClassFiscal()=" + getClassFiscal() + ", getObservacao()=" + getObservacao()
+				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
+				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
+				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
+				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
+				+ ", getProcessId()=" + getProcessId() + ", getUserId()=" + getUserId() + ", toString()="
 				+ super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
 				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
 				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
