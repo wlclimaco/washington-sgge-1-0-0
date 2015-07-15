@@ -16,22 +16,22 @@ public class FuncionarioBACImpl implements IFuncionarioBAC
 {
 
 	/** The person dac. */
-	private IPessoaDAC funcionarioDAC;
+	private IPessoaDAC pessoaDAC;
 
 	/**
-	 * @return the funcionarioDAC
+	 * @return the pessoaDAC
 	 */
-	public IPessoaDAC getFuncionarioDAC()
+	public IPessoaDAC getPessoaDAC()
 	{
-		return funcionarioDAC;
+		return pessoaDAC;
 	}
 
 	/**
-	 * @param funcionarioDAC the funcionarioDAC to set
+	 * @param pessoaDAC the pessoaDAC to set
 	 */
-	public void setFuncionarioDAC(IPessoaDAC funcionarioDAC)
+	public void setPessoaDAC(IPessoaDAC pessoaDAC)
 	{
-		this.funcionarioDAC = funcionarioDAC;
+		this.pessoaDAC = pessoaDAC;
 	}
 
 	/*
@@ -43,7 +43,7 @@ public class FuncionarioBACImpl implements IFuncionarioBAC
 	{
 		InternalResultsResponse<Funcionario> response = new InternalResultsResponse<Funcionario>();
 
-		response = getFuncionarioDAC().insertFuncionario(request.getFuncionario());
+		response = getPessoaDAC().insertFuncionario(request.getFuncionario());
 
 		return response;
 	}
@@ -57,7 +57,7 @@ public class FuncionarioBACImpl implements IFuncionarioBAC
 	{
 		InternalResultsResponse<Funcionario> response = new InternalResultsResponse<Funcionario>();
 
-		response = getFuncionarioDAC().updateFuncionario(request.getFuncionario());
+		response = getPessoaDAC().updateFuncionario(request.getFuncionario());
 
 		return response;
 	}
@@ -72,7 +72,7 @@ public class FuncionarioBACImpl implements IFuncionarioBAC
 	@Override
 	public InternalResponse deleteFuncionario(FuncionarioMaintenanceRequest request)
 	{
-		return getFuncionarioDAC().deleteFuncionario(request.getFuncionario());
+		return getPessoaDAC().deleteFuncionario(request.getFuncionario());
 	}
 
 	/*
@@ -82,7 +82,7 @@ public class FuncionarioBACImpl implements IFuncionarioBAC
 	@Override
 	public InternalResultsResponse<Funcionario> fetchFuncionarioById(FetchByIdRequest request)
 	{
-		return getFuncionarioDAC().fetchFuncionarioById(request);
+		return getPessoaDAC().fetchFuncionarioById(request);
 	}
 
 	/*
@@ -95,7 +95,7 @@ public class FuncionarioBACImpl implements IFuncionarioBAC
 	@Override
 	public InternalResultsResponse<Funcionario> fetchFuncionarioByRequest(FuncionarioInquiryRequest request)
 	{
-		return getFuncionarioDAC().fetchFuncionarioByRequest(request);
+		return getPessoaDAC().fetchFuncionarioByRequest(request);
 	}
 
 }
