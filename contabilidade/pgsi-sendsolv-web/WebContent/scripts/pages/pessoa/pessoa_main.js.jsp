@@ -16,22 +16,22 @@ pgsi.pages.pessoa = {
 
 	// Returns link for edit view
 	fnCreateClienteNameLink : function (val, type, full)
-
-		var sCnpj="";
+	{
+		var sCnpj="" , returno="";
 		if (type !== "display")
 		{
 			return val;
 		}
+
 		if (!$.pgsi.isNullOrUndefined(full.documentos)) {
 			for(var i=0;i<full.documentos.length;i++){
 				if((full.documentos[i].description == "CNPJ")||(full.documentos[i].description == "CPF")){
 					sCnpj = full.documentos[i].numero;
 				}
 			}
-			return '<a title="View/Edit ' + sCnpj + '" href="#/pessoa/view?tab=info&pessoaId=' + full.id + '" class="edit_link">' + sCnpj + '</a>';
-		}else{
-			return '';
+			returno = '<a title="View/Edit ' + sCnpj + '" href="#/pessoa/view?tab=info&pessoaId=' + full.id + '" class="edit_link">' + sCnpj + '</a>';
 		}
+		return returno;
 	},
 
 	fnCreateNomeLink : function (val, type, full)
@@ -53,14 +53,14 @@ pgsi.pages.pessoa = {
 		var sProfissao ="";
 		if (!$.pgsi.isNullOrUndefined(full.profissao)) {
 			for(var i=0;i<full.profissao.length;i++){
-				sCnae = sCnae + full.profissao[i].profissao  +" - <sup>"+full.profissao[i].renda+"</sup><br>" ;
+				sProfissao = sProfissao + full.profissao[i].profissao  +" - <sup>"+full.profissao[i].renda+"</sup><br>" ;
 				if(i === (full.profissao.length - 1)){
-					sCnae = sCnae + full.profissao[i].profissao  +" - <sup>"+full.profissao[i].renda+" - Atual</sup><br>" ;
+					sProfissao = sProfissao + full.profissao[i].profissao  +" - <sup>"+full.profissao[i].renda+" - Atual</sup><br>" ;
 				}
 			}
 		}
 
-		return sCnae;
+		return sProfissao;
 
 	},
 
@@ -142,7 +142,7 @@ pgsi.pages.pessoa = {
 		return sDocumentos;
 	},
 
-	pessoaTable: {
+	clienteTable: {
 
 	}
 }
