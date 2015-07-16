@@ -2,16 +2,7 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.List;
 
-import org.mybatis.spring.support.SqlSessionDaoSupport;
-import org.slf4j.LoggerFactory;
-
-import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
 import com.prosperitasglobal.sendsolv.dac.IConvenioDAC;
-import com.prosperitasglobal.sendsolv.model.Convenio;
-import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.util.QATMyBatisDacHelper;
-import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class CommonBusinessObjectsDACImpl.
@@ -215,5 +206,63 @@ public class ConvenioDACImpl extends SqlSessionDaoSupport implements IConvenioDA
 			}
 		}
 		return count;
+	}
+
+	@Override
+	public com.prosperitasglobal.sendsolv.dac.InternalResultsResponse<com.prosperitasglobal.sendsolv.dac.Convenio> fetchConvenioByParent(
+			Integer parentId, com.prosperitasglobal.sendsolv.dac.BusinessTypeEnum parentType)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public com.prosperitasglobal.sendsolv.dac.InternalResultsResponse<com.prosperitasglobal.sendsolv.dac.Convenio> fetchConvenioById(
+			Integer id)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer insertConvenioPessoa(ConvenioPessoa convenio)
+	{
+		Integer insertCount = 0;
+		InternalResultsResponse<ConvenioPessoa> response = new InternalResultsResponse<ConvenioPessoa>();
+		// First insert the root convenio data
+		insertCount =
+				QATMyBatisDacHelper.doInsert(getSqlSession(), "ConvenioMap.insertConvenioPessoa", convenio, response);
+
+		return insertCount;
+	}
+
+	@Override
+	public Integer deleteConvenioPessoa(ConvenioPessoa convenio)
+	{
+		InternalResponse response = new InternalResponse();
+		return QATMyBatisDacHelper.doRemove(getSqlSession(), "ConvenioMap.deleteConvenioPessoa", convenio.getId(),
+				response);
+	}
+
+	@Override
+	public Integer updateConvenioPessoa(ConvenioPessoa convenio)
+	{
+		Integer updateCount = 0;
+		InternalResultsResponse<ConvenioPessoa> response = new InternalResultsResponse<ConvenioPessoa>();
+		// First update the root if necessary.
+		if (!ValidationUtil.isNull(convenio.getModelAction())
+				&& (convenio.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
+		{
+			updateCount =
+					QATMyBatisDacHelper.doUpdate(getSqlSession(), "ConvenioMap.updateConvenioPessoa", convenio,
+							response);
+
+			if (updateCount == 1)
+			{
+				convenio.setModelAction(QATModel.PersistanceActionEnum.NONE);
+			}
+		}
+
+		return updateCount;
 	}
 }

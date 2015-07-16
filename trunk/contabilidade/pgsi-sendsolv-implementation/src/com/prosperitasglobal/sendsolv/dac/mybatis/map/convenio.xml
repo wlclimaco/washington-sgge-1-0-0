@@ -9,28 +9,6 @@
 	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
 	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
 
-  	<!-- Result maps describe the mapping between the columns returned
-       from a query, and the class properties.  A result map isn't
-       necessary if the columns (or aliases) match to the properties
-       exactly.	/** Attributes. */
-	private Integer id;
-
-	private String nome;
-
-	private Long dataini;
-
-	private Long dataFin;
-
-	private Double porcentagem;
-
-	private Double valor;
-
-	private List<Note> notes;
-
-	private List<CondPag> listCondPag;
-
-	private List<TipoPag> listTipoPag; -->
-
   <resultMap id="convenioResult" type="Convenio" >
     <result property="id" column="id" />
     <result property="nome" column="nome" />
@@ -65,7 +43,22 @@
     	#{valor},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
+  <sql id="allConvenioPessoaColumns">
+	 b.parentId
+	,b.convId
+	,b.processId
+	,b.create_date
+  	,b.create_user
+  	,b.modify_date
+  	,b.modify_user
+  </sql>
 
+  <sql id="allConvenioPessoaValues">
+	#{parentId},
+	#{convId},
+	#{processId},
+	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
   <!--
 		SQL Insert Statements.
  	-->
@@ -74,6 +67,13 @@
 		<include refid="allConvenioColumns" />
       )
     VALUES (<include refid="allConvenioValues" /> )
+  </insert>
+
+  <insert id="insertConvenioPessoa" parameterType="ConvenioPessoa" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO convenioPessoa (
+		<include refid="allConvenioPessoaColumns" />
+      )
+    VALUES (<include refid="allConvenioPessoaValues" /> )
   </insert>
 
 
@@ -97,11 +97,27 @@
      id = #{id}
   </update>
 
+    <update id="updateConvenioPessoa" parameterType="ConvenioPessoa">
+    UPDATE convenioPessoa
+    	<set>
+    		<if test="parentId!= null">parentId = #{parentId},</if>
+	    	<if test="convId!= null"> convId=#{convId},</if>
+			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
    <!--
 		SQL Delete Statements.
    -->
   <delete id="deleteConvenioById" parameterType="Integer">
     	DELETE FROM convenio WHERE business_id = #{id}
+  </delete>
+
+    <delete id="deleteConvenioPessoa" parameterType="Integer">
+    	DELETE FROM convenioPessoa WHERE id = #{id}
   </delete>
 
 	<!--

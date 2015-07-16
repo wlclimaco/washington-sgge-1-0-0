@@ -2,10 +2,6 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.Map;
 
-import org.mybatis.spring.support.SqlSessionDaoSupport;
-import org.slf4j.LoggerFactory;
-
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.IBancoDAC;
 import com.prosperitasglobal.sendsolv.dac.ICnaeDAC;
 import com.prosperitasglobal.sendsolv.dac.IEmailDAC;
@@ -14,13 +10,6 @@ import com.prosperitasglobal.sendsolv.dac.IEventosDAC;
 import com.prosperitasglobal.sendsolv.dac.ISociosDAC;
 import com.prosperitasglobal.sendsolv.dac.ITelefoneDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
-import com.prosperitasglobal.sendsolv.model.Banco;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
-import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResponse;
-import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.util.QATMyBatisDacHelper;
-import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class BancoDACImpl.
@@ -354,5 +343,97 @@ public class BancoDACImpl extends SqlSessionDaoSupport implements IBancoDAC
 	{
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public com.prosperitasglobal.sendsolv.dac.InternalResultsResponse<com.prosperitasglobal.sendsolv.dac.Banco> fetchBancoById(
+			com.prosperitasglobal.sendsolv.dac.FetchByIdRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public com.prosperitasglobal.sendsolv.dac.InternalResultsResponse<com.prosperitasglobal.sendsolv.dac.Banco> fetchAllBancos()
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public com.prosperitasglobal.sendsolv.dac.InternalResultsResponse<com.prosperitasglobal.sendsolv.dac.Banco> fetchBancoByRequest(
+			com.prosperitasglobal.sendsolv.dac.PagedInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer updateBancoPessoa(BancoPessoa banco)
+	{
+		Integer updateCount = 0;
+		InternalResultsResponse<BancoPessoa> response = new InternalResultsResponse<BancoPessoa>();
+
+		// First update the root if necessary.
+		if (!ValidationUtil.isNull(banco.getModelAction())
+				&& (banco.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
+		{
+			updateCount =
+					QATMyBatisDacHelper.doUpdate(getSqlSession(), "BancoMap.updateBancoPessoa", banco,
+							response);
+		}
+
+		if (response.isInError())
+		{
+			return null;
+		}
+		// Next traverse the object graph and "maintain" the associations
+		updateCount += maintainBancoAssociations(banco, response);
+
+		// Finally, if something was updated then add the Person to the result.
+		if (updateCount > 0)
+		{
+			response.addResult(banco);
+		}
+
+		return updateCount;
+	}
+
+	@Override
+	public Integer insertBancoPessoa(BancoPessoa banco)
+	{
+		Integer insertCount = 0;
+		InternalResultsResponse<BancoPessoa> response = new InternalResultsResponse<BancoPessoa>();
+
+		// First insert the root
+		// Is successful the unique-id will be populated back into the object.
+		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), "BancoMap.insertBancoPessoa", banco, response);
+
+		if (response.isInError())
+		{
+			return null;
+		}
+		// Finally, if something was inserted then add the Banco to the result.
+		if (insertCount > 0)
+		{
+			response.addResult(banco);
+		}
+
+		return insertCount;
+	}
+
+	@Override
+	public Integer deleteBancoPessoa(BancoPessoa banco)
+	{
+		InternalResponse response = new InternalResponse();
+		QATMyBatisDacHelper.doRemove(getSqlSession(), "BancoMap.deleteBancoPessoa", banco, response);
+		if (response.isInError())
+		{
+			return null;
+		}
+		else
+		{
+			return 1;
+		}
 	}
 }

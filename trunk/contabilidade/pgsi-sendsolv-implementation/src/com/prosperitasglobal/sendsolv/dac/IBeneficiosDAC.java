@@ -1,9 +1,5 @@
 package com.prosperitasglobal.sendsolv.dac;
 
-import com.prosperitasglobal.sendsolv.model.Beneficios;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
-import com.qat.framework.model.response.InternalResultsResponse;
-
 /**
  * The Interface IBeneficiosDAC.
  */
@@ -35,5 +31,11 @@ public interface IBeneficiosDAC
 	public Integer deleteBeneficios(Beneficios beneficios);
 
 	public InternalResultsResponse<Beneficios> fetchBeneficiosByRequest(PagedInquiryRequest request);
+
+	public Integer updateBeneficioPessoa(BeneficioPessoa beneficios);
+
+	public Integer insertBeneficioPessoa(BeneficioPessoa beneficios);
+
+	public Integer deleteBeneficioPessoa(BeneficioPessoa beneficios);
 
 }
