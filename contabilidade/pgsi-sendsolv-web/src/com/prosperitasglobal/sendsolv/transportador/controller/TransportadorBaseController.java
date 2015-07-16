@@ -1,6 +1,7 @@
 package com.prosperitasglobal.sendsolv.transportador.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -30,6 +31,7 @@ import com.prosperitasglobal.sendsolv.model.TabelaEnum;
 import com.prosperitasglobal.sendsolv.model.Telefone;
 import com.prosperitasglobal.sendsolv.model.Transportador;
 import com.prosperitasglobal.sendsolv.model.request.TransportadorInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.TransportadorMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.response.TransportadorResponse;
 import com.qat.framework.model.QATModel.PersistanceActionEnum;
 import com.qat.framework.validation.ValidationUtil;
@@ -164,6 +166,27 @@ public class TransportadorBaseController extends UtilControllerD
 		}
 
 		return transportadorResponse;
+	}
+
+	public TransportadorResponse insert(TransportadorMaintenanceRequest transportadorRequest)
+	{
+		TransportadorResponse transportadorResponse = new TransportadorResponse();
+
+		try
+		{
+
+			transportadorRequest.setTransportador(insertMockTransportador(PersistanceActionEnum.INSERT));
+			transportadorRequest.getTransportador().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
+			transportadorResponse = getPessoaBAI().insertTransportador(transportadorRequest);
+		}
+		catch (Exception e)
+		{
+			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			transportadorResponse = null;
+		}
+
+		return transportadorResponse;
+
 	}
 
 	public List<Endereco> insertEndereco(PersistanceActionEnum modelAction)
@@ -343,7 +366,7 @@ public class TransportadorBaseController extends UtilControllerD
 		ContatoItens contatoItens = new ContatoItens();
 		contatoItens.setId(1);
 		contatoItens.setNoteList(insertNote(modelAction));
-		contatoItens.setMotivo(ContatoTypeEnum.COBRANCA);
+
 		Date a = new Date();
 		contatoItens.setDataContato(a.getTime());
 		contatoItens.setNomeContato("Maria de lourdes");
@@ -353,6 +376,7 @@ public class TransportadorBaseController extends UtilControllerD
 		contato.setId(1);
 		a = new Date();
 		contato.setDataContato(a.getTime());
+		contato.setMotivo(ContatoTypeEnum.COBRANCA);
 		contato.setContatoItensList(new ArrayList<ContatoItens>());
 		contato.getContatoItensList().add(contatoItens);
 		contatoList.add(contato);
@@ -365,6 +389,7 @@ public class TransportadorBaseController extends UtilControllerD
 		Transportador transportador = new Transportador();
 
 		transportador.setId(1);
+		transportador.setEmprId(1);
 		transportador.setNome("Damiao jose junior");
 		transportador.setNomePai("Damiao Jose Pai");
 		transportador.setNomeMae("Sonia Mae");

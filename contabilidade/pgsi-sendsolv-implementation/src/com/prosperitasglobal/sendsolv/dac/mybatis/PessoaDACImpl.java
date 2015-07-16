@@ -631,10 +631,10 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
-								null, AcaoEnum.DELETE,
-								pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.CLIENTE, getStatusDAC(),
-								getHistoricoDAC(), processId, null);
+				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
+						null, AcaoEnum.DELETE,
+						pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.CLIENTE, getStatusDAC(),
+						getHistoricoDAC(), processId, null);
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
 		{
@@ -889,10 +889,10 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
-								null, AcaoEnum.DELETE,
-								pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.FORNECEDOR, getStatusDAC(),
-								getHistoricoDAC(), processId, null);
+				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
+						null, AcaoEnum.DELETE,
+						pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.FORNECEDOR, getStatusDAC(),
+						getHistoricoDAC(), processId, null);
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
@@ -938,39 +938,21 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		Integer insertCount = 0;
 		InternalResultsResponse<Transportador> response = new InternalResultsResponse<Transportador>();
 
-		Process process = new Process();
-		process.setEmprId(pessoa.getEmprId());
-		process.setTabelaEnum(TabelaEnum.TRANSPORTADOR);
-		process.setUserId(pessoa.getUserId());
-		process.setAcaoType(AcaoEnum.INSERT);
-
-		Integer processId = 0;
-		Integer historicoId = 0;
-
-		processId = (Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), "ProcessMap.insertProcess", process);
-
-		pessoa.setProcessId(processId);
-
-		// First insert the root
-		// Is successful the unique-id will be populated back into the object.
-		insertCount =
-				QATMyBatisDacHelper.doInsert(getSqlSession(), "PessoaMap.insertPessoa", pessoa, response);
-
 		Historico historico = new Historico();
 		historico.setEmprId(pessoa.getId());
 		historico.setUserId(pessoa.getUserId());
-		historico.setProcessId(processId);
+		historico.setProcessId(0);
 		Date a = new Date();
-		process.setData(a.getTime());
+		historico.setData(a.getTime());
 
 		insertCount =
 				QATMyBatisDacHelper.doInsert(getSqlSession(), "HistoricoMap.insertHistorico", historico, response);
 
-		historicoId = historico.getId();
+		Integer historicoId = historico.getId();
 
 		HistoricoItens historicoItens = new HistoricoItens();
 		historicoItens.setIdHist(historicoId);
-		historicoItens.setProcessId(processId);
+		historicoItens.setProcessId(0);
 		historicoItens.setParentId(pessoa.getId());
 		historicoItens.setTabelaEnum(TabelaEnum.EMPRESA);
 		historicoItens.setAcaoType(AcaoEnum.INSERT);
@@ -978,6 +960,15 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		insertCount =
 				QATMyBatisDacHelper.doInsert(getSqlSession(), "HistoricoMap.insertHistoricoItens", historicoItens,
 						response);
+
+		Integer processId = historicoId;
+
+		pessoa.setProcessId(processId);
+
+		// First insert the root
+		// Is successful the unique-id will be populated back into the object.
+		insertCount =
+				QATMyBatisDacHelper.doInsert(getSqlSession(), "PessoaMap.insertPessoa", pessoa, response);
 
 		historicoId = historico.getId();
 
@@ -1126,10 +1117,10 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
-								null, AcaoEnum.DELETE,
-								pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.TRANSPORTADOR, getStatusDAC(),
-								getHistoricoDAC(), processId, null);
+				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
+						null, AcaoEnum.DELETE,
+						pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.TRANSPORTADOR, getStatusDAC(),
+						getHistoricoDAC(), processId, null);
 		return response;
 	}
 
@@ -1324,39 +1315,21 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		Integer insertCount = 0;
 		InternalResultsResponse<Funcionario> response = new InternalResultsResponse<Funcionario>();
 
-		Process process = new Process();
-		process.setEmprId(pessoa.getEmprId());
-		process.setTabelaEnum(TabelaEnum.FUNCIONARIO);
-		process.setUserId(pessoa.getUserId());
-		process.setAcaoType(AcaoEnum.INSERT);
-
-		Integer processId = 0;
-		Integer historicoId = 0;
-
-		processId = (Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), "ProcessMap.insertProcess", process);
-
-		pessoa.setProcessId(processId);
-
-		// First insert the root
-		// Is successful the unique-id will be populated back into the object.
-		insertCount =
-				QATMyBatisDacHelper.doInsert(getSqlSession(), "PessoaMap.insertPessoa", pessoa, response);
-
 		Historico historico = new Historico();
 		historico.setEmprId(pessoa.getId());
 		historico.setUserId(pessoa.getUserId());
-		historico.setProcessId(processId);
+		historico.setProcessId(0);
 		Date a = new Date();
-		process.setData(a.getTime());
+		historico.setData(a.getTime());
 
 		insertCount =
 				QATMyBatisDacHelper.doInsert(getSqlSession(), "HistoricoMap.insertHistorico", historico, response);
 
-		historicoId = historico.getId();
+		Integer historicoId = historico.getId();
 
 		HistoricoItens historicoItens = new HistoricoItens();
 		historicoItens.setIdHist(historicoId);
-		historicoItens.setProcessId(processId);
+		historicoItens.setProcessId(0);
 		historicoItens.setParentId(pessoa.getId());
 		historicoItens.setTabelaEnum(TabelaEnum.EMPRESA);
 		historicoItens.setAcaoType(AcaoEnum.INSERT);
@@ -1365,7 +1338,14 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 				QATMyBatisDacHelper.doInsert(getSqlSession(), "HistoricoMap.insertHistoricoItens", historicoItens,
 						response);
 
-		historicoId = historico.getId();
+		Integer processId = historicoId;
+
+		pessoa.setProcessId(processId);
+
+		// First insert the root
+		// Is successful the unique-id will be populated back into the object.
+		insertCount =
+				QATMyBatisDacHelper.doInsert(getSqlSession(), "PessoaMap.insertPessoa", pessoa, response);
 
 		if (response.isInError())
 		{
@@ -1466,12 +1446,12 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response,
-						funcionario.getId(),
-								null, AcaoEnum.DELETE,
-								funcionario.getCreateUser(), funcionario.getEmprId(), TabelaEnum.TRANSPORTADOR,
-						getStatusDAC(),
-								getHistoricoDAC(), processId, null);
+				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response,
+								funcionario.getId(),
+						null, AcaoEnum.DELETE,
+						funcionario.getCreateUser(), funcionario.getEmprId(), TabelaEnum.TRANSPORTADOR,
+								getStatusDAC(),
+						getHistoricoDAC(), processId, null);
 		return response;
 	}
 }

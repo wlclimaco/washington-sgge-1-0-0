@@ -1,7 +1,5 @@
 package com.prosperitasglobal.sendsolv.funcionario.controller;
 
-import java.util.Calendar;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -143,23 +141,10 @@ public class FuncionarioAPIController extends FuncionarioBaseController
 	 */
 	@RequestMapping(value = INSERT_LOCATION, method = RequestMethod.POST)
 	@ResponseBody
-	public FuncionarioResponse insert(@RequestBody FuncionarioMaintenanceRequest locationRequest)
+	public FuncionarioResponse insertApi(@RequestBody FuncionarioMaintenanceRequest locationRequest)
 	{
-		FuncionarioResponse locationResponse = new FuncionarioResponse();
 
-		try
-		{
-
-			locationRequest.getFuncionario().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
-			locationResponse = getFuncionarioBAI().insertFuncionario(locationRequest);
-		}
-		catch (Exception e)
-		{
-			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
-			locationResponse = null;
-		}
-
-		return locationResponse;
+		return insert(locationRequest);
 
 	}
 }

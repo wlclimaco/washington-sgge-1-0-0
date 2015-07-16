@@ -135,10 +135,11 @@ pgsi.pages.pessoa = {
 			return val;
 		}
 		var sDocumentos ="";
-		for(var i=0;i<full.documentos.length;i++){
-			sDocumentos = sDocumentos +  full.documentos[0].description+ " - "+full.documentos[0].numero + "<br>";
+		if (!$.pgsi.isNullOrUndefined(full.documentos)) {
+			for(var i=0;i<full.documentos.length;i++){
+				sDocumentos = sDocumentos +  full.documentos[0].description+ " - "+full.documentos[0].numero + "<br>";
+			}
 		}
-
 		return sDocumentos;
 	},
 

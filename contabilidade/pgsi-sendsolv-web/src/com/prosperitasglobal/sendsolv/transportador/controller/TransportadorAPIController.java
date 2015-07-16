@@ -1,7 +1,5 @@
 package com.prosperitasglobal.sendsolv.transportador.controller;
 
-import java.util.Calendar;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -137,23 +135,10 @@ public class TransportadorAPIController extends TransportadorBaseController
 	 */
 	@RequestMapping(value = INSERT_TRANSPORTADOR, method = RequestMethod.POST)
 	@ResponseBody
-	public TransportadorResponse insert(@RequestBody TransportadorMaintenanceRequest transportadorRequest)
+	public TransportadorResponse insertApi(@RequestBody TransportadorMaintenanceRequest transportadorRequest)
 	{
-		TransportadorResponse transportadorResponse = new TransportadorResponse();
 
-		try
-		{
-
-			transportadorRequest.getTransportador().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
-			transportadorResponse = getPessoaBAI().insertTransportador(transportadorRequest);
-		}
-		catch (Exception e)
-		{
-			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
-			transportadorResponse = null;
-		}
-
-		return transportadorResponse;
+		return insert(transportadorRequest);
 
 	}
 

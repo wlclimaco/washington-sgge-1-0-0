@@ -23,6 +23,7 @@
     <result property="descricao" column="descricao" />
 	<result property="diasPg" column="diasPg"/>
 	<result property="entrada" column="entrada"/>
+	<result property="processId" column="processId"/>
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
@@ -36,6 +37,7 @@
 		 b.descricao
 		,b.diasPg
 		,b.entrada
+		,b.processId
       	,b.create_date
       	,b.create_user
       	,b.modify_date
@@ -46,6 +48,7 @@
   		 #{descricao},
 		 #{diasPg},
 		 #{entrada},
+		 #{processId},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 

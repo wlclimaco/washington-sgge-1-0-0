@@ -28,6 +28,7 @@
 	<result property="valor" column="valor" />
    	<result property="porcentagem" column="porcentagem"/>
 	<result property="tipo" column="tipo"/>
+	<result property="processId" column="processId"/>
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
@@ -46,24 +47,26 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allEventoColumns">
-		 b.name
+		 b.nome
 		,b.codigo
       	,b.descricao
       	,b.valor
       	,b.porcentagem
       	,b.tipo
+      	,b.processId
       	,b.create_user
       	,b.modify_date
       	,b.modify_user
   </sql>
 
   <sql id="allEventoValues">
-  		#{name},
+  		#{nome},
   		#{codigo},
     	#{descricao},
     	#{valor},
     	#{porcentagem},
     	#{tipo},
+    	#{processId},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 

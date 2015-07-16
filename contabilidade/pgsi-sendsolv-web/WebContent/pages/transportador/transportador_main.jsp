@@ -30,7 +30,7 @@
 	</div>
 </div>
 
+<jsp:include page="../../scripts/pages/pessoa/pessoa_main.js.jsp" flush="true" />
 <jsp:include page="../../scripts/pages/transportador/transportador_main.js.jsp" flush="true" />
-<jsp:include page="../../scripts/pages/transportador/transportador_actions.js.jsp" flush="true" />
 <jsp:include page="../../scripts/pages/transportador/transportador_init.js.jsp" flush="true" />
 
