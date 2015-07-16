@@ -2,10 +2,6 @@ package com.prosperitasglobal.sendsolv.dac;
 
 import java.util.List;
 
-import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
-import com.prosperitasglobal.sendsolv.model.Convenio;
-import com.qat.framework.model.response.InternalResultsResponse;
-
 public interface IConvenioDAC
 {
 	/**
@@ -74,4 +70,24 @@ public interface IConvenioDAC
 	public Integer maintainConvenioAssociations(List<Convenio> convenioList, Integer parentId,
 			String associateStatement,
 			InternalResultsResponse<?> response);
+
+	public Integer insertConvenioPessoa(ConvenioPessoa convenio);
+
+	/**
+	 * Delete business convenio.
+	 *
+	 * @param convenio the convenio
+	 * @param response the response
+	 * @return the integer
+	 */
+	public Integer deleteConvenioPessoa(ConvenioPessoa convenio);
+
+	/**
+	 * Delete person convenio.
+	 *
+	 * @param convenio the convenio
+	 * @param response the response
+	 * @return the integer
+	 */
+	public Integer updateConvenioPessoa(ConvenioPessoa convenio);
 }

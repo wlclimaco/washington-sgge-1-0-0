@@ -1,7 +1,5 @@
 package com.prosperitasglobal.sendsolv.model;
 
-import java.util.List;
-
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -11,9 +9,6 @@ public class Beneficios extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
-
-	/** The type of an account. */
-	private List<BeneficioMesApp> dataList;
 
 	/** The description. */
 	private String nome;
@@ -181,22 +176,6 @@ public class Beneficios extends ModelCosmeDamiao
 		this.tipo = tipo;
 	}
 
-	/**
-	 * @return the dataList
-	 */
-	public List<BeneficioMesApp> getDataList()
-	{
-		return dataList;
-	}
-
-	/**
-	 * @param dataList the dataList to set
-	 */
-	public void setDataList(List<BeneficioMesApp> dataList)
-	{
-		this.dataList = dataList;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -206,7 +185,7 @@ public class Beneficios extends ModelCosmeDamiao
 	{
 		return "Beneficios [getId()=" + getId() + ", getNome()=" + getNome() + ", getCodigo()=" + getCodigo()
 				+ ", getDescricao()=" + getDescricao() + ", getValor()=" + getValor() + ", getPorcentagem()="
-				+ getPorcentagem() + ", getTipo()=" + getTipo() + ", getDataList()=" + getDataList()
+				+ getPorcentagem() + ", getTipo()=" + getTipo()
 				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
 				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
 				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()

@@ -2,18 +2,8 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.Map;
 
-import org.mybatis.spring.support.SqlSessionDaoSupport;
-import org.slf4j.LoggerFactory;
-
 import com.prosperitasglobal.sendsolv.dac.IBeneficiosDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
-import com.prosperitasglobal.sendsolv.model.Beneficios;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
-import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResponse;
-import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.util.QATMyBatisDacHelper;
-import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class BeneficiosDACImpl.
@@ -201,5 +191,85 @@ public class BeneficiosDACImpl extends SqlSessionDaoSupport implements IBenefici
 		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, EMPRESA_STMT_FETCH_COUNT,
 				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
 		return response;
+	}
+
+	@Override
+	public com.prosperitasglobal.sendsolv.dac.InternalResultsResponse<com.prosperitasglobal.sendsolv.dac.Beneficios> fetchBeneficiosByRequest(
+			com.prosperitasglobal.sendsolv.dac.PagedInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer updateBeneficioPessoa(BeneficioPessoa beneficios)
+	{
+		Integer updateCount = 0;
+		InternalResultsResponse<BeneficioPessoa> response = new InternalResultsResponse<BeneficioPessoa>();
+
+		// First update the root if necessary.
+		if (!ValidationUtil.isNull(beneficios.getModelAction())
+				&& (beneficios.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
+		{
+			updateCount =
+					QATMyBatisDacHelper.doUpdate(getSqlSession(), "BeneficiosMap.updateBeneficioPessoa", beneficios,
+							response);
+		}
+
+		if (response.isInError())
+		{
+			return null;
+		}
+
+		// Finally, if something was updated then add the Person to the result.
+		if (updateCount > 0)
+		{
+			response.addResult(beneficios);
+		}
+
+		return updateCount;
+	}
+
+	@Override
+	public Integer insertBeneficioPessoa(BeneficioPessoa beneficios)
+	{
+		Integer insertCount = 0;
+		InternalResultsResponse<BeneficioPessoa> response = new InternalResultsResponse<BeneficioPessoa>();
+
+		// First insert the root
+		// Is successful the unique-id will be populated back into the object.
+		insertCount =
+				QATMyBatisDacHelper.doInsert(getSqlSession(), "BeneficiosMap.insertBeneficioPerson", beneficios,
+						response);
+
+		// Finally, if something was inserted then add the Beneficios to the result.
+		if (insertCount > 0)
+		{
+			response.addResult(beneficios);
+		}
+
+		return insertCount;
+	}
+
+	@Override
+	public InternalResultsResponse<Beneficios> fetchBeneficiosByRequest(PagedInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer deleteBeneficioPessoa(BeneficioPessoa beneficios)
+	{
+		InternalResponse response = new InternalResponse();
+		QATMyBatisDacHelper.doRemove(getSqlSession(), "BeneficiosMap.deleteBeneficioPerson", beneficios, response);
+		if (response.isInError())
+		{
+			return null;
+		}
+		else
+		{
+			return 1;
+		}
 	}
 }

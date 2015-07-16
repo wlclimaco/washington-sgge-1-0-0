@@ -70,6 +70,23 @@
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
+     <sql id="allEventoAppplyColumns">
+		 b.data
+		,b.idEvent
+		,b.idFunc
+      	,b.processId
+      	,b.create_user
+      	,b.modify_date
+      	,b.modify_user
+  </sql>
+
+  <sql id="allEventoApplyValues">
+  		#{data},
+  		#{idEvent},
+    	#{idFunc},
+    	#{processId},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
 
   <!--
 		SQL Insert Statements.
@@ -81,6 +98,13 @@
     VALUES (<include refid="allEventoValues" /> )
   </insert>
 
+    <insert id="insertEventoPessoa" parameterType="EventoPessoa" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO EventoFunc (
+		<include refid="allEventoAppplyColumns" />
+      )
+    VALUES (<include refid="allEventoApplyValues" /> )
+  </insert>
+
 
 	<!--
 		SQL Update Statements.
@@ -88,10 +112,36 @@
 
   <update id="updateEvento" parameterType="Eventos">
     UPDATE evento
-
+    	<set>
+    		<if test="nome!= null">nome = #{nome},</if>
+	    	<if test="codigo!= null"> codigo=#{codigo},</if>
+	    	<if test="descricao!= null">descricao = #{descricao},</if>
+	    	<if test="valor!= null"> valor=#{valor},</if>
+	    	<if test="porcentagem!= null"> porcentagem=#{porcentagem},</if>
+	    	<if test="tipo!= null"> tipo=#{tipo},</if>
+			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
     WHERE
-     business_id = #{id}
+     id = #{id}
   </update>
+
+    <update id="updateEventoPessoa" parameterType="EventoPessoa">
+    UPDATE eventoFunc
+    	<set>
+    		<if test="data!= null">data = #{data},</if>
+    		<if test="idEvent!= null">idEvent = #{idEvent},</if>
+	    	<if test="idFunc!= null"> idFunc=#{idFunc},</if>
+			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <delete id="deleteEventoPessoaById" parameterType="Integer">
+    	DELETE FROM eventoFunc WHERE id = #{id}
+  </delete>
 
    <!--
 		SQL Delete Statements.

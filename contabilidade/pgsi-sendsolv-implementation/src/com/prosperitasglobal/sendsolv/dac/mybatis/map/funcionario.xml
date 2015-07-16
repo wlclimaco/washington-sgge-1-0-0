@@ -18,7 +18,7 @@
   <resultMap id="funcionarioResult" type="Funcionario" >
     <result property="id" column="id" />
    	<result property="matricula" column="matricula"/>
-   	<result property="dataAdm" column="dataAdm"/>
+   	<result property="dataAdm" column="dataAdmin"/>
     <result property="emprId" column="cdEmpr" />
    	<result property="nome" column="nome"/>
 	<result property="pessoaTypeEnumValue" column="type"/>
@@ -51,7 +51,7 @@
 	-->
   <sql id="allFuncionarioColumns">
 	     b.matricula
-      	,b.dataAdm
+      	,b.dataAdmin
       	,b.cdEmpr
 		,b.nome
 		,b.type

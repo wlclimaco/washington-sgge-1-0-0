@@ -29,6 +29,7 @@
 		<typeAlias alias="Agencia"              					 type="com.prosperitasglobal.sendsolv.model.Agencia"/>
 		<typeAlias alias="Banco"              				 		 type="com.prosperitasglobal.sendsolv.model.Banco"/>
 		<typeAlias alias="Beneficios"              				 	 type="com.prosperitasglobal.sendsolv.model.Beneficios"/>
+		<typeAlias alias="BeneficioPessoa"              		 	 type="com.prosperitasglobal.sendsolv.model.BeneficioPessoa"/>
 		<typeAlias alias="Cidade"              				 		 type="com.prosperitasglobal.sendsolv.model.Cidade"/>
 		<typeAlias alias="Cfop"              				 		 type="com.prosperitasglobal.sendsolv.model.Cfop"/>
 		<typeAlias alias="Classificacao"              				 type="com.prosperitasglobal.sendsolv.model.Classificacao"/>
@@ -51,6 +52,7 @@
 		<typeAlias alias="Estado"              				 	     type="com.prosperitasglobal.sendsolv.model.Estado"/>
 		<typeAlias alias="Estoque"              				 	 type="com.prosperitasglobal.sendsolv.model.Estoque"/>
 		<typeAlias alias="Eventos"              				 	 type="com.prosperitasglobal.sendsolv.model.Eventos"/>
+		<typeAlias alias="EventoPessoa"              			 	 type="com.prosperitasglobal.sendsolv.model.EventoPessoa"/>
 		<typeAlias alias="Field"              				 		 type="com.prosperitasglobal.sendsolv.model.Field"/>
 		<typeAlias alias="Financeiro"              				 	 type="com.prosperitasglobal.sendsolv.model.Financeiro"/>
 		<typeAlias alias="FormaPg"              				 	 type="com.prosperitasglobal.sendsolv.model.FormaPg"/>

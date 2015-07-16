@@ -28,6 +28,7 @@
 	<result property="valor" column="valor" />
    	<result property="porcentagem" column="porcentagem"/>
 	<result property="tipo" column="tipo"/>
+	<result property="processId" column="processId"/>
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
@@ -37,9 +38,10 @@
   </resultMap>
 
   <resultMap id="beneficioMesAppResult" type="BeneficioMesApp">
-    <result property="int" column="FK_beneficio_id" />
+    <result property="id" column="id" />
     <result property="data" column="data" />
    	<result property="idFuncBenef" column="idFuncBenef"/>
+   	<result property="processId" column="processId"/>
   </resultMap>
 
   <!--
@@ -52,6 +54,7 @@
       	,b.valor
       	,b.porcentagem
       	,b.tipo
+      	,b.processId
       	,b.create_user
       	,b.modify_date
       	,b.modify_user
@@ -64,6 +67,23 @@
     	#{valor},
     	#{porcentagem},
     	#{tipo},
+    	#{processId},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+   <sql id="allBeneficiosAppplyColumns">
+		 b.idFunc
+		,b.idBenef
+      	,b.processId
+      	,b.create_user
+      	,b.modify_date
+      	,b.modify_user
+  </sql>
+
+  <sql id="allBeneficiosApplyValues">
+  		#{pessoaId},
+  		#{benefId},
+    	#{processId},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
@@ -72,10 +92,17 @@
 		SQL Insert Statements.
  	-->
   <insert id="insertBeneficios" parameterType="Beneficios" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO business (
+  	INSERT INTO beneficio (
 		<include refid="allBeneficiosColumns" />
       )
     VALUES (<include refid="allBeneficiosValues" /> )
+  </insert>
+
+  <insert id="insertBeneficioPerson" parameterType="BeneficioPessoa" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO BeneficioFunc (
+		<include refid="allBeneficiosAppplyColumns" />
+      )
+    VALUES (<include refid="allBeneficiosApplyValues" /> )
   </insert>
 
 
@@ -83,12 +110,37 @@
 		SQL Update Statements.
  	-->
 
-  <update id="updateBeneficios" parameterType="Beneficios">
-    UPDATE business
-
+    <update id="updateBeneficios" parameterType="Beneficios">
+    UPDATE beneficio
+    	<set>
+    		<if test="nome!= null">nome = #{nome},</if>
+	    	<if test="codigo!= null"> codigo=#{codigo},</if>
+	    	<if test="descricao!= null">descricao = #{descricao},</if>
+	    	<if test="valor!= null"> valor=#{valor},</if>
+	    	<if test="porcentagem!= null"> porcentagem=#{porcentagem},</if>
+	    	<if test="tipo!= null"> tipo=#{tipo},</if>
+			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
     WHERE
-     business_id = #{id}
+     id = #{id}
   </update>
+
+    <update id="updateBeneficioPessoa" parameterType="BeneficioPessoa">
+    UPDATE BeneficioFunc
+    	<set>
+    		<if test="pessoaId!= null">idFunc = #{pessoaId},</if>
+	    	<if test="benefId!= null"> idBenef=#{benefId},</if>
+			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <delete id="deleteBeneficiosPessoaById" parameterType="Integer">
+    	DELETE FROM BeneficioFunc WHERE id = #{id}
+  </delete>
 
    <!--
 		SQL Delete Statements.

@@ -310,9 +310,9 @@ CONSTRAINT [pk_beneficio_id] PRIMARY KEY CLUSTERED
 
 DROP TABLE [dbo].[BeneficioFunc];
 CREATE TABLE [dbo].[BeneficioFunc](
-	[id]             [int] identity(1,1) NOT NULL,
+	[id]           [int] identity(1,1) NOT NULL,
 	[idFunc]       [int] NOT NULL,
-	[idBenef]       [int] NOT NULL,
+	[idBenef]      [int] NOT NULL,
 	[processId]    [int] NULL,
 	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
@@ -368,7 +368,7 @@ CONSTRAINT [pk_evento_id] PRIMARY KEY CLUSTERED
 /** ---------------------------------------------------------------*/
 DROP TABLE [dbo].[EventoFunc];
 CREATE TABLE [dbo].[EventoFunc](
-	[id]             [int] identity(1,1) NOT NULL,
+	[id]           [int] identity(1,1) NOT NULL,
 	[data]         [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[idFunc]	   [int] NULL,
 	[idEvent]	   [int] NULL,
@@ -412,7 +412,7 @@ CREATE TABLE [dbo].[Pessoa](
 	[sexo] 		   [int] NULL,
 	[type]         [int] NOT NULL,
 	[dataNasc]     [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
-	[dataAdmin]     [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[dataAdmin]    [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[nomePai] 	   [varchar](200) NULL,
 	[nomeMae]      [varchar](200) NULL,
 	[nomeConjugue] [varchar](200) NULL,
@@ -630,14 +630,15 @@ CONSTRAINT [pk_agencia_id] PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 /** ---------------------------------------------------------------*/
-DROP TABLE [dbo].[BancoPesoa];
-CREATE TABLE [dbo].[BancoPesoa](
+DROP TABLE [dbo].[BancoPessoa];
+CREATE TABLE [dbo].[BancoPessoa](
 	[id]          	         [int] identity(1,1) NOT NULL,
 	[parentId]          	 [int] NOT NULL,
 	[bancoId]          	 	 [int] NOT NULL,
 	[numCont]          	     [varchar](50) NULL,
 	[saldo]          	     [real] NOT NULL,
-	[processId]    [int] NULL,
+	[processId]    			 [int] NULL,
+	[agenciaId]    			 [int] NULL,
 	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),

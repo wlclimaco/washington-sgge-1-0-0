@@ -48,7 +48,7 @@ public class Pessoa extends ModelCosmeDamiao
 
 	private List<Note> notes;
 
-	private List<Banco> bancos;
+	private List<BancoPessoa> bancos;
 
 	private List<FormaPg> formaPagamentoList;
 

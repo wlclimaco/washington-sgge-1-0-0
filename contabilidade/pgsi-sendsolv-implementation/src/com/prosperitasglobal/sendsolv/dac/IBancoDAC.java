@@ -1,10 +1,5 @@
 package com.prosperitasglobal.sendsolv.dac;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.Banco;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
-import com.qat.framework.model.response.InternalResultsResponse;
-
 /**
  * The Interface IBancoDAC.
  */
@@ -57,5 +52,29 @@ public interface IBancoDAC
 	 * @return the internal results response< banco>
 	 */
 	public InternalResultsResponse<Banco> fetchBancoByRequest(PagedInquiryRequest request);
+
+	/**
+	 * Update banco.
+	 *
+	 * @param banco the banco
+	 * @return the internal results response< banco>
+	 */
+	public Integer updateBancoPessoa(BancoPessoa banco);
+
+	/**
+	 * Insert banco.
+	 *
+	 * @param banco the banco
+	 * @return the internal results response< banco>
+	 */
+	public Integer insertBancoPessoa(BancoPessoa banco);
+
+	/**
+	 * Delete banco.
+	 *
+	 * @param banco the banco
+	 * @return the internal response
+	 */
+	public Integer deleteBancoPessoa(BancoPessoa banco);
 
 }

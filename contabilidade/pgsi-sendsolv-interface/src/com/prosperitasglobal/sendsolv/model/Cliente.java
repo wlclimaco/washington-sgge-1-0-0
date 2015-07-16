@@ -15,7 +15,7 @@ public class Cliente extends Pessoa
 	/** The horarios. */
 	private List<Profissao> profissao;
 
-	private List<Convenio> convenioList;
+	private List<ConvenioPessoa> convenioList;
 
 	/**
 	 * Default constructor.

@@ -1,21 +1,12 @@
 package com.prosperitasglobal.sendsolv.dacd.mybatis;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.prosperitasglobal.sendsolv.dac.IEventosDAC;
 import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
-import com.prosperitasglobal.sendsolv.model.AcaoEnum;
-import com.prosperitasglobal.sendsolv.model.Eventos;
-import com.prosperitasglobal.sendsolv.model.Status;
-import com.prosperitasglobal.sendsolv.model.StatusEnum;
-import com.prosperitasglobal.sendsolv.model.TabelaEnum;
-import com.prosperitasglobal.sendsolv.model.TypeEnum;
-import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.validation.ValidationUtil;
 
 /**
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
@@ -74,6 +65,16 @@ public final class EventosDACD extends SqlSessionDaoSupport
 										AcaoEnum.INSERT, UserId, empId, TabelaEnum.EVENTOS, statusDAC, historicoDAC,
 										processId, HistoriId);
 					}
+
+					EventoPessoa eventoPessoa = new EventoPessoa();
+					Date a = new Date();
+					eventoPessoa.setData(a.getTime());
+					eventoPessoa.setIdEvent(cnae.getId());
+					eventoPessoa.setIdFunc(parentId);
+					eventoPessoa.setProcessId(processId);
+
+					count = cnaeDAC.insertEventoPessoa(eventoPessoa);
+
 					break;
 				case UPDATE:
 					count = cnaeDAC.updateEvento(cnae, response);
@@ -84,6 +85,14 @@ public final class EventosDACD extends SqlSessionDaoSupport
 										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.EVENTOS, statusDAC,
 										historicoDAC, processId, HistoriId);
 					}
+					EventoPessoa eventoPessoa = new EventoPessoa();
+					Date a = new Date();
+					eventoPessoa.setData(a.getTime());
+					eventoPessoa.setIdEvent(cnae.getId());
+					eventoPessoa.setIdFunc(parentId);
+					eventoPessoa.setProcessId(processId);
+
+					count = cnaeDAC.updateEventoPessoa(eventoPessoa);
 					break;
 				case DELETE:
 
@@ -95,6 +104,14 @@ public final class EventosDACD extends SqlSessionDaoSupport
 									AcaoEnum.DELETE, UserId, empId, TabelaEnum.EVENTOS, statusDAC, historicoDAC,
 									processId, HistoriId);
 
+					EventoPessoa eventoPessoa = new EventoPessoa();
+					Date a = new Date();
+					eventoPessoa.setData(a.getTime());
+					eventoPessoa.setIdEvent(cnae.getId());
+					eventoPessoa.setIdFunc(parentId);
+					eventoPessoa.setProcessId(processId);
+
+					count = cnaeDAC.deleteEventoPessoa(eventoPessoa);
 					break;
 			}
 		}
