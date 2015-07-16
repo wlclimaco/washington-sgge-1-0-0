@@ -28,6 +28,7 @@
 	<result property="nomeMae" column="nomeMae"/>
 	<result property="nomeConjugue" column="nomeConjugue"/>
 	<result property="estadoCivil" column="estadoCivil"/>
+	<result property="processId" column="processId"/>
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
@@ -59,6 +60,7 @@
 		,b.nomePai
 		,b.nomeMae
 		,b.nomeConjugue
+		,b.processId
 		,b.estadoCivil
       	,b.create_date
       	,b.create_user
@@ -78,6 +80,7 @@
     	#{nomeMae},
     	#{nomeConjugue},
     	#{estadoCivil},
+    	#{processId},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
@@ -85,7 +88,7 @@
 		SQL Insert Statements.
  	-->
   <insert id="insertFuncionario" parameterType="Funcionario" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO funcionario (
+  	INSERT INTO pessoa (
 		<include refid="allFuncionarioColumns" />
       )
     VALUES (<include refid="allFuncionarioValues" /> )
@@ -97,7 +100,7 @@
  	-->
 
   <update id="updateFuncionario" parameterType="Funcionario">
-    UPDATE funcionario
+    UPDATE pessoa
     	<set>
     		<if test="cdEmpr!= null">cdEmpr = #{cdEmpr},</if>
 	    	<if test="nome!= null"> nome =#{nome},</if>
@@ -122,7 +125,7 @@
  	-->
   <select id="fetchFuncionarioRowCount" parameterType="FuncionarioInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
-        FROM funcionario where 1 = 1
+        FROM pessoa where 1 = 1 and type = 3
      <if test="criteria.empresa != null">
 		  AND cdEmpr = #{criteria.empresa}
 	 </if>
@@ -131,7 +134,7 @@
   <select id="fetchAllFuncionarios" resultMap="funcionarioResult">
     SELECT
 	<include refid="allFuncionarioColumns" />
-    FROM funcionario ORDER BY name ASC
+    FROM pessoa b where b.type = 3 ORDER BY b.id ASC
   </select>
 
   <select id="fetchFuncionarioById" parameterType="FetchByIdRequest" resultMap="funcionarioResult">
@@ -142,8 +145,8 @@
 		SELECT * FROM ( SELECT b.id,
     						<include refid="allFuncionarioColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
-    				FROM funcionario b
-						where 1 = 1
+    				FROM pessoa b
+						where  b.type = 3
 					<if test="criteria.empresa != null">
 						AND b.cdEmpr = #{criteria.empresa}
 					</if>

@@ -43,58 +43,66 @@ $(document).ready(function()
 		},
 
 		aoColumns :
-		[
-		{
-			headerData 		: "Nome Funcionario",
-			order			: "name",
-			mRender         : pgsi.pages.funcionario.fnCreateFuncionarioNameLink,
-			sDefaultContent : "",
-			bSortable 		: false,
-			sClass          : "name-col"
-		},
-		{
-			headerData 		: "CPF",
-			order			: "organization_column",
-			mRender 		: pgsi.pages.funcionario.fnCreateCPFLink,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Email",
-			order			: "state_column",
-			mRender 		: pgsi.pages.funcionario.fnEmail,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Telefone",
-			order			: "country_column",
-			mRender 		: pgsi.pages.funcionario.fnTelefone,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Endereco",
-			order			: "phone_column",
-			mRender 		: pgsi.pages.funcionario.fnEndereco,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Documentos",
-			order			: "phone_column",
-			mRender 		: pgsi.pages.funcionario.fnDocumento,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Beneficios",
-			order			: "phone_column",
-			mRender 		: pgsi.pages.funcionario.fnBeneficios,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		],
+			[
+			{
+				headerData 		: "CPF/CNPJ",
+				order			: "name",
+				mRender         : pgsi.pages.pessoa.fnCreateClienteNameLink,
+				sDefaultContent : "",
+				bSortable 		: false,
+				sClass          : "name-col"
+			},
+			{
+				headerData 		: "Nome",
+				order			: "organization_column",
+				mRender 		: pgsi.pages.pessoa.fnCreateNomeLink,
+				sDefaultContent : "",
+				bSortable 		: false
+			},
+			{
+				headerData 		: "Profissao",
+				order			: "city_column",
+				mRender 		: pgsi.pages.pessoa.fnProfissao,
+				mData	 		: "null",
+				sDefaultContent : "",
+				bSortable 		: false
+			},
+			{
+				headerData 		: "Email",
+				order			: "state_column",
+				mRender 		: pgsi.pages.pessoa.fnEmail,
+				sDefaultContent : "",
+				bSortable 		: false
+			},
+			{
+				headerData 		: "Telefone",
+				order			: "country_column",
+				mRender 		: pgsi.pages.pessoa.fnTelefone,
+				sDefaultContent : "",
+				bSortable 		: false
+			},
+			{
+				headerData 		: "Convenio",
+				order			: "sdn_status_column",
+				mRender 		: pgsi.pages.pessoa.fnConvenio,
+				sDefaultContent : "",
+				bSortable 		: false
+			},
+			{
+				headerData 		: "Endereco",
+				order			: "phone_column",
+				mRender 		: pgsi.pages.pessoa.fnEndereco,
+				sDefaultContent : "",
+				bSortable 		: false
+			},
+			{
+				headerData 		: "Documentos",
+				order			: "phone_column",
+				mRender 		: pgsi.pages.pessoa.fnDocumento,
+				sDefaultContent : "",
+				bSortable 		: false
+			},
+			],
 
 		<c:choose>
 			<c:when test="${not empty refresh}">

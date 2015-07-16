@@ -1,6 +1,7 @@
 package com.prosperitasglobal.sendsolv.funcionario.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -35,6 +36,7 @@ import com.prosperitasglobal.sendsolv.model.Salario;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
 import com.prosperitasglobal.sendsolv.model.Telefone;
 import com.prosperitasglobal.sendsolv.model.request.FuncionarioInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.FuncionarioMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.response.FuncionarioResponse;
 import com.qat.framework.model.QATModel.PersistanceActionEnum;
 import com.qat.framework.validation.ValidationUtil;
@@ -180,6 +182,26 @@ public class FuncionarioBaseController extends UtilControllerD
 		}
 
 		return locationResponse;
+	}
+
+	public FuncionarioResponse insert(FuncionarioMaintenanceRequest locationRequest)
+	{
+		FuncionarioResponse locationResponse = new FuncionarioResponse();
+
+		try
+		{
+			locationRequest.setFuncionario(insertMockCliente(PersistanceActionEnum.INSERT));
+			locationRequest.getFuncionario().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
+			locationResponse = getFuncionarioBAI().insertFuncionario(locationRequest);
+		}
+		catch (Exception e)
+		{
+			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			locationResponse = null;
+		}
+
+		return locationResponse;
+
 	}
 
 	public List<Endereco> insertEndereco(PersistanceActionEnum modelAction)
@@ -467,6 +489,7 @@ public class FuncionarioBaseController extends UtilControllerD
 		Funcionario funcionario = new Funcionario();
 
 		funcionario.setId(1);
+		funcionario.setEmprId(1);
 		funcionario.setModelAction(modelAction);
 		funcionario.setNome("Damiao jose junior");
 		funcionario.setNomePai("Damiao Jose Pai");

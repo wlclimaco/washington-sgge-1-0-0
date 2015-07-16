@@ -46,7 +46,7 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allBeneficiosColumns">
-		 b.name
+		 b.nome
 		,b.codigo
       	,b.descricao
       	,b.valor
@@ -58,7 +58,7 @@
   </sql>
 
   <sql id="allBeneficiosValues">
-  		#{name},
+  		#{nome},
   		#{codigo},
     	#{descricao},
     	#{valor},

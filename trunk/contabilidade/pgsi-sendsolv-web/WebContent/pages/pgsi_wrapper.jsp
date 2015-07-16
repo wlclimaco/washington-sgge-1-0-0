@@ -55,7 +55,7 @@
         </li>
 		<li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Departamento Pessoal</span> <b class="caret"></b></a>
 		 <ul class="dropdown-menu">
-            <li><a href="funcionario">Funcionario</a></li>
+            <li><a href="funcionario" class="alist" data-title='Funcionario'>Funcionario</a></li>
             <li><a href="funcionario/eventos">Eventos</a></li>
             <li><a href="funcionario/beneficios">Beneficios</a></li>
 			<li><a href="funcionario/convenio">Convenio</a></li>
