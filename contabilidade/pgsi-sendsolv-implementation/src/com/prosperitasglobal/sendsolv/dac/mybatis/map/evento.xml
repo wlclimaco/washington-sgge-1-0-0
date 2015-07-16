@@ -75,7 +75,7 @@
 		SQL Insert Statements.
  	-->
   <insert id="insertEvento" parameterType="Eventos" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO business (
+  	INSERT INTO evento (
 		<include refid="allEventoColumns" />
       )
     VALUES (<include refid="allEventoValues" /> )
@@ -87,7 +87,7 @@
  	-->
 
   <update id="updateEvento" parameterType="Eventos">
-    UPDATE business
+    UPDATE evento
 
     WHERE
      business_id = #{id}

@@ -52,7 +52,7 @@
   <sql id="allFuncionarioColumns">
 	     b.matricula
       	,b.dataAdm
-      	 b.cdEmpr
+      	,b.cdEmpr
 		,b.nome
 		,b.type
 		,b.sexo
