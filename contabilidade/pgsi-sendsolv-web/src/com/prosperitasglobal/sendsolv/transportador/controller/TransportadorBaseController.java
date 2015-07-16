@@ -16,7 +16,7 @@ import com.prosperitasglobal.cbof.model.Note;
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
 import com.prosperitasglobal.sendsolv.bai.IPessoaBAI;
-import com.prosperitasglobal.sendsolv.model.Banco;
+import com.prosperitasglobal.sendsolv.model.BancoPessoa;
 import com.prosperitasglobal.sendsolv.model.Cidade;
 import com.prosperitasglobal.sendsolv.model.Contato;
 import com.prosperitasglobal.sendsolv.model.ContatoItens;
@@ -405,8 +405,8 @@ public class TransportadorBaseController extends UtilControllerD
 		transportador.setEmails(insertEmail(modelAction));
 		transportador.setTelefones(insertTelefone(modelAction));
 		transportador.setNotes(insertNote(modelAction));
-		transportador.setBancos(new ArrayList<Banco>());
-		transportador.getBancos().add(new Banco(1));
+		transportador.setBancos(new ArrayList<BancoPessoa>());
+		transportador.getBancos().add(new BancoPessoa(1, PersistanceActionEnum.NONE));
 		transportador.setContatoList(insertContato(modelAction));
 		return transportador;
 

@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
 import com.prosperitasglobal.sendsolv.bai.IProdutoBAI;
-import com.prosperitasglobal.sendsolv.model.Cfop;
+import com.prosperitasglobal.sendsolv.model.CfopPessoa;
 import com.prosperitasglobal.sendsolv.model.Classificacao;
 import com.prosperitasglobal.sendsolv.model.Csosn;
 import com.prosperitasglobal.sendsolv.model.Cst;
@@ -202,8 +202,8 @@ public class ProdutoBaseController extends UtilControllerD
 		produto.setCustoList(mockCusto(model));
 		produto.setPorcaoList(mockPorcao(model));
 		produto.setRentabilidadeList(mockRentabilidade(model));
-		produto.setCfopList(new ArrayList<Cfop>());
-		produto.getCfopList().add(new Cfop());
+		produto.setCfopList(new ArrayList<CfopPessoa>());
+		produto.getCfopList().add(new CfopPessoa(1, PersistanceActionEnum.NONE));
 		produto.setFornecedorList(new ArrayList<Fornecedor>());
 		produto.getFornecedorList().add(new Fornecedor(1));
 

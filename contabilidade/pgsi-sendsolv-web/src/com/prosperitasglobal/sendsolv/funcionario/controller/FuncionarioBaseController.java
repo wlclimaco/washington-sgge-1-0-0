@@ -16,8 +16,8 @@ import com.prosperitasglobal.cbof.model.Note;
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
 import com.prosperitasglobal.sendsolv.bai.IFuncionarioBAI;
-import com.prosperitasglobal.sendsolv.model.Banco;
-import com.prosperitasglobal.sendsolv.model.BeneficioMesApp;
+import com.prosperitasglobal.sendsolv.model.BancoPessoa;
+import com.prosperitasglobal.sendsolv.model.BeneficioPessoa;
 import com.prosperitasglobal.sendsolv.model.Beneficios;
 import com.prosperitasglobal.sendsolv.model.Cidade;
 import com.prosperitasglobal.sendsolv.model.Contato;
@@ -27,6 +27,7 @@ import com.prosperitasglobal.sendsolv.model.Documento;
 import com.prosperitasglobal.sendsolv.model.Email;
 import com.prosperitasglobal.sendsolv.model.Endereco;
 import com.prosperitasglobal.sendsolv.model.Estado;
+import com.prosperitasglobal.sendsolv.model.EventoPessoa;
 import com.prosperitasglobal.sendsolv.model.Eventos;
 import com.prosperitasglobal.sendsolv.model.Funcionario;
 import com.prosperitasglobal.sendsolv.model.HorarioFunc;
@@ -433,50 +434,43 @@ public class FuncionarioBaseController extends UtilControllerD
 		return horarioFuncList;
 	}
 
-	public List<Beneficios> insertBeneficios(PersistanceActionEnum modelAction)
+	public List<BeneficioPessoa> insertBeneficios(PersistanceActionEnum modelAction)
 	{
-		List<Beneficios> beneficioList = new ArrayList<Beneficios>();
+		List<BeneficioPessoa> beneficioList = new ArrayList<BeneficioPessoa>();
 		Date a = new Date();
-		Beneficios beneficio = new Beneficios();
+		BeneficioPessoa beneficio = new BeneficioPessoa();
 
 		beneficio.setId(1);
-		beneficio.setDataList(new ArrayList<BeneficioMesApp>());
-		beneficio.getDataList().add(new BeneficioMesApp());
-		beneficio.setNome("Vale Transporte");
-		beneficio.setCodigo("00001");
-		beneficio.setDescricao("Vale transporte");
-		beneficio.setValor(new Double(0));
-		beneficio.setPorcentagem(new Double(7.5));
-		beneficio.setTipo("");
-		beneficio.setModelAction(modelAction);
+		// beneficio.setDataList(new ArrayList<BeneficioMesApp>());
+		// beneficio.getDataList().add(new BeneficioMesApp());
+		beneficio.setParentId(1);
+		beneficio.setBenefId(new Beneficios(1));
+		beneficio.setModelAction(PersistanceActionEnum.NONE);
 		beneficioList.add(beneficio);
 
-		beneficio = new Beneficios();
+		beneficio = new BeneficioPessoa();
 		beneficio.setModelAction(PersistanceActionEnum.NONE);
 		beneficio.setId(1);
+		beneficio.setBenefId(new Beneficios(2));
 		beneficioList.add(beneficio);
 
 		return beneficioList;
 	}
 
-	public List<Eventos> insertEventos(PersistanceActionEnum modelAction)
+	public List<EventoPessoa> insertEventos(PersistanceActionEnum modelAction)
 	{
-		List<Eventos> eventosList = new ArrayList<Eventos>();
+		List<EventoPessoa> eventosList = new ArrayList<EventoPessoa>();
 		Date a = new Date();
-		Eventos evento = new Eventos();
+		EventoPessoa evento = new EventoPessoa();
 		evento.setId(1);
 
-		evento.setCodigo("00002");
-		evento.setDescricao("INSS");
-		evento.setValor(new Double(0));
-		evento.setPorcentagem(new Double(7));
-		evento.setTipo("");
-		evento.setModelAction(modelAction);
-		evento.setIsMensal(Boolean.TRUE);
-		evento.setIsSistema(Boolean.FALSE);
+		evento.setParentId(1);
+		evento.setIdEvent(new Eventos(1));
+		evento.setModelAction(PersistanceActionEnum.NONE);
 		eventosList.add(evento);
 
-		evento = new Eventos();
+		evento = new EventoPessoa();
+		evento.setIdEvent(new Eventos(2));
 		evento.setModelAction(PersistanceActionEnum.NONE);
 		evento.setId(1);
 		eventosList.add(evento);
@@ -508,8 +502,9 @@ public class FuncionarioBaseController extends UtilControllerD
 		funcionario.setEmails(insertEmail(modelAction));
 		funcionario.setTelefones(insertTelefone(modelAction));
 		funcionario.setNotes(insertNote(modelAction));
-		funcionario.setBancos(new ArrayList<Banco>());
-		funcionario.getBancos().add(new Banco(1));
+		funcionario.setBancos(new ArrayList<BancoPessoa>());
+		funcionario.getBancos().add(new BancoPessoa(1, PersistanceActionEnum.NONE));
+		funcionario.getBancos().add(new BancoPessoa(2, PersistanceActionEnum.NONE));
 		funcionario.setSalarios(insertSalario(modelAction));
 		funcionario.setHorarios(insertHorarioFunc(modelAction));
 		funcionario.setBeneficios(insertBeneficios(modelAction));
