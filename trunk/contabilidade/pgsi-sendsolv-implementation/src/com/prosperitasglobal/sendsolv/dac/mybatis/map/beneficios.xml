@@ -87,7 +87,7 @@
 
   <sql id="allBeneficiosApplyValues">
   		#{pessoaId},
-  		#{benefId},
+  		#{benefId.id},
     	#{processId},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
@@ -135,7 +135,7 @@
     UPDATE BeneficioFunc
     	<set>
     		<if test="pessoaId!= null">idFunc = #{pessoaId},</if>
-	    	<if test="benefId!= null"> idBenef=#{benefId},</if>
+	    	<if test="benefId!= null"> idBenef=#{benefId.id},</if>
 			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>

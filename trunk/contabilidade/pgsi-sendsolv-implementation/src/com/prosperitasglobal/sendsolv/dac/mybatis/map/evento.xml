@@ -82,7 +82,7 @@
 
   <sql id="allEventoApplyValues">
   		#{data},
-  		#{idEvent},
+  		#{idEvent.id},
     	#{idFunc},
     	#{processId},
     	<include refid="CBOFMap.changeControlFields"/>
@@ -130,7 +130,7 @@
     UPDATE eventoFunc
     	<set>
     		<if test="data!= null">data = #{data},</if>
-    		<if test="idEvent!= null">idEvent = #{idEvent},</if>
+    		<if test="idEvent.id!= null">idEvent = #{idEvent.id},</if>
 	    	<if test="idFunc!= null"> idFunc=#{idFunc},</if>
 			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>

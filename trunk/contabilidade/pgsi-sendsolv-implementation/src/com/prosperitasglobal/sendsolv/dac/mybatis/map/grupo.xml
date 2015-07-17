@@ -53,7 +53,7 @@
   <sql id="allGrupoProdValues">
   		#{parentId},
   		#{processId},
-  		#{grupoId},
+  		#{grupoId.id},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
