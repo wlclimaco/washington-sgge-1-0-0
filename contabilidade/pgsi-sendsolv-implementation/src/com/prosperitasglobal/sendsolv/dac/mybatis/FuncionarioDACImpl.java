@@ -288,7 +288,7 @@ public class FuncionarioDACImpl extends SqlSessionDaoSupport implements IFuncion
 						funcionario.getCreateUser(), processId, null);
 
 		insertCount +=
-				EventosDACD.maintainEventosAssociations(funcionario.getEventosList(), response, insertCount, null,
+				EventosDACD.maintainEventoPessoaAssociations(funcionario.getEventosList(), response, insertCount, null,
 						null,
 						null, getEventosDAC(), getStatusDAC(), getHistoricoDAC(), funcionario.getEmprId(),
 						funcionario.getCreateUser(), processId, null);
@@ -387,7 +387,7 @@ public class FuncionarioDACImpl extends SqlSessionDaoSupport implements IFuncion
 						funcionario.getCreateUser(), processId, null);
 
 		updateCount +=
-				EventosDACD.maintainEventosAssociations(funcionario.getEventosList(), response, updateCount, null,
+				EventosDACD.maintainEventoPessoaAssociations(funcionario.getEventosList(), response, updateCount, null,
 						null,
 						null, getEventosDAC(), getStatusDAC(), getHistoricoDAC(), funcionario.getEmprId(),
 						funcionario.getCreateUser(), processId, null);

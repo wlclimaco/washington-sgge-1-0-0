@@ -1,11 +1,14 @@
 package com.prosperitasglobal.sendsolv.dac;
 
-import java.util.List;
-
-import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
 import com.prosperitasglobal.sendsolv.model.Cfop;
+import com.prosperitasglobal.sendsolv.model.CfopPessoa;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.qat.framework.model.response.InternalResultsResponse;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface ICfopDAC.
+ */
 public interface ICfopDAC
 {
 	/**
@@ -15,7 +18,7 @@ public interface ICfopDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer updateCfop(Cfop cfop, InternalResultsResponse<?> response);
+	public Integer updateCfop(Cfop cfop);
 
 	/**
 	 * Insert cfop.
@@ -25,7 +28,7 @@ public interface ICfopDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer insertCfop(Cfop cfop, String statementName, InternalResultsResponse<?> response);
+	public Integer insertCfop(Cfop cfop);
 
 	/**
 	 * Delete business cfop.
@@ -34,25 +37,7 @@ public interface ICfopDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer deleteBusinessCfop(Cfop cfop, InternalResultsResponse<?> response);
-
-	/**
-	 * Delete person cfop.
-	 *
-	 * @param cfop the cfop
-	 * @param response the response
-	 * @return the integer
-	 */
-	public Integer deletePersonCfop(Cfop cfop, InternalResultsResponse<?> response);
-
-	/**
-	 * Fetch cfop by parent.
-	 *
-	 * @param parentId the parent id
-	 * @param parentType the parent type
-	 * @return the internal results response< cfop>
-	 */
-	public InternalResultsResponse<Cfop> fetchCfopByParent(Integer parentId, BusinessTypeEnum parentType);
+	public Integer deleteCfop(Cfop cfop);
 
 	/**
 	 * Fetch cfop by id.
@@ -63,15 +48,35 @@ public interface ICfopDAC
 	public InternalResultsResponse<Cfop> fetchCfopById(Integer id);
 
 	/**
-	 * Maintain cfop associations.
+	 * Fetch cfop by request.
 	 *
-	 * @param cfopList the cfop list
-	 * @param parentId the parent id
-	 * @param associateStatement the associate statement
-	 * @param response the response
+	 * @param request the request
+	 * @return the internal results response
+	 */
+	public InternalResultsResponse<Cfop> fetchCfopByRequest(PagedInquiryRequest request);
+
+	/**
+	 * Update cfop pessoa.
+	 *
+	 * @param cfop the cfop
 	 * @return the integer
 	 */
-	public Integer maintainCfopAssociations(List<Cfop> cfopList, Integer parentId,
-			String associateStatement,
-			InternalResultsResponse<?> response);
+	public Integer updateCfopPessoa(CfopPessoa cfop);
+
+	/**
+	 * Insert cfop.
+	 *
+	 * @param cfop the cfop
+	 * @return the integer
+	 */
+	public Integer insertCfopPessoa(CfopPessoa cfop);
+
+	/**
+	 * Delete business cfop.
+	 *
+	 * @param cfop the cfop
+	 * @return the integer
+	 */
+	public Integer deleteCfopPessoa(CfopPessoa cfop);
+
 }
