@@ -55,7 +55,7 @@
   <sql id="allMarcaProdValues">
   		#{parentId},
   		#{processId},
-  		#{marcaId},
+  		#{marcaId.id},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 

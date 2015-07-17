@@ -52,7 +52,7 @@
   <sql id="allSubGrupoProdValues">
   		#{parentId},
   		#{processId},
-  		#{subGrupoId},
+  		#{subGrupoId.id},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
