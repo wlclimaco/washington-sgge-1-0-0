@@ -77,7 +77,7 @@
 		b.saldo,
 		b.processId,
 		b.tabela,
-		b.agenciaId
+		b.agenciaId,
 		b.create_date,
       	b.create_user,
       	b.modify_date,

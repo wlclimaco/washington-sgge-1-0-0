@@ -205,8 +205,6 @@ public class BancoDACImpl extends SqlSessionDaoSupport implements IBancoDAC
 		{
 			return null;
 		}
-		// Next traverse the object graph and "maintain" the associations
-		insertCount += maintainBancoAssociations(banco, response);
 
 		// Finally, if something was inserted then add the Banco to the result.
 		if (insertCount > 0)
@@ -242,8 +240,6 @@ public class BancoDACImpl extends SqlSessionDaoSupport implements IBancoDAC
 		{
 			return null;
 		}
-		// Next traverse the object graph and "maintain" the associations
-		updateCount += maintainBancoAssociations(banco, response);
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)

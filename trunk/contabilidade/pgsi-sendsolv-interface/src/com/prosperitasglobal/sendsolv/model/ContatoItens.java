@@ -11,15 +11,13 @@ import com.prosperitasglobal.cbof.model.Note;
 @SuppressWarnings("serial")
 public class ContatoItens extends ModelCosmeDamiao
 {
+
 	/** The SendSolv id for the account. */
 	private Integer id;
 
-	/** The type of an account. */
+	private String texto;
+
 	private List<Note> noteList;
-
-	private Long DataContato;
-
-	private String nomeContato;
 
 	/**
 	 * Default constructor.
@@ -66,35 +64,19 @@ public class ContatoItens extends ModelCosmeDamiao
 	}
 
 	/**
-	 * @return the dataContato
+	 * @return the texto
 	 */
-	public Long getDataContato()
+	public String getTexto()
 	{
-		return DataContato;
+		return texto;
 	}
 
 	/**
-	 * @param dataContato the dataContato to set
+	 * @param texto the texto to set
 	 */
-	public void setDataContato(Long dataContato)
+	public void setTexto(String texto)
 	{
-		DataContato = dataContato;
-	}
-
-	/**
-	 * @return the nomeContato
-	 */
-	public String getNomeContato()
-	{
-		return nomeContato;
-	}
-
-	/**
-	 * @param nomeContato the nomeContato to set
-	 */
-	public void setNomeContato(String nomeContato)
-	{
-		this.nomeContato = nomeContato;
+		this.texto = texto;
 	}
 
 	/*
@@ -104,14 +86,13 @@ public class ContatoItens extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "ContatoItens [getId()=" + getId() + ", getNoteList()=" + getNoteList() + ", getDataContato()="
-				+ getDataContato() + ", getNomeContato()=" + getNomeContato() + ", getTabelaEnumValue()="
-				+ getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()="
-				+ getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()=" + getType()
-				+ ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()="
-				+ getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite() + ", getProcessId()="
-				+ getProcessId() + ", getUserId()=" + getUserId() + ", toString()=" + super.toString()
-				+ ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
+		return "ContatoItens [getId()=" + getId() + ", getNoteList()=" + getNoteList() + ", getTexto()=" + getTexto()
+				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
+				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
+				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
+				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
+				+ ", getProcessId()=" + getProcessId() + ", getUserId()=" + getUserId() + ", toString()="
+				+ super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
 				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
 				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
 				+ hashCode() + "]";

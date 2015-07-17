@@ -499,6 +499,7 @@ CONSTRAINT [pk_Convenio_id] PRIMARY KEY CLUSTERED
 DROP TABLE [dbo].[ConvenioPessoa];
 CREATE TABLE [dbo].[ConvenioPessoa](
 	[id]          	 [int] identity(1,1) NOT NULL,
+	[data]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[parentId] 	 	 [int] NOT NULL,
 	[convId]   	 [int] NOT NULL,
 	[processId]    [int] NULL,
@@ -2356,7 +2357,7 @@ CREATE TABLE [dbo].[condPagPessoa](
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
-CONSTRAINT [pk_formaPg_id] PRIMARY KEY CLUSTERED
+CONSTRAINT [pk_condPagPessoaPessoa_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
