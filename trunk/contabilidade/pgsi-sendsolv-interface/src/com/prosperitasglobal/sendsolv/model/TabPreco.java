@@ -10,6 +10,8 @@ public class TabPreco extends ModelCosmeDamiao
 	/** The SendSolv id for the account. */
 	private Integer id;
 
+	private Integer entidadeId;
+
 	/** The type of an account. */
 	private Long dataMarcacao;
 
@@ -145,6 +147,22 @@ public class TabPreco extends ModelCosmeDamiao
 		this.dataProFinal = dataProFinal;
 	}
 
+	/**
+	 * @return the entidadeId
+	 */
+	public Integer getEntidadeId()
+	{
+		return entidadeId;
+	}
+
+	/**
+	 * @param entidadeId the entidadeId to set
+	 */
+	public void setEntidadeId(Integer entidadeId)
+	{
+		this.entidadeId = entidadeId;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -152,16 +170,19 @@ public class TabPreco extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "TabPreco [getId()=" + getId() + ", getDataMarcacao()=" + getDataMarcacao() + ", getPrecoTypeEnum()="
-				+ getPrecoTypeEnum() + ", getValor()=" + getValor() + ", getDataProInicial()=" + getDataProInicial()
-				+ ", getDataProFinal()=" + getDataProFinal() + ", getTabelaEnumValue()=" + getTabelaEnumValue()
-				+ ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue()
-				+ ", getParentId()=" + getParentId() + ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType()
-				+ ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()="
-				+ getEmprId() + ", getSite()=" + getSite() + ", toString()=" + super.toString() + ", getModelAction()="
-				+ getModelAction() + ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()="
-				+ getCreateDateUTC() + ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()="
-				+ getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
+		return "TabPreco [getPrecoTypeEnumValue()=" + getPrecoTypeEnumValue() + ", getId()=" + getId()
+				+ ", getDataMarcacao()=" + getDataMarcacao() + ", getPrecoTypeEnum()=" + getPrecoTypeEnum()
+				+ ", getValor()=" + getValor() + ", getDataProInicial()=" + getDataProInicial()
+				+ ", getDataProFinal()=" + getDataProFinal() + ", getEntidadeId()=" + getEntidadeId()
+				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
+				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
+				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
+				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
+				+ ", getProcessId()=" + getProcessId() + ", getUserId()=" + getUserId() + ", getNotes()=" + getNotes()
+				+ ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()="
+				+ getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()="
+				+ getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + "]";
 	}
 
 }

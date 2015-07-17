@@ -1,6 +1,8 @@
 package com.prosperitasglobal.sendsolv.dac;
 
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.model.Tributacao;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
@@ -13,36 +15,47 @@ public interface ITributacaoDAC
 	 * Update tributacao.
 	 *
 	 * @param tributacao the tributacao
-	 * @param response the response
-	 * @return the integer
+	 * @return the internal results response< tributacao>
 	 */
-	public Integer updateTributacao(Tributacao tributacao, InternalResultsResponse<?> response);
+	public Integer updateTributacao(Tributacao tributacao);
 
 	/**
 	 * Insert tributacao.
 	 *
 	 * @param tributacao the tributacao
-	 * @param statementName the statement name
-	 * @param response the response
-	 * @return the integer
+	 * @return the internal results response< tributacao>
 	 */
-	public Integer insertTributacao(Tributacao tributacao, String statementName, InternalResultsResponse<?> response);
+	public Integer insertTributacao(Tributacao tributacao);
 
 	/**
-	 * Delete business tributacao.
+	 * Delete tributacao.
 	 *
 	 * @param tributacao the tributacao
-	 * @param response the response
-	 * @return the integer
+	 * @return the internal response
 	 */
-	public Integer deleteTributacao(Tributacao tributacao, InternalResultsResponse<?> response);
+	public Integer deleteTributacao(Tributacao tributacao);
 
 	/**
 	 * Fetch tributacao by id.
 	 *
-	 * @param id the id
+	 * @param request the request
+	 * @return the internal results response
+	 */
+	public InternalResultsResponse<Tributacao> fetchTributacaoById(FetchByIdRequest request);
+
+	/**
+	 * Fetch all tributacaos.
+	 *
 	 * @return the internal results response< tributacao>
 	 */
-	public InternalResultsResponse<Tributacao> fetchTributacaoById(Integer id);
+	public InternalResultsResponse<Tributacao> fetchAllTributacaos();
+
+	/**
+	 * Fetch tributacao by request.
+	 *
+	 * @param request the request
+	 * @return the internal results response< tributacao>
+	 */
+	public InternalResultsResponse<Tributacao> fetchTributacaoByRequest(PagedInquiryRequest request);
 
 }

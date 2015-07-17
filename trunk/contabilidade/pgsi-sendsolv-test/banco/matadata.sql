@@ -1234,7 +1234,9 @@ INSERT INTO [dbo].[classificacaoProd]
 /** ---------------------------------------------------------------*/
 DROP TABLE [dbo].[estoque];
 CREATE TABLE [dbo].[estoque](
-	[id]             [int] identity(1,1) NOT NULL,
+	[id]              [int] identity(1,1) NOT NULL,
+	[entidadeId]      [int]  NULL,
+	[empId]      [int]  NULL,
 	[prodId]          [int] NOT NULL,
 	[estoqueTypeEnum] [int] NOT NULL,
 	[processId]    [int] NULL,
@@ -1278,6 +1280,8 @@ DROP TABLE [dbo].[preco];
 CREATE TABLE [dbo].[preco](
 	[id]             [int] identity(1,1) NOT NULL,
 	[prodId]          [int] NOT NULL,
+	[empId]           [int] NOT NULL,
+	[entidadeId]      [int] NULL,
 	[precoTypeEnum]   [int] NOT NULL,
 	[dataMarcacao]    [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[valor]           [real] NOT NULL,
@@ -1649,6 +1653,10 @@ CREATE TABLE [dbo].[produto](
 	[pesoBruto]    [real]  NULL,
 	[pesoLiquido]  [real]  NULL,
 	[processId]    [int] NULL,
+	[marca]    [int] NULL,
+	[subgrupo]    [int] NULL,
+	[unimed]    [int] NULL,
+	[tributacao]    [int] NULL,
 	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),

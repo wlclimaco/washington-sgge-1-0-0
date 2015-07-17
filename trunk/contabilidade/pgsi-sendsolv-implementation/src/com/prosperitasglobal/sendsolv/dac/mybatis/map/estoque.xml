@@ -19,6 +19,9 @@
     <result property="estoqueTypeEnumValue" column="estoqueTypeEnum" />
    	<result property="ultimoMov" column="ultimoMov"/>
    	<result property="quant" column="quant"/>
+   	<result property="parentId" column="prodId" />
+   	<result property="emprId" column="emprId"/>
+   	<result property="entidadeId" column="entidadeId"/>
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
