@@ -28,20 +28,24 @@
 		<typeAlias alias="Arquivo"              					 type="com.prosperitasglobal.sendsolv.model.Arquivo"/>
 		<typeAlias alias="Agencia"              					 type="com.prosperitasglobal.sendsolv.model.Agencia"/>
 		<typeAlias alias="Banco"              				 		 type="com.prosperitasglobal.sendsolv.model.Banco"/>
+		<typeAlias alias="BancoPessoa"              		 		 type="com.prosperitasglobal.sendsolv.model.BancoPessoa"/>
 		<typeAlias alias="Beneficios"              				 	 type="com.prosperitasglobal.sendsolv.model.Beneficios"/>
 		<typeAlias alias="BeneficioPessoa"              		 	 type="com.prosperitasglobal.sendsolv.model.BeneficioPessoa"/>
 		<typeAlias alias="Cidade"              				 		 type="com.prosperitasglobal.sendsolv.model.Cidade"/>
 		<typeAlias alias="Cfop"              				 		 type="com.prosperitasglobal.sendsolv.model.Cfop"/>
+		<typeAlias alias="CfopPessoa"              			 		 type="com.prosperitasglobal.sendsolv.model.CfopPessoa"/>
 		<typeAlias alias="Classificacao"              				 type="com.prosperitasglobal.sendsolv.model.Classificacao"/>
 		<typeAlias alias="Cliente"              				 	 type="com.prosperitasglobal.sendsolv.model.Cliente"/>
 		<typeAlias alias="Cnae"              				 		 type="com.prosperitasglobal.sendsolv.model.Cnae"/>
 		<typeAlias alias="CondPag"              				 	 type="com.prosperitasglobal.sendsolv.model.CondPag"/>
+		<typeAlias alias="CondPagPessoa"            			 	 type="com.prosperitasglobal.sendsolv.model.CondPagPessoa"/>
 		<typeAlias alias="ConhecimentoTransporte"              		 type="com.prosperitasglobal.sendsolv.model.ConhecimentoTransporte"/>
 		<typeAlias alias="ContasPagar"              				 type="com.prosperitasglobal.sendsolv.model.ContasPagar"/>
 		<typeAlias alias="ContasReceber"              				 type="com.prosperitasglobal.sendsolv.model.ContasReceber"/>
 		<typeAlias alias="Contato"              				 	 type="com.prosperitasglobal.sendsolv.model.Contato"/>
 		<typeAlias alias="ContatoItens"              			 	 type="com.prosperitasglobal.sendsolv.model.ContatoItens"/>
 		<typeAlias alias="Convenio"              				 	 type="com.prosperitasglobal.sendsolv.model.Convenio"/>
+		<typeAlias alias="ConvenioPessoa"              			 	 type="com.prosperitasglobal.sendsolv.model.ConvenioPessoa"/>
 		<typeAlias alias="Cst"              				 		 type="com.prosperitasglobal.sendsolv.model.Cst"/>
 		<typeAlias alias="Custo"              				 		 type="com.prosperitasglobal.sendsolv.model.Custo"/>
 		<typeAlias alias="CustoItem"              				 	 type="com.prosperitasglobal.sendsolv.model.CustoItem"/>
@@ -56,6 +60,7 @@
 		<typeAlias alias="Field"              				 		 type="com.prosperitasglobal.sendsolv.model.Field"/>
 		<typeAlias alias="Financeiro"              				 	 type="com.prosperitasglobal.sendsolv.model.Financeiro"/>
 		<typeAlias alias="FormaPg"              				 	 type="com.prosperitasglobal.sendsolv.model.FormaPg"/>
+		<typeAlias alias="FormaPgPessoa"              			 	 type="com.prosperitasglobal.sendsolv.model.FormaPgPessoa"/>
 		<typeAlias alias="Fornecedor"              				 	 type="com.prosperitasglobal.sendsolv.model.Fornecedor"/>
 		<typeAlias alias="Funcionario"              				 type="com.prosperitasglobal.sendsolv.model.Funcionario"/>
 		<typeAlias alias="Grupo"              				 		 type="com.prosperitasglobal.sendsolv.model.Grupo"/>
@@ -84,6 +89,7 @@
 		<typeAlias alias="TabPreco"              				 	 type="com.prosperitasglobal.sendsolv.model.TabPreco"/>
 		<typeAlias alias="Process"              				 	 type="com.prosperitasglobal.sendsolv.model.Process"/>
 		<typeAlias alias="Produto"              			 		 type="com.prosperitasglobal.sendsolv.model.Produto"/>
+		<typeAlias alias="ProdutoPessoa"             		 		 type="com.prosperitasglobal.sendsolv.model.ProdutoPessoa"/>
 		<typeAlias alias="Profissao"              			 		 type="com.prosperitasglobal.sendsolv.model.Profissao"/>
 		<typeAlias alias="Regime"              				 		 type="com.prosperitasglobal.sendsolv.model.Regime"/>
 		<typeAlias alias="Rentabilidade"              		 		 type="com.prosperitasglobal.sendsolv.model.Rentabilidade"/>
