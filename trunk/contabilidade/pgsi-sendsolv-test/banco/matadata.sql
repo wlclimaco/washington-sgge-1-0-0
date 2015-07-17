@@ -909,9 +909,9 @@ INSERT INTO [dbo].[subgrupo]
 DROP TABLE [dbo].[subgrupoGrupo];
 CREATE TABLE [dbo].[subgrupoGrupo](
 	[id]             [int] identity(1,1) NOT NULL,
-	[grupoId]      [int] NOT NULL,
 	[subGrupoId]   [int] NOT NULL,
 	[processId]    [int] NULL,
+	[prodId]       [int] NOT NULL,
 	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),

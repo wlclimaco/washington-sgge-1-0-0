@@ -1,12 +1,12 @@
 package com.prosperitasglobal.sendsolv.dac.mybatis;
 
-import java.util.List;
-
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
 import com.prosperitasglobal.sendsolv.dac.ISubGrupoDAC;
 import com.prosperitasglobal.sendsolv.model.SubGrupo;
+import com.prosperitasglobal.sendsolv.model.SubGrupoProd;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.qat.framework.model.QATModel;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
@@ -17,56 +17,29 @@ import com.qat.framework.validation.ValidationUtil;
  */
 public class SubGrupoDACImpl extends SqlSessionDaoSupport implements ISubGrupoDAC
 {
-	/** The Constant CONTACT_NAMESPACE. */
-	private static final String CONTACT_NAMESPACE = "SubGrupoMap.";
+	/** The Constant UNIMED_NAMESPACE. */
+	private static final String UNIMED_NAMESPACE = "SubGrupoMap.";
 
-	/** The Constant CONTACT_STMT_UPDATE. */
-	private static final String CONTACT_STMT_UPDATE = CONTACT_NAMESPACE + "updateSubGrupo";
+	/** The Constant UNIMED_STMT_UPDATE. */
+	private static final String UNIMED_STMT_UPDATE = UNIMED_NAMESPACE + "updateSubGrupo";
 
-	/** The Constant CONTACT_STMT_UPDATE_PHONE. */
-	private static final String CONTACT_STMT_UPDATE_PHONE = CONTACT_NAMESPACE + "updatePhone";
+	/** The Constant UNIMED_STMT_DELETE_PERSON_UNIMED. */
+	private static final String UNIMED_STMT_DELETE = UNIMED_NAMESPACE + "deletePersonSubGrupo";
 
-	/** The Constant CONTACT_STMT_UPDATE_EMAIL. */
-	private static final String CONTACT_STMT_UPDATE_EMAIL = CONTACT_NAMESPACE + "updateEmail";
+	/** The Constant UNIMED_STMT_INSERT. */
+	private static final String UNIMED_STMT_INSERT = UNIMED_NAMESPACE + "insertSubGrupo";
 
-	/** The Constant CONTACT_STMT_UPDATE_ADDRESS. */
-	private static final String CONTACT_STMT_UPDATE_ADDRESS = CONTACT_NAMESPACE + "updateAddress";
+	/** The Constant UNIMED_STMT_UPDATE. */
+	private static final String UNIMED_PROD_STMT_UPDATE = UNIMED_NAMESPACE + "updateSubGrupoProd";
 
-	/** The Constant CONTACT_STMT_DELETE_BUSINESS_CONTACT. */
-	private static final String CONTACT_STMT_DELETE_BUSINESS_CONTACT = CONTACT_NAMESPACE + "deleteBusinessSubGrupo";
+	/** The Constant UNIMED_STMT_DELETE_PERSON_UNIMED. */
+	private static final String UNIMED_PROD_STMT_DELETE = UNIMED_NAMESPACE + "deletePersonSubGrupoProd";
 
-	/** The Constant CONTACT_STMT_DELETE_PERSON_CONTACT. */
-	private static final String CONTACT_STMT_DELETE_PERSON_CONTACT = CONTACT_NAMESPACE + "deletePersonSubGrupo";
+	/** The Constant UNIMED_STMT_INSERT. */
+	private static final String UNIMED_PROD_STMT_INSERT = UNIMED_NAMESPACE + "insertSubGrupoProd";
 
-	/** The Constant CONTACT_STMT_INSERT. */
-	private static final String CONTACT_STMT_INSERT = CONTACT_NAMESPACE + "insertSubGrupo";
-
-	/** The Constant CONTACT_STMT_INSERT_PHONE. */
-	private static final String CONTACT_STMT_INSERT_PHONE = CONTACT_NAMESPACE + "insertPhone";
-
-	/** The Constant CONTACT_STMT_INSERT_EMAIL. */
-	private static final String CONTACT_STMT_INSERT_EMAIL = CONTACT_NAMESPACE + "insertEmail";
-
-	/** The Constant CONTACT_STMT_INSERT_ADDRESS. */
-	private static final String CONTACT_STMT_INSERT_ADDRESS = CONTACT_NAMESPACE + "insertAddress";
-
-	/** The Constant CONTACT_STMT_FETCH_BY_BUSINESS_ID. */
-	private static final String CONTACT_STMT_FETCH_BY_BUSINESS_ID = CONTACT_NAMESPACE + "fetchSubGruposByBusinessId";
-
-	/** The Constant CONTACT_STMT_FETCH_BY_PERSON_ID. */
-	private static final String CONTACT_STMT_FETCH_BY_PERSON_ID = CONTACT_NAMESPACE + "fetchSubGruposByPersonId";
-
-	/** The Constant CONTACT_STMT_FETCH_BY_ID. */
-	private static final String CONTACT_STMT_FETCH_BY_ID = CONTACT_NAMESPACE + "fetchSubGruposById";
-
-	/** The Constant CONTACT_STMT_FETCH_EMAIL_VERSION. */
-	private static final String CONTACT_STMT_FETCH_EMAIL_VERSION = CONTACT_NAMESPACE + "fetchVersionNumberEmail";
-
-	/** The Constant CONTACT_STMT_FETCH_PHONE_VERSION. */
-	private static final String CONTACT_STMT_FETCH_PHONE_VERSION = CONTACT_NAMESPACE + "fetchVersionNumberPhone";
-
-	/** The Constant CONTACT_STMT_FETCH_ADDRESS_VERSION. */
-	private static final String CONTACT_STMT_FETCH_ADDRESS_VERSION = CONTACT_NAMESPACE + "fetchVersionNumberAddress";
+	/** The Constant UNIMED_STMT_FETCH_BY_ID. */
+	private static final String UNIMED_STMT_FETCH_BY_ID = UNIMED_NAMESPACE + "fetchSubGruposById";
 
 	/** The Constant LOG. */
 	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(SubGrupoDACImpl.class);
@@ -74,8 +47,7 @@ public class SubGrupoDACImpl extends SqlSessionDaoSupport implements ISubGrupoDA
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#insertSubGrupo(com.prosperitasglobal.cbof.model.SubGrupo
-	 * ,
+	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#insertSubGrupo(com.prosperitasglobal.cbof.model.SubGrupo,
 	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
@@ -83,7 +55,12 @@ public class SubGrupoDACImpl extends SqlSessionDaoSupport implements ISubGrupoDA
 	{
 		Integer insertCount = 0;
 		// First insert the root subGrupo data
-		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT, subGrupo, response);
+		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), UNIMED_STMT_INSERT, subGrupo, response);
+
+		// Associate with parent using statement name passed as parameter
+		insertCount +=
+				QATMyBatisDacHelper
+				.doInsert(getSqlSession(), statementName, subGrupo, response);
 
 		return insertCount;
 	}
@@ -97,14 +74,13 @@ public class SubGrupoDACImpl extends SqlSessionDaoSupport implements ISubGrupoDA
 	@Override
 	public Integer deleteSubGrupo(SubGrupo subGrupo, InternalResultsResponse<?> response)
 	{
-		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, subGrupo, response);
+		return QATMyBatisDacHelper.doRemove(getSqlSession(), UNIMED_STMT_DELETE, subGrupo, response);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#updateSubGrupo(com.prosperitasglobal.cbof.model.SubGrupo
-	 * ,
+	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#updateSubGrupo(com.prosperitasglobal.cbof.model.SubGrupo,
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
@@ -116,7 +92,7 @@ public class SubGrupoDACImpl extends SqlSessionDaoSupport implements ISubGrupoDA
 		if (!ValidationUtil.isNull(subGrupo.getModelAction())
 				&& (subGrupo.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
 		{
-			updateCount = QATMyBatisDacHelper.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE, subGrupo, response);
+			updateCount = QATMyBatisDacHelper.doUpdate(getSqlSession(), UNIMED_STMT_UPDATE, subGrupo, response);
 
 			if (updateCount == 1)
 			{
@@ -124,64 +100,75 @@ public class SubGrupoDACImpl extends SqlSessionDaoSupport implements ISubGrupoDA
 			}
 		}
 
-		updateCount +=
-				QATMyBatisDacHelper.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE_PHONE, subGrupo, response);
-
 		return updateCount;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.cbof.dac.ISubGrupoDAC#maintainSubGrupoAssociations(java.util.List,
-	 * java.lang.Integer,
-	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
+	 * @see com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#fetchSubGrupoById(java.lang.Integer)
 	 */
-	public Integer maintainSubGrupoAssociations(List<SubGrupo> subGrupoList, Integer parentId,
-			String associateStatement,
-			InternalResultsResponse<?> response)
+	@Override
+	public InternalResultsResponse<SubGrupo> fetchSubGrupoById(Integer id)
 	{
-		Integer count = 0;
-		// First Maintain SubGrupos
-		if (ValidationUtil.isNullOrEmpty(subGrupoList))
-		{
-			return count;
-		}
-		// For Each SubGrupo...
-		for (SubGrupo subGrupo : subGrupoList)
-		{
-			// Make sure we set the parent key
-			subGrupo.setParentId(parentId);
+		InternalResultsResponse<SubGrupo> response = new InternalResultsResponse<SubGrupo>();
 
-			if (ValidationUtil.isNull(subGrupo.getModelAction()))
-			{
-				continue;
-			}
-			switch (subGrupo.getModelAction())
-			{
-				case INSERT:
-					count += insertSubGrupo(subGrupo, associateStatement, response);
-					break;
-				case UPDATE:
-					count += updateSubGrupo(subGrupo, response);
-					break;
-				case DELETE:
-					count += deleteSubGrupo(subGrupo, response);
-					break;
-				default:
-					if (LOG.isDebugEnabled())
-					{
-						LOG.debug("ModelAction for Organization missing!");
-					}
-					break;
-			}
-		}
-		return count;
+		QATMyBatisDacHelper.doQueryForList(getSqlSession(), UNIMED_STMT_FETCH_BY_ID, id, response);
+
+		return response;
 	}
 
 	@Override
-	public InternalResultsResponse<SubGrupo> fetchSubGrupoById(Integer id)
+	public Integer deleteSubGrupoProd(SubGrupoProd subGrupo, InternalResultsResponse<?> response)
+	{
+		return QATMyBatisDacHelper.doRemove(getSqlSession(), UNIMED_PROD_STMT_DELETE, subGrupo, response);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#updateSubGrupo(com.prosperitasglobal.cbof.model.SubGrupo,
+	 * com.qat.framework.model.response.InternalResultsResponse)
+	 */
+	@Override
+	public Integer updateSubGrupoProd(SubGrupoProd subGrupo, InternalResultsResponse<?> response)
+	{
+		Integer updateCount = 0;
+
+		// First update the root if necessary.
+		if (!ValidationUtil.isNull(subGrupo.getModelAction())
+				&& (subGrupo.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
+		{
+			updateCount = QATMyBatisDacHelper.doUpdate(getSqlSession(), UNIMED_PROD_STMT_UPDATE, subGrupo, response);
+
+			if (updateCount == 1)
+			{
+				subGrupo.setModelAction(QATModel.PersistanceActionEnum.NONE);
+			}
+		}
+
+		return updateCount;
+	}
+
+	@Override
+	public Integer insertSubGrupoProd(SubGrupoProd subGrupo, String statementName, InternalResultsResponse<?> response)
+	{
+		Integer insertCount = 0;
+		// First insert the root subGrupo data
+		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), UNIMED_PROD_STMT_INSERT, subGrupo, response);
+
+		// Associate with parent using statement name passed as parameter
+		insertCount +=
+				QATMyBatisDacHelper
+				.doInsert(getSqlSession(), statementName, subGrupo, response);
+
+		return insertCount;
+	}
+
+	@Override
+	public InternalResultsResponse<SubGrupo> fetchSubGrupoByRequest(PagedInquiryRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }

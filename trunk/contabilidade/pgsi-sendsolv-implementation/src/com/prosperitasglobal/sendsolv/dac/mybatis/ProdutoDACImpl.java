@@ -31,6 +31,7 @@ import com.prosperitasglobal.sendsolv.dacd.mybatis.EstoqueDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.FornecedorDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.GrupoDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.MarcaDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PorcaoDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PrecoDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.RentabilidadeDACD;
@@ -781,7 +782,16 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	@Override
 	public InternalResultsResponse<Produto> fetchProdutoByRequest(ProdutoInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		InternalResultsResponse<Produto> response = new InternalResultsResponse<Produto>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, PRODUTO_STMT_FETCH_COUNT,
+				PRODUTO_STMT_FETCH_ALL_BY_REQUEST, response);
+		return response;
 	}
 }

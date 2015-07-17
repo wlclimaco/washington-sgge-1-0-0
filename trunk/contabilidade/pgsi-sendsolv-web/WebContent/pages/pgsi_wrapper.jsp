@@ -64,7 +64,7 @@
         </li>
 		<li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Produtos</span> <b class="caret"></b></a>
 		 <ul class="dropdown-menu">
-            <li><a href="icons.html">Produto</a></li>
+            <li><a href="produto" class="alist" data-title='Produto'>Produto</a></li>
             <li><a href="faq.html">Unidade Medida</a></li>
             <li><a href="pricing.html">Grupo</a></li>
 			<li><a href="pricing.html">Sub Grupo</a></li>
