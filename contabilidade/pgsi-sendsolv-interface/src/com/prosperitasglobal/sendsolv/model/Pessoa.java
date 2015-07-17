@@ -2,8 +2,6 @@ package com.prosperitasglobal.sendsolv.model;
 
 import java.util.List;
 
-import com.prosperitasglobal.cbof.model.Note;
-
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -45,8 +43,6 @@ public class Pessoa extends ModelCosmeDamiao
 
 	/** The Telefones. */
 	private List<Telefone> Telefones;
-
-	private List<Note> notes;
 
 	private List<BancoPessoa> bancos;
 
@@ -320,22 +316,6 @@ public class Pessoa extends ModelCosmeDamiao
 	public void setTelefones(List<Telefone> telefones)
 	{
 		Telefones = telefones;
-	}
-
-	/**
-	 * @return the notes
-	 */
-	public List<Note> getNotes()
-	{
-		return notes;
-	}
-
-	/**
-	 * @param notes the notes to set
-	 */
-	public void setNotes(List<Note> notes)
-	{
-		this.notes = notes;
 	}
 
 	/**

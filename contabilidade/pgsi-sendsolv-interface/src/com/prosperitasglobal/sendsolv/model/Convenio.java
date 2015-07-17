@@ -2,8 +2,6 @@ package com.prosperitasglobal.sendsolv.model;
 
 import java.util.List;
 
-import com.prosperitasglobal.cbof.model.Note;
-
 /**
  * The Class Document represents a generic formal business or personal document, such as driver's license or bylaws.
  */
@@ -23,8 +21,6 @@ public class Convenio extends ModelCosmeDamiao
 	private Double porcentagem;
 
 	private Double valor;
-
-	private List<Note> notes;
 
 	private List<CondPag> listCondPag;
 
@@ -142,22 +138,6 @@ public class Convenio extends ModelCosmeDamiao
 	public void setValor(Double valor)
 	{
 		this.valor = valor;
-	}
-
-	/**
-	 * @return the notes
-	 */
-	public List<Note> getNotes()
-	{
-		return notes;
-	}
-
-	/**
-	 * @param notes the notes to set
-	 */
-	public void setNotes(List<Note> notes)
-	{
-		this.notes = notes;
 	}
 
 	/**

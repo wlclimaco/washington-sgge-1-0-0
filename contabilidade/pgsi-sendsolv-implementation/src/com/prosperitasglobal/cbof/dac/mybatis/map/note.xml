@@ -4,7 +4,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="noteMap">
+<mapper namespace="NoteMap">
 
   <!-- Result maps describe the mapping between the columns returned
        from a query, and the class properties.  A result map isn't
@@ -92,6 +92,14 @@
 		WHERE b.parentId = #{id} and b.tabela = 23
 	</select>
 
+
+	 <select id="fetchNoteByContato" parameterType="Integer" resultMap="noteResult">
+		SELECT
+			b.id,
+			<include refid="allNoteColumns" />
+		FROM note1 b
+		WHERE b.parentId = #{id} and b.tabela = 33
+	</select>
 
 
 	<select id="fetchNoteByPersonId" parameterType="Integer" resultMap="noteResult">

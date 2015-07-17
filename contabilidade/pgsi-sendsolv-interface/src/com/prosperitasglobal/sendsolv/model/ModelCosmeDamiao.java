@@ -2,6 +2,7 @@ package com.prosperitasglobal.sendsolv.model;
 
 import java.util.List;
 
+import com.prosperitasglobal.cbof.model.Note;
 import com.qat.framework.model.QATModel;
 
 /**
@@ -29,6 +30,8 @@ public class ModelCosmeDamiao extends QATModel
 	private String userId;
 
 	private List<Status> statusList;
+
+	private List<Note> notes;
 
 	public Integer getTabelaEnumValue()
 	{
@@ -192,6 +195,22 @@ public class ModelCosmeDamiao extends QATModel
 		this.processId = processId;
 	}
 
+	/**
+	 * @return the notes
+	 */
+	public List<Note> getNotes()
+	{
+		return notes;
+	}
+
+	/**
+	 * @param notes the notes to set
+	 */
+	public void setNotes(List<Note> notes)
+	{
+		this.notes = notes;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -203,11 +222,11 @@ public class ModelCosmeDamiao extends QATModel
 				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
 				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
 				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
-				+ ", getProcessId()=" + getProcessId() + ", getUserId()=" + getUserId() + ", getModelAction()="
-				+ getModelAction() + ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()="
-				+ getCreateDateUTC() + ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()="
-				+ getModifyDateUTC() + ", toString()=" + super.toString() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + "]";
+				+ ", getProcessId()=" + getProcessId() + ", getUserId()=" + getUserId() + ", getNotes()=" + getNotes()
+				+ ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
+				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
+				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", toString()=" + super.toString() + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + "]";
 	}
 
 }

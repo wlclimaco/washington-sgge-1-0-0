@@ -61,17 +61,17 @@
 	<result property="modifyDateUTC" column="modify_date"/>
 	<association property="classificacao"    column="classificacao" select="ClassificaMap.fetchClassificacaoById"  />
 	<association property="uniMed"    column="uniMed" select="UniMedMap.fetchUniMedByProduto"  />
-	<association property="grupo"    column="grupo" select="RegimeMap.fetchRegimeByEmpresa"  />
-	<association property="subGrupo"    column="subGrupo" select="RegimeMap.fetchRegimeByEmpresa"  />
-	<association property="marca"    column="marca" select="RegimeMap.fetchRegimeByEmpresa"  />
-	<association property="tributacao"    column="tributacao" select="RegimeMap.fetchRegimeByEmpresa"  />
-	<collection property="estoqueList" column="id" select="ProdutoItemMap.fetchProdutoItemByProduto"/>
-	<collection property="precoList" column="id" select="ProdutoItemMap.fetchProdutoItemByProduto"/>
-	<collection property="custoList" column="id" select="ProdutoItemMap.fetchProdutoItemByProduto"/>
-	<collection property="porcaoList" column="id" select="ProdutoItemMap.fetchProdutoItemByProduto"/>
-	<collection property="rentabilidadeList" column="id" select="ProdutoItemMap.fetchProdutoItemByProduto"/>
-	<collection property="cfopList" column="id" select="ProdutoItemMap.fetchProdutoItemByProduto"/>
-	<collection property="fornecedorList" column="id" select="ProdutoItemMap.fetchProdutoItemByProduto"/>
+	<association property="grupo"    column="grupo" select="GrupoMap.fetchGrupoByProduto"  />
+	<association property="subGrupo"    column="subGrupo" select="SubGrupoMap.fetchSubGrupoByProduto"  />
+	<association property="marca"    column="marca" select="MarcaMap.fetchMarcaByProduto"  />
+<!-- 	<association property="tributacao"    column="tributacao" select="RegimeMap.fetchRegimeByEmpresa"  /> -->
+<!-- 	<collection property="estoqueList" column="id" select="ProdutoItemMap.fetchProdutoItemByProduto"/> -->
+<!-- 	<collection property="precoList" column="id" select="ProdutoItemMap.fetchProdutoItemByProduto"/> -->
+<!-- 	<collection property="custoList" column="id" select="ProdutoItemMap.fetchProdutoItemByProduto"/> -->
+<!-- 	<collection property="porcaoList" column="id" select="ProdutoItemMap.fetchProdutoItemByProduto"/> -->
+<!-- 	<collection property="rentabilidadeList" column="id" select="ProdutoItemMap.fetchProdutoItemByProduto"/> -->
+<!-- 	<collection property="cfopList" column="id" select="ProdutoItemMap.fetchProdutoItemByProduto"/> -->
+<!-- 	<collection property="fornecedorList" column="id" select="ProdutoItemMap.fetchProdutoItemByProduto"/> -->
 	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEmpresa"/>
 
   </resultMap>
