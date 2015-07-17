@@ -30,6 +30,17 @@
 	<result property="modifyDateUTC" column="modify_date"/>
   </resultMap>
 
+    <resultMap id="formaPgPessoaResult" type="FormaPgPessoa">
+    <result property="id" column="id" />
+	<result property="parentId" column="parentId"/>
+	<result property="processId" column="processId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+	<association property="formaPgId"    column="formaPgId" select="fetchBancoByBancoId"  />
+  </resultMap>
+
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
@@ -52,6 +63,23 @@
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
+    <sql id="allFormaPgPessoaColumns">
+		 b.parentId
+		,b.processId
+		,b.formaPgId
+      	,b.create_date
+      	,b.create_user
+      	,b.modify_date
+      	,b.modify_user
+  </sql>
+
+  <sql id="allFormaPgPessoaValues">
+  		 #{parentId},
+		 #{processId},
+		 #{formaPgId.id},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
   <!--
 		SQL Insert Statements.
  	-->
@@ -62,6 +90,24 @@
     VALUES (<include refid="allFormaPgValues" /> )
   </insert>
 
+    <insert id="insertFormaPgPessoa" parameterType="FormaPgPessoa" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO formaPgPessoa (
+		<include refid="allFormaPgPessoaColumns" />
+      )
+    VALUES (<include refid="allFormaPgPessoaValues" /> )
+  </insert>
+
+ <update id="updateFormaPgPessoa" parameterType="FormaPgPessoa">
+    UPDATE formaPg
+    	<set>
+    		<if test="parentId!= null">parentId = #{parentId},</if>
+	    	<if test="formaPgId.id!= null"> formaPgId=#{formaPgId.id},</if>
+			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
 
 	<!--
 		SQL Update Statements.
@@ -85,6 +131,10 @@
    -->
   <delete id="deleteFormaPgById" parameterType="Integer">
     	DELETE FROM formaPg WHERE id = #{id}
+  </delete>
+
+  <delete id="deleteFormaPgByIdPessoa" parameterType="Integer">
+    	DELETE FROM formaPgPessoa WHERE id = #{id}
   </delete>
 
 	<!--
@@ -111,10 +161,10 @@
     FROM formaPg b where b.id=#{id}  ORDER BY b.id ASC
   </select>
 
-      <select id="fetchAllFormaPgByPessoa" parameterType="Integer" resultMap="formaPgResult">
+      <select id="fetchFormaPgByPessoa" parameterType="Integer" resultMap="formaPgPessoaResult">
     SELECT b.id,
-	<include refid="allFormaPgColumns" />
-    FROM formaPg b where b.id= #{id}  ORDER BY b.id ASC
+	<include refid="allFormaPgPessoaColumns" />
+    FROM formaPgPessoa b where b.parentId= #{id}  ORDER BY b.id ASC
   </select>
 
 

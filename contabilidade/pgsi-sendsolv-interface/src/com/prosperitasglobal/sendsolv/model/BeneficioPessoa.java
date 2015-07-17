@@ -11,10 +11,7 @@ public class BeneficioPessoa extends ModelCosmeDamiao
 	private Integer id;
 
 	/** The description. */
-	private Integer benefId;
-
-	/** The codigo. */
-	private Integer pessoaId;
+	private Beneficios benefId;
 
 	/**
 	 * Default constructor.
@@ -44,4 +41,38 @@ public class BeneficioPessoa extends ModelCosmeDamiao
 		this.id = id;
 	}
 
+	/**
+	 * @return the benefId
+	 */
+	public Beneficios getBenefId()
+	{
+		return benefId;
+	}
+
+	/**
+	 * @param benefId the benefId to set
+	 */
+	public void setBenefId(Beneficios benefId)
+	{
+		this.benefId = benefId;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "BeneficioPessoa [getId()=" + getId() + ", getBenefId()=" + getBenefId() + ", getTabelaEnumValue()="
+				+ getTabelaEnumValue() + ", getTypeValue()="
+				+ getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId()
+				+ ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()="
+				+ getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId()
+				+ ", getSite()=" + getSite() + ", getProcessId()=" + getProcessId() + ", getUserId()=" + getUserId()
+				+ ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()="
+				+ getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()="
+				+ getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + "]";
+	}
 }

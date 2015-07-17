@@ -1,92 +1,76 @@
 package com.prosperitasglobal.sendsolv.dac;
 
-import java.util.List;
+import com.prosperitasglobal.sendsolv.model.Convenio;
+import com.prosperitasglobal.sendsolv.model.ConvenioPessoa;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.response.InternalResultsResponse;
 
+/**
+ * The Interface IConvenioDAC.
+ */
 public interface IConvenioDAC
 {
+
 	/**
 	 * Update convenio.
 	 *
 	 * @param convenio the convenio
-	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer updateConvenio(Convenio convenio, InternalResultsResponse<?> response);
+	public Integer updateConvenio(Convenio convenio);
 
 	/**
 	 * Insert convenio.
 	 *
 	 * @param convenio the convenio
-	 * @param statementName the statement name
-	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer insertConvenio(Convenio convenio, String statementName, InternalResultsResponse<?> response);
+	public Integer insertConvenio(Convenio convenio);
 
 	/**
-	 * Delete business convenio.
+	 * Delete convenio.
 	 *
 	 * @param convenio the convenio
-	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer deleteBusinessConvenio(Convenio convenio, InternalResultsResponse<?> response);
+	public Integer deleteConvenio(Convenio convenio);
 
 	/**
-	 * Delete person convenio.
+	 * Fetch empresa by request.
 	 *
-	 * @param convenio the convenio
-	 * @param response the response
-	 * @return the integer
+	 * @param request the request
+	 * @return the internal results response
 	 */
-	public Integer deletePersonConvenio(Convenio convenio, InternalResultsResponse<?> response);
-
-	/**
-	 * Fetch convenio by parent.
-	 *
-	 * @param parentId the parent id
-	 * @param parentType the parent type
-	 * @return the internal results response< convenio>
-	 */
-	public InternalResultsResponse<Convenio> fetchConvenioByParent(Integer parentId, BusinessTypeEnum parentType);
+	public InternalResultsResponse<Convenio> fetchConvenioByRequest(PagedInquiryRequest request);
 
 	/**
 	 * Fetch convenio by id.
 	 *
 	 * @param id the id
-	 * @return the internal results response< convenio>
+	 * @return the internal results response
 	 */
 	public InternalResultsResponse<Convenio> fetchConvenioById(Integer id);
 
 	/**
-	 * Maintain convenio associations.
+	 * Insert convenio pessoa.
 	 *
-	 * @param convenioList the convenio list
-	 * @param parentId the parent id
-	 * @param associateStatement the associate statement
-	 * @param response the response
+	 * @param convenio the convenio
 	 * @return the integer
 	 */
-	public Integer maintainConvenioAssociations(List<Convenio> convenioList, Integer parentId,
-			String associateStatement,
-			InternalResultsResponse<?> response);
-
 	public Integer insertConvenioPessoa(ConvenioPessoa convenio);
 
 	/**
-	 * Delete business convenio.
+	 * Delete convenio pessoa.
 	 *
 	 * @param convenio the convenio
-	 * @param response the response
 	 * @return the integer
 	 */
 	public Integer deleteConvenioPessoa(ConvenioPessoa convenio);
 
 	/**
-	 * Delete person convenio.
+	 * Update convenio pessoa.
 	 *
 	 * @param convenio the convenio
-	 * @param response the response
 	 * @return the integer
 	 */
 	public Integer updateConvenioPessoa(ConvenioPessoa convenio);

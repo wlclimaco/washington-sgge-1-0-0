@@ -66,7 +66,7 @@ public class Produto extends ModelCosmeDamiao
 
 	private List<Rentabilidade> rentabilidadeList;
 
-	private List<Cfop> cfopList;
+	private List<CfopPessoa> cfopList;
 
 	private List<Fornecedor> fornecedorList;
 
@@ -459,7 +459,7 @@ public class Produto extends ModelCosmeDamiao
 	/**
 	 * @return the cfopList
 	 */
-	public List<Cfop> getCfopList()
+	public List<CfopPessoa> getCfopList()
 	{
 		return cfopList;
 	}
@@ -467,7 +467,7 @@ public class Produto extends ModelCosmeDamiao
 	/**
 	 * @param cfopList the cfopList to set
 	 */
-	public void setCfopList(List<Cfop> cfopList)
+	public void setCfopList(List<CfopPessoa> cfopList)
 	{
 		this.cfopList = cfopList;
 	}

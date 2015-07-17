@@ -2,8 +2,19 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.Map;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
 import com.prosperitasglobal.sendsolv.dac.IBeneficiosDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
+import com.prosperitasglobal.sendsolv.model.BeneficioPessoa;
+import com.prosperitasglobal.sendsolv.model.Beneficios;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class BeneficiosDACImpl.
@@ -14,9 +25,6 @@ public class BeneficiosDACImpl extends SqlSessionDaoSupport implements IBenefici
 	/** The Constant EMPRESA_NAMESPACE. */
 	private static final String EMPRESA_NAMESPACE = "BeneficiosMap.";
 
-	/** The Constant CBOF_NAMESPACE. */
-	private static final String CBOF_NAMESPACE = "CBOFMap.";
-
 	/** The Constant EMPRESA_STMT_FETCH_COUNT. */
 	private static final String EMPRESA_STMT_FETCH_COUNT = EMPRESA_NAMESPACE + "fetchBeneficiosRowCount";
 
@@ -24,40 +32,14 @@ public class BeneficiosDACImpl extends SqlSessionDaoSupport implements IBenefici
 	private static final String EMPRESA_STMT_FETCH_ALL_BY_REQUEST = EMPRESA_NAMESPACE
 			+ "fetchAllBeneficiossByRequest";
 
-	/** The Constant EMPRESA_STMT_FETCH_BY_ID. */
-	private static final String EMPRESA_STMT_FETCH_BY_ID = EMPRESA_NAMESPACE + "fetchBeneficiosById";
-
 	/** The Constant EMPRESA_STMT_INSERT. */
 	private static final String EMPRESA_STMT_INSERT = EMPRESA_NAMESPACE + "insertBeneficios";
-
-	/** The Constant EMPRESA_STMT_ASSOC_ORG_TO_CONTACT. */
-	private static final String EMPRESA_STMT_ASSOC_ORG_TO_CONTACT = EMPRESA_NAMESPACE
-			+ "associateBeneficiosWithContact";
 
 	/** The Constant EMPRESA_STMT_UPDATE. */
 	private static final String EMPRESA_STMT_UPDATE = EMPRESA_NAMESPACE + "updateBeneficios";
 
 	/** The Constant EMPRESA_STMT_DELETE. */
 	private static final String EMPRESA_STMT_DELETE = EMPRESA_NAMESPACE + "deleteBeneficiosById";
-
-	/** The Constant EMPRESA_DOCUMENT_STMT_UPDATE. */
-	private static final String EMPRESA_DOCUMENT_STMT_UPDATE = EMPRESA_NAMESPACE
-			+ "updateBeneficiosDocument";
-
-	/** The Constant EMPRESA_STMT_ASSOC_ORG_TO_DOCUMENT. */
-	private static final String EMPRESA_STMT_ASSOC_ORG_TO_DOCUMENT = EMPRESA_NAMESPACE
-			+ "associateBeneficiosWithDocument";
-
-	/** The Constant EMPRESA_STMT_DELETE_DOCUMENT. */
-	private static final String EMPRESA_STMT_DELETE_DOCUMENT = EMPRESA_NAMESPACE
-			+ "deleteBeneficiosDocument";
-
-	/** The Constant STMT_VERSION. */
-	private static final String EMPRESA_STMT_VERSION = EMPRESA_NAMESPACE + "fetchVersionNumber";
-
-	/** The Constant EMPRESA_STMT_UPDATE_EMPRESA_STATUS. */
-	private static final String EMPRESA_STMT_UPDATE_EMPRESA_STATUS = CBOF_NAMESPACE
-			+ "updateBusinessStatus";
 
 	/** The Constant LOG. */
 	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(BeneficiosDACImpl.class);
@@ -194,14 +176,6 @@ public class BeneficiosDACImpl extends SqlSessionDaoSupport implements IBenefici
 	}
 
 	@Override
-	public com.prosperitasglobal.sendsolv.dac.InternalResultsResponse<com.prosperitasglobal.sendsolv.dac.Beneficios> fetchBeneficiosByRequest(
-			com.prosperitasglobal.sendsolv.dac.PagedInquiryRequest request)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public Integer updateBeneficioPessoa(BeneficioPessoa beneficios)
 	{
 		Integer updateCount = 0;
@@ -252,13 +226,6 @@ public class BeneficiosDACImpl extends SqlSessionDaoSupport implements IBenefici
 	}
 
 	@Override
-	public InternalResultsResponse<Beneficios> fetchBeneficiosByRequest(PagedInquiryRequest request)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public Integer deleteBeneficioPessoa(BeneficioPessoa beneficios)
 	{
 		InternalResponse response = new InternalResponse();
@@ -272,4 +239,5 @@ public class BeneficiosDACImpl extends SqlSessionDaoSupport implements IBenefici
 			return 1;
 		}
 	}
+
 }

@@ -1,7 +1,5 @@
 package com.prosperitasglobal.sendsolv.model;
 
-import java.util.List;
-
 /**
  * The Class Document represents a generic formal business or personal document, such as driver's license or bylaws.
  */
@@ -20,10 +18,11 @@ public class BancoPessoa extends ModelCosmeDamiao
 
 	private Agencia agenciaId;
 
-	public BancoPessoa(Integer id)
+	public BancoPessoa(Integer id, PersistanceActionEnum mode)
 	{
 		super();
 		this.id = id;
+		setModelAction(mode);
 	}
 
 	/**
@@ -35,8 +34,6 @@ public class BancoPessoa extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the id.
-	 *
 	 * @return the id
 	 */
 	public Integer getId()
@@ -45,9 +42,7 @@ public class BancoPessoa extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Sets the id.
-	 *
-	 * @param id the id
+	 * @param id the id to set
 	 */
 	public void setId(Integer id)
 	{
@@ -55,35 +50,67 @@ public class BancoPessoa extends ModelCosmeDamiao
 	}
 
 	/**
-	 * @return the nome
+	 * @return the numCont
 	 */
-	public String getNome()
+	public String getNumCont()
 	{
-		return nome;
+		return numCont;
 	}
 
 	/**
-	 * @param nome the nome to set
+	 * @param numCont the numCont to set
 	 */
-	public void setNome(String nome)
+	public void setNumCont(String numCont)
 	{
-		this.nome = nome;
+		this.numCont = numCont;
 	}
 
 	/**
-	 * @return the agenciaList
+	 * @return the saldo
 	 */
-	public List<Agencia> getAgenciaList()
+	public Double getSaldo()
 	{
-		return agenciaList;
+		return saldo;
 	}
 
 	/**
-	 * @param agenciaList the agenciaList to set
+	 * @param saldo the saldo to set
 	 */
-	public void setAgenciaList(List<Agencia> agenciaList)
+	public void setSaldo(Double saldo)
 	{
-		this.agenciaList = agenciaList;
+		this.saldo = saldo;
+	}
+
+	/**
+	 * @return the bancoId
+	 */
+	public Banco getBancoId()
+	{
+		return bancoId;
+	}
+
+	/**
+	 * @param bancoId the bancoId to set
+	 */
+	public void setBancoId(Banco bancoId)
+	{
+		this.bancoId = bancoId;
+	}
+
+	/**
+	 * @return the agenciaId
+	 */
+	public Agencia getAgenciaId()
+	{
+		return agenciaId;
+	}
+
+	/**
+	 * @param agenciaId the agenciaId to set
+	 */
+	public void setAgenciaId(Agencia agenciaId)
+	{
+		this.agenciaId = agenciaId;
 	}
 
 	/*
@@ -93,15 +120,16 @@ public class BancoPessoa extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Banco [getId()=" + getId() + ", getNome()=" + getNome() + ", getAgenciaList()=" + getAgenciaList()
-				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
-				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
-				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
-				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
-				+ ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()="
-				+ getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()="
-				+ getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + "]";
+		return "BancoPessoa [getId()=" + getId() + ", getNumCont()=" + getNumCont() + ", getSaldo()=" + getSaldo()
+				+ ", getBancoId()=" + getBancoId() + ", getAgenciaId()=" + getAgenciaId() + ", getTabelaEnumValue()="
+				+ getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()="
+				+ getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()=" + getType()
+				+ ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()="
+				+ getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite() + ", getProcessId()="
+				+ getProcessId() + ", getUserId()=" + getUserId() + ", toString()=" + super.toString()
+				+ ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
+				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
+				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + "]";
 	}
-
 }

@@ -16,8 +16,23 @@
 	<result property="dataFin" column="dataFin"/>
 	<result property="porcentagem" column="porcentagem"/>
 	<result property="valor" column="valor"/>
-	<collection property="notes" column="business_id" select="FrequencyEventMap.fetchFrequencyByConvenioId"/>
+   <result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+	<collection property="notes" column="id" select="FrequencyEventMap.fetchFrequencyByConvenioId"/>
 	<collection property="listCondPag" column="id" select="CondPagMap.fetchCondPagByConvenioId"/>
+  </resultMap>
+
+    <resultMap id="convenioPessoaResult" type="ConvenioPessoa" >
+    <result property="id" column="id" />
+    <result property="parentId" column="parentId" />
+   	<result property="data" column="data"/>
+    <result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+	<association property="convId"    column="convId" select="fetchConvenioById"  />
   </resultMap>
 
   <!--
@@ -44,7 +59,8 @@
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
   <sql id="allConvenioPessoaColumns">
-	 b.parentId
+	 b.data
+	,b.parentId
 	,b.convId
 	,b.processId
 	,b.create_date
@@ -54,8 +70,9 @@
   </sql>
 
   <sql id="allConvenioPessoaValues">
+	#{data},
 	#{parentId},
-	#{convId},
+	#{convId.id},
 	#{processId},
 	<include refid="CBOFMap.changeControlFields"/>
   </sql>
@@ -101,7 +118,7 @@
     UPDATE convenioPessoa
     	<set>
     		<if test="parentId!= null">parentId = #{parentId},</if>
-	    	<if test="convId!= null"> convId=#{convId},</if>
+	    	<if test="convId.id!= null"> convId=#{convId.id},</if>
 			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
@@ -151,10 +168,10 @@
   </select>
 
 
-<select id="fetchConvenioByPerson" parameterType="Integer" resultMap="convenioResult">
+<select id="fetchConvenioByPerson" parameterType="Integer" resultMap="convenioPessoaResult">
 	 SELECT b.id,
-	<include refid="allConvenioColumns" />
-    FROM convenio b where id = #{id} ORDER BY id ASC
+	<include refid="allConvenioPessoaColumns" />
+    FROM convenioPessoa b where b.parentId = #{id} ORDER BY b.id ASC
   </select>
 
 

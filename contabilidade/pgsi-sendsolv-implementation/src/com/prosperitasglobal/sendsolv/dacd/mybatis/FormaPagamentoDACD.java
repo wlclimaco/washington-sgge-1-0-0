@@ -10,6 +10,7 @@ import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
 import com.prosperitasglobal.sendsolv.model.AcaoEnum;
 import com.prosperitasglobal.sendsolv.model.FormaPg;
+import com.prosperitasglobal.sendsolv.model.FormaPgPessoa;
 import com.prosperitasglobal.sendsolv.model.Status;
 import com.prosperitasglobal.sendsolv.model.StatusEnum;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
@@ -37,11 +38,11 @@ public final class FormaPagamentoDACD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainFormaPgAssociations(List<FormaPg> formaPgList,
+	public static Integer maintainFormaPgAssociations(List<FormaPgPessoa> formaPgList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, IFormaPagamentoDAC formaPgDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
 			Integer empId,
-			String UserId, Integer processId)
+			String UserId, Integer processId, Integer historicoId)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
@@ -50,10 +51,11 @@ public final class FormaPagamentoDACD extends SqlSessionDaoSupport
 			return count;
 		}
 		// For Each Contact...
-		for (FormaPg formaPg : formaPgList)
+		for (FormaPgPessoa formaPg : formaPgList)
 		{
 			// Make sure we set the parent key
 			formaPg.setParentId(parentId);
+			formaPg.setProcessId(processId);
 
 			if (ValidationUtil.isNull(formaPg.getModelAction()))
 			{
@@ -62,8 +64,7 @@ public final class FormaPagamentoDACD extends SqlSessionDaoSupport
 			switch (formaPg.getModelAction())
 			{
 				case INSERT:
-					count = formaPgDAC.insertFormaPg(formaPg,
-							"insertFormaPg", response);
+					count = formaPgDAC.insertFormaPgPessoa(formaPg);
 					if (count > 0)
 					{
 						Status status = new Status();
@@ -76,18 +77,18 @@ public final class FormaPagamentoDACD extends SqlSessionDaoSupport
 					}
 					break;
 				case UPDATE:
-					count = formaPgDAC.updateFormaPg(formaPg, response);
+					count = formaPgDAC.updateFormaPgPessoa(formaPg);
 					if (count > 0)
 					{
 						count =
 								StatusDACD
-										.maintainStatusAssociations(formaPg.getStatusList(), response, formaPg.getId(),
-												null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
-												historicoDAC, processId, null);
+								.maintainStatusAssociations(formaPg.getStatusList(), response, formaPg.getId(),
+										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
+										historicoDAC, processId, null);
 					}
 					break;
 				case DELETE:
-
+					count = formaPgDAC.deleteFormaPgPessoa(formaPg);
 					Status status = new Status();
 					status.setStatus(StatusEnum.INACTIVE);
 					List<Status> statusList = new ArrayList<Status>();
@@ -97,7 +98,72 @@ public final class FormaPagamentoDACD extends SqlSessionDaoSupport
 									processId, null);
 
 					break;
+				case NONE:
+					count = maintainBancoAssociationsA(formaPg.getFormaPgId(), response, null, null,
+							null,
+							TabelaEnum.PESSOA, formaPgDAC, statusDAC, historicoDAC, formaPg.getEmprId(),
+							formaPg.getCreateUser(), processId, historicoId);
+					break;
 			}
+		}
+
+		return count;
+	}
+
+	public static Integer maintainBancoAssociationsA(FormaPg formaPg,
+			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
+			TabelaEnum tabelaEnum, IFormaPagamentoDAC formaPgDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
+			Integer empId,
+			String UserId, Integer processId, Integer historicoId)
+	{
+
+		Integer count = 0;
+		// First Maintain Empresa
+		if (ValidationUtil.isNull(formaPg))
+		{
+			return count;
+		}
+
+		// Make sure we set the parent key
+		formaPg.setParentId(parentId);
+		formaPg.setProcessId(processId);
+
+		switch (formaPg.getModelAction())
+		{
+			case INSERT:
+				count = formaPgDAC.insertFormaPg(formaPg);
+				if (count > 0)
+				{
+					Status status = new Status();
+					status.setStatus(StatusEnum.ACTIVE);
+					List<Status> statusList = new ArrayList<Status>();
+					count =
+							StatusDACD.maintainStatusAssociations(statusList, response, formaPg.getId(), null,
+									AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
+									processId, historicoId);
+				}
+				break;
+			case UPDATE:
+				count = formaPgDAC.updateFormaPg(formaPg);
+				if (count > 0)
+				{
+					count =
+							StatusDACD
+							.maintainStatusAssociations(formaPg.getStatusList(), response, formaPg.getId(),
+									null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
+									historicoDAC, processId, historicoId);
+				}
+				break;
+			case DELETE:
+				Status status = new Status();
+				status.setStatus(StatusEnum.INACTIVE);
+				List<Status> statusList = new ArrayList<Status>();
+				count =
+						StatusDACD.maintainStatusAssociations(statusList, response, formaPg.getId(), null,
+								AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
+								processId, historicoId);
+
+				break;
 		}
 
 		return count;
