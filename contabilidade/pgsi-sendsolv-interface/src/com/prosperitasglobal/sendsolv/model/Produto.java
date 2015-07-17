@@ -38,15 +38,15 @@ public class Produto extends ModelCosmeDamiao
 	private Classificacao classificacao;
 
 	/** The top. */
-	private UniMed uniMed;
+	private UniMedProd uniMed;
 
 	/** The width. */
-	private Grupo grupo;
+	private GrupoProd grupo;
 
 	/** The height. */
-	private SubGrupo subGrupo;
+	private SubGrupoProd subGrupo;
 
-	private Marca marca;
+	private MarcaProd marca;
 
 	private Double pesoBruto;
 
@@ -267,7 +267,7 @@ public class Produto extends ModelCosmeDamiao
 	/**
 	 * @return the uniMed
 	 */
-	public UniMed getUniMed()
+	public UniMedProd getUniMed()
 	{
 		return uniMed;
 	}
@@ -275,7 +275,7 @@ public class Produto extends ModelCosmeDamiao
 	/**
 	 * @param uniMed the uniMed to set
 	 */
-	public void setUniMed(UniMed uniMed)
+	public void setUniMed(UniMedProd uniMed)
 	{
 		this.uniMed = uniMed;
 	}
@@ -283,7 +283,7 @@ public class Produto extends ModelCosmeDamiao
 	/**
 	 * @return the grupo
 	 */
-	public Grupo getGrupo()
+	public GrupoProd getGrupo()
 	{
 		return grupo;
 	}
@@ -291,7 +291,7 @@ public class Produto extends ModelCosmeDamiao
 	/**
 	 * @param grupo the grupo to set
 	 */
-	public void setGrupo(Grupo grupo)
+	public void setGrupo(GrupoProd grupo)
 	{
 		this.grupo = grupo;
 	}
@@ -299,7 +299,7 @@ public class Produto extends ModelCosmeDamiao
 	/**
 	 * @return the subGrupo
 	 */
-	public SubGrupo getSubGrupo()
+	public SubGrupoProd getSubGrupo()
 	{
 		return subGrupo;
 	}
@@ -307,7 +307,7 @@ public class Produto extends ModelCosmeDamiao
 	/**
 	 * @param subGrupo the subGrupo to set
 	 */
-	public void setSubGrupo(SubGrupo subGrupo)
+	public void setSubGrupo(SubGrupoProd subGrupo)
 	{
 		this.subGrupo = subGrupo;
 	}
@@ -315,7 +315,7 @@ public class Produto extends ModelCosmeDamiao
 	/**
 	 * @return the marca
 	 */
-	public Marca getMarca()
+	public MarcaProd getMarca()
 	{
 		return marca;
 	}
@@ -323,9 +323,25 @@ public class Produto extends ModelCosmeDamiao
 	/**
 	 * @param marca the marca to set
 	 */
-	public void setMarca(Marca marca)
+	public void setMarca(MarcaProd marca)
 	{
 		this.marca = marca;
+	}
+
+	/**
+	 * @return the modoUso
+	 */
+	public String getModoUso()
+	{
+		return modoUso;
+	}
+
+	/**
+	 * @param modoUso the modoUso to set
+	 */
+	public void setModoUso(String modoUso)
+	{
+		this.modoUso = modoUso;
 	}
 
 	/**
@@ -500,7 +516,7 @@ public class Produto extends ModelCosmeDamiao
 				+ ", getProduto()=" + getProduto() + ", getAplicacao()=" + getAplicacao() + ", getLocalizacao()="
 				+ getLocalizacao() + ", getDataValidade()=" + getDataValidade() + ", getComissao()=" + getComissao()
 				+ ", getFracao()=" + getFracao() + ", getUniMed()=" + getUniMed() + ", getGrupo()=" + getGrupo()
-				+ ", getSubGrupo()=" + getSubGrupo() + ", getMarca()=" + getMarca()
+				+ ", getSubGrupo()=" + getSubGrupo() + ", getMarca()=" + getMarca() + ", getModoUso()=" + getModoUso()
 				+ ", getPesoBruto()=" + getPesoBruto() + ", getPesoLiquido()=" + getPesoLiquido()
 				+ ", getTributacao()=" + getTributacao() + ", getEstoqueList()=" + getEstoqueList()
 				+ ", getPrecoList()=" + getPrecoList() + ", getCustoList()=" + getCustoList() + ", getPorcaoList()="
@@ -509,7 +525,8 @@ public class Produto extends ModelCosmeDamiao
 				+ getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()="
 				+ getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()=" + getType()
 				+ ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()="
-				+ getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite() + ", toString()="
+				+ getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite() + ", getProcessId()="
+				+ getProcessId() + ", getUserId()=" + getUserId() + ", getNotes()=" + getNotes() + ", toString()="
 				+ super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
 				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
 				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="

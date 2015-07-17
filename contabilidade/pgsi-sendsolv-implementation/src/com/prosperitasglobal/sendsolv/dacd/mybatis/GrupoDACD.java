@@ -9,7 +9,7 @@ import com.prosperitasglobal.sendsolv.dac.IGrupoDAC;
 import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
 import com.prosperitasglobal.sendsolv.model.AcaoEnum;
-import com.prosperitasglobal.sendsolv.model.Grupo;
+import com.prosperitasglobal.sendsolv.model.GrupoProd;
 import com.prosperitasglobal.sendsolv.model.Status;
 import com.prosperitasglobal.sendsolv.model.StatusEnum;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
@@ -37,7 +37,7 @@ public final class GrupoDACD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainGrupoAssociations(Grupo grupo,
+	public static Integer maintainGrupoAssociations(GrupoProd grupo,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, IGrupoDAC grupoDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC, Integer empId,
 			String UserId, Integer processId)
@@ -55,7 +55,7 @@ public final class GrupoDACD extends SqlSessionDaoSupport
 		switch (grupo.getModelAction())
 		{
 			case INSERT:
-				count = grupoDAC.insertGrupo(grupo,
+				count = grupoDAC.insertGrupoProd(grupo,
 						"insertGrupo", response);
 				if (count > 0)
 				{
@@ -69,7 +69,7 @@ public final class GrupoDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case UPDATE:
-				count = grupoDAC.updateGrupo(grupo, response);
+				count = grupoDAC.updateGrupoProd(grupo, response);
 				if (count > 0)
 				{
 					count =
@@ -80,7 +80,7 @@ public final class GrupoDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case DELETE:
-
+				count = grupoDAC.deleteGrupoProd(grupo, response);
 				Status status = new Status();
 				status.setStatus(StatusEnum.INACTIVE);
 				List<Status> statusList = new ArrayList<Status>();

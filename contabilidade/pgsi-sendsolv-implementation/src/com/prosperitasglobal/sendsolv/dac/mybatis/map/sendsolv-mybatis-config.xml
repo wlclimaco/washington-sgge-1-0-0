@@ -21,6 +21,7 @@
 		<typeAlias alias="PessoaTypeEnum"							 	 type="com.prosperitasglobal.sendsolv.model.PessoaTypeEnum" />
 	    <typeAlias alias="EntidadeTypeEnum"							 	 type="com.prosperitasglobal.sendsolv.model.EntidadeTypeEnum" />
 		<typeAlias alias="PagedInquiryRequest"     						 type="com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest"/>
+		<typeAlias alias="ProdutoInquiryRequest"     					 type="com.prosperitasglobal.sendsolv.model.request.ProdutoInquiryRequest"/>
 
 
 

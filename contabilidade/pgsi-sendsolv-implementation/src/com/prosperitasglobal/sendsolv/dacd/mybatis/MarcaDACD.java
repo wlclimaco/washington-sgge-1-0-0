@@ -9,7 +9,7 @@ import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.IMarcaDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
 import com.prosperitasglobal.sendsolv.model.AcaoEnum;
-import com.prosperitasglobal.sendsolv.model.Marca;
+import com.prosperitasglobal.sendsolv.model.MarcaProd;
 import com.prosperitasglobal.sendsolv.model.Status;
 import com.prosperitasglobal.sendsolv.model.StatusEnum;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
@@ -37,7 +37,7 @@ public final class MarcaDACD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainMarcaAssociations(Marca marca,
+	public static Integer maintainMarcaAssociations(MarcaProd marca,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, IMarcaDAC marcaDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC, Integer empId,
 			String UserId, Integer processId)
@@ -55,7 +55,7 @@ public final class MarcaDACD extends SqlSessionDaoSupport
 		switch (marca.getModelAction())
 		{
 			case INSERT:
-				count = marcaDAC.insertMarca(marca,
+				count = marcaDAC.insertMarcaProd(marca,
 						"insertMarca", response);
 				if (count > 0)
 				{
@@ -69,18 +69,18 @@ public final class MarcaDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case UPDATE:
-				count = marcaDAC.updateMarca(marca, response);
+				count = marcaDAC.updateMarcaProd(marca, response);
 				if (count > 0)
 				{
 					count =
 							StatusDACD
-									.maintainStatusAssociations(marca.getStatusList(), response, marca.getId(),
-											null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
-											historicoDAC, processId, null);
+							.maintainStatusAssociations(marca.getStatusList(), response, marca.getId(),
+									null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
+									historicoDAC, processId, null);
 				}
 				break;
 			case DELETE:
-
+				count = marcaDAC.deleteMarcaProd(marca, response);
 				Status status = new Status();
 				status.setStatus(StatusEnum.INACTIVE);
 				List<Status> statusList = new ArrayList<Status>();

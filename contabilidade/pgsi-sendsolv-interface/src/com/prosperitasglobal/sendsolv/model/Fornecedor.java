@@ -10,21 +10,15 @@ import java.util.List;
 public class Fornecedor extends Pessoa
 {
 
+	private Integer id;
+
 	private List<CfopPessoa> listCfops;
 
 	private List<ProdutoPessoa> listProdutos;
 
-	/**
-	 * Default constructor.
-	 */
 	public Fornecedor()
 	{
 		super();
-	}
-
-	public Fornecedor(Integer id)
-	{
-		setId(id);
 	}
 
 	/**
@@ -59,6 +53,24 @@ public class Fornecedor extends Pessoa
 		this.listProdutos = listProdutos;
 	}
 
+	/**
+	 * @return the id
+	 */
+	@Override
+	public Integer getId()
+	{
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	@Override
+	public void setId(Integer id)
+	{
+		this.id = id;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -67,23 +79,23 @@ public class Fornecedor extends Pessoa
 	public String toString()
 	{
 		return "Fornecedor [getListCfops()=" + getListCfops() + ", getListProdutos()=" + getListProdutos()
-				+ ", getPessoaTypeEnumValue()=" + getPessoaTypeEnumValue() + ", getId()=" + getId() + ", getNome()="
+				+ ", getId()=" + getId() + ", getPessoaTypeEnumValue()=" + getPessoaTypeEnumValue() + ", getNome()="
 				+ getNome() + ", getNomePai()=" + getNomePai() + ", getNomeMae()=" + getNomeMae()
 				+ ", getNomeConjugue()=" + getNomeConjugue() + ", getEstadoCivil()=" + getEstadoCivil()
 				+ ", getDatanasc()=" + getDatanasc() + ", getFoto()=" + getFoto() + ", getPessoaTypeEnum()="
-				+ getPessoaTypeEnum() + ", getFormaPagamentoList()=" + getFormaPagamentoList() + ", getCondPagList()="
-				+ getCondPagList() + ", getContatoList()=" + getContatoList() + ", getSexo()=" + getSexo()
+				+ getPessoaTypeEnum() + ", getContatoList()=" + getContatoList() + ", getSexo()=" + getSexo()
 				+ ", getEnderecos()=" + getEnderecos() + ", getDocumentos()=" + getDocumentos() + ", getEmails()="
-				+ getEmails() + ", getTelefones()=" + getTelefones() + ", getNotes()=" + getNotes() + ", getBancos()="
-				+ getBancos() + ", toString()=" + super.toString() + ", getTabelaEnumValue()=" + getTabelaEnumValue()
+				+ getEmails() + ", getTelefones()=" + getTelefones() + ", getBancos()=" + getBancos()
+				+ ", getFormaPagamentoList()=" + getFormaPagamentoList() + ", getCondPagList()=" + getCondPagList()
+				+ ", toString()=" + super.toString() + ", getTabelaEnumValue()=" + getTabelaEnumValue()
 				+ ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue()
 				+ ", getParentId()=" + getParentId() + ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType()
 				+ ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()="
 				+ getEmprId() + ", getSite()=" + getSite() + ", getProcessId()=" + getProcessId() + ", getUserId()="
-				+ getUserId() + ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
-				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
-				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
-				+ hashCode() + "]";
+				+ getUserId() + ", getNotes()=" + getNotes() + ", getModelAction()=" + getModelAction()
+				+ ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC()
+				+ ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
 	}
 
 }
