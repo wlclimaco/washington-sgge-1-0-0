@@ -407,8 +407,6 @@ public class ClienteBaseController extends UtilControllerD
 		contatoItens.setNoteList(insertNote(modelAction));
 
 		Date a = new Date();
-		contatoItens.setDataContato(a.getTime());
-		contatoItens.setNomeContato("Maria de lourdes");
 
 		Contato contato = new Contato();
 		contato.setModelAction(modelAction);

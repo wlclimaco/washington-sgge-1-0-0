@@ -13,7 +13,7 @@ import com.prosperitasglobal.sendsolv.model.Status;
 import com.prosperitasglobal.sendsolv.model.StatusEnum;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
 import com.prosperitasglobal.sendsolv.model.TypeEnum;
-import com.prosperitasglobal.sendsolv.model.UniMed;
+import com.prosperitasglobal.sendsolv.model.UniMedProd;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
 
@@ -37,7 +37,7 @@ public final class UniMedDACD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainUniMedAssociations(UniMed uniMed,
+	public static Integer maintainUniMedAssociations(UniMedProd uniMed,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, IUniMedDAC uniMedDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
 			Integer empId,
@@ -60,7 +60,7 @@ public final class UniMedDACD extends SqlSessionDaoSupport
 		switch (uniMed.getModelAction())
 		{
 			case INSERT:
-				count = uniMedDAC.insertUniMed(uniMed,
+				count = uniMedDAC.insertUniMedProd(uniMed,
 						"insertUniMed", response);
 				if (count > 0)
 				{
@@ -74,7 +74,7 @@ public final class UniMedDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case UPDATE:
-				count = uniMedDAC.updateUniMed(uniMed, response);
+				count = uniMedDAC.updateUniMedProd(uniMed, response);
 				if (count > 0)
 				{
 					count =
@@ -85,7 +85,7 @@ public final class UniMedDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case DELETE:
-
+				count = uniMedDAC.deleteUniMedProd(uniMed, response);
 				Status status = new Status();
 				status.setStatus(StatusEnum.INACTIVE);
 				List<Status> statusList = new ArrayList<Status>();

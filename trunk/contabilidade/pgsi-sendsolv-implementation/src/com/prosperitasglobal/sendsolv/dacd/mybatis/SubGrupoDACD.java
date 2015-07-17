@@ -11,7 +11,7 @@ import com.prosperitasglobal.sendsolv.dac.ISubGrupoDAC;
 import com.prosperitasglobal.sendsolv.model.AcaoEnum;
 import com.prosperitasglobal.sendsolv.model.Status;
 import com.prosperitasglobal.sendsolv.model.StatusEnum;
-import com.prosperitasglobal.sendsolv.model.SubGrupo;
+import com.prosperitasglobal.sendsolv.model.SubGrupoProd;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
 import com.prosperitasglobal.sendsolv.model.TypeEnum;
 import com.qat.framework.model.response.InternalResultsResponse;
@@ -37,7 +37,7 @@ public final class SubGrupoDACD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainSubGrupoAssociations(SubGrupo subGrupo,
+	public static Integer maintainSubGrupoAssociations(SubGrupoProd subGrupo,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, ISubGrupoDAC subGrupoDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
 			Integer empId,
@@ -56,7 +56,7 @@ public final class SubGrupoDACD extends SqlSessionDaoSupport
 		switch (subGrupo.getModelAction())
 		{
 			case INSERT:
-				count = subGrupoDAC.insertSubGrupo(subGrupo,
+				count = subGrupoDAC.insertSubGrupoProd(subGrupo,
 						"insertSubGrupo", response);
 				if (count > 0)
 				{
@@ -70,7 +70,7 @@ public final class SubGrupoDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case UPDATE:
-				count = subGrupoDAC.updateSubGrupo(subGrupo, response);
+				count = subGrupoDAC.updateSubGrupoProd(subGrupo, response);
 				if (count > 0)
 				{
 					count =
@@ -82,7 +82,7 @@ public final class SubGrupoDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case DELETE:
-
+				count = subGrupoDAC.deleteSubGrupoProd(subGrupo, response);
 				Status status = new Status();
 				status.setStatus(StatusEnum.INACTIVE);
 				List<Status> statusList = new ArrayList<Status>();

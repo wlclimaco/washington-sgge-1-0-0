@@ -15,31 +15,9 @@
        exactly.
        -->
 
-  <resultMap id="funcionarioResult" type="Funcionario" >
-    <result property="id" column="id" />
+   <resultMap id="funcionarioResult" type="Funcionario" extends="PessoaMap.PessoaResult">
    	<result property="matricula" column="matricula"/>
    	<result property="dataAdm" column="dataAdmin"/>
-    <result property="emprId" column="cdEmpr" />
-   	<result property="nome" column="nome"/>
-	<result property="pessoaTypeEnumValue" column="type"/>
-	<result property="sexo" column="sexo"/>
-	<result property="datanasc" column="datanasc"/>
-	<result property="nomePai" column="nomePai"/>
-	<result property="nomeMae" column="nomeMae"/>
-	<result property="nomeConjugue" column="nomeConjugue"/>
-	<result property="estadoCivil" column="estadoCivil"/>
-	<result property="processId" column="processId"/>
-	<result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
-	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
-	<collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByPessoaId"/>
-	<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByPessoaId"/>
-	<collection property="emails" column="id" select="EmailMap.fetchAllEmailsByPessoaId"/>
-	<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByPessoaId"/>
-	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByPessoaId"/>
-	<collection property="convenioList" column="id" select="ConvenioMap.fetchConvenioByPerson"/>
-	<collection property="bancos" column="id" select="BancoMap.fetchBancoByPessoa"/>
 	<collection property="salarios" column="id" select="SalarioMap.fetchSalarioById"/>
 	<collection property="horarios" column="id" select="HoraFuncMap.fetchHoraFuncById"/>
 	<collection property="beneficios" column="id" select="BeneficiosMap.fetchFuncByBeneficios"/>
@@ -117,7 +95,7 @@
 		SQL Delete Statements.
    -->
   <delete id="deleteFuncionarioById" parameterType="Integer">
-    	DELETE FROM funcionario WHERE id = #{id}
+    	DELETE FROM pessoa WHERE id = #{id}
   </delete>
 
 	<!--
@@ -172,9 +150,6 @@
 				</choose>
   </select>
 
-  <select id="fetchVersionNumber" parameterType="Funcionario" resultType="int">
-	SELECT versn_lock_num FROM business WHERE business_id = #{id}
-  </select>
 
 
 </mapper>

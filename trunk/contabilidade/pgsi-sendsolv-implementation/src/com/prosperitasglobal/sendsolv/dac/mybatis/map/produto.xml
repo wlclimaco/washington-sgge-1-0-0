@@ -210,7 +210,7 @@
 	<!--
 		SQL Fetch Statements.
  	-->
-  <select id="fetchProdutoRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+  <select id="fetchProdutoRowCount" parameterType="ProdutoInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
         FROM produto
      WHERE 1 = 1
@@ -233,7 +233,7 @@
     ORDER BY id ASC
   </select>
 
-  <select id="fetchAllProdutosByRequest" parameterType="PagedInquiryRequest" resultMap="produtoResult">
+  <select id="fetchAllProdutosByRequest" parameterType="ProdutoInquiryRequest" resultMap="produtoResult">
 	 SELECT b.id,<include refid="allProdutoColumns" />
         FROM produto b
      WHERE 1 = 1

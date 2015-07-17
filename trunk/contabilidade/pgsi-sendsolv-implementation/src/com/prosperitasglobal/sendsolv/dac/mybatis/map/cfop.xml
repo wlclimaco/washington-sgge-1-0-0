@@ -42,7 +42,7 @@
 	<result property="modifyDateUTC" column="modify_date"/>
   </resultMap>
 
-    <resultMap id="cfopPessoaResult" type="CfopPessoa" >
+   <resultMap id="cfopPessoaResult" type="CfopPessoa" >
   	<result property="id" column="id" />
 	<result property="parentId" column="parentId" />
 	<result property="processId" column="processId" />
