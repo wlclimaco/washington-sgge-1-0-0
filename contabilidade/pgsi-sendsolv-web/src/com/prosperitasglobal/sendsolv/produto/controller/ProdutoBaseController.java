@@ -21,9 +21,9 @@ import com.prosperitasglobal.sendsolv.model.CustoItem;
 import com.prosperitasglobal.sendsolv.model.Estoque;
 import com.prosperitasglobal.sendsolv.model.EstoqueTypeEnum;
 import com.prosperitasglobal.sendsolv.model.Fornecedor;
-import com.prosperitasglobal.sendsolv.model.Grupo;
+import com.prosperitasglobal.sendsolv.model.GrupoProd;
 import com.prosperitasglobal.sendsolv.model.Incidencia;
-import com.prosperitasglobal.sendsolv.model.Marca;
+import com.prosperitasglobal.sendsolv.model.MarcaProd;
 import com.prosperitasglobal.sendsolv.model.Porcao;
 import com.prosperitasglobal.sendsolv.model.PorcaoItem;
 import com.prosperitasglobal.sendsolv.model.PrecoTypeEnum;
@@ -31,10 +31,11 @@ import com.prosperitasglobal.sendsolv.model.Produto;
 import com.prosperitasglobal.sendsolv.model.Rentabilidade;
 import com.prosperitasglobal.sendsolv.model.RentabilidadeItens;
 import com.prosperitasglobal.sendsolv.model.RentabilidadeTypeEnum;
-import com.prosperitasglobal.sendsolv.model.SubGrupo;
+import com.prosperitasglobal.sendsolv.model.SubGrupoProd;
 import com.prosperitasglobal.sendsolv.model.TabPreco;
 import com.prosperitasglobal.sendsolv.model.Tributacao;
 import com.prosperitasglobal.sendsolv.model.UniMed;
+import com.prosperitasglobal.sendsolv.model.UniMedProd;
 import com.prosperitasglobal.sendsolv.model.request.ProdutoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.response.ProdutoResponse;
 import com.qat.framework.model.QATModel.PersistanceActionEnum;
@@ -192,10 +193,10 @@ public class ProdutoBaseController extends UtilControllerD
 		produto.setPesoBruto(new Double(1.5));
 		produto.setPesoLiquido(new Double(1.2));
 		produto.setClassificacao(new Classificacao(1));
-		produto.setUniMed(new UniMed(1));
-		produto.setGrupo(new Grupo(1));
-		produto.setSubGrupo(new SubGrupo(1));
-		produto.setMarca(new Marca(1));
+		produto.setUniMed(new UniMedProd(1));
+		produto.setGrupo(new GrupoProd(1));
+		produto.setSubGrupo(new SubGrupoProd(1));
+		produto.setMarca(new MarcaProd(1));
 		produto.setTributacao(mockTributacao(model));
 		produto.setEstoqueList(mockEstoque(model));
 		produto.setPrecoList(mockPreco(model));
@@ -205,7 +206,7 @@ public class ProdutoBaseController extends UtilControllerD
 		produto.setCfopList(new ArrayList<CfopPessoa>());
 		produto.getCfopList().add(new CfopPessoa(1, PersistanceActionEnum.NONE));
 		produto.setFornecedorList(new ArrayList<Fornecedor>());
-		produto.getFornecedorList().add(new Fornecedor(1));
+		produto.getFornecedorList().add(new Fornecedor());
 
 		return produto;
 
