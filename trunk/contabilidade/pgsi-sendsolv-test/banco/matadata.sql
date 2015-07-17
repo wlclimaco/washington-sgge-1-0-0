@@ -1563,15 +1563,15 @@ INSERT INTO [dbo].[cfop]
 /** ---------------------------------------------------------------*/
 DROP TABLE [dbo].[CfopParentId];
 CREATE TABLE [dbo].[CfopParentId](
-	[id]             [int] identity(1,1) NOT NULL,
+	[id]              [int] identity(1,1) NOT NULL,
 	[idCfop]          [int] NOT NULL,
-	[prodId]		  [int] NOT NULL,
+	[parentId]		  [int] NOT NULL,
 	[processId]    [int] NULL,
 	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
-CONSTRAINT [pk_CfopProd_id] PRIMARY KEY CLUSTERED
+CONSTRAINT [pk_CfopParentId_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -2358,6 +2358,23 @@ CREATE TABLE [dbo].[condPagPessoa](
     [modify_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
 CONSTRAINT [pk_condPagPessoaPessoa_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+DROP TABLE [dbo].[produtoPessoa];
+CREATE TABLE [dbo].[produtoPessoa](
+	[id]          	    [int] identity(1,1) NOT NULL,
+	[parentId]         	[int] NULL,
+	[prodId]            [int] NULL,
+	[processId]         [int] NULL,
+	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_produtoPessoa_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]

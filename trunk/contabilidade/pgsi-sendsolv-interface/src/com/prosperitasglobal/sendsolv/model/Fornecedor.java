@@ -24,7 +24,6 @@ public class Fornecedor extends Pessoa
 
 	public Fornecedor(Integer id)
 	{
-		super();
 		setId(id);
 	}
 

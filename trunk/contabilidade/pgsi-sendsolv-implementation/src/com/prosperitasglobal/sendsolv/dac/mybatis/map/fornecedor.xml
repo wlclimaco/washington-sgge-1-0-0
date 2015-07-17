@@ -14,33 +14,9 @@
        necessary if the columns (or aliases) match to the properties
 	-->
 
-  <resultMap id="fornecedorResult" type="Fornecedor">
-
-   <result property="id" column="id" />
-    <result property="emprId" column="cdEmpr" />
-   	<result property="nome" column="nome"/>
-	<result property="pessoaTypeEnumValue" column="type"/>
-	<result property="sexo" column="sexo"/>
-	<result property="datanasc" column="datanasc"/>
-	<result property="nomePai" column="nomePai"/>
-	<result property="nomeMae" column="nomeMae"/>
-	<result property="nomeConjugue" column="nomeConjugue"/>
-	<result property="estadoCivil" column="estadoCivil"/>
-	<result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
-	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
-	<collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByPessoaId"/>
-	<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByPessoaId"/>
-	<collection property="emails" column="id" select="EmailMap.fetchAllEmailsByPessoaId"/>
-	<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByPessoaId"/>
-	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByPessoaId"/>
-	<collection property="bancos" column="id" select="BancoMap.fetchBancoByPessoa"/>
-	<collection property="contatoList" column="id" select="ContatoMap.fetchContatoByPessoa"/>
-	<collection property="listCfops" column="id" select="CfopMap.fetchCfopById"/>
-	<collection property="formaPagamentoList" column="id" select="FormaPgMap.fetchAllFormaPgByPessoa"/>
-	<collection property="notes" column="id" select="noteMap.fetchNoteByPessoa"/>
-<!-- 	<collection property="produtoList" column="id" select="ProdutoMap.fetchFuncByBeneficios"/> -->
+  <resultMap id="fornecedorResult" type="Fornecedor" extends="PessoaMap.PessoaResult">
+	<collection property="listCfops" column="id" select="CfopMap.fetchCfopByPessoa"/>
+    <collection property="produtoList" column="id" select="ProdutoMap.fetchProdutoByPessoa"/>
   </resultMap>
 
   <!--

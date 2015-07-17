@@ -42,6 +42,37 @@
 	<result property="modifyDateUTC" column="modify_date"/>
   </resultMap>
 
+    <resultMap id="cfopPessoaResult" type="CfopPessoa" >
+  	<result property="id" column="id" />
+	<result property="parentId" column="parentId" />
+	<result property="processId" column="processId" />
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+	<association property="idCfop"    column="idCfop" select="fetchCfopById"  />
+  </resultMap>
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+
+ <sql id="allCfopPessoaColumns">
+		,b.parentId"
+		,b.processId"
+		,b.idCfop"
+		,b.create_date
+      	,b.create_user
+      	,b.modify_date
+      	,b.modify_user
+  </sql>
+
+<sql id="allCfopPessoaValues">
+  		#{parentId},
+		#{processId},
+		#{idCfop.id},
+		<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
@@ -155,6 +186,15 @@
 
 		    ON F.id like C.Porcaoid
 		where  c.prodId = #{id}
+  </select>
+
+  <select id="fetchCfopByPessoa" parameterType="Integer" resultMap="cfopPessoaResult">
+	 SELECT b.id,<include refid="allCfopPessoaColumns" />
+        FROM CfopParentId b
+     WHERE 1 = 1
+     <if test="id != null">
+		  AND b.parentid = #{id}
+	 </if>
   </select>
 
 

@@ -177,23 +177,23 @@ public class NoteBAIImpl implements INoteBAI
 	 */
 	private InternalResponse doPersistanceNote(NoteMaintenanceRequest request, PersistanceActionEnum updateType)
 	{
-		switch (updateType)
-		{
-			case INSERT:
-				return getNoteDAC().insertNote(request.getNote());
-
-			case UPDATE:
-				return getNoteDAC().updateNote(request.getNote());
-
-			case DELETE:
-				return getNoteDAC().deleteNote(request.getNote());
-			default:
-				if (LOG.isDebugEnabled())
-				{
-					LOG.debug("updateType for Note missing!");
-				}
-				break;
-		}
+		// switch (updateType)
+		// {
+		// case INSERT:
+		// return getNoteDAC().insertNote(request.getNote());
+		//
+		// case UPDATE:
+		// return getNoteDAC().updateNote(request.getNote());
+		//
+		// case DELETE:
+		// return getNoteDAC().deleteNote(request.getNote());
+		// default:
+		// if (LOG.isDebugEnabled())
+		// {
+		// LOG.debug("updateType for Note missing!");
+		// }
+		// break;
+		// }
 
 		return null;
 	}
