@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProdutoMap">
+
+
+  <resultMap id="produtoResult" type="Produto" >
+    <result property="id" column="id" />
+   	<result property="parentId" column="prodId" />
+   	<result property="emprId" column="emprId"/>
+   	<result property="entidadeId" column="entidadeId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+  </resultMap>
+
+
+
+</mapper>

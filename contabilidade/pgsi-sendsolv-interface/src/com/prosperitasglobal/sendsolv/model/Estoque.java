@@ -110,6 +110,22 @@ public class Estoque extends ModelCosmeDamiao
 		this.quant = quant;
 	}
 
+	/**
+	 * @return the entidadeId
+	 */
+	public Integer getEntidadeId()
+	{
+		return entidadeId;
+	}
+
+	/**
+	 * @param entidadeId the entidadeId to set
+	 */
+	public void setEntidadeId(Integer entidadeId)
+	{
+		this.entidadeId = entidadeId;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -117,15 +133,18 @@ public class Estoque extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Estoque [getId()=" + getId() + ", getEstoqueTypeEnum()=" + getEstoqueTypeEnum() + ", getUltimoMov()="
-				+ getUltimoMov() + ", getQuant()=" + getQuant() + ", getTabelaEnumValue()=" + getTabelaEnumValue()
-				+ ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue()
-				+ ", getParentId()=" + getParentId() + ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType()
-				+ ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()="
-				+ getEmprId() + ", getSite()=" + getSite() + ", toString()=" + super.toString() + ", getModelAction()="
-				+ getModelAction() + ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()="
-				+ getCreateDateUTC() + ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()="
-				+ getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
+		return "Estoque [getEstoqueTypeEnumValue()=" + getEstoqueTypeEnumValue() + ", getId()=" + getId()
+				+ ", getEstoqueTypeEnum()=" + getEstoqueTypeEnum() + ", getUltimoMov()=" + getUltimoMov()
+				+ ", getQuant()=" + getQuant() + ", getEntidadeId()=" + getEntidadeId() + ", getTabelaEnumValue()="
+				+ getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()="
+				+ getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()=" + getType()
+				+ ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()="
+				+ getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite() + ", getProcessId()="
+				+ getProcessId() + ", getUserId()=" + getUserId() + ", getNotes()=" + getNotes() + ", toString()="
+				+ super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
+				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
+				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + "]";
 	}
 
 }

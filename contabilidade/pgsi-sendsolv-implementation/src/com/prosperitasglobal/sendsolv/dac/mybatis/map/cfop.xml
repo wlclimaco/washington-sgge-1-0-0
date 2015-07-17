@@ -57,9 +57,9 @@
 	-->
 
  <sql id="allCfopPessoaColumns">
-		,b.parentId"
-		,b.processId"
-		,b.idCfop"
+		,b.parentId
+		,b.processId
+		,b.idCfop
 		,b.create_date
       	,b.create_user
       	,b.modify_date
@@ -192,9 +192,7 @@
 	 SELECT b.id,<include refid="allCfopPessoaColumns" />
         FROM CfopParentId b
      WHERE 1 = 1
-     <if test="id != null">
 		  AND b.parentid = #{id}
-	 </if>
   </select>
 
 

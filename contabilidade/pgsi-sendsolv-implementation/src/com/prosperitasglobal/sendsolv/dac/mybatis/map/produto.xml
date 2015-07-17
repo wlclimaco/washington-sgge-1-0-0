@@ -64,7 +64,7 @@
 	<association property="grupo"    column="grupo" select="GrupoMap.fetchGrupoByProduto"  />
 	<association property="subGrupo"    column="subGrupo" select="SubGrupoMap.fetchSubGrupoByProduto"  />
 	<association property="marca"    column="marca" select="MarcaMap.fetchMarcaByProduto"  />
-<!-- 	<association property="tributacao"    column="tributacao" select="RegimeMap.fetchRegimeByEmpresa"  /> -->
+	<association property="tributacao"    column="tributacao" select="TributosMap.fetchTributacaoByProduto"  />
 <!-- 	<collection property="estoqueList" column="id" select="ProdutoItemMap.fetchProdutoItemByProduto"/> -->
 <!-- 	<collection property="precoList" column="id" select="ProdutoItemMap.fetchProdutoItemByProduto"/> -->
 <!-- 	<collection property="custoList" column="id" select="ProdutoItemMap.fetchProdutoItemByProduto"/> -->
@@ -91,8 +91,8 @@
 	-->
 
  <sql id="allProdutoPessoaColumns">
-		,b.parentId"
-		,b.processId"
+		,b.parentId
+		,b.processId
 		,b.prodId"
 		,b.create_date
       	,b.create_user
@@ -108,25 +108,25 @@
   </sql>
 
   <sql id="allProdutoColumns">
-		,b.codigo"
-		,b.cdBarras"
-		,b.dataCreate"
-		,b.produto"
-		,b.aplicacao"
-		,b.localizacao"
-		,b.dataValidade"
-		,b.comissao"
-		,b.fracao"
-		,b.porcao"
-		,b.pesoBruto"
-		,b.pesoLiquido"
-		,b.modoUso"
-		,b.classificacao"
-		,b.uniMed"
-		,b.grupo"
-		,b.subGrupo"
-		,b.marca"
-		,b.tributacao"
+		 b.codigo
+		,b.cdBarras
+		,b.dataCreate
+		,b.produto
+		,b.aplicacao
+		,b.localizacao
+		,b.dataValidade
+		,b.comissao
+		,b.fracao
+		,b.porcao
+		,b.pesoBruto
+		,b.pesoLiquido
+		,b.modoUso
+		,b.classificacao
+		,b.uniMed
+		,b.grupo
+		,b.subGrupo
+		,b.marca
+		,b.tributacao
       	,b.create_date
       	,b.create_user
       	,b.modify_date
@@ -213,10 +213,6 @@
   <select id="fetchProdutoRowCount" parameterType="ProdutoInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
         FROM produto
-     WHERE 1 = 1
-     <if test="id != null">
-		  AND id = #{id}
-	 </if>
   </select>
 
   <select id="fetchAllProdutos" resultMap="produtoResult">
@@ -236,10 +232,6 @@
   <select id="fetchAllProdutosByRequest" parameterType="ProdutoInquiryRequest" resultMap="produtoResult">
 	 SELECT b.id,<include refid="allProdutoColumns" />
         FROM produto b
-     WHERE 1 = 1
-     <if test="id != null">
-		  AND b.id = #{id}
-	 </if>
   </select>
 
   <select id="fetchProdutoByProduto" parameterType="Integer" resultMap="produtoResult">
@@ -257,9 +249,7 @@
 	 SELECT b.id,<include refid="allProdutoPessoaColumns" />
         FROM produtoPessoa b
      WHERE 1 = 1
-     <if test="id != null">
 		  AND b.parentid = #{id}
-	 </if>
   </select>
 
 
