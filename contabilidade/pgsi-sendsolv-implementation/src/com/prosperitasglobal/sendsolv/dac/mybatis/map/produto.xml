@@ -59,8 +59,8 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-	<association property="classificacao"    column="classificacao" select="RegimeMap.fetchRegimeByEmpresa"  />
-	<association property="uniMed"    column="uniMed" select="RegimeMap.fetchRegimeByEmpresa"  />
+	<association property="classificacao"    column="classificacao" select="ClassificaMap.fetchClassificacaoById"  />
+	<association property="uniMed"    column="uniMed" select="UniMedMap.fetchUniMedByProduto"  />
 	<association property="grupo"    column="grupo" select="RegimeMap.fetchRegimeByEmpresa"  />
 	<association property="subGrupo"    column="subGrupo" select="RegimeMap.fetchRegimeByEmpresa"  />
 	<association property="marca"    column="marca" select="RegimeMap.fetchRegimeByEmpresa"  />

@@ -1,12 +1,12 @@
 package com.prosperitasglobal.sendsolv.dac.mybatis;
 
-import java.util.List;
-
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
 import com.prosperitasglobal.sendsolv.dac.IMarcaDAC;
 import com.prosperitasglobal.sendsolv.model.Marca;
+import com.prosperitasglobal.sendsolv.model.MarcaProd;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.qat.framework.model.QATModel;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
@@ -17,20 +17,29 @@ import com.qat.framework.validation.ValidationUtil;
  */
 public class MarcaDACImpl extends SqlSessionDaoSupport implements IMarcaDAC
 {
-	/** The Constant CONTACT_NAMESPACE. */
-	private static final String CONTACT_NAMESPACE = "MarcaMap.";
+	/** The Constant UNIMED_NAMESPACE. */
+	private static final String UNIMED_NAMESPACE = "MarcaMap.";
 
-	/** The Constant CONTACT_STMT_UPDATE. */
-	private static final String CONTACT_STMT_UPDATE = CONTACT_NAMESPACE + "updateMarca";
+	/** The Constant UNIMED_STMT_UPDATE. */
+	private static final String UNIMED_STMT_UPDATE = UNIMED_NAMESPACE + "updateMarca";
 
-	/** The Constant CONTACT_STMT_UPDATE_PHONE. */
-	private static final String CONTACT_STMT_UPDATE_PHONE = CONTACT_NAMESPACE + "updatePhone";
+	/** The Constant UNIMED_STMT_DELETE_PERSON_UNIMED. */
+	private static final String UNIMED_STMT_DELETE = UNIMED_NAMESPACE + "deletePersonMarca";
 
-	/** The Constant CONTACT_STMT_DELETE_BUSINESS_CONTACT. */
-	private static final String CONTACT_STMT_DELETE_BUSINESS_CONTACT = CONTACT_NAMESPACE + "deleteBusinessMarca";
+	/** The Constant UNIMED_STMT_INSERT. */
+	private static final String UNIMED_STMT_INSERT = UNIMED_NAMESPACE + "insertMarca";
 
-	/** The Constant CONTACT_STMT_INSERT. */
-	private static final String CONTACT_STMT_INSERT = CONTACT_NAMESPACE + "insertMarca";
+	/** The Constant UNIMED_STMT_UPDATE. */
+	private static final String UNIMED_PROD_STMT_UPDATE = UNIMED_NAMESPACE + "updateMarcaProd";
+
+	/** The Constant UNIMED_STMT_DELETE_PERSON_UNIMED. */
+	private static final String UNIMED_PROD_STMT_DELETE = UNIMED_NAMESPACE + "deletePersonMarcaProd";
+
+	/** The Constant UNIMED_STMT_INSERT. */
+	private static final String UNIMED_PROD_STMT_INSERT = UNIMED_NAMESPACE + "insertMarcaProd";
+
+	/** The Constant UNIMED_STMT_FETCH_BY_ID. */
+	private static final String UNIMED_STMT_FETCH_BY_ID = UNIMED_NAMESPACE + "fetchMarcasById";
 
 	/** The Constant LOG. */
 	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(MarcaDACImpl.class);
@@ -38,8 +47,7 @@ public class MarcaDACImpl extends SqlSessionDaoSupport implements IMarcaDAC
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#insertMarca(com.prosperitasglobal.cbof.model.Marca
-	 * ,
+	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#insertMarca(com.prosperitasglobal.cbof.model.Marca,
 	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
@@ -47,7 +55,12 @@ public class MarcaDACImpl extends SqlSessionDaoSupport implements IMarcaDAC
 	{
 		Integer insertCount = 0;
 		// First insert the root marca data
-		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT, marca, response);
+		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), UNIMED_STMT_INSERT, marca, response);
+
+		// Associate with parent using statement name passed as parameter
+		insertCount +=
+				QATMyBatisDacHelper
+				.doInsert(getSqlSession(), statementName, marca, response);
 
 		return insertCount;
 	}
@@ -61,14 +74,13 @@ public class MarcaDACImpl extends SqlSessionDaoSupport implements IMarcaDAC
 	@Override
 	public Integer deleteMarca(Marca marca, InternalResultsResponse<?> response)
 	{
-		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, marca, response);
+		return QATMyBatisDacHelper.doRemove(getSqlSession(), UNIMED_STMT_DELETE, marca, response);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#updateMarca(com.prosperitasglobal.cbof.model.Marca
-	 * ,
+	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#updateMarca(com.prosperitasglobal.cbof.model.Marca,
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
@@ -80,7 +92,7 @@ public class MarcaDACImpl extends SqlSessionDaoSupport implements IMarcaDAC
 		if (!ValidationUtil.isNull(marca.getModelAction())
 				&& (marca.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
 		{
-			updateCount = QATMyBatisDacHelper.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE, marca, response);
+			updateCount = QATMyBatisDacHelper.doUpdate(getSqlSession(), UNIMED_STMT_UPDATE, marca, response);
 
 			if (updateCount == 1)
 			{
@@ -88,64 +100,75 @@ public class MarcaDACImpl extends SqlSessionDaoSupport implements IMarcaDAC
 			}
 		}
 
-		updateCount +=
-				QATMyBatisDacHelper.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE_PHONE, marca, response);
-
 		return updateCount;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.cbof.dac.IMarcaDAC#maintainMarcaAssociations(java.util.List,
-	 * java.lang.Integer,
-	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
+	 * @see com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#fetchMarcaById(java.lang.Integer)
 	 */
-	public Integer maintainMarcaAssociations(List<Marca> marcaList, Integer parentId,
-			String associateStatement,
-			InternalResultsResponse<?> response)
+	@Override
+	public InternalResultsResponse<Marca> fetchMarcaById(Integer id)
 	{
-		Integer count = 0;
-		// First Maintain Marcas
-		if (ValidationUtil.isNullOrEmpty(marcaList))
-		{
-			return count;
-		}
-		// For Each Marca...
-		for (Marca marca : marcaList)
-		{
-			// Make sure we set the parent key
-			marca.setParentId(parentId);
+		InternalResultsResponse<Marca> response = new InternalResultsResponse<Marca>();
 
-			if (ValidationUtil.isNull(marca.getModelAction()))
-			{
-				continue;
-			}
-			switch (marca.getModelAction())
-			{
-				case INSERT:
-					count += insertMarca(marca, associateStatement, response);
-					break;
-				case UPDATE:
-					count += updateMarca(marca, response);
-					break;
-				case DELETE:
-					count += deleteMarca(marca, response);
-					break;
-				default:
-					if (LOG.isDebugEnabled())
-					{
-						LOG.debug("ModelAction for Organization missing!");
-					}
-					break;
-			}
-		}
-		return count;
+		QATMyBatisDacHelper.doQueryForList(getSqlSession(), UNIMED_STMT_FETCH_BY_ID, id, response);
+
+		return response;
 	}
 
 	@Override
-	public InternalResultsResponse<Marca> fetchMarcaById(Integer id)
+	public Integer deleteMarcaProd(MarcaProd marca, InternalResultsResponse<?> response)
+	{
+		return QATMyBatisDacHelper.doRemove(getSqlSession(), UNIMED_PROD_STMT_DELETE, marca, response);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#updateMarca(com.prosperitasglobal.cbof.model.Marca,
+	 * com.qat.framework.model.response.InternalResultsResponse)
+	 */
+	@Override
+	public Integer updateMarcaProd(MarcaProd marca, InternalResultsResponse<?> response)
+	{
+		Integer updateCount = 0;
+
+		// First update the root if necessary.
+		if (!ValidationUtil.isNull(marca.getModelAction())
+				&& (marca.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
+		{
+			updateCount = QATMyBatisDacHelper.doUpdate(getSqlSession(), UNIMED_PROD_STMT_UPDATE, marca, response);
+
+			if (updateCount == 1)
+			{
+				marca.setModelAction(QATModel.PersistanceActionEnum.NONE);
+			}
+		}
+
+		return updateCount;
+	}
+
+	@Override
+	public Integer insertMarcaProd(MarcaProd marca, String statementName, InternalResultsResponse<?> response)
+	{
+		Integer insertCount = 0;
+		// First insert the root marca data
+		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), UNIMED_PROD_STMT_INSERT, marca, response);
+
+		// Associate with parent using statement name passed as parameter
+		insertCount +=
+				QATMyBatisDacHelper
+				.doInsert(getSqlSession(), statementName, marca, response);
+
+		return insertCount;
+	}
+
+	@Override
+	public InternalResultsResponse<Marca> fetchMarcaByRequest(PagedInquiryRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }

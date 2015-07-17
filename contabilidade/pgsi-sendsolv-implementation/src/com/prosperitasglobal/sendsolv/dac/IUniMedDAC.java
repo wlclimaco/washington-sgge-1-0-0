@@ -1,26 +1,30 @@
 package com.prosperitasglobal.sendsolv.dac;
 
-import java.util.List;
-
-import com.prosperitasglobal.cbof.model.BusinessTypeEnum;
 import com.prosperitasglobal.sendsolv.model.UniMed;
+import com.prosperitasglobal.sendsolv.model.UniMedProd;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.qat.framework.model.response.InternalResultsResponse;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface IUniMedDAC.
+ */
 public interface IUniMedDAC
 {
+
 	/**
-	 * Update uniMed.
+	 * Update uni med.
 	 *
-	 * @param uniMed the uniMed
+	 * @param uniMed the uni med
 	 * @param response the response
 	 * @return the integer
 	 */
 	public Integer updateUniMed(UniMed uniMed, InternalResultsResponse<?> response);
 
 	/**
-	 * Insert uniMed.
+	 * Insert uni med.
 	 *
-	 * @param uniMed the uniMed
+	 * @param uniMed the uni med
 	 * @param statementName the statement name
 	 * @param response the response
 	 * @return the integer
@@ -28,50 +32,56 @@ public interface IUniMedDAC
 	public Integer insertUniMed(UniMed uniMed, String statementName, InternalResultsResponse<?> response);
 
 	/**
-	 * Delete business uniMed.
+	 * Delete uni med.
 	 *
-	 * @param uniMed the uniMed
+	 * @param uniMed the uni med
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer deleteBusinessUniMed(UniMed uniMed, InternalResultsResponse<?> response);
+	public Integer deleteUniMed(UniMed uniMed, InternalResultsResponse<?> response);
 
 	/**
-	 * Delete person uniMed.
-	 *
-	 * @param uniMed the uniMed
-	 * @param response the response
-	 * @return the integer
-	 */
-	public Integer deletePersonUniMed(UniMed uniMed, InternalResultsResponse<?> response);
-
-	/**
-	 * Fetch uniMed by parent.
-	 *
-	 * @param parentId the parent id
-	 * @param parentType the parent type
-	 * @return the internal results response< uniMed>
-	 */
-	public InternalResultsResponse<UniMed> fetchUniMedByParent(Integer parentId, BusinessTypeEnum parentType);
-
-	/**
-	 * Fetch uniMed by id.
+	 * Fetch uni med by id.
 	 *
 	 * @param id the id
-	 * @return the internal results response< uniMed>
+	 * @return the internal results response
 	 */
 	public InternalResultsResponse<UniMed> fetchUniMedById(Integer id);
 
 	/**
-	 * Maintain uniMed associations.
+	 * Fetch uni med by request.
 	 *
-	 * @param uniMedList the uniMed list
-	 * @param parentId the parent id
-	 * @param associateStatement the associate statement
+	 * @param request the request
+	 * @return the internal results response
+	 */
+	public InternalResultsResponse<UniMed> fetchUniMedByRequest(PagedInquiryRequest request);
+
+	/**
+	 * Update uni med prod.
+	 *
+	 * @param uniMed the uni med
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer maintainUniMedAssociations(List<UniMed> uniMedList, Integer parentId,
-			String associateStatement,
-			InternalResultsResponse<?> response);
+	public Integer updateUniMedProd(UniMedProd uniMed, InternalResultsResponse<?> response);
+
+	/**
+	 * Insert uni med prod.
+	 *
+	 * @param uniMed the uni med
+	 * @param statementName the statement name
+	 * @param response the response
+	 * @return the integer
+	 */
+	public Integer insertUniMedProd(UniMedProd uniMed, String statementName, InternalResultsResponse<?> response);
+
+	/**
+	 * Delete uni med prod.
+	 *
+	 * @param uniMed the uni med
+	 * @param response the response
+	 * @return the integer
+	 */
+	public Integer deleteUniMedProd(UniMedProd uniMed, InternalResultsResponse<?> response);
+
 }
