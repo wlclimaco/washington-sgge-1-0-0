@@ -55,7 +55,7 @@ public class Cliente extends Pessoa
 	/**
 	 * @return the convenioList
 	 */
-	public List<Convenio> getConvenioList()
+	public List<ConvenioPessoa> getConvenioList()
 	{
 		return convenioList;
 	}
@@ -63,7 +63,7 @@ public class Cliente extends Pessoa
 	/**
 	 * @param convenioList the convenioList to set
 	 */
-	public void setConvenioList(List<Convenio> convenioList)
+	public void setConvenioList(List<ConvenioPessoa> convenioList)
 	{
 		this.convenioList = convenioList;
 	}

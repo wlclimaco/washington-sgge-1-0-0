@@ -37,11 +37,16 @@
 
   </resultMap>
 
-  <resultMap id="beneficioMesAppResult" type="BeneficioMesApp">
+  <resultMap id="beneficioMesAppResult" type="BeneficioPessoa">
     <result property="id" column="id" />
     <result property="data" column="data" />
    	<result property="idFuncBenef" column="idFuncBenef"/>
    	<result property="processId" column="processId"/>
+   	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+   	<association property="idFuncBenef"    column="idBenef" select="fetchBeneficiosById"  />
   </resultMap>
 
   <!--
@@ -159,8 +164,10 @@
     FROM business ORDER BY name ASC
   </select>
 
-  <select id="fetchBeneficiosById" parameterType="FetchByIdRequest" resultMap="beneficioResult">
-
+  <select id="fetchBeneficiosById" parameterType="Integer" resultMap="beneficioResult">
+	SELECT b.id,
+	<include refid="allBeneficiosColumns" />
+    FROM Beneficio b ORDER BY b.id ASC
   </select>
 
   <select id="fetchAllBeneficiossByRequest" parameterType="PagedInquiryRequest" resultMap="beneficioResult">

@@ -10,6 +10,7 @@ import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
 import com.prosperitasglobal.sendsolv.model.AcaoEnum;
 import com.prosperitasglobal.sendsolv.model.Cfop;
+import com.prosperitasglobal.sendsolv.model.CfopPessoa;
 import com.prosperitasglobal.sendsolv.model.Status;
 import com.prosperitasglobal.sendsolv.model.StatusEnum;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
@@ -37,10 +38,10 @@ public final class CfopDACD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainCfopAssociations(List<Cfop> cfopList,
+	public static Integer maintainCfopAssociations(List<CfopPessoa> cfopList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, ICfopDAC cfopDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC, Integer empId,
-			String UserId, Integer processId)
+			String UserId, Integer processId, Integer historicoId)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
@@ -49,10 +50,11 @@ public final class CfopDACD extends SqlSessionDaoSupport
 			return count;
 		}
 		// For Each Contact...
-		for (Cfop cfop : cfopList)
+		for (CfopPessoa cfop : cfopList)
 		{
 			// Make sure we set the parent key
 			cfop.setParentId(parentId);
+			cfop.setProcessId(processId);
 
 			if (ValidationUtil.isNull(cfop.getModelAction()))
 			{
@@ -61,8 +63,7 @@ public final class CfopDACD extends SqlSessionDaoSupport
 			switch (cfop.getModelAction())
 			{
 				case INSERT:
-					count = cfopDAC.insertCfop(cfop,
-							"insertCfop", response);
+					count = cfopDAC.insertCfopPessoa(cfop);
 					if (count > 0)
 					{
 						Status status = new Status();
@@ -71,32 +72,100 @@ public final class CfopDACD extends SqlSessionDaoSupport
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
 										AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
-										processId, null);
+										processId, historicoId);
 					}
 					break;
 				case UPDATE:
-					count = cfopDAC.updateCfop(cfop, response);
+					count = cfopDAC.updateCfopPessoa(cfop);
 					if (count > 0)
 					{
 						count =
 								StatusDACD
-										.maintainStatusAssociations(cfop.getStatusList(), response, cfop.getId(),
-												null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
-												historicoDAC, processId, null);
+								.maintainStatusAssociations(cfop.getStatusList(), response, cfop.getId(),
+										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
+										historicoDAC, processId, historicoId);
 					}
 					break;
 				case DELETE:
-
+					count = cfopDAC.deleteCfopPessoa(cfop);
 					Status status = new Status();
 					status.setStatus(StatusEnum.INACTIVE);
 					List<Status> statusList = new ArrayList<Status>();
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, cfop.getId(), null,
 									AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
-									processId, null);
+									processId, historicoId);
 
 					break;
+				case NONE:
+					count =
+							maintainCfopAssociationsA(cfop.getIdCfop(), response, null, null,
+									null,
+									TabelaEnum.PESSOA, cfopDAC, statusDAC, historicoDAC,
+									cfop.getEmprId(),
+									cfop.getCreateUser(), processId, historicoId);
+					break;
 			}
+		}
+
+		return count;
+	}
+
+	public static Integer maintainCfopAssociationsA(Cfop cfop,
+			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
+			TabelaEnum tabelaEnum, ICfopDAC cfopDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
+			Integer empId,
+			String UserId, Integer processId, Integer historicoId)
+	{
+
+		Integer count = 0;
+		// First Maintain Empresa
+		if (ValidationUtil.isNull(cfop))
+		{
+			return count;
+		}
+
+		// Make sure we set the parent key
+		cfop.setParentId(parentId);
+		cfop.setProcessId(processId);
+
+		switch (cfop.getModelAction())
+		{
+			case INSERT:
+				count = cfopDAC.insertCfop(cfop);
+				if (count > 0)
+				{
+					Status status = new Status();
+					status.setStatus(StatusEnum.ACTIVE);
+					List<Status> statusList = new ArrayList<Status>();
+					count =
+							StatusDACD.maintainStatusAssociations(statusList, response, count, null,
+									AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
+									processId, historicoId);
+				}
+				break;
+			case UPDATE:
+				count = cfopDAC.updateCfop(cfop);
+				if (count > 0)
+				{
+					count =
+							StatusDACD
+									.maintainStatusAssociations(cfop.getStatusList(), response, cfop.getId(),
+											null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
+											historicoDAC, processId, historicoId);
+				}
+				break;
+			case DELETE:
+				count = cfopDAC.deleteCfop(cfop);
+				Status status = new Status();
+				status.setStatus(StatusEnum.INACTIVE);
+				List<Status> statusList = new ArrayList<Status>();
+				count =
+						StatusDACD.maintainStatusAssociations(statusList, response, cfop.getId(), null,
+								AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
+								processId, historicoId);
+
+				break;
 		}
 
 		return count;

@@ -639,6 +639,7 @@ CREATE TABLE [dbo].[BancoPessoa](
 	[saldo]          	     [real] NOT NULL,
 	[processId]    			 [int] NULL,
 	[agenciaId]    			 [int] NULL,
+	[tabela]    			 [int] NULL,
 	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -909,9 +910,9 @@ INSERT INTO [dbo].[subgrupo]
 DROP TABLE [dbo].[subgrupoGrupo];
 CREATE TABLE [dbo].[subgrupoGrupo](
 	[id]             [int] identity(1,1) NOT NULL,
+	[grupoId]      [int] NOT NULL,
 	[subGrupoId]   [int] NOT NULL,
 	[processId]    [int] NULL,
-	[prodId]       [int] NOT NULL,
 	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1559,8 +1560,8 @@ INSERT INTO [dbo].[cfop]
            ('1','5','10',1,18,2,0,0,1,'OBSERVACAO','System',1432783357778,1432783357778,'System'),
            ('1','5','10',1,18,2,0,0,1,'OBSERVACAO','System',1432783357778,1432783357778,'System');
 /** ---------------------------------------------------------------*/
-DROP TABLE [dbo].[CfopProd];
-CREATE TABLE [dbo].[CfopProd](
+DROP TABLE [dbo].[CfopParentId];
+CREATE TABLE [dbo].[CfopParentId](
 	[id]             [int] identity(1,1) NOT NULL,
 	[idCfop]          [int] NOT NULL,
 	[prodId]		  [int] NOT NULL,
@@ -2284,6 +2285,73 @@ CREATE TABLE [dbo].[formaPg](
 	[diasPg]         	[int] NULL,
 	[entrada]          [int] NULL,
 	[processId]         	 [int] NULL,
+	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_formaPg_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+DROP TABLE [dbo].[formaPgPessoa];
+CREATE TABLE [dbo].[formaPgPessoa](
+	[id]          	    [int] identity(1,1) NOT NULL,
+	[parentId]         	[int] NULL,
+	[formaPgId]         [int] NULL,
+	[processId]         [int] NULL,
+	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_formaPg_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+DROP TABLE [dbo].[condPag];
+CREATE TABLE [dbo].[condPag](
+	[id]          	    [int] identity(1,1) NOT NULL,
+	[nome]              [varchar](150) NULL,
+	[valorIni]         	[int] NULL,
+	[valorFin]          [real]  NULL,
+	[valorFin]          [real]  NULL,
+	[parcelas]         	[int] NULL,
+	[processId]         [int] NULL,
+	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_formaPg_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+DROP TABLE [dbo].[tipoPag];
+CREATE TABLE [dbo].[tipoPag](
+	[id]          	    [int] identity(1,1) NOT NULL,
+	[descricao]         [varchar](150) NULL,
+	[processId]         [int] NULL,
+	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+CONSTRAINT [pk_formaPg_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+DROP TABLE [dbo].[condPagPessoa];
+CREATE TABLE [dbo].[condPagPessoa](
+	[id]          	    [int] identity(1,1) NOT NULL,
+	[parentId]         	[int] NULL,
+	[condPagId]         [int] NULL,
+	[processId]         [int] NULL,
 	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),

@@ -50,9 +50,9 @@ public class Pessoa extends ModelCosmeDamiao
 
 	private List<BancoPessoa> bancos;
 
-	private List<FormaPg> formaPagamentoList;
+	private List<FormaPgPessoa> formaPagamentoList;
 
-	private List<CondPag> condPagList;
+	private List<CondPagPessoa> condPagList;
 
 	private List<Contato> contatoList;
 
@@ -227,38 +227,6 @@ public class Pessoa extends ModelCosmeDamiao
 	}
 
 	/**
-	 * @return the formaPagamentoList
-	 */
-	public List<FormaPg> getFormaPagamentoList()
-	{
-		return formaPagamentoList;
-	}
-
-	/**
-	 * @param formaPagamentoList the formaPagamentoList to set
-	 */
-	public void setFormaPagamentoList(List<FormaPg> formaPagamentoList)
-	{
-		this.formaPagamentoList = formaPagamentoList;
-	}
-
-	/**
-	 * @return the condPagList
-	 */
-	public List<CondPag> getCondPagList()
-	{
-		return condPagList;
-	}
-
-	/**
-	 * @param condPagList the condPagList to set
-	 */
-	public void setCondPagList(List<CondPag> condPagList)
-	{
-		this.condPagList = condPagList;
-	}
-
-	/**
 	 * @return the contatoList
 	 */
 	public List<Contato> getContatoList()
@@ -373,7 +341,7 @@ public class Pessoa extends ModelCosmeDamiao
 	/**
 	 * @return the bancos
 	 */
-	public List<Banco> getBancos()
+	public List<BancoPessoa> getBancos()
 	{
 		return bancos;
 	}
@@ -381,9 +349,41 @@ public class Pessoa extends ModelCosmeDamiao
 	/**
 	 * @param bancos the bancos to set
 	 */
-	public void setBancos(List<Banco> bancos)
+	public void setBancos(List<BancoPessoa> bancos)
 	{
 		this.bancos = bancos;
+	}
+
+	/**
+	 * @return the formaPagamentoList
+	 */
+	public List<FormaPgPessoa> getFormaPagamentoList()
+	{
+		return formaPagamentoList;
+	}
+
+	/**
+	 * @param formaPagamentoList the formaPagamentoList to set
+	 */
+	public void setFormaPagamentoList(List<FormaPgPessoa> formaPagamentoList)
+	{
+		this.formaPagamentoList = formaPagamentoList;
+	}
+
+	/**
+	 * @return the condPagList
+	 */
+	public List<CondPagPessoa> getCondPagList()
+	{
+		return condPagList;
+	}
+
+	/**
+	 * @param condPagList the condPagList to set
+	 */
+	public void setCondPagList(List<CondPagPessoa> condPagList)
+	{
+		this.condPagList = condPagList;
 	}
 
 	/*

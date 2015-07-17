@@ -1,8 +1,17 @@
 package com.prosperitasglobal.sendsolv.dac.mybatis;
 
-import java.util.List;
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
 
 import com.prosperitasglobal.sendsolv.dac.IEventosDAC;
+import com.prosperitasglobal.sendsolv.model.EventoPessoa;
+import com.prosperitasglobal.sendsolv.model.Eventos;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class CnaeDACImpl.
@@ -31,16 +40,12 @@ public class EventosDACImpl extends SqlSessionDaoSupport implements IEventosDAC
 	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer insertEvento(Eventos endereco, String statementName, InternalResultsResponse<?> response)
+	public Integer insertEvento(Eventos endereco)
 	{
 		Integer insertCount = 0;
+		InternalResultsResponse<Eventos> response = new InternalResultsResponse<Eventos>();
 		// First insert the root endereco data
 		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT, endereco, response);
-
-		// Associate with parent using statement name passed as parameter
-		insertCount +=
-				QATMyBatisDacHelper
-						.doInsert(getSqlSession(), statementName, endereco, response);
 
 		return insertCount;
 	}
@@ -52,10 +57,10 @@ public class EventosDACImpl extends SqlSessionDaoSupport implements IEventosDAC
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer updateEvento(Eventos endereco, InternalResultsResponse<?> response)
+	public Integer updateEvento(Eventos endereco)
 	{
 		Integer updateCount = 0;
-
+		InternalResultsResponse<Eventos> response = new InternalResultsResponse<Eventos>();
 		// First update the root if necessary.
 		if (!ValidationUtil.isNull(endereco.getModelAction())
 				&& (endereco.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
@@ -72,63 +77,14 @@ public class EventosDACImpl extends SqlSessionDaoSupport implements IEventosDAC
 	}
 
 	@Override
-	public Integer deleteEvento(Eventos evento, InternalResultsResponse<?> response)
+	public Integer deleteEvento(Eventos evento)
 	{
+		InternalResponse response = new InternalResponse();
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, evento, response);
 	}
 
 	@Override
 	public InternalResultsResponse<Eventos> fetchEventosByRequest(PagedInquiryRequest request)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Integer maintainEstoqueAssociations(List<Eventos> estoqueList, Integer parentId,
-			String associateStatement,
-			InternalResultsResponse<?> response)
-	{
-		Integer count = 0;
-		// First Maintain Estoques
-		if (ValidationUtil.isNullOrEmpty(estoqueList))
-		{
-			return count;
-		}
-		// For Each Estoque...
-		for (Eventos estoque : estoqueList)
-		{
-			// Make sure we set the parent key
-			estoque.setParentId(parentId);
-
-			if (ValidationUtil.isNull(estoque.getModelAction()))
-			{
-				continue;
-			}
-			switch (estoque.getModelAction())
-			{
-				case INSERT:
-					count += insertEvento(estoque, associateStatement, response);
-					break;
-				case UPDATE:
-					count += updateEvento(estoque, response);
-					break;
-				case DELETE:
-					count += deleteEvento(estoque, response);
-					break;
-				default:
-					if (LOG.isDebugEnabled())
-					{
-						LOG.debug("ModelAction for Organization missing!");
-					}
-					break;
-			}
-		}
-		return count;
-	}
-
-	@Override
-	public com.prosperitasglobal.sendsolv.dac.InternalResultsResponse<com.prosperitasglobal.sendsolv.dac.Eventos> fetchEventosByRequest(
-			com.prosperitasglobal.sendsolv.dac.PagedInquiryRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
@@ -188,7 +144,7 @@ public class EventosDACImpl extends SqlSessionDaoSupport implements IEventosDAC
 	public Integer deleteEventoPessoa(EventoPessoa evento)
 	{
 		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doRemove(getSqlSession(), "EventoMap.deleteEventoPessoaById", evento.getId(), response);
+		QATMyBatisDacHelper.doRemove(getSqlSession(), "EventoMap.deleteEventoPessoaById", evento, response);
 		if (response.isInError())
 		{
 			return null;

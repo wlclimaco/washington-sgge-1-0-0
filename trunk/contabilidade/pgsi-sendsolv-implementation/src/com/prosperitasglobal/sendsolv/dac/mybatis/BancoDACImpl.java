@@ -2,6 +2,10 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.Map;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.IBancoDAC;
 import com.prosperitasglobal.sendsolv.dac.ICnaeDAC;
 import com.prosperitasglobal.sendsolv.dac.IEmailDAC;
@@ -10,6 +14,14 @@ import com.prosperitasglobal.sendsolv.dac.IEventosDAC;
 import com.prosperitasglobal.sendsolv.dac.ISociosDAC;
 import com.prosperitasglobal.sendsolv.dac.ITelefoneDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
+import com.prosperitasglobal.sendsolv.model.Banco;
+import com.prosperitasglobal.sendsolv.model.BancoPessoa;
+import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class BancoDACImpl.
@@ -19,9 +31,6 @@ public class BancoDACImpl extends SqlSessionDaoSupport implements IBancoDAC
 
 	/** The Constant EMPRESA_NAMESPACE. */
 	private static final String EMPRESA_NAMESPACE = "BancoMap.";
-
-	/** The Constant CBOF_NAMESPACE. */
-	private static final String CBOF_NAMESPACE = "CBOFMap.";
 
 	/** The Constant EMPRESA_STMT_FETCH_COUNT. */
 	private static final String EMPRESA_STMT_FETCH_COUNT = EMPRESA_NAMESPACE + "fetchBancoRowCount";
@@ -36,34 +45,11 @@ public class BancoDACImpl extends SqlSessionDaoSupport implements IBancoDAC
 	/** The Constant EMPRESA_STMT_INSERT. */
 	private static final String EMPRESA_STMT_INSERT = EMPRESA_NAMESPACE + "insertBanco";
 
-	/** The Constant EMPRESA_STMT_ASSOC_ORG_TO_CONTACT. */
-	private static final String EMPRESA_STMT_ASSOC_ORG_TO_CONTACT = EMPRESA_NAMESPACE
-			+ "associateBancoWithContact";
-
 	/** The Constant EMPRESA_STMT_UPDATE. */
 	private static final String EMPRESA_STMT_UPDATE = EMPRESA_NAMESPACE + "updateBanco";
 
 	/** The Constant EMPRESA_STMT_DELETE. */
 	private static final String EMPRESA_STMT_DELETE = EMPRESA_NAMESPACE + "deleteBancoById";
-
-	/** The Constant EMPRESA_DOCUMENT_STMT_UPDATE. */
-	private static final String EMPRESA_DOCUMENT_STMT_UPDATE = EMPRESA_NAMESPACE
-			+ "updateBancoDocument";
-
-	/** The Constant EMPRESA_STMT_ASSOC_ORG_TO_DOCUMENT. */
-	private static final String EMPRESA_STMT_ASSOC_ORG_TO_DOCUMENT = EMPRESA_NAMESPACE
-			+ "associateBancoWithDocument";
-
-	/** The Constant EMPRESA_STMT_DELETE_DOCUMENT. */
-	private static final String EMPRESA_STMT_DELETE_DOCUMENT = EMPRESA_NAMESPACE
-			+ "deleteBancoDocument";
-
-	/** The Constant STMT_VERSION. */
-	private static final String EMPRESA_STMT_VERSION = EMPRESA_NAMESPACE + "fetchVersionNumber";
-
-	/** The Constant EMPRESA_STMT_UPDATE_EMPRESA_STATUS. */
-	private static final String EMPRESA_STMT_UPDATE_EMPRESA_STATUS = CBOF_NAMESPACE
-			+ "updateBusinessStatus";
 
 	/** The Constant LOG. */
 	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(BancoDACImpl.class);
@@ -346,29 +332,6 @@ public class BancoDACImpl extends SqlSessionDaoSupport implements IBancoDAC
 	}
 
 	@Override
-	public com.prosperitasglobal.sendsolv.dac.InternalResultsResponse<com.prosperitasglobal.sendsolv.dac.Banco> fetchBancoById(
-			com.prosperitasglobal.sendsolv.dac.FetchByIdRequest request)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public com.prosperitasglobal.sendsolv.dac.InternalResultsResponse<com.prosperitasglobal.sendsolv.dac.Banco> fetchAllBancos()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public com.prosperitasglobal.sendsolv.dac.InternalResultsResponse<com.prosperitasglobal.sendsolv.dac.Banco> fetchBancoByRequest(
-			com.prosperitasglobal.sendsolv.dac.PagedInquiryRequest request)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public Integer updateBancoPessoa(BancoPessoa banco)
 	{
 		Integer updateCount = 0;
@@ -387,8 +350,6 @@ public class BancoDACImpl extends SqlSessionDaoSupport implements IBancoDAC
 		{
 			return null;
 		}
-		// Next traverse the object graph and "maintain" the associations
-		updateCount += maintainBancoAssociations(banco, response);
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)

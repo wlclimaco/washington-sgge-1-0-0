@@ -44,6 +44,12 @@ public class Eventos extends ModelCosmeDamiao
 
 	}
 
+	public Eventos(Integer id)
+	{
+		super();
+		this.id = id;
+	}
+
 	/**
 	 * @return the id
 	 */

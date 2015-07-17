@@ -9,12 +9,10 @@ import java.util.List;
 @SuppressWarnings("serial")
 public class Fornecedor extends Pessoa
 {
-	/** The SendSolv id for the account. */
-	private Integer id;
 
-	private List<Cfop> listCfops;
+	private List<CfopPessoa> listCfops;
 
-	private List<Produto> listProdutos;
+	private List<ProdutoPessoa> listProdutos;
 
 	/**
 	 * Default constructor.
@@ -27,31 +25,13 @@ public class Fornecedor extends Pessoa
 	public Fornecedor(Integer id)
 	{
 		super();
-		this.id = id;
-	}
-
-	/**
-	 * @return the id
-	 */
-	@Override
-	public Integer getId()
-	{
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	@Override
-	public void setId(Integer id)
-	{
-		this.id = id;
+		setId(id);
 	}
 
 	/**
 	 * @return the listCfops
 	 */
-	public List<Cfop> getListCfops()
+	public List<CfopPessoa> getListCfops()
 	{
 		return listCfops;
 	}
@@ -59,7 +39,7 @@ public class Fornecedor extends Pessoa
 	/**
 	 * @param listCfops the listCfops to set
 	 */
-	public void setListCfops(List<Cfop> listCfops)
+	public void setListCfops(List<CfopPessoa> listCfops)
 	{
 		this.listCfops = listCfops;
 	}
@@ -67,7 +47,7 @@ public class Fornecedor extends Pessoa
 	/**
 	 * @return the listProdutos
 	 */
-	public List<Produto> getListProdutos()
+	public List<ProdutoPessoa> getListProdutos()
 	{
 		return listProdutos;
 	}
@@ -75,7 +55,7 @@ public class Fornecedor extends Pessoa
 	/**
 	 * @param listProdutos the listProdutos to set
 	 */
-	public void setListProdutos(List<Produto> listProdutos)
+	public void setListProdutos(List<ProdutoPessoa> listProdutos)
 	{
 		this.listProdutos = listProdutos;
 	}
@@ -87,20 +67,24 @@ public class Fornecedor extends Pessoa
 	@Override
 	public String toString()
 	{
-		return "Fornecedor [getId()=" + getId() + ", getListCfops()=" + getListCfops() + ", getListProdutos()="
-				+ getListProdutos() + ", getNome()=" + getNome() + ", getNomePai()=" + getNomePai() + ", getNomeMae()="
-				+ getNomeMae() + ", getNomeConjugue()=" + getNomeConjugue() + ", getEstadoCivil()=" + getEstadoCivil()
-				+ ", getDatanasc()=" + getDatanasc() + ", getFoto()=" + getFoto() + ", getSexo()=" + getSexo()
+		return "Fornecedor [getListCfops()=" + getListCfops() + ", getListProdutos()=" + getListProdutos()
+				+ ", getPessoaTypeEnumValue()=" + getPessoaTypeEnumValue() + ", getId()=" + getId() + ", getNome()="
+				+ getNome() + ", getNomePai()=" + getNomePai() + ", getNomeMae()=" + getNomeMae()
+				+ ", getNomeConjugue()=" + getNomeConjugue() + ", getEstadoCivil()=" + getEstadoCivil()
+				+ ", getDatanasc()=" + getDatanasc() + ", getFoto()=" + getFoto() + ", getPessoaTypeEnum()="
+				+ getPessoaTypeEnum() + ", getFormaPagamentoList()=" + getFormaPagamentoList() + ", getCondPagList()="
+				+ getCondPagList() + ", getContatoList()=" + getContatoList() + ", getSexo()=" + getSexo()
 				+ ", getEnderecos()=" + getEnderecos() + ", getDocumentos()=" + getDocumentos() + ", getEmails()="
 				+ getEmails() + ", getTelefones()=" + getTelefones() + ", getNotes()=" + getNotes() + ", getBancos()="
 				+ getBancos() + ", toString()=" + super.toString() + ", getTabelaEnumValue()=" + getTabelaEnumValue()
 				+ ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue()
 				+ ", getParentId()=" + getParentId() + ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType()
 				+ ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()="
-				+ getEmprId() + ", getSite()=" + getSite() + ", getModelAction()=" + getModelAction()
-				+ ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC()
-				+ ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC()
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
+				+ getEmprId() + ", getSite()=" + getSite() + ", getProcessId()=" + getProcessId() + ", getUserId()="
+				+ getUserId() + ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
+				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
+				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + "]";
 	}
 
 }

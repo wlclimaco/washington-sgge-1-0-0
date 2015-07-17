@@ -23,9 +23,9 @@ public class Funcionario extends Pessoa
 	private List<HorarioFunc> horarios;
 
 	/** The beneficios. */
-	private List<Beneficios> beneficios;
+	private List<BeneficioPessoa> beneficios;
 
-	private List<Eventos> eventosList;
+	private List<EventoPessoa> eventosList;
 
 	/**
 	 * Default constructor.
@@ -84,22 +84,6 @@ public class Funcionario extends Pessoa
 	}
 
 	/**
-	 * @return the beneficios
-	 */
-	public List<Beneficios> getBeneficios()
-	{
-		return beneficios;
-	}
-
-	/**
-	 * @param beneficios the beneficios to set
-	 */
-	public void setBeneficios(List<Beneficios> beneficios)
-	{
-		this.beneficios = beneficios;
-	}
-
-	/**
 	 * @return the dataAdm
 	 */
 	public Long getDataAdm()
@@ -116,9 +100,25 @@ public class Funcionario extends Pessoa
 	}
 
 	/**
+	 * @return the beneficios
+	 */
+	public List<BeneficioPessoa> getBeneficios()
+	{
+		return beneficios;
+	}
+
+	/**
+	 * @param beneficios the beneficios to set
+	 */
+	public void setBeneficios(List<BeneficioPessoa> beneficios)
+	{
+		this.beneficios = beneficios;
+	}
+
+	/**
 	 * @return the eventosList
 	 */
-	public List<Eventos> getEventosList()
+	public List<EventoPessoa> getEventosList()
 	{
 		return eventosList;
 	}
@@ -126,7 +126,7 @@ public class Funcionario extends Pessoa
 	/**
 	 * @param eventosList the eventosList to set
 	 */
-	public void setEventosList(List<Eventos> eventosList)
+	public void setEventosList(List<EventoPessoa> eventosList)
 	{
 		this.eventosList = eventosList;
 	}

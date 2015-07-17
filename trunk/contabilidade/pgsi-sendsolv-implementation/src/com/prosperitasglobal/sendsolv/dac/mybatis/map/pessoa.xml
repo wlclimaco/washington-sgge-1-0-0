@@ -6,6 +6,34 @@
 
 <mapper namespace="PessoaMap">
 
+	<resultMap id="PessoaResult" type="Pessoa">
+    <result property="id" column="id" />
+    <result property="emprId" column="cdEmpr" />
+   	<result property="nome" column="nome"/>
+	<result property="pessoaTypeEnumValue" column="type"/>
+	<result property="sexo" column="sexo"/>
+	<result property="datanasc" column="datanasc"/>
+	<result property="nomePai" column="nomePai"/>
+	<result property="nomeMae" column="nomeMae"/>
+	<result property="nomeConjugue" column="nomeConjugue"/>
+	<result property="estadoCivil" column="estadoCivil"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+	<collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByPessoaId"/>
+	<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByPessoaId"/>
+	<collection property="emails" column="id" select="EmailMap.fetchAllEmailsByPessoaId"/>
+	<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByPessoaId"/>
+	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByPessoaId"/>
+	<collection property="bancos" column="id" select="BancoMap.fetchBancoByPessoa"/>
+	<collection property="contatoList" column="id" select="ContatoMap.fetchContatoByPessoa"/>
+	<collection property="notes" column="id" select="NoteMap.fetchNoteByPessoa"/>
+	<collection property="formaPagamentoList" column="id" select="FormaPgMap.fetchFormaPgByPessoa"/>
+	<collection property="condPagList" column="id" select="CondPagMap.fetchCondPagByPessoa"/>
+
+  </resultMap>
+
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->

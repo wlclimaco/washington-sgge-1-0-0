@@ -36,6 +36,12 @@ public class Beneficios extends ModelCosmeDamiao
 		super();
 	}
 
+	public Beneficios(Integer id)
+	{
+		super();
+		this.id = id;
+	}
+
 	/**
 	 * Gets the id.
 	 *
