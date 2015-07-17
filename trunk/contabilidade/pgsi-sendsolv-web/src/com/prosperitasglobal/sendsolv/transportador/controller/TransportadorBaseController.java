@@ -368,9 +368,6 @@ public class TransportadorBaseController extends UtilControllerD
 		contatoItens.setNoteList(insertNote(modelAction));
 
 		Date a = new Date();
-		contatoItens.setDataContato(a.getTime());
-		contatoItens.setNomeContato("Maria de lourdes");
-
 		Contato contato = new Contato();
 		contato.setModelAction(modelAction);
 		contato.setId(1);
