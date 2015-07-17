@@ -289,10 +289,6 @@
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
 
- 	<bean id="grupoSubGrupoDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.GrupoSubGrupoDACImpl">
- 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
- 	</bean>
-
  	<bean id="historicoDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.HistoricoDACImpl">
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
