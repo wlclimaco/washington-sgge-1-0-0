@@ -527,7 +527,7 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 						insertCount, null,
 						null,
 						null, getCfopDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
-						produto.getCreateUser(), processId);
+						produto.getCreateUser(), processId, null);
 
 		insertCount +=
 				FornecedorDACD.maintainFornecedorAssociations(produto.getFornecedorList(), response,
@@ -666,7 +666,7 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 						produto.getId(), null,
 						null,
 						null, getCfopDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
-						produto.getCreateUser(), processId);
+						produto.getCreateUser(), processId, null);
 
 		updateCount +=
 				FornecedorDACD.maintainFornecedorAssociations(produto.getFornecedorList(), response,

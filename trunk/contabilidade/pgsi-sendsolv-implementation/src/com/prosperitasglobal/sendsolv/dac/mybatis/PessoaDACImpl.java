@@ -738,13 +738,13 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 						null,
 						null,
 						TabelaEnum.PESSOA, getFormaPgDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser(), processId);
+						pessoa.getCreateUser(), processId, historicoId);
 
 		insertCount +=
 				CfopDACD.maintainCfopAssociations(pessoa.getListCfops(), response, pessoa.getId(), null,
 						null,
 						TabelaEnum.PESSOA, getCfopDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser(), processId);
+						pessoa.getCreateUser(), processId, historicoId);
 
 		if (insertCount > 0)
 		{
@@ -838,13 +838,13 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 						null,
 						null,
 						null, getFormaPgDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser(), processId);
+						pessoa.getCreateUser(), processId, historicoId);
 
 		updateCount +=
 				CfopDACD.maintainCfopAssociations(pessoa.getListCfops(), response, pessoa.getId(), null,
 						null,
 						null, getCfopDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser(), processId);
+						pessoa.getCreateUser(), processId, historicoId);
 
 		if (updateCount > 0)
 		{
@@ -1072,7 +1072,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 						null,
 						null,
 						null, getFormaPgDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser(), processId);
+						pessoa.getCreateUser(), processId, historicoId);
 
 		if (updateCount > 0)
 		{
@@ -1081,7 +1081,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 					StatusDACD.maintainStatusAssociations(pessoa.getStatusList(), response, pessoa.getId(), null,
 							AcaoEnum.INSERT,
 							pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.TRANSPORTADOR, getStatusDAC(),
-							getHistoricoDAC(), processId, null);
+							getHistoricoDAC(), processId, historicoId);
 
 		}
 
@@ -1278,7 +1278,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 						pessoa.getCreateUser(), processId, historicoId);
 
 		updateCount +=
-				EventosDACD.maintainEventosAssociations(pessoa.getEventosList(), response, pessoa.getId(), null,
+				EventosDACD.maintainEventoPessoaAssociations(pessoa.getEventosList(), response, pessoa.getId(), null,
 						null,
 						null, getEventosDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
 						pessoa.getCreateUser(), processId, historicoId);
@@ -1367,7 +1367,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 						pessoa.getCreateUser(), processId, historicoId);
 
 		insertCount +=
-				EventosDACD.maintainEventosAssociations(pessoa.getEventosList(), response, pessoa.getId(), null,
+				EventosDACD.maintainEventoPessoaAssociations(pessoa.getEventosList(), response, pessoa.getId(), null,
 						null,
 						null, getEventosDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
 						pessoa.getCreateUser(), processId, historicoId);
