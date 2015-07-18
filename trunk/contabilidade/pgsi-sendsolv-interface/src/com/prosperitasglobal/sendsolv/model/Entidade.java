@@ -33,7 +33,7 @@ public class Entidade extends ModelCosmeDamiao
 
 	private List<Socio> socios;
 
-	private List<Cnae> cnaes;
+	private List<CnaeEmpresa> cnaes;
 
 	private List<Filial> filialList;
 
@@ -176,7 +176,7 @@ public class Entidade extends ModelCosmeDamiao
 	/**
 	 * @return the cnaes
 	 */
-	public List<Cnae> getCnaes()
+	public List<CnaeEmpresa> getCnaes()
 	{
 		return cnaes;
 	}
@@ -184,7 +184,7 @@ public class Entidade extends ModelCosmeDamiao
 	/**
 	 * @param cnaes the cnaes to set
 	 */
-	public void setCnaes(List<Cnae> cnaes)
+	public void setCnaes(List<CnaeEmpresa> cnaes)
 	{
 		this.cnaes = cnaes;
 	}

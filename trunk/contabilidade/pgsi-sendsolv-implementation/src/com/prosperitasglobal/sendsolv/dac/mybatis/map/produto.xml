@@ -65,14 +65,13 @@
 	<association property="subGrupo"    column="subGrupo" select="SubGrupoMap.fetchSubGrupoByProduto"  />
 	<association property="marca"    column="marca" select="MarcaMap.fetchMarcaByProduto"  />
 	<association property="tributacao"    column="tributacao" select="TributosMap.fetchTributacaoByProduto"  />
-<!-- 	<collection property="estoqueList" column="id" select="ProdutoItemMap.fetchProdutoItemByProduto"/> -->
-<!-- 	<collection property="precoList" column="id" select="ProdutoItemMap.fetchProdutoItemByProduto"/> -->
-<!-- 	<collection property="custoList" column="id" select="ProdutoItemMap.fetchProdutoItemByProduto"/> -->
-<!-- 	<collection property="porcaoList" column="id" select="ProdutoItemMap.fetchProdutoItemByProduto"/> -->
-<!-- 	<collection property="rentabilidadeList" column="id" select="ProdutoItemMap.fetchProdutoItemByProduto"/> -->
-<!-- 	<collection property="cfopList" column="id" select="ProdutoItemMap.fetchProdutoItemByProduto"/> -->
-<!-- 	<collection property="fornecedorList" column="id" select="ProdutoItemMap.fetchProdutoItemByProduto"/> -->
-	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEmpresa"/>
+	<collection property="estoqueList" column="id" select="EstoqueMap.fetchEstoqueByProduto"/>
+	<collection property="precoList" column="id" select="TabPrecoMap.fetchTabPrecoByProduto"/>
+	<collection property="custoList" column="id" select="CustoMap.fetchCustoByProduto"/>
+	<collection property="porcaoList" column="id" select="PorcaoMap.fetchPorcaoByProduto"/>
+	<collection property="rentabilidadeList" column="id" select="RentabilidadeMap.fetchRentabilidadeByProduto"/>
+	<collection property="cfopList" column="id" select="CfopMap.fetchCfopByProd"/>
+	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByProduto"/>
 
   </resultMap>
 
@@ -91,9 +90,9 @@
 	-->
 
  <sql id="allProdutoPessoaColumns">
-		,b.parentId
+		 b.parentId
 		,b.processId
-		,b.prodId"
+		,b.prodId
 		,b.create_date
       	,b.create_user
       	,b.modify_date

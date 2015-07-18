@@ -26,6 +26,38 @@
 	<result property="modifyDateUTC" column="modify_date"/>
   </resultMap>
 
+
+  <resultMap id="cnaeEmpresaResult" type="CnaeEmpresa">
+    <result property="id" column="id"/>
+    <result property="parentId" column="parentId"/>
+    <result property="tabelaEnumValue" column="tabela" />
+    <result property="processId" column="processId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+	 <association property="idCnae"    column="idCnae" select="fetchCnaeById"  />
+  </resultMap>
+
+  <sql id="allCnaeEmpresaColumns">
+		 b.parentId
+		,b.tabela
+      	,b.processId
+      	,b.idCnae
+      	,b.create_date
+      	,b.create_user
+      	,b.modify_date
+      	,b.modify_user
+  </sql>
+
+  <sql id="allCnaeEmpresaValues">
+  		#{parentId},
+  		#{tabelaEnumValue},
+    	#{processId},
+    	#{idCnae.id},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
@@ -48,25 +80,6 @@
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
-  <sql id="allCnaeColumnsRel">
-		 b.idCnae
-		,b.idParentId
-      	,b.tabela
-      	,b.processId
-      	,b.create_date
-      	,b.create_user
-      	,b.modify_date
-      	,b.modify_user
-  </sql>
-
-  <sql id="allCnaeValuesRel">
-  		#{idCnae},
-  		#{idParentId},
-    	#{tabelaEnumValue},
-    	#{processId},
-    	<include refid="CBOFMap.changeControlFields"/>
-  </sql>
-
   <!--
 		SQL Insert Statements.
  	-->
@@ -77,11 +90,11 @@
     VALUES (<include refid="allCnaeValues" /> )
   </insert>
 
-   <insert id="insertCnaeRelacionamento" parameterType="CnaeRel" useGeneratedKeys="true" keyProperty="id">
+   <insert id="insertCnaeEmpresa" parameterType="CnaeEmpresa" useGeneratedKeys="true" keyProperty="id">
   	INSERT INTO cnaePorRelacionamento (
-		<include refid="allCnaeColumnsRel" />
+		<include refid="allCnaeEmpresaColumns" />
       )
-    VALUES (<include refid="allCnaeValuesRel" /> )
+    VALUES (<include refid="allCnaeEmpresaValues" /> )
   </insert>
 
 	<!--
@@ -102,11 +115,28 @@
     id = #{id}
   </update>
 
+   <update id="updateCnaeEmpresa" parameterType="CnaeEmpresa">
+    UPDATE cnaePorRelacionamento
+    	<set>
+    		<if test="idCnae.id!= null">idCnae = #{idCnae.id},</if>
+	    	<if test="tabelaEnumValue!= null"> tabela=#{tabelaEnumValue},</if>
+	    	<if test="parentId!= null"> parentId=#{parentId},</if>
+			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+    id = #{id}
+  </update>
+
    <!--
 		SQL Delete Statements.
    -->
   <delete id="deleteCnaeById" parameterType="Integer">
     	DELETE FROM cnae WHERE id = #{id}
+  </delete>
+
+  <delete id="deleteCnaeEmpresaById" parameterType="Integer">
+    	DELETE FROM cnaePorRelacionamento WHERE id = #{id}
   </delete>
 
     <select id="fetchAllCnaesByEmpresa" parameterType="Integer" resultMap="cnaeResult">
@@ -127,6 +157,13 @@
 		    left join cnaePorRelacionamento r on r.tabela = 3 , c.id = r.idCnae, r.idParentId = #{id}
     </select>
 
+   <select id="fetchAllCnaesByEmpresa" parameterType="Integer" resultMap="cnaeEmpresaResult">
+    	SELECT
+			<include refid="allCnaeEmpresaColumns" />
+		    FROM cnaePorRelacionamento b
+		   where b.tabela = 1 and  b.parentid = #{id}
+    </select>
+
 	<!--
 		SQL Fetch Statements.
  	-->
@@ -142,17 +179,13 @@
     FROM cnae ORDER BY name ASC
   </select>
 
-  <select id="fetchCnaeById" parameterType="FetchByIdRequest" resultMap="cnaeResult">
-    			   SELECT
-						<include refid="allCnaeColumns" />,
- 				   FROM cnae b
-					<where>
-				  		 <choose>
-							<when test="id != null and id != ''">
+  <select id="fetchCnaeById" parameterType="Integer" resultMap="cnaeResult">
+    			   SELECT b.id,
+						<include refid="allCnaeColumns" />
+ 				   FROM cnae b where
+
 								b.id = #{id}
-				    		</when>
-				    	 </choose>
-				  </where>
+
   </select>
 
   <select id="fetchAllCnaesByRequest" parameterType="PagedInquiryRequest" resultMap="cnaeResult">

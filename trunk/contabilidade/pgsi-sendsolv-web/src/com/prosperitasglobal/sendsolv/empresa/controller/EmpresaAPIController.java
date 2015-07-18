@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.model.Cidade;
-import com.prosperitasglobal.sendsolv.model.Cnae;
+import com.prosperitasglobal.sendsolv.model.CnaeEmpresa;
 import com.prosperitasglobal.sendsolv.model.Documento;
 import com.prosperitasglobal.sendsolv.model.Email;
 import com.prosperitasglobal.sendsolv.model.Empresa;
@@ -158,38 +158,24 @@ public class EmpresaAPIController extends EmpresaBaseController
 		email.setModelAction(modelAction);
 		emailList.add(email);
 
-		email = new Email();
-		email.setId(2);
-		email.setEmail("wlclimaco@yahoo.com.br");
-		email.setDescription("Trabalho");
-		email.setModelAction(modelAction);
-		emailList.add(email);
-
-		email = new Email();
-		email.setId(3);
-		email.setEmail("wlclimaco@hotmail.com");
-		email.setDescription("Casa Joaquina");
-		email.setModelAction(modelAction);
-		emailList.add(email);
-
 		return emailList;
 	}
 
-	public List<Cnae> insertCnae(PersistanceActionEnum modelAction)
+	public List<CnaeEmpresa> insertCnae(PersistanceActionEnum modelAction)
 	{
-		List<Cnae> cnaeList = new ArrayList<Cnae>();
-		Cnae cnae = new Cnae();
-		cnae.setModelAction(PersistanceActionEnum.NONE);
+		List<CnaeEmpresa> cnaeList = new ArrayList<CnaeEmpresa>();
+		CnaeEmpresa cnae = new CnaeEmpresa();
+		cnae.setModelAction(PersistanceActionEnum.INSERT);
 		cnae.setId(1);
 		cnaeList.add(cnae);
 
-		cnae = new Cnae();
-		// cnae.setModelAction("NONE");
+		cnae = new CnaeEmpresa();
+		cnae.setModelAction(PersistanceActionEnum.INSERT);
 		cnae.setId(2);
 		cnaeList.add(cnae);
 
-		cnae = new Cnae();
-		// cnae.setModelAction("NONE");
+		cnae = new CnaeEmpresa();
+		cnae.setModelAction(PersistanceActionEnum.INSERT);
 		cnae.setId(3);
 		cnaeList.add(cnae);
 

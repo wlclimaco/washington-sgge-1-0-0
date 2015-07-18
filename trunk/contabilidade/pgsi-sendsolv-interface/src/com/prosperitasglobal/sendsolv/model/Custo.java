@@ -10,8 +10,6 @@ public class Custo extends ModelCosmeDamiao
 	/** The SendSolv id for the account. */
 	private Integer id;
 
-	private Integer idproduto;
-
 	private Integer entidadeId;
 
 	/** The type of an account. */
@@ -45,22 +43,6 @@ public class Custo extends ModelCosmeDamiao
 	public void setId(Integer id)
 	{
 		this.id = id;
-	}
-
-	/**
-	 * @return the idproduto
-	 */
-	public Integer getIdproduto()
-	{
-		return idproduto;
-	}
-
-	/**
-	 * @param idproduto the idproduto to set
-	 */
-	public void setIdproduto(Integer idproduto)
-	{
-		this.idproduto = idproduto;
 	}
 
 	/**
@@ -118,7 +100,7 @@ public class Custo extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Custo [getId()=" + getId() + ", getIdproduto()=" + getIdproduto() + ", getCusto()=" + getCusto()
+		return "Custo [getId()=" + getId() + ", getCusto()=" + getCusto()
 				+ ", getValor()=" + getValor() + ", getEntidadeId()=" + getEntidadeId() + ", getTabelaEnumValue()="
 				+ getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()="
 				+ getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()=" + getType()

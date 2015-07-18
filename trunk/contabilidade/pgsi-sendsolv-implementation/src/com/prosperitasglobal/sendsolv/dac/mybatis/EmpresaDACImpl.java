@@ -294,44 +294,21 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 	{
 		Integer insertCount = 0;
 		InternalResultsResponse<Empresa> response = new InternalResultsResponse<Empresa>();
-
-		Process process = new Process();
-		process.setEmprId(0);
-		process.setTabelaEnum(TabelaEnum.EMPRESA);
-		process.setUserId(empresa.getUserId());
-		process.setAcaoType(AcaoEnum.INSERT);
-		Date a = new Date();
-		process.setData(a.getTime());
-
-		Integer processId = 0;
-		Integer historicoId = 0;
-
-		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), "ProcessMap.insertProcess", process, response);
-
-		processId = process.getId();
-
-		empresa.setProcessId(process.getId());
-		empresa.setModifyDateUTC(a.getTime());
-
-		// First insert the root
-		// Is successful the unique-id will be populated back into the object.
-		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), EMPRESA_STMT_INSERT, empresa, response);
-
 		Historico historico = new Historico();
 		historico.setEmprId(empresa.getId());
 		historico.setUserId(empresa.getUserId());
-		historico.setProcessId(processId);
-		a = new Date();
-		process.setData(a.getTime());
+		historico.setProcessId(0);
+		Date a = new Date();
+		historico.setData(a.getTime());
 
 		insertCount =
 				QATMyBatisDacHelper.doInsert(getSqlSession(), "HistoricoMap.insertHistorico", historico, response);
 
-		historicoId = historico.getId();
+		Integer historicoId = historico.getId();
 
 		HistoricoItens historicoItens = new HistoricoItens();
 		historicoItens.setIdHist(historicoId);
-		historicoItens.setProcessId(processId);
+		historicoItens.setProcessId(0);
 		historicoItens.setParentId(empresa.getId());
 		historicoItens.setTabelaEnum(TabelaEnum.EMPRESA);
 		historicoItens.setAcaoType(AcaoEnum.INSERT);
@@ -339,6 +316,15 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		insertCount =
 				QATMyBatisDacHelper.doInsert(getSqlSession(), "HistoricoMap.insertHistoricoItens", historicoItens,
 						response);
+
+		Integer processId = historicoId;
+
+		empresa.setProcessId(processId);
+		empresa.setModifyDateUTC(a.getTime());
+
+		// First insert the root
+		// Is successful the unique-id will be populated back into the object.
+		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), EMPRESA_STMT_INSERT, empresa, response);
 
 		historicoId = historico.getId();
 

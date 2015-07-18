@@ -1,239 +1,153 @@
-<%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags'%>
+<%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags' %>
 <%@ taglib prefix='c' uri='http://java.sun.com/jstl/core_rt' %>
 
 <sec:authorize access="hasAnyRole('ROLE_DOMAIN ADMIN', 'ROLE_ADMIN', 'ROLE_CSR')">
 
 <script type="text/javascript">
+/**
+ * @namespace pgsi.pages.pessoa
+ * @fileoverview The main namespace for the Location List Page.
+ */
+pgsi.pages.pessoa = {
 
-pgsi.pages.produto = {
+	/**
+	* Set of functions used by the datatables plugin to customize field values
+	*/
 
-		form :{
+	// Returns link for edit view
+	fnCreateClienteNameLink : function (val, type, full)
+	{
+		var sCnpj="" , returno="";
+		if (type !== "display")
+		{
+			return val;
+		}
 
-			/**
-			 * Validate the fields
-			 */
-			validator : $("#create-note-form").validate({
-				ignore : "",
-				invalidHandler : function(form, validator) {
-					$.each(validator.errorList, function(index, value) {
-						if (value.element.nodeName.toLowerCase() == 'select') {
-							$(value.element).next('span').addClass("error");
-						}
-						else {
-							$(value.element).addClass("error");
-						}
-
-					});
-				}
-			}),
-
-			/**
-			 * Validate the fields required at Contact Form
-			 */
-			validator :	$( "#create-note-form" ).validate(),
-
-			fnInitForm : function() {
-				pgsi.util.page.form.fnInitTolltip("#note.error");
-			},
-
-			fillRequest : function(sModelAction) {
-
-				var oNote = new Note;
-				oNote.modelAction = sModelAction;
-				oNote.noteText = $("#add-notes-template").find("textarea").val();
-
-				return oNote;
-			},
-
-			fnAjaxCallFetchAll : function(fnCallBackFetch,sUrl){
-
-				var fnCallBackFetch = function(oResponseFetch) {
-					if (oResponseFetch.operationSuccess == true) {
-						if (parseInt($('#business-type').val()) == 1) {
-							pgsi.pages.note.view.fill(oResponseFetch.organizationList[0].noteList, oResponseFetch.organizationList[0]);
-						}
-						else if(parseInt($('#business-type').val()) == 2){
-							pgsi.pages.note.view.fill(oResponseFetch.locationList[0].noteList, oResponseFetch.locationList[0]);
-						} else if(parseInt($('#business-type').val()) == 3){
-							pgsi.pages.note.view.fill(oResponseFetch.memberList[0].noteList, oResponseFetch.memberList[0]);
-						} else if (parseInt($('#business-type').val()) == 5){
-							pgsi.pages.note.view.fill(oResponseFetch.recipientList[0].noteList, oResponseFetch.recipientList[0]);
-						}
-
-						$("#action-dialog").dialog('close');
-					}
-					else{
-						pgsi.pages.sendsolv.fnDialogMessageError("",{},oResponseFetch,null,$.pgsi.locale.get("commons.dialog.error.title"),true);
-					}
-					$.pgsi.progressBar.stop();
-				}
-
-				if(parseInt($('#business-type').val()) == 1){
-					sPurl = "api/organization/fetch";
-					iId   = parseInt($('#business-id').val(),10);
-				}
-				else if(parseInt($('#business-type').val()) == 2){
-					sPurl = "api/location/fetch";
-					iId   = parseInt($('#business-id').val(),10);
-				}
-				else if(parseInt($('#business-type').val()) == 3){
-					sPurl = "api/member/fetch";
-					iId   = parseInt($('#member-id').val(),10);
-				}
-				else if(parseInt($('#business-type').val()) == 5){
-					sPurl = "api/recipient/fetch";
-					iId   = parseInt($('#recipient-id').val(),10);
-				}
-
-				$.pgsi.ajax.post({
-					 sUrl       : sPurl,
-					 oRequest   : {id:iId},
-					 fnCallback : fnCallBackFetch
-				});
-			},
-
-			fnAjaxCallInsertUpdateNote : function(oRequest,sUrl,fnCallBack){
-
-				var bValidForm = pgsi.pages.note.form.validator.form();
-				if(bValidForm){
-					var fnCallBack = function(oResponse) {
-
-						if (oResponse.operationSuccess == true) {
-
-							pgsi.pages.note.form.fnAjaxCallFetchAll(fnCallBack,sUrl);
-							$("#action-dialog").dialog('close');
-						}
-
-						else {
-							pgsi.pages.sendsolv.fnDialogMessageError("",{},oResponse,null,$.pgsi.locale.get("commons.dialog.error.title"),true);
-						}
-					}
-					oRequest.note.noteText = $('#note').val();
-					$.pgsi.ajax.post({
-						 sUrl 		: sUrl,
-						 oRequest 	: oRequest,
-						 fnCallback : fnCallBack
-					});
+		if (!$.pgsi.isNullOrUndefined(full.documentos)) {
+			for(var i=0;i<full.documentos.length;i++){
+				if((full.documentos[i].description == "CNPJ")||(full.documentos[i].description == "CPF")){
+					sCnpj = full.documentos[i].numero;
 				}
 			}
-		},
-		view :{
-			fill : function(oNoteList, oBusinessParent) {
+			returno = '<a title="View/Edit ' + sCnpj + '" href="#/pessoa/view?tab=info&pessoaId=' + full.id + '" class="edit_link">' + sCnpj + '</a>';
+		}
+		return returno;
+	},
 
-				var oNote = null;
-				var sNoteList = "";
-				var sDelUpdLinks = "";
+	fnCreateNomeLink : function (val, type, full)
+	{
+		if (type !== "display")
+		{
+			return val;
+		}
 
-				var sDate;
-				var sUser;
-				var sNoteText;
+		return '<a title="View/Edit ' + full.nome + '" href="#/pessoa/view?tab=info&pessoaId=' + full.id + '" class="edit_link">' + full.nome + '</a>';
 
-				var $container = $("section.notes").find("div.container");
-
-				$("section.notes").find(".col-title").find('a').unbind("click");
-
-				for (var i=0; i < oNoteList.length; i++) {
-					oNote = oNoteList[i];
-
-					sUser = oNote.createUser;
-
-					if (!$.pgsi.isNullOrUndefined(oNote.modifyDateUTC)) {
-						sDate = $.pgsi.date.format(new Date(oNote.modifyDateUTC), "mm/dd/yy h:i A", true);
-					}
-
-					else {
-						sDate = $.pgsi.date.format(new Date(oNote.createDateUTC), "mm/dd/yy h:i A", true);
-					}
-
-					sNoteText = oNote.noteText;
-					iNoteId = oNote.id;
-
-					if (!pgsi.util.page.fnIsSDNFlagged(oBusinessParent.sdnstatus)) {
-						<sec:authorize access="hasAnyRole('ROLE_DOMAIN ADMIN', 'ROLE_ADMIN')">
-						sDelUpdLinks = "<div class='small-box'><div class='links viewNote'><a href='"+iNoteId+"'  class='ui-subtitle edit' title='" + $.pgsi.locale.get('commons.pages.edit') + "'> <span class='icon-small-button icon-nav icon-pencil edit'></span> <span>" + $.pgsi.locale.get('commons.pages.edit') +"</span></a><a href='"+iNoteId+"'  class='ui-subtitle delete' title='" + $.pgsi.locale.get('commons.pages.delete') + "'> <span class='icon-small-button icon-nav icon-trash-bin delete'></span> <span>"+$.pgsi.locale.get('commons.pages.delete')+"</span></a></div></div>";
-						</sec:authorize>
-					}
-
-					sNoteList = sNoteList + "<div class='outer-box'><div class='box note'>" + sDelUpdLinks + "<span class='bold'>" + sUser + "</span><span class='date'>" + sDate +"</span><p class='full-text hide'>" + sNoteText + "</p><p></p><div class='text_here'><span class='ellipsis_text'>" + sNoteText + "</span></div></div></div>";
+	},
+	fnProfissao: function (val, type, full)
+	{
+		if (type !== "display")
+		{
+			return val;
+		}
+		var sProfissao ="";
+		if (!$.pgsi.isNullOrUndefined(full.profissao)) {
+			for(var i=0;i<full.profissao.length;i++){
+				sProfissao = sProfissao + full.profissao[i].profissao  +" - <sup>"+full.profissao[i].renda+"</sup><br>" ;
+				if(i === (full.profissao.length - 1)){
+					sProfissao = sProfissao + full.profissao[i].profissao  +" - <sup>"+full.profissao[i].renda+" - Atual</sup><br>" ;
 				}
-
-				// Removes content from the session
-				$container.empty();
-
-				if (sNoteList.length > 0) {
-					$container.append(sNoteList);
-					// Limiting content
-					// Configuring the initial settings to use
-					$container.find('.text_here').ThreeDots({max_rows:4});
-				}
-
-				else {
-					$("section.notes").find('div.container').append("<p class='empty'>" + $.pgsi.locale.get("page.business.view.note.empty") + "</p>");
-				}
-
-				// Attach add/edit/delete events
-				$("section.notes.view  a").click(function(event)
-				{
-					event.preventDefault();
-					var sNote  = $(this).parents('.box');
-					var oNote = new Note({
-								parentKey      : parseInt($('#business-id').val(),10),
-								parentKeyValue : parseInt($('#business-type').val()),
-								parentKeyType  : parseInt($('#business-type').val()),
-								id             : parseInt($(this).attr("href")) ,
-								noteText       : sNote.find('p').text(),
-								modelAction    : "INSERT"});
-					var oRequest = new NoteMaintenanceRequest({note : oNote});
-
-					if (!$(this).hasClass('delete')) {
-						if($(this).hasClass('edit')) {
-							oNote.modelAction = "UPDATE";
-							var sUrl = "api/note/edit",
-							sTitle   = $.pgsi.locale.get("pages.business.dialog.note.title.edit",$('#business-name').val());
-						}else{
-							oNote.modelAction = "INSERT";
-							var sUrl = "api/note/insert",
-							sTitle   = $.pgsi.locale.get("pages.business.dialog.note.title.add",$('#business-name').val());
-						}
-
-						pgsi.util.actiondialog.launchActionDialog("insUpdNote", pgsi.pages.business.dialogSettings.insUpdNote($('#business-id').val(),sTitle,sUrl,new NoteMaintenanceRequest({note : oNote}),null));
-					}
-
-					else {
-
-						pgsi.pages.note.fnDelete(oNote);
-					}
-				});
 			}
+		}
 
-		},
-		fnDelete : function(oNote) {
+		return sProfissao;
 
-			var fnCallBack = function(oResponse) {
-				pgsi.pages.note.form.fnAjaxCallFetchAll();
+	},
+
+	fnEmail: function (val, type, full)
+	{
+		if (type !== "display")
+		{
+			return val;
+		}
+		var sCnae ="";
+		if (!$.pgsi.isNullOrUndefined(full.emails)) {
+
+			for(var i=0;i<full.emails.length;i++){
+				sCnae = sCnae + "<sup>"+full.emails[i].email+"</sup><br>" ;
 			}
+		}
 
-			oNote.modelAction = "DELETE";
-			sTitle = $.pgsi.locale.get("pages.business.dialog.note.title.delete",$('#business-name').val());
-			pgsi.util.actiondialog.launchActionDialog("deleteDialog", pgsi.pages.business.dialogSettings.deleteDialog("api/note/delete", new NoteMaintenanceRequest({note : oNote}),sTitle,fnCallBack,$.pgsi.locale.get("commons.pages.erroView","note")));
-		},
+		return sCnae;
+	},
 
-		//Set up Required Selects
-	initRequiredSelects : function() {
-		$( "span.ui-selectmenu-text" ).each(
-			function(index) {
-				if (!$(this).text().trim())
-				{
-					$(this).parent( "span.ui-selectmenu-button" ).addClass( "required" );
-				}
-				else
-				{
-					$(this).parent( "span.ui-selectmenu-button" ).removeClass( "required" );
-				}
-			});
+	fnTelefone: function (val, type, full)
+	{
+		if (type !== "display")
+		{
+			return val;
+		}
+		var sCnae ="";
+		if (!$.pgsi.isNullOrUndefined(full.telefones)) {
+			for(var i=0;i<full.telefones.length;i++){
+				sCnae = sCnae + "("+full.telefones[i].ddd+ ") "+full.telefones[i].numero+"<br>";
+			}
+		}
+		return sCnae;
+	},
+
+	fnConvenio: function (val, type, full)
+	{
+		if (type !== "display")
+		{
+			return val;
+		}
+
+		var sCnae ="";
+		if (!$.pgsi.isNullOrUndefined(full.convenioList)) {
+			for(var i=0;i<full.convenioList.length;i++){
+				sCnae = sCnae +'<a title="View/Edit ' + full.convenioList[i].nome + '" href="#/convenio/view?tab=info&convenioId=' + full.convenioList[i].id + '" class="edit_link">' + full.convenioList[i].nome + '</a><br>';
+			}
+		}
+		return sCnae;
+
+	},
+
+	fnEndereco: function (val, type, full)
+	{
+		if (type !== "display")
+		{
+			return val;
+		}
+		var sCnae ="";
+		if (!$.pgsi.isNullOrUndefined(full.enderecos)) {
+			for(var i=0;i<full.enderecos.length;i++){
+				sCnae = sCnae + ' '+full.enderecos[i].logradouro + " "+full.enderecos[i].numero + " "+full.enderecos[i].bairro + " "+full.enderecos[i].cidade+'<br>';
+			}
+		}
+		return sCnae;
+
+	},
+	fnDocumento: function (val, type, full)
+	{
+		if (type !== "display")
+		{
+			return val;
+		}
+		var sDocumentos ="";
+		if (!$.pgsi.isNullOrUndefined(full.documentos)) {
+			for(var i=0;i<full.documentos.length;i++){
+				sDocumentos = sDocumentos +  full.documentos[0].description+ " - "+full.documentos[0].numero + "<br>";
+			}
+		}
+		return sDocumentos;
+	},
+
+	produtoTable: {
+
 	}
 }
-
 </script>
+
 
 </sec:authorize>

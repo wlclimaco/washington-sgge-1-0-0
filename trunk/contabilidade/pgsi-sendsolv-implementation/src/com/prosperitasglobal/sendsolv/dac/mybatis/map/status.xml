@@ -186,6 +186,15 @@
   </select>
 
 
+<select id="fetchAllStatusByProduto" parameterType="Integer" resultMap="statusResult">
+
+	    SELECT
+		<include refid="allStatusColumns" />
+	    FROM status b where b.tabelaEnum = 45 and b.parentId = #{id}
+
+	    ORDER BY dataStatus ASC
+  </select>
+
 
   <select id="fetchAllStatusByContatoId" parameterType="Integer" resultMap="statusResult">
 

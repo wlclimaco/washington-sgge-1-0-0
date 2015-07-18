@@ -255,7 +255,7 @@ DROP TABLE  [dbo].[cnaePorRelacionamento];
 CREATE TABLE [dbo].[cnaePorRelacionamento](
     [id]         [int] identity(1,1) NOT NULL,
     [idCnae]     [varchar](50) not NULL,
-    [idParentId] [int] NOT NULL,
+    [parentId] [int] NOT NULL,
     [tabela]     [int] NOT NULL,
     [processId]    [int] NULL,
 	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),

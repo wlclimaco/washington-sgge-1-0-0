@@ -61,8 +61,8 @@ public final class NotaFiscalItensDACD extends SqlSessionDaoSupport
 			switch (cnae.getModelAction())
 			{
 				case INSERT:
-					count = cnaeDAC.insertCnae(cnae,
-							"insertCnae", response);
+					// count = cnaeDAC.insertCnae(cnae,
+					// "insertCnae", response);
 					if (count > 0)
 					{
 						Status status = new Status();
@@ -75,7 +75,7 @@ public final class NotaFiscalItensDACD extends SqlSessionDaoSupport
 					}
 					break;
 				case UPDATE:
-					count = cnaeDAC.updateCnae(cnae, response);
+					// count = cnaeDAC.updateCnae(cnae, response);
 					if (count > 0)
 					{
 						count =
@@ -91,9 +91,9 @@ public final class NotaFiscalItensDACD extends SqlSessionDaoSupport
 					List<Status> statusList = new ArrayList<Status>();
 					count =
 							StatusDACD
-							.maintainStatusAssociations(statusList, response, cnae.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
-									processId, null);
+									.maintainStatusAssociations(statusList, response, cnae.getId(), null,
+											AcaoEnum.DELETE, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
+											processId, null);
 
 					break;
 			}
