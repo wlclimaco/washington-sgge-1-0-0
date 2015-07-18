@@ -254,7 +254,7 @@ CONSTRAINT [pk_cidade_id] PRIMARY KEY CLUSTERED
 DROP TABLE  [dbo].[cnaePorRelacionamento];
 CREATE TABLE [dbo].[cnaePorRelacionamento](
     [id]         [int] identity(1,1) NOT NULL,
-    [idCnae]     [varchar](50) not NULL,
+    [idCnae]     [int] NOT NULL,
     [parentId] [int] NOT NULL,
     [tabela]     [int] NOT NULL,
     [processId]    [int] NULL,

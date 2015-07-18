@@ -30,6 +30,13 @@ public class Cnae extends ModelCosmeDamiao
 		super();
 	}
 
+	public Cnae(Integer id, PersistanceActionEnum mode)
+	{
+		super();
+		this.id = id;
+		setModelAction(mode);
+	}
+
 	/**
 	 * Gets the id.
 	 *
