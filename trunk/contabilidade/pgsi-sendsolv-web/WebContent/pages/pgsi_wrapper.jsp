@@ -128,7 +128,7 @@
                 <div class="row">
                     <div class="span3">
                         <h4>
-                            About Free Admin Template</h4>
+                            Cosme & Damiao Contabilidade</h4>
                         <ul>
                             <li><a href="javascript:;">EGrappler.com</a></li>
                             <li><a href="javascript:;">Web Development Resources</a></li>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.model.Cidade;
+import com.prosperitasglobal.sendsolv.model.Cnae;
 import com.prosperitasglobal.sendsolv.model.CnaeEmpresa;
 import com.prosperitasglobal.sendsolv.model.Documento;
 import com.prosperitasglobal.sendsolv.model.Email;
@@ -166,17 +167,20 @@ public class EmpresaAPIController extends EmpresaBaseController
 		List<CnaeEmpresa> cnaeList = new ArrayList<CnaeEmpresa>();
 		CnaeEmpresa cnae = new CnaeEmpresa();
 		cnae.setModelAction(PersistanceActionEnum.INSERT);
+		cnae.setIdCnae(new Cnae(1, PersistanceActionEnum.NONE));
 		cnae.setId(1);
 		cnaeList.add(cnae);
 
 		cnae = new CnaeEmpresa();
 		cnae.setModelAction(PersistanceActionEnum.INSERT);
-		cnae.setId(2);
+		cnae.setIdCnae(new Cnae(1, PersistanceActionEnum.NONE));
+		cnae.setId(1);
 		cnaeList.add(cnae);
 
 		cnae = new CnaeEmpresa();
 		cnae.setModelAction(PersistanceActionEnum.INSERT);
-		cnae.setId(3);
+		cnae.setIdCnae(new Cnae(1, PersistanceActionEnum.NONE));
+		cnae.setId(1);
 		cnaeList.add(cnae);
 
 		return cnaeList;
