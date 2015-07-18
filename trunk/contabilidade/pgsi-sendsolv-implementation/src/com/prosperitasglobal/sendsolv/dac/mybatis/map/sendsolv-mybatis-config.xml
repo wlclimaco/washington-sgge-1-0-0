@@ -38,6 +38,7 @@
 		<typeAlias alias="Classificacao"              				 type="com.prosperitasglobal.sendsolv.model.Classificacao"/>
 		<typeAlias alias="Cliente"              				 	 type="com.prosperitasglobal.sendsolv.model.Cliente"/>
 		<typeAlias alias="Cnae"              				 		 type="com.prosperitasglobal.sendsolv.model.Cnae"/>
+		<typeAlias alias="CnaeEmpresa"              				 type="com.prosperitasglobal.sendsolv.model.CnaeEmpresa"/>
 		<typeAlias alias="CondPag"              				 	 type="com.prosperitasglobal.sendsolv.model.CondPag"/>
 		<typeAlias alias="CondPagPessoa"            			 	 type="com.prosperitasglobal.sendsolv.model.CondPagPessoa"/>
 		<typeAlias alias="ConhecimentoTransporte"              		 type="com.prosperitasglobal.sendsolv.model.ConhecimentoTransporte"/>
