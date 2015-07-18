@@ -105,11 +105,11 @@
     FROM profissao ORDER BY id ASC
   </select>
 
-  <select id="fetchProfissaoById" parameterType="FetchByIdRequest" resultMap="profissaoResult">
+  <select id="fetchProfissaoById" parameterType="Integer" resultMap="profissaoResult">
     			   SELECT
 					b.id,	<include refid="allProfissaoColumns" />
  				   FROM profissao b
-					where b.id = #{id} order by dataAdmissao ASC
+					where b.id = #{id} order by b.dataAdmissao ASC
   </select>
 
   <select id="fetchAllProfissaosByRequest" parameterType="PagedInquiryRequest" resultMap="profissaoResult">

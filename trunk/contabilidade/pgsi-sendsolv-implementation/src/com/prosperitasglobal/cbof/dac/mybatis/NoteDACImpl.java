@@ -19,7 +19,7 @@ public class NoteDACImpl extends SqlSessionDaoSupport implements INoteDAC
 {
 
 	/** The Constant NOTE_NAMESPACE. */
-	private static final String NOTE_NAMESPACE = "noteMap.";
+	private static final String NOTE_NAMESPACE = "NoteMap.";
 
 	/** The Constant NOTE_STMT_FETCH_BY_ID. */
 	private static final String NOTE_STMT_FETCH_BY_ID = NOTE_NAMESPACE + "fetchNoteById";

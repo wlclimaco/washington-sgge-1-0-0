@@ -96,6 +96,22 @@ public class ClienteCriteria implements Serializable
 		this.status = status;
 	}
 
+	/**
+	 * @return the id
+	 */
+	public Integer getId()
+	{
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Integer id)
+	{
+		this.id = id;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -103,8 +119,9 @@ public class ClienteCriteria implements Serializable
 	@Override
 	public String toString()
 	{
-		return "ProdutoCriteria [getNome()=" + getNome() + ", getEmpresa()=" + getEmpresa() + ", getType()="
-				+ getType() + ", getAssunto()=" + getAssunto() + ", getStatus()=" + getStatus() + ", toString()="
+		return "ClienteCriteria [getNome()=" + getNome() + ", getEmpresa()=" + getEmpresa() + ", getType()="
+				+ getType() + ", getAssunto()=" + getAssunto() + ", getStatus()=" + getStatus() + ", getId()="
+				+ getId() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
 				+ super.toString() + "]";
 	}
 

@@ -17,7 +17,7 @@ import com.qat.framework.model.UserContext;
 public class FilterStatus extends AbstractFilterBase
 {
 	/** The Constant TAGS. */
-	private static final String STATUS = "STATUS";
+	private static final String STATUS = "CDSTATUS";
 
 	/*
 	 * (non-Javadoc)

@@ -614,7 +614,7 @@ pgsi.util.filter =
 			}
 		},
 
-		transferstatus : {
+		status : {
 			type : "options",
 			title : "pages.batches.filter.title",
 			allLabel : "pages.batches.filter.all.types",

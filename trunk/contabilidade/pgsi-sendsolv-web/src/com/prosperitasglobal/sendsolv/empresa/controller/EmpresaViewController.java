@@ -29,6 +29,8 @@ import com.qat.framework.model.SortExpression.Direction;
 @RequestMapping("/empresa")
 public class EmpresaViewController extends EmpresaBaseController
 {
+	private static final String CDSTATUS = "CDSTATUS";
+
 	/** The URL mapping constants. */
 	private static final String FETCH_LIST = "";
 
@@ -143,7 +145,7 @@ public class EmpresaViewController extends EmpresaBaseController
 					.writeValueAsString(fetchEmpresaByRequest(pagedInquiryRequest)));
 
 			FiltersResponse filtersResponse = new FiltersResponse();
-			getFilterFactory().configureFilter(STATUS, null, filtersResponse);
+			getFilterFactory().configureFilter(CDSTATUS, null, filtersResponse);
 
 			modelAndView.addObject(FILTERS, getMapper().writeValueAsString(filtersResponse));
 		}

@@ -102,6 +102,13 @@ $(document).ready(function()
 			sDefaultContent : "",
 			bSortable 		: false
 		},
+		{
+			headerData 		: "Status",
+			order			: "phone_column",
+			mRender 		: pgsi.pages.empresa.fnStatus,
+			sDefaultContent : "",
+			bSortable 		: false
+		},
 		],
 
 		<c:choose>

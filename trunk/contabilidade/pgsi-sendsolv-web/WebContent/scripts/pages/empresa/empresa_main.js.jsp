@@ -130,11 +130,27 @@ pgsi.pages.empresa = {
 			return val;
 		}
 		var sDocumentos ="";
-		for(var i=0;i<full.documentos.length;i++){
-			sDocumentos = sDocumentos +  full.documentos[0].description+ " - "+full.documentos[0].numero + "<br>";
+		if (!$.pgsi.isNullOrUndefined(full.documentos)) {
+			for(var i=0;i<full.documentos.length;i++){
+				sDocumentos = sDocumentos +  full.documentos[i].description+ " - "+full.documentos[i].numero + "<br>";
+			}
 		}
 
 		return sDocumentos;
+	},
+
+	fnStatus: function (val, type, full)
+	{
+		if (type !== "display")
+		{
+			return val;
+		}
+		var sStatus ="";
+		if (!$.pgsi.isNullOrUndefined(full.statusList)) {
+			sStatus = // $.pgsi.enums.internationalizeByLabel("com.prosperitasglobal.sendsolv.model.CdStatusTypeEnum",full.statusList[0].status);
+			sStatus = full.statusList[0].status;
+		}
+		return sStatus;
 	},
 
 	locationTable: {
