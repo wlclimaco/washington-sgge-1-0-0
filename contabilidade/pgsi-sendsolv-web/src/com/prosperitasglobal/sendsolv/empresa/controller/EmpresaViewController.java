@@ -143,7 +143,7 @@ public class EmpresaViewController extends EmpresaBaseController
 					.writeValueAsString(fetchEmpresaByRequest(pagedInquiryRequest)));
 
 			FiltersResponse filtersResponse = new FiltersResponse();
-			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);
+			getFilterFactory().configureFilter(STATUS, null, filtersResponse);
 
 			modelAndView.addObject(FILTERS, getMapper().writeValueAsString(filtersResponse));
 		}

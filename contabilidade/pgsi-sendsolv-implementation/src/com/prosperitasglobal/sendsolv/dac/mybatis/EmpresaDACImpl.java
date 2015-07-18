@@ -27,12 +27,12 @@ import com.prosperitasglobal.sendsolv.dacd.mybatis.SociosDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.StatusDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.TelefoneDACD;
 import com.prosperitasglobal.sendsolv.model.AcaoEnum;
+import com.prosperitasglobal.sendsolv.model.CdStatusTypeEnum;
 import com.prosperitasglobal.sendsolv.model.Empresa;
 import com.prosperitasglobal.sendsolv.model.Historico;
 import com.prosperitasglobal.sendsolv.model.HistoricoItens;
 import com.prosperitasglobal.sendsolv.model.Process;
 import com.prosperitasglobal.sendsolv.model.Status;
-import com.prosperitasglobal.sendsolv.model.StatusEnum;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
 import com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest;
 import com.qat.framework.model.QATModel;
@@ -336,7 +336,7 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		insertCount +=
 				EnderecoDACD.maintainEnderecoAssociations(empresa.getEnderecos(), response, empresa.getId(), null,
 						null,
-						null, getEnderecoDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+						TabelaEnum.EMPRESA, getEnderecoDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
 						empresa.getCreateUser(), processId, historicoId);
 
 		insertCount +=
@@ -346,30 +346,30 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 
 		insertCount +=
 				EmailDACD.maintainEmailAssociations(empresa.getEmails(), response, empresa.getId(), null, null,
-						null, getEmailDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+						TabelaEnum.EMPRESA, getEmailDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
 						empresa.getCreateUser(), processId, historicoId);
 
 		insertCount +=
 				TelefoneDACD.maintainTelefoneAssociations(empresa.getTelefones(), response, empresa.getId(), null,
 						null,
-						null, getTelefoneDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+						TabelaEnum.EMPRESA, getTelefoneDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
 						empresa.getCreateUser(), processId, historicoId);
 
 		insertCount +=
 				DocumentosDACD.maintainDocumentoAssociations(empresa.getDocumentos(), response, empresa.getId(), null,
 						null,
-						null, getDocumentoDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+						TabelaEnum.EMPRESA, getDocumentoDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
 						empresa.getCreateUser(), processId, historicoId);
 
 		insertCount +=
 				SociosDACD.maintainSocioAssociations(empresa.getSocios(), response, empresa.getId(), null, null,
-						null, getSocioDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+						TabelaEnum.EMPRESA, getSocioDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
 						empresa.getCreateUser(), processId, historicoId);
 
 		if (insertCount > 0)
 		{
 			Status status = new Status();
-			status.setStatus(StatusEnum.ACTIVE);
+			status.setStatus(CdStatusTypeEnum.ANALISANDO);
 			List<Status> statusList = new ArrayList<Status>();
 			insertCount =
 					StatusDACD.maintainStatusAssociations(statusList, response, empresa.getId(), null, AcaoEnum.INSERT,
@@ -501,14 +501,14 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		Integer updateCount;
 
 		Status status = new Status();
-		status.setStatus(StatusEnum.INACTIVE);
+		status.setStatus(CdStatusTypeEnum.DELETADO);
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, empresa.getId(),
-						null, AcaoEnum.DELETE,
-						empresa.getCreateUser(), empresa.getId(), TabelaEnum.EMPRESA, getStatusDAC(),
-						getHistoricoDAC(), processId, null);
+						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, empresa.getId(),
+								null, AcaoEnum.DELETE,
+								empresa.getCreateUser(), empresa.getId(), TabelaEnum.EMPRESA, getStatusDAC(),
+								getHistoricoDAC(), processId, null);
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)

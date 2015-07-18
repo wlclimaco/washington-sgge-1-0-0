@@ -9,10 +9,10 @@ import com.prosperitasglobal.sendsolv.dac.ICondPagDAC;
 import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
 import com.prosperitasglobal.sendsolv.model.AcaoEnum;
+import com.prosperitasglobal.sendsolv.model.CdStatusTypeEnum;
 import com.prosperitasglobal.sendsolv.model.CondPag;
 import com.prosperitasglobal.sendsolv.model.CondPagPessoa;
 import com.prosperitasglobal.sendsolv.model.Status;
-import com.prosperitasglobal.sendsolv.model.StatusEnum;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
 import com.prosperitasglobal.sendsolv.model.TipoPag;
 import com.prosperitasglobal.sendsolv.model.TypeEnum;
@@ -70,7 +70,7 @@ public final class CondPagDACD extends SqlSessionDaoSupport
 					if (count > 0)
 					{
 						Status status = new Status();
-						status.setStatus(StatusEnum.ACTIVE);
+						status.setStatus(CdStatusTypeEnum.ATIVO);
 						List<Status> statusList = new ArrayList<Status>();
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
@@ -84,15 +84,15 @@ public final class CondPagDACD extends SqlSessionDaoSupport
 					{
 						count =
 								StatusDACD
-										.maintainStatusAssociations(condPag.getStatusList(), response, condPag.getId(),
-												null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
-												historicoDAC, processId, historicoId);
+								.maintainStatusAssociations(condPag.getStatusList(), response, condPag.getId(),
+										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
+										historicoDAC, processId, historicoId);
 					}
 					break;
 				case DELETE:
 					count = condPagDAC.deleteCondPagPessoa(condPag);
 					Status status = new Status();
-					status.setStatus(StatusEnum.INACTIVE);
+					status.setStatus(CdStatusTypeEnum.DELETADO);
 					List<Status> statusList = new ArrayList<Status>();
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, condPag.getId(), null,
@@ -137,7 +137,7 @@ public final class CondPagDACD extends SqlSessionDaoSupport
 				if (count > 0)
 				{
 					Status status = new Status();
-					status.setStatus(StatusEnum.ACTIVE);
+					status.setStatus(CdStatusTypeEnum.ATIVO);
 					List<Status> statusList = new ArrayList<Status>();
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, count, null,
@@ -151,15 +151,15 @@ public final class CondPagDACD extends SqlSessionDaoSupport
 				{
 					count =
 							StatusDACD
-									.maintainStatusAssociations(condPag.getStatusList(), response, condPag.getId(),
-											null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
-											historicoDAC, processId, historicoId);
+							.maintainStatusAssociations(condPag.getStatusList(), response, condPag.getId(),
+									null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
+									historicoDAC, processId, historicoId);
 				}
 				break;
 			case DELETE:
 				count = condPagDAC.deleteCondPag(condPag);
 				Status status = new Status();
-				status.setStatus(StatusEnum.INACTIVE);
+				status.setStatus(CdStatusTypeEnum.DELETADO);
 				List<Status> statusList = new ArrayList<Status>();
 				count =
 						StatusDACD.maintainStatusAssociations(statusList, response, condPag.getId(), null,
@@ -206,7 +206,7 @@ public final class CondPagDACD extends SqlSessionDaoSupport
 					if (count > 0)
 					{
 						Status status = new Status();
-						status.setStatus(StatusEnum.ACTIVE);
+						status.setStatus(CdStatusTypeEnum.ATIVO);
 						List<Status> statusList = new ArrayList<Status>();
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
@@ -220,15 +220,15 @@ public final class CondPagDACD extends SqlSessionDaoSupport
 					{
 						count =
 								StatusDACD
-										.maintainStatusAssociations(condPag.getStatusList(), response, condPag.getId(),
-												null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
-												historicoDAC, processId, historicoId);
+								.maintainStatusAssociations(condPag.getStatusList(), response, condPag.getId(),
+										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
+										historicoDAC, processId, historicoId);
 					}
 					break;
 				case DELETE:
 					count = condPagDAC.deleteTipoPag(condPag);
 					Status status = new Status();
-					status.setStatus(StatusEnum.INACTIVE);
+					status.setStatus(CdStatusTypeEnum.DELETADO);
 					List<Status> statusList = new ArrayList<Status>();
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, condPag.getId(), null,

@@ -86,11 +86,6 @@ public class DocumentoDACImpl extends SqlSessionDaoSupport implements IDocumento
 		// First insert the root documento data
 		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT, documento, response);
 
-		// Associate with parent using statement name passed as parameter
-		insertCount +=
-				QATMyBatisDacHelper
-				.doInsert(getSqlSession(), statementName, documento, response);
-
 		return insertCount;
 	}
 

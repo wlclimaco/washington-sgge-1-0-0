@@ -9,9 +9,9 @@ import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.ISociosDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
 import com.prosperitasglobal.sendsolv.model.AcaoEnum;
+import com.prosperitasglobal.sendsolv.model.CdStatusTypeEnum;
 import com.prosperitasglobal.sendsolv.model.Socio;
 import com.prosperitasglobal.sendsolv.model.Status;
-import com.prosperitasglobal.sendsolv.model.StatusEnum;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
 import com.prosperitasglobal.sendsolv.model.TypeEnum;
 import com.qat.framework.model.response.InternalResultsResponse;
@@ -66,7 +66,7 @@ public final class SociosDACD extends SqlSessionDaoSupport
 					if (count > 0)
 					{
 						Status status = new Status();
-						status.setStatus(StatusEnum.ACTIVE);
+						status.setStatus(CdStatusTypeEnum.ATIVO);
 						List<Status> statusList = new ArrayList<Status>();
 						statusList.add(status);
 						count =
@@ -89,7 +89,7 @@ public final class SociosDACD extends SqlSessionDaoSupport
 				case DELETE:
 
 					Status status = new Status();
-					status.setStatus(StatusEnum.ACTIVE);
+					status.setStatus(CdStatusTypeEnum.ATIVO);
 					List<Status> statusList = new ArrayList<Status>();
 					statusList.add(status);
 					count =

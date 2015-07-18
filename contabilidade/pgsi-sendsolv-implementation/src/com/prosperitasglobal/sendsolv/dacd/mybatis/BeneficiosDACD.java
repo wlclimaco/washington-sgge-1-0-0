@@ -11,8 +11,8 @@ import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
 import com.prosperitasglobal.sendsolv.model.AcaoEnum;
 import com.prosperitasglobal.sendsolv.model.BeneficioPessoa;
 import com.prosperitasglobal.sendsolv.model.Beneficios;
+import com.prosperitasglobal.sendsolv.model.CdStatusTypeEnum;
 import com.prosperitasglobal.sendsolv.model.Status;
-import com.prosperitasglobal.sendsolv.model.StatusEnum;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
 import com.prosperitasglobal.sendsolv.model.TypeEnum;
 import com.qat.framework.model.response.InternalResultsResponse;
@@ -68,7 +68,7 @@ public final class BeneficiosDACD extends SqlSessionDaoSupport
 					if (count > 0)
 					{
 						Status status = new Status();
-						status.setStatus(StatusEnum.ACTIVE);
+						status.setStatus(CdStatusTypeEnum.ATIVO);
 						List<Status> statusList = new ArrayList<Status>();
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
@@ -92,7 +92,7 @@ public final class BeneficiosDACD extends SqlSessionDaoSupport
 				case DELETE:
 					count = beneficioPessoaDAC.deleteBeneficioPessoa(beneficioPessoa);
 					Status status = new Status();
-					status.setStatus(StatusEnum.INACTIVE);
+					status.setStatus(CdStatusTypeEnum.DELETADO);
 					List<Status> statusList = new ArrayList<Status>();
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, beneficioPessoa.getId(), null,
@@ -102,11 +102,11 @@ public final class BeneficiosDACD extends SqlSessionDaoSupport
 					break;
 				case NONE:
 					count =
-							maintainBeneficioAssociationsA(beneficioPessoa.getBenefId(), response, null, null,
-									null,
-									TabelaEnum.PESSOA, beneficioPessoaDAC, statusDAC, historicoDAC,
-									beneficioPessoa.getEmprId(),
-									beneficioPessoa.getCreateUser(), processId, historiId);
+					maintainBeneficioAssociationsA(beneficioPessoa.getBenefId(), response, null, null,
+							null,
+							TabelaEnum.PESSOA, beneficioPessoaDAC, statusDAC, historicoDAC,
+							beneficioPessoa.getEmprId(),
+							beneficioPessoa.getCreateUser(), processId, historiId);
 					break;
 
 			}
@@ -140,7 +140,7 @@ public final class BeneficiosDACD extends SqlSessionDaoSupport
 				if (count > 0)
 				{
 					Status status = new Status();
-					status.setStatus(StatusEnum.ACTIVE);
+					status.setStatus(CdStatusTypeEnum.ATIVO);
 					List<Status> statusList = new ArrayList<Status>();
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, count, null,
@@ -154,15 +154,15 @@ public final class BeneficiosDACD extends SqlSessionDaoSupport
 				{
 					count =
 							StatusDACD
-							.maintainStatusAssociations(beneficio.getStatusList(), response, beneficio.getId(),
-									null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
-									historicoDAC, processId, historicoId);
+									.maintainStatusAssociations(beneficio.getStatusList(), response, beneficio.getId(),
+											null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
+											historicoDAC, processId, historicoId);
 				}
 				break;
 			case DELETE:
 				count = beneficioDAC.deleteBeneficios(beneficio);
 				Status status = new Status();
-				status.setStatus(StatusEnum.INACTIVE);
+				status.setStatus(CdStatusTypeEnum.DELETADO);
 				List<Status> statusList = new ArrayList<Status>();
 				count =
 						StatusDACD.maintainStatusAssociations(statusList, response, beneficio.getId(), null,

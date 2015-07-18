@@ -62,7 +62,7 @@ public final class PedidoComprasDACD extends SqlSessionDaoSupport
 		// if (count > 0)
 		// {
 		// Status status = new Status();
-		// status.setStatus(StatusEnum.ACTIVE);
+		// status.setStatus(CdStatusTypeEnum.ATIVO);
 		// List<Status> statusList = new ArrayList<Status>();
 		// count =
 		// StatusDACD.maintainStatusAssociations(statusList, response, count, null,
@@ -83,7 +83,7 @@ public final class PedidoComprasDACD extends SqlSessionDaoSupport
 		// case DELETE:
 		//
 		// Status status = new Status();
-		// status.setStatus(StatusEnum.INACTIVE);
+		// status.setStatus(CdStatusTypeEnum.DELETADO);
 		// List<Status> statusList = new ArrayList<Status>();
 		// count =
 		// StatusDACD

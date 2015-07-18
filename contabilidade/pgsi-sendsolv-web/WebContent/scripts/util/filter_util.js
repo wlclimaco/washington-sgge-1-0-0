@@ -623,6 +623,15 @@ pgsi.util.filter =
 			propertyTitle : 1
 		},
 
+		transferstatus : {
+			type : "options",
+			title : "pages.batches.filter.title",
+			allLabel : "pages.batches.filter.all.types",
+			urlParameter : "transaction_type",
+			propertyValue : 0,
+			propertyTitle : 1
+		},
+
 		alerts : {
 			type : "options",
 			title : "commons.pages.alerts",

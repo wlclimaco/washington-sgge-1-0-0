@@ -9,8 +9,8 @@ import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
 import com.prosperitasglobal.sendsolv.dac.ITabPrecoDAC;
 import com.prosperitasglobal.sendsolv.model.AcaoEnum;
+import com.prosperitasglobal.sendsolv.model.CdStatusTypeEnum;
 import com.prosperitasglobal.sendsolv.model.Status;
-import com.prosperitasglobal.sendsolv.model.StatusEnum;
 import com.prosperitasglobal.sendsolv.model.TabPreco;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
 import com.prosperitasglobal.sendsolv.model.TypeEnum;
@@ -67,7 +67,7 @@ public final class PrecoDACD extends SqlSessionDaoSupport
 					if (count > 0)
 					{
 						Status status = new Status();
-						status.setStatus(StatusEnum.ACTIVE);
+						status.setStatus(CdStatusTypeEnum.ATIVO);
 						List<Status> statusList = new ArrayList<Status>();
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
@@ -81,16 +81,16 @@ public final class PrecoDACD extends SqlSessionDaoSupport
 					{
 						count =
 								StatusDACD
-										.maintainStatusAssociations(tabPreco.getStatusList(), response,
-												tabPreco.getId(),
-												null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
-												historicoDAC, processId, null);
+								.maintainStatusAssociations(tabPreco.getStatusList(), response,
+										tabPreco.getId(),
+										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
+										historicoDAC, processId, null);
 					}
 					break;
 				case DELETE:
 
 					Status status = new Status();
-					status.setStatus(StatusEnum.INACTIVE);
+					status.setStatus(CdStatusTypeEnum.DELETADO);
 					List<Status> statusList = new ArrayList<Status>();
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, tabPreco.getId(), null,

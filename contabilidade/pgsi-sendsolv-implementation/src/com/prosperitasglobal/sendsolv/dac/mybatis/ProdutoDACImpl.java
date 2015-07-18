@@ -40,10 +40,10 @@ import com.prosperitasglobal.sendsolv.dacd.mybatis.SubGrupoDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.TributacaoDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.UniMedDACD;
 import com.prosperitasglobal.sendsolv.model.AcaoEnum;
+import com.prosperitasglobal.sendsolv.model.CdStatusTypeEnum;
 import com.prosperitasglobal.sendsolv.model.Process;
 import com.prosperitasglobal.sendsolv.model.Produto;
 import com.prosperitasglobal.sendsolv.model.Status;
-import com.prosperitasglobal.sendsolv.model.StatusEnum;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
 import com.prosperitasglobal.sendsolv.model.request.ProdutoInquiryRequest;
 import com.qat.framework.model.QATModel;
@@ -539,7 +539,7 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 		if (insertCount > 0)
 		{
 			Status status = new Status();
-			status.setStatus(StatusEnum.ACTIVE);
+			status.setStatus(CdStatusTypeEnum.ANALISANDO);
 			List<Status> statusList = new ArrayList<Status>();
 			insertCount =
 					StatusDACD.maintainStatusAssociations(statusList, response, produto.getId(), null, AcaoEnum.INSERT,
@@ -678,7 +678,7 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 		if (updateCount > 0)
 		{
 			Status status = new Status();
-			status.setStatus(StatusEnum.ACTIVE);
+			status.setStatus(CdStatusTypeEnum.ANALISANDO);
 			List<Status> statusList = new ArrayList<Status>();
 			updateCount =
 					StatusDACD.maintainStatusAssociations(statusList, response, produto.getId(), null, AcaoEnum.INSERT,

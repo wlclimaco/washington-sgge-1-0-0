@@ -31,11 +31,6 @@ import com.qat.framework.model.QATModel.PersistanceActionEnum;
 @RequestMapping("/api/empresa")
 public class EmpresaAPIController extends EmpresaBaseController
 {
-
-	/** The Constant FETCH_SIC_NAICS. */
-	private static final String FETCH_SIC_NAICS = "fetchSicNaics";
-	/** The Constant FETCH_ORGANIZATION_BYEMPRESA. */
-	private static final String FETCH_ORGANIZATION_BYEMPRESA = "fetchOrganizationByempresa";
 	/** The URL mapping constants. */
 	private static final String DELETE_EMPRESA = "/delete";
 
@@ -50,11 +45,6 @@ public class EmpresaAPIController extends EmpresaBaseController
 
 	/** The Constant FETCH. */
 	private static final String FETCH = "/fetch";
-	/** The Constant APPLY. */
-	private static final String APPLY = "/applyStatus";
-
-	/** The Constant CONTROLLER_EXCEPTION_MSG. */
-	private static final String CONTROLLER_EXCEPTION_MSG = "EmpresaAPIController";
 
 	/**
 	 * Fetch all Empresas.
@@ -193,24 +183,24 @@ public class EmpresaAPIController extends EmpresaBaseController
 		telefone.setModelAction(modelAction);
 		telefone.setId(1);
 		telefone.setDdd("34");
-		// telefone.setTelefone("91782776");
-		// telefone.setDescricao("Casa");
+		telefone.setNumero("91782776");
+		telefone.setDescricao("Casa");
 		telefoneList.add(telefone);
 
 		telefone = new Telefone();
 		telefone.setModelAction(modelAction);
 		telefone.setId(1);
 		telefone.setDdd("34");
-		// telefone.setTelefone("91782776");
-		// telefone.setDescricao("Trabalho");
+		telefone.setNumero("91782776");
+		telefone.setDescricao("Trabalho");
 		telefoneList.add(telefone);
 
 		telefone = new Telefone();
 		telefone.setModelAction(modelAction);
 		telefone.setId(1);
 		telefone.setDdd("34");
-		// telefone.setTelefone("91782776");
-		// telefone.setDescricao("Celular");
+		telefone.setNumero("91782776");
+		telefone.setDescricao("Celular");
 		telefoneList.add(telefone);
 
 		return telefoneList;

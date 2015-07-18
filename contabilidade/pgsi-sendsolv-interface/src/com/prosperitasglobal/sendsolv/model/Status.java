@@ -18,7 +18,7 @@ public class Status extends QATModelOL
 	private Integer parentId;
 
 	/** The parent key type. */
-	private StatusEnum status;
+	private CdStatusTypeEnum status;
 
 	private AcaoEnum acaoType;
 
@@ -73,7 +73,7 @@ public class Status extends QATModelOL
 
 	public void setStatusValue(Integer priorityValue)
 	{
-		status = StatusEnum.enumForValue(priorityValue);
+		status = CdStatusTypeEnum.enumForValue(priorityValue);
 	}
 
 	/**
@@ -111,7 +111,7 @@ public class Status extends QATModelOL
 	/**
 	 * @return the status
 	 */
-	public StatusEnum getStatus()
+	public CdStatusTypeEnum getStatus()
 	{
 		return status;
 	}
@@ -119,7 +119,7 @@ public class Status extends QATModelOL
 	/**
 	 * @param status the status to set
 	 */
-	public void setStatus(StatusEnum status)
+	public void setStatus(CdStatusTypeEnum status)
 	{
 		this.status = status;
 	}

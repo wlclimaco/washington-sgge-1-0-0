@@ -9,10 +9,10 @@ import com.prosperitasglobal.sendsolv.dac.ICnaeDAC;
 import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
 import com.prosperitasglobal.sendsolv.model.AcaoEnum;
+import com.prosperitasglobal.sendsolv.model.CdStatusTypeEnum;
 import com.prosperitasglobal.sendsolv.model.Cnae;
 import com.prosperitasglobal.sendsolv.model.CnaeEmpresa;
 import com.prosperitasglobal.sendsolv.model.Status;
-import com.prosperitasglobal.sendsolv.model.StatusEnum;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
 import com.prosperitasglobal.sendsolv.model.TypeEnum;
 import com.qat.framework.model.response.InternalResultsResponse;
@@ -55,6 +55,7 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 			// Make sure we set the parent key
 			cnae.setParentId(parentId);
 			cnae.setProcessId(processId);
+			cnae.setTabelaEnum(tabelaEnum);
 
 			if (ValidationUtil.isNull(cnae.getModelAction()))
 			{
@@ -67,7 +68,7 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 					if (count > 0)
 					{
 						Status status = new Status();
-						status.setStatus(StatusEnum.ACTIVE);
+						status.setStatus(CdStatusTypeEnum.ATIVO);
 						List<Status> statusList = new ArrayList<Status>();
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
@@ -81,15 +82,15 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 					{
 						count =
 								StatusDACD
-										.maintainStatusAssociations(cnae.getStatusList(), response, cnae.getId(),
-												null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
-												historicoDAC, processId, historicoId);
+								.maintainStatusAssociations(cnae.getStatusList(), response, cnae.getId(),
+										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
+										historicoDAC, processId, historicoId);
 					}
 					break;
 				case DELETE:
 					count = cnaeDAC.deleteCnaeEmpresa(cnae);
 					Status status = new Status();
-					status.setStatus(StatusEnum.INACTIVE);
+					status.setStatus(CdStatusTypeEnum.DELETADO);
 					List<Status> statusList = new ArrayList<Status>();
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, cnae.getId(), null,
@@ -99,11 +100,11 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 					break;
 				case NONE:
 					count =
-					maintainCnaeAssociationsA(cnae.getIdCnae(), response, null, null,
-							null,
-							TabelaEnum.PESSOA, cnaeDAC, statusDAC, historicoDAC,
-							cnae.getEmprId(),
-							cnae.getCreateUser(), processId, historicoId);
+							maintainCnaeAssociationsA(cnae.getIdCnae(), response, null, null,
+									null,
+									TabelaEnum.PESSOA, cnaeDAC, statusDAC, historicoDAC,
+									cnae.getEmprId(),
+									cnae.getCreateUser(), processId, historicoId);
 					break;
 			}
 		}
@@ -136,7 +137,7 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 				if (count > 0)
 				{
 					Status status = new Status();
-					status.setStatus(StatusEnum.ACTIVE);
+					status.setStatus(CdStatusTypeEnum.ATIVO);
 					List<Status> statusList = new ArrayList<Status>();
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, count, null,
@@ -150,15 +151,15 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 				{
 					count =
 							StatusDACD
-							.maintainStatusAssociations(cnae.getStatusList(), response, cnae.getId(),
-									null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
-									historicoDAC, processId, historicoId);
+									.maintainStatusAssociations(cnae.getStatusList(), response, cnae.getId(),
+											null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
+											historicoDAC, processId, historicoId);
 				}
 				break;
 			case DELETE:
 				count = cnaeDAC.deleteCnae(cnae);
 				Status status = new Status();
-				status.setStatus(StatusEnum.INACTIVE);
+				status.setStatus(CdStatusTypeEnum.DELETADO);
 				List<Status> statusList = new ArrayList<Status>();
 				count =
 						StatusDACD.maintainStatusAssociations(statusList, response, cnae.getId(), null,

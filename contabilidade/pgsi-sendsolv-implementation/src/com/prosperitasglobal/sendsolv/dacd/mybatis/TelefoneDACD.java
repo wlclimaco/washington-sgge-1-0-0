@@ -9,8 +9,8 @@ import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
 import com.prosperitasglobal.sendsolv.dac.ITelefoneDAC;
 import com.prosperitasglobal.sendsolv.model.AcaoEnum;
+import com.prosperitasglobal.sendsolv.model.CdStatusTypeEnum;
 import com.prosperitasglobal.sendsolv.model.Status;
-import com.prosperitasglobal.sendsolv.model.StatusEnum;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
 import com.prosperitasglobal.sendsolv.model.Telefone;
 import com.prosperitasglobal.sendsolv.model.TypeEnum;
@@ -67,7 +67,7 @@ public final class TelefoneDACD extends SqlSessionDaoSupport
 					if (count > 0)
 					{
 						Status status = new Status();
-						status.setStatus(StatusEnum.ACTIVE);
+						status.setStatus(CdStatusTypeEnum.ATIVO);
 						List<Status> statusList = new ArrayList<Status>();
 						statusList.add(status);
 						count =
@@ -89,14 +89,14 @@ public final class TelefoneDACD extends SqlSessionDaoSupport
 				case DELETE:
 
 					Status status = new Status();
-					status.setStatus(StatusEnum.INACTIVE);
+					status.setStatus(CdStatusTypeEnum.DELETADO);
 					List<Status> statusList = new ArrayList<Status>();
 					statusList.add(status);
 					count =
 							StatusDACD
-									.maintainStatusAssociations(statusList, response, count, null, AcaoEnum.DELETE,
-											UserId, empId, TabelaEnum.TELEFONE, statusDAC, historicoDAC, processId,
-											historicoId);
+							.maintainStatusAssociations(statusList, response, count, null, AcaoEnum.DELETE,
+									UserId, empId, TabelaEnum.TELEFONE, statusDAC, historicoDAC, processId,
+									historicoId);
 
 					break;
 			}
