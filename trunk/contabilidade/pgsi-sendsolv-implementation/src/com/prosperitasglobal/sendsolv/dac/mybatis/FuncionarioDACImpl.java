@@ -28,10 +28,10 @@ import com.prosperitasglobal.sendsolv.dacd.mybatis.SalarioDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.StatusDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.TelefoneDACD;
 import com.prosperitasglobal.sendsolv.model.AcaoEnum;
+import com.prosperitasglobal.sendsolv.model.CdStatusTypeEnum;
 import com.prosperitasglobal.sendsolv.model.Funcionario;
 import com.prosperitasglobal.sendsolv.model.Process;
 import com.prosperitasglobal.sendsolv.model.Status;
-import com.prosperitasglobal.sendsolv.model.StatusEnum;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
 import com.prosperitasglobal.sendsolv.model.request.FuncionarioInquiryRequest;
 import com.qat.framework.model.QATModel;
@@ -296,7 +296,7 @@ public class FuncionarioDACImpl extends SqlSessionDaoSupport implements IFuncion
 		if (insertCount > 0)
 		{
 			Status status = new Status();
-			status.setStatus(StatusEnum.ACTIVE);
+			status.setStatus(CdStatusTypeEnum.ANALISANDO);
 			List<Status> statusList = new ArrayList<Status>();
 			insertCount =
 					StatusDACD.maintainStatusAssociations(statusList, response, funcionario.getId(), null,
@@ -434,7 +434,7 @@ public class FuncionarioDACImpl extends SqlSessionDaoSupport implements IFuncion
 		funcionario.setProcessId(processId);
 
 		Status status = new Status();
-		status.setStatus(StatusEnum.INACTIVE);
+		status.setStatus(CdStatusTypeEnum.DELETADO);
 		List<Status> statusList = new ArrayList<Status>();
 
 		StatusDACD.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, funcionario.getId(),

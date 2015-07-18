@@ -53,7 +53,7 @@ pgsi.pages.empresa = {
 		if (!$.pgsi.isNullOrUndefined(full.cnaes)) {
 			var sCnae ="";
 			for(var i=0;i<full.cnaes.length;i++){
-				sCnae = sCnae + full.cnaes[i].cnae  +" - <sup>"+full.cnaes[i].descricao+"</sup><br>" ;
+				sCnae = sCnae + full.cnaes[i].idCnae.cnae  +" - <sup>"+full.cnaes[i].idCnae.descricao+"</sup><br>" ;
 			}
 			return sCnae;
 		}else{
@@ -117,7 +117,7 @@ pgsi.pages.empresa = {
 		var sCnae ="";
 		if (!$.pgsi.isNullOrUndefined(full.enderecos)) {
 			for(var i=0;i<full.enderecos.length;i++){
-				sCnae = sCnae + ' '+full.enderecos[i].logradouro + " "+full.enderecos[i].numero + " "+full.enderecos[i].bairro + " "+full.enderecos[i].cidade+'<br>';
+				sCnae = sCnae + ' '+full.enderecos[i].logradouro + " "+full.enderecos[i].numero + " "+full.enderecos[i].bairro + " "+full.enderecos[i].cidade || "" +'<br>';
 			}
 		}
 		return sCnae;

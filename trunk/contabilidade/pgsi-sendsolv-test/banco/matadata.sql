@@ -182,7 +182,9 @@ CONSTRAINT [pk_historico_id] PRIMARY KEY CLUSTERED
 
 
 /** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[CNAE];
 CREATE TABLE [dbo].[CNAE] (
+    [id]             [int] identity(1,1) NOT NULL,
     [CODIGO]     [VARCHAR](6) NOT NULL,
     [CNAE]       [VARCHAR](10) NULL,
     [DESCRICAO]  [VARCHAR](100) NULL,

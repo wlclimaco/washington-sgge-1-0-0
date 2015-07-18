@@ -245,7 +245,7 @@ $(document).ready(function()
 
 	if (!$.pgsi.isNullOrUndefined(oFilterPreLoad)) {
 		// Filters
-		var aFilters = ['business'];
+		var aFilters = ['status'];
 
 		var filters = pgsi.util.filter.filterArrayToObject(aFilters);
 		pgsi.util.filter.init(oFilterPreLoad, filters, function(oResponse)

@@ -9,10 +9,10 @@ import com.prosperitasglobal.sendsolv.dac.ICfopDAC;
 import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
 import com.prosperitasglobal.sendsolv.model.AcaoEnum;
+import com.prosperitasglobal.sendsolv.model.CdStatusTypeEnum;
 import com.prosperitasglobal.sendsolv.model.Cfop;
 import com.prosperitasglobal.sendsolv.model.CfopPessoa;
 import com.prosperitasglobal.sendsolv.model.Status;
-import com.prosperitasglobal.sendsolv.model.StatusEnum;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
 import com.prosperitasglobal.sendsolv.model.TypeEnum;
 import com.qat.framework.model.response.InternalResultsResponse;
@@ -67,7 +67,7 @@ public final class CfopDACD extends SqlSessionDaoSupport
 					if (count > 0)
 					{
 						Status status = new Status();
-						status.setStatus(StatusEnum.ACTIVE);
+						status.setStatus(CdStatusTypeEnum.ATIVO);
 						List<Status> statusList = new ArrayList<Status>();
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
@@ -81,15 +81,15 @@ public final class CfopDACD extends SqlSessionDaoSupport
 					{
 						count =
 								StatusDACD
-								.maintainStatusAssociations(cfop.getStatusList(), response, cfop.getId(),
-										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
-										historicoDAC, processId, historicoId);
+										.maintainStatusAssociations(cfop.getStatusList(), response, cfop.getId(),
+												null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
+												historicoDAC, processId, historicoId);
 					}
 					break;
 				case DELETE:
 					count = cfopDAC.deleteCfopPessoa(cfop);
 					Status status = new Status();
-					status.setStatus(StatusEnum.INACTIVE);
+					status.setStatus(CdStatusTypeEnum.DELETADO);
 					List<Status> statusList = new ArrayList<Status>();
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, cfop.getId(), null,
@@ -99,11 +99,11 @@ public final class CfopDACD extends SqlSessionDaoSupport
 					break;
 				case NONE:
 					count =
-							maintainCfopAssociationsA(cfop.getIdCfop(), response, null, null,
-									null,
-									TabelaEnum.PESSOA, cfopDAC, statusDAC, historicoDAC,
-									cfop.getEmprId(),
-									cfop.getCreateUser(), processId, historicoId);
+					maintainCfopAssociationsA(cfop.getIdCfop(), response, null, null,
+							null,
+							TabelaEnum.PESSOA, cfopDAC, statusDAC, historicoDAC,
+							cfop.getEmprId(),
+							cfop.getCreateUser(), processId, historicoId);
 					break;
 			}
 		}
@@ -136,7 +136,7 @@ public final class CfopDACD extends SqlSessionDaoSupport
 				if (count > 0)
 				{
 					Status status = new Status();
-					status.setStatus(StatusEnum.ACTIVE);
+					status.setStatus(CdStatusTypeEnum.ATIVO);
 					List<Status> statusList = new ArrayList<Status>();
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, count, null,
@@ -150,15 +150,15 @@ public final class CfopDACD extends SqlSessionDaoSupport
 				{
 					count =
 							StatusDACD
-									.maintainStatusAssociations(cfop.getStatusList(), response, cfop.getId(),
-											null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
-											historicoDAC, processId, historicoId);
+							.maintainStatusAssociations(cfop.getStatusList(), response, cfop.getId(),
+									null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
+									historicoDAC, processId, historicoId);
 				}
 				break;
 			case DELETE:
 				count = cfopDAC.deleteCfop(cfop);
 				Status status = new Status();
-				status.setStatus(StatusEnum.INACTIVE);
+				status.setStatus(CdStatusTypeEnum.DELETADO);
 				List<Status> statusList = new ArrayList<Status>();
 				count =
 						StatusDACD.maintainStatusAssociations(statusList, response, cfop.getId(), null,
