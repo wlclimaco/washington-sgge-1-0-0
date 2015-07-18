@@ -10,7 +10,7 @@ import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
 import com.prosperitasglobal.sendsolv.model.AcaoEnum;
 import com.prosperitasglobal.sendsolv.model.Cnae;
-import com.prosperitasglobal.sendsolv.model.CnaeRel;
+import com.prosperitasglobal.sendsolv.model.CnaeEmpresa;
 import com.prosperitasglobal.sendsolv.model.Status;
 import com.prosperitasglobal.sendsolv.model.StatusEnum;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
@@ -38,7 +38,7 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainCnaeAssociations(List<Cnae> cnaeList,
+	public static Integer maintainCnaeAssociations(List<CnaeEmpresa> cnaeList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, ICnaeDAC cnaeDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC, Integer empId,
 			String UserId, Integer processId, Integer historicoId)
@@ -50,10 +50,11 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 			return count;
 		}
 		// For Each Contact...
-		for (Cnae cnae : cnaeList)
+		for (CnaeEmpresa cnae : cnaeList)
 		{
 			// Make sure we set the parent key
 			cnae.setParentId(parentId);
+			cnae.setProcessId(processId);
 
 			if (ValidationUtil.isNull(cnae.getModelAction()))
 			{
@@ -62,64 +63,109 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 			switch (cnae.getModelAction())
 			{
 				case INSERT:
-					count = cnaeDAC.insertCnae(cnae,
-							"insertCnae", response);
+					count = cnaeDAC.insertCnaeEmpresa(cnae);
 					if (count > 0)
 					{
 						Status status = new Status();
 						status.setStatus(StatusEnum.ACTIVE);
 						List<Status> statusList = new ArrayList<Status>();
-						statusList.add(status);
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
+										AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
 										processId, historicoId);
 					}
 					break;
 				case UPDATE:
-					count = cnaeDAC.updateCnae(cnae, response);
+					count = cnaeDAC.updateCnaeEmpresa(cnae);
 					if (count > 0)
 					{
-
 						count =
-								StatusDACD.maintainStatusAssociations(cnae.getStatusList(), response, cnae.getId(),
-										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
-										processId, historicoId);
+								StatusDACD
+										.maintainStatusAssociations(cnae.getStatusList(), response, cnae.getId(),
+												null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
+												historicoDAC, processId, historicoId);
 					}
 					break;
 				case DELETE:
-
+					count = cnaeDAC.deleteCnaeEmpresa(cnae);
 					Status status = new Status();
 					status.setStatus(StatusEnum.INACTIVE);
 					List<Status> statusList = new ArrayList<Status>();
-					statusList.add(status);
 					count =
-							StatusDACD
-									.maintainStatusAssociations(statusList, response, cnae.getId(), null,
-											AcaoEnum.DELETE, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
-											processId, historicoId);
+							StatusDACD.maintainStatusAssociations(statusList, response, cnae.getId(), null,
+									AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
+									processId, historicoId);
 
 					break;
 				case NONE:
-
-					status = new Status();
-					status.setStatus(StatusEnum.APPLY);
-					statusList = new ArrayList<Status>();
-					statusList.add(status);
-					CnaeRel cnaeRel = new CnaeRel();
-					cnaeRel.setParentId(parentId);
-					cnaeRel.setTabelaEnum(tabelaEnum);
-					cnaeRel.setProcessId(processId);
-					cnaeRel.setParentId(cnae.getId());
-
-					cnaeDAC.insertParentId(cnaeRel, "insertCnaeRel", response);
-
-					count = StatusDACD.maintainStatusAssociations(statusList, response, cnae.getId(), null,
-							AcaoEnum.APPLY, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
-							processId, historicoId);
-
+					count =
+					maintainCnaeAssociationsA(cnae.getIdCnae(), response, null, null,
+							null,
+							TabelaEnum.PESSOA, cnaeDAC, statusDAC, historicoDAC,
+							cnae.getEmprId(),
+							cnae.getCreateUser(), processId, historicoId);
 					break;
 			}
+		}
+
+		return count;
+	}
+
+	public static Integer maintainCnaeAssociationsA(Cnae cnae,
+			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
+			TabelaEnum tabelaEnum, ICnaeDAC cnaeDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
+			Integer empId,
+			String UserId, Integer processId, Integer historicoId)
+	{
+
+		Integer count = 0;
+		// First Maintain Empresa
+		if (ValidationUtil.isNull(cnae))
+		{
+			return count;
+		}
+
+		// Make sure we set the parent key
+		cnae.setParentId(parentId);
+		cnae.setProcessId(processId);
+
+		switch (cnae.getModelAction())
+		{
+			case INSERT:
+				count = cnaeDAC.insertCnae(cnae);
+				if (count > 0)
+				{
+					Status status = new Status();
+					status.setStatus(StatusEnum.ACTIVE);
+					List<Status> statusList = new ArrayList<Status>();
+					count =
+							StatusDACD.maintainStatusAssociations(statusList, response, count, null,
+									AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
+									processId, historicoId);
+				}
+				break;
+			case UPDATE:
+				count = cnaeDAC.updateCnae(cnae);
+				if (count > 0)
+				{
+					count =
+							StatusDACD
+							.maintainStatusAssociations(cnae.getStatusList(), response, cnae.getId(),
+									null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
+									historicoDAC, processId, historicoId);
+				}
+				break;
+			case DELETE:
+				count = cnaeDAC.deleteCnae(cnae);
+				Status status = new Status();
+				status.setStatus(StatusEnum.INACTIVE);
+				List<Status> statusList = new ArrayList<Status>();
+				count =
+						StatusDACD.maintainStatusAssociations(statusList, response, cnae.getId(), null,
+								AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
+								processId, historicoId);
+
+				break;
 		}
 
 		return count;

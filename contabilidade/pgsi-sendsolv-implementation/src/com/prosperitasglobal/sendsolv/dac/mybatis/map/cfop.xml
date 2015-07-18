@@ -57,7 +57,7 @@
 	-->
 
  <sql id="allCfopPessoaColumns">
-		,b.parentId
+		 b.parentId
 		,b.processId
 		,b.idCfop
 		,b.create_date
@@ -189,6 +189,13 @@
   </select>
 
   <select id="fetchCfopByPessoa" parameterType="Integer" resultMap="cfopPessoaResult">
+	 SELECT b.id,<include refid="allCfopPessoaColumns" />
+        FROM CfopParentId b
+     WHERE 1 = 1
+		  AND b.parentid = #{id}
+  </select>
+
+    <select id="fetchCfopByProd" parameterType="Integer" resultMap="cfopPessoaResult">
 	 SELECT b.id,<include refid="allCfopPessoaColumns" />
         FROM CfopParentId b
      WHERE 1 = 1

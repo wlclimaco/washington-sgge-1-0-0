@@ -16,13 +16,11 @@ import com.prosperitasglobal.cbof.model.Note;
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
 import com.prosperitasglobal.sendsolv.bai.IPessoaBAI;
-import com.prosperitasglobal.sendsolv.model.BancoPessoa;
 import com.prosperitasglobal.sendsolv.model.Cidade;
 import com.prosperitasglobal.sendsolv.model.Cliente;
 import com.prosperitasglobal.sendsolv.model.Contato;
 import com.prosperitasglobal.sendsolv.model.ContatoItens;
 import com.prosperitasglobal.sendsolv.model.ContatoTypeEnum;
-import com.prosperitasglobal.sendsolv.model.ConvenioPessoa;
 import com.prosperitasglobal.sendsolv.model.Documento;
 import com.prosperitasglobal.sendsolv.model.Email;
 import com.prosperitasglobal.sendsolv.model.Endereco;
@@ -442,12 +440,12 @@ public class ClienteBaseController extends UtilControllerD
 		cliente.setEmails(insertEmail(modelAction));
 		cliente.setTelefones(insertTelefone(modelAction));
 		cliente.setNotes(insertNote(modelAction));
-		cliente.setBancos(new ArrayList<BancoPessoa>());
-		cliente.getBancos().add(new BancoPessoa(1, PersistanceActionEnum.NONE));
+		// cliente.setBancos(new ArrayList<BancoPessoa>());
+		// cliente.getBancos().add(new BancoPessoa(1, PersistanceActionEnum.NONE));
 		cliente.setContatoList(insertContato(modelAction));
 		cliente.setProfissao(insertProfissao(modelAction));
-		cliente.setConvenioList(new ArrayList<ConvenioPessoa>());
-		cliente.getConvenioList().add(new ConvenioPessoa(1, PersistanceActionEnum.NONE));
+		// cliente.setConvenioList(new ArrayList<ConvenioPessoa>());
+		// cliente.getConvenioList().add(new ConvenioPessoa(1, PersistanceActionEnum.NONE));
 
 		return cliente;
 

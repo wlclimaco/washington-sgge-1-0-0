@@ -55,8 +55,7 @@ public final class TributacaoDACD extends SqlSessionDaoSupport
 		switch (tributacao.getModelAction())
 		{
 			case INSERT:
-				count = tributacaoDAC.insertTributacao(tributacao,
-						"insertTributacao", response);
+				count = tributacaoDAC.insertTributacao(tributacao);
 				if (count > 0)
 				{
 					Status status = new Status();
@@ -69,15 +68,15 @@ public final class TributacaoDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case UPDATE:
-				count = tributacaoDAC.updateTributacao(tributacao, response);
+				count = tributacaoDAC.updateTributacao(tributacao);
 				if (count > 0)
 				{
 					count =
 							StatusDACD
-									.maintainStatusAssociations(tributacao.getStatusList(), response,
-											tributacao.getId(),
-											null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
-											historicoDAC, processId, null);
+							.maintainStatusAssociations(tributacao.getStatusList(), response,
+									tributacao.getId(),
+									null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
+									historicoDAC, processId, null);
 				}
 				break;
 			case DELETE:

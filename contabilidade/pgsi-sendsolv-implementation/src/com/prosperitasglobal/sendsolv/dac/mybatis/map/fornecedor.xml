@@ -40,7 +40,7 @@
 	<collection property="formaPagamentoList" column="id" select="FormaPgMap.fetchFormaPgByPessoa"/>
 	<collection property="condPagList" column="id" select="CondPagMap.fetchCondPagByPessoa"/>
 	<collection property="listCfops" column="id" select="CfopMap.fetchCfopByPessoa"/>
-    <collection property="produtoList" column="id" select="ProdutoMap.fetchProdutoByPessoa"/>
+    <collection property="listProdutos" column="id" select="ProdutoMap.fetchProdutoByPessoa"/>
   </resultMap>
 
   <!--
