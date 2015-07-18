@@ -33,14 +33,13 @@
       	,b.create_user
       	,b.modify_date
       	,b.modify_user
-  		<include refid="CBOFMap.allChangeControlColumns"/>
   	</sql>
 
   	<sql id="allNoteValue">
-		parentId,
-		noteText,
-		tabelaEnumValue,
-		<include refid="CBOFMap.allChangeControlColumns"/>
+		#{parentId},
+		#{noteText},
+		#{tabelaEnumValue},
+		<include refid="CBOFMap.changeControlFields"/>
 	</sql>
 
 

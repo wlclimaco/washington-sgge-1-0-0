@@ -30,7 +30,6 @@
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
 	<collection property="contatoItensList" column="id" select="fetchContatoItensByContatos"/>
-	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByContatoId"/>
   </resultMap>
 
   <!--
@@ -125,7 +124,7 @@
   <select id="fetchContatoByPessoa" parameterType="Integer" resultMap="contatoResult">
 	SELECT b.id,
 		<include refid="allContatoColumns" />
-		FROM contato b where parentId = #{id} ORDER BY b.id ASC
+		FROM contato b where b.parentId = #{id} ORDER BY b.id ASC
   </select>
 
 
@@ -233,10 +232,7 @@
 	SELECT b.id,
 		<include refid="allContatoItensColumns" />
         FROM contatoItens b
-     WHERE 1=1
-     <if test="id != null">
-		  AND b.parentId = #{id}
-	 </if>
+     WHERE b.parentId = #{id}
   </select>
 
   <select id="fetchAllContatoItenssByRequest" parameterType="PagedInquiryRequest" resultMap="contatoItensResult">

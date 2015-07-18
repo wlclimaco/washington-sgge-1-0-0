@@ -117,7 +117,7 @@
 		<include refid="allStatusColumns" />
 	    FROM status b where b.tabelaEnum = 1 and b.parentId = #{id}
 
-	    ORDER BY dataStatus ASC
+	    ORDER BY dataStatus DESC
   </select>
 
   <select id="fetchAllStatusByDocumento" parameterType="Integer" resultMap="statusResult">
