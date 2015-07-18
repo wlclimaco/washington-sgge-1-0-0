@@ -36,6 +36,12 @@ public class CnaeDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 	/** The Constant LOG. */
 	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(CnaeDACImpl.class);
 
+	private static final String CNAE_EMPRESA_STMT_UPDATE = CONTACT_NAMESPACE + "updateCnaeEmpresa";
+
+	private static final String CNAE_EMPRESA_STMT_DELETE = CONTACT_NAMESPACE + "deleteCnaeEmpresaById";
+
+	private static final String CNAE_EMPRESA_STMT_INSERT = CONTACT_NAMESPACE + "insertCnaeEmpresa";
+
 	/*
 	 * (non-Javadoc)
 	 * @see
@@ -112,7 +118,7 @@ public class CnaeDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 		Integer insertCount = 0;
 		InternalResultsResponse<CnaeEmpresa> response = new InternalResultsResponse<CnaeEmpresa>();
 		// First insert the root cnae data
-		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT, cnae, response);
+		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), CNAE_EMPRESA_STMT_INSERT, cnae, response);
 
 		return insertCount;
 	}
@@ -127,7 +133,7 @@ public class CnaeDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 	public Integer deleteCnaeEmpresa(CnaeEmpresa cnae)
 	{
 		InternalResponse response = new InternalResponse();
-		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, cnae, response);
+		return QATMyBatisDacHelper.doRemove(getSqlSession(), CNAE_EMPRESA_STMT_DELETE, cnae, response);
 	}
 
 	/*
@@ -145,7 +151,7 @@ public class CnaeDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 		if (!ValidationUtil.isNull(cnae.getModelAction())
 				&& (cnae.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
 		{
-			updateCount = QATMyBatisDacHelper.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE, cnae, response);
+			updateCount = QATMyBatisDacHelper.doUpdate(getSqlSession(), CNAE_EMPRESA_STMT_UPDATE, cnae, response);
 
 			if (updateCount == 1)
 			{

@@ -139,17 +139,6 @@
     	DELETE FROM cnaePorRelacionamento WHERE id = #{id}
   </delete>
 
-    <select id="fetchAllCnaesByEmpresa" parameterType="Integer" resultMap="cnaeResult">
-    	SELECT F.*
-
-		  FROM cnaePorRelacionamento AS C
-
-		  INNER JOIN cnae AS F
-
-		    ON F.CODIGO like C.IDCNAE
-		where  c.idParentId = #{id} and c.tabela = 1
-    </select>
-
     <select id="fetchAllCnaesByPerson" parameterType="Integer" resultMap="cnaeResult">
     	SELECT
 			<include refid="allCnaeColumns" />
