@@ -46,6 +46,8 @@ public class Produto extends ModelCosmeDamiao
 	/** The height. */
 	private SubGrupoProd subGrupo;
 
+	private Double porcao;
+
 	private MarcaProd marca;
 
 	private Double pesoBruto;
@@ -504,6 +506,22 @@ public class Produto extends ModelCosmeDamiao
 		this.fornecedorList = fornecedorList;
 	}
 
+	/**
+	 * @return the porcao
+	 */
+	public Double getPorcao()
+	{
+		return porcao;
+	}
+
+	/**
+	 * @param porcao the porcao to set
+	 */
+	public void setPorcao(Double porcao)
+	{
+		this.porcao = porcao;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -521,16 +539,16 @@ public class Produto extends ModelCosmeDamiao
 				+ ", getTributacao()=" + getTributacao() + ", getEstoqueList()=" + getEstoqueList()
 				+ ", getPrecoList()=" + getPrecoList() + ", getCustoList()=" + getCustoList() + ", getPorcaoList()="
 				+ getPorcaoList() + ", getRentabilidadeList()=" + getRentabilidadeList() + ", getCfopList()="
-				+ getCfopList() + ", getFornecedorList()=" + getFornecedorList() + ", getTabelaEnumValue()="
-				+ getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()="
-				+ getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()=" + getType()
-				+ ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()="
-				+ getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite() + ", getProcessId()="
-				+ getProcessId() + ", getUserId()=" + getUserId() + ", getNotes()=" + getNotes() + ", toString()="
-				+ super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
-				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
-				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
-				+ hashCode() + "]";
+				+ getCfopList() + ", getFornecedorList()=" + getFornecedorList() + ", getPorcao()=" + getPorcao()
+				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
+				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
+				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
+				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
+				+ ", getProcessId()=" + getProcessId() + ", getUserId()=" + getUserId() + ", getNotes()=" + getNotes()
+				+ ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()="
+				+ getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()="
+				+ getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + "]";
 	}
 
 }

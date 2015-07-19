@@ -1,6 +1,7 @@
 package com.prosperitasglobal.sendsolv.dac.mybatis;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +42,8 @@ import com.prosperitasglobal.sendsolv.dacd.mybatis.TributacaoDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.UniMedDACD;
 import com.prosperitasglobal.sendsolv.model.AcaoEnum;
 import com.prosperitasglobal.sendsolv.model.CdStatusTypeEnum;
+import com.prosperitasglobal.sendsolv.model.Historico;
+import com.prosperitasglobal.sendsolv.model.HistoricoItens;
 import com.prosperitasglobal.sendsolv.model.Process;
 import com.prosperitasglobal.sendsolv.model.Produto;
 import com.prosperitasglobal.sendsolv.model.Status;
@@ -435,16 +438,30 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	{
 		Integer insertCount = 0;
 		InternalResultsResponse<Produto> response = new InternalResultsResponse<Produto>();
+		Historico historico = new Historico();
+		historico.setEmprId(produto.getEmprId());
+		historico.setUserId(produto.getUserId());
+		historico.setProcessId(0);
+		Date a = new Date();
+		historico.setData(a.getTime());
 
-		Process process = new Process();
-		process.setEmprId(produto.getEmprId());
-		process.setTabelaEnum(TabelaEnum.CLIENTE);
-		process.setUserId(produto.getUserId());
-		process.setAcaoType(AcaoEnum.UPDATE);
+		insertCount =
+				QATMyBatisDacHelper.doInsert(getSqlSession(), "HistoricoMap.insertHistorico", historico, response);
 
-		Integer processId = 0;
+		Integer historicoId = historico.getId();
 
-		processId = (Integer)QATMyBatisDacHelper.doQueryForObject(getSqlSession(), "ProcessMap.insertProcess", process);
+		HistoricoItens historicoItens = new HistoricoItens();
+		historicoItens.setIdHist(historicoId);
+		historicoItens.setProcessId(0);
+		historicoItens.setParentId(produto.getId());
+		historicoItens.setTabelaEnum(TabelaEnum.EMPRESA);
+		historicoItens.setAcaoType(AcaoEnum.INSERT);
+
+		insertCount =
+				QATMyBatisDacHelper.doInsert(getSqlSession(), "HistoricoMap.insertHistoricoItens", historicoItens,
+						response);
+
+		Integer processId = historicoId;
 
 		produto.setProcessId(processId);
 
