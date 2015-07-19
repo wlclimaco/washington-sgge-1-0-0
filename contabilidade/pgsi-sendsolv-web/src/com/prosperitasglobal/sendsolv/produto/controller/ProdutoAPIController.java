@@ -1,7 +1,5 @@
 package com.prosperitasglobal.sendsolv.produto.controller;
 
-import java.util.Calendar;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -137,23 +135,10 @@ public class ProdutoAPIController extends ProdutoBaseController
 	 */
 	@RequestMapping(value = INSERT_LOCATION, method = RequestMethod.POST)
 	@ResponseBody
-	public ProdutoResponse insert(@RequestBody ProdutoMaintenanceRequest locationRequest)
+	public ProdutoResponse insertApi(@RequestBody ProdutoMaintenanceRequest locationRequest)
 	{
-		ProdutoResponse locationResponse = new ProdutoResponse();
 
-		try
-		{
-
-			locationRequest.getProduto().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
-			locationResponse = getProdutoBAI().insertProduto(locationRequest);
-		}
-		catch (Exception e)
-		{
-			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
-			locationResponse = null;
-		}
-
-		return locationResponse;
+		return insert(locationRequest);
 
 	}
 

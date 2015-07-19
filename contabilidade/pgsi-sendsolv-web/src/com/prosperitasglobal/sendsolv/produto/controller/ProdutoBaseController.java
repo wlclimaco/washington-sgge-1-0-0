@@ -1,6 +1,7 @@
 package com.prosperitasglobal.sendsolv.produto.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -37,6 +38,7 @@ import com.prosperitasglobal.sendsolv.model.Tributacao;
 import com.prosperitasglobal.sendsolv.model.UniMed;
 import com.prosperitasglobal.sendsolv.model.UniMedProd;
 import com.prosperitasglobal.sendsolv.model.request.ProdutoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ProdutoMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.response.ProdutoResponse;
 import com.qat.framework.model.QATModel.PersistanceActionEnum;
 import com.qat.framework.validation.ValidationUtil;
@@ -176,12 +178,33 @@ public class ProdutoBaseController extends UtilControllerD
 		return produtoResponse;
 	}
 
+	public ProdutoResponse insert(ProdutoMaintenanceRequest locationRequest)
+	{
+		ProdutoResponse locationResponse = new ProdutoResponse();
+
+		try
+		{
+			locationRequest.setProduto(mockProduto(PersistanceActionEnum.INSERT));
+			locationRequest.getProduto().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
+			locationResponse = getProdutoBAI().insertProduto(locationRequest);
+		}
+		catch (Exception e)
+		{
+			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			locationResponse = null;
+		}
+
+		return locationResponse;
+
+	}
+
 	public Produto mockProduto(PersistanceActionEnum model)
 	{
 		Produto produto = new Produto();
 
 		produto.setId(1);
 		produto.setCodigo("0001");
+		produto.setEmprId(1);
 		produto.setCdBarras("0001010101110101");
 		produto.setDataCreate(new Long("14327833577780"));
 		produto.setProduto("Produto 0001");
