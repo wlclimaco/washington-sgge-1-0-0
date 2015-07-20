@@ -1,5 +1,7 @@
 package com.prosperitasglobal.sendsolv.model;
 
+import com.qat.framework.model.II18nEnum;
+import com.qat.framework.model.IIntegerEnum;
 
 /**
  * The Enum PayrollTypeEnum details the different options a payroll can have inside of SendSolv
@@ -8,20 +10,20 @@ package com.prosperitasglobal.sendsolv.model;
  * @version 1.0
  * @created 21-Jul-2014 10:00:07 AM
  */
-public enum ContasTypeEnum implements IIntegerEnum, II18nEnum
+public enum NotaFiscalTypeEnum implements IIntegerEnum, II18nEnum
 {
 
 	/** The centralized. */
-	PAGAR(1, "com.prosperitasglobal.sendsolv.model.payrolltype.centralized"),
+	INICIAL(1, "com.prosperitasglobal.sendsolv.model.payrolltype.centralized"),
 
 	/** The not centralized. */
-	RECEBER(2, "com.prosperitasglobal.sendsolv.model.payrolltype.not_centralized"),
+	MINIMO(2, "com.prosperitasglobal.sendsolv.model.payrolltype.not_centralized"),
 
 	/** The mixed. */
-	MIXED(3, "com.prosperitasglobal.sendsolv.model.payrolltype.mixed"),
+	MAXIMO(3, "com.prosperitasglobal.sendsolv.model.payrolltype.mixed"),
 
 	/** The unknown. */
-	UNKNOWN(4, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
+	ATUAL(4, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
 
 	/** The code. */
 	private Integer code;
@@ -35,7 +37,7 @@ public enum ContasTypeEnum implements IIntegerEnum, II18nEnum
 	 * @param value the value
 	 * @param labelKeyParam the label key param
 	 */
-	private ContasTypeEnum(Integer value, String labelKeyParam)
+	private NotaFiscalTypeEnum(Integer value, String labelKeyParam)
 	{
 		code = value;
 		labelKey = labelKeyParam;
@@ -58,9 +60,9 @@ public enum ContasTypeEnum implements IIntegerEnum, II18nEnum
 	 * @param value the value
 	 * @return the process status enum
 	 */
-	public static ContasTypeEnum enumForValue(Integer value)
+	public static NotaFiscalTypeEnum enumForValue(Integer value)
 	{
-		for (ContasTypeEnum e : values())
+		for (NotaFiscalTypeEnum e : values())
 		{
 			if (e.getValue().equals(value))
 			{
@@ -81,7 +83,7 @@ public enum ContasTypeEnum implements IIntegerEnum, II18nEnum
 		String comma = "";
 		StringBuilder enumValue = new StringBuilder();
 
-		for (ContasTypeEnum i : ContasTypeEnum.class.getEnumConstants())
+		for (NotaFiscalTypeEnum i : NotaFiscalTypeEnum.class.getEnumConstants())
 		{
 			enumValue.append(comma).append(i.getValue());
 			comma = ", ";

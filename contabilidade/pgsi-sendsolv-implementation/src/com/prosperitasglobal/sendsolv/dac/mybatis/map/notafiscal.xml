@@ -22,7 +22,6 @@
 		<result property="numero" column="numero" />
 		<result property="tipo" column="tipo" />
 		<result property="nfValor" column="nfValor" />
-		<result property="xml" column="xml" />
 		<result property="dataEmissao" column="dataEmissao" />
 		<result property="dataSaida" column="dataSaida" />
 		<result property="dataEntrada" column="dataEntrada" />
@@ -30,8 +29,6 @@
 		<result property="bxEstoque" column="bxEstoque" />
 		<result property="descItens" column="descItens" />
 		<result property="pcCusto" column="pcCusto" />
-		<result property="pedidoCompraId" column="pedidoCompraId" />
-		<result property="orcamentoId" column="orcamentoId" />
 		<result property="createUser" column="create_user"/>
 		<result property="createDateUTC" column="create_date"/>
 		<result property="modifyUser" column="modify_user"/>
@@ -40,8 +37,6 @@
 		<association property="transportador"    column="transportador" select="TransportadorMap.fetchTransportadorByNota"  />
 		<association property="conhecimentoTransporte"    column="conhecimentoTransporte" select="ConhecimentoTransporteMap.fetchAllConhecimentoTransportesByNotaFiscalId"  />
 		<association property="empresa"    column="empresa" select="EmpresaMap.fetchEmpresaByNota"  />
-		<association property="fornecedor"    column="fornecedor" select="FornecedorMap.fetchFornecedorByNota"  />
-		<association property="cliente"    column="cliente" select="ClienteMap.fetchClienteByNota"  />
 		<collection property="tributosList" column="id" select="TributosMap.fetchTributosByNota"/>
 		<collection property="formaPagList" column="id" select="FormaPgMap.fetchAllFormaPgByNota"/>
 		<collection property="notaFiscalItens" column="id" select="NotaFiscalItensMap.fetchAllNotaFiscalItensByNota"/>

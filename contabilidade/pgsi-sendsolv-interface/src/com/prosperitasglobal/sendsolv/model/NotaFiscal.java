@@ -86,23 +86,10 @@ public class NotaFiscal extends ModelCosmeDamiao
 	/** The pc custo. */
 	private Integer pcCusto;
 
-	/** The servicos itens list. */
-	List<ServicoItens> servicosItensList;
-
 	/** The nf status list. */
 	private List<NFStatus> nfStatusList;
 
-	/** The fornecedor. */
-	private Fornecedor fornecedor;
-
-	/** The pedido compra. */
-	private List<PedidoCompras> pedidoCompra;
-
-	/** The cliente. */
-	private Cliente cliente;
-
-	/** The orcamento list. */
-	private List<Orcamento> orcamentoList;
+	private List<HistoricoNF> historicoNFList;
 
 	/**
 	 * Default constructor.

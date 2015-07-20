@@ -1,8 +1,5 @@
 package com.prosperitasglobal.sendsolv.model;
 
-import com.qat.framework.model.II18nEnum;
-import com.qat.framework.model.IIntegerEnum;
-
 public enum NotaTypeEnum implements IIntegerEnum, II18nEnum
 {
 
@@ -16,7 +13,11 @@ public enum NotaTypeEnum implements IIntegerEnum, II18nEnum
 	TRANSPORTE(3, "com.prosperitasglobal.sendsolv.model.payrolltype.mixed"),
 
 	/** The unknown. */
-	SERVICO(4, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
+	SERVICO(4, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown"),
+
+	ORCAMENTO(5, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown"),
+
+	PEDIDOCOMPRAS(6, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
 
 	/** The code. */
 	private Integer code;
