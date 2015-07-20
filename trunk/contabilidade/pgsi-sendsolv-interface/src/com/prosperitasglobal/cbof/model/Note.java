@@ -1,7 +1,5 @@
 package com.prosperitasglobal.cbof.model;
 
-import org.springframework.security.ldap.userdetails.Person;
-
 import com.prosperitasglobal.sendsolv.model.ModelCosmeDamiao;
 
 /**
@@ -28,6 +26,12 @@ public class Note extends ModelCosmeDamiao
 	public Note()
 	{
 
+	}
+
+	public Note(String noteText)
+	{
+		super();
+		this.noteText = noteText;
 	}
 
 	public Note(Integer id, String noteText)

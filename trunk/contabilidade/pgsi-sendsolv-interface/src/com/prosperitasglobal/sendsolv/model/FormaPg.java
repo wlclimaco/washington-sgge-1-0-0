@@ -1,6 +1,5 @@
 package com.prosperitasglobal.sendsolv.model;
 
-
 /**
  * The Class FormaPg.
  */
@@ -19,6 +18,18 @@ public class FormaPg extends ModelCosmeDamiao
 
 	/** The entrada. */
 	private Integer entrada;
+
+	public FormaPg(Integer id, PersistanceActionEnum modelAction)
+	{
+		super();
+		this.id = id;
+		setModelAction(modelAction);
+	}
+
+	public FormaPg()
+	{
+		super();
+	}
 
 	/**
 	 * Gets the id.

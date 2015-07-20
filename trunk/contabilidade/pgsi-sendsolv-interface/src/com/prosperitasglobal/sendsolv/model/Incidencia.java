@@ -39,6 +39,13 @@ public class Incidencia extends ModelCosmeDamiao
 		return id;
 	}
 
+	public Incidencia(String codigo, String texto)
+	{
+		super();
+		this.codigo = codigo;
+		this.texto = texto;
+	}
+
 	/**
 	 * Sets the id.
 	 *

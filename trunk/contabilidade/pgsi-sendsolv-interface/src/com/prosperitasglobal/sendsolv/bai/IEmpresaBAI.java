@@ -1,10 +1,12 @@
 package com.prosperitasglobal.sendsolv.bai;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.request.CidadeInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.CnaeInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.EmpresaMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.request.RegimeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.response.CidadeResponse;
 import com.prosperitasglobal.sendsolv.model.response.CnaeResponse;
 import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
 import com.prosperitasglobal.sendsolv.model.response.RegimeResponse;
@@ -58,5 +60,7 @@ public interface IEmpresaBAI
 	public CnaeResponse fetchCnaeByRequest(CnaeInquiryRequest request);
 
 	public RegimeResponse fetchRegimeByRequest(RegimeInquiryRequest request);
+
+	public CidadeResponse fetchCidadeByRequest(CidadeInquiryRequest request);
 
 }

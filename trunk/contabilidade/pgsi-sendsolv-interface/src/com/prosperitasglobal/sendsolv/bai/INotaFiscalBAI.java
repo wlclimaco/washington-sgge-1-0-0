@@ -1,9 +1,16 @@
 package com.prosperitasglobal.sendsolv.bai;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.request.NotaFiscalInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.NotaFiscalMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.response.NotaFiscalResponse;
+import com.prosperitasglobal.sendsolv.model.request.ContasMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.NotaFiscalEntradaMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.NotaFiscalSaidaMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.OrcamentoMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.PedidoComprasMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.ContasResponse;
+import com.prosperitasglobal.sendsolv.model.response.NotaFiscalEntradaResponse;
+import com.prosperitasglobal.sendsolv.model.response.NotaFiscalSaidaResponse;
+import com.prosperitasglobal.sendsolv.model.response.OrcamentoResponse;
+import com.prosperitasglobal.sendsolv.model.response.PedidoComprasResponse;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -12,44 +19,54 @@ import com.prosperitasglobal.sendsolv.model.response.NotaFiscalResponse;
 public interface INotaFiscalBAI
 {
 
-	/**
-	 * Insert nota fiscal.
-	 *
-	 * @param request the request
-	 * @return the nota fiscal response
-	 */
-	public NotaFiscalResponse insertNotaFiscal(NotaFiscalMaintenanceRequest request);
+	public NotaFiscalEntradaResponse insertNotaFiscalEntrada(NotaFiscalEntradaMaintenanceRequest request);
 
-	/**
-	 * Update nota fiscal.
-	 *
-	 * @param request the request
-	 * @return the nota fiscal response
-	 */
-	public NotaFiscalResponse updateNotaFiscal(NotaFiscalMaintenanceRequest request);
+	public NotaFiscalEntradaResponse updateNotaFiscalEntrada(NotaFiscalEntradaMaintenanceRequest request);
 
-	/**
-	 * Delete nota fiscal.
-	 *
-	 * @param request the request
-	 * @return the nota fiscal response
-	 */
-	public NotaFiscalResponse deleteNotaFiscal(NotaFiscalMaintenanceRequest request);
+	public NotaFiscalEntradaResponse deleteNotaFiscalEntrada(NotaFiscalEntradaMaintenanceRequest request);
 
-	/**
-	 * Fetch nota fiscal by id.
-	 *
-	 * @param request the request
-	 * @return the nota fiscal response
-	 */
-	public NotaFiscalResponse fetchNotaFiscalById(FetchByIdRequest request);
+	public NotaFiscalEntradaResponse fetchNotaFiscalEntradaById(FetchByIdRequest request);
 
-	/**
-	 * Fetch nota fiscal by request.
-	 *
-	 * @param request the request
-	 * @return the nota fiscal response
-	 */
-	public NotaFiscalResponse fetchNotaFiscalByRequest(NotaFiscalInquiryRequest request);
+	public NotaFiscalEntradaResponse fetchNotaFiscalEntradaByRequest(NotaFiscalEntradaMaintenanceRequest request);
+
+	public NotaFiscalSaidaResponse insertNotaFiscalSaida(NotaFiscalSaidaMaintenanceRequest request);
+
+	public NotaFiscalSaidaResponse updateNotaFiscalSaida(NotaFiscalSaidaMaintenanceRequest request);
+
+	public NotaFiscalSaidaResponse deleteNotaFiscalSaida(NotaFiscalSaidaMaintenanceRequest request);
+
+	public NotaFiscalSaidaResponse fetchNotaFiscalSaidaById(FetchByIdRequest request);
+
+	public NotaFiscalSaidaResponse fetchNotaFiscalSaidaByRequest(NotaFiscalSaidaMaintenanceRequest request);
+
+	public PedidoComprasResponse insertPedidoCompras(PedidoComprasMaintenanceRequest request);
+
+	public PedidoComprasResponse updatePedidoCompras(PedidoComprasMaintenanceRequest request);
+
+	public PedidoComprasResponse deletePedidoComprasl(PedidoComprasMaintenanceRequest request);
+
+	public PedidoComprasResponse fetchPedidoComprasById(FetchByIdRequest request);
+
+	public PedidoComprasResponse fetchPedidoComprasByRequest(PedidoComprasMaintenanceRequest request);
+
+	public OrcamentoResponse insertOrcamento(OrcamentoMaintenanceRequest request);
+
+	public OrcamentoResponse updateOrcamento(OrcamentoMaintenanceRequest request);
+
+	public OrcamentoResponse deleteOrcamento(OrcamentoMaintenanceRequest request);
+
+	public OrcamentoResponse fetchOrcamentoById(FetchByIdRequest request);
+
+	public OrcamentoResponse fetchOrcamentoByRequest(OrcamentoMaintenanceRequest request);
+
+	public ContasResponse fetchContasByRequest(ContasMaintenanceRequest request);
+
+	public ContasResponse insertContas(NotaFiscalSaidaMaintenanceRequest request);
+
+	public ContasResponse updateContas(NotaFiscalSaidaMaintenanceRequest request);
+
+	public ContasResponse deleteContas(NotaFiscalSaidaMaintenanceRequest request);
+
+	public ContasResponse fetchContasById(FetchByIdRequest request);
 
 }

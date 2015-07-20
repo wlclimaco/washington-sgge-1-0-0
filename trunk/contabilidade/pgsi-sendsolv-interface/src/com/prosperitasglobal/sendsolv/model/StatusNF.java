@@ -1,6 +1,5 @@
 package com.prosperitasglobal.sendsolv.model;
 
-
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -20,6 +19,22 @@ public class StatusNF extends ModelCosmeDamiao
 	public StatusNF()
 	{
 		super();
+	}
+
+	public StatusNF(String value)
+	{
+		super();
+		this.value = value;
+	}
+
+	public String getValue()
+	{
+		return value;
+	}
+
+	public void setValue(String value)
+	{
+		this.value = value;
 	}
 
 	/**
