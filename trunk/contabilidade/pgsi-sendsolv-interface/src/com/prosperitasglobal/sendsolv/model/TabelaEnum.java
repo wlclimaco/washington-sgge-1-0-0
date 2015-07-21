@@ -146,7 +146,15 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 
 	HORAFUNC(44, "sendsolv.base.model.risklevelenum.medium"),
 
-	PRODUTO(45, "sendsolv.base.model.risklevelenum.medium");
+	PRODUTO(45, "sendsolv.base.model.risklevelenum.medium"),
+
+	NOTAFISCAL(46, "sendsolv.base.model.risklevelenum.medium"),
+
+	ORCAMENTO(47, "sendsolv.base.model.risklevelenum.medium"),
+
+	PEDIDOCOMPRAS(48, "sendsolv.base.model.risklevelenum.medium"),
+
+	CONTAS(49, "sendsolv.base.model.risklevelenum.medium");
 
 	/** The code. */
 	private Integer code;

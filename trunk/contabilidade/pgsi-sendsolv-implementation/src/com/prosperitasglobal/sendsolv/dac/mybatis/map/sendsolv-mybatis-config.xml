@@ -42,8 +42,7 @@
 		<typeAlias alias="CondPag"              				 	 type="com.prosperitasglobal.sendsolv.model.CondPag"/>
 		<typeAlias alias="CondPagPessoa"            			 	 type="com.prosperitasglobal.sendsolv.model.CondPagPessoa"/>
 		<typeAlias alias="ConhecimentoTransporte"              		 type="com.prosperitasglobal.sendsolv.model.ConhecimentoTransporte"/>
-		<typeAlias alias="ContasPagar"              				 type="com.prosperitasglobal.sendsolv.model.ContasPagar"/>
-		<typeAlias alias="ContasReceber"              				 type="com.prosperitasglobal.sendsolv.model.ContasReceber"/>
+		<typeAlias alias="Contas"              				         type="com.prosperitasglobal.sendsolv.model.Contas"/>
 		<typeAlias alias="Contato"              				 	 type="com.prosperitasglobal.sendsolv.model.Contato"/>
 		<typeAlias alias="ContatoItens"              			 	 type="com.prosperitasglobal.sendsolv.model.ContatoItens"/>
 		<typeAlias alias="Convenio"              				 	 type="com.prosperitasglobal.sendsolv.model.Convenio"/>
@@ -79,7 +78,6 @@
 		<typeAlias alias="Note"              					     type="com.prosperitasglobal.cbof.model.Note"/>
 		<typeAlias alias="NotaFiscalItens"              	 		 type="com.prosperitasglobal.sendsolv.model.NotaFiscalItens"/>
 		<typeAlias alias="Orcamento"              					 type="com.prosperitasglobal.sendsolv.model.Orcamento"/>
-		<typeAlias alias="OrcamentoItens"              		 		 type="com.prosperitasglobal.sendsolv.model.OrcamentoItens"/>
 		<typeAlias alias="OrdemServicoTypes"              		 	 type="com.prosperitasglobal.sendsolv.model.OrdemServicoTypes"/>
 		<typeAlias alias="OrdemServicoStatus"              		 	 type="com.prosperitasglobal.sendsolv.model.OrdemServicoStatus"/>
 		<typeAlias alias="OrdemServico"              		 		 type="com.prosperitasglobal.sendsolv.model.OrdemServico"/>

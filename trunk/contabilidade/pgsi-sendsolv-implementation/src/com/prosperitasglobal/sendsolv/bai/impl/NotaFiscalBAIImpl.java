@@ -9,17 +9,22 @@ import org.slf4j.LoggerFactory;
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.bac.INotaFiscalBAC;
 import com.prosperitasglobal.sendsolv.bai.INotaFiscalBAI;
-import com.prosperitasglobal.sendsolv.model.NotaFiscal;
+import com.prosperitasglobal.sendsolv.model.Contas;
+import com.prosperitasglobal.sendsolv.model.NotaFiscalEntrada;
+import com.prosperitasglobal.sendsolv.model.NotaFiscalSaida;
+import com.prosperitasglobal.sendsolv.model.Orcamento;
+import com.prosperitasglobal.sendsolv.model.PedidoCompras;
+import com.prosperitasglobal.sendsolv.model.request.ContasInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ContasMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.request.NotaFiscalEntradaMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.request.NotaFiscalInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.NotaFiscalMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.request.NotaFiscalSaidaMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.OrcamentoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.OrcamentoMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.PedidoComprasInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.PedidoComprasMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.response.ContasResponse;
 import com.prosperitasglobal.sendsolv.model.response.NotaFiscalEntradaResponse;
-import com.prosperitasglobal.sendsolv.model.response.NotaFiscalResponse;
 import com.prosperitasglobal.sendsolv.model.response.NotaFiscalSaidaResponse;
 import com.prosperitasglobal.sendsolv.model.response.OrcamentoResponse;
 import com.prosperitasglobal.sendsolv.model.response.PedidoComprasResponse;
@@ -107,25 +112,20 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 		return notaFiscalBAC;
 	}
 
-
-
-
-
 	@Override
 	public NotaFiscalEntradaResponse insertNotaFiscalEntrada(NotaFiscalEntradaMaintenanceRequest request)
 	{
 		NotaFiscalEntradaResponse response = new NotaFiscalEntradaResponse();
-		 try
-		 {
-		 response = processEntrada(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
-		 }
-		 catch (Exception ex)
-		 {
-		 QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		 }
+		try
+		{
+			response = processEntrada(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
 
-		 return response;
-		 }
+		return response;
 	}
 
 	@Override
@@ -188,7 +188,7 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 	}
 
 	@Override
-	public NotaFiscalEntradaResponse fetchNotaFiscalEntradaByRequest(NotaFiscalEntradaMaintenanceRequest request)
+	public NotaFiscalEntradaResponse fetchNotaFiscalEntradaByRequest(NotaFiscalInquiryRequest request)
 	{
 		NotaFiscalEntradaResponse response = new NotaFiscalEntradaResponse();
 		try
@@ -206,17 +206,16 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 	public NotaFiscalSaidaResponse insertNotaFiscalSaida(NotaFiscalSaidaMaintenanceRequest request)
 	{
 		NotaFiscalSaidaResponse response = new NotaFiscalSaidaResponse();
-		 try
-		 {
-		 response = processSaida(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
-		 }
-		 catch (Exception ex)
-		 {
-		 QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		 }
+		try
+		{
+			response = processSaida(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
 
-		 return response;
-		 }
+		return response;
 	}
 
 	@Override
@@ -279,7 +278,7 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 	}
 
 	@Override
-	public NotaFiscalSaidaResponse fetchNotaFiscalSaidaByRequest(NotaFiscalSaidaMaintenanceRequest request)
+	public NotaFiscalSaidaResponse fetchNotaFiscalSaidaByRequest(NotaFiscalInquiryRequest request)
 	{
 		NotaFiscalSaidaResponse response = new NotaFiscalSaidaResponse();
 		try
@@ -297,17 +296,16 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 	public PedidoComprasResponse insertPedidoCompras(PedidoComprasMaintenanceRequest request)
 	{
 		PedidoComprasResponse response = new PedidoComprasResponse();
-		 try
-		 {
-		 response = processPedidoCompras(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
-		 }
-		 catch (Exception ex)
-		 {
-		 QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		 }
+		try
+		{
+			response = processPedidoCompras(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
 
-		 return response;
-		 }
+		return response;
 	}
 
 	@Override
@@ -370,7 +368,7 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 	}
 
 	@Override
-	public PedidoComprasResponse fetchPedidoComprasByRequest(PedidoComprasMaintenanceRequest request)
+	public PedidoComprasResponse fetchPedidoComprasByRequest(PedidoComprasInquiryRequest request)
 	{
 		PedidoComprasResponse response = new PedidoComprasResponse();
 		try
@@ -388,17 +386,16 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 	public OrcamentoResponse insertOrcamento(OrcamentoMaintenanceRequest request)
 	{
 		OrcamentoResponse response = new OrcamentoResponse();
-		 try
-		 {
-		 response = processOrcamento(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
-		 }
-		 catch (Exception ex)
-		 {
-		 QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		 }
+		try
+		{
+			response = processOrcamento(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
 
-		 return response;
-		 }
+		return response;
 	}
 
 	@Override
@@ -461,7 +458,7 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 	}
 
 	@Override
-	public OrcamentoResponse fetchOrcamentoByRequest(OrcamentoMaintenanceRequest request)
+	public OrcamentoResponse fetchOrcamentoByRequest(OrcamentoInquiryRequest request)
 	{
 		OrcamentoResponse response = new OrcamentoResponse();
 		try
@@ -476,39 +473,38 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 	}
 
 	@Override
-	public ContasResponse fetchContasByRequest(ContasMaintenanceRequest request)
-	{
-		OrcamentoResponse response = new OrcamentoResponse();
-		try
-		{
-			fetchPagedOrcamento(request, response);
-		}
-		catch (Exception ex)
-		{
-			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-
-	@Override
-	public ContasResponse insertContas(NotaFiscalSaidaMaintenanceRequest request)
+	public ContasResponse fetchContasByRequest(ContasInquiryRequest request)
 	{
 		ContasResponse response = new ContasResponse();
-		 try
-		 {
-		 response = processContas(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
-		 }
-		 catch (Exception ex)
-		 {
-		 QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		 }
-
-		 return response;
-		 }
+		try
+		{
+			fetchPagedContas(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
 	}
 
 	@Override
-	public ContasResponse updateContas(NotaFiscalSaidaMaintenanceRequest request)
+	public ContasResponse insertContas(ContasMaintenanceRequest request)
+	{
+		ContasResponse response = new ContasResponse();
+		try
+		{
+			response = processContas(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public ContasResponse updateContas(ContasMaintenanceRequest request)
 	{
 		ContasResponse response = new ContasResponse();
 		try
@@ -524,7 +520,7 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 	}
 
 	@Override
-	public ContasResponse deleteContas(NotaFiscalSaidaMaintenanceRequest request)
+	public ContasResponse deleteContas(ContasMaintenanceRequest request)
 	{
 		ContasResponse response = new ContasResponse();
 		try
@@ -574,17 +570,32 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 	 * @param request the request
 	 * @return the notaFiscal response
 	 */
-	private NotaFiscalResponseEntrada processEntrada(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
+	private NotaFiscalEntradaResponse processEntrada(ValidationContextIndicator indicator,
+			PersistanceActionEnum persistType,
 			NotaFiscalEntradaMaintenanceRequest request)
 	{
-		NotaFiscalResponseEntrada response = new NotaFiscalResponseEntrada();
+		NotaFiscalEntradaResponse response = new NotaFiscalEntradaResponse();
 		InternalResponse internalResponse = null;
 
 		// Persist
 		internalResponse = doPersistanceEntrada(request, persistType);
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return (NotaFiscalResponseEntrada)handleReturn((Response)response, internalResponse, null, true);
+		return (NotaFiscalEntradaResponse)handleReturn((Response)response, internalResponse, null, true);
+	}
+
+	private NotaFiscalSaidaResponse processSaida(ValidationContextIndicator indicator,
+			PersistanceActionEnum persistType,
+			NotaFiscalSaidaMaintenanceRequest request)
+	{
+		NotaFiscalSaidaResponse response = new NotaFiscalSaidaResponse();
+		InternalResponse internalResponse = null;
+
+		// Persist
+		internalResponse = doPersistanceSaida(request, persistType);
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		return (NotaFiscalSaidaResponse)handleReturn((Response)response, internalResponse, null, true);
 	}
 
 	/**
@@ -603,38 +614,11 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 		}
 		else
 		{
-			 internalResponse = getNotaFiscalBAC().fetchNotaFiscalEntradaByRequest(request);
+			internalResponse = getNotaFiscalBAC().fetchNotaFiscalEntradaByRequest(request);
 		}
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
 		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
-	}
-
-
-
-	/**
-	 * Handle return.
-	 *
-	 * @param response the response
-	 * @param internalResponse the internal response
-	 * @param messages the messages
-	 * @param copyOver the copy over
-	 * @return the response
-	 */
-	private Response handleReturn(Response response, InternalResponse internalResponse,
-			List<MessageInfo> messages, boolean copyOver)
-	{
-		// In the case there was an Optimistic Locking error, add the specific message
-		if (!ValidationUtil.isNull(internalResponse) && !ValidationUtil.isNull(internalResponse.getStatus())
-				&& Status.OptimisticLockingError.equals(internalResponse.getStatus()))
-		{
-			messages.add(new MessageInfo(PROSPERITASGLOBAL_BASE_OL_ERROR, MessageSeverity.Error,
-					MessageLevel.Object));
-		}
-
-		QATInterfaceUtil.handleOperationStatusAndMessages((com.qat.framework.model.response.Response)response,
-				internalResponse, messages, copyOver);
-		return response;
 	}
 
 	/**
@@ -644,25 +628,26 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 	 * @param updateType the update type
 	 * @return the internal response
 	 */
-	private InternalResponse doPersistance(NotaFiscalEntradaMaintenanceRequest request, PersistanceActionEnum updateType)
+	private InternalResponse doPersistanceEntrada(NotaFiscalEntradaMaintenanceRequest request,
+			PersistanceActionEnum updateType)
 	{
 		switch (updateType)
 		{
-			 case INSERT:
-			 return getNotaFiscalBAC().insertNotaFiscalEntrada(request);
+			case INSERT:
+				return getNotaFiscalBAC().insertNotaFiscalEntrada(request);
 
-			 case UPDATE:
-			 return getNotaFiscalBAC().updateNotaFiscalEntrada(request);
+			case UPDATE:
+				return getNotaFiscalBAC().updateNotaFiscalEntrada(request);
 
-			 case DELETE:
-			 return getNotaFiscalBAC().deleteNotaFiscalEntrada(request);
+			case DELETE:
+				return getNotaFiscalBAC().deleteNotaFiscalEntrada(request);
 
-			 default:
-			 if (LOG.isDebugEnabled())
-			 {
-			 LOG.debug("updateType missing!");
-			 }
-			 break;
+			default:
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("updateType missing!");
+				}
+				break;
 		}
 		return null;
 	}
@@ -683,14 +668,12 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 		}
 		else
 		{
-			 internalResponse = getNotaFiscalBAC().fetchNotaFiscalSaidaByRequest(request);
+			internalResponse = getNotaFiscalBAC().fetchNotaFiscalSaidaByRequest(request);
 		}
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
 		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
 	}
-
-
 
 	/**
 	 * Handle return.
@@ -724,25 +707,26 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 	 * @param updateType the update type
 	 * @return the internal response
 	 */
-	private InternalResponse doPersistanceSaida(NotaFiscalSaidaMaintenanceRequest request, PersistanceActionEnum updateType)
+	private InternalResponse doPersistanceSaida(NotaFiscalSaidaMaintenanceRequest request,
+			PersistanceActionEnum updateType)
 	{
 		switch (updateType)
 		{
-			 case INSERT:
-			 return getNotaFiscalBAC().insertNotaFiscalSaida(request);
+			case INSERT:
+				return getNotaFiscalBAC().insertNotaFiscalSaida(request);
 
-			 case UPDATE:
-			 return getNotaFiscalBAC().updateNotaFiscalSaida(request);
+			case UPDATE:
+				return getNotaFiscalBAC().updateNotaFiscalSaida(request);
 
-			 case DELETE:
-			 return getNotaFiscalBAC().deleteNotaFiscalSaida(request);
+			case DELETE:
+				return getNotaFiscalBAC().deleteNotaFiscalSaida(request);
 
-			 default:
-			 if (LOG.isDebugEnabled())
-			 {
-			 LOG.debug("updateType missing!");
-			 }
-			 break;
+			default:
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("updateType missing!");
+				}
+				break;
 		}
 		return null;
 	}
@@ -755,17 +739,18 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 	 * @param request the request
 	 * @return the notaFiscal response
 	 */
-	private PedidoComprasResponse processPedidoCompras(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
+	private PedidoComprasResponse processPedidoCompras(ValidationContextIndicator indicator,
+			PersistanceActionEnum persistType,
 			PedidoComprasMaintenanceRequest request)
 	{
-		NotaFiscalResponseEntrada response = new NotaFiscalResponseEntrada();
+		PedidoComprasResponse response = new PedidoComprasResponse();
 		InternalResponse internalResponse = null;
 
 		// Persist
-		internalResponse = doPersistanceEntrada(request, persistType);
+		internalResponse = doPersistancePedidoCompras(request, persistType);
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return (NotaFiscalResponseEntrada)handleReturn((Response)response, internalResponse, null, true);
+		return (PedidoComprasResponse)handleReturn((Response)response, internalResponse, null, true);
 	}
 
 	/**
@@ -774,7 +759,7 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 	 * @param request the request
 	 * @param response the response
 	 */
-	private void fetchPagedPedidoCompras(NotaFiscalInquiryRequest request, PedidoComprasResponse response)
+	private void fetchPagedPedidoCompras(PedidoComprasInquiryRequest request, PedidoComprasResponse response)
 	{
 		InternalResultsResponse<PedidoCompras> internalResponse = new InternalResultsResponse<PedidoCompras>();
 
@@ -784,36 +769,36 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 		}
 		else
 		{
-			 internalResponse = getNotaFiscalBAC().fetchPedidoComprasByRequest(request);
+			internalResponse = getNotaFiscalBAC().fetchPedidoComprasByRequest(request);
 		}
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
 		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
 	}
 
-	private InternalResponse doPersistancePedidoCompras(PedidoComprasMaintenanceRequest request, PersistanceActionEnum updateType)
+	private InternalResponse doPersistancePedidoCompras(PedidoComprasMaintenanceRequest request,
+			PersistanceActionEnum updateType)
 	{
 		switch (updateType)
 		{
-			 case INSERT:
-			 return getNotaFiscalBAC().insertPedidoCompras(request);
+			case INSERT:
+				return getNotaFiscalBAC().insertPedidoCompras(request);
 
-			 case UPDATE:
-			 return getNotaFiscalBAC().updatePedidoCompras(request);
+			case UPDATE:
+				return getNotaFiscalBAC().updatePedidoCompras(request);
 
-			 case DELETE:
-			 return getNotaFiscalBAC().deletePedidoCompras(request);
+			case DELETE:
+				return getNotaFiscalBAC().deletePedidoCompras(request);
 
-			 default:
-			 if (LOG.isDebugEnabled())
-			 {
-			 LOG.debug("updateType missing!");
-			 }
-			 break;
+			default:
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("updateType missing!");
+				}
+				break;
 		}
 		return null;
 	}
-
 
 	/**
 	 * Process.
@@ -826,14 +811,14 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 	private OrcamentoResponse processOrcamento(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
 			OrcamentoMaintenanceRequest request)
 	{
-		NotaFiscalResponseEntrada response = new NotaFiscalResponseEntrada();
+		OrcamentoResponse response = new OrcamentoResponse();
 		InternalResponse internalResponse = null;
 
 		// Persist
-		internalResponse = doPersistanceEntrada(request, persistType);
+		internalResponse = doPersistanceOrcamento(request, persistType);
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return (NotaFiscalResponseEntrada)handleReturn((Response)response, internalResponse, null, true);
+		return (OrcamentoResponse)handleReturn((Response)response, internalResponse, null, true);
 	}
 
 	/**
@@ -842,7 +827,7 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 	 * @param request the request
 	 * @param response the response
 	 */
-	private void fetchPagedOrcamento(NotaFiscalInquiryRequest request, OrcamentoResponse response)
+	private void fetchPagedOrcamento(OrcamentoInquiryRequest request, OrcamentoResponse response)
 	{
 		InternalResultsResponse<Orcamento> internalResponse = new InternalResultsResponse<Orcamento>();
 
@@ -852,36 +837,36 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 		}
 		else
 		{
-			 internalResponse = getNotaFiscalBAC().fetchOrcamentoByRequest(request);
+			internalResponse = getNotaFiscalBAC().fetchOrcamentoByRequest(request);
 		}
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
 		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
 	}
 
-	private InternalResponse doPersistanceOrcamento(OrcamentoMaintenanceRequest request, PersistanceActionEnum updateType)
+	private InternalResponse doPersistanceOrcamento(OrcamentoMaintenanceRequest request,
+			PersistanceActionEnum updateType)
 	{
 		switch (updateType)
 		{
-			 case INSERT:
-			 return getNotaFiscalBAC().insertOrcamento(request);
+			case INSERT:
+				return getNotaFiscalBAC().insertOrcamento(request);
 
-			 case UPDATE:
-			 return getNotaFiscalBAC().updateOrcamento(request);
+			case UPDATE:
+				return getNotaFiscalBAC().updateOrcamento(request);
 
-			 case DELETE:
-			 return getNotaFiscalBAC().deleteOrcamento(request);
+			case DELETE:
+				return getNotaFiscalBAC().deleteOrcamento(request);
 
-			 default:
-			 if (LOG.isDebugEnabled())
-			 {
-			 LOG.debug("updateType missing!");
-			 }
-			 break;
+			default:
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("updateType missing!");
+				}
+				break;
 		}
 		return null;
 	}
-
 
 	/**
 	 * Process.
@@ -894,14 +879,14 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 	private ContasResponse processContas(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
 			ContasMaintenanceRequest request)
 	{
-		NotaFiscalResponseEntrada response = new NotaFiscalResponseEntrada();
+		ContasResponse response = new ContasResponse();
 		InternalResponse internalResponse = null;
 
 		// Persist
-		internalResponse = doPersistanceEntrada(request, persistType);
+		internalResponse = doPersistanceContas(request, persistType);
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return (NotaFiscalResponseEntrada)handleReturn((Response)response, internalResponse, null, true);
+		return (ContasResponse)handleReturn((Response)response, internalResponse, null, true);
 	}
 
 	/**
@@ -910,7 +895,7 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 	 * @param request the request
 	 * @param response the response
 	 */
-	private void fetchPagedContas(NotaFiscalInquiryRequest request, ContasResponse response)
+	private void fetchPagedContas(ContasInquiryRequest request, ContasResponse response)
 	{
 		InternalResultsResponse<Contas> internalResponse = new InternalResultsResponse<Contas>();
 
@@ -920,7 +905,7 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 		}
 		else
 		{
-			 internalResponse = getNotaFiscalBAC().fetchContasByRequest(request);
+			internalResponse = getNotaFiscalBAC().fetchContasByRequest(request);
 		}
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
@@ -931,24 +916,23 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 	{
 		switch (updateType)
 		{
-			 case INSERT:
-			 return getNotaFiscalBAC().insertContas(request);
+			case INSERT:
+				return getNotaFiscalBAC().insertContas(request);
 
-			 case UPDATE:
-			 return getNotaFiscalBAC().updateContas(request);
+			case UPDATE:
+				return getNotaFiscalBAC().updateContas(request);
 
-			 case DELETE:
-			 return getNotaFiscalBAC().deleteContas(request);
+			case DELETE:
+				return getNotaFiscalBAC().deleteContas(request);
 
-			 default:
-			 if (LOG.isDebugEnabled())
-			 {
-			 LOG.debug("updateType missing!");
-			 }
-			 break;
+			default:
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("updateType missing!");
+				}
+				break;
 		}
 		return null;
 	}
-
 
 }

@@ -6,11 +6,11 @@ import java.util.List;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
-import com.prosperitasglobal.sendsolv.dac.IProfissaoDAC;
+import com.prosperitasglobal.sendsolv.dac.IHistoricoNFDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
 import com.prosperitasglobal.sendsolv.model.AcaoEnum;
 import com.prosperitasglobal.sendsolv.model.CdStatusTypeEnum;
-import com.prosperitasglobal.sendsolv.model.Profissao;
+import com.prosperitasglobal.sendsolv.model.HistoricoNF;
 import com.prosperitasglobal.sendsolv.model.Status;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
 import com.prosperitasglobal.sendsolv.model.TypeEnum;
@@ -37,34 +37,34 @@ public final class HistoricoNFDACD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainProfissaoAssociations(List<Profissao> profissaoList,
+	public static Integer maintainHistoricoNFAssociations(List<HistoricoNF> historicoNFList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, IProfissaoDAC profissaoDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
+			TabelaEnum tabelaEnum, IHistoricoNFDAC historicoNFDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
 			Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
-		if (ValidationUtil.isNullOrEmpty(profissaoList))
+		if (ValidationUtil.isNullOrEmpty(historicoNFList))
 		{
 			return count;
 		}
 		// For Each Contact...
-		for (Profissao profissao : profissaoList)
+		for (HistoricoNF historicoNF : historicoNFList)
 		{
 			// Make sure we set the parent key
-			profissao.setParentId(parentId);
-			profissao.setProcessId(processId);
+			historicoNF.setParentId(parentId);
+			historicoNF.setProcessId(processId);
 
-			if (ValidationUtil.isNull(profissao.getModelAction()))
+			if (ValidationUtil.isNull(historicoNF.getModelAction()))
 			{
 				continue;
 			}
-			switch (profissao.getModelAction())
+			switch (historicoNF.getModelAction())
 			{
 				case INSERT:
-					count = profissaoDAC.insertProfissao(profissao,
-							"insertProfissao", response);
+					count = historicoNFDAC.insertHistoricoNF(historicoNF,
+							"insertHistoricoNF", response);
 					if (count > 0)
 					{
 						Status status = new Status();
@@ -77,12 +77,12 @@ public final class HistoricoNFDACD extends SqlSessionDaoSupport
 					}
 					break;
 				case UPDATE:
-					count = profissaoDAC.updateProfissao(profissao, response);
+					count = historicoNFDAC.updateHistoricoNF(historicoNF, response);
 					if (count > 0)
 					{
 						count =
-								StatusDACD.maintainStatusAssociations(profissao.getStatusList(), response,
-										profissao.getId(),
+								StatusDACD.maintainStatusAssociations(historicoNF.getStatusList(), response,
+										historicoNF.getId(),
 										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.PROFISSAO, statusDAC,
 										historicoDAC, processId, historicoId);
 					}
@@ -93,7 +93,7 @@ public final class HistoricoNFDACD extends SqlSessionDaoSupport
 					status.setStatus(CdStatusTypeEnum.DELETADO);
 					List<Status> statusList = new ArrayList<Status>();
 					count =
-							StatusDACD.maintainStatusAssociations(statusList, response, profissao.getId(), null,
+							StatusDACD.maintainStatusAssociations(statusList, response, historicoNF.getId(), null,
 									AcaoEnum.DELETE, UserId, empId, TabelaEnum.PROFISSAO, statusDAC, historicoDAC,
 									processId, historicoId);
 

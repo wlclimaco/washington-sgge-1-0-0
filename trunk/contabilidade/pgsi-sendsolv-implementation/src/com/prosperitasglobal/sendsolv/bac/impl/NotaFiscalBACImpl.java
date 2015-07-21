@@ -1,39 +1,74 @@
 package com.prosperitasglobal.sendsolv.bac.impl;
 
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.bac.INotaFiscalBAC;
+import com.prosperitasglobal.sendsolv.dac.INotaFiscalDAC;
+import com.prosperitasglobal.sendsolv.model.Contas;
+import com.prosperitasglobal.sendsolv.model.NotaFiscalEntrada;
+import com.prosperitasglobal.sendsolv.model.NotaFiscalSaida;
+import com.prosperitasglobal.sendsolv.model.Orcamento;
+import com.prosperitasglobal.sendsolv.model.PedidoCompras;
+import com.prosperitasglobal.sendsolv.model.request.ContasInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ContasMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.NotaFiscalEntradaMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.NotaFiscalInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.NotaFiscalSaidaMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.OrcamentoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.OrcamentoMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.PedidoComprasInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.PedidoComprasMaintenanceRequest;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
 
 /**
  * The Class NotaFiscalBACImpl.
  */
 public class NotaFiscalBACImpl implements INotaFiscalBAC
 {
+	private INotaFiscalDAC notaFiscalDAC;
+
+	/**
+	 * @return the notaFiscalDAC
+	 */
+	public INotaFiscalDAC getNotaFiscalDAC()
+	{
+		return notaFiscalDAC;
+	}
+
+	/**
+	 * @param notaFiscalDAC the notaFiscalDAC to set
+	 */
+	public void setNotaFiscalDAC(INotaFiscalDAC notaFiscalDAC)
+	{
+		this.notaFiscalDAC = notaFiscalDAC;
+	}
 
 	@Override
 	public InternalResultsResponse<NotaFiscalEntrada> insertNotaFiscalEntrada(
 			NotaFiscalEntradaMaintenanceRequest request)
-	{
+			{
 		InternalResultsResponse<NotaFiscalEntrada> response = new InternalResultsResponse<NotaFiscalEntrada>();
 
-		response = getNotaFiscalDAC().insertNotaFiscalEntrada(request.getNotaFiscal());
+		response = getNotaFiscalDAC().insertNotaFiscalEntrada(request.getNotafiscal());
 
 		return response;
-	}
+			}
 
 	@Override
 	public InternalResultsResponse<NotaFiscalEntrada> updateNotaFiscalEntrada(
 			NotaFiscalEntradaMaintenanceRequest request)
-	{
+			{
 		InternalResultsResponse<NotaFiscalEntrada> response = new InternalResultsResponse<NotaFiscalEntrada>();
 
-		response = getNotaFiscalDAC().updateNotaFiscalEntrada(request.getNotaFiscal());
+		response = getNotaFiscalDAC().updateNotaFiscalEntrada(request.getNotafiscal());
 
 		return response;
-	}
+			}
 
 	@Override
 	public InternalResponse deleteNotaFiscalEntrada(NotaFiscalEntradaMaintenanceRequest request)
 	{
-		return getNotaFiscalDAC().deleteNotaFiscalEntrada(request.getNotaFiscal());
+		return getNotaFiscalDAC().deleteNotaFiscalEntrada(request.getNotafiscal());
 	}
 
 	@Override
@@ -44,17 +79,17 @@ public class NotaFiscalBACImpl implements INotaFiscalBAC
 
 	@Override
 	public InternalResultsResponse<NotaFiscalEntrada> fetchNotaFiscalEntradaByRequest(
-			NotaFiscalEntradaMaintenanceRequest request)
-	{
+			NotaFiscalInquiryRequest request)
+			{
 		return getNotaFiscalDAC().fetchNotaFiscalEntradaByRequest(request);
-	}
+			}
 
 	@Override
 	public InternalResultsResponse<NotaFiscalSaida> insertNotaFiscalSaida(NotaFiscalSaidaMaintenanceRequest request)
 	{
 		InternalResultsResponse<NotaFiscalSaida> response = new InternalResultsResponse<NotaFiscalSaida>();
 
-		response = getNotaFiscalDAC().insertNotaFiscalSaida(request.getNotaFiscal());
+		response = getNotaFiscalDAC().insertNotaFiscalSaida(request.getNotafiscal());
 
 		return response;
 	}
@@ -64,7 +99,7 @@ public class NotaFiscalBACImpl implements INotaFiscalBAC
 	{
 		InternalResultsResponse<NotaFiscalSaida> response = new InternalResultsResponse<NotaFiscalSaida>();
 
-		response = getNotaFiscalDAC().insertNotaFiscalSaida(request.getNotaFiscal());
+		response = getNotaFiscalDAC().insertNotaFiscalSaida(request.getNotafiscal());
 
 		return response;
 	}
@@ -72,7 +107,7 @@ public class NotaFiscalBACImpl implements INotaFiscalBAC
 	@Override
 	public InternalResponse deleteNotaFiscalSaida(NotaFiscalSaidaMaintenanceRequest request)
 	{
-		return getNotaFiscalDAC().deleteNotaFiscalSaida(request.getNotaFiscal());
+		return getNotaFiscalDAC().deleteNotaFiscalSaida(request.getNotafiscal());
 	}
 
 	@Override
@@ -83,10 +118,10 @@ public class NotaFiscalBACImpl implements INotaFiscalBAC
 
 	@Override
 	public InternalResultsResponse<NotaFiscalSaida> fetchNotaFiscalSaidaByRequest(
-			NotaFiscalSaidaMaintenanceRequest request)
-	{
+			NotaFiscalInquiryRequest request)
+			{
 		return getNotaFiscalDAC().fetchNotaFiscalSaidaByRequest(request);
-	}
+			}
 
 	@Override
 	public InternalResultsResponse<PedidoCompras> insertPedidoCompras(PedidoComprasMaintenanceRequest request)
@@ -109,7 +144,7 @@ public class NotaFiscalBACImpl implements INotaFiscalBAC
 	}
 
 	@Override
-	public InternalResponse deletePedidoComprasl(PedidoComprasMaintenanceRequest request)
+	public InternalResponse deletePedidoCompras(PedidoComprasMaintenanceRequest request)
 	{
 		return getNotaFiscalDAC().deletePedidoCompras(request.getPedidoCompras());
 	}
@@ -121,7 +156,7 @@ public class NotaFiscalBACImpl implements INotaFiscalBAC
 	}
 
 	@Override
-	public InternalResultsResponse<PedidoCompras> fetchPedidoComprasByRequest(PedidoComprasMaintenanceRequest request)
+	public InternalResultsResponse<PedidoCompras> fetchPedidoComprasByRequest(PedidoComprasInquiryRequest request)
 	{
 		return getNotaFiscalDAC().fetchPedidoComprasByRequest(request);
 	}
@@ -149,7 +184,7 @@ public class NotaFiscalBACImpl implements INotaFiscalBAC
 	@Override
 	public InternalResponse deleteOrcamento(OrcamentoMaintenanceRequest request)
 	{
-		return getNotaFiscalDAC().deleteOrcamento(request.getNotaFiscal());
+		return getNotaFiscalDAC().deleteOrcamento(request.getOrcamento());
 	}
 
 	@Override
@@ -159,15 +194,15 @@ public class NotaFiscalBACImpl implements INotaFiscalBAC
 	}
 
 	@Override
-	public InternalResultsResponse<Orcamento> fetchOrcamentoByRequest(OrcamentoMaintenanceRequest request)
+	public InternalResultsResponse<Orcamento> fetchOrcamentoByRequest(OrcamentoInquiryRequest request)
 	{
 		return getNotaFiscalDAC().fetchOrcamentoByRequest(request);
 	}
 
 	@Override
-	public InternalResultsResponse<Contas> fetchContasByRequest(ContasMaintenanceRequest request)
+	public InternalResultsResponse<Contas> fetchContasByRequest(ContasInquiryRequest request)
 	{
-		return getNotaFiscalDAC().fetchEmpresaByRequest(request);
+		return getNotaFiscalDAC().fetchContasByRequest(request);
 	}
 
 	@Override
@@ -193,7 +228,7 @@ public class NotaFiscalBACImpl implements INotaFiscalBAC
 	@Override
 	public InternalResponse deleteContas(ContasMaintenanceRequest request)
 	{
-		return getNotaFiscalDAC().deleteContas(request.getNotaFiscal());
+		return getNotaFiscalDAC().deleteContas(request.getContas());
 	}
 
 	@Override

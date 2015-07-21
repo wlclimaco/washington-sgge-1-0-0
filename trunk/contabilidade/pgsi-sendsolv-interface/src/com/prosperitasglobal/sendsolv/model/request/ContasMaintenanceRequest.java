@@ -1,13 +1,13 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
-import com.prosperitasglobal.sendsolv.model.Arquivo;
+import com.prosperitasglobal.sendsolv.model.Contas;
 import com.qat.framework.model.request.MaintenanceRequest;
 
 public class ContasMaintenanceRequest extends MaintenanceRequest
 {
 
 	/** Attributes */
-	private Arquivo arquivo;
+	private Contas contas;
 
 	/**
 	 * The Constructor.
@@ -18,19 +18,19 @@ public class ContasMaintenanceRequest extends MaintenanceRequest
 	}
 
 	/**
-	 * @return the arquivo
+	 * @return the contas
 	 */
-	public Arquivo getArquivo()
+	public Contas getContas()
 	{
-		return arquivo;
+		return contas;
 	}
 
 	/**
-	 * @param arquivo the arquivo to set
+	 * @param contas the contas to set
 	 */
-	public void setArquivo(Arquivo arquivo)
+	public void setContas(Contas contas)
 	{
-		this.arquivo = arquivo;
+		this.contas = contas;
 	}
 
 	/*
@@ -40,7 +40,7 @@ public class ContasMaintenanceRequest extends MaintenanceRequest
 	@Override
 	public String toString()
 	{
-		return "ArquivoMaintenanceRequest [getArquivo()=" + getArquivo() + ", getUserContext()=" + getUserContext()
+		return "ContasMaintenanceRequest [getContas()=" + getContas() + ", getUserContext()=" + getUserContext()
 				+ "]";
 	}
 
