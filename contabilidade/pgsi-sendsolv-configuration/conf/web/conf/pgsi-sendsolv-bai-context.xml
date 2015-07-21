@@ -166,11 +166,6 @@
  		<property name="validationController" ref="notaFiscalValidationController"/>
  	</bean>
 
- 	<bean id="orcamentoBAI" class="com.prosperitasglobal.sendsolv.bai.impl.OrcamentoBAIImpl">
- 		<property name="orcamentoBAC" ref="orcamentoBACTarget"/>
- 		<property name="validationController" ref="orcamentoValidationController"/>
- 	</bean>
-
  	<bean id="ordemServicoBAI" class="com.prosperitasglobal.sendsolv.bai.impl.OrdemServicoBAIImpl">
  		<property name="ordemServicoBAC" ref="ordemServicoBACTarget"/>
  		<property name="validationController" ref="ordemServicoValidationController"/>

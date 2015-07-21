@@ -84,10 +84,6 @@
  		<property name="notaFiscalDAC" ref="notaFiscalDACTarget"/>
  	</bean>
 
- 	<bean id="orcamentoBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.OrcamentoBACImpl">
- 		<property name="orcamentoDAC" ref="orcamentoDACTarget"/>
- 	</bean>
-
  	<bean id="ordemServicoBACTarget" class="com.prosperitasglobal.sendsolv.bac.impl.OrdemServicoBACImpl">
  		<property name="ordemServicoDAC" ref="ordemServicoDACTarget"/>
  	</bean>
