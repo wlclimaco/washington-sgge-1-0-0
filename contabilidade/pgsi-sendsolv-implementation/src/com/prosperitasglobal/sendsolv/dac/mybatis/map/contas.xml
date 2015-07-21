@@ -6,24 +6,48 @@
 
 <mapper namespace="ContasMap">
 
-  <resultMap id="contasResult" type="Contas" extends="PessoaMap.PessoaResult">
-	<collection property="profissao" column="id" select="ProfissaoMap.fetchProfissaoById"/>
-	<collection property="convenioList" column="id" select="ConvenioMap.fetchConvenioByPerson"/>
+  <resultMap id="contasResult" type="Contas">
+	<result property="id" 			  column="id" />
+	<result property="parentId" 	  column="parentId" />
+	<result property="pessoaId" 	  column="pessoaId" />
+	<result property="docId" 		  column="docId" />
+	<result property="contasTypeEnum" column="contasTypeEnum" />
+	<result property="numeroParc" 	  column="numeroParc" />
+	<result property="parcela" 		  column="parcela" />
+	<result property="valorOriginal"  column="valorOriginal" />
+	<result property="dataVencimento" column="dataVencimento" />
+	<result property="dataGeracao" 	  column="dataGeracao" />
+	<result property="dataPagamento"  column="dataPagamento" />
+	<result property="juros" 		  column="juros" />
+	<result property="taxa" 		  column="taxa" />
+	<result property="valorTotal"     column="valorTotal" />
+	<result property="processId"      column="processId" />
+	<result property="emprId"     	  column="emprId" />
+	<result property="createUser" 	  column="create_user"/>
+	<result property="createDateUTC"  column="create_date"/>
+	<result property="modifyUser"     column="modify_user"/>
+	<result property="modifyDateUTC"  column="modify_date"/>
   </resultMap>
 
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allContasColumns">
-		 b.cdEmpr
-		,b.nome
-		,b.type
-		,b.sexo
-		,b.dataNasc
-		,b.nomePai
-		,b.nomeMae
-		,b.nomeConjugue
-		,b.estadoCivil
+  		 b.parentId
+		,b.pessoaId
+		,b.docId
+		,b.contasTypeEnum
+		,b.numeroParc
+		,b.parcela
+		,b.valorOriginal
+		,b.dataVencimento
+		,b.dataGeracao
+		,b.dataPagamento
+		,b.juros
+		,b.taxa
+		,b.valorTotal
+		,b.processId
+		,b.emprId
       	,b.create_date
       	,b.create_user
       	,b.modify_date
@@ -31,56 +55,101 @@
   </sql>
 
   <sql id="allContasValues">
-  		#{emprId},
-  		#{nome},
-  		#{pessoaTypeEnumValue},
-  		#{sexo},
-  		#{dataNasc},
-  		#{nomePai},
-  		#{nomeMae},
-  		#{nomeConjugue},
-  		#{estadoCivil},
+  		#{parentId},
+		#{pessoaId},
+		#{docId},
+		#{contasTypeEnumValue},
+		#{numeroParc},
+		#{parcela},
+		#{valorOriginal},
+		#{dataVencimento},
+		#{dataGeracao},
+		#{dataPagamento},
+		#{juros},
+		#{taxa},
+		#{valorTotal},
+		#{processId},
+		#{emprId},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
+
+
+   <insert id="insertContas" parameterType="Contas" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO contas (
+		<include refid="allContasColumns" />
+      )
+    VALUES (<include refid="allContasValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateContas" parameterType="Contas">
+    UPDATE contas
+    	<set>
+			<if test="parentId!= null"> parentId=#{parentId},</if>
+			<if test="pessoaId!= null"> pessoaId=#{pessoaId},</if>
+			<if test="docId!= null"> docId=#{docId},</if>
+			<if test="contasTypeEnumValue!= null"> contasTypeEnum=#{contasTypeEnumValue},</if>
+			<if test="numeroParc!= null"> numeroParc=#{numeroParc},</if>
+			<if test="parcela!= null"> parcela=#{parcela},</if>
+			<if test="valorOriginal!= null"> valorOriginal=#{valorOriginal},</if>
+			<if test="dataVencimento!= null"> dataVencimento=#{dataVencimento},</if>
+			<if test="dataGeracao!= null"> dataGeracao=#{dataGeracao},</if>
+			<if test="dataPagamento!= null"> dataPagamento=#{dataPagamento},</if>
+			<if test="juros!= null"> juros=#{juros},</if>
+			<if test="taxa!= null"> taxa=#{taxa},</if>
+			<if test="valorTotal!= null"> valorTotal=#{valorTotal},</if>
+			<if test="processId!= null"> processId=#{processId},</if>
+			<if test="emprId!= null"> emprId=#{emprId},</if>
+			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
 
 	<!--
 		SQL Fetch Statements.
  	-->
   <select id="fetchContasRowCount" parameterType="ContasInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
-        FROM pessoa where type = 1
+        FROM contas
 
   </select>
 
   <select id="fetchAllContass" resultMap="contasResult">
     SELECT
 	<include refid="allContasColumns" />
-    FROM pessoa ORDER BY nome ASC
+    FROM contas ORDER BY dataGeracao ASC
   </select>
 
   <select id="fetchContasById" parameterType="FetchByIdRequest" resultMap="contasResult">
     			   SELECT
 					b.id,	<include refid="allContasColumns" />
- 				   FROM pessoa b
+ 				   FROM contas b
 					where b.id = #{id}
   </select>
 
    <select id="fetchContasByNota" parameterType="Integer" resultMap="contasResult">
     			   SELECT
 					b.id,	<include refid="allContasColumns" />
- 				   FROM pessoa b
-					where b.id = #{id}
+ 				   FROM contas b
+					where b.parentid = #{id} order by b.dataGeracao
   </select>
 
   <select id="fetchAllContassByRequest" parameterType="ContasInquiryRequest" resultMap="contasResult">
      SELECT * FROM ( SELECT b.id,
     						<include refid="allContasColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
-    				FROM pessoa b
-						where type = 1
+    				FROM contas b
+						where 1 = 1
 					<if test="parentId != null">
-						AND b.id = #{id}
+						AND b.parentid = #{id}
 					</if>
+
 					 <if test="statusList != null and !statusList.isEmpty()">
 					     AND b.PGSI_status IN
 					     <foreach item="item" index="index" collection="statusList"

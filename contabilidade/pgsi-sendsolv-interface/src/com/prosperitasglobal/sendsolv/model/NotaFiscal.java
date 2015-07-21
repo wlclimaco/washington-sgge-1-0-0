@@ -39,7 +39,9 @@ public class NotaFiscal extends ModelCosmeDamiao
 	private ConhecimentoTransporte conhecimentoTransporte;
 
 	/** The empresa. */
-	private Empresa empresa;
+	private Entidade empresa;
+
+	private Pessoa pessoa;
 
 	/** The tributos list. */
 	private List<Tributacao> tributosList;
@@ -281,7 +283,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 	 *
 	 * @return the empresa
 	 */
-	public Empresa getEmpresa()
+	public Entidade getEmpresa()
 	{
 		return empresa;
 	}
@@ -291,7 +293,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 	 *
 	 * @param empresa the empresa to set
 	 */
-	public void setEmpresa(Empresa empresa)
+	public void setEmpresa(Entidade empresa)
 	{
 		this.empresa = empresa;
 	}
@@ -608,6 +610,38 @@ public class NotaFiscal extends ModelCosmeDamiao
 		this.historicoNFList = historicoNFList;
 	}
 
+	/**
+	 * @return the pessoa
+	 */
+	public Pessoa getPessoa()
+	{
+		return pessoa;
+	}
+
+	/**
+	 * @param pessoa the pessoa to set
+	 */
+	public void setPessoa(Pessoa pessoa)
+	{
+		this.pessoa = pessoa;
+	}
+
+	/**
+	 * @return the contasList
+	 */
+	public List<Contas> getContasList()
+	{
+		return contasList;
+	}
+
+	/**
+	 * @param contasList the contasList to set
+	 */
+	public void setContasList(List<Contas> contasList)
+	{
+		this.contasList = contasList;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -622,17 +656,18 @@ public class NotaFiscal extends ModelCosmeDamiao
 				+ ", getTributosList()=" + getTributosList() + ", getFormaPagList()=" + getFormaPagList()
 				+ ", getNotaFiscalItens()=" + getNotaFiscalItens() + ", getNoteList()=" + getNoteList()
 				+ ", getContaspagarList()=" + getContaspagarList() + ", getItensEspeciais()=" + getItensEspeciais()
-				+ ", getDataEmissao()="
-				+ getDataEmissao() + ", getDataSaida()=" + getDataSaida() + ", getDataEntrada()=" + getDataEntrada()
-				+ ", getModelo()=" + getModelo() + ", getCfop()=" + getCfop() + ", getBxEstoque()=" + getBxEstoque()
-				+ ", getDescItens()=" + getDescItens() + ", getPcCusto()=" + getPcCusto() + ", getNfStatusList()="
-				+ getNfStatusList() + ", getHistoricoNFList()=" + getHistoricoNFList() + ", getTabelaEnumValue()="
-				+ getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()="
-				+ getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()=" + getType()
-				+ ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()="
-				+ getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite() + ", getProcessId()="
-				+ getProcessId() + ", getUserId()=" + getUserId() + ", getNotes()=" + getNotes() + ", toString()="
-				+ super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
+				+ ", getDataEmissao()=" + getDataEmissao() + ", getDataSaida()=" + getDataSaida()
+				+ ", getDataEntrada()=" + getDataEntrada() + ", getModelo()=" + getModelo() + ", getCfop()="
+				+ getCfop() + ", getBxEstoque()=" + getBxEstoque() + ", getDescItens()=" + getDescItens()
+				+ ", getPcCusto()=" + getPcCusto() + ", getNfStatusList()=" + getNfStatusList()
+				+ ", getHistoricoNFList()=" + getHistoricoNFList() + ", getPessoa()=" + getPessoa()
+				+ ", getContasList()=" + getContasList() + ", getTabelaEnumValue()=" + getTabelaEnumValue()
+				+ ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue()
+				+ ", getParentId()=" + getParentId() + ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType()
+				+ ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()="
+				+ getEmprId() + ", getSite()=" + getSite() + ", getProcessId()=" + getProcessId() + ", getUserId()="
+				+ getUserId() + ", getNotes()=" + getNotes() + ", toString()=" + super.toString()
+				+ ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
 				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
 				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
 				+ hashCode() + "]";

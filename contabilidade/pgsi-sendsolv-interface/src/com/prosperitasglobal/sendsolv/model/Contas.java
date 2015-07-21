@@ -1,6 +1,5 @@
 package com.prosperitasglobal.sendsolv.model;
 
-
 /**
  * The Class Document represents a generic formal business or personal document, such as driver's license or bylaws.
  */
@@ -11,7 +10,7 @@ public class Contas extends ModelCosmeDamiao
 	/** Attributes. */
 	private Integer id;
 
-	private Integer idFornecedor;
+	private Integer pessoaId;
 
 	/** The parent key. */
 	private Integer docId;
