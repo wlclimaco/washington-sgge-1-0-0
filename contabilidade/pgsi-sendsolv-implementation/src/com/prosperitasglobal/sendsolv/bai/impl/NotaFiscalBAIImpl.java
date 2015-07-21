@@ -107,160 +107,463 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 		return notaFiscalBAC;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.bai.ILocaationBAI#insertLocaation(com.prosperitasglobal.sendsolv.model
-	 * .request.LocaationRequest)
-	 * Leveraging the common process method to perform the "real" work.
-	 * Wrapped in a try-catch to ensure we never return an exception from this operation.
-	 */
-	// @Override
-	// public NotaFiscalResponse insertNotaFiscal(NotaFiscalMaintenanceRequest request)
-	// {
-	// NotaFiscalResponse response = new NotaFiscalResponse();
-	// try
-	// {
-	// response = process(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
-	// }
-	// catch (Exception ex)
-	// {
-	// QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-	// }
-	//
-	// return response;
-	// }
-	//
-	// /*
-	// * (non-Javadoc)
-	// * @see
-	// * com.prosperitasglobal.sendsolv.bai.ILocaationBAI#updateLocaation(com.prosperitasglobal.sendsolv.model
-	// * .request.LocaationRequest)
-	// * Leveraging the common process method to perform the "real" work.
-	// * Wrapped in a try-catch to ensure we never return an exception from this operation.
-	// */
-	// @Override
-	// public NotaFiscalResponse updateNotaFiscal(NotaFiscalMaintenanceRequest request)
-	// {
-	// NotaFiscalResponse response = new NotaFiscalResponse();
-	// try
-	// {
-	// response = process(ValidationContextIndicator.UPDATE, PersistanceActionEnum.UPDATE, request);
-	// }
-	// catch (Exception ex)
-	// {
-	// QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-	// }
-	//
-	// return response;
-	// }
-	//
-	// /*
-	// * (non-Javadoc)
-	// * @see
-	// * com.prosperitasglobal.sendsolv.bai.ILocaationBAI#deleteLocaation(com.prosperitasglobal.sendsolv.model
-	// * .request.LocaationRequest)
-	// * Leveraging the common process method to perform the "real" work.
-	// * Wrapped in a try-catch to ensure we never return an exception from this operation.
-	// */
-	// @Override
-	// public NotaFiscalResponse deleteNotaFiscal(NotaFiscalMaintenanceRequest request)
-	// {
-	// NotaFiscalResponse response = new NotaFiscalResponse();
-	// try
-	// {
-	// response = process(ValidationContextIndicator.DELETE, PersistanceActionEnum.DELETE, request);
-	// }
-	// catch (Exception ex)
-	// {
-	// QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-	// }
-	//
-	// return response;
-	// }
-	//
-	// /*
-	// * (non-Javadoc)
-	// * @see
-	// * com.prosperitasglobal.sendsolv.bai.ILocaationBAI#fetchLocaationById(com.prosperitasglobal.sendsolv.model.
-	// * request
-	// * .CountyRequest)
-	// */
-	// @Override
-	// public NotaFiscalResponse fetchNotaFiscalById(FetchByIdRequest request)
-	// {
-	// NotaFiscalResponse response = new NotaFiscalResponse();
-	// try
-	// {
-	// InternalResponse internalResponse = new InternalResponse();
-	// // validate fetchId field
-	// if (ValidationUtil.isNull(request.getId()) && ValidationUtil.isNullOrEmpty(request.getStringId()))
-	// {
-	// internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_ID_REQUIRED);
-	// }
-	// else
-	// {
-	// internalResponse = getNotaFiscalBAC().fetchNotaFiscalById(request);
-	// }
-	// // Handle the processing for all previous methods regardless of them failing or succeeding.
-	// QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
-	// }
-	// catch (Exception ex)
-	// {
-	// QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-	// }
-	//
-	// return response;
-	// }
-	//
-	// /*
-	// * (non-Javadoc)
-	// * @see
-	// * com.prosperitasglobal.sendsolv.bai.INotaFiscalBAI#fetchNotaFiscalByRequest(com.prosperitasglobal.sendsolv.model
-	// * .request.PagedInquiryRequest)
-	// */
-	// @Override
-	// public NotaFiscalResponse fetchNotaFiscalByRequest(NotaFiscalInquiryRequest request)
-	// {
-	// NotaFiscalResponse response = new NotaFiscalResponse();
-	// try
-	// {
-	// fetchPaged(request, response);
-	// }
-	// catch (Exception ex)
-	// {
-	// QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-	// }
-	// return response;
-	// }
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.sendsolv.bai.INotaFiscalBAI#updateRisk(com.prosperitasglobal.sendsolv.model.request.
-	 * RiskMaintenanceRequest)
-	 */
 
-	/**
-	 * Fetch paged.
-	 *
-	 * @param request the request
-	 * @param response the response
-	 */
-	private void fetchPaged(NotaFiscalInquiryRequest request, NotaFiscalResponse response)
+
+
+	@Override
+	public NotaFiscalEntradaResponse insertNotaFiscalEntrada(NotaFiscalEntradaMaintenanceRequest request)
 	{
-		InternalResultsResponse<NotaFiscal> internalResponse = new InternalResultsResponse<NotaFiscal>();
+		NotaFiscalEntradaResponse response = new NotaFiscalEntradaResponse();
+		 try
+		 {
+		 response = processEntrada(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
+		 }
+		 catch (Exception ex)
+		 {
+		 QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		 }
 
-		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		 return response;
+		 }
+	}
+
+	@Override
+	public NotaFiscalEntradaResponse updateNotaFiscalEntrada(NotaFiscalEntradaMaintenanceRequest request)
+	{
+		NotaFiscalEntradaResponse response = new NotaFiscalEntradaResponse();
+		try
 		{
-			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+			response = processEntrada(ValidationContextIndicator.UPDATE, PersistanceActionEnum.UPDATE, request);
 		}
-		else
+		catch (Exception ex)
 		{
-			// internalResponse = getNotaFiscalBAC().fetchNotaFiscalByRequest(request);
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
 		}
 
-		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+		return response;
+	}
+
+	@Override
+	public NotaFiscalEntradaResponse deleteNotaFiscalEntrada(NotaFiscalEntradaMaintenanceRequest request)
+	{
+		NotaFiscalEntradaResponse response = new NotaFiscalEntradaResponse();
+		try
+		{
+			response = processEntrada(ValidationContextIndicator.DELETE, PersistanceActionEnum.DELETE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public NotaFiscalEntradaResponse fetchNotaFiscalEntradaById(FetchByIdRequest request)
+	{
+		NotaFiscalEntradaResponse response = new NotaFiscalEntradaResponse();
+		try
+		{
+			InternalResponse internalResponse = new InternalResponse();
+			// validate fetchId field
+			if (ValidationUtil.isNull(request.getId()) && ValidationUtil.isNullOrEmpty(request.getStringId()))
+			{
+				internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_ID_REQUIRED);
+			}
+			else
+			{
+				internalResponse = getNotaFiscalBAC().fetchNotaFiscalEntradaById(request);
+			}
+			// Handle the processing for all previous methods regardless of them failing or succeeding.
+			QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public NotaFiscalEntradaResponse fetchNotaFiscalEntradaByRequest(NotaFiscalEntradaMaintenanceRequest request)
+	{
+		NotaFiscalEntradaResponse response = new NotaFiscalEntradaResponse();
+		try
+		{
+			fetchPagedEntrada(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	@Override
+	public NotaFiscalSaidaResponse insertNotaFiscalSaida(NotaFiscalSaidaMaintenanceRequest request)
+	{
+		NotaFiscalSaidaResponse response = new NotaFiscalSaidaResponse();
+		 try
+		 {
+		 response = processSaida(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
+		 }
+		 catch (Exception ex)
+		 {
+		 QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		 }
+
+		 return response;
+		 }
+	}
+
+	@Override
+	public NotaFiscalSaidaResponse updateNotaFiscalSaida(NotaFiscalSaidaMaintenanceRequest request)
+	{
+		NotaFiscalSaidaResponse response = new NotaFiscalSaidaResponse();
+		try
+		{
+			response = processSaida(ValidationContextIndicator.UPDATE, PersistanceActionEnum.UPDATE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public NotaFiscalSaidaResponse deleteNotaFiscalSaida(NotaFiscalSaidaMaintenanceRequest request)
+	{
+		NotaFiscalSaidaResponse response = new NotaFiscalSaidaResponse();
+		try
+		{
+			response = processSaida(ValidationContextIndicator.DELETE, PersistanceActionEnum.DELETE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public NotaFiscalSaidaResponse fetchNotaFiscalSaidaById(FetchByIdRequest request)
+	{
+		NotaFiscalSaidaResponse response = new NotaFiscalSaidaResponse();
+		try
+		{
+			InternalResponse internalResponse = new InternalResponse();
+			// validate fetchId field
+			if (ValidationUtil.isNull(request.getId()) && ValidationUtil.isNullOrEmpty(request.getStringId()))
+			{
+				internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_ID_REQUIRED);
+			}
+			else
+			{
+				internalResponse = getNotaFiscalBAC().fetchNotaFiscalSaidaById(request);
+			}
+			// Handle the processing for all previous methods regardless of them failing or succeeding.
+			QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public NotaFiscalSaidaResponse fetchNotaFiscalSaidaByRequest(NotaFiscalSaidaMaintenanceRequest request)
+	{
+		NotaFiscalSaidaResponse response = new NotaFiscalSaidaResponse();
+		try
+		{
+			fetchPagedSaida(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	@Override
+	public PedidoComprasResponse insertPedidoCompras(PedidoComprasMaintenanceRequest request)
+	{
+		PedidoComprasResponse response = new PedidoComprasResponse();
+		 try
+		 {
+		 response = processPedidoCompras(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
+		 }
+		 catch (Exception ex)
+		 {
+		 QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		 }
+
+		 return response;
+		 }
+	}
+
+	@Override
+	public PedidoComprasResponse updatePedidoCompras(PedidoComprasMaintenanceRequest request)
+	{
+		PedidoComprasResponse response = new PedidoComprasResponse();
+		try
+		{
+			response = processPedidoCompras(ValidationContextIndicator.UPDATE, PersistanceActionEnum.UPDATE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public PedidoComprasResponse deletePedidoComprasl(PedidoComprasMaintenanceRequest request)
+	{
+		PedidoComprasResponse response = new PedidoComprasResponse();
+		try
+		{
+			response = processPedidoCompras(ValidationContextIndicator.DELETE, PersistanceActionEnum.DELETE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public PedidoComprasResponse fetchPedidoComprasById(FetchByIdRequest request)
+	{
+		PedidoComprasResponse response = new PedidoComprasResponse();
+		try
+		{
+			InternalResponse internalResponse = new InternalResponse();
+			// validate fetchId field
+			if (ValidationUtil.isNull(request.getId()) && ValidationUtil.isNullOrEmpty(request.getStringId()))
+			{
+				internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_ID_REQUIRED);
+			}
+			else
+			{
+				internalResponse = getNotaFiscalBAC().fetchPedidoComprasById(request);
+			}
+			// Handle the processing for all previous methods regardless of them failing or succeeding.
+			QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public PedidoComprasResponse fetchPedidoComprasByRequest(PedidoComprasMaintenanceRequest request)
+	{
+		PedidoComprasResponse response = new PedidoComprasResponse();
+		try
+		{
+			fetchPagedPedidoCompras(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	@Override
+	public OrcamentoResponse insertOrcamento(OrcamentoMaintenanceRequest request)
+	{
+		OrcamentoResponse response = new OrcamentoResponse();
+		 try
+		 {
+		 response = processOrcamento(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
+		 }
+		 catch (Exception ex)
+		 {
+		 QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		 }
+
+		 return response;
+		 }
+	}
+
+	@Override
+	public OrcamentoResponse updateOrcamento(OrcamentoMaintenanceRequest request)
+	{
+		OrcamentoResponse response = new OrcamentoResponse();
+		try
+		{
+			response = processOrcamento(ValidationContextIndicator.UPDATE, PersistanceActionEnum.UPDATE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public OrcamentoResponse deleteOrcamento(OrcamentoMaintenanceRequest request)
+	{
+		OrcamentoResponse response = new OrcamentoResponse();
+		try
+		{
+			response = processOrcamento(ValidationContextIndicator.DELETE, PersistanceActionEnum.DELETE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public OrcamentoResponse fetchOrcamentoById(FetchByIdRequest request)
+	{
+		OrcamentoResponse response = new OrcamentoResponse();
+		try
+		{
+			InternalResponse internalResponse = new InternalResponse();
+			// validate fetchId field
+			if (ValidationUtil.isNull(request.getId()) && ValidationUtil.isNullOrEmpty(request.getStringId()))
+			{
+				internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_ID_REQUIRED);
+			}
+			else
+			{
+				internalResponse = getNotaFiscalBAC().fetchOrcamentoById(request);
+			}
+			// Handle the processing for all previous methods regardless of them failing or succeeding.
+			QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public OrcamentoResponse fetchOrcamentoByRequest(OrcamentoMaintenanceRequest request)
+	{
+		OrcamentoResponse response = new OrcamentoResponse();
+		try
+		{
+			fetchPagedOrcamento(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	@Override
+	public ContasResponse fetchContasByRequest(ContasMaintenanceRequest request)
+	{
+		OrcamentoResponse response = new OrcamentoResponse();
+		try
+		{
+			fetchPagedOrcamento(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	@Override
+	public ContasResponse insertContas(NotaFiscalSaidaMaintenanceRequest request)
+	{
+		ContasResponse response = new ContasResponse();
+		 try
+		 {
+		 response = processContas(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
+		 }
+		 catch (Exception ex)
+		 {
+		 QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		 }
+
+		 return response;
+		 }
+	}
+
+	@Override
+	public ContasResponse updateContas(NotaFiscalSaidaMaintenanceRequest request)
+	{
+		ContasResponse response = new ContasResponse();
+		try
+		{
+			response = processContas(ValidationContextIndicator.UPDATE, PersistanceActionEnum.UPDATE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public ContasResponse deleteContas(NotaFiscalSaidaMaintenanceRequest request)
+	{
+		ContasResponse response = new ContasResponse();
+		try
+		{
+			response = processContas(ValidationContextIndicator.DELETE, PersistanceActionEnum.DELETE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public ContasResponse fetchContasById(FetchByIdRequest request)
+	{
+		ContasResponse response = new ContasResponse();
+		try
+		{
+			InternalResponse internalResponse = new InternalResponse();
+			// validate fetchId field
+			if (ValidationUtil.isNull(request.getId()) && ValidationUtil.isNullOrEmpty(request.getStringId()))
+			{
+				internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_ID_REQUIRED);
+			}
+			else
+			{
+				internalResponse = getNotaFiscalBAC().fetchContasById(request);
+			}
+			// Handle the processing for all previous methods regardless of them failing or succeeding.
+			QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
 	}
 
 	/**
@@ -271,18 +574,43 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 	 * @param request the request
 	 * @return the notaFiscal response
 	 */
-	private NotaFiscalResponse process(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
-			NotaFiscalMaintenanceRequest request)
+	private NotaFiscalResponseEntrada processEntrada(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
+			NotaFiscalEntradaMaintenanceRequest request)
 	{
-		NotaFiscalResponse response = new NotaFiscalResponse();
+		NotaFiscalResponseEntrada response = new NotaFiscalResponseEntrada();
 		InternalResponse internalResponse = null;
 
 		// Persist
-		internalResponse = doPersistance(request, persistType);
+		internalResponse = doPersistanceEntrada(request, persistType);
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return (NotaFiscalResponse)handleReturn((Response)response, internalResponse, null, true);
+		return (NotaFiscalResponseEntrada)handleReturn((Response)response, internalResponse, null, true);
 	}
+
+	/**
+	 * Fetch paged.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private void fetchPagedEntrada(NotaFiscalInquiryRequest request, NotaFiscalEntradaResponse response)
+	{
+		InternalResultsResponse<NotaFiscalEntrada> internalResponse = new InternalResultsResponse<NotaFiscalEntrada>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			 internalResponse = getNotaFiscalBAC().fetchNotaFiscalEntradaByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+
 
 	/**
 	 * Handle return.
@@ -316,202 +644,311 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 	 * @param updateType the update type
 	 * @return the internal response
 	 */
-	private InternalResponse doPersistance(NotaFiscalMaintenanceRequest request, PersistanceActionEnum updateType)
+	private InternalResponse doPersistance(NotaFiscalEntradaMaintenanceRequest request, PersistanceActionEnum updateType)
 	{
 		switch (updateType)
 		{
-			// case INSERT:
-			// return getNotaFiscalBAC().insertNotaFiscal(request);
-			//
-			// case UPDATE:
-			// return getNotaFiscalBAC().updateNotaFiscal(request);
-			//
-			// case DELETE:
-			// return getNotaFiscalBAC().deleteNotaFiscal(request);
-			//
-			// default:
-			// if (LOG.isDebugEnabled())
-			// {
-			// LOG.debug("updateType missing!");
-			// }
-			// break;
+			 case INSERT:
+			 return getNotaFiscalBAC().insertNotaFiscalEntrada(request);
+
+			 case UPDATE:
+			 return getNotaFiscalBAC().updateNotaFiscalEntrada(request);
+
+			 case DELETE:
+			 return getNotaFiscalBAC().deleteNotaFiscalEntrada(request);
+
+			 default:
+			 if (LOG.isDebugEnabled())
+			 {
+			 LOG.debug("updateType missing!");
+			 }
+			 break;
 		}
 		return null;
 	}
 
-	@Override
-	public NotaFiscalEntradaResponse insertNotaFiscalEntrada(NotaFiscalEntradaMaintenanceRequest request)
+	/**
+	 * Fetch paged.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private void fetchPagedSaida(NotaFiscalInquiryRequest request, NotaFiscalSaidaResponse response)
 	{
-		// TODO Auto-generated method stub
+		InternalResultsResponse<NotaFiscalSaida> internalResponse = new InternalResultsResponse<NotaFiscalSaida>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			 internalResponse = getNotaFiscalBAC().fetchNotaFiscalSaidaByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+
+
+	/**
+	 * Handle return.
+	 *
+	 * @param response the response
+	 * @param internalResponse the internal response
+	 * @param messages the messages
+	 * @param copyOver the copy over
+	 * @return the response
+	 */
+	private Response handleReturn(Response response, InternalResponse internalResponse,
+			List<MessageInfo> messages, boolean copyOver)
+	{
+		// In the case there was an Optimistic Locking error, add the specific message
+		if (!ValidationUtil.isNull(internalResponse) && !ValidationUtil.isNull(internalResponse.getStatus())
+				&& Status.OptimisticLockingError.equals(internalResponse.getStatus()))
+		{
+			messages.add(new MessageInfo(PROSPERITASGLOBAL_BASE_OL_ERROR, MessageSeverity.Error,
+					MessageLevel.Object));
+		}
+
+		QATInterfaceUtil.handleOperationStatusAndMessages((com.qat.framework.model.response.Response)response,
+				internalResponse, messages, copyOver);
+		return response;
+	}
+
+	/**
+	 * Do persistance.
+	 *
+	 * @param request the request
+	 * @param updateType the update type
+	 * @return the internal response
+	 */
+	private InternalResponse doPersistanceSaida(NotaFiscalSaidaMaintenanceRequest request, PersistanceActionEnum updateType)
+	{
+		switch (updateType)
+		{
+			 case INSERT:
+			 return getNotaFiscalBAC().insertNotaFiscalSaida(request);
+
+			 case UPDATE:
+			 return getNotaFiscalBAC().updateNotaFiscalSaida(request);
+
+			 case DELETE:
+			 return getNotaFiscalBAC().deleteNotaFiscalSaida(request);
+
+			 default:
+			 if (LOG.isDebugEnabled())
+			 {
+			 LOG.debug("updateType missing!");
+			 }
+			 break;
+		}
 		return null;
 	}
 
-	@Override
-	public NotaFiscalEntradaResponse updateNotaFiscalEntrada(NotaFiscalEntradaMaintenanceRequest request)
+	/**
+	 * Process.
+	 *
+	 * @param indicator the indicator
+	 * @param persistType the persist type
+	 * @param request the request
+	 * @return the notaFiscal response
+	 */
+	private PedidoComprasResponse processPedidoCompras(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
+			PedidoComprasMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
+		NotaFiscalResponseEntrada response = new NotaFiscalResponseEntrada();
+		InternalResponse internalResponse = null;
+
+		// Persist
+		internalResponse = doPersistanceEntrada(request, persistType);
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		return (NotaFiscalResponseEntrada)handleReturn((Response)response, internalResponse, null, true);
+	}
+
+	/**
+	 * Fetch paged.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private void fetchPagedPedidoCompras(NotaFiscalInquiryRequest request, PedidoComprasResponse response)
+	{
+		InternalResultsResponse<PedidoCompras> internalResponse = new InternalResultsResponse<PedidoCompras>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			 internalResponse = getNotaFiscalBAC().fetchPedidoComprasByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	private InternalResponse doPersistancePedidoCompras(PedidoComprasMaintenanceRequest request, PersistanceActionEnum updateType)
+	{
+		switch (updateType)
+		{
+			 case INSERT:
+			 return getNotaFiscalBAC().insertPedidoCompras(request);
+
+			 case UPDATE:
+			 return getNotaFiscalBAC().updatePedidoCompras(request);
+
+			 case DELETE:
+			 return getNotaFiscalBAC().deletePedidoCompras(request);
+
+			 default:
+			 if (LOG.isDebugEnabled())
+			 {
+			 LOG.debug("updateType missing!");
+			 }
+			 break;
+		}
 		return null;
 	}
 
-	@Override
-	public NotaFiscalEntradaResponse deleteNotaFiscalEntrada(NotaFiscalEntradaMaintenanceRequest request)
+
+	/**
+	 * Process.
+	 *
+	 * @param indicator the indicator
+	 * @param persistType the persist type
+	 * @param request the request
+	 * @return the notaFiscal response
+	 */
+	private OrcamentoResponse processOrcamento(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
+			OrcamentoMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
+		NotaFiscalResponseEntrada response = new NotaFiscalResponseEntrada();
+		InternalResponse internalResponse = null;
+
+		// Persist
+		internalResponse = doPersistanceEntrada(request, persistType);
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		return (NotaFiscalResponseEntrada)handleReturn((Response)response, internalResponse, null, true);
+	}
+
+	/**
+	 * Fetch paged.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private void fetchPagedOrcamento(NotaFiscalInquiryRequest request, OrcamentoResponse response)
+	{
+		InternalResultsResponse<Orcamento> internalResponse = new InternalResultsResponse<Orcamento>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			 internalResponse = getNotaFiscalBAC().fetchOrcamentoByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	private InternalResponse doPersistanceOrcamento(OrcamentoMaintenanceRequest request, PersistanceActionEnum updateType)
+	{
+		switch (updateType)
+		{
+			 case INSERT:
+			 return getNotaFiscalBAC().insertOrcamento(request);
+
+			 case UPDATE:
+			 return getNotaFiscalBAC().updateOrcamento(request);
+
+			 case DELETE:
+			 return getNotaFiscalBAC().deleteOrcamento(request);
+
+			 default:
+			 if (LOG.isDebugEnabled())
+			 {
+			 LOG.debug("updateType missing!");
+			 }
+			 break;
+		}
 		return null;
 	}
 
-	@Override
-	public NotaFiscalEntradaResponse fetchNotaFiscalEntradaById(FetchByIdRequest request)
+
+	/**
+	 * Process.
+	 *
+	 * @param indicator the indicator
+	 * @param persistType the persist type
+	 * @param request the request
+	 * @return the notaFiscal response
+	 */
+	private ContasResponse processContas(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
+			ContasMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
+		NotaFiscalResponseEntrada response = new NotaFiscalResponseEntrada();
+		InternalResponse internalResponse = null;
+
+		// Persist
+		internalResponse = doPersistanceEntrada(request, persistType);
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		return (NotaFiscalResponseEntrada)handleReturn((Response)response, internalResponse, null, true);
+	}
+
+	/**
+	 * Fetch paged.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private void fetchPagedContas(NotaFiscalInquiryRequest request, ContasResponse response)
+	{
+		InternalResultsResponse<Contas> internalResponse = new InternalResultsResponse<Contas>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			 internalResponse = getNotaFiscalBAC().fetchContasByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	private InternalResponse doPersistanceContas(ContasMaintenanceRequest request, PersistanceActionEnum updateType)
+	{
+		switch (updateType)
+		{
+			 case INSERT:
+			 return getNotaFiscalBAC().insertContas(request);
+
+			 case UPDATE:
+			 return getNotaFiscalBAC().updateContas(request);
+
+			 case DELETE:
+			 return getNotaFiscalBAC().deleteContas(request);
+
+			 default:
+			 if (LOG.isDebugEnabled())
+			 {
+			 LOG.debug("updateType missing!");
+			 }
+			 break;
+		}
 		return null;
 	}
 
-	@Override
-	public NotaFiscalEntradaResponse fetchNotaFiscalEntradaByRequest(NotaFiscalEntradaMaintenanceRequest request)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public NotaFiscalSaidaResponse insertNotaFiscalSaida(NotaFiscalSaidaMaintenanceRequest request)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public NotaFiscalSaidaResponse updateNotaFiscalSaida(NotaFiscalSaidaMaintenanceRequest request)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public NotaFiscalSaidaResponse deleteNotaFiscalSaida(NotaFiscalSaidaMaintenanceRequest request)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public NotaFiscalSaidaResponse fetchNotaFiscalSaidaById(FetchByIdRequest request)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public NotaFiscalSaidaResponse fetchNotaFiscalSaidaByRequest(NotaFiscalSaidaMaintenanceRequest request)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public PedidoComprasResponse insertPedidoCompras(PedidoComprasMaintenanceRequest request)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public PedidoComprasResponse updatePedidoCompras(PedidoComprasMaintenanceRequest request)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public PedidoComprasResponse deletePedidoComprasl(PedidoComprasMaintenanceRequest request)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public PedidoComprasResponse fetchPedidoComprasById(FetchByIdRequest request)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public PedidoComprasResponse fetchPedidoComprasByRequest(PedidoComprasMaintenanceRequest request)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public OrcamentoResponse insertOrcamento(OrcamentoMaintenanceRequest request)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public OrcamentoResponse updateOrcamento(OrcamentoMaintenanceRequest request)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public OrcamentoResponse deleteOrcamento(OrcamentoMaintenanceRequest request)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public OrcamentoResponse fetchOrcamentoById(FetchByIdRequest request)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public OrcamentoResponse fetchOrcamentoByRequest(OrcamentoMaintenanceRequest request)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ContasResponse fetchContasByRequest(ContasMaintenanceRequest request)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ContasResponse insertContas(NotaFiscalSaidaMaintenanceRequest request)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ContasResponse updateContas(NotaFiscalSaidaMaintenanceRequest request)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ContasResponse deleteContas(NotaFiscalSaidaMaintenanceRequest request)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ContasResponse fetchContasById(FetchByIdRequest request)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }
