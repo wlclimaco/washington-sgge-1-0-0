@@ -1,13 +1,13 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
-import com.prosperitasglobal.sendsolv.model.Arquivo;
+import com.prosperitasglobal.sendsolv.model.PedidoCompras;
 import com.qat.framework.model.request.MaintenanceRequest;
 
 public class PedidoComprasMaintenanceRequest extends MaintenanceRequest
 {
 
 	/** Attributes */
-	private Arquivo arquivo;
+	private PedidoCompras pedidoCompras;
 
 	/**
 	 * The Constructor.
@@ -18,19 +18,19 @@ public class PedidoComprasMaintenanceRequest extends MaintenanceRequest
 	}
 
 	/**
-	 * @return the arquivo
+	 * @return the pedidoCompras
 	 */
-	public Arquivo getArquivo()
+	public PedidoCompras getPedidoCompras()
 	{
-		return arquivo;
+		return pedidoCompras;
 	}
 
 	/**
-	 * @param arquivo the arquivo to set
+	 * @param pedidoCompras the pedidoCompras to set
 	 */
-	public void setArquivo(Arquivo arquivo)
+	public void setPedidoCompras(PedidoCompras pedidoCompras)
 	{
-		this.arquivo = arquivo;
+		this.pedidoCompras = pedidoCompras;
 	}
 
 	/*
@@ -40,7 +40,8 @@ public class PedidoComprasMaintenanceRequest extends MaintenanceRequest
 	@Override
 	public String toString()
 	{
-		return "ArquivoMaintenanceRequest [getArquivo()=" + getArquivo() + ", getUserContext()=" + getUserContext()
+		return "PedidoComprasMaintenanceRequest [getPedidoCompras()=" + getPedidoCompras() + ", getUserContext()="
+				+ getUserContext()
 				+ "]";
 	}
 

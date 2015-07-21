@@ -6,10 +6,14 @@ import com.prosperitasglobal.sendsolv.model.NotaFiscalEntrada;
 import com.prosperitasglobal.sendsolv.model.NotaFiscalSaida;
 import com.prosperitasglobal.sendsolv.model.Orcamento;
 import com.prosperitasglobal.sendsolv.model.PedidoCompras;
+import com.prosperitasglobal.sendsolv.model.request.ContasInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ContasMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.request.NotaFiscalEntradaMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.NotaFiscalInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.NotaFiscalSaidaMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.OrcamentoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.OrcamentoMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.PedidoComprasInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.PedidoComprasMaintenanceRequest;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
@@ -31,7 +35,7 @@ public interface INotaFiscalBAC
 	public InternalResultsResponse<NotaFiscalEntrada> fetchNotaFiscalEntradaById(FetchByIdRequest request);
 
 	public InternalResultsResponse<NotaFiscalEntrada> fetchNotaFiscalEntradaByRequest(
-			NotaFiscalEntradaMaintenanceRequest request);
+			NotaFiscalInquiryRequest request);
 
 	public InternalResultsResponse<NotaFiscalSaida> insertNotaFiscalSaida(NotaFiscalSaidaMaintenanceRequest request);
 
@@ -42,17 +46,17 @@ public interface INotaFiscalBAC
 	public InternalResultsResponse<NotaFiscalSaida> fetchNotaFiscalSaidaById(FetchByIdRequest request);
 
 	public InternalResultsResponse<NotaFiscalSaida> fetchNotaFiscalSaidaByRequest(
-			NotaFiscalSaidaMaintenanceRequest request);
+			NotaFiscalInquiryRequest request);
 
 	public InternalResultsResponse<PedidoCompras> insertPedidoCompras(PedidoComprasMaintenanceRequest request);
 
 	public InternalResultsResponse<PedidoCompras> updatePedidoCompras(PedidoComprasMaintenanceRequest request);
 
-	public InternalResponse deletePedidoComprasl(PedidoComprasMaintenanceRequest request);
+	public InternalResponse deletePedidoCompras(PedidoComprasMaintenanceRequest request);
 
 	public InternalResultsResponse<PedidoCompras> fetchPedidoComprasById(FetchByIdRequest request);
 
-	public InternalResultsResponse<PedidoCompras> fetchPedidoComprasByRequest(PedidoComprasMaintenanceRequest request);
+	public InternalResultsResponse<PedidoCompras> fetchPedidoComprasByRequest(PedidoComprasInquiryRequest request);
 
 	public InternalResultsResponse<Orcamento> insertOrcamento(OrcamentoMaintenanceRequest request);
 
@@ -62,9 +66,9 @@ public interface INotaFiscalBAC
 
 	public InternalResultsResponse<Orcamento> fetchOrcamentoById(FetchByIdRequest request);
 
-	public InternalResultsResponse<Orcamento> fetchOrcamentoByRequest(OrcamentoMaintenanceRequest request);
+	public InternalResultsResponse<Orcamento> fetchOrcamentoByRequest(OrcamentoInquiryRequest request);
 
-	public InternalResultsResponse<Contas> fetchContasByRequest(ContasMaintenanceRequest request);
+	public InternalResultsResponse<Contas> fetchContasByRequest(ContasInquiryRequest request);
 
 	public InternalResultsResponse<Contas> insertContas(ContasMaintenanceRequest request);
 

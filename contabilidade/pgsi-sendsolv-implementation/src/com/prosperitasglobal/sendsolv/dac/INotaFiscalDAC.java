@@ -6,7 +6,10 @@ import com.prosperitasglobal.sendsolv.model.NotaFiscalEntrada;
 import com.prosperitasglobal.sendsolv.model.NotaFiscalSaida;
 import com.prosperitasglobal.sendsolv.model.Orcamento;
 import com.prosperitasglobal.sendsolv.model.PedidoCompras;
+import com.prosperitasglobal.sendsolv.model.request.ContasInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.NotaFiscalInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.OrcamentoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.PedidoComprasInquiryRequest;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 
@@ -44,11 +47,11 @@ public interface INotaFiscalDAC
 
 	public InternalResultsResponse<PedidoCompras> updatePedidoCompras(PedidoCompras request);
 
-	public InternalResponse deletePedidoComprasl(PedidoCompras request);
+	public InternalResponse deletePedidoCompras(PedidoCompras request);
 
 	public InternalResultsResponse<PedidoCompras> fetchPedidoComprasById(FetchByIdRequest request);
 
-	public InternalResultsResponse<PedidoCompras> fetchPedidoComprasByRequest(NotaFiscalInquiryRequest request);
+	public InternalResultsResponse<PedidoCompras> fetchPedidoComprasByRequest(PedidoComprasInquiryRequest request);
 
 	public InternalResultsResponse<Orcamento> insertOrcamento(Orcamento request);
 
@@ -58,9 +61,9 @@ public interface INotaFiscalDAC
 
 	public InternalResultsResponse<Orcamento> fetchOrcamentoById(FetchByIdRequest request);
 
-	public InternalResultsResponse<Orcamento> fetchOrcamentoByRequest(NotaFiscalInquiryRequest request);
+	public InternalResultsResponse<Orcamento> fetchOrcamentoByRequest(OrcamentoInquiryRequest request);
 
-	public InternalResultsResponse<Contas> fetchContasByRequest(Contas request);
+	public InternalResultsResponse<Contas> fetchContasByRequest(ContasInquiryRequest request);
 
 	public InternalResultsResponse<Contas> insertContas(Contas request);
 

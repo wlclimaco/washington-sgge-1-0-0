@@ -5,12 +5,12 @@ import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
-import com.prosperitasglobal.sendsolv.dac.IConhecimentoTransporteDAC;
+import com.prosperitasglobal.sendsolv.dac.IFormaPagamentoDAC;
 import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
 import com.prosperitasglobal.sendsolv.model.AcaoEnum;
 import com.prosperitasglobal.sendsolv.model.CdStatusTypeEnum;
-import com.prosperitasglobal.sendsolv.model.ConhecimentoTransporte;
+import com.prosperitasglobal.sendsolv.model.FormaPg;
 import com.prosperitasglobal.sendsolv.model.Status;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
 import com.prosperitasglobal.sendsolv.model.TypeEnum;
@@ -21,7 +21,7 @@ import com.qat.framework.validation.ValidationUtil;
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
  * passed into the methods. Nothing injected.
  */
-public final class ConhecimentoTransporteDACD extends SqlSessionDaoSupport
+public final class FormaPgDACD extends SqlSessionDaoSupport
 {
 
 	/** The Constant ZERO. */
@@ -37,67 +37,64 @@ public final class ConhecimentoTransporteDACD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainConecimentoTransporteAssociations(ConhecimentoTransporte conhecimentoTransporte,
+	public static Integer maintainFormaPgAssociations(List<FormaPg> formaPgList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, IConhecimentoTransporteDAC conecimentoTransporteDAC, IStatusDAC statusDAC,
-			IHistoricoDAC historicoDAC,
+			TabelaEnum tabelaEnum, IFormaPagamentoDAC formaPgDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
 			Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
-		if (ValidationUtil.isNull(conhecimentoTransporte))
+		if (ValidationUtil.isNullOrEmpty(formaPgList))
 		{
 			return count;
 		}
-		else
+		// For Each Contact...
+		for (FormaPg formaPg : formaPgList)
 		{
-			// Make sure we set the parent key
-			conhecimentoTransporte.setParentId(parentId);
-			conhecimentoTransporte.setProcessId(processId);
 
-			switch (conhecimentoTransporte.getModelAction())
+			// Make sure we set the parent key
+			formaPg.setParentId(parentId);
+			formaPg.setProcessId(processId);
+
+			switch (formaPg.getModelAction())
 			{
 				case INSERT:
-					count = conecimentoTransporteDAC.insertConhecimentoTransporte(conhecimentoTransporte,
-							"insertConecimentoTransporte", response);
+					count = formaPgDAC.insertFormaPg(formaPg);
 					if (count > 0)
 					{
 						Status status = new Status();
 						status.setStatus(CdStatusTypeEnum.ATIVO);
 						List<Status> statusList = new ArrayList<Status>();
 						count =
-								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.PROFISSAO, statusDAC, historicoDAC,
+								StatusDACD.maintainStatusAssociations(statusList, response, formaPg.getId(), null,
+										AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
 										processId, historicoId);
 					}
 					break;
 				case UPDATE:
-					count = conecimentoTransporteDAC.updateConhecimentoTransporte(conhecimentoTransporte, response);
+					count = formaPgDAC.updateFormaPg(formaPg);
 					if (count > 0)
 					{
 						count =
-								StatusDACD.maintainStatusAssociations(conhecimentoTransporte.getStatusList(), response,
-										conhecimentoTransporte.getId(),
-										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.PROFISSAO, statusDAC,
-										historicoDAC, processId, historicoId);
+								StatusDACD
+										.maintainStatusAssociations(formaPg.getStatusList(), response, formaPg.getId(),
+												null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
+												historicoDAC, processId, historicoId);
 					}
 					break;
 				case DELETE:
-
 					Status status = new Status();
 					status.setStatus(CdStatusTypeEnum.DELETADO);
 					List<Status> statusList = new ArrayList<Status>();
 					count =
-							StatusDACD.maintainStatusAssociations(statusList, response, conhecimentoTransporte.getId(),
-									null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.PROFISSAO, statusDAC, historicoDAC,
+							StatusDACD.maintainStatusAssociations(statusList, response, formaPg.getId(), null,
+									AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
 									processId, historicoId);
 
 					break;
 			}
 		}
-
 		return count;
 	}
 }

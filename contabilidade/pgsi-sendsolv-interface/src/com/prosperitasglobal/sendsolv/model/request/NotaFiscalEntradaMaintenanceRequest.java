@@ -7,7 +7,7 @@ public class NotaFiscalEntradaMaintenanceRequest extends MaintenanceRequest
 {
 
 	/** Attributes */
-	private NotaFiscalEntrada notafiscalList;
+	private NotaFiscalEntrada notafiscal;
 
 	/**
 	 * The Constructor.
@@ -18,19 +18,19 @@ public class NotaFiscalEntradaMaintenanceRequest extends MaintenanceRequest
 	}
 
 	/**
-	 * @return the notafiscalList
+	 * @return the notafiscal
 	 */
-	public NotaFiscalEntrada getNotafiscalList()
+	public NotaFiscalEntrada getNotafiscal()
 	{
-		return notafiscalList;
+		return notafiscal;
 	}
 
 	/**
-	 * @param notafiscalList the notafiscalList to set
+	 * @param notafiscal the notafiscal to set
 	 */
-	public void setNotafiscalList(NotaFiscalEntrada notafiscalList)
+	public void setNotafiscal(NotaFiscalEntrada notafiscal)
 	{
-		this.notafiscalList = notafiscalList;
+		this.notafiscal = notafiscal;
 	}
 
 	/*
@@ -40,8 +40,8 @@ public class NotaFiscalEntradaMaintenanceRequest extends MaintenanceRequest
 	@Override
 	public String toString()
 	{
-		return "NotaFiscalEntradaMaintenanceRequest [getNotafiscalList()=" + getNotafiscalList()
-				+ ", getUserContext()=" + getUserContext() + ", toString()=" + super.toString() + "]";
+		return "NotaFiscalEntradaMaintenanceRequest [getNotafiscal()=" + getNotafiscal() + ", getUserContext()="
+				+ getUserContext() + ", toString()=" + super.toString() + "]";
 	}
 
 }
