@@ -120,7 +120,7 @@
 
   </select>
 
-  <select id="fetchAllContass" resultMap="contasResult">
+  <select id="fetchAllContas" resultMap="contasResult">
     SELECT
 	<include refid="allContasColumns" />
     FROM contas ORDER BY dataGeracao ASC

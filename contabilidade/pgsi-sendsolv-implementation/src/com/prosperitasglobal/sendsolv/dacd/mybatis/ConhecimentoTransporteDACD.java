@@ -55,6 +55,7 @@ public final class ConhecimentoTransporteDACD extends SqlSessionDaoSupport
 			// Make sure we set the parent key
 			conhecimentoTransporte.setParentId(parentId);
 			conhecimentoTransporte.setProcessId(processId);
+			conhecimentoTransporte.setIdNota(parentId);
 
 			switch (conhecimentoTransporte.getModelAction())
 			{
