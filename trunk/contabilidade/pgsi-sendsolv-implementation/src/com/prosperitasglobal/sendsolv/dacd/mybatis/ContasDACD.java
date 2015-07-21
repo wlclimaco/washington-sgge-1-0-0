@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
-import com.prosperitasglobal.sendsolv.dac.INotaFiscalItensDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
 
 /**
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
  * passed into the methods. Nothing injected.
  */
-public final class NotaFiscalItensDACD extends SqlSessionDaoSupport
+public final class ContasDACD extends SqlSessionDaoSupport
 {
 
 	/** The Constant ZERO. */
@@ -27,34 +26,34 @@ public final class NotaFiscalItensDACD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainNotaFiscalItensAssociations(List<NotaFiscalItens> notaFiscalItensList,
+	public static Integer maintainContasAssociations(List<Contas> contasList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, INotaFiscalItensDAC notaFiscalItensDAC, IStatusDAC statusDAC,
-			IHistoricoDAC historicoDAC, Integer empId,
-			String UserId, Integer processId)
+			TabelaEnum tabelaEnum, IContasDAC contasDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
+			Integer empId,
+			String UserId, Integer processId, Integer historicoId)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
-		if (ValidationUtil.isNullOrEmpty(notaFiscalItensList))
+		if (ValidationUtil.isNullOrEmpty(contasList))
 		{
 			return count;
 		}
 		// For Each Contact...
-		for (NotaFiscalItens notaFiscalItens : notaFiscalItensList)
+		for (Contas contas : contasList)
 		{
 			// Make sure we set the parent key
-			notaFiscalItens.setParentId(parentId);
+			contas.setParentId(parentId);
+			contas.setProcessId(processId);
 
-			if (ValidationUtil.isNull(notaFiscalItens.getModelAction()))
+			if (ValidationUtil.isNull(contas.getModelAction()))
 			{
 				continue;
 			}
-			switch (notaFiscalItens.getModelAction())
+			switch (contas.getModelAction())
 			{
 				case INSERT:
-					count =
-							notaFiscalItensDAC
-									.insertNotaFiscalItens(notaFiscalItens, "insertNotaFiscalItens", response);
+					count = contasDAC.insertContas(contas,
+							"insertContas", response);
 					if (count > 0)
 					{
 						Status status = new Status();
@@ -62,31 +61,30 @@ public final class NotaFiscalItensDACD extends SqlSessionDaoSupport
 						List<Status> statusList = new ArrayList<Status>();
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
-										processId, null);
+										AcaoEnum.INSERT, UserId, empId, TabelaEnum.PROFISSAO, statusDAC, historicoDAC,
+										processId, historicoId);
 					}
 					break;
 				case UPDATE:
-					count = notaFiscalItensDAC.updateNotaFiscalItens(notaFiscalItens, response);
+					count = contasDAC.updateContas(contas, response);
 					if (count > 0)
 					{
 						count =
-								StatusDACD.maintainStatusAssociations(notaFiscalItens.getStatusList(), response,
-										notaFiscalItens.getId(),
-										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
-										processId, null);
+								StatusDACD.maintainStatusAssociations(contas.getStatusList(), response,
+										contas.getId(),
+										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.PROFISSAO, statusDAC,
+										historicoDAC, processId, historicoId);
 					}
 					break;
 				case DELETE:
-					count = notaFiscalItensDAC.deleteNotaFiscalItens(notaFiscalItens, response);
+					count = contasDAC.deleteContas(contas, response);
 					Status status = new Status();
 					status.setStatus(CdStatusTypeEnum.DELETADO);
 					List<Status> statusList = new ArrayList<Status>();
 					count =
-							StatusDACD
-									.maintainStatusAssociations(statusList, response, notaFiscalItens.getId(), null,
-											AcaoEnum.DELETE, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
-											processId, null);
+							StatusDACD.maintainStatusAssociations(statusList, response, contas.getId(), null,
+									AcaoEnum.DELETE, UserId, empId, TabelaEnum.PROFISSAO, statusDAC, historicoDAC,
+									processId, historicoId);
 
 					break;
 			}

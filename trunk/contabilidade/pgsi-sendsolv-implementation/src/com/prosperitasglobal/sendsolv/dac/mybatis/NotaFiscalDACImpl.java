@@ -1,16 +1,14 @@
 package com.prosperitasglobal.sendsolv.dac.mybatis;
 
+import java.util.Date;
 import java.util.Map;
 
-import org.mybatis.spring.support.SqlSessionDaoSupport;
-import org.slf4j.LoggerFactory;
-
 import com.prosperitasglobal.cbof.dac.INoteDAC;
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.ICfopDAC;
 import com.prosperitasglobal.sendsolv.dac.IConhecimentoTransporteDAC;
 import com.prosperitasglobal.sendsolv.dac.IFormaPagamentoDAC;
 import com.prosperitasglobal.sendsolv.dac.IFornecedorDAC;
+import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.IItensEspeciaisDAC;
 import com.prosperitasglobal.sendsolv.dac.INFStatusDAC;
 import com.prosperitasglobal.sendsolv.dac.INotaFiscalDAC;
@@ -18,14 +16,14 @@ import com.prosperitasglobal.sendsolv.dac.INotaFiscalItensDAC;
 import com.prosperitasglobal.sendsolv.dac.IServicoItensDAC;
 import com.prosperitasglobal.sendsolv.dac.ITransportadorDAC;
 import com.prosperitasglobal.sendsolv.dac.ITributacaoDAC;
-import com.prosperitasglobal.sendsolv.model.Contas;
-import com.prosperitasglobal.sendsolv.model.NotaFiscalEntrada;
-import com.prosperitasglobal.sendsolv.model.NotaFiscalSaida;
-import com.prosperitasglobal.sendsolv.model.Orcamento;
-import com.prosperitasglobal.sendsolv.model.PedidoCompras;
-import com.prosperitasglobal.sendsolv.model.request.NotaFiscalInquiryRequest;
-import com.qat.framework.model.response.InternalResponse;
-import com.qat.framework.model.response.InternalResultsResponse;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.ContasDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.FormaPagamentoDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.HistoricoNFDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.ItensEspeciaisDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.NFstatusDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.NotaFiscalItensDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.NotesDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.TributacaoDACD;
 
 /**
  * The Class NotaFiscalDACImpl.
@@ -72,6 +70,7 @@ public class NotaFiscalDACImpl extends SqlSessionDaoSupport implements INotaFisc
 	private IServicoItensDAC servicoItensDAC;
 	private INFStatusDAC nfStatusDAC;
 	private IFornecedorDAC fornecedorDAC;
+	private IHistoricoDAC historicoDAC;
 
 	/**
 	 * @return the cnaeInquiryValidSortFields
@@ -79,6 +78,16 @@ public class NotaFiscalDACImpl extends SqlSessionDaoSupport implements INotaFisc
 	public Map<String, String> getCnaeInquiryValidSortFields()
 	{
 		return cnaeInquiryValidSortFields;
+	}
+
+	public IHistoricoDAC getHistoricoDAC()
+	{
+		return historicoDAC;
+	}
+
+	public void setHistoricoDAC(IHistoricoDAC historicoDAC)
+	{
+		this.historicoDAC = historicoDAC;
 	}
 
 	/**
@@ -288,8 +297,35 @@ public class NotaFiscalDACImpl extends SqlSessionDaoSupport implements INotaFisc
 	@Override
 	public InternalResultsResponse<NotaFiscalEntrada> insertNotaFiscalEntrada(NotaFiscalEntrada request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		InternalResultsResponse<Empresa> response = new InternalResultsResponse<Empresa>();
+		Integer historicoId = insertprocess(request.getEmpId(),request.getUserId(),"InsertNfEntrada", response);
+
+
+		if(request.getModelAction == PersistanceActionEnum.INSERT){
+
+		request.setProcessId(historicoId);
+		insertCount =
+				QATMyBatisDacHelper.doInsert(getSqlSession(), "NotaFiscalEntradaMap.insertNotaFiscal", request, response);
+
+
+		Integer historicoItensId = insertprocessItens(historicoId,request.getId(), TabelaEnum.NOTAFISCAL, AcaoEnum.INSERT)
+		}else{
+			historicoId = request.getProcessId();
+		}
+		insertCount =+ insertNF(request,response,historicoId,
+				historicoId);
+
+		if (response.isInError())
+		{
+			return response;
+		}
+
+		if (insertCount > 0)
+		{
+			response.addResult(request);
+		}
+
+		return response;
 	}
 
 	@Override
@@ -458,6 +494,118 @@ public class NotaFiscalDACImpl extends SqlSessionDaoSupport implements INotaFisc
 	{
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public Integer insertNF(NotaFiscal notafiscal, InternalResultsResponse<?> response, Integer processId,
+			Integer historicoId)
+	{
+		Integer insertCount = 0;
+
+		// ConhecimentoTransporte
+		insertCount +=
+				ConecimentoTransporteDACD.maintainConecimentoTransporteAssociations(
+						notafiscal.getConhecimentoTransporte(), response, notafiscal.getId(), null, null,
+						null, getConhecimentoTransporteDAC(), getStatusDAC(), getHistoricoDAC(),
+						notafiscal.getEmprId(),
+						pessoa.getCreateUser(), processId, historicoId);
+
+		// Tributacao
+		insertCount +=
+				TributacaoDACD.maintainTributacaoAssociations(notafiscal.getTributacao(), response, notafiscal.getId(),
+						null,
+						null,
+						null, getTributacaoDAC(), getStatusDAC(), getHistoricoDAC(), notafiscal.getEmprId(),
+						produto.getCreateUser(), processId);
+
+		// FormaPg
+		insertCount +=
+				FormaPagamentoDACD.maintainFormaPgAssociations(pessoa.getFormaPagamentoList(), response,
+						notafiscal.getId(),
+						null,
+						null,
+						TabelaEnum.PESSOA, getFormaPgDAC(), getStatusDAC(), getHistoricoDAC(), notafiscal.getEmprId(),
+						notafiscal.getCreateUser(), processId, historicoId);
+
+		// NotaFiscalItens
+		insertCount +=
+				NotaFiscalItensDACD.maintainNotaFiscalItensAssociations(notafiscal.getNotaFiscalItens(), response,
+						notafiscal.getId(),
+						null,
+						null,
+						TabelaEnum.PESSOA, getFormaPgDAC(), getStatusDAC(), getHistoricoDAC(), notafiscal.getEmprId(),
+						notafiscal.getCreateUser(), processId, historicoId);
+
+		// Note
+		insertCount +=
+				NotesDACD.maintainNoteAssociations(notafiscal.getNotes(), response, notafiscal.getId(), null,
+						null,
+						TabelaEnum.PESSOA, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), notafiscal.getEmprId(),
+						notafiscal.getCreateUser(), processId, historicoId);
+
+		// Contas
+		insertCount +=
+				ContasDACD.maintainContasAssociations(notafiscal.getNotes(), response, notafiscal.getId(), null,
+						null,
+						TabelaEnum.PESSOA, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), notafiscal.getEmprId(),
+						notafiscal.getCreateUser(), processId, historicoId);
+
+		// ItensEspeciais
+		insertCount +=
+				ItensEspeciaisDACD.maintainItensEspeciaisAssociations(notafiscal.getItensEspeciais(), response,
+						notafiscal.getId(), null,
+						null,
+						TabelaEnum.PESSOA, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), notafiscal.getEmprId(),
+						notafiscal.getCreateUser(), processId, historicoId);
+
+		// NFStatus
+		insertCount +=
+				NFstatusDACD.maintainNFStatusAssociations(notafiscal.getNFStatus(), response, notafiscal.getId(), null,
+						null,
+						TabelaEnum.PESSOA, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), notafiscal.getEmprId(),
+						notafiscal.getCreateUser(), processId, historicoId);
+
+		// HistoricoNF
+		HistoricoNFDACD.maintainProfissaoAssociations(notafiscal.getHistoricoNF(), response, notafiscal.getId(), null,
+				null,
+				TabelaEnum.PESSOA, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), notafiscal.getEmprId(),
+				notafiscal.getCreateUser(), processId, historicoId);
+
+		return count;
+	}
+
+	public Integer insertprocess(Integer emprId, String userId, String statementName,
+			InternalResultsResponse<?> response)
+	{
+		Integer count = 0;
+
+		Historico historico = new Historico();
+		historico.setEmprId(emprId);
+		historico.setUserId(userId);
+		historico.setProcessId(0);
+		Date a = new Date();
+		historico.setData(a.getTime());
+
+		count = getHistoricoDAC().insertHistorico(historico, statementName, response);
+		QATMyBatisDacHelper.doInsert(getSqlSession(), "HistoricoMap.insertHistorico", historico, response);
+
+		return count;
+	}
+
+	public Integer insertprocessItens(Integer historicoId, Integer parentId, TabelaEnum tabela, AcaoEnum acao)
+	{
+		Integer count = 0;
+
+		HistoricoItens historicoItens = new HistoricoItens();
+		historicoItens.setIdHist(historicoId);
+		historicoItens.setProcessId(0);
+		historicoItens.setParentId(parentId);
+		historicoItens.setTabelaEnum(TabelaEnum);
+		historicoItens.setAcaoType(AcaoEnum);
+
+		count = getHistoricoDAC().insertHistoricoItens(historicoItens, statementName, response);
+
+		Integer processId = historicoId;
+		return count;
 	}
 
 	/*

@@ -5,11 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.mybatis.spring.support.SqlSessionDaoSupport;
-import org.slf4j.LoggerFactory;
-
 import com.prosperitasglobal.cbof.dac.INoteDAC;
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.IBancoDAC;
 import com.prosperitasglobal.sendsolv.dac.IBeneficiosDAC;
 import com.prosperitasglobal.sendsolv.dac.ICfopDAC;
@@ -46,27 +42,6 @@ import com.prosperitasglobal.sendsolv.dacd.mybatis.ProfissaoDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.SalarioDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.StatusDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.TelefoneDACD;
-import com.prosperitasglobal.sendsolv.model.AcaoEnum;
-import com.prosperitasglobal.sendsolv.model.CdStatusTypeEnum;
-import com.prosperitasglobal.sendsolv.model.Cliente;
-import com.prosperitasglobal.sendsolv.model.Fornecedor;
-import com.prosperitasglobal.sendsolv.model.Funcionario;
-import com.prosperitasglobal.sendsolv.model.Historico;
-import com.prosperitasglobal.sendsolv.model.HistoricoItens;
-import com.prosperitasglobal.sendsolv.model.Pessoa;
-import com.prosperitasglobal.sendsolv.model.Process;
-import com.prosperitasglobal.sendsolv.model.Status;
-import com.prosperitasglobal.sendsolv.model.TabelaEnum;
-import com.prosperitasglobal.sendsolv.model.Transportador;
-import com.prosperitasglobal.sendsolv.model.request.ClienteInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.FornecedorInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.FuncionarioInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.TransportadorInquiryRequest;
-import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResponse;
-import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.util.QATMyBatisDacHelper;
-import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class PessoaDACImpl.
@@ -734,7 +709,8 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		insertCount += insertPerson(pessoa, processId, historicoId, response);
 
 		insertCount +=
-				FormaPagamentoDACD.maintainFormaPgAssociations(pessoa.getFormaPagamentoList(), response, insertCount,
+				FormaPagamentoDACD.maintainFormaPgAssociations(pessoa.getFormaPagamentoList(), response,
+						pessoa.getId(),
 						null,
 						null,
 						TabelaEnum.PESSOA, getFormaPgDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
@@ -1447,10 +1423,10 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		updateCount =
 				StatusDACD
 						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response,
-						funcionario.getId(),
+								funcionario.getId(),
 								null, AcaoEnum.DELETE,
 								funcionario.getCreateUser(), funcionario.getEmprId(), TabelaEnum.TRANSPORTADOR,
-						getStatusDAC(),
+								getStatusDAC(),
 								getHistoricoDAC(), processId, null);
 		return response;
 	}
