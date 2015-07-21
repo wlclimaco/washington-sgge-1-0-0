@@ -72,19 +72,19 @@ public class Contas extends ModelCosmeDamiao
 	}
 
 	/**
-	 * @return the idFornecedor
+	 * @return the pessoaId
 	 */
-	public Integer getIdFornecedor()
+	public Integer getPessoaId()
 	{
-		return idFornecedor;
+		return pessoaId;
 	}
 
 	/**
-	 * @param idFornecedor the idFornecedor to set
+	 * @param pessoaId the pessoaId to set
 	 */
-	public void setIdFornecedor(Integer idFornecedor)
+	public void setPessoaId(Integer pessoaId)
 	{
-		this.idFornecedor = idFornecedor;
+		this.pessoaId = pessoaId;
 	}
 
 	/**
@@ -270,8 +270,8 @@ public class Contas extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "ContasPagar [getId()=" + getId() + ", getIdFornecedor()=" + getIdFornecedor() + ", getDocId()="
-				+ getDocId() + ", getContasTypeEnum()=" + getContasTypeEnum() + ", getNumeroParc()=" + getNumeroParc()
+		return "Contas [getId()=" + getId() + ", getPessoaId()=" + getPessoaId() + ", getDocId()=" + getDocId()
+				+ ", getContasTypeEnum()=" + getContasTypeEnum() + ", getNumeroParc()=" + getNumeroParc()
 				+ ", getParcela()=" + getParcela() + ", getValorOriginal()=" + getValorOriginal()
 				+ ", getDataVencimento()=" + getDataVencimento() + ", getDataGeracao()=" + getDataGeracao()
 				+ ", getDataPagamento()=" + getDataPagamento() + ", getJuros()=" + getJuros() + ", getTaxa()="
@@ -279,10 +279,12 @@ public class Contas extends ModelCosmeDamiao
 				+ ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue()
 				+ ", getParentId()=" + getParentId() + ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType()
 				+ ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()="
-				+ getEmprId() + ", getSite()=" + getSite() + ", toString()=" + super.toString() + ", getModelAction()="
-				+ getModelAction() + ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()="
-				+ getCreateDateUTC() + ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()="
-				+ getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
+				+ getEmprId() + ", getSite()=" + getSite() + ", getProcessId()=" + getProcessId() + ", getUserId()="
+				+ getUserId() + ", getNotes()=" + getNotes() + ", toString()=" + super.toString()
+				+ ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
+				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
+				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + "]";
 	}
 
 }

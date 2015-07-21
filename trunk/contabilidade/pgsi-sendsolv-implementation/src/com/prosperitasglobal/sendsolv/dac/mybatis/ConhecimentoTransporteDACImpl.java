@@ -22,12 +22,13 @@ public class ConhecimentoTransporteDACImpl extends SqlSessionDaoSupport implemen
 
 	/** The Constant LOG. */
 	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(ConhecimentoTransporteDACImpl.class);
-	private static final String CONTACT_STMT_INSERT = null;
-	private static final String CONTACT_STMT_DELETE_BUSINESS_CONTACT = null;
-	private static final String CONTACT_STMT_UPDATE = null;
-	private static final String EMPRESA_STMT_FETCH_COUNT = null;
-	private static final String EMPRESA_STMT_FETCH_ALL_BY_REQUEST = null;
-	private static final String CONTACT_STMT_FETCH_BY_ID = null;
+	private static final String CONHECIMENTOTP_STMT_INSERT = "ConhecimentoTransporteMap.insertConhecimentoTransporte";
+	private static final String CONHECIMENTOTP_STMT_DELETE_BUSINESS_CONHECIMENTOTP =
+			"ConhecimentoTransporteMap.deleteConhecimentoTransporteById";
+	private static final String CONHECIMENTOTP_STMT_UPDATE = "ConhecimentoTransporteMap.updateConhecimentoTransporte";
+	private static final String EMPRESA_STMT_FETCH_COUNT = "ConhecimentoTransporteMap.";
+	private static final String EMPRESA_STMT_FETCH_ALL_BY_REQUEST = "ConhecimentoTransporteMap.";
+	private static final String CONHECIMENTOTP_STMT_FETCH_BY_ID = "ConhecimentoTransporteMap.";
 
 	/*
 	 * (non-Javadoc)
@@ -43,12 +44,13 @@ public class ConhecimentoTransporteDACImpl extends SqlSessionDaoSupport implemen
 		Integer insertCount = 0;
 		// First insert the root conhecimentoTransporte data
 		insertCount =
-				QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT, conhecimentoTransporte, response);
+				QATMyBatisDacHelper.doInsert(getSqlSession(), CONHECIMENTOTP_STMT_INSERT, conhecimentoTransporte,
+						response);
 
 		// Associate with parent using statement name passed as parameter
 		insertCount +=
 				QATMyBatisDacHelper
-				.doInsert(getSqlSession(), statementName, conhecimentoTransporte, response);
+						.doInsert(getSqlSession(), statementName, conhecimentoTransporte, response);
 
 		return insertCount;
 	}
@@ -64,7 +66,7 @@ public class ConhecimentoTransporteDACImpl extends SqlSessionDaoSupport implemen
 	public Integer deleteConhecimentoTransporte(ConhecimentoTransporte conhecimentoTransporte,
 			InternalResultsResponse<?> response)
 	{
-		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT,
+		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONHECIMENTOTP_STMT_DELETE_BUSINESS_CONHECIMENTOTP,
 				conhecimentoTransporte, response);
 	}
 
@@ -87,7 +89,7 @@ public class ConhecimentoTransporteDACImpl extends SqlSessionDaoSupport implemen
 		{
 			updateCount =
 					QATMyBatisDacHelper
-					.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE, conhecimentoTransporte, response);
+							.doUpdate(getSqlSession(), CONHECIMENTOTP_STMT_UPDATE, conhecimentoTransporte, response);
 
 			if (updateCount == 1)
 			{
@@ -107,7 +109,7 @@ public class ConhecimentoTransporteDACImpl extends SqlSessionDaoSupport implemen
 	@Override
 	public InternalResultsResponse<ConhecimentoTransporte> fetchConhecimentoTransporteByRequest(
 			PagedInquiryRequest request)
-			{
+	{
 		InternalResultsResponse<ConhecimentoTransporte> response =
 				new InternalResultsResponse<ConhecimentoTransporte>();
 
@@ -121,7 +123,7 @@ public class ConhecimentoTransporteDACImpl extends SqlSessionDaoSupport implemen
 				EMPRESA_STMT_FETCH_COUNT,
 				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
 		return response;
-			}
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -133,7 +135,7 @@ public class ConhecimentoTransporteDACImpl extends SqlSessionDaoSupport implemen
 		InternalResultsResponse<ConhecimentoTransporte> response =
 				new InternalResultsResponse<ConhecimentoTransporte>();
 
-		QATMyBatisDacHelper.doQueryForList(getSqlSession(), CONTACT_STMT_FETCH_BY_ID, id, response);
+		QATMyBatisDacHelper.doQueryForList(getSqlSession(), CONHECIMENTOTP_STMT_FETCH_BY_ID, id, response);
 
 		return response;
 	}

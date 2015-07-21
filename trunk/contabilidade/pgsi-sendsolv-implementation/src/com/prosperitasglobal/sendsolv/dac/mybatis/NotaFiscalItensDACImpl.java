@@ -22,9 +22,9 @@ public class NotaFiscalItensDACImpl extends SqlSessionDaoSupport implements INot
 
 	/** The Constant LOG. */
 	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(NotaFiscalItensDACImpl.class);
-	private static final String CONTACT_STMT_INSERT = null;
-	private static final String CONTACT_STMT_DELETE_BUSINESS_CONTACT = null;
-	private static final String CONTACT_STMT_UPDATE = null;
+	private static final String NF_ITENS_STMT_INSERT = null;
+	private static final String NF_ITENS_STMT_DELETE_BUSINESS_NF_ITENS = null;
+	private static final String NF_ITENS_STMT_UPDATE = null;
 	private static final String EMPRESA_STMT_FETCH_COUNT = null;
 	private static final String EMPRESA_STMT_FETCH_ALL_BY_REQUEST = null;
 
@@ -42,12 +42,12 @@ public class NotaFiscalItensDACImpl extends SqlSessionDaoSupport implements INot
 		Integer insertCount = 0;
 		// First insert the root notaFiscalItens data
 		insertCount =
-				QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT, notaFiscalItens, response);
+				QATMyBatisDacHelper.doInsert(getSqlSession(), NF_ITENS_STMT_INSERT, notaFiscalItens, response);
 
 		// Associate with parent using statement name passed as parameter
 		insertCount +=
 				QATMyBatisDacHelper
-				.doInsert(getSqlSession(), statementName, notaFiscalItens, response);
+						.doInsert(getSqlSession(), statementName, notaFiscalItens, response);
 
 		return insertCount;
 	}
@@ -63,7 +63,7 @@ public class NotaFiscalItensDACImpl extends SqlSessionDaoSupport implements INot
 	public Integer deleteNotaFiscalItens(NotaFiscalItens notaFiscalItens,
 			InternalResultsResponse<?> response)
 	{
-		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT,
+		return QATMyBatisDacHelper.doRemove(getSqlSession(), NF_ITENS_STMT_DELETE_BUSINESS_NF_ITENS,
 				notaFiscalItens, response);
 	}
 
@@ -86,7 +86,7 @@ public class NotaFiscalItensDACImpl extends SqlSessionDaoSupport implements INot
 		{
 			updateCount =
 					QATMyBatisDacHelper
-					.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE, notaFiscalItens, response);
+							.doUpdate(getSqlSession(), NF_ITENS_STMT_UPDATE, notaFiscalItens, response);
 
 			if (updateCount == 1)
 			{
@@ -106,7 +106,7 @@ public class NotaFiscalItensDACImpl extends SqlSessionDaoSupport implements INot
 	@Override
 	public InternalResultsResponse<NotaFiscalItens> fetchNotaFiscalItensByRequest(
 			PagedInquiryRequest request)
-			{
+	{
 		InternalResultsResponse<NotaFiscalItens> response =
 				new InternalResultsResponse<NotaFiscalItens>();
 
@@ -120,7 +120,7 @@ public class NotaFiscalItensDACImpl extends SqlSessionDaoSupport implements INot
 				EMPRESA_STMT_FETCH_COUNT,
 				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
 		return response;
-			}
+	}
 
 	/*
 	 * (non-Javadoc)

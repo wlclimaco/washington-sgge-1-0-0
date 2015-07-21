@@ -43,23 +43,23 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-    <association property="produto"    column="produto" select="RegimeMap.fetchRegimeByEmpresa"  />
-    <association property="cfop"    column="cfop" select="RegimeMap.fetchRegimeByEmpresa"  />
-    <association property="classificacao"    column="classificacao" select="RegimeMap.fetchRegimeByEmpresa"  />
-	<collection property="tributosList" column="id" select="StatusMap.fetchAllStatusByNotaFiscalItens"/>
+    <association property="produto"    column="produto" select="ProdutoMap.fetchProdutoById"  />
+    <association property="cfop"    column="cfop" select="CfopMap.fetchCfopById"  />
+    <association property="classificacao"    column="classificacao" select="ClassificacaoMap.fetchClassificacaoById"  />
+	<collection property="tributosList" column="id" select="TributosMap.fetchTributosById"/>
   </resultMap>
 
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allNotaFiscalItensColumns">
-		 b.id
-		,b.IdNota
+		 b.IdNota
 		,b.qnt
 		,b.vrUnitario
 		,b.vrDesconto
-		,b.cfop
-		,b.classificacao
+		,b.cfop.id
+		,b.classificacao.id
+		,b.produto.id
       	,b.create_date
       	,b.create_user
       	,b.modify_date
@@ -67,13 +67,13 @@
   </sql>
 
   <sql id="allNotaFiscalItensValues">
-  		 #{id},
 		 #{IdNota},
 		 #{qnt},
 		 #{vrUnitario},
 		 #{vrDesconto},
 		 #{cfop.id},
 		 #{classificacao.id},
+		 #{produto.id},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 

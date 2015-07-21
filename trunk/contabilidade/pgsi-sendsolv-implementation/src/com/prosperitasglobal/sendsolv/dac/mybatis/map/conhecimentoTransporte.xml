@@ -30,9 +30,9 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-	<association property="transportador"    column="transportador" select="RegimeMap.fetchRegimeByEmpresa"  />
-	<association property="marca"    column="marca" select="RegimeMap.fetchRegimeByEmpresa"  />
-	<association property="estado"    column="estado" select="RegimeMap.fetchRegimeByEmpresa"  />
+	<association property="transportador"    column="transportador" select="PessoaMap.fetchPessoaById"  />
+	<association property="marca"    column="marca" select="MarcaMap.fetchMarcaById"  />
+	<association property="estado"    column="estado" select="EstadoMap.fetchEstadoById"  />
   </resultMap>
 
   <!--
