@@ -22,6 +22,10 @@
 	    <typeAlias alias="EntidadeTypeEnum"							 	 type="com.prosperitasglobal.sendsolv.model.EntidadeTypeEnum" />
 		<typeAlias alias="PagedInquiryRequest"     						 type="com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest"/>
 		<typeAlias alias="ProdutoInquiryRequest"     					 type="com.prosperitasglobal.sendsolv.model.request.ProdutoInquiryRequest"/>
+		<typeAlias alias="ContasInquiryRequest"     					 type="com.prosperitasglobal.sendsolv.model.request.ContasInquiryRequest"/>
+		<typeAlias alias="NotaFiscalInquiryRequest"     				 type="com.prosperitasglobal.sendsolv.model.request.NotaFiscalInquiryRequest"/>
+		<typeAlias alias="OrcamentoInquiryRequest"     					 type="com.prosperitasglobal.sendsolv.model.request.OrcamentoInquiryRequest"/>
+		<typeAlias alias="PedidoComprasInquiryRequest"     				 type="com.prosperitasglobal.sendsolv.model.request.PedidoComprasInquiryRequest"/>
 
 
 
@@ -75,6 +79,8 @@
 		<typeAlias alias="MarcaProd"              				 	 type="com.prosperitasglobal.sendsolv.model.MarcaProd"/>
 		<typeAlias alias="NFStatus"              					 type="com.prosperitasglobal.sendsolv.model.NFStatus"/>
 		<typeAlias alias="NotaFiscal"              					 type="com.prosperitasglobal.sendsolv.model.NotaFiscal"/>
+		<typeAlias alias="NotaFiscalEntrada"              			 type="com.prosperitasglobal.sendsolv.model.NotaFiscalEntrada"/>
+		<typeAlias alias="NotaFiscalSaida"              			 type="com.prosperitasglobal.sendsolv.model.NotaFiscalSaida"/>
 		<typeAlias alias="Note"              					     type="com.prosperitasglobal.cbof.model.Note"/>
 		<typeAlias alias="NotaFiscalItens"              	 		 type="com.prosperitasglobal.sendsolv.model.NotaFiscalItens"/>
 		<typeAlias alias="Orcamento"              					 type="com.prosperitasglobal.sendsolv.model.Orcamento"/>
@@ -134,8 +140,7 @@
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/cnae.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/condpag.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/conhecimentoTransporte.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/contasPagar.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/contasReceber.xml" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/contas.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/contato.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/convenio.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/cst.xml" />
@@ -167,13 +172,14 @@
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/marca.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/nfStatus.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/notafiscal.xml" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/nfentrada.xml" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/nfsaida.xml" />
 		<mapper resource="com/prosperitasglobal/cbof/dac/mybatis/map/note.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/notaFiscalItens.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/orcamento.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/orcamentoItens.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/ordemServico.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/ordemServicoItens.xml" />
-		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/pedidoCompras.xml" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/pedidocompras.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/porcao.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/porcaoItens.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/pessoa.xml" />
