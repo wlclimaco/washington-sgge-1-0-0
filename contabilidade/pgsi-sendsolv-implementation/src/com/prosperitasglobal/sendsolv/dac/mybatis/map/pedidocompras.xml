@@ -4,9 +4,9 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="ClienteMap">
+<mapper namespace="PedidoComprasMap">
 
-  <resultMap id="clienteResult" type="Cliente" extends="PessoaMap.PessoaResult">
+  <resultMap id="pedidoComprasResult" type="PedidoCompras" extends="PessoaMap.PessoaResult">
 	<collection property="profissao" column="id" select="ProfissaoMap.fetchProfissaoById"/>
 	<collection property="convenioList" column="id" select="ConvenioMap.fetchConvenioByPerson"/>
   </resultMap>
@@ -14,7 +14,7 @@
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
-  <sql id="allClienteColumns">
+  <sql id="allPedidoComprasColumns">
 		 b.cdEmpr
 		,b.nome
 		,b.type
@@ -30,7 +30,7 @@
       	,b.modify_user
   </sql>
 
-  <sql id="allClienteValues">
+  <sql id="allPedidoComprasValues">
   		#{emprId},
   		#{nome},
   		#{pessoaTypeEnumValue},
@@ -46,35 +46,35 @@
 	<!--
 		SQL Fetch Statements.
  	-->
-  <select id="fetchClienteRowCount" parameterType="ClienteInquiryRequest" resultType="Integer">
+  <select id="fetchPedidoComprasRowCount" parameterType="PedidoComprasInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
         FROM pessoa where type = 1
 
   </select>
 
-  <select id="fetchAllClientes" resultMap="clienteResult">
+  <select id="fetchAllPedidoComprass" resultMap="pedidoComprasResult">
     SELECT
-	<include refid="allClienteColumns" />
+	<include refid="allPedidoComprasColumns" />
     FROM pessoa ORDER BY nome ASC
   </select>
 
-  <select id="fetchClienteById" parameterType="FetchByIdRequest" resultMap="clienteResult">
+  <select id="fetchPedidoComprasById" parameterType="FetchByIdRequest" resultMap="pedidoComprasResult">
     			   SELECT
-					b.id,	<include refid="allClienteColumns" />
+					b.id,	<include refid="allPedidoComprasColumns" />
  				   FROM pessoa b
 					where b.id = #{id}
   </select>
 
-   <select id="fetchClienteByNota" parameterType="Integer" resultMap="clienteResult">
+   <select id="fetchPedidoComprasByNota" parameterType="Integer" resultMap="pedidoComprasResult">
     			   SELECT
-					b.id,	<include refid="allClienteColumns" />
+					b.id,	<include refid="allPedidoComprasColumns" />
  				   FROM pessoa b
 					where b.id = #{id}
   </select>
 
-  <select id="fetchAllClientesByRequest" parameterType="ClienteInquiryRequest" resultMap="clienteResult">
+  <select id="fetchAllPedidoComprassByRequest" parameterType="PedidoComprasInquiryRequest" resultMap="pedidoComprasResult">
      SELECT * FROM ( SELECT b.id,
-    						<include refid="allClienteColumns" />,
+    						<include refid="allPedidoComprasColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM pessoa b
 						where type = 1
