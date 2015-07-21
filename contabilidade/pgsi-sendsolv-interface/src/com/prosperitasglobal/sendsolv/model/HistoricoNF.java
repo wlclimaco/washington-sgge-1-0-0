@@ -1,5 +1,7 @@
 package com.prosperitasglobal.sendsolv.model;
 
+import java.util.List;
+
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -21,6 +23,11 @@ public class HistoricoNF extends ModelCosmeDamiao
 		super();
 		this.data = data;
 		this.notaTypeEnumList = notaTypeEnumList;
+	}
+
+	public HistoricoNF()
+	{
+		super();
 	}
 
 	public Integer getId()

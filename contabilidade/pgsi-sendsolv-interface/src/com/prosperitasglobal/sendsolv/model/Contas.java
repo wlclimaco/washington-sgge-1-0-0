@@ -5,7 +5,7 @@ package com.prosperitasglobal.sendsolv.model;
  * The Class Document represents a generic formal business or personal document, such as driver's license or bylaws.
  */
 @SuppressWarnings("serial")
-public class ContasReceber extends ModelCosmeDamiao
+public class Contas extends ModelCosmeDamiao
 {
 
 	/** Attributes. */
@@ -47,7 +47,7 @@ public class ContasReceber extends ModelCosmeDamiao
 	/**
 	 * The Constructor.
 	 */
-	public ContasReceber()
+	public Contas()
 	{
 
 	}

@@ -7,7 +7,7 @@ public class NotaFiscalMaintenanceRequest extends MaintenanceRequest
 {
 
 	/** Attributes. */
-	private NotaFiscal notaFiscal;
+	private NotaFiscal notafiscalList;
 
 	/**
 	 * The Constructor.
@@ -18,19 +18,19 @@ public class NotaFiscalMaintenanceRequest extends MaintenanceRequest
 	}
 
 	/**
-	 * @return the notaFiscal
+	 * @return the notafiscalList
 	 */
-	public NotaFiscal getNotaFiscal()
+	public NotaFiscal getNotafiscalList()
 	{
-		return notaFiscal;
+		return notafiscalList;
 	}
 
 	/**
-	 * @param notaFiscal the notaFiscal to set
+	 * @param notafiscalList the notafiscalList to set
 	 */
-	public void setNotaFiscal(NotaFiscal notaFiscal)
+	public void setNotafiscalList(NotaFiscal notafiscalList)
 	{
-		this.notaFiscal = notaFiscal;
+		this.notafiscalList = notafiscalList;
 	}
 
 	/*
@@ -40,7 +40,8 @@ public class NotaFiscalMaintenanceRequest extends MaintenanceRequest
 	@Override
 	public String toString()
 	{
-		return "ProdutoMaintenanceRequest [getNotaFiscal()=" + getNotaFiscal() + ", getUserContext()="
-				+ getUserContext() + "]";
+		return "NotaFiscalMaintenanceRequest [getNotafiscalList()=" + getNotafiscalList() + ", getUserContext()="
+				+ getUserContext() + ", toString()=" + super.toString() + "]";
 	}
+
 }
