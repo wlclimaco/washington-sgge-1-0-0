@@ -8,6 +8,16 @@ package com.prosperitasglobal.sendsolv.model;
 public class Empresa extends Entidade
 {
 
+	public Empresa()
+	{
+		super();
+	}
+
+	public Empresa(Integer id)
+	{
+		setId(id);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()

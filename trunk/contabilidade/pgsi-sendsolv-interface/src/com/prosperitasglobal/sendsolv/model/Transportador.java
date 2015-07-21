@@ -16,6 +16,12 @@ public class Transportador extends Pessoa
 		super();
 	}
 
+	public Transportador(Integer id)
+	{
+		super();
+		setId(id);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()

@@ -54,10 +54,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 	private List<Note> noteList;
 
 	/** The contaspagar list. */
-	private List<ContasPagar> contaspagarList;
-
-	/** The contas receber list. */
-	private List<ContasReceber> contasReceberList;
+	private List<Contas> contasList;
 
 	/** The itens especiais. */
 	private List<ItensEspeciais> itensEspeciais;
@@ -384,9 +381,9 @@ public class NotaFiscal extends ModelCosmeDamiao
 	 *
 	 * @return the contaspagarList
 	 */
-	public List<ContasPagar> getContaspagarList()
+	public List<Contas> getContaspagarList()
 	{
-		return contaspagarList;
+		return contasList;
 	}
 
 	/**
@@ -394,29 +391,9 @@ public class NotaFiscal extends ModelCosmeDamiao
 	 *
 	 * @param contaspagarList the contaspagarList to set
 	 */
-	public void setContaspagarList(List<ContasPagar> contaspagarList)
+	public void setContaspagarList(List<Contas> contaspagarList)
 	{
-		this.contaspagarList = contaspagarList;
-	}
-
-	/**
-	 * Gets the contas receber list.
-	 *
-	 * @return the contasReceberList
-	 */
-	public List<ContasReceber> getContasReceberList()
-	{
-		return contasReceberList;
-	}
-
-	/**
-	 * Sets the contas receber list.
-	 *
-	 * @param contasReceberList the contasReceberList to set
-	 */
-	public void setContasReceberList(List<ContasReceber> contasReceberList)
-	{
-		this.contasReceberList = contasReceberList;
+		contasList = contaspagarList;
 	}
 
 	/**
@@ -600,28 +577,6 @@ public class NotaFiscal extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the servicos itens list.
-	 *
-	 * @return the servicosItensList
-	 */
-	public List<ServicoItens> getServicosItensList()
-	{
-		return servicosItensList;
-	}
-
-	/**
-	 * Sets the servicos itens list.
-	 *
-	 * @param servicosItensList the servicosItensList to set
-	 */
-	public void setServicosItensList(List<ServicoItens> servicosItensList)
-	{
-		this.servicosItensList = servicosItensList;
-	}
-
-	/**
-	 * Gets the nf status list.
-	 *
 	 * @return the nfStatusList
 	 */
 	public List<NFStatus> getNfStatusList()
@@ -630,8 +585,6 @@ public class NotaFiscal extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Sets the nf status list.
-	 *
 	 * @param nfStatusList the nfStatusList to set
 	 */
 	public void setNfStatusList(List<NFStatus> nfStatusList)
@@ -640,83 +593,19 @@ public class NotaFiscal extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the fornecedor.
-	 *
-	 * @return the fornecedor
+	 * @return the historicoNFList
 	 */
-	public Fornecedor getFornecedor()
+	public List<HistoricoNF> getHistoricoNFList()
 	{
-		return fornecedor;
+		return historicoNFList;
 	}
 
 	/**
-	 * Sets the fornecedor.
-	 *
-	 * @param fornecedor the fornecedor to set
+	 * @param historicoNFList the historicoNFList to set
 	 */
-	public void setFornecedor(Fornecedor fornecedor)
+	public void setHistoricoNFList(List<HistoricoNF> historicoNFList)
 	{
-		this.fornecedor = fornecedor;
-	}
-
-	/**
-	 * Gets the pedido compra.
-	 *
-	 * @return the pedidoCompra
-	 */
-	public List<PedidoCompras> getPedidoCompra()
-	{
-		return pedidoCompra;
-	}
-
-	/**
-	 * Sets the pedido compra.
-	 *
-	 * @param pedidoCompra the pedidoCompra to set
-	 */
-	public void setPedidoCompra(List<PedidoCompras> pedidoCompra)
-	{
-		this.pedidoCompra = pedidoCompra;
-	}
-
-	/**
-	 * Gets the cliente.
-	 *
-	 * @return the cliente
-	 */
-	public Cliente getCliente()
-	{
-		return cliente;
-	}
-
-	/**
-	 * Sets the cliente.
-	 *
-	 * @param cliente the cliente to set
-	 */
-	public void setCliente(Cliente cliente)
-	{
-		this.cliente = cliente;
-	}
-
-	/**
-	 * Gets the orcamento list.
-	 *
-	 * @return the orcamentoList
-	 */
-	public List<Orcamento> getOrcamentoList()
-	{
-		return orcamentoList;
-	}
-
-	/**
-	 * Sets the orcamento list.
-	 *
-	 * @param orcamentoList the orcamentoList to set
-	 */
-	public void setOrcamentoList(List<Orcamento> orcamentoList)
-	{
-		this.orcamentoList = orcamentoList;
+		this.historicoNFList = historicoNFList;
 	}
 
 	/*
@@ -732,22 +621,21 @@ public class NotaFiscal extends ModelCosmeDamiao
 				+ ", getConhecimentoTransporte()=" + getConhecimentoTransporte() + ", getEmpresa()=" + getEmpresa()
 				+ ", getTributosList()=" + getTributosList() + ", getFormaPagList()=" + getFormaPagList()
 				+ ", getNotaFiscalItens()=" + getNotaFiscalItens() + ", getNoteList()=" + getNoteList()
-				+ ", getContaspagarList()=" + getContaspagarList() + ", getContasReceberList()="
-				+ getContasReceberList() + ", getItensEspeciais()=" + getItensEspeciais()
-				+ ", getDataEmissao()=" + getDataEmissao() + ", getDataSaida()=" + getDataSaida()
-				+ ", getDataEntrada()=" + getDataEntrada() + ", getModelo()=" + getModelo() + ", getCfop()="
-				+ getCfop() + ", getBxEstoque()=" + getBxEstoque() + ", getDescItens()=" + getDescItens()
-				+ ", getPcCusto()=" + getPcCusto() + ", getServicosItensList()=" + getServicosItensList()
-				+ ", getNfStatusList()=" + getNfStatusList() + ", getFornecedor()=" + getFornecedor()
-				+ ", getPedidoCompra()=" + getPedidoCompra() + ", getCliente()=" + getCliente()
-				+ ", getOrcamentoList()=" + getOrcamentoList() + ", getTabelaEnumValue()=" + getTabelaEnumValue()
-				+ ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue()
-				+ ", getParentId()=" + getParentId() + ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType()
-				+ ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()="
-				+ getEmprId() + ", getSite()=" + getSite() + ", toString()=" + super.toString() + ", getModelAction()="
-				+ getModelAction() + ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()="
-				+ getCreateDateUTC() + ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()="
-				+ getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
+				+ ", getContaspagarList()=" + getContaspagarList() + ", getItensEspeciais()=" + getItensEspeciais()
+				+ ", getDataEmissao()="
+				+ getDataEmissao() + ", getDataSaida()=" + getDataSaida() + ", getDataEntrada()=" + getDataEntrada()
+				+ ", getModelo()=" + getModelo() + ", getCfop()=" + getCfop() + ", getBxEstoque()=" + getBxEstoque()
+				+ ", getDescItens()=" + getDescItens() + ", getPcCusto()=" + getPcCusto() + ", getNfStatusList()="
+				+ getNfStatusList() + ", getHistoricoNFList()=" + getHistoricoNFList() + ", getTabelaEnumValue()="
+				+ getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()="
+				+ getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()=" + getType()
+				+ ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()="
+				+ getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite() + ", getProcessId()="
+				+ getProcessId() + ", getUserId()=" + getUserId() + ", getNotes()=" + getNotes() + ", toString()="
+				+ super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
+				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
+				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + "]";
 	}
 
 }

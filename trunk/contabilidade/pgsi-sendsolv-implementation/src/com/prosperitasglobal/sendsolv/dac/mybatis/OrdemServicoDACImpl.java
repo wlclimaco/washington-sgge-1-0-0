@@ -25,7 +25,6 @@ public class OrdemServicoDACImpl extends SqlSessionDaoSupport implements IOrdemS
 	/** The Constant ORDEMSERVICO_NAMESPACE. */
 	private static final String ORDEMSERVICO_NAMESPACE = "OrdemServicoMap.";
 
-	/** The Constant CBOF_NAMESPACE. */
 	private static final String CBOF_NAMESPACE = "CBOFMap.";
 
 	/** The Constant ORDEMSERVICO_STMT_FETCH_COUNT. */

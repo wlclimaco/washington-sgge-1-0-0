@@ -11,6 +11,22 @@ public class NotaFiscalSaida extends ModelCosmeDamiao
 	/** The cliente. */
 	private Cliente cliente;
 
+	/**
+	 * @return the cliente
+	 */
+	public Cliente getCliente()
+	{
+		return cliente;
+	}
+
+	/**
+	 * @param cliente the cliente to set
+	 */
+	public void setCliente(Cliente cliente)
+	{
+		this.cliente = cliente;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -18,28 +34,16 @@ public class NotaFiscalSaida extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "NotaFiscal [getId()=" + getId() + ", getNotaType()=" + getNotaType() + ", getSerie()=" + getSerie()
-				+ ", getOrdem()=" + getOrdem() + ", getNumero()=" + getNumero() + ", getTipo()=" + getTipo()
-				+ ", getNfValor()=" + getNfValor() + ", getTransportador()=" + getTransportador()
-				+ ", getConhecimentoTransporte()=" + getConhecimentoTransporte() + ", getEmpresa()=" + getEmpresa()
-				+ ", getTributosList()=" + getTributosList() + ", getFormaPagList()=" + getFormaPagList()
-				+ ", getNotaFiscalItens()=" + getNotaFiscalItens() + ", getNoteList()=" + getNoteList()
-				+ ", getContaspagarList()=" + getContaspagarList() + ", getContasReceberList()="
-				+ getContasReceberList() + ", getItensEspeciais()=" + getItensEspeciais()
-				+ ", getDataEmissao()=" + getDataEmissao() + ", getDataSaida()=" + getDataSaida()
-				+ ", getDataEntrada()=" + getDataEntrada() + ", getModelo()=" + getModelo() + ", getCfop()="
-				+ getCfop() + ", getBxEstoque()=" + getBxEstoque() + ", getDescItens()=" + getDescItens()
-				+ ", getPcCusto()=" + getPcCusto() + ", getServicosItensList()=" + getServicosItensList()
-				+ ", getNfStatusList()=" + getNfStatusList() + ", getFornecedor()=" + getFornecedor()
-				+ ", getPedidoCompra()=" + getPedidoCompra() + ", getCliente()=" + getCliente()
-				+ ", getOrcamentoList()=" + getOrcamentoList() + ", getTabelaEnumValue()=" + getTabelaEnumValue()
+		return "NotaFiscalSaida [getCliente()=" + getCliente() + ", getTabelaEnumValue()=" + getTabelaEnumValue()
 				+ ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue()
 				+ ", getParentId()=" + getParentId() + ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType()
 				+ ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()="
-				+ getEmprId() + ", getSite()=" + getSite() + ", toString()=" + super.toString() + ", getModelAction()="
-				+ getModelAction() + ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()="
-				+ getCreateDateUTC() + ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()="
-				+ getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
+				+ getEmprId() + ", getSite()=" + getSite() + ", getProcessId()=" + getProcessId() + ", getUserId()="
+				+ getUserId() + ", getNotes()=" + getNotes() + ", toString()=" + super.toString()
+				+ ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
+				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
+				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + "]";
 	}
 
 }

@@ -1,16 +1,15 @@
 package com.prosperitasglobal.sendsolv.model.response;
 
-import java.util.Collection;
 import java.util.List;
 
-import com.prosperitasglobal.sendsolv.model.Banco;
+import com.prosperitasglobal.sendsolv.model.Contas;
 import com.qat.framework.model.response.InquiryResponse;
 
 public class ContasResponse extends InquiryResponse
 {
 
 	/** Attributes */
-	private List<Banco> bancoList;
+	private List<Contas> contasList;
 
 	/**
 	 * The Constructor.
@@ -21,30 +20,19 @@ public class ContasResponse extends InquiryResponse
 	}
 
 	/**
-	 * @return the bancoList
+	 * @return the contasList
 	 */
-	public List<Banco> getBancoList()
+	public List<Contas> getContasList()
 	{
-		return bancoList;
+		return contasList;
 	}
 
 	/**
-	 * @param bancoList the bancoList to set
+	 * @param contasList the contasList to set
 	 */
-	public void setBancoList(List<Banco> bancoList)
+	public void setContasList(List<Contas> contasList)
 	{
-		this.bancoList = bancoList;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.qat.framework.model.response.InquiryResponse#addResults(java.util.Collection)
-	 */
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	@Override
-	public void addResults(Collection coll)
-	{
-		setBancoList((List<Banco>)coll);
+		this.contasList = contasList;
 	}
 
 	/*
@@ -54,10 +42,11 @@ public class ContasResponse extends InquiryResponse
 	@Override
 	public String toString()
 	{
-		return "LocationResponse [getLocationList()=" + getBancoList() + ", getResultsSetInfo()="
-				+ getResultsSetInfo() + ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()="
-				+ getMessageList() + ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()="
-				+ isOperationSuccess() + "]";
+		return "ContasResponse [getContasList()=" + getContasList() + ", getResultsSetInfo()=" + getResultsSetInfo()
+				+ ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()=" + getMessageList()
+				+ ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()=" + isOperationSuccess()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
 	}
 
 }

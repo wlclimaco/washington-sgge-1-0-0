@@ -1,13 +1,13 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
-import com.prosperitasglobal.sendsolv.model.Arquivo;
+import com.prosperitasglobal.sendsolv.model.NotaFiscalEntrada;
 import com.qat.framework.model.request.MaintenanceRequest;
 
 public class NotaFiscalEntradaMaintenanceRequest extends MaintenanceRequest
 {
 
 	/** Attributes */
-	private Arquivo arquivo;
+	private NotaFiscalEntrada notafiscalList;
 
 	/**
 	 * The Constructor.
@@ -18,19 +18,19 @@ public class NotaFiscalEntradaMaintenanceRequest extends MaintenanceRequest
 	}
 
 	/**
-	 * @return the arquivo
+	 * @return the notafiscalList
 	 */
-	public Arquivo getArquivo()
+	public NotaFiscalEntrada getNotafiscalList()
 	{
-		return arquivo;
+		return notafiscalList;
 	}
 
 	/**
-	 * @param arquivo the arquivo to set
+	 * @param notafiscalList the notafiscalList to set
 	 */
-	public void setArquivo(Arquivo arquivo)
+	public void setNotafiscalList(NotaFiscalEntrada notafiscalList)
 	{
-		this.arquivo = arquivo;
+		this.notafiscalList = notafiscalList;
 	}
 
 	/*
@@ -40,8 +40,8 @@ public class NotaFiscalEntradaMaintenanceRequest extends MaintenanceRequest
 	@Override
 	public String toString()
 	{
-		return "ArquivoMaintenanceRequest [getArquivo()=" + getArquivo() + ", getUserContext()=" + getUserContext()
-				+ "]";
+		return "NotaFiscalEntradaMaintenanceRequest [getNotafiscalList()=" + getNotafiscalList()
+				+ ", getUserContext()=" + getUserContext() + ", toString()=" + super.toString() + "]";
 	}
 
 }

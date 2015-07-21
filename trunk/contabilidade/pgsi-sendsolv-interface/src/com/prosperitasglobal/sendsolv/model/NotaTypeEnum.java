@@ -1,5 +1,8 @@
 package com.prosperitasglobal.sendsolv.model;
 
+import com.qat.framework.model.II18nEnum;
+import com.qat.framework.model.IIntegerEnum;
+
 public enum NotaTypeEnum implements IIntegerEnum, II18nEnum
 {
 
