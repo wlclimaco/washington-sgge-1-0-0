@@ -581,7 +581,7 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 		internalResponse = doPersistanceEntrada(request, persistType);
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return (NotaFiscalEntradaResponse)handleReturn((Response)response, internalResponse, null, true);
+		return handleReturnEntrada(response, internalResponse, null, true);
 	}
 
 	private NotaFiscalSaidaResponse processSaida(ValidationContextIndicator indicator,
@@ -696,6 +696,23 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 		}
 
 		QATInterfaceUtil.handleOperationStatusAndMessages((com.qat.framework.model.response.Response)response,
+				internalResponse, messages, copyOver);
+		return response;
+	}
+
+	private NotaFiscalEntradaResponse handleReturnEntrada(NotaFiscalEntradaResponse response,
+			InternalResponse internalResponse,
+			List<MessageInfo> messages, boolean copyOver)
+	{
+		// In the case there was an Optimistic Locking error, add the specific message
+		if (!ValidationUtil.isNull(internalResponse) && !ValidationUtil.isNull(internalResponse.getStatus())
+				&& Status.OptimisticLockingError.equals(internalResponse.getStatus()))
+		{
+			messages.add(new MessageInfo(PROSPERITASGLOBAL_BASE_OL_ERROR, MessageSeverity.Error,
+					MessageLevel.Object));
+		}
+
+		QATInterfaceUtil.handleOperationStatusAndMessages(response,
 				internalResponse, messages, copyOver);
 		return response;
 	}
