@@ -22,7 +22,7 @@ public class NotaFiscalItensDACImpl extends SqlSessionDaoSupport implements INot
 
 	/** The Constant LOG. */
 	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(NotaFiscalItensDACImpl.class);
-	private static final String NF_ITENS_STMT_INSERT = null;
+	private static final String NF_ITENS_STMT_INSERT = "NotaFiscalItensMap.insertNotaFiscalItens";
 	private static final String NF_ITENS_STMT_DELETE_BUSINESS_NF_ITENS = null;
 	private static final String NF_ITENS_STMT_UPDATE = null;
 	private static final String EMPRESA_STMT_FETCH_COUNT = null;
@@ -43,11 +43,6 @@ public class NotaFiscalItensDACImpl extends SqlSessionDaoSupport implements INot
 		// First insert the root notaFiscalItens data
 		insertCount =
 				QATMyBatisDacHelper.doInsert(getSqlSession(), NF_ITENS_STMT_INSERT, notaFiscalItens, response);
-
-		// Associate with parent using statement name passed as parameter
-		insertCount +=
-				QATMyBatisDacHelper
-						.doInsert(getSqlSession(), statementName, notaFiscalItens, response);
 
 		return insertCount;
 	}

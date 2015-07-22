@@ -224,7 +224,7 @@ public class NotaFiscalBaseController extends UtilControllerD
 		conhecimentoTransporte.setPlaca("jhu-0102");
 		conhecimentoTransporte.setEstado(new Estado(1));
 		conhecimentoTransporte.setMarca(new Marca(1));
-		conhecimentoTransporte.setEspecie("ddd");
+		conhecimentoTransporte.setEspecie(new Double(9.99));
 		conhecimentoTransporte.setVolume(new Double(.99));
 		conhecimentoTransporte.setPesoLiquido(new Double(1.99));
 		conhecimentoTransporte.setPesoBruto(new Double(3.99));

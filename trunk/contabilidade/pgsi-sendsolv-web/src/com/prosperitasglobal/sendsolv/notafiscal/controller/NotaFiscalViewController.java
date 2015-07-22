@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.prosperitasglobal.sendsolv.filter.FilterFactory;
@@ -132,7 +131,7 @@ public class NotaFiscalViewController extends NotaFiscalBaseController
 		{
 
 			modelAndView.addObject(RESPONSE, getMapper()
-					.writeValueAsString(fetchEmpresaByRequest(pagedInquiryRequest)));
+					.writeValueAsString(fetchNotaFiscalByRequest(pagedInquiryRequest)));
 
 			FiltersResponse filtersResponse = new FiltersResponse();
 			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);
@@ -158,20 +157,20 @@ public class NotaFiscalViewController extends NotaFiscalBaseController
 	 * @param locationId the location id
 	 * @return the model and view
 	 */
-	@RequestMapping(value = {FETCH_ADD, FETCH_EDIT}, method = RequestMethod.GET)
-	public ModelAndView loadUpdate(@RequestParam(value = EMPRESA_ID, required = false) Integer locationId,
-			HttpServletRequest request)
-	{
-
-		return locationEditMAV(locationId, VIEW_EMPRESA_ADD, true, request);
-	}
-
-	@RequestMapping(value = {FETCH_VIEW_TABS}, method = RequestMethod.GET)
-	public ModelAndView loadTabs(@RequestParam(value = EMPRESA_ID, required = true) Integer locationId,
-			HttpServletRequest request)
-	{
-		return new ModelAndView(VIEW_EMPRESA_TABS);
-	}
+	// @RequestMapping(value = {FETCH_ADD, FETCH_EDIT}, method = RequestMethod.GET)
+	// public ModelAndView loadUpdate(@RequestParam(value = EMPRESA_ID, required = false) Integer locationId,
+	// HttpServletRequest request)
+	// {
+	//
+	// return locationEditMAV(locationId, VIEW_EMPRESA_ADD, true, request);
+	// }
+	//
+	// @RequestMapping(value = {FETCH_VIEW_TABS}, method = RequestMethod.GET)
+	// public ModelAndView loadTabs(@RequestParam(value = EMPRESA_ID, required = true) Integer locationId,
+	// HttpServletRequest request)
+	// {
+	// return new ModelAndView(VIEW_EMPRESA_TABS);
+	// }
 
 	/**
 	 * Load location view.
@@ -180,26 +179,26 @@ public class NotaFiscalViewController extends NotaFiscalBaseController
 	 * @param request the request
 	 * @return the model and view
 	 */
-	@RequestMapping(value = {FETCH_VIEW}, method = RequestMethod.GET)
-	public ModelAndView loadView(@RequestParam(value = EMPRESA_ID, required = true) Integer locationId,
-			HttpServletRequest request)
-	{
-		return locationEditMAV(locationId, VIEW_EMPRESA_VIEW, true, request);
-	}
-
-	/**
-	 * Load view update.
-	 *
-	 * @param locationId the location id
-	 * @param request the request
-	 * @return the model and view
-	 */
-	@RequestMapping(value = {EDIT_VIEW}, method = RequestMethod.GET)
-	public ModelAndView loadViewUpdate(@RequestParam(value = EMPRESA_ID, required = false) Integer locationId,
-			HttpServletRequest request)
-	{
-
-		return locationEditMAV(locationId, VIEW_EMPRESA_DIALOG_ADD, true, request);
-	}
+	// @RequestMapping(value = {FETCH_VIEW}, method = RequestMethod.GET)
+	// public ModelAndView loadView(@RequestParam(value = EMPRESA_ID, required = true) Integer locationId,
+	// HttpServletRequest request)
+	// {
+	// return locationEditMAV(locationId, VIEW_EMPRESA_VIEW, true, request);
+	// }
+	//
+	// /**
+	// * Load view update.
+	// *
+	// * @param locationId the location id
+	// * @param request the request
+	// * @return the model and view
+	// */
+	// @RequestMapping(value = {EDIT_VIEW}, method = RequestMethod.GET)
+	// public ModelAndView loadViewUpdate(@RequestParam(value = EMPRESA_ID, required = false) Integer locationId,
+	// HttpServletRequest request)
+	// {
+	//
+	// return locationEditMAV(locationId, VIEW_EMPRESA_DIALOG_ADD, true, request);
+	// }
 
 }

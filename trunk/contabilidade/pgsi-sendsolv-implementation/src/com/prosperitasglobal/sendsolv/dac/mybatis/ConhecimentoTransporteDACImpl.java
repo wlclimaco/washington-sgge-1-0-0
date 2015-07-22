@@ -47,11 +47,6 @@ public class ConhecimentoTransporteDACImpl extends SqlSessionDaoSupport implemen
 				QATMyBatisDacHelper.doInsert(getSqlSession(), CONHECIMENTOTP_STMT_INSERT, conhecimentoTransporte,
 						response);
 
-		// Associate with parent using statement name passed as parameter
-		insertCount +=
-				QATMyBatisDacHelper
-						.doInsert(getSqlSession(), statementName, conhecimentoTransporte, response);
-
 		return insertCount;
 	}
 

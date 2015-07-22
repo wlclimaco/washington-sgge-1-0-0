@@ -324,6 +324,7 @@
 
  	<bean id="contasDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.ContasDACImpl">
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 		<property name="notaFiscalDac" ref="notaFiscalDACTarget" />
  	</bean>
 
  	<bean id="ordemServicoDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.OrdemServicoDACImpl">

@@ -8,6 +8,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.INotaFiscalItensDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
+import com.prosperitasglobal.sendsolv.dac.ITributacaoDAC;
 import com.prosperitasglobal.sendsolv.model.AcaoEnum;
 import com.prosperitasglobal.sendsolv.model.CdStatusTypeEnum;
 import com.prosperitasglobal.sendsolv.model.NotaFiscalItens;
@@ -41,7 +42,7 @@ public final class NotaFiscalItensDACD extends SqlSessionDaoSupport
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, INotaFiscalItensDAC notaFiscalItensDAC, IStatusDAC statusDAC,
 			IHistoricoDAC historicoDAC, Integer empId,
-			String UserId, Integer processId)
+			String UserId, Integer processId, ITributacaoDAC tributacaoDAC)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
@@ -63,8 +64,8 @@ public final class NotaFiscalItensDACD extends SqlSessionDaoSupport
 			{
 				case INSERT:
 					count =
-							notaFiscalItensDAC
-									.insertNotaFiscalItens(notaFiscalItens, "insertNotaFiscalItens", response);
+					notaFiscalItensDAC
+					.insertNotaFiscalItens(notaFiscalItens, "insertNotaFiscalItens", response);
 					if (count > 0)
 					{
 						Status status = new Status();
@@ -94,12 +95,20 @@ public final class NotaFiscalItensDACD extends SqlSessionDaoSupport
 					List<Status> statusList = new ArrayList<Status>();
 					count =
 							StatusDACD
-									.maintainStatusAssociations(statusList, response, notaFiscalItens.getId(), null,
-											AcaoEnum.DELETE, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
-											processId, null);
+							.maintainStatusAssociations(statusList, response, notaFiscalItens.getId(), null,
+									AcaoEnum.DELETE, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
+									processId, null);
 
 					break;
 			}
+			// Tributacao
+			count +=
+					TributacaoDACD.maintainTributacaoAssociations(notaFiscalItens.getTributosList().get(0), response,
+							notaFiscalItens.getId(),
+							null,
+							null,
+							null, tributacaoDAC, statusDAC, historicoDAC, notaFiscalItens.getEmprId(),
+							notaFiscalItens.getCreateUser(), processId);
 		}
 
 		return count;

@@ -100,7 +100,7 @@
 	<include refid="allClassificacaoColumns" />
     FROM classificacao b
     where id = #{id}
-    ORDER BY nome ASC
+    ORDER BY id ASC
   </select>
 
   <select id="fetchAllClassificacaosByRequest" parameterType="PagedInquiryRequest" resultMap="classificacaoResult">

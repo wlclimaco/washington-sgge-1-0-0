@@ -61,7 +61,7 @@ public final class ConhecimentoTransporteDACD extends SqlSessionDaoSupport
 			{
 				case INSERT:
 					count = conecimentoTransporteDAC.insertConhecimentoTransporte(conhecimentoTransporte,
-							"insertConecimentoTransporte", response);
+							"insertConhecimentoTransporte", response);
 					if (count > 0)
 					{
 						Status status = new Status();

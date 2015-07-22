@@ -29,7 +29,7 @@ public class ConhecimentoTransporte extends ModelCosmeDamiao
 
 	private Marca marca;
 
-	private String especie;
+	private Double especie;
 
 	private Double volume;
 
@@ -208,7 +208,7 @@ public class ConhecimentoTransporte extends ModelCosmeDamiao
 	/**
 	 * @return the especie
 	 */
-	public String getEspecie()
+	public Double getEspecie()
 	{
 		return especie;
 	}
@@ -216,7 +216,7 @@ public class ConhecimentoTransporte extends ModelCosmeDamiao
 	/**
 	 * @param especie the especie to set
 	 */
-	public void setEspecie(String especie)
+	public void setEspecie(Double especie)
 	{
 		this.especie = especie;
 	}
@@ -286,6 +286,7 @@ public class ConhecimentoTransporte extends ModelCosmeDamiao
 				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
 				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
 				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
+				+ ", getProcessId()=" + getProcessId() + ", getUserId()=" + getUserId() + ", getNotes()=" + getNotes()
 				+ ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()="
 				+ getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()="
 				+ getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass()
