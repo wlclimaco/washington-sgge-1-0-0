@@ -24,7 +24,6 @@ import com.prosperitasglobal.sendsolv.dac.ITributacaoDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.ConhecimentoTransporteDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.ContasDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.FormaPgDACD;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.HistoricoNFDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.ItensEspeciaisDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.NFstatusDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.NotaFiscalItensDACD;
@@ -1074,16 +1073,16 @@ public class NotaFiscalDACImpl extends SqlSessionDaoSupport implements INotaFisc
 						notafiscal.getCreateUser(), processId);
 
 		// HistoricoNF
-		insertCount +=
-				HistoricoNFDACD.maintainHistoricoNFAssociations(notafiscal.getHistoricoNFList(), response,
-						notafiscal.getId(),
-						null,
-						null,
-						TabelaEnum.PESSOA, getHistoricoNFDAC(), getStatusDAC(), getHistoricoDAC(),
-						notafiscal.getEmprId(),
-						notafiscal.getCreateUser(), processId, historicoId);
+		// insertCount +=
+		// HistoricoNFDACD.maintainHistoricoNFAssociations(notafiscal.getHistoricoNFList(), response,
+		// notafiscal.getId(),
+		// null,
+		// null,
+		// TabelaEnum.PESSOA, getHistoricoNFDAC(), getStatusDAC(), getHistoricoDAC(),
+		// notafiscal.getEmprId(),
+		// notafiscal.getCreateUser(), processId, historicoId);
 
-		return insertCount;
+		return 1;
 	}
 
 	public Integer insertprocess(Integer emprId, String userId, String statementName,

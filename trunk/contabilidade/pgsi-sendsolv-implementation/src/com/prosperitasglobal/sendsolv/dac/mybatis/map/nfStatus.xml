@@ -28,15 +28,14 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-	<association property="status"    column="status" select="RegimeMap.fetchRegimeByEmpresa"  />
+	<association property="status"    column="status" select="StatusMap.fetchStatusByNota"  />
   </resultMap>
 
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allNFStatusColumns">
-		 b.id
-		,b.idNota
+		 b.idNota
 		,b.status
 		,b.dataMudanca
       	,b.create_date
@@ -46,7 +45,6 @@
   </sql>
 
   <sql id="allNFStatusValues">
-  		 #{id},
 		 #{idNota},
 		 #{status.id},
 		 #{dataMudanca},
