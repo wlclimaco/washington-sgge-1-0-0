@@ -896,23 +896,15 @@ public class NotaFiscalDACImpl extends SqlSessionDaoSupport implements INotaFisc
 	public InternalResultsResponse<Contas> insertContas(Contas request)
 	{
 		InternalResultsResponse<Contas> response = new InternalResultsResponse<Contas>();
-		Integer historicoId = insertprocess(request.getEmprId(), request.getUserId(), "InsertNfEntrada", response);
 		Integer insertCount = 0;
 
 		if (request.getModelAction() == PersistanceActionEnum.INSERT)
 		{
 
-			request.setProcessId(historicoId);
 			insertCount =
-					QATMyBatisDacHelper.doInsert(getSqlSession(), NOTAFISCAL_STMT_INSERT, request,
+					QATMyBatisDacHelper.doInsert(getSqlSession(), "ContasMap.insertContas", request,
 							response);
 
-			Integer historicoItensId =
-					insertprocessItens(historicoId, request.getId(), TabelaEnum.NOTAFISCAL, AcaoEnum.INSERT);
-		}
-		else
-		{
-			historicoId = request.getProcessId();
 		}
 
 		if (response.isInError())

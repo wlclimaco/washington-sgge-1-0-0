@@ -22,7 +22,7 @@ public class ItensEspeciaisDACImpl extends SqlSessionDaoSupport implements IIten
 
 	/** The Constant LOG. */
 	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(ItensEspeciaisDACImpl.class);
-	private static final String CONTACT_STMT_INSERT = null;
+	private static final String CONTACT_STMT_INSERT = "ItensEspeciaisMap.insertItensEspeciais";
 	private static final String CONTACT_STMT_DELETE_BUSINESS_CONTACT = null;
 	private static final String CONTACT_STMT_UPDATE = null;
 	private static final String EMPRESA_STMT_FETCH_COUNT = null;
@@ -47,7 +47,7 @@ public class ItensEspeciaisDACImpl extends SqlSessionDaoSupport implements IIten
 		// Associate with parent using statement name passed as parameter
 		insertCount +=
 				QATMyBatisDacHelper
-				.doInsert(getSqlSession(), statementName, itensEspeciais, response);
+						.doInsert(getSqlSession(), statementName, itensEspeciais, response);
 
 		return insertCount;
 	}
@@ -86,7 +86,7 @@ public class ItensEspeciaisDACImpl extends SqlSessionDaoSupport implements IIten
 		{
 			updateCount =
 					QATMyBatisDacHelper
-					.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE, itensEspeciais, response);
+							.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE, itensEspeciais, response);
 
 			if (updateCount == 1)
 			{
@@ -106,7 +106,7 @@ public class ItensEspeciaisDACImpl extends SqlSessionDaoSupport implements IIten
 	@Override
 	public InternalResultsResponse<ItensEspeciais> fetchItensEspeciaisByRequest(
 			PagedInquiryRequest request)
-			{
+	{
 		InternalResultsResponse<ItensEspeciais> response =
 				new InternalResultsResponse<ItensEspeciais>();
 
@@ -120,7 +120,7 @@ public class ItensEspeciaisDACImpl extends SqlSessionDaoSupport implements IIten
 				EMPRESA_STMT_FETCH_COUNT,
 				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
 		return response;
-			}
+	}
 
 	/*
 	 * (non-Javadoc)
