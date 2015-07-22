@@ -10,6 +10,6 @@ public interface IContasDAC
 
 	public Integer insertContas(Contas contas, String statementName, InternalResultsResponse<?> response);
 
-	public Integer deleteContas(Contas contas, InternalResultsResponse<?> response);
+	public Integer deleteContas(Contas contas, InternalResultsResponse response);
 
 }

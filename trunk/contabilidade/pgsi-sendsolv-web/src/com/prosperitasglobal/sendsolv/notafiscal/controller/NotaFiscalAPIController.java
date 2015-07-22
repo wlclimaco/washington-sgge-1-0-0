@@ -1,7 +1,5 @@
 package com.prosperitasglobal.sendsolv.notafiscal.controller;
 
-import java.util.Calendar;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -11,12 +9,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.request.EmpresaMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.NotaFiscalEntradaMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
+import com.prosperitasglobal.sendsolv.model.response.NotaFiscalEntradaResponse;
+import com.prosperitasglobal.sendsolv.model.response.NotaFiscalResponse;
 
 /**
- * The EmpresaAPIController Class.
+ * The NotaFiscalAPIController Class.
  *
  * @author Flavio Tosta, Washington Costa
  *
@@ -50,20 +49,20 @@ public class NotaFiscalAPIController extends NotaFiscalBaseController
 	private static final Logger LOG = LoggerFactory.getLogger(NotaFiscalAPIController.class);
 
 	/** The Constant CONTROLLER_EXCEPTION_MSG. */
-	private static final String CONTROLLER_EXCEPTION_MSG = "EmpresaAPIController";
+	private static final String CONTROLLER_EXCEPTION_MSG = "NotaFiscalAPIController";
 
 	/**
-	 * Fetch all Empresas.
+	 * Fetch all NotaFiscals.
 	 *
 	 * @param pagedInquiryRequest the paged inquiry request
 	 * @return the response
 	 */
 	@RequestMapping(value = FETCH_ALL, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse fetchAll(@RequestBody PagedInquiryRequest pagedInquiryRequest)
+	public NotaFiscalResponse fetchAll(@RequestBody PagedInquiryRequest pagedInquiryRequest)
 	{
 
-		return fetchEmpresaByRequest(pagedInquiryRequest);
+		return fetchNotaFiscalByRequest(pagedInquiryRequest);
 
 	}
 
@@ -75,10 +74,10 @@ public class NotaFiscalAPIController extends NotaFiscalBaseController
 	 */
 	@RequestMapping(value = FETCH, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse fetch(@RequestBody FetchByIdRequest fetchByIdRequest)
+	public NotaFiscalResponse fetch(@RequestBody FetchByIdRequest fetchByIdRequest)
 	{
 
-		return fetchEmpresaById(fetchByIdRequest);
+		return fetchNotaFiscalById(fetchByIdRequest);
 
 	}
 
@@ -88,25 +87,25 @@ public class NotaFiscalAPIController extends NotaFiscalBaseController
 	 * @param locationRequest the location request
 	 * @return the response
 	 */
-	@RequestMapping(value = EDIT_LOCATION, method = RequestMethod.POST)
-	@ResponseBody
-	public EmpresaResponse edit(@RequestBody EmpresaMaintenanceRequest locationRequest)
-	{
-		EmpresaResponse locationResponse = new EmpresaResponse();
-		try
-		{
-
-			locationResponse = getEmpresaBAI().updateEmpresa(locationRequest);
-
-		}
-		catch (Exception e)
-		{
-			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
-			locationResponse = null;
-		}
-		return locationResponse;
-
-	}
+	// @RequestMapping(value = EDIT_LOCATION, method = RequestMethod.POST)
+	// @ResponseBody
+	// public NotaFiscalResponse edit(@RequestBody NotaFiscalMaintenanceRequest locationRequest)
+	// {
+	// NotaFiscalResponse locationResponse = new NotaFiscalResponse();
+	// try
+	// {
+	//
+	// locationResponse = getNotaFiscalBAI().updateNotaFiscal(locationRequest);
+	//
+	// }
+	// catch (Exception e)
+	// {
+	// LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+	// locationResponse = null;
+	// }
+	// return locationResponse;
+	//
+	// }
 
 	/**
 	 * Delete one location.
@@ -114,26 +113,26 @@ public class NotaFiscalAPIController extends NotaFiscalBaseController
 	 * @param locationRequest the location request
 	 * @return the response
 	 */
-	@RequestMapping(value = DELETE_LOCATION, method = RequestMethod.POST)
-	@ResponseBody
-	public EmpresaResponse delete(@RequestBody EmpresaMaintenanceRequest locationRequest)
-	{
-		EmpresaResponse locationResponse = new EmpresaResponse();
-		try
-		{
-
-			locationResponse = getEmpresaBAI().deleteEmpresa(locationRequest);
-
-		}
-		catch (Exception e)
-		{
-			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
-			locationResponse = null;
-		}
-
-		return locationResponse;
-
-	}
+	// @RequestMapping(value = DELETE_LOCATION, method = RequestMethod.POST)
+	// @ResponseBody
+	// public NotaFiscalResponse delete(@RequestBody NotaFiscalMaintenanceRequest locationRequest)
+	// {
+	// NotaFiscalResponse locationResponse = new NotaFiscalResponse();
+	// try
+	// {
+	//
+	// locationResponse = getNotaFiscalBAI().deleteNotaFiscal(locationRequest);
+	//
+	// }
+	// catch (Exception e)
+	// {
+	// LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+	// locationResponse = null;
+	// }
+	//
+	// return locationResponse;
+	//
+	// }
 
 	/**
 	 * Insert one location.
@@ -143,23 +142,10 @@ public class NotaFiscalAPIController extends NotaFiscalBaseController
 	 */
 	@RequestMapping(value = INSERT_LOCATION, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse insert(@RequestBody EmpresaMaintenanceRequest locationRequest)
+	public NotaFiscalEntradaResponse insertApi(@RequestBody NotaFiscalEntradaMaintenanceRequest locationRequest)
 	{
-		EmpresaResponse locationResponse = new EmpresaResponse();
 
-		try
-		{
-
-			locationRequest.getEmpresa().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
-			locationResponse = getEmpresaBAI().insertEmpresa(locationRequest);
-		}
-		catch (Exception e)
-		{
-			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
-			locationResponse = null;
-		}
-
-		return locationResponse;
+		return insert(locationRequest);
 
 	}
 

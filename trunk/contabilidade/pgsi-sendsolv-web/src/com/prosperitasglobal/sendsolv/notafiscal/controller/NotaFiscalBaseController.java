@@ -61,38 +61,38 @@ public class NotaFiscalBaseController extends UtilControllerD
 	private static final String ENROLLED_MEMBERS = "enrolled_members";
 
 	/** The NotaFiscal BAI. */
-	private INotaFiscalBAI locationBAI;
+	private INotaFiscalBAI notaFiscalBAI;
 
 	/**
-	 * Gets the location bai.
+	 * Gets the notaFiscal bai.
 	 *
-	 * @return the location bai
+	 * @return the notaFiscal bai
 	 */
 	public INotaFiscalBAI getNotaFiscalBAI()
 	{
-		return locationBAI;
+		return notaFiscalBAI;
 	}
 
 	/**
-	 * Sets the location bai.
+	 * Sets the notaFiscal bai.
 	 *
-	 * @param locationBAI the location bai
+	 * @param notaFiscalBAI the notaFiscal bai
 	 */
 	@Resource
-	public void setNotaFiscalBAI(INotaFiscalBAI locationBAI)
+	public void setNotaFiscalBAI(INotaFiscalBAI notaFiscalBAI)
 	{
-		this.locationBAI = locationBAI;
+		this.notaFiscalBAI = notaFiscalBAI;
 	}
 
 	/**
 	 * NotaFiscal edit mav.
 	 *
-	 * @param locationId the location id
+	 * @param notaFiscalId the notaFiscal id
 	 * @param returnViewName the return view name
 	 * @param isSelect the is select
 	 * @return the model and view
 	 */
-	protected ModelAndView locationEditMAV(Integer locationId, String returnViewName, Boolean isSelect,
+	protected ModelAndView notaFiscalEditMAV(Integer notaFiscalId, String returnViewName, Boolean isSelect,
 			HttpServletRequest request)
 	{
 		ModelAndView modelAndView = new ModelAndView(returnViewName);
@@ -104,11 +104,11 @@ public class NotaFiscalBaseController extends UtilControllerD
 			{
 				// modelAndView = listSelectBusiness(modelAndView, request);
 			}
-			if (!ValidationUtil.isNullOrZero(locationId))
+			if (!ValidationUtil.isNullOrZero(notaFiscalId))
 			{
 
 				modelAndView.addObject(RESPONSE,
-						getMapper().writeValueAsString(fetchNotaFiscalById(new FetchByIdRequest(locationId))));
+						getMapper().writeValueAsString(fetchNotaFiscalById(new FetchByIdRequest(notaFiscalId))));
 
 				return modelAndView;
 			}
@@ -127,19 +127,19 @@ public class NotaFiscalBaseController extends UtilControllerD
 	}
 
 	/**
-	 * Fetch location by request.
+	 * Fetch notaFiscal by request.
 	 *
 	 * @param pagedInquiryRequest the paged inquiry request
-	 * @return the location response
+	 * @return the notaFiscal response
 	 */
 	public NotaFiscalResponse fetchNotaFiscalByRequest(PagedInquiryRequest pagedInquiryRequest)
 	{
 
-		NotaFiscalResponse locationResponse = new NotaFiscalResponse();
+		NotaFiscalResponse notaFiscalResponse = new NotaFiscalResponse();
 		try
 		{
 
-			// locationResponse = Mock();
+			// notaFiscalResponse = Mock();
 			// getNotaFiscalBAI().fetchNotaFiscalByRequest(pagedInquiryRequest);
 
 		}
@@ -151,23 +151,23 @@ public class NotaFiscalBaseController extends UtilControllerD
 			}
 		}
 
-		return locationResponse;
+		return notaFiscalResponse;
 	}
 
 	/**
-	 * Fetch location by id.
+	 * Fetch notaFiscal by id.
 	 *
 	 * @param fetchByIdRequest the fetch by id request
-	 * @return the location response
+	 * @return the notaFiscal response
 	 */
 	public NotaFiscalResponse fetchNotaFiscalById(FetchByIdRequest fetchByIdRequest)
 	{
 
-		NotaFiscalResponse locationResponse = new NotaFiscalResponse();
+		NotaFiscalResponse notaFiscalResponse = new NotaFiscalResponse();
 		try
 		{
 
-			// locationResponse = MockById();
+			// notaFiscalResponse = MockById();
 			// getNotaFiscalBAI().fetchNotaFiscalById(fetchByIdRequest);
 
 		}
@@ -179,32 +179,32 @@ public class NotaFiscalBaseController extends UtilControllerD
 			}
 		}
 
-		return locationResponse;
+		return notaFiscalResponse;
 	}
 
 	/**
-	 * Insert one location.
+	 * Insert one notaFiscal.
 	 *
-	 * @param locationRequest the location request
+	 * @param notaFiscalRequest the notaFiscal request
 	 * @return the response
 	 */
-	public NotaFiscalEntradaResponse insert(NotaFiscalEntradaMaintenanceRequest locationRequest)
+	public NotaFiscalEntradaResponse insert(NotaFiscalEntradaMaintenanceRequest notaFiscalRequest)
 	{
-		NotaFiscalEntradaResponse locationResponse = new NotaFiscalEntradaResponse();
+		NotaFiscalEntradaResponse notaFiscalResponse = new NotaFiscalEntradaResponse();
 
 		try
 		{
-			locationRequest.setNotafiscalList(insertMockNotaFiscal(PersistanceActionEnum.INSERT));
-			locationRequest.getNotafiscalList().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
-			locationResponse = getNotaFiscalBAI().insertNotaFiscalEntrada(locationRequest);
+			notaFiscalRequest.setNotafiscal(insertMockNotaFiscal(PersistanceActionEnum.INSERT));
+			notaFiscalRequest.getNotafiscal().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
+			notaFiscalResponse = getNotaFiscalBAI().insertNotaFiscalEntrada(notaFiscalRequest);
 		}
 		catch (Exception e)
 		{
 			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
-			locationResponse = null;
+			notaFiscalResponse = null;
 		}
 
-		return locationResponse;
+		return notaFiscalResponse;
 
 	}
 
@@ -275,7 +275,7 @@ public class NotaFiscalBaseController extends UtilControllerD
 		Contas contasPagar = new Contas();
 		contasPagar.setModelAction(modelAction);
 		contasPagar.setId(1);
-		contasPagar.setIdFornecedor(1);
+		contasPagar.setPessoaId(1);
 		contasPagar.setDocId(100);
 		contasPagar.setContasTypeEnum(tipe);
 		contasPagar.setNumeroParc(3);
@@ -293,7 +293,7 @@ public class NotaFiscalBaseController extends UtilControllerD
 		contasPagar = new Contas();
 		contasPagar.setModelAction(modelAction);
 		contasPagar.setId(1);
-		contasPagar.setIdFornecedor(1);
+		contasPagar.setPessoaId(1);
 		contasPagar.setDocId(100);
 		contasPagar.setContasTypeEnum(tipe);
 		contasPagar.setNumeroParc(3);
@@ -311,7 +311,7 @@ public class NotaFiscalBaseController extends UtilControllerD
 		contasPagar = new Contas();
 		contasPagar.setModelAction(modelAction);
 		contasPagar.setId(1);
-		contasPagar.setIdFornecedor(1);
+		contasPagar.setPessoaId(1);
 		contasPagar.setDocId(100);
 		contasPagar.setContasTypeEnum(tipe);
 		contasPagar.setNumeroParc(3);
