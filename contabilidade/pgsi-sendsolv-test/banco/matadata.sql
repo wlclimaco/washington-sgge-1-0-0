@@ -1396,10 +1396,11 @@ CONSTRAINT [pk_notaFiscalItens_id] PRIMARY KEY CLUSTERED
 DROP TABLE [dbo].[contas];
 CREATE TABLE [dbo].[contas](
 	[id]             [int] identity(1,1) NOT NULL,
-	[idFornecedor] 	[int] NOT NULL,
+	[docId] 	[int] NOT NULL,
+	[pessoaId] 	[int] NOT NULL,
 	[parentId] 	[int]  NULL,
+	[contasTypeEnum] 	[int]  NULL,
 	[emprId]		[int]  NULL,
-	[contaTypeEnum] [int] NOT NULL,
 	[numeroParc] 	[int]  NULL,
 	[parcela]    	[int]  NULL,
 	[valorOriginal]	[real]  NULL,
@@ -1449,8 +1450,8 @@ CONSTRAINT [pk_itensEspeciais_id] PRIMARY KEY CLUSTERED
 
 DROP TABLE [dbo].[nFStatus];
 CREATE TABLE [dbo].[nFStatus](
-	[id]             [int] identity(1,1) NOT NULL,
-	[IdNota]		[int] NOT NULL,
+	[id]            [int] identity(1,1) NOT NULL,
+	[IdNota]		[int]  NULL,
 	[status]        [int] NOT NULL,
 	[dataMudanca]  	[bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[processId]     [int]  NULL,

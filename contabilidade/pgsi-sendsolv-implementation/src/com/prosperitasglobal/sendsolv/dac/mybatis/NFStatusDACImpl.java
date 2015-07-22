@@ -22,7 +22,7 @@ public class NFStatusDACImpl extends SqlSessionDaoSupport implements INFStatusDA
 
 	/** The Constant LOG. */
 	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(NFStatusDACImpl.class);
-	private static final String CONTACT_STMT_INSERT = null;
+	private static final String CONTACT_STMT_INSERT = "NFStatusMap.insertNFStatus";
 	private static final String CONTACT_STMT_DELETE_BUSINESS_CONTACT = null;
 	private static final String CONTACT_STMT_UPDATE = null;
 	private static final String EMPRESA_STMT_FETCH_COUNT = null;
@@ -47,7 +47,7 @@ public class NFStatusDACImpl extends SqlSessionDaoSupport implements INFStatusDA
 		// Associate with parent using statement name passed as parameter
 		insertCount +=
 				QATMyBatisDacHelper
-						.doInsert(getSqlSession(), statementName, nFStatus, response);
+				.doInsert(getSqlSession(), statementName, nFStatus, response);
 
 		return insertCount;
 	}
@@ -86,7 +86,7 @@ public class NFStatusDACImpl extends SqlSessionDaoSupport implements INFStatusDA
 		{
 			updateCount =
 					QATMyBatisDacHelper
-							.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE, nFStatus, response);
+					.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE, nFStatus, response);
 
 			if (updateCount == 1)
 			{
@@ -106,7 +106,7 @@ public class NFStatusDACImpl extends SqlSessionDaoSupport implements INFStatusDA
 	@Override
 	public InternalResultsResponse<NFStatus> fetchNFStatusByRequest(
 			PagedInquiryRequest request)
-	{
+			{
 		InternalResultsResponse<NFStatus> response =
 				new InternalResultsResponse<NFStatus>();
 
@@ -120,7 +120,7 @@ public class NFStatusDACImpl extends SqlSessionDaoSupport implements INFStatusDA
 				EMPRESA_STMT_FETCH_COUNT,
 				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
 		return response;
-	}
+			}
 
 	/*
 	 * (non-Javadoc)

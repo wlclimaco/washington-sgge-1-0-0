@@ -195,6 +195,14 @@
 	    ORDER BY dataStatus ASC
   </select>
 
+  <select id="fetchStatusByNota" parameterType="Integer" resultMap="statusResult">
+
+	    SELECT
+		<include refid="allStatusColumns" />
+	    FROM status b where b.tabelaEnum = 32 and b.parentId = #{id}
+
+	    ORDER BY dataStatus ASC
+  </select>
 
   <select id="fetchAllStatusByContatoId" parameterType="Integer" resultMap="statusResult">
 
