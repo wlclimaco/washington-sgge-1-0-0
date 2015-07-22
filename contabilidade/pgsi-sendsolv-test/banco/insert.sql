@@ -252,3 +252,20 @@ INSERT INTO [dbo].[cst]
            ('05','SubProduto','System',1432783357778,1432783357778,'System'),
            ('06','Produto Intermediario','System',1432783357778,1432783357778,'System'),
            ('07','Material de Uso e Consumo','System',1432783357778,1432783357778,'System');
+
+/** ---------------------------------------------------------------*/
+    INSERT INTO [dbo].[users] ([username], [password],[enabled],[entidadeId]) VALUES
+     ('rod', 'koala', 1),
+     ('washington', 'koala', 1),
+     ('admin', 'admin', 1);
+
+/** ---------------------------------------------------------------*/
+    INSERT INTO [dbo].[user_roles] ([username`, [ROLE]) VALUES
+     ('washington', 'ROLE_DOMAIN'),
+     ('washington', 'ROLE_ADMIN'),
+     ('admin', 'ROLE_CSR'),
+     ('rod', 'ROLE_CSR'),
+     ('rod', 'ROLE_ADMIN');
+
+/** ---------------------------------------------------------------*/
+

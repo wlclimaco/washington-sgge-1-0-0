@@ -38,18 +38,30 @@
 			<sec:concurrency-control max-sessions="5"
 				error-if-maximum-exceeded="true" />
 		</sec:session-management>
-	</sec:http>
+</sec:http>
 
-	<sec:ldap-server url="ldaps://localhost:636/dc=BLDWILLCHANGE,dc=prosperitasglobal,dc=com" />
+ <!-- <authentication-manager> <authentication-provider> <user-service> <user
+  name="user" password="user@123" authorities="ROLE_ADMIN" /> </user-service>
+  </authentication-provider> </authentication-manager> -->
 
-	<sec:authentication-manager erase-credentials="false">
-		<sec:ldap-authentication-provider
-			user-dn-pattern="uid={0},ou=Users"
-			group-search-base="ou=Roles"
-			user-context-mapper-ref="userContextMapper" />
-	</sec:authentication-manager>
+ <sec:authentication-manager>
+  <sec:authentication-provider>
+   <<sec:jdbc-user-service data-source-ref="dataSource"
+    users-by-username-query="select username,password, enabled from users where username=?"
+    authorities-by-username-query="select username, role from user_roles where username =?  " />
+  </<sec:authentication-provider>
+</sec:authentication-manager>
 
-	<bean id="userContextMapper" class="org.springframework.security.ldap.userdetails.InetOrgPersonContextMapper" />
+<!-- 	<sec:ldap-server url="ldaps://localhost:636/dc=BLDWILLCHANGE,dc=prosperitasglobal,dc=com" /> -->
+
+<!-- 	<sec:authentication-manager erase-credentials="false"> -->
+<!-- 		<sec:ldap-authentication-provider -->
+<!-- 			user-dn-pattern="uid={0},ou=Users" -->
+<!-- 			group-search-base="ou=Roles" -->
+<!-- 			user-context-mapper-ref="userContextMapper" /> -->
+<!-- 	</sec:authentication-manager> -->
+
+<!-- 	<bean id="userContextMapper" class="org.springframework.security.ldap.userdetails.InetOrgPersonContextMapper" /> -->
 
 	<!-- 	<security:http Auto-config="false" Use-expressions="true" -->
 <!-- 		Access-denied-page="/login.jsp?Session Timed Out." Entry-point-ref="loginUrlAuthenticationEntryPoint"> -->
