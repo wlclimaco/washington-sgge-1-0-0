@@ -90,6 +90,20 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	private List<HistoricoNF> historicoNFList;
 
+	public Integer getNotaTypeValue()
+	{
+		if (notaType != null)
+		{
+			return notaType.getValue();
+		}
+		return null;
+	}
+
+	public void setNotaTypeValue(Integer acaoTypeValue)
+	{
+		notaType = NotaTypeEnum.enumForValue(acaoTypeValue);
+	}
+
 	/**
 	 * Default constructor.
 	 */
