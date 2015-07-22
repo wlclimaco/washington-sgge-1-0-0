@@ -12,7 +12,6 @@ import com.prosperitasglobal.sendsolv.dac.ICfopDAC;
 import com.prosperitasglobal.sendsolv.dac.IConhecimentoTransporteDAC;
 import com.prosperitasglobal.sendsolv.dac.IContasDAC;
 import com.prosperitasglobal.sendsolv.dac.IFormaPagamentoDAC;
-import com.prosperitasglobal.sendsolv.dac.IFornecedorDAC;
 import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.IHistoricoNFDAC;
 import com.prosperitasglobal.sendsolv.dac.IItensEspeciaisDAC;
@@ -21,7 +20,6 @@ import com.prosperitasglobal.sendsolv.dac.INotaFiscalDAC;
 import com.prosperitasglobal.sendsolv.dac.INotaFiscalItensDAC;
 import com.prosperitasglobal.sendsolv.dac.IServicoItensDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
-import com.prosperitasglobal.sendsolv.dac.ITransportadorDAC;
 import com.prosperitasglobal.sendsolv.dac.ITributacaoDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.ConhecimentoTransporteDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.ContasDACD;
@@ -79,21 +77,16 @@ public class NotaFiscalDACImpl extends SqlSessionDaoSupport implements INotaFisc
 	/** The valid sort fields for an cnae inquiry. Will be injected by Spring. */
 	private Map<String, String> cnaeInquiryValidSortFields;
 
-	private ITransportadorDAC transportadorDac;
 	private IConhecimentoTransporteDAC conhecimentoTransporteDac;
 	private ITributacaoDAC tributacaoDAC;
-	private IFormaPagamentoDAC formapgDAC;
+	private IFormaPagamentoDAC formaPgDAC;
 	private INotaFiscalItensDAC notaItensDAC;
 	private INoteDAC noteDAC;
 	private IItensEspeciaisDAC itensEspeciaisDAC;
 	private ICfopDAC cfopDAC;
 	private IServicoItensDAC servicoItensDAC;
-	private INFStatusDAC nfStatusDAC;
-	private IFornecedorDAC fornecedorDAC;
 	private IHistoricoDAC historicoDAC;
-	private IConhecimentoTransporteDAC conhecimentoTransporteDAC;
 	private IStatusDAC statusDAC;
-	private IFormaPagamentoDAC formaPgDAC;
 	private IContasDAC contasDAC;
 	private INFStatusDAC nFStatusDAC;
 	private IHistoricoNFDAC historicoNFDAC;
@@ -163,38 +156,6 @@ public class NotaFiscalDACImpl extends SqlSessionDaoSupport implements INotaFisc
 	}
 
 	/**
-	 * @return the formaPgDAC
-	 */
-	public IFormaPagamentoDAC getFormaPgDAC()
-	{
-		return formaPgDAC;
-	}
-
-	/**
-	 * @param formaPgDAC the formaPgDAC to set
-	 */
-	public void setFormaPgDAC(IFormaPagamentoDAC formaPgDAC)
-	{
-		this.formaPgDAC = formaPgDAC;
-	}
-
-	/**
-	 * @return the conhecimentoTransporteDAC
-	 */
-	public IConhecimentoTransporteDAC getConhecimentoTransporteDAC()
-	{
-		return conhecimentoTransporteDAC;
-	}
-
-	/**
-	 * @param conhecimentoTransporteDAC the conhecimentoTransporteDAC to set
-	 */
-	public void setConhecimentoTransporteDAC(IConhecimentoTransporteDAC conhecimentoTransporteDAC)
-	{
-		this.conhecimentoTransporteDAC = conhecimentoTransporteDAC;
-	}
-
-	/**
 	 * @return the cnaeInquiryValidSortFields
 	 */
 	public Map<String, String> getCnaeInquiryValidSortFields()
@@ -218,22 +179,6 @@ public class NotaFiscalDACImpl extends SqlSessionDaoSupport implements INotaFisc
 	public void setCnaeInquiryValidSortFields(Map<String, String> cnaeInquiryValidSortFields)
 	{
 		this.cnaeInquiryValidSortFields = cnaeInquiryValidSortFields;
-	}
-
-	/**
-	 * @return the transportadorDac
-	 */
-	public ITransportadorDAC getTransportadorDac()
-	{
-		return transportadorDac;
-	}
-
-	/**
-	 * @param transportadorDac the transportadorDac to set
-	 */
-	public void setTransportadorDac(ITransportadorDAC transportadorDac)
-	{
-		this.transportadorDac = transportadorDac;
 	}
 
 	/**
@@ -269,19 +214,19 @@ public class NotaFiscalDACImpl extends SqlSessionDaoSupport implements INotaFisc
 	}
 
 	/**
-	 * @return the formapgDAC
+	 * @return the formaPgDAC
 	 */
-	public IFormaPagamentoDAC getFormapgDAC()
+	public IFormaPagamentoDAC getFormaPgDAC()
 	{
-		return formapgDAC;
+		return formaPgDAC;
 	}
 
 	/**
-	 * @param formapgDAC the formapgDAC to set
+	 * @param formaPgDAC the formaPgDAC to set
 	 */
-	public void setFormapgDAC(IFormaPagamentoDAC formapgDAC)
+	public void setFormaPgDAC(IFormaPagamentoDAC formaPgDAC)
 	{
-		this.formapgDAC = formapgDAC;
+		this.formaPgDAC = formaPgDAC;
 	}
 
 	/**
@@ -362,38 +307,6 @@ public class NotaFiscalDACImpl extends SqlSessionDaoSupport implements INotaFisc
 	public void setServicoItensDAC(IServicoItensDAC servicoItensDAC)
 	{
 		this.servicoItensDAC = servicoItensDAC;
-	}
-
-	/**
-	 * @return the nfStatusDAC
-	 */
-	public INFStatusDAC getNfStatusDAC()
-	{
-		return nfStatusDAC;
-	}
-
-	/**
-	 * @param nfStatusDAC the nfStatusDAC to set
-	 */
-	public void setNfStatusDAC(INFStatusDAC nfStatusDAC)
-	{
-		this.nfStatusDAC = nfStatusDAC;
-	}
-
-	/**
-	 * @return the fornecedorDAC
-	 */
-	public IFornecedorDAC getFornecedorDAC()
-	{
-		return fornecedorDAC;
-	}
-
-	/**
-	 * @param fornecedorDAC the fornecedorDAC to set
-	 */
-	public void setFornecedorDAC(IFornecedorDAC fornecedorDAC)
-	{
-		this.fornecedorDAC = fornecedorDAC;
 	}
 
 	/**
@@ -1104,7 +1017,7 @@ public class NotaFiscalDACImpl extends SqlSessionDaoSupport implements INotaFisc
 		insertCount +=
 				ConhecimentoTransporteDACD.maintainConecimentoTransporteAssociations(
 						notafiscal.getConhecimentoTransporte(), response, notafiscal.getId(), null, null,
-						null, getConhecimentoTransporteDAC(), getStatusDAC(), getHistoricoDAC(),
+						null, getConhecimentoTransporteDac(), getStatusDAC(), getHistoricoDAC(),
 						notafiscal.getEmprId(),
 						notafiscal.getCreateUser(), processId, historicoId);
 
@@ -1193,16 +1106,15 @@ public class NotaFiscalDACImpl extends SqlSessionDaoSupport implements INotaFisc
 		Date a = new Date();
 		historico.setData(a.getTime());
 
-		count = getHistoricoDAC().insertHistorico(historico, statementName, response);
 		QATMyBatisDacHelper.doInsert(getSqlSession(), "HistoricoMap.insertHistorico", historico, response);
 
-		return count;
+		return historico.getId();
 	}
 
 	public Integer insertprocessItens(Integer historicoId, Integer parentId, TabelaEnum tabela, AcaoEnum acao)
 	{
 		Integer count = 0;
-
+		InternalResultsResponse<HistoricoItens> response = new InternalResultsResponse<HistoricoItens>();
 		HistoricoItens historicoItens = new HistoricoItens();
 		historicoItens.setIdHist(historicoId);
 		historicoItens.setProcessId(0);
@@ -1210,10 +1122,7 @@ public class NotaFiscalDACImpl extends SqlSessionDaoSupport implements INotaFisc
 		historicoItens.setTabelaEnum(tabela);
 		historicoItens.setAcaoType(acao);
 
-		count = getHistoricoDAC().insertHistoricoItens(historicoItens, null, null);
-
-		Integer processId = historicoId;
-		return count;
+		QATMyBatisDacHelper.doInsert(getSqlSession(), "HistoricoMap.insertHistoricoItens", historicoItens, response);
+		return historicoItens.getId();
 	}
-
 }
