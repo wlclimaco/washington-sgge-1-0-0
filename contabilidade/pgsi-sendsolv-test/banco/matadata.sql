@@ -1765,3 +1765,26 @@ CONSTRAINT [pk_produtoPessoa_id] PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 /** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[users];
+CREATE TABLE [dbo].[users](
+	  [id]          	    [int] identity(1,1) NOT NULL,
+	  [username] 	[varchar](45) NOT NULL,
+      [password] 	[varchar](450) NOT NULL,
+      [enabled]  	[tinyint](4) NOT NULL DEFAULT '1',
+      [entidadeId]  [int](4) NOT NULL,
+ CONSTRAINT [pk_users_id] PRIMARY KEY CLUSTERED
+(
+	[username] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+/** ---------------------------------------------------------------*/
+DROP TABLE [dbo].[user_roles];
+CREATE TABLE [dbo].[user_roles](
+      [user_role_id] [int] identity(1,1) NOT NULL,
+	  [username] 	 [varchar](45) NOT NULL,
+      [ROLE] 	     [varchar](45) NOT NULL,
+CONSTRAINT [pk_user_roles_id] PRIMARY KEY CLUSTERED
+(
+	[user_role_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
