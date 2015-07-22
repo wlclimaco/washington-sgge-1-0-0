@@ -39,8 +39,7 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allConhecimentoTransporteColumns">
-		 b.id
-		,b.IdNota
+		 b.IdNota
 		,b.remetente
 		,b.vrTotalMercadorias
 		,b.apCreIcms
@@ -60,7 +59,6 @@
   </sql>
 
   <sql id="allConhecimentoTransporteValues">
-  		 #{id},
 		 #{IdNota},
 		 #{remetente},
 		 #{vrTotalMercadorias},

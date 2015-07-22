@@ -1393,21 +1393,21 @@ CONSTRAINT [pk_notaFiscalItens_id] PRIMARY KEY CLUSTERED
 
 /** ---------------------------------------------------------------*/
 
-DROP TABLE [dbo].[contasPagarReceber];
-CREATE TABLE [dbo].[contasPagarReceber](
+DROP TABLE [dbo].[contas];
+CREATE TABLE [dbo].[contas](
 	[id]             [int] identity(1,1) NOT NULL,
 	[idFornecedor] 	[int] NOT NULL,
-	[parentId] 	[int] NOT NULL,
-	[emprId]		[int] NOT NULL,
+	[parentId] 	[int]  NULL,
+	[emprId]		[int]  NULL,
 	[contaTypeEnum] [int] NOT NULL,
 	[numeroParc] 	[int]  NULL,
-	[parcela]    	[int] NOT NULL,
-	[valorOriginal]	[real] NOT NULL,
+	[parcela]    	[int]  NULL,
+	[valorOriginal]	[real]  NULL,
 	[dataVencimento] [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[dataGeracao]    [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[dataPagamento]  [bigint] NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
-	[juros]			 [real] NOT NULL,
-	[taxa]           [real] NOT NULL,
+	[juros]			 [real]  NULL,
+	[taxa]           [real]  NULL,
 	[valorTotal] 	 [real]  NULL,
 	[baixaUser]		 [int]  NULL,
 	[baixaDateUTC]	 [bigint] NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1416,7 +1416,7 @@ CREATE TABLE [dbo].[contasPagarReceber](
     [create_user]  			[varchar](50) NULL,
     [modify_date]  			[bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  			[varchar](50) NULL,
-CONSTRAINT [pk_contasPagar_id] PRIMARY KEY CLUSTERED
+CONSTRAINT [pk_contasPagar001_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]

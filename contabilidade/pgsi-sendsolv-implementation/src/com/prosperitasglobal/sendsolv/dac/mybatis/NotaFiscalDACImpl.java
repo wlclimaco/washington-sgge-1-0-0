@@ -1047,7 +1047,7 @@ public class NotaFiscalDACImpl extends SqlSessionDaoSupport implements INotaFisc
 						null,
 						TabelaEnum.PESSOA, getNotaItensDAC(), getStatusDAC(), getHistoricoDAC(),
 						notafiscal.getEmprId(),
-						notafiscal.getCreateUser(), processId);
+						notafiscal.getCreateUser(), processId, getTributacaoDAC());
 
 		// Note
 		insertCount +=

@@ -43,6 +43,20 @@ public class Contas extends ModelCosmeDamiao
 	/** The expiration date. */
 	private Double valorTotal;
 
+	public Integer getContasTypeEnumValue()
+	{
+		if (contasTypeEnum != null)
+		{
+			return contasTypeEnum.getValue();
+		}
+		return null;
+	}
+
+	public void setContasTypeEnumValue(Integer acaoTypeValue)
+	{
+		contasTypeEnum = ContasTypeEnum.enumForValue(acaoTypeValue);
+	}
+
 	/**
 	 * The Constructor.
 	 */
@@ -270,21 +284,21 @@ public class Contas extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Contas [getId()=" + getId() + ", getPessoaId()=" + getPessoaId() + ", getDocId()=" + getDocId()
-				+ ", getContasTypeEnum()=" + getContasTypeEnum() + ", getNumeroParc()=" + getNumeroParc()
-				+ ", getParcela()=" + getParcela() + ", getValorOriginal()=" + getValorOriginal()
-				+ ", getDataVencimento()=" + getDataVencimento() + ", getDataGeracao()=" + getDataGeracao()
-				+ ", getDataPagamento()=" + getDataPagamento() + ", getJuros()=" + getJuros() + ", getTaxa()="
-				+ getTaxa() + ", getValorTotal()=" + getValorTotal() + ", getTabelaEnumValue()=" + getTabelaEnumValue()
-				+ ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue()
-				+ ", getParentId()=" + getParentId() + ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType()
-				+ ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()="
-				+ getEmprId() + ", getSite()=" + getSite() + ", getProcessId()=" + getProcessId() + ", getUserId()="
-				+ getUserId() + ", getNotes()=" + getNotes() + ", toString()=" + super.toString()
-				+ ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
-				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
-				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
-				+ hashCode() + "]";
+		return "Contas [getContasTypeEnumValue()=" + getContasTypeEnumValue() + ", getId()=" + getId()
+				+ ", getPessoaId()=" + getPessoaId() + ", getDocId()=" + getDocId() + ", getContasTypeEnum()="
+				+ getContasTypeEnum() + ", getNumeroParc()=" + getNumeroParc() + ", getParcela()=" + getParcela()
+				+ ", getValorOriginal()=" + getValorOriginal() + ", getDataVencimento()=" + getDataVencimento()
+				+ ", getDataGeracao()=" + getDataGeracao() + ", getDataPagamento()=" + getDataPagamento()
+				+ ", getJuros()=" + getJuros() + ", getTaxa()=" + getTaxa() + ", getValorTotal()=" + getValorTotal()
+				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
+				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
+				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
+				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
+				+ ", getProcessId()=" + getProcessId() + ", getUserId()=" + getUserId() + ", getNotes()=" + getNotes()
+				+ ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()="
+				+ getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()="
+				+ getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + "]";
 	}
 
 }

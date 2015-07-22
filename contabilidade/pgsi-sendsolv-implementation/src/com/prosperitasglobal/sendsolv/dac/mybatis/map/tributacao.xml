@@ -126,6 +126,14 @@
     ORDER BY id ASC
   </select>
 
+  <select id="fetchTributosById" parameterType="FetchByIdRequest" resultMap="tributosResult">
+	SELECT b.id,
+	<include refid="allTributacaoColumns" />
+    FROM tributos b
+    where id = #{id}
+    ORDER BY id ASC
+  </select>
+
    <select id="fetchTributacaoByNota" parameterType="Integer" resultMap="tributosResult">
 	SELECT b.id,
 	<include refid="allTributacaoColumns" />

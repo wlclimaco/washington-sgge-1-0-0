@@ -39,6 +39,7 @@
    	<result property="qnt" column="qnt"/>
 	<result property="vrUnitario" column="vrUnitario"/>
     <result property="vrDesconto" column="vrDesconto" />
+     <result property="processId" column="processId" />
    	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
@@ -57,9 +58,10 @@
 		,b.qnt
 		,b.vrUnitario
 		,b.vrDesconto
-		,b.cfop.id
-		,b.classificacao.id
-		,b.produto.id
+		,b.cfop
+		,b.classificacao
+		,b.produto
+		,b.processId
       	,b.create_date
       	,b.create_user
       	,b.modify_date
@@ -74,6 +76,7 @@
 		 #{cfop.id},
 		 #{classificacao.id},
 		 #{produto.id},
+		 #{processId},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
