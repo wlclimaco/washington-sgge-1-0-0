@@ -1,15 +1,15 @@
 package com.prosperitasglobal.sendsolv.model.response;
 
-import java.util.Collection;
 import java.util.List;
 
-import com.prosperitasglobal.sendsolv.model.NotaFiscal;
+import com.prosperitasglobal.sendsolv.model.NotaFiscalEntrada;
+import com.qat.framework.model.response.InquiryResponse;
 
 public class NotaFiscalEntradaResponse extends InquiryResponse
 {
 
 	/** Attributes */
-	private List<NotaFiscal> notaFiscalList;
+	private List<NotaFiscalEntrada> notaFiscalList;
 
 	/**
 	 * The Constructor.
@@ -22,7 +22,7 @@ public class NotaFiscalEntradaResponse extends InquiryResponse
 	/**
 	 * @return the notaFiscalList
 	 */
-	public List<NotaFiscal> getNotaFiscalList()
+	public List<NotaFiscalEntrada> getNotaFiscalList()
 	{
 		return notaFiscalList;
 	}
@@ -30,20 +30,9 @@ public class NotaFiscalEntradaResponse extends InquiryResponse
 	/**
 	 * @param notaFiscalList the notaFiscalList to set
 	 */
-	public void setNotaFiscalList(List<NotaFiscal> notaFiscalList)
+	public void setNotaFiscalList(List<NotaFiscalEntrada> notaFiscalList)
 	{
 		this.notaFiscalList = notaFiscalList;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.qat.framework.model.response.InquiryResponse#addResults(java.util.Collection)
-	 */
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	@Override
-	public void addResults(Collection coll)
-	{
-		setNotaFiscalList((List<NotaFiscal>)coll);
 	}
 
 	/*
@@ -53,10 +42,11 @@ public class NotaFiscalEntradaResponse extends InquiryResponse
 	@Override
 	public String toString()
 	{
-		return "LocationResponse [getLocationList()=" + getNotaFiscalList() + ", getResultsSetInfo()="
+		return "NotaFiscalEntradaResponse [getNotaFiscalList()=" + getNotaFiscalList() + ", getResultsSetInfo()="
 				+ getResultsSetInfo() + ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()="
 				+ getMessageList() + ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()="
-				+ isOperationSuccess() + "]";
+				+ isOperationSuccess() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
+				+ super.toString() + "]";
 	}
 
 }

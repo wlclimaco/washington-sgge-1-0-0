@@ -1,6 +1,8 @@
 package com.prosperitasglobal.sendsolv.bai;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.request.CaixaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CondPgInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ContasInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ContasMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.request.NotaFiscalEntradaMaintenanceRequest;
@@ -75,9 +77,8 @@ public interface INotaFiscalBAI
 
 	public ContasResponse fetchContasById(FetchByIdRequest request);
 
-	public CaixaResponse fetchOrcamentoByRequest(CaixaInquiryRequest request);
+	public CaixaResponse fetchCaixaByRequest(CaixaInquiryRequest request);
 
-	public CondPgResponse fetchOrcamentoByRequest(CondPgInquiryRequest request);
+	public CondPgResponse fetchCondPgByRequest(CondPgInquiryRequest request);
 
-	public OrcamentoResponse fetchOrcamentoByRequest(OrcamentoInquiryRequest request);
 }
