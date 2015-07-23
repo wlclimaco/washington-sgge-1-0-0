@@ -27,7 +27,7 @@
  	-->
   <select id="fetchNotaFiscalEntradaRowCount" parameterType="NotaFiscalInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
-        FROM notafiscal where type = 1
+        FROM notafiscal
 
   </select>
 
@@ -41,7 +41,7 @@
     			   SELECT
 					b.id,	<include refid="allNotaFiscalEntradaColumns" />
  				   FROM notaFiscal b
-					where  b.type = 1 and b.id = #{id}
+					where  b.id = #{id}
   </select>
 
 
@@ -50,7 +50,7 @@
     						<include refid="allNotaFiscalEntradaColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM notafiscal b
-						where type = 1
+						where 1 = 1
 					<if test="parentId != null">
 						AND b.id = #{id}
 					</if>
