@@ -255,12 +255,12 @@ INSERT INTO [dbo].[cst]
 
 /** ---------------------------------------------------------------*/
     INSERT INTO [dbo].[users] ([username], [password],[enabled],[entidadeId]) VALUES
-     ('rod', 'koala', 1),
-     ('washington', 'koala', 1),
-     ('admin', 'admin', 1);
+     ('rod', 'koala', 1,1),
+     ('washington', 'koala', 1,1),
+     ('admin', 'admin', 1,1);
 
 /** ---------------------------------------------------------------*/
-    INSERT INTO [dbo].[user_roles] ([username`, [ROLE]) VALUES
+    INSERT INTO [dbo].[user_roles] ([username], [ROLE]) VALUES
      ('washington', 'ROLE_DOMAIN'),
      ('washington', 'ROLE_ADMIN'),
      ('admin', 'ROLE_CSR'),

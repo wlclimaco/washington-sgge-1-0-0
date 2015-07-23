@@ -25,7 +25,7 @@ import com.prosperitasglobal.sendsolv.model.Csosn;
 import com.prosperitasglobal.sendsolv.model.Cst;
 import com.prosperitasglobal.sendsolv.model.Empresa;
 import com.prosperitasglobal.sendsolv.model.Estado;
-import com.prosperitasglobal.sendsolv.model.FormaPg;
+import com.prosperitasglobal.sendsolv.model.FormaPgPessoa;
 import com.prosperitasglobal.sendsolv.model.HistoricoNF;
 import com.prosperitasglobal.sendsolv.model.Incidencia;
 import com.prosperitasglobal.sendsolv.model.ItensEspeciais;
@@ -39,7 +39,7 @@ import com.prosperitasglobal.sendsolv.model.StatusNF;
 import com.prosperitasglobal.sendsolv.model.Transportador;
 import com.prosperitasglobal.sendsolv.model.Tributacao;
 import com.prosperitasglobal.sendsolv.model.request.NotaFiscalEntradaMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.NotaFiscalInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.response.NotaFiscalEntradaResponse;
 import com.prosperitasglobal.sendsolv.model.response.NotaFiscalResponse;
 import com.qat.framework.model.QATModel.PersistanceActionEnum;
@@ -132,15 +132,15 @@ public class NotaFiscalBaseController extends UtilControllerD
 	 * @param pagedInquiryRequest the paged inquiry request
 	 * @return the notaFiscal response
 	 */
-	public NotaFiscalResponse fetchNotaFiscalByRequest(PagedInquiryRequest pagedInquiryRequest)
+	public NotaFiscalEntradaResponse fetchNotaFiscalByRequest(NotaFiscalInquiryRequest pagedInquiryRequest)
 	{
 
-		NotaFiscalResponse notaFiscalResponse = new NotaFiscalResponse();
+		NotaFiscalEntradaResponse notaFiscalResponse = new NotaFiscalEntradaResponse();
 		try
 		{
 
 			// notaFiscalResponse = Mock();
-			// getNotaFiscalBAI().fetchNotaFiscalByRequest(pagedInquiryRequest);
+			notaFiscalResponse = getNotaFiscalBAI().fetchNotaFiscalEntradaByRequest(pagedInquiryRequest);
 
 		}
 		catch (Exception e)
@@ -254,16 +254,22 @@ public class NotaFiscalBaseController extends UtilControllerD
 		return tributacaoList;
 	}
 
-	public List<FormaPg> insertFormaPg(PersistanceActionEnum modelAction)
+	public List<FormaPgPessoa> insertFormaPg(PersistanceActionEnum modelAction)
 	{
-		List<FormaPg> formaPgList = new ArrayList<FormaPg>();
-		FormaPg formaPg = new FormaPg(1, PersistanceActionEnum.NONE);
+		List<FormaPgPessoa> formaPgList = new ArrayList<FormaPgPessoa>();
+		FormaPgPessoa formaPg = new FormaPgPessoa();
+		formaPg.setId(1);
+		formaPg.setModelAction(PersistanceActionEnum.NONE);
 		formaPgList.add(formaPg);
 
-		formaPg = new FormaPg(2, PersistanceActionEnum.NONE);
+		formaPg = new FormaPgPessoa();
+		formaPg.setId(2);
+		formaPg.setModelAction(PersistanceActionEnum.NONE);
 		formaPgList.add(formaPg);
 
-		formaPg = new FormaPg(3, PersistanceActionEnum.NONE);
+		formaPg = new FormaPgPessoa();
+		formaPg.setId(3);
+		formaPg.setModelAction(PersistanceActionEnum.NONE);
 		formaPgList.add(formaPg);
 
 		return formaPgList;
@@ -370,8 +376,7 @@ public class NotaFiscalBaseController extends UtilControllerD
 		historicoNF.setNotaId(1);
 		Date a = new Date();
 		historicoNF.setData(a.getTime());
-		historicoNF.setNotaTypeEnumList(new ArrayList<NotaTypeEnum>());
-		historicoNF.getNotaTypeEnumList().add(NotaTypeEnum.ENTRADA);
+		historicoNF.setNotaTypeEnum(NotaTypeEnum.ENTRADA);
 		historicoNFList.add(historicoNF);
 
 		return historicoNFList;
@@ -465,7 +470,7 @@ public class NotaFiscalBaseController extends UtilControllerD
 
 		Date a = new Date();
 		notaFiscal.setId(1);
-		notaFiscal.setNotaType(NotaTypeEnum.ENTRADA);
+		notaFiscal.setModelAction(modelAction);
 		notaFiscal.setSerie("01");
 		notaFiscal.setOrdem("01");
 		notaFiscal.setNumero("123");

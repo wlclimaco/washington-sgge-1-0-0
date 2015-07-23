@@ -33,8 +33,8 @@ public class NotaFiscalEntrada extends NotaFiscal
 	@Override
 	public String toString()
 	{
-		return "NotaFiscalEntrada [getFornecedor()=" + getFornecedor() + ", getId()=" + getId() + ", getNotaType()="
-				+ getNotaType() + ", getSerie()=" + getSerie() + ", getOrdem()=" + getOrdem() + ", getNumero()="
+		return "NotaFiscalEntrada [getFornecedor()=" + getFornecedor() + ", getId()=" + getId() + ", getSerie()="
+				+ getSerie() + ", getOrdem()=" + getOrdem() + ", getNumero()="
 				+ getNumero() + ", getTipo()=" + getTipo() + ", getNfValor()=" + getNfValor() + ", getTransportador()="
 				+ getTransportador() + ", getConhecimentoTransporte()=" + getConhecimentoTransporte()
 				+ ", getEmpresa()=" + getEmpresa() + ", getTributosList()=" + getTributosList()

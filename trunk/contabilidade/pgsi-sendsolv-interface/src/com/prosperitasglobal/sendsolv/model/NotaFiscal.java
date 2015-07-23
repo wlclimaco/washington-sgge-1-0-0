@@ -14,9 +14,6 @@ public class NotaFiscal extends ModelCosmeDamiao
 	/** The SendSolv id for the account. */
 	private Integer id;
 
-	/** The type of an account. */
-	private NotaTypeEnum notaType;
-
 	/** The description. */
 	private String serie;
 
@@ -47,7 +44,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 	private List<Tributacao> tributosList;
 
 	/** The cep. */
-	private List<FormaPg> formaPagList;
+	private List<FormaPgPessoa> formaPagList;
 
 	/** The tipo endereco. */
 	private List<NotaFiscalItens> notaFiscalItens;
@@ -90,20 +87,6 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	private List<HistoricoNF> historicoNFList;
 
-	public Integer getNotaTypeValue()
-	{
-		if (notaType != null)
-		{
-			return notaType.getValue();
-		}
-		return null;
-	}
-
-	public void setNotaTypeValue(Integer acaoTypeValue)
-	{
-		notaType = NotaTypeEnum.enumForValue(acaoTypeValue);
-	}
-
 	/**
 	 * Default constructor.
 	 */
@@ -130,26 +113,6 @@ public class NotaFiscal extends ModelCosmeDamiao
 	public void setId(Integer id)
 	{
 		this.id = id;
-	}
-
-	/**
-	 * Gets the nota type.
-	 *
-	 * @return the notaType
-	 */
-	public NotaTypeEnum getNotaType()
-	{
-		return notaType;
-	}
-
-	/**
-	 * Sets the nota type.
-	 *
-	 * @param notaType the notaType to set
-	 */
-	public void setNotaType(NotaTypeEnum notaType)
-	{
-		this.notaType = notaType;
 	}
 
 	/**
@@ -337,7 +300,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 	 *
 	 * @return the formaPagList
 	 */
-	public List<FormaPg> getFormaPagList()
+	public List<FormaPgPessoa> getFormaPagList()
 	{
 		return formaPagList;
 	}
@@ -347,7 +310,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 	 *
 	 * @param formaPagList the formaPagList to set
 	 */
-	public void setFormaPagList(List<FormaPg> formaPagList)
+	public void setFormaPagList(List<FormaPgPessoa> formaPagList)
 	{
 		this.formaPagList = formaPagList;
 	}
@@ -663,7 +626,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "NotaFiscal [getId()=" + getId() + ", getNotaType()=" + getNotaType() + ", getSerie()=" + getSerie()
+		return "NotaFiscal [getId()=" + getId() + ", getSerie()=" + getSerie()
 				+ ", getOrdem()=" + getOrdem() + ", getNumero()=" + getNumero() + ", getTipo()=" + getTipo()
 				+ ", getNfValor()=" + getNfValor() + ", getTransportador()=" + getTransportador()
 				+ ", getConhecimentoTransporte()=" + getConhecimentoTransporte() + ", getEmpresa()=" + getEmpresa()

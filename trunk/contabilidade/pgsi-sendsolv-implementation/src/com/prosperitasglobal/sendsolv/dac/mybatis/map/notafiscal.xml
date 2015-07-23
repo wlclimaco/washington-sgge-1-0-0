@@ -16,7 +16,6 @@
 
   <resultMap id="NotaFiscalResult" type="NotaFiscal" >
 		<result property="id" column="id" />
-		<result property="notaType" column="notaType" />
 		<result property="serie" column="serie" />
 		<result property="ordem" column="ordem" />
 		<result property="numero" column="numero" />
@@ -53,8 +52,7 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allNotaFiscalColumns">
-		 b.notaType
-		,b.serie
+		 b.serie
 		,b.ordem
 		,b.numero
 		,b.tipo
@@ -66,13 +64,12 @@
 		,b.bxEstoque
 		,b.descItens
 		,b.pcCusto
-		,b.pedidoCompraId
-		,b.orcamentoId
 		,b.cfop
 		,b.transportador
 		,b.conhecimentoTransporte
 		,b.empresa
 		,b.pessoa
+		,b.processId
       	,b.create_date
       	,b.create_user
       	,b.modify_date
@@ -80,7 +77,6 @@
   </sql>
 
   <sql id="allNotaFiscalValues">
-  		#{notaType},
 		#{serie},
 		#{ordem},
 		#{numero},
@@ -93,13 +89,12 @@
 		#{bxEstoque},
 		#{descItens},
 		#{pcCusto},
-		#{pedidoCompraId},
-		#{orcamentoId},
 		#{cfop.id},
 		#{transportador.id},
 		#{conhecimentoTransporte.id},
 		#{empresa.id},
 		#{pessoa.id},
+		#{processId},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
@@ -121,7 +116,6 @@
   <update id="updateNotaFiscal" parameterType="NotaFiscal">
     UPDATE notaFiscal
     	<set>
-	    	<if test="notaTypeValue!= null"> notaType=#{notaTypeValue},</if>
 			<if test="serie!= null"> serie=#{serie},</if>
 			<if test="ordem!= null"> ordem=#{ordem},</if>
 			<if test="numero!= null"> numero=#{numero},</if>
