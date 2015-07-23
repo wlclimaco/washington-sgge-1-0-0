@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.model.request.NotaFiscalEntradaMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.NotaFiscalInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.response.NotaFiscalEntradaResponse;
 import com.prosperitasglobal.sendsolv.model.response.NotaFiscalResponse;
 
@@ -59,7 +59,7 @@ public class NotaFiscalAPIController extends NotaFiscalBaseController
 	 */
 	@RequestMapping(value = FETCH_ALL, method = RequestMethod.POST)
 	@ResponseBody
-	public NotaFiscalResponse fetchAll(@RequestBody PagedInquiryRequest pagedInquiryRequest)
+	public NotaFiscalResponse fetchAll(@RequestBody NotaFiscalInquiryRequest pagedInquiryRequest)
 	{
 
 		return fetchNotaFiscalByRequest(pagedInquiryRequest);

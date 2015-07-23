@@ -77,7 +77,7 @@ public class HistoricoNFDACImpl extends SqlSessionDaoSupport implements IHistori
 		{
 			updateCount =
 					QATMyBatisDacHelper
-					.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE, HistoricoNF, response);
+							.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE, HistoricoNF, response);
 
 			if (updateCount == 1)
 			{

@@ -71,6 +71,7 @@
 		<typeAlias alias="Grupo"              				 		 type="com.prosperitasglobal.sendsolv.model.Grupo"/>
 		<typeAlias alias="GrupoProd"            			 		 type="com.prosperitasglobal.sendsolv.model.GrupoProd"/>
 		<typeAlias alias="Historico"              				 	 type="com.prosperitasglobal.sendsolv.model.Historico"/>
+		<typeAlias alias="HistoricoNF"              			 	 type="com.prosperitasglobal.sendsolv.model.HistoricoNF"/>
 		<typeAlias alias="HistoricoItens"              			 	 type="com.prosperitasglobal.sendsolv.model.HistoricoItens"/>
 		<typeAlias alias="HorarioFunc"              			 	 type="com.prosperitasglobal.sendsolv.model.HorarioFunc"/>
 		<typeAlias alias="Incidencia"              				 	 type="com.prosperitasglobal.sendsolv.model.Incidencia"/>
@@ -166,6 +167,7 @@
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/funcionario.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/grupo.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/historico.xml" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/historicoNF.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/horaFunc.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/incidencia.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/itensEspeciais.xml" />

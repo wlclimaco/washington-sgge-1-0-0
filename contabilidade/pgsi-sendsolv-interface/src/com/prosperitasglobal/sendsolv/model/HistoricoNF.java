@@ -1,6 +1,5 @@
 package com.prosperitasglobal.sendsolv.model;
 
-import java.util.List;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -16,13 +15,27 @@ public class HistoricoNF extends ModelCosmeDamiao
 
 	private Long data;
 
-	private List<NotaTypeEnum> notaTypeEnumList;
+	private NotaTypeEnum notaTypeEnum;
 
-	public HistoricoNF(Long data, List<NotaTypeEnum> notaTypeEnumList)
+	public Integer getNotaTypeEnumValue()
+	{
+		if (notaTypeEnum != null)
+		{
+			return notaTypeEnum.getValue();
+		}
+		return null;
+	}
+
+	public void setNotaTypeEnumValue(Integer acaoTypeValue)
+	{
+		notaTypeEnum = NotaTypeEnum.enumForValue(acaoTypeValue);
+	}
+
+	public HistoricoNF(Long data, NotaTypeEnum notaTypeEnum)
 	{
 		super();
 		this.data = data;
-		this.notaTypeEnumList = notaTypeEnumList;
+		this.notaTypeEnum = notaTypeEnum;
 	}
 
 	public HistoricoNF()
@@ -60,14 +73,40 @@ public class HistoricoNF extends ModelCosmeDamiao
 		this.data = data;
 	}
 
-	public List<NotaTypeEnum> getNotaTypeEnumList()
+	/**
+	 * @return the notaTypeEnum
+	 */
+	public NotaTypeEnum getNotaTypeEnum()
 	{
-		return notaTypeEnumList;
+		return notaTypeEnum;
 	}
 
-	public void setNotaTypeEnumList(List<NotaTypeEnum> notaTypeEnumList)
+	/**
+	 * @param notaTypeEnum the notaTypeEnum to set
+	 */
+	public void setNotaTypeEnum(NotaTypeEnum notaTypeEnum)
 	{
-		this.notaTypeEnumList = notaTypeEnumList;
+		this.notaTypeEnum = notaTypeEnum;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "HistoricoNF [getNotaTypeEnumValue()=" + getNotaTypeEnumValue() + ", getId()=" + getId()
+				+ ", getNotaId()=" + getNotaId() + ", getData()=" + getData() + ", getNotaTypeEnum()="
+				+ getNotaTypeEnum() + ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()="
+				+ getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId()
+				+ ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()="
+				+ getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId()
+				+ ", getSite()=" + getSite() + ", getProcessId()=" + getProcessId() + ", getUserId()=" + getUserId()
+				+ ", getNotes()=" + getNotes() + ", toString()=" + super.toString() + ", getModelAction()="
+				+ getModelAction() + ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()="
+				+ getCreateDateUTC() + ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()="
+				+ getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
 	}
 
 }

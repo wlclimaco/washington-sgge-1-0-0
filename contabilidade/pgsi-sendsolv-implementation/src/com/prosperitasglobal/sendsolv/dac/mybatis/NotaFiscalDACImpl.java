@@ -23,7 +23,8 @@ import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
 import com.prosperitasglobal.sendsolv.dac.ITributacaoDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.ConhecimentoTransporteDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.ContasDACD;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.FormaPgDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.FormaPagamentoDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.HistoricoNFDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.ItensEspeciaisDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.NFstatusDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.NotaFiscalItensDACD;
@@ -1023,12 +1024,12 @@ public class NotaFiscalDACImpl extends SqlSessionDaoSupport implements INotaFisc
 
 		// FormaPg
 		insertCount +=
-				FormaPgDACD.maintainFormaPgAssociations(notafiscal.getFormaPagList(), response,
+				FormaPagamentoDACD.maintainFormaPgAssociations(notafiscal.getFormaPagList(), response,
 						notafiscal.getId(),
 						null,
 						null,
 						TabelaEnum.PESSOA, getFormaPgDAC(), getStatusDAC(), getHistoricoDAC(), notafiscal.getEmprId(),
-						notafiscal.getCreateUser(), processId, historicoId);
+						notafiscal.getCreateUser(), historicoId, historicoId);
 
 		// NotaFiscalItens
 		insertCount +=
@@ -1073,14 +1074,14 @@ public class NotaFiscalDACImpl extends SqlSessionDaoSupport implements INotaFisc
 						notafiscal.getCreateUser(), processId);
 
 		// HistoricoNF
-		// insertCount +=
-		// HistoricoNFDACD.maintainHistoricoNFAssociations(notafiscal.getHistoricoNFList(), response,
-		// notafiscal.getId(),
-		// null,
-		// null,
-		// TabelaEnum.PESSOA, getHistoricoNFDAC(), getStatusDAC(), getHistoricoDAC(),
-		// notafiscal.getEmprId(),
-		// notafiscal.getCreateUser(), processId, historicoId);
+		insertCount +=
+				HistoricoNFDACD.maintainHistoricoNFAssociations(notafiscal.getHistoricoNFList(), response,
+						notafiscal.getId(),
+						null,
+						null,
+						TabelaEnum.PESSOA, getHistoricoNFDAC(), getStatusDAC(), getHistoricoDAC(),
+						notafiscal.getEmprId(),
+						notafiscal.getCreateUser(), processId, historicoId);
 
 		return 1;
 	}

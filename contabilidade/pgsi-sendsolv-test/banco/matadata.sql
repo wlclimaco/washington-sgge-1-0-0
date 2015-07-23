@@ -1452,7 +1452,7 @@ DROP TABLE [dbo].[nFStatus];
 CREATE TABLE [dbo].[nFStatus](
 	[id]            [int] identity(1,1) NOT NULL,
 	[IdNota]		[int]  NULL,
-	[status]        [int] NOT NULL,
+	[status]        [int]  NULL,
 	[dataMudanca]  	[bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[processId]     [int]  NULL,
 	[create_date]  	[bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1470,7 +1470,6 @@ CONSTRAINT [pk_nFStatus2_id] PRIMARY KEY CLUSTERED
 DROP TABLE [dbo].[notaFiscal];
 CREATE TABLE [dbo].[notaFiscal](
 	[id]             [int] identity(1,1) NOT NULL,
-	[notaType]		 [int] NOT NULL,
 	[serie]		     [varchar](50) NULL,
 	[ordem]          [varchar](50) NULL,
 	[numero]  	     [int] NOT NULL,
@@ -1489,8 +1488,7 @@ CREATE TABLE [dbo].[notaFiscal](
 	[transportador]  [int] NULL,
 	[conhecimentoTransporte]  [int] NULL,
     [empresa]  	    [int] NULL,
-    [fornecedor]    [int] NULL,
-    [cliente]  	    [int] NULL,
+    [pessoa]    [int] NULL,
     [processId]     [int]  NULL,
 	[create_date]   [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  	[varchar](50) NULL,
@@ -1787,5 +1785,22 @@ CREATE TABLE [dbo].[user_roles](
 CONSTRAINT [pk_user_roles_id] PRIMARY KEY CLUSTERED
 (
 	[user_role_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+DROP TABLE [dbo].[historicoNF];
+CREATE TABLE [dbo].[historicoNF](
+	[id]             [int] identity(1,1) NOT NULL,
+	[notaId]         [int]  NULL,
+	[data]           [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[notaTypeEnum]   [int] NOT NULL,
+    [processId]      [int]  NULL,
+	[create_date]    [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  	 [varchar](50) NULL,
+    [modify_date]    [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]    [varchar](50) NULL,
+CONSTRAINT [pk_historicoNF_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]

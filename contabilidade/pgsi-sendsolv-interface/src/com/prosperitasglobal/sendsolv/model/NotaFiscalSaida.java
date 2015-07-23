@@ -15,7 +15,7 @@ public class NotaFiscalSaida extends NotaFiscal
 	@Override
 	public String toString()
 	{
-		return "NotaFiscalSaida [getId()=" + getId() + ", getNotaType()=" + getNotaType() + ", getSerie()="
+		return "NotaFiscalSaida [getId()=" + getId() + ", getSerie()="
 				+ getSerie() + ", getOrdem()=" + getOrdem() + ", getNumero()=" + getNumero() + ", getTipo()="
 				+ getTipo() + ", getNfValor()=" + getNfValor() + ", getTransportador()=" + getTransportador()
 				+ ", getConhecimentoTransporte()=" + getConhecimentoTransporte() + ", getEmpresa()=" + getEmpresa()
