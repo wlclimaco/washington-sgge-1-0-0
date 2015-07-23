@@ -118,6 +118,72 @@ public class NotaFiscalBaseController extends UtilControllerD
 		return notaFiscalResponse;
 	}
 
+	// caixa
+	public CaixaResponse fetchCaixaByRequest(CaixaInquiryRequest pagedInquiryRequest)
+	{
+
+		CaixaResponse notaFiscalResponse = new CaixaResponse();
+		try
+		{
+
+			notaFiscalResponse = getNotaFiscalBAI().fetchCaixaByRequest(pagedInquiryRequest);
+
+		}
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			}
+		}
+
+		return notaFiscalResponse;
+	}
+
+	// contas
+	public ContasResponse fetchContasByRequest(ContasInquiryRequest pagedInquiryRequest)
+	{
+
+		ContasResponse notaFiscalResponse = new ContasResponse();
+		try
+		{
+
+			notaFiscalResponse = getNotaFiscalBAI().fetchContasByRequest(pagedInquiryRequest);
+
+		}
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			}
+		}
+
+		return notaFiscalResponse;
+	}
+
+	// cond Pag
+	public CondPgResponse fetchNotaFiscalEntradaByRequest(CondPgInquiryRequest pagedInquiryRequest)
+	{
+
+		CondPgResponse notaFiscalResponse = new CondPgResponse();
+		try
+		{
+
+			notaFiscalResponse = getNotaFiscalBAI().fetchCondPgByRequest(pagedInquiryRequest);
+
+		}
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			}
+		}
+
+		return notaFiscalResponse;
+	}
+
 	// Saida
 	public NotaFiscalSaidaResponse fetchNotaFiscalSaidaByRequest(NotaFiscalInquiryRequest pagedInquiryRequest)
 	{

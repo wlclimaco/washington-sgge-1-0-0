@@ -2,6 +2,7 @@ package com.prosperitasglobal.sendsolv.bai;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.model.request.CfopInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ClassificacaoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.GrupoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.MarcaInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ProdutoInquiryRequest;
@@ -10,6 +11,7 @@ import com.prosperitasglobal.sendsolv.model.request.SubGrupoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.TributacaoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.UniMedInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.response.CfopResponse;
+import com.prosperitasglobal.sendsolv.model.response.ClassificacaoResponse;
 import com.prosperitasglobal.sendsolv.model.response.GrupoResponse;
 import com.prosperitasglobal.sendsolv.model.response.MarcaResponse;
 import com.prosperitasglobal.sendsolv.model.response.ProdutoResponse;
@@ -115,5 +117,7 @@ public interface IProdutoBAI
 	 * @return the cfop response
 	 */
 	public CfopResponse fetchCfopByRequest(CfopInquiryRequest request);
+
+	public ClassificacaoResponse fetchClassificacaoByRequest(ClassificacaoInquiryRequest request);
 
 }

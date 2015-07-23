@@ -3,18 +3,8 @@ package com.prosperitasglobal.sendsolv.empresa.controller;
 import java.util.Calendar;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.LoggerFactory;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
-import com.prosperitasglobal.sendsolv.bai.IEmpresaBAI;
-import com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.EmpresaMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
-import com.qat.framework.validation.ValidationUtil;
 
 public class EmpresaBaseController extends UtilControllerD
 {
@@ -111,6 +101,50 @@ public class EmpresaBaseController extends UtilControllerD
 		{
 
 			empresaResponse = getEmpresaBAI().fetchEmpresaByRequest(pagedInquiryRequest);
+
+		}
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			}
+		}
+
+		return empresaResponse;
+	}
+
+	// cnae
+	public CnaeResponse fetchCnaeByRequest(CnaeInquiryRequest pagedInquiryRequest)
+	{
+
+		CnaeResponse empresaResponse = new CnaeResponse();
+		try
+		{
+
+			empresaResponse = getEmpresaBAI().fetchCnaeByRequest(pagedInquiryRequest);
+
+		}
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			}
+		}
+
+		return empresaResponse;
+	}
+
+	// regime
+	public RegimeResponse fetchRegimeByRequest(RegimeInquiryRequest pagedInquiryRequest)
+	{
+
+		RegimeResponse empresaResponse = new RegimeResponse();
+		try
+		{
+
+			empresaResponse = getEmpresaBAI().fetchRegimeByRequest(pagedInquiryRequest);
 
 		}
 		catch (Exception e)

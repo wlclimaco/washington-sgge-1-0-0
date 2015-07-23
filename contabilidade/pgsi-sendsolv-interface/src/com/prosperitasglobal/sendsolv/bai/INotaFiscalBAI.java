@@ -10,6 +10,8 @@ import com.prosperitasglobal.sendsolv.model.request.OrcamentoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.OrcamentoMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.request.PedidoComprasInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.PedidoComprasMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.CaixaResponse;
+import com.prosperitasglobal.sendsolv.model.response.CondPgResponse;
 import com.prosperitasglobal.sendsolv.model.response.ContasResponse;
 import com.prosperitasglobal.sendsolv.model.response.NotaFiscalEntradaResponse;
 import com.prosperitasglobal.sendsolv.model.response.NotaFiscalSaidaResponse;
@@ -73,4 +75,9 @@ public interface INotaFiscalBAI
 
 	public ContasResponse fetchContasById(FetchByIdRequest request);
 
+	public CaixaResponse fetchOrcamentoByRequest(CaixaInquiryRequest request);
+
+	public CondPgResponse fetchOrcamentoByRequest(CondPgInquiryRequest request);
+
+	public OrcamentoResponse fetchOrcamentoByRequest(OrcamentoInquiryRequest request);
 }

@@ -200,6 +200,50 @@ public class ClienteBaseController extends UtilControllerD
 
 	}
 
+	// banco
+	public BancoResponse fetchBancoByRequest(BancoInquiryRequest pagedInquiryRequest)
+	{
+
+		BancoResponse clienteResponse = new BancoResponse();
+		try
+		{
+
+			clienteResponse = getPessoaBAI().fetchBancoByRequest(pagedInquiryRequest);
+
+		}
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			}
+		}
+
+		return clienteResponse;
+	}
+
+	// agencia
+	public AgenciaResponse fetchAgenciaByRequest(AgenciaInquiryRequest pagedInquiryRequest)
+	{
+
+		AgenciaResponse clienteResponse = new AgenciaResponse();
+		try
+		{
+
+			clienteResponse = getPessoaBAI().fetchAgenciaByRequest(pagedInquiryRequest);
+
+		}
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			}
+		}
+
+		return clienteResponse;
+	}
+
 	public ClienteResponse insert(ClienteMaintenanceRequest clienteRequest)
 	{
 		ClienteResponse clienteResponse = new ClienteResponse();
