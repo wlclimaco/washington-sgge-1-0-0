@@ -91,7 +91,7 @@
 	<!--
 		SQL Fetch Statements.
  	-->
-  <select id="fetchCidadeRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+  <select id="fetchCidadeRowCount" parameterType="CidadeInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
         FROM cidade
 
@@ -109,12 +109,12 @@
 					FROM cidade b where b.id= #{id} ORDER BY b.id ASC
   </select>
 
-  <select id="fetchAllCidadesByRequest" parameterType="PagedInquiryRequest" resultMap="cidadeResult">
+  <select id="fetchAllCidadesByRequest" parameterType="CidadeInquiryRequest" resultMap="cidadeResult">
     SELECT * FROM
     			(
     				SELECT
     						<include refid="allCidadeColumns" />,
-    						ROW_NUMBER() OVER(ORDER BY b.codigo) AS RowNumber
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM cidade b
 					WHERE 2 = 2
 					<if test="codigo != null">

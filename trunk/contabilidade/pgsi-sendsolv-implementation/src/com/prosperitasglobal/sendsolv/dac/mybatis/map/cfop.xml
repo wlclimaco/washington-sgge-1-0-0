@@ -152,7 +152,7 @@
 	<!--
 		SQL Fetch Statements.
  	-->
-  <select id="fetchCfopRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+  <select id="fetchCfopRowCount" parameterType="CfopInquiryRequest" resultType="Integer">
      SELECT COUNT(cfop_id) AS RECORD_COUNT
         FROM cfop
      WHERE 2 = 2
@@ -173,8 +173,30 @@
      WHERE id=#{id}
   </select>
 
-  <select id="fetchAllCfopsByRequest" parameterType="PagedInquiryRequest" resultMap="cfopResult">
-
+  <select id="fetchAllCfopsByRequest" parameterType="CfopInquiryRequest" resultMap="cfopResult">
+	SELECT * FROM
+    			(
+    				SELECT
+    						<include refid="allCfopColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
+    				FROM cfop b
+					WHERE 2 = 2
+					<if test="id != null">
+						AND b.id = #{id}
+					</if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
   </select>
 
   <select id="fetchCfopByProduto" parameterType="Integer" resultMap="cfopResult">

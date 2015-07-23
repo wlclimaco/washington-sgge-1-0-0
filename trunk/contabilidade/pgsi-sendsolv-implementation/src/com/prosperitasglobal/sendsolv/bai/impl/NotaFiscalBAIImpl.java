@@ -9,11 +9,15 @@ import org.slf4j.LoggerFactory;
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.bac.INotaFiscalBAC;
 import com.prosperitasglobal.sendsolv.bai.INotaFiscalBAI;
+import com.prosperitasglobal.sendsolv.model.Caixa;
+import com.prosperitasglobal.sendsolv.model.CondPag;
 import com.prosperitasglobal.sendsolv.model.Contas;
 import com.prosperitasglobal.sendsolv.model.NotaFiscalEntrada;
 import com.prosperitasglobal.sendsolv.model.NotaFiscalSaida;
 import com.prosperitasglobal.sendsolv.model.Orcamento;
 import com.prosperitasglobal.sendsolv.model.PedidoCompras;
+import com.prosperitasglobal.sendsolv.model.request.CaixaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CondPgInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ContasInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ContasMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.request.NotaFiscalEntradaMaintenanceRequest;
@@ -23,6 +27,8 @@ import com.prosperitasglobal.sendsolv.model.request.OrcamentoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.OrcamentoMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.request.PedidoComprasInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.PedidoComprasMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.CaixaResponse;
+import com.prosperitasglobal.sendsolv.model.response.CondPgResponse;
 import com.prosperitasglobal.sendsolv.model.response.ContasResponse;
 import com.prosperitasglobal.sendsolv.model.response.NotaFiscalEntradaResponse;
 import com.prosperitasglobal.sendsolv.model.response.NotaFiscalSaidaResponse;
@@ -950,6 +956,70 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 				break;
 		}
 		return null;
+	}
+
+	@Override
+	public CaixaResponse fetchCaixaByRequest(CaixaInquiryRequest request)
+	{
+		CaixaResponse response = new CaixaResponse();
+		try
+		{
+			fetchPagedCaixa(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	@Override
+	public CondPgResponse fetchCondPgByRequest(CondPgInquiryRequest request)
+	{
+		CondPgResponse response = new CondPgResponse();
+		try
+		{
+			fetchPagedCondPg(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	private void fetchPagedCondPg(CondPgInquiryRequest request, CondPgResponse response)
+	{
+		InternalResultsResponse<CondPag> internalResponse = new InternalResultsResponse<CondPag>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getNotaFiscalBAC().fetchCondPgByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	private void fetchPagedCaixa(CaixaInquiryRequest request, CaixaResponse response)
+	{
+		InternalResultsResponse<Caixa> internalResponse = new InternalResultsResponse<Caixa>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getNotaFiscalBAC().fetchCaixaByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
 	}
 
 }

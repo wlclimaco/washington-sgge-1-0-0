@@ -7,26 +7,52 @@ import org.slf4j.LoggerFactory;
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.bac.IPessoaBAC;
 import com.prosperitasglobal.sendsolv.bai.IPessoaBAI;
+import com.prosperitasglobal.sendsolv.model.Agencia;
+import com.prosperitasglobal.sendsolv.model.Banco;
+import com.prosperitasglobal.sendsolv.model.Beneficios;
+import com.prosperitasglobal.sendsolv.model.Cidade;
 import com.prosperitasglobal.sendsolv.model.Cliente;
+import com.prosperitasglobal.sendsolv.model.Conta;
+import com.prosperitasglobal.sendsolv.model.Contato;
+import com.prosperitasglobal.sendsolv.model.Convenio;
+import com.prosperitasglobal.sendsolv.model.Estado;
+import com.prosperitasglobal.sendsolv.model.Eventos;
+import com.prosperitasglobal.sendsolv.model.FormaPg;
 import com.prosperitasglobal.sendsolv.model.Fornecedor;
+import com.prosperitasglobal.sendsolv.model.HorarioFunc;
+import com.prosperitasglobal.sendsolv.model.Profissao;
 import com.prosperitasglobal.sendsolv.model.Transportador;
+import com.prosperitasglobal.sendsolv.model.request.AgenciaInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.BancoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.BeneficiosInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CidadeInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ClienteInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ClienteMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.ContaInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ContatoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ConvenioInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.EstadoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.EventoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.FormaPgInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.FornecedorInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.FornecedorMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.HoraFuncInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ProfissaoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.TransportadorInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.TransportadorMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.AgenciaResponse;
 import com.prosperitasglobal.sendsolv.model.response.BancoResponse;
+import com.prosperitasglobal.sendsolv.model.response.BeneficiosResponse;
+import com.prosperitasglobal.sendsolv.model.response.CidadeResponse;
 import com.prosperitasglobal.sendsolv.model.response.ClienteResponse;
+import com.prosperitasglobal.sendsolv.model.response.ContaResponse;
 import com.prosperitasglobal.sendsolv.model.response.ContatoResponse;
 import com.prosperitasglobal.sendsolv.model.response.ConvenioResponse;
+import com.prosperitasglobal.sendsolv.model.response.EstadoResponse;
+import com.prosperitasglobal.sendsolv.model.response.EventoResponse;
 import com.prosperitasglobal.sendsolv.model.response.FormaPgResponse;
 import com.prosperitasglobal.sendsolv.model.response.FornecedorResponse;
+import com.prosperitasglobal.sendsolv.model.response.HorarioFuncResponse;
 import com.prosperitasglobal.sendsolv.model.response.ProfissaoResponse;
 import com.prosperitasglobal.sendsolv.model.response.TransportadorResponse;
 import com.qat.framework.model.MessageInfo;
@@ -751,35 +777,384 @@ public class PessoaBAIImpl implements IPessoaBAI
 	@Override
 	public ProfissaoResponse fetchProfissaoByRequest(ProfissaoInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		ProfissaoResponse response = new ProfissaoResponse();
+		try
+		{
+			fetchProfissao(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	private void fetchProfissao(ProfissaoInquiryRequest request, ProfissaoResponse response)
+	{
+		InternalResultsResponse<Profissao> internalResponse = new InternalResultsResponse<Profissao>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getPessoaBAC().fetchProfissaoByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
 	}
 
 	@Override
 	public ConvenioResponse fetchConvenioByRequest(ConvenioInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		ConvenioResponse response = new ConvenioResponse();
+		try
+		{
+			fetchConvenio(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	private void fetchConvenio(ConvenioInquiryRequest request, ConvenioResponse response)
+	{
+		InternalResultsResponse<Convenio> internalResponse = new InternalResultsResponse<Convenio>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getPessoaBAC().fetchConvenioByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
 	}
 
 	@Override
 	public ContatoResponse fetchContatoByRequest(ContatoInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		ContatoResponse response = new ContatoResponse();
+		try
+		{
+			fetchContato(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	private void fetchContato(ContatoInquiryRequest request, ContatoResponse response)
+	{
+		InternalResultsResponse<Contato> internalResponse = new InternalResultsResponse<Contato>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getPessoaBAC().fetchContatoByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
 	}
 
 	@Override
 	public BancoResponse fetchBancoByRequest(BancoInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		BancoResponse response = new BancoResponse();
+		try
+		{
+			fetchBanco(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	private void fetchBanco(BancoInquiryRequest request, BancoResponse response)
+	{
+		InternalResultsResponse<Banco> internalResponse = new InternalResultsResponse<Banco>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getPessoaBAC().fetchBancoByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
 	}
 
 	@Override
 	public FormaPgResponse fetchFormaPgByRequest(FormaPgInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		FormaPgResponse response = new FormaPgResponse();
+		try
+		{
+			fetchFormaPg(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	private void fetchFormaPg(FormaPgInquiryRequest request, FormaPgResponse response)
+	{
+		InternalResultsResponse<FormaPg> internalResponse = new InternalResultsResponse<FormaPg>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getPessoaBAC().fetchFormaPgByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	@Override
+	public AgenciaResponse fetchAgenciaByRequest(AgenciaInquiryRequest request)
+	{
+		AgenciaResponse response = new AgenciaResponse();
+		try
+		{
+			fetchAgencia(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	private void fetchAgencia(AgenciaInquiryRequest request, AgenciaResponse response)
+	{
+		InternalResultsResponse<Agencia> internalResponse = new InternalResultsResponse<Agencia>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getPessoaBAC().fetchAgenciaByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	@Override
+	public ContaResponse fetchContaByRequest(ContaInquiryRequest request)
+	{
+		ContaResponse response = new ContaResponse();
+		try
+		{
+			fetchConta(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	private void fetchConta(ContaInquiryRequest request, ContaResponse response)
+	{
+		InternalResultsResponse<Conta> internalResponse = new InternalResultsResponse<Conta>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getPessoaBAC().fetchContaByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	@Override
+	public EstadoResponse fetchEstadoByRequest(EstadoInquiryRequest request)
+	{
+		EstadoResponse response = new EstadoResponse();
+		try
+		{
+			fetchEstado(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	private void fetchEstado(EstadoInquiryRequest request, EstadoResponse response)
+	{
+		InternalResultsResponse<Estado> internalResponse = new InternalResultsResponse<Estado>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getPessoaBAC().fetchEstadoByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	@Override
+	public CidadeResponse fetchCidadeRequest(CidadeInquiryRequest request)
+	{
+		CidadeResponse response = new CidadeResponse();
+		try
+		{
+			fetchCidade(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	private void fetchCidade(CidadeInquiryRequest request, CidadeResponse response)
+	{
+		InternalResultsResponse<Cidade> internalResponse = new InternalResultsResponse<Cidade>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getPessoaBAC().fetchCidadeRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	@Override
+	public EventoResponse fetchEventosRequest(EventoInquiryRequest request)
+	{
+		EventoResponse response = new EventoResponse();
+		try
+		{
+			fetchEventos(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	private void fetchEventos(EventoInquiryRequest request, EventoResponse response)
+	{
+		InternalResultsResponse<Eventos> internalResponse = new InternalResultsResponse<Eventos>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getPessoaBAC().fetchEventosRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	@Override
+	public BeneficiosResponse fetchBeneficiosRequest(BeneficiosInquiryRequest request)
+	{
+		BeneficiosResponse response = new BeneficiosResponse();
+		try
+		{
+			fetchBeneficios(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	private void fetchBeneficios(BeneficiosInquiryRequest request, BeneficiosResponse response)
+	{
+		InternalResultsResponse<Beneficios> internalResponse = new InternalResultsResponse<Beneficios>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getPessoaBAC().fetchBeneficiosRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	@Override
+	public HorarioFuncResponse fetchHorarioFuncsRequest(HoraFuncInquiryRequest request)
+	{
+		HorarioFuncResponse response = new HorarioFuncResponse();
+		try
+		{
+			fetchHorarioFunc(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	private void fetchHorarioFunc(HoraFuncInquiryRequest request, HorarioFuncResponse response)
+	{
+		InternalResultsResponse<HorarioFunc> internalResponse = new InternalResultsResponse<HorarioFunc>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getPessoaBAC().fetchHorarioFuncsRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
 	}
 }

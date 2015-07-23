@@ -148,7 +148,7 @@
 	<!--
 		SQL Fetch Statements.
  	-->
-  <select id="fetchBancoRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+  <select id="fetchBancoRowCount" parameterType="BancoInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
         FROM banco
      WHERE 1=1
@@ -183,10 +183,30 @@
 	 </if>
   </select>
 
-  <select id="fetchAllBancosByRequest" parameterType="PagedInquiryRequest" resultMap="bancoResult">
-		 SELECT b.id
-		<include refid="allBancoColumns" />
-	    FROM banco b ORDER BY b.id ASC
+  <select id="fetchAllBancosByRequest" parameterType="BancoInquiryRequest" resultMap="bancoResult">
+	   SELECT * FROM
+    			(
+    				SELECT
+    						<include refid="allBancoColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
+    				FROM banco b
+					WHERE 2 = 2
+					<if test="id != null">
+						AND b.id = #{id}
+					</if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
   </select>
 
   <select id="fetchBancoByPessoa" parameterType="Integer" resultMap="bancoPessoaResult">

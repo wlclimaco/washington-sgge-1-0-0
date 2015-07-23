@@ -1,11 +1,15 @@
 package com.prosperitasglobal.sendsolv.dac;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.Caixa;
+import com.prosperitasglobal.sendsolv.model.CondPag;
 import com.prosperitasglobal.sendsolv.model.Contas;
 import com.prosperitasglobal.sendsolv.model.NotaFiscalEntrada;
 import com.prosperitasglobal.sendsolv.model.NotaFiscalSaida;
 import com.prosperitasglobal.sendsolv.model.Orcamento;
 import com.prosperitasglobal.sendsolv.model.PedidoCompras;
+import com.prosperitasglobal.sendsolv.model.request.CaixaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CondPgInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ContasInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.NotaFiscalInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.OrcamentoInquiryRequest;
@@ -72,5 +76,9 @@ public interface INotaFiscalDAC
 	public InternalResponse deleteContas(Contas request);
 
 	public InternalResultsResponse<Contas> fetchContasById(FetchByIdRequest request);
+
+	public InternalResultsResponse<Caixa> fetchCaixaByRequest(CaixaInquiryRequest request);
+
+	public InternalResultsResponse<CondPag> fetchCondPgByRequest(CondPgInquiryRequest request);
 
 }

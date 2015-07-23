@@ -80,11 +80,11 @@
 		SQL Fetch Statements.
  	-->
   <select id="fetchEstadoRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
-     SELECT COUNT(business_id) AS RECORD_COUNT
-        FROM business
-     WHERE business_type = 2
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM estado
+     WHERE 2 = 2
      <if test="parentId != null">
-		  AND FK_estado_id = #{parentId}
+		  AND id = #{parentId}
 	 </if>
   </select>
 
@@ -99,6 +99,38 @@
 	<include refid="allEstadoColumns" />
     FROM estado b where b.id= #{id} ORDER BY b.id ASC
  </select>
+
+  <select id="fetchAllEstadoByRequest" parameterType="EstadoInquiryRequest" resultMap="estadoResult">
+     SELECT * FROM ( SELECT b.id,
+    						<include refid="allContaColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
+    				FROM estado b
+						where 1 = 1
+					<if test="parentId != null">
+						AND b.parentid = #{id}
+					</if>
+
+					 <if test="statusList != null and !statusList.isEmpty()">
+					     AND b.PGSI_status IN
+					     <foreach item="item" index="index" collection="statusList"
+						     open="(" separator="," close=")">
+						   	 #{item.value}
+						 </foreach>
+					 </if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
 
 
 

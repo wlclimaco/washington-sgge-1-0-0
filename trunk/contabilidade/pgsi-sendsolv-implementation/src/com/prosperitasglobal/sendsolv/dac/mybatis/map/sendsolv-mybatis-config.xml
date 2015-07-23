@@ -27,6 +27,24 @@
 		<typeAlias alias="OrcamentoInquiryRequest"     					 type="com.prosperitasglobal.sendsolv.model.request.OrcamentoInquiryRequest"/>
 		<typeAlias alias="PedidoComprasInquiryRequest"     				 type="com.prosperitasglobal.sendsolv.model.request.PedidoComprasInquiryRequest"/>
 
+		<typeAlias alias="UniMedInquiryRequest"     				 type="com.prosperitasglobal.sendsolv.model.request.UniMedInquiryRequest"/>
+		<typeAlias alias="GrupoInquiryRequest"     				 type="com.prosperitasglobal.sendsolv.model.request.GrupoInquiryRequest"/>
+		<typeAlias alias="SubGrupoInquiryRequest"     				 type="com.prosperitasglobal.sendsolv.model.request.SubGrupoInquiryRequest"/>
+		<typeAlias alias="MarcaInquiryRequest"     				 type="com.prosperitasglobal.sendsolv.model.request.MarcaInquiryRequest"/>
+		<typeAlias alias="CfopInquiryRequest"     				 type="com.prosperitasglobal.sendsolv.model.request.CfopInquiryRequest"/>
+		<typeAlias alias="CidadeInquiryRequest"     				 type="com.prosperitasglobal.sendsolv.model.request.CidadeInquiryRequest"/>
+		<typeAlias alias="EstadoInquiryRequest"     				 type="com.prosperitasglobal.sendsolv.model.request.EstadoInquiryRequest"/>
+		<typeAlias alias="TributacaoInquiryRequest"     				 type="com.prosperitasglobal.sendsolv.model.request.TributacaoInquiryRequest"/>
+		<typeAlias alias="ClassificacaoInquiryRequest"     				 type="com.prosperitasglobal.sendsolv.model.request.ClassificacaoInquiryRequest"/>
+		<typeAlias alias="BancoInquiryRequest"     				 type="com.prosperitasglobal.sendsolv.model.request.BancoInquiryRequest"/>
+		<typeAlias alias="AgenciaInquiryRequest"     				 type="com.prosperitasglobal.sendsolv.model.request.AgenciaInquiryRequest"/>
+		<typeAlias alias="ContaInquiryRequest"     				 type="com.prosperitasglobal.sendsolv.model.request.ContaInquiryRequest"/>
+		<typeAlias alias="BeneficiosInquiryRequest"     				 type="com.prosperitasglobal.sendsolv.model.request.BeneficiosInquiryRequest"/>
+		<typeAlias alias="EventoInquiryRequest"     				 type="com.prosperitasglobal.sendsolv.model.request.EventoInquiryRequest"/>
+		<typeAlias alias="FormaPgInquiryRequest"     				 type="com.prosperitasglobal.sendsolv.model.request.FormaPgInquiryRequest"/>
+		<typeAlias alias="HoraFuncInquiryRequest"     				 type="com.prosperitasglobal.sendsolv.model.request.HoraFuncInquiryRequest"/>
+
+
 
 
 
@@ -36,7 +54,9 @@
 		<typeAlias alias="BancoPessoa"              		 		 type="com.prosperitasglobal.sendsolv.model.BancoPessoa"/>
 		<typeAlias alias="Beneficios"              				 	 type="com.prosperitasglobal.sendsolv.model.Beneficios"/>
 		<typeAlias alias="BeneficioPessoa"              		 	 type="com.prosperitasglobal.sendsolv.model.BeneficioPessoa"/>
+		<typeAlias alias="Caixa"              				 		 type="com.prosperitasglobal.sendsolv.model.Caixa"/>
 		<typeAlias alias="Cidade"              				 		 type="com.prosperitasglobal.sendsolv.model.Cidade"/>
+		<typeAlias alias="Conta"              				 		 type="com.prosperitasglobal.sendsolv.model.Conta"/>
 		<typeAlias alias="Cfop"              				 		 type="com.prosperitasglobal.sendsolv.model.Cfop"/>
 		<typeAlias alias="CfopPessoa"              			 		 type="com.prosperitasglobal.sendsolv.model.CfopPessoa"/>
 		<typeAlias alias="Classificacao"              				 type="com.prosperitasglobal.sendsolv.model.Classificacao"/>
@@ -136,6 +156,8 @@
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/beneficios.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/cidade.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/cfop.xml" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/conta.xml" />
+		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/caixa.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/classificacao.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/cliente.xml" />
 		<mapper resource="com/prosperitasglobal/sendsolv/dac/mybatis/map/cnae.xml" />

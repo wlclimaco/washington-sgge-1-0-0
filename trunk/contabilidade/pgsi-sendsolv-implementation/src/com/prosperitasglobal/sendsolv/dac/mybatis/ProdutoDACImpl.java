@@ -42,13 +42,27 @@ import com.prosperitasglobal.sendsolv.dacd.mybatis.TributacaoDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.UniMedDACD;
 import com.prosperitasglobal.sendsolv.model.AcaoEnum;
 import com.prosperitasglobal.sendsolv.model.CdStatusTypeEnum;
+import com.prosperitasglobal.sendsolv.model.Cfop;
+import com.prosperitasglobal.sendsolv.model.Classificacao;
+import com.prosperitasglobal.sendsolv.model.Grupo;
 import com.prosperitasglobal.sendsolv.model.Historico;
 import com.prosperitasglobal.sendsolv.model.HistoricoItens;
+import com.prosperitasglobal.sendsolv.model.Marca;
 import com.prosperitasglobal.sendsolv.model.Process;
 import com.prosperitasglobal.sendsolv.model.Produto;
 import com.prosperitasglobal.sendsolv.model.Status;
+import com.prosperitasglobal.sendsolv.model.SubGrupo;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
+import com.prosperitasglobal.sendsolv.model.Tributacao;
+import com.prosperitasglobal.sendsolv.model.UniMed;
+import com.prosperitasglobal.sendsolv.model.request.CfopInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ClassificacaoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.GrupoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.MarcaInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ProdutoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.SubGrupoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.TributacaoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.UniMedInquiryRequest;
 import com.qat.framework.model.QATModel;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
@@ -809,6 +823,118 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 
 		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, PRODUTO_STMT_FETCH_COUNT,
 				PRODUTO_STMT_FETCH_ALL_BY_REQUEST, response);
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<UniMed> fetchUniMedByRequest(UniMedInquiryRequest request)
+	{
+		InternalResultsResponse<UniMed> response = new InternalResultsResponse<UniMed>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "UniMedMap.fetchUniMedRowCount",
+				"UniMedMap.fetchAllUniMedsByRequest", response);
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Grupo> fetchGrupoByRequest(GrupoInquiryRequest request)
+	{
+		InternalResultsResponse<Grupo> response = new InternalResultsResponse<Grupo>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "GrupoMap.fetchGrupoRowCount",
+				"GrupoMap.fetchAllGruposByRequest", response);
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<SubGrupo> fetchSubGrupoByRequest(SubGrupoInquiryRequest request)
+	{
+		InternalResultsResponse<SubGrupo> response = new InternalResultsResponse<SubGrupo>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "SubGrupoMap.fetchSubGrupoRowCount",
+				"SubGrupoMap.fetchAllSubGruposByRequest", response);
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Marca> fetchMarcaByRequest(MarcaInquiryRequest request)
+	{
+		InternalResultsResponse<Marca> response = new InternalResultsResponse<Marca>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "MarcaMap.fetchMarcaRowCount",
+				"MarcaMap.fetchAllMarcasByRequest", response);
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Tributacao> fetchTributacaoByRequest(TributacaoInquiryRequest request)
+	{
+		InternalResultsResponse<Tributacao> response = new InternalResultsResponse<Tributacao>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "TributacaoMap.fetchTributacaoRowCount",
+				"TributacaoMap.fetchAllTributacaosByRequest", response);
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Cfop> fetchCfopByRequest(CfopInquiryRequest request)
+	{
+		InternalResultsResponse<Cfop> response = new InternalResultsResponse<Cfop>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "CfopMap.fetchCfopRowCount",
+				"CfopMap.fetchAllCfopsByRequest", response);
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Classificacao> fetchClassificacaoByRequest(ClassificacaoInquiryRequest request)
+	{
+		InternalResultsResponse<Classificacao> response = new InternalResultsResponse<Classificacao>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "ClassificacaoMap.fetchClassificacaoRowCount",
+				"ClassificacaoMap.fetchAllClassificacaosByRequest", response);
 		return response;
 	}
 }
