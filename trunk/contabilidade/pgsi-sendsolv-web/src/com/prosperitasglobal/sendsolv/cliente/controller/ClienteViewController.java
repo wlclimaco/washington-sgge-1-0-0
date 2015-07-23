@@ -1,11 +1,26 @@
 package com.prosperitasglobal.sendsolv.cliente.controller;
 
-import java.util.logging.Logger;
-
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.prosperitasglobal.sendsolv.filter.FilterFactory;
 import com.prosperitasglobal.sendsolv.filter.model.response.FiltersResponse;
+import com.prosperitasglobal.sendsolv.model.request.AgenciaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.BancoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CidadeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ClienteInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ContaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.EstadoInquiryRequest;
+import com.qat.framework.model.SortExpression;
+import com.qat.framework.model.SortExpression.Direction;
 
 @Controller
 @RequestMapping("/cliente")
@@ -146,9 +161,9 @@ public class ClienteViewController extends ClienteBaseController
 	}
 
 	@RequestMapping(value = FETCH_LIST_CIDADE, method = RequestMethod.GET)
-	public ModelAndView loadList(HttpServletRequest request)
+	public ModelAndView loadListCidade(HttpServletRequest request)
 	{
-		ModelAndView modelAndView = new ModelAndView(VIEW_CIDADE_MAIN);
+		ModelAndView modelAndView = new ModelAndView("cidade/cidade_main");
 
 		// Check whether has initial load or not
 		if (!isInitialLoad(request, modelAndView))
@@ -156,7 +171,7 @@ public class ClienteViewController extends ClienteBaseController
 			return modelAndView;
 		}
 
-		CidadeRequest pagedInquiryRequest = new CidadeRequest();
+		CidadeInquiryRequest pagedInquiryRequest = new CidadeInquiryRequest();
 		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
 		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
 		pagedInquiryRequest.setPreQueryCount(true);
@@ -189,7 +204,7 @@ public class ClienteViewController extends ClienteBaseController
 
 	// banco
 	@RequestMapping(value = FETCH_LIST_BANCO, method = RequestMethod.GET)
-	public ModelAndView loadList(HttpServletRequest request)
+	public ModelAndView loadListBanco(HttpServletRequest request)
 	{
 		ModelAndView modelAndView = new ModelAndView("banco/banco_main");
 
@@ -199,7 +214,7 @@ public class ClienteViewController extends ClienteBaseController
 			return modelAndView;
 		}
 
-		BancoRequest pagedInquiryRequest = new BancoRequest();
+		BancoInquiryRequest pagedInquiryRequest = new BancoInquiryRequest();
 		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
 		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
 		pagedInquiryRequest.setPreQueryCount(true);
@@ -232,7 +247,7 @@ public class ClienteViewController extends ClienteBaseController
 
 	// agencia
 	@RequestMapping(value = FETCH_LIST_AGENCIA, method = RequestMethod.GET)
-	public ModelAndView loadList(HttpServletRequest request)
+	public ModelAndView loadListAgencia(HttpServletRequest request)
 	{
 		ModelAndView modelAndView = new ModelAndView("agencia/agencia_main");
 
@@ -242,7 +257,7 @@ public class ClienteViewController extends ClienteBaseController
 			return modelAndView;
 		}
 
-		AgenciaRequest pagedInquiryRequest = new AgenciaRequest();
+		AgenciaInquiryRequest pagedInquiryRequest = new AgenciaInquiryRequest();
 		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
 		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
 		pagedInquiryRequest.setPreQueryCount(true);
@@ -275,7 +290,7 @@ public class ClienteViewController extends ClienteBaseController
 
 	// conta
 	@RequestMapping(value = FETCH_LIST_CONTA, method = RequestMethod.GET)
-	public ModelAndView loadList(HttpServletRequest request)
+	public ModelAndView loadListConta(HttpServletRequest request)
 	{
 		ModelAndView modelAndView = new ModelAndView("conta/conta_main");
 
@@ -318,7 +333,7 @@ public class ClienteViewController extends ClienteBaseController
 
 	// estado
 	@RequestMapping(value = FETCH_LIST_ESTADO, method = RequestMethod.GET)
-	public ModelAndView loadList(HttpServletRequest request)
+	public ModelAndView loadListEstado(HttpServletRequest request)
 	{
 		ModelAndView modelAndView = new ModelAndView("estado/estado_main");
 

@@ -3,8 +3,22 @@ package com.prosperitasglobal.sendsolv.empresa.controller;
 import java.util.Calendar;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
+import com.prosperitasglobal.sendsolv.bai.IEmpresaBAI;
+import com.prosperitasglobal.sendsolv.model.request.CnaeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.EmpresaMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.RegimeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.response.CnaeResponse;
+import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
+import com.prosperitasglobal.sendsolv.model.response.RegimeResponse;
+import com.qat.framework.validation.ValidationUtil;
 
 public class EmpresaBaseController extends UtilControllerD
 {

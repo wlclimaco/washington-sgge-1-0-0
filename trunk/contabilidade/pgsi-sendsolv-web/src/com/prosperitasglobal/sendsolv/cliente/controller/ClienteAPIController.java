@@ -1,11 +1,24 @@
 package com.prosperitasglobal.sendsolv.cliente.controller;
 
-/**
- * The ClienteAPIController Class.
- *
- * @author Flavio Tosta, Washington Costa
- *
- */
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.request.AgenciaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.BancoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ClienteInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ClienteMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.ContaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.EstadoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.response.AgenciaResponse;
+import com.prosperitasglobal.sendsolv.model.response.BancoResponse;
+import com.prosperitasglobal.sendsolv.model.response.ClienteResponse;
+import com.prosperitasglobal.sendsolv.model.response.ContaResponse;
+import com.prosperitasglobal.sendsolv.model.response.EstadoResponse;
+
 @Controller
 @RequestMapping("/api/cliente")
 public class ClienteAPIController extends ClienteBaseController

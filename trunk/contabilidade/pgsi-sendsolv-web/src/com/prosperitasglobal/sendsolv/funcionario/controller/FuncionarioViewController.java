@@ -1,11 +1,28 @@
 package com.prosperitasglobal.sendsolv.funcionario.controller;
 
-import java.util.logging.Logger;
-
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.prosperitasglobal.sendsolv.filter.FilterFactory;
 import com.prosperitasglobal.sendsolv.filter.model.response.FiltersResponse;
+import com.prosperitasglobal.sendsolv.model.criteria.BeneficiosCriteria;
+import com.prosperitasglobal.sendsolv.model.criteria.EventoCriteria;
+import com.prosperitasglobal.sendsolv.model.criteria.FuncionarioCriteria;
+import com.prosperitasglobal.sendsolv.model.criteria.HoraFuncCriteria;
+import com.prosperitasglobal.sendsolv.model.request.BeneficiosInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.EventoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.FuncionarioInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.HoraFuncInquiryRequest;
+import com.qat.framework.model.SortExpression;
+import com.qat.framework.model.SortExpression.Direction;
 
 @Controller
 @RequestMapping("/funcionario")
@@ -145,7 +162,7 @@ public class FuncionarioViewController extends FuncionarioBaseController
 
 	// Convenio
 	@RequestMapping(value = FETCH_LIST_CONVENIO, method = RequestMethod.GET)
-	public ModelAndView loadList(@RequestParam(value = "locationId", required = false) Integer locationId,
+	public ModelAndView loadListConvenio(@RequestParam(value = "locationId", required = false) Integer locationId,
 			HttpServletRequest request)
 	{
 		ModelAndView modelAndView = new ModelAndView("convenio/convenio_main");
@@ -188,7 +205,7 @@ public class FuncionarioViewController extends FuncionarioBaseController
 
 	// Eventos
 	@RequestMapping(value = FETCH_LIST_EVENTO, method = RequestMethod.GET)
-	public ModelAndView loadList(@RequestParam(value = "locationId", required = false) Integer locationId,
+	public ModelAndView loadListEvento(@RequestParam(value = "locationId", required = false) Integer locationId,
 			HttpServletRequest request)
 	{
 		ModelAndView modelAndView = new ModelAndView("eventos/eventos_main");
@@ -234,7 +251,7 @@ public class FuncionarioViewController extends FuncionarioBaseController
 
 	// pontoFunc
 	@RequestMapping(value = FETCH_LIST_FUNCPONTO, method = RequestMethod.GET)
-	public ModelAndView loadList(@RequestParam(value = "locationId", required = false) Integer locationId,
+	public ModelAndView loadListFunc(@RequestParam(value = "locationId", required = false) Integer locationId,
 			HttpServletRequest request)
 	{
 		ModelAndView modelAndView = new ModelAndView("pontoFunc/pontoFunc_main");
@@ -280,7 +297,7 @@ public class FuncionarioViewController extends FuncionarioBaseController
 
 	// beneficios
 	@RequestMapping(value = FETCH_LIST_BENEFICIOS, method = RequestMethod.GET)
-	public ModelAndView loadList(@RequestParam(value = "locationId", required = false) Integer locationId,
+	public ModelAndView loadListBene(@RequestParam(value = "locationId", required = false) Integer locationId,
 			HttpServletRequest request)
 	{
 		ModelAndView modelAndView = new ModelAndView("beneficios/beneficios_main");
