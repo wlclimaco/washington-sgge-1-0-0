@@ -43,6 +43,7 @@
 		<typeAlias alias="EventoInquiryRequest"     				 type="com.prosperitasglobal.sendsolv.model.request.EventoInquiryRequest"/>
 		<typeAlias alias="FormaPgInquiryRequest"     				 type="com.prosperitasglobal.sendsolv.model.request.FormaPgInquiryRequest"/>
 		<typeAlias alias="HoraFuncInquiryRequest"     				 type="com.prosperitasglobal.sendsolv.model.request.HoraFuncInquiryRequest"/>
+		<typeAlias alias="CaixaInquiryRequest"     				 type="com.prosperitasglobal.sendsolv.model.request.CaixaInquiryRequest"/>
 
 
 
