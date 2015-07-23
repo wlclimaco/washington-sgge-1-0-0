@@ -164,10 +164,6 @@
 
   </select>
 
-  <select id="fetchAllEventosByRequest" parameterType="PagedInquiryRequest" resultMap="eventoResult">
-
-  </select>
-
   <select id="fetchFuncByData" parameterType="Integer" resultMap="eventoMesAppResult">
 	SELECT c.*
 
