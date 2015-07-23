@@ -2,22 +2,30 @@ package com.prosperitasglobal.sendsolv.bai;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.model.request.BancoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.BeneficiosInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CidadeInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ClienteInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ClienteMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.request.ContatoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ConvenioInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.EventoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.FormaPgInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.FornecedorInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.FornecedorMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.HoraFuncInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ProfissaoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.TransportadorInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.TransportadorMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.response.BancoResponse;
+import com.prosperitasglobal.sendsolv.model.response.BeneficiosResponse;
+import com.prosperitasglobal.sendsolv.model.response.CidadeResponse;
 import com.prosperitasglobal.sendsolv.model.response.ClienteResponse;
 import com.prosperitasglobal.sendsolv.model.response.ContatoResponse;
 import com.prosperitasglobal.sendsolv.model.response.ConvenioResponse;
+import com.prosperitasglobal.sendsolv.model.response.EventoResponse;
 import com.prosperitasglobal.sendsolv.model.response.FormaPgResponse;
 import com.prosperitasglobal.sendsolv.model.response.FornecedorResponse;
+import com.prosperitasglobal.sendsolv.model.response.HorarioFuncResponse;
 import com.prosperitasglobal.sendsolv.model.response.ProfissaoResponse;
 import com.prosperitasglobal.sendsolv.model.response.TransportadorResponse;
 
@@ -192,5 +200,13 @@ public interface IPessoaBAI
 	 * @return the forma pg response
 	 */
 	public FormaPgResponse fetchFormaPgByRequest(FormaPgInquiryRequest request);
+
+	public CidadeResponse fetchCidadeRequest(CidadeInquiryRequest request);
+
+	public EventoResponse fetchEventosRequest(EventoInquiryRequest request);
+
+	public BeneficiosResponse fetchBeneficiosRequest(BeneficiosInquiryRequest request);
+
+	public HorarioFuncResponse fetchHorarioFuncsRequest(HoraFuncInquiryRequest request);
 
 }
