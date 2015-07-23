@@ -150,9 +150,36 @@
   </select>
 
   <select id="fetchAllFormaPgsByRequest" parameterType="PagedInquiryRequest" resultMap="formaPgResult">
-		 SELECT b.id
-		<include refid="allBancoColumns" />
-	    FROM formapg b ORDER BY b.id ASC
+	    SELECT * FROM
+    			(
+    				SELECT
+    						<include refid="allFormaPgColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
+    				FROM formapg b
+					WHERE 2 = 2
+					<if test="id != null">
+						AND b.id = #{id}
+					</if>
+					 <if test="cidadeList != null and !cidadeList.isEmpty()">
+					     AND b.cidade IN
+					     <foreach item="item" index="index" collection="cidadeList"
+						     open="(" separator="," close=")">
+						   	 #{item.value}
+						 </foreach>
+					 </if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
   </select>
 
   <select id="fetchAllFormaPgs" resultMap="formaPgResult">

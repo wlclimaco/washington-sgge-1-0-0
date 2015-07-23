@@ -102,7 +102,7 @@
 
   <select id="fetchAllEstadoByRequest" parameterType="EstadoInquiryRequest" resultMap="estadoResult">
      SELECT * FROM ( SELECT b.id,
-    						<include refid="allContaColumns" />,
+    						<include refid="allEstadoColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM estado b
 						where 1 = 1
