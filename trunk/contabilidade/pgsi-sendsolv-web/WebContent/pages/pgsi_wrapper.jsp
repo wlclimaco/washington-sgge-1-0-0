@@ -65,10 +65,10 @@
 		<li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Produtos</span> <b class="caret"></b></a>
 		 <ul class="dropdown-menu">
             <li><a href="produto" class="alist" data-title='Produto'>Produto</a></li>
-            <li><a href="faq.html">Unidade Medida</a></li>
-            <li><a href="pricing.html">Grupo</a></li>
-			<li><a href="pricing.html">Sub Grupo</a></li>
-			<li><a href="pricing.html">Marca</a></li>
+            <li><a href="produto/fetch/unimed">Unidade Medida</a></li>
+            <li><a href="produto/fetch/grupo">Grupo</a></li>
+			<li><a href="produto/fetch/subgrupo">Sub Grupo</a></li>
+			<li><a href="produto/fetch/marca">Marca</a></li>
           </ul>
         </li>
         <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Financeiro</span> <b class="caret"></b></a>
@@ -77,24 +77,22 @@
             <li><a href="faq.html">Contas Receber</a></li>
             <li><a href="pricing.html">Caixa</a></li>
 			<li><a href="pricing.html">Condicao Pagamento</a></li>
-			<li><a href="pricing.html">Marca</a></li>
+			<li><a href="pricing.html">Banco</a></li>
+			<li><a href="pricing.html">Agencia</a></li>
           </ul>
         </li>
 		<li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Fiscal</span> <b class="caret"></b></a>
 		<ul class="dropdown-menu">
-            <li><a href="icons.html">Nota Entrada</a></li>
-            <li><a href="faq.html">Nota Saida</a></li>
             <li><a href="pricing.html">CFOP</a></li>
 			<li><a href="pricing.html">CNAE</a></li>
-			<li><a href="pricing.html">Marca</a></li>
           </ul>
         </li>
 		<li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Compras/vendas</span> <b class="caret"></b></a>
 		<ul class="dropdown-menu">
-            <li><a href="icons.html">Nota Entrada</a></li>
-            <li><a href="faq.html">Nota Saida</a></li>
-            <li><a href="pricing.html">Orçamento</a></li>
-			<li><a href="pricing.html">Pedido de Compras</a></li>
+            <li><a href="notafiscal/fetch/entrada" class="alist" data-title='Nota Entrada'>Nota Entrada</a></li>
+            <li><a href="notafiscal/fetch/saida" class="alist" data-title='Nota Saida'>Nota Saida</a></li>
+            <li><a href="notafiscal/fetch/orcamento" class="alist" data-title='Orcamento'>Orçamento</a></li>
+			<li><a href="notafiscal/fetch/pdcompras" class="alist" data-title='Pedido de Compras'>Pedido de Compras</a></li>
           </ul>
         </li>
         <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Sistema</span> <b class="caret"></b></a>

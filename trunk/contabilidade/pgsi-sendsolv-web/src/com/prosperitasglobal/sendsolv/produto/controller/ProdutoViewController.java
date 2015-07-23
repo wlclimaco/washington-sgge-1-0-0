@@ -1,21 +1,11 @@
 package com.prosperitasglobal.sendsolv.produto.controller;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
+import java.util.logging.Logger;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import javax.annotation.Resource;
 
 import com.prosperitasglobal.sendsolv.filter.FilterFactory;
 import com.prosperitasglobal.sendsolv.filter.model.response.FiltersResponse;
-import com.prosperitasglobal.sendsolv.model.request.ProdutoInquiryRequest;
-import com.qat.framework.model.SortExpression;
-import com.qat.framework.model.SortExpression.Direction;
 
 /**
  * The LocationViewController Class.
@@ -30,6 +20,14 @@ public class ProdutoViewController extends ProdutoBaseController
 {
 	/** The URL mapping constants. */
 	private static final String FETCH_LIST = "";
+
+	private static final String FETCH_LIST_UNIMED = "/fetch/unimed";
+
+	private static final String FETCH_LIST_GRUPO = "/fetch/grupo";
+
+	private static final String FETCH_LIST_SUBGRUPO = "/fetch/subgrupo";
+
+	private static final String FETCH_LIST_MARCA = "/fetch/marca";
 
 	/** The Constant FETCH_ADD. */
 	private static final String FETCH_ADD = "/add";
@@ -133,6 +131,178 @@ public class ProdutoViewController extends ProdutoBaseController
 
 			modelAndView.addObject(RESPONSE, getMapper()
 					.writeValueAsString(fetchProdutoByRequest(pagedInquiryRequest)));
+
+			FiltersResponse filtersResponse = new FiltersResponse();
+			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);
+
+			modelAndView.addObject(FILTERS, getMapper().writeValueAsString(filtersResponse));
+		}
+
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+				modelAndView.addObject(RESPONSE, null);
+			}
+		}
+
+		return modelAndView;
+	}
+
+	// unimed
+	@RequestMapping(value = FETCH_LIST_UNIMED, method = RequestMethod.GET)
+	public ModelAndView loadList(HttpServletRequest request)
+	{
+		ModelAndView modelAndView = new ModelAndView("unimed/unimed_main");
+
+		// Check whether has initial load or not
+		if (!isInitialLoad(request, modelAndView))
+		{
+			return modelAndView;
+		}
+
+		UniMedInquiryRequest pagedInquiryRequest = new UniMedInquiryRequest();
+		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
+		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
+		pagedInquiryRequest.setPreQueryCount(true);
+		pagedInquiryRequest.addSortExpressions(new SortExpression("ID",
+				Direction.Ascending));
+
+		try
+		{
+
+			modelAndView.addObject(RESPONSE, getMapper()
+					.writeValueAsString(fetchUniMedByRequest(pagedInquiryRequest)));
+
+			FiltersResponse filtersResponse = new FiltersResponse();
+			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);
+
+			modelAndView.addObject(FILTERS, getMapper().writeValueAsString(filtersResponse));
+		}
+
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+				modelAndView.addObject(RESPONSE, null);
+			}
+		}
+
+		return modelAndView;
+	}
+
+	// grupo
+	@RequestMapping(value = FETCH_LIST_GRUPO, method = RequestMethod.GET)
+	public ModelAndView loadList(HttpServletRequest request)
+	{
+		ModelAndView modelAndView = new ModelAndView("grupo/grupo_main");
+
+		// Check whether has initial load or not
+		if (!isInitialLoad(request, modelAndView))
+		{
+			return modelAndView;
+		}
+
+		GrupoInquiryRequest pagedInquiryRequest = new GrupoInquiryRequest();
+		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
+		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
+		pagedInquiryRequest.setPreQueryCount(true);
+		pagedInquiryRequest.addSortExpressions(new SortExpression("ID",
+				Direction.Ascending));
+
+		try
+		{
+
+			modelAndView.addObject(RESPONSE, getMapper()
+					.writeValueAsString(fetchGrupoByRequest(pagedInquiryRequest)));
+
+			FiltersResponse filtersResponse = new FiltersResponse();
+			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);
+
+			modelAndView.addObject(FILTERS, getMapper().writeValueAsString(filtersResponse));
+		}
+
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+				modelAndView.addObject(RESPONSE, null);
+			}
+		}
+
+		return modelAndView;
+	}
+
+	// subgrupo
+	@RequestMapping(value = FETCH_LIST_SUBGRUPO, method = RequestMethod.GET)
+	public ModelAndView loadList(HttpServletRequest request)
+	{
+		ModelAndView modelAndView = new ModelAndView("subgrupo/subgrupo_main");
+
+		// Check whether has initial load or not
+		if (!isInitialLoad(request, modelAndView))
+		{
+			return modelAndView;
+		}
+
+		SubGrupoInquiryRequest pagedInquiryRequest = new SubGrupoInquiryRequest();
+		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
+		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
+		pagedInquiryRequest.setPreQueryCount(true);
+		pagedInquiryRequest.addSortExpressions(new SortExpression("ID",
+				Direction.Ascending));
+
+		try
+		{
+
+			modelAndView.addObject(RESPONSE, getMapper()
+					.writeValueAsString(fetchSubGrupoByRequest(pagedInquiryRequest)));
+
+			FiltersResponse filtersResponse = new FiltersResponse();
+			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);
+
+			modelAndView.addObject(FILTERS, getMapper().writeValueAsString(filtersResponse));
+		}
+
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+				modelAndView.addObject(RESPONSE, null);
+			}
+		}
+
+		return modelAndView;
+	}
+
+	// marca
+	@RequestMapping(value = FETCH_LIST_MARCA, method = RequestMethod.GET)
+	public ModelAndView loadList(HttpServletRequest request)
+	{
+		ModelAndView modelAndView = new ModelAndView("marca/marca_main");
+
+		// Check whether has initial load or not
+		if (!isInitialLoad(request, modelAndView))
+		{
+			return modelAndView;
+		}
+
+		MarcaInquiryRequest pagedInquiryRequest = new MarcaInquiryRequest();
+		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
+		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
+		pagedInquiryRequest.setPreQueryCount(true);
+		pagedInquiryRequest.addSortExpressions(new SortExpression("ID",
+				Direction.Ascending));
+
+		try
+		{
+
+			modelAndView.addObject(RESPONSE, getMapper()
+					.writeValueAsString(fetchMarcaByRequest(pagedInquiryRequest)));
 
 			FiltersResponse filtersResponse = new FiltersResponse();
 			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);
