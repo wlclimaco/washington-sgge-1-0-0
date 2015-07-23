@@ -59,7 +59,7 @@ public class NotaFiscalAPIController extends NotaFiscalBaseController
 	 */
 	@RequestMapping(value = FETCH_ALL, method = RequestMethod.POST)
 	@ResponseBody
-	public NotaFiscalResponse fetchAll(@RequestBody NotaFiscalInquiryRequest pagedInquiryRequest)
+	public NotaFiscalEntradaResponse fetchAll(@RequestBody NotaFiscalInquiryRequest pagedInquiryRequest)
 	{
 
 		return fetchNotaFiscalByRequest(pagedInquiryRequest);

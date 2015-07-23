@@ -107,5 +107,12 @@
     	DELETE FROM pessoa WHERE id = #{id}
   </delete>
 
+     <select id="fetchPessoaById" parameterType="Integer" resultMap="pessoaResult">
+    			   SELECT
+					b.id,	<include refid="allPessoaColumns" />
+ 				   FROM pessoa b
+					where b.id = #{id}
+  </select>
+
 
 </mapper>
