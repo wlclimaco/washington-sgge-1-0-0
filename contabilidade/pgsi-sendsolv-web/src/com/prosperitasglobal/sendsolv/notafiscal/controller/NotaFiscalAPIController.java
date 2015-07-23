@@ -1,18 +1,6 @@
 package com.prosperitasglobal.sendsolv.notafiscal.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.request.NotaFiscalEntradaMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.NotaFiscalInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.response.NotaFiscalEntradaResponse;
-import com.prosperitasglobal.sendsolv.model.response.NotaFiscalResponse;
+import java.util.logging.Logger;
 
 /**
  * The NotaFiscalAPIController Class.
@@ -27,19 +15,31 @@ public class NotaFiscalAPIController extends NotaFiscalBaseController
 
 	/** The Constant FETCH_SIC_NAICS. */
 	private static final String FETCH_SIC_NAICS = "fetchSicNaics";
-	/** The Constant FETCH_ORGANIZATION_BYLOCATION. */
-	private static final String FETCH_ORGANIZATION_BYLOCATION = "fetchOrganizationBylocation";
+	/** The Constant FETCH_ORGANIZATION_BYNOTAFISCAL. */
+	private static final String FETCH_ORGANIZATION_BYNOTAFISCAL = "fetchOrganizationBylocation";
 	/** The URL mapping constants. */
-	private static final String DELETE_LOCATION = "/delete";
+	private static final String DELETE_NOTAFISCAL = "/delete";
 
-	/** The Constant EDIT_LOCATION. */
-	private static final String EDIT_LOCATION = "/edit";
+	/** The Constant EDIT_NOTAFISCAL. */
+	private static final String EDIT_NOTAFISCAL = "/edit";
 
 	/** The Constant FETCH_ALL. */
-	private static final String FETCH_ALL = "/fetchall";
+	private static final String FETCH_ALL_ENTRADA = "/fetchall/entrada";
 
-	/** The Constant INSERT_LOCATION. */
-	private static final String INSERT_LOCATION = "/add";
+	private static final String FETCH_ALL_SAIDA = "/fetchall/saida";
+
+	private static final String FETCH_ALL_ORCAMENTO = "/fetchall/orcamento";
+
+	private static final String FETCH_ALL_COMPRAS = "/fetchall/compras";
+
+	/** The Constant INSERT_NOTAFISCAL. */
+	private static final String INSERT_NOTAFISCAL_ENTRADA = "/add/entrada";
+
+	private static final String INSERT_NOTAFISCAL_SAIDA = "/add/saida";
+
+	private static final String INSERT_PD_COMPRAS = "/add/compras";
+
+	private static final String INSERT_ORCAMENTO = "/add/orcamento";
 
 	/** The Constant FETCH. */
 	private static final String FETCH = "/fetch";
@@ -57,12 +57,39 @@ public class NotaFiscalAPIController extends NotaFiscalBaseController
 	 * @param pagedInquiryRequest the paged inquiry request
 	 * @return the response
 	 */
-	@RequestMapping(value = FETCH_ALL, method = RequestMethod.POST)
+	@RequestMapping(value = FETCH_ALL_ENTRADA, method = RequestMethod.POST)
 	@ResponseBody
 	public NotaFiscalEntradaResponse fetchAll(@RequestBody NotaFiscalInquiryRequest pagedInquiryRequest)
 	{
 
-		return fetchNotaFiscalByRequest(pagedInquiryRequest);
+		return fetchNotaFiscalEntradaByRequest(pagedInquiryRequest);
+
+	}
+
+	@RequestMapping(value = FETCH_ALL_SAIDA, method = RequestMethod.POST)
+	@ResponseBody
+	public NotaFiscalSaidaResponse fetchAll(@RequestBody NotaFiscalInquiryRequest pagedInquiryRequest)
+	{
+
+		return fetchNotaFiscalSaidaByRequest(pagedInquiryRequest);
+
+	}
+
+	@RequestMapping(value = FETCH_ALL_COMPRAS, method = RequestMethod.POST)
+	@ResponseBody
+	public PedidoComprasResponse fetchAll(@RequestBody PedidoComprasInquiryRequest pagedInquiryRequest)
+	{
+
+		return fetchPedidoComprasByRequest(pagedInquiryRequest);
+
+	}
+
+	@RequestMapping(value = FETCH_ALL_ORCAMENTO, method = RequestMethod.POST)
+	@ResponseBody
+	public OrcamentoResponse fetchAll(@RequestBody OrcamentoInquiryRequest pagedInquiryRequest)
+	{
+
+		return fetchOrcamentoByRequest(pagedInquiryRequest);
 
 	}
 
@@ -87,7 +114,7 @@ public class NotaFiscalAPIController extends NotaFiscalBaseController
 	 * @param locationRequest the location request
 	 * @return the response
 	 */
-	// @RequestMapping(value = EDIT_LOCATION, method = RequestMethod.POST)
+	// @RequestMapping(value = EDIT_NOTAFISCAL, method = RequestMethod.POST)
 	// @ResponseBody
 	// public NotaFiscalResponse edit(@RequestBody NotaFiscalMaintenanceRequest locationRequest)
 	// {
@@ -113,7 +140,7 @@ public class NotaFiscalAPIController extends NotaFiscalBaseController
 	 * @param locationRequest the location request
 	 * @return the response
 	 */
-	// @RequestMapping(value = DELETE_LOCATION, method = RequestMethod.POST)
+	// @RequestMapping(value = DELETE_NOTAFISCAL, method = RequestMethod.POST)
 	// @ResponseBody
 	// public NotaFiscalResponse delete(@RequestBody NotaFiscalMaintenanceRequest locationRequest)
 	// {
@@ -140,12 +167,39 @@ public class NotaFiscalAPIController extends NotaFiscalBaseController
 	 * @param locationRequest the location request
 	 * @return the response
 	 */
-	@RequestMapping(value = INSERT_LOCATION, method = RequestMethod.POST)
+	@RequestMapping(value = INSERT_NOTAFISCAL_ENTRADA, method = RequestMethod.POST)
 	@ResponseBody
 	public NotaFiscalEntradaResponse insertApi(@RequestBody NotaFiscalEntradaMaintenanceRequest locationRequest)
 	{
 
-		return insert(locationRequest);
+		return insertEntrada(locationRequest);
+
+	}
+
+	@RequestMapping(value = INSERT_NOTAFISCAL_SAIDA, method = RequestMethod.POST)
+	@ResponseBody
+	public NotaFiscalSaidaResponse insertApii(@RequestBody NotaFiscalSaidaMaintenanceRequest locationRequest)
+	{
+
+		return insertSaida(locationRequest);
+
+	}
+
+	@RequestMapping(value = INSERT_ORCAMENTO, method = RequestMethod.POST)
+	@ResponseBody
+	public OrcamentoResponse insertApiii(@RequestBody OrcamentoMaintenanceRequest locationRequest)
+	{
+
+		return insertOrcamento(locationRequest);
+
+	}
+
+	@RequestMapping(value = INSERT_PD_COMPRAS, method = RequestMethod.POST)
+	@ResponseBody
+	public PedidoComprasResponse insertApiiii(@RequestBody PedidoComprasMaintenanceRequest locationRequest)
+	{
+
+		return insertCompras(locationRequest);
 
 	}
 

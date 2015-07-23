@@ -5,43 +5,8 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.LoggerFactory;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
-import com.prosperitasglobal.sendsolv.bai.IProdutoBAI;
-import com.prosperitasglobal.sendsolv.model.CfopPessoa;
-import com.prosperitasglobal.sendsolv.model.Classificacao;
-import com.prosperitasglobal.sendsolv.model.Csosn;
-import com.prosperitasglobal.sendsolv.model.Cst;
-import com.prosperitasglobal.sendsolv.model.Custo;
-import com.prosperitasglobal.sendsolv.model.CustoItem;
-import com.prosperitasglobal.sendsolv.model.Estoque;
-import com.prosperitasglobal.sendsolv.model.EstoqueTypeEnum;
-import com.prosperitasglobal.sendsolv.model.Fornecedor;
-import com.prosperitasglobal.sendsolv.model.GrupoProd;
-import com.prosperitasglobal.sendsolv.model.Incidencia;
-import com.prosperitasglobal.sendsolv.model.MarcaProd;
-import com.prosperitasglobal.sendsolv.model.Porcao;
-import com.prosperitasglobal.sendsolv.model.PorcaoItem;
-import com.prosperitasglobal.sendsolv.model.PrecoTypeEnum;
-import com.prosperitasglobal.sendsolv.model.Produto;
-import com.prosperitasglobal.sendsolv.model.Rentabilidade;
-import com.prosperitasglobal.sendsolv.model.RentabilidadeItens;
-import com.prosperitasglobal.sendsolv.model.RentabilidadeTypeEnum;
-import com.prosperitasglobal.sendsolv.model.SubGrupoProd;
-import com.prosperitasglobal.sendsolv.model.TabPreco;
-import com.prosperitasglobal.sendsolv.model.Tributacao;
-import com.prosperitasglobal.sendsolv.model.UniMed;
-import com.prosperitasglobal.sendsolv.model.UniMedProd;
-import com.prosperitasglobal.sendsolv.model.request.ProdutoInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.ProdutoMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.response.ProdutoResponse;
-import com.qat.framework.model.QATModel.PersistanceActionEnum;
-import com.qat.framework.validation.ValidationUtil;
 
 public class ProdutoBaseController extends UtilControllerD
 {
@@ -138,6 +103,94 @@ public class ProdutoBaseController extends UtilControllerD
 		{
 
 			produtoResponse = getProdutoBAI().fetchProdutoByRequest(pagedInquiryRequest);
+
+		}
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			}
+		}
+
+		return produtoResponse;
+	}
+
+	// unimed
+	public UniMedResponse fetchUniMedByRequest(UniMedInquiryRequest pagedInquiryRequest)
+	{
+
+		UniMedResponse produtoResponse = new UniMedResponse();
+		try
+		{
+
+			produtoResponse = getProdutoBAI().fetchUniMedByRequest(pagedInquiryRequest);
+
+		}
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			}
+		}
+
+		return produtoResponse;
+	}
+
+	// grupo
+	public GrupoResponse fetchGrupoByRequest(GrupoInquiryRequest pagedInquiryRequest)
+	{
+
+		GrupoResponse produtoResponse = new GrupoResponse();
+		try
+		{
+
+			produtoResponse = getProdutoBAI().fetchGrupoByRequest(pagedInquiryRequest);
+
+		}
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			}
+		}
+
+		return produtoResponse;
+	}
+
+	// subgrupo
+	public SubGrupoResponse fetchSubGrupoByRequest(SubGrupoInquiryRequest pagedInquiryRequest)
+	{
+
+		SubGrupoResponse produtoResponse = new SubGrupoResponse();
+		try
+		{
+
+			produtoResponse = getProdutoBAI().fetchSubGrupoByRequest(pagedInquiryRequest);
+
+		}
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			}
+		}
+
+		return produtoResponse;
+	}
+
+	// marca
+	public MarcaResponse fetchMarcaByRequest(MarcaInquiryRequest pagedInquiryRequest)
+	{
+
+		MarcaResponse produtoResponse = new MarcaResponse();
+		try
+		{
+
+			produtoResponse = getProdutoBAI().fetchMarcaByRequest(pagedInquiryRequest);
 
 		}
 		catch (Exception e)

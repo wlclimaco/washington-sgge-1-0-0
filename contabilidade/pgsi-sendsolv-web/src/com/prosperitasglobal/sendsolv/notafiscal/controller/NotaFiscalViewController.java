@@ -1,20 +1,11 @@
 package com.prosperitasglobal.sendsolv.notafiscal.controller;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
+import java.util.logging.Logger;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import javax.annotation.Resource;
 
 import com.prosperitasglobal.sendsolv.filter.FilterFactory;
 import com.prosperitasglobal.sendsolv.filter.model.response.FiltersResponse;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
-import com.qat.framework.model.SortExpression;
-import com.qat.framework.model.SortExpression.Direction;
 
 /**
  * The LocationViewController Class.
@@ -28,10 +19,22 @@ import com.qat.framework.model.SortExpression.Direction;
 public class NotaFiscalViewController extends NotaFiscalBaseController
 {
 	/** The URL mapping constants. */
-	private static final String FETCH_LIST = "";
+	private static final String FETCH_LIST_SAIDA = "/fetch/saida";
+
+	private static final String FETCH_LIST_ENTRADA = "/fetch/entrada";
+
+	private static final String FETCH_LIST_PDCOMPRAS = "/fetch/pdcompras";
+
+	private static final String FETCH_LIST_ORCAMENTO = "/fetch/orcamento";
 
 	/** The Constant FETCH_ADD. */
-	private static final String FETCH_ADD = "/add";
+	private static final String FETCH_ADD_SAIDA = "/add/saida";
+
+	private static final String FETCH_ADD_ENTRADA = "/add/entrada";
+
+	private static final String FETCH_ADD_ORCAMENTO = "/add/orcamento";
+
+	private static final String FETCH_ADD_PDCOMPRAS = "/add/pdcompras";
 
 	/** The Constant FETCH_EDIT. */
 	private static final String FETCH_EDIT = "/edit";
@@ -45,11 +48,14 @@ public class NotaFiscalViewController extends NotaFiscalBaseController
 	/** The Constant EDIT_VIEW. */
 	private static final String EDIT_VIEW = "/editView";
 
-	/** The Constant FETCH_ORGANIZATION_BYEMPRESA. */
-	private static final String FETCH_ORGANIZATION_BYEMPRESA = "fetchOrganizationBylocation";
-
 	/** The view mapping constants . */
-	private static final String VIEW_EMPRESA_MAIN = "/empresa/empresa_main";
+	private static final String VIEW_NF_ENTRADA_MAIN = "/notaFiscalEntrada/notaFiscalEntrada_main";
+
+	private static final String VIEW_NF_SAIDA_MAIN = "/notaFiscalSaida/notaFiscalSaida_main";
+
+	private static final String VIEW_PD_COMPRAS_MAIN = "/pedidoCompras/pedidoCompras_main";
+
+	private static final String VIEW_ORCAMENTO_MAIN = "/orcamento/orcamento_main";
 
 	/** The Constant VIEW_EMPRESA_ADD. */
 	private static final String VIEW_EMPRESA_ADD = "/empresa/empresa_create";
@@ -109,10 +115,10 @@ public class NotaFiscalViewController extends NotaFiscalBaseController
 	 * @param request the request
 	 * @return the model and view
 	 */
-	@RequestMapping(value = FETCH_LIST, method = RequestMethod.GET)
+	@RequestMapping(value = FETCH_LIST_SAIDA, method = RequestMethod.GET)
 	public ModelAndView loadList(HttpServletRequest request)
 	{
-		ModelAndView modelAndView = new ModelAndView(VIEW_EMPRESA_MAIN);
+		ModelAndView modelAndView = new ModelAndView(VIEW_NF_SAIDA_MAIN);
 
 		// Check whether has initial load or not
 		if (!isInitialLoad(request, modelAndView))
@@ -120,7 +126,7 @@ public class NotaFiscalViewController extends NotaFiscalBaseController
 			return modelAndView;
 		}
 
-		PagedInquiryRequest pagedInquiryRequest = new PagedInquiryRequest();
+		NotaFiscalInquiryRequest pagedInquiryRequest = new NotaFiscalInquiryRequest();
 		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
 		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
 		pagedInquiryRequest.setPreQueryCount(true);
@@ -131,7 +137,136 @@ public class NotaFiscalViewController extends NotaFiscalBaseController
 		{
 
 			modelAndView.addObject(RESPONSE, getMapper()
-					.writeValueAsString(fetchNotaFiscalByRequest(pagedInquiryRequest)));
+					.writeValueAsString(fetchNotaFiscalSaidaByRequest(pagedInquiryRequest)));
+
+			FiltersResponse filtersResponse = new FiltersResponse();
+			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);
+
+			modelAndView.addObject(FILTERS, getMapper().writeValueAsString(filtersResponse));
+		}
+
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+				modelAndView.addObject(RESPONSE, null);
+			}
+		}
+
+		return modelAndView;
+	}
+
+	// Entrada
+	@RequestMapping(value = FETCH_LIST_ENTRADA, method = RequestMethod.GET)
+	public ModelAndView loadList(HttpServletRequest request)
+	{
+		ModelAndView modelAndView = new ModelAndView(VIEW_NF_ENTRADA_MAIN);
+
+		// Check whether has initial load or not
+		if (!isInitialLoad(request, modelAndView))
+		{
+			return modelAndView;
+		}
+
+		NotaFiscalInquiryRequest pagedInquiryRequest = new NotaFiscalInquiryRequest();
+		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
+		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
+		pagedInquiryRequest.setPreQueryCount(true);
+		pagedInquiryRequest.addSortExpressions(new SortExpression("ID",
+				Direction.Ascending));
+
+		try
+		{
+
+			modelAndView.addObject(RESPONSE, getMapper()
+					.writeValueAsString(fetchNotaFiscalEntradaByRequest(pagedInquiryRequest)));
+
+			FiltersResponse filtersResponse = new FiltersResponse();
+			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);
+
+			modelAndView.addObject(FILTERS, getMapper().writeValueAsString(filtersResponse));
+		}
+
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+				modelAndView.addObject(RESPONSE, null);
+			}
+		}
+
+		return modelAndView;
+	}
+
+	// Pedido Compras
+	@RequestMapping(value = FETCH_LIST_PDCOMPRAS, method = RequestMethod.GET)
+	public ModelAndView loadList(HttpServletRequest request)
+	{
+		ModelAndView modelAndView = new ModelAndView(VIEW_PD_COMPRAS_MAIN);
+
+		// Check whether has initial load or not
+		if (!isInitialLoad(request, modelAndView))
+		{
+			return modelAndView;
+		}
+
+		PedidoComprasInquiryRequest pagedInquiryRequest = new PedidoComprasInquiryRequest();
+		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
+		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
+		pagedInquiryRequest.setPreQueryCount(true);
+		pagedInquiryRequest.addSortExpressions(new SortExpression("ID",
+				Direction.Ascending));
+
+		try
+		{
+
+			modelAndView.addObject(RESPONSE, getMapper()
+					.writeValueAsString(fetchPedidoComprasByRequest(pagedInquiryRequest)));
+
+			FiltersResponse filtersResponse = new FiltersResponse();
+			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);
+
+			modelAndView.addObject(FILTERS, getMapper().writeValueAsString(filtersResponse));
+		}
+
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+				modelAndView.addObject(RESPONSE, null);
+			}
+		}
+
+		return modelAndView;
+	}
+
+	// Orcamento
+	@RequestMapping(value = FETCH_LIST_ORCAMENTO, method = RequestMethod.GET)
+	public ModelAndView loadList(HttpServletRequest request)
+	{
+		ModelAndView modelAndView = new ModelAndView(VIEW_ORCAMENTO_MAIN);
+
+		// Check whether has initial load or not
+		if (!isInitialLoad(request, modelAndView))
+		{
+			return modelAndView;
+		}
+
+		OrcamentoInquiryRequest pagedInquiryRequest = new OrcamentoInquiryRequest();
+		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
+		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
+		pagedInquiryRequest.setPreQueryCount(true);
+		pagedInquiryRequest.addSortExpressions(new SortExpression("ID",
+				Direction.Ascending));
+
+		try
+		{
+
+			modelAndView.addObject(RESPONSE, getMapper()
+					.writeValueAsString(fetchOrcamentoByRequest(pagedInquiryRequest)));
 
 			FiltersResponse filtersResponse = new FiltersResponse();
 			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);

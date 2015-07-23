@@ -1,19 +1,7 @@
 package com.prosperitasglobal.sendsolv.pessoa.controller;
 
 import java.util.Calendar;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.request.EmpresaMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
+import java.util.logging.Logger;
 
 /**
  * The EmpresaAPIController Class.
@@ -38,6 +26,8 @@ public class PessoaAPIController extends PessoaBaseController
 
 	/** The Constant FETCH_ALL. */
 	private static final String FETCH_ALL = "/fetchall";
+
+	private static final String FETCH_ALL_CIDADE = "/fetchall/cidade";
 
 	/** The Constant INSERT_LOCATION. */
 	private static final String INSERT_LOCATION = "/add";
@@ -64,6 +54,15 @@ public class PessoaAPIController extends PessoaBaseController
 	{
 
 		return fetchEmpresaByRequest(pagedInquiryRequest);
+
+	}
+
+	@RequestMapping(value = FETCH_ALL_CIDADE, method = RequestMethod.POST)
+	@ResponseBody
+	public CidadeResponse fetchAll(@RequestBody CidadeInquiryRequest pagedInquiryRequest)
+	{
+
+		return fetchCidadeByRequest(pagedInquiryRequest);
 
 	}
 

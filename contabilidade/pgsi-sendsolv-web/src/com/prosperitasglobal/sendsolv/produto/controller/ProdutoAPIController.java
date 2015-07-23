@@ -1,17 +1,6 @@
 package com.prosperitasglobal.sendsolv.produto.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.request.ProdutoInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.ProdutoMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.response.ProdutoResponse;
+import java.util.logging.Logger;
 
 @Controller
 @RequestMapping("/api/produto")
@@ -30,6 +19,14 @@ public class ProdutoAPIController extends ProdutoBaseController
 
 	/** The Constant FETCH_ALL. */
 	private static final String FETCH_ALL = "/fetchall";
+
+	private static final String FETCH_UNIMED = "/fetch/unimed";
+
+	private static final String FETCH_GRUPO = "/fetch/grupo";
+
+	private static final String FETCH_SUBGRUPO = "/fetch/subgrupo";
+
+	private static final String FETCH_MARCA = "/fetch/marca";
 
 	/** The Constant INSERT_LOCATION. */
 	private static final String INSERT_LOCATION = "/add";
@@ -56,6 +53,42 @@ public class ProdutoAPIController extends ProdutoBaseController
 	{
 
 		return fetchProdutoByRequest(pagedInquiryRequest);
+
+	}
+
+	@RequestMapping(value = FETCH_UNIMED, method = RequestMethod.POST)
+	@ResponseBody
+	public UniMedResponse fetchAll(@RequestBody UniMedInquiryRequest pagedInquiryRequest)
+	{
+
+		return fetchUniMedByRequest(pagedInquiryRequest);
+
+	}
+
+	@RequestMapping(value = FETCH_GRUPO, method = RequestMethod.POST)
+	@ResponseBody
+	public GrupoResponse fetchAll(@RequestBody GrupoInquiryRequest pagedInquiryRequest)
+	{
+
+		return fetchGrupoByRequest(pagedInquiryRequest);
+
+	}
+
+	@RequestMapping(value = FETCH_SUBGRUPO, method = RequestMethod.POST)
+	@ResponseBody
+	public SubGrupoResponse fetchAll(@RequestBody SubGrupoInquiryRequest pagedInquiryRequest)
+	{
+
+		return fetchSubGrupoByRequest(pagedInquiryRequest);
+
+	}
+
+	@RequestMapping(value = FETCH_MARCA, method = RequestMethod.POST)
+	@ResponseBody
+	public MarcaResponse fetchAll(@RequestBody MarcaInquiryRequest pagedInquiryRequest)
+	{
+
+		return fetchMarcaByRequest(pagedInquiryRequest);
 
 	}
 
