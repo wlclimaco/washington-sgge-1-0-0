@@ -1,16 +1,15 @@
 package com.prosperitasglobal.sendsolv.model.response;
 
-import java.util.Collection;
 import java.util.List;
 
-import com.prosperitasglobal.sendsolv.model.Arquivo;
+import com.prosperitasglobal.sendsolv.model.PedidoCompras;
 import com.qat.framework.model.response.InquiryResponse;
 
 public class PedidoComprasResponse extends InquiryResponse
 {
 
 	/** Attributes */
-	private List<Arquivo> arquivoList;
+	private List<PedidoCompras> pedidoComprasList;
 
 	/**
 	 * The Constructor.
@@ -21,30 +20,19 @@ public class PedidoComprasResponse extends InquiryResponse
 	}
 
 	/**
-	 * @return the arquivoList
+	 * @return the pedidoComprasList
 	 */
-	public List<Arquivo> getArquivoList()
+	public List<PedidoCompras> getPedidoComprasList()
 	{
-		return arquivoList;
+		return pedidoComprasList;
 	}
 
 	/**
-	 * @param arquivoList the arquivoList to set
+	 * @param pedidoComprasList the pedidoComprasList to set
 	 */
-	public void setArquivoList(List<Arquivo> arquivoList)
+	public void setPedidoComprasList(List<PedidoCompras> pedidoComprasList)
 	{
-		this.arquivoList = arquivoList;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.qat.framework.model.response.InquiryResponse#addResults(java.util.Collection)
-	 */
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	@Override
-	public void addResults(Collection coll)
-	{
-		setArquivoList((List<Arquivo>)coll);
+		this.pedidoComprasList = pedidoComprasList;
 	}
 
 	/*
@@ -54,10 +42,11 @@ public class PedidoComprasResponse extends InquiryResponse
 	@Override
 	public String toString()
 	{
-		return "LocationResponse [getLocationList()=" + getArquivoList() + ", getResultsSetInfo()="
+		return "PedidoComprasResponse [getPedidoComprasList()=" + getPedidoComprasList() + ", getResultsSetInfo()="
 				+ getResultsSetInfo() + ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()="
 				+ getMessageList() + ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()="
-				+ isOperationSuccess() + "]";
+				+ isOperationSuccess() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
+				+ super.toString() + "]";
 	}
 
 }

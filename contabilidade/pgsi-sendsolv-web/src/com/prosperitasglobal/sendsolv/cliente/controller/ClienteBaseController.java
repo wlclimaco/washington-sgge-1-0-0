@@ -4,11 +4,46 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.prosperitasglobal.cbof.model.Note;
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
+import com.prosperitasglobal.sendsolv.bai.IPessoaBAI;
+import com.prosperitasglobal.sendsolv.model.Cidade;
+import com.prosperitasglobal.sendsolv.model.Cliente;
+import com.prosperitasglobal.sendsolv.model.Contato;
+import com.prosperitasglobal.sendsolv.model.ContatoItens;
+import com.prosperitasglobal.sendsolv.model.ContatoTypeEnum;
+import com.prosperitasglobal.sendsolv.model.Documento;
+import com.prosperitasglobal.sendsolv.model.Email;
+import com.prosperitasglobal.sendsolv.model.Endereco;
+import com.prosperitasglobal.sendsolv.model.Estado;
+import com.prosperitasglobal.sendsolv.model.PessoaTypeEnum;
+import com.prosperitasglobal.sendsolv.model.Profissao;
+import com.prosperitasglobal.sendsolv.model.TabelaEnum;
+import com.prosperitasglobal.sendsolv.model.Telefone;
+import com.prosperitasglobal.sendsolv.model.request.AgenciaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.BancoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CidadeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ClienteInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ClienteMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.ContaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.EstadoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.response.AgenciaResponse;
+import com.prosperitasglobal.sendsolv.model.response.BancoResponse;
+import com.prosperitasglobal.sendsolv.model.response.CidadeResponse;
+import com.prosperitasglobal.sendsolv.model.response.ClienteResponse;
+import com.prosperitasglobal.sendsolv.model.response.ContaResponse;
+import com.prosperitasglobal.sendsolv.model.response.EstadoResponse;
+import com.qat.framework.model.QATModel.PersistanceActionEnum;
+import com.qat.framework.validation.ValidationUtil;
 
 public class ClienteBaseController extends UtilControllerD
 {
@@ -102,6 +137,72 @@ public class ClienteBaseController extends UtilControllerD
 		{
 
 			clienteResponse = getPessoaBAI().fetchClienteByRequest(pagedInquiryRequest);
+
+		}
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			}
+		}
+
+		return clienteResponse;
+	}
+
+	// cidade
+	public CidadeResponse fetchCidadeByRequest(CidadeInquiryRequest pagedInquiryRequest)
+	{
+
+		CidadeResponse clienteResponse = new CidadeResponse();
+		try
+		{
+
+			clienteResponse = getPessoaBAI().fetchCidadeRequest(pagedInquiryRequest);
+
+		}
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			}
+		}
+
+		return clienteResponse;
+	}
+
+	// conta
+	public ContaResponse fetchContaByRequest(ContaInquiryRequest pagedInquiryRequest)
+	{
+
+		ContaResponse clienteResponse = new ContaResponse();
+		try
+		{
+
+			clienteResponse = getPessoaBAI().fetchContaByRequest(pagedInquiryRequest);
+
+		}
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			}
+		}
+
+		return clienteResponse;
+	}
+
+	// estado
+	public EstadoResponse fetchEstadoByRequest(EstadoInquiryRequest pagedInquiryRequest)
+	{
+
+		EstadoResponse clienteResponse = new EstadoResponse();
+		try
+		{
+
+			clienteResponse = getPessoaBAI().fetchEstadoByRequest(pagedInquiryRequest);
 
 		}
 		catch (Exception e)

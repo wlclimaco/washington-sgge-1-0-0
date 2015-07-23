@@ -4,11 +4,64 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.prosperitasglobal.cbof.model.Note;
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
+import com.prosperitasglobal.sendsolv.bai.INotaFiscalBAI;
+import com.prosperitasglobal.sendsolv.model.Cfop;
+import com.prosperitasglobal.sendsolv.model.Classificacao;
+import com.prosperitasglobal.sendsolv.model.ConhecimentoTransporte;
+import com.prosperitasglobal.sendsolv.model.Contas;
+import com.prosperitasglobal.sendsolv.model.ContasTypeEnum;
+import com.prosperitasglobal.sendsolv.model.Csosn;
+import com.prosperitasglobal.sendsolv.model.Cst;
+import com.prosperitasglobal.sendsolv.model.Empresa;
+import com.prosperitasglobal.sendsolv.model.Estado;
+import com.prosperitasglobal.sendsolv.model.FormaPgPessoa;
+import com.prosperitasglobal.sendsolv.model.HistoricoNF;
+import com.prosperitasglobal.sendsolv.model.Incidencia;
+import com.prosperitasglobal.sendsolv.model.ItensEspeciais;
+import com.prosperitasglobal.sendsolv.model.Marca;
+import com.prosperitasglobal.sendsolv.model.NFStatus;
+import com.prosperitasglobal.sendsolv.model.NotaFiscal;
+import com.prosperitasglobal.sendsolv.model.NotaFiscalEntrada;
+import com.prosperitasglobal.sendsolv.model.NotaFiscalItens;
+import com.prosperitasglobal.sendsolv.model.NotaFiscalSaida;
+import com.prosperitasglobal.sendsolv.model.NotaTypeEnum;
+import com.prosperitasglobal.sendsolv.model.Orcamento;
+import com.prosperitasglobal.sendsolv.model.PedidoCompras;
+import com.prosperitasglobal.sendsolv.model.Produto;
+import com.prosperitasglobal.sendsolv.model.StatusNF;
+import com.prosperitasglobal.sendsolv.model.Transportador;
+import com.prosperitasglobal.sendsolv.model.Tributacao;
+import com.prosperitasglobal.sendsolv.model.request.CaixaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CondPgInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ContasInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.NotaFiscalEntradaMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.NotaFiscalInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.NotaFiscalSaidaMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.OrcamentoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.OrcamentoMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.PedidoComprasInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.PedidoComprasMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.CaixaResponse;
+import com.prosperitasglobal.sendsolv.model.response.CondPgResponse;
+import com.prosperitasglobal.sendsolv.model.response.ContasResponse;
+import com.prosperitasglobal.sendsolv.model.response.NotaFiscalEntradaResponse;
+import com.prosperitasglobal.sendsolv.model.response.NotaFiscalResponse;
+import com.prosperitasglobal.sendsolv.model.response.NotaFiscalSaidaResponse;
+import com.prosperitasglobal.sendsolv.model.response.OrcamentoResponse;
+import com.prosperitasglobal.sendsolv.model.response.PedidoComprasResponse;
+import com.qat.framework.model.QATModel.PersistanceActionEnum;
+import com.qat.framework.validation.ValidationUtil;
 
 public class NotaFiscalBaseController extends UtilControllerD
 {
@@ -163,7 +216,7 @@ public class NotaFiscalBaseController extends UtilControllerD
 	}
 
 	// cond Pag
-	public CondPgResponse fetchNotaFiscalEntradaByRequest(CondPgInquiryRequest pagedInquiryRequest)
+	public CondPgResponse fetchCondPgByRequest(CondPgInquiryRequest pagedInquiryRequest)
 	{
 
 		CondPgResponse notaFiscalResponse = new CondPgResponse();
@@ -290,7 +343,8 @@ public class NotaFiscalBaseController extends UtilControllerD
 
 		try
 		{
-			notaFiscalRequest.setNotafiscal(insertMockNotaFiscal(PersistanceActionEnum.INSERT, NotaTypeEnum.ENTRADA));
+			notaFiscalRequest.setNotafiscal((NotaFiscalEntrada)insertMockNotaFiscal(PersistanceActionEnum.INSERT,
+					NotaTypeEnum.ENTRADA));
 			notaFiscalRequest.getNotafiscal().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
 			notaFiscalResponse = getNotaFiscalBAI().insertNotaFiscalEntrada(notaFiscalRequest);
 		}
@@ -311,7 +365,8 @@ public class NotaFiscalBaseController extends UtilControllerD
 
 		try
 		{
-			notaFiscalRequest.setNotafiscal(insertMockNotaFiscal(PersistanceActionEnum.INSERT, NotaTypeEnum.SAIDA));
+			notaFiscalRequest.setNotafiscal((NotaFiscalSaida)insertMockNotaFiscal(PersistanceActionEnum.INSERT,
+					NotaTypeEnum.SAIDA));
 			notaFiscalRequest.getNotafiscal().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
 			notaFiscalResponse = getNotaFiscalBAI().insertNotaFiscalSaida(notaFiscalRequest);
 		}
@@ -332,9 +387,9 @@ public class NotaFiscalBaseController extends UtilControllerD
 
 		try
 		{
-			notaFiscalRequest.setNotafiscal(insertMockNotaFiscal(PersistanceActionEnum.INSERT,
+			notaFiscalRequest.setPedidoCompras((PedidoCompras)insertMockNotaFiscal(PersistanceActionEnum.INSERT,
 					NotaTypeEnum.PEDIDOCOMPRAS));
-			notaFiscalRequest.getNotafiscal().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
+			notaFiscalRequest.getPedidoCompras().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
 			notaFiscalResponse = getNotaFiscalBAI().insertPedidoCompras(notaFiscalRequest);
 		}
 		catch (Exception e)
@@ -354,9 +409,9 @@ public class NotaFiscalBaseController extends UtilControllerD
 
 		try
 		{
-			notaFiscalRequest.setNotafiscal(insertMockNotaFiscal(PersistanceActionEnum.INSERT,
+			notaFiscalRequest.setOrcamento((Orcamento)insertMockNotaFiscal(PersistanceActionEnum.INSERT,
 					NotaTypeEnum.ORCAMENTO));
-			notaFiscalRequest.getNotafiscal().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
+			notaFiscalRequest.getOrcamento().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
 			notaFiscalResponse = getNotaFiscalBAI().insertOrcamento(notaFiscalRequest);
 		}
 		catch (Exception e)
@@ -625,7 +680,7 @@ public class NotaFiscalBaseController extends UtilControllerD
 		return notaFiscalItensList;
 	}
 
-	public NotaFiscalEntrada insertMockNotaFiscal(PersistanceActionEnum modelAction, NotaTypeEnum notaType)
+	public NotaFiscal insertMockNotaFiscal(PersistanceActionEnum modelAction, NotaTypeEnum notaType)
 	{
 		NotaFiscalEntrada notaFiscal = new NotaFiscalEntrada();
 

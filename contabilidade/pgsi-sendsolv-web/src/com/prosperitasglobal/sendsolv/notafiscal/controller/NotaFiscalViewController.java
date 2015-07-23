@@ -1,11 +1,25 @@
 package com.prosperitasglobal.sendsolv.notafiscal.controller;
 
-import java.util.logging.Logger;
-
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.prosperitasglobal.sendsolv.filter.FilterFactory;
 import com.prosperitasglobal.sendsolv.filter.model.response.FiltersResponse;
+import com.prosperitasglobal.sendsolv.model.request.CaixaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CondPgInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ContasInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.NotaFiscalInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.OrcamentoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.PedidoComprasInquiryRequest;
+import com.qat.framework.model.SortExpression;
+import com.qat.framework.model.SortExpression.Direction;
 
 /**
  * The LocationViewController Class.
@@ -124,7 +138,7 @@ public class NotaFiscalViewController extends NotaFiscalBaseController
 	 * @return the model and view
 	 */
 	@RequestMapping(value = FETCH_LIST_SAIDA, method = RequestMethod.GET)
-	public ModelAndView loadList(HttpServletRequest request)
+	public ModelAndView loadListSaida(HttpServletRequest request)
 	{
 		ModelAndView modelAndView = new ModelAndView(VIEW_NF_SAIDA_MAIN);
 
@@ -167,7 +181,7 @@ public class NotaFiscalViewController extends NotaFiscalBaseController
 
 	// Entrada
 	@RequestMapping(value = FETCH_LIST_ENTRADA, method = RequestMethod.GET)
-	public ModelAndView loadList(HttpServletRequest request)
+	public ModelAndView loadListEntrada(HttpServletRequest request)
 	{
 		ModelAndView modelAndView = new ModelAndView(VIEW_NF_ENTRADA_MAIN);
 
@@ -210,7 +224,7 @@ public class NotaFiscalViewController extends NotaFiscalBaseController
 
 	// Pedido Compras
 	@RequestMapping(value = FETCH_LIST_PDCOMPRAS, method = RequestMethod.GET)
-	public ModelAndView loadList(HttpServletRequest request)
+	public ModelAndView loadListPdCompras(HttpServletRequest request)
 	{
 		ModelAndView modelAndView = new ModelAndView(VIEW_PD_COMPRAS_MAIN);
 
@@ -253,7 +267,7 @@ public class NotaFiscalViewController extends NotaFiscalBaseController
 
 	// Orcamento
 	@RequestMapping(value = FETCH_LIST_ORCAMENTO, method = RequestMethod.GET)
-	public ModelAndView loadList(HttpServletRequest request)
+	public ModelAndView loadListOrcamento(HttpServletRequest request)
 	{
 		ModelAndView modelAndView = new ModelAndView(VIEW_ORCAMENTO_MAIN);
 
@@ -296,7 +310,7 @@ public class NotaFiscalViewController extends NotaFiscalBaseController
 
 	// contasPagar
 	@RequestMapping(value = FETCH_LIST_CONTAS_PG, method = RequestMethod.GET)
-	public ModelAndView loadList(HttpServletRequest request)
+	public ModelAndView loadListContasPgs(HttpServletRequest request)
 	{
 		ModelAndView modelAndView = new ModelAndView("contas/contas_main");
 
@@ -339,7 +353,7 @@ public class NotaFiscalViewController extends NotaFiscalBaseController
 
 	// Contas receber
 	@RequestMapping(value = FETCH_LIST_CONTAS_RB, method = RequestMethod.GET)
-	public ModelAndView loadList(HttpServletRequest request)
+	public ModelAndView loadListContasTb(HttpServletRequest request)
 	{
 		ModelAndView modelAndView = new ModelAndView("contas/contas_main");
 
@@ -382,7 +396,7 @@ public class NotaFiscalViewController extends NotaFiscalBaseController
 
 	// caixa
 	@RequestMapping(value = FETCH_LIST_CAIXA, method = RequestMethod.GET)
-	public ModelAndView loadList(HttpServletRequest request)
+	public ModelAndView loadListCaixa(HttpServletRequest request)
 	{
 		ModelAndView modelAndView = new ModelAndView(VIEW_PD_COMPRAS_MAIN);
 

@@ -1,18 +1,27 @@
 package com.prosperitasglobal.sendsolv.produto.controller;
 
-import java.util.logging.Logger;
-
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.prosperitasglobal.sendsolv.filter.FilterFactory;
 import com.prosperitasglobal.sendsolv.filter.model.response.FiltersResponse;
-
-/**
- * The LocationViewController Class.
- *
- * @author Flavio Tosta, Washington Costa
- *
- */
+import com.prosperitasglobal.sendsolv.model.request.CfopInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ClassificacaoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.GrupoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.MarcaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ProdutoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.SubGrupoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.UniMedInquiryRequest;
+import com.qat.framework.model.SortExpression;
+import com.qat.framework.model.SortExpression.Direction;
 
 @Controller
 @RequestMapping("/produto")
@@ -156,7 +165,7 @@ public class ProdutoViewController extends ProdutoBaseController
 
 	// unimed
 	@RequestMapping(value = FETCH_LIST_UNIMED, method = RequestMethod.GET)
-	public ModelAndView loadList(HttpServletRequest request)
+	public ModelAndView loadListUniMed(HttpServletRequest request)
 	{
 		ModelAndView modelAndView = new ModelAndView("unimed/unimed_main");
 
@@ -199,7 +208,7 @@ public class ProdutoViewController extends ProdutoBaseController
 
 	// grupo
 	@RequestMapping(value = FETCH_LIST_GRUPO, method = RequestMethod.GET)
-	public ModelAndView loadList(HttpServletRequest request)
+	public ModelAndView loadListGrupo(HttpServletRequest request)
 	{
 		ModelAndView modelAndView = new ModelAndView("grupo/grupo_main");
 
@@ -242,7 +251,7 @@ public class ProdutoViewController extends ProdutoBaseController
 
 	// subgrupo
 	@RequestMapping(value = FETCH_LIST_SUBGRUPO, method = RequestMethod.GET)
-	public ModelAndView loadList(HttpServletRequest request)
+	public ModelAndView loadListSubGrupo(HttpServletRequest request)
 	{
 		ModelAndView modelAndView = new ModelAndView("subgrupo/subgrupo_main");
 
@@ -285,7 +294,7 @@ public class ProdutoViewController extends ProdutoBaseController
 
 	// marca
 	@RequestMapping(value = FETCH_LIST_MARCA, method = RequestMethod.GET)
-	public ModelAndView loadList(HttpServletRequest request)
+	public ModelAndView loadListMarca(HttpServletRequest request)
 	{
 		ModelAndView modelAndView = new ModelAndView("marca/marca_main");
 
@@ -328,7 +337,7 @@ public class ProdutoViewController extends ProdutoBaseController
 
 	// cfop
 	@RequestMapping(value = FETCH_LIST_CFOP, method = RequestMethod.GET)
-	public ModelAndView loadList(HttpServletRequest request)
+	public ModelAndView loadListCfop(HttpServletRequest request)
 	{
 		ModelAndView modelAndView = new ModelAndView("cfop/cfop_main");
 
@@ -371,7 +380,7 @@ public class ProdutoViewController extends ProdutoBaseController
 
 	// classificacao
 	@RequestMapping(value = FETCH_LIST_CLASSI, method = RequestMethod.GET)
-	public ModelAndView loadList(HttpServletRequest request)
+	public ModelAndView loadListClass(HttpServletRequest request)
 	{
 		ModelAndView modelAndView = new ModelAndView("classificacao/classificacao_main");
 

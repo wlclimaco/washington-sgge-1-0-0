@@ -4,11 +4,52 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.prosperitasglobal.cbof.model.Note;
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
+import com.prosperitasglobal.sendsolv.bai.IFuncionarioBAI;
+import com.prosperitasglobal.sendsolv.bai.IPessoaBAI;
+import com.prosperitasglobal.sendsolv.model.BancoPessoa;
+import com.prosperitasglobal.sendsolv.model.BeneficioPessoa;
+import com.prosperitasglobal.sendsolv.model.Beneficios;
+import com.prosperitasglobal.sendsolv.model.Cidade;
+import com.prosperitasglobal.sendsolv.model.Contato;
+import com.prosperitasglobal.sendsolv.model.ContatoItens;
+import com.prosperitasglobal.sendsolv.model.ContatoTypeEnum;
+import com.prosperitasglobal.sendsolv.model.Documento;
+import com.prosperitasglobal.sendsolv.model.Email;
+import com.prosperitasglobal.sendsolv.model.Endereco;
+import com.prosperitasglobal.sendsolv.model.Estado;
+import com.prosperitasglobal.sendsolv.model.EventoPessoa;
+import com.prosperitasglobal.sendsolv.model.Eventos;
+import com.prosperitasglobal.sendsolv.model.Funcionario;
+import com.prosperitasglobal.sendsolv.model.HorarioFunc;
+import com.prosperitasglobal.sendsolv.model.PessoaTypeEnum;
+import com.prosperitasglobal.sendsolv.model.Profissao;
+import com.prosperitasglobal.sendsolv.model.Salario;
+import com.prosperitasglobal.sendsolv.model.TabelaEnum;
+import com.prosperitasglobal.sendsolv.model.Telefone;
+import com.prosperitasglobal.sendsolv.model.request.BeneficiosInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ConvenioInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.EventoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.FuncionarioInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.FuncionarioMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.HoraFuncInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.response.BeneficiosResponse;
+import com.prosperitasglobal.sendsolv.model.response.ConvenioResponse;
+import com.prosperitasglobal.sendsolv.model.response.EventoResponse;
+import com.prosperitasglobal.sendsolv.model.response.FuncionarioResponse;
+import com.prosperitasglobal.sendsolv.model.response.HorarioFuncResponse;
+import com.qat.framework.model.QATModel.PersistanceActionEnum;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class FuncionarioBaseController.
@@ -34,27 +75,42 @@ public class FuncionarioBaseController extends UtilControllerD
 	private static final String ENROLLED_MEMBERS = "enrolled_members";
 
 	/** The Funcionario BAI. */
-	private IPessoaBAI locationBAI;
+	private IPessoaBAI pessoaBAI;
+
+	private IFuncionarioBAI funcionarioBAI;
 
 	/**
-	 * Gets the location bai.
-	 *
-	 * @return the location bai
+	 * @return the pessoaBAI
 	 */
-	public IPessoaBAI getFuncionarioBAI()
+	public IPessoaBAI getPessoaBAI()
 	{
-		return locationBAI;
+		return pessoaBAI;
 	}
 
 	/**
-	 * Sets the location bai.
-	 *
-	 * @param locationBAI the location bai
+	 * @param pessoaBAI the pessoaBAI to set
 	 */
 	@Resource
-	public void setFuncionarioBAI(IPessoaBAI locationBAI)
+	public void setPessoaBAI(IPessoaBAI pessoaBAI)
 	{
-		this.locationBAI = locationBAI;
+		this.pessoaBAI = pessoaBAI;
+	}
+
+	/**
+	 * @param funcionarioBAI the funcionarioBAI to set
+	 */
+	@Resource
+	public void setFuncionarioBAI(IFuncionarioBAI funcionarioBAI)
+	{
+		this.funcionarioBAI = funcionarioBAI;
+	}
+
+	/**
+	 * @return the funcionarioBAI
+	 */
+	public IFuncionarioBAI getFuncionarioBAI()
+	{
+		return funcionarioBAI;
 	}
 
 	/**
@@ -156,7 +212,7 @@ public class FuncionarioBaseController extends UtilControllerD
 		try
 		{
 
-			locationResponse = getFuncionarioBAI().fetchConvenioByRequest(pagedInquiryRequest);
+			locationResponse = getPessoaBAI().fetchConvenioByRequest(pagedInquiryRequest);
 
 		}
 		catch (Exception e)
@@ -200,7 +256,7 @@ public class FuncionarioBaseController extends UtilControllerD
 		try
 		{
 
-			locationResponse = getFuncionarioBAI().fetchHorarioFuncsRequest(pagedInquiryRequest);
+			locationResponse = getPessoaBAI().fetchHorarioFuncsRequest(pagedInquiryRequest);
 
 		}
 		catch (Exception e)

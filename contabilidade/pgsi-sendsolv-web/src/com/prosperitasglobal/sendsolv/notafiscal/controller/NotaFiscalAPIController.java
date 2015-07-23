@@ -1,13 +1,33 @@
 package com.prosperitasglobal.sendsolv.notafiscal.controller;
 
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-/**
- * The NotaFiscalAPIController Class.
- *
- * @author Flavio Tosta, Washington Costa
- *
- */
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.request.CaixaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CondPgInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ContasInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.NotaFiscalEntradaMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.NotaFiscalInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.NotaFiscalSaidaMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.OrcamentoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.OrcamentoMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.PedidoComprasInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.PedidoComprasMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.CaixaResponse;
+import com.prosperitasglobal.sendsolv.model.response.CondPgResponse;
+import com.prosperitasglobal.sendsolv.model.response.ContasResponse;
+import com.prosperitasglobal.sendsolv.model.response.NotaFiscalEntradaResponse;
+import com.prosperitasglobal.sendsolv.model.response.NotaFiscalResponse;
+import com.prosperitasglobal.sendsolv.model.response.NotaFiscalSaidaResponse;
+import com.prosperitasglobal.sendsolv.model.response.OrcamentoResponse;
+import com.prosperitasglobal.sendsolv.model.response.PedidoComprasResponse;
+
 @Controller
 @RequestMapping("/api/notafiscal")
 public class NotaFiscalAPIController extends NotaFiscalBaseController
@@ -75,7 +95,7 @@ public class NotaFiscalAPIController extends NotaFiscalBaseController
 	 */
 	@RequestMapping(value = FETCH_ALL_ENTRADA, method = RequestMethod.POST)
 	@ResponseBody
-	public NotaFiscalEntradaResponse fetchAll(@RequestBody NotaFiscalInquiryRequest pagedInquiryRequest)
+	public NotaFiscalEntradaResponse fetchAllEntrada(@RequestBody NotaFiscalInquiryRequest pagedInquiryRequest)
 	{
 
 		return fetchNotaFiscalEntradaByRequest(pagedInquiryRequest);
@@ -84,7 +104,7 @@ public class NotaFiscalAPIController extends NotaFiscalBaseController
 
 	@RequestMapping(value = FETCH_ALL_SAIDA, method = RequestMethod.POST)
 	@ResponseBody
-	public NotaFiscalSaidaResponse fetchAll(@RequestBody NotaFiscalInquiryRequest pagedInquiryRequest)
+	public NotaFiscalSaidaResponse fetchAllSaida(@RequestBody NotaFiscalInquiryRequest pagedInquiryRequest)
 	{
 
 		return fetchNotaFiscalSaidaByRequest(pagedInquiryRequest);
@@ -93,7 +113,7 @@ public class NotaFiscalAPIController extends NotaFiscalBaseController
 
 	@RequestMapping(value = FETCH_ALL_COMPRAS, method = RequestMethod.POST)
 	@ResponseBody
-	public PedidoComprasResponse fetchAll(@RequestBody PedidoComprasInquiryRequest pagedInquiryRequest)
+	public PedidoComprasResponse fetchAllCompras(@RequestBody PedidoComprasInquiryRequest pagedInquiryRequest)
 	{
 
 		return fetchPedidoComprasByRequest(pagedInquiryRequest);
@@ -102,7 +122,7 @@ public class NotaFiscalAPIController extends NotaFiscalBaseController
 
 	@RequestMapping(value = FETCH_ALL_ORCAMENTO, method = RequestMethod.POST)
 	@ResponseBody
-	public OrcamentoResponse fetchAll(@RequestBody OrcamentoInquiryRequest pagedInquiryRequest)
+	public OrcamentoResponse fetchAllOrcamento(@RequestBody OrcamentoInquiryRequest pagedInquiryRequest)
 	{
 
 		return fetchOrcamentoByRequest(pagedInquiryRequest);
@@ -111,7 +131,7 @@ public class NotaFiscalAPIController extends NotaFiscalBaseController
 
 	@RequestMapping(value = FETCH_ALL_CAIXA, method = RequestMethod.POST)
 	@ResponseBody
-	public CaixaResponse fetchAll(@RequestBody CaixaInquiryRequest pagedInquiryRequest)
+	public CaixaResponse fetchAllCaixa(@RequestBody CaixaInquiryRequest pagedInquiryRequest)
 	{
 
 		return fetchCaixaByRequest(pagedInquiryRequest);
@@ -120,7 +140,7 @@ public class NotaFiscalAPIController extends NotaFiscalBaseController
 
 	@RequestMapping(value = FETCH_ALL_CONDPG, method = RequestMethod.POST)
 	@ResponseBody
-	public CondPgResponse fetchAll(@RequestBody CondPgInquiryRequest pagedInquiryRequest)
+	public CondPgResponse fetchAllCondPag(@RequestBody CondPgInquiryRequest pagedInquiryRequest)
 	{
 
 		return fetchCondPgByRequest(pagedInquiryRequest);
@@ -129,7 +149,7 @@ public class NotaFiscalAPIController extends NotaFiscalBaseController
 
 	@RequestMapping(value = FETCH_ALL_CONTAS_PG, method = RequestMethod.POST)
 	@ResponseBody
-	public ContasResponse fetchAll(@RequestBody ContasInquiryRequest pagedInquiryRequest)
+	public ContasResponse fetchAllContas(@RequestBody ContasInquiryRequest pagedInquiryRequest)
 	{
 
 		return fetchContasByRequest(pagedInquiryRequest);

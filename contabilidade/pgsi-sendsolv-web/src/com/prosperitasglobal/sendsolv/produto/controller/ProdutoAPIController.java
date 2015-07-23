@@ -1,6 +1,29 @@
 package com.prosperitasglobal.sendsolv.produto.controller;
 
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.request.CfopInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ClassificacaoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.GrupoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.MarcaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ProdutoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ProdutoMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.SubGrupoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.UniMedInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.response.CfopResponse;
+import com.prosperitasglobal.sendsolv.model.response.ClassificacaoResponse;
+import com.prosperitasglobal.sendsolv.model.response.GrupoResponse;
+import com.prosperitasglobal.sendsolv.model.response.MarcaResponse;
+import com.prosperitasglobal.sendsolv.model.response.ProdutoResponse;
+import com.prosperitasglobal.sendsolv.model.response.SubGrupoResponse;
+import com.prosperitasglobal.sendsolv.model.response.UniMedResponse;
 
 @Controller
 @RequestMapping("/api/produto")

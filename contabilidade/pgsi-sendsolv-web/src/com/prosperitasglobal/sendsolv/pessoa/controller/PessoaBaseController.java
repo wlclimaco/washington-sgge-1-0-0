@@ -10,7 +10,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
 import com.prosperitasglobal.sendsolv.bai.IEmpresaBAI;
+import com.prosperitasglobal.sendsolv.model.request.CidadeInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.response.CidadeResponse;
 import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
 import com.qat.framework.validation.ValidationUtil;
 
@@ -110,6 +112,28 @@ public class PessoaBaseController extends UtilControllerD
 
 			// locationResponse = Mock();
 			// getEmpresaBAI().fetchEmpresaByRequest(pagedInquiryRequest);
+
+		}
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			}
+		}
+
+		return locationResponse;
+	}
+
+	public CidadeResponse fetchCidadeByRequest(CidadeInquiryRequest pagedInquiryRequest)
+	{
+
+		CidadeResponse locationResponse = new CidadeResponse();
+		try
+		{
+
+			// locationResponse = Mock();
+			getEmpresaBAI().fetchCidadeByRequest(pagedInquiryRequest);
 
 		}
 		catch (Exception e)
